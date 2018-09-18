@@ -96,6 +96,13 @@
       height: calc(90vh - 100px);
       overflow: auto;
 
+      .proficiency-chart {
+        .learner-proficiency-domain-matrix .chart-area {
+          width: 100%;
+          display: flex;
+        }
+      }
+
       .not-tagged {
         font-size: 15px;
         margin-top: 30px;
@@ -103,8 +110,6 @@
       }
 
       .proficiency-tags {
-        float: right;
-
         .last-updated {
           text-align: right;
           margin-top: 15px;
@@ -113,7 +118,8 @@
         }
 
         .proficiency-legends {
-          margin-top: 15px;
+          margin: 15px auto auto;
+          width: max-content;
           display: flex;
 
           .legend {

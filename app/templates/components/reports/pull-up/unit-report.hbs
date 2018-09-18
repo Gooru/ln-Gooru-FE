@@ -1,4 +1,4 @@
-<div class="backdrop" {{action 'onPullUpClose'}}></div>
+<div class="backdrop" {{action 'onPullUpClose' true}}></div>
 <div class="unit-report-container">
   <div class="report-header">
     <div class="report-breadcrumb">
@@ -63,6 +63,7 @@
           sortByLastnameEnabled=sortByLastnameEnabled
           sortByScoreEnabled=sortByScoreEnabled
           contents=lessons
+          onPullUpClose="onPullUpClose"
           studentReportData=studentReportData
           selectedUnit=selectedUnit
           openLessonReport="openLessonReport"
@@ -73,7 +74,7 @@
   </div>
 </div>
 {{#if showStudentUnitReport}}
-  {{reports.pull-up.student-unit-report context=studentUnitReportContext showPullUp=showStudentUnitReport}}
+  {{reports.pull-up.student-unit-report context=studentUnitReportContext onClosePullUp="onPullUpClose" showPullUp=showStudentUnitReport}}
 {{/if}}
 {{#if isLoading}}
   <div class="loading-spinner">

@@ -4,9 +4,6 @@
     <div class="search-pullup-close" {{action 'onPullUpClose'}}>
       {{gru-icon name="arrow_downward"}}
     </div>
-    <div class="gooru-logo">
-      <img src="/assets/gooru/images/gooru-logo.svg">
-    </div>
     <div class="search-filter-container">
       <span>{{t selectedMenuItem.label }}</span>
       <span {{action 'toggleMenuList'}}>{{gru-icon name="arrow_drop_down"}}</span>
@@ -33,7 +30,6 @@
     </div>
   </div>
   <div class="search-content-type-filter">
-    <div class="filter-by">{{t 'common.filter-by'}}</div>
     <div class="filter-content-types">
       {{#each filterContentType as |contentType|}}
         <div class="filter-item {{contentType.format}} {{if (eq contentType.format activeContentType) 'active' }}" {{action 'onSelectFilterBy' contentType.format}}>

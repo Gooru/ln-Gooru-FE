@@ -39,8 +39,8 @@ export default Ember.Component.extend({
     /**
      * Action triggered when the user invoke the pull up.
      **/
-    onPullUpClose() {
-      this.closePullUp();
+    onPullUpClose(closeAll) {
+      this.closePullUp(closeAll);
     },
 
     onChooseGridView() {
@@ -177,7 +177,9 @@ export default Ember.Component.extend({
 
     onClosePullUp() {
       let component = this;
+      component.set('isShowQuestionReport', false);
       component.set('isShowStudentExternalAssessmentReport', false);
+      component.sendAction('onClosePullUp');
     }
   },
 
@@ -420,7 +422,7 @@ export default Ember.Component.extend({
     );
   },
 
-  closePullUp() {
+  closePullUp(closeAll) {
     let component = this;
     component.$().animate(
       {
@@ -429,6 +431,9 @@ export default Ember.Component.extend({
       400,
       function() {
         component.set('showPullUp', false);
+        if (closeAll) {
+          component.sendAction('onClosePullUp');
+        }
       }
     );
   },
@@ -491,7 +496,9 @@ export default Ember.Component.extend({
         format === 'assessment'
           ? component.get('assessmentService').readAssessment(collectionId)
           : format === 'assessment-external'
-            ? component.get('assessmentService').readExternalAssessment(collectionId)
+            ? component
+              .get('assessmentService')
+              .readExternalAssessment(collectionId)
             : component.get('collectionService').readCollection(collectionId),
       performance: component
         .get('analyticsService')
@@ -521,10 +528,12 @@ export default Ember.Component.extend({
     let component = this;
     let classMembers = component.get('classMembers');
     let users = Ember.A([]);
-    classMembers.map(member =>  {
+    classMembers.map(member => {
       let user = component.createUser(member);
       let userPerformance = performance.findBy('user', member.id);
-      let userExternalAssessmentPerf = userPerformance ? userPerformance.assessment : null;
+      let userExternalAssessmentPerf = userPerformance
+        ? userPerformance.assessment
+        : null;
       if (userExternalAssessmentPerf) {
         user.set('score', userExternalAssessmentPerf.score);
         user.set('hasStarted', true);

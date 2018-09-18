@@ -98,6 +98,12 @@ export default Ember.Component.extend({
     let qpm, queryParams;
     var route = component.get('router');
     qpm = component.transfromQpms(notin, ngtnDetails.queryparams);
+    if (ngtnDetails.setlocation === true) {
+      let userlocation = `${qpm.unitId}+${qpm.lessonId}+${qpm.collectionId}+${
+        notin.currentItemType
+      }`;
+      qpm.location = userlocation;
+    }
     if (ngtnDetails.queryPType === 'qponly') {
       queryParams = {
         queryParams: qpm
@@ -121,10 +127,10 @@ export default Ember.Component.extend({
     }
   },
 
-  transfromQpms(srcNotin, tgtQueryParams) {
+  transfromQpms(srcObj, tgtQueryParams) {
     /* {"id":9,"ctxClassId":"002b0b27-1b51-4343-a51f-76fae80534f8","ctxClassCode":"FZRC834","ctxCourseId":"5d2d7b02-540f-495b-9ce3-6f3ed5a99074","ctxUnitId":"495644c9-5814-4144-8a06-bb2d55d58e30","ctxLessonId":"21f1bdf8-f983-4cbe-9446-0b95fdeb6798","ctxCollectionId":"63d1e631-7560-4f02-9adf-9679a1f97b63","currentItemId":"4f3b3a9e-3475-464c-9579-e1e5b1ad5f46","currentItemType":"assessment","currentItemTitle":"CFU:  Lesson 24 -Exit Ticket","notificationType":"teacher.suggestion","ctxPathId":527,"ctxPathType":"teacher","updatedAt":1535587200000}
     */
-    var keys = Object.keys(srcNotin);
+    var keys = Object.keys(srcObj);
     var result = {},
       fresult = {};
     var fix_key = function(key) {
@@ -137,7 +143,7 @@ export default Ember.Component.extend({
     };
     for (let i = 0; i < keys.length; i++) {
       var key = keys[i];
-      result[fix_key(key)] = srcNotin[key];
+      result[fix_key(key)] = srcObj[key];
     }
 
     var tgtkeys = Object.keys(tgtQueryParams);
@@ -145,11 +151,7 @@ export default Ember.Component.extend({
       var tkey = tgtkeys[i];
       fresult[tkey] = result[tkey] || tgtQueryParams[tkey];
     }
-
-    // if (!fresult.questionId && notin.currentItemId) {
-    //   fresult.questionId = notin.currentItemId;
-    // }
-
+    //console.log('transformQpms', fresult);
     return fresult;
   }
 });

@@ -128,7 +128,7 @@
       }
 
       .search-right-menu {
-        width: 488px;
+        width: 532px;
         display: flex;
         justify-content: flex-end;
 
@@ -189,21 +189,10 @@
       width: 100%;
       position: relative;
 
-      .filter-by {
-        width: 200px;
-        display: flex;
-        padding-left: 20px;
-        font-weight: bold;
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
-        font-size: 12px;
-        color: #4b5667;
-      }
-
       .filter-content-types {
         display: flex;
         align-items: center;
+        padding-left: 40px;
 
         .filter-item {
           width: 100px;
