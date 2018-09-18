@@ -6,8 +6,8 @@
       .dca-panel-actions-performance {
         .dca-panel-actions {
           .dca-add {
-            visibility: visible;
-            opacity: 1;
+            visibility: hidden;
+            opacity: 0;
             transition: opacity 0.5s linear;
           }
         }
@@ -79,7 +79,7 @@
         align-items: center;
         grid-template-columns: 50% 50%;
         justify-items: center;
-
+        height: 20px;
         .resource-icon {
           width: 20px;
           height: 20px;
@@ -87,6 +87,9 @@
           background-size: 20px 20px;
           background-image: url("../assets/gooru/images/add_resource_icon.svg");
           opacity: 0.8;
+        }
+        span {
+          height: 20px;
         }
       }
 
@@ -96,6 +99,7 @@
         align-items: center;
         grid-template-columns: 50% 50%;
         justify-items: center;
+        height: 20px;
 
         .question-icon {
           width: 20px;
@@ -104,6 +108,9 @@
           background-size: 20px 20px;
           background-image: url("../assets/gooru/images/add_question.svg");
           opacity: 0.8;
+        }
+        span {
+          height: 20px;
         }
       }
 
@@ -120,10 +127,6 @@
       display: inline-grid;
       grid-template-columns: 1fr 53px;
       align-items: center;
-      cursor: pointer;
-      &.not-started {
-        pointer-events: none;
-      }
 
       .dca-panel-actions {
         display: inline-flex;
@@ -138,7 +141,6 @@
           opacity: 0;
           transition: visibility 0s 0.5s, opacity 0.5s linear;
           cursor: pointer;
-
           .add {
             font-size: 20px;
           }
@@ -239,10 +241,13 @@
         justify-content: center;
         color: #fff;
         font-size: 15px;
+        cursor: pointer;
+        &.not-started {
+          pointer-events: none;
+        }
 
         .no-performance {
           color: #37424b;
-          pointer-events: none;
         }
       }
     }
