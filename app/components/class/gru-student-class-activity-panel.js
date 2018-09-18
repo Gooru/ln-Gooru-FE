@@ -59,9 +59,20 @@ export default Ember.Component.extend({
      * @function externalAssessment open new tab from DCA
      */
     externalAssessment: function(classActivity) {
+      let component = this;
       let url = classActivity.collection.get('url');
+      let classData = component.get('class');
+      let collection = classActivity.get('collection');
+      let classId = classData.get('id');
+      let queryParams = {
+        collectionId: collection.get('id'),
+        classId,
+        role: 'student',
+        source: component.get('source'),
+        type: 'assessment-external'
+      };
       if (url) {
-        window.open(url);
+        component.get('router').transitionTo('player-external', {queryParams});
       }
     },
     /**

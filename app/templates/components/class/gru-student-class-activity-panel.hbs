@@ -29,8 +29,8 @@
       {{#if visible}}
         {{#if (eq item.collectionType 'assessment-external') }}
           <button {{action 'externalAssessment' classActivity}} class="btn btn-info study-now pull-left ember-view">
-          {{gru-icon name='play_arrow'}}
-        </button>
+            {{gru-icon name='play_arrow'}}
+          </button>
         {{else}}
           {{#if classActivity.context.courseId}}
             {{#link-to 'context-player' class.id classActivity.context.courseId classActivity.context.unitId classActivity.context.lessonId item.id (query-params type=item.collectionType role='student' source=source tenantId=session.tenantId partnerId=session.partnerId
@@ -53,8 +53,8 @@
 
     <div class="performance pull-right">
       {{#if item.isAssessment}}
-        <span class="score" style= {{safe-html (concat "color:" (grade-color (if collectionPerformanceSummary.score collectionPerformanceSummary.score 'NA')))}}>
-          {{if collectionPerformanceSummary.score (concat collectionPerformanceSummary.score '%') '--'}}
+        <span class="score" style= {{safe-html (concat "color:" (grade-color (if (gte collectionPerformanceSummary.score 0) collectionPerformanceSummary.score 'NA')))}}>
+          {{if (gte collectionPerformanceSummary.score 0) (concat collectionPerformanceSummary.score '%') '--'}}
         </span>
       {{else}}
         <span class="time-spent">
