@@ -26,8 +26,8 @@ export default Ember.Component.extend({
     /**
      * Action triggered when the user invoke the pull up.
      **/
-    onPullUpClose() {
-      this.closePullUp();
+    onPullUpClose(closeAll) {
+      this.closePullUp(closeAll);
     },
 
     onChooseCollectionView() {
@@ -393,8 +393,12 @@ export default Ember.Component.extend({
    */
   assessmentList: Ember.computed('collections', function() {
     let component = this;
-    let assessmentList = component.get('collections').filterBy('format', 'assessment');
-    let externalAssessmentList = component.get('collections').filterBy('format', 'assessment-external');
+    let assessmentList = component
+      .get('collections')
+      .filterBy('format', 'assessment');
+    let externalAssessmentList = component
+      .get('collections')
+      .filterBy('format', 'assessment-external');
     return assessmentList.concat(externalAssessmentList);
   }),
 
@@ -428,7 +432,7 @@ export default Ember.Component.extend({
     );
   },
 
-  closePullUp() {
+  closePullUp(closeAll) {
     let component = this;
     component.$().animate(
       {
@@ -437,6 +441,9 @@ export default Ember.Component.extend({
       400,
       function() {
         component.set('showPullUp', false);
+        if (closeAll) {
+          component.sendAction('onClosePullUp');
+        }
       }
     );
   },
@@ -560,7 +567,9 @@ export default Ember.Component.extend({
       .get('collections')
       .filterBy('format', collectionType);
     if (collectionType === 'assessment') {
-      let externalAssessments = component.get('collections').filterBy('format', 'assessment-external');
+      let externalAssessments = component
+        .get('collections')
+        .filterBy('format', 'assessment-external');
       collections = collections.concat(externalAssessments);
     }
     collections.map(function(collection) {
@@ -602,7 +611,9 @@ export default Ember.Component.extend({
         .get('collections')
         .filterBy('format', collectionType);
       if (collectionType === 'assessment') {
-        let externalAssessments = component.get('collections').filterBy('format', 'assessment-external');
+        let externalAssessments = component
+          .get('collections')
+          .filterBy('format', 'assessment-external');
         collections = collections.concat(externalAssessments);
       }
       let performanceData = performance.get('studentPerformanceData');

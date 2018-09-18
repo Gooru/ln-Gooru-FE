@@ -26,8 +26,8 @@ export default Ember.Component.extend({
     /**
      * Action triggered when the user invoke the pull up.
      **/
-    onPullUpClose() {
-      this.closePullUp();
+    onPullUpClose(closeAll) {
+      this.closePullUp(closeAll);
     },
 
     onClickPrev() {
@@ -248,7 +248,13 @@ export default Ember.Component.extend({
     );
   },
 
-  closePullUp() {
+  onClosePullUp() {
+    let component = this;
+    component.set('showStudentUnitReport', false);
+    component.closePullUp(true);
+  },
+
+  closePullUp(closeAll) {
     let component = this;
     component.$().animate(
       {
@@ -257,6 +263,9 @@ export default Ember.Component.extend({
       400,
       function() {
         component.set('showPullUp', false);
+        if (closeAll) {
+          component.sendAction('onClosePullUp');
+        }
       }
     );
   },

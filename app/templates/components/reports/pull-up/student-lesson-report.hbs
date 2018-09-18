@@ -1,4 +1,4 @@
-<div class="backdrop" {{action 'onPullUpClose'}}></div>
+<div class="backdrop" {{action 'onPullUpClose' true}}></div>
 <div class="student-lesson-report-container">
   <div class="report-header">
     <div class="report-breadcrumb">
@@ -81,9 +81,9 @@
           <div class="score">
             {{#if collection.performance.hasStarted}}
               {{#if (not-eq collection.format 'collection')}}
-              <span style= {{safe-html (concat "color:" (grade-color collection.performance.score))}}>{{collection.performance.score}}%</span>
+                <span style= {{safe-html (concat "color:" (grade-color collection.performance.score))}}>{{collection.performance.score}}%</span>
               {{else}}
-              <span style= {{safe-html (concat "color:" (grade-color collection.performance.score))}}>{{format-time collection.performance.timeSpent}}</span>
+                <span style= {{safe-html (concat "color:" (grade-color collection.performance.score))}}>{{format-time collection.performance.timeSpent}}</span>
               {{/if}}
             {{else}}
               <span>--</span>
@@ -110,7 +110,7 @@
 {{/if}}
 
 {{#if showCollectionReport}}
-  {{class.gru-report-panel showPullUp=showCollectionReport reportData=studentCollectionReportContext model=studentCollectionReportContext.lesson isStudent=studentCollectionReportContext.isStudent onClosePullUp="onClosePullUp"}}
+  {{class.gru-report-panel showPullUp=showCollectionReport  reportData=studentCollectionReportContext model=studentCollectionReportContext.lesson isStudent=studentCollectionReportContext.isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalAssessmentReport}}
