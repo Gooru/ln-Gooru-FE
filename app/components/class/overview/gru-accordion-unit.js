@@ -67,6 +67,7 @@ export default Ember.Component.extend(AccordionMixin, {
     return `u-${this.get('model.id')}`;
   }),
 
+  showLocationReport: null,
   // -------------------------------------------------------------------------
   // Actions
   actions: {
