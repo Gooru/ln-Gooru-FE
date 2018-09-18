@@ -4,18 +4,20 @@
     <p {{action 'onPlayContent' item}}>{{item.title}}</p>
   </div>
   <div class="dca-content-counts">
-    {{#if (gt item.resourceCount 0)}}
-      <div class="resource-count">
+    <div class="resource-count">
+      {{#if (gt item.resourceCount 0)}}
         <i class="resource-icon"></i>
         <span>{{item.resourceCount}}</span>
-      </div>
-    {{/if}}
-    {{#if (gt item.questionCount 0)}}
-      <div class="question-count">
+      {{/if}}
+    </div>
+
+    <div class="question-count">
+      {{#if (gt item.questionCount 0)}}
         <i class="question-icon"></i>
         <span>{{item.questionCount}}</span>
-      </div>
-    {{/if}}
+      {{/if}}
+    </div>
+
     {{#if (eq item.collectionType 'assessment-external')}}
       <i class="external-icon"></i>
     {{/if}}
