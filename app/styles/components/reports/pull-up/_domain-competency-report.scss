@@ -8,7 +8,7 @@
       width: max-content;
 
       .students {
-        margin-top: 108px;
+        margin-top: 143px;
 
         &.competency-slider-visible {
           margin-top: 143px;
@@ -83,9 +83,12 @@
               min-width: 30px;
               display: grid;
               font-weight: bold;
-              transform: rotate(180deg); /* Saf3.1+, Chrome */
-              -moz-transform: rotate(180deg); /* FF3.5+ */
-              -o-transform: rotate(180deg); /* Opera 10.5 */
+              transform: rotate(180deg);
+              /* Saf3.1+, Chrome */
+              -moz-transform: rotate(180deg);
+              /* FF3.5+ */
+              -o-transform: rotate(180deg);
+              /* Opera 10.5 */
               -webkit-transform: rotate(180deg);
 
               &:not(:first-child) {

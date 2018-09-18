@@ -82,7 +82,9 @@ export default Ember.Component.extend({
   init() {
     let component = this;
     component._super(...arguments);
-    this.title = this.title.replace(/\./g, ' | ');
+    if (this.title) {
+      this.title = this.title.replace(/\./g, ' | ');
+    }
   },
 
   closePullUp(closeAll) {
