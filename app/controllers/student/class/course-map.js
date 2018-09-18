@@ -134,12 +134,22 @@ export default Ember.Controller.extend({
   init: function() {
     const controller = this;
     controller._super(...arguments);
+    let tab = controller.get('tab');
     Ember.run.scheduleOnce('afterRender', controller, function() {
       $('[data-toggle="tooltip"]').tooltip();
+      if (tab && tab === 'assesmentreport') {
+        controller.loadTabReport();
+      }
     });
-    let tab = controller.get('tab');
     if (tab && tab === 'report') {
       controller.openStudentCourseReport();
+    }
+  },
+
+  loadTabReport() {
+    const controller = this;
+    if (controller.get('tab') === 'assesmentreport') {
+      //controller.loadLocationReport(controller.get('location'));
     }
   },
 
@@ -388,5 +398,102 @@ export default Ember.Controller.extend({
       loadUnitsPerformance: false
     });
     controller.set('studentCourseReportContext', params);
+  },
+
+  loadLocationReport(notificationlocation) {
+    const component = this;
+    let locationEl = '';
+    let parsedlocation = notificationlocation.split('+');
+    let unitId = parsedlocation[0],
+      lessonId = parsedlocation[1],
+      collectionId = parsedlocation[2],
+      collectionprefix = parsedlocation[3] === 'assessment' ? 'a' : 'c';
+
+    var isExpanded = component.expandLocation(parsedlocation, null);
+    isExpanded.then(
+      successResp => {
+        locationEl = `.u-${unitId} .l-${lessonId} div > ol > li.panel.${collectionprefix}-${collectionId} > div > div.info > div.performance > span.score`;
+        console.log('expanded to location', successResp); // eslint-disable-line
+        $(locationEl).click();
+      },
+      failureResp => {
+        console.log('expansion failure', failureResp); // eslint-disable-line
+      }
+    );
+  },
+
+  expandLocation(location, traversed) {
+    const component = this;
+    let loctionReolved = new Ember.RSVP.Promise(function(res) {
+      let unitId = location[0],
+        lessonId = location[1],
+        collectionId = location[2],
+        collectionprefix = location[3] === 'assessment' ? 'a' : 'c';
+      if (!traversed) {
+        traversed = [false, false, false]; // init as array
+      }
+      let unitLocationEl = $(`.u-${unitId}`);
+      if (unitLocationEl.length === 0) {
+        Ember.run.later(function() {
+          return component.expandLocation(location, traversed);
+        }, 20000);
+      } else if (
+        unitLocationEl.length > 0 &&
+        unitLocationEl.hasClass('expanded')
+      ) {
+        let lessonLocationEl = $(`.l-${lessonId}`);
+        if (lessonLocationEl.hasClass('expanded')) {
+          let collectionEl = $(`.${collectionprefix}-${collectionId}`);
+          if (collectionEl.length > 0) {
+            let locationEl = `.u-${unitId} .l-${lessonId} div > ol > li.panel.${collectionprefix}-${collectionId} > div > div.info > div.performance > span.score`;
+            console.log('expanded to location', collectionId); // eslint-disable-line
+            $(locationEl).click();
+            res(true);
+          } else {
+            if (traversed[2] === false) {
+              traversed[2] = true;
+              lessonLocationEl.click(); // Click to expand
+              Ember.run.later(function() {
+                return component.expandLocation(location, traversed);
+              }, 20000);
+            } else {
+              // Wait and comeback
+              Ember.run.later(function() {
+                return component.expandLocation(location, traversed);
+              }, 20000);
+            }
+          }
+
+          //res
+          res(true);
+        } else {
+          if (traversed[1] === false) {
+            traversed[1] = true;
+            lessonLocationEl.click(); // Click to expand
+            Ember.run.later(function() {
+              return component.expandLocation(location, traversed);
+            }, 20000);
+          } else {
+            Ember.run.later(function() {
+              return component.expandLocation(location, traversed);
+            }, 20000);
+          }
+        }
+      } else if (unitLocationEl.length > 0) {
+        if (traversed[0] === false) {
+          traversed[0] = true;
+          unitLocationEl.click(); // Click to expand
+          Ember.run.later(function() {
+            return component.expandLocation(location, traversed);
+          }, 20000);
+        } else {
+          // Wait and comeback
+          Ember.run.later(function() {
+            return component.expandLocation(location, traversed);
+          }, 20000);
+        }
+      }
+    });
+    return loctionReolved;
   }
 });
