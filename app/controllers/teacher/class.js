@@ -52,6 +52,14 @@ export default Ember.Controller.extend({
       this.openLessonReport(lesson);
     },
 
+    onClosePullUp() {
+      let controller = this;
+      controller.set('isShowCourseReport', false);
+      controller.set('isShowUnitReportPullUp', false);
+      controller.set('isShowLessonReportPullUp', false);
+      controller.set('isShowCollectionReportPullUp', false);
+    },
+
     /**
      *  Triggered the unit report from inside course report
      */
