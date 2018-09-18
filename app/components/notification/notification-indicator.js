@@ -184,10 +184,15 @@ export default Ember.Component.extend({
           navigate: true,
           navigationDetails: {
             route: 'teacher.class.course-map',
-            queryPType: 'paramonly',
+            queryPType: 'hybrid',
             exactparams: 'classId',
+            setlocation: true,
             queryparams: {
-              classId: 0
+              classId: 0,
+              unitId: 0,
+              lessonId: 0,
+              collectionId: 0,
+              location: 'unitId+lessonId+collectionId+currentItemType'
             }
           }
         }
