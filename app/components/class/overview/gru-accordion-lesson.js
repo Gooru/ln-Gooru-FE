@@ -593,11 +593,16 @@ export default Ember.Component.extend(AccordionMixin, ModalMixin, {
       })
       .then(() => {
         if (!component.isDestroyed) {
-          collections.forEach(collection => {
-            component.setVisibility(collection);
-            component.showReportAtLocation(collection);
-          });
           component.set('items', collections);
+          collections.forEach(collection =>
+            component.setVisibility(collection)
+          );
+
+          Ember.run.later(function() {
+            collections.forEach(collection =>
+              component.showReportAtLocation(collection, collections)
+            );
+          }, 2000);
           component.set('loading', false);
         }
       });
@@ -1044,7 +1049,7 @@ export default Ember.Component.extend(AccordionMixin, ModalMixin, {
     }
   },
 
-  showReportAtLocation(currentCollection) {
+  showReportAtLocation(currentCollection, collections) {
     const component = this;
     if (component.get('showLocationReport') === 'assesmentreport') {
       let reportLocation = component.get('parsedLocation');
@@ -1055,14 +1060,22 @@ export default Ember.Component.extend(AccordionMixin, ModalMixin, {
           collectionId = reportLocation[2],
           curUnitId = component.get('unitId'),
           curLessonId = component.get('model.id');
-        //collectionprefix = reportLocation[3] === 'assessment' ? 'a' : 'c',
 
         if (
           curUnitId === unitId &&
           curLessonId === lessonId &&
           currentCollection.id === collectionId
         ) {
-          component.send('studentReport', currentCollection);
+          if (component.get('isTeacher')) {
+            component.send(
+              'teacherCollectionReport',
+              currentCollection,
+              collections
+            );
+          } else {
+            component.send('studentReport', currentCollection);
+          }
+          component.set('showLocationReport', null);
         }
       }
     }
