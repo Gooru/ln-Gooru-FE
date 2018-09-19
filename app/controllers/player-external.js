@@ -10,7 +10,10 @@ export default Ember.Controller.extend({
     'type',
     'classId',
     'collectionId',
-    'source'
+    'source',
+    'courseId',
+    'unitId',
+    'lessonId'
   ],
 
   // -------------------------------------------------------------------------
