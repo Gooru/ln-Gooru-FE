@@ -14,11 +14,6 @@ export default Ember.Component.extend({
   // --------------------------------------------
   // Actions
   actions: {
-    closePopUp: function() {
-      let component = this;
-      var $anchor = component.$('button.non-visible-tags');
-      $anchor.removeClass('list-open').popover('hide');
-    },
     removeTag: function(tag) {
       if (this.get('onRemove')) {
         this.get('onRemove')(tag);
