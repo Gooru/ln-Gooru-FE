@@ -1,5 +1,6 @@
-<div class="backdrop" {{action 'onPullUpClose'}}></div>
-<div class="student-open-ended-summary-pull-up">
+{{#if showPullUp}}
+  <div class="backdrop" {{action 'closeAll'}}></div>
+{{/if}}<div class="student-open-ended-summary-pull-up">
   <div class="free-response-report-container">
     <div class="report-header">
       <div class="report-breadcrumb">

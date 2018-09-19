@@ -117,6 +117,7 @@
     students=studentsSelectedForSuggest
     onCloseSuggest="onCloseSuggest"
     context=suggestContextParams
+    onClosePullUp="onClosePullUp"
     collection=collections
     defaultSuggestContentType=defaultSuggestContentType
   }}
@@ -124,7 +125,7 @@
 
 
 {{#if showOpenEndedPullup}}
-  {{reports.pull-up.open-ended-report-pull-up collectionTitle=assessmentResult.collection.title showPullUp=showOpenEndedPullup context=freeResponseContextParams}}
+  {{reports.pull-up.open-ended-report-pull-up collectionTitle=assessmentResult.collection.title onClosePullUp="onClosePullUp" showPullUp=showOpenEndedPullup context=freeResponseContextParams}}
 {{/if}}
 
 {{#if isLoading}}
