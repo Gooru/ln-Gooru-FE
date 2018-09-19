@@ -82,6 +82,18 @@ export default Ember.Component.extend({
   classId: Ember.computed.alias('context.classId'),
 
   /**
+   * class Object extract from context
+   * @type {String}
+   */
+  class: Ember.computed.alias('context.class'),
+
+  /**
+   * course Object extract from context
+   * @type {String}
+   */
+  course: Ember.computed.alias('context.course'),
+
+  /**
    * @property {TaxonomyTag[]} List of taxonomy tags
    */
   tags: Ember.computed('collection.standards.[]', function() {
@@ -352,7 +364,7 @@ export default Ember.Component.extend({
   getSearchServiceByType() {
     let component = this;
     let activeContentType = component.get('activeContentType');
-    let params = component.getParams();
+    let params = component.getSearchParams();
     let term = component.getSearchTerm() ? component.getSearchTerm() : '*';
     if (activeContentType === 'collection') {
       return component.get('searchService').searchCollections(term, params);
@@ -365,7 +377,7 @@ export default Ember.Component.extend({
     let component = this;
     let currentUserId = component.get('session.userId');
     let activeContentType = component.get('activeContentType');
-    let params = component.getParams();
+    let params = component.getMyContentParams();
     let term = component.getSearchTerm();
     if (term) {
       params.searchText = term;
@@ -398,11 +410,32 @@ export default Ember.Component.extend({
     return searchText;
   },
 
-  getParams() {
+  getSearchParams() {
+    let component = this;
     let params = {
       taxonomies: null,
-      page: this.get('page'),
-      pageSize: this.get('defaultSearchPageSize')
+      page: component.get('page'),
+      pageSize: component.get('defaultSearchPageSize')
+    };
+    let term = component.getSearchTerm();
+    if (!term) {
+      let grade = component.get('class.grade')
+        ? component.get('class.grade').join(',')
+        : null;
+      let filters = {};
+      if (grade) {
+        filters['flt.grade'] = grade;
+      }
+      params.filters = filters;
+    }
+    return params;
+  },
+
+  getMyContentParams() {
+    let component = this;
+    let params = {
+      page: component.get('page'),
+      pageSize: component.get('defaultSearchPageSize')
     };
     return params;
   },

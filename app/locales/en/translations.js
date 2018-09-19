@@ -1111,7 +1111,8 @@ export default Object.assign(quizzesTranslations, {
       lesson: 'Lesson',
       'class-activities': 'Daily Class Activities',
       'class-activities-tab': {
-        today: 'Today'
+        today: 'Today',
+        'past-activities': 'Past Activities'
       },
       'my-report': 'My Report',
       'my-location': 'My Location'
