@@ -1,5 +1,18 @@
-.taxonomy.gru-taxonomy-tag-list,
-.taxonomy.gru-preview-taxonomy-tag-list {
+.taxonomy.gru-preview-taxonomy-tag-list,
+.taxonomy.gru-taxonomy-tag-list {
+  .overlay-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    cursor: pointer;
+    opacity: 0.9;
+  }
+
   .non-visible-tags {
     display: inline-block;
     padding: 5px 0;
@@ -7,8 +20,8 @@
     background-color: transparent;
     border: 0 none;
 
-    &:focus,
-    &:active {
+    &:active,
+    &:focus {
       outline: 0 none;
     }
   }
@@ -22,16 +35,20 @@
       border-right-color: $dark-200;
     }
   }
+
   &.show-description {
     .popover-content {
       max-height: 230px;
       overflow-y: auto;
+
       .gru-taxonomy-tag {
         max-width: 100%;
       }
     }
+
     .description-tag {
       margin: 5px 0;
+
       .panel-body {
         padding: 5px 10px;
         min-height: inherit;

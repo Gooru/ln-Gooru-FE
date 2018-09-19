@@ -14,6 +14,12 @@ export default Ember.Component.extend({
   // --------------------------------------------
   // Actions
   actions: {
+    closePopUp: function() {
+      let component = this;
+      component.set('showPopUp', false);
+      var $anchor = component.$('button.non-visible-tags');
+      $anchor.removeClass('list-open').popover('hide');
+    },
     removeTag: function(tag) {
       if (this.get('onRemove')) {
         this.get('onRemove')(tag);
@@ -64,6 +70,7 @@ export default Ember.Component.extend({
    */
   showDescription: false,
 
+  showPopUp: false,
   /**
    * @property {TaxonomyTag[]} taxonomy tag
    */
@@ -121,7 +128,6 @@ export default Ember.Component.extend({
 
   setupTooltip: function() {
     var $anchor = this.$('button.non-visible-tags');
-
     if ($anchor.length) {
       let component = this;
       let placement =
@@ -145,7 +151,9 @@ export default Ember.Component.extend({
           // Close all tag-list popovers by simulating a click on them
           $('.non-visible-tags.list-open').click();
           $this.addClass('list-open').popover('show');
+          component.set('showPopUp', true);
         } else {
+          component.set('showPopUp', false);
           $this.removeClass('list-open').popover('hide');
         }
       });

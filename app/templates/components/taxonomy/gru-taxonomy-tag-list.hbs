@@ -1,3 +1,7 @@
+{{#if showPopUp}}
+  <div class="overlay-container" {{action 'closePopUp'}}>
+  </div>
+{{/if}}
 {{#each visibleTags as |taxonomyTag|}}
   {{taxonomy.gru-taxonomy-tag model=taxonomyTag isEditing=isEditing hasTooltip=hasTooltips tagPopoverDefaultPosition=tagPopoverDefaultPosition onRemove=(action 'removeTag' taxonomyTag) onAdd=(action 'addTag' taxonomyTag)}}
 {{/each}}
