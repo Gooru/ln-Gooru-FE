@@ -419,9 +419,7 @@ export default Ember.Component.extend({
     };
     let term = component.getSearchTerm();
     if (!term) {
-      let grade = component.get('class.grade')
-        ? component.get('class.grade').join(',')
-        : null;
+      let grade = component.get('class.grade');
       let filters = {};
       if (grade) {
         filters['flt.grade'] = grade;
