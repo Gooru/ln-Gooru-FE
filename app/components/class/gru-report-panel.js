@@ -378,6 +378,7 @@ export default Ember.Component.extend({
     onClosePullUp() {
       let component = this;
       component.set('showSuggestionPullup', false);
+      component.set('showOpenEndedPullup', false);
       component.closePullUp(true);
     }
   },
