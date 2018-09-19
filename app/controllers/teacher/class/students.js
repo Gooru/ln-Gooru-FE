@@ -336,8 +336,7 @@ export default Ember.Controller.extend(ModalMixin, {
         isStudentPerformed = score != null;
         proficiency.set('totalCompetencies', studentCompetencyPerformance.totalCompetency);
         proficiency.set('completedCompetencies', studentCompetencyPerformance.completedCompetency);
-        let pendingCompetencies = studentCompetencyPerformance.totalCompetency - studentCompetencyPerformance.completedCompetency;
-        proficiency.set('pendingCompetencies', pendingCompetencies);
+        proficiency.set('pendingCompetencies', studentCompetencyPerformance.inprogressCompetencies);
       }
       controller.getStudentCurrentLocation(member.id).then(function(studentLocation) {
         let currentLocation = '--';
