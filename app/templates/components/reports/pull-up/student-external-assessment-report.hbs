@@ -1,4 +1,6 @@
-<div class="backdrop" {{action 'onPullUpClose'}}></div>
+{{#if showPullUp}}
+  <div class="backdrop" {{action 'closeAll'}}></div>
+{{/if}}
 <div class="report-container">
   <div class="report-header">
     <div class="assessment-container">
@@ -12,7 +14,7 @@
           {{profile.fullName}}
         </div>
         <div class="performance-bar">
-          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="{{performanceColorStyle}} {{studentAverage}}" >
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="{{performanceColorStyle}} {{studentAverage}}">
           </div>
           <span class="score-text" style="color: {{performanceColor}}"> {{performanceScore}} % </span>
         </div>
@@ -52,6 +54,7 @@
   {{teacher.suggestion-pull-up
     showPullUp=showSuggestionPullup
     students=studentsSelectedForSuggest
+    onClosePullUp="onClosePullUp"
     onCloseSuggest="onCloseSuggest"
     context=suggestContextParams
     collection=collections
