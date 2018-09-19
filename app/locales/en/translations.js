@@ -876,6 +876,8 @@ export default Object.assign(quizzesTranslations, {
         'class-not-found':
           'Classroom not found. Make sure you\'ve entered the correct classroom code',
         'invalid-code': 'Invalid classroom code.',
+        'join-not-allowed':
+          'The class you are trying to join is no longer active. Please contact your teacher for the correct class code.',
         'already-member': 'You are already a member of this classroom.',
         'join-class': 'Join Classroom',
         'terms-and-conditions':
