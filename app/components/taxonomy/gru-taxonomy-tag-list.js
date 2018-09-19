@@ -16,7 +16,6 @@ export default Ember.Component.extend({
   actions: {
     closePopUp: function() {
       let component = this;
-      component.set('showPopUp', false);
       var $anchor = component.$('button.non-visible-tags');
       $anchor.removeClass('list-open').popover('hide');
     },
@@ -70,7 +69,6 @@ export default Ember.Component.extend({
    */
   showDescription: false,
 
-  showPopUp: false,
   /**
    * @property {TaxonomyTag[]} taxonomy tag
    */
@@ -137,6 +135,10 @@ export default Ember.Component.extend({
 
       $anchor.addClass('clickable');
       $anchor.attr('data-html', 'true');
+      $anchor.attr(
+        'data-title',
+        '<button type="button" id="popoverClose" class="close">&times;</button>'
+      );
       $anchor.popover({
         placement: placement,
         content: function() {
@@ -145,15 +147,19 @@ export default Ember.Component.extend({
         trigger: 'manual'
       });
 
+      $(document).click(function(e) {
+        if (e.target.id === 'popoverClose') {
+          $('.list-open').popover('hide');
+        }
+      });
+
       $anchor.click(function() {
         var $this = $(this);
         if (!$this.hasClass('list-open')) {
           // Close all tag-list popovers by simulating a click on them
           $('.non-visible-tags.list-open').click();
           $this.addClass('list-open').popover('show');
-          component.set('showPopUp', true);
         } else {
-          component.set('showPopUp', false);
           $this.removeClass('list-open').popover('hide');
         }
       });

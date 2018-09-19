@@ -26,6 +26,26 @@
     }
   }
 
+  .popover-content {
+    margin-top: 20px;
+  }
+  /* Styles for header */
+  .popover-title {
+    margin-right: 5px;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    text-align: right;
+  }
+
+  .close {
+    font-size: 20px;
+    outline: none;
+  }
+
   .popover {
     max-width: 300px;
     background-color: $dark-200;
