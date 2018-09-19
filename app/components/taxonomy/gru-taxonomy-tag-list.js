@@ -121,7 +121,6 @@ export default Ember.Component.extend({
 
   setupTooltip: function() {
     var $anchor = this.$('button.non-visible-tags');
-
     if ($anchor.length) {
       let component = this;
       let placement =
@@ -131,12 +130,22 @@ export default Ember.Component.extend({
 
       $anchor.addClass('clickable');
       $anchor.attr('data-html', 'true');
+      $anchor.attr(
+        'data-title',
+        '<button type="button" id="popoverClose" class="close">&times;</button>'
+      );
       $anchor.popover({
         placement: placement,
         content: function() {
           return component.$('.all-tags').html();
         },
         trigger: 'manual'
+      });
+
+      $(document).click(function(e) {
+        if (e.target.id === 'popoverClose') {
+          $('.list-open').popover('hide');
+        }
       });
 
       $anchor.click(function() {
