@@ -60,20 +60,7 @@ export default Ember.Component.extend({
      */
     externalAssessment: function(classActivity) {
       let component = this;
-      let url = classActivity.collection.get('url');
-      let classData = component.get('class');
-      let collection = classActivity.get('collection');
-      let classId = classData.get('id');
-      let queryParams = {
-        collectionId: collection.get('id'),
-        classId,
-        role: 'student',
-        source: component.get('source'),
-        type: 'assessment-external'
-      };
-      if (url) {
-        component.get('router').transitionTo('player-external', {queryParams});
-      }
+      component.loadPlayerExternal(classActivity.collection);
     },
     /**
      * Action triggred when dca report action invoke
@@ -125,5 +112,36 @@ export default Ember.Component.extend({
   /**
    * @property {boolean}
    */
-  visible: Ember.computed.alias('classActivity.isActive')
+  visible: Ember.computed.alias('classActivity.isActive'),
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function loadPlayerExternal
+   * Method to load external player
+   */
+  loadPlayerExternal(assessment) {
+    let component = this;
+    let assessmentService = component.get('assessmentService');
+    let classData = component.get('class');
+    let classId = classData.get('id');
+    return Ember.RSVP.hash({
+      externalAssessment: Ember.RSVP.resolve(assessmentService.readExternalAssessment(assessment.get('id')))
+    })
+      .then(({externalAssessment}) => {
+        let queryParams = {
+          collectionId: externalAssessment.get('id'),
+          classId,
+          role: 'student',
+          source: component.get('source'),
+          type: 'assessment-external',
+          collectionSubType: null,
+          courseId: externalAssessment.get('courseId'),
+          unitId: externalAssessment.get('unitId'),
+          lessonId: externalAssessment.get('lessonId')
+        };
+        component.get('router').transitionTo('player-external', {queryParams});
+      });
+  }
 });
