@@ -123,25 +123,15 @@ export default Ember.Component.extend({
    */
   loadPlayerExternal(assessment) {
     let component = this;
-    let assessmentService = component.get('assessmentService');
     let classData = component.get('class');
     let classId = classData.get('id');
-    return Ember.RSVP.hash({
-      externalAssessment: Ember.RSVP.resolve(assessmentService.readExternalAssessment(assessment.get('id')))
-    })
-      .then(({externalAssessment}) => {
-        let queryParams = {
-          collectionId: externalAssessment.get('id'),
-          classId,
-          role: 'student',
-          source: component.get('source'),
-          type: 'assessment-external',
-          collectionSubType: null,
-          courseId: externalAssessment.get('courseId'),
-          unitId: externalAssessment.get('unitId'),
-          lessonId: externalAssessment.get('lessonId')
-        };
-        component.get('router').transitionTo('player-external', {queryParams});
-      });
+    let queryParams = {
+      collectionId: assessment.get('id'),
+      classId,
+      role: 'student',
+      source: component.get('source'),
+      type: 'assessment-external'
+    };
+    component.get('router').transitionTo('player-external', {queryParams});
   }
 });
