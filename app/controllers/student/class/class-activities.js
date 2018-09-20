@@ -46,8 +46,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       };
       if (collection.get('format') === 'assessment-external') {
         component.set('isShowStudentExternalAssessmentReport', true);
+        component.set('showStudentDcaReport', false);
       } else {
         component.set('showStudentDcaReport', true);
+        component.set('isShowStudentExternalAssessmentReport', false);
       }
       component.set('studentReportContextData', params);
     },
@@ -92,7 +94,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   /**
    * @property {Boolean} isShowStudentExternalAssessmentReport
    */
-  isShowStudentExternalAssessmentReport: false
+  isShowStudentExternalAssessmentReport: false,
+
+  /**
+   * @property {Boolean} studentDcaReport
+   */
+  studentDcaReport: false
 
   // -------------------------------------------------------------------------
   // Observers

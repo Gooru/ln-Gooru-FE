@@ -23,10 +23,18 @@ export default Ember.Route.extend({
   model: function(params) {
     const route = this;
     return Ember.RSVP.hash({
-      mapLocation: route.get('navigateMapService').getMapLocation(params),
       externalAssessment: route.get('assessmentService').readExternalAssessment(params.collectionId)
     })
-      .then(({mapLocation, externalAssessment}) => {
+      .then(({externalAssessment}) => {
+        let mapLocation = Ember.Object.create({
+          context: Ember.Object.create({
+            classId: params.classId,
+            courseId: externalAssessment.get('courseId'),
+            unitId: externalAssessment.get('unitId'),
+            collectionId: externalAssessment.get('id'),
+            itemType: 'assessment-external'
+          })
+        });
         return {
           source: params.source,
           mapLocation,
