@@ -420,9 +420,13 @@ export default Ember.Component.extend({
     let term = component.getSearchTerm();
     if (!term) {
       let grade = component.get('class.grade');
+      let subject = component.get('course.subject');
       let filters = {};
       if (grade) {
         filters['flt.grade'] = grade;
+      }
+      if (subject) {
+        filters['flt.subject'] = subject;
       }
       params.filters = filters;
     }
