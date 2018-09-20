@@ -25,9 +25,8 @@ RUN npm install -g  graceful-fs@4.1.4
 RUN apt-get install -y git-core
 RUN npm install -g phantomjs-prebuilt@2.1.3
 
-# Add the user UID:1000, GID:1000, home at /build
-RUN groupadd -g 1001 bamboo && \
-    useradd -r -u 1001 -g bamboo bamboo
+# Add the user
+RUN adduser bamboo
 
 # Set the working directory to build home directory
 WORKDIR /build
