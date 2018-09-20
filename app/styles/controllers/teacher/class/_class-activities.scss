@@ -122,9 +122,8 @@
 
       .dca-todays-container {
         .dca-todays-header {
-          opacity: 0.5;
           font-family: "Lato";
-          font-size: 12px;
+          font-size: 15px;
           font-weight: bold;
           color: #000000;
           text-transform: uppercase;
@@ -132,8 +131,9 @@
 
         .dca-todays-action-list-container {
           border-radius: 4px;
-          background-color: #ffffff;
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+          box-shadow: 0 0 2px 2px #0066ff;
+          background-color: #fff;
+          padding: 2px;
 
           .dca-todays-info-action-container {
             min-height: 110px;
@@ -256,6 +256,14 @@
 
       .dca-past-date-list-container {
         padding-bottom: 50px;
+        .dca-past-activities-header {
+          padding-top: 20px;
+          font-family: "Lato";
+          font-size: 15px;
+          font-weight: bold;
+          color: #000000;
+          text-transform: uppercase;
+        }
 
         .dca-date-view-container {
           display: inline-grid;

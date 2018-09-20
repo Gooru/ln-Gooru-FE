@@ -59,10 +59,8 @@ export default Ember.Component.extend({
      * @function externalAssessment open new tab from DCA
      */
     externalAssessment: function(classActivity) {
-      let url = classActivity.collection.get('url');
-      if (url) {
-        window.open(url);
-      }
+      let component = this;
+      component.loadPlayerExternal(classActivity.collection);
     },
     /**
      * Action triggred when dca report action invoke
@@ -114,5 +112,26 @@ export default Ember.Component.extend({
   /**
    * @property {boolean}
    */
-  visible: Ember.computed.alias('classActivity.isActive')
+  visible: Ember.computed.alias('classActivity.isActive'),
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function loadPlayerExternal
+   * Method to load external player
+   */
+  loadPlayerExternal(assessment) {
+    let component = this;
+    let classData = component.get('class');
+    let classId = classData.get('id');
+    let queryParams = {
+      collectionId: assessment.get('id'),
+      classId,
+      role: 'student',
+      source: component.get('source'),
+      type: 'assessment-external'
+    };
+    component.get('router').transitionTo('player-external', {queryParams});
+  }
 });

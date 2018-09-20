@@ -209,6 +209,7 @@ export default Ember.Object.extend({
           score: performance.percentScore || 0,
           totalCompetency: performance.totalCompetencies || 0,
           completedCompetency: performance.completedCompetencies || 0,
+          inprogressCompetencies: performance.inprogressCompetencies || 0,
           userId: performance.userId
         };
         normalizedClassPerformanceSummary.push(userPerformanceData);

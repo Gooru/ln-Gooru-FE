@@ -132,6 +132,10 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    closeAll() {
+      this.sendAction('onClosePullUp');
+    },
+
     onPullUpClose() {
       this.closePullUp();
     },
@@ -154,6 +158,12 @@ export default Ember.Component.extend({
       component.set('suggestContextParams', suggestContextParams);
       component.set('studentsSelectedForSuggest', studentsSelectedForSuggest);
       component.set('showSuggestionPullup', true);
+    },
+
+    onClosePullUp() {
+      let component = this;
+      component.set('showSuggestionPullup', false);
+      component.closePullUp(true);
     }
   },
 
@@ -173,7 +183,7 @@ export default Ember.Component.extend({
     );
   },
 
-  closePullUp() {
+  closePullUp(closeAll) {
     let component = this;
     component.$().animate(
       {
@@ -182,7 +192,9 @@ export default Ember.Component.extend({
       400,
       function() {
         component.set('showPullUp', false);
-        component.sendAction('onClosePullUp');
+        if (closeAll) {
+          component.sendAction('onClosePullUp', true);
+        }
       }
     );
   },

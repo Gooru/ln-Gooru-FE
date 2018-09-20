@@ -8,10 +8,10 @@
       width: max-content;
 
       .students {
-        margin-top: 143px;
+        margin-top: 166px;
 
         &.competency-slider-visible {
-          margin-top: 143px;
+          margin-top: 166px;
         }
 
         .name-filter {
@@ -70,6 +70,7 @@
 
         .competencies-list {
           max-width: 455px;
+          margin-top: 23px;
           overflow-x: auto;
 
           .competency-codes {

@@ -124,6 +124,9 @@ export default Ember.Component.extend({
   // actions
 
   actions: {
+    closeAll: function() {
+      this.sendAction('onClosePullUp');
+    },
     /**
      * Action triggered when the user close the pull up.
      **/

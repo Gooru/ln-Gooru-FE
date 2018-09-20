@@ -136,11 +136,11 @@
         }
 
         .students-list {
-          max-width: 75px;
-          min-width: 75px;
+          max-width: 61px;
+          min-width: 61px;
           max-height: 587px;
           background-color: $white;
-          transition: 1s;
+          transition: 2s;
           position: absolute;
           overflow-x: hidden;
           overflow-y: auto;
@@ -159,7 +159,7 @@
 
           &:hover {
             z-index: 9999;
-            box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.13);
+            box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.13);
             max-width: 100%;
 
             .list {
@@ -186,7 +186,7 @@
             display: flex;
             cursor: pointer;
             width: max-content;
-            margin-left: 21px;
+            margin-left: 16px;
 
             .thumbnail {
               width: 30px;

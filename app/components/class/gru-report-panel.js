@@ -373,6 +373,13 @@ export default Ember.Component.extend({
     onCloseSuggest() {
       // on close suggest callback
       return true;
+    },
+
+    onClosePullUp() {
+      let component = this;
+      component.set('showSuggestionPullup', false);
+      component.set('showOpenEndedPullup', false);
+      component.closePullUp(true);
     }
   },
 
@@ -400,7 +407,7 @@ export default Ember.Component.extend({
     );
   },
 
-  closePullUp() {
+  closePullUp(closeAll) {
     let component = this;
     component.$().animate(
       {
@@ -409,6 +416,9 @@ export default Ember.Component.extend({
       400,
       function() {
         component.set('showPullUp', false);
+        if (closeAll) {
+          component.sendAction('onClosePullUp', true);
+        }
       }
     );
   },
