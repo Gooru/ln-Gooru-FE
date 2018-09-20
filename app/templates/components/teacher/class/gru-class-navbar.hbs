@@ -1,4 +1,4 @@
-<div class="panel">
+<div class="panel" {{action 'closeNotificationList'}}>
 <div class="nav-body">
     <ul class="nav nav-pills" role="tablist">
       <li class="app-brand tab">
@@ -52,7 +52,7 @@
             {{#if isFeatureEnabled }}
                 <li>
                     <a style="opacity:1;">
-                        {{notification/notification-indicator accessorClass='class' isTeacher=true classId=class.id }}
+                        {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' isTeacher=true class=class.id }}
                     </a>
                 </li>
             {{/if}}
