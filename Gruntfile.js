@@ -93,6 +93,31 @@ module.exports = function(grunt) {
     grunt.task.run(tasks);
   });
 
+  /**
+   * Test Runnner task taking module as paramter and running with 4 process
+   */
+  grunt.registerTask('testmodule', function() {
+    //for development
+    //grunt -s -module='Acceptance | library' testmodule
+    var noStubby = grunt.option('no-stubby') || grunt.option('ns'),
+      server = grunt.option('server') || grunt.option('s'),
+      target = grunt.option('module');
+
+    var command = 'ember test ';
+    if (server) {
+      command += ' --server';
+    }
+    command += '--silent --split=4 --parallel ';
+
+    if (target) {
+      command += `--module='${target}'`;
+    }
+
+    var testExecTask = `exec:run:${command}`;
+    var tasks = noStubby ? [testExecTask] : ['stubby:test', testExecTask];
+    grunt.task.run(tasks);
+  });
+
   grunt.registerTask('bamboo-eslint', function() {
     grunt.config.set('eslint.options.format', 'junit');
     grunt.config.set('eslint.options.outputFile', 'linter-xunit.xml');
