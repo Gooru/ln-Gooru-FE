@@ -42,7 +42,7 @@
   <div class="search-list-container">
     {{#if (gt searchResults.length 0)}}
       <div class="search-list">
-        {{#each searchResults as |result|}}
+        {{#each searchResultSet as |result|}}
           {{cards.dca-search-collection-card collection=result contentType=activeContentType onAddContentToDCA="onAddContentToDCA" onScheduleContentToDCA="onScheduleContentToDCA"}}
         {{/each}}
       </div>
