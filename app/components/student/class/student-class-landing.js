@@ -7,14 +7,25 @@ import {
 
 export default Ember.Component.extend({
 
+  // -------------------------------------------------------------------------
+  // Attributes
   classNames: ['student-class-landing'],
+
+  // -------------------------------------------------------------------------
+  // Dependencies
 
   /**
    * @property {NavigateMapService}
    */
   navigateMapService: Ember.inject.service('api-sdk/navigate-map'),
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+
+    /**
+     * Action triggered when select next action
+     */
     onMoveNext(curStep) {
       let component = this;
       if (curStep === 'grade') {
@@ -31,12 +42,28 @@ export default Ember.Component.extend({
     }
   },
 
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {Boolean} isShowRoute0Destination
+   */
   isShowRoute0Destination: false,
 
+  /**
+   * @property {Boolean} isShowInspectDestination
+   */
   isShowInspectDestination: false,
 
+  /**
+   * @property {Boolean} isShowGradeLevel
+   */
   isShowGradeLevel: true,
 
+  /**
+   * @property {Number} classGrade
+   */
   classGrade: Ember.computed('classData', function() {
     let controller = this;
     let classData = controller.get('classData');
@@ -44,18 +71,37 @@ export default Ember.Component.extend({
     return classGrade ? parseInt(classGrade.objectAt(0)) : null;
   }),
 
+  /**
+   * @property {UUID} classId
+   */
   classId: Ember.computed('classData', function() {
     let component = this;
     let classData = component.get('classData');
     return classData.get('id');
   }),
 
+  /**
+   * @property {UUID} courseId
+   */
   courseId: Ember.computed('classData', function() {
     let component = this;
     let classData = component.get('classData');
     return classData.get('courseId');
   }),
 
+
+  /**
+   * @property {String} navMathSubjectCode
+   */
+  navMathSubjectCode: 'K12.MA',
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function startPlaying
+   * Method to play first item that needs to be played
+   */
   startPlaying() {
     const component = this;
     let classData = component.get('classData');
@@ -79,8 +125,8 @@ export default Ember.Component.extend({
     });
   },
 
-  /** returns options promise chain resolving response
-   * @param
+  /**
+   * @function nextPromiseHandler
    */
   nextPromiseHandler(resp) {
     let queryParams = {

@@ -2,12 +2,26 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+  // -------------------------------------------------------------------------
+  // Attributes
   classNames: ['student-destination-course-accordion'],
 
+  // -------------------------------------------------------------------------
+  // Dependencies
+
+  /**
+   * Session service to retrieve session content
+   */
   session: Ember.inject.service('session'),
 
+  /**
+   * Unit service
+   */
   unitService: Ember.inject.service('api-sdk/unit'),
 
+  /**
+   * Lesson service
+   */
   lessonService: Ember.inject.service('api-sdk/lesson'),
 
   /**
@@ -15,6 +29,8 @@ export default Ember.Component.extend({
    */
   rescopeService: Ember.inject.service('api-sdk/rescope'),
 
+  // -------------------------------------------------------------------------
+  // Events
   didInsertElement() {
     let component = this;
     if (component.get('isRoute0')) {
@@ -29,7 +45,21 @@ export default Ember.Component.extend({
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Observers
+
+  rescopeObserver: Ember.observer('skippedContents', function() {
+    let component = this;
+    component.processSkippedContents();
+  }),
+
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+
+    /**
+     * Action triggered when select an unit
+     */
     onSelectUnit(selectedUnit) {
       let component = this;
       let isUnitHasChildren = selectedUnit.get('children').length > 0;
@@ -39,6 +69,9 @@ export default Ember.Component.extend({
       component.toggleAccordion('u', selectedUnit.id);
     },
 
+    /**
+     * Action triggered when select a lesson
+     */
     onSelectLesson(selectedUnit, selectedLesson) {
       let component = this;
       let isLessonHasChildren = selectedLesson.get('children').length > 0;
@@ -49,6 +82,12 @@ export default Ember.Component.extend({
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {Array} units
+   */
   units: Ember.computed('courseData', function() {
     let component = this;
     let courseData = component.get('courseData');
@@ -56,15 +95,23 @@ export default Ember.Component.extend({
     return units;
   }),
 
+  /**
+   * @property {Array} skippedContents
+   */
   skippedContents: null,
 
-  rescopeObserver: Ember.observer('skippedContents', function() {
-    let component = this;
-    component.processSkippedContents();
-  }),
-
+  /**
+   * @property {Boolean} isRoute0
+   */
   isRoute0: false,
 
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function loadUnitData
+   * Method to load unit data
+   */
   loadUnitData(unit) {
     let component = this;
     let unitId = unit.get('id');
@@ -78,6 +125,10 @@ export default Ember.Component.extend({
       });
   },
 
+  /**
+   * @function loadLessonData
+   * Method to load lesson data
+   */
   loadLessonData(unit, lesson) {
     let component = this;
     let lessonId = lesson.get('id');
@@ -96,6 +147,10 @@ export default Ember.Component.extend({
       });
   },
 
+  /**
+   * @function toggleAccordion
+   * Method to toggle accordion
+   */
   toggleAccordion(type, id) {
     let component = this;
     if (component.$(`#${type}-${id}`).hasClass('collapsed')) {
@@ -106,6 +161,10 @@ export default Ember.Component.extend({
     }
   },
 
+  /**
+   * @function processSkippedContents
+   * Method to hide/show skipped contents
+   */
   processSkippedContents() {
     let component = this;
     let skippedContents = component.get('skippedContents');

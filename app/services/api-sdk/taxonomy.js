@@ -182,16 +182,19 @@ export default Ember.Service.extend({
     });
   },
 
-  fetchDomainGradeBoundryBySubjectId(gradeId) {
+  /**
+   * @function fetchDomainGradeBoundaryBySubjectId
+   */
+  fetchDomainGradeBoundaryBySubjectId(gradeId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('taxonomyAdapter')
-        .fetchDomainGradeBoundryBySubjectId(gradeId)
+        .fetchDomainGradeBoundaryBySubjectId(gradeId)
         .then(
           function(response) {
             resolve(
-              service.get('taxonomySerializer').normalizeDomainGradeBoundry(response)
+              service.get('taxonomySerializer').normalizeDomainGradeBoundary(response)
             );
           },
           function(error) {
@@ -201,6 +204,9 @@ export default Ember.Service.extend({
     });
   },
 
+  /**
+   * @function fetchGradesBySubject
+   */
   fetchGradesBySubject(filters) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {

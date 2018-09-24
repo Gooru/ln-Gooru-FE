@@ -287,7 +287,10 @@ export default Ember.Object.extend({
     return taxonomyResult;
   },
 
-  normalizeDomainGradeBoundry(payload) {
+  /**
+   * @function normalizeDomainGradeBoundary
+   */
+  normalizeDomainGradeBoundary(payload) {
     let normalizedData = Ember.A([]);
     if (payload && payload.domains) {
       normalizedData = payload.domains;
@@ -295,6 +298,9 @@ export default Ember.Object.extend({
     return normalizedData;
   },
 
+  /**
+   * @function normalizeGrades
+   */
   normalizeGrades(payload) {
     let normalizedGrades = Ember.A([]);
     if (payload && payload.grades) {

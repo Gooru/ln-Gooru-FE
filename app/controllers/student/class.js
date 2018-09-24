@@ -115,6 +115,9 @@ export default Ember.Controller.extend({
     return scorePercentage !== null && scorePercentage >= 0;
   }),
 
+  /**
+   * @property {Boolean} isShowNavigatorLanding
+   */
   isShowNavigatorLanding: Ember.computed('class.currentLocation', function() {
     let controller = this;
     let classData = controller.get('class');

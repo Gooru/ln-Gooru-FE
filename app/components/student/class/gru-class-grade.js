@@ -1,15 +1,31 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+
+  // -------------------------------------------------------------------------
+  // Attributes
   classNames: ['gru-class-grade'],
 
+  // -------------------------------------------------------------------------
+  // Actions
+
   actions: {
+
+    /**
+     * Action triggered when click next
+     */
     onMoveNext(step) {
       let component = this;
       component.sendAction('onMoveNext', step);
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {Array} gradeLevels
+   */
   gradeLevels: Ember.computed('gradeLevel', function() {
     let component = this;
     let gradeLevel = component.get('gradeLevel');

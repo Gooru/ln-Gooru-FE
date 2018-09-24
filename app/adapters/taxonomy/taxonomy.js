@@ -142,7 +142,10 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
-  fetchDomainGradeBoundryBySubjectId(gradeId) {
+  /**
+   * @function fetchDomainGradeBoundaryBySubjectId
+   */
+  fetchDomainGradeBoundaryBySubjectId(gradeId) {
     const adapter = this;
     const namespace = adapter.get('taxonomyDSNamespace');
     const url = `${namespace}/grade/boundary/${gradeId}`;
@@ -155,6 +158,9 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * @function fetchGradesBySubject
+   */
   fetchGradesBySubject(filters) {
     const adapter = this;
     const namespace = adapter.get('taxonomyDSNamespace');

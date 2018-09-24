@@ -8,6 +8,9 @@ export default Ember.Component.extend({
 
   classNames: ['student-inspect-competency-chart'],
 
+  // -------------------------------------------------------------------------
+  // Dependencies
+
   session: Ember.inject.service('session'),
 
   /**
@@ -36,13 +39,24 @@ export default Ember.Component.extend({
     component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
   },
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+    /**
+     * Action triggered when select a grade
+     */
     onSelectGrade(gradeData) {
       let component = this;
       component.set('selectedGrade', gradeData);
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {UUID} userId
+   */
   userId: Ember.computed(function() {
     let component = this;
     return component.get('session.userId');
@@ -61,7 +75,10 @@ export default Ember.Component.extend({
     '5': '#006eb5'
   }),
 
-  courseCompetencyColor: '#ef8f2f',
+  /**
+   * @property {String} route0SuggestedCompetency
+   */
+  route0SuggestedCompetency: '#ef8f2f',
 
   /**
    * Width of the cell
@@ -81,15 +98,33 @@ export default Ember.Component.extend({
    */
   taxonomyDomains: Ember.A(),
 
+  /**
+   * @property {Array} route0Contents
+   */
   route0Contents: null,
 
+  /**
+   * @property {Array} domainSummaryData
+   */
   domainSummaryData: null,
 
+  /**
+   * @property {Boolean} isRoute0Chart
+   */
   isRoute0Chart: false,
 
+  /**
+   * @property {JSON} selectedGrade
+   */
   selectedGrade: null,
 
-  subjectCode: 'K12.MA',
+  /**
+   * @property {String} subjectCode
+   */
+  subjectCode: '',
+
+  // -------------------------------------------------------------------------
+  // Observers
 
   domainSummaryObserver: Ember.observer('domainSummaryData', function() {
     let component = this;
@@ -108,6 +143,9 @@ export default Ember.Component.extend({
     });
   }),
 
+
+  // -------------------------------------------------------------------------
+  // Methods
 
   /**
    * @function loadDataBySubject
@@ -130,6 +168,9 @@ export default Ember.Component.extend({
     }
   },
 
+  /**
+   * @function parseChartData
+   */
   parseChartData(domainLevelSummary, domainBoundaries, route0Suggestions) {
     let component = this;
     let domainCompetencies = domainLevelSummary.domainCompetencies;
@@ -213,16 +254,6 @@ export default Ember.Component.extend({
     return chartData;
   },
 
-  getHighestCourseCoveredCompetency(domainCompetenciesList) {
-    let topMostCoveredPosition = domainCompetenciesList.length - 1;
-    let courseCoveredCompetency = domainCompetenciesList.filterBy('isCourseCoveredCompetecy', true);
-    if (courseCoveredCompetency && courseCoveredCompetency.length > 0) {
-      let topMostCompentecy = courseCoveredCompetency[courseCoveredCompetency.length - 1];
-      topMostCoveredPosition = parseInt(topMostCompentecy.competencySeq) - 1 ;
-    }
-    return topMostCoveredPosition;
-  },
-
   /**
    * @function drawChart
    * Method to plot competency chart
@@ -266,14 +297,18 @@ export default Ember.Component.extend({
       .transition()
       .duration(1000)
       .style('fill', d => {
-        let colorCode = d.isRoute0SuggestedCompetency ? component.get('courseCompetencyColor') : colorsBasedOnStatus.get(d.status.toString());
+        let colorCode = d.isRoute0SuggestedCompetency ? component.get('route0SuggestedCompetency') : colorsBasedOnStatus.get(d.status.toString());
         return colorCode;
       });
     cards.exit().remove();
     component.drawSkyline();
-    component.draDomainBoundaryLine();
+    component.drawDomainBoundaryLine();
   },
 
+  /**
+   * @function fetchDomainLevelSummary
+   * Method to fetch domain level summary data
+   */
   fetchDomainLevelSummary() {
     let component = this;
     let competencyService = component.get('competencyService');
@@ -366,7 +401,11 @@ export default Ember.Component.extend({
     }
   },
 
-  draDomainBoundaryLine() {
+  /**
+  * @function drawDomainBoundaryLine
+  * Method to draw domain boundary line
+  */
+  drawDomainBoundaryLine() {
     let component = this;
     let skylineElements = component.$('.domain-boundary');
     let cellWidth = component.get('cellWidth');
@@ -400,8 +439,8 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function joinSkyLinePoints
-   * Method to draw vertical line to connects sky line points, if necessary
+   * @function joinDomainBoundaryLinePoints
+   * Method to draw vertical line to connects domain boundary line points, if necessary
    */
   joinDomainBoundaryLinePoints(cellIndex, curLinePoint) {
     let component = this;
@@ -428,13 +467,17 @@ export default Ember.Component.extend({
   },
 
 
+  /**
+   * @function getDomainGradeBoundry
+   * Method to fetch domain grade boundary
+   */
   getDomainGradeBoundry() {
     let component = this;
     let taxonomyService = component.get('taxonomyService');
     let destinationGrade = component.get('selectedGrade');
     let gradeId = destinationGrade.id;
     return Ember.RSVP.hash({
-      domainBoundaries : Ember.RSVP.resolve(taxonomyService.fetchDomainGradeBoundryBySubjectId(gradeId))
+      domainBoundaries : Ember.RSVP.resolve(taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId))
     })
       .then(({domainBoundaries}) => {
         component.set('domainBoundaries', domainBoundaries);
