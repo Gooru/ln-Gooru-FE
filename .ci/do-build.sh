@@ -48,4 +48,3 @@ docker run  -t --rm \
 	-w /build dockergooru/fe-build ./.ci/build.sh
 
 
-#source .ci/build.sh

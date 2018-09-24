@@ -32,7 +32,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     onAddDca(selectedSearchContentType) {
       let controller = this;
       let contextParams = {
-        classId: controller.get('classId')
+        classId: controller.get('classId'),
+        class: controller.get('class'),
+        course: controller.get('course')
       };
       controller.set('contextParams', contextParams);
       controller.set('selectedSearchContentType', selectedSearchContentType);
@@ -238,10 +240,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   classId: Ember.computed.alias('classController.class.id'),
 
   /**
+   * Class Object
+   * @property {Object}
+   */
+  class: Ember.computed.alias('classController.class'),
+
+  /**
    * Course Id which is associated with this class
    * @property {String}
    */
   courseId: Ember.computed.alias('classController.class.courseId'),
+
+  /**
+   * Course Object
+   * @property {Object}
+   */
+  course: Ember.computed.alias('classController.course'),
 
   /**
    * Class id

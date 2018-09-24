@@ -1,5 +1,5 @@
-.taxonomy.gru-taxonomy-tag-list,
-.taxonomy.gru-preview-taxonomy-tag-list {
+.taxonomy.gru-preview-taxonomy-tag-list,
+.taxonomy.gru-taxonomy-tag-list {
   .non-visible-tags {
     display: inline-block;
     padding: 5px 0;
@@ -7,10 +7,30 @@
     background-color: transparent;
     border: 0 none;
 
-    &:focus,
-    &:active {
+    &:active,
+    &:focus {
       outline: 0 none;
     }
+  }
+
+  .popover-content {
+    margin-top: 20px;
+  }
+  /* Styles for header */
+  .popover-title {
+    margin-right: 5px;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    text-align: right;
+  }
+
+  .close {
+    font-size: 20px;
+    outline: none;
   }
 
   .popover {
@@ -22,16 +42,20 @@
       border-right-color: $dark-200;
     }
   }
+
   &.show-description {
     .popover-content {
       max-height: 230px;
       overflow-y: auto;
+
       .gru-taxonomy-tag {
         max-width: 100%;
       }
     }
+
     .description-tag {
       margin: 5px 0;
+
       .panel-body {
         padding: 5px 10px;
         min-height: inherit;

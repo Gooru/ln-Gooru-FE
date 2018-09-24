@@ -237,6 +237,7 @@
           border-left: 1px solid #f2f2f2;
           justify-self: end;
           cursor: pointer;
+          position: relative;
 
           .add {
             margin-left: 9px;
@@ -244,6 +245,33 @@
             pointer-events: none;
             font-size: 22px;
             color: #37424a;
+            position: absolute;
+          }
+
+          .done {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s 0.5s, opacity 0.5s linear;
+            color: #4d9840;
+            font-size: 22px;
+            position: absolute;
+            margin-left: 9px;
+            margin-top: 8px;
+          }
+
+          &.added {
+            pointer-events: none;
+
+            .add {
+              visibility: hidden;
+              opacity: 0;
+            }
+
+            .done {
+              visibility: visible;
+              opacity: 1;
+              transition: opacity 0.5s linear;
+            }
           }
         }
       }

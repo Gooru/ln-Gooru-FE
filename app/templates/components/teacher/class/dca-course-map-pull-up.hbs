@@ -12,11 +12,11 @@
     </div>
   </div>
   <div class="dca-course-map-unit-container">
-    {{#each course.children as | unit |}}
+    {{#each course.children as | unit index |}}
       <div class="dca-course-map-unit">
         <div class="dca-course-map-unit-panel {{if unit.isActive 'active'}}" {{action 'toggleUnitItems' unit }}>
           <div class="unit-name-sequence">
-            {{t 'common.unit'}} {{unit.sequence}}
+            {{t 'common.unit'}} {{plus-one index}}
           </div>
           <div class="unit-title">
             <p>{{unit.title}}</p>
@@ -25,11 +25,11 @@
         <div class="dca-course-map-lesson-container" id="dca-unit-{{unit.id}}">
           {{#if unit.hasLessonFetched}}
             {{#if unit.children}}
-              {{#each unit.children as | lesson |}}
+              {{#each unit.children as | lesson index |}}
                 <div class="dca-course-map-lesson {{if lesson.isActive 'active'}}">
                   <div class="dca-course-map-lesson-panel" {{action 'toggleLessonItems' unit lesson }}>
                     <div class="lesson-name-sequence">
-                      {{t 'common.lesson'}} {{lesson.sequence}}
+                      {{t 'common.lesson'}} {{plus-one index}}
                     </div>
                     <div class="lesson-title">
                       <p>{{lesson.title}}</p>

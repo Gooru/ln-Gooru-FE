@@ -19,11 +19,6 @@ export default Ember.Component.extend({
   // Dependencies
 
   /**
-   * @type {ClassService} Service to retrieve class information
-   */
-  classService: Ember.inject.service('api-sdk/class'),
-
-  /**
    * @type {PerformanceService} Service to retrieve class performance summary
    */
   performanceService: Ember.inject.service('api-sdk/performance'),
@@ -201,11 +196,6 @@ export default Ember.Component.extend({
    * @property {String} collectionUrl
    */
   collectionUrl: null,
-
-  /**
-   * @property {Class} class information
-   */
-  class: null,
 
   /**
    * @property {String} classId - Class unique Id associated for the collection / assessment.

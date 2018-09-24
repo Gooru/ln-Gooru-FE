@@ -134,10 +134,16 @@ export default Ember.Component.extend({
           navigate: true,
           navigationDetails: {
             route: 'student.class.course-map',
-            queryPType: 'paramonly',
+            queryPType: 'hybrid',
             exactparams: 'classId',
+            setlocation: true,
             queryparams: {
-              classId: 0
+              classId: 0,
+              unitId: 0,
+              lessonId: 0,
+              collectionId: 0,
+              tab: 'assesmentreport',
+              location: 'unitId+lessonId+collectionId+currentItemType'
             }
           }
         }
@@ -153,10 +159,16 @@ export default Ember.Component.extend({
           navigate: true,
           navigationDetails: {
             route: 'student.class.course-map',
-            queryPType: 'paramonly',
+            queryPType: 'hybrid',
             exactparams: 'classId',
+            setlocation: true,
             queryparams: {
-              classId: 0
+              classId: 0,
+              unitId: 0,
+              lessonId: 0,
+              collectionId: 0,
+              tab: 'assesmentreport',
+              location: 'unitId+lessonId+collectionId+currentItemType'
             }
           }
         }
@@ -172,10 +184,16 @@ export default Ember.Component.extend({
           navigate: true,
           navigationDetails: {
             route: 'teacher.class.course-map',
-            queryPType: 'paramonly',
+            queryPType: 'hybrid',
             exactparams: 'classId',
+            setlocation: true,
             queryparams: {
-              classId: 0
+              classId: 0,
+              unitId: 0,
+              lessonId: 0,
+              collectionId: 0,
+              tab: 'assesmentreport',
+              location: 'unitId+lessonId+collectionId+currentItemType'
             }
           }
         }
@@ -401,9 +419,10 @@ export default Ember.Component.extend({
         : '';
     filter.limit = component.get('rowsPerPage');
     filter.classId =
-      component.get('model.isClass') && component.get('class')
-        ? component.get('class').id
+      component.get('model.isClass') && component.get('classId')
+        ? component.get('classId')
         : ''; // from page Options passed to instance
+
     return filter;
   },
 
@@ -415,8 +434,8 @@ export default Ember.Component.extend({
     const component = this;
     let filter = { classId: '', limit: 2, boundary: '' };
     filter.classId =
-      component.get('model.isClass') && component.get('class')
-        ? component.get('class').id
+      component.get('model.isClass') && component.get('classId')
+        ? component.get('classId')
         : ''; // from page Options passed to instance
     filter.limit = component.get('rowsPerPage');
     return filter;

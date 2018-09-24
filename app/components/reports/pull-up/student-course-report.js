@@ -34,8 +34,8 @@ export default Ember.Component.extend({
     /**
      * Action triggered when the user invoke the pull up.
      **/
-    onPullUpClose() {
-      this.closePullUp();
+    onPullUpClose(closeAll) {
+      this.closePullUp(closeAll);
     },
 
     /**
@@ -198,7 +198,13 @@ export default Ember.Component.extend({
     );
   },
 
-  closePullUp() {
+  onClosePullUp() {
+    let component = this;
+    component.set('showUnitReport', false);
+    component.closePullUp(true);
+  },
+
+  closePullUp(closePullUp) {
     let component = this;
     component.$().animate(
       {
@@ -207,6 +213,9 @@ export default Ember.Component.extend({
       400,
       function() {
         component.set('showPullUp', false);
+        if (closePullUp) {
+          component.sendAction('onPullUpClose', true);
+        }
       }
     );
   },
@@ -311,7 +320,10 @@ export default Ember.Component.extend({
     let userId = component.get('userId');
     if (courseId) {
       classCourseId = Ember.A([
-        { classId, courseId }
+        {
+          classId,
+          courseId
+        }
       ]);
     }
     const performanceSummaryPromise = classCourseId
@@ -324,8 +336,11 @@ export default Ember.Component.extend({
       : null;
     Ember.RSVP.hash({
       studentClassPerformanceSummary: performanceSummaryPromise
-    }).then(({studentClassPerformanceSummary}) => {
-      component.set('performanceSummary', studentClassPerformanceSummary.objectAt(0));
+    }).then(({ studentClassPerformanceSummary }) => {
+      component.set(
+        'performanceSummary',
+        studentClassPerformanceSummary.objectAt(0)
+      );
     });
   }
 });

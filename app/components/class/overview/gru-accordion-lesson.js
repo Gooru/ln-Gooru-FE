@@ -84,6 +84,8 @@ export default Ember.Component.extend(AccordionMixin, ModalMixin, {
 
   tagName: 'li',
 
+  showLocationReport: null,
+
   curComponentId: Ember.computed(function() {
     return `l-${this.get('model.id')}`;
   }),
@@ -591,10 +593,16 @@ export default Ember.Component.extend(AccordionMixin, ModalMixin, {
       })
       .then(() => {
         if (!component.isDestroyed) {
+          component.set('items', collections);
           collections.forEach(collection =>
             component.setVisibility(collection)
           );
-          component.set('items', collections);
+
+          Ember.run.later(function() {
+            collections.forEach(collection =>
+              component.showReportAtLocation(collection, collections)
+            );
+          }, 2000);
           component.set('loading', false);
         }
       });
@@ -1038,6 +1046,38 @@ export default Ember.Component.extend(AccordionMixin, ModalMixin, {
       collection.set('visible', visible);
     } else {
       collection.set('visible', true);
+    }
+  },
+
+  showReportAtLocation(currentCollection, collections) {
+    const component = this;
+    if (component.get('showLocationReport') === 'assesmentreport') {
+      let reportLocation = component.get('parsedLocation');
+
+      if (reportLocation && reportLocation.length > 2) {
+        let unitId = reportLocation[0],
+          lessonId = reportLocation[1],
+          collectionId = reportLocation[2],
+          curUnitId = component.get('unitId'),
+          curLessonId = component.get('model.id');
+
+        if (
+          curUnitId === unitId &&
+          curLessonId === lessonId &&
+          currentCollection.id === collectionId
+        ) {
+          if (component.get('isTeacher')) {
+            component.send(
+              'teacherCollectionReport',
+              currentCollection,
+              collections
+            );
+          } else {
+            component.send('studentReport', currentCollection);
+          }
+          component.set('showLocationReport', null);
+        }
+      }
     }
   },
 

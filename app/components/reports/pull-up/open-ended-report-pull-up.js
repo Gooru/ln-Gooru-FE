@@ -29,6 +29,10 @@ export default Ember.Component.extend({
   classNames: ['open-ended-report-pull-up'],
 
   actions: {
+    closeAll() {
+      this.sendAction('onClosePullUp');
+    },
+
     onPullUpClose() {
       this.closePullUp();
     }

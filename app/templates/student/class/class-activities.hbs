@@ -17,3 +17,13 @@
 {{#if showStudentDcaReport}}
   {{reports.pull-up.dca-student-collection-report showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
 {{/if}}
+
+{{#if isShowStudentExternalAssessmentReport}}
+  {{
+    reports.pull-up.student-external-assessment-report
+    reportData=studentReportContextData
+    showPullUp=isShowStudentExternalAssessmentReport
+    isStudent=true
+    onClosePullUp="onClosePullUp"
+  }}
+{{/if}}

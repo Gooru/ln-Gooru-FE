@@ -1,13 +1,14 @@
 .gru-class-activity-panel {
   &:hover {
     .dca-panel-container {
-      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
       position: relative;
+
       .dca-panel-actions-performance {
         .dca-panel-actions {
           .dca-add {
-            visibility: visible;
-            opacity: 1;
+            visibility: hidden;
+            opacity: 0;
             transition: opacity 0.5s linear;
           }
         }
@@ -18,7 +19,7 @@
   .dca-panel-container {
     display: inline-grid;
     width: 100%;
-    grid-template-columns: 60% 15% 25%;
+    grid-template-columns: 55% 15% 30%;
     height: 45px;
     border-bottom: solid 1px #cacaca;
     transition: background-color 2s linear;
@@ -79,6 +80,7 @@
         align-items: center;
         grid-template-columns: 50% 50%;
         justify-items: center;
+        height: 20px;
 
         .resource-icon {
           width: 20px;
@@ -88,6 +90,10 @@
           background-image: url("../assets/gooru/images/add_resource_icon.svg");
           opacity: 0.8;
         }
+
+        span {
+          height: 20px;
+        }
       }
 
       .question-count {
@@ -96,6 +102,7 @@
         align-items: center;
         grid-template-columns: 50% 50%;
         justify-items: center;
+        height: 20px;
 
         .question-icon {
           width: 20px;
@@ -104,6 +111,10 @@
           background-size: 20px 20px;
           background-image: url("../assets/gooru/images/add_question.svg");
           opacity: 0.8;
+        }
+
+        span {
+          height: 20px;
         }
       }
 
@@ -120,20 +131,17 @@
       display: inline-grid;
       grid-template-columns: 1fr 53px;
       align-items: center;
-      cursor: pointer;
-      &.not-started {
-        pointer-events: none;
-      }
 
       .dca-panel-actions {
-        display: inline-flex;
+        display: inline-grid;
         align-items: center;
         padding-left: 10px;
         padding-right: 10px;
-        justify-content: flex-end;
+        justify-items: center;
+        grid-template-columns: 30px 30px 35px 35px 30px;
+        grid-column-gap: 5px;
 
         .dca-add {
-          height: 19px;
           visibility: hidden;
           opacity: 0;
           transition: visibility 0s 0.5s, opacity 0.5s linear;
@@ -141,6 +149,7 @@
 
           .add {
             font-size: 20px;
+            display: block;
           }
         }
 
@@ -150,16 +159,19 @@
           background-repeat: no-repeat;
           background-size: 25px 25px;
           background-image: url("../assets/gooru/images/rubric-green.svg");
-          margin-left: 5px;
-          margin-right: 5px;
+          display: block;
         }
 
         .remove-dca {
           width: 20px;
-          height: 22px;
-          margin-left: 5px;
-          margin-right: 5px;
+          height: 19px;
           cursor: pointer;
+          display: block;
+
+          .remove_circle {
+            font-size: 20px;
+            display: block;
+          }
         }
 
         .golive-icon {
@@ -169,16 +181,12 @@
           background-size: 25px 25px;
           background-image: url("../assets/gooru/on-air-icon.png");
           cursor: pointer;
-          margin-left: 5px;
-          margin-right: 5px;
+          display: block;
         }
 
         .dca-assign {
           width: 40px;
           display: inline-block;
-          height: 25px;
-          margin-left: 5px;
-          margin-right: 5px;
 
           .gru-switch {
             padding: 0;
@@ -239,10 +247,14 @@
         justify-content: center;
         color: #fff;
         font-size: 15px;
+        cursor: pointer;
+
+        &.not-started {
+          pointer-events: none;
+        }
 
         .no-performance {
           color: #37424b;
-          pointer-events: none;
         }
       }
     }
