@@ -49,7 +49,7 @@ export default Ember.Component.extend({
       .then(({taxonomyGrades}) => {
         let activeGrade = taxonomyGrades.findBy('id', component.get('classGrade'));
         component.sendAction('onSelectGrade', activeGrade);
-        component.set('activeGrade', activeGrade)
+        component.set('activeGrade', activeGrade);
         component.set('taxonomyGrades', taxonomyGrades.reverse());
       });
   }
