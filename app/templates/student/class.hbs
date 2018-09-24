@@ -79,5 +79,5 @@
   </div>
 </div>
 {{#if showCourseReport}}
-  {{reports.pull-up.student-course-report context=studentCourseReportContext showPullUp=showCourseReport}}
+  {{reports.pull-up.student-course-report onClosePullUp="onClosePullUp" context=studentCourseReportContext showPullUp=showCourseReport}}
 {{/if}}

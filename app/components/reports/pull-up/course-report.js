@@ -39,6 +39,11 @@ export default Ember.Component.extend({
       this.sendAction('onOpenUnitReport', params);
     },
 
+    onClosePullUp() {
+      let component = this;
+      component.set('showStudentCourseReport', false);
+      component.closePullUp(true);
+    },
     /**
      * Trigger the event to open student course report
      */
@@ -176,12 +181,6 @@ export default Ember.Component.extend({
     );
   },
 
-  onClosePullUp() {
-    let component = this;
-    component.set('showStudentCourseReport', false);
-    component.closePullUp(true);
-  },
-
   closePullUp(closeAll) {
     let component = this;
     component.$().animate(
@@ -192,7 +191,7 @@ export default Ember.Component.extend({
       function() {
         component.set('showPullUp', false);
         if (closeAll) {
-          component.sendAction('onClosePullUp', true);
+          component.sendAction('onClosePullUp');
         }
       }
     );

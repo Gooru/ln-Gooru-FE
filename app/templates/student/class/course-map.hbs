@@ -16,14 +16,14 @@
     {{/if}}
     {{#if showRoute0Suggestion}}
     <h5>Pre-study for your course</h5>
-      {{class.overview.routesuggestion-coursemap route0=route0  
+      {{class.overview.routesuggestion-coursemap route0=route0
        onLocationUpdate=(action 'updateUserLocation')
-      userLocation=userLocation 
-      location=openingLocation 
+      userLocation=userLocation
+      location=openingLocation
 
-      class=class 
-      course=course 
-      routeSuggestAction=(action 'courseRouteSuggestAction') 
+      class=class
+      course=course
+      routeSuggestAction=(action 'courseRouteSuggestAction')
       onStudyNow=(action 'studyCoursePlayer' ) }}
     {{/if}}
 
@@ -78,5 +78,5 @@
 {{/if}}
 
 {{#if showCourseReport}}
-  {{reports.pull-up.student-course-report context=studentCourseReportContext showPullUp=showCourseReport}}
+  {{reports.pull-up.student-course-report onClosePullUp="onClosePullUp" context=studentCourseReportContext showPullUp=showCourseReport}}
 {{/if}}

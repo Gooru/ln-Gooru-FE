@@ -179,7 +179,7 @@ export default Ember.Component.extend({
       let component = this;
       component.set('isShowQuestionReport', false);
       component.set('isShowStudentExternalAssessmentReport', false);
-      component.sendAction('onClosePullUp');
+      component.closePullUp(true);
     }
   },
 

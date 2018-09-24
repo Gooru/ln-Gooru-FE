@@ -64,7 +64,7 @@
   </div>
 </div>
 {{#if showStudentCourseReport}}
-  {{reports.pull-up.student-course-report context=studentCourseReportContext onPullUpClose="onPullUpClose" showPullUp=showStudentCourseReport}}
+  {{reports.pull-up.student-course-report context=studentCourseReportContext onClosePullUp="onClosePullUp" showPullUp=showStudentCourseReport}}
 {{/if}}
 {{#if isLoading}}
   <div class="loading-spinner">

@@ -42,20 +42,21 @@
 </ol>
 
 {{#if showStudentUnitReport}}
-  {{reports.pull-up.student-unit-report context=studentUnitReportContext showPullUp=showStudentUnitReport}}
+  {{reports.pull-up.student-unit-report onClosePullUp="onClosePullUp" context=studentUnitReportContext showPullUp=showStudentUnitReport}}
 {{/if}}
 
 {{#if showStudentLessonReport}}
-  {{reports.pull-up.student-lesson-report context=studentLessonReportContext showPullUp=showStudentLessonReport}}
+  {{reports.pull-up.student-lesson-report onClosePullUp="onClosePullUp" context=studentLessonReportContext showPullUp=showStudentLessonReport}}
 {{/if}}
 
 {{#if isShowStudentReport}}
-  {{class.gru-report-panel showPullUp=isShowStudentReport reportData=studentReportData model=studentReportData.lesson isStudent=studentReportData.isStudent onClosePullUp="onClosePullUp"}}
+  {{class.gru-report-panel showPullUp=isShowStudentReport onClosePullUp="onClosePullUp" reportData=studentReportData model=studentReportData.lesson isStudent=studentReportData.isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalAssessmentReport}}
   {{
     reports.pull-up.student-external-assessment-report
+    showPullUp=isShowStudentExternalAssessmentReport
     reportData=studentReportData
     isStudent=studentReportData.isStudent
     onClosePullUp="onClosePullUp"

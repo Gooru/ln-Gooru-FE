@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import {getSubjectIdFromSubjectBucket} from 'gooru-web/utils/utils';
+import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
 import ModalMixin from 'gooru-web/mixins/modal';
 
 /**
@@ -87,6 +87,7 @@ export default Ember.Controller.extend(ModalMixin, {
       this.set('isShowProficiencyPullup', false);
       this.set('isShowCompetencyContentReport', false);
       this.set('isShowCompetencyReport', false);
+      this.set('showCourseReport', false);
       this.set('isShowDomainCompetencyReport', false);
     },
 
@@ -139,7 +140,10 @@ export default Ember.Controller.extend(ModalMixin, {
      */
     sortStudentList(sortCriteria) {
       let controller = this;
-      controller.set('studentsList', controller.get('studentsList').sortBy(sortCriteria));
+      controller.set(
+        'studentsList',
+        controller.get('studentsList').sortBy(sortCriteria)
+      );
     }
   },
 
@@ -253,10 +257,12 @@ export default Ember.Controller.extend(ModalMixin, {
     return Ember.RSVP.hash({
       competencyPerformance: controller.getPremiumCoursePerformanceSummary(),
       classContentPerformance: controller.getClassicCoursePerformanceSummary()
-    })
-      .then(function(hash) {
-        controller.parseStudentsDetails(hash.competencyPerformance, hash.classContentPerformance);
-      });
+    }).then(function(hash) {
+      controller.parseStudentsDetails(
+        hash.competencyPerformance,
+        hash.classContentPerformance
+      );
+    });
   },
 
   /**
@@ -266,10 +272,12 @@ export default Ember.Controller.extend(ModalMixin, {
   getClassicCoursePerformanceSummary() {
     const controller = this;
     const analyticsService = controller.get('analyticsService');
-    let classId =  controller.get('classId');
+    let classId = controller.get('classId');
     let courseId = controller.get('courseId');
     return Ember.RSVP.resolve(
-      courseId ? analyticsService.getAtcPerformanceSummary(classId, courseId) : null
+      courseId
+        ? analyticsService.getAtcPerformanceSummary(classId, courseId)
+        : null
     );
   },
 
@@ -284,11 +292,13 @@ export default Ember.Controller.extend(ModalMixin, {
     let courseId = controller.get('courseId');
     let subjectCode = controller.get('subjectCode');
     return Ember.RSVP.resolve(
-      courseId ? analyticsService.getAtcPerformanceSummaryPremiumClass(
-        classId,
-        courseId,
-        subjectCode
-      ) : null
+      courseId
+        ? analyticsService.getAtcPerformanceSummaryPremiumClass(
+          classId,
+          courseId,
+          subjectCode
+        )
+        : null
     );
   },
 
@@ -305,11 +315,14 @@ export default Ember.Controller.extend(ModalMixin, {
       courseId
     };
     return Ember.RSVP.hash({
-      currentLocation: analyticsService.getUserCurrentLocation(classId, userId, locationQueryParam)
-    })
-      .then(({currentLocation}) => {
-        return currentLocation;
-      });
+      currentLocation: analyticsService.getUserCurrentLocation(
+        classId,
+        userId,
+        locationQueryParam
+      )
+    }).then(({ currentLocation }) => {
+      return currentLocation;
+    });
   },
 
   /**
@@ -319,10 +332,14 @@ export default Ember.Controller.extend(ModalMixin, {
   parseStudentsDetails(competencyPerformance, classContentPerformance) {
     let controller = this;
     let classMembers = controller.get('classMembers');
-    let classMembersList = classMembers.map( member => {
+    let classMembersList = classMembers.map(member => {
       let studentDetails = Object.assign(member);
-      let studentCompetencyPerformance = competencyPerformance ? competencyPerformance.findBy('userId', member.id) : null;
-      let studentContentPerformance = classContentPerformance ? classContentPerformance.findBy('userId', member.id) : null;
+      let studentCompetencyPerformance = competencyPerformance
+        ? competencyPerformance.findBy('userId', member.id)
+        : null;
+      let studentContentPerformance = classContentPerformance
+        ? classContentPerformance.findBy('userId', member.id)
+        : null;
       let performance = null;
       let isStudentPerformed = false;
       let proficiency = Ember.Object.create({
@@ -331,24 +348,36 @@ export default Ember.Controller.extend(ModalMixin, {
         pendingCompetencies: 0
       });
       if (studentCompetencyPerformance) {
-        let score = studentContentPerformance ? studentContentPerformance.score : null;
+        let score = studentContentPerformance
+          ? studentContentPerformance.score
+          : null;
         performance = score != null ? Math.round(score * 100) / 100 : null;
         isStudentPerformed = score != null;
-        proficiency.set('totalCompetencies', studentCompetencyPerformance.totalCompetency);
-        proficiency.set('completedCompetencies', studentCompetencyPerformance.completedCompetency);
-        let pendingCompetencies = studentCompetencyPerformance.totalCompetency - studentCompetencyPerformance.completedCompetency;
+        proficiency.set(
+          'totalCompetencies',
+          studentCompetencyPerformance.totalCompetency
+        );
+        proficiency.set(
+          'completedCompetencies',
+          studentCompetencyPerformance.completedCompetency
+        );
+        let pendingCompetencies =
+          studentCompetencyPerformance.totalCompetency -
+          studentCompetencyPerformance.completedCompetency;
         proficiency.set('pendingCompetencies', pendingCompetencies);
       }
-      controller.getStudentCurrentLocation(member.id).then(function(studentLocation) {
-        let currentLocation = '--';
-        if (studentLocation) {
-          currentLocation = studentLocation.collectionTitle;
-        }
-        studentDetails.set('hasStarted', isStudentPerformed);
-        studentDetails.set('performance', performance);
-        studentDetails.set('proficiency', proficiency);
-        studentDetails.set('currentLocation', currentLocation);
-      });
+      controller
+        .getStudentCurrentLocation(member.id)
+        .then(function(studentLocation) {
+          let currentLocation = '--';
+          if (studentLocation) {
+            currentLocation = studentLocation.collectionTitle;
+          }
+          studentDetails.set('hasStarted', isStudentPerformed);
+          studentDetails.set('performance', performance);
+          studentDetails.set('proficiency', proficiency);
+          studentDetails.set('currentLocation', currentLocation);
+        });
       return studentDetails;
     });
     Ember.RSVP.all(classMembersList).then(function(studentsList) {

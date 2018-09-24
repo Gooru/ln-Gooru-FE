@@ -308,14 +308,11 @@ export default Ember.Component.extend({
   // Actions
 
   actions: {
-    closeAll: function() {
-      this.sendAction('onClosePullUp');
-    },
     /**
      * Action triggered when the user close the pull up.
      **/
-    onPullUpClose() {
-      this.closePullUp();
+    onPullUpClose(closeAll) {
+      this.closePullUp(closeAll);
     },
 
     /**
@@ -417,7 +414,7 @@ export default Ember.Component.extend({
       function() {
         component.set('showPullUp', false);
         if (closeAll) {
-          component.sendAction('onClosePullUp', true);
+          component.sendAction('onClosePullUp');
         }
       }
     );
