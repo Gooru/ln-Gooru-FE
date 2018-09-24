@@ -20,7 +20,7 @@ export default Ember.Component.extend({
    * taxonomy service dependency injection
    * @type {Object}
    */
-  taxonomyService: Ember.inject.service('taxonomy'),
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
   // -------------------------------------------------------------------------
   // Events
@@ -28,14 +28,19 @@ export default Ember.Component.extend({
   didInsertElement() {
     let component = this;
     component.set('isLoading', true);
-    if (!component.get('isRoute0Chart')) {
-      component.loadChartData();
-    }
+    component.fetchDomainLevelSummary();
   },
 
   didRender() {
     var component = this;
     component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
+
+  actions: {
+    onSelectGrade(gradeData) {
+      let component = this;
+      component.set('selectedGrade', gradeData);
+    }
   },
 
   userId: Ember.computed(function() {
@@ -82,9 +87,25 @@ export default Ember.Component.extend({
 
   isRoute0Chart: false,
 
+  selectedGrade: null,
+
+  subjectCode: 'K12.MA',
+
+  domainSummaryObserver: Ember.observer('domainSummaryData', function() {
+    let component = this;
+    component.loadChartData();
+  }),
+
   route0Observer: Ember.observer('route0Contents', function() {
     let component = this;
     component.loadChartData();
+  }),
+
+  gradeChangeObserver: Ember.observer('selectedGrade', function() {
+    let component = this;
+    component.getDomainGradeBoundry().then(() => {
+      component.loadChartData();
+    });
   }),
 
 
@@ -94,21 +115,24 @@ export default Ember.Component.extend({
    */
   loadChartData() {
     let component = this;
-    return Ember.RSVP.hash({
-      domainLevelSummary: component.fetchDomainLevelSummary()
-    })
-      .then( ({domainLevelSummary}) => {
-        let route0Contents = component.get('route0Contents');
-        let route0Suggestions = route0Contents && route0Contents.status === 'pending' ? route0Contents.userCompetencyRoute.domains : null;
-        component.drawChart(component.parseChartData(domainLevelSummary, route0Suggestions));
-      });
-
+    let domainLevelSummary = component.get('domainLevelSummary');
+    let route0Contents = component.get('route0Contents');
+    let domainBoundaries = component.get('domainBoundaries');
+    let route0Suggestions = route0Contents && route0Contents.status === 'pending' ? route0Contents.userCompetencyRoute.domains : null;
+    if (component.get('isRoute0Chart')) {
+      if (domainLevelSummary && route0Contents && domainBoundaries) {
+        component.drawChart(component.parseChartData(domainLevelSummary, domainBoundaries, route0Suggestions));
+      }
+    } else {
+      if (domainLevelSummary && domainBoundaries) {
+        component.drawChart(component.parseChartData(domainLevelSummary, domainBoundaries, route0Suggestions));
+      }
+    }
   },
 
-  parseChartData(domainLevelSummary, route0Suggestions) {
+  parseChartData(domainLevelSummary, domainBoundaries, route0Suggestions) {
     let component = this;
     let domainCompetencies = domainLevelSummary.domainCompetencies;
-    let classCompetencies = domainLevelSummary.classCompetencies;
     let userCompetencies = domainLevelSummary.students.objectAt(0).userCompetencyMatrix;  //we always get one student data
     let chartData = Ember.A([]);
     let maxNumberOfCompetencies = 0;
@@ -119,8 +143,8 @@ export default Ember.Component.extend({
       let domainName = domain.domainName;
       let domainSeq = domain.domainSeq;
       let userCompetencyMatrix = userCompetencies.findBy('domainCode', domainCode);
-      let classDomain = classCompetencies.findBy('domainCode', domainCode);
-      let classDomainCompetencies = classDomain ? classDomain.competencies : null;
+      let domainBoundary = domainBoundaries ? domainBoundaries.findBy('domainCode', domainCode) : null;
+      let domainBoundaryCompetency = domainBoundary ? domainBoundary.highline : null;
       let userCompetenciesStatus = userCompetencyMatrix.competencies;
       let domainCompetenciesList = Ember.A([]);
       let route0SuggestedDomain = route0Suggestions ? route0Suggestions.findBy('domainCode', domainCode) : null;
@@ -132,11 +156,10 @@ export default Ember.Component.extend({
         let competencyStudentDesc = competency.competencyStudentDesc;
         let competencyName = competency.competencyName;
         let competencyStatus = userCompetenciesStatus[`${competency.competencyCode}`];
-        let courseCompetency = classDomainCompetencies ? classDomainCompetencies.findBy('competencyCode', competencyCode) : null;
+        let isDoaminBoundaryCompetency = domainBoundaryCompetency === competency.competencyCode;
         let route0SuggestedCompetencies = route0SuggestedDomain ? route0SuggestedDomain.path : null;
         let route0suggestedCompetency = route0SuggestedCompetencies ? route0SuggestedCompetencies.findBy('competencyCode', competencyCode) : false;
         let isRoute0SuggestedCompetency = !!route0suggestedCompetency;
-        let isCourseCoveredCompetecy = !!courseCompetency;
         let isMastery = parseInt(competencyStatus) > 1;
         let xAxisSeq = domainSeq;
         let yAxisSeq = competencySeq;
@@ -151,7 +174,7 @@ export default Ember.Component.extend({
           domainCode,
           domainSeq,
           domainName,
-          isCourseCoveredCompetecy,
+          isDoaminBoundaryCompetency,
           isMastery,
           xAxisSeq,
           yAxisSeq,
@@ -178,7 +201,9 @@ export default Ember.Component.extend({
           .objectAt(numberOfMasteryCompetency)
           .set('mastered', true);
       }
-      domainCompetenciesList.objectAt(component.getHighestCourseCoveredCompetency(domainCompetenciesList)).set('courseCovered', true);
+      if (!domainBoundaryCompetency) {
+        domainCompetenciesList.objectAt(0).set('isDoaminBoundaryCompetency', true);
+      }
       maxNumberOfCompetencies = domainCompetenciesList.length > maxNumberOfCompetencies ? domainCompetenciesList.length : maxNumberOfCompetencies;
       chartData = chartData.concat(domainCompetenciesList);
     });
@@ -220,9 +245,9 @@ export default Ember.Component.extend({
       .attr('height', height);
     let cellContainer = svg.append('g').attr('id', 'cell-container');
     let skylineContainer = svg.append('g').attr('id', 'skyline-container');
-    let courseCoveredLineContainer = svg.append('g').attr('id', 'course-covered-line-container');
+    let domainBoundaryLineContainer = svg.append('g').attr('id', 'course-covered-line-container');
     component.set('skylineContainer', skylineContainer);
-    component.set('courseCoveredLineContainer', courseCoveredLineContainer);
+    component.set('domainBoundaryLineContainer', domainBoundaryLineContainer);
     const cards = cellContainer.selectAll('.competency').data(data);
     cards
       .enter()
@@ -231,8 +256,8 @@ export default Ember.Component.extend({
       .attr('y', d => (d.yAxisSeq - 1) * cellHeight)
       .attr('class', d => {
         let skylineClassName = d.skyline ? 'skyline-competency' : '';
-        let courseCoveredCompetency = d.courseCovered ? 'course-covered-competency' : '';
-        return `competency competency-${d.xAxisSeq}-${d.yAxisSeq} ${skylineClassName} ${courseCoveredCompetency}`;
+        let domainBoundaryCompetency = d.isDoaminBoundaryCompetency ? 'domain-boundary' : '';
+        return `competency competency-${d.xAxisSeq}-${d.yAxisSeq} ${skylineClassName} ${domainBoundaryCompetency}`;
       })
 
       .attr('width', cellWidth)
@@ -246,7 +271,7 @@ export default Ember.Component.extend({
       });
     cards.exit().remove();
     component.drawSkyline();
-    component.drawCourseCoverageLine();
+    component.draDomainBoundaryLine();
   },
 
   fetchDomainLevelSummary() {
@@ -264,6 +289,7 @@ export default Ember.Component.extend({
       domainLevelSummary: competencyService.getDomainLevelSummary(filters)
     })
       .then( ({domainLevelSummary}) => {
+        component.set('domainLevelSummary', domainLevelSummary);
         return domainLevelSummary;
       });
   },
@@ -340,17 +366,17 @@ export default Ember.Component.extend({
     }
   },
 
-  drawCourseCoverageLine() {
+  draDomainBoundaryLine() {
     let component = this;
-    let skylineElements = component.$('.course-covered-competency');
+    let skylineElements = component.$('.domain-boundary');
     let cellWidth = component.get('cellWidth');
     let cellHeight = component.get('cellHeight');
-    let svg = component.get('courseCoveredLineContainer');
+    let svg = component.get('domainBoundaryLineContainer');
     let cellIndex = 0;
     skylineElements.each(function(index) {
       let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
       let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
-      y1 = y1 === 0 ? y1 + 3 : y1 + cellHeight + 3;
+      y1 = y1 === 0 ? y1 + 1 : y1 + cellHeight + 1;
       let x2 = x1 + cellWidth;
       let y2 = y1;
       let linePoint = {
@@ -365,8 +391,8 @@ export default Ember.Component.extend({
         .attr('y1', linePoint.y1)
         .attr('x2', linePoint.x2)
         .attr('y2', linePoint.y2)
-        .attr('class', `course-covered-line course-covered-line-${cellIndex}`);
-      component.joinCourseCoveredLinePoints(cellIndex, linePoint);
+        .attr('class', `domain-boundary-line domain-boundary-line-${cellIndex}`);
+      component.joinDomainBoundaryLinePoints(cellIndex, linePoint);
       cellIndex++;
     });
     component.$('.scrollable-chart').scrollTop(component.get('chartHeight'));
@@ -377,10 +403,10 @@ export default Ember.Component.extend({
    * @function joinSkyLinePoints
    * Method to draw vertical line to connects sky line points, if necessary
    */
-  joinCourseCoveredLinePoints(cellIndex, curLinePoint) {
+  joinDomainBoundaryLinePoints(cellIndex, curLinePoint) {
     let component = this;
-    let lastSkyLineContainer = component.$(`.course-covered-line-${cellIndex - 1}`);
-    let skyLineContainer = component.get('courseCoveredLineContainer');
+    let lastSkyLineContainer = component.$(`.domain-boundary-line-${cellIndex - 1}`);
+    let skyLineContainer = component.get('domainBoundaryLineContainer');
     let lastskyLinePoint = {
       x2: parseInt(lastSkyLineContainer.attr('x2')),
       y2: parseInt(lastSkyLineContainer.attr('y2'))
@@ -397,7 +423,22 @@ export default Ember.Component.extend({
         .attr('y1', lastskyLinePoint.y2)
         .attr('x2', curLinePoint.x1)
         .attr('y2', curLinePoint.y1)
-        .attr('class', `course-covered-line course-covered-line-${cellIndex}`);
+        .attr('class', `domain-boundary-line domain-boundary-line-${cellIndex}`);
     }
+  },
+
+
+  getDomainGradeBoundry() {
+    let component = this;
+    let taxonomyService = component.get('taxonomyService');
+    let destinationGrade = component.get('selectedGrade');
+    let gradeId = destinationGrade.id;
+    return Ember.RSVP.hash({
+      domainBoundaries : Ember.RSVP.resolve(taxonomyService.fetchDomainGradeBoundryBySubjectId(gradeId))
+    })
+      .then(({domainBoundaries}) => {
+        component.set('domainBoundaries', domainBoundaries);
+        return domainBoundaries;
+      });
   }
 });

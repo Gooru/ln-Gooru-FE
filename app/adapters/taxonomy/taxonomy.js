@@ -142,6 +142,32 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  fetchDomainGradeBoundryBySubjectId(gradeId) {
+    const adapter = this;
+    const namespace = adapter.get('taxonomyDSNamespace');
+    const url = `${namespace}/grade/boundary/${gradeId}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: {}
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  fetchGradesBySubject(filters) {
+    const adapter = this;
+    const namespace = adapter.get('taxonomyDSNamespace');
+    const url = `${namespace}/grades`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: filters
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

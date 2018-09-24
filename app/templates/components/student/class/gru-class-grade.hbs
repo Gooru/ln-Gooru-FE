@@ -13,12 +13,10 @@
             {{grade}}
           </div>
         </div>
-        {{#if (eq grade gradeLevel)}}
-          <div class="next" {{action "onMoveNext" 'grade'}}>
-            Next
-          </div>
-        {{/if}}
       </div>
     {{/each}}
+  </div>
+  <div class="next" {{action "onMoveNext" 'grade'}}>
+    Next
   </div>
 </div>

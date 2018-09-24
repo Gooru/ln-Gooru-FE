@@ -1,6 +1,6 @@
 .student-destination-course-map-container {
   .units-container {
-    height: 300px;
+    max-height: 300px;
     overflow-y: auto;
     &::-webkit-scrollbar {
       height: 6px;

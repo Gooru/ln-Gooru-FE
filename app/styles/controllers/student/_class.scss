@@ -1,5 +1,5 @@
 .student.class {
-  // width: 960px;
+  width: 960px;
   margin: 0 auto;
   .gru-take-tour {
     right: 80px;
@@ -167,5 +167,8 @@
         padding: 0;
       }
     }
+  }
+  &.student-class-landing {
+    width: 100%;
   }
 }

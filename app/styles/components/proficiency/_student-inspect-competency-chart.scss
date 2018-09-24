@@ -16,6 +16,8 @@
       height: 80vh;
       overflow-y: auto;
       width: max-content;
+      display: grid;
+      grid-template-columns: 150px auto;
 
       &::-webkit-scrollbar {
         height: 6px;
@@ -64,7 +66,8 @@
           transition-duration: 0s, 1s;
         }
 
-        .course-covered-line {
+        .domain-boundary-line {
+          stroke-dasharray: 6;
           stroke: #010518;
           stroke-width: 2px;
         }
@@ -73,6 +76,8 @@
 
     .domain-sequence {
       display: inline-block;
+      float: right;
+      margin-right: 8px;
 
       .domain-counts {
         float: left;

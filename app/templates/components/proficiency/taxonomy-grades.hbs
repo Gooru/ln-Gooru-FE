@@ -1,0 +1,7 @@
+<div class="grades-container">
+  {{#each taxonomyGrades as |taxonomyGrade|}}
+    <div class="grade-name" style="height: calc(100% / {{taxonomyGrades.length}});">
+      {{taxonomyGrade.grade}}
+    </div>
+  {{/each}}
+</div>
