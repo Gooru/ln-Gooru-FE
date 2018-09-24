@@ -56,26 +56,27 @@
           {{/if}}
         </div>
 
-    {{class.overview.gru-accordion-course
-    currentClass=class
-    classMembers=classMembers
-    onSelectResource="playResource"
-    onStudyNow="studyPlayer"
-    onLocationUpdate=(action 'updateLocation')
-    userLocation=userLocation
-    location=openingLocation
-    units=units
-    contentVisibility=contentVisibility
-    showLocation=showLocation
-    isTeacher=false
-    isStudent=true
-    toggleLocation=toggleLocation
-    onSelectItem="onSelectItem"
-    showLocationReport= tab
-    }}
-  </div>
-{{else}}
-  <div class="no-content">{{t 'student-landing.no-content-classrooms'}}</div>
+        {{class.overview.gru-accordion-course
+        currentClass=class
+        classMembers=classMembers
+        onSelectResource="playResource"
+        onStudyNow="studyPlayer"
+        onLocationUpdate=(action 'updateLocation')
+        userLocation=userLocation
+        location=openingLocation
+        units=units
+        contentVisibility=contentVisibility
+        showLocation=showLocation
+        isTeacher=false
+        isStudent=true
+        toggleLocation=toggleLocation
+        onSelectItem="onSelectItem"
+        showLocationReport= tab
+        }}
+      </div>
+    {{else}}
+      <div class="no-content">{{t 'student-landing.no-content-classrooms'}}</div>
+    {{/if}}
 {{/if}}
 
 {{#if showCourseReport}}

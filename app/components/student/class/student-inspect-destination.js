@@ -64,6 +64,14 @@ export default Ember.Component.extend({
         component.$('.route0-body').show(1000);
       }
       component.toggleProperty('isRoute0ExpandedView');
+    },
+
+    /**
+     * Action triggered when select a grade
+     */
+    onSelectGrade(gradeData) {
+      let component = this;
+      component.set('gradeData', gradeData);
     }
   },
 
@@ -89,6 +97,11 @@ export default Ember.Component.extend({
    * @property {Boolean} isRoute0ExpandedView
    */
   isRoute0ExpandedView: false,
+
+  /**
+   * @property {JSON} gradeData
+   */
+  gradeData: null,
 
   // -------------------------------------------------------------------------
   // Methods

@@ -47,8 +47,9 @@ export default Ember.Component.extend({
       taxonomyGrades: Ember.RSVP.resolve(taxonomyService.fetchGradesBySubject(filters))
     })
       .then(({taxonomyGrades}) => {
-        let classGradeLevel = taxonomyGrades.findBy('id', component.get('classGrade'));
-        component.sendAction('onSelectGrade', classGradeLevel);
+        let activeGrade = taxonomyGrades.findBy('id', component.get('classGrade'));
+        component.sendAction('onSelectGrade', activeGrade);
+        component.set('activeGrade', activeGrade)
         component.set('taxonomyGrades', taxonomyGrades.reverse());
       });
   }

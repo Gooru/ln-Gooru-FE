@@ -1,6 +1,56 @@
 .proficiency.taxonomy-grades {
   height: 100%;
+  margin-right:30px;
   .grades-container {
     height: 100%;
+
+    .grade-container {
+      height: 30px;
+       position: relative;
+       padding: 0px;
+       margin: 0px;
+       text-align: center;
+
+       &.active-grade {
+         .grade-title {
+           opacity: 1;
+           border: 1px solid #010518;
+         }
+         .grade-title:after {
+           border-color: transparent transparent transparent  #010518;
+         }
+       }
+
+       .grade-title {
+         position:relative;
+         line-height: 30px; /* equal to the list item's height */
+         width: 100%;
+         border: 1px solid rgba(151, 151, 151, 0.3);
+         color: #525659;
+         opacity: 0.5;
+       }
+       .grade-title:after, .grade-title:before {
+         content:"";
+         display:inline-block;
+         border-width: 16px;
+         border-style: solid;
+         width: 0px;
+         height: 0px;
+         left: 100%;
+         top: -1px;
+         position: absolute;
+         z-index: 1;
+       }
+       .grade-title:after {
+         border-color: transparent transparent transparent rgba(151, 151, 151, 0.3);
+       }
+       .grade-title:before {
+         border-width: 14px;
+         display: block;
+         border-color: transparent transparent transparent $white;
+         z-index: 2;
+         top:1px;
+       }
+    }
   }
 }

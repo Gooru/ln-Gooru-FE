@@ -48,6 +48,7 @@ export default Ember.Component.extend({
     onSelectGrade(gradeData) {
       let component = this;
       component.set('selectedGrade', gradeData);
+      component.sendAction('onSelectGrade', gradeData);
     }
   },
 
