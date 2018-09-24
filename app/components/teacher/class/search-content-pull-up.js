@@ -161,6 +161,40 @@ export default Ember.Component.extend({
    */
   isMenuEnabled: false,
 
+  /**
+   * Maintains the list of added collection ids from today's class activities
+   * @type {Object}
+   */
+  addedCollectionIdsInTodayClassActivities: Ember.computed(
+    'todaysClassActivities',
+    function() {
+      let classActivities = this.get('todaysClassActivities');
+      let collectionIds = Ember.A([]);
+      if (classActivities) {
+        collectionIds = classActivities.map(classActivity => {
+          return classActivity.get('collection.id');
+        });
+      }
+      return collectionIds;
+    }
+  ),
+
+  /**
+   * Maintains the list of search result set.
+   * @type {Array}
+   */
+  searchResultSet: Ember.computed('searchResults.[]', function() {
+    let searchResults = this.get('searchResults');
+    let collectionIds = this.get('addedCollectionIdsInTodayClassActivities');
+    collectionIds.forEach(id => {
+      let result = searchResults.findBy('id', id);
+      if (result) {
+        result.set('isAdded', true);
+      }
+    });
+    return searchResults;
+  }),
+
   // -------------------------------------------------------------------------
   // actions
 
@@ -199,8 +233,8 @@ export default Ember.Component.extend({
             newContentId,
             date
           );
+          content.set('isAdded', true);
           component.sendAction('addedContentToDCA', data, date);
-          component.closePullUp();
         });
     },
 
