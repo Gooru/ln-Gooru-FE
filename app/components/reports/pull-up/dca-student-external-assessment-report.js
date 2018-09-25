@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   classNames: [
     'reports',
     'backdrop-pull-ups',
-    'student-external-assessment-report'
+    'dca-student-external-assessment-report'
   ],
 
   /**
@@ -26,16 +26,6 @@ export default Ember.Component.extend({
    */
   assessmentService: Ember.inject.service('api-sdk/assessment'),
 
-  /**
-   * @requires service:api-sdk/search
-   */
-  searchService: Ember.inject.service('api-sdk/search'),
-
-  /**
-   * @requires service:api-sdk/course-map
-   */
-  courseMapService: Ember.inject.service('api-sdk/course-map'),
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -46,24 +36,6 @@ export default Ember.Component.extend({
   isLoading: false,
 
   showPullUp: false,
-
-  /**
-   * defaultSuggestContentType
-   * @type {String}
-   */
-  defaultSuggestContentType: 'collection',
-
-  /**
-   * suggest count
-   * @type {Number}
-   */
-  suggestResultCount: 0,
-
-  /**
-   * Maintains maximum number of search results
-   * @type {Number}
-   */
-  maxSearchResult: 6,
 
   /**
    * calculate  the class average by student performance score as a width
@@ -140,34 +112,8 @@ export default Ember.Component.extend({
       this.closePullUp();
     },
 
-    onCloseSuggest() {
-      // on close suggest callback
-      return true;
-    },
-
-    /**
-     * Trigger when suggestion button got clicked
-     */
-    onOpenSuggestionPullup() {
-      let component = this;
-      let studentsSelectedForSuggest = Ember.A([]);
-      let context = component.getContext(component.get('reportData'));
-      let suggestContextParams = Ember.Object.create({
-        classId: context.get('classId'),
-        courseId: context.get('courseId'),
-        unitId: context.get('unitId'),
-        lessonId: context.get('lessonId'),
-        collectionId: context.get('collectionId')
-      });
-      studentsSelectedForSuggest.pushObject(component.get('profile'));
-      component.set('suggestContextParams', suggestContextParams);
-      component.set('studentsSelectedForSuggest', studentsSelectedForSuggest);
-      component.set('showSuggestionPullup', true);
-    },
-
     onClosePullUp() {
       let component = this;
-      component.set('showSuggestionPullup', false);
       component.closePullUp(true);
     }
   },
@@ -221,95 +167,7 @@ export default Ember.Component.extend({
     }).then(function(hash) {
       component.set('profile', hash.profile);
       component.set('externalAssessmentContent', hash.externalAssessment);
-      component.loadTeacherSuggestions();
     });
-  },
-
-  loadTeacherSuggestions() {
-    let component = this;
-    let context = component.getContext(component.get('reportData'));
-    if (!component.get('isStudent')) {
-      component
-        .get('courseMapService')
-        .getLessonInfo(
-          context.get('classId'),
-          context.get('courseId'),
-          context.get('unitId'),
-          context.get('lessonId'),
-          true,
-          context.get('userId')
-        )
-        .then(lesson => {
-          let collections = lesson.get('children');
-          let collection = collections.findBy(
-            'id',
-            context.get('collectionId')
-          );
-          if (!collection.get('isSuggestedContent')) {
-            component.set('showSuggestion', true);
-            component.loadSuggestion();
-          }
-        });
-    }
-  },
-
-  loadSuggestion: function() {
-    let component = this;
-    component.set('isSuggestionLoading', true);
-    let collection = this.get('externalAssessmentContent');
-    let taxonomies = null;
-    let tags = component.get('tags');
-    if (tags) {
-      taxonomies = tags.map(tag => {
-        return tag.data.id;
-      });
-    }
-    let maxSearchResult = component.get('maxSearchResult');
-    let filters = {
-      pageSize: maxSearchResult,
-      taxonomies: taxonomies
-    };
-    let term =
-      taxonomies != null && taxonomies.length > 0
-        ? '*'
-        : collection.get('title');
-    component
-      .get('searchService')
-      .searchCollections(term, filters)
-      .then(collectionSuggestResults => {
-        if (!component.isDestroyed) {
-          // To show appropriate suggest count, check is their any suggest found in assessment type if count is less than.
-          let collectionSuggestCount = collectionSuggestResults.length;
-          if (collectionSuggestCount >= maxSearchResult) {
-            component.set('isSuggestionLoading', false);
-            component.set('suggestResultCount', maxSearchResult);
-          } else {
-            component
-              .get('searchService')
-              .searchAssessments(term, filters)
-              .then(assessmentSuggestResult => {
-                if (!component.isDestroyed) {
-                  let assessmentSuggestCount = assessmentSuggestResult.length;
-                  let suggestCount =
-                    assessmentSuggestCount + collectionSuggestCount;
-                  if (
-                    collectionSuggestCount === 0 &&
-                    assessmentSuggestCount > 0
-                  ) {
-                    component.set('defaultSuggestContentType', 'assessment');
-                  }
-                  component.set('isSuggestionLoading', false);
-                  component.set(
-                    'suggestResultCount',
-                    suggestCount >= maxSearchResult
-                      ? maxSearchResult
-                      : suggestCount
-                  );
-                }
-              });
-          }
-        }
-      });
   },
 
   /**
@@ -320,18 +178,12 @@ export default Ember.Component.extend({
   getContext: function(params) {
     let userId = params.userId;
     const collectionId = params.collectionId;
-    const courseId = params.courseId;
-    const unitId = params.unitId;
-    const lessonId = params.lessonId;
 
     return Context.create({
       collectionType: params.type,
       userId: userId,
       collectionId: collectionId,
-      courseId: courseId,
-      classId: params.classId,
-      unitId: unitId,
-      lessonId: lessonId
+      classId: params.classId
     });
   }
 });
