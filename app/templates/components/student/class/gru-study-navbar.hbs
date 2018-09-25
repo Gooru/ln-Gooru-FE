@@ -38,14 +38,6 @@
         </div>
       {{/if}}
     {{/if}}
-    {{#unless class.isArchived}}
-      <div class="class-management tab hidden">
-        <a {{action 'selectItem' 'class-management'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.class-management' }}">
-            {{gru-icon name='school'}}
-            <span class="add-info">{{t 'teacher-landing.class.class-management' }}</span>
-        </a>
-      </div>
-    {{/unless}}
     {{#if navTitle}}
       <div class="studyplayer-title">
         <span>{{navTitle}}</span>
@@ -53,7 +45,7 @@
     {{/if}}
     {{#if isFeatureEnabled }}
       <div class="notification-tab">
-        {{notification/notification-indicator accessorClass='class' isTeacher=true classId=class.id }}
+        {{notification/notification-indicator accessorClass='class' class=class isTeacher=false }}
       </div>
     {{/if}}
     {{#if hasClassInfo }}
