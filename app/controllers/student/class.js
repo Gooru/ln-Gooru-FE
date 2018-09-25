@@ -126,7 +126,8 @@ export default Ember.Controller.extend({
     let isPremiumCourse = setting
       ? setting['course.premium'] && setting['course.premium'] === true
       : false;
-    return isPremiumCourse && !currentLocation;
+    let isGradeAdded = classData.get('grade');
+    return isPremiumCourse && !currentLocation && isGradeAdded;
   }),
 
   // -------------------------------------------------------------------------

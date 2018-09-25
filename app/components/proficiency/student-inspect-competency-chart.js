@@ -105,9 +105,9 @@ export default Ember.Component.extend({
   route0Contents: null,
 
   /**
-   * @property {Array} domainSummaryData
+   * @property {Array} domainLevelSummary
    */
-  domainSummaryData: null,
+  domainLevelSummary: null,
 
   /**
    * @property {Boolean} isRoute0Chart
@@ -127,7 +127,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Observers
 
-  domainSummaryObserver: Ember.observer('domainSummaryData', function() {
+  domainSummaryObserver: Ember.observer('domainLevelSummary', function() {
     let component = this;
     component.loadChartData();
   }),

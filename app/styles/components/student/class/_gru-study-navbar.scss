@@ -220,6 +220,11 @@
   }
   &.student-landing {
     pointer-events: none;
+    .panel {
+      .study-player-brand {
+        pointer-events: auto;
+      }
+    }
   }
 }
 //nav-body

@@ -1,8 +1,7 @@
 .proficiency.taxonomy-grades {
-  height: 100%;
   margin-right:30px;
   .grades-container {
-    height: 100%;
+    height: 80vh;
 
     .grade-container {
       height: 30px;
@@ -14,7 +13,7 @@
        &.active-grade {
          .grade-title {
            opacity: 1;
-           border: 1px solid #010518;
+           border: 2px dashed #010518;
          }
          .grade-title:after {
            border-color: transparent transparent transparent  #010518;
