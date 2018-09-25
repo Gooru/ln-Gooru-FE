@@ -21,7 +21,12 @@ export default Ember.Component.extend({
       if (component.get('onItemSelected')) {
         component.selectItem(item);
         if (item === 'class-info') {
-          $('.classroom-information').toggle({ direction: 'left' }, 1000);
+          $('.classroom-information').toggle(
+            {
+              direction: 'left'
+            },
+            1000
+          );
         } else {
           component.sendAction('onItemSelected', item);
         }
@@ -69,6 +74,7 @@ export default Ember.Component.extend({
       .currentPath;
 
     let component = this;
+
     if (currentPath === 'student.class.profile') {
       component.set('selectedMenuItem', 'profile');
     } else if (currentPath === 'student.class.course-map') {

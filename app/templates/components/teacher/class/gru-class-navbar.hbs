@@ -1,77 +1,45 @@
-<div class="panel">
-<div class="nav-body">
-    <ul class="nav nav-pills" role="tablist">
-      <li class="app-brand tab">
-        {{#link-to 'index' class="navbar-brand home-link"}}  {{/link-to}}
-      </li>
-
-        {{#unless class.isArchived}}
-        <li class="class-activities tab">
-            <a {{action 'selectItem' 'class-activities'}} class="dca" title= "{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
-                <span class="dca-pin"></span>
-                <span class="add-info">
-                 &nbsp; {{t 'teacher-landing.class.class-activities'}}
-                </span>
-            </a>
-        </li>
-        <li role="separator" class="divider"></li>
-
-        <li class="course-map tab">
-            <a {{action 'selectItem' 'course-map'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}">
-                {{gru-icon name='sort'}}
-                <span class="add-info">
-                 &nbsp;   {{t 'teacher-landing.class.course-map'}}
-                </span>
-            </a>
-        </li>
-        <li role="separator" class="divider"></li>
-        <li class="students tab">
-            <a {{action 'selectItem' 'students'}} role="tab" data-toggle="tooltip" title="{{t 'class.info.students' }}">
-                    {{gru-icon name='account_circle'}}
-                    <span class="add-info" >
-                     &nbsp; {{t 'class.info.students' }}
-                    </span>
-            </a>
-        </li>
-        <li role="separator" class="divider"></li>
-        {{/unless}}
-
-        {{#if navTitle}}
-            <ul class="nav navbar-nav navbar-center">
-                <li class="studyplayer-title">
-                    <a style=" opacity:1; ">
-                        <span>
-                            {{navTitle}}
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        {{/if}}
-
-        <ul class="nav navbar-nav navbar-right">
-            {{#if isFeatureEnabled }}
-                <li>
-                    <a style="opacity:1;">
-                        {{notification/notification-indicator accessorClass='class' isTeacher=true class=class }}
-                    </a>
-                </li>
-            {{/if}}
-          <li role="separator" class="divider"></li>
-          <li>
-            <div class="navbar-performance performanceSummary  {{unless hasStarted 'not-started'}}" {{action 'onOpenCourseReport'}}>
-            {{charts/gru-performance-chart performanceSummary=class.performanceSummary }}
-            </div>
-          </li>
-        <li role="separator" class="divider"></li>
-        <li class="class-management tab">
-            <a {{action 'selectItem' 'class-management'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.class-management'}}">
-                {{gru-icon name="settings"}}
-            </a>
-        </li>
-        <li role="separator" class="divider"></li>
-        </ul>
-    </ul>
-
-
-</div>
+<div class="header-panel">
+  <div class="nav-body">
+    <div class="app-brand">
+      {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
+    </div>
+    {{#unless class.isArchived}}
+      <div class="class-activities tab">
+        <a {{action 'selectItem' 'class-activities'}} class="dca" title="{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
+          <span class="dca-pin"></span>
+          <span class="add-info">{{t 'teacher-landing.class.class-activities'}}</span>
+        </a>
+      </div>
+      <div class="course-map tab">
+        <a {{action 'selectItem' 'course-map'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}">
+          {{gru-icon name='sort'}}
+          <span class="add-info">{{t 'teacher-landing.class.course-map'}}</span>
+        </a>
+      </div>
+      <div class="students tab">
+        <a {{action 'selectItem' 'students'}} role="tab" data-toggle="tooltip" title="{{t 'class.info.students' }}">
+          {{gru-icon name='account_circle'}}
+          <span class="add-info">{{t 'class.info.students' }}</span>
+        </a>
+      </div>
+    {{/unless}}
+    {{#if navTitle}}
+      <div class="studyplayer-title">
+        <span>{{navTitle}}</span>
+      </div>
+    {{/if}}
+    {{#if isFeatureEnabled }}
+      <div class="notification-tab">
+        {{notification/notification-indicator accessorClass='class' isTeacher=true classId=class.id }}
+      </div>
+    {{/if}}
+    <div class="performance-summary  {{unless hasStarted 'not-started'}}" {{action 'onOpenCourseReport'}}>
+      {{charts/gru-performance-chart performanceSummary=class.performanceSummary }}
+    </div>
+    <div class="class-management tab">
+      <a {{action 'selectItem' 'class-management'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.class-management'}}">
+      {{gru-icon name="settings"}}
+      </a>
+    </div>
+  </div>
 </div>
