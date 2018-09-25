@@ -4,158 +4,148 @@
   left: 0;
   width: 100%;
 
-  .panel {
+  .gru-icon {
+    vertical-align: middle;
+  }
+
+  %app-info-container {
+    display: inline-block;
+    word-wrap: break-word;
+    vertical-align: middle;
+  }
+
+  %app-container {
+    color: $white;
+    margin: auto;
+    height: 100%;
+    grid-template-columns: auto auto;
+    align-items: center;
+    grid-gap: 5px;
+    display: grid;
+  }
+
+  .header-panel {
     height: 51px;
     width: 100%;
-  }
+    background-color: $green-700;
 
-  .nav-body {
-    margin: auto;
+    .nav-body {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+      /*Default View */
+      grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
+      /* Extra small devices (phones, 600px and down) */
+      @media only screen and (max-width: 600px) {
+        grid-template-columns: 50px 40px 40px 40px 1fr 40px 40px 40px;
 
-    .add-info {
-      display: inline-block;
-      word-wrap: break-word;
+        .class-activities,
+        .course-map,
+        .students {
+          a {
+            grid-gap: 0;
 
-      //width: 90px;
-      vertical-align: middle;
-    }
+            .add-info {
+              display: none !important;
+            }
+          }
+        }
 
-    @media (min-width: 768px) and (max-width: 1024px) {
-      .add-info {
-        display: none;
-      }
-    }
-
-    @media (min-width: 1025px) and (max-width: 1280px) {
-      //width: 960px;
-      add-info: {
-        display: inline-block;
-      }
-    }
-
-    @media (min-width: 1281px) {
-      //width: 960px;
-      add-info: {
-        display: inline-block;
-      }
-    }
-
-    /*
-              ##Device = Tablets, Ipads (landscape)
-              ##Screen = B/w 768px to 1024px
-            */
-
-    @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-      //width: 960px;
-      add-info: {
-        display: inline-block;
-      }
-    }
-
-    /*
-              ##Device = Low Resolution Tablets, Mobiles (Landscape)
-              ##Screen = B/w 481px to 767px
-            */
-
-    @media (min-width: 481px) and (max-width: 767px) {
-      .add-info {
-        display: none;
-      }
-    }
-
-    /*
-              ##Device = Most of the Smartphones Mobiles (Portrait)
-              ##Screen = B/w 320px to 479px
-            */
-
-    @media (min-width: 320px) and (max-width: 480px) {
-      .add-info {
-        display: none;
-      }
-    }
-
-    .studyplayer-title {
-      text-align: center;
-      opacity: 1;
-      height: 22px;
-      font-size: 16px;
-      font-weight: bold;
-      pointer-events: none;
-    }
-
-    .app-brand {
-      padding: 0 8px;
-      background-color: $white;
-      a {
-        background-image: url("gooru/images/gooru-logo.svg");
-        background-repeat: no-repeat;
-        background-color: $white;
-        background-size: contain;
-        width: 56px;
-        height: 30px;
-        top: 18px;
-        opacity: 1 !important;
-        &:hover,
-        &:focus {
-          background-color: $white !important;
+        .performance-summary {
+          .charts.gru-performance-chart {
+            min-width: 40px !important;
+          }
         }
       }
-    }
-  }
+      /* Small devices (portrait tablets and large phones, 768px and up) */
+      @media only screen and (min-width: 768px) {
+        grid-template-columns: 90px 50px 50px 50px 1fr 59px 59px 59px;
 
-  /* @media (min-width: $screen-sm) {
-        display: block;
-        .add-info{
-          display: none;
+        .class-activities,
+        .course-map,
+        .students {
+          a {
+            grid-gap: 0;
+
+            .add-info {
+              display: none !important;
+            }
+          }
         }
-      } */
+      }
+      /* Large devices (laptops/desktops, 992px and up) */
+      @media only screen and (min-width: 992px) {
+        grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
 
-  ul.nav-pills,
-  ul.nav-bar {
-    background-color: rgba(77, 152, 64, 1);
-    .nav-item {
-      border-left: $border-right-side $light-200;
-      border-right: $border-left-side $light-200;
-    }
+        .class-activities,
+        .course-map,
+        .students {
+          a {
+            grid-gap: 5px;
 
-    li {
-      &.divider {
-        border-left: 1px solid $panel-default-border;
-        height: 50px;
+            .add-info {
+              display: inline-block !important;
+            }
+          }
+        }
       }
 
-      &.not-started {
-        pointer-events: none;
-      }
+      .class-activities,
+      .class-management,
+      .course-map,
+      .students {
+        &.vactive {
+          a {
+            color: $gray-base;
+          }
 
-      height: 50px;
+          a.dca {
+            .dca-pin {
+              background-image: url("gooru/pin.png");
+            }
+          }
+        }
 
-      &.vactive {
-        display: block;
-        color: $gray-base;
-
-        a {
+        a:hover {
           color: $gray-base;
         }
-        .dca {
+
+        a.dca:hover {
           .dca-pin {
             background-image: url("gooru/pin.png");
           }
         }
       }
 
-      a {
-        color: $white;
-        height: 100%;
-        padding-top: 12px;
-        padding-bottom: 8px;
-        padding-left: 15px;
-        padding-right: 15px;
+      .app-brand {
+        padding: 0 8px;
+        background-color: $white;
+        display: flex;
+        height: 51px;
 
-        .gru-icon {
-          vertical-align: middle;
+        a {
+          margin: auto;
+          display: block;
+          background-image: url("gooru/images/gooru-logo.svg");
+          background-repeat: no-repeat;
+          background-size: contain;
+          width: 56px;
+          height: 30px;
+          background-position: 0 15px;
+          top: 18px;
+          opacity: 1 !important;
         }
-        &.dca {
+      }
+
+      .class-activities {
+        display: flex;
+        border-right: 1px solid $white;
+        height: 51px;
+
+        a {
+          @extend %app-container;
+
           .dca-pin {
             background-image: url("gooru/pin-white.png");
             background-repeat: no-repeat;
@@ -165,91 +155,120 @@
             display: block;
             margin-top: 2px;
           }
-          display: flex;
-        }
 
-        &:hover {
-          background-color: rgba(77, 152, 64, 1);
-          color: $gray-base;
-          .dca-pin {
-            background-image: url("gooru/pin.png");
+          .add-info {
+            @extend %app-info-container;
           }
         }
       }
 
-      @media (min-width: $screen-sm) {
-        display: block;
-      }
+      .course-map {
+        display: flex;
+        border-right: 1px solid $white;
+        height: 51px;
 
-      @media (max-width: $screen-xs-max) {
-        .charts.gru-performance-chart {
-          display: none;
+        a {
+          @extend %app-container;
+        }
+
+        .add-info {
+          @extend %app-info-container;
         }
       }
 
-      /*  &.class-activities > a:hover,
-            &.class-activities > a.vactive {
-              // img {
-              //   display: block;
-              // }
-            } */
+      .students {
+        display: flex;
+        border-right: 1px solid $white;
+        height: 51px;
 
-      .class-title {
-        padding: 5px;
+        a {
+          @extend %app-container;
+        }
+
+        .add-info {
+          @extend %app-info-container;
+        }
       }
-    }
-  }
 
-  .navbar-right {
-    margin-right: 0px;
-  }
+      .studyplayer-title {
+        display: grid;
+        margin: auto;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 10px;
+        height: 51px;
+        align-items: center;
+        pointer-events: none;
+        color: $white;
 
-  .navbar-performance {
-    .container-box {
-      border-bottom: 1px solid $white;
-    }
-    &.not-started {
-      pointer-events: none;
-    }
-    .gru-performance-chart {
-      .percentage {
-        margin-top: 8px;
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
-    }
-  }
 
-  .charts.gru-performance-chart {
-    cursor: pointer;
-    min-width: 59px;
-
-    > .container-box {
-      height: 51px;
-      .percentage {
+      .notification-tab {
+        display: grid;
+        height: 51px;
+        align-items: center;
         cursor: pointer;
+        justify-content: center;
+        border-left: 1px solid $white;
+
+        div {
+          .active-study {
+            i {
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+
+      .performance-summary {
+        display: grid;
+        border-left: 1px solid $white;
+        border-right: 1px solid $white;
+        height: 51px;
+        align-items: center;
+
+        &.not-started {
+          pointer-events: none;
+        }
+
+        .charts.gru-performance-chart {
+          color: $white;
+          text-align: center;
+          height: 100%;
+          cursor: pointer;
+          min-width: 59px;
+          padding-left: 1px;
+          padding-right: 3px;
+
+          .container-box {
+            height: 51px;
+            cursor: pointer;
+
+            .percentage {
+              margin-top: 8px;
+            }
+          }
+        }
+      }
+
+      .class-management {
+        display: grid;
+        margin: auto;
+        align-items: center;
+        height: 51px;
+
+        a {
+          color: $white;
+        }
       }
     }
   }
-
-  .nav > li > a:hover,
-  .nav > li > a:focus {
-    background-color: $white;
-
-    //color: $blue-400; // sunken effect
-  }
-
-  ul.navbar-nav > li.class-info {
-    > a {
-      border-radius: 3px;
-      padding: 10px 15px;
-    }
-  }
-
-  .navbar-nav.navbar-center {
-    position: absolute;
-    left: 72%;
-    transform: translatex(-50%);
-  }
-} //nav-body
+}
 
 div.teacher.class {
   div.header.clearfix {
@@ -257,12 +276,4 @@ div.teacher.class {
       display: none;
     }
   }
-}
-
-.hide-classroom-information {
-  display: none;
-}
-
-.start-tour {
-  display: none;
 }
