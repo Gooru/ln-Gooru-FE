@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import {CONTENT_TYPES} from 'gooru-web/config/config';
+import {CONTENT_TYPES, PLAYER_EVENT_SOURCE} from 'gooru-web/config/config';
 import {validatePercentage, generateUUID} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
@@ -71,7 +71,7 @@ export default Ember.Component.extend({
      */
     onCancel() {
       let component = this;
-      component.redirectCourseMap();
+      component.redirectTo();
     }
   },
 
@@ -229,9 +229,15 @@ export default Ember.Component.extend({
   validateFractionScore(score, maxScore) {
     let isValidFractionScore = false;
     if (!(isNaN(score)) && !(isNaN(maxScore))) {
+      let isIntegerTypeScore = score.indexOf('.');
+      let isIntegerTypeMaxScore = maxScore.indexOf('.');
       score = parseFloat(score);
       maxScore = parseFloat(maxScore);
-      if (maxScore > 0 && score < maxScore) {
+      let isPositiveScore = score >= 0;
+      let isNotExceedsLimit = maxScore >= 1 && maxScore <= 100;
+      let isValidScore = score <= maxScore;
+      let isIntegerNumber = isIntegerTypeScore === -1 && isIntegerTypeMaxScore === -1;
+      if (isValidScore && isNotExceedsLimit && isPositiveScore && isIntegerNumber) {
         isValidFractionScore = true;
       }
     }
@@ -280,12 +286,13 @@ export default Ember.Component.extend({
   },
 
   /**
-   * Redirect to course map
+   * Redirect to right path
    */
-  redirectCourseMap() {
+  redirectTo() {
     let component = this;
     let context = component.get('mapLocation.context');
-    if (context.get('classId')) {
+    let source = component.get('source');
+    if (context.get('classId') && source === PLAYER_EVENT_SOURCE.COURSE_MAP) {
       component.get('router').transitionTo(
         'student.class.course-map',
         context.get('classId'),
@@ -294,6 +301,11 @@ export default Ember.Component.extend({
             refresh: true
           }
         }
+      );
+    } else if (context.get('classId') && source === PLAYER_EVENT_SOURCE.DAILY_CLASS) {
+      component.get('router').transitionTo(
+        'student.class.class-activities',
+        context.get('classId')
       );
     } else {
       component.get('router').transitionTo(

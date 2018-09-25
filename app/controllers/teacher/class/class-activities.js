@@ -32,7 +32,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     onAddDca(selectedSearchContentType) {
       let controller = this;
       let contextParams = {
-        classId: controller.get('classId')
+        classId: controller.get('classId'),
+        class: controller.get('class'),
+        course: controller.get('course')
       };
       controller.set('contextParams', contextParams);
       controller.set('selectedSearchContentType', selectedSearchContentType);
@@ -50,6 +52,34 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       };
       controller.set('courseMapContextParams', contextParams);
       controller.set('showDcaCourseMapPullup', true);
+    },
+
+    /**
+     * Action will trigger to open teacher dca content report.
+     * @param  {Object} collection
+     */
+    openDcaContentReport(selectedClassActivity) {
+      let controller = this;
+      let collection = selectedClassActivity.get('collection');
+      let activityDate = selectedClassActivity.get('added_date');
+      let dateWiseClassActivity = controller
+        .get('classActivities')
+        .findBy('added_date', activityDate);
+      let dateWiseClassActivities = dateWiseClassActivity.get(
+        'classActivities'
+      );
+      let collections = dateWiseClassActivities.map(classActivity => {
+        return classActivity.get('collection');
+      });
+      let params = {
+        classId: controller.get('classId'),
+        collection: collection,
+        collections: collections,
+        activityDate: activityDate,
+        classMembers: controller.get('members')
+      };
+      controller.set('showDcaCollectionReportPullUp', true);
+      controller.set('dcaCollectionReportData', params);
     },
 
     /**
@@ -157,7 +187,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      * Triggered when a close welcome panel button is selected.
      */
     toggleHeader: function() {
-      this.set('showWelcome', false);
+      let controller = this;
+      Ember.$('.controller.teacher.class.class-activities .welcome').slideUp(
+        400,
+        function() {
+          Ember.$(
+            '.controller.teacher.class.class-activities .dca-content-list-container'
+          ).css('height', 'calc(100vh - 180px)');
+          controller.handleShowActionBar();
+        }
+      );
     },
 
     /**
@@ -183,6 +222,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   showSearchContentPullup: false,
 
   /**
+   * Maintains the state of show dca collection report pull up
+   * @type {Boolean}
+   */
+  showDcaCollectionReportPullUp: false,
+
+  /**
    * Contains classActivity objects
    * @property {classActivity[]} classActivities
    */
@@ -195,10 +240,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   classId: Ember.computed.alias('classController.class.id'),
 
   /**
+   * Class Object
+   * @property {Object}
+   */
+  class: Ember.computed.alias('classController.class'),
+
+  /**
    * Course Id which is associated with this class
    * @property {String}
    */
   courseId: Ember.computed.alias('classController.class.courseId'),
+
+  /**
+   * Course Object
+   * @property {Object}
+   */
+  course: Ember.computed.alias('classController.course'),
 
   /**
    * Class id

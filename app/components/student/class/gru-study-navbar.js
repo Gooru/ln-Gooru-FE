@@ -3,6 +3,8 @@ import { GRU_FEATURE_FLAG } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   classNames: ['gru-study-navbar'],
 
+  classNameBindings: ['isStudentLanding:student-landing'],
+
   session: Ember.inject.service('session'),
 
   isFeatureEnabled: Ember.computed(function() {
@@ -103,11 +105,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Properties
-  /**
-   * @property {Class} class
-   */
-  class: null,
-
   /**
    * @property {String|Function} onItemSelected - event handler for when an menu item is selected
    */

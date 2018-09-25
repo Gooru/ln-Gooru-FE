@@ -132,8 +132,17 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    closeAll() {
+      this.sendAction('onClosePullUp');
+    },
+
     onPullUpClose() {
       this.closePullUp();
+    },
+
+    onCloseSuggest() {
+      // on close suggest callback
+      return true;
     },
 
     /**
@@ -154,6 +163,12 @@ export default Ember.Component.extend({
       component.set('suggestContextParams', suggestContextParams);
       component.set('studentsSelectedForSuggest', studentsSelectedForSuggest);
       component.set('showSuggestionPullup', true);
+    },
+
+    onClosePullUp() {
+      let component = this;
+      component.set('showSuggestionPullup', false);
+      component.closePullUp(true);
     }
   },
 
@@ -173,7 +188,7 @@ export default Ember.Component.extend({
     );
   },
 
-  closePullUp() {
+  closePullUp(closeAll) {
     let component = this;
     component.$().animate(
       {
@@ -182,7 +197,9 @@ export default Ember.Component.extend({
       400,
       function() {
         component.set('showPullUp', false);
-        component.sendAction('onClosePullUp');
+        if (closeAll) {
+          component.sendAction('onClosePullUp', true);
+        }
       }
     );
   },
@@ -228,7 +245,6 @@ export default Ember.Component.extend({
             'id',
             context.get('collectionId')
           );
-          component.set('collections', collections);
           if (!collection.get('isSuggestedContent')) {
             component.set('showSuggestion', true);
             component.loadSuggestion();
@@ -240,7 +256,7 @@ export default Ember.Component.extend({
   loadSuggestion: function() {
     let component = this;
     component.set('isSuggestionLoading', true);
-    let collection = this.get('collections');
+    let collection = this.get('externalAssessmentContent');
     let taxonomies = null;
     let tags = component.get('tags');
     if (tags) {

@@ -134,10 +134,10 @@ export default Ember.Controller.extend({
   init: function() {
     const controller = this;
     controller._super(...arguments);
+    let tab = controller.get('tab');
     Ember.run.scheduleOnce('afterRender', controller, function() {
       $('[data-toggle="tooltip"]').tooltip();
     });
-    let tab = controller.get('tab');
     if (tab && tab === 'report') {
       controller.openStudentCourseReport();
     }
@@ -200,6 +200,12 @@ export default Ember.Controller.extend({
    * Property to toggle checkbox visibility
    */
   isChecked: false,
+
+
+  /**
+   * @property {Boolean} isShowNavigatorLanding
+   */
+  isShowNavigatorLanding: Ember.computed.alias('studentClassController.isShowNavigatorLanding'),
 
   /**
    * @type {Boolean}

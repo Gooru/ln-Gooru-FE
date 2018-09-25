@@ -30,7 +30,6 @@
     </div>
   </div>
   <div class="search-content-type-filter">
-    <div class="filter-by">{{t 'common.filter-by'}}</div>
     <div class="filter-content-types">
       {{#each filterContentType as |contentType|}}
         <div class="filter-item {{contentType.format}} {{if (eq contentType.format activeContentType) 'active' }}" {{action 'onSelectFilterBy' contentType.format}}>
@@ -43,7 +42,7 @@
   <div class="search-list-container">
     {{#if (gt searchResults.length 0)}}
       <div class="search-list">
-        {{#each searchResults as |result|}}
+        {{#each searchResultSet as |result|}}
           {{cards.dca-search-collection-card collection=result contentType=activeContentType onAddContentToDCA="onAddContentToDCA" onScheduleContentToDCA="onScheduleContentToDCA"}}
         {{/each}}
       </div>

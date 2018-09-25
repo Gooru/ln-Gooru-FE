@@ -12,6 +12,12 @@ export default Ember.Component.extend({
 
   notificationService: Ember.inject.service('api-sdk/app-notification'),
 
+  /**
+   * Logged in user session object
+   * @type {Session}
+   */
+  session: Ember.inject.service(),
+
   // -------------------------------------------------------------------------
   // Dispaly properties
 
@@ -128,10 +134,16 @@ export default Ember.Component.extend({
           navigate: true,
           navigationDetails: {
             route: 'student.class.course-map',
-            queryPType: 'paramonly',
+            queryPType: 'hybrid',
             exactparams: 'classId',
+            setlocation: true,
             queryparams: {
-              classId: 0
+              classId: 0,
+              unitId: 0,
+              lessonId: 0,
+              collectionId: 0,
+              tab: 'assesmentreport',
+              location: 'unitId+lessonId+collectionId+currentItemType'
             }
           }
         }
@@ -147,10 +159,16 @@ export default Ember.Component.extend({
           navigate: true,
           navigationDetails: {
             route: 'student.class.course-map',
-            queryPType: 'paramonly',
+            queryPType: 'hybrid',
             exactparams: 'classId',
+            setlocation: true,
             queryparams: {
-              classId: 0
+              classId: 0,
+              unitId: 0,
+              lessonId: 0,
+              collectionId: 0,
+              tab: 'assesmentreport',
+              location: 'unitId+lessonId+collectionId+currentItemType'
             }
           }
         }
@@ -166,10 +184,16 @@ export default Ember.Component.extend({
           navigate: true,
           navigationDetails: {
             route: 'teacher.class.course-map',
-            queryPType: 'paramonly',
+            queryPType: 'hybrid',
             exactparams: 'classId',
+            setlocation: true,
             queryparams: {
-              classId: 0
+              classId: 0,
+              unitId: 0,
+              lessonId: 0,
+              collectionId: 0,
+              tab: 'assesmentreport',
+              location: 'unitId+lessonId+collectionId+currentItemType'
             }
           }
         }
@@ -210,10 +234,6 @@ export default Ember.Component.extend({
    */
   notificationModel: {},
 
-  isTeacher: Ember.computed('ctxprofile', function() {
-    return !!(this.get('ctxprofile') && this.get('ctxprofile').isTeacher);
-  }),
-
   timer: null,
 
   init() {
@@ -235,30 +255,18 @@ export default Ember.Component.extend({
 
   /**
    * @property {string}
-   * Context in which notificantion is loaded student/teacher
+   * Context in which notification is loaded student/teacher
    */
   notificationCtxRole: Ember.computed(function() {
     const component = this;
-    let userrole = 'student';
-    //if (!component.get('model.isClass')) {} // No check as supplied from parent component
-    userrole = component.get('isTeacher') ? 'teacher' : 'student';
+    let userrole = component.get('session').get('role');
+    userrole =
+      userrole === 'teacher' || userrole === 'student' ? userrole : null; // Don't show notifications of user role is not student or teacher
     return userrole;
   }),
 
   model: null,
 
-  /**
-   * @description Populates the necessary configuration options for instance
-   * a. notificationAcessor : The place or context of invocation of notification. [global / class]
-   *  a.1. notificationAcessor is a positional configuration. The control from where its invokes passes the value. eg. from gru-header then 'global' from study-nav-bar then 'class'
-   * b. acessorRole : Role of the notification accessor. [student/teacher]
-   * b.1. acessorRole is obtained from the current user session.
-   */
-  getInstanceInvoctionOptions() {
-    //ToDo: mhere
-    //let notificationOptions = {};
-    console.log('mhere', 'location'); //eslint-disable-line
-  },
   /**
    * Takes action on the notification
    * Refresh UI upon success, to remove the acted notification
@@ -308,9 +316,7 @@ export default Ember.Component.extend({
      */
     dismissNotifiocation(notin) {
       const component = this;
-      if (notin) {
-        //Service call and dismiss item.
-        //if (notin.ctxPathType === component.get('notificationCtxRole')) { // Const correction needed to enable this check
+      if (notin && component.get('notificationCtxRole')) {
         let serviceEndpoint =
           component.get('notificationCtxRole') === 'student'
             ? component
@@ -349,6 +355,9 @@ export default Ember.Component.extend({
    */
   getNotifications(dataFilter) {
     const component = this;
+    if (!component.get('notificationCtxRole')) {
+      return; //Don't fetch any notifications if user role is null
+    }
     let notinPromise;
     dataFilter = dataFilter || component.getDataFilter();
     if (component.get('notificationCtxRole') === 'student') {
@@ -390,16 +399,9 @@ export default Ember.Component.extend({
         newNotificationDetails
       );
 
-      //Array.prototype.push.apply(notndetail, newNotificationDetails); //ToDo: requiers a data merge
-
       if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
         newDataModel.notifications = ndt;
         component.set('notificationModel', newDataModel);
-        //eslint-disable-next-line
-        /* console.log(
-          'hasActiveNotifications',
-          component.get('hasActiveNotifications')
-        ); */
       }
     });
   },
@@ -417,9 +419,10 @@ export default Ember.Component.extend({
         : '';
     filter.limit = component.get('rowsPerPage');
     filter.classId =
-      component.get('model.isClass') && component.get('class')
-        ? component.get('class').id
+      component.get('model.isClass') && component.get('classId')
+        ? component.get('classId')
         : ''; // from page Options passed to instance
+
     return filter;
   },
 
@@ -431,32 +434,18 @@ export default Ember.Component.extend({
     const component = this;
     let filter = { classId: '', limit: 2, boundary: '' };
     filter.classId =
-      component.get('model.isClass') && component.get('class')
-        ? component.get('class').id
+      component.get('model.isClass') && component.get('classId')
+        ? component.get('classId')
         : ''; // from page Options passed to instance
     filter.limit = component.get('rowsPerPage');
     return filter;
   },
 
-  /**
-   * Timer based refresh of UI
-   */
-  refreshSelf() {
-    const component = this;
-    component.set('notificationModel', ''); // reset with timer, rather
-    component._debouncedItem = Ember.run.later(
-      component,
-      function() {
-        //let d = new Date(); console.log('500 ms of timeout:', d); // ToDo: revisit here
-        component.getNotifications(component.getDefaultFilter()); //Force default filter for first time load and refresh
-      },
-      30000
-    );
-  },
-
   destroy() {
     this._super(...arguments);
-    clearInterval(this.timer);
-    //Ember.run.cancel(this._debouncedItem);
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
   }
 });

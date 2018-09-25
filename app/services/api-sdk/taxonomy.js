@@ -180,5 +180,49 @@ export default Ember.Service.extend({
           }
         );
     });
+  },
+
+  /**
+   * @function fetchDomainGradeBoundaryBySubjectId
+   */
+  fetchDomainGradeBoundaryBySubjectId(gradeId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('taxonomyAdapter')
+        .fetchDomainGradeBoundaryBySubjectId(gradeId)
+        .then(
+          function(response) {
+            resolve(
+              service.get('taxonomySerializer').normalizeDomainGradeBoundary(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * @function fetchGradesBySubject
+   */
+  fetchGradesBySubject(filters) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('taxonomyAdapter')
+        .fetchGradesBySubject(filters)
+        .then(
+          function(response) {
+            resolve(
+              service.get('taxonomySerializer').normalizeGrades(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });

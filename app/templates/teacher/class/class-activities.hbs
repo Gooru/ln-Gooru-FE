@@ -2,7 +2,7 @@
   <div class="dca-title">
     <p>{{t 'teacher-landing.class.class-activities'}}</p>
   </div>
-  <div class="panel panel-default panel-primary welcome {{if showWelcome 'visible' 'hidden'}}">
+  <div class="panel panel-default panel-primary welcome">
     <div class="panel-body">
       <div class="description">{{t "teacher-landing.class.class-activities-tab.welcome-dca"}}</div>
       <div class="close">
@@ -101,12 +101,16 @@
               showDcaAddButton=false
               onChangeVisibility='changeVisibility'
               onRemoveClassActivity='removeClassActivity'
+              openDcaContentReport='openDcaContentReport'
             }}
             {{/each}}
           </div>
         </div>
       </div>
       <div class="dca-past-date-list-container">
+        {{#if pastClassActivities}}
+          <p class="dca-past-activities-header">{{t 'student-landing.class.class-activities-tab.past-activities'}}</p>
+        {{/if}}
         {{#each pastClassActivities as |pastclassActivity|}}
           <div class="dca-date-view-container">
             <div class="dca-date-container">
@@ -125,11 +129,12 @@
               onGoLive='goLive'
               showGolive=false
               showDcaAssignButton=true
-              showDcaRemoveButton=true
+              showDcaRemoveButton=false
               showDcaAddButton=true
               onChangeVisibility='changeVisibility'
               onRemoveClassActivity='removeClassActivity'
               addedContentToDCA='addedContentToDCA'
+              openDcaContentReport='openDcaContentReport'
             }}
             {{/each}}
           </div>
@@ -164,6 +169,7 @@
     addedContentToDCA="addedContentToDCA"
     context=contextParams
     selectedSearchContentType=selectedSearchContentType
+    todaysClassActivities=todaysClassActivities.classActivities
   }}
 {{/if}}
 
@@ -173,4 +179,8 @@
   addedContentToDCA="addedContentToDCA"
   context=courseMapContextParams
   }}
+{{/if}}
+
+{{#if showDcaCollectionReportPullUp}}
+  {{reports.pull-up.dca-collection-report context=dcaCollectionReportData showPullUp=showDcaCollectionReportPullUp}}
 {{/if}}

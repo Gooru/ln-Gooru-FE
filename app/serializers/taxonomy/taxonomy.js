@@ -285,5 +285,27 @@ export default Ember.Object.extend({
       });
     }
     return taxonomyResult;
+  },
+
+  /**
+   * @function normalizeDomainGradeBoundary
+   */
+  normalizeDomainGradeBoundary(payload) {
+    let normalizedData = Ember.A([]);
+    if (payload && payload.domains) {
+      normalizedData = payload.domains;
+    }
+    return normalizedData;
+  },
+
+  /**
+   * @function normalizeGrades
+   */
+  normalizeGrades(payload) {
+    let normalizedGrades = Ember.A([]);
+    if (payload && payload.grades) {
+      normalizedGrades = payload.grades;
+    }
+    return normalizedGrades;
   }
 });

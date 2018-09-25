@@ -34,11 +34,17 @@ export default Ember.Object.extend({
         usageData = payload.resources;
       }
     }
+    let data = usageData.objectAt(0);
+    let sessionId = 'NA';
+    if (data) {
+      sessionId = data.sessionId;
+    }
     return UserResourcesResult.create({
       user: payload.userUid,
       isAttemptFinished: !!payload.isCompleteAttempt, // This value is used only by the RealTime dashboard
       resourceResults: serializer.normalizeResourceResults(usageData),
-      assessment: payload.assessment || null
+      assessment: payload.assessment || null,
+      sessionId: sessionId
     });
   },
 
@@ -203,6 +209,7 @@ export default Ember.Object.extend({
           score: performance.percentScore || 0,
           totalCompetency: performance.totalCompetencies || 0,
           completedCompetency: performance.completedCompetencies || 0,
+          inprogressCompetencies: performance.inprogressCompetencies || 0,
           userId: performance.userId
         };
         normalizedClassPerformanceSummary.push(userPerformanceData);

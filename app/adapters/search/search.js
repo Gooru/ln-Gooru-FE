@@ -43,6 +43,7 @@ export default Ember.Object.extend({
     if (Ember.isArray(taxonomies) && taxonomies.length > 0) {
       options.data['flt.standard'] = taxonomies.join(',');
     }
+    adapter.appendFilters(params, options);
 
     return Ember.$.ajax(url, options);
   },
@@ -78,6 +79,7 @@ export default Ember.Object.extend({
     if (Ember.isArray(taxonomies) && taxonomies.length > 0) {
       options.data['flt.standard'] = taxonomies.join(',');
     }
+    adapter.appendFilters(params, options);
 
     return Ember.$.ajax(url, options);
   },
@@ -221,5 +223,18 @@ export default Ember.Object.extend({
     return {
       Authorization: `Token ${this.get('session.token-api3')}`
     };
+  },
+
+  appendFilters(params, options) {
+    if (params.filters) {
+      let filters = params.filters;
+      let filterKeys = Object.keys(filters);
+      if (filterKeys) {
+        for (let index = 0; index < filterKeys.length; index++) {
+          let filterKey = filterKeys[index];
+          options.data[filterKey] = filters[filterKey];
+        }
+      }
+    }
   }
 });
