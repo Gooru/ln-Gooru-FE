@@ -1,6 +1,6 @@
 <div class="header-panel">
   <div class="nav-body">
-    <div class="app-brand">
+    <div class="app-brand" {{action "onClickBrand"}}>
       {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
     </div>
     {{#unless class.isArchived}}
