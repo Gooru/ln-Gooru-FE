@@ -11,65 +11,66 @@
   }
 
   .chart-container {
-
-    .scrollable-chart {
-      height: 80vh;
-      overflow-y: auto;
-      width: max-content;
+    .graded-chart-container {
       display: grid;
       grid-template-columns: 150px auto;
+      .scrollable-chart {
+        height: 80vh;
+        overflow-y: auto;
+        width: max-content;
 
-      &::-webkit-scrollbar {
-        height: 6px;
-        width: 8px;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background: $gray-light;
-        border: 1px solid $gray-light;
-        border-radius: 5px;
-      }
-
-      #student-inspect-competency-chart {
-        margin-bottom: 20px;
-        position: relative;
-        transform: rotateX(180deg);
-        -webkit-transition: -webkit-transform 0.6s ease-in;
-        transition: transform 0.6s ease-in;
-        -webkit-transform-style: preserve-3d;
-        transform-style: preserve-3d;
-
-        .competency {
-          stroke: $snow-gray;
-          stroke-width: 1;
-          shape-rendering: crispedges;
-          stroke-opacity: 0.4;
-          cursor: pointer;
+        &::-webkit-scrollbar {
+          height: 6px;
+          width: 8px;
         }
 
-        #skyline-container {
-          line {
-            stroke: $white;
-            stroke-width: 6px;
+        &::-webkit-scrollbar-thumb {
+          background: $gray-light;
+          border: 1px solid $gray-light;
+          border-radius: 5px;
+        }
+
+        #student-inspect-competency-chart {
+          margin-bottom: 20px;
+          position: relative;
+          transform: rotateX(180deg);
+          -webkit-transition: -webkit-transform 0.6s ease-in;
+          transition: transform 0.6s ease-in;
+          -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+
+          .competency {
+            stroke: $snow-gray;
+            stroke-width: 1;
+            shape-rendering: crispedges;
+            stroke-opacity: 0.4;
+            cursor: pointer;
           }
-        }
 
-        #baseline-container {
-          line {
-            stroke: $dark-400;
+          #skyline-container {
+            line {
+              stroke: $white;
+              stroke-width: 6px;
+            }
+          }
+
+          #baseline-container {
+            line {
+              stroke: $dark-400;
+              stroke-width: 2px;
+            }
+          }
+
+          .skyline {
+            transition-property: visibility, opacity;
+            transition-duration: 0s, 1s;
+          }
+
+          .domain-boundary-line {
+            stroke-dasharray: 6;
+            stroke: #010518;
             stroke-width: 2px;
           }
-        }
-
-        .skyline {
-          transition-property: visibility, opacity;
-          transition-duration: 0s, 1s;
-        }
-
-        .domain-boundary-line {
-          stroke-dasharray: 6;
-          stroke: #010518;
-          stroke-width: 2px;
         }
       }
     }

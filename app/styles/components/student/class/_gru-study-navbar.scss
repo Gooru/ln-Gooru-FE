@@ -7,6 +7,11 @@
 
   &.student-landing {
     pointer-events: none;
+    .header-panel {
+      .app-brand {
+        pointer-events: auto;
+      }
+    }
   }
 
   .gru-icon {
@@ -283,4 +288,16 @@ div.student.class {
       display: none;
     }
   }
+}
+
+.hide-classroom-information {
+  display: none;
+}
+
+.start-tour {
+  display: none;
+}
+
+button.locate {
+  display: none;
 }

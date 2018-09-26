@@ -14,14 +14,15 @@
     }
     .course-container {
       width: 99%;
-      display: grid;
       margin-top: 30px;
+      height: 90%;
       .course-info {
         height: 84px;
         background-color: $white;
         box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
         display: grid;
         grid-template-columns: 82px auto;
+        margin-bottom: 4px;
         .course-thumbnail {
           background-size: contain;
           background-repeat: no-repeat;
@@ -162,6 +163,9 @@
             cursor: pointer;
           }
         }
+      }
+      .course-map-accordion-container {
+        max-height: 375px;
       }
     }
   }
