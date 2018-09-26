@@ -76,11 +76,11 @@ test('Layout', function(assert) {
         background-size: contain;
     }
 
-    .gru-study-navbar .panel .nav-body .nav .study-player-brand a {
+    .gru-study-navbar .header-panel .nav-body .app-brand a {
       background-image: url("http://gooru.org/welcome/images/GooruLogo.png");
     }
 
-    .gru-class-navbar .panel .nav-body .nav .app-brand a {
+    .gru-class-navbar .header-panel .nav-body .app-brand a {
       background-image: url("http://gooru.org/welcome/images/GooruLogo.png");
     }
 `;
