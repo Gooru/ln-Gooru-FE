@@ -7,6 +7,7 @@
 
   &.student-landing {
     pointer-events: none;
+
     .header-panel {
       .app-brand {
         pointer-events: auto;
@@ -46,6 +47,146 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
       /*Default View */
       grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
+
+      &.independent-learning.no-class-info {
+        grid-template-columns: 90px 120px 1fr 60px 120px 120px;
+        @media only screen and (max-width: 600px) {
+          grid-template-columns: 70px 60px 1fr 60px 60px 60px;
+
+          .class-activities,
+          .course-map.study-player,
+          .profile {
+            a {
+              grid-gap: 0;
+
+              .add-info {
+                display: none !important;
+              }
+            }
+          }
+
+          .performance-chart {
+            .charts.gru-performance-chart {
+              min-width: 40px !important;
+            }
+          }
+        }
+        /* Small devices (portrait tablets and large phones, 768px and up) */
+        @media only screen and (min-width: 768px) {
+          grid-template-columns: 70px 60px 1fr 60px 120px 120px;
+
+          .class-activities,
+          .course-map.study-player,
+          .profile {
+            a {
+              grid-gap: 0;
+
+              .add-info {
+                display: none !important;
+              }
+            }
+          }
+        }
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+          grid-template-columns: 90px 120px 1fr 60px 120px 120px;
+
+          .class-activities,
+          .course-map.study-player,
+          .profile {
+            a {
+              grid-gap: 5px;
+
+              .add-info {
+                display: inline-block !important;
+              }
+            }
+          }
+        }
+      }
+      /* Apply to independent-learning class */
+      &.independent-learning {
+        grid-template-columns: 90px 120px 1fr 60px 60px 60px;
+        @media only screen and (max-width: 600px) {
+          grid-template-columns: 90px 60px 1fr 50px 50px 50px;
+
+          .class-activities,
+          .course-map.study-player,
+          .profile {
+            a {
+              grid-gap: 0;
+
+              .add-info {
+                display: none !important;
+              }
+            }
+          }
+
+          .performance-chart {
+            .charts.gru-performance-chart {
+              min-width: 40px !important;
+            }
+          }
+        }
+        /* Small devices (portrait tablets and large phones, 768px and up) */
+        @media only screen and (min-width: 768px) {
+          grid-template-columns: 90px 60px 1fr 60px 60px 60px;
+
+          .class-activities,
+          .course-map.study-player,
+          .profile {
+            a {
+              grid-gap: 0;
+
+              .add-info {
+                display: none !important;
+              }
+            }
+          }
+        }
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+          grid-template-columns: 90px 120px 1fr 60px 60px 60px;
+
+          .class-activities,
+          .course-map.study-player,
+          .profile {
+            a {
+              grid-gap: 5px;
+
+              .add-info {
+                display: inline-block !important;
+              }
+            }
+          }
+        }
+      }
+
+      &.no-class-info {
+        grid-template-columns: 90px 160px 120px 115px 1fr 59px 105px 105px;
+        /* Extra small devices (phones, 600px and down) */
+        @media only screen and (max-width: 600px) {
+          grid-template-columns: 50px 40px 40px 40px 1fr 40px 45px 45px;
+
+          .performance,
+          .performance-summary {
+            .score {
+              font-size: 16px;
+            }
+
+            .label {
+              font-size: 5px;
+            }
+          }
+        }
+        @media only screen and (min-width: 768px) {
+          grid-template-columns: 90px 50px 50px 50px 1fr 59px 105px 105px;
+        }
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+          grid-template-columns: 90px 160px 120px 115px 1fr 59px 105px 105px;
+        }
+      }
       /* Extra small devices (phones, 600px and down) */
       @media only screen and (max-width: 600px) {
         grid-template-columns: 50px 40px 40px 40px 1fr 40px 40px 40px;
@@ -234,7 +375,6 @@
       .performance-chart {
         display: grid;
         border-left: 1px solid $white;
-        border-right: 1px solid $white;
         height: 51px;
         align-items: center;
 
@@ -248,8 +388,6 @@
           height: 100%;
           cursor: pointer;
           min-width: 59px;
-          padding-left: 1px;
-          padding-right: 2px;
 
           .container-box {
             height: 51px;
@@ -266,9 +404,10 @@
       .performance,
       .performance-summary {
         display: grid;
-        margin: auto;
+        justify-content: center;
         align-items: center;
         height: 51px;
+        border-left: 1px solid $white;
 
         a {
           color: $white;
@@ -276,6 +415,24 @@
 
         .tooltip {
           display: none !important;
+        }
+
+        .score {
+          font-weight: 900;
+          font-size: 30px;
+          height: 35px;
+          line-height: 35px;
+          display: block;
+          text-align: center;
+        }
+
+        .label {
+          font-size: 12px;
+          line-height: 8px;
+          text-transform: uppercase;
+          font-weight: 700;
+          display: block;
+          text-align: center;
         }
       }
     }

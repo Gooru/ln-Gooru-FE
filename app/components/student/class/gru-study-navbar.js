@@ -131,6 +131,8 @@ export default Ember.Component.extend({
 
   navTitle: null,
 
+  ILActivity: null,
+
   /**
    * @property {Boolean}
    * Computed property  to identify class is started or not
@@ -138,6 +140,12 @@ export default Ember.Component.extend({
   hasStarted: Ember.computed('performanceSummary', function() {
     const scorePercentage = this.get('performanceSummary.score');
     return scorePercentage !== null && scorePercentage >= 0;
+  }),
+
+  isILActivity: Ember.computed('sourceType', function() {
+    let sourceType = this.get('sourceType');
+    let ILActivity = this.get('ILActivity');
+    return sourceType === 'ILActivity' || ILActivity;
   }),
 
   // -------------------------------------------------------------------------
