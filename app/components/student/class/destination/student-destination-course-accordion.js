@@ -193,16 +193,7 @@ export default Ember.Component.extend({
       skippedContents: skippedContentsPromise
     })
       .then(function(hash) {
-        // component.set('skippedContents', hash.skippedContents);
-        let content = {
-          'units':['f83b395b-9d17-4da6-9542-cea235dadc70', '8020c16c-992b-4a88-b428-f737ee89db34'],
-          'lessons':['ff529e45-0974-466b-b68c-ef36d9cc73ff'],
-          'assessments':[],
-          'collections':[],
-          'assessmentsExternal':[],
-          'collectionsExternal':[]
-        };
-        component.set('skippedContents', content);
+        component.set('skippedContents', hash.skippedContents);
         return hash.skippedContents;
       })
       .catch(function() {
