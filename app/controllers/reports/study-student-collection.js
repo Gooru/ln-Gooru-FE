@@ -93,6 +93,10 @@ export default StudentCollection.extend({
           })
         )
         .then(({ mapLocationNxt, attemptData }) => {
+          if (controller.get('hasSuggestion')) {
+            mapLocationNxt.context.set('status', 'content-served');
+          }
+
           mapLocationNxt.context.set('score', attemptData.get('averageScore'));
           return navigateMapService.next(mapLocationNxt.context);
         })
@@ -178,9 +182,13 @@ export default StudentCollection.extend({
       studyPlayerController.set('isFullScreen', !isFullScreen);
       controller.set('isFullScreen', !isFullScreen);
       if (isFullScreen) {
-        Ember.$('body').removeClass('fullscreen').addClass('fullscreen-exit');
+        Ember.$('body')
+          .removeClass('fullscreen')
+          .addClass('fullscreen-exit');
       } else {
-        Ember.$('body').removeClass('fullscreen-exit').addClass('fullscreen');
+        Ember.$('body')
+          .removeClass('fullscreen-exit')
+          .addClass('fullscreen');
       }
     }
   },

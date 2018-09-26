@@ -98,6 +98,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     const route = this;
     const controller = route.get('controller');
     const navMapServc = route.get('navigateMapService');
+    let locationContext = currentLocationToMapContext(currentLocation);
+    controller.set('locationContext', locationContext);
     let options = {
         role: ROLES.STUDENT,
         source: PLAYER_EVENT_SOURCE.COURSE_MAP,
@@ -112,14 +114,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       ); //Complete
     } else if (currentLocation.get('status') === 'complete') {
       //content_served
-      nextPromise = navMapServc.contentServedResource(
-        currentLocationToMapContext(currentLocation)
-      );
+      nextPromise = navMapServc.contentServedResource(locationContext);
     } else {
-      // Next not required, get the params from current location
-      nextPromise = route.nextPromiseHandler(
-        currentLocationToMapContext(currentLocation)
-      );
+      // Next not required, get the params from current location when in-progress
+      // in-progress case- when in progress score is null by location api
+      nextPromise = route.nextPromiseHandler(locationContext);
     }
 
     nextPromise.then(route.nextPromiseHandler).then(parsedOptions => {
@@ -134,12 +133,27 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     let queryParams = {
       role: ROLES.STUDENT,
       source: PLAYER_EVENT_SOURCE.COURSE_MAP,
-      courseId: hasSuggestions(resp) ? resp.context.courseId : resp.courseId // Only in case of suggestions we dont have courseId in suggestion
+      courseId: hasSuggestions(resp) ? resp.context.courseId : resp.courseId, // Only in case of suggestions we dont have courseId in suggestion
+      classId: hasSuggestions(resp) ? resp.context.classId : resp.classId // Only in case of suggestions we dont have classId in suggestion
     };
     queryParams = createStudyPlayerQueryParams(
       hasSuggestions(resp) ? resp.suggestions[0] : resp.context || resp,
       queryParams
     );
+
+    var respctx = hasSuggestions(resp) ? resp.context : resp;
+    queryParams.lessonId = respctx.lessonId;
+    queryParams.courseId = respctx.courseId;
+    queryParams.collectionId = respctx.collectionId;
+    queryParams.unitId = respctx.unitId;
+    queryParams.collectionType = resp.type;
+    queryParams.type = respctx.itemType;
+    queryParams.role = ROLES.STUDENT;
+    queryParams.source = PLAYER_EVENT_SOURCE.COURSE_MAP;
+
+    if (hasSuggestions(resp)) {
+      queryParams.hasSuggestion = resp.suggestions[0].id;
+    }
     return Ember.RSVP.resolve(queryParams);
   },
 
@@ -148,9 +162,13 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    * @param options {object} is the queryParams required to launch study-player
    */
   launchStudyPlayer(queryParams) {
-    console.log('launchStudyPlayer', queryParams); //eslint-disable-line
     const route = this;
-    route.transitionTo('study-player', queryParams.courseId, { queryParams });
+    console.log('launchStudyPlayer', queryParams); //eslint-disable-line
+    if (queryParams.hasSuggestion) {
+      route.transitionTo('reports.study-student-collection', { queryParams });
+    } else {
+      route.transitionTo('study-player', queryParams.courseId, { queryParams });
+    }
   },
 
   // -------------------------------------------------------------------------

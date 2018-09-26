@@ -9,6 +9,10 @@ export function createStudyPlayerQueryParams(context, options) {
     source: options.source,
     courseId: options.courseId
   };
+
+  if (options.classId) {
+    queryParams.classId = options.classId;
+  }
   Object.assign(queryParams, context);
   return queryParams;
 }
