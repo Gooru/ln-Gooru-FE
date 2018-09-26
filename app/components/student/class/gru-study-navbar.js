@@ -101,6 +101,9 @@ export default Ember.Component.extend({
   willDestroyElement() {
     this._super(...arguments);
     this.set('selectedMenuItem', null);
+    Ember.$('body')
+      .removeClass('fullscreen')
+      .removeClass('fullscreen-exit');
   },
 
   // -------------------------------------------------------------------------
