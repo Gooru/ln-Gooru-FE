@@ -10,6 +10,7 @@ export default Ember.Route.extend({
       refreshModel: true
     }
   },
+
   /**
    * @type {ProfileService} Service to retrieve profile information
    */
@@ -38,7 +39,6 @@ export default Ember.Route.extend({
    */
   model: function(params) {
     let route = this;
-    this.loadAboutPageIfRouteNotExist();
     //Steps for Take a Tour functionality
     const tourSteps = Ember.A([
       {
@@ -102,15 +102,6 @@ export default Ember.Route.extend({
       tourSteps: tourSteps,
       loginUserProfile: null
     });
-  },
-
-  loadAboutPageIfRouteNotExist() {
-    const route = this;
-    let pathname = window.location.pathname;
-    let routeLocationPath = pathname.split('/')[2];
-    if (!routeLocationPath) {
-      route.transitionTo('profile.about');
-    }
   },
 
   /**

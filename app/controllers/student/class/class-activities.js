@@ -44,8 +44,20 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         activityDate,
         studentPerformance
       };
-      component.set('showStudentDcaReport', true);
+      if (collection.get('format') === 'assessment-external') {
+        component.set('isShowStudentExternalAssessmentReport', true);
+        component.set('showStudentDcaReport', false);
+      } else {
+        component.set('showStudentDcaReport', true);
+        component.set('isShowStudentExternalAssessmentReport', false);
+      }
       component.set('studentReportContextData', params);
+    },
+
+    onClosePullUp() {
+      let component = this;
+      component.set('isShowStudentExternalAssessmentReport', false);
+      component.set('studentDcaReport', false);
     }
   },
 
@@ -77,7 +89,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   /**
    * @property {boolean} Indicates if there are class activities
    */
-  showClassActivities: Ember.computed.gt('classActivities.length', 0)
+  showClassActivities: Ember.computed.gt('classActivities.length', 0),
+
+  /**
+   * @property {Boolean} isShowStudentExternalAssessmentReport
+   */
+  isShowStudentExternalAssessmentReport: false,
+
+  /**
+   * @property {Boolean} studentDcaReport
+   */
+  studentDcaReport: false
 
   // -------------------------------------------------------------------------
   // Observers

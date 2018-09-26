@@ -1,7 +1,7 @@
 <div class="panel {{if hasStarted 'has-course' 'no-course'}}">
   {{#if course}}
     <div class="panel-heading" style="background-color:{{grade-color class.performanceSummary.score}}">
-      <div class="title ellipsis">
+      <div class="title ellipsis" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}">
         {{#link-to 'student.class.course-map' class.id}}
           {{truncate text=class.title maxLength=25}}
         {{/link-to}}
@@ -17,26 +17,26 @@
           <div class="start-studying" {{action "playCollection"}}>
             {{t "student-landing.start-studying"}}
           </div>
-        {{else}}
-          <div class="current-activity">
-            {{#if isCompleted}}
-              {{t "student-landing.last-activity"}}
-            {{else}}
-              {{t "student-landing.resume-current-activity"}}
-            {{/if}}
-           </div>
+  {{else}}
+    <div class="current-activity">
+      {{#if isCompleted}}
+        {{t "student-landing.last-activity"}}
+      {{else}}
+        {{t "student-landing.resume-current-activity"}}
+      {{/if}}
+    </div>
         {{/unless}}
 
         {{#if class.currentLocation}}
           <div class="title-section">
-          {{#if showCurrentLocation}}
-            <i class="{{collectionType}}"></i>
-            <div class="title pointer" alt="{{class.currentLocation.collectionTitle}}" {{action "playCollection"}}>
-              {{truncate text=currentLocationTitle maxLength=90}}
-            </div>
-          {{else}}
-            <span>{{t "student-landing.not-available"}}</span>
-          {{/if}}
+            {{#if showCurrentLocation}}
+              <i class="{{collectionType}}"></i>
+              <div class="title pointer" alt="{{class.currentLocation.collectionTitle}}" {{action "playCollection"}}>
+                {{truncate text=currentLocationTitle maxLength=90}}
+              </div>
+            {{else}}
+              <span>{{t "student-landing.not-available"}}</span>
+            {{/if}}
           </div>
         {{/if}}
       </div>
@@ -71,7 +71,7 @@
     </div>
   {{else}}
     <div class="panel-heading">
-      <div class="title">
+      <div class="title" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}">
         {{#link-to 'student.class.course-map' class.id}}
           {{truncate text=class.title maxLength=25}}
         {{/link-to}}
@@ -105,7 +105,7 @@
         </ul>
       </div>
       <div class="performance">
-        <div class="percentage" >
+        <div class="percentage">
           {{scorePercentage}}
         </div>
         <div class="completion-chart">

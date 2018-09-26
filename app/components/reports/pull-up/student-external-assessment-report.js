@@ -136,6 +136,11 @@ export default Ember.Component.extend({
       this.closePullUp(closeAll);
     },
 
+    onCloseSuggest() {
+      // on close suggest callback
+      return true;
+    },
+
     /**
      * Trigger when suggestion button got clicked
      */
@@ -236,7 +241,6 @@ export default Ember.Component.extend({
             'id',
             context.get('collectionId')
           );
-          component.set('collections', collections);
           if (!collection.get('isSuggestedContent')) {
             component.set('showSuggestion', true);
             component.loadSuggestion();
@@ -248,7 +252,7 @@ export default Ember.Component.extend({
   loadSuggestion: function() {
     let component = this;
     component.set('isSuggestionLoading', true);
-    let collection = this.get('collections');
+    let collection = this.get('externalAssessmentContent');
     let taxonomies = null;
     let tags = component.get('tags');
     if (tags) {

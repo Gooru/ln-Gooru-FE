@@ -348,6 +348,9 @@ $box-shadow: 1px -1px;
 @import "components/reports/pull-up/student-unit-report";
 @import "components/reports/pull-up/student-lesson-report";
 @import "components/reports/pull-up/dca-student-collection-report";
+@import "components/reports/pull-up/dca-teacher-external-assessment-report-list-view";
+@import "components/reports/pull-up/dca-teacher-external-assessment-report-grid-view";
+@import "components/reports/pull-up/dca-student-external-assessment-report";
 @import "components/reports/pull-up/teacher-external-assessment-report-list-view";
 @import "components/reports/pull-up/teacher-external-assessment-report-grid-view";
 @import "components/reports/pull-up/open-ended-report-pull-up";
@@ -407,3 +410,12 @@ $box-shadow: 1px -1px;
 @import "components/reports/pull-up/domain-competency-report";
 @import "components/reports/pull-up/competency-content-report";
 @import "components/reports/pull-up/accordion/collection-accordion";
+
+
+//Student Nav Math class join landing
+@import "components/student/class/student-class-landing";
+@import "components/student/class/gru-class-grade";
+@import "components/student/class/student-inspect-destination";
+@import "components/proficiency/student-inspect-competency-chart";
+@import "components/student/class/destination/student-destination-course-accordion";
+@import "components/proficiency/taxonomy-grades";

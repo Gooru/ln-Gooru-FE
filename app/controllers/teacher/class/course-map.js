@@ -58,7 +58,7 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  queryParams: ['location'],
+  queryParams: ['location', 'tab'],
 
   /**
    * Combination of unit, lesson and resource (collection or assessment)
@@ -67,6 +67,8 @@ export default Ember.Controller.extend({
    * location='uId001+lId002+cId003'
    */
   location: '',
+
+  tab: null,
 
   isFirstLoad: true,
 

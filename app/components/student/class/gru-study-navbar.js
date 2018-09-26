@@ -3,6 +3,8 @@ import { GRU_FEATURE_FLAG } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   classNames: ['gru-study-navbar'],
 
+  classNameBindings: ['isStudentLanding:student-landing'],
+
   session: Ember.inject.service('session'),
 
   isFeatureEnabled: Ember.computed(function() {
@@ -21,7 +23,12 @@ export default Ember.Component.extend({
       if (component.get('onItemSelected')) {
         component.selectItem(item);
         if (item === 'class-info') {
-          $('.classroom-information').toggle({ direction: 'left' }, 1000);
+          $('.classroom-information').toggle(
+            {
+              direction: 'left'
+            },
+            1000
+          );
         } else {
           component.sendAction('onItemSelected', item);
         }
@@ -69,6 +76,7 @@ export default Ember.Component.extend({
       .currentPath;
 
     let component = this;
+
     if (currentPath === 'student.class.profile') {
       component.set('selectedMenuItem', 'profile');
     } else if (currentPath === 'student.class.course-map') {
@@ -97,11 +105,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Properties
-  /**
-   * @property {Class} class
-   */
-  class: null,
-
   /**
    * @property {String|Function} onItemSelected - event handler for when an menu item is selected
    */

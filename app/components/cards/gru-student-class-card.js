@@ -33,7 +33,17 @@ export default Ember.Component.extend({
       const component = this;
       const currentLocation = component.get('class.currentLocation');
       let classData = component.get('class');
-      this.sendAction('onPlayCollection', currentLocation, classData);
+      let setting = classData.get('setting');
+      let isPremiumCourse = setting
+        ? setting['course.premium'] && setting['course.premium'] === true
+        : false;
+      let isGradeAdded = classData.get('grade');
+      if (isPremiumCourse && !currentLocation && isGradeAdded) {
+        component.get('router').transitionTo('student.class.course-map', classData.get('id'));
+      } else {
+        component.sendAction('onPlayCollection', currentLocation, classData);
+      }
+
     },
 
     /**
@@ -47,6 +57,11 @@ export default Ember.Component.extend({
         this.sendAction('onItemSelected', item, classId);
       }
     }
+  },
+
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
   },
   // -------------------------------------------------------------------------
   // Events
@@ -84,9 +99,7 @@ export default Ember.Component.extend({
    * @property {boolean} Show or not the current location
    */
   showCurrentLocation: Ember.computed('class.currentLocation', function() {
-    return (
-      this.get('class.currentLocation')
-    );
+    return this.get('class.currentLocation');
   }),
 
   /**
@@ -178,9 +191,10 @@ export default Ember.Component.extend({
   currentLocationTitle: Ember.computed('class.currentLocation', function() {
     const currentLocation = this.get('class.currentLocation');
     let pathType = currentLocation.get('pathType');
-    let prepandText = pathType === 'route0' ? 'Pre-study: ': '';
+    let prepandText = pathType === 'route0' ? 'Pre-study: ' : '';
     return currentLocation
-      ? `${prepandText}${currentLocation.get('collectionTitle')}` : '';
+      ? `${prepandText}${currentLocation.get('collectionTitle')}`
+      : '';
   }),
 
   collectionType: Ember.computed('class.currentLocation', function() {

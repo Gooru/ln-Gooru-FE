@@ -108,6 +108,9 @@
         </div>
       </div>
       <div class="dca-past-date-list-container">
+        {{#if pastClassActivities}}
+          <p class="dca-past-activities-header">{{t 'student-landing.class.class-activities-tab.past-activities'}}</p>
+        {{/if}}
         {{#each pastClassActivities as |pastclassActivity|}}
           <div class="dca-date-view-container">
             <div class="dca-date-container">
@@ -166,6 +169,7 @@
     addedContentToDCA="addedContentToDCA"
     context=contextParams
     selectedSearchContentType=selectedSearchContentType
+    todaysClassActivities=todaysClassActivities.classActivities
   }}
 {{/if}}
 
