@@ -1,4 +1,9 @@
 <div class="student class {{if isShowNavigatorLanding 'student-class-landing'}}">
+  {{#if isNotAbleToStartPlayer}}
+    <div class="alert-player-error">
+      <div class="alert-status">{{t 'common.errors.no-studymaterial'}}</div>
+    </div>
+  {{/if}}
   {{gru-take-tour steps=steps containerClass='class-view-tour'}}
   <div class="header clearfix">
     <div class="go-back-container">

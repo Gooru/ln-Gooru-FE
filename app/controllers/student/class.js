@@ -130,6 +130,11 @@ export default Ember.Controller.extend({
     return isPremiumCourse && !currentLocation && isGradeAdded;
   }),
 
+  /**
+   * Property to identify when there is no content to play
+   */
+  isNotAbleToStartPlayer: false,
+
   // -------------------------------------------------------------------------
   // Methods
 

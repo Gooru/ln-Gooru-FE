@@ -382,7 +382,8 @@ export default Object.assign(quizzesTranslations, {
       'user-email-presence': 'Please enter a valid email.',
       'username-length': 'Username must be between 4 and 254 characters.',
       'forgot-password-gmail':
-        'Please use Google signin. We can\'t reset your password.'
+        'Please use Google signin. We can\'t reset your password.',
+      'no-studymaterial': 'The course assigned to this class does not have any study material in it. Please contact your teacher to fix this'
     },
     'essential-questions': 'Essential Questions',
     example: 'example: ',

@@ -59,7 +59,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       const route = this;
       const controller = route.get('controller');
       const currentItem = controller.get('menuItem');
-
+      controller.set('isNotAbleToStartPlayer', false);
       if (item !== currentItem) {
         controller.selectMenuItem(item);
         const queryParams = {
@@ -98,7 +98,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     const route = this;
     const controller = route.get('controller');
     const navMapServc = route.get('navigateMapService');
-    let locationContext = currentLocationToMapContext(currentLocation);
+    let locationContext = currentLocation ? currentLocationToMapContext(currentLocation) : null;
     controller.set('locationContext', locationContext);
     let options = {
         role: ROLES.STUDENT,
@@ -123,7 +123,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
 
     nextPromise.then(route.nextPromiseHandler).then(parsedOptions => {
       return route.launchStudyPlayer(parsedOptions);
-    });
+    })
+      .catch(() => {
+        controller.set('isNotAbleToStartPlayer', true);
+      });
   },
 
   /** returns options promise chain resolving response
@@ -140,7 +143,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       hasSuggestions(resp) ? resp.suggestions[0] : resp.context || resp,
       queryParams
     );
-
+    let isContentMapped = true;
     var respctx = hasSuggestions(resp) ? resp.context : resp;
     queryParams.lessonId = respctx.lessonId;
     queryParams.courseId = respctx.courseId;
@@ -150,11 +153,15 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     queryParams.type = respctx.itemType;
     queryParams.role = ROLES.STUDENT;
     queryParams.source = PLAYER_EVENT_SOURCE.COURSE_MAP;
-
     if (hasSuggestions(resp)) {
       queryParams.hasSuggestion = resp.suggestions[0].id;
     }
-    return Ember.RSVP.resolve(queryParams);
+    isContentMapped = !!queryParams.collectionId;
+    if (isContentMapped) {
+      return Ember.RSVP.resolve(queryParams);
+    } else {
+      return Ember.RSVP.reject(null);
+    }
   },
 
   /**
@@ -322,5 +329,9 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('contentVisibility', model.contentVisibility);
     controller.set('steps', model.tourSteps);
     controller.set('classmodel', model);
+  },
+
+  resetController(controller) {
+    controller.set('isNotAbleToStartPlayer', false);
   }
 });
