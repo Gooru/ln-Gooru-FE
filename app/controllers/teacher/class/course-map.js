@@ -284,6 +284,9 @@ export default Ember.Controller.extend({
      */
     onClosePullUp() {
       let controller = this;
+      controller.set('isShowCourseReport', false);
+      controller.set('isShowUnitReportPullUp', false);
+      controller.set('isShowLessonReportPullUp', false);
       controller.set('isShowStudentReport', false);
       controller.set('isShowStudentExternalAssessmentReport', false);
     },

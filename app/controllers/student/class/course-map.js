@@ -394,5 +394,9 @@ export default Ember.Controller.extend({
       loadUnitsPerformance: false
     });
     controller.set('studentCourseReportContext', params);
+  },
+  onClosePullUp() {
+    let controller = this;
+    controller.set('showCourseReport', false);
   }
 });

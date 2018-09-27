@@ -104,6 +104,12 @@ export default Ember.Component.extend({
       this.sendAction('teacherCollectionReport', params);
     },
 
+    onClosePullUp() {
+      let component = this;
+      component.set('showStudentLessonReport', false);
+      component.closePullUp(true);
+    },
+
     openStudentLessonReport(userId) {
       this.onOpenStudentLessonReport(userId);
     },
@@ -442,7 +448,7 @@ export default Ember.Component.extend({
       function() {
         component.set('showPullUp', false);
         if (closeAll) {
-          component.sendAction('onClosePullUp');
+          component.sendAction('onClosePullUp', true);
         }
       }
     );

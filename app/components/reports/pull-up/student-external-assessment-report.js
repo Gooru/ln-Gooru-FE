@@ -132,12 +132,8 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    closeAll() {
-      this.sendAction('onClosePullUp');
-    },
-
-    onPullUpClose() {
-      this.closePullUp();
+    onPullUpClose(closeAll) {
+      this.closePullUp(closeAll);
     },
 
     onCloseSuggest() {
@@ -198,7 +194,7 @@ export default Ember.Component.extend({
       function() {
         component.set('showPullUp', false);
         if (closeAll) {
-          component.sendAction('onClosePullUp', true);
+          component.sendAction('onClosePullUp');
         }
       }
     );
