@@ -68,7 +68,7 @@ export default Ember.Component.extend({
     let controller = this;
     let classData = controller.get('classData');
     let classGrade = classData.get('grade');
-    return classGrade ? parseInt(classGrade.objectAt(0)) : null;
+    return classGrade ? parseInt(classGrade) : null;
   }),
 
   /**

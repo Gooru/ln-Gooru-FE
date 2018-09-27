@@ -244,6 +244,16 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   studentsList: Ember.A([]),
 
+  /**
+   * @property {Boolean} isNoStudentJoined
+   * If there is none of students are joined in a class
+   */
+  isNoStudentJoined: Ember.computed('studentsList', function() {
+    let controller = this;
+    let studentsList = controller.get('studentsList');
+    return !studentsList.length > 0;
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 

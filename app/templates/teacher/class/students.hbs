@@ -4,7 +4,7 @@
       <div class="title">
         {{t 'class.info.students'}}
       </div>
-      <div class="competency-report" {{action "onOpenCompetencyReport"}}>
+      <div class="competency-report {{if isNoStudentJoined 'no-event'}}" {{action "onOpenCompetencyReport"}}>
         {{t 'report.competency-report.title'}}
       </div>
     </div>
@@ -24,7 +24,7 @@
               <th class='performance {{unless courseId 'no-event'}}' {{action "onOpenCourseReport"}}>
                 <span>{{t 'teacher-landing.class.students-tab.performance'}}</span>
               </th>
-              <th class='proficiency' {{action "onOpenCompetencyReport"}}>
+              <th class='proficiency {{if isNoStudentJoined 'no-event'}}' {{action "onOpenCompetencyReport"}}>
                 <span class="proficiency-header">{{t 'teacher-landing.class.students-tab.proficiency'}}</span>
                 <div class="proficiency-status">
                   <span class="mastered">{{t 'teacher-landing.class.students-tab.mastered'}}</span><span class="in-progress">{{t 'teacher-landing.class.students-tab.in-progress'}}</span>
