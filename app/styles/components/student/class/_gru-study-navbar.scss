@@ -48,6 +48,7 @@
       /*Default View */
       grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
 
+      /*Apply to independent-learning class and it has no class info */
       &.independent-learning.no-class-info {
         grid-template-columns: 90px 120px 1fr 60px 120px 120px;
         @media only screen and (max-width: 600px) {
@@ -104,6 +105,7 @@
           }
         }
       }
+
       /* Apply to independent-learning class */
       &.independent-learning {
         grid-template-columns: 90px 120px 1fr 60px 60px 60px;
@@ -162,6 +164,7 @@
         }
       }
 
+      /*Apply when it has no class info */
       &.no-class-info {
         grid-template-columns: 90px 160px 120px 115px 1fr 59px 105px 105px;
         /* Extra small devices (phones, 600px and down) */
