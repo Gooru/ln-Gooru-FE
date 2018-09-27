@@ -141,12 +141,12 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       queryParams
     );
 
-    var respctx = hasSuggestions(resp) ? resp.context : resp;
+    var respctx = hasSuggestions(resp) || resp.context ? resp.context : resp;
     queryParams.lessonId = respctx.lessonId;
     queryParams.courseId = respctx.courseId;
     queryParams.collectionId = respctx.collectionId;
     queryParams.unitId = respctx.unitId;
-    queryParams.collectionType = resp.type;
+    queryParams.collectionType = resp.type || respctx.type;
     queryParams.type = respctx.itemType;
     queryParams.role = ROLES.STUDENT;
     queryParams.source = PLAYER_EVENT_SOURCE.COURSE_MAP;
