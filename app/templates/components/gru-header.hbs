@@ -6,7 +6,7 @@
           {{#if session.isAnonymous}}
             <a aria-label="{{t "common.home"}}" href="{{marketingSiteUrl}}" target="_blank" class="navbar-brand home-link"></a>
           {{else}}
-            {{#link-to 'index' class="navbar-brand home-link"}}  {{/link-to}}
+            {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
           {{/if}}
         </div>
         <div class="search-navbar-form {{if session.isAnonymous 'anonymous' 'authenticated'}}">
@@ -36,22 +36,22 @@
           </form>
         </div>
         <div class="navbar-collapse">
-        {{#if showDropMenu}}
-        <div class="btn-group clearfix dropMenuLabelWidth">
-          <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary btn-sm ">
+          {{#if showDropMenu}}
+            <div class="btn-group clearfix dropMenuLabelWidth">
+              <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary btn-sm ">
               {{t i18n.locale}}
           </button>
-          <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-primary btn-sm dropdown-toggle ">
+              <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-primary btn-sm dropdown-toggle ">
             <span class="caret"></span>
             <span class="sr-only">{{t "common.choose-lang"}}</span>
           </button>
-          <ul class="dropdown-menu">
-              {{#each locales as |loc|}}
-              <li><a {{action 'setLocale' loc.id}}>{{loc.text}}</a></li>
-            {{/each}}
-          </ul>
-        </div>
-        {{/if}}
+              <ul class="dropdown-menu">
+                {{#each locales as |loc|}}
+                  <li><a {{action 'setLocale' loc.id}}>{{loc.text}}</a></li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/if}}
           <ul class="nav navbar-nav menu-navbar">
             {{#if session.isAnonymous}}
               <li class="navbar-nav-list visible-md visible-lg library-link">
@@ -60,32 +60,32 @@
                 {{/link-to}}
               </li>
               <li class="navbar-nav-list visible-md visible-lg">
-                {{#link-to 'sign-in' class="btn btn-info sign-in-button" tagName='button'}} {{t "common.login"}} {{/link-to}}
+                {{#link-to 'sign-in' class="btn btn-info sign-in-button" tagName='button' }} {{t "common.login"}} {{/link-to}}
               </li>
               <li class="navbar-nav-list visible-md visible-lg no-hover">
-                {{#link-to 'sign-up' class="btn btn-primary sign-up-button" tagName='button'}} {{t "common.signUp"}} {{/link-to}}
+                {{#link-to 'sign-up' class="btn btn-primary sign-up-button" tagName='button' }} {{t "common.signUp"}} {{/link-to}}
               </li>
               <li class="navbar-nav-list hidden-md hidden-lg dropdown xs-design">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true">{{gru-icon name='menu'}}</a>
                 <ul class="dropdown-menu" role="menu">
                   <li class="navbar-nav-list close-menu">
-                     <button class="btn dropdown-toggle" data-toggle="dropdown">{{gru-icon name='close'}}</button>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">{{gru-icon name='close'}}</button>
                   </li>
                   <li class="navbar-nav-list">
                     {{#link-to 'library'}} {{t "common.library"}} {{/link-to}}
                   </li>
-                    <li class="navbar-nav-list">
-                      {{#link-to 'sign-in' class="navbar-link sign-in-link" }} {{t "common.login"}} {{/link-to}}
-                    </li>
-                    <li class="navbar-nav-list">
-                        {{#link-to 'sign-up' class="navbar-link sign-up-link" }} {{t "common.signUp"}} {{/link-to}}
-                    </li>
+                  <li class="navbar-nav-list">
+                    {{#link-to 'sign-in' class="navbar-link sign-in-link" }} {{t "common.login"}} {{/link-to}}
+                  </li>
+                  <li class="navbar-nav-list">
+                    {{#link-to 'sign-up' class="navbar-link sign-up-link" }} {{t "common.signUp"}} {{/link-to}}
+                  </li>
                 </ul>
               </li>
             {{else}}
               {{#if profile.isResearcher}}
                 <li class="navbar-nav-list visible-md visible-lg study-link">
-                  <a {{action 'navigateToResearchApp' }} >
+                  <a {{action 'navigateToResearchApp' }}>
                     <span>{{t "user.rgo"}}</span>
                   </a>
                 </li>
@@ -96,40 +96,40 @@
                     <span>{{t "student-landing.my-study"}}</span>
                   {{/link-to}}
                 </li>
-              {{else}}
-                <li class="navbar-nav-list visible-md visible-lg classrooms-link">
-                  {{#link-to 'teacher-home'}}
-                    <span>{{t "user.classrooms"}}</span>
-                  {{/link-to}}
-                </li>
-                <li class="navbar-nav-list visible-md visible-lg content-link">
-                  {{#link-to 'profile.content.courses' session.userData.gooruUId}}
-                    <span>{{t "common.content-manager"}}</span>
-                  {{/link-to}}
-                </li>
-                <li class="navbar-nav-list visible-md visible-lg tools-link dropdown out-of-scope">
-                  <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="tools">{{t "common.tools"}}{{gru-icon name='arrow_drop_down'}}</span>
+            {{else}}
+              <li class="navbar-nav-list visible-md visible-lg classrooms-link">
+                {{#link-to 'teacher-home'}}
+                  <span>{{t "user.classrooms"}}</span>
+                {{/link-to}}
+              </li>
+              <li class="navbar-nav-list visible-md visible-lg content-link">
+                {{#link-to 'profile.content.courses' session.userData.gooruUId}}
+                  <span>{{t "common.content-manager"}}</span>
+                {{/link-to}}
+              </li>
+              <li class="navbar-nav-list visible-md visible-lg tools-link dropdown out-of-scope">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="tools">{{t "common.tools"}}{{gru-icon name='arrow_drop_down'}}</span>
                   </a>
-                  <ul class="tools-menu dropdown-menu pull-left" role="menu" id="tools">
-                    <li class="navbar-nav-list assessments-link out-of-scope">
-                      <a class="navbar-link">
+                <ul class="tools-menu dropdown-menu pull-left" role="menu" id="tools">
+                  <li class="navbar-nav-list assessments-link out-of-scope">
+                    <a class="navbar-link">
                         {{t "common.live-assessments"}}
                       </a>
-                    </li>
-                    <li class="navbar-nav-list content-link">
-                      {{#link-to 'profile.content.courses' session.userData.gooruUId}}
-                        <a class="navbar-link">
+                  </li>
+                  <li class="navbar-nav-list content-link">
+                    {{#link-to 'profile.content.courses' session.userData.gooruUId}}
+                      <a class="navbar-link">
                           {{t "common.content-manager"}}
                         </a>
-                      {{/link-to}}
-                    </li>
-                    <li class="navbar-nav-list performance-dashboard-link out-of-scope">
-                      <a class="navbar-link">
+                    {{/link-to}}
+                  </li>
+                  <li class="navbar-nav-list performance-dashboard-link out-of-scope">
+                    <a class="navbar-link">
                         {{t "common.performance-dashboard"}}
                       </a>
-                    </li>
-                  </ul>
-                </li>
+                  </li>
+                </ul>
+              </li>
               {{/unless}}
               <li class="navbar-nav-list visible-md visible-lg library-link">
                 {{#link-to 'library'}}
@@ -153,22 +153,22 @@
                   </a>
                 </li>
               {{/unless}}
-            
-              {{#if isFeatureEnabled }}      
-               
-              <li class="navbar-nav-list visible-md visible-lg notifications-link">
-                <a style="opacity:1;">
+
+              {{#if isFeatureEnabled }}
+
+                <li class="navbar-nav-list visible-md visible-lg notifications-link">
+                  <a style="opacity:1;">
                   {{notification/notification-indicator}}
                 </a>
-              </li>
+                </li>
               {{/if}}
-                <li class="navbar-nav-list visible-md visible-lg profile-link">
-                  {{#link-to (if profile.isStudent 'profile.proficiency' 'profile.content.courses') session.userData.gooruUId class="profile"}}
-                    <div class="img-container pull-left">
-                      <img class="img-responsive" src="{{session.userData.avatarUrl}}"/>
-                    </div>
-                    <span class="username">{{truncate text=session.userData.username maxLength=18}}</span>
-                  {{/link-to}}
+              <li class="navbar-nav-list visible-md visible-lg profile-link">
+                {{#link-to 'profile.about' session.userData.gooruUId class="profile" }}
+                  <div class="img-container pull-left">
+                    <img class="img-responsive" src="{{session.userData.avatarUrl}}" />
+                  </div>
+                  <span class="username">{{truncate text=session.userData.username maxLength=18}}</span>
+                {{/link-to}}
               </li>
               <li class="navbar-nav-list visible-md visible-lg dropdown">
                 <a class="profile-more dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -197,12 +197,12 @@
                         <span>{{t "student-landing.my-study"}}</span>
                       {{/link-to}}
                     </li>
-                  {{else}}
-                    <li class="navbar-nav-list">
-                      {{#link-to 'teacher-home'}}
-                        <span>{{t "user.classrooms"}}</span>
-                      {{/link-to}}
-                    </li>
+            {{else}}
+              <li class="navbar-nav-list">
+                {{#link-to 'teacher-home'}}
+                  <span>{{t "user.classrooms"}}</span>
+                {{/link-to}}
+              </li>
                   {{/unless}}
                   <li class="navbar-nav-list">
                     {{#link-to 'library'}}
@@ -222,7 +222,7 @@
                     </li>
                   {{/unless}}
                   <li class="navbar-nav-list">
-                    {{#link-to (if profile.isStudent 'profile.proficiency' 'profile.content.courses') session.userData.gooruUId class="navbar-link"}}
+                    {{#link-to (if profile.isStudent 'profile.proficiency' 'profile.content.courses') session.userData.gooruUId class="navbar-link" }}
                       <span class="">{{t "common.profile"}}</span>
                     {{/link-to}}
                   </li>
