@@ -20,6 +20,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   classNames: ['gru-class-navbar', 'teacher'],
 
+  /**
+   * Controls display of notification list, typical use from header is to hide it as required.
+   */
+  displayNotificationList: null,
+
   isFeatureEnabled: Ember.computed(function() {
     let feature = 'notifications';
     return GRU_FEATURE_FLAG[feature];
@@ -64,6 +69,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
       if (this.onCollapseExpandClicked) {
         this.sendAction('onCollapseExpandClicked', this.get('toggleState'));
       }
+    },
+
+    closeNotificationList() {
+      this.set('displayNotificationList', false);
     }
   },
 

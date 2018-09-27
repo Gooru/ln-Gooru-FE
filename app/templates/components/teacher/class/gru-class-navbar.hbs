@@ -1,4 +1,4 @@
-<div class="header-panel">
+<div class="header-panel" {{action 'closeNotificationList'}} >
   <div class="nav-body">
     <div class="app-brand">
       {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
@@ -30,7 +30,7 @@
     {{/if}}
     {{#if isFeatureEnabled }}
       <div class="notification-tab">
-        {{notification/notification-indicator accessorClass='class' isTeacher=true class=class }}
+        {{notification/notification-indicator accessorClass='class' isTeacher=true classId=class.id }}
       </div>
     {{/if}}
     <div class="performance-summary  {{unless hasStarted 'not-started'}}" {{action 'onOpenCourseReport'}}>

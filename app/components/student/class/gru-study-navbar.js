@@ -12,6 +12,11 @@ export default Ember.Component.extend({
     return GRU_FEATURE_FLAG[feature];
   }),
 
+  /**
+   * Controls display of notification list, typical use from header is to hide it as required.
+   */
+  displayNotificationList: null,
+
   actions: {
     /**
      *
@@ -59,6 +64,10 @@ export default Ember.Component.extend({
      */
     openCourseReport() {
       this.sendAction('openCourseReport');
+    },
+
+    closeNotificationList() {
+      this.set('displayNotificationList', false);
     }
   },
 

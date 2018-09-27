@@ -1,4 +1,4 @@
-<div class="container-fluid {{if searchInputDirty 'search-input-dirty'}}">
+<div class="container-fluid {{if searchInputDirty 'search-input-dirty'}}" {{action 'closeNotificationList'}}>
   <div class="row">
     <div class="col-xs-12">
       <nav class="navbar navbar-default row">
@@ -153,13 +153,11 @@
                   </a>
                 </li>
               {{/unless}}
-
-              {{#if isFeatureEnabled }}
-
-                <li class="navbar-nav-list visible-md visible-lg notifications-link">
-                  <a style="opacity:1;">
-                  {{notification/notification-indicator}}
-                </a>
+              {{#if isFeatureEnabled }}      
+               
+              <li class="navbar-nav-list visible-md visible-lg notifications-link">
+                <a style="opacity:1;">
+                  {{notification/notification-indicator displayNotificationList=displayNotificationList}}                </a>
                 </li>
               {{/if}}
               <li class="navbar-nav-list visible-md visible-lg profile-link">

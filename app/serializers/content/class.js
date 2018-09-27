@@ -94,7 +94,7 @@ export default Ember.Object.extend({
       courseId: payload.course_id,
       courseTitle: payload.course_title,
       greeting: payload.greeting,
-      grade: payload.grade || null,
+      grade: Array.isArray(payload.grade) ? payload.grade.objectAt(0) : payload.grade,
       classSharing: payload.class_sharing,
       coverImage: payload.cover_image,
       minScore: payload.min_score === 0 ? null : payload.min_score,
