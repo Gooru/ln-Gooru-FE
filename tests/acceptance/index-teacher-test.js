@@ -1,4 +1,4 @@
-import { skip } from 'qunit';
+import { test } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 
@@ -14,7 +14,7 @@ moduleForAcceptance('Acceptance | index-teacher', {
   }
 });
 
-skip('logged in as a teacher and home-link button navigation', function(assert) {
+test('logged in as a teacher and home-link button navigation', function(assert) {
   visit('/');
 
   andThen(function() {
@@ -29,8 +29,8 @@ skip('logged in as a teacher and home-link button navigation', function(assert) 
     andThen(function() {
       assert.equal(
         currentURL(),
-        '/id-for-pochita/content/courses',
-        'Navigating to profile should display "/id-for-pochita/content/courses"'
+        '/id-for-pochita/about',
+        'Navigating to profile should display "/id-for-pochita/about"'
       );
       const $navHeader = find('.gru-header .navbar-header');
       click($navHeader.find('.home-link'));
