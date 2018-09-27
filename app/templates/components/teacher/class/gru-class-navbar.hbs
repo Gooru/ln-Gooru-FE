@@ -30,7 +30,7 @@
     {{/if}}
     {{#if isFeatureEnabled }}
       <div class="notification-tab">
-        {{notification/notification-indicator accessorClass='class' isTeacher=true class=class }}
+        {{notification/notification-indicator accessorClass='class' isTeacher=true classId=class.id }}
       </div>
     {{/if}}
     <div class="performance-summary  {{unless hasStarted 'not-started'}}" {{action 'onOpenCourseReport'}}>
