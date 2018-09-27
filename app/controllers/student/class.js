@@ -118,17 +118,7 @@ export default Ember.Controller.extend({
   /**
    * @property {Boolean} isShowNavigatorLanding
    */
-  isShowNavigatorLanding: Ember.computed('class.currentLocation', function() {
-    let controller = this;
-    let classData = controller.get('class');
-    let currentLocation = classData.get('currentLocation') || null;
-    let setting = classData.get('setting');
-    let isPremiumCourse = setting
-      ? setting['course.premium'] && setting['course.premium'] === true
-      : false;
-    let isGradeAdded = classData.get('grade');
-    return isPremiumCourse && !currentLocation && isGradeAdded;
-  }),
+  isShowNavigatorLanding: false,
 
   // -------------------------------------------------------------------------
   // Methods
