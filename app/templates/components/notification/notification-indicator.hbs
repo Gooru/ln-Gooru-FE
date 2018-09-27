@@ -1,5 +1,5 @@
 {{#if hasActiveNotifications }}
-    <span class= {{model.notificationlocation}} {{action "showNotificationList"}}>
+    <span class= {{model.notificationlocation}} {{action "showNotificationList" bubbles=false}}>
         {{gru-icon name='notifications'}}
         {{#if (eq notifcationCount 0)}}
             {{log notifcationCount}}
