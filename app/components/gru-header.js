@@ -99,6 +99,12 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       this.set('isTyping', false);
     },
 
+    navigateToSupport() {
+      let component = this;
+      let supportUrl = component.get('supportSiteUrl');
+      window.open(supportUrl, '_blank');
+    },
+
     navigateToResearchApp: function() {
       let researcher = EndPointsConfig.getResearcher();
       if (researcher && researcher.redirectURL) {
