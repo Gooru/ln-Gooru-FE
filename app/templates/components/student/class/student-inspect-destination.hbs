@@ -4,15 +4,18 @@
   </div>
   <div class="course-container">
     <div class="course-info">
-      <div class="course-thumbnail" style="background-image: url({{courseData.thumbnailUrl}})">
+      <div class="course-thumbnail" style="background-image: url({{gradeData.thumbnail}})">
+        {{destinationGradeLevel}}
       </div>
       <div class="course-title">
-        {{courseData.title}}
+        <span>{{courseData.title}}</span><br>
+        <span>{{gradeData.grade}}</span><br>
+        <span class="brand">Gooru</span>
         <div class="direction-icon" {{action "onMoveNext" (if isRoute0 'playNext' 'inspect-destination')}}>
           {{gru-icon name=(if isRoute0 'near_me' 'directions')}}
         </div>
         <div class="content-count">
-          <span class="unit-count" title="Unit"><i class="icon"></i> <span class="count">{{courseData.unitCount}}</span></span>
+          <span class="competency-count" ><i class="icon"></i> <span class="count"></span></span>
         </div>
       </div>
     </div>
@@ -38,7 +41,7 @@
       </div>
     {{else}}
       <div class="course-description">
-        <div>{{courseData.description}}</div>
+        <div>{{safe-html gradeData.description}}</div>
       </div>
     {{/if}}
 

@@ -2,7 +2,7 @@
   .inspect-destination-container {
     display: grid;
     grid-template-columns: auto 650px;
-    height: calc(100vh - 63px);
+    max-height: calc(100vh - 50px);
     justify-content: center;
     overflow-x: auto;
     .destination-chart-container {
@@ -10,12 +10,24 @@
       background-color: #ffffff;
       box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
       padding: 8px;
-      height: 95%;
     }
     .course-container {
       width: 99%;
-      margin-top: 30px;
-      height: 90%;
+      padding-top: 30px;
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        height: 6px;
+        width: 8px;
+        background-color: $white;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $gray-light;
+        border: 1px solid $gray-light;
+        border-radius: 5px;
+      }
       .course-info {
         height: 84px;
         background-color: $white;
@@ -23,9 +35,15 @@
         display: grid;
         grid-template-columns: 82px auto;
         margin-bottom: 4px;
+        margin-left: 4px;
         .course-thumbnail {
           background-size: contain;
           background-repeat: no-repeat;
+          font-size: 60px;
+          line-height: 84px;
+          font-weight: bold;
+          color: #212121;
+          text-align: center;
         }
         .course-title {
           font-size: 16px;
@@ -33,6 +51,11 @@
           color: #4990e2;
           margin-left: 30px;
           position: relative;
+          .brand {
+            font-size: 12px;
+            font-weight: bold;
+            color: rgba(0, 0, 0, 0.87);
+          }
           .direction-icon {
             width: 58px;
             height: 57px;
@@ -81,6 +104,8 @@
         font-size: 15px;
         color: #525659;
         line-height: 23px;
+        box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
+        margin-left: 4px;
         div {
           width: 90%;
           margin: auto;
@@ -90,7 +115,8 @@
         background-color: $white;
         margin-bottom: 30px;
         margin-top: 3px;
-        box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
+        margin-left: 4px;
         .route0-comment {
           display: grid;
           grid-template-columns: 85px auto;
@@ -166,6 +192,8 @@
       }
       .course-map-accordion-container {
         max-height: 375px;
+        box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
+        margin-left: 4px;
       }
     }
   }

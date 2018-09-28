@@ -9,8 +9,12 @@
     pointer-events: none;
 
     .header-panel {
-      .app-brand {
+      .tab {
+        opacity: 0.5;
+      }
+      .app-brand, .class-activities {
         pointer-events: auto;
+        opacity: 1;
       }
     }
   }

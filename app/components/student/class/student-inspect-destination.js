@@ -103,6 +103,14 @@ export default Ember.Component.extend({
    */
   gradeData: null,
 
+  /**
+   * @property {Number} destinationGradeLevel
+   */
+  destinationGradeLevel: Ember.computed('classGrade', function() {
+    let component = this;
+    return parseInt(component.get('classGrade')) - 1;
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
