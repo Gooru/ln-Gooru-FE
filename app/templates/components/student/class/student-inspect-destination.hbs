@@ -2,7 +2,19 @@
   <div class="destination-chart-container">
     {{proficiency.student-inspect-competency-chart route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode onSelectGrade="onSelectGrade"}}
   </div>
-  <div class="course-container">
+
+  <div class="grade-data-container">
+    <div class="grade-title">
+      {{gradeData.grade}}
+    </div>
+    <div class="grade-description">
+      {{safe-html gradeData.description}}
+    </div>
+    <div class="next-route">
+      {{gru-icon name="directions"}} Show me my route
+    </div>
+  </div>
+  <div class="course-container hide">
     <div class="course-info">
       <div class="course-thumbnail" style="background-image: url({{gradeData.thumbnail}})">
         {{destinationGradeLevel}}

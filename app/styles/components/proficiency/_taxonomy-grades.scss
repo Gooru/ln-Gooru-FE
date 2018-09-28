@@ -51,5 +51,23 @@
          top:1px;
        }
     }
+
+    //TODO new screen changes
+    .grade-container {
+      height: 30px;
+
+      .grade-title {
+        border: none;
+        color: black;
+        background-color: #989ba1;
+      }
+
+      &.active-grade {
+        .grade-title {
+          background-color: $white;
+          border: none;
+        }
+      }
+    }
   }
 }

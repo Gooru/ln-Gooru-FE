@@ -54,12 +54,12 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isShowInspectDestination
    */
-  isShowInspectDestination: false,
+  isShowInspectDestination: true,
 
   /**
    * @property {Boolean} isShowGradeLevel
    */
-  isShowGradeLevel: true,
+  isShowGradeLevel: false,
 
   /**
    * @property {Number} classGrade

@@ -5,12 +5,36 @@
     max-height: calc(100vh - 50px);
     justify-content: center;
     overflow-x: auto;
+    background-color: #36394a;
     .destination-chart-container {
       margin-right: 30px;
-      background-color: #ffffff;
       box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
       padding: 8px;
     }
+
+
+
+    //TODO new screen changes
+    .grade-data-container {
+      .grade-title {
+        font-size: 45px;
+        color: #8fd383;
+      }
+      .grade-description {
+        color: $white;
+      }
+      .next-route {
+        color: $white;
+        height: 35px;
+        line-height: 35px;
+        background-color: #4a8cdb;
+        width: 200px;
+        border-radius: 17px;
+        font-size: 18px;
+        padding-left: 8px;
+      }
+    }
+
     .course-container {
       width: 99%;
       padding-top: 30px;
@@ -30,7 +54,6 @@
       }
       .course-info {
         height: 84px;
-        background-color: $white;
         box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
         display: grid;
         grid-template-columns: 82px auto;
@@ -100,7 +123,6 @@
         }
       }
       .course-description {
-        background-color: $white;
         font-size: 15px;
         color: #525659;
         line-height: 23px;
@@ -112,7 +134,6 @@
         }
       }
       .route0-container {
-        background-color: $white;
         margin-bottom: 30px;
         margin-top: 3px;
         box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);

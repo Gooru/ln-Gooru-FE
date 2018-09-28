@@ -12,6 +12,7 @@
 
   .chart-container {
     .graded-chart-container {
+
       display: grid;
       grid-template-columns: 150px auto;
       .scrollable-chart {
@@ -40,10 +41,10 @@
           transform-style: preserve-3d;
 
           .competency {
-            stroke: $snow-gray;
-            stroke-width: 1;
+            stroke: #36394a;
+            stroke-width: 2;
             shape-rendering: crispedges;
-            stroke-opacity: 0.4;
+            stroke-opacity: 0.7;
             cursor: pointer;
           }
 
@@ -67,9 +68,9 @@
           }
 
           .domain-boundary-line {
-            stroke-dasharray: 6;
-            stroke: #010518;
-            stroke-width: 2px;
+            // stroke-dasharray: 6;
+            stroke: #8fd383;
+            stroke-width: 4px;
           }
         }
       }

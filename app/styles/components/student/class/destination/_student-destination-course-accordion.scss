@@ -1,17 +1,14 @@
 .student-destination-course-map-container {
   .units-container {
-    // max-height: 375px;
-    // overflow-y: auto;
     box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.3);
     &::-webkit-scrollbar {
       height: 6px;
       width: 8px;
-      background-color: $white;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: $gray-light;
-      border: 1px solid $gray-light;
+      background: $white;
+      border: 1px solid $white;
       border-radius: 5px;
     }
     .u-container {  //unit-container
@@ -19,7 +16,6 @@
       .header {
         height: 67px;
         border-radius: 4px;
-        background-color: #ffffff;
         border-bottom: solid 1px #e3e5ea;
         display: grid;
         align-items: center;
