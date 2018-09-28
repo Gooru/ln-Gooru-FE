@@ -220,7 +220,7 @@
 
       .render-course-map {
         width: 98%;
-        margin: 0 auto auto 20px;
+        margin: 0 20px auto;
 
         .header {
           padding-left: 20px;
@@ -308,6 +308,31 @@
           font-weight: bold;
           color: #000000;
           margin-left: 15px;
+        }
+
+        .no-grade-items {
+          width: 311px;
+          height: 178px;
+          display: grid;
+          justify-content: center;
+          align-items: center;
+          background-color: $white;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+          grid-template-rows: 125px 40px;
+
+          i {
+            background-repeat: no-repeat;
+            width: 258px;
+            display: block;
+            height: 54px;
+            background-image: url("gooru/images/group.svg");
+          }
+
+          span {
+            font-size: 13px;
+            color: $grey-light;
+            text-align: center;
+          }
         }
       }
     }
