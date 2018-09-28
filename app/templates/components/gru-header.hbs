@@ -4,7 +4,7 @@
       <nav class="navbar navbar-default row">
         <div class="navbar-header">
           {{#if session.isAnonymous}}
-            <a aria-label="{{t "common.home"}}" href="{{marketingSiteUrl}}" target="_blank" class="navbar-brand home-link"></a>
+            <a aria-label="{{t "common.home"}}" {{action 'navigateToMarketSite'}} target="_blank" class="navbar-brand home-link"></a>
           {{else}}
             {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
           {{/if}}
