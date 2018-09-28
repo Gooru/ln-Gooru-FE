@@ -4,7 +4,7 @@
       <nav class="navbar navbar-default row">
         <div class="navbar-header">
           {{#if session.isAnonymous}}
-            <a aria-label="{{t "common.home"}}" href="{{marketingSiteUrl}}" target="_blank" class="navbar-brand home-link"></a>
+            <a aria-label="{{t "common.home"}}" {{action 'navigateToMarketSite'}} target="_blank" class="navbar-brand home-link"></a>
           {{else}}
             {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
           {{/if}}
@@ -153,10 +153,10 @@
                   </a>
                 </li>
               {{/unless}}
-              {{#if isFeatureEnabled }}      
-               
-              <li class="navbar-nav-list visible-md visible-lg notifications-link">
-                <a style="opacity:1;">
+              {{#if isFeatureEnabled }}
+
+                <li class="navbar-nav-list visible-md visible-lg notifications-link">
+                  <a style="opacity:1;">
                   {{notification/notification-indicator displayNotificationList=displayNotificationList}}                </a>
                 </li>
               {{/if}}
@@ -174,7 +174,7 @@
                 </a>
                 <ul class="dropdown-menu pull-right" role="menu" id="profile-more">
                   <li class="navbar-nav-list">
-                    <a href="{{supportSiteUrl}}" target="_blank" class="navbar-link">
+                    <a {{action 'navigateToSupport' }} target="_blank" class="navbar-link">
                       {{t "common.support"}}
                     </a>
                   </li>
@@ -225,7 +225,7 @@
                     {{/link-to}}
                   </li>
                   <li class="navbar-nav-list">
-                    <a href="{{supportSiteUrl}}" target="_blank" class="navbar-link">
+                    <a {{action 'navigateToSupport' }} target="_blank" class="navbar-link">
                       <span>{{t "common.support"}}</span>
                     </a>
                   </li>
