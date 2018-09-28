@@ -41,7 +41,7 @@
     {{/if}}
     {{#if isFeatureEnabled }}
       <div class="notification-tab">
-        {{notification/notification-indicator accessorClass='class' class=class isTeacher=false }}
+        {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' classId=classId isTeacher=false }}
       </div>
     {{/if}}
     {{#if hasClassInfo }}
