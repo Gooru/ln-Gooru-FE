@@ -201,6 +201,12 @@ export default Ember.Controller.extend({
    */
   isChecked: false,
 
+
+  /**
+   * @property {Boolean} isShowNavigatorLanding
+   */
+  isShowNavigatorLanding: Ember.computed.alias('studentClassController.isShowNavigatorLanding'),
+
   /**
    * @type {Boolean}
    * Property to check whether a class is rescoped
@@ -388,5 +394,9 @@ export default Ember.Controller.extend({
       loadUnitsPerformance: false
     });
     controller.set('studentCourseReportContext', params);
+  },
+  onClosePullUp() {
+    let controller = this;
+    controller.set('showCourseReport', false);
   }
 });

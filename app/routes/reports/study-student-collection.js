@@ -54,6 +54,8 @@ export default StudentCollection.extend({
     let navigateMapService = route.get('navigateMapService');
     let studentCollectionModel;
     const pathType = params.pathType || transition.queryParams.pathType; //pathType gets trucated by deserializer hook thus used from transition
+
+    params.contextId = params.contextId === 'null' ? null : params.contextId;
     return route
       .studentCollectionModel(params)
       .then(collectionModel => {
@@ -123,6 +125,11 @@ export default StudentCollection.extend({
         });
       })
       .then(function(hash) {
+        if (params.contextId !== null) {
+          studentCollectionModel.contextId = params.contextId;
+          studentCollectionModel.hasSuggestion =
+            transition.queryParams.hasSuggestion;
+        }
         if (pathType !== 'route0') {
           // Set the correct unit sequence number
           hash.course.children.find((child, index) => {
@@ -156,7 +163,9 @@ export default StudentCollection.extend({
       lesson: model.lesson,
       mapLocation: model.mapLocation,
       profile: model.profile,
-      minScore: model.minScore
+      minScore: model.minScore,
+      contextId: model.contextId,
+      hasSuggestion: model.hasSuggestion
     });
     controller.confettiSetup();
   },

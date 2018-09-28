@@ -42,8 +42,9 @@
       <div class="dca-schedule-btn" title="{{t 'common.schedule'}}" data-toggle="tooltip" data-placement="top" {{action "onScheduleCollectionToDCA" collection}}>
         {{gru-icon name="update"}}
       </div>
-      <div class="dca-add-btn" title="{{t 'common.add'}}" data-toggle="tooltip" data-placement="top" {{action "onAddCollectionToDCA" collection}}>
+      <div class="dca-add-btn {{if collection.isAdded 'added'}}" title="{{t 'common.add'}}" data-toggle="tooltip" data-placement="top" {{action "onAddCollectionToDCA" collection}}>
         {{gru-icon name="add"}}
+        {{gru-icon name="done"}}
       </div>
     </div>
   </div>

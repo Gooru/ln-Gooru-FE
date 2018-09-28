@@ -1,6 +1,4 @@
-{{#if showPullUp}}
-  <div class="backdrop" {{action 'closeAll'}}></div>
-{{/if}}
+<div class="backdrop" {{action 'onPullUpClose' true}}></div>
 <div class="suggestion-container">
   <div class="suggestion-header">
     {{#unless isFromSearch}}

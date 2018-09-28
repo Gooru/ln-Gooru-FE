@@ -3,12 +3,19 @@ import { GRU_FEATURE_FLAG } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   classNames: ['gru-study-navbar'],
 
+  classNameBindings: ['isStudentLanding:student-landing'],
+
   session: Ember.inject.service('session'),
 
   isFeatureEnabled: Ember.computed(function() {
     let feature = 'notifications';
     return GRU_FEATURE_FLAG[feature];
   }),
+
+  /**
+   * Controls display of notification list, typical use from header is to hide it as required.
+   */
+  displayNotificationList: null,
 
   actions: {
     /**
@@ -21,7 +28,12 @@ export default Ember.Component.extend({
       if (component.get('onItemSelected')) {
         component.selectItem(item);
         if (item === 'class-info') {
-          $('.classroom-information').toggle({ direction: 'left' }, 1000);
+          $('.classroom-information').toggle(
+            {
+              direction: 'left'
+            },
+            1000
+          );
         } else {
           component.sendAction('onItemSelected', item);
         }
@@ -52,6 +64,10 @@ export default Ember.Component.extend({
      */
     openCourseReport() {
       this.sendAction('openCourseReport');
+    },
+
+    closeNotificationList() {
+      this.set('displayNotificationList', false);
     }
   },
 
@@ -69,6 +85,7 @@ export default Ember.Component.extend({
       .currentPath;
 
     let component = this;
+
     if (currentPath === 'student.class.profile') {
       component.set('selectedMenuItem', 'profile');
     } else if (currentPath === 'student.class.course-map') {
@@ -93,6 +110,9 @@ export default Ember.Component.extend({
   willDestroyElement() {
     this._super(...arguments);
     this.set('selectedMenuItem', null);
+    Ember.$('body')
+      .removeClass('fullscreen')
+      .removeClass('fullscreen-exit');
   },
 
   // -------------------------------------------------------------------------
@@ -123,6 +143,8 @@ export default Ember.Component.extend({
 
   navTitle: null,
 
+  ILActivity: null,
+
   /**
    * @property {Boolean}
    * Computed property  to identify class is started or not
@@ -130,6 +152,12 @@ export default Ember.Component.extend({
   hasStarted: Ember.computed('performanceSummary', function() {
     const scorePercentage = this.get('performanceSummary.score');
     return scorePercentage !== null && scorePercentage >= 0;
+  }),
+
+  isILActivity: Ember.computed('sourceType', function() {
+    let sourceType = this.get('sourceType');
+    let ILActivity = this.get('ILActivity');
+    return sourceType === 'ILActivity' || ILActivity;
   }),
 
   // -------------------------------------------------------------------------

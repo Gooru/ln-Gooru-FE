@@ -24,6 +24,11 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
 
   classNames: ['gru-header', 'navbar-fixed-top'],
 
+  /**
+   * Controls display of notification list, typical use from header is to hide it as required.
+   */
+  displayNotificationList: null,
+
   isFeatureEnabled: Ember.computed(function() {
     let feature = 'notifications';
     return GRU_FEATURE_FLAG[feature];
@@ -94,6 +99,18 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       this.set('isTyping', false);
     },
 
+    navigateToSupport() {
+      let component = this;
+      let supportUrl = component.get('supportSiteUrl');
+      window.open(supportUrl, '_blank');
+    },
+
+    navigateToMarketSite() {
+      let component = this;
+      let marketUrl = component.get('marketingSiteUrl');
+      window.open(marketUrl, '_self');
+    },
+
     navigateToResearchApp: function() {
       let researcher = EndPointsConfig.getResearcher();
       if (researcher && researcher.redirectURL) {
@@ -102,6 +119,10 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
         )}`;
         window.open(url, '_self');
       }
+    },
+
+    closeNotificationList() {
+      this.set('displayNotificationList', false);
     }
   },
 

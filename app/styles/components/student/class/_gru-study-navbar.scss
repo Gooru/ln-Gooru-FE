@@ -5,172 +5,420 @@
   width: 100%;
   z-index: 100;
 
-  .panel {
+  &.student-landing {
+    pointer-events: none;
+
+    .header-panel {
+      .app-brand {
+        pointer-events: auto;
+      }
+    }
+  }
+
+  .gru-icon {
+    vertical-align: middle;
+  }
+
+  %app-info-container {
+    display: inline-block;
+    word-wrap: break-word;
+    vertical-align: middle;
+  }
+
+  %app-container {
+    color: $white;
+    margin: auto;
+    height: 100%;
+    grid-template-columns: auto auto;
+    align-items: center;
+    grid-gap: 5px;
+    display: grid;
+  }
+
+  .header-panel {
     height: 51px;
     width: 100%;
-  }
+    background-color: $blue-400;
 
-  .nav-body {
-    margin: auto;
+    .nav-body {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+      /*Default View */
+      grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
 
-    .add-info {
-      display: inline-block;
-      word-wrap: break-word;
-      //width: 90px;
-      vertical-align: middle;
-    }
-    @media (min-width: 768px) and (max-width: 1024px) {
-      .add-info {
-        display: none;
-      }
-    }
-    @media (min-width: 1025px) and (max-width: 1280px) {
-      //width: 960px;
-      add-info: {
-        display: inline-block;
-      }
-    }
-    @media (min-width: 1281px) {
-      //width: 960px;
-      add-info: {
-        display: inline-block;
-      }
-    }
-    /*
-                                  ##Device = Tablets, Ipads (landscape)
-                                  ##Screen = B/w 768px to 1024px
-                                */
-    @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-      //width: 960px;
-      add-info: {
-        display: inline-block;
-      }
-    }
-    /*
-                                  ##Device = Low Resolution Tablets, Mobiles (Landscape)
-                                  ##Screen = B/w 481px to 767px
-                                */
-    @media (min-width: 481px) and (max-width: 767px) {
-      .add-info {
-        display: none;
-      }
-    }
-    /*
-                                  ##Device = Most of the Smartphones Mobiles (Portrait)
-                                  ##Screen = B/w 320px to 479px
-                                */
-    @media (min-width: 320px) and (max-width: 480px) {
-      .add-info {
-        display: none;
-      }
-    }
+      /*Apply to independent-learning class and it has no class info */
+      &.independent-learning.no-class-info {
+        grid-template-columns: 90px 120px 1fr 60px 120px 120px;
+        @media only screen and (max-width: 600px) {
+          grid-template-columns: 70px 60px 1fr 60px 60px 60px;
 
-    .studyplayer-title {
-      opacity: 1;
-      height: 50px;
-      font-size: 16px;
-      font-weight: bold;
-      pointer-events: none;
+          .class-activities,
+          .course-map.study-player,
+          .profile {
+            a {
+              grid-gap: 0;
 
-      a {
-        padding: 0;
-        max-width: 300px;
-        padding: 0 0 0 15px;
-        line-height: 50px;
-      }
-    }
-  }
+              .add-info {
+                display: none !important;
+              }
+            }
+          }
 
-  ul.nav-bar,
-  ul.nav-pills {
-    .nav-item {
-      border-left: $border-right-side $light-200;
-      border-right: $border-left-side $light-200;
-    }
+          .performance-chart {
+            .charts.gru-performance-chart {
+              min-width: 40px !important;
+            }
+          }
+        }
+        /* Small devices (portrait tablets and large phones, 768px and up) */
+        @media only screen and (min-width: 768px) {
+          grid-template-columns: 70px 60px 1fr 60px 120px 120px;
 
-    .performance-chart {
-      cursor: pointer;
+          .class-activities,
+          .course-map.study-player,
+          .profile {
+            a {
+              grid-gap: 0;
 
-      &.not-started {
-        pointer-events: none;
-      }
-    }
+              .add-info {
+                display: none !important;
+              }
+            }
+          }
+        }
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+          grid-template-columns: 90px 120px 1fr 60px 120px 120px;
 
-    li {
-      &.not-started {
-        pointer-events: none;
-      }
+          .class-activities,
+          .course-map.study-player,
+          .profile {
+            a {
+              grid-gap: 5px;
 
-      &.divider {
-        border-left: 1px solid $panel-default-border;
-        height: 50px;
-      }
-
-      &.class-info > a {
-        opacity: 1;
-      }
-      height: 50px;
-
-      &.vactive {
-        display: block;
-        color: $blue-400;
-
-        a {
-          color: $blue-400;
+              .add-info {
+                display: inline-block !important;
+              }
+            }
+          }
         }
       }
 
-      a {
-        color: $white;
-        height: 100%;
-        padding: 12px 15px 8px;
+      /* Apply to independent-learning class */
+      &.independent-learning {
+        grid-template-columns: 90px 120px 1fr 60px 60px 60px;
+        @media only screen and (max-width: 600px) {
+          grid-template-columns: 90px 60px 1fr 50px 50px 50px;
 
-        .gru-icon {
-          vertical-align: middle;
+          .class-activities,
+          .course-map.study-player,
+          .profile {
+            a {
+              grid-gap: 0;
+
+              .add-info {
+                display: none !important;
+              }
+            }
+          }
+
+          .performance-chart {
+            .charts.gru-performance-chart {
+              min-width: 40px !important;
+            }
+          }
+        }
+        /* Small devices (portrait tablets and large phones, 768px and up) */
+        @media only screen and (min-width: 768px) {
+          grid-template-columns: 90px 60px 1fr 60px 60px 60px;
+
+          .class-activities,
+          .course-map.study-player,
+          .profile {
+            a {
+              grid-gap: 0;
+
+              .add-info {
+                display: none !important;
+              }
+            }
+          }
+        }
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+          grid-template-columns: 90px 120px 1fr 60px 60px 60px;
+
+          .class-activities,
+          .course-map.study-player,
+          .profile {
+            a {
+              grid-gap: 5px;
+
+              .add-info {
+                display: inline-block !important;
+              }
+            }
+          }
+        }
+      }
+
+      /*Apply when it has no class info */
+      &.no-class-info {
+        grid-template-columns: 90px 160px 120px 115px 1fr 59px 105px 105px;
+        /* Extra small devices (phones, 600px and down) */
+        @media only screen and (max-width: 600px) {
+          grid-template-columns: 50px 40px 40px 40px 1fr 40px 45px 45px;
+
+          .performance,
+          .performance-summary {
+            .score {
+              font-size: 16px;
+            }
+
+            .label {
+              font-size: 5px;
+            }
+          }
+        }
+        @media only screen and (min-width: 768px) {
+          grid-template-columns: 90px 50px 50px 50px 1fr 59px 105px 105px;
+        }
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+          grid-template-columns: 90px 160px 120px 115px 1fr 59px 105px 105px;
+        }
+      }
+      /* Extra small devices (phones, 600px and down) */
+      @media only screen and (max-width: 600px) {
+        grid-template-columns: 50px 40px 40px 40px 1fr 40px 40px 40px;
+
+        .class-activities,
+        .course-map.study-player,
+        .profile {
+          a {
+            grid-gap: 0;
+
+            .add-info {
+              display: none !important;
+            }
+          }
         }
 
-        .dca-pin {
-          background-image: url("gooru/images/dca-white.svg");
-          background-repeat: no-repeat;
-          background-size: contain;
-          width: 24px;
-          display: block;
-          float: left;
-          height: 24px !important;
+        .performance-chart {
+          .charts.gru-performance-chart {
+            min-width: 40px !important;
+          }
+        }
+      }
+      /* Small devices (portrait tablets and large phones, 768px and up) */
+      @media only screen and (min-width: 768px) {
+        grid-template-columns: 90px 50px 50px 50px 1fr 59px 59px 59px;
+
+        .class-activities,
+        .course-map.study-player,
+        .profile {
+          a {
+            grid-gap: 0;
+
+            .add-info {
+              display: none !important;
+            }
+          }
+        }
+      }
+      /* Large devices (laptops/desktops, 992px and up) */
+      @media only screen and (min-width: 992px) {
+        grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
+
+        .class-activities,
+        .course-map.study-player,
+        .profile {
+          a {
+            grid-gap: 5px;
+
+            .add-info {
+              display: inline-block !important;
+            }
+          }
+        }
+      }
+
+      .class-activities,
+      .class-management,
+      .course-map.study-player,
+      .profile {
+        &.vactive {
+          a {
+            color: $yellow;
+
+            .dca-pin {
+              background-image: url("gooru/images/dca-yellow.svg");
+            }
+          }
         }
 
-        .dca-text {
-          float: left;
-        }
+        a:hover {
+          color: $yellow;
 
-        &:hover {
           .dca-pin {
             background-image: url("gooru/images/dca-yellow.svg");
           }
         }
       }
-      @media (min-width: $screen-sm) {
-        display: block;
-      }
-      @media (max-width: $screen-xs-max) {
-        .charts.gru-performance-chart {
-          display: none;
+
+      .app-brand {
+        padding: 0 8px;
+        background-color: $white;
+        display: flex;
+        height: 51px;
+
+        a {
+          margin: auto;
+          display: block;
+          background-image: url("gooru/images/gooru-logo.svg");
+          background-repeat: no-repeat;
+          background-size: contain;
+          width: 56px;
+          height: 30px;
+          background-position: 0 15px;
+          top: 18px;
+          opacity: 1 !important;
         }
       }
 
-      .class-title {
-        padding: 5px;
+      .class-activities {
+        display: flex;
+        border-right: 1px solid $white;
+        height: 51px;
+
+        a {
+          @extend %app-container;
+
+          .dca-pin {
+            background-image: url("gooru/pin-white.png");
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 25px;
+            background-size: 24px 25px;
+            display: block;
+            margin-top: 2px;
+          }
+
+          .add-info {
+            @extend %app-info-container;
+          }
+        }
       }
-    }
-  }
 
-  .navbar-right {
-    margin-right: 0;
+      .course-map.study-player {
+        display: flex;
+        border-right: 1px solid $white;
+        height: 51px;
 
-    li {
-      .performance {
-        height: 51.5px;
-        width: 143px;
+        a {
+          @extend %app-container;
+        }
+
+        .add-info {
+          @extend %app-info-container;
+        }
+      }
+
+      .profile {
+        display: flex;
+        border-right: 1px solid $white;
+        height: 51px;
+
+        a {
+          @extend %app-container;
+        }
+
+        .add-info {
+          @extend %app-info-container;
+        }
+      }
+
+      .studyplayer-title {
+        display: grid;
+        margin: auto;
+        font-size: 16px;
+        font-weight: 700;
+        height: 51px;
+        padding: 10px;
+        align-items: center;
+        pointer-events: none;
+        color: $white;
+
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .notification-tab {
+        display: grid;
+        height: 51px;
+        align-items: center;
+        cursor: pointer;
+        justify-content: center;
+        border-left: 1px solid $white;
+
+        div {
+          .active-study {
+            i {
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+
+      .performance-chart {
+        display: grid;
+        border-left: 1px solid $white;
+        height: 51px;
+        align-items: center;
+
+        &.not-started {
+          pointer-events: none;
+        }
+
+        .charts.gru-performance-chart {
+          color: $white;
+          text-align: center;
+          height: 100%;
+          cursor: pointer;
+          min-width: 59px;
+
+          .container-box {
+            height: 51px;
+            cursor: pointer;
+
+            .percentage {
+              margin-top: 8px;
+            }
+          }
+        }
+      }
+
+      .class-info,
+      .performance,
+      .performance-summary {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        height: 51px;
+        border-left: 1px solid $white;
+
+        a {
+          color: $white;
+        }
+
+        .tooltip {
+          display: none !important;
+        }
 
         .score {
           font-weight: 900;
@@ -179,47 +427,20 @@
           line-height: 35px;
           display: block;
           text-align: center;
-          // margin-top: 4px;
         }
 
         .label {
           font-size: 12px;
           line-height: 8px;
           text-transform: uppercase;
-          font-weight: bold;
+          font-weight: 700;
           display: block;
           text-align: center;
         }
       }
     }
   }
-
-  .charts.gru-performance-chart {
-    min-width: 59px;
-
-    > .container-box {
-      height: 51px;
-
-      > .percentage {
-        margin-top: 9.5px;
-        cursor: pointer;
-      }
-    }
-  }
-
-  .nav > li > a:focus,
-  .nav > li > a:hover {
-    background-color: $blue-400; // sunken effect
-  }
-
-  ul.navbar-nav > li.class-info {
-    > a {
-      border-radius: 3px;
-      padding: 10px 15px;
-    }
-  }
 }
-//nav-body
 
 div.student.class {
   div.header.clearfix {

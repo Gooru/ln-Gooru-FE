@@ -251,7 +251,7 @@ export default Ember.Component.extend({
       function() {
         component.set('showPullUp', false);
         if (closeAll) {
-          component.sendAction('onPullUpClose', true);
+          component.sendAction('onClosePullUp');
         }
       }
     );

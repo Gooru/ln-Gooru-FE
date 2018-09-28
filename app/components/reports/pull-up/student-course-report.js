@@ -57,6 +57,12 @@ export default Ember.Component.extend({
       };
       component.set('showUnitReport', true);
       component.set('studentUnitReportContext', params);
+    },
+
+    onClosePullUp() {
+      let component = this;
+      component.set('showUnitReport', false);
+      component.closePullUp(true);
     }
   },
 
@@ -198,12 +204,6 @@ export default Ember.Component.extend({
     );
   },
 
-  onClosePullUp() {
-    let component = this;
-    component.set('showUnitReport', false);
-    component.closePullUp(true);
-  },
-
   closePullUp(closePullUp) {
     let component = this;
     component.$().animate(
@@ -214,7 +214,7 @@ export default Ember.Component.extend({
       function() {
         component.set('showPullUp', false);
         if (closePullUp) {
-          component.sendAction('onPullUpClose', true);
+          component.sendAction('onClosePullUp');
         }
       }
     );

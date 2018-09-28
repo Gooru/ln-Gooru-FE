@@ -14,9 +14,7 @@ moduleForAcceptance('Acceptance | index-teacher', {
   }
 });
 
-test('logged in as a teacher and home-link button navigation', function(
-  assert
-) {
+test('logged in as a teacher and home-link button navigation', function(assert) {
   visit('/');
 
   andThen(function() {
@@ -31,8 +29,8 @@ test('logged in as a teacher and home-link button navigation', function(
     andThen(function() {
       assert.equal(
         currentURL(),
-        '/id-for-pochita/content/courses',
-        'Navigating to profile should display "/id-for-pochita/content/courses"'
+        '/id-for-pochita/about',
+        'Navigating to profile should display "/id-for-pochita/about"'
       );
       const $navHeader = find('.gru-header .navbar-header');
       click($navHeader.find('.home-link'));

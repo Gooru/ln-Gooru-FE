@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 
@@ -14,9 +14,7 @@ moduleForAcceptance('Acceptance | index-provider', {
   }
 });
 
-test('logged in as a provider and home-link button navigation', function(
-  assert
-) {
+skip('logged in as a provider and home-link button navigation', function(assert) {
   visit('/');
 
   andThen(function() {

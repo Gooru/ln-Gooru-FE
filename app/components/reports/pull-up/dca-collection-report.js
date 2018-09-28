@@ -116,7 +116,12 @@ export default Ember.Component.extend({
         studentPerformance: studentPerformance,
         collection
       };
-      component.set('isShowStudentReport', true);
+      let reportType = params.type;
+      if (reportType === 'assessment-external') {
+        component.set('isShowStudentExternalAssessmentReport', true);
+      } else {
+        component.set('isShowStudentReport', true);
+      }
       component.set('studentReportContextData', params);
     },
 
@@ -135,10 +140,16 @@ export default Ember.Component.extend({
           type: collection.get('format'),
           activityDate: activityDate,
           studentPerformance: studentPerformance,
-          isStudent: false
+          isStudent: false,
+          collection
         };
+        let reportType = params.type;
+        if (reportType === 'assessment-external') {
+          component.set('isShowStudentExternalAssessmentReport', true);
+        } else {
+          component.set('isShowStudentReport', true);
+        }
         component.set('studentReportContextData', params);
-        component.set('isShowStudentReport', true);
       }
     },
 
@@ -475,9 +486,6 @@ export default Ember.Component.extend({
     component.set('sortByFirstnameEnabled', false);
     component.set('sortByScoreEnabled', false);
     component.set('sortByTimeSpentEnabled', false);
-    component.set('studentsSelectedForSuggest', Ember.A([]));
-    component.set('suggestResultCount', 0);
-    component.set('defaultSuggestContentType', 'collection');
     component.handleCarouselControl();
   },
 
@@ -523,9 +531,6 @@ export default Ember.Component.extend({
     component.set('sortByFirstnameEnabled', false);
     component.set('sortByScoreEnabled', false);
     component.set('sortByTimeSpentEnabled', false);
-    component.set('studentsSelectedForSuggest', Ember.A([]));
-    component.set('suggestResultCount', 0);
-    component.set('defaultSuggestContentType', 'collection');
     component.set('studentReportData', users);
     let maxTimeSpent = Math.max(...usersTotaltimeSpent);
     component.calculateTimeSpentScore(users, maxTimeSpent);

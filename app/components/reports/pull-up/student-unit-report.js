@@ -100,6 +100,11 @@ export default Ember.Component.extend({
       };
       component.set('showLessonReport', true);
       component.set('studentLessonReportContext', params);
+    },
+    onClosePullUp() {
+      let component = this;
+      component.set('showLessonReport', false);
+      component.closePullUp(true);
     }
   },
 
@@ -246,7 +251,7 @@ export default Ember.Component.extend({
       function() {
         component.set('showPullUp', false);
         if (closeAll) {
-          component.sendAction('onClosePullUp', true);
+          component.sendAction('onClosePullUp');
         }
       }
     );

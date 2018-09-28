@@ -206,6 +206,12 @@
       .btn-primary:active {
         background: #1aa9eb;
       }
+      &.date-not-selected {
+        button {
+          pointer-events: none;
+          opacity: 0.4;
+        }
+      }
     }
   }
 }

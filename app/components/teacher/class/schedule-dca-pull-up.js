@@ -47,6 +47,11 @@ export default Ember.Component.extend({
    */
   maxNumberOfDays: 30,
 
+  /**
+   * Maintains the state of whether schedule date is selected or not
+   */
+  isScheduleDateSelected: false,
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -63,6 +68,9 @@ export default Ember.Component.extend({
       endDate: endDate,
       maxViewMode: 0,
       format: 'yyyy-mm-dd'
+    });
+    component.$('#schedule-dca-datepicker').on('changeDate', function() {
+      component.set('isScheduleDateSelected', true);
     });
   },
 

@@ -1,11 +1,14 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['reports', 'backdrop-pull-ups', 'teacher-external-assessment-list-view'],
+  classNames: [
+    'reports',
+    'backdrop-pull-ups',
+    'teacher-external-assessment-list-view'
+  ],
 
   // -------------------------------------------------------------------------
   // Properties
@@ -54,7 +57,6 @@ export default Ember.Component.extend({
   // Actions
 
   actions: {
-
     /**
      * Action triggered when select a student report
      */
@@ -117,9 +119,18 @@ export default Ember.Component.extend({
       let component = this;
       component.toggleProperty('sortByScoreEnabled');
       if (component.get('sortByScoreEnabled')) {
-        component.set('studentReportData', component.get('studentReportData').sortBy('score').reverse());
+        component.set(
+          'studentReportData',
+          component
+            .get('studentReportData')
+            .sortBy('score')
+            .reverse()
+        );
       } else {
-        component.set('studentReportData', component.get('studentReportData').sortBy('score'));
+        component.set(
+          'studentReportData',
+          component.get('studentReportData').sortBy('score')
+        );
       }
     },
 
@@ -144,6 +155,12 @@ export default Ember.Component.extend({
      */
     onOpenSuggestionPullup() {
       this.set('showSuggestionPullup', true);
+    },
+
+    onClosePullUp() {
+      let component = this;
+      component.set('showSuggestionPullup', false);
+      component.sendAction('onClosePullUp');
     },
 
     /**

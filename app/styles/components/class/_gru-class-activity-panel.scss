@@ -7,9 +7,8 @@
       .dca-panel-actions-performance {
         .dca-panel-actions {
           .dca-add {
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.5s linear;
+            visibility: visible;
+            opacity: 1;
           }
         }
       }
@@ -144,7 +143,6 @@
         .dca-add {
           visibility: hidden;
           opacity: 0;
-          transition: visibility 0s 0.5s, opacity 0.5s linear;
           cursor: pointer;
 
           .add {

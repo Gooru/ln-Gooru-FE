@@ -1,4 +1,4 @@
-<div class="backdrop" {{action 'closeAll'}}></div>
+<div class="backdrop" {{action 'onPullUpClose' true}}></div>
 <div class="report-container">
   <div class="report-header">
     <div class="assessment-container">
@@ -55,7 +55,7 @@
     onClosePullUp="onClosePullUp"
     onCloseSuggest="onCloseSuggest"
     context=suggestContextParams
-    collection=collections
+    collection=externalAssessmentContent
     defaultSuggestContentType=defaultSuggestContentType
   }}
 {{/if}}

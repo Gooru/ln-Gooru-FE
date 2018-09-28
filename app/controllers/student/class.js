@@ -115,6 +115,11 @@ export default Ember.Controller.extend({
     return scorePercentage !== null && scorePercentage >= 0;
   }),
 
+  /**
+   * @property {Boolean} isShowNavigatorLanding
+   */
+  isShowNavigatorLanding: false,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -140,5 +145,10 @@ export default Ember.Controller.extend({
       loadUnitsPerformance: true
     });
     controller.set('studentCourseReportContext', params);
+  },
+
+  onClosePullUp() {
+    let controller = this;
+    controller.set('showCourseReport', false);
   }
 });
