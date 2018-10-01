@@ -383,7 +383,8 @@ export default Object.assign(quizzesTranslations, {
       'username-length': 'Username must be between 4 and 254 characters.',
       'forgot-password-gmail':
         'Please use Google signin. We can\'t reset your password.',
-      'no-studymaterial': 'The course assigned to this class does not have any study material in it. Please contact your teacher to fix this'
+      'no-studymaterial':
+        'The course assigned to this class does not have any study material in it. Please contact your teacher to fix this'
     },
     'essential-questions': 'Essential Questions',
     example: 'example: ',
@@ -1150,7 +1151,9 @@ export default Object.assign(quizzesTranslations, {
       'You have not yet joined any classrooms. Click on “Join </br> Classroom” to add your teacher’s class. You can also search for </br> a featured course under the Library tab.',
     'no-content-classrooms':
       'This classroom currently has no content available',
-    welcome: 'Welcome to Gooru.'
+    welcome: 'Welcome to Gooru.',
+    'no-course-assigned':
+      'No course has been assigned to this class yet. Please contact your teacher.'
   },
   'student-independent-learning': {
     'show-more': 'Show More',

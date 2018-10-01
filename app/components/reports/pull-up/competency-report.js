@@ -82,8 +82,9 @@ export default Ember.Component.extend({
   init() {
     let component = this;
     component._super(...arguments);
-    if (component.title) {
-      component.title = component.title.replace(/\./g, ' | ');
+    let title = component.get('title');
+    if (title && !title.string) {
+      component.set('title', title.replace(/\./g, ' | '));
     }
   },
 
