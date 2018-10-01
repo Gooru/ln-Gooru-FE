@@ -4,7 +4,7 @@
       <div class="title">
         {{t 'class.info.students'}}
       </div>
-      <div class="competency-report {{if (or isNoStudentJoined not class.courseId) 'no-event'}}" {{action "onOpenCompetencyReport"}}>
+      <div class="competency-report {{unless class.courseId 'no-event'}} {{if isNoStudentJoined  'no-event'}}" {{action "onOpenCompetencyReport"}}>
         {{t 'report.competency-report.title'}}
       </div>
     </div>
