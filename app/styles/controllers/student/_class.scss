@@ -1,6 +1,18 @@
 .student.class {
   width: 960px;
   margin: 0 auto;
+
+  .alert-player-error {
+    height: 50px;
+    line-height: 50px;
+    border-radius: 4px;
+    @include box-shadow(0 0 7px $table-border-color);
+    background-color: $brand-danger;
+    .alert-status {
+      padding-left: 10px;
+      color: $white;
+    }
+  }
   .gru-take-tour {
     right: 80px;
     top: 125px;
