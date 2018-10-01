@@ -1,0 +1,153 @@
+<div class="backdrop" {{action 'onPullUpClose' true}}></div>
+<div class="free-response-question-grade-container">
+  <div class="frq-grade-header">
+    <div class="frq-grade-breadcrumb">
+      <div class="unit-title">
+        <i class="unit-icon"></i>
+        <p>{{t 'common.unit'}} {{unit.sequence}} : {{unit.title}}</p>
+      </div>
+      <div class="lesson-title">
+        {{gru-icon name="keyboard_arrow_right"}}
+        <i class="lesson-icon"></i>
+        <p>{{t 'common.lesson'}} {{lesson.sequence}} : {{lesson.title}}</p>
+      </div>
+      <div class="collection-title">
+        {{gru-icon name="keyboard_arrow_right"}}
+        <i class="collection-icon {{collection.collectionType}}"></i>
+        <p>{{collection.title}}</p>
+      </div>
+    </div>
+    <div class="collection-performance-score">
+      --
+    </div>
+    <div class="frq-grade-close-pullup" {{action 'onPullUpClose'}}>
+      {{gru-icon name="close" }}
+    </div>
+  </div>
+
+  <div class="frq-grade-body">
+    <div class="frq-grade-left-panel">
+      <div class="frq-grade-left-panel-header">
+        <div class="frq-grade-count">
+          <sup>1</sup>&frasl;<sub>25</sub>
+        </div>
+        <div class="frq-grade-students">
+          <div class="frq-grade-students-carousel">
+            <div id="frq-grade-students-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
+              <div class="carousel-inner">
+                {{#each users as |user index|}}
+                  <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
+                    <div class="user-profile-img">
+                      <img src="{{user.avatarUrl}}" />
+                      <span>{{user.lastName}}  {{user.firstName}}</span>
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+              <!-- Left and right controls -->
+              <a class="left carousel-control" data-slide="prev" {{action 'onClickPrev'}}>
+                  {{gru-icon name="keyboard_arrow_left"}}
+              </a>
+              <a class="right carousel-control" data-slide="next" {{action 'onClickNext'}}>
+                {{gru-icon name="keyboard_arrow_right"}}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="frq-self-grade">
+          <span>Self-Graded</span>
+          <span class="performance-score">17/20</span>
+          <span>Rubric Grade</span>
+        </div>
+      </div>
+      <div class="frq-grade-left-panel-body">
+        <div class="frq-question-info">
+          <span>Brief</span>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+        </div>
+        <div class="frq-question-answer-info">
+          <span>Answer</span>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....</p>
+        </div>
+      </div>
+    </div>
+    <div class="frq-grade-right-panel">
+      <div class="frq-grade-right-panel-header">
+        <div class="frq-grade-info">
+          <span class="frq-grade-info-title">Rubric</span>
+          <span class="frq-grade-info-desc">Answer this rubric to complete your FRQ.</span>
+        </div>
+        <div class="frq-grade-score">
+          <span>0/15</span>
+        </div>
+      </div>
+      <div class="frq-grade-right-panel-body">
+        <div class="frq-grade-rubric-level-score">
+          <div class="frq-grade-rubric-categories">
+            <div class="frq-grade-rubric-category">
+              <div class="frq-grade-rubric-category-info">
+                {{gru-icon name="error_outline"}}
+                <p>Inherent understanding of Subject Matter</p>
+              </div>
+              <div class="frq-grade-rubric-level-container">
+                <div class="frq-grade-rubric-levels">
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </div>
+                {{gru-icon name="mode_comment"}}
+              </div>
+            </div>
+            <div class="frq-grade-rubric-category">
+              <div class="frq-grade-rubric-category-info">
+                {{gru-icon name="error_outline"}}
+                <p>Understanding of mechanical forces at play</p>
+              </div>
+              <div class="frq-grade-rubric-level-container">
+                <div class="frq-grade-rubric-levels">
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </div>
+                {{gru-icon name="mode_comment"}}
+              </div>
+            </div>
+            <div class="frq-grade-rubric-category">
+              <div class="frq-grade-rubric-category-info">
+                {{gru-icon name="error_outline"}}
+                <p>Understanding the lingual processes at play</p>
+              </div>
+              <div class="frq-grade-rubric-level-container">
+                <div class="frq-grade-rubric-levels">
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </div>
+                {{gru-icon name="mode_comment"}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="frq-grade-rubric-level-no-score">
+        </div>
+        <div class="frq-grade-rubric-no-level-no-score">
+        </div>
+        <div class="frq-grade-general-comment-container">
+          <textarea rows='1' placeholder='General Comments Only'></textarea>
+        </div>
+        <div class="frq-grade-action-btns">
+          <button type="button" class="btn cancel btn-primary btn-lg">{{t 'common.cancel'}}</button>
+          <button type="button" class="btn confirm btn-primary btn-lg">{{t 'common.confirm'}}</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

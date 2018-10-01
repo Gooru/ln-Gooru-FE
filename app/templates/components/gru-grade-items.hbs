@@ -1,20 +1,11 @@
 {{#each questionItems as |item|}}
-  <div class="item">
+  <div class="item" {{action 'openFRQuestionGrade' item}}>
     <div class="question ellipsis">
       <span class="rubric-icon"><i class="icon"></i></span>
-      {{#link-to 'grading-player'
-        (query-params
-          questionId=item.question.id
-          classId=item.classId
-          courseId=item.courseId
-          unitId=item.unitId
-          lessonId=item.lessonId
-          collectionId=item.collection.id
-        )
-        class="ellipsis"
-      }}
-        <span class="question-name">{{item.question.title}}</span>
-      {{/link-to}}
+      <span class="question-name">{{item.question.title}}</span>
     </div>
   </div>
 {{/each}}
+{{#if showFRQuestionGrade}}
+  {{grade.pull-up.free-response-question-grade showPullUp=showFRQuestionGrade context=itemToGradeContextData}}
+{{/if}}
