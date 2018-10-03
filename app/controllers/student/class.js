@@ -135,11 +135,6 @@ export default Ember.Controller.extend({
    */
   isNotAbleToStartPlayer: false,
 
-  /**
-   * Property to identify when there is no content to play
-   */
-  isNotAbleToStartPlayer: false,
-
   // -------------------------------------------------------------------------
   // Methods
 
