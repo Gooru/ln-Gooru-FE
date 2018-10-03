@@ -1,69 +1,92 @@
 <div class="inspect-destination-container">
   <div class="destination-chart-container">
-    {{proficiency.student-inspect-competency-chart route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode onSelectGrade="onSelectGrade"}}
+    {{proficiency.student-inspect-competency-chart title=gradeData.grade route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode onSelectGrade="onSelectGrade"}}
   </div>
-
-  <div class="grade-data-container">
-    <div class="grade-title">
-      {{gradeData.grade}}
-    </div>
-    <div class="grade-description">
-      {{safe-html gradeData.description}}
-    </div>
-    <div class="next-route">
-      {{gru-icon name="directions"}} Show me my route
-    </div>
-  </div>
-  <div class="course-container hide">
-    <div class="course-info">
-      <div class="course-thumbnail" style="background-image: url({{gradeData.thumbnail}})">
-        {{destinationGradeLevel}}
-      </div>
-      <div class="course-title">
-        <span>{{courseData.title}}</span><br>
-        <span>{{gradeData.grade}}</span><br>
-        <span class="brand">Gooru</span>
-        <div class="direction-icon" {{action "onMoveNext" (if isRoute0 'playNext' 'inspect-destination')}}>
-          {{gru-icon name=(if isRoute0 'near_me' 'directions')}}
+  {{#if (eq type "route")}}
+    <div class="course-container">
+      {{#if (and isRoute0Pending isRoute0)}}
+        <div class="pre-study-title">
+          {{t "student-first-experience.preStudyTitle" title=gradeData.grade}}
         </div>
-        <div class="content-count">
-          <span class="competency-count" ><i class="icon"></i> <span class="count"></span></span>
-        </div>
-      </div>
-    </div>
-    {{#if (and isRoute0Pending isRoute0)}}
-      <div class="route0-container">
-        <div class="route0-comment" {{action "onToggleRoute0View"}}>
-          <div class="suggestion-icon">{{gru-icon name="explore_outline"}}</div>
-          <div class="suggestion-note">As per your competency profile, there are some competencies that you need to master so that you can do well in this course. We have a route that we recommend you take to master these competencies. Click here to see the details.</div>
-        </div>
-        <div class="route0-body" style="display: none;">
-          <div class="route0-accordion-container">
-            {{class.overview.course-suggestions model=route0Contents index=index class=classData course=courseData}}
+        <div class="route0-container">
+          <div class="route0-comment" {{action "onToggleRoute0View"}}>
+            <div class="suggestion-icon">{{gru-icon name="explore_outline"}}</div>
+            <div class="suggestion-note"> {{t 'class.overview.course-map.route0-bannerdesc'}}</div>
           </div>
-          <div class="route0-action">
-            <div class="accept" {{action "onRoute0Reject"}}>
-              Accept All {{gru-icon name="done"}}
-            </div>
-            <div class="ignore" {{action "onRoute0Accept"}}>
-              No, Thanks
+          <div class="route0-body" style="display: none;">
+            <div class="route0-accordion-container">
+              {{class.overview.course-suggestions model=route0Contents index=index class=classData course=courseData}}
             </div>
           </div>
         </div>
+        <div class="route0-action">
+          <div class="ignore" {{action "onRoute0Accept"}}>
+            <i></i>
+            <span>{{t 'student-first-experience.route0-action.ignore'}}</span>
+          </div>
+          <div class="accept" {{action "onRoute0Reject"}}>
+            <i></i>
+            <span>{{t 'student-first-experience.route0-action.accept'}}</span>
+          </div>
+        </div>
+      {{/if}}
+      <div class="assigned-course-title" {{action onMoveNext 'playNext'}}>
+        {{t "student-first-experience.assigned-course-title" title=gradeData.grade}}
       </div>
-    {{else}}
-      <div class="course-description">
-        <div>{{safe-html gradeData.description}}</div>
-      </div>
-    {{/if}}
-
-    <div class="course-map-accordion-container">
-      {{student.class.destination.student-destination-course-accordion
+      <div class="course-map-accordion-container">
+        {{student.class.destination.student-destination-course-accordion
         courseData=courseData
         classId=classId
         courseId=courseId
         isRoute0=isRoute0
       }}
+      </div>
+      <div class="study-course">
+        {{gru-icon name="directions"}} {{t "student-first-experience.study-course"}}
+      </div>
     </div>
-  </div>
+    {{else if (eq type "destination")}}
+    <div class="grade-data-container">
+      <div class="grade-title">
+        {{gradeData.grade}}
+      </div>
+      <div class="grade-description">
+        {{safe-html gradeData.description}}
+      </div>
+      <div class="next-route" {{action onMoveNext 'inspect-destination'}}>
+        {{gru-icon name="directions"}} {{t "student-first-experience.show-me-my-route"}}
+      </div>
+    </div>
+  {{else}}
+    <div class="competency-level-container">
+      <div class="grade-title">
+        {{gradeData.grade}}
+      </div>
+      <div class="grade-description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+      </div>
+      <div class="competency-level-list">
+        <div class="mastery-container">
+          <div class="legend"></div>
+          <div class="label"> {{t "student-first-experience.competency-level.mastery" count="71"}}</div>
+        </div>
+        <div class="in-progress-container">
+          <div class="legend"></div>
+          <div class="label"> {{t "student-first-experience.competency-level.in-progress" count="71"}}</div>
+        </div>
+        <div class="not-started-container">
+          <div class="legend"></div>
+          <div class="label"> {{t "student-first-experience.competency-level.not-started" count="71"}}</div>
+        </div>
+        <div class="skyline-container">
+          <div class="legend"></div>
+          <div class="label"> {{t "student-first-experience.competency-level.your-skyline"}}</div>
+        </div>
+      </div>
+      <div class="show-destination" {{action onMoveNext 'competency'}}>
+        {{gru-icon name="directions"}} {{t "student-first-experience.view-my-destination"}}
+      </div>
+    </div>
+  {{/if}}
 </div>

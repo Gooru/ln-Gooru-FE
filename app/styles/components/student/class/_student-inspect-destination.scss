@@ -1,143 +1,181 @@
 .student-inspect-destination {
   .inspect-destination-container {
     display: grid;
-    grid-template-columns: auto 650px;
+    grid-template-columns: 50% 50%;
+    height: 100vh;
     max-height: calc(100vh - 50px);
     justify-content: center;
     overflow-x: auto;
     background-color: #36394a;
+
     .destination-chart-container {
       margin-right: 30px;
-      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
       padding: 8px;
     }
 
+    .competency-level-container {
+      .grade-title {
+        width: 344px;
+        height: 68px;
+        font-size: 50px;
+        color: $white;
+      }
 
+      .grade-description {
+        width: 414px;
+        font-size: 15px;
+        color: $white;
+      }
 
+      .competency-level-list {
+        margin-top: 10px;
+        display: grid;
+        width: 200px;
+        height: 160px;
+        grid-gap: 3px;
+        grid-template-rows: 40px 40px 40px 40px;
+
+        .in-progress-container,
+        .mastery-container,
+        .not-started-container,
+        .skyline-container {
+          display: grid;
+          grid-gap: 5px;
+          align-items: center;
+          grid-template-columns: 40px auto;
+
+          .legend {
+            width: 40px;
+            height: 40px;
+          }
+
+          .label {
+            font-size: 24px;
+            color: $white;
+            text-align: start;
+            font-weight: normal;
+            padding: 0;
+          }
+        }
+
+        .in-progress-container {
+          .legend {
+            background-color: #97c5e5;
+          }
+        }
+
+        .not-started-container {
+          .legend {
+            background-color: $white;
+          }
+        }
+
+        .skyline-container {
+          .legend {
+            width: 40px;
+            height: 10px;
+            background-color: #ffffff;
+          }
+        }
+
+        .mastery-container {
+          .legend {
+            background-color: #4990e2;
+          }
+        }
+      }
+
+      .show-destination {
+        margin-top: 10px;
+        width: 272px;
+        align-items: center;
+        cursor: pointer;
+        justify-content: center;
+        height: 40px;
+        text-align: center;
+        display: grid;
+        grid-template-columns: 40px auto;
+        border-radius: 45px;
+        background-color: #4190e0;
+        color: white;
+        font-size: 18px;
+        float: right;
+      }
+    }
     //TODO new screen changes
     .grade-data-container {
+      width: 100%;
+
       .grade-title {
         font-size: 45px;
         color: #8fd383;
       }
+
       .grade-description {
+        margin-top: 10px;
         color: $white;
+        height: 73vh;
       }
+
       .next-route {
+        float: right;
         color: $white;
+        grid-template-columns: auto auto;
+        align-items: center;
+        grid-gap: 7px;
+        display: grid;
+        cursor: pointer;
+        justify-content: center;
         height: 35px;
         line-height: 35px;
         background-color: #4a8cdb;
         width: 200px;
         border-radius: 17px;
         font-size: 18px;
-        padding-left: 8px;
       }
     }
 
     .course-container {
-      width: 99%;
-      padding-top: 30px;
+      width: 100%;
+      padding-top: 10px;
       max-height: calc(100vh - 80px);
-      overflow-y: auto;
 
-      &::-webkit-scrollbar {
-        height: 6px;
-        width: 8px;
-        background-color: $white;
+      .pre-study-title {
+        font-size: 30px;
+        color: $white;
+        padding-left: 20px;
       }
 
-      &::-webkit-scrollbar-thumb {
-        background: $gray-light;
-        border: 1px solid $gray-light;
-        border-radius: 5px;
-      }
-      .course-info {
-        height: 84px;
-        box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
-        display: grid;
-        grid-template-columns: 82px auto;
-        margin-bottom: 4px;
-        margin-left: 4px;
-        .course-thumbnail {
-          background-size: contain;
-          background-repeat: no-repeat;
-          font-size: 60px;
-          line-height: 84px;
-          font-weight: bold;
-          color: #212121;
-          text-align: center;
-        }
-        .course-title {
-          font-size: 16px;
-          font-weight: bold;
-          color: #4990e2;
-          margin-left: 30px;
-          position: relative;
-          .brand {
-            font-size: 12px;
-            font-weight: bold;
-            color: rgba(0, 0, 0, 0.87);
-          }
-          .direction-icon {
-            width: 58px;
-            height: 57px;
-            position: absolute;
-            top: -26px;
-            right: 50px;
-            background-color: #4a8cdb;
-            color: $white;
-            border-radius: 50%;
-            text-align: center;
-            border: none;
-            box-shadow: 0px 1px 6px 3px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            i {
-              line-height: 57px;
-            }
-          }
-          .content-count {
-            .unit-count {
-              display: grid;
-              grid-template-columns: auto auto;
-              width: 30px;
-              align-items: center;
-              position: absolute;
-              bottom: 10px;
-              right: 60px;
-
-              i {
-                background-image: url("gooru/images/unit.svg");
-                width: 15px;
-                height: 15px;
-                background-size: 15px;
-                background-repeat: no-repeat;
-                display: block;
-              }
-              .count {
-                font-size: 13px;
-                color: #4a4a4a;
-              }
-            }
-          }
-        }
-      }
       .course-description {
         font-size: 15px;
         color: #525659;
         line-height: 23px;
         box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
         margin-left: 4px;
+
         div {
-          width: 90%;
+          width: 100%;
           margin: auto;
         }
       }
+
+      .assigned-course-title {
+        padding-top: 10px;
+        font-size: 30px;
+        text-align: justify;
+        white-space: nowrap;
+        line-height: normal;
+        color: #9cff8e;
+        margin-bottom: 10px;
+        padding-left: 20px;
+      }
+
       .route0-container {
-        margin-bottom: 30px;
         margin-top: 3px;
-        box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 6px 6px #ef8f2f;
+        background-color: $white;
         margin-left: 4px;
+
         .route0-comment {
           display: grid;
           grid-template-columns: 85px auto;
@@ -145,15 +183,17 @@
           padding-bottom: 8px;
           padding-top: 8px;
           cursor: pointer;
+
           .suggestion-icon {
             align-items: center;
-            border-right: 1px solid #d7d7d7;
+
             i {
               font-size: 50px;
               margin-left: 15px;
             }
             color: $orange-400;
           }
+
           .suggestion-note {
             margin: 0 15px;
             font-size: 16px;
@@ -161,11 +201,14 @@
             line-height: 19px;
           }
         }
+
         .route0-accordion-container {
           border-top: 1px solid #d7d7d7;
+
           .gru-accordion-course {
             padding-top: 0;
             border-bottom: 1px solid #d7d7d7;
+
             .gru-accordion-unit {
               .unit {
                 padding-left: 7px !important;
@@ -173,54 +216,117 @@
             }
           }
         }
-        .route0-action {
-          height: 65px;
+      }
+
+      .route0-action {
+        height: 65px;
+        grid-gap: 15px;
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        padding-bottom: 8px;
+        padding-top: 8px;
+        justify-content: end;
+
+        .accept {
+          background-color: $orange-400;
+          width: 125px;
+          height: 30px;
+          border-radius: 45px;
           display: grid;
-          grid-template-columns: auto auto;
+          box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
+          color: $white;
+          grid-template-columns: 30px auto;
           align-items: center;
-          padding-bottom: 8px;
-          padding-top: 8px;
-          justify-content: end;
-          .accept {
-            background-color: $orange-400;
-            width: 100px;
-            height: 30px;
-            border-radius: 3px;
-            background-color: #ef8f2f;
-            box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
-            color: $white;
-            line-height: 30px;
-            text-align: center;
-            margin: 0 10px;
-            cursor: pointer;
-            i  {
-              font-size: 15px;
-            }
+          justify-content: center;
+          cursor: pointer;
+
+          i {
+            background-image: url("gooru/images/baseline-add.svg");
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+            background-size: 20px 20px;
+            display: block;
+            margin-top: 2px;
           }
-          .ignore {
-            width: 86px;
-            height: 30px;
-            border-radius: 3px;
-            background-color: #b8bfc4;
-            box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
-            color: $white;
-            line-height: 30px;
-            text-align: center;
-            margin-right: 30px;
-            cursor: pointer;
+        }
+
+        .ignore {
+          width: 86px;
+          height: 30px;
+          display: grid;
+          grid-template-columns: 20px auto;
+          align-items: center;
+          justify-content: space-evenly;
+          border-radius: 45px;
+          background-color: #b8bfc4;
+          box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
+          color: $white;
+          line-height: 30px;
+          text-align: center;
+          cursor: pointer;
+
+          i {
+            background-image: url("gooru/images/baseline-close.svg");
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+            background-size: 20px 20px;
+            display: block;
+            margin-top: 2px;
           }
         }
       }
+
       .course-map-accordion-container {
-        max-height: 375px;
+        max-height: 290px;
         box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
         margin-left: 4px;
+        overflow-y: auto;
+        background: $white;
+
+        &::-webkit-scrollbar {
+          height: 6px;
+          width: 8px;
+          background-color: $white;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: $gray-light;
+          border: 1px solid $gray-light;
+          border-radius: 5px;
+        }
+      }
+
+      .study-course {
+        color: $white;
+        grid-template-columns: auto auto;
+        align-items: center;
+        grid-gap: 7px;
+        display: grid;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        float: right;
+        justify-content: center;
+        height: 35px;
+        line-height: 35px;
+        background-color: #4a8cdb;
+        width: 200px;
+        border-radius: 17px;
+        font-size: 18px;
       }
     }
   }
+
   .loading-spinner {
     position: absolute;
     left: 50%;
     top: 50%;
   }
+}
+
+.app-container {
+  padding-top: 50px;
 }

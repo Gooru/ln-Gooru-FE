@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['student-inspect-destination'],
@@ -21,7 +20,9 @@ export default Ember.Component.extend({
 
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -75,14 +76,17 @@ export default Ember.Component.extend({
     }
   },
 
-
   // -------------------------------------------------------------------------
   // Properties
 
   /**
    * @property {Boolean} isRoute0
    */
-  isRoute0: false,
+  isRoute0: Ember.computed('type', function() {
+    let component = this;
+    let type = component.get('type');
+    return type === 'route';
+  }),
 
   /**
    * @property {Boolean} isRoute0Pending
@@ -90,7 +94,7 @@ export default Ember.Component.extend({
   isRoute0Pending: Ember.computed('route0Contents', function() {
     let component = this;
     let route0Contents = component.get('route0Contents');
-    return route0Contents ? route0Contents.status === 'pending': false;
+    return route0Contents ? route0Contents.status === 'pending' : false;
   }),
 
   /**
@@ -124,14 +128,14 @@ export default Ember.Component.extend({
     let classId = component.get('classId');
     let route0Service = component.get('route0Service');
     let filters = {
-      courseId, classId
+      courseId,
+      classId
     };
     return Ember.RSVP.hash({
       route0Contents: Ember.RSVP.resolve(route0Service.fetchInClass(filters))
-    })
-      .then(({route0Contents}) => {
-        component.set('route0Contents', route0Contents);
-      });
+    }).then(({ route0Contents }) => {
+      component.set('route0Contents', route0Contents);
+    });
   },
 
   /**
@@ -149,7 +153,9 @@ export default Ember.Component.extend({
     };
     let route0Service = component.get('route0Service');
     return Ember.RSVP.hash({
-      route0ActionStatus: Ember.RSVP.resolve(route0Service.updateRouteAction(actionData))
+      route0ActionStatus: Ember.RSVP.resolve(
+        route0Service.updateRouteAction(actionData)
+      )
     });
   }
 });

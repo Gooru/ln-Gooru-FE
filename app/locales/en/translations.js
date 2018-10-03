@@ -1715,6 +1715,31 @@ export default Object.assign(quizzesTranslations, {
       'Please reorder the answers in correct order, and click "{{action}}".'
   },
 
+  'student-first-experience': {
+    preStudyTitle: 'Pre-Study for {{title}}',
+    'route0-action': {
+      accept: 'Accept & Add',
+      ignore: 'Ignore'
+    },
+    competency: {
+      popover: {
+        title: '{{title}} BOUNDARY',
+        content:
+          'You need to study all tiles between your skyline and this line to reach your destination.'
+      }
+    },
+    'assigned-course-title': 'Assigned Course for {{title}}',
+    'study-course': 'Study Course',
+    'view-my-destination': 'Next: View My Destination',
+    'show-me-my-route': 'Show me my route',
+    'competency-level': {
+      mastery: '{{count}} Mastery',
+      'in-progress': '{{count}} In Progress',
+      'not-started': '{{count}} Not Started',
+      'your-skyline': 'Your Skyline'
+    }
+  },
+
   player: {
     'gru-navigation': {
       'view-report': 'View Report'

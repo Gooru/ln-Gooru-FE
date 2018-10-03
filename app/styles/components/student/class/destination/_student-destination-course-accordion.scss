@@ -1,6 +1,7 @@
 .student-destination-course-map-container {
   .units-container {
     box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.3);
+
     &::-webkit-scrollbar {
       height: 6px;
       width: 8px;
@@ -11,20 +12,62 @@
       border: 1px solid $white;
       border-radius: 5px;
     }
-    .u-container {  //unit-container
+
+    // .performance-not-started {
+    //   background-color: #E3E5EA;
+    //   height: 100%;
+    //   width: 100%;
+    //   pointer-events: none;
+    //   display: grid;
+    //
+    //   .container-box {
+    //     text-align: center;
+    //     color: #b8bfc4;
+    //     height: 100%;
+    //     min-width: 76px;
+    //     grid-row: 3;
+    //     grid-template-rows: 15px 10px;
+    //     align-items: center;
+    //     justify-content: center;
+    //     margin: auto;
+    //     display: grid;
+    //     width: 100%;
+    //
+    //     .percentage {
+    //       font-size: 10px;
+    //       white-space: nowrap;
+    //       line-height: 1;
+    //     }
+    //
+    //     .completion-bar {
+    //       border-radius: 5px;
+    //       height: 5px;
+    //       background-color: $white;
+    //       margin: 0 auto;
+    //       min-width: 35px;
+    //       width: 32%;
+    //     }
+    //   }
+    // }
+
+    .u-container {
+      //unit-container
       height: auto;
+
       .header {
         height: 67px;
         border-radius: 4px;
         border-bottom: solid 1px #e3e5ea;
         display: grid;
         align-items: center;
+
         .title {
           font-size: 18px;
           color: #666666;
           cursor: pointer;
           padding-left: 15px;
         }
+
         .sequence {
           font-size: 18px;
           font-weight: bold;
@@ -37,22 +80,27 @@
       .unit-header {
         padding-left: 15px;
         grid-template-columns: 72px auto;
-
       }
+
       .unit-body {
         .lessons-container {
           margin: 0;
-          .l-container {  //lesson-container
+
+          .l-container {
+            //lesson-container
             .lesson-header {
               padding-left: 30px;
-              grid-template-columns: 90px auto;
+              grid-template-columns: 72px auto;
             }
+
             .lesson-body {
               .collections-container {
-                .c-container {  //collection-container
+                .c-container {
+                  //collection-container
                   .collection-header {
                     grid-template-columns: 80px auto;
                     padding-left: 15px;
+
                     .collection-thumbnail {
                       width: 75px;
                       height: inherit;
@@ -63,11 +111,13 @@
                 }
               }
             }
+
             &.collapsed {
               .body {
                 display: none;
               }
             }
+
             &.expanded {
               .body {
                 display: grid;
@@ -76,11 +126,13 @@
           }
         }
       }
+
       &.collapsed {
         .body {
           display: none;
         }
       }
+
       &.expanded {
         .body {
           display: grid;
@@ -88,9 +140,11 @@
       }
     }
   }
+
   &.route0-view {
     // box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
   }
+
   .no-data-available {
     background-color: $white;
     font-size: 15px;
