@@ -1733,10 +1733,19 @@ export default Object.assign(quizzesTranslations, {
     'view-my-destination': 'Next: View My Destination',
     'show-me-my-route': 'Show me my route',
     'competency-level': {
+      title: 'Your Proficiency Profile',
       mastery: '{{count}} Mastery',
       'in-progress': '{{count}} In Progress',
       'not-started': '{{count}} Not Started',
       'your-skyline': 'Your Skyline'
+    },
+    'competency-level-description': {
+      description_1:
+        'You are currently in <span class=\'title\'>{{grade}}</span> <br>The chart on the left depicts your proficiency in Math.  Each column represents a domain in Math. Hover over the number to see the domain name.  Each cell represents a competency or standard in that domain. Your proficiency in Math is determined based on your current grade and any external standardised test scores that are available.',
+      description_2:
+        'In the chart, <br><span class=\'mastered\'></span> - indicates  that there is evidence that you have successfully mastered the competency <br> <span class=\'in-progress\'></span> - indicates that there is evidence that you have started studying the competency and are in progress towards achieving mastery <br><span class=\'not-started\'></span> - indicates that there is no evidence and are yet to begin studying the competency ',
+      description_3:
+        '<br> Skyline - the thick white line across the domains indicates your Skyline in Math. The Skyline identifies the highest competency that you have mastered in each domain. And indicates the progress you are making in Math. As you begin studying and successfully master the competencies in the course, the Skyline will continuously get bumped up. <br>The following represents your current proficiency status in Math'
     }
   },
 

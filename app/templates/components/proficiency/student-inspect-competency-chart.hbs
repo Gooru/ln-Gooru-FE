@@ -6,12 +6,14 @@
     <div class="domain-chart">
       <div class="scrollable-chart">
         <div id="student-inspect-competency-chart">
-          <div id="popover">
-            <span class="title">{{t "student-first-experience.competency.popover.title" title=title}}</span>
-            <span class="content">
+          {{#unless isProficiency}}
+            <div id="popover">
+              <span class="title">{{t "student-first-experience.competency.popover.title" title=title}}</span>
+              <span class="content">
             {{t "student-first-experience.competency.popover.content"}}
             </span>
-          </div>
+            </div>
+          {{/unless}}
         </div>
       </div>
       <div class="domain-sequence" style="width:{{width}}px">

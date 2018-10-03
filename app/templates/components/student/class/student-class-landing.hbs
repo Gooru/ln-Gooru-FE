@@ -1,7 +1,7 @@
 {{#if isShowGradeLevel}}
   {{student.class.gru-class-grade gradeLevel=classGrade onMoveNext="onMoveNext"}}
-{{else if isShowCompetencyLevel}}
-    {{student.class.student-inspect-destination type="competency" classId=classId courseId=courseId courseData=courseData onMoveNext="onMoveNext" classGrade=classGrade subjectCode=navMathSubjectCode}}
+{{else if isShowProficiencyLevel}}
+    {{student.class.student-inspect-destination type="proficiency" classId=classId courseId=courseId courseData=courseData onMoveNext="onMoveNext" classGrade=classGrade subjectCode=navMathSubjectCode}}
 {{else if isShowInspectDestination}}
   {{student.class.student-inspect-destination type="destination" classId=classId courseId=courseId courseData=courseData onMoveNext="onMoveNext" classGrade=classGrade subjectCode=navMathSubjectCode}}
 {{else if isShowRoute0Destination}}

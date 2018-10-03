@@ -34,7 +34,9 @@ export default Ember.Component.extend({
     onRoute0Accept() {
       let component = this;
       let action = 'accepted';
-      component.updateRoute0Action(action);
+      component.updateRoute0Action(action).then(() => {
+        component.set('isRoute0Pending', false);
+      });
     },
 
     /**
@@ -80,12 +82,28 @@ export default Ember.Component.extend({
   // Properties
 
   /**
+   * @property {JSON} competencyStatus
+   */
+  competencyStatus: null,
+
+  route0Contents: null,
+
+  /**
    * @property {Boolean} isRoute0
    */
   isRoute0: Ember.computed('type', function() {
     let component = this;
     let type = component.get('type');
     return type === 'route';
+  }),
+
+  /**
+   * @property {Boolean} isProficiency
+   */
+  isProficiency: Ember.computed('type', function() {
+    let component = this;
+    let type = component.get('type');
+    return type === 'proficiency';
   }),
 
   /**

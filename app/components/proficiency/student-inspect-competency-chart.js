@@ -125,6 +125,16 @@ export default Ember.Component.extend({
    */
   subjectCode: '',
 
+  /**
+   * @property {Boolean} isProficiency
+   */
+  isProficiency: false,
+
+  /**
+   * @property {JSON} competencyStatus
+   */
+  competencyStatus: null,
+
   // -------------------------------------------------------------------------
   // Observers
 
@@ -195,6 +205,9 @@ export default Ember.Component.extend({
     let chartData = Ember.A([]);
     let maxNumberOfCompetencies = 0;
     let taxonomyDomains = Ember.A([]);
+    let masterCount = 0;
+    let inProgressCount = 0;
+    let notStartedCount = 0;
     domainCompetencies.map(domain => {
       let competencies = domain.competencies;
       let domainCode = domain.domainCode;
@@ -233,6 +246,16 @@ export default Ember.Component.extend({
           ? route0SuggestedCompetencies.findBy('competencyCode', competencyCode)
           : false;
         let isRoute0SuggestedCompetency = !!route0suggestedCompetency;
+
+        let competencyStatusCode = parseInt(competencyStatus);
+        if (competencyStatusCode > 1) {
+          masterCount++;
+        } else if (competencyStatusCode === 1) {
+          inProgressCount++;
+        } else {
+          notStartedCount++;
+        }
+
         let isMastery = parseInt(competencyStatus) > 1;
         let xAxisSeq = domainSeq;
         let yAxisSeq = competencySeq;
@@ -289,6 +312,13 @@ export default Ember.Component.extend({
           : maxNumberOfCompetencies;
       chartData = chartData.concat(domainCompetenciesList);
     });
+
+    component.set('competencyStatus', {
+      master: masterCount,
+      inProgress: inProgressCount,
+      notStarted: notStartedCount
+    });
+
     component.set(
       'chartHeight',
       maxNumberOfCompetencies * component.get('cellHeight')
@@ -457,37 +487,40 @@ export default Ember.Component.extend({
    */
   drawDomainBoundaryLine() {
     let component = this;
-    let skylineElements = component.$('.domain-boundary');
-    let cellWidth = component.get('cellWidth');
-    let cellHeight = component.get('cellHeight');
-    let svg = component.get('domainBoundaryLineContainer');
-    let cellIndex = 0;
-    skylineElements.each(function(index) {
-      let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
-      let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
-      y1 = y1 === 0 ? y1 + 1 : y1 + cellHeight + 1;
-      let x2 = x1 + cellWidth;
-      let y2 = y1;
-      let linePoint = {
-        x1,
-        y1,
-        x2,
-        y2
-      };
-      svg
-        .append('line')
-        .attr('x1', linePoint.x1)
-        .attr('y1', linePoint.y1)
-        .attr('x2', linePoint.x2)
-        .attr('y2', linePoint.y2)
-        .attr(
-          'class',
-          `domain-boundary-line horizontal-line domain-boundary-line-${cellIndex}`
-        );
-      component.joinDomainBoundaryLinePoints(cellIndex, linePoint);
-      cellIndex++;
-    });
-    component.showDomainPopOver();
+    let isProficiency = component.get('isProficiency');
+    if (!isProficiency) {
+      let skylineElements = component.$('.domain-boundary');
+      let cellWidth = component.get('cellWidth');
+      let cellHeight = component.get('cellHeight');
+      let svg = component.get('domainBoundaryLineContainer');
+      let cellIndex = 0;
+      skylineElements.each(function(index) {
+        let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
+        let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
+        y1 = y1 === 0 ? y1 + 1 : y1 + cellHeight + 1;
+        let x2 = x1 + cellWidth;
+        let y2 = y1;
+        let linePoint = {
+          x1,
+          y1,
+          x2,
+          y2
+        };
+        svg
+          .append('line')
+          .attr('x1', linePoint.x1)
+          .attr('y1', linePoint.y1)
+          .attr('x2', linePoint.x2)
+          .attr('y2', linePoint.y2)
+          .attr(
+            'class',
+            `domain-boundary-line horizontal-line domain-boundary-line-${cellIndex}`
+          );
+        component.joinDomainBoundaryLinePoints(cellIndex, linePoint);
+        cellIndex++;
+      });
+      component.showDomainPopOver();
+    }
     component.$('.scrollable-chart').scrollTop(component.get('chartHeight'));
     component.set('isLoading', false);
   },

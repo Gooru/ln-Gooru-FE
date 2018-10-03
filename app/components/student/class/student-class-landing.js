@@ -30,17 +30,17 @@ export default Ember.Component.extend({
         component.set('isShowInspectDestination', false);
         component.set('isShowGradeLevel', false);
         component.set('isShowRoute0Destination', false);
-        component.set('isShowCompetencyLevel', true);
-      } else if (curStep === 'competency') {
+        component.set('isShowProficiencyLevel', true);
+      } else if (curStep === 'proficiency') {
         component.set('isShowInspectDestination', true);
         component.set('isShowGradeLevel', false);
         component.set('isShowRoute0Destination', false);
-        component.set('isShowCompetencyLevel', false);
+        component.set('isShowProficiencyLevel', false);
       } else if (curStep === 'inspect-destination') {
         component.set('isShowInspectDestination', false);
         component.set('isShowGradeLevel', false);
         component.set('isShowRoute0Destination', true);
-        component.set('isShowCompetencyLevel', false);
+        component.set('isShowProficiencyLevel', false);
       } else if (curStep === 'playNext') {
         component.startPlaying();
       }
@@ -61,14 +61,14 @@ export default Ember.Component.extend({
   isShowInspectDestination: false,
 
   /**
-   * @property {Boolean} isShowCompetencyLevel
+   * @property {Boolean} isShowProficiencyLevel
    */
-  isShowCompetencyLevel: true,
+  isShowProficiencyLevel: false,
 
   /**
    * @property {Boolean} isShowGradeLevel
    */
-  isShowGradeLevel: false,
+  isShowGradeLevel: true,
 
   /**
    * @property {Number} classGrade

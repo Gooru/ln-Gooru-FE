@@ -1,6 +1,6 @@
 <div class="inspect-destination-container">
   <div class="destination-chart-container">
-    {{proficiency.student-inspect-competency-chart title=gradeData.grade route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode onSelectGrade="onSelectGrade"}}
+    {{proficiency.student-inspect-competency-chart competencyStatus=competencyStatus isProficiency=isProficiency title=gradeData.grade route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode onSelectGrade="onSelectGrade"}}
   </div>
   {{#if (eq type "route")}}
     <div class="course-container">
@@ -30,7 +30,7 @@
           </div>
         </div>
       {{/if}}
-      <div class="assigned-course-title" {{action onMoveNext 'playNext'}}>
+      <div class="assigned-course-title">
         {{t "student-first-experience.assigned-course-title" title=gradeData.grade}}
       </div>
       <div class="course-map-accordion-container">
@@ -41,7 +41,7 @@
         isRoute0=isRoute0
       }}
       </div>
-      <div class="study-course">
+      <div class="study-course" {{action onMoveNext 'playNext'}}>
         {{gru-icon name="directions"}} {{t "student-first-experience.study-course"}}
       </div>
     </div>
@@ -60,31 +60,30 @@
   {{else}}
     <div class="competency-level-container">
       <div class="grade-title">
-        {{gradeData.grade}}
+        {{'t' "student-first-experience.competency-level.title"}}
       </div>
       <div class="grade-description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+        {{'t' "student-first-experience.competency-level-description.description_1" grade=gradeData.grade}} {{'t' "student-first-experience.competency-level-description.description_2"}} {{'t' "student-first-experience.competency-level-description.description_3"}}
       </div>
       <div class="competency-level-list">
         <div class="mastery-container">
           <div class="legend"></div>
-          <div class="label"> {{t "student-first-experience.competency-level.mastery" count="71"}}</div>
+          <div class="label"> {{t "student-first-experience.competency-level.mastery" count=competencyStatus.master}}</div>
         </div>
         <div class="in-progress-container">
           <div class="legend"></div>
-          <div class="label"> {{t "student-first-experience.competency-level.in-progress" count="71"}}</div>
+          <div class="label"> {{t "student-first-experience.competency-level.in-progress" count=competencyStatus.inProgress}}</div>
         </div>
         <div class="not-started-container">
           <div class="legend"></div>
-          <div class="label"> {{t "student-first-experience.competency-level.not-started" count="71"}}</div>
+          <div class="label"> {{t "student-first-experience.competency-level.not-started" count=competencyStatus.notStarted}}</div>
         </div>
         <div class="skyline-container">
           <div class="legend"></div>
           <div class="label"> {{t "student-first-experience.competency-level.your-skyline"}}</div>
         </div>
       </div>
-      <div class="show-destination" {{action onMoveNext 'competency'}}>
+      <div class="show-destination" {{action onMoveNext 'proficiency'}}>
         {{gru-icon name="directions"}} {{t "student-first-experience.view-my-destination"}}
       </div>
     </div>
