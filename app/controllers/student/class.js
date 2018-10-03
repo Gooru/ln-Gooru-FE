@@ -120,6 +120,11 @@ export default Ember.Controller.extend({
    */
   isShowNavigatorLanding: false,
 
+  /**
+   * Property to identify when there is no content to play
+   */
+  isNotAbleToStartPlayer: false,
+
   // -------------------------------------------------------------------------
   // Methods
 
