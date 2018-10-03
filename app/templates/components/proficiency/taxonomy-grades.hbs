@@ -1,7 +1,7 @@
-<div class="grades-container">
+<div class="grade-list">
   {{#each taxonomyGrades as |taxonomyGrade|}}
-    <div class="grade-container {{if (eq activeGrade.id taxonomyGrade.id) 'active-grade'}}" style="height: calc(80vh / {{taxonomyGrades.length}});">
-      <div class="grade-title">{{taxonomyGrade.grade}}</div>
+    <div class="grade-container {{if (eq activeGrade.id taxonomyGrade.id) 'active-grade'}}">
+      <span class="grade-title">{{taxonomyGrade.grade}}</span>
     </div>
   {{/each}}
 </div>

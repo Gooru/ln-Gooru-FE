@@ -6,7 +6,6 @@ import {
 } from 'gooru-web/utils/navigation-util';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['student-class-landing'],
@@ -22,26 +21,31 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
-
     /**
      * Action triggered when select next action
      */
     onMoveNext(curStep) {
       let component = this;
       if (curStep === 'grade') {
+        component.set('isShowInspectDestination', false);
+        component.set('isShowGradeLevel', false);
+        component.set('isShowRoute0Destination', false);
+        component.set('isShowProficiencyLevel', true);
+      } else if (curStep === 'proficiency') {
         component.set('isShowInspectDestination', true);
         component.set('isShowGradeLevel', false);
         component.set('isShowRoute0Destination', false);
+        component.set('isShowProficiencyLevel', false);
       } else if (curStep === 'inspect-destination') {
         component.set('isShowInspectDestination', false);
         component.set('isShowGradeLevel', false);
         component.set('isShowRoute0Destination', true);
-      } else if (curStep === 'playNext'){
+        component.set('isShowProficiencyLevel', false);
+      } else if (curStep === 'playNext') {
         component.startPlaying();
       }
     }
   },
-
 
   // -------------------------------------------------------------------------
   // Properties
@@ -55,6 +59,11 @@ export default Ember.Component.extend({
    * @property {Boolean} isShowInspectDestination
    */
   isShowInspectDestination: false,
+
+  /**
+   * @property {Boolean} isShowProficiencyLevel
+   */
+  isShowProficiencyLevel: false,
 
   /**
    * @property {Boolean} isShowGradeLevel
@@ -89,7 +98,6 @@ export default Ember.Component.extend({
     return classData.get('courseId');
   }),
 
-
   /**
    * @property {String} navMathSubjectCode
    */
@@ -121,7 +129,9 @@ export default Ember.Component.extend({
       options.classId
     );
     nextPromise.then(component.nextPromiseHandler).then(queryParams => {
-      component.get('router').transitionTo('study-player', courseId, { queryParams });
+      component.get('router').transitionTo('study-player', courseId, {
+        queryParams
+      });
     });
   },
 

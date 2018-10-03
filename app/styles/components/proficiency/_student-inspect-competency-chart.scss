@@ -1,5 +1,6 @@
 .student-inspect-competency-chart {
   margin: 0 auto;
+
   .three-bounce-spinner {
     position: absolute;
     left: 33%;
@@ -11,13 +12,14 @@
   }
 
   .chart-container {
+    margin-top: 35px;
+
     .graded-chart-container {
       display: grid;
       grid-template-columns: 150px auto;
-      .scrollable-chart {
-        height: 80vh;
-        overflow-y: auto;
-        width: max-content;
+
+      .domain-chart {
+        overflow: auto;
 
         &::-webkit-scrollbar {
           height: 6px;
@@ -30,46 +32,96 @@
           border-radius: 5px;
         }
 
-        #student-inspect-competency-chart {
-          margin-bottom: 20px;
-          position: relative;
-          transform: rotateX(180deg);
-          -webkit-transition: -webkit-transform 0.6s ease-in;
-          transition: transform 0.6s ease-in;
-          -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
+        .scrollable-chart {
+          height: 80vh;
+          overflow-y: auto;
+          width: max-content;
 
-          .competency {
-            stroke: $snow-gray;
-            stroke-width: 1;
-            shape-rendering: crispedges;
-            stroke-opacity: 0.4;
-            cursor: pointer;
+          &::-webkit-scrollbar {
+            height: 6px;
+            width: 8px;
           }
 
-          #skyline-container {
-            line {
-              stroke: $white;
-              stroke-width: 6px;
+          &::-webkit-scrollbar-thumb {
+            background: $gray-light;
+            border: 1px solid $gray-light;
+            border-radius: 5px;
+          }
+
+          #popover {
+            width: 200px;
+            height: 100px;
+            border-radius: 2px;
+            padding: 5px;
+            transform: rotateX(180deg);
+            position: absolute;
+            background-color: $white;
+            box-shadow: 0 2px 14px 10px rgba(0, 0, 0, 0.7);
+            display: block;
+
+            span.title {
+              display: block;
+              font-weight: bold;
+              font-size: 13px;
+            }
+
+            &:before {
+              content: "";
+              display: inline-block;
+              background-color: transparent;
+              position: absolute;
+              z-index: 1;
+              width: 0;
+              top: 100%;
+              left: 15px;
+              height: 0;
+              border-left: 8px solid transparent;
+              border-right: 8px solid transparent;
+              border-top: 10px solid $white;
             }
           }
 
-          #baseline-container {
-            line {
-              stroke: $dark-400;
-              stroke-width: 2px;
+          #student-inspect-competency-chart {
+            margin-bottom: 20px;
+            position: relative;
+            transform: rotateX(180deg);
+            -webkit-transition: -webkit-transform 0.6s ease-in;
+            transition: transform 0.6s ease-in;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+
+            .competency {
+              stroke: #36394a;
+              stroke-width: 2;
+              shape-rendering: crispedges;
+              stroke-opacity: 0.7;
+              cursor: pointer;
             }
-          }
 
-          .skyline {
-            transition-property: visibility, opacity;
-            transition-duration: 0s, 1s;
-          }
+            #skyline-container {
+              line {
+                stroke: $white;
+                stroke-width: 6px;
+              }
+            }
 
-          .domain-boundary-line {
-            stroke-dasharray: 6;
-            stroke: #010518;
-            stroke-width: 2px;
+            #baseline-container {
+              line {
+                stroke: $dark-400;
+                stroke-width: 2px;
+              }
+            }
+
+            .skyline {
+              transition-property: visibility, opacity;
+              transition-duration: 0s, 1s;
+            }
+
+            .domain-boundary-line {
+              // stroke-dasharray: 6;
+              stroke: #8fd383;
+              stroke-width: 4px;
+            }
           }
         }
       }
@@ -77,13 +129,11 @@
 
     .domain-sequence {
       display: inline-block;
-      float: right;
-      margin-right: 8px;
 
       .domain-counts {
         float: left;
         display: inline-block;
-        width: 30px;
+        width: 35px;
         text-align: center;
         margin-top: 0;
         cursor: pointer;
