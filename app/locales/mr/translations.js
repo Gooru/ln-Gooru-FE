@@ -1169,6 +1169,18 @@ export default Object.assign(quizzesTranslations, {
         'students-null':
           'त्यांना आपल्या वर्गात प्रवेश करण्यासाठी वर्ग कोड वापरा.'
       },
+      'students-tab': {
+        'last-name': 'आडनाव',
+        'first-name': 'पहिले नाव',
+        performance: 'कामगिरी',
+        proficiency: 'प्रवीणता',
+        location: 'स्थान',
+        'currently-studying': 'सध्या अभ्यास करत आहे',
+        'student-id': 'विद्यार्थी ओळखपत्र',
+        remove: 'काढा',
+        mastered: 'मास्टर्ड',
+        'in-progress': 'प्रगतीपथावर'
+      },
       'class-activities': 'दैनिक वर्ग कृती',
       'back-to-class-activities': 'परत दैनंदिन कामकाजातील',
       'class-activities-tab': {
@@ -1704,7 +1716,11 @@ export default Object.assign(quizzesTranslations, {
       'expand-chart': 'चार्ट विस्तृत करा',
       mastered: 'ताकदवान',
       'in-progress': 'काम चालू',
-      'not-started': 'सुरु  केलेले नाही'
+      'not-started': 'सुरु  केलेले नाही',
+      skyline: 'स्काईलाइन',
+      baseline: 'बेसलाइन',
+      'not-tagged':
+        'वर्गात कोणत्याही प्रकारचे नियुक्त केलेले नाही किंवा अर्थातच एखाद्या वैध विषयावर किंवा मानकांवर टॅग केले गेले नाही.'
     }
   },
   'gru-data-picker': {
@@ -2537,5 +2553,51 @@ export default Object.assign(quizzesTranslations, {
   'gru-performance-chart': {
     'teacher-tooltip':
       'आपल्या विद्यार्थ्यांनी या धड्यातील सर्व मूल्यमापन पूर्ण केले आहेत'
+  },
+  report: {
+    'external-assessment-report': {
+      note:
+        'मूल्यांकनासाठी विद्यार्थ्यांच्या अहवालानुसार हा एक बाह्य मूल्यांकन आहे. वैयक्तिक प्रश्न पातळी डेटा उपलब्ध नाही.',
+      wish: 'अभिनंदन! तुम्ही गोल केले',
+      reference: 'हे बाह्य मूल्यांकन प्रवेश केला जाऊ शकतो '
+    },
+    'competency-report': {
+      title: 'क्षमता अहवाल',
+      'no-subject': 'कोणताही विषय नियुक्त केला नाही'
+    },
+    'domain-report': 'डोमेन अहवाल'
+  },
+
+  'self-report': {
+    'your-score': 'आपला स्कोअर',
+    'update-error': 'स्कोअर अद्यतनित करताना समस्या',
+    'validation-error': 'वैध गुण प्रविष्ट करा',
+    'enter-score': 'येथे आपला स्कोअर प्रविष्ट करा'
+  },
+  notifications: {
+    'notificationlist-header-title': 'अधिसूचना',
+    'show-more': 'अजून दाखवा',
+    type: {
+      'teacher-suggestion-title':
+        'आपल्याकडे वर्गात एक नवीन शिक्षक सूचना आहे : {{ classTitle }}',
+      'student-gradable-submission-title':
+        'You have {{occurrence}} item(s) to grade in class : {{ classTitle }}',
+      'student-self-report-title':
+        '{{occurrence}} Student(s) reported performance at class : {{ classTitle }}',
+      'teacher-override-title':
+        'शिक्षकाने आपली सबमिशन क्लासमध्ये दुरुस्त केली आहे : {{ classTitle }}  ',
+      'teacher-grading-complete-title':
+        'शिक्षकाने आपली सबमिशन श्रेणीमध्ये केली आहे : {{ classTitle }}'
+    },
+    typeinclass: {
+      'teacher-suggestion-title': 'आपल्याकडे एक नवीन शिक्षक सूचना आहे',
+      'student-gradable-submission-title':
+        'You have {{occurrence}} student item(s) to grade',
+      'student-self-report-title':
+        '{{occurrence}} विद्यार्थ्यांनी कार्यप्रदर्शन केले',
+      'teacher-override-title': 'शिक्षकाने आपली सबमिशन दुरुस्त केली आहे',
+      'teacher-grading-complete-title':
+        'शिक्षकाने आपली सबमिशन श्रेणीमध्ये केली आहे'
+    }
   }
 });
