@@ -113,12 +113,15 @@ export default Ember.Component.extend({
               role: 0,
               source: 0,
               type: null,
+              itemId: 0,
+              itemType: '',
               subtype: null,
               pathId: 0,
               minScore: 0,
               collectionSource: 'course_map',
               isStudyPlayer: true,
-              pathType: ''
+              pathType: '',
+              isNotification: true
             }
           }
         }

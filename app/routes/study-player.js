@@ -91,9 +91,12 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
         const courseId = mapLocation.get('context.courseId');
         const unitId = mapLocation.get('context.unitId');
         const lessonId = mapLocation.get('context.lessonId');
+        // const collectionId = params.isNotification ? mapLocation.get('context.collectionId') : mapLocation.get('context.itemId') ||
+        //   mapLocation.get('context.collectionId');
         const collectionId =
           mapLocation.get('context.itemId') ||
           mapLocation.get('context.collectionId');
+
         params.type =
           mapLocation.get('context.itemType') ||
           mapLocation.get('context.collectionType');

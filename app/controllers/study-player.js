@@ -24,7 +24,8 @@ export default PlayerController.extend({
     'minScore',
     'collectionSource',
     'isStudyPlayer',
-    'pathType'
+    'pathType',
+    'isNotification'
   ],
 
   // -------------------------------------------------------------------------
