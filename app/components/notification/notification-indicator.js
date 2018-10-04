@@ -343,7 +343,9 @@ export default Ember.Component.extend({
     closeNotificationList() {
       const component = this;
       let dataModel = component.get('notificationModel');
-      dataModel.notifications.clear();
+      if (dataModel && dataModel.notifications) {
+        dataModel.notifications.clear();
+      }
       component.set('notificationModel', dataModel);
       component.set('displayNotificationList', false);
     }
