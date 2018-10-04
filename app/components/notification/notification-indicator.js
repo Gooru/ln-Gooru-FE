@@ -343,7 +343,9 @@ export default Ember.Component.extend({
     closeNotificationList() {
       const component = this;
       let dataModel = component.get('notificationModel');
-      dataModel.notifications.clear();
+      if (dataModel && dataModel.notifications) {
+        dataModel.notifications.clear();
+      }
       component.set('notificationModel', dataModel);
       component.set('displayNotificationList', false);
     }
@@ -360,6 +362,7 @@ export default Ember.Component.extend({
       return; //Don't fetch any notifications if user role is null
     }
     let notinPromise;
+    let showMoreFlow = !dataFilter;
     dataFilter = dataFilter || component.getDataFilter();
     if (component.get('notificationCtxRole') === 'student') {
       notinPromise = component
@@ -394,11 +397,9 @@ export default Ember.Component.extend({
             []
           );
 
-      var ndt = concatAndDeDuplicateObjects(
-        'id',
-        notndetail,
-        newNotificationDetails
-      );
+      var ndt = showMoreFlow
+        ? concatAndDeDuplicateObjects('id', notndetail, newNotificationDetails)
+        : newNotificationDetails;
 
       if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
         newDataModel.notifications = ndt;

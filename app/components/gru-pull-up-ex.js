@@ -83,6 +83,7 @@ export default Ember.Component.extend({
    * Observer to check the showPullUp property in component
    **/
   onChange: Ember.observer('showPullUp', function() {
+    this.onClosePullUp();
     this.animatePullOut();
   }),
 
