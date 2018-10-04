@@ -203,6 +203,7 @@
             background: #8dc496;
             text-align: center;
             line-height: 1.5;
+            visibility: hidden;
 
             span {
               font-size: 10px;
@@ -233,6 +234,7 @@
                   align-items: center;
                   justify-content: center;
                   width: 100%;
+                  cursor: default;
 
                   img {
                     width: 45px;
@@ -560,7 +562,7 @@
               height: 40px;
               border-radius: 4px;
               border: solid 1px #ffffff;
-              background-color: #35424b;
+              background: #35424b;
               font-family: "Open Sans";
               font-size: 15px;
               font-weight: bold;
@@ -568,19 +570,27 @@
               color: #ffffff;
               text-transform: uppercase;
               margin-right: 10px;
+              &:active {
+                background: #35424b;
+                box-shadow: none;
+              }
             }
 
             .confirm {
               width: 100px;
               height: 40px;
               border-radius: 4px;
-              background-color: #1aa9eb;
+              background: #1aa9eb;
               font-family: "Open Sans";
               font-size: 15px;
               font-weight: bold;
               text-align: center;
               color: #ffffff;
               text-transform: uppercase;
+              &:active {
+                background: #1aa9eb;
+                box-shadow: none;
+              }
             }
           }
         }

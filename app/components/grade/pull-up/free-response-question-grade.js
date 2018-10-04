@@ -35,7 +35,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
     this.openPullUp();
-    this.loadData();
+    this.initialize();
   },
 
   /**
@@ -272,6 +272,17 @@ export default Ember.Component.extend({
     return score;
   }),
 
+  /**
+   * Maintains the value of selected user index.
+   * @return {Number}
+   */
+  currentStudentIndex: Ember.computed('studentId', 'users', function() {
+    let users = this.get('users');
+    let studentId = this.get('studentId');
+    let user = users.findBy('id', studentId);
+    return users.indexOf(user) + 1;
+  }),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -319,13 +330,61 @@ export default Ember.Component.extend({
      */
     onChooseCategory(category) {
       category.set('selected', true);
+    },
+
+    onClickPrev() {
+      let component = this;
+      component
+        .$(
+          '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control'
+        )
+        .addClass('in-active');
+      let users = component.get('users');
+      let selectedElement = component.$(
+        '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .item.active'
+      );
+      let currentIndex = selectedElement.data('item-index');
+      let selectedIndex = selectedElement.data('item-index') - 1;
+      if (currentIndex === 0) {
+        selectedIndex = users.length - 1;
+      }
+      let user = users.objectAt(selectedIndex);
+      component.set('studentId', user.get('id'));
+      component
+        .$('.frq-grade-students-carousel #frq-grade-students-carousel-wrapper')
+        .carousel('prev');
+      component.loadData();
+    },
+
+    onClickNext() {
+      let component = this;
+      component
+        .$(
+          '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control'
+        )
+        .addClass('in-active');
+      let users = component.get('users');
+      let selectedElement = component.$(
+        '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .item.active'
+      );
+      let currentIndex = selectedElement.data('item-index');
+      let selectedIndex = currentIndex + 1;
+      if (users.length - 1 === currentIndex) {
+        selectedIndex = 0;
+      }
+      let user = users.objectAt(selectedIndex);
+      component.set('studentId', user.get('id'));
+      component
+        .$('.frq-grade-students-carousel #frq-grade-students-carousel-wrapper')
+        .carousel('next');
+      component.loadData();
     }
   },
 
   //--------------------------------------------------------------------------
   // Methods
 
-  loadData() {
+  initialize() {
     let component = this;
     let classId = component.get('classId');
     let courseId = component.get('courseId');
@@ -333,6 +392,7 @@ export default Ember.Component.extend({
     let lessonId = component.get('lessonId');
     let collectionId = component.get('collection.id');
     let questionId = component.get('question.id');
+    component.set('isLoading', true);
     return Ember.RSVP.hash({
       question: this.get('questionService').readQuestion(questionId),
       users: this.get('rubricService').getStudentsForQuestion(
@@ -347,8 +407,8 @@ export default Ember.Component.extend({
         if (users.get('students') && users.get('students').length) {
           let studentId = component.get('studentId');
           if (!studentId) {
-            component.set('studentId', users.get('students.firstObject'));
             studentId = users.get('students.firstObject');
+            component.set('studentId', studentId);
           }
 
           return Ember.RSVP.hash({
@@ -382,10 +442,43 @@ export default Ember.Component.extend({
         users.map(user => {
           user.set('rubric', rubric.copy());
         });
-        component.set('users', users);
-        component.set('rubric', rubric);
-        component.set('answer', answer);
+        if (!component.get('isDestroyed')) {
+          component.set('users', users);
+          component.set('rubric', rubric);
+          component.set('answer', answer);
+          component.set('isLoading', false);
+          component.handleCarouselControl();
+        }
       });
+  },
+
+  loadData() {
+    let component = this;
+    let classId = component.get('classId');
+    let courseId = component.get('courseId');
+    let unitId = component.get('unitId');
+    let lessonId = component.get('lessonId');
+    let collectionId = component.get('collection.id');
+    let questionId = component.get('question.id');
+    let studentId = component.get('studentId');
+    component.set('isLoading', true);
+    return Ember.RSVP.hash({
+      answer: this.get('rubricService').getAnswerToGrade(
+        studentId,
+        classId,
+        courseId,
+        collectionId,
+        questionId,
+        unitId,
+        lessonId
+      )
+    }).then(({ answer }) => {
+      if (!component.get('isDestroyed')) {
+        component.set('answer', answer);
+        component.set('isLoading', false);
+        component.handleCarouselControl();
+      }
+    });
   },
 
   /**
@@ -472,6 +565,48 @@ export default Ember.Component.extend({
           Ember.$('.popover-title').hide();
         }
       });
+    }
+  },
+
+  handleCarouselControl() {
+    let component = this;
+    let studentId = component.get('studentId');
+    let users = component.get('users');
+    let selectedUser = users.findBy('id', studentId);
+    let currentIndex = users.indexOf(selectedUser);
+    if (users.length - 1 === 0) {
+      component
+        .$(
+          '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control'
+        )
+        .addClass('in-active');
+    } else {
+      if (currentIndex === 0) {
+        component
+          .$(
+            '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control.left'
+          )
+          .addClass('in-active');
+      } else {
+        component
+          .$(
+            '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control.left'
+          )
+          .removeClass('in-active');
+      }
+      if (currentIndex === users.length - 1) {
+        component
+          .$(
+            '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control.right'
+          )
+          .addClass('in-active');
+      } else {
+        component
+          .$(
+            '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control.right'
+          )
+          .removeClass('in-active');
+      }
     }
   }
 });

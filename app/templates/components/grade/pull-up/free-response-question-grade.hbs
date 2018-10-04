@@ -29,7 +29,7 @@
     <div class="frq-grade-left-panel">
       <div class="frq-grade-left-panel-header">
         <div class="frq-grade-count">
-          <sup>1</sup>&frasl;<sub>{{users.length}}</sub>
+          <sup>{{currentStudentIndex}}</sup>&frasl;<sub>{{users.length}}</sub>
         </div>
         <div class="frq-grade-students">
           <div class="frq-grade-students-carousel">
@@ -151,5 +151,9 @@
 
     </div>
   </div>
-
 </div>
+{{#if isLoading}}
+  <div class="loading-spinner">
+    {{three-bounce-spinner}}
+  </div>
+{{/if}}
