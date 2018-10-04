@@ -8,6 +8,15 @@
   margin: auto;
   color: #37434d;
 
+  .popover {
+    border: 0;
+    padding: 0;
+
+    .popover-title {
+      text-align: center;
+    }
+  }
+
   .backdrop {
     background-color: #434c5a;
     position: fixed;
@@ -285,7 +294,7 @@
           .frq-question-info {
             padding-top: 15px;
 
-            span {
+            .frq-header {
               font-family: "Open Sans";
               font-size: 34px;
               color: #37424b;
@@ -334,14 +343,21 @@
             width: 100%;
             height: 100%;
             background-color: #5d676f;
-            padding-top: 16px;
+            padding-top: 10px;
             text-align: center;
 
             span {
               font-family: "Open Sans";
-              font-size: 25px;
+              font-size: 20px;
               font-weight: bold;
               color: #35424b;
+              line-height: 1.5;
+            }
+
+            hr {
+              margin: 0 15px;
+              border-width: 2px;
+              border-color: #35424b;
             }
           }
         }
@@ -352,50 +368,161 @@
           padding-right: 20px;
           padding-top: 40px;
 
-          .frq-grade-rubric-level-score {
-            .frq-grade-rubric-categories {
-              .frq-grade-rubric-category {
-                padding-bottom: 15px;
+          .frq-grade-rubric-grading {
+            width: 200px;
+            font-size: 30px;
+            line-height: 1;
+            text-align: center;
+            margin: 0 auto;
+            padding-bottom: 20px;
 
-                .frq-grade-rubric-category-info {
-                  display: inline-flex;
+            .studentScore {
+              input {
+                text-align: center;
+                font-size: 30px;
+                color: #fff;
+              }
+            }
+          }
 
-                  .error_outline {
-                    padding-right: 10px;
-                  }
+          .frq-grade-rubric-categories {
+            .frq-grade-rubric-category {
+              padding-bottom: 15px;
 
-                  p {
-                    font-family: "Open Sans";
-                    font-size: 13px;
-                    font-weight: bold;
-                    color: #ffffff;
+              &.comment-active {
+                .frq-grade-rubric-level-container {
+                  .mode_comment {
+                    opacity: 1 !important;
                   }
                 }
+              }
 
-                .frq-grade-rubric-level-container {
+              .frq-grade-rubric-category-info {
+                display: inline-flex;
+
+                p {
+                  font-family: "Open Sans";
+                  font-size: 13px;
+                  font-weight: bold;
+                  color: #ffffff;
+                  line-height: 1.2;
+                }
+              }
+
+              .frq-grade-rubric-level-container {
+                display: flex;
+                align-items: center;
+                height: 25px;
+
+                .frq-grade-rubric-levels {
+                  width: 290px;
+                  background-color: #5d666f;
+                  border-radius: 16px;
                   display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  padding: 3px;
+                  color: #37424b;
+                  position: relative;
 
-                  .frq-grade-rubric-levels {
-                    width: 300px;
-                    background-color: #5d666f;
-                    border-radius: 16px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    padding: 3px;
+                  &.active,
+                  &.no-progress {
+                    background-color: transparent;
+                    border-radius: 0;
+                  }
 
-                    i {
-                      height: 20px;
-                      width: 20px;
-                      border-radius: 50%;
-                      background-color: #ffff;
+                  &.no-progress {
+                    .frq-grade-info-no-level,
+                    .frq-grade-info-popover {
+                      opacity: 0.3;
+
+                      &.selected {
+                        opacity: 1 !important;
+                        background-color: #4b9147;
+                      }
                     }
                   }
 
-                  .mode_comment {
-                    padding-left: 20px;
-                    opacity: 0.2;
+                  i {
+                    height: 20px;
+                    width: 20px;
+                    border-radius: 50%;
+                    background-color: #ffff;
+                    cursor: pointer;
+                    position: relative;
+                    z-index: 1;
                   }
+
+                  .progress-bar {
+                    position: absolute;
+                    height: 26px;
+                    display: block;
+                    border-radius: 16px;
+                    margin-left: -3px;
+                    width: 0;
+                  }
+
+                  .popover {
+                    .popover-title {
+                      text-align: center;
+                    }
+
+                    .popover-content {
+                      text-align: center;
+                      background-color: #fff;
+                    }
+                  }
+                }
+
+                .frq-grade-clear {
+                  height: 18px;
+                  width: 25px;
+                  padding-left: 4px;
+
+                  .clear {
+                    font-size: 18px;
+                    visibility: hidden;
+                  }
+
+                  &.active {
+                    .clear {
+                      visibility: visible;
+                      cursor: pointer;
+                    }
+                  }
+                }
+
+                .frq-grade-comment {
+                  height: 20px;
+                  width: 30px;
+
+                  .mode_comment {
+                    opacity: 0.2;
+                    cursor: pointer;
+                  }
+                }
+              }
+
+              .frq-grade-comment-section {
+                padding-top: 20px;
+                display: none;
+
+                [contenteditable="true"]:empty:before {
+                  content: attr(placeholder);
+                  display: block;
+                }
+
+                p {
+                  width: 100%;
+                  font-family: "Open Sans";
+                  font-size: 16px;
+                  font-style: italic;
+                  color: #ffffff;
+                  background-color: #35424b;
+                  border-bottom: 1px solid #fff;
+                  cursor: text;
+                  outline: none;
+                  word-break: break-all;
                 }
               }
             }
@@ -404,19 +531,29 @@
           .frq-grade-general-comment-container {
             padding-top: 20px;
 
-            textarea {
+            [contenteditable="true"]:empty:before {
+              content: attr(placeholder);
+              display: block;
+            }
+
+            p {
               width: 100%;
               font-family: "Open Sans";
               font-size: 16px;
               font-style: italic;
               color: #ffffff;
               background-color: #35424b;
+              border-bottom: 1px solid #fff;
+              cursor: text;
+              outline: none;
+              word-break: break-all;
             }
           }
 
           .frq-grade-action-btns {
             text-align: right;
             padding-top: 20px;
+            padding-bottom: 40px;
 
             .cancel {
               width: 100px;

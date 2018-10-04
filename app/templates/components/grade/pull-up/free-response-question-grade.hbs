@@ -29,7 +29,7 @@
     <div class="frq-grade-left-panel">
       <div class="frq-grade-left-panel-header">
         <div class="frq-grade-count">
-          <sup>1</sup>&frasl;<sub>25</sub>
+          <sup>1</sup>&frasl;<sub>{{users.length}}</sub>
         </div>
         <div class="frq-grade-students">
           <div class="frq-grade-students-carousel">
@@ -62,84 +62,86 @@
       </div>
       <div class="frq-grade-left-panel-body">
         <div class="frq-question-info">
-          <span>Brief</span>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+          <span class="frq-header">Brief</span>
+          <p>
+            {{gru-math-text text=question.text}}
+          </p>
         </div>
         <div class="frq-question-answer-info">
-          <span>Answer</span>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....</p>
+          <span class="frq-header">Answer</span>
+          <p>
+            {{gru-math-text text=answer.answerText}}
+          </p>
         </div>
       </div>
     </div>
     <div class="frq-grade-right-panel">
       <div class="frq-grade-right-panel-header">
         <div class="frq-grade-info">
-          <span class="frq-grade-info-title">Rubric</span>
-          <span class="frq-grade-info-desc">Answer this rubric to complete your FRQ.</span>
+          {{#if rubric.scoring}}
+            <span class="frq-grade-info-title">Grading</span>
+            <span class="frq-grade-info-desc">Update grade score to complete your FRQ.</span>
+          {{else}}
+            <span class="frq-grade-info-title">Rubric</span>
+            <span class="frq-grade-info-desc">Answer this rubric to complete your FRQ.</span>
+          {{/if}}
         </div>
-        <div class="frq-grade-score">
-          <span>0/15</span>
-        </div>
+        {{#if rubric.scoring}}
+          <div class="frq-grade-score" style= {{safe-html (concat "background-color:" (grade-color userGradeScore))}}>
+            <span>{{studentGradeScore}}</span>
+            <hr/>
+            <span>{{rubric.maxScore}}</span>
+          </div>
+        {{else}}
+          <div class="frq-grade-score" style= {{safe-html (concat "background-color:" (grade-color userRubricScore))}}>
+            <span>{{totalUserRubricPoints}}</span>
+            <hr/>
+            <span>{{totalRubricPoints}}</span>
+          </div>
+        {{/if}}
       </div>
       <div class="frq-grade-right-panel-body">
-        <div class="frq-grade-rubric-level-score">
+        {{#if rubric.scoring}}
+            <div class="frq-grade-rubric-grading">
+              {{validation.gru-input-number model=userGrade  valuePath='studentScore' min=0 max=rubric.maxScore step=rubric.increment }}
+              <span class="score">{{rubric.maxScore}}</span>
+            </div>
+        {{else}}
           <div class="frq-grade-rubric-categories">
-            <div class="frq-grade-rubric-category">
-              <div class="frq-grade-rubric-category-info">
-                {{gru-icon name="error_outline"}}
-                <p>Inherent understanding of Subject Matter</p>
-              </div>
-              <div class="frq-grade-rubric-level-container">
-                <div class="frq-grade-rubric-levels">
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
+            {{#each categories as | category categoryIndex |}}
+              <div class="frq-grade-rubric-category" id="frq-grade-rubric-category-{{categoryIndex}}">
+                <div class="frq-grade-rubric-category-info">
+                  <p>{{category.title}}</p>
                 </div>
-                {{gru-icon name="mode_comment"}}
-              </div>
-            </div>
-            <div class="frq-grade-rubric-category">
-              <div class="frq-grade-rubric-category-info">
-                {{gru-icon name="error_outline"}}
-                <p>Understanding of mechanical forces at play</p>
-              </div>
-              <div class="frq-grade-rubric-level-container">
-                <div class="frq-grade-rubric-levels">
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
+                <div class="frq-grade-rubric-level-container">
+                  <div class="frq-grade-rubric-levels {{unless (and category.allowsLevels category.allowsScoring) 'no-progress'}} {{if category.scoreInPrecentage 'active'}}">
+                    {{#if category.allowsLevels}}
+                      {{#each category.levels as |level levelIndex|}}
+                        <i class="frq-grade-info-popover {{if level.selected 'selected'}}" data-html="true" title="Level: {{level.score}}" data-content="{{level.name}}" data-category= {{categoryIndex}} data-level= {{levelIndex}}></i>
+                      {{/each}}
+                    {{else}}
+                      <i class="frq-grade-info-no-level {{if category.selected 'selected'}}" {{action 'onChooseCategory' category}}></i>
+                    {{/if}}
+                    {{#if (and category.allowsLevels category.allowsScoring)}}
+                      <div class="progress-bar" style= {{safe-html (concat "background-color:" (grade-color category.scoreInPrecentage) ";width:" category.scoreInPrecentage "%")}}></div>
+                    {{/if}}
+                  </div>
+                  <div class="frq-grade-clear {{if category.selected 'active'}}" {{action 'unSelectCategoryLevel' category}}>
+                    {{gru-icon name="clear"}}
+                  </div>
+                  <div class="frq-grade-comment" {{action 'onShowAddCommentBox' categoryIndex}}>
+                    {{gru-icon name="mode_comment"}}
+                  </div>
                 </div>
-                {{gru-icon name="mode_comment"}}
-              </div>
-            </div>
-            <div class="frq-grade-rubric-category">
-              <div class="frq-grade-rubric-category-info">
-                {{gru-icon name="error_outline"}}
-                <p>Understanding the lingual processes at play</p>
-              </div>
-              <div class="frq-grade-rubric-level-container">
-                <div class="frq-grade-rubric-levels">
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
+                <div class="frq-grade-comment-section">
+                  <p contenteditable="true" placeholder='Add Comment'></p>
                 </div>
-                {{gru-icon name="mode_comment"}}
               </div>
-            </div>
+            {{/each}}
           </div>
-        </div>
-        <div class="frq-grade-rubric-level-no-score">
-        </div>
-        <div class="frq-grade-rubric-no-level-no-score">
-        </div>
+        {{/if}}
         <div class="frq-grade-general-comment-container">
-          <textarea rows='1' placeholder='General Comments Only'></textarea>
+          <p contenteditable="true" placeholder='General Comments Only'></p>
         </div>
         <div class="frq-grade-action-btns">
           <button type="button" class="btn cancel btn-primary btn-lg">{{t 'common.cancel'}}</button>
