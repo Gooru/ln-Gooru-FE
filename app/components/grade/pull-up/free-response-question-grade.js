@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { getGradeColor } from 'gooru-web/utils/utils';
 import RubricGrade from 'gooru-web/models/rubric/rubric-grade';
+import RubricCategoryScore from 'gooru-web/models/rubric/grade-category-score';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -120,9 +121,9 @@ export default Ember.Component.extend({
    * Computed Properties for rubric categories
    * @type {Object}
    */
-  categories: Ember.computed('userRubric', function() {
-    let categories = this.get('userRubric.categories')
-      ? this.get('userRubric.categories')
+  categories: Ember.computed('userGrade', function() {
+    let categories = this.get('userGrade.categories')
+      ? this.get('userGrade.categories')
       : Ember.A([]);
     categories.map(category => {
       let levels = category.get('levels');
@@ -135,41 +136,13 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * Maintains the object value of rubric grading
-   * @type {Object}
-   */
-  userRubric: Ember.computed('studentId', 'users.[]', function() {
-    let studentId = this.get('studentId');
-    let user = this.get('users').findBy('id', studentId);
-    return user ? user.get('rubric') : {};
-  }),
-
-  /**
    * Maintains the user grade
    * @return {Object}
    */
-  userGrade: Ember.computed('studentId', function() {
-    let component = this;
-    let studentId = component.get('studentId');
-    return RubricGrade.create(
-      Ember.getOwner(this).ownerInjection(),
-      component.get('rubric'),
-      {
-        comment: '',
-        studentId: studentId,
-        classId: component.get('classId'),
-        courseId: component.get('courseId'),
-        unitId: component.get('unit.id'),
-        lessonId: component.get('lesson.id'),
-        collectionId: component.get('collectionId'),
-        resourceId: component.get('questionId'),
-        sessionId: component.get('answer.sessionId'),
-        createdDate: new Date(),
-        rubricCreatedDate: component.get('rubric.createdDate'),
-        rubricUpdatedDate: component.get('updatedDate'),
-        studentScore: 0
-      }
-    );
+  userGrade: Ember.computed('studentId', 'users.[]', function() {
+    let studentId = this.get('studentId');
+    let user = this.get('users').findBy('id', studentId);
+    return user ? user.get('rubricGrade') : null;
   }),
 
   /**
@@ -378,6 +351,31 @@ export default Ember.Component.extend({
         .$('.frq-grade-students-carousel #frq-grade-students-carousel-wrapper')
         .carousel('next');
       component.loadData();
+    },
+
+    /**
+     * Action triggered when category comment section got focus in/out.
+     */
+    updateCategoryComment(category, categoryIndex) {
+      let comment = this.$(
+        `#frq-grade-rubric-category-${categoryIndex} .frq-grade-comment-section p`
+      ).text();
+      category.set('comment', comment);
+    },
+
+    /**
+     * Action triggered when general comment section got focus in/out.
+     */
+    updateUserGradeComment() {
+      let comment = this.$('.frq-grade-general-comment-container p').text();
+      this.set('userGrade.comment', comment);
+    },
+
+    /**
+     * Action get triggered when user submit grade for student.
+     */
+    submitUserGrade() {
+      this.saveUserGrade();
     }
   },
 
@@ -439,10 +437,14 @@ export default Ember.Component.extend({
         }
       })
       .then(({ users, rubric, answer }) => {
-        users.map(user => {
-          user.set('rubric', rubric.copy());
-        });
         if (!component.get('isDestroyed')) {
+          users.map(user => {
+            let newRubric = rubric.copy();
+            user.set(
+              'rubricGrade',
+              component.createRubricGrade(newRubric, user)
+            );
+          });
           component.set('users', users);
           component.set('rubric', rubric);
           component.set('answer', answer);
@@ -566,6 +568,64 @@ export default Ember.Component.extend({
         }
       });
     }
+  },
+
+  createRubricCategory(category, level) {
+    let rubricCategory = RubricCategoryScore.create(
+      Ember.getOwner(this).ownerInjection(),
+      {
+        title: category.get('title')
+      }
+    );
+    if (level) {
+      rubricCategory.set('levelObtained', level.get('name'));
+      if (level) {
+        rubricCategory.set('levelScore', level.get('score'));
+        rubricCategory.set('levelMaxScore', category.get('levels.length'));
+      }
+      rubricCategory.set('levelComment', category.get('comment'));
+    }
+    return rubricCategory;
+  },
+
+  createRubricGrade(rubric, user) {
+    let component = this;
+    return RubricGrade.create(Ember.getOwner(this).ownerInjection(), rubric, {
+      comment: '',
+      studentId: user.get('id'),
+      classId: component.get('classId'),
+      courseId: component.get('courseId'),
+      unitId: component.get('unit.id'),
+      lessonId: component.get('lesson.id'),
+      collectionId: component.get('collection.id'),
+      resourceId: component.get('question.id'),
+      createdDate: new Date(),
+      rubricCreatedDate: component.get('rubric.createdDate'),
+      rubricUpdatedDate: component.get('updatedDate'),
+      studentScore: 0
+    });
+  },
+
+  saveUserGrade() {
+    let component = this;
+    let userGrade = component.get('userGrade');
+    let categories = component.get('categories').filterBy('selected', true);
+    let categoriesScore = Ember.A([]);
+    categories.forEach(category => {
+      if (category.get('selected')) {
+        let level = null;
+        if (category.get('allowsLevels')) {
+          level = category.get('levels').findBy('selected', true);
+        }
+        categoriesScore.pushObject(
+          component.createRubricCategory(category, level)
+        );
+      }
+    });
+    userGrade.set('categoriesScore', categoriesScore);
+    userGrade.set('sessionId', component.get('answer.sessionId'));
+    userGrade.set('updatedDate', new Date());
+    component.get('rubricService').setStudentRubricGrades(userGrade);
   },
 
   handleCarouselControl() {

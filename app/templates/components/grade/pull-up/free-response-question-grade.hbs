@@ -134,18 +134,30 @@
                   </div>
                 </div>
                 <div class="frq-grade-comment-section">
-                  <p contenteditable="true" placeholder='Add Comment'></p>
+                  {{validation.gru-textarea
+                    model=category
+                    valuePath='comment'
+                    maxLength=500
+                    rows=1
+                    placeholder='Add Comment'
+                  }}
                 </div>
               </div>
             {{/each}}
           </div>
         {{/if}}
         <div class="frq-grade-general-comment-container">
-          <p contenteditable="true" placeholder='General Comments Only'></p>
+          {{validation.gru-textarea
+            model=userGrade
+            valuePath='comment'
+            maxLength=500
+            rows=1
+            placeholder='General Comments Only'
+          }}
         </div>
         <div class="frq-grade-action-btns">
           <button type="button" class="btn cancel btn-primary btn-lg">{{t 'common.cancel'}}</button>
-          <button type="button" class="btn confirm btn-primary btn-lg">{{t 'common.confirm'}}</button>
+          <button type="button" class="btn confirm btn-primary btn-lg" {{action  'submitUserGrade'}}>{{t 'common.confirm'}}</button>
         </div>
       </div>
 

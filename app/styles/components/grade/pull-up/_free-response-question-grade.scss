@@ -509,22 +509,12 @@
                 padding-top: 20px;
                 display: none;
 
-                [contenteditable="true"]:empty:before {
-                  content: attr(placeholder);
-                  display: block;
-                }
-
-                p {
-                  width: 100%;
+                textarea {
                   font-family: "Open Sans";
                   font-size: 16px;
                   font-style: italic;
                   color: #ffffff;
                   background-color: #35424b;
-                  border-bottom: 1px solid #fff;
-                  cursor: text;
-                  outline: none;
-                  word-break: break-all;
                 }
               }
             }
@@ -533,22 +523,12 @@
           .frq-grade-general-comment-container {
             padding-top: 20px;
 
-            [contenteditable="true"]:empty:before {
-              content: attr(placeholder);
-              display: block;
-            }
-
-            p {
-              width: 100%;
+            textarea {
               font-family: "Open Sans";
               font-size: 16px;
               font-style: italic;
               color: #ffffff;
               background-color: #35424b;
-              border-bottom: 1px solid #fff;
-              cursor: text;
-              outline: none;
-              word-break: break-all;
             }
           }
 
