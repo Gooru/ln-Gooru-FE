@@ -115,11 +115,6 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
         const unitId = mapLocation.get('context.unitId');
         const lessonId = mapLocation.get('context.lessonId');
 
-        /*const collectionId = params.isNotification
-          ? params.itemId
-          : mapLocation.get('context.itemId') ||
-            mapLocation.get('context.collectionId'); */
-
         const collectionId =
           mapLocation.get('context.itemId') ||
           mapLocation.get('context.collectionId');
