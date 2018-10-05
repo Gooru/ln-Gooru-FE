@@ -25,6 +25,7 @@ export default PlayerController.extend({
     'collectionSource',
     'isStudyPlayer',
     'pathType',
+    'itemId',
     'isNotification'
   ],
 
@@ -196,6 +197,8 @@ export default PlayerController.extend({
    * Property to enable/disable fullscreen mode
    */
   isFullScreen: false,
+
+  isNotification: false,
 
   /**
    * Steps for Take a Tour functionality
