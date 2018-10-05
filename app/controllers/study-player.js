@@ -299,7 +299,8 @@ export default PlayerController.extend({
       collectionId: null,
       resourceId: null,
       type: null,
-      isStudyPlayer: true
+      isStudyPlayer: true,
+      isNotification: false
     });
   },
 

@@ -79,11 +79,34 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
         .then(() => this.refresh());
     }
   },
+  /**
+   *
+   * @param {mapcontext} params
+   * @description set local storage such  study player gets value from local store when item is being played
+   */
+  setStudyPlayerForTeacherNotifications(params) {
+    const route = this;
+    const mapSerializer = route.get('navigateMapService').get('serializer');
+    let normDataModel = Ember.Object.create(params);
+    let serDataCtx = {};
+    serDataCtx.context = mapSerializer.serializeMapContext(normDataModel);
+    route
+      .get('navigateMapService')
+      .getLocalStorage()
+      .setItem(
+        route.get('navigateMapService').generateKey(),
+        JSON.stringify(serDataCtx)
+      );
+  },
 
   // -------------------------------------------------------------------------
   // Methods
   model: function(params) {
     const route = this;
+    if (params.isNotification) {
+      route.setStudyPlayerForTeacherNotifications(params);
+    }
+
     return route
       .get('navigateMapService')
       .getMapLocation(params)
@@ -92,17 +115,15 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
         const unitId = mapLocation.get('context.unitId');
         const lessonId = mapLocation.get('context.lessonId');
 
-        /* console.log('params', params);
-        console.log('maplocation', mapLocation); */
-
-        const collectionId = params.isNotification
+        /*const collectionId = params.isNotification
           ? params.itemId
           : mapLocation.get('context.itemId') ||
-            mapLocation.get('context.collectionId');
+            mapLocation.get('context.collectionId'); */
 
-        // const collectionId =
-        //   mapLocation.get('context.itemId') ||
-        //   mapLocation.get('context.collectionId');
+        const collectionId =
+          mapLocation.get('context.itemId') ||
+          mapLocation.get('context.collectionId');
+
         params.type =
           mapLocation.get('context.itemType') ||
           mapLocation.get('context.collectionType');
@@ -112,6 +133,7 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
         }
         var unitPromise = null;
         var lessonPromise = null;
+        var notificationNextPromise = null;
         if (params.pathType === 'route0') {
           let route0Model = route
             .get('route0Service')
@@ -166,6 +188,21 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
             .fetchById(courseId, unitId, lessonId);
         }
 
+        if (params.isNotification) {
+          notificationNextPromise = route
+            .get('navigateMapService')
+            .startCollection(
+              courseId,
+              unitId,
+              lessonId,
+              collectionId,
+              params.type,
+              params.classId,
+              +params.pathId,
+              params.pathType
+            );
+        }
+
         return Ember.RSVP.hash({
           course: route.get('courseService').fetchById(courseId),
           unit: unitPromise,
@@ -178,7 +215,8 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
                   route.get('session.userId'),
                   collectionId
                 )
-              : null
+              : null,
+          notificationNextStarted: notificationNextPromise
         }).then(function(hash) {
           //setting query params using the map location
           params.collectionId = collectionId;
