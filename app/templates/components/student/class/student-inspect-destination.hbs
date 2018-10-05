@@ -1,12 +1,12 @@
 <div class="inspect-destination-container">
   <div class="destination-chart-container">
-    {{proficiency.student-inspect-competency-chart competencyStatus=competencyStatus isProficiency=isProficiency title=gradeData.grade route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode onSelectGrade="onSelectGrade"}}
+    {{proficiency.student-inspect-competency-chart competencyStatus=competencyStatus isProficiency=isProficiency title=activeGrade.grade route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode taxonomyGrades=taxonomyGrades activeGrade=activeGrade}}
   </div>
   {{#if (eq type "route")}}
     <div class="course-container">
       {{#if (and isRoute0Pending isRoute0)}}
         <div class="pre-study-title">
-          {{t "student-first-experience.preStudyTitle" title=gradeData.grade}}
+          {{t "student-first-experience.preStudyTitle" title=activeGrade.grade}}
         </div>
         <div class="route0-container">
           <div class="route0-comment" {{action "onToggleRoute0View"}}>
@@ -31,9 +31,9 @@
         </div>
       {{/if}}
       <div class="assigned-course-title">
-        {{t "student-first-experience.assigned-course-title" title=gradeData.grade}}
+        {{t "student-first-experience.assigned-course-title" title=activeGrade.grade}}
       </div>
-      <div class="course-map-accordion-container">
+      <div class="course-map-accordion-container {{unless (and isRoute0Pending isRoute0) 'no-route0'}}">
         {{student.class.destination.student-destination-course-accordion
         courseData=courseData
         classId=classId
@@ -48,10 +48,10 @@
     {{else if (eq type "destination")}}
     <div class="grade-data-container">
       <div class="grade-title">
-        {{gradeData.grade}}
+        {{activeGrade.grade}}
       </div>
       <div class="grade-description">
-        {{safe-html gradeData.description}}
+        {{safe-html activeGrade.description}}
       </div>
       <div class="next-route" {{action onMoveNext 'inspect-destination'}}>
         {{gru-icon name="directions"}} {{t "student-first-experience.show-me-my-route"}}
@@ -63,20 +63,29 @@
         {{'t' "student-first-experience.competency-level.title"}}
       </div>
       <div class="grade-description">
-        {{'t' "student-first-experience.competency-level-description.description_1" grade=gradeData.grade}} {{'t' "student-first-experience.competency-level-description.description_2"}} {{'t' "student-first-experience.competency-level-description.description_3"}}
+        {{'t' "student-first-experience.competency-level-description" grade=activeGrade.grade}}
       </div>
       <div class="competency-level-list">
         <div class="mastery-container">
-          <div class="legend"></div>
+          <div class="legend" id="master" data-placement='left'></div>
           <div class="label"> {{t "student-first-experience.competency-level.mastery" count=competencyStatus.master}}</div>
+          <div id="master_popover" style="display: none">
+            {{ t "student-first-experience.explanatory.master"}}
+          </div>
         </div>
         <div class="in-progress-container">
-          <div class="legend"></div>
+          <div class="legend" id="in-progress" data-placement='left'></div>
           <div class="label"> {{t "student-first-experience.competency-level.in-progress" count=competencyStatus.inProgress}}</div>
+          <div id="progress_popover" style="display: none">
+            {{ t "student-first-experience.explanatory.in-progress"}}
+          </div>
         </div>
         <div class="not-started-container">
-          <div class="legend"></div>
+          <div class="legend" id="not-started" data-placement='left'></div>
           <div class="label"> {{t "student-first-experience.competency-level.not-started" count=competencyStatus.notStarted}}</div>
+          <div id="not_started_popover" style="display: none">
+            {{ t "student-first-experience.explanatory.not-started"}}
+          </div>
         </div>
         <div class="skyline-container">
           <div class="legend"></div>

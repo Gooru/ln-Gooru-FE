@@ -12,11 +12,14 @@
   }
 
   .chart-container {
-    margin-top: 35px;
-
     .graded-chart-container {
       display: grid;
       grid-template-columns: 150px auto;
+
+      &.hide-grade {
+        justify-content: center;
+        grid-template-columns: auto;
+      }
 
       .domain-chart {
         overflow: auto;
@@ -49,7 +52,7 @@
           }
 
           #popover {
-            width: 200px;
+            width: 205px;
             height: 100px;
             border-radius: 2px;
             padding: 5px;
@@ -95,10 +98,11 @@
               stroke-width: 2;
               shape-rendering: crispedges;
               stroke-opacity: 0.7;
-              cursor: pointer;
             }
 
             #skyline-container {
+              filter: url(#shadow);
+
               line {
                 stroke: $white;
                 stroke-width: 6px;
@@ -133,9 +137,12 @@
       .domain-counts {
         float: left;
         display: inline-block;
-        width: 35px;
+        width: 30px;
         text-align: center;
         margin-top: 0;
+        color: $white;
+        display: inline-block;
+        opacity: 0.5;
         cursor: pointer;
       }
     }

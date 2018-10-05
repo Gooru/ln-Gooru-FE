@@ -1729,7 +1729,7 @@ export default Object.assign(quizzesTranslations, {
       popover: {
         title: '{{title}} BOUNDARY',
         content:
-          'You need to study all tiles between your skyline and this line to reach your destination.'
+          'You need to study all competency between your skyline and this line to reach your destination.'
       }
     },
     'assigned-course-title': 'Assigned Course for {{title}}',
@@ -1743,14 +1743,16 @@ export default Object.assign(quizzesTranslations, {
       'not-started': '{{count}} Not Started',
       'your-skyline': 'Your Skyline'
     },
-    'competency-level-description': {
-      description_1:
-        'You are currently in <span class=\'title\'>{{grade}}</span> <br>The chart on the left depicts your proficiency in Math.  Each column represents a domain in Math. Hover over the number to see the domain name.  Each cell represents a competency or standard in that domain. Your proficiency in Math is determined based on your current grade and any external standardised test scores that are available.',
-      description_2:
-        'In the chart, <br><span class=\'mastered\'></span> - indicates  that there is evidence that you have successfully mastered the competency <br> <span class=\'in-progress\'></span> - indicates that there is evidence that you have started studying the competency and are in progress towards achieving mastery <br><span class=\'not-started\'></span> - indicates that there is no evidence and are yet to begin studying the competency ',
-      description_3:
-        '<br> Skyline - the thick white line across the domains indicates your Skyline in Math. The Skyline identifies the highest competency that you have mastered in each domain. And indicates the progress you are making in Math. As you begin studying and successfully master the competencies in the course, the Skyline will continuously get bumped up. <br>The following represents your current proficiency status in Math'
-    }
+    explanatory: {
+      master:
+        '<span class="explanatory-title">MASTERED</span><br> Indicates that there is evidence that you have successfully mastered the competency ',
+      'in-progress':
+        '<span class="explanatory-title">IN-PROGRESS</span><br>  Indicates that there is evidence that you have started studying the competency and are in progress towards achieving mastery ',
+      'not-started':
+        '<span class="explanatory-title">NOT STARTED</span><br> Indicates that there is no evidence and are yet to begin studying the competency'
+    },
+    'competency-level-description':
+      'You are currently in <span class="desc-title"> {{grade}} </span> <br> Welcome to your proficiency map for Maths. Each column is a domain, and each domain consists of individual competencies. The thick white line across the domains indicates your Skyline. which identifies the highest competency that you have mastered in each domain. It indicates the progress you are making in Math. As you begin studying and successfully master the competencies in the course, the Skyline will continuously get bumped up. '
   },
 
   player: {

@@ -1,54 +1,43 @@
 .student-inspect-destination {
+  .popover {
+    width: 160px;
+    box-shadow: 0 2px 14px 10px rgba(0, 0, 0, 0.7);
+  }
+
   .inspect-destination-container {
     display: grid;
     grid-template-columns: 50% 50%;
     height: 100vh;
-    max-height: calc(100vh - 50px);
     justify-content: center;
     background-color: #36394a;
-    overflow: hidden;
 
     .destination-chart-container {
       margin-right: 30px;
-      padding: 8px;
+      padding: 30px 8px 8px;
     }
 
     .competency-level-container {
+      padding-top: 30px;
       overflow-y: auto;
 
       .grade-title {
         height: 68px;
         font-size: 35px;
+        line-height: 0.8em;
         color: $white;
       }
 
       .grade-description {
         width: 100%;
-        padding-right: 15px;
+        padding-right: 83px;
         font-size: 15px;
         white-space: normal;
         text-align: justify;
         color: $white;
 
-        .mastered {
-          height: 30px;
-          width: 30px;
-          display: inline-block;
-          background: #006eb5;
-        }
-
-        .in-progress {
-          height: 30px;
-          width: 30px;
-          display: inline-block;
-          background: #1aa9eb;
-        }
-
-        .not-started {
-          height: 30px;
-          width: 30px;
-          display: inline-block;
-          background: #e7e8e9;
+        .desc-title {
+          font-size: 16px;
+          font-weight: bold;
         }
       }
 
@@ -56,24 +45,28 @@
         margin-top: 5px;
         display: grid;
         grid-gap: 3px;
-        grid-template-columns: auto auto;
+        grid-template-rows: auto auto;
 
         .in-progress-container,
         .mastery-container,
         .not-started-container,
         .skyline-container {
           display: grid;
-          grid-gap: 5px;
+          grid-gap: 15px;
           align-items: center;
-          grid-template-columns: 30px auto;
+          grid-template-columns: 40px auto;
 
           .legend {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
+          }
+
+          span.explanatory-title {
+            font-weight: bold;
           }
 
           .label {
-            font-size: 24px;
+            font-size: 20px;
             color: $white;
             text-align: start;
             font-weight: normal;
@@ -94,8 +87,10 @@
         }
 
         .skyline-container {
+          height: 40px;
+
           .legend {
-            width: 30px;
+            width: 40px;
             height: 10px;
             background-color: $white;
           }
@@ -109,9 +104,7 @@
       }
 
       .show-destination {
-        margin-top: 5px;
-        right: 30px;
-        bottom: 0;
+        bottom: 20px;
         width: 272px;
         position: fixed;
         align-items: center;
@@ -131,10 +124,12 @@
     //TODO new screen changes
     .grade-data-container {
       width: 100%;
+      padding-top: 30px;
       overflow-y: auto;
 
       .grade-title {
-        font-size: 45px;
+        line-height: 0.8em;
+        font-size: 30px;
         color: #8fd383;
       }
 
@@ -146,8 +141,7 @@
 
       .next-route {
         position: fixed;
-        right: 30px;
-        bottom: 10px;
+        bottom: 20px;
         color: $white;
         grid-template-columns: auto auto;
         align-items: center;
@@ -155,23 +149,24 @@
         display: grid;
         cursor: pointer;
         justify-content: center;
-        height: 35px;
+        height: 40px;
         line-height: 35px;
         background-color: #4a8cdb;
         width: 200px;
-        border-radius: 17px;
+        border-radius: 45px;
         font-size: 18px;
       }
     }
 
     .course-container {
       width: 100%;
-      padding-top: 10px;
+      padding-top: 30px;
       padding-right: 20px;
 
       .pre-study-title {
         font-size: 30px;
         color: $white;
+        line-height: 0.8em;
         padding-left: 20px;
       }
 
@@ -189,18 +184,17 @@
       }
 
       .assigned-course-title {
-        padding-top: 10px;
         font-size: 30px;
         text-align: justify;
         white-space: nowrap;
-        line-height: normal;
+        line-height: 0.8em;
         color: #9cff8e;
         margin-bottom: 10px;
         padding-left: 20px;
       }
 
       .route0-container {
-        margin-top: 3px;
+        margin-top: 20px;
         box-shadow: 0 0 6px 6px #ef8f2f;
         background-color: $white;
         margin-left: 4px;
@@ -309,11 +303,15 @@
       }
 
       .course-map-accordion-container {
-        max-height: 260px;
+        max-height: calc(73vh - 271px);
         box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
         margin-left: 4px;
         overflow-y: auto;
         background: $white;
+
+        &.no-route0 {
+          max-height: 73vh;
+        }
 
         &::-webkit-scrollbar {
           height: 6px;
@@ -329,25 +327,21 @@
       }
 
       .study-course {
+        bottom: 20px;
+        width: 165px;
         position: fixed;
-        right: 30px;
-        bottom: 0;
-        color: $white;
-        grid-template-columns: auto auto;
         align-items: center;
-        grid-gap: 7px;
-        display: grid;
-        margin-top: 10px;
-        margin-bottom: 10px;
         cursor: pointer;
-        float: right;
         justify-content: center;
-        height: 35px;
-        line-height: 35px;
-        background-color: #4a8cdb;
-        width: 200px;
-        border-radius: 17px;
+        height: 40px;
+        text-align: center;
+        display: grid;
+        grid-template-columns: 40px auto;
+        border-radius: 45px;
+        background-color: #4190e0;
+        color: white;
         font-size: 18px;
+        float: right;
       }
     }
   }
