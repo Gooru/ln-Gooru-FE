@@ -9,6 +9,12 @@ export default Ember.Component.extend({
   // Dependencies
   route0Service: Ember.inject.service('api-sdk/route0'),
 
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
@@ -16,12 +22,40 @@ export default Ember.Component.extend({
     if (component.get('isRoute0')) {
       component.fetchRout0Contents();
     }
+    component.getTaxonomyGrades();
   },
 
   didRender() {
     var component = this;
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
+    });
+    component.$('[data-toggle="popover"]').popover({
+      trigger: 'hover'
+    });
+  },
+
+  /**
+   * @function getTaxonomyGrades
+   * Method to fetch taxonomy grades
+   */
+  getTaxonomyGrades() {
+    let component = this;
+    let taxonomyService = component.get('taxonomyService');
+    let filters = {
+      subject: component.get('subjectCode')
+    };
+    return Ember.RSVP.hash({
+      taxonomyGrades: Ember.RSVP.resolve(
+        taxonomyService.fetchGradesBySubject(filters)
+      )
+    }).then(({ taxonomyGrades }) => {
+      let activeGrade = taxonomyGrades.findBy(
+        'id',
+        component.get('classGrade')
+      );
+      component.set('activeGrade', activeGrade);
+      component.set('taxonomyGrades', taxonomyGrades.reverse());
     });
   },
 
@@ -67,14 +101,6 @@ export default Ember.Component.extend({
         component.$('.route0-body').show(1000);
       }
       component.toggleProperty('isRoute0ExpandedView');
-    },
-
-    /**
-     * Action triggered when select a grade
-     */
-    onSelectGrade(gradeData) {
-      let component = this;
-      component.set('gradeData', gradeData);
     }
   },
 
@@ -87,6 +113,8 @@ export default Ember.Component.extend({
   competencyStatus: null,
 
   route0Contents: null,
+
+  taxonomyGrades: null,
 
   /**
    * @property {Boolean} isRoute0
@@ -121,9 +149,9 @@ export default Ember.Component.extend({
   isRoute0ExpandedView: false,
 
   /**
-   * @property {JSON} gradeData
+   * @property {JSON} activeGrade
    */
-  gradeData: null,
+  activeGrade: null,
 
   /**
    * @property {Number} destinationGradeLevel
