@@ -24,7 +24,9 @@ export default PlayerController.extend({
     'minScore',
     'collectionSource',
     'isStudyPlayer',
-    'pathType'
+    'pathType',
+    'itemId',
+    'isNotification'
   ],
 
   // -------------------------------------------------------------------------
@@ -196,6 +198,8 @@ export default PlayerController.extend({
    */
   isFullScreen: false,
 
+  isNotification: false,
+
   /**
    * Steps for Take a Tour functionality
    * @property {Array}
@@ -295,7 +299,8 @@ export default PlayerController.extend({
       collectionId: null,
       resourceId: null,
       type: null,
-      isStudyPlayer: true
+      isStudyPlayer: true,
+      isNotification: false
     });
   },
 

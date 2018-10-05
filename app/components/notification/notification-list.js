@@ -138,6 +138,9 @@ export default Ember.Component.extend({
       if (key.indexOf('ctx') > -1) {
         retvar = key.substring(3);
         retvar = retvar.camelize();
+      } else if (key.indexOf('current') === 0) {
+        retvar = key.substring(7);
+        retvar = retvar.camelize();
       }
       return retvar;
     };
