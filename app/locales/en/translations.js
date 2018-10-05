@@ -1744,15 +1744,27 @@ export default Object.assign(quizzesTranslations, {
       'your-skyline': 'Your Skyline'
     },
     explanatory: {
-      master:
-        '<span class="explanatory-title">MASTERED</span><br> Indicates that there is evidence that you have successfully mastered the competency ',
-      'in-progress':
-        '<span class="explanatory-title">IN-PROGRESS</span><br>  Indicates that there is evidence that you have started studying the competency and are in progress towards achieving mastery ',
-      'not-started':
-        '<span class="explanatory-title">NOT STARTED</span><br> Indicates that there is no evidence and are yet to begin studying the competency'
+      master: {
+        title: 'MASTERED',
+        desc:
+          'Indicates that there is evidence that you have successfully mastered the competency '
+      },
+      'in-progress': {
+        title: 'IN PROGRESS',
+        desc:
+          'Indicates that there is evidence that you have started studying the competency and are in progress towards achieving mastery '
+      },
+      'not-started': {
+        title: 'NOT STARTED',
+        desc:
+          'Indicates that there is no evidence and are yet to begin studying the competency'
+      }
     },
-    'competency-level-description':
-      'You are currently in <span class="desc-title"> {{grade}} </span> <br> Welcome to your proficiency map for Maths. Each column is a domain, and each domain consists of individual competencies. The thick white line across the domains indicates your Skyline. which identifies the highest competency that you have mastered in each domain. It indicates the progress you are making in Math. As you begin studying and successfully master the competencies in the course, the Skyline will continuously get bumped up. '
+    'competency-level-partial': {
+      desc1: 'You are currently in ',
+      desc2:
+        'Welcome to your proficiency map for Maths. Each column is a domain, and each domain consists of individual competencies. The thick white line across the domains indicates your Skyline. which identifies the highest competency that you have mastered in each domain. It indicates the progress you are making in Math. As you begin studying and successfully master the competencies in the course, the Skyline will continuously get bumped up. '
+    }
   },
 
   player: {

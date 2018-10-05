@@ -23,12 +23,14 @@ export default Ember.Component.extend({
       component.fetchRout0Contents();
     }
     component.getTaxonomyGrades();
-    component.initExplantoryPopover();
   },
 
   didRender() {
     var component = this;
     component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
+    component.$('[data-toggle="popover"]').popover({
       trigger: 'hover'
     });
   },
@@ -54,33 +56,6 @@ export default Ember.Component.extend({
       );
       component.set('activeGrade', activeGrade);
       component.set('taxonomyGrades', taxonomyGrades.reverse());
-    });
-  },
-
-  initExplantoryPopover() {
-    let component = this;
-    component.$('#master').popover({
-      html: true,
-      trigger: 'hover',
-      content: function() {
-        return $('#master_popover').html();
-      }
-    });
-
-    component.$('#in-progress').popover({
-      html: true,
-      trigger: 'hover',
-      content: function() {
-        return $('#progress_popover').html();
-      }
-    });
-
-    component.$('#not-started').popover({
-      html: true,
-      trigger: 'hover',
-      content: function() {
-        return $('#not_started_popover').html();
-      }
     });
   },
 

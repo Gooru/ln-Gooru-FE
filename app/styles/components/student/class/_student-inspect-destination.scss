@@ -2,6 +2,17 @@
   .popover {
     width: 160px;
     box-shadow: 0 2px 14px 10px rgba(0, 0, 0, 0.7);
+
+    .popover-title {
+      font-weight: bold;
+      font-size: 13px;
+      background-color: $white;
+      border-bottom: none;
+    }
+
+    .popover-content {
+      padding-top: 0;
+    }
   }
 
   .inspect-destination-container {

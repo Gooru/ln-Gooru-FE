@@ -63,29 +63,21 @@
         {{'t' "student-first-experience.competency-level.title"}}
       </div>
       <div class="grade-description">
-        {{'t' "student-first-experience.competency-level-description" grade=activeGrade.grade}}
+        {{'t' "student-first-experience.competency-level-partial.desc1"}}
+        <span class="desc-title">{{activeGrade.grade}}</span> <br> {{'t' "student-first-experience.competency-level-partial.desc2"}}
       </div>
       <div class="competency-level-list">
         <div class="mastery-container">
-          <div class="legend" id="master" data-placement='left'></div>
+          <div class="legend" title= {{ t "student-first-experience.explanatory.master.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.master.desc"}} data-placement='left'></div>
           <div class="label"> {{t "student-first-experience.competency-level.mastery" count=competencyStatus.master}}</div>
-          <div id="master_popover" style="display: none">
-            {{ t "student-first-experience.explanatory.master"}}
-          </div>
         </div>
         <div class="in-progress-container">
-          <div class="legend" id="in-progress" data-placement='left'></div>
+          <div class="legend" title= {{ t "student-first-experience.explanatory.in-progress.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.in-progress.desc"}} data-placement='left'></div>
           <div class="label"> {{t "student-first-experience.competency-level.in-progress" count=competencyStatus.inProgress}}</div>
-          <div id="progress_popover" style="display: none">
-            {{ t "student-first-experience.explanatory.in-progress"}}
-          </div>
         </div>
         <div class="not-started-container">
-          <div class="legend" id="not-started" data-placement='left'></div>
+          <div class="legend" title= {{ t "student-first-experience.explanatory.not-started.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.not-started.desc"}} data-placement='left'></div>
           <div class="label"> {{t "student-first-experience.competency-level.not-started" count=competencyStatus.notStarted}}</div>
-          <div id="not_started_popover" style="display: none">
-            {{ t "student-first-experience.explanatory.not-started"}}
-          </div>
         </div>
         <div class="skyline-container">
           <div class="legend"></div>
