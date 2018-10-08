@@ -199,5 +199,10 @@ export default Ember.Component.extend({
         this.$(itemElement).addClass('vactive');
       }
     }
+    if (selection === 'class-activities' && !this.get('hasStarted')) {
+      this.$('.course-map').addClass('enable');
+    } else {
+      this.$('.course-map').removeClass('enable');
+    }
   }
 });

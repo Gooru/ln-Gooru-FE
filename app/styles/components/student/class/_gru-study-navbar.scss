@@ -12,7 +12,9 @@
       .tab {
         opacity: 0.5;
       }
-      .app-brand, .class-activities {
+
+      .app-brand,
+      .class-activities {
         pointer-events: auto;
         opacity: 1;
       }
@@ -252,6 +254,11 @@
       .profile {
         .no-course {
           pointer-events: none;
+        }
+
+        &.enable {
+          opacity: 1;
+          pointer-events: all;
         }
 
         &.vactive {

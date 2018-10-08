@@ -456,34 +456,59 @@ export default Ember.Component.extend({
    */
   joinSkyLinePoints(cellIndex, curLinePoint) {
     let component = this;
-    let lastSkyLineContainer = component.$(`.sky-line-${cellIndex - 1}`);
-    let skyLineContainer = component.get('skylineContainer');
-    let lastskyLinePoint = {
-      x2: parseInt(lastSkyLineContainer.attr('x2')),
-      y2: parseInt(lastSkyLineContainer.attr('y2'))
-    };
-    //Connect sky line points if last and current points are not same
-    if (
-      lastSkyLineContainer.length &&
-      lastskyLinePoint.y2 !== curLinePoint.y1
-    ) {
-      //Increase extra height to connect intersection points
-      if (lastskyLinePoint.y2 > curLinePoint.y1) {
-        lastskyLinePoint.y2 = lastskyLinePoint.y2 + 3;
-        curLinePoint.y1 = curLinePoint.y1 - 3;
-      } else {
-        lastskyLinePoint.y2 = lastskyLinePoint.y2 - 3;
-        curLinePoint.y1 = curLinePoint.y1 + 3;
+    let lastSkyLineContainer;
+    if (cellIndex === 0) {
+      //Connect vertical skyline for first domain
+      let fisrtSkyLineContainer = component.$(`.sky-line-${cellIndex}`);
+      if (fisrtSkyLineContainer.attr('y1') > 0) {
+        let points = {
+          x1: 3,
+          y1: 0,
+          x2: 3,
+          y2: parseInt(fisrtSkyLineContainer.attr('y1'))
+        };
+        component.appendSkylines(points, cellIndex);
       }
-
-      skyLineContainer
-        .append('line')
-        .attr('x1', lastskyLinePoint.x2)
-        .attr('y1', lastskyLinePoint.y2)
-        .attr('x2', curLinePoint.x1)
-        .attr('y2', curLinePoint.y1)
-        .attr('class', `sky-line-vertical-${cellIndex}`);
+    } else {
+      lastSkyLineContainer = component.$(`.sky-line-${cellIndex - 1}`);
+      let lastskyLinePoint = {
+        x2: parseInt(lastSkyLineContainer.attr('x2')),
+        y2: parseInt(lastSkyLineContainer.attr('y2'))
+      };
+      //Connect sky line points if last and current points are not same
+      if (
+        lastSkyLineContainer.length &&
+        lastskyLinePoint.y2 !== curLinePoint.y1
+      ) {
+        //Increase extra height to connect intersection points
+        if (lastskyLinePoint.y2 > curLinePoint.y1) {
+          lastskyLinePoint.y2 = lastskyLinePoint.y2 + 3;
+          curLinePoint.y1 = curLinePoint.y1 - 3;
+        } else {
+          lastskyLinePoint.y2 = lastskyLinePoint.y2 - 3;
+          curLinePoint.y1 = curLinePoint.y1 + 3;
+        }
+        let points = {
+          x1: lastskyLinePoint.x2,
+          y1: lastskyLinePoint.y2,
+          x2: curLinePoint.x1,
+          y2: curLinePoint.y1
+        };
+        component.appendSkylines(points, cellIndex);
+      }
     }
+  },
+
+  appendSkylines(point, cellIndex) {
+    let component = this;
+    let skyLineContainer = component.get('skylineContainer');
+    skyLineContainer
+      .append('line')
+      .attr('x1', point.x1)
+      .attr('y1', point.y1)
+      .attr('x2', point.x2)
+      .attr('y2', point.y2)
+      .attr('class', `sky-line-vertical-${cellIndex}`);
   },
 
   /**
