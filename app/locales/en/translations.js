@@ -817,6 +817,7 @@ export default Object.assign(quizzesTranslations, {
           }
         },
         'grade-items': 'Items to Grade',
+        'no-grade-items': 'Looks like you’re all caught up!',
         'gru-grade-items': {
           students: {
             zero: '{{count}} students',

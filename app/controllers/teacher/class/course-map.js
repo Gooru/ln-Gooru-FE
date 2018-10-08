@@ -163,6 +163,7 @@ export default Ember.Controller.extend({
 
   studentClassScore: null,
 
+  isGradeLoading: null,
   // -------------------------------------------------------------------------
   // Actions
 
@@ -651,6 +652,7 @@ export default Ember.Controller.extend({
 
   getQuestionsToGrade() {
     let controller = this;
+    controller.set('isGradeLoading', true);
     let currentClass = controller.get('currentClass');
     let classId = currentClass.get('id');
     let courseId = currentClass.get('courseId');
@@ -672,6 +674,7 @@ export default Ember.Controller.extend({
               }
             });
             Ember.RSVP.all(itemsToGrade).then(function(questionItems) {
+              controller.set('isGradeLoading', false);
               controller.set('questionItems', questionItems);
             });
           });
