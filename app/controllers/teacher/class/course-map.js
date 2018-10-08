@@ -731,8 +731,10 @@ export default Ember.Controller.extend({
                 .get('children')
                 .findBy('id', resourceId);
               itemObject.setProperties({
-                unitPrefix: `U${unitIndex}`,
-                lessonPrefix: `L${lessonIndex}`,
+                unitIndex: unitIndex,
+                lessonIndex: lessonIndex,
+                unit: unit,
+                lesson: lesson,
                 classId: controller.get('class.id'),
                 courseId: controller.get('course.id'),
                 unitId: unit.get('id'),

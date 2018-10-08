@@ -4,14 +4,19 @@
   overflow-y: auto;
   background-color: $white;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+
   .item {
+    cursor: pointer;
+
     .question {
       height: 36px;
       line-height: 36px;
       display: flex;
       border-bottom: 1px solid #d7d7d7;
+
       .rubric-icon {
         padding: 12px;
+
         i {
           background-image: url("gooru/images/add_rubric.svg");
           width: 20px;
@@ -21,11 +26,13 @@
           background-repeat: no-repeat;
         }
       }
+
       .question-name {
         font-size: 13px;
         text-transform: capitalize;
         color: #666666;
       }
+
       a {
         text-decoration: none;
         cursor: pointer;
