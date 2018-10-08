@@ -1738,9 +1738,9 @@ export default Object.assign(quizzesTranslations, {
     'show-me-my-route': 'Show me my route',
     'competency-level': {
       title: 'Your Proficiency Profile',
-      mastery: '{{count}} Mastery',
-      'in-progress': '{{count}} In Progress',
-      'not-started': '{{count}} Not Started',
+      mastery: '{{count}} Competences Mastery',
+      'in-progress': '{{count}} Competences In Progress',
+      'not-started': '{{count}} Competences Not Started',
       'your-skyline': 'Your Skyline'
     },
     explanatory: {
@@ -1757,7 +1757,7 @@ export default Object.assign(quizzesTranslations, {
       'not-started': {
         title: 'NOT STARTED',
         desc:
-          'Indicates that there is no evidence and are yet to begin studying the competency'
+          'Indicates that there is no evidence and you are yet to begin studying the competency'
       }
     },
     'competency-level-partial': {
