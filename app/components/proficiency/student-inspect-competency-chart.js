@@ -42,16 +42,7 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Actions
-  actions: {
-    /**
-     * Action triggered when select a grade
-     */
-    onSelectGrade(gradeData) {
-      let component = this;
-      component.set('selectedGrade', gradeData);
-      component.sendAction('onSelectGrade', gradeData);
-    }
-  },
+  actions: {},
 
   // -------------------------------------------------------------------------
   // Properties
@@ -86,13 +77,13 @@ export default Ember.Component.extend({
    * Width of the cell
    * @type {Number}
    */
-  cellWidth: 35,
+  cellWidth: 30,
 
   /**
    * height of the cell
    * @type {Number}
    */
-  cellHeight: 35,
+  cellHeight: 30,
 
   /**
    * It will have selected taxonomy subject courses
@@ -116,9 +107,9 @@ export default Ember.Component.extend({
   isRoute0Chart: false,
 
   /**
-   * @property {JSON} selectedGrade
+   * @property {JSON} activeGrade
    */
-  selectedGrade: null,
+  activeGrade: null,
 
   /**
    * @property {String} subjectCode
@@ -148,11 +139,13 @@ export default Ember.Component.extend({
     component.loadChartData();
   }),
 
-  gradeChangeObserver: Ember.observer('selectedGrade', function() {
+  gradeChangeObserver: Ember.observer('activeGrade', function() {
     let component = this;
-    component.getDomainGradeBoundry().then(() => {
-      component.loadChartData();
-    });
+    if (!component.get('isProficiency')) {
+      component.getDomainGradeBoundry().then(() => {
+        component.loadChartData();
+      });
+    }
   }),
 
   // -------------------------------------------------------------------------
@@ -182,7 +175,10 @@ export default Ember.Component.extend({
         );
       }
     } else {
-      if (domainLevelSummary && domainBoundaries) {
+      if (
+        (domainLevelSummary && domainBoundaries) ||
+        component.get('isProficiency')
+      ) {
         component.drawChart(
           component.parseChartData(
             domainLevelSummary,
@@ -349,6 +345,15 @@ export default Ember.Component.extend({
       .attr('height', height);
     let cellContainer = svg.append('g').attr('id', 'cell-container');
     let skylineContainer = svg.append('g').attr('id', 'skyline-container');
+    let filterContainer = svg
+      .append('defs')
+      .append('filter')
+      .attr('id', 'shadow');
+    filterContainer
+      .append('feDropShadow')
+      .attr('dx', '0')
+      .attr('dy', '0')
+      .attr('stdDeviation', '4');
     let domainBoundaryLineContainer = svg
       .append('g')
       .attr('id', 'course-covered-line-container');
@@ -581,7 +586,7 @@ export default Ember.Component.extend({
   getDomainGradeBoundry() {
     let component = this;
     let taxonomyService = component.get('taxonomyService');
-    let destinationGrade = component.get('selectedGrade');
+    let destinationGrade = component.get('activeGrade');
     let gradeId = destinationGrade.id;
     return Ember.RSVP.hash({
       domainBoundaries: Ember.RSVP.resolve(

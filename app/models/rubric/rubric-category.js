@@ -84,7 +84,7 @@ export default Ember.Object.extend(Validations, {
   /**
    * @property {Ember.A} levels { name: string, score: number }
    */
-  levels: [],
+  levels: Ember.A([]),
 
   /**
    * @property {Boolean} isNew
@@ -112,9 +112,12 @@ export default Ember.Object.extend(Validations, {
   copy: function() {
     var properties = this.getProperties(this.modelProperties());
     // Copy array values
-    properties.levels = this.get('levels').map(level =>
-      JSON.parse(JSON.stringify(level))
-    );
+    properties.levels = this.get('levels').map(level => {
+      return Ember.Object.create({
+        name: level.name,
+        score: level.score
+      });
+    });
     return this.get('constructor').create(
       Ember.getOwner(this).ownerInjection(),
       properties

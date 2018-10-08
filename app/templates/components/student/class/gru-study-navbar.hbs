@@ -14,7 +14,7 @@
       {{/unless}}
       <div class="course-map study-player tab">
         {{#if (eq selectedMenuItem 'course-map')}}
-          <a {{action 'selectItem' 'study-player'}} role="tab" data-toggle="tooltip" title="{{t 'student-landing.study-player'}}" class="{{unless class.courseId 'no-course'}}">
+          <a {{action 'selectItem' 'study-player'}} role="tab" data-toggle="tooltip" title="{{t 'student-landing.study-player'}}" class="{{unless isCourseMapped 'no-course'}}">
             {{gru-icon name='play_arrow'}}
             <span class="add-info">{{t 'student-landing.study-player'}}</span>
         </a>

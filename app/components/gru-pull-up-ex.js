@@ -82,13 +82,13 @@ export default Ember.Component.extend({
   /**
    * Observer to check the showPullUp property in component
    **/
-  onChange: Ember.observer('showPullUp', function() {
-    this.onClosePullUp();
+  onChange: Ember.observer('showPullUpEx', function() {
+    //this.onClosePullUp();
     this.animatePullOut();
   }),
 
   animatePullUp() {
-    if (this.get('showPullUp')) {
+    if (this.get('showPullUpEx')) {
       Ember.$('.gru-pull-up').animate(
         {
           top: '10%'
@@ -103,7 +103,7 @@ export default Ember.Component.extend({
   },
 
   animatePullOut() {
-    if (this.get('showPullUp')) {
+    if (this.get('showPullUpEx')) {
       Ember.$('body.application').addClass('no-vertical-scroll');
       let component = this;
       const right = 650 - component.$().width();

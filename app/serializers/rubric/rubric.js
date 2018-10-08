@@ -55,7 +55,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
         this.get('session.cdnUrls')
       ),
       metadata: model.get('hasAudience')
-        ? { audience: model.get('audience') }
+        ? {
+          audience: model.get('audience')
+        }
         : null,
       taxonomy: serializer
         .get('taxonomySerializer')
@@ -84,7 +86,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
           this.get('session.cdnUrls')
         ),
         metadata: model.get('hasAudience')
-          ? { audience: model.get('audience') }
+          ? {
+            audience: model.get('audience')
+          }
           : null,
         taxonomy: serializer
           .get('taxonomySerializer')
@@ -191,7 +195,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
         model.get('standards')
       ),
       metadata: model.get('hasAudience')
-        ? { audience: model.get('audience') }
+        ? {
+          audience: model.get('audience')
+        }
         : null,
       tenant_root: model.get('tenantRoot'),
       tenant: model.get('tenant'),
@@ -304,16 +310,24 @@ export default Ember.Object.extend(ConfigurationMixin, {
    *
    */
   normalizeRubricCategory(data) {
-    const levels = data.levels || [];
+    const levels = Ember.A([]);
+    if (data.levels) {
+      data.levels.map(function(level) {
+        levels.pushObject(
+          Ember.Object.create({
+            name: level.level_name,
+            score: level.level_score
+          })
+        );
+      });
+    }
     return RubricCategory.create(Ember.getOwner(this).ownerInjection(), {
       title: data.category_title,
       feedbackGuidance: data.feedback_guidance,
       requiresFeedback: data.required_feedback,
       allowsLevels: data.level === true,
       allowsScoring: data.scoring === true,
-      levels: levels.map(function(level) {
-        return { name: level.level_name, score: level.level_score };
-      })
+      levels: levels
     });
   },
 

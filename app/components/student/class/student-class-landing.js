@@ -26,19 +26,12 @@ export default Ember.Component.extend({
      */
     onMoveNext(curStep) {
       let component = this;
-      if (curStep === 'grade') {
-        component.set('isShowInspectDestination', false);
-        component.set('isShowGradeLevel', false);
-        component.set('isShowRoute0Destination', false);
-        component.set('isShowProficiencyLevel', true);
-      } else if (curStep === 'proficiency') {
+      if (curStep === 'proficiency') {
         component.set('isShowInspectDestination', true);
-        component.set('isShowGradeLevel', false);
         component.set('isShowRoute0Destination', false);
         component.set('isShowProficiencyLevel', false);
       } else if (curStep === 'inspect-destination') {
         component.set('isShowInspectDestination', false);
-        component.set('isShowGradeLevel', false);
         component.set('isShowRoute0Destination', true);
         component.set('isShowProficiencyLevel', false);
       } else if (curStep === 'playNext') {
@@ -63,12 +56,7 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isShowProficiencyLevel
    */
-  isShowProficiencyLevel: false,
-
-  /**
-   * @property {Boolean} isShowGradeLevel
-   */
-  isShowGradeLevel: true,
+  isShowProficiencyLevel: true,
 
   /**
    * @property {Number} classGrade
