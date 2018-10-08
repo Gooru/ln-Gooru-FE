@@ -160,6 +160,16 @@ export default Ember.Component.extend({
     return sourceType === 'ILActivity' || ILActivity;
   }),
 
+  /**
+   * @property {Boolean} isCourseMapped
+   */
+  isCourseMapped: Ember.computed('class', 'isILActivity', function() {
+    let component = this;
+    let classData = component.get('class');
+    let isILActivity = component.get('isILActivity');
+    return isILActivity || (classData && classData.get('courseId'));
+  }),
+
   // -------------------------------------------------------------------------
   // Observers
   /**
