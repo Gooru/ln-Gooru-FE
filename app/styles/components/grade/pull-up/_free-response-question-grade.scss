@@ -14,6 +14,13 @@
 
     .popover-title {
       text-align: center;
+
+      .close-popover {
+        position: absolute;
+        right: 12px;
+        color: #37434d;
+        cursor: pointer;
+      }
     }
   }
 
@@ -43,6 +50,105 @@
     width: 100%;
     height: 100%;
     top: 0;
+  }
+
+  .rubric-file-preview-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 5%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    visibility: hidden;
+
+    .rubric-file-preview {
+      width: 90%;
+      height: 90vh;
+      margin: 0 auto;
+      background: #fff;
+      text-align: center;
+      border-radius: 8px;
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        padding: 20px 20px 70px;
+      }
+
+      .rubric-file-preview-close {
+        height: 20px;
+
+        .close {
+          color: #ccc;
+          margin-right: 20px;
+          font-size: 24px;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+
+  .caught-up-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 30%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    display: none;
+
+    .caught-up {
+      width: 400px;
+      height: 300px;
+      margin: 0 auto;
+      background: #fff;
+      text-align: center;
+      border-radius: 8px;
+
+      .caught-up-tick-container {
+        position: relative;
+        padding-top: 100px;
+        padding-bottom: 28px;
+
+        hr {
+          margin: 0;
+          border-width: 1px;
+          border-color: green;
+          margin-left: 20px;
+          margin-right: 20px;
+          border-color: #4caf50;
+        }
+
+        .caught-up-tick {
+          position: absolute;
+          width: 90px;
+          height: 80px;
+          background: #fff;
+          display: block;
+          left: 40%;
+          margin-top: -38px;
+          padding-left: 8px;
+
+          span {
+            display: block;
+            height: 75px;
+            width: 75px;
+            border-radius: 50%;
+            color: #4caf50;
+            border: 2px solid #4caf50;
+
+            i {
+              font-size: 40px;
+              margin-top: 15px;
+            }
+          }
+        }
+      }
+    }
   }
 
   .free-response-question-grade-container {
@@ -151,15 +257,8 @@
         }
       }
 
-      .go-to-collection {
-        text-align: center;
-        color: #57b4f6;
-        font-family: "Open Sans";
-        font-weight: bold;
-        font-size: 12px;
-        height: 20px;
-        padding-left: 10px;
-        padding-right: 10px;
+      .collection-performance-score {
+        visibility: hidden;
       }
 
       .frq-grade-close-pullup {
@@ -330,6 +429,11 @@
               line-height: 1.09;
               color: #ffffff;
               display: block;
+
+              .rubric-attachment {
+                color: #03a9f4;
+                cursor: pointer;
+              }
             }
 
             .frq-grade-info-desc {
@@ -533,28 +637,9 @@
           }
 
           .frq-grade-action-btns {
-            text-align: right;
+            text-align: center;
             padding-top: 20px;
             padding-bottom: 40px;
-
-            .cancel {
-              width: 100px;
-              height: 40px;
-              border-radius: 4px;
-              border: solid 1px #ffffff;
-              background: #35424b;
-              font-family: "Open Sans";
-              font-size: 15px;
-              font-weight: bold;
-              text-align: center;
-              color: #ffffff;
-              text-transform: uppercase;
-              margin-right: 10px;
-              &:active {
-                background: #35424b;
-                box-shadow: none;
-              }
-            }
 
             .confirm {
               width: 100px;
@@ -567,6 +652,7 @@
               text-align: center;
               color: #ffffff;
               text-transform: uppercase;
+
               &:active {
                 background: #1aa9eb;
                 box-shadow: none;

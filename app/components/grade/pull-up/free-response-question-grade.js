@@ -163,8 +163,6 @@ export default Ember.Component.extend({
       categories.forEach(category => {
         if (category.get('allowsLevels') && category.get('allowsScoring')) {
           totalRubricPoints += category.get('levels.length');
-        } else {
-          totalRubricPoints += 1;
         }
       });
     }
@@ -191,8 +189,6 @@ export default Ember.Component.extend({
             if (levelIndex > -1) {
               totalUserRubricPoints += levelIndex + 1;
             }
-          } else if (category.get('selected')) {
-            totalUserRubricPoints += 1;
           }
         });
       }
@@ -255,6 +251,12 @@ export default Ember.Component.extend({
     let user = users.findBy('id', studentId);
     return users.indexOf(user) + 1;
   }),
+
+  /**
+   * Maintains the  list of question items  need to grade.
+   * @type {Array}
+   */
+  itemsToGrade: Ember.A([]),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -376,6 +378,23 @@ export default Ember.Component.extend({
      */
     submitUserGrade() {
       this.saveUserGrade();
+    },
+
+    /**
+     * Action get triggered when rubric attachment preview got close
+     */
+    filePreviewClose() {
+      this.$('.rubric-file-preview-container').fadeOut('slow');
+    },
+
+    /**
+     * Action get triggered when rubric attachment preview got open
+     */
+    filePreviewOpen() {
+      this.$('.rubric-file-preview-container')
+        .css('visibility', 'visible')
+        .hide()
+        .fadeIn('slow');
     }
   },
 
@@ -521,6 +540,12 @@ export default Ember.Component.extend({
       trigger: 'manual'
     });
     let isMobile = window.matchMedia('only screen and (max-width: 768px)');
+    if (isMobile.matches) {
+      component.$('.close-popover').click(function() {
+        component.$('.frq-grade-info-popover').popover('hide');
+      });
+    }
+
     component.$('.frq-grade-info-popover').on('click', function() {
       let levelIndex = component.$(this).data('level');
       let categoryIndex = component.$(this).data('category');
@@ -540,10 +565,9 @@ export default Ember.Component.extend({
           .not(this)
           .popover('hide');
         component.$(this).popover('show');
-        Ember.$('.popover-title').css(
-          'background-color',
-          getGradeColor(scoreInPrecentage)
-        );
+        Ember.$('.popover-title')
+          .append('<span class="close-popover">x</span>')
+          .css('background-color', getGradeColor(scoreInPrecentage));
       }
     });
     if (!isMobile.matches) {
@@ -625,7 +649,55 @@ export default Ember.Component.extend({
     userGrade.set('categoriesScore', categoriesScore);
     userGrade.set('sessionId', component.get('answer.sessionId'));
     userGrade.set('updatedDate', new Date());
-    component.get('rubricService').setStudentRubricGrades(userGrade);
+    component
+      .get('rubricService')
+      .setStudentRubricGrades(userGrade)
+      .then(() => {
+        component.slideToNextUser();
+      });
+  },
+
+  slideToNextUser() {
+    let component = this;
+    let users = component.get('users');
+    if (users.length > 1) {
+      let studentId = component.get('studentId');
+      let users = component.get('users');
+      let selectedUser = users.findBy('id', studentId);
+      let selectedIndex = users.indexOf(selectedUser);
+      let rightNavElement = component.$(
+        '#frq-grade-students-carousel-wrapper .carousel-control.right'
+      );
+      let leftNavElement = component.$(
+        '#frq-grade-students-carousel-wrapper .carousel-control.left'
+      );
+      let nextUserIndex = 0;
+      if (!rightNavElement.hasClass('in-active')) {
+        nextUserIndex = selectedIndex + 1;
+      } else if (!leftNavElement.hasClass('in-active')) {
+        nextUserIndex = selectedIndex - 1;
+      }
+      let nextUser = users.objectAt(nextUserIndex);
+      component.set('studentId', nextUser.get('id'));
+      component
+        .$('.frq-grade-students-carousel  #frq-grade-students-carousel-wrapper')
+        .carousel(nextUserIndex);
+      users.removeAt(selectedIndex);
+      component.loadData();
+      component.handleCarouselControl();
+    } else {
+      component.$('.caught-up-container').show(400, function() {
+        let itemsToGrade = component.get('itemsToGrade');
+        if (itemsToGrade) {
+          let questionId = component.get('question.id');
+          let item = itemsToGrade.findBy('question.id', questionId);
+          itemsToGrade.removeObject(item);
+        }
+        component.$().fadeOut(5000, function() {
+          component.set('showPullUp', false);
+        });
+      });
+    }
   },
 
   handleCarouselControl() {

@@ -82,8 +82,13 @@
             <span class="frq-grade-info-title">Grading</span>
             <span class="frq-grade-info-desc">Update grade score to complete your FRQ.</span>
           {{else}}
-            <span class="frq-grade-info-title">Rubric</span>
-            <span class="frq-grade-info-desc">Answer this rubric to complete your FRQ.</span>
+            <span class="frq-grade-info-title">
+              Rubric
+              {{#if (and rubric.uploaded rubric.url)}}
+                <span class="rubric-attachment" {{action 'filePreviewOpen'}}>{{gru-icon name="attachment"}}</span>
+              {{/if}}
+          </span>
+          <span class="frq-grade-info-desc">Answer this rubric to complete your FRQ.</span>
           {{/if}}
         </div>
         {{#if rubric.scoring}}
@@ -92,7 +97,7 @@
             <hr/>
             <span>{{rubric.maxScore}}</span>
           </div>
-        {{else}}
+          {{else if (gt totalRubricPoints 0)}}
           <div class="frq-grade-score" style= {{safe-html (concat "background-color:" (grade-color userRubricScore))}}>
             <span>{{totalUserRubricPoints}}</span>
             <hr/>
@@ -102,10 +107,10 @@
       </div>
       <div class="frq-grade-right-panel-body">
         {{#if rubric.scoring}}
-            <div class="frq-grade-rubric-grading">
-              {{validation.gru-input-number model=userGrade  valuePath='studentScore' min=0 max=rubric.maxScore step=rubric.increment }}
-              <span class="score">{{rubric.maxScore}}</span>
-            </div>
+          <div class="frq-grade-rubric-grading">
+            {{validation.gru-input-number model=userGrade  valuePath='studentScore' min=0 max=rubric.maxScore step=rubric.increment }}
+            <span class="score">{{rubric.maxScore}}</span>
+          </div>
         {{else}}
           <div class="frq-grade-rubric-categories">
             {{#each categories as | category categoryIndex |}}
@@ -156,8 +161,7 @@
           }}
         </div>
         <div class="frq-grade-action-btns">
-          <button type="button" class="btn cancel btn-primary btn-lg">{{t 'common.cancel'}}</button>
-          <button type="button" class="btn confirm btn-primary btn-lg" {{action  'submitUserGrade'}}>{{t 'common.confirm'}}</button>
+          <button type="button" class="btn confirm btn-primary btn-lg" {{action  'submitUserGrade'}}>{{t 'common.submit'}}</button>
         </div>
       </div>
 
@@ -168,4 +172,30 @@
   <div class="loading-spinner">
     {{three-bounce-spinner}}
   </div>
+{{/if}}
+
+<div class="caught-up-container">
+  <div class="backdrop" {{action 'onPullUpClose' true}}></div>
+  <div class="caught-up">
+    <div class="caught-up-tick-container">
+      <hr/>
+      <div class="caught-up-tick">
+        <span>{{gru-icon name="done"}}</span>
+      </div>
+    </div>
+    <h3>You are all caught up!</h3>
+    <p>There are no users to grade for this FRQ.</p>
+  </div>
+</div>
+
+{{#if (and rubric.uploaded rubric.url)}}
+<div class="rubric-file-preview-container">
+  <div class="backdrop"></div>
+  <div class="rubric-file-preview">
+    <div class="rubric-file-preview-close" {{action 'filePreviewClose'}}>
+        {{gru-icon name="close"}}
+    </div>
+    <iframe src="{{rubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
 {{/if}}
