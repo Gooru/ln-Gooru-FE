@@ -399,6 +399,8 @@
               font-family: "Open Sans";
               font-size: 34px;
               color: #37424b;
+              word-break: break-all;
+              line-height: 1;
             }
 
             p {
@@ -406,6 +408,7 @@
               font-size: 13px;
               line-height: 1.15;
               color: #37424b;
+              word-break: break-all;
             }
           }
         }

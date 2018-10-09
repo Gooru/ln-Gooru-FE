@@ -458,7 +458,7 @@ export default Ember.Component.extend({
       .then(({ users, rubric, answer }) => {
         if (!component.get('isDestroyed')) {
           users.map(user => {
-            let newRubric = rubric.copy();
+            let newRubric = rubric ? rubric.copy() : rubric;
             user.set(
               'rubricGrade',
               component.createRubricGrade(newRubric, user)
