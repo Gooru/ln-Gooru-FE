@@ -25,6 +25,7 @@ export default Ember.Component.extend({
       if (notifionAddresAction && notifionAddresAction.postActionHook) {
         component.postActionHook(notifionAddresAction, notinItem);
       }
+      component.attrs.closeNotificationList();
     },
 
     /**
