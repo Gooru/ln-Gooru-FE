@@ -55,20 +55,20 @@
           </div>
         </div>
         <div class="frq-self-grade">
-          <span>Self-Graded</span>
+          <span>{{t 'common.self-graded'}}</span>
           <span class="performance-score">17/20</span>
-          <span>Rubric Grade</span>
+          <span>{{t 'common.rubric-grade'}}</span>
         </div>
       </div>
       <div class="frq-grade-left-panel-body">
         <div class="frq-question-info">
-          <span class="frq-header">Brief</span>
+          <span class="frq-header">{{t 'common.brief'}}</span>
           <p>
             {{gru-math-text text=question.text}}
           </p>
         </div>
         <div class="frq-question-answer-info">
-          <span class="frq-header">Answer</span>
+          <span class="frq-header">{{t 'gru-question-viewer.answer'}}</span>
           <p>
             {{gru-math-text text=answer.answerText}}
           </p>
@@ -79,8 +79,8 @@
       <div class="frq-grade-right-panel-header">
         <div class="frq-grade-info">
           {{#if rubric.scoring}}
-            <span class="frq-grade-info-title">Grading</span>
-            <span class="frq-grade-info-desc">Update grade score to complete your FRQ.</span>
+            <span class="frq-grade-info-title">{{t 'grading-player.grading'}}</span>
+            <span class="frq-grade-info-desc">{{t 'common.update-grade-score'}}</span>
           {{else}}
             <span class="frq-grade-info-title">
               Rubric
@@ -88,7 +88,7 @@
                 <span class="rubric-attachment" {{action 'filePreviewOpen'}}>{{gru-icon name="attachment"}}</span>
               {{/if}}
           </span>
-          <span class="frq-grade-info-desc">Answer this rubric to complete your FRQ.</span>
+          <span class="frq-grade-info-desc">{{t 'common.answer-this-rubric'}}</span>
           {{/if}}
         </div>
         {{#if rubric.scoring}}
@@ -183,8 +183,8 @@
         <span>{{gru-icon name="done"}}</span>
       </div>
     </div>
-    <h3>You are all caught up!</h3>
-    <p>There are no users to grade for this FRQ.</p>
+    <h3>{{t 'common.all-caught-up'}}</h3>
+    <p>{{t 'common.no-users-to-grade'}}</p>
   </div>
 </div>
 
