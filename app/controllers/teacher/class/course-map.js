@@ -334,6 +334,16 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Events
 
+  init() {
+    const controller = this;
+    controller._super(...arguments);
+    let tab = controller.get('tab');
+    if (tab && tab === 'report') {
+      const classController = controller.get('classController');
+      classController.openTeacherCourseReport();
+    }
+  },
+
   // -------------------------------------------------------------------------
   // Observers
 
