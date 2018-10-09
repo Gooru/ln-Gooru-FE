@@ -109,6 +109,12 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
         route.transitionTo('teacher.class.course-map', classId);
       } else if (item === 'class-activities') {
         route.transitionTo('teacher.class.class-activities', classId);
+      } else if (item === 'report') {
+        route.transitionTo('teacher.class.course-map', classId, {
+          queryParams: {
+            tab: 'report'
+          }
+        });
       } else {
         route.transitionTo('teacher-home');
       }

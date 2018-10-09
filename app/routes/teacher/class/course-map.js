@@ -190,6 +190,7 @@ export default Ember.Route.extend({
     controller.get('classController').selectMenuItem('course-map');
     controller.set('isStudentCourseMap', false);
     controller.getQuestionsToGrade();
+    controller.init();
   },
 
   resetController(controller) {
