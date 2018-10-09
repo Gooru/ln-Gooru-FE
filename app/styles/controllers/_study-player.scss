@@ -95,6 +95,11 @@
     }
 
     .qz-resource-viewer {
+      .qz-resource-viewer-panel {
+        .narration {
+          display: none !important;
+        }
+      }
       .qz-youtube-resource {
         height: calc(100vh - 210px) !important;
       }
