@@ -380,6 +380,12 @@ export default StudentCollection.extend({
   courseVersion: Ember.computed.alias('course.version'),
 
   /**
+   * Report Source Type
+   * @property {String}
+   */
+  source: null,
+
+  /**
    * Steps for Take a Tour functionality
    * @return {Array}
    */
