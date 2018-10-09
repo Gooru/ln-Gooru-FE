@@ -35,7 +35,7 @@ export default Ember.Component.extend({
      * Action triggered when the user invoke the pull up.
      **/
     onPullUpClose() {
-      this.set('showPullUp', false);
+      this.set('showPullUpEx', false);
       this.sendAction('onClosePullUp');
     }
   },

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import PlayerRoute from 'gooru-web/routes/player';
 import PrivateRouteMixin from 'gooru-web/mixins/private-route-mixin';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import { CONTENT_TYPES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 
 /**
  * Study Player Route
@@ -88,6 +88,7 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
     const route = this;
     const mapSerializer = route.get('navigateMapService').get('serializer');
     let normDataModel = Ember.Object.create(params);
+    normDataModel.set('source', PLAYER_EVENT_SOURCE.COURSE_MAP);
     let serDataCtx = {};
     serDataCtx.context = mapSerializer.serializeMapContext(normDataModel);
     route
