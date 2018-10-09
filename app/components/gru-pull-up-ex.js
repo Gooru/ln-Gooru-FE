@@ -47,7 +47,7 @@ export default Ember.Component.extend({
    * Propery to hide the default pullup.
    * @property {showPullUp}
    */
-  showPullUp: false,
+  showPullUpEx: false,
 
   /**
    * Propery to show header in pullup component.
