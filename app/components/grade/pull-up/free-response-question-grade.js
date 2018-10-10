@@ -128,7 +128,9 @@ export default Ember.Component.extend({
     categories.map(category => {
       let levels = category.get('levels');
       if (levels) {
-        levels = levels.reverse();
+        if (category.get('allowsLevels') && category.get('allowsScoring')) {
+          levels = levels.sortBy('score');
+        }
         category.set('levels', levels);
       }
     });
@@ -162,7 +164,7 @@ export default Ember.Component.extend({
     if (categories) {
       categories.forEach(category => {
         if (category.get('allowsLevels') && category.get('allowsScoring')) {
-          totalRubricPoints += category.get('levels.length');
+          totalRubricPoints += category.get('totalPoints');
         }
       });
     }
@@ -555,8 +557,8 @@ export default Ember.Component.extend({
         level.set('selected', false);
       });
       level.set('selected', true);
-      let numberOfLevels = category.get('levels.length');
-      let scoreInPrecentage = ((levelIndex + 1) / numberOfLevels) * 100;
+      let totalPoints = category.get('totalPoints');
+      let scoreInPrecentage = (level.get('score') / totalPoints) * 100;
       category.set('scoreInPrecentage', scoreInPrecentage);
       category.set('selected', true);
       if (isMobile.matches) {
@@ -578,11 +580,11 @@ export default Ember.Component.extend({
         let levelIndex = component.$(this).data('level');
         let categoryIndex = component.$(this).data('category');
         let category = categories.objectAt(categoryIndex);
-        let numberOfLevels = category.get('levels.length');
-
+        let totalPoints = category.get('totalPoints');
+        let level = category.get('levels').objectAt(levelIndex);
         $(this).popover('show');
         if (category.get('allowsScoring')) {
-          let scoreInPrecentage = ((levelIndex + 1) / numberOfLevels) * 100;
+          let scoreInPrecentage = (level.get('score') / totalPoints) * 100;
           Ember.$('.popover-title').css(
             'background-color',
             getGradeColor(scoreInPrecentage)
@@ -603,9 +605,9 @@ export default Ember.Component.extend({
     );
     if (level) {
       rubricCategory.set('levelObtained', level.get('name'));
-      if (level) {
+      if (category.get('allowsLevels') && category.get('allowsScoring')) {
         rubricCategory.set('levelScore', level.get('score'));
-        rubricCategory.set('levelMaxScore', category.get('levels.length'));
+        rubricCategory.set('levelMaxScore', category.get('totalPoints'));
       }
       rubricCategory.set('levelComment', category.get('comment'));
     }
