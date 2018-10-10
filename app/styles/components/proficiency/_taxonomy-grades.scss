@@ -15,14 +15,12 @@
         padding-left: 10px;
         padding-right: 10px;
         height: 24px;
-        opacity: 0.5;
-        color: #ffffff;
+        color: $dark-300;
       }
 
       &.active-grade {
         .grade-title {
-          color: black;
-          background-color: $white;
+          background-color: $dark-300;
           border: none;
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
           opacity: 1;
@@ -30,7 +28,7 @@
           display: grid;
           align-items: center;
           justify-content: center;
-          color: #525659;
+          color: $white;
         }
 
         .grade-title:after,
@@ -54,7 +52,7 @@
         .grade-title:before {
           border-width: 12px;
           display: block;
-          border-color: transparent transparent transparent #fff;
+          border-color: transparent transparent transparent $dark-300;
           z-index: 0;
           top: 0;
         }

@@ -77,13 +77,13 @@ export default Ember.Component.extend({
    * Width of the cell
    * @type {Number}
    */
-  cellWidth: 30,
+  cellWidth: 32,
 
   /**
    * height of the cell
    * @type {Number}
    */
-  cellHeight: 30,
+  cellHeight: 6,
 
   /**
    * It will have selected taxonomy subject courses
@@ -338,6 +338,7 @@ export default Ember.Component.extend({
     const width = Math.round(numberOfColumns * cellWidth);
     component.set('width', width);
     const height = component.get('chartHeight');
+    component.clearChart();
     const svg = d3
       .select('#student-inspect-competency-chart')
       .append('svg')
@@ -601,7 +602,12 @@ export default Ember.Component.extend({
 
   willDestroyElement() {
     let component = this;
-    component.$('#student-inspect-competency-chart').empty();
+    component.clearChart();
+  },
+
+  clearChart() {
+    let component = this;
+    component.$('svg').remove();
   },
 
   /**

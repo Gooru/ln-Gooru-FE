@@ -79,7 +79,9 @@ export default Ember.Component.extend({
     onRoute0Reject() {
       let component = this;
       let action = 'rejected';
-      component.updateRoute0Action(action);
+      component.updateRoute0Action(action).then(() => {
+        component.set('isRoute0Pending', false);
+      });
     },
 
     /**

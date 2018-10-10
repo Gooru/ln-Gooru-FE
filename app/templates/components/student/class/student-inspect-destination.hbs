@@ -20,11 +20,11 @@
           </div>
         </div>
         <div class="route0-action">
-          <div class="ignore" {{action "onRoute0Accept"}}>
+          <div class="ignore" {{action "onRoute0Reject"}}>
             <i></i>
             <span>{{t 'student-first-experience.route0-action.ignore'}}</span>
           </div>
-          <div class="accept" {{action "onRoute0Reject"}}>
+          <div class="accept" {{action "onRoute0Accept"}}>
             <i></i>
             <span>{{t 'student-first-experience.route0-action.accept'}}</span>
           </div>
@@ -85,7 +85,7 @@
         </div>
       </div>
       <div class="show-destination" {{action onMoveNext 'proficiency'}}>
-        {{gru-icon name="directions"}} {{t "student-first-experience.view-my-destination"}}
+        {{gru-icon name="directions"}} {{t "student-first-experience.show-my-destination"}}
       </div>
     </div>
   {{/if}}
