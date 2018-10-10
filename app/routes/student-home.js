@@ -369,7 +369,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       hasSuggestions(resp) ? resp.suggestions[0] : resp.context || resp,
       queryParams
     );
-    isContentMapped = !!queryParams.collectionId;
+    isContentMapped = !!((queryParams.collectionId || queryParams.id));
     if (isContentMapped) {
       return Ember.RSVP.resolve(queryParams);
     } else {
