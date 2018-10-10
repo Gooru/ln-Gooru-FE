@@ -50,26 +50,27 @@
                               </div>
                               <div class="collection-content-counts">
                                 {{#if (gt collection.resourceCount 0)}}
-                                  <div class="resource-count" title="{{t 'common.resource'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
+                                  <div class="resource-count" title="{{t 'common.resource'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
                                     <i class="resource-icon"></i>
                                     <span>{{collection.resourceCount}}</span>
                                   </div>
                                 {{/if}}
                                 {{#if (gt collection.questionCount 0)}}
-                                  <div class="question-count" title="{{t 'common.question'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
+                                  <div class="question-count" title="{{t 'common.question'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
                                     <i class="question-icon"></i>
                                     <span>{{collection.questionCount}}</span>
                                   </div>
                                 {{/if}}
                                 {{#if (eq collection.format 'assessment-external')}}
-                                  <i class="external-icon" title="{{t 'common.assessment-external'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover"></i>
+                                  <i class="external-icon" title="{{t 'common.assessment-external'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover"></i>
                                 {{/if}}
                               </div>
                               <div class="collection-action-btns">
-                                <div class="schedule-dca-content" title="{{t 'common.schedule'}}" data-toggle="tooltip" data-placement="top" {{action 'onScheduleContentToDCA' collection}}>
+                                <div class="schedule-dca-content" title="{{t 'common.schedule'}}" data-toggle="tooltip" data-placement="bottom" onclick={{action 'onScheduleContentToDCA' collection}}>
                                   {{gru-icon name="update"}}
+                                  <i class="schedule-dca-datepicker"></i>
                                 </div>
-                                <div class="add-dca-content {{if collection.isAdded 'added'}}" {{action 'onAddContentToDCA' collection}} data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.add"}}" data-trigger="hover">
+                                <div class="add-dca-content {{if collection.isAdded 'added'}}" {{action 'onAddContentToDCA' collection}} data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.add"}}" data-trigger="hover">
                                   {{gru-icon name="add"}}
                                   {{gru-icon name="done"}}
                                 </div>
@@ -114,8 +115,4 @@
   <div class="loading-spinner">
     {{three-bounce-spinner}}
   </div>
-{{/if}}
-
-{{#if showScheduleDca}}
-  {{teacher.class.schedule-dca-pull-up context=scheduleDcaContext showPullUp=showScheduleDca addedScheduleContentToDCA='addedScheduleContentToDCA'}}
 {{/if}}

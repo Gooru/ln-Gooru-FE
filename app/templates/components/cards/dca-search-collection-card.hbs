@@ -6,12 +6,12 @@
   </div>
   <div class="content-count-container">
     {{#if (eq contentType 'collection') }}
-      <div class="resource" title="{{t 'common.resource'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
+      <div class="resource" title="{{t 'common.resource'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
         <i class="icon"></i>
         <span>{{collection.resourceCount}}</span>
       </div>
     {{/if}}
-    <div class="question" title="{{t 'common.question'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
+    <div class="question" title="{{t 'common.question'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
       <i class="icon"></i>
       <span>{{collection.questionCount}}</span>
     </div>
@@ -36,13 +36,14 @@
   </div>
   <div class="card-panel-footer">
     <div class="buttons-container">
-      <div class="play-btn" title="Play" data-toggle="tooltip" data-placement="top" {{action "onPlayCollection" collection.id}}>
+      <div class="play-btn" title="Play" data-toggle="tooltip" data-placement="bottom" {{action "onPlayCollection" collection.id}}>
         {{gru-icon name="ic_play_arrow"}}
       </div>
-      <div class="dca-schedule-btn" title="{{t 'common.schedule'}}" data-toggle="tooltip" data-placement="top" {{action "onScheduleCollectionToDCA" collection}}>
+      <div class="dca-schedule-btn" title="{{t 'common.schedule'}}" data-toggle="tooltip" data-placement="bottom" onclick={{action "onScheduleCollectionToDCA" collection}}>
         {{gru-icon name="update"}}
+        <i class="schedule-dca-datepicker"></i>
       </div>
-      <div class="dca-add-btn {{if collection.isAdded 'added'}}" title="{{t 'common.add'}}" data-toggle="tooltip" data-placement="top" {{action "onAddCollectionToDCA" collection}}>
+      <div class="dca-add-btn {{if collection.isAdded 'added'}}" title="{{t 'common.add'}}" data-toggle="tooltip" data-placement="bottom" {{action "onAddCollectionToDCA" collection}}>
         {{gru-icon name="add"}}
         {{gru-icon name="done"}}
       </div>

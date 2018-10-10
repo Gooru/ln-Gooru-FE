@@ -36,6 +36,56 @@
     }
   }
 
+  .datepicker {
+    margin: 0 auto;
+    width: 219px;
+    background: #989898;
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px 10px 0;
+    font-weight: 600;
+
+    .datepicker-switch {
+      pointer-events: none;
+    }
+
+    &:after {
+      border-top: 6px solid #989898;
+    }
+
+    .disabled {
+      color: #fff !important;
+      pointer-events: none;
+      opacity: 0.7;
+      font-weight: normal;
+    }
+
+    .new,
+    .old {
+      color: #999 !important;
+      pointer-events: none;
+      &.active {
+        color: #999 !important;
+        background: transparent !important;
+      }
+    }
+
+    .active {
+      color: #fff !important;
+      background: #363636 !important;
+    }
+
+    .datepicker tfoot tr th:hover,
+    .datepicker thead tr:first-child th:hover {
+      color: #363636;
+    }
+
+    .datepicker table tr td.day.focused,
+    .datepicker table tr td.day:hover {
+      color: #363636;
+    }
+  }
+
   .search-container {
     background: #ffffff;
     width: 768px;
