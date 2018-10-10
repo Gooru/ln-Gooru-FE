@@ -38,6 +38,12 @@ export default Ember.Component.extend({
       component.set('suggestedContent', suggestedContent);
       component.set('currentContent', currentContent);
     });
+    Ember.$('body').addClass('system-suggested');
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    Ember.$('body').removeClass('system-suggested');
   },
 
   // -------------------------------------------------------------------------
