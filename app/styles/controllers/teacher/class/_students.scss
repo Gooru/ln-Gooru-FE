@@ -25,10 +25,9 @@
         cursor: pointer;
       }
       /* opacity: 0.5; */
-      font-size: 12px;
+      font-size: 15px;
       font-weight: bold;
       padding-bottom: 8px;
-      text-transform: uppercase;
     }
     .table {
       background-color: $white;
@@ -69,10 +68,9 @@
           line-height: 40px;
           > span {
             opacity: 0.5;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: bold;
             color: $gray-icon;
-            text-transform: uppercase;
           }
         }
         th.last-name {
@@ -92,7 +90,6 @@
           .proficiency-status {
             font-size: 10px;
             font-weight: bold;
-            text-transform: uppercase;
             .mastered,
             .in-progress {
               float: left;
@@ -135,7 +132,6 @@
               color: $gray-dove;
               .ellipsis {
                 max-width: 150px;
-                text-transform: capitalize;
               }
               i {
                 color: $gray-dove;

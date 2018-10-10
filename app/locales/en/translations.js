@@ -211,6 +211,13 @@ export default Object.assign(quizzesTranslations, {
     'correct-answers': 'Correct Answer(s)',
     'incorrect-answers': 'InCorrect Answer(s)',
     'rubric-graded': 'Rubric Graded',
+    'self-graded': 'Self-Graded',
+    'rubric-grade': 'Rubric Grade',
+    brief: 'Brief',
+    'update-grade-score': 'Update grade score to complete your FRQ.',
+    'answer-this-rubric': 'Answer this rubric to complete your FRQ.',
+    'all-caught-up': 'You are all caught up!',
+    'no-users-to-grade': 'There are no users to grade for this FRQ.',
     'rubric-needs-grading': 'Rubric Needs Grading',
     'not-answered': 'Not Answered',
     'rubric-not-answered': 'Rubric Not Answered',
@@ -817,6 +824,7 @@ export default Object.assign(quizzesTranslations, {
           }
         },
         'grade-items': 'Items to Grade',
+        'no-grade-items': 'Looks like you’re all caught up!',
         'gru-grade-items': {
           students: {
             zero: '{{count}} students',
@@ -1722,7 +1730,7 @@ export default Object.assign(quizzesTranslations, {
   'student-first-experience': {
     preStudyTitle: 'Pre-Study for {{title}}',
     'route0-action': {
-      accept: 'Accept & Add',
+      accept: 'Accept',
       ignore: 'Ignore'
     },
     competency: {
@@ -1734,8 +1742,8 @@ export default Object.assign(quizzesTranslations, {
     },
     'assigned-course-title': 'Assigned Course for {{title}}',
     'study-course': 'Study Course',
-    'view-my-destination': 'Next: View My Destination',
-    'show-me-my-route': 'Show me my route',
+    'show-my-destination': 'Show My Destination',
+    'show-me-my-route': 'Show My route',
     'competency-level': {
       title: 'Your Proficiency Profile',
       mastery: '{{count}} Competences Mastery',

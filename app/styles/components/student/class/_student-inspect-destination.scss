@@ -20,7 +20,7 @@
     grid-template-columns: 50% 50%;
     height: 100vh;
     justify-content: center;
-    background-color: #36394a;
+    background-color: $white;
 
     .destination-chart-container {
       margin-right: 30px;
@@ -35,7 +35,7 @@
         height: 68px;
         font-size: 35px;
         line-height: 0.8em;
-        color: $white;
+        color: $dark-300;
       }
 
       .grade-description {
@@ -44,7 +44,7 @@
         font-size: 15px;
         white-space: normal;
         text-align: justify;
-        color: $white;
+        color: $dark-300;
 
         .desc-title {
           font-size: 16px;
@@ -78,7 +78,7 @@
 
           .label {
             font-size: 20px;
-            color: $white;
+            color: $dark-300;
             text-align: start;
             font-weight: normal;
             padding: 0;
@@ -102,6 +102,7 @@
 
           .legend {
             width: 40px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
             height: 10px;
             background-color: $white;
           }
@@ -146,7 +147,7 @@
 
       .grade-description {
         margin-top: 10px;
-        color: $white;
+        color: $dark-400;
         height: 73vh;
       }
 
@@ -176,7 +177,7 @@
 
       .pre-study-title {
         font-size: 30px;
-        color: $white;
+        color: $dark-400;
         line-height: 0.8em;
         padding-left: 20px;
       }
@@ -264,7 +265,7 @@
 
         .accept {
           background-color: $orange-400;
-          width: 125px;
+          width: 100px;
           height: 30px;
           border-radius: 45px;
           display: grid;

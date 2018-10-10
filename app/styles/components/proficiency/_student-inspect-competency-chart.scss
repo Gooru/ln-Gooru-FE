@@ -138,12 +138,12 @@
       .domain-counts {
         float: left;
         display: inline-block;
-        width: 30px;
+        width: 32px;
         text-align: center;
         margin-top: 0;
-        color: $white;
+        font-weight: bold;
+        color: $dark-300;
         display: inline-block;
-        opacity: 0.5;
         cursor: pointer;
       }
     }
