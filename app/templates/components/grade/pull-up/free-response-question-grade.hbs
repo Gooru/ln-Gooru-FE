@@ -122,7 +122,7 @@
                   <div class="frq-grade-rubric-levels {{unless (and category.allowsLevels category.allowsScoring) 'no-progress'}} {{if category.scoreInPrecentage 'active'}}">
                     {{#if category.allowsLevels}}
                       {{#each category.levels as |level levelIndex|}}
-                        <i class="frq-grade-info-popover {{if level.selected 'selected'}}" data-html="true" title="Level: {{level.score}}" data-content="{{level.name}}" data-category= {{categoryIndex}} data-level= {{levelIndex}}></i>
+                        <i class="frq-grade-info-popover {{if level.selected 'selected'}}" data-html="true" title="Points: {{level.score}}" data-content="{{level.name}}" data-category= {{categoryIndex}} data-level= {{levelIndex}}></i>
                       {{/each}}
                     {{else}}
                       <i class="frq-grade-info-no-level {{if category.selected 'selected'}}" {{action 'onChooseCategory' category}}></i>
