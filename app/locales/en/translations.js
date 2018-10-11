@@ -1737,7 +1737,7 @@ export default Object.assign(quizzesTranslations, {
       popover: {
         title: '{{title}} BOUNDARY',
         content:
-          'You need to study all competency between your skyline and this line to reach your destination.'
+          'You need to study all the competencies between your skyline and this grade line to reach your destination.'
       }
     },
     'assigned-course-title': 'Assigned Course for {{title}}',

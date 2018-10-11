@@ -528,7 +528,7 @@ export default Ember.Component.extend({
       skylineElements.each(function(index) {
         let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
         let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
-        y1 = y1 === 0 ? y1 + 1 : y1 + cellHeight + 1;
+        y1 = y1 === 0 ? y1 + 3 : y1 + cellHeight + 3;
         let x2 = x1 + cellWidth;
         let y2 = y1;
         let linePoint = {
