@@ -116,21 +116,19 @@
       }
 
       .show-destination {
-        bottom: 20px;
-        width: 272px;
         position: fixed;
+        bottom: 20px;
+        color: $white;
         align-items: center;
         cursor: pointer;
-        justify-content: center;
+        justify-content: space-evenly;
         height: 40px;
-        text-align: center;
         display: grid;
-        grid-template-columns: 40px auto;
+        grid-template-columns: 25px auto;
+        background-color: #4a8cdb;
+        width: 220px;
         border-radius: 45px;
-        background-color: #4190e0;
-        color: white;
         font-size: 18px;
-        float: right;
       }
     }
     //TODO new screen changes
@@ -155,16 +153,14 @@
         position: fixed;
         bottom: 20px;
         color: $white;
-        grid-template-columns: auto auto;
         align-items: center;
-        grid-gap: 7px;
-        display: grid;
         cursor: pointer;
-        justify-content: center;
+        justify-content: space-evenly;
         height: 40px;
-        line-height: 35px;
+        display: grid;
+        grid-template-columns: 25px auto;
         background-color: #4a8cdb;
-        width: 200px;
+        width: 175px;
         border-radius: 45px;
         font-size: 18px;
       }
@@ -200,7 +196,7 @@
         text-align: justify;
         white-space: nowrap;
         line-height: 0.8em;
-        color: #9cff8e;
+        color: $dark-300;
         margin-bottom: 10px;
         padding-left: 20px;
       }
@@ -339,21 +335,19 @@
       }
 
       .study-course {
-        bottom: 20px;
-        width: 165px;
         position: fixed;
+        bottom: 20px;
+        color: $white;
         align-items: center;
         cursor: pointer;
-        justify-content: center;
+        justify-content: space-evenly;
         height: 40px;
-        text-align: center;
         display: grid;
-        grid-template-columns: 40px auto;
+        grid-template-columns: 25px auto;
+        background-color: #4a8cdb;
+        width: 175px;
         border-radius: 45px;
-        background-color: #4190e0;
-        color: white;
         font-size: 18px;
-        float: right;
       }
     }
   }
