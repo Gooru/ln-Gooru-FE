@@ -56,6 +56,15 @@ export default Ember.Component.extend({
       if (this.get('onItemSelected')) {
         this.sendAction('onItemSelected', item, classId);
       }
+    },
+
+    /**
+     * Action triggered when clear alert message
+     */
+    onClearAlert() {
+      let component = this;
+      let classData = component.get('class');
+      classData.set('isNotAbleToStartPlayer', false);
     }
   },
 

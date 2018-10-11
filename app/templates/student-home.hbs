@@ -34,11 +34,6 @@
       </ul>
     </div>
     <div class="content">
-      {{#if isNotAbleToStartPlayer}}
-        <div class="alert-player-error">
-          <div class="alert-status">{{t 'common.errors.no-studymaterial'}}</div>
-        </div>
-      {{/if}}
       {{cards.gru-join-class-card
         onJoinClass="joinClass"
         validCode=validCode
@@ -50,7 +45,8 @@
           {{cards.gru-student-class-card
             class=class
             onPlayCollection='studyPlayer'
-            onItemSelected='selectMenuItem'}}
+            onItemSelected='selectMenuItem'
+            }}
         {{/each}}
       {{/if}}
     </div>
