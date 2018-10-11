@@ -70,8 +70,8 @@
           </div>
         </div>
       {{else}}
-        <div class="alert-player-error" {{action 'onClearAlert'}}>
-          <span class="clear-alert">{{gru-icon name="clear"}}</span>
+        <div class="alert-player-error">
+          <span class="clear-alert" {{action 'onClearAlert'}}>{{gru-icon name="clear"}}</span>
           <div class="alert-status">{{t 'common.errors.no-studymaterial'}}</div>
         </div>
       {{/unless}}
