@@ -50,19 +50,6 @@ export default Ember.Component.extend({
   userId: null,
 
   /**
-   * Different color range based on status
-   * @type {Object}
-   */
-  colorsBasedOnStatus: Ember.Object.create({
-    '0': '#e7e8e9',
-    '1': '#1aa9eb',
-    '2': '#006eb5',
-    '3': '#006eb5',
-    '4': '#006eb5',
-    '5': '#006eb5'
-  }),
-
-  /**
    * Width of the cell
    * @type {Number}
    */
@@ -199,7 +186,6 @@ export default Ember.Component.extend({
     let cellSizeInRow = component.get('taxonomyDomains');
     let numberOfCellsInEachColumn = cellSizeInRow.length;
     component.set('numberOfCellsInEachColumn', numberOfCellsInEachColumn);
-    const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
     const cellWidth = component.get('cellWidth');
     const cellHeight = component.get('cellHeight');
     const width = Math.round(numberOfCellsInEachColumn * cellWidth);
@@ -216,36 +202,26 @@ export default Ember.Component.extend({
     let baseLineContainer = svg.append('g').attr('id', 'baseline-container');
     component.set('skylineContainer', skylineContainer);
     component.set('baseLineContainer', baseLineContainer);
+
     const cards = cellContainer.selectAll('.competency').data(data);
     cards
       .enter()
       .append('rect')
       .attr('x', d => (d.xAxisSeq - 1) * cellWidth)
       .attr('y', d => (d.yAxisSeq - 1) * cellHeight)
-      .attr('copy-yaxis', d => (d.yAxisSeq - 1) * cellHeight)
+      .attr('width', cellWidth)
+      .attr('height', cellHeight)
+      .attr('yaxis-seq', d => d.yAxisSeq)
       .attr('class', d => {
         let skylineClassName = d.skyline ? 'skyline-competency' : '';
         return `competency ${skylineClassName} competency-${
           d.xAxisSeq
-        } competency-${d.xAxisSeq}-${d.yAxisSeq}`;
+        } competency-${d.xAxisSeq}-${
+          d.yAxisSeq
+        } fillArea${d.status.toString()}`;
       })
-      .attr('copy-class-name', d => {
-        let skylineClassName = d.skyline ? 'skyline-competency' : '';
-        return `competency ${skylineClassName} competency-${
-          d.xAxisSeq
-        } competency-${d.xAxisSeq}-${d.yAxisSeq}`;
-      })
-      .attr('width', cellWidth)
-      .attr('height', cellHeight)
       .on('click', function(d) {
         component.sendAction('onSelectCompetency', d);
-      })
-      .attr('yaxis-seq', d => d.yAxisSeq)
-      .style('fill', '#EAEAEA')
-      .transition()
-      .duration(1000)
-      .style('fill', d => {
-        return colorsBasedOnStatus.get(d.status.toString());
       });
     cards.exit().remove();
     component.expandChartColumnHeight();
@@ -489,18 +465,19 @@ export default Ember.Component.extend({
     for (let index = 0; index < elements.length; index++) {
       let element = component.$(elements[index]);
       let cellHeight = component.get('cellHeight');
-      let yAxis = element.attr('copy-yaxis');
-      let className = element.attr('copy-class-name');
+      let yAxis = element.attr('y');
+      let className = element.attr('class');
       element.attr('height', cellHeight);
       element.attr('class', className);
       element.attr('y', yAxis);
     }
-    component.drawSkyline();
-    component.drawBaseLine();
     let height = component.get('height');
     component.$('#render-proficiency-matrix').height(height);
     component.$('#render-proficiency-matrix svg').attr('height', height);
     component.$('.scrollable-chart').scrollTop(height);
+
+    component.drawSkyline();
+    component.drawBaseLine();
   },
 
   /**
