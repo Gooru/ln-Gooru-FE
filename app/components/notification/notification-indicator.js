@@ -1,5 +1,9 @@
 import Ember from 'ember';
-import { NOTIFICATION_SETTINGS } from 'gooru-web/config/config';
+import {
+  NOTIFICATION_SETTINGS,
+  PLAYER_EVENT_SOURCE,
+  ROLES
+} from 'gooru-web/config/config';
 
 const notificationAccesor = {
   class: 'active-study',
@@ -110,8 +114,8 @@ export default Ember.Component.extend({
               unitId: 0,
               lessonId: 0,
               collectionId: 0,
-              role: 0,
-              source: 0,
+              role: ROLES.STUDENT,
+              source: PLAYER_EVENT_SOURCE.COURSE_MAP,
               type: null,
               itemId: 0,
               itemType: '',
