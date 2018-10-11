@@ -86,7 +86,7 @@
               Rubric
               {{#if (and rubric.uploaded rubric.url)}}
                 <span class="rubric-attachment" {{action 'filePreviewOpen'}}>{{gru-icon name="attachment"}}</span>
-              {{/if}}
+          {{/if}}
           </span>
           <span class="frq-grade-info-desc">{{t 'common.answer-this-rubric'}}</span>
           {{/if}}
@@ -115,22 +115,26 @@
           <div class="frq-grade-rubric-categories">
             {{#each categories as | category categoryIndex |}}
               <div class="frq-grade-rubric-category" id="frq-grade-rubric-category-{{categoryIndex}}">
-                <div class="frq-grade-rubric-category-info">
-                  <p>{{category.title}}</p>
-                </div>
+                {{#if category.allowsLevels}}
+                  <div class="frq-grade-rubric-category-info">
+                    <p>{{category.title}}</p>
+                  </div>
+                {{/if}}
                 <div class="frq-grade-rubric-level-container">
-                  <div class="frq-grade-rubric-levels {{unless (and category.allowsLevels category.allowsScoring) 'no-progress'}} {{if category.scoreInPrecentage 'active'}}">
-                    {{#if category.allowsLevels}}
+                  {{#if category.allowsLevels}}
+                    <div class="frq-grade-rubric-levels {{unless (and category.allowsLevels category.allowsScoring) 'no-progress'}} {{if category.scoreInPrecentage 'active'}}">
                       {{#each category.levels as |level levelIndex|}}
                         <i class="frq-grade-info-popover {{if level.selected 'selected'}}" data-html="true" title="Points: {{level.score}}" data-content="{{level.name}}" data-category= {{categoryIndex}} data-level= {{levelIndex}}></i>
                       {{/each}}
-                    {{else}}
-                      <i class="frq-grade-info-no-level {{if category.selected 'selected'}}" {{action 'onChooseCategory' category}}></i>
-                    {{/if}}
-                    {{#if (and category.allowsLevels category.allowsScoring)}}
-                      <div class="progress-bar" style= {{safe-html (concat "background-color:" (grade-color category.scoreInPrecentage) ";width:" category.scoreInPrecentage "%")}}></div>
-                    {{/if}}
-                  </div>
+                      {{#if (and category.allowsLevels category.allowsScoring)}}
+                        <div class="progress-bar" style= {{safe-html (concat "background-color:" (grade-color category.scoreInPrecentage) ";width:" category.scoreInPrecentage "%")}}></div>
+                      {{/if}}
+                    </div>
+                  {{else}}
+                    <div class="frq-grade-rubric-category-info">
+                      <p>{{category.title}}</p>
+                    </div>
+                  {{/if}}
                   <div class="frq-grade-clear {{if category.selected 'active'}}" {{action 'unSelectCategoryLevel' category}}>
                     {{gru-icon name="clear"}}
                   </div>
@@ -189,13 +193,13 @@
 </div>
 
 {{#if (and rubric.uploaded rubric.url)}}
-<div class="rubric-file-preview-container">
-  <div class="backdrop"></div>
-  <div class="rubric-file-preview">
-    <div class="rubric-file-preview-close" {{action 'filePreviewClose'}}>
+  <div class="rubric-file-preview-container">
+    <div class="backdrop"></div>
+    <div class="rubric-file-preview">
+      <div class="rubric-file-preview-close" {{action 'filePreviewClose'}}>
         {{gru-icon name="close"}}
+      </div>
+      <iframe src="{{rubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
     </div>
-    <iframe src="{{rubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
   </div>
-</div>
 {{/if}}
