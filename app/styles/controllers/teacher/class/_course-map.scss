@@ -138,7 +138,7 @@
         .students-list {
           max-width: 61px;
           min-width: 61px;
-          max-height: 587px;
+          max-height: calc(100vh - 225px);
           background-color: $white;
           transition: 2s;
           position: absolute;
