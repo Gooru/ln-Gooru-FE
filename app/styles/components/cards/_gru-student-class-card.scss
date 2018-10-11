@@ -82,6 +82,9 @@
           font-weight: bold;
           bottom: 0;
           cursor: pointer;
+          &.no-play {
+            pointer-events: none;
+          }
         }
         .title-section {
           $line-height: 0.5;
@@ -197,6 +200,29 @@
           font-size: $font-size-small;
           margin: 0;
           padding: 0 10px;
+        }
+      }
+
+      .alert-player-error {
+        height: 93px;
+        border-radius: 4px;
+        @include box-shadow(0 0 7px $table-border-color);
+        margin-bottom: 15px;
+        background-color: $white;
+        position: relative;
+        .alert-status {
+          padding-left: 10px;
+          color: $brand-danger;
+          padding-top: 15px;
+        }
+        .clear-alert {
+          position: absolute;
+          right: 0;
+          cursor: pointer;
+          i {
+            font-size: 20px;
+            color: $brand-danger;
+          }
         }
       }
     }
