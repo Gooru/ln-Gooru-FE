@@ -187,9 +187,8 @@ export default Ember.Component.extend({
         categories.forEach(category => {
           if (category.get('allowsLevels') && category.get('allowsScoring')) {
             let level = category.get('levels').findBy('selected', true);
-            let levelIndex = category.get('levels').indexOf(level);
-            if (levelIndex > -1) {
-              totalUserRubricPoints += levelIndex + 1;
+            if (level) {
+              totalUserRubricPoints += parseInt(level.get('score'));
             }
           }
         });
@@ -355,16 +354,6 @@ export default Ember.Component.extend({
         .$('.frq-grade-students-carousel #frq-grade-students-carousel-wrapper')
         .carousel('next');
       component.loadData();
-    },
-
-    /**
-     * Action triggered when category comment section got focus in/out.
-     */
-    updateCategoryComment(category, categoryIndex) {
-      let comment = this.$(
-        `#frq-grade-rubric-category-${categoryIndex} .frq-grade-comment-section p`
-      ).text();
-      category.set('comment', comment);
     },
 
     /**
@@ -558,7 +547,9 @@ export default Ember.Component.extend({
       });
       level.set('selected', true);
       let totalPoints = category.get('totalPoints');
-      let scoreInPrecentage = (level.get('score') / totalPoints) * 100;
+      let scoreInPrecentage = Math.floor(
+        (level.get('score') / totalPoints) * 100
+      );
       category.set('scoreInPrecentage', scoreInPrecentage);
       category.set('selected', true);
       if (isMobile.matches) {
@@ -584,7 +575,9 @@ export default Ember.Component.extend({
         let level = category.get('levels').objectAt(levelIndex);
         $(this).popover('show');
         if (category.get('allowsScoring')) {
-          let scoreInPrecentage = (level.get('score') / totalPoints) * 100;
+          let scoreInPrecentage = Math.floor(
+            (level.get('score') / totalPoints) * 100
+          );
           Ember.$('.popover-title').css(
             'background-color',
             getGradeColor(scoreInPrecentage)
@@ -603,14 +596,15 @@ export default Ember.Component.extend({
         title: category.get('title')
       }
     );
+    rubricCategory.set('levelMaxScore', 0);
     if (level) {
       rubricCategory.set('levelObtained', level.get('name'));
       if (category.get('allowsLevels') && category.get('allowsScoring')) {
         rubricCategory.set('levelScore', level.get('score'));
         rubricCategory.set('levelMaxScore', category.get('totalPoints'));
       }
-      rubricCategory.set('levelComment', category.get('comment'));
     }
+    rubricCategory.set('levelComment', category.get('comment'));
     return rubricCategory;
   },
 
@@ -635,14 +629,16 @@ export default Ember.Component.extend({
   saveUserGrade() {
     let component = this;
     let userGrade = component.get('userGrade');
-    let categories = component.get('categories').filterBy('selected', true);
+    let categories = component.get('categories');
     let categoriesScore = Ember.A([]);
     categories.forEach(category => {
-      if (category.get('selected')) {
-        let level = null;
-        if (category.get('allowsLevels')) {
-          level = category.get('levels').findBy('selected', true);
-        }
+      let level = null;
+      if (category.get('allowsLevels')) {
+        level = category.get('levels').findBy('selected', true);
+        categoriesScore.pushObject(
+          component.createRubricCategory(category, level)
+        );
+      } else if (category.get('comment')) {
         categoriesScore.pushObject(
           component.createRubricCategory(category, level)
         );

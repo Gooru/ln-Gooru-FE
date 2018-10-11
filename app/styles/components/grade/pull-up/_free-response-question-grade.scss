@@ -523,6 +523,14 @@
                 align-items: center;
                 height: 25px;
 
+                .frq-grade-rubric-category-info {
+                  width: 290px;
+
+                  p {
+                    margin: 0;
+                  }
+                }
+
                 .frq-grade-rubric-levels {
                   width: 290px;
                   background-color: #5d666f;
