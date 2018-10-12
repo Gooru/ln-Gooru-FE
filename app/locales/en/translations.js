@@ -1771,7 +1771,7 @@ export default Object.assign(quizzesTranslations, {
     'competency-level-partial': {
       desc1: 'You are currently in ',
       desc2:
-        'Welcome to your proficiency map for Maths. Each column is a domain, and each domain consists of individual competencies. The thick white line across the domains indicates your Skyline. which identifies the highest competency that you have mastered in each domain. It indicates the progress you are making in Math. As you begin studying and successfully master the competencies in the course, the Skyline will continuously get bumped up. '
+        'Welcome to your Skyline map for Math. The Skyline (the thick white line) shows the highest standard that you have mastered in each domain. A domain is an area of math that you study, such as Number Systems and Expressions and Equations. Each column represents a math domain. And each box in the column represents a standard in the domain. Once you start learning and mastering the standards, your Skyline will continuously bump up.'
     }
   },
 
