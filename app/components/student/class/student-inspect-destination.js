@@ -55,7 +55,10 @@ export default Ember.Component.extend({
         component.get('classGrade')
       );
       component.set('activeGrade', activeGrade);
-      component.set('taxonomyGrades', taxonomyGrades.reverse());
+      component.set(
+        'taxonomyGrades',
+        taxonomyGrades.sortBy('sequence').reverse()
+      );
     });
   },
 
