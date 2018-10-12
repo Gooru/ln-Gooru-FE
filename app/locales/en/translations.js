@@ -1737,7 +1737,7 @@ export default Object.assign(quizzesTranslations, {
       popover: {
         title: '{{title}} BOUNDARY',
         content:
-          'You need to study all the competencies between your skyline and this grade line to reach your destination.'
+          'You need to study all the standards between your skyline and this grade line to reach your destination.'
       }
     },
     'assigned-course-title': 'Assigned Course for {{title}}',
@@ -1746,32 +1746,32 @@ export default Object.assign(quizzesTranslations, {
     'show-me-my-route': 'Show My route',
     'competency-level': {
       title: 'Your Proficiency Profile',
-      mastery: '{{count}} Competences Mastery',
-      'in-progress': '{{count}} Competences In Progress',
-      'not-started': '{{count}} Competences Not Started',
+      mastery: '{{count}} Standards Mastered',
+      'in-progress': '{{count}} Standards In Progress',
+      'not-started': '{{count}} Standards Not Started',
       'your-skyline': 'Your Skyline'
     },
     explanatory: {
       master: {
         title: 'MASTERED',
         desc:
-          'Indicates that there is evidence that you have successfully mastered the competency '
+          'Indicates that there is evidence that you have successfully mastered the standards '
       },
       'in-progress': {
         title: 'IN PROGRESS',
         desc:
-          'Indicates that there is evidence that you have started studying the competency and are in progress towards achieving mastery '
+          'Indicates that there is evidence that you have started studying the standards and are in progress towards achieving mastered '
       },
       'not-started': {
         title: 'NOT STARTED',
         desc:
-          'Indicates that there is no evidence and you are yet to begin studying the competency'
+          'Indicates that there is no evidence and you are yet to begin studying the standards'
       }
     },
     'competency-level-partial': {
       desc1: 'You are currently in ',
       desc2:
-        'Welcome to your Skyline map for Math. The Skyline (the thick white line) shows the highest standard that you have mastered in each domain. A domain is an area of math that you study, such as Number Systems and Expressions and Equations. Each column represents a math domain. And each box in the column represents a standard in the domain. Once you start learning and mastering the standards, your Skyline will continuously bump up.'
+        'Welcome to your Skyline map for Math. The Skyline (the thick white line) shows the highest standard that you have mastered in each domain. A domain is an area of math that you study, such as Number Systems and Expressions & Equations. Each column represents a math domain. And each box in the column represents a standard in the domain. Once you start learning and mastering the standards, your Skyline will continuously bump up.'
     }
   },
 
