@@ -12,6 +12,11 @@ export default Ember.Service.extend({
 
   searchAdapter: null,
 
+  /**
+   * Make a cache of competency content and make use of offset as well to avoid recursive API
+   */
+  competencyContentContainer: null,
+
   init: function() {
     this._super(...arguments);
     this.set(
@@ -22,6 +27,7 @@ export default Ember.Service.extend({
       'searchAdapter',
       SearchAdapter.create(Ember.getOwner(this).ownerInjection())
     );
+    this.set('competencyContentContainer', []);
   },
 
   /**
@@ -163,6 +169,47 @@ export default Ember.Service.extend({
           reject(error);
         }
       );
+    });
+  },
+
+  fetchLearningMapsContent(gutCode, filters) {
+    const service = this;
+    let start = filters.start || 0;
+    let competencyContentContainer = service.get('competencyContentContainer');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      let isCompetencyContentAvailable = competencyContentContainer[
+        `${gutCode}`
+      ]
+        ? competencyContentContainer[`${gutCode}`][start] || null
+        : null;
+      if (isCompetencyContentAvailable) {
+        resolve(competencyContentContainer[`${gutCode}`][start]);
+      } else {
+        service
+          .get('searchAdapter')
+          .fetchLearningMapsContent(gutCode, filters)
+          .then(
+            function(response) {
+              let normalizedCompetencyContent = service
+                .get('searchSerializer')
+                .normalizeLearningMapsContent(response);
+              let fetchedCompetencyContent =
+                competencyContentContainer[`${gutCode}`] || [];
+              fetchedCompetencyContent[start] = normalizedCompetencyContent;
+              competencyContentContainer[
+                `${gutCode}`
+              ] = fetchedCompetencyContent;
+              service.set(
+                'competencyContentContainer',
+                competencyContentContainer
+              );
+              resolve(normalizedCompetencyContent);
+            },
+            function(error) {
+              reject(error);
+            }
+          );
+      }
     });
   }
 });

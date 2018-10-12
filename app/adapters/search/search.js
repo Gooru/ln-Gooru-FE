@@ -13,6 +13,8 @@ export default Ember.Object.extend({
 
   namespace: '/gooru-search/rest/v2/search',
 
+  pedagogySearch: '/gooru-search/rest/v1/pedagogy-search',
+
   /**
    * Fetches the collections that match with the term
    *
@@ -215,6 +217,23 @@ export default Ember.Object.extend({
         start: 1,
         length: 20
       }
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Function to retrieve learning maps content
+   */
+  fetchLearningMapsContent(gutCode, filters = {}) {
+    const adapter = this;
+    const namespace = this.get('pedagogySearch');
+    const url = `${namespace}/learning-maps/standard/${gutCode}`;
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: filters
     };
     return Ember.$.ajax(url, options);
   },

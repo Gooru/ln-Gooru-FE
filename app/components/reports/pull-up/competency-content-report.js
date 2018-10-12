@@ -18,6 +18,21 @@ export default Ember.Component.extend({
   },
 
   // -------------------------------------------------------------------------
+  // Actions
+  actions: {
+    /**
+     * Action triggered when click global view
+     */
+    onToggleCompetencyInfoView() {
+      let component = this;
+      component.toggleProperty('isShowGlobalInfo');
+      if (component.get('isShowGlobalInfo')) {
+        component.sendAction('onToggleGlobalCompetencyView', component.get('competency.competencyCode'));
+      }
+    }
+  },
+
+  // -------------------------------------------------------------------------
   // Methods
 
   /**
@@ -52,5 +67,10 @@ export default Ember.Component.extend({
   /**
    * @property {Array} collectionPerformances
    */
-  collectionPerformances: Ember.A([])
+  collectionPerformances: Ember.A([]),
+
+  /**
+   * @property {Boolean} isShowGlobalInfo
+   */
+  isShowGlobalInfo: false
 });

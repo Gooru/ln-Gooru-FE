@@ -1,0 +1,71 @@
+.competency-content-info {
+  .competency-content-container {
+    .title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #4a4a4a;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #4a4a4a;
+    }
+    .content-count-container {
+      display: flex;
+      margin-bottom: 30px;
+      .content-count {
+        width: 95px;
+        height: 98px;
+        text-align: center;
+        border: 1px solid #979797;
+      }
+    }
+    .prerequisites-cotainer {
+      margin-bottom: 30px;
+      .preRequisites-info-container {
+        display: flex;
+        margin-top: 15px;
+        .prerequisites-code-container {
+          width: 100px;
+          border-right: 1px solid #979797;
+          padding-right: 15px;
+          padding-bottom: 15px;
+          .prerequisite-code {
+            width: max-content;
+            padding: 0 8px;
+            border: 1px solid #e1e1e1;
+            height: 18px;
+            border-radius: 9px;
+            font-size: 10px;
+            font-weight: bold;
+            color: #4a4a4a;
+          }
+        }
+        .prerequisites-title-container {
+          margin-left: 15px;
+          .prerequisite-title {
+            font-size: 12px;
+            color: #4a4a4a;
+          }
+        }
+      }
+    }
+
+    .signature-content-container {
+      margin-bottom: 30px;
+      .signature-item {
+        display: flex;
+        border-bottom: 1px solid #979797;
+        .thumbnail-container {
+          width: 87px;
+          height: 54px;
+          display: block;
+          background-size: 87px 54px;
+          background-repeat: no-repeat;
+        }
+        .title-container {
+          height: 54px;
+          line-height: 54px;
+          margin-left: 22px;
+        }
+      }
+    }
+  }
+}
