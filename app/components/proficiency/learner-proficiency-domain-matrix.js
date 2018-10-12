@@ -209,6 +209,7 @@ export default Ember.Component.extend({
       .append('rect')
       .attr('x', d => (d.xAxisSeq - 1) * cellWidth)
       .attr('y', d => (d.yAxisSeq - 1) * cellHeight)
+      .attr('copy-yaxis', d => (d.yAxisSeq - 1) * cellHeight)
       .attr('width', cellWidth)
       .attr('height', cellHeight)
       .attr('yaxis-seq', d => d.yAxisSeq)
@@ -465,7 +466,7 @@ export default Ember.Component.extend({
     for (let index = 0; index < elements.length; index++) {
       let element = component.$(elements[index]);
       let cellHeight = component.get('cellHeight');
-      let yAxis = element.attr('y');
+      let yAxis = element.attr('copy-yaxis');
       let className = element.attr('class');
       element.attr('height', cellHeight);
       element.attr('class', className);
