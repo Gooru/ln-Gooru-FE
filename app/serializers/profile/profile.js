@@ -115,39 +115,41 @@ export default Ember.Object.extend(ConfigurationMixin, {
    */
   normalizeReadProfile: function(payload) {
     const serializer = this;
-    const basePath = serializer.get('session.cdnUrls.user');
-    const appRootPath = this.get('appRootPath'); //configuration appRootPath
-    const thumbnailUrl = payload.thumbnail
-      ? basePath + payload.thumbnail
-      : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+    if (payload) {
+      const basePath = serializer.get('session.cdnUrls.user');
+      const appRootPath = this.get('appRootPath'); //configuration appRootPath
+      const thumbnailUrl = payload.thumbnail
+        ? basePath + payload.thumbnail
+        : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
 
-    return ProfileModel.create(Ember.getOwner(this).ownerInjection(), {
-      id: payload.id,
-      firstName: payload.first_name,
-      lastName: payload.last_name,
-      username: payload.username,
-      email: payload.email,
-      gender: payload.gender,
-      grades: payload.grade,
-      dateOfBirth: payload.birth_date,
-      role: payload.user_category,
-      createdAt: payload.created_at,
-      lastUpdate: payload.updated_at,
-      countryId: payload.country_id,
-      country: payload.country,
-      stateId: payload.state_id,
-      state: payload.state,
-      studentId: payload.roster_global_userid,
-      schoolDistrictId: payload.school_district_id,
-      schoolDistrict: payload.school_district,
-      aboutMe: payload.about,
-      avatarUrl: thumbnailUrl,
-      rosterId: payload.roster_id,
-      followers: payload.followers,
-      followings: payload.followings,
-      isFollowing: !!payload.isFollowing,
-      fullName: `${payload.last_name  } ${  payload.first_name}`
-    });
+      return ProfileModel.create(Ember.getOwner(this).ownerInjection(), {
+        id: payload.id,
+        firstName: payload.first_name,
+        lastName: payload.last_name,
+        username: payload.username,
+        email: payload.email,
+        gender: payload.gender,
+        grades: payload.grade,
+        dateOfBirth: payload.birth_date,
+        role: payload.user_category,
+        createdAt: payload.created_at,
+        lastUpdate: payload.updated_at,
+        countryId: payload.country_id,
+        country: payload.country,
+        stateId: payload.state_id,
+        state: payload.state,
+        studentId: payload.roster_global_userid,
+        schoolDistrictId: payload.school_district_id,
+        schoolDistrict: payload.school_district,
+        aboutMe: payload.about,
+        avatarUrl: thumbnailUrl,
+        rosterId: payload.roster_id,
+        followers: payload.followers,
+        followings: payload.followings,
+        isFollowing: !!payload.isFollowing,
+        fullName: `${payload.last_name  } ${  payload.first_name}`
+      });
+    }
   },
 
   /**
