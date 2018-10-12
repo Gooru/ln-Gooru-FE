@@ -14,7 +14,7 @@
   .chart-container {
     .graded-chart-container {
       display: grid;
-      grid-template-columns: 150px auto;
+      grid-template-columns: 100px auto;
 
       &.hide-grade {
         justify-content: center;
@@ -97,7 +97,7 @@
 
             .competency {
               stroke: $dark-300;
-              stroke-width: 2;
+              stroke-width: 1;
               shape-rendering: crispedges;
               stroke-opacity: 0.7;
             }

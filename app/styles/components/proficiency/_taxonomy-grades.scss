@@ -8,13 +8,18 @@
       position: relative;
       padding: 0;
       margin: 0;
+      max-width: 100px;
       width: max-content;
 
       .grade-title {
         border: none;
+        display: block;
         padding-left: 10px;
         padding-right: 10px;
         height: 24px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         color: $dark-300;
       }
 
