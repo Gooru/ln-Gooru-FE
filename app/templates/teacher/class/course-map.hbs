@@ -110,14 +110,25 @@
           {{/if}}
         </div>
         {{#unless isStudentCourseMap}}
-          {{#if questionItems}}
-            <div class="items-to-grade">
-              <div class="header">
-                {{t 'class.analytics.performance.grade-items'}}
-              </div>
-              {{gru-grade-items questionItems=questionItems}}
+          <div class="items-to-grade">
+            <div class="header">
+              {{t 'class.analytics.performance.grade-items'}}
             </div>
-          {{/if}}
+            {{#if isGradeLoading}}
+              {{three-bounce-spinner}}
+            {{else}}
+              {{#if questionItems}}
+                {{gru-grade-items questionItems=questionItems}}
+              {{else}}
+                <div class="no-grade-items">
+                  <i></i>
+                  <span>
+                    {{t 'class.analytics.performance.no-grade-items'}}
+                  </span>
+                </div>
+              {{/if}}
+            {{/if}}
+          </div>
         {{/unless}}
       </div>
     </div>

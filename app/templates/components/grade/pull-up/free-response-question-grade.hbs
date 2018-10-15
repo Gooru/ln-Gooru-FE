@@ -1,0 +1,205 @@
+<div class="backdrop" {{action 'onPullUpClose' true}}></div>
+<div class="free-response-question-grade-container">
+  <div class="frq-grade-header">
+    <div class="frq-grade-breadcrumb">
+      <div class="unit-title">
+        <i class="unit-icon"></i>
+        <p>{{t 'common.unit'}} {{unit.sequence}} : {{unit.title}}</p>
+      </div>
+      <div class="lesson-title">
+        {{gru-icon name="keyboard_arrow_right"}}
+        <i class="lesson-icon"></i>
+        <p>{{t 'common.lesson'}} {{lesson.sequence}} : {{lesson.title}}</p>
+      </div>
+      <div class="collection-title">
+        {{gru-icon name="keyboard_arrow_right"}}
+        <i class="collection-icon {{collection.collectionType}}"></i>
+        <p>{{collection.title}}</p>
+      </div>
+    </div>
+    <div class="collection-performance-score">
+      --
+    </div>
+    <div class="frq-grade-close-pullup" {{action 'onPullUpClose'}}>
+      {{gru-icon name="close" }}
+    </div>
+  </div>
+
+  <div class="frq-grade-body">
+    <div class="frq-grade-left-panel">
+      <div class="frq-grade-left-panel-header">
+        <div class="frq-grade-count">
+          <sup>{{currentStudentIndex}}</sup>&frasl;<sub>{{users.length}}</sub>
+        </div>
+        <div class="frq-grade-students">
+          <div class="frq-grade-students-carousel">
+            <div id="frq-grade-students-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
+              <div class="carousel-inner">
+                {{#each users as |user index|}}
+                  <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
+                    <div class="user-profile-img">
+                      <img src="{{user.avatarUrl}}" />
+                      <span>{{user.lastName}}  {{user.firstName}}</span>
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+              <!-- Left and right controls -->
+              <a class="left carousel-control" data-slide="prev" {{action 'onClickPrev'}}>
+                  {{gru-icon name="keyboard_arrow_left"}}
+              </a>
+              <a class="right carousel-control" data-slide="next" {{action 'onClickNext'}}>
+                {{gru-icon name="keyboard_arrow_right"}}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="frq-self-grade">
+          <span>{{t 'common.self-graded'}}</span>
+          <span class="performance-score">17/20</span>
+          <span>{{t 'common.rubric-grade'}}</span>
+        </div>
+      </div>
+      <div class="frq-grade-left-panel-body">
+        <div class="frq-question-info">
+          <span class="frq-header">{{t 'common.brief'}}</span>
+          <p>
+            {{gru-math-text text=question.text}}
+          </p>
+        </div>
+        <div class="frq-question-answer-info">
+          <span class="frq-header">{{t 'gru-question-viewer.answer'}}</span>
+          <p>
+            {{gru-math-text text=answer.answerText}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="frq-grade-right-panel">
+      <div class="frq-grade-right-panel-header">
+        <div class="frq-grade-info">
+          {{#if rubric.scoring}}
+            <span class="frq-grade-info-title">{{t 'grading-player.grading'}}</span>
+            <span class="frq-grade-info-desc">{{t 'common.update-grade-score'}}</span>
+          {{else}}
+            <span class="frq-grade-info-title">
+              Rubric
+              {{#if (and rubric.uploaded rubric.url)}}
+                <span class="rubric-attachment" {{action 'filePreviewOpen'}}>{{gru-icon name="attachment"}}</span>
+          {{/if}}
+          </span>
+          <span class="frq-grade-info-desc">{{t 'common.answer-this-rubric'}}</span>
+          {{/if}}
+        </div>
+        {{#if rubric.scoring}}
+          <div class="frq-grade-score" style= {{safe-html (concat "background-color:" (grade-color userGradeScore))}}>
+            <span>{{studentGradeScore}}</span>
+            <hr/>
+            <span>{{rubric.maxScore}}</span>
+          </div>
+          {{else if (gt totalRubricPoints 0)}}
+          <div class="frq-grade-score" style= {{safe-html (concat "background-color:" (grade-color userRubricScore))}}>
+            <span>{{totalUserRubricPoints}}</span>
+            <hr/>
+            <span>{{totalRubricPoints}}</span>
+          </div>
+        {{/if}}
+      </div>
+      <div class="frq-grade-right-panel-body">
+        {{#if rubric.scoring}}
+          <div class="frq-grade-rubric-grading">
+            {{validation.gru-input-number model=userGrade  valuePath='studentScore' min=0 max=rubric.maxScore step=rubric.increment }}
+            <span class="score">{{rubric.maxScore}}</span>
+          </div>
+        {{else}}
+          <div class="frq-grade-rubric-categories">
+            {{#each categories as | category categoryIndex |}}
+              <div class="frq-grade-rubric-category" id="frq-grade-rubric-category-{{categoryIndex}}">
+                {{#if category.allowsLevels}}
+                  <div class="frq-grade-rubric-category-info">
+                    <p>{{category.title}}</p>
+                  </div>
+                {{/if}}
+                <div class="frq-grade-rubric-level-container">
+                  {{#if category.allowsLevels}}
+                    <div class="frq-grade-rubric-levels {{unless (and category.allowsLevels category.allowsScoring) 'no-progress'}} {{if category.scoreInPrecentage 'active'}}">
+                      {{#each category.levels as |level levelIndex|}}
+                        <i class="frq-grade-info-popover {{if level.selected 'selected'}}" data-html="true" title="Points: {{level.score}}" data-content="{{level.name}}" data-category= {{categoryIndex}} data-level= {{levelIndex}}></i>
+                      {{/each}}
+                      {{#if (and category.allowsLevels category.allowsScoring)}}
+                        <div class="progress-bar" style= {{safe-html (concat "background-color:" (grade-color category.scoreInPrecentage) ";width:" category.scoreInPrecentage "%")}}></div>
+                      {{/if}}
+                    </div>
+                  {{else}}
+                    <div class="frq-grade-rubric-category-info">
+                      <p>{{category.title}}</p>
+                    </div>
+                  {{/if}}
+                  <div class="frq-grade-clear {{if category.selected 'active'}}" {{action 'unSelectCategoryLevel' category}}>
+                    {{gru-icon name="clear"}}
+                  </div>
+                  <div class="frq-grade-comment" {{action 'onShowAddCommentBox' categoryIndex}}>
+                    {{gru-icon name="mode_comment"}}
+                  </div>
+                </div>
+                <div class="frq-grade-comment-section">
+                  {{validation.gru-textarea
+                    model=category
+                    valuePath='comment'
+                    maxLength=500
+                    rows=1
+                    placeholder='Add Comment'
+                  }}
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        {{/if}}
+        <div class="frq-grade-general-comment-container">
+          {{validation.gru-textarea
+            model=userGrade
+            valuePath='comment'
+            maxLength=500
+            rows=1
+            placeholder='General Comments Only'
+          }}
+        </div>
+        <div class="frq-grade-action-btns">
+          <button type="button" class="btn confirm btn-primary btn-lg" {{action  'submitUserGrade'}}>{{t 'common.submit'}}</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{{#if isLoading}}
+  <div class="loading-spinner">
+    {{three-bounce-spinner}}
+  </div>
+{{/if}}
+
+<div class="caught-up-container">
+  <div class="backdrop" {{action 'onPullUpClose' true}}></div>
+  <div class="caught-up">
+    <div class="caught-up-tick-container">
+      <hr/>
+      <div class="caught-up-tick">
+        <span>{{gru-icon name="done"}}</span>
+      </div>
+    </div>
+    <h3>{{t 'common.all-caught-up'}}</h3>
+    <p>{{t 'common.no-users-to-grade'}}</p>
+  </div>
+</div>
+
+{{#if (and rubric.uploaded rubric.url)}}
+  <div class="rubric-file-preview-container">
+    <div class="backdrop"></div>
+    <div class="rubric-file-preview">
+      <div class="rubric-file-preview-close" {{action 'filePreviewClose'}}>
+        {{gru-icon name="close"}}
+      </div>
+      <iframe src="{{rubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+{{/if}}

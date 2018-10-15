@@ -50,6 +50,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     studyPlayer: function(currentLocation, classData) {
       const route = this;
       const controller = route.get('controller');
+      let activeClasses = controller.get('activeClasses');
       let navigateMapService = route.get('navigateMapService');
       let classId = currentLocation ? currentLocation.get('classId') : classData.get('id');
       let courseId = currentLocation ? currentLocation.get('courseId') : classData.get('courseId');
@@ -80,7 +81,8 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
         route.transitionTo('study-player', courseId, { queryParams });
       })
         .catch(() => {
-          controller.set('isNotAbleToStartPlayer', true);
+          let selectedClass = activeClasses.findBy('id', classData.get('id'));
+          selectedClass.set('isNotAbleToStartPlayer', true);
           // Below logic is used to clear the left over state of study player,
           // in order to avoid the conflict.
           navigateMapService
@@ -96,13 +98,11 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
      */
     selectMenuItem: function(item, classId) {
       const route = this;
-      const controller = route.get('controller');
       const queryParams = {
         queryParams: {
           tab: 'report'
         }
       };
-      controller.set('isNotAbleToStartPlayer', false);
       if (item === 'report') {
         route.transitionTo('student.class.course-map', classId, queryParams);
       } else if (item === 'profile') {
@@ -344,10 +344,6 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     controller.set('activeClasses', model.activeClasses);
   },
 
-  resetController(controller) {
-    controller.set('isNotAbleToStartPlayer', false);
-  },
-
   /**
    * Before leaving the route
    */
@@ -369,7 +365,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       hasSuggestions(resp) ? resp.suggestions[0] : resp.context || resp,
       queryParams
     );
-    isContentMapped = !!queryParams.collectionId;
+    isContentMapped = !!((queryParams.collectionId || queryParams.id));
     if (isContentMapped) {
       return Ember.RSVP.resolve(queryParams);
     } else {

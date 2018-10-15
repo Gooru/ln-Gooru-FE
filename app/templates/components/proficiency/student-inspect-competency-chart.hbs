@@ -1,21 +1,33 @@
 <div class="chart-container">
-  <div class="graded-chart-container">
-    <div class="taxonomy-grades-container">
-      {{proficiency.taxonomy-grades onSelectGrade="onSelectGrade" classGrade=classGrade subjectCode="K12.MA"}}
+  <div class="graded-chart-container {{if isProficiency 'hide-grade'}}">
+    {{#unless isProficiency}}
+      <div class="taxonomy-grades-container">
+        {{proficiency.taxonomy-grades taxonomyGrades=taxonomyGrades activeGrade=activeGrade classGrade=classGrade subjectCode="K12.MA"}}
+      </div>
+    {{/unless}}
+    <div class="domain-chart">
+      <div class="scrollable-chart">
+        <div id="student-inspect-competency-chart">
+          {{#unless isProficiency}}
+            <div id="popover">
+              <span class="title">{{t "student-first-experience.competency.popover.title" title=title}}</span>
+              <span class="content">
+            {{t "student-first-experience.competency.popover.content"}}
+            </span>
+            </div>
+          {{/unless}}
+        </div>
+      </div>
+      <div class="domain-sequence">
+        {{#each taxonomyDomains as |taxonomyDomain index |}}
+          <li class="domain-counts" title="{{taxonomyDomain.domainName}}" data-toggle="tooltip">
+            {{taxonomyDomain.domainSeq}}
+          </li>
+        {{/each}}
+      </div>
     </div>
-    <div class="scrollable-chart">
-      <div id="student-inspect-competency-chart"></div>
-    </div>
-  </div>
-  <div class="domain-sequence" style="width:{{width}}px">
-    {{#each taxonomyDomains as |taxonomyDomain index |}}
-      <li class="domain-counts" title="{{taxonomyDomain.domainName}}" data-toggle="tooltip">
-        {{taxonomyDomain.domainSeq}}
-      </li>
-    {{/each}}
   </div>
 </div>
-
 {{#if isLoading}}
   <div class="loading-spinner">
     {{three-bounce-spinner}}

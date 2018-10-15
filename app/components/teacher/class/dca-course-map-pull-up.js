@@ -68,6 +68,18 @@ export default Ember.Component.extend({
    */
   course: null,
 
+  /**
+   * Maximum number of days to schedule dca content ahead.
+   * @type {Number}
+   */
+  maxNumberOfDays: 30,
+
+  /**
+   * Selected collection for scheduling
+   * @type {Object}
+   */
+  selectedContentForSchedule: null,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -165,30 +177,15 @@ export default Ember.Component.extend({
     /**
      * Action get triggered when schedule content to DCA got clicked
      */
-    onScheduleContentToDCA(content) {
-      let component = this;
-      let contentType = content.get('format');
-      let classId = component.get('classId');
-      let params = {
-        content: content,
-        contentType: contentType,
-        classId: classId
-      };
-      component.set('showScheduleDca', true);
-      component.set('scheduleDcaContext', params);
-    },
-
-    /**
-     * Action get triggered when schedule content  added to DCA
-     */
-    addedScheduleContentToDCA(content, newContentId, addedDate) {
-      let component = this;
-      let data = component.serializerSearchContent(
-        content,
-        newContentId,
-        addedDate
-      );
-      component.sendAction('addedContentToDCA', data, addedDate);
+    onScheduleContentToDCA(content, event) {
+      let element = this.$(event.target).find('.schedule-dca-datepicker');
+      if (!element.hasClass('active')) {
+        this.$('.schedule-dca-datepicker').removeClass('active');
+        element.addClass('active').datepicker('show');
+      } else {
+        element.removeClass('active').datepicker('hide');
+      }
+      this.set('selectedContentForSchedule', content);
     },
 
     /**
@@ -227,10 +224,11 @@ export default Ember.Component.extend({
   },
 
   didRender() {
-    var component = this;
+    let component = this;
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
     });
+    component.setupDatepicker();
   },
 
   //--------------------------------------------------------------------------
@@ -274,6 +272,54 @@ export default Ember.Component.extend({
           component.set('course', course);
           component.set('isLoading', false);
         }
+      });
+  },
+
+  setupDatepicker() {
+    let component = this;
+    let startDate = moment().toDate();
+    let maxNumberOfDays = component.get('maxNumberOfDays');
+    let endDate = moment()
+      .add(maxNumberOfDays, 'd')
+      .toDate();
+    component.$('.schedule-dca-datepicker').datepicker({
+      startDate: startDate,
+      endDate: endDate,
+      format: 'yyyy-mm-dd',
+      maxViewMode: 0,
+      orientation: 'bottom right',
+      container: '.teacher-class-dca-course-map-pull-up'
+    });
+    component
+      .$('.schedule-dca-datepicker')
+      .off('changeDate')
+      .on('changeDate', function() {
+        let datepicker = this;
+        let scheduleDate = component
+          .$(datepicker)
+          .datepicker('getFormattedDate')
+          .valueOf();
+        let classId = component.get('classId');
+        let contentType = component.get('selectedContentForSchedule.format');
+        let contentId = component.get('selectedContentForSchedule.id');
+        let content = component.get('selectedContentForSchedule');
+        component
+          .$(datepicker)
+          .removeClass('active')
+          .datepicker('hide');
+        component
+          .get('classActivityService')
+          .addActivityToClass(classId, contentId, contentType, scheduleDate)
+          .then(newContentId => {
+            if (!component.isDestroyed) {
+              let data = component.serializerSearchContent(
+                content,
+                newContentId,
+                scheduleDate
+              );
+              component.sendAction('addedContentToDCA', data, scheduleDate);
+            }
+          });
       });
   },
 

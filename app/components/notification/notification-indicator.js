@@ -1,5 +1,9 @@
 import Ember from 'ember';
-import { NOTIFICATION_SETTINGS } from 'gooru-web/config/config';
+import {
+  NOTIFICATION_SETTINGS,
+  PLAYER_EVENT_SOURCE,
+  ROLES
+} from 'gooru-web/config/config';
 
 const notificationAccesor = {
   class: 'active-study',
@@ -110,15 +114,18 @@ export default Ember.Component.extend({
               unitId: 0,
               lessonId: 0,
               collectionId: 0,
-              role: 0,
-              source: 0,
+              role: ROLES.STUDENT,
+              source: PLAYER_EVENT_SOURCE.COURSE_MAP,
               type: null,
+              itemId: 0,
+              itemType: '',
               subtype: null,
               pathId: 0,
               minScore: 0,
               collectionSource: 'course_map',
               isStudyPlayer: true,
-              pathType: ''
+              pathType: '',
+              isNotification: true
             }
           }
         }
@@ -143,7 +150,8 @@ export default Ember.Component.extend({
               lessonId: 0,
               collectionId: 0,
               tab: 'assesmentreport',
-              location: 'unitId+lessonId+collectionId+currentItemType'
+              location: 'unitId+lessonId+collectionId+currentItemType',
+              refresh: true
             }
           }
         }
@@ -342,7 +350,9 @@ export default Ember.Component.extend({
     closeNotificationList() {
       const component = this;
       let dataModel = component.get('notificationModel');
-      dataModel.notifications.clear();
+      if (dataModel && dataModel.notifications) {
+        dataModel.notifications.clear();
+      }
       component.set('notificationModel', dataModel);
       component.set('displayNotificationList', false);
     }
@@ -359,6 +369,7 @@ export default Ember.Component.extend({
       return; //Don't fetch any notifications if user role is null
     }
     let notinPromise;
+    let showMoreFlow = !dataFilter;
     dataFilter = dataFilter || component.getDataFilter();
     if (component.get('notificationCtxRole') === 'student') {
       notinPromise = component
@@ -393,11 +404,9 @@ export default Ember.Component.extend({
             []
           );
 
-      var ndt = concatAndDeDuplicateObjects(
-        'id',
-        notndetail,
-        newNotificationDetails
-      );
+      var ndt = showMoreFlow
+        ? concatAndDeDuplicateObjects('id', notndetail, newNotificationDetails)
+        : newNotificationDetails;
 
       if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
         newDataModel.notifications = ndt;

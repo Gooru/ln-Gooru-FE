@@ -14,7 +14,7 @@
     <div class="panel-body" style="background-color:{{grade-color class.performanceSummary.score}}">
       <div class="information" style="background-image: url({{course.thumbnailUrl}})">
         {{#unless class.currentLocation}}
-          <div class="start-studying" {{action "playCollection"}}>
+          <div class="start-studying {{if class.isNotAbleToStartPlayer 'no-play'}}" {{action "playCollection"}}>
             {{t "student-landing.start-studying"}}
           </div>
   {{else}}
@@ -40,34 +40,41 @@
           </div>
         {{/if}}
       </div>
-      <div class="links">
-        <ul>
-          <li class="class-activities">
-            <a {{action 'selectItem' 'class-activities'}}>
-              <span>{{t 'student-landing.class.class-activities'}}</span>
-            </a>
-          </li>
-          <li class="course-map">
-            <a {{action 'selectItem' 'course-map'}}>
-              <span>{{t 'student-landing.class.course-map'}}</span>
-            </a>
-          </li>
-          <li class="performance">
-            <a {{action 'selectItem' 'profile'}}>
-              <span>{{t 'student-landing.class.my-location'}}</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="performance pointer {{unless hasStarted 'not-started'}}" style="background-color:{{grade-color class.performanceSummary.score}}" {{action 'selectItem' 'report'}}>
-        <div class="percentage">
-          {{scorePercentage}}
+      {{#unless class.isNotAbleToStartPlayer}}
+        <div class="links">
+          <ul>
+            <li class="class-activities">
+              <a {{action 'selectItem' 'class-activities'}}>
+                <span>{{t 'student-landing.class.class-activities'}}</span>
+              </a>
+            </li>
+            <li class="course-map">
+              <a {{action 'selectItem' 'course-map'}}>
+                <span>{{t 'student-landing.class.course-map'}}</span>
+              </a>
+            </li>
+            <li class="performance">
+              <a {{action 'selectItem' 'profile'}}>
+                <span>{{t 'student-landing.class.my-location'}}</span>
+              </a>
+            </li>
+          </ul>
         </div>
-        <div class="completion-chart">
-          {{charts/gru-x-bar-chart data=barChartData }}
-          <label>{{completedPercentage}}</label>
+        <div class="performance pointer {{unless hasStarted 'not-started'}}" style="background-color:{{grade-color class.performanceSummary.score}}" {{action 'selectItem' 'report'}}>
+          <div class="percentage">
+            {{scorePercentage}}
+          </div>
+          <div class="completion-chart">
+            {{charts/gru-x-bar-chart data=barChartData }}
+            <label>{{completedPercentage}}</label>
+          </div>
         </div>
-      </div>
+      {{else}}
+        <div class="alert-player-error">
+          <span class="clear-alert" {{action 'onClearAlert'}}>{{gru-icon name="clear"}}</span>
+          <div class="alert-status">{{t 'common.errors.no-studymaterial'}}</div>
+        </div>
+      {{/unless}}
     </div>
   {{else}}
     <div class="panel-heading">

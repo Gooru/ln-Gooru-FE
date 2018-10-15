@@ -1,55 +1,67 @@
 .proficiency.taxonomy-grades {
-  margin-right:30px;
-  .grades-container {
+  .grade-list {
+    display: grid;
     height: 80vh;
+    align-items: center;
 
     .grade-container {
-      height: 30px;
-       position: relative;
-       padding: 0px;
-       margin: 0px;
-       text-align: center;
+      position: relative;
+      padding: 0;
+      margin: 0;
+      max-width: 100px;
+      width: max-content;
 
-       &.active-grade {
-         .grade-title {
-           opacity: 1;
-           border: 2px dashed #010518;
-         }
-         .grade-title:after {
-           border-color: transparent transparent transparent  #010518;
-         }
-       }
+      .grade-title {
+        border: none;
+        display: block;
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 24px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: $dark-300;
+      }
 
-       .grade-title {
-         position:relative;
-         line-height: 30px; /* equal to the list item's height */
-         width: 100%;
-         border: 1px solid rgba(151, 151, 151, 0.3);
-         color: #525659;
-         opacity: 0.5;
-       }
-       .grade-title:after, .grade-title:before {
-         content:"";
-         display:inline-block;
-         border-width: 16px;
-         border-style: solid;
-         width: 0px;
-         height: 0px;
-         left: 100%;
-         top: -1px;
-         position: absolute;
-         z-index: 1;
-       }
-       .grade-title:after {
-         border-color: transparent transparent transparent rgba(151, 151, 151, 0.3);
-       }
-       .grade-title:before {
-         border-width: 14px;
-         display: block;
-         border-color: transparent transparent transparent $white;
-         z-index: 2;
-         top:1px;
-       }
+      &.active-grade {
+        .grade-title {
+          background-color: $dark-300;
+          border: none;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+          opacity: 1;
+          font-weight: bold;
+          display: grid;
+          align-items: center;
+          justify-content: center;
+          color: $white;
+        }
+
+        .grade-title:after,
+        .grade-title:before {
+          content: "";
+          display: inline-block;
+          border-width: 16px;
+          border-style: solid;
+          width: 0;
+          height: 0;
+          left: 100%;
+          top: -1px;
+          position: absolute;
+          z-index: 1;
+        }
+
+        .grade-title:after {
+          border-color: transparent transparent transparent transparent;
+        }
+
+        .grade-title:before {
+          border-width: 12px;
+          display: block;
+          border-color: transparent transparent transparent $dark-300;
+          z-index: 0;
+          top: 0;
+        }
+      }
     }
   }
 }

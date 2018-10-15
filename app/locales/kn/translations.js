@@ -1171,6 +1171,18 @@ export default Object.assign(quizzesTranslations, {
         'students-null':
           'ನಿಮ್ಮ ತರಗತಿಗೆ ಸೇರಲು ವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ವರ್ಗ ಕೋಡ್ ಅನ್ನು ಹಂಚಿಕೊಳ್ಳಿ.'
       },
+      'students-tab': {
+        'last-name': 'ಕೊನೆಯ ಹೆಸರು',
+        'first-name': 'ಮೊದಲ ಹೆಸರು',
+        performance: 'ಪ್ರದರ್ಶನ',
+        proficiency: 'ಪ್ರಾವೀಣ್ಯತೆ',
+        location: 'ಸ್ಥಳ',
+        'currently-studying': 'ಪ್ರಸ್ತುತ ಅಧ್ಯಯನ',
+        'student-id': 'ವಿದ್ಯಾರ್ಥಿಯ ಐಡಿ',
+        remove: 'ತೆಗೆದುಹಾಕಿ',
+        mastered: 'Mastered',
+        'in-progress': 'ಪ್ರಗತಿಯಲ್ಲಿದೆ'
+      },
       'class-activities': 'ದೈನಂದಿನ ವರ್ಗ ಚಟುವಟಿಕೆಗಳು',
       'back-to-class-activities': 'ದೈನಂದಿನ ದರ್ಜೆಯ ಚಟುವಟಿಕೆಗಳಿಗೆ ಹಿಂತಿರುಗಿ',
       'class-activities-tab': {
@@ -1714,7 +1726,11 @@ export default Object.assign(quizzesTranslations, {
       'expand-chart': 'ಚಾರ್ಟ್ ವಿಸ್ತರಿಸಿ',
       mastered: 'ಮಾಸ್ಟರಿಂಗ್',
       'in-progress': 'ಪ್ರಗತಿಯಲ್ಲಿದೆ',
-      'not-started': 'ಪ್ರಾರಂಭಿಸಲಿಲ್ಲ'
+      'not-started': 'ಪ್ರಾರಂಭಿಸಲಿಲ್ಲ',
+      skyline: 'ಸ್ಕೈಲೈನ್',
+      baseline: 'ಬೇಸ್ಲೈನ್',
+      'not-tagged':
+        'ವರ್ಗವು ಯಾವುದೇ ಕೋರ್ಸ್ ಅನ್ನು ಹೊಂದಿಲ್ಲ ಅಥವಾ ಕೋರ್ಸ್ ಅನ್ನು ಮಾನ್ಯವಾದ ವಿಷಯ ಅಥವಾ ಮಾನದಂಡಗಳಿಗೆ ಟ್ಯಾಗ್ ಮಾಡಲಾಗಿಲ್ಲ.'
     }
   },
   'gru-data-picker': {
@@ -2552,5 +2568,51 @@ export default Object.assign(quizzesTranslations, {
   'gru-performance-chart': {
     'teacher-tooltip':
       'ನಿಮ್ಮ ವಿದ್ಯಾರ್ಥಿಗಳಲ್ಲಿ ಈ ಪಾಠದಲ್ಲಿ ಎಲ್ಲಾ ಮೌಲ್ಯಮಾಪನಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದ್ದೀರಿ'
+  },
+  report: {
+    'external-assessment-report': {
+      note:
+        'ಮೌಲ್ಯಮಾಪನಕ್ಕೆ ವಿದ್ಯಾರ್ಥಿ ವರದಿ ಮಾಡಿದ ಅಂಕಗಳೊಂದಿಗೆ ಇದು ಬಾಹ್ಯ ಮೌಲ್ಯಮಾಪನವಾಗಿದೆ. ವೈಯಕ್ತಿಕ ಪ್ರಶ್ನೆ ಮಟ್ಟದ ಡೇಟಾ ಲಭ್ಯವಿಲ್ಲ.',
+      wish: 'ಅಭಿನಂದನೆಗಳು! ನೀವು ಗಳಿಸಿದ್ದೀರಿ',
+      reference: 'ಈ ಬಾಹ್ಯ ಮೌಲ್ಯಮಾಪನವನ್ನು ಪ್ರವೇಶಿಸಬಹುದು '
+    },
+    'competency-report': {
+      title: 'ಸ್ಪರ್ಧಾತ್ಮಕ ವರದಿ',
+      'no-subject': 'ವಿಷಯ ನಿಗದಿಪಡಿಸಲಾಗಿಲ್ಲ'
+    },
+    'domain-report': 'ಡೊಮೇನ್ ವರದಿ'
+  },
+
+  'self-report': {
+    'your-score': 'ನಿಮ್ಮ ಅಂಕ',
+    'update-error': 'ಸ್ಕೋರ್ ಅನ್ನು ಅಪ್ಡೇಟ್ ಮಾಡುವಲ್ಲಿ ಸಮಸ್ಯೆ',
+    'validation-error': 'ಮಾನ್ಯವಾದ ಸ್ಕೋರ್ ನಮೂದಿಸಿ',
+    'enter-score': 'ನಿಮ್ಮ ಸ್ಕೋರ್ ಅನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ'
+  },
+  notifications: {
+    'notificationlist-header-title': 'ಸೂಚನೆ',
+    'show-more': 'ಇನ್ನು ಹೆಚ್ಚು ತೋರಿಸು',
+    type: {
+      'teacher-suggestion-title':
+        'ನೀವು ತರಗತಿಯಲ್ಲಿ ಹೊಸ ಶಿಕ್ಷಕ ಸಲಹೆಯನ್ನು ಹೊಂದಿದ್ದೀರಿ : {{ classTitle }}',
+      'student-gradable-submission-title':
+        'You have {{occurrence}} item(s) to grade in class : {{ classTitle }}',
+      'student-self-report-title':
+        '{{occurrence}} ವಿದ್ಯಾರ್ಥಿ ವರ್ಗದ ಕಾರ್ಯಕ್ಷಮತೆಯನ್ನು ವರದಿ ಮಾಡಿದ್ದಾರೆ : {{ classTitle }}',
+      'teacher-override-title':
+        'ಶಿಕ್ಷಕ ನಿಮ್ಮ ಸಲ್ಲಿಕೆಗಳನ್ನು ವರ್ಗದಲ್ಲಿ ಸರಿಪಡಿಸಿದ್ದಾರೆ : {{ classTitle }}  ',
+      'teacher-grading-complete-title':
+        'ಶಿಕ್ಷಕನು ನಿಮ್ಮ ಸಲ್ಲಿಕೆಗಳನ್ನು ತರಗತಿಯಲ್ಲಿ ವರ್ಗೀಕರಿಸಿದ್ದಾನೆ : {{ classTitle }}'
+    },
+    typeinclass: {
+      'teacher-suggestion-title': 'ನಿಮಗೆ ಹೊಸ ಶಿಕ್ಷಕ ಸಲಹೆ ಇದೆ',
+      'student-gradable-submission-title':
+        'You have {{occurrence}} student item(s) to grade',
+      'student-self-report-title':
+        '{{occurrence}} Student(s) reported performance',
+      'teacher-override-title': 'ಶಿಕ್ಷಕರು ನಿಮ್ಮ ಸಲ್ಲಿಕೆಯನ್ನು ಸರಿಪಡಿಸಿದ್ದಾರೆ',
+      'teacher-grading-complete-title':
+        'ಶಿಕ್ಷಕನು ನಿಮ್ಮ ಸಲ್ಲಿಕೆಗಳನ್ನು ತರಗತಿಯಲ್ಲಿ ವರ್ಗೀಕರಿಸಿದ್ದಾನೆ'
+    }
   }
 });

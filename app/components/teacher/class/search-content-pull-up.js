@@ -239,22 +239,6 @@ export default Ember.Component.extend({
     },
 
     /**
-     * Action get triggered when schedule content to DCA got clicked
-     */
-    onScheduleContentToDCA(content) {
-      let component = this;
-      let contentType = component.get('activeContentType');
-      let classId = component.get('classId');
-      let params = {
-        content: content,
-        contentType: contentType,
-        classId: classId
-      };
-      component.set('showScheduleDca', true);
-      component.set('scheduleDcaContext', params);
-    },
-
-    /**
      * Action get triggered when schedule content  added to DCA
      */
     addedScheduleContentToDCA(content, newContentId, addedDate) {
@@ -298,11 +282,15 @@ export default Ember.Component.extend({
    * Function to triggered once when the component element is first rendered.
    */
   didInsertElement() {
-    this.set('activeContentType', this.get('selectedSearchContentType'));
-    this.loadData();
-    this.openPullUp();
-    this.handleSearchBar();
-    this.handleShowMoreData();
+    let component = this;
+    component.set(
+      'activeContentType',
+      component.get('selectedSearchContentType')
+    );
+    component.loadData();
+    component.openPullUp();
+    component.handleSearchBar();
+    component.handleShowMoreData();
   },
 
   //--------------------------------------------------------------------------

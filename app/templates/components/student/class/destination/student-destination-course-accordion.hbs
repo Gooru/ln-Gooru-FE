@@ -1,7 +1,7 @@
 <div class="student-destination-course-map-container {{if isRoute0 'route0-view'}}">
   <div class="units-container">
     {{#each units as |unit unitIndex|}}
-      <div class="u-container collapsed" id="u-{{unit.id}}" >
+      <div class="u-container collapsed" id="u-{{unit.id}}">
         <div class="unit-header header" {{action "onSelectUnit" unit}}>
           <div class="sequence">{{course-sections-prefix index=unitIndex type='unit' longName=true}}</div>
           <div class="unit-title title ellipsis">{{unit.title}}</div>
@@ -23,20 +23,20 @@
                           <div class="collection-title title ellipsis">{{collection.title}}</div>
                         </div>
                       </div>
-                    {{else}}
-                        <div class="no-data-available">No Content Available</div>
+                      {{else}}
+                        <div class="no-data-available">{{t "common.no-content"}}</div>
                     {{/each}}
                   </div>
                 </div>
               </div>
-            {{else}}
-              <div class="no-data-available">No Content Available</div>
+              {{else}}
+                <div class="no-data-available">{{t "common.no-content"}}</div>
             {{/each}}
           </div>
         </div>
       </div>
-    {{else}}
-      <div class="no-data-available">No Content Available</div>
+      {{else}}
+        <div class="no-data-available">{{t "common.no-content"}}</div>
     {{/each}}
   </div>
 </div>

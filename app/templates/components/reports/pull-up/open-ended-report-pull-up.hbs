@@ -55,6 +55,7 @@
                     <div class="content">
                       <div>
                         <span class="title ellipsis">{{category.title}}</span>
+                        <span class="title ellipsis">{{category.levelObtained}}</span>
                         {{#unless (eq category.levelMaxScore 0)}}
                           <span class="score">({{#if category.levelScore}}{{category.levelScore}}{{else}}0{{/if}}/{{category.levelMaxScore}})</span>
                         {{/unless}}

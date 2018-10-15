@@ -211,6 +211,13 @@ export default Object.assign(quizzesTranslations, {
     'correct-answers': 'Correct Answer(s)',
     'incorrect-answers': 'InCorrect Answer(s)',
     'rubric-graded': 'Rubric Graded',
+    'self-graded': 'Self-Graded',
+    'rubric-grade': 'Rubric Grade',
+    brief: 'Brief',
+    'update-grade-score': 'Update grade score to complete your FRQ.',
+    'answer-this-rubric': 'Answer this rubric to complete your FRQ.',
+    'all-caught-up': 'You are all caught up!',
+    'no-users-to-grade': 'There are no users to grade for this FRQ.',
     'rubric-needs-grading': 'Rubric Needs Grading',
     'not-answered': 'Not Answered',
     'rubric-not-answered': 'Rubric Not Answered',
@@ -817,6 +824,7 @@ export default Object.assign(quizzesTranslations, {
           }
         },
         'grade-items': 'Items to Grade',
+        'no-grade-items': 'Looks like you’re all caught up!',
         'gru-grade-items': {
           students: {
             zero: '{{count}} students',
@@ -1719,6 +1727,54 @@ export default Object.assign(quizzesTranslations, {
       'Please reorder the answers in correct order, and click "{{action}}".'
   },
 
+  'student-first-experience': {
+    preStudyTitle: 'Pre-Study for {{title}}',
+    'route0-action': {
+      accept: 'Accept',
+      ignore: 'Ignore'
+    },
+    competency: {
+      popover: {
+        title: '{{title}} BOUNDARY',
+        content:
+          'You need to study all the standards between your skyline and this grade line to reach your destination.'
+      }
+    },
+    'assigned-course-title': 'Assigned Course for {{title}}',
+    'study-course': 'Study Course',
+    'show-my-destination': 'Show My Destination',
+    'show-me-my-route': 'Show My route',
+    'competency-level': {
+      title: 'Your Proficiency Profile',
+      mastery: '{{count}} Standards Mastered',
+      'in-progress': '{{count}} Standards In Progress',
+      'not-started': '{{count}} Standards Not Started',
+      'your-skyline': 'Your Skyline'
+    },
+    explanatory: {
+      master: {
+        title: 'MASTERED',
+        desc:
+          'Indicates that there is evidence that you have successfully mastered the standards '
+      },
+      'in-progress': {
+        title: 'IN PROGRESS',
+        desc:
+          'Indicates that there is evidence that you have started studying the standards and are in progress towards achieving mastered '
+      },
+      'not-started': {
+        title: 'NOT STARTED',
+        desc:
+          'Indicates that there is no evidence and you are yet to begin studying the standards'
+      }
+    },
+    'competency-level-partial': {
+      desc1: 'You are currently in ',
+      desc2:
+        'Welcome to your Skyline map for Math. The Skyline (the thick white line) shows the highest standard that you have mastered in each domain. A domain is an area of math that you study, such as Number Systems and Expressions & Equations. Each column represents a math domain. And each box in the column represents a standard in the domain. Once you start learning and mastering the standards, your Skyline will continuously bump up.'
+    }
+  },
+
   player: {
     'gru-navigation': {
       'view-report': 'View Report'
@@ -1797,6 +1853,7 @@ export default Object.assign(quizzesTranslations, {
       'not-started': 'Not Started',
       skyline: 'Skyline',
       baseline: 'Baseline',
+      'grade-line': 'Grade Line',
       'not-tagged':
         'The class has no course assigned or the course has not been tagged to a valid subject or standards.'
     }

@@ -163,6 +163,7 @@ export default Ember.Controller.extend({
 
   studentClassScore: null,
 
+  isGradeLoading: null,
   // -------------------------------------------------------------------------
   // Actions
 
@@ -333,6 +334,16 @@ export default Ember.Controller.extend({
 
   // -------------------------------------------------------------------------
   // Events
+
+  init() {
+    const controller = this;
+    controller._super(...arguments);
+    let tab = controller.get('tab');
+    if (tab && tab === 'report') {
+      const classController = controller.get('classController');
+      classController.openTeacherCourseReport();
+    }
+  },
 
   // -------------------------------------------------------------------------
   // Observers
@@ -651,6 +662,7 @@ export default Ember.Controller.extend({
 
   getQuestionsToGrade() {
     let controller = this;
+    controller.set('isGradeLoading', true);
     let currentClass = controller.get('currentClass');
     let classId = currentClass.get('id');
     let courseId = currentClass.get('courseId');
@@ -672,6 +684,7 @@ export default Ember.Controller.extend({
               }
             });
             Ember.RSVP.all(itemsToGrade).then(function(questionItems) {
+              controller.set('isGradeLoading', false);
               controller.set('questionItems', questionItems);
             });
           });
@@ -731,8 +744,10 @@ export default Ember.Controller.extend({
                 .get('children')
                 .findBy('id', resourceId);
               itemObject.setProperties({
-                unitPrefix: `U${unitIndex}`,
-                lessonPrefix: `L${lessonIndex}`,
+                unitIndex: unitIndex,
+                lessonIndex: lessonIndex,
+                unit: unit,
+                lesson: lesson,
                 classId: controller.get('class.id'),
                 courseId: controller.get('course.id'),
                 unitId: unit.get('id'),

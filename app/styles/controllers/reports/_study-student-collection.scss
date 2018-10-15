@@ -77,6 +77,7 @@
       background-color: #37424b;
       z-index: 888;
       opacity: 0.4;
+      pointer-events: none;
     }
   }
 }
@@ -120,5 +121,8 @@ body.reports_study-student-collection {
         }
       }
     }
+  }
+  &.system-suggested {
+    overflow: hidden;
   }
 }

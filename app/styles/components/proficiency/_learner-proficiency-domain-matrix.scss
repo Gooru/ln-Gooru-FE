@@ -12,6 +12,19 @@
     clear: both;
   }
 
+  .fillArea0 {
+    fill: #e7e8e9;
+  }
+  .fillArea1 {
+    fill: #1aa9eb;
+  }
+  .fillArea2,
+  .fillArea3,
+  .fillArea4,
+  .fillArea5 {
+    fill: #006eb5;
+  }
+
   .chart-area {
     background-color: $gray-97;
     display: grid;

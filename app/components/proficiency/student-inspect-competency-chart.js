@@ -2,7 +2,6 @@ import Ember from 'ember';
 import d3 from 'd3';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -36,21 +35,14 @@ export default Ember.Component.extend({
 
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   // -------------------------------------------------------------------------
   // Actions
-  actions: {
-    /**
-     * Action triggered when select a grade
-     */
-    onSelectGrade(gradeData) {
-      let component = this;
-      component.set('selectedGrade', gradeData);
-      component.sendAction('onSelectGrade', gradeData);
-    }
-  },
+  actions: {},
 
   // -------------------------------------------------------------------------
   // Properties
@@ -85,13 +77,13 @@ export default Ember.Component.extend({
    * Width of the cell
    * @type {Number}
    */
-  cellWidth: 30,
+  cellWidth: 32,
 
   /**
    * height of the cell
    * @type {Number}
    */
-  cellHeight: 15,
+  cellHeight: 6,
 
   /**
    * It will have selected taxonomy subject courses
@@ -115,14 +107,24 @@ export default Ember.Component.extend({
   isRoute0Chart: false,
 
   /**
-   * @property {JSON} selectedGrade
+   * @property {JSON} activeGrade
    */
-  selectedGrade: null,
+  activeGrade: null,
 
   /**
    * @property {String} subjectCode
    */
   subjectCode: '',
+
+  /**
+   * @property {Boolean} isProficiency
+   */
+  isProficiency: false,
+
+  /**
+   * @property {JSON} competencyStatus
+   */
+  competencyStatus: null,
 
   // -------------------------------------------------------------------------
   // Observers
@@ -137,13 +139,14 @@ export default Ember.Component.extend({
     component.loadChartData();
   }),
 
-  gradeChangeObserver: Ember.observer('selectedGrade', function() {
+  gradeChangeObserver: Ember.observer('activeGrade', function() {
     let component = this;
-    component.getDomainGradeBoundry().then(() => {
-      component.loadChartData();
-    });
+    if (!component.get('isProficiency')) {
+      component.getDomainGradeBoundry().then(() => {
+        component.loadChartData();
+      });
+    }
   }),
-
 
   // -------------------------------------------------------------------------
   // Methods
@@ -157,14 +160,32 @@ export default Ember.Component.extend({
     let domainLevelSummary = component.get('domainLevelSummary');
     let route0Contents = component.get('route0Contents');
     let domainBoundaries = component.get('domainBoundaries');
-    let route0Suggestions = route0Contents && route0Contents.status === 'pending' ? route0Contents.userCompetencyRoute.domains : null;
+    let route0Suggestions =
+      route0Contents && route0Contents.status === 'pending'
+        ? route0Contents.userCompetencyRoute.domains
+        : null;
     if (component.get('isRoute0Chart')) {
       if (domainLevelSummary && route0Contents && domainBoundaries) {
-        component.drawChart(component.parseChartData(domainLevelSummary, domainBoundaries, route0Suggestions));
+        component.drawChart(
+          component.parseChartData(
+            domainLevelSummary,
+            domainBoundaries,
+            route0Suggestions
+          )
+        );
       }
     } else {
-      if (domainLevelSummary && domainBoundaries) {
-        component.drawChart(component.parseChartData(domainLevelSummary, domainBoundaries, route0Suggestions));
+      if (
+        (domainLevelSummary && domainBoundaries) ||
+        component.get('isProficiency')
+      ) {
+        component.drawChart(
+          component.parseChartData(
+            domainLevelSummary,
+            domainBoundaries,
+            route0Suggestions
+          )
+        );
       }
     }
   },
@@ -175,33 +196,62 @@ export default Ember.Component.extend({
   parseChartData(domainLevelSummary, domainBoundaries, route0Suggestions) {
     let component = this;
     let domainCompetencies = domainLevelSummary.domainCompetencies;
-    let userCompetencies = domainLevelSummary.students.objectAt(0).userCompetencyMatrix;  //we always get one student data
+    let userCompetencies = domainLevelSummary.students.objectAt(0)
+      .userCompetencyMatrix; //we always get one student data
     let chartData = Ember.A([]);
     let maxNumberOfCompetencies = 0;
     let taxonomyDomains = Ember.A([]);
-    domainCompetencies.map( domain => {
+    let masterCount = 0;
+    let inProgressCount = 0;
+    let notStartedCount = 0;
+    domainCompetencies.map(domain => {
       let competencies = domain.competencies;
       let domainCode = domain.domainCode;
       let domainName = domain.domainName;
       let domainSeq = domain.domainSeq;
-      let userCompetencyMatrix = userCompetencies.findBy('domainCode', domainCode);
-      let domainBoundary = domainBoundaries ? domainBoundaries.findBy('domainCode', domainCode) : null;
-      let domainBoundaryCompetency = domainBoundary ? domainBoundary.highline : null;
+      let userCompetencyMatrix = userCompetencies.findBy(
+        'domainCode',
+        domainCode
+      );
+      let domainBoundary = domainBoundaries
+        ? domainBoundaries.findBy('domainCode', domainCode)
+        : null;
+      let domainBoundaryCompetency = domainBoundary
+        ? domainBoundary.highline
+        : null;
       let userCompetenciesStatus = userCompetencyMatrix.competencies;
       let domainCompetenciesList = Ember.A([]);
-      let route0SuggestedDomain = route0Suggestions ? route0Suggestions.findBy('domainCode', domainCode) : null;
+      let route0SuggestedDomain = route0Suggestions
+        ? route0Suggestions.findBy('domainCode', domainCode)
+        : null;
       taxonomyDomains.push(domain);
-      competencies.map( competency => {
+      competencies.map(competency => {
         let competencyCode = competency.competencyCode;
         let competencySeq = competency.competencySeq;
         let competencyDesc = competency.competencyDesc;
         let competencyStudentDesc = competency.competencyStudentDesc;
         let competencyName = competency.competencyName;
-        let competencyStatus = userCompetenciesStatus[`${competency.competencyCode}`];
-        let isDoaminBoundaryCompetency = domainBoundaryCompetency === competency.competencyCode;
-        let route0SuggestedCompetencies = route0SuggestedDomain ? route0SuggestedDomain.path : null;
-        let route0suggestedCompetency = route0SuggestedCompetencies ? route0SuggestedCompetencies.findBy('competencyCode', competencyCode) : false;
+        let competencyStatus =
+          userCompetenciesStatus[`${competency.competencyCode}`];
+        let isDoaminBoundaryCompetency =
+          domainBoundaryCompetency === competency.competencyCode;
+        let route0SuggestedCompetencies = route0SuggestedDomain
+          ? route0SuggestedDomain.path
+          : null;
+        let route0suggestedCompetency = route0SuggestedCompetencies
+          ? route0SuggestedCompetencies.findBy('competencyCode', competencyCode)
+          : false;
         let isRoute0SuggestedCompetency = !!route0suggestedCompetency;
+
+        let competencyStatusCode = parseInt(competencyStatus);
+        if (competencyStatusCode > 1) {
+          masterCount++;
+        } else if (competencyStatusCode === 1) {
+          inProgressCount++;
+        } else {
+          notStartedCount++;
+        }
+
         let isMastery = parseInt(competencyStatus) > 1;
         let xAxisSeq = domainSeq;
         let yAxisSeq = competencySeq;
@@ -222,7 +272,8 @@ export default Ember.Component.extend({
           yAxisSeq,
           isRoute0SuggestedCompetency
         });
-        if (competencyStatus > 1) { //Mark as mastery to all competencies which status is more than 1
+        if (competencyStatus > 1) {
+          //Mark as mastery to all competencies which status is more than 1
           domainCompetenciesList.forEach(data => {
             data.set('status', competencyStatus);
             data.set('isMastery', true);
@@ -231,7 +282,10 @@ export default Ember.Component.extend({
         domainCompetenciesList.push(chartCellData);
       });
 
-      let masteryCompetencies = domainCompetenciesList.filterBy('isMastery', true);
+      let masteryCompetencies = domainCompetenciesList.filterBy(
+        'isMastery',
+        true
+      );
       if (masteryCompetencies && masteryCompetencies.length === 0) {
         domainCompetenciesList.objectAt(0).set('skyline', true);
       } else {
@@ -244,12 +298,27 @@ export default Ember.Component.extend({
           .set('mastered', true);
       }
       if (!domainBoundaryCompetency) {
-        domainCompetenciesList.objectAt(0).set('isDoaminBoundaryCompetency', true);
+        domainCompetenciesList
+          .objectAt(0)
+          .set('isDoaminBoundaryCompetency', true);
       }
-      maxNumberOfCompetencies = domainCompetenciesList.length > maxNumberOfCompetencies ? domainCompetenciesList.length : maxNumberOfCompetencies;
+      maxNumberOfCompetencies =
+        domainCompetenciesList.length > maxNumberOfCompetencies
+          ? domainCompetenciesList.length
+          : maxNumberOfCompetencies;
       chartData = chartData.concat(domainCompetenciesList);
     });
-    component.set('chartHeight', maxNumberOfCompetencies * component.get('cellHeight'));
+
+    component.set('competencyStatus', {
+      master: masterCount,
+      inProgress: inProgressCount,
+      notStarted: notStartedCount
+    });
+
+    component.set(
+      'chartHeight',
+      maxNumberOfCompetencies * component.get('cellHeight')
+    );
     component.set('taxonomyDomains', taxonomyDomains);
     component.set('chartData', chartData);
     return chartData;
@@ -269,7 +338,7 @@ export default Ember.Component.extend({
     const width = Math.round(numberOfColumns * cellWidth);
     component.set('width', width);
     const height = component.get('chartHeight');
-    component.$('#student-inspect-competency-chart').empty();
+    component.clearChart();
     const svg = d3
       .select('#student-inspect-competency-chart')
       .append('svg')
@@ -277,7 +346,18 @@ export default Ember.Component.extend({
       .attr('height', height);
     let cellContainer = svg.append('g').attr('id', 'cell-container');
     let skylineContainer = svg.append('g').attr('id', 'skyline-container');
-    let domainBoundaryLineContainer = svg.append('g').attr('id', 'course-covered-line-container');
+    let filterContainer = svg
+      .append('defs')
+      .append('filter')
+      .attr('id', 'shadow');
+    filterContainer
+      .append('feDropShadow')
+      .attr('dx', '0')
+      .attr('dy', '0')
+      .attr('stdDeviation', '4');
+    let domainBoundaryLineContainer = svg
+      .append('g')
+      .attr('id', 'course-covered-line-container');
     component.set('skylineContainer', skylineContainer);
     component.set('domainBoundaryLineContainer', domainBoundaryLineContainer);
     const cards = cellContainer.selectAll('.competency').data(data);
@@ -288,8 +368,12 @@ export default Ember.Component.extend({
       .attr('y', d => (d.yAxisSeq - 1) * cellHeight)
       .attr('class', d => {
         let skylineClassName = d.skyline ? 'skyline-competency' : '';
-        let domainBoundaryCompetency = d.isDoaminBoundaryCompetency ? 'domain-boundary' : '';
-        return `competency competency-${d.xAxisSeq}-${d.yAxisSeq} ${skylineClassName} ${domainBoundaryCompetency}`;
+        let domainBoundaryCompetency = d.isDoaminBoundaryCompetency
+          ? 'domain-boundary'
+          : '';
+        return `competency competency-${d.xAxisSeq}-${
+          d.yAxisSeq
+        } ${skylineClassName} ${domainBoundaryCompetency}`;
       })
 
       .attr('width', cellWidth)
@@ -298,7 +382,9 @@ export default Ember.Component.extend({
       .transition()
       .duration(1000)
       .style('fill', d => {
-        let colorCode = d.isRoute0SuggestedCompetency ? component.get('route0SuggestedCompetency') : colorsBasedOnStatus.get(d.status.toString());
+        let colorCode = d.isRoute0SuggestedCompetency
+          ? component.get('route0SuggestedCompetency')
+          : colorsBasedOnStatus.get(d.status.toString());
         return colorCode;
       });
     cards.exit().remove();
@@ -323,11 +409,10 @@ export default Ember.Component.extend({
     };
     return Ember.RSVP.hash({
       domainLevelSummary: competencyService.getDomainLevelSummary(filters)
-    })
-      .then( ({domainLevelSummary}) => {
-        component.set('domainLevelSummary', domainLevelSummary);
-        return domainLevelSummary;
-      });
+    }).then(({ domainLevelSummary }) => {
+      component.set('domainLevelSummary', domainLevelSummary);
+      return domainLevelSummary;
+    });
   },
 
   /**
@@ -372,71 +457,118 @@ export default Ember.Component.extend({
    */
   joinSkyLinePoints(cellIndex, curLinePoint) {
     let component = this;
-    let lastSkyLineContainer = component.$(`.sky-line-${cellIndex - 1}`);
-    let skyLineContainer = component.get('skylineContainer');
-    let lastskyLinePoint = {
-      x2: parseInt(lastSkyLineContainer.attr('x2')),
-      y2: parseInt(lastSkyLineContainer.attr('y2'))
-    };
-    //Connect sky line points if last and current points are not same
-    if (
-      lastSkyLineContainer.length &&
-      lastskyLinePoint.y2 !== curLinePoint.y1
-    ) {
-      //Increase extra height to connect intersection points
-      if (lastskyLinePoint.y2 > curLinePoint.y1) {
-        lastskyLinePoint.y2 = lastskyLinePoint.y2 + 3;
-        curLinePoint.y1 = curLinePoint.y1 - 3;
-      } else {
-        lastskyLinePoint.y2 = lastskyLinePoint.y2 - 3;
-        curLinePoint.y1 = curLinePoint.y1 + 3;
+    let lastSkyLineContainer;
+    if (cellIndex === 0) {
+      //Connect vertical skyline for first domain
+      let fisrtSkyLineContainer = component.$(`.sky-line-${cellIndex}`);
+      if (fisrtSkyLineContainer.attr('y1') > 0) {
+        let points = {
+          x1: 3,
+          y1: 0,
+          x2: 3,
+          y2: parseInt(fisrtSkyLineContainer.attr('y1'))
+        };
+        component.appendSkylines(points, cellIndex);
       }
-
-      skyLineContainer
-        .append('line')
-        .attr('x1', lastskyLinePoint.x2)
-        .attr('y1', lastskyLinePoint.y2)
-        .attr('x2', curLinePoint.x1)
-        .attr('y2', curLinePoint.y1)
-        .attr('class', `sky-line-vertical-${cellIndex}`);
+    } else {
+      lastSkyLineContainer = component.$(`.sky-line-${cellIndex - 1}`);
+      let lastskyLinePoint = {
+        x2: parseInt(lastSkyLineContainer.attr('x2')),
+        y2: parseInt(lastSkyLineContainer.attr('y2'))
+      };
+      //Connect sky line points if last and current points are not same
+      if (
+        lastSkyLineContainer.length &&
+        lastskyLinePoint.y2 !== curLinePoint.y1
+      ) {
+        //Increase extra height to connect intersection points
+        if (lastskyLinePoint.y2 > curLinePoint.y1) {
+          lastskyLinePoint.y2 = lastskyLinePoint.y2 + 3;
+          curLinePoint.y1 = curLinePoint.y1 - 3;
+        } else {
+          lastskyLinePoint.y2 = lastskyLinePoint.y2 - 3;
+          curLinePoint.y1 = curLinePoint.y1 + 3;
+        }
+        let points = {
+          x1: lastskyLinePoint.x2,
+          y1: lastskyLinePoint.y2,
+          x2: curLinePoint.x1,
+          y2: curLinePoint.y1
+        };
+        component.appendSkylines(points, cellIndex);
+      }
     }
   },
 
+  appendSkylines(point, cellIndex) {
+    let component = this;
+    let skyLineContainer = component.get('skylineContainer');
+    skyLineContainer
+      .append('line')
+      .attr('x1', point.x1)
+      .attr('y1', point.y1)
+      .attr('x2', point.x2)
+      .attr('y2', point.y2)
+      .attr('class', `sky-line-vertical-${cellIndex}`);
+  },
+
   /**
-  * @function drawDomainBoundaryLine
-  * Method to draw domain boundary line
-  */
+   * @function drawDomainBoundaryLine
+   * Method to draw domain boundary line
+   */
   drawDomainBoundaryLine() {
     let component = this;
-    let skylineElements = component.$('.domain-boundary');
-    let cellWidth = component.get('cellWidth');
-    let cellHeight = component.get('cellHeight');
-    let svg = component.get('domainBoundaryLineContainer');
-    let cellIndex = 0;
-    skylineElements.each(function(index) {
-      let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
-      let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
-      y1 = y1 === 0 ? y1 + 1 : y1 + cellHeight + 1;
-      let x2 = x1 + cellWidth;
-      let y2 = y1;
-      let linePoint = {
-        x1,
-        y1,
-        x2,
-        y2
-      };
-      svg
-        .append('line')
-        .attr('x1', linePoint.x1)
-        .attr('y1', linePoint.y1)
-        .attr('x2', linePoint.x2)
-        .attr('y2', linePoint.y2)
-        .attr('class', `domain-boundary-line domain-boundary-line-${cellIndex}`);
-      component.joinDomainBoundaryLinePoints(cellIndex, linePoint);
-      cellIndex++;
-    });
+    let isProficiency = component.get('isProficiency');
+    if (!isProficiency) {
+      let skylineElements = component.$('.domain-boundary');
+      let cellWidth = component.get('cellWidth');
+      let cellHeight = component.get('cellHeight');
+      let svg = component.get('domainBoundaryLineContainer');
+      let cellIndex = 0;
+      skylineElements.each(function(index) {
+        let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
+        let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
+        y1 = y1 === 0 ? y1 + 3 : y1 + cellHeight + 3;
+        let x2 = x1 + cellWidth;
+        let y2 = y1;
+        let linePoint = {
+          x1,
+          y1,
+          x2,
+          y2
+        };
+        svg
+          .append('line')
+          .attr('x1', linePoint.x1)
+          .attr('y1', linePoint.y1)
+          .attr('x2', linePoint.x2)
+          .attr('y2', linePoint.y2)
+          .attr(
+            'class',
+            `domain-boundary-line horizontal-line domain-boundary-line-${cellIndex}`
+          );
+        component.joinDomainBoundaryLinePoints(cellIndex, linePoint);
+        cellIndex++;
+      });
+      component.showDomainPopOver();
+    }
     component.$('.scrollable-chart').scrollTop(component.get('chartHeight'));
     component.set('isLoading', false);
+  },
+
+  showDomainPopOver() {
+    let component = this;
+    let domainBoundaryLines = component.$('.horizontal-line');
+    let midDomain = Math.round(domainBoundaryLines.length / 2);
+    let midLevelDomainBoundary = component.$(
+      `.domain-boundary-line-${midDomain}`
+    );
+    let topPosition = parseInt(midLevelDomainBoundary.attr('y2')) + 15;
+    let leftPosition = parseInt(midLevelDomainBoundary.attr('x1')) - 15;
+    component.$('#popover').css({
+      top: `${topPosition}px`,
+      left: `${leftPosition}px`
+    });
   },
 
   /**
@@ -445,7 +577,9 @@ export default Ember.Component.extend({
    */
   joinDomainBoundaryLinePoints(cellIndex, curLinePoint) {
     let component = this;
-    let lastSkyLineContainer = component.$(`.domain-boundary-line-${cellIndex - 1}`);
+    let lastSkyLineContainer = component.$(
+      `.domain-boundary-line-${cellIndex - 1}`
+    );
     let skyLineContainer = component.get('domainBoundaryLineContainer');
     let lastskyLinePoint = {
       x2: parseInt(lastSkyLineContainer.attr('x2')),
@@ -456,17 +590,25 @@ export default Ember.Component.extend({
       lastSkyLineContainer.length &&
       lastskyLinePoint.y2 !== curLinePoint.y1
     ) {
-
       skyLineContainer
         .append('line')
         .attr('x1', lastskyLinePoint.x2)
         .attr('y1', lastskyLinePoint.y2)
         .attr('x2', curLinePoint.x1)
         .attr('y2', curLinePoint.y1)
-        .attr('class', `domain-boundary-line domain-boundary-line-${cellIndex}`);
+        .attr('class', 'domain-boundary-line vertical-line');
     }
   },
 
+  willDestroyElement() {
+    let component = this;
+    component.clearChart();
+  },
+
+  clearChart() {
+    let component = this;
+    component.$('svg').remove();
+  },
 
   /**
    * @function getDomainGradeBoundry
@@ -475,14 +617,15 @@ export default Ember.Component.extend({
   getDomainGradeBoundry() {
     let component = this;
     let taxonomyService = component.get('taxonomyService');
-    let destinationGrade = component.get('selectedGrade');
+    let destinationGrade = component.get('activeGrade');
     let gradeId = destinationGrade.id;
     return Ember.RSVP.hash({
-      domainBoundaries : Ember.RSVP.resolve(taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId))
-    })
-      .then(({domainBoundaries}) => {
-        component.set('domainBoundaries', domainBoundaries);
-        return domainBoundaries;
-      });
+      domainBoundaries: Ember.RSVP.resolve(
+        taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
+      )
+    }).then(({ domainBoundaries }) => {
+      component.set('domainBoundaries', domainBoundaries);
+      return domainBoundaries;
+    });
   }
 });

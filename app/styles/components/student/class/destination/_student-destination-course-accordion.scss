@@ -1,35 +1,38 @@
 .student-destination-course-map-container {
   .units-container {
-    max-height: 375px;
-    overflow-y: auto;
+    box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.3);
+
     &::-webkit-scrollbar {
       height: 6px;
       width: 8px;
-      background-color: $white;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: $gray-light;
-      border: 1px solid $gray-light;
+      background: $white;
+      border: 1px solid $white;
       border-radius: 5px;
     }
-    .u-container {  //unit-container
+
+    .u-container {
+      //unit-container
       height: auto;
+
       .header {
         height: 67px;
         border-radius: 4px;
-        background-color: #ffffff;
         border-bottom: solid 1px #e3e5ea;
         display: grid;
         align-items: center;
+
         .title {
-          font-size: 18px;
+          font-size: 16px;
           color: #666666;
           cursor: pointer;
           padding-left: 15px;
         }
+
         .sequence {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: bold;
           color: #000000;
           height: 30px;
@@ -39,38 +42,49 @@
 
       .unit-header {
         padding-left: 15px;
-        grid-template-columns: 72px auto;
-
+        grid-template-columns: 80px auto;
       }
+
       .unit-body {
         .lessons-container {
           margin: 0;
-          .l-container {  //lesson-container
+
+          .l-container {
+            //lesson-container
             .lesson-header {
               padding-left: 30px;
-              grid-template-columns: 90px auto;
+              grid-template-columns: 80px auto;
             }
+
             .lesson-body {
               .collections-container {
-                .c-container {  //collection-container
+                .c-container {
+                  //collection-container
                   .collection-header {
                     grid-template-columns: 80px auto;
                     padding-left: 15px;
+
                     .collection-thumbnail {
                       width: 75px;
                       height: inherit;
                       background-size: 75px 65px;
                       background-repeat: no-repeat;
                     }
+
+                    .collection-title {
+                      cursor: default;
+                    }
                   }
                 }
               }
             }
+
             &.collapsed {
               .body {
                 display: none;
               }
             }
+
             &.expanded {
               .body {
                 display: grid;
@@ -79,11 +93,13 @@
           }
         }
       }
+
       &.collapsed {
         .body {
           display: none;
         }
       }
+
       &.expanded {
         .body {
           display: grid;
@@ -91,9 +107,7 @@
       }
     }
   }
-  &.route0-view {
-    box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
-  }
+
   .no-data-available {
     background-color: $white;
     font-size: 15px;

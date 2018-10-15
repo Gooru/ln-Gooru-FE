@@ -33,7 +33,17 @@ export default Ember.Component.extend({
       const component = this;
       const currentLocation = component.get('class.currentLocation');
       let classData = component.get('class');
-      component.sendAction('onPlayCollection', currentLocation, classData);
+      let setting = classData.get('setting');
+      let isPremiumCourse = setting
+        ? setting['course.premium'] && setting['course.premium'] === true
+        : false;
+      let isGradeAdded = classData.get('grade');
+      if (isPremiumCourse && !currentLocation && isGradeAdded) {
+        component.get('router').transitionTo('student.class.course-map', classData.get('id'));
+      } else {
+        component.sendAction('onPlayCollection', currentLocation, classData);
+      }
+
     },
 
     /**
@@ -46,6 +56,15 @@ export default Ember.Component.extend({
       if (this.get('onItemSelected')) {
         this.sendAction('onItemSelected', item, classId);
       }
+    },
+
+    /**
+     * Action triggered when clear alert message
+     */
+    onClearAlert() {
+      let component = this;
+      let classData = component.get('class');
+      classData.set('isNotAbleToStartPlayer', false);
     }
   },
 

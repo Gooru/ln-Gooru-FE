@@ -121,7 +121,8 @@ export default StudentCollection.extend({
           unit: unitPromise,
           lesson: lessonPromise,
           mapLocation: navigateMapService.getMapLocation(params),
-          minScore: params.minScore
+          minScore: params.minScore,
+          source: params.source
         });
       })
       .then(function(hash) {
@@ -165,7 +166,8 @@ export default StudentCollection.extend({
       profile: model.profile,
       minScore: model.minScore,
       contextId: model.contextId,
-      hasSuggestion: model.hasSuggestion
+      hasSuggestion: model.hasSuggestion,
+      source: model.source
     });
     controller.confettiSetup();
   },

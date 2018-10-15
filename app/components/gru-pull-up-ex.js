@@ -35,7 +35,7 @@ export default Ember.Component.extend({
      * Action triggered when the user invoke the pull up.
      **/
     onPullUpClose() {
-      this.set('showPullUp', false);
+      this.set('showPullUpEx', false);
       this.sendAction('onClosePullUp');
     }
   },
@@ -47,7 +47,7 @@ export default Ember.Component.extend({
    * Propery to hide the default pullup.
    * @property {showPullUp}
    */
-  showPullUp: false,
+  showPullUpEx: false,
 
   /**
    * Propery to show header in pullup component.
@@ -82,12 +82,13 @@ export default Ember.Component.extend({
   /**
    * Observer to check the showPullUp property in component
    **/
-  onChange: Ember.observer('showPullUp', function() {
+  onChange: Ember.observer('showPullUpEx', function() {
+    //this.onClosePullUp();
     this.animatePullOut();
   }),
 
   animatePullUp() {
-    if (this.get('showPullUp')) {
+    if (this.get('showPullUpEx')) {
       Ember.$('.gru-pull-up').animate(
         {
           top: '10%'
@@ -102,7 +103,7 @@ export default Ember.Component.extend({
   },
 
   animatePullOut() {
-    if (this.get('showPullUp')) {
+    if (this.get('showPullUpEx')) {
       Ember.$('body.application').addClass('no-vertical-scroll');
       let component = this;
       const right = 650 - component.$().width();

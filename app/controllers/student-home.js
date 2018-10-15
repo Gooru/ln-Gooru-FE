@@ -135,10 +135,5 @@ export default Ember.Controller.extend(ModalMixin, {
   /**
    * Indicate if it's waiting for join class callback
    */
-  isLoading: false,
-
-  /**
-   * Property to indicate error when not able to trigger player
-   */
-  isNotAbleToStartPlayer: false
+  isLoading: false
 });
