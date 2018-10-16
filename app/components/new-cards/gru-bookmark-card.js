@@ -1,8 +1,7 @@
 import Ember from 'ember';
-import {CONTENT_TYPES, PLAYER_EVENT_SOURCE} from 'gooru-web/config/config';
+import { CONTENT_TYPES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 import ModalMixin from 'gooru-web/mixins/modal';
 export default Ember.Component.extend(ModalMixin, {
-
   // -------------------------------------------------------------------------
   // Dependencies
   /**
@@ -27,13 +26,22 @@ export default Ember.Component.extend(ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Attributes
-  classNames: ['new-cards', 'new-gru-bookmark-card', 'col-sm-3'],
+  classNames: [
+    'new-cards',
+    'new-gru-bookmark-card',
+    'col-sm-4',
+    'col-xs-12',
+    'col-md-3',
+    'col-lg-3'
+  ],
 
   // -------------------------------------------------------------------------
   // Events
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   init: function() {
@@ -53,7 +61,7 @@ export default Ember.Component.extend(ModalMixin, {
             }
           });
       }
-    } else if (isCollection)  {
+    } else if (isCollection) {
       const collectionId = component.get('bookmark.contentId');
       if (collectionId) {
         component
@@ -78,7 +86,6 @@ export default Ember.Component.extend(ModalMixin, {
           });
       }
     }
-
   },
 
   actions: {
@@ -114,12 +121,18 @@ export default Ember.Component.extend(ModalMixin, {
   /**
    * @property {Boolean} if the bookmark is of type assessment
    */
-  isAssessment: Ember.computed.equal('bookmark.contentType', CONTENT_TYPES.ASSESSMENT),
+  isAssessment: Ember.computed.equal(
+    'bookmark.contentType',
+    CONTENT_TYPES.ASSESSMENT
+  ),
 
   /**
    * @property {Boolean} if the bookmark is of type collection
    */
-  isCollection: Ember.computed.equal('bookmark.contentType', CONTENT_TYPES.COLLECTION),
+  isCollection: Ember.computed.equal(
+    'bookmark.contentType',
+    CONTENT_TYPES.COLLECTION
+  ),
 
   /**
    * @property {Bookmark} bookmark information
@@ -127,13 +140,12 @@ export default Ember.Component.extend(ModalMixin, {
   bookmark: null,
 
   /**
-  * @property {Content} content information
-  */
+   * @property {Content} content information
+   */
   content: null,
 
   /**
-  * @property {Source} source information for study player
-  */
+   * @property {Source} source information for study player
+   */
   source: PLAYER_EVENT_SOURCE.INDEPENDENT_ACTIVITY
-
 });
