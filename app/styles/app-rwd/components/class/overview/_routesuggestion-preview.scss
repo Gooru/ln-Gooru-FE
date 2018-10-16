@@ -1,0 +1,64 @@
+.routesuggestion-preview {
+  .route-suggestions-container {
+    width: 98%;
+    margin: auto;
+    .route0-banner {
+      display: flex;
+    }
+    .preview-content {
+      display: block;
+      .proficiency-chart {
+        .route-suggestion-proficiency-matrix {
+          .matrix-chart {
+            zoom: 0.8;
+            margin: auto;
+            .domain-sequence-container {
+              width: 100%;
+            }
+          }
+        }
+      }
+      .suggestion-accordion {
+        zoom: 0.7;
+        .gru-accordion-course.course-suggestions {
+          margin: auto;
+          margin-bottom: 15px;
+        }
+      }
+    }
+    .course-suggestion {
+      .created-by-kangoorus {
+        height: auto;
+        width: auto;
+      }
+    }
+  }
+
+  .action {
+    width: max-content;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .routesuggestion-preview {
+    .route-suggestions-container {
+      .preview-content {
+        display: flex;
+        .proficiency-chart {
+          .route-suggestion-proficiency-matrix {
+            .matrix-chart {
+              zoom: 0.6;
+            }
+          }
+        }
+        .suggestion-accordion {
+          zoom: 0.9;
+        }
+      }
+    }
+    .action {
+      margin: auto 15px auto auto;
+    }
+  }
+}

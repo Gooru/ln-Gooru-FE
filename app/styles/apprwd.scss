@@ -6,11 +6,14 @@
 
 // Components
 @import "app-rwd/components/proficiency/learner-proficiency-domain-matrix";
+@import "app-rwd/components/class/overview/routesuggestion-preview";
+@import "app-rwd/components/class/overview/routesuggestion-coursemap";
 @import "app-rwd/components/_gru-student-featured-courses-rwd.scss";
 
 
 //Controllers
 @import "app-rwd/controllers/student/class";
 @import "app-rwd/controllers/student/class/profile";
+@import "app-rwd/controllers/student/class/course-map";
 @import "app-rwd/controllers/student/_student-home-rwd.scss";
 @import "app-rwd/controllers/student/_student-independent-learning-rwd.scss";
