@@ -107,6 +107,42 @@ export default Ember.Service.extend(StoreMixin, {
   },
 
   /**
+   * Fetch course card level detail
+   *
+   */
+
+  fetchCoursesCardData: function(courses) {
+    //const service = this;
+    if (courses && courses.length > 0) {
+      let resultObj = [];
+      courses.forEach(it => {
+        let course = {
+          courseId: it,
+          title: 'My Test Course',
+          thumbnailUrl:
+            'http://cdn.gooru.org/a6ff0d51-7770-439a-b703-7af60f4f111c.png'
+        };
+        resultObj.push(course);
+      });
+
+      return Ember.RSVP.resolve(resultObj);
+
+      /*      return service
+        .get('adapter')
+        .getCourseCards(courses)
+        .then(function(courseCardsData) {
+          let courses = service.get('serializer').normalizeCourseCards(courseCardsData);
+          return courses;
+        })
+        .catch(function(error) {
+          return error;
+        });*/
+    } else {
+      return Ember.RSVP.resolve([]);
+    }
+  },
+
+  /**
    * Update existing course
    *
    * @param courseModel The Course model to update

@@ -139,11 +139,11 @@ export default Ember.Object.extend({
   },
 
   /**
-  * Copies a course by id
-  *
-  * @param data course data to be sent in the request body
-  * @returns {Promise}
-  */
+   * Copies a course by id
+   *
+   * @param data course data to be sent in the request body
+   * @returns {Promise}
+   */
   copyCourse: function(courseId) {
     const adapter = this;
     const namespace = this.get('copierNamespace');
@@ -180,6 +180,32 @@ export default Ember.Object.extend({
     };
 
     return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Fetch course Card level data for by multiple course ids
+   *
+   * @param {string[]} courseIds
+   * @returns {Promise}
+   */
+  getCourseCards: function(courseIds) {
+    const namespace = this.get('namespace');
+    const url = `${namespace}/courses`;
+    const options = {
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      processData: false,
+      headers: this.defineHeaders(),
+      data: JSON.stringify({
+        courses: courseIds
+      })
+    };
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      Ember.$.ajax(url, options).then(function(responseData) {
+        resolve(responseData);
+      }, reject);
+    });
   },
 
   defineHeaders: function() {

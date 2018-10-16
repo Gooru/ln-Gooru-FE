@@ -39,11 +39,12 @@ export default Ember.Component.extend({
         : false;
       let isGradeAdded = classData.get('grade');
       if (isPremiumCourse && !currentLocation && isGradeAdded) {
-        component.get('router').transitionTo('student.class.course-map', classData.get('id'));
+        component
+          .get('router')
+          .transitionTo('student.class.course-map', classData.get('id'));
       } else {
         component.sendAction('onPlayCollection', currentLocation, classData);
       }
-
     },
 
     /**
@@ -75,6 +76,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
+  /*
   init: function() {
     const component = this;
     component._super(...arguments);
@@ -91,6 +93,7 @@ export default Ember.Component.extend({
         });
     }
   },
+*/
 
   // -------------------------------------------------------------------------
   // Properties

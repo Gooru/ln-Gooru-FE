@@ -129,7 +129,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
    */
   model: function() {
     let route = this;
-    const configuration = this.get('configurationService.configuration');
+    // const configuration = this.get('configurationService.configuration');
 
     //Steps for Take a Tour functionality
     let tourSteps = Ember.A([
@@ -223,66 +223,17 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     let myClassessPromise = Ember.RSVP.resolve(
       route.controllerFor('application').loadUserClasses()
     );
-    let firstCoursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
-    let secondCoursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
-    let thirdCoursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
-    let fourthCoursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
-
-    const firstCourseId = configuration.get(
-      'exploreFeaturedCourses.firstCourseId'
-    );
-    const secondCourseId = configuration.get(
-      'exploreFeaturedCourses.secondCourseId'
-    );
-    const thirdCourseId = configuration.get(
-      'exploreFeaturedCourses.thirdCourseId'
-    );
-    const fourthCourseId = configuration.get(
-      'exploreFeaturedCourses.fourthCourseId'
-    );
-    var featuredCourses = Ember.A([]);
-
-    if (firstCourseId) {
-      firstCoursePromise = route.get('courseService').fetchById(firstCourseId);
-    }
-    if (secondCourseId) {
-      secondCoursePromise = route
-        .get('courseService')
-        .fetchById(secondCourseId);
-    }
-    if (thirdCourseId) {
-      thirdCoursePromise = route.get('courseService').fetchById(thirdCourseId);
-    }
-    if (fourthCourseId) {
-      fourthCoursePromise = route
-        .get('courseService')
-        .fetchById(fourthCourseId);
-    }
 
     return Ember.RSVP.hash({
-      firstCourse: firstCoursePromise,
-      secondCourse: secondCoursePromise,
-      thirdCourse: thirdCoursePromise,
-      fourthCourse: fourthCoursePromise,
       myClasses: myClassessPromise
     }).then(function(hash) {
-      const firstFeaturedCourse = hash.firstCourse;
-      const secondFeaturedCourse = hash.secondCourse;
-      const thirdFeaturedCourse = hash.thirdCourse;
-      const fourthFeaturedCourse = hash.fourthCourse;
       const myClasses = hash.myClasses;
       const myId = route.get('session.userId');
       const activeClasses = myClasses.getTeacherActiveClasses(myId);
       const archivedClasses = myClasses.getTeacherArchivedClasses();
-      featuredCourses.push(firstFeaturedCourse);
-      featuredCourses.push(secondFeaturedCourse);
-      featuredCourses.push(thirdFeaturedCourse);
-      featuredCourses.push(fourthFeaturedCourse);
-
       return {
         activeClasses,
         archivedClasses,
-        featuredCourses,
         tourSteps
       };
     });
