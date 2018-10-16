@@ -1,3 +1,33 @@
-body {
-  background: red;
+.learner-proficiency-domain-matrix {
+
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    .chart-area {
+      width: 100%;
+      margin: auto;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .chart-area {
+      width: 100%;
+      margin: auto;
+      zoom: 0.8;
+      grid-template-columns: none;
+      .domain-list {
+        display: none;
+      }
+      .matrix-chart {
+        .scrollable-chart {
+          margin: auto;
+        }
+        .domain-sequence-container {
+          width: max-content;
+          margin: auto;
+        }
+      }
+    }
+  }
+
+
+
 }
