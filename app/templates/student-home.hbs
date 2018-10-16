@@ -2,17 +2,13 @@
   {{gru-take-tour steps=steps containerClass='home-tour'}}
 
   <div class="student-left-panel">
-    <div class="greetings">
-      <div class="title">
-        <span>{{t 'user.hello' name=profile.firstName}}</span>
-      </div>
-      {{#unless (gt loginCount 5)}}
+    {{#unless (gt loginCount 5)}}
+     <div class="greetings">
         <div class="featured-courses pull-right">
           <span>{{t 'student-landing.browse-our'}} {{#link-to 'library'}}{{t 'student-landing.featured-courses'}}{{/link-to}}</span>
         </div>
-      {{/unless}}
-    </div>
-    {{#unless (gt loginCount 5)}}
+     </div>
+
       {{gru-student-featured-courses
         courses=featuredCourses
         profile=profile
