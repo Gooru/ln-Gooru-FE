@@ -1,0 +1,22 @@
+.student.proficiency {
+  .header {
+    width: 100%;
+  }
+  .body {
+    .proficiency-tags, .time-series-container {
+      width: 100% !important;
+      margin: 0 !important;
+      @media screen and (max-width: 767px) {
+        .proficiency-legends {
+          .legend {
+            margin-right: 4px !important;
+          }
+        }
+        .monthly-time-series-chart {
+          zoom: 0.5;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

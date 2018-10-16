@@ -3,5 +3,12 @@
     Example: @import "app-rwd/components/filename";
   */
 @import "variables";
-@import "app-rwd/controllers/student/_student-home-rwd.scss";
+// Components
+@import "app-rwd/components/proficiency/learner-proficiency-domain-matrix";
 @import "app-rwd/components/_gru-student-featured-courses-rwd.scss";
+
+
+//Controllers
+@import "app-rwd/controllers/student/class";
+@import "app-rwd/controllers/student/class/profile";
+@import "app-rwd/controllers/student/_student-home-rwd.scss";
