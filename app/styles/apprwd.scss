@@ -2,3 +2,6 @@
     Source Path: app-rwd/*
     Example: @import "app-rwd/components/filename";
   */
+@import "variables";
+@import "app-rwd/controllers/student/_student-home-rwd.scss";
+@import "app-rwd/components/_gru-student-featured-courses-rwd.scss";
