@@ -7,10 +7,10 @@
         margin: 0 auto;
         width: 97%;
         @media (min-width: $screen-sm) {
-          width: 90%;
+          width: 100%;
         }
         @media (min-width: $screen-md) {
-          width: 90%;
+          width: 100%;
         }
       }
 
@@ -126,6 +126,9 @@
     li {
       height: 43px;
       margin-bottom: 0;
+      @media (min-width: $screen-sm) {
+        display: block;
+      }
 
       &.active {
         display: block;
