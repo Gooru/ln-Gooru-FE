@@ -1,0 +1,67 @@
+.routesuggestion-coursemap {
+  .route-suggestions-container {
+    width: 98% !important;
+    margin: auto;
+    .gru-accordion-course {
+      padding: 0;
+    }
+    @media screen and (max-width: 767px) {
+      .gru-accordion-course .panel-heading .panel-title > a {
+        max-width: none;
+        display: block;
+      }
+      .gru-accordion-lesson {
+        .panel-collapse.collapse.in .collections .panel-heading .panel-title {
+          width: 65%;
+          display: flex;
+          line-height: 60px;
+          .title {
+            width: calc(100% - 100px);
+          }
+        }
+        .panel-heading {
+          .panel-title {
+            width: 75%;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 479px) {
+      .gru-accordion-lesson {
+        .panel-collapse.collapse.in .collections .panel-heading {
+          .panel-title {
+            width: 58%;
+            .icon-container {
+              width: 50px;
+            }
+            .title {
+              width: calc(100% - 50px);
+            }
+          }
+          .info {
+            div.play-btn, div.performance {
+              width: 50px;
+            }
+          }
+        }
+      }
+    }
+
+    @media screen and (min-width: 320px) and (max-width: 374px) {
+      .gru-accordion-lesson {
+        .panel-heading {
+          .panel-title {
+            width: 72%;
+          }
+        }
+        .panel-collapse.collapse.in .collections .panel-heading {
+          .panel-title {
+            width: 55%;
+          }
+        }
+      }
+    }
+  }
+
+
+}

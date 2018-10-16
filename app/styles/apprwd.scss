@@ -5,8 +5,11 @@
 
 // Components
 @import "app-rwd/components/proficiency/learner-proficiency-domain-matrix";
+@import "app-rwd/components/class/overview/routesuggestion-preview";
+@import "app-rwd/components/class/overview/routesuggestion-coursemap";
 
 
 //Controllers
 @import "app-rwd/controllers/student/class";
 @import "app-rwd/controllers/student/class/profile";
+@import "app-rwd/controllers/student/class/course-map";
