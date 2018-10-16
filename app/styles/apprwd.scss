@@ -2,3 +2,11 @@
     Source Path: app-rwd/*
     Example: @import "app-rwd/components/filename";
   */
+
+// Components
+@import "app-rwd/components/proficiency/learner-proficiency-domain-matrix";
+
+
+//Controllers
+@import "app-rwd/controllers/student/class";
+@import "app-rwd/controllers/student/class/profile";
