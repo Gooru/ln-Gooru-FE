@@ -112,9 +112,9 @@ export default Ember.Service.extend(StoreMixin, {
    */
 
   fetchCoursesCardData: function(courses) {
-    //const service = this;
+    const service = this;
     if (courses && courses.length > 0) {
-      let resultObj = [];
+      /*      let resultObj = [];
       courses.forEach(it => {
         let course = {
           courseId: it,
@@ -126,17 +126,19 @@ export default Ember.Service.extend(StoreMixin, {
       });
 
       return Ember.RSVP.resolve(resultObj);
-
-      /*      return service
+*/
+      return service
         .get('adapter')
         .getCourseCards(courses)
         .then(function(courseCardsData) {
-          let courses = service.get('serializer').normalizeCourseCards(courseCardsData);
+          let courses = service
+            .get('serializer')
+            .normalizeCourseCards(courseCardsData);
           return courses;
         })
         .catch(function(error) {
           return error;
-        });*/
+        });
     } else {
       return Ember.RSVP.resolve([]);
     }

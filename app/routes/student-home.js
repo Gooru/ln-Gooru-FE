@@ -342,10 +342,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
         );
 
         if (courseId) {
-          let course = courseCards.findBy(
-            'courseId',
-            activeClass.get('courseId')
-          );
+          let course = courseCards.findBy('id', activeClass.get('courseId'));
           activeClass.set('course', course);
         }
       });

@@ -190,16 +190,14 @@ export default Ember.Object.extend({
    */
   getCourseCards: function(courseIds) {
     const namespace = this.get('namespace');
-    const url = `${namespace}/courses`;
+    const url = `${namespace}/list`;
     const options = {
-      type: 'POST',
+      type: 'GET',
       contentType: 'application/json; charset=utf-8',
-      dataType: 'json',
-      processData: false,
       headers: this.defineHeaders(),
-      data: JSON.stringify({
-        courses: courseIds
-      })
+      data: {
+        ids: Ember.isArray(courseIds) ? courseIds.join() : null
+      }
     };
     return new Ember.RSVP.Promise(function(resolve, reject) {
       Ember.$.ajax(url, options).then(function(responseData) {

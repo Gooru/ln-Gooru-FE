@@ -154,11 +154,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       id: payload.id,
       thumbnailUrl: thumbnailUrl,
       title: payload.title,
-      unitCount: payload.unit_count
-        ? payload.unit_count
-        : payload.unit_summary
-          ? payload.unit_summary.length
-          : 0,
+      ownerId: payload.owner_id,
       version: payload.version
     });
   },

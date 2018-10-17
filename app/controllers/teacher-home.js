@@ -116,7 +116,7 @@ export default Ember.Controller.extend(ModalMixin, {
 
         if (courseId) {
           let course = hash.courseCards.findBy(
-            'courseId',
+            'id',
             activeclass.get('courseId')
           );
           activeclass.set('course', course);
