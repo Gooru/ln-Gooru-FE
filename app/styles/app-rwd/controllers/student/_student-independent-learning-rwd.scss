@@ -11,5 +11,47 @@
         }
       }
     }
+
+    .independent-content {
+      .assessments,
+      .collections,
+      .courses {
+        .assessment-content,
+        .collection-content,
+        .course-content {
+          .content-results.not-expanded {
+            height: 1150px;
+          }
+        }
+      }
+
+      .bookmark-content {
+        .content-results.not-expanded {
+          height: 1000px;
+        }
+      }
+    }
+  }
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: $lg-width-min) {
+    .independent-content {
+      .assessments,
+      .collections,
+      .courses {
+        .assessment-content,
+        .collection-content,
+        .course-content {
+          .content-results.not-expanded {
+            height: 575px;
+          }
+        }
+      }
+
+      .bookmark-content {
+        .content-results.not-expanded {
+          height: 495px;
+        }
+      }
+    }
   }
 }
