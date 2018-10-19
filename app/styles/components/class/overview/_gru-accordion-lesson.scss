@@ -81,9 +81,13 @@
 
       .content-count {
         font-size: $font-navigator;
-        margin: 0 10px 0 0;
+        margin: 10px 10px 0 0;
         color: $light-400;
         display: inline-block;
+        @media (max-width: $screen-lg-min) {
+          display: none;
+          visibility: hidden;
+        }
 
         span {
           vertical-align: middle;
@@ -316,13 +320,12 @@
         border-radius: 0;
 
         .controls {
-          width: 95px;
           padding: 15px 0;
-          margin: 0 20px 0 10px;
+          margin: 0 5px 0 5px;
           display: inline-block;
 
           .switch {
-            width: 50px;
+            width: 40px;
             display: inline-block;
           }
 
@@ -333,7 +336,7 @@
 
           .go-live-cnt {
             width: 25px;
-            margin: 0 15px 0 0;
+            margin: 0 5px 0 0;
             display: inline-block;
           }
         }
@@ -369,10 +372,11 @@
         }
 
         .panel-title {
-          width: 70%;
+          width: 60% !important;
           float: $tab-float-dir;
           height: inherit;
           color: $gray;
+          text-overflow: ellipsis;
           padding: 0;
           font-size: $font-size-large;
 
@@ -416,7 +420,6 @@
             vertical-align: middle;
             margin: 0;
             padding: 5px 0 0 5px;
-            max-width: 75%;
 
             .type {
               color: $light-500;
@@ -474,6 +477,7 @@
         .info {
           float: $menu-float-dir;
           height: inherit;
+          max-width: 38% !important;
 
           .share {
             width: 18px;
@@ -491,9 +495,13 @@
 
           .content-count {
             font-size: $font-navigator;
-            margin: 0;
+            margin: 12px 10px 0 0;
             color: $light-400;
             display: inline-block;
+            @media (max-width: $screen-lg-min) {
+              display: none;
+              visibility: hidden;
+            }
 
             span {
               vertical-align: middle;
@@ -501,11 +509,11 @@
 
               i {
                 display: inline-block;
-                margin: 0 10px 0 0;
                 vertical-align: middle;
                 color: $light-200;
                 font-size: $font-unBookmark;
                 cursor: default;
+                margin: 0 10px 0 0;
               }
 
               &.question-count {
@@ -572,6 +580,8 @@
             padding: 20px 5px 0;
             text-align: center;
             font-weight: 900;
+            float: $menu-float-dir;
+
             &.not-started {
               pointer-events: none;
             }
@@ -607,6 +617,7 @@
             }
 
             &.chart {
+              float: $menu-float-dir;
               padding: 0;
               .time-spent {
                 line-height: 67px;
