@@ -1,7 +1,7 @@
 <div class="panel-heading  {{if isLessonSelected 'study-active'}}" role="tab" id="{{elementId}}-heading">
   <div class="panel-title">
     <a class="title collapsed" role="button" data-toggle="collapse" href="#{{elementId}}-content" aria-expanded="false" aria-controls="{{elementId}}-content" {{action "selectLesson" model.id}}>
-      <span class="lesson-prefix">{{course-sections-prefix  index=index type='lesson' longName=true}}</span>{{model.title}}
+      <span class="lesson-prefix">{{course-sections-prefix  index=index type='lesson' longName=true}}</span><span class="lesson-title-text ellipsis">{{model.title}}</span>
     </a>
   </div>
   {{#unless isFromDCA}}
@@ -148,12 +148,12 @@
                       {{#if item.isAssessment}}
                         {{#if item.questionCount}}
                           <span class="{{if (gt item.resourceCount 0) '' 'invisible'}}" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.resources"}}">{{gru-icon name='local_library'}}  &nbsp; &nbsp;</span>
-                          <span class="{{if (gt item.questionCount 0) '' 'invisible'}}" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span class="{{if (gt item.questionCount 0) '' 'invisible'}}">{{item.questionCount}}</span>
+                          <span class="{{if (gt item.questionCount 0) '' 'invisible'}}" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span class="question-count-text {{if (gt item.questionCount 0) '' 'invisible'}}">{{item.questionCount}}</span>
                         {{/if}}
                       {{else}}
                         {{#if (or item.questionCount item.resourceCount)}}
-                          <span class="{{if (gt item.resourceCount 0) '' 'invisible'}}" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.resources"}}">{{gru-icon name='local_library'}}</span><span class="{{if (gt item.resourceCount 0) '' 'invisible'}}">{{item.resourceCount}}</span>
-                          <span class="{{if (gt item.questionCount 0) '' 'invisible'}}" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span class="{{if (gt item.questionCount 0) '' 'invisible'}}">{{item.questionCount}}</span>
+                          <span class="{{if (gt item.resourceCount 0) '' 'invisible'}}" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.resources"}}">{{gru-icon name='local_library'}}</span><span class="resource-count-text {{if (gt item.resourceCount 0) '' 'invisible'}}">{{item.resourceCount}}</span>
+                          <span class="{{if (gt item.questionCount 0) '' 'invisible'}}" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span class="question-count-text {{if (gt item.questionCount 0) '' 'invisible'}}">{{item.questionCount}}</span>
                         {{/if}}
                       {{/if}}
                       {{#if item.isExternalAssessment}}

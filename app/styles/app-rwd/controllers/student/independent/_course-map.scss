@@ -1,20 +1,6 @@
-.student.course-map {
-  width: 100vw;
-  .assigned-course-title {
-    margin-left: 10px;
-  }
-  .rescope-section {
-    width: 98%;
-    margin: auto;
-    .rescope-toggle {
-      display: block !important;
-      .info {
-        width: 100% !important;
-      }
-    }
-  }
-
-  .student-coursemap-container {
+.student-independent-container {
+  padding: 0;
+  .student.course-map {
     .gru-accordion.gru-accordion-course {
       .gru-accordion-unit {
         .unit.panel-heading {
