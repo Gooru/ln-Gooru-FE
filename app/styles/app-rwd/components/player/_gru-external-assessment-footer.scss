@@ -1,0 +1,85 @@
+.gru-external-assessment-footer {
+	/*mobile view */
+	@media only screen and (max-width: 767px) {
+		.nav-player-container {
+			.prev {
+				width: 35px;
+				i {
+					margin-left: -108px;
+				}
+				span {
+					display: none;
+				}
+			}
+			.player-container {
+				width: calc(100% - 122px);
+				.resource-title {
+					font-size: 14px;
+				}
+				.list-resource-nav {
+					i {
+						margin-left: -66px;
+					}
+				}
+				.reaction-bar {
+					width: 50px;
+					margin-right: 0;
+					border-left: 1px solid $breadcrumb-color;
+				}
+				.list-resources {
+					width: 80%;
+				}
+			}
+			.next-action {
+				width: 36px;
+				span {
+					display: none;
+				}
+			}
+		}
+	}
+	@media only screen and (orientation: landscape) {
+		.nav-player-container {
+			.prev.disabled {
+				width: 14%;
+			}
+			.prev {
+				width: auto;
+				i {
+					margin-left: -108px;
+				}
+				span {
+					display: block !important;
+				}
+			}
+			.player-container {
+				width: auto;
+				.resource-title {
+					font-size: 14px;
+					span {
+						margin-left: 61px;
+					}
+				}
+				.list-resource-nav {
+					i {
+						margin-left: -66px;
+					}
+				}
+				.reaction-bar {
+					width: 50px;
+					margin-right: 0;
+					border-left: 1px solid $breadcrumb-color;
+				}
+				.list-resources {
+					width: 80%;
+				}
+			}
+			.next-action {
+				width: auto;
+				span {
+					display: block !important;
+				}
+			}
+		}
+	}
+}
