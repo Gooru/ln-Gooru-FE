@@ -160,7 +160,7 @@
                     }
                   }
                 }
-                @media screen and (max-width: 376px) {
+                @media screen and (max-width: $screen-376) {
                   .collections {
                     .collection, .assessment {
                       .panel-heading {

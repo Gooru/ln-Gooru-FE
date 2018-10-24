@@ -41,7 +41,7 @@
     }
   }
 
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: $screen-sm) and (max-width: $screen-md) {
     .routesuggestion-preview {
       .route-suggestions-container {
         .preview-content {
@@ -64,7 +64,8 @@
     }
   }
 
-  @media screen and (max-width: 376px) {
+  // Custom media screen
+  @media screen and (max-width: $screen-376) {
     .routesuggestion-preview {
       .route-suggestions-container {
         .preview-content {

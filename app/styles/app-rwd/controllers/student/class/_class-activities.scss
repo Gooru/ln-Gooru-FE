@@ -11,7 +11,7 @@
     }
 
     // Mobile and Tab potrait view
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: $screen-sm - 1) {
       .gru-student-class-activity-panel {
         height: auto;
         .panel-heading {
@@ -62,8 +62,8 @@
       }
     }
 
-    // Mobile and Tab potrait view
-    @media screen and (max-width: 359px) {
+    // Custom media screen
+    @media screen and (max-width: $screen-359) {
       .gru-student-class-activity-panel {
         .panel-heading {
           grid-template-columns: calc(100% - 200px) 200px;
