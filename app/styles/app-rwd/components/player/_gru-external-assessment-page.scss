@@ -1,6 +1,6 @@
 .study-player-external {
 	.player-container {
-		@media screen and (min-width: 568px) {
+		@media screen and (min-width: $screen-568) {
 			overflow: auto;
 			height: 144vh;
 			.player {
