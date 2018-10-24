@@ -1,6 +1,6 @@
 .gru-external-assessment-footer {
 	/*mobile view */
-	@media only screen and (max-width: $screen-767) {
+	@media only screen and (max-width: $screen-md - 1) {
 		.nav-player-container {
 			.prev {
 				width: 35px;
