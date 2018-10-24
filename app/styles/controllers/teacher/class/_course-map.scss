@@ -121,6 +121,10 @@
     .course-map-body {
       display: flex;
 
+      @media (max-width: $screen-md-min) {
+        flex-direction: column;
+      }
+
       .header {
         opacity: 0.5;
         font-size: 12px;
@@ -130,151 +134,130 @@
         padding: 10px 0;
       }
 
-      .students {
-        .header {
-          text-align: center;
+      .mandatory-course-map {
+        display: flex;
+
+        @media (max-width: $screen-md-min) {
+          order: 2;
         }
 
-        .students-list {
-          max-width: 61px;
-          min-width: 61px;
-          max-height: calc(100vh - 225px);
-          background-color: $white;
-          transition: 2s;
-          position: absolute;
-          overflow-x: hidden;
-          overflow-y: auto;
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-
-          &::-webkit-scrollbar {
-            height: 6px;
-            width: 8px;
+        .students {
+          .header {
+            text-align: center;
           }
 
-          &::-webkit-scrollbar-thumb {
-            background: $gray-light;
-            border: 1px solid $gray-light;
-            border-radius: 5px;
-          }
+          .students-list {
+            max-width: 61px;
+            min-width: 61px;
+            max-height: calc(100vh - 225px);
+            background-color: $white;
+            transition: 2s;
+            position: absolute;
+            overflow-x: hidden;
+            overflow-y: auto;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
 
-          &:hover {
-            z-index: 9999;
-            box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.13);
-            max-width: 100%;
+            &::-webkit-scrollbar {
+              height: 6px;
+              width: 8px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+              background: $gray-light;
+              border: 1px solid $gray-light;
+              border-radius: 5px;
+            }
+
+            &:hover {
+              z-index: 9999;
+              box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.13);
+              max-width: 100%;
+
+              .list {
+                &.active {
+                  .student-name {
+                    color: #0072bc;
+                  }
+                }
+
+                .student-name {
+                  display: block;
+                }
+              }
+            }
+
+            .teacher {
+              .thumbnail {
+                background-color: #535e66;
+                border: none;
+              }
+            }
 
             .list {
-              &.active {
-                .student-name {
+              display: flex;
+              cursor: pointer;
+              width: max-content;
+              margin-left: 16px;
+
+              .thumbnail {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-size: contain;
+                margin: 6px 0;
+              }
+
+              .student-name {
+                display: none;
+                margin-left: 40px;
+                margin-top: 7px;
+                padding-right: 10px;
+                font-size: 15px;
+                text-transform: capitalize;
+
+                &:hover {
                   color: #0072bc;
                 }
               }
 
-              .student-name {
-                display: block;
-              }
-            }
-          }
-
-          .teacher {
-            .thumbnail {
-              background-color: #535e66;
-              border: none;
-            }
-          }
-
-          .list {
-            display: flex;
-            cursor: pointer;
-            width: max-content;
-            margin-left: 16px;
-
-            .thumbnail {
-              width: 30px;
-              height: 30px;
-              border-radius: 50%;
-              background-size: contain;
-              margin: 6px 0;
-            }
-
-            .student-name {
-              display: none;
-              margin-left: 40px;
-              margin-top: 7px;
-              padding-right: 10px;
-              font-size: 15px;
-              text-transform: capitalize;
-
-              &:hover {
-                color: #0072bc;
-              }
-            }
-
-            &.active {
-              .thumbnail {
-                border: 3px solid #0072bc;
-              }
-            }
-          }
-        }
-      }
-
-      .render-course-map {
-        width: 98%;
-        margin: 0 20px auto;
-
-        .header {
-          padding-left: 20px;
-        }
-
-        .routesuggestion-coursemap {
-          margin-bottom: 15px;
-          box-shadow: 0 0 4px 2px #ef8f2f;
-
-          .gru-accordion-course {
-            padding: 0;
-          }
-        }
-
-        .teacher-coursemap {
-          .gru-accordion-course {
-            padding: 0;
-
-            .gru-accordion-lesson {
-              .panel-body {
-                .collections {
-                  li {
-                    margin-bottom: 10px;
-
-                    .performance.chart {
-                      width: 77px;
-                    }
-                  }
+              &.active {
+                .thumbnail {
+                  border: 3px solid #0072bc;
                 }
               }
             }
           }
         }
 
-        .student-coursemap {
-          .gru-learner-accordion-unit {
-            background-color: $white;
+        .render-course-map {
+          width: 98%;
+          margin: 0 20px auto;
 
-            .gru-learner-accordion-lesson {
-              .panel-heading {
-                .panel-title {
-                  width: 69% !important;
-                }
-              }
+          .header {
+            padding-left: 20px;
+          }
 
-              .panel-body {
-                .collections {
-                  .panel-heading {
-                    .panel-title {
-                      display: flex;
+          .routesuggestion-coursemap {
+            margin-bottom: 15px;
+            box-shadow: 0 0 4px 2px #ef8f2f;
 
-                      a .ellipsis {
-                        height: 60px;
-                        line-height: 60px;
+            .gru-accordion-course {
+              padding: 0;
+            }
+          }
+
+          .teacher-coursemap {
+            .gru-accordion-course {
+              padding: 0;
+
+              .gru-accordion-lesson {
+                .panel-body {
+                  .collections {
+                    li {
+                      margin-bottom: 10px;
+
+                      .performance.chart {
+                        width: 77px;
                       }
                     }
                   }
@@ -282,22 +265,51 @@
               }
             }
           }
-        }
 
-        &.sm-course-map {
-          min-width: 70%;
-          margin: 0 10px auto;
+          .student-coursemap {
+            .gru-learner-accordion-unit {
+              background-color: $white;
 
-          .gru-accordion .panel-heading .panel-title {
-            width: 53% !important;
+              .gru-learner-accordion-lesson {
+                .panel-heading {
+                  .panel-title {
+                    width: 69% !important;
+                  }
+                }
+
+                .panel-body {
+                  .collections {
+                    .panel-heading {
+                      .panel-title {
+                        display: flex;
+
+                        a .ellipsis {
+                          height: 60px;
+                          line-height: 60px;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
 
-          .gru-accordion-lesson
-            .collections
-            .panel-heading
-            .panel-title
-            .title {
-            width: 73%;
+          &.sm-course-map {
+            min-width: 70%;
+            margin: 0 10px auto;
+
+            .gru-accordion .panel-heading .panel-title {
+              width: 53% !important;
+            }
+
+            .gru-accordion-lesson
+              .collections
+              .panel-heading
+              .panel-title
+              .title {
+              width: 73%;
+            }
           }
         }
       }
@@ -308,6 +320,11 @@
         @media (max-width: $screen-sm-min) {
           display: none;
         }
+
+        @media (max-width: $screen-md-min) {
+          order: 1;
+        }
+
         .header {
           font-size: 12px;
           font-weight: bold;
