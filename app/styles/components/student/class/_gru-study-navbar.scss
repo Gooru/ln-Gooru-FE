@@ -56,7 +56,7 @@
       /*Apply to independent-learning class and it has no class info */
       &.independent-learning.no-class-info {
         grid-template-columns: 90px 120px 1fr 60px 120px 120px;
-        @media only screen and (max-width: 767px) {
+        @media only screen and (max-width: $screen-sm - 1) {
           grid-template-columns: 70px 60px 1fr 60px 60px 60px;
 
           .class-activities,
@@ -113,7 +113,7 @@
       /* Apply to independent-learning class */
       &.independent-learning {
         grid-template-columns: 90px 120px 1fr 60px 60px 60px;
-        @media only screen and (max-width: 767px) {
+        @media only screen and (max-width: $screen-sm - 1) {
           grid-template-columns: 90px 60px 1fr 50px 50px 50px;
 
           .class-activities,
@@ -171,7 +171,7 @@
       &.no-class-info {
         grid-template-columns: 90px 160px 120px 115px 1fr 59px 105px 105px;
         /* Extra small devices (phones, 767pxpx and down) */
-        @media only screen and (max-width: 767px) {
+        @media only screen and (max-width: $screen-sm - 1) {
           grid-template-columns: 50px 40px 40px 40px 1fr 40px 45px 45px;
 
           .performance,
@@ -194,7 +194,7 @@
         }
       }
       /* Extra small devices (phones, 767pxpx and down) */
-      @media only screen and (max-width: 767px) {
+      @media only screen and (max-width: $screen-sm - 1) {
         grid-template-columns: 50px 40px 40px 40px 1fr 40px 40px 40px;
 
         .class-activities,
