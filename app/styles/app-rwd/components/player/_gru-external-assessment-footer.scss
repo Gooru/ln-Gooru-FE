@@ -16,19 +16,6 @@
 				.resource-title {
 					font-size: 14px;
 				}
-				.list-resource-nav {
-					i {
-						margin-left: -66px;
-					}
-				}
-				.reaction-bar {
-					width: 50px;
-					margin-right: 0;
-					border-left: 1px solid $breadcrumb-color;
-				}
-				.list-resources {
-					width: 80%;
-				}
 			}
 			.next-action {
 				width: 36px;
@@ -41,7 +28,7 @@
 	@media only screen and (orientation: landscape) {
 		.nav-player-container {
 			.prev.disabled {
-				width: 14%;
+		    width: 18%;
 			}
 			.prev {
 				width: auto;
@@ -59,19 +46,6 @@
 					span {
 						margin-left: 61px;
 					}
-				}
-				.list-resource-nav {
-					i {
-						margin-left: -66px;
-					}
-				}
-				.reaction-bar {
-					width: 50px;
-					margin-right: 0;
-					border-left: 1px solid $breadcrumb-color;
-				}
-				.list-resources {
-					width: 80%;
 				}
 			}
 			.next-action {
