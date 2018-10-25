@@ -1,16 +1,12 @@
 .learner-proficiency-domain-matrix {
 
-  @media screen and (min-width: 768px) and (max-width: 992px) {
-    .chart-area {
-      width: 100%;
-      margin: auto;
-    }
+  .chart-area {
+    width: 100%;
+    margin: auto;
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: $screen-md - 1) {
     .chart-area {
-      width: 100%;
-      margin: auto;
       zoom: 0.8;
       grid-template-columns: none;
       .domain-list {
@@ -28,6 +24,23 @@
     }
   }
 
-
+  @media screen and (max-width: $screen-359 + 1) {
+    .chart-area {
+      zoom: 0.7;
+      grid-template-columns: none;
+      .domain-list {
+        display: none;
+      }
+      .matrix-chart {
+        .scrollable-chart {
+          margin: auto;
+        }
+        .domain-sequence-container {
+          width: max-content;
+          margin: auto;
+        }
+      }
+    }
+  }
 
 }
