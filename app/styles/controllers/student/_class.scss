@@ -53,7 +53,6 @@
     }
 
     .panel.classroom-information {
-      float: $tab-float-dir;
       margin: 10px 0 0;
       width: 100%;
       margin-bottom: 20px;
@@ -61,13 +60,26 @@
       .panel-body {
         padding: 0;
         height: 60px;
+        display: grid;
+        grid-template-columns: 90px 1fr max-content 150px 200px 90px 75px;
+
+        &.no-taxomony {
+          grid-template-columns: 90px 1fr max-content 150px 90px 75px;
+
+          .taxonomy-standards {
+            display: none;
+          }
+        }
+
+        &::before,
+        ::after {
+          content: none;
+        }
 
         .course-image {
           border-right: $border-right-side $light-300;
           border-left: $border-left-side $light-300;
           height: 60px;
-          width: 90px;
-          float: $tab-float-dir !important;
 
           img {
             height: 100%;
@@ -84,15 +96,16 @@
 
         .course-name {
           line-height: 1.4;
-          margin: 10px 10px 0;
-          width: 25%;
-          float: $tab-float-dir !important;
+          margin-top: 18px;
+          text-overflow: ellipsis;
+          text-align: center;
+          overflow: hidden;
+          white-space: nowrap;
+          display: block;
         }
 
         .counts-container {
           padding: 6px 0 0;
-          width: 6%;
-          float: $tab-float-dir !important;
 
           .count {
             height: 20px;
@@ -112,25 +125,22 @@
         }
 
         .teacher-profile {
-          margin: 0 0 0 20px;
-          width: 16%;
-          float: $tab-float-dir !important;
+          grid-template-columns: auto auto;
+          display: grid;
+          align-items: center;
+          justify-content: center;
+          grid-gap: 5px;
 
           img {
             border-radius: 50px;
             display: inline-block;
-            float: $tab-float-dir;
             height: 40px;
-            margin: 10px 10px 10px 0;
             width: 43px;
           }
 
           .owner-name {
-            display: inline-block !important;
-            float: $tab-float-dir;
             line-height: 1.4;
-            margin: 10px 0 0;
-            width: 65%;
+            justify-self: center;
           }
         }
 
@@ -138,8 +148,6 @@
           min-width: 100px;
           margin: 0 0 0 20px;
           padding: 12px 0 0;
-          width: 18%;
-          float: $tab-float-dir !important;
 
           .taxonomy.gru-taxonomy-tag {
             background-color: $light-300;
@@ -158,11 +166,10 @@
         .class-code {
           border-left: $border-right-side;
           border-right: $border-left-side;
+          margin-left: 10px;
           height: 60px;
           padding: 14px 0 6px;
-          text-align: $menu-float-dir;
-          width: 7%;
-          float: $tab-float-dir !important;
+          text-align: center;
 
           div {
             line-height: 1;
@@ -185,8 +192,6 @@
         }
 
         .performance-container {
-          width: 11%;
-          float: $menu-float-dir !important;
           cursor: pointer;
 
           &.not-started {
