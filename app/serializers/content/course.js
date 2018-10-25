@@ -120,6 +120,46 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
+   * Normalize an array of ClassPerformanceSummary
+   *
+   * @param payload endpoint response format in JSON format
+   * @returns {ClassPerformanceSummary[]}
+   */
+  normalizeCourseCards: function(payload) {
+    const serializer = this;
+    if (payload.courses && Ember.isArray(payload.courses)) {
+      return payload.courses.map(function(course) {
+        return serializer.normalizeCourseCard(course);
+      });
+    } else {
+      return [];
+    }
+  },
+
+  /**
+   * Normalize a Course card response
+   *
+   * @param payload - The endpoint response in JSON format
+   * @returns {Content/Course} Course Model
+   */
+  normalizeCourseCard: function(payload) {
+    const serializer = this;
+    const basePath = serializer.get('session.cdnUrls.content');
+    const appRootPath = this.get('appRootPath'); //configuration appRootPath
+    const thumbnailUrl = payload.thumbnail
+      ? basePath + payload.thumbnail
+      : appRootPath + DEFAULT_IMAGES.COURSE;
+
+    return CourseModel.create(Ember.getOwner(serializer).ownerInjection(), {
+      id: payload.id,
+      thumbnailUrl: thumbnailUrl,
+      title: payload.title,
+      ownerId: payload.owner_id,
+      version: payload.version
+    });
+  },
+
+  /**
    * Normalize a Course response
    *
    * @param payload - The endpoint response in JSON format
@@ -165,12 +205,19 @@ export default Ember.Object.extend(ConfigurationMixin, {
       title: payload.title,
       unitCount: payload.unit_count
         ? payload.unit_count
-        : payload.unit_summary ? payload.unit_summary.length : 0,
+        : payload.unit_summary
+          ? payload.unit_summary.length
+          : 0,
       metadata: metadata,
-      audience: metadata.audience && metadata.audience.length > 0 ? metadata.audience : [],
+      audience:
+        metadata.audience && metadata.audience.length > 0
+          ? metadata.audience
+          : [],
       useCase: payload.use_case,
       version: payload.version,
-      aggregatedTaxonomy: payload.aggregated_taxonomy ? payload.aggregated_taxonomy : null
+      aggregatedTaxonomy: payload.aggregated_taxonomy
+        ? payload.aggregated_taxonomy
+        : null
       // TODO More properties will be added here...
     });
   },

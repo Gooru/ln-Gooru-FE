@@ -34,16 +34,7 @@ test('Layout', function(assert) {
       $leftUserContainer.find('.greetings'),
       'Missing student greetings'
     );
-    T.exists(
-      assert,
-      $leftUserContainer.find('.greetings .title'),
-      'Missing student name'
-    );
-    assert.equal(
-      $leftUserContainer.find('.greetings .title span').text(),
-      'Hello, Student!',
-      'Incorrect student name text'
-    );
+
     T.exists(
       assert,
       $leftUserContainer.find('.greetings .featured-courses'),
