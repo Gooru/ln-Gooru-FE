@@ -1,5 +1,6 @@
 <div class="panel {{if hasStarted 'has-course' 'no-course'}}">
   {{#if course}}
+
     <div class="panel-heading" style="background-color:{{grade-color class.performanceSummary.score}}">
       <div class="title ellipsis" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}">
         {{#link-to 'student.class.course-map' class.id}}
@@ -17,7 +18,9 @@
           <div class="start-studying {{if class.isNotAbleToStartPlayer 'no-play'}}" {{action "playCollection"}}>
             {{t "student-landing.start-studying"}}
           </div>
+
   {{else}}
+
     <div class="current-activity">
       {{#if isCompleted}}
         {{t "student-landing.last-activity"}}
@@ -121,5 +124,7 @@
         </div>
       </div>
     </div>
+
   {{/if}}
+
 </div>

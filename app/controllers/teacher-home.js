@@ -97,28 +97,36 @@ export default Ember.Controller.extend(ModalMixin, {
   loadClassPerformance(classes) {
     let route = this;
     let classCourseIds = route.getListOfClassCourseIds(classes);
-    route
+    let courseIDs = route.getListOfCourseIds(classes);
+    let courseCardsPromise = route
+      .get('courseService')
+      .fetchCoursesCardData(courseIDs);
+    let perfSummaryPromise = route
       .get('performanceService')
-      .findClassPerformanceSummaryByClassIds(classCourseIds)
-      .then(function(classPerformanceSummaryItems) {
-        classes.forEach(function(clas) {
-          let classId = clas.get('id');
-          let courseId = clas.get('courseId');
-          if (courseId) {
-            route
-              .get('courseService')
-              .fetchByIdWithOutProfile(courseId)
-              .then(course => {
-                clas.set('course', course);
-                clas.set('unitsCount', course.get('unitCount'));
-              });
-          }
-          clas.set(
-            'performanceSummary',
-            classPerformanceSummaryItems.findBy('classId', classId)
+      .findClassPerformanceSummaryByClassIds(classCourseIds);
+
+    Ember.RSVP.hash({
+      courseCards: courseCardsPromise,
+      perfSummary: perfSummaryPromise,
+      classes: classes
+    }).then(function(hash) {
+      hash.classes.forEach(function(activeclass) {
+        let classId = activeclass.get('id');
+        let courseId = activeclass.get('courseId');
+
+        if (courseId) {
+          let course = hash.courseCards.findBy(
+            'id',
+            activeclass.get('courseId')
           );
-        });
+          activeclass.set('course', course);
+        }
+        activeclass.set(
+          'performanceSummary',
+          hash.perfSummary.findBy('classId', classId)
+        );
       });
+    });
   },
 
   /**
@@ -195,6 +203,20 @@ export default Ember.Controller.extend(ModalMixin, {
     return listOfActiveClassCourseIds;
   },
 
+  /**
+   * @function getListOfCourseIds
+   * Method to fetch course ids from the list of classess
+   */
+  getListOfCourseIds(classes) {
+    let listOfActiveClassCourseIds = Ember.A([]);
+    classes.map(activeClass => {
+      if (activeClass.get('courseId')) {
+        listOfActiveClassCourseIds.push(activeClass.get('courseId'));
+      }
+    });
+    return listOfActiveClassCourseIds;
+  },
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -222,6 +244,7 @@ export default Ember.Controller.extend(ModalMixin, {
         this.set('order', this.get('order') === 'desc' ? 'asc' : 'desc');
       }
     },
+
     showClasses: function(type) {
       this.set('showActiveClasses', type === 'active');
       this.set('showArchivedClasses', type === 'archived');
@@ -307,13 +330,6 @@ export default Ember.Controller.extend(ModalMixin, {
     const controller = this;
     controller._super(...arguments);
     controller.getLastAccessedClassData();
-    let localStorage = this.get('applicationController').getLocalStorage();
-    const userId = this.get('session.userId');
-    const localStorageLogins = `${userId}_logins`;
-    let loginCount = localStorage.getItem(localStorageLogins);
-    if (loginCount) {
-      this.set('loginCount', +loginCount);
-    }
   },
 
   // -------------------------------------------------------------------------
@@ -389,16 +405,6 @@ export default Ember.Controller.extend(ModalMixin, {
   toolkitSiteUrl: Ember.computed(function() {
     return Env.toolkitSiteUrl;
   }),
-
-  /**
-   * @property {Array[]} - featuredCourses
-   */
-  featuredCourses: null,
-
-  /**
-   * @property {Number} - Amount of logins by the user
-   */
-  loginCount: null,
 
   /**
    * @property {JSON}

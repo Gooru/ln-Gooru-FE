@@ -27,48 +27,9 @@ test('Layout', function(assert) {
 
     const $teacherContainer = find('.controller.teacher-landing');
     T.exists(assert, $teacherContainer, 'Missing teacher container');
-    const $teacherPanel = $teacherContainer.find('.teacher-panel');
-    T.exists(
-      assert,
-      $teacherPanel.find('.greetings'),
-      'Missing teacher greetings'
-    );
 
-    const $panelsContainer = $teacherPanel.find('.panels');
-    T.exists(assert, $panelsContainer, 'Missing panels container');
-
-    const $featuredCourses = $panelsContainer.find('.teacher-featured-courses');
-    T.exists(assert, $featuredCourses, 'Missing featured courses component');
-
-    const $navigatorContainer = $teacherPanel.find('.teacher-navigator');
+    const $navigatorContainer = $teacherContainer.find('.teacher-navigator');
     T.exists(assert, $navigatorContainer, 'Missing teacher navigator');
-  });
-});
-
-test('Will disappear next login', function(assert) {
-  window.localStorage.setItem('id-for-pochita_logins', 5);
-  visit('/teacher-home');
-
-  andThen(function() {
-    const $teacherContainer = find('.controller.teacher-landing');
-    const $teacherPanel = $teacherContainer.find('.teacher-panel');
-    const $panelsContainer = $teacherPanel.find('.panels');
-    T.exists(assert, $panelsContainer, 'Missing panels container');
-
-    const $featuredCourses = $panelsContainer.find('.teacher-featured-courses');
-    T.exists(assert, $featuredCourses, 'Missing featured courses component');
-  });
-});
-
-test('Layout without panels', function(assert) {
-  window.localStorage.setItem('id-for-pochita_logins', 6);
-  visit('/teacher-home');
-
-  andThen(function() {
-    const $teacherContainer = find('.controller.teacher-landing');
-    const $teacherPanel = $teacherContainer.find('.teacher-panel');
-    const $panelsContainer = $teacherPanel.find('.panels');
-    T.notExists(assert, $panelsContainer, 'Panels container should not appear');
   });
 });
 
