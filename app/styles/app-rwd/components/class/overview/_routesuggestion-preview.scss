@@ -22,8 +22,20 @@
         .suggestion-accordion {
           zoom: 0.6;
           .gru-accordion-course.course-suggestions {
+            .panel-heading {
+              .panel-title > a {
+                max-width: none;
+              }
+            }
             margin: auto;
             margin-bottom: 15px;
+            .gru-accordion-unit {
+              .panel-heading {
+                .panel-title {
+                  width: 100%;
+                }
+              }
+            }
           }
         }
       }
