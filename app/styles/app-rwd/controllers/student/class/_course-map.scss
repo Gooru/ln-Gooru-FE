@@ -22,6 +22,7 @@
   .student-coursemap-container {
     .gru-accordion.gru-accordion-course {
       .gru-accordion-unit {
+        padding: 0;
         .unit.panel-heading {
           .panel-title {
             width: calc(100% - 85px) !important;
@@ -39,6 +40,18 @@
               }
               .unit-title-text {
                 margin-left: 10px;
+              }
+            }
+          }
+          .performance-container {
+            height: 67px;
+            width: 64px;
+            margin-top: 0;
+            .charts.gru-performance-chart {
+              height: 67px;
+              min-width: unset;
+              .container-box {
+                height: 67px;
               }
             }
           }
