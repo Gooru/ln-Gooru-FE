@@ -17,7 +17,6 @@ import {
 export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
-
   analyticsService: Ember.inject.service('api-sdk/analytics'),
 
   performanceService: Ember.inject.service('api-sdk/performance'),
@@ -52,8 +51,12 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       const controller = route.get('controller');
       let activeClasses = controller.get('activeClasses');
       let navigateMapService = route.get('navigateMapService');
-      let classId = currentLocation ? currentLocation.get('classId') : classData.get('id');
-      let courseId = currentLocation ? currentLocation.get('courseId') : classData.get('courseId');
+      let classId = currentLocation
+        ? currentLocation.get('classId')
+        : classData.get('id');
+      let courseId = currentLocation
+        ? currentLocation.get('courseId')
+        : classData.get('courseId');
       let options = {
           role: ROLES.STUDENT,
           source: PLAYER_EVENT_SOURCE.COURSE_MAP,
@@ -61,25 +64,29 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
           classId
         },
         nextPromise = null;
-        //start studying
+      //start studying
       if (currentLocation == null || currentLocation === '') {
         nextPromise = navigateMapService.continueCourse(
           options.courseId,
           options.classId
         );
-      } else if (currentLocation.get('status') === 'complete') {  //completed
+      } else if (currentLocation.get('status') === 'complete') {
+        //completed
         nextPromise = navigateMapService.contentServedResource(
           currentLocationToMapContext(currentLocation)
         );
-      } else {  //in-progress
+      } else {
+        //in-progress
         // Next not required, get the params from current location
         nextPromise = route.nextPromiseHandler(
           currentLocationToMapContext(currentLocation)
         );
       }
-      nextPromise.then(route.nextPromiseHandler).then(queryParams => {
-        route.transitionTo('study-player', courseId, { queryParams });
-      })
+      nextPromise
+        .then(route.nextPromiseHandler)
+        .then(queryParams => {
+          route.transitionTo('study-player', courseId, { queryParams });
+        })
         .catch(() => {
           let selectedClass = activeClasses.findBy('id', classData.get('id'));
           selectedClass.set('isNotAbleToStartPlayer', true);
@@ -224,14 +231,18 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       }
     ]);
 
-    let myClasses =
-      route.modelFor('application').myClasses || //when refreshing the page the variable is accessible at the route
-      route.controllerFor('application').get('myClasses'); //after login the variable is refreshed at the controller
+    let localStorage = this.getLocalStorage();
+    const userId = this.get('session.userId');
+    const localStorageLogins = `${userId}_logins`;
+    let loginCount = localStorage.getItem(localStorageLogins);
+    loginCount = loginCount ? 0 + loginCount : 0;
+
     let firstCoursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
     let secondCoursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
     let thirdCoursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
     let fourthCoursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
-    const myId = route.get('session.userId');
+    var featuredCourses = Ember.A([]);
+
     const firstCourseId = configuration.get(
       'exploreFeaturedCourses.firstCourseId'
     );
@@ -244,70 +255,83 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     const fourthCourseId = configuration.get(
       'exploreFeaturedCourses.fourthCourseId'
     );
-    let myClassessPromise = Ember.RSVP.resolve(
-      route.controllerFor('application').loadUserClasses()
-    );
-    var featuredCourses = Ember.A([]);
 
-    if (firstCourseId) {
+    if (firstCourseId && loginCount <= 5) {
       firstCoursePromise = route.get('courseService').fetchById(firstCourseId);
     }
-    if (secondCourseId) {
+    if (secondCourseId && loginCount <= 5) {
       secondCoursePromise = route
         .get('courseService')
         .fetchById(secondCourseId);
     }
-    if (thirdCourseId) {
+    if (thirdCourseId && loginCount <= 5) {
       thirdCoursePromise = route.get('courseService').fetchById(thirdCourseId);
     }
-    if (fourthCourseId) {
+    if (fourthCourseId && loginCount <= 5) {
       fourthCoursePromise = route
         .get('courseService')
         .fetchById(fourthCourseId);
     }
+
+    const myId = route.get('session.userId');
+    let myClasses =
+      route.modelFor('application').myClasses || // when refreshing the page the variable is accessible at the route
+      route.controllerFor('application').get('myClasses'); // after login the variable is refreshed at the controller
+
     return Ember.RSVP.hash({
       firstCourse: firstCoursePromise,
       secondCourse: secondCoursePromise,
       thirdCourse: thirdCoursePromise,
       fourthCourse: fourthCoursePromise,
-      myClasses: myClassessPromise
+      myClasses: myClasses
     }).then(function(hash) {
       const firstFeaturedCourse = hash.firstCourse;
       const secondFeaturedCourse = hash.secondCourse;
       const thirdFeaturedCourse = hash.thirdCourse;
       const fourthFeaturedCourse = hash.fourthCourse;
-      const activeClasses = myClasses.getStudentActiveClasses(myId);
       featuredCourses.push(firstFeaturedCourse);
       featuredCourses.push(secondFeaturedCourse);
       featuredCourses.push(thirdFeaturedCourse);
       featuredCourses.push(fourthFeaturedCourse);
 
-      return {
-        activeClasses,
-        featuredCourses,
-        tourSteps
-      };
+      const activeClasses = hash.myClasses.getStudentActiveClasses(myId);
+      return { activeClasses, featuredCourses, tourSteps, loginCount };
     });
   },
 
   afterModel(resolvedModel) {
+    this.loadClassCardsData(resolvedModel.activeClasses);
+  },
+
+  loadClassCardsData(activeClasses) {
     let route = this;
-    let activeClasses = resolvedModel.activeClasses;
     let classCourseIds = route.getListOfClassCourseIds(activeClasses);
+    let courseIDs = route.getListOfCourseIds(activeClasses);
     let myId = route.get('session.userId');
 
+    let courseCardsPromise = route
+      .get('courseService')
+      .fetchCoursesCardData(courseIDs);
+    let perfPromise = route
+      .get('performanceService')
+      .findClassPerformanceSummaryByStudentAndClassIds(myId, classCourseIds);
+    let locationPromise = route
+      .get('analyticsService')
+      .getUserCurrentLocationByClassIds(classCourseIds, myId);
+
     Ember.RSVP.hash({
-      classPerformanceSummaryItems: route
-        .get('performanceService')
-        .findClassPerformanceSummaryByStudentAndClassIds(myId, classCourseIds),
-      classesLocation: route
-        .get('analyticsService')
-        .getUserCurrentLocationByClassIds(classCourseIds, myId)
+      classPerformanceSummaryItems: perfPromise,
+      classesLocation: locationPromise,
+      courseCards: courseCardsPromise
     }).then(function(hash) {
       const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
       const classesLocation = hash.classesLocation;
+      const courseCards = hash.courseCards;
+
       activeClasses.forEach(function(activeClass) {
         const classId = activeClass.get('id');
+        const courseId = activeClass.get('courseId');
+
         activeClass.set(
           'currentLocation',
           classesLocation.findBy('classId', classId)
@@ -316,6 +340,11 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
           'performanceSummary',
           classPerformanceSummaryItems.findBy('classId', classId)
         );
+
+        if (courseId) {
+          let course = courseCards.findBy('id', activeClass.get('courseId'));
+          activeClass.set('course', course);
+        }
       });
     });
   },
@@ -338,10 +367,25 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     return listOfActiveClassCourseIds;
   },
 
+  /**
+   * @function getListOfCourseIds
+   * Method to fetch course ids from the list of classess
+   */
+  getListOfCourseIds(activeClasses) {
+    let listOfActiveCourseIds = Ember.A([]);
+    activeClasses.map(activeClass => {
+      if (activeClass.courseId) {
+        listOfActiveCourseIds.push(activeClass.courseId);
+      }
+    });
+    return listOfActiveCourseIds;
+  },
+
   setupController: function(controller, model) {
     controller.set('steps', model.tourSteps);
     controller.set('featuredCourses', model.featuredCourses);
     controller.set('activeClasses', model.activeClasses);
+    controller.set('loginCount', model.loginCount);
   },
 
   /**
@@ -365,7 +409,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       hasSuggestions(resp) ? resp.suggestions[0] : resp.context || resp,
       queryParams
     );
-    isContentMapped = !!((queryParams.collectionId || queryParams.id));
+    isContentMapped = !!(queryParams.collectionId || queryParams.id);
     if (isContentMapped) {
       return Ember.RSVP.resolve(queryParams);
     } else {

@@ -3,9 +3,10 @@
   .student.course-map {
     .gru-accordion.gru-accordion-course {
       .gru-accordion-unit {
+        padding: 0;
         .unit.panel-heading {
           .panel-title {
-            width: calc(100% - 85px);
+            width: calc(100% - 85px) !important;
             padding-top: 0;
             > a {
               width: 100% !important;
@@ -20,6 +21,18 @@
               }
               .unit-title-text {
                 margin-left: 10px;
+              }
+            }
+          }
+          .performance-container {
+            height: 67px;
+            width: 64px;
+            margin-top: 0;
+            .charts.gru-performance-chart {
+              height: 67px;
+              min-width: unset;
+              .container-box {
+                height: 67px;
               }
             }
           }
@@ -45,8 +58,13 @@
                   }
                 }
                 .info {
+                  max-width: none !important;
                   .content-count {
+                    display: inline-block;
+                    visibility: visible;
                     margin: 0;
+                    height: inherit;
+                    line-height: 60px;
                     .assessment-count, .collection-count {
                       margin: 0;
                       margin-right: 5px;
@@ -85,7 +103,7 @@
                     .panel-heading {
                       height: 50px;
                       .panel-title {
-                        width: calc(100% - 200px);
+                        width: calc(100% - 200px) !important;
                         padding: 0;
                         margin-left: 0;
                         display: flex;
@@ -101,11 +119,19 @@
                             font-size: 15px;
                             line-height: 50px;
                           }
+                          i {
+                            margin-top: 10px;
+                          }
                         }
                       }
                       .info {
+                        max-width: none !important;
                         .content-count {
+                          display: inline-block;
+                          visibility: visible;
                           margin: 0;
+                          height: inherit;
+                          line-height: 45px;
                           span {
                             margin: 0;
                             i {
@@ -166,7 +192,7 @@
                 .gru-accordion-lesson {
                   .panel-heading {
                     .panel-title {
-                      width: calc(100% - 125px);
+                      width: calc(100% - 125px) !important;
                     }
                     .info {
                       .content-count {
@@ -181,7 +207,7 @@
                           .panel-heading {
                             height: 50px;
                             .panel-title {
-                              width: calc(100% - 125px);
+                              width: calc(100% - 125px) !important;
                               .title {
                                 padding-left: 10px;
                               }
