@@ -4,7 +4,7 @@
     margin-left: 10px;
   }
   .rescope-section {
-    width: 98%;
+    width: 93%;
     margin: auto;
     .rescope-toggle {
       display: block !important;
@@ -12,6 +12,10 @@
         width: 100% !important;
       }
     }
+  }
+
+  h5 {
+    margin-left: 10px;
   }
 
   .student-coursemap-container {
@@ -30,15 +34,16 @@
               display: grid;
               .prefix {
                 border: none;
+                margin-left: 0px;
               }
               .unit-title-text {
-                margin-left: 20px;
+                margin-left: 10px;
               }
             }
           }
         }
         .panel-collapse {
-          padding: 10px;
+          padding: 4px;
           .panel-body {
             .gru-accordion-lesson {
               .panel-heading {
@@ -65,9 +70,9 @@
                       margin-right: 5px;
                       i {
                         margin: 0;
-                        width: 20px;
-                        height: 20px;
-                        background-size: 20px 20px;
+                        width: 16px;
+                        height: 16px;
+                        background-size: 16px 16px;
                       }
                     }
                   }
@@ -94,6 +99,7 @@
               .panel-body {
                 .collections {
                   .collection, .assessment {
+                    height: 52px;
                     .panel-heading {
                       height: 50px;
                       .panel-title {
@@ -108,9 +114,13 @@
                         > a.title {
                           display: flex;
                           padding: 0;
+                          padding-left: 5px;
                           .ellipsis {
                             font-size: 15px;
                             line-height: 50px;
+                          }
+                          i {
+                            margin-top: 10px;
                           }
                         }
                       }
@@ -132,7 +142,7 @@
                           }
                         }
                         .play-btn {
-                          width: 50px;
+                          width: 44px;
                           padding: 0;
                           height: 50px;
                           button {
@@ -142,16 +152,19 @@
                             margin: 0;
                             background: transparent;
                             &.study-now {
-                              width: 48px;
-                              padding: 11px;
+                              width: 44px;
                             }
                           }
                         }
                         .performance {
                           width: 60px;
-                          height: 50px;
-                          line-height: 50px;
+                          height: 48px;
+                          line-height: 48px;
                           padding: 0;
+                          margin-top: 0;
+                          .score {
+                            font-size: 14px;
+                          }
                           .charts.gru-performance-chart {
                             min-width: auto;
                           }
@@ -160,14 +173,48 @@
                     }
                   }
                 }
-                @media screen and (max-width: $screen-376) {
-                  .collections {
-                    .collection, .assessment {
-                      .panel-heading {
-                        height: 50px;
-                        .panel-title {
-                          .icon-container {
-                            display: none;
+
+              }
+              &.expanded .panel-collapse.collapse.in {
+                margin: 0;
+                margin-top: -9px;
+              }
+            }
+          }
+          @media screen and (max-width: $screen-376) {
+            .panel-body {
+              .panel-group {
+                .gru-accordion-lesson {
+                  .panel-heading {
+                    .panel-title {
+                      width: calc(100% - 125px);
+                    }
+                    .info {
+                      .content-count {
+                        display: none;
+                      }
+                    }
+                  }
+                  .panel-collapse {
+                    .panel-body {
+                      .collections {
+                        .collection, .assessment {
+                          .panel-heading {
+                            height: 50px;
+                            .panel-title {
+                              width: calc(100% - 125px);
+                              .title {
+                                padding-left: 10px;
+                              }
+                              .icon-container {
+                                display: none;
+                              }
+                            }
+                            .info {
+                              .content-count {
+                                display: none;
+                              }
+                            }
                           }
                         }
                       }

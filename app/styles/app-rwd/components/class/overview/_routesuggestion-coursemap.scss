@@ -23,6 +23,11 @@
           .panel-title {
             width: 75%;
           }
+          .info {
+            .performance .not-started {
+              padding: 6px 5px 0;
+            }
+          }
         }
       }
     }
@@ -41,6 +46,9 @@
           .info {
             div.play-btn, div.performance {
               width: 50px;
+            }
+            .performance .not-started {
+              padding: 6px 5px 0;
             }
           }
         }

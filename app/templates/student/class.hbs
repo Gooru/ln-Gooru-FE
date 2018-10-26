@@ -14,7 +14,7 @@
       <h1>{{class.title}}</h1>
     </div>
     <div class="panel panel-default panel-primary classroom-information hide-classroom-information">
-      <div class="panel-body">
+      <div class="panel-body {{unless course.tags.length 'no-taxomony'}}">
         <div class="course-image">
           {{#if course.thumbnailUrl}}
             <img src="{{course.thumbnailUrl}}"/>
