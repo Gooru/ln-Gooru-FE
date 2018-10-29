@@ -68,6 +68,7 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     logout: function() {
       this.sendAction('onLogout');
     },
+
     setLocale(selVal) {
       this.set('i18n.locale', selVal);
       if (selVal === 'ar') {
@@ -133,6 +134,8 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     if (EndPointsConfig.getLanguageSettingdropMenu() !== undefined) {
       this.set('showDropMenu', EndPointsConfig.getLanguageSettingdropMenu());
     }
+
+    /*
     if (EndPointsConfig.getLanguageSettingdefaultLang() !== undefined) {
       this.set('i18n.locale', EndPointsConfig.getLanguageSettingdefaultLang());
       if (EndPointsConfig.getLanguageSettingdefaultLang() === 'ar') {
@@ -144,7 +147,8 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
         rootElement.removeClass('changeDir');
         rootElement.addClass('changeDirDefault');
       }
-    }
+    } */
+
     $('.search-input').on(
       'keyup',
       function(e) {
