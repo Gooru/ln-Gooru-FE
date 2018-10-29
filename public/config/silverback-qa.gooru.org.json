@@ -42,6 +42,6 @@
 
   "languageSetting": {
     "defaultLang": "en",
-    "showDropMenu": false
+    "showDropMenu": true
   }
 }
