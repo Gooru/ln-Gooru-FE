@@ -63,7 +63,7 @@ export default {
 
   languageSetting: {
     defaultLang: 'en',
-    showDropMenu: false
+    showDropMenu: true
   },
 
   researcher: {

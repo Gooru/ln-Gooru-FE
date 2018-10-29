@@ -31,12 +31,17 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Attributes
 
-  queryParams: ['themeId'],
+  queryParams: ['themeId', 'lang'],
 
   /**
    * @property {string} application theme
    */
   themeId: null,
+
+  /**
+   * @property {string} application locale
+   */
+  lang: null,
 
   /**
    * This is a link to the search controller so the header is updated
