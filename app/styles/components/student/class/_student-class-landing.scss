@@ -1,3 +1,63 @@
 .student-class-landing {
-  
+  @media screen and (min-width: 1024px) {
+    .student-inspect-destination.proficiency {
+      .inspect-destination-container {
+        .destination-chart-container {
+          .student-inspect-competency-chart {
+            .chart-container {
+              .graded-chart-container {
+                .domain-chart {
+                  .scrollable-chart {
+                    height: auto;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .competency-level-container {
+          position: relative;
+          .show-destination {
+            position: absolute;
+            bottom: 10px;
+          }
+        }
+      }
+    }
+
+    .student-inspect-destination.destination {
+      .inspect-destination-container {
+        .destination-chart-container {
+          .student-inspect-competency-chart {
+            .chart-container {
+              .graded-chart-container {
+                .taxonomy-grades-container {
+                  .taxonomy-grades {
+                    .grade-list {
+                      height: 545px;
+                    }
+                  }
+                }
+                .domain-chart {
+                  .scrollable-chart {
+                    height: 545px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .grade-data-container {
+          position: relative;
+          .grade-description {
+            height: 480px;
+          }
+          .next-route {
+            position: absolute;
+            bottom: 10px;
+          }
+        }
+      }
+    }
+  }
 }

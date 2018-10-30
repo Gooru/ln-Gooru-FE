@@ -11,6 +11,7 @@
 @import "app-rwd/components/_gru-student-featured-courses-rwd";
 @import "app-rwd/components/player/_gru-external-assessment-page";
 @import "app-rwd/components/player/_gru-external-assessment-footer";
+@import "app-rwd/components/student/class/student-class-landing";
 
 //Controllers
 @import "app-rwd/controllers/student/class-rwd";
@@ -21,3 +22,4 @@
 @import "app-rwd/controllers/student/_student-independent-learning-rwd";
 @import "app-rwd/controllers/student/independent/course-map";
 @import "app-rwd/controllers/student/_independent-rwd";
+@import "app-rwd/controllers/teacher/class/course-map";

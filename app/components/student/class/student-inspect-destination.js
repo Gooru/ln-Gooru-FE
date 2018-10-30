@@ -5,6 +5,8 @@ export default Ember.Component.extend({
   // Attributes
   classNames: ['student-inspect-destination'],
 
+  classNameBindings: ['type'],
+
   // -------------------------------------------------------------------------
   // Dependencies
   route0Service: Ember.inject.service('api-sdk/route0'),
