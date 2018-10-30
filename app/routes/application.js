@@ -5,6 +5,7 @@ import PublicRouteMixin from 'gooru-web/mixins/public-route-mixin';
 import GooruLegacyUrl from 'gooru-web/utils/gooru-legacy-url';
 import Error from 'gooru-web/models/error';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
+import EndPointsConfig from 'gooru-web/utils/endpoint-config';
 
 /**
  * @typedef {object} ApplicationRoute
@@ -113,6 +114,8 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
     const route = this;
     const currentSession = route.get('session.data.authenticated');
     const themeId = params.themeId || Env.themes.default;
+    const lang = params.lang || EndPointsConfig.getLanguageSettingdefaultLang();
+
     let myClasses = null;
     var profilePromise = null;
 
@@ -125,6 +128,7 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
       });
     }
 
+    route.setupDefaultLanguage(lang);
     route.setupTheme(themeId);
 
     let accessToken = params.access_token;
@@ -141,7 +145,6 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
 
   afterModel: function() {
     const route = this;
-    this.set('i18n.locale', 'en');
     if (Env.embedded) {
       return route.afterModelEmbeddedApplication();
     } else {
@@ -167,6 +170,25 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
       this.handleRedirectionBasedOnDomain(controller);
     } else {
       controller.set('isRedirectionDomainDone', true);
+    }
+  },
+
+  /**
+   * Setups the application default language
+   * @param {lang}  // default language to use
+   */
+  setupDefaultLanguage: function(lang) {
+    if (lang !== undefined) {
+      this.set('i18n.locale', lang);
+      if (lang === 'ar') {
+        const rootElement = Ember.$(Env.rootElement);
+        rootElement.addClass('changeDir');
+        rootElement.removeClass('changeDirDefault');
+      } else {
+        const rootElement = Ember.$(Env.rootElement);
+        rootElement.removeClass('changeDir');
+        rootElement.addClass('changeDirDefault');
+      }
     }
   },
 
