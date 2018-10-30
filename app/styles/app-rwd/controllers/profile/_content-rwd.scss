@@ -20,6 +20,7 @@
 	.dropdowns {
 		.dropdown-menu>li>a {
 			font-weight: bold;
+			text-align: left;
 		}
 		.dropdown-menu {
 			padding: 0;
@@ -85,7 +86,6 @@
 			li {
 				text-align: center;
 				border-bottom: 1px solid $light-200;
-				float: left;
 			}
 		}
 	}
