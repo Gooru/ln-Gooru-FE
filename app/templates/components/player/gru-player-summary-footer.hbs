@@ -4,7 +4,6 @@
     <span>{{t "qz-question-viewer.previous"}}</span>
   </div>
 
-
   <div class="player-container">
     <div class="player-info">
       <div class="pull-left resource-title">
@@ -13,34 +12,33 @@
     </div>
   </div>
 
-<div class="next-action">
-{{#if isDone}}
-  {{#if classId}}
-      {{#link-to 'student.class.course-map' classId }}
-        <div class="next {{unless isNextEnabled 'disabled'}}" data-toggle="tooltip" title="{{ t 'common.exit'}}">
-          <span>{{t 'common.exit'}}</span>
-        </div>
-      {{/link-to}}
-  {{else}}
-      {{#link-to 'student.independent.course-map' courseId}}
-        <div class="next {{unless isNextEnabled 'disabled'}}" data-toggle="tooltip" title="{{ t 'common.exit'}}">
-        <span>{{t 'common.exit'}}</span>
-      </div>
-      {{/link-to}}
-  {{/if}}
-{{else}}
+  <div class="toggle-screen" {{action 'onToggleScreen'}}>
+    {{#if isFullScreen}}
+      {{gru-icon name="fullscreen_exit"}}
+    {{else}}
+      {{gru-icon name="fullscreen"}}
+    {{/if}}
+  </div>
+
+  <div class="next-action">
+    {{#if isDone}}
+      {{#if classId}}
+        {{#link-to 'student.class.course-map' classId }}
+          <div class="next {{unless isNextEnabled 'disabled'}}" data-toggle="tooltip" title="{{ t 'common.exit'}}">
+            <span>{{t 'common.exit'}}</span>
+          </div>
+        {{/link-to}}
+      {{else}}
+        {{#link-to 'student.independent.course-map' courseId}}
+          <div class="next {{unless isNextEnabled 'disabled'}}" data-toggle="tooltip" title="{{ t 'common.exit'}}">
+            <span>{{t 'common.exit'}}</span>
+          </div>
+        {{/link-to}}
+      {{/if}}
+    {{else}}
       <div {{action 'parentNext'}} class="next {{unless isNextEnabled 'disabled'}}" data-toggle="tooltip" title="{{ t 'common.next'}}">
         <span>{{t 'common.next'}}</span> {{gru-icon name="ic_skip_next"}}
       </div>
-{{/if}}
-</div>
-
-<div class="toggle-screen pull-right" {{action 'onToggleScreen'}}>
-  {{#if isFullScreen}}
-    {{gru-icon name="fullscreen_exit"}}
-  {{else}}
-    {{gru-icon name="fullscreen"}}
-  {{/if}}
-</div>
-
+    {{/if}}
+  </div>
 </div>

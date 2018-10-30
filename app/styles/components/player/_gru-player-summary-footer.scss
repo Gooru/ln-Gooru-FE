@@ -9,6 +9,9 @@
   box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.5);
 
   .nav-player-container {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+
     .prev {
       float: $tab-float-dir;
       width: 138px;
@@ -42,7 +45,7 @@
     }
 
     .player-container {
-      width: calc(100% - 330px);
+      width: 100%;
       float: $tab-float-dir;
       height: 50px;
 
@@ -62,6 +65,7 @@
       display: block;
       cursor: pointer;
       border-left: 1px solid $light-200;
+
       i {
         line-height: 50px;
         margin-left: 12px;
