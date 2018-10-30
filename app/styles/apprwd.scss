@@ -3,9 +3,7 @@
     Example: @import "app-rwd/components/filename";
   */
 @import "variables";
-
 @import "quizzes-rwd";
-
 // Components
 @import "app-rwd/components/proficiency/learner-proficiency-domain-matrix";
 @import "app-rwd/components/class/overview/routesuggestion-preview";
@@ -23,3 +21,4 @@
 @import "app-rwd/controllers/student/_student-independent-learning-rwd";
 @import "app-rwd/controllers/student/independent/course-map";
 @import "app-rwd/controllers/profile/_content-rwd.scss";
+@import "app-rwd/controllers/student/_independent-rwd";

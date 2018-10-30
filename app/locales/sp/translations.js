@@ -2,11 +2,11 @@ import quizzesTranslations from './quizzes/translations';
 
 export default Object.assign(quizzesTranslations, {
   en: 'English',
-  sp: 'Español',
-  ar: 'عربى',
-  mr: 'मराठी',
-  kn: 'ಕನ್ನಡ',
-  hi: 'हिंदी',
+  sp: 'Español - preRelease',
+  ar: 'عربى - preRelease',
+  mr: 'मराठी - preRelease',
+  kn: 'ಕನ್ನಡ - preRelease',
+  hi: 'हिंदी - preRelease',
   errors: {
     tooShort:
       '{{description}} es demasiado corta (el mínimo es {{min}} caracteres)',
@@ -1002,6 +1002,9 @@ export default Object.assign(quizzesTranslations, {
       'primary-text':
         'Elija las cosas que desea analizar y generaremos un informe de rendimiento personalizado.'
     },
+    'browse-our': 'Navegue por',
+    'class-code': 'Código de clase',
+    'featured-courses': 'Cursos destacados',
     'browse-featured-courses': 'Navegue por nuestros cursos destacados',
     'current-activity': 'Actividad actual',
     learn: 'Aprender con un aula de Gooru',
