@@ -107,6 +107,7 @@ export default Ember.Component.extend({
       } else {
         component.$('.route0-body').show(1000);
       }
+      component.$('.route0-container').toggleClass('expanded');
       component.toggleProperty('isRoute0ExpandedView');
     }
   },
