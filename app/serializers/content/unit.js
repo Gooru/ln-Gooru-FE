@@ -63,8 +63,12 @@ export default Ember.Object.extend({
         var lessons = [];
         if (payload.lesson_summary) {
           lessons = payload.lesson_summary.map(function(lessonData) {
-            let assessmentCount = lessonData.assessment_count ? lessonData.assessment_count : 0;
-            let externalAssessmentCount = lessonData.external_assessment_count ? lessonData.external_assessment_count : 0;
+            let assessmentCount = lessonData.assessment_count
+              ? lessonData.assessment_count
+              : 0;
+            let externalAssessmentCount = lessonData.external_assessment_count
+              ? lessonData.external_assessment_count
+              : 0;
             return Lesson.create(Ember.getOwner(serializer).ownerInjection(), {
               assessmentCount: assessmentCount + externalAssessmentCount,
               collectionCount: lessonData.collection_count
@@ -84,7 +88,9 @@ export default Ember.Object.extend({
       lessonCount:
         payload.lesson_summary && Ember.isArray(payload.lesson_summary)
           ? payload.lesson_summary.length
-          : payload.lesson_count ? payload.lesson_count : 0,
+          : payload.lesson_count
+            ? payload.lesson_count
+            : 0,
       sequence: payload.sequence_id,
       title: payload.title,
       taxonomy: serializer
@@ -96,8 +102,12 @@ export default Ember.Object.extend({
   normalizeUnits: function(payload) {
     const serializer = this;
     if (Ember.isArray(payload)) {
+      let unitUiSequence = 1;
       return payload.map(function(unit) {
-        return serializer.normalizeUnit(unit);
+        let sunit = serializer.normalizeUnit(unit);
+        sunit.set('ui_sequence', unitUiSequence);
+        unitUiSequence++;
+        return sunit;
       });
     } else {
       return [];
