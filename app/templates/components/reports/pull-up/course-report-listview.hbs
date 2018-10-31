@@ -69,7 +69,7 @@
           <th class="tabular-header on-scroll-fixed">
             <div class="content-header {{unless content.performance.hasStarted 'not-started'}}" {{action 'openUnitReport' content contents}}>
               <div style= {{safe-html (concat "background-color:" (grade-color content.performance.score))}} class="content-icon">
-                <span>U{{content.sequence}}</span>
+                <span>U{{content.ui_sequence}}</span>
               </div>
               <div class="content-title">
                 <p>{{safe-html content.title}}</p>
