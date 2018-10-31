@@ -1,0 +1,33 @@
+.gru-player-summary-footer {
+  @media only screen and (max-width: $sm-width-max) {
+    .nav-player-container {
+      grid-template-columns: 50px 1fr auto 50px;
+
+      .prev {
+        width: 50px;
+
+        span {
+          display: none;
+        }
+
+        i {
+          margin-left: -100px;
+        }
+      }
+
+      .next-action {
+        width: 50px;
+
+        .next {
+          span {
+            display: none;
+          }
+
+          i {
+            margin-left: -100px;
+          }
+        }
+      }
+    }
+  }
+}
