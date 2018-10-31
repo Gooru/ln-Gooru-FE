@@ -1,12 +1,15 @@
 .study-player-external {
 	.player-container {
+		@media screen and (min-width: $screen-sm) and (min-height: $screen-1024) {
+			height: 100% !important;
+		}
 		.player {
 			.gru-external-assessment-page {
 				height: 100%;
 				width: 100%;
 			}
 		}
-		@media screen and (min-width: $screen-sm - 1) and (max-width: $screen-sm) {
+		@media screen and (min-width: $screen-sm) {
 			.player {
 				.gru-external-assessment-page {
 					background-position: left !important;
