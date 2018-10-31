@@ -10,6 +10,7 @@
 @import "app-rwd/components/_gru-student-featured-courses-rwd";
 @import "app-rwd/components/player/_gru-external-assessment-page";
 @import "app-rwd/components/player/_gru-external-assessment-footer";
+@import "app-rwd/components/player/_gru-player-summary-footer-rwd";
 //Controllers
 @import "app-rwd/controllers/student/class-rwd";
 @import "app-rwd/controllers/student/class/profile";
@@ -21,3 +22,6 @@
 @import "app-rwd/controllers/student/_independent-rwd";
 @import "app-rwd/controllers/teacher/_teacher-home-rwd";
 @import "app-rwd/controllers/teacher/_class-atc-view-rwd";
+@import "app-rwd/controllers/reports/_student-collection-analytics-rwd";
+@import "app-rwd/controllers/profile/_content-rwd.scss";
+

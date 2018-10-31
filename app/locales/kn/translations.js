@@ -2,11 +2,11 @@ import quizzesTranslations from './quizzes/translations';
 
 export default Object.assign(quizzesTranslations, {
   en: 'English',
-  sp: 'Español',
-  ar: 'عربى',
-  mr: 'मराठी',
-  kn: 'ಕನ್ನಡ',
-  hi: 'हिंदी',
+  sp: 'Español - preRelease',
+  ar: 'عربى - preRelease',
+  mr: 'मराठी - preRelease',
+  kn: 'ಕನ್ನಡ - preRelease',
+  hi: 'हिंदी - preRelease',
   errors: {
     description: 'ಈ ಕ್ಷೇತ್ರ',
     inclusion: '{{description}} ಪಟ್ಟಿಯಲ್ಲಿ ಸೇರಿಸಲಾಗಿಲ್ಲ',
