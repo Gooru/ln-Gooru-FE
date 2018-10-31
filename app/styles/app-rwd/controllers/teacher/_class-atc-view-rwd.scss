@@ -1,0 +1,24 @@
+.teacher-panel {
+  .teacher.class-atc-view {
+    .class-view {
+      .body {
+        .nav-previous {
+          left: -15px;
+        }
+
+        .nav-next {
+          right: -15px;
+        }
+
+        .atc-chart {
+          @media only screen and(max-width: $screen-md) {
+            zoom: 0.7;
+          }
+          @media only screen and(max-width: $screen-sm) {
+            zoom: 0.5;
+          }
+        }
+      }
+    }
+  }
+}

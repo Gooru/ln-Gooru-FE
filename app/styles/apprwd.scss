@@ -3,15 +3,13 @@
     Example: @import "app-rwd/components/filename";
   */
 @import "variables";
-@import "quizzes-rwd";
-// Components
+@import "quizzes-rwd"; // Components
 @import "app-rwd/components/proficiency/learner-proficiency-domain-matrix";
 @import "app-rwd/components/class/overview/routesuggestion-preview";
 @import "app-rwd/components/class/overview/routesuggestion-coursemap";
 @import "app-rwd/components/_gru-student-featured-courses-rwd";
 @import "app-rwd/components/player/_gru-external-assessment-page";
 @import "app-rwd/components/player/_gru-external-assessment-footer";
-
 //Controllers
 @import "app-rwd/controllers/student/class-rwd";
 @import "app-rwd/controllers/student/class/profile";
@@ -21,3 +19,5 @@
 @import "app-rwd/controllers/student/_student-independent-learning-rwd";
 @import "app-rwd/controllers/student/independent/course-map";
 @import "app-rwd/controllers/student/_independent-rwd";
+@import "app-rwd/controllers/teacher/_teacher-home-rwd";
+@import "app-rwd/controllers/teacher/_class-atc-view-rwd";
