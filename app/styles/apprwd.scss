@@ -23,7 +23,10 @@
 @import "app-rwd/controllers/student/_student-home-rwd";
 @import "app-rwd/controllers/student/_student-independent-learning-rwd";
 @import "app-rwd/controllers/student/independent/course-map";
-@import "app-rwd/controllers/profile/_content-rwd.scss";
 @import "app-rwd/controllers/student/_independent-rwd";
+@import "app-rwd/controllers/teacher/_teacher-home-rwd";
+@import "app-rwd/controllers/teacher/_class-atc-view-rwd";
 @import "app-rwd/controllers/teacher/class/course-map";
 @import "app-rwd/controllers/reports/_student-collection-analytics-rwd";
+@import "app-rwd/controllers/profile/_content-rwd.scss";
+
