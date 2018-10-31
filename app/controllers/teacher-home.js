@@ -73,6 +73,7 @@ export default Ember.Controller.extend(ModalMixin, {
             lastAccessedClassData = controller.updateLastAccessedClass(
               lastAccessedClassData
             );
+            controller.set('lastAccessedClassData', lastAccessedClassData);
           }
         });
       }
