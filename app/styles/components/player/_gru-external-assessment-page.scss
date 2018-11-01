@@ -1,3 +1,13 @@
+@media screen and (min-width: $screen-1024) and (min-height: $screen-sm) {
+  .gru-external-assessment-page {
+    background-position: right !important;
+  }
+}
+@media screen and (min-width: $screen-1024) and (min-height: $screen-1366) {
+  .gru-external-assessment-page {
+    background-position: left !important;
+  }
+}
 .gru-external-assessment-page {
   background-image: url("gooru/assessment-start-page.jpg");
   background-repeat: no-repeat;
