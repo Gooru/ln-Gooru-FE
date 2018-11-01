@@ -61,10 +61,8 @@ export default Ember.Object.extend({
     return Unit.create(Ember.getOwner(this).ownerInjection(), {
       children: (function() {
         var lessons = [];
-        var lessonsequence = 0;
         if (payload.lesson_summary) {
           lessons = payload.lesson_summary.map(function(lessonData) {
-            lessonsequence++;
             let assessmentCount = lessonData.assessment_count
               ? lessonData.assessment_count
               : 0;
@@ -78,7 +76,6 @@ export default Ember.Object.extend({
                 : 0,
               id: lessonData.lesson_id,
               sequence: lessonData.sequence_id,
-              ui_sequence: lessonsequence,
               title: lessonData.title
             });
           });

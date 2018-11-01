@@ -1,11 +1,11 @@
-import { moduleFor, skip } from 'ember-qunit';
+import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
 import Lesson from 'gooru-web/models/content/lesson';
 import Unit from 'gooru-web/models/content/unit';
 
 moduleFor('serializer:content/unit', 'Unit | Serializer | content/unit');
 
-skip('serializeCreateUnit', function(assert) {
+test('serializeCreateUnit', function(assert) {
   const serializer = this.subject();
   const modelInstance = Unit.create({
     bigIdeas: 'Big ideas text',
@@ -27,7 +27,7 @@ skip('serializeCreateUnit', function(assert) {
   assert.deepEqual(modelObject, expected, 'Serializer response');
 });
 
-skip('serializeUpdateUnit', function(assert) {
+test('serializeUpdateUnit', function(assert) {
   const serializer = this.subject();
   const modelInstance = Unit.create({
     bigIdeas: 'Big ideas text',
@@ -115,7 +115,7 @@ test('normalizeUnit', function(assert) {
   assert.deepEqual(result, expected, 'Serialized response');
 });
 
-skip('serializeReorderUnit', function(assert) {
+test('serializeReorderUnit', function(assert) {
   const serializer = this.subject();
   const ids = ['a', 'b', 'c'];
   const data = serializer.serializeReorderUnit(ids);

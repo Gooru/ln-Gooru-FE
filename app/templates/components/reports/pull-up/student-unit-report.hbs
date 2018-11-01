@@ -70,11 +70,11 @@
         </div>
       </div>
 
-      {{#each lessons as |lesson|}}
+      {{#each lessons as |lesson index|}}
         <div class="report-performance-list">
           <div class="content-name {{unless lesson.performance.hasStarted 'not-started'}}" {{action 'openLessonReport' lesson lessons}}>
             <i class="lesson-icon"></i>
-            <span>Lesson {{lesson.ui_sequence}} : {{lesson.title}}</span>
+            <span>Lesson {{plus-one index}} : {{lesson.title}}</span>
           </div>
           <div class="score">
             {{#if lesson.performance.hasStarted}}
