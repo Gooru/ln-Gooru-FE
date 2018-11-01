@@ -1,6 +1,87 @@
 .user-proficiency {
   display: flex;
 
+  .taxonomy-info {
+    display: none;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    margin: 15px 0;
+    .label {
+      font-size: 17px;
+      font-weight: bold;
+      color: $charcoal-grey;
+      padding: 0;
+      text-align: left;
+      margin-right: 10px;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      width: max-content;
+      border-bottom: 1px solid;
+
+      .active-item {
+        display: flex;
+        cursor: pointer;
+        height: 25px;
+
+        .label {
+          font-size: 17px;
+          font-weight: bold;
+          color: $charcoal-grey;
+          padding: 0;
+          text-align: left;
+        }
+
+        .icon {
+          font-size: 17px;
+          font-weight: bold;
+          color: $charcoal-grey;
+        }
+
+        &.active-subject {
+          .label {
+            min-width: 0;
+          }
+
+          .icon {
+            i {
+              line-height: 0;
+            }
+          }
+        }
+      }
+    }
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: $white;
+      min-width: 187px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      max-height: 150px;
+      overflow-y: auto;
+      z-index: 1;
+      border-top: 1px solid;
+
+      .list-item {
+        height: 30px;
+        line-height: 30px;
+        padding-left: 15px;
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+          background-color: $light-200;
+        }
+      }
+    }
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  }
+
   .gru-pull-out {
     top: 63px;
     height: calc(100vh - 63px);
@@ -181,5 +262,16 @@
     position: absolute;
     left: 40%;
     z-index: 999;
+  }
+
+  @media screen and (min-width: $screen-in-1024) and (max-width: $screen-lg) {
+    display: grid;
+    justify-content: center;
+    > .taxonomy-info:first-child {
+      display: grid;
+    }
+    .panel.right-panel {
+      display: none;
+    }
   }
 }
