@@ -1,0 +1,44 @@
+@media screen and (max-width: $screen-568) {
+  .controller {
+    .content {
+      .controller {
+            width: 100vw;
+        .assessments {
+            display: grid;
+            justify-content: center;
+            padding-left: 0;
+      }
+    }
+  }
+}
+}
+@media screen and (min-width: $screen-sm) {
+  .controller {
+    .content {
+      .controller {
+        .assessments {
+          grid-template-columns: auto auto auto !important;
+      }
+    }
+  }
+}
+}
+@media (orientation: landscape) {
+  .controller {
+  .content {
+      .controller {
+        width: 100vw;
+        .assessments {
+          width: 100%;
+          display: grid;
+          grid-template-columns: auto auto;
+          justify-content: center;
+          padding-left: 0;
+          &:before {
+              display: none;
+        }
+      }
+    }
+  }
+}
+}
