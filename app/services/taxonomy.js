@@ -28,9 +28,9 @@ export default Ember.Service.extend({
   taxonomyContainer: null,
 
   /**
-  * @property {Object} taxonomySubjectContainer
-  * An object to store taxonomy subjects which is fetched from the ds-user API
-  */
+   * @property {Object} taxonomySubjectContainer
+   * An object to store taxonomy subjects which is fetched from the ds-user API
+   */
   taxonomySubjectContainer: null,
 
   init() {
@@ -359,6 +359,7 @@ export default Ember.Service.extend({
         let grandparent = secondLevelParents.findBy('id', parentId);
 
         if (grandparent) {
+          grandparent.set('hasMicroStandard', true);
           // Use a "fake" parent to close any gaps in the hierarchy
           parent = TaxonomyItem.create({
             id: `empty-${parentId}`,
