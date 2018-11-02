@@ -1,3 +1,6 @@
+.controller.profile>.content .panel.add-content {
+  width: 100%;
+}
 .profile {
 	.profile-content {
 		.content-navigation {
@@ -264,6 +267,11 @@
 			.profile-content.content-navigation {
 				margin-left: -14px;
 				height: 55px;
+				.category-menu {
+					.category-options li.rubrics a {
+							line-height: 26px;
+					}
+				}
 				.nav_dropdown {
 					display: none !important;
 				}
@@ -287,8 +295,13 @@
 			.category-menu {
 				width: auto;
 				margin-left: 5px;
-				.category-options li.rubrics {
-					margin-top: 1px;
+				.category-options {
+				li.rubrics {
+				margin-top: 1px;
+					a {
+					    line-height: 26px;
+						}
+					}
 				}
 			}
 			.profile-navigation {
