@@ -11,11 +11,19 @@
         }
 
         .atc-chart {
-          @media only screen and(max-width: $screen-md) {
-            zoom: 0.7;
-          }
+          display: grid;
+          justify-content: center;
+          zoom: 0.7;
           @media only screen and(max-width: $screen-sm) {
-            zoom: 0.5;
+            zoom: 0.69;
+          }
+
+          @media only screen and (max-width: $screen-xs) {
+            zoom: 0.6;
+          }
+
+          @media only screen and (max-width: $screen-359 + 1) {
+            zoom: 0.59;
           }
         }
       }
