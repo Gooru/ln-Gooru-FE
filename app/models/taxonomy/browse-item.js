@@ -135,7 +135,8 @@ BrowseItem.reopenClass({
           'code',
           'title',
           'description',
-          'level'
+          'level',
+          'hasMicroStandard'
         ]),
         { parent: parent }
       );
