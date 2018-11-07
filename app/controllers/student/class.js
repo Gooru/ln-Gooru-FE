@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import { getBarGradeColor } from 'gooru-web/utils/utils';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
   session: Ember.inject.service('session'),
@@ -120,6 +121,7 @@ export default Ember.Controller.extend({
    */
   isShowNavigatorLanding: Ember.computed('class.currentLocation', function() {
     let controller = this;
+    const configuration = controller.get('configurationService.configuration');
     let classData = controller.get('class');
     let currentLocation = classData.get('currentLocation') || null;
     let setting = classData.get('setting');
@@ -127,7 +129,8 @@ export default Ember.Controller.extend({
       ? setting['course.premium'] && setting['course.premium'] === true
       : false;
     let isGradeAdded = classData.get('grade');
-    return isPremiumCourse && !currentLocation && isGradeAdded;
+    let isDemoClass = configuration.get('demoClass.code') === classData.code;
+    return (isPremiumCourse && !currentLocation && isGradeAdded) || isDemoClass;
   }),
 
   /**
