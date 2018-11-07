@@ -75,17 +75,6 @@ export default Ember.Component.extend({
       trigger: 'hover'
     });
   },
-  // -------------------------------------------------------------------------
-  // Events
-
-  init: function() {
-    let controller = this;
-    controller._super(...arguments);
-    // const configuration = controller.get('configurationService.configuration');
-    // let isDemoClass =
-    //   configuration.get('demoClass.code') === controller.get('class.code');
-    // controller.set('isDemoClass', isDemoClass);
-  },
 
   // -------------------------------------------------------------------------
   // Properties
