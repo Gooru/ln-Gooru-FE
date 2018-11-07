@@ -3,11 +3,11 @@
 
   <div class="student-left-panel">
     {{#unless (gt loginCount 5)}}
-     <div class="greetings">
+      <div class="greetings">
         <div class="featured-courses pull-right">
           <span>{{t 'student-landing.browse-our'}} {{#link-to 'library'}}{{t 'student-landing.featured-courses'}}{{/link-to}}</span>
         </div>
-     </div>
+      </div>
 
       {{gru-student-featured-courses
         courses=featuredCourses
@@ -43,6 +43,7 @@
             class=class
             course=class.course
             onPlayCollection='studyPlayer'
+            demoClass= demoClass
             onItemSelected='selectMenuItem'
             }}
         {{/each}}

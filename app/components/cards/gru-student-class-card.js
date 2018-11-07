@@ -1,8 +1,7 @@
 import Ember from 'ember';
 import { getBarGradeColor } from 'gooru-web/utils/utils';
-import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
-export default Ember.Component.extend(ConfigurationMixin, {
+export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -82,10 +81,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
   init: function() {
     let controller = this;
     controller._super(...arguments);
-    const configuration = controller.get('configurationService.configuration');
-    let isDemoClass =
-      configuration.get('demoClass.code') === controller.get('class.code');
-    controller.set('isDemoClass', isDemoClass);
+    // const configuration = controller.get('configurationService.configuration');
+    // let isDemoClass =
+    //   configuration.get('demoClass.code') === controller.get('class.code');
+    // controller.set('isDemoClass', isDemoClass);
   },
 
   // -------------------------------------------------------------------------
@@ -100,7 +99,14 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   course: null,
 
-  isDemoClass: false,
+  /**
+   * @property {boolean}
+   * Computed property to identify class is demo class or not
+   */
+  isDemoClass: Ember.computed('demoClass', function() {
+    let controller = this;
+    return controller.get('demoClass.code') === controller.get('class.code');
+  }),
 
   /**
    * @property {boolean} Show or not the current location

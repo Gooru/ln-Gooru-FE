@@ -96,6 +96,7 @@ export default Ember.Controller.extend(ConfigurationMixin, {
       }
     ];
   }),
+
   performancePercentage: Ember.computed('barChartData', function() {
     let data = this.get('barChartData').objectAt(0);
     return data.percentage.toFixed(0);
@@ -116,22 +117,29 @@ export default Ember.Controller.extend(ConfigurationMixin, {
     return scorePercentage !== null && scorePercentage >= 0;
   }),
 
+  demoClass: Ember.computed.alias('configuration.demoClass'),
+
   /**
    * @property {Boolean} isShowNavigatorLanding
    */
-  isShowNavigatorLanding: Ember.computed('class.currentLocation', function() {
-    let controller = this;
-    const configuration = controller.get('configurationService.configuration');
-    let classData = controller.get('class');
-    let currentLocation = classData.get('currentLocation') || null;
-    let setting = classData.get('setting');
-    let isPremiumCourse = setting
-      ? setting['course.premium'] && setting['course.premium'] === true
-      : false;
-    let isGradeAdded = classData.get('grade');
-    let isDemoClass = configuration.get('demoClass.code') === classData.code;
-    return (isPremiumCourse && !currentLocation && isGradeAdded) || isDemoClass;
-  }),
+  isShowNavigatorLanding: Ember.computed(
+    'class.currentLocation',
+    'demoClass',
+    function() {
+      let controller = this;
+      let classData = controller.get('class');
+      let currentLocation = classData.get('currentLocation') || null;
+      let setting = classData.get('setting');
+      let isPremiumCourse = setting
+        ? setting['course.premium'] && setting['course.premium'] === true
+        : false;
+      let isGradeAdded = classData.get('grade');
+      let isDemoClass = controller.get('demoClass.code') === classData.code;
+      return (
+        (isPremiumCourse && !currentLocation && isGradeAdded) || isDemoClass
+      );
+    }
+  ),
 
   /**
    * Property to identify when there is no content to play
