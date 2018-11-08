@@ -4,7 +4,6 @@
   */
 @import "variables";
 @import "quizzes-rwd";
-
 // Components
 @import "app-rwd/components/proficiency/learner-proficiency-domain-matrix";
 @import "app-rwd/components/class/overview/routesuggestion-preview";
@@ -14,7 +13,6 @@
 @import "app-rwd/components/player/_gru-external-assessment-footer";
 @import "app-rwd/components/student/class/student-class-landing";
 @import "app-rwd/components/player/_gru-player-summary-footer-rwd";
-
 //Controllers
 @import "app-rwd/controllers/student/class-rwd";
 @import "app-rwd/controllers/student/class/profile";
@@ -30,11 +28,13 @@
 @import "app-rwd/controllers/reports/_student-collection-analytics-rwd";
 @import "app-rwd/controllers/profile/_content-rwd.scss";
 @import "app-rwd/controllers/profile/proficiency";
-@import "app-rwd/controllers/profile/network/_following.scss";
-@import "app-rwd/controllers/profile/network/_followers.scss";
-@import "app-rwd/controllers/profile/content/_resources.scss";
-@import "app-rwd/controllers/profile/content/_questions.scss";
-@import "app-rwd/controllers/profile/content/_rubrics.scss";
-@import "app-rwd/controllers/profile/content/_assessments.scss";
-@import "app-rwd/controllers/profile/content/_collections.scss";
+@import "app-rwd/controllers/profile/network/_following";
+@import "app-rwd/controllers/profile/network/_followers";
+@import "app-rwd/controllers/profile/content/_resources";
+@import "app-rwd/controllers/profile/content/_questions";
+@import "app-rwd/controllers/profile/content/_rubrics";
+@import "app-rwd/controllers/profile/content/_assessments";
+@import "app-rwd/controllers/profile/content/_collections";
 @import "app-rwd/controllers/profile/content/courses";
+@import "app-rwd/controllers/teacher/class/_class-activities-rwd";
+@import "app-rwd/controllers/teacher/class/_gru-class-activity-panel-rwd";
