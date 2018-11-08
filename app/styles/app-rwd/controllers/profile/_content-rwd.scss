@@ -22,8 +22,43 @@
 			}
 		}
 	}
+  .content-navigation
+  {
+    .nav_dropdown {
+  		.dropdown-menu {
+  			li.active,
+  			li {
+  				display: none;
+  			}
+  		}
+  	}
+  	.open {
+  		.dropdown-menu {
+  			li.active,
+  			li {
+  				display: unset !important;
+  			}
+  		}
+  	}
+  }
 	.gru-navigation-tabs {
 		width: 100% !important;
+    .nav_dropdown {
+  		.dropdown-menu {
+  			li.active,
+  			li {
+  				display: none;
+  			}
+  		}
+  	}
+  	.open {
+  		.dropdown-menu {
+  			li.active,
+  			li {
+  				display: unset !important;
+  			}
+  		}
+  	}
 		.nav_dropdown {
 			display: unset !important;
 		}

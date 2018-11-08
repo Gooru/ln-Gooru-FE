@@ -2,17 +2,11 @@
 	.side-panel {
 		display: none;
 	}
-}
-
-.partner-library {
 	.nav_dropdown {
 		.dropbtn {
 			display: unset;
 		}
 	}
-}
-
-.partner-library {
 	.nav_dropdown {
 		.dropdown-menu {
 			li.active,
@@ -29,9 +23,6 @@
 			}
 		}
 	}
-}
-
-.partner-library {
 	.partner-library-content {
 		display: none;
 	}
@@ -63,7 +54,7 @@
 }
 
 .partner-library {
-	@media screen and (min-width: 568px) {
+	@media screen and (min-width: $screen-568) {
 		.partner-library-content {
 			.category-options {
 				margin-bottom: 25px;
@@ -78,7 +69,7 @@
 			grid-template-columns: auto auto;
 		}
 	}
-	@media screen and (min-width: 800px) {
+	@media screen and (min-width: $screen-800) {
 		.controller.content-resources .resources {
 			grid-template-columns: auto auto auto;
 		}
