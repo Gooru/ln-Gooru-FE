@@ -4,7 +4,7 @@
 	}
 	.nav_dropdown {
 		.dropbtn {
-			display: unset;
+			display: block;
 		}
 	}
 	.nav_dropdown {
@@ -19,7 +19,7 @@
 		.dropdown-menu {
 			li.active,
 			li {
-				display: unset !important;
+				display: block !important;
 			}
 		}
 	}
@@ -100,7 +100,7 @@
 	.gru-navigation-tabs {
 		width: 100% !important;
 		.nav_dropdown {
-			display: unset !important;
+			display: block !important;
 		}
 		.profile-navigation {
 			width: 100%;
@@ -222,7 +222,7 @@
 		font-size: 16px;
 		border: none;
 		margin-top: 25px;
-		display: unset !important;
+		display: block !important;
 	}
 	.nav_dropdown {
 		margin: 0 auto;
