@@ -1,4 +1,5 @@
-.controller.profile-courses {
+.profile {
+  .controller.profile-courses {
   .course-content {
     padding-left: 0;
     display: grid;
@@ -8,4 +9,5 @@
       grid-template-columns: auto;
     }
   }
+}
 }

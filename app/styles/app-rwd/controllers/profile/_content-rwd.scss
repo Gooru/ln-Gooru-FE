@@ -22,10 +22,45 @@
 			}
 		}
 	}
+  .content-navigation
+  {
+    .nav_dropdown {
+  		.dropdown-menu {
+  			li.active,
+  			li {
+  				display: none;
+  			}
+  		}
+  	}
+  	.open {
+  		.dropdown-menu {
+  			li.active,
+  			li {
+  				display: block !important;
+  			}
+  		}
+  	}
+  }
 	.gru-navigation-tabs {
 		width: 100% !important;
+    .nav_dropdown {
+  		.dropdown-menu {
+  			li.active,
+  			li {
+  				display: none;
+  			}
+  		}
+  	}
+  	.open {
+  		.dropdown-menu {
+  			li.active,
+  			li {
+  				display: block !important;
+  			}
+  		}
+  	}
 		.nav_dropdown {
-			display: unset !important;
+			display: block !important;
 		}
 		.profile-navigation {
 			width: 100%;
@@ -138,7 +173,7 @@
 		font-size: 16px;
 		border: none;
 		margin-top: 8px;
-		display: unset !important;
+		display: block !important;
 	}
 	.nav_dropdown {
 		margin: 0 auto;
@@ -206,6 +241,16 @@
 	}
 	@media (min-width: 640px) {
 		.profile {
+      .content {
+        .search-bar {
+          width: 75%;
+        }
+        .container-fluid {
+          .sort-buttons {
+            display: block !important;
+          }
+        }
+      }
 			.profile-content {
 				.content-navigation {
 					.category-menu {
@@ -259,7 +304,7 @@
 			.gru-navigation-tabs {
 				.profile-navigation {
 					.category-menu {
-						display: unset !important;
+						display: block !important;
 						margin-bottom: 21px;
 					}
 				}
@@ -276,13 +321,23 @@
 					display: none !important;
 				}
 				.category-menu {
-					display: unset !important;
+					display: block !important;
 				}
 			}
 		}
 	}
 	@media (min-width: $screen-568) and (max-width: $modal-md) {
 		.profile {
+      .content {
+        .search-bar {
+          width: 72%;
+        }
+        .container-fluid {
+          .sort-buttons {
+            display: block !important;
+          }
+        }
+      }
 			.profile-content {
 				.content-navigation {
 					.category-menu {
@@ -342,7 +397,7 @@
 				width: 3%;
 				.profile-navigation {
 					.category-menu {
-						display: unset !important;
+						display: block !important;
 						margin-bottom: 25px;
 					}
 				}
@@ -355,7 +410,7 @@
 					display: none !important;
 				}
 				.category-menu {
-					display: unset !important;
+					display: block !important;
 				}
 			}
 		}
