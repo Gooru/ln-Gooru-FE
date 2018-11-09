@@ -1,0 +1,35 @@
+.gru-class-activity-panel {
+  @media screen and (max-width: $screen-600) {
+    .dca-panel-container {
+      grid-template-columns: 1fr max-content;
+
+      .dca-panel-info {
+        grid-template-columns: 25px 1fr;
+
+        .assessment-icon,
+        .collection-icon {
+          background-size: 15px 25px;
+        }
+      }
+
+      .dca-content-counts {
+        display: none;
+      }
+
+      .dca-panel-actions-performance {
+        grid-template-columns: max-content 55px;
+
+        .dca-panel-actions {
+          grid-template-columns: 20px 20px 25px 35px 20px;
+          padding-left: 0;
+          padding-right: 0;
+
+          .dca-add {
+            visibility: visible;
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
