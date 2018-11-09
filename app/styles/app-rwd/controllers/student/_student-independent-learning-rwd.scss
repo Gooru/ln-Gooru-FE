@@ -20,14 +20,14 @@
         .collection-content,
         .course-content {
           .content-results.not-expanded {
-            height: 1150px;
+            max-height: 1150px;
           }
         }
       }
 
       .bookmark-content {
         .content-results.not-expanded {
-          height: 1000px;
+          max-height: 1000px;
         }
       }
     }
@@ -42,14 +42,14 @@
         .collection-content,
         .course-content {
           .content-results.not-expanded {
-            height: 575px;
+            max-height: 575px;
           }
         }
       }
 
       .bookmark-content {
         .content-results.not-expanded {
-          height: 495px;
+          max-height: 495px;
         }
       }
     }

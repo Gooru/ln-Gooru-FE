@@ -67,13 +67,13 @@
 
       .content-results {
         &.not-expanded {
-          height: 288px;
+          max-height: 288px;
           overflow: hidden;
         }
 
         &.expanded {
           overflow-y: auto;
-          height: 620px;
+          max-height: 620px;
         }
 
         .show-more-results {
@@ -86,7 +86,7 @@
           font-size: 19.5px;
           color: $gray;
           text-align: center;
-          margin-top: 12%;
+          padding: 15px;
           font-weight: 300;
         }
       }

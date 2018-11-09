@@ -4,7 +4,6 @@
   */
 @import "variables";
 @import "quizzes-rwd";
-
 // Components
 @import "app-rwd/components/proficiency/learner-proficiency-domain-matrix";
 @import "app-rwd/components/class/overview/routesuggestion-preview";
@@ -14,7 +13,6 @@
 @import "app-rwd/components/player/_gru-external-assessment-footer";
 @import "app-rwd/components/student/class/student-class-landing";
 @import "app-rwd/components/player/_gru-player-summary-footer-rwd";
-
 //Controllers
 @import "app-rwd/controllers/student/class-rwd";
 @import "app-rwd/controllers/student/class/profile";
@@ -39,3 +37,8 @@
 @import "app-rwd/controllers/profile/content/_collections";
 @import "app-rwd/controllers/profile/content/courses";
 @import "app-rwd/controllers/partner-library/_content-rwd";
+@import "app-rwd/controllers/teacher/class/_class-activities-rwd";
+@import "app-rwd/controllers/teacher/class/_gru-class-activity-panel-rwd";
+@import "app-rwd/controllers/teacher/class/_search-content-pull-up";
+@import "app-rwd/controllers/teacher/class/teacher_class_class-activities-rwd";
+@import "app-rwd/controllers/teacher/class/_teacher-class-dca-course-map-pull-up-rwd";

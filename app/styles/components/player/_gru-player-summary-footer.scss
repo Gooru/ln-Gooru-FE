@@ -49,8 +49,13 @@
       float: $tab-float-dir;
       height: 50px;
 
+      .player-info {
+        display: flex;
+      }
+
       .resource-title {
-        width: 100%;
+        margin: auto;
+        width: 80%;
         height: 50px;
         text-align: center;
         font-size: 16px;
