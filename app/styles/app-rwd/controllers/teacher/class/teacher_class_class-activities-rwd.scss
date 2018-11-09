@@ -1,0 +1,42 @@
+.controller.teacher.class.class-activities {
+	.panel.welcome {
+		display: none;
+	}
+	.dca-panel-container {
+		.dca-panel-actions-performance {
+			.dca-panel-actions {
+				margin-left: 5px;
+				margin-right: 5px;
+				margin: 0 auto;
+			}
+		}
+	}
+	@media screen and (min-width: $screen-600 + 1) and (max-width: $screen-875) {
+		.dca-panel-container {
+			grid-template-columns: 50% 15% 35%;
+			.dca-panel-actions-performance {
+				grid-template-columns: 1fr max-content;
+				.dca-panel-performance {
+					width: 36px;
+				}
+				.dca-panel-actions {
+					grid-template-columns: 25px 25px 30px 35px 25px;
+				}
+			}
+		}
+		.dca-content-container {
+			.dca-content-list-container {
+				padding-right: 10px;
+				padding-left: 10px;
+			}
+		}
+	}
+	.dca-content-container {
+		.dca-content-list-container {
+			height: calc(100vh - 130px);
+		}
+		.dca-nav-to-todays-dca-list.active {
+			display: none;
+		}
+	}
+}
