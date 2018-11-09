@@ -1,5 +1,5 @@
 .teacher-class-dca-course-map-pull-up {
-	@media screen and (min-width: 568px) and (max-width: 600px) {
+	@media screen and (min-width: $screen-568) and (max-width: $screen-600) {
 		.dca-course-map-container {
 			.dca-course-map-unit-container {
 				.dca-course-map-unit {
