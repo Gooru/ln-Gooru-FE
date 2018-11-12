@@ -71,29 +71,10 @@ export default Ember.Component.extend({
 
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
-  // -------------------------------------------------------------------------
-  // Events
-
-  /*
-  init: function() {
-    const component = this;
-    component._super(...arguments);
-
-    const courseId = component.get('class.courseId');
-    if (courseId) {
-      component
-        .get('courseService')
-        .fetchByIdWithOutProfile(courseId)
-        .then(function(course) {
-          if (!component.isDestroyed) {
-            component.set('course', course);
-          }
-        });
-    }
-  },
-*/
 
   // -------------------------------------------------------------------------
   // Properties
@@ -106,6 +87,15 @@ export default Ember.Component.extend({
    * @property {Course} course information
    */
   course: null,
+
+  /**
+   * @property {boolean}
+   * Computed property to identify class is demo class or not
+   */
+  isDemoClass: Ember.computed('demoClass', function() {
+    let controller = this;
+    return controller.get('demoClass.code') === controller.get('class.code');
+  }),
 
   /**
    * @property {boolean} Show or not the current location
