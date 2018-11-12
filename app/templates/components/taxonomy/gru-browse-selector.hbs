@@ -13,8 +13,8 @@
             {{!-- domain picker only has 2 levels --}}
             {{#if (eq browseItem.level 2)}}
 
-            <li>
-              <label>
+              <li>
+                <label>
                 <input type="checkbox"
                        checked={{browseItem.isSelected}}
                        onclick={{action 'selectCheckableItem' browseItem}} />
@@ -22,7 +22,7 @@
                   <strong>{{browseItem.title}}</strong>
                 </div>
               </label>
-            </li>
+              </li>
 
             {{else}}
 
@@ -34,9 +34,11 @@
                 {{#each browseItem.children as |L1Standard|}}
                   <div class="standard">
                     <label>
+                      {{#if (or (not L1Standard.children) (and L1Standard.children  L1Standard.hasMicroStandard))}}
                       <input type="checkbox"
                              checked={{L1Standard.isSelected}}
                              onclick={{action 'selectCheckableItem' L1Standard}} />
+                      {{/if}}
                       <div>
                         <strong>{{L1Standard.code}}</strong>
                         <span>{{L1Standard.title}}</span>
@@ -65,9 +67,7 @@
                               </label>
 
                               {{#if L2Standard.children.length}}
-                                <button data-toggle="collapse"
-                                        class="collapsed"
-                                        data-target="#{{L2Standard.accordionId}}">
+                                <button data-toggle="collapse" class="collapsed" data-target="#{{L2Standard.accordionId}}">
                                   {{gru-icon name='keyboard_arrow_up'}}
                                   {{gru-icon name='keyboard_arrow_down'}}
                                 </button>
