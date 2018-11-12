@@ -1,0 +1,69 @@
+<ul class='timeline'>
+    {{ log 'timeData' timeData }}
+    <div class='leftDate'>{{ timeLineLeftDate.mon  }} <span>'</span>{{ timeLineLeftDate.year  }}</div>
+    <li {{action 'scrollLeft'  }}> <span class='badge timeSession-icon'>...</span></li>
+    <li class='divider'></li>
+    {{#each timeData as |timeSession|}}
+        <li {{action 'showCard' timeSession }} class='line-{{timeSession.sessionId}}' data-content="{{timeSession.sessionId}}, {{timeSession.title}}">
+            <span class='badge timeSession-icon'>
+                {{#if (eq timeSession.collectionType 'assessment')}}
+                    {{gru-icon name='grucount'  }}
+                {{else}}
+                    {{gru-icon name='view_comfy'  }}
+                {{/if}}
+            </span>
+            {{!-- {{timeSession.collectionType}}  {{timeSession.collectionId}} --}}
+        </li>
+        <li class='divider'></li>
+    {{/each}}
+    <li class='lasttime' {{action 'scrollRight'  }}> <span class='badge timeSession-icon'>...</span></li>
+    <div class='rightDate'>{{ timeLineRightDate.mon  }} <span>'</span>{{ timeLineRightDate.year  }}</div>
+    <div class=" perf-container suggest-performance">
+        <div class="performance " style="background-color:{{if performanceSummary (grade-color performanceSummary.score) defaultBarColor}}">
+            <span class="score">
+                {{#if performanceSummary}}
+                    {{#if performanceSummary.score}}
+                        {{performanceSummary.score}}%
+                    {{else}}
+                        0%
+                    {{/if}}
+                {{else}}
+                    --
+                {{/if}}
+            </span>
+            <span class="label">{{t 'teacher-landing.class.performance'}} </span>
+        </div>
+    </div>
+</ul>
+<ul class='cards-display'>
+
+    {{#each displayCards.dummyleft as |card index|}}
+        <li class="dummy-timecard-left"  style='transform :scale({{card.scale}}); Z-INDEX: {{ card.zIndex}}' >
+                {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask-mid'}}            
+        </li>
+    {{/each}}
+
+    {{#each displayCards.left as |card|}}
+        <li style='transform :scale({{card.scale}});Z-INDEX: {{card.zIndex}}'>
+            {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask-mid cardmask-mid-data-left'}}
+        </li>
+    {{/each}}
+    {{#each displayCards.center as |card|}}
+        <li>
+            <div class='selecthighlight'></div>
+            {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask'}}
+        </li>
+    {{/each}}
+    {{#each displayCards.right as |card|}}
+        <li style='transform :scale({{card.scale}});Z-INDEX:{{card.zIndex}};' >
+            {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask-mid cardmask-mid-data-right'}}
+        </li>
+    {{/each}}
+    
+    
+    {{#each displayCards.dummyright as |card index|}}
+        <li class="dummy-timecard-right" style='transform :scale({{card.scale}});Z-INDEX:{{card.zIndex}};'>
+                {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask-mid'}}
+        </li>
+    {{/each}}
+</ul>

@@ -86,6 +86,9 @@ export default PlayerController.extend({
 
     loadPreTest: () => {
       return true;
+    },
+    updateModel(option) {
+      this.send('updateModelM', option);
     }
   },
 

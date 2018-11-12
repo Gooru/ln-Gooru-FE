@@ -26,7 +26,10 @@
     "wysihtml5ParserRules": false
   },
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
   },
   "rules": {
     "comma-dangle": "error",
@@ -72,6 +75,8 @@
     "semi": [
       "error",
       "always"
-    ]
+    ] ,
+    "no-unused-vars" : ["error", {
+      "ignoreRestSiblings": true}]
   }
 }
