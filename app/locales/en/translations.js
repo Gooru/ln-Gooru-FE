@@ -2708,7 +2708,12 @@ export default Object.assign(quizzesTranslations, {
     },
     'competency-report': {
       title: 'Competency Report',
-      'no-subject': 'No Subject Assigned'
+      'no-subject': 'No Subject Assigned',
+      prerequisites: 'prerequisites',
+      'signature-assessments': 'Signature Assessments',
+      'signature-collections': 'Signature Collections',
+      'show-global-data': 'Show Global Data',
+      'show-student-data': 'Show Student Data'
     },
     'domain-report': 'Domain Report'
   },

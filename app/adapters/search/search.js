@@ -238,6 +238,30 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * Fetches learningMapsCompetencyContent
+   *
+   * @param gutCode the term to search
+   * @returns {Promise.<Content[]>}
+   */
+  fetchLearningMapsCompetencyContent(gutCode, filters) {
+    const adapter = this;
+    const namespace = this.get('pedagogySearch');
+    const url = `${namespace}/learning-maps/competency/${gutCode}`;
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: filters
+    };
+    if (filters.fwCode) {
+      options.data.fwCode = filters.fwCode;
+      options.data.isDisplayCode = false;
+    }
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

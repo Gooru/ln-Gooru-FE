@@ -489,6 +489,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     let questionData = [];
     let unitData = [];
     let lessonData = [];
+    let rubricData = [];
 
     if (contents.assessment) {
       contents.assessment.searchResults.map(assessment => {
@@ -497,6 +498,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
         assessmentInfo.description = assessment.learningObjective;
         assessmentInfo.creator = serializer.normalizeOwner(assessment.creator);
         assessmentInfo.owner = serializer.normalizeOwner(assessment.user);
+        assessmentInfo.efficacy = assessment.efficacy;
+        assessmentInfo.engagement = assessment.engagement;
+        assessmentInfo.relevance = assessment.relevance;
         assessmentInfo.standards = serializer
           .get('taxonomySerializer')
           .normalizeLearningMapsTaxonomyArray(
@@ -514,6 +518,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
         collectionInfo.description = collection.learningObjective;
         collectionInfo.creator = serializer.normalizeOwner(collection.creator);
         collectionInfo.owner = serializer.normalizeOwner(collection.user);
+        collectionInfo.efficacy = collection.efficacy;
+        collectionInfo.engagement = collection.engagement;
+        collectionInfo.relevance = collection.relevance;
         collectionInfo.standards = serializer
           .get('taxonomySerializer')
           .normalizeLearningMapsTaxonomyArray(
@@ -535,6 +542,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
         courseInfo.owner = course.owner
           ? serializer.normalizeOwner(course.owner)
           : {};
+        courseInfo.efficacy = course.efficacy;
+        courseInfo.engagement = course.engagement;
+        courseInfo.relevance = course.relevance;
         courseInfo.standards = serializer
           .get('taxonomySerializer')
           .normalizeLearningMapsTaxonomyArray(
@@ -573,6 +583,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
         questionInfo.description = question.description;
         questionInfo.creator = serializer.normalizeOwner(question.creator);
         questionInfo.owner = serializer.normalizeOwner(question.user);
+        questionInfo.efficacy = question.efficacy;
+        questionInfo.engagement = question.engagement;
+        questionInfo.relevance = question.relevance;
         questionInfo.standards = serializer
           .get('taxonomySerializer')
           .normalizeLearningMapsTaxonomyArray(
@@ -632,6 +645,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     serializedContentData.question = questionData;
     serializedContentData.unit = unitData;
     serializedContentData.lesson = lessonData;
+    serializedContentData.rubric = rubricData;
     return serializedContentData;
   }
 });

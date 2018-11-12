@@ -7,6 +7,20 @@ export default Ember.Component.extend({
   classNames: ['competency-content-info'],
 
   // -------------------------------------------------------------------------
+  // Events
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
+
+  actions: {
+    onSelectActivityContent(contentType) {
+      let component = this;
+      component.sendAction('onSelectActivityContent', contentType);
+    }
+  },
+
+  // -------------------------------------------------------------------------
   // Properties
 
   /**
@@ -30,7 +44,7 @@ export default Ember.Component.extend({
       },
       {
         type: 'rubric',
-        count: competencyContents.unit.totalHitCount || 0
+        count: competencyContents.rubric.totalHitCount || 0
       },
       {
         type: 'assessment',

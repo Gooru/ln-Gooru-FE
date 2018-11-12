@@ -211,5 +211,46 @@ export default Ember.Service.extend({
           );
       }
     });
+  },
+
+  fetchLearningMapsCompetencyContent(gutCode, filters) {
+    const service = this;
+    let start = filters.startAt || 0;
+    let competencyContentContainer = service.get('competencyContentContainer');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      let isCompetencyContentAvailable = competencyContentContainer[
+        `${gutCode}`
+      ]
+        ? competencyContentContainer[`${gutCode}`][start] || null
+        : null;
+      if (isCompetencyContentAvailable) {
+        resolve(competencyContentContainer[`${gutCode}`][start]);
+      } else {
+        service
+          .get('searchAdapter')
+          .fetchLearningMapsCompetencyContent(gutCode, filters)
+          .then(
+            function(response) {
+              let normalizedCompetencyContent = service
+                .get('searchSerializer')
+                .normalizeLearningMapsContent(response);
+              let fetchedCompetencyContent =
+                competencyContentContainer[`${gutCode}`] || [];
+              fetchedCompetencyContent[start] = normalizedCompetencyContent;
+              competencyContentContainer[
+                `${gutCode}`
+              ] = fetchedCompetencyContent;
+              service.set(
+                'competencyContentContainer',
+                competencyContentContainer
+              );
+              resolve(normalizedCompetencyContent);
+            },
+            function(error) {
+              reject(error);
+            }
+          );
+      }
+    });
   }
 });

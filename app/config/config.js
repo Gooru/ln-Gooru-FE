@@ -364,3 +364,5 @@ export const NOTIFICATION_SETTINGS = {
   polling_interval: 30000,
   page_size: 5
 };
+
+export const PLAYER_WINDOW_NAME = 'rgo_player';

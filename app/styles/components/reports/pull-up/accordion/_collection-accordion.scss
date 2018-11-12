@@ -1,5 +1,6 @@
 .collection-accordion {
   .collection-content {
+    margin-left: 15px;
     .collection-header {
       margin-top: 15px;
       display: flex;
@@ -16,7 +17,7 @@
       .collection {
         margin: 7px 15px 0 0;
         i {
-          background: url("gooru/images/collection-gray.svg");
+          background: url("gooru/images/collection_gray.svg");
           width: 20px;
           height: 15px;
           object-fit: contain;
@@ -33,7 +34,7 @@
             display: flex;
             width: 100%;
           }
-          
+
           width: 77%;
           font-size: 15px;
           color: $dark-800;
