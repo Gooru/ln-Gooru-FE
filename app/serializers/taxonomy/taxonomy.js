@@ -307,5 +307,40 @@ export default Ember.Object.extend({
       normalizedGrades = payload.grades;
     }
     return normalizedGrades;
+  },
+
+  /**
+   * Normalize the learning maps taxonomy array
+   *
+   * @param taxonomyArray - array of taxonomy objects
+   * @param {string} level
+   * @returns {TaxonomyTagData[]} a TaxonomyTagData array
+   */
+  normalizeLearningMapsTaxonomyArray: function(taxonomyObject, level) {
+    var taxonomyData = [];
+    if (taxonomyObject) {
+      Object.keys(taxonomyObject).forEach(function(internalCode) {
+        let isMicroStandard = TaxonomyTagData.isMicroStandardId(
+          taxonomyObject.internalCode
+        );
+        let taxonomyInfo = taxonomyObject[internalCode];
+
+        taxonomyData.push(
+          TaxonomyTagData.create({
+            id: internalCode,
+            code: taxonomyInfo.code,
+            title: taxonomyInfo.title,
+            parentTitle: taxonomyInfo.parentTitle,
+            frameworkCode: taxonomyInfo.frameworkCode,
+            taxonomyLevel: level
+              ? level
+              : isMicroStandard
+                ? TAXONOMY_LEVELS.MICRO
+                : TAXONOMY_LEVELS.STANDARD
+          })
+        );
+      });
+    }
+    return Ember.A(taxonomyData);
   }
 });

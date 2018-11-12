@@ -1,10 +1,9 @@
 import Ember from 'ember';
-import { COMPETENCY_STATUS } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
-  classNames: ['competency-report-pull-up'],
+  classNames: ['activity-list-pull-up'],
 
   // -------------------------------------------------------------------------
   // Events
@@ -22,6 +21,14 @@ export default Ember.Component.extend({
     onClosePullUp(closeAll) {
       let component = this;
       component.closePullUp(closeAll);
+    },
+
+    /**
+     * Action triggered when click show more activity
+     */
+    onClickShowMoreActivity() {
+      let component = this;
+      component.sendAction('onClickShowMoreActivity');
     }
   },
 
@@ -35,33 +42,18 @@ export default Ember.Component.extend({
   showPullUp: false,
 
   /**
-   * @property {title}
-   * Property to store pull up title
-   */
-  title: '',
-
-  /**
-   * @property {type}
-   * Property to store pull up type
+   * @property {String} type
    */
   type: '',
 
   /**
-   * @property {String} competencyStatus
+   * @property {Boolean} isShowMoveVisible
    */
-  competencyStatus: Ember.computed('competency', function() {
+  isShowMoveVisible: Ember.computed('activityContents', function() {
     let component = this;
-    let competency = component.get('competency');
-    return COMPETENCY_STATUS[competency.status];
-  }),
-
-  /**
-   * @property {Boolean} isBadgedCompetency
-   */
-  isBadgedCompetency: Ember.computed('competency', function() {
-    let component = this;
-    let competency = component.get('competency');
-    return competency.status === 5;
+    let activityTotalHitCount = component.get('activityTotalHitCount');
+    let numberOfActivityContents = component.get('activityContents.length');
+    return activityTotalHitCount > numberOfActivityContents;
   }),
 
   // -------------------------------------------------------------------------
@@ -79,15 +71,6 @@ export default Ember.Component.extend({
     );
   },
 
-  init() {
-    let component = this;
-    component._super(...arguments);
-    let title = component.get('title');
-    if (title && !title.string) {
-      component.set('title', title.replace(/\./g, ' | '));
-    }
-  },
-
   closePullUp(closeAll) {
     let component = this;
     component.$().animate(
@@ -97,6 +80,7 @@ export default Ember.Component.extend({
       400,
       function() {
         component.set('showPullUp', false);
+        component.sendAction('onResetPullUpData');
         if (closeAll) {
           component.sendAction('onClosePullUp');
         }
