@@ -23,7 +23,8 @@ module.exports = function(defaults) {
           app: '/assets/gooru-web.css',
           'themes/bergen': '/assets/themes/bergen/styles.css',
           goorultr: '/assets/goorultr.css',
-          goorurtl: '/assets/goorurtl.css'
+          goorurtl: '/assets/goorurtl.css',
+          apprwd: '/assets/gooru-rwd.css'
         }
       }
     },

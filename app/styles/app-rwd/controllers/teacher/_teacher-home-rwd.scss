@@ -1,0 +1,49 @@
+.container-fluid {
+  .teacher-landing {
+    margin-left: 0;
+
+    .teacher-panel {
+      width: 100%;
+
+      .teacher-navigator {
+        @media only screen and(max-width: $screen-md) {
+          margin-left: 10px;
+          margin-right: 10px;
+
+          &.atc-view {
+            margin: 0;
+          }
+
+          .nav {
+            li {
+              a {
+                .lead {
+                  font-size: 13.5px;
+                }
+              }
+            }
+          }
+
+          .atc-class-performance {
+            width: 50px;
+          }
+        }
+      }
+
+      .tab-content {
+        .tab-pane.active {
+          display: grid;
+          @media only screen and (min-width: $sm-width-max) and (max-width: $screen-md) {
+            grid-template-columns: auto auto;
+            justify-content: center;
+          }
+          @media only screen and (max-width: $sm-width-max) {
+            grid-template-rows: auto;
+            grid-template-columns: none;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}

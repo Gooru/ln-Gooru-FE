@@ -84,10 +84,6 @@
         margin: 10px 10px 0 0;
         color: $light-400;
         display: inline-block;
-        @media (max-width: $screen-lg-min) {
-          display: none;
-          visibility: hidden;
-        }
 
         span {
           vertical-align: middle;
@@ -499,10 +495,6 @@
             margin: 12px 10px 0 0;
             color: $light-400;
             display: inline-block;
-            @media (max-width: $screen-lg-min) {
-              display: none;
-              visibility: hidden;
-            }
 
             span {
               vertical-align: middle;

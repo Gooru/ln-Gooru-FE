@@ -4,7 +4,7 @@
     <div class="report-breadcrumb">
       <div class="unit-title">
         <i class="unit-icon"></i>
-        <p>{{t 'common.unit'}} {{unit.sequence}} : {{unit.title}}</p>
+        <p>{{t 'common.unit'}} {{unit.ui_sequence}} : {{unit.title}}</p>
       </div>
     </div>
     <div class="report-close-pullup" {{action 'onPullUpClose'}}>
@@ -69,11 +69,12 @@
           <span>{{t 'gru-performance-metrics.score'}}</span>
         </div>
       </div>
-      {{#each lessons as |lesson|}}
+
+      {{#each lessons as |lesson index|}}
         <div class="report-performance-list">
           <div class="content-name {{unless lesson.performance.hasStarted 'not-started'}}" {{action 'openLessonReport' lesson lessons}}>
             <i class="lesson-icon"></i>
-            <span>Lesson {{lesson.sequence}} : {{lesson.title}}</span>
+            <span>Lesson {{plus-one index}} : {{lesson.title}}</span>
           </div>
           <div class="score">
             {{#if lesson.performance.hasStarted}}

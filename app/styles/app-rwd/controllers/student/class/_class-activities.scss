@@ -1,0 +1,77 @@
+.controller.student.class.class-activities {
+  .collections {
+    .gru-student-class-activity-panel {
+      .panel-heading {
+        .info {
+          .play-btn {
+            width: 60px;
+          }
+        }
+      }
+    }
+
+    // Mobile and Tab potrait view
+    @media screen and (max-width: $screen-sm - 1) {
+      .gru-student-class-activity-panel {
+        height: auto;
+        .panel-heading {
+          display: grid;
+          grid-template-columns: 50px calc(100% - 250px) 200px;
+          .icon-container {
+            width: 50px;
+            img {
+              width: 50px;
+            }
+          }
+          .title-container {
+            width: 100%;
+            margin: 0;
+            line-height: 60px;
+            .title {
+              font-size: 16px;
+            }
+          }
+          .info {
+            display: grid;
+            grid-template-columns: 100px 50px 50px;
+            width: max-content;
+            .content-count {
+              width: 100px;
+              margin: 0;
+              line-height: 60px;
+              span i {
+                font-size: 23px;
+                margin: 0;
+              }
+            }
+            .play-btn {
+              width: 50px;
+              button {
+                margin: 0;
+                padding: 12px;
+                height: 60px;
+              }
+            }
+            .performance {
+              width: 50px;
+              padding: 0;
+              line-height: 60px;
+            }
+          }
+        }
+      }
+    }
+
+    // Custom media screen
+    @media screen and (max-width: $screen-359) {
+      .gru-student-class-activity-panel {
+        .panel-heading {
+          grid-template-columns: calc(100% - 200px) 200px;
+          .icon-container {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
