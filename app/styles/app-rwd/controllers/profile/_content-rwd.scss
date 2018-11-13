@@ -1,0 +1,418 @@
+.controller.profile>.content .panel.add-content {
+  width: 100%;
+}
+.profile {
+	.profile-content {
+		.content-navigation {
+			.category-menu {
+				.category-options {
+					padding: 0px 19px;
+					margin-top: 3px;
+				}
+			}
+		}
+	}
+	.profile-content {
+		.content-navigation {
+			.category-menu {
+				.category-options li {
+					margin: 0;
+					padding: 0px 6px;
+				}
+			}
+		}
+	}
+  .content-navigation
+  {
+    .nav_dropdown {
+  		.dropdown-menu {
+  			li.active,
+  			li {
+  				display: none;
+  			}
+  		}
+  	}
+  	.open {
+  		.dropdown-menu {
+  			li.active,
+  			li {
+  				display: block !important;
+  			}
+  		}
+  	}
+  }
+	.gru-navigation-tabs {
+		width: 100% !important;
+    .nav_dropdown {
+  		.dropdown-menu {
+  			li.active,
+  			li {
+  				display: none;
+  			}
+  		}
+  	}
+  	.open {
+  		.dropdown-menu {
+  			li.active,
+  			li {
+  				display: block !important;
+  			}
+  		}
+  	}
+		.nav_dropdown {
+			display: block !important;
+		}
+		.profile-navigation {
+			width: 100%;
+			margin: 0 auto;
+		}
+	}
+	.nav_dropdown {
+		.dropdown-menu>li>a {
+			font-weight: bold;
+			text-align: left;
+		}
+		.dropdown-menu {
+			padding: 0;
+			min-width: unset;
+			li i {
+				display: inline-block;
+				width: 20px;
+				height: 25px;
+				vertical-align: middle;
+				margin-right: 20px;
+				background-repeat: no-repeat;
+				background-position: center center;
+				background-size: contain;
+			}
+			li.courses i {
+				font-size: 20px;
+				color: $gray-light;
+			}
+			li.active i {
+				font-size: 20px;
+				color: black;
+			}
+			li.active>a>span {
+				color: black;
+			}
+			li.collections.active i {
+				background-image: url("gooru/images/navigation_collection_selected_icon.svg");
+			}
+			li.assessments.active i {
+				background-image: url("gooru/images/navigation_assessment_selected.svg");
+			}
+			li.resources.active i {
+				background-image: url("gooru/images/navigation_resource_selected_icon.svg");
+			}
+			li.questions.active i {
+				background-image: url("gooru/images/navigation_question_selected.svg");
+			}
+			li.questions.active i {
+				background-image: url("gooru/images/navigation_question_selected.svg");
+			}
+			li.rubrics.active i {
+				background-image: url("gooru/images/navigation_rubric_selected_icon.svg");
+			}
+			li.collections .icon {
+				background-image: url("gooru/images/navigation_collection.svg");
+			}
+			li.assessments .icon {
+				background-image: url("gooru/images/navigation_assessment.svg");
+				width: 20px !important;
+			}
+			li.resources .icon {
+				background-image: url("gooru/images/navigation_resource_icon.svg");
+			}
+			li.questions .icon {
+				background-image: url("gooru/images/navigation_question.svg");
+			}
+			li.rubrics .icon {
+				background-image: url("gooru/images/navigation_rubric_icon.svg");
+			}
+			ul {
+				min-width: unset;
+			}
+			li {
+				text-align: center;
+				border-bottom: 1px solid $light-200;
+			}
+		}
+	}
+	.nav_dropdown:hover>ul.dropdown-menu {
+		display: block;
+		align-items: left;
+	}
+	@media (max-width: $screen-320) {
+		.profile {
+			.gru-navigation-tabs {
+				width: 100vw;
+			}
+		}
+	}
+	.profile-content.content-navigation {
+		.nav_dropdown {
+			.dropdown-menu>li.active .icon {
+				color: black;
+			}
+		}
+		.category-menu {
+			display: none;
+		}
+		.nav_dropdown {
+			.dropdown-menu>li.active>a {
+				background-color: $gray-light;
+				padding-right: 46px;
+			}
+		}
+	}
+	.dropbtn {
+		background-color: $light-100;
+		color: black;
+		padding: 3px;
+		font-size: 16px;
+		border: none;
+		margin-top: 8px;
+		display: block !important;
+	}
+	.nav_dropdown {
+		margin: 0 auto;
+		border-bottom: 2px solid;
+	}
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		background-color:$gray-sharper;
+		min-width: 160px;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		z-index: 1;
+	}
+	.dropdown-content a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+	}
+	.gru-navigation-tabs {
+		.profile-navigation {
+			.category-menu {
+				display: none;
+			}
+			.nav_dropdown {
+				margin: 0 auto;
+				.dropdown-menu>li.selected>a {
+					background-color: $gray-light;
+				}
+				.dropdown-menu>li>a {
+					font-weight: bold;
+				}
+				.dropdown-menu>li.active>a {
+					background-color: $gray-light;
+				}
+			}
+		}
+	}
+	@media (min-width: 812px) and (max-width: $screen-824) {
+		.profile {
+			.profile-content {
+				.content-navigation {
+					.category-menu {
+						.category-options {
+							margin-top: 0px;
+						}
+					}
+				}
+			}
+			.gru-navigation-tabs {
+				.profile-navigation {
+					.category-menu {
+						.category-options li.profile-menu-item>a>span {
+							padding: 10px;
+						}
+					}
+				}
+			}
+			.profile-content {
+				.content-navigation {
+					margin-left: 0px;
+				}
+			}
+		}
+	}
+	@media (min-width: 640px) {
+		.profile {
+      .content {
+        .search-bar {
+          width: 75%;
+        }
+        .container-fluid {
+          .sort-buttons {
+            display: block !important;
+          }
+        }
+      }
+			.profile-content {
+				.content-navigation {
+					.category-menu {
+						.category-options li.rubrics>a {
+							margin-top: 6px;
+						}
+					}
+				}
+			}
+			.profile-content {
+				.content-navigation {
+					.category-menu {
+						.category-options li.collections.active i {
+							min-height: 16px;
+						}
+					}
+				}
+			}
+			.gru-navigation-tabs {
+				.profile-navigation {
+					.category-menu {
+						.category-options li.profile-menu-item>a>span {
+							padding: 9px;
+						}
+					}
+					.category-menu {
+						.category-options li.followings>a {
+							line-height: 16px;
+						}
+					}
+					.category-menu {
+						.category-options li.followers>a {
+							line-height: 48px;
+						}
+					}
+					.category-menu {
+						.category-options li.selected {
+							border-bottom: 4px solid #222222;
+							margin-top: 4px;
+						}
+					}
+				}
+			}
+			.category-menu {
+				width: auto;
+				margin-left: 44px;
+			}
+			.dropbtn {
+				display: none !important;
+			}
+			.gru-navigation-tabs {
+				.profile-navigation {
+					.category-menu {
+						display: block !important;
+						margin-bottom: 21px;
+					}
+				}
+			}
+			.profile-content.content-navigation {
+				margin-left: -14px;
+				height: 55px;
+				.category-menu {
+					.category-options li.rubrics a {
+							line-height: 26px;
+					}
+				}
+				.nav_dropdown {
+					display: none !important;
+				}
+				.category-menu {
+					display: block !important;
+				}
+			}
+		}
+	}
+	@media (min-width: $screen-568) and (max-width: $modal-md) {
+		.profile {
+      .content {
+        .search-bar {
+          width: 72%;
+        }
+        .container-fluid {
+          .sort-buttons {
+            display: block !important;
+          }
+        }
+      }
+			.profile-content {
+				.content-navigation {
+					.category-menu {
+						.category-options li.collections.active i {
+							min-height: 16px !important;
+						}
+					}
+				}
+			}
+			.category-menu {
+				width: auto;
+				margin-left: 5px;
+				.category-options {
+				li.rubrics {
+				margin-top: 1px;
+					a {
+					    line-height: 26px;
+						}
+					}
+				}
+			}
+			.profile-navigation {
+				.category-menu {
+					.category-options li.profile-menu-item>a>span {
+						padding: 10px;
+					}
+				}
+			}
+			.dropbtn {
+				display: none !important;
+			}
+			.gru-navigation-tabs {
+				.profile-navigation {
+					.category-menu {
+						.category-options li.profile-menu-item>a>span {
+							padding: 9px;
+						}
+					}
+					.category-menu {
+						.category-options li.followings>a {
+							line-height: 16px;
+						}
+					}
+					.category-menu {
+						.category-options li.followers>a {
+							line-height: 45px;
+						}
+					}
+					.category-menu {
+						.category-options li {
+							height: unset !important;
+						}
+					}
+				}
+			}
+			.gru-navigation-tabs {
+				width: 3%;
+				.profile-navigation {
+					.category-menu {
+						display: block !important;
+						margin-bottom: 25px;
+					}
+				}
+			}
+			.profile-content.content-navigation {
+				margin-top: 0px;
+				margin-left: 0px;
+				height: 55px;
+				.nav_dropdown {
+					display: none !important;
+				}
+				.category-menu {
+					display: block !important;
+				}
+			}
+		}
+	}
+}

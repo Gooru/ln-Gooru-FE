@@ -1,3 +1,109 @@
 .student-class-landing {
-  
+  @media screen and (min-width: $screen-in-1024) {
+    .student-inspect-destination.proficiency {
+      .inspect-destination-container {
+        .destination-chart-container {
+          .student-inspect-competency-chart {
+            .chart-container {
+              .graded-chart-container {
+                .domain-chart {
+                  .scrollable-chart {
+                    height: auto;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .competency-level-container {
+          position: relative;
+          .show-destination {
+            position: absolute;
+            bottom: 10px;
+          }
+        }
+      }
+    }
+
+    .student-inspect-destination.destination {
+      .inspect-destination-container {
+        .destination-chart-container {
+          .student-inspect-competency-chart {
+            .chart-container {
+              .graded-chart-container {
+                .taxonomy-grades-container {
+                  .taxonomy-grades {
+                    .grade-list {
+                      height: 545px;
+                    }
+                  }
+                }
+                .domain-chart {
+                  .scrollable-chart {
+                    height: 545px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .grade-data-container {
+          position: relative;
+          .grade-description {
+            height: 480px;
+          }
+          .next-route {
+            position: absolute;
+            bottom: 10px;
+          }
+        }
+      }
+    }
+
+    .student-inspect-destination.route {
+      .inspect-destination-container {
+        .destination-chart-container {
+          .student-inspect-competency-chart {
+            .chart-container {
+              .graded-chart-container {
+                .taxonomy-grades-container {
+                  .taxonomy-grades {
+                    .grade-list {
+                      height: 545px;
+                    }
+                  }
+                }
+                .domain-chart {
+                  .scrollable-chart {
+                    height: 545px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .course-container {
+          .route0-container {
+            .route0-body {
+              .route0-accordion-container {
+                .gru-accordion-course {
+                  .gru-accordion-unit {
+                    .panel-collapse {
+                      padding: 5px;
+                      max-height: 300px;
+                      overflow-y: auto;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .study-course {
+            margin: 15px 0;
+            position: unset;
+          }
+        }
+      }
+    }
+  }
 }

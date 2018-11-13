@@ -1,0 +1,39 @@
+.profile {
+	.controller {
+		.content {
+			@media screen and (max-width: $screen-568) {
+				.controller {
+					width: 100vw;
+					.collections {
+						display: grid;
+						justify-content: center;
+						padding-left: 0;
+					}
+				}
+			}
+			@media screen and (min-width: $screen-sm) {
+				.controller {
+					.collections {
+						grid-template-columns: auto auto auto !important;
+						padding-left: 0;
+					}
+				}
+			}
+			@media (orientation: landscape) {
+				.controller {
+					width: 100vw;
+					.collections {
+						width: 100%;
+						display: grid;
+						grid-template-columns: auto auto;
+						justify-content: center;
+						padding-left: 0;
+						&:before {
+							display: none;
+						}
+					}
+				}
+			}
+		}
+	}
+}
