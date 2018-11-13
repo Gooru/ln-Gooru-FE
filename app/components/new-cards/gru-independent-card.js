@@ -36,7 +36,14 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Attributes
-  classNames: ['new-cards', 'new-gru-independent-card', 'col-sm-3'],
+  classNames: [
+    'new-cards',
+    'new-gru-independent-card',
+    'col-sm-4',
+    'col-xs-12',
+    'col-md-3',
+    'col-lg-3'
+  ],
 
   actions: {
     /**
@@ -90,7 +97,9 @@ export default Ember.Component.extend({
   // Events
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   init: function() {

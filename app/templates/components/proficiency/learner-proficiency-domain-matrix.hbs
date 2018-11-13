@@ -8,12 +8,14 @@
     <div class="scrollable-chart">
       <div id="render-proficiency-matrix"></div>
     </div>
-    <div class="domain-sequence" style="width:{{width}}px">
-      {{#each taxonomyDomains as |taxonomyDomain index |}}
-        <li class="domain-counts">
-          {{taxonomyDomain.domainSeq}}
-        </li>
-      {{/each}}
+    <div class="domain-sequence-container">
+      <div class="domain-sequence" style="width:{{width}}px">
+        {{#each taxonomyDomains as |taxonomyDomain index |}}
+          <li class="domain-counts">
+            {{taxonomyDomain.domainSeq}}
+          </li>
+        {{/each}}
+      </div>
     </div>
   </div>
   <div class="domain-list">

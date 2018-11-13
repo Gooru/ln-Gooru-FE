@@ -1,6 +1,5 @@
 <div class="controller teacher-landing row {{if isShowAtcView 'atc-landing'}}">
-  <iframe id="download_iframe" style="display:none;"></iframe>
-  {{gru-take-tour steps=steps containerClass='home-tour'}}
+  <iframe id="download_iframe" style="display:none;"></iframe> {{gru-take-tour steps=steps containerClass='home-tour'}}
   {{#if isShowNavigatorBanner}}
     <div class="landing-banner">
       {{teacher.navigator-math-banner updateClass="updateClass"}}
@@ -8,7 +7,7 @@
   {{/if}}
   <div class="teacher-panel">
 
-    <div class="teacher-navigator">
+    <div class="teacher-navigator {{if isShowAtcView 'atc-view'}}">
       {{#if isShowAtcView}}
         <div class="atc-view nav">
           <div class="class-title ellipsis">
@@ -25,12 +24,12 @@
         </div>
       {{else}}
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="{{if showActiveClasses 'active'}} active-classes tab hidden-xs">
+          <li role="presentation" class="{{if showActiveClasses 'active'}} active-classes tab">
             <a href="#active-classes" aria-controls="activeClasses" role="tab" data-toggle="tab" {{action 'showClasses' 'active'}}>
               <span class="lead">{{t 'user.active-classrooms'}}</span>
             </a>
           </li>
-          <li role="presentation" class="{{if showArchivedClasses 'active'}} archived-classes tab hidden-xs">
+          <li role="presentation" class="{{if showArchivedClasses 'active'}} archived-classes tab">
             <a href="#archived-classes" aria-controls="archivedClasses" role="tab" data-toggle="tab" {{action 'archivedClass' 'archived'}}>
               <span class="lead">{{t 'user.archived-classrooms'}}</span>
             </a>
@@ -38,22 +37,22 @@
         </ul>
 
         {{#if showActiveClasses}}
-        {{#unless hasClasses}}
-          <div class="pull-left no-classes-found">
-            {{t 'teacher-landing.no-classrooms'}}
-          </div>
-        {{/unless}}
+          {{#unless hasClasses}}
+            <div class="pull-left no-classes-found">
+              {{t 'teacher-landing.no-classrooms'}}
+            </div>
+          {{/unless}}
         {{/if}}
-        {{#if (and showArchivedClasses  (gt sortedArchivedClassrooms.length 0))}}
+        {{#if (and showArchivedClasses (gt sortedArchivedClassrooms.length 0))}}
           <div class="pull-right sort">
             <div class="filter-date-asc btn-group" role="group">
-              <button type="button" title={{t 'common.sort-most-recently'}} data-toggle="tooltip" {{action 'filterByDate'}} class="filter-date btn {{if (eq sortOn 'startDate') 'btn-primary' 'btn-info'}}">
+              <button type="button" title= {{t 'common.sort-most-recently'}} data-toggle="tooltip" {{action 'filterByDate'}} class="filter-date btn {{if (eq sortOn 'startDate') 'btn-primary' 'btn-info'}}">
                 {{#if (eq sortOn 'startDate')}}
                   <div class="arrow {{if (eq order 'asc') 'arrow-up' 'arrow-down'}}"></div>
                 {{/if}}
                 {{gru-icon name='timer'}}
               </button>
-              <button type="button" title={{t 'common.sortAlphabetical'}}  data-toggle="tooltip" {{action 'filterByTitle'}} class="filter-asc btn {{if (eq sortOn 'title') 'btn-primary' 'btn-info'}}">
+              <button type="button" title= {{t 'common.sortAlphabetical'}} data-toggle="tooltip" {{action 'filterByTitle'}} class="filter-asc btn {{if (eq sortOn 'title') 'btn-primary' 'btn-info'}}">
                 {{gru-icon name='sort_by_alpha'}}
                 {{#if (eq sortOn 'title')}}
                   <div class="arrow {{if (eq order 'desc') 'arrow-up' 'arrow-down'}}"></div>
@@ -108,8 +107,8 @@
               classStudentCount=myClasses.memberCount
               onPlayCollection='studyPlayer'
               onItemSelected='selectMenuItem'}}
-          {{else}}
-            <span class="no-archived">{{t 'common.no-archived'}}</span>
+    {{else}}
+      <span class="no-archived">{{t 'common.no-archived'}}</span>
           {{/each}}
         </div>
       </div>
@@ -119,18 +118,19 @@
 
 {{#if isShowCompetencyReport}}
   {{#reports.pull-up.competency-report type=(t 'report.competency-report.title') title=(if selectedClass.course.subject selectedClass.course.subject (t 'report.competency-report.no-subject')) showPullUp=isShowCompetencyReport}}
-      {{reports.pull-up.course-competency-report classData=selectedClass onSelectDomain="onSelectDomain"}}
+    {{reports.pull-up.course-competency-report classData=selectedClass onSelectDomain="onSelectDomain"}}
   {{/reports.pull-up.competency-report}}
 {{/if}}
 
 {{#if isShowDomainCompetencyReport}}
-  {{#reports.pull-up.competency-report type=(t 'report.domain-report') title=selectedDomain.domainData.domainName showPullUp=isShowDomainCompetencyReport onClosePullUp="onCloseCompetencyReportPullUp"}}
-      {{reports.pull-up.domain-competency-report domainSet=selectedDomain onSelectCompetency="onSelectCompetency"}}
+  {{#reports.pull-up.competency-report type=(t 'report.domain-report') title=selectedDomain.domainData.domainName showPullUp=isShowDomainCompetencyReport onClosePullUp="onCloseCompetencyReportPullUp" }}
+    {{reports.pull-up.domain-competency-report domainSet=selectedDomain onSelectCompetency="onSelectCompetency"}}
   {{/reports.pull-up.competency-report}}
 {{/if}}
 
 {{#if isShowCompetencyContentReport}}
-  {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
+  {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
+    onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
     {{reports.pull-up.competency-content-report competency=selectedCompetency userId=selectedStudentUserId}}
   {{/reports.pull-up.competency-report}}
 {{/if}}

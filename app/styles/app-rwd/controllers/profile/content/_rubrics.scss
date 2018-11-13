@@ -1,0 +1,36 @@
+.profile {
+	.controller {
+		.content {
+			@media screen and (max-width: $screen-568) {
+				.controller {
+					width: 100vw;
+					.rubrics {
+						display: grid;
+						justify-content: center;
+					}
+				}
+			}
+			@media screen and (min-width: $screen-sm) {
+				.controller {
+					.rubrics {
+						grid-template-columns: auto auto auto !important;
+					}
+				}
+			}
+			@media (orientation: landscape) {
+				.controller {
+					width: 100vw;
+					.rubrics {
+						width: 100%;
+						display: grid;
+						grid-template-columns: auto auto;
+						justify-content: center;
+						&:before {
+							display: none;
+						}
+					}
+				}
+			}
+		}
+	}
+}

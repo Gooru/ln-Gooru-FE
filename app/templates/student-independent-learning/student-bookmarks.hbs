@@ -2,11 +2,11 @@
   <div class="title">
     <span class="bookmark-section">
       <span class="section-header">{{t 'common.bookmarks'}}</span>
-      {{#link-to 'search.collections' tagName="span" class='add-bookmark'}}
-        <span title="{{t 'student-independent-learning.add-bookmark'}}">
+    {{#link-to 'search.collections' tagName="span" class='add-bookmark' }}
+      <span title="{{t 'student-independent-learning.add-bookmark'}}">
           {{gru-icon name="add"}}
         </span>
-      {{/link-to}}
+    {{/link-to}}
     </span>
     <span class="show-more" {{action 'togglePanel'}}>
       {{#if showMoreToggle}}
@@ -30,7 +30,7 @@
       <div class="no-bookmark">{{t 'student-independent-learning.no-bookmarks'}}</div>
     {{/if}}
     {{#if isShowMoreVisible}}
-      <div class="col-md-12 show-more-results" {{action 'showMoreResults'}}>{{t 'common.show-more-results'}}</div>
+      <div class="col-md-12 col-lg-12 col-sm-6 col-xs-3 show-more-results" {{action 'showMoreResults'}}>{{t 'common.show-more-results'}}</div>
     {{/if}}
   </div>
 </div>

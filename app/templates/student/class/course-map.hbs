@@ -30,7 +30,7 @@
           onStudyNow=(action 'studyCoursePlayer' ) }}
         {{/if}}
 
-        <h5>Your assigned course</h5>
+        <h5 class="assigned-course-title">Your assigned course</h5>
 
         <div class="rescope-section">
           {{#if isPremiumClass}}
@@ -55,24 +55,25 @@
             {{/if}}
           {{/if}}
         </div>
-
-        {{class.overview.gru-accordion-course
-        currentClass=class
-        classMembers=classMembers
-        onSelectResource="playResource"
-        onStudyNow="studyPlayer"
-        onLocationUpdate=(action 'updateLocation')
-        userLocation=userLocation
-        location=openingLocation
-        units=units
-        contentVisibility=contentVisibility
-        showLocation=showLocation
-        isTeacher=false
-        isStudent=true
-        toggleLocation=toggleLocation
-        onSelectItem="onSelectItem"
-        showLocationReport= tab
-        }}
+        <div class="student-coursemap-container">
+          {{class.overview.gru-accordion-course
+          currentClass=class
+          classMembers=classMembers
+          onSelectResource="playResource"
+          onStudyNow="studyPlayer"
+          onLocationUpdate=(action 'updateLocation')
+          userLocation=userLocation
+          location=openingLocation
+          units=units
+          contentVisibility=contentVisibility
+          showLocation=showLocation
+          isTeacher=false
+          isStudent=true
+          toggleLocation=toggleLocation
+          onSelectItem="onSelectItem"
+          showLocationReport= tab
+          }}
+        </div>
       </div>
     {{else}}
       <div class="no-course-content">{{t 'student-landing.no-course-assigned'}}</div>

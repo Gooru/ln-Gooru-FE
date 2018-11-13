@@ -1,3 +1,10 @@
+.partner-library {
+  .nav_dropdown {
+    .dropbtn {
+    display: none;
+    }
+  }
+}
 .profile-content.content-navigation {
   @include flexbox;
   @include align-items(center);
