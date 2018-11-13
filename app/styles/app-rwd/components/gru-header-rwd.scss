@@ -1,0 +1,36 @@
+.gru-header {
+  .container-fluid  {
+    .navbar-default {
+      display: grid;
+      grid-template-columns: 65px 1fr 162px;
+      &:before {
+        display: none;
+      }
+      .navbar-collapse {
+        display: flex !important;
+      }
+      .search-navbar-form .form-group .validation span.error, span.validation.error {
+          display: none;
+      }
+      .search-navbar-form {
+          padding: 0 0 0 12px !important;
+      }
+      .navbar-header {
+          display: flex !important;
+        .navbar-brand {
+          height: 19px;
+          padding: 0;
+          width: 69px;
+          background-repeat: no-repeat;
+          background-size: 69px 19px;
+        }
+      }
+      .menu-navbar {
+        display: inline-block;
+        .navbar-nav-list {
+            margin-left: 33px;
+        }
+      }
+    }
+  }
+}
