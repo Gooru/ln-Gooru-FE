@@ -9,10 +9,12 @@
   .qz-player {
     overflow: auto;
     height: 100vh;
+
     .player {
       overflow: auto;
     }
   }
+
   .no-confirmation {
     .qz-player {
       padding-top: 104px !important;
@@ -24,7 +26,6 @@
   }
 
   &.fullscreen {
-
     //Fullscreen mode global styles
 
     @mixin fullscreenStyle {
@@ -67,15 +68,18 @@
         background: url("quizzes-addon/quizzes/images/audio-resource-white.svg");
         background-size: 25px 25px;
       }
-    };
+    }
 
     // Styles
     @include fullscreenStyle;
+
     .gru-study-navbar {
       display: none;
     }
+
     .bar-charts {
       top: 0;
+
       @include fullscreenStyle;
     }
 
@@ -87,7 +91,8 @@
     }
 
     .qz-question-viewer {
-      .question-panel, .answer-panel{
+      .question-panel,
+      .answer-panel {
         // @include fullscreenStyle;
         // box-shadow: rgba(255, 255, 255, 0.3) 0px 1px 4px;
         color: #353e47 !important;
@@ -100,6 +105,7 @@
           display: none !important;
         }
       }
+
       .qz-youtube-resource {
         height: calc(100vh - 210px) !important;
       }
@@ -107,6 +113,7 @@
 
     .qz-player-footer {
       @include fullscreenStyle;
+
       .player-info {
         .resource-sequence {
           @include fullscreenStyle;
@@ -120,36 +127,48 @@
           }
         }
       }
+
       .list-resources {
         .breadcrumb-title {
           color: $white;
           border-bottom: 1px solid $white;
         }
-        .list-group-item  {
+
+        .list-group-item {
           @include fullscreenStyle;
+
           border-top: 1px solid $white !important;
+
           .title {
             @include fullscreenStyle;
           }
+
           .resources-info {
             @include resourceIcons;
+
             .resource-index {
               color: $white !important;
             }
           }
         }
+
         @include fullscreenStyle;
+
         .submit-all {
           border-top: 1px solid $white;
         }
       }
+
       .next-action .next {
         @include fullscreenStyle;
       }
     }
-    .related-content-tab-box, .related-content-body{
+
+    .related-content-tab-box,
+    .related-content-body {
       border: 1px solid $white;
     }
+
     .related-content-body {
       border-top: none;
     }

@@ -38,6 +38,12 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
   // -------------------------------------------------------------------------
   // Actions
   actions: {
+    didTransition() {
+      /*
+    * Pre load timeline data and set that data to model.
+    */
+      return true; // Bubble the didTransition event
+    },
     /**
      * When the submission is complete
      */
@@ -77,6 +83,10 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
         .getStoredNext()
         .then(mapLocation => navigateMapService.next(mapLocation.context))
         .then(() => this.refresh());
+    },
+    updateModelM(option) {
+      var mdl = this.modelFor(this.routeName);
+      Object.assign(mdl, option);
     }
   },
   /**

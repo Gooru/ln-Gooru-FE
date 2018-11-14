@@ -1,0 +1,39 @@
+<div class={{cardClass}}>
+    {{#if timeSession}}
+        {{#if (eq timeSession.collectionType 'assessment')}}
+            <div class="imgClassAssesment"> </div>
+        {{else if (eq timeSession.collectionType 'collection') }}
+            <div class="imgClassCollection"> </div>
+        {{else }}
+            <div class="imgClassPlaceHolder"> </div>
+        {{/if}}
+        
+        <div class='cardTitle'>
+            <div class='cardTypeIcon'>
+                {{#if (eq timeSession.collectionType 'assessment')}}
+                    {{gru-icon name='pers'  }}
+                {{else if (eq timeSession.collectionType 'collection') }}
+                    {{gru-icon name='view_comfy'  }}
+                {{else }}
+                    {{gru-icon name='node'  }}
+                {{/if}}
+            </div>
+            <div class='titleCont'>
+                <div class='cardSubTitle ellipsis'>
+                    {{#if (eq timeSession.collectionType 'dummy')}}
+                    {{else }}
+                        {{timeSession.collectionType}}
+                    {{/if}}
+                </div>
+                <div class='cardMainTitle ellipsis'>
+                    {{timeSession.title}}
+                </div>
+            </div>
+        </div>
+    {{else}}
+
+        {{log 'nodata time ' timeSession}}
+        {{!-- Dummy Card, Get the injected class and apply for card size --}}
+        <div> nodata</div>
+    {{/if}}
+</div>
