@@ -135,6 +135,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
 
     var svgCanvas = d3
       .select('.vbar')
+      .html('')
       .append('svg')
       .attr('background', 'green');
 
