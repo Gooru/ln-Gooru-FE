@@ -1,4 +1,23 @@
 .teacher-class-dca-course-map-pull-up {
+	@media screen and (min-width: $screen-568) and (max-width: $screen-600) {
+		.dca-course-map-container {
+			.dca-course-map-unit-container {
+				.dca-course-map-unit {
+					.dca-course-map-lesson-container {
+						.dca-course-map-lesson {
+							.dca-course-map-collection-container {
+								.dca-course-map-collection {
+									.dca-course-map-collection-panel {
+										grid-template-columns: 1fr 85px 61px !important;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 	@media screen and (max-width: $screen-568) {
 		width: 100%;
 		.dca-course-map-container {
@@ -12,12 +31,12 @@
 							.dca-course-map-lesson-panel .lesson-title p {
 								font-size: 14px;
 							}
-              .dca-course-map-lesson-panel .lesson-name-sequence {
-                font-size: 14px;
-              }
-              .dca-course-map-lesson-panel {
-                grid-template-columns: 125px 1fr;
-              }
+							.dca-course-map-lesson-panel .lesson-name-sequence {
+								font-size: 14px;
+							}
+							.dca-course-map-lesson-panel {
+								grid-template-columns: 125px 1fr;
+							}
 							.dca-course-map-collection-container {
 								.dca-course-map-collection {
 									.dca-course-map-collection-panel {
@@ -50,8 +69,8 @@
 			width: 100%;
 		}
 	}
-	@media screen and (max-width: $screen-360 - 1) {
 		.dca-course-map-container {
+			@media screen and (max-width: $screen-360 - 1) {
 			.dca-course-map-unit-container {
 				.dca-course-map-unit {
 					.dca-course-map-lesson-container {
