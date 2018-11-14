@@ -1,0 +1,47 @@
+@media screen and (max-width: $screen-600) {
+  .teacher-suggestion-pull-up {
+    .suggestion-container {
+      .search-list-container {
+        .search-list {
+          grid-template-columns: auto;
+          width: 100vw;
+          display: grid;
+          justify-content: center;
+          margin: 0 !important;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: $screen-360) and (max-width: $screen-640) {
+  .teacher-suggestion-pull-up {
+    .suggest-confirmation {
+      left: 19%;
+    }
+  }
+
+  .teacher-suggestion-pull-up {
+    .suggestion-container {
+      .suggestion-content-type-filter {
+        .filter-by {
+          width: 120px;
+        }
+      }
+    }
+  }
+}
+
+@media (orientation: landscape) {
+  .teacher-suggestion-pull-up {
+    .suggestion-container {
+      .search-list-container {
+        .search-list {
+          grid-template-columns: auto auto;
+          width: 100%;
+          display: grid;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
