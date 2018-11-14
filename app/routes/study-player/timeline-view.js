@@ -118,12 +118,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         : Math.round((graphdatajsn.notstarted / total) * 100);
 
     graphdata = [
-      graphdataper.inprogress,
-      graphdataper.notstarted,
-      graphdataper.completed
+      { value: graphdataper.inprogress, colorcode: '#a8d4e4' },
+      { value: graphdataper.notstarted, colorcode: '#cdd2d6' },
+      { value: graphdataper.completed, colorcode: '#5d93d9' }
     ];
 
-    //console.log('graphdata', graphdata);
     //graphdata = [20, 10, 70];
     const height = 500,
       dmn = 100;
@@ -167,14 +166,15 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       .data(graphdata)
       .enter()
       .append('rect')
+      .attr('fill', d => d.colorcode)
       .attr('x', 24)
       .attr('y', function(d) {
         let rt = yoffset;
-        yoffset = yoffset + yScale(d);
+        yoffset = yoffset + yScale(d.value);
         return rt;
       })
       .attr('width', 20)
-      .attr('height', d => yScale(d));
+      .attr('height', d => yScale(d.value));
   },
   parseAndGetChartData(/* perfdata */) {
     return [20, 30, 50];
