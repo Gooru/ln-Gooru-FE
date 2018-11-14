@@ -139,42 +139,21 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       .append('svg')
       .attr('background', 'green');
 
-    // svgCanvas
-    //   .selectAll('circle')
-    //   .data(graphdata)
-    //   .enter()
-    //   .append('circle')
-    //   .attr('r', 24)
-    //   .attr('width', 20)
-    //   .attr('fill', '#5d93d9')
-    //   .attr('cy', d=> yScale(d) )
-    //   .attr('cx', 35);
-
-    // svgCanvas
-    //   .selectAll('text')
-    //   .data(graphdata)
-    //   .enter()
-    //   .append('text')
-    //   .attr('r', 24)
-    //   .attr('width', 20)
-    //   .attr('fill', '#5d93d9')
-    //   .attr('y', d => yScale(d))
-    //   .attr('x', 25)
-    //   .text(d => d);
-
     svgCanvas
       .selectAll('rect')
       .data(graphdata)
       .enter()
       .append('rect')
       .attr('fill', d => d.colorcode)
-      .attr('x', 24)
+      .attr('x', 27)
+      .attr('rx', 3)
+      .attr('ry', 3)
       .attr('y', function(d) {
         let rt = yoffset;
         yoffset = yoffset + yScale(d.value);
         return rt;
       })
-      .attr('width', 20)
+      .attr('width', 12)
       .attr('height', d => yScale(d.value));
   },
   parseAndGetChartData(/* perfdata */) {
