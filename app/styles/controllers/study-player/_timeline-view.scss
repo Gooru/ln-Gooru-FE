@@ -115,10 +115,12 @@
         margin-top: 42px;
         margin-left: 13px;
         color: #4c95d7;
+
         /* z-index: 2; */
 
         > i {
           $size: 30px;
+
           font-size: $size;
         }
       }
@@ -139,6 +141,7 @@
       .vbar {
         flex: 1;
         display: flex;
+
         /*  z-index: 1; */
 
         svg {
@@ -152,27 +155,9 @@
           }
 
           rect {
-            //  color: #fff;
-            stroke: #5d93d9;
             stroke-width: 1px;
-
-            //fill: transparent;
+            width: 12px;
           }
-
-          /* rect:first-of-type {
-                                  color: #fff;
-                                  stroke: #6a95d1;
-                                  fill: #6a95d1;
-                                  opacity: 0.5;
-                                  stroke-width: 1px;
-                                }
-                                rect:nth-of-type(2) {
-                                    color: #fff;
-                                    stroke: #5d93d9;
-                                    opacity: 0.2;
-                                    fill: #5d93d9;
-                                    stroke-width: 1px;
-                                } */
 
           text:first-of-type {
             fill: #3994b6;
@@ -434,9 +419,9 @@
 
             .cardTypeIcon {
               /* width: 35px;
-                                                                                                                              height: 26px;
-                                                                                                                              object-fit: contain;
-                                                                                                                              background-color: #535e67; */
+                                                                                                                                            height: 26px;
+                                                                                                                                            object-fit: contain;
+                                                                                                                                            background-color: #535e67; */
               align-self: center;
             }
 
