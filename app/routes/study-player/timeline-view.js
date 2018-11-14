@@ -30,6 +30,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
 
   vbarData: null,
 
+  /**
+   * Default page size
+   */
+  pageSize: 10,
+
   vbarDataChanged: Ember.observer('vbarData', function() {
     const route = this;
     var graphdata = route.get('vbarData');
@@ -163,13 +168,17 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   actions: {
     scrollRRight: function() {
       const route = this;
-      route.currentModel.filterOptions.offset -= 2;
+      route.currentModel.filterOptions.offset -= route.pageSize;
+      route.currentModel.filterOptions.offset =
+        route.currentModel.filterOptions.offset < 0
+          ? 1
+          : route.currentModel.filterOptions.offset;
       route.refresh();
     },
     scrollLLeft: function() {
       const route = this;
-      route.currentModel.filterOptions.offset += 2;
-      this.refresh({ queryParams: { offsetlimit: 1 } });
+      route.currentModel.filterOptions.offset += route.pageSize;
+      this.refresh();
     }
   },
 
