@@ -13,6 +13,13 @@
 @import "app-rwd/components/player/_gru-external-assessment-footer";
 @import "app-rwd/components/student/class/student-class-landing";
 @import "app-rwd/components/player/_gru-player-summary-footer-rwd";
+@import "app-rwd/components/reports/pull-up/_course-report-rwd";
+@import "app-rwd/components/reports/pull-up/_course-report-listview-rwd";
+@import "app-rwd/components/reports/pull-up/_unit-report-rwd";
+@import "app-rwd/components/reports/pull-up/_unit-report-listview-rwd";
+@import "app-rwd/components/reports/pull-up/_lesson-report-rwd";
+@import "app-rwd/components/reports/pull-up/_lesson-report-listview-rwd";
+
 //Controllers
 @import "app-rwd/controllers/student/class-rwd";
 @import "app-rwd/controllers/student/class/profile";
