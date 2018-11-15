@@ -68,7 +68,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
 
     let parentModel = Object.assign({}, this.modelFor('study-player')),
       subjectId = parentModel.course.subject;
-    subjectId = subjectId.substring(subjectId.indexOf('.') + 1);
+
+    if (parentModel.course.version !== 'premium') {
+      subjectId = subjectId.substring(subjectId.indexOf('.') + 1);
+    }
     if (parentModel.barchartdata) {
       route.set('barChartData', parentModel.barchartdata);
     }
@@ -209,7 +212,9 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     let classId = parentModel.context.classId;
     let courseId = parentModel.course.id;
     let subjectCode = parentModel.course.subject;
-    subjectCode = subjectCode.substring(subjectCode.indexOf('.') + 1);
+    if (parentModel.course.version !== 'premium') {
+      subjectCode = subjectCode.substring(subjectCode.indexOf('.') + 1);
+    }
     return Ember.RSVP.resolve(
       analyticsService.getAtcPerformanceSummaryPremiumClass(
         classId,
