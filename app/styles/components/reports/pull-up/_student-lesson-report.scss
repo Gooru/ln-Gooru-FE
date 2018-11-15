@@ -327,7 +327,11 @@
               }
             }
           }
-
+          .score {
+            .report-student-time-spent {
+              color: $dark-600;
+            }
+          }
           .completion {
             .completion-bar {
               width: 80%;
