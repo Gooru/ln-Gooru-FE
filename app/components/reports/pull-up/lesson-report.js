@@ -429,13 +429,6 @@ export default Ember.Component.extend({
    */
   showStudentLessonReport: false,
 
-  /**
-   *
-   * This attribute decide whether vertical scroll need to add or not
-   *  @type {Boolean}
-   */
-  isVerticalScroll: false,
-
   //--------------------------------------------------------------------------
   // Methods
 
@@ -444,12 +437,6 @@ export default Ember.Component.extend({
    */
   openPullUp() {
     let component = this;
-    let scrollEnable = Ember.$(document.body).hasClass('no-vertical-scroll');
-    if (!scrollEnable) {
-      Ember.$(document.body).addClass('no-vertical-scroll');
-      component.set('isVerticalScroll', true);
-    }
-
     component.$().animate(
       {
         top: '10%'
@@ -460,9 +447,6 @@ export default Ember.Component.extend({
 
   closePullUp(closeAll) {
     let component = this;
-    if (component.get('isVerticalScroll')) {
-      Ember.$(document.body).removeClass('no-vertical-scroll');
-    }
     component.$().animate(
       {
         top: '100%'
