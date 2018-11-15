@@ -3,7 +3,7 @@
     Example: @import "app-rwd/components/filename";
   */
 @import "variables";
-// @import "quizzes-rwd";
+@import "quizzes-rwd"; 
 // Components
 @import "app-rwd/components/proficiency/learner-proficiency-domain-matrix";
 @import "app-rwd/components/class/overview/routesuggestion-preview";
@@ -13,6 +13,18 @@
 @import "app-rwd/components/player/_gru-external-assessment-footer";
 @import "app-rwd/components/student/class/student-class-landing";
 @import "app-rwd/components/player/_gru-player-summary-footer-rwd";
+@import "app-rwd/components/reports/pull-up/_course-report-rwd";
+@import "app-rwd/components/reports/pull-up/_course-report-list-view-rwd";
+@import "app-rwd/components/reports/pull-up/_unit-report-rwd";
+@import "app-rwd/components/reports/pull-up/_unit-report-list-view-rwd";
+@import "app-rwd/components/reports/pull-up/_lesson-report-rwd";
+@import "app-rwd/components/reports/pull-up/_lesson-report-list-view-rwd";
+@import "app-rwd/components/reports/pull-up/_collection-report-rwd";
+@import "app-rwd/components/reports/pull-up/_collection-report-list-view-rwd";
+@import "app-rwd/components/reports/pull-up/_collection-report-grid-view-rwd";
+@import "app-rwd/components/reports/pull-up/_question-report-rwd";
+@import "app-rwd/components/reports/pull-up/_teacher-external-assessment-report-list-view-rwd";
+@import "app-rwd/components/reports/pull-up/_teacher-external-assessment-report-grid-view-rwd";
 @import "app-rwd/components/reports/pull-up/_teacher-suggestion-pull-up-rwd";
 @import "app-rwd/components/gru-header-rwd";
 

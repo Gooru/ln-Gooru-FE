@@ -26,8 +26,9 @@
 
     .summary-report-btn {
       border: 1px solid #b8bfc4;
-      border-radius: 15px;
+      border-radius: 16px;
       background: #b8bfc4;
+      z-index: 0;
 
       .performance {
         color: black;
@@ -53,18 +54,20 @@
     width: 36%;
     float: $menu-float-dir;
     margin-top: 15px;
+
     .change-score {
-      padding: 4px 16px 4px 16px;
+      padding: 4px 16px;
       border-radius: 5px;
     }
+
     .confirm {
-      padding: 4px 16px 4px 16px;
+      padding: 4px 16px;
       border-radius: 5px;
       margin-left: 25px;
     }
 
     .cancel {
-      padding: 4px 9px 4px 9px;
+      padding: 4px 9px;
       border-radius: 5px;
     }
   }
@@ -74,11 +77,11 @@
     background: $white;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    padding: 0px 0 40px;
+    padding: 0 0 40px;
     display: block;
     clear: both;
     @media (min-width: $screen-md) {
-      padding: 0px 15px 40px;
+      padding: 0 15px 40px;
     }
 
     th {
