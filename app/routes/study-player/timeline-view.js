@@ -126,9 +126,9 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         : Math.round((graphdatajsn.notstarted / total) * 100);
 
     graphdata = [
+      { value: graphdataper.completed, colorcode: '#5d93d9' },
       { value: graphdataper.inprogress, colorcode: '#a8d4e4' },
-      { value: graphdataper.notstarted, colorcode: '#cdd2d6' },
-      { value: graphdataper.completed, colorcode: '#5d93d9' }
+      { value: graphdataper.notstarted, colorcode: '#cdd2d6' }
     ];
 
     //graphdata = [20, 10, 70];
