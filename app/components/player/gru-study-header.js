@@ -91,7 +91,16 @@ export default Ember.Component.extend({
     },
 
     mileStoneHandler: function() {
-      this.get('router').transitionTo('study-player.timeline-view');
+      if (this.get('router').currentPath === 'study-player.index') {
+        this.get('router').transitionTo('study-player.timeline-view');
+      } else if (
+        this.get('router').currentPath === 'reports.study-student-collection'
+      ) {
+        this.get('router').transitionTo(
+          'study-player.timeline-view',
+          this.get('courseId')
+        );
+      }
     },
     /**
      * Go back to collection
@@ -260,6 +269,10 @@ export default Ember.Component.extend({
    * @property {Boolean} fromReport
    */
   fromReport: false,
+
+  showLocateMe: Ember.computed(function() {
+    return !this.get('fromReport') && this.get('isFeatureEnabled');
+  }),
 
   /**
    * Indicates if PreTest is showing
