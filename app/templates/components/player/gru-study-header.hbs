@@ -64,7 +64,7 @@
 {{student.class.gru-study-navbar classId=classId navTitle=courseTitle onItemSelected="selectMenuItem" selectedMenuItem=menuItem isPremiumClass =isPremiumClass sourceType=sourceType performanceSummary =performanceSummary isStudyPlayer=isStudyPlayer}}
 <div class="bar-charts" data-content="{{performancePercentage}}% Completed">
   <div class="completion-chart">
-    {{#if isFeatureEnabled }}
+    {{#if  showLocateMe  }}
         {{charts/gru-x-bar-chart data=barChartData mileStone=mileStone mileStoneHandler=(action 'mileStoneHandler')  }}
     
     {{else}}

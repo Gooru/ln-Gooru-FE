@@ -40,7 +40,10 @@ export default DS.JSONAPISerializer.extend({
    * @returns{JSON Object} data normalized, converted to the form used by application(non snake_case )
    */
   normalizeUsageData(responseData, serializedFilterData) {
-    responseData = responseData ? responseData.content[0].usageData : {};
+    responseData =
+      responseData && responseData.content && responseData.content.length > 0
+        ? responseData.content[0].usageData
+        : [];
     responseData.filterOptions = serializedFilterData;
     let newStartDate = new Date();
     newStartDate.setMonth(

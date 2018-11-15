@@ -65,7 +65,9 @@ export default Ember.Component.extend({
   },
 
   didInsertElement() {
-    this.send('showCard', this.timeData[this.timeData.length - 1]);
+    if (this.timeData && this.timeData.length > 0) {
+      this.send('showCard', this.timeData[this.timeData.length - 1]);
+    }
   },
 
   actions: {
