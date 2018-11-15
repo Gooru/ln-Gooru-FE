@@ -1,0 +1,127 @@
+.container-fluid {
+  .pull-up-student-lesson-report {
+    .report-content {
+      .report-performance-tabular {
+        .report-performance-header {
+          grid-template-columns: auto auto !important;
+          grid-gap: 20px;
+
+          .content-name {
+            padding-left: 0 !important;
+            justify-self: center;
+          }
+
+          .score {
+            justify-self: center;
+          }
+        }
+
+        .report-performance-list {
+          grid-template-columns: 50% 10% 40%;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: $screen-sm - 1) {
+    .pull-up-student-lesson-report {
+      margin: 0;
+
+      .student-lesson-report-container {
+        width: 100vw;
+
+        .report-header {
+          .report-breadcrumb {
+            .course-title p {
+              max-width: calc(100% - 50px);
+            }
+          }
+
+          .report-title {
+            width: calc(100% - 50px);
+
+            .title {
+              width: 100%;
+              font-size: 16px;
+              line-height: 20px;
+              padding-left: 15px;
+              letter-spacing: normal;
+              padding-top: 10px;
+              color: #37424b;
+
+              p {
+                margin: 0;
+              }
+            }
+          }
+        }
+
+        .report-content {
+          .report-performance-tabular {
+            .report-performance-header {
+              grid-template-columns: auto auto;
+              grid-gap: 20px;
+
+              .content-name {
+                padding-left: 0;
+                justify-self: center;
+              }
+
+              .score {
+                justify-self: center;
+              }
+            }
+
+            .report-performance-list {
+              grid-template-columns: 50% 10% 40%;
+            }
+          }
+
+          .report-carousel-tags {
+            .report-carousel {
+              .report-carousel-content-container {
+                .report-carousel-content {
+                  width: 100%;
+
+                  .performance-display-container {
+                    margin: 0 auto;
+                  }
+
+                  .lesson-description {
+                    display: none;
+                  }
+                }
+              }
+            }
+
+            .report-standard-tags {
+              .show-description {
+                display: grid;
+                grid-template-columns: auto auto auto auto auto;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (orientation: landscape) {
+    .pull-up-student-lesson-report {
+      .student-lesson-report-container {
+        .report-content {
+          .report-carousel-tags {
+            .report-carousel {
+              .report-carousel-content-container {
+                .report-carousel-content {
+                  .lesson-description {
+                    display: block;
+                    width: calc(100% - 300px);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

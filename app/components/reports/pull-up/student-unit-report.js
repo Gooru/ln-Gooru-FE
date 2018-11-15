@@ -110,7 +110,12 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-
+  didRender() {
+    this.handleAppContainerScroll();
+  },
+   didDestroyElement() {
+    this.handleAppContainerScroll();
+  },
   /**
    * Function to triggered once when the component element is first rendered.
    */
@@ -256,7 +261,15 @@ export default Ember.Component.extend({
       }
     );
   },
-
+  handleAppContainerScroll() {
+    let activePullUpCount = Ember.$(document.body).find('.backdrop-pull-ups')
+      .length;
+    if (activePullUpCount > 0) {
+      Ember.$(document.body).addClass('no-vertical-scroll');
+    } else if (activePullUpCount === 0) {
+      Ember.$(document.body).removeClass('no-vertical-scroll');
+    }
+  },
   handleScrollToFixHeader() {
     let component = this;
     component

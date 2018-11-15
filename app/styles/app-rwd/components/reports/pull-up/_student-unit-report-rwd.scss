@@ -1,0 +1,80 @@
+.container-fluid {
+  .pull-up-student-unit-report {
+    .student-unit-report-container {
+      .report-content {
+        .report-carousel-tags {
+          .report-standard-tags {
+            .show-description {
+              display: grid;
+              grid-template-columns: auto auto auto auto auto;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: $screen-sm - 1) {
+    .pull-up-student-unit-report {
+      margin: 0;
+
+      .student-unit-report-container {
+        width: 100vw;
+
+        .report-header {
+          .report-breadcrumb {
+            .course-title p {
+              max-width: calc(100% - 50px);
+            }
+          }
+        }
+
+        .report-content {
+          .report-carousel-tags {
+            .report-carousel {
+              .report-carousel-content-container {
+                .report-carousel-content {
+                  width: 100%;
+
+                  .performance-display-container {
+                    margin: 0 auto;
+                  }
+
+                  .unit-description {
+                    display: none;
+                  }
+                }
+              }
+            }
+
+            .report-standard-tags {
+              .show-description {
+                display: grid;
+                grid-template-columns: auto auto auto auto auto;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (orientation: landscape) {
+    .pull-up-student-unit-report {
+      .student-unit-report-container {
+        .report-content {
+          .report-carousel-tags {
+            .report-carousel {
+              .report-carousel-content-container {
+                .report-carousel-content {
+                  .unit-description {
+                    display: block;
+                    width: calc(100% - 300px);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+.container-fluid {
+  .pull-up-student-course-report {
+    .student-course-report-container {
+      .report-content {
+        .report-carousel-tags {
+          .report-standard-tags {
+            .show-description {
+              display: grid;
+              grid-template-columns: auto auto auto auto;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: $screen-sm - 1) {
+    .pull-up-student-course-report {
+      margin: 0;
+
+      .student-course-report-container {
+        width: 100vw;
+
+        .report-header {
+          .report-breadcrumb {
+            .course-title p {
+              max-width: calc(100% - 50px);
+            }
+          }
+        }
+
+        .report-content {
+          .report-carousel-tags {
+            .report-carousel {
+              #report-carousel-wrapper {
+                .course-background-cover {
+                  .report-carousel-content {
+                    width: 100%;
+
+                    .performance-display-container {
+                      margin: 0 auto;
+                    }
+
+                    .course-description {
+                      display: none;
+                    }
+                  }
+                }
+              }
+            }
+
+            .report-standard-tags {
+              .show-description {
+                display: grid;
+                grid-template-columns: auto auto auto auto;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (orientation: landscape) {
+    .pull-up-student-course-report {
+      .student-course-report-container {
+        .report-content {
+          .report-carousel-tags {
+            .report-carousel {
+              #report-carousel-wrapper {
+                .course-background-cover {
+                  .report-carousel-content {
+                    .course-description {
+                      display: block;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
