@@ -14,6 +14,8 @@
 @import "app-rwd/components/student/class/student-class-landing";
 @import "app-rwd/components/player/_gru-player-summary-footer-rwd";
 @import "app-rwd/components/reports/pull-up/_teacher-suggestion-pull-up-rwd";
+@import "app-rwd/components/gru-header-rwd";
+
 //Controllers
 @import "app-rwd/controllers/student/class-rwd";
 @import "app-rwd/controllers/student/class/profile";
@@ -43,3 +45,4 @@
 @import "app-rwd/controllers/teacher/class/_search-content-pull-up";
 @import "app-rwd/controllers/teacher/class/teacher_class_class-activities-rwd";
 @import "app-rwd/controllers/teacher/class/_teacher-class-dca-course-map-pull-up-rwd";
+@import "app-rwd/controllers/_sign-in";
