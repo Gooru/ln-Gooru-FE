@@ -997,7 +997,7 @@ export default Object.assign(quizzesTranslations, {
              'past-activities':'मागील क्रियाकलाप'
           },
           'my-report':'माझा रिपो्र्ट',
-          'my-location':'माझा रिपो्र्ट'
+          'my-location':'माझा स्थान'
        },
        'course':{  
           'to-report':'वापर सारांश',
