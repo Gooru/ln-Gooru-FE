@@ -36,6 +36,22 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
       /*Default View */
       grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
+
+      .tab {
+        a {
+          opacity: 0.3;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+
+        &.vactive {
+          a {
+            opacity: 1;
+          }
+        }
+      }
       /* Extra small devices (phones, 600px and down) */
       @media only screen and (max-width: 600px) {
         grid-template-columns: 50px 40px 40px 40px 1fr 40px 40px 40px;
@@ -87,33 +103,6 @@
             .add-info {
               display: inline-block !important;
             }
-          }
-        }
-      }
-
-      .class-activities,
-      .class-management,
-      .course-map,
-      .students {
-        &.vactive {
-          a {
-            color: $gray-base;
-          }
-
-          a.dca {
-            .dca-pin {
-              background-image: url("gooru/pin.png");
-            }
-          }
-        }
-
-        a:hover {
-          color: $gray-base;
-        }
-
-        a.dca:hover {
-          .dca-pin {
-            background-image: url("gooru/pin.png");
           }
         }
       }
