@@ -47,6 +47,12 @@
         display: grid;
         grid-template-columns: auto auto auto;
         justify-content: space-around;
+        &.cards-2 {
+          grid-template-columns: auto auto;
+        }
+        &.cards-1 {
+          grid-template-columns: auto;
+        }
       }
     }
   }

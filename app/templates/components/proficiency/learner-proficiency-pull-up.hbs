@@ -33,7 +33,15 @@
   <div class="body">
     {{#if isShowMatrixChart}}
       <div class="proficiency-chart">
-        {{proficiency.learner-proficiency-domain-matrix subjectBucket=subjectBucket timeLine=timeLine userId=student.id subject=activeSubject class=class onShownBaseLine="onShownBaseLine" onSelectCompetency="onSelectCompetency"}}
+        {{proficiency.learner-proficiency-domain-matrix
+          subjectBucket=subjectBucket
+          timeLine=timeLine
+          userId=student.id
+          subject=activeSubject
+          class=class
+          onShownBaseLine="onShownBaseLine"
+          onSelectCompetency="onSelectCompetency"
+        }}
       </div>
       <div class="proficiency-tags">
         <div class="proficiency-legends">
@@ -57,10 +65,14 @@
             <span class="box-baseline"></span>
             <span class="title">{{t 'profile.proficiency.baseline'}}</span>
           </div>
+          <div class="grade-line legend">
+            <span class="box-grade-line"></span>
+            <span class="title">{{t 'profile.proficiency.grade-line'}}</span>
+          </div>
         </div>
       </div>
       {{#if isShowTimeSeries}}
-        <div class="time-series">
+        <div class="time-series-container">
           {{charts.monthly-time-series-chart onSelectMonth="onSelectMonth" startDate=timeSeriesStartDate}}
         </div>
       {{/if}}
