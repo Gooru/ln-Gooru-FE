@@ -27,9 +27,14 @@
     <div class="collection-description">
       {{safe-html collection.learningObjectives}}
     </div>
-    <div class="collection-standards">
+    <div class="hidden-xs collection-standards">
       {{#if tags.length}}
-        {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1  showDescription=true tagPopoverDefaultPosition='top'}}
+        {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 showDescription=true tagPopoverDefaultPosition='top'}}
+      {{/if}}
+    </div>
+    <div class="hidden visible-xs collection-standards">
+      {{#if tags.length}}
+        {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 placement="top" showDescription=true tagPopoverDefaultPosition='top'}}
       {{/if}}
     </div>
 
