@@ -113,7 +113,7 @@ export default Ember.Component.extend({
   didRender() {
     this.handleAppContainerScroll();
   },
-   didDestroyElement() {
+  didDestroyElement() {
     this.handleAppContainerScroll();
   },
   /**
