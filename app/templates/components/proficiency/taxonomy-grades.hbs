@@ -1,6 +1,6 @@
 <div class="grade-list">
   {{#each taxonomyGrades as |taxonomyGrade|}}
-    <div class="grade-container {{if (eq activeGrade.id taxonomyGrade.id) 'active-grade'}}">
+    <div class="grade-container grade-sequence-{{taxonomyGrade.sequence}} {{if (eq activeGrade.id taxonomyGrade.id) 'active-grade'}}" {{action "onSelectGrade" taxonomyGrade}}>
       <span class="grade-title">{{taxonomyGrade.grade}}</span>
     </div>
   {{/each}}

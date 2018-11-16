@@ -52,6 +52,15 @@
             zoom: 0.7;
           }
         }
+
+        @media screen and (max-width: $screen-xs) {
+          .proficiency-legends {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-row-gap: 15px;
+            grid-column-gap: 15px;
+          }
+        }
       }
     }
   }

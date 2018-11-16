@@ -1855,7 +1855,9 @@ export default Object.assign(quizzesTranslations, {
       baseline: 'Baseline',
       'grade-line': 'Grade Line',
       'not-tagged':
-        'The class has no course assigned or the course has not been tagged to a valid subject or standards.'
+        'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
+      'show-compressed-chart': 'Show Compressed Chart',
+      'show-expanded-chart': 'Show Expanded Chart'
     }
   },
 
