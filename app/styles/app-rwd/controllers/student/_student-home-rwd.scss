@@ -1,0 +1,41 @@
+/* Styles apply to mobile and tablets (landscape & portrait) */
+.student-home {
+  /* Extra small devices (phones, 600px and down) */
+  @media only screen and (max-width: $sm-width-max) {
+    .container-fluid {
+      .student-landing {
+        > * {
+          width: 100%;
+        }
+
+        .content {
+          display: grid;
+          justify-items: center;
+        }
+
+        .greetings {
+          .featured-courses {
+            float: none !important;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: $lg-width-min) {
+    .container-fluid {
+      .student-landing {
+        > * {
+          width: 100%;
+        }
+
+        .content {
+          display: grid;
+          grid-template-columns: auto auto;
+          justify-items: center;
+        }
+      }
+    }
+  }
+}

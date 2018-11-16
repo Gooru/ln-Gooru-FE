@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import {
   ANONYMOUS_COLOR,
-  STUDY_PLAYER_BAR_COLOR
+  STUDY_PLAYER_BAR_COLOR,
+  GRU_FEATURE_FLAG
 } from 'gooru-web/config/config';
 
 /**
@@ -36,12 +37,27 @@ export default Ember.Component.extend({
   menuItem: null,
 
   sourceType: null,
+
+  isFeatureEnabled: Ember.computed(function() {
+    let feature = 'chronoView';
+    return GRU_FEATURE_FLAG[feature];
+  }),
   // -------------------------------------------------------------------------
   // Attributes
 
   classNames: ['gru-study-header'],
 
   classNameBindings: ['showConfirmation:non-clickable'],
+
+  mileStone: Ember.computed(function() {
+    return {
+      iconClass: 'msaddonTop',
+      offset: {
+        left: '-20px',
+        top: '9px'
+      }
+    };
+  }),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -74,6 +90,18 @@ export default Ember.Component.extend({
       }
     },
 
+    mileStoneHandler: function() {
+      if (this.get('router').currentPath === 'study-player.index') {
+        this.get('router').transitionTo('study-player.timeline-view');
+      } else if (
+        this.get('router').currentPath === 'reports.study-student-collection'
+      ) {
+        this.get('router').transitionTo(
+          'study-player.timeline-view',
+          this.get('courseId')
+        );
+      }
+    },
     /**
      * Go back to collection
      */
@@ -173,6 +201,10 @@ export default Ember.Component.extend({
           component.$('.popover').css({
             left: `${left}px`
           });
+          // Add hover icon
+          component.$('.popover').css({
+            cursor: 's-resize'
+          });
         })
         .mouseleave(function() {
           component.$(this).popover('hide');
@@ -238,6 +270,10 @@ export default Ember.Component.extend({
    */
   fromReport: false,
 
+  showLocateMe: Ember.computed(function() {
+    return !this.get('fromReport') && this.get('isFeatureEnabled');
+  }),
+
   /**
    * Indicates if PreTest is showing
    * @property {Boolean} isPreTest
@@ -260,12 +296,14 @@ export default Ember.Component.extend({
       const completed = this.get('performanceSummary.totalCompleted');
       const total = this.get('performanceSummary.total');
       const percentage = completed ? (completed / total) * 100 : 0;
-      return [
+      var barchartdata = [
         {
           color: this.get('color'),
           percentage
         }
       ];
+      this.updateParent({ barchartdata: barchartdata });
+      return barchartdata;
     }
   ),
 
@@ -312,6 +350,9 @@ export default Ember.Component.extend({
           'performanceSummary',
           classPerformanceSummaryItems.findBy('classId', classId)
         );
+        component.updateParent({
+          performanceSummary: component.get('performanceSummary')
+        });
       });
     } else {
       Ember.RSVP.hash({
@@ -332,6 +373,9 @@ export default Ember.Component.extend({
               score: coursePerformanceSummaryItem.scoreInPercentage
             })
           );
+          component.updateParent({
+            performanceSummary: component.get('performanceSummary')
+          });
         }
       });
     }
@@ -342,5 +386,10 @@ export default Ember.Component.extend({
   },
   setMenuItem: function(item) {
     this.set('menuItem', item);
+  },
+  updateParent(objData) {
+    if (this.attrs && this.attrs.updateModel) {
+      this.attrs.updateModel(objData);
+    }
   }
 });

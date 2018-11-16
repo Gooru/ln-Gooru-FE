@@ -6,7 +6,7 @@
       {{/link-to}}
     </div>
     <div class="panel panel-default panel-primary course-information classroom-information hide-classroom-information">
-      <div class="panel-body">
+      <div class="panel-body {{unless course.tags.length 'no-taxomony'}}">
         <div class="course-image">
           {{#if course.thumbnailUrl}}
             <img src="{{course.thumbnailUrl}}" />

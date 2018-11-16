@@ -1,0 +1,46 @@
+.learner-proficiency-domain-matrix {
+
+  .chart-area {
+    width: 100%;
+    margin: auto;
+  }
+
+  @media screen and (max-width: $screen-md - 1) {
+    .chart-area {
+      zoom: 0.8;
+      grid-template-columns: none;
+      .domain-list {
+        display: none;
+      }
+      .matrix-chart {
+        .scrollable-chart {
+          margin: auto;
+        }
+        .domain-sequence-container {
+          width: max-content;
+          margin: auto;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $screen-359 + 1) {
+    .chart-area {
+      zoom: 0.7;
+      grid-template-columns: none;
+      .domain-list {
+        display: none;
+      }
+      .matrix-chart {
+        .scrollable-chart {
+          margin: auto;
+        }
+        .domain-sequence-container {
+          width: max-content;
+          margin: auto;
+        }
+      }
+    }
+  }
+
+}

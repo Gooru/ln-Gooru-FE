@@ -1,0 +1,157 @@
+.controller.profile {
+  .user-proficiency {
+    display: grid;
+
+    .taxonomy-info {
+      display: grid;
+    }
+
+    .panel.left-panel {
+      margin: auto;
+    }
+    .panel.right-panel {
+      display: none;
+    }
+    @media screen and (max-width: $screen-sm - 1) {
+      .panel.left-panel {
+        width: 100vw;
+        .panel-header {
+          display: grid;
+          grid-template-columns: auto 125px;
+          .title {
+            width: 100%;
+            margin-left: 10px;
+          }
+          .toggle-chart-view {
+            display: none;
+          }
+          .actions {
+            .toggle-view {
+              span {
+                margin-right: 10px;
+              }
+            }
+          }
+        }
+        .panel-body.matrix {
+          .domain {
+            .proficiency-matrix {
+              .competency-chart-tab-container {
+                .competency-courses-chart {
+                  .courses {
+                    display: none;
+                  }
+                  .matrix-chart-container {
+                    zoom: 0.8;
+                    width: 100%;
+                    display: grid;
+                    justify-content: center;
+                  }
+                }
+              }
+            }
+          }
+          .course {
+            .proficiency-course-matrix {
+              .course-matrix-container {
+                zoom: 0.5;
+                .course-chart {
+                  display: grid;
+                  grid-template-columns: auto auto;
+                  justify-content: center;
+                }
+              }
+            }
+          }
+          .proficiency-tags {
+            .proficiency-legends {
+              .legend {
+                .box, .box-skyline {
+                  margin-right: 5px;
+                }
+                margin-right: 10px;
+                &.baseline {
+                  display: none;
+                }
+              }
+            }
+          }
+          .time-series {
+            .monthly-time-series-chart {
+              width: max-content;
+              margin: auto;
+              svg {
+                zoom: 0.5;
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: $screen-359 + 1) {
+      .panel.left-panel {
+        .panel-header {
+          .title {
+            font-size: 15px;
+          }
+        }
+        .panel-body.matrix {
+          .course {
+            .proficiency-course-matrix {
+              .course-matrix-container {
+                zoom: 0.4;
+              }
+            }
+          }
+          .proficiency-tags {
+            .proficiency-legends {
+              .legend {
+                margin-right: 5px;
+                .box, .box-skyline {
+                  margin-right: 5px;
+                }
+                .title {
+                  font-size: 11px;
+                }
+                &.baseline {
+                  display: none;
+                }
+              }
+            }
+          }
+          .time-series {
+            .monthly-time-series-chart {
+              svg {
+                zoom: 0.4;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: $screen-xs) {
+      .panel.left-panel {
+        .panel-body.matrix {
+          .competency-chart-tab-container, .course-matrix-container {
+            #render-proficiency-matrix, #render-proficiency-course-matrix {
+              svg {
+                .competency {
+                  pointer-events: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @media screen and (max-height: $screen-359 + 1) {
+      .panel.left-panel {
+        .panel-body.matrix {
+          margin-bottom: 70px;
+        }
+      }
+    }
+  }
+}

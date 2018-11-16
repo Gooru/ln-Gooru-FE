@@ -1,0 +1,314 @@
+.controller.teacher.course-map {
+  max-width: 95%;
+  .course-map-container {
+    .course-map-body {
+      display: grid;
+      grid-template-rows: 60px auto;
+      .students {
+        .header {
+          display: none;
+        }
+        .students-list {
+          display: flex;
+          width: 95%;
+          min-width: unset;
+          max-width: unset;
+          max-height: unset;
+          overflow-x: auto;
+          .student-list {
+            .student-name {
+              display: none;
+            }
+          }
+        }
+      }
+      .render-course-map {
+        width: 100%;
+        margin: auto;
+        .header {
+          display: none;
+        }
+        .teacher-coursemap {
+          .gru-accordion.gru-accordion-course {
+            .gru-accordion-unit {
+              padding: 0;
+              .unit.panel-heading {
+                .panel-title {
+                  width: calc(100% - 85px) !important;
+                  padding-top: 0;
+                  > a {
+                    width: 100% !important;
+                    max-width: none;
+                    height: auto;
+                  }
+                  .title.ellipsis {
+                    display: grid;
+                    .prefix {
+                      border: none;
+                      margin-left: 0px;
+                    }
+                    .unit-title-text {
+                      margin-left: 10px;
+                    }
+                  }
+                }
+                .performance-container {
+                  height: 67px;
+                  width: 64px;
+                  margin-top: 0;
+                  .charts.gru-students-performance-chart {
+                    height: 67px;
+                    min-width: unset;
+                    .container-box {
+                      height: 67px;
+                      .students-count {
+                        display: grid;
+                        grid-template-columns: auto auto;
+                        .count {
+                          width: unset;
+                        }
+                        .avatar {
+                          right: unset;
+                          position: unset;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              .panel-collapse {
+                padding: 4px;
+                .panel-body {
+                  .gru-accordion-lesson {
+                    .panel-heading {
+                      .panel-title {
+                        width: calc(100% - 225px);
+                        padding: 0;
+                        margin-left: 8px;
+                        > a.title {
+                          display: grid;
+                          max-width: none;
+                          .lesson-prefix {
+                            border: none;
+                          }
+                          .lesson-title-text {
+                            font-size: 15px;
+                          }
+                        }
+                      }
+                      .info {
+                        max-width: none !important;
+                        .content-count {
+                          display: inline-block;
+                          visibility: visible;
+                          margin: 0;
+                          height: inherit;
+                          line-height: 60px;
+                          .assessment-count, .collection-count {
+                            margin: 0;
+                            margin-right: 5px;
+                            i {
+                              margin: 0;
+                              width: 16px;
+                              height: 16px;
+                              background-size: 16px 16px;
+                            }
+                          }
+                        }
+
+                        .performance-container {
+                          width: 60px;
+                          .charts.gru-students-performance-chart {
+                            min-width: auto;
+                            .students-count {
+                              display: grid;
+                              grid-template-columns: auto auto;
+                              .count {
+                                width: unset;
+                              }
+                              .avatar {
+                                right: unset;
+                                position: unset;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                    .panel-body {
+                      .collections {
+                        .collection, .assessment {
+                          .panel-heading {
+                            .panel-title {
+                              width: calc(100% - 225px) !important;
+                              padding: 0;
+                              margin-left: 0;
+                              display: flex;
+                              .icon-container {
+                                width: 60px;
+                              }
+                              > a.title {
+                                display: flex;
+                                padding: 0;
+                                padding-left: 5px;
+                                .ellipsis {
+                                  font-size: 15px;
+                                  line-height: 67px;
+                                }
+                                i {
+                                  margin-top: 10px;
+                                }
+                              }
+                            }
+                            .info {
+                              max-width: none !important;
+                              .content-count {
+                                display: inline-block;
+                                visibility: visible;
+                                margin: 0;
+                                height: inherit;
+                                line-height: 60px;
+                                span {
+                                  margin: 0;
+                                  i {
+                                    font-size: 20px;
+                                    margin: 0;
+                                    margin-right: 5px;
+                                  }
+                                }
+                                .resource-count-text, .question-count-text {
+                                    height: 30px;
+                                    margin-top: 5px;
+                                    display: inline-block;
+                                }
+                              }
+
+                              .controls {
+                                width: 70px;
+                                .go-live-cnt {
+                                  margin: 0;
+                                }
+                              }
+
+                              .performance {
+                                width: 60px;
+                                padding: 0;
+                                margin-top: 0;
+                                .score {
+                                  font-size: 14px;
+                                }
+                                .charts.gru-students-performance-chart {
+                                  min-width: auto;
+                                  .container-box {
+                                    height: 67px;
+                                    .students-count {
+                                      display: grid;
+                                      grid-template-columns: auto auto;
+                                      .count {
+                                        width: unset;
+                                      }
+                                      .avatar {
+                                        right: unset;
+                                        position: unset;
+                                      }
+                                    }
+                                  }
+
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+
+                    }
+                    &.expanded .panel-collapse.collapse.in {
+                      margin: 0;
+                      margin-top: -9px;
+                    }
+                  }
+                }
+
+                @media screen and (max-width: 480px) {
+                  .panel-body {
+                    .panel-group {
+                      .gru-accordion-lesson {
+                        .panel-collapse {
+                          .panel-body {
+                            .collections {
+                              .collection, .assessment {
+                                margin-bottom: 5px;
+                                .panel-heading {
+                                  .panel-title {
+                                    width: calc(100% - 150px) !important;
+                                    .title {
+                                      padding-left: 10px;
+                                    }
+                                  }
+                                  .info {
+                                    .controls {
+                                      display: none;
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+
+                @media screen and (max-width: $screen-376) {
+                  .panel-body {
+                    .panel-group {
+                      .gru-accordion-lesson {
+                        .panel-heading {
+                          .panel-title {
+                            width: calc(100% - 70px) !important;
+                          }
+                          .info {
+                            .content-count {
+                              display: none;
+                            }
+                          }
+                        }
+                        .panel-collapse {
+                          .panel-body {
+                            .collections {
+                              .collection, .assessment {
+                                margin-bottom: 5px;
+                                .panel-heading {
+                                  .panel-title {
+                                    width: calc(100% - 65px) !important;
+                                    .title {
+                                      padding-left: 10px;
+                                      width: 100%;
+                                    }
+                                    .icon-container {
+                                      display: none;
+                                    }
+                                  }
+                                  .info {
+                                    .content-count {
+                                      display: none;
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

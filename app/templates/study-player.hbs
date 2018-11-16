@@ -1,3 +1,7 @@
+<div class="timeLineViewContainer" >
+  {{outlet}}
+</div>
+
 {{player.gru-study-header
   classId=classId
   collection=collection
@@ -14,7 +18,10 @@
   sourceType= source
   isStudyPlayer=true
   isFullScreen=isFullScreen
+  updateModel=(action 'updateModel')
+
 }}
+
 <div class="player-container {{if collection.isCollection 'collection' 'assessment'}} {{if showConfirmation 'show-confirmation' 'no-confirmation'}}">
   {{#if (and hasPreTestSuggestions showSuggestion)}}
       {{player.gru-suggest-test type=typeSuggestion onPlayCollection='playActualCollection' onPlaySuggestion='playSuggestion'}}
