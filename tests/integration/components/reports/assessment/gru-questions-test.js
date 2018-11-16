@@ -160,11 +160,6 @@ test('Questions Layout-non open ended', function(assert) {
     $component.find('table tbody td.question-report'),
     'question report column should no be visible'
   );
-  T.exists(
-    assert,
-    $component.find('.question-cards.visible-xs'),
-    'Missing mobile question cards'
-  );
   assert.equal(
     $component.find('table tbody tr').length,
     2,
