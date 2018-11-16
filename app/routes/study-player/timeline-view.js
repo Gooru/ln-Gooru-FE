@@ -105,7 +105,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
 
     //Consume these changes for route animation
     willTransition() {
-      $('.timeLineViewContainer').css({ position: 'relative' });
       $('.timeLineViewContainer').animate(
         {
           '-webkit-transform': 'translate(500px,1000px)',
@@ -125,22 +124,22 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     },
     didTransition() {
       //top to bottom - remove
-      $('.timeLineViewContainer').css({ position: 'relative' });
-
+      $('.timeLineViewContainer').css({ top: '0vh' });
       Ember.run.later(function() {
         $('.timeLineViewContainer').animate(
           {
             '-webkit-transform': 'translate(500px,1000px)',
-            top: '0vh',
+            /* top: '0vh', */
             height: '100vh'
           },
           {
-            duration: 400,
+            duration: 400
+            /* ,
             complete: function() {
               $('.timeLineViewContainer').css({
                 top: '0vh'
               });
-            }
+            } */
           }
         );
       });
