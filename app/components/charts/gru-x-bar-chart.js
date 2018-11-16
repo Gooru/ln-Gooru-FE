@@ -44,8 +44,45 @@ export default Ember.Component.extend({
   styles: Ember.computed('data', function() {
     return this.get('data').map(function(questionData) {
       return Ember.String.htmlSafe(
-        `background-color: ${questionData.color}; width: ${questionData.percentage}%;`
+        `background-color: ${questionData.color}; width: ${
+          questionData.percentage
+        }%;`
       );
+    });
+  }),
+
+  actions: {
+    mshandler: function() {
+      if (this.attrs.mileStoneHandler) {
+        this.attrs.mileStoneHandler();
+      }
+    }
+  },
+
+  msaddonclass: Ember.computed('msstyles', function() {
+    return this.get('mileStone') ? this.get('mileStone').iconClass : '';
+  }),
+  msstyles: Ember.computed('data', function() {
+    const component = this;
+    return this.get('data').map(function(questionData) {
+      let leftoffsetval =
+        component.get('mileStone') && component.get('mileStone').offset.left
+          ? component.get('mileStone').offset.left
+          : null;
+      if (leftoffsetval && questionData.percentage < 20) {
+        leftoffsetval = '0px';
+      }
+      let displayStyle = component.get('mileStone') ? 'block' : 'none';
+      let leftoffsetstr = leftoffsetval
+          ? `left: calc(${questionData.percentage}% + ${leftoffsetval});`
+          : '',
+        topoffsetstr =
+          component.get('mileStone') && component.get('mileStone').offset.top
+            ? `top : ${component.get('mileStone').offset.top};`
+            : '';
+      let retstring = `${leftoffsetstr} display: ${displayStyle}; ${topoffsetstr}`,
+        retSafeString = Ember.String.htmlSafe(retstring);
+      return retSafeString;
     });
   }),
 
