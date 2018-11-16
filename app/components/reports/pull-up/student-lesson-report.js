@@ -119,11 +119,11 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
   didRender() {
-   this.handleAppContainerScroll();
- },
+    this.handleAppContainerScroll();
+  },
   didDestroyElement() {
-   this.handleAppContainerScroll();
- },
+    this.handleAppContainerScroll();
+  },
   /**
    * Function to triggered once when the component element is first rendered.
    */
