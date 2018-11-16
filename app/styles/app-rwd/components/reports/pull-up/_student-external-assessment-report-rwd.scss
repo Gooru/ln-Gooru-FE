@@ -8,10 +8,23 @@
       .report-body {
         width: 100%;
       }
-      @media only screen and (max-width: $screen-600) {
-        .assessment-container {
-          .assessment-thumbnail {
-            display: none;
+
+      .report-header {
+        @media only screen and (max-width: $screen-600) {
+          .assessment-container {
+            padding: 10px;
+
+            .assessment-info {
+              margin-left: 0;
+            }
+
+            .assessment-thumbnail {
+              display: none;
+            }
+          }
+
+          .pullup-close {
+            width: 50px;
           }
         }
       }
