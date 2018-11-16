@@ -26,8 +26,9 @@
 
     .summary-report-btn {
       border: 1px solid #b8bfc4;
-      border-radius: 15px;
+      border-radius: 16px;
       background: #b8bfc4;
+      z-index: 0;
 
       .performance {
         color: black;
