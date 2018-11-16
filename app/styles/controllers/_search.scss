@@ -1,4 +1,9 @@
 .controller.search {
+  .nav_dropdown {
+    .dropbtn {
+      display: none;
+    }
+  }
   display: block;
   padding: 0;
   max-width: 960px;
