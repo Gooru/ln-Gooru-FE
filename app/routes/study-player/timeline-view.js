@@ -43,17 +43,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     });
   }),
 
-  /*
-  //Consume these changes for route animation
-  states: Ember.inject.service(),
-  actions: {
-    willTransition() {
-      this.set('states.animate', true);
-    }
-  },
-  afterModel() {
-    this.set('states.animate', false);
-  }, */
   beforeModel(transition) {
     if (!this.modelFor('study-player').barchartdata) {
       let studyPlayerController = this.controllerFor('study-player');
@@ -98,6 +87,64 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     });
   },
 
+  actions: {
+    scrollRRight: function() {
+      const route = this;
+      route.currentModel.filterOptions.offset -= route.pageSize;
+      route.currentModel.filterOptions.offset =
+        route.currentModel.filterOptions.offset < 0
+          ? 1
+          : route.currentModel.filterOptions.offset;
+      route.refresh();
+    },
+    scrollLLeft: function() {
+      const route = this;
+      route.currentModel.filterOptions.offset += route.pageSize;
+      this.refresh();
+    },
+
+    //Consume these changes for route animation
+    willTransition() {
+      $('.timeLineViewContainer').animate(
+        {
+          '-webkit-transform': 'translate(500px,1000px)',
+          top: '100vh',
+          height: '0vh'
+        },
+        {
+          duration: 400,
+          complete: function() {
+            $('.timeLineViewContainer').css({
+              top: '100vh',
+              height: '0vh'
+            });
+          }
+        }
+      );
+    },
+    didTransition() {
+      //top to bottom - remove
+      $('.timeLineViewContainer').css({ top: '0vh' });
+      Ember.run.later(function() {
+        $('.timeLineViewContainer').animate(
+          {
+            '-webkit-transform': 'translate(500px,1000px)',
+            /* top: '0vh', */
+            height: '100vh'
+          },
+          {
+            duration: 400
+            /* ,
+            complete: function() {
+              $('.timeLineViewContainer').css({
+                top: '0vh'
+              });
+            } */
+          }
+        );
+      });
+    }
+  },
   paintGraph(graphdatajsn) {
     var graphdata = [
       graphdatajsn.inprogress,
@@ -164,26 +211,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       .attr('width', 12)
       .attr('height', d => yScale(d.value));
   },
-  parseAndGetChartData(/* perfdata */) {
-    return [20, 30, 50];
-    /* return { total: 100, completed: 20, inprogress: 40, notstarted: 40 }; */
-  },
-  actions: {
-    scrollRRight: function() {
-      const route = this;
-      route.currentModel.filterOptions.offset -= route.pageSize;
-      route.currentModel.filterOptions.offset =
-        route.currentModel.filterOptions.offset < 0
-          ? 1
-          : route.currentModel.filterOptions.offset;
-      route.refresh();
-    },
-    scrollLLeft: function() {
-      const route = this;
-      route.currentModel.filterOptions.offset += route.pageSize;
-      this.refresh();
-    }
-  },
 
   getTimeLineData(parentModel) {
     var route = this;
@@ -202,62 +229,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     route.set('timeData', model.timeData);
   },
 
-  /**
-   * @function getPremiumAtcPerformanceSummary, uses ATC view discard this
-   * Method to fetch premium class performance for the ATC view
-   */
-  getPremiumAtcPerformanceSummary(parentModel) {
-    const route = this;
-    const analyticsService = route.get('analyticsService');
-    let classId = parentModel.context.classId;
-    let courseId = parentModel.course.id;
-    let subjectCode = parentModel.course.subject;
-    if (parentModel.course.version !== 'premium') {
-      subjectCode = subjectCode.substring(subjectCode.indexOf('.') + 1);
-    }
-    return Ember.RSVP.resolve(
-      analyticsService.getAtcPerformanceSummaryPremiumClass(
-        classId,
-        courseId,
-        subjectCode
-      )
-    );
-  },
-
-  /**
-   *
-   * @param {} subjectId
-   */
-  loadDataBySubject(parentModel) {
-    let route = this;
-    const userId = this.get('session.userId');
-    let subjectId = parentModel.course.subject;
-
-    route.set('isLoading', true);
-    return Ember.RSVP.hash({
-      competencyMatrixs: route
-        .get('competencyService')
-        .getCompetencyMatrixDomain(userId, subjectId),
-      competencyMatrixCoordinates: route
-        .get('competencyService')
-        .getCompetencyMatrixCoordinates(subjectId)
-    }).then(({ competencyMatrixs }) => {
-      route.set('isLoading', false);
-      /*  let resultSet = route.parseCompetencyData(
-        competencyMatrixs,
-        competencyMatrixCoordinates
-      ); */
-
-      let resultSet = route.getCompletion(competencyMatrixs);
-
-      console.log('resultSet', resultSet); //eslint-disable-line
-      //route.drawChart(resultSet);
-    });
-  },
-
   getCompletion(competencyMatrixs) {
-    /* competencyMatrixs..reduce(function( accumulator, currentValue, currentIndex, array ) { return accumulator + currentValue; }); */
-    /*  var lt5 = competencyMatrixs.domains.reduce((returnlist, currentvalue) => { console.log('returnlist', returnlist); console.log('currentvalue', currentvalue); returnlist.competencies = Object.assign( returnlist.competencies, currentvalue.competencies ); return returnlist; }); */
     var score = { total: 100, completed: 0, inprogress: 0, notstarted: 0 },
       scoremap = {
         2: 'completed',

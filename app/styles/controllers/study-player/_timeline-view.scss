@@ -1,5 +1,7 @@
 .timeLineViewContainer {
-  top: 10px;
+  top: 100vh;
+  height: 0vh;
+  position: relative;
 
   .charts.gru-x-bar-chart {
     background-color: #cdd2d6;
@@ -44,7 +46,7 @@
     border: brown;
     z-index: 21;
     background-image: url("gooru/timeline-view-bg.png");
-    background-size: 100%;
+    background-size: cover;
     display: flex;
     padding-top: 20px;
     flex-direction: column;
