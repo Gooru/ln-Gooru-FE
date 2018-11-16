@@ -1,6 +1,8 @@
 .timeLineViewContainer {
   top: 100vh;
+  height: 0vh;
   position: relative;
+
   .charts.gru-x-bar-chart {
     background-color: #cdd2d6;
     height: 10px;

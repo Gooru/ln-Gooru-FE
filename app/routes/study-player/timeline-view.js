@@ -107,13 +107,17 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     willTransition() {
       $('.timeLineViewContainer').css({ position: 'relative' });
       $('.timeLineViewContainer').animate(
-        { '-webkit-transform': 'translate(500px,1000px)', top: '10vh' },
         {
-          duration: 4000,
+          '-webkit-transform': 'translate(500px,1000px)',
+          top: '100vh',
+          height: '0vh'
+        },
+        {
+          duration: 400,
           complete: function() {
             $('.timeLineViewContainer').css({
               top: '100vh',
-              position: 'unset'
+              height: '0vh'
             });
           }
         }
@@ -125,13 +129,16 @@ export default Ember.Route.extend(PrivateRouteMixin, {
 
       Ember.run.later(function() {
         $('.timeLineViewContainer').animate(
-          { '-webkit-transform': 'translate(500px,1000px)', top: '30vh' },
+          {
+            '-webkit-transform': 'translate(500px,1000px)',
+            top: '0vh',
+            height: '100vh'
+          },
           {
             duration: 400,
             complete: function() {
               $('.timeLineViewContainer').css({
-                top: '1vh',
-                position: 'unset'
+                top: '0vh'
               });
             }
           }
