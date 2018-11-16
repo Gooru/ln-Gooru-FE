@@ -1,0 +1,25 @@
+.reports.assessment.gru-questions {
+  .summary-report-questions {
+    @media screen and (max-width: $screen-sm - 1) {
+      table {
+        th.number {
+          padding-bottom: 10px;
+        }
+
+        .header {
+          .title {
+            display: none;
+          }
+
+          .icon {
+            display: inline-block;
+          }
+        }
+
+        .top-left {
+          padding: 10px 5px;
+        }
+      }
+    }
+  }
+}
