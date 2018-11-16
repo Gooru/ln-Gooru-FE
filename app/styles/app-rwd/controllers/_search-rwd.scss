@@ -9,6 +9,8 @@
           .results {
             margin-left: 0;
             display: grid;
+            grid-gap: 20px;
+            margin-bottom: 0px;
 
             .cards.gru-resource-card {
               margin: auto;
