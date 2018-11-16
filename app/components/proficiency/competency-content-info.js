@@ -14,9 +14,12 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    onSelectActivityContent(contentType) {
+    // Action triggered when select a content type
+    onSelectActivityContent(content) {
       let component = this;
-      component.sendAction('onSelectActivityContent', contentType);
+      if (content.count > 0) {
+        component.sendAction('onSelectActivityContent', content.type);
+      }
     }
   },
 

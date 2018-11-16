@@ -94,7 +94,6 @@
           .taxonomy-grades {
             .grade-list {
               max-height: 63vh;
-              overflow-x: auto;
               @extend %scroll-style;
               .grade-container {
                 cursor: pointer;

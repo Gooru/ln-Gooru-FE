@@ -76,8 +76,13 @@
           color: $dark-800;
         }
 
-        &.disable-click {
-          pointer-events: none;
+        &.default-click {
+          cursor: default;
+        }
+      }
+      .tooltip {
+        .tooltip-inner {
+          text-transform: capitalize;
         }
       }
     }

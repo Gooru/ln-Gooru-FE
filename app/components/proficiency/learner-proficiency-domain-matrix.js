@@ -485,15 +485,6 @@ export default Ember.Component.extend({
     let domainBoundaryLineContainer = svg
       .append('g')
       .attr('id', 'domain-boundary-line-container');
-    let filterContainer = svg
-      .append('defs')
-      .append('filter')
-      .attr('id', 'shadow');
-    filterContainer
-      .append('feDropShadow')
-      .attr('dx', '0')
-      .attr('dy', '0')
-      .attr('stdDeviation', '4');
     component.set('skylineContainer', skylineContainer);
     component.set('baseLineContainer', baseLineContainer);
     component.set('domainBoundaryLineContainer', domainBoundaryLineContainer);
@@ -562,6 +553,34 @@ export default Ember.Component.extend({
       component.joinSkyLinePoints(cellIndex, linePoint);
       cellIndex++;
     });
+    component.showDropShadow();
+  },
+
+  /**
+   * @function showDropShadow
+   * Method to show a drop shadow in skyline
+   */
+  showDropShadow() {
+    let component = this;
+    const chartContainer = d3
+      .select('#render-proficiency-matrix svg');
+    let skylineContainer = component.get('skylineContainer');
+    let filterContainer = chartContainer
+      .append('defs')
+      .append('filter')
+      .attr('id', 'shadow');
+    filterContainer
+      .append('feDropShadow')
+      .attr('dx', '0')
+      .attr('dy', '0')
+      .attr('stdDeviation', '4');
+    skylineContainer
+      .append('line')
+      .attr('x1', 0)
+      .attr('y1', 30)
+      .attr('x2', 0)
+      .attr('y2',30)
+      .attr('class', `sky-line-${-1} dummy-line`);
   },
 
   /**

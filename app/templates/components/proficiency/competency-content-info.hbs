@@ -1,7 +1,7 @@
 <div class="competency-content-container">
   <div class="content-count-container">
     {{#each contentCounts as |content|}}
-      <div class="{{content.type}} content-count {{if (lt content.count 1) 'disable-click'}}" title="{{content.type}}" data-toggle="tooltip" {{action "onSelectActivityContent" content.type}}>
+      <div class="{{content.type}} content-count {{if (lt content.count 1) 'default-click'}}" title="{{content.type}}" data-toggle="tooltip" {{action "onSelectActivityContent" content}}>
         <div class="icon"><i class="{{content.type}}"></i></div>
         <div class="count">{{content.count}}</div>
       </div>

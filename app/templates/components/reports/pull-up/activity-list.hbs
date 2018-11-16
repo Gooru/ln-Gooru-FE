@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="activity-list-body">
-    <div class="activity-contents">
+    <div class="activity-contents {{concat 'cards-' activityContents.length}}">
       {{#if (eq activityContentType 'course')}}
         {{#each activityContents as |content|}}
           {{activity.course-card course=content}}
