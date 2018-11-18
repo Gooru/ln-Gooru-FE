@@ -18,6 +18,9 @@ export default Ember.Component.extend({
 
   uiDateFormat: function(givenDate) {
     givenDate = givenDate || new Date();
+    if (typeof givenDate === 'string') {
+      givenDate = new Date(givenDate);
+    }
     let dateLocale = 'en-us',
       dateMonth = givenDate.toLocaleString(dateLocale, { month: 'short' }),
       dateYear = givenDate.toLocaleString(dateLocale, { year: '2-digit' }),
