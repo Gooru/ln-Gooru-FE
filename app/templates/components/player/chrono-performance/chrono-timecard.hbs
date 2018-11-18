@@ -7,7 +7,6 @@
         {{else }}
             <div class="imgClassPlaceHolder"> </div>
         {{/if}}
-        
         <div class='cardTitle'>
             <div class='cardTypeIcon'>
                 {{#if (eq timeSession.collectionType 'assessment')}}
@@ -30,8 +29,38 @@
                 </div>
             </div>
         </div>
-    {{else}}
+        {{!--  new info card[start] --}} 
+        {{!-- <div class='cardTitle'>
+            <span> {{t 'locateme.score'}}: </span> <span> {{timeSession.scoreInPercentage  }} </span>
+        </div>
+        <div class='cardTitle'>
+            <span> {{t 'locateme.timespent'}}: </span> <span>
 
+            {{timeSession.timeSpent  }}
+            </span> 
+        </div>
+
+        <div class='cardTitle'>
+            {{#if (eq timeSession.collectionType 'assessment')}}
+                <span> {{t 'locateme.attempt'}}: </span>  
+                <span>
+                {{timeSession.attempts }}
+                </span>
+            {{else }}
+                <span> {{t 'locateme.view'}}: </span> 
+                <span>
+                {{timeSession.views  }}
+                </span>
+            {{/if}}
+        </div>
+        <div class='cardTitle ellipsis'>
+            <span> {{t 'locateme.lastAcessesed'}}: </span> 
+            <span>
+            {{format-date timeSession.lastAccessed 'MMMM DD, YYYY' }}
+            </span>
+        </div> --}}
+        {{!--  new info card[end] --}}
+    {{else}}
         {{log 'nodata time ' timeSession}}
         {{!-- Dummy Card, Get the injected class and apply for card size --}}
         <div> nodata</div>

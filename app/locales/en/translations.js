@@ -2052,6 +2052,14 @@ export default Object.assign(quizzesTranslations, {
       'Featured courses are curated by innovative teachers, vetted and reviewed by content experts, and implemented in classrooms with students. Discover, remix, and customize courses to personalize learning and increase student engagement! <a href=\'http://about.gooru.org/courses\' target=\'_blank\'>Learn more</a> about the development of these courses.'
   },
 
+  locateme: {
+    score: 'Score',
+    timespent: 'Time Spent',
+    view: 'View',
+    attempt: 'Attempt',
+    lastAcessesed: 'Last Accessed'
+  },
+
   'taxonomy.modals': {
     'gru-domain-picker': {
       browseSelectorText: 'What domains will this unit cover?',

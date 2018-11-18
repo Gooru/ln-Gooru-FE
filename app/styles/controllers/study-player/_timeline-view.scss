@@ -215,7 +215,8 @@
             font-weight: bold;
             align-self: center;
             width: 56px;
-            margin-left: 20px;
+            margin: 25px;
+            font-size: 20px;
           }
         }
       }
@@ -298,6 +299,14 @@
           align-items: flex-end;
           list-style: none;
 
+          .cardacessinfo {
+            display: none;
+
+            span {
+              font-weight: bold;
+            }
+          }
+
           .cardmask {
             margin-left: 60px;
             margin-right: 60px;
@@ -341,6 +350,7 @@
 
             .cardTypeIcon {
               align-self: center;
+              padding: 5px;
             }
 
             .titleCont {
@@ -372,6 +382,16 @@
                 letter-spacing: normal;
                 text-align: left;
                 color: #5d5d5d;
+              }
+            }
+
+            .cardacessinfo {
+              display: block;
+              padding: 20px;
+
+              span {
+                font-weight: 900;
+                font-size: 15px;
               }
             }
           }
@@ -427,10 +447,12 @@
 
             .cardTypeIcon {
               /* width: 35px;
-                                                                                                                                                                        height: 26px;
-                                                                                                                                                                        object-fit: contain;
-                                                                                                                                                                        background-color: #535e67; */
+                            
+                                                                                                                                                                                      height: 26px;
+                                                                                                                                                                                      object-fit: contain;
+                                                                                                                                                                                      background-color: #535e67; */
               align-self: center;
+              padding: 5px;
             }
 
             .titleCont {

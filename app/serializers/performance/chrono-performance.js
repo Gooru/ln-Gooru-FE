@@ -40,19 +40,21 @@ export default DS.JSONAPISerializer.extend({
    * @returns{JSON Object} data normalized, converted to the form used by application(non snake_case )
    */
   normalizeUsageData(responseData, serializedFilterData) {
-    responseData =
+    let newStartDate = new Date();
+    let cutomResponseData =
       responseData && responseData.content && responseData.content.length > 0
         ? responseData.content[0].usageData
         : [];
-    responseData.filterOptions = serializedFilterData;
-    let newStartDate = new Date();
+    cutomResponseData.filterOptions = serializedFilterData;
     newStartDate.setMonth(
       newStartDate.getMonth() === 0 ? 11 : newStartDate.getMonth() - 1
     );
-    responseData.startDate = responseData.startDate
-      ? responseData.startDate
-      : newStartDate;
-    return responseData;
+    cutomResponseData.startDate =
+      responseData && responseData.content && responseData.content.length > 0
+        ? responseData.content[0].startDate
+        : newStartDate;
+
+    return cutomResponseData;
   },
 
   normalizeFetch: data => {
