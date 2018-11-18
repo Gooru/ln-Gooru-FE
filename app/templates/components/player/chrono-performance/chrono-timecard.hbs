@@ -30,7 +30,7 @@
             </div>
         </div>
         {{!--  new info card[start] --}} 
-        {{!-- <div class='cardTitle'>
+        <div class='cardTitle'>
             <span> {{t 'locateme.score'}}: </span> <span> {{timeSession.scoreInPercentage  }} </span>
         </div>
         <div class='cardTitle'>
@@ -58,7 +58,7 @@
             <span>
             {{format-date timeSession.lastAccessed 'MMMM DD, YYYY' }}
             </span>
-        </div> --}}
+        </div> 
         {{!--  new info card[end] --}}
     {{else}}
         {{log 'nodata time ' timeSession}}

@@ -298,6 +298,7 @@
           justify-content: center;
           align-items: flex-end;
           list-style: none;
+          margin-left: -40px;
 
           .cardacessinfo {
             display: none;
@@ -308,34 +309,36 @@
           }
 
           .cardmask {
-            margin-left: 60px;
-            margin-right: 60px;
-            width: 288px;
-            height: 419px;
+            margin-left: 45px;
+            margin-right: 45px;
+            width: 370px;
+            height: 505px;
             border-radius: 8px;
             box-shadow: 0 0 3px 3px rgba(93, 93, 93, 0.3);
             background-color: #ffffff;
 
             .imgClassAssesment {
-              width: auto;
-              height: 180.4px;
               background: url("gooru/images/navigation_assessment_selected.svg");
+              width: auto;
+              height: 230.4px;
               background-size: 66%;
               border-top-left-radius: 8px;
               border-top-right-radius: 8px;
-              background-position: center;
               background-repeat: space;
+              background-position: center;
+              margin: 20px;
             }
 
             .imgClassCollection {
-              width: auto;
-              height: 180.4px;
               background: url("gooru/images/navigation_collection_selected_icon.svg");
+              width: auto;
+              height: 230.4px;
               background-size: 66%;
               border-top-left-radius: 8px;
               border-top-right-radius: 8px;
               background-repeat: space;
               background-position: center;
+              margin: 20px;
             }
 
             .cardTitle {
@@ -346,6 +349,12 @@
               border-top: 0.5px solid gainsboro;
               background-color: #ffffff;
               display: flex;
+              align-items: center;
+              justify-content: space-evenly;
+
+              span {
+                padding: 11px;
+              }
             }
 
             .cardTypeIcon {
@@ -372,7 +381,7 @@
               }
 
               .cardMainTitle {
-                width: 157px;
+                width: 257px;
                 height: 20px;
                 font-size: 15px;
                 font-weight: bold;
@@ -398,9 +407,9 @@
 
           .cardmask-mid {
             border-radius: 8px;
-            margin-bottom: 80px;
-            width: 217px;
-            height: 277px;
+            /* margin-bottom: 80px; */
+            width: 250px;
+            height: 450px;
             box-shadow: 0 0 3px 3px rgba(93, 93, 93, 0.3);
             background-color: #ffffff;
 
@@ -413,16 +422,19 @@
               background-size: 83%;
               background-repeat: space;
               background-position: center;
+              margin: 20px;
             }
 
             .imgClassCollection {
+              background: url("gooru/images/navigation_collection_selected_icon.svg");
               width: auto;
               height: 162px;
-              background: url("gooru/images/navigation_collection_selected_icon.svg");
-              background-size: 90%;
+              background-size: 83%;
+              background-repeat: space;
               background-position: center;
               border-top-left-radius: 8px;
               border-top-right-radius: 8px;
+              margin: 20px;
             }
 
             .imgClassPlaceHolder {
@@ -440,17 +452,21 @@
 
               /* width: 20px; */
               box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+              border-top: 0.5px solid gainsboro;
               background-color: #ffffff;
               display: flex;
-              border: 1px solid black;
+
+              span {
+                padding: 11px;
+              }
             }
 
             .cardTypeIcon {
               /* width: 35px;
-                            
-                                                                                                                                                                                      height: 26px;
-                                                                                                                                                                                      object-fit: contain;
-                                                                                                                                                                                      background-color: #535e67; */
+                                          
+                                                                                                                                                                                                    height: 26px;
+                                                                                                                                                                                                    object-fit: contain;
+                                                                                                                                                                                                    background-color: #535e67; */
               align-self: center;
               padding: 5px;
             }

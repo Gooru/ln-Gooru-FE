@@ -43,18 +43,18 @@
     {{/each}}
 
     {{#each displayCards.left as |card|}}
-        <li style='transform :scale({{card.scale}});Z-INDEX: {{card.zIndex}}'>
+        <li style='transform :scale({{card.scale}});Z-INDEX: {{card.zIndex}}; cursor:pointer;' {{action 'showCard' card }}>
             {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask-mid cardmask-mid-data-left'}}
         </li>
     {{/each}}
     {{#each displayCards.center as |card|}}
-        <li>
+        <li {{action 'showCard' card }}>
             <div class='selecthighlight'></div>
             {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask'}}
         </li>
     {{/each}}
     {{#each displayCards.right as |card|}}
-        <li style='transform :scale({{card.scale}});Z-INDEX:{{card.zIndex}};' >
+        <li style='transform :scale({{card.scale}});Z-INDEX:{{card.zIndex}};cursor:pointer;' {{action 'showCard' card }} >
             {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask-mid cardmask-mid-data-right'}}
         </li>
     {{/each}}
