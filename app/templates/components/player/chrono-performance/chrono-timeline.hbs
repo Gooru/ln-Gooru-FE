@@ -34,6 +34,8 @@
         </div>
     </div>
 </ul>
+{{#if (gt timeData.length  0)}}
+
 <ul class='cards-display'>
 
     {{#each displayCards.dummyleft as |card index|}}
@@ -66,3 +68,4 @@
         </li>
     {{/each}}
 </ul>
+{{/if}}
