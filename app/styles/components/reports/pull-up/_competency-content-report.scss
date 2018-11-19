@@ -2,11 +2,21 @@
   .competency-performance {
     .competency-name {
       font-size: 15px;
-      color: #29323a;
+      color: $dark-500;
       padding: 20px 15px 20px 15px;
       margin: 0 -15px;
-      border-bottom: dashed 1px #979797;
+      border-bottom: dashed 1px $nobel-gray;
       border-bottom-width: thin;
+    }
+
+    .toggle-view {
+      font-size: 15px;
+      font-weight: bold;
+      color: #4496fa;
+      margin: 10px 50px;
+      cursor: pointer;
+      width: max-content;
+      text-transform: uppercase;
     }
   }
 }

@@ -2,7 +2,7 @@
   position: fixed;
   top: 100%;
   z-index: 1031;
-  width: 768px !important;
+  width: 768px;
   left: 0;
   right: 0;
   margin: auto;
@@ -26,7 +26,7 @@
         .title-section {
           width: 73%;
           font-size: 16px;
-          color: #37424b;
+          color: $dark-400;
 
           .type {
             text-transform: uppercase;
@@ -59,7 +59,7 @@
         .competency-status {
           width: 27%;
           margin: auto;
-          color: #37424b;
+          color: $dark-400;
           font-size: 16px;
 
           .badge {
@@ -91,6 +91,15 @@
       overflow-x: hidden;
       overflow-y: auto;
       padding: 8px 10px 15px;
+    }
+  }
+
+  @media screen and (max-width: $screen-md) {
+    width: 100vw;
+    .competency-report {
+      .body {
+        width: 100vw;
+      }
     }
   }
 }

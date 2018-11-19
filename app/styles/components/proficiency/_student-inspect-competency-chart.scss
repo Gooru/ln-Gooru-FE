@@ -21,6 +21,10 @@
         grid-template-columns: auto;
       }
 
+      .taxonomy-grades-container {
+        pointer-events: none;
+      }
+
       .domain-chart {
         overflow: auto;
 

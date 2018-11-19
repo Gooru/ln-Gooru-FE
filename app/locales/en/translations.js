@@ -1855,7 +1855,9 @@ export default Object.assign(quizzesTranslations, {
       baseline: 'Baseline',
       'grade-line': 'Grade Line',
       'not-tagged':
-        'The class has no course assigned or the course has not been tagged to a valid subject or standards.'
+        'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
+      'show-compressed-chart': 'Show Compressed Chart',
+      'show-expanded-chart': 'Show Expanded Chart'
     }
   },
 
@@ -2716,7 +2718,12 @@ export default Object.assign(quizzesTranslations, {
     },
     'competency-report': {
       title: 'Competency Report',
-      'no-subject': 'No Subject Assigned'
+      'no-subject': 'No Subject Assigned',
+      prerequisites: 'prerequisites',
+      'signature-assessments': 'Signature Assessments',
+      'signature-collections': 'Signature Collections',
+      'show-global-data': 'Show Global Data',
+      'show-student-data': 'Show Student Data'
     },
     'domain-report': 'Domain Report'
   },
