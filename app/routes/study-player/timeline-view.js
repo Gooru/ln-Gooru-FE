@@ -95,16 +95,22 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         route.currentModel.filterOptions.offset < 0
           ? 1
           : route.currentModel.filterOptions.offset;
+
+      route.get('controller').set('isSysEvent', 0);
       route.refresh();
     },
     scrollLLeft: function() {
       const route = this;
       route.currentModel.filterOptions.offset += route.pageSize;
+      route.get('controller').set('isSysEvent', 0);
       this.refresh();
     },
 
     //Consume these changes for route animation
     willTransition() {
+      if (this.get('controller').get('isSysEvent') === 0) {
+        return;
+      }
       $('.timeLineViewContainer').animate(
         {
           '-webkit-transform': 'translate(500px,1000px)',
@@ -124,6 +130,9 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     },
     didTransition() {
       //top to bottom - remove
+      if (this.get('controller').get('isSysEvent') === 0) {
+        return;
+      }
       $('.timeLineViewContainer').css({ top: '0vh' });
       Ember.run.later(function() {
         $('.timeLineViewContainer').animate(
