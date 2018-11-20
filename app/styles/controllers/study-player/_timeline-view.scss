@@ -303,11 +303,67 @@
           .cardrowscore {
             display: flex;
             overflow: hidden;
-            margin-left: 10px;
+            justify-items: center;
 
             .cardTitle {
               flex: 1;
               font-size: 15px;
+              flex-direction: column;
+            }
+
+            .cperformance {
+              flex: 1;
+              background-color: #319848;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-self: stretch;
+
+              /* .cscore { */
+              color: #fff;
+              font-weight: bold;
+              align-self: center;
+              flex: 1;
+
+              .scorelable {
+                font-size: 10px;
+                flex: 1;
+                align-self: center;
+                margin: auto;
+              }
+
+              .scorevlaue {
+                font-size: 25px;
+                flex: 1;
+                align-self: center;
+                margin: auto;
+              }
+
+              /* }
+                             */
+            }
+
+            .timespent {
+              flex: 1;
+              align-self: center;
+              color: black;
+              font-weight: bold;
+              display: flex;
+              flex-direction: column;
+
+              .tslable {
+                font-size: 10px;
+                flex: 1;
+                align-self: center;
+                margin: auto;
+              }
+
+              .tsvalue {
+                font-size: 25px;
+                flex: 1;
+                align-self: center;
+                margin: auto;
+              }
             }
           }
 
@@ -488,10 +544,10 @@
 
             .cardTypeIcon {
               /* width: 35px;
-                                                                      
-                                                                                                                                                                                                                                height: 26px;
-                                                                                                                                                                                                                                object-fit: contain;
-                                                                                                                                                                                                                                background-color: #535e67; */
+                                                                                    
+                                                                                                                                                                                                                                              height: 26px;
+                                                                                                                                                                                                                                              object-fit: contain;
+                                                                                                                                                                                                                                              background-color: #535e67; */
               align-self: center;
               padding: 5px;
             }
@@ -621,8 +677,8 @@
       }
 
       /* @media only screen and (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-                @content;
-            } */
+                      @content;
+                  } */
 
       /*  @media (max-width: $screen-lptp-hidpi) {
                 .cardmask-mid-data-left:first-child {

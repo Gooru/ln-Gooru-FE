@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { getGradeColor } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   /**
@@ -10,6 +11,15 @@ export default Ember.Component.extend({
    * Card Data model
    */
   timeSession: null,
+
+  /**
+   * @property {String} barColor
+   * Computed property to know the color of the small bar
+   */
+  colorStyle: Ember.computed('performanceSummary', function() {
+    let score = this.get('timeSession.scoreInPercentage');
+    return Ember.String.htmlSafe(`background-color: ${getGradeColor(score)};`);
+  }),
 
   /**
    * Set the static display properties to model

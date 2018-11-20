@@ -30,14 +30,25 @@
             </div>
         </div>
         {{!--  new info card[start] --}} 
-        <div class='cardrowscore'>
-            <div class='cardTitle'>
-                <span> {{t 'locateme.score'}}: </span> <span> {{timeSession.scoreInPercentage  }} </span>
+        <div class='cardrowscore cperf-container'>
+            <div class='cperformance'  style="{{colorStyle}}">
+                <span class='scorelable'> {{t 'locateme.score'}}</span>
+                <span class='scorevlaue'> 
+                    {{#if timeSession.scoreInPercentage}}
+                    {{timeSession.scoreInPercentage  }} 
+                        {{else}}
+                        -- 
+                    {{/if}}
+                    </span>  
             </div>
-            <div class='cardTitle'>
-                <span class='ellipsis'> {{t 'locateme.timespent'}}: </span> <span>
-
-                {{timeSession.timeSpent  }}
+            <div class='timespent'>
+                <span class='tslable ellipsis'> {{t 'locateme.timespent'}}: </span> 
+                <span class='tsvalue ellipsis'>
+                    {{#if timeSession.timeSpent}}
+                        {{format-time timeSession.timeSpent}}
+                    {{else}}
+                        &dash;&dash;
+                    {{/if}}
                 </span> 
             </div>
         </div>
@@ -58,7 +69,7 @@
         <div class='cardTitle ellipsis lastaccessed'>
             <span> {{t 'locateme.lastAcessesed'}}: </span> 
             <span>
-            {{format-date timeSession.lastAccessed 'MMMM DD, YYYY' }}
+            {{format-date timeSession.lastAccessed 'DD, MMM, YYYY' }}
             </span>
         </div> 
         {{!--  new info card[end] --}}
