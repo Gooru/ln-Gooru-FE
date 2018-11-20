@@ -340,7 +340,7 @@
               }
 
               /* }
-                             */
+                                           */
             }
 
             .timespent {
@@ -371,6 +371,18 @@
             overflow: hidden;
             margin-left: 10px;
             font-size: 15px;
+            flex-direction: column;
+            height: 101px !important;
+            align-items: center;
+            padding-top: 40px;
+            font-weight: bold;
+
+            .lastacessedLable {
+              font-size: 10px;
+            }
+            span {
+              padding: 0px !important;
+            }
           }
 
           .cardacessinfo {
@@ -544,10 +556,10 @@
 
             .cardTypeIcon {
               /* width: 35px;
-                                                                                    
-                                                                                                                                                                                                                                              height: 26px;
-                                                                                                                                                                                                                                              object-fit: contain;
-                                                                                                                                                                                                                                              background-color: #535e67; */
+                                                                                                  
+                                                                                                                                                                                                                                                            height: 26px;
+                                                                                                                                                                                                                                                            object-fit: contain;
+                                                                                                                                                                                                                                                            background-color: #535e67; */
               align-self: center;
               padding: 5px;
             }
@@ -661,6 +673,31 @@
             }
           }
 
+          @media (max-width: $screen-360) {
+            .cardmask-mid-data-left:first-child {
+              margin-left: -70px;
+              display: none;
+            }
+
+            .cardmask-mid-data-right:first-child {
+              margin-right: -70px;
+              display: none;
+            }
+
+            .dummy-timecard-left {
+              display: none;
+            }
+
+            .dummy-timecard-right {
+              display: none;
+            }
+
+            .cardmask {
+              width: unset;
+              margin-left: -10px;
+            }
+          }
+
           /*
                     .cardmask-mid-data-left:last-child {
                         box-shadow: unset;
@@ -677,8 +714,8 @@
       }
 
       /* @media only screen and (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-                      @content;
-                  } */
+                            @content;
+                        } */
 
       /*  @media (max-width: $screen-lptp-hidpi) {
                 .cardmask-mid-data-left:first-child {

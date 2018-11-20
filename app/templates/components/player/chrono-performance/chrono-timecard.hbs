@@ -35,7 +35,7 @@
                 <span class='scorelable'> {{t 'locateme.score'}}</span>
                 <span class='scorevlaue'> 
                     {{#if timeSession.scoreInPercentage}}
-                    {{timeSession.scoreInPercentage  }} 
+                    {{timeSession.scoreInPercentage  }} %
                         {{else}}
                         -- 
                     {{/if}}
@@ -67,7 +67,7 @@
             {{/if}}
         </div> --}}
         <div class='cardTitle ellipsis lastaccessed'>
-            <span> {{t 'locateme.lastAcessesed'}}: </span> 
+            <span class="lastacessedLable"> {{t 'locateme.lastAcessesed'}} </span> 
             <span>
             {{format-date timeSession.lastAccessed 'DD, MMM, YYYY' }}
             </span>
