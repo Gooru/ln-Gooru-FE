@@ -1,5 +1,12 @@
 .application {
+  /*Hide tooltip for mobile and tablets*/
+  @media only screen and (max-width: $screen-1024) {
+    .tooltip {
+      visibility: hidden;
+    }
+  }
   overflow-x: hidden;
+
   &.no-vertical-scroll {
     overflow-y: hidden;
   }
@@ -7,10 +14,12 @@
 
 .profile_proficiency {
   overflow-y: hidden;
+
   .app-container {
     overflow-y: auto;
   }
 }
+
 .app-container {
   height: 100vh;
   padding-top: 55px;
@@ -21,6 +30,7 @@
   > .backdrop-pull-ups .backdrop {
     background: none !important;
   }
+
   > .backdrop-pull-ups:last-child .backdrop {
     background-color: #000 !important;
   }
@@ -30,7 +40,6 @@
     @include flex-direction(column);
     @include align-content(flex-start);
     min-height: 100%;
-
     @media (min-width: $screen-md) {
       @include flex-direction(row);
     }
@@ -75,6 +84,7 @@
     }
   }
 }
+
 .popover {
   z-index: 99999;
 }
