@@ -36,8 +36,12 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
       /*Default View */
       grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
+
+      &.archived-class {
+        grid-template-columns: 50px 1fr 40px 59px 40px;
+      }
       /* Extra small devices (phones, 600px and down) */
-      @media only screen and (max-width: 600px) {
+      @media only screen and (max-width: $screen-sm - 1) {
         grid-template-columns: 50px 40px 40px 40px 1fr 40px 40px 40px;
 
         .class-activities,
