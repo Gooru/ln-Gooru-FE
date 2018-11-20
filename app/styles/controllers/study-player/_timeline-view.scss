@@ -300,6 +300,23 @@
           list-style: none;
           margin-left: -40px;
 
+          .cardrowscore {
+            display: flex;
+            overflow: hidden;
+            margin-left: 10px;
+
+            .cardTitle {
+              flex: 1;
+              font-size: 15px;
+            }
+          }
+
+          .lastaccessed {
+            overflow: hidden;
+            margin-left: 10px;
+            font-size: 15px;
+          }
+
           .cardacessinfo {
             display: none;
 
@@ -358,7 +375,7 @@
               justify-content: space-evenly;
 
               span {
-                padding: 11px;
+                /* padding: 11px; */
                 flex: 1;
               }
             }
@@ -471,10 +488,10 @@
 
             .cardTypeIcon {
               /* width: 35px;
-                                                        
-                                                                                                                                                                                                                  height: 26px;
-                                                                                                                                                                                                                  object-fit: contain;
-                                                                                                                                                                                                                  background-color: #535e67; */
+                                                                      
+                                                                                                                                                                                                                                height: 26px;
+                                                                                                                                                                                                                                object-fit: contain;
+                                                                                                                                                                                                                                background-color: #535e67; */
               align-self: center;
               padding: 5px;
             }
@@ -549,8 +566,101 @@
           .cardmask-mid-data-right:first-child {
             margin-right: -20px;
           }
+
+          @media (max-width: $screen-lptp-hidpi) {
+            .cardmask-mid-data-left:first-child {
+              margin-left: -70px;
+            }
+
+            .cardmask-mid-data-right:first-child {
+              margin-right: -70px;
+            }
+
+            .dummy-timecard-left {
+              display: none;
+            }
+
+            .dummy-timecard-right {
+              display: none;
+            }
+          }
+
+          @media (max-width: $screen-sm) {
+            .cardmask-mid-data-left:first-child {
+              margin-left: -70px;
+              display: none;
+            }
+
+            .cardmask-mid-data-right:first-child {
+              margin-right: -70px;
+              display: none;
+            }
+
+            .dummy-timecard-left {
+              display: none;
+            }
+
+            .dummy-timecard-right {
+              display: none;
+            }
+          }
+
+          /*
+                    .cardmask-mid-data-left:last-child {
+                        box-shadow: unset;
+                    }
+
+                    .cardmask-mid-data-right:last-child {
+                        box-shadow: unset;
+                    } */
+
+          .cardTitle:last-child {
+            box-shadow: unset;
+          }
         }
       }
+
+      /* @media only screen and (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+                @content;
+            } */
+
+      /*  @media (max-width: $screen-lptp-hidpi) {
+                .cardmask-mid-data-left:first-child {
+                    margin-left: -70px;
+                }
+
+                .cardmask-mid-data-right:first-child {
+                    margin-right: -70px;
+                }
+
+                .dummy-timecard-left {
+                    display: none;
+                }
+
+                .dummy-timecard-right {
+                    display: none;
+                }
+            }
+
+            @media (max-width: $screen-sm) {
+                .cardmask-mid-data-left:first-child {
+                    margin-left: -70px;
+                    display: none;
+                }
+
+                .cardmask-mid-data-right:first-child {
+                    margin-right: -70px;
+                    display: none;
+                }
+
+                .dummy-timecard-left {
+                    display: none;
+                }
+
+                .dummy-timecard-right {
+                    display: none;
+                }
+            } */
     }
 
     .bottom-perf-line {

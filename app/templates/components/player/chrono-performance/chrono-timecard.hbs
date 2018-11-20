@@ -30,17 +30,19 @@
             </div>
         </div>
         {{!--  new info card[start] --}} 
-        <div class='cardTitle'>
-            <span> {{t 'locateme.score'}}: </span> <span> {{timeSession.scoreInPercentage  }} </span>
-        </div>
-        <div class='cardTitle'>
-            <span> {{t 'locateme.timespent'}}: </span> <span>
+        <div class='cardrowscore'>
+            <div class='cardTitle'>
+                <span> {{t 'locateme.score'}}: </span> <span> {{timeSession.scoreInPercentage  }} </span>
+            </div>
+            <div class='cardTitle'>
+                <span class='ellipsis'> {{t 'locateme.timespent'}}: </span> <span>
 
-            {{timeSession.timeSpent  }}
-            </span> 
+                {{timeSession.timeSpent  }}
+                </span> 
+            </div>
         </div>
 
-        <div class='cardTitle'>
+        {{!-- <div class='cardTitle'>
             {{#if (eq timeSession.collectionType 'assessment')}}
                 <span> {{t 'locateme.attempt'}}: </span>  
                 <span>
@@ -52,8 +54,8 @@
                 {{timeSession.views  }}
                 </span>
             {{/if}}
-        </div>
-        <div class='cardTitle ellipsis'>
+        </div> --}}
+        <div class='cardTitle ellipsis lastaccessed'>
             <span> {{t 'locateme.lastAcessesed'}}: </span> 
             <span>
             {{format-date timeSession.lastAccessed 'MMMM DD, YYYY' }}
