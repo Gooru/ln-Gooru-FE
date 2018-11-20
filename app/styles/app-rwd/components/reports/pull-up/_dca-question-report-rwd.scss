@@ -1,0 +1,34 @@
+.reports.pull-up-dca-question-report {
+  @media only screen and (max-width: $screen-sm - 1) {
+    width: 100%;
+
+    .dca-question-report-container {
+      width: 100%;
+
+      .report-content {
+        .report-info-chart-container {
+          .report-chart-container {
+            .not-answered {
+              width: 40%;
+            }
+          }
+        }
+      }
+    }
+  }
+    @media only screen and (min-width: $screen-568) and (max-width: $screen-824) {
+      .dca-question-report-container {
+        width: 100%;
+
+        .report-content {
+          .report-info-chart-container {
+            .report-chart-container {
+              .not-answered {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+}

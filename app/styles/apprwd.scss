@@ -3,7 +3,7 @@
     Example: @import "app-rwd/components/filename";
   */
 @import "variables";
-@import "quizzes-rwd"; 
+@import "quizzes-rwd";
 // Components
 @import "app-rwd/components/proficiency/learner-proficiency-domain-matrix";
 @import "app-rwd/components/class/overview/routesuggestion-preview";
@@ -33,6 +33,10 @@
 @import "app-rwd/components/reports/pull-up/_gru-report-panel-rwd";
 @import "app-rwd/components/reports/_gru-questions-rwd";
 @import "app-rwd/components/reports/pull-up/_student-external-assessment-report-rwd";
+@import "app-rwd/components/reports/pull-up/_dca-collection-report-rwd";
+@import "app-rwd/components/reports/pull-up/_dca-collection-report-gridview-rwd";
+@import "app-rwd/components/reports/pull-up/_dca-question-report-rwd";
+@import "app-rwd/components/reports/pull-up/_dca-student-collection-report-rwd";
 
 //Controllers
 @import "app-rwd/controllers/student/class-rwd";
