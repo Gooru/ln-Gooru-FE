@@ -39,7 +39,7 @@
 <ul class='cards-display'>
 
     {{#each displayCards.dummyleft as |card index|}}
-        <li class="dummy-timecard-left"  style='transform :scale({{card.scale}}); Z-INDEX: {{ card.zIndex}}' >
+        <li class="dummy-timecard-left"  style='transform :scale({{card.scale}}); Z-INDEX: {{ card.zIndex}} ; margin-right:-10px;' >
                 {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask-mid'}}            
         </li>
     {{/each}}
@@ -63,7 +63,7 @@
     
     
     {{#each displayCards.dummyright as |card index|}}
-        <li class="dummy-timecard-right" style='transform :scale({{card.scale}});Z-INDEX:{{card.zIndex}};'>
+        <li class="dummy-timecard-right" style='transform :scale({{card.scale}});Z-INDEX:{{card.zIndex}};margin-left:-10px;'>
                 {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask-mid'}}
         </li>
     {{/each}}

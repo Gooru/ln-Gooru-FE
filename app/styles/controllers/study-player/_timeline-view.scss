@@ -300,6 +300,96 @@
           list-style: none;
           margin-left: -40px;
 
+          .cardrowscore {
+            display: flex;
+            overflow: hidden;
+            justify-items: center;
+
+            .cardTitle {
+              flex: 1;
+              font-size: 15px;
+              flex-direction: column;
+            }
+
+            .cperformance {
+              flex: 1;
+              background-color: #319848;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-self: stretch;
+
+              /* .cscore { */
+              color: #fff;
+              font-weight: bold;
+              align-self: center;
+              flex: 1;
+              height: 10vh;
+
+              .scorelable {
+                font-size: 10px;
+                align-self: center;
+
+                /*flex: 1;
+                                 margin: 14px; */
+              }
+
+              .scorevlaue {
+                font-size: 25px;
+
+                /*  flex: 1;
+                                 margin: auto; */
+                align-self: center;
+              }
+
+              /* }
+                                                         */
+            }
+
+            .timespent {
+              flex: 1;
+              align-self: center;
+              color: black;
+              font-weight: bold;
+              display: flex;
+              flex-direction: column;
+
+              .tslable {
+                font-size: 10px;
+
+                /* flex: 1; 
+                                margin: 14px; */
+                align-self: center;
+              }
+
+              .tsvalue {
+                font-size: 25px;
+                /* flex: 1;
+                                margin: auto; */
+                align-self: center;
+              }
+            }
+          }
+
+          .lastaccessed {
+            overflow: hidden;
+            margin-left: 10px;
+            font-size: 15px;
+            flex-direction: column;
+            height: 101px !important;
+            align-items: center;
+            padding-top: 40px;
+            font-weight: bold;
+
+            .lastacessedLable {
+              font-size: 10px;
+            }
+
+            span {
+              padding: 0px !important;
+            }
+          }
+
           .cardacessinfo {
             display: none;
 
@@ -308,38 +398,43 @@
             }
           }
 
+          .imgAttrs {
+            width: auto;
+            height: 22vh;
+            margin: 20px;
+          }
+
+          .imgClassAssesment {
+            background: url("gooru/images/navigation_assessment_selected.svg");
+
+            @extend .imgAttrs;
+
+            background-size: 66%;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            background-repeat: space;
+            background-position: center;
+          }
+
+          .imgClassCollection {
+            @extend .imgAttrs;
+
+            background: url("gooru/images/navigation_collection_selected_icon.svg");
+            background-size: 66%;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            background-repeat: space;
+            background-position: center;
+          }
+
           .cardmask {
             margin-left: 45px;
             margin-right: 45px;
             width: 370px;
-            height: 505px;
+            height: 55vh;
             border-radius: 8px;
             box-shadow: 0 0 3px 3px rgba(93, 93, 93, 0.3);
             background-color: #ffffff;
-
-            .imgClassAssesment {
-              background: url("gooru/images/navigation_assessment_selected.svg");
-              width: auto;
-              height: 230.4px;
-              background-size: 66%;
-              border-top-left-radius: 8px;
-              border-top-right-radius: 8px;
-              background-repeat: space;
-              background-position: center;
-              margin: 20px;
-            }
-
-            .imgClassCollection {
-              background: url("gooru/images/navigation_collection_selected_icon.svg");
-              width: auto;
-              height: 230.4px;
-              background-size: 66%;
-              border-top-left-radius: 8px;
-              border-top-right-radius: 8px;
-              background-repeat: space;
-              background-position: center;
-              margin: 20px;
-            }
 
             .cardTitle {
               height: 50px;
@@ -353,7 +448,8 @@
               justify-content: space-evenly;
 
               span {
-                padding: 11px;
+                /* padding: 11px; */
+                flex: 1;
               }
             }
 
@@ -407,6 +503,7 @@
 
           .cardmask-mid {
             border-radius: 8px;
+
             /* margin-bottom: 80px; */
             width: 250px;
             height: 450px;
@@ -458,15 +555,16 @@
 
               span {
                 padding: 11px;
+                flex: 1;
               }
             }
 
             .cardTypeIcon {
               /* width: 35px;
-                                          
-                                                                                                                                                                                                    height: 26px;
-                                                                                                                                                                                                    object-fit: contain;
-                                                                                                                                                                                                    background-color: #535e67; */
+                                                                                                                
+                                                                                                                                                                                                                                                                          height: 26px;
+                                                                                                                                                                                                                                                                          object-fit: contain;
+                                                                                                                                                                                                                                                                          background-color: #535e67; */
               align-self: center;
               padding: 5px;
             }
@@ -541,8 +639,126 @@
           .cardmask-mid-data-right:first-child {
             margin-right: -20px;
           }
+
+          @media (max-width: $screen-lptp-hidpi) {
+            .cardmask-mid-data-left:first-child {
+              margin-left: -70px;
+            }
+
+            .cardmask-mid-data-right:first-child {
+              margin-right: -70px;
+            }
+
+            .dummy-timecard-left {
+              display: none;
+            }
+
+            .dummy-timecard-right {
+              display: none;
+            }
+          }
+
+          @media (max-width: $screen-sm) {
+            .cardmask-mid-data-left:first-child {
+              margin-left: -70px;
+              display: none;
+            }
+
+            .cardmask-mid-data-right:first-child {
+              margin-right: -70px;
+              display: none;
+            }
+
+            .dummy-timecard-left {
+              display: none;
+            }
+
+            .dummy-timecard-right {
+              display: none;
+            }
+          }
+
+          @media (max-width: $screen-360) {
+            .cardmask-mid-data-left:first-child {
+              margin-left: -70px;
+              display: none;
+            }
+
+            .cardmask-mid-data-right:first-child {
+              margin-right: -70px;
+              display: none;
+            }
+
+            .dummy-timecard-left {
+              display: none;
+            }
+
+            .dummy-timecard-right {
+              display: none;
+            }
+
+            .cardmask {
+              width: unset;
+              margin-left: -10px;
+            }
+          }
+
+          /*
+                    .cardmask-mid-data-left:last-child {
+                        box-shadow: unset;
+                    }
+
+                    .cardmask-mid-data-right:last-child {
+                        box-shadow: unset;
+                    } */
+
+          .cardTitle:last-child {
+            box-shadow: unset;
+          }
         }
       }
+
+      /* @media only screen and (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+                                  @content;
+                              } */
+
+      /*  @media (max-width: $screen-lptp-hidpi) {
+                .cardmask-mid-data-left:first-child {
+                    margin-left: -70px;
+                }
+
+                .cardmask-mid-data-right:first-child {
+                    margin-right: -70px;
+                }
+
+                .dummy-timecard-left {
+                    display: none;
+                }
+
+                .dummy-timecard-right {
+                    display: none;
+                }
+            }
+
+            @media (max-width: $screen-sm) {
+                .cardmask-mid-data-left:first-child {
+                    margin-left: -70px;
+                    display: none;
+                }
+
+                .cardmask-mid-data-right:first-child {
+                    margin-right: -70px;
+                    display: none;
+                }
+
+                .dummy-timecard-left {
+                    display: none;
+                }
+
+                .dummy-timecard-right {
+                    display: none;
+                }
+            } */
     }
 
     .bottom-perf-line {

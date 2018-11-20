@@ -6,6 +6,8 @@ export default Ember.Component.extend({
   classNames: ['chrono-timeline'],
 
   timeData: null,
+  selectedIndex: 0,
+  animateDirection: 'left',
 
   timeLineRightDate: function() {
     let todaysDate = new Date();
@@ -126,6 +128,16 @@ export default Ember.Component.extend({
       timeIndx = -1; // All empty cards
     }
 
+    //Animate card to side ways
+    let oldIndex = this.set('selectedIndex');
+    if (oldIndex > timeIndx) {
+      //Scroll left
+      this.set('animateDirection', 'left');
+    } // Scroll right
+    else {
+      this.set('animateDirection', 'right');
+    }
+    //Animate Ends
     displayCards = this.getCenterCard(timeIndx);
     cards = this.getAdjcentCards(
       timeIndx,
@@ -139,6 +151,7 @@ export default Ember.Component.extend({
   getCenterCard: function(cardidx) {
     let currentCard = this.timeData[cardidx],
       card = { center: [currentCard] };
+    this.set('selectedIndex', cardidx);
     this.set('currentCard', currentCard);
     return card;
   },

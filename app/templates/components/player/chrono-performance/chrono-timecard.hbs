@@ -30,17 +30,30 @@
             </div>
         </div>
         {{!--  new info card[start] --}} 
-        <div class='cardTitle'>
-            <span> {{t 'locateme.score'}}: </span> <span> {{timeSession.scoreInPercentage  }} </span>
+        <div class='cardrowscore cperf-container'>
+            <div class='cperformance'  style="{{colorStyle}}">
+                <span class='scorelable'> {{t 'locateme.score'}}</span>
+                <span class='scorevlaue'> 
+                    {{#if timeSession.scoreInPercentage}}
+                    {{timeSession.scoreInPercentage  }} %
+                        {{else}}
+                        -- 
+                    {{/if}}
+                    </span>  
+            </div>
+            <div class='timespent'>
+                <span class='tslable ellipsis'> {{t 'locateme.timespent'}}: </span> 
+                <span class='tsvalue ellipsis'>
+                    {{#if timeSession.timeSpent}}
+                        {{format-time timeSession.timeSpent}}
+                    {{else}}
+                        &dash;&dash;
+                    {{/if}}
+                </span> 
+            </div>
         </div>
-        <div class='cardTitle'>
-            <span> {{t 'locateme.timespent'}}: </span> <span>
 
-            {{timeSession.timeSpent  }}
-            </span> 
-        </div>
-
-        <div class='cardTitle'>
+        {{!-- <div class='cardTitle'>
             {{#if (eq timeSession.collectionType 'assessment')}}
                 <span> {{t 'locateme.attempt'}}: </span>  
                 <span>
@@ -52,11 +65,11 @@
                 {{timeSession.views  }}
                 </span>
             {{/if}}
-        </div>
-        <div class='cardTitle ellipsis'>
-            <span> {{t 'locateme.lastAcessesed'}}: </span> 
+        </div> --}}
+        <div class='cardTitle ellipsis lastaccessed'>
+            <span class="lastacessedLable"> {{t 'locateme.lastAcessesed'}} </span> 
             <span>
-            {{format-date timeSession.lastAccessed 'MMMM DD, YYYY' }}
+            {{format-date timeSession.lastAccessed 'DD, MMM, YYYY' }}
             </span>
         </div> 
         {{!--  new info card[end] --}}
