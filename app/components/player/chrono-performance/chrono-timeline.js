@@ -86,6 +86,16 @@ export default Ember.Component.extend({
     },
     scrollRight() {
       this.attrs.scrollRight();
+    },
+    onClickRight() {
+      let curcard = this.get('currentCard');
+      this.selectTimeSession(curcard);
+      this.setDisplayPack(curcard, 1);
+    },
+    onClickLeft() {
+      let curcard = this.get('currentCard');
+      this.selectTimeSession(curcard);
+      this.setDisplayPack(curcard, -1);
     }
   },
 
@@ -128,16 +138,6 @@ export default Ember.Component.extend({
       timeIndx = -1; // All empty cards
     }
 
-    //Animate card to side ways
-    let oldIndex = this.set('selectedIndex');
-    if (oldIndex > timeIndx) {
-      //Scroll left
-      this.set('animateDirection', 'left');
-    } // Scroll right
-    else {
-      this.set('animateDirection', 'right');
-    }
-    //Animate Ends
     displayCards = this.getCenterCard(timeIndx);
     cards = this.getAdjcentCards(
       timeIndx,
