@@ -3,8 +3,10 @@
   <div class="report-header">
     <div class="report-breadcrumb">
       <div class="course-title">
-        <i class="course-icon"></i>
-        <p>{{t 'common.course'}} : {{course.title}}</p>
+        <div>
+          <div>{{t 'common.course'}} :</div>
+          <div class="course-title-value ellipsis">{{course.title}}</div>
+        </div>
       </div>
     </div>
     <div class="report-close-pullup" {{action 'onPullUpClose'}}>
