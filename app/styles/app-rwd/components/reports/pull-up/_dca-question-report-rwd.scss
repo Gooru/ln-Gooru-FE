@@ -4,12 +4,28 @@
 
     .dca-question-report-container {
       width: 100%;
-
+      .report-content {
+        .report-carousel {
+          #report-carousel-wrapper {
+            .question-background-cover {
+              .question-content-container {
+                width: 100%;
+                .question-image-container {
+                  img {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
       .report-header {
         .report-header-info {
           .dca-activity-date {
             padding-right: 10px;
             font-size: 13px;
+            line-height: 18px;
           }
 
           .collection-title {
@@ -28,14 +44,9 @@
     .dca-question-report-container {
       .report-content {
         .report-info-chart-container {
-          grid-template-columns: 100px 420px 100px;
+          grid-template-columns:  auto 1fr 100px;;
           .report-chart-container {
-            .correct {
-              width: 10% !important;
-            }
-            .not-answered {
-              width: 40% !important;
-            }
+            width: 100%;
           }
         }
       }
