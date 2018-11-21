@@ -127,18 +127,35 @@ export default Ember.Component.extend({
           cOffX = cCardEl.offsetLeft;
 
         let movemnt = tOffX - cOffX;
-
-        //console.log('cSelector', cSelector);
         let cbfunc = function() {
           resolve('done');
         };
 
-        //console.log('movemnt', movemnt);
-        //component.animateJQ(cSelector,movemnt, cbfunc);
         component.animated3(tCard, movemnt, cbfunc);
       });
       return animateCompleted;
     }
+  },
+  animated3All(tgt, movemnt, cbcomplete) {
+    var t = d3
+      .transition()
+      .delay(9000)
+      .duration(9000);
+    var tgt1 = tgt.transition(t);
+    tgt1.style('transform', `translateX(${movemnt}px)`).each('end', cbcomplete);
+
+    let displayCards = this.set('displayCards');
+    if (displayCards) {
+      // Animate all the cards in the carddeck
+    }
+  },
+  animated3(tgt, movemnt, cbcomplete) {
+    var t = d3
+      .transition()
+      .delay(9000)
+      .duration(9000);
+    var tgt1 = tgt.transition(t);
+    tgt1.style('transform', `translateX(${movemnt}px)`).each('end', cbcomplete);
   },
   animateJQ(cSelector, movemnt, cbcomplete) {
     let cCard = $(cSelector);
@@ -152,16 +169,6 @@ export default Ember.Component.extend({
         complete: cbcomplete
       }
     );
-  },
-  animated3(tgt, movemnt, cbcomplete) {
-    var t = d3
-      .transition()
-      .delay(9000)
-      .duration(9000);
-    var tgt1 = tgt.transition(t);
-
-    tgt1.style('transform', `translateX(${movemnt}px)`).each('end', cbcomplete);
-    //tgt.transform('translate', `${movemnt}px`);
   },
   animated3b(tgt, movemnt) {
     //cbcomplete
@@ -242,14 +249,28 @@ export default Ember.Component.extend({
       scaleprop = 7;
 
     // leftcards cardidx =12, len=3, Added checks for null, will have another version for adding dummy cards, now null cards are not treated ad empty or dummy card.
-    for (let index = cardidx - 1; cardidx - len < index; --index) {
+    /*  for (let index = cardidx - 1; cardidx - len < index; --index) {
       if (this.timeData[index]) {
         let curCard = Object.assign({}, this.timeData[index]);
         cards.left.push(curCard);
       } else {
         isFull = 0;
       }
+    } */
+
+    let curIndx = cardidx,
+      lenbound = len;
+    lenbound--;
+    for (let index = 0; index < lenbound; index++) {
+      curIndx--;
+      if (this.timeData[curIndx]) {
+        let curCard = Object.assign({}, this.timeData[curIndx]);
+        cards.left.push(curCard);
+      } else {
+        isFull = 0;
+      }
     }
+    cards.left.reverse();
     if (isFull === 1) {
       cards.dummyleft.push({
         collectionType: 'dummy',
