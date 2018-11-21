@@ -7,10 +7,26 @@
       .report-content {
         .report-carousel {
           #report-carousel-wrapper {
+            .carousel-control.left,
+            .carousel-control.right {
+              margin-top: 5px;
+              width: 30px;
+              height: 30px;
+
+              .arrow-left,
+              .arrow-right {
+                width: 25px;
+                background-size: 25px 25px;
+                height: 25px;
+                top: 10%;
+                margin-left: 0;
+              }
+            }
             .question-background-cover {
               .question-content-container {
                 width: 100%;
                 .question-image-container {
+                  display: none;
                   img {
                     display: none;
                   }
