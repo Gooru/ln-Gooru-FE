@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import d3 from 'd3';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -88,15 +89,88 @@ export default Ember.Component.extend({
       this.attrs.scrollRight();
     },
     onClickRight() {
-      let curcard = this.get('currentCard');
-      this.selectTimeSession(curcard);
-      this.setDisplayPack(curcard, 1);
+      const comp = this;
+      let resv = comp.animateCard(1);
+      resv.then(function() {
+        let curcard = comp.get('currentCard');
+        comp.selectTimeSession(curcard);
+        comp.setDisplayPack(curcard, 1);
+      });
+      //this.$('.cards-display').carousel('next');
     },
     onClickLeft() {
-      let curcard = this.get('currentCard');
-      this.selectTimeSession(curcard);
-      this.setDisplayPack(curcard, -1);
+      //this.$('.cards-display').carousel('next');
+      const comp = this;
+      let resv = this.animateCard(-1);
+      resv.then(function() {
+        let curcard = comp.get('currentCard');
+        comp.selectTimeSession(curcard);
+        comp.setDisplayPack(curcard, -1);
+      });
     }
+  },
+  animateCard(offset) {
+    const component = this;
+    let curCard = this.get('currentCard');
+    if (curCard) {
+      let animateCompleted = new Ember.RSVP.Promise(function(resolve) {
+        let tIndx = component.getOffsetCardIdx(curCard, offset),
+          tSelector = `.c-${component.timeData[tIndx].sessionId}`,
+          tCard = d3.selectAll(tSelector),
+          tCardEl = tCard[0][0],
+          tOffX = tCardEl.offsetLeft;
+
+        let cIndx = component.getOffsetCardIdx(curCard, 0),
+          cSelector = `.c-${component.timeData[cIndx].sessionId}`,
+          cCard = d3.selectAll(cSelector),
+          cCardEl = cCard[0][0],
+          cOffX = cCardEl.offsetLeft;
+
+        let movemnt = tOffX - cOffX;
+
+        //console.log('cSelector', cSelector);
+        let cbfunc = function() {
+          resolve('done');
+        };
+
+        //console.log('movemnt', movemnt);
+        //component.animateJQ(cSelector,movemnt, cbfunc);
+        component.animated3(tCard, movemnt, cbfunc);
+      });
+      return animateCompleted;
+    }
+  },
+  animateJQ(cSelector, movemnt, cbcomplete) {
+    let cCard = $(cSelector);
+    //console.log('cSelector', cSelector);
+    cCard.animate(
+      {
+        transform: `translateX(${movemnt}px)`
+      },
+      {
+        duration: 9000,
+        complete: cbcomplete
+      }
+    );
+  },
+  animated3(tgt, movemnt, cbcomplete) {
+    var t = d3
+      .transition()
+      .delay(9000)
+      .duration(9000);
+    var tgt1 = tgt.transition(t);
+
+    tgt1.style('transform', `translateX(${movemnt}px)`).each('end', cbcomplete);
+    //tgt.transform('translate', `${movemnt}px`);
+  },
+  animated3b(tgt, movemnt) {
+    //cbcomplete
+    var t = d3.transition().duration(500);
+
+    tgt.attr('transform', 'translate(20,20)');
+    tgt.transition(t).attr('translate', '200px)');
+    tgt.style('transform', `translateX(${movemnt}px)`);
+    //tgt.transform('translate', `${movemnt}px`);
   },
 
   selectTimeSession(currentCard) {
@@ -105,6 +179,26 @@ export default Ember.Component.extend({
     $(`ul.timeline >li.line-${currentCard.sessionId} > span`).addClass(
       'selectedTime'
     );
+  },
+
+  getOffsetCardIdx(offsetCurrentCard, offset) {
+    let timeIndx;
+
+    if (offsetCurrentCard && this.timeData) {
+      /* Set display Wrt a given card- card selection case Find card from timdData*/
+      timeIndx = this.timeData.findIndex(
+        timemom => timemom.sessionId === offsetCurrentCard.sessionId
+      );
+      if (offset) {
+        timeIndx = timeIndx + offset;
+      }
+    } else if (this.timeData && !offsetCurrentCard) {
+      /* if there is timesData but no card selected - init case show cards to left */
+      timeIndx = this.timeData.length;
+    } else if (!this.timeData) {
+      timeIndx = -1; // All empty cards
+    }
+    return timeIndx;
   },
 
   /**
@@ -118,33 +212,13 @@ export default Ember.Component.extend({
     let displayCards = {},
       cards,
       timeIndx;
-
-    if (offsetCurrentCard && this.timeData) {
-      /* Set display Wrt a given card- card selection case
-      Find card from timdData*/
-      timeIndx = this.timeData.findIndex(
-        timemom => timemom.sessionId === offsetCurrentCard.sessionId
-      );
-
-      if (scroll) {
-        timeIndx = timeIndx + scroll;
-      }
-    } else if (this.timeData && !offsetCurrentCard) {
-      /* if there is timesData but no card selected - init case
-        show cards to left
-      */
-      timeIndx = this.timeData.length;
-    } else if (!this.timeData) {
-      timeIndx = -1; // All empty cards
-    }
-
+    timeIndx = this.getOffsetCardIdx(offsetCurrentCard, scroll);
     displayCards = this.getCenterCard(timeIndx);
     cards = this.getAdjcentCards(
       timeIndx,
       this.cardDisplayConfig.activeSideWays
     );
     displayCards = Object.assign(displayCards, cards);
-
     this.set('displayCards', displayCards);
   },
 
