@@ -32,8 +32,11 @@
 @import "app-rwd/components/reports/pull-up/_student-unit-report-rwd";
 @import "app-rwd/components/reports/pull-up/_gru-report-panel-rwd";
 @import "app-rwd/components/reports/_gru-questions-rwd";
+@import "app-rwd/components/reports/pull-up/_open-ended-report-pull-up-rwd";
+@import "app-rwd/components/reports/pull-up/_free-response-question-grade-rwd";
 @import "app-rwd/components/reports/pull-up/_student-external-assessment-report-rwd";
 @import "app-rwd/components/content/modals/_gru-content-suggestion-rwd";
+@import "app-rwd/components/grading/_gru-rubric-panel-rwd";
 
 //Controllers
 @import "app-rwd/controllers/student/class-rwd";
