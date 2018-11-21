@@ -80,6 +80,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         competencyMatrix = hash.competencyMatrixs;
       parentModel.perfromanceData = route.getCompletion(competencyMatrix);
       route.set('vbarData', parentModel.perfromanceData);
+      timeLineData.reverse();
       parentModel.timeData = timeLineData;
       parentModel.filterOptions = timeLineData.filterOptions;
       return parentModel;
