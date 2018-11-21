@@ -140,6 +140,15 @@
   }
   @media only screen and (min-width: $screen-568) and (max-width: $screen-824) {
     .dca-collection-report-container {
+      .report-header {
+        .report-header-info {
+          .collection-title {
+            p {
+                width: 100%;
+              }
+          }
+        }
+      }
       .report-content {
         .report-performance-tabular {
           .report-header-container {

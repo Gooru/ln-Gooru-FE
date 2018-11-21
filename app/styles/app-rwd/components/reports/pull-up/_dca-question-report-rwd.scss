@@ -5,30 +5,55 @@
     .dca-question-report-container {
       width: 100%;
 
-      .report-content {
-        .report-info-chart-container {
-          .report-chart-container {
-            .not-answered {
-              width: 40%;
+      .report-header {
+        .report-header-info {
+          .dca-activity-date {
+            padding-right: 10px;
+            font-size: 13px;
+          }
+
+          .collection-title {
+            .collection-icon.collection {
+              padding: 18px;
+            }
+            .collection-icon.assessment {
+              padding: 18px;
             }
           }
         }
       }
     }
   }
-    @media only screen and (min-width: $screen-568) and (max-width: $screen-824) {
-      .dca-question-report-container {
-        width: 100%;
-
-        .report-content {
-          .report-info-chart-container {
-            .report-chart-container {
-              .not-answered {
-                width: 100%;
-              }
+  @media only screen and (max-width: $screen-568 - 1) {
+    .dca-question-report-container {
+      .report-content {
+        .report-info-chart-container {
+          grid-template-columns: 100px 420px 100px;
+          .report-chart-container {
+            .correct {
+              width: 10% !important;
+            }
+            .not-answered {
+              width: 40% !important;
             }
           }
         }
       }
     }
+  }
+  @media only screen and (min-width: $screen-568) and (max-width: $screen-824) {
+    .dca-question-report-container {
+      width: 100%;
+
+      .report-content {
+        .report-info-chart-container {
+          .report-chart-container {
+            .not-answered {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
 }
