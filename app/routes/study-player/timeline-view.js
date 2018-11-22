@@ -226,6 +226,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     var route = this;
     var { id, description, ...filterOption } = parentModel.context;
     filterOption.courseId = parentModel.course.id;
+    filterOption.limit = route.pageSize;
     if (route.context && route.context.filterOptions) {
       filterOption = route.context.filterOptions;
     }

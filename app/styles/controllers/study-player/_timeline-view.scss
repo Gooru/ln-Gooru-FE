@@ -31,6 +31,23 @@
     cursor: pointer;
   }
 
+  .timeSession-icon {
+    position: relative;
+    border: 1px solid;
+    padding: 0px;
+    border-radius: 50px;
+    line-height: 24px;
+    height: 24px;
+    width: 24px;
+    border: solid 1px #e9e9e9;
+    background-color: #0094de;
+    color: white;
+
+    > i {
+      line-height: 20px;
+      font-size: 16px;
+    }
+  }
   .completion-chart:hover .msaddon {
     background: url(gooru/images/close-up.svg);
     cursor: pointer;
@@ -84,9 +101,9 @@
       border: 1px solid;
       padding: 0px;
       border-radius: 50px;
-      line-height: 24px;
-      height: 24px;
-      width: 24px;
+      line-height: 45px;
+      height: 40px;
+      width: 40px;
       border: solid 1px #e9e9e9;
       background-color: #0094de;
       color: white;
@@ -99,7 +116,7 @@
 
     .performance-v-view {
       width: 77px;
-      height: 80vh;
+      height: 87vh;
       box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
       border: solid 1px rgba(151, 151, 151, 0.3);
       background-color: #ffffff;
@@ -194,14 +211,15 @@
       }
 
       .selectedTime {
-        zoom: 5;
-        top: -4px;
+        zoom: 3;
+        top: -10px;
         background-color: green;
       }
 
       .perf-container {
         background-color: #319848;
         display: flex;
+        width: 70px;
 
         .performance {
           /* flex: 1; */
@@ -250,12 +268,13 @@
 
       .chrono-timeline {
         margin-left: 20px;
+        margin-right: 120px;
         position: relative;
         flex: 1;
 
         .timeline {
           display: flex;
-          height: 68px;
+          height: 70px;
           box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
           background-color: #ffffff;
           justify-content: space-between;
@@ -300,6 +319,7 @@
           align-items: flex-end;
           list-style: none;
           margin-left: -40px;
+          margin-top: 5vh;
 
           .cardrowscore {
             display: flex;
@@ -332,19 +352,19 @@
                 align-self: center;
 
                 /*flex: 1;
-                                                 margin: 14px; */
+                                                                 margin: 14px; */
               }
 
               .scorevlaue {
                 font-size: 25px;
 
                 /*  flex: 1;
-                                                 margin: auto; */
+                                                                 margin: auto; */
                 align-self: center;
               }
 
               /* }
-                                                                       */
+                                                                                     */
             }
 
             .timespent {
@@ -359,7 +379,7 @@
                 font-size: 10px;
 
                 /* flex: 1; 
-                                                margin: 14px; */
+                                                                margin: 14px; */
                 align-self: center;
               }
 
@@ -367,7 +387,7 @@
                 font-size: 25px;
 
                 /* flex: 1;
-                                                margin: auto; */
+                                                                margin: auto; */
                 align-self: center;
               }
             }
@@ -430,8 +450,8 @@
           }
 
           .cardmask {
-            margin-left: 45px;
-            margin-right: 45px;
+            margin-left: 20px;
+            margin-right: 20px;
             width: 370px;
             height: 55vh;
             border-radius: 8px;
@@ -439,7 +459,7 @@
             background-color: #ffffff;
 
             .cardTitle {
-              height: 50px;
+              height: 70px;
 
               /*  width: 20px; */
               box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
@@ -506,15 +526,16 @@
           .cardmask-mid {
             border-radius: 8px;
 
-            /* margin-bottom: 80px; */
-            width: 250px;
-            height: 450px;
+            /* margin-bottom: 20px; */
+            width: 370px;
+            height: 55vh;
             box-shadow: 0 0 3px 3px rgba(93, 93, 93, 0.3);
             background-color: #ffffff;
+            overflow: hidden;
 
             .imgClassAssesment {
-              width: auto;
-              height: 162px;
+              @extend .imgAttrs;
+
               background: url("gooru/images/navigation_assessment_selected.svg");
               border-top-left-radius: 8px;
               border-top-right-radius: 8px;
@@ -526,8 +547,9 @@
 
             .imgClassCollection {
               background: url("gooru/images/navigation_collection_selected_icon.svg");
-              width: auto;
-              height: 162px;
+
+              @extend .imgAttrs;
+
               background-size: 83%;
               background-repeat: space;
               background-position: center;
@@ -547,7 +569,7 @@
             }
 
             .cardTitle {
-              height: 50px;
+              height: 70px;
 
               /* width: 20px; */
               box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
@@ -563,10 +585,10 @@
 
             .cardTypeIcon {
               /* width: 35px;
-                                                                                                                              
-                                                                                                                                                                                                                                                                                        height: 26px;
-                                                                                                                                                                                                                                                                                        object-fit: contain;
-                                                                                                                                                                                                                                                                                        background-color: #535e67; */
+                                                                                                                                            
+                                                                                                                                                                                                                                                                                                      height: 26px;
+                                                                                                                                                                                                                                                                                                      object-fit: contain;
+                                                                                                                                                                                                                                                                                                      background-color: #535e67; */
               align-self: center;
               padding: 5px;
             }
@@ -618,29 +640,65 @@
 
           .dummy-timecard-left {
             border-radius: 8px;
-            margin-bottom: 80px;
-            margin-left: -40px;
-            width: 130px;
-            height: 277px;
+            margin-right: -290px;
             overflow: hidden;
+
+            // align-self: center;
+            // margin-top: 80px;
+
+            @extend .cardmask-mid;
           }
 
           .dummy-timecard-right {
             border-radius: 8px;
-            margin-bottom: 80px;
-            margin-right: -40px;
-            width: 130px;
-            height: 277px;
+            margin-left: -290px;
+
+            /*  width: 130px;
+                         height: 277px; */
             overflow: hidden;
+
+            // margin-top: 80px;
+            // align-self: center;
+
+            @extend .cardmask-mid;
           }
 
-          .cardmask-mid-data-left:first-child {
-            margin-left: -20px;
+          /* li:nth-child(3) {
+                        background-color: yellow !important;
+                        border: solid 2px yellow !important;
+                    } */
+
+          li:nth-child(4) {
+            margin-left: -270px;
+            /*     background-color: blue;
+                        border: solid 2px blue; */
           }
 
-          .cardmask-mid-data-right:first-child {
-            margin-right: -20px;
+          li:nth-child(6) {
+            margin-right: -270px;
+            // background-color: blue !important;
+            // border: solid 2px blue !important;
           }
+
+          // li.dummy-timecard-left:nth-child(1) {
+          //     background-color: #319848 !important;
+          //     border: solid 2px #319848 !important;
+          // }
+
+          // li.dummy-timecard-left:nth-child(2) {
+          //     background-color: red !important;
+          //     border: solid 2px red !important;
+          // }
+
+          // li.dummy-timecard-right:nth-child(8) {
+          //     background-color: #319848 !important;
+          //     border: solid 2px #319848 !important;
+          // }
+
+          // li.dummy-timecard-right:nth-child(9) {
+          //     background-color: red !important;
+          //     border: solid 2px red !important;
+          // }
 
           @media (max-width: $screen-lptp-hidpi) {
             .cardmask-mid-data-left:first-child {
@@ -756,8 +814,8 @@
       }
 
       /* @media only screen and (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-                                        @content;
-                                    } */
+                                              @content;
+                                          } */
 
       /*  @media (max-width: $screen-lptp-hidpi) {
                 .cardmask-mid-data-left:first-child {
