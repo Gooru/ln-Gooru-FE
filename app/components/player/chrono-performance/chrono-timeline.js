@@ -93,8 +93,9 @@ export default Ember.Component.extend({
       let resv = comp.animateCard(1);
       resv.then(function() {
         let curcard = comp.get('currentCard');
-        comp.selectTimeSession(curcard);
         comp.setDisplayPack(curcard, 1);
+        curcard = comp.get('currentCard');
+        comp.selectTimeSession(curcard);
       });
       //this.$('.cards-display').carousel('next');
     },
@@ -104,8 +105,9 @@ export default Ember.Component.extend({
       let resv = this.animateCard(-1);
       resv.then(function() {
         let curcard = comp.get('currentCard');
-        comp.selectTimeSession(curcard);
         comp.setDisplayPack(curcard, -1);
+        curcard = comp.get('currentCard');
+        comp.selectTimeSession(curcard);
       });
     }
   },
@@ -205,6 +207,11 @@ export default Ember.Component.extend({
     } else if (!this.timeData) {
       timeIndx = -1; // All empty cards
     }
+
+    timeIndx = timeIndx < 0 ? 0 : timeIndx;
+    timeIndx =
+      timeIndx >= this.timeData.length ? this.timeData.length - 1 : timeIndx;
+
     return timeIndx;
   },
 
