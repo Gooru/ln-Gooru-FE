@@ -1,0 +1,52 @@
+.controller.teacher.class.class-management {
+  .panel.classroom-information {
+    margin: 0 20px 0 0;
+    height: 60px;
+
+    .panel-body {
+      .course-name {
+        line-height: 3;
+        width: 33%;
+      }
+
+      .counts-container {
+        display: none;
+      }
+
+      .teacher-profile {
+        .owner-name {
+          line-height: 3;
+          width: 125%;
+        }
+      }
+
+      .class-code {
+        width: 12%;
+        padding: 20px 5px 6px;
+
+        div.code {
+          font-size: 11px;
+        }
+      }
+
+      .taxonomy-standards {
+        display: none;
+      }
+    }
+  }
+
+  .header-info {
+    .class-information {
+      width: 32%;
+    }
+  }
+
+  .assessment-min-score > span {
+    width: 40%;
+  }
+  @media screen and (min-width: $screen-sm) {
+    .header-info {
+      display: flex;
+    }
+  }
+}
