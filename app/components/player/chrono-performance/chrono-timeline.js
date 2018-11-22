@@ -42,7 +42,8 @@ export default Ember.Component.extend({
     ],
     dummyRight: {},
     assessment: { imgUrl: '', iconClass: 'grucount' },
-    collection: { imgUrl: '', iconClass: 'view_comfy' }
+    collection: { imgUrl: '', iconClass: 'view_comfy' },
+    'assessment-external': { imgUrl: '', iconClass: 'grucount' }
   },
 
   /**
@@ -50,7 +51,9 @@ export default Ember.Component.extend({
    */
   cardTypeClass: function(timeSession) {
     const component = this;
-    return component.cardDisplayConfig[timeSession.collectionType].iconClass;
+    let icnclass =
+      component.cardDisplayConfig[timeSession.collectionType].iconClass;
+    return icnclass;
   },
 
   timeDataChanged: Ember.observer('timeData', function() {
