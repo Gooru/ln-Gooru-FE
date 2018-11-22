@@ -1,8 +1,9 @@
 .controller.teacher.class.class-management {
   width: 100vw;
+  //992px
   @media only screen and (max-width: $screen-md) {
     .assessment-min-score {
-      margin-left: 140px;
+      margin-left: 0;
     }
 
     .header-info {
@@ -46,14 +47,21 @@
 
         .performance-container,
         .teacher-profile {
-          display: none;
+          display: block;
         }
       }
     }
   }
+  //600px
   @media only screen and (max-width: $sm-width-max) {
-    .assessment-min-score > span {
-      width: 20%;
+    .header-info {
+      .class-information {
+        .class-name {
+          .edit-text > span {
+            width: 100%;
+          }
+        }
+      }
     }
 
     .panel.classroom-information {
