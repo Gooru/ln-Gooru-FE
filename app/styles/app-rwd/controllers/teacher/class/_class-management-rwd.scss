@@ -1,52 +1,91 @@
 .controller.teacher.class.class-management {
-  .panel.classroom-information {
-    margin: 0 20px 0 0;
-    height: 60px;
+  width: 100vw;
+  @media only screen and (max-width: $screen-md) {
+    .assessment-min-score {
+      margin-left: 140px;
+    }
 
-    .panel-body {
-      .course-name {
-        line-height: 3;
-        width: 33%;
-      }
+    .header-info {
+      .class-information {
+        .class-name > span {
+          width: max-content;
+        }
 
-      .counts-container {
-        display: none;
-      }
-
-      .teacher-profile {
-        .owner-name {
-          line-height: 3;
-          width: 125%;
+        .class-name {
+          .edit-text > span {
+            width: max-content;
+          }
         }
       }
+    }
 
-      .class-code {
-        width: 12%;
-        padding: 20px 5px 6px;
+    .panel.classroom-information {
+      .panel-body {
+        grid-template-columns: 50px 1fr max-content 200px 100px;
 
-        div.code {
-          font-size: 11px;
+        &.no-taxomony {
+          grid-template-columns: 50px 1fr max-content 100px;
         }
-      }
 
-      .taxonomy-standards {
-        display: none;
+        .taxonomy-standards {
+          width: 21%;
+        }
+
+        .class-code {
+          div.code {
+            font-size: 10px;
+            margin-top: 5px;
+          }
+        }
+
+        .course-image {
+          img {
+            width: 50px;
+          }
+        }
+
+        .performance-container,
+        .teacher-profile {
+          display: none;
+        }
       }
     }
   }
+  @media only screen and (max-width: $sm-width-max) {
+    .assessment-min-score > span {
+      width: 20%;
+    }
 
-  .header-info {
-    .class-information {
-      width: 32%;
+    .panel.classroom-information {
+      .panel-body {
+        grid-template-columns: 50px 1fr max-content 100px;
+
+        .course-name {
+          width: 29%;
+        }
+
+        .class-code {
+          width: 12%;
+          padding: 18px 5px 6px;
+
+          div.code {
+            font-size: 10px;
+          }
+        }
+
+        .taxonomy-standards {
+          display: none;
+        }
+      }
     }
   }
-
-  .assessment-min-score > span {
-    width: 40%;
-  }
-  @media screen and (min-width: $screen-sm) {
+  @media only screen and (min-width: $screen-sm) {
     .header-info {
       display: flex;
+    }
+
+    .assessment-min-score {
+      margin-left: 0;
     }
   }
 }
