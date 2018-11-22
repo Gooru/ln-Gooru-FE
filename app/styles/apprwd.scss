@@ -33,6 +33,13 @@
 @import "app-rwd/components/reports/pull-up/_gru-report-panel-rwd";
 @import "app-rwd/components/reports/_gru-questions-rwd";
 @import "app-rwd/components/reports/pull-up/_student-external-assessment-report-rwd";
+@import "app-rwd/components/reports/pull-up/_dca-collection-report-rwd";
+@import "app-rwd/components/reports/pull-up/_dca-collection-report-gridview-rwd";
+@import "app-rwd/components/reports/pull-up/_dca-question-report-rwd";
+@import "app-rwd/components/reports/pull-up/_dca-student-collection-report-rwd";
+@import "app-rwd/components/reports/_dca-teacher-external-assessment-list-view-rwd";
+@import "app-rwd/components/reports/_dca-teacher-external-assessment-report-grid-view-rwd";
+@import "app-rwd/components/reports/pull-up/_dca-student-external-assessment-report-rwd";
 @import "app-rwd/components/content/modals/_gru-content-suggestion-rwd";
 
 //Controllers
@@ -66,3 +73,4 @@
 @import "app-rwd/controllers/teacher/class/_teacher-class-dca-course-map-pull-up-rwd";
 @import "app-rwd/controllers/_sign-in";
 @import "app-rwd/controllers/_search-rwd";
+@import "app-rwd/controllers/teacher/class/_class-management-rwd";

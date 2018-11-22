@@ -31,6 +31,23 @@
 			}
 		}
 	}
+	@media screen and (max-width: $screen-568 - 1) {
+		.dca-content-container {
+			.dca-content-list-container {
+				.dca-todays-container {
+					.dca-todays-action-list-container {
+						.dca-todays-info-action-container {
+							.dca-info-container {
+								.user-profile-img {
+									display: none;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 	.dca-content-container {
 		.dca-content-list-container {
 			height: calc(100vh - 130px);
