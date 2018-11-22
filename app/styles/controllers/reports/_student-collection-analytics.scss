@@ -1,5 +1,8 @@
 .controller.analytics.collection.student {
   padding: 0 160px 0 180px;
+  @media (min-width: $screen-md) and (max-width: $screen-lg) {
+    padding: 0 90px 0 110px;
+  }
 
   .navigation {
     padding: 10px 25px;
