@@ -357,7 +357,7 @@ export const COMPETENCY_STATUS = [
 //gruF-Feature-flag
 export const GRU_FEATURE_FLAG = {
   notifications: true,
-  chronoView: true
+  chronoView: false
 };
 
 //notifciation timer
