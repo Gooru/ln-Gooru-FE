@@ -78,6 +78,7 @@ $box-shadow: 1px -1px;
 @import "controllers/account-settings";
 @import "controllers/grading-player";
 @import "controllers/study-player";
+@import "controllers/study-player/timeline-view";
 @import "controllers/study-player-external";
 @import "controllers/player-external";
 @import "controllers/resource-player";
@@ -393,6 +394,7 @@ $box-shadow: 1px -1px;
 @import "components/proficiency/pull-out-accordion-collection";
 @import "components/proficiency/learner-proficiency-pull-up";
 @import "components/proficiency/learner-proficiency-domain-matrix";
+@import "components/proficiency/competency-content-info";
 @import "components/class/overview/route-suggestion-proficiency-matrix";
 
 //ATC View
@@ -409,6 +411,7 @@ $box-shadow: 1px -1px;
 @import "components/reports/pull-up/domain-competency-report";
 @import "components/reports/pull-up/competency-content-report";
 @import "components/reports/pull-up/accordion/collection-accordion";
+@import "components/reports/pull-up/activity-list";
 
 //Student Nav Math class join landing
 @import "components/student/class/student-class-landing";
@@ -420,3 +423,12 @@ $box-shadow: 1px -1px;
 
 // Student / Teacher grading
 @import "components/grade/pull-up/free-response-question-grade";
+
+// Activity card
+@import "components/activity/course-card";
+@import "components/activity/assessment-card";
+@import "components/activity/collection-card";
+@import "components/activity/lesson-card";
+@import "components/activity/unit-card";
+@import "components/activity/question-card";
+@import "components/activity/resource-card";

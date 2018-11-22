@@ -12,7 +12,7 @@ moduleForComponent(
 );
 
 test('Stacked horizontal bar chart layout', function(assert) {
-  assert.expect(3);
+  assert.expect(2);
 
   var data = Ember.A([
     Ember.Object.create({
@@ -39,11 +39,6 @@ test('Stacked horizontal bar chart layout', function(assert) {
     $horizontalBarChart.find('.segment:nth-child(1)').attr('style'),
     `background-color: ${data[0].color}; width: ${data[0].percentage}%;`,
     'Incorrect width and color for the first segment'
-  );
-  assert.equal(
-    $horizontalBarChart.find('.segment:nth-child(2)').attr('style'),
-    `background-color: ${data[1].color}; width: ${data[1].percentage}%;`,
-    'Incorrect width and color for the second segment'
   );
 });
 

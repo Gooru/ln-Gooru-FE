@@ -7,9 +7,11 @@
           {{truncate text=class.title maxLength=25}}
         {{/link-to}}
       </div>
-      <div class="code">
+      <div class="code {{if isDemoClass 'demo-class'}}" {{action 'selectItem' (if isDemoClass 'demo' 'course-map')}}>
         <div class="title">{{t 'student-landing.class-code'}}</div>
-        <div class="class-code ellipsis">{{class.code}}</div>
+        <div class="class-code ellipsis">
+            {{class.code}}
+        </div>
       </div>
     </div>
     <div class="panel-body" style="background-color:{{grade-color class.performanceSummary.score}}">
@@ -72,11 +74,11 @@
             <label>{{completedPercentage}}</label>
           </div>
         </div>
-      {{else}}
-        <div class="alert-player-error">
-          <span class="clear-alert" {{action 'onClearAlert'}}>{{gru-icon name="clear"}}</span>
-          <div class="alert-status">{{t 'common.errors.no-studymaterial'}}</div>
-        </div>
+  {{else}}
+    <div class="alert-player-error">
+      <span class="clear-alert" {{action 'onClearAlert'}}>{{gru-icon name="clear"}}</span>
+      <div class="alert-status">{{t 'common.errors.no-studymaterial'}}</div>
+    </div>
       {{/unless}}
     </div>
   {{else}}

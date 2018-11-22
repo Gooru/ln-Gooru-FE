@@ -1,0 +1,50 @@
+<div class="activity-list">
+  <div class="activity-list-header">
+    <div class="header-info">
+      {{concat activityContentType 's'}}
+    </div>
+    <div class="close-pullup" {{action "onClosePullUp"}}>
+      {{gru-icon name="close"}}
+    </div>
+  </div>
+  <div class="activity-list-body">
+    <div class="activity-contents {{concat 'cards-' activityContents.length}}">
+      {{#if (eq activityContentType 'course')}}
+        {{#each activityContents as |content|}}
+          {{activity.course-card course=content}}
+        {{/each}}
+      {{else if (eq activityContentType 'unit')}}
+        {{#each activityContents as |content|}}
+          {{activity.unit-card unit=content}}
+        {{/each}}
+      {{else if (eq activityContentType 'lesson')}}
+        {{#each activityContents as |content|}}
+          {{activity.lesson-card lesson=content}}
+        {{/each}}
+      {{else if (eq activityContentType 'collection')}}
+        {{#each activityContents as |content|}}
+          {{activity.collection-card collection=content}}
+        {{/each}}
+      {{else if (eq activityContentType 'assessment')}}
+        {{#each activityContents as |content|}}
+          {{activity.assessment-card assessment=content}}
+        {{/each}}
+      {{else if (eq activityContentType 'resource')}}
+        {{#each activityContents as |content|}}
+          {{activity.resource-card resource=content}}
+        {{/each}}
+      {{else if (eq activityContentType 'question')}}
+        {{#each activityContents as |content|}}
+          {{activity.question-card question=content}}
+        {{/each}}
+      {{else}}
+        Content Not Available
+      {{/if}}
+    </div>
+    {{#if isShowMoveVisible}}
+      <div class="show-more-results" {{action "onClickShowMoreActivity"}}>
+        Show more
+      </div>
+    {{/if}}
+  </div>
+</div>

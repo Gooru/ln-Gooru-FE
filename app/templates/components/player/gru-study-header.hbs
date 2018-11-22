@@ -1,7 +1,8 @@
 <div class="header-panel row" style="display:none">
   <div class="col-xs-3 course-info">
     {{#if showBackToCourseMap}}
-      <div class="course-map pull-left" {{action 'redirectCourseMap'}} data-toggle="tooltip" data-placement="bottom" title="{{t 'common.back-to-course-map'}}">
+      <div class="course-map pull-left" {{action 'redirectCourseMap'}} data-toggle="tooltip" data-placement="bottom"
+        title="{{t 'common.back-to-course-map'}}">
         <div class="nav-icon-container">
           {{gru-icon name="sort"}}
         </div>
@@ -9,13 +10,15 @@
     {{/if}}
     {{#if showBackToCollection}}
       {{#if collectionUrl}}
-        <div class="back-to-collection pull-left" {{action 'backToCollection'}} data-toggle="tooltip" data-placement="bottom" title="{{if collection.isCollection (t 'common.back-to-collection') (t 'common.back-to-assessment') }}">
+        <div class="back-to-collection pull-left" {{action 'backToCollection'}} data-toggle="tooltip" data-placement="bottom"
+          title="{{if collection.isCollection (t 'common.back-to-collection') (t 'common.back-to-assessment') }}">
           <div class="nav-icon-container">
             {{gru-icon name='ic_close'}}
           </div>
         </div>
       {{else}}
-        <div class="course-map pull-left" {{action 'redirectCourseMap'}} data-toggle="tooltip" data-placement="bottom" title="{{t 'common.back-to-course-map'}}">
+        <div class="course-map pull-left" {{action 'redirectCourseMap'}} data-toggle="tooltip" data-placement="bottom"
+          title="{{t 'common.back-to-course-map'}}">
           <div class="nav-icon-container">
             {{gru-icon name="sort"}}
           </div>
@@ -31,25 +34,25 @@
     </div>
     <div class="performance-completion-take-tour-info pull-left">
       <div class="completion pull-left">
-          {{#if performanceSummary}}
-            <span class="score">{{performanceSummary.totalCompleted}}/{{performanceSummary.total}}</span>
-          {{else}}
-            <span class="score">--</span>
-          {{/if}}
-          <span class="label">{{t 'common.completion'}}</span>
+        {{#if performanceSummary}}
+          <span class="score">{{performanceSummary.totalCompleted}}/{{performanceSummary.total}}</span>
+        {{else}}
+          <span class="score">--</span>
+        {{/if}}
+        <span class="label">{{t 'common.completion'}}</span>
       </div>
       <div class="performance pull-left" style="background-color:{{if performanceSummary (grade-color performanceSummary.score) defaultBarColor}}">
         <span class="score">
-            {{#if performanceSummary}}
-              {{#if performanceSummary.score}}
-                {{performanceSummary.score}}%
-              {{else}}
-                0%
-              {{/if}}
+          {{#if performanceSummary}}
+            {{#if performanceSummary.score}}
+              {{performanceSummary.score}}%
             {{else}}
-              --
+              0%
             {{/if}}
-          </span>
+          {{else}}
+            --
+          {{/if}}
+        </span>
         <span class="label">{{t 'teacher-landing.class.performance'}} </span>
       </div>
       <div class="take-a-tour pull-left">
@@ -58,9 +61,14 @@
     </div>
   </div>
 </div>
- {{student.class.gru-study-navbar classId=classId navTitle=courseTitle onItemSelected="selectMenuItem" selectedMenuItem=menuItem isPremiumClass =isPremiumClass sourceType=sourceType performanceSummary =performanceSummary isStudyPlayer=isStudyPlayer}}
-  <div class="bar-charts" data-content="{{performancePercentage}}% Completed">
-    <div class="completion-chart">
+{{student.class.gru-study-navbar classId=classId navTitle=courseTitle onItemSelected="selectMenuItem" selectedMenuItem=menuItem isPremiumClass =isPremiumClass sourceType=sourceType performanceSummary =performanceSummary isStudyPlayer=isStudyPlayer}}
+<div class="bar-charts" data-content="{{performancePercentage}}% Completed">
+  <div class="completion-chart">
+    {{#if  showLocateMe  }}
+        {{charts/gru-x-bar-chart data=barChartData mileStone=mileStone mileStoneHandler=(action 'mileStoneHandler')  }}
+    
+    {{else}}
       {{charts/gru-x-bar-chart data=barChartData }}
+    {{/if}}
   </div>
 </div>

@@ -1089,7 +1089,7 @@ export default Object.assign(quizzesTranslations, {
         today: 'ಇಂದು'
       },
       'my-report': 'ನನ್ನ ವರದಿ',
-      'my-location': 'ನನ್ನ ವರದಿ'
+      'my-location': 'ನನ್ನ ಸ್ಥಳ'
     },
     course: {
       'to-report': 'ಬಳಕೆಯ ಸಾರಾಂಶ',

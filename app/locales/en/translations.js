@@ -880,6 +880,7 @@ export default Object.assign(quizzesTranslations, {
       },
       join: {
         title: 'Join a new Classroom',
+        'join-a-classroom': 'Join a  Classroom',
         content: 'Where the journey begins.',
         'not-now': 'Not now',
         'class-code-input': 'Enter a classroom code',
@@ -1855,7 +1856,9 @@ export default Object.assign(quizzesTranslations, {
       baseline: 'Baseline',
       'grade-line': 'Grade Line',
       'not-tagged':
-        'The class has no course assigned or the course has not been tagged to a valid subject or standards.'
+        'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
+      'show-compressed-chart': 'Show Compressed Chart',
+      'show-expanded-chart': 'Show Expanded Chart'
     }
   },
 
@@ -2050,6 +2053,14 @@ export default Object.assign(quizzesTranslations, {
     'featured-title': 'Featured Courses',
     'featured-description':
       'Featured courses are curated by innovative teachers, vetted and reviewed by content experts, and implemented in classrooms with students. Discover, remix, and customize courses to personalize learning and increase student engagement! <a href=\'http://about.gooru.org/courses\' target=\'_blank\'>Learn more</a> about the development of these courses.'
+  },
+
+  locateme: {
+    score: 'Score',
+    timespent: 'Time Spent',
+    view: 'View',
+    attempt: 'Attempt',
+    lastAcessesed: 'Last Accessed'
   },
 
   'taxonomy.modals': {
@@ -2708,7 +2719,12 @@ export default Object.assign(quizzesTranslations, {
     },
     'competency-report': {
       title: 'Competency Report',
-      'no-subject': 'No Subject Assigned'
+      'no-subject': 'No Subject Assigned',
+      prerequisites: 'prerequisites',
+      'signature-assessments': 'Signature Assessments',
+      'signature-collections': 'Signature Collections',
+      'show-global-data': 'Show Global Data',
+      'show-student-data': 'Show Student Data'
     },
     'domain-report': 'Domain Report'
   },

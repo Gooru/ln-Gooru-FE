@@ -356,7 +356,8 @@ export const COMPETENCY_STATUS = [
 
 //gruF-Feature-flag
 export const GRU_FEATURE_FLAG = {
-  notifications: true
+  notifications: true,
+  chronoView: false
 };
 
 //notifciation timer
@@ -364,3 +365,5 @@ export const NOTIFICATION_SETTINGS = {
   polling_interval: 30000,
   page_size: 5
 };
+
+export const PLAYER_WINDOW_NAME = 'rgo_player';

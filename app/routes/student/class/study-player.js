@@ -108,8 +108,6 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
   // -------------------------------------------------------------------------
   // Methods
   model: function(params) {
-    //eslint-disable-next-line
-    console.log('study-player > model :: params supplied:', params);
     const route = this;
     return route
       .get('navigateMapService')

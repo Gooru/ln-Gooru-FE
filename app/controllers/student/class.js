@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import { getBarGradeColor } from 'gooru-web/utils/utils';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
   session: Ember.inject.service('session'),
@@ -95,6 +96,7 @@ export default Ember.Controller.extend({
       }
     ];
   }),
+
   performancePercentage: Ember.computed('barChartData', function() {
     let data = this.get('barChartData').objectAt(0);
     return data.percentage.toFixed(0);
@@ -115,20 +117,26 @@ export default Ember.Controller.extend({
     return scorePercentage !== null && scorePercentage >= 0;
   }),
 
+  demoClass: Ember.computed.alias('configuration.demoClass'),
+
   /**
    * @property {Boolean} isShowNavigatorLanding
    */
-  isShowNavigatorLanding: Ember.computed('class.currentLocation', function() {
-    let controller = this;
-    let classData = controller.get('class');
-    let currentLocation = classData.get('currentLocation') || null;
-    let setting = classData.get('setting');
-    let isPremiumCourse = setting
-      ? setting['course.premium'] && setting['course.premium'] === true
-      : false;
-    let isGradeAdded = classData.get('grade');
-    return isPremiumCourse && !currentLocation && isGradeAdded;
-  }),
+  isShowNavigatorLanding: Ember.computed(
+    'class.currentLocation',
+    'demoClass',
+    function() {
+      let controller = this;
+      let classData = controller.get('class');
+      let currentLocation = classData.get('currentLocation') || null;
+      let setting = classData.get('setting');
+      let isPremiumCourse = setting
+        ? setting['course.premium'] && setting['course.premium'] === true
+        : false;
+      let isGradeAdded = classData.get('grade');
+      return (isPremiumCourse && !currentLocation && isGradeAdded);
+    }
+  ),
 
   /**
    * Property to identify when there is no content to play

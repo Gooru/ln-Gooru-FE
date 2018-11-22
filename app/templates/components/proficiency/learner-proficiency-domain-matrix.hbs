@@ -3,31 +3,42 @@
     {{three-bounce-spinner}}
   </div>
 {{/if}}
-<div class="chart-area">
-  <div class="matrix-chart">
-    <div class="scrollable-chart">
-      <div id="render-proficiency-matrix"></div>
-    </div>
-    <div class="domain-sequence-container">
-      <div class="domain-sequence" style="width:{{width}}px">
-        {{#each taxonomyDomains as |taxonomyDomain index |}}
-          <li class="domain-counts">
-            {{taxonomyDomain.domainSeq}}
-          </li>
-        {{/each}}
-      </div>
-    </div>
+<div class="chart-area {{unless isExpandChartEnabled 'compressed-view'}}">
+  <div class="toggle-chart" {{action "onToggleChart"}}>
+    {{#if isExpandChartEnabled}}
+      {{gru-icon name="unfold_less"}}<span>{{t 'profile.proficiency.show-compressed-chart'}}</span>
+    {{else}}
+      {{gru-icon name="unfold_more"}}<span>{{t 'profile.proficiency.show-expanded-chart'}}</span>
+    {{/if}}
+
   </div>
-  <div class="domain-list">
-    {{#each taxonomyDomains as |taxonomyDomain |}}
-      <div class="domain">
-        <div class="sequence">
-          {{taxonomyDomain.domainSeq}}.
+  <div class="matrix-chart">
+    <div class="chart-container {{if (lte taxonomyGrades.length 0) 'no-grade'}}">
+      {{#if (gt taxonomyGrades.length 0)}}
+        <div class="taxonomy-grades-container">
+          {{proficiency.taxonomy-grades
+            taxonomyGrades=taxonomyGrades
+            activeGrade=activeGrade
+            classGrade=classGrade
+            subjectCode=subjectCode
+            onSelectGrade="onSelectGrade"
+          }}
         </div>
-        <div class="name">
-          {{taxonomyDomain.domainName}}
+      {{/if}}
+      <div class="domain-chart-container">
+        <div class="scrollable-chart">
+          <div id="render-proficiency-matrix"></div>
+        </div>
+        <div class="domain-sequence-container">
+          <div class="domain-sequence" style="width:{{width}}px">
+            {{#each taxonomyDomains as |taxonomyDomain index |}}
+              <li class="domain-counts" title="{{taxonomyDomain.domainName}}" data-toggle="tooltip">
+                {{taxonomyDomain.domainSeq}}
+              </li>
+            {{/each}}
+          </div>
         </div>
       </div>
-    {{/each}}
+    </div>
   </div>
 </div>

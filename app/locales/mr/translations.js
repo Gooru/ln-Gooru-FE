@@ -7,6 +7,7 @@ export default Object.assign(quizzesTranslations, {
   mr: 'मराठी - preRelease',
   kn: 'ಕನ್ನಡ - preRelease',
   hi: 'हिंदी - preRelease',
+
   errors: {
     description: 'हे फील्ड',
     inclusion: '{{description}} सूचीमध्ये समाविष्ट नाही',
@@ -14,11 +15,11 @@ export default Object.assign(quizzesTranslations, {
     invalid: '{{description}} अवैध आहे}}',
     confirmation: '{{description}}  शी जुळत नाही{{on}}',
     accepted: '{{description}} स्वीकार करणे आवश्यक आहे}}',
-    empty: '{{description}} रिक्त असू शकते\\ शकत नाही',
-    blank: '{{description}} रिक्त असू शकते\\शकत नाही',
+    empty: '{{description}} रिक्त असू शकत नाही',
+    blank: '{{description}} रिक्त असू शकत नाही',
     present: '{{description}} रिक्त असणे आवश्यक आहे',
     collection: '{{description}} हा संग्रह असणे आवश्यक आहे',
-    singular: '{{description}} हा संग्रह असू शकतो\\ शकत नाही',
+    singular: '{{description}} हा संग्रह असू शकत नाही',
     tooLong: '{{description}} खूपच लांब आहे (अधिकतम {{max}} वर्ण)',
     tooShort: '{{description}} खूप लहान आहे (किमान {{min}} वर्ण आहेत)',
     before: '  {{description}} आधी असणे आवश्यक आहे{{before}}',
@@ -29,7 +30,7 @@ export default Object.assign(quizzesTranslations, {
     notAnInteger: '{{description}} हा पूर्णांक असणे आवश्यक आहे',
     greaterThan: '{{description}}  पेक्षा जास्त असणे आवश्यक आहे.{{gt}}',
     greaterThanOrEqualTo:
-      '{{description}}  पेक्षा मोठे किंवा त्यासमान असणे आवश्यक आहे{{gte}\n\n',
+      '{{description}}  पेक्षा मोठे किंवा त्यासमान असणे आवश्यक आहे{{gte}',
     equalTo: ' {{description}}  च्या बरोबरीने असणे आवश्यक आहे{{is}}.',
     lessThan: '{{description}} {{lt}} पेक्षा कमी असणे आवश्यक आहे',
     lessThanOrEqualTo:
@@ -47,6 +48,30 @@ export default Object.assign(quizzesTranslations, {
     relevance: 'समर्पकता',
     engagement: 'प्रतिबद्धता',
     efficacy: 'परिणामकारकता',
+    grid: 'ग्रिड',
+    list: 'यादी',
+    first: 'पहिला',
+    last: 'शेवटचे',
+    name: 'नाव',
+    'content-name': 'सामग्रीचे नाव',
+    lastName: 'आडनाव',
+    firstName: 'पहिले नाव',
+    'filter-by': 'द्वारे फिल्टर',
+    more: 'अधिक',
+    'avg-score': 'सरासरी गुण',
+    frq: 'फ्रॅक',
+    schedule: 'वेळापत्रक',
+    responses: 'प्रतिसाद',
+    'no-lesson-info-message': 'या युनिटमध्ये काही धडे आहेत.',
+    'no-collection-info-message': 'या धड्यात कोणतेही संग्रह आहेत.',
+    'gooru-suggestions': 'गुरूच्या सूचना',
+    'gooru-catalog': 'गुरू कॅटलॉग',
+    'suggestion-made-to': 'सूचित केले',
+    'student-selected': 'विद्यार्थी निवडले',
+    'no-suggest-result-message': ' कोणतीही जुळणारी सामग्री सापडली नाही',
+    'no-suggest-results-message': 'आपण संबंधित सामग्री शोधू आणि शोधू शकता.',
+    'no-suggest-search-results-message':
+      'आपले शब्दलेखन तपासा. आम्ही सर्व चुका करतो! किंवा त्याऐवजी समान शब्द शोधण्याचा प्रयत्न करा.',
     'a-collection': 'एक संग्रह',
     'a-course': 'एक कोर्स',
     'a-question': 'एक प्रश्न',
@@ -57,6 +82,8 @@ export default Object.assign(quizzesTranslations, {
     about: 'याबद्दल',
     'about-you': 'तुमच्याबद्दल',
     'about-me': 'माझ्याबद्दल',
+    accept: 'स्वीकार',
+    ignore: 'दुर्लक्ष',
     add: 'जोडा',
     'add-assessment': 'नवीन मूल्यांकन तयार करा',
     'add-century-skills': ' 21 व्या    शतकाची कौशल्ये जोडा',
@@ -65,7 +92,7 @@ export default Object.assign(quizzesTranslations, {
     'add-collection-item': 'स्रोत किंवा प्रश्न तयार करा',
     'add-competency': 'योग्यता जोडा',
     'add-content-prompt':
-      'आपण <span> {{Type}} </span> अजून तयार केले नाही ,चला धीट व्हा\n',
+      'आपण <span> {{Type}} </span> अजून तयार केले नाही ,चला धीट व्हा',
     'add-course': 'नवीन अभ्यासक्रम तयार करा',
     'add-domains-to-unit': 'युनिटमध्ये डोमेन्स जोडा',
     'add-url': 'url जोडा',
@@ -102,7 +129,7 @@ export default Object.assign(quizzesTranslations, {
     approved: 'मंजूर',
     archive: 'संग्रह',
     assessment: 'मूल्यांकन',
-    'assessment-disabled': 'आपण या मूल्यांकनाचा प्रयत्न करू शकता/शकत नाही',
+    'assessment-disabled': 'आपण या मूल्यांकनाचा प्रयत्न करू शकत नाही',
     'assessment-external': 'मूल्यांकन- बाह्य',
     'assessment-pl': {
       zero: 'मूल्यांकन',
@@ -178,6 +205,20 @@ export default Object.assign(quizzesTranslations, {
     'copy-to': 'मध्ये कॉपी करा',
     correct: 'योग्य/बरोबर',
     'correct-answer': 'योग्य उत्तर',
+    'correct-answers': 'योग्य उत्तर',
+    'incorrect-answers': 'चुकीचा उत्तर',
+    'rubric-graded': 'रुब्रिक श्रेणीबद्ध',
+    'self-graded': 'स्व-श्रेणीबद्ध',
+    'rubric-grade': 'रुब्रिक ग्रेड',
+    brief: 'थोडक्यात',
+    'update-grade-score':
+      'आपले फ्रॅक पूर्ण करण्यासाठी ग्रेड स्कोअर अद्यतनित करा.',
+    'answer-this-rubric': 'आपल्या frq पूर्ण करण्यासाठी या रुब्रिक उत्तर.',
+    'all-caught-up': 'आपण सर्व पकडले आहे!',
+    'no-users-to-grade': 'या frq साठी ग्रेडसाठी कोणतेही वापरकर्ते नाहीत.',
+    'rubric-needs-grading': 'rubric ग्रेडिंग आवश्यक आहे',
+    'not-answered': 'उत्तर दिले नाही',
+    'rubric-not-answered': 'रुब्रिक उत्तर दिले नाही',
     country: 'देश',
     'course-map': 'पाठ्यक्रम नकाशा',
     course: 'अभ्यासक्रम',
@@ -295,9 +336,9 @@ export default Object.assign(quizzesTranslations, {
       'question-not-copied':
         'अरेरे! आत्ता प्रश्न कॉपी  करू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा.',
       'question-not-created':
-        'अरेरे! आत्ताच प्रश्न तयार \nकरू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
+        'अरेरे! आत्ताच प्रश्न तयार करू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
       'question-not-updated':
-        'अरेरे! आत्ताच प्रश्न अपडेट \nकरू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
+        'अरेरे! आत्ताच प्रश्न अपडेट करू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
       'reset-password-error':
         'अरे हो! काहीतरी बरोबर नाही.पासवर्ड रीसेट करू शकत नाही. कृपया लवकरच पुन्हा प्रयत्न करा',
       'reset-google-account-exists':
@@ -309,13 +350,13 @@ export default Object.assign(quizzesTranslations, {
       'resource-missing-type': 'कृपया स्रोत प्रकार निवडा.',
       'resource-missing-url': 'कृपया वैध यूआरएल प्रविष्ट करा.',
       'resource-not-added-to-collection':
-        'अरेरे! आत्ताच तुमच्या संकलनात स्त्रोत जोडू  \n शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
+        'अरेरे! आत्ताच तुमच्या संकलनात स्त्रोत जोडू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
       'resource-not-copied':
-        'अरेरे! आत्ताच स्त्रोत कॉपी\nकरू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
+        'अरेरे! आत्ताच स्त्रोत कॉपी करू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
       'resource-not-created':
-        'अरेरे! आत्ताच स्त्रोत निर्माण \nकरू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
+        'अरेरे! आत्ताच स्त्रोत निर्माण करू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
       'resource-not-updated':
-        'अरेरे! आत्ताच स्त्रोत अपडेट \nकरू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
+        'अरेरे! आत्ताच स्त्रोत अपडेट करू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
       'resource-same-host-url': 'स्रोत Gooru यूआरएल्स असू शकत नाहीत.',
       'resource-title-length': 'शीर्षक 50 वर्णांपेक्षा मोठे असू शकत नाही.',
       'rubric-title-presence': 'कृपया रुब्रिक शीर्षक प्रविष्ट करा.',
@@ -327,7 +368,7 @@ export default Object.assign(quizzesTranslations, {
       'sign-in-google-account-exists':
         'कृपया Google साइनइन वापरा आम्ही आपला पासवर्ड रीसेट करू शकत नाही.',
       'sign-up-error':
-        'अरेरे! आत्ताच साइन-अप\nकरू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
+        'अरेरे! आत्ताच साइन-अप करू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
       'sign-up-first-name': 'कृपया आपले प्रथम नाव प्रविष्ट करा',
       'sign-up-last-name': 'कृपया आपले आडनाव प्रविष्ट करा',
       'sign-up-name-length': 'आडनावात किमान 2 अक्षरे असणे आवश्यक आहे.',
@@ -337,14 +378,16 @@ export default Object.assign(quizzesTranslations, {
       'unit-not-copied':
         'अरेरे! आत्ताच युनिट कॉपी करू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
       'unit-not-created':
-        'अरेरे! आत्ताच युनिट निर्माण\nकरू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
+        'अरेरे! आत्ताच युनिट निर्माण करू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
       'unit-not-loaded':
-        'अरेरे! आत्ताच युनिट लोड \nकरू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
+        'अरेरे! आत्ताच युनिट लोड करू शकत नाही.कृपया लवकरच पुन्हा प्रयत्न करा',
       'unit-title-required': 'कृपया एकक शीर्षक प्रविष्ट करा.',
       'user-email-presence': 'एक वैध ईमेल प्रविष्ट करा.',
       'username-length': 'युजरनेम 4 ते 254 वर्ण असणे आवश्यक आहे',
       'forgot-password-gmail':
-        'कृपया Google साइनइन वापरा आम्ही आपला पासवर्ड रीसेट करू शकत नाही.'
+        'कृपया Google साइनइन वापरा आम्ही आपला पासवर्ड रीसेट करू शकत नाही.',
+      'no-studymaterial':
+        'या वर्गात नियुक्त केलेल्या कोर्समध्ये कोणतीही अभ्यास सामग्री नाही. कृपया हे निश्चित करण्यासाठी आपल्या शिक्षकांशी संपर्क साधा'
     },
     'essential-questions': 'आवश्यक प्रश्न',
     example: 'उदाहरण:',
@@ -403,6 +446,7 @@ export default Object.assign(quizzesTranslations, {
     'more-details': 'अधिक माहिती',
     move: 'पुढे जा',
     myContent: 'माझा कंटेंट',
+    myProfile: 'माझे स्थान',
     library: 'ग्रंथालय',
     myPerformance: 'माझी कामगिरी',
     'edit-narration': 'वर्णन संपादित करा',
@@ -474,7 +518,7 @@ export default Object.assign(quizzesTranslations, {
     preview: 'पूर्वावलोकन (प्रिव्ह्यू)',
     profile: 'प्रोफाइल',
     'profile-publishing': 'प्रोफाइल दिसण्याची शक्यता',
-    'publish-to': ' हे माझ्या प्रोफाइल लायब्ररीवर इतरांना  दिसू द्या',
+    'publish-to': ' हे माझ्या प्रोफाइल लायब्ररीवर इतरांना  दिसू द्या',
     'published-by': 'द्वारा प्रकाशित',
     'published-tooltip': 'बॅज्ड सामग्री',
     publisher: 'प्रकाशक',
@@ -670,7 +714,7 @@ export default Object.assign(quizzesTranslations, {
       button: 'सामग्री ब्राउझ करा',
       footer: {
         description_1: 'आधीपासूनच एक खाते आहे का?',
-        description_2: ' येथे.',
+        description_2: ' येथे.',
         login: 'लॉगइन'
       },
       grades_missing_message: 'कृपया ग्रेड आणि विषय निवडा.',
@@ -704,7 +748,7 @@ export default Object.assign(quizzesTranslations, {
     findDescription:
       'शिक्षकांनी बनवलेले हजारो के -12 संग्रह ब्राउझ करा किंवा 16m संसाधनांवर शोधा',
     remixDescription:
-      'आपल्या विद्यार्थ्यांना \'गरजा पूर्ण करण्यासाठी  रीमिक्स संग्रहित करा आणि सामग्री सानुकूलित करा',
+      'आपल्या विद्यार्थ्यांना गरजा पूर्ण करण्यासाठी  रीमिक्स संग्रहित करा आणि सामग्री सानुकूलित करा',
     shareDescription:
       'गोरु वर्गांच्या माध्यमातून संग्रह विद्यार्थ्यांसह  शेअर करा. प्रवेशासाठी लॉगिन आवश्यक नाही',
     monitorDescription:
@@ -753,7 +797,9 @@ export default Object.assign(quizzesTranslations, {
         'rescope-info':
           'हा कोर्स विशेषतः गणित पाया अभ्यासक्रम आपल्याकडून वैयक्तिकृत केला गेला आहे. मूळ कोर्स पाहण्यासाठी, हे वैशिष्ट्य सक्षम करा',
         'custom-msg':
-          'आम्ही आपल्या प्रवीणताच्या आधारावर विशेषतः आपल्यासाठी हा कोर्स वैयक्तिकृत करत आहोत. वैयक्तिकृत अभ्यासक्रम नकाशा पाहण्यासाठी थोड्या वेळाने परत तपासा.'
+          'आम्ही आपल्या प्रवीणताच्या आधारावर विशेषतः आपल्यासाठी हा कोर्स वैयक्तिकृत करत आहोत. वैयक्तिकृत अभ्यासक्रम नकाशा पाहण्यासाठी थोड्या वेळाने परत तपासा.',
+        'route0-bannerdesc':
+          'आपल्या पात्रतेच्या प्रोफाइलनुसार, काही सक्षमता आहेत ज्या आपल्याला मास्टर करावे लागतात ज्यायोगे आपण या मार्गात चांगले कार्य करू शकता. आमच्याकडे असा एक मार्ग आहे जो आपण या सक्षमतांचे पालन करण्यास आम्ही शिफारस करतो. तपशील पाहण्यासाठी येथे क्लिक करा.'
       }
     },
     analytics: {
@@ -780,6 +826,7 @@ export default Object.assign(quizzesTranslations, {
           }
         },
         'grade-items': 'श्रेणीसाठी आयटम',
+        'no-grade-items': 'असे दिसते की आपण सगळे पकडले आहात!',
         'gru-grade-items': {
           students: {
             zero: '{{count}} विद्यार्थी',
@@ -821,7 +868,7 @@ export default Object.assign(quizzesTranslations, {
     assessments: {
       edit: {
         'best-practices':
-          '<p> एक मूल्नयांक्न म्हणजे मूल्यांकन केलेल्या अशा प्रश्नांचा संच जो आप आणि आपले विद्यार्थी  समज व कामगिरीवर लक्ष ठेवण्यासाठीवापरू शकाल. </p> <p> आपल्या मूल्यांकना मध्ये विविध प्रश्नांचे प्रकार वापरा  (एसबीएसीवर आधारित) ज्यांच्या द्वारी विद्यार्थी त्यांची समज   विविध प्रकारे  प्रदर्शित करू शकतील. आम्ही प्रत्येक प्रश्न मानक, सूक्ष्म मानके आणि Webb\\\'s Depth of Knowledge टॅग करण्याची शिफारस करतो. </p>'
+          '<p> एक मूल्नयांक्न म्हणजे मूल्यांकन केलेल्या अशा प्रश्नांचा संच जो आप आणि आपले विद्यार्थी  समज व कामगिरीवर लक्ष ठेवण्यासाठीवापरू शकाल. </p> <p> आपल्या मूल्यांकना मध्ये विविध प्रश्नांचे प्रकार वापरा  (एसबीएसीवर आधारित) ज्यांच्या द्वारी विद्यार्थी त्यांची समज   विविध प्रकारे  प्रदर्शित करू शकतील. आम्ही प्रत्येक प्रश्न मानक, सूक्ष्म मानके आणि Webb\'s Depth of Knowledge टॅग करण्याची शिफारस करतो. </p>'
       }
     },
     classes: {
@@ -842,6 +889,8 @@ export default Object.assign(quizzesTranslations, {
         'class-not-found':
           'वर्ग सापडला नाही.. आपण योग्य वर्ग कोड  एंटर केल्याची खात्री करा',
         'invalid-code': 'अवैध वर्ग कोड',
+        'join-not-allowed':
+          'आपण जो वर्ग सामील करण्याचा प्रयत्न करीत आहात तो आता सक्रिय नाही. कृपया आपल्या शिक्षकांशी योग्य वर्ग कोडसाठी संपर्क साधा.',
         'already-member': 'आपण आधीच या वर्गाचे सदस्य आहात',
         'join-class': 'क्लासरूममध्ये सामील व्हा',
         'terms-and-conditions':
@@ -852,7 +901,7 @@ export default Object.assign(quizzesTranslations, {
       edit: {
         'assign-to-course': 'पाठ्यक्रमात द्या',
         'best-practices':
-          '<p> विद्यार्थी संकलन स्तरावर आपल्या सामग्रीसह संवाद साधतात. शिक्षणाचे संकलन तयार करताना, शिकण्याची उद्दिष्टे समाविष्ट करणे सुनिश्चित करा आणि विद्यार्थ्यांसमोर सिध्दांत विविध स्त्रोतांद्वारे प्रस्तुत करण्याचा विचार करा. </p> <p> संकल्पना तयार करण्यासाठी संसाधनांच्या क्रमवारीचा वापर करा. एका संकलन माध्यमातून प्रगती तार्किक पद्धतीने प्रवाहित झाली पाहिजे आणि \nगरज भासल्यास  अपेक्षित श्रोत्यांना  समजूतीच्या/आत्मसात करण्याच्या एका सर्व सामान्य स्तरावरून आणखी क्लीष्ट स्तरावर घेऊन जा किंवा विद्यार्थ्यांना अप्र्याप्त पणे अन्वेषण करू द्या   . </p> <p> मार्आगावर समजले आहे का हे जाणण्यासाठी चाचण्या घ्या आणि त्या साठी आमच्या गूरु प्र्श्नांचा वा इतर संभषकांचा वापर करा.  आम्ही संग्रहातील उद्दीष्टे पूर्ण करण्यासाठी आणि प्रत्येक स्रोताची भूमिका आणि उद्देश सुनिश्चित करण्यासाठी पुरेसे स्त्रोत आणि / किंवा पुरेशी विविध संसाधने शिफारस करतो. </p>'
+          '<p> विद्यार्थी संकलन स्तरावर आपल्या सामग्रीसह संवाद साधतात. शिक्षणाचे संकलन तयार करताना, शिकण्याची उद्दिष्टे समाविष्ट करणे सुनिश्चित करा आणि विद्यार्थ्यांसमोर सिध्दांत विविध स्त्रोतांद्वारे प्रस्तुत करण्याचा विचार करा. </p> <p> संकल्पना तयार करण्यासाठी संसाधनांच्या क्रमवारीचा वापर करा. एका संकलन माध्यमातून प्रगती तार्किक पद्धतीने प्रवाहित झाली पाहिजे आणि गरज भासल्यास  अपेक्षित श्रोत्यांना  समजूतीच्या/आत्मसात करण्याच्या एका सर्व सामान्य स्तरावरून आणखी क्लीष्ट स्तरावर घेऊन जा किंवा विद्यार्थ्यांना अप्र्याप्त पणे अन्वेषण करू द्या   . </p> <p> मार्आगावर समजले आहे का हे जाणण्यासाठी चाचण्या घ्या आणि त्या साठी आमच्या गूरु प्र्श्नांचा वा इतर संभषकांचा वापर करा.  आम्ही संग्रहातील उद्दीष्टे पूर्ण करण्यासाठी आणि प्रत्येक स्रोताची भूमिका आणि उद्देश सुनिश्चित करण्यासाठी पुरेसे स्त्रोत आणि / किंवा पुरेशी विविध संसाधने शिफारस करतो. </p>'
       }
     },
     courses: {
@@ -1024,7 +1073,7 @@ export default Object.assign(quizzesTranslations, {
     resources: {
       edit: {
         'best-practices':
-          '<p> संसाधने विविध स्वरुपामध्ये मल्टिमिडिया सामग्री आहेत उदा व्हिडिओ, परस्परसंवाद, वेबसाइट, प्रतिमा, Google डॉक्स, आणि बरेच काही. सर्जनशील व्हा आणि आपल्या स्वत: च्या स्त्रोतांचा वापर करा किंवा "स्त्रोतसंशोधक" ्बना आणि गोरुमध्ये \nआमचा भरपूर पुरवठा शोधा. </p> <p> आपल्या विद्यार्थ्यांना व्यस्त ठेवण्यासाठी विविध प्रकारचे संसाधन वापरा आणि  वर्णन व विवरण समाविष्ट करा जेणेकरुन आपण  आपल्या विद्यार्थ्यांना स्त्रोताद्वारे मार्गदर्शन करण्यास मदत करू शकता. </p> <p> आम्ही प्रत्येक प्रश्नासाठी मानक, सूक्ष्म-मानके आणि 21 व्या शतकातील कौशल्यांचे टॅगिंग करण्याची शिफारस करतो. आपण शिक्षक डॅशबोर्डद्वारे आपले विद्यार्थी संसाधनांसह परस्परसंवाद कसा करतात हे पाहू शकता. </p>',
+          '<p> संसाधने विविध स्वरुपामध्ये मल्टिमिडिया सामग्री आहेत उदा व्हिडिओ, परस्परसंवाद, वेबसाइट, प्रतिमा, Google डॉक्स, आणि बरेच काही. सर्जनशील व्हा आणि आपल्या स्वत: च्या स्त्रोतांचा वापर करा किंवा "स्त्रोतसंशोधक" बना आणि गोरुमध्ये आमचा भरपूर पुरवठा शोधा. </p> <p> आपल्या विद्यार्थ्यांना व्यस्त ठेवण्यासाठी विविध प्रकारचे संसाधन वापरा आणि  वर्णन व विवरण समाविष्ट करा जेणेकरुन आपण  आपल्या विद्यार्थ्यांना स्त्रोताद्वारे मार्गदर्शन करण्यास मदत करू शकता. </p> <p> आम्ही प्रत्येक प्रश्नासाठी मानक, सूक्ष्म-मानके आणि 21 व्या शतकातील कौशल्यांचे टॅगिंग करण्याची शिफारस करतो. आपण शिक्षक डॅशबोर्डद्वारे आपले विद्यार्थी संसाधनांसह परस्परसंवाद कसा करतात हे पाहू शकता. </p>',
         'placeholder-message':
           'येथे एक संसाधन जोडा <span> येथे पूर्वावलोकन करा </span>',
         'not-implemented':
@@ -1078,10 +1127,11 @@ export default Object.assign(quizzesTranslations, {
       lesson: 'धडा',
       'class-activities': 'दैनिक वर्ग कृती',
       'class-activities-tab': {
-        today: 'आज'
+        today: 'आज',
+        'past-activities': 'मागील क्रियाकलाप'
       },
       'my-report': 'माझा रिपो्र्ट',
-      'my-location': 'माझा रिपो्र्ट'
+      'my-location': 'माझा स्थान'
     },
     course: {
       'to-report': 'वापर सारांश',
@@ -1089,6 +1139,8 @@ export default Object.assign(quizzesTranslations, {
     },
     'current-activity': 'वर्तमान कार्य',
     'resume-current-activity': 'वर्तमान कार्य पुन्हा सुरू करा',
+    'last-activity': 'शेवटची क्रिया',
+    'start-studying': 'अभ्यास सुरू करा',
     'not-available': '-NA-',
     'join-classroom':
       'शिकण्यास प्रारंभ करण्यासाठी आपल्या शिक्षकांच्या वर्गात सामील व्हा',
@@ -1108,12 +1160,15 @@ export default Object.assign(quizzesTranslations, {
       'time-period': 'कालावधी',
       'update-report': 'रिपोर्ट अपडेट करा'
     },
+    'study-player': 'अभ्यास खेळाडू',
     'my-study': 'माझे अभ्यास',
     'no-classrooms':
-      'आपण अद्याप कोणत्याही वर्गांमध्ये सामील झालेले नाही. आपल्या शिक्षकांचे वर्ग जोडण्यासाठी "</br> कक्षामध्ये सामील व्हा/Join[1} Classroom" वर क्लिक करा आपण लायब्ररी टॅब अंतर्गत  \nसुध्दा वैशिष्ट्यीकृत कोर्स शोधू शकता.',
+      'आपण अद्याप कोणत्याही वर्गांमध्ये सामील झालेले नाही. आपल्या शिक्षकांचे वर्ग जोडण्यासाठी "कक्षामध्ये </br> सामील व्हा" वर क्लिक करा आपण लायब्ररी टॅब अंतर्गत सुध्दा वैशिष्ट्यीकृत कोर्स शोधू शकता.',
     'no-content-classrooms':
       'या वर्गात सध्या कोणताही कंटेंटंत सामग्री उपलब्ध नाही',
-    welcome: 'गोवरुमध्ये स्वागत आहे'
+    welcome: 'गोवरुमध्ये स्वागत आहे',
+    'no-course-assigned':
+      'अद्याप या वर्गात कोणताही कोर्स नियुक्त केला गेला नाही. कृपया आपल्या शिक्षकांशी संपर्क साधा.'
   },
   'student-independent-learning': {
     'show-more': 'अजून दाखवा',
@@ -1134,7 +1189,27 @@ export default Object.assign(quizzesTranslations, {
     'latest-assessment': 'नवीनतम मूल्यांकन',
     'create-classroom':
       'वर्ग तयार करा, सामग्री नियुक्त करा, विद्यार्थ्यांना आमंत्रित करा',
+    'dca-create-info':
+      'दैनिक चिन्ह क्रिया तयार करण्यासाठी खालील चिन्हावर क्लिक करा आणि गुरू ग्रंथालयातील सामग्री शोधा. आपण अभ्यासक्रमाच्या नकाशावर क्लिक करून आपल्या अभ्यासक्रमाच्या नकाशातून दररोज श्रेणी क्रियाकलाप देखील सामग्री जोडू शकता.',
+    'schedule-for-later': 'नंतरसाठी शेड्यूल',
+    'teach-this-activity-later': 'नंतर dca येथे या क्रिया शिकवा',
+    'schedule-dca-instruction-1': 'ही गतिविधी शिकवण्याची पुढील तारीख निवडा.',
+    'schedule-dca-instruction-2':
+      'ही क्रिया निवडलेल्या तारखेसाठी dca ​​येथे दिसेल.',
+    'navigator-banner': {
+      title: 'गणित साठी नेव्हिगेटर',
+      description:
+        'शिक्षण तंत्रज्ञानासाठी या जीपीएसचा वापर करून, आम्ही गणितासाठी नेव्हिगेटर तयार केले आहे जेणेकरुन प्रत्येक विद्यार्थी आत्मविश्वास मिळवू शकेल आणि गणितातील त्यांच्या शिक्षणास वेग वाढवू शकेल. <br/> गणितासाठी नेव्हिगेटर अभ्यासक्रमांचा अभ्यासक्रम आहे ज्यायोगे ग्रेड 2-12 मधील सर्व गणित संकल्पनांचा समावेश असेल. विद्यार्थ्यांना त्यांचे वर्तमान ज्ञान तयार करण्यासाठी डिझाइन केलेल्या वैयक्तिकृत मार्गाने मार्गक्रमण केले जाते आणि त्याचप्रमाणे त्यांच्या समजानुसार अंतर भरते. या व्यापक आणि वैयक्तिकृत शिक्षणाच्या अनुभवाद्वारे, प्रत्येक विद्यार्थी अधिक प्रगत गणितासाठी पूर्णपणे तयार होऊ शकतो.',
+      join: 'डेमो क्लासमध्ये सामील व्हा',
+      'success-message':
+        'आपण नेव्हिगेटर क्लासचे सह-शिक्षक म्हणून यशस्वीरित्या सामील झाले',
+      'error-message': 'वर्ग सामील सह समस्या'
+    },
     class: {
+      manage: 'व्यवस्थापित करा',
+      reports: 'अहवाल',
+      'daily-activites': 'दररोज सक्रिय',
+      courses: 'अर्थातच',
       'back-to': 'क्लासरूम कडे परत',
       'back-to-archived': 'संग्रहित कक्षांमध्ये परत',
       'class-management': 'वर्ग व्यवस्थापन',
@@ -1210,7 +1285,9 @@ export default Object.assign(quizzesTranslations, {
     'welcome-course-map':
       'हा आपला अभ्यासक्रम नकाशा आहे जेथे आपण अभ्यासक्रमाची सामग्री पाहू शकता, मूल्यांकन चालू किंवा बंद करू शकता आणि रिअल टाईममध्ये मूल्यांकनास लाँच करू शकता. आपण एकंदर क्लास कामगिरी आणि पूर्णता पाहू शकता. वर्ग कामगिरीच्या तपशीलवार दृश्यासाठी, आपल्या कक्षाच्या अहवाल टॅबला भेट द्या.',
     'welcome-rescoped-course-map':
-      'हा कोर्स वर्ग प्रत्येक विद्यार्थ्याला वैयक्तिकृत केले गेले आहे. आपण विद्यार्थ्यांच्या शिकण्याच्या मार्ग (वर्ण - आणि>) वर क्लिक करून वर्ग व्यवस्थापनातील प्रत्येक विद्यार्थ्याचे अभ्यासक्रम नकाशा पाहू शकता.'
+      'हा कोर्स वर्ग प्रत्येक विद्यार्थ्याला वैयक्तिकृत केले गेले आहे. आपण विद्यार्थ्यांच्या शिकण्याच्या मार्ग (वर्ण - आणि>) वर क्लिक करून वर्ग व्यवस्थापनातील प्रत्येक विद्यार्थ्याचे अभ्यासक्रम नकाशा पाहू शकता.',
+    'welcome-premium-course-map':
+      'हे नॅव्हिगेटर कोर्स अनेक श्रेणींमध्ये वैयक्तिकृत अभ्यासक्रम मानके आहे. प्रत्येक विद्यार्थ्याला अंतर भरण्यासाठी, संकल्पना आणि सराव मजबूतीसाठी आणि त्यांचे शिक्षण वाढवण्यासाठी एक अद्वितीय अभ्यासक्रम प्रदान केला जातो. वैयक्तिकृत मार्ग तयार केले गेले आहेत आणि विद्यार्थ्यांना प्रत्येक विद्यार्थ्याच्या शिक्षणाची क्षमता वाढविण्यासाठी आणि त्यांच्या निर्धारित गंतव्यस्थानावर नेव्हिगेट करण्यासाठी रीअल-टाइममध्ये री-रूट केले जाते.'
   },
   goals: {
     manage: {
@@ -1251,24 +1328,25 @@ export default Object.assign(quizzesTranslations, {
     }
   },
   'gru-add-to': {
-    'add-assessment-to-lesson': 'माझ्या मूल्यांकनांमधून जोडा',
+    'add-assessment-to-lesson': 'Add from my assessments',
     'add-assessment-to-lesson-lead':
-      'या धड्यात जोडण्यासाठी एक मूल्यांकन निवडा.',
-    'add-collection-to-lesson': 'माझ्या संग्रहातून जोडा',
-    'add-collection-to-lesson-lead': 'या धड्यामध्ये जोडण्यासाठी संग्रह निवडा.',
-    'add-to-collection': 'संग्रहामध्ये जोडा',
+      'Select an assessment to add to this lesson.',
+    'add-collection-to-lesson': 'Add from my collections',
+    'add-collection-to-lesson-lead':
+      'Select a collection to add to this lesson.',
+    'add-to-collection': 'Add to collection',
     'add-to-collection-lead':
-      'ज्याला आपण {{सामग्री शीर्षक}} जोडू इच्छिता तो संग्रह निवडा',
+      'Choose a collection you want to add {{contentTitle}} to',
     'add-to-existing-classroom': 'विद्यमान वर्गातीलमध्ये जोडा',
     'add-to-existing-classroom-lead':
       'आपण जोडण्यास इच्छुक असलेले एक वर्ग निवडा',
-    'add-to-assessment': 'मूल्यांकन किंवा संकलनात जोडा',
+    'add-to-assessment': 'Add to assessment or collection',
     'add-to-assessment-lead':
-      'आपण {{सामग्री शीर्षक}} जोडू इच्छित मूल्यांकन निवडा',
+      'Choose an assessment you want to add {{contentTitle}} to',
     'assessments-info':
-      'येथे सूचीबद्ध केलेले मूल्यांकन <b> नाही </b> दुसर्या धड्याचा किंवा अभ्यासक्रमाचा भाग आहे',
+      'The assessments listed here <b>do not</b> belong to another lesson or course',
     'collections-info':
-      'येथे सूचीबद्ध संकलन <b> नाही </b> दुसर्या धडा किंवा अभ्यासक्रम संबंधित'
+      'The collections listed here <b>do not</b> belong to another lesson or course'
   },
   'gru-add-rubric-to-question': {
     title: 'माझ्या रूबरॅब्रिकमधून जोडा',
@@ -1292,69 +1370,70 @@ export default Object.assign(quizzesTranslations, {
     'unlimited-attempts': 'आपल्याकडे अमर्यादित प्रयत्न आहेत',
     cancel: 'रद्द करा',
     continue: 'सुरू',
-    start: 'प्रारंभ!'
+    start: 'प्रारंभ!',
+    submit: 'सबमिट करा'
   },
   'gru-submit-confirmation': {
-    title: 'हे क्विझ पूर्ण करा आणि सर्व सबमिट करा',
+    title: 'Finish this quiz and submit all',
     description:
-      'आपण हा प्रयत्न समाप्त करणार आहात आणि सर्व प्रतिसाद सबमिट करणार आहात वगळलेले कोणतेही प्रश्न चुकीचे म्हणून मोजले जातील.',
-    cancel: 'रद्द करा',
-    confirm: 'समाप्त क्विझ',
+      'You are about to end this attempt and submit all responses. Any skipped questions will be counted as incorrect.',
+    cancel: 'Cancel',
+    confirm: 'Finish Quiz',
     'finish-description':
       'आपले प्रतिसाद सबमिट करण्यासाठी "समाप्त क्विझ" क्लिक करा'
   },
   'gru-quick-course-search': {
-    'add-from-course': 'विद्यमान कोर्स पासून जोडा',
-    'view-featured-courses': 'वैशिष्ट्यीकृत अभ्यासक्रम पहा',
-    assign: 'सोपवा'
+    'add-from-course': 'Add from Existing Course',
+    'view-featured-courses': 'View Featured Courses',
+    assign: 'Assign'
   },
   'gru-share-pop-over': {
-    copy: 'कॉपी करा',
-    'ios-tooltip': 'कॉपी करण्यासाठी टॅप करा!',
-    'multiarch-tooltip': 'कॉपी करण्यासाठी ctrl + c दाबा!',
-    'safari-osx-tooltip': 'कॉपी करण्यासाठी cmd + c दाबा!',
-    'share-course': 'लिंकसह आपले कोर्स सामायिक करा',
-    'share-question': 'आपला प्रश्न दुव्यासह सामायिक करा',
-    'share-resource': 'लिंकसह आपले संसाधन सामायिक करा',
-    'share-assessment': 'लिंकसह आपले मूल्यांकन सामायिक करा',
+    copy: 'Copy',
+    'ios-tooltip': 'Hold tap to copy!',
+    'multiarch-tooltip': 'Press Ctrl + C to copy!',
+    'safari-osx-tooltip': 'Press Cmd + C to copy!',
+    'share-course': 'Share your course with link',
+    'share-question': 'Share your question with link',
+    'share-resource': 'Share your resource with link',
+    'share-assessment': 'Share your assessment with link',
     'share-rubric': 'लिंकसह आपले रूब्ररी सामायिक करा',
-    'share-collection': 'लिंकसह आपले संकलन सामायिक करा'
+    'share-collection': 'Share your collection with link'
   },
   'gru-category-panel': {
     teacher: {
-      title: 'शिक्षकांसाठी',
+      title: 'For Teachers',
       body:
-        'डेटा विश्लेषणाद्वारे मानक-संरेखित सामग्री शोधा, सामग्री सानुकूलित करा आणि विद्यार्थी प्रगतीचा मागोवा घ्या.',
-      cta: 'कथा पहा'
+        'Discover standards-aligned content, customize content, and track student progress through data analytics.',
+      cta: 'See Stories'
     },
     student: {
-      title: 'विद्यार्थ्यांसाठी',
+      title: 'For Students',
       body:
-        'शिकण्याच्या साहित्याद्वारे स्वारस्ये शोधा, तयार करा आणि प्रगतीवर लक्ष ठेवा.',
-      cta: 'प्रविष्ट करा',
-      'text-placeholder': 'वर्ग कोड प्रविष्ट करा'
+        'Explore interests, build, and monitor progress through learning materials.',
+      cta: 'Enter',
+      'text-placeholder': 'Enter Classroom Code'
     },
     district: {
-      title: 'जिल्हे साठी',
+      title: 'For Districts',
       body:
-        'वैयक्तीकृत शिकण्यास मुक्त होण्यासाठी गोरुबरोबर सहयोग करा आणि जिल्हा-परीक्षण केलेले अभ्यासक्रम सामायिक करा.',
-      cta: 'आमचे परिणाम पहा'
+        'Collaborate with Gooru to unleash personalized learning and share a district-vetted curriculum.',
+      cta: 'See Our Impact'
     },
     partner: {
-      title: 'भागीदारांसाठी',
+      title: 'For Partners',
       body:
-        'शिक्षण पर्यावरणातील आमच्या सामूहिक परिणाम वाढवण्यासाठी मिशन-संरेखित भागीदारांसह सहयोग करा.',
-      cta: 'अधिक जाणून घ्या'
+        'Collaborate with mission-aligned partners to increase our collective impact on the education ecosystem.',
+      cta: 'Learn More'
     }
   },
   'class.gru-class-navigation': {
-    active: 'सक्रिय:',
-    members: 'सदस्य',
-    greetings: 'घोषणा',
-    overview: 'पाठ्यक्रम नकाशा',
-    analytics: 'डेटा',
-    teams: 'संघ',
-    information: 'वर्गाबद्दल माहिती'
+    active: 'Active:',
+    members: 'Members',
+    greetings: 'Announcements',
+    overview: 'Course Map',
+    analytics: 'Data',
+    teams: 'Teams',
+    information: 'Classroom Information'
   },
   'class.gru-class-statistics': {
     title: 'वर्ग आकडेवारी',
@@ -1383,7 +1462,7 @@ export default Object.assign(quizzesTranslations, {
     'text-temporary-one':
       'आपण संपूर्ण शिकत नेव्हीगेटरमध्ये जाता तेव्हा आपल्या प्रवासाला समर्थन देण्यास आम्ही आनंदी आहोत. एक फेरफटका चिन्ह घ्या',
     'text-temporary-two':
-      ' आमच्या वैशिष्ट्यांचा वापर कसा करावा यासाठी मार्गदर्शन केलेल्या टुरांसाठी',
+      ' आमच्या वैशिष्ट्यांचा वापर कसा करावा यासाठी मार्गदर्शन केलेल्या टुरांसाठी',
     'text-one':
       'आपण संपूर्ण लर्निंग नेविगेटरमध्ये जाता तेव्हा, आम्ही खालील प्रकारे आपल्या प्रवासास समर्थन करण्यास आनंदित आहोत:',
     'text-two': {
@@ -1403,54 +1482,53 @@ export default Object.assign(quizzesTranslations, {
     'dont-show-again': 'पुन्हा दाखवू नका'
   },
   'sign-up': {
-    'step-1-title': 'हॅलो!',
-    'step-1-description':
-      'आम्हाला आनंद होत आहे की आपण आमच्यात सामील होण्याचे ठरवले आहे.',
-    'step-child-title': 'खूप वेगाने नको!',
-    'step-child-subtitle': 'आम्ही तुमची नोंदणी पूर्ण करू शकत नाही.',
-    'step-child-description-1': 'गोरू आपले खाते बनवू शकले नाहीत',
-    'step-child-age-requirements': 'अटी व शर्ती',
-    'step-child-description-2':
-      '. शिक्षणात राहा आणि काही वर्षांमध्ये आपण पाहू!',
-    'step-2-title': 'मूलभूत माहिती',
-    'step-2-description': 'आपण मूलभूत नाही, परंतु ही माहिती आहे.',
-    'log-in': 'लॉग इन',
-    'log-in-description': 'आपले आधीच खाते असेल तर',
-    'google-button': 'google सह साइन अप करा',
-    username: 'वापरकर्तानाव',
+    'step-1-title': 'Hello!',
+    'step-1-description': 'We’re glad you’ve decided to join us.',
+    'step-child-title': 'Not so fast!',
+    'step-child-subtitle': 'We cannot complete your registration.',
+    'step-child-description-1':
+      'Gooru could not create your account due to our ',
+    'step-child-age-requirements': 'Terms & Conditions',
+    'step-child-description-2': '. Keep learning and see you in a few years!',
+    'step-2-title': 'Basic Info',
+    'step-2-description': 'You’re not basic, but this info is.',
+    'log-in': 'Log In',
+    'log-in-description': 'if you already have an account.',
+    'google-button': 'Sign Up with Google',
+    username: 'Username',
     dateOfBirth: {
-      title: 'वाढदिवस',
-      day: 'दिवस',
-      month: 'महिना',
+      title: 'Birthday',
+      day: 'Day',
+      month: 'Month',
       months: {
-        january: 'जानेवारी',
-        february: 'फेब्रुवारी',
-        march: 'मार्च',
-        april: 'एप्रिल',
-        may: 'मे',
-        june: 'जून',
-        july: 'जुलै',
-        august: 'ऑगस्ट',
-        september: 'सप्टेंबर',
-        october: 'ऑक्टोबर',
-        november: 'नोव्हेंबर',
-        december: 'डिसेंबर महिना'
+        january: 'January',
+        february: 'February',
+        march: 'March',
+        april: 'April',
+        may: 'May',
+        june: 'June',
+        july: 'July',
+        august: 'August',
+        september: 'September',
+        october: 'October',
+        november: 'November',
+        december: 'December'
       },
-      year: 'वर्ष',
-      'error-message': 'कृपया आपली जन्मतारीख प्रविष्ट करा'
+      year: 'Year',
+      'error-message': 'Please enter your birth date.'
     },
-    email: 'ईमेल',
-    password: 'पासवर्ड',
-    rePassword: 'पासवर्डची पुष्टी करा',
-    state: 'राज्य किंवा प्रदेश',
-    district: 'जिल्हा किंवा चार्टर संस्था',
-    'error-username-taken': 'ओहो, हे वापरकर्तानाव घेतले आहे. दुसरा प्रयत्न करा',
-    'error-email-taken': 'हे ईमेल घेतले आहे दुसरा प्रयत्न करा',
-    'error-role-message': 'कृपया एक भूमिका निवडा.',
-    'error-country-message': 'कृपया आपला देश निवडा.',
-    'error-state-message': 'कृपया आपले राज्य किंवा प्रदेश निवडा.',
+    email: 'Email',
+    password: 'Password',
+    rePassword: 'Confirm Password',
+    state: 'State or Territory',
+    district: 'District or Charter Organization',
+    'error-username-taken': 'Aww, this username is taken. Try another.',
+    'error-email-taken': 'This email is taken. Try another.',
+    'error-role-message': 'Please select a role.',
+    'error-country-message': 'Please select your country.',
+    'error-state-message': 'Please select your state or territory.',
     'error-district-message':
-      'कृपया सूचीतून आपला जिल्हा / चार्टर निवडा किंवा तो "इतर" मध्ये प्रदान करा'
+      'Please select your district/charter from the list or provide it in "Other".'
   },
   'gru-user-sign-up-cancel': {
     title: 'रजा नोंदणी?',
@@ -1478,7 +1556,7 @@ export default Object.assign(quizzesTranslations, {
     description: 'हे आपल्या सर्वांच्या बाबतीत घडते',
     usernameOrEmail: 'कृपया आपले ईमेल प्रविष्ट करा',
     'footer-google-description-1':
-      '<a href=\'/sign-in\'> \'google सह साइन इन\' दाबून पुन्हा लॉग इन करण्याचा प्रयत्न करा. </a>',
+      '<a href=\'sign-in\'> \'google सह साइन इन\' दाबून पुन्हा लॉग इन करण्याचा प्रयत्न करा. </a>',
     'footer-description-1':
       'आपल्याला आपला संकेतशब्द रीसेट करण्यासाठी एका दुव्यासह एक ईमेल प्राप्त होईल.',
     'footer-description-2':
@@ -1498,32 +1576,32 @@ export default Object.assign(quizzesTranslations, {
   },
   footer: {
     footerDescription:
-      'गोरू आपले व्यासपीठ मुक्त-स्रोत ठेवण्यासाठी वचनबद्ध आहे आणि समुदाय सामग्री cc0 तयार करते.',
-    company: 'कंपनी',
-    community: 'समुदाय',
-    legal: 'कायदेशीर',
-    connect: 'कनेक्ट करा',
-    aboutGooru: 'गोरू बद्दल',
-    careers: 'करिअर',
-    supportCenter: 'समर्थन केंद्र',
-    contactUs: 'आमच्याशी संपर्क साधा',
-    districts: 'जिल्हे',
-    partners: 'भागीदार',
-    coaches: 'प्रशिक्षक',
-    events: 'प्रसंग',
-    terms: 'अटी',
-    privacy: 'गोपनीयता',
-    Copyright: 'कॉपीराइट'
+      'Gooru is committed to keeping its platform open-source and community created content CC0.',
+    company: 'Company',
+    community: 'Community',
+    legal: 'Legal',
+    connect: 'Connect',
+    aboutGooru: 'About Gooru',
+    careers: 'Careers',
+    supportCenter: 'Support Center',
+    contactUs: 'Contact Us',
+    districts: 'Districts',
+    partners: 'Partners',
+    coaches: 'Coaches',
+    events: 'Events',
+    terms: 'Terms',
+    privacy: 'Privacy',
+    Copyright: 'Copyright'
   },
   'grade-dropdown': {
-    placeholder: 'दर्जा',
-    prompt: 'एक ग्रेड निवडा',
-    'pre-k': 'पूर्व-के',
-    elementary: 'प्राथमिक',
-    'middle-school': 'माध्यमिक शाळा',
-    'high-school': 'माध्यमिक शाळा',
-    'higher-ed': 'उच्च शिक्षण',
-    k: 'के',
+    placeholder: 'grade(s)',
+    prompt: 'Select a grade',
+    'pre-k': 'Pre-K',
+    elementary: 'Elementary',
+    'middle-school': 'Middle School',
+    'high-school': 'High School',
+    'higher-ed': 'Higher Ed',
+    k: 'K',
     first: '1',
     second: '2',
     third: '3',
@@ -1538,11 +1616,11 @@ export default Object.assign(quizzesTranslations, {
     twelfth: '12'
   },
   'standard-dropdown': {
-    placeholder: 'मानक द्वारे ब्राउझ करा'
+    placeholder: 'Browse by Standard'
   },
   'subject-dropdown': {
-    placeholder: 'विषय',
-    prompt: 'एक विषय निवडा'
+    placeholder: 'subject(s)',
+    prompt: 'Select a subject'
   },
   'search-filter': {
     courses: 'अभ्यासक्रम',
@@ -1572,14 +1650,14 @@ export default Object.assign(quizzesTranslations, {
     }
   },
   resource: {
-    video: 'व्हिडिओ',
-    webpage: 'वेब पेज',
-    interactive: 'परस्परसंवादी',
-    question: 'प्रश्न',
-    image: 'प्रतिमा',
-    text: 'मजकूर',
-    audio: 'ऑडिओ',
-    oer: 'प्रती'
+    video: 'Video',
+    webpage: 'Webpage',
+    interactive: 'Interactive',
+    question: 'Question',
+    image: 'Image',
+    text: 'Text',
+    audio: 'Audio',
+    oer: 'OER'
   },
   'search-result': {
     resource: 'स्त्रोत',
@@ -1591,11 +1669,10 @@ export default Object.assign(quizzesTranslations, {
     'search-results-for': 'च्या शोधाचे निकाल'
   },
   'gru-image-picker': {
-    chooseFile: 'एक फाईल निवडा ...',
-    instruction: 'आपल्या संगणकावरील एका फाईलमधून एक प्रतिमा अपलोड करा.',
-    restriction:
-      'प्रतिमा jpg, gif किंवा 5 mb पेक्षा लहान असलेल्या png फाईल असणे आवश्यक आहे.',
-    submit: 'प्रतिमा वापरा'
+    chooseFile: 'Choose a file ...',
+    instruction: 'Upload an image from a file on your computer.',
+    restriction: 'The image must be a JPG, GIF or PNG file smaller than 5 MB.',
+    submit: 'Use Image'
   },
   'gru-fib': {
     instructions:
@@ -1642,6 +1719,52 @@ export default Object.assign(quizzesTranslations, {
   'gru-reorder': {
     instructions:
       'कृपया योग्य क्रमाने उत्तरे पुनर्क्रमित करा आणि "{{action}}" क्लिक करा.'
+  },
+  'student-first-experience': {
+    preStudyTitle: '{{title}} साठी पूर्व-अभ्यास',
+    'route0-action': {
+      accept: 'स्वीकार',
+      ignore: 'दुर्लक्ष'
+    },
+    competency: {
+      popover: {
+        title: '{{शीर्षक}} सीमा',
+        content:
+          'आपल्याला आपल्या स्काईलाइन आणि या ग्रेडलाइन दरम्यान आपल्या गंतव्यस्थानापर्यंत पोहोचण्यासाठी सर्व मानकांचा अभ्यास करण्याची आवश्यकता आहे.'
+      }
+    },
+    'assigned-course-title': '{{शीर्षक}} साठी नियुक्त केलेला कोर्स',
+    'study-course': 'अभ्यासक्रम',
+    'show-my-destination': 'माझे गंतव्य दर्शवा',
+    'show-me-my-route': 'माझा मार्ग दाखवा',
+    'competency-level': {
+      title: 'आपल्या प्रवीण प्रोफाइल',
+      mastery: '{{गणना}} मानके महारत',
+      'in-progress': '{{गणित}} दर्जा प्रगतीपथावर आहे',
+      'not-started': '{{गणित}} मानक सुरू झाले नाहीत',
+      'your-skyline': 'तुझा स्कायलाइन'
+    },
+    explanatory: {
+      master: {
+        title: 'मास्टर्ड',
+        desc: 'आपण असे मानले आहे की आपण यशस्वीरित्या गुणवत्तेचे मास्तर केले आहे'
+      },
+      'in-progress': {
+        title: 'प्रगतीपथावर',
+        desc:
+          'आपण असे मानले आहे की आपण मानकांचा अभ्यास करण्यास प्रारंभ केला आहे आणि महारत प्राप्त करण्याच्या दिशेने प्रगती करीत आहे'
+      },
+      'not-started': {
+        title: 'सुरु केले नाही',
+        desc:
+          'असे कोणतेही पुरावे नाहीत आणि आपण अद्याप मानकांचा अभ्यास करण्यास प्रारंभ केला आहे असे सूचित करते'
+      }
+    },
+    'competency-level-partial': {
+      desc1: 'तू सध्या आहेस',
+      desc2:
+        'गणितासाठी आपल्या स्काईलाइन नकाशात आपले स्वागत आहे. स्काईलाइन (जाड पांढरे ओळ) प्रत्येक डोमेनमध्ये आपण उच्च दर्जाचे उच्च दर्जा दर्शवितो. डोमेन म्हणजे गणित क्षेत्र आहे जे आपण अभ्यास करता, जसे की संख्या प्रणाली आणि अभिव्यक्ती आणि समीकरण. प्रत्येक स्तंभ गणित डोमेन प्रस्तुत करते. आणि स्तंभातील प्रत्येक बॉक्स डोमेनमधील मानक प्रस्तुत करते. एकदा आपण शिकणे सुरू केले आणि मानकांचे व्यवस्थापन केले, तर आपले स्कायलाइन सतत बंप होईल.'
+    }
   },
   player: {
     'gru-navigation': {
@@ -1719,36 +1842,37 @@ export default Object.assign(quizzesTranslations, {
       'not-started': 'सुरु  केलेले नाही',
       skyline: 'स्काईलाइन',
       baseline: 'बेसलाइन',
+      'grade-line': 'ग्रेड ओळ',
       'not-tagged':
         'वर्गात कोणत्याही प्रकारचे नियुक्त केलेले नाही किंवा अर्थातच एखाद्या वैध विषयावर किंवा मानकांवर टॅग केले गेले नाही.'
     }
   },
   'gru-data-picker': {
-    score: 'स्कोअर',
+    score: 'Score',
     report: 'अहवाल',
-    completion: 'पूर्णत्व',
-    timeSpent: 'वेळ',
+    completion: 'Completion',
+    timeSpent: 'Time',
     'time-spent': 'खर्च केलेला वेळ',
-    'study-time': 'अभ्यासाची वेळ',
-    reaction: 'प्रतिक्रिया',
-    attempts: 'प्रयत्न'
+    'study-time': 'Study Time',
+    reaction: 'Reaction',
+    attempts: 'Attempt'
   },
   'gru-performance-summary': {
-    title: 'शीर्षक',
-    scores: 'स्कोअर',
-    completion: 'पूर्णत्व',
-    'time-spent': 'पूर्ण वेळ',
-    reaction: 'प्रतिक्रिया',
-    attempts: 'प्रयत्न',
-    redo: 'तयार',
-    resume: 'पुन्हा सुरू करा',
-    study: 'आता अभ्यास करा',
-    'view-report': 'अहवाल पहा',
-    'not-applicable': 'N/A लागू नाही',
-    'not-started': 'अद्याप प्रारंभ झाला नाही'
+    title: 'Title',
+    scores: 'Scores',
+    completion: 'Completion',
+    'time-spent': 'Total Time',
+    reaction: 'Reaction',
+    attempts: 'Attempts',
+    redo: 'Redo',
+    resume: 'Resume',
+    study: 'Study Now',
+    'view-report': 'View Report',
+    'not-applicable': 'N/A',
+    'not-started': 'Not started yet'
   },
   'gru-performance': {
-    'no-content': 'कोणताही कंटेंट उपलब्ध नाही'
+    'no-content': 'No content available'
   },
   'gru-performance-metrics': {
     assessment: 'मूल्यांकन',
@@ -1761,10 +1885,10 @@ export default Object.assign(quizzesTranslations, {
   },
   'gru-metrics-sub-header': {
     assessment: 'मूल्यांकन',
-    student: 'विद्यार्थी',
-    score: 'स्कोअर',
+    student: 'Student',
+    score: 'Score',
     report: 'अहवाल',
-    completion: 'पूर्णत्व',
+    completion: 'Completion',
     'time-spent': 'वेळ'
   },
   'gru-resource-new': {
@@ -1845,10 +1969,10 @@ export default Object.assign(quizzesTranslations, {
       }
     },
     'gru-resource-card': {
-      add: 'जोडू'
+      add: 'Add to'
     },
     'gru-resource-result-card': {
-      skipped: 'वगळले'
+      skipped: 'Skipped'
     },
     'gru-profile-card': {
       followers: 'अनुयायी',
@@ -1903,45 +2027,45 @@ export default Object.assign(quizzesTranslations, {
   },
   taxonomy: {
     'gru-taxonomy-selector': {
-      'add-secondary': 'दुय्यम जोडा',
-      'choose-subject': 'विषय निवडा',
+      'add-secondary': 'Add secondary',
+      'choose-subject': 'Choose Subject',
       'competency-subject-and-course': 'क्षमता फ्रेमवर्क आणि अभ्यासक्रम',
-      'primary-subject-and-course': 'मानक फ्रेमवर्क आणि अभ्यासक्रम'
+      'primary-subject-and-course': 'क्षमता आराखडा आणि अभ्यासक्रम'
     }
   },
   validations: {
     unsavedChanges:
-      'आपले बदल अद्याप जतन केले गेले नाहीत. आपण हे पृष्ठ सोडू इच्छिता?'
+      'आपले बदल अजून सेव्ह केले गेलेले नाहीत. आपण हे पान सोडू इच्छिता?'
   },
   featured: {
     'featured-title': 'प्रदर्शित अभ्यासक्रम',
     'featured-description':
-      'वैशिष्ट्यपूर्ण अभ्यासक्रम अभिनव शिक्षकांनी तयार केलेले आहेत, नमुने तपासलेले आणि सामग्री तज्ञांचे पुनरावलोकन केले आणि विद्यार्थ्यांसह कक्षांमध्ये कार्यान्वित केले. शोधा आणि रीमिक्स करा आणि अभ्यासक्रम वैयक्तिकृत करा आणि विद्यार्थी प्रतिबद्धता वाढवा! <a href=\'http://about.gooru.org/courses\' target=\'_blank\'> या अभ्यासक्रमांच्या विकासाबद्दल अधिक जाणून घ्या </a>.'
+      'वैशिष्ट्यपूर्ण अभ्यासक्रम अभिनव शिक्षकांनी तयार केलेले आहेत, नमुने तपासलेले आणि सामग्री तज्ञांचे पुनरावलोकन केले आणि विद्यार्थ्यांसह कक्षांमध्ये कार्यान्वित केले. शोधा आणि रीमिक्स करा आणि अभ्यासक्रम वैयक्तिकृत करा आणि विद्यार्थी प्रतिबद्धता वाढवा! <a href=\' http://about.gooru.org/courses\' target=\'_blank\'> या अभ्यासक्रमांच्या विकासाबद्दल अधिक जाणून घ्या </a>.'
   },
   'taxonomy.modals': {
     'gru-domain-picker': {
-      browseSelectorText: 'हे युनिट कव्हर कोणते डोमेन करेल?',
+      browseSelectorText: 'हे युनिट कोणते विषय कव्हर करेल?',
       selectedText: {
         zero: '{{count}} डोमेन निवडले',
-        one: '{{count}} डोमेन निवडले',
-        other: '{{count}} डोमेन निवडले'
+        one: '{{count}} विषय निवडला आहे',
+        other: '{{count}} विषय निवडले आहेत'
       },
-      shortcutText: 'कोर्स चालू आहे'
+      shortcutText: 'Course is in'
     },
     'gru-standard-picker': {
-      browseSelectorText: 'काय मानक समाविष्ट केले जाईल?',
+      browseSelectorText: 'कुठल्या क्षमता समाविष्ट केल्या जातील?',
       browseCompetencySelectorText: 'काय क्षमता समाविष्ट केले जाईल?',
       selectedText: {
         zero: '{{count}} मानक निवडले',
-        one: '{{count}} मानक निवडले',
-        other: '{{count}} मानक निवडले'
+        one: '{{count}} क्षमता निवडली आहे',
+        other: '{{count}} क्षमता निवडल्या आहेत'
       },
       selectedCompetencyText: {
         zero: '{{count}} निवडलेल्या क्षमता',
         one: '{{count}} निवडलेल्या क्षमता',
         other: '{{count}} निवडलेल्या क्षमता'
       },
-      shortcutText: 'युनिटवर टॅग केले आहे'
+      shortcutText: 'युनिटचा शी संबंध जोडला आहे'
     }
   },
   'account-settings': {
@@ -1975,18 +2099,20 @@ export default Object.assign(quizzesTranslations, {
     }
   },
   'gru-settings-edit': {
-    'answerkey-attempts': 'उत्तर आणि प्रयत्न उत्तर',
-    'answer-key': 'विद्यार्थी शेवटी उत्तर की पाहू शकता',
+    'answerkey-attempts': 'उत्तरे आणि प्रयत्न',
+    'answer-key': 'विद्यार्थी शेवटी उत्तरे पाहू शकतात',
     attempts: 'प्रयत्न',
     'attempts-unlimited': 'अमर्यादित',
-    backwards: 'विद्यार्थी मागे व नेव्हिगेट करू शकतात आणि प्रतिसाद बदलू शकतात',
-    feedback: 'विद्यार्थी योग्य / चुकीचे आहेत का ते पहा',
-    'feedback-immediate': 'प्रति प्रश्न आणि शेवटी',
+    backwards: 'विद्यार्थी मागे जाऊन उत्तर बदलू शकतात',
+    feedback: 'विद्यार्थी त्यांची उत्तरे चूक/ बरोबर आहेत ते पाहतात',
+    'feedback-immediate': 'प्रत्येक प्रश्नाकरिता आणि शेवटी',
     'feedback-never': 'कधीही नाही',
     'feedback-summary': 'शेवटी',
-    'navigation-scoring': 'नेव्हिगेशन आणि स्कोअरिंग',
-    'disable-heading': 'अभ्यासक्रम नकाशामध्ये मूल्यांकन सक्रिय करा',
-    'disable-legend': 'विद्यार्थी त्यांच्या कोर्स नकाशावरून मूल्यांकन करू शकतात'
+    'navigation-scoring': 'नॅव्हिगेशन आणि स्कोअरिंग',
+    'disable-heading':
+      'अभ्यासक्रमाच्या आराखड्यामध्ये मूल्यमापन कार्यान्वित करा',
+    'disable-legend':
+      'विद्यार्थी त्यांच्या अभ्यासक्रमाच्या आराखड्यामध्ये मूल्यमापन सुरु करू शकतात'
   },
   'gru-icon-popover': {
     'settings-visibility-title': 'आपली सामग्री दृश्यमान करा',
@@ -2323,46 +2449,46 @@ export default Object.assign(quizzesTranslations, {
     },
     overview: {
       stepOne: {
-        title: 'पाठ्यक्रम नकाशा',
+        title: 'अभ्यासक्रमाचा आराखडा',
         description:
-          'अर्थात नकाशा आपल्या विद्यार्थ्यांना त्यांच्यासाठी नियुक्त केलेल्या सर्व मूल्यांकनांमुळे आणि संग्रहांमध्ये प्रवेश प्रदान करते.'
+          'अभ्यासक्रमाच्या आराखड्यावरून तुमच्या विद्यार्थ्यांना त्यांच्यासाठी नेमून दिलेली सर्व मूल्यमापने आणि संग्रह मिळू शकतात'
       },
       stepTwo: {
-        title: 'वर्ग कोड',
+        title: 'वर्गाचा कोड',
         description:
-          'आपण तयार केलेल्या प्रत्येक वर्गामध्ये एक अद्वितीय वर्ग कोड असतो. जेव्हा आपण आपल्या वर्गामध्ये सहभागी होऊन आपल्या सामग्रीवर प्रवेश करण्यास तयार असाल तेव्हा आपण हा कोड विद्यार्थ्यांना देऊ.'
+          'तुम्ही तयार केलेल्या प्रत्येक वर्गाकरिता एक युनिक वर्ग कोड असतो. जेव्हा तुम्ही त्यांना तुमच्या वर्गात प्रवेश देण्याकरिता आणि त्यातील मजकूर बघू देण्याकरिता तयार असाल तेव्हा त्यांना  हा कोड द्या.'
       },
       stepThree: {
-        title: 'विद्यार्थी आणि वर्ग डेटा निरीक्षण',
+        title: 'विद्यार्थी आणि वर्गाची माहिती लक्षपूर्वक पहा',
         description:
-          'जेव्हा विद्यार्थी अभ्यासक्रमाचा भाग घेतात तेव्हा ते विद्यार्थी आणि विद्यार्थी मूल्यांकन डेटा पाहू शकतात.'
+          'यामुळे तुम्ही जेव्हा विद्यार्थी अभ्यासक्रमाचा भाग असलेली मूल्यमापने पूर्ण करता तेव्हा वर्गाच्या आणि विद्यार्थ्याच्या वैयक्तिक मूल्यमापनाच्या माहितीचे विश्लेषण बघू शकता'
       },
       stepFour: {
-        title: 'वर्गाबद्दल माहिती',
+        title: 'वर्गाची माहिती',
         description:
-          'येथे आपण आपले वर्ग नाव संपादित करू शकता, आपल्या विद्यार्थ्यांसाठी घोषणा पोस्ट करू शकता, आपल्या वर्गात नोंदणी केलेल्या विद्यार्थ्यांची नावे पाहू शकता आणि आपली वर्गवारी हटवू शकता'
+          'येथे तुम्ही तुमच्या वर्गाचे नाव बदलू शकता, तुमच्या विद्यार्थ्यांसाठी सूचना पोस्ट करू शकता, तुमच्या वर्गात नोंदणी केलेल्या विद्यार्थ्यांची नावे पाहू शकता आणि तुमचा वर्ग डिलीट करू शकता.'
       },
       stepFive: {
-        title: 'आपल्या अभ्यासक्रमाची सामग्री संपादित करत आहे',
+        title: 'तुमच्या अभ्यासक्रमातील साहित्यमध्ये बदल होत आहे',
         description:
-          'जेव्हा आपण वर्गातील असाल, तेव्हा आपल्या विद्यार्थ्यांना नियुक्त केलेल्या अभ्यासक्रमातील कोणतीही सामग्री संपादित करण्यासाठी येथे क्लिक करा.'
+          'जेव्हा तुम्ही वर्गात असाल तेव्हा तुमच्या विद्यार्थ्यांना नेमुन दिलेल्या अभ्यासक्रमातील काहीही बदलण्यासाठी येथे क्लिक करा.'
       },
       stepSix: {
-        title: 'रिअल-टाइम मध्ये प्रगतीवर मागोवा घ्या!',
+        title: 'प्रत्यक्षात प्रगतीवर लक्ष ठेवा!',
         description:
-          'रिअल-टाइम डॅशबोर्डचा वापर रिअलटाइममधील मूल्यांवर वर्गाची प्रगती मॉनिटर करण्यासाठी करतात. <br> <br> विद्यार्थ्यांसाठी वास्तविक-वेळ मूल्यांकन लाँच करण्यासाठी प्रत्येक मूल्यांकनाच्या डाव्या बाजुस असलेल्या "थेट लाइव्ह" चिन्हावर क्लिक करा. <br> <br> <i class = "real-time-icon">'
+          'वर्गाच्या मूल्यमापनामधील प्रगतीवर सतत लक्ष ठेवण्यासाठी रिअल-टाइम डॅशबोर्ड वापरा. <br><br>विद्यार्थ्यांसाठी रियल-टाईम मूल्यमापन लाँच करण्यासाठी प्रत्येक मूल्यमापनाच्या डाव्या बाजुला असलेल्या "गो लाइव्ह" चिन्हावर क्लिक करा. <br><br><i class="real-time-icon">'
       }
     },
     'quick-start': {
       stepOne: {
-        title: 'आपल्या वर्गासाठी नॅव्हिगेट करणे',
+        title: 'तुमच्या वर्गांमध्ये पुढे मागे जाणे',
         description:
-          'हे नवीन तयार केलेल्या वर्गाचे दृश्य आहे. कोणत्याही वेळी वर्गात परत जाण्यासाठी, "वर्ग" वर क्लिक करा आणि ड्रॉप डाउन मेनू वापरा जे आपण प्रवेश करू इच्छित असलेला वर्ग निवडा.'
+          'हा नवीन तयार केलेला वर्ग आहे. कोणत्याही वेळी एखाद्या वर्गात परत जाण्यासाठी, "वर्ग" वर क्लिक करा आणि ड्रॉप डाउन मधील सूची वापरून तुम्हाला हवा असलेला वर्ग निवडा.'
       },
       stepTwo: {
-        title: 'प्रारंभ करणे? मूल्यांकन तयार करा!',
+        title: 'सुरवात करताय? मूल्यमापन तयार करा!',
         description:
-          'आम्ही गोरूसह प्रारंभ करण्यासाठी आणि आपल्या वर्गात विद्यार्थी समस्यांच्या वर्तमान पातळीचे मूल्यांकन करण्याचा एक उपाय म्हणून एक मूल्यांकन तयार करण्याचा सल्ला देतो.'
+          'आम्ही तुम्हाला असे सुचवू की Gooru वापरण्याची सुरवात करताना तसेच तुमच्या वर्गातील विद्यार्थ्यांच्या आकलनशक्तीची सध्याची पातळी मोजण्याकरिता तुम्ही एक मूल्यमापन तयार करावे'
       }
     },
     'real-time': {
@@ -2545,6 +2671,15 @@ export default Object.assign(quizzesTranslations, {
     'take-resource': 'अभ्यास संसाधन',
     'end-of-course': 'आपण कोर्सच्या शेवटी पोहोचला आहात.'
   },
+  'gru-content-suggestion': {
+    header: 'आमच्याकडे आपल्यासाठी एक सूचना आहे!',
+    'suggestion-text': {
+      collection:
+        'या विषयावरील आपल्या कार्यप्रदर्शनावर आधारित, आम्ही आपल्याला निपुणता मिळविण्यात मदत करण्यासाठी आमच्या सुचविलेल्या संकलनातून पुढे जाण्याची शिफारस करतो.',
+      assessment:
+        'या विषयावरील आपल्या कार्यप्रदर्शनावर आधारित, आम्ही आपल्याला निपुणता मिळविण्यात मदत करण्यासाठी आमच्या सुचविलेल्या मूल्यांकनानुसार शिफारस करतो.'
+    }
+  },
   'student-open-ended-summary': {
     'overall-comment': 'एकूणच टिप्पणी',
     'overall-score': 'एकूण धावसंख्या',
@@ -2567,7 +2702,6 @@ export default Object.assign(quizzesTranslations, {
     },
     'domain-report': 'डोमेन अहवाल'
   },
-
   'self-report': {
     'your-score': 'आपला स्कोअर',
     'update-error': 'स्कोअर अद्यतनित करताना समस्या',
