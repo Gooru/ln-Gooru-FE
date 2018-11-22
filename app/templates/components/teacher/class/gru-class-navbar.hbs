@@ -1,5 +1,5 @@
-<div class="header-panel" {{action 'closeNotificationList'}} >
-  <div class="nav-body">
+<div class="header-panel" {{action 'closeNotificationList'}}>
+  <div class="nav-body {{if class.isArchived 'archived-class'}}">
     <div class="app-brand">
       {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
     </div>

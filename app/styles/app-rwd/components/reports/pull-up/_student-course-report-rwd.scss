@@ -17,9 +17,26 @@
 
       .report-content {
         .report-performance-tabular {
-          .report-performance-header {
-            .content-name {
-              padding-left: 48px;
+          @media screen and (max-width: $screen-xs) {
+            .report-performance-header {
+              grid-template-columns: auto auto;
+
+              .content-name {
+                padding-left: 50px;
+              }
+
+              .score {
+                padding-right: 10px;
+                text-align: right;
+              }
+            }
+
+            .report-performance-list {
+              grid-template-columns: 90% 10%;
+
+              .completion {
+                display: none;
+              }
             }
           }
         }
