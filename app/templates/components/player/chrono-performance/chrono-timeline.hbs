@@ -49,7 +49,7 @@
         </li>
     {{/each}}
     {{#each displayCards.center as |card|}}
-        <li class ='c-{{card.sessionId}}' {{action 'showCard' card }}>
+        <li class ='c-{{card.sessionId}}' style='cursor:pointer;' {{action 'onClickLeft' }}>
             <div class='selecthighlight'></div>
             {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask'}}
         </li>
