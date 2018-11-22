@@ -36,27 +36,26 @@
 </ul>
 {{#if (gt timeData.length  0)}}
 
-<ul class='cards-display'>
-
+<ul class='cards-display carousel slide' data-ride="carousel" data-interval="false">
     {{#each displayCards.dummyleft as |card index|}}
-        <li class="dummy-timecard-left"  style='transform :scale({{card.scale}}); Z-INDEX: {{ card.zIndex}} ; margin-right:-10px;' >
+        <li class=" dummy-timecard-left"  style='transform :scale({{card.scale}}); Z-INDEX: {{ card.zIndex}} ; margin-right:-10px;' >
                 {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask-mid'}}            
         </li>
     {{/each}}
 
     {{#each displayCards.left as |card|}}
-        <li style='transform :scale({{card.scale}});Z-INDEX: {{card.zIndex}}; cursor:pointer;' {{action 'showCard' card }}>
+        <li class ='c-{{card.sessionId}}' style='transform :scale({{card.scale}});Z-INDEX: {{card.zIndex}}; cursor:pointer;' {{action 'showCard' card }} >
             {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask-mid cardmask-mid-data-left'}}
         </li>
     {{/each}}
     {{#each displayCards.center as |card|}}
-        <li {{action 'showCard' card }}>
+        <li class ='c-{{card.sessionId}}' {{action 'showCard' card }}>
             <div class='selecthighlight'></div>
             {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask'}}
         </li>
     {{/each}}
     {{#each displayCards.right as |card|}}
-        <li style='transform :scale({{card.scale}});Z-INDEX:{{card.zIndex}};cursor:pointer;' {{action 'showCard' card }} >
+        <li class ='c-{{card.sessionId}}' style='transform :scale({{card.scale}});Z-INDEX:{{card.zIndex}};cursor:pointer;' {{action 'showCard' card }} >
             {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask-mid cardmask-mid-data-right'}}
         </li>
     {{/each}}
@@ -68,4 +67,13 @@
         </li>
     {{/each}}
 </ul>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" data-slide="prev">
+        <i class="small-arrow-left" {{action 'onClickLeft'}}></i>
+    </a>
+    <a class="right carousel-control" {{action 'onClickRight'}} data-slide="next">
+        <i class="small-arrow-right"></i>
+    </a>
+
 {{/if}}

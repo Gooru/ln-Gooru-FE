@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import d3 from 'd3';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -86,7 +87,99 @@ export default Ember.Component.extend({
     },
     scrollRight() {
       this.attrs.scrollRight();
+    },
+    onClickRight() {
+      const comp = this;
+      let resv = comp.animateCard(1);
+      resv.then(function() {
+        let curcard = comp.get('currentCard');
+        comp.setDisplayPack(curcard, 1);
+        curcard = comp.get('currentCard');
+        comp.selectTimeSession(curcard);
+      });
+      //this.$('.cards-display').carousel('next');
+    },
+    onClickLeft() {
+      //this.$('.cards-display').carousel('next');
+      const comp = this;
+      let resv = this.animateCard(-1);
+      resv.then(function() {
+        let curcard = comp.get('currentCard');
+        comp.setDisplayPack(curcard, -1);
+        curcard = comp.get('currentCard');
+        comp.selectTimeSession(curcard);
+      });
     }
+  },
+  animateCard(offset) {
+    const component = this;
+    let curCard = this.get('currentCard');
+    if (curCard) {
+      let animateCompleted = new Ember.RSVP.Promise(function(resolve) {
+        let tIndx = component.getOffsetCardIdx(curCard, offset),
+          tSelector = `.c-${component.timeData[tIndx].sessionId}`,
+          tCard = d3.selectAll(tSelector),
+          tCardEl = tCard[0][0],
+          tOffX = tCardEl.offsetLeft;
+
+        let cIndx = component.getOffsetCardIdx(curCard, 0),
+          cSelector = `.c-${component.timeData[cIndx].sessionId}`,
+          cCard = d3.selectAll(cSelector),
+          cCardEl = cCard[0][0],
+          cOffX = cCardEl.offsetLeft;
+
+        let movemnt = tOffX - cOffX;
+        let cbfunc = function() {
+          resolve('done');
+        };
+
+        component.animated3(tCard, movemnt, cbfunc);
+      });
+      return animateCompleted;
+    }
+  },
+  animated3All(tgt, movemnt, cbcomplete) {
+    var t = d3
+      .transition()
+      .delay(9000)
+      .duration(9000);
+    var tgt1 = tgt.transition(t);
+    tgt1.style('transform', `translateX(${movemnt}px)`).each('end', cbcomplete);
+
+    let displayCards = this.set('displayCards');
+    if (displayCards) {
+      // Animate all the cards in the carddeck
+    }
+  },
+  animated3(tgt, movemnt, cbcomplete) {
+    var t = d3
+      .transition()
+      .delay(9000)
+      .duration(9000);
+    var tgt1 = tgt.transition(t);
+    tgt1.style('transform', `translateX(${movemnt}px)`).each('end', cbcomplete);
+  },
+  animateJQ(cSelector, movemnt, cbcomplete) {
+    let cCard = $(cSelector);
+    //console.log('cSelector', cSelector);
+    cCard.animate(
+      {
+        transform: `translateX(${movemnt}px)`
+      },
+      {
+        duration: 9000,
+        complete: cbcomplete
+      }
+    );
+  },
+  animated3b(tgt, movemnt) {
+    //cbcomplete
+    var t = d3.transition().duration(500);
+
+    tgt.attr('transform', 'translate(20,20)');
+    tgt.transition(t).attr('translate', '200px)');
+    tgt.style('transform', `translateX(${movemnt}px)`);
+    //tgt.transform('translate', `${movemnt}px`);
   },
 
   selectTimeSession(currentCard) {
@@ -95,6 +188,31 @@ export default Ember.Component.extend({
     $(`ul.timeline >li.line-${currentCard.sessionId} > span`).addClass(
       'selectedTime'
     );
+  },
+
+  getOffsetCardIdx(offsetCurrentCard, offset) {
+    let timeIndx;
+
+    if (offsetCurrentCard && this.timeData) {
+      /* Set display Wrt a given card- card selection case Find card from timdData*/
+      timeIndx = this.timeData.findIndex(
+        timemom => timemom.sessionId === offsetCurrentCard.sessionId
+      );
+      if (offset) {
+        timeIndx = timeIndx + offset;
+      }
+    } else if (this.timeData && !offsetCurrentCard) {
+      /* if there is timesData but no card selected - init case show cards to left */
+      timeIndx = this.timeData.length;
+    } else if (!this.timeData) {
+      timeIndx = -1; // All empty cards
+    }
+
+    timeIndx = timeIndx < 0 ? 0 : timeIndx;
+    timeIndx =
+      timeIndx >= this.timeData.length ? this.timeData.length - 1 : timeIndx;
+
+    return timeIndx;
   },
 
   /**
@@ -108,43 +226,13 @@ export default Ember.Component.extend({
     let displayCards = {},
       cards,
       timeIndx;
-
-    if (offsetCurrentCard && this.timeData) {
-      /* Set display Wrt a given card- card selection case
-      Find card from timdData*/
-      timeIndx = this.timeData.findIndex(
-        timemom => timemom.sessionId === offsetCurrentCard.sessionId
-      );
-
-      if (scroll) {
-        timeIndx = timeIndx + scroll;
-      }
-    } else if (this.timeData && !offsetCurrentCard) {
-      /* if there is timesData but no card selected - init case
-        show cards to left
-      */
-      timeIndx = this.timeData.length;
-    } else if (!this.timeData) {
-      timeIndx = -1; // All empty cards
-    }
-
-    //Animate card to side ways
-    let oldIndex = this.set('selectedIndex');
-    if (oldIndex > timeIndx) {
-      //Scroll left
-      this.set('animateDirection', 'left');
-    } // Scroll right
-    else {
-      this.set('animateDirection', 'right');
-    }
-    //Animate Ends
+    timeIndx = this.getOffsetCardIdx(offsetCurrentCard, scroll);
     displayCards = this.getCenterCard(timeIndx);
     cards = this.getAdjcentCards(
       timeIndx,
       this.cardDisplayConfig.activeSideWays
     );
     displayCards = Object.assign(displayCards, cards);
-
     this.set('displayCards', displayCards);
   },
 
@@ -168,14 +256,28 @@ export default Ember.Component.extend({
       scaleprop = 7;
 
     // leftcards cardidx =12, len=3, Added checks for null, will have another version for adding dummy cards, now null cards are not treated ad empty or dummy card.
-    for (let index = cardidx - 1; cardidx - len < index; --index) {
+    /*  for (let index = cardidx - 1; cardidx - len < index; --index) {
       if (this.timeData[index]) {
         let curCard = Object.assign({}, this.timeData[index]);
         cards.left.push(curCard);
       } else {
         isFull = 0;
       }
+    } */
+
+    let curIndx = cardidx,
+      lenbound = len;
+    lenbound--;
+    for (let index = 0; index < lenbound; index++) {
+      curIndx--;
+      if (this.timeData[curIndx]) {
+        let curCard = Object.assign({}, this.timeData[curIndx]);
+        cards.left.push(curCard);
+      } else {
+        isFull = 0;
+      }
     }
+    cards.left.reverse();
     if (isFull === 1) {
       cards.dummyleft.push({
         collectionType: 'dummy',
