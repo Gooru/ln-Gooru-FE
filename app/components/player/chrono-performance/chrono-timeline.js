@@ -42,7 +42,8 @@ export default Ember.Component.extend({
     ],
     dummyRight: {},
     assessment: { imgUrl: '', iconClass: 'grucount' },
-    collection: { imgUrl: '', iconClass: 'view_comfy' }
+    collection: { imgUrl: '', iconClass: 'view_comfy' },
+    'assessment-external': { imgUrl: '', iconClass: 'grucount' }
   },
 
   /**
@@ -50,7 +51,9 @@ export default Ember.Component.extend({
    */
   cardTypeClass: function(timeSession) {
     const component = this;
-    return component.cardDisplayConfig[timeSession.collectionType].iconClass;
+    let icnclass =
+      component.cardDisplayConfig[timeSession.collectionType].iconClass;
+    return icnclass;
   },
 
   timeDataChanged: Ember.observer('timeData', function() {
@@ -72,15 +75,19 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     if (this.timeData && this.timeData.length > 0) {
-      this.send('showCard', this.timeData[this.timeData.length - 1]);
+      this.showSelCard(this.timeData[this.timeData.length - 1]);
     }
   },
 
   actions: {
     showCard(currentCard) {
-      this.selectTimeSession(currentCard);
-      this.set('currentCard', currentCard);
-      this.setDisplayPack(currentCard, 0);
+      const comp = this;
+      let cardpos = comp.getCardDisplayPos(currentCard);
+      cardpos = !cardpos && currentCard ? 0 : cardpos;
+      let resv = comp.animateCard(cardpos);
+      resv.then(function() {
+        comp.showSelCard(currentCard);
+      });
     },
     scrollLeft() {
       this.attrs.scrollLeft();
@@ -110,6 +117,34 @@ export default Ember.Component.extend({
         comp.selectTimeSession(curcard);
       });
     }
+  },
+
+  showSelCard(currentCard) {
+    this.selectTimeSession(currentCard);
+    this.set('currentCard', currentCard);
+    this.setDisplayPack(currentCard, 0);
+  },
+  getCardDisplayPos(card) {
+    let retval;
+    if (card) {
+      let disCards = this.get('displayCards');
+      if (disCards) {
+        if (disCards.center && disCards.center.sessionId === card.sessionId) {
+          retval = 0;
+        }
+        if (disCards.left && retval === undefined) {
+          retval = disCards.left.findIndex(
+            timemom => timemom.sessionId === card.sessionId
+          );
+        }
+        if (disCards.right && retval === undefined) {
+          retval = disCards.rigth.findIndex(
+            timemom => timemom.sessionId === card.sessionId
+          );
+        }
+      }
+    }
+    return retval;
   },
   animateCard(offset) {
     const component = this;
