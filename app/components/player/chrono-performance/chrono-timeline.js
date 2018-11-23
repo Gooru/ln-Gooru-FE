@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import d3 from 'd3';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -6,6 +7,8 @@ export default Ember.Component.extend({
   classNames: ['chrono-timeline'],
 
   timeData: null,
+  selectedIndex: 0,
+  animateDirection: 'left',
 
   timeLineRightDate: function() {
     let todaysDate = new Date();
@@ -18,6 +21,9 @@ export default Ember.Component.extend({
 
   uiDateFormat: function(givenDate) {
     givenDate = givenDate || new Date();
+    if (typeof givenDate === 'string') {
+      givenDate = new Date(givenDate);
+    }
     let dateLocale = 'en-us',
       dateMonth = givenDate.toLocaleString(dateLocale, { month: 'short' }),
       dateYear = givenDate.toLocaleString(dateLocale, { year: '2-digit' }),
@@ -36,7 +42,8 @@ export default Ember.Component.extend({
     ],
     dummyRight: {},
     assessment: { imgUrl: '', iconClass: 'grucount' },
-    collection: { imgUrl: '', iconClass: 'view_comfy' }
+    collection: { imgUrl: '', iconClass: 'view_comfy' },
+    'assessment-external': { imgUrl: '', iconClass: 'grucount' }
   },
 
   /**
@@ -44,7 +51,9 @@ export default Ember.Component.extend({
    */
   cardTypeClass: function(timeSession) {
     const component = this;
-    return component.cardDisplayConfig[timeSession.collectionType].iconClass;
+    let icnclass =
+      component.cardDisplayConfig[timeSession.collectionType].iconClass;
+    return icnclass;
   },
 
   timeDataChanged: Ember.observer('timeData', function() {
@@ -66,22 +75,146 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     if (this.timeData && this.timeData.length > 0) {
-      this.send('showCard', this.timeData[this.timeData.length - 1]);
+      this.showSelCard(this.timeData[this.timeData.length - 1]);
     }
   },
 
   actions: {
     showCard(currentCard) {
-      this.selectTimeSession(currentCard);
-      this.set('currentCard', currentCard);
-      this.setDisplayPack(currentCard, 0);
+      const comp = this;
+      let cardpos = comp.getCardDisplayPos(currentCard);
+      cardpos = !cardpos && currentCard ? 0 : cardpos;
+      let resv = comp.animateCard(cardpos);
+      resv.then(function() {
+        comp.showSelCard(currentCard);
+      });
     },
     scrollLeft() {
       this.attrs.scrollLeft();
     },
     scrollRight() {
       this.attrs.scrollRight();
+    },
+    onClickRight() {
+      const comp = this;
+      let resv = comp.animateCard(1);
+      resv.then(function() {
+        let curcard = comp.get('currentCard');
+        comp.setDisplayPack(curcard, 1);
+        curcard = comp.get('currentCard');
+        comp.selectTimeSession(curcard);
+      });
+      //this.$('.cards-display').carousel('next');
+    },
+    onClickLeft() {
+      //this.$('.cards-display').carousel('next');
+      const comp = this;
+      let resv = this.animateCard(-1);
+      resv.then(function() {
+        let curcard = comp.get('currentCard');
+        comp.setDisplayPack(curcard, -1);
+        curcard = comp.get('currentCard');
+        comp.selectTimeSession(curcard);
+      });
     }
+  },
+
+  showSelCard(currentCard) {
+    this.selectTimeSession(currentCard);
+    this.set('currentCard', currentCard);
+    this.setDisplayPack(currentCard, 0);
+  },
+  getCardDisplayPos(card) {
+    let retval;
+    if (card) {
+      let disCards = this.get('displayCards');
+      if (disCards) {
+        if (disCards.center && disCards.center.sessionId === card.sessionId) {
+          retval = 0;
+        }
+        if (disCards.left && retval === undefined) {
+          retval = disCards.left.findIndex(
+            timemom => timemom.sessionId === card.sessionId
+          );
+        }
+        if (disCards.right && retval === undefined) {
+          retval = disCards.rigth.findIndex(
+            timemom => timemom.sessionId === card.sessionId
+          );
+        }
+      }
+    }
+    return retval;
+  },
+  animateCard(offset) {
+    const component = this;
+    let curCard = this.get('currentCard');
+    if (curCard) {
+      let animateCompleted = new Ember.RSVP.Promise(function(resolve) {
+        let tIndx = component.getOffsetCardIdx(curCard, offset),
+          tSelector = `.c-${component.timeData[tIndx].sessionId}`,
+          tCard = d3.selectAll(tSelector),
+          tCardEl = tCard[0][0],
+          tOffX = tCardEl.offsetLeft;
+
+        let cIndx = component.getOffsetCardIdx(curCard, 0),
+          cSelector = `.c-${component.timeData[cIndx].sessionId}`,
+          cCard = d3.selectAll(cSelector),
+          cCardEl = cCard[0][0],
+          cOffX = cCardEl.offsetLeft;
+
+        let movemnt = tOffX - cOffX;
+        let cbfunc = function() {
+          resolve('done');
+        };
+
+        component.animated3(tCard, movemnt, cbfunc);
+      });
+      return animateCompleted;
+    }
+  },
+  animated3All(tgt, movemnt, cbcomplete) {
+    var t = d3
+      .transition()
+      .delay(9000)
+      .duration(9000);
+    var tgt1 = tgt.transition(t);
+    tgt1.style('transform', `translateX(${movemnt}px)`).each('end', cbcomplete);
+
+    let displayCards = this.set('displayCards');
+    if (displayCards) {
+      // Animate all the cards in the carddeck
+    }
+  },
+  animated3(tgt, movemnt, cbcomplete) {
+    var t = d3
+      .transition()
+      .delay(9000)
+      .duration(9000);
+    var tgt1 = tgt.transition(t);
+    tgt1.style('transform', `translateX(${movemnt}px)`).each('end', cbcomplete);
+  },
+  animateJQ(cSelector, movemnt, cbcomplete) {
+    let cCard = $(cSelector);
+    //console.log('cSelector', cSelector);
+    cCard.animate(
+      {
+        transform: `translateX(${movemnt}px)`
+      },
+      {
+        duration: 9000,
+        complete: cbcomplete
+      }
+    );
+  },
+  animated3b(tgt, movemnt) {
+    //cbcomplete
+    var t = d3.transition().duration(500);
+
+    tgt.attr('transform', 'translate(20,20)');
+    tgt.transition(t).attr('translate', '200px)');
+    tgt.style('transform', `translateX(${movemnt}px)`);
+    //tgt.transform('translate', `${movemnt}px`);
   },
 
   selectTimeSession(currentCard) {
@@ -90,6 +223,31 @@ export default Ember.Component.extend({
     $(`ul.timeline >li.line-${currentCard.sessionId} > span`).addClass(
       'selectedTime'
     );
+  },
+
+  getOffsetCardIdx(offsetCurrentCard, offset) {
+    let timeIndx;
+
+    if (offsetCurrentCard && this.timeData) {
+      /* Set display Wrt a given card- card selection case Find card from timdData*/
+      timeIndx = this.timeData.findIndex(
+        timemom => timemom.sessionId === offsetCurrentCard.sessionId
+      );
+      if (offset) {
+        timeIndx = timeIndx + offset;
+      }
+    } else if (this.timeData && !offsetCurrentCard) {
+      /* if there is timesData but no card selected - init case show cards to left */
+      timeIndx = this.timeData.length;
+    } else if (!this.timeData) {
+      timeIndx = -1; // All empty cards
+    }
+
+    timeIndx = timeIndx < 0 ? 0 : timeIndx;
+    timeIndx =
+      timeIndx >= this.timeData.length ? this.timeData.length - 1 : timeIndx;
+
+    return timeIndx;
   },
 
   /**
@@ -103,39 +261,20 @@ export default Ember.Component.extend({
     let displayCards = {},
       cards,
       timeIndx;
-
-    if (offsetCurrentCard && this.timeData) {
-      /* Set display Wrt a given card- card selection case
-      Find card from timdData*/
-      timeIndx = this.timeData.findIndex(
-        timemom => timemom.sessionId === offsetCurrentCard.sessionId
-      );
-
-      if (scroll) {
-        timeIndx = timeIndx + scroll;
-      }
-    } else if (this.timeData && !offsetCurrentCard) {
-      /* if there is timesData but no card selected - init case
-        show cards to left
-      */
-      timeIndx = this.timeData.length;
-    } else if (!this.timeData) {
-      timeIndx = -1; // All empty cards
-    }
-
+    timeIndx = this.getOffsetCardIdx(offsetCurrentCard, scroll);
     displayCards = this.getCenterCard(timeIndx);
     cards = this.getAdjcentCards(
       timeIndx,
       this.cardDisplayConfig.activeSideWays
     );
     displayCards = Object.assign(displayCards, cards);
-
     this.set('displayCards', displayCards);
   },
 
   getCenterCard: function(cardidx) {
     let currentCard = this.timeData[cardidx],
       card = { center: [currentCard] };
+    this.set('selectedIndex', cardidx);
     this.set('currentCard', currentCard);
     return card;
   },
@@ -149,17 +288,21 @@ export default Ember.Component.extend({
         scale: 0.8
       },
       zIndex = 1,
-      scaleprop = 7;
+      scaleprop = 4;
 
-    // leftcards cardidx =12, len=3, Added checks for null, will have another version for adding dummy cards, now null cards are not treated ad empty or dummy card.
-    for (let index = cardidx - 1; cardidx - len < index; --index) {
-      let curCard = Object.assign({}, this.timeData[index]);
-      if (curCard) {
+    let curIndx = cardidx,
+      lenbound = len;
+    lenbound--;
+    for (let index = 0; index < lenbound; index++) {
+      curIndx--;
+      if (this.timeData[curIndx]) {
+        let curCard = Object.assign({}, this.timeData[curIndx]);
         cards.left.push(curCard);
       } else {
         isFull = 0;
       }
     }
+    cards.left.reverse();
     if (isFull === 1) {
       cards.dummyleft.push({
         collectionType: 'dummy',
@@ -181,10 +324,11 @@ export default Ember.Component.extend({
     });
 
     isFull = 1;
+    scaleprop = 7;
     // leftcards cardidx =12, len=3
     for (let index = cardidx + 1; index < cardidx + len; ++index) {
-      let curCard = Object.assign({}, this.timeData[index]);
-      if (curCard) {
+      if (this.timeData[index]) {
+        let curCard = Object.assign({}, this.timeData[index]);
         curCard.zIndex = zIndex--;
         curCard.scale = 0.1 * scaleprop--;
         cards.right.push(curCard);

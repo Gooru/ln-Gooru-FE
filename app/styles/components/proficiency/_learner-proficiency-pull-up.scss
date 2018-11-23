@@ -92,14 +92,13 @@
 
     .body {
       padding: 10px 30px 0;
-      background-color: $white;
+      background-color: #f7f7f7;
       height: calc(90vh - 100px);
       overflow: auto;
 
       .proficiency-chart {
         .learner-proficiency-domain-matrix .chart-area {
           width: 100%;
-          display: flex;
         }
       }
 
@@ -120,7 +119,9 @@
         .proficiency-legends {
           margin: 15px auto auto;
           width: max-content;
-          display: flex;
+          display: grid;
+          grid-template-columns: auto auto auto auto auto auto;
+          justify-content: space-around;
 
           .legend {
             display: flex;
@@ -134,7 +135,8 @@
               margin-right: 8.4px;
             }
 
-            .box-baseline {
+            .box-baseline,
+            .box-grade-line {
               width: 18px;
               height: 5px;
               margin-top: 4px;
@@ -182,6 +184,12 @@
             &.baseline {
               .box-baseline {
                 background-color: $dark-400;
+              }
+            }
+
+            &.grade-line {
+              .box-grade-line {
+                background-color: #8fd383;
               }
             }
           }

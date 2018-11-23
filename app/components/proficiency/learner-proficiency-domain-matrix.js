@@ -23,12 +23,103 @@ export default Ember.Component.extend({
    * taxonomy service dependency injection
    * @type {Object}
    */
-  taxonomyService: Ember.inject.service('taxonomy'),
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
   // -------------------------------------------------------------------------
   // Attributes
 
   classNames: ['learner-proficiency-domain-matrix'],
+
+  // -------------------------------------------------------------------------
+  // Events
+
+  didInsertElement() {
+    let component = this;
+    component.set('isBaseLineDrawn', false);
+    if (component.get('subject')) {
+      component.loadDataBySubject(component.get('subject.id'));
+    }
+    component.fetchTaxonomyGrades();
+  },
+
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
+
+  // -------------------------------------------------------------------------
+  // Actions
+  actions: {
+    // Action triggered when toggle chart view
+    onToggleChart() {
+      let component = this;
+      component.toggleProperty('isExpandChartEnabled');
+      let cellHeight = component.get('isExpandChartEnabled')
+        ? component.get('expandedCellHeight')
+        : component.get('compressedCellHeight');
+      let maxNumberOfCellsInEachColumn = component.get(
+        'maxNumberOfCellsInEachColumn'
+      );
+      component.set('height', maxNumberOfCellsInEachColumn * cellHeight);
+      component.set('cellHeight', cellHeight);
+      component.drawChart(component.get('chartData'));
+    },
+
+    // Action triggered when select a grade
+    onSelectGrade(gradeData) {
+      let component = this;
+      let activeGrade = component.get('activeGrade');
+      if (activeGrade && activeGrade.id === gradeData.id) {
+        component.$('.domain-boundary-line').toggleClass('hidden-line');
+        component
+          .$(
+            `.taxonomy-grades .grade-list .grade-sequence-${gradeData.sequence}`
+          )
+          .toggleClass('active-grade');
+      }
+      component.set('activeGrade', gradeData);
+    }
+  },
+
+  // -------------------------------------------------------------------------
+  // Observers
+
+  /**
+   * subjectId  change will call the function
+   */
+  onChangeSubject: Ember.observer('subject', function() {
+    let component = this;
+    if (component.get('subject')) {
+      component.set('chartData', {});
+      component.loadDataBySubject(component.get('subject.id'));
+      component.fetchTaxonomyGrades();
+    }
+    return null;
+  }),
+
+  /**
+   * Timeline change will call this function
+   */
+  onChangeTimeLine: Ember.observer('timeLine', function() {
+    let component = this;
+    component.loadDataBySubject(component.get('subject.id'));
+  }),
+
+  /**
+   * On change of domainBoundaries will trigger this function
+   */
+  onChangeGradeBoundary: Ember.observer('domainBoundaries', function() {
+    let component = this;
+    component.loadChartData();
+  }),
+
+  /**
+   * On change of grade will trigger this function
+   */
+  onChangeGrade: Ember.observer('activeGrade', function() {
+    let component = this;
+    component.fetchDomainGradeBoundary();
+  }),
 
   // -------------------------------------------------------------------------
   // Properties
@@ -50,16 +141,26 @@ export default Ember.Component.extend({
   userId: null,
 
   /**
+   * @property {Number} compressedCellHeight
+   */
+  compressedCellHeight: 6,
+
+  /**
+   * @property {Number} expandedCellHeight
+   */
+  expandedCellHeight: 15,
+
+  /**
    * Width of the cell
    * @type {Number}
    */
-  cellWidth: 30,
+  cellWidth: 32,
 
   /**
    * height of the cell
    * @type {Number}
    */
-  cellHeight: 15,
+  cellHeight: 6,
 
   /**
    * It will have selected taxonomy subject courses
@@ -102,25 +203,6 @@ export default Ember.Component.extend({
   maxNumberOfCellsInEachColumn: 20,
 
   /**
-   * This should be the height of cells when maximum number of cell size
-   * got exceeds for each column.
-   * @type {Number}
-   */
-  reducedHeightOfCells: 5,
-
-  /**
-   * Default height of the chart
-   * @type {Number}
-   */
-  defaultHeightOfChart: 350,
-
-  /**
-   * Maximum number of reduce cell below
-   * @type {Number}
-   */
-  maxNumberOfReduceCellBelow: 5,
-
-  /**
    * skyline container
    * @type {Object}
    */
@@ -144,88 +226,65 @@ export default Ember.Component.extend({
    */
   baselinePoints: Ember.A([]),
 
-  // -------------------------------------------------------------------------
-  // Events
-
-  didInsertElement() {
-    let component = this;
-    component.set('isBaseLineDrawn', false);
-    if (component.get('subject')) {
-      component.loadDataBySubject(component.get('subject.id'));
-    }
-  },
+  /**
+   * @property {Boolean} isExpandChartEnabled
+   */
+  isExpandChartEnabled: false,
 
   /**
-   * subjectId  change will call the function
+   * @property {Array} taxonomyGrades
    */
-  onChangeSubject: Ember.observer('subject', function() {
-    let component = this;
-    if (component.get('subject')) {
-      component.loadDataBySubject(component.get('subject.id'));
-    }
-    return null;
+  taxonomyGrades: Ember.A([]),
+
+  /**
+   * @property {Number} classGrade
+   */
+  classGrade: Ember.computed('class', function() {
+    let controller = this;
+    let classData = controller.get('class');
+    let classGrade = classData.get('grade');
+    return classGrade ? parseInt(classGrade) : null;
   }),
 
   /**
-   * Timeline change will call this function
+   * @property {String} subjectCode
    */
-  onChangeTimeLine: Ember.observer('timeLine', function() {
+  subjectCode: Ember.computed('subject', function() {
     let component = this;
-    component.loadDataBySubject(component.get('subject.id'));
+    let subject = component.get('subject');
+    return subject ? subject.id : '';
   }),
 
   // -------------------------------------------------------------------------
   // Methods
 
   /**
-   * @function drawChart
-   * Method to plot competency chart
+   * @function loadChartData
+   * Method to collect chart data
    */
-  drawChart(data) {
+  loadChartData() {
     let component = this;
-    let cellSizeInRow = component.get('taxonomyDomains');
-    let numberOfCellsInEachColumn = cellSizeInRow.length;
-    component.set('numberOfCellsInEachColumn', numberOfCellsInEachColumn);
-    const cellWidth = component.get('cellWidth');
-    const cellHeight = component.get('cellHeight');
-    const width = Math.round(numberOfCellsInEachColumn * cellWidth);
-    component.set('width', width);
-    const height = component.get('defaultHeightOfChart');
-    component.$('#render-proficiency-matrix').empty();
-    const svg = d3
-      .select('#render-proficiency-matrix')
-      .append('svg')
-      .attr('width', width)
-      .attr('height', height);
-    let cellContainer = svg.append('g').attr('id', 'cell-container');
-    let skylineContainer = svg.append('g').attr('id', 'skyline-container');
-    let baseLineContainer = svg.append('g').attr('id', 'baseline-container');
-    component.set('skylineContainer', skylineContainer);
-    component.set('baseLineContainer', baseLineContainer);
-
-    const cards = cellContainer.selectAll('.competency').data(data);
-    cards
-      .enter()
-      .append('rect')
-      .attr('x', d => (d.xAxisSeq - 1) * cellWidth)
-      .attr('y', d => (d.yAxisSeq - 1) * cellHeight)
-      .attr('copy-yaxis', d => (d.yAxisSeq - 1) * cellHeight)
-      .attr('width', cellWidth)
-      .attr('height', cellHeight)
-      .attr('yaxis-seq', d => d.yAxisSeq)
-      .attr('class', d => {
-        let skylineClassName = d.skyline ? 'skyline-competency' : '';
-        return `competency ${skylineClassName} competency-${
-          d.xAxisSeq
-        } competency-${d.xAxisSeq}-${
-          d.yAxisSeq
-        } fillArea${d.status.toString()}`;
-      })
-      .on('click', function(d) {
-        component.sendAction('onSelectCompetency', d);
-      });
-    cards.exit().remove();
-    component.expandChartColumnHeight();
+    let competencyMatrixDomains = component.get('competencyMatrixDomains');
+    let competencyMatrixCoordinates = component.get(
+      'competencyMatrixCoordinates'
+    );
+    let domainBoundaries = component.get('domainBoundaries');
+    let isDomainBoundaryAvailable = component.get('activeGrade')
+      ? !!domainBoundaries
+      : true;
+    if (
+      competencyMatrixDomains &&
+      competencyMatrixCoordinates &&
+      isDomainBoundaryAvailable
+    ) {
+      let chartData = component.parseChartData(
+        competencyMatrixDomains,
+        competencyMatrixCoordinates,
+        domainBoundaries
+      );
+      component.drawChart(chartData);
+      component.set('chartData', chartData);
+    }
   },
 
   /**
@@ -243,15 +302,17 @@ export default Ember.Component.extend({
         .getCompetencyMatrixDomain(userId, subjectId, timeLine),
       competencyMatrixCoordinates: component
         .get('competencyService')
-        .getCompetencyMatrixCoordinates(subjectId)
+        .getCompetencyMatrixCoordinates(subjectId),
+      userProficiencyBaseLine: component.fetchBaselineCompetencies()
     }).then(({ competencyMatrixs, competencyMatrixCoordinates }) => {
       if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
         component.set('isLoading', false);
-        let resultSet = component.parseCompetencyData(
-          competencyMatrixs.domains,
+        component.set('competencyMatrixDomains', competencyMatrixs.domains);
+        component.set(
+          'competencyMatrixCoordinates',
           competencyMatrixCoordinates
         );
-        component.drawChart(resultSet);
+        component.loadChartData();
         component.sendAction('onGetLastUpdated', competencyMatrixs.lastUpdated);
       } else {
         Ember.Logger.warn('comp is destroyed...');
@@ -260,10 +321,81 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function fetchBaselineCompetencies
+   * Method to fetch baseline competenceis list
+   */
+  fetchBaselineCompetencies() {
+    let component = this;
+    let classId = component.get('class.id');
+    let courseId = component.get('class.courseId');
+    let userId = component.get('userId');
+    return Ember.RSVP.hash({
+      userProficiencyBaseLine: component
+        .get('competencyService')
+        .getUserProficiencyBaseLine(classId, courseId, userId)
+    }).then(({ userProficiencyBaseLine }) => {
+      component.set('userProficiencyBaseLine', userProficiencyBaseLine);
+      return userProficiencyBaseLine;
+    });
+  },
+
+  /**
+   * @function fetchTaxonomyGrades
+   * Method to fetch taxonomy grades
+   */
+  fetchTaxonomyGrades() {
+    let component = this;
+    let taxonomyService = component.get('taxonomyService');
+    let filters = {
+      subject: component.get('subjectCode')
+    };
+    return Ember.RSVP.hash({
+      taxonomyGrades: Ember.RSVP.resolve(
+        taxonomyService.fetchGradesBySubject(filters)
+      )
+    }).then(({ taxonomyGrades }) => {
+      let activeGrade = taxonomyGrades.findBy(
+        'id',
+        component.get('classGrade')
+      );
+      component.set('activeGrade', activeGrade);
+      component.set(
+        'taxonomyGrades',
+        taxonomyGrades.sortBy('sequence').reverse()
+      );
+    });
+  },
+
+  /**
+   * @function fetchDomainGradeBoundary
+   * Method to fetch domain grade boundary
+   */
+  fetchDomainGradeBoundary() {
+    let component = this;
+    let taxonomyService = component.get('taxonomyService');
+    let destinationGrade = component.get('activeGrade');
+    let gradeId = destinationGrade ? destinationGrade.id : null;
+    return Ember.RSVP.hash({
+      domainBoundaries: gradeId
+        ? Ember.RSVP.resolve(
+          taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
+        )
+        : Ember.RSVP.resolve(null)
+    }).then(({ domainBoundaries }) => {
+      component.set('domainBoundaries', domainBoundaries);
+      return domainBoundaries;
+    });
+  },
+
+  /**
    * @function parseCompetencyData
    * Method to parse raw competency matrix and co-ordinate data to plot the chart
    */
-  parseCompetencyData(competencyMatrixs, competencyMatrixCoordinates) {
+  parseChartData(
+    competencyMatrixs,
+    competencyMatrixCoordinates,
+    domainBoundaries
+  ) {
     let component = this;
     const cellHeight = component.get('cellHeight');
     let taxonomyDomain = Ember.A();
@@ -271,6 +403,7 @@ export default Ember.Component.extend({
     let currentXaxis = 1;
     let resultSet = Ember.A();
     let numberOfCellsInEachColumn = Ember.A();
+    let isDomainBoundaryAvailable = !!domainBoundaries;
     domains.forEach(domainData => {
       let domainCode = domainData.get('domainCode');
       let domainName = domainData.get('domainName');
@@ -279,6 +412,12 @@ export default Ember.Component.extend({
       let competencyMatrixByCompetency = competencyMatrix
         ? competencyMatrix.get('competencies')
         : [];
+      let domainBoundary = domainBoundaries
+        ? domainBoundaries.findBy('domainCode', domainCode)
+        : null;
+      let domainBoundaryCompetency = domainBoundary
+        ? domainBoundary.highline
+        : null;
       if (competencyMatrix && competencyMatrixByCompetency.length > 0) {
         taxonomyDomain.pushObject(domainData);
         let mergeDomainData = Ember.A();
@@ -287,6 +426,8 @@ export default Ember.Component.extend({
           let competencyName = competency.get('competencyName');
           let competencySeq = competency.get('competencySeq');
           let status = competency.get('status');
+          let isDomainBoundaryCompetency =
+            domainBoundaryCompetency === competency.competencyCode;
           let data = Ember.Object.create({
             domainName: domainName,
             domainCode: domainCode,
@@ -295,9 +436,10 @@ export default Ember.Component.extend({
             competencyName: competencyName,
             competencySeq: competencySeq,
             competencyStudentDesc: competency.get('competencyStudentDesc'),
-            status: status
+            status: status,
+            isDomainBoundaryCompetency
           });
-          if (status === 2 || status === 3 || status === 4 || status === 5) {
+          if (status > 1) {
             mergeDomainData.forEach(data => {
               data.set('status', status);
               data.set('isMastery', true);
@@ -318,6 +460,9 @@ export default Ember.Component.extend({
             .objectAt(numberOfMasteredCompetency)
             .set('mastered', true);
         }
+        if (!domainBoundaryCompetency && isDomainBoundaryAvailable) {
+          mergeDomainData.objectAt(0).set('isDomainBoundaryCompetency', true);
+        }
 
         let cellIndex = 1;
         numberOfCellsInEachColumn.push(mergeDomainData.length);
@@ -331,154 +476,75 @@ export default Ember.Component.extend({
       }
     });
     let height = cellHeight * Math.max(...numberOfCellsInEachColumn);
+    component.set(
+      'maxNumberOfCellsInEachColumn',
+      Math.max(...numberOfCellsInEachColumn)
+    );
     component.set('height', height);
     component.set('taxonomyDomains', taxonomyDomain);
     return resultSet;
   },
 
   /**
-   * @function reduceChartBelowCells
-   * Method to reduce chart bottom cells based on the available height and number of competencies
+   * @function drawChart
+   * Method to draw competency chart
    */
-  reduceChartBelowCells() {
+  drawChart(data) {
     let component = this;
-    let skylines = component.$('.skyline-competency');
-    let maxNumberOfCellsInEachColumn = component.get(
-      'maxNumberOfCellsInEachColumn'
-    );
-    let reducedHeightOfCells = component.get('reducedHeightOfCells');
-    let cellHeight = component.get('cellHeight');
-    let maxNumberOfReduceCellBelow = component.get(
-      'maxNumberOfReduceCellBelow'
-    );
-    for (let index = 0; index < skylines.length; index++) {
-      let skyline = component.$(skylines[index]);
-      let skylineYAxisSeq = +skyline.attr('yaxis-seq');
-      if (skylineYAxisSeq > maxNumberOfCellsInEachColumn) {
-        let aboveMaxCells = skylineYAxisSeq - maxNumberOfCellsInEachColumn;
-        let domainColumnIndex = index + 1;
-        let competencyCells = component.$(`.competency-${domainColumnIndex}`);
-        let belowReduceCount = 1;
-        let yAxis = 0;
-        for (
-          let cellIndex = 0;
-          cellIndex < competencyCells.length;
-          cellIndex++
-        ) {
-          let element = component.$(competencyCells[cellIndex]);
-          let height = cellHeight;
-          if (belowReduceCount < aboveMaxCells) {
-            height = reducedHeightOfCells;
-          }
-          if (cellIndex > 0) {
-            if (belowReduceCount <= aboveMaxCells) {
-              if (belowReduceCount > maxNumberOfReduceCellBelow) {
-                yAxis = yAxis + 0;
-              } else {
-                yAxis = yAxis + reducedHeightOfCells;
-              }
-              let className = element.attr('class');
-              element.attr(
-                'class',
-                `${className} competency-more-cells-${domainColumnIndex} competency-more-cells`
-              );
-              belowReduceCount++;
-            } else {
-              yAxis = yAxis + cellHeight;
-            }
-          }
-          element.attr('y', yAxis);
-          element.attr('height', height);
-        }
-      }
-    }
-  },
-
-  /**
-   * @function reduceChartAboveCells
-   * Method to reduce chart top cells to shrink the chart within given widh and height
-   */
-  reduceChartAboveCells() {
-    let component = this;
-    let numberOfDomainColumn = component.get('taxonomyDomains').length;
-    let maxNumberOfCellsInEachColumn = component.get(
-      'maxNumberOfCellsInEachColumn'
-    );
-    let reducedHeightOfCells = component.get('reducedHeightOfCells');
-    for (let index = 1; index <= numberOfDomainColumn; index++) {
-      let elements = component.$(`.competency-${index}`);
-      let totalCompetencyInDomain = elements.length;
-      let belowReducedCellElements = component.$(
-        `.competency-more-cells-${index}`
-      );
-      let numberOfBelowReducedCells = belowReducedCellElements.length;
-      let totalCellsWithoutReduce =
-        totalCompetencyInDomain - numberOfBelowReducedCells;
-      if (totalCellsWithoutReduce > maxNumberOfCellsInEachColumn) {
-        let aboveReduceCellIndex =
-          numberOfBelowReducedCells > 0
-            ? numberOfBelowReducedCells + maxNumberOfCellsInEachColumn
-            : maxNumberOfCellsInEachColumn;
-        let startIndex = aboveReduceCellIndex + 1;
-        let startElement = component.$(`.competency-${index}-${startIndex}`);
-        let newYAxis = +startElement.attr('y');
-        for (
-          let cellIndex = aboveReduceCellIndex;
-          cellIndex < elements.length;
-          cellIndex++
-        ) {
-          let element = component.$(elements[cellIndex]);
-          element.attr('height', reducedHeightOfCells);
-          if (cellIndex > aboveReduceCellIndex) {
-            newYAxis = newYAxis + reducedHeightOfCells;
-            element.attr('y', newYAxis);
-          }
-          let className = element.attr('class');
-          element.attr(
-            'class',
-            `${className} competency-more-cells-${index} competency-more-cells`
-          );
-        }
-      }
-    }
-  },
-
-  /**
-   * @function reduceChartHeight
-   * Method to reduce chart height to compress the chart within available space
-   */
-  reduceChartHeight() {
-    let component = this;
-    component.reduceChartBelowCells();
-    component.reduceChartAboveCells();
-    component.drawSkyline();
-
-    let height = component.get('isTaxonomyDomainsAvailable')
-      ? component.get('defaultHeightOfChart')
-      : 50;
+    let cellSizeInRow = component.get('taxonomyDomains');
+    let numberOfCellsInEachColumn = cellSizeInRow.length;
+    let extendedChartHeight = 15;
+    component.set('numberOfCellsInEachColumn', numberOfCellsInEachColumn);
+    const cellWidth = component.get('cellWidth');
+    const cellHeight = component.get('cellHeight');
+    var width = Math.round(numberOfCellsInEachColumn * cellWidth) + 5;
+    component.set('width', width);
+    var height = component.get('height') + extendedChartHeight;
+    component.$('#render-proficiency-matrix').empty();
     component.$('#render-proficiency-matrix').height(height);
-    component.$('#render-proficiency-matrix svg').attr('height', height);
-  },
-
-  expandChartColumnHeight() {
-    let component = this;
-    let elements = component.$('.competency');
-    for (let index = 0; index < elements.length; index++) {
-      let element = component.$(elements[index]);
-      let cellHeight = component.get('cellHeight');
-      let yAxis = element.attr('copy-yaxis');
-      let className = element.attr('class');
-      element.attr('height', cellHeight);
-      element.attr('class', className);
-      element.attr('y', yAxis);
-    }
-    let height = component.get('height');
-    component.$('#render-proficiency-matrix').height(height);
-    component.$('#render-proficiency-matrix svg').attr('height', height);
+    const svg = d3
+      .select('#render-proficiency-matrix')
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height);
+    let cellContainer = svg.append('g').attr('id', 'cell-container');
+    let skylineContainer = svg.append('g').attr('id', 'skyline-container');
+    let baseLineContainer = svg.append('g').attr('id', 'baseline-container');
+    let domainBoundaryLineContainer = svg
+      .append('g')
+      .attr('id', 'domain-boundary-line-container');
+    component.set('skylineContainer', skylineContainer);
+    component.set('baseLineContainer', baseLineContainer);
+    component.set('domainBoundaryLineContainer', domainBoundaryLineContainer);
+    const cards = cellContainer.selectAll('.competency').data(data);
+    cards
+      .enter()
+      .append('rect')
+      .attr('x', d => (d.xAxisSeq - 1) * cellWidth)
+      .attr('y', d => (d.yAxisSeq - 1) * cellHeight)
+      .attr('copy-yaxis', d => (d.yAxisSeq - 1) * cellHeight)
+      .attr('width', cellWidth)
+      .attr('height', cellHeight)
+      .attr('yaxis-seq', d => d.yAxisSeq)
+      .attr('class', d => {
+        let skylineClassName = d.skyline ? 'skyline-competency' : '';
+        let domainBoundaryCompetency = d.isDomainBoundaryCompetency
+          ? 'domain-boundary'
+          : '';
+        return `competency ${skylineClassName} competency-${
+          d.xAxisSeq
+        } competency-${d.xAxisSeq}-${
+          d.yAxisSeq
+        } fillArea${d.status.toString()} ${domainBoundaryCompetency}`;
+      })
+      .on('click', function(d) {
+        component.sendAction('onSelectCompetency', d);
+      });
+    cards.exit().remove();
     component.$('.scrollable-chart').scrollTop(height);
-
     component.drawSkyline();
     component.drawBaseLine();
+    component.drawDomainBoundaryLine();
   },
 
   /**
@@ -515,6 +581,33 @@ export default Ember.Component.extend({
       component.joinSkyLinePoints(cellIndex, linePoint);
       cellIndex++;
     });
+    component.showDropShadow();
+  },
+
+  /**
+   * @function showDropShadow
+   * Method to show a drop shadow in skyline
+   */
+  showDropShadow() {
+    let component = this;
+    const chartContainer = d3.select('#render-proficiency-matrix svg');
+    let skylineContainer = component.get('skylineContainer');
+    let filterContainer = chartContainer
+      .append('defs')
+      .append('filter')
+      .attr('id', 'shadow');
+    filterContainer
+      .append('feDropShadow')
+      .attr('dx', '0')
+      .attr('dy', '0')
+      .attr('stdDeviation', '4');
+    skylineContainer
+      .append('line')
+      .attr('x1', 0)
+      .attr('y1', 30)
+      .attr('x2', 0)
+      .attr('y2', 30)
+      .attr('class', `sky-line-${-1} dummy-line`);
   },
 
   /**
@@ -562,77 +655,68 @@ export default Ember.Component.extend({
     let subjectBucket = component.get('subjectBucket');
     let subjectId = component.get('subject.id');
     let isOwnSubject = subjectBucket.split(subjectId).length > 1;
+    let cellWidth = component.get('cellWidth');
+    let cellHeight = component.get('cellHeight');
     if (!component.get('isBaseLineDrawn') || isOwnSubject) {
-      let classId = component.get('class.id');
-      let courseId = component.get('class.courseId');
-      let userId = component.get('userId');
-      let cellHeight = component.get('cellHeight');
-      let cellWidth = component.get('cellWidth');
-      return Ember.RSVP.hash({
-        userProficiencyBaseLine: component
-          .get('competencyService')
-          .getUserProficiencyBaseLine(classId, courseId, userId),
-        competencyMatrixCoordinates: component
-          .get('competencyService')
-          .getCompetencyMatrixCoordinates(subjectId)
-      }).then(({ userProficiencyBaseLine, competencyMatrixCoordinates }) => {
-        let baseLineDomains = userProficiencyBaseLine.domains;
-        let domains = competencyMatrixCoordinates.domains;
-        let cellIndex = 0;
-        let baselinePoints = Ember.A([]);
-        domains.map(domain => {
-          let domainData = baseLineDomains.findBy(
-            'domainCode',
-            domain.domainCode
-          );
-          let domainCompetencies = domainData ? domainData.competencies : [];
-          let domainWiseMasteredCompetencies = Ember.A([]);
-          domainCompetencies.map(competency => {
-            //Consider only the mastered competencies
-            if (competency.status === 4 || competency.status === 5) {
-              domainWiseMasteredCompetencies.push(competency);
-            }
-          });
-          let numberOfMasteredCompetency =
-            domainWiseMasteredCompetencies.length;
-          let masteredCompetencyHighestSeq = numberOfMasteredCompetency
-            ? domainWiseMasteredCompetencies[numberOfMasteredCompetency - 1]
-              .competencySeq
-            : 0;
-          let x1 = cellIndex * cellWidth;
-          let y1 = cellHeight * masteredCompetencyHighestSeq; //stroke width
-          let isSkyLineContainer = component.$(
-            `.sky-line-vertical-${cellIndex + 1}`
-          );
-          //check skyline is present in the cell and adjust y1 height
-          y1 =
-            y1 === parseInt(isSkyLineContainer.attr('y1')) - 6 ||
-            y1 === parseInt(isSkyLineContainer.attr('y1')) ||
-            y1 === 0
-              ? y1 + 3
-              : y1;
-
-          let x2 = x1 + cellWidth;
-          let y2 = y1;
-
-          let linePoint = {
-            x1: x1,
-            x2: x2,
-            y1: y1,
-            y2: y2,
-            isHorizontal: true
-          };
-          baselinePoints.push(linePoint);
-          component.set('baselinePoints', baselinePoints);
-          cellIndex++;
-        });
-        component.drawVerticalBaseLine();
-        component.sendAction(
-          'onShownBaseLine',
-          userProficiencyBaseLine.lastUpdated
+      let userProficiencyBaseLine = component.get('userProficiencyBaseLine');
+      let competencyMatrixCoordinates = component.get(
+        'competencyMatrixCoordinates'
+      );
+      let baseLineDomains = userProficiencyBaseLine.domains;
+      let domains = competencyMatrixCoordinates.domains;
+      let cellIndex = 0;
+      let baselinePoints = Ember.A([]);
+      domains.map(domain => {
+        let domainData = baseLineDomains.findBy(
+          'domainCode',
+          domain.domainCode
         );
-        component.set('isBaseLineDrawn', true);
+        let domainCompetencies = domainData ? domainData.competencies : [];
+        let domainWiseMasteredCompetencies = Ember.A([]);
+        domainCompetencies.map(competency => {
+          //Consider only the mastered competencies
+          if (competency.status === 4 || competency.status === 5) {
+            domainWiseMasteredCompetencies.push(competency);
+          }
+        });
+        let numberOfMasteredCompetency = domainWiseMasteredCompetencies.length;
+        let masteredCompetencyHighestSeq = numberOfMasteredCompetency
+          ? domainWiseMasteredCompetencies[numberOfMasteredCompetency - 1]
+            .competencySeq
+          : 0;
+        let x1 = cellIndex * cellWidth;
+        let y1 = cellHeight * masteredCompetencyHighestSeq; //stroke width
+        let isSkyLineContainer = component.$(
+          `.sky-line-vertical-${cellIndex + 1}`
+        );
+        //check skyline is present in the cell and adjust y1 height
+        y1 =
+          y1 === parseInt(isSkyLineContainer.attr('y1')) - 6 ||
+          y1 === parseInt(isSkyLineContainer.attr('y1')) ||
+          y1 === 0
+            ? y1 + 3
+            : y1;
+
+        let x2 = x1 + cellWidth;
+        let y2 = y1;
+
+        let linePoint = {
+          x1: x1,
+          x2: x2,
+          y1: y1,
+          y2: y2,
+          isHorizontal: true
+        };
+        baselinePoints.push(linePoint);
+        component.set('baselinePoints', baselinePoints);
+        cellIndex++;
       });
+      component.drawVerticalBaseLine();
+      component.sendAction(
+        'onShownBaseLine',
+        userProficiencyBaseLine.lastUpdated
+      );
+      component.set('isBaseLineDrawn', true);
     }
   },
 
@@ -726,16 +810,80 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function toggleChartSize
-   * Method to toggle chart size between expanded and collapsed
+   * @function drawDomainBoundaryLine
+   * Method to draw domain boundary line
    */
-  toggleChartSize() {
+  drawDomainBoundaryLine() {
     let component = this;
-    let isExpandChartEnabled = component.get('isExpandChartEnabled');
-    if (isExpandChartEnabled) {
-      component.expandChartColumnHeight();
-    } else {
-      component.reduceChartHeight();
+    let skylineElements = component.$('.domain-boundary');
+    let cellWidth = component.get('cellWidth');
+    let cellHeight = component.get('cellHeight');
+    let svg = component.get('domainBoundaryLineContainer');
+    let cellIndex = 0;
+    skylineElements.each(function(index) {
+      let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
+      let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
+      y1 = y1 === 0 ? y1 + 3 : y1 + cellHeight + 3;
+      let x2 = x1 + cellWidth;
+      let y2 = y1;
+      let linePoint = {
+        x1,
+        y1,
+        x2,
+        y2
+      };
+      svg
+        .append('line')
+        .attr('x1', linePoint.x1)
+        .attr('y1', linePoint.y1)
+        .attr('x2', linePoint.x2)
+        .attr('y2', linePoint.y2)
+        .attr(
+          'class',
+          `domain-boundary-line horizontal-line domain-boundary-line-${cellIndex}`
+        );
+      component.joinDomainBoundaryLinePoints(cellIndex, linePoint);
+      cellIndex++;
+    });
+    component.set('isLoading', false);
+  },
+
+  /**
+   * @function joinDomainBoundaryLinePoints
+   * Method to draw vertical line to connects domain boundary line points, if necessary
+   */
+  joinDomainBoundaryLinePoints(cellIndex, curLinePoint) {
+    let component = this;
+    let lastSkyLineContainer = component.$(
+      `.domain-boundary-line-${cellIndex - 1}`
+    );
+    let skyLineContainer = component.get('domainBoundaryLineContainer');
+    let lastskyLinePoint = {
+      x2: parseInt(lastSkyLineContainer.attr('x2')),
+      y2: parseInt(lastSkyLineContainer.attr('y2'))
+    };
+    //Connect sky line points if last and current points are not same
+    if (
+      lastSkyLineContainer.length &&
+      lastskyLinePoint.y2 !== curLinePoint.y1
+    ) {
+      skyLineContainer
+        .append('line')
+        .attr('x1', lastskyLinePoint.x2)
+        .attr('y1', lastskyLinePoint.y2)
+        .attr('x2', curLinePoint.x1)
+        .attr('y2', curLinePoint.y1)
+        .attr('class', 'domain-boundary-line vertical-line');
     }
+  },
+
+  willDestroyElement() {
+    let component = this;
+    component.clearChart();
+  },
+
+  clearChart() {
+    let component = this;
+    component.$('svg').remove();
   }
 });

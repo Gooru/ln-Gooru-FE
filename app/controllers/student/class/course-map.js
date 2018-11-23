@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  queryParams: ['location', 'tab'],
+  queryParams: ['location', 'tab', 'demo'],
 
   /**
    * Combination of unit, lesson and resource (collection or assessment)
@@ -42,6 +42,8 @@ export default Ember.Controller.extend({
   tab: null,
 
   isFirstLoad: true,
+
+  demo: false,
 
   // -------------------------------------------------------------------------
   // Actions
@@ -201,11 +203,21 @@ export default Ember.Controller.extend({
    */
   isChecked: false,
 
-
   /**
    * @property {Boolean} isShowNavigatorLanding
    */
-  isShowNavigatorLanding: Ember.computed.alias('studentClassController.isShowNavigatorLanding'),
+  isShowNavigatorLanding: Ember.computed(
+    'studentClassController.isShowNavigatorLanding',
+    'demo',
+    function() {
+      let controller = this;
+      let isShowNavigatorLanding = controller.get(
+        'studentClassController.isShowNavigatorLanding'
+      );
+      let isDemoClass = controller.get('demo');
+      return isShowNavigatorLanding || isDemoClass;
+    }
+  ),
 
   /**
    * @type {Boolean}

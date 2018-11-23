@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import ModalMixin from 'gooru-web/mixins/modal';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
-export default Ember.Controller.extend(ModalMixin, {
+export default Ember.Controller.extend(ModalMixin, ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -103,6 +104,11 @@ export default Ember.Controller.extend(ModalMixin, {
   hasClasses: Ember.computed('totalJoinedClasses', function() {
     return this.get('totalJoinedClasses') > 0;
   }),
+
+  /**
+   * @property {Json} - demoClass
+   */
+  demoClass: Ember.computed.alias('configuration.demoClass'),
 
   /**
    * @property {Array[]} - featuredCourses

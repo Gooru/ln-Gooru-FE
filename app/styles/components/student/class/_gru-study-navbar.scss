@@ -53,6 +53,22 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
       /*Default View */
       grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
+
+      .tab {
+        a {
+          opacity: 0.3;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+
+        &.vactive {
+          a {
+            opacity: 1;
+          }
+        }
+      }
       /*Apply to independent-learning class and it has no class info */
       &.independent-learning.no-class-info {
         grid-template-columns: 90px 120px 1fr 60px 120px 120px;
@@ -257,26 +273,7 @@
         }
 
         &.enable {
-          opacity: 1;
           pointer-events: all;
-        }
-
-        &.vactive {
-          a {
-            color: $yellow;
-
-            .dca-pin {
-              background-image: url("gooru/images/dca-yellow.svg");
-            }
-          }
-        }
-
-        a:hover {
-          color: $yellow;
-
-          .dca-pin {
-            background-image: url("gooru/images/dca-yellow.svg");
-          }
         }
       }
 

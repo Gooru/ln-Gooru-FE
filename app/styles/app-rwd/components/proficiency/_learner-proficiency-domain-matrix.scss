@@ -1,5 +1,4 @@
 .learner-proficiency-domain-matrix {
-
   .chart-area {
     width: 100%;
     margin: auto;
@@ -43,4 +42,19 @@
     }
   }
 
+  @media screen and (orientation: landscape) {
+    .chart-area {
+      .matrix-chart {
+        .chart-container {
+          .taxonomy-grades-container {
+            .taxonomy-grades {
+              .grade-list {
+                overflow: auto;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

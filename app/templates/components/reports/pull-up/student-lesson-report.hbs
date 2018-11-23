@@ -89,7 +89,7 @@
               {{#if (not-eq collection.format 'collection')}}
                 <span style= {{safe-html (concat "color:" (grade-color collection.performance.score))}}>{{collection.performance.score}}%</span>
               {{else}}
-                <span style= {{safe-html (concat "color:" (grade-color collection.performance.score))}}>{{format-time collection.performance.timeSpent}}</span>
+                <span class="report-student-time-spent">{{format-time collection.performance.timeSpent}}</span>
               {{/if}}
             {{else}}
               <span>--</span>

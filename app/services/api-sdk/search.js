@@ -12,6 +12,11 @@ export default Ember.Service.extend({
 
   searchAdapter: null,
 
+  /**
+   * Make a cache of competency content and make use of offset as well to avoid recursive API
+   */
+  competencyContentContainer: null,
+
   init: function() {
     this._super(...arguments);
     this.set(
@@ -22,6 +27,7 @@ export default Ember.Service.extend({
       'searchAdapter',
       SearchAdapter.create(Ember.getOwner(this).ownerInjection())
     );
+    this.set('competencyContentContainer', []);
   },
 
   /**
@@ -131,16 +137,19 @@ export default Ember.Service.extend({
   searchFeaturedCourses: function(term) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchFeaturedCourses(term).then(
-        function(response) {
-          resolve(
-            service.get('searchSerializer').normalizeSearchCourses(response)
-          );
-        },
-        function(error) {
-          reject(error);
-        }
-      );
+      service
+        .get('searchAdapter')
+        .searchFeaturedCourses(term)
+        .then(
+          function(response) {
+            resolve(
+              service.get('searchSerializer').normalizeSearchCourses(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
     });
   },
 
@@ -153,16 +162,101 @@ export default Ember.Service.extend({
   searchCourses: function(term) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchCourses(term).then(
-        function(response) {
-          resolve(
-            service.get('searchSerializer').normalizeSearchCourses(response)
+      service
+        .get('searchAdapter')
+        .searchCourses(term)
+        .then(
+          function(response) {
+            resolve(
+              service.get('searchSerializer').normalizeSearchCourses(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  fetchLearningMapsContent(gutCode, filters) {
+    const service = this;
+    let start = filters.start || 0;
+    let competencyContentContainer = service.get('competencyContentContainer');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      let isCompetencyContentAvailable = competencyContentContainer[
+        `${gutCode}`
+      ]
+        ? competencyContentContainer[`${gutCode}`][start] || null
+        : null;
+      if (isCompetencyContentAvailable) {
+        resolve(competencyContentContainer[`${gutCode}`][start]);
+      } else {
+        service
+          .get('searchAdapter')
+          .fetchLearningMapsContent(gutCode, filters)
+          .then(
+            function(response) {
+              let normalizedCompetencyContent = service
+                .get('searchSerializer')
+                .normalizeLearningMapsContent(response);
+              let fetchedCompetencyContent =
+                competencyContentContainer[`${gutCode}`] || [];
+              fetchedCompetencyContent[start] = normalizedCompetencyContent;
+              competencyContentContainer[
+                `${gutCode}`
+              ] = fetchedCompetencyContent;
+              service.set(
+                'competencyContentContainer',
+                competencyContentContainer
+              );
+              resolve(normalizedCompetencyContent);
+            },
+            function(error) {
+              reject(error);
+            }
           );
-        },
-        function(error) {
-          reject(error);
-        }
-      );
+      }
+    });
+  },
+
+  fetchLearningMapsCompetencyContent(gutCode, filters) {
+    const service = this;
+    let start = filters.startAt || 0;
+    let competencyContentContainer = service.get('competencyContentContainer');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      let isCompetencyContentAvailable = competencyContentContainer[
+        `${gutCode}`
+      ]
+        ? competencyContentContainer[`${gutCode}`][start] || null
+        : null;
+      if (isCompetencyContentAvailable) {
+        resolve(competencyContentContainer[`${gutCode}`][start]);
+      } else {
+        service
+          .get('searchAdapter')
+          .fetchLearningMapsCompetencyContent(gutCode, filters)
+          .then(
+            function(response) {
+              let normalizedCompetencyContent = service
+                .get('searchSerializer')
+                .normalizeLearningMapsContent(response);
+              let fetchedCompetencyContent =
+                competencyContentContainer[`${gutCode}`] || [];
+              fetchedCompetencyContent[start] = normalizedCompetencyContent;
+              competencyContentContainer[
+                `${gutCode}`
+              ] = fetchedCompetencyContent;
+              service.set(
+                'competencyContentContainer',
+                competencyContentContainer
+              );
+              resolve(normalizedCompetencyContent);
+            },
+            function(error) {
+              reject(error);
+            }
+          );
+      }
     });
   }
 });

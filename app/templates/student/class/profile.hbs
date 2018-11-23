@@ -26,7 +26,16 @@
       </div>
       <div class="body">
         <div class="proficiency-chart">
-          {{proficiency.learner-proficiency-domain-matrix subjectBucket=subjectBucket timeLine=timeLine course=course userId=userId subject=activeSubject class=currentClass onShownBaseLine="onShownBaseLine" onSelectCompetency="onSelectCompetency"}}
+          {{proficiency.learner-proficiency-domain-matrix
+            subjectBucket=subjectBucket
+            timeLine=timeLine
+            course=course
+            userId=userId
+            subject=activeSubject
+            class=currentClass
+            onShownBaseLine="onShownBaseLine"
+            onSelectCompetency="onSelectCompetency"
+          }}
           <div class="proficiency-tags">
             <div class="proficiency-legends">
               <div class="mastered legend">
@@ -49,6 +58,10 @@
                 <span class="box-baseline"></span>
                 <span class="title">{{t 'profile.proficiency.baseline'}}</span>
               </div>
+              <div class="grade-line legend">
+                <span class="box-grade-line"></span>
+                <span class="title">{{t 'profile.proficiency.grade-line'}}</span>
+              </div>
             </div>
           </div>
           {{#if isShowTimeSeries}}
@@ -67,6 +80,6 @@
 
 {{#if isShowCompetencyContentReport}}
   {{#reports.pull-up.competency-report type=selectedCompetency.competencyCode title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport onClosePullUp="onClosePullUp" competency=selectedCompetency}}
-    {{reports.pull-up.competency-content-report competency=selectedCompetency userId=userId}}
+    {{reports.pull-up.competency-content-report competency=selectedCompetency userId=userId isStudent=true}}
   {{/reports.pull-up.competency-report}}
 {{/if}}

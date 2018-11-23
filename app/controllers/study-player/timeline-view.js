@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
   barChartData: null,
   //navMathSubjectCode
   subjectCode: null,
+  isSysEvent: 1,
 
   offsetlimit: 1,
 
@@ -18,6 +19,7 @@ export default Ember.Controller.extend({
   }),
   actions: {
     mileStoneHandler: function() {
+      this.isSysEvent = 1;
       this.transitionToRoute('study-player');
     },
     scrollRight: function() {

@@ -40,6 +40,22 @@
       &.archived-class {
         grid-template-columns: 50px 1fr 40px 59px 40px;
       }
+
+      .tab {
+        a {
+          opacity: 0.3;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+
+        &.vactive {
+          a {
+            opacity: 1;
+          }
+        }
+      }
       /* Extra small devices (phones, 600px and down) */
       @media only screen and (max-width: $screen-sm - 1) {
         grid-template-columns: 50px 40px 40px 40px 1fr 40px 40px 40px;
@@ -91,33 +107,6 @@
             .add-info {
               display: inline-block !important;
             }
-          }
-        }
-      }
-
-      .class-activities,
-      .class-management,
-      .course-map,
-      .students {
-        &.vactive {
-          a {
-            color: $gray-base;
-          }
-
-          a.dca {
-            .dca-pin {
-              background-image: url("gooru/pin.png");
-            }
-          }
-        }
-
-        a:hover {
-          color: $gray-base;
-        }
-
-        a.dca:hover {
-          .dca-pin {
-            background-image: url("gooru/pin.png");
           }
         }
       }

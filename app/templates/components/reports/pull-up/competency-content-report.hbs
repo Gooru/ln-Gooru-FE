@@ -2,9 +2,34 @@
   <div class="competency-name">
     {{competency.competencyName}}
   </div>
-  <div class="collections-accordion">
-    {{#each collectionPerformances as |collectionPerformance|}}
-      {{reports.pull-up.accordion.collection-accordion collection=collectionPerformance userId=userId}}
-    {{/each}}
-  </div>
+  {{#if isShowGlobalInfo}}
+    {{#if learningMapData}}
+      <div class="student-data toggle-view" {{action "onToggleCompetencyInfoView"}}>{{t 'report.competency-report.show-student-data'}}</div>
+      <div class="competency-global-info">
+        {{proficiency.competency-content-info learningMapData=learningMapData onSelectActivityContent="onSelectActivityContent"}}
+      </div>
+    {{else}}
+      {{three-bounce-spinner}}
+    {{/if}}
+  {{else}}
+    <div class="collections-accordion">
+      {{#each collectionPerformances as |collectionPerformance|}}
+        {{reports.pull-up.accordion.collection-accordion collection=collectionPerformance userId=userId}}
+      {{/each}}
+    </div>
+    {{#unless isStudent}}
+      <div class="global-data toggle-view" {{action "onToggleCompetencyInfoView"}}>{{t 'report.competency-report.show-global-data'}}</div>
+    {{/unless}}
+  {{/if}}
 </div>
+
+{{#if isShowActivityPullup}}
+  {{reports.pull-up.activity-list
+    activityContents=activityContents
+    activityContentType=activityContentType
+    activityTotalHitCount=activityTotalHitCount
+    showPullUp=isShowActivityPullup
+    onResetPullUpData="onResetPullUpData"
+    onClickShowMoreActivity="onClickShowMoreActivity"
+  }}
+{{/if}}

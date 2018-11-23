@@ -21,6 +21,8 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   analyticsService: Ember.inject.service('api-sdk/analytics'),
 
+  searchService: Ember.inject.service('api-sdk/search'),
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -144,6 +146,14 @@ export default Ember.Controller.extend(ModalMixin, {
         'studentsList',
         controller.get('studentsList').sortBy(sortCriteria)
       );
+    },
+
+    /**
+     * Action triggered when click global view
+     */
+    onToggleGlobalCompetencyView(gutCode) {
+      let controller = this;
+      controller.fetchLearningMapsContent(gutCode);
     }
   },
 
@@ -363,9 +373,18 @@ export default Ember.Controller.extend(ModalMixin, {
           : null;
         performance = score != null ? Math.round(score * 100) / 100 : null;
         isStudentPerformed = score != null;
-        proficiency.set('totalCompetencies', studentCompetencyPerformance.totalCompetency);
-        proficiency.set('completedCompetencies', studentCompetencyPerformance.completedCompetency);
-        proficiency.set('pendingCompetencies', studentCompetencyPerformance.inprogressCompetencies);
+        proficiency.set(
+          'totalCompetencies',
+          studentCompetencyPerformance.totalCompetency
+        );
+        proficiency.set(
+          'completedCompetencies',
+          studentCompetencyPerformance.completedCompetency
+        );
+        proficiency.set(
+          'pendingCompetencies',
+          studentCompetencyPerformance.inprogressCompetencies
+        );
       }
       controller
         .getStudentCurrentLocation(member.id)
@@ -384,6 +403,26 @@ export default Ember.Controller.extend(ModalMixin, {
     Ember.RSVP.all(classMembersList).then(function(studentsList) {
       controller.set('studentsList', studentsList);
       controller.set('isLoading', false);
+    });
+  },
+
+  /**
+   * Action triggered when retrieve learning maps content
+   */
+  fetchLearningMapsContent(competencyCode) {
+    let controller = this;
+    let searchService = controller.get('searchService');
+    let filters = {
+      startAt: 0,
+      length: 5,
+      isCrosswalk: false
+    };
+    return Ember.RSVP.hash({
+      learningMapData: Ember.RSVP.resolve(
+        searchService.fetchLearningMapsContent(competencyCode, filters)
+      )
+    }).then(({ learningMapData }) => {
+      controller.set('learningMapData', learningMapData);
     });
   }
 });
