@@ -288,17 +288,7 @@ export default Ember.Component.extend({
         scale: 0.8
       },
       zIndex = 1,
-      scaleprop = 7;
-
-    // leftcards cardidx =12, len=3, Added checks for null, will have another version for adding dummy cards, now null cards are not treated ad empty or dummy card.
-    /*  for (let index = cardidx - 1; cardidx - len < index; --index) {
-      if (this.timeData[index]) {
-        let curCard = Object.assign({}, this.timeData[index]);
-        cards.left.push(curCard);
-      } else {
-        isFull = 0;
-      }
-    } */
+      scaleprop = 4;
 
     let curIndx = cardidx,
       lenbound = len;
@@ -334,7 +324,7 @@ export default Ember.Component.extend({
     });
 
     isFull = 1;
-    scaleprop = 10;
+    scaleprop = 7;
     // leftcards cardidx =12, len=3
     for (let index = cardidx + 1; index < cardidx + len; ++index) {
       if (this.timeData[index]) {
