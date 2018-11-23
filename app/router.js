@@ -159,6 +159,7 @@ Router.map(function() {
         path: '/unit/:unitId/lesson/:lessonId/collection/:collectionId'
       });
       this.route('students');
+      this.route('students-proficiency');
     });
   });
 

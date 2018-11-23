@@ -1,0 +1,9 @@
+{{#unless domainLevelSummary}}
+  {{#if isDataNotAvailable}}
+    {{t 'teacher-landing.class.students-tab.data-not-available'}}
+  {{else}}
+    {{three-bounce-spinner}}
+  {{/if}}
+{{else}}
+  {{proficiency.inspect.student-domain-performance domainLevelSummary=domainLevelSummary classMembers=classMembers subjectBucket=subjectBucket}}
+{{/unless}}
