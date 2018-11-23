@@ -12,9 +12,37 @@
           width: max-content;
         }
 
-        .class-name {
-          .edit-text > span {
+        .assessment-min-score .edit-text {
+          span {
             width: max-content;
+          }
+
+          .gru-input-number {
+            .form-group {
+              .error-messages {
+                .error {
+                  margin-top: 0;
+                  white-space: nowrap;
+                }
+              }
+            }
+          }
+        }
+
+        .class-name .edit-text {
+          span {
+            width: max-content;
+          }
+
+          .gru-input {
+            .form-group {
+              .error-messages {
+                .error {
+                  margin-top: 0;
+                  white-space: nowrap;
+                }
+              }
+            }
           }
         }
       }
@@ -22,12 +50,6 @@
 
     .panel.classroom-information {
       .panel-body {
-        grid-template-columns: 50px 1fr max-content 200px 100px;
-
-        &.no-taxomony {
-          grid-template-columns: 50px 1fr max-content 100px;
-        }
-
         .taxonomy-standards {
           width: 21%;
         }
@@ -66,8 +88,6 @@
 
     .panel.classroom-information {
       .panel-body {
-        grid-template-columns: 50px 1fr max-content 100px;
-
         .course-name {
           width: 29%;
         }

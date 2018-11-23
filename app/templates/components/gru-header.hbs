@@ -142,11 +142,6 @@
                     <span>{{t "student-landing.class.performance"}}</span>
                   {{/link-to}}
                 </li>
-                <li class="navbar-nav-list visible-md visible-lg community-link out-of-scope">
-                  <a>
-                    <span>{{t "common.community"}}</span>
-                  </a>
-                </li>
                 <li class="navbar-nav-list visible-md visible-lg notifications-link out-of-scope">
                   <a>
                     {{gru-icon name='notifications'}}
@@ -207,18 +202,6 @@
                       <span>{{t "common.library"}}</span>
                     {{/link-to}}
                   </li>
-                  {{#unless profile.isTeacher}}
-                    <li class="navbar-nav-list">
-                      {{#link-to 'student.performance'}}
-                        <span>{{t "student-landing.class.performance"}}</span>
-                      {{/link-to}}
-                    </li>
-                    <li class="navbar-nav-list">
-                      <a>
-                        <span>{{t "common.community"}}</span>
-                      </a>
-                    </li>
-                  {{/unless}}
                   <li class="navbar-nav-list">
                     {{#link-to (if profile.isStudent 'profile.proficiency' 'profile.content.courses') session.userData.gooruUId class="navbar-link" }}
                       <span class="">{{t "common.profile"}}</span>

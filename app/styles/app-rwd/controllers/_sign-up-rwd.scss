@@ -1,10 +1,36 @@
-@media screen and (min-width: $screen-360) and (max-width: $screen-640) {
-  .signUpForm {
-    .form-right {
-      padding-left: 0px;
+.controller.sign-up {
+  @media only screen and (max-width: $screen-sm - 1) {
+    .modal {
+      .modal-dialog {
+        .modal-body {
+          .sign-up-finish-form {
+            .form-right {
+              padding: 0;
+            }
+          }
+        }
+      }
     }
-    .form-left {
-      padding-left: 0px;
+  }
+}
+
+.controller.sign-up {
+  @media only screen and (max-width: $screen-sm - 1) {
+    .modal {
+      .modal-dialog {
+        .modal-body {
+          .sign-up-form {
+            .form-group.lastName {
+              margin-left: -15px;
+            }
+
+            .form-left,
+            .form-right {
+              padding: 0;
+            }
+          }
+        }
+      }
     }
   }
 }
