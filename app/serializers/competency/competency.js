@@ -87,8 +87,10 @@ export default Ember.Object.extend({
   normalizeCompetencyMatrixDomain: function(response) {
     let resultSet = Ember.A();
     let domains = Ember.A();
-    if (response.userCompetencyMatrix) {
+    let lastUpdated = null;
+    if (response && response.userCompetencyMatrix) {
       let userCompetencyMatrix = Ember.A(response.userCompetencyMatrix);
+      lastUpdated = response.lastUpdated || response.createdAt;
       userCompetencyMatrix.forEach(domainData => {
         let domain = Ember.Object.create(domainData);
         let competencies = domain.get('competencies');
@@ -101,8 +103,8 @@ export default Ember.Object.extend({
       });
     }
     resultSet = {
-      domains: domains,
-      lastUpdated: response.lastUpdated || response.createdAt
+      domains,
+      lastUpdated
     };
     return resultSet;
   },

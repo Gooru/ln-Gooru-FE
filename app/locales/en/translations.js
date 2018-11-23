@@ -641,6 +641,7 @@ export default Object.assign(quizzesTranslations, {
     study: 'Study',
     'study-now': 'Study Now',
     student: 'Student',
+    students: 'Students',
     'student-id': 'Student ID (not displayed on Profile)',
     'studen-id-display':
       'Student ID (not displayed on Profile, displayed in Anonymous mode)',
@@ -880,6 +881,7 @@ export default Object.assign(quizzesTranslations, {
       },
       join: {
         title: 'Join a new Classroom',
+        'join-a-classroom': 'Join a  Classroom',
         content: 'Where the journey begins.',
         'not-now': 'Not now',
         'class-code-input': 'Enter a classroom code',
@@ -1247,7 +1249,10 @@ export default Object.assign(quizzesTranslations, {
         'student-id': 'StudentId',
         remove: 'Remove',
         mastered: 'Mastered',
-        'in-progress': 'In Progress'
+        'in-progress': 'In Progress',
+        'course-coverage': 'Course Coverage',
+        'proficiency-in': 'Proficiency in',
+        'data-not-available': 'Data Not Available'
       },
       'class-activities': 'Daily Class Activities',
       'back-to-class-activities': 'Back to Daily Class Activities',

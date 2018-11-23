@@ -2,6 +2,8 @@
     {{#if timeSession}}
         {{#if (eq timeSession.collectionType 'assessment')}}
             <div class="imgClassAssesment"> </div>
+        {{else if (eq timeSession.collectionType 'assessment-external') }}
+            <div class="imgClassCollection"> </div>
         {{else if (eq timeSession.collectionType 'collection') }}
             <div class="imgClassCollection"> </div>
         {{else }}
@@ -10,6 +12,8 @@
         <div class='cardTitle'>
             <div class='cardTypeIcon'>
                 {{#if (eq timeSession.collectionType 'assessment')}}
+                    {{gru-icon name='pers'  }}
+                {{else if (eq timeSession.collectionType 'assessment-external')}}
                     {{gru-icon name='pers'  }}
                 {{else if (eq timeSession.collectionType 'collection') }}
                     {{gru-icon name='view_comfy'  }}
@@ -69,7 +73,7 @@
         <div class='cardTitle ellipsis lastaccessed'>
             <span class="lastacessedLable"> {{t 'locateme.lastAcessesed'}} </span> 
             <span>
-            {{format-date timeSession.lastAccessed 'DD, MMM, YYYY' }}
+            {{format-date timeSession.lastAccessed 'MMM DD, YYYY' }}
             </span>
         </div> 
         {{!--  new info card[end] --}}

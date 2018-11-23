@@ -47,6 +47,10 @@
         padding: 10px 0;
         width: 30%;
 
+        &.demo-class {
+          pointer-events: visible;
+          cursor: pointer;
+        }
         div {
           font-size: $font-size-small;
           font-weight: bold;
@@ -65,11 +69,6 @@
 
             a {
               color: inherit;
-            }
-
-            &.demo-class {
-              pointer-events: visible;
-              cursor: pointer;
             }
           }
         }

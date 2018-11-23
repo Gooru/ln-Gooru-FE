@@ -80,7 +80,13 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         competencyMatrix = hash.competencyMatrixs;
       parentModel.perfromanceData = route.getCompletion(competencyMatrix);
       route.set('vbarData', parentModel.perfromanceData);
+      timeLineData.reverse();
       parentModel.timeData = timeLineData;
+      if (parentModel.timeData.length === 0) {
+        route
+          .get('controller')
+          .set('offsetlimit', route.currentModel.filterOptions.offset);
+      }
       parentModel.filterOptions = timeLineData.filterOptions;
       return parentModel;
       //route.paintGraph(parentModel.perfromanceData);
@@ -95,15 +101,20 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         route.currentModel.filterOptions.offset < 0
           ? 1
           : route.currentModel.filterOptions.offset;
-
+      route.get('controller').set('offsetlimit', -1);
       route.get('controller').set('isSysEvent', 0);
       route.refresh();
     },
     scrollLLeft: function() {
       const route = this;
-      route.currentModel.filterOptions.offset += route.pageSize;
-      route.get('controller').set('isSysEvent', 0);
-      this.refresh();
+      if (
+        route.get('controller').get('offsetlimit') <
+        route.currentModel.filterOptions.offset
+      ) {
+        route.currentModel.filterOptions.offset += route.pageSize;
+        route.get('controller').set('isSysEvent', 0);
+        this.refresh();
+      }
     },
 
     //Consume these changes for route animation
@@ -225,6 +236,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     var route = this;
     var { id, description, ...filterOption } = parentModel.context;
     filterOption.courseId = parentModel.course.id;
+    filterOption.limit = route.pageSize;
     if (route.context && route.context.filterOptions) {
       filterOption = route.context.filterOptions;
     }
