@@ -3,8 +3,10 @@
   <div class="report-header">
     <div class="report-breadcrumb">
       <div class="unit-title">
-        <i class="unit-icon"></i>
-        <p>{{t 'common.unit'}} {{unit.sequence}} : {{unit.title}}</p>
+        <div>
+          <div>{{t 'common.unit'}} {{unit.sequence}} :</div>
+           <div class="unit-title-value ellipsis">{{unit.title}}</div>
+         </div>
       </div>
     </div>
     <div class="report-close-pullup" {{action 'onPullUpClose'}}>

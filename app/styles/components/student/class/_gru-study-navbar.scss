@@ -55,18 +55,12 @@
       grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
 
       .tab {
-        a {
-          opacity: 0.3;
-
-          &:hover {
-            opacity: 1;
-          }
+        &:hover {
+          background-color: #1aa9eb;
         }
 
         &.vactive {
-          a {
-            opacity: 1;
-          }
+          background-color: #1aa9eb;
         }
       }
       /*Apply to independent-learning class and it has no class info */
