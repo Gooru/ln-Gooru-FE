@@ -48,6 +48,7 @@
       font-size: 16px;
     }
   }
+
   .completion-chart:hover .msaddon {
     background: url(gooru/images/close-up.svg);
     cursor: pointer;
@@ -352,19 +353,19 @@
                 align-self: center;
 
                 /*flex: 1;
-                                                                 margin: 14px; */
+                                                                                 margin: 14px; */
               }
 
               .scorevlaue {
                 font-size: 25px;
 
                 /*  flex: 1;
-                                                                 margin: auto; */
+                                                                                 margin: auto; */
                 align-self: center;
               }
 
               /* }
-                                                                                     */
+                                                                                                   */
             }
 
             .timespent {
@@ -379,7 +380,7 @@
                 font-size: 10px;
 
                 /* flex: 1; 
-                                                                margin: 14px; */
+                                                                                margin: 14px; */
                 align-self: center;
               }
 
@@ -387,7 +388,7 @@
                 font-size: 25px;
 
                 /* flex: 1;
-                                                                margin: auto; */
+                                                                                margin: auto; */
                 align-self: center;
               }
             }
@@ -402,9 +403,11 @@
             align-items: center;
             padding-top: 40px;
             font-weight: bold;
+            justify-content: unset !important;
 
             .lastacessedLable {
               font-size: 10px;
+              flex: unset !important;
             }
 
             span {
@@ -457,6 +460,7 @@
             border-radius: 8px;
             box-shadow: 0 0 3px 3px rgba(93, 93, 93, 0.3);
             background-color: #ffffff;
+            overflow: hidden;
 
             .cardTitle {
               height: 70px;
@@ -585,10 +589,10 @@
 
             .cardTypeIcon {
               /* width: 35px;
-                                                                                                                                            
-                                                                                                                                                                                                                                                                                                      height: 26px;
-                                                                                                                                                                                                                                                                                                      object-fit: contain;
-                                                                                                                                                                                                                                                                                                      background-color: #535e67; */
+                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                    height: 26px;
+                                                                                                                                                                                                                                                                                                                    object-fit: contain;
+                                                                                                                                                                                                                                                                                                                    background-color: #535e67; */
               align-self: center;
               padding: 5px;
             }
@@ -654,7 +658,7 @@
             margin-left: -290px;
 
             /*  width: 130px;
-                         height: 277px; */
+                                     height: 277px; */
             overflow: hidden;
 
             // margin-top: 80px;
@@ -664,18 +668,20 @@
           }
 
           /* li:nth-child(3) {
-                        background-color: yellow !important;
-                        border: solid 2px yellow !important;
-                    } */
+                                  background-color: yellow !important;
+                                  border: solid 2px yellow !important;
+                              } */
 
           li:nth-child(4) {
             margin-left: -270px;
+
             /*     background-color: blue;
-                        border: solid 2px blue; */
+                                    border: solid 2px blue; */
           }
 
           li:nth-child(6) {
             margin-right: -270px;
+
             // background-color: blue !important;
             // border: solid 2px blue !important;
           }
@@ -716,6 +722,27 @@
             .dummy-timecard-right {
               display: none;
             }
+
+            li:nth-child(4) {
+              margin-left: -200px;
+
+              /*     background-color: blue;
+                                        border: solid 2px blue; */
+            }
+
+            li:nth-child(6) {
+              margin-right: -200px;
+
+              // background-color: blue !important;
+              // border: solid 2px blue !important;
+            }
+
+            //
+            .lastaccessed {
+              justify-content: unset !important;
+              padding: 0px !important;
+            }
+            //
           }
 
           @media (max-width: $screen-sm) {
@@ -814,8 +841,8 @@
       }
 
       /* @media only screen and (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-                                              @content;
-                                          } */
+                                                    @content;
+                                                } */
 
       /*  @media (max-width: $screen-lptp-hidpi) {
                 .cardmask-mid-data-left:first-child {
