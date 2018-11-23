@@ -39,6 +39,10 @@ export default Ember.Component.extend({
     this.initialize();
   },
 
+  didDestroyElement() {
+    this.handleAppContainerScroll();
+  },
+
   /**
    * Function to triggered once when the component element is after rendered
    */
@@ -46,6 +50,7 @@ export default Ember.Component.extend({
     this._super(...arguments);
     let component = this;
     component.setupTooltip();
+    component.handleAppContainerScroll();
   },
 
   // -------------------------------------------------------------------------
@@ -520,6 +525,16 @@ export default Ember.Component.extend({
         }
       }
     );
+  },
+
+  handleAppContainerScroll() {
+    let activePullUpCount = Ember.$(document.body).find('.backdrop-pull-ups')
+      .length;
+    if (activePullUpCount > 0) {
+      Ember.$(document.body).addClass('no-vertical-scroll');
+    } else if (activePullUpCount === 0) {
+      Ember.$(document.body).removeClass('no-vertical-scroll');
+    }
   },
 
   setupTooltip: function() {

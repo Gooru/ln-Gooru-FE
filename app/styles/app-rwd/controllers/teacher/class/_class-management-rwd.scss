@@ -1,0 +1,99 @@
+.controller.teacher.class.class-management {
+  width: 100vw;
+  //992px
+  @media only screen and (max-width: $screen-md) {
+    .assessment-min-score {
+      margin-left: 0;
+    }
+
+    .header-info {
+      .class-information {
+        .class-name > span {
+          width: max-content;
+        }
+
+        .class-name {
+          .edit-text > span {
+            width: max-content;
+          }
+        }
+      }
+    }
+
+    .panel.classroom-information {
+      .panel-body {
+        grid-template-columns: 50px 1fr max-content 200px 100px;
+
+        &.no-taxomony {
+          grid-template-columns: 50px 1fr max-content 100px;
+        }
+
+        .taxonomy-standards {
+          width: 21%;
+        }
+
+        .class-code {
+          div.code {
+            font-size: 10px;
+            margin-top: 5px;
+          }
+        }
+
+        .course-image {
+          img {
+            width: 50px;
+          }
+        }
+
+        .performance-container,
+        .teacher-profile {
+          display: block;
+        }
+      }
+    }
+  }
+  //600px
+  @media only screen and (max-width: $sm-width-max) {
+    .header-info {
+      .class-information {
+        .class-name {
+          .edit-text > span {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .panel.classroom-information {
+      .panel-body {
+        grid-template-columns: 50px 1fr max-content 100px;
+
+        .course-name {
+          width: 29%;
+        }
+
+        .class-code {
+          width: 12%;
+          padding: 18px 5px 6px;
+
+          div.code {
+            font-size: 10px;
+          }
+        }
+
+        .taxonomy-standards {
+          display: none;
+        }
+      }
+    }
+  }
+  @media only screen and (min-width: $screen-sm) {
+    .header-info {
+      display: flex;
+    }
+
+    .assessment-min-score {
+      margin-left: 0;
+    }
+  }
+}

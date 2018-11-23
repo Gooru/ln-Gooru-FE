@@ -4,6 +4,9 @@
 
     .taxonomy-info {
       display: grid;
+      .label {
+        margin-right: 0px;
+      }
     }
 
     .panel.left-panel {
