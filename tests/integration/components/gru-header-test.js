@@ -207,10 +207,6 @@ test('Links as student', function(assert) {
 
   const $component = this.$(); //component dom element
 
-  const $performanceLink = $component.find('.performance-link');
-  assert.ok($performanceLink.length, 'Missing performance link');
-  const $communityLink = $component.find('.community-link');
-  assert.ok($communityLink.length, 'Missing community link');
   const $notificationsLink = $component.find('.notifications-link');
   assert.ok($notificationsLink.length, 'Missing notifications link');
   const $libraryLink = $component.find('.library-link');
@@ -234,10 +230,6 @@ test('hidden links as teacher', function(assert) {
   assert.ok($classroomsLink.length, 'Missing classrooms link');
   const $toolsTab = $component.find('.tools-link');
   assert.ok($toolsTab.length, 'Missing tools tab');
-  const $performanceLink = $component.find('.performance-link');
-  assert.notOk($performanceLink.length, 'Performance link should not appear');
-  const $communityLink = $component.find('.community-link');
-  assert.notOk($communityLink.length, 'Missing community link');
   const $notificationsLink = $component.find('.notifications-link');
   assert.ok($notificationsLink.length, 'Missing notifications link');
 });
