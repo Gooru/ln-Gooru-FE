@@ -1,0 +1,13 @@
+.gru-pull-out-xs {
+  @media screen and (max-width: $screen-568) {
+    right: 0% !important;
+
+    .pull-out-ex {
+      left: 0;
+
+      .notification-list {
+        width: 100vw;
+      }
+    }
+  }
+}
