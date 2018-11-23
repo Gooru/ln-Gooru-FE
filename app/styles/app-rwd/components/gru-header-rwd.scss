@@ -8,14 +8,19 @@
 
     .navbar-default {
       display: grid;
-      grid-template-columns: 65px 1fr 165px;
+      grid-template-columns: 65px 1fr auto;
 
       &:before {
         display: none;
       }
 
       .navbar-collapse {
+        justify-content: flex-end;
         display: flex !important;
+
+        .dropMenuLabelWidth {
+          margin-left: 15px;
+        }
       }
 
       .search-navbar-form .form-group .validation span.error,
