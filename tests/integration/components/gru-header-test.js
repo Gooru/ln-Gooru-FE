@@ -195,7 +195,7 @@ test('Search terms under 3 letters', function(assert) {
 });
 
 test('Links as student', function(assert) {
-  assert.expect(4); //making sure all asserts are called
+  assert.expect(2); //making sure all asserts are called
 
   let profile = Ember.Object.create({
     isTeacher: false
@@ -214,7 +214,7 @@ test('Links as student', function(assert) {
 });
 
 test('hidden links as teacher', function(assert) {
-  assert.expect(5); //making sure all asserts are called
+  assert.expect(3); //making sure all asserts are called
 
   let profile = Ember.Object.create({
     isTeacher: true
