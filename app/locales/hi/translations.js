@@ -869,6 +869,7 @@ export default Object.assign(quizzesTranslations, {
       },
       join: {
         title: 'एक नई कक्षा में शामिल हों',
+        'join-a-classroom': 'एक कक्षा में शामिल हों',
         content: 'जहां यात्रा शुरू होती है।',
         'not-now': 'अभी नहीं',
         'class-code-input': 'कक्षा कोड दर्ज करें',
@@ -1781,8 +1782,11 @@ export default Object.assign(quizzesTranslations, {
       'not-started': 'शुरू नही हुआ',
       skyline: 'क्षितिज',
       baseline: 'बेसलाइन',
+      'grade-line': 'वर्ग लाइन',
       'not-tagged':
-        'कक्षा में कोई कोर्स नहीं है या पाठ्यक्रम को वैध विषय या मानकों पर टैग नहीं किया गया है।'
+        'कक्षा में कोई कोर्स नहीं है या पाठ्यक्रम को वैध विषय या मानकों पर टैग नहीं किया गया है।',
+        'show-compressed-chart': 'संक्षिप्त चार्ट दिखाएं',
+      'show-expanded-chart': 'विस्तारित चार्ट दिखाएं'
     }
   },
   'gru-data-picker': {
@@ -1980,6 +1984,14 @@ export default Object.assign(quizzesTranslations, {
     'featured-description':
       'फीचर्ड पाठ्यक्रमों को अभिनव शिक्षकों द्वारा तैयार किया जाता है, सामग्री विशेषज्ञों द्वारा जांच और समीक्षा की जाती है, और छात्रों के लिए कक्षाओं में इसे लागू किया जाता है। सीखने को वैयक्तिकृत करने और छात्र जुड़ाव बढ़ाने के लिए पाठ्यक्रमों की खोज, रीमिक्स और कस्टमाइज़ करें! <a href="http://about.gooru.org/courses" target="_blank"> इन पाठ्यक्रमों के विकास के बारे में और जानें </a>।'
   },
+  locateme: {
+    score: 'स्कोर',
+    timespent: 'समय बिताया',
+    view: 'देखें',
+    attempt: 'प्रयास',
+    lastAcessesed: 'पिछला उपयोग'
+  },
+
   'taxonomy.modals': {
     'gru-domain-picker': {
       browseSelectorText: 'इस इकाई में कौन से डोमेन शामिल होंगे?',
@@ -2637,7 +2649,12 @@ export default Object.assign(quizzesTranslations, {
     },
     'competency-report': {
       title: 'योग्यता रिपोर्ट',
-      'no-subject': 'कोई विषय असाइन नहीं किया गया'
+      'no-subject': 'कोई विषय असाइन नहीं किया गया',
+      prerequisites: 'आवश्यक योग्यता',
+      'signature-assessments': 'Signature मूल्यांकन',
+      'signature-collections': 'Signature संकलन',
+      'show-global-data': 'वैश्विक डेटा दिखाएं',
+      'show-student-data': 'छात्र डेटा दिखाएं'
     },
     'domain-report': 'डोमेन रिपोर्ट'
   },
