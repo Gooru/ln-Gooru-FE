@@ -883,6 +883,7 @@ export default Object.assign(quizzesTranslations, {
       },
       join: {
         title: 'नवीन वर्गात सामील व्हा',
+        'join-a-classroom': 'वर्गात सामील व्हा',
         content: 'जिथे प्रवास सुरु होतो',
         'not-now': 'आता नाही',
         'class-code-input': 'वर्गाचा कोड एंटर करा',
@@ -1844,7 +1845,9 @@ export default Object.assign(quizzesTranslations, {
       baseline: 'बेसलाइन',
       'grade-line': 'ग्रेड ओळ',
       'not-tagged':
-        'वर्गात कोणत्याही प्रकारचे नियुक्त केलेले नाही किंवा अर्थातच एखाद्या वैध विषयावर किंवा मानकांवर टॅग केले गेले नाही.'
+        'वर्गात कोणत्याही प्रकारचे नियुक्त केलेले नाही किंवा अर्थातच एखाद्या वैध विषयावर किंवा मानकांवर टॅग केले गेले नाही.',
+        'show-compressed-chart': 'संक्षिप्त चार्ट दर्शवा',
+      'show-expanded-chart': 'विस्तृत चार्ट दर्शवा'
     }
   },
   'gru-data-picker': {
@@ -2041,6 +2044,13 @@ export default Object.assign(quizzesTranslations, {
     'featured-title': 'प्रदर्शित अभ्यासक्रम',
     'featured-description':
       'वैशिष्ट्यपूर्ण अभ्यासक्रम अभिनव शिक्षकांनी तयार केलेले आहेत, नमुने तपासलेले आणि सामग्री तज्ञांचे पुनरावलोकन केले आणि विद्यार्थ्यांसह कक्षांमध्ये कार्यान्वित केले. शोधा आणि रीमिक्स करा आणि अभ्यासक्रम वैयक्तिकृत करा आणि विद्यार्थी प्रतिबद्धता वाढवा! <a href=\' http://about.gooru.org/courses\' target=\'_blank\'> या अभ्यासक्रमांच्या विकासाबद्दल अधिक जाणून घ्या </a>.'
+  },
+  locateme: {
+    score: 'स्कोअर',
+    timespent: 'खर्च केलेला वेळ',
+    view: 'पहा',
+    attempt: 'प्रयत्न',
+    lastAcessesed: 'अखेरचा प्रवेश केला'
   },
   'taxonomy.modals': {
     'gru-domain-picker': {
@@ -2698,7 +2708,12 @@ export default Object.assign(quizzesTranslations, {
     },
     'competency-report': {
       title: 'क्षमता अहवाल',
-      'no-subject': 'कोणताही विषय नियुक्त केला नाही'
+      'no-subject': 'कोणताही विषय नियुक्त केला नाही',
+      prerequisites: 'पूर्वीची',
+      'signature-assessments': 'Signature मूल्यांकन',
+      'signature-collections': 'Signature संग्रह',
+      'show-global-data': 'ग्लोबल डेटा दर्शवा',
+      'show-student-data': 'विद्यार्थी डेटा दर्शवा'
     },
     'domain-report': 'डोमेन अहवाल'
   },
