@@ -55,6 +55,7 @@ export default Object.assign(quizzesTranslations, {
     first: 'First',
     last: 'Last',
     name: 'Name',
+    user: 'user',
     'content-name': 'Content Name',
     lastName: 'Lastname',
     firstName: 'Firstname',
@@ -704,6 +705,15 @@ export default Object.assign(quizzesTranslations, {
   /*
    * CONTROLLERS: Translations used in a specific controller
    */
+  'not-found': {
+    tenant: {
+      'login-not-found-msg-1':
+        'Gooru tenant login not found, page will be automatically redirect to ',
+      'login-not-found-msg-2': 'login page in',
+      'login-not-found-msg-3': 'sec or click below button to login as'
+    }
+  },
+
   index: {
     joinUs: 'Join Us to <br/> Honor the Human Right to <br/> Education',
     browseContent: {
