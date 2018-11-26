@@ -27,15 +27,15 @@
           {{charts/gru-students-performance-chart performanceSummary=model.performance hasStarted=true isTeacher=isTeacher assessmentCount=model.assessmentCount}}
         </div>
       {{else}}
-        <div class="performance-container pull-right {{unless (gte model.performance.score 0) 'not-started'}}" {{action 'onOpenLessonReport'}}>
-          {{charts/gru-performance-chart performanceSummary=model.performance hasStarted=true isTeacher=isTeacher assessmentCount=model.assessmentCount}}
-        </div>
         <div class= {{if isTeacher 'controls pull-right' 'play-btn pull-right'}}>
           {{#unless isTeacher}}
             <button class="btn btn-info study-now" disabled= {{if (or studyNowDisabled (not isExpanded)) 'true' ''}} {{action "studyNow" 'lesson' model}} data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.play"}}">
               {{gru-icon name='play_arrow'}}
             </button>
           {{/unless}}
+        </div>
+        <div class="performance-container pull-right {{unless (gte model.performance.score 0) 'not-started'}}" {{action 'onOpenLessonReport'}}>
+          {{charts/gru-performance-chart performanceSummary=model.performance hasStarted=true isTeacher=isTeacher assessmentCount=model.assessmentCount}}
         </div>
       {{/if}}
     </div>

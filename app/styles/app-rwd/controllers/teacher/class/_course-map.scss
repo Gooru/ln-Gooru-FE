@@ -533,6 +533,7 @@
                               .ellipsis {
                                 font-size: 15px;
                                 line-height: 50px;
+                                width: calc(100% - 28px);
                               }
 
                               i {
@@ -621,6 +622,7 @@
 
               .performance-container {
                 width: 85px;
+                margin-left: 0;
               }
             }
 
@@ -654,7 +656,7 @@
 
                                   .title {
                                     padding-left: 10px;
-                                    width: calc(100% - 39px) !important;
+                                    width: 100%;
                                   }
 
                                   .icon-container {
@@ -688,6 +690,7 @@
 
               .performance-container {
                 width: 81px;
+                margin-left: 0;
               }
             }
           }
