@@ -1,5 +1,12 @@
 .teacher_class_students-proficiency {
   .teacher.class {
     padding: 0;
+    .students-proficiency-container {
+      .no-data {
+        font-size: 15px;
+        text-align: center;
+        margin-top: 30px;
+      }
+    }
   }
 }

@@ -1252,7 +1252,8 @@ export default Object.assign(quizzesTranslations, {
         'in-progress': 'In Progress',
         'course-coverage': 'Course Coverage',
         'proficiency-in': 'Proficiency in',
-        'data-not-available': 'Data Not Available'
+        'data-not-available': 'Data Not Available',
+        'error-message': 'Possibly there is no a course assigned or there are none of students are joined or a valid subject is not assigned!'
       },
       'class-activities': 'Daily Class Activities',
       'back-to-class-activities': 'Back to Daily Class Activities',

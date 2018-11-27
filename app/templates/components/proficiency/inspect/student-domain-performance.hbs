@@ -28,7 +28,7 @@
       <div class="domains-coverage-container scrollable-container">
         {{#each domainCoverageCount as |domain|}}
           <div class="domain-coverage-count">
-            <div class="domain-name title">
+            <div class="domain-name title" {{action "onSelectDomain" domain}}>
               {{domain.domainName}}
             </div>
             <div class="coverage-count">
