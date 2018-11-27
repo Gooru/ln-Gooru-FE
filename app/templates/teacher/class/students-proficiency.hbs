@@ -1,9 +1,19 @@
-{{#unless domainLevelSummary}}
-  {{#if isDataNotAvailable}}
-    {{t 'teacher-landing.class.students-tab.data-not-available'}}
+<div class="students-proficiency-container">
+  {{#if isShowCompetencyReport}}
+    {{#unless domainLevelSummary}}
+      {{#if isDataNotAvailable}}
+        <div class="no-data">{{t 'teacher-landing.class.students-tab.data-not-available'}}</div>
+      {{else }}
+        {{three-bounce-spinner}}
+      {{/if}}
+    {{else}}
+      {{#if isShowCourseCompetencyReport}}
+        {{proficiency.inspect.student-domain-performance domainLevelSummary=domainLevelSummary classMembers=classMembers subjectBucket=subjectBucket onSelectDomain="onSelectDomain"}}
+      {{else if isShowDomainCompetencyReport}}
+        {{proficiency.inspect.student-domain-competency-performance domainLevelSummary=domainLevelSummary classMembers=classMembers activeDomain=activeDomain onClickBack="onClickBack"}}
+      {{/if}}
+    {{/unless}}
   {{else}}
-    {{three-bounce-spinner}}
+    <div class="no-data">{{t 'teacher-landing.class.students-tab.error-message'}}</div>
   {{/if}}
-{{else}}
-  {{proficiency.inspect.student-domain-performance domainLevelSummary=domainLevelSummary classMembers=classMembers subjectBucket=subjectBucket}}
-{{/unless}}
+</div>

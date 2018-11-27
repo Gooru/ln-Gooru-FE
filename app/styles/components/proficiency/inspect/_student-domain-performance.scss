@@ -86,6 +86,7 @@
           .domain-coverage-count {
             min-width: 200px;
             .domain-name {
+              cursor: pointer;
               color: $white;
               $font-size: 15px;
               $line-height: 1.3;

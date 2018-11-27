@@ -26,6 +26,12 @@ export default Ember.Component.extend({
       scrollableContainer.animate({
         scrollLeft: nextPos
       }, 400);
+    },
+
+    //Action triggered when select a domain
+    onSelectDomain(domain) {
+      let component = this;
+      component.sendAction('onSelectDomain', domain);
     }
   },
 
