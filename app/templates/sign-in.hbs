@@ -1,7 +1,7 @@
 {{#if isRedirectionDomainDone}}
   <div class="controller sign-in row">
     <div class="sign-in-wrapper col-md-12 col-sm-12 col-xs-12">
-      {{#if session.isGooruClientId}}
+      {{#if isGooruLogin }}
         <div class="sign-in-header">
           {{#if sessionEnds}}
             <h1>{{t "login.title-session-ends"}}</h1>

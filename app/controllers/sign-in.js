@@ -132,5 +132,10 @@ export default Ember.Controller.extend({
    * Maintain the state of redirection completed or not
    * @property {Boolean}
    */
-  isRedirectionDomainDone: false
+  isRedirectionDomainDone: false,
+
+  /**
+   * Computed property to identify gooru or tenant login.
+   */
+  isGooruLogin: Ember.computed.alias('session.isGooruClientId')
 });
