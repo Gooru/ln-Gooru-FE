@@ -1846,7 +1846,7 @@ export default Object.assign(quizzesTranslations, {
       'grade-line': 'ग्रेड ओळ',
       'not-tagged':
         'वर्गात कोणत्याही प्रकारचे नियुक्त केलेले नाही किंवा अर्थातच एखाद्या वैध विषयावर किंवा मानकांवर टॅग केले गेले नाही.',
-        'show-compressed-chart': 'संक्षिप्त चार्ट दर्शवा',
+      'show-compressed-chart': 'संक्षिप्त चार्ट दर्शवा',
       'show-expanded-chart': 'विस्तृत चार्ट दर्शवा'
     }
   },

@@ -1737,7 +1737,7 @@ export default Object.assign(quizzesTranslations, {
       baseline: 'ಬೇಸ್ಲೈನ್',
       'not-tagged':
         'ವರ್ಗವು ಯಾವುದೇ ಕೋರ್ಸ್ ಅನ್ನು ಹೊಂದಿಲ್ಲ ಅಥವಾ ಕೋರ್ಸ್ ಅನ್ನು ಮಾನ್ಯವಾದ ವಿಷಯ ಅಥವಾ ಮಾನದಂಡಗಳಿಗೆ ಟ್ಯಾಗ್ ಮಾಡಲಾಗಿಲ್ಲ.',
-        'show-compressed-chart': 'ಸಂಕುಚಿತ ಚಾರ್ಟ್ ತೋರಿಸಿ',
+      'show-compressed-chart': 'ಸಂಕುಚಿತ ಚಾರ್ಟ್ ತೋರಿಸಿ',
       'show-expanded-chart': 'ವಿವರವಾದ ಚಾರ್ಟ್ ತೋರಿಸಿ'
     }
   },
