@@ -73,16 +73,7 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
       }
     };
 
-    Ember.$(document).ajaxStart(function() {
-      route.get('sessionService').updateNetworkStatus(true);
-    });
-
-    Ember.$(document).ajaxStop(function() {
-      route.get('sessionService').updateNetworkStatus(false);
-    });
-
     Ember.$(document).ajaxError(function(event, jqXHR, settings) {
-      route.get('sessionService').updateNetworkStatus(false);
       if (
         jqXHR.status !== 401 &&
         !route.isGetCollectionWithRefreshRequest(settings)
