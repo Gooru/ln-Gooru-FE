@@ -5,8 +5,18 @@
     .taxonomy-info {
       display: grid;
       .dropdown-content {
+        .list-item,
+        .list-item.active {
+          display: block !important;
+        }
+      }
+      .dropdown-content {
         .list-item.active {
             background-color: #bbb;
+        }
+        .list-item,
+        .list-item.active {
+          display: none;
         }
       }
       .label {
