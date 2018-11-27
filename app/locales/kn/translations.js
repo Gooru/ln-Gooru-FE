@@ -840,6 +840,7 @@ export default Object.assign(quizzesTranslations, {
       },
       join: {
         title: 'ಒಂದು ಹೊಸ ತರಗತಿಯ ಸೇರಲು',
+        'join-a-classroom': 'ಒಂದು ತರಗತಿಯ ಸೇರಲು',
         content: 'ಅಲ್ಲಿ ಪ್ರಯಾಣ ಆರಂಭವಾಗುತ್ತದೆ.',
         'not-now': 'ಈಗ ಸಾಧ್ಯವಿಲ್ಲ',
         'class-code-input': 'ತರಗತಿಯ ಕೋಣೆಯನ್ನು ನಮೂದಿಸಿ',
@@ -1735,7 +1736,9 @@ export default Object.assign(quizzesTranslations, {
       skyline: 'ಸ್ಕೈಲೈನ್',
       baseline: 'ಬೇಸ್ಲೈನ್',
       'not-tagged':
-        'ವರ್ಗವು ಯಾವುದೇ ಕೋರ್ಸ್ ಅನ್ನು ಹೊಂದಿಲ್ಲ ಅಥವಾ ಕೋರ್ಸ್ ಅನ್ನು ಮಾನ್ಯವಾದ ವಿಷಯ ಅಥವಾ ಮಾನದಂಡಗಳಿಗೆ ಟ್ಯಾಗ್ ಮಾಡಲಾಗಿಲ್ಲ.'
+        'ವರ್ಗವು ಯಾವುದೇ ಕೋರ್ಸ್ ಅನ್ನು ಹೊಂದಿಲ್ಲ ಅಥವಾ ಕೋರ್ಸ್ ಅನ್ನು ಮಾನ್ಯವಾದ ವಿಷಯ ಅಥವಾ ಮಾನದಂಡಗಳಿಗೆ ಟ್ಯಾಗ್ ಮಾಡಲಾಗಿಲ್ಲ.',
+        'show-compressed-chart': 'ಸಂಕುಚಿತ ಚಾರ್ಟ್ ತೋರಿಸಿ',
+      'show-expanded-chart': 'ವಿವರವಾದ ಚಾರ್ಟ್ ತೋರಿಸಿ'
     }
   },
   'gru-data-picker': {
@@ -1933,6 +1936,14 @@ export default Object.assign(quizzesTranslations, {
     'featured-description':
       'ವೈಶಿಷ್ಟ್ಯಗೊಳಿಸಿದ ಶಿಕ್ಷಣವನ್ನು ನವೀನ ಶಿಕ್ಷಕರು, ಪರಿಣತರು ಮತ್ತು ವಿಷಯ ತಜ್ಞರು ಪರಿಶೀಲಿಸಿದ್ದಾರೆ ಮತ್ತು ವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ತರಗತಿ ಕೊಠಡಿಗಳಲ್ಲಿ ಜಾರಿಗೊಳಿಸಲಾಗಿದೆ. ಕಲಿಕೆ ಮತ್ತು ವಿದ್ಯಾರ್ಥಿ ನಿಶ್ಚಿತಾರ್ಥವನ್ನು ಹೆಚ್ಚಿಸಲು ವೈಯಕ್ತೀಕರಿಸಲು ಕೋರ್ಸ್ಗಳನ್ನು ಅನ್ವೇಷಿಸಿ, ರೀಮಿಕ್ಸ್ ಮಾಡಿ ಮತ್ತು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ! <a href=\'http://about.gooru.org/courses\' target=\'_blank\'> ಈ ಕೋರ್ಸ್ಗಳ ಅಭಿವೃದ್ಧಿ ಬಗ್ಗೆ </a> ಇನ್ನಷ್ಟು ತಿಳಿದುಕೊಳ್ಳಿ.'
   },
+  locateme: {
+    score: 'ಸ್ಕೋರ್',
+    timespent: 'ಸಮಯ ಕಳೆದರು',
+    view: 'ವೀಕ್ಷಿಸಿ',
+    attempt: 'ಪ್ರಯತ್ನಗಳು',
+    lastAcessesed: 'ಕೊನೆಯದಾಗಿ ಪ್ರವೇಶಿಸಲಾಗಿದೆ'
+  },
+
   'taxonomy.modals': {
     'gru-domain-picker': {
       browseSelectorText: 'ಯಾವ ಘಟಕವು ಈ ಘಟಕವನ್ನು ಒಳಗೊಂಡಿದೆ?',
@@ -2583,7 +2594,12 @@ export default Object.assign(quizzesTranslations, {
     },
     'competency-report': {
       title: 'ಸ್ಪರ್ಧಾತ್ಮಕ ವರದಿ',
-      'no-subject': 'ವಿಷಯ ನಿಗದಿಪಡಿಸಲಾಗಿಲ್ಲ'
+      'no-subject': 'ವಿಷಯ ನಿಗದಿಪಡಿಸಲಾಗಿಲ್ಲ',
+      prerequisites: 'ಪೂರ್ವಾಪೇಕ್ಷಿತಗಳು',
+      'signature-assessments': 'Signature ಮೌಲ್ಯಮಾಪನಗಳು',
+      'signature-collections': 'Signature ಸಂಗ್ರಹಣೆಗಳು',
+      'show-global-data': 'ಜಾಗತಿಕ ಡೇಟಾವನ್ನು ತೋರಿಸಿ',
+      'show-student-data': 'ವಿದ್ಯಾರ್ಥಿ ಡೇಟಾವನ್ನು ತೋರಿಸಿ'
     },
     'domain-report': 'ಡೊಮೇನ್ ವರದಿ'
   },
