@@ -78,3 +78,78 @@
 .popover {
   z-index: 99999;
 }
+
+.network-progress-indicator {
+  width: 100%;
+  height: 2px;
+  -webkit-animation: network-progress-indicator 2s infinite; /* Safari 4.0 - 8.0 */
+  animation: network-progress-indicator 2s infinite;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes network-progress-indicator {
+  0% {
+    top: 0px;
+    left: 0px;
+    width: 25%;
+    background: red;
+  }
+  25% {
+    top: 0px;
+    left: 0px;
+    width: 50%;
+    background: orange;
+  }
+  50% {
+    top: 0px;
+    left: 0px;
+    width: 75%;
+    background: gold;
+  }
+  75% {
+    top: 0px;
+    left: 0px;
+    width: 90%;
+    background: lightgreen;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background: darkgreen;
+  }
+}
+
+/* Standard syntax */
+@keyframes network-progress-indicator {
+  0% {
+    top: 0px;
+    left: 0px;
+    width: 25%;
+    background: red;
+  }
+  25% {
+    top: 0px;
+    left: 0px;
+    width: 50%;
+    background: orange;
+  }
+  50% {
+    top: 0px;
+    left: 0px;
+    width: 75%;
+    background: gold;
+  }
+  75% {
+    top: 0px;
+    left: 0px;
+    width: 90%;
+    background: lightgreen;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background: darkgreen;
+  }
+}
