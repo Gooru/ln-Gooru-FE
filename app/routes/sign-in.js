@@ -32,7 +32,7 @@ export default Ember.Route.extend(PublicRouteMixin, {
     let route = this;
     let nonce = transition.queryParams.nonce;
     let session = this.get('session');
-    session.authenticateAsAnonymous(nonce).then(function() {
+    return session.authenticateAsAnonymous(nonce).then(function() {
       const applicationController = route.controllerFor('application');
       return Ember.RSVP.all([applicationController.setupTenant()]);
     });
