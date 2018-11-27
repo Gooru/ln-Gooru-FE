@@ -89,6 +89,8 @@ $box-shadow: 1px -1px;
 @import "controllers/teacher/class/quick-start";
 @import "controllers/goals/manage";
 @import "controllers/student-independent-learning/learning-base";
+@import "controllers/not-found";
+
 // TODO: update these components so they follow the naming conventions
 @import "components/app-dropdown";
 @import "components/standard-dropdown";

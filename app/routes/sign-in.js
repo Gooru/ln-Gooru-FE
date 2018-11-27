@@ -6,6 +6,13 @@ export default Ember.Route.extend(PublicRouteMixin, {
   // Dependencies
 
   /**
+   * The session service.
+   * @property session
+   * @readOnly
+   */
+  session: Ember.inject.service('session'),
+
+  /**
    * @requires service:notifications
    */
   notifications: Ember.inject.service(),
@@ -19,6 +26,16 @@ export default Ember.Route.extend(PublicRouteMixin, {
   // Methods
   model: function(params) {
     return params;
+  },
+
+  beforeModel(transition) {
+    let route = this;
+    let nonce = transition.queryParams.nonce;
+    let session = this.get('session');
+    session.authenticateAsAnonymous(nonce).then(function() {
+      const applicationController = route.controllerFor('application');
+      return Ember.RSVP.all([applicationController.setupTenant()]);
+    });
   },
 
   /**

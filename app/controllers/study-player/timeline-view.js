@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
   subjectCode: null,
   isSysEvent: 1,
 
-  offsetlimit: 1,
+  offsetlimit: -1,
 
   mileStone: Ember.computed(function() {
     return {

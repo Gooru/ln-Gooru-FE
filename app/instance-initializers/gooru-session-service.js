@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import Env from 'gooru-web/config/environment';
 
 /**
  * Initialize session service
@@ -56,6 +57,16 @@ export function initialize(application) {
     tenantId: Ember.computed.alias('data.authenticated.tenant.tenantId'),
 
     /**
+     * Property used to identify client is gooru or not
+     * @return {Boolean}
+     */
+    isGooruClientId: Ember.computed('tenantId', function() {
+      let clientId = Env['API-3.0'].clientId;
+      let tenantId = this.get('tenantId');
+      return clientId === tenantId;
+    }),
+
+    /**
      * @property {string} session partner id
      */
     partnerId: Ember.computed.alias('data.authenticated.partnerId'),
@@ -64,9 +75,10 @@ export function initialize(application) {
      * This method authenticates using the default authenticator for an anonymous user
      * @returns {*|Ember.RSVP.Promise}
      */
-    authenticateAsAnonymous: function() {
+    authenticateAsAnonymous: function(nonce) {
       return this.authenticate('authenticator:auth-api-3', {
-        isAnonymous: true
+        isAnonymous: true,
+        nonce: nonce
       });
     },
 

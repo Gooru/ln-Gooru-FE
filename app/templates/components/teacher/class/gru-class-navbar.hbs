@@ -1,5 +1,9 @@
 <div class="header-panel" {{action 'closeNotificationList'}}>
-  <div class="nav-body {{if class.isArchived 'archived-class'}}">
+  {{#if session.networkStatus}}
+    <div class="row-fluid network-progress-indicator">
+    </div>
+  {{/if}}
+  <div class="nav-body">
     <div class="app-brand">
       {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
     </div>
