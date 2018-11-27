@@ -63,7 +63,7 @@ export function initialize(application) {
     isGooruClientId: Ember.computed('tenantId', function() {
       let clientId = Env['API-3.0'].clientId;
       let tenantId = this.get('tenantId');
-      return clientId === tenantId;
+      return tenantId ? clientId === tenantId : true;
     }),
 
     /**
