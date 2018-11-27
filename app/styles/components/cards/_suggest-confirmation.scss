@@ -157,8 +157,10 @@
     }
 
     .suggestion-profile-list {
-      text-align: center;
       height: 27px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       .popover-content {
         .suggestion-profile-details-popover {

@@ -203,16 +203,21 @@ export default Ember.Controller.extend({
    */
   isChecked: false,
 
-
   /**
    * @property {Boolean} isShowNavigatorLanding
    */
-  isShowNavigatorLanding: Ember.computed('studentClassController.isShowNavigatorLanding','demo', function() {
-    let controller = this;
-    let isShowNavigatorLanding = controller.get('studentClassController.isShowNavigatorLanding');
-    let isDemoClass = controller.get('demo');
-    return isShowNavigatorLanding || isDemoClass;
-  }),
+  isShowNavigatorLanding: Ember.computed(
+    'studentClassController.isShowNavigatorLanding',
+    'demo',
+    function() {
+      let controller = this;
+      let isShowNavigatorLanding = controller.get(
+        'studentClassController.isShowNavigatorLanding'
+      );
+      let isDemoClass = controller.get('demo');
+      return isShowNavigatorLanding || isDemoClass;
+    }
+  ),
 
   /**
    * @type {Boolean}

@@ -249,7 +249,7 @@
 
         .report-performance-header {
           display: inline-grid;
-          grid-template-columns: 45% 15% 30% 10%;
+          grid-template-columns: 40% 20% 40%;
           width: 100%;
           align-items: center;
           text-transform: uppercase;
@@ -268,7 +268,7 @@
 
         .report-performance-list {
           display: inline-grid;
-          grid-template-columns: 50% 10% 30% 10%;
+          grid-template-columns: 40% 20% 40%;
           width: 100%;
           align-items: center;
           color: #666;
@@ -279,6 +279,7 @@
             display: flex;
             align-items: center;
             cursor: pointer;
+
             &.not-started {
               pointer-events: none;
             }
@@ -292,8 +293,8 @@
               background-position: 15px;
             }
 
-            .assessment-icon,
-            .assessment-external-icon {
+            .assessment-external-icon,
+            .assessment-icon {
               background-image: url("../assets/gooru/images/assessment-gray.svg");
               width: 50px;
               height: 40px;
@@ -311,6 +312,7 @@
                 $lines-to-show: 1
               );
             }
+
             .explore {
               padding-right: 20px;
             }

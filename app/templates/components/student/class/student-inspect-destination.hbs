@@ -3,7 +3,7 @@
     {{proficiency.student-inspect-competency-chart competencyStatus=competencyStatus isProficiency=isProficiency title=activeGrade.grade route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode taxonomyGrades=taxonomyGrades activeGrade=activeGrade}}
   </div>
   {{#if (eq type "route")}}
-    <div class="course-container">
+    <div class="course-container hidden-xs">
       {{#if (and isRoute0Pending isRoute0)}}
         <div class="pre-study-title">
           {{t "student-first-experience.preStudyTitle" title=activeGrade.grade}}
@@ -46,7 +46,7 @@
       </div>
     </div>
     {{else if (eq type "destination")}}
-    <div class="grade-data-container">
+    <div class="grade-data-container hidden-xs">
       <div class="grade-title">
         {{activeGrade.grade}}
       </div>
@@ -89,4 +89,24 @@
       </div>
     </div>
   {{/if}}
+  <div class="hidden visible-xs">
+    {{#unless (eq type "proficiency") }}
+      {{student.class.student-inspect-destination-xs
+        type=type
+        onMoveNext="onMoveNext"
+        courseData=courseData
+        classId=classId
+        courseId=courseId
+        grade=activeGrade
+        isRoute0=isRoute0
+        isRoute0Pending=isRoute0Pending
+        onRoute0Accept="onRoute0Accept"
+        onToggleRoute0View="onToggleRoute0View"
+        onRoute0Reject="onRoute0Reject"
+        route0Contents=route0Contents
+        index=index
+        classData=classData
+      }}
+    {{/unless}}
+  </div>
 </div>

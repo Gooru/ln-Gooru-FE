@@ -1,4 +1,10 @@
 .application {
+  /*Hide tooltip for mobile and tablets*/
+  @media only screen and (max-width: $screen-1024) {
+    .tooltip {
+      visibility: hidden;
+    }
+  }
   overflow-x: hidden;
 
   &.no-vertical-scroll {

@@ -18,10 +18,6 @@
         </div>
       </div>
     </div>
-    <div class="pullup-close pull-right" {{action 'onPullUpClose'}}>
-      {{gru-icon name='close'}}
-      <span>Close</span>
-    </div>
     {{#if (and (not isStudent) showSuggestion)}}
       <div class="teacher-suggestion">
         <div class="suggestion-count-container" {{action 'onOpenSuggestionPullup'}}>
@@ -33,6 +29,10 @@
         </div>
       </div>
     {{/if}}
+    <div class="pullup-close" {{action 'onPullUpClose'}}>
+      {{gru-icon name='close'}}
+      <span>Close</span>
+    </div>
   </div>
   <div class="report-body">
     <div class="external-assessment-container">

@@ -262,7 +262,8 @@
 
     .gru-standard-card {
       .panel .panel-footer {
-        padding: 0px !important;
+        padding: 0 !important;
+
         .options {
           .preview-btn {
             height: 44px;
@@ -270,14 +271,6 @@
           }
         }
       }
-    }
-  }
-  @media screen and (min-width: $screen-in-1024) and (max-width: $screen-lg) {
-    .course-content {
-      padding-left: 0;
-      display: grid;
-      grid-template-columns: auto auto;
-      justify-content: center;
     }
   }
 }

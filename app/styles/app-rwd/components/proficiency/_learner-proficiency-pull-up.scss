@@ -4,10 +4,12 @@
     .proficiency-pull-up {
       .body {
         padding: 0;
-        .proficiency-tags, .time-series-container {
+        .proficiency-tags,
+        .time-series-container {
           width: 100%;
           margin: 0;
-          .proficiency-legends, .monthly-time-series-chart {
+          .proficiency-legends,
+          .monthly-time-series-chart {
             width: max-content;
             margin: 0 auto;
           }
@@ -16,7 +18,9 @@
             .proficiency-legends {
               width: 100%;
               .legend {
-                .box, .box-skyline, .box-baseline {
+                .box,
+                .box-skyline,
+                .box-baseline {
                   margin-right: 5px;
                 }
                 margin-right: 10px;
@@ -35,7 +39,8 @@
                   height: 10px;
                   margin-right: 5px;
                 }
-                .box-skyline, .box-baseline {
+                .box-skyline,
+                .box-baseline {
                   width: 10px;
                   height: 6px;
                   margin-top: 2px;

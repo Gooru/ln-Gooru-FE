@@ -18,12 +18,10 @@
           <span class="{{if (gt item.questionCount 0) '' 'invisible'}}" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span class="{{if (gt item.questionCount 0) '' 'invisible'}} ">{{item.questionCount}}</span>
         {{/if}}
       {{/if}}
-       {{#if (eq item.collectionType 'assessment-external')}}
-      <img src="/assets/gooru/share.png"
-     srcset="/assets/gooru/share@2x.png 2x,
-             /assets/gooru/share@3x.png 3x"
-     class="share">
-     {{/if}}
+      {{#if (eq item.collectionType 'assessment-external')}}
+        <img src="/assets/gooru/share.png" srcset="/assets/gooru/share@2x.png 2x,
+             /assets/gooru/share@3x.png 3x" class="share">
+      {{/if}}
     </div>
     <div class="play-btn">
       {{#if visible}}
@@ -47,7 +45,7 @@
         {{gru-icon name='play_arrow'}}
       {{/if}}
       {{#if (or collectionPerformanceSummary.score collectionPerformanceSummary.timeSpent)}}
-        <span {{action 'studentDcaReport'  item collectionPerformanceSummary}} class='visibility-panel pull-right reporticon item-not-visible hidden-xs pointer' data-toggle="tooltip" data-placement="auto">{{gru-icon name='library_books'}}</span>
+        <span {{action 'studentDcaReport'  item collectionPerformanceSummary}} class='visibility-panel pull-right reporticon item-not-visible pointer' data-toggle="tooltip" data-placement="auto">{{gru-icon name='library_books'}}</span>
       {{/if}}
     </div>
 

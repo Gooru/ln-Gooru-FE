@@ -112,8 +112,10 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       };
       if (item === 'report') {
         route.transitionTo('student.class.course-map', classId, queryParams);
-      } else if(item === 'demo') {
-        route.transitionTo('student.class.course-map', classId, {queryParams: {demo: true}});
+      } else if (item === 'demo') {
+        route.transitionTo('student.class.course-map', classId, {
+          queryParams: { demo: true }
+        });
       } else if (item === 'profile') {
         route.transitionTo('student.class.profile', classId);
       } else if (item === 'course-map') {
