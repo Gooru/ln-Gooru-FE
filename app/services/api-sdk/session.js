@@ -86,5 +86,13 @@ export default Ember.Service.extend({
     var providedAt = this.get('session.userData.providedAt');
     var time = now - (providedAt || 0);
     return time >= TOKEN_EXPIRATION_TIME;
+  },
+
+  /**
+   * Updates a session networkStatus
+   */
+  updateNetworkStatus: function(status) {
+    const session = this.get('session');
+    session.set('networkStatus', status);
   }
 });
