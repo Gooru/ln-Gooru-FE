@@ -76,3 +76,83 @@
 		}
 	}
 }
+
+@media screen and (max-width: $screen-568) {
+	.player-external {
+		.app-container {
+		.external-player-container {
+			.player-container {
+					.gru-external-assessment-page {
+						display: flex;
+						.external-assessment-landing-page {
+							margin: auto;
+								.external-assessment-card {
+									width: calc(100% - 40px);
+								  position: unset;
+									margin: 0 auto;
+									padding: 20px;
+									.header {
+										.title {
+											font-size: 22px;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	@media screen and (min-width: $screen-568) {
+		.player-external {
+			.app-container {
+			  min-height: 370px;
+			.external-player-container {
+				.player-container {
+					.gru-external-assessment-page {
+						display: flex;
+						height: 100vh;
+						.external-assessment-landing-page {
+							margin: auto;
+							.external-assessment-card {
+						  	width: 499px;
+								position: unset;
+								margin: 0 auto;
+								padding: 30px;
+								.body {
+									padding-top: 0px;
+								}
+								.footer {
+								   padding-top: 0px;
+								}
+								.header {
+									.title {
+										font-size: 22px;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+@media screen and (max-width: $screen-320) {
+	.player-external {
+		.app-container {
+		.external-player-container {
+			.player-container {
+					.gru-external-assessment-page {
+						.external-assessment-landing-page {
+							.external-assessment-card {
+									margin-left: 5px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
