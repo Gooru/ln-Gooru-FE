@@ -18,6 +18,15 @@
           font-weight: bold;
           color: $white;
           justify-self: right;
+          display: grid;
+          grid-template-columns: auto 30px;
+          justify-content: center;
+          align-items: center;
+          .toggle-view {
+            display: grid;
+            justify-content: right;
+            cursor: pointer;
+          }
         }
       }
       .competency-coverage-container {
