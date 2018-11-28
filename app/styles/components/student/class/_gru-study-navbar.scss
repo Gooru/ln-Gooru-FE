@@ -193,7 +193,7 @@
           .performance,
           .performance-summary {
             .score {
-              font-size: 16px;
+              font-size: 12px;
             }
 
             .label {
@@ -228,6 +228,12 @@
         .performance-chart {
           .charts.gru-performance-chart {
             min-width: 40px !important;
+
+            .container-box {
+              .percentage {
+                font-size: 14px;
+              }
+            }
           }
         }
       }
