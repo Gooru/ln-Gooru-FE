@@ -238,7 +238,9 @@ export default Ember.Component.extend(AccordionMixin, {
   }),
 
   didRender() {
-    this.sendAction('onSelectItem');
+    let component = this;
+    component.sendAction('onSelectItem');
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
   },
 
   // -------------------------------------------------------------------------
