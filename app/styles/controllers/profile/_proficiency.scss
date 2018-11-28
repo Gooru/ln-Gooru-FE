@@ -9,6 +9,18 @@
     .dropdown-menu > li {
       padding: 3px 25px;
     }
+    .dropdown {
+      .dropbtn {
+        background-color: #f1f3f7;
+        color: black;
+        padding: 3px;
+        font-size: 16px;
+        text-transform: capitalize;
+        border: none;
+        margin-top: 8px;
+        display: block !important;
+      }
+    }
     .label {
       font-size: 17px;
       font-weight: bold;
@@ -62,6 +74,8 @@
     .dropdown-menu > li {
         font-weight: bold;
         text-align: left;
+        white-space: nowrap;
+        cursor: pointer;
     }
     .dropdown-menu > li.active {
       background-color: $gray-light;
