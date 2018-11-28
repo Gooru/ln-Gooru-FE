@@ -92,7 +92,12 @@ export default Ember.Service.extend({
    * Updates a session networkStatus
    */
   updateNetworkStatus: function(status) {
-    const session = this.get('session');
-    session.set('networkStatus', status);
+    let service = this;
+    Ember.run(function() {
+      const session = service.get('session');
+      if (session && session.get('token')) {
+        session.set('networkStatus', status);
+      }
+    });
   }
 });

@@ -83,6 +83,10 @@ test('Layout', function(assert) {
     .gru-class-navbar .header-panel .nav-body .app-brand a {
       background-image: url("http://gooru.org/welcome/images/GooruLogo.png");
     }
+
+    .controller.sign-in .sign-in-wrapper .sign-in-tenant-header .tenant-logo {
+      background-image: url("http://gooru.org/welcome/images/GooruLogo.png");
+    }
 `;
   assert.equal($style.text(), expedtedStyle, 'Wrong style body');
 });
