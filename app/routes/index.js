@@ -16,8 +16,7 @@ export default Ember.Route.extend(PublicRouteMixin, {
   profileService: Ember.inject.service('api-sdk/profile'),
 
   queryParams: {
-    access_token: {},
-    nonce: {}
+    access_token: {}
   },
 
   beforeModel(transition) {

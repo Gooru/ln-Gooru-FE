@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Dependencies
 
-  queryParams: ['sessionEnds', 'redirectURL'],
+  queryParams: ['sessionEnds', 'redirectURL', 'nonce'],
 
   /**
    * @property {Service} Session
