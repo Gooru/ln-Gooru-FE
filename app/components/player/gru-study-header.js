@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import {
   ANONYMOUS_COLOR,
-  STUDY_PLAYER_BAR_COLOR,
-  GRU_FEATURE_FLAG
+  STUDY_PLAYER_BAR_COLOR
 } from 'gooru-web/config/config';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 /**
  * Study Player header
@@ -15,7 +15,7 @@ import {
  * @see controllers/study-player.js
  * @augments ember/Component
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -39,8 +39,13 @@ export default Ember.Component.extend({
   sourceType: null,
 
   isFeatureEnabled: Ember.computed(function() {
-    let feature = 'chronoView';
-    return GRU_FEATURE_FLAG[feature];
+    let featureEnabled = false;
+    let GRU_FEATURE_FLAG = this.get('configuration.GRU_FEATURE_FLAG'),
+      feature = 'chronoView';
+    if (GRU_FEATURE_FLAG) {
+      featureEnabled = GRU_FEATURE_FLAG[feature];
+    }
+    return featureEnabled;
   }),
   // -------------------------------------------------------------------------
   // Attributes
