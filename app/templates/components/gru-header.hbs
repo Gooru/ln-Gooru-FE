@@ -66,9 +66,11 @@
               <li class="navbar-nav-list visible-md visible-lg">
                 {{#link-to 'sign-in' class="btn btn-info sign-in-button" tagName='button' }} {{t "common.login"}} {{/link-to}}
               </li>
-              <li class="navbar-nav-list visible-md visible-lg no-hover">
-                {{#link-to 'sign-up' class="btn btn-primary sign-up-button" tagName='button' }} {{t "common.signUp"}} {{/link-to}}
-              </li>
+              {{#if session.isGooruClientId}}
+                <li class="navbar-nav-list visible-md visible-lg no-hover">
+                  {{#link-to 'sign-up' class="btn btn-primary sign-up-button" tagName='button' }} {{t "common.signUp"}} {{/link-to}}
+                </li>
+              {{/if}}
               <li class="navbar-nav-list hidden-md hidden-lg dropdown xs-design">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true">{{gru-icon name='menu'}}</a>
                 <ul class="dropdown-menu" role="menu">
@@ -81,9 +83,11 @@
                   <li class="navbar-nav-list">
                     {{#link-to 'sign-in' class="navbar-link sign-in-link" }} {{t "common.login"}} {{/link-to}}
                   </li>
-                  <li class="navbar-nav-list">
-                    {{#link-to 'sign-up' class="navbar-link sign-up-link" }} {{t "common.signUp"}} {{/link-to}}
-                  </li>
+                  {{#if session.isGooruClientId}}
+                    <li class="navbar-nav-list">
+                      {{#link-to 'sign-up' class="navbar-link sign-up-link" }} {{t "common.signUp"}} {{/link-to}}
+                    </li>
+                  {{/if}}
                 </ul>
               </li>
             {{else}}

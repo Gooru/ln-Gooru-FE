@@ -411,11 +411,7 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
           // Required to get list of classes after login
           function() {
             route.get('controller').set('profile', null);
-            route.transitionTo('index', {
-              queryParams: {
-                nonce: undefined
-              }
-            });
+            route.transitionTo('index');
           }
         );
       }
