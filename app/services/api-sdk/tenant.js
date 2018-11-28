@@ -38,14 +38,21 @@ export default Ember.Service.extend({
   findTenantById: function(id) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve) {
-      service.get('tenantAdapter').findTenantById(id).then(
-        function(response) {
-          resolve(service.get('tenantSerializer').normalizeTenant(response));
-        },
-        function() {
-          resolve(undefined); //ignore if the api call fails
-        }
-      );
+      return service
+        .get('tenantAdapter')
+        .findTenantById(id)
+        .then(
+          function(response) {
+            Ember.run(() => {
+              resolve(
+                service.get('tenantSerializer').normalizeTenant(response)
+              );
+            });
+          },
+          function() {
+            resolve(undefined); //ignore if the api call fails
+          }
+        );
     });
   },
 
