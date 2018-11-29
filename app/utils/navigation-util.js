@@ -46,7 +46,7 @@ export function currentLocationToMapContext(locationdatModeldata) {
       data.pathType === 'system'
         ? data.collectionType === 'collection'
           ? 'signature-collection'
-          : 'signature-assesment'
+          : 'signature-assessment'
         : null, // inference based on pathType & collectionType
     itemId: data.collectionId,
     status: data.status,
