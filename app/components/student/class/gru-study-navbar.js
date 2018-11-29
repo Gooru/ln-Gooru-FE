@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import { GRU_FEATURE_FLAG } from 'gooru-web/config/config';
-export default Ember.Component.extend({
+import SessionMixin from 'gooru-web/mixins/session';
+
+export default Ember.Component.extend(SessionMixin, {
   classNames: ['gru-study-navbar'],
 
   classNameBindings: ['isStudentLanding:student-landing'],

@@ -107,6 +107,8 @@ export default Ember.Component.extend({
       Ember.$('body.application').addClass('no-vertical-scroll');
       let component = this;
       const right = 650 - component.$().width();
+      //Add class for mobile responsive
+      component.$().addClass('gru-pull-out-xs');
       component.$().removeClass('gru-pull-out-hidden');
       component.$().animate(
         {
@@ -126,6 +128,7 @@ export default Ember.Component.extend({
         },
         {
           complete: function() {
+            component.$().removeClass('gru-pull-out-xs');
             component.$().addClass('gru-pull-out-hidden');
             Ember.$('body.application').removeClass('no-vertical-scroll');
           }

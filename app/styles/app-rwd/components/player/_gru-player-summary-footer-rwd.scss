@@ -1,8 +1,10 @@
 .gru-player-summary-footer {
-  @media only screen and (max-width: $sm-width-max) {
+  @media only screen and (max-width: $screen-780) {
     .nav-player-container {
       grid-template-columns: 50px 1fr auto 50px;
-
+      .player-container {
+          width: calc(100vw - 150px);
+        }
       .prev {
         width: 50px;
 

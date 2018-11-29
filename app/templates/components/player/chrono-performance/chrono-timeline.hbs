@@ -38,7 +38,7 @@
 
 <ul class='cards-display carousel slide' data-ride="carousel" data-interval="false">
     {{#each displayCards.dummyleft as |card index|}}
-        <li class=" dummy-timecard-left"  style='transform :scale({{card.scale}}); Z-INDEX: {{ card.zIndex}} ; margin-right:-10px;' >
+        <li class=" dummy-timecard-left"  style='transform :scale({{card.scale}}); Z-INDEX: {{ card.zIndex}} ;' >
                 {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask-mid'}}            
         </li>
     {{/each}}
@@ -49,7 +49,7 @@
         </li>
     {{/each}}
     {{#each displayCards.center as |card|}}
-        <li class ='c-{{card.sessionId}}' {{action 'showCard' card }}>
+        <li class ='c-{{card.sessionId}}' style='cursor:pointer;' {{action 'onClickLeft' }}>
             <div class='selecthighlight'></div>
             {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask'}}
         </li>
@@ -62,7 +62,7 @@
     
     
     {{#each displayCards.dummyright as |card index|}}
-        <li class="dummy-timecard-right" style='transform :scale({{card.scale}});Z-INDEX:{{card.zIndex}};margin-left:-10px;'>
+        <li class="dummy-timecard-right" style='transform :scale({{card.scale}});Z-INDEX:{{card.zIndex}};'>
                 {{player/chrono-performance/chrono-timecard timeSession=card cardClass='cardmask-mid'}}
         </li>
     {{/each}}

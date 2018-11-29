@@ -1,0 +1,229 @@
+.student-inspect-destination-xs {
+  position: fixed;
+  top: 90%;
+  z-index: 1031;
+  width: 100%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  color: #37434d;
+
+  .backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    cursor: pointer;
+    opacity: 0.8;
+    background-color: #000;
+  }
+
+  .pull-up-container {
+    background: #fff;
+    max-height: 90vh;
+    height: 90vh;
+    width: 100%;
+
+    .btn-container {
+      color: #fff;
+      align-items: center;
+      cursor: pointer;
+      justify-content: center;
+      box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
+      display: grid;
+      right: 20px;
+      top: -15px;
+      position: absolute;
+      background-color: #4a8cdb;
+      width: 57px;
+      height: 57px;
+      border-radius: 45px;
+    }
+
+    .pull-up-header {
+      box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      height: 70px;
+      width: 100%;
+
+      .grade-title {
+        width: 200px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #4990e2;
+      }
+
+      .counts {
+        width: 62px;
+        height: 16px;
+        object-fit: contain;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: left;
+        color: rgba(0, 0, 0, 0.87);
+      }
+    }
+
+    .pull-up-content {
+      height: 100%;
+      width: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      .destination-container {
+        overflow-y: auto;
+        padding: 10px;
+        max-height: calc(100% - 100px);
+
+        .grade-description {
+          margin-top: 10px;
+          color: #37424b;
+        }
+      }
+
+      .assigned-course-title {
+        text-align: center;
+        color: #535e67;
+        font-size: 20px;
+      }
+
+      .route0-container {
+        margin: 20px 5px 5px;
+        box-shadow: 0 0 6px 6px #ef8f2f;
+        background-color: $white;
+        margin-left: 4px;
+
+        .route0-comment {
+          display: grid;
+          grid-template-columns: 85px auto;
+          align-items: center;
+          padding-bottom: 8px;
+          padding-top: 8px;
+          cursor: pointer;
+
+          .suggestion-icon {
+            align-items: center;
+
+            i {
+              font-size: 50px;
+              margin-left: 15px;
+            }
+            color: $orange-400;
+          }
+
+          .suggestion-note {
+            margin: 0 15px;
+            font-size: 16px;
+            color: #37424b;
+            line-height: 19px;
+          }
+        }
+
+        .route0-accordion-container {
+          border-top: 1px solid #d7d7d7;
+
+          .gru-accordion-course {
+            padding-top: 0;
+            border-bottom: 1px solid #d7d7d7;
+
+            .gru-accordion-unit {
+              .unit {
+                padding-left: 7px !important;
+
+                .panel-title {
+                  width: 100%;
+
+                  .title {
+                    max-width: 100%;
+                  }
+                }
+              }
+            }
+
+            .gru-accordion-lesson {
+              .panel-title {
+                width: 100%;
+
+                .title {
+                  max-width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .route0-action {
+        height: 65px;
+        grid-gap: 15px;
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        padding-bottom: 8px;
+        padding-top: 8px;
+        justify-content: end;
+
+        .accept {
+          background-color: $orange-400;
+          width: 100px;
+          height: 30px;
+          border-radius: 45px;
+          display: grid;
+          box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
+          color: $white;
+          grid-template-columns: 30px auto;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+
+          i {
+            background-image: url("gooru/images/baseline-add.svg");
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+            background-size: 20px 20px;
+            display: block;
+            margin-top: 2px;
+          }
+        }
+
+        .ignore {
+          width: 86px;
+          height: 30px;
+          display: grid;
+          grid-template-columns: 20px auto;
+          align-items: center;
+          justify-content: space-evenly;
+          border-radius: 45px;
+          background-color: #b8bfc4;
+          box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
+          color: $white;
+          line-height: 30px;
+          text-align: center;
+          cursor: pointer;
+
+          i {
+            background-image: url("gooru/images/baseline-close.svg");
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+            background-size: 20px 20px;
+            display: block;
+            margin-top: 2px;
+          }
+        }
+      }
+
+      .course-map-accordion-container {
+        max-height: calc(100% - 100px);
+        overflow-y: auto;
+        height: 100%;
+        margin: auto;
+      }
+    }
+  }
+}

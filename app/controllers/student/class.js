@@ -134,7 +134,7 @@ export default Ember.Controller.extend(ConfigurationMixin, {
         ? setting['course.premium'] && setting['course.premium'] === true
         : false;
       let isGradeAdded = classData.get('grade');
-      return (isPremiumCourse && !currentLocation && isGradeAdded);
+      return isPremiumCourse && !currentLocation && isGradeAdded;
     }
   ),
 
