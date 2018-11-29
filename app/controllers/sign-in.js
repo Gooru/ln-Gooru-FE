@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import User from 'gooru-web/models/sign-in/sign-in';
 import Env from 'gooru-web/config/environment';
-import { getParameterByName } from 'gooru-web/utils/utils';
 
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
@@ -71,9 +70,13 @@ export default Ember.Controller.extend({
                   },
                   function() {
                     controller.get('notifications').warning(errorMessage);
+                    let anonymousSessionData = controller.get(
+                      'anonymousSessionData'
+                    );
                     // Authenticate as anonymous if it fails to mantain session
-                    let nonce = getParameterByName('nonce');
-                    controller.get('session').authenticateAsAnonymous(nonce);
+                    controller
+                      .get('session')
+                      .authenticateAsAnonymousWithData(anonymousSessionData);
                   }
                 );
             }
@@ -137,5 +140,11 @@ export default Ember.Controller.extend({
   /**
    * Computed property to identify gooru or tenant login.
    */
-  isGooruLogin: Ember.computed.alias('session.isGooruClientId')
+  isGooruLogin: Ember.computed.alias('session.isGooruClientId'),
+
+  /**
+   * Maintains the state of anonymous session data.
+   * @type {Session}
+   */
+  anonymousSessionData: null
 });

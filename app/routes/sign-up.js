@@ -23,6 +23,15 @@ export default Ember.Route.extend({
   beforeModel: function() {
     if (!this.get('session.isAnonymous')) {
       this.transitionTo('index');
+    } else {
+      let route = this;
+      return route
+        .get('session')
+        .authenticateAsAnonymous()
+        .then(() => {
+          let applicationController = route.controllerFor('application');
+          return Ember.RSVP.all([applicationController.setupTenant()]);
+        });
     }
   },
 
