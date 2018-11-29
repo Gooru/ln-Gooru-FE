@@ -185,6 +185,7 @@ $box-shadow: 1px -1px;
 @import "components/charts/report-bar-chart";
 @import "components/charts/domain-competency-chart";
 @import "components/charts/student-domain-performance";
+@import "components/charts/proficiency-view";
 
 @import "components/class/gru-class-navigation";
 @import "components/class/gru-class-navbar";
@@ -438,3 +439,4 @@ $box-shadow: 1px -1px;
 // Inspect Competency
 @import "components/proficiency/inspect/student-domain-performance";
 @import "components/proficiency/inspect/student-domain-competency-performance";
+@import "components/proficiency/inspect/student-class-proficiency";

@@ -7,6 +7,6 @@ export default Ember.Route.extend({
   },
 
   resetController(controller) {
-    controller.set('domainLevelSummary', null);
+    controller.resetProperties();
   }
 });

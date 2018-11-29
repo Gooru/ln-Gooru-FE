@@ -1,12 +1,12 @@
-{{#if isLoading}}
-  {{three-bounce-spinner}}
-{{/if}}
 <div class="performance-container">
   <div class="performance-header-container">
     <div class="proficiency-info">
       <div class="subject">{{t 'teacher-landing.class.students-tab.proficiency-in'}} {{subjectFramework}}</div>
       <div class="students-count">
-        {{classMembers.length}} {{t 'common.students'}} | {{domainCoverageCount.length}} {{t 'common.domains'}} / {{totalCompetencies}} {{t 'common.competencies'}}
+        <div class="count-container">
+            {{numberOfStudents}} {{t 'common.students'}} | {{domainCoverageCount.length}} {{t 'common.domains'}} / {{totalCompetencies}} {{t 'common.competencies'}}
+        </div>
+        <div class="toggle-view" {{action "onClickClassView"}}>{{gru-icon name="view_module"}}</div>
       </div>
     </div>
     <div class="competency-coverage-container">

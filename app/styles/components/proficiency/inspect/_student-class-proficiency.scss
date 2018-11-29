@@ -1,0 +1,92 @@
+.inspect.student-class-proficiency {
+  background-color: #36424b;
+  min-height: calc(100vh - 51px);
+  .class-proficiency-container {
+    .header-container {
+      padding: 0 50px;
+      .proficiency-info {
+        display: grid;
+        grid-template-columns: auto auto;
+        border-bottom: 1px dashed $white;
+        .subject {
+          font-size: 20px;
+          font-weight: bold;
+          color: $white;
+        }
+        .students-count {
+          font-size: 15px;
+          font-weight: bold;
+          color: $white;
+          justify-self: right;
+          display: grid;
+          justify-content: center;
+          align-items: center;
+          grid-template-columns: auto 30px;
+          .toggle-view {
+            display: grid;
+            justify-content: right;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .body-container {
+      padding: 10px 50px;
+      .proficiency-cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        .proficiency-card-container {
+          background-color: $white;
+          border-radius: 5px;
+          margin: 5px;
+          cursor: pointer;
+          .card-header {
+            margin: 10px;
+            border-bottom: 1px solid #979797;
+            display: grid;
+            grid-template-columns: 55px auto;
+            padding-bottom: 10px;
+            .thumbnail-container {
+              width: 47px;
+              height: 47px;
+              background-size: 47px 47px;
+              display: block;
+              border-radius: 50%;
+              border: none;
+            }
+            .student-name {
+              .first-name, .last-name {
+                text-transform: capitalize;
+                opacity: 0.9;
+                font-size: 13px;
+                color: #000000;
+              }
+            }
+          }
+          .card-body {
+            padding: 5px 10px;
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 481px) {
+      .header-container {
+        padding: 5px;
+        .proficiency-info {
+          .subject {
+            font-size: 16px;
+          }
+        }
+      }
+      .body-container {
+        padding: 5px;
+        .proficiency-cards-container {
+          .proficiency-card-container {
+            margin: 5px auto;
+          }
+        }
+      }
+    }
+  }
+}

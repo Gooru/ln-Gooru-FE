@@ -2729,7 +2729,8 @@ export default Object.assign(quizzesTranslations, {
       'signature-assessments': 'Signature Assessments',
       'signature-collections': 'Signature Collections',
       'show-global-data': 'Show Global Data',
-      'show-student-data': 'Show Student Data'
+      'show-student-data': 'Show Student Data',
+      'show-learning-map': 'Show Learning Map'
     },
     'domain-report': 'Domain Report'
   },

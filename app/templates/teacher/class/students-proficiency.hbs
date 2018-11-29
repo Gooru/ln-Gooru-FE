@@ -8,9 +8,36 @@
       {{/if}}
     {{else}}
       {{#if isShowCourseCompetencyReport}}
-        {{proficiency.inspect.student-domain-performance domainLevelSummary=domainLevelSummary classMembers=classMembers subjectBucket=subjectBucket onSelectDomain="onSelectDomain"}}
+        {{proficiency.inspect.student-domain-performance
+          studentsDomainPerformance=studentsDomainPerformance
+          domainCoverageCount=domainCoverageCount
+          courseCoverageCount=courseCoverageCount
+          totalCompetencies=totalCompetencies
+          subjectBucket=subjectBucket
+          numberOfStudents=numberOfStudents
+          subjectFramework=subjectFramework
+          onSelectDomain="onSelectDomain"
+          onClickClassView="onClickClassView"
+        }}
       {{else if isShowDomainCompetencyReport}}
-        {{proficiency.inspect.student-domain-competency-performance domainLevelSummary=domainLevelSummary classMembers=classMembers activeDomain=activeDomain onClickBack="onClickBack"}}
+        {{proficiency.inspect.student-domain-competency-performance
+          domainLevelSummary=domainLevelSummary
+          classMembers=classMembers
+          activeDomain=activeDomain
+          onClickBack="onClickBack"
+        }}
+      {{else if isShowClassProficiencyReport}}
+        {{proficiency.inspect.student-class-proficiency
+          studentsDomainPerformance=studentsDomainPerformance
+          class=class
+          course=course
+          subjectBucket=subjectBucket
+          domainCoverageCount=domainCoverageCount
+          totalCompetencies=totalCompetencies
+          subjectFramework=subjectFramework
+          maxNumberOfCompetencies=maxNumberOfCompetencies
+          onClickCourseCompetencyView="onClickCourseCompetencyView"
+        }}
       {{/if}}
     {{/unless}}
   {{else}}

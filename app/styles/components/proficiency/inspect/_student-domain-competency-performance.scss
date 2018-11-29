@@ -69,15 +69,19 @@
           width: 100%;
           top: 35%;
           .move-left, .move-right {
-            width: 70px;
+            width: 77px;
             height: 77px;
             position: absolute;
+            text-align: center;
             cursor: pointer;
             &:hover {
+              text-align: center;
+              border-radius: 50%;
               background-color: rgba(255, 255, 255 , 0.8);;
-              box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+              box-shadow: 0 0 0 1px rgba(0,0,0,0.04), 0 4px 8px 0 rgba(0,0,0,0.20);
               -webkit-transition: background-color 2s; /* Safari */
               transition: background-color 2s;
+              border: none;
             }
           }
           .move-left {
@@ -91,8 +95,6 @@
             opacity: 0.3;
           }
           i {
-            height: 100px;
-            width: 30px;
             font-size: 78px;
           }
         }
