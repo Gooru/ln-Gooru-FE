@@ -1,7 +1,6 @@
 .controller.profile {
   .user-proficiency {
     display: grid;
-
     .taxonomy-info {
       display: grid;
       .dropdown-content {
@@ -88,9 +87,6 @@
                   margin-right: 5px;
                 }
                 margin-right: 10px;
-                &.baseline {
-                  display: none;
-                }
               }
             }
           }
@@ -131,9 +127,6 @@
                 .title {
                   font-size: 11px;
                 }
-                &.baseline {
-                  display: none;
-                }
               }
             }
           }
@@ -147,8 +140,32 @@
         }
       }
     }
+    @media screen and (max-width: $screen-400) {
+      .panel.left-panel {
+        .panel-body.matrix {
+          .domain {
+            .proficiency-matrix {
+              .competency-chart-tab-container {
+                .competency-courses-chart {
+                  .matrix-chart-container {
+                    zoom: 0.6;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 
     @media screen and (max-width: $screen-xs) {
+      .proficiency-tags {
+        .proficiency-legends {
+          display: grid;
+          grid-template-columns: auto auto auto;
+          grid-gap: 10px;
+        }
+      }
       .panel.left-panel {
         .panel-body.matrix {
           .competency-chart-tab-container, .course-matrix-container {
