@@ -1,5 +1,51 @@
 .student.course-map {
   width: 100vw;
+  @media only screen and (max-width: $screen-sm - 1) {
+    .course-title {
+      font-family: PlayfairDisplay;
+      font-size: 20px;
+      font-weight: normal;
+      font-style: italic;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .assigned-course-title,
+    .pre-study-title {
+      color: $white;
+      margin: 10px;
+    }
+
+    .rescope-section {
+      .rescope-toggle {
+        .info {
+          span {
+            color: #fff;
+          }
+        }
+
+        .action {
+          span {
+            color: $white;
+          }
+        }
+      }
+
+      .custom-msg {
+        height: 100%;
+        width: 100%;
+
+        span {
+          i {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
 
   .assigned-course-title {
     margin-left: 10px;

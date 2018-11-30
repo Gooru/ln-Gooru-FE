@@ -454,6 +454,193 @@
         }
       }
     }
+
+    .header-container {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 80% 20%;
+
+      .report-container {
+        .report {
+          .charts.gru-performance-chart {
+            .container-box {
+              height: 51px;
+
+              .percentage {
+                margin-top: 10px;
+              }
+            }
+          }
+        }
+
+        .performance-summary {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+
+          .score {
+            margin: auto;
+            font-weight: 900;
+            font-size: 23px;
+            height: 35px;
+            line-height: 35px;
+          }
+        }
+      }
+
+      .nav-bar {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: calc(100% / 6);
+
+        .tab {
+          opacity: 0.3;
+
+          &.vactive {
+            border-left: 1px solid #fff;
+            opacity: 1;
+          }
+        }
+
+        .action,
+        .dca,
+        .profile {
+          .no-course {
+            pointer-events: none;
+          }
+
+          &.enable {
+            pointer-events: all;
+          }
+        }
+
+        %image-conatiner {
+          background-repeat: no-repeat;
+          width: 24px;
+          height: 25px;
+          background-size: 30px 35px;
+          display: block;
+          margin-top: 2px;
+        }
+
+        .close {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-right: 1px solid $white;
+          height: 51px;
+
+          a {
+            background-image: url("gooru/images/baseline-close.svg");
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 25px;
+            background-position: center;
+            background-size: 25px 35px;
+            display: block;
+            margin-top: 2px;
+          }
+        }
+
+        .dca {
+          display: flex;
+          border-right: 1px solid $white;
+          height: 51px;
+
+          a {
+            width: 100%;
+            display: block;
+
+            .dca-pin {
+              background-image: url("gooru/images/dca-white.svg");
+              background-repeat: no-repeat;
+              width: -webkit-fill-available;
+              height: 30px;
+              background-size: 24px 36px;
+              background-position: center;
+              display: block;
+              margin-top: 12px;
+            }
+          }
+        }
+
+        .action {
+          .course-map.study-player {
+            display: flex;
+            border-right: 1px solid $white;
+            height: 51px;
+            position: relative;
+
+            a {
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              margin: auto;
+              color: $white;
+              height: 100%;
+              position: absolute;
+              align-items: center;
+              grid-gap: 5px;
+              display: grid;
+
+              i {
+                display: flex;
+                justify-content: center;
+              }
+            }
+          }
+        }
+
+        .profile {
+          display: flex;
+          border-right: 1px solid $white;
+          height: 51px;
+          position: relative;
+
+          a {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            color: $white;
+            height: 100%;
+            position: absolute;
+            align-items: center;
+            grid-gap: 5px;
+            display: grid;
+
+            i {
+              display: flex;
+              justify-content: center;
+            }
+          }
+        }
+
+        .notification-tab {
+          display: flex;
+          border-left: 1px solid #fff;
+          border-right: 1px solid #fff;
+          height: 51px;
+          position: relative;
+          grid-column-start: 6;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+
+          .notification {
+            display: flex;
+            position: absolute;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
   }
 }
 
