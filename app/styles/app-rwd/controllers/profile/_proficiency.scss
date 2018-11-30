@@ -4,6 +4,14 @@
 
     .taxonomy-info {
       display: grid;
+      .dropdown-content {
+        .list-item.active {
+            background-color: #bbb;
+        }
+      }
+      .label {
+        margin-right: 0px;
+      }
     }
 
     .panel.left-panel {

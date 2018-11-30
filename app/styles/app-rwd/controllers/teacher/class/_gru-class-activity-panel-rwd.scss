@@ -6,9 +6,12 @@
       .dca-panel-info {
         grid-template-columns: 25px 1fr;
 
-        .assessment-icon,
+        .assessment-icon,.assessment-external-icon,
         .collection-icon {
           background-size: 15px 25px;
+        }
+        p {
+          font-size: 14px;
         }
       }
 

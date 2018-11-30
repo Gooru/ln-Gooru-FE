@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Dependencies
 
-  queryParams: ['sessionEnds', 'redirectURL'],
+  queryParams: ['sessionEnds', 'redirectURL', 'nonce'],
 
   /**
    * @property {Service} Session
@@ -70,8 +70,13 @@ export default Ember.Controller.extend({
                   },
                   function() {
                     controller.get('notifications').warning(errorMessage);
+                    let anonymousSessionData = controller.get(
+                      'anonymousSessionData'
+                    );
                     // Authenticate as anonymous if it fails to mantain session
-                    controller.get('session').authenticateAsAnonymous();
+                    controller
+                      .get('session')
+                      .authenticateAsAnonymousWithData(anonymousSessionData);
                   }
                 );
             }
@@ -96,8 +101,9 @@ export default Ember.Controller.extend({
     controller.set('user', user);
     const homeURL = `${window.location.protocol}//${window.location.host}`;
     let redirectURL = controller.get('redirectURL') || homeURL;
-    const url = `${homeURL}${Env['google-sign-in']
-      .url}?redirectURL=${redirectURL}`;
+    const url = `${homeURL}${
+      Env['google-sign-in'].url
+    }?redirectURL=${redirectURL}`;
     controller.set('googleSignInUrl', url);
     controller.set('didValidate', false);
   },
@@ -129,5 +135,16 @@ export default Ember.Controller.extend({
    * Maintain the state of redirection completed or not
    * @property {Boolean}
    */
-  isRedirectionDomainDone: false
+  isRedirectionDomainDone: false,
+
+  /**
+   * Computed property to identify gooru or tenant login.
+   */
+  isGooruLogin: Ember.computed.alias('session.isGooruClientId'),
+
+  /**
+   * Maintains the state of anonymous session data.
+   * @type {Session}
+   */
+  anonymousSessionData: null
 });

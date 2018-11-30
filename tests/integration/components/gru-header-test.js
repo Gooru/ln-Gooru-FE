@@ -15,7 +15,10 @@ moduleForComponent('gru-header', 'Integration | Component | Header', {
 test('header layout for anonymous', function(assert) {
   assert.expect(10); //making sure all asserts are called
 
-  this.set('session', Ember.Object.create({ isAnonymous: true }));
+  this.set(
+    'session',
+    Ember.Object.create({ isAnonymous: true, isGooruClientId: true })
+  );
 
   this.on('myAuthenticateAction', function() {
     assert.ok(false, 'onAuthenticateAction should not be called');
@@ -195,7 +198,7 @@ test('Search terms under 3 letters', function(assert) {
 });
 
 test('Links as student', function(assert) {
-  assert.expect(4); //making sure all asserts are called
+  assert.expect(2); //making sure all asserts are called
 
   let profile = Ember.Object.create({
     isTeacher: false
@@ -207,10 +210,6 @@ test('Links as student', function(assert) {
 
   const $component = this.$(); //component dom element
 
-  const $performanceLink = $component.find('.performance-link');
-  assert.ok($performanceLink.length, 'Missing performance link');
-  const $communityLink = $component.find('.community-link');
-  assert.ok($communityLink.length, 'Missing community link');
   const $notificationsLink = $component.find('.notifications-link');
   assert.ok($notificationsLink.length, 'Missing notifications link');
   const $libraryLink = $component.find('.library-link');
@@ -218,7 +217,7 @@ test('Links as student', function(assert) {
 });
 
 test('hidden links as teacher', function(assert) {
-  assert.expect(5); //making sure all asserts are called
+  assert.expect(3); //making sure all asserts are called
 
   let profile = Ember.Object.create({
     isTeacher: true
@@ -234,10 +233,6 @@ test('hidden links as teacher', function(assert) {
   assert.ok($classroomsLink.length, 'Missing classrooms link');
   const $toolsTab = $component.find('.tools-link');
   assert.ok($toolsTab.length, 'Missing tools tab');
-  const $performanceLink = $component.find('.performance-link');
-  assert.notOk($performanceLink.length, 'Performance link should not appear');
-  const $communityLink = $component.find('.community-link');
-  assert.notOk($communityLink.length, 'Missing community link');
   const $notificationsLink = $component.find('.notifications-link');
   assert.ok($notificationsLink.length, 'Missing notifications link');
 });

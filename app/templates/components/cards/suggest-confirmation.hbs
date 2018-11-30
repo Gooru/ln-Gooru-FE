@@ -32,9 +32,12 @@
   </div>
   <div class="suggestion-profile-list">
     {{#if (gt moreStudentsNumber 0)}}
-      <button data-placement="right" data-toggle="popover">
-      <span>+ {{moreStudentsNumber}} {{t 'common.more'}}</span>
-    </button>
+      <button class="hidden-xs" data-placement="right" data-toggle="popover">
+          <span>+ {{moreStudentsNumber}} {{t 'common.more'}}</span>
+      </button>
+      <button class="hidden visible-xs" data-placement="top" data-toggle="popover">
+        <span>+ {{moreStudentsNumber}} {{t 'common.more'}}</span>
+      </button>
       <div class="hidden" id="suggestion-profile-details">
         <div class="suggestion-profile-details-popover">
           {{#each students as |student|}}

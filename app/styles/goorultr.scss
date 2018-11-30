@@ -1,29 +1,23 @@
 @import "variables";
-
 // Variable which are specific to rtl & ltr languages
 $tab-float-dir: left;
 $menu-float-dir: right;
 $border-right-side: 1px solid;
-$border-left-side: 0px;
+$border-left-side: 0;
 $header-menu-rt-pos: 10px;
 $box-shadow: 1px -1px;
-
 // 2) import style file
-
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
 @import "embedded";
 @import "gooru-theme";
-
 @import "mixins";
 @import "common";
 @import "quizzes";
-
 @import "helpers/grading-scale-legend";
 @import "helpers/three-bounce-spinner";
 @import "helpers/fractional";
 @import "mixins/content/edit";
 @import "mixins/gru-accordion";
-
 @import "controllers/application";
 @import "controllers/class";
 @import "controllers/class/analytics/performance/student";
@@ -38,14 +32,12 @@ $box-shadow: 1px -1px;
 @import "controllers/content/classes/join";
 @import "controllers/library";
 @import "controllers/partner-library";
-
 @import "controllers/content/courses/edit";
 @import "controllers/content/courses/play";
 @import "controllers/content/questions/edit";
 @import "controllers/content/questions/play";
 @import "controllers/content/resources/edit";
 @import "controllers/content/resources/play";
-
 @import "controllers/partials/player";
 @import "controllers/profile";
 @import "controllers/profile/content";
@@ -64,7 +56,6 @@ $box-shadow: 1px -1px;
 @import "controllers/reports/student-collection-analytics";
 @import "controllers/reports/study-student-collection";
 @import "controllers/reports/student-open-ended-summary";
-
 @import "controllers/search";
 @import "controllers/sign-in";
 @import "controllers/sign-up";
@@ -83,14 +74,12 @@ $box-shadow: 1px -1px;
 @import "controllers/player-external";
 @import "controllers/resource-player";
 @import "controllers/_add-from-course-map.scss";
-
 @import "controllers/student/class";
 @import "controllers/student/independent";
 @import "controllers/student/performance";
 @import "controllers/student/class/course-map";
 @import "controllers/student/class/class-activities";
 @import "controllers/student/class/profile";
-
 @import "controllers/teacher/class";
 @import "controllers/teacher/class/class-activities";
 @import "controllers/teacher/class/class-management";
@@ -101,8 +90,8 @@ $box-shadow: 1px -1px;
 @import "controllers/teacher/class/students-proficiency";
 
 @import "controllers/goals/manage";
-
 @import "controllers/student-independent-learning/learning-base";
+@import "controllers/not-found";
 
 // TODO: update these components so they follow the naming conventions
 @import "components/app-dropdown";
@@ -151,9 +140,7 @@ $box-shadow: 1px -1px;
 @import "components/gru-toggle-button";
 @import "components/gru-pull-out";
 @import "components/gru-pull-up";
-
 @import "components/notification/gru-notification";
-
 @import "components/cards/gru-class-card";
 @import "components/cards/gru-student-class-card";
 @import "components/cards/gru-teacher-class-card";
@@ -173,7 +160,6 @@ $box-shadow: 1px -1px;
 @import "components/cards/no-suggest-result-found";
 @import "components/cards/suggest-confirmation";
 @import "components/cards/dca-search-collection-card";
-
 @import "components/charts/gru-bubble-chart";
 @import "components/charts/gru-completion-chart";
 @import "components/charts/gru-pie-chart";
@@ -206,9 +192,7 @@ $box-shadow: 1px -1px;
 @import "components/class/gru-report-panel";
 @import "components/class/learner/gru-learner-accordion-unit";
 @import "components/class/learner/gru-learner-accordion-lesson";
-
 @import "components/profile/gru-navigation-tabs";
-
 @import "components/content/assessments/gru-assessment-edit";
 @import "components/content/gru-audience";
 @import "components/content/gru-category";
@@ -262,9 +246,7 @@ $box-shadow: 1px -1px;
 @import "components/content/rubric/gru-fixed-footer";
 @import "components/content/rubric/gru-category";
 @import "components/content/rubric/gru-scoring-levels";
-
 @import "components/goal/gru-goal-form";
-
 @import "components/grading/gru-roster-header";
 @import "components/grading/gru-student-roster";
 @import "components/grading/gru-task-header";
@@ -272,11 +254,9 @@ $box-shadow: 1px -1px;
 @import "components/grading/gru-rubric-panel";
 @import "components/grading/gru-rubric-off";
 @import "components/grading/gru-rubric-on";
-
 @import "components/library/gru-browse-library";
 @import "components/library/gru-library-card";
 @import "components/library/gru-partner-library-card";
-
 @import "components/new-cards/gru-bookmark-card";
 @import "components/new-cards/gru-independent-card";
 @import "components/new-cards/gru-collection-card";
@@ -284,7 +264,6 @@ $box-shadow: 1px -1px;
 @import "components/new-cards/gru-standard-card";
 @import "components/new-cards/gru-teacher-class-card";
 @import "components/new-cards/gru-new-class-card";
-
 @import "components/player/gru-navigation";
 @import "components/player/gru-navigator";
 @import "components/player/gru-viewer";
@@ -308,7 +287,6 @@ $box-shadow: 1px -1px;
 @import "components/player/gru-player-summary-footer.scss";
 @import "components/player/gru-external-assessment-page";
 @import "components/player/gru-external-assessment-footer";
-
 @import "components/reports/gru-assessment-report";
 @import "components/reports/assessment/gru-questions";
 @import "components/reports/assessment/gru-resources";
@@ -361,35 +339,28 @@ $box-shadow: 1px -1px;
 @import "components/reports/pull-up/student-external-assessment-report";
 @import "components/search/gru-question-options";
 @import "components/search/gru-resource-options";
-
 @import "components/student/gru-performance-filter-panel";
 @import "components/student/gru-performance-course-filter";
 @import "components/student/gru-performance-courses";
 @import "components/student/class/_gru-study-navbar";
-
 @import "components/student/class/gru-class-navigation";
 @import "components/student/class/analytics/gru-performance-table";
-
 @import "components/teacher/class/gru-class-statistics";
 @import "components/teacher/class/search-content-pull-up";
 @import "components/teacher/suggestion-pull-up";
 @import "components/teacher/class/dca-course-map-pull-up";
 @import "components/teacher/navigator-math-banner";
-
 @import "components/taxonomy/gru-subject-course-picker";
 @import "components/taxonomy/gru-subject-picker";
 @import "components/taxonomy/gru-taxonomy-selector";
 @import "components/taxonomy/gru-taxonomy-tag";
 @import "components/taxonomy/gru-taxonomy-tag-list";
 @import "components/taxonomy/modals/modals";
-
 @import "components/century-skills/modals/modals";
 @import "components/century-skills/gru-century-skills-legend";
 @import "components/century-skills/gru-century-skills-content";
 @import "components/century-skills/gru-century-skill-tag";
-
 @import "components/validation/gru-input";
-
 @import "components/proficiency/proficiency-matrix";
 @import "components/proficiency/subject-item-list";
 @import "components/proficiency/proficiency-course-matrix";
@@ -399,15 +370,12 @@ $box-shadow: 1px -1px;
 @import "components/proficiency/learner-proficiency-domain-matrix";
 @import "components/proficiency/competency-content-info";
 @import "components/class/overview/route-suggestion-proficiency-matrix";
-
 //ATC View
 @import "components/teacher/class-atc-view";
 @import "components/teacher/class-performance-chart";
 @import "components/teacher/class/atc-chart";
-
 @import "routes/student/class/performance";
 @import "routes/content/rubric/preview";
-
 //Pull Up
 @import "components/reports/pull-up/competency-report";
 @import "components/reports/pull-up/course-competency-report";
@@ -415,7 +383,6 @@ $box-shadow: 1px -1px;
 @import "components/reports/pull-up/competency-content-report";
 @import "components/reports/pull-up/accordion/collection-accordion";
 @import "components/reports/pull-up/activity-list";
-
 //Student Nav Math class join landing
 @import "components/student/class/student-class-landing";
 @import "components/student/class/gru-class-grade";
@@ -423,7 +390,8 @@ $box-shadow: 1px -1px;
 @import "components/proficiency/student-inspect-competency-chart";
 @import "components/student/class/destination/student-destination-course-accordion";
 @import "components/proficiency/taxonomy-grades";
-
+//Student Nav Math Class join landing for mobile view
+@import "components/student/class/student-inspect-destination-xs";
 // Student / Teacher grading
 @import "components/grade/pull-up/free-response-question-grade";
 
