@@ -83,6 +83,17 @@ export function initialize(application) {
     },
 
     /**
+     * This method authenticates using the default authenticator for an anonymous user
+     * @returns {*|Ember.RSVP.Promise}
+     */
+    authenticateAsAnonymousWithData: function(data) {
+      return this.authenticate('authenticator:auth-api-3', {
+        hasUserData: true,
+        user: data
+      });
+    },
+
+    /**
      * Checks for changes at token-api3
      * @observer
      */

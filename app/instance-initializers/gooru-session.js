@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { getParameterByName } from 'gooru-web/utils/utils';
 
 /**
  * Initialize session
@@ -16,8 +15,7 @@ export function initialize(application) {
     restore: function() {
       return new Ember.RSVP.Promise((resolve, reject) => {
         this._super().then(resolve, function() {
-          let nonce = getParameterByName('nonce');
-          sessionService.authenticateAsAnonymous(nonce).then(resolve, reject);
+          sessionService.authenticateAsAnonymous().then(resolve, reject);
         });
       });
     }
