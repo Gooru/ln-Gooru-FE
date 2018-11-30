@@ -125,7 +125,7 @@ test('header layout with user', function(assert) {
 });
 
 test('Do search by clicking search button', function(assert) {
-  assert.expect(3); //making sure all asserts are called
+  assert.expect(4); //making sure all asserts are called
 
   this.on('mySearchAction', function(term) {
     assert.equal(term, 'test', 'onSearchAction should be called once');
@@ -146,7 +146,7 @@ test('Do search by clicking search button', function(assert) {
 });
 
 test('Do search by hitting Enter', function(assert) {
-  assert.expect(1); //making sure all asserts are called
+  assert.expect(2); //making sure all asserts are called
 
   const ANY_TERM = 'any term';
 
