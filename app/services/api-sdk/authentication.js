@@ -36,13 +36,14 @@ export default Ember.Service.extend({
    *
    * @returns {Object} the a normalized response from the endpoint
    */
-  authenticateAsAnonymous: function() {
+  authenticateAsAnonymous: function(nonce) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('authenticationAdapter')
         .postAuthentication({
-          isAnonymous: true
+          isAnonymous: true,
+          nonce: nonce
         })
         .then(
           function(response) {

@@ -26,8 +26,9 @@
 
     .summary-report-btn {
       border: 1px solid #b8bfc4;
-      border-radius: 15px;
+      border-radius: 16px;
       background: #b8bfc4;
+      z-index: 0;
 
       .performance {
         color: black;
@@ -51,20 +52,25 @@
 
   .score-change-container {
     width: 36%;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
     float: $menu-float-dir;
+    margin-right: 10px;
     margin-top: 15px;
+
     .change-score {
-      padding: 4px 16px 4px 16px;
+      padding: 4px 16px;
       border-radius: 5px;
     }
+
     .confirm {
-      padding: 4px 16px 4px 16px;
+      padding: 4px 16px;
       border-radius: 5px;
-      margin-left: 25px;
     }
 
     .cancel {
-      padding: 4px 9px 4px 9px;
+      padding: 4px 9px;
       border-radius: 5px;
     }
   }
@@ -74,11 +80,11 @@
     background: $white;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    padding: 0px 0 40px;
+    padding: 0 0 40px;
     display: block;
     clear: both;
     @media (min-width: $screen-md) {
-      padding: 0px 15px 40px;
+      padding: 0 15px 40px;
     }
 
     th {
@@ -92,6 +98,28 @@
       height: 30px;
       text-align: center;
       border-bottom: 1px solid $gray-lighter;
+    }
+
+    .header {
+      .title {
+        display: block;
+      }
+
+      %background-container {
+        background-size: contain !important;
+        width: 20px;
+        height: 23px;
+      }
+
+      .icon {
+        display: none;
+
+        &.question {
+          background: url("gooru/images/navigation_question_selected.svg")
+            no-repeat;
+          @extend %background-container;
+        }
+      }
     }
 
     th.number {
@@ -169,11 +197,11 @@
     }
 
     .question-score span.skipped {
-      color: $gray-icon;
-
       i {
+        background: url("gooru/images/baseline-block.svg");
+        width: 24px;
+        height: 24px;
         display: inline-flex;
-        margin-right: 67px;
       }
     }
 

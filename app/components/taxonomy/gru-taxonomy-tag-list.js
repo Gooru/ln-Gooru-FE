@@ -116,6 +116,12 @@ export default Ember.Component.extend({
    */
   tagPopoverDefaultPosition: 'bottom',
 
+  /**
+   * Maintains the value popover placement
+   * @type {String}
+   */
+  placement: null,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -123,11 +129,11 @@ export default Ember.Component.extend({
     var $anchor = this.$('button.non-visible-tags');
     if ($anchor.length) {
       let component = this;
-      let placement =
-        this.get('isInCard') || this.get('isInSearch')
+      let placement = this.get('placement')
+        ? this.get('placement')
+        : this.get('isInCard') || this.get('isInSearch')
           ? 'bottom'
           : 'auto right';
-
       $anchor.addClass('clickable');
       $anchor.attr('data-html', 'true');
       $anchor.attr(

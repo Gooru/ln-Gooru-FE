@@ -32,15 +32,23 @@
   .report-container {
     background: $white;
     width: 768px;
+    max-height: 90vh;
+    height: 90vh;
+
     .report-header {
       height: 135px;
       width: 100%;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      grid-gap: 10px;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
       .assessment-container {
-        width: 90%;
+        width: 100%;
         display: flex;
-        margin: 15px;
+        padding: 15px;
+        height: 135px;
+
         .assessment-thumbnail {
           width: 106px;
           height: 106px;
@@ -48,46 +56,56 @@
           background-size: contain;
           background-repeat: no-repeat;
         }
+
         .assessment-info {
-          width: calc(100% - 140px);
+          width: 100%;
           margin-left: 15px;
+
           .title {
             font-size: 15px;
             color: #37424b;
           }
+
           .student-name {
             font-size: 13px;
             font-weight: bold;
             color: #37424b;
             text-transform: capitalize;
           }
+
           .performance-bar {
             height: 30px;
             display: flex;
+
             .progress-bar {
               border-top-right-radius: 11px;
               border-bottom-right-radius: 11px;
               height: 11px;
             }
           }
+
           .score-text {
             margin-top: -6px;
             margin-left: 10px;
-            width: 40px;
+            width: 60px;
           }
         }
       }
 
       .pullup-close {
+        display: grid;
+        grid-template-rows: 30px 30px;
+        width: 65px;
+        align-self: center;
         cursor: pointer;
         text-align: center;
+
         i {
           opacity: 0.2;
           color: #000000;
           font-size: 32px;
-          margin-top: 25px;
-          margin-right: 29px;
         }
+
         span {
           text-transform: uppercase;
           margin-top: 5px;
@@ -95,11 +113,9 @@
       }
 
       .teacher-suggestion {
-        position: absolute;
-        top: 5%;
-        right: 70px;
-        width: 63px;
-        height: 56px;
+        display: grid;
+        align-items: center;
+        width: 65px;
 
         .suggestion-count-container {
           cursor: pointer;
@@ -138,32 +154,40 @@
         }
       }
     }
+
     .report-body {
-      height: 84vh;
+      height: 60vh;
       width: 768px;
+      overflow-y: auto;
+
       .external-assessment-container {
         .taxonomy-container {
           padding: 15px;
+
           .gru-taxonomy-tag {
             background-color: #37424b;
           }
         }
+
         .reference {
           text-align: center;
           border-bottom: 1px solid $light-200;
           margin-top: 15px;
           font-size: 15px;
           color: #37424b;
+
           .link {
             color: #00a9e2;
           }
         }
+
         .wish {
           text-align: center;
           font-size: 15px;
           color: #37424b;
           margin: 30px 0;
         }
+
         .student-score {
           font-size: 100px;
           font-weight: bold;

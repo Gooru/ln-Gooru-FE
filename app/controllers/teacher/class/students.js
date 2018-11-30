@@ -373,9 +373,18 @@ export default Ember.Controller.extend(ModalMixin, {
           : null;
         performance = score != null ? Math.round(score * 100) / 100 : null;
         isStudentPerformed = score != null;
-        proficiency.set('totalCompetencies', studentCompetencyPerformance.totalCompetency);
-        proficiency.set('completedCompetencies', studentCompetencyPerformance.completedCompetency);
-        proficiency.set('pendingCompetencies', studentCompetencyPerformance.inprogressCompetencies);
+        proficiency.set(
+          'totalCompetencies',
+          studentCompetencyPerformance.totalCompetency
+        );
+        proficiency.set(
+          'completedCompetencies',
+          studentCompetencyPerformance.completedCompetency
+        );
+        proficiency.set(
+          'pendingCompetencies',
+          studentCompetencyPerformance.inprogressCompetencies
+        );
       }
       controller
         .getStudentCurrentLocation(member.id)
@@ -409,10 +418,11 @@ export default Ember.Controller.extend(ModalMixin, {
       isCrosswalk: false
     };
     return Ember.RSVP.hash({
-      learningMapData: Ember.RSVP.resolve(searchService.fetchLearningMapsContent(competencyCode, filters))
-    })
-      .then(({learningMapData}) => {
-        controller.set('learningMapData', learningMapData);
-      });
+      learningMapData: Ember.RSVP.resolve(
+        searchService.fetchLearningMapsContent(competencyCode, filters)
+      )
+    }).then(({ learningMapData }) => {
+      controller.set('learningMapData', learningMapData);
+    });
   }
 });

@@ -83,7 +83,6 @@
     background-color: $white;
 
     .proficiency-chart {
-
       .proficiency-tags {
         display: flex;
         margin: 0 auto;
@@ -106,7 +105,8 @@
               margin-right: 8.4px;
             }
 
-            .box-baseline, .box-grade-line {
+            .box-baseline,
+            .box-grade-line {
               width: 18px;
               height: 5px;
               margin-top: 4px;

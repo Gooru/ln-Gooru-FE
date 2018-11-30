@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['competency-content-report'],
@@ -69,10 +68,9 @@ export default Ember.Component.extend({
     let component = this;
     return Ember.RSVP.hash({
       collectionPerformances: component.fetchUserCompetencyPerformance()
-    })
-      .then(({collectionPerformances}) => {
-        component.set('collectionPerformances', collectionPerformances);
-      });
+    }).then(({ collectionPerformances }) => {
+      component.set('collectionPerformances', collectionPerformances);
+    });
   },
 
   /**
@@ -83,10 +81,9 @@ export default Ember.Component.extend({
     let component = this;
     return Ember.RSVP.hash({
       learningMapData: component.fetchLearningMapsCompetencyContent()
-    })
-      .then(({learningMapData}) => {
-        return component.set('learningMapData', learningMapData);
-      });
+    }).then(({ learningMapData }) => {
+      return component.set('learningMapData', learningMapData);
+    });
   },
 
   /**
@@ -98,7 +95,12 @@ export default Ember.Component.extend({
     let competencyService = component.get('competencyService');
     let userId = component.get('userId');
     let competencyCode = component.get('competency.competencyCode');
-    return new Ember.RSVP.resolve(competencyService.getUserPerformanceCompetencyCollections(userId, competencyCode));
+    return new Ember.RSVP.resolve(
+      competencyService.getUserPerformanceCompetencyCollections(
+        userId,
+        competencyCode
+      )
+    );
   },
 
   /**
@@ -116,7 +118,9 @@ export default Ember.Component.extend({
       length,
       isCrosswalk: false
     };
-    return new Ember.RSVP.resolve(searchService.fetchLearningMapsCompetencyContent(competencyCode, filters));
+    return new Ember.RSVP.resolve(
+      searchService.fetchLearningMapsCompetencyContent(competencyCode, filters)
+    );
   },
 
   /**
@@ -126,15 +130,23 @@ export default Ember.Component.extend({
   loadActivityContentData(contentType) {
     let component = this;
     component.set('isLoading', true);
-    let activityContentType = contentType || component.get('activityContentType');
+    let activityContentType =
+      contentType || component.get('activityContentType');
     let activityContents = component.get('activityContents');
     let startAt = component.get('startAt');
     let length = component.get('length');
     component.loadLearningMapsCompetencyContent().then(() => {
       let learningMapData = component.get('learningMapData');
-      let activityTotalHitCount = learningMapData ? learningMapData.contents[`${activityContentType}`].totalHitCount : 0;
-      let activityContentData = learningMapData ? learningMapData.learningMapsContent[`${activityContentType}`] : Ember.A([]);
-      component.set('activityContents', activityContents.concat(activityContentData));
+      let activityTotalHitCount = learningMapData
+        ? learningMapData.contents[`${activityContentType}`].totalHitCount
+        : 0;
+      let activityContentData = learningMapData
+        ? learningMapData.learningMapsContent[`${activityContentType}`]
+        : Ember.A([]);
+      component.set(
+        'activityContents',
+        activityContents.concat(activityContentData)
+      );
       component.set('activityTotalHitCount', activityTotalHitCount);
       component.set('startAt', startAt + length);
       component.set('isLoading', false);

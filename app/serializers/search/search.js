@@ -218,8 +218,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
    */
   normalizeQuestion: function(result) {
     const serializer = this;
-    const format = (result.contentFormat) || (result.resourceFormat.value || null); //value should be 'question'
-    const type = QuestionModel.normalizeQuestionType(result.typeName || result.contentSubFormat);
+    const format =
+      result.contentFormat || (result.resourceFormat.value || null); //value should be 'question'
+    const type = QuestionModel.normalizeQuestionType(
+      result.typeName || result.contentSubFormat
+    );
     const taxonomyInfo =
       (result.taxonomySet &&
         result.taxonomySet.curriculum &&

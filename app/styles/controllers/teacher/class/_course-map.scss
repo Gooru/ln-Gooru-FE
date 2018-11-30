@@ -305,9 +305,6 @@
       .items-to-grade {
         width: 331px;
 
-        @media (max-width: $screen-sm-min) {
-          display: none;
-        }
         .header {
           font-size: 12px;
           font-weight: bold;

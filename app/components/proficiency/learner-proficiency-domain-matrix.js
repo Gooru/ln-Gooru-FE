@@ -54,8 +54,12 @@ export default Ember.Component.extend({
     onToggleChart() {
       let component = this;
       component.toggleProperty('isExpandChartEnabled');
-      let cellHeight = component.get('isExpandChartEnabled') ? component.get('expandedCellHeight') : component.get('compressedCellHeight');
-      let maxNumberOfCellsInEachColumn = component.get('maxNumberOfCellsInEachColumn');
+      let cellHeight = component.get('isExpandChartEnabled')
+        ? component.get('expandedCellHeight')
+        : component.get('compressedCellHeight');
+      let maxNumberOfCellsInEachColumn = component.get(
+        'maxNumberOfCellsInEachColumn'
+      );
       component.set('height', maxNumberOfCellsInEachColumn * cellHeight);
       component.set('cellHeight', cellHeight);
       component.drawChart(component.get('chartData'));
@@ -65,9 +69,13 @@ export default Ember.Component.extend({
     onSelectGrade(gradeData) {
       let component = this;
       let activeGrade = component.get('activeGrade');
-      if (activeGrade && (activeGrade.id === gradeData.id)) {
+      if (activeGrade && activeGrade.id === gradeData.id) {
         component.$('.domain-boundary-line').toggleClass('hidden-line');
-        component.$(`.taxonomy-grades .grade-list .grade-sequence-${gradeData.sequence}`).toggleClass('active-grade');
+        component
+          .$(
+            `.taxonomy-grades .grade-list .grade-sequence-${gradeData.sequence}`
+          )
+          .toggleClass('active-grade');
       }
       component.set('activeGrade', gradeData);
     }
@@ -112,7 +120,6 @@ export default Ember.Component.extend({
     let component = this;
     component.fetchDomainGradeBoundary();
   }),
-
 
   // -------------------------------------------------------------------------
   // Properties
@@ -258,11 +265,23 @@ export default Ember.Component.extend({
   loadChartData() {
     let component = this;
     let competencyMatrixDomains = component.get('competencyMatrixDomains');
-    let competencyMatrixCoordinates = component.get('competencyMatrixCoordinates');
+    let competencyMatrixCoordinates = component.get(
+      'competencyMatrixCoordinates'
+    );
     let domainBoundaries = component.get('domainBoundaries');
-    let isDomainBoundaryAvailable = component.get('activeGrade') ? !!domainBoundaries : true;
-    if (competencyMatrixDomains && competencyMatrixCoordinates && isDomainBoundaryAvailable) {
-      let chartData = component.parseChartData(competencyMatrixDomains, competencyMatrixCoordinates, domainBoundaries);
+    let isDomainBoundaryAvailable = component.get('activeGrade')
+      ? !!domainBoundaries
+      : true;
+    if (
+      competencyMatrixDomains &&
+      competencyMatrixCoordinates &&
+      isDomainBoundaryAvailable
+    ) {
+      let chartData = component.parseChartData(
+        competencyMatrixDomains,
+        competencyMatrixCoordinates,
+        domainBoundaries
+      );
       component.drawChart(chartData);
       component.set('chartData', chartData);
     }
@@ -289,7 +308,10 @@ export default Ember.Component.extend({
       if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
         component.set('isLoading', false);
         component.set('competencyMatrixDomains', competencyMatrixs.domains);
-        component.set('competencyMatrixCoordinates', competencyMatrixCoordinates);
+        component.set(
+          'competencyMatrixCoordinates',
+          competencyMatrixCoordinates
+        );
         component.loadChartData();
         component.sendAction('onGetLastUpdated', competencyMatrixs.lastUpdated);
       } else {
@@ -311,11 +333,10 @@ export default Ember.Component.extend({
       userProficiencyBaseLine: component
         .get('competencyService')
         .getUserProficiencyBaseLine(classId, courseId, userId)
-    })
-      .then(({userProficiencyBaseLine}) => {
-        component.set('userProficiencyBaseLine', userProficiencyBaseLine);
-        return userProficiencyBaseLine;
-      });
+    }).then(({ userProficiencyBaseLine }) => {
+      component.set('userProficiencyBaseLine', userProficiencyBaseLine);
+      return userProficiencyBaseLine;
+    });
   },
 
   /**
@@ -355,9 +376,11 @@ export default Ember.Component.extend({
     let destinationGrade = component.get('activeGrade');
     let gradeId = destinationGrade ? destinationGrade.id : null;
     return Ember.RSVP.hash({
-      domainBoundaries: gradeId ? Ember.RSVP.resolve(
-        taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
-      ) : Ember.RSVP.resolve(null)
+      domainBoundaries: gradeId
+        ? Ember.RSVP.resolve(
+          taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
+        )
+        : Ember.RSVP.resolve(null)
     }).then(({ domainBoundaries }) => {
       component.set('domainBoundaries', domainBoundaries);
       return domainBoundaries;
@@ -368,7 +391,11 @@ export default Ember.Component.extend({
    * @function parseCompetencyData
    * Method to parse raw competency matrix and co-ordinate data to plot the chart
    */
-  parseChartData(competencyMatrixs, competencyMatrixCoordinates, domainBoundaries) {
+  parseChartData(
+    competencyMatrixs,
+    competencyMatrixCoordinates,
+    domainBoundaries
+  ) {
     let component = this;
     const cellHeight = component.get('cellHeight');
     let taxonomyDomain = Ember.A();
@@ -434,9 +461,7 @@ export default Ember.Component.extend({
             .set('mastered', true);
         }
         if (!domainBoundaryCompetency && isDomainBoundaryAvailable) {
-          mergeDomainData
-            .objectAt(0)
-            .set('isDomainBoundaryCompetency', true);
+          mergeDomainData.objectAt(0).set('isDomainBoundaryCompetency', true);
         }
 
         let cellIndex = 1;
@@ -451,7 +476,10 @@ export default Ember.Component.extend({
       }
     });
     let height = cellHeight * Math.max(...numberOfCellsInEachColumn);
-    component.set('maxNumberOfCellsInEachColumn', Math.max(...numberOfCellsInEachColumn));
+    component.set(
+      'maxNumberOfCellsInEachColumn',
+      Math.max(...numberOfCellsInEachColumn)
+    );
     component.set('height', height);
     component.set('taxonomyDomains', taxonomyDomain);
     return resultSet;
@@ -562,8 +590,7 @@ export default Ember.Component.extend({
    */
   showDropShadow() {
     let component = this;
-    const chartContainer = d3
-      .select('#render-proficiency-matrix svg');
+    const chartContainer = d3.select('#render-proficiency-matrix svg');
     let skylineContainer = component.get('skylineContainer');
     let filterContainer = chartContainer
       .append('defs')
@@ -579,7 +606,7 @@ export default Ember.Component.extend({
       .attr('x1', 0)
       .attr('y1', 30)
       .attr('x2', 0)
-      .attr('y2',30)
+      .attr('y2', 30)
       .attr('class', `sky-line-${-1} dummy-line`);
   },
 
@@ -632,7 +659,9 @@ export default Ember.Component.extend({
     let cellHeight = component.get('cellHeight');
     if (!component.get('isBaseLineDrawn') || isOwnSubject) {
       let userProficiencyBaseLine = component.get('userProficiencyBaseLine');
-      let competencyMatrixCoordinates = component.get('competencyMatrixCoordinates');
+      let competencyMatrixCoordinates = component.get(
+        'competencyMatrixCoordinates'
+      );
       let baseLineDomains = userProficiencyBaseLine.domains;
       let domains = competencyMatrixCoordinates.domains;
       let cellIndex = 0;
@@ -650,8 +679,7 @@ export default Ember.Component.extend({
             domainWiseMasteredCompetencies.push(competency);
           }
         });
-        let numberOfMasteredCompetency =
-          domainWiseMasteredCompetencies.length;
+        let numberOfMasteredCompetency = domainWiseMasteredCompetencies.length;
         let masteredCompetencyHighestSeq = numberOfMasteredCompetency
           ? domainWiseMasteredCompetencies[numberOfMasteredCompetency - 1]
             .competencySeq
