@@ -157,6 +157,11 @@
         vertical-align: middle;
         &.not-started {
           pointer-events: none;
+          .container-box {
+            .percentage {
+              padding-top: 20px !important;
+            }
+          }
         }
 
         .container-box {
@@ -316,7 +321,7 @@
 
         .controls {
           padding: 15px 0;
-          margin: 0 5px 0 5px;
+          margin: 0 10px 0 5px !important;
           display: inline-block;
 
           .switch {
