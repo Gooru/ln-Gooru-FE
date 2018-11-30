@@ -161,6 +161,11 @@
 
         &.not-started {
           pointer-events: none;
+          .container-box {
+            .percentage {
+              padding-top: 20px !important;
+            }
+          }
         }
 
         .container-box {
@@ -321,9 +326,8 @@
 
         .controls {
           padding: 15px 0;
-          margin: 0 5px;
-          display: flex;
-          align-items: center;
+          margin: 0 10px 0 5px !important;
+          display: inline-block;
 
           .switch {
             width: 40px;
