@@ -55,6 +55,7 @@ export default Object.assign(quizzesTranslations, {
     first: 'First',
     last: 'Last',
     name: 'Name',
+    user: 'user',
     'content-name': 'Content Name',
     lastName: 'Lastname',
     firstName: 'Firstname',
@@ -705,6 +706,15 @@ export default Object.assign(quizzesTranslations, {
   /*
    * CONTROLLERS: Translations used in a specific controller
    */
+  'not-found': {
+    tenant: {
+      'login-not-found-msg-1':
+        'Gooru tenant login not found, page will be automatically redirect to ',
+      'login-not-found-msg-2': 'login page in',
+      'login-not-found-msg-3': 'sec or click below button to login as'
+    }
+  },
+
   index: {
     joinUs: 'Join Us to <br/> Honor the Human Right to <br/> Education',
     browseContent: {
@@ -1778,6 +1788,9 @@ export default Object.assign(quizzesTranslations, {
       desc1: 'You are currently in ',
       desc2:
         'Welcome to your Skyline map for Math. The Skyline (the thick white line) shows the highest standard that you have mastered in each domain. A domain is an area of math that you study, such as Number Systems and Expressions & Equations. Each column represents a math domain. And each box in the column represents a standard in the domain. Once you start learning and mastering the standards, your Skyline will continuously bump up.'
+    },
+    units: {
+      other: '{{count}} Units'
     }
   },
 

@@ -56,6 +56,43 @@
     {{/if}}
     </div>
   </div>
+  <div class="dropdown nav_dropdown">
+    <button class="dropbtn" type="button" data-toggle="dropdown">{{t "common.myContent"}}
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      {{#link-to "search.courses" (query-params term=term) tagName="li" class='courses'}}
+        <a href='{{view.href}}' class="btn btn-category">
+          <i class="icon"></i>
+          <span>{{t "search-filter.courses"}}</span>
+        </a>
+      {{/link-to}}
+      {{#link-to "search.collections" (query-params term=term) tagName="li" class='collections'}}
+        <a href='{{view.href}}' class="btn btn-category">
+          <i class="icon"></i>
+          <span>{{t "search-filter.collections"}}</span>
+        </a>
+      {{/link-to}}
+      {{#link-to "search.assessments" (query-params term=term) tagName="li" class='assessments'}}
+        <a href='{{view.href}}' class="btn btn-category">
+          <i class="icon"></i>
+          <span>{{t "search-filter.assessments"}}</span>
+        </a>
+      {{/link-to}}
+      {{#link-to "search.resources" (query-params term=term) tagName="li" class='resources'}}
+        <a href='{{view.href}}' class="btn btn-category">
+          <i class="icon"></i>
+          <span>{{t "search-filter.resources"}}</span>
+        </a>
+      {{/link-to}}
+      {{#link-to "search.questions" (query-params term=term) tagName="li" class='questions'}}
+        <a href='{{view.href}}' class="btn btn-category">
+          <i class="icon"></i>
+          <span>{{t "search-filter.questions"}}</span>
+        </a>
+      {{/link-to}}
+    </ul>
+  </div>
   <div class="content">
     {{outlet}}
   </div>

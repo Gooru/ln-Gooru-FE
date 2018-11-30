@@ -24,17 +24,33 @@ export default Ember.Object.extend({
     const endpointUrl = EndPointsConfig.getEndpointSecureUrl();
     const namespace = this.get('namespace');
     const url = `${endpointUrl}${namespace}/signin`;
+    const reqBody = {
+      grant_type: data.isAnonymous ? 'anonymous' : 'credential'
+    };
+    let useGooruClient = false;
+    if (data.isAnonymous) {
+      if (!data.nonce) {
+        useGooruClient = true;
+      }
+    } else {
+      if (!adapter.get('session.isGooruClientId')) {
+        reqBody.anonymous_token = adapter.get('session.token-api3');
+      } else {
+        useGooruClient = true;
+      }
+    }
+    if (useGooruClient) {
+      reqBody.client_key = Env['API-3.0'].clientKey;
+      reqBody.client_id = Env['API-3.0'].clientId;
+    }
+
     const options = {
       type: 'POST',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       processData: false,
       headers: adapter.defineHeaders(data),
-      data: JSON.stringify({
-        client_key: Env['API-3.0'].clientKey,
-        client_id: Env['API-3.0'].clientId,
-        grant_type: data.isAnonymous ? 'anonymous' : 'credential'
-      }),
+      data: JSON.stringify(reqBody),
       global: false /* Stop global ajaxError event from triggering */
     };
     return Ember.$.ajax(url, options);
@@ -42,7 +58,11 @@ export default Ember.Object.extend({
 
   defineHeaders: function(data) {
     if (data.isAnonymous) {
-      return {};
+      return data.nonce
+        ? {
+          Authorization: `Nonce ${data.nonce}`
+        }
+        : {};
     } else {
       return {
         Authorization: `Basic ${btoa(`${data.username}:${data.password}`)}`

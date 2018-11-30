@@ -20,14 +20,13 @@
         align-items: center;
         cursor: pointer;
 
-        &:nth-child(1n+1) {
+        &:nth-child(1n + 1) {
           border-right: none;
         }
         &:last-child {
           border-right: 1px solid $nobel-gray;
         }
         .icon {
-
           i {
             background-size: 32px 32px;
             width: 32px;

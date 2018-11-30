@@ -137,16 +137,19 @@ export default Ember.Service.extend({
   searchFeaturedCourses: function(term) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchFeaturedCourses(term).then(
-        function(response) {
-          resolve(
-            service.get('searchSerializer').normalizeSearchCourses(response)
-          );
-        },
-        function(error) {
-          reject(error);
-        }
-      );
+      service
+        .get('searchAdapter')
+        .searchFeaturedCourses(term)
+        .then(
+          function(response) {
+            resolve(
+              service.get('searchSerializer').normalizeSearchCourses(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
     });
   },
 
@@ -159,16 +162,19 @@ export default Ember.Service.extend({
   searchCourses: function(term) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchCourses(term).then(
-        function(response) {
-          resolve(
-            service.get('searchSerializer').normalizeSearchCourses(response)
-          );
-        },
-        function(error) {
-          reject(error);
-        }
-      );
+      service
+        .get('searchAdapter')
+        .searchCourses(term)
+        .then(
+          function(response) {
+            resolve(
+              service.get('searchSerializer').normalizeSearchCourses(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
     });
   },
 

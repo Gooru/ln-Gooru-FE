@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['competency-content-info'],
@@ -73,27 +72,39 @@ export default Ember.Component.extend({
    */
   preRequisites: Ember.computed('learningMapData.prerequisites', function() {
     let component = this;
-    let competencyPreRequisites = component.get('learningMapData.prerequisites');
+    let competencyPreRequisites = component.get(
+      'learningMapData.prerequisites'
+    );
     return competencyPreRequisites || null;
   }),
 
   /**
    * @property {Array} signatureAssessments
    */
-  signatureAssessments: Ember.computed('learningMapData.signatureContents', function() {
-    let component = this;
-    let signatureContents = component.get('learningMapData.signatureContents');
-    let signatureAssessments = signatureContents.assessments;
-    return signatureAssessments || null;
-  }),
+  signatureAssessments: Ember.computed(
+    'learningMapData.signatureContents',
+    function() {
+      let component = this;
+      let signatureContents = component.get(
+        'learningMapData.signatureContents'
+      );
+      let signatureAssessments = signatureContents.assessments;
+      return signatureAssessments || null;
+    }
+  ),
 
   /**
    * @property {Array} signatureCollections
    */
-  signatureCollections: Ember.computed('learningMapData.signatureContents', function() {
-    let component = this;
-    let signatureContents = component.get('learningMapData.signatureContents');
-    let signatureCollections = signatureContents.collections;
-    return signatureCollections || null;
-  })
+  signatureCollections: Ember.computed(
+    'learningMapData.signatureContents',
+    function() {
+      let component = this;
+      let signatureContents = component.get(
+        'learningMapData.signatureContents'
+      );
+      let signatureCollections = signatureContents.collections;
+      return signatureCollections || null;
+    }
+  )
 });

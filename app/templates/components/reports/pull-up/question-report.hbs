@@ -1,7 +1,7 @@
 <div class="backdrop" {{action 'onPullUpClose' true}}></div>
 <div class="question-report-container">
   <div class="report-header">
-    <div class="report-breadcrumb">
+    <div class="report-breadcrumb hidden-xs">
       <div class="unit-title">
         <i class="unit-icon"></i>
         <p>{{t 'common.unit'}} {{unit.sequence}} : {{unit.title}}</p>
@@ -15,6 +15,13 @@
         {{gru-icon name="keyboard_arrow_right"}}
         <i class="collection-icon {{collection.format}}"></i>
         <p>{{collection.title}}</p>
+      </div>
+    </div>
+    <div class="report-title hidden visible-xs">
+      <div class="title">
+        <p>{{t 'common.unit'}} {{unit.sequence}} / {{t 'common.lesson'}} {{lesson.sequence}} :</p>
+        <i class="collection-icon {{collection.format}}"></i>
+        <p class="ellipsis">{{collection.title}}</p>
       </div>
     </div>
     <div class="report-close-pullup" {{action 'onPullUpClose'}}>

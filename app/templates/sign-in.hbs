@@ -1,30 +1,39 @@
 {{#if isRedirectionDomainDone}}
   <div class="controller sign-in row">
     <div class="sign-in-wrapper col-md-12 col-sm-12 col-xs-12">
-      <div class="sign-in-header">
-        {{#if sessionEnds}}
-          <h1>{{t "login.title-session-ends"}}</h1>
-          <div class="description" alt="{{t "login.description-session-ends"}}" title="{{t "login.description-session-ends"}}">{{t "login.description-session-ends"}}
-          </div>
-        {{else}}
-          <h1>{{t "login.title"}}</h1>
-          <div class="description" alt="{{t "login.description"}}" title="{{t "login.description"}}">{{t "login.description"}}
-          </div>
-        {{/if}}
-        <a href="{{unbound googleSignInUrl}}">
-          <div class="google-button">
-            <div class="google-button-content-wrapper">
-              <div class="google-button-icon">
-                <div class="google-button-icon-image">
-                </div>
-              </div>
-              <span class="google-button-content">
-              <span>{{t "login.googleButton"}}</span>
-              </span>
+      {{#if isGooruLogin }}
+        <div class="sign-in-header">
+          {{#if sessionEnds}}
+            <h1>{{t "login.title-session-ends"}}</h1>
+            <div class="description" alt="{{t "login.description-session-ends"}}" title="{{t "login.description-session-ends"}}">{{t "login.description-session-ends"}}
             </div>
+          {{else}}
+            <h1>{{t "login.title"}}</h1>
+            <div class="description" alt="{{t "login.description"}}" title="{{t "login.description"}}">{{t "login.description"}}
+            </div>
+          {{/if}}
+          <a href="{{unbound googleSignInUrl}}">
+            <div class="google-button">
+              <div class="google-button-content-wrapper">
+                <div class="google-button-icon">
+                  <div class="google-button-icon-image">
+                  </div>
+                </div>
+                <span class="google-button-content">
+              <span>{{t "login.googleButton"}}</span>
+                </span>
+              </div>
+            </div>
+          </a>
+        </div>
+      {{else}}
+        <div class="sign-in-tenant-header">
+          <div class="gooru-logo">
           </div>
-        </a>
-      </div>
+          <div class="tenant-logo">
+          </div>
+        </div>
+      {{/if}}
       <div class="divider"></div>
       <div class="sign-in-form">
         <form>
@@ -40,9 +49,11 @@
             {{validation.gru-input model=user valuePath='password' type='password' didValidate=didValidate inputId='passwordId'}}
           </label>
           </div>
-          <div class="form-group forgot-password">
-            {{#link-to 'forgot-password'}} {{t "login.forgotPassword"}} {{/link-to}}
-          </div>
+          {{#if isGooruLogin}}
+            <div class="form-group forgot-password">
+              {{#link-to 'forgot-password'}} {{t "login.forgotPassword"}} {{/link-to}}
+            </div>
+          {{/if}}
           <div class="log-in-button form-group text-center">
             <button class="btn btn-success submit-sign-in" {{action "authenticate"}}>{{t "login.log-in"}} <span>{{gru-icon name='keyboard_arrow_right'}}</span></button>
           </div>
