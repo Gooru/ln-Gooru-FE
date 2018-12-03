@@ -2,6 +2,7 @@
   .route-suggestions-container {
     width: 98% !important;
     margin: auto;
+
     .gru-accordion-course {
       padding: 0;
     }
@@ -10,19 +11,23 @@
         max-width: none;
         display: block;
       }
+
       .gru-accordion-lesson {
         .panel-collapse.collapse.in .collections .panel-heading .panel-title {
           width: 65%;
           display: flex;
           line-height: 60px;
+
           .title {
             width: calc(100% - 100px);
           }
         }
+
         .panel-heading {
           .panel-title {
             width: 75%;
           }
+
           .info {
             .performance .not-started {
               padding: 6px 5px 0;
@@ -36,17 +41,22 @@
         .panel-collapse.collapse.in .collections .panel-heading {
           .panel-title {
             width: 58%;
+
             .icon-container {
               width: 50px;
             }
+
             .title {
               width: calc(100% - 50px);
             }
           }
+
           .info {
-            div.play-btn, div.performance {
+            div.performance,
+            div.play-btn {
               width: 50px;
             }
+
             .performance .not-started {
               padding: 6px 5px 0;
             }
@@ -54,7 +64,6 @@
         }
       }
     }
-
     @media screen and (min-width: 320px) and (max-width: 374px) {
       .gru-accordion-lesson {
         .panel-heading {
@@ -62,6 +71,7 @@
             width: 72%;
           }
         }
+
         .panel-collapse.collapse.in .collections .panel-heading {
           .panel-title {
             width: 55%;
@@ -69,7 +79,55 @@
         }
       }
     }
+
+    .course-suggestions {
+      @media screen and (max-width: $screen-sm - 1) {
+        .gru-accordion-unit .unit > .panel-title {
+          padding-top: 0;
+          height: 100%;
+
+          a {
+            height: 100%;
+
+            .title {
+              display: grid;
+              grid-template-rows: 30px auto;
+              padding-left: 10px;
+
+              .prefix {
+                border: none;
+                padding: 0;
+                margin: 0;
+              }
+            }
+          }
+        }
+
+        .gru-accordion-lesson .panel-heading .panel-title {
+          padding-top: 0;
+
+          & > a {
+            display: grid;
+            grid-template-rows: 30px auto;
+
+            .lesson-prefix {
+              border: none;
+            }
+          }
+        }
+
+        .gru-accordion-lesson .panel-collapse.collapse.in {
+          .collections {
+            .panel-heading {
+              .panel-title {
+                .title {
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
-
-
 }
