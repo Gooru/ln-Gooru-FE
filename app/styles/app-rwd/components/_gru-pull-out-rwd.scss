@@ -19,13 +19,13 @@
   .notfication-container {
     .list-item-container {
       .line-suggestion-title {
-        width: 100px;
+        width: 100%;
       }
       .line-item-title {
           position: absolute;
           left: 69px;
           top: 20px;
-          max-width: 80%;
+          width: 80%;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;

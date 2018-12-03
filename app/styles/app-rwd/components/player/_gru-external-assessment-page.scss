@@ -96,6 +96,13 @@
 											font-size: 22px;
 										}
 									}
+									.footer {
+										.actions {
+											.cancel {
+												 margin-left: 0px;
+											}
+										}
+									}
 								}
 							}
 						}
@@ -139,17 +146,13 @@
 		}
 	}
 }
-@media screen and (max-width: $screen-320) {
-	.player-external {
-		.app-container {
-		.external-player-container {
-			.player-container {
-					.gru-external-assessment-page {
-						.external-assessment-landing-page {
-							.external-assessment-card {
-									margin-left: 5px;
-							}
-						}
+.gru-external-assessment-page {
+	.external-assessment-landing-page {
+		.external-assessment-card {
+			.body {
+				.score-entered {
+					.score {
+					    font-size: 39px;
 					}
 				}
 			}
