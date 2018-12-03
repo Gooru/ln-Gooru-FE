@@ -55,320 +55,98 @@
   .dca-content-container {
     position: relative;
 
-    .dca-content-list-container {
-      height: calc(100vh - 270px);
-      overflow-y: auto;
-      padding-right: 20px;
-      padding-left: 20px;
-      padding-bottom: 20px;
-
-      .dca-future-date-list-container {
-        padding-bottom: 20px;
-        padding-top: 45px;
-
-        .dca-date-view-container {
-          display: inline-grid;
-          grid-template-columns: 200px 1fr;
-          align-items: center;
-          height: 50px;
-          width: 100%;
-
-          .dca-date-container {
-            display: inline-flex;
-            width: 100%;
-            align-items: center;
-
-            .update {
-              padding-left: 20px;
-            }
-
-            span {
-              padding-left: 20px;
-            }
-          }
-
-          hr {
-            width: 100%;
-            border-top: 1px solid #ccc;
-          }
-        }
-
-        .dca-future-list-container {
-          background-color: #fff;
-          border-radius: 4px;
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-
-          .dca-assign {
-            pointer-events: none;
-          }
-
-          .gru-class-activity-panel:last-child {
-            .dca-panel-container {
-              border-bottom: none;
-            }
-
-            .dca-panel-performance {
-              border-bottom-right-radius: 4px;
-            }
-          }
-
-          .gru-class-activity-panel:first-child {
-            .dca-panel-performance {
-              border-top-right-radius: 4px;
-            }
-          }
-        }
-      }
-
-      .dca-todays-container {
-        .dca-todays-header {
-          font-family: "Lato";
-          font-size: 15px;
-          font-weight: bold;
-          color: #000000;
-          text-transform: uppercase;
-        }
-
-        .dca-todays-action-list-container {
-          border-radius: 4px;
-          box-shadow: 0 0 2px 2px #0066ff;
-          background-color: #fff;
-          padding: 2px;
-
-          .dca-todays-info-action-container {
-            min-height: 110px;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-            padding: 0 20px;
-
-            .dca-info-container {
-              height: 67px;
-              display: flex;
-              align-items: center;
-              border-bottom: 1px solid #e3e5ea;
-
-              .user-profile-img {
-                width: 60px;
-
-                img {
-                  width: 40px;
-                  border-radius: 50%;
-                  border-color: transparent;
-                  height: 40px;
-
-                  &.selected {
-                    visibility: hidden;
-                  }
-                }
-              }
-
-              .info {
-                p {
-                  margin: 0;
-                  padding-left: 20px;
-                  padding-right: 20px;
-                  padding-bottom: 0;
-                  line-height: 1.5;
-                  font-family: "Lato";
-                  font-size: 13px;
-                  color: #b8bfc4;
-                }
-              }
-            }
-
-            .dca-action-container {
-              display: inline-grid;
-              grid-template-columns: 50% 50%;
-              width: 100%;
-              padding-top: 10px;
-              padding-bottom: 10px;
-
-              .dca-action-buttons {
-                display: inline-grid;
-                justify-items: center;
-                align-items: center;
-                grid-template-columns: 40px 20px 20px;
-                grid-gap: 15px;
-
-                p {
-                  font-family: "Open Sans";
-                  font-size: 13px;
-                  font-weight: bold;
-                  color: #666666;
-                  text-transform: uppercase;
-                  margin: 0;
-                  padding: 0;
-                }
-
-                .collection-icon {
-                  width: 20px;
-                  height: 20px;
-                  background-repeat: no-repeat;
-                  background-size: 20px 20px;
-                  background-image: url("../assets/gooru/images/add_collection.svg");
-                  opacity: 0.8;
-                  cursor: pointer;
-                }
-
-                .assessment-icon {
-                  width: 20px;
-                  height: 20px;
-                  background-repeat: no-repeat;
-                  background-size: 20px 20px;
-                  background-image: url("../assets/gooru/images/add_assessment.svg");
-                  opacity: 0.8;
-                  cursor: pointer;
-                }
-              }
-
-              .dca-course-map-button {
-                text-align: right;
-                cursor: pointer;
-                height: 20px;
-
-                &.no-course {
-                  pointer-events: none;
-                  opacity: 0.5;
-                }
-
-                span {
-                  font-family: "Lato";
-                  font-size: 13px;
-                  color: #1aa9eb;
-                  text-transform: uppercase;
-                }
-              }
-            }
-          }
-
-          .dca-todays-list-container {
-            .gru-class-activity-panel:last-child {
-              .dca-panel-container {
-                border-bottom: none;
-              }
-
-              .dca-panel-performance {
-                border-radius: 0 0 4px 0;
-              }
-            }
-          }
-        }
-      }
-
-      .dca-past-date-list-container {
-        padding-bottom: 50px;
-        .dca-past-activities-header {
-          padding-top: 20px;
-          font-family: "Lato";
-          font-size: 15px;
-          font-weight: bold;
-          color: #000000;
-          text-transform: uppercase;
-        }
-
-        .dca-date-view-container {
-          display: inline-grid;
-          grid-template-columns: 200px 1fr;
-          align-items: center;
-          height: 50px;
-          width: 100%;
-
-          .dca-date-container {
-            display: inline-flex;
-            width: 100%;
-            align-items: center;
-
-            .calendar_today {
-              padding-left: 20px;
-            }
-
-            span {
-              padding-left: 20px;
-            }
-          }
-
-          hr {
-            width: 100%;
-            border-top: 1px solid #ccc;
-          }
-        }
-
-        .dca-past-list-container {
-          background-color: #fff;
-          border-radius: 4px;
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-
-          .dca-assign {
-            pointer-events: none;
-          }
-
-          .gru-class-activity-panel:last-child {
-            .dca-panel-container {
-              border-bottom: none;
-            }
-
-            .dca-panel-performance {
-              border-bottom-right-radius: 4px;
-            }
-          }
-
-          .gru-class-activity-panel:first-child {
-            .dca-panel-performance {
-              border-top-right-radius: 4px;
-            }
-          }
-        }
-      }
-    }
-
-    .dca-nav-to-todays-dca-list {
-      position: absolute;
-      width: calc(100% - 50px);
-      visibility: hidden;
-      opacity: 0;
-      transition: visibility 0s 0.5s, opacity 0.5s linear;
+    .ca-date-and-add-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background-color: #fff;
       height: 50px;
-      margin-left: 15px;
-      z-index: 2;
+      border-radius: 4px;
 
-      &.top-section {
-        top: 0;
-
-        .dca-nav-action-panel {
-          box-shadow: 0 0 14px 10px #f1f3f7, 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-        }
-      }
-
-      &.bottom-section {
-        bottom: 0;
-
-        .dca-nav-action-panel {
-          box-shadow: 0 -11px 14px 10px #f1f3f7, 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-        }
-      }
-
-      &.active {
-        visibility: visible;
-        opacity: 1;
-        transition: opacity 0.5s linear;
-      }
-
-      .dca-nav-action-panel {
-        display: inline-grid;
-        grid-template-columns: 50% 50%;
-        height: 50px;
-        border-radius: 4px;
-        background-color: #ffffff;
-        padding-left: 20px;
-        padding-right: 20px;
-        align-items: center;
+      .ca-date-container {
         width: 100%;
+        position: relative;
+        display: grid;
+        grid-template-columns: 50px 1fr 50px;
+        align-items: center;
+        justify-items: center;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
 
-        .dca-action-buttons {
+        .prev-cal-arrow {
+          height: 20px;
+          cursor: pointer;
+          color: #ccc;
+        }
+
+        .next-cal-arrow {
+          height: 20px;
+          cursor: pointer;
+          color: #ccc;
+        }
+
+        .cal-mm-yyyy {
+          display: inline-flex;
+          height: 20px;
+          font-weight: bold;
+          cursor: pointer;
+
+          .arrow_drop_up {
+            display: none;
+          }
+
+          .arrow_drop_down {
+            display: inline-block;
+          }
+
+          &.active {
+            .arrow_drop_up {
+              display: inline-block;
+            }
+
+            .arrow_drop_down {
+              display: none;
+            }
+          }
+        }
+
+        .ca-datepicker-container {
+          background: #fff;
+          position: absolute;
+          z-index: 1;
+          width: inherit;
+          box-shadow: 0 13px 16px 0 rgba(0, 0, 0, 0.13);
+          top: 50px;
+          display: none;
+
+          #ca-datepicker {
+            .datepicker {
+              width: 100%;
+
+              .table-condensed {
+                width: 100%;
+
+                thead tr:first-child {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .ca-add-content {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr 1fr;
+        border-left: 1px solid #ccc;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+
+        .ca-contents-button {
           display: inline-grid;
           justify-items: center;
           align-items: center;
           grid-template-columns: 40px 20px 20px;
           grid-gap: 15px;
+          padding-left: 15px;
 
           p {
             font-family: "Open Sans";
@@ -401,10 +179,17 @@
           }
         }
 
-        .dca-course-map-button {
+        .ca-course-map-button {
           text-align: right;
           cursor: pointer;
           height: 20px;
+          padding-left: 15px;
+          padding-right: 15px;
+
+          &.no-course {
+            pointer-events: none;
+            opacity: 0.5;
+          }
 
           span {
             font-family: "Lato";
@@ -414,39 +199,65 @@
           }
         }
       }
+    }
 
-      .todays-dca-list-arrow-container {
-        position: absolute;
-        top: -6px;
-        left: 46%;
+    .dca-list-container {
+      height: calc(100vh - 270px);
+      overflow-y: auto;
+      padding-right: 20px;
+      padding-left: 20px;
+      padding-bottom: 20px;
 
-        .todays-dca-list-arrow {
-          width: 60px;
-          height: 60px;
-          background-color: #fff;
-          border-radius: 50%;
-          box-shadow: 0 6px 4px 0 rgba(0, 0, 0, 0.3),
-            0 1px 4px 0 rgba(0, 0, 0, 0.15), 0 6px 4px 0 rgba(0, 0, 0, 0.15),
-            0 2px 4px 0 rgba(0, 0, 0, 0.15);
-          margin-bottom: 10px;
-          cursor: pointer;
+      .dca-date-view-container {
+        display: inline-grid;
+        grid-template-columns: 200px 1fr;
+        align-items: center;
+        height: 50px;
+        width: 100%;
 
-          .arrow_downward,
-          .arrow_upward {
-            color: #1aa9eb;
-            font-size: 36px;
-            margin-left: 12px;
-            margin-top: 13px;
+        .dca-date-container {
+          display: inline-flex;
+          width: 100%;
+          align-items: center;
+
+          .calendar_today {
+            padding-left: 20px;
+          }
+
+          span {
+            padding-left: 20px;
           }
         }
 
-        span {
-          font-family: "Lato";
-          text-transform: uppercase;
-          display: block;
-          text-align: center;
-          color: #1aa9eb;
-          font-weight: bold;
+        hr {
+          width: 100%;
+          border-top: 1px solid #ccc;
+        }
+      }
+
+      .dca-content-list-container {
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+
+        .dca-assign {
+          pointer-events: none;
+        }
+
+        .gru-class-activity-panel:last-child {
+          .dca-panel-container {
+            border-bottom: none;
+          }
+
+          .dca-panel-performance {
+            border-bottom-right-radius: 4px;
+          }
+        }
+
+        .gru-class-activity-panel:first-child {
+          .dca-panel-performance {
+            border-top-right-radius: 4px;
+          }
         }
       }
     }
