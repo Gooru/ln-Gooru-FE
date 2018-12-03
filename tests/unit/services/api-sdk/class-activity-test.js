@@ -49,8 +49,8 @@ test('findClassActivities', function(assert) {
       endDate
     ) {
       assert.equal(classId, 123, 'Wrong class id');
-      assert.equal(startDate, 'fake-start-date', 'Wrong start date');
-      assert.equal(endDate, 'fake-end-date', 'Wrong end date');
+      assert.equal(startDate, '2018-11-01', 'Wrong start date');
+      assert.equal(endDate, '2018-11-30', 'Wrong end date');
       assert.deepEqual(classActivities, [1, 2, 3], 'Wrong class activities');
       return Ember.RSVP.resolve(classActivities);
     }
@@ -59,11 +59,11 @@ test('findClassActivities', function(assert) {
   service.set(
     'classActivityAdapter',
     Ember.Object.create({
-      findClassActivities: function(classId, contentType, startDate, endDate) {
+      findClassActivities: function(classId, contentType, forMonth, forYear) {
         assert.equal(classId, 123, 'Wrong class id');
         assert.equal(contentType, 'any content type', 'Wrong content type');
-        assert.equal(startDate, 'fake-start-date', 'Wrong start date');
-        assert.equal(endDate, 'fake-end-date', 'Wrong end date');
+        assert.equal(forMonth, 11, 'Wrong for month');
+        assert.equal(forYear, 2018, 'Wrong for year');
         return Ember.RSVP.resolve('fake-payload');
       }
     })
@@ -81,12 +81,7 @@ test('findClassActivities', function(assert) {
 
   var done = assert.async();
   service
-    .findClassActivities(
-      123,
-      'any content type',
-      'fake-start-date',
-      'fake-end-date'
-    )
+    .findClassActivities(123, 'any content type', 11, 2018)
     .then(function(response) {
       assert.deepEqual(response, [1, 2, 3], 'Wrong response');
       done();
@@ -106,8 +101,8 @@ test('findStudentClassActivities', function(assert) {
     ) {
       assert.equal(userId, 321, 'Wrong user id');
       assert.equal(classId, 123, 'Wrong class id');
-      assert.equal(startDate, 'fake-start-date', 'Wrong start date');
-      assert.equal(endDate, 'fake-end-date', 'Wrong end date');
+      assert.equal(startDate, '2018-11-01', 'Wrong start date');
+      assert.equal(endDate, '2018-11-30', 'Wrong end date');
       assert.deepEqual(classActivities, [1, 2, 3], 'Wrong class activities');
       return Ember.RSVP.resolve(classActivities);
     }
@@ -116,11 +111,11 @@ test('findStudentClassActivities', function(assert) {
   service.set(
     'classActivityAdapter',
     Ember.Object.create({
-      findClassActivities: function(classId, contentType, startDate, endDate) {
+      findClassActivities: function(classId, contentType, forMonth, forYear) {
         assert.equal(classId, 123, 'Wrong class id');
         assert.equal(contentType, 'any content type', 'Wrong content type');
-        assert.equal(startDate, 'fake-start-date', 'Wrong start date');
-        assert.equal(endDate, 'fake-end-date', 'Wrong end date');
+        assert.equal(forMonth, 11, 'Wrong for month');
+        assert.equal(forYear, 2018, 'Wrong for year');
         return Ember.RSVP.resolve('fake-payload');
       }
     })
@@ -138,13 +133,7 @@ test('findStudentClassActivities', function(assert) {
 
   var done = assert.async();
   service
-    .findStudentClassActivities(
-      321,
-      123,
-      'any content type',
-      'fake-start-date',
-      'fake-end-date'
-    )
+    .findStudentClassActivities(321, 123, 'any content type', 11, 2018)
     .then(function(response) {
       assert.deepEqual(response, [1, 2, 3], 'Wrong response');
       done();

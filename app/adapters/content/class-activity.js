@@ -25,8 +25,10 @@ export default Ember.Object.extend({
     classId,
     contentId,
     contentType,
-    addedDate = new Date(),
-    context = {}
+    addedDate,
+    context = {},
+    forMonth = moment().format('MM'),
+    forYear = moment().format('YYYY')
   ) {
     const adapter = this;
     const namespace = this.get('namespace');
@@ -42,6 +44,8 @@ export default Ember.Object.extend({
         content_id: contentId,
         content_type: contentType,
         dca_added_date: formatDate(addedDate, 'YYYY-MM-DD'),
+        for_month: parseInt(forMonth),
+        for_year: parseInt(forYear),
         ctx_course_id: context ? context.courseId : null,
         ctx_unit_id: context ? context.unitId : null,
         ctx_lesson_id: context ? context.lessonId : null,
@@ -84,15 +88,15 @@ export default Ember.Object.extend({
    *
    * @param {string} classId
    * @param {string} contentType collection|assessment|resource|question
-   * @param {Date} startDate optional, default is now
-   * @param {Date} endDate optional, default is now
+   * @param {Month} month optional, default is current month
+   * @param {Year} year optional, default is current year
    * @returns {Promise}
    */
   findClassActivities: function(
     classId,
     contentType = undefined,
-    startDate = new Date(),
-    endDate = new Date()
+    forMonth = moment().format('MM'),
+    forYear = moment().format('YYYY')
   ) {
     const adapter = this;
     const namespace = this.get('namespace');
@@ -103,8 +107,8 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       data: {
         content_type: contentType,
-        date_from: formatDate(startDate, 'YYYY-MM-DD'),
-        date_to: formatDate(endDate, 'YYYY-MM-DD')
+        for_month: forMonth,
+        for_year: forYear
       }
     };
     return Ember.$.ajax(url, options);
