@@ -559,7 +559,7 @@ export default Ember.Component.extend({
   showDomainPopOver() {
     let component = this;
     let domainBoundaryLines = component.$('.horizontal-line');
-    let midDomain = Math.round(domainBoundaryLines.length / 2);
+    let midDomain = Math.round((domainBoundaryLines.length - 6) / 2);
     let midLevelDomainBoundary = component.$(
       `.domain-boundary-line-${midDomain}`
     );
