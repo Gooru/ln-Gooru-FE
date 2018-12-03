@@ -1,5 +1,5 @@
 {{#if isExpanded}}
-  <div class="backdrop" {{action 'closePullUp'}}></div>
+  <div class="backdrop" {{action 'onClosePullUp'}}></div>
 {{/if}}
 <div class="pull-up-container">
   {{#if (eq type "destination")}}
@@ -11,7 +11,7 @@
       {{gru-icon name="near_me"}}
     </div>
   {{/if}}
-  <div class="pull-up-header" {{action 'openPullUp'}}>
+  <div class="pull-up-header" {{action 'onOpenPullUp'}}>
     <div class="grade-title">{{grade.grade}}</div>
     <div class="counts">{{t 'student-first-experience.units.other' count=courseData.unitCount}}
     </div>

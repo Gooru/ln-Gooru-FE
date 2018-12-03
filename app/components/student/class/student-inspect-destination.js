@@ -96,7 +96,6 @@ export default Ember.Component.extend({
       let component = this;
       component.sendAction('onMoveNext', curStep);
     },
-
     /**
      * Action triggered when toggle route0 course-map view expanded/collapsed
      */

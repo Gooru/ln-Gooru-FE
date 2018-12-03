@@ -575,6 +575,10 @@
             height: 51px;
             position: relative;
 
+            &.enable {
+              pointer-events: all;
+            }
+
             a {
               top: 0;
               right: 0;
