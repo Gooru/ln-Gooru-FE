@@ -121,7 +121,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           'classActivities',
           sortedDateWiseClassActivities
         );
-        controller.handleContainerListScroll();
       }
       if (!content.get('isAddedFromPanel')) {
         controller.get('newlyAddedDcaContents').pushObject(addContent);
@@ -131,6 +130,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           addContent.set('isNewlyAdded', false);
         }, 2000);
       }
+      this.set(
+        'classActivities',
+        classActivities.sortBy('added_date').reverse()
+      );
     },
 
     /**
@@ -180,22 +183,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         this,
         'content.modals.gru-remove-class-activity',
         model
-      );
-    },
-
-    /**
-     * Triggered when a close welcome panel button is selected.
-     */
-    toggleHeader: function() {
-      let controller = this;
-      Ember.$('.controller.teacher.class.class-activities .welcome').slideUp(
-        400,
-        function() {
-          Ember.$(
-            '.controller.teacher.class.class-activities .dca-content-list-container'
-          ).css('height', 'calc(100vh - 180px)');
-          controller.handleShowActionBar();
-        }
       );
     },
 
@@ -396,7 +383,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     if (dateWiseClassActivities.get('classActivities').length === 0) {
       classActivities.removeObject(dateWiseClassActivities);
     }
-    this.handleContainerListScroll();
   },
 
   loadData() {

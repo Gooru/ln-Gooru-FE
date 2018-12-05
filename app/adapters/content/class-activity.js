@@ -18,7 +18,6 @@ export default Ember.Object.extend({
    * @param {string} contentId
    * @param {string} contentType
    * @param {Date} addedDate
-   * @param { { courseId: string, unitId: string, lessonId: string } } context
    * @returns {Promise}
    */
   addActivityToClass: function(
@@ -26,7 +25,6 @@ export default Ember.Object.extend({
     contentId,
     contentType,
     addedDate,
-    context = {},
     forMonth = moment().format('MM'),
     forYear = moment().format('YYYY')
   ) {
@@ -45,11 +43,7 @@ export default Ember.Object.extend({
         content_type: contentType,
         dca_added_date: formatDate(addedDate, 'YYYY-MM-DD'),
         for_month: parseInt(forMonth),
-        for_year: parseInt(forYear),
-        ctx_course_id: context ? context.courseId : null,
-        ctx_unit_id: context ? context.unitId : null,
-        ctx_lesson_id: context ? context.lessonId : null,
-        ctx_collection_id: context ? context.collectionId : null
+        for_year: parseInt(forYear)
       })
     };
     return Ember.$.ajax(url, options);
@@ -132,6 +126,49 @@ export default Ember.Object.extend({
       processData: false,
       headers: adapter.defineHeaders(),
       data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Get the users information for the specified activity
+   *
+   * @param {string} classId
+   * @param {string} contentId content uuid
+   * @returns {Promise}
+   */
+  fetchUsersForClassActivity: function(classId, contentId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${classId}/contents/${contentId}/users`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Update the users information for the specified activity
+   *
+   * @param {string} classId
+   * @param {string} contentId
+   * @returns {Promise}
+   */
+  addUsersToActivity: function(classId, contentId, users) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${classId}/contents/${contentId}/users`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({
+        users: users
+      })
     };
     return Ember.$.ajax(url, options);
   },

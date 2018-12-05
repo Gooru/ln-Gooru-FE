@@ -35,7 +35,6 @@ export default Ember.Service.extend({
    * @param {string} contentId
    * @param {string} contentType
    * @param {Date} addedDate
-   * @param { { courseId: string, unitId: string, lessonId: string } } context
    * @param {Month} month optional, default is current month
    * @param {Year} year optional, default is current year
    * @returns {boolean}
@@ -45,7 +44,6 @@ export default Ember.Service.extend({
     contentId,
     contentType,
     addedDate,
-    context = {},
     forMonth = moment().format('MM'),
     forYear = moment().format('YYYY')
   ) {
@@ -62,7 +60,6 @@ export default Ember.Service.extend({
           contentId,
           contentType,
           addedDate,
-          context,
           forMonth,
           forYear
         )
@@ -341,6 +338,52 @@ export default Ember.Service.extend({
       service
         .get('classActivityAdapter')
         .removeClassActivity(classId, contentId)
+        .then(resolve, reject);
+    });
+  },
+
+  /**
+   * Get the users information for the specified activity
+   *
+   * @param {string} classId
+   * @param {string} contentId content uuid
+   * @returns {Promise}
+   */
+  fetchUsersForClassActivity: function(classId, contentId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .fetchUsersForClassActivity(classId, contentId)
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('classActivitySerializer')
+                .normalizeFetchUsersForClassActivity(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * Update the users information for the specified activity
+   *
+   * @param {string} classId
+   * @param {string} contentId
+   * @param {Array} list of user ids
+   * @returns {Promise}
+   */
+  addUsersToActivity: function(classId, contentId, users) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .addUsersToActivity(classId, contentId, users)
         .then(resolve, reject);
     });
   }
