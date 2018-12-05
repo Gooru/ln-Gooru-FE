@@ -99,6 +99,10 @@ export default Ember.Component.extend({
             component.sendAction('addedContentToDCA', data, date);
           }
         });
+    },
+
+    showStudentList() {
+      this.set('showStudentListPullup', true);
     }
   },
 
@@ -154,5 +158,11 @@ export default Ember.Component.extend({
    * Maintains the flag to show add dca content button or not.
    * @type {Boolean}
    */
-  showDcaAddButton: false
+  showDcaAddButton: false,
+
+  /**
+   * Maintains the flag to show student list pull up.
+   * @type {Boolean}
+   */
+  showStudentListPullup: false
 });

@@ -56,7 +56,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
       },
       added_date: data.dca_added_date,
       activation_date: data.activation_date,
-      collection: content
+      collection: content,
+      usersCount: data.users_count
     });
   },
 
@@ -122,5 +123,21 @@ export default Ember.Object.extend(ConfigurationMixin, {
 
     //TODO normalize resources and questions
     return content;
+  },
+
+  normalizeFetchUsersForClassActivity(payload) {
+    if (payload && payload.users && Ember.isArray(payload.users)) {
+      return payload.users.map(function(user) {
+        return Ember.Object.create({
+          id: user.id,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          thumbnail: user.thumbnail_path,
+          isActive: user.is_active
+        });
+      });
+    } else {
+      return [];
+    }
   }
 });

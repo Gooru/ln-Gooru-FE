@@ -1,14 +1,6 @@
 <div class="controller teacher class class-activities">
-  <div class="dca-title">
+  <div class="ca-title hidden-xs hidden-sm">
     <p>{{t 'teacher-landing.class.class-activities'}}</p>
-  </div>
-  <div class="panel panel-default panel-primary welcome">
-    <div class="panel-body">
-      <div class="description">{{t "teacher-landing.class.class-activities-tab.welcome-dca"}}</div>
-      <div class="close">
-        <a {{action 'toggleHeader'}}>X</a>
-      </div>
-    </div>
   </div>
   <div class="loading-spinner">
     {{#if isLoading}}
@@ -64,6 +56,10 @@
           {{/each}}
         </div>
       {{/each}}
+    </div>
+    <div class="ca-unschedule-container">
+      <div class="unscheduled-items">Unscheduled Items</div>
+      {{gru-icon name="arrow_drop_up"}}
     </div>
   </div>
 </div>

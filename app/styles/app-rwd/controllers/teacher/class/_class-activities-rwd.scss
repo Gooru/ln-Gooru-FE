@@ -1,17 +1,5 @@
 .controller.teacher.class.class-activities {
   @media screen and (max-width: $screen-600) {
-    .panel.welcome {
-      height: max-content;
-
-      .panel-body {
-        padding: 15px;
-
-        .description {
-          width: 90%;
-        }
-      }
-    }
-
     .dca-content-container {
       .dca-content-list-container {
         padding-left: 5px;

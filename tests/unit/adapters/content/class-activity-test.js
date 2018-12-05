@@ -11,7 +11,7 @@ moduleForAdapter(
 );
 
 test('addActivityToClass with no context', function(assert) {
-  assert.expect(10);
+  assert.expect(6);
 
   const adapter = this.subject();
   adapter.set(
@@ -36,22 +36,6 @@ test('addActivityToClass with no context', function(assert) {
           moment(requestBodyJson.dca_added_date).format('YYYY-MM-DD'),
           '2013-01-20',
           'Wrong added date'
-        );
-        assert.notOk(
-          requestBodyJson.ctx_course_id,
-          'ctx_course_id should be undefined'
-        );
-        assert.notOk(
-          requestBodyJson.ctx_unit_id,
-          'ctx_unit_id should be undefined'
-        );
-        assert.notOk(
-          requestBodyJson.ctx_lesson_id,
-          'ctx_lesson_id should be undefined'
-        );
-        assert.notOk(
-          requestBodyJson.ctx_collection_id,
-          'ctx_collection_id should be undefined'
         );
         assert.equal(
           request.requestHeaders.Authorization,
@@ -77,7 +61,7 @@ test('addActivityToClass with no context', function(assert) {
 });
 
 test('addActivityToClass with context', function(assert) {
-  assert.expect(10);
+  assert.expect(6);
 
   const adapter = this.subject();
   adapter.set(
@@ -103,26 +87,7 @@ test('addActivityToClass with context', function(assert) {
           '2013-01-20',
           'Wrong added date'
         );
-        assert.equal(
-          requestBodyJson.ctx_course_id,
-          10,
-          'ctx_course_id should be 10'
-        );
-        assert.equal(
-          requestBodyJson.ctx_unit_id,
-          20,
-          'ctx_unit_id should be 20'
-        );
-        assert.equal(
-          requestBodyJson.ctx_lesson_id,
-          30,
-          'ctx_lesson_id should be 30'
-        );
-        assert.equal(
-          requestBodyJson.ctx_collection_id,
-          40,
-          'ctx_collection_id should be 40'
-        );
+
         assert.equal(
           request.requestHeaders.Authorization,
           'Token token-api-3',
@@ -140,12 +105,7 @@ test('addActivityToClass with context', function(assert) {
     );
   });
   adapter
-    .addActivityToClass(123, 321, 'assessment', new Date(2013, 0, 20), {
-      courseId: 10,
-      unitId: 20,
-      lessonId: 30,
-      collectionId: 40
-    })
+    .addActivityToClass(123, 321, 'assessment', new Date(2013, 0, 20))
     .then(function(response) {
       assert.equal('', response, 'Wrong response');
     });

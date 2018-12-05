@@ -16,244 +16,268 @@
   }
 
   .dca-panel-container {
-    display: inline-grid;
-    width: 100%;
-    grid-template-columns: 55% 15% 30%;
-    height: 45px;
-    border-bottom: solid 1px #cacaca;
     transition: background-color 2s linear;
 
     &.new {
       background-color: #ffc107ad;
     }
 
-    .dca-panel-info {
+    .ca-panel-container-1 {
+      display: inline-grid;
       width: 100%;
-      display: inline-grid;
-      grid-template-columns: 65px 1fr;
-      align-items: center;
+      grid-template-columns: 55% 15% 30%;
+      height: 60px;
+      border-bottom: solid 1px #cacaca;
 
-      .collection-icon {
-        width: 20px;
-        height: 20px;
-        background-repeat: no-repeat;
-        background-size: 20px 20px;
-        background-image: url("../assets/gooru/images/add_collection.svg");
-        opacity: 0.8;
-        justify-self: center;
-      }
-
-      .assessment-external-icon,
-      .assessment-icon {
-        width: 20px;
-        height: 20px;
-        background-repeat: no-repeat;
-        background-size: 20px 20px;
-        background-image: url("../assets/gooru/images/add_assessment.svg");
-        opacity: 0.8;
-        justify-self: center;
-      }
-
-      p {
-        margin: 0;
-        cursor: pointer;
-        font-family: "Open Sans";
-        color: #4a4a4a;
-        padding: 0 20px 0 0;
-        @include ellipsis(
-          $font-size: 15px,
-          $line-height: 1.5,
-          $lines-to-show: 1
-        );
-      }
-    }
-
-    .dca-content-counts {
-      display: inline-flex;
-      align-items: center;
-      justify-content: space-evenly;
-
-      .resource-count {
-        width: 40px;
+      .dca-panel-info {
+        width: 100%;
         display: inline-grid;
+        grid-template-columns: 65px 1fr;
         align-items: center;
-        grid-template-columns: 50% 50%;
-        justify-items: center;
-        height: 20px;
 
-        .resource-icon {
+        .collection-icon {
           width: 20px;
           height: 20px;
           background-repeat: no-repeat;
           background-size: 20px 20px;
-          background-image: url("../assets/gooru/images/add_resource_icon.svg");
+          background-image: url("../assets/gooru/images/add_collection.svg");
           opacity: 0.8;
+          justify-self: center;
         }
 
-        span {
-          height: 20px;
-        }
-      }
-
-      .question-count {
-        width: 40px;
-        display: inline-grid;
-        align-items: center;
-        grid-template-columns: 50% 50%;
-        justify-items: center;
-        height: 20px;
-
-        .question-icon {
+        .assessment-external-icon,
+        .assessment-icon {
           width: 20px;
           height: 20px;
           background-repeat: no-repeat;
           background-size: 20px 20px;
-          background-image: url("../assets/gooru/images/add_question.svg");
+          background-image: url("../assets/gooru/images/add_assessment.svg");
           opacity: 0.8;
+          justify-self: center;
         }
 
-        span {
-          height: 20px;
+        p {
+          margin: 0;
+          cursor: pointer;
+          font-family: "Open Sans";
+          color: #4a4a4a;
+          padding: 0 20px 0 0;
+          @include ellipsis(
+            $font-size: 15px,
+            $line-height: 1.5,
+            $lines-to-show: 1
+          );
         }
       }
 
-      .external-icon {
-        width: 20px;
-        height: 20px;
-        background-repeat: no-repeat;
-        background-size: 20px 20px;
-        background-image: url("../assets/gooru/share.png");
-      }
-    }
-
-    .dca-panel-actions-performance {
-      display: inline-grid;
-      grid-template-columns: 1fr 53px;
-      align-items: center;
-
-      .dca-panel-actions {
-        display: inline-grid;
+      .dca-content-counts {
+        display: inline-flex;
         align-items: center;
-        padding-left: 10px;
-        padding-right: 10px;
-        justify-items: center;
-        grid-template-columns: 30px 30px 35px 35px 30px;
-        grid-column-gap: 5px;
+        justify-content: space-evenly;
 
-        .dca-add {
-          visibility: hidden;
-          opacity: 0;
-          cursor: pointer;
-
-          .add {
-            font-size: 20px;
-            display: block;
-          }
-        }
-
-        .rubric-icon {
-          width: 25px;
-          height: 25px;
-          background-repeat: no-repeat;
-          background-size: 25px 25px;
-          background-image: url("../assets/gooru/images/rubric-green.svg");
-          display: block;
-        }
-
-        .remove-dca {
-          width: 20px;
-          height: 19px;
-          cursor: pointer;
-          display: block;
-
-          .remove_circle {
-            font-size: 20px;
-            display: block;
-          }
-        }
-
-        .golive-icon {
-          width: 25px;
-          height: 25px;
-          background-repeat: no-repeat;
-          background-size: 25px 25px;
-          background-image: url("../assets/gooru/on-air-icon.png");
-          cursor: pointer;
-          display: block;
-        }
-
-        .dca-assign {
+        .resource-count {
           width: 40px;
-          display: inline-block;
+          display: inline-grid;
+          align-items: center;
+          grid-template-columns: 50% 50%;
+          justify-items: center;
+          height: 20px;
 
-          .gru-switch {
-            padding: 0;
+          .resource-icon {
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-image: url("../assets/gooru/images/add_resource_icon.svg");
+            opacity: 0.8;
+          }
 
-            &.assigned {
-              pointer-events: none;
+          span {
+            height: 20px;
+          }
+        }
+
+        .question-count {
+          width: 40px;
+          display: inline-grid;
+          align-items: center;
+          grid-template-columns: 50% 50%;
+          justify-items: center;
+          height: 20px;
+
+          .question-icon {
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-image: url("../assets/gooru/images/add_question.svg");
+            opacity: 0.8;
+          }
+
+          span {
+            height: 20px;
+          }
+        }
+
+        .external-icon {
+          width: 20px;
+          height: 20px;
+          background-repeat: no-repeat;
+          background-size: 20px 20px;
+          background-image: url("../assets/gooru/share.png");
+        }
+      }
+
+      .dca-panel-actions-performance {
+        display: inline-grid;
+        grid-template-columns: 1fr 53px;
+        align-items: center;
+
+        .dca-panel-actions {
+          display: inline-grid;
+          align-items: center;
+          padding-left: 10px;
+          padding-right: 10px;
+          justify-items: center;
+          grid-template-columns: 30px 30px 35px 35px 30px;
+          grid-column-gap: 5px;
+
+          .dca-add {
+            visibility: hidden;
+            opacity: 0;
+            cursor: pointer;
+
+            .add {
+              font-size: 20px;
+              display: block;
             }
+          }
 
-            .toggle.btn {
-              width: 40px !important;
-              height: 20px !important;
-              border-radius: 20px;
+          .rubric-icon {
+            width: 25px;
+            height: 25px;
+            background-repeat: no-repeat;
+            background-size: 25px 25px;
+            background-image: url("../assets/gooru/images/rubric-green.svg");
+            display: block;
+          }
 
-              .toggle-group {
-                .toggle-handle,
-                .toggle-off,
-                .toggle-on {
-                  border-radius: 20px;
-                }
+          .remove-dca {
+            width: 20px;
+            height: 19px;
+            cursor: pointer;
+            display: block;
 
-                .toggle-on {
-                  left: -13px;
-                  font-style: italic;
-                  font-size: $font-size-xxsmall;
-                  line-height: 4px !important;
-                }
+            .remove_circle {
+              font-size: 20px;
+              display: block;
+            }
+          }
 
-                .toggle-off {
-                  left: 33px;
-                  font-style: italic;
-                  line-height: 4px !important;
-                  font-size: $font-size-xxsmall;
-                }
+          .golive-icon {
+            width: 25px;
+            height: 25px;
+            background-repeat: no-repeat;
+            background-size: 25px 25px;
+            background-image: url("../assets/gooru/on-air-icon.png");
+            cursor: pointer;
+            display: block;
+          }
 
-                .toggle-handle {
-                  top: -5px;
-                  left: -2px;
-                }
+          .dca-assign {
+            width: 40px;
+            display: inline-block;
+
+            .gru-switch {
+              padding: 0;
+
+              &.assigned {
+                pointer-events: none;
               }
 
-              &.off {
+              .toggle.btn {
+                width: 40px !important;
+                height: 20px !important;
+                border-radius: 20px;
+
                 .toggle-group {
+                  .toggle-handle,
+                  .toggle-off,
+                  .toggle-on {
+                    border-radius: 20px;
+                  }
+
+                  .toggle-on {
+                    left: -13px;
+                    font-style: italic;
+                    font-size: $font-size-xxsmall;
+                    line-height: 4px !important;
+                  }
+
+                  .toggle-off {
+                    left: 33px;
+                    font-style: italic;
+                    line-height: 4px !important;
+                    font-size: $font-size-xxsmall;
+                  }
+
                   .toggle-handle {
-                    left: 2px;
+                    top: -5px;
+                    left: -2px;
+                  }
+                }
+
+                &.off {
+                  .toggle-group {
+                    .toggle-handle {
+                      left: 2px;
+                    }
                   }
                 }
               }
             }
           }
         }
+
+        .dca-panel-performance {
+          width: 100%;
+          height: 100%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          font-size: 11px;
+          cursor: pointer;
+
+          &.not-started {
+            pointer-events: none;
+          }
+
+          .no-performance {
+            color: #37424b;
+          }
+        }
+      }
+    }
+
+    .ca-panel-container-2 {
+      height: 20px;
+      grid-template-columns: 1fr 1fr 1fr;
+      display: grid;
+      align-items: center;
+      height: 30px;
+
+      .student-count {
+        padding-left: 25px;
       }
 
-      .dca-panel-performance {
-        width: 100%;
-        height: 100%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-size: 11px;
-        cursor: pointer;
+      .re-schedule {
+        justify-self: center;
+      }
 
-        &.not-started {
-          pointer-events: none;
-        }
-
-        .no-performance {
-          color: #37424b;
-        }
+      .time-spent {
+        justify-self: right;
+        padding-right: 25px;
       }
     }
   }

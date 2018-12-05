@@ -66,7 +66,6 @@ export default Ember.Route.extend({
    * @param model
    */
   setupController: function(controller, model) {
-    controller.set('showWelcome', true);
     controller.parseClassActivityData(model.classActivities);
     controller.initialize();
   },
