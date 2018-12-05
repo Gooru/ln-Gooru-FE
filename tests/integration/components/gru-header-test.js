@@ -15,7 +15,10 @@ moduleForComponent('gru-header', 'Integration | Component | Header', {
 test('header layout for anonymous', function(assert) {
   assert.expect(10); //making sure all asserts are called
 
-  this.set('session', Ember.Object.create({ isAnonymous: true }));
+  this.set(
+    'session',
+    Ember.Object.create({ isAnonymous: true, isGooruClientId: true })
+  );
 
   this.on('myAuthenticateAction', function() {
     assert.ok(false, 'onAuthenticateAction should not be called');

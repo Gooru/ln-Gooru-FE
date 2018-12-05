@@ -36,6 +36,8 @@ export default Ember.Component.extend({
   didInsertElement() {
     let component = this;
     component.set('isBaseLineDrawn', false);
+    component.set('activeGradeList', Ember.A([]));
+    component.set('domainBoundariesContainer', Ember.A([]));
     if (component.get('subject')) {
       component.loadDataBySubject(component.get('subject.id'));
     }
@@ -68,16 +70,43 @@ export default Ember.Component.extend({
     // Action triggered when select a grade
     onSelectGrade(gradeData) {
       let component = this;
-      let activeGrade = component.get('activeGrade');
-      if (activeGrade && activeGrade.id === gradeData.id) {
-        component.$('.domain-boundary-line').toggleClass('hidden-line');
-        component
-          .$(
-            `.taxonomy-grades .grade-list .grade-sequence-${gradeData.sequence}`
-          )
-          .toggleClass('active-grade');
+      let activeGradeList = component.get('activeGradeList');
+      let domainBoundariesContainer = component.get(
+        'domainBoundariesContainer'
+      );
+      let selectedGradeSeq = gradeData.sequence;
+      let selectedGradeElement = component.$(
+        `.taxonomy-grades .grade-list .grade-sequence-${selectedGradeSeq}`
+      );
+      let selectedGradeLine = component.$(`.grade-${gradeData.sequence}-line`);
+      if (activeGradeList[`${selectedGradeSeq}`]) {
+        delete activeGradeList[`${selectedGradeSeq}`];
+        selectedGradeLine.addClass('hidden-line');
+        selectedGradeElement.removeClass('active-grade');
+      } else {
+        activeGradeList[`${gradeData.sequence}`] = gradeData;
+        if (!domainBoundariesContainer[`${selectedGradeSeq}`]) {
+          component
+            .fetchDomainGradeBoundary(gradeData)
+            .then(function(domainBoundary) {
+              domainBoundariesContainer[`${selectedGradeSeq}`] = domainBoundary;
+              component.loadChartData();
+            });
+        } else {
+          component.loadChartData();
+        }
+        selectedGradeLine.removeClass('hidden-line');
+        selectedGradeElement.addClass('active-grade');
       }
-      component.set('activeGrade', gradeData);
+      component.set('domainBoundariesContainer', domainBoundariesContainer);
+      component.set('activeGradeList', activeGradeList);
+    },
+
+    //Action triggered when toggle baseline visibility
+    onToggleBaseline() {
+      let component = this;
+      component.$('#baseline-container').toggleClass('hidden-line');
+      component.$('.baseline-toggle').toggleClass('active-baseline');
     }
   },
 
@@ -91,6 +120,8 @@ export default Ember.Component.extend({
     let component = this;
     if (component.get('subject')) {
       component.set('chartData', {});
+      component.set('activeGradeList', Ember.A([]));
+      component.set('domainBoundariesContainer', Ember.A([]));
       component.loadDataBySubject(component.get('subject.id'));
       component.fetchTaxonomyGrades();
     }
@@ -105,24 +136,18 @@ export default Ember.Component.extend({
     component.loadDataBySubject(component.get('subject.id'));
   }),
 
-  /**
-   * On change of domainBoundaries will trigger this function
-   */
-  onChangeGradeBoundary: Ember.observer('domainBoundaries', function() {
-    let component = this;
-    component.loadChartData();
-  }),
-
-  /**
-   * On change of grade will trigger this function
-   */
-  onChangeGrade: Ember.observer('activeGrade', function() {
-    let component = this;
-    component.fetchDomainGradeBoundary();
-  }),
-
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {Array} domainBoundariesContainer
+   */
+  domainBoundariesContainer: Ember.A([]),
+
+  /**
+   * @property {Array} activeGradeList
+   */
+  activeGradeList: Ember.A([]),
 
   /**
    * @property {Number} width
@@ -268,19 +293,10 @@ export default Ember.Component.extend({
     let competencyMatrixCoordinates = component.get(
       'competencyMatrixCoordinates'
     );
-    let domainBoundaries = component.get('domainBoundaries');
-    let isDomainBoundaryAvailable = component.get('activeGrade')
-      ? !!domainBoundaries
-      : true;
-    if (
-      competencyMatrixDomains &&
-      competencyMatrixCoordinates &&
-      isDomainBoundaryAvailable
-    ) {
+    if (competencyMatrixDomains && competencyMatrixCoordinates) {
       let chartData = component.parseChartData(
         competencyMatrixDomains,
-        competencyMatrixCoordinates,
-        domainBoundaries
+        competencyMatrixCoordinates
       );
       component.drawChart(chartData);
       component.set('chartData', chartData);
@@ -354,11 +370,6 @@ export default Ember.Component.extend({
         taxonomyService.fetchGradesBySubject(filters)
       )
     }).then(({ taxonomyGrades }) => {
-      let activeGrade = taxonomyGrades.findBy(
-        'id',
-        component.get('classGrade')
-      );
-      component.set('activeGrade', activeGrade);
       component.set(
         'taxonomyGrades',
         taxonomyGrades.sortBy('sequence').reverse()
@@ -370,20 +381,18 @@ export default Ember.Component.extend({
    * @function fetchDomainGradeBoundary
    * Method to fetch domain grade boundary
    */
-  fetchDomainGradeBoundary() {
+  fetchDomainGradeBoundary(gradeData) {
     let component = this;
     let taxonomyService = component.get('taxonomyService');
-    let destinationGrade = component.get('activeGrade');
-    let gradeId = destinationGrade ? destinationGrade.id : null;
+    let gradeId = gradeData ? gradeData.id : null;
     return Ember.RSVP.hash({
-      domainBoundaries: gradeId
+      domainBoundary: gradeId
         ? Ember.RSVP.resolve(
           taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
         )
         : Ember.RSVP.resolve(null)
-    }).then(({ domainBoundaries }) => {
-      component.set('domainBoundaries', domainBoundaries);
-      return domainBoundaries;
+    }).then(({ domainBoundary }) => {
+      return domainBoundary;
     });
   },
 
@@ -391,11 +400,7 @@ export default Ember.Component.extend({
    * @function parseCompetencyData
    * Method to parse raw competency matrix and co-ordinate data to plot the chart
    */
-  parseChartData(
-    competencyMatrixs,
-    competencyMatrixCoordinates,
-    domainBoundaries
-  ) {
+  parseChartData(competencyMatrixs, competencyMatrixCoordinates) {
     let component = this;
     const cellHeight = component.get('cellHeight');
     let taxonomyDomain = Ember.A();
@@ -403,7 +408,6 @@ export default Ember.Component.extend({
     let currentXaxis = 1;
     let resultSet = Ember.A();
     let numberOfCellsInEachColumn = Ember.A();
-    let isDomainBoundaryAvailable = !!domainBoundaries;
     domains.forEach(domainData => {
       let domainCode = domainData.get('domainCode');
       let domainName = domainData.get('domainName');
@@ -412,12 +416,6 @@ export default Ember.Component.extend({
       let competencyMatrixByCompetency = competencyMatrix
         ? competencyMatrix.get('competencies')
         : [];
-      let domainBoundary = domainBoundaries
-        ? domainBoundaries.findBy('domainCode', domainCode)
-        : null;
-      let domainBoundaryCompetency = domainBoundary
-        ? domainBoundary.highline
-        : null;
       if (competencyMatrix && competencyMatrixByCompetency.length > 0) {
         taxonomyDomain.pushObject(domainData);
         let mergeDomainData = Ember.A();
@@ -426,8 +424,7 @@ export default Ember.Component.extend({
           let competencyName = competency.get('competencyName');
           let competencySeq = competency.get('competencySeq');
           let status = competency.get('status');
-          let isDomainBoundaryCompetency =
-            domainBoundaryCompetency === competency.competencyCode;
+
           let data = Ember.Object.create({
             domainName: domainName,
             domainCode: domainCode,
@@ -436,8 +433,7 @@ export default Ember.Component.extend({
             competencyName: competencyName,
             competencySeq: competencySeq,
             competencyStudentDesc: competency.get('competencyStudentDesc'),
-            status: status,
-            isDomainBoundaryCompetency
+            status: status
           });
           if (status > 1) {
             mergeDomainData.forEach(data => {
@@ -460,9 +456,6 @@ export default Ember.Component.extend({
             .objectAt(numberOfMasteredCompetency)
             .set('mastered', true);
         }
-        if (!domainBoundaryCompetency && isDomainBoundaryAvailable) {
-          mergeDomainData.objectAt(0).set('isDomainBoundaryCompetency', true);
-        }
 
         let cellIndex = 1;
         numberOfCellsInEachColumn.push(mergeDomainData.length);
@@ -473,6 +466,10 @@ export default Ember.Component.extend({
           cellIndex++;
         });
         currentXaxis = currentXaxis + 1;
+        mergeDomainData = component.parseGradeLineBoundaries(
+          mergeDomainData,
+          domainCode
+        );
       }
     });
     let height = cellHeight * Math.max(...numberOfCellsInEachColumn);
@@ -483,6 +480,35 @@ export default Ember.Component.extend({
     component.set('height', height);
     component.set('taxonomyDomains', taxonomyDomain);
     return resultSet;
+  },
+
+  /**
+   * @function parseGradeLineBoundaries
+   * Method will extract all the grade boundary competencies by domain wise
+   */
+  parseGradeLineBoundaries(domainCompetencyData, domainCode) {
+    let component = this;
+    let domainBoundariesContainer = component.get('domainBoundariesContainer');
+    if (domainBoundariesContainer) {
+      domainBoundariesContainer.forEach(function(domainsBoundary, gradeSeq) {
+        let curDomainBoundaryData = domainsBoundary.findBy(
+          'domainCode',
+          domainCode
+        );
+        let firstCompetency = domainCompetencyData.objectAt(0);
+        let curDomainHighLineCompetency = curDomainBoundaryData
+          ? domainCompetencyData.findBy(
+            'competencyCode',
+            curDomainBoundaryData.highline
+          ) || firstCompetency
+          : firstCompetency;
+        let className = curDomainHighLineCompetency.boundaryClass
+          ? curDomainHighLineCompetency.boundaryClass
+          : '';
+        curDomainHighLineCompetency.boundaryClass = `${className} boundary-line-${gradeSeq}`;
+      });
+    }
+    return domainCompetencyData;
   },
 
   /**
@@ -509,7 +535,10 @@ export default Ember.Component.extend({
       .attr('height', height);
     let cellContainer = svg.append('g').attr('id', 'cell-container');
     let skylineContainer = svg.append('g').attr('id', 'skyline-container');
-    let baseLineContainer = svg.append('g').attr('id', 'baseline-container');
+    let baseLineContainer = svg
+      .append('g')
+      .attr('id', 'baseline-container')
+      .attr('class', 'hidden-line');
     let domainBoundaryLineContainer = svg
       .append('g')
       .attr('id', 'domain-boundary-line-container');
@@ -535,7 +564,9 @@ export default Ember.Component.extend({
           d.xAxisSeq
         } competency-${d.xAxisSeq}-${
           d.yAxisSeq
-        } fillArea${d.status.toString()} ${domainBoundaryCompetency}`;
+        } fillArea${d.status.toString()} ${domainBoundaryCompetency} ${
+          d.boundaryClass
+        }`;
       })
       .on('click', function(d) {
         component.sendAction('onSelectCompetency', d);
@@ -718,6 +749,9 @@ export default Ember.Component.extend({
       );
       component.set('isBaseLineDrawn', true);
     }
+    if (component.$('.baseline-toggle').hasClass('active-baseline')) {
+      component.$('#baseline-container').removeClass('hidden-line');
+    }
   },
 
   /**
@@ -815,36 +849,46 @@ export default Ember.Component.extend({
    */
   drawDomainBoundaryLine() {
     let component = this;
-    let skylineElements = component.$('.domain-boundary');
+    let activeGradeList = component.get('activeGradeList');
     let cellWidth = component.get('cellWidth');
     let cellHeight = component.get('cellHeight');
     let svg = component.get('domainBoundaryLineContainer');
-    let cellIndex = 0;
-    skylineElements.each(function(index) {
-      let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
-      let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
-      y1 = y1 === 0 ? y1 + 3 : y1 + cellHeight + 3;
-      let x2 = x1 + cellWidth;
-      let y2 = y1;
-      let linePoint = {
-        x1,
-        y1,
-        x2,
-        y2
-      };
-      svg
-        .append('line')
-        .attr('x1', linePoint.x1)
-        .attr('y1', linePoint.y1)
-        .attr('x2', linePoint.x2)
-        .attr('y2', linePoint.y2)
-        .attr(
-          'class',
-          `domain-boundary-line horizontal-line domain-boundary-line-${cellIndex}`
+    activeGradeList.forEach(function(gradeData, gradeSeq) {
+      let boundaryLineElements = component.$(`.boundary-line-${gradeSeq}`);
+      boundaryLineElements.each(function(boundaryLineSeq) {
+        let x1 = parseInt(
+          component.$(boundaryLineElements[boundaryLineSeq]).attr('x')
         );
-      component.joinDomainBoundaryLinePoints(cellIndex, linePoint);
-      cellIndex++;
+        let y1 = parseInt(
+          component.$(boundaryLineElements[boundaryLineSeq]).attr('y')
+        );
+        y1 = y1 === 0 ? y1 + 3 : y1 + cellHeight + 3;
+        let x2 = x1 + cellWidth;
+        let y2 = y1;
+        let linePoint = {
+          x1,
+          y1,
+          x2,
+          y2
+        };
+        svg
+          .append('line')
+          .attr('x1', linePoint.x1)
+          .attr('y1', linePoint.y1)
+          .attr('x2', linePoint.x2)
+          .attr('y2', linePoint.y2)
+          .attr(
+            'class',
+            `boundary-line horizontal-line boundary-line-${gradeSeq}-${boundaryLineSeq} grade-${gradeSeq}-line`
+          );
+        component.joinDomainBoundaryLinePoints(
+          linePoint,
+          boundaryLineSeq - 1,
+          gradeSeq
+        );
+      });
     });
+
     component.set('isLoading', false);
   },
 
@@ -852,28 +896,30 @@ export default Ember.Component.extend({
    * @function joinDomainBoundaryLinePoints
    * Method to draw vertical line to connects domain boundary line points, if necessary
    */
-  joinDomainBoundaryLinePoints(cellIndex, curLinePoint) {
+  joinDomainBoundaryLinePoints(curLinePoint, lastBoundaryLineSeq, gradeSeq) {
     let component = this;
-    let lastSkyLineContainer = component.$(
-      `.domain-boundary-line-${cellIndex - 1}`
+    let lastBoundaryLineContainer = component.$(
+      `.boundary-line-${gradeSeq}-${lastBoundaryLineSeq}`
     );
-    let skyLineContainer = component.get('domainBoundaryLineContainer');
-    let lastskyLinePoint = {
-      x2: parseInt(lastSkyLineContainer.attr('x2')),
-      y2: parseInt(lastSkyLineContainer.attr('y2'))
+    let domainBoundaryLineContainer = component.get(
+      'domainBoundaryLineContainer'
+    );
+    let lastBoundaryLinePoint = {
+      x2: parseInt(lastBoundaryLineContainer.attr('x2')),
+      y2: parseInt(lastBoundaryLineContainer.attr('y2'))
     };
     //Connect sky line points if last and current points are not same
     if (
-      lastSkyLineContainer.length &&
-      lastskyLinePoint.y2 !== curLinePoint.y1
+      lastBoundaryLineContainer.length &&
+      lastBoundaryLinePoint.y2 !== curLinePoint.y1
     ) {
-      skyLineContainer
+      domainBoundaryLineContainer
         .append('line')
-        .attr('x1', lastskyLinePoint.x2)
-        .attr('y1', lastskyLinePoint.y2)
+        .attr('x1', lastBoundaryLinePoint.x2)
+        .attr('y1', lastBoundaryLinePoint.y2)
         .attr('x2', curLinePoint.x1)
         .attr('y2', curLinePoint.y1)
-        .attr('class', 'domain-boundary-line vertical-line');
+        .attr('class', `boundary-line vertical-line grade-${gradeSeq}-line`);
     }
   },
 

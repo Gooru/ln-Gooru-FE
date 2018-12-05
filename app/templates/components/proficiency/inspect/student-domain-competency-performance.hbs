@@ -1,0 +1,72 @@
+<div class="domain-competency-performance-container">
+  <div class="performance-header-container">
+    <div class="domain-details">
+      <div class="domain-info">
+        <div class="back-arrow" {{action "onClickBack"}}>
+          {{gru-icon name="arrow_back"}}
+        </div>
+        <div class="domain-name ellipsis">
+          {{concat activeDomain.domainSeq '. ' activeDomain.domainName}}
+        </div>
+      </div>
+      <div class="competency-count">
+        {{activeDomainCompetencyPerformance.domainData.competencies.length}} {{t 'common.competencies'}}
+      </div>
+    </div>
+    <div class="competency-performance-chartlist">
+      <div class="scrollable-chartlist">
+        {{#each activeDomainCompetencyPerformance.studentCompetencies as |studentPerformance studentSeq|}}
+          <div class="student-performance-detail">
+            {{charts.domain-competency-chart domainSeq=activeDomainCompetencyPerformance.domainData.domainSeq studentSeq=studentSeq competencies=studentPerformance.competencies maxChartHeight=180}}
+            <div class="thumbnail-container" style="background-image: url({{studentPerformance.thumbnail}})">
+            </div>
+          </div>
+        {{/each}}
+      </div>
+      <div class="domain-scroll-controller">
+        <div class="move-left {{if (lte activeDomainSeq 1) 'disabled'}}" {{action "onChangeDomainSeq" 'left'}}>
+          {{gru-icon name="chevron_left"}}
+        </div>
+        <div class="move-right {{if (gte activeDomainSeq numberOfDomains) 'disabled'}}"{{action "onChangeDomainSeq" 'right'}}>
+          {{gru-icon name="chevron_right"}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="performance-body-container">
+    <div class="students-container">
+      {{#each activeDomainCompetencyPerformance.studentCompetencies as |student|}}
+        <div class="student-container">
+          <div class="thumbnail-container" style="background-image: url({{student.thumbnail}})">
+          </div>
+          <div class="student-name">
+            {{student.fullName}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <div class="students-competencies-performance-container">
+      <div class="competencies-info">
+        {{#each activeDomainCompetencyPerformance.domainData.competencies as |competency|}}
+          <div class="competency-info"><i class="info-icon" title="{{if competency.competencyStudentDesc competency.competencyStudentDesc competency.competencyCode}}" data-toggle="tooltip" data-placement="bottom auto"></i></div>
+        {{/each}}
+      </div>
+      {{#each activeDomainCompetencyPerformance.studentCompetencies as |studentCompetencyPerformance|}}
+        <div class="competencies-performance-container">
+          {{#each studentCompetencyPerformance.competencies as |competencyPerformance|}}
+            <div class="competency-performance tab-container" {{action "onSelectCompetency" competencyPerformance studentCompetencyPerformance.userId}}>
+              <div class="check-circle status-{{competencyPerformance.status}}"></div>
+            </div>
+          {{/each}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+{{#if isShowCompetencyContentReport}}
+  {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
+    onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
+    {{reports.pull-up.competency-content-report competency=selectedCompetency userId=selectedStudentUserId learningMapData=learningMapData onToggleGlobalCompetencyView="onToggleGlobalCompetencyView"}}
+  {{/reports.pull-up.competency-report}}
+{{/if}}

@@ -54,7 +54,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         if (item === 'class-management') {
           route.transitionTo('teacher.class.class-management');
         } else if (item === 'students') {
-          route.transitionTo('teacher.class.students');
+          route.transitionTo('teacher.class.students-proficiency');
         } else if (item === 'course-map') {
           route.transitionTo('teacher.class.course-map');
         } else if (item === 'performance' && !isPremiumClass) {
@@ -166,11 +166,15 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     return classPromise.then(function(classData) {
       let classCourseId = null;
       if (classData.courseId) {
-        classCourseId = Ember.A([{classId: params.classId, courseId: classData.courseId}]);
+        classCourseId = Ember.A([
+          { classId: params.classId, courseId: classData.courseId }
+        ]);
       }
-      const performanceSummaryPromise = classCourseId ? route
-        .get('performanceService')
-        .findClassPerformanceSummaryByClassIds(classCourseId) : null;
+      const performanceSummaryPromise = classCourseId
+        ? route
+          .get('performanceService')
+          .findClassPerformanceSummaryByClassIds(classCourseId)
+        : null;
       return Ember.RSVP.hash({
         class: classPromise,
         members: membersPromise,
@@ -179,11 +183,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         const aClass = hash.class;
         const members = hash.members;
         const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
-        let classPerformanceSummary = classPerformanceSummaryItems ? classPerformanceSummaryItems.findBy('classId', classId) : null;
-        aClass.set(
-          'performanceSummary',
-          classPerformanceSummary
-        );
+        let classPerformanceSummary = classPerformanceSummaryItems
+          ? classPerformanceSummaryItems.findBy('classId', classId)
+          : null;
+        aClass.set('performanceSummary', classPerformanceSummary);
 
         const courseId = aClass.get('courseId');
         let visibilityPromise = Ember.RSVP.resolve([]);

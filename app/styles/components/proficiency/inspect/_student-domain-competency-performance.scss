@@ -1,0 +1,246 @@
+.inspect.student-domain-competency-performance {
+  .domain-competency-performance-container {
+    .performance-header-container {
+      background-color: #35424b;
+      padding: 15px 50px 5px;
+      min-height: 290px;
+      .domain-details {
+        display: grid;
+        grid-template-columns: auto auto;
+        border-bottom: 1px dashed $white;
+        margin-bottom: 15px;
+        .domain-info {
+          display: grid;
+          grid-template-columns: 30px auto;
+          justify-content: center;
+          align-items: center;
+          justify-self: left;
+          .back-arrow {
+            cursor: pointer;
+            i {
+              color: $white;
+              font-size: 20px;
+              font-weight: bold;
+            }
+          }
+          .domain-name {
+            color: $white;
+            font-size: 20px;
+            font-weight: bold;
+          }
+        }
+        .competency-count {
+          color: $white;
+          justify-self: end;
+          font-size: 15px;
+          font-weight: bold;
+        }
+      }
+      .competency-performance-chartlist {
+        position: relative;
+        .scrollable-chartlist {
+          display: flex;
+          overflow-x: auto;
+          .student-performance-detail {
+            display: grid;
+            .thumbnail-container {
+              width: 40px;
+              height: 40px;
+              background-size: 38px 38px;
+              display: block;
+              border-radius: 50%;
+              margin: 5px 0;
+              border: 2px solid $white;
+            }
+          }
+          &::-webkit-scrollbar {
+            height: 6px;
+            width: 8px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: $gray-light;
+            border: 1px solid $gray-light;
+            border-radius: 5px;
+          }
+        }
+        .domain-scroll-controller {
+          position: absolute;
+          width: 100%;
+          top: 35%;
+          .move-left,
+          .move-right {
+            width: 77px;
+            height: 77px;
+            position: absolute;
+            text-align: center;
+            cursor: pointer;
+            &:hover {
+              text-align: center;
+              border-radius: 50%;
+              background-color: rgba(255, 255, 255, 0.8);
+              box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04),
+                0 4px 8px 0 rgba(0, 0, 0, 0.2);
+              -webkit-transition: background-color 2s; /* Safari */
+              transition: background-color 2s;
+              border: none;
+            }
+          }
+          .move-left {
+            left: 0;
+          }
+          .move-right {
+            right: 0;
+          }
+          .disabled {
+            pointer-events: none;
+            opacity: 0.3;
+          }
+          i {
+            font-size: 78px;
+          }
+        }
+      }
+    }
+    .performance-body-container {
+      padding: 5px 50px 50px 50px;
+      background-color: $white;
+      display: grid;
+      grid-template-columns: 200px auto;
+      .students-container {
+        margin-top: 40px;
+        .student-container {
+          display: grid;
+          grid-template-columns: 35px auto;
+          align-items: center;
+          border-bottom: 1px solid rgba(151, 151, 151, 0.2);
+          height: 40px;
+          &:first-child {
+            border-top: 1px solid rgba(151, 151, 151, 0.2);
+          }
+          .thumbnail-container {
+            width: 30px;
+            height: 30px;
+            background-size: 30px 30px;
+            border: none;
+            display: block;
+            border-radius: 50%;
+            margin: 5px 0;
+          }
+          .student-name {
+            color: #37424b;
+            $font-size: 10px;
+            $line-height: 1.3;
+            text-transform: capitalize;
+            $lines-to-show: 2;
+            @include ellipsis(
+              $font-size: $font-size,
+              $line-height: $line-height,
+              $lines-to-show: $lines-to-show
+            );
+          }
+        }
+      }
+      .students-competencies-performance-container {
+        overflow-x: auto;
+        .competencies-info {
+          display: flex;
+          .competency-info {
+            height: 40px;
+            width: 40px;
+            display: grid;
+            .info-icon {
+              width: 40px;
+              height: 40px;
+              background-size: 20px 20px;
+              background-image: url("gooru/info-outline-light-gray.svg");
+              background-position: center;
+              background-repeat: no-repeat;
+              cursor: pointer;
+            }
+          }
+        }
+        .competencies-performance-container {
+          display: flex;
+          width: max-content;
+          .competency-performance {
+            min-height: 40px;
+            width: 40px;
+            border: 1px solid rgba(151, 151, 151, 0.2);
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            .check-circle {
+              height: 20px;
+              width: 20px;
+              background-size: 20px 20px;
+              &.status-0 {
+                background-image: url("gooru/images/check-circle-0.svg");
+              }
+              &.status-1 {
+                background-image: url("gooru/images/check-circle-1.svg");
+              }
+              &.status-2,
+              &.status-3,
+              &.status-4,
+              &.status-5 {
+                background-image: url("gooru/images/check-circle-mastered.svg");
+              }
+            }
+          }
+        }
+        &::-webkit-scrollbar {
+          height: 6px;
+          width: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: $gray-light;
+          border: 1px solid $gray-light;
+          border-radius: 5px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 992px) {
+      .performance-header-container {
+        .competency-performance-chartlist {
+          .domain-scroll-controller {
+            .move-left,
+            .move-right {
+              &:hover,
+              &:focus {
+                background-color: none;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 481px) {
+      .performance-header-container {
+        padding: 5px;
+      }
+      .performance-body-container {
+        padding: 5px;
+      }
+    }
+
+    @media screen and (max-width: 320px) {
+      .performance-header-container {
+        .domain-details {
+          .domain-info {
+            .domain-name {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+      .performance-body-container {
+        grid-template-columns: 150px auto;
+      }
+    }
+  }
+}

@@ -35,6 +35,20 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   pageSize: 10,
 
+  pageOptions: function(winwidth) {
+    let localpage = 10;
+    if (winwidth > 1440) {
+      localpage = 20;
+    } else if (winwidth > 1400 && winwidth < 1440) {
+      localpage = 20;
+    } else if (winwidth > 768 && winwidth < 1400) {
+      localpage = 10;
+    } else if (winwidth > 360 && winwidth < 768) {
+      localpage = 5;
+    }
+    return localpage;
+  },
+
   vbarDataChanged: Ember.observer('vbarData', function() {
     const route = this;
     var graphdata = route.get('vbarData');
@@ -43,6 +57,12 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     });
   }),
 
+  init() {
+    this._super(...arguments);
+    const route = this;
+    var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+    route.pageSize = route.pageOptions(width);
+  },
   beforeModel(transition) {
     if (!this.modelFor('study-player').barchartdata) {
       let studyPlayerController = this.controllerFor('study-player');

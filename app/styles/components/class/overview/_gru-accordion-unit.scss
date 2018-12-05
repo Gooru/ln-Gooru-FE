@@ -46,6 +46,11 @@
       width: 85px;
       &.not-started {
         pointer-events: none;
+        .container-box {
+          .percentage {
+            padding-top: 20px !important;
+          }
+        }
       }
       .charts.gru-performance-chart {
         .container-box {

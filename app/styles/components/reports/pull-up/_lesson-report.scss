@@ -100,6 +100,12 @@
           display: flex;
           align-items: center;
           max-width: calc(100% / 2);
+          padding-left: 15px;
+
+          .lesson-title-value {
+            width: 320px;
+            float: left;
+          }
 
           .keyboard_arrow_right {
             margin-right: 5px;

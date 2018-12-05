@@ -49,9 +49,11 @@
             {{validation.gru-input model=user valuePath='password' type='password' didValidate=didValidate inputId='passwordId'}}
           </label>
           </div>
-          <div class="form-group forgot-password">
-            {{#link-to 'forgot-password'}} {{t "login.forgotPassword"}} {{/link-to}}
-          </div>
+          {{#if isGooruLogin}}
+            <div class="form-group forgot-password">
+              {{#link-to 'forgot-password'}} {{t "login.forgotPassword"}} {{/link-to}}
+            </div>
+          {{/if}}
           <div class="log-in-button form-group text-center">
             <button class="btn btn-success submit-sign-in" {{action "authenticate"}}>{{t "login.log-in"}} <span>{{gru-icon name='keyboard_arrow_right'}}</span></button>
           </div>
