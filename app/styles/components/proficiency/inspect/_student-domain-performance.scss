@@ -1,0 +1,267 @@
+.inspect-competency.student-domain-performance {
+  .performance-container {
+    .performance-header-container {
+      padding: 0 50px;
+      background-color: #35424b;
+      min-height: 200px;
+      .proficiency-info {
+        display: grid;
+        grid-template-columns: auto auto;
+        border-bottom: 1px dashed $white;
+        .subject {
+          font-size: 20px;
+          font-weight: bold;
+          color: $white;
+        }
+        .students-count {
+          font-size: 15px;
+          font-weight: bold;
+          color: $white;
+          justify-self: right;
+          display: grid;
+          grid-template-columns: auto 30px;
+          justify-content: center;
+          align-items: center;
+          .toggle-view {
+            display: grid;
+            justify-content: right;
+            cursor: pointer;
+          }
+        }
+      }
+      .competency-coverage-container {
+        display: grid;
+        grid-template-columns: 200px auto;
+        position: relative;
+        %coverage-count-styles {
+          .count-container {
+            width: 150px;
+            display: grid;
+            grid-template-columns: 77px auto;
+            .count-box {
+              width: 77px;
+              height: 25px;
+              display: block;
+            }
+            .competency-count {
+              font-size: 15px;
+              font-weight: bold;
+              margin-left: 10px;
+            }
+            &.mastered-count {
+              .count-box {
+                background-color: #0c70bb;
+              }
+              .competency-count {
+                color: #0c70bb;
+              }
+            }
+            &.inprogress-count  {
+              .count-box {
+                background-color: #24ade6;
+              }
+              .competency-count {
+                color: #24ade6;
+              }
+            }
+            &.notstarted-count {
+              .count-box {
+                background-color: #e7e8e9;
+              }
+              .competency-count {
+                color: #e7e8e9;
+              }
+            }
+          }
+        }
+        .course-coverage-container {
+          margin-top: 15px;
+          .title {
+            color: $white;
+            font-size: 20px;
+            text-transform: capitalize;
+            height: 50px;
+            margin-bottom: 10px;
+          }
+          .coverage-count {
+            @extend %coverage-count-styles;
+          }
+        }
+
+        .domains-coverage-container {
+          display: flex;
+          overflow-x: hidden;
+          margin-top: 25px;
+          .domain-coverage-count {
+            min-width: 200px;
+            .domain-name {
+              cursor: pointer;
+              color: $white;
+              $font-size: 15px;
+              $line-height: 1.3;
+              text-transform: capitalize;
+              height: 50px;
+              margin-bottom: 10px;
+              $lines-to-show: 2;
+              @include ellipsis($font-size: $font-size, $line-height: $line-height, $lines-to-show: $lines-to-show);
+            }
+            .coverage-count {
+              @extend %coverage-count-styles;
+            }
+          }
+          &::-webkit-scrollbar {
+            background: transparent;
+            width: 0;
+          }
+        }
+        .scroll-controller {
+          .right,
+          .left {
+            position: absolute;
+            top: 0;
+            cursor: pointer;
+
+            i {
+              font-size: 30px;
+              color: $white;
+            }
+
+            &.disabled {
+              cursor: default;
+              opacity: 0.5;
+            }
+          }
+
+          .left {
+            left: 200px;
+          }
+
+          .right {
+            right: 0;
+          }
+        }
+      }
+    }
+    .performance-body-container {
+      padding: 25px 50px 50px 50px;
+      background-color: $white;
+      display: grid;
+      grid-template-columns: 200px auto;
+      .tab-container {
+        width: 200px;
+        min-height: 40px;
+        line-height: 40px;
+      }
+      .students-container {
+        .student-container {
+          display: grid;
+          grid-template-columns: 35px auto;
+          align-items: center;
+          border-bottom: 1px solid rgba(151,151,151, 0.2);
+          &:first-child {
+            border-top: 1px solid rgba(151,151,151, 0.2);
+          }
+          .thumbnail-container {
+            width: 30px;
+            height: 30px;
+            background-size: 30px 30px;
+            border: none;
+            display: block;
+            border-radius: 50%;
+            margin: 5px 0;
+          }
+          .student-name {
+            color: #37424b;
+            $font-size: 10px;
+            $line-height: 1.3;
+            text-transform: capitalize;
+            $lines-to-show: 2;
+            @include ellipsis($font-size: $font-size, $line-height: $line-height, $lines-to-show: $lines-to-show);
+          }
+        }
+      }
+      .domains-performance-container {
+        overflow-x: hidden;
+        .domain-performance-container {
+          width: max-content;
+          &:first-child {
+            border-top: 1px solid rgba(151,151,151, 0.2);
+          }
+          border-bottom: 1px solid rgba(151,151,151, 0.2);
+          display: flex;
+          .performance-chart-container {
+            &.tab-container {
+              min-width: 200px;
+              display: grid;
+              align-items: center;
+            }
+            .student-domain-performance {
+              .chart {
+                display: grid;
+                align-items: center;
+                grid-template-columns: auto;
+              }
+            }
+          }
+        }
+        &::-webkit-scrollbar {
+          background: transparent;
+          width: 0;
+        }
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .performance-header-container {
+        padding: 0 10px;
+        .proficiency-info {
+          .subject {
+            font-size: 17px;
+          }
+          .students-count {
+            font-size: 15px;
+          }
+        }
+        .competency-coverage-container {
+          .title {
+            font-size: 17px;
+          }
+        }
+      }
+      .performance-body-container {
+        padding: 10px;
+      }
+    }
+
+    @media screen and (max-width: 320px) {
+      .performance-header-container {
+        .competency-coverage-container {
+          grid-template-columns: 150px auto;
+          .scroll-controller {
+            .left {
+              left: 150px;
+            }
+          }
+          .course-coverage-container {
+            .title {
+              font-size: 15px;
+            }
+          }
+        }
+        .domains-coverage-container {
+          .domain-coverage-count {
+            .domain-name {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+      .performance-body-container {
+        grid-template-columns: 150px auto;
+        .tab-container {
+          width: 150px;
+        }
+      }
+    }
+  }
+}

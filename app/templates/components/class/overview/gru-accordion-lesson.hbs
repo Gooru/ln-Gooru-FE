@@ -1,7 +1,7 @@
 <div class="panel-heading  {{if isLessonSelected 'study-active'}}" role="tab" id="{{elementId}}-heading">
   <div class="panel-title">
     <a class="title collapsed" role="button" data-toggle="collapse" href="#{{elementId}}-content" aria-expanded="false" aria-controls="{{elementId}}-content" {{action "selectLesson" model.id}}>
-      <span class="lesson-prefix">{{course-sections-prefix  index=index type='lesson' longName=true}}</span><span class="lesson-title-text ellipsis">{{model.title}}</span>
+      <span class="lesson-prefix">{{course-sections-prefix  index=index type='lesson' longName=true}}</span><span class="lesson-title-text ellipsis" title="{{model.title}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">{{model.title}}</span>
     </a>
   </div>
   {{#unless isFromDCA}}
@@ -29,7 +29,7 @@
       {{else}}
         <div class= {{if isTeacher 'controls pull-right' 'play-btn pull-right'}}>
           {{#unless isTeacher}}
-            <button class="btn btn-info study-now" disabled= {{if (or studyNowDisabled (not isExpanded)) 'true' ''}} {{action "studyNow" 'lesson' model}} data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.play"}}">
+            <button class="btn btn-info study-now"  {{action "studyNow" 'lesson' model}} data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.play"}}">
               {{gru-icon name='play_arrow'}}
             </button>
           {{/unless}}
@@ -59,7 +59,7 @@
                     <span class="icon"><i class="{{item.contentSubFormat}}"></i></span>
                   </div>
                   <a class="title {{item.source}}" {{action "selectResource" item}}>
-                    <div class="ellipsis">{{item.title}}</div>
+                    <div class="ellipsis" title="{{item.title}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">{{item.title}}</div>
                     {{#if (eq item.source 'system_suggestions')}}
                       {{gru-icon name="explore"}} {{else if (eq item.source 'teacher_suggestions')}}
                       <i class="teacher_suggestions icon"></i>
@@ -114,7 +114,7 @@
                   </div>
                   {{#if item.visible}}
                     <a class="title {{item.source}}" {{action "selectResource" item}}>
-                      <div class="ellipsis">{{item.title}}</div>
+                      <div class="ellipsis" title="{{item.title}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">{{item.title}}</div>
                       {{#if (eq item.source 'system_suggestions')}}
                         {{gru-icon name="explore"}} {{else if (eq item.source 'teacher_suggestions')}}
                         <i class="teacher_suggestions icon"></i>
@@ -171,7 +171,7 @@
                           {{/if}}
                         {{else}}
                           {{#if item.performance.hasStarted}}
-                            <span {{action 'studentReport' item}} class="score {{unless item.performance.timeSpent 'not-started'}}" style= {{safe-html (concat "color:" (grade-color item.performance.score))}}>
+                            <span {{action 'studentReport' item}} class="score {{unless item.performance.timeSpent 'not-started'}}">
                               {{if item.performance.hasStarted (format-time item.performance.timeSpent) '--'}}
                             </span>
                           {{else}}

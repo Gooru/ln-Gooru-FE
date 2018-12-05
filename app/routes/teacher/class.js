@@ -54,7 +54,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         if (item === 'class-management') {
           route.transitionTo('teacher.class.class-management');
         } else if (item === 'students') {
-          route.transitionTo('teacher.class.students');
+          route.transitionTo('teacher.class.students-proficiency');
         } else if (item === 'course-map') {
           route.transitionTo('teacher.class.course-map');
         } else if (item === 'performance' && !isPremiumClass) {

@@ -642,6 +642,7 @@ export default Object.assign(quizzesTranslations, {
     study: 'Study',
     'study-now': 'Study Now',
     student: 'Student',
+    students: 'Students',
     'student-id': 'Student ID (not displayed on Profile)',
     'studen-id-display':
       'Student ID (not displayed on Profile, displayed in Anonymous mode)',
@@ -1258,7 +1259,11 @@ export default Object.assign(quizzesTranslations, {
         'student-id': 'StudentId',
         remove: 'Remove',
         mastered: 'Mastered',
-        'in-progress': 'In Progress'
+        'in-progress': 'In Progress',
+        'course-coverage': 'Course Coverage',
+        'proficiency-in': 'Proficiency in',
+        'data-not-available': 'Data Not Available',
+        'error-message': 'Possibly there is no a course assigned or there are none of students are joined or a valid subject is not assigned!'
       },
       'class-activities': 'Daily Class Activities',
       'back-to-class-activities': 'Back to Daily Class Activities',
@@ -2737,7 +2742,8 @@ export default Object.assign(quizzesTranslations, {
       'signature-assessments': 'Signature Assessments',
       'signature-collections': 'Signature Collections',
       'show-global-data': 'Show Global Data',
-      'show-student-data': 'Show Student Data'
+      'show-student-data': 'Show Student Data',
+      'show-learning-map': 'Show Learning Map'
     },
     'domain-report': 'Domain Report'
   },
