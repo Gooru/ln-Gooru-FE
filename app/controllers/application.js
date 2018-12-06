@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
+import Env from '../config/environment';
 
 export default Ember.Controller.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
@@ -115,14 +116,18 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    * Maintains the state of network progress
    * @return {Boolean}
    */
-  isNetworkInProgress: true,
+  isNetworkInProgress: false,
 
   // -------------------------------------------------------------------------
   // Methods
 
-  init: function() {
-    this._super(...arguments);
-    this.updateNetworkStatus();
+  init() {
+    let controller = this;
+    controller._super(...arguments);
+    const isTesting = Env.environment === 'test';
+    if (!isTesting) {
+      controller.updateNetworkStatus();
+    }
   },
 
   loadUserClasses: function() {
@@ -173,17 +178,24 @@ export default Ember.Controller.extend(ConfigurationMixin, {
     });
   },
 
-  updateNetworkStatus: function() {
+  updateNetworkStatus() {
     let controller = this;
     Ember.$(document).ajaxStart(function() {
-      controller.set('isNetworkInProgress', true);
+      controller.updateNetworkStatusVal(true);
     });
 
     Ember.$(document).ajaxStop(function() {
-      controller.set('isNetworkInProgress', false);
+      controller.updateNetworkStatusVal(false);
     });
     Ember.$(document).ajaxError(function() {
-      controller.set('isNetworkInProgress', true);
+      controller.updateNetworkStatusVal(false);
     });
+  },
+
+  updateNetworkStatusVal(status) {
+    let controller = this;
+    if (!controller.get('isDestroyed')) {
+      controller.set('isNetworkInProgress', status);
+    }
   }
 });
