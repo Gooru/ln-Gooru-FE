@@ -17,7 +17,7 @@ export default Ember.Component.extend({
       let component = this;
       let scrollableContainer = component.$('.scrollable-container');
       let curPos = scrollableContainer.scrollLeft();
-      let nextPos = direction === 'left' ? curPos - 120 : curPos + 120;
+      let nextPos = direction === 'left' ? curPos - 200 : curPos + 200;
       scrollableContainer.animate({
         scrollLeft: nextPos
       }, 400);
