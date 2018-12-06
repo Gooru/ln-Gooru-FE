@@ -105,6 +105,7 @@
   position: absolute;
   -webkit-animation: network-progress-indicator 2s infinite; /* Safari 4.0 - 8.0 */
   animation: network-progress-indicator 2s infinite;
+  z-index: 9999;
 }
 
 /* Safari 4.0 - 8.0 */

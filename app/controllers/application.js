@@ -110,8 +110,20 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    * @property {Profile}
    */
   profile: null,
+
+  /**
+   * Maintains the state of network progress
+   * @return {Boolean}
+   */
+  isNetworkInProgress: true,
+
   // -------------------------------------------------------------------------
   // Methods
+
+  init: function() {
+    this._super(...arguments);
+    this.updateNetworkStatus();
+  },
 
   loadUserClasses: function() {
     const controller = this;
@@ -158,6 +170,20 @@ export default Ember.Controller.extend(ConfigurationMixin, {
     return tenantService.findTenantFromCurrentSession().then(function(tenant) {
       controller.set('tenant', tenant);
       return tenant;
+    });
+  },
+
+  updateNetworkStatus: function() {
+    let controller = this;
+    Ember.$(document).ajaxStart(function() {
+      controller.set('isNetworkInProgress', true);
+    });
+
+    Ember.$(document).ajaxStop(function() {
+      controller.set('isNetworkInProgress', false);
+    });
+    Ember.$(document).ajaxError(function() {
+      controller.set('isNetworkInProgress', true);
     });
   }
 });
