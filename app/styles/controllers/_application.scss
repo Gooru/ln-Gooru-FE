@@ -15,8 +15,9 @@
     .gru-header {
       display: none;
     }
+
     .app-container {
-      padding: 0px;
+      padding: 0;
     }
   }
 }
@@ -98,25 +99,28 @@
   z-index: 99999;
 }
 
-.network-progress-indicator {
-  content: "";
-  width: 100%;
-  height: 3px;
-  position: absolute;
-  -webkit-animation: network-progress-indicator 2s infinite; /* Safari 4.0 - 8.0 */
-  animation: network-progress-indicator 2s infinite;
-  z-index: 9999;
+.network-inprogress {
+  .network-progress-indicator {
+    content: "";
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    -webkit-animation: network-progress-indicator 2s infinite;
+    /* Safari 4.0 - 8.0 */
+    animation: network-progress-indicator 2s infinite;
+    z-index: 9999;
+  }
 }
-
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes network-progress-indicator {
   0% {
     top: 0;
-    width: 0%;
+    width: 0;
     left: 0;
     right: 0;
     background: red;
   }
+
   50% {
     top: 0;
     width: 100%;
@@ -124,24 +128,25 @@
     right: 0;
     background: orange;
   }
+
   99% {
     top: 0;
-    width: 0%;
+    width: 0;
     left: 100%;
     right: 0;
     background: red;
   }
 }
-
 /* Standard syntax */
 @keyframes network-progress-indicator {
   0% {
     top: 0;
-    width: 0%;
+    width: 0;
     left: 0;
     right: 0;
     background: red;
   }
+
   50% {
     top: 0;
     width: 100%;
@@ -149,9 +154,10 @@
     right: 0;
     background: orange;
   }
+
   99% {
     top: 0;
-    width: 0%;
+    width: 0;
     left: 100%;
     right: 0;
     background: red;

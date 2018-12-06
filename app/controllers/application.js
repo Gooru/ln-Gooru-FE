@@ -124,10 +124,7 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   init() {
     let controller = this;
     controller._super(...arguments);
-    const isTesting = Env.environment === 'test';
-    if (!isTesting) {
-      controller.updateNetworkStatus();
-    }
+    controller.updateNetworkStatus();
   },
 
   loadUserClasses: function() {
@@ -179,23 +176,16 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   },
 
   updateNetworkStatus() {
-    let controller = this;
+    let rootElement = Env.rootElement;
     Ember.$(document).ajaxStart(function() {
-      controller.updateNetworkStatusVal(true);
+      Ember.$(rootElement).addClass('network-inprogress');
     });
 
     Ember.$(document).ajaxStop(function() {
-      controller.updateNetworkStatusVal(false);
+      Ember.$(rootElement).removeClass('network-inprogress');
     });
     Ember.$(document).ajaxError(function() {
-      controller.updateNetworkStatusVal(false);
+      Ember.$(rootElement).removeClass('network-inprogress');
     });
-  },
-
-  updateNetworkStatusVal(status) {
-    let controller = this;
-    if (!controller.get('isDestroyed')) {
-      controller.set('isNetworkInProgress', status);
-    }
   }
 });
