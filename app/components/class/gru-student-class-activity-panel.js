@@ -13,14 +13,12 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['gru-student-class-activity-panel', 'panel'],
+  classNames: ['gru-student-class-activity-panel'],
 
   classNameBindings: [
     'visible:visibility-on:visibility-off',
     'item.isAssessment:assessment:collection'
   ],
-
-  tagName: 'li',
 
   /**
    * @requires service:api-sdk/collection
@@ -56,17 +54,38 @@ export default Ember.Component.extend({
 
   actions: {
     /**
-     * @function externalAssessment open new tab from DCA
-     */
-    externalAssessment: function(classActivity) {
-      let component = this;
-      component.loadPlayerExternal(classActivity.collection);
-    },
-    /**
      * Action triggred when dca report action invoke
      */
     studentDcaReport: function(assessment, studentPerformance) {
       this.sendAction('studentDcaReport', assessment, studentPerformance);
+    },
+
+    /**
+     * Action triggered when the user play collection
+     */
+    onPlayContent(classActivity) {
+      let component = this;
+      let content = classActivity.get('collection');
+      let contentId = content.get('id');
+      let collectionType = content.get('collectionType');
+      let classData = component.get('class');
+      let classId = classData.get('id');
+      let queryParams = {
+        collectionId: content.get('id'),
+        classId,
+        role: 'student',
+        source: component.get('source'),
+        type: collectionType
+      };
+      if (collectionType === 'assessment-external') {
+        component.get('router').transitionTo('player-external', {
+          queryParams
+        });
+      } else {
+        component.get('router').transitionTo('player', contentId, {
+          queryParams
+        });
+      }
     }
   },
 
@@ -112,26 +131,5 @@ export default Ember.Component.extend({
   /**
    * @property {boolean}
    */
-  visible: Ember.computed.alias('classActivity.isActive'),
-
-  // -------------------------------------------------------------------------
-  // Methods
-
-  /**
-   * @function loadPlayerExternal
-   * Method to load external player
-   */
-  loadPlayerExternal(assessment) {
-    let component = this;
-    let classData = component.get('class');
-    let classId = classData.get('id');
-    let queryParams = {
-      collectionId: assessment.get('id'),
-      classId,
-      role: 'student',
-      source: component.get('source'),
-      type: 'assessment-external'
-    };
-    component.get('router').transitionTo('player-external', {queryParams});
-  }
+  visible: Ember.computed.alias('classActivity.isActive')
 });

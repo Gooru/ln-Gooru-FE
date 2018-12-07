@@ -1,64 +1,49 @@
-<div class="panel-heading">
-  <div class="icon-container pull-left">
-    <img src="{{item.thumbnailUrl}}">
+<div class="ca-panel-container">
+  <div class="dca-panel-info">
+    <i class="{{item.collectionType}}-icon" />
+    <p>{{item.title}}</p>
   </div>
-  <div class="title-container pull-left">
-    <div class="title ellipsis">{{item.title}}</div>
-  </div>
-  <div class="info pull-right">
-    <div class="content-count">
-      {{#if item.isAssessment}}
-        {{#if item.questionCount}}
-          <span class="{{if (gt item.resourceCount 0) '' 'invisible'}}" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}} &nbsp; &nbsp;</span>
-          <span class="{{if (gt item.questionCount 0) '' 'invisible'}}" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span> <span class="{{if (gt item.questionCount 0) '' 'invisible'}} ">{{item.questionCount}}</span>
-        {{/if}}
-      {{else}}
-        {{#if (or item.questionCount item.resourceCount)}}
-          <span class="{{if (gt item.resourceCount 0) '' 'invisible'}}" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.resources"}}">{{gru-icon name='local_library'}}</span><span class="{{if (gt item.resourceCount 0) '' 'invisible'}} ">{{item.resourceCount}}</span>
-          <span class="{{if (gt item.questionCount 0) '' 'invisible'}}" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span class="{{if (gt item.questionCount 0) '' 'invisible'}} ">{{item.questionCount}}</span>
-        {{/if}}
-      {{/if}}
-      {{#if (eq item.collectionType 'assessment-external')}}
-        <img src="/assets/gooru/share.png" srcset="/assets/gooru/share@2x.png 2x,
-             /assets/gooru/share@3x.png 3x" class="share">
-      {{/if}}
-    </div>
-    <div class="play-btn">
-      {{#if visible}}
-        {{#if (eq item.collectionType 'assessment-external') }}
-          <button {{action 'externalAssessment' classActivity}} class="btn btn-info study-now pull-left ember-view">
-            {{gru-icon name='play_arrow'}}
-          </button>
-        {{else}}
-          {{#if classActivity.context.courseId}}
-            {{#link-to 'context-player' class.id classActivity.context.courseId classActivity.context.unitId classActivity.context.lessonId item.id (query-params type=item.collectionType role='student' source=source tenantId=session.tenantId partnerId=session.partnerId
-              ) tagName="button" class="btn btn-info study-now pull-left" }}
-              {{gru-icon name='play_arrow'}}
-            {{/link-to}}
-          {{else}}
-            {{#link-to 'player' item.id (query-params classId=class.id type=item.collectionType role='student' source=source tenantId=session.tenantId partnerId=session.partnerId ) tagName="button" class="btn btn-info study-now pull-left" }}
-              {{gru-icon name='play_arrow'}}
-            {{/link-to}}
-          {{/if}}
-        {{/if}}
-      {{else}}
-        {{gru-icon name='play_arrow'}}
-      {{/if}}
-      {{#if (or collectionPerformanceSummary.score collectionPerformanceSummary.timeSpent)}}
-        <span {{action 'studentDcaReport'  item collectionPerformanceSummary}} class='visibility-panel pull-right reporticon item-not-visible pointer' data-toggle="tooltip" data-placement="auto">{{gru-icon name='library_books'}}</span>
+  <div class="dca-content-counts">
+    <div class="resource-count">
+      {{#if (gt item.resourceCount 0)}}
+        <i class="resource-icon"></i>
+        <span>{{item.resourceCount}}</span>
       {{/if}}
     </div>
 
-    <div class="performance pull-right">
-      {{#if item.isAssessment}}
-        <span class="score" style= {{safe-html (concat "color:" (grade-color (if (gte collectionPerformanceSummary.score 0) collectionPerformanceSummary.score 'NA')))}}>
-          {{if (gte collectionPerformanceSummary.score 0) (concat collectionPerformanceSummary.score '%') '--'}}
-        </span>
-      {{else}}
-        <span class="time-spent">
-          {{if collectionPerformanceSummary.timeSpent (format-time collectionPerformanceSummary.timeSpent) '--'}}
-        </span>
+    <div class="question-count">
+      {{#if (gt item.questionCount 0)}}
+        <i class="question-icon"></i>
+        <span>{{item.questionCount}}</span>
       {{/if}}
     </div>
+
+    {{#if (eq item.collectionType 'assessment-external')}}
+      <i class="external-icon"></i>
+    {{/if}}
+  </div>
+  <div class="ca-play-container" {{action 'onPlayContent' classActivity}}>
+    <div class="ca-play-btn">
+      {{gru-icon name='play_arrow'}}
+    </div>
+  </div>
+  <div class="dca-panel-actions-performance">
+    {{#if collectionPerformanceSummary}}
+      {{#if (not-eq item.collectionType 'collection')}}
+        <div class="dca-panel-performance" {{action 'studentDcaReport' item collectionPerformanceSummary}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
+          <span>{{collectionPerformanceSummary.score}}%</span>
+        </div>
+      {{else}}
+        <div class="dca-panel-performance collection" {{action 'studentDcaReport' item collectionPerformanceSummary}}>
+          <span class="time-spent">
+            {{if collectionPerformanceSummary.timeSpent (format-time collectionPerformanceSummary.timeSpent) '--'}}
+          </span>
+        </div>
+      {{/if}}
+    {{else}}
+      <div class="dca-panel-performance not-started">
+        <span class="no-performance">--</span>
+      </div>
+    {{/if}}
   </div>
 </div>

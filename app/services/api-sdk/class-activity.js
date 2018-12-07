@@ -35,21 +35,34 @@ export default Ember.Service.extend({
    * @param {string} contentId
    * @param {string} contentType
    * @param {Date} addedDate
-   * @param { { courseId: string, unitId: string, lessonId: string } } context
+   * @param {Month} month optional, default is current month
+   * @param {Year} year optional, default is current year
    * @returns {boolean}
    */
   addActivityToClass: function(
     classId,
     contentId,
     contentType,
-    addedDate = new Date(),
-    context = {}
+    addedDate,
+    forMonth = moment().format('MM'),
+    forYear = moment().format('YYYY')
   ) {
     const service = this;
+    if (addedDate != null) {
+      forMonth = moment(addedDate).format('MM');
+      forYear = moment(addedDate).format('YYYY');
+    }
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('classActivityAdapter')
-        .addActivityToClass(classId, contentId, contentType, addedDate, context)
+        .addActivityToClass(
+          classId,
+          contentId,
+          contentType,
+          addedDate,
+          forMonth,
+          forYear
+        )
         .then(function(responseData, textStatus, request) {
           let newContentId = parseInt(request.getResponseHeader('location'));
           resolve(newContentId);
@@ -86,25 +99,31 @@ export default Ember.Service.extend({
    *
    * @param {string} classId
    * @param {string} contentType collection|assessment|resource|question
-   * @param {Date} startDate optional start date, default is now
-   * @param {Date} endDate optional end date, default is now
-   * @returns {Promise.<ClassActivity[]>}
+   * @param {Month} month optional, default is current month
+   * @param {Year} year optional, default is current year
+   * @returns {Promise}
    */
   findClassActivities: function(
     classId,
     contentType = undefined,
-    startDate = new Date(),
-    endDate = new Date()
+    forMonth = moment().format('MM'),
+    forYear = moment().format('YYYY')
   ) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('classActivityAdapter')
-        .findClassActivities(classId, contentType, startDate, endDate)
+        .findClassActivities(classId, contentType, forMonth, forYear)
         .then(function(payload) {
           const classActivities = service
             .get('classActivitySerializer')
             .normalizeFindClassActivities(payload);
+          const startDate = moment(`${forYear}-${forMonth}-01`).format(
+            'YYYY-MM-DD'
+          );
+          const endDate = moment(startDate)
+            .endOf('month')
+            .format('YYYY-MM-DD');
           service
             .findClassActivitiesPerformanceSummary(
               classId,
@@ -123,26 +142,32 @@ export default Ember.Service.extend({
    * @param {string} userId
    * @param {string} classId
    * @param {string} contentType collection|assessment|resource|question
-   * @param {Date} startDate optional start date, default is now
-   * @param {Date} endDate optional end date, default is now
+   * @param {Month} month optional, default is current month
+   * @param {Year} year optional, default is current year
    * @returns {Promise.<ClassActivity[]>}
    */
   findStudentClassActivities: function(
     userId,
     classId,
     contentType = undefined,
-    startDate = new Date(),
-    endDate = new Date()
+    forMonth = moment().format('MM'),
+    forYear = moment().format('YYYY')
   ) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('classActivityAdapter')
-        .findClassActivities(classId, contentType, startDate, endDate)
+        .findClassActivities(classId, contentType, forMonth, forYear)
         .then(function(payload) {
           const classActivities = service
             .get('classActivitySerializer')
             .normalizeFindClassActivities(payload);
+          const startDate = moment(`${forYear}-${forMonth}-01`).format(
+            'YYYY-MM-DD'
+          );
+          const endDate = moment(startDate)
+            .endOf('month')
+            .format('YYYY-MM-DD');
           service
             .findStudentActivitiesPerformanceSummary(
               userId,
@@ -313,6 +338,52 @@ export default Ember.Service.extend({
       service
         .get('classActivityAdapter')
         .removeClassActivity(classId, contentId)
+        .then(resolve, reject);
+    });
+  },
+
+  /**
+   * Get the users information for the specified activity
+   *
+   * @param {string} classId
+   * @param {string} contentId content uuid
+   * @returns {Promise}
+   */
+  fetchUsersForClassActivity: function(classId, contentId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .fetchUsersForClassActivity(classId, contentId)
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('classActivitySerializer')
+                .normalizeFetchUsersForClassActivity(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * Update the users information for the specified activity
+   *
+   * @param {string} classId
+   * @param {string} contentId
+   * @param {Array} list of user ids
+   * @returns {Promise}
+   */
+  addUsersToActivity: function(classId, contentId, users) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .addUsersToActivity(classId, contentId, users)
         .then(resolve, reject);
     });
   }
