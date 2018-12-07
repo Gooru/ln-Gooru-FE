@@ -4,12 +4,18 @@ export default Ember.Route.extend({
   // -------------------------------------------------------------------------
   // Dependencies
 
+  /**
+   * @type {Service} session service
+   */
   session: Ember.inject.service('session'),
 
   /**
    * @requires service:api-sdk/class-activity
    */
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
+
+  // -------------------------------------------------------------------------
+  // Properties
 
   // -------------------------------------------------------------------------
   // Methods
@@ -33,6 +39,15 @@ export default Ember.Route.extend({
    */
   setupController: function(controller, model) {
     controller.get('classController').selectMenuItem('class-activities');
-    controller.set('classActivities', model.classActivities);
+    controller.parseClassActivityData(model.classActivities);
+    controller.initialize();
+  },
+
+  /**
+   * Reset data on deactive
+   * @param controller
+   */
+  resetController(controller) {
+    controller.set('classActivities', Ember.A([]));
   }
 });

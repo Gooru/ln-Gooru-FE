@@ -28,10 +28,9 @@ test('Layout', function(assert) {
     );
     assert.ok($container.length, 'Missing class activities tab container');
 
-    T.exists(assert, $container.find('.today'), 'Missing today title');
     T.exists(
       assert,
-      $container.find('.collections'),
+      $container.find('.dca-list-container'),
       'Missing activities collections'
     );
   });
