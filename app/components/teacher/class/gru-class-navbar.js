@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import SessionMixin from 'gooru-web/mixins/session';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 import { GRU_FEATURE_FLAG } from 'gooru-web/config/config';
 
@@ -12,7 +11,7 @@ import { GRU_FEATURE_FLAG } from 'gooru-web/config/config';
  * @see controllers/teacher/class.js
  * @augments ember/Component
  */
-export default Ember.Component.extend(SessionMixin, ConfigurationMixin, {
+export default Ember.Component.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
 

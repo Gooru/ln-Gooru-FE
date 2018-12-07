@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
+import Env from '../config/environment';
 
 export default Ember.Controller.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
@@ -110,8 +111,15 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    * @property {Profile}
    */
   profile: null,
+
   // -------------------------------------------------------------------------
   // Methods
+
+  init() {
+    let controller = this;
+    controller._super(...arguments);
+    controller.updateNetworkStatus();
+  },
 
   loadUserClasses: function() {
     const controller = this;
@@ -158,6 +166,20 @@ export default Ember.Controller.extend(ConfigurationMixin, {
     return tenantService.findTenantFromCurrentSession().then(function(tenant) {
       controller.set('tenant', tenant);
       return tenant;
+    });
+  },
+
+  updateNetworkStatus() {
+    let rootElement = Env.rootElement;
+    Ember.$(document).ajaxStart(function() {
+      Ember.$(rootElement).addClass('network-inprogress');
+    });
+
+    Ember.$(document).ajaxStop(function() {
+      Ember.$(rootElement).removeClass('network-inprogress');
+    });
+    Ember.$(document).ajaxError(function() {
+      Ember.$(rootElement).removeClass('network-inprogress');
     });
   }
 });
