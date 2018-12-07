@@ -1,4 +1,21 @@
 .gru-class-activity-panel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+  border-radius: 4px;
+  margin-bottom: 10px;
+
+  &:last-child {
+    .dca-panel-container {
+      border-bottom: none;
+    }
+  }
+
+  &:first-child {
+    .dca-panel-performance {
+      border-top-right-radius: 4px;
+    }
+  }
+
   &:hover {
     .dca-panel-container {
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
@@ -269,6 +286,10 @@
 
       .student-count {
         padding-left: 25px;
+
+        span {
+          cursor: pointer;
+        }
       }
 
       .re-schedule {

@@ -1,10 +1,11 @@
 .teacher_class_class-activities {
   .app-container {
     .teacher.class {
-      padding: 0px;
+      padding: 0;
     }
   }
 }
+
 .controller.teacher.class.class-activities {
   padding: 0;
   margin: 20px 0;
@@ -21,7 +22,7 @@
     color: #000000;
 
     p {
-      margin-bottom: 0px;
+      margin-bottom: 0;
     }
   }
 
@@ -210,27 +211,6 @@
         hr {
           width: 100%;
           border-top: 1px solid #ccc;
-        }
-      }
-
-      .dca-content-list-container {
-        .gru-class-activity-panel {
-          background-color: #fff;
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-          border-radius: 4px;
-          margin-bottom: 10px;
-        }
-
-        .gru-class-activity-panel:last-child {
-          .dca-panel-container {
-            border-bottom: none;
-          }
-        }
-
-        .gru-class-activity-panel:first-child {
-          .dca-panel-performance {
-            border-top-right-radius: 4px;
-          }
         }
       }
     }

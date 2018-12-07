@@ -77,12 +77,13 @@
     </div>
   </div>
   <div class="ca-panel-container-2">
-    <div class="student-count" {{action 'showStudentList'}}>
+    <div class="student-count">
       {{#if (eq classActivity.usersCount -1)}}
-        <span>Everyone</span> {{else if (eq classActivity.usersCount 0)}}
-        <span>No Students Selected</span>
+        <span {{action 'showStudentList'}}>Everyone</span>
+        {{else if (eq classActivity.usersCount 0)}}
+        <span {{action 'showStudentList'}}>No Students Selected</span>
       {{else}}
-        <span> {{classActivity.usersCount}}  Students Selected</span>
+        <span {{action 'showStudentList'}}> {{classActivity.usersCount}}  Students Selected</span>
       {{/if}}
     </div>
     <div class="re-schedule">Re schedule</div>
