@@ -112,12 +112,6 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    */
   profile: null,
 
-  /**
-   * Maintains the state of network progress
-   * @return {Boolean}
-   */
-  isNetworkInProgress: false,
-
   // -------------------------------------------------------------------------
   // Methods
 
