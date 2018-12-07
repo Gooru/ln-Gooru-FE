@@ -3,6 +3,8 @@
     {{tenant.gru-tenant-theme tenant=tenant}}
   {{/if}}
   <div class="gooru {{if configuration.embedded 'embedded'}}">
+      <div class="row-fluid network-progress-indicator">
+      </div>
     {{#if features.header.enabled}}
       {{gru-header
       term=term
