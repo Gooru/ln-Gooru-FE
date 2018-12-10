@@ -5,7 +5,7 @@
 
     <div class="controller student course-map">
       <h5 class="course-title hidden visible-xs">{{class.title}}</h5>
-      <div class="actions">
+      <div class="actions hidden-xs">
         <span class="min-score {{unless class.minScore 'hidden'}}">
             <i></i> > {{class.minScore}} %</span>
         <button {{action "locateMe" userLocation}} title="{{t 'class.overview.locate'}}" class="btn btn-info locate" data-toggle="tooltip" data-placement="auto">
@@ -13,11 +13,11 @@
           </button>
       </div>
       {{#if hasRouteSuggestion}}
-        <h5 class="pre-study-title">{{t 'class.overview.pre-study-title'}}</h5>{{!-- ToDo: Move css out of HBS --}}
+        <h5 class="pre-study-title hidden-xs">{{t 'class.overview.pre-study-title'}}</h5>{{!-- ToDo: Move css out of HBS --}}
         {{class.overview.routesuggestion-preview route0=route0 routeSuggestAction=(action 'courseRouteSuggestAction' ) class=currentClass course=course }}
       {{/if}}
       {{#if showRoute0Suggestion}}
-        <h5 class="pre-study-title">{{t 'class.overview.pre-study-title'}}</h5>
+        <h5 class="pre-study-title hidden-xs">{{t 'class.overview.pre-study-title'}}</h5>
         {{class.overview.routesuggestion-coursemap route0=route0
            onLocationUpdate=(action 'updateUserLocation')
           userLocation=userLocation

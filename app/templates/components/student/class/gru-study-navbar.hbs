@@ -4,7 +4,7 @@
     </div>
   {{/if}}
 
-  <div class="nav-body hidden-xs {{if isILActivity  'independent-learning'}} {{unless hasClassInfo 'no-class-info'}}">
+  <div class="nav-body hidden-xs {{if isILActivity  'independent-learning'}} {{if class.isArchived 'class-archived'}} {{unless hasClassInfo 'no-class-info'}}">
     <div class="app-brand" {{action "onClickBrand"}}>
       {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
     </div>

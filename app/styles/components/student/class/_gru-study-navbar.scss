@@ -64,6 +64,10 @@
           background-color: #1aa9eb;
         }
       }
+
+      &.class-archived {
+        grid-template-columns: 88px 170px 1fr 59px 59px 59px;
+      }
       /*Apply to independent-learning class and it has no class info */
       &.independent-learning.no-class-info {
         grid-template-columns: 90px 120px 1fr 60px 120px 120px;
