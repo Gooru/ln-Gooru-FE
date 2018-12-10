@@ -483,9 +483,9 @@ export default Object.assign(quizzesTranslations, {
       'Check your spelling. We all make mistakes!<br/>Go broader and remove some filters.<br/> Or try searching for a similar word instead.',
     'no-more-attempts': 'No more attempts',
     'no-dca-student':
-      'Your teacher has not yet assigned any collections or assessments to Daily Class Activities.',
+      'Your teacher has not yet assigned any collections or assessments to Class Activities.',
     'no-dca-teacher':
-      'No current activities. Add Daily Class Activities from the Course Map or My Content.',
+      'No current activities. Add  Class Activities from the Course Map or Content Catalog.',
     notScored: 'Unscored',
     notStarted: 'Not started',
     'not-added': 'Not Added',
@@ -1130,7 +1130,7 @@ export default Object.assign(quizzesTranslations, {
       'course-map': 'Course Map',
       unit: 'Unit',
       lesson: 'Lesson',
-      'class-activities': 'Daily Class Activities',
+      'class-activities': 'Class Activities',
       'class-activities-tab': {
         today: 'Today',
         'past-activities': 'Past Activities'
@@ -1260,7 +1260,7 @@ export default Object.assign(quizzesTranslations, {
         mastered: 'Mastered',
         'in-progress': 'In Progress'
       },
-      'class-activities': 'Daily Class Activities',
+      'class-activities': 'Class Activities',
       'back-to-class-activities': 'Back to Daily Class Activities',
       'class-activities-tab': {
         today: 'Today: ',

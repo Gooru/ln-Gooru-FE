@@ -228,27 +228,24 @@ export default Ember.Service.extend({
           )
           : []
       }).then(function(hash) {
-        const activityCollectionPerformanceSummaryItems =
-          hash.activityCollectionPerformanceSummaryItems;
-        const activityAssessmentPerformanceSummaryItems =
-          hash.activityAssessmentPerformanceSummaryItems;
+        let performances = hash.activityCollectionPerformanceSummaryItems.concat(
+          hash.activityAssessmentPerformanceSummaryItems
+        );
+        performances.forEach(performance => {
+          let classActivity = classActivities
+            .filterBy('activation_date', performance.get('activation_date'))
+            .filterBy(
+              'collection.id',
+              performance.get('collectionPerformanceSummary.collectionId')
+            )
+            .objectAt(0);
 
-        classActivities.forEach(function(classActivity) {
-          const collection = classActivity.get('collection');
-          if (collection) {
-            const activityPerformanceSummary = collection.get('isAssessment')
-              ? activityAssessmentPerformanceSummaryItems.findBy(
-                'collectionPerformanceSummary.collectionId',
-                collection.get('id')
-              )
-              : activityCollectionPerformanceSummaryItems.findBy(
-                'collectionPerformanceSummary.collectionId',
-                collection.get('id')
-              );
-            classActivity.set(
-              'activityPerformanceSummary',
-              activityPerformanceSummary
+          if (classActivity) {
+            let performanceData = performance.get(
+              'collectionPerformanceSummary'
             );
+            performanceData.set('hasStarted', true);
+            classActivity.set('collection.performance', performanceData);
           }
         });
 

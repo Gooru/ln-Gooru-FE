@@ -26,10 +26,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Actions
 
   actions: {
-    studentDcaReport(collection, studentPerformance) {
+    studentDcaReport(collection, studentPerformance, activityDate) {
       let component = this;
       let userId = component.get('session.userId');
-      let activityDate = moment().format('YYYY-MM-DD');
       let params = {
         userId: userId,
         classId: component.get('class.id'),
@@ -66,6 +65,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         .format('YYYY');
       this.set('forMonth', forMonth);
       this.set('forYear', forYear);
+      let datepickerEle = Ember.$(
+        '.controller.student.class.class-activities #ca-datepicker .datepicker-days .prev'
+      );
+      datepickerEle.trigger('click');
       this.loadData();
     },
 
@@ -79,11 +82,15 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         .format('YYYY');
       this.set('forMonth', forMonth);
       this.set('forYear', forYear);
+      let datepickerEle = Ember.$(
+        '.controller.student.class.class-activities #ca-datepicker .datepicker-days .next'
+      );
+      datepickerEle.trigger('click');
       this.loadData();
     },
 
     showCalendar() {
-      this.handleDatePicker();
+      this.toggleDatePicker();
     }
   },
 
@@ -168,7 +175,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   initialize() {
     let controller = this;
     controller._super(...arguments);
-    controller.initializeDatePicker();
+    Ember.run.scheduleOnce('afterRender', controller, function() {
+      controller.initializeDatePicker();
+    });
   },
 
   loadData() {
@@ -208,21 +217,41 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   },
 
   initializeDatePicker: function() {
-    let controller = this;
-    Ember.run.scheduleOnce('afterRender', controller, function() {
-      let startDate = moment().toDate();
-      Ember.$('#ca-datepicker').datepicker({
-        startDate: startDate,
-        maxViewMode: 0,
-        format: 'yyyy-mm-dd'
-      });
+    let datepickerEle = Ember.$(
+      '.controller.student.class.class-activities #ca-datepicker'
+    );
+    datepickerEle.datepicker({
+      maxViewMode: 0,
+      format: 'yyyy-mm-dd'
+    });
+    datepickerEle.off('changeDate').on('changeDate', function() {
+      let datepicker = this;
+      let selectedDate = Ember.$(datepicker)
+        .datepicker('getFormattedDate')
+        .valueOf();
+      let listContainerEle = Ember.$(
+        '.controller.student.class.class-activities .dca-list-container'
+      );
+      let selectedDateEle = Ember.$(
+        `.controller.student.class.class-activities .dca-list-container .ca-date-${selectedDate}`
+      );
+      if (selectedDateEle.length > 0) {
+        listContainerEle.animate(
+          {
+            scrollTop: selectedDateEle.offset().top
+          },
+          'slow'
+        );
+      }
     });
   },
 
-  handleDatePicker() {
-    let element = Ember.$('.ca-content-container .ca-datepicker-container');
+  toggleDatePicker() {
+    let element = Ember.$(
+      '.controller.student.class.class-activities .ca-content-container .ca-datepicker-container'
+    );
     let dateDisplayEle = Ember.$(
-      '.ca-content-container .ca-date-container .cal-mm-yyyy'
+      '.controller.student.class.class-activities .ca-content-container .ca-date-container .cal-mm-yyyy'
     );
     if (!element.hasClass('active')) {
       element.slideDown(400, function() {
