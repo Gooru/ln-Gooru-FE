@@ -191,6 +191,7 @@ export default Ember.Route.extend({
     controller.set('isStudentCourseMap', false);
     controller.getQuestionsToGrade();
     controller.init();
+    controller.getUnitLevelPerformance();
   },
 
   resetController(controller) {
