@@ -1,5 +1,10 @@
 .controller.teacher.course-map {
   max-width: 95%;
+  @media screen and (max-width: $screen-sm - 1) {
+    .actions {
+      display: none;
+    }
+  }
 
   .course-map-container {
     .course-map-body {
