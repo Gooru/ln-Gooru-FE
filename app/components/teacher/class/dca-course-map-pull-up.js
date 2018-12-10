@@ -328,6 +328,8 @@ export default Ember.Component.extend({
       id: contentId,
       added_date: date,
       collection: content,
+      activityDate: date,
+      usersCount: -1,
       isActive: false
     });
   }

@@ -44,11 +44,6 @@ export default Ember.Component.extend({
    */
   session: Ember.inject.service('session'),
 
-  /**
-   * @property {string}
-   */
-  activityDateVal: null,
-
   // -------------------------------------------------------------------------
   // Actions
 
@@ -56,8 +51,13 @@ export default Ember.Component.extend({
     /**
      * Action triggred when dca report action invoke
      */
-    studentDcaReport: function(assessment, studentPerformance) {
-      this.sendAction('studentDcaReport', assessment, studentPerformance);
+    studentDcaReport: function(assessment, studentPerformance, activityDate) {
+      this.sendAction(
+        'studentDcaReport',
+        assessment,
+        studentPerformance,
+        activityDate
+      );
     },
 
     /**
@@ -121,8 +121,9 @@ export default Ember.Component.extend({
    * @property {CollectionPerformanceSummary}
    */
   collectionPerformanceSummary: Ember.computed.alias(
-    'classActivity.activityPerformanceSummary.collectionPerformanceSummary'
+    'classActivity.collection.performance'
   ),
+
   /**
    * @property {String} source
    */
@@ -131,5 +132,21 @@ export default Ember.Component.extend({
   /**
    * @property {boolean}
    */
-  visible: Ember.computed.alias('classActivity.isActive')
+  visible: Ember.computed.alias('classActivity.isActive'),
+
+  /**
+   * Class activity date
+   * @type {Date}
+   */
+  activityDate: null,
+
+  /**
+   * It is used to find activity is today or not
+   * @return {Boolean}
+   */
+  isToday: Ember.computed('activityDate', function() {
+    let activityDate = this.get('activityDate');
+    let currentDate = moment().format('YYYY-MM-DD');
+    return currentDate === activityDate;
+  })
 });

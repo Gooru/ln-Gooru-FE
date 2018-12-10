@@ -141,7 +141,7 @@ test('findStudentClassActivities', function(assert) {
 });
 
 test('findStudentActivitiesPerformanceSummary', function(assert) {
-  assert.expect(13);
+  assert.expect(12);
 
   const service = this.subject();
 
@@ -236,18 +236,11 @@ test('findStudentActivitiesPerformanceSummary', function(assert) {
     .then(function(response) {
       const classActivity = response[0];
       assert.ok(
-        classActivity.get('activityPerformanceSummary'),
+        classActivity.get('collection.performance'),
         'Missing activity performance summary'
       );
       assert.equal(
-        classActivity.get('activityPerformanceSummary.date'),
-        'fake-date-1',
-        'Wrong date'
-      );
-      assert.equal(
-        classActivity.get(
-          'activityPerformanceSummary.collectionPerformanceSummary.score'
-        ),
+        classActivity.get('collection.performance.score'),
         100,
         'Wrong score'
       );

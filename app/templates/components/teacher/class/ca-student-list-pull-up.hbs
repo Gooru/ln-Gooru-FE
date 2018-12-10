@@ -1,5 +1,5 @@
 <div class="backdrop"></div>
-<div class="ca-student-list-container">
+<div class="ca-student-list-container {{if isActivityPast 'past-activity' }}">
   <div class="ca-student-list-header">
     <div class="ca-student-selected-ctn">
       {{#if (eq usersCount -1)}}
@@ -46,7 +46,7 @@
   </div>
   <div class="action-buttons">
     <button class="btn" {{action 'onPullUpClose'}}>Cancel</button>
-    <button class="btn btn-primary" {{action 'saveUsersToClassActivityContent'}}>Save</button>
+    <button class="btn btn-primary save-users" {{action 'saveUsersToClassActivityContent'}}>Save</button>
   </div>
 </div>
 {{#if isLoading}}

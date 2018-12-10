@@ -469,7 +469,9 @@ export default Ember.Component.extend({
     return Ember.Object.create({
       id: contentId,
       added_date: date,
+      activityDate: date,
       collection: content,
+      usersCount: -1,
       isActive: false
     });
   },

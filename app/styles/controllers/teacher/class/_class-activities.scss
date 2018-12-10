@@ -66,14 +66,14 @@
           display: inline-flex;
           height: 20px;
           font-weight: bold;
-          cursor: pointer;
+          pointer-events: none;
 
           .arrow_drop_up {
             display: none;
           }
 
           .arrow_drop_down {
-            display: inline-block;
+            display: none;
           }
 
           &.active {
@@ -180,8 +180,29 @@
       }
     }
 
+    .no-content {
+      color: $gray-dove;
+      font-size: $font-size-lead;
+      text-align: center;
+    }
+
+    .no-contentfont {
+      width: 100%;
+      font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 13px;
+    }
+
+    .no-content-image {
+      background-image: url("gooru/no-dca-student.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      height: 240px;
+      margin: 40px auto 0;
+    }
+
     .dca-list-container {
-      height: calc(100vh - 195px);
+      height: calc(100vh - 155px);
       overflow-y: auto;
       padding-right: 20px;
       padding-left: 20px;
@@ -225,6 +246,7 @@
       align-items: center;
       box-shadow: 0 3px 30px 0 rgba(0, 0, 0, 0.13);
       cursor: pointer;
+      display: none;
 
       .arrow_drop_up {
         justify-self: right;

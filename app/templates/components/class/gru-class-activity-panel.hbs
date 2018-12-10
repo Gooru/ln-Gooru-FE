@@ -1,4 +1,4 @@
-<div class="dca-panel-container {{if classActivity.isNewlyAdded 'new'}}">
+<div class="dca-panel-container {{if classActivity.isNewlyAdded 'new'}} {{if isActivityPast 'past-date'}}">
   <div class="ca-panel-container-1">
     <div class="dca-panel-info">
       <i class="{{item.collectionType}}-icon" />
@@ -23,52 +23,56 @@
         <i class="external-icon"></i>
       {{/if}}
     </div>
-    <div class="dca-panel-actions-performance">
-      <div class="dca-panel-actions">
-        <div class="dca-add-btn">
-          {{#if showDcaAddButton}}
-            <span class="dca-add" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.add"}}" {{action 'onAddContentToDCA' item}}>
-            {{gru-icon name="add"}}
-          </span>
-          {{/if}}
-        </div>
-        <div class="dca-rubric-icon">
-          {{#if (gt item.oeQuestionCount 0)}}
-            <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.rubric"}}" class="rubric-icon"></i>
-          {{/if}}
-        </div>
-        <div class="dca-golive-btn">
-          {{#if (and showGolive (eq item.collectionType 'assessment'))}}
-            <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item.id}}></i>
-          {{/if}}
-        </div>
-        <div class="dca-assign-btn">
-          {{#if showDcaAssignButton}}
-            <span class="dca-assign" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.assign"}}">
-          {{#unless classActivity.isActive}}
-              {{gru-switch switchOptions=switchOptions onOptionSwitch='changeVisibility' isChecked=classActivity.isActive item=item}}
-          {{else}}
-            {{gru-switch class="assigned" switchOptions=switchOptions  isChecked=classActivity.isActive item=item}}
-          {{/unless}}
-          </span>
-          {{/if}}
-        </div>
-        <div class="dca-remove-btn">
-          {{#if showDcaRemoveButton}}
-            <span class="remove-dca" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.remove"}}" {{action 'removeClassActivity' classActivity}}>
-            {{gru-icon name="remove_circle" }}
-          </span>
-          {{/if}}
-        </div>
+    <div class="dca-panel-actions">
+      <div class="dca-add-btn">
+        {{#if showDcaAddButton}}
+          <span class="dca-add" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.add"}}" {{action 'onAddContentToDCA' item}}>
+          {{gru-icon name="add"}}
+        </span>
+        {{/if}}
       </div>
+      <div class="dca-rubric-icon">
+        {{#if (gt item.oeQuestionCount 0)}}
+          <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.rubric"}}" class="rubric-icon"></i>
+        {{/if}}
+      </div>
+      <div class="dca-golive-btn">
+        {{#if (and showGolive (eq item.collectionType 'assessment'))}}
+          <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item.id}}></i>
+        {{/if}}
+      </div>
+      <div class="dca-assign-btn">
+        {{#if showDcaAssignButton}}
+          <span class="dca-assign" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.assign"}}">
+        {{#unless classActivity.isActive}}
+            {{gru-switch switchOptions=switchOptions onOptionSwitch='changeVisibility' isChecked=classActivity.isActive item=item}}
+        {{else}}
+          {{gru-switch class="assigned" switchOptions=switchOptions  isChecked=classActivity.isActive item=item}}
+        {{/unless}}
+        </span>
+        {{/if}}
+      </div>
+      <div class="dca-remove-btn">
+        {{#if showDcaRemoveButton}}
+          <span class="remove-dca" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.remove"}}" {{action 'removeClassActivity' classActivity}}>
+          {{gru-icon name="remove_circle" }}
+        </span>
+        {{/if}}
+      </div>
+    </div>
+    <div class="dca-panel-actions-performance">
       {{#if collectionPerformanceSummary}}
-        <div class="dca-panel-performance" {{action 'openDcaContentReport' classActivity}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
-          {{#if (not-eq item.collectionType 'collection')}}
+        {{#if (not-eq item.collectionType 'collection')}}
+          <div class="dca-panel-performance" {{action 'openDcaContentReport' classActivity}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
             <span>{{collectionPerformanceSummary.score}}%</span>
-          {{else}}
-            <span>{{format-time collectionPerformanceSummary.timeSpent}}</span>
-          {{/if}}
-        </div>
+          </div>
+        {{else}}
+          <div class="dca-panel-performance collection" {{action 'openDcaContentReport' classActivity}}>
+            <span class="time-spent">
+                {{if collectionPerformanceSummary.timeSpent (format-time collectionPerformanceSummary.timeSpent) '--'}}
+              </span>
+          </div>
+        {{/if}}
       {{else}}
         <div class="dca-panel-performance not-started">
           <span class="no-performance">--</span>
@@ -79,14 +83,13 @@
   <div class="ca-panel-container-2">
     <div class="student-count">
       {{#if (eq classActivity.usersCount -1)}}
-        <span {{action 'showStudentList'}}>Everyone</span>
-        {{else if (eq classActivity.usersCount 0)}}
+        <span {{action 'showStudentList'}}>Everyone</span> {{else if (eq classActivity.usersCount 0)}}
         <span {{action 'showStudentList'}}>No Students Selected</span>
       {{else}}
         <span {{action 'showStudentList'}}> {{classActivity.usersCount}}  Students Selected</span>
       {{/if}}
     </div>
-    <div class="re-schedule">Re schedule</div>
+    <div class="re-schedule hidden">Re schedule</div>
     <div class="time-spent">
       {{#if collectionPerformanceSummary}}
         <span>{{format-time collectionPerformanceSummary.timeSpent}}</span>
@@ -96,5 +99,5 @@
 </div>
 
 {{#if showStudentListPullup}}
-  {{teacher.class.ca-student-list-pull-up classId=classId classActivity=classActivity members=members showPullUp=showStudentListPullup}}
+  {{teacher.class.ca-student-list-pull-up isActivityPast=isActivityPast classId=classId classActivity=classActivity members=members showPullUp=showStudentListPullup}}
 {{/if}}
