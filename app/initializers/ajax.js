@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import EndPointsConfig from 'gooru-web/utils/endpoint-config';
+import Env from '../config/environment';
 
 export default {
   name: 'ajax',
@@ -23,6 +24,18 @@ export default {
           }
         }
       }
+    });
+
+    let rootElement = Env.rootElement;
+    Ember.$(document).ajaxStart(function() {
+      Ember.$(rootElement).addClass('network-inprogress');
+    });
+
+    Ember.$(document).ajaxStop(function() {
+      Ember.$(rootElement).removeClass('network-inprogress');
+    });
+    Ember.$(document).ajaxError(function() {
+      Ember.$(rootElement).removeClass('network-inprogress');
     });
   }
 };
