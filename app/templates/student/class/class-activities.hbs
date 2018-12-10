@@ -22,7 +22,7 @@
       <div class="dca-list-container">
         {{#each classActivities as |classActivity|}}
           <div class="dca-date-view-container">
-            <div class="dca-date-container">
+            <div class="dca-date-container ca-date-{{format-date classActivity.added_date 'YYYY-MM-DD'}}">
               {{gru-icon name="calendar_today"}}
               <span>{{format-date classActivity.added_date 'MMMM DD, YYYY'}}</span>
             </div>
@@ -34,6 +34,7 @@
                class=class
                classActivity=classActivity
                studentDcaReport='studentDcaReport'
+               activityDate=classActivity.added_date
              }}
             {{/each}}
           </div>

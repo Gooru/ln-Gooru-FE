@@ -1,21 +1,32 @@
 .gru-student-class-activity-panel {
   background-color: #fff;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
   border-radius: 4px;
   margin-bottom: 10px;
-
-  &:hover {
-    .ca-panel-container {
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-      position: relative;
-    }
-  }
 
   .ca-panel-container {
     display: inline-grid;
     width: 100%;
     grid-template-columns: 1fr 150px 60px 60px;
     height: 60px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+
+    &.today {
+      &:hover {
+        box-shadow: 0 0 11px 3px #4b9741;
+        position: relative;
+      }
+
+      .ca-play-container {
+        pointer-events: all;
+        cursor: pointer;
+
+        .ca-play-btn {
+          i {
+            color: #4b9741;
+          }
+        }
+      }
+    }
 
     .dca-panel-info {
       width: 100%;
@@ -117,18 +128,21 @@
     }
 
     .ca-play-container {
-      background: #2196f3;
       color: #fff;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
+      pointer-events: none;
 
       .ca-play-btn {
         height: 30px;
+        border-radius: 50%;
+        width: 30px;
 
         i {
-          font-size: 30px;
+          margin-left: 3px;
+          margin-top: 3px;
+          color: #535e67;
         }
       }
     }

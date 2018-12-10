@@ -1,4 +1,4 @@
-<div class="ca-panel-container">
+<div class="ca-panel-container {{if isToday 'today'}}">
   <div class="dca-panel-info">
     <i class="{{item.collectionType}}-icon" />
     <p>{{item.title}}</p>
@@ -30,11 +30,11 @@
   <div class="dca-panel-actions-performance">
     {{#if collectionPerformanceSummary}}
       {{#if (not-eq item.collectionType 'collection')}}
-        <div class="dca-panel-performance" {{action 'studentDcaReport' item collectionPerformanceSummary}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
+        <div class="dca-panel-performance" {{action 'studentDcaReport' item collectionPerformanceSummary activityDate}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
           <span>{{collectionPerformanceSummary.score}}%</span>
         </div>
       {{else}}
-        <div class="dca-panel-performance collection" {{action 'studentDcaReport' item collectionPerformanceSummary}}>
+        <div class="dca-panel-performance collection" {{action 'studentDcaReport' item collectionPerformanceSummary activityDate}}>
           <span class="time-spent">
             {{if collectionPerformanceSummary.timeSpent (format-time collectionPerformanceSummary.timeSpent) '--'}}
           </span>

@@ -140,19 +140,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      *
      * @function actions:changeVisibility
      */
-    changeVisibility: function(classActivityId) {
+    changeVisibility: function(classActivity) {
       const controller = this;
       const currentClass = controller.get('classController.class');
       const classId = currentClass.get('id');
-      const date = new Date();
+      const classActivityId = classActivity.get('id');
+      const date = classActivity.get('added_date');
       controller
         .get('classActivityService')
         .enableClassActivity(classId, classActivityId, date)
         .then(function() {
-          const classActivities = controller.get(
-            'todaysClassActivities.classActivities'
-          );
-          let classActivity = classActivities.findBy('id', classActivityId);
           classActivity.set('date', date);
         });
     },
@@ -196,6 +193,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         .format('YYYY');
       this.set('forMonth', forMonth);
       this.set('forYear', forYear);
+      let datepickerEle = Ember.$(
+        '.controller.teacher.class.class-activities #ca-datepicker .datepicker-days .prev'
+      );
+      datepickerEle.trigger('click');
       this.loadData();
     },
 
@@ -209,11 +210,15 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         .format('YYYY');
       this.set('forMonth', forMonth);
       this.set('forYear', forYear);
+      let datepickerEle = Ember.$(
+        '.controller.teacher.class.class-activities #ca-datepicker .datepicker-days .next'
+      );
+      datepickerEle.trigger('click');
       this.loadData();
     },
 
     showCalendar() {
-      this.handleDatePicker();
+      this.toggleDatePicker();
     }
   },
 
@@ -223,11 +228,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   initialize() {
     let controller = this;
     controller._super(...arguments);
-    controller.initializeDatePicker();
+    Ember.run.scheduleOnce('afterRender', controller, function() {
+      controller.initializeDatePicker();
+    });
   },
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {boolean} Indicates if there are class activities
+   */
+  showClassActivities: Ember.computed.gt('classActivities.length', 0),
 
   /**
    * Maintains the selected search content type.
@@ -421,21 +433,41 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   },
 
   initializeDatePicker: function() {
-    let controller = this;
-    Ember.run.scheduleOnce('afterRender', controller, function() {
-      let startDate = moment().toDate();
-      Ember.$('#ca-datepicker').datepicker({
-        startDate: startDate,
-        maxViewMode: 0,
-        format: 'yyyy-mm-dd'
-      });
+    let datepickerEle = Ember.$(
+      '.controller.teacher.class.class-activities #ca-datepicker'
+    );
+    datepickerEle.datepicker({
+      maxViewMode: 0,
+      format: 'yyyy-mm-dd'
+    });
+    datepickerEle.off('changeDate').on('changeDate', function() {
+      let datepicker = this;
+      let selectedDate = Ember.$(datepicker)
+        .datepicker('getFormattedDate')
+        .valueOf();
+      let listContainerEle = Ember.$(
+        '.controller.teacher.class.class-activities .dca-list-container'
+      );
+      let selectedDateEle = Ember.$(
+        `.controller.teacher.class.class-activities .dca-list-container .ca-date-${selectedDate}`
+      );
+      if (selectedDateEle.length > 0) {
+        listContainerEle.animate(
+          {
+            scrollTop: selectedDateEle.offset().top
+          },
+          'slow'
+        );
+      }
     });
   },
 
-  handleDatePicker() {
-    let element = Ember.$('.dca-content-container .ca-datepicker-container');
+  toggleDatePicker() {
+    let element = Ember.$(
+      '.controller.teacher.class.class-activities .ca-datepicker-container'
+    );
     let dateDisplayEle = Ember.$(
-      '.dca-content-container .ca-date-container .cal-mm-yyyy'
+      '.controller.teacher.class.class-activities .ca-datepicker-container .cal-mm-yyyy'
     );
     if (!element.hasClass('active')) {
       element.slideDown(400, function() {

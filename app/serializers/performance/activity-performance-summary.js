@@ -65,6 +65,7 @@ export default Ember.Object.extend({
     return ActivityPerformanceSummary.create({
       userId: userId,
       date: parseDate(data.date, 'YYYY-MM-DD'),
+      activation_date: data.date,
       collectionPerformanceSummary: serializer
         .get('collectionPerformanceSummarySerializer')
         .normalizeCollectionPerformanceSummary(data)

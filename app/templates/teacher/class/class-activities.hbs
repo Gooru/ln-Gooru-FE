@@ -28,39 +28,43 @@
         </div>
       </div>
     </div>
-    <div class="dca-list-container">
-      {{#each classActivities as |classActivity|}}
-        <div class="dca-date-view-container">
-          <div class="dca-date-container">
-            {{gru-icon name="calendar_today"}}
-            <span>{{format-date classActivity.added_date 'MMMM DD, YYYY'}}</span>
+    {{#if showClassActivities}}
+      <div class="dca-list-container">
+        {{#each classActivities as |classActivity|}}
+          <div class="dca-date-view-container">
+            <div class="dca-date-container">
+              {{gru-icon name="calendar_today"}}
+              <span>{{format-date classActivity.added_date 'MMMM DD, YYYY'}}</span>
+            </div>
+            <hr/>
           </div>
-          <hr/>
-        </div>
-        <div class="dca-content-list-container">
-          {{#each classActivity.classActivities as |classActivity|}}
-            {{class.gru-class-activity-panel
+          <div class="dca-content-list-container">
+            {{#each classActivity.classActivities as |classActivity|}}
+              {{class.gru-class-activity-panel
               classActivity=classActivity
               classId=classId
               members=members
               onReportclick='changeStatusValue'
               onGoLive='goLive'
-              showGolive=true
               showDcaAssignButton=true
-              showDcaRemoveButton=true
               showDcaAddButton=false
               onChangeVisibility='changeVisibility'
               onRemoveClassActivity='removeClassActivity'
               openDcaContentReport='openDcaContentReport'
+              activityDate=classActivity.added_date
             }}
-          {{/each}}
-        </div>
-      {{/each}}
-    </div>
-    <div class="ca-unschedule-container">
-      <div class="unscheduled-items">Unscheduled Items</div>
-      {{gru-icon name="arrow_drop_up"}}
-    </div>
+            {{/each}}
+          </div>
+        {{/each}}
+      </div>
+      <div class="ca-unschedule-container">
+        <div class="unscheduled-items">Unscheduled Items</div>
+        {{gru-icon name="arrow_drop_up"}}
+      </div>
+    {{else}}
+      <div class="no-content">{{t "common.no-dca-teacher"}}</div>
+      <div class="no-content-image"></div>
+    {{/if}}
   </div>
 </div>
 
