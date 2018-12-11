@@ -1,24 +1,29 @@
 .gru-accordion-unit {
-  padding: 10px 0 0 0;
+  padding: 10px 0 0;
   border-bottom: 1px solid $light-100;
+
   .unit {
     padding: 0 0 10px 20px;
+
     > .panel-title {
       font-size: $font-size-large;
       color: $gray;
       height: 43px;
       padding-top: 11px;
+
       > a {
         width: 90%;
         vertical-align: middle;
         height: 43px;
+
         .title {
           height: inherit;
+
           .prefix {
             border-right: $border-right-side $light-300;
             border-left: $border-left-side $light-300;
-            margin: 0 10px 0 10px;
-            padding: 5px 10px 0 10px;
+            margin: 0 10px;
+            padding: 5px 10px 0;
             color: $gray-base;
             font-weight: bold;
             height: inherit;
@@ -31,36 +36,37 @@
     + .collapse {
       &.in {
         background-color: $light-300;
-        padding: 10px 10px;
+        padding: 10px;
       }
+
       > .panel-body {
         padding: 0;
         background-color: $light-100;
         border-radius: 4px;
       }
     }
+
     .performance-container {
       cursor: pointer;
-      padding-top: 0px;
+      padding-top: 0;
       margin-top: -10px;
       width: 85px;
+
       &.not-started {
         pointer-events: none;
-        .container-box {
-          .percentage {
-            padding-top: 20px !important;
-          }
-        }
       }
+
       .charts.gru-performance-chart {
         .container-box {
           height: 77px;
+
           .percentage {
             cursor: pointer;
             margin: 19px 0 0;
           }
         }
       }
+
       .charts.gru-students-performance-chart {
         .container-box {
           height: 77px;
@@ -73,6 +79,7 @@
     border: 0;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
+
     .unit {
       + .collapse {
         &.in {
@@ -84,18 +91,20 @@
   }
 
   .item-disabled {
+    .content-count,
     .icon-container,
     .panel-title,
-    .content-count,
     .score,
     .state {
       opacity: 0.5;
     }
+
     .panel-title {
       .title {
         cursor: default;
       }
     }
+
     .icon-container {
       .score {
         button {
