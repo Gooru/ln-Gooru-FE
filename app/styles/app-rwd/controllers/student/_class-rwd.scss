@@ -1,12 +1,6 @@
-.student_class_course-map {
-  @media only screen and (max-width: $screen-sm - 1) {
-    background-image: url("gooru/timeline-view-bg.png");
-    background-position: center;
-  }
-}
-
 .student.class {
   width: 100vw;
+
   .no-course-content {
     color: #ffffff;
   }

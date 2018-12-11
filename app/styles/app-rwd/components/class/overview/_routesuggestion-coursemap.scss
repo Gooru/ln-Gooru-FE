@@ -3,7 +3,8 @@
     width: 98% !important;
     margin: auto;
 
-    .gru-accordion-course {
+    .gru-accordion-course,
+    .gru-accordion-unit {
       padding: 0;
     }
     @media screen and (max-width: 767px) {
@@ -82,6 +83,10 @@
 
     .course-suggestions {
       @media screen and (max-width: $screen-sm - 1) {
+        .gru-accordion-unit .unit + .collapse.in {
+          padding: 4px;
+        }
+
         .gru-accordion-unit .unit > .panel-title {
           padding-top: 0;
           height: 100%;
@@ -91,15 +96,27 @@
 
             .title {
               display: grid;
-              grid-template-rows: 30px auto;
+              grid-template-rows: max-content auto;
               padding-left: 10px;
 
               .prefix {
                 border: none;
-                padding: 0;
+                font-size: 12px;
                 margin: 0;
               }
+
+              .ellipsis {
+                font-size: 15px;
+                font-style: normal;
+                padding-left: 10px;
+              }
             }
+          }
+        }
+
+        .gru-accordion-lesson.expanded .panel-collapse.collapse.in {
+          .panel-body {
+            padding: 5px 5px 10px;
           }
         }
 
@@ -108,10 +125,16 @@
 
           & > a {
             display: grid;
-            grid-template-rows: 30px auto;
+            grid-template-rows: max-content auto;
 
             .lesson-prefix {
               border: none;
+              font-size: 12px;
+            }
+
+            .ellipsis {
+              font-size: 15px;
+              font-style: normal;
             }
           }
         }
