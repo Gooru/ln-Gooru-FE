@@ -1,28 +1,28 @@
-<div class="dca-panel-container {{if classActivity.isNewlyAdded 'new'}}">
-  <div class="dca-panel-info">
-    <i class="{{item.collectionType}}-icon" />
-    <p {{action 'onPlayContent' item}}>{{item.title}}</p>
-  </div>
-  <div class="dca-content-counts">
-    <div class="resource-count">
-      {{#if (gt item.resourceCount 0)}}
-        <i class="resource-icon"></i>
-        <span>{{item.resourceCount}}</span>
+<div class="dca-panel-container {{if classActivity.isNewlyAdded 'new'}} {{if isActivityPast 'past-date'}}">
+  <div class="ca-panel-container-1">
+    <div class="dca-panel-info">
+      <i class="{{item.collectionType}}-icon" />
+      <p {{action 'onPlayContent' item}}>{{item.title}}</p>
+    </div>
+    <div class="dca-content-counts">
+      <div class="resource-count">
+        {{#if (gt item.resourceCount 0)}}
+          <i class="resource-icon"></i>
+          <span>{{item.resourceCount}}</span>
+        {{/if}}
+      </div>
+
+      <div class="question-count">
+        {{#if (gt item.questionCount 0)}}
+          <i class="question-icon"></i>
+          <span>{{item.questionCount}}</span>
+        {{/if}}
+      </div>
+
+      {{#if (eq item.collectionType 'assessment-external')}}
+        <i class="external-icon"></i>
       {{/if}}
     </div>
-
-    <div class="question-count">
-      {{#if (gt item.questionCount 0)}}
-        <i class="question-icon"></i>
-        <span>{{item.questionCount}}</span>
-      {{/if}}
-    </div>
-
-    {{#if (eq item.collectionType 'assessment-external')}}
-      <i class="external-icon"></i>
-    {{/if}}
-  </div>
-  <div class="dca-panel-actions-performance">
     <div class="dca-panel-actions">
       <div class="dca-add-btn">
         {{#if showDcaAddButton}}
@@ -60,18 +60,44 @@
         {{/if}}
       </div>
     </div>
-    {{#if collectionPerformanceSummary}}
-      <div class="dca-panel-performance" {{action 'openDcaContentReport' classActivity}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
+    <div class="dca-panel-actions-performance">
+      {{#if collectionPerformanceSummary}}
         {{#if (not-eq item.collectionType 'collection')}}
-          <span>{{collectionPerformanceSummary.score}}%</span>
+          <div class="dca-panel-performance" {{action 'openDcaContentReport' classActivity}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
+            <span>{{collectionPerformanceSummary.score}}%</span>
+          </div>
         {{else}}
-          <span>{{format-time collectionPerformanceSummary.timeSpent}}</span>
+          <div class="dca-panel-performance collection" {{action 'openDcaContentReport' classActivity}}>
+            <span class="time-spent">
+                {{if collectionPerformanceSummary.timeSpent (format-time collectionPerformanceSummary.timeSpent) '--'}}
+              </span>
+          </div>
         {{/if}}
-      </div>
-    {{else}}
-      <div class="dca-panel-performance not-started">
-        <span class="no-performance">--</span>
-      </div>
-    {{/if}}
+      {{else}}
+        <div class="dca-panel-performance not-started">
+          <span class="no-performance">--</span>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+  <div class="ca-panel-container-2">
+    <div class="student-count">
+      {{#if (eq classActivity.usersCount -1)}}
+        <span {{action 'showStudentList'}}>Everyone</span> {{else if (eq classActivity.usersCount 0)}}
+        <span {{action 'showStudentList'}}>No Students Selected</span>
+      {{else}}
+        <span {{action 'showStudentList'}}> {{classActivity.usersCount}}  Students Selected</span>
+      {{/if}}
+    </div>
+    <div class="re-schedule hidden">Re schedule</div>
+    <div class="time-spent">
+      {{#if collectionPerformanceSummary}}
+        <span>{{format-time collectionPerformanceSummary.timeSpent}}</span>
+      {{/if}}
+    </div>
   </div>
 </div>
+
+{{#if showStudentListPullup}}
+  {{teacher.class.ca-student-list-pull-up isActivityPast=isActivityPast classId=classId classActivity=classActivity members=members showPullUp=showStudentListPullup}}
+{{/if}}

@@ -1,42 +1,196 @@
+.student_class_class-activities {
+  .app-container {
+    .student.class {
+      padding: 0;
+    }
+  }
+}
+
 .controller.student.class.class-activities {
   padding: 0;
-  margin: 35px 0 0;
+  margin: 20px 0;
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
 
-  .today {
-    background-color: $white;
-    border-radius: 4px 4px 0 0;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-    color: $gray-base;
-    font-size: $font-size-lead;
-    height: 52px;
-    padding: 8px 0 0 15px;
-  }
+  .ca-title {
+    opacity: 0.2;
+    font-family: "Playfair Display";
+    font-size: 30px;
+    font-style: italic;
+    text-align: center;
+    color: #000000;
 
-  .collections {
-    margin-top: 1px;
-    padding: 0;
-    .gru-student-class-activity-panel {
-      box-shadow: none;
-      margin: 0;
+    p {
+      margin-bottom: 0;
     }
   }
 
-  .no-content {
-    color: $gray-dove;
-    font-size: $font-size-lead;
-    text-align: center;
+  .loading-spinner {
+    position: absolute;
+    left: 50%;
   }
-  .no-contentfont {
-    width: 100% !important;
-    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    font-size: 13px !important;
-  }
-  .no-content-image {
-    background-image: url(gooru/no-dca-student.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 240px;
-    margin: 40px auto 0;
+
+  .ca-content-container {
+    position: relative;
+
+    .ca-date-and-add-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      background-color: #fff;
+      height: 50px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+
+      .ca-date-container {
+        width: 50%;
+        position: relative;
+        display: grid;
+        grid-template-columns: 50px 1fr 50px;
+        align-items: center;
+        justify-items: center;
+        margin: 0 auto;
+
+        .prev-cal-arrow {
+          height: 20px;
+          cursor: pointer;
+          color: #ccc;
+        }
+
+        .next-cal-arrow {
+          height: 20px;
+          cursor: pointer;
+          color: #ccc;
+        }
+
+        .cal-mm-yyyy {
+          display: inline-flex;
+          height: 20px;
+          font-weight: bold;
+          cursor: pointer;
+          pointer-events: none;
+
+          .arrow_drop_up {
+            display: none;
+          }
+
+          .arrow_drop_down {
+            display: none;
+          }
+
+          &.active {
+            .arrow_drop_up {
+              display: inline-block;
+            }
+
+            .arrow_drop_down {
+              display: none;
+            }
+          }
+        }
+
+        .ca-datepicker-container {
+          background: #fff;
+          position: absolute;
+          z-index: 1;
+          width: inherit;
+          box-shadow: 0 13px 16px 0 rgba(0, 0, 0, 0.13);
+          top: 50px;
+          display: none;
+          width: 100%;
+
+          #ca-datepicker {
+            .datepicker {
+              width: 100%;
+
+              .table-condensed {
+                width: 100%;
+
+                thead tr:first-child {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .no-content {
+      color: $gray-dove;
+      font-size: $font-size-lead;
+      text-align: center;
+    }
+
+    .no-contentfont {
+      width: 100%;
+      font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 13px;
+    }
+
+    .no-content-image {
+      background-image: url("gooru/no-dca-student.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      height: 240px;
+      margin: 40px auto 0;
+    }
+
+    .dca-list-container {
+      height: calc(100vh - 195px);
+      overflow-y: auto;
+      padding-right: 20px;
+      padding-left: 20px;
+      padding-bottom: 20px;
+
+      .dca-date-view-container {
+        display: inline-grid;
+        grid-template-columns: 200px 1fr;
+        align-items: center;
+        height: 50px;
+        width: 100%;
+
+        .dca-date-container {
+          display: inline-flex;
+          width: 100%;
+          align-items: center;
+
+          .calendar_today {
+            padding-left: 20px;
+          }
+
+          span {
+            padding-left: 20px;
+          }
+        }
+
+        hr {
+          width: 100%;
+          border-top: 1px solid #ccc;
+        }
+      }
+
+      .dca-content-list-container {
+        .gru-class-activity-panel {
+          background-color: #fff;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+          border-radius: 4px;
+          margin-bottom: 10px;
+        }
+
+        .gru-class-activity-panel:last-child {
+          .dca-panel-container {
+            border-bottom: none;
+          }
+        }
+
+        .gru-class-activity-panel:first-child {
+          .dca-panel-performance {
+            border-top-right-radius: 4px;
+          }
+        }
+      }
+    }
   }
 }

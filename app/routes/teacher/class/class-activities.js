@@ -18,18 +18,6 @@ export default Ember.Route.extend({
   // -------------------------------------------------------------------------
   // Properties
 
-  /**
-   * Number of records loaded past date
-   * @type {Number}
-   */
-  numberRecordsLoadedPastDate: 30,
-
-  /**
-   * Number of records loaded future date
-   * @type {Number}
-   */
-  numberRecordsLoadedFutureDate: 30,
-
   // -------------------------------------------------------------------------
   // Actions
 
@@ -63,22 +51,12 @@ export default Ember.Route.extend({
     const route = this;
     const currentClass = route.modelFor('teacher.class').class;
     const classId = currentClass.get('id');
-    const numberRecordsLoadedPastDate = route.get(
-      'numberRecordsLoadedPastDate'
-    );
-    const numberRecordsLoadedFutureDate = route.get(
-      'numberRecordsLoadedFutureDate'
-    );
-    let startDate = moment()
-      .subtract(numberRecordsLoadedPastDate, 'd')
-      .format('YYYY-MM-DD');
-    let endDate = moment()
-      .add(numberRecordsLoadedFutureDate, 'd')
-      .format('YYYY-MM-DD');
+    let forMonth = moment().format('MM');
+    let forYear = moment().format('YYYY');
     return Ember.RSVP.hash({
       classActivities: route
         .get('classActivityService')
-        .findClassActivities(classId, null, startDate, endDate)
+        .findClassActivities(classId, null, forMonth, forYear)
     });
   },
 
@@ -88,9 +66,8 @@ export default Ember.Route.extend({
    * @param model
    */
   setupController: function(controller, model) {
-    controller.set('showWelcome', true);
     controller.parseClassActivityData(model.classActivities);
-    controller.init();
+    controller.initialize();
   },
 
   /**

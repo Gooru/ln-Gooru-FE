@@ -1,135 +1,133 @@
 .gru-class-activity-panel {
+  background-color: #fff;
+  border-radius: 4px;
+  margin-bottom: 10px;
+
   &:hover {
     .dca-panel-container {
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
       position: relative;
-
-      .dca-panel-actions-performance {
-        .dca-panel-actions {
-          .dca-add {
-            visibility: visible;
-            opacity: 1;
-          }
-        }
-      }
     }
   }
 
   .dca-panel-container {
-    display: inline-grid;
-    width: 100%;
-    grid-template-columns: 55% 15% 30%;
-    height: 45px;
-    border-bottom: solid 1px #cacaca;
     transition: background-color 2s linear;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
 
     &.new {
       background-color: #ffc107ad;
     }
+    &.past-date {
+      .dca-assign-btn {
+        pointer-events: none;
+      }
+    }
 
-    .dca-panel-info {
+    .ca-panel-container-1 {
+      display: inline-grid;
       width: 100%;
-      display: inline-grid;
-      grid-template-columns: 65px 1fr;
-      align-items: center;
+      grid-template-columns: 1fr 100px 200px 60px;
+      height: 60px;
+      border-bottom: solid 1px #cacaca;
 
-      .collection-icon {
-        width: 20px;
-        height: 20px;
-        background-repeat: no-repeat;
-        background-size: 20px 20px;
-        background-image: url("../assets/gooru/images/add_collection.svg");
-        opacity: 0.8;
-        justify-self: center;
-      }
-
-      .assessment-external-icon,
-      .assessment-icon {
-        width: 20px;
-        height: 20px;
-        background-repeat: no-repeat;
-        background-size: 20px 20px;
-        background-image: url("../assets/gooru/images/add_assessment.svg");
-        opacity: 0.8;
-        justify-self: center;
-      }
-
-      p {
-        margin: 0;
-        cursor: pointer;
-        font-family: "Open Sans";
-        color: #4a4a4a;
-        padding: 0 20px 0 0;
-        @include ellipsis(
-          $font-size: 15px,
-          $line-height: 1.5,
-          $lines-to-show: 1
-        );
-      }
-    }
-
-    .dca-content-counts {
-      display: inline-flex;
-      align-items: center;
-      justify-content: space-evenly;
-
-      .resource-count {
-        width: 40px;
+      .dca-panel-info {
+        width: 100%;
         display: inline-grid;
+        grid-template-columns: 65px 1fr;
         align-items: center;
-        grid-template-columns: 50% 50%;
-        justify-items: center;
-        height: 20px;
 
-        .resource-icon {
+        .collection-icon {
           width: 20px;
           height: 20px;
           background-repeat: no-repeat;
           background-size: 20px 20px;
-          background-image: url("../assets/gooru/images/add_resource_icon.svg");
+          background-image: url("../assets/gooru/images/add_collection.svg");
           opacity: 0.8;
+          justify-self: center;
         }
 
-        span {
-          height: 20px;
-        }
-      }
-
-      .question-count {
-        width: 40px;
-        display: inline-grid;
-        align-items: center;
-        grid-template-columns: 50% 50%;
-        justify-items: center;
-        height: 20px;
-
-        .question-icon {
+        .assessment-external-icon,
+        .assessment-icon {
           width: 20px;
           height: 20px;
           background-repeat: no-repeat;
           background-size: 20px 20px;
-          background-image: url("../assets/gooru/images/add_question.svg");
+          background-image: url("../assets/gooru/images/add_assessment.svg");
           opacity: 0.8;
+          justify-self: center;
         }
 
-        span {
+        p {
+          margin: 0;
+          cursor: pointer;
+          font-family: "Open Sans";
+          color: #4a4a4a;
+          padding: 0 20px 0 0;
+          @include ellipsis(
+            $font-size: 15px,
+            $line-height: 1.5,
+            $lines-to-show: 1
+          );
+        }
+      }
+
+      .dca-content-counts {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .resource-count {
+          width: 40px;
+          display: inline-grid;
+          align-items: center;
+          grid-template-columns: 50% 50%;
+          justify-items: center;
           height: 20px;
+
+          .resource-icon {
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-image: url("../assets/gooru/images/add_resource_icon.svg");
+            opacity: 0.8;
+          }
+
+          span {
+            height: 20px;
+          }
+        }
+
+        .question-count {
+          width: 40px;
+          display: inline-grid;
+          align-items: center;
+          grid-template-columns: 50% 50%;
+          justify-items: center;
+          height: 20px;
+
+          .question-icon {
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-image: url("../assets/gooru/images/add_question.svg");
+            opacity: 0.8;
+          }
+
+          span {
+            height: 20px;
+          }
+        }
+
+        .external-icon {
+          width: 20px;
+          height: 20px;
+          background-repeat: no-repeat;
+          background-size: 20px 20px;
+          background-image: url("../assets/gooru/share.png");
         }
       }
-
-      .external-icon {
-        width: 20px;
-        height: 20px;
-        background-repeat: no-repeat;
-        background-size: 20px 20px;
-        background-image: url("../assets/gooru/share.png");
-      }
-    }
-
-    .dca-panel-actions-performance {
-      display: inline-grid;
-      grid-template-columns: 1fr 53px;
-      align-items: center;
 
       .dca-panel-actions {
         display: inline-grid;
@@ -237,23 +235,59 @@
         }
       }
 
-      .dca-panel-performance {
-        width: 100%;
-        height: 100%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-size: 11px;
-        cursor: pointer;
+      .dca-panel-actions-performance {
+        .dca-panel-performance {
+          width: 100%;
+          height: 100%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          font-size: 18px;
+          font-weight: bold;
+          cursor: pointer;
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
 
-        &.not-started {
-          pointer-events: none;
-        }
+          &.collection {
+            background-color: #4e5e68;
+            font-size: 12px;
+            text-overflow: ellipsis;
+          }
 
-        .no-performance {
-          color: #37424b;
+          &.not-started {
+            pointer-events: none;
+          }
+
+          .no-performance {
+            color: #37424b;
+          }
         }
+      }
+    }
+
+    .ca-panel-container-2 {
+      height: 20px;
+      grid-template-columns: 1fr 1fr;
+      display: grid;
+      align-items: center;
+      height: 30px;
+
+      .student-count {
+        padding-left: 25px;
+
+        span {
+          cursor: pointer;
+        }
+      }
+
+      .re-schedule {
+        justify-self: center;
+      }
+
+      .time-spent {
+        justify-self: right;
+        padding-right: 25px;
       }
     }
   }
