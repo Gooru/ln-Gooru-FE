@@ -210,7 +210,7 @@ export default Ember.Component.extend({
   parseClassMembers(usersClassActivity) {
     let component = this;
     let students = Ember.A([]);
-    let members = component.get('members');
+    let members = component.get('members').filterBy('isActive', true);
     members.forEach(member => {
       let memberId = member.get('id');
       let lastName = member.get('lastName');
