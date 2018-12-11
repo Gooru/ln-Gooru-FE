@@ -48,6 +48,41 @@ export default Ember.Controller.extend({
       let controller = this;
       controller.set('isShowClassProficiencyReport', false);
       controller.set('isShowCourseCompetencyReport', true);
+    },
+
+    //Action triggered when select a student
+    onSelectStudent(student) {
+      let controller = this;
+      let activeStudentData = Ember.Object.create({
+        firstName: student.firstName,
+        lastName: student.lastName,
+        avatarUrl: student.thumbnail,
+        fullName: student.fullName,
+        id: student.id
+      });
+      controller.set('activeStudent', activeStudentData);
+      controller.set('isShowProficiencyPullup', true);
+    },
+
+    /**
+     * Action triggered when select a competency
+     */
+    onSelectCompetency(competency) {
+      let controller = this;
+      controller.set('selectedCompetency', competency);
+      controller.set('isShowCompetencyContentReport', true);
+    },
+
+    // Action triggered when close competency report pullup
+    onCloseCompetencyReportPullUp() {
+      this.set('isShowCompetencyContentReport', false);
+    },
+
+    /**
+     * Action triggered when the user click outside of pullup.
+     **/
+    onClosePullUp() {
+      this.set('isShowProficiencyPullup', false);
     }
   },
 
@@ -166,9 +201,13 @@ export default Ember.Controller.extend({
             domainSeq: domain.domainSeq,
             'in-progress':  curDomainInProgressCount + inProgressDomainCompetencyCoverage,
             'not-started': curDomainNotStartedCount + notStartedDomainCompetencyCoverage,
-            'mastered': curDomainMasteredCount + masteredDomainCompetencyCoverage
+            'mastered': curDomainMasteredCount + masteredDomainCompetencyCoverage,
+            'total-coverage': curDomainInProgressCount + inProgressDomainCompetencyCoverage + notStartedDomainCompetencyCoverage + masteredDomainCompetencyCoverage
           });
           studentCompetencies.set('competencies', studentDomainCompetenciesInfo.sortBy('competencyStatus').reverse());
+          studentCompetencies.set('in-progress', inProgressDomainCompetencyCoverage);
+          studentCompetencies.set('mastered', masteredDomainCompetencyCoverage);
+          studentCompetencies.set('not-started', notStartedDomainCompetencyCoverage);
           studentDomainCompetencies.push(studentCompetencies);
         });
         studentDomainPerformance.set('domainCompetencies', studentDomainCompetencies);
@@ -271,6 +310,11 @@ export default Ember.Controller.extend({
     let controller = this;
     return controller.get('course.subject') || 'K12.MA';
   }),
+
+  /**
+   * @property {Boolean} isShowProficiencyPullup
+   */
+  isShowProficiencyPullup: false,
 
   /**
    * @property {Array} domainLevelSummary
