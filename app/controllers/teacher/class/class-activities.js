@@ -229,6 +229,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let controller = this;
     controller._super(...arguments);
     Ember.run.scheduleOnce('afterRender', controller, function() {
+      controller.set('forMonth', moment().format('MM'));
+      controller.set('forYear', moment().format('YYYY'));
       controller.initializeDatePicker();
     });
   },
