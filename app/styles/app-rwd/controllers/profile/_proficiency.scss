@@ -4,35 +4,54 @@
 
     .taxonomy-info {
       display: grid;
+
       .dropdown-content {
+        .list-item,
         .list-item.active {
-            background-color: #bbb;
+          display: block !important;
         }
       }
+
+      .dropdown-content {
+        .list-item.active {
+          background-color: #bbb;
+        }
+
+        .list-item,
+        .list-item.active {
+          display: none;
+        }
+      }
+
       .label {
-        margin-right: 0px;
+        margin-right: 0;
       }
     }
 
     .panel.left-panel {
       margin: auto;
     }
+
     .panel.right-panel {
       display: none;
     }
     @media screen and (max-width: $screen-sm - 1) {
       .panel.left-panel {
         width: 100vw;
+
         .panel-header {
           display: grid;
           grid-template-columns: auto 125px;
+
           .title {
             width: 100%;
             margin-left: 10px;
           }
+
           .toggle-chart-view {
             display: none;
           }
+
           .actions {
             .toggle-view {
               span {
@@ -41,6 +60,7 @@
             }
           }
         }
+
         .panel-body.matrix {
           .domain {
             .proficiency-matrix {
@@ -49,6 +69,7 @@
                   .courses {
                     display: none;
                   }
+
                   .matrix-chart-container {
                     zoom: 0.8;
                     width: 100%;
@@ -59,10 +80,12 @@
               }
             }
           }
+
           .course {
             .proficiency-course-matrix {
               .course-matrix-container {
                 zoom: 0.5;
+
                 .course-chart {
                   display: grid;
                   grid-template-columns: auto auto;
@@ -71,27 +94,21 @@
               }
             }
           }
+
           .proficiency-tags {
             .proficiency-legends {
               .legend {
-                .box, .box-skyline {
+                .box,
+                .box-skyline {
                   margin-right: 5px;
                 }
                 margin-right: 10px;
-                &.baseline {
-                  display: none;
-                }
               }
             }
           }
+
           .time-series {
-            .monthly-time-series-chart {
-              width: max-content;
-              margin: auto;
-              svg {
-                zoom: 0.5;
-              }
-            }
+            display: none;
           }
         }
       }
@@ -103,6 +120,7 @@
             font-size: 15px;
           }
         }
+
         .panel-body.matrix {
           .course {
             .proficiency-course-matrix {
@@ -111,38 +129,62 @@
               }
             }
           }
+
           .proficiency-tags {
             .proficiency-legends {
               .legend {
                 margin-right: 5px;
-                .box, .box-skyline {
+
+                .box,
+                .box-skyline {
                   margin-right: 5px;
                 }
+
                 .title {
                   font-size: 11px;
-                }
-                &.baseline {
-                  display: none;
                 }
               }
             }
           }
+
           .time-series {
-            .monthly-time-series-chart {
-              svg {
-                zoom: 0.4;
+            display: none;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: $screen-400) {
+      .panel.left-panel {
+        .panel-body.matrix {
+          .domain {
+            .proficiency-matrix {
+              .competency-chart-tab-container {
+                .competency-courses-chart {
+                  .matrix-chart-container {
+                    zoom: 0.6;
+                  }
+                }
               }
             }
           }
         }
       }
     }
-
     @media screen and (max-width: $screen-xs) {
+      .proficiency-tags {
+        .proficiency-legends {
+          display: grid;
+          grid-template-columns: auto auto auto;
+          grid-gap: 10px;
+        }
+      }
+
       .panel.left-panel {
         .panel-body.matrix {
-          .competency-chart-tab-container, .course-matrix-container {
-            #render-proficiency-matrix, #render-proficiency-course-matrix {
+          .competency-chart-tab-container,
+          .course-matrix-container {
+            #render-proficiency-course-matrix,
+            #render-proficiency-matrix {
               svg {
                 .competency {
                   pointer-events: none;
@@ -153,7 +195,6 @@
         }
       }
     }
-
     @media screen and (max-height: $screen-359 + 1) {
       .panel.left-panel {
         .panel-body.matrix {

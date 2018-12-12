@@ -2,7 +2,6 @@ import Ember from 'ember';
 import d3 from 'd3';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['proficiency-view'],
@@ -57,13 +56,15 @@ export default Ember.Component.extend({
     let cellWidth = component.get('cellWidth');
     let chartWidth = numberOfDomains * cellWidth;
     let chartHeight = component.get('chartHeight');
-    const proficiencyChartContainer = d3.select(`.chart.proficiency-view-${studentSeq}`)
+    const proficiencyChartContainer = d3
+      .select(`.chart.proficiency-view-${studentSeq}`)
       .append('svg')
       .attr('width', chartWidth)
       .attr('height', chartHeight);
-    const domainChartContainer = proficiencyChartContainer.append('g')
+    const domainChartContainer = proficiencyChartContainer
+      .append('g')
       .attr('id', 'chart-container');
-    domainDataSet.map( dataSet => {
+    domainDataSet.map(dataSet => {
       component.drawDomainVerticalChart(domainChartContainer, dataSet);
     });
   },
@@ -79,12 +80,16 @@ export default Ember.Component.extend({
     let cellHeight = component.get('cellHeight');
     let competencySeq = -1;
     let xSeq = (domainSeq - 1) * cellWidth;
-    const cells = domainChartContainer.selectAll('.competency').data(dataSet.competencies);
+    const cells = domainChartContainer
+      .selectAll('.competency')
+      .data(dataSet.competencies);
     cells
       .enter()
       .append('rect')
       .attr('class', d => {
-        return `domain-${domainSeq} competency-${d.competencySeq} fill-${d.competencyStatus}`;
+        return `domain-${domainSeq} competency-${d.competencySeq} fill-${
+          d.competencyStatus
+        }`;
       })
       .attr('id', 'competency-cell')
       .attr('width', cellWidth)
@@ -92,7 +97,7 @@ export default Ember.Component.extend({
       .attr('x', xSeq)
       .attr('y', () => {
         competencySeq++;
-        return (competencySeq * cellHeight);
+        return competencySeq * cellHeight;
       });
     cells.exit().remove();
   }

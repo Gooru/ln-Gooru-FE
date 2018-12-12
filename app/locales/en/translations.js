@@ -802,6 +802,8 @@ export default Object.assign(quizzesTranslations, {
       locate: 'Locate Me',
       'edit-content': 'Edit Content',
       'add-to-daily-class-activities': 'Add to Daily Class Activities',
+      'assigned-course': 'Your assigned course',
+      'pre-study-title': 'Pre-study for your course',
       'course-map': {
         'rescope-toggle': 'Show Complete Course',
         'rescope-info':

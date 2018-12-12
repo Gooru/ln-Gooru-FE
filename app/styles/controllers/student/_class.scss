@@ -1,6 +1,7 @@
 .student.class {
   width: 960px;
   margin: 0 auto;
+  height: 100%;
 
   .alert-player-error {
     height: 50px;
@@ -20,13 +21,17 @@
     top: 125px;
   }
 
-  .content .no-course-content {
-    font-size: 20px;
-    align-items: center;
-    height: 85vh;
-    display: flex;
-    justify-content: center;
-    font-family: "Open Sans";
+  .content {
+    height: 100%;
+
+    .no-course-content {
+      font-size: 20px;
+      align-items: center;
+      height: 85vh;
+      display: flex;
+      justify-content: center;
+      font-family: "Open Sans";
+    }
   }
 
   .header {

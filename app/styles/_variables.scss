@@ -286,8 +286,7 @@ $screen-in-1024: 1024px;
 $screen-xs-max: $screen-sm-min - 1 !default;
 $screen-sm-max: $screen-md-min - 1 !default;
 $screen-md-max: $screen-lg-min - 1 !default; //== Grid system
-$screen-lptp-hidpi: 1440px;
-//
+$screen-lptp-hidpi: 1440px; //
 //## Define your custom responsive grid.
 //** Number of columns in the grid.
 $grid-columns: 12 !default; //** Padding between columns. Gets divided in half for the left and right.
@@ -705,4 +704,6 @@ $screen-640: 640px !default;
 $screen-791: 791px !default;
 $screen-780: 780px !default;
 $screen-814: 814px !default;
+$screen-675: 675px !default;
+$screen-400: 400px !default;
 $bg-dark: #323232;
