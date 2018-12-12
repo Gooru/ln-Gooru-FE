@@ -28,9 +28,11 @@
   .fillArea0 {
     fill: #e7e8e9;
   }
+
   .fillArea1 {
     fill: #1aa9eb;
   }
+
   .fillArea2,
   .fillArea3,
   .fillArea4,
@@ -70,6 +72,7 @@
       align-items: center;
       justify-self: end;
       margin: 8px 8px 8px 0;
+
       i {
         font-size: 15px;
       }
@@ -78,7 +81,8 @@
     .matrix-chart {
       .chart-container {
         display: grid;
-        grid-template-columns: 150px auto;
+        grid-template-columns: auto auto;
+        grid-gap: 10px;
         justify-content: center;
 
         &.no-grade {
@@ -94,18 +98,21 @@
             .grade-list {
               max-height: 63vh;
               @extend %scroll-style;
+
               .grade-container {
                 cursor: pointer;
               }
             }
           }
+
           .baseline-toggle {
             position: relative;
             padding: 0;
             margin: 0;
             max-width: 100px;
             width: max-content;
-            max-width: 100px;
+            min-width: 100px;
+            text-align: right;
             cursor: pointer;
 
             .baseline-label {
@@ -119,6 +126,7 @@
               text-overflow: ellipsis;
               color: $dark-300;
             }
+
             &.active-baseline {
               font-weight: bold;
 
@@ -162,14 +170,12 @@
             }
           }
         }
-
         @extend %scroll-style;
 
         .domain-chart-container {
           align-self: flex-end;
           max-width: calc(100vw - 100px);
           overflow-x: auto;
-
           @extend %scroll-style;
 
           .scrollable-chart {
@@ -180,7 +186,6 @@
             grid-template-columns: auto;
             justify-content: flex-end;
             align-items: end;
-
             @extend %scroll-style;
 
             #popover {
@@ -236,6 +241,7 @@
 
               #skyline-container {
                 filter: url(#shadow);
+
                 line {
                   stroke: $white;
                   stroke-width: 6px;
@@ -253,6 +259,7 @@
                 transition-property: visibility, opacity;
                 transition-duration: 0s, 1s;
               }
+
               .boundary-line {
                 stroke: #8fd383;
                 stroke-width: 4px;
@@ -303,7 +310,6 @@
           width: calc(100% - 20px);
         }
       }
-
       @extend %scroll-style;
     }
   }
