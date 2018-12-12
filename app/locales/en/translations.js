@@ -1260,7 +1260,9 @@ export default Object.assign(quizzesTranslations, {
         remove: 'Remove',
         mastered: 'Mastered',
         'in-progress': 'In Progress',
+        'not-started': 'Not Started',
         'course-coverage': 'Course Coverage',
+        'class-statistics': 'Class Statistics',
         'proficiency-in': 'Proficiency in',
         'data-not-available': 'Data Not Available',
         'error-message':

@@ -28,6 +28,11 @@ export default Ember.Component.extend({
     if (component.get('activeCategory')) {
       component.fetchSubjectsByCategory(activeCategory);
     }
+    Ember.$('body').css('overflow', 'hidden');
+  },
+
+  willDestroyElement() {
+    Ember.$('body').css('overflow', 'auto');
   },
 
   // -------------------------------------------------------------------------
