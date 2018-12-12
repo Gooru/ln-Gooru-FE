@@ -110,6 +110,7 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    * @property {Profile}
    */
   profile: null,
+
   // -------------------------------------------------------------------------
   // Methods
 

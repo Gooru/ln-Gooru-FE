@@ -18,15 +18,15 @@ export default Ember.Object.extend({
    * @param {string} contentId
    * @param {string} contentType
    * @param {Date} addedDate
-   * @param { { courseId: string, unitId: string, lessonId: string } } context
    * @returns {Promise}
    */
   addActivityToClass: function(
     classId,
     contentId,
     contentType,
-    addedDate = new Date(),
-    context = {}
+    addedDate,
+    forMonth = moment().format('MM'),
+    forYear = moment().format('YYYY')
   ) {
     const adapter = this;
     const namespace = this.get('namespace');
@@ -42,10 +42,8 @@ export default Ember.Object.extend({
         content_id: contentId,
         content_type: contentType,
         dca_added_date: formatDate(addedDate, 'YYYY-MM-DD'),
-        ctx_course_id: context ? context.courseId : null,
-        ctx_unit_id: context ? context.unitId : null,
-        ctx_lesson_id: context ? context.lessonId : null,
-        ctx_collection_id: context ? context.collectionId : null
+        for_month: parseInt(forMonth),
+        for_year: parseInt(forYear)
       })
     };
     return Ember.$.ajax(url, options);
@@ -84,15 +82,15 @@ export default Ember.Object.extend({
    *
    * @param {string} classId
    * @param {string} contentType collection|assessment|resource|question
-   * @param {Date} startDate optional, default is now
-   * @param {Date} endDate optional, default is now
+   * @param {Month} month optional, default is current month
+   * @param {Year} year optional, default is current year
    * @returns {Promise}
    */
   findClassActivities: function(
     classId,
     contentType = undefined,
-    startDate = new Date(),
-    endDate = new Date()
+    forMonth = moment().format('MM'),
+    forYear = moment().format('YYYY')
   ) {
     const adapter = this;
     const namespace = this.get('namespace');
@@ -103,8 +101,8 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       data: {
         content_type: contentType,
-        date_from: formatDate(startDate, 'YYYY-MM-DD'),
-        date_to: formatDate(endDate, 'YYYY-MM-DD')
+        for_month: forMonth,
+        for_year: forYear
       }
     };
     return Ember.$.ajax(url, options);
@@ -128,6 +126,49 @@ export default Ember.Object.extend({
       processData: false,
       headers: adapter.defineHeaders(),
       data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Get the users information for the specified activity
+   *
+   * @param {string} classId
+   * @param {string} contentId content uuid
+   * @returns {Promise}
+   */
+  fetchUsersForClassActivity: function(classId, contentId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${classId}/contents/${contentId}/users`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Update the users information for the specified activity
+   *
+   * @param {string} classId
+   * @param {string} contentId
+   * @returns {Promise}
+   */
+  addUsersToActivity: function(classId, contentId, users) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${classId}/contents/${contentId}/users`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({
+        users: users
+      })
     };
     return Ember.$.ajax(url, options);
   },

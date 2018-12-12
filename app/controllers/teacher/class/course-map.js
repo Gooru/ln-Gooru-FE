@@ -242,6 +242,7 @@ export default Ember.Controller.extend({
       controller.set('activeStudent', student);
       controller.getStudentCourseMap(student.id);
       controller.getStudentClassPerformance(student.id);
+      controller.set('skippedContents', null);
       if (controller.get('isPremiumClass')) {
         controller.getRescopedData();
         controller.loadRoute0Data();
@@ -456,9 +457,6 @@ export default Ember.Controller.extend({
 
         if (skippedContents && isContentAvailable) {
           controller.toggleSkippedContents(skippedContents);
-          controller.set('isChecked', false);
-        } else {
-          controller.set('isChecked', true);
         }
       });
     }
@@ -539,14 +537,8 @@ export default Ember.Controller.extend({
    * Method to toggle content visibility
    */
   toggleContentVisibility(contentClassnames) {
-    let controller = this;
-    let isChecked = controller.get('isChecked');
     const $contentcontroller = Ember.$(contentClassnames.join());
-    if (isChecked) {
-      $contentcontroller.show().addClass('rescoped-content');
-    } else {
-      $contentcontroller.hide();
-    }
+    $contentcontroller.hide();
   },
 
   /**

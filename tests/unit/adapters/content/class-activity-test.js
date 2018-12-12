@@ -11,7 +11,7 @@ moduleForAdapter(
 );
 
 test('addActivityToClass with no context', function(assert) {
-  assert.expect(10);
+  assert.expect(6);
 
   const adapter = this.subject();
   adapter.set(
@@ -37,28 +37,18 @@ test('addActivityToClass with no context', function(assert) {
           '2013-01-20',
           'Wrong added date'
         );
-        assert.notOk(
-          requestBodyJson.ctx_course_id,
-          'ctx_course_id should be undefined'
-        );
-        assert.notOk(
-          requestBodyJson.ctx_unit_id,
-          'ctx_unit_id should be undefined'
-        );
-        assert.notOk(
-          requestBodyJson.ctx_lesson_id,
-          'ctx_lesson_id should be undefined'
-        );
-        assert.notOk(
-          requestBodyJson.ctx_collection_id,
-          'ctx_collection_id should be undefined'
-        );
         assert.equal(
           request.requestHeaders.Authorization,
           'Token token-api-3',
           'Wrong token'
         );
-        return [201, { 'Content-Type': 'text/plain' }, ''];
+        return [
+          201,
+          {
+            'Content-Type': 'text/plain'
+          },
+          ''
+        ];
       },
       false
     );
@@ -71,7 +61,7 @@ test('addActivityToClass with no context', function(assert) {
 });
 
 test('addActivityToClass with context', function(assert) {
-  assert.expect(10);
+  assert.expect(6);
 
   const adapter = this.subject();
   adapter.set(
@@ -97,43 +87,25 @@ test('addActivityToClass with context', function(assert) {
           '2013-01-20',
           'Wrong added date'
         );
-        assert.equal(
-          requestBodyJson.ctx_course_id,
-          10,
-          'ctx_course_id should be 10'
-        );
-        assert.equal(
-          requestBodyJson.ctx_unit_id,
-          20,
-          'ctx_unit_id should be 20'
-        );
-        assert.equal(
-          requestBodyJson.ctx_lesson_id,
-          30,
-          'ctx_lesson_id should be 30'
-        );
-        assert.equal(
-          requestBodyJson.ctx_collection_id,
-          40,
-          'ctx_collection_id should be 40'
-        );
+
         assert.equal(
           request.requestHeaders.Authorization,
           'Token token-api-3',
           'Wrong token'
         );
-        return [201, { 'Content-Type': 'text/plain' }, ''];
+        return [
+          201,
+          {
+            'Content-Type': 'text/plain'
+          },
+          ''
+        ];
       },
       false
     );
   });
   adapter
-    .addActivityToClass(123, 321, 'assessment', new Date(2013, 0, 20), {
-      courseId: 10,
-      unitId: 20,
-      lessonId: 30,
-      collectionId: 40
-    })
+    .addActivityToClass(123, 321, 'assessment', new Date(2013, 0, 20))
     .then(function(response) {
       assert.equal('', response, 'Wrong response');
     });
@@ -160,7 +132,13 @@ test('enableClassActivity', function(assert) {
           'Token token-api-3',
           'Wrong token'
         );
-        return [201, { 'Content-Type': 'text/plain' }, ''];
+        return [
+          201,
+          {
+            'Content-Type': 'text/plain'
+          },
+          ''
+        ];
       },
       false
     );
@@ -195,7 +173,9 @@ test('findClassActivities with no content type', function(assert) {
         );
         return [
           201,
-          { 'Content-Type': 'application/json' },
+          {
+            'Content-Type': 'application/json'
+          },
           JSON.stringify('fake-response')
         ];
       },
@@ -226,16 +206,8 @@ test('findClassActivities with content type and dates', function(assert) {
           'assessment',
           'Content type should be assessment'
         );
-        assert.equal(
-          moment(request.queryParams.date_from).format('YYYY-MM-DD'),
-          '2012-01-20',
-          'Wrong start date'
-        );
-        assert.equal(
-          moment(request.queryParams.date_to).format('YYYY-MM-DD'),
-          '2012-01-30',
-          'Wrong end date'
-        );
+        assert.equal(request.queryParams.for_month, 11, 'Wrong for month');
+        assert.equal(request.queryParams.for_year, 2018, 'Wrong for year');
         assert.equal(
           request.requestHeaders.Authorization,
           'Token token-api-3',
@@ -243,7 +215,9 @@ test('findClassActivities with content type and dates', function(assert) {
         );
         return [
           201,
-          { 'Content-Type': 'application/json' },
+          {
+            'Content-Type': 'application/json'
+          },
           JSON.stringify('fake-response')
         ];
       },
@@ -251,12 +225,7 @@ test('findClassActivities with content type and dates', function(assert) {
     );
   });
   adapter
-    .findClassActivities(
-      123,
-      'assessment',
-      new Date(2012, 0, 20),
-      new Date(2012, 0, 30)
-    )
+    .findClassActivities(123, 'assessment', 11, 2018)
     .then(function(response) {
       assert.equal('fake-response', response, 'Wrong response');
     });
@@ -274,7 +243,13 @@ test('removeClassActivity', function(assert) {
     this.delete(
       '/api/nucleus/v2/classes/class-id/contents/content-id',
       function() {
-        return [204, { 'Content-Type': 'application/json; charset=utf-8' }, ''];
+        return [
+          204,
+          {
+            'Content-Type': 'application/json; charset=utf-8'
+          },
+          ''
+        ];
       },
       false
     );

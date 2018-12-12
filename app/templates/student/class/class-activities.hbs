@@ -1,17 +1,48 @@
 <div class="controller student class class-activities">
-  {{#if showClassActivities}}
-    <div class="today">
-      {{date}}
+  <div class="ca-title hidden-xs hidden-sm">
+    <p>{{t 'teacher-landing.class.class-activities'}}</p>
+  </div>
+  <div class="loading-spinner {{if isLoading 'active'}}">
+      {{three-bounce-spinner}}
+  </div>
+  <div class="ca-content-container">
+    <div class="ca-date-and-add-content">
+      <div class="ca-date-container">
+        <div class="prev-cal-arrow" {{action 'showPreviousMonth'}}>{{gru-icon name="keyboard_arrow_left"}}</div>
+        <div class="cal-mm-yyyy" {{action 'showCalendar'}}>{{format-date forFirstDateOfMonth 'MMMM YYYY'}} {{gru-icon name="arrow_drop_down"}}{{gru-icon name="arrow_drop_up"}}</div>
+        <div class="next-cal-arrow" {{action 'showNextMonth'}}>{{gru-icon name="keyboard_arrow_right"}}</div>
+        <div class="ca-datepicker-container">
+          <div id="ca-datepicker"></div>
+        </div>
+      </div>
     </div>
-    <ol class="collections">
-      {{#each classActivities as |classActivity|}}
-        {{class.gru-student-class-activity-panel members=members class=class classActivity=classActivity studentDcaReport='studentDcaReport'}}
-      {{/each}}
-    </ol>
-  {{else}}
-    <div class="no-content">{{t "common.no-dca-student"}}</div>
-    <div class="no-content-image"></div>
-  {{/if}}
+    {{#if showClassActivities}}
+      <div class="dca-list-container">
+        {{#each classActivities as |classActivity|}}
+          <div class="dca-date-view-container">
+            <div class="dca-date-container ca-date-{{format-date classActivity.added_date 'YYYY-MM-DD'}}">
+              {{gru-icon name="calendar_today"}}
+              <span>{{format-date classActivity.added_date 'MMMM DD, YYYY'}}</span>
+            </div>
+            <hr/>
+          </div>
+          <div class="dca-content-list-container">
+            {{#each classActivity.classActivities as |classActivity|}}
+              {{class.gru-student-class-activity-panel
+               class=class
+               classActivity=classActivity
+               studentDcaReport='studentDcaReport'
+               activityDate=classActivity.added_date
+             }}
+            {{/each}}
+          </div>
+        {{/each}}
+      </div>
+    {{else}}
+      <div class="no-content">{{t "common.no-dca-student"}}</div>
+      <div class="no-content-image"></div>
+    {{/if}}
+  </div>
 </div>
 
 {{#if showStudentDcaReport}}

@@ -65,7 +65,7 @@ export default Ember.Component.extend({
      */
     changeVisibility: function() {
       let classActivity = this.get('classActivity');
-      this.sendAction('onChangeVisibility', classActivity.get('id'));
+      this.sendAction('onChangeVisibility', classActivity);
     },
 
     /**
@@ -99,6 +99,10 @@ export default Ember.Component.extend({
             component.sendAction('addedContentToDCA', data, date);
           }
         });
+    },
+
+    showStudentList() {
+      this.set('showStudentListPullup', true);
     }
   },
 
@@ -136,13 +140,21 @@ export default Ember.Component.extend({
    * Maintains the flag to show go live or not
    * @type {Boolean}
    */
-  showGolive: false,
+  showGolive: Ember.computed('isToday', function() {
+    return this.get('isToday');
+  }),
 
   /**
    * Maintains the flag to show remove content button or not.
    * @type {Boolean}
    */
-  showDcaRemoveButton: false,
+  showDcaRemoveButton: Ember.computed(
+    'isToday',
+    'isActivityFuture',
+    function() {
+      return this.get('isToday') || this.get('isActivityFuture');
+    }
+  ),
 
   /**
    * Maintains the flag to show assign button or not.
@@ -154,5 +166,47 @@ export default Ember.Component.extend({
    * Maintains the flag to show add dca content button or not.
    * @type {Boolean}
    */
-  showDcaAddButton: false
+  showDcaAddButton: false,
+
+  /**
+   * Maintains the flag to show student list pull up.
+   * @type {Boolean}
+   */
+  showStudentListPullup: false,
+
+  /**
+   * Class activity date
+   * @type {Date}
+   */
+  activityDate: null,
+
+  /**
+   * It is used to find activity is today or not
+   * @return {Boolean}
+   */
+  isToday: Ember.computed('activityDate', function() {
+    let activityDate = this.get('activityDate');
+    let currentDate = moment().format('YYYY-MM-DD');
+    return currentDate === activityDate;
+  }),
+
+  /**
+   * It is used to find activity is past or not
+   * @return {Boolean}
+   */
+  isActivityPast: Ember.computed('activityDate', function() {
+    let activityDate = this.get('activityDate');
+    let currentDate = moment().format('YYYY-MM-DD');
+    return moment(activityDate).isBefore(currentDate);
+  }),
+
+  /**
+   * It is used to find activity is future or not
+   * @return {Boolean}
+   */
+  isActivityFuture: Ember.computed('activityDate', function() {
+    let activityDate = this.get('activityDate');
+    let currentDate = moment().format('YYYY-MM-DD');
+    return moment(activityDate).isAfter(currentDate);
+  })
 });

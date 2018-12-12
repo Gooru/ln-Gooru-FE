@@ -38,7 +38,7 @@ export default Ember.Component.extend({
    * @type {Number}
    * Property to hold max chart height
    */
-  maxChartWidth: 180,
+  maxChartWidth: 126,
 
   // -------------------------------------------------------------------------
   // Methods
