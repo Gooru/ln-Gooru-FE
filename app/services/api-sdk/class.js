@@ -498,5 +498,70 @@ export default Ember.Service.extend({
         .joinCoTeacherIntoClass(classCode)
         .then(resolve, reject);
     });
+  },
+  /**
+   * @function profileBaseLine
+   * Method to baseline users of a class
+   */
+  profileBaseLine(classCode, users) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classAdapter')
+        .profileBaseLine(classCode, users)
+        .then(resolve, reject);
+    });
+  },
+  /**
+   * @function classSettings
+   * Method to update class settings  users of a class
+   */
+  classSettings(classid, settings) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classAdapter')
+        .classSettings(classid, settings)
+        .then(resolve, reject);
+    });
+  },
+  /**
+   * @function classSettings
+   * Method to update class members settings  users of a class
+   */
+  classMembersSettings(classid, settings) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classAdapter')
+        .classMembersSettings(classid, settings)
+        .then(resolve, reject);
+    });
+  },
+  /**
+   * @function classSettings
+   * Method to deactivate class members
+   */
+  classMembersDeactivate(classid, filter) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classAdapter')
+        .classMembersDeactivate(classid, filter)
+        .then(resolve, reject);
+    });
+  },
+  /**
+   * @function classSettings
+   * Method to activate class members
+   */
+  classMembersActivate(classid, filter) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classAdapter')
+        .classMembersActivate(classid, filter)
+        .then(resolve, reject);
+    });
   }
 });

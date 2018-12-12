@@ -1,6 +1,8 @@
 .controller.teacher.class.class-management {
   max-width: 960px;
   margin: 0 auto;
+  display: none;
+
   .miniprofile {
     width: 29px;
     height: 29px;
@@ -15,9 +17,11 @@
     margin-top: 80px;
     margin-bottom: 10px;
     background-color: $white;
+
     .class-information {
       height: 60px;
       float: $tab-float-dir;
+
       .class-name {
         > span {
           font-size: 11px;
@@ -26,10 +30,12 @@
           position: absolute;
           margin-top: 10px;
         }
+
         .edit-text {
           display: flex;
           position: absolute;
           margin-top: 26px;
+
           .gru-icon.edit {
             opacity: 0.3;
             font-size: 18px;
@@ -41,25 +47,31 @@
         }
       }
     }
+
     .course-information {
       height: 60px;
       display: block;
+
       .actions {
         // margin-left: 283px;
         float: $menu-float-dir;
         margin-top: 18px;
+
         .delete-btn,
         .archive-btn {
           cursor: pointer;
         }
+
         .archive-btn {
           margin-right: 10px;
         }
       }
+
       .edit-text {
         display: flex;
         margin-top: 26px;
         position: absolute;
+
         .gru-icon.edit {
           opacity: 0.3;
           font-size: 18px;
@@ -93,6 +105,7 @@
     min-height: 0;
     padding: 0;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.07), 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+
     .student-actions-width {
       width: calc((955px - 640px) / 3);
       align-items: center;
@@ -101,43 +114,54 @@
     table {
       width: 100%;
       margin-bottom: 0;
+
       thead {
         display: block;
       }
+
       tbody {
         display: block;
         max-height: 364px;
       }
+
       .table-header {
         background-color: $white;
         width: 100%;
         border-bottom: 1px solid $light-300;
+
         th {
           padding: 0;
           border-bottom: none;
           height: 48px;
+
           //width: 36%;
           @media (min-width: $screen-sm-max) {
             //border-right: 2px dashed $table-border-color;
             // width: calc((955px - 654px) /4);
           }
+
           th.miniprofile {
             @extend .miniprofile;
           }
+
           .student-actions {
             @extend .student-actions-width;
           }
+
           .datacolumn {
             width: calc((654px - 29px) / 3);
           }
+
           div {
             padding: 0 0 10px 10px;
             display: flex;
+
             i {
               margin-left: 15px;
               cursor: pointer;
             }
           }
+
           span {
             font-size: 14px;
             color: $dark-400;
@@ -150,6 +174,7 @@
       tbody {
         width: 100%;
         overflow: auto;
+
         tr {
           border-bottom: 1px solid $light-200;
         }
@@ -157,24 +182,30 @@
         tr:nth-child(odd) {
           background-color: $white;
         }
+
         tr:nth-child(even) {
           background-color: $white;
         }
+
         .student {
           height: 36px;
+
           .miniprofile {
             @extend .miniprofile;
 
             cursor: pointer;
           }
+
           td.datacolumn {
             width: calc((654px - 29px) / 3);
           }
+
           td.border-right {
             width: 218px;
             white-space: nowrap;
             padding: 0;
             border-top: none;
+
             span {
               font-size: 12px;
               color: $gray-29;
@@ -182,17 +213,21 @@
               line-height: 36px;
             }
           }
+
           td.student-actions {
             //border: none;
             //width: 91px;
             @extend .student-actions-width;
+
             vertical-align: bottom;
             line-height: 35px;
             padding: 0;
             padding-left: 31px;
             cursor: pointer;
+
             .remove-student {
               cursor: pointer;
+
               > i {
                 line-height: 35px;
                 margin-right: 9px;
@@ -212,9 +247,11 @@
         }
       }
     }
+
     .border-right {
       border-right: 2px dashed $table-border-color;
     }
+
     tbody::-webkit-scrollbar {
       width: 4px;
       border-radius: 3px;
@@ -226,8 +263,10 @@
       border-radius: 5px;
     }
   }
+
   .assessment-min-score {
     margin-left: 100px;
+
     > span {
       font-size: 11px;
       opacity: 0.7;
@@ -235,12 +274,14 @@
       margin-top: 10px;
       position: absolute;
     }
+
     .gru-input-number {
       .error-messages {
         margin-top: -5px;
       }
     }
   }
+
   .no-students {
     .student-null {
       background: url("gooru/images/student-null.png") no-repeat;
@@ -249,6 +290,7 @@
       background-size: 216px 216px;
       margin: 25px auto auto;
     }
+
     div.message {
       color: $gray-dove;
       font-size: 19.5px;
@@ -257,6 +299,7 @@
       text-align: center;
     }
   }
+
   .teacherinfo {
     margin-top: 1.9%;
     margin-bottom: 1.9%;
@@ -268,6 +311,7 @@
     .teacher-title {
       @extend .student-title;
     }
+
     .line-sep-hr {
       width: 956px;
       height: 1px;
@@ -276,9 +320,11 @@
       margin-bottom: 1.5%;
       border-bottom: none;
     }
+
     .teachercard {
       display: flex;
       flex-flow: row wrap;
+
       .teacher-card-shape {
         width: 225px;
         height: 281px;
@@ -300,6 +346,7 @@
           margin-right: auto;
           margin-top: 9.3%;
         }
+
         .owner {
           width: 100%;
           height: 16px;
@@ -343,8 +390,10 @@
               margin-right: auto;
               border-bottom: none;
             }
+
             .t-ver-line {
               @extend .posabs;
+
               width: 1px;
               height: 51px;
               border: solid 0.5px $gray-base;
@@ -358,21 +407,27 @@
               height: 20px;
               align-self: center;
             }
+
             .account-circle {
               @extend .Shape;
+
               @extend .posabs;
+
               left: 152px;
               object-fit: contain;
             }
 
             .lbl {
               @extend .posabs;
+
               font-weight: 300;
               color: $gray;
               text-align: center;
             }
+
             .profile-lbl {
               @extend .lbl;
+
               left: 47.5px;
               top: 35px;
               width: 37px;
@@ -383,6 +438,7 @@
 
             .remove-lbl {
               @extend .lbl;
+
               left: 121px;
               top: 35px;
               width: 82px;
@@ -392,14 +448,17 @@
           }
         }
       }
+
       // Special  behavior for single card
       .teacher-card-shape:only-child {
         margin-left: auto;
         margin-right: auto;
+
         .teachername {
           margin-top: auto;
           height: 33%;
         }
+
         .owner {
           margin-top: auto;
         }
@@ -409,22 +468,28 @@
 
   .teachers-info-table {
     @extend .students-panel;
+
     .teacherdatacolumn {
       width: calc(955px / 3);
     }
+
     .teacher-actions {
       width: calc(300px / 2);
     }
+
     table {
       tbody {
         display: block;
         max-height: 320px;
       }
     }
+
     table > tbody > tr > td.teacher-actions {
       padding-left: 30px;
+
       .remove-teacher {
         cursor: pointer;
+
         > i {
           line-height: 35px;
           margin-right: 9px;
@@ -555,6 +620,7 @@
         text-align: $menu-float-dir;
         width: 7%;
         float: right;
+
         div {
           line-height: 1;
           text-transform: uppercase;
@@ -659,9 +725,9 @@
       }
 
       /*
-                    ##Device = Low Resolution Tablets, Mobiles (Landscape)
-                    ##Screen = B/w 481px to 767px
-                  */
+                                            ##Device = Low Resolution Tablets, Mobiles (Landscape)
+                                            ##Screen = B/w 481px to 767px
+                                          */
 
       @media (min-width: 481px) and (max-width: 767px) {
         $screen-width: 768px; // Needs different handling
@@ -682,9 +748,9 @@
       }
 
       /*
-                    ##Device = Most of the Smartphones Mobiles (Portrait)
-                    ##Screen = B/w 320px to 479px
-                  */
+                                            ##Device = Most of the Smartphones Mobiles (Portrait)
+                                            ##Screen = B/w 320px to 479px
+                                          */
 
       @media (min-width: 320px) and (max-width: 480px) {
         $screen-width: 768px; // Needs different handling
@@ -705,6 +771,825 @@
       }
 
       // ends here
+    }
+  }
+}
+
+$canvas-width: 1250px;
+$canvas-height: 1254px;
+
+.controller.teacher.classbg {
+  background-color: $bg-dark;
+  width: auto;
+  height: auto;
+  min-height: 100vh;
+  margin-top: -11px;
+
+  .controller.teacher.class.class-settings {
+    margin: 0 auto;
+    max-width: $canvas-width;
+    /* max-height: 100vh; */
+    background-color: $bg-dark;
+
+    .font-base {
+      font-family: Lato;
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+    }
+
+    .white-font-label {
+      @extend .font-base;
+
+      font-weight: bold;
+      color: $white;
+    }
+
+    .sec-panel {
+      border-radius: 4px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+      background-color: $white;
+      color: $dark-300;
+    }
+
+    .caps-field-label {
+      /* width: 55px; */
+      height: 16px;
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    //dd
+
+    .arrowdropdown {
+      > i {
+        font-size: 18px;
+      }
+    }
+    .grade-info {
+      display: grid;
+      /* The container <div> - needed to position the dropdown content */
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+        width: max-content;
+        margin-top: -7px;
+
+        .active-item {
+          display: flex;
+          cursor: pointer;
+          height: 25px;
+
+          .label {
+            min-width: max-content;
+            font-size: 13px;
+            font-weight: normal;
+            font-style: italic;
+            color: $charcoal-grey;
+            padding: 5px;
+            text-align: left;
+          }
+
+          .icon {
+            font-size: 13px;
+            font-weight: bold;
+            color: $charcoal-grey;
+          }
+        }
+      }
+      /* Dropdown Content (Hidden by Default) */
+      .dropdown-content {
+        display: none;
+        position: fixed;
+        background-color: $white;
+        min-width: 94px;
+        width: auto;
+        max-width: max-content;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        max-height: 150px;
+        overflow-y: auto;
+        z-index: 1;
+        border-top: 1px solid;
+
+        .list-item {
+          height: 30px;
+          width: max-content;
+          line-height: 30px;
+          padding-left: 15px;
+          cursor: pointer;
+
+          &.active,
+          &:hover {
+            background-color: $light-200;
+          }
+        }
+      }
+      /* Show the dropdown menu on hover */
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+    }
+
+    .inActiveRow {
+      pointer-events: none;
+      cursor: none;
+      opacity: 0.6;
+    }
+
+    div::disabled {
+      pointer-events: none;
+      cursor: none;
+      opacity: 0.2;
+    }
+
+    //dde
+
+    /* // Defines the layout of the page, css grid can be used here  */
+    .sec-col-layout {
+      display: flex;
+      margin-left: 21px;
+      /* two columns sec-rows-layout, and student-sec-cont */
+
+      .sec-rows-layout {
+        /*  max-height: 100vh; */
+        overflow-x: auto;
+        padding-right: 14px; // to add scrollbar outside of the left panel area
+
+        display: flex;
+        flex-direction: column;
+        /* two rows in this column */
+        .class-sec-cont {
+          .class-settings-label {
+            width: 94px;
+            height: 15px;
+            text-transform: uppercase;
+            margin: 15px;
+
+            @extend .white-font-label;
+          }
+
+          .class-settings-sec {
+            width: 463px;
+
+            /*  height: 413px; //height can vary */
+            padding-left: 20px;
+
+            @extend .sec-panel;
+
+            @extend .font-base;
+
+            color: $gray-dove;
+
+            .class-head-row-wrap {
+              display: flex;
+              margin-bottom: 16px;
+
+              .sec-head-class-name {
+                width: 340px;
+                height: 22px;
+                font-size: 18px;
+                margin-top: 20px;
+                /* border-bottom: 1px solid $sep-border-color; */
+                padding-bottom: 25px;
+                margin-right: 25px;
+                .gru-icon.edit {
+                  opacity: 0.3;
+                  font-size: 18px;
+                  margin-left: 10px;
+                  position: absolute;
+                  line-height: 1.2;
+                  cursor: pointer;
+                }
+              }
+
+              .sec-head-sep {
+                width: 294px;
+                height: 1px;
+                margin-top: 6px;
+                margin-bottom: 16px;
+                border-bottom: 1px solid $sep-border-color;
+
+                /* border-bottom: solid $gray-dove; */
+              }
+
+              .sec-desc-min-perf {
+                width: 249px;
+                height: 16px;
+                font-family: Lato;
+                font-size: 13px;
+                display: inline;
+              }
+
+              .minscoresec {
+                float: right;
+                position: relative;
+                .sec-dec-value {
+                  width: 34px;
+                  height: 16px;
+                  font-family: Lato;
+                  font-size: 13px;
+                  text-align: center;
+
+                  border-bottom: 1px solid $sep-border-color;
+                  margin-top: 7px;
+                  margin-right: 5px;
+                  line-height: 6px;
+                }
+
+                .gru-icon.edit {
+                  opacity: 0.3;
+                  font-size: 18px;
+                  margin-left: 10px;
+                  line-height: 1.2;
+                  position: absolute;
+                  top: 0;
+                  cursor: pointer;
+                }
+
+                .colscoreedit {
+                  margin: -10px;
+                }
+              }
+              .class-code {
+                width: 140px;
+                height: 89px;
+                background-image: linear-gradient(to bottom, #4d9748, #0472b9);
+                display: flex;
+                border-radius: 2px;
+
+                .class-code-wrap {
+                  margin: auto;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+
+                  .label-class-code {
+                    width: 63px;
+                    height: 16px;
+                    opacity: 0.5;
+                    font-size: 13px;
+                    color: $white;
+                  }
+
+                  .value-class-code {
+                    height: 22px;
+                    font-size: 15.5px;
+                    font-weight: bold;
+                    color: $white;
+                  }
+                }
+              }
+            }
+
+            .class-level-setting-field {
+              display: flex;
+              width: 300px;
+              margin-top: 3px;
+
+              .caps-field-label-class {
+                /* width: 55px; */
+                @extend .caps-field-label;
+
+                flex: 1;
+              }
+
+              .field-drop-down {
+                width: 64px;
+                height: 16px;
+                font-size: 13px;
+                font-style: italic;
+                flex: 1;
+              }
+            }
+
+            .sub-sec-coteach {
+              margin-top: 25px;
+
+              .sub-sec-head {
+                /* width: 68px; */
+                height: 14px;
+                opacity: 0.8;
+
+                /* font-family: OpenSans; */
+                font-size: 10px;
+                font-weight: bold;
+                line-height: normal;
+                text-transform: uppercase;
+                margin-bottom: 12px;
+              }
+
+              .sub-sec-row {
+                width: 422.9px;
+                border-top: 1px solid $sep-border-color;
+                display: flex;
+                align-items: center;
+                padding: 5px;
+
+                .teacher-icon {
+                  display: inline;
+                  width: 30px;
+                  height: 30px;
+                  background-size: contain;
+                  border-radius: 50%;
+                }
+
+                .co-teacher-label {
+                  width: 97px;
+                  height: 15px;
+                  font-family: Lato;
+                  font-size: 15px;
+                  line-height: 1;
+                  display: inline;
+                  flex: 1;
+                  margin-left: 10px;
+                }
+
+                .delete-co-teacher {
+                  /* svg if needed icon_name 'delete' */
+                  width: 14px;
+                  height: 18px;
+                  opacity: 0.3;
+                  display: inline;
+                  cursor: pointer;
+
+                  /* margin-right: 10px; */
+                }
+
+                /*  .row-add-another-teacher { */
+                /* This may be floating  */
+                .add-co-teacher-icon {
+                  @extend .teacher-icon;
+
+                  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
+                  background-color: $gray-harder;
+                  cursor: pointer;
+                  color: $dark-400;
+                  margin: 0px;
+
+                  > i {
+                    padding: 3px;
+                  }
+                }
+
+                .add-co-teacher-label {
+                  width: 126px;
+                  height: 15px;
+                  font-family: Lato;
+                  font-size: 15px;
+                  font-style: italic;
+                  line-height: 1;
+                  margin-left: 10px;
+                  flex: 1;
+                }
+              }
+
+              .row-offline-class {
+                margin-top: 10px;
+                padding-top: 10px;
+                padding-bottom: 20px;
+
+                .offline-icon {
+                  display: inline;
+                  width: 22px;
+                  height: 30px;
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                  margin: 10px 10px 0 20px;
+                  background-image: url("gooru/sort-horizontal.svg");
+                }
+
+                .offline-label {
+                  width: 287px;
+                  height: 16px;
+                  font-family: Lato;
+                  font-size: 13px;
+                  flex: 1;
+                }
+
+                .action-button-slide-yes {
+                  /* Has icon / SVG class */
+
+                  /*  width: 40px; */
+                  /*  height: 24px; */
+                  object-fit: contain;
+                }
+              }
+
+              //}
+            }
+          }
+        }
+
+        .course-sec-cont {
+          .course-settings-label {
+            @extend .white-font-label;
+
+            margin: 15px;
+            text-transform: uppercase;
+            width: 106px;
+            height: 15px;
+          }
+
+          .course-settings-sec {
+            width: 463px;
+            padding: 20px;
+
+            @extend .sec-panel;
+
+            .sec-title {
+              /* width: 150px; */
+              height: 14px;
+              opacity: 0.7;
+
+              /* font-family: OpenSans;  Opensans not comming correctly */
+              font-size: 12px;
+              font-weight: bold;
+              margin-bottom: 10px;
+            }
+
+            .sub-sec-sep {
+              width: 422.9px;
+              border-top: 1px solid $sep-border-color;
+              margin-top: 12px;
+
+              // opacity: 0.5;
+            }
+
+            .sub-sec-row {
+              width: 422.9px;
+
+              // border-top: 1px solid;
+              display: flex;
+              margin-top: 13px;
+
+              .field-dropdown-caps-label {
+                /* width: 55px; */
+                @extend .caps-field-label;
+
+                flex: 1;
+              }
+
+              .field-drop-down {
+                flex: 2;
+                width: 46px;
+                height: 16px;
+                font-family: Lato;
+                font-size: 13px;
+              }
+            }
+
+            .class-level-setting-field {
+              @extend .sub-sec-row;
+            }
+
+            .sec-course-action {
+              width: 422.9px;
+              border-top: 1px solid;
+
+              .action-icon {
+                width: 18px;
+                height: 14px;
+                background-color: #535e67;
+              }
+
+              .action-rescope-label {
+                width: 287px;
+                height: 16px;
+                font-family: Lato;
+                font-size: 13px;
+              }
+
+              .action-button {
+                /* svg-avalible ToDo: */
+                width: 40px;
+                height: 24px;
+                object-fit: contain;
+              }
+            }
+            .row-offline-class {
+              margin-top: 10px;
+              padding-top: 10px;
+              /*  padding-bottom: 20px; */
+
+              .offline-icon {
+                display: inline;
+                width: 22px;
+                height: 30px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                margin: 3px 10px 0 20px;
+                background-image: url("gooru/sort-horizontal.svg");
+              }
+
+              .offline-label {
+                width: 287px;
+                height: 16px;
+                font-family: Lato;
+                font-size: 13px;
+                flex: 1;
+              }
+
+              .action-button-slide-yes {
+                /* Has icon / SVG class */
+
+                /*  width: 40px; */
+                /*  height: 24px; */
+                object-fit: contain;
+              }
+            }
+
+            //Apply Button
+            .btn-panel {
+              display: flex;
+              align-items: baseline;
+              justify-content: flex-end;
+
+              .class-btn {
+                align-self: unset;
+                margin: unset;
+              }
+
+              .class-btn {
+                background-color: #543c3c;
+                width: 135px;
+                height: 53px;
+                border-radius: 4px;
+                padding: 15px;
+                color: $white;
+                border-color: #f36463;
+                text-transform: uppercase;
+                cursor: pointer;
+                > i {
+                  vertical-align: bottom;
+                  margin-left: 16px;
+                }
+              }
+
+              .disabled {
+                cursor: none;
+                opacity: 0.5;
+                pointer-events: none;
+              }
+
+              .btn-txt {
+                color: whitesmoke;
+                background: transparent;
+              }
+            }
+          }
+        }
+
+        .assessment-sec-cont {
+          display: none;
+
+          .assessment-setting-label {
+            @extend .white-font-label;
+
+            margin: 15px;
+            text-transform: uppercase;
+          }
+
+          .assessment-setting-sec {
+            width: 463px;
+            height: 299px;
+            overflow-x: scroll;
+
+            @extend .sec-panel;
+          }
+        }
+
+        .btn-panel {
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          margin-top: 20px;
+        }
+        .class-btn {
+          margin: auto;
+          align-self: center;
+        }
+
+        .class-btn {
+          background-color: #543c3c;
+          width: 215px;
+          height: 53px;
+          // opacity: 0.1;
+          border-radius: 4px;
+          padding: 15px;
+          color: #f36463;
+          border-color: #f36463;
+          text-transform: uppercase;
+          cursor: pointer;
+          > i {
+            vertical-align: bottom;
+            margin-left: 16px;
+          }
+        }
+
+        .disabled {
+          cursor: none;
+          opacity: 0.5;
+          pointer-events: none;
+        }
+
+        .btn-txt {
+          color: #f36463;
+          background: transparent;
+        }
+      }
+
+      .student-sec-cont {
+        margin-left: 31px;
+
+        .student-settings-label {
+          @extend .white-font-label;
+
+          text-transform: uppercase;
+          margin: 15px;
+          width: 113px;
+          height: 15px;
+        }
+        .dropdown-menu {
+          position: fixed;
+          top: auto;
+          left: auto;
+        }
+        .student-settings-sec {
+          width: 667px;
+
+          /*   height: 100vh;
+          overflow-x: scroll; */
+
+          @extend .sec-panel;
+
+          .grid-header-caps-label {
+            @extend .caps-field-label;
+
+            /* width: 52px;
+            height: 14px; */
+            opacity: 0.7;
+            /* font-family: OpenSans; */
+            font-size: 10px;
+            font-weight: bold;
+          }
+
+          .student-header {
+            @extend .grid-header-caps-label;
+            border-bottom: 1px solid $sep-border-color;
+            text-overflow: ellipsis;
+          }
+
+          .btn-panel {
+            display: flex;
+            align-items: baseline;
+            justify-content: flex-end;
+            padding: 20px;
+
+            .class-btn {
+              /*   margin: auto;
+            align-self: center; */
+            }
+
+            .class-btn {
+              background-color: #543c3c;
+              width: 211px;
+              height: 53px;
+              border-radius: 4px;
+              padding: 15px;
+              color: $white;
+              border-color: #f36463;
+              text-transform: uppercase;
+              cursor: pointer;
+              > i {
+                vertical-align: bottom;
+                margin-left: 16px;
+              }
+            }
+
+            .disabled {
+              cursor: none;
+              opacity: 0.5;
+              pointer-events: none;
+            }
+
+            .btn-txt {
+              color: whitesmoke;
+              background: transparent;
+            }
+          }
+
+          .student-grid {
+            display: grid;
+            grid-template-columns: 40px minmax(15px, auto) 100px 100px 100px auto auto auto;
+            /*  grid-auto-rows: 40px minmax(15px, auto) 100px 100px 100px 100px 40px 40px 40px; */
+            /*grid-auto-rows: minmax(40px, auto); */
+            /* padding: 15px; */
+            margin-left: 13px;
+            grid-column-gap: 0px;
+            > div {
+              border-right: 2px dashed $sep-border-color;
+              border-bottom: 1px solid $sep-border-color;
+              padding: 3px;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              height: inherit;
+              width: auto;
+            }
+          }
+
+          .student-icon-col {
+            border-right: unset !important;
+
+            padding: unset;
+          }
+          .student-icon {
+            background-size: contain;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            margin: auto;
+          }
+
+          .student-name {
+            /* width: 97px;
+              height: 15px; */
+          }
+
+          .origin {
+            font-size: 13px;
+            color: $gray-dove;
+          }
+
+          .destination {
+            @extend .origin;
+          }
+
+          .student-id {
+            @extend .origin;
+          }
+
+          .joined-on {
+            @extend .origin;
+            text-align: right;
+          }
+
+          .student-action-col {
+            cursor: pointer;
+            background-size: contain;
+            height: 35px;
+            width: 35px;
+            display: flex;
+            justify-content: center;
+          }
+
+          .student-delete {
+            background-size: contain;
+            height: 30px;
+            width: 30px;
+            opacity: 0.3;
+          }
+
+          .sub-sec-row {
+            width: 422.9px;
+
+            /* border-top: 1px solid $sep-border-color; */
+            display: flex;
+            align-items: center;
+            padding: 13px;
+            display: none; // Hiding add student button as no interaction available
+            .add-student-icon {
+              background-size: contain;
+              border-radius: 50%;
+              margin: 10px 10px 0 20px;
+              box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
+              background-color: $gray-harder;
+              cursor: pointer;
+              color: $dark-400;
+              margin-right: 13px;
+
+              > i {
+                padding: 5px;
+              }
+            }
+
+            .add-student-label {
+              width: 126px;
+              height: 15px;
+              font-family: Lato;
+              font-size: 15px;
+              font-style: italic;
+              line-height: 1;
+              margin-left: 10px;
+              flex: 1;
+            }
+          }
+        }
+      }
     }
   }
 }

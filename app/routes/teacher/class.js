@@ -206,6 +206,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           const course = hash.course;
           aClass.set('owner', members.get('owner'));
           aClass.set('collaborators', members.get('collaborators'));
+          aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
           aClass.set('members', members.get('members'));
           return {
             class: aClass,
