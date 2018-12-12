@@ -59,6 +59,15 @@ export default Ember.Component.extend({
   isShowProficiencyLevel: true,
 
   /**
+   * @property {Boolean} isRoute0Applicable
+   */
+  isRoute0Applicable: Ember.computed('classData', function() {
+    let component = this;
+    let classData = component.get('classData');
+    return classData.route0Applicable;
+  }),
+
+  /**
    * @property {Number} classGrade
    */
   classGrade: Ember.computed('classData', function() {

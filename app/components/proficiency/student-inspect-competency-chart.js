@@ -164,7 +164,7 @@ export default Ember.Component.extend({
       route0Contents && route0Contents.status === 'pending'
         ? route0Contents.userCompetencyRoute.domains
         : null;
-    if (component.get('isRoute0Chart')) {
+    if (component.get('isRoute0Chart') && component.get('isRoute0Applicable')) {
       if (domainLevelSummary && route0Contents && domainBoundaries) {
         component.drawChart(
           component.parseChartData(
