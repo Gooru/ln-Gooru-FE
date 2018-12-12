@@ -1288,7 +1288,37 @@ export default Object.assign(quizzesTranslations, {
         assessments: 'Assessments',
         collections: 'Collections'
       },
-      'view-more': 'View more'
+      'view-more': 'View more',
+      'class-settings': {
+        'class-settings-sec': {
+          'generate-pathway': 'Generate Pathway',
+          'class-settings-sec-head': 'Class Settings',
+          'class-settings-sec-desc': 'Minimum performance to pass',
+          'class-code': 'Class Code',
+          subject: 'Subject',
+          framework: 'Framework',
+          'grade-level': 'Grade Level',
+          'option-choose-one': 'Choose One',
+          'co-teachers': 'Co-Teachers',
+          'add-coteacher': 'Add another teacher',
+          'offline-class-label': 'This is an Offline classroom'
+        },
+        'student-settings-sec': {
+          'student-settings-sec-head': 'Student Settings'
+        },
+        'course-settings-sec': {
+          'course-settings-sec-head': 'Course Settings',
+          'is-route0-applicable':
+            'Generated pathway should cover gaps at profile?',
+          'apply-settings': 'Apply Settings'
+        },
+        origin: 'Origin',
+        destination: 'Destination',
+        students: 'Students',
+        'student-id': 'Student-Id',
+        'joined-on': 'Joined On',
+        'action-lable-add-student': 'Add onother student'
+      }
     },
     'no-classrooms':
       'You have not yet created any classrooms. Click on “Create Classroom” or search </br> for a featured course under the Library tab.',
