@@ -814,6 +814,7 @@ export default Ember.Controller.extend(ModalMixin, {
       .get('classService')
       .profileBaseLine(classId, users)
       .then(function(/* responseData */) {
+        controller.send('refreshRoute');
         /*    //Do noting for success  */
       });
   },
@@ -879,6 +880,8 @@ export default Ember.Controller.extend(ModalMixin, {
 
         if (!controller.get('isPremiumClass')) {
           controller.generateClassPathway(); // Call LP // Baseline class on setting save for not premium
+        } else {
+          controller.send('refreshRoute');
         }
       });
   },
