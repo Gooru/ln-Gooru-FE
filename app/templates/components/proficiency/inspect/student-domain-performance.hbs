@@ -22,6 +22,18 @@
           </div>
         </div>
       </div>
+      {{#unless isMobilePotraitView}}
+        <div class="scroll-controller">
+          {{#if (gt domainCoverageCount.length 5)}}
+            <div class="left" {{action "onClickArrow" 'left'}}>
+              {{gru-icon name="keyboard_arrow_left"}}
+            </div>
+            <div class="right" {{action "onClickArrow" 'right'}}>
+              {{gru-icon name="keyboard_arrow_right"}}
+            </div>
+          {{/if}}
+        </div>
+      {{/unless}}
 
       <div class="domains-coverage-container scrollable-container">
         {{#each domainCoverageCount as |domain|}}
@@ -85,17 +97,5 @@
         </div>
       {{/each}}
     </div>
-    {{#unless isMobilePotraitView}}
-      <div class="scroll-controller">
-        {{#if (gt domainCoverageCount.length 5)}}
-          <div class="left" {{action "onClickArrow" 'left'}}>
-            {{gru-icon name="keyboard_arrow_left"}}
-          </div>
-          <div class="right" {{action "onClickArrow" 'right'}}>
-            {{gru-icon name="keyboard_arrow_right"}}
-          </div>
-        {{/if}}
-      </div>
-    {{/unless}}
   </div>
 </div>

@@ -1,18 +1,88 @@
 .inspect-competency.student-domain-performance {
   .performance-container {
+  @media screen and (min-width: $screen-1035) and (max-width: $screen-1366) {
+    .performance-header-container {
+      .competency-coverage-container {
+        .domains-coverage-container {
+          width: 924px !important;
+        }
+      }
+    }
+
+  }
+    @media screen and (min-width: $screen-md + 1) and (max-width: $screen-in-1024) {
+      .performance-header-container {
+        .competency-coverage-container {
+          .domains-coverage-container {
+            width: 698px !important;
+            margin: auto !important;
+          }
+        }
+      }
+
+      .performance-body-container {
+        .domains-performance-container {
+          width: 698px !important;
+          margin: auto !important;
+        }
+      }
+    }
+    @media screen and (min-width: $screen-669) and (max-width: $screen-md) {
+      .performance-header-container {
+        .competency-coverage-container {
+          .domains-coverage-container {
+            width: 464px !important;
+            margin: auto !important;
+          }
+        }
+      }
+
+      .performance-body-container {
+        .domains-performance-container {
+          width: 464px !important;
+          margin: auto !important;
+        }
+      }
+    }
+    @media screen and (min-width: $screen-569) and (max-width: $screen-sm) {
+      .performance-header-container {
+        .competency-coverage-container {
+          .domains-coverage-container {
+            width: 232px !important;
+            margin: auto !important;
+          }
+        }
+      }
+
+      .performance-body-container {
+        .domains-performance-container {
+          width: 232px !important;
+          margin: auto !important;
+        }
+      }
+    }
+    @media screen and (max-width: $screen-568) {
+      .performance-body-container {
+            overflow-x: hidden;
+      }
+    }
     background-color: #35424b;
     min-height: calc(100vh - 40px);
+
     .performance-header-container {
       min-height: 200px;
+
       .proficiency-info {
         display: grid;
         grid-template-columns: auto auto;
         height: 64px;
+
         .subject {
           font-size: 30px;
           color: $white;
           margin-left: 15px;
         }
+
         .students-count {
           font-size: 15px;
           font-weight: bold;
@@ -23,6 +93,7 @@
           justify-content: center;
           align-items: center;
           margin-right: 44px;
+
           .toggle-view {
             display: grid;
             justify-content: right;
@@ -30,14 +101,60 @@
           }
         }
       }
+
       .competency-coverage-container {
         display: grid;
         grid-template-columns: 228px auto;
         position: relative;
+        position: relative;
+
+
+
+        .scroll-controller {
+          position: absolute;
+          width: 100%;
+
+          .left,
+          .right {
+            position: absolute;
+            top: 75px;
+            cursor: pointer;
+            width: 32px;
+            background-color: rgba(160, 203, 243, 0.5);
+            border-radius: 50%;
+            height: 32px;
+
+            i {
+              font-size: 25px;
+              color: $white;
+              text-align: center;
+              line-height: 32px;
+            }
+
+            &.disabled {
+              cursor: default;
+              opacity: 0.5;
+            }
+          }
+
+          .left {
+            left: 228px;
+            margin: 0 4px;
+          }
+
+          .right {
+            right: 15px;
+            margin-left: 4px;
+          }
+        }
+
+
         .course-coverage-container {
           width: 224px;
           padding: 16px 15px;
           background-color: $white;
+          margin-bottom: 8px;
+
           .title {
             color: #35424b;
             text-transform: capitalize;
@@ -46,8 +163,10 @@
             height: 33px;
             margin-bottom: 16px;
           }
+
           .course-competency-metrics {
             line-height: 15px;
+
             .students-metric {
               font-size: 12px;
               font-weight: 600;
@@ -57,24 +176,29 @@
               line-height: 24px;
               margin-bottom: 8px;
             }
+
             .metrics-title {
               font-size: 12px;
               font-weight: bold;
               text-transform: uppercase;
               color: #35424b;
             }
+
             .metrics {
               .metric-count {
                 font-size: 12px;
                 font-weight: bold;
                 text-transform: uppercase;
               }
+
               .mastered {
                 color: #0c70bb;
               }
+
               .in-progress {
                 color: #24ade6;
               }
+
               .not-started {
                 color: #35424b;
                 opacity: 0.5;
@@ -86,12 +210,15 @@
         .domains-coverage-container {
           display: flex;
           overflow-x: hidden;
-          margin: 0 47px;
+          margin: 0 97px;
+
           .domain-coverage-count {
             min-width: 224px;
             padding: 16px 15px;
             background-color: $white;
             margin: 0 4px;
+            margin-bottom: 8px;
+
             .domain-name {
               cursor: pointer;
               $font-size: 15px;
@@ -109,45 +236,56 @@
               max-height: 33.1px;
               margin-bottom: 16px;
             }
+
             .coverage-count {
               .count-container {
                 display: flex;
                 width: 191px;
                 height: 24px;
                 margin-bottom: 8px;
+
                 span {
                   height: inherit;
                 }
+
                 .mastered-count {
                   background-color: #0c70bb;
                 }
+
                 .inprogress-count {
                   background-color: #24ade6;
                 }
+
                 .notstarted-count {
                   background-color: #e7e8e9;
                 }
               }
+
               .competency-metrics {
                 line-height: 15px;
+
                 .title {
                   font-size: 12px;
                   font-weight: bold;
                   text-transform: uppercase;
                   color: #35424b;
                 }
+
                 .metrics {
                   .metric-count {
                     font-size: 12px;
                     font-weight: bold;
                     text-transform: uppercase;
                   }
+
                   .mastered {
                     color: #0c70bb;
                   }
+
                   .in-progress {
                     color: #24ade6;
                   }
+
                   .not-started {
                     color: #35424b;
                     opacity: 0.5;
@@ -156,6 +294,7 @@
               }
             }
           }
+
           &::-webkit-scrollbar {
             background: transparent;
             width: 0;
@@ -163,24 +302,31 @@
         }
       }
     }
+
     .performance-body-container {
       display: grid;
       grid-template-columns: 228px auto;
       position: relative;
       padding-bottom: 8px;
+      max-height: calc(100vh - 280px);
+      overflow-y: auto;
+
       .tab-container {
         min-height: 48px;
         line-height: 48px;
       }
+
       .students-container {
         padding-left: 15px;
         width: 224px;
         background-color: $white;
+
         .student-container {
           display: grid;
           grid-template-columns: 35px auto;
           align-items: center;
           cursor: pointer;
+
           .thumbnail-container {
             width: 30px;
             height: 30px;
@@ -190,9 +336,14 @@
             border-radius: 50%;
             margin: 5px 0;
           }
+          @media screen and (max-width: $screen-md) {
+            .student-name {
+              $font-size: 12px;
+            }
+          }
           .student-name {
             color: #37424b;
-            $font-size: 10px;
+            $font-size: 14px;
             $line-height: 1.3;
             text-transform: capitalize;
             $lines-to-show: 2;
@@ -204,11 +355,15 @@
           }
         }
       }
+
       .domains-performance-container {
         overflow-x: hidden;
-        margin: 0 47px;
+        margin: 0 97px;
+        width: 924px;
+
         .domain-performance-container {
           display: flex;
+
           .tab-container {
             min-width: 224px;
             margin: 0 4px;
@@ -219,8 +374,10 @@
             grid-template-columns: 134px auto;
             align-items: center;
           }
+
           .performance-chart-container {
             margin-right: 4px;
+
             .student-domain-performance {
               .chart {
                 display: grid;
@@ -229,30 +386,36 @@
               }
             }
           }
+
           .competency-count-container {
             font-size: 12px;
             font-weight: bold;
             line-height: 48px;
             height: inherit;
+
             .mastered {
               color: #0c70bb;
             }
+
             .not-started {
               color: #35424b;
             }
+
             .in-progress {
               color: #24ade6;
             }
           }
         }
+
         &::-webkit-scrollbar {
           background: transparent;
           width: 0;
         }
       }
+
       .scroll-controller {
-        .right,
-        .left {
+        .left,
+        .right {
           position: absolute;
           top: 0;
           cursor: pointer;
@@ -260,6 +423,7 @@
           background-color: rgba(160, 203, 243, 0.5);
           border-radius: 50%;
           height: 32px;
+
           i {
             font-size: 25px;
             color: $white;
@@ -284,30 +448,39 @@
         }
       }
     }
-
-    @media screen and (max-width: 639px) {
+    @media screen and (max-width: $screen-639) {
       .performance-header-container {
         min-height: unset;
+
         .proficiency-info {
+          .subject {
+            font-size: 24px;
+          }
           .students-count {
             margin-right: 0;
+
             .count-container {
               display: none;
             }
           }
         }
+
         .competency-coverage-container {
           grid-template-columns: auto;
+
           .course-coverage-container {
             display: none;
           }
+
           .domains-coverage-container {
             margin: 0;
             position: relative;
+
             .domain-coverage-count {
               min-width: 100vw;
               margin: 0;
               padding: 15px 50px;
+
               .domain-name {
                 font-size: 15px;
                 font-weight: bold;
@@ -315,18 +488,27 @@
                 color: #35424b;
               }
               .coverage-count {
+                .count-container {
+                  margin: auto;
+                }
+              }
+
+              .coverage-count {
                 .competency-metrics {
                   display: none;
                 }
               }
             }
+
             .scroll-controller {
               position: fixed;
-              .right,
-              .left {
+
+              .left,
+              .right {
                 position: absolute;
                 top: 40px;
                 cursor: pointer;
+
                 i {
                   font-size: 30px;
                   color: #405d66;
@@ -345,27 +527,32 @@
               }
 
               .right {
-                left: 90vw;
+                left: 88vw;
               }
             }
           }
         }
       }
+
       .performance-body-container {
         grid-template-columns: 150px auto;
+
         .students-container {
           width: 150px;
+
           .student-container {
             .student-name {
-              font-size: 10px;
+              font-size: 12px;
               font-weight: bold;
               line-height: 1.2;
               color: #3e5e67;
             }
           }
         }
+
         .domains-performance-container {
           margin: 0;
+
           .domain-performance-container {
             .tab-container {
               min-width: calc(100vw - 150px;);
@@ -374,8 +561,7 @@
         }
       }
     }
-
-    @media screen and (max-width: 320px) {
+    @media screen and (max-width: $screen-320) {
       .performance-body-container {
         .domains-performance-container {
           .domain-performance-container {
