@@ -39,6 +39,10 @@ export default Ember.Route.extend({
         this.set('model.showFeedback', 'true');
       }
       //this.sendAction('action');
+    },
+    refreshRoute: function() {
+      Ember.Logger.log('refreshRoute');
+      this.refresh();
     }
   },
   // -------------------------------------------------------------------------

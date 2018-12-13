@@ -377,9 +377,9 @@
                 </div>
               {{/if}}
               {{!-- Current --}}
+              {{!-- if Grade is present show that grade and dont allow a change --}}
               {{!-- Dont show grade if not present --}}
               {{#if getCurrentGradeDDContent}}
-                {{log 'currentGradeDDValue' currentGradeDDValue}}
                 {{#if currentGradeDDValue}}
                   <div class='sub-sec-row'>
                     <div class='field-dropdown-caps-label'> {{t
@@ -387,29 +387,29 @@
                     <div class='field-drop-down'>
                       <div class='grade-info'>
                         <div class="dropdown">
-                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="true"
-                            {{action 'prepareListData' class 'class-current'}}>
-                            {{#if class.gradeCurrent}}
-                              {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
-                      searchVal=class.gradeCurrent
-                      destProp='grade' }}
-                            {{else}}
+                          {{#if class.gradeCurrent}}
+                            {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
+                                  searchVal=class.gradeCurrent
+                                  destProp='grade' }}
+                          {{else}}
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="true"
+                              {{action 'prepareListData' class 'class-current'}}>
                               {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                            {{/if}}
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu">
-                            {{#if getCurrentGradeDDContent}}
-                              {{#each currentFilterList as |grade|}}
-                                {{#if grade}}
-                                  <li> <a data-item={{grade}}
-                                      {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
-                                    </a> </li>
-                                {{/if}}
-                              {{/each}}
-                            {{/if}}
-                          </ul>
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                              {{#if getCurrentGradeDDContent}}
+                                {{#each currentGradeDDValue as |grade|}}
+                                  {{#if grade}}
+                                    <li> <a data-item={{grade}}
+                                        {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
+                                      </a> </li>
+                                  {{/if}}
+                                {{/each}}
+                              {{/if}}
+                            </ul>
+                          {{/if}}
                         </div>
                       </div>
                     </div>
@@ -417,6 +417,8 @@
                 {{/if}}
               {{/if}}
               {{!-- current end --}}
+              {{!-- //Removing upper_bound for class settings 
+             
               {{#if (and (and course subject) isPremiumClass) }}
                 <div class='sub-sec-row'>
                   <div class='field-dropdown-caps-label'>
@@ -452,7 +454,7 @@
                     </div>
                   </div>
                 </div>
-              {{/if}}
+              {{/if}} --}}
               {{#if (and (and course subject) isPremiumClass) }}
                 <div class='sub-sec-sep'></div>
                 <div class='row-offline-class sub-sec-row'>
@@ -521,7 +523,7 @@
             {{#if (and (and course subject) isPremiumClass) }}
               <div class='student-header'></div> {{!-- Adjust LP --}}
             {{/if}}
-            <div class='student-header'></div> {{!-- Enable/Disable --}}
+            <div class='student-header' style='display:none;'></div> {{!-- Enable/Disable --}}
             <div class='student-header'></div> {{!-- Delete --}}
             {{!-- each row of student goes here --}}
             {{#each sortedMembers as |student|}}
@@ -602,7 +604,7 @@
                     data-toggle="tooltip"> {{gru-icon name='trending_up'}}</div>
                 </div>
               {{/if}}
-              <div class='student-action-col'>
+              <div class='student-action-col' style='display:none;'>
                 <div class='student-act-de' {{action "classMembersToggle" student}} title="Activate/Deactivate"
                   data-toggle="tooltip">
                   {{gru-icon name='block'}}</div>
