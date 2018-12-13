@@ -350,25 +350,14 @@ export default Ember.Controller.extend(ModalMixin, {
       const controller = this;
       if (controller.get('course.id') && controller.get('sanitizedSubject')) {
         let settings = {
-            grade_lower_bound: controller.get('class.gradeLowerBound'),
-            grade_upper_bound: controller.get('class.gradeUpperBound'),
-            grade_current: controller.get('class.gradeCurrent'),
-            route0: controller.get('class.route0Applicable')
+            grade_lower_bound: controller.get('tempClass.gradeLowerBound'),
+            grade_upper_bound: controller.get('tempClass.gradeUpperBound'),
+            grade_current: controller.get('tempClass.gradeCurrent'),
+            route0: controller.get('tempClass.route0Applicable')
           },
           akey = setKey ? setKey : 'route0';
 
         settings[akey] = value;
-
-        let normalizedClassSettings = {
-          gradeLowerBound: settings.grade_lower_bound,
-          gradeUpperBound: settings.grade_upper_bound,
-          gradeCurrent: settings.grade_current,
-          route0Applicable: settings.route0
-        };
-
-        let curClass = controller.get('class');
-        curClass.setProperties(normalizedClassSettings);
-        controller.set('class', curClass);
 
         let tClass = controller.get('tempClass');
         tClass.set('gradeLowerBound', settings.grade_lower_bound);
@@ -468,10 +457,10 @@ export default Ember.Controller.extend(ModalMixin, {
       const controller = this;
       if (controller.get('course.id') && controller.get('sanitizedSubject')) {
         let settings = {
-          grade_lower_bound: controller.get('class.gradeLowerBound'),
-          grade_upper_bound: controller.get('class.gradeUpperBound'),
-          grade_current: controller.get('class.gradeCurrent'),
-          route0: controller.get('class.route0Applicable')
+          grade_lower_bound: controller.get('tempClass.gradeLowerBound'),
+          grade_upper_bound: controller.get('tempClass.gradeUpperBound'),
+          grade_current: controller.get('tempClass.gradeCurrent'),
+          route0: controller.get('tempClass.route0Applicable')
         };
         controller.updateClassSettings(settings); // Call api with whatever is saved
       } else {
@@ -527,7 +516,7 @@ export default Ember.Controller.extend(ModalMixin, {
       } else if (posParam === 'class-current') {
         sourceFilteredByContext = controller.filterRange(
           source,
-          classLB,
+          controller.get('tempClass.gradeLowerBound'),
           classCurrent // Once set class current cant be updated so if would always be null, once called for
         );
       }
@@ -738,11 +727,11 @@ export default Ember.Controller.extend(ModalMixin, {
   currentGradeDDValue: null,
   getCurrentGradeDDContent: Ember.computed(
     'subjectTaxonomyGrades',
-    'class.grade_lower_bound',
+    'class.gradeLowerBound',
     function() {
       const controller = this;
       let subjectTGS = controller.get('subjectTaxonomyGrades'),
-        classLB = controller.get('class.gradeLowerBound'),
+        classLB = controller.get('tempClass.gradeLowerBound'),
         filteredGrades = null;
       if (subjectTGS && classLB) {
         filteredGrades = subjectTGS.map(subjectGrade => {
