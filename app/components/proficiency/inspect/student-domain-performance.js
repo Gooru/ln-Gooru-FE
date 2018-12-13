@@ -140,7 +140,9 @@ export default Ember.Component.extend({
     let component = this;
     let curDeviceVW = window.screen.width;
     let mobilePotraitVW = component.get('mobilePotraitVW');
-    component.set('isMobilePotraitView', curDeviceVW <= mobilePotraitVW);
+    if (!component.get('isDestroyed') || component.get('isDestroying')) {
+      component.set('isMobilePotraitView', curDeviceVW <= mobilePotraitVW);
+    }
     let scrollableContainer = component.$('.scrollable-container');
     scrollableContainer.animate(
       {
