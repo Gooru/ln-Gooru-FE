@@ -1,6 +1,7 @@
 .controller.teacher.class.class-management {
   max-width: 960px;
   margin: 0 auto;
+  display: none;
 
   .miniprofile {
     width: 29px;
@@ -781,7 +782,6 @@ $canvas-height: 1254px;
   background-color: $bg-dark;
   width: auto;
   height: auto;
-  display: none;
   min-height: 100vh;
   margin-top: -11px;
 
