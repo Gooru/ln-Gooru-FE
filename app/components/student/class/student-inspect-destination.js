@@ -21,7 +21,7 @@ export default Ember.Component.extend({
   // Events
   didInsertElement() {
     let component = this;
-    if (component.get('isRoute0')) {
+    if (component.get('isRoute0') && component.get('isRoute0Applicable')) {
       component.fetchRout0Contents();
     }
     component.getTaxonomyGrades();
