@@ -1152,6 +1152,7 @@ $canvas-height: 1254px;
                 margin-top: 10px;
                 padding-top: 10px;
                 padding-bottom: 20px;
+                align-items: center;
 
                 .offline-icon {
                   display: inline;
@@ -1165,7 +1166,7 @@ $canvas-height: 1254px;
 
                 .offline-label {
                   width: 287px;
-                  height: 16px;
+                  height: 29px;
                   font-family: Lato;
                   font-size: 13px;
                   flex: 1;
@@ -1177,6 +1178,7 @@ $canvas-height: 1254px;
                   /*  width: 40px; */
                   /*  height: 24px; */
                   object-fit: contain;
+                  align-self: flex-end; //align to the line base
                 }
               }
 
@@ -1276,6 +1278,7 @@ $canvas-height: 1254px;
             .row-offline-class {
               margin-top: 10px;
               padding-top: 10px;
+              align-items: center;
               /*  padding-bottom: 20px; */
 
               .offline-icon {
@@ -1290,7 +1293,7 @@ $canvas-height: 1254px;
 
               .offline-label {
                 width: 287px;
-                height: 16px;
+                height: 30px;
                 font-family: Lato;
                 font-size: 13px;
                 flex: 1;
@@ -1520,6 +1523,8 @@ $canvas-height: 1254px;
           .student-name {
             /* width: 97px;
               height: 15px; */
+            display: flex;
+            align-items: center;
           }
 
           .origin {
