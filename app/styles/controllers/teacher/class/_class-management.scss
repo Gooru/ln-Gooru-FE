@@ -838,8 +838,7 @@ $canvas-height: 1254px;
         position: relative;
         display: inline-block;
         width: max-content;
-        margin-top: -7px;
-
+        /*margin-top: -7px; */
         .active-item {
           display: flex;
           cursor: pointer;
@@ -1225,7 +1224,9 @@ $canvas-height: 1254px;
 
               // border-top: 1px solid;
               display: flex;
-              margin-top: 13px;
+              //margin-top: 13px;
+              height: 36px;
+              align-items: baseline;
 
               .field-dropdown-caps-label {
                 /* width: 55px; */
@@ -1415,7 +1416,7 @@ $canvas-height: 1254px;
           height: 15px;
         }
         .dropdown-menu {
-          position: fixed;
+          position: absolute;
           top: auto;
           left: auto;
         }
@@ -1485,7 +1486,7 @@ $canvas-height: 1254px;
 
           .student-grid {
             display: grid;
-            grid-template-columns: 40px minmax(15px, auto) 100px 100px 100px auto auto auto;
+            grid-template-columns: 40px minmax(15px, auto) 120px 120px 100px auto auto auto;
             /*  grid-auto-rows: 40px minmax(15px, auto) 100px 100px 100px 100px 40px 40px 40px; */
             /*grid-auto-rows: minmax(40px, auto); */
             /* padding: 15px; */
@@ -1496,7 +1497,7 @@ $canvas-height: 1254px;
               border-bottom: 1px solid $sep-border-color;
               padding: 3px;
               text-overflow: ellipsis;
-              overflow: hidden;
+              /*  overflow: hidden; */
               height: inherit;
               width: auto;
             }
