@@ -377,9 +377,9 @@
                 </div>
               {{/if}}
               {{!-- Current --}}
+              {{!-- if Grade is present show that grade and dont allow a change --}}
               {{!-- Dont show grade if not present --}}
               {{#if getCurrentGradeDDContent}}
-                {{log 'currentGradeDDValue' currentGradeDDValue}}
                 {{#if currentGradeDDValue}}
                   <div class='sub-sec-row'>
                     <div class='field-dropdown-caps-label'> {{t
@@ -387,29 +387,29 @@
                     <div class='field-drop-down'>
                       <div class='grade-info'>
                         <div class="dropdown">
-                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="true"
-                            {{action 'prepareListData' class 'class-current'}}>
-                            {{#if class.gradeCurrent}}
-                              {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
-                      searchVal=class.gradeCurrent
-                      destProp='grade' }}
-                            {{else}}
+                          {{#if class.gradeCurrent}}
+                            {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
+                                  searchVal=class.gradeCurrent
+                                  destProp='grade' }}
+                          {{else}}
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="true"
+                              {{action 'prepareListData' class 'class-current'}}>
                               {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                            {{/if}}
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu">
-                            {{#if getCurrentGradeDDContent}}
-                              {{#each currentFilterList as |grade|}}
-                                {{#if grade}}
-                                  <li> <a data-item={{grade}}
-                                      {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
-                                    </a> </li>
-                                {{/if}}
-                              {{/each}}
-                            {{/if}}
-                          </ul>
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                              {{#if getCurrentGradeDDContent}}
+                                {{#each currentGradeDDValue as |grade|}}
+                                  {{#if grade}}
+                                    <li> <a data-item={{grade}}
+                                        {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
+                                      </a> </li>
+                                  {{/if}}
+                                {{/each}}
+                              {{/if}}
+                            </ul>
+                          {{/if}}
                         </div>
                       </div>
                     </div>

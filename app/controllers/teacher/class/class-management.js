@@ -484,54 +484,51 @@ export default Ember.Controller.extend(ModalMixin, {
       const controller = this;
       let classV = controller.get('class'),
         classLB = classV.gradeLowerBound,
-        classUB = classV.gradeUpperBound,
-        classCurrent = classV.classCurrent,
+        classCurrent = classV.gradeCurrent,
         source = controller.get('subjectTaxonomyGrades'),
-        sourceFilteredByClassRange = controller.filterRange(
-          source,
-          null,
-          classLB,
-          classUB
-        ),
         sourceFilteredByContext;
 
       // class filters
       if (posParam === 'student-origin' || posParam === 'student-destination') {
         if (posParam === 'student-origin') {
-          sourceFilteredByContext = controller.filterRange(
-            sourceFilteredByClassRange,
-            null,
-            classLB,
-            context.gradeUpperBound
-          );
+          if (classLB) {
+            sourceFilteredByContext = controller.filterRange(
+              source,
+              classLB,
+              context.gradeLowerBound || classCurrent
+            );
+          }
+          /* Student's lower bound can't be SET if class lower bound is null
+             Student's lower bound can't be lower than class lower bound
+             Student's destination can be set to any value greater than or equal to class grade
+             Shrinking is not allowed .i.e. student
+             */
         } else if (posParam === 'student-destination') {
-          sourceFilteredByContext = controller.filterRange(
-            sourceFilteredByClassRange,
-            null,
-            context.gradeLowerBound,
-            classUB
-          );
+          if (classCurrent) {
+            sourceFilteredByContext = controller.filterRange(
+              source,
+              context.gradeUpperBound ||
+                classCurrent ||
+                context.gradeLowerBound ||
+                classLB,
+              null
+            );
+          }
+          /* Student's upper bound can't be SET if class current bound is null */
         }
       } else if (posParam === 'class-origin') {
         sourceFilteredByContext = controller.filterRange(
           source,
-          null,
-          classLB,
-          context.gradeUpperBound
+          classLB ? 0 : null,
+          classLB ? classLB : classCurrent
         );
-      } else if (posParam === 'class-destination') {
-        sourceFilteredByContext = controller.filterRange(
-          source,
-          classCurrent,
-          classLB,
-          context.gradeUpperBound // once set class ub should not be shrinked
-        );
+        /*  The grade_lower_bound should be less than or equal to current_grade
+        The grade_lower_bound can be modified multiple times. However, it can't be made higher than previous value  */
       } else if (posParam === 'class-current') {
         sourceFilteredByContext = controller.filterRange(
           source,
-          null,
           classLB,
-          context.gradeUpperBound // once set class ub should not be shrinked
+          classCurrent // Once set class current cant be updated so if would always be null, once called for
         );
       }
 
@@ -542,28 +539,25 @@ export default Ember.Controller.extend(ModalMixin, {
 
   currentFilterList: null, //Dynamic filtered list
 
-  filterRange: function(filterSource, current, lb, ub) {
-    if (current) {
-      lb = current; //Get value
-    }
+  filterRange: function(filterSource, lb, ub) {
     let filteredDest = null;
     if (filterSource && lb && ub) {
       // if ub and lb , cg is between lb and ub
-      filteredDest = filterSource.map(srcrow => {
-        if (srcrow && srcrow.id >= lb && srcrow.id <= ub) {
-          return srcrow;
+      filteredDest = filterSource.map(srcRow => {
+        if (srcRow && srcRow.id >= lb && srcRow.id <= ub) {
+          return srcRow;
         }
       });
     } else if (filterSource && (lb && !ub)) {
-      filteredDest = filterSource.map(srcrow => {
-        if (srcrow && srcrow.id >= lb) {
-          return srcrow;
+      filteredDest = filterSource.map(srcRow => {
+        if (srcRow && srcRow.id >= lb) {
+          return srcRow;
         }
       });
     } else if (filterSource && (!lb && ub)) {
-      filteredDest = filterSource.map(srcrow => {
-        if (srcrow && srcrow.id <= ub) {
-          return srcrow;
+      filteredDest = filterSource.map(srcRow => {
+        if (srcRow && srcRow.id <= ub) {
+          return srcRow;
         }
       });
     } else if (filterSource && (!lb && !ub)) {
@@ -745,36 +739,20 @@ export default Ember.Controller.extend(ModalMixin, {
   getCurrentGradeDDContent: Ember.computed(
     'subjectTaxonomyGrades',
     'class.grade_lower_bound',
-    'class.grade_upper_bound',
     function() {
       const controller = this;
-      let subjecttgs = controller.get('subjectTaxonomyGrades'),
-        classub = controller.get('class.gradeUpperBound'),
-        classlb = controller.get('class.gradeLowerBound'),
+      let subjectTGS = controller.get('subjectTaxonomyGrades'),
+        classLB = controller.get('class.gradeLowerBound'),
         filteredGrades = null;
-      if (subjecttgs && classlb && classub) {
-        // if ub and lb , cg is btwn lb and ub
-        filteredGrades = subjecttgs.map(subg => {
-          if (subg.id >= classlb && subg.id <= classub) {
-            return subg;
+      if (subjectTGS && classLB) {
+        filteredGrades = subjectTGS.map(subjectGrade => {
+          if (subjectGrade.id >= classLB) {
+            return subjectGrade;
           }
         });
-      } else if (subjecttgs && (classlb && !classub)) {
-        filteredGrades = subjecttgs.map(subg => {
-          if (subg.id >= classlb) {
-            return subg;
-          }
-        });
-      } else if (subjecttgs && (!classlb && classub)) {
-        filteredGrades = subjecttgs.map(subg => {
-          if (subg.id <= classub) {
-            return subg;
-          }
-        });
-      } else if (subjecttgs && (!classlb && !classub)) {
-        filteredGrades = subjecttgs; //all
+      } else if (subjectTGS && !classLB) {
+        filteredGrades = subjectTGS; //all
       }
-
       controller.set('currentGradeDDValue', filteredGrades);
       return filteredGrades;
     }
