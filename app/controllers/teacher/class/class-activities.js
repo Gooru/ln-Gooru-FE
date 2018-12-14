@@ -204,10 +204,29 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      */
     showTodaysDcaListContainer: function() {
       this.defaultScrollToTodaysDcaContentList(400);
+    },
+
+    onOpenPerformanceEntry(item, classActivity) {
+      let component = this;
+      if (item.format === 'assessment') {
+        component.set('isShowAssessmentPerformanceEntryPullUp', true);
+        component.set('isShowCollectionPerformanceEntryPullUp', false);
+      } else {
+        component.set('isShowCollectionPerformanceEntryPullUp', true);
+        component.set('isShowAssessmentPerformanceEntryPullUp', false);
+      }
+      component.set('selectedItem', item);
+      component.set('selectedActivity', classActivity);
     }
   },
   // -------------------------------------------------------------------------
   // Properties
+
+  selectedActivity: null,
+
+  selectedItem: null,
+
+  isShowPerformanceEntryPullUp: false,
 
   /**
    * Maintains the selected search content type.

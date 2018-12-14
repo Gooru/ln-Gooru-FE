@@ -99,6 +99,13 @@ export default Ember.Component.extend({
             component.sendAction('addedContentToDCA', data, date);
           }
         });
+    },
+
+    onOpenPerformanceEntry(item, classActivity) {
+      let component = this;
+      console.log('item', item);
+      console.log('classActivity', classActivity);
+      component.sendAction('onOpenPerformanceEntry', item, classActivity);
     }
   },
 

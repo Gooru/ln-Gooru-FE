@@ -247,9 +247,9 @@
         font-size: 11px;
         cursor: pointer;
 
-        &.not-started {
-          pointer-events: none;
-        }
+        // &.not-started {
+        //   pointer-events: none;
+        // }
 
         .no-performance {
           color: #37424b;

@@ -69,7 +69,7 @@
         {{/if}}
       </div>
     {{else}}
-      <div class="dca-panel-performance not-started">
+      <div class="dca-panel-performance not-started"  {{action "onOpenPerformanceEntry" item classActivity}}>
         <span class="no-performance">--</span>
       </div>
     {{/if}}

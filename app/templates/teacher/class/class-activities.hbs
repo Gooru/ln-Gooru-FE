@@ -102,6 +102,7 @@
               onChangeVisibility='changeVisibility'
               onRemoveClassActivity='removeClassActivity'
               openDcaContentReport='openDcaContentReport'
+              onOpenPerformanceEntry="onOpenPerformanceEntry"
             }}
             {{/each}}
           </div>
@@ -135,6 +136,7 @@
               onRemoveClassActivity='removeClassActivity'
               addedContentToDCA='addedContentToDCA'
               openDcaContentReport='openDcaContentReport'
+              onOpenPerformanceEntry="onOpenPerformanceEntry"
             }}
             {{/each}}
           </div>
@@ -183,4 +185,17 @@
 
 {{#if showDcaCollectionReportPullUp}}
   {{reports.pull-up.dca-collection-report context=dcaCollectionReportData showPullUp=showDcaCollectionReportPullUp}}
+{{/if}}
+
+
+{{#if isShowAssessmentPerformanceEntryPullUp}}
+  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowAssessmentPerformanceEntryPullUp title=selectedItem.title type='assessment'}}
+    {{reports.pull-up.assessment-performance-entry assessment=selectedItem students=members activityData=selectedActivity classId=classId}}
+  {{/reports.pull-up.performance-manual-entry}}
+{{/if}}
+
+{{#if isShowCollectionPerformanceEntryPullUp}}
+  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowCollectionPerformanceEntryPullUp title=selectedItem.title}}
+    {{reports.pull-up.collection-performance-entry}}
+  {{/reports.pull-up.performance-manual-entry}}
 {{/if}}
