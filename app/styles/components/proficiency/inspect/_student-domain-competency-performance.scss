@@ -227,6 +227,40 @@
         padding: 5px;
       }
     }
+    @media screen and (max-width: $screen-568) {
+      .performance-body-container {
+        .students-container {
+          margin-top: 0;
+          .student-container {
+            .student-name {
+              font-size: 12px;
+            }
+          }
+        }
+        .students-competencies-performance-container {
+          .competencies-info {
+            display: none;
+          }
+        }
+      }
+    .performance-header-container {
+      min-height: unset;
+      .domain-details {
+        border-bottom: none;
+        .competency-count {
+            margin-top: 7px;
+        }
+        .domain-info {
+          .back-arrow {
+            margin-top: 8px;
+          }
+        }
+      }
+      .competency-performance-chartlist {
+        display: none;
+      }
+    }
+  }
 
     @media screen and (max-width: 320px) {
       .performance-header-container {
