@@ -124,9 +124,10 @@ export default Ember.Route.extend({
     var route0Promise = {};
     let setting = currentClass.get('setting');
     let premiumCourse = setting
-      ? setting['course.premium'] && setting['course.premium'] === true
-      : false;
-    if (premiumCourse) {
+        ? setting['course.premium'] && setting['course.premium'] === true
+        : false,
+      isRoute0Applicable = currentClass.get('route0Applicable');
+    if (premiumCourse & isRoute0Applicable) {
       route0Promise = route.get('route0Service').fetchInClass({
         courseId: course.id,
         classId: currentClass.id

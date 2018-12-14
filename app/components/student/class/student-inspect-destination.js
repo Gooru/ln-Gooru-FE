@@ -21,7 +21,7 @@ export default Ember.Component.extend({
   // Events
   didInsertElement() {
     let component = this;
-    if (component.get('isRoute0')) {
+    if (component.get('isRoute0') && component.get('isRoute0Applicable')) {
       component.fetchRout0Contents();
     }
     component.getTaxonomyGrades();
@@ -96,7 +96,6 @@ export default Ember.Component.extend({
       let component = this;
       component.sendAction('onMoveNext', curStep);
     },
-
     /**
      * Action triggered when toggle route0 course-map view expanded/collapsed
      */

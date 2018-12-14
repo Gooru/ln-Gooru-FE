@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['inspect', 'student-class-proficiency'],
@@ -21,7 +20,6 @@ export default Ember.Component.extend({
       let component = this;
       component.sendAction('onClickCourseCompetencyView');
     }
-
   },
 
   // -------------------------------------------------------------------------

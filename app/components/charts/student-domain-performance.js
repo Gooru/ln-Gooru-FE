@@ -2,7 +2,6 @@ import Ember from 'ember';
 import d3 from 'd3';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['student-domain-performance'],
@@ -56,13 +55,17 @@ export default Ember.Component.extend({
     let domainSeq = component.get('domainSeq');
     let studentSeq = component.get('studentSeq');
     let competencySeq = 0;
-    const svgContainer = d3.select(`.chart.render-student-domain-performance-${studentSeq}-${domainSeq}`)
+    const svgContainer = d3
+      .select(
+        `.chart.render-student-domain-performance-${studentSeq}-${domainSeq}`
+      )
       .append('svg')
       .attr('width', cellWidth * numberOfCompetencies)
       .attr('height', cellHeight);
-    const cellContainer = svgContainer.append('g')
-      .attr('id', 'cell-container');
-    const cells = cellContainer.selectAll('.competency').data(competencyDataSet);
+    const cellContainer = svgContainer.append('g').attr('id', 'cell-container');
+    const cells = cellContainer
+      .selectAll('.competency')
+      .data(competencyDataSet);
     cells
       .enter()
       .append('rect')
@@ -72,7 +75,7 @@ export default Ember.Component.extend({
       .attr('id', 'competency-cell')
       .attr('width', cellWidth)
       .attr('height', cellHeight)
-      .attr('x', ()=> {
+      .attr('x', () => {
         competencySeq++;
         return (competencySeq - 1) * cellWidth;
       })

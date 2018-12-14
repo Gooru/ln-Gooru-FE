@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['inspect-competency', 'student-domain-performance'],
@@ -20,7 +19,7 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Actions
-  actions : {
+  actions: {
     // Action triggered when click left/right arrow
     onClickArrow(direction) {
       let component = this;
@@ -32,9 +31,12 @@ export default Ember.Component.extend({
         let scrollableContainer = component.$('.scrollable-container');
         let curPos = scrollableContainer.scrollLeft();
         let nextPos = direction === 'left' ? curPos - 232 : curPos + 232;
-        scrollableContainer.animate({
-          scrollLeft: nextPos
-        }, 400);
+        scrollableContainer.animate(
+          {
+            scrollLeft: nextPos
+          },
+          400
+        );
       }
     },
 
@@ -64,7 +66,7 @@ export default Ember.Component.extend({
    * @property {JSON} courseCoverageCount
    */
   courseCoverageCount: Ember.Object.create({
-    'mastered': 0,
+    mastered: 0,
     'in-progress': 0,
     'not-started': 0
   }),
@@ -89,7 +91,6 @@ export default Ember.Component.extend({
    */
   isMobilePotraitView: false,
 
-
   // -------------------------------------------------------------------------
   // Methods
 
@@ -99,20 +100,36 @@ export default Ember.Component.extend({
    */
   mobilePotraitScroller(direction) {
     let component = this;
-    const $domainsPerformanceContainer = component.$('.domains-performance-container');
-    const $domainsCoverageContainer = component.$('.domains-coverage-container');
+    const $domainsPerformanceContainer = component.$(
+      '.domains-performance-container'
+    );
+    const $domainsCoverageContainer = component.$(
+      '.domains-coverage-container'
+    );
     let curDeviceVW = window.screen.width;
     let curPerfPos = $domainsPerformanceContainer.scrollLeft();
     let curCoveragePos = $domainsCoverageContainer.scrollLeft();
     let scrollablePos = curDeviceVW - 142;
-    let nextPerfPos = direction === 'left' ? curPerfPos - scrollablePos : curPerfPos + scrollablePos;
-    let nextCoveragePos = direction === 'left' ? curCoveragePos - curDeviceVW : curCoveragePos + curDeviceVW;
-    $domainsPerformanceContainer.animate({
-      scrollLeft: nextPerfPos
-    }, 400);
-    $domainsCoverageContainer.animate({
-      scrollLeft: nextCoveragePos
-    }, 400);
+    let nextPerfPos =
+      direction === 'left'
+        ? curPerfPos - scrollablePos
+        : curPerfPos + scrollablePos;
+    let nextCoveragePos =
+      direction === 'left'
+        ? curCoveragePos - curDeviceVW
+        : curCoveragePos + curDeviceVW;
+    $domainsPerformanceContainer.animate(
+      {
+        scrollLeft: nextPerfPos
+      },
+      400
+    );
+    $domainsCoverageContainer.animate(
+      {
+        scrollLeft: nextCoveragePos
+      },
+      400
+    );
   },
 
   /**
@@ -122,12 +139,24 @@ export default Ember.Component.extend({
   handleResize() {
     let component = this;
     let curDeviceVW = window.screen.width;
+    let curDeviceVH = window.screen.height;
     let mobilePotraitVW = component.get('mobilePotraitVW');
-    component.set('isMobilePotraitView', curDeviceVW <= mobilePotraitVW);
+    let domainsCoverageContainer = component.$('.domains-coverage-container');
+    let domainsPerformanceContainer = component.$('.domains-performance-container');
+    if (!component.get('isDestroyed') || component.get('isDestroying')) {
+      component.set('isMobilePotraitView', curDeviceVW <= mobilePotraitVW);
+    }
     let scrollableContainer = component.$('.scrollable-container');
-    scrollableContainer.animate({
-      scrollLeft: 0
-    }, 400);
+    scrollableContainer.animate(
+      {
+        scrollLeft: 0
+      },
+      400
+    );
+    if (curDeviceVH - 280 < domainsPerformanceContainer.height()) {
+      domainsCoverageContainer.addClass('scrollable-margin');
+    } else {
+      domainsCoverageContainer.removeClass('scrollable-margin');
+    }
   }
-
 });

@@ -2,7 +2,6 @@ import Ember from 'ember';
 import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
 
 export default Ember.Controller.extend({
-
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -97,11 +96,10 @@ export default Ember.Controller.extend({
     let controller = this;
     return Ember.RSVP.hash({
       domainLevelSummary: controller.fetchDomainLevelSummary()
-    })
-      .then(({ domainLevelSummary}) => {
-        controller.set('domainLevelSummary', domainLevelSummary);
-        controller.parseStudentsDomainProficiencyData();
-      });
+    }).then(({ domainLevelSummary }) => {
+      controller.set('domainLevelSummary', domainLevelSummary);
+      controller.parseStudentsDomainProficiencyData();
+    });
   },
 
   /**
@@ -115,11 +113,13 @@ export default Ember.Controller.extend({
       classId: controller.get('classId'),
       courseId: controller.get('courseId')
     };
-    let domainLevelSummaryPromise = Ember.RSVP.resolve(competencyService.getDomainLevelSummary(filters));
+    let domainLevelSummaryPromise = Ember.RSVP.resolve(
+      competencyService.getDomainLevelSummary(filters)
+    );
     return Ember.RSVP.hash({
       domainLevelSummary: domainLevelSummaryPromise
     })
-      .then(({domainLevelSummary}) => {
+      .then(({ domainLevelSummary }) => {
         controller.set('isDataNotAvailable', false);
         return domainLevelSummary;
       })
@@ -146,12 +146,17 @@ export default Ember.Controller.extend({
       let inProgressCourseCompetencyCoverage = 0;
       let masteredCourseCompetencyCoverage = 0;
       let studentsDomainCompetencyCoverage = Ember.A([]);
-      classMembers.map( member => {
+      classMembers.map(member => {
         let studentDomainPerformance = component.generateStudentData(member);
-        let studentCompetencyMatrix = studentsCompetencyMatrix.findBy('id', member.id);
-        let userCompetencyMatrix = studentCompetencyMatrix ? studentCompetencyMatrix.userCompetencyMatrix : null;
+        let studentCompetencyMatrix = studentsCompetencyMatrix.findBy(
+          'id',
+          member.id
+        );
+        let userCompetencyMatrix = studentCompetencyMatrix
+          ? studentCompetencyMatrix.userCompetencyMatrix
+          : null;
         let studentDomainCompetencies = Ember.A([]);
-        domainCompetencies.map( domain => {
+        domainCompetencies.map(domain => {
           let studentCompetencies = Ember.Object.create({
             domainCode: domain.domainCode,
             domainName: domain.domainName,
@@ -163,10 +168,17 @@ export default Ember.Controller.extend({
           let masteredDomainCompetencyCoverage = 0;
           let studentDomainCompetenciesInfo = Ember.A([]);
           let competencies = domain.competencies;
-          let userDomainCompetencyMatrix = userCompetencyMatrix.findBy('domainCode', domain.domainCode);
-          let userDomainMatrixCompetencies = userDomainCompetencyMatrix.competencies;
-          maxNumberOfCompetencies = maxNumberOfCompetencies < competencies.length ? competencies.length : maxNumberOfCompetencies;
-          competencies.map( competency => {
+          let userDomainCompetencyMatrix = userCompetencyMatrix.findBy(
+            'domainCode',
+            domain.domainCode
+          );
+          let userDomainMatrixCompetencies =
+            userDomainCompetencyMatrix.competencies;
+          maxNumberOfCompetencies =
+            maxNumberOfCompetencies < competencies.length
+              ? competencies.length
+              : maxNumberOfCompetencies;
+          competencies.map(competency => {
             totalCompetencies++;
             let studentCompetencyPerformanceData = Ember.Object.create({
               competencyCode: competency.competencyCode,
@@ -176,9 +188,15 @@ export default Ember.Controller.extend({
               competencyStudentDesc: competency.competencyStudentDesc,
               competencyStatus: 0
             });
-            let competencyStatus = userDomainMatrixCompetencies[`${competency.competencyCode}`];
-            studentCompetencyPerformanceData.set('competencyStatus', competencyStatus);
-            studentDomainCompetenciesInfo.push(studentCompetencyPerformanceData);
+            let competencyStatus =
+              userDomainMatrixCompetencies[`${competency.competencyCode}`];
+            studentCompetencyPerformanceData.set(
+              'competencyStatus',
+              competencyStatus
+            );
+            studentDomainCompetenciesInfo.push(
+              studentCompetencyPerformanceData
+            );
             if (competencyStatus === 0) {
               notStartedCourseCompetencyCoverage++;
               notStartedDomainCompetencyCoverage++;
@@ -191,34 +209,60 @@ export default Ember.Controller.extend({
             }
           });
 
-          let curDomainObject = studentsDomainCompetencyCoverage[domain.domainSeq - 1];
-          let curDomainInProgressCount = curDomainObject ? curDomainObject.get('in-progress') : 0;
-          let curDomainNotStartedCount = curDomainObject ? curDomainObject.get('not-started') : 0;
-          let curDomainMasteredCount = curDomainObject ? curDomainObject.get('mastered') : 0;
-          studentsDomainCompetencyCoverage[domain.domainSeq - 1] = Ember.Object.create({
+          let curDomainObject =
+            studentsDomainCompetencyCoverage[domain.domainSeq - 1];
+          let curDomainInProgressCount = curDomainObject
+            ? curDomainObject.get('in-progress')
+            : 0;
+          let curDomainNotStartedCount = curDomainObject
+            ? curDomainObject.get('not-started')
+            : 0;
+          let curDomainMasteredCount = curDomainObject
+            ? curDomainObject.get('mastered')
+            : 0;
+          studentsDomainCompetencyCoverage[
+            domain.domainSeq - 1
+          ] = Ember.Object.create({
             domainCode: domain.domainCode,
             domainName: domain.domainName,
             domainSeq: domain.domainSeq,
-            'in-progress':  curDomainInProgressCount + inProgressDomainCompetencyCoverage,
-            'not-started': curDomainNotStartedCount + notStartedDomainCompetencyCoverage,
-            'mastered': curDomainMasteredCount + masteredDomainCompetencyCoverage,
-            'total-coverage': curDomainInProgressCount + inProgressDomainCompetencyCoverage + notStartedDomainCompetencyCoverage + masteredDomainCompetencyCoverage
+            'in-progress':
+              curDomainInProgressCount + inProgressDomainCompetencyCoverage,
+            'not-started':
+              curDomainNotStartedCount + notStartedDomainCompetencyCoverage,
+            mastered: curDomainMasteredCount + masteredDomainCompetencyCoverage,
+            'total-coverage':
+              curDomainInProgressCount +
+              inProgressDomainCompetencyCoverage +
+              notStartedDomainCompetencyCoverage +
+              masteredDomainCompetencyCoverage
           });
-          studentCompetencies.set('competencies', studentDomainCompetenciesInfo.sortBy('competencyStatus').reverse());
-          studentCompetencies.set('in-progress', inProgressDomainCompetencyCoverage);
+          studentCompetencies.set(
+            'competencies',
+            studentDomainCompetenciesInfo.sortBy('competencyStatus').reverse()
+          );
+          studentCompetencies.set(
+            'in-progress',
+            inProgressDomainCompetencyCoverage
+          );
           studentCompetencies.set('mastered', masteredDomainCompetencyCoverage);
-          studentCompetencies.set('not-started', notStartedDomainCompetencyCoverage);
+          studentCompetencies.set(
+            'not-started',
+            notStartedDomainCompetencyCoverage
+          );
           studentDomainCompetencies.push(studentCompetencies);
         });
-        studentDomainPerformance.set('domainCompetencies', studentDomainCompetencies);
+        studentDomainPerformance.set(
+          'domainCompetencies',
+          studentDomainCompetencies
+        );
         studentsDomainPerformance.push(studentDomainPerformance);
-
       });
       component.set('domainCoverageCount', studentsDomainCompetencyCoverage);
       let courseCoverageCount = Ember.Object.create({
         'not-started': notStartedCourseCompetencyCoverage,
         'in-progress': inProgressCourseCompetencyCoverage,
-        'mastered': masteredCourseCompetencyCoverage
+        mastered: masteredCourseCompetencyCoverage
       });
       component.set('courseCoverageCount', courseCoverageCount);
     }
@@ -237,7 +281,7 @@ export default Ember.Controller.extend({
     return Ember.Object.create({
       firstName: student.get('firstName'),
       lastName: student.get('lastName'),
-      fullName: `${student.get('lastName')  } ${  student.get('firstName')}`,
+      fullName: `${student.get('lastName')} ${student.get('firstName')}`,
       id: student.get('id'),
       email: student.get('email'),
       thumbnail: student.get('avatarUrl'),
@@ -361,7 +405,7 @@ export default Ember.Controller.extend({
    * @property {JSON} courseCoverageCount
    */
   courseCoverageCount: Ember.Object.create({
-    'mastered': 0,
+    mastered: 0,
     'in-progress': 0,
     'not-started': 0
   }),

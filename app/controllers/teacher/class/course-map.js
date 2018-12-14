@@ -613,8 +613,9 @@ export default Ember.Controller.extend({
    */
   loadRoute0Data() {
     let controller = this;
-    let isPremiumClass = controller.get('isPremiumClass');
-    if (isPremiumClass) {
+    let isPremiumClass = controller.get('isPremiumClass'),
+      isRoute0Applicable = controller.get('class.route0Applicable');
+    if (isPremiumClass && isRoute0Applicable) {
       let route0Promise = controller.fetchRoute0Contents();
       return route0Promise.then(function(route0Contents) {
         let isAccepted = route0Contents.status === 'accepted';

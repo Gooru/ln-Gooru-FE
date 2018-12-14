@@ -1,5 +1,8 @@
 .collection-accordion {
   .collection-content {
+    @media screen and (max-width: $screen-568) {
+      margin-left: 0;
+    }
     margin-left: 15px;
     .collection-header {
       margin-top: 15px;

@@ -71,9 +71,13 @@ export default Ember.Component.extend({
     onSelectGrade(gradeData) {
       let component = this;
       let activeGradeList = component.get('activeGradeList');
-      let domainBoundariesContainer = component.get('domainBoundariesContainer');
+      let domainBoundariesContainer = component.get(
+        'domainBoundariesContainer'
+      );
       let selectedGradeSeq = gradeData.sequence;
-      let selectedGradeElement = component.$(`.taxonomy-grades .grade-list .grade-sequence-${selectedGradeSeq}`);
+      let selectedGradeElement = component.$(
+        `.taxonomy-grades .grade-list .grade-sequence-${selectedGradeSeq}`
+      );
       let selectedGradeLine = component.$(`.grade-${gradeData.sequence}-line`);
       if (activeGradeList[`${selectedGradeSeq}`]) {
         delete activeGradeList[`${selectedGradeSeq}`];
@@ -82,10 +86,12 @@ export default Ember.Component.extend({
       } else {
         activeGradeList[`${gradeData.sequence}`] = gradeData;
         if (!domainBoundariesContainer[`${selectedGradeSeq}`]) {
-          component.fetchDomainGradeBoundary(gradeData).then(function(domainBoundary) {
-            domainBoundariesContainer[`${selectedGradeSeq}`] = domainBoundary;
-            component.loadChartData();
-          });
+          component
+            .fetchDomainGradeBoundary(gradeData)
+            .then(function(domainBoundary) {
+              domainBoundariesContainer[`${selectedGradeSeq}`] = domainBoundary;
+              component.loadChartData();
+            });
         } else {
           component.loadChartData();
         }
@@ -287,10 +293,7 @@ export default Ember.Component.extend({
     let competencyMatrixCoordinates = component.get(
       'competencyMatrixCoordinates'
     );
-    if (
-      competencyMatrixDomains &&
-      competencyMatrixCoordinates
-    ) {
+    if (competencyMatrixDomains && competencyMatrixCoordinates) {
       let chartData = component.parseChartData(
         competencyMatrixDomains,
         competencyMatrixCoordinates
@@ -397,10 +400,7 @@ export default Ember.Component.extend({
    * @function parseCompetencyData
    * Method to parse raw competency matrix and co-ordinate data to plot the chart
    */
-  parseChartData(
-    competencyMatrixs,
-    competencyMatrixCoordinates
-  ) {
+  parseChartData(competencyMatrixs, competencyMatrixCoordinates) {
     let component = this;
     const cellHeight = component.get('cellHeight');
     let taxonomyDomain = Ember.A();
@@ -466,7 +466,10 @@ export default Ember.Component.extend({
           cellIndex++;
         });
         currentXaxis = currentXaxis + 1;
-        mergeDomainData = component.parseGradeLineBoundaries(mergeDomainData, domainCode);
+        mergeDomainData = component.parseGradeLineBoundaries(
+          mergeDomainData,
+          domainCode
+        );
       }
     });
     let height = cellHeight * Math.max(...numberOfCellsInEachColumn);
@@ -488,11 +491,21 @@ export default Ember.Component.extend({
     let domainBoundariesContainer = component.get('domainBoundariesContainer');
     if (domainBoundariesContainer) {
       domainBoundariesContainer.forEach(function(domainsBoundary, gradeSeq) {
-        let curDomainBoundaryData = domainsBoundary.findBy('domainCode', domainCode);
+        let curDomainBoundaryData = domainsBoundary.findBy(
+          'domainCode',
+          domainCode
+        );
         let firstCompetency = domainCompetencyData.objectAt(0);
-        let curDomainHighLineCompetency = curDomainBoundaryData ? domainCompetencyData.findBy('competencyCode', curDomainBoundaryData.highline) || firstCompetency : firstCompetency;
-        let className = curDomainHighLineCompetency.boundaryClass ? curDomainHighLineCompetency.boundaryClass : '';
-        curDomainHighLineCompetency.boundaryClass = `${className  } boundary-line-${gradeSeq}`;
+        let curDomainHighLineCompetency = curDomainBoundaryData
+          ? domainCompetencyData.findBy(
+            'competencyCode',
+            curDomainBoundaryData.highline
+          ) || firstCompetency
+          : firstCompetency;
+        let className = curDomainHighLineCompetency.boundaryClass
+          ? curDomainHighLineCompetency.boundaryClass
+          : '';
+        curDomainHighLineCompetency.boundaryClass = `${className} boundary-line-${gradeSeq}`;
       });
     }
     return domainCompetencyData;
@@ -522,7 +535,10 @@ export default Ember.Component.extend({
       .attr('height', height);
     let cellContainer = svg.append('g').attr('id', 'cell-container');
     let skylineContainer = svg.append('g').attr('id', 'skyline-container');
-    let baseLineContainer = svg.append('g').attr('id', 'baseline-container').attr('class', 'hidden-line');
+    let baseLineContainer = svg
+      .append('g')
+      .attr('id', 'baseline-container')
+      .attr('class', 'hidden-line');
     let domainBoundaryLineContainer = svg
       .append('g')
       .attr('id', 'domain-boundary-line-container');
@@ -548,7 +564,9 @@ export default Ember.Component.extend({
           d.xAxisSeq
         } competency-${d.xAxisSeq}-${
           d.yAxisSeq
-        } fillArea${d.status.toString()} ${domainBoundaryCompetency} ${d.boundaryClass}`;
+        } fillArea${d.status.toString()} ${domainBoundaryCompetency} ${
+          d.boundaryClass
+        }`;
       })
       .on('click', function(d) {
         component.sendAction('onSelectCompetency', d);
@@ -838,8 +856,12 @@ export default Ember.Component.extend({
     activeGradeList.forEach(function(gradeData, gradeSeq) {
       let boundaryLineElements = component.$(`.boundary-line-${gradeSeq}`);
       boundaryLineElements.each(function(boundaryLineSeq) {
-        let x1 = parseInt(component.$(boundaryLineElements[boundaryLineSeq]).attr('x'));
-        let y1 = parseInt(component.$(boundaryLineElements[boundaryLineSeq]).attr('y'));
+        let x1 = parseInt(
+          component.$(boundaryLineElements[boundaryLineSeq]).attr('x')
+        );
+        let y1 = parseInt(
+          component.$(boundaryLineElements[boundaryLineSeq]).attr('y')
+        );
         y1 = y1 === 0 ? y1 + 3 : y1 + cellHeight + 3;
         let x2 = x1 + cellWidth;
         let y2 = y1;
@@ -859,7 +881,11 @@ export default Ember.Component.extend({
             'class',
             `boundary-line horizontal-line boundary-line-${gradeSeq}-${boundaryLineSeq} grade-${gradeSeq}-line`
           );
-        component.joinDomainBoundaryLinePoints(linePoint, boundaryLineSeq - 1, gradeSeq);
+        component.joinDomainBoundaryLinePoints(
+          linePoint,
+          boundaryLineSeq - 1,
+          gradeSeq
+        );
       });
     });
 
@@ -875,7 +901,9 @@ export default Ember.Component.extend({
     let lastBoundaryLineContainer = component.$(
       `.boundary-line-${gradeSeq}-${lastBoundaryLineSeq}`
     );
-    let domainBoundaryLineContainer = component.get('domainBoundaryLineContainer');
+    let domainBoundaryLineContainer = component.get(
+      'domainBoundaryLineContainer'
+    );
     let lastBoundaryLinePoint = {
       x2: parseInt(lastBoundaryLineContainer.attr('x2')),
       y2: parseInt(lastBoundaryLineContainer.attr('y2'))

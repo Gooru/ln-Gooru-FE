@@ -1,30 +1,31 @@
 <div class="unit panel-heading" role="tab" id="{{elementId}}-heading">
-    <div class="panel-title">
-        <a class="collapsed title" role="button" data-toggle="collapse" href="#{{elementId}}-content" aria-expanded="false" aria-controls="{{elementId}}-content" {{action "selectUnit" model.id}} >
+  <div class="panel-title">
+    <a class="collapsed title" role="button" data-toggle="collapse" href="#{{elementId}}-content" aria-expanded="false" aria-controls="{{elementId}}-content" {{action "selectUnit" model.id}}>
             {{!--  {{action "selectUnit" model.unitId}} --}}
             <div class="title ellipsis">
-                <span class="prefix">{{course-sections-prefix index=index type='unit' longName=true}}</span>{{model.unitTitle}}
+                <span class="prefix">{{course-sections-prefix index=index type='unit' longName=true}}</span>
+                <span class="ellipsis">{{model.unitTitle}}</span>
             </div>
         </a>
-    </div>
+  </div>
 </div>
 <div id="{{elementId}}-content" data-index="{{componentIndex}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{elementId}}-heading">
-    <div class="panel-body">
-        <ol class="panel-group" role="tablist" aria-multiselectable="true">
-            {{#each model.lessons as |lesson index|}}
-                {{class.overview.lesson-suggestions class=class course=course 
-                unit=model model=lesson 
-                userLocationInRoute0=userLocationInRoute0 
+  <div class="panel-body">
+    <ol class="panel-group" role="tablist" aria-multiselectable="true">
+      {{#each model.lessons as |lesson index|}}
+        {{class.overview.lesson-suggestions class=class course=course
+                unit=model model=lesson
+                userLocationInRoute0=userLocationInRoute0
                 currentResource=currentResource
-                parsedLocation=parsedLocation 
-                index=index 
+                parsedLocation=parsedLocation
+                index=index
                 onSelectResource=(action 'selectResource')
                 onSelectLesson=(action 'updateLesson')
                 onSelectItem="onSelectItem"
 
-                isPlayer=isPlayer onStudyNow=(action 'studyNow') 
+                isPlayer=isPlayer onStudyNow=(action 'studyNow')
                 }}
-            {{/each}}
-        </ol>
-    </div>
+      {{/each}}
+    </ol>
+  </div>
 </div>

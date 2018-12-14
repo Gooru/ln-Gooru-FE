@@ -802,6 +802,8 @@ export default Object.assign(quizzesTranslations, {
       locate: 'Locate Me',
       'edit-content': 'Edit Content',
       'add-to-daily-class-activities': 'Add to Daily Class Activities',
+      'assigned-course': 'Your assigned course',
+      'pre-study-title': 'Pre-study for your course',
       'course-map': {
         'rescope-toggle': 'Show Complete Course',
         'rescope-info':
@@ -1265,8 +1267,9 @@ export default Object.assign(quizzesTranslations, {
         'class-statistics': 'Class Statistics',
         'proficiency-in': 'Proficiency in',
         'data-not-available': 'Data Not Available',
+        'course-coverage-label': 'Cumulative count of competencies for all students in class',
         'error-message':
-          'Possibly there is no a course assigned or there are none of students are joined or a valid subject is not assigned!'
+          'The class does not have a course assigned or does not have students rostered into the class yet. Once the course has been assigned to the class and the students are rostered, the class competency report will be shown here'
       },
       'class-activities': 'Class Activities',
       'back-to-class-activities': 'Back to Daily Class Activities',
@@ -1288,7 +1291,37 @@ export default Object.assign(quizzesTranslations, {
         assessments: 'Assessments',
         collections: 'Collections'
       },
-      'view-more': 'View more'
+      'view-more': 'View more',
+      'class-settings': {
+        'class-settings-sec': {
+          'generate-pathway': 'Generate Pathway',
+          'class-settings-sec-head': 'Class Settings',
+          'class-settings-sec-desc': 'Minimum performance to pass',
+          'class-code': 'Class Code',
+          subject: 'Subject',
+          framework: 'Framework',
+          'grade-level': 'Grade Level',
+          'option-choose-one': 'Choose One',
+          'co-teachers': 'Co-Teachers',
+          'add-coteacher': 'Add another teacher',
+          'offline-class-label': 'This is an Offline classroom'
+        },
+        'student-settings-sec': {
+          'student-settings-sec-head': 'Student Settings'
+        },
+        'course-settings-sec': {
+          'course-settings-sec-head': 'Course Settings',
+          'is-route0-applicable':
+            'Generated pathway should cover gaps at profile?',
+          'apply-settings': 'Apply Settings'
+        },
+        origin: 'Origin',
+        destination: 'Destination',
+        students: 'Students',
+        'student-id': 'Student-Id',
+        'joined-on': 'Joined On',
+        'action-lable-add-student': 'Add onother student'
+      }
     },
     'no-classrooms':
       'You have not yet created any classrooms. Click on “Create Classroom” or search </br> for a featured course under the Library tab.',

@@ -174,6 +174,24 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * Fetches the Taxonomy Subjects for the specific type
+   *
+   * @param filters - The classification type
+   * @example GET /api/nucleus/:version/taxonomy/subjects/:subjectId
+   * @returns {Promise}
+   */
+  fetchSubject: function(filters) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/subjects/${filters}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

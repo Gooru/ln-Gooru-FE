@@ -160,8 +160,8 @@ export default Ember.Component.extend(AccordionMixin, {
   }),
 
   /**
-     * To initate to toggle the skipped content
-     */
+   * To initate to toggle the skipped content
+   */
   didRender() {
     this.sendAction('onSelectItem');
   },
