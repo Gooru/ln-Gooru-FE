@@ -1456,6 +1456,21 @@ $canvas-height: 1254px;
             @extend .grid-header-caps-label;
             border-bottom: 1px solid $sep-border-color;
             text-overflow: ellipsis;
+
+            .name-head {
+              margin-left: -10px;
+            }
+            .origin-head {
+              margin: 14px;
+            }
+
+            .destination-head {
+              margin: 14px;
+            }
+
+            .id-head {
+              margin: 14px;
+            }
           }
 
           .btn-panel {
@@ -1547,6 +1562,11 @@ $canvas-height: 1254px;
 
           .student-id {
             @extend .origin;
+            display: flex;
+            align-items: center;
+            > span {
+              margin-left: 14px;
+            }
           }
 
           .joined-on {
