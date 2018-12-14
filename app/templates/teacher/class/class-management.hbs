@@ -350,7 +350,8 @@
                     <div class='grade-info'>
                       <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
-                          aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' class 'class-origin'}}>
+                          aria-haspopup="true" aria-expanded="true"
+                          {{action 'prepareListData' tempClass 'class-origin'}}>
                           {{#if tempClass.gradeLowerBound}}
                             {{get-value 'soruce' source=subjectTaxonomyGrades searchProp='id'
                       searchVal=tempClass.gradeLowerBound
