@@ -919,7 +919,8 @@ $canvas-height: 1254px;
       .sec-rows-layout {
         /*  max-height: 100vh; */
         overflow-x: auto;
-        padding-right: 14px; // to add scrollbar outside of the left panel area
+        padding-right: 1px; // to add scrollbar outside of the left panel area
+        margin-left: 30px;
 
         display: flex;
         flex-direction: column;
@@ -1070,6 +1071,7 @@ $canvas-height: 1254px;
 
             .sub-sec-coteach {
               margin-top: 25px;
+              padding-bottom: 8px;
 
               .sub-sec-head {
                 /* width: 68px; */
@@ -1218,6 +1220,7 @@ $canvas-height: 1254px;
               font-size: 12px;
               font-weight: bold;
               margin-bottom: 10px;
+              margin-bottom: 12px;
             }
 
             .sub-sec-sep {
@@ -1233,15 +1236,14 @@ $canvas-height: 1254px;
 
               // border-top: 1px solid;
               display: flex;
-              //margin-top: 13px;
               height: 36px;
               align-items: baseline;
 
               .field-dropdown-caps-label {
                 /* width: 55px; */
                 @extend .caps-field-label;
-
                 flex: 1;
+                padding: 12px 0;
               }
 
               .field-drop-down {
@@ -1255,6 +1257,7 @@ $canvas-height: 1254px;
 
             .class-level-setting-field {
               @extend .sub-sec-row;
+              padding: 12px 0;
             }
 
             .sec-course-action {
