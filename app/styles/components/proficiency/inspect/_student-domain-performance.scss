@@ -93,7 +93,7 @@
             font-size: 15px;
             line-height: 1.07;
             height: 33px;
-            margin-bottom: 16px;
+            margin-bottom: 9px;
           }
 
           .course-competency-metrics {
@@ -106,13 +106,11 @@
               text-transform: uppercase;
               height: 24px;
               line-height: 24px;
-              margin-bottom: 8px;
             }
 
             .metrics-title {
               font-size: 12px;
               font-weight: bold;
-              text-transform: uppercase;
               color: #35424b;
             }
 
@@ -142,16 +140,14 @@
         .domains-coverage-container {
           display: flex;
           overflow-x: hidden;
-          margin: 0 97px;
 
           .domain-coverage-count {
             min-width: 224px;
             padding: 16px 15px;
             background-color: $white;
             margin: 0 4px 8px;
-
+            cursor: pointer;
             .domain-name {
-              cursor: pointer;
               $font-size: 15px;
               $line-height: 1.07;
               $lines-to-show: 2;
@@ -222,9 +218,8 @@
             }
           }
 
-          &::-webkit-scrollbar {
-            background: transparent;
-            width: 0;
+          &.scrollable-margin {
+            margin-right: 8px;
           }
         }
       }
@@ -281,8 +276,8 @@
       }
 
       .domains-performance-container {
-        overflow-x: hidden;
-        margin: 0 97px;
+        overflow: hidden;
+        // margin: 0 97px;
 
         .domain-performance-container {
           display: flex;
@@ -329,11 +324,6 @@
             }
           }
         }
-
-        &::-webkit-scrollbar {
-          background: transparent;
-          width: 0;
-        }
       }
 
       .scroll-controller {
@@ -369,6 +359,16 @@
           right: 8px;
           margin-left: 4px;
         }
+      }
+      &::-webkit-scrollbar {
+        height: 6px;
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $gray-light;
+        border: 1px solid $gray-light;
+        border-radius: 5px;
       }
     }
     @media screen and (max-width: $screen-639) {
@@ -411,6 +411,7 @@
                 font-weight: bold;
                 line-height: 1.07;
                 color: #35424b;
+                text-align: center;
               }
 
               .coverage-count {

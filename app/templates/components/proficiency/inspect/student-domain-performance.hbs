@@ -14,7 +14,7 @@
         <div class="title">{{t 'teacher-landing.class.students-tab.class-statistics'}}</div>
         <div class="course-competency-metrics">
           <div class="students-metric">{{domainCoverageCount.length}} {{t 'common.domains'}} | {{numberOfStudents}} {{t 'common.students'}}</div>
-          <div class="metrics-title">{{t 'common.competencies'}}</div>
+          <div class="metrics-title">{{t 'teacher-landing.class.students-tab.course-coverage-label'}}</div>
           <div class="metrics">
             <div class="metric-count mastered">{{courseCoverageCount.mastered}} {{t 'teacher-landing.class.students-tab.mastered'}}</div>
             <div class="metric-count in-progress">{{courseCoverageCount.in-progress}} {{t 'teacher-landing.class.students-tab.in-progress'}}</div>
@@ -37,8 +37,8 @@
 
       <div class="domains-coverage-container scrollable-container">
         {{#each domainCoverageCount as |domain|}}
-          <div class="domain-coverage-count">
-            <div class="domain-name title" {{action "onSelectDomain" domain}}>
+          <div class="domain-coverage-count" {{action "onSelectDomain" domain}}>
+            <div class="domain-name title">
               {{domain.domainName}}
             </div>
             <div class="coverage-count">
