@@ -1,71 +1,5 @@
 .inspect-competency.student-domain-performance {
   .performance-container {
-  @media screen and (min-width: $screen-1035) and (max-width: $screen-1366) {
-    .performance-header-container {
-      .competency-coverage-container {
-        .domains-coverage-container {
-          width: 924px !important;
-        }
-      }
-    }
-
-  }
-    @media screen and (min-width: $screen-md + 1) and (max-width: $screen-in-1024) {
-      .performance-header-container {
-        .competency-coverage-container {
-          .domains-coverage-container {
-            width: 698px !important;
-            margin: auto !important;
-          }
-        }
-      }
-
-      .performance-body-container {
-        .domains-performance-container {
-          width: 698px !important;
-          margin: auto !important;
-        }
-      }
-    }
-    @media screen and (min-width: $screen-669) and (max-width: $screen-md) {
-      .performance-header-container {
-        .competency-coverage-container {
-          .domains-coverage-container {
-            width: 464px !important;
-            margin: auto !important;
-          }
-        }
-      }
-
-      .performance-body-container {
-        .domains-performance-container {
-          width: 464px !important;
-          margin: auto !important;
-        }
-      }
-    }
-    @media screen and (min-width: $screen-569) and (max-width: $screen-sm) {
-      .performance-header-container {
-        .competency-coverage-container {
-          .domains-coverage-container {
-            width: 232px !important;
-            margin: auto !important;
-          }
-        }
-      }
-
-      .performance-body-container {
-        .domains-performance-container {
-          width: 232px !important;
-          margin: auto !important;
-        }
-      }
-    }
-    @media screen and (max-width: $screen-568) {
-      .performance-body-container {
-            overflow-x: hidden;
-      }
-    }
     background-color: #35424b;
     min-height: calc(100vh - 40px);
 
@@ -98,6 +32,7 @@
             display: grid;
             justify-content: right;
             cursor: pointer;
+            margin-top: 3px;
           }
         }
       }
@@ -107,8 +42,6 @@
         grid-template-columns: 228px auto;
         position: relative;
         position: relative;
-
-
 
         .scroll-controller {
           position: absolute;
@@ -138,16 +71,15 @@
           }
 
           .left {
-            left: 228px;
+            left: 238px;
             margin: 0 4px;
           }
 
           .right {
-            right: 15px;
+            right: 16px;
             margin-left: 4px;
           }
         }
-
 
         .course-coverage-container {
           width: 224px;
@@ -216,8 +148,7 @@
             min-width: 224px;
             padding: 16px 15px;
             background-color: $white;
-            margin: 0 4px;
-            margin-bottom: 8px;
+            margin: 0 4px 8px;
 
             .domain-name {
               cursor: pointer;
@@ -228,11 +159,7 @@
               height: 50px;
               margin-bottom: 10px;
               color: #35424b;
-              @include ellipsis(
-                $font-size: $font-size,
-                $line-height: $line-height,
-                $lines-to-show: $lines-to-show
-              );
+              @include ellipsis($font-size: $font-size, $line-height: $line-height, $lines-to-show: $lines-to-show);
               max-height: 33.1px;
               margin-bottom: 16px;
             }
@@ -341,17 +268,14 @@
               $font-size: 12px;
             }
           }
+
           .student-name {
             color: #37424b;
             $font-size: 14px;
             $line-height: 1.3;
             text-transform: capitalize;
             $lines-to-show: 2;
-            @include ellipsis(
-              $font-size: $font-size,
-              $line-height: $line-height,
-              $lines-to-show: $lines-to-show
-            );
+            @include ellipsis($font-size: $font-size, $line-height: $line-height, $lines-to-show: $lines-to-show);
           }
         }
       }
@@ -359,7 +283,6 @@
       .domains-performance-container {
         overflow-x: hidden;
         margin: 0 97px;
-        width: 924px;
 
         .domain-performance-container {
           display: flex;
@@ -455,7 +378,9 @@
         .proficiency-info {
           .subject {
             font-size: 24px;
+            margin-top: 6px;
           }
+
           .students-count {
             margin-right: 0;
 
@@ -487,6 +412,7 @@
                 line-height: 1.07;
                 color: #35424b;
               }
+
               .coverage-count {
                 .count-container {
                   margin: auto;
@@ -559,6 +485,88 @@
             }
           }
         }
+      }
+    }
+    @media screen and (min-width: $screen-1035) {
+      .performance-header-container {
+        .competency-coverage-container {
+          .domains-coverage-container {
+            width: 924px;
+            justify-self: center;
+          }
+        }
+      }
+
+      .performance-body-container {
+        .domains-performance-container {
+          width: 924px;
+          justify-self: center;
+        }
+      }
+    }
+    @media screen and (min-width: $screen-569) and (max-width: $screen-in-1024) {
+      .performance-header-container {
+        .competency-coverage-container {
+          .domains-coverage-container {
+            margin: auto !important;
+          }
+        }
+      }
+
+      .performance-body-container {
+        .domains-performance-container {
+          margin: auto !important;
+        }
+      }
+    }
+    @media screen and (min-width: $screen-md + 1) and (max-width: $screen-in-1024) {
+      .performance-header-container {
+        .competency-coverage-container {
+          .domains-coverage-container {
+            width: 698px;
+          }
+        }
+      }
+
+      .performance-body-container {
+        .domains-performance-container {
+          width: 698px;
+        }
+      }
+    }
+    @media screen and (min-width: $screen-669) and (max-width: $screen-md) {
+      .performance-header-container {
+        .competency-coverage-container {
+          .domains-coverage-container {
+            width: 464px;
+          }
+        }
+      }
+
+      .performance-body-container {
+        .domains-performance-container {
+          width: 464px;
+        }
+      }
+    }
+    @media screen and (min-width: $screen-569) and (max-width: $screen-sm) {
+      .performance-header-container {
+        .competency-coverage-container {
+          .domains-coverage-container {
+            width: 232px;
+          }
+        }
+      }
+
+      .performance-body-container {
+        .domains-performance-container {
+          width: 232px;
+        }
+      }
+    }
+    @media screen and (max-width: $screen-568) {
+      .performance-body-container {
+        overflow-x: hidden;
       }
     }
     @media screen and (max-width: $screen-320) {
