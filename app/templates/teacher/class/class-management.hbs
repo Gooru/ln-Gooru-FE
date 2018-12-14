@@ -521,13 +521,16 @@
               <div class='student-header' style="border-bottom:unset;"> </div>
             </div>
             {{#if (and (and course subject) isPremiumClass) }}
-              <div class='student-header'> {{t 'teacher-landing.class.class-settings.students'}}</div>
-              <div class='student-header'> {{t 'teacher-landing.class.class-settings.origin'}}</div>
-              <div class='student-header'> {{t 'teacher-landing.class.class-settings.destination'}}</div>
+              <div class='student-header'> <span class='name-head'> {{t 'teacher-landing.class.class-settings.students'}}</span></div>
+              <div class='student-header'> <span class='origin-head'>{{t 'teacher-landing.class.class-settings.origin'}}
+                </span> </div>
+              <div class='student-header'> <span class='destination-head'> {{t 'teacher-landing.class.class-settings.destination'}}</span></div>
             {{else }}
-              <div class='student-header' style="grid-column-start:2; grid-column-end:6;"> {{t 'teacher-landing.class.class-settings.students'}}</div>
+              <div class='student-header' style="grid-column-start:2; grid-column-end:6;"> <span class='name-head'>
+                  {{t 'teacher-landing.class.class-settings.students'}}</span></div>
             {{/if}}
-            <div class='student-header'> {{t 'teacher-landing.class.class-settings.student-id'}}</div>
+            <div class='student-header'> <span class='id-head'> {{t 'teacher-landing.class.class-settings.student-id'}}
+              </span></div>
             {{!-- <div class='student-header'> {{t 'teacher-landing.class.class-settings.joined-on'}}</div> --}}
             {{#if (and (and course subject) isPremiumClass) }}
               <div class='student-header'></div> {{!-- Adjust LP --}}
@@ -605,7 +608,7 @@
                   <span class="ellipsis">{{student.lastName}} {{student.firstName}}</span>
                 </div>
               {{/if}}
-              <div class="student-id {{if student.isActive "" "inActiveRow"}}  "> {{student.studentId}} </div>
+              <div class="student-id {{if student.isActive "" "inActiveRow"}}  "> <span> {{student.studentId}} </span></div>
               {{!-- <div class='joined'> </div> --}}
               {{#if (and (and course subject) isPremiumClass) }}
                 <div class=" student-action-col {{if (and student.isActive (or student.gradeLowerBound student.gradeLowerBound)) "" "inActiveRow"}}  ">
