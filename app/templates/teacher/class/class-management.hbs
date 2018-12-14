@@ -350,7 +350,8 @@
                     <div class='grade-info'>
                       <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
-                          aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' class 'class-origin'}}>
+                          aria-haspopup="true" aria-expanded="true"
+                          {{action 'prepareListData' tempClass 'class-origin'}}>
                           {{#if tempClass.gradeLowerBound}}
                             {{get-value 'soruce' source=subjectTaxonomyGrades searchProp='id'
                       searchVal=tempClass.gradeLowerBound
@@ -570,7 +571,7 @@
                     </div>
                   </div>
                 </div>
-                <div class='destination' class="{{if student.isActive "" "inActiveRow"}}  ">
+                <div class='destination {{if student.isActive "" "inActiveRow"}}  '>
                   <div class='grade-info'>
                     <div class="dropdown">
                       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
@@ -607,7 +608,7 @@
               <div class="student-id {{if student.isActive "" "inActiveRow"}}  "> {{student.studentId}} </div>
               {{!-- <div class='joined'> </div> --}}
               {{#if (and (and course subject) isPremiumClass) }}
-                <div class=" student-action-col {{if student.isActive "" "inActiveRow"}}  ">
+                <div class=" student-action-col {{if (and student.isActive (or student.gradeLowerBound student.gradeLowerBound)) "" "inActiveRow"}}  ">
                   <div class='student-adj-lp' {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}"
                     data-toggle="tooltip"> {{gru-icon name='trending_up'}}</div>
                 </div>

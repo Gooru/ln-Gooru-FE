@@ -509,7 +509,7 @@ export default Ember.Controller.extend(ModalMixin, {
         sourceFilteredByContext = controller.filterRange(
           source,
           classLB ? 0 : null,
-          classLB ? classLB : classCurrent
+          classLB ? classLB : controller.get('tempClass.gradeCurrent')
         );
         /*  The grade_lower_bound should be less than or equal to current_grade
         The grade_lower_bound can be modified multiple times. However, it can't be made higher than previous value  */
