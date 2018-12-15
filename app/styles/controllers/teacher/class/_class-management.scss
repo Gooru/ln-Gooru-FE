@@ -836,6 +836,7 @@ $canvas-height: 1254px;
       .grade-label {
         padding-left: 16px;
       }
+
       .dropdown {
         position: relative;
         display: inline-block;
@@ -1252,6 +1253,9 @@ $canvas-height: 1254px;
                 height: 16px;
                 font-family: Lato;
                 font-size: 13px;
+                .subject-label {
+                  padding-left: 30px;
+                }
               }
             }
 
@@ -1529,6 +1533,7 @@ $canvas-height: 1254px;
               height: inherit;
               width: auto;
             }
+            // > div: div:nth-last-child(3)
           }
 
           .student-icon-col {
@@ -1588,6 +1593,8 @@ $canvas-height: 1254px;
             height: 30px;
             width: 30px;
             opacity: 0.3;
+          }
+          .student-delete :parent {
           }
           .student-act-de {
             display: none;

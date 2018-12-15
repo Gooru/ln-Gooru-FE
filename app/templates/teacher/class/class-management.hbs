@@ -285,29 +285,31 @@
               </div>
             </div>
             <div class='sub-sec-coteach'>
-              {{#each class.collaborators as |coteacher|}}
+              {{#if class.collaborators}}
                 <div class='sub-sec-head'>{{t 'teacher-landing.class.class-settings.class-settings-sec.co-teachers'}}</div>
-                <div class='sub-sec-row'>
-                  <div class='teacher-icon' style="background-image: url({{coteacher.avatarUrl}})"></div>
-                  <div class='co-teacher-label'> {{coteacher.lastName}} {{coteacher.firstName}}</div>
-                  <div class='delete-co-teacher' {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}"
-                    data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
-                </div>
-              {{/each}}
-              <div class='sub-sec-row' style='display:none;'>
-                <div class='add-co-teacher-icon' {{action 'addCoteacher' }}> {{gru-icon name='add'}} </div>
-                <div class='add-co-teacher-label'> {{t
+                {{#each class.collaborators as |coteacher|}}
+                  <div class='sub-sec-row'>
+                    <div class='teacher-icon' style="background-image: url({{coteacher.avatarUrl}})"></div>
+                    <div class='co-teacher-label'> {{coteacher.lastName}} {{coteacher.firstName}}</div>
+                    <div class='delete-co-teacher' {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}"
+                      data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
+                  </div>
+                {{/each}}
+                <div class='sub-sec-row' style='display:none;'>
+                  <div class='add-co-teacher-icon' {{action 'addCoteacher' }}> {{gru-icon name='add'}} </div>
+                  <div class='add-co-teacher-label'> {{t
                   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher'}}</div>
-              </div>
-              <div class='row-offline-class sub-sec-row'>
-                <div class='offline-icon'></div>
-                <div class='offline-label'> {{t
-                  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label'}}</div>
-                <div class='action-button-slide-yes'>
-                  {{gru-switch switchOptions=switchOptions onOptionSwitch='saveOffline'
-                  isChecked=class.isOffline}}
                 </div>
-              </div>
+                <div class='row-offline-class sub-sec-row'>
+                  <div class='offline-icon'></div>
+                  <div class='offline-label'> {{t
+                  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label'}}</div>
+                  <div class='action-button-slide-yes'>
+                    {{gru-switch switchOptions=switchOptions onOptionSwitch='saveOffline'
+                  isChecked=class.isOffline}}
+                  </div>
+                </div>
+              {{/if}}
             </div>
           </div>
         </div>
@@ -329,8 +331,10 @@
               <div class='sub-sec-row'>
                 <div class='field-dropdown-caps-label'> {{t
                 'teacher-landing.class.class-settings.class-settings-sec.subject'}}</div>
-                <div class='student-field field-drop-down'>
-                  {{gradeSubjectFWK.title }}
+                <div class='student-field field-drop-down '>
+                  <span class='subject-label'>
+                    {{gradeSubjectFWK.title }}
+                  </span>
                 </div>
               </div>
               <div class='sub-sec-row'>
