@@ -1314,7 +1314,10 @@ export default Object.assign(quizzesTranslations, {
           'course-settings-sec-head': 'Course Settings',
           'is-route0-applicable':
             'Generated pathway should cover gaps at profile?',
-          'apply-settings': 'Apply Settings'
+          'apply-settings': 'Apply Settings',
+          'origin-info':
+            'What is the lowest grade level content that your students should study?',
+          'current-grade-info': 'What is the grade level of your class?'
         },
         'gen-baseline': {
           'baseline-1':
