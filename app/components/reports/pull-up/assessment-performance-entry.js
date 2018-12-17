@@ -34,7 +34,7 @@ export default Ember.Component.extend({
       component.$(`.question-${questionSeq} .question-info-container`).addClass('selected-question');
     },
 
-    onEnterScore(questionSeq) {
+    onEditScore(questionSeq) {
       let component = this;
       component.updateScoredElement(questionSeq);
     },
@@ -52,19 +52,20 @@ export default Ember.Component.extend({
     let activeStudentSeq = component.get('activeStudentSeq');
     let activeStudentId = activeStudent.id;
     let studentsOfflineAssessmentData = component.get('studentsOfflineAssessmentData');
-    let isStudentDataEntered = studentsOfflineAssessmentData[`${activeStudentId}`] ? studentsOfflineAssessmentData[`${activeStudentId}`] : null;
+    activeStudentSeq = direction === 'next' ? activeStudentSeq + 1 : activeStudentSeq - 1;
+    activeStudent = students.objectAt(activeStudentSeq);
+    let isStudentDataEntered = studentsOfflineAssessmentData[activeStudentSeq] ? studentsOfflineAssessmentData[activeStudentSeq] : null;
     if (isStudentDataEntered) {
       component.loadEnteredStudentData(isStudentDataEntered);
     } else {
       let assessmentPerformanceDataParams = component.getDataParams();
-      studentsOfflineAssessmentData[`${activeStudentId}`] = assessmentPerformanceDataParams;
+      studentsOfflineAssessmentData[activeStudentSeq  - 1] = assessmentPerformanceDataParams;
       component.set('studentsOfflineAssessmentData', studentsOfflineAssessmentData);
       // component.updateStudentAssessmentPerformance(assessmentPerformanceDataParams);
 
       component.resetElements();
     }
-    activeStudentSeq = direction === 'next' ? activeStudentSeq + 1 : activeStudentSeq - 1;
-    activeStudent = students.objectAt(activeStudentSeq);
+    console.log('studentsOfflineAssessmentData', studentsOfflineAssessmentData);
     component.set('activeStudent', activeStudent);
     component.set('activeStudentSeq', activeStudentSeq);
   },
@@ -137,9 +138,13 @@ export default Ember.Component.extend({
     let component = this;
     let questionContainer = component.$(`.question-${questionSeq}`);
     let enteredScore = component.$(`.q-${questionSeq}-score`).val();
+    console.log('enteredScore', enteredScore);
     if (enteredScore && !isNaN(enteredScore)) {
       component.$(`.question-${questionSeq}`).removeClass('scored').addClass('scored');
       component.$(`.question-${questionSeq} .question-thumbnail`).css('background-color', getBarGradeColor(enteredScore));
+    } else {
+      component.$(`.question-${questionSeq}`).removeClass('scored');
+      component.$(`.question-${questionSeq} .question-thumbnail`).css('background-color', '#d8d8d8');
     }
   },
 

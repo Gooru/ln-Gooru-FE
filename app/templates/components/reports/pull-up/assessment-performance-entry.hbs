@@ -7,7 +7,7 @@
   </div>
   <div class="active-student">
     <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})"></div>
-    <div class="student-name ellipsis">{{activeStudent.fullName}}</div>
+    <div class="student-name ellipsis">{{activeStudent.fullName}} {{activeStudentSeq}}</div>
     <div></div>
   </div>
   <div class="questions-container">
@@ -19,7 +19,7 @@
           <div class="question-score" {{action "onSelectQuestion" question questionSeq}}>
             {{input type="text" class=(concat 'question-score-entry' ' q-' questionSeq '-score')
               focus-in=(action "onSelectQuestion" question questionSeq)
-              keyUp=(action "onEnterScore" questionSeq)
+              focus-out=(action "onEditScore" questionSeq)
             }}
           </div>
         </div>
