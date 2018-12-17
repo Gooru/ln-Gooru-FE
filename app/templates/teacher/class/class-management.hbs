@@ -642,7 +642,10 @@
                 <div class="student-id {{if student.isActive "" "inActiveRow"}}  "> <span> {{student.studentId}} </span></div>
                 {{!-- <div class='joined'> </div> --}}
                 {{#if (and (and course subject) isPremiumClass) }}
-                  <div class=" student-action-col {{if (and student.isActive (or student.gradeLowerBound student.gradeLowerBound)) "" "inActiveRow"}}  "
+                  <div class=" student-action-col 
+                  {{if (and student.isActive (or student.gradeLowerBound student.gradeLowerBound)) "" "inActiveRow"}} 
+                  {{if student.profileBaselineDone "baseline-active" "baseline-inactive" }} 
+                   "
                     style='border-right:unset;'>
                     <div class='student-adj-lp' {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}"
                       data-toggle="tooltip"> {{gru-icon name='replay'}}</div>

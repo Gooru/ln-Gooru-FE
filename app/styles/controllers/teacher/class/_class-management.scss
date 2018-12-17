@@ -902,7 +902,12 @@ $canvas-height: 1254px;
       cursor: none;
       opacity: 0.6;
     }
-
+    .baseline-active {
+      opacity: 1;
+    }
+    .baseline-inactive {
+      opacity: 0.5;
+    }
     div::disabled {
       pointer-events: none;
       cursor: none;
