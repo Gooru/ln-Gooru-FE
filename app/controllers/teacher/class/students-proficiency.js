@@ -178,7 +178,8 @@ export default Ember.Controller.extend({
             maxNumberOfCompetencies < competencies.length
               ? competencies.length
               : maxNumberOfCompetencies;
-          competencies.map(competency => {
+          let skyLineCompetency = 0;
+          competencies.forEach( function(competency, competencyIndex) {
             totalCompetencies++;
             let studentCompetencyPerformanceData = Ember.Object.create({
               competencyCode: competency.competencyCode,
@@ -186,7 +187,8 @@ export default Ember.Controller.extend({
               competencyDesc: competency.competencyDesc,
               competencySeq: competency.competencySeq,
               competencyStudentDesc: competency.competencyStudentDesc,
-              competencyStatus: 0
+              competencyStatus: 0,
+              isSkyLineCompetency: false
             });
             let competencyStatus =
               userDomainMatrixCompetencies[`${competency.competencyCode}`];
@@ -206,6 +208,7 @@ export default Ember.Controller.extend({
             } else {
               masteredCourseCompetencyCoverage++;
               masteredDomainCompetencyCoverage++;
+              skyLineCompetency = competencyIndex;
             }
           });
 
@@ -237,10 +240,12 @@ export default Ember.Controller.extend({
               notStartedDomainCompetencyCoverage +
               masteredDomainCompetencyCoverage
           });
+          studentDomainCompetenciesInfo.objectAt(skyLineCompetency).set('isSkyLineCompetency', true);
           studentCompetencies.set(
             'competencies',
             studentDomainCompetenciesInfo.sortBy('competencyStatus').reverse()
           );
+          studentCompetencies.set('actualCompetencies', studentDomainCompetenciesInfo);
           studentCompetencies.set(
             'in-progress',
             inProgressDomainCompetencyCoverage
