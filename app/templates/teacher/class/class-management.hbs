@@ -528,7 +528,7 @@
                   {{t 'student-landing.class.no-course'}}
                 {{/if}}
               </div>
-              <div class='top-btn' {{action 'generateClassPathway'}}>
+              <div class='top-btn {{if isClassBaselined "disabled" ""}} ' {{action 'generateClassPathway'}}>
                 {{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}
                 {{gru-icon name='replay'}}
               </div>
