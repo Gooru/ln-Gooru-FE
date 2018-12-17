@@ -1267,7 +1267,8 @@ export default Object.assign(quizzesTranslations, {
         'class-statistics': 'Class Statistics',
         'proficiency-in': 'Proficiency in',
         'data-not-available': 'Data Not Available',
-        'course-coverage-label': 'Cumulative count of competencies for all students in class',
+        'course-coverage-label':
+          'Cumulative count of competencies for all students in class',
         'error-message':
           'The class does not have a course assigned or does not have students rostered into the class yet. Once the course has been assigned to the class and the students are rostered, the class competency report will be shown here'
       },
@@ -1313,7 +1314,20 @@ export default Object.assign(quizzesTranslations, {
           'course-settings-sec-head': 'Course Settings',
           'is-route0-applicable':
             'Generated pathway should cover gaps at profile?',
-          'apply-settings': 'Apply Settings'
+          'apply-settings': 'Apply Settings',
+          'origin-info':
+            'What is the lowest grade level content that your students should study?',
+          'current-grade-info': 'What is the grade level of your class?'
+        },
+        'gen-baseline': {
+          'baseline-1':
+            '(1) You can generate the personalised learning path for each student based on their origin and destination.',
+          'baseline-2':
+            '(2) By default, all students have the grade level as their destination. You can adjust the destination to be a higher grade for students who are ahead in the class. Click Personalize learning path to set the base line for each student.  and to generate a personalized course map based on the student’s skyline and their destination. ',
+          'baseline-3':
+            '(3) The path generation for the entire class can be actioned only once. After that, any updates will have to be done individually for each student.',
+          'baseline-4':
+            '(4) You can also adjust the origin and destination grade for individual students. Click on the pathway icon (show icon) once you have confirmed the origin and destination to recompute the personalized path'
         },
         origin: 'Origin',
         destination: 'Destination',

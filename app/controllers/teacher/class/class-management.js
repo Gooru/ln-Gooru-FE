@@ -69,6 +69,16 @@ export default Ember.Controller.extend(ModalMixin, {
     );
   },
 
+  isClassBaselined: Ember.computed('class.members', function() {
+    let controller = this;
+    const classMembers = controller.get('class.members');
+    let baselineMembers = classMembers.filter(
+      mem => mem.profileBaselineDone === true
+    );
+    let isBaselined = baselineMembers && baselineMembers.length > 0;
+    return isBaselined;
+  }),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
