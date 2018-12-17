@@ -15,7 +15,7 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     let component = this;
-    component.loadQuestionsData();
+    component.loadAssessmentData();
     console.log('students', this.get('students'));
   },
 
@@ -148,7 +148,7 @@ export default Ember.Component.extend({
     }
   },
 
-  loadQuestionsData() {
+  loadAssessmentData() {
     let component = this;
     let assessment = component.get('assessment');
     component.fetchAssessmentData(assessment.id).then(function(assessmentData) {

@@ -1,0 +1,13 @@
+<div class="external-assessment-performance-container">
+  <div class="assessment-thumbnail" style="background-image: url({{assessment.thumbnailUrl}})"></div>
+  <div class="question-score header">Question Score</div>
+  <div class="active-student">
+    <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})"></div>
+    <div class="student-name ellipsis">{{activeStudent.fullName}} {{activeStudentSeq}}</div>
+    <div></div>
+  </div>
+  <div class="action-container">
+    <div class="prev action" {{action "onMoveStudent" 'prev'}}><div class="student-thumbnail"></div>Prev</div>
+    <div class="next action" {{action "onMoveStudent" 'next'}}>Next<div class="student-thumbnail"></div></div>
+  </div>
+</div>

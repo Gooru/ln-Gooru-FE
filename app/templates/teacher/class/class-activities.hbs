@@ -194,8 +194,8 @@
   {{/reports.pull-up.performance-manual-entry}}
 {{/if}}
 
-{{#if isShowCollectionPerformanceEntryPullUp}}
-  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowCollectionPerformanceEntryPullUp title=selectedItem.title}}
-    {{reports.pull-up.collection-performance-entry}}
+{{#if isShowExternalAssessmentPeformanceEntryPullUp}}
+  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowExternalAssessmentPeformanceEntryPullUp title=selectedItem.title type="assessment-external"}}
+    {{reports.pull-up.external-assessment-performance-entry assessment=selectedItem students=members activityData=selectedActivity classId=classId}}
   {{/reports.pull-up.performance-manual-entry}}
 {{/if}}

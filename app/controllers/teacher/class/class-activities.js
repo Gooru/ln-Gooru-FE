@@ -208,11 +208,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
     onOpenPerformanceEntry(item, classActivity) {
       let component = this;
+      console.log('item', item);
       if (item.format === 'assessment') {
         component.set('isShowAssessmentPerformanceEntryPullUp', true);
-        component.set('isShowCollectionPerformanceEntryPullUp', false);
-      } else {
-        component.set('isShowCollectionPerformanceEntryPullUp', true);
+        component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
+      } else if(item.format === 'assessment-external'){
+        component.set('isShowExternalAssessmentPeformanceEntryPullUp', true);
         component.set('isShowAssessmentPerformanceEntryPullUp', false);
       }
       component.set('selectedItem', item);
