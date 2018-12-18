@@ -8,7 +8,7 @@
   <div id="ca-datepicker"></div>
   {{#if showMonths}}
     <div id="ca-month-picker">
-      <span>Add to unscheduled list for</span>
+      <span>{{t 'common.add-to-unschedule'}}</span>
       <div class="ca-months">
         {{#each months as |month|}}
           <span {{action 'onSelectMonth' month }}>{{month.monthName}}</span>
