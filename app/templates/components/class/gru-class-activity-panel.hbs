@@ -81,7 +81,7 @@
     </div>
   </div>
   <div class="ca-panel-container-2">
-    <div class="student-count">
+    <div class="student-count {{if showCohort 'active'}}">
       {{#if (eq classActivity.usersCount -1)}}
         <span {{action 'showStudentList'}}>Everyone</span> {{else if (eq classActivity.usersCount 0)}}
         <span {{action 'showStudentList'}}>No Students Selected</span>
@@ -89,7 +89,11 @@
         <span {{action 'showStudentList'}}> {{classActivity.usersCount}}  Students Selected</span>
       {{/if}}
     </div>
-    <div class="re-schedule hidden">Re schedule</div>
+    <div class="re-schedule">
+      <div class="re-schedule-activity ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' item}}>
+          {{gru-icon name="update"}}
+      </div>
+    </div>
     <div class="time-spent">
       {{#if collectionPerformanceSummary}}
         <span>{{format-time collectionPerformanceSummary.timeSpent}}</span>

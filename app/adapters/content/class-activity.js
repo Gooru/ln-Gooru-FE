@@ -41,7 +41,7 @@ export default Ember.Object.extend({
         class_id: classId,
         content_id: contentId,
         content_type: contentType,
-        dca_added_date: formatDate(addedDate, 'YYYY-MM-DD'),
+        dca_added_date: addedDate ? formatDate(addedDate, 'YYYY-MM-DD') : null,
         for_month: parseInt(forMonth),
         for_year: parseInt(forYear)
       })

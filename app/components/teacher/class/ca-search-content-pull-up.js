@@ -94,6 +94,12 @@ export default Ember.Component.extend({
   course: Ember.computed.alias('context.course'),
 
   /**
+   * courseId Object extract from context
+   * @type {String}
+   */
+  courseId: Ember.computed.alias('context.courseId'),
+
+  /**
    * @property {TaxonomyTag[]} List of taxonomy tags
    */
   tags: Ember.computed('collection.standards.[]', function() {
@@ -137,11 +143,18 @@ export default Ember.Component.extend({
    */
   menuItems: Ember.A([
     Ember.Object.create({
+      key: 'catalog',
       label: 'common.gooru-catalog',
       selected: true
     }),
     Ember.Object.create({
+      key: 'myContent',
       label: 'common.myContent',
+      selected: false
+    }),
+    Ember.Object.create({
+      key: 'courseMap',
+      label: 'common.course-map',
       selected: false
     })
   ]),
@@ -195,6 +208,12 @@ export default Ember.Component.extend({
     return searchResults;
   }),
 
+  /**
+   * This flag gets update on selection of menu items
+   * @type {Boolean}
+   */
+  isCourseMap: false,
+
   // -------------------------------------------------------------------------
   // actions
 
@@ -221,7 +240,8 @@ export default Ember.Component.extend({
     onAddContentToDCA(content) {
       let component = this;
       let classId = component.get('classId');
-      let contentType = component.get('activeContentType');
+      let contentType =
+        content.get('format') || component.get('activeContentType');
       let contentId = content.get('id');
       component
         .get('classActivityService')
@@ -271,7 +291,129 @@ export default Ember.Component.extend({
         }
       });
       component.toggleProperty('isMenuEnabled');
-      component.loadData();
+      if (selectedItem.get('key') === 'courseMap') {
+        component.set('isCourseMap', true);
+      } else {
+        component.set('isCourseMap', false);
+        component.loadData();
+      }
+    },
+
+    /**
+     * It will takes care of content will schedule for the specific date.
+     * @param  {String} scheduleDate
+     */
+    onScheduleDate(scheduleDate) {
+      let component = this;
+      let classId = component.get('classId');
+      let contentType =
+        component.get('selectedContentForSchedule.format') ||
+        component.get('activeContentType');
+      let contentId = component.get('selectedContentForSchedule.id');
+      let content = component.get('selectedContentForSchedule');
+      let datepickerEle = component.$('.schedule-ca-datepicker-container');
+      datepickerEle.hide();
+      component
+        .get('classActivityService')
+        .addActivityToClass(classId, contentId, contentType, scheduleDate)
+        .then(newContentId => {
+          if (!component.isDestroyed) {
+            let data = component.serializerSearchContent(
+              content,
+              newContentId,
+              scheduleDate
+            );
+            component.sendAction('addedContentToDCA', data, scheduleDate);
+          }
+        });
+    },
+
+    /**
+     * It will takes care of content will schedule for the specific month.
+     * @param  {Number} forMonth
+     * @param  {Number} forYear
+     */
+    onScheduleForMonth(forMonth, forYear) {
+      let component = this;
+      let classId = component.get('classId');
+      let contentType =
+        component.get('selectedContentForSchedule.format') ||
+        component.get('activeContentType');
+      let contentId = component.get('selectedContentForSchedule.id');
+      let content = component.get('selectedContentForSchedule');
+      let datepickerEle = component.$('.schedule-ca-datepicker-container');
+      datepickerEle.hide();
+      component
+        .get('classActivityService')
+        .addActivityToClass(
+          classId,
+          contentId,
+          contentType,
+          null,
+          forMonth,
+          forYear
+        )
+        .then(newContentId => {
+          if (!component.isDestroyed) {
+            let data = component.serializerSearchContent(
+              content,
+              newContentId,
+              null,
+              forMonth,
+              forYear
+            );
+            component.sendAction(
+              'addedContentToDCA',
+              data,
+              null,
+              forMonth,
+              forYear
+            );
+          }
+        });
+    },
+
+    /**
+     * Action get triggered when schedule content to CA got clicked
+     */
+    onScheduleContentToDCA(content, event) {
+      let component = this;
+      let datepickerEle = component.$('.schedule-ca-datepicker-container');
+      let datepickerCtnEle = component.$(
+        '.schedule-ca-datepicker-container .ca-date-picker-container'
+      );
+      datepickerCtnEle.removeClass('ca-datepicker-orientation-top');
+      datepickerCtnEle.removeClass('ca-datepicker-orientation-bottom');
+      datepickerCtnEle.removeClass('ca-datepicker-orientation-center');
+      let selectedContentEle = component.$(event.target);
+      let position = selectedContentEle.position();
+      let top = position.top + 10 - datepickerEle.height();
+      let left = position.left + 20 - datepickerEle.width();
+      let componentHeight = component.$().height();
+      let windowHeight = $(window).height();
+      let allowedTop = windowHeight - componentHeight + top;
+      if (left < 0) {
+        left = position.left - datepickerEle.width() / 2;
+        datepickerCtnEle.addClass('ca-datepicker-orientation-center');
+      }
+      if (allowedTop < 0) {
+        datepickerCtnEle.addClass('ca-datepicker-orientation-bottom');
+        top = position.top + 35;
+      } else {
+        datepickerCtnEle.addClass('ca-datepicker-orientation-top');
+      }
+      datepickerEle.css({
+        top: top,
+        left: left
+      });
+      if (!selectedContentEle.hasClass('active')) {
+        selectedContentEle.addClass('active');
+        datepickerEle.show();
+      } else {
+        selectedContentEle.removeClass('active');
+        datepickerEle.hide();
+      }
+      this.set('selectedContentForSchedule', content);
     }
   },
 
@@ -287,10 +429,12 @@ export default Ember.Component.extend({
       'activeContentType',
       component.get('selectedSearchContentType')
     );
+    component.resetMenuItems();
     component.loadData();
     component.openPullUp();
     component.handleSearchBar();
     component.handleShowMoreData();
+    component.closeCADatePickerOnScroll();
   },
 
   //--------------------------------------------------------------------------
@@ -491,6 +635,27 @@ export default Ember.Component.extend({
         component.get('isMoreDataExists')
       ) {
         component.loadMoreData();
+      }
+    });
+  },
+
+  resetMenuItems() {
+    let menuItems = this.get('menuItems');
+    menuItems.forEach(item => {
+      item.set('selected', false);
+      if (item.get('key') === 'catalog') {
+        item.set('selected', true);
+      }
+    });
+    this.set('isCourseMap', false);
+  },
+
+  closeCADatePickerOnScroll() {
+    let component = this;
+    component.$('.search-list-container').on('scroll', function() {
+      if (Ember.$('.ca-datepicker-popover-container').is(':visible')) {
+        Ember.$('.ca-datepicker-popover-container').hide();
+        Ember.$('.ca-datepicker-popover').removeClass('active');
       }
     });
   }
