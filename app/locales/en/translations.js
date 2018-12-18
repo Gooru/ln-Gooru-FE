@@ -1248,8 +1248,11 @@ export default Object.assign(quizzesTranslations, {
         'student-id': 'Student ID',
         teachers: 'Teachers',
         'view-report': 'View Report',
+        'course-null': 'The classroom has no course assigned yet.',
+        'course-subject-null':
+          'The course assigned to classroom has not been tagged to a valid subject.',
         'students-null':
-          'Share the Class Code with students to have them join your Classroom.'
+          'Share the Class Code with your students to have them join the classroom.'
       },
       'students-tab': {
         'last-name': 'Lastname',

@@ -1270,6 +1270,14 @@ $canvas-height: 1254px;
 
         .course-sec-cont {
           margin-left: 31px;
+
+          .no-course-message {
+            color: whitesmoke;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.54;
+          }
+
           .course-settings-label {
             @extend .white-font-label;
 
@@ -1508,6 +1516,13 @@ $canvas-height: 1254px;
 
       .student-sec-cont {
         margin-left: 31px;
+
+        .no-students-message {
+          color: whitesmoke;
+          font-size: 14px;
+          font-weight: 300;
+          line-height: 1.54;
+        }
 
         .student-settings-label {
           @extend .white-font-label;
