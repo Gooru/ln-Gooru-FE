@@ -924,7 +924,7 @@ $canvas-height: 1254px;
 
       .sec-rows-layout {
         /*  max-height: 100vh; */
-        overflow-x: auto;
+        /*  overflow-x: auto; */
         padding-right: 1px; // to add scrollbar outside of the left panel area
         margin-left: 30px;
 
@@ -1620,12 +1620,7 @@ $canvas-height: 1254px;
             padding-top: 20px;
             display: grid;
 
-            grid-template-columns: 40px minmax(200px, auto) 160px 150px auto auto;
-
-            /* grid-template-columns: 40px minmax(15px, auto) 120px 120px 100px auto auto; */
-            /* grid-auto-rows: 40px minmax(15px, auto) 100px 100px 100px 100px 40px 40px 40px; */
-            /* grid-auto-rows: minmax(40px, auto); */
-            /* padding: 15px; */
+            grid-template-columns: 40px minmax(200px, auto) 150px 150px auto auto;
 
             margin-left: 13px;
             grid-column-gap: 0px;
@@ -1674,8 +1669,11 @@ $canvas-height: 1254px;
             @extend .origin;
             display: flex;
             align-items: center;
+            text-overflow: ellipsis;
             > span {
               margin-left: 14px;
+              overflow-wrap: break-word;
+              max-width: 135px;
             }
           }
 
