@@ -2,6 +2,36 @@
   .chart-area {
     width: 100%;
     margin: auto;
+}
+  @media screen and (max-width: $screen-568 - 1) {
+    .chart-area {
+      .matrix-chart {
+        .chart-container {
+          .domain-chart-container {
+            max-width: 100vw;
+
+            .scrollable-chart {
+              max-height: 100vh;
+            }
+          }
+        }
+      }
+    }
+
+    .chart-area {
+      .matrix-chart {
+        .chart-container {
+          .taxonomy-grades-container {
+            .taxonomy-grades {
+              .grade-list {
+                max-height: 100vh;
+                height: 100vh;
+              }
+            }
+          }
+        }
+      }
+    }
   }
   @media screen and (max-width: $screen-md - 1) {
     .chart-area {

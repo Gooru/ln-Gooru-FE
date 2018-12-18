@@ -1,7 +1,9 @@
 .learner-proficiency-domain-matrix {
   margin: 0 auto;
   background-color: $white;
-
+  .show-tooltip + .tooltip {
+    visibility: visible;
+  }
   %scroll-style {
     &::-webkit-scrollbar {
       height: 6px;
