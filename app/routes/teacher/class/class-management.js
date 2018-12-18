@@ -41,7 +41,6 @@ export default Ember.Route.extend({
       //this.sendAction('action');
     },
     refreshRoute: function() {
-      Ember.Logger.log('refreshRoute');
       this.refresh();
     }
   },
