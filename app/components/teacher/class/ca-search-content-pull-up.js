@@ -141,23 +141,22 @@ export default Ember.Component.extend({
    * Maintains the list of  menu items
    * @type {Array}
    */
-  menuItems: Ember.A([
-    Ember.Object.create({
-      key: 'catalog',
-      label: 'common.gooru-catalog',
-      selected: true
-    }),
-    Ember.Object.create({
-      key: 'myContent',
-      label: 'common.myContent',
-      selected: false
-    }),
-    Ember.Object.create({
-      key: 'courseMap',
-      label: 'common.course-map',
-      selected: false
-    })
-  ]),
+  menuItems: Ember.computed('courseId', function() {
+    let courseId = this.get('courseId');
+    let menuItems = Ember.A([]);
+    menuItems.pushObject(
+      this.createMenuItem('catalog', 'common.gooru-catalog', true)
+    );
+    menuItems.pushObject(
+      this.createMenuItem('myContent', 'common.myContent', false)
+    );
+    if (courseId) {
+      menuItems.pushObject(
+        this.createMenuItem('courseMap', 'common.course-map', false)
+      );
+    }
+    return menuItems;
+  }),
 
   /**
    * It will compute the selected menu item on changes of menu item selection or data change.
@@ -657,6 +656,14 @@ export default Ember.Component.extend({
         Ember.$('.ca-datepicker-popover-container').hide();
         Ember.$('.ca-datepicker-popover').removeClass('active');
       }
+    });
+  },
+
+  createMenuItem(key, label, selected) {
+    return Ember.Object.create({
+      key: key,
+      label: label,
+      selected: selected
     });
   }
 });
