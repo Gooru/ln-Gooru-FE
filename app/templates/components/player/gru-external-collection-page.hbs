@@ -1,0 +1,79 @@
+<div class="external-collection-landing-page">
+  <div class="external-collection-card">
+    <div class="header">
+      <div class="title">
+        {{assessment.title}}
+      </div>
+      <div class="taxonomy">
+        {{#if tags.length}}
+          {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+        {{/if}}
+      </div>
+    </div>
+    <i class="resource icon"></i>
+    <span>23</span>
+    <i class="add_question icon"></i>
+    <span>33</span>
+    <div class="body">
+      <div class="description">
+        {{assessment.learningObjectives}}
+      </div>
+      {{#if isTimeEntered}}
+        {{#if score}}
+          <div class="time-entered">
+            <div class="time">
+              {{score}}
+            </div>
+            <div class="time-label">
+                ENTER YOUR TIME SPENT HERE
+            </div>
+          </div>
+        {{else}}
+          {{three-bounce-spinner}}
+          <div class="not-updated">{{t 'self-report.update-error'}}</div>
+        {{/if}}
+      {{else}}
+        <div class="time-editor {{if isDisableScoreEditor 'disabled'}}">
+          {{#if (eq defaultScoreType 'fraction')}}
+            <div class="fraction-editor">
+              <span>
+                <input class="time-value" type="text" id="fraction-hours" value=""/>h
+              </span>
+              <span>
+                <input class="time-value" type="text" id="fraction-mins" value=""/>m
+              </span>
+            </div>
+            {{/if}}
+            {{#if (and isTyping (not isValidtime))}}
+              <div class="error">Enter the correct Hours</div>
+            {{/if}}
+            {{#if (and isTyping (not isValidmins))}}
+              <div class="error">Enter the correct Minutes</div>
+            {{/if}}
+          <div class="time-label">
+            ENTER YOUR TIME SPENT HERE
+          </div>
+        </div>
+      {{/if}}
+    </div>
+    <div class="footer">
+      <div class="actions">
+        {{#if (not isTimeEntered)}}
+          <div class="btn cancel {{if isTimeEntered 'score-entered'}}" {{action "onCancel"}}>
+            {{t 'common.cancel'}}
+          </div>
+          {{#if isDisableScoreEditor}}
+            <div class="btn start" {{action "onStart" 'fraction'}}>
+              <!-- {{t 'gru-assessment-confirmation.start'}} -->
+              {{t 'gru-assessment-confirmation.start'}}
+            </div>
+          {{else}}
+          <div class="btn submit {{unless isValidtime 'disabled'}}" {{action "onSubmit"}}>
+            {{t 'gru-assessment-confirmation.submit'}}
+          </div>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
