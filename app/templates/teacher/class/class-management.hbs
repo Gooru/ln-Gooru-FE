@@ -332,14 +332,12 @@
         </div>
       </div> {{!-- two col layout ends --}}
       <div class='sec-rows-layout'>
-
-          {{!-- Course Settings container  starts --}}
-          <div class='course-sec-cont'>
-            <div class='course-settings-label'>
-              {{t 'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head'}}
-            </div>
-
-            {{#if (and course subject) }}
+        {{!-- Course Settings container  starts --}}
+        <div class='course-sec-cont'>
+          <div class='course-settings-label'>
+            {{t 'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head'}}
+          </div>
+          {{#if (and course subject) }}
             {{!-- Course setting section starts --}}
             <div class='course-settings-sec'>
               <div class="btn-panel">
@@ -536,9 +534,8 @@
                 {{t 'teacher-landing.class.class-management-tab.course-null'}}
               {{/if}}
             </div>
-          {{/if }} 
+          {{/if }}
         </div> {{!-- Course Settings container ends --}}
-
         {{!-- Generate pathway section starts here --}}
         <div class='gen-pathway-sec'>
           {{#if isPremiumClass}}
@@ -563,18 +560,15 @@
               <div> {{t 'teacher-landing.class.class-settings.gen-baseline.baseline-4'}} </div>
             </div>
           {{/if}}
-        </div>  {{!-- Generate pathway section ends --}}
-
+        </div> {{!-- Generate pathway section ends --}}
         {{!-- Student Settings starts here --}}
         <div class='student-sec-cont'>
           <div class='student-settings-label'> {{t
           'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head'}}</div>
-
           {{#if (gt sortedMembers.length 0)}}
             <div class="student-settings-sec">
               {{!-- Student Table / Grid starts here --}}
               <div class='student-grid'>
-
                 {{!-- Student table header starts here --}}
                 <div class='student-icon-col'>
                   <div class='student-header' style="border-bottom:unset;"> </div>
@@ -585,19 +579,18 @@
                     </span> </div> --}}
                   <div class='student-header'> <span class='destination-head'> {{t 'teacher-landing.class.class-settings.destination'}}</span></div>
                 {{else }}
-                  <div class='student-header' style="grid-column-start:2; grid-column-end:3;"> <span class='name-head'>
+                  <div class='student-header' style="grid-column-start:2; grid-column-end:5;"> <span class='name-head'>
                       {{t 'teacher-landing.class.class-settings.students'}}</span></div>
                 {{/if}}
-                <div class='student-header'> <span class='id-head'> {{t 'teacher-landing.class.class-settings.student-id'}}
+                <div class='student-header' style="margin-left:-10px"> <span class='id-head'> {{t 'teacher-landing.class.class-settings.student-id'}}
                   </span></div>
                 {{!-- <div class='student-header'> {{t 'teacher-landing.class.class-settings.joined-on'}}</div> --}}
                 {{#if (and (and course subject) isPremiumClass) }}
                   <div class='student-header' style='border-right:unset;'></div> {{!-- Adjust LP --}}
                 {{/if}}
                 <div class='student-header' style='display:none;'></div> {{!-- Enable/Disable --}}
-                <div class='student-header'></div> {{!-- Delete --}}  
+                <div class='student-header'></div> {{!-- Delete --}}
                 {{!-- Student table header -- ends --}}
-                
                 {{!-- Each row of student goes here --}}
                 {{#each sortedMembers as |student|}}
                   <div class='student-icon-col'>
@@ -607,7 +600,6 @@
                     <div class="student-name {{if student.isActive "" "inActiveRow"}}  ">
                       <span class="ellipsis">{{student.lastName}} {{student.firstName}}</span>
                     </div>
-
                     {{!--
                     <div class="origin disabled {{if student.isActive "" "inActiveRow"}}  ">
                       <div class='grade-info'>
@@ -671,16 +663,17 @@
                       </div>
                     </div>
                   {{else }}
-                    <div class="student-name {{if student.isActive "" "inActiveRow"}}  " style="grid-column-start:2; grid-column-end:3;">
+                    <div class="student-name {{if student.isActive "" "inActiveRow"}}  " style="grid-column-start:2; grid-column-end:5;">
                       <span class="ellipsis">{{student.lastName}} {{student.firstName}}</span>
                     </div>
                   {{/if}}
-                  <div class="student-id {{if student.isActive "" "inActiveRow"}}  "> <span> {{student.studentId}} </span></div>
+                  <div class="student-id {{if student.isActive "" "inActiveRow"}}  "> <span> {{student.studentId}}
+                    </span></div>
                   {{!-- <div class='joined'> </div> --}}
                   {{#if (and (and course subject) isPremiumClass) }}
                     <div class=" student-action-col 
-                    {{if student.isActive "" "inActiveRow"}} 
-                    {{if (or (not student.profileBaselineDone) student.regeneratePathway) "baseline-active" "baseline-inactive" }} 
+                    {{if (and student.isActive  student.gradeUpperBound) "" "inActiveRow"}} 
+                    {{if (and student.gradeUpperBound (or (not student.profileBaselineDone) student.regeneratePathway)) "baseline-active" "inActiveRow baseline-inactive" }} 
                     "
                       style='border-right:unset;'>
                       <div class='student-adj-lp' {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}"
@@ -697,22 +690,19 @@
                       data-toggle="tooltip">
                       {{gru-icon name='delete'}}</div>
                   </div>
-                {{/each}}  {{!-- Each row of student -- ends --}}
-              </div>  {{!-- Student Table / Grid ends --}}
-
+                {{/each}} {{!-- Each row of student -- ends --}}
+              </div> {{!-- Student Table / Grid ends --}}
               {{!-- Add Student Section -- Hidden for now as there is flow not defined --}}
               <div class='sub-sec-row'>
                 <div class='add-student-icon'> {{gru-icon name='add'}}</div>
                 <div class='add-student-label'> {{t 'teacher-landing.class.class-settings.action-lable-add-student'}}</div>
-              </div>  {{!-- Add Student Section -- ends --}}
-
+              </div> {{!-- Add Student Section -- ends --}}
             </div>
           {{else}}
             <div class='no-students-message'>
               {{t 'teacher-landing.class.class-management-tab.students-null'}}
             </div>
           {{/if}}
-
         </div> {{!-- Student Settings section ends --}}
       </div>
     </div> {{!-- two col layout ends --}}
