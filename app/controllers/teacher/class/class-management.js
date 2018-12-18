@@ -283,6 +283,7 @@ export default Ember.Controller.extend(ModalMixin, {
         },
         callback: {
           success: function() {
+            controller.get('classMembers').removeObject(student);
             controller.get('sortedMembers').removeObject(student);
           }
         }
@@ -571,6 +572,11 @@ export default Ember.Controller.extend(ModalMixin, {
    * @property {Course}
    */
   course: Ember.computed.alias('classController.course'),
+
+  /**
+   * @property {classMembers}
+   */
+  classMembers: Ember.computed.alias('classController.members.members'),
 
   /**
    * @type {Boolean}

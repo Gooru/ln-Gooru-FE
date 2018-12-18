@@ -535,13 +535,10 @@ export default Ember.Component.extend({
       .attr('height', height);
     let cellContainer = svg.append('g').attr('id', 'cell-container');
     let skylineContainer = svg.append('g').attr('id', 'skyline-container');
-    let baseLineContainer = svg
-      .append('g')
-      .attr('id', 'baseline-container')
-      .attr('class', 'hidden-line');
     let domainBoundaryLineContainer = svg
       .append('g')
       .attr('id', 'domain-boundary-line-container');
+    let baseLineContainer = svg.append('g').attr('id', 'baseline-container').attr('class', 'hidden-line');
     component.set('skylineContainer', skylineContainer);
     component.set('baseLineContainer', baseLineContainer);
     component.set('domainBoundaryLineContainer', domainBoundaryLineContainer);
