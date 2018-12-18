@@ -194,7 +194,9 @@ export default Ember.Service.extend({
         .then(
           function(response) {
             resolve(
-              service.get('taxonomySerializer').normalizeDomainGradeBoundary(response)
+              service
+                .get('taxonomySerializer')
+                .normalizeDomainGradeBoundary(response)
             );
           },
           function(error) {
@@ -217,6 +219,30 @@ export default Ember.Service.extend({
           function(response) {
             resolve(
               service.get('taxonomySerializer').normalizeGrades(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+  /**
+   * Fetches the Taxonomy Subjects
+   *
+   * @param category - The classification type
+   * @returns {Promise}
+   */
+  fetchSubject: function(category) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('taxonomyAdapter')
+        .fetchSubject(category)
+        .then(
+          function(response) {
+            resolve(
+              service.get('taxonomySerializer').normalizeFetchSubject(response)
             );
           },
           function(error) {

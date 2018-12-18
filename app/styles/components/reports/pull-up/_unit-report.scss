@@ -56,7 +56,12 @@
           display: flex;
           align-items: center;
           max-width: 100%;
+          padding-left: 15px;
 
+          .unit-title-value {
+            width: 320px;
+            float: left;
+          }
           p {
             max-width: calc(100% - 45px);
             margin: 0;

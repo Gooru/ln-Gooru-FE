@@ -1,5 +1,9 @@
 .student.class {
   width: 100vw;
+
+  .no-course-content {
+    color: #ffffff;
+  }
   @media only screen and (max-width: $screen-sm - 1) {
     .header {
       .panel.classroom-information {

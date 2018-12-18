@@ -319,5 +319,110 @@ export default Ember.Object.extend({
       })
     };
     return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * profileBaseLine class
+   * @param classId Identifier of the class to be baseLine
+   * @param users Array of profileids which needs to be baselined, a empty array is for whole class
+   * @returns {Promise}
+   */
+  profileBaseLine: function(classId, users) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/${classId}/profilebaseline`;
+    const options = {
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({
+        users: users ? [users] : []
+      })
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Updates class settings
+   * @param classId Identifier of the class to update
+   * @param settings {"grade_lower_bound" : 1, "grade_upper_bound" : 3, "grade_current" : 2, "route0: true}
+   * @returns {Promise}
+   */
+  classSettings: function(classId, settings) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/${classId}/settings/reroute`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(settings)
+    };
+    return Ember.$.ajax(url, options);
+  },
+  /**
+   * Updates grade settings, Grade Settings for Student
+   * @param classId Identifier of the class to update
+   * @param settings {"grade_lower_bound" : 1, "grade_upper_bound" : 3, "grade_current" : 2, "route0: true}
+   * @example
+   * <pre>PUT /api/nucleus/{version}/classes/{class-id}/members/settings/reroute
+   { "grade_lower_bound" : 1, "grade_upper_bound" : 3, "users" : ["68492039-3713-42de-90ad-94d5945cd482", "a71fc3aa-38b4-41bd-b7ef-6be7b509d3d7"] }
+   * @returns {Promise}
+   */
+  classMembersSettings: function(classId, settings) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/${classId}/members/settings/reroute`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(settings)
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Updates grade settings, Grade Settings for Student
+   * @param classId Identifier of the class to update
+   * @param users {"grade_lower_bound" : 1, "grade_upper_bound" : 3, "grade_current" : 2, "route0: true}
+   * @example
+   *  PUT /api/nucleus/{version}/classes/{class-id}/members/deactivate
+   { "users" : ["68492039-3713-42de-90ad-94d5945cd482", "a71fc3aa-38b4-41bd-b7ef-6be7b509d3d7"] }
+   * @returns {Promise}
+   */
+  classMembersDeactivate: function(classId, users) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/${classId}/members/deactivate`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(users)
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Updates grade settings, Grade Settings for Student
+   * @param classId Identifier of the class to update
+   * @param users
+   * @example
+   *  PUT /api/nucleus/{version}/classes/{class-id}/members/activate
+   { "users" : ["68492039-3713-42de-90ad-94d5945cd482", "a71fc3aa-38b4-41bd-b7ef-6be7b509d3d7"] }
+   * @returns {Promise}
+   */
+  classMembersActivate: function(classId, users) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/${classId}/members/activate`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(users)
+    };
+    return Ember.$.ajax(url, options);
   }
 });

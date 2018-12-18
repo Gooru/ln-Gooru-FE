@@ -1,5 +1,10 @@
 .controller.teacher.course-map {
   max-width: 95%;
+  @media screen and (max-width: $screen-sm - 1) {
+    .actions {
+      display: none;
+    }
+  }
 
   .course-map-container {
     .course-map-body {
@@ -227,8 +232,6 @@
                               }
 
                               .controls {
-                                width: 70px;
-
                                 .go-live-cnt {
                                   margin: 0;
                                 }
@@ -289,7 +292,7 @@
 
                                 .panel-heading {
                                   .panel-title {
-                                    width: calc(100% - 216px) !important;
+                                    width: calc(100% - 250px) !important;
                                     padding: 0;
                                     margin-left: 0;
                                     display: flex;

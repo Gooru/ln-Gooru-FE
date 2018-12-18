@@ -347,11 +347,11 @@ export const SEARCH_FILTER_BY_CONTENT_TYPES = [
 //Competency status
 export const COMPETENCY_STATUS = [
   'Not Started',
-  'In progress',
-  'Inferred',
-  'Inferred',
-  'Mastered',
-  'Mastered'
+  'In Progress',
+  'Mastered (Inferred)',
+  'Mastered (Asserted)',
+  'Mastered (Earned)',
+  'Mastered (Demonstrated)'
 ];
 
 //gruF-Feature-flag

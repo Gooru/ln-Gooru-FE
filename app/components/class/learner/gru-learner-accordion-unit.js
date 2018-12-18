@@ -159,6 +159,12 @@ export default Ember.Component.extend(AccordionMixin, {
     this.$().off('show.bs.collapse');
   }),
 
+  /**
+   * To initate to toggle the skipped content
+   */
+  didRender() {
+    this.sendAction('onSelectItem');
+  },
   // -------------------------------------------------------------------------
   // Properties
 

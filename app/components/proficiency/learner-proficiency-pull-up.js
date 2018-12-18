@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { TAXONOMY_CATEGORIES } from 'gooru-web/config/config';
-import {getSubjectIdFromSubjectBucket} from 'gooru-web/utils/utils';
+import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   classNames: ['learner-proficiency-pull-up'],
@@ -28,6 +28,11 @@ export default Ember.Component.extend({
     if (component.get('activeCategory')) {
       component.fetchSubjectsByCategory(activeCategory);
     }
+    Ember.$('body').css('overflow', 'hidden');
+  },
+
+  willDestroyElement() {
+    Ember.$('body').css('overflow', 'auto');
   },
 
   // -------------------------------------------------------------------------
@@ -57,7 +62,10 @@ export default Ember.Component.extend({
      */
     onShownBaseLine(createdDate) {
       let component = this;
-      component.set('timeSeriesStartDate', createdDate ? new Date(createdDate) : component.get('courseStartDate'));
+      component.set(
+        'timeSeriesStartDate',
+        createdDate ? new Date(createdDate) : component.get('courseStartDate')
+      );
       component.set('isShowTimeSeries', true);
     },
 
@@ -164,8 +172,12 @@ export default Ember.Component.extend({
       let curMonth = courseCreatedDate.getMonth();
       let curYear = courseCreatedDate.getFullYear();
       let oneYearBeforeFromCurrentDate = courseCreatedDate;
-      courseCreatedDate = new Date(oneYearBeforeFromCurrentDate.setMonth(curMonth - 11));
-      courseCreatedDate = new Date(oneYearBeforeFromCurrentDate.setFullYear(curYear - 1));
+      courseCreatedDate = new Date(
+        oneYearBeforeFromCurrentDate.setMonth(curMonth - 11)
+      );
+      courseCreatedDate = new Date(
+        oneYearBeforeFromCurrentDate.setFullYear(curYear - 1)
+      );
     }
     return courseCreatedDate;
   }),
@@ -180,8 +192,13 @@ export default Ember.Component.extend({
     if (course.get('id')) {
       let taxonomySubjects = component.get('taxonomySubjects');
       let subjectBucket = component.get('subjectBucket');
-      let subjectCode = subjectBucket ? getSubjectIdFromSubjectBucket(subjectBucket) : null;
-      let isSupportedTaxonomySubject = taxonomySubjects.findBy('code', subjectCode);
+      let subjectCode = subjectBucket
+        ? getSubjectIdFromSubjectBucket(subjectBucket)
+        : null;
+      let isSupportedTaxonomySubject = taxonomySubjects.findBy(
+        'code',
+        subjectCode
+      );
       let aggregatedTaxonomy = course.get('aggregatedTaxonomy');
       isShowMatrixChart = !!(aggregatedTaxonomy && isSupportedTaxonomySubject);
     }

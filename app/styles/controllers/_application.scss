@@ -104,7 +104,7 @@
     content: "";
     width: 100%;
     height: 3px;
-    position: absolute;
+    position: fixed;
     -webkit-animation: network-progress-indicator 2s infinite;
     /* Safari 4.0 - 8.0 */
     animation: network-progress-indicator 2s infinite;
