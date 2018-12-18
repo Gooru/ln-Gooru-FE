@@ -1619,10 +1619,14 @@ $canvas-height: 1254px;
           .student-grid {
             padding-top: 20px;
             display: grid;
-            grid-template-columns: 40px minmax(15px, auto) 120px 120px 100px auto auto;
-            /*  grid-auto-rows: 40px minmax(15px, auto) 100px 100px 100px 100px 40px 40px 40px; */
-            /*grid-auto-rows: minmax(40px, auto); */
+
+            grid-template-columns: 40px minmax(200px, auto) 160px 150px auto auto;
+
+            /* grid-template-columns: 40px minmax(15px, auto) 120px 120px 100px auto auto; */
+            /* grid-auto-rows: 40px minmax(15px, auto) 100px 100px 100px 100px 40px 40px 40px; */
+            /* grid-auto-rows: minmax(40px, auto); */
             /* padding: 15px; */
+
             margin-left: 13px;
             grid-column-gap: 0px;
             > div {

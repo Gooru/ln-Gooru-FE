@@ -1324,7 +1324,7 @@ export default Object.assign(quizzesTranslations, {
         },
         'gen-baseline': {
           'baseline-1':
-            '(1) You can generate the personalised learning path for each student based on their origin and destination.',
+            '(1) You can generate the personalised learning path for each student based on class origin and destination.',
           'baseline-2':
             '(2) By default, all students have the grade level as their destination. You can adjust the destination to be a higher grade for students who are ahead in the class. Click Generate Pathway to generate a personalized course map based on the student’s skyline and their destination. ',
           'baseline-3':
