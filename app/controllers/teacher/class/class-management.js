@@ -60,13 +60,7 @@ export default Ember.Controller.extend(ModalMixin, {
         ☐  Student grade setting Button present before delete to apply the grade setting
     */
   classDisplayRules: function() {
-    let course = this.get('course.id'),
-      subject = this.get('subject'),
-      premium = this.get('isPremiumClass');
-
-    Ember.Logger.log(
-      `course: ${course}, subject : ${subject} , premium : ${premium}`
-    );
+    /* Set class display rules here */
   },
 
   isClassBaselined: Ember.computed('class.members', function() {
