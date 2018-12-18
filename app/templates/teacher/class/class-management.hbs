@@ -387,31 +387,39 @@
                   </div>
                   <div class='field-drop-down'>
                     <div class='grade-info'>
-                      <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
-                          aria-haspopup="true" aria-expanded="true"
-                          {{action 'prepareListData' tempClass 'class-origin'}}>
-                          {{#if tempClass.gradeLowerBound}}
-                            {{get-value 'soruce' source=subjectTaxonomyGrades searchProp='id'
-                      searchVal=tempClass.gradeLowerBound
-                      destProp='grade' }}
-                          {{else}}
-                            {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                          {{/if}}
-                          <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                          {{#if getCurrentGradeDDContent}}
-                            {{#each currentFilterList as |grade|}}
-                              {{#if grade}}
-                                <li> <a data-item={{grade}}
-                                    {{ action 'updateClassSettings'  grade.id 'grade_lower_bound'}}>{{grade.grade}}
-                                  </a> </li>
-                              {{/if}}
-                            {{/each}}
-                          {{/if}}
-                        </ul>
-                      </div>
+                      {{#if class.gradeLowerBound}}
+                        <div class='grade-label'>
+                          {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
+                                searchVal=class.gradeLowerBound
+                                destProp='grade' }}
+                        </div>
+                      {{else}}
+                        <div class="dropdown">
+                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="true"
+                            {{action 'prepareListData' tempClass 'class-origin'}}>
+                            {{#if tempClass.gradeLowerBound}}
+                              {{get-value 'soruce' source=subjectTaxonomyGrades searchProp='id'
+                        searchVal=tempClass.gradeLowerBound
+                        destProp='grade' }}
+                            {{else}}
+                              {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
+                            {{/if}}
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu">
+                            {{#if getCurrentGradeDDContent}}
+                              {{#each currentFilterList as |grade|}}
+                                {{#if grade}}
+                                  <li> <a data-item={{grade}}
+                                      {{ action 'updateClassSettings'  grade.id 'grade_lower_bound'}}>{{grade.grade}}
+                                    </a> </li>
+                                {{/if}}
+                              {{/each}}
+                            {{/if}}
+                          </ul>
+                        </div>
+                      {{/if}}
                     </div>
                   </div>
                 </div>
@@ -601,6 +609,7 @@
                     </div>
                     <div class="origin disabled {{if student.isActive "" "inActiveRow"}}  ">
                       <div class='grade-info'>
+
                         <div class="dropdown">
                           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="true"
@@ -612,7 +621,7 @@
                             {{else}}
                               {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
                             {{/if}}
-                            <span class="caret"></span>
+                            {{!-- <span class="caret"></span>  --}}
                           </button>
                           <ul class="dropdown-menu">
                             {{#if getCurrentGradeDDContent}}
@@ -626,6 +635,7 @@
                             {{/if}}
                           </ul>
                         </div>
+                        
                       </div>
                     </div>
                     <div class='destination {{if student.isActive "" "inActiveRow"}}  '>
