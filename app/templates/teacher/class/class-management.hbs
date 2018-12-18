@@ -680,7 +680,7 @@
                   {{#if (and (and course subject) isPremiumClass) }}
                     <div class=" student-action-col 
                     {{if student.isActive "" "inActiveRow"}} 
-                    {{if student.profileBaselineDone "baseline-inactive" "baseline-active" }} 
+                    {{if (or (not student.profileBaselineDone) student.regeneratePathway) "baseline-active" "baseline-inactive" }} 
                     "
                       style='border-right:unset;'>
                       <div class='student-adj-lp' {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}"
