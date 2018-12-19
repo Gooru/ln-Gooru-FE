@@ -47,6 +47,7 @@ export default Ember.Component.extend({
   didRender() {
     var component = this;
     component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip().removeClass('show-tooltip').addClass('show-tooltip');
   },
 
   // -------------------------------------------------------------------------
