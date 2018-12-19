@@ -22,19 +22,7 @@
       .report-info {
         width: 96%;
         display: flex;
-        @media screen and (max-width: $screen-568) {
-          .competency-status {
-            line-height: 17px;
-          }
-          .title-section {
-            width: 60%;
-            &.content {
-              .type {
-                font-size: 16px;
-              }
-            }
-          }
-        }
+
         .title-section {
           width: 73%;
           font-size: 16px;
@@ -111,6 +99,15 @@
     .competency-report {
       .body {
         width: 100vw;
+        .collection-accordion {
+          .collection-content {
+            .collection-header {
+              .collection-info .title {
+                width: 73%;
+              }
+            }
+          }
+        }
       }
     }
   }
