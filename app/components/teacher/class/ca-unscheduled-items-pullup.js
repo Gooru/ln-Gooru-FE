@@ -43,25 +43,34 @@ export default Ember.Component.extend({
      */
     onScheduleDate(scheduleDate) {
       let component = this;
-      let classId = component.get('classId');
-      let contentType = component.get('selectedContentForSchedule.format');
-      let contentId = component.get('selectedContentForSchedule.id');
-      let content = component.get('selectedContentForSchedule');
-      let datepickerEle = component.$('.schedule-ca-datepicker-container');
-      datepickerEle.hide();
-      component
-        .get('classActivityService')
-        .addActivityToClass(classId, contentId, contentType, scheduleDate)
-        .then(newContentId => {
-          if (!component.isDestroyed) {
-            let data = component.serializerSearchContent(
-              content,
-              newContentId,
-              scheduleDate
-            );
-            component.sendAction('addedContentToDCA', data, scheduleDate);
-          }
-        });
+      let classActivity = component.get('selectedClassActivityForSchedule');
+      let scheduleMonth = parseInt(moment(scheduleDate).format('MM'));
+      let scheduleYear = parseInt(moment(scheduleDate).format('YYYY'));
+      let forMonth = classActivity.get('forMonth');
+      let forYear = classActivity.get('forYear');
+      if (forMonth === scheduleMonth && forYear === scheduleYear) {
+        this.sendAction('onChangeVisibility', classActivity, scheduleDate);
+      } else {
+        let classId = component.get('classId');
+        let content = classActivity.get('collection');
+        let contentType = content.get('format');
+        let contentId = content.get('id');
+        let datepickerEle = component.$('.schedule-ca-datepicker-container');
+        datepickerEle.hide();
+        component
+          .get('classActivityService')
+          .addActivityToClass(classId, contentId, contentType, scheduleDate)
+          .then(newContentId => {
+            if (!component.isDestroyed) {
+              let data = component.serializerSearchContent(
+                content,
+                newContentId,
+                scheduleDate
+              );
+              component.sendAction('addedContentToDCA', data, scheduleDate);
+            }
+          });
+      }
     },
 
     /**
@@ -72,9 +81,10 @@ export default Ember.Component.extend({
     onScheduleForMonth(forMonth, forYear) {
       let component = this;
       let classId = component.get('classId');
-      let contentType = component.get('selectedContentForSchedule.format');
-      let contentId = component.get('selectedContentForSchedule.id');
-      let content = component.get('selectedContentForSchedule');
+      let classActivity = component.get('selectedClassActivityForSchedule');
+      let content = classActivity.get('collection');
+      let contentType = content.get('format');
+      let contentId = content.get('id');
       let datepickerEle = component.$('.schedule-ca-datepicker-container');
       datepickerEle.hide();
       component
@@ -110,7 +120,7 @@ export default Ember.Component.extend({
     /**
      * Action get triggered when schedule content to CA got clicked
      */
-    onScheduleContentToDCA(content, event) {
+    onScheduleContentToDCA(classActivity, event) {
       let component = this;
       let datepickerEle = component.$('.schedule-ca-datepicker-container');
       let datepickerCtnEle = component.$(
@@ -147,7 +157,14 @@ export default Ember.Component.extend({
         selectedContentEle.removeClass('active');
         datepickerEle.hide();
       }
-      this.set('selectedContentForSchedule', content);
+      this.set('selectedClassActivityForSchedule', classActivity);
+    },
+
+    /**
+     * @function removeClassActivity
+     */
+    removeClassActivity: function(classActivity) {
+      this.sendAction('onRemoveClassActivity', classActivity);
     }
   },
 
@@ -189,14 +206,12 @@ export default Ember.Component.extend({
    */
   openPullUp() {
     let component = this;
+    component.$().addClass('active');
     component.$().animate(
       {
         top: '10%'
       },
-      400,
-      function() {
-        component.$().addClass('active');
-      }
+      400
     );
   },
 
@@ -210,7 +225,6 @@ export default Ember.Component.extend({
       function() {
         component.$().css('top', 'calc(100% - 35px)');
         component.$().removeClass('active');
-        component.set('showPullUp', false);
       }
     );
   },

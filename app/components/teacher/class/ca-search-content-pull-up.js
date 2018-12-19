@@ -607,15 +607,21 @@ export default Ember.Component.extend({
     return params;
   },
 
-  serializerSearchContent(content, contentId, date) {
-    content.set('collectionType', this.get('activeContentType'));
+  serializerSearchContent(content, contentId, date, forMonth, forYear) {
+    let format = content.get('format');
+    if (!format) {
+      content.set('format', this.get('activeContentType'));
+    }
+
     return Ember.Object.create({
       id: contentId,
       added_date: date,
       activityDate: date,
       collection: content,
       usersCount: -1,
-      isActive: false
+      isActive: false,
+      forMonth: parseInt(forMonth),
+      forYear: parseInt(forYear)
     });
   },
 
