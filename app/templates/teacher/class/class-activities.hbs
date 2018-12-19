@@ -59,7 +59,13 @@
   </div>
 </div>
 {{#if unScheduledClassActivities}}
-  {{teacher.class.ca-unscheduled-items-pullup showPullUp=true classId=classId unScheduledClassActivities=unScheduledClassActivities}}
+  {{teacher.class.ca-unscheduled-items-pullup
+    showPullUp=true
+    classId=classId
+    unScheduledClassActivities=unScheduledClassActivities
+    onChangeVisibility='changeVisibility'
+    onRemoveClassActivity='removeClassActivity'
+  }}
 {{/if}}
 {{#if showSearchContentPullup}}
   {{teacher.class.ca-search-content-pull-up

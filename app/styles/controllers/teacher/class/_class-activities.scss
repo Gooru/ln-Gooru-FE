@@ -1,5 +1,6 @@
 .teacher_class_class-activities {
   .app-container {
+    overflow-y: hidden;
     .teacher.class {
       padding: 0;
     }
@@ -145,7 +146,7 @@
     }
 
     .dca-list-container {
-      height: calc(100vh - 155px);
+      max-height: calc(100vh - 155px);
       overflow-y: auto;
       padding-right: 20px;
       padding-left: 20px;
@@ -183,7 +184,7 @@
   .ca-datepicker-schedule-container {
     background: #fff;
     position: absolute;
-    z-index: 10;
+    z-index: 1031;
     width: inherit;
     box-shadow: 0 13px 16px 0 rgba(0, 0, 0, 0.13);
     top: 50px;
