@@ -74,6 +74,11 @@ export default {
     ]
   },
 
+  userAlert: {
+    message:
+      'Server maintenance planned on 20 Dec 2019 from 10:00AM to 1:00PM IST. Please plan your work accordingly.'
+  },
+
   demoClass: {
     code: 'FZRC834',
     id: '002b0b27-1b51-4343-a51f-76fae80534f8'

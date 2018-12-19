@@ -70,6 +70,11 @@ export default {
     url: 'http://research.gooru.org/'
   },
 
+  userAlert: {
+    message:
+      'Server maintenance planned on 20 Dec 2019 from 10:00AM to 1:00PM IST. Please plan your work accordingly.'
+  },
+
   demoClass: {
     code: 'DGNTIKN',
     id: '71bfbc07-1b87-4e8e-a98a-1839e834cd20'
