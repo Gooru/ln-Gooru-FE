@@ -9,16 +9,63 @@
       background-repeat: no-repeat;
       object-fit: contain;
     }
+
+    .max-score-entry-container {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      .text-title {
+        font-size: 10px;
+        font-weight: bold;
+        text-align: center;
+        color: #3e5e67;
+        margin: 20px 0;
+      }
+
+      .score-entry {
+        width: 200px;
+        justify-self: center;
+        input {
+          font-size: 100px;
+          font-weight: bold;
+          color: #3e5e67;
+          width: 100%;
+          outline: none;
+          text-align: center;
+        }
+      }
+
+      .action {
+        width: 100px;
+        height: 40px;
+        border-radius: 4px;
+        background-color: #1aa9eb;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+        color: $white;
+        text-transform: uppercase;
+        line-height: 40px;
+        cursor: pointer;
+        margin: 20px 0;
+        justify-self: center;
+      }
+    }
+
     .question-score.header {
       font-size: 12px;
       font-weight: bold;
       height: 40px;
-      color: #3e90fa;
       text-transform: uppercase;
       text-align: left;
-      border-bottom: 3px solid #3e90fa;
-      line-height: 40px;
       padding-left: 16px;
+      border-bottom: 1px solid #3e90fa;
+      span {
+        border-bottom: 2px solid #3e90fa;
+        line-height: 40px;
+        color: #3e90fa;
+        padding-bottom: 10px;
+      }
     }
     .active-question {
       display: grid;
@@ -35,12 +82,13 @@
     }
     .active-student {
       display: grid;
-      grid-template-columns: 40px auto 48px;
+      grid-template-columns: 40px auto;
       align-items: center;
       height: 40px;
       align-items: center;
-      justify-content: center;
+      justify-content: left;
       box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+      padding: 0 16px;
       .student-thumbnail {
         width: 32px;
         height: 32px;
@@ -48,6 +96,9 @@
         display: block;
         border: none;
         border-radius: 50%;
+        i {
+          display: none;
+        }
       }
 
       .student-name {
@@ -55,8 +106,18 @@
         font-size: 10px;
         font-weight: bold;
         color: #3e5e67;
-        border-right: 2px dashed rgba(45,45,45, 0.3);
       }
+    }
+
+    .assessment-max-score {
+      height: 14px;
+      line-height: 14px;
+      border-bottom: 1px solid #3e90fa;
+      font-size: 10px;
+      font-weight: bold;
+      color: #3e5e67;
+      text-transform: uppercase;
+      text-align: center;
     }
 
     .students-container {
@@ -64,7 +125,8 @@
       overflow-y: auto;
       .student-info-container {
         display: grid;
-        grid-template-columns: 40px 120px 120px 40px;
+        grid-template-columns: 32px 120px 120px 32px;
+        column-gap: 8px;
         align-items: center;
         height: 40px;
         align-items: center;
@@ -122,6 +184,27 @@
       .next {
         .student-thumbnail {
           margin-left: 8px;
+          margin-top: 4px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 320px) {
+      .max-score-entry-container {
+        .score-entry {
+          input {
+            font-size: 50px;
+          }
+        }
+      }
+    }
+
+    @media screen and (max-height: 481px) {
+      .max-score-entry-container {
+        .score-entry {
+          input {
+            font-size: 50px;
+          }
         }
       }
     }

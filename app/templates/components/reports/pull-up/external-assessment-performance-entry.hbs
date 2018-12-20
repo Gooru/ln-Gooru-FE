@@ -1,7 +1,7 @@
 <div class="external-assessment-performance-container">
   <div class="assessment-thumbnail" style="background-image: url({{assessment.thumbnailUrl}})"></div>
   {{#if isShowMaxScoreEntry}}
-    <div class="max-score-entry">
+    <div class="max-score-entry-container">
       <div class="text-title">
         ENTER THE MAXIMUM SCORE FOR THE ASSESSMENT
       </div>
@@ -15,10 +15,13 @@
       </div>
     </div>
   {{else}}
-    <div class="question-score header">Question Score</div>
+    <div class="question-score header"><span>Assessment Score</span></div>
+    <div class="assessment-max-score">
+      Assessment Max. Score: {{assessmentMaxScore}}
+    </div>
     <div class="active-student">
       <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})"></div>
-      <div class="student-name ellipsis">{{activeStudent.fullName}} {{activeStudentSeq}}</div>
+      <div class="student-name ellipsis">{{activeStudent.fullName}}</div>
       <div></div>
     </div>
     <div class="students-container">
