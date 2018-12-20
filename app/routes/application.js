@@ -153,6 +153,10 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
   },
 
   setupController: function(controller, model) {
+    if (EndPointsConfig.getUserAlertMessage() !== null) {
+      controller.set('userAlert', EndPointsConfig.getUserAlertMessage());
+    }
+
     if (model.myClasses) {
       controller.set('myClasses', model.myClasses);
     }
@@ -437,6 +441,11 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
         var termParam = `?term=${term}`;
         this.transitionTo(`/search/courses${termParam}`);
       }
+    },
+
+    onCloseAlert: function() {
+      const route = this;
+      route.get('controller').set('userAlert', null);
     },
 
     /**
