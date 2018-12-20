@@ -54,12 +54,21 @@ export default Ember.Component.extend({
       this.toggleDatePicker();
     },
 
-    onSelectMonth: function(month) {
+    onSelectMonth(month) {
       this.sendAction(
         'onSelectMonth',
         month.get('monthNumber'),
         month.get('monthYear')
       );
+    },
+
+    onSelectToday() {
+      let component = this;
+      let allowDateSelectorToggle = component.get('allowDateSelectorToggle');
+      if (allowDateSelectorToggle) {
+        component.toggleDatePicker();
+      }
+      component.sendAction('onSelectToday', moment().format('YYYY-MM-DD'));
     }
   },
 
@@ -161,11 +170,28 @@ export default Ember.Component.extend({
    */
   allowDateSelectorToggle: false,
 
+  /**
+   * It will decide whether today button need to show or not.
+   * @type {Boolean}
+   */
+  showToday: false,
+
+  /**
+   * If show today is true then this attribute will check today is exist for the current month selection.
+   * @return {String}
+   */
+  isTodayExistInCurrentMonth: Ember.computed('forFirstDateOfMonth', function() {
+    let component = this;
+    let forFirstDateOfMonth = component.get('forFirstDateOfMonth');
+    return moment().format('MM') === moment(forFirstDateOfMonth).format('MM');
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
   initializeDatePicker: function() {
     let component = this;
+    let allowDateSelectorToggle = component.get('allowDateSelectorToggle');
     let datepickerEle = component.$('#ca-datepicker');
     let defaultParams = {
       maxViewMode: 0,
@@ -185,6 +211,9 @@ export default Ember.Component.extend({
       let selectedDate = Ember.$(datepicker)
         .datepicker('getFormattedDate')
         .valueOf();
+      if (allowDateSelectorToggle) {
+        component.toggleDatePicker();
+      }
       component.sendAction('onSelectDate', selectedDate);
     });
   },

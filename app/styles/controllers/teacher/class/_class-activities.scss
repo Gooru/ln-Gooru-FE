@@ -1,6 +1,7 @@
 .teacher_class_class-activities {
   .app-container {
     overflow-y: hidden;
+
     .teacher.class {
       padding: 0;
     }
@@ -63,14 +64,6 @@
 
         .ca-date-nav-container {
           height: 50px;
-
-          .cal-mm-yyyy {
-            pointer-events: none;
-
-            i {
-              display: none;
-            }
-          }
         }
       }
 
@@ -152,6 +145,13 @@
       padding-left: 20px;
       padding-bottom: 55px;
 
+      .dca-content-list-container {
+        &.dca-content-list-container-today {
+          box-shadow: 0 0 11px 3px #4b9741;
+          border-radius: 4px;
+        }
+      }
+
       .dca-date-view-container {
         display: inline-grid;
         grid-template-columns: 200px 1fr;
@@ -163,6 +163,16 @@
           display: inline-flex;
           width: 100%;
           align-items: center;
+
+          &.dca-date-container-today {
+            span {
+              font-family: "Lato";
+              font-size: 15px;
+              font-weight: bold;
+              color: #000000;
+              text-transform: uppercase;
+            }
+          }
 
           .calendar_today {
             padding-left: 20px;

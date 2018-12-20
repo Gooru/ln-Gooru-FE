@@ -65,6 +65,21 @@
     width: inherit;
     padding-bottom: 10px;
 
+    .ca-datepicker-today {
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: bold;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      background-color: #4b9740;
+      color: #fff;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
     &.ca-date-picker-toggle {
       display: none;
     }
@@ -78,6 +93,18 @@
 
           thead tr:first-child {
             display: none;
+          }
+
+          tr td.day:hover {
+            background: none;
+            font-weight: bold;
+            color: #000;
+          }
+
+          tr td.active {
+            background: none;
+            color: #666;
+            text-shadow: none;
           }
         }
       }

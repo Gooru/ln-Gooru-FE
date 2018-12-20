@@ -55,42 +55,20 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       component.set('studentDcaReport', false);
     },
 
+    showCalendar() {
+      this.toggleDatePicker();
+    },
+
     showPreviousMonth() {
-      let forFirstDateOfMonth = this.get('forFirstDateOfMonth');
-      let forMonth = moment(forFirstDateOfMonth)
-        .subtract(1, 'months')
-        .format('MM');
-      let forYear = moment(forFirstDateOfMonth)
-        .subtract(1, 'months')
-        .format('YYYY');
-      this.set('forMonth', forMonth);
-      this.set('forYear', forYear);
-      let datepickerEle = Ember.$(
-        '.controller.student.class.class-activities #ca-datepicker .datepicker-days .prev'
-      );
-      datepickerEle.trigger('click');
       this.loadData();
     },
 
     showNextMonth() {
-      let forFirstDateOfMonth = this.get('forFirstDateOfMonth');
-      let forMonth = moment(forFirstDateOfMonth)
-        .add(1, 'months')
-        .format('MM');
-      let forYear = moment(forFirstDateOfMonth)
-        .add(1, 'months')
-        .format('YYYY');
-      this.set('forMonth', forMonth);
-      this.set('forYear', forYear);
-      let datepickerEle = Ember.$(
-        '.controller.student.class.class-activities #ca-datepicker .datepicker-days .next'
-      );
-      datepickerEle.trigger('click');
       this.loadData();
     },
 
-    showCalendar() {
-      this.toggleDatePicker();
+    onSelectDate(date) {
+      this.handleScrollToSpecificDate(date);
     }
   },
 
@@ -169,6 +147,14 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     return moment(date).format('YYYY-MM-DD');
   }),
 
+  /**
+   * Maintains the value  of today date
+   * @type {String}
+   */
+  today: Ember.computed(function() {
+    return moment().format('YYYY-MM-DD');
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -178,7 +164,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     Ember.run.scheduleOnce('afterRender', controller, function() {
       controller.set('forMonth', moment().format('MM'));
       controller.set('forYear', moment().format('YYYY'));
-      controller.initializeDatePicker();
+      let date = moment().format('YYYY-MM-DD');
+      controller.handleScrollToSpecificDate(date);
     });
   },
 
@@ -218,53 +205,19 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     });
   },
 
-  initializeDatePicker: function() {
-    let datepickerEle = Ember.$(
-      '.controller.student.class.class-activities #ca-datepicker'
+  handleScrollToSpecificDate(date) {
+    let dateEle = Ember.$(
+      `.student_class_class-activities .dca-date-view-container-${date}`
     );
-    datepickerEle.datepicker({
-      maxViewMode: 0,
-      format: 'yyyy-mm-dd'
-    });
-    datepickerEle.off('changeDate').on('changeDate', function() {
-      let datepicker = this;
-      let selectedDate = Ember.$(datepicker)
-        .datepicker('getFormattedDate')
-        .valueOf();
-      let listContainerEle = Ember.$(
-        '.controller.student.class.class-activities .dca-list-container'
+    if (dateEle.length > 0) {
+      let scrollToContainer = Ember.$('.dca-list-container');
+      let top = dateEle.position().top - 50 + scrollToContainer.scrollTop();
+      scrollToContainer.animate(
+        {
+          scrollTop: top
+        },
+        1000
       );
-      let selectedDateEle = Ember.$(
-        `.controller.student.class.class-activities .dca-list-container .ca-date-${selectedDate}`
-      );
-      if (selectedDateEle.length > 0) {
-        listContainerEle.animate(
-          {
-            scrollTop: selectedDateEle.offset().top
-          },
-          'slow'
-        );
-      }
-    });
-  },
-
-  toggleDatePicker() {
-    let element = Ember.$(
-      '.controller.student.class.class-activities .ca-content-container .ca-datepicker-container'
-    );
-    let dateDisplayEle = Ember.$(
-      '.controller.student.class.class-activities .ca-content-container .ca-date-container .cal-mm-yyyy'
-    );
-    if (!element.hasClass('active')) {
-      element.slideDown(400, function() {
-        element.addClass('active');
-        dateDisplayEle.addClass('active');
-      });
-    } else {
-      element.slideUp(400, function() {
-        element.removeClass('active');
-        dateDisplayEle.removeClass('active');
-      });
     }
   }
 });
