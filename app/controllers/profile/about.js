@@ -56,9 +56,6 @@ export default Ember.Controller.extend({
    */
   isMyProfile: Ember.computed.reads('parentController.isMyProfile'),
   actions: {
-    changePasswordIMPL: function() {
-      Ember.Logger.log('changePasswordIMPL');
-    },
     showChangePass: function(show) {
       if (show) {
         this.set('showChangePassFlag', true);
