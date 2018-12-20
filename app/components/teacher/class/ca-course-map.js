@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['backdrop-pull-ups', 'teacher-class-dca-course-map-pull-up'],
+  classNames: ['teacher-class-ca-course-map'],
 
   // -------------------------------------------------------------------------
   // Dependencies
@@ -33,46 +33,28 @@ export default Ember.Component.extend({
   // Properties
 
   /**
-   * Propery to hide the default pullup.
-   * @property {showPullUp}
-   */
-  showPullUp: false,
-
-  /**
    * Maintains the state of data loading
    * @type {Boolean}
    */
   isLoading: false,
 
   /**
-   * Maintains the context data
-   * @type {Object}
-   */
-  context: null,
-
-  /**
    * Class Id extract from context
    * @type {String}
    */
-  classId: Ember.computed.alias('context.classId'),
+  classId: null,
 
   /**
    * Course Id which is mapped to this class.
    * @type {String}
    */
-  courseId: Ember.computed.alias('context.courseId'),
+  courseId: null,
 
   /**
    * This property have details of course object
    * @type {Object}
    */
   course: null,
-
-  /**
-   * Maximum number of days to schedule dca content ahead.
-   * @type {Number}
-   */
-  maxNumberOfDays: 30,
 
   /**
    * Selected collection for scheduling
@@ -84,13 +66,6 @@ export default Ember.Component.extend({
   // Actions
 
   actions: {
-    /**
-     * Action triggered when the user close the pull up.
-     **/
-    onPullUpClose() {
-      this.closePullUp();
-    },
-
     /**
      * Handle toggle functionality of hide/show unit items
      * @return {Object}
@@ -155,37 +130,7 @@ export default Ember.Component.extend({
      * Action get triggered when add content to DCA got clicked
      */
     onAddContentToDCA(content) {
-      let component = this;
-      let classId = component.get('classId');
-      let contentType = content.get('format');
-      let contentId = content.get('id');
-      component
-        .get('classActivityService')
-        .addActivityToClass(classId, contentId, contentType)
-        .then(newContentId => {
-          let date = moment().format('YYYY-MM-DD');
-          let data = component.serializerSearchContent(
-            content,
-            newContentId,
-            date
-          );
-          content.set('isAdded', true);
-          component.sendAction('addedContentToDCA', data, date);
-        });
-    },
-
-    /**
-     * Action get triggered when schedule content to DCA got clicked
-     */
-    onScheduleContentToDCA(content, event) {
-      let element = this.$(event.target).find('.schedule-dca-datepicker');
-      if (!element.hasClass('active')) {
-        this.$('.schedule-dca-datepicker').removeClass('active');
-        element.addClass('active').datepicker('show');
-      } else {
-        element.removeClass('active').datepicker('hide');
-      }
-      this.set('selectedContentForSchedule', content);
+      this.sendAction('onAddContentToDCA', content);
     },
 
     /**
@@ -209,6 +154,13 @@ export default Ember.Component.extend({
         url = collection.get('url');
       }
       window.open(url);
+    },
+
+    /**
+     * Action get triggered when schedule content to CA got clicked
+     */
+    onScheduleContentToDCA(content, event) {
+      this.sendAction('onScheduleContentToDCA', content, event);
     }
   },
 
@@ -220,7 +172,7 @@ export default Ember.Component.extend({
    */
   didInsertElement() {
     this.loadData();
-    this.openPullUp();
+    this.closeCADatePickerOnScroll();
   },
 
   didRender() {
@@ -228,37 +180,10 @@ export default Ember.Component.extend({
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
     });
-    component.setupDatepicker();
   },
 
   //--------------------------------------------------------------------------
   // Methods
-
-  /**
-   * Function to animate the  pullup from bottom to top
-   */
-  openPullUp() {
-    let component = this;
-    component.$().animate(
-      {
-        top: '10%'
-      },
-      400
-    );
-  },
-
-  closePullUp() {
-    let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-      }
-    );
-  },
 
   loadData() {
     let component = this;
@@ -275,60 +200,26 @@ export default Ember.Component.extend({
       });
   },
 
-  setupDatepicker() {
-    let component = this;
-    let startDate = moment().toDate();
-    let maxNumberOfDays = component.get('maxNumberOfDays');
-    let endDate = moment()
-      .add(maxNumberOfDays, 'd')
-      .toDate();
-    component.$('.schedule-dca-datepicker').datepicker({
-      startDate: startDate,
-      endDate: endDate,
-      format: 'yyyy-mm-dd',
-      maxViewMode: 0,
-      orientation: 'bottom right',
-      container: '.teacher-class-dca-course-map-pull-up'
-    });
-    component
-      .$('.schedule-dca-datepicker')
-      .off('changeDate')
-      .on('changeDate', function() {
-        let datepicker = this;
-        let scheduleDate = component
-          .$(datepicker)
-          .datepicker('getFormattedDate')
-          .valueOf();
-        let classId = component.get('classId');
-        let contentType = component.get('selectedContentForSchedule.format');
-        let contentId = component.get('selectedContentForSchedule.id');
-        let content = component.get('selectedContentForSchedule');
-        component
-          .$(datepicker)
-          .removeClass('active')
-          .datepicker('hide');
-        component
-          .get('classActivityService')
-          .addActivityToClass(classId, contentId, contentType, scheduleDate)
-          .then(newContentId => {
-            if (!component.isDestroyed) {
-              let data = component.serializerSearchContent(
-                content,
-                newContentId,
-                scheduleDate
-              );
-              component.sendAction('addedContentToDCA', data, scheduleDate);
-            }
-          });
-      });
-  },
-
-  serializerSearchContent(content, contentId, date) {
+  serializerSearchContent(content, contentId, date, forMonth, forYear) {
     return Ember.Object.create({
       id: contentId,
       added_date: date,
       collection: content,
+      activityDate: date,
+      forMonth,
+      forYear,
+      usersCount: -1,
       isActive: false
+    });
+  },
+
+  closeCADatePickerOnScroll() {
+    let component = this;
+    component.$('.dca-course-map-unit-container').on('scroll', function() {
+      if (Ember.$('.ca-datepicker-popover-container').is(':visible')) {
+        Ember.$('.ca-datepicker-popover-container').hide();
+        Ember.$('.ca-datepicker-popover').removeClass('active');
+      }
     });
   }
 });

@@ -1,34 +1,42 @@
 <div class="assessment-performance-container">
   <div class="assessment-thumbnail" style="background-image: url({{assessment.thumbnailUrl}})"></div>
-  <div class="question-score header">Question Score</div>
-  <div class="active-question">
-    <div class="question-seq">Question {{activeQuestionSeq}}</div>
-    <div class="question-max-score"> Max Score: 5</div>
-  </div>
-  <div class="active-student">
-    <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})"></div>
-    <div class="student-name ellipsis">{{activeStudent.fullName}} {{activeStudentSeq}}</div>
-    <div></div>
-  </div>
-  <div class="questions-container">
-    {{#each questions as |question questionSeq|}}
-      <div class="question-container question-{{questionSeq}}">
-        <div class="question-info-container {{if (eq question.id activeQuestion.id) 'selected-question'}}">
-          <div class="question-thumbnail">{{gru-icon name="done_all"}}</div>
-          <div class="question-title ellipsis" {{action "onToggleQuestion" question questionSeq}}>{{plus-one questionSeq}}{{concat '. ' question.title}}</div>
-          <div class="question-score" {{action "onSelectQuestion" question questionSeq}}>
-            {{input type="text" class=(concat 'question-score-entry' ' q-' questionSeq '-score')
-              focus-in=(action "onSelectQuestion" question questionSeq)
-              focus-out=(action "onEditScore" questionSeq)
-            }}
+    <div class="question-score header"><span>Question Score</span></div>
+    <div class="active-question">
+      <div class="question-seq">Question {{activeQuestionSeq}}</div>
+      <div class="question-max-score"> Max Score: {{activeQuestion.maxScore}}</div>
+    </div>
+    <div class="active-student">
+      <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})"></div>
+      <div class="student-name ellipsis">{{activeStudent.fullName}} {{activeStudentSeq}}</div>
+    </div>
+    <div class="questions-container">
+      {{#each questions as |question questionSeq|}}
+        <div class="question-container question-{{questionSeq}}">
+          <div class="question-info-container {{if (eq question.id activeQuestion.id) 'selected-question'}}">
+            <div class="question-thumbnail">{{gru-icon name="done_all"}}</div>
+            <div class="question-title ellipsis" {{action "onToggleQuestion" question questionSeq}}>{{plus-one questionSeq}}{{concat '. ' question.title}}</div>
+            <div class="question-score" {{action "onSelectQuestion" question questionSeq}}>
+              {{input type="text" class=(concat 'question-score-entry' ' q-' questionSeq '-score')
+                focus-in=(action "onSelectQuestion" question questionSeq)
+                focus-out=(action "onEditScore" questionSeq)
+                pattern="[0-9]*"
+                inputmode="numeric"
+              }}
+            </div>
           </div>
+          <div class="question-description hidden">{{safe-html question.text}}</div>
         </div>
-        <div class="question-description hidden">{{question.text}}</div>
+      {{/each}}
+    </div>
+    <div class="action-container">
+      <div class="prev action {{if isDisablePrev 'disabled'}}" {{action "onMoveStudent" 'prev'}}><div class="student-thumbnail"></div>Prev</div>
+      <div class="next action" {{action "onMoveStudent" 'next'}}>
+        {{#if isDisableNext}}
+          <div>Submit</div>
+        {{else}}
+          Next
+          <div class="student-thumbnail"></div>
+        {{/if}}
       </div>
-    {{/each}}
-  </div>
-  <div class="action-container">
-    <div class="prev action" {{action "onMoveStudent" 'prev'}}><div class="student-thumbnail"></div>Prev</div>
-    <div class="next action" {{action "onMoveStudent" 'next'}}>Next<div class="student-thumbnail"></div></div>
-  </div>
+    </div>
 </div>

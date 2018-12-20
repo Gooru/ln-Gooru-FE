@@ -14,8 +14,10 @@
           }
         }
       }
+
       .competency-level-container {
         position: relative;
+
         .show-destination {
           position: absolute;
           bottom: 10px;
@@ -25,22 +27,26 @@
     @media screen and (max-width: $screen-sm - 1) {
       .inspect-destination-container {
         grid-template-columns: unset;
+
         .destination-chart-container {
           margin-right: 0;
           zoom: 0.8;
         }
+
         .competency-level-container {
           width: 94%;
-          margin: auto;
-          margin-bottom: 15px;
+          margin: auto auto 15px;
+
           .grade-title {
             font-size: 25px;
             height: 40px;
             line-height: 40px;
           }
+
           .grade-description {
             padding-right: 0;
           }
+
           .show-destination {
             margin: auto;
             position: unset;
@@ -60,20 +66,30 @@
   .student-inspect-destination.destination {
     .inspect-destination-container {
       grid-template-columns: unset;
+      @media screen and (max-width: $screen-xs) {
+        height: 100vh;
+      }
+      @media screen and (min-width: $screen-xs) {
+        height: 100%;
+      }
+
       .destination-chart-container {
-        margin-right: 0;
-        margin: auto;
+        margin: 0;
+
         .student-inspect-competency-chart {
           zoom: 0.8;
+
           .chart-container {
-            .graded-chart-container  {
+            .graded-chart-container {
               .taxonomy-grades-container {
                 .taxonomy-grades {
                   .grade-list {
+                    padding-bottom: 10px;
                     height: 545px;
                   }
                 }
               }
+
               .domain-chart {
                 .scrollable-chart {
                   height: 545px;
@@ -83,12 +99,14 @@
           }
         }
       }
+
       .grade-data-container {
         width: 94%;
-        margin: auto;
-        margin-bottom: 15px;
+        margin: auto auto 15px;
+
         .grade-description {
           height: auto;
+
           &::-webkit-scrollbar {
             width: 4px;
           }
@@ -97,6 +115,7 @@
             border-radius: 4px;
           }
         }
+
         .next-route {
           position: unset;
           margin: auto;
@@ -108,20 +127,30 @@
   .student-inspect-destination.route {
     .inspect-destination-container {
       grid-template-columns: unset;
+      @media screen and (max-width: $screen-xs) {
+        height: 100vh;
+      }
+      @media screen and (min-width: $screen-xs) {
+        height: 100%;
+      }
+
       .destination-chart-container {
-        margin-right: 0;
-        margin: auto;
+        margin: 0;
+
         .student-inspect-competency-chart {
           zoom: 0.8;
+
           .chart-container {
-            .graded-chart-container  {
+            .graded-chart-container {
               .taxonomy-grades-container {
                 .taxonomy-grades {
                   .grade-list {
+                    padding-bottom: 10px;
                     height: 545px;
                   }
                 }
               }
+
               .domain-chart {
                 .scrollable-chart {
                   height: 545px;
@@ -131,21 +160,25 @@
           }
         }
       }
+
       .course-container {
         width: 100%;
         margin: auto;
         padding: 0;
+
         .pre-study-title {
           padding-left: 15px;
           font-size: 25px;
         }
+
         .route0-container {
           width: 96%;
-          margin: auto;
-          margin-top: 15px;
+          margin: 15px auto auto;
+
           .route0-comment {
             grid-template-columns: 60px auto;
           }
+
           .route0-body {
             .route0-accordion-container {
               .course-suggestions {
@@ -156,10 +189,12 @@
                       width: 100%;
                     }
                   }
+
                   .panel-collapse {
                     padding: 5px;
                     max-height: 300px;
                     overflow-y: auto;
+
                     .panel-body {
                       .panel-group {
                         .gru-accordion-lesson {
@@ -177,35 +212,41 @@
             }
           }
         }
+
         .route0-action {
           width: 96%;
           margin: auto;
         }
+
         .assigned-course-title {
           padding-left: 15px;
           font-size: 25px;
         }
+
         .course-map-accordion-container {
           max-height: 420px;
           width: 96%;
           margin: auto;
         }
+
         .study-course {
           position: unset;
-          margin: auto;
-          margin-top: 15px;
-          margin-bottom: 15px;
+          margin: 15px auto;
         }
         @media screen and (max-width: $screen-359 + 1) {
           .route0-container {
             width: 87%;
+
             &.expanded {
               width: 80%;
             }
           }
-          .assigned-course-title, .pre-study-title {
+
+          .assigned-course-title,
+          .pre-study-title {
             font-size: 20px;
           }
+
           .route0-action {
             width: 87%;
             margin: auto;
@@ -214,5 +255,4 @@
       }
     }
   }
-
 }

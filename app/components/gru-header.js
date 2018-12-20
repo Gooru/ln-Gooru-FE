@@ -69,6 +69,10 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       this.sendAction('onLogout');
     },
 
+    showLocales() {
+      Ember.$('.lang-dropdown').toggle();
+    },
+
     setLocale(selVal) {
       this.set('i18n.locale', selVal);
       if (selVal === 'ar') {

@@ -58,36 +58,24 @@ test('Layout', function(assert) {
   );
 
   var $component = this.$(); //component dom element
-  const $collectionPanel = $component.find(
-    '.gru-student-class-activity-panel.panel'
-  );
+  const $collectionPanel = $component.find('.gru-student-class-activity-panel');
   T.exists(assert, $collectionPanel, 'Missing class collection panel');
 
-  const $collectionPanelHeading = $collectionPanel.find('.panel-heading');
-  assert.ok($collectionPanelHeading.length, 'Panel heading element is missing');
+  const $collectionPanelHeading = $collectionPanel.find('.dca-panel-info');
+  assert.ok($collectionPanelHeading.length, 'Panel info  element is missing');
 
-  const $collectionIcon = $collectionPanelHeading.find('.icon-container img');
-  assert.ok($collectionIcon.length, 'Collection icon is missing');
+  const $collectionCount = $collectionPanel.find('.dca-content-counts');
+  assert.ok($collectionCount.length, 'Content count element is missing');
 
-  const $collectionTitle = $collectionPanelHeading.find('.title-container');
-  assert.ok($collectionTitle.length, 'Title anchor element is missing');
-  assert.equal(
-    T.text($collectionTitle.find('.title')),
-    'The Early Earth',
-    'Wrong title text'
-  );
+  const $collectionTitle = $collectionPanelHeading.find('p');
+  assert.ok($collectionTitle.length, 'Title  element is missing');
+  assert.equal(T.text($collectionTitle), 'The Early Earth', 'Wrong title text');
 
-  const $collectionInfo = $collectionPanel.find('.info');
-  assert.ok($collectionInfo.length, 'Collection Info element is missing');
-
-  const $collectionContentCount = $collectionInfo.find('.content-count');
-  assert.ok($collectionContentCount.length, 'Content count panel is missing');
-
-  const $collectionPlayButton = $collectionInfo.find('.play-btn');
+  const $collectionPlayButton = $collectionPanel.find('.ca-play-container');
   assert.ok($collectionPlayButton.length, 'Play button is missing');
 
   assert.ok(
-    $collectionInfo.find('.performance').length,
+    $collectionPanel.find('.dca-panel-actions-performance').length,
     'Performance container is missing'
   );
 });
@@ -130,13 +118,11 @@ test('Layout - collection', function(assert) {
   );
 
   var $component = this.$(); //component dom element
-  const $collectionPanel = $component.find(
-    '.gru-student-class-activity-panel.panel'
-  );
+  const $collectionPanel = $component.find('.gru-student-class-activity-panel');
 
-  const $collectionInfo = $collectionPanel.find('.info');
+  const $collectionInfo = $collectionPanel.find('.dca-panel-info');
   assert.ok($collectionInfo.length, 'Collection Info element is missing');
 
-  const $collectionContentCount = $collectionInfo.find('.content-count');
+  const $collectionContentCount = $collectionPanel.find('.dca-content-counts');
   assert.ok($collectionContentCount.length, 'Content count panel is missing');
 });

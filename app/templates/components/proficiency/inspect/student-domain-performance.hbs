@@ -1,7 +1,7 @@
 <div class="performance-container">
   <div class="performance-header-container">
     <div class="proficiency-info">
-      <div class="subject">{{t 'teacher-landing.class.students-tab.proficiency-in'}} {{subjectFramework}}</div>
+      <div class="subject">{{t 'teacher-landing.class.students-tab.proficiency'}}</div>
       <div class="students-count">
         <div class="count-container">
             {{numberOfStudents}} {{t 'common.students'}} | {{domainCoverageCount.length}} {{t 'common.domains'}} / {{totalCompetencies}} {{t 'common.competencies'}}
@@ -11,56 +11,73 @@
     </div>
     <div class="competency-coverage-container">
       <div class="course-coverage-container">
-        <div class="title">{{t 'teacher-landing.class.students-tab.course-coverage'}}</div>
-        <div class="coverage-count">
-          <div class="count-container notstarted-count">
-            <span class="count-box"></span><span class="competency-count">{{courseCoverageCount.not-started}}</span>
-          </div>
-          <div class="count-container inprogress-count">
-            <span class="count-box"></span><span class="competency-count">{{courseCoverageCount.in-progress}}</span>
-          </div>
-          <div class="count-container mastered-count">
-            <span class="count-box"></span><span class="competency-count">{{courseCoverageCount.mastered}}</span>
+        <div class="title">{{t 'teacher-landing.class.students-tab.class-statistics'}}</div>
+        <div class="course-competency-metrics">
+          <div class="students-metric">{{domainCoverageCount.length}} {{t 'common.domains'}} | {{numberOfStudents}} {{t 'common.students'}}</div>
+          <div class="metrics-title">{{t 'teacher-landing.class.students-tab.course-coverage-label'}}</div>
+          <div class="metrics">
+            <div class="metric-count mastered">{{courseCoverageCount.mastered}} {{t 'teacher-landing.class.students-tab.mastered'}}</div>
+            <div class="metric-count in-progress">{{courseCoverageCount.in-progress}} {{t 'teacher-landing.class.students-tab.in-progress'}}</div>
+            <div class="metric-count not-started">{{courseCoverageCount.not-started}} {{t 'teacher-landing.class.students-tab.not-started'}}</div>
           </div>
         </div>
       </div>
+      {{#unless isMobilePotraitView}}
+        <div class="scroll-controller">
+          {{#if (gt domainCoverageCount.length 5)}}
+            <div class="left" {{action "onClickArrow" 'left'}}>
+              {{gru-icon name="keyboard_arrow_left"}}
+            </div>
+            <div class="right" {{action "onClickArrow" 'right'}}>
+              {{gru-icon name="keyboard_arrow_right"}}
+            </div>
+          {{/if}}
+        </div>
+      {{/unless}}
 
       <div class="domains-coverage-container scrollable-container">
         {{#each domainCoverageCount as |domain|}}
-          <div class="domain-coverage-count">
-            <div class="domain-name title" {{action "onSelectDomain" domain}}>
+          <div class="domain-coverage-count" {{action "onSelectDomain" domain}}>
+            <div class="domain-name title">
               {{domain.domainName}}
             </div>
             <div class="coverage-count">
-              <div class="count-container notstarted-count">
-                <span class="count-box"></span><span class="competency-count">{{domain.not-started}}</span>
+              <div class="count-container">
+                <span class="mastered-count" style="width: {{find-percentage domain.total-coverage domain.mastered}}%;" ></span>
+                <span class="inprogress-count" style="width: {{find-percentage domain.total-coverage domain.in-progress}}%;"></span>
+                <span class="notstarted-count" style="width: {{find-percentage domain.total-coverage domain.not-started}}%;"></span>
               </div>
-              <div class="count-container inprogress-count">
-                <span class="count-box"></span><span class="competency-count">{{domain.in-progress}}</span>
-              </div>
-              <div class="count-container mastered-count">
-                <span class="count-box"></span><span class="competency-count">{{domain.mastered}}</span>
+              <div class="competency-metrics">
+                <div class="title">{{t 'common.competencies'}}</div>
+                <div class="metrics">
+                  <div class="metric-count mastered">{{domain.mastered}} {{t 'teacher-landing.class.students-tab.mastered'}}</div>
+                  <div class="metric-count in-progress">{{domain.in-progress}} {{t 'teacher-landing.class.students-tab.in-progress'}}</div>
+                  <div class="metric-count not-started">{{domain.not-started}} {{t 'teacher-landing.class.students-tab.not-started'}}</div>
+                </div>
               </div>
             </div>
           </div>
         {{/each}}
-      </div>
-      <div class="scroll-controller">
-        {{#if (gt domainCoverageCount.length 5)}}
-          <div class="left" {{action "onClickArrow" 'left'}}>
-            {{gru-icon name="keyboard_arrow_left"}}
-          </div>
-          <div class="right" {{action "onClickArrow" 'right'}}>
-            {{gru-icon name="keyboard_arrow_right"}}
+        {{#if isMobilePotraitView}}
+          <div class="scroll-controller">
+            {{#if (gt domainCoverageCount.length 5)}}
+              <div class="left" {{action "onClickArrow" 'left'}}>
+                {{gru-icon name="keyboard_arrow_left"}}
+              </div>
+              <div class="right" {{action "onClickArrow" 'right'}}>
+                {{gru-icon name="keyboard_arrow_right"}}
+              </div>
+            {{/if}}
           </div>
         {{/if}}
       </div>
+
     </div>
   </div>
   <div class="performance-body-container students-performance-container">
     <div class="students-container">
       {{#each studentsDomainPerformance as |student|}}
-        <div class="student-container tab-container">
+        <div class="student-container tab-container" {{action "onSelectStudent" student}}>
           <div class="thumbnail-container" style="background-image: url({{student.thumbnail}});"></div>
           <div class="student-name">{{student.fullName}}</div>
         </div>
@@ -70,8 +87,11 @@
       {{#each studentsDomainPerformance as |studentPerformance studentSeq|}}
         <div class="domain-performance-container">
           {{#each studentPerformance.domainCompetencies as |domainCompetencies|}}
-            <div class="performance-chart-container tab-container">
-              {{charts.student-domain-performance domainSeq=domainCompetencies.domainSeq studentSeq=studentSeq competencies=domainCompetencies.competencies}}
+            <div class="tab-container">
+              <div class="performance-chart-container">
+                {{charts.student-domain-performance domainSeq=domainCompetencies.domainSeq studentSeq=studentSeq competencies=domainCompetencies.competencies}}
+              </div>
+              <div class="competency-count-container"><span class="mastered">{{domainCompetencies.mastered}}</span>/<span class="in-progress">{{domainCompetencies.in-progress}}</span>/<span class="not-started">{{domainCompetencies.not-started}}</span></div>
             </div>
           {{/each}}
         </div>

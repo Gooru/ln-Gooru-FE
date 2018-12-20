@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['inspect', 'student-domain-competency-performance'],
@@ -21,7 +20,6 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
-
     //Action triggered when click back arrow
     onClickBack() {
       let component = this;
@@ -32,9 +30,14 @@ export default Ember.Component.extend({
     onChangeDomainSeq(direction) {
       let component = this;
       let curDomainSeq = component.get('activeDomainSeq');
-      let updatedDomainSeq = direction === 'left' ? curDomainSeq - 1 : curDomainSeq + 1;
-      let domainsCompetencyPerformance = component.get('domainsCompetencyPerformance');
-      let activeDomain = domainsCompetencyPerformance.objectAt(updatedDomainSeq - 1);
+      let updatedDomainSeq =
+        direction === 'left' ? curDomainSeq - 1 : curDomainSeq + 1;
+      let domainsCompetencyPerformance = component.get(
+        'domainsCompetencyPerformance'
+      );
+      let activeDomain = domainsCompetencyPerformance.objectAt(
+        updatedDomainSeq - 1
+      );
       component.set('activeDomainSeq', updatedDomainSeq);
       component.set('activeDomainCompetencyPerformance', activeDomain);
       component.set('activeDomain', activeDomain.domainData);
@@ -82,20 +85,29 @@ export default Ember.Component.extend({
   /**
    * @property {JSON} activeDomainCompetencyPerformance
    */
-  activeDomainCompetencyPerformance: Ember.computed('domainsCompetencyPerformance', function() {
-    let component = this;
-    let domainsCompetencyPerformance = component.get('domainsCompetencyPerformance');
-    let activeDomainSeq = component.get('activeDomainSeq');
-    return domainsCompetencyPerformance.objectAt(`${activeDomainSeq - 1}`);
-  }),
+  activeDomainCompetencyPerformance: Ember.computed(
+    'domainsCompetencyPerformance',
+    function() {
+      let component = this;
+      let domainsCompetencyPerformance = component.get(
+        'domainsCompetencyPerformance'
+      );
+      let activeDomainSeq = component.get('activeDomainSeq');
+      return domainsCompetencyPerformance.objectAt(`${activeDomainSeq - 1}`);
+    }
+  ),
 
   /**
    * @property {Number} numberOfDomains
    */
   numberOfDomains: Ember.computed('domainsCompetencyPerformance', function() {
     let component = this;
-    let domainsCompetencyPerformance = component.get('domainsCompetencyPerformance');
-    return domainsCompetencyPerformance ? domainsCompetencyPerformance.length : 0;
+    let domainsCompetencyPerformance = component.get(
+      'domainsCompetencyPerformance'
+    );
+    return domainsCompetencyPerformance
+      ? domainsCompetencyPerformance.length
+      : 0;
   }),
 
   // -------------------------------------------------------------------------
@@ -114,27 +126,45 @@ export default Ember.Component.extend({
     if (domainLevelSummary && classMembers.length) {
       let domainCompetencies = domainLevelSummary.domainCompetencies;
       let studentsDomainCompetencies = domainLevelSummary.students;
-      domainCompetencies.map( domainData => {
+      domainCompetencies.map(domainData => {
         let numberOfCompetencies = domainData.competencies.length;
-        maxCompetencyLength = numberOfCompetencies > maxCompetencyLength ? numberOfCompetencies : maxCompetencyLength;
+        maxCompetencyLength =
+          numberOfCompetencies > maxCompetencyLength
+            ? numberOfCompetencies
+            : maxCompetencyLength;
         domainData.competencyLength = numberOfCompetencies;
         let studentLevelDomainCompetencyData = {
           domainData
         };
         let domainCode = domainData.domainCode;
         let parsedStudentCompetenctData = Ember.A([]);
-        classMembers.map( student => {
-          let studentDomainCompetencies = studentsDomainCompetencies.findBy('id', student.id);
-          let userCompetencyMatrix = studentDomainCompetencies ? studentDomainCompetencies.userCompetencyMatrix : {};
-          let currentStudentDomainCompetencies = userCompetencyMatrix.findBy('domainCode', domainCode);
-          let parsedData = component.parseStudentCompetencyData(student, domainData, currentStudentDomainCompetencies.competencies);
+        classMembers.map(student => {
+          let studentDomainCompetencies = studentsDomainCompetencies.findBy(
+            'id',
+            student.id
+          );
+          let userCompetencyMatrix = studentDomainCompetencies
+            ? studentDomainCompetencies.userCompetencyMatrix
+            : {};
+          let currentStudentDomainCompetencies = userCompetencyMatrix.findBy(
+            'domainCode',
+            domainCode
+          );
+          let parsedData = component.parseStudentCompetencyData(
+            student,
+            domainData,
+            currentStudentDomainCompetencies.competencies
+          );
           parsedStudentCompetenctData.push(parsedData);
         });
         studentLevelDomainCompetencyData.studentCompetencies = parsedStudentCompetenctData;
         domainLevelStudentSummaryData.push(studentLevelDomainCompetencyData);
       });
     }
-    component.set('domainsCompetencyPerformance', domainLevelStudentSummaryData);
+    component.set(
+      'domainsCompetencyPerformance',
+      domainLevelStudentSummaryData
+    );
     component.set('isLoading', false);
   },
 
@@ -148,12 +178,12 @@ export default Ember.Component.extend({
       lastName: student.lastName,
       userId: student.id,
       thumbnail: student.avatarUrl,
-      fullName: `${student.lastName  } ${  student.firstName}`,
+      fullName: `${student.lastName} ${student.firstName}`,
       competencies: Ember.A([])
     };
     if (studentDomainCompetencies) {
       let competencies = Ember.A([]);
-      domainData.competencies.map( competency => {
+      domainData.competencies.map(competency => {
         let competencyData = {
           competencyCode: competency.competencyCode,
           competencySeq: competency.competencySeq,
@@ -182,10 +212,11 @@ export default Ember.Component.extend({
       isCrosswalk: false
     };
     return Ember.RSVP.hash({
-      learningMapData: Ember.RSVP.resolve(searchService.fetchLearningMapsContent(competencyCode, filters))
-    })
-      .then(({learningMapData}) => {
-        controller.set('learningMapData', learningMapData);
-      });
+      learningMapData: Ember.RSVP.resolve(
+        searchService.fetchLearningMapsContent(competencyCode, filters)
+      )
+    }).then(({ learningMapData }) => {
+      controller.set('learningMapData', learningMapData);
+    });
   }
 });

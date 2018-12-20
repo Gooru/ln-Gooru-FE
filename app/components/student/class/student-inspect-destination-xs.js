@@ -8,32 +8,14 @@ export default Ember.Component.extend({
   classNameBindings: ['type'],
 
   actions: {
-    closePullUp() {
+    onClosePullUp() {
       let component = this;
-      component.$().animate(
-        {
-          top: '90%'
-        },
-        400,
-        function() {
-          component.set('isExpanded', false);
-        }
-      );
+      component.closePullUp();
     },
 
-    openPullUp() {
+    onOpenPullUp() {
       let component = this;
-      if (!component.get('isExpanded')) {
-        component.$().animate(
-          {
-            top: '10%'
-          },
-          400,
-          function() {
-            component.set('isExpanded', true);
-          }
-        );
-      }
+      component.openPullUp();
     },
 
     /**
@@ -66,6 +48,40 @@ export default Ember.Component.extend({
     onRoute0Reject() {
       let component = this;
       component.sendAction('onRoute0Reject');
+    }
+  },
+
+  openPullUp() {
+    let component = this;
+    if (!component.get('isExpanded')) {
+      component.$().animate(
+        {
+          top: '10%'
+        },
+        400,
+        function() {
+          component.set('isExpanded', true);
+        }
+      );
+    }
+  },
+
+  closePullUp() {
+    let component = this;
+    component.$().animate(
+      {
+        top: '90%'
+      },
+      400,
+      function() {
+        component.set('isExpanded', false);
+      }
+    );
+  },
+
+  didInsertElement() {
+    if (this.type === 'route') {
+      this.openPullUp();
     }
   },
 

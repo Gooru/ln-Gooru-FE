@@ -1,0 +1,62 @@
+<div class="backdrop"></div>
+<div class="ca-student-list-container {{if isActivityPast 'past-activity' }}">
+  <div class="ca-student-list-header">
+    <div class="ca-student-selected-ctn">
+      {{#if (eq usersCount -1)}}
+        <span>{{t 'common.everyone'}}</span> {{else if (eq usersCount 0)}}
+        <span>{{t 'common.no-students-selected'}}</span>
+      {{else}}
+        <span> {{usersCount}}  {{t 'common.students-selected'}}</span>
+      {{/if}}
+    </div>
+    <div class="search-student-container">
+      <div class="search-input-container">
+        {{input type="text"
+          placeholder=(t "common.search-placeholder")
+          spellcheck="true"
+          id="student-search"
+        }}
+        <label for="student-search" id="search-student" class="search-icon">
+            {{gru-icon name="search"}}
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="ca-student-list-select-ctn">
+    {{#if (eq usersCount -1)}}
+      <button class="btn btn-primary de-select" {{action 'onDeSelect'}}>{{t 'common.de-select'}}</button>
+    {{else}}
+      <button class="btn btn-primary select-all" {{action 'onSelectAll'}}>{{t 'common.select-all'}}</button>
+    {{/if}}
+  </div>
+  <div class="student-list-container">
+    {{#each studentSearchResults as |student| }}
+      <div class="user-profile-details">
+        <div class="user-profile-img">
+          {{#if student.isSelected}}
+            <div class="selected-user-for-class-activity">
+              {{gru-icon name="done_all"}}
+              <div class="de-select-user" {{action 'onDeSelectUser' student}}>
+                {{gru-icon name="close"}}
+              </div>
+            </div>
+          {{/if}}
+          <img src="{{student.avatarUrl}}" class="{{if student.isSelected 'selected'}}" {{action 'onSelectUser' student}} />
+        </div>
+        <div class="username">
+          <span>{{student.firstName}}</span>
+          <span>{{student.lastName}}</span>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  <div class="action-buttons">
+    <button class="btn" {{action 'onPullUpClose'}}>{{t 'common.cancel'}}</button>
+    <button class="btn btn-primary save-users" {{action 'saveUsersToClassActivityContent'}}>{{t 'common.save'}}</button>
+  </div>
+</div>
+{{#if isLoading}}
+  <div class="loading-spinner">
+    {{three-bounce-spinner}}
+  </div>
+{{/if}}

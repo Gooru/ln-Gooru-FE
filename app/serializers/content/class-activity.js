@@ -48,15 +48,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
       date: data.activation_date
         ? parseDate(data.activation_date, 'YYYY-MM-DD')
         : null,
-      context: {
-        courseId: data.ctx_course_id,
-        unitId: data.ctx_unit_id,
-        lessonId: data.ctx_lesson_id,
-        collectionId: data.ctx_collection_id
-      },
       added_date: data.dca_added_date,
       activation_date: data.activation_date,
-      collection: content
+      collection: content,
+      usersCount: data.users_count
     });
   },
 
@@ -122,5 +117,21 @@ export default Ember.Object.extend(ConfigurationMixin, {
 
     //TODO normalize resources and questions
     return content;
+  },
+
+  normalizeFetchUsersForClassActivity(payload) {
+    if (payload && payload.users && Ember.isArray(payload.users)) {
+      return payload.users.map(function(user) {
+        return Ember.Object.create({
+          id: user.id,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          thumbnail: user.thumbnail_path,
+          isActive: user.is_active
+        });
+      });
+    } else {
+      return [];
+    }
   }
 });

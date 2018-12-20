@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import {generateUUID, getBarGradeColor} from 'gooru-web/utils/utils';
+import {generateUUID} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
 
@@ -16,8 +16,16 @@ export default Ember.Component.extend({
   didInsertElement() {
     let component = this;
     component.loadAssessmentData();
-    console.log('students', this.get('students'));
   },
+
+  // Detect keyDown event
+  keyDown(event) {
+    //prevent triggering tab key event
+    if (event.keyCode === 9) {
+      event.preventDefault();
+    }
+  },
+
 
   actions: {
     onToggleQuestion(question, questionSeq) {
@@ -41,33 +49,34 @@ export default Ember.Component.extend({
 
     onMoveStudent(direction) {
       let component = this;
-      component.observeStudentChange(direction);
+      component.loadStudentPerformanceData(direction);
     }
   },
 
-  observeStudentChange(direction) {
+  loadStudentPerformanceData(direction) {
     let component = this;
     let students = component.get('students');
     let activeStudent = component.get('activeStudent');
     let activeStudentSeq = component.get('activeStudentSeq');
-    let activeStudentId = activeStudent.id;
     let studentsOfflineAssessmentData = component.get('studentsOfflineAssessmentData');
     activeStudentSeq = direction === 'next' ? activeStudentSeq + 1 : activeStudentSeq - 1;
     activeStudent = students.objectAt(activeStudentSeq);
     let isStudentDataEntered = studentsOfflineAssessmentData[activeStudentSeq] ? studentsOfflineAssessmentData[activeStudentSeq] : null;
     if (isStudentDataEntered) {
-      component.loadEnteredStudentData(isStudentDataEntered);
+      component.loadEnteredStudentData(isStudentDataEntered, direction);
     } else {
       let assessmentPerformanceDataParams = component.getDataParams();
       studentsOfflineAssessmentData[activeStudentSeq  - 1] = assessmentPerformanceDataParams;
       component.set('studentsOfflineAssessmentData', studentsOfflineAssessmentData);
-      // component.updateStudentAssessmentPerformance(assessmentPerformanceDataParams);
-
+      component.updateStudentAssessmentPerformance(assessmentPerformanceDataParams);
       component.resetElements();
     }
-    console.log('studentsOfflineAssessmentData', studentsOfflineAssessmentData);
-    component.set('activeStudent', activeStudent);
-    component.set('activeStudentSeq', activeStudentSeq);
+    if (activeStudentSeq === students.length) {
+      component.sendAction('onClosePerformanceEntry');
+    } else {
+      component.set('activeStudent', activeStudent);
+      component.set('activeStudentSeq', activeStudentSeq);
+    }
   },
 
   students: Ember.A([]),
@@ -115,33 +124,55 @@ export default Ember.Component.extend({
 
   contentSource: 'dailyclassactivity',
 
+  isValid: true,
+
+  isDisablePrev: Ember.computed('activeStudentSeq', function() {
+    let component = this;
+    let activeStudentSeq = component.get('activeStudentSeq');
+    return activeStudentSeq === 0;
+  }),
+
+  isDisableNext: Ember.computed('activeStudentSeq', function() {
+    let component = this;
+    let activeStudentSeq = component.get('activeStudentSeq');
+    let numberOfStudents = component.get('students.length');
+    return activeStudentSeq === numberOfStudents - 1;
+  }),
+
+  isShowMaxScoreEntry: true,
+
+  assessmentMaxScore: null,
+
   resetElements() {
     let component = this;
     let inputElements = component.$('.question-score-entry');
     component.$(inputElements).val(null);
     component.$('.question-thumbnail').css('background-color', '#d8d8d8');
     component.$('.question-container').removeClass('scored');
+    component.$('.question-score').removeClass('disabled');
+    component.$('.question-score-entry').removeClass('wrong-score');
   },
 
   loadEnteredStudentData(studentData) {
     let component = this;
     let resources = studentData ? studentData.resources : Ember.A([]);
-    console.log('studentData', studentData.fullName);
+    component.$('.question-score').addClass('disabled');
+    component.$('.question-info-container').removeClass('selected-question');
     resources.forEach(function(question, index) {
       let inputElement = component.$(`.q-${index}-score`);
       component.$(inputElement).val(question.score);
+
       component.updateScoredElement(index);
     });
   },
 
   updateScoredElement(questionSeq) {
     let component = this;
-    let questionContainer = component.$(`.question-${questionSeq}`);
     let enteredScore = component.$(`.q-${questionSeq}-score`).val();
-    console.log('enteredScore', enteredScore);
-    if (enteredScore && !isNaN(enteredScore)) {
-      component.$(`.question-${questionSeq}`).removeClass('scored').addClass('scored');
-      component.$(`.question-${questionSeq} .question-thumbnail`).css('background-color', getBarGradeColor(enteredScore));
+    if (component.validateQuestionScore(questionSeq, enteredScore)) {
+      if (enteredScore)
+      {component.$(`.question-${questionSeq}`).removeClass('scored').addClass('scored');}
+      component.$(`.question-${questionSeq} .question-thumbnail`).css('background-color', '#538a32');
     } else {
       component.$(`.question-${questionSeq}`).removeClass('scored');
       component.$(`.question-${questionSeq} .question-thumbnail`).css('background-color', '#d8d8d8');
@@ -164,7 +195,7 @@ export default Ember.Component.extend({
     let assessmentResources = Ember.A([]);
     let activeStudent = component.get('activeStudent');
     let activityData = component.get('activityData');
-    let conductedOn = new Date(component.get('activityData.added_date'));
+    let conductedOn = new Date(component.get('activityData.activation_date')) || new Date();
     let classId = component.get('classId');
     let courseId = activityData.get('context.courseId') || null;
     let unitId = activityData.get('context.unitId') || null;
@@ -178,7 +209,7 @@ export default Ember.Component.extend({
         'resource_type': 'question',
         'question_type': questionData.type,
         'score': Number(score) || 0,
-        'max_score': 10,
+        'max_score': questionData.maxScore,
         'time_spent': 0
       };
       assessmentResources.push(resourceData);
@@ -203,9 +234,17 @@ export default Ember.Component.extend({
     return studentPerformanceData;
   },
 
-  loadPreviousStudentData() {
+  validateQuestionScore(questionSeq, score) {
     let component = this;
-
+    let maxScore = component.get('activeQuestion.maxScore');
+    let isValid = !isNaN(score) && Number(score) <= maxScore;
+    if (isValid) {
+      component.$(`.q-${questionSeq}-score`).removeClass('wrong-score');
+    } else {
+      component.$(`.q-${questionSeq}-score`).removeClass('wrong-score').addClass('wrong-score');
+    }
+    component.set('isValid', isValid);
+    return isValid;
   },
 
   fetchAssessmentData(assessmentId) {
@@ -234,13 +273,9 @@ export default Ember.Component.extend({
 
   updateStudentAssessmentPerformance(dataParams) {
     let component = this;
-    console.log('dataParams' ,dataParams);
     let performanceService = component.get('performanceService');
     return Ember.RSVP.hash({
       studentPerformanceUpdated: Ember.RSVP.resolve(performanceService.updateCollectionOfflinePerformance(dataParams))
-    })
-    .then(({studentPerformanceUpdated}) => {
-      console.log('studentPerformanceUpdated', studentPerformanceUpdated);
     });
   }
 });

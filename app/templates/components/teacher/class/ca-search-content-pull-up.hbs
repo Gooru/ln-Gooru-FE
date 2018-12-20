@@ -1,0 +1,73 @@
+<div class="search-backdrop" {{action 'onPullUpClose'}}></div>
+<div class="search-container">
+  <div class="search-header">
+    <div class="search-pullup-close" {{action 'onPullUpClose'}}>
+      {{gru-icon name="arrow_downward"}}
+    </div>
+    <div class="search-filter-container">
+      <span>{{t selectedMenuItem.label }}</span>
+      <span {{action 'toggleMenuList'}}>{{gru-icon name="arrow_drop_down"}}</span>
+      <div class="search-filter-container-list {{if isMenuEnabled 'active'}}">
+        {{#each menuItems as |item|}}
+          <p {{action 'onChooseMenuItem' item}} class="{{if item.selected 'selected'}}">{{t item.label}}</p>
+        {{/each}}
+      </div>
+    </div>
+    {{#unless isCourseMap}}
+      <div class="search-right-menu">
+        <div class="search-input-container">
+          {{input type="text"
+          placeholder=(t "common.search-placeholder")
+          spellcheck="true"
+          id="search-content"
+        }}
+          <label for="search-content" class="search-icon">
+            {{gru-icon name="search"}}
+        </label>
+        </div>
+        <div class="search-filter-icon">
+          {{gru-icon name="filter_list"}}
+        </div>
+      </div>
+    {{/unless}}
+  </div>
+  {{#if isCourseMap}}
+    <div class="ca-course-map-container">
+      {{teacher.class.ca-course-map onAddContentToDCA="onAddContentToDCA" onScheduleContentToDCA="onScheduleContentToDCA" classId=classId courseId=courseId}}
+    </div>
+  {{else}}
+    <div class="search-content-type-filter">
+      <div class="filter-content-types">
+        {{#each filterContentType as |contentType|}}
+          <div class="filter-item {{contentType.format}} {{if (eq contentType.format activeContentType) 'active' }}" {{action 'onSelectFilterBy' contentType.format}}>
+            <i></i>
+            <span>{{t contentType.label}}</span>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="search-list-container">
+      {{#if (gt searchResults.length 0)}}
+        <div class="search-list">
+          {{#each searchResultSet as |result|}}
+            {{cards.dca-search-collection-card onScheduleContentToDCA='onScheduleContentToDCA' collection=result contentType=activeContentType onAddContentToDCA="onAddContentToDCA" addedScheduleContentToDCA='addedScheduleContentToDCA' classId=classId}}
+          {{/each}}
+        </div>
+      {{else}}
+        {{#unless isLoading}}
+          {{cards.no-suggest-result-found isFromSearch=true}}
+        {{/unless}}
+      {{/if}}
+    </div>
+  {{/if}}
+
+</div>
+{{#if isLoading}}
+  <div class="loading-spinner">
+    {{three-bounce-spinner}}
+  </div>
+{{/if}}
+
+<div class="schedule-ca-datepicker-container ca-datepicker-popover-container">
+  {{ca-date-picker userStartDateAsToday=true onSelectDate='onScheduleDate' showCurrentMonth=true showMonths=true onSelectMonth='onScheduleForMonth'}}
+</div>

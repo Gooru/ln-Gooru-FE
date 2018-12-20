@@ -1,10 +1,10 @@
 <div class="header-panel" {{action 'closeNotificationList'}}>
-{{#if session.networkStatus}}
-  <div class="row-fluid network-progress-indicator">
-  </div>
-{{/if}}
+  {{#if session.networkStatus}}
+    <div class="row-fluid network-progress-indicator">
+    </div>
+  {{/if}}
 
-  <div class="nav-body {{if isILActivity  'independent-learning'}} {{unless hasClassInfo 'no-class-info'}}">
+  <div class="nav-body hidden-xs {{if isILActivity  'independent-learning'}} {{if class.isArchived 'class-archived'}} {{unless hasClassInfo 'no-class-info'}}">
     <div class="app-brand" {{action "onClickBrand"}}>
       {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
     </div>
@@ -78,5 +78,67 @@
         <span class="label">{{t 'teacher-landing.class.performance'}} </span>
       </div>
     {{/if}}
+  </div>
+
+
+  <div class="hidden visible-xs">
+    <div class="header-container">
+      <div class="nav-bar">
+        <div class="close tab" {{action "onClickBrand"}}>
+          {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
+        </div>
+        {{#unless class.isArchived}}
+          {{#unless isILActivity}}
+            <div class="class-activities dca tab">
+              <a {{action 'selectItem' 'class-activities'}}>
+              <i class="dca-pin"></i>
+            </a>
+            </div>
+          {{/unless}}
+          <div class="action">
+            <div class="course-map study-player tab">
+              {{#if (eq selectedMenuItem 'course-map')}}
+                <a {{action 'selectItem' 'study-player'}} class="{{unless isCourseMapped 'no-course'}}">
+                {{gru-icon name='play_arrow'}}
+              </a>
+              {{else}}
+                <a {{action 'selectItem' 'course-map'}}>
+                {{gru-icon name='sort'}}
+              </a>
+              {{/if}}
+            </div>
+          </div>
+          {{#unless isILActivity}}
+            <div class="profile tab">
+              <a {{action 'selectItem' 'profile'}}>
+                 {{gru-icon name='account_circle'}}
+              </a>
+            </div>
+          {{/unless}}
+          {{#if isFeatureEnabled }}
+            <div class="notification-tab">
+              {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' classId=classId isTeacher=false }}
+            </div>
+          {{/if}}
+        {{/unless}}
+      </div>
+      <div class="report-container-bar">
+        {{#if hasClassInfo }}
+          {{#if (not isPremiumClass)}}
+            <div class="report {{unless hasStarted 'not-started'}}" {{action 'openCourseReport'}}>
+              {{charts/gru-performance-chart performanceSummary=performanceSummary }}
+            </div>
+          {{/if}}
+        {{else}}
+          <div class="performance-summary" style="background-color:{{if performanceSummary (grade-color performanceSummary.score) defaultBarColor}}">
+            <span class="score">
+                {{#if performanceSummary}}
+                {{#if performanceSummary.score}} {{performanceSummary.score}}% {{else}}0% {{/if}} {{else}}--
+                {{/if}}
+              </span>
+          </div>
+        {{/if}}
+      </div>
+    </div>
   </div>
 </div>

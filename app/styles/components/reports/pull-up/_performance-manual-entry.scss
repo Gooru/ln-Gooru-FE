@@ -54,4 +54,17 @@
 
     }
   }
+
+  @media screen and (orientation: landscape) and (max-height: 481px){
+    .body-container {
+      .assessment-performance-container {
+        .assessment-thumbnail {
+          display: none;
+        }
+        .questions-container {
+          max-height: calc(100vh - 220px);
+        }
+      }
+    }
+  }
 }

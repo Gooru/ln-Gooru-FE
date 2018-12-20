@@ -483,9 +483,9 @@ export default Object.assign(quizzesTranslations, {
       'Check your spelling. We all make mistakes!<br/>Go broader and remove some filters.<br/> Or try searching for a similar word instead.',
     'no-more-attempts': 'No more attempts',
     'no-dca-student':
-      'Your teacher has not yet assigned any collections or assessments to Daily Class Activities.',
+      'Your teacher has not yet assigned any collections or assessments to Class Activities.',
     'no-dca-teacher':
-      'No current activities. Add Daily Class Activities from the Course Map or My Content.',
+      'No current activities. Add  Class Activities from the Course Map or Content Catalog.',
     notScored: 'Unscored',
     notStarted: 'Not started',
     'not-added': 'Not Added',
@@ -606,6 +606,13 @@ export default Object.assign(quizzesTranslations, {
     rubrics: 'Rubrics',
     'rubric-title': 'Rubric Title',
     save: 'Save',
+    'de-select': 'De Select',
+    'select-all': 'Select All',
+    'no-students-selected': 'No Students Selected',
+    'students-selected': 'Students Selected',
+    everyone: 'Everyone',
+    'unscheduled-items': 'Unscheduled Items',
+    'add-to-unschedule': 'Add to unscheduled list for',
     'save-next': 'Save and Next',
     'save-submit': 'Save and Submit All',
     'save-finish': 'Save and Finish',
@@ -802,6 +809,8 @@ export default Object.assign(quizzesTranslations, {
       locate: 'Locate Me',
       'edit-content': 'Edit Content',
       'add-to-daily-class-activities': 'Add to Daily Class Activities',
+      'assigned-course': 'Your assigned course',
+      'pre-study-title': 'Pre-study for your course',
       'course-map': {
         'rescope-toggle': 'Show Complete Course',
         'rescope-info':
@@ -1131,7 +1140,7 @@ export default Object.assign(quizzesTranslations, {
       'course-map': 'Course Map',
       unit: 'Unit',
       lesson: 'Lesson',
-      'class-activities': 'Daily Class Activities',
+      'class-activities': 'Class Activities',
       'class-activities-tab': {
         today: 'Today',
         'past-activities': 'Past Activities'
@@ -1246,8 +1255,11 @@ export default Object.assign(quizzesTranslations, {
         'student-id': 'Student ID',
         teachers: 'Teachers',
         'view-report': 'View Report',
+        'course-null': 'The classroom has no course assigned yet.',
+        'course-subject-null':
+          'The course assigned to classroom has not been tagged to a valid subject.',
         'students-null':
-          'Share the Class Code with students to have them join your Classroom.'
+          'Share the Class Code with your students to have them join the classroom.'
       },
       'students-tab': {
         'last-name': 'Lastname',
@@ -1260,12 +1272,17 @@ export default Object.assign(quizzesTranslations, {
         remove: 'Remove',
         mastered: 'Mastered',
         'in-progress': 'In Progress',
+        'not-started': 'Not Started',
         'course-coverage': 'Course Coverage',
+        'class-statistics': 'Class Statistics',
         'proficiency-in': 'Proficiency in',
         'data-not-available': 'Data Not Available',
-        'error-message': 'Possibly there is no a course assigned or there are none of students are joined or a valid subject is not assigned!'
+        'course-coverage-label':
+          'Cumulative count of competencies for all students in class',
+        'error-message':
+          'The class does not have a course assigned or does not have students rostered into the class yet. Once the course has been assigned to the class and the students are rostered, the class competency report will be shown here'
       },
-      'class-activities': 'Daily Class Activities',
+      'class-activities': 'Class Activities',
       'back-to-class-activities': 'Back to Daily Class Activities',
       'class-activities-tab': {
         today: 'Today: ',
@@ -1285,7 +1302,50 @@ export default Object.assign(quizzesTranslations, {
         assessments: 'Assessments',
         collections: 'Collections'
       },
-      'view-more': 'View more'
+      'view-more': 'View more',
+      'class-settings': {
+        'class-settings-sec': {
+          'generate-pathway': 'Personalize Learning Path',
+          'class-settings-sec-head': 'Class Settings',
+          'class-settings-sec-desc': 'Minimum performance to pass',
+          'class-code': 'Class Code',
+          subject: 'Subject',
+          framework: 'Framework',
+          'grade-level': 'Grade Level',
+          'option-choose-one': 'Choose One',
+          'co-teachers': 'Co-Teachers',
+          'add-coteacher': 'Add another teacher',
+          'offline-class-label': 'This is an Offline classroom'
+        },
+        'student-settings-sec': {
+          'student-settings-sec-head': 'Student Settings'
+        },
+        'course-settings-sec': {
+          'course-settings-sec-head': 'Course Settings',
+          'is-route0-applicable':
+            'Personalize Learning Path should cover gaps at profile?',
+          'apply-settings': 'Apply Settings',
+          'origin-info':
+            'What is the lowest grade level content that your students should study?',
+          'current-grade-info': 'What is the grade level of your class?'
+        },
+        'gen-baseline': {
+          'baseline-1':
+            '(1) You can generate the personalized learning path for each student based on class origin and destination.',
+          'baseline-2':
+            '(2) By default, all students have the grade level as their destination. You can adjust the destination to be a higher grade for students who are ahead in the class. Click Personalize Learning Path to generate a personalized course map based on the student’s skyline and their destination. ',
+          'baseline-3':
+            '(3) The path generation for the entire class can be actioned only once. After that, any updates will have to be done individually for each student.',
+          'baseline-4':
+            '(4) You can also adjust the destination grade for individual student. Click on the icon <i id="ember1600" class="ember-view gru-icon material-icons replay" style="vertical-align: middle;">replay </i> once you have confirmed the destination, to recompute the personalized path.'
+        },
+        origin: 'Origin',
+        destination: 'Destination',
+        students: 'Students',
+        'student-id': 'Student-Id',
+        'joined-on': 'Joined On',
+        'action-lable-add-student': 'Add onother student'
+      }
     },
     'no-classrooms':
       'You have not yet created any classrooms. Click on “Create Classroom” or search </br> for a featured course under the Library tab.',

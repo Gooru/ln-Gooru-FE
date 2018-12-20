@@ -34,24 +34,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let contextParams = {
         classId: controller.get('classId'),
         class: controller.get('class'),
-        course: controller.get('course')
+        course: controller.get('course'),
+        courseId: controller.get('courseId')
       };
       controller.set('contextParams', contextParams);
       controller.set('selectedSearchContentType', selectedSearchContentType);
       controller.set('showSearchContentPullup', true);
-    },
-
-    /**
-     * Action Triggered when course map button clicked.
-     */
-    addFromCourseMap() {
-      let controller = this;
-      let contextParams = {
-        classId: controller.get('classId'),
-        courseId: controller.get('courseId')
-      };
-      controller.set('courseMapContextParams', contextParams);
-      controller.set('showDcaCourseMapPullup', true);
     },
 
     /**
@@ -89,47 +77,55 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      */
     addedContentToDCA(content, addedDate) {
       let controller = this;
-      let classActivities = controller.get('classActivities');
-      let dateWiseClassActivities = classActivities.findBy(
-        'added_date',
-        addedDate
-      );
-      if (!dateWiseClassActivities) {
-        classActivities.pushObject(
-          Ember.Object.create({
-            added_date: addedDate,
-            classActivities: Ember.A([])
-          })
-        );
-        dateWiseClassActivities = classActivities.findBy(
+      let addedMonth = moment(addedDate).format('MM');
+      let forFirstDateOfMonth = controller.get('forFirstDateOfMonth');
+      let selectedMonth = moment(forFirstDateOfMonth).format('MM');
+      if (selectedMonth === addedMonth) {
+        let classActivities = controller.get('classActivities');
+        let dateWiseClassActivities = classActivities.findBy(
           'added_date',
           addedDate
         );
-      }
-      let id = content.get('id');
-      let addContent = dateWiseClassActivities
-        .get('classActivities')
-        .findBy('id', id);
-      if (!addContent) {
-        addContent = content;
-        dateWiseClassActivities.get('classActivities').pushObject(content);
-        let sortedDateWiseClassActivities = dateWiseClassActivities
+        if (!dateWiseClassActivities) {
+          classActivities.pushObject(
+            Ember.Object.create({
+              added_date: addedDate,
+              classActivities: Ember.A([])
+            })
+          );
+          dateWiseClassActivities = classActivities.findBy(
+            'added_date',
+            addedDate
+          );
+        }
+        let id = content.get('id');
+        let addContent = dateWiseClassActivities
           .get('classActivities')
-          .sortBy('id')
-          .reverse();
-        dateWiseClassActivities.set(
+          .findBy('id', id);
+        if (!addContent) {
+          addContent = content;
+          dateWiseClassActivities.get('classActivities').pushObject(content);
+          let sortedDateWiseClassActivities = dateWiseClassActivities
+            .get('classActivities')
+            .sortBy('id')
+            .reverse();
+          dateWiseClassActivities.set(
+            'classActivities',
+            sortedDateWiseClassActivities
+          );
+        }
+        if (!content.get('isAddedFromPanel')) {
+          controller.get('newlyAddedDcaContents').pushObject(addContent);
+        } else {
+          addContent.set('isNewlyAdded', true);
+          Ember.run.later(function() {
+            addContent.set('isNewlyAdded', false);
+          }, 2000);
+        }
+        this.set(
           'classActivities',
-          sortedDateWiseClassActivities
+          classActivities.sortBy('added_date').reverse()
         );
-        controller.handleContainerListScroll();
-      }
-      if (!content.get('isAddedFromPanel')) {
-        controller.get('newlyAddedDcaContents').pushObject(addContent);
-      } else {
-        addContent.set('isNewlyAdded', true);
-        Ember.run.later(function() {
-          addContent.set('isNewlyAdded', false);
-        }, 2000);
       }
     },
 
@@ -137,19 +133,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      *
      * @function actions:changeVisibility
      */
-    changeVisibility: function(classActivityId) {
+    changeVisibility: function(classActivity) {
       const controller = this;
       const currentClass = controller.get('classController.class');
       const classId = currentClass.get('id');
-      const date = new Date();
+      const classActivityId = classActivity.get('id');
+      const date = classActivity.get('added_date');
       controller
         .get('classActivityService')
         .enableClassActivity(classId, classActivityId, date)
         .then(function() {
-          const classActivities = controller.get(
-            'todaysClassActivities.classActivities'
-          );
-          let classActivity = classActivities.findBy('id', classActivityId);
           classActivity.set('date', date);
         });
     },
@@ -183,51 +176,212 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       );
     },
 
+    showPreviousMonth() {
+      this.loadData();
+    },
+
+    showNextMonth() {
+      this.loadData();
+    },
+
+    showUnScheduledItems() {
+      this.set('showUnScheduledItemsPullup', true);
+    },
+
     /**
-     * Triggered when a close welcome panel button is selected.
+     * It will takes care of content will schedule for the specific date.
+     * @param  {String} scheduleDate
      */
-    toggleHeader: function() {
+    onScheduleDate(scheduleDate) {
       let controller = this;
-      Ember.$('.controller.teacher.class.class-activities .welcome').slideUp(
-        400,
-        function() {
-          Ember.$(
-            '.controller.teacher.class.class-activities .dca-content-list-container'
-          ).css('height', 'calc(100vh - 180px)');
-          controller.handleShowActionBar();
-        }
-      );
+      let classId = controller.get('classId');
+      let contentType = controller.get('selectedContentForSchedule.format');
+      let contentId = controller.get('selectedContentForSchedule.id');
+      let content = controller.get('selectedContentForSchedule');
+      let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
+      datepickerEle.hide();
+      controller
+        .get('classActivityService')
+        .addActivityToClass(classId, contentId, contentType, scheduleDate)
+        .then(newContentId => {
+          if (!controller.isDestroyed) {
+            let data = controller.serializerSearchContent(
+              content,
+              newContentId,
+              scheduleDate
+            );
+            controller.send('addedContentToDCA', data, scheduleDate);
+          }
+        });
     },
 
     /**
-     * Scroll to show todays DCA List container
+     * It will takes care of content will schedule for the specific month.
+     * @param  {Number} forMonth
+     * @param  {Number} forYear
      */
-    showTodaysDcaListContainer: function() {
-      this.defaultScrollToTodaysDcaContentList(400);
+    onScheduleForMonth(forMonth, forYear) {
+      let controller = this;
+      let classId = controller.get('classId');
+      let contentType = controller.get('selectedContentForSchedule.format');
+      let contentId = controller.get('selectedContentForSchedule.id');
+      let content = controller.get('selectedContentForSchedule');
+      let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
+      datepickerEle.hide();
+      controller
+        .get('classActivityService')
+        .addActivityToClass(
+          classId,
+          contentId,
+          contentType,
+          null,
+          forMonth,
+          forYear
+        )
+        .then(newContentId => {
+          if (!controller.isDestroyed) {
+            let data = controller.serializerSearchContent(
+              content,
+              newContentId,
+              null,
+              forMonth,
+              forYear
+            );
+            controller.send('addedContentToDCA', data, null, forMonth, forYear);
+          }
+        });
     },
 
-    onOpenPerformanceEntry(item, classActivity) {
+    /**
+     * Action get triggered when schedule content to CA got clicked
+     */
+    onScheduleContentToDCA(content, event) {
+      let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
+      let datepickerCtnEle = Ember.$(
+        '.ca-datepicker-schedule-container .ca-date-picker-container'
+      );
+      datepickerCtnEle.removeClass('ca-datepicker-orientation-top');
+      datepickerCtnEle.removeClass('ca-datepicker-orientation-bottom');
+      datepickerCtnEle.removeClass('ca-datepicker-orientation-center');
+      let selectedContentEle = Ember.$(event.target);
+      let position = selectedContentEle.position();
+      let top = position.top - datepickerEle.height();
+      let left = position.left + 10 - datepickerEle.width();
+      let controllerHeight = Ember.$('.dca-content-container').height();
+      let windowHeight = $(window).height();
+      let allowedTop = windowHeight - controllerHeight + top;
+      if (left < 0) {
+        left = position.left - datepickerEle.width() / 2;
+        datepickerCtnEle.addClass('ca-datepicker-orientation-center');
+      }
+      if (allowedTop < 0) {
+        datepickerCtnEle.addClass('ca-datepicker-orientation-bottom');
+        top = position.top + 25;
+      } else {
+        datepickerCtnEle.addClass('ca-datepicker-orientation-top');
+      }
+      datepickerEle.css({
+        top: top,
+        left: left
+      });
+      if (!selectedContentEle.hasClass('active')) {
+        selectedContentEle.addClass('active');
+        datepickerEle.show();
+      } else {
+        selectedContentEle.removeClass('active');
+        datepickerEle.hide();
+      }
+      this.set('selectedContentForSchedule', content);
+    },
+
+    onOpenPerformanceEntry(item, activity) {
       let component = this;
-      console.log('item', item);
       if (item.format === 'assessment') {
         component.set('isShowAssessmentPerformanceEntryPullUp', true);
         component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-      } else if(item.format === 'assessment-external'){
+      } else {
         component.set('isShowExternalAssessmentPeformanceEntryPullUp', true);
         component.set('isShowAssessmentPerformanceEntryPullUp', false);
       }
       component.set('selectedItem', item);
-      component.set('selectedActivity', classActivity);
+      component.set('selectedActivity', activity);
+    },
+
+    onClosePerformanceEntry() {
+      let controller = this;
+      controller.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
+      controller.set('isShowAssessmentPerformanceEntryPullUp', false);
+      controller.loadData();
     }
   },
+
+  // -------------------------------------------------------------------------
+  // Events
+
+  initialize() {
+    let controller = this;
+    controller._super(...arguments);
+    Ember.run.scheduleOnce('afterRender', controller, function() {
+      controller.set('forMonth', moment().format('MM'));
+      controller.set('forYear', moment().format('YYYY'));
+      controller.closeCADatePickerOnClickOutSide();
+    });
+  },
+
   // -------------------------------------------------------------------------
   // Properties
+
+  isOfflineClass: Ember.computed('class', function() {
+    let controller = this;
+    let classData = controller.get('class');
+    return classData.isOffline;
+  }),
 
   selectedActivity: null,
 
   selectedItem: null,
 
   isShowPerformanceEntryPullUp: false,
+
+  /**
+   * @property {boolean} Indicates if there are class activities
+   */
+  showClassActivities: Ember.computed.gt('scheduledClassActivities.length', 0),
+
+  /**
+   * It Maintains the list of  scheduled class activities
+   * @type {Array}
+   */
+  scheduledClassActivities: Ember.computed('classActivities', function() {
+    let controller = this;
+    let classActivities = controller
+      .get('classActivities')
+      .filter(function(classActivity) {
+        if (classActivity.get('added_date')) {
+          return classActivity;
+        }
+      });
+    return classActivities;
+  }),
+
+  /**
+   * It Maintains the list of unscheduled class activities
+   * @type {Array}
+   */
+  unScheduledClassActivities: Ember.computed('classActivities', function() {
+    let controller = this;
+    let classActivities = controller
+      .get('classActivities')
+      .filter(function(classActivity) {
+        if (!classActivity.get('added_date')) {
+          return classActivity;
+        }
+      });
+    let unScheduledClassActivities = classActivities.objectAt(0);
+    return unScheduledClassActivities
+      ? unScheduledClassActivities.get('classActivities')
+      : null;
+  }),
 
   /**
    * Maintains the selected search content type.
@@ -289,97 +443,49 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   collection: Ember.computed.alias('classController.class.collection'),
 
   /**
-   * It maintains the today's class activities data.
-   */
-  todaysClassActivities: Ember.computed('classActivities.[]', function() {
-    let controller = this;
-    let todaysDate = moment().format('YYYY-MM-DD');
-    let classActivities = controller.get('classActivities');
-    let todaysClassActivities = classActivities.findBy(
-      'added_date',
-      todaysDate
-    );
-    return todaysClassActivities;
-  }),
-
-  /**
-   * It maintains the future class activities data.
-   */
-  futureClassActivities: Ember.computed('classActivities.[]', function() {
-    let controller = this;
-    let todaysDate = moment().format('YYYY-MM-DD');
-    let classActivities = controller.get('classActivities');
-    let futureClassActivities = Ember.A([]);
-    classActivities.forEach(classActivity => {
-      let addedDate = classActivity.get('added_date');
-      if (moment(todaysDate).isBefore(addedDate)) {
-        futureClassActivities.pushObject(classActivity);
-      }
-    });
-    futureClassActivities = futureClassActivities
-      .sortBy('added_date')
-      .reverse();
-    return futureClassActivities;
-  }),
-
-  /**
-   * It maintains the past class activities data.
-   */
-  pastClassActivities: Ember.computed('classActivities.[]', function() {
-    let controller = this;
-    let todaysDate = moment().format('YYYY-MM-DD');
-    let classActivities = controller.get('classActivities');
-    let pastClassActivities = Ember.A([]);
-    classActivities.forEach(classActivity => {
-      let addedDate = classActivity.get('added_date');
-      if (moment(todaysDate).isAfter(addedDate)) {
-        pastClassActivities.pushObject(classActivity);
-      }
-    });
-    return pastClassActivities;
-  }),
-
-  /**
-   * Number of records loaded past date
-   * @type {Number}
-   */
-  numberRecordsLoadedPastDate: 30,
-
-  /**
-   * Number of records loaded future date
-   * @type {Number}
-   */
-  numberRecordsLoadedFutureDate: 30,
-
-  /**
-   * Number of records load  per hit
-   * @return {Number}
-   */
-  numberRecordstoLoad: 30,
-
-  /**
    * Maintain  state of loading data
    * @type {Boolean}
    */
   isLoading: false,
 
   /**
-   * Maximum number of retry for past date data
-   * @return {Number}
-   */
-  retryNumberOfPastDateDataLoad: 12,
-
-  /**
-   * Retried data load for past date
-   * @type {Number}
-   */
-  retriedDataLoadForPastDate: 0,
-
-  /**
    * Maintains the list of newly added DCA content
    * @type {Array}
    */
   newlyAddedDcaContents: Ember.A([]),
+
+  /**
+   * Maintains the value which of month activities displaying
+   * @type {Integer}
+   */
+  forMonth: Ember.computed(function() {
+    return moment().format('MM');
+  }),
+
+  /**
+   * Maintains the value which of year activities displaying
+   * @type {Integer}
+   */
+  forYear: Ember.computed(function() {
+    return moment().format('YYYY');
+  }),
+
+  /**
+   * Maintains  the value of first date of month
+   * @return {String}
+   */
+  forFirstDateOfMonth: Ember.computed('forMonth', 'forYear', function() {
+    let forMonth = this.get('forMonth');
+    let forYear = this.get('forYear');
+    let date = `${forYear}-${forMonth}-01`;
+    return moment(date).format('YYYY-MM-DD');
+  }),
+
+  /**
+   * It maintains the  state of unscheduled classActivities pull up
+   * @type {Boolean}
+   */
+  showUnScheduledItemsPullup: false,
 
   // -------------------------------------------------------------------------
   // Observers
@@ -391,10 +497,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     'showSearchContentPullup',
     'showDcaCourseMapPullup',
     function() {
-      let component = this;
-      let showSearchContentPullup = component.get('showSearchContentPullup');
-      let showDcaCourseMapPullup = component.get('showDcaCourseMapPullup');
-      let newlyAddedDcaContents = component.get('newlyAddedDcaContents');
+      let controller = this;
+      let showSearchContentPullup = controller.get('showSearchContentPullup');
+      let showDcaCourseMapPullup = controller.get('showDcaCourseMapPullup');
+      let newlyAddedDcaContents = controller.get('newlyAddedDcaContents');
       if (
         !showDcaCourseMapPullup &&
         !showSearchContentPullup &&
@@ -407,24 +513,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           newlyAddedDcaContents.forEach(content => {
             content.set('isNewlyAdded', false);
           });
-          component.set('newlyAddedDcaContents', Ember.A());
+          controller.set('newlyAddedDcaContents', Ember.A());
         }, 5000);
       }
     }
   ),
-
-  // -------------------------------------------------------------------------
-  // Events
-
-  init() {
-    let controller = this;
-    controller._super(...arguments);
-    Ember.run.scheduleOnce('afterRender', controller, function() {
-      controller.handleShowMoreData();
-      controller.handleShowActionBar();
-      controller.defaultScrollToTodaysDcaContentList(0);
-    });
-  },
 
   // -------------------------------------------------------------------------
   // Methods
@@ -450,28 +543,21 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     if (dateWiseClassActivities.get('classActivities').length === 0) {
       classActivities.removeObject(dateWiseClassActivities);
     }
-    this.handleContainerListScroll();
   },
 
-  loadData(startDate, endDate, isPastClassActivity) {
+  loadData() {
     const controller = this;
     const classId = controller.get('classId');
+    let forMonth = controller.get('forMonth');
+    let forYear = controller.get('forYear');
     controller.set('isLoading', true);
     controller
       .get('classActivityService')
-      .findClassActivities(classId, null, startDate, endDate)
+      .findClassActivities(classId, null, forMonth, forYear)
       .then(classActivities => {
+        controller.set('classActivities', Ember.A([]));
         if (classActivities && classActivities.length > 0) {
           controller.parseClassActivityData(classActivities);
-          controller.set('retriedDataLoadForPastDate', 1);
-        } else if (isPastClassActivity) {
-          controller.loadPastClassActivitesData();
-          let retriedDataLoadForPastDate =
-            controller.get('retriedDataLoadForPastDate') + 1;
-          controller.set(
-            'retriedDataLoadForPastDate',
-            retriedDataLoadForPastDate
-          );
         }
         controller.set('isLoading', false);
       });
@@ -494,100 +580,35 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     });
   },
 
-  handleShowMoreData() {
-    let controller = this;
-    let container = Ember.$('.dca-content-list-container');
-    Ember.$(container).scroll(function() {
-      let scrollTop = Ember.$(container).scrollTop();
-      let listContainerHeight = Ember.$(container).height() + 20;
-      let isScrollReachedBottom =
-        scrollTop ===
-        Ember.$(container).prop('scrollHeight') - listContainerHeight;
-      if (isScrollReachedBottom && !controller.get('isLoading')) {
-        controller.loadPastClassActivitesData();
+  closeCADatePickerOnClickOutSide() {
+    Ember.$('.teacher_class_class-activities').on('click', function(e) {
+      if (
+        !Ember.$(e.target).hasClass('ca-datepicker-popover') &&
+        Ember.$('.ca-datepicker-popover-container').has(e.target).length === 0
+      ) {
+        Ember.$('.ca-datepicker-popover-container').hide();
+        Ember.$('.ca-datepicker-popover').removeClass('active');
       }
     });
+    Ember.$('.teacher_class_class-activities .dca-list-container').on(
+      'scroll',
+      function() {
+        if (Ember.$('.ca-datepicker-popover-container').is(':visible')) {
+          Ember.$('.ca-datepicker-popover-container').hide();
+          Ember.$('.ca-datepicker-popover').removeClass('active');
+        }
+      }
+    );
   },
 
-  handleShowActionBar() {
-    let controller = this;
-    let container = Ember.$('.dca-content-list-container');
-    Ember.$(container).scroll(function() {
-      controller.handleContainerListScroll();
+  serializerSearchContent(content, contentId, date) {
+    return Ember.Object.create({
+      id: contentId,
+      added_date: date,
+      activityDate: date,
+      collection: content,
+      usersCount: -1,
+      isActive: false
     });
-  },
-
-  handleContainerListScroll() {
-    let container = Ember.$('.dca-content-list-container');
-    let containerListHeight = $(container).height();
-    let futureListContainerHeight = Ember.$(
-      '.dca-future-date-list-container'
-    ).height();
-    let todaysInfoActionContainerHeight = Ember.$(
-      '.dca-todays-action-list-container .dca-todays-info-action-container'
-    ).height();
-    let todaysDcaListTopArrowContainer = Ember.$(
-      '.dca-nav-to-todays-dca-list.top-section'
-    );
-    let todaysDcaListBottomArrowContainer = Ember.$(
-      '.dca-nav-to-todays-dca-list.bottom-section'
-    );
-    let scrollTop = Ember.$(container).scrollTop();
-    let containerHeight =
-      futureListContainerHeight + todaysInfoActionContainerHeight + 85;
-    let diffFutureAndTodaysContainerDistance =
-      futureListContainerHeight +
-      45 +
-      todaysInfoActionContainerHeight -
-      containerListHeight;
-    if (scrollTop > containerHeight) {
-      Ember.$(todaysDcaListTopArrowContainer).addClass('active');
-    } else {
-      Ember.$(todaysDcaListTopArrowContainer).removeClass('active');
-    }
-
-    if (
-      futureListContainerHeight + 45 > containerListHeight &&
-      scrollTop < diffFutureAndTodaysContainerDistance
-    ) {
-      Ember.$(todaysDcaListBottomArrowContainer).addClass('active');
-    } else {
-      Ember.$(todaysDcaListBottomArrowContainer).removeClass('active');
-    }
-  },
-
-  loadPastClassActivitesData() {
-    let controller = this;
-    if (
-      controller.get('retriedDataLoadForPastDate') <
-      controller.get('retryNumberOfPastDateDataLoad')
-    ) {
-      let numberRecordsLoadedPastDate = controller.get(
-        'numberRecordsLoadedPastDate'
-      );
-      let numberRecordstoLoad = controller.get('numberRecordstoLoad');
-      let startDate = moment()
-        .subtract(numberRecordstoLoad + numberRecordsLoadedPastDate, 'd')
-        .format('YYYY-MM-DD');
-      let endDate = moment()
-        .subtract(numberRecordsLoadedPastDate + 1, 'd')
-        .format('YYYY-MM-DD');
-      controller.set(
-        'numberRecordsLoadedPastDate',
-        numberRecordsLoadedPastDate + numberRecordstoLoad
-      );
-      controller.loadData(startDate, endDate, true);
-    }
-  },
-
-  defaultScrollToTodaysDcaContentList(animateDuration) {
-    let futureListHeight =
-      Ember.$('.dca-future-date-list-container').height() + 65;
-    Ember.$('.dca-content-list-container').animate(
-      {
-        scrollTop: futureListHeight
-      },
-      animateDuration
-    );
   }
 });

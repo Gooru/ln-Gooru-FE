@@ -36,7 +36,7 @@
             onShownBaseLine="onShownBaseLine"
             onSelectCompetency="onSelectCompetency"
           }}
-          <div class="proficiency-tags">
+          <div class="proficiency-tags hidden-xs">
             <div class="proficiency-legends">
               <div class="mastered legend">
                 <span class="box"></span>
@@ -65,7 +65,7 @@
             </div>
           </div>
           {{#if isShowTimeSeries}}
-            <div class="time-series-container">
+            <div class="time-series-container hidden-xs">
               {{charts.monthly-time-series-chart onSelectMonth="onSelectMonth" startDate=timeSeriesStartDate}}
             </div>
           {{/if}}

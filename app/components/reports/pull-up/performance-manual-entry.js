@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    onClosePullUp() {
+    onClosePerformanceEntry() {
       let component = this;
       component.closePullUp();
     }
@@ -29,7 +29,7 @@ export default Ember.Component.extend({
     );
   },
 
-  closePullUp(closeAll) {
+  closePullUp() {
     let component = this;
     component.$().animate(
       {
@@ -38,9 +38,6 @@ export default Ember.Component.extend({
       400,
       function() {
         component.set('isShowPullUp', false);
-        // if (closeAll) {
-        //   component.sendAction('onClosePullUp');
-        // }
       }
     );
   }

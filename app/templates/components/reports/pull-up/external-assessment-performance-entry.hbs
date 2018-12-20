@@ -1,28 +1,43 @@
 <div class="external-assessment-performance-container">
   <div class="assessment-thumbnail" style="background-image: url({{assessment.thumbnailUrl}})"></div>
-  <div class="question-score header">Question Score</div>
-  <div class="active-student">
-    <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})"></div>
-    <div class="student-name ellipsis">{{activeStudent.fullName}} {{activeStudentSeq}}</div>
-    <div></div>
-  </div>
-  <div class="students-container">
-    {{#each students as |student studentSeq|}}
-      <div class="student-info-container student-{{studentSeq}} {{if (eq activeStudent.id student.id) 'selected-student' }}">
-        <div class="student-thumbnail" style="background-image: url({{student.avatarUrl}})"></div>
-        <div class="last-name">{{student.lastName}}</div>
-        <div class="first-name">{{student.firstName}}</div>
-        <div class="student-score">
-          {{input type="text" class=(concat 'student-score-entry' ' st-' studentSeq '-score')
-            focus-in=(action "onSelectStudent" student studentSeq)
-            focus-out=(action "onEditScore" studentSeq)
-          }}
-        </div>
+  {{#if isShowMaxScoreEntry}}
+    <div class="max-score-entry">
+      <div class="text-title">
+        ENTER THE MAXIMUM SCORE FOR THE ASSESSMENT
       </div>
-    {{/each}}
-  </div>
-  <div class="action-container">
-    <div class="prev action" {{action "onMoveStudent" 'prev'}}><div class="student-thumbnail"></div>Prev</div>
-    <div class="next action" {{action "onMoveStudent" 'next'}}>Next<div class="student-thumbnail"></div></div>
-  </div>
+      <div class="score-entry">
+        {{input type="text" class="max-score-entry"
+          value=assessmentMaxScore
+        }}
+      </div>
+      <div class="action {{unless isValidMaxScore 'disabled'}}" {{action "onEnterMaxScore"}}>
+        Confirm
+      </div>
+    </div>
+  {{else}}
+    <div class="question-score header">Question Score</div>
+    <div class="active-student">
+      <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})"></div>
+      <div class="student-name ellipsis">{{activeStudent.fullName}} {{activeStudentSeq}}</div>
+      <div></div>
+    </div>
+    <div class="students-container">
+      {{#each students as |student studentSeq|}}
+        <div class="student-info-container student-{{studentSeq}} {{if (eq activeStudent.id student.id) 'selected-student' }}">
+          <div class="student-thumbnail" style="background-image: url({{student.avatarUrl}})">{{gru-icon name="done_all"}}</div>
+          <div class="last-name ellipsis">{{student.lastName}}</div>
+          <div class="first-name ellipsis">{{student.firstName}}</div>
+          <div class="student-score">
+            {{input type="text" class=(concat 'student-score-entry' ' s-' studentSeq '-score')
+              focus-in=(action "onSelectStudent" student studentSeq)
+              focus-out=(action "onEditScore" studentSeq)
+            }}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <div class="action-container">
+      <div class="next action" {{action "onMoveNext"}}>Next<div class="student-thumbnail"></div></div>
+    </div>
+  {{/if}}
 </div>

@@ -65,7 +65,7 @@ export default Ember.Component.extend({
      */
     changeVisibility: function() {
       let classActivity = this.get('classActivity');
-      this.sendAction('onChangeVisibility', classActivity.get('id'));
+      this.sendAction('onChangeVisibility', classActivity);
     },
 
     /**
@@ -76,41 +76,36 @@ export default Ember.Component.extend({
     },
 
     /**
-     * Action get triggered when add content to DCA got clicked
+     * Action get triggered when schedule content to CA got clicked
      */
-    onAddContentToDCA(content) {
-      let component = this;
-      let classId = component.get('classId');
-      let contentType = content.get('collectionType');
-      let contentId = content.get('id');
-      component
-        .get('classActivityService')
-        .addActivityToClass(classId, contentId, contentType)
-        .then(newContentId => {
-          if (!component.isDestroyed) {
-            let date = moment().format('YYYY-MM-DD');
-            let data = Ember.Object.create({
-              id: newContentId,
-              added_date: date,
-              collection: content,
-              isActive: false,
-              isAddedFromPanel: true
-            });
-            component.sendAction('addedContentToDCA', data, date);
-          }
-        });
+    onScheduleContentToDCA(content, event) {
+      this.sendAction('onScheduleContentToDCA', content, event);
+    },
+
+    showStudentList() {
+      this.set('showStudentListPullup', true);
     },
 
     onOpenPerformanceEntry(item, classActivity) {
       let component = this;
-      console.log('item', item);
-      console.log('classActivity', classActivity);
       component.sendAction('onOpenPerformanceEntry', item, classActivity);
     }
   },
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {Boolean} isShowAddData
+   */
+  isShowAddData: Ember.computed('isOfflineClass', 'classActivity', 'item', function() {
+    let component = this;
+    let isOfflineClass = component.get('isOfflineClass');
+    let itemType = component.get('item.collectionType');
+    let isAssessment = itemType === 'assessment' || itemType === 'assessment-external';
+    let activationData = !!component.get('classActivity.activation_date');
+    return isOfflineClass && isAssessment && activationData;
+  }),
 
   /**
    * @property {Collection/Assessment} item
@@ -143,13 +138,21 @@ export default Ember.Component.extend({
    * Maintains the flag to show go live or not
    * @type {Boolean}
    */
-  showGolive: false,
+  showGolive: Ember.computed('isToday', function() {
+    return this.get('isToday');
+  }),
 
   /**
    * Maintains the flag to show remove content button or not.
    * @type {Boolean}
    */
-  showDcaRemoveButton: false,
+  showDcaRemoveButton: Ember.computed(
+    'isToday',
+    'isActivityFuture',
+    function() {
+      return this.get('isToday') || this.get('isActivityFuture');
+    }
+  ),
 
   /**
    * Maintains the flag to show assign button or not.
@@ -161,5 +164,53 @@ export default Ember.Component.extend({
    * Maintains the flag to show add dca content button or not.
    * @type {Boolean}
    */
-  showDcaAddButton: false
+  showDcaAddButton: false,
+
+  /**
+   * Maintains the flag to show student list pull up.
+   * @type {Boolean}
+   */
+  showStudentListPullup: false,
+
+  /**
+   * Class activity date
+   * @type {Date}
+   */
+  activityDate: null,
+
+  /**
+   * It is used to find activity is today or not
+   * @return {Boolean}
+   */
+  isToday: Ember.computed('activityDate', function() {
+    let activityDate = this.get('activityDate');
+    let currentDate = moment().format('YYYY-MM-DD');
+    return currentDate === activityDate;
+  }),
+
+  /**
+   * It is used to find activity is past or not
+   * @return {Boolean}
+   */
+  isActivityPast: Ember.computed('activityDate', function() {
+    let activityDate = this.get('activityDate');
+    let currentDate = moment().format('YYYY-MM-DD');
+    return moment(activityDate).isBefore(currentDate);
+  }),
+
+  /**
+   * It is used to find activity is future or not
+   * @return {Boolean}
+   */
+  isActivityFuture: Ember.computed('activityDate', function() {
+    let activityDate = this.get('activityDate');
+    let currentDate = moment().format('YYYY-MM-DD');
+    return moment(activityDate).isAfter(currentDate);
+  }),
+
+  /**
+   * It maintains the state of cohort pull up need to show or not.
+   * @type {Boolean}
+   */
+  showCohort: false
 });

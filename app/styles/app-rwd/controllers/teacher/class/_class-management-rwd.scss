@@ -116,4 +116,84 @@
       margin-left: 0;
     }
   }
+  @media only screen and (max-width: $screen-568 - 1) {
+    .teachers-info-table {
+      .last-name {
+        display: none;
+      }
+
+      table {
+        .table-header {
+          th {
+            div {
+              padding: 0 0 10px;
+            }
+          }
+
+          .sm-last-name {
+            display: none;
+          }
+
+          .profile {
+            width: calc(100vw /3);
+          }
+
+          .teacher-actions {
+            width: calc(100vw / 4);
+          }
+        }
+      }
+
+      .first-name {
+        width: calc(100vw /2);
+      }
+
+      .last-name {
+        display: none;
+      }
+
+      .sm-last-name {
+        display: none;
+      }
+    }
+  }
+  @media only screen and (min-width: $screen-568) {
+    .teachers-info-table {
+      .teacher-actions {
+        width: calc(100vw / 4);
+      }
+
+      .teacherdatacolumn {
+        width: calc(100vw / 4);
+      }
+
+      .last-name {
+        width: calc(100vw / 4);
+      }
+
+      table {
+        .table-header {
+          th {
+            width: calc(100vw / 4);
+
+            div {
+              padding: 0 0 10px 27px;
+            }
+          }
+
+          .teachername {
+            display: none;
+          }
+
+          .sm-last-name {
+            width: calc(100vw / 4);
+          }
+
+          .teacher-actions {
+            width: calc(100vw / 4);
+          }
+        }
+      }
+    }
+  }
 }

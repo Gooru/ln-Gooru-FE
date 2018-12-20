@@ -1,4 +1,7 @@
 .reports.pull-up-dca-student-collection-report {
+  .user-course-info {
+    height: auto;
+  }
   @media only screen and (max-width: $screen-sm) {
   width: 100%;
   .user-course-info {
@@ -26,6 +29,12 @@
   }
   @media only screen and (min-width: $screen-568) and (max-width: $screen-824) {
     .user-course-info {
+      .assessment-name {
+          margin-left: 0;
+      }
+      .class-performance {
+          margin-left: 0;
+      }
       .user-profile-info {
         .profile {
           .img-container {
