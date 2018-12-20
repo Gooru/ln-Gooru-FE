@@ -71,8 +71,7 @@ export default {
   },
 
   userAlert: {
-    message:
-      'Server maintenance planned on 20 Dec 2019 from 10:00AM to 1:00PM IST. Please plan your work accordingly.'
+    message: null
   },
 
   demoClass: {
