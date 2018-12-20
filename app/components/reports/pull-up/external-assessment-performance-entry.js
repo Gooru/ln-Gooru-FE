@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   session: Ember.inject.service('session'),
 
   actions: {
-    onSelectStudent(student, studentSeq) {
+    onSelectStudent(student) {
       let component = this;
       component.set('activeStudent', student);
     },
@@ -67,7 +67,6 @@ export default Ember.Component.extend({
 
   updateScoredElement(studentSeq) {
     let component = this;
-    let studentContainer = component.$(`.student-${studentSeq}`);
     let enteredScore = component.$(`.s-${studentSeq}-score`).val();
     if (enteredScore && !isNaN(enteredScore)) {
       component.$(`.student-${studentSeq}`).removeClass('scored').addClass('scored');
@@ -92,14 +91,14 @@ export default Ember.Component.extend({
       'collection_type': 'assessment-external',
       'session_id': generateUUID(),
       'time_zone': component.get('timeZone'),
-      'class_id': component.get('classId') || null,
+      'class_id': classId,
       'course_id': courseId,
       'unit_id': unitId,
       'lesson_id': lessonId,
       'collection_id': component.get('assessment.id'),
       'partner_id': component.get('session.partnerId') || null,
       'content_source': 'dailyclassactivity',
-      'score': score,
+      'score': 0,
       'max_score': maxScore,
       'percent_score': 25,
       'time_spent': 0,
@@ -110,6 +109,7 @@ export default Ember.Component.extend({
 
   updateStudentAssessmentScore(reqBodyParams) {
     let component = this;
+    let performanceService = component.get('performanceService');
     return Ember.RSVP.hash({
       studentPerformanceUpdated: Ember.RSVP.resolve(performanceService.updateCollectionOfflinePerformance(reqBodyParams))
     });
