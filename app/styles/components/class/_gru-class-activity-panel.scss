@@ -6,7 +6,6 @@
   &:hover {
     .dca-panel-container {
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-      position: relative;
     }
   }
 
@@ -17,6 +16,7 @@
     &.new {
       background-color: #ffc107ad;
     }
+
     &.past-date {
       .dca-assign-btn {
         pointer-events: none;
@@ -247,7 +247,6 @@
           font-weight: bold;
           cursor: pointer;
           border-top-right-radius: 4px;
-          border-bottom-right-radius: 4px;
 
           &.collection {
             background-color: #4e5e68;
@@ -262,19 +261,32 @@
           .no-performance {
             color: #37424b;
           }
+
+          &.add-data {
+            color: $white;
+            background-color: #4e5e67;
+            font-size: 10px;
+            text-align: center;
+            text-transform: uppercase;
+          }
         }
       }
     }
 
     .ca-panel-container-2 {
       height: 20px;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       display: grid;
       align-items: center;
       height: 30px;
 
       .student-count {
         padding-left: 25px;
+        visibility: hidden;
+
+        &.active {
+          visibility: visible;
+        }
 
         span {
           cursor: pointer;
@@ -283,6 +295,15 @@
 
       .re-schedule {
         justify-self: center;
+
+        .re-schedule-activity {
+          height: 22px;
+          cursor: pointer;
+          .update {
+            font-size: 20px;
+            pointer-events: none;
+          }
+        }
       }
 
       .time-spent {

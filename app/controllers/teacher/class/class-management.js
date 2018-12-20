@@ -60,14 +60,22 @@ export default Ember.Controller.extend(ModalMixin, {
         ☐  Student grade setting Button present before delete to apply the grade setting
     */
   classDisplayRules: function() {
-    let course = this.get('course.id'),
-      subject = this.get('subject'),
-      premium = this.get('isPremiumClass');
-
-    Ember.Logger.log(
-      `course: ${course}, subject : ${subject} , premium : ${premium}`
-    );
+    /* Set class display rules here */
   },
+
+  isClassBaselined: Ember.computed('class.members', function() {
+    let controller = this;
+    const classMembers = controller.get('class.members');
+    let isBaselined = true;
+    if (classMembers && classMembers.length > 0) {
+      let baselineMembers = classMembers.filter(
+        mem => mem.profileBaselineDone === true
+      );
+      isBaselined = baselineMembers && baselineMembers.length > 0;
+    }
+
+    return isBaselined;
+  }),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -283,6 +291,7 @@ export default Ember.Controller.extend(ModalMixin, {
         },
         callback: {
           success: function() {
+            controller.get('classMembers').removeObject(student);
             controller.get('sortedMembers').removeObject(student);
           }
         }
@@ -377,27 +386,26 @@ export default Ember.Controller.extend(ModalMixin, {
     updateClassMembersSettings: function(student, value, setKey) {
       const controller = this;
       if (controller.get('course.id') && controller.get('sanitizedSubject')) {
+        let oldDestination = student.get('gradeUpperBound');
+        let oldOrigin = student.get('gradeLowerBound');
+        student.set('regeneratePathway', false);
+
         let settings = {
-            grade_lower_bound: student.get('gradeLowerBound'),
-            grade_upper_bound: student.get('gradeUpperBound'),
+            grade_lower_bound: oldOrigin,
+            grade_upper_bound: oldDestination,
             users: [student.id]
           },
           akey = setKey ? setKey : '';
+
         settings[akey] = value;
         student.set('gradeLowerBound', settings.grade_lower_bound);
         student.set('gradeUpperBound', settings.grade_upper_bound);
-        /*  let normalizedClassSettings = {
-          gradeLowerBound: settings.grade_lower_bound,
-          gradeUpperBound: settings.grade_upper_bound,
-          gradeCurrent: settings.grade_current,
-          route0Applicable: settings.route0
-        };
 
-        let curClass = this.get('class');
-        curClass.setProperties(normalizedClassSettings); */
+        if (settings.grade_upper_bound !== oldDestination) {
+          student.set('regeneratePathway', true);
+        }
+
         controller.updateBondValueToSingleStudent(student);
-
-        //controller.updateClassMembersSettings(settings); // No Api calls on update only save settings
       } else {
         Ember.Logger.log(
           'Course or Subject not assigned to class, cannot update class settings'
@@ -571,6 +579,11 @@ export default Ember.Controller.extend(ModalMixin, {
    * @property {Course}
    */
   course: Ember.computed.alias('classController.course'),
+
+  /**
+   * @property {classMembers}
+   */
+  classMembers: Ember.computed.alias('classController.members.members'),
 
   /**
    * @type {Boolean}
@@ -887,6 +900,7 @@ export default Ember.Controller.extend(ModalMixin, {
       queryParams
     });
   },
+
   updateClassMembersSettings: function(settings) {
     const controller = this;
     const classId = this.get('class.id');

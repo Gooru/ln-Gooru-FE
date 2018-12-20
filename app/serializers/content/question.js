@@ -214,7 +214,8 @@ export default Ember.Object.extend({
         courseId: questionData.course_id,
         unitId: questionData.unit_id,
         lessonId: questionData.lesson_id,
-        collectionId: questionData.collection_id
+        collectionId: questionData.collection_id,
+        maxScore: questionData.max_score || 1
       }
     );
 

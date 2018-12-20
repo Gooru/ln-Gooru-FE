@@ -74,22 +74,32 @@
           </div>
         {{/if}}
       {{else}}
-        <div class="dca-panel-performance not-started">
-          <span class="no-performance">--</span>
-        </div>
+        {{#if isShowAddData}}
+          <div class="dca-panel-performance add-data" {{action "onOpenPerformanceEntry" item classActivity}}>
+            Add Data
+          </div>
+        {{else}}
+          <div class="dca-panel-performance not-started">
+            <span class="no-performance">--</span>
+          </div>
+        {{/if}}
       {{/if}}
     </div>
   </div>
   <div class="ca-panel-container-2">
-    <div class="student-count">
+    <div class="student-count {{if showCohort 'active'}}">
       {{#if (eq classActivity.usersCount -1)}}
-        <span {{action 'showStudentList'}}>Everyone</span> {{else if (eq classActivity.usersCount 0)}}
-        <span {{action 'showStudentList'}}>No Students Selected</span>
+        <span {{action 'showStudentList'}}>{{t 'common.everyone'}}</span> {{else if (eq classActivity.usersCount 0)}}
+        <span {{action 'showStudentList'}}>{{t 'common.no-students-selected'}}</span>
       {{else}}
-        <span {{action 'showStudentList'}}> {{classActivity.usersCount}}  Students Selected</span>
+        <span {{action 'showStudentList'}}> {{classActivity.usersCount}}  {{t 'common.students-selected'}}</span>
       {{/if}}
     </div>
-    <div class="re-schedule hidden">Re schedule</div>
+    <div class="re-schedule">
+      <div class="re-schedule-activity ca-datepicker-popover" onclick= {{action 'onScheduleContentToDCA' classActivity}}>
+        {{gru-icon name="update"}}
+      </div>
+    </div>
     <div class="time-spent">
       {{#if collectionPerformanceSummary}}
         <span>{{format-time collectionPerformanceSummary.timeSpent}}</span>

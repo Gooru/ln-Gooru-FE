@@ -1,0 +1,143 @@
+.ca-date-picker-container {
+  box-shadow: 0 4px 40px 0 rgba(0, 0, 0, 0.13);
+
+  .ca-date-nav-container {
+    width: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: 50px 1fr 50px;
+    align-items: center;
+    justify-items: center;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+    height: 35px;
+
+    .prev-cal-arrow {
+      height: 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .next-cal-arrow {
+      height: 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .cal-mm-yyyy {
+      display: inline-flex;
+      height: 20px;
+      font-weight: bold;
+      pointer-events: none;
+
+      .arrow_drop_down,
+      .arrow_drop_up {
+        display: none;
+      }
+
+      &.ca-date-picker-toggle {
+        cursor: pointer;
+        pointer-events: all;
+
+        .arrow_drop_up {
+          display: none;
+        }
+
+        .arrow_drop_down {
+          display: inline-block;
+        }
+
+        &.active {
+          .arrow_drop_up {
+            display: inline-block;
+          }
+
+          .arrow_drop_down {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .ca-datepicker-container {
+    background: #fff;
+    z-index: 1;
+    width: inherit;
+    padding-bottom: 10px;
+
+    &.ca-date-picker-toggle {
+      display: none;
+    }
+
+    #ca-datepicker {
+      .datepicker {
+        width: 100%;
+
+        .table-condensed {
+          width: 100%;
+
+          thead tr:first-child {
+            display: none;
+          }
+        }
+      }
+    }
+
+    #ca-month-picker {
+      padding-left: 10px;
+      padding-right: 10px;
+
+      .ca-month-picker-title {
+        font-weight: bold;
+        padding-bottom: 5px;
+        display: inline-block;
+      }
+
+      .ca-months {
+        span {
+          padding: 3px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          margin-right: 5px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &.ca-datepicker-orientation-top {
+    .ca-datepicker-top {
+      display: inline-block;
+    }
+  }
+
+  &.ca-datepicker-orientation-bottom {
+    .ca-datepicker-bottom {
+      display: inline-block;
+    }
+  }
+
+  .ca-datepicker-top {
+    position: absolute;
+    right: -7px;
+    bottom: -14px;
+    color: #fff;
+    display: none;
+  }
+
+  .ca-datepicker-bottom {
+    position: absolute;
+    right: -7px;
+    top: -14px;
+    color: #fff;
+    display: none;
+  }
+
+  &.ca-datepicker-orientation-center {
+    .ca-datepicker-bottom,
+    .ca-datepicker-top {
+      right: 0;
+      left: calc(100% / 2);
+    }
+  }
+}

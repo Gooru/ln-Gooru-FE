@@ -836,6 +836,7 @@ $canvas-height: 1254px;
       .grade-label {
         padding-left: 16px;
       }
+
       .dropdown {
         position: relative;
         display: inline-block;
@@ -901,7 +902,12 @@ $canvas-height: 1254px;
       cursor: none;
       opacity: 0.6;
     }
-
+    .baseline-active {
+      opacity: 1;
+    }
+    .baseline-inactive {
+      opacity: 0.5;
+    }
     div::disabled {
       pointer-events: none;
       cursor: none;
@@ -918,8 +924,9 @@ $canvas-height: 1254px;
 
       .sec-rows-layout {
         /*  max-height: 100vh; */
-        overflow-x: auto;
-        padding-right: 14px; // to add scrollbar outside of the left panel area
+        /*  overflow-x: auto; */
+        padding-right: 1px; // to add scrollbar outside of the left panel area
+        margin-left: 30px;
 
         display: flex;
         flex-direction: column;
@@ -1070,6 +1077,7 @@ $canvas-height: 1254px;
 
             .sub-sec-coteach {
               margin-top: 25px;
+              padding-bottom: 8px;
 
               .sub-sec-head {
                 /* width: 68px; */
@@ -1193,7 +1201,83 @@ $canvas-height: 1254px;
           }
         }
 
+        .gen-pathway-sec {
+          @extend .sec-panel;
+          margin-top: 25px;
+          margin-left: 31px;
+          width: 667px;
+
+          .sec-title {
+            height: 14px;
+            opacity: 0.7;
+
+            font-size: 12px;
+            font-weight: bold;
+          }
+
+          .sub-sec-sep {
+            border-top: 1px solid $sep-border-color;
+            margin-top: 12px;
+          }
+          .btn-top-panel {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            border-bottom: 1px solid #d7d7d7;
+            margin-left: 15px;
+
+            /* padding: 20px; */
+
+            .class-btn {
+              margin: unset;
+              align-self: unset;
+            }
+
+            .top-btn {
+              background-color: $btn-blue;
+              /* width: 211px; */
+              height: 53px;
+              border-radius: unset;
+              padding: 15px;
+              color: $white;
+              border-color: #f36463;
+              text-transform: uppercase;
+              cursor: pointer;
+              > i {
+                vertical-align: bottom;
+                margin-left: 16px;
+              }
+            }
+
+            .disabled {
+              cursor: none;
+              opacity: 0.5;
+              pointer-events: none;
+            }
+
+            .btn-txt {
+              color: whitesmoke;
+              background: transparent;
+            }
+          }
+          .gen-baseline-info {
+            margin: 15px;
+            font-weight: bold;
+            font-size: 13px;
+            color: $bg-dark;
+          }
+        }
+
         .course-sec-cont {
+          margin-left: 31px;
+
+          .no-course-message {
+            color: whitesmoke;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.54;
+          }
+
           .course-settings-label {
             @extend .white-font-label;
 
@@ -1204,8 +1288,8 @@ $canvas-height: 1254px;
           }
 
           .course-settings-sec {
-            width: 463px;
-            padding: 20px;
+            /*  width: 463px; //width greater than 463, same as student sec */
+            padding: 0 0 20px 20px;
 
             @extend .sec-panel;
 
@@ -1218,10 +1302,51 @@ $canvas-height: 1254px;
               font-size: 12px;
               font-weight: bold;
               margin-bottom: 10px;
+              margin-bottom: 12px;
+            }
+
+            //Apply Button
+            .btn-panel {
+              display: flex;
+              align-items: baseline;
+              justify-content: space-between;
+              border-bottom: 1px solid #d7d7d7;
+
+              .class-btn {
+                align-self: unset;
+                margin: unset;
+              }
+
+              .class-btn {
+                background-color: $btn-blue;
+                width: 135px;
+                height: 53px;
+                border-radius: 0px;
+                padding: 15px;
+                color: $white;
+                border-color: #f36463;
+                text-transform: uppercase;
+                cursor: pointer;
+                > i {
+                  vertical-align: bottom;
+                  margin-left: 16px;
+                }
+              }
+
+              .disabled {
+                cursor: none;
+                opacity: 0.5;
+                pointer-events: none;
+              }
+
+              .btn-txt {
+                color: whitesmoke;
+                background: transparent;
+              }
             }
 
             .sub-sec-sep {
-              width: 422.9px;
+              /* width: 422.9px; */
               border-top: 1px solid $sep-border-color;
               margin-top: 12px;
 
@@ -1229,19 +1354,28 @@ $canvas-height: 1254px;
             }
 
             .sub-sec-row {
-              width: 422.9px;
+              /*  width: 422.9px; */
 
               // border-top: 1px solid;
               display: flex;
-              //margin-top: 13px;
               height: 36px;
               align-items: baseline;
 
               .field-dropdown-caps-label {
                 /* width: 55px; */
                 @extend .caps-field-label;
-
-                flex: 1;
+                flex: 0.7;
+                padding: 12px 0;
+              }
+              .gradelevel-info {
+                align-self: flex-end;
+                cursor: pointer;
+                flex: 0.3;
+                > i {
+                  font-size: 20px;
+                  vertical-align: bottom;
+                  margin-left: 16px;
+                }
               }
 
               .field-drop-down {
@@ -1250,11 +1384,15 @@ $canvas-height: 1254px;
                 height: 16px;
                 font-family: Lato;
                 font-size: 13px;
+                .subject-label {
+                  padding-left: 16px;
+                }
               }
             }
 
             .class-level-setting-field {
               @extend .sub-sec-row;
+              padding: 12px 0;
             }
 
             .sec-course-action {
@@ -1310,46 +1448,8 @@ $canvas-height: 1254px;
 
                 /*  width: 40px; */
                 /*  height: 24px; */
+                margin-right: 30px;
                 object-fit: contain;
-              }
-            }
-
-            //Apply Button
-            .btn-panel {
-              display: flex;
-              align-items: baseline;
-              justify-content: flex-end;
-
-              .class-btn {
-                align-self: unset;
-                margin: unset;
-              }
-
-              .class-btn {
-                background-color: #543c3c;
-                width: 135px;
-                height: 53px;
-                border-radius: 4px;
-                padding: 15px;
-                color: $white;
-                border-color: #f36463;
-                text-transform: uppercase;
-                cursor: pointer;
-                > i {
-                  vertical-align: bottom;
-                  margin-left: 16px;
-                }
-              }
-
-              .disabled {
-                cursor: none;
-                opacity: 0.5;
-                pointer-events: none;
-              }
-
-              .btn-txt {
-                color: whitesmoke;
-                background: transparent;
               }
             }
           }
@@ -1417,6 +1517,13 @@ $canvas-height: 1254px;
       .student-sec-cont {
         margin-left: 31px;
 
+        .no-students-message {
+          color: whitesmoke;
+          font-size: 14px;
+          font-weight: 300;
+          line-height: 1.54;
+        }
+
         .student-settings-label {
           @extend .white-font-label;
 
@@ -1453,6 +1560,21 @@ $canvas-height: 1254px;
             @extend .grid-header-caps-label;
             border-bottom: 1px solid $sep-border-color;
             text-overflow: ellipsis;
+
+            .name-head {
+              margin-left: -10px;
+            }
+            .origin-head {
+              margin: 14px;
+            }
+
+            .destination-head {
+              margin: 14px;
+            }
+
+            .id-head {
+              margin: 14px;
+            }
           }
 
           .btn-panel {
@@ -1495,11 +1617,11 @@ $canvas-height: 1254px;
           }
 
           .student-grid {
+            padding-top: 20px;
             display: grid;
-            grid-template-columns: 40px minmax(15px, auto) 120px 120px 100px auto auto;
-            /*  grid-auto-rows: 40px minmax(15px, auto) 100px 100px 100px 100px 40px 40px 40px; */
-            /*grid-auto-rows: minmax(40px, auto); */
-            /* padding: 15px; */
+
+            grid-template-columns: 40px minmax(200px, auto) 150px 150px auto auto;
+
             margin-left: 13px;
             grid-column-gap: 0px;
             > div {
@@ -1511,6 +1633,7 @@ $canvas-height: 1254px;
               height: inherit;
               width: auto;
             }
+            // > div: div:nth-last-child(3)
           }
 
           .student-icon-col {
@@ -1544,6 +1667,14 @@ $canvas-height: 1254px;
 
           .student-id {
             @extend .origin;
+            display: flex;
+            align-items: center;
+            text-overflow: ellipsis;
+            > span {
+              margin-left: 14px;
+              overflow-wrap: break-word;
+              max-width: 135px;
+            }
           }
 
           .joined-on {
@@ -1565,6 +1696,8 @@ $canvas-height: 1254px;
             height: 30px;
             width: 30px;
             opacity: 0.3;
+          }
+          .student-delete :parent {
           }
           .student-act-de {
             display: none;
