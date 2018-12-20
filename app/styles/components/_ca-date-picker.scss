@@ -87,6 +87,12 @@
       padding-left: 10px;
       padding-right: 10px;
 
+      .ca-month-picker-title {
+        font-weight: bold;
+        padding-bottom: 5px;
+        display: inline-block;
+      }
+
       .ca-months {
         span {
           padding: 3px;

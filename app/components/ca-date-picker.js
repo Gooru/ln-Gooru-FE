@@ -124,35 +124,24 @@ export default Ember.Component.extend({
   numberOfMonthsToShow: 3,
 
   /**
-   * This flag will decide to whether the current month need to add in the months list or not.
-   * @type {Boolean}
-   */
-  showCurrentMonth: false,
-
-  /**
    * It maintains list of months to be display for unschedule contents
    * @return {Array}
    */
-  months: Ember.computed('showMonths', 'showCurrentMonth', function() {
+  months: Ember.computed('forFirstDateOfMonth', function() {
     let component = this;
     let showMonths = component.get('showMonths');
     let monthsList = Ember.A([]);
-    if (showMonths) {
-      let showCurrentMonth = component.get('showCurrentMonth');
+    let forFirstDateOfMonth = component.get('forFirstDateOfMonth');
+    if (showMonths && forFirstDateOfMonth) {
       let numberOfMonthsToShow = component.get('numberOfMonthsToShow');
-      let startDateOfMonth = showCurrentMonth
-        ? `${moment().format('YYYY-MM')}-01`
-        : `${moment()
-          .add(1, 'months')
-          .format('YYYY-MM')}-01`;
-      for (let index = 0; index < numberOfMonthsToShow; index++) {
-        let monthName = moment(startDateOfMonth)
+      for (let index = 1; index <= numberOfMonthsToShow; index++) {
+        let monthName = moment(forFirstDateOfMonth)
           .add(index, 'months')
           .format('MMMM');
-        let monthYear = moment(startDateOfMonth)
+        let monthYear = moment(forFirstDateOfMonth)
           .add(index, 'months')
           .format('YYYY');
-        let monthNumber = moment(startDateOfMonth)
+        let monthNumber = moment(forFirstDateOfMonth)
           .add(index, 'months')
           .format('MM');
         let month = Ember.Object.create({
