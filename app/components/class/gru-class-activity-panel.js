@@ -102,7 +102,7 @@ export default Ember.Component.extend({
     let component = this;
     let isOfflineClass = component.get('isOfflineClass');
     let itemType = component.get('item.collectionType');
-    let isAssessment = itemType === 'assessment' || itemType === 'assessment-external';
+    let isAssessment = itemType === 'assessment';
     let activationData = !!component.get('classActivity.activation_date');
     return isOfflineClass && isAssessment && activationData;
   }),

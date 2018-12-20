@@ -3,8 +3,12 @@ import {generateUUID} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
 
+  // -------------------------------------------------------------------------
+  // Attributes
   classNames: ['performance-manual-entry', 'assessment-performance-entry'],
 
+  // -------------------------------------------------------------------------
+  // Serevices
   assessmentService: Ember.inject.service('api-sdk/assessment'),
 
   questionService: Ember.inject.service('api-sdk/question'),
@@ -13,6 +17,8 @@ export default Ember.Component.extend({
 
   session: Ember.inject.service('session'),
 
+  // -------------------------------------------------------------------------
+  // Events
   didInsertElement() {
     let component = this;
     component.loadAssessmentData();
@@ -27,12 +33,16 @@ export default Ember.Component.extend({
   },
 
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+    //Action triggered when show/hide question description
     onToggleQuestion(question, questionSeq) {
       let component = this;
       component.$(`.question-${questionSeq} .question-description`).toggleClass('hidden');
     },
 
+    //Action triggered when select a question
     onSelectQuestion(question, questionSeq) {
       let component = this;
       component.set('activeQuestion', question);
@@ -42,17 +52,143 @@ export default Ember.Component.extend({
       component.$(`.question-${questionSeq} .question-info-container`).addClass('selected-question');
     },
 
+
+    //Action triggered when edit score of a question
     onEditScore(questionSeq) {
       let component = this;
       component.updateScoredElement(questionSeq);
     },
 
+    //Action triggered when move to prev/next student
     onMoveStudent(direction) {
       let component = this;
       component.loadStudentPerformanceData(direction);
     }
   },
 
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {Array} students
+   */
+  students: Ember.A([]),
+
+  /**
+   * @property {Object} activeStudent
+   */
+  activeStudent: Ember.computed('students', function() {
+    let component = this;
+    let students = component.get('students');
+    return students ? students.objectAt(0) : null;
+  }),
+
+  /**
+   * @property {Number} activeStudentSeq
+   */
+  activeStudentSeq: 0,
+
+  /**
+   * @property {Boolean} isNoStudent
+   */
+  isNoStudent: Ember.computed('students', function() {
+    let component = this;
+    let students = component.get('students');
+    return students.length <= 0;
+  }),
+
+  /**
+   * @property {Array} questions
+   */
+  questions: Ember.A([]),
+
+  /**
+   * @property {Object} assessment
+   */
+  assessment: null,
+
+  /**
+   * @property {Array} assessmentResources
+   */
+  assessmentResources: Ember.A([]),
+
+  /**
+   * @property {Object} activeQuestion
+   */
+  activeQuestion: Ember.computed('questions', function() {
+    let component = this;
+    let questions = component.get('questions');
+    return questions.objectAt(0);
+  }),
+
+  /**
+   * @property {Number} activeQuestionSeq
+   */
+  activeQuestionSeq: Ember.computed('questions', function() {
+    let component = this;
+    let questions = component.get('questions');
+    return questions ? 1 : 'NA';
+  }),
+
+  /**
+   @property {Array} studentsOfflineAssessmentData
+   */
+  studentsOfflineAssessmentData: Ember.A([]),
+
+  /**
+   * @property {String} timeZone
+   */
+  timeZone: Ember.computed(function() {
+    return moment.tz.guess() || null;
+  }),
+
+  /**
+   * @property {String} contentSource
+   */
+  contentSource: 'dailyclassactivity',
+
+  /**
+   * @property {Boolean} isValid
+   */
+  isValid: true,
+
+  /**
+   * @property {Boolean} isDisablePrev
+   */
+  isDisablePrev: Ember.computed('activeStudentSeq', function() {
+    let component = this;
+    let activeStudentSeq = component.get('activeStudentSeq');
+    return activeStudentSeq === 0;
+  }),
+
+  /**
+   * @property {Boolean} isDisableNext
+   */
+  isDisableNext: Ember.computed('activeStudentSeq', function() {
+    let component = this;
+    let activeStudentSeq = component.get('activeStudentSeq');
+    let numberOfStudents = component.get('students.length');
+    return activeStudentSeq === numberOfStudents - 1;
+  }),
+
+  /**
+   * @property {Boolean} isShowMaxScoreEntry
+   */
+  isShowMaxScoreEntry: true,
+
+  /**
+   * @property {Number} assessmentMaxScore
+   */
+  assessmentMaxScore: null,
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function loadStudentPerformanceData
+   * Method to load student performance data
+   */
   loadStudentPerformanceData(direction) {
     let component = this;
     let students = component.get('students');
@@ -79,70 +215,9 @@ export default Ember.Component.extend({
     }
   },
 
-  students: Ember.A([]),
-
-  activeStudent: Ember.computed('students', function() {
-    let component = this;
-    let students = component.get('students');
-    return students ? students.objectAt(0) : null;
-  }),
-
-  activeStudentSeq: 0,
-
-  isNoStudent: Ember.computed('students', function() {
-    let component = this;
-    let students = component.get('students');
-    return students.length <= 0;
-  }),
-
-  questions: Ember.A([]),
-
-  assessment: null,
-
-  assessmentResources: Ember.A([]),
-
-  activeQuestion: Ember.computed('questions', function() {
-    let component = this;
-    let questions = component.get('questions');
-    return questions.objectAt(0);
-  }),
-
-  activeQuestionSeq: Ember.computed('questions', function() {
-    let component = this;
-    let questions = component.get('questions');
-    return questions ? 1 : 'NA';
-  }),
-
-  studentsOfflineAssessmentData: Ember.A([]),
-
   /**
-   * @property {String} timeZone
+   * @function resetElements
    */
-  timeZone: Ember.computed(function() {
-    return moment.tz.guess() || null;
-  }),
-
-  contentSource: 'dailyclassactivity',
-
-  isValid: true,
-
-  isDisablePrev: Ember.computed('activeStudentSeq', function() {
-    let component = this;
-    let activeStudentSeq = component.get('activeStudentSeq');
-    return activeStudentSeq === 0;
-  }),
-
-  isDisableNext: Ember.computed('activeStudentSeq', function() {
-    let component = this;
-    let activeStudentSeq = component.get('activeStudentSeq');
-    let numberOfStudents = component.get('students.length');
-    return activeStudentSeq === numberOfStudents - 1;
-  }),
-
-  isShowMaxScoreEntry: true,
-
-  assessmentMaxScore: null,
-
   resetElements() {
     let component = this;
     let inputElements = component.$('.question-score-entry');
@@ -153,6 +228,9 @@ export default Ember.Component.extend({
     component.$('.question-score-entry').removeClass('wrong-score');
   },
 
+  /**
+   * @function loadEnteredStudentData
+   */
   loadEnteredStudentData(studentData) {
     let component = this;
     let resources = studentData ? studentData.resources : Ember.A([]);
@@ -166,6 +244,9 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * @function updateScoredElement
+   */
   updateScoredElement(questionSeq) {
     let component = this;
     let enteredScore = component.$(`.q-${questionSeq}-score`).val();
@@ -179,6 +260,9 @@ export default Ember.Component.extend({
     }
   },
 
+  /**
+   * @function loadAssessmentData
+   */
   loadAssessmentData() {
     let component = this;
     let assessment = component.get('assessment');
@@ -188,6 +272,9 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * @function getDataParams
+   */
   getDataParams() {
     let component = this;
     let inputElements = component.$('.question-score-entry');
@@ -234,6 +321,9 @@ export default Ember.Component.extend({
     return studentPerformanceData;
   },
 
+  /**
+   * @function validateQuestionScore
+   */
   validateQuestionScore(questionSeq, score) {
     let component = this;
     let maxScore = component.get('activeQuestion.maxScore');
@@ -247,6 +337,9 @@ export default Ember.Component.extend({
     return isValid;
   },
 
+  /**
+   * @function fetchAssessmentData
+   */
   fetchAssessmentData(assessmentId) {
     let component = this;
     let assessmentService = component.get('assessmentService');
@@ -258,6 +351,9 @@ export default Ember.Component.extend({
       });
   },
 
+  /**
+   * @function fetchQuestionData
+   */
   fetchQuestionData(questionId) {
     let component = this;
     let questionService = component.get('questionService');
@@ -271,6 +367,9 @@ export default Ember.Component.extend({
     }
   },
 
+  /**
+   * @function updateStudentAssessmentPerformance
+   */
   updateStudentAssessmentPerformance(dataParams) {
     let component = this;
     let performanceService = component.get('performanceService');
