@@ -18,6 +18,120 @@ export default Ember.Component.extend({
     let activeResource = component.get('timeData')[midLen];
     component.set('activeResource', activeResource);
     component.set('activeIndex', midLen);
+  },
+
+  moveToSelected(element) {
+    var selected;
+    if (element === 'next') {
+      selected = $('.selected').next();
+    } else if (element === 'prev') {
+      selected = $('.selected').prev();
+    } else {
+      selected = element;
+    }
+
+    var next = $(selected).next();
+    var prev = $(selected).prev();
+    var prevSecond = $(prev).prev();
+    var nextSecond = $(next).next();
+    var prevLeftThird = $(prevSecond).prev();
+    var nextRightThird = $(nextSecond).next();
+    var prevLeftFourth = $(prevLeftThird).prev();
+    var nextRightFourth = $(nextRightThird).next();
+
+    $(selected)
+      .removeClass()
+      .addClass('selected');
+
+    $(prev)
+      .removeClass()
+      .addClass('prev');
+    $(next)
+      .removeClass()
+      .addClass('next');
+
+    $(nextSecond)
+      .removeClass()
+      .addClass('nextRightSecond');
+    $(prevSecond)
+      .removeClass()
+      .addClass('prevLeftSecond');
+
+    $(prevLeftThird)
+      .removeClass()
+      .addClass('prevLeftThird');
+    $(nextRightThird)
+      .removeClass()
+      .addClass('nextRightThird');
+
+    $(prevLeftFourth)
+      .removeClass()
+      .addClass('prevLeftFourth');
+    $(nextRightFourth)
+      .removeClass()
+      .addClass('nextRightFourth');
+
+    $(nextRightFourth)
+      .nextAll()
+      .removeClass()
+      .addClass('hideRight');
+    $(prevLeftFourth)
+      .prevAll()
+      .removeClass()
+      .addClass('hideLeft');
+  },
+
+  setDefaultClasses() {
+    let activeCard = this.get('activeIndex');
+    let component = this;
+    let activeCartContainer = component.$(`.card-${activeCard}`);
+    component.$(activeCartContainer).addClass('selected');
+    component
+      .$(`.card-${activeCard}`)
+      .prev()
+      .addClass('prev');
+    component.$(`.card-${activeCard + 1}`).addClass('next');
+    // component.$(`.card-${activeCard - 1}`).prev().addClass('prevLeftSecond');
+    // component.$(`.card-${activeCard + 1}`).next().addClass('nextRightSecond');
+    // component.$(`.card-${activeCard - 1}`).prev().prev().addClass('prevLeftThird');
+    // component.$(`.card-${activeCard + 1}`).next().next().addClass('nextRightThird');
+    // component.$(`.card-${activeCard - 1}`).prev().prev().prev().addClass('prevLeftFourth');
+    // component.$(`.card-${activeCard + 1}`).next().next().next().addClass('nextRightFourth');
+    component
+      .$(`.card-${activeCard + 1}`)
+      .nextAll()
+      .addClass('hideRight');
+    component
+      .$(`.card-${activeCard - 1}`)
+      .prevAll()
+      .addClass('hideLeft');
+  },
+
+  didRender() {
+    let component = this;
+    component.setDefaultClasses();
+    component.$('#carousel').keydown(function(e) {
+      switch (e.which) {
+      case 37: // left
+        component.moveToSelected('prev');
+        break;
+
+      case 39: // right
+        component.moveToSelected('next');
+        break;
+
+      default:
+        return;
+      }
+      e.preventDefault();
+    });
+
+    // let activeCartContainer = component.$(`.card-4`);
+    // component.moveToSelected(activeCartContainer);
+
+    // $('#carousel div').click(function() {
+    //   component.moveToSelected($(this));
+    // });
   }
 
   //
@@ -35,7 +149,7 @@ export default Ember.Component.extend({
   //
   // uiDateFormat: function(givenDate) {
   //   givenDate = givenDate || new Date();
-  //   if (typeof givenDate === 'string') {
+  //   if (typeof givenDate ==== 'string') {
   //     givenDate = new Date(givenDate);
   //   }
   //   let dateLocale = 'en-us',
@@ -167,17 +281,17 @@ export default Ember.Component.extend({
   //   if (card) {
   //     let disCards = this.get('displayCards');
   //     if (disCards) {
-  //       if (disCards.center && disCards.center.sessionId === card.sessionId) {
+  //       if (disCards.center && disCards.center.sessionId ==== card.sessionId) {
   //         retval = 0;
   //       }
-  //       if (disCards.left && retval === undefined) {
+  //       if (disCards.left && retval ==== undefined) {
   //         retval = disCards.left.findIndex(
-  //           timemom => timemom.sessionId === card.sessionId
+  //           timemom => timemom.sessionId ==== card.sessionId
   //         );
   //       }
-  //       if (disCards.right && retval === undefined) {
+  //       if (disCards.right && retval ==== undefined) {
   //         retval = disCards.rigth.findIndex(
-  //           timemom => timemom.sessionId === card.sessionId
+  //           timemom => timemom.sessionId ==== card.sessionId
   //         );
   //       }
   //     }
@@ -266,7 +380,7 @@ export default Ember.Component.extend({
   //   if (offsetCurrentCard && this.timeData) {
   //     /* Set display Wrt a given card- card selection case Find card from timdData*/
   //     timeIndx = this.timeData.findIndex(
-  //       timemom => timemom.sessionId === offsetCurrentCard.sessionId
+  //       timemom => timemom.sessionId ==== offsetCurrentCard.sessionId
   //     );
   //     if (offset) {
   //       timeIndx = timeIndx + offset;
@@ -345,7 +459,7 @@ export default Ember.Component.extend({
   //     }
   //   }
   //   cards.left.reverse();
-  //   if (isFull === 1) {
+  //   if (isFull ==== 1) {
   //     cards.dummyleft.push({
   //       collectionType: 'dummy',
   //       title: '',
@@ -378,7 +492,7 @@ export default Ember.Component.extend({
   //       isFull = 0;
   //     }
   //   }
-  //   if (isFull === 1) {
+  //   if (isFull ==== 1) {
   //     dummyCard.scale = 0.8;
   //     cards.dummyright.push({
   //       collectionType: 'dummy',

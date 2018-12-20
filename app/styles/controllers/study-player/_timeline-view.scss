@@ -285,13 +285,184 @@
             padding-bottom: 60px;
             width: 100%;
             display: flex;
-
-            .selected {
-              height: 400px;
-              width: 288px;
-              margin: auto;
-            }
           }
+
+          #carousel {
+            // margin-top: 260px;
+            position: relative;
+            // height: 400px;
+            // transform: translateY(-50%);
+            overflow: hidden;
+          }
+
+          #carousel .student-activity {
+            height: 400px;
+            width: 288px;
+            margin: auto;
+            position: absolute;
+            transition: transform 1s, left 1s, opacity 1s, z-index 0s;
+            opacity: 1;
+          }
+
+          .student-activity.prev {
+            z-index: 5;
+            left: 30%;
+            transform: translateY(50px) translateX(-50%);
+          }
+
+          .student-activity.next {
+            z-index: 5;
+            left: 70%;
+            transform: translateY(50px) translateX(-50%);
+          }
+
+          .student-activity.selected {
+            z-index: 10;
+            left: 50%;
+            transform: translateY(0px) translateX(-50%);
+          }
+
+          .student-activity.hideRight {
+            left: 140%;
+            opacity: 0;
+            transform: translateY(50%) translateX(-50%);
+          }
+
+          .student-activity.hideRightSecond {
+            z-index: 4;
+            left: 85%;
+            transform: translateY(50%) translateX(-50%);
+            opacity: 0.7;
+          }
+
+          .student-activity.prevLeftSecond {
+            z-index: 4;
+            left: 15%;
+            transform: translateY(50%) translateX(-50%);
+            opacity: 0.7;
+          }
+
+          .student-activity.hideLeft {
+            left: -150px;
+            opacity: 0;
+            transform: translateY(50%) translateX(-50%);
+          }
+          // #carousel div div {
+          //   width: 400px;
+          //   transition: width 1s;
+          // }
+          //
+          // #carousel div.hideLeft {
+          //   left: 0;
+          //   opacity: 0;
+          //   transform: translateY(50%) translateX(-50%);
+          // }
+          //
+          // #carousel div.hideLeft div {
+          //   width: 200px;
+          // }
+          //
+          // #carousel div.hideRight {
+          //   left: 100%;
+          //   opacity: 0;
+          //   transform: translateY(50%) translateX(-50%);
+          // }
+          //
+          // #carousel div.hideRight div {
+          //   width: 200px;
+          // }
+          //
+          // #carousel div.prev {
+          //   z-index: 5;
+          //   left: 30%;
+          //   transform: translateY(50px) translateX(-50%);
+          // }
+          //
+          // #carousel div.prev div {
+          //   width: 300px;
+          // }
+          //
+          // #carousel div.prevLeftFourth {
+          //   z-index: 2;
+          //   left: 3%;
+          //   transform: translateY(150px) translateX(-50%);
+          //   opacity: 0.7;
+          // }
+          //
+          // #carousel div.prevLeftFourth div {
+          //   width: 50px;
+          // }
+          //
+          // #carousel div.nextRightFourth {
+          //   z-index: 2;
+          //   left: 115%;
+          //   transform: translateY(150px) translateX(-50%);
+          //   opacity: 0.7;
+          // }
+          //
+          // #carousel div.nextRightFourth div {
+          //   width: 50px;
+          // }
+          //
+          // #carousel div.prevLeftThird {
+          //   z-index: 3;
+          //   left: 7%;
+          //   transform: translateY(150px) translateX(-50%);
+          //   opacity: 0.7;
+          // }
+          //
+          // #carousel div.prevLeftThird div {
+          //   width: 100px;
+          // }
+          //
+          // #carousel div.nextRightThird {
+          //   z-index: 3;
+          //   left: 100%;
+          //   transform: translateY(150px) translateX(-50%);
+          //   opacity: 0.7;
+          // }
+          //
+          // #carousel div.nextRightThird div {
+          //   width: 100px;
+          // }
+          //
+          // #carousel div.prevLeftSecond {
+          //   z-index: 4;
+          //   left: 15%;
+          //   transform: translateY(50%) translateX(-50%);
+          //   opacity: 0.7;
+          // }
+          //
+          // #carousel div.prevLeftSecond div {
+          //   width: 200px;
+          // }
+          //
+          // #carousel div.selected {
+          //   z-index: 10;
+          //   left: 50%;
+          //   transform: translateY(0px) translateX(-50%);
+          // }
+          //
+          // #carousel div.next {
+          //   z-index: 5;
+          //   left: 70%;
+          //   transform: translateY(50px) translateX(-50%);
+          // }
+          //
+          // #carousel div.next div {
+          //   width: 300px;
+          // }
+          //
+          // #carousel div.nextRightSecond {
+          //   z-index: 4;
+          //   left: 85%;
+          //   transform: translateY(50%) translateX(-50%);
+          //   opacity: 0.7;
+          // }
+          //
+          // #carousel div.nextRightSecond div {
+          //   width: 200px;
+          // }
         }
         // .timeline {
         //   display: flex;
