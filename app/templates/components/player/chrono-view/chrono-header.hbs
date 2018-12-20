@@ -1,0 +1,18 @@
+<div class="timeline-container">
+  <div class="start-date">{{ startDate.mon  }} <span>'</span>{{ startDate.year  }}</div>
+  <div class="timeline-path" id="student-timeline"></div>
+  <div class="end-date">{{ endDate.mon  }} <span>'</span>{{ endDate.year  }}</div>
+</div>
+<div class="performance" style="background-color:{{if performanceSummary (grade-color performanceSummary.score) defaultBarColor}}">
+  <span class="score">
+    {{#if performanceSummary}}
+      {{#if performanceSummary.score}}
+        {{performanceSummary.score}}%
+      {{else}}
+        0%
+      {{/if}}
+    {{else}}
+      --
+    {{/if}}
+  </span>
+</div>

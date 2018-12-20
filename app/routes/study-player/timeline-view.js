@@ -36,15 +36,15 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   pageSize: 10,
 
   pageOptions: function(winwidth) {
-    let localpage = 10;
+    let localpage = 20;
     if (winwidth > 1440) {
       localpage = 20;
     } else if (winwidth > 1400 && winwidth < 1440) {
       localpage = 20;
     } else if (winwidth > 768 && winwidth < 1400) {
-      localpage = 10;
+      localpage = 20;
     } else if (winwidth > 360 && winwidth < 768) {
-      localpage = 5;
+      localpage = 20;
     }
     return localpage;
   },
