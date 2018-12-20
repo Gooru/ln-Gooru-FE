@@ -35,6 +35,12 @@
       .ca-unscheduled-items-header {
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
 
+        .unscheduled-items {
+          .unscheduled-items-month {
+            visibility: visible;
+          }
+        }
+
         .arrow_drop_down {
           display: inline-block;
         }
@@ -78,6 +84,11 @@
 
       .unscheduled-items {
         padding-left: 20px;
+        font-weight: bold;
+
+        .unscheduled-items-month {
+          visibility: hidden;
+        }
       }
 
       .arrow_drop_up {
@@ -97,6 +108,7 @@
       padding: 20px;
     }
   }
+
   .schedule-ca-datepicker-container {
     background: #fff;
     position: absolute;

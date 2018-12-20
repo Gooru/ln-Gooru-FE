@@ -84,3 +84,12 @@ export function getMarketingsiteURL() {
   const configuration = ConfigurationService.configuration;
   return configuration ? configuration.get('marketingSiteUrl') : '';
 }
+
+/**
+ * Get maintenance window ticker needed from config
+ */
+export function getUserAlertMessage() {
+  //TODO don't use global configuration variable
+  const configuration = ConfigurationService.configuration;
+  return configuration ? configuration.get('userAlert.message') : null;
+}
