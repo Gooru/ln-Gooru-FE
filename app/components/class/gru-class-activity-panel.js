@@ -78,8 +78,8 @@ export default Ember.Component.extend({
     /**
      * Action get triggered when schedule content to CA got clicked
      */
-    onScheduleContentToDCA(content, event) {
-      this.sendAction('onScheduleContentToDCA', content, event);
+    onScheduleContentToDCA(classActivity, event) {
+      this.sendAction('onScheduleContentToDCA', classActivity, event);
     },
 
     showStudentList() {

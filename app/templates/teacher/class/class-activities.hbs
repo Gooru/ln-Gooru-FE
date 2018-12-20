@@ -51,7 +51,7 @@
           </div>
         {{/each}}
         <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
-          {{ca-date-picker userStartDateAsToday=true onSelectDate='onScheduleDate' showCurrentMonth=true showMonths=true onSelectMonth='onScheduleForMonth'}}
+          {{ca-date-picker forFirstDateOfMonth=forFirstDateOfMonth   userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
         </div>
       </div>
     {{else}}
@@ -61,7 +61,14 @@
   </div>
 </div>
 {{#if unScheduledClassActivities}}
-  {{teacher.class.ca-unscheduled-items-pullup showPullUp=true classId=classId unScheduledClassActivities=unScheduledClassActivities}}
+  {{teacher.class.ca-unscheduled-items-pullup
+    showPullUp=true
+    classId=classId
+    unScheduledClassActivities=unScheduledClassActivities
+    onChangeVisibility='changeVisibility'
+    onRemoveClassActivity='removeClassActivity'
+    forFirstDateOfMonth=forFirstDateOfMonth
+  }}
 {{/if}}
 {{#if showSearchContentPullup}}
   {{teacher.class.ca-search-content-pull-up
@@ -70,6 +77,7 @@
     context=contextParams
     selectedSearchContentType=selectedSearchContentType
     todaysClassActivities=todaysClassActivities.classActivities
+    forFirstDateOfMonth=forFirstDateOfMonth
   }}
 {{/if}}
 
