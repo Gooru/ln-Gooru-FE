@@ -1,7 +1,7 @@
 <div class="backdrop" {{action 'onPullUpClose'}}></div>
 <div class="ca-unscheduled-items-container">
   <div class="ca-unscheduled-items-header" {{action 'onPullUpOpen'}}>
-    <div class="unscheduled-items">{{t 'common.unscheduled-items'}}</div>
+    <div class="unscheduled-items">{{t 'common.unscheduled-items'}} <span class="unscheduled-items-month"> - {{format-date forFirstDateOfMonth 'MMMM YYYY'}}</span></div>
     {{gru-icon name="arrow_drop_up"}} {{gru-icon name="arrow_drop_down"}}
   </div>
   <div class="ca-unscheduled-content-items">
@@ -18,7 +18,7 @@
       onRemoveClassActivity='removeClassActivity'
       openDcaContentReport='openDcaContentReport'
       activityDate=classActivity.added_date
-      showDcaRemoveButton=true
+      showDcaRemoveButton=false
       onScheduleContentToDCA='onScheduleContentToDCA'
     }}
     {{/each}}
@@ -32,5 +32,5 @@
 {{/if}}
 
 <div class="schedule-ca-datepicker-container ca-datepicker-popover-container">
-  {{ca-date-picker userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
+  {{ca-date-picker forFirstDateOfMonth=forFirstDateOfMonth userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
 </div>
