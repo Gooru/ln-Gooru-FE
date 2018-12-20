@@ -509,6 +509,7 @@ export default Object.assign(quizzesTranslations, {
     password: 'Password',
     pending: 'Pending',
     performance: 'Show Performance',
+
     'performance-dashboard': 'Performance Dashboard',
     'personal-information': 'Personal Information',
     play: 'Play',
@@ -1646,6 +1647,14 @@ export default Object.assign(quizzesTranslations, {
     title: 'Reset password'
   },
 
+  'change-password': {
+    'change-password': 'Change password link',
+    title: 'Change Password',
+    'current-password-label': 'Enter your current password',
+    'change-success': 'Password Changed Successfully !!',
+    'change-password-error':
+      'Uh oh! Something’s not right. Unable to change password. Please try again shortly.'
+  },
   footer: {
     footerDescription:
       'Gooru is committed to keeping its platform open-source and community created content CC0.',
