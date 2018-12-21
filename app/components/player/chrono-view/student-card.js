@@ -3,7 +3,13 @@ import { STUDY_PLAYER_BAR_COLOR } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
-  classNames: ['card'],
+  classNames: ['card', 'student-activity'],
+
+  classNameBindings: ['cardPos'],
+
+  cardPos: Ember.computed(function() {
+    return `card-${this.get('cardIndex') + 1}`;
+  }),
 
   /**
    * @requires {AssessmentService} Service to retrieve an assessment
@@ -60,5 +66,11 @@ export default Ember.Component.extend({
         hash.collection.state === 'fulfilled' ? hash.collection.value : null
       );
     });
+  },
+
+  actions: {
+    onSelectCard() {
+      this.sendAction('onSelectCard', this.get('cardPos'));
+    }
   }
 });

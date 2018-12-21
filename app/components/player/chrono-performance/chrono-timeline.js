@@ -21,64 +21,19 @@ export default Ember.Component.extend({
   },
 
   moveToSelected(element) {
-    var selected;
-    if (element === 'next') {
-      selected = $('.selected').next();
-    } else if (element === 'prev') {
-      selected = $('.selected').prev();
-    } else {
-      selected = element;
-    }
-
-    var next = $(selected).next();
-    var prev = $(selected).prev();
-    var prevSecond = $(prev).prev();
-    var nextSecond = $(next).next();
-    var prevLeftThird = $(prevSecond).prev();
-    var nextRightThird = $(nextSecond).next();
-    var prevLeftFourth = $(prevLeftThird).prev();
-    var nextRightFourth = $(nextRightThird).next();
-
-    $(selected)
-      .removeClass()
-      .addClass('selected');
-
-    $(prev)
-      .removeClass()
-      .addClass('prev');
-    $(next)
-      .removeClass()
-      .addClass('next');
-
-    $(nextSecond)
-      .removeClass()
-      .addClass('nextRightSecond');
-    $(prevSecond)
-      .removeClass()
-      .addClass('prevLeftSecond');
-
-    $(prevLeftThird)
-      .removeClass()
-      .addClass('prevLeftThird');
-    $(nextRightThird)
-      .removeClass()
-      .addClass('nextRightThird');
-
-    $(prevLeftFourth)
-      .removeClass()
-      .addClass('prevLeftFourth');
-    $(nextRightFourth)
-      .removeClass()
-      .addClass('nextRightFourth');
-
-    $(nextRightFourth)
-      .nextAll()
-      .removeClass()
-      .addClass('hideRight');
-    $(prevLeftFourth)
-      .prevAll()
-      .removeClass()
-      .addClass('hideLeft');
+    let component = this;
+    var selected = element;
+    var next = component.$(selected).next();
+    var prev = component.$(selected).prev();
+    var prevSecond = component.$(prev).prev();
+    var nextSecond = component.$(next).next();
+    component.$(selected).removeClass().addClass('selected');
+    component.$(prev).removeClass().addClass('prev');
+    component.$(next).removeClass().addClass('next');
+    component.$(nextSecond).removeClass().addClass('nextRightSecond');
+    component.$(prevSecond).removeClass().addClass('prevLeftSecond');
+    component.$('.nextRightSecond').nextAll().removeClass().addClass('hideRight');
+    component.$('.prevLeftSecond').prevAll().removeClass().addClass('hideLeft');
   },
 
   setDefaultClasses() {
@@ -86,52 +41,35 @@ export default Ember.Component.extend({
     let component = this;
     let activeCartContainer = component.$(`.card-${activeCard}`);
     component.$(activeCartContainer).addClass('selected');
-    component
-      .$(`.card-${activeCard}`)
-      .prev()
-      .addClass('prev');
-    component.$(`.card-${activeCard + 1}`).addClass('next');
-    // component.$(`.card-${activeCard - 1}`).prev().addClass('prevLeftSecond');
-    // component.$(`.card-${activeCard + 1}`).next().addClass('nextRightSecond');
-    // component.$(`.card-${activeCard - 1}`).prev().prev().addClass('prevLeftThird');
-    // component.$(`.card-${activeCard + 1}`).next().next().addClass('nextRightThird');
-    // component.$(`.card-${activeCard - 1}`).prev().prev().prev().addClass('prevLeftFourth');
-    // component.$(`.card-${activeCard + 1}`).next().next().next().addClass('nextRightFourth');
-    component
-      .$(`.card-${activeCard + 1}`)
-      .nextAll()
-      .addClass('hideRight');
-    component
-      .$(`.card-${activeCard - 1}`)
-      .prevAll()
-      .addClass('hideLeft');
+    component.$(activeCartContainer).prev().addClass('prev');
+    component.$(activeCartContainer).prev().prev().addClass('prevLeftSecond');
+    component.$(activeCartContainer).prev().prev().prevAll().addClass('hideLeft');
+    component.$(activeCartContainer).next().addClass('next');
+    component.$(activeCartContainer).next().next().addClass('nextRightSecond');
+    component.$(activeCartContainer).next().next().nextAll().addClass('hideRight');
+
   },
 
   didRender() {
     let component = this;
     component.setDefaultClasses();
-    component.$('#carousel').keydown(function(e) {
-      switch (e.which) {
-      case 37: // left
-        component.moveToSelected('prev');
-        break;
+  },
 
-      case 39: // right
-        component.moveToSelected('next');
-        break;
+  actions: {
+    onSelectCard(cardPos) {
+      let component = this;
+      component.animateCardTransition(cardPos);
+    }
+  },
 
-      default:
-        return;
-      }
-      e.preventDefault();
+  animateCardTransition(cardPos) {
+    let component = this;
+    component.moveToSelected(`.${cardPos}`);
+    component.$('.class-activities > div').addClass('student-activity card');
+    let cards = component.$('.class-activities > div');
+    cards.each(function(index, elem) {
+      component.$(elem).addClass(`card-${index + 1}`);
     });
-
-    // let activeCartContainer = component.$(`.card-4`);
-    // component.moveToSelected(activeCartContainer);
-
-    // $('#carousel div').click(function() {
-    //   component.moveToSelected($(this));
-    // });
   }
 
   //

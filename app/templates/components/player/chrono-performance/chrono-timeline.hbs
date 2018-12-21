@@ -4,9 +4,7 @@
   </div>
   <div class="body class-activities" id="carousel">
     {{#each timeData as |activitiy index|}}
-      <div class="student-activity card-{{index}}">
-        {{player/chrono-view/student-card context=activitiy index=activeIndex}}
-      </div>
+        {{player/chrono-view/student-card context=activitiy index=activeIndex cardIndex=index onSelectCard="onSelectCard"}}
     {{/each}}
   </div>
 </div>
