@@ -31,12 +31,14 @@ export default Ember.Component.extend({
       component.set('forYear', forYear);
       let datepickerEle = component.$('#ca-datepicker .datepicker-days .prev');
       datepickerEle.trigger('click');
+      let date = `${forYear}-${forMonth}-01`;
+      component.set('forFirstDateOfMonth', moment(date).format('YYYY-MM-DD'));
       component.sendAction('showPreviousMonth');
     },
 
     showNextMonth() {
       let component = this;
-      let forFirstDateOfMonth = this.get('forFirstDateOfMonth');
+      let forFirstDateOfMonth = component.get('forFirstDateOfMonth');
       let forMonth = moment(forFirstDateOfMonth)
         .add(1, 'months')
         .format('MM');
@@ -47,6 +49,8 @@ export default Ember.Component.extend({
       component.set('forYear', forYear);
       let datepickerEle = component.$('#ca-datepicker .datepicker-days .next');
       datepickerEle.trigger('click');
+      let date = `${forYear}-${forMonth}-01`;
+      component.set('forFirstDateOfMonth', moment(date).format('YYYY-MM-DD'));
       component.sendAction('showNextMonth');
     },
 
@@ -141,9 +145,12 @@ export default Ember.Component.extend({
     let showMonths = component.get('showMonths');
     let monthsList = Ember.A([]);
     let forFirstDateOfMonth = component.get('forFirstDateOfMonth');
+    let monthAndYearOfCurrentDate = moment().format('YYYY-MM');
+    let firtDateOfCurrentMonth = moment(`${monthAndYearOfCurrentDate}-01`);
     if (showMonths && forFirstDateOfMonth) {
       let numberOfMonthsToShow = component.get('numberOfMonthsToShow');
       for (let index = 1; index <= numberOfMonthsToShow; index++) {
+        let slectedMonth = moment(forFirstDateOfMonth).add(index, 'months');
         let monthName = moment(forFirstDateOfMonth)
           .add(index, 'months')
           .format('MMMM');
@@ -158,6 +165,10 @@ export default Ember.Component.extend({
           monthName,
           monthYear
         });
+        month.set(
+          'isPast',
+          !slectedMonth.isSameOrAfter(firtDateOfCurrentMonth)
+        );
         monthsList.pushObject(month);
       }
     }

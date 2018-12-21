@@ -10,11 +10,12 @@
   {{/if}}
   <div id="ca-datepicker"></div>
   {{#if showMonths}}
+    <hr/>
     <div id="ca-month-picker">
       <span class="ca-month-picker-title">{{t 'common.add-to-unschedule'}}</span>
       <div class="ca-months">
         {{#each months as |month|}}
-          <span {{action 'onSelectMonth' month }}>{{month.monthName}}</span>
+          <span class="{{if month.isPast 'past-month'}}" {{action 'onSelectMonth' month }}>{{month.monthName}}</span>
         {{/each}}
       </div>
     </div>

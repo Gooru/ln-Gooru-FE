@@ -65,6 +65,10 @@
     width: inherit;
     padding-bottom: 10px;
 
+    hr {
+      margin: 0;
+    }
+
     .ca-datepicker-today {
       text-align: center;
       text-transform: uppercase;
@@ -116,17 +120,34 @@
 
       .ca-month-picker-title {
         font-weight: bold;
-        padding-bottom: 5px;
+        padding-bottom: 3px;
         display: inline-block;
+        text-align: center;
+        width: 100%;
+        padding-top: 3px;
       }
 
       .ca-months {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+        justify-items: center;
+
         span {
-          padding: 3px;
           border: 1px solid #ccc;
           border-radius: 4px;
-          margin-right: 5px;
           cursor: pointer;
+          width: 70px;
+          display: inline-block;
+          text-align: center;
+
+          &.past-month {
+            pointer-events: none;
+            cursor: default;
+            opacity: 0.8;
+          }
         }
       }
     }
