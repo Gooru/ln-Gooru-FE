@@ -331,7 +331,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let position = selectedContentEle.position();
       let top = position.top - datepickerEle.height();
       let left = position.left + 10 - datepickerEle.width();
-      let controllerHeight = Ember.$('.dca-content-container').height();
+      let controllerHeight = Ember.$(
+        '.teacher.class.class-activities'
+      ).height();
       let windowHeight = $(window).height();
       let allowedTop = windowHeight - controllerHeight + top;
       if (left < 0) {
@@ -680,7 +682,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     );
     if (dateEle.length > 0) {
       let scrollToContainer = Ember.$('.dca-list-container');
-      let top = dateEle.position().top - 50 + scrollToContainer.scrollTop();
+      let reduceHeight = 100;
+      let titleEle = Ember.$('.teacher_class_class-activities .ca-title');
+      if (titleEle.is(':visible')) {
+        reduceHeight += 50;
+      }
+      let top =
+        dateEle.position().top - reduceHeight + scrollToContainer.scrollTop();
       scrollToContainer.animate(
         {
           scrollTop: top
