@@ -26,7 +26,13 @@ export default buildValidations({
     validator('presence', {
       presence: true,
       message: '{{description}}',
-      descriptionKey: 'common.errors.password-required'
+      descriptionKey: 'change-password.new-password-required'
+    }),
+    validator('length', {
+      min: 5,
+      max: 14,
+      message: '{{description}}',
+      descriptionKey: 'common.errors.password-length'
     })
     /* allowing any character for now
     validator('format', {
