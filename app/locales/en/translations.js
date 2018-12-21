@@ -89,6 +89,11 @@ export default Object.assign(quizzesTranslations, {
     accept: 'Accept',
     ignore: 'Ignore',
     add: 'Add',
+    'add-an-activity': 'Add an Activity',
+    Reschedule: 'Reschedule',
+    'no-unschedule-items':
+      'You don\'t have any activities that need scheduling for ',
+    'repeat-activity': 'Repeat Activity',
     'add-assessment': 'Create New Assessment',
     'add-century-skills': 'Add 21st Century Skills',
     'add-collaborator': 'Add Collaborator',
