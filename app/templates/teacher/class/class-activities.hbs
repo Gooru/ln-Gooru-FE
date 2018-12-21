@@ -62,7 +62,7 @@
           </div>
         {{/each}}
         <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
-          {{ca-date-picker forFirstDateOfMonth=forFirstDateOfMonth   userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
+          {{ca-date-picker   userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
         </div>
       </div>
     {{else}}
@@ -88,7 +88,6 @@
     context=contextParams
     selectedSearchContentType=selectedSearchContentType
     todaysClassActivities=todaysClassActivities.classActivities
-    forFirstDateOfMonth=forFirstDateOfMonth
   }}
 {{/if}}
 
