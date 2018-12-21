@@ -91,23 +91,25 @@
             </div>
             <div class="row">
               <div class="col-xs-12 col-sm-6">
-                <h6>{{t "common.biography"}}</h6>
-                <div class="bio">
+                {{!-- <h6>{{t "change-password.change-password"}} </h6> --}}
+                <div class="bios">
                   <p>
-                    {{#if profile.aboutMe}}
-                      {{profile.aboutMe}}
+                    {{#if (eq profile.loginType 'credential')}}
+                      <a {{action 'showChangePass' true}}>{{t "change-password.title"}}</a>
                     {{else}}
                       <span class="italic">{{t "common.not-added"}}</span>
                     {{/if}}
                   </p>
                 </div>
               </div>
+            </div>
+            <div class="row">
               <div class="col-xs-12 col-sm-6">
-                {{!-- <h6>{{t "change-password.change-password"}} </h6> --}}
+                <h6>{{t "common.biography"}}</h6>
                 <div class="bio">
                   <p>
-                    {{#if (eq profile.loginType 'credential')}}
-                      <a {{action 'showChangePass' true}}>{{t "change-password.title"}}</a>
+                    {{#if profile.aboutMe}}
+                      {{profile.aboutMe}}
                     {{else}}
                       <span class="italic">{{t "common.not-added"}}</span>
                     {{/if}}
