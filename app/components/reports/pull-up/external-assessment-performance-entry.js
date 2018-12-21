@@ -9,6 +9,16 @@ export default Ember.Component.extend({
 
   session: Ember.inject.service('session'),
 
+  keyDown(event) {
+    //prevent triggering tab key event
+    if (event.keyCode === 9) {
+      event.preventDefault();
+    }
+  },
+  didRender() {
+    let component = this;
+    component.scoreValidator();
+  },
   actions: {
     onSelectStudent(student) {
       let component = this;
@@ -43,6 +53,19 @@ export default Ember.Component.extend({
       component.set('isValidMaxScore', isValidMaxScore);
     }
   },
+  scoreValidator() {
+    let component = this;
+    component.$('.score-entry').keyup(function() {
+      let percentageScore = component.$('.max-score-entry').val();
+      if ( percentageScore  != 0 ) {
+
+        component.set('isValidScore', validatePercentage(percentageScore));
+      } else {
+        component.set('isValidScore', false);
+      }
+      component.set('isTyping', true);
+    });
+  },
 
   activeStudentSeq: 0,
 
@@ -64,15 +87,18 @@ export default Ember.Component.extend({
   isShowMaxScoreEntry: true,
 
   assessmentMaxScore: null,
+  isValidScore: false,
 
   updateScoredElement(studentSeq) {
     let component = this;
     let enteredScore = component.$(`.s-${studentSeq}-score`).val();
-    if (enteredScore && !isNaN(enteredScore)) {
+    console.log("working is ", enteredScore);
+    if (component.validateQuestionScore(studentSeq, enteredScore)) {
       component.$(`.student-${studentSeq}`).removeClass('scored').addClass('scored');
-      component.$(`.student-${studentSeq} .student-thumbnail`).css('background-color', getBarGradeColor(enteredScore));
+      component.$(`.student-${studentSeq} .student-thumbnail`).css('background-color', '#538a32');
     } else {
       component.$(`.student-${studentSeq}`).removeClass('scored');
+      component.$(`.student-${studentSeq} .student-thumbnail`).css('background-color', '#d8d8d8');
     }
   },
 
@@ -105,6 +131,20 @@ export default Ember.Component.extend({
       'conducted_on': conductedOn.toISOString()
     };
     return reqBodyParams;
+  },
+
+  validateQuestionScore(studentSeq, score) {
+    let component = this;
+    let maxScore = component.get('assessmentMaxScore');
+    console.log("maxscore is", maxScore);
+    let isValid = !isNaN(score) && Number(score) <= maxScore;
+    if (isValid) {
+      component.$(`.s-${studentSeq}-score`).removeClass('wrong-score');
+    } else {
+      component.$(`.s-${studentSeq}-score`).removeClass('wrong-score').addClass('wrong-score');
+    }
+    component.set('isValid', isValid);
+    return isValid;
   },
 
   updateStudentAssessmentScore(reqBodyParams) {

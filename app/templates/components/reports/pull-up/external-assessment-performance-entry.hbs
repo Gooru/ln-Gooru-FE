@@ -10,7 +10,10 @@
           value=assessmentMaxScore
         }}
       </div>
-      <div class="action {{unless isValidMaxScore 'disabled'}}" {{action "onEnterMaxScore"}}>
+      {{#if (and isTyping (not isValidScore))}}
+        <div class="error">{{t 'self-report.validation-error'}}</div>
+      {{/if}}
+      <div class="action {{unless isValidScore 'disabled'}}" {{action "onEnterMaxScore"}}>
         Confirm
       </div>
     </div>
