@@ -1652,8 +1652,9 @@ export default Object.assign(quizzesTranslations, {
     title: 'Change Password',
     'current-password-label': 'Enter your current password',
     'change-success': 'Password Changed Successfully !!',
+    'new-password-required': 'Please enter your new password.',
     'change-password-error':
-      'Uh oh! Something’s not right. Unable to change password. Please try again shortly.'
+      'Uh oh! Something’s not right. Unable to change password. Please try again.'
   },
   footer: {
     footerDescription:

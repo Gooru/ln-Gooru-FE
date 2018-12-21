@@ -28,20 +28,20 @@
                   <div class="form-group password">
                     <label for="oldPassword">
                       <span>{{t "change-password.current-password-label"}}</span>
-                      {{validation.gru-input model=cprofile id='oldPassword' valuePath='oldPassword' type='password'  maxLength=254 didValidate=didValidate  }}
                     </label>
+                    {{validation.gru-input model=cprofile id='oldPassword' valuePath='oldPassword' type='password'  maxLength=254 didValidate=didValidate  }}
                   </div>
                   <div class="form-group password">
                     <label for="newPassword">
                       <span>{{t "reset-password.new-password"}}</span>
-                      {{validation.gru-input model=cprofile id='newPassword' valuePath='newPassword' type='password' didValidate=didValidate isRequired=true  maxLength=254 }}
                     </label>
+                    {{validation.gru-input model=cprofile id='newPassword' valuePath='newPassword' type='password' didValidate=didValidate isRequired=true  maxLength=254 }}
                   </div>
                   <div class="form-group password-confirm">
                     <label for="confirmPassword">
                       <span>{{t "reset-password.new-password-confirm"}}</span>
-                      {{validation.gru-input model=cprofile id='confirmPassword' valuePath='confirmPassword' type='password' didValidate=didValidate isRequired=true  maxLength=254}}
                     </label>
+                    {{validation.gru-input model=cprofile id='confirmPassword' valuePath='confirmPassword' type='password' didValidate=didValidate isRequired=true  maxLength=254}}
                   </div>
                 </div>
               </div>
@@ -50,7 +50,6 @@
                   <div class="panel-title">
                     <div class="submit-button form-group {{!-- text-center --}}">
                       <button type="submit" class="btn btn-success submit">{{t "common.submit"}}
-                        {{gru-icon name= "keyboard_arrow_right" class=""}}
                       </button>
                     </div>
                   </div>

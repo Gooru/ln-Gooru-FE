@@ -26,7 +26,7 @@ export default buildValidations({
     validator('presence', {
       presence: true,
       message: '{{description}}',
-      descriptionKey: 'common.errors.password-required'
+      descriptionKey: 'change-password.new-password-required'
     }),
     validator('length', {
       min: 5,

@@ -57,6 +57,7 @@ export default Ember.Controller.extend({
   isMyProfile: Ember.computed.reads('parentController.isMyProfile'),
   actions: {
     showChangePass: function(show) {
+      this.resetController();
       if (show) {
         this.set('showChangePassFlag', true);
       } else {
@@ -102,8 +103,18 @@ export default Ember.Controller.extend({
                 Ember.Logger.error(error);
               }
             );
+          component.set('showChangePassFlag', false);
         }
       });
     }
+  },
+
+  resetController: function() {
+    const component = this;
+    const profile = component.get('cprofile');
+    profile.set('oldPassword', null);
+    profile.set('newPassword', null);
+    profile.set('confirmPassword', null);
+    component.set('cprofile', profile);
   }
 });
