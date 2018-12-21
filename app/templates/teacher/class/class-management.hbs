@@ -587,11 +587,12 @@
                 {{!-- <div class='student-header'> {{t 'teacher-landing.class.class-settings.joined-on'}}</div> --}}
                 {{#if (and (and course subject) isPremiumClass) }}
                   <div class='student-header' style='border-right:unset;'></div> {{!-- Adjust LP --}}
-                  <div class='student-header'></div> {{!-- Delete --}}
+                  <div class='student-header' style='border-right:unset;'></div> {{!-- Delete --}}
                 {{else }}
-                  <div class='student-header' style="grid-column-start:span  2;"></div> {{!-- Delete --}}
+                  <div class='student-header' style="grid-column-start:span  2;border-right:unset;"></div>
+                  {{!-- Delete --}}
                 {{/if}}
-                <div class='student-header' style='display:none;'></div> {{!-- Enable/Disable --}}
+                <div class='student-header' style='border-right:unset;'></div> {{!-- Enable/Disable --}}
                 {{!-- Student table header -- ends --}}
                 {{!-- Each row of student goes here --}}
                 {{#each sortedMembers as |student|}}
@@ -671,6 +672,11 @@
                   {{/if}}
                   <div class="student-id {{if student.isActive "" "inActiveRow"}}  "> <span> {{student.studentId}}
                     </span></div>
+                  <div class='student-action-col' style='border-right:unset;'>
+                    <div class='student-act-de' {{action "classMembersToggle" student}} title="Activate/Deactivate"
+                      data-toggle="tooltip">
+                      {{gru-icon name='block'}}</div>
+                  </div>
                   {{!-- <div class='joined'> </div> --}}
                   {{#if (and (and course subject) isPremiumClass) }}
                     <div class=" student-action-col 
@@ -679,7 +685,7 @@
                     "
                       style='border-right:unset;'>
                       <div class='student-adj-lp' {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}"
-                        data-toggle="tooltip"> {{gru-icon name='replay'}}</div>
+                        data-toggle="tooltip" style='border-right:unset;'> {{gru-icon name='replay'}}</div>
                     </div>
                     <div class='student-action-col'>
                       <div class='student-delete' {{action "onRemoveStudent" student}} title="{{t 'common.remove'}}"
@@ -693,11 +699,6 @@
                         {{gru-icon name='delete'}}</div>
                     </div>
                   {{/if}}
-                  <div class='student-action-col' style='display:none;'>
-                    <div class='student-act-de' {{action "classMembersToggle" student}} title="Activate/Deactivate"
-                      data-toggle="tooltip">
-                      {{gru-icon name='block'}}</div>
-                  </div>
                 {{/each}} {{!-- Each row of student -- ends --}}
               </div> {{!-- Student Table / Grid ends --}}
               {{!-- Add Student Section -- Hidden for now as there is flow not defined --}}

@@ -1620,7 +1620,7 @@ $canvas-height: 1254px;
             padding-top: 20px;
             display: grid;
 
-            grid-template-columns: 40px minmax(200px, auto) 150px 150px auto auto;
+            grid-template-columns: 40px minmax(200px, auto) 150px 150px auto auto auto;
 
             margin-left: 13px;
             grid-column-gap: 0px;
@@ -1700,7 +1700,7 @@ $canvas-height: 1254px;
           .student-delete :parent {
           }
           .student-act-de {
-            display: none;
+            // display: none;
           }
           .sub-sec-row {
             width: 422.9px;
