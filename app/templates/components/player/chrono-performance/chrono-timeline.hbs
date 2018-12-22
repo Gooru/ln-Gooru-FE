@@ -1,8 +1,8 @@
 <div class="container">
   <div class="header">
-    {{player/chrono-view/chrono-header performanceSummary=performanceSummary activeIndex=activeIndex activeResource=activeResource timeData=timeData}}
+    {{player/chrono-view/chrono-header performanceSummary=performanceSummary activeIndex=activeIndex activeResource=activeResource}}
   </div>
-  <div class="body class-activities" id="carousel">
+  <div class="body class-activities hidden" id="carousel">
     {{#each timeData as |activitiy index|}}
       <div class="student-activity card-{{index}}">
         {{player/chrono-view/student-card context=activitiy index=activeIndex}}

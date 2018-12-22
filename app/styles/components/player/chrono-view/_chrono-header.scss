@@ -18,16 +18,46 @@
       color: #211238;
     }
 
-    .timeline-path {
+    .timeline-actvities {
       height: 70px;
       width: 100%;
       display: grid;
       align-items: center;
-      // justify-content: center;
+      overflow-x: auto;
 
-      .svg-path {
+      .activities {
         height: 100%;
         width: auto;
+      }
+
+      .active {
+        stroke: #359649;
+        fill: #fff;
+        r: 30;
+      }
+
+      .suggestion-activity {
+        r: 10;
+        fill: #f9944b;
+      }
+
+      .activity {
+        r: 10;
+        fill: #0094dc;
+      }
+
+      .suggestion-curve,
+      .suggestion-line {
+        stroke-width: 2;
+        fill: none;
+        stroke: #f9944b;
+      }
+
+      .curve,
+      .line {
+        stroke-width: 2;
+        stroke: #0094dc;
+        fill: none;
       }
 
       .active-assessment {

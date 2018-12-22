@@ -14,7 +14,7 @@ export default Ember.Component.extend({
   init() {
     let component = this;
     component._super(...arguments);
-    let midLen = component.get('timeData').length / 2;
+    let midLen = Math.round(component.get('timeData').length / 2);
     let activeResource = component.get('timeData')[midLen];
     component.set('activeResource', activeResource);
     component.set('activeIndex', midLen);

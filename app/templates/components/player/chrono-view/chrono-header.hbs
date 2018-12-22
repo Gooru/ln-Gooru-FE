@@ -1,6 +1,8 @@
 <div class="timeline-container">
   <div class="start-date">{{ startDate.mon  }} <span>'</span>{{ startDate.year  }}</div>
-  <div class="timeline-path" id="student-timeline"></div>
+  <div>
+    <div class="timeline-actvities" id="student-actvities"></div>
+  </div>
   <div class="end-date">{{ endDate.mon  }} <span>'</span>{{ endDate.year  }}</div>
 </div>
 <div class="performance" style="background-color:{{if performanceSummary (grade-color performanceSummary.score) defaultBarColor}}">
