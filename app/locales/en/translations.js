@@ -1324,7 +1324,8 @@ export default Object.assign(quizzesTranslations, {
           'offline-class-label': 'This is an Offline classroom'
         },
         'student-settings-sec': {
-          'student-settings-sec-head': 'Student Settings'
+          'student-settings-sec-head': 'Student Settings',
+          'col-head-active': 'Active'
         },
         'course-settings-sec': {
           'course-settings-sec-head': 'Course Settings',
