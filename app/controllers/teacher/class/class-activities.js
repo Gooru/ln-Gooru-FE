@@ -263,19 +263,27 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let contentId = content.get('id');
       let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
       datepickerEle.hide();
-      controller
-        .get('classActivityService')
-        .addActivityToClass(classId, contentId, contentType, scheduleDate)
-        .then(newContentId => {
-          if (!controller.isDestroyed) {
-            let data = controller.serializerSearchContent(
-              content,
-              newContentId,
-              scheduleDate
-            );
-            controller.send('addedContentToDCA', data, scheduleDate);
-          }
-        });
+      let scheduleMonth = parseInt(moment(scheduleDate).format('MM'));
+      let scheduleYear = parseInt(moment(scheduleDate).format('YYYY'));
+      let forMonth = classActivity.get('forMonth');
+      let forYear = classActivity.get('forYear');
+      if (forMonth === scheduleMonth && forYear === scheduleYear) {
+        this.send('changeVisibility', classActivity, scheduleDate);
+      } else {
+        controller
+          .get('classActivityService')
+          .addActivityToClass(classId, contentId, contentType, scheduleDate)
+          .then(newContentId => {
+            if (!controller.isDestroyed) {
+              let data = controller.serializerSearchContent(
+                content,
+                newContentId,
+                scheduleDate
+              );
+              controller.send('addedContentToDCA', data, scheduleDate);
+            }
+          });
+      }
     },
 
     /**
@@ -549,6 +557,33 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   showUnScheduledItemsPullup: false,
 
+  /**
+   * It Maintains the list of scheduled class activities datewise.
+   * @type {Array}
+   */
+  scheduledClassActivitiesDatewise: Ember.computed(
+    'classActivities.[]',
+    function() {
+      let controller = this;
+      let activities = Ember.A();
+      controller.get('classActivities').forEach(classActivity => {
+        let addedDate = classActivity.get('added_date');
+        if (addedDate) {
+          let isToday =
+            moment(addedDate).format('YYYY-MM-DD') ===
+            moment().format('YYYY-MM-DD');
+          let activity = Ember.Object.create({
+            day: moment(addedDate).format('DD'),
+            hasActivity: true,
+            isToday
+          });
+          activities.pushObject(activity);
+        }
+      });
+      return activities;
+    }
+  ),
+
   // -------------------------------------------------------------------------
   // Observers
 
@@ -622,6 +657,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           controller.parseClassActivityData(classActivities);
         }
         controller.set('isLoading', false);
+        Ember.run.later(function() {
+          let date = moment().format('YYYY-MM-DD');
+          controller.handleScrollToSpecificDate(date, true);
+        }, 1000);
       });
   },
 
@@ -643,6 +682,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   },
 
   closeCADatePickerOnClickOutSide() {
+    let controller = this;
     Ember.$('.teacher_class_class-activities').on('click', function(e) {
       if (
         !Ember.$(e.target).hasClass('ca-datepicker-popover') &&
@@ -651,16 +691,37 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         Ember.$('.ca-datepicker-popover-container').hide();
         Ember.$('.ca-datepicker-popover').removeClass('active');
       }
-    });
-    Ember.$('.teacher_class_class-activities .dca-list-container').on(
-      'scroll',
-      function() {
-        if (Ember.$('.ca-datepicker-popover-container').is(':visible')) {
-          Ember.$('.ca-datepicker-popover-container').hide();
-          Ember.$('.ca-datepicker-popover').removeClass('active');
-        }
+      if (
+        !Ember.$(e.target).hasClass('ca-date-picker-toggle') &&
+        Ember.$('.ca-date-picker-container').has(e.target).length === 0
+      ) {
+        controller.slideUpCAInlineDatePickerOnClickOutSide();
       }
+    });
+
+    Ember.$(
+      '.teacher_class_class-activities .dca-list-container, .teacher_class_class-activities .ca-unscheduled-content-items'
+    ).on('scroll', function() {
+      if (Ember.$('.ca-datepicker-popover-container').is(':visible')) {
+        Ember.$('.ca-datepicker-popover-container').hide();
+        Ember.$('.ca-datepicker-popover').removeClass('active');
+      }
+    });
+  },
+
+  slideUpCAInlineDatePickerOnClickOutSide() {
+    let element = Ember.$(
+      '.teacher_class_class-activities .ca-date-picker-inline'
     );
+    if (element.length > 0 && element.hasClass('active')) {
+      let dateDisplayEle = Ember.$(
+        '.teacher_class_class-activities .dca-content-container .cal-mm-yyyy'
+      );
+      element.slideUp(400, function() {
+        element.removeClass('active');
+        dateDisplayEle.removeClass('active');
+      });
+    }
   },
 
   serializerSearchContent(content, contentId, date, forMonth, forYear) {
@@ -676,7 +737,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     });
   },
 
-  handleScrollToSpecificDate(date) {
+  handleScrollToSpecificDate(date, isDefaultTop) {
     let dateEle = Ember.$(
       `.teacher_class_class-activities .dca-date-view-container-${date}`
     );
@@ -692,6 +753,14 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       scrollToContainer.animate(
         {
           scrollTop: top
+        },
+        1000
+      );
+    } else if (isDefaultTop) {
+      let scrollToContainer = Ember.$('.dca-list-container');
+      scrollToContainer.animate(
+        {
+          scrollTop: 0
         },
         1000
       );

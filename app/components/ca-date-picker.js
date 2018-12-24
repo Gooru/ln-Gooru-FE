@@ -12,6 +12,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
     this.initializeDatePicker();
+    this.doHighlightActivity();
   },
 
   // -------------------------------------------------------------------------
@@ -197,6 +198,26 @@ export default Ember.Component.extend({
     return moment().format('MM') === moment(forFirstDateOfMonth).format('MM');
   }),
 
+  /**
+   * It will decide whether  need to highlight activities or not.
+   * @type {Boolean}
+   */
+  highlightActivities: false,
+
+  // -------------------------------------------------------------------------
+  // Observers
+
+  /**
+   * This method  will trigger when  the property change happen in activities or highlightActivities
+   */
+  doHighlightActivities: Ember.observer(
+    'highlightActivities',
+    'activities.[]',
+    function() {
+      this.doHighlightActivity();
+    }
+  ),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -206,7 +227,8 @@ export default Ember.Component.extend({
     let datepickerEle = component.$('#ca-datepicker');
     let defaultParams = {
       maxViewMode: 0,
-      format: 'yyyy-mm-dd'
+      format: 'yyyy-mm-dd',
+      todayHighlight: true
     };
     let startDate = this.get('startDate');
     let userStartDateAsToday = this.get('userStartDateAsToday');
@@ -225,6 +247,7 @@ export default Ember.Component.extend({
       if (allowDateSelectorToggle) {
         component.toggleDatePicker();
       }
+      component.doHighlightActivity();
       component.sendAction('onSelectDate', selectedDate);
     });
   },
@@ -242,6 +265,36 @@ export default Ember.Component.extend({
       element.slideUp(400, function() {
         element.removeClass('active');
         dateDisplayEle.removeClass('active');
+      });
+    }
+  },
+
+  doHighlightActivity() {
+    let component = this;
+    let highlightActivities = component.get('highlightActivities');
+    if (highlightActivities) {
+      let dateEles = component.$(
+        '#ca-datepicker .datepicker .datepicker-days  .table-condensed tbody tr td'
+      );
+      let activities = component.get('activities');
+      let todayActivity = activities.findBy('isToday', true);
+      if (todayActivity) {
+        component.$('.ca-datepicker-today').addClass('has-activities');
+      }
+
+      dateEles.each(function(index, dateEle) {
+        let dateElement = component.$(dateEle);
+        if (!(dateElement.hasClass('new') || dateElement.hasClass('old'))) {
+          let day = dateElement.html();
+          let activity = activities.findBy('day', day);
+          if (activity) {
+            dateElement.removeClass('no-activities');
+            dateElement.addClass('has-activities');
+          } else {
+            dateElement.addClass('no-activities');
+            dateElement.removeClass('has-activities');
+          }
+        }
       });
     }
   }

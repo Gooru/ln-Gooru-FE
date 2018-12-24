@@ -4,7 +4,7 @@
   <div class="cal-mm-yyyy {{if allowDateSelectorToggle 'ca-date-picker-toggle'}}" {{action 'showCalendar'}}>{{format-date forFirstDateOfMonth 'MMMM YYYY'}} {{gru-icon name="arrow_drop_down"}}{{gru-icon name="arrow_drop_up"}}</div>
   <div class="next-cal-arrow" {{action 'showNextMonth'}}>{{gru-icon name="keyboard_arrow_right"}}</div>
 </div>
-<div class="ca-datepicker-container {{if allowDateSelectorToggle 'ca-date-picker-toggle'}}">
+<div class="ca-datepicker-container {{if allowDateSelectorToggle 'ca-date-picker-toggle ca-date-picker-inline'}}">
   {{#if (and showToday isTodayExistInCurrentMonth)}}
     <div class="ca-datepicker-today" {{action 'onSelectToday'}}>Today</div>
   {{/if}}
