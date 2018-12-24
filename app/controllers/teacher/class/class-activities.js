@@ -331,7 +331,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let position = selectedContentEle.position();
       let top = position.top - datepickerEle.height();
       let left = position.left + 10 - datepickerEle.width();
-      let controllerHeight = Ember.$('.dca-content-container').height();
+      let controllerHeight = Ember.$(
+        '.teacher.class.class-activities'
+      ).height();
       let windowHeight = $(window).height();
       let allowedTop = windowHeight - controllerHeight + top;
       if (left < 0) {
@@ -356,6 +358,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         datepickerEle.hide();
       }
       this.set('selectedClassActivityForSchedule', classActivity);
+    },
+
+    onSelectDate(date) {
+      this.handleScrollToSpecificDate(date);
     },
 
     onOpenPerformanceEntry(item, activity) {
@@ -389,6 +395,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('forMonth', moment().format('MM'));
       controller.set('forYear', moment().format('YYYY'));
       controller.closeCADatePickerOnClickOutSide();
+      let date = moment().format('YYYY-MM-DD');
+      controller.handleScrollToSpecificDate(date);
     });
   },
 
@@ -549,6 +557,14 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   }),
 
   /**
+   * Maintains the value  of today date
+   * @type {String}
+   */
+  today: Ember.computed(function() {
+    return moment().format('YYYY-MM-DD');
+  }),
+
+  /**
    * Maintains  the value of first date of month
    * @return {String}
    */
@@ -690,5 +706,27 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       usersCount: -1,
       isActive: false
     });
+  },
+
+  handleScrollToSpecificDate(date) {
+    let dateEle = Ember.$(
+      `.teacher_class_class-activities .dca-date-view-container-${date}`
+    );
+    if (dateEle.length > 0) {
+      let scrollToContainer = Ember.$('.dca-list-container');
+      let reduceHeight = 100;
+      let titleEle = Ember.$('.teacher_class_class-activities .ca-title');
+      if (titleEle.is(':visible')) {
+        reduceHeight += 50;
+      }
+      let top =
+        dateEle.position().top - reduceHeight + scrollToContainer.scrollTop();
+      scrollToContainer.animate(
+        {
+          scrollTop: top
+        },
+        1000
+      );
+    }
   }
 });

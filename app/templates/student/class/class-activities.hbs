@@ -7,26 +7,34 @@
   </div>
   <div class="ca-content-container">
     <div class="ca-date-and-add-content">
-      <div class="ca-date-container">
-        <div class="prev-cal-arrow" {{action 'showPreviousMonth'}}>{{gru-icon name="keyboard_arrow_left"}}</div>
-        <div class="cal-mm-yyyy" {{action 'showCalendar'}}>{{format-date forFirstDateOfMonth 'MMMM YYYY'}} {{gru-icon name="arrow_drop_down"}}{{gru-icon name="arrow_drop_up"}}</div>
-        <div class="next-cal-arrow" {{action 'showNextMonth'}}>{{gru-icon name="keyboard_arrow_right"}}</div>
-        <div class="ca-datepicker-container">
-          <div id="ca-datepicker"></div>
-        </div>
+      <div class="ca-date-selector">
+        {{ca-date-picker
+          showToday=true
+          forMonth=forMonth
+          allowDateSelectorToggle=true
+          forYear=forYear
+          showPreviousMonth="showPreviousMonth"
+          showNextMonth="showNextMonth"
+          onSelectDate="onSelectDate"
+          onSelectToday="onSelectDate"
+        }}
       </div>
     </div>
     {{#if showClassActivities}}
       <div class="dca-list-container">
         {{#each classActivities as |classActivity|}}
-          <div class="dca-date-view-container">
-            <div class="dca-date-container ca-date-{{format-date classActivity.added_date 'YYYY-MM-DD'}}">
-              {{gru-icon name="calendar_today"}}
-              <span>{{format-date classActivity.added_date 'MMMM DD, YYYY'}}</span>
+          <div class="dca-date-view-container dca-date-view-container-{{format-date classActivity.added_date 'YYYY-MM-DD'}}">
+            <div class="dca-date-container {{if (eq today classActivity.added_date) 'dca-date-container-today'}}">
+              {{#if (eq today classActivity.added_date)}}
+                <span>{{t 'student-landing.class.class-activities-tab.today'}}</span>
+              {{else}}
+                {{gru-icon name="calendar_today"}}
+                <span>{{format-date classActivity.added_date 'MMMM DD, YYYY'}}</span>
+              {{/if}}
             </div>
             <hr/>
           </div>
-          <div class="dca-content-list-container">
+          <div class="dca-content-list-container {{if (eq today classActivity.added_date) 'dca-content-list-container-today'}}">
             {{#each classActivity.classActivities as |classActivity|}}
               {{class.gru-student-class-activity-panel
                class=class

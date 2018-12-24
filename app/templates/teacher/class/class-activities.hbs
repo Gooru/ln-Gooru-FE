@@ -2,35 +2,50 @@
   <div class="ca-title hidden-xs hidden-sm">
     <p>{{t 'teacher-landing.class.class-activities'}}</p>
   </div>
-  <div class="loading-spinner {{if isLoading 'active'}}">
-    {{three-bounce-spinner}}
-  </div>
-  <div class="dca-content-container">
-    <div class="ca-date-and-add-content">
-      <div class="ca-date-selector">
-        {{ca-date-picker forMonth=forMonth allowDateSelectorToggle=true forYear=forYear showPreviousMonth="showPreviousMonth" showNextMonth="showNextMonth" }}
+  <div class="ca-panel">
+    <div class="ca-left-panel">
+      <div class="loading-spinner {{if isLoading 'active'}}">
+        {{three-bounce-spinner}}
       </div>
-      <div class="ca-add-content">
-        <div class="ca-contents-button">
-          <p>{{t 'common.add'}}</p>
-          <i class="collection-icon" {{action 'onAddDca' 'collection'}}></i>
-          <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
-        </div>
-      </div>
-    </div>
-    {{#if showClassActivities}}
-      <div class="dca-list-container">
-        {{#each scheduledClassActivities as |classActivity|}}
-          <div class="dca-date-view-container">
-            <div class="dca-date-container">
-              {{gru-icon name="calendar_today"}}
-              <span>{{format-date classActivity.added_date 'MMMM DD, YYYY'}}</span>
-            </div>
-            <hr/>
+      <div class="dca-content-container">
+        <div class="ca-date-and-add-content">
+          <div class="ca-date-selector">
+            {{ca-date-picker
+          showToday=true
+          forMonth=forMonth
+          allowDateSelectorToggle=true
+          forYear=forYear
+          showPreviousMonth="showPreviousMonth"
+          showNextMonth="showNextMonth"
+          onSelectDate="onSelectDate"
+          onSelectToday="onSelectDate"
+        }}
           </div>
-          <div class="dca-content-list-container">
-            {{#each classActivity.classActivities as |classActivity|}}
-              {{class.gru-class-activity-panel
+          <div class="ca-add-content">
+            <div class="ca-contents-button">
+              <p>{{t 'common.add-an-activity'}}</p>
+              <i class="collection-icon" {{action 'onAddDca' 'collection'}}></i>
+              <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
+            </div>
+          </div>
+        </div>
+        {{#if showClassActivities}}
+          <div class="dca-list-container">
+            {{#each scheduledClassActivities as |classActivity|}}
+              <div class="dca-date-view-container dca-date-view-container-{{format-date classActivity.added_date 'YYYY-MM-DD'}}">
+                <div class="dca-date-container {{if (eq today classActivity.added_date) 'dca-date-container-today'}}">
+                  {{#if (eq today classActivity.added_date)}}
+                    <span>{{t 'student-landing.class.class-activities-tab.today'}}</span>
+                  {{else}}
+                    {{gru-icon name="calendar_today"}}
+                    <span>{{format-date classActivity.added_date 'MMMM DD, YYYY'}}</span>
+                  {{/if}}
+                </div>
+                <hr/>
+              </div>
+              <div class="dca-content-list-container {{if (eq today classActivity.added_date) 'dca-content-list-container-today'}}">
+                {{#each classActivity.classActivities as |classActivity|}}
+                  {{class.gru-class-activity-panel
               classActivity=classActivity
               classId=classId
               members=members
@@ -47,17 +62,52 @@
               onOpenPerformanceEntry="onOpenPerformanceEntry"
               isOfflineClass=isOfflineClass
             }}
+                {{/each}}
+              </div>
             {{/each}}
           </div>
-        {{/each}}
-        <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
-          {{ca-date-picker forFirstDateOfMonth=forFirstDateOfMonth   userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
-        </div>
+        {{else}}
+          <div class="no-content">{{t "common.no-dca-teacher"}}</div>
+          <div class="no-content-image"></div>
+        {{/if}}
       </div>
-    {{else}}
-      <div class="no-content">{{t "common.no-dca-teacher"}}</div>
-      <div class="no-content-image"></div>
-    {{/if}}
+    </div>
+    <div class="ca-right-panel hidden-xs hidden-sm">
+      <div class="ca-unschedule-items-list-container">
+        <div class="ca-unschedule-items-header">
+          <span>{{t 'common.unscheduled-items'}}</span>
+        </div>
+        {{#if unScheduledClassActivities}}
+          <div class="ca-unscheduled-content-items">
+            {{#each unScheduledClassActivities as |classActivity|}}
+              {{class.gru-class-activity-panel
+            classActivity=classActivity
+            classId=classId
+            members=members
+            onReportclick='changeStatusValue'
+            onGoLive='goLive'
+            showDcaAssignButton=false
+            showDcaAddButton=false
+            onChangeVisibility='changeVisibility'
+            onRemoveClassActivity='removeClassActivity'
+            openDcaContentReport='openDcaContentReport'
+            activityDate=classActivity.added_date
+            showDcaRemoveButton=false
+            onScheduleContentToDCA='onScheduleContentToDCA'
+            isUnScheduled=true
+          }}
+            {{/each}}
+          </div>
+        {{else}}
+          <div class="ca-unscheduled-no-content-items">
+            {{t 'common.no-unschedule-items'}} {{format-date forFirstDateOfMonth 'MMMM YYYY'}}.
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+  <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
+    {{ca-date-picker   userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
   </div>
 </div>
 {{#if unScheduledClassActivities}}
@@ -68,8 +118,10 @@
     onChangeVisibility='changeVisibility'
     onRemoveClassActivity='removeClassActivity'
     forFirstDateOfMonth=forFirstDateOfMonth
+    class="hidden visible-xs visible-sm"
   }}
 {{/if}}
+
 {{#if showSearchContentPullup}}
   {{teacher.class.ca-search-content-pull-up
     showPullUp=showSearchContentPullup
@@ -77,7 +129,6 @@
     context=contextParams
     selectedSearchContentType=selectedSearchContentType
     todaysClassActivities=todaysClassActivities.classActivities
-    forFirstDateOfMonth=forFirstDateOfMonth
   }}
 {{/if}}
 

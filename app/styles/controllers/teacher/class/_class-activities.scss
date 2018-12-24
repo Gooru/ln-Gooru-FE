@@ -1,6 +1,7 @@
 .teacher_class_class-activities {
   .app-container {
     overflow-y: hidden;
+
     .teacher.class {
       padding: 0;
     }
@@ -9,9 +10,8 @@
 
 .controller.teacher.class.class-activities {
   padding: 0;
-  margin: 20px 0;
-  max-width: 960px;
   margin: 0 auto;
+  color: #35424b;
   position: relative;
 
   .ca-title {
@@ -27,155 +27,215 @@
     }
   }
 
-  .loading-spinner {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    visibility: hidden;
+  .ca-panel {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-column-gap: 50px;
 
-    &.active {
-      visibility: visible;
-    }
-  }
+    .ca-left-panel {
+      .loading-spinner {
+        position: absolute;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        visibility: hidden;
 
-  .dca-content-container {
-    position: relative;
+        &.active {
+          visibility: visible;
+        }
+      }
 
-    .ca-date-and-add-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background-color: #fff;
-      border-radius: 4px;
-      user-select: none;
+      .dca-content-container {
+        padding-left: 20px;
 
-      .ca-date-selector {
-        position: relative;
-        height: 50px;
+        .ca-date-and-add-content {
+          display: grid;
+          grid-template-columns: 1fr;
+          background-color: #fff;
+          border-radius: 4px;
+          user-select: none;
+          grid-template-rows: 1fr 1fr;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+          position: relative;
 
-        .ca-date-picker-container {
-          position: absolute;
-          width: 100%;
-          z-index: 1;
+          .ca-date-selector {
+            position: relative;
+            height: 50px;
+            border-bottom: 1px solid #ccc;
+
+            .ca-date-picker-container {
+              position: absolute;
+              width: 100%;
+              z-index: 1;
+              box-shadow: none;
+            }
+
+            .ca-date-nav-container {
+              height: 50px;
+              box-shadow: none;
+            }
+          }
+
+          .ca-add-content {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            height: 50px;
+
+            .ca-contents-button {
+              display: inline-grid;
+              justify-items: center;
+              align-items: center;
+              grid-template-columns: 120px 20px 20px;
+              grid-gap: 15px;
+              padding-left: 15px;
+
+              p {
+                font-family: "Open Sans";
+                font-size: 13px;
+                font-weight: bold;
+                color: #666666;
+                text-transform: uppercase;
+                margin: 0;
+                padding: 0;
+              }
+
+              .collection-icon {
+                width: 20px;
+                height: 20px;
+                background-repeat: no-repeat;
+                background-size: 20px 20px;
+                background-image: url("../assets/gooru/images/add_collection.svg");
+                opacity: 0.8;
+                cursor: pointer;
+              }
+
+              .assessment-icon {
+                width: 20px;
+                height: 20px;
+                background-repeat: no-repeat;
+                background-size: 20px 20px;
+                background-image: url("../assets/gooru/images/add_assessment.svg");
+                opacity: 0.8;
+                cursor: pointer;
+              }
+            }
+          }
         }
 
-        .ca-date-nav-container {
-          height: 50px;
+        .no-content {
+          color: $gray-dove;
+          font-size: $font-size-lead;
+          text-align: center;
+        }
 
-          .cal-mm-yyyy {
-            pointer-events: none;
+        .no-contentfont {
+          width: 100%;
+          font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size: 13px;
+        }
 
-            i {
-              display: none;
+        .no-content-image {
+          background-image: url("gooru/no-dca-student.png");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          height: 240px;
+          margin: 40px auto 0;
+        }
+
+        .dca-list-container {
+          height: calc(100vh - 205px);
+          overflow-y: auto;
+          padding-right: 20px;
+          padding-left: 20px;
+          padding-bottom: 55px;
+
+          .dca-content-list-container {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+            border-radius: 4px;
+
+            &.dca-content-list-container-today {
+              box-shadow: 0 0 11px 3px #4b9741;
+            }
+          }
+
+          .dca-date-view-container {
+            display: inline-grid;
+            grid-template-columns: 200px 1fr;
+            align-items: center;
+            height: 50px;
+            width: 100%;
+
+            .dca-date-container {
+              display: inline-flex;
+              width: 100%;
+              align-items: center;
+
+              &.dca-date-container-today {
+                span {
+                  font-family: "Lato";
+                  font-size: 15px;
+                  font-weight: bold;
+                  color: #000000;
+                  text-transform: uppercase;
+                }
+              }
+
+              .calendar_today {
+                padding-left: 20px;
+              }
+
+              span {
+                padding-left: 20px;
+              }
+            }
+
+            hr {
+              width: 100%;
+              border-top: 1px solid #ccc;
             }
           }
         }
       }
+    }
 
-      .ca-add-content {
-        display: grid;
-        align-items: center;
-        grid-template-columns: 1fr 1fr;
-        border-left: 1px solid #ccc;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-        position: relative;
-        height: 50px;
+    .ca-right-panel {
+      .ca-unschedule-items-list-container {
+        padding-right: 20px;
 
-        .ca-contents-button {
-          display: inline-grid;
-          justify-items: center;
+        .ca-unschedule-items-header {
+          height: 50px;
+          box-shadow: rgba(0, 0, 0, 0.13) 0 2px 4px 0;
+          background: #fff;
+          border-radius: 4px;
+          display: grid;
           align-items: center;
-          grid-template-columns: 40px 20px 20px;
-          grid-gap: 15px;
-          padding-left: 15px;
-
-          p {
-            font-family: "Open Sans";
-            font-size: 13px;
-            font-weight: bold;
-            color: #666666;
-            text-transform: uppercase;
-            margin: 0;
-            padding: 0;
-          }
-
-          .collection-icon {
-            width: 20px;
-            height: 20px;
-            background-repeat: no-repeat;
-            background-size: 20px 20px;
-            background-image: url("../assets/gooru/images/add_collection.svg");
-            opacity: 0.8;
-            cursor: pointer;
-          }
-
-          .assessment-icon {
-            width: 20px;
-            height: 20px;
-            background-repeat: no-repeat;
-            background-size: 20px 20px;
-            background-image: url("../assets/gooru/images/add_assessment.svg");
-            opacity: 0.8;
-            cursor: pointer;
-          }
-        }
-      }
-    }
-
-    .no-content {
-      color: $gray-dove;
-      font-size: $font-size-lead;
-      text-align: center;
-    }
-
-    .no-contentfont {
-      width: 100%;
-      font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 13px;
-    }
-
-    .no-content-image {
-      background-image: url("gooru/no-dca-student.png");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: contain;
-      height: 240px;
-      margin: 40px auto 0;
-    }
-
-    .dca-list-container {
-      height: calc(100vh - 155px);
-      overflow-y: auto;
-      padding-right: 20px;
-      padding-left: 20px;
-      padding-bottom: 55px;
-
-      .dca-date-view-container {
-        display: inline-grid;
-        grid-template-columns: 200px 1fr;
-        align-items: center;
-        height: 50px;
-        width: 100%;
-
-        .dca-date-container {
-          display: inline-flex;
-          width: 100%;
-          align-items: center;
-
-          .calendar_today {
-            padding-left: 20px;
-          }
+          justify-content: center;
+          grid-template-columns: 1fr;
 
           span {
+            text-transform: uppercase;
             padding-left: 20px;
+            font-size: 12px;
+            font-weight: bold;
           }
         }
 
-        hr {
-          width: 100%;
-          border-top: 1px solid #ccc;
+        .ca-unscheduled-content-items {
+          padding: 20px;
+          height: calc(100vh - 155px);
+          overflow-y: auto;
+        }
+
+        .ca-unscheduled-no-content-items {
+          color: #666666;
+          font-size: 19px;
+          text-align: center;
+          margin-top: 5px;
         }
       }
     }

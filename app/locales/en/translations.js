@@ -89,6 +89,11 @@ export default Object.assign(quizzesTranslations, {
     accept: 'Accept',
     ignore: 'Ignore',
     add: 'Add',
+    'add-an-activity': 'Add an Activity',
+    Reschedule: 'Reschedule',
+    'no-unschedule-items':
+      'You don\'t have any activities that need scheduling for ',
+    'repeat-activity': 'Repeat Activity',
     'add-assessment': 'Create New Assessment',
     'add-century-skills': 'Add 21st Century Skills',
     'add-collaborator': 'Add Collaborator',
@@ -509,6 +514,7 @@ export default Object.assign(quizzesTranslations, {
     password: 'Password',
     pending: 'Pending',
     performance: 'Show Performance',
+
     'performance-dashboard': 'Performance Dashboard',
     'personal-information': 'Personal Information',
     play: 'Play',
@@ -1656,6 +1662,15 @@ export default Object.assign(quizzesTranslations, {
     title: 'Reset password'
   },
 
+  'change-password': {
+    'change-password': 'Change password link',
+    title: 'Change Password',
+    'current-password-label': 'Enter your current password',
+    'change-success': 'Password Changed Successfully !!',
+    'new-password-required': 'Please enter your new password.',
+    'change-password-error':
+      'Uh oh! Something’s not right. Unable to change password. Please try again.'
+  },
   footer: {
     footerDescription:
       'Gooru is committed to keeping its platform open-source and community created content CC0.',
