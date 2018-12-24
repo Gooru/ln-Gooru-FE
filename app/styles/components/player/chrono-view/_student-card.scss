@@ -17,7 +17,7 @@
     background-position: center;
     background-image: url(/assets/gooru/assessment-default.png);
     position: absolute;
-    border-radius: 8px;
+    border-radius: 8px 8px 0 0;
     top: 0;
     left: 0;
     width: 100%;
@@ -89,13 +89,12 @@
       height: 6px;
       width: 5px;
       background-color: $white;
-      border-radius: 8px;
     }
 
     &::-webkit-scrollbar-thumb {
       background: $gray-light;
       border: 1px solid $gray-light;
-      border-radius: 5px;
+      border-radius: 8px;
     }
     .resource {
       background-color: $white;
