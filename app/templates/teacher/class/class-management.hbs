@@ -285,6 +285,16 @@
               </div>
             </div>
             <div class='sub-sec-coteach'>
+              <div class='row-offline-class sub-sec-row' style="border-top:unset;">
+                <div class='offline-icon'></div>
+                <div class='offline-label'> {{t
+                  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label'}}</div>
+                <div class='action-button-slide-yes'>
+                  {{gru-switch switchOptions=switchOptions onOptionSwitch='saveOffline'
+                  isChecked=class.isOffline}}
+                </div>
+              </div>
+              <div class='sub-sec-row' style="display:none"> </div>
               {{#if class.collaborators}}
                 <div class='sub-sec-head'>{{t 'teacher-landing.class.class-settings.class-settings-sec.co-teachers'}}</div>
                 {{#each class.collaborators as |coteacher|}}
@@ -299,15 +309,6 @@
                   <div class='add-co-teacher-icon' {{action 'addCoteacher' }}> {{gru-icon name='add'}} </div>
                   <div class='add-co-teacher-label'> {{t
                   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher'}}</div>
-                </div>
-                <div class='row-offline-class sub-sec-row'>
-                  <div class='offline-icon'></div>
-                  <div class='offline-label'> {{t
-                  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label'}}</div>
-                  <div class='action-button-slide-yes'>
-                    {{gru-switch switchOptions=switchOptions onOptionSwitch='saveOffline'
-                  isChecked=class.isOffline}}
-                  </div>
                 </div>
               {{/if}}
             </div>
