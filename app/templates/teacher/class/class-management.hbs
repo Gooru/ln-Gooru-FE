@@ -674,7 +674,7 @@
                   {{/if}}
                   <div class="student-id {{if student.isActive "" "inActiveRow"}}  "> <span> {{student.studentId}}
                     </span></div>
-                  <div class='student-action-col' style='border-right:unset;'>
+                  <div class='student-action-col' style='border-right:unset;align-items: center;'>
                     {{gru-switch switchOptions=switchOptions onOptionSwitch='classMembersToggle' item=student data-toggle="tooltip"
                   isChecked=student.isActive}}
                   </div>
@@ -684,17 +684,17 @@
                     {{if (and student.isActive  student.gradeUpperBound) "" "inActiveRow"}} 
                     {{if (and student.gradeUpperBound (or (not student.profileBaselineDone) student.regeneratePathway)) "baseline-active" "inActiveRow baseline-inactive" }} 
                     "
-                      style='border-right:unset;'>
+                      style='border-right:unset;padding:5px;'>
                       <div class='student-adj-lp' {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}"
                         data-toggle="tooltip" style='border-right:unset;'> {{gru-icon name='replay'}}</div>
                     </div>
-                    <div class='student-action-col'>
+                    <div class='student-action-col' style="padding:5px; align-self:end;;border-right:unset;">
                       <div class='student-delete' {{action "onRemoveStudent" student}} title="{{t 'common.remove'}}"
                         data-toggle="tooltip">
                         {{gru-icon name='delete'}}</div>
                     </div>
                   {{else}}
-                    <div class='student-action-col' style="grid-column-start:span 2;">
+                    <div class='student-action-col' style="grid-column-start:span 2;padding:5px ;align-self:end;border-right:unset;">
                       <div class='student-delete' {{action "onRemoveStudent" student}} title="{{t 'common.remove'}}"
                         data-toggle="tooltip">
                         {{gru-icon name='delete'}}</div>
