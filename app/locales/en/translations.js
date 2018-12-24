@@ -527,6 +527,7 @@ export default Object.assign(quizzesTranslations, {
     'published-by': 'Published by',
     'published-tooltip': 'Badged Content',
     publisher: 'Publisher',
+    prev: 'Prev',
     question: 'Question',
     questions: 'Questions',
     'questions-OE': 'Free Response Questions',
@@ -616,6 +617,7 @@ export default Object.assign(quizzesTranslations, {
     'select-all': 'Select All',
     'no-students-selected': 'No Students Selected',
     'students-selected': 'Students Selected',
+    'add-data': 'Add Data',
     everyone: 'Everyone',
     'unscheduled-items': 'Unscheduled Items',
     'add-to-unschedule': 'Add to unscheduled list for',
@@ -1297,7 +1299,15 @@ export default Object.assign(quizzesTranslations, {
         'add-from-course-map': 'Add from Course Map',
         'add-from-my-content': 'Add from My Content',
         'welcome-dca':
-          'Welcome to your  Class Activities where you can assign collections and assessments for students to complete today. Please note: any reports generated will only be available today for the most recent attempt.'
+          'Welcome to your  Class Activities where you can assign collections and assessments for students to complete today. Please note: any reports generated will only be available today for the most recent attempt.',
+        'enter-max-timespent': 'Enter the Maximum Timespent for the Assessment',
+        'enter-max-score': 'Enter the Maximum Score for the Assessment',
+        hour: 'h',
+        min: 'm',
+        'question-score': 'Question Score',
+        'max-score': 'Max Score',
+        'assessment-score': 'Assessment Score',
+        'assessment-max-score': 'Assessment Max. Score'
       },
       'click-to-copy': 'Click to copy class code',
       'course-map': 'Course Map',

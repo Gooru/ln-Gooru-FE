@@ -38,9 +38,15 @@
             </div>
           {{/if}}
         {{else}}
-          <div class="dca-panel-performance not-started">
-            <span class="no-performance">--</span>
-          </div>
+          {{#if isShowAddData}}
+            <div class="dca-panel-performance add-data" {{action "onOpenPerformanceEntry" item classActivity}}>
+              {{t 'common.add-data'}}
+            </div>
+          {{else}}
+            <div class="dca-panel-performance not-started">
+              <span class="no-performance">--</span>
+            </div>
+          {{/if}}
         {{/if}}
       </div>
       {{else}}

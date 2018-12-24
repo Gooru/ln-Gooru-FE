@@ -59,6 +59,8 @@
               activityDate=classActivity.added_date
               showCohort=true
               onScheduleContentToDCA='onScheduleContentToDCA'
+              onOpenPerformanceEntry="onOpenPerformanceEntry"
+              isOfflineClass=isOfflineClass
             }}
                 {{/each}}
               </div>
@@ -132,4 +134,17 @@
 
 {{#if showDcaCollectionReportPullUp}}
   {{reports.pull-up.dca-collection-report context=dcaCollectionReportData showPullUp=showDcaCollectionReportPullUp}}
+{{/if}}
+
+
+{{#if isShowAssessmentPerformanceEntryPullUp}}
+  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowAssessmentPerformanceEntryPullUp title=selectedItem.title type='assessment'}}
+    {{reports.pull-up.assessment-performance-entry assessment=selectedItem students=members activityData=selectedActivity classId=classId onClosePerformanceEntry="onClosePerformanceEntry"}}
+  {{/reports.pull-up.performance-manual-entry}}
+{{/if}}
+
+{{#if isShowExternalAssessmentPeformanceEntryPullUp}}
+  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowExternalAssessmentPeformanceEntryPullUp title=selectedItem.title type="assessment-external"}}
+    {{reports.pull-up.external-assessment-performance-entry assessment=selectedItem students=members activityData=selectedActivity classId=classId}}
+  {{/reports.pull-up.performance-manual-entry}}
 {{/if}}

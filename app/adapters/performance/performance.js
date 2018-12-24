@@ -213,6 +213,24 @@ export default Ember.Object.extend({
     });
   },
 
+  updateCollectionOfflinePerformance(performanceData) {
+    const adapter = this;
+    const namespace = adapter.get('insightsNamespace');
+    const url = `${namespace}/offline-report`;
+    const options = {
+      type: 'POST',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      data: JSON.stringify(performanceData)
+    };
+    return Ember.RSVP.hashSettled({
+      updatedPerformance: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.updatedPerformance;
+    });
+  },
+
   defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`
