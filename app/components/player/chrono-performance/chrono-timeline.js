@@ -27,13 +27,21 @@ export default Ember.Component.extend({
     var prev = component.$(selected).prev();
     var prevSecond = component.$(prev).prev();
     var nextSecond = component.$(next).next();
+    var prevThird = component.$(prevSecond).prev();
+    var nextThird = component.$(nextSecond).next();
+    var prevFourth = component.$(prevThird).prev();
+    var nextFourth = component.$(nextThird).next();
     component.$(selected).removeClass().addClass('selected');
     component.$(prev).removeClass().addClass('prev');
     component.$(next).removeClass().addClass('next');
     component.$(nextSecond).removeClass().addClass('nextRightSecond');
     component.$(prevSecond).removeClass().addClass('prevLeftSecond');
-    component.$('.nextRightSecond').nextAll().removeClass().addClass('hideRight');
-    component.$('.prevLeftSecond').prevAll().removeClass().addClass('hideLeft');
+    component.$(nextThird).removeClass().addClass('nextRightThird');
+    component.$(prevThird).removeClass().addClass('prevLeftThird');
+    component.$(nextFourth).removeClass().addClass('nextRightFourth');
+    component.$(prevFourth).removeClass().addClass('prevLeftFourth');
+    component.$('.nextRightFourth').nextAll().removeClass().addClass('hideRight');
+    component.$('.prevLeftFourth').prevAll().removeClass().addClass('hideLeft');
   },
 
   setDefaultClasses() {
@@ -43,10 +51,14 @@ export default Ember.Component.extend({
     component.$(activeCartContainer).addClass('selected');
     component.$(activeCartContainer).prev().addClass('prev');
     component.$(activeCartContainer).prev().prev().addClass('prevLeftSecond');
-    component.$(activeCartContainer).prev().prev().prevAll().addClass('hideLeft');
+    component.$(activeCartContainer).prev().prev().prev().addClass('prevLeftThird');
+    component.$(activeCartContainer).prev().prev().prev().prev().addClass('prevLeftFourth');
+    component.$(activeCartContainer).prev().prev().prev().prev().prevAll().addClass('hideLeft');
     component.$(activeCartContainer).next().addClass('next');
     component.$(activeCartContainer).next().next().addClass('nextRightSecond');
-    component.$(activeCartContainer).next().next().nextAll().addClass('hideRight');
+    component.$(activeCartContainer).next().next().next().addClass('nextRightThird');
+    component.$(activeCartContainer).next().next().next().next().addClass('nextRightFourth');
+    component.$(activeCartContainer).next().next().next().next().nextAll().addClass('hideRight');
 
   },
 

@@ -36,6 +36,8 @@ export default Ember.Component.extend({
 
   index: null,
 
+  loading: true,
+
   didInsertElement() {
     let component = this;
     component.$().addClass(`student-card-${component.get('index')}`);
@@ -65,6 +67,7 @@ export default Ember.Component.extend({
         'collection',
         hash.collection.state === 'fulfilled' ? hash.collection.value : null
       );
+      component.set('loading', false);
     });
   },
 

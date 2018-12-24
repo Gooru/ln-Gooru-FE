@@ -1,3 +1,6 @@
+{{#if loading}}
+  {{three-bounce-spinner}}
+{{else}}
 <div class="card-container" {{action "onSelectCard"}}>
     <div class="collection-img" style="background-image: url({{collection.thumbnailUrl}})">
 </div>
@@ -25,9 +28,9 @@
     {{#each collection.children as |resource|}}
       <div class="resource">
         {{#if (eq type "assessment")}}
-          <div class="question-img"></div>
+          <i class="question-img"></i>
         {{else}}
-          <div class="resource-img {{resource.format}}"></div>
+          <i class="resource-img {{resource.format}}"></i>
         {{/if}}
         <div class="collection-info">
           <p class="title ellipsis">{{resource.title}}</p>
@@ -41,3 +44,4 @@
     {{/each}}
   </div>
 </div>
+  {{/if}}
