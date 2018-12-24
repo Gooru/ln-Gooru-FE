@@ -98,7 +98,7 @@
       align-items: center;
       justify-content: left;
       box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
-      padding: 0 10px;
+      padding: 0 12px;
       .student-thumbnail {
         width: 32px;
         height: 32px;
@@ -144,48 +144,67 @@
       }
 
       .student-info-container {
-        display: grid;
-        grid-template-columns: 32px 120px 120px 32px;
-        column-gap: 8px;
-        align-items: center;
-        height: 40px;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
-        .student-thumbnail {
-          width: 32px;
-          height: 32px;
-          background-size: 32px 32px;
-          display: block;
-          border: none;
-          border-radius: 50%;
-        }
-        .last-name, .first-name {
-          text-transform: capitalize;
-          font-size: 10px;
-          font-weight: bold;
-          color: #3e5e67;
-          margin-right: 8px;
-        }
-        .student-score {
-          input.student-score-entry {
-            width: 100%;
-            text-indent: 10px;
-                &:focus {
-                  background-color: #c9e4f9;
-                  outline: none;
-                }
-                &.wrong-score {
-                  color: red;
-                  border-bottom: 1px solid red;
-                  outline: none;
-                }
-          }
-        }
-        &.scored {
+        .student-info {
+          display: grid;
+          grid-template-columns: 32px 120px 120px 32px;
+          column-gap: 8px;
+          align-items: center;
+          height: 40px;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
           .student-thumbnail {
-            background-image: unset !important;
+            width: 32px;
+            height: 32px;
+            background-size: 32px 32px;
+            display: block;
+            border: none;
+            border-radius: 50%;
+            i {
+              display: none;
+              line-height: 32px;
+              text-align: center;
+            }
           }
+          .last-name, .first-name {
+            text-transform: capitalize;
+            font-size: 10px;
+            font-weight: bold;
+            color: #3e5e67;
+            margin-right: 8px;
+          }
+          .student-score {
+            input.student-score-entry {
+              width: 100%;
+              text-align: center;
+              background-color: transparent;
+              &:focus {
+                background-color: transparent;
+                outline: none;
+              }
+
+            }
+          }
+          &.scored {
+            .student-thumbnail {
+              background-image: unset !important;
+              i {
+                display: block;
+                color: $white;
+              }
+            }
+          }
+          &.wrong-score {
+            .student-score input {
+              color: red;
+              border-bottom: 1px solid red;
+              outline: none;
+            }
+
+          }
+        }
+        &.selected-student {
+          background-color: #c9e4f9;
         }
       }
     }
@@ -210,13 +229,10 @@
         background-color: #d8d8d8;
         border-radius: 50%;
         display: block;
-      }
-      &.scored {
-        .student-thumbnail {
-          background-image: unset !important;
-        }
+
       }
       .next {
+        cursor: pointer;
         .student-thumbnail {
           margin-left: 8px;
           margin-top: 4px;

@@ -9,6 +9,55 @@
       background-repeat: no-repeat;
       object-fit: contain;
     }
+    .max-timespent-container {
+      padding: 0 16px 16px 16px;
+      .title-container {
+        font-size: 10px;
+        font-weight: bold;
+        text-align: center;
+        color: #3e5e67;
+        padding: 15px;
+      }
+      .timespent-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        columns-gap: 16px;
+        .timespent-hour, .timespent-mins {
+          display: grid;
+          grid-template-columns: auto auto;
+          align-items: baseline;
+        }
+        input {
+          width: 100%;
+          font-size: 100px;
+          font-weight: bold;
+          color: #3d5e67;
+          outline: none;
+          &:focus {
+            outline: none;
+          }
+
+        }
+        .placeholder-text {
+          font-size: 50px;
+          font-weight: bold;
+          color: #3d5e67;
+        }
+      }
+      .confirm-action-container {
+        width: 100px;
+        height: 40px;
+        border-radius: 4px;
+        background-color: #1aa9eb;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+        color: #ffffff;
+        line-height: 40px;
+        text-transform: uppercase;
+        margin: 15px auto;
+      }
+    }
     .question-score.header {
       font-size: 12px;
       font-weight: bold;

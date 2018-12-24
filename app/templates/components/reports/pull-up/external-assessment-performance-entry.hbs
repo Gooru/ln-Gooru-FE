@@ -3,47 +3,50 @@
   {{#if isShowMaxScoreEntry}}
     <div class="max-score-entry-container">
       <div class="text-title">
-        ENTER THE MAXIMUM SCORE FOR THE ASSESSMENT
+        {{t 'teacher-landing.class.class-activities-tab.enter-max-score'}}
       </div>
       <div class="score-entry">
         {{input type="text" class="max-score-entry"
           value=assessmentMaxScore
         }}
+        {{#if (and isTyping (not isValidScore))}}
+          <span class="error">{{t 'self-report.validation-error'}}</span>
+        {{/if}}
       </div>
-      {{#if (and isTyping (not isValidScore))}}
-        <div class="error">{{t 'self-report.validation-error'}}</div>
-      {{/if}}
       <div class="action {{unless isValidScore 'disabled'}}" {{action "onEnterMaxScore"}}>
-        Confirm
+        {{t 'common.confirm'}}
       </div>
     </div>
   {{else}}
-    <div class="question-score header"><span>Assessment Score</span></div>
+    <div class="question-score header"><span>{{t 'teacher-landing.class.class-activities-tab.assessment-score'}}</span></div>
     <div class="assessment-max-score">
-      Assessment Max. Score: {{assessmentMaxScore}}
+      {{t 'teacher-landing.class.class-activities-tab.assessment-max-score'}}: {{assessmentMaxScore}}
     </div>
     <div class="active-student">
       <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})"></div>
       <div class="student-name ellipsis">{{activeStudent.fullName}}</div>
-      <div></div>
     </div>
     <div class="students-container">
       {{#each students as |student studentSeq|}}
-        <div class="student-info-container student-{{studentSeq}} {{if (eq activeStudent.id student.id) 'selected-student' }}">
-          <div class="student-thumbnail" style="background-image: url({{student.avatarUrl}})">{{gru-icon name="done_all"}}</div>
-          <div class="last-name ellipsis">{{student.lastName}}</div>
-          <div class="first-name ellipsis">{{student.firstName}}</div>
-          <div class="student-score">
-            {{input type="text" class=(concat 'student-score-entry' ' s-' studentSeq '-score')
-              focus-in=(action "onSelectStudent" student studentSeq)
-              focus-out=(action "onEditScore" studentSeq)
-            }}
+        <div class="student-info-container {{if (eq activeStudent.id student.id) 'selected-student'}}">
+          <div class="student-info student-{{studentSeq}}">
+            <div class="student-thumbnail" style="background-image: url({{student.avatarUrl}})">{{gru-icon name="done_all"}}</div>
+            <div class="last-name ellipsis">{{student.lastName}}</div>
+            <div class="first-name ellipsis">{{student.firstName}}</div>
+            <div class="student-score">
+              {{input type="text" class=(concat 'student-score-entry' ' s-' studentSeq '-score')
+                focus-in=(action "onSelectStudent" student studentSeq)
+                focus-out=(action "onEditScore" studentSeq)
+                pattern="[0-9]*"
+                inputmode="numeric"
+              }}
+            </div>
           </div>
         </div>
       {{/each}}
     </div>
     <div class="action-container">
-      <div class="next action" {{action "onMoveNext"}}>Next<div class="student-thumbnail"></div></div>
+      <div class="next action" {{action "onMoveNext"}}>{{t 'common.next'}}<div class="student-thumbnail"></div></div>
     </div>
   {{/if}}
 </div>
