@@ -155,6 +155,33 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     return moment().format('YYYY-MM-DD');
   }),
 
+  /**
+   * It Maintains the list of scheduled class activities datewise.
+   * @type {Array}
+   */
+  scheduledClassActivitiesDatewise: Ember.computed(
+    'classActivities.[]',
+    function() {
+      let controller = this;
+      let activities = Ember.A();
+      controller.get('classActivities').forEach(classActivity => {
+        let addedDate = classActivity.get('added_date');
+        if (addedDate) {
+          let isToday =
+            moment(addedDate).format('YYYY-MM-DD') ===
+            moment().format('YYYY-MM-DD');
+          let activity = Ember.Object.create({
+            day: moment(addedDate).format('DD'),
+            hasActivity: true,
+            isToday
+          });
+          activities.pushObject(activity);
+        }
+      });
+      return activities;
+    }
+  ),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -166,6 +193,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('forYear', moment().format('YYYY'));
       let date = moment().format('YYYY-MM-DD');
       controller.handleScrollToSpecificDate(date);
+      controller.slideUpCAInlineDatePickerOnClickOutSide();
     });
   },
 
@@ -185,6 +213,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           controller.parseClassActivityData(classActivities);
         }
         controller.set('isLoading', false);
+        Ember.run.later(function() {
+          let date = moment().format('YYYY-MM-DD');
+          controller.handleScrollToSpecificDate(date, true);
+        }, 1000);
       });
   },
 
@@ -205,19 +237,51 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     });
   },
 
-  handleScrollToSpecificDate(date) {
+  handleScrollToSpecificDate(date, isDefaultTop) {
     let dateEle = Ember.$(
       `.student_class_class-activities .dca-date-view-container-${date}`
     );
     if (dateEle.length > 0) {
       let scrollToContainer = Ember.$('.dca-list-container');
-      let top = dateEle.position().top - 50 + scrollToContainer.scrollTop();
+      let reduceHeight = 50;
+      let top =
+        dateEle.position().top - reduceHeight + scrollToContainer.scrollTop();
       scrollToContainer.animate(
         {
           scrollTop: top
         },
         1000
       );
+    } else if (isDefaultTop) {
+      let scrollToContainer = Ember.$('.dca-list-container');
+      scrollToContainer.animate(
+        {
+          scrollTop: 0
+        },
+        1000
+      );
     }
+  },
+
+  slideUpCAInlineDatePickerOnClickOutSide() {
+    Ember.$('.student_class_class-activities').on('click', function(e) {
+      if (
+        !Ember.$(e.target).hasClass('ca-date-picker-toggle') &&
+        Ember.$('.ca-date-picker-container').has(e.target).length === 0
+      ) {
+        let element = Ember.$(
+          '.student_class_class-activities .ca-date-picker-inline'
+        );
+        if (element.length > 0 && element.hasClass('active')) {
+          let dateDisplayEle = Ember.$(
+            '.student_class_class-activities .ca-content-container .cal-mm-yyyy'
+          );
+          element.slideUp(400, function() {
+            element.removeClass('active');
+            dateDisplayEle.removeClass('active');
+          });
+        }
+      }
+    });
   }
 });

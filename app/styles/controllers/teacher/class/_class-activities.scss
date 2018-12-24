@@ -63,13 +63,21 @@
           .ca-date-selector {
             position: relative;
             height: 50px;
-            border-bottom: 1px solid #ccc;
+            align-self: center;
+            justify-self: center;
+            width: 360px;
 
             .ca-date-picker-container {
               position: absolute;
               width: 100%;
               z-index: 1;
               box-shadow: none;
+
+              .ca-datepicker-container {
+                &.active {
+                  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.13);
+                }
+              }
             }
 
             .ca-date-nav-container {
@@ -84,6 +92,7 @@
             grid-template-columns: 1fr 1fr;
             position: relative;
             height: 50px;
+            border-top: 1px solid #ccc;
 
             .ca-contents-button {
               display: inline-grid;
@@ -216,6 +225,7 @@
           align-items: center;
           justify-content: center;
           grid-template-columns: 1fr;
+          position: relative;
 
           span {
             text-transform: uppercase;

@@ -60,9 +60,9 @@
       <div class="student-count {{if showCohort 'active'}}">
         {{#if (eq classActivity.usersCount -1)}}
           <span {{action 'showStudentList'}}>{{t 'common.everyone'}}</span> {{else if (eq classActivity.usersCount 0)}}
-          <span {{action 'showStudentList'}}>{{t 'common.no-students-selected'}}</span>
+          <span {{action 'showStudentList'}}>{{t 'common.no-students'}}</span>
         {{else}}
-          <span {{action 'showStudentList'}}> {{classActivity.usersCount}}  {{t 'common.students-selected'}}</span>
+          <span {{action 'showStudentList'}}> {{classActivity.usersCount}}  {{t 'common.students'}}</span>
         {{/if}}
       </div>
       <div class="re-schedule">

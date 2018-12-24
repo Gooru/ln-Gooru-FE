@@ -15,12 +15,20 @@
       height: 20px;
       cursor: pointer;
       user-select: none;
+
+      i {
+        pointer-events: none;
+      }
     }
 
     .next-cal-arrow {
       height: 20px;
       cursor: pointer;
       user-select: none;
+
+      i {
+        pointer-events: none;
+      }
     }
 
     .cal-mm-yyyy {
@@ -32,6 +40,7 @@
       .arrow_drop_down,
       .arrow_drop_up {
         display: none;
+        pointer-events: none;
       }
 
       &.ca-date-picker-toggle {
@@ -77,10 +86,17 @@
       padding-bottom: 4px;
       background-color: #4b9740;
       color: #fff;
-      cursor: pointer;
+      pointer-events: none;
+      opacity: 0.7;
 
-      &:hover {
-        opacity: 0.8;
+      &.has-activities {
+        opacity: 1;
+        pointer-events: all;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.8;
+        }
       }
     }
 
@@ -99,15 +115,44 @@
             display: none;
           }
 
+          tr td.disabled:hover,
+          tr td.new:hover,
+          tr td.no-activities:hover,
+          tr td.old:hover {
+            background: none;
+            font-weight: normal;
+            color: #999;
+          }
+
+          tr td.disabled,
+          tr td.new,
+          tr td.no-activities,
+          tr td.old {
+            pointer-events: none;
+            font-weight: normal;
+            color: #999;
+          }
+
           tr td.day:hover {
             background: none;
             font-weight: bold;
             color: #000;
           }
 
+          tr td.has-activities:before {
+            content: "";
+            display: inline-block;
+            background-color: black;
+            width: 3px;
+            height: 3px;
+            position: relative;
+            bottom: -10px;
+            left: 10px;
+          }
+
           tr td.active {
             background: none;
-            color: #666;
+            color: #35424b;
             text-shadow: none;
           }
         }

@@ -167,6 +167,10 @@
         cursor: pointer;
         justify-self: center;
         align-self: center;
+        color: #3589fb;
+        font-size: 13px;
+        font-weight: bold;
+
         span {
           pointer-events: none;
         }
@@ -200,6 +204,9 @@
 
       .re-schedule {
         justify-self: center;
+        color: #3589fb;
+        font-size: 13px;
+        font-weight: bold;
 
         .re-schedule-activity {
           height: 22px;
@@ -328,7 +335,8 @@
 
       .time-spent {
         justify-self: right;
-        padding-right: 25px;
+        padding-right: 5px;
+        font-size: 12px;
       }
     }
   }
