@@ -212,5 +212,11 @@ export default Ember.Component.extend({
    * It maintains the state of cohort pull up need to show or not.
    * @type {Boolean}
    */
-  showCohort: false
+  showCohort: false,
+
+  /**
+   * It's used identify CA is scheduled or unscheduled
+   * @type {Boolean}
+   */
+  isUnScheduled: false
 });

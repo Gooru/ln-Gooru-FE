@@ -31,12 +31,14 @@ export default Ember.Component.extend({
       component.set('forYear', forYear);
       let datepickerEle = component.$('#ca-datepicker .datepicker-days .prev');
       datepickerEle.trigger('click');
+      let date = `${forYear}-${forMonth}-01`;
+      component.set('forFirstDateOfMonth', moment(date).format('YYYY-MM-DD'));
       component.sendAction('showPreviousMonth');
     },
 
     showNextMonth() {
       let component = this;
-      let forFirstDateOfMonth = this.get('forFirstDateOfMonth');
+      let forFirstDateOfMonth = component.get('forFirstDateOfMonth');
       let forMonth = moment(forFirstDateOfMonth)
         .add(1, 'months')
         .format('MM');
@@ -47,6 +49,8 @@ export default Ember.Component.extend({
       component.set('forYear', forYear);
       let datepickerEle = component.$('#ca-datepicker .datepicker-days .next');
       datepickerEle.trigger('click');
+      let date = `${forYear}-${forMonth}-01`;
+      component.set('forFirstDateOfMonth', moment(date).format('YYYY-MM-DD'));
       component.sendAction('showNextMonth');
     },
 
@@ -54,12 +58,21 @@ export default Ember.Component.extend({
       this.toggleDatePicker();
     },
 
-    onSelectMonth: function(month) {
+    onSelectMonth(month) {
       this.sendAction(
         'onSelectMonth',
         month.get('monthNumber'),
         month.get('monthYear')
       );
+    },
+
+    onSelectToday() {
+      let component = this;
+      let allowDateSelectorToggle = component.get('allowDateSelectorToggle');
+      if (allowDateSelectorToggle) {
+        component.toggleDatePicker();
+      }
+      component.sendAction('onSelectToday', moment().format('YYYY-MM-DD'));
     }
   },
 
@@ -132,9 +145,12 @@ export default Ember.Component.extend({
     let showMonths = component.get('showMonths');
     let monthsList = Ember.A([]);
     let forFirstDateOfMonth = component.get('forFirstDateOfMonth');
+    let monthAndYearOfCurrentDate = moment().format('YYYY-MM');
+    let firtDateOfCurrentMonth = moment(`${monthAndYearOfCurrentDate}-01`);
     if (showMonths && forFirstDateOfMonth) {
       let numberOfMonthsToShow = component.get('numberOfMonthsToShow');
       for (let index = 1; index <= numberOfMonthsToShow; index++) {
+        let slectedMonth = moment(forFirstDateOfMonth).add(index, 'months');
         let monthName = moment(forFirstDateOfMonth)
           .add(index, 'months')
           .format('MMMM');
@@ -149,6 +165,10 @@ export default Ember.Component.extend({
           monthName,
           monthYear
         });
+        month.set(
+          'isPast',
+          !slectedMonth.isSameOrAfter(firtDateOfCurrentMonth)
+        );
         monthsList.pushObject(month);
       }
     }
@@ -161,11 +181,28 @@ export default Ember.Component.extend({
    */
   allowDateSelectorToggle: false,
 
+  /**
+   * It will decide whether today button need to show or not.
+   * @type {Boolean}
+   */
+  showToday: false,
+
+  /**
+   * If show today is true then this attribute will check today is exist for the current month selection.
+   * @return {String}
+   */
+  isTodayExistInCurrentMonth: Ember.computed('forFirstDateOfMonth', function() {
+    let component = this;
+    let forFirstDateOfMonth = component.get('forFirstDateOfMonth');
+    return moment().format('MM') === moment(forFirstDateOfMonth).format('MM');
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
   initializeDatePicker: function() {
     let component = this;
+    let allowDateSelectorToggle = component.get('allowDateSelectorToggle');
     let datepickerEle = component.$('#ca-datepicker');
     let defaultParams = {
       maxViewMode: 0,
@@ -185,6 +222,9 @@ export default Ember.Component.extend({
       let selectedDate = Ember.$(datepicker)
         .datepicker('getFormattedDate')
         .valueOf();
+      if (allowDateSelectorToggle) {
+        component.toggleDatePicker();
+      }
       component.sendAction('onSelectDate', selectedDate);
     });
   },

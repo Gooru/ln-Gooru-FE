@@ -1,17 +1,8 @@
 .gru-class-activity-panel {
   background-color: #fff;
-  border-radius: 4px;
-  margin-bottom: 10px;
-
-  &:hover {
-    .dca-panel-container {
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-    }
-  }
 
   .dca-panel-container {
     transition: background-color 2s linear;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
 
     &.new {
       background-color: #ffc107ad;
@@ -23,10 +14,16 @@
       }
     }
 
+    &.unscheduled {
+      .ca-panel-container-1 {
+        grid-template-columns: 1fr 100px 80px;
+      }
+    }
+
     .ca-panel-container-1 {
       display: inline-grid;
       width: 100%;
-      grid-template-columns: 1fr 100px 200px 60px;
+      grid-template-columns: 1fr 100px 60px;
       height: 60px;
       border-bottom: solid 1px #cacaca;
 
@@ -126,6 +123,100 @@
           background-repeat: no-repeat;
           background-size: 20px 20px;
           background-image: url("../assets/gooru/share.png");
+        }
+      }
+
+      .dca-panel-actions-performance {
+        .dca-panel-performance {
+          width: 100%;
+          height: 100%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          font-size: 18px;
+          font-weight: bold;
+          cursor: pointer;
+          border-top-right-radius: 4px;
+
+          &.collection {
+            background-color: #4e5e68;
+            font-size: 12px;
+            text-overflow: ellipsis;
+          }
+
+          &.not-started {
+            pointer-events: none;
+          }
+
+          &.add-data {
+            color: $white;
+            background-color: #4e5e67;
+            font-size: 10px;
+            text-align: center;
+            text-transform: uppercase;
+          }
+
+          .no-performance {
+            color: #37424b;
+          }
+        }
+      }
+
+      .ca-panel-reschedule {
+        cursor: pointer;
+        justify-self: center;
+        align-self: center;
+        span {
+          pointer-events: none;
+        }
+      }
+    }
+
+    .ca-panel-container-2 {
+      height: 20px;
+      grid-template-columns: 1fr 1fr 1fr 60px;
+      display: grid;
+      align-items: center;
+      height: 30px;
+      border-bottom: solid 1px #cacaca;
+
+      .student-count {
+        padding-left: 10px;
+        visibility: hidden;
+
+        &.active {
+          visibility: visible;
+        }
+
+        span {
+          cursor: pointer;
+
+          &:hover {
+            color: #000;
+          }
+        }
+      }
+
+      .re-schedule {
+        justify-self: center;
+
+        .re-schedule-activity {
+          height: 22px;
+          cursor: pointer;
+
+          .update {
+            font-size: 20px;
+            pointer-events: none;
+          }
+
+          span {
+            pointer-events: none;
+
+            &:hover {
+              color: #000;
+            }
+          }
         }
       }
 
@@ -231,77 +322,6 @@
                 }
               }
             }
-          }
-        }
-      }
-
-      .dca-panel-actions-performance {
-        .dca-panel-performance {
-          width: 100%;
-          height: 100%;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          font-size: 18px;
-          font-weight: bold;
-          cursor: pointer;
-          border-top-right-radius: 4px;
-
-          &.collection {
-            background-color: #4e5e68;
-            font-size: 12px;
-            text-overflow: ellipsis;
-          }
-
-          &.not-started {
-            pointer-events: none;
-          }
-
-          .no-performance {
-            color: #37424b;
-          }
-
-          &.add-data {
-            color: $white;
-            background-color: #4e5e67;
-            font-size: 10px;
-            text-align: center;
-            text-transform: uppercase;
-          }
-        }
-      }
-    }
-
-    .ca-panel-container-2 {
-      height: 20px;
-      grid-template-columns: 1fr 1fr 1fr;
-      display: grid;
-      align-items: center;
-      height: 30px;
-
-      .student-count {
-        padding-left: 25px;
-        visibility: hidden;
-
-        &.active {
-          visibility: visible;
-        }
-
-        span {
-          cursor: pointer;
-        }
-      }
-
-      .re-schedule {
-        justify-self: center;
-
-        .re-schedule-activity {
-          height: 22px;
-          cursor: pointer;
-          .update {
-            font-size: 20px;
-            pointer-events: none;
           }
         }
       }
