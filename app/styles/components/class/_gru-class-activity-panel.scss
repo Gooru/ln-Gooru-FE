@@ -149,6 +149,14 @@
             pointer-events: none;
           }
 
+          &.add-data {
+            color: $white;
+            background-color: #4e5e67;
+            font-size: 10px;
+            text-align: center;
+            text-transform: uppercase;
+          }
+
           .no-performance {
             color: #37424b;
           }

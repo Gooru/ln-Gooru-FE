@@ -514,6 +514,7 @@ export default Object.assign(quizzesTranslations, {
     password: 'Password',
     pending: 'Pending',
     performance: 'Show Performance',
+
     'performance-dashboard': 'Performance Dashboard',
     'personal-information': 'Personal Information',
     play: 'Play',
@@ -526,6 +527,7 @@ export default Object.assign(quizzesTranslations, {
     'published-by': 'Published by',
     'published-tooltip': 'Badged Content',
     publisher: 'Publisher',
+    prev: 'Prev',
     question: 'Question',
     questions: 'Questions',
     'questions-OE': 'Free Response Questions',
@@ -614,6 +616,7 @@ export default Object.assign(quizzesTranslations, {
     'de-select': 'De Select',
     'select-all': 'Select All',
     'no-students': 'No Students',
+    'add-data': 'Add Data',
     everyone: 'Everyone',
     'unscheduled-items': 'Unscheduled Items',
     'add-to-unschedule': 'Add to unscheduled list for',
@@ -1295,7 +1298,15 @@ export default Object.assign(quizzesTranslations, {
         'add-from-course-map': 'Add from Course Map',
         'add-from-my-content': 'Add from My Content',
         'welcome-dca':
-          'Welcome to your  Class Activities where you can assign collections and assessments for students to complete today. Please note: any reports generated will only be available today for the most recent attempt.'
+          'Welcome to your  Class Activities where you can assign collections and assessments for students to complete today. Please note: any reports generated will only be available today for the most recent attempt.',
+        'enter-max-timespent': 'Enter the Maximum Timespent for the Assessment',
+        'enter-max-score': 'Enter the Maximum Score for the Assessment',
+        hour: 'h',
+        min: 'm',
+        'question-score': 'Question Score',
+        'max-score': 'Max Score',
+        'assessment-score': 'Assessment Score',
+        'assessment-max-score': 'Assessment Max. Score'
       },
       'click-to-copy': 'Click to copy class code',
       'course-map': 'Course Map',
@@ -1322,7 +1333,8 @@ export default Object.assign(quizzesTranslations, {
           'offline-class-label': 'This is an Offline classroom'
         },
         'student-settings-sec': {
-          'student-settings-sec-head': 'Student Settings'
+          'student-settings-sec-head': 'Student Settings',
+          'col-head-active': 'Active'
         },
         'course-settings-sec': {
           'course-settings-sec-head': 'Course Settings',
@@ -1650,6 +1662,15 @@ export default Object.assign(quizzesTranslations, {
     title: 'Reset password'
   },
 
+  'change-password': {
+    'change-password': 'Change password link',
+    title: 'Change Password',
+    'current-password-label': 'Enter your current password',
+    'change-success': 'Password Changed Successfully !!',
+    'new-password-required': 'Please enter your new password.',
+    'change-password-error':
+      'Uh oh! Something’s not right. Unable to change password. Please try again.'
+  },
   footer: {
     footerDescription:
       'Gooru is committed to keeping its platform open-source and community created content CC0.',

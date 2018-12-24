@@ -47,6 +47,7 @@ $box-shadow: 1px -1px;
 @import "controllers/profile/content/resources";
 @import "controllers/profile/content/rubrics";
 @import "controllers/profile/about";
+
 @import "controllers/profile/edit";
 @import "controllers/profile/courses";
 @import "controllers/profile/network";
@@ -191,6 +192,7 @@ $box-shadow: 1px -1px;
 @import "components/class/learner/gru-learner-accordion-unit";
 @import "components/class/learner/gru-learner-accordion-lesson";
 @import "components/profile/gru-navigation-tabs";
+@import "components/profile/_change-password";
 @import "components/content/assessments/gru-assessment-edit";
 @import "components/content/gru-audience";
 @import "components/content/gru-category";
@@ -409,3 +411,8 @@ $box-shadow: 1px -1px;
 @import "components/proficiency/inspect/student-domain-performance";
 @import "components/proficiency/inspect/student-domain-competency-performance";
 @import "components/proficiency/inspect/student-class-proficiency";
+
+// Performance Manual Entry
+@import "components/reports/pull-up/performance-manual-entry";
+@import "components/reports/pull-up/assessment-performance-entry";
+@import "components/reports/pull-up/external-assessment-performance-entry";

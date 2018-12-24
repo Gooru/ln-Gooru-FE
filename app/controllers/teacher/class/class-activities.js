@@ -370,6 +370,26 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
     onSelectDate(date) {
       this.handleScrollToSpecificDate(date);
+    },
+
+    onOpenPerformanceEntry(item, activity) {
+      let component = this;
+      if (item.format === 'assessment') {
+        component.set('isShowAssessmentPerformanceEntryPullUp', true);
+        component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
+      } else {
+        component.set('isShowExternalAssessmentPeformanceEntryPullUp', true);
+        component.set('isShowAssessmentPerformanceEntryPullUp', false);
+      }
+      component.set('selectedItem', item);
+      component.set('selectedActivity', activity);
+    },
+
+    onClosePerformanceEntry() {
+      let controller = this;
+      controller.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
+      controller.set('isShowAssessmentPerformanceEntryPullUp', false);
+      controller.loadData();
     }
   },
 
@@ -390,6 +410,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
+
+  isOfflineClass: Ember.computed('class', function() {
+    let controller = this;
+    let classData = controller.get('class');
+    return classData.isOffline;
+  }),
+
+  selectedActivity: null,
+
+  selectedItem: null,
+
+  isShowPerformanceEntryPullUp: false,
 
   /**
    * @property {boolean} Indicates if there are class activities
