@@ -585,6 +585,8 @@
                 <div class='student-header' style="margin-left:-10px"> <span class='id-head'> {{t 'teacher-landing.class.class-settings.student-id'}}
                   </span></div>
                 {{!-- <div class='student-header'> {{t 'teacher-landing.class.class-settings.joined-on'}}</div> --}}
+                <div class='student-header' style='border-right:unset;'><span class='id-head'> {{t 'teacher-landing.class.class-settings.student-settings-sec.col-head-active'}}
+                  </span></div> {{!-- Enable/Disable --}}
                 {{#if (and (and course subject) isPremiumClass) }}
                   <div class='student-header' style='border-right:unset;'></div> {{!-- Adjust LP --}}
                   <div class='student-header' style='border-right:unset;'></div> {{!-- Delete --}}
@@ -592,7 +594,6 @@
                   <div class='student-header' style="grid-column-start:span  2;border-right:unset;"></div>
                   {{!-- Delete --}}
                 {{/if}}
-                <div class='student-header' style='border-right:unset;'></div> {{!-- Enable/Disable --}}
                 {{!-- Student table header -- ends --}}
                 {{!-- Each row of student goes here --}}
                 {{#each sortedMembers as |student|}}
@@ -673,9 +674,8 @@
                   <div class="student-id {{if student.isActive "" "inActiveRow"}}  "> <span> {{student.studentId}}
                     </span></div>
                   <div class='student-action-col' style='border-right:unset;'>
-                    <div class='student-act-de' {{action "classMembersToggle" student}} title="Activate/Deactivate"
-                      data-toggle="tooltip">
-                      {{gru-icon name='block'}}</div>
+                    {{gru-switch switchOptions=switchOptions onOptionSwitch='classMembersToggle' item=student data-toggle="tooltip"
+                  isChecked=student.isActive}}
                   </div>
                   {{!-- <div class='joined'> </div> --}}
                   {{#if (and (and course subject) isPremiumClass) }}

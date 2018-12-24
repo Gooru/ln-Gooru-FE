@@ -439,20 +439,20 @@ export default Ember.Controller.extend(ModalMixin, {
       controller.saveClass();
     },
 
-    classMembersToggle: function(student) {
+    classMembersToggle: function(targetStatusActive, student) {
       const controller = this;
       if (controller.get('course.id') && controller.get('sanitizedSubject')) {
         let settings = {
           users: [student.id]
         };
 
-        if (student.isActive) {
-          controller.classMembersDeactivate(settings);
-        } else {
+        if (targetStatusActive) {
           controller.classMembersActivate(settings);
+        } else {
+          controller.classMembersDeactivate(settings);
         }
 
-        student.set('isActive', !student.isActive); //Toggle Status
+        student.set('isActive', targetStatusActive); //Toggle Status
         controller.updateBondValueToSingleStudent(student);
       } else {
         Ember.Logger.log(
