@@ -611,6 +611,7 @@ export default Object.assign(quizzesTranslations, {
     'select-all': 'Select All',
     'no-students-selected': 'No Students Selected',
     'students-selected': 'Students Selected',
+    'add-data': 'Add Data',
     everyone: 'Everyone',
     'unscheduled-items': 'Unscheduled Items',
     'add-to-unschedule': 'Add to unscheduled list for',
