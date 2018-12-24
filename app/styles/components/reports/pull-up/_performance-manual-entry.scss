@@ -19,7 +19,6 @@
     right: 0;
     bottom: 0;
     z-index: -1;
-    cursor: pointer;
     opacity: 0.8;
     background-color: #000;
   }
@@ -51,17 +50,27 @@
       opacity: 0.3;
       font-size: 24px;
       color: #37424b;
+      i {
+        cursor: pointer;
+      }
 
     }
   }
 
-  @media screen and (orientation: landscape) and (max-height: 481px){
+  @media screen and (max-width: 360px) {
+    width: 100vw;
     .body-container {
-      .assessment-performance-container {
+      width: 100vw;
+    }
+  }
+
+  @media screen and (orientation: landscape) and (max-height: 481px) {
+    .body-container {
+      .assessment-performance-container, .external-assessment-performance-container {
         .assessment-thumbnail {
           display: none;
         }
-        .questions-container {
+        .questions-container, .students-container {
           max-height: calc(100vh - 220px);
         }
       }

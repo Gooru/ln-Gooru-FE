@@ -63,12 +63,45 @@ export default Ember.Component.extend({
     onMoveStudent(direction) {
       let component = this;
       component.loadStudentPerformanceData(direction);
+    },
+
+    //Action triggered when submit performance entry
+    onSubmitPerformance() {
+      let component = this;
+      let assessmentPerformanceDataParams = component.getDataParams();
+      let activeStudentSeq = component.get('activeStudentSeq');
+      let studentsOfflineAssessmentData = component.get('studentsOfflineAssessmentData');
+      studentsOfflineAssessmentData[activeStudentSeq  - 1] = assessmentPerformanceDataParams;
+      component.set('studentsOfflineAssessmentData', studentsOfflineAssessmentData);
+      component.updateStudentAssessmentPerformance(assessmentPerformanceDataParams);
+      component.sendAction('onClosePerformanceEntry');
+    },
+
+    //Action triggered when enter max timespent
+    onEnterMaxTimespent() {
+      let component = this;
+      let maxHour = component.get('maxTimeHour');
+      let maxMins = component.get('maxTimeMins');
+      let maxTimeInMilliSec = (maxHour*60*60+maxMins*60)*1000;
+      let questionTimespent = maxTimeInMilliSec / component.get('questions.length');
+      component.set('questionTimespent', questionTimespent);
+      component.set('isCaptureTimespent', false);
     }
   },
 
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {Number} questionTimespent
+   */
+  questionTimespent: 0,
+
+  /**
+   * @property {Boolean} isCaptureTimespent
+   */
+  isCaptureTimespent: true,
 
   /**
    * @property {Array} students
@@ -207,12 +240,8 @@ export default Ember.Component.extend({
       component.updateStudentAssessmentPerformance(assessmentPerformanceDataParams);
       component.resetElements();
     }
-    if (activeStudentSeq === students.length) {
-      component.sendAction('onClosePerformanceEntry');
-    } else {
-      component.set('activeStudent', activeStudent);
-      component.set('activeStudentSeq', activeStudentSeq);
-    }
+    component.set('activeStudent', activeStudent);
+    component.set('activeStudentSeq', activeStudentSeq);
   },
 
   /**
@@ -251,8 +280,7 @@ export default Ember.Component.extend({
     let component = this;
     let enteredScore = component.$(`.q-${questionSeq}-score`).val();
     if (component.validateQuestionScore(questionSeq, enteredScore)) {
-      if (enteredScore)
-      {component.$(`.question-${questionSeq}`).removeClass('scored').addClass('scored');}
+      component.$(`.question-${questionSeq}`).removeClass('scored').addClass('scored');
       component.$(`.question-${questionSeq} .question-thumbnail`).css('background-color', '#538a32');
     } else {
       component.$(`.question-${questionSeq}`).removeClass('scored');
@@ -297,7 +325,7 @@ export default Ember.Component.extend({
         'question_type': questionData.type,
         'score': Number(score) || 0,
         'max_score': questionData.maxScore,
-        'time_spent': 0
+        'time_spent': component.get('questionTimespent')
       };
       assessmentResources.push(resourceData);
     });

@@ -1,9 +1,29 @@
 <div class="assessment-performance-container">
-  <div class="assessment-thumbnail" style="background-image: url({{assessment.thumbnailUrl}})"></div>
-    <div class="question-score header"><span>Question Score</span></div>
+    <div class="assessment-thumbnail" style="background-image: url({{assessment.thumbnailUrl}})"></div>
+    {{#if isCaptureTimespent}}
+      <div class="max-timespent-container">
+        <div class="title-container">
+          {{t 'teacher-landing.class.class-activities-tab.enter-max-timespent'}}
+        </div>
+        <div class="timespent-container">
+          <div class="timespent-hour">
+            <span>{{input type="text" value=maxTimeHour}}</span>
+            <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.hour'}}</span>
+          </div>
+          <div class="timespent-mins">
+            <span>{{input type="text" value=maxTimeMins}}</span>
+            <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.min'}}</span>
+          </div>
+        </div>
+        <div class="confirm-action-container" {{action "onEnterMaxTimespent"}}>
+          {{t 'common.confirm'}}
+        </div>
+      </div>
+    {{else}}
+    <div class="question-score header"><span>{{t 'teacher-landing.class.class-activities-tab.question-score'}}</span></div>
     <div class="active-question">
-      <div class="question-seq">Question {{activeQuestionSeq}}</div>
-      <div class="question-max-score"> Max Score: {{activeQuestion.maxScore}}</div>
+      <div class="question-seq">{{t 'common.question'}} {{activeQuestionSeq}}</div>
+      <div class="question-max-score"> {{t 'teacher-landing.class.class-activities-tab.max-score'}}: {{activeQuestion.maxScore}}</div>
     </div>
     <div class="active-student">
       <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})"></div>
@@ -29,14 +49,15 @@
       {{/each}}
     </div>
     <div class="action-container">
-      <div class="prev action {{if isDisablePrev 'disabled'}}" {{action "onMoveStudent" 'prev'}}><div class="student-thumbnail"></div>Prev</div>
-      <div class="next action" {{action "onMoveStudent" 'next'}}>
+      <div class="prev action {{if isDisablePrev 'disabled'}}" {{action "onMoveStudent" 'prev'}}><div class="student-thumbnail"></div>{{t 'common.prev'}}</div>
         {{#if isDisableNext}}
-          <div>Submit</div>
+          <div {{action "onSubmitPerformance"}}>{{t 'common.submit'}}</div>
         {{else}}
-          Next
-          <div class="student-thumbnail"></div>
+          <div class="next action" {{action "onMoveStudent" 'next'}}>
+            {{t 'common.next'}}
+            <div class="student-thumbnail"></div>
+          </div>
         {{/if}}
-      </div>
     </div>
+  {{/if}}
 </div>
