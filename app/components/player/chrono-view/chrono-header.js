@@ -366,24 +366,22 @@ export default Ember.Component.extend({
     component.clearChart();
     let activeResource = component.get('activeResource');
     let activeIndex = component.get('activeIndex');
-    const width = component.$('#student-actvities').width();
-    const svg = d3
-      .select('#student-actvities')
-      .append('svg')
-      .attr('class', 'activities');
+    // const width = component.$('.student-activities').width();
+    const svg = d3.select('#active-resource').append('svg');
     component.set('timeLineContainer', svg);
     let activeResourceGroup = svg.append('g');
-    let centerX = width / 2;
-    component.set('centerXPosition', centerX);
+    // let centerX = width / 2;
+    component.set('centerXPosition', 50);
     activeResourceGroup
       .append('circle')
-      .attr('cx', centerX)
-      .attr('cy', '35')
+      // .attr('cx', centerX)
+      // .attr('cy', '35')
       .attr('class', `active node-${activeIndex}`);
     activeResourceGroup
       .append('foreignObject')
-      .attr('x', centerX - 19)
-      .attr('y', '21')
+      // .append('class','active-object')
+      // .attr('x', centerX - 19)
+      // .attr('y', '21')
       .append('xhtml:div')
       .attr('class', () => {
         return activeResource.collectionType === 'collection'
@@ -393,8 +391,8 @@ export default Ember.Component.extend({
 
     component.calculateLeftNodes();
     component.calculateRightNodes();
-    component.drawPath();
-    component.handleView();
+    //component.drawPath();
+    //component.handleView();
   },
 
   calculateLeftNodes() {
@@ -402,7 +400,8 @@ export default Ember.Component.extend({
     let resources = this.get('timeData');
     let activeIndex = this.get('activeIndex');
     let leftTimeLine = resources.slice(0, activeIndex);
-    component.drawNodes(leftTimeLine.reverse(), false);
+    component.drawNodes(leftTimeLine, true);
+    component.handleView(true);
   },
 
   calculateRightNodes() {
@@ -410,7 +409,8 @@ export default Ember.Component.extend({
     let resources = this.get('timeData');
     let activeIndex = this.get('activeIndex');
     let rightTimeLine = resources.slice(activeIndex + 1, resources.length);
-    component.drawNodes(rightTimeLine, true);
+    component.drawNodes(rightTimeLine, false);
+    component.handleView(false);
   },
 
   drawPath() {
@@ -502,11 +502,19 @@ export default Ember.Component.extend({
       );
   },
 
-  drawNodes(timeLine, isRight) {
+  drawNodes(timeLine, isLeft) {
     let component = this;
     let resources = this.get('timeData');
-    const svg = component.get('timeLineContainer');
-    const centerX = component.get('centerXPosition');
+    let domElementId;
+    if (isLeft) {
+      domElementId = 'left-activities';
+    } else {
+      domElementId = 'right-activities';
+    }
+    const svg = d3
+      .select(`#${domElementId}`)
+      .append('svg')
+      .attr('class', `${domElementId}`);
     let node = svg
       .selectAll('.student-node')
       .data(timeLine)
@@ -520,8 +528,8 @@ export default Ember.Component.extend({
         return `${className} node-${index}`;
       })
       .attr('cx', (d, i) => {
-        let xAxis = 50 + i * 30;
-        return isRight ? centerX + xAxis : centerX - xAxis;
+        let xAxis = 10 + i * 30;
+        return isLeft ? xAxis + 70 : xAxis;
       })
       .attr('cy', d => {
         let position;
@@ -538,7 +546,7 @@ export default Ember.Component.extend({
       .attr('height', 22)
       .attr('x', (d, i) => {
         let xAxis = i * 30;
-        return isRight ? centerX + (39.5 + xAxis) : centerX - (60.5 + xAxis);
+        return xAxis - 1;
       })
       .attr('y', d => {
         let position;
@@ -562,14 +570,21 @@ export default Ember.Component.extend({
     });
   },
 
-  handleView() {
+  handleView(isLeft) {
     let component = this;
-    const svg = component.$('.activities')[0];
+    let domElementId;
+    if (isLeft) {
+      domElementId = 'left-activities';
+    } else {
+      domElementId = 'right-activities';
+    }
+    const svg = component.$(`.${domElementId}`)[0];
+    // console.log(svg);
     const bbox = svg.getBBox();
-    let width = bbox.width + 20;
-    let height = bbox.height + 20;
-    let xPosition = bbox.x - 10;
-    let yPosition = bbox.y - 10;
+    let width = bbox.width;
+    let height = bbox.height;
+    let xPosition = bbox.x;
+    let yPosition = bbox.y;
     svg.setAttribute('viewBox', `${xPosition} ${yPosition} ${width} ${height}`);
     svg.setAttribute('width', `${width}px`);
     svg.setAttribute('height', `${height}px`);

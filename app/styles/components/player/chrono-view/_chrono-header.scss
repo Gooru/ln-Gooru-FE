@@ -18,18 +18,111 @@
       color: #211238;
     }
 
+    .student-activities {
+      display: grid;
+      grid-template-columns: 1fr max-content 1fr;
+    }
+
+    .left-timeline-activities {
+      svg {
+        float: right;
+      }
+    }
+
+    .left-timeline-activities,
+    .right-timeline-activities {
+      height: 70px;
+
+      svg {
+        height: 70px;
+      }
+
+      %bg-container {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: 12px 12px;
+        background-position: center;
+        cursor: pointer;
+      }
+
+      .suggestion-activity {
+        r: 10;
+        fill: #f9944b;
+      }
+
+      .activity {
+        r: 10;
+        fill: #0094dc;
+      }
+
+      .assessment-img {
+        background-image: url("gooru/images/assessment-white.svg");
+        @extend %bg-container;
+      }
+
+      .collection-img {
+        background-image: url("gooru/images/navigation_collection_selected.svg");
+        @extend %bg-container;
+      }
+    }
+
+    .active-timeline-resource {
+      width: 100px;
+      height: 70px;
+
+      svg {
+        width: 100px;
+        height: 100%;
+      }
+
+      .active {
+        stroke: #359649;
+        fill: #fff;
+        r: 30;
+        cy: 35;
+        cx: 50;
+      }
+
+      foreignObject {
+        x: 32;
+        y: 21;
+      }
+
+      .active-assessment {
+        background-image: url("gooru/images/assessment-white.svg");
+        display: block;
+        width: 36.7px;
+        background-color: green;
+        height: 27.5px;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+      }
+
+      .active-collection {
+        background-image: url("gooru/images/navigation_collection_selected.svg");
+        display: block;
+        width: 36.7px;
+        background-color: green;
+        height: 27.5px;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+      }
+    }
+
     .timeline-actvities {
       height: 70px;
       width: 100%;
       display: grid;
       align-items: center;
       overflow-x: auto;
-
-      .activities {
-        height: 100%;
-        width: auto;
-      }
-
+      // .activities {
+      //   height: 100%;
+      //   width: 100%;
+      // }
       .active {
         stroke: #359649;
         fill: #fff;
