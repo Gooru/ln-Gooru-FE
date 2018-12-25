@@ -98,14 +98,17 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isShowAddData
    */
-  isShowAddData: Ember.computed('isOfflineClass', 'classActivity', 'item', function() {
-    let component = this;
-    let isOfflineClass = component.get('isOfflineClass');
-    let itemType = component.get('item.collectionType');
-    let isAssessment = itemType === 'assessment' || itemType === 'assessment-external';
-    let activationData = !!component.get('classActivity.activation_date');
-    return isOfflineClass && isAssessment && activationData;
-  }),
+  isShowAddData: Ember.computed(
+    'isOfflineClass',
+    'classActivity',
+    'item',
+    function() {
+      let component = this;
+      let isOfflineClass = component.get('isOfflineClass');
+      let activationData = !!component.get('classActivity.activation_date');
+      return isOfflineClass && activationData;
+    }
+  ),
 
   /**
    * @property {Collection/Assessment} item

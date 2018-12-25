@@ -30,47 +30,75 @@
     align-items: center;
     padding: 0 16px;
     background-color: $white;
+
     .title {
       display: grid;
       grid-template-columns: auto auto;
       justify-content: left;
       align-items: center;
-      .assessment, .assessment-external {
+
+      %image-container {
+        width: 16px;
+        height: 12px;
+        display: block;
+        background-size: cover;
+      }
+
+      .assessment,
+      .assessment-external {
         margin-right: 8px;
+
         .icon {
-          width: 16px;
-          height: 12px;
-          display: block;
-          background-size: cover;
-          background-image: url("../assets/gooru/images/add_assessment.svg")
+          @extend %image-container;
+          background-image: url("../assets/gooru/images/add_assessment.svg");
+        }
+      }
+
+      .collection {
+        margin-right: 8px;
+
+        .icon {
+          @extend %image-container;
+          background-image: url("../assets/gooru/images/add_collection.svg");
         }
       }
     }
+
     .close-pullup {
       opacity: 0.3;
       font-size: 24px;
       color: #37424b;
+
       i {
         cursor: pointer;
       }
-
     }
   }
-
   @media screen and (max-width: 360px) {
     width: 100vw;
+
     .body-container {
       width: 100vw;
     }
   }
-
   @media screen and (orientation: landscape) and (max-height: 481px) {
     .body-container {
-      .assessment-performance-container, .external-assessment-performance-container {
-        .assessment-thumbnail {
+      .assessment-performance-container,
+      .collection-performance-container,
+      .external-assessment-performance-container {
+        .assessment-thumbnail,
+        .collection-thumbnail {
           display: none;
         }
-        .questions-container, .students-container {
+
+        .collection-resource-container {
+          .resources-container {
+            max-height: calc(100vh - 220px);
+          }
+        }
+
+        .questions-container,
+        .students-container {
           max-height: calc(100vh - 220px);
         }
       }

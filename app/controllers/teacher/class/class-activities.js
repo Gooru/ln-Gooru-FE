@@ -375,11 +375,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     onOpenPerformanceEntry(item, activity) {
       let component = this;
       if (item.format === 'assessment') {
-        component.set('isShowAssessmentPerformanceEntryPullUp', true);
         component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-      } else {
-        component.set('isShowExternalAssessmentPeformanceEntryPullUp', true);
+        component.set('isShowCollectionPerformanceEntryPullUp', false);
+        component.set('isShowAssessmentPerformanceEntryPullUp', true);
+      } else if (item.format === 'assessment-external') {
         component.set('isShowAssessmentPerformanceEntryPullUp', false);
+        component.set('isShowCollectionPerformanceEntryPullUp', false);
+        component.set('isShowExternalAssessmentPeformanceEntryPullUp', true);
+      } else if (item.format === 'collection') {
+        component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
+        component.set('isShowAssessmentPerformanceEntryPullUp', false);
+        component.set('isShowCollectionPerformanceEntryPullUp', true);
       }
       component.set('selectedItem', item);
       component.set('selectedActivity', activity);
@@ -389,6 +395,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let controller = this;
       controller.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
       controller.set('isShowAssessmentPerformanceEntryPullUp', false);
+      controller.set('isShowCollectionPerformanceEntryPullUp', false);
       controller.loadData();
     }
   },
