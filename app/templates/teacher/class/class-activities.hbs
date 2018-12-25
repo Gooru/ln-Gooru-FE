@@ -140,13 +140,19 @@
 
 
 {{#if isShowAssessmentPerformanceEntryPullUp}}
-  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowAssessmentPerformanceEntryPullUp title=selectedItem.title type='assessment'}}
+  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowAssessmentPerformanceEntryPullUp title=selectedItem.title type='assessment' }}
     {{reports.pull-up.assessment-performance-entry assessment=selectedItem students=members activityData=selectedActivity classId=classId onClosePerformanceEntry="onClosePerformanceEntry"}}
   {{/reports.pull-up.performance-manual-entry}}
 {{/if}}
 
+{{#if isShowCollectionPerformanceEntryPullUp}}
+  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowCollectionPerformanceEntryPullUp title=selectedItem.title type='collection' }}
+    {{reports.pull-up.collection-performance-entry collection=selectedItem students=members activityData=selectedActivity classId=classId onClosePerformanceEntry="onClosePerformanceEntry"}}
+  {{/reports.pull-up.performance-manual-entry}}
+{{/if}}
+
 {{#if isShowExternalAssessmentPeformanceEntryPullUp}}
-  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowExternalAssessmentPeformanceEntryPullUp title=selectedItem.title type="assessment-external"}}
+  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowExternalAssessmentPeformanceEntryPullUp title=selectedItem.title type="assessment-external" }}
     {{reports.pull-up.external-assessment-performance-entry assessment=selectedItem students=members activityData=selectedActivity classId=classId}}
   {{/reports.pull-up.performance-manual-entry}}
 {{/if}}
