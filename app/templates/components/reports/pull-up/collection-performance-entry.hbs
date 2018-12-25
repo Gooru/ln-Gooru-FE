@@ -1,0 +1,42 @@
+<div class="collection-performance-container">
+  <div class="collection-thumbnail" style="background-image: url({{collection.thumbnailUrl}})"></div>
+  <div class="collection-resource-container">
+    <div class="header">
+      <span class="title">Resource</span>
+      <span class="timespent">Time Spent</span>
+    </div>
+    <div class="resources-container">
+      {{#if isLoading}}
+        {{three-bounce-spinner}}
+      {{else}}
+        {{#each resources as |resource resourceSeq|}}
+          <div class="resource">
+            <span class="resource-icon"></span>
+            <span class="resource-title ellipsis">{{resource.title}}</span>
+            <div class="timespent-entry">
+              <div class="timespent-hour">
+                <span>  {{input type="text" class=(concat 'resource-time-hour' ' r-' resourceSeq '-hour')
+                  pattern="[0-9]*"
+                  focus-out=(action "validateHour" resource.maxHour resourceSeq)
+                  inputmode="numeric"
+                  value=resource.maxHour
+                }}</span>
+                <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.hour'}}</span>
+              </div>
+              <div class="timespent-mins">
+                <span>{{input type="text" class=(concat 'resource-time-min' ' r-' resourceSeq '-minute')
+                pattern="[0-9]*"
+                inputmode="numeric"
+                focus-out=(action "validateMinute" resource.maxMins resourceSeq)
+                value=resource.maxMins
+              }}</span>
+                <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.min'}}</span>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      {{/if}}
+    </div>
+  </div>
+  <div class="submit {{if isValid 'disabled'}}" {{action "submit"}}>{{t 'common.submit'}}</div>
+</div>

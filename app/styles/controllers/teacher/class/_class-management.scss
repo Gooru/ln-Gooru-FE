@@ -914,6 +914,54 @@ $canvas-height: 1254px;
       opacity: 0.2;
     }
 
+    .gru-switch {
+      padding: 0;
+
+      &.assigned {
+        pointer-events: none;
+      }
+
+      .toggle.btn {
+        width: 40px !important;
+        height: 20px !important;
+        border-radius: 20px;
+
+        .toggle-group {
+          .toggle-handle,
+          .toggle-off,
+          .toggle-on {
+            border-radius: 20px;
+          }
+
+          .toggle-on {
+            left: -13px;
+            font-style: italic;
+            font-size: $font-size-xxsmall;
+            line-height: 4px !important;
+          }
+
+          .toggle-off {
+            left: 33px;
+            font-style: italic;
+            line-height: 4px !important;
+            font-size: $font-size-xxsmall;
+          }
+
+          .toggle-handle {
+            top: -5px;
+            left: -2px;
+          }
+        }
+
+        &.off {
+          .toggle-group {
+            .toggle-handle {
+              left: 2px;
+            }
+          }
+        }
+      }
+    }
     //dde
 
     /* // Defines the layout of the page, css grid can be used here  */
@@ -1162,7 +1210,6 @@ $canvas-height: 1254px;
               }
 
               .row-offline-class {
-                display: none;
                 margin-top: 10px;
                 padding-top: 10px;
                 padding-bottom: 20px;
@@ -1191,8 +1238,8 @@ $canvas-height: 1254px;
 
                   /*  width: 40px; */
                   /*  height: 24px; */
-                  object-fit: contain;
-                  align-self: flex-end; //align to the line base
+                  // object-fit: contain;
+                  // align-self: flex-end; //align to the line base
                 }
               }
 
@@ -1620,7 +1667,7 @@ $canvas-height: 1254px;
             padding-top: 20px;
             display: grid;
 
-            grid-template-columns: 40px minmax(200px, auto) 150px 150px auto auto;
+            grid-template-columns: 40px minmax(190px, auto) 140px 140px auto auto auto;
 
             margin-left: 13px;
             grid-column-gap: 0px;
@@ -1691,6 +1738,9 @@ $canvas-height: 1254px;
             justify-content: center;
           }
 
+          .student-adj-lp {
+            margin-top: 4px;
+          }
           .student-delete {
             background-size: contain;
             height: 30px;
@@ -1700,7 +1750,7 @@ $canvas-height: 1254px;
           .student-delete :parent {
           }
           .student-act-de {
-            display: none;
+            // display: none;
           }
           .sub-sec-row {
             width: 422.9px;

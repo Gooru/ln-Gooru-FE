@@ -362,6 +362,32 @@ export default Ember.Object.extend({
   },
 
   /**
+   * Changes the user password
+   * @param {string} oldPassword
+   * @param {string} newPassword
+   * @returns {Ember.RSVP.Promise}
+   */
+  changePassword: function(oldPassword, newPassword) {
+    const adapter = this;
+    const endpointUrl = EndPointsConfig.getEndpointSecureUrl();
+    const namespace = adapter.get('authNamespace');
+    const url = `${endpointUrl}${namespace}/users/change-password`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({
+        old_password: oldPassword,
+        new_password: newPassword
+      })
+    };
+
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
    * Gets network by user id
    *
    * @param {string} userId

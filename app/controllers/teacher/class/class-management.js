@@ -60,22 +60,20 @@ export default Ember.Controller.extend(ModalMixin, {
         ☐  Student grade setting Button present before delete to apply the grade setting
     */
   classDisplayRules: function() {
-    let course = this.get('course.id'),
-      subject = this.get('subject'),
-      premium = this.get('isPremiumClass');
-
-    Ember.Logger.log(
-      `course: ${course}, subject : ${subject} , premium : ${premium}`
-    );
+    /* Set class display rules here */
   },
 
   isClassBaselined: Ember.computed('class.members', function() {
     let controller = this;
     const classMembers = controller.get('class.members');
-    let baselineMembers = classMembers.filter(
-      mem => mem.profileBaselineDone === true
-    );
-    let isBaselined = baselineMembers && baselineMembers.length > 0;
+    let isBaselined = true;
+    if (classMembers && classMembers.length > 0) {
+      let baselineMembers = classMembers.filter(
+        mem => mem.profileBaselineDone === true
+      );
+      isBaselined = baselineMembers && baselineMembers.length > 0;
+    }
+
     return isBaselined;
   }),
 
@@ -441,20 +439,20 @@ export default Ember.Controller.extend(ModalMixin, {
       controller.saveClass();
     },
 
-    classMembersToggle: function(student) {
+    classMembersToggle: function(targetStatusActive, student) {
       const controller = this;
       if (controller.get('course.id') && controller.get('sanitizedSubject')) {
         let settings = {
           users: [student.id]
         };
 
-        if (student.isActive) {
-          controller.classMembersDeactivate(settings);
-        } else {
+        if (targetStatusActive) {
           controller.classMembersActivate(settings);
+        } else {
+          controller.classMembersDeactivate(settings);
         }
 
-        student.set('isActive', !student.isActive); //Toggle Status
+        student.set('isActive', targetStatusActive); //Toggle Status
         controller.updateBondValueToSingleStudent(student);
       } else {
         Ember.Logger.log(

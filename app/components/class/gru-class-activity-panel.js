@@ -76,38 +76,39 @@ export default Ember.Component.extend({
     },
 
     /**
-     * Action get triggered when add content to DCA got clicked
+     * Action get triggered when schedule content to CA got clicked
      */
-    onAddContentToDCA(content) {
-      let component = this;
-      let classId = component.get('classId');
-      let contentType = content.get('collectionType');
-      let contentId = content.get('id');
-      component
-        .get('classActivityService')
-        .addActivityToClass(classId, contentId, contentType)
-        .then(newContentId => {
-          if (!component.isDestroyed) {
-            let date = moment().format('YYYY-MM-DD');
-            let data = Ember.Object.create({
-              id: newContentId,
-              added_date: date,
-              collection: content,
-              isActive: false,
-              isAddedFromPanel: true
-            });
-            component.sendAction('addedContentToDCA', data, date);
-          }
-        });
+    onScheduleContentToDCA(classActivity, event) {
+      this.sendAction('onScheduleContentToDCA', classActivity, event);
     },
 
     showStudentList() {
       this.set('showStudentListPullup', true);
+    },
+
+    onOpenPerformanceEntry(item, classActivity) {
+      let component = this;
+      component.sendAction('onOpenPerformanceEntry', item, classActivity);
     }
   },
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {Boolean} isShowAddData
+   */
+  isShowAddData: Ember.computed(
+    'isOfflineClass',
+    'classActivity',
+    'item',
+    function() {
+      let component = this;
+      let isOfflineClass = component.get('isOfflineClass');
+      let activationData = !!component.get('classActivity.activation_date');
+      return isOfflineClass && activationData;
+    }
+  ),
 
   /**
    * @property {Collection/Assessment} item
@@ -208,5 +209,17 @@ export default Ember.Component.extend({
     let activityDate = this.get('activityDate');
     let currentDate = moment().format('YYYY-MM-DD');
     return moment(activityDate).isAfter(currentDate);
-  })
+  }),
+
+  /**
+   * It maintains the state of cohort pull up need to show or not.
+   * @type {Boolean}
+   */
+  showCohort: false,
+
+  /**
+   * It's used identify CA is scheduled or unscheduled
+   * @type {Boolean}
+   */
+  isUnScheduled: false
 });

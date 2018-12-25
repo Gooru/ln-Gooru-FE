@@ -48,15 +48,13 @@ export default Ember.Object.extend(ConfigurationMixin, {
       date: data.activation_date
         ? parseDate(data.activation_date, 'YYYY-MM-DD')
         : null,
-      context: {
-        courseId: data.ctx_course_id,
-        unitId: data.ctx_unit_id,
-        lessonId: data.ctx_lesson_id,
-        collectionId: data.ctx_collection_id
-      },
-      added_date: data.dca_added_date,
+      added_date: data.dca_added_date
+        ? data.dca_added_date
+        : data.activation_date,
       activation_date: data.activation_date,
       collection: content,
+      forYear: data.for_year,
+      forMonth: data.for_month,
       usersCount: data.users_count
     });
   },
