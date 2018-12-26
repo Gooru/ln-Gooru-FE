@@ -242,11 +242,11 @@ export default Ember.Component.extend({
       let contentType =
         content.get('format') || component.get('activeContentType');
       let contentId = content.get('id');
+      let date = moment().format('YYYY-MM-DD');
       component
         .get('classActivityService')
-        .addActivityToClass(classId, contentId, contentType)
+        .addActivityToClass(classId, contentId, contentType, date)
         .then(newContentId => {
-          let date = moment().format('YYYY-MM-DD');
           let data = component.serializerSearchContent(
             content,
             newContentId,
