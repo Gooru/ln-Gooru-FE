@@ -11,7 +11,7 @@
 .gru-external-collection-page {
   background-image: url("gooru/assessment-start-page.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   width: 100%;
   height: 100vh;
   background-position: inherit;
@@ -73,11 +73,42 @@
       }
       span {
         margin-right: 5px;
+        font-weight: 600;
       }
       .body {
         padding-top: 15px;
         position: relative;
         min-height: 80px;
+        .time-spent {
+          font-size: 22px;
+          input {
+            width: 100px;
+            opacity: 0.9;
+            font-size: 35px;
+            font-weight: bold;
+            text-align: center;
+            color: $charcoal-grey-two;
+            &:focus {
+              outline: none;
+            }
+          }
+          .fraction-of {
+            height: 64px;
+            line-height: 100px;
+            font-size: 20px;
+            text-align: center;
+            color: $charcoal-grey-two;
+            border-bottom: 1px solid rgba(151,151,151, 0.3);
+          }
+        }
+        .time-label {
+          clear: both;
+          font-size: 12px;
+          font-weight: bold;
+          color: $charcoal-grey-two;
+          text-transform: uppercase;
+          margin-top: 4px;
+        }
         .description {
           $font-size: 12px;
           $line-height: 1.5;
@@ -96,11 +127,11 @@
             pointer-events: none;
           }
         }
-        .time-editor {
+        .time-spent {
           &.disabled {
             opacity: 0.3;
             pointer-events: none;
-            input {
+            .hours,.mins {
               pointer-events: none;
             }
           }
@@ -125,16 +156,19 @@
               color: $dark-400;
             }
           }
-
-          .fraction-editor {
+          %input-properties {
+            width: 80px;
+            opacity: 0.9;
+            font-size: 35px;
+            font-weight: bold;
+            text-align: center;
+            color: $charcoal-grey-two;
+          }
+          .time-spent {
             display: flex;
-            input {
-              width: 80px;
-              opacity: 0.4;
-              font-size: 35px;
-              font-weight: bold;
-              text-align: center;
-              color: $charcoal-grey-two;
+            font-size: 22px;
+            .hours,.mins {
+            @extend %input-properties;
               &:focus {
                 outline: none;
               }
@@ -148,6 +182,15 @@
               border-bottom: 1px solid rgba(151,151,151, 0.3);
             }
           }
+          .disabled-editor {
+            display: flex;
+            input {
+              @extend %input-properties;
+              &:focus {
+                outline: none;
+              }
+            }
+          }
           .time-label {
             font-size: 12px;
             font-weight: bold;
@@ -158,9 +201,11 @@
           .error {
             color: $red-400;
             font-size: 10px;
+            width: max-content;
+            margin-right: 22%;
           }
         }
-        .time-entered {
+        .entered-time {
           .time {
             font-size: 80px;
             font-weight: bold;
@@ -196,7 +241,7 @@
             margin-left: 130px;
             background-color: $light-200;
 
-            &.time-entered {
+            &.entered-time {
               margin-left: 180px;
             }
           }

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import {CONTENT_TYPES, PLAYER_EVENT_SOURCE} from 'gooru-web/config/config';
-import {validatePercentage, generateUUID} from 'gooru-web/utils/utils';
+import {generateUUID, validateTime} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
 
@@ -18,33 +18,32 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-  didRender() {
-    let component = this;
-    component.scoreValidator();
-  },
+
 
   /**
    * Observe the assessment change
    */
-  assessmentObserver: Ember.observer('assessment', function() {
+  collectionObserver: Ember.observer('assessment', function() {
     let component = this;
     console.log("observer call");
     component.resetProperties();
   }),
-
+  didRender() {
+    let component = this;
+    component.timeValidator();
+  },
   // -------------------------------------------------------------------------
   // Actions
   actions: {
     /**
      * Action triggered when click start
      */
-    onStart(type) {
+    onStart() {
       let component = this;
       component.set('startTime', new Date().getTime());
-      component.set('defaultScoreType', type);
+      component.set('isStarted', true);
       let externalUrl = component.get('assessment.url');
       component.set('isDisableScoreEditor', false);
-      component.$('#percentage-score').focus();
       if (externalUrl) {
         window.open(externalUrl, CONTENT_TYPES.EXTERNAL_ASSESSMENT);
       }
@@ -63,10 +62,7 @@ export default Ember.Component.extend({
     /**
      * Action triggered when change score type
      */
-    onChangeScoreType(type) {
-      let component = this;
-      component.set('defaultScoreType', type);
-    },
+
 
     /**
      * Action triggered when click cancel
@@ -75,6 +71,16 @@ export default Ember.Component.extend({
       let component = this;
       component.redirectTo();
     }
+  },
+
+  timeValidator() {
+    let component = this;
+    component.$('.time').keyup(function() {
+    let hours = component.get('hours');
+    let mins = component.get('mins');
+    component.set('isValidtime', validateTime(hours,mins));
+    component.set('isTyping', true);
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -95,26 +101,24 @@ export default Ember.Component.extend({
    */
   isValidScore: false,
 
-  isValidtime: false,
+  isValidtime: null,
 
-  isValidmins: false,
+  isValidmins: null,
 
   /**
-   * @property {String} defaultScoreType
+   * @property {String} isStarted
    */
-  defaultScoreType: 'percentage',
+  isStarted: 'null',
 
   /**
    * @property {String} timeZone
    */
-  timeZone: Ember.computed(function() {
-    return moment.tz.guess() || null;
-  }),
 
   /**
    * @property {Boolean} isTyping
    */
-  isTyping: false,
+  isHourTyping: false,
+  isMinTyping:false,
 
   /**
    * @property {Number} startTime
@@ -135,43 +139,15 @@ export default Ember.Component.extend({
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags
    */
-  tags: Ember.computed('assessment', function() {
-    let component = this;
-    let standards = component.get('assessment.standards');
-    if (standards) {
-      standards = standards.filter(function(standard) {
-        // Filter out learning targets (they're too long for the card)
-        return !TaxonomyTagData.isMicroStandardId(standard.get('id'));
-      });
-      return TaxonomyTag.getTaxonomyTags(standards);
-    }
-  }),
 
   // -------------------------------------------------------------------------
   // Methods
 
   /**
-   * @function scoreValidator
+   * @function timeValidator
    * Method to validate entered score
    */
-  scoreValidator() {
-    let component = this;
-    component.$('.time-value').keyup(function() {
-      let hours = component.$('#fraction-hours').val();
-      if (hours >= 0 && hours <= 12) {
-        component.set('isValidtime', true);
-      } else {
-        component.set('isValidtime', false);
-      }
-      let mins = component.$('#fraction-mins').val();
-      if (mins >= 0 && mins <= 60) {
-        component.set('isValidmins', true);
-      } else {
-        component.set('isValidmins', false);
-      }
-      component.set('isTyping', true);
-    });
-  },
+
 
   /**
    * @function getDataParams
@@ -180,13 +156,11 @@ export default Ember.Component.extend({
   getDataParams() {
     let component = this;
     let mapLocation = component.get('mapLocation');
-    let percent_score = component.$('#percentage-score').val() || null;
-    let score = component.$('#fraction-hours').val() || null;
-    let max_score = component.$('#fraction-mins').val() || null;
+    let score = component.get('hours') || null;
+    let max_score = component.get('mins') || null;
     let context = mapLocation.get('context');
     let userId = component.get('session.userId');
     let dataParams = {
-      percent_score,
       score,
       max_score,
       user_id: userId,
@@ -232,27 +206,7 @@ export default Ember.Component.extend({
 
   },
 
-  /**
-   * @function validateFractionScore
-   * Method to validate fraction score
-   */
-  validateFractionScore(score, maxScore) {
-    let isValidFractionScore = false;
-    if (!(isNaN(score)) && !(isNaN(maxScore))) {
-      let isIntegerTypeScore = score.indexOf('.');
-      let isIntegerTypeMaxScore = maxScore.indexOf('.');
-      score = parseFloat(score);
-      maxScore = parseFloat(maxScore);
-      let isPositiveScore = score >= 0;
-      let isNotExceedsLimit = maxScore >= 1 && maxScore <= 100;
-      let isValidScore = score <= maxScore;
-      let isIntegerNumber = isIntegerTypeScore === -1 && isIntegerTypeMaxScore === -1;
-      if (isValidScore && isNotExceedsLimit && isPositiveScore && isIntegerNumber) {
-        isValidFractionScore = true;
-      }
-    }
-    return isValidFractionScore;
-  },
+
 
   /**
    * @function roundMilliseconds
@@ -268,12 +222,10 @@ export default Ember.Component.extend({
    */
   getEnteredScore(dataParams) {
     let component = this;
-    let defaultScoreType = component.get('defaultScoreType');
+    let isStarted = component.get('isStarted');
     let score = null;
-    if (defaultScoreType === 'percentage') {
-      score = `${dataParams.percent_score}%`;
-    } else {
-      score =  `${dataParams.score} of ${dataParams.max_score}`;
+    if (isStarted) {
+      score =  `${dataParams.score} h ${dataParams.max_score} m`;
     }
     return score;
   },
@@ -287,14 +239,15 @@ export default Ember.Component.extend({
     this._super(...arguments);
     component.set('score', '');
     component.set('isTimeEntered', false);
-    component.set('defaultScoreType', 'percentage');
+    component.set('isStarted', 'null');
     component.set('isDisableScoreEditor',true);
     component.set('isValidScore', false);
     component.set('isValidtime', false);
     component.set('isValidmins', false);
     component.set('startTime', 0);
     component.set('stopTime', 0);
-    component.set('isTyping', false);
+    component.set('isHourTyping', false);
+    component.set('isMinTyping', false);
   },
 
   /**

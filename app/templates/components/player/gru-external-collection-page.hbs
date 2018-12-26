@@ -20,39 +20,27 @@
       </div>
       {{#if isTimeEntered}}
         {{#if score}}
-          <div class="time-entered">
+          <div class="entered-time">
             <div class="time">
               {{score}}
             </div>
             <div class="time-label">
-                ENTER YOUR TIME SPENT HERE
+               TIME SPENT
             </div>
           </div>
         {{else}}
           {{three-bounce-spinner}}
-          <div class="not-updated">{{t 'self-report.update-error'}}</div>
         {{/if}}
       {{else}}
-        <div class="time-editor {{if isDisableScoreEditor 'disabled'}}">
-          {{#if (eq defaultScoreType 'fraction')}}
-            <div class="fraction-editor">
-              <span>
-                <input class="time-value" type="text" id="fraction-hours" value=""/>h
-              </span>
-              <span>
-                <input class="time-value" type="text" id="fraction-mins" value=""/>m
-              </span>
-            </div>
-            {{/if}}
-            {{#if (and isTyping (not isValidtime))}}
-              <div class="error">Enter the correct Hours</div>
-            {{/if}}
-            {{#if (and isTyping (not isValidmins))}}
-              <div class="error">Enter the correct Minutes</div>
-            {{/if}}
-          <div class="time-label">
-            ENTER YOUR TIME SPENT HERE
-          </div>
+        <div class="time-spent {{if isDisableScoreEditor 'disabled'}}">
+            {{input type="text" class="time" id="hours" value=hours}}<span>h</span>
+            {{input type="text" class="time" id="mins" value=mins}}<span>m</span>
+           {{#if (and isTyping  (not isValidtime))}}
+            <div class="error">Enter the valid Time</div>
+          {{/if}}
+        </div>
+        <div class="time-label">
+          ENTER YOUR TIME SPENT HERE
         </div>
       {{/if}}
     </div>
@@ -63,14 +51,13 @@
             {{t 'common.cancel'}}
           </div>
           {{#if isDisableScoreEditor}}
-            <div class="btn start" {{action "onStart" 'fraction'}}>
-              <!-- {{t 'gru-assessment-confirmation.start'}} -->
+            <div class="btn start" {{action "onStart"}}>
               {{t 'gru-assessment-confirmation.start'}}
             </div>
           {{else}}
-          <div class="btn submit {{unless isValidtime 'disabled'}}" {{action "onSubmit"}}>
-            {{t 'gru-assessment-confirmation.submit'}}
-          </div>
+            <div class="btn submit {{unless isValidtime 'disabled'}}" {{action "onSubmit"}}>
+              {{t 'gru-assessment-confirmation.submit'}}
+            </div>
           {{/if}}
         {{/if}}
       </div>
