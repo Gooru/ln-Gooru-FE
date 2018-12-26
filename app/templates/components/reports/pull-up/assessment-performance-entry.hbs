@@ -7,20 +7,26 @@
         </div>
         <div class="timespent-container">
           <div class="timespent-hour">
-            <span>{{input type="text" value=maxTimeHour}}</span>
+            <span>{{input type="text" class="time" value=maxTimeHour}}</span>
             <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.hour'}}</span>
           </div>
           <div class="timespent-mins">
-            <span>{{input type="text" value=maxTimeMins}}</span>
+            <span>{{input type="text" class="mins" value=maxTimeMins}}</span>
             <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.min'}}</span>
           </div>
+          {{#if (and isHourTyping (not isValidtime))}}
+           <div class="error">Enter the correct hours</div>
+         {{/if}}
+         {{#if (and isMinTyping (not isValidmins))}}
+           <div class="error">Enter the correct minutes</div>
+         {{/if}}
         </div>
-        <div class="confirm-action-container" {{action "onEnterMaxTimespent"}}>
+        <div class="confirm-action-container {{unless isValidtime 'disabled'}}" {{action "onEnterMaxTimespent"}}>
           {{t 'common.confirm'}}
         </div>
       </div>
     {{else}}
-    <div class="question-score header"><span>{{t 'teacher-landing.class.class-activities-tab.question-score'}}</span></div>
+    <div class="question-score header"><span>{{t 'teacher-landing.class.class-activities-tab.assessment-score'}}</span></div>
     <div class="active-question">
       <div class="question-seq">{{t 'common.question'}} {{activeQuestionSeq}}</div>
       <div class="question-max-score"> {{t 'teacher-landing.class.class-activities-tab.max-score'}}: {{activeQuestion.maxScore}}</div>

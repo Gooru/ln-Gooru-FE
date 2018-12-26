@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { generateUUID } from 'gooru-web/utils/utils';
+import { generateUUID, validateHour, validateMin } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -18,6 +18,11 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
+  didRender() {
+    let component = this;
+    component.timeValidator();
+  },
+
   didInsertElement() {
     let component = this;
     component.loadAssessmentData();
@@ -99,6 +104,7 @@ export default Ember.Component.extend({
         maxTimeInMilliSec / component.get('questions.length');
       component.set('questionTimespent', questionTimespent);
       component.set('isCaptureTimespent', false);
+      component.set('isShowTimespent', true);
     }
   },
 
@@ -114,6 +120,20 @@ export default Ember.Component.extend({
    * @property {Boolean} isCaptureTimespent
    */
   isCaptureTimespent: true,
+
+  isValidtime: false,
+
+  isValidmins: false,
+
+  isTyping: false,
+
+  isHourTyping: false,
+
+  isMinTyping: false,
+
+  isShowTimespent: false,
+
+  isValidTimeSpent: null,
 
   /**
    * @property {Array} students
@@ -230,6 +250,20 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Methods
 
+  timeValidator() {
+    let component = this;
+    component.$('.time').keyup(function() {
+      let maxHour = component.get('maxTimeHour');
+      component.set('isValidtime', validateHour(maxHour));
+      component.set('isHourTyping', true);
+    });
+    component.$('.mins').keyup(function() {
+      let maxMins = component.get('maxTimeMins');
+      component.set('isValidmins', validateMin(maxMins));
+      component.set('isMinTyping', true);
+    });
+  },
+
   /**
    * @function loadStudentPerformanceData
    * Method to load student performance data
@@ -344,11 +378,8 @@ export default Ember.Component.extend({
     let activeStudent = component.get('activeStudent');
     let activityData = component.get('activityData');
     let conductedOn =
-      new Date(component.get('activityData.activation_date')) || new Date();
+      activityData.get(new Date('activityData.activation_date')) || new Date();
     let classId = component.get('classId');
-    let courseId = activityData.get('context.courseId') || null;
-    let unitId = activityData.get('context.unitId') || null;
-    let lessonId = activityData.get('context.lessonId') || null;
     let assessment = component.get('assessment');
     inputElements.each(function(index, scoreElement) {
       let questionData = questions.objectAt(index);
@@ -368,9 +399,6 @@ export default Ember.Component.extend({
       student_id: activeStudent.get('id'),
       session_id: generateUUID(),
       class_id: classId,
-      course_id: courseId,
-      unit_id: unitId,
-      lesson_id: lessonId,
       collection_id: assessment.id,
       collection_type: 'assessment',
       content_source: component.get('contentSource'),
