@@ -173,6 +173,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           if (!controller.isDestroyed) {
             classActivity.set('date', date);
             classActivity.set('added_date', date);
+            classActivity.set('activation_date', date);
             classActivity.set('isActive', true);
             if (scheduleDate) {
               let id = classActivity.get('id');
@@ -267,7 +268,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let scheduleYear = parseInt(moment(scheduleDate).format('YYYY'));
       let forMonth = classActivity.get('forMonth');
       let forYear = classActivity.get('forYear');
-      if (forMonth === scheduleMonth && forYear === scheduleYear) {
+      let activationDate = classActivity.get('activation_date');
+      if (
+        forMonth === scheduleMonth &&
+        forYear === scheduleYear &&
+        !activationDate
+      ) {
         this.send('changeVisibility', classActivity, scheduleDate);
       } else {
         controller
