@@ -770,14 +770,23 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   },
 
   serializerSearchContent(content, contentId, date, forMonth, forYear) {
+    let collection = Ember.Object.create({
+      id: content.get('id'),
+      title: content.get('title'),
+      format: content.get('format'),
+      collectionType: content.get('format'),
+      resourceCount: content.get('resourceCount'),
+      questionCount: content.get('questionCount'),
+      oeQuestionCount: content.get('oeQuestionCount')
+    });
     return Ember.Object.create({
       id: contentId,
       added_date: date,
       activityDate: date,
-      collection: content,
       forMonth,
       forYear,
       usersCount: -1,
+      collection,
       isActive: false
     });
   },
