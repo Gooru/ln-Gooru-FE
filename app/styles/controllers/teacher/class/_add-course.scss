@@ -1,0 +1,40 @@
+.add-course-ctrl {
+  background-color: #37424b;
+  min-height: 100vh;
+  .featured-courses-container {
+    display: flex;
+    overflow-x: auto;
+    .featured-course {
+      margin: 10px 15px;
+    }
+    &::-webkit-scrollbar {
+      height: 6px;
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $gray-light;
+      border: 1px solid $gray-light;
+      border-radius: 5px;
+    }
+  }
+
+  .content-catalogs-container {
+    display: flex;
+    overflow-x: auto;
+    .catalog-card {
+      min-width: 202px;
+      min-height: 192px;
+      border-radius: 4px;
+      background-color: $white;
+      margin: 0 5px;
+      display: block;
+      .catalog-image {
+        width: 93px;
+        height: 93px;
+        background-size: 93px 93px;
+        display: block;
+      }
+    }
+  }
+}

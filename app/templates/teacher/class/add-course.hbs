@@ -1,0 +1,33 @@
+<div class="add-course-ctrl">
+  <div class="featured-courses-container">
+    {{#each featuredCourses as |course|}}
+      <div class="featured-course">
+        {{cards.gru-add-course-card course=course onAddCourse="onAddCourse" onRemixCourse="onRemixCourse"}}
+      </div>
+    {{/each}}
+  </div>
+
+  <div class="content-catalogs-container">
+    {{#each contentCatalogs as |catalog|}}
+      <div class="catalog-card" {{action "onSelectCatalog" catalog}}>
+        <div class="catalog-name">{{catalog.name}}</div>
+        <div class="catalog-image" style="background-image: url({{catalog.image}})"></div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+
+
+{{#if isShowSearchCoursePullUp}}
+  {{teacher.class.course-search-pull-up
+    showPullUp=isShowSearchCoursePullUp
+    courses=libraryCourses
+    contentCatalogs=contentCatalogs
+    activeCatalog=selectedCatalog
+    onAddCourse="onAddCourse"
+    onRemixCourse="onRemixCourse"
+    onSelectCatalog="onSelectCatalog"
+    onSearchCourse="onSearchCourse"
+  }}
+{{/if}}
