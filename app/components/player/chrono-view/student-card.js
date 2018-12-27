@@ -7,9 +7,19 @@ export default Ember.Component.extend({
 
   classNameBindings: ['cardPos'],
 
-  cardPos: Ember.computed(function() {
-    return `card-${this.get('cardIndex') + 1}`;
-  }),
+  cardPos: Ember.computed(
+    'activitiy.selected',
+    'activitiy.position',
+    'activitiy.positionSeq',
+    function() {
+      let activitiy = this.get('activitiy');
+      if (activitiy.get('selected')) {
+        return 'selected';
+      } else {
+        return `${activitiy.get('position')}-${activitiy.get('positionSeq')}`;
+      }
+    }
+  ),
 
   /**
    * @requires {AssessmentService} Service to retrieve an assessment
@@ -28,18 +38,13 @@ export default Ember.Component.extend({
 
   collection: null,
 
-  type: Ember.computed('context', function() {
-    return this.get('context').collectionType;
+  type: Ember.computed('activitiy', function() {
+    return this.get('activitiy.collectionType');
   }),
 
-  context: null,
+  activitiy: null,
 
-  index: null,
-
-  didInsertElement() {
-    let component = this;
-    component.$().addClass(`student-card-${component.get('index')}`);
-  },
+  loading: true,
 
   init() {
     this._super(...arguments);
@@ -47,30 +52,33 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function  get collection summary report by student
+   * @function  getcollection summary report by student
    */
   getStundentCollectionReport() {
     let component = this;
-    let context = component.get('context');
-    // console.log(context);
-    const isCollection = context.collectionType === 'collection';
+    let activitiy = component.get('activitiy');
+    const isCollection = activitiy.get('collectionType') === 'collection';
     const collectionPromise = isCollection
-      ? component.get('collectionService').readCollection(context.collectionId)
-      : component.get('assessmentService').readAssessment(context.collectionId);
+      ? component
+        .get('collectionService')
+        .readCollection(activitiy.get('collectionId'))
+      : component
+        .get('assessmentService')
+        .readAssessment(activitiy.get('collectionId'));
     return Ember.RSVP.hashSettled({
       collection: collectionPromise
     }).then(hash => {
-      // console.log(hash);
       component.set(
         'collection',
         hash.collection.state === 'fulfilled' ? hash.collection.value : null
       );
+      component.set('loading', false);
     });
   },
 
   actions: {
-    onSelectCard() {
-      this.sendAction('onSelectCard', this.get('cardPos'));
+    onSelectCard(activitiy) {
+      this.sendAction('onSelectCard', activitiy);
     }
   }
 });

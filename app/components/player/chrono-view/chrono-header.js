@@ -11,21 +11,21 @@ export default Ember.Component.extend({
    */
   defaultBarColor: STUDY_PLAYER_BAR_COLOR,
 
-  timeData: null,
+  draw: Ember.observer(
+    'activities.[]',
+    'activities.@each.selected',
+    function() {
+      this.drawTimeLinePath();
+    }
+  ),
 
-  performanceSummary: null,
+  rightTimeLine: null,
 
-  activeResource: null,
+  leftTimeLine: null,
 
-  timeLineContainer: null,
+  activities: null,
 
-  centerXPosition: null,
-
-  observeActiveResource: Ember.observer('activeResource', function() {
-    this.drawTimeLinePath();
-  }),
-
-  activeIndex: null,
+  selectedIndex: null,
 
   endDate: function() {
     let todaysDate = new Date();
@@ -33,7 +33,7 @@ export default Ember.Component.extend({
   }.property(),
 
   startDate: function() {
-    return this.uiDateFormat(this.timeData.startDate);
+    return this.uiDateFormat(this.activities.startDate);
   }.property(),
 
   uiDateFormat: function(givenDate) {
@@ -60,67 +60,191 @@ export default Ember.Component.extend({
     component.drawTimeLinePath();
   },
 
+  didRender() {
+    this.scrollToCenter();
+  },
+
   drawTimeLinePath() {
     const component = this;
     component.clearChart();
-    let activeResource = component.get('activeResource');
-    const width = component.$('#student-timeline')[0].clientWidth;
-    const height = component.$('#student-timeline')[0].clientHeight;
-    const svg = d3
-      .select('#student-timeline')
-      .append('svg')
-      .attr('width', width)
-      .attr('height', height)
-      .attr('class', 'svg-path');
-    component.set('timeLineContainer', svg);
-    let activeResourceGroup = svg.append('g');
-    let centerX = width / 2;
-    component.set('centerXPosition', centerX);
-    activeResourceGroup
-      .append('circle')
-      .attr('cx', centerX)
-      .attr('cy', '35')
-      .attr('r', 30)
-      .style('fill', 'white')
-      .attr('stroke', 'green');
-    activeResourceGroup
-      .append('foreignObject')
-      .attr('x', centerX - 19)
-      .attr('y', '21')
-      .append('xhtml:div')
-      .attr('class', () => {
-        return activeResource.collectionType === 'collection'
-          ? 'active-collection'
-          : 'active-assessment';
-      });
-
     component.calculateLeftNodes();
     component.calculateRightNodes();
-    // component.drawPath();
-    component.handleViewBox();
+    component.drawActiveResource();
   },
 
+  /**
+   * Function to draw active resource
+   */
+  drawActiveResource() {
+    const component = this;
+    let selectedActivitiy = component
+      .get('activities')
+      .findBy('selected', true);
+    let selectedIndex = component.get('activities').indexOf(selectedActivitiy);
+    if (selectedIndex > -1) {
+      component.set('selectedIndex', selectedIndex);
+      const svg = d3
+        .select('#active-resource')
+        .append('svg')
+        .attr('class', 'center-activities');
+      let activeResourceGroup = svg.append('g');
+      activeResourceGroup
+        .append('circle')
+        .attr('class', `active node-${selectedIndex}`);
+      activeResourceGroup
+        .append('foreignObject')
+        .append('xhtml:div')
+        .attr('class', () => {
+          return selectedActivitiy.get('collectionType') === 'collection'
+            ? 'active-collection'
+            : 'active-assessment';
+        });
+    }
+  },
+
+  /**
+   * Function to calculate left timeline
+   */
   calculateLeftNodes() {
     let component = this;
-    let resources = this.get('timeData');
-    let activeIndex = this.get('activeIndex');
-    let leftTimeLine = resources.slice(0, activeIndex);
-    component.drawNodes(leftTimeLine.reverse(), false);
+    let resources = this.get('activities');
+    let selectedIndex = this.get('selectedIndex');
+    let leftTimeLine = resources.slice(0, selectedIndex);
+    component.set('leftTimeLine', leftTimeLine);
+    component.drawNodes(leftTimeLine, 'left');
+    component.drawPath('left');
+    component.handleView('left');
   },
 
+  /**
+   * Function to calculate right timeline
+   */
   calculateRightNodes() {
     let component = this;
-    let resources = this.get('timeData');
-    let activeIndex = this.get('activeIndex');
-    let rightTimeLine = resources.slice(activeIndex + 1, resources.length);
-    component.drawNodes(rightTimeLine, true);
+    let resources = this.get('activities');
+    let selectedIndex = this.get('selectedIndex');
+    let rightTimeLine = resources.slice(selectedIndex + 1, resources.length);
+    component.set('rightTimeLine', rightTimeLine);
+    component.drawNodes(rightTimeLine, 'right');
+    component.handleView('right');
+    component.drawPath('right');
   },
 
-  drawNodes(timeLine, isRight) {
+  /**
+   * Function to draw nodes
+   */
+  drawPath(position) {
+    let resources =
+      position === 'right'
+        ? this.get('rightTimeLine')
+        : this.get('leftTimeLine');
+    resources.forEach(resource => {
+      let index = this.get('activities')
+        .map(x => x)
+        .indexOf(resource);
+      let node = this.$(`.${position}-node-${index}`);
+      let nodeX = parseInt(node.attr('cx'));
+      let nodeY = parseInt(node.attr('cy'));
+      if (index < this.get('activities').length - 1) {
+        let nextIndex = index + 1;
+        let nextResource = this.get('activities').get(nextIndex);
+        let nextNode = this.$(`.${position}-node-${nextIndex}`);
+        let nextNodeY = parseInt(nextNode.attr('cy'));
+        if (nextResource && nextNode.length > 0) {
+          if (nextResource.pathId) {
+            if (nodeY === nextNodeY) {
+              this.drawHorizontalLine(
+                {
+                  x: nodeX,
+                  y: nodeY
+                },
+                nextResource.pathId,
+                position
+              );
+            } else {
+              this.drawCurve(
+                {
+                  x: nodeX,
+                  y: nodeY
+                },
+                {
+                  x: nextNodeY - nodeY,
+                  y: nodeY,
+                  curve: 0
+                },
+                nextResource.pathId,
+                position
+              );
+            }
+          } else {
+            if (nodeY === nextNodeY) {
+              this.drawHorizontalLine(
+                {
+                  x: nodeX,
+                  y: nodeY
+                },
+                nextResource.pathId,
+                position
+              );
+            } else {
+              this.drawCurve(
+                {
+                  x: nodeX,
+                  y: nodeY
+                },
+                {
+                  x: nextNodeY - nodeY,
+                  y: nodeY,
+                  curve: 0
+                },
+                nextResource.pathId,
+                position
+              );
+            }
+          }
+        }
+      }
+    });
+  },
+
+  /**
+   * Function to draw horizontal line
+   */
+  drawHorizontalLine(startPoint, isSuggestion, position) {
+    d3.select(`.${position}-activities`)
+      .append('path')
+      .attr('class', () => {
+        return isSuggestion ? 'suggestion-line' : 'line';
+      })
+      .attr('d', `M ${startPoint.x + 8} ${startPoint.y} l 14 0`);
+  },
+
+  /**
+   * Function to draw curve line
+   */
+  drawCurve(startPoint, points, isSuggestion, position) {
+    d3.select(`.${position}-activities`)
+      .append('path')
+      .attr('class', () => {
+        return isSuggestion ? 'suggestion-curve' : 'curve';
+      })
+      .attr(
+        'd',
+        `M ${startPoint.x + 10} ${points.y} q 5 ${points.curve} 10 ${points.x}`
+      );
+  },
+
+  /**
+   * Function to draw nodes
+   */
+  drawNodes(timeLine, position) {
     let component = this;
-    let resources = this.get('timeData');
-    const svg = component.get('timeLineContainer');
-    const centerX = component.get('centerXPosition');
+    let resources = this.get('activities');
+    let isLeft = position === 'left';
+    const svg = d3
+      .select(`#${position}-activities`)
+      .append('svg')
+      .attr('class', `${position}-activities`);
     let node = svg
       .selectAll('.student-node')
       .data(timeLine)
@@ -128,29 +252,19 @@ export default Ember.Component.extend({
     let group = node.append('g');
     group
       .append('circle')
-      .style('fill', d => {
-        let color;
-        if (d.pathId) {
-          color = '#f29545';
-        } else {
-          color = '#0094de';
-        }
-        return color;
-      })
-      .attr('r', () => {
-        return 10;
-      })
       .attr('class', d => {
-        return d.pathId ? 'suggestion' : '';
+        let index = resources.map(x => x).indexOf(d);
+        let className = d.pathId ? 'suggestion-activity' : 'activity';
+        return `${className} ${position}-node-${index}`;
       })
       .attr('cx', (d, i) => {
-        let xAxis = 50 + i * 30;
-        return isRight ? centerX + xAxis : centerX - xAxis;
+        let xAxis = 10 + i * 30;
+        return isLeft ? xAxis + 70 : xAxis;
       })
       .attr('cy', d => {
         let position;
         if (d.pathId) {
-          position = d.pathType === 'system' ? 45 : 25;
+          position = d.pathType === 'teacher' ? 25 : 50;
         } else {
           position = 35;
         }
@@ -162,12 +276,12 @@ export default Ember.Component.extend({
       .attr('height', 22)
       .attr('x', (d, i) => {
         let xAxis = i * 30;
-        return isRight ? centerX + (39.5 + xAxis) : centerX - (60.5 + xAxis);
+        return isLeft ? xAxis + 70 : xAxis;
       })
       .attr('y', d => {
         let position;
         if (d.pathId) {
-          position = d.pathType === 'system' ? 34 : 14;
+          position = d.pathType === 'teacher' ? 14 : 39;
         } else {
           position = 24;
         }
@@ -180,21 +294,42 @@ export default Ember.Component.extend({
           : 'assessment-img';
       });
     group.on('click', d => {
-      let index = resources.map(x => x).indexOf(d);
-      component.set('activeIndex', index);
-      component.set('activeResource', d);
+      component.sendAction('onSelectCard', d);
     });
   },
 
-  handleViewBox() {
-    var svg = document.getElementsByClassName('svg-path')[0];
-    var bbox = svg.getBBox();
-    svg.setAttribute(
-      'viewBox',
-      `${bbox.x - 10} ${bbox.y - 10} ${bbox.width + 20} ${bbox.height + 20}`
+  /**
+   * Function to handle svg view
+   */
+  handleView(position) {
+    let component = this;
+    const svg = component.$(`.${position}-activities`)[0];
+    const bbox = svg.getBBox();
+    let width = bbox.width;
+    let height = 5;
+    let xPosition = bbox.x;
+    let yPosition = 37;
+    svg.setAttribute('viewBox', `${xPosition} ${yPosition} ${width} ${height}`);
+    svg.setAttribute('width', `${width}px`);
+    svg.setAttribute('height', `${yPosition}px`);
+  },
+
+  /**
+   * Function to set scroll position
+   */
+  scrollToCenter() {
+    let component = this;
+    let activeOffset = component.$('#active-resource').offset().left;
+    let activitiesOneHalfWidthContainer =
+      component.$('.student-activities').width() / 2;
+    let activeResourceWidth = component.$('#active-resource').width();
+    component.$('.student-activities').animate(
+      {
+        scrollLeft:
+          activeOffset - (activitiesOneHalfWidthContainer + activeResourceWidth)
+      },
+      'slow'
     );
-    svg.setAttribute('width', `${bbox.width + 20}px`);
-    svg.setAttribute('height', `${bbox.height + 20}px`);
   },
 
   willDestroyElement() {
@@ -202,6 +337,9 @@ export default Ember.Component.extend({
     component.clearChart();
   },
 
+  /**
+   * Function to clear svg
+   */
   clearChart() {
     let component = this;
     component.$('svg').remove();
