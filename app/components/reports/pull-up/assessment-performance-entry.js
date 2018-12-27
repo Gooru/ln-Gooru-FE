@@ -119,19 +119,44 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isCaptureTimespent
    */
+
   isCaptureTimespent: true,
+  /**
+   * @property {Number} isvalidtime
+   */
 
   isValidtime: false,
+  /**
+   * @property {Number} isvalidmins
+   */
 
   isValidmins: false,
 
+  /**
+   * @property {Boolean} isTyping
+   */
   isTyping: false,
 
+  /**
+   * @property {Boolean} isHourTyping
+   */
   isHourTyping: false,
+
+  /**
+   * @property {Boolean} isMinTyping
+   */
 
   isMinTyping: false,
 
+  /**
+   * @property {Number} isShowTimespent
+   */
+
   isShowTimespent: false,
+
+  /**
+   * @property {Boolean} isValidTimeSpent
+   */
 
   isValidTimeSpent: null,
 
@@ -378,7 +403,7 @@ export default Ember.Component.extend({
     let activeStudent = component.get('activeStudent');
     let activityData = component.get('activityData');
     let conductedOn =
-      activityData.get(new Date('activityData.activation_date')) || new Date();
+      activityData.get('activityData.activation_date') || new Date();
     let classId = component.get('classId');
     let assessment = component.get('assessment');
     inputElements.each(function(index, scoreElement) {
@@ -427,9 +452,14 @@ export default Ember.Component.extend({
         .addClass('wrong-score');
     }
     component.set('isValid', isValid);
+    component.validateScore();
     return isValid;
   },
-
+  validateScore() {
+    let component = this;
+    let isValid = component.$('.wrong-score').length > 0;
+    component.set('isValid', isValid);
+  },
   /**
    * @function fetchAssessmentData
    */

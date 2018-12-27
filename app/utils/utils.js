@@ -1027,23 +1027,11 @@ export function validateTime(hours, mins) {
   let isValidhours = false;
   let hour = Number(hours);
   let isHour = !isNaN(hour);
-  if (hour >= 0 && hour <= 12 && isHour) {
-    isValidhours = true;
-  } else {
-    isValidhours = false;
-  }
+  isValidhours = hour >= 0 && hour <= 12 && isHour;
   let isValidmins = false;
   let min = Number(mins);
   let isMin = !isNaN(mins);
-  if (min >= 0 && min <= 60 && isMin) {
-    isValidmins = true;
-  } else {
-    isValidmins = false;
-  }
-  if (isValidhours && isValidmins) {
-    isValidTimeSpent = true;
-  } else {
-    isValidTimeSpent = false;
-  }
+  isValidmins = min >= 0 && min <= 60 && isMin;
+  isValidTimeSpent = isValidhours && isValidmins;
   return isValidTimeSpent;
 }

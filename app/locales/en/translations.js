@@ -1300,6 +1300,7 @@ export default Object.assign(quizzesTranslations, {
         'welcome-dca':
           'Welcome to your  Class Activities where you can assign collections and assessments for students to complete today. Please note: any reports generated will only be available today for the most recent attempt.',
         'enter-max-timespent': 'Enter the Maximum Timespent for the Assessment',
+        'enter-max-assessment-time-spent': 'Timespent on Assessment',
         'enter-max-score': 'Enter the Maximum Score for the Assessment',
         hour: 'h',
         min: 'm',

@@ -3,7 +3,7 @@
     {{#if isCaptureTimespent}}
       <div class="max-timespent-container">
         <div class="title-container">
-          {{t 'teacher-landing.class.class-activities-tab.enter-max-timespent'}}
+          {{t 'teacher-landing.class.class-activities-tab.enter-max-assessment-time-spent'}}
         </div>
         <div class="timespent-container">
           <div class="timespent-hour">
@@ -52,13 +52,13 @@
       {{/each}}
     </div>
     <div class="action-container">
-      <div class="prev action {{if isDisablePrev 'disabled'}}" {{action "onMoveStudent" 'prev'}}><div class="student-thumbnail"></div>{{t 'common.prev'}}</div>
+      <div class="prev action  {{if (and isDisablePrev isValid) 'disabled'}}" {{action "onMoveStudent" 'prev'}}>{{gru-icon name="fast_rewind" }}{{t 'common.prev'}}</div>
         {{#if isDisableNext}}
           <div {{action "onSubmitPerformance"}}>{{t 'common.submit'}}</div>
         {{else}}
-          <div class="next action" {{action "onMoveStudent" 'next'}}>
+          <div class="next action {{if isValid 'disabled'}}" {{action "onMoveStudent" 'next'}}>
             {{t 'common.next'}}
-            <div class="student-thumbnail"></div>
+            {{gru-icon name="fast_forward" }}
           </div>
         {{/if}}
     </div>
