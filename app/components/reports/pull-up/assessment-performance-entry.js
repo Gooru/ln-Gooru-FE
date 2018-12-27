@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { generateUUID, validateHour, validateMin } from 'gooru-web/utils/utils';
+import { generateUUID, validateTime } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -250,17 +250,17 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Methods
 
+  /**
+   * @function timeValidator
+   * Method to validate time in student performance entry
+   */
   timeValidator() {
     let component = this;
     component.$('.time').keyup(function() {
       let maxHour = component.get('maxTimeHour');
-      component.set('isValidtime', validateHour(maxHour));
-      component.set('isHourTyping', true);
-    });
-    component.$('.mins').keyup(function() {
       let maxMins = component.get('maxTimeMins');
-      component.set('isValidmins', validateMin(maxMins));
-      component.set('isMinTyping', true);
+      component.set('isValidtime', validateTime(maxHour, maxMins));
+      component.set('isTyping', true);
     });
   },
 

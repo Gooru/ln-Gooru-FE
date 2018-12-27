@@ -11,14 +11,11 @@
             <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.hour'}}</span>
           </div>
           <div class="timespent-mins">
-            <span>{{input type="text" class="mins" value=maxTimeMins}}</span>
+            <span>{{input type="text" class="time" value=maxTimeMins}}</span>
             <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.min'}}</span>
           </div>
-          {{#if (and isHourTyping (not isValidtime))}}
-           <div class="error">Enter the correct hours</div>
-         {{/if}}
-         {{#if (and isMinTyping (not isValidmins))}}
-           <div class="error">Enter the correct minutes</div>
+          {{#if (and isTyping  (not isValidtime))}}
+           <div class="error">Enter the valid Time</div>
          {{/if}}
         </div>
         <div class="confirm-action-container {{unless isValidtime 'disabled'}}" {{action "onEnterMaxTimespent"}}>
