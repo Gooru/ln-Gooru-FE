@@ -57,7 +57,6 @@ export default Ember.Component.extend({
   getStundentCollectionReport() {
     let component = this;
     let activitiy = component.get('activitiy');
-    console.log(activitiy);
     const isCollection = activitiy.get('collectionType') === 'collection';
     const collectionPromise = isCollection
       ? component
@@ -80,6 +79,18 @@ export default Ember.Component.extend({
   actions: {
     onSelectCard(activitiy) {
       this.sendAction('onSelectCard', activitiy);
+    },
+
+    onOpenCollectionReport() {
+      let component = this;
+      let isActive = this.get('activitiy.selected');
+      if (isActive) {
+        component.sendAction(
+          'onOpenCollectionReport',
+          component.get('collection'),
+          component.get('type')
+        );
+      }
     }
   }
 });

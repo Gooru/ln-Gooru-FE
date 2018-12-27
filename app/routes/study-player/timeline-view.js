@@ -3,15 +3,25 @@ import PrivateRouteMixin from 'gooru-web/mixins/private-route-mixin';
 import d3 from 'd3';
 
 export default Ember.Route.extend(PrivateRouteMixin, {
+  queryParams: {
+    classId: {
+      as: 'class_id'
+    }
+  },
+
   // -------------------------------------------------------------------------
   // Dependencies
-  /**
   /**
    * @type {SessionService} Service to retrieve session information
    */
   session: Ember.inject.service('session'),
 
   chronoPerformanceService: Ember.inject.service('api-sdk/chrono-performance'),
+
+  /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
 
   /**
    * competency service dependency injection
@@ -33,21 +43,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   /**
    * Default page size
    */
-  pageSize: 10,
-
-  pageOptions: function(winwidth) {
-    let localpage = 20;
-    if (winwidth > 1440) {
-      localpage = 20;
-    } else if (winwidth > 1400 && winwidth < 1440) {
-      localpage = 20;
-    } else if (winwidth > 768 && winwidth < 1400) {
-      localpage = 20;
-    } else if (winwidth > 360 && winwidth < 768) {
-      localpage = 20;
-    }
-    return localpage;
-  },
+  pageSize: 20,
 
   vbarDataChanged: Ember.observer('vbarData', function() {
     const route = this;
@@ -57,12 +53,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     });
   }),
 
-  init() {
-    this._super(...arguments);
-    const route = this;
-    var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
-    route.pageSize = route.pageOptions(width);
-  },
   beforeModel(transition) {
     if (!this.modelFor('study-player').barchartdata) {
       let studyPlayerController = this.controllerFor('study-player');
@@ -70,11 +60,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       this.transitionTo('study-player');
     }
   },
-  model: function() {
+  model: function(params) {
     this._super(...arguments);
     const route = this;
     const userId = this.get('session.userId');
-
     let parentModel = Object.assign({}, this.modelFor('study-player')),
       subjectId = parentModel.course.subject;
 
@@ -88,55 +77,45 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       route.set('performanceSummary', parentModel.performanceSummary);
     }
 
+    const classId = params.classId;
+    const classPromise = route.get('classService').readClassInfo(classId);
+
     let timeLineDataPromise = route.getTimeLineData(parentModel);
 
     return Ember.RSVP.hash({
       timeLineData: timeLineDataPromise,
+      class: classPromise,
       competencyMatrixs: route
         .get('competencyService')
         .getCompetencyMatrixDomain(userId, subjectId)
     }).then(function(hash) {
-      const timeLineData = hash.timeLineData,
-        competencyMatrix = hash.competencyMatrixs;
+      const timeLineData = hash.timeLineData;
+      const competencyMatrix = hash.competencyMatrixs;
+      timeLineData.get('activities').reverse();
+      parentModel.timeData = timeLineData;
+      parentModel.class = hash.class;
       parentModel.perfromanceData = route.getCompletion(competencyMatrix);
       route.set('vbarData', parentModel.perfromanceData);
-      timeLineData.reverse();
-      parentModel.timeData = timeLineData;
-      if (parentModel.timeData.length === 0) {
-        route
-          .get('controller')
-          .set('offsetlimit', route.currentModel.filterOptions.offset);
-      }
-      parentModel.filterOptions = timeLineData.filterOptions;
       return parentModel;
-      //route.paintGraph(parentModel.perfromanceData);
     });
   },
 
-  actions: {
-    scrollRRight: function() {
-      const route = this;
-      route.currentModel.filterOptions.offset -= route.pageSize;
-      route.currentModel.filterOptions.offset =
-        route.currentModel.filterOptions.offset < 0
-          ? 1
-          : route.currentModel.filterOptions.offset;
-      route.get('controller').set('offsetlimit', -1);
-      route.get('controller').set('isSysEvent', 0);
-      route.refresh();
-    },
-    scrollLLeft: function() {
-      const route = this;
-      if (
-        route.get('controller').get('offsetlimit') <
-        route.currentModel.filterOptions.offset
-      ) {
-        route.currentModel.filterOptions.offset += route.pageSize;
-        route.get('controller').set('isSysEvent', 0);
-        this.refresh();
-      }
-    },
+  /**
+   * Set all controller properties from the model
+   * @param controller
+   * @param model
+   */
+  setupController: function(controller, model) {
+    controller.set('timeData', model.timeData.activities);
+    controller.set('startDate', model.timeData.activityStartDate);
+    controller.set('class', model.class);
+    controller.set('performanceSummary', model.performanceSummary);
+    controller.set('course', model.course);
+    controller.set('limit', this.get('pageSize'));
+    controller.set('barchartdata', model.barchartdata);
+  },
 
+  actions: {
     //Consume these changes for route animation
     willTransition() {
       if (this.get('controller').get('isSysEvent') === 0) {
@@ -164,7 +143,9 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       if (this.get('controller').get('isSysEvent') === 0) {
         return;
       }
-      $('.timeLineViewContainer').css({ top: '0vh' });
+      $('.timeLineViewContainer').css({
+        top: '0vh'
+      });
       Ember.run.later(function() {
         $('.timeLineViewContainer').animate(
           {
@@ -174,12 +155,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           },
           {
             duration: 400
-            /* ,
-            complete: function() {
-              $('.timeLineViewContainer').css({
-                top: '0vh'
-              });
-            } */
           }
         );
       });
@@ -213,9 +188,18 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         : Math.round((graphdatajsn.notstarted / total) * 100);
 
     graphdata = [
-      { value: graphdataper.completed, colorcode: '#5d93d9' },
-      { value: graphdataper.inprogress, colorcode: '#a8d4e4' },
-      { value: graphdataper.notstarted, colorcode: '#cdd2d6' }
+      {
+        value: graphdataper.completed,
+        colorcode: '#5d93d9'
+      },
+      {
+        value: graphdataper.inprogress,
+        colorcode: '#a8d4e4'
+      },
+      {
+        value: graphdataper.notstarted,
+        colorcode: '#cdd2d6'
+      }
     ];
 
     //graphdata = [20, 10, 70];
@@ -260,18 +244,18 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     if (route.context && route.context.filterOptions) {
       filterOption = route.context.filterOptions;
     }
-
     return this.get(
       'chronoPerformanceService'
     ).getStudentPerformanceOfAllItemsInClass(filterOption);
   },
-  setuproute(route, model) {
-    this._super(...arguments);
-    route.set('timeData', model.timeData);
-  },
 
   getCompletion(competencyMatrixs) {
-    var score = { total: 100, completed: 0, inprogress: 0, notstarted: 0 },
+    var score = {
+        total: 100,
+        completed: 0,
+        inprogress: 0,
+        notstarted: 0
+      },
       scoremap = {
         2: 'completed',
         3: 'completed',

@@ -10,11 +10,11 @@
       <div class="title ellipsis">
         <span class="ellipsis">{{collection.title}}</span>
       </div>
-      <div class="performance" style="background-color:{{if activitiy (grade-color activitiy.scoreInPercentage) defaultBarColor}}">
+      <div class="performance" {{action "onOpenCollectionReport" activitiy}} style="background-color:{{if activitiy (grade-color activitiy.score) defaultBarColor}}">
         <span class="score">
         {{#if activitiy}}
-          {{#if activitiy.scoreInPercentage}}
-            {{activitiy.scoreInPercentage}}%
+          {{#if activitiy.score}}
+            {{activitiy.score}}%
           {{else}}
             0%
           {{/if}}

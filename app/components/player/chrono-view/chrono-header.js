@@ -27,14 +27,15 @@ export default Ember.Component.extend({
 
   selectedIndex: null,
 
-  endDate: function() {
-    let todaysDate = new Date();
-    return this.uiDateFormat(todaysDate);
-  }.property(),
+  activitiyEndDate: Ember.computed('activities', function() {
+    let lastIndex = this.get('activities').length - 1;
+    let lastAccesedResource = this.get('activities').objectAt(lastIndex);
+    return this.uiDateFormat(lastAccesedResource.get('lastAccessedDate'));
+  }),
 
-  startDate: function() {
-    return this.uiDateFormat(this.activities.startDate);
-  }.property(),
+  activityDate: Ember.computed('startDate', function() {
+    return this.uiDateFormat(this.get('startDate'));
+  }),
 
   uiDateFormat: function(givenDate) {
     givenDate = givenDate || new Date();
@@ -58,6 +59,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     component.drawTimeLinePath();
+    component.paginateNext();
   },
 
   didRender() {
@@ -67,11 +69,16 @@ export default Ember.Component.extend({
   drawTimeLinePath() {
     const component = this;
     component.clearChart();
+    component.drawActiveResource();
     component.calculateLeftNodes();
     component.calculateRightNodes();
-    component.drawActiveResource();
   },
 
+  actions: {
+    onOpenCourseReport() {
+      this.sendAction('onOpenCourseReport');
+    }
+  },
   /**
    * Function to draw active resource
    */
@@ -83,10 +90,13 @@ export default Ember.Component.extend({
     let selectedIndex = component.get('activities').indexOf(selectedActivitiy);
     if (selectedIndex > -1) {
       component.set('selectedIndex', selectedIndex);
-      const svg = d3
-        .select('#active-resource')
-        .append('svg')
-        .attr('class', 'center-activities');
+      let svg = d3.select('#active-resource').select('svg');
+      if (!svg[0][0]) {
+        svg = d3
+          .select('#active-resource')
+          .append('svg')
+          .attr('class', 'center-activities');
+      }
       let activeResourceGroup = svg.append('g');
       activeResourceGroup
         .append('circle')
@@ -241,10 +251,13 @@ export default Ember.Component.extend({
     let component = this;
     let resources = this.get('activities');
     let isLeft = position === 'left';
-    const svg = d3
-      .select(`#${position}-activities`)
-      .append('svg')
-      .attr('class', `${position}-activities`);
+    let svg = d3.select(`#${position}-activities`).select('svg');
+    if (!svg[0][0]) {
+      svg = d3
+        .select(`#${position}-activities`)
+        .append('svg')
+        .attr('class', `${position}-activities`);
+    }
     let node = svg
       .selectAll('.student-node')
       .data(timeLine)
@@ -313,7 +326,6 @@ export default Ember.Component.extend({
     svg.setAttribute('width', `${width}px`);
     svg.setAttribute('height', `${yPosition}px`);
   },
-
   /**
    * Function to set scroll position
    */
@@ -323,13 +335,19 @@ export default Ember.Component.extend({
     let activitiesOneHalfWidthContainer =
       component.$('.student-activities').width() / 2;
     let activeResourceWidth = component.$('#active-resource').width();
-    component.$('.student-activities').animate(
-      {
-        scrollLeft:
-          activeOffset - (activitiesOneHalfWidthContainer + activeResourceWidth)
-      },
-      'slow'
-    );
+    let scrollLeft =
+      component.$('.student-activities').scrollLeft() +
+      (activeOffset - (activitiesOneHalfWidthContainer + activeResourceWidth));
+    component.$('.student-activities').scrollLeft(scrollLeft);
+  },
+
+  paginateNext() {
+    let component = this;
+    component.$('.student-activities').scroll(function() {
+      if (component.$(this).scrollLeft() === 0) {
+        component.sendAction('onPaginateNext');
+      }
+    });
   },
 
   willDestroyElement() {
@@ -342,6 +360,6 @@ export default Ember.Component.extend({
    */
   clearChart() {
     let component = this;
-    component.$('svg').remove();
+    component.$('svg').empty();
   }
 });

@@ -1,19 +1,19 @@
 <div class='timeLineRoot'>
-    <div class='v-series-parent'>
-        <div class='performance-v-view'>
-            <div class="badge Oval-12">
-                {{gru-icon name='equalizer'  }}
-            </div>
-            <div class='vbar'>
-            </div>
-        </div>
-        {{player/chrono-performance/chrono-timeline performanceSummary=model.performanceSummary timeData=model.timeData scrollLeft=(action 'scrollLeft') scrollRight=(action 'scrollRight')}}
+  <div class='v-series-parent'>
+    <div class='performance-v-view'>
+      <div class="badge Oval-12">
+        {{gru-icon name='equalizer'  }}
+      </div>
+      <div class='vbar'>
+      </div>
     </div>
-    <div class="bar-charts bottom-perf-line" data-content="{{performancePercentage}}% Completed">
-        {{#if model}}
-            <div class="completion-chart">
-                {{charts/gru-x-bar-chart data=model.barchartdata mileStone=mileStone mileStoneHandler=(action 'mileStoneHandler')}}
-            </div>
-        {{/if}}
-    </div>
+    {{player/chrono-performance/chrono-timeline performanceSummary=performanceSummary class=class course=course timeData=timeData startDate=startDate paginateNext="paginateNext"}}
+  </div>
+  <div class="bar-charts bottom-perf-line" data-content="{{performancePercentage}}% Completed">
+    {{#if barchartdata}}
+      <div class="completion-chart">
+        {{charts/gru-x-bar-chart data=barchartdata mileStone=mileStone mileStoneHandler=(action 'mileStoneHandler')}}
+      </div>
+    {{/if}}
+  </div>
 </div>

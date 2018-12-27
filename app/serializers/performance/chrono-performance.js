@@ -15,14 +15,7 @@ export default DS.JSONAPISerializer.extend({
    * Filter convertions to be consumend by the adapter
    */
   serializedFilterData(data) {
-    let {
-      classId,
-      courseId,
-      userId,
-      startDate,
-      limit,
-      offset
-    } = data;
+    let { classId, courseId, userId, startDate, limit, offset } = data;
     classId = classId ? classId : null;
     courseId = courseId ? courseId : null;
     userId = userId ? userId : this.get('session.userId');
@@ -48,17 +41,21 @@ export default DS.JSONAPISerializer.extend({
    */
   normalizeUsageData(payload) {
     const serializer = this;
+    const timeData = Ember.Object.create({
+      activities: Ember.A()
+    });
     if (payload.content && payload.content.length > 0) {
       if (Ember.isArray(payload.content[0].usageData)) {
-        return payload.content[0].usageData.map(function(timelineData) {
+        timeData.set('activityStartDate', payload.content[0].startDate);
+        let activityData = payload.content[0].usageData.map(function(
+          timelineData
+        ) {
           return serializer.normalizeChronoPerformanceSummary(timelineData);
         });
-      } else {
-        return [];
+        timeData.set('activities', activityData);
       }
-    } else {
-      return [];
     }
+    return timeData;
   },
 
   /**
@@ -77,7 +74,9 @@ export default DS.JSONAPISerializer.extend({
       pathId: data.pathId,
       sessionId: data.lastSessionId,
       status: data.status,
-      collectionType: data.collectionType
+      collectionType: data.collectionType,
+      pathType: data.pathType,
+      lastAccessedDate: data.lastAccessed
     });
   },
 

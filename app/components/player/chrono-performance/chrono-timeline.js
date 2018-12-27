@@ -6,9 +6,21 @@ export default Ember.Component.extend({
   classNames: ['chrono-timeline'],
 
   // -------------------------------------------------------------------------
+  // Dependencies
+  session: Ember.inject.service('session'),
+
+  // -------------------------------------------------------------------------
   // Properties
 
   timeData: Ember.A([]),
+
+  showCourseReport: null,
+
+  showCollectionReport: null,
+
+  studentCourseReportContext: null,
+
+  studentCollectionReportContext: null,
 
   activities: Ember.computed(
     'timeData.[]',
@@ -22,10 +34,31 @@ export default Ember.Component.extend({
   // Actions
 
   actions: {
+    onPaginateNext() {
+      this.sendAction('paginateNext');
+    },
+
+    onClosePullUp() {
+      let component = this;
+      component.set('showCourseReport', false);
+    },
+
+    onOpenCourseReport() {
+      let component = this;
+      component.openStudentCourseReport();
+    },
+
+    onOpenCollectionReport(collection, collectionType) {
+      let component = this;
+      component.openStudentCollectionReport(collection, collectionType);
+    },
+
     onSelectCard(activity) {
       let component = this;
       let timeData = component.get('timeData');
       let selectedTimeData = timeData.findBy('selected', true);
+      let selectedIndex = component.get('activities').indexOf(activity);
+      component.checkPagination(selectedIndex);
       selectedTimeData.set('selected', false);
       activity.set('selected', true);
     }
@@ -91,6 +124,47 @@ export default Ember.Component.extend({
       activities.pushObject(data);
     });
     return activities;
+  },
+
+  checkPagination(selectedIndex) {
+    let component = this;
+    if (selectedIndex < 4) {
+      component.sendAction('paginateNext');
+    }
+  },
+
+  openStudentCollectionReport(collection, collectionType) {
+    let component = this;
+    let params = {
+      userId: component.get('session.userId'),
+      classId: component.get('class.id'),
+      courseId: component.get('course.id'),
+      unitId: collection.get('unitId'),
+      lessonId: collection.get('lessonId'),
+      collectionId: collection.get('id'),
+      type: collectionType,
+      isStudent: true,
+      isTeacher: false,
+      collection
+    };
+    component.set('studentCollectionReportContext', params);
+    component.set('showCollectionReport', true);
+  },
+
+  openStudentCourseReport() {
+    let component = this;
+    component.set('showCourseReport', true);
+    let params = Ember.Object.create({
+      userId: component.get('session.userId'),
+      classId: component.get('class.id'),
+      class: component.get('class'),
+      courseId: component.get('course.id'),
+      course: component.get('course'),
+      isTeacher: false,
+      isStudent: true,
+      loadUnitsPerformance: true
+    });
+    component.set('studentCourseReportContext', params);
   },
 
   updatePosition(timeData, startIndex, endIndex, position, positionSeq) {
