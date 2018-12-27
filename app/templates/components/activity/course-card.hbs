@@ -26,25 +26,39 @@
     </div>
 
   </div>
-  <div class="card-panel-footer">
-    <div class="buttons-container">
-      <div class="play-btn" title="Play" data-toggle="tooltip" data-placement="right" {{action "onPlayCourse" course.id}}>{{gru-icon name="ic_play_arrow"}}</div>
-    </div>
-    <div class="course-prefs-container">
-      <span class="left-arc"></span>
-      <span class="right-arc"></span>
-      <div class="course-prefs relevance pull-left" style="background-color:rgba(0, 114, 188, {{course.relevance}})">
-        <div class="count">{{course.relevance}}</div>
-        <div class="title">{{t 'common.relevance'}}</div>
-      </div>
-      <div class="course-prefs engagement pull-left" style="background-color:rgba(0, 114, 188, {{course.engagement}})">
-        <div class="count">{{course.engagement}}</div>
-        <div class="title">{{t 'common.engagement'}}</div>
-      </div>
-      <div class="course-prefs efficacy pull-left" style="background-color:rgba(0, 114, 188, {{course.efficacy}})">
-        <div class="count">{{course.efficacy}}</div>
-        <div class="title">{{t 'common.efficacy'}}</div>
+  {{#if isHideCoursePerf}}
+    <div class="panel-footer-container">
+      <div class="actions-container">
+        <div class="left-aligned">
+          <div class="play-btn action-btn" title="Play" data-toggle="tooltip" data-placement="right" {{action "onPlayCourse" course.id}}>{{gru-icon name="ic_play_arrow"}}</div>
+        </div>
+        <div class="right-aligned">
+          <div class="edit-btn action-btn" title="Remix" data-toggle="tooltip" data-placement="right" {{action "onRemixCourse" course.id}}>{{gru-icon name="create"}}</div>
+          <div class="edit-btn action-btn" title="Add" data-toggle="tooltip" data-placement="right" {{action "onAddCourse" course.id}}>{{gru-icon name="add"}}</div>
+        </div>
       </div>
     </div>
-  </div>
+  {{else}}
+    <div class="card-panel-footer">
+      <div class="buttons-container">
+        <div class="play-btn" title="Play" data-toggle="tooltip" data-placement="right" {{action "onPlayCourse" course.id}}>{{gru-icon name="ic_play_arrow"}}</div>
+      </div>
+      <div class="course-prefs-container">
+        <span class="left-arc"></span>
+        <span class="right-arc"></span>
+        <div class="course-prefs relevance pull-left" style="background-color:rgba(0, 114, 188, {{course.relevance}})">
+          <div class="count">{{course.relevance}}</div>
+          <div class="title">{{t 'common.relevance'}}</div>
+        </div>
+        <div class="course-prefs engagement pull-left" style="background-color:rgba(0, 114, 188, {{course.engagement}})">
+          <div class="count">{{course.engagement}}</div>
+          <div class="title">{{t 'common.engagement'}}</div>
+        </div>
+        <div class="course-prefs efficacy pull-left" style="background-color:rgba(0, 114, 188, {{course.efficacy}})">
+          <div class="count">{{course.efficacy}}</div>
+          <div class="title">{{t 'common.efficacy'}}</div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
 </div>

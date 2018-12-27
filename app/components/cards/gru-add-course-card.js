@@ -1,16 +1,13 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
-import {
-  PLAYER_WINDOW_NAME,
-  PLAYER_EVENT_SOURCE
-} from 'gooru-web/config/config';
+import { PLAYER_WINDOW_NAME, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['activity-course-card'],
+  classNames: ['add-course', 'featured-course-card'],
 
   // -------------------------------------------------------------------------
   // Events
@@ -18,22 +15,6 @@ export default Ember.Component.extend({
     var component = this;
     component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
   },
-
-  // -------------------------------------------------------------------------
-  // Properties
-
-  /**
-   * course object
-   * @type {Object}
-   */
-  course: null,
-
-  /**
-   * @property {TaxonomyTag[]} List of taxonomy tags
-   */
-  tags: Ember.computed('course.taxonomy.[]', function() {
-    return TaxonomyTag.getTaxonomyTags(this.get('course.taxonomy'));
-  }),
 
   actions: {
     onPlayCourse(courseId) {
@@ -52,5 +33,29 @@ export default Ember.Component.extend({
       let component = this;
       component.sendAction('onRemixCourse', courseId);
     }
-  }
+  },
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * course object
+   * @type {Object}
+   */
+  course: null,
+
+  /**
+   * @property {TaxonomyTag[]} List of taxonomy tags
+   */
+  tags: Ember.computed('course.taxonomy.[]', function() {
+    return TaxonomyTag.getTaxonomyTags(this.get('course.taxonomy'));
+  }),
+
+
+  isPremiumCourse: Ember.computed('course', function() {
+    let controller = this;
+    let course = controller.get('course');
+    let courseVersion = course.version;
+    return courseVersion === 'premium';
+  })
 });

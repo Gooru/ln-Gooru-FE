@@ -417,3 +417,8 @@ $box-shadow: 1px -1px;
 @import "components/reports/pull-up/assessment-performance-entry";
 @import "components/reports/pull-up/external-assessment-performance-entry";
 @import "components/reports/pull-up/collection-performance-entry";
+
+// Add course to class
+@import "controllers/teacher/class/add-course";
+@import "components/cards/gru-add-course-card";
+@import "components/teacher/class/course-search-pull-up";

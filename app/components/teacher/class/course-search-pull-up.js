@@ -1,0 +1,105 @@
+import Ember from 'ember';
+import { KEY_CODES } from 'gooru-web/config/config';
+
+export default Ember.Component.extend({
+
+  classNames: ['course-search-pull-up'],
+
+  showPullUp: false,
+
+  isMenuEnabled: false,
+
+  didInsertElement() {
+    let component = this;
+    if (component.get('showPullUp')) {
+      component.openPullUp();
+      component.handleSearchBar();
+    }
+  },
+
+  actions: {
+    onPullUpClose() {
+      let component = this;
+      component.closePullUp();
+    },
+
+    onChooseMenuItem(catalogItem) {
+      console.log('catalogItem', catalogItem);
+    },
+
+    onRemixCourse(courseId) {
+      let component = this;
+      component.sendAction('onRemixCourse', courseId);
+    },
+
+    onAddCourse(courseId) {
+      let component = this;
+      component.sendAction('onAddCourse', courseId);
+    },
+
+    onSelectCatalog(catalog) {
+      let component = this;
+      component.sendAction('onSelectCatalog', catalog);
+      this.toggleProperty('isMenuEnabled');
+    },
+
+    /**
+     * Toggle menu list based on the recent selection of the menu.
+     */
+    toggleMenuList() {
+      this.toggleProperty('isMenuEnabled');
+    }
+  },
+
+  //--------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * Function to animate the  pullup from bottom to top
+   */
+  openPullUp() {
+    let component = this;
+    component.$().animate(
+      {
+        top: '10%'
+      },
+      400
+    );
+  },
+
+  closePullUp() {
+    let component = this;
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+      }
+    );
+  },
+
+  handleSearchBar() {
+    let component = this;
+    component.$('#search-courses').on('keyup', function(e) {
+      console.log('keyup');
+      if (e.which === KEY_CODES.ENTER) {
+        component.loadData();
+      }
+    });
+
+    component.$('.search-icon .search').click(function() {
+      let term = component.getSearchTerm();
+      if (term.length > 0) {
+        component.loadData();
+      }
+    });
+  },
+
+  loadData() {
+    let component = this;
+    let searchText = component.get('searchText');
+    component.sendAction('onSearchCourse', searchText);
+  }
+});

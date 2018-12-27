@@ -353,7 +353,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
         .get('taxonomySerializer')
         .normalizeTaxonomyArray(taxonomyInfo, TAXONOMY_LEVELS.COURSE),
       owner: result.owner ? serializer.normalizeOwner(result.owner) : null,
-      sequence: result.sequence
+      sequence: result.sequence,
+      version: result.version || null
     });
   },
 
