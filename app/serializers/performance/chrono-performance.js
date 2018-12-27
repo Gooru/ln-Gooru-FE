@@ -15,7 +15,14 @@ export default DS.JSONAPISerializer.extend({
    * Filter convertions to be consumend by the adapter
    */
   serializedFilterData(data) {
-    let { classId, courseId, userId, startDate, limit, offset } = data;
+    let {
+      classId,
+      courseId,
+      userId,
+      startDate,
+      limit,
+      offset
+    } = data;
     classId = classId ? classId : null;
     courseId = courseId ? courseId : null;
     userId = userId ? userId : this.get('session.userId');
@@ -69,7 +76,8 @@ export default DS.JSONAPISerializer.extend({
       score: data.scoreInPercentage,
       pathId: data.pathId,
       sessionId: data.lastSessionId,
-      status: data.status
+      status: data.status,
+      collectionType: data.collectionType
     });
   },
 

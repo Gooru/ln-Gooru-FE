@@ -57,6 +57,7 @@ export default Ember.Component.extend({
   getStundentCollectionReport() {
     let component = this;
     let activitiy = component.get('activitiy');
+    console.log(activitiy);
     const isCollection = activitiy.get('collectionType') === 'collection';
     const collectionPromise = isCollection
       ? component
