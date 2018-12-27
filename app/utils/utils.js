@@ -1023,15 +1023,11 @@ export function validatePercentage(number) {
  * Validate time in hours and minutes
  */
 export function validateTime(hours, mins) {
-  let isValidTimeSpent = false;
-  let isValidhours = false;
   let hour = Number(hours);
   let isHour = !isNaN(hour);
-  isValidhours = hour >= 0 && hour <= 12 && isHour;
-  let isValidmins = false;
+  let isValidhours = hour >= 0 && hour <= 12 && isHour;
   let min = Number(mins);
   let isMin = !isNaN(mins);
-  isValidmins = min >= 0 && min <= 60 && isMin;
-  isValidTimeSpent = isValidhours && isValidmins;
-  return isValidTimeSpent;
+  let isValidmins = min >= 0 && min <= 60 && isMin;
+  return isValidhours && isValidmins;
 }

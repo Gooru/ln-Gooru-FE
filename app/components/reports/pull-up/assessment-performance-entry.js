@@ -402,8 +402,7 @@ export default Ember.Component.extend({
     let assessmentResources = Ember.A([]);
     let activeStudent = component.get('activeStudent');
     let activityData = component.get('activityData');
-    let conductedOn =
-      activityData.get('activityData.activation_date') || new Date();
+    let conductedOn = new Date(activityData.activation_date) || new Date();
     let classId = component.get('classId');
     let assessment = component.get('assessment');
     inputElements.each(function(index, scoreElement) {
