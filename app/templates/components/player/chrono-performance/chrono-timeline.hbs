@@ -1,6 +1,6 @@
 <div class="container">
   <div class="header">
-    {{player/chrono-view/chrono-header performanceSummary=performanceSummary activeIndex=activeIndex activeResource=activeResource}}
+    {{player/chrono-view/chrono-header performanceSummary=performanceSummary activeIndex=activeIndex timeData=timeData  activeResource=activeResource}}
   </div>
   <div class="body class-activities hidden" id="carousel">
     {{#each timeData as |activitiy index|}}

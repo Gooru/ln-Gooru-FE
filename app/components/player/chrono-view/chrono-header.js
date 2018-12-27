@@ -11,308 +11,7 @@ export default Ember.Component.extend({
    */
   defaultBarColor: STUDY_PLAYER_BAR_COLOR,
 
-  timeData: [
-    {
-      scoreInPercentage: 33,
-      attempts: 1,
-      collectionType: 'assessment',
-      collectionId: '1e3ca9a9-44e8-432b-9b97-39286881b82b',
-      title: 'CFU - Compare decimals to the hundredths place',
-      sessionId: '0218c8de-bf28-466f-baab-a03e0eaea067',
-      pathId: null,
-      pathType: null,
-      lastAccessed: '2018-12-14 09:05:54.908',
-      timeSpent: 17000,
-      reaction: 0,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: 50,
-      attempts: 1,
-      collectionType: 'assessment',
-      collectionId: '1e3ca9a9-44e8-432b-9b97-39286881b82b',
-      title: 'CFU - Compare decimals to the hundredths place',
-      sessionId: 'a87ad180-fa44-4f6b-8519-8d805af3f058',
-      pathId: 856,
-      pathType: 'teacher',
-      lastAccessed: '2018-12-13 08:26:04.694',
-      timeSpent: 273000,
-      reaction: 0,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: null,
-      views: 1,
-      collectionType: 'collection',
-      collectionId: '8758909a-728b-4a24-bbf9-0632b80d1631',
-      title: 'Compare decimals to the hundredths place',
-      sessionId: 'aaf63402-0c1c-4b6e-99f7-e7f28a6b8af3',
-      pathId: 856,
-      pathType: 'teacher',
-      lastAccessed: '2018-12-13 05:58:38.284',
-      timeSpent: 7000,
-      reaction: 0,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: 50,
-      attempts: 1,
-      collectionType: 'assessment',
-      collectionId: '1e3ca9a9-44e8-432b-9b97-39286881b82b',
-      title: 'CFU - Compare decimals to the hundredths place',
-      sessionId: '510eb5d2-00d4-4a2c-aebe-2c0387cad2c6',
-      pathId: 856,
-      pathType: 'system',
-      lastAccessed: '2018-12-13 05:58:09.205',
-      timeSpent: 49000,
-      reaction: 0,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: 0,
-      attempts: 1,
-      collectionType: 'assessment',
-      collectionId: '869e9713-14ab-44d5-91fa-be33387aab04',
-      title: 'MaxAnswerOptionAmt',
-      sessionId: '59057b98-13df-4805-b81d-27ce8a155333',
-      pathId: null,
-      pathType: null,
-      lastAccessed: '2018-12-12 09:26:20.364',
-      timeSpent: 6000,
-      reaction: 0,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: null,
-      views: 1,
-      collectionType: 'collection',
-      collectionId: 'e0a7de54-0ac3-4abb-a28f-3871db7fc61f',
-      title: 'Read, Write and Compare Numbers',
-      sessionId: 'f00cb817-d530-45b8-952c-e926ae556604',
-      pathId: null,
-      pathType: null,
-      lastAccessed: '2018-12-11 14:40:29.53',
-      timeSpent: 305000,
-      reaction: 0,
-      status: 'in-progress',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: 0,
-      attempts: 1,
-      collectionType: 'assessment',
-      collectionId: '1e3ca9a9-44e8-432b-9b97-39286881b82b',
-      title: 'CFU - Compare decimals to the hundredths place',
-      sessionId: 'a7fef167-d336-43d5-976e-7ae6c7fe47f1',
-      pathId: 856,
-      pathType: 'system',
-      lastAccessed: '2018-12-11 13:05:03.516',
-      timeSpent: 5000,
-      reaction: 0,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: null,
-      views: 1,
-      collectionType: 'collection',
-      collectionId: 'b74a78e6-59e6-4b3e-ad89-fd9e1c30a078',
-      title: 'Compare decimals to the hundredths place',
-      sessionId: 'a0e672c1-b42f-4715-8ad8-a341988d3849',
-      pathId: 220,
-      pathType: 'teacher',
-      lastAccessed: '2018-12-11 13:04:25.796',
-      timeSpent: 2000,
-      reaction: 0,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: null,
-      views: 1,
-      collectionType: 'collection',
-      collectionId: 'af975dcc-0b90-4b8f-8a19-da356fcd0939',
-      title: 'Comparing Decimals',
-      sessionId: '606920fe-8554-4278-ac77-fc27389eedd4',
-      pathId: null,
-      pathType: null,
-      lastAccessed: '2018-12-11 08:30:27.356',
-      timeSpent: 10000,
-      reaction: 3,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: null,
-      views: 1,
-      collectionType: 'collection',
-      collectionId: 'f11cfb97-182f-4147-b790-3e393d0646f2',
-      title: 'Multiplication as Comparison(4.OA.1)',
-      sessionId: '5a66fb3d-7792-44b5-8d4a-33e600fd1b03',
-      pathId: null,
-      pathType: null,
-      lastAccessed: '2018-12-10 12:35:15.297',
-      timeSpent: 0,
-      reaction: 0,
-      status: 'in-progress',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: null,
-      views: 1,
-      collectionType: 'collection',
-      collectionId: '96c342cf-6b4d-4964-a209-eef9669c53b5',
-      title: 'Comparing Large Numbers',
-      sessionId: '4651204c-efe4-4512-a019-bbf8736bb9a0',
-      pathId: null,
-      pathType: null,
-      lastAccessed: '2018-12-07 11:58:35.937',
-      timeSpent: 94000,
-      reaction: 0,
-      status: 'in-progress',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: 0,
-      attempts: 1,
-      collectionType: 'assessment',
-      collectionId: '87da6c06-4dac-4f19-b1e9-9b86a1f23606',
-      title: 'CFU - Read/write larger numbers all ways',
-      sessionId: '7dbe8f58-4fca-4568-8904-66add5d6cec6',
-      pathId: null,
-      pathType: null,
-      lastAccessed: '2018-12-07 11:56:39.494',
-      timeSpent: 73000,
-      reaction: 0,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: null,
-      views: 1,
-      collectionType: 'collection',
-      collectionId: 'ebdd1cd4-aa6f-4097-8b41-394d1b84b564',
-      title: 'Read/write larger numbers all ways',
-      sessionId: '47c4274a-59d8-4b48-96cc-25389e315afd',
-      pathId: 852,
-      pathType: 'system',
-      lastAccessed: '2018-12-07 11:53:55.28',
-      timeSpent: 46000,
-      reaction: 1,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: 0,
-      attempts: 1,
-      collectionType: 'assessment',
-      collectionId: '87da6c06-4dac-4f19-b1e9-9b86a1f23606',
-      title: 'CFU - Read/write larger numbers all ways',
-      sessionId: '56367e38-5f50-4896-bb3f-3df809efd44d',
-      pathId: null,
-      pathType: null,
-      lastAccessed: '2018-12-07 10:42:31.772',
-      timeSpent: 12094000,
-      reaction: 1,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: null,
-      views: 1,
-      collectionType: 'collection',
-      collectionId: 'e0a7de54-0ac3-4abb-a28f-3871db7fc61f',
-      title: 'Read, Write and Compare Numbers',
-      sessionId: 'f7e6679b-9ba7-4093-a0b2-f548346fd75f',
-      pathId: null,
-      pathType: null,
-      lastAccessed: '2018-12-07 07:45:45.692',
-      timeSpent: 70000,
-      reaction: 5,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: null,
-      views: 1,
-      collectionType: 'collection',
-      collectionId: 'e0a7de54-0ac3-4abb-a28f-3871db7fc61f',
-      title: 'Read, Write and Compare Numbers',
-      sessionId: 'cbd65389-8fce-4465-a5f0-63333af8f6e3',
-      pathId: null,
-      pathType: null,
-      lastAccessed: '2018-12-07 07:33:25.331',
-      timeSpent: 156000,
-      reaction: 5,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: null,
-      views: 1,
-      collectionType: 'collection',
-      collectionId: 'e0a7de54-0ac3-4abb-a28f-3871db7fc61f',
-      title: 'Read, Write and Compare Numbers',
-      sessionId: '92b7d10a-787a-4d5c-a6a1-ca90e75d3419',
-      pathId: 851,
-      pathType: null,
-      lastAccessed: '2018-12-07 06:45:39.964',
-      timeSpent: 38000,
-      reaction: 0,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: null,
-      views: 1,
-      collectionType: 'collection',
-      collectionId: '3a4bfda7-441e-4d8e-a810-43f6800f81ce',
-      title: 'Multiply and divide to solve word problems',
-      sessionId: 'b1cb2bbd-9a2c-47c5-9a4d-f3db4caefe37',
-      pathId: 851,
-      pathType: 'system',
-      lastAccessed: '2018-12-07 06:44:09.155',
-      timeSpent: 0,
-      reaction: 0,
-      status: 'in-progress',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: 0,
-      attempts: 1,
-      collectionType: 'assessment',
-      collectionId: 'bb589aab-9a97-43c8-ba50-bc06482d8f21',
-      title: 'CFU: Multiplication Comparison Word Problems',
-      sessionId: 'aa5bc68e-3454-4b37-8414-5d5c9afd6813',
-      pathId: null,
-      pathType: null,
-      lastAccessed: '2018-12-07 06:43:43.746',
-      timeSpent: 2000,
-      reaction: 0,
-      status: 'complete',
-      gradingStatus: 'complete'
-    },
-    {
-      scoreInPercentage: null,
-      views: 1,
-      collectionType: 'collection',
-      collectionId: 'fab22538-8c14-4b19-9d58-2ad7363adea8',
-      title: 'Multiplicative Comparison Word Problems',
-      sessionId: 'f1fa58a4-0427-4bce-8422-e52133edf354',
-      pathId: null,
-      pathType: null,
-      lastAccessed: '2018-12-07 06:43:08.621',
-      timeSpent: 17000,
-      reaction: 0,
-      status: 'complete',
-      gradingStatus: 'complete'
-    }
-  ],
+  timeData: null,
 
   performanceSummary: null,
 
@@ -325,6 +24,10 @@ export default Ember.Component.extend({
   observeActiveResource: Ember.observer('activeResource', function() {
     this.drawTimeLinePath();
   }),
+
+  rightTimeLine: null,
+
+  leftTimeLine: null,
 
   activeIndex: null,
 
@@ -361,127 +64,154 @@ export default Ember.Component.extend({
     component.drawTimeLinePath();
   },
 
+  didRender() {
+    this.scrollToCenter();
+  },
+
   drawTimeLinePath() {
     const component = this;
     component.clearChart();
+    component.calculateLeftNodes();
+    component.calculateRightNodes();
+    component.drawActiveResource();
+  },
+
+  /**
+   * Function to draw active resource
+   */
+  drawActiveResource() {
+    const component = this;
     let activeResource = component.get('activeResource');
     let activeIndex = component.get('activeIndex');
-    // const width = component.$('.student-activities').width();
-    const svg = d3.select('#active-resource').append('svg');
+    const svg = d3
+      .select('#active-resource')
+      .append('svg')
+      .attr('class', 'center-activities');
     component.set('timeLineContainer', svg);
     let activeResourceGroup = svg.append('g');
-    // let centerX = width / 2;
-    component.set('centerXPosition', 50);
     activeResourceGroup
       .append('circle')
-      // .attr('cx', centerX)
-      // .attr('cy', '35')
       .attr('class', `active node-${activeIndex}`);
     activeResourceGroup
       .append('foreignObject')
-      // .append('class','active-object')
-      // .attr('x', centerX - 19)
-      // .attr('y', '21')
       .append('xhtml:div')
       .attr('class', () => {
         return activeResource.collectionType === 'collection'
           ? 'active-collection'
           : 'active-assessment';
       });
-
-    component.calculateLeftNodes();
-    component.calculateRightNodes();
-    //component.drawPath();
-    //component.handleView();
   },
 
+  /**
+   * Function to calculate left timeline
+   */
   calculateLeftNodes() {
     let component = this;
     let resources = this.get('timeData');
     let activeIndex = this.get('activeIndex');
     let leftTimeLine = resources.slice(0, activeIndex);
-    component.drawNodes(leftTimeLine, true);
-    component.handleView(true);
+    component.set('leftTimeLine', leftTimeLine);
+    component.drawNodes(leftTimeLine, 'left');
+    component.drawPath('left');
+    component.handleView('left');
   },
 
+  /**
+   * Function to calculate right timeline
+   */
   calculateRightNodes() {
     let component = this;
     let resources = this.get('timeData');
     let activeIndex = this.get('activeIndex');
     let rightTimeLine = resources.slice(activeIndex + 1, resources.length);
-    component.drawNodes(rightTimeLine, false);
-    component.handleView(false);
+    component.set('rightTimeLine', rightTimeLine);
+    component.drawNodes(rightTimeLine, 'right');
+    component.handleView('right');
+    component.drawPath('right');
   },
 
-  drawPath() {
-    let resources = this.get('timeData');
-    let activeIndex = this.get('activeIndex');
-    resources.forEach((resource, index) => {
-      let node = this.$(`.node-${index}`);
+  /**
+   * Function to draw nodes
+   */
+  drawPath(position) {
+    let resources =
+      position === 'right'
+        ? this.get('rightTimeLine')
+        : this.get('leftTimeLine');
+    resources.forEach(resource => {
+      let index = this.get('timeData')
+        .map(x => x)
+        .indexOf(resource);
+      let node = this.$(`.${position}-node-${index}`);
       let nodeX = parseInt(node.attr('cx'));
       let nodeY = parseInt(node.attr('cy'));
-      if (index === activeIndex) {
-        nodeX += 22; //Active index has higher circle radius
-      }
-      if (index < resources.length - 1) {
+      if (index < this.get('timeData').length - 1) {
         let nextIndex = index + 1;
-        let nextResource = resources[nextIndex];
-        let nextNode = this.$(`.node-${nextIndex}`);
+        let nextResource = this.get('timeData').get(nextIndex);
+        let nextNode = this.$(`.${position}-node-${nextIndex}`);
         let nextNodeY = parseInt(nextNode.attr('cy'));
-        if (nextResource.pathId) {
-          if (nodeY === nextNodeY) {
-            this.drawHorizontalLine(
-              {
-                x: nodeX,
-                y: nodeY
-              },
-              nextResource.pathId
-            );
+        if (nextResource && nextNode.length > 0) {
+          if (nextResource.pathId) {
+            if (nodeY === nextNodeY) {
+              this.drawHorizontalLine(
+                {
+                  x: nodeX,
+                  y: nodeY
+                },
+                nextResource.pathId,
+                position
+              );
+            } else {
+              this.drawCurve(
+                {
+                  x: nodeX,
+                  y: nodeY
+                },
+                {
+                  x: nextNodeY - nodeY,
+                  y: nodeY,
+                  curve: 0
+                },
+                nextResource.pathId,
+                position
+              );
+            }
           } else {
-            this.drawCurve(
-              {
-                x: nodeX,
-                y: nodeY
-              },
-              {
-                x: nextNodeY - nodeY,
-                y: nodeY,
-                curve: 0
-              },
-              nextResource.pathId
-            );
-          }
-        } else {
-          if (nodeY === nextNodeY) {
-            this.drawHorizontalLine(
-              {
-                x: nodeX,
-                y: nodeY
-              },
-              nextResource.pathId
-            );
-          } else {
-            this.drawCurve(
-              {
-                x: nodeX,
-                y: nodeY
-              },
-              {
-                x: nextNodeY - nodeY,
-                y: nodeY,
-                curve: 0
-              },
-              nextResource.pathId
-            );
+            if (nodeY === nextNodeY) {
+              this.drawHorizontalLine(
+                {
+                  x: nodeX,
+                  y: nodeY
+                },
+                nextResource.pathId,
+                position
+              );
+            } else {
+              this.drawCurve(
+                {
+                  x: nodeX,
+                  y: nodeY
+                },
+                {
+                  x: nextNodeY - nodeY,
+                  y: nodeY,
+                  curve: 0
+                },
+                nextResource.pathId,
+                position
+              );
+            }
           }
         }
       }
     });
   },
 
-  drawHorizontalLine(startPoint, isSuggestion) {
-    const svg = this.get('timeLineContainer');
-    svg
+  /**
+   * Function to draw horizontal line
+   */
+  drawHorizontalLine(startPoint, isSuggestion, position) {
+    d3.select(`.${position}-activities`)
       .append('path')
       .attr('class', () => {
         return isSuggestion ? 'suggestion-line' : 'line';
@@ -489,9 +219,11 @@ export default Ember.Component.extend({
       .attr('d', `M ${startPoint.x + 8} ${startPoint.y} l 14 0`);
   },
 
-  drawCurve(startPoint, points, isSuggestion) {
-    const svg = this.get('timeLineContainer');
-    svg
+  /**
+   * Function to draw curve line
+   */
+  drawCurve(startPoint, points, isSuggestion, position) {
+    d3.select(`.${position}-activities`)
       .append('path')
       .attr('class', () => {
         return isSuggestion ? 'suggestion-curve' : 'curve';
@@ -502,19 +234,17 @@ export default Ember.Component.extend({
       );
   },
 
-  drawNodes(timeLine, isLeft) {
+  /**
+   * Function to draw nodes
+   */
+  drawNodes(timeLine, position) {
     let component = this;
     let resources = this.get('timeData');
-    let domElementId;
-    if (isLeft) {
-      domElementId = 'left-activities';
-    } else {
-      domElementId = 'right-activities';
-    }
+    let isLeft = position === 'left';
     const svg = d3
-      .select(`#${domElementId}`)
+      .select(`#${position}-activities`)
       .append('svg')
-      .attr('class', `${domElementId}`);
+      .attr('class', `${position}-activities`);
     let node = svg
       .selectAll('.student-node')
       .data(timeLine)
@@ -525,7 +255,7 @@ export default Ember.Component.extend({
       .attr('class', d => {
         let index = resources.map(x => x).indexOf(d);
         let className = d.pathId ? 'suggestion-activity' : 'activity';
-        return `${className} node-${index}`;
+        return `${className} ${position}-node-${index}`;
       })
       .attr('cx', (d, i) => {
         let xAxis = 10 + i * 30;
@@ -546,7 +276,7 @@ export default Ember.Component.extend({
       .attr('height', 22)
       .attr('x', (d, i) => {
         let xAxis = i * 30;
-        return xAxis - 1;
+        return isLeft ? xAxis + 70 : xAxis;
       })
       .attr('y', d => {
         let position;
@@ -570,25 +300,36 @@ export default Ember.Component.extend({
     });
   },
 
-  handleView(isLeft) {
+  /**
+   * Function to handle svg view
+   */
+  handleView(position) {
     let component = this;
-    let domElementId;
-    if (isLeft) {
-      domElementId = 'left-activities';
-    } else {
-      domElementId = 'right-activities';
-    }
-    const svg = component.$(`.${domElementId}`)[0];
-    // console.log(svg);
+    const svg = component.$(`.${position}-activities`)[0];
     const bbox = svg.getBBox();
     let width = bbox.width;
-    let height = bbox.height;
+    let height = 5;
     let xPosition = bbox.x;
-    let yPosition = bbox.y;
+    let yPosition = 37;
     svg.setAttribute('viewBox', `${xPosition} ${yPosition} ${width} ${height}`);
     svg.setAttribute('width', `${width}px`);
-    svg.setAttribute('height', `${height}px`);
-    // svg.setAttribute('style', `margin-left : ${xPosition}px`);
+    svg.setAttribute('height', `${yPosition}px`);
+  },
+
+  /**
+   * Function to set scroll position
+   */
+  scrollToCenter() {
+    let component = this;
+    let activeOffset = component.$('#active-resource').offset().left;
+    let leftWidthContainer = component.$('.left-activities').width();
+    let rightWidthContainer = component.$('.right-activities').width();
+    component.$('.student-activities').animate(
+      {
+        scrollLeft: activeOffset - (leftWidthContainer + rightWidthContainer)
+      },
+      'slow'
+    );
   },
 
   willDestroyElement() {
@@ -596,6 +337,9 @@ export default Ember.Component.extend({
     component.clearChart();
   },
 
+  /**
+   * Function to clear svg
+   */
   clearChart() {
     let component = this;
     component.$('svg').remove();
