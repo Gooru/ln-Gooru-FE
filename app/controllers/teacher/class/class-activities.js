@@ -380,19 +380,27 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
     onOpenPerformanceEntry(item, activity) {
       let component = this;
-      if (item.format === 'assessment') {
-        component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-        component.set('isShowCollectionPerformanceEntryPullUp', false);
-        component.set('isShowAssessmentPerformanceEntryPullUp', true);
-      } else if (item.format === 'assessment-external') {
-        component.set('isShowAssessmentPerformanceEntryPullUp', false);
-        component.set('isShowCollectionPerformanceEntryPullUp', false);
-        component.set('isShowExternalAssessmentPeformanceEntryPullUp', true);
-      } else if (item.format === 'collection') {
-        component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-        component.set('isShowAssessmentPerformanceEntryPullUp', false);
-        component.set('isShowCollectionPerformanceEntryPullUp', true);
-      }
+      component.fetchActivityUsers(activity.id).then(function(activityMembers) {
+        let classMembers = component.get('members');
+        let classActivityStudents = Ember.A([]);
+        activityMembers.map(member => {
+          classActivityStudents.push(classMembers.findBy('id', member.id));
+        });
+        component.set('activityMembers', classActivityStudents);
+        if (item.format === 'assessment') {
+          component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
+          component.set('isShowCollectionPerformanceEntryPullUp', false);
+          component.set('isShowAssessmentPerformanceEntryPullUp', true);
+        } else if (item.format === 'assessment-external') {
+          component.set('isShowAssessmentPerformanceEntryPullUp', false);
+          component.set('isShowCollectionPerformanceEntryPullUp', false);
+          component.set('isShowExternalAssessmentPeformanceEntryPullUp', true);
+        } else if (item.format === 'collection') {
+          component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
+          component.set('isShowAssessmentPerformanceEntryPullUp', false);
+          component.set('isShowCollectionPerformanceEntryPullUp', true);
+        }
+      });
       component.set('selectedItem', item);
       component.set('selectedActivity', activity);
     },
@@ -819,5 +827,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         1000
       );
     }
+  },
+
+  fetchActivityUsers(activityId) {
+    let controller = this;
+    let classId = controller.get('classId');
+    return Ember.RSVP.hash({
+      activityMembers: Ember.RSVP.resolve(controller.get('classActivityService').fetchUsersForClassActivity(classId, activityId))
+    })
+      .then(({activityMembers}) =>  {
+        return activityMembers;
+      });
   }
 });
