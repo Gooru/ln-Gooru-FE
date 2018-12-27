@@ -1,41 +1,47 @@
-<div class="collection-img">
-  <img src="{{collection.thumbnailUrl}}" /></div>
-<div class="collection-performance">
-  <div class="icon-{{type}}">
-  </div>
-  <div class="title">
-    <p>{{collection.title}}</p>
-  </div>
-  <div class="performance" style="background-color:{{if context (grade-color context.scoreInPercentage) defaultBarColor}}">
-    <span class="score">
-      {{#if context}}
-        {{#if context.scoreInPercentage}}
-          {{context.scoreInPercentage}}%
+{{#if loading}}
+  {{three-bounce-spinner}}
+{{else}}
+  <div class="card-container" {{action "onSelectCard" activitiy}}>
+    <div class="collection-img" style="background-image: url({{collection.thumbnailUrl}})">
+    </div>
+    <div class="collection-performance">
+      <div class="icon-{{type}}">
+      </div>
+      <div class="title ellipsis">
+        <span class="ellipsis">{{collection.title}}</span>
+      </div>
+      <div class="performance" style="background-color:{{if activitiy (grade-color activitiy.scoreInPercentage) defaultBarColor}}">
+        <span class="score">
+        {{#if activitiy}}
+          {{#if activitiy.scoreInPercentage}}
+            {{activitiy.scoreInPercentage}}%
+          {{else}}
+            0%
+          {{/if}}
         {{else}}
-          0%
+          --
         {{/if}}
-      {{else}}
-        --
-      {{/if}}
-    </span>
-  </div>
-</div>
-<div class="collections hidden">
-  {{#each collection.children as |collection|}}
-    <div class="resource">
-      {{#if (eq type "assessment")}}
-        <div class="question-img"></div>
-      {{else}}
-        <div class="resource-img"></div>
-      {{/if}}
-      <div class="collection-info">
-        <p class="title ellipsis">{{collection.title}}</p>
-        {{#if (eq type "assessment")}}
-          <span class="type">{{t (concat "common.question-type." collection.type)}}</span>
-        {{else}}
-          <span class="type">{{t (concat "common.resource-format." collection.format)}}</span>
-        {{/if}}
+      </span>
       </div>
     </div>
-  {{/each}}
-</div>
+    <div class="collections">
+      {{#each collection.children as |resource|}}
+        <div class="resource">
+          {{#if (eq type "assessment")}}
+            <i class="question-img"></i>
+          {{else}}
+            <i class="resource-img {{resource.format}}"></i>
+          {{/if}}
+          <div class="collection-info">
+            <p class="title ellipsis">{{resource.title}}</p>
+            {{#if (eq type "assessment")}}
+              <span class="type">{{t (concat "common.question-type." resource.type)}}</span>
+            {{else}}
+              <span class="type">{{t (concat "common.resource-format." resource.format)}}</span>
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+{{/if}}

@@ -11,25 +11,21 @@ export default Ember.Component.extend({
    */
   defaultBarColor: STUDY_PLAYER_BAR_COLOR,
 
-  timeData: null,
-
-  performanceSummary: null,
-
-  activeResource: null,
-
-  timeLineContainer: null,
-
-  centerXPosition: null,
-
-  observeActiveResource: Ember.observer('activeResource', function() {
-    this.drawTimeLinePath();
-  }),
+  draw: Ember.observer(
+    'activities.[]',
+    'activities.@each.selected',
+    function() {
+      this.drawTimeLinePath();
+    }
+  ),
 
   rightTimeLine: null,
 
   leftTimeLine: null,
 
-  activeIndex: null,
+  activities: null,
+
+  selectedIndex: null,
 
   endDate: function() {
     let todaysDate = new Date();
@@ -37,7 +33,7 @@ export default Ember.Component.extend({
   }.property(),
 
   startDate: function() {
-    return this.uiDateFormat(this.timeData.startDate);
+    return this.uiDateFormat(this.activities.startDate);
   }.property(),
 
   uiDateFormat: function(givenDate) {
@@ -81,25 +77,29 @@ export default Ember.Component.extend({
    */
   drawActiveResource() {
     const component = this;
-    let activeResource = component.get('activeResource');
-    let activeIndex = component.get('activeIndex');
-    const svg = d3
-      .select('#active-resource')
-      .append('svg')
-      .attr('class', 'center-activities');
-    component.set('timeLineContainer', svg);
-    let activeResourceGroup = svg.append('g');
-    activeResourceGroup
-      .append('circle')
-      .attr('class', `active node-${activeIndex}`);
-    activeResourceGroup
-      .append('foreignObject')
-      .append('xhtml:div')
-      .attr('class', () => {
-        return activeResource.collectionType === 'collection'
-          ? 'active-collection'
-          : 'active-assessment';
-      });
+    let selectedActivitiy = component
+      .get('activities')
+      .findBy('selected', true);
+    let selectedIndex = component.get('activities').indexOf(selectedActivitiy);
+    if (selectedIndex > -1) {
+      component.set('selectedIndex', selectedIndex);
+      const svg = d3
+        .select('#active-resource')
+        .append('svg')
+        .attr('class', 'center-activities');
+      let activeResourceGroup = svg.append('g');
+      activeResourceGroup
+        .append('circle')
+        .attr('class', `active node-${selectedIndex}`);
+      activeResourceGroup
+        .append('foreignObject')
+        .append('xhtml:div')
+        .attr('class', () => {
+          return selectedActivitiy.get('collectionType') === 'collection'
+            ? 'active-collection'
+            : 'active-assessment';
+        });
+    }
   },
 
   /**
@@ -107,9 +107,9 @@ export default Ember.Component.extend({
    */
   calculateLeftNodes() {
     let component = this;
-    let resources = this.get('timeData');
-    let activeIndex = this.get('activeIndex');
-    let leftTimeLine = resources.slice(0, activeIndex);
+    let resources = this.get('activities');
+    let selectedIndex = this.get('selectedIndex');
+    let leftTimeLine = resources.slice(0, selectedIndex);
     component.set('leftTimeLine', leftTimeLine);
     component.drawNodes(leftTimeLine, 'left');
     component.drawPath('left');
@@ -121,9 +121,9 @@ export default Ember.Component.extend({
    */
   calculateRightNodes() {
     let component = this;
-    let resources = this.get('timeData');
-    let activeIndex = this.get('activeIndex');
-    let rightTimeLine = resources.slice(activeIndex + 1, resources.length);
+    let resources = this.get('activities');
+    let selectedIndex = this.get('selectedIndex');
+    let rightTimeLine = resources.slice(selectedIndex + 1, resources.length);
     component.set('rightTimeLine', rightTimeLine);
     component.drawNodes(rightTimeLine, 'right');
     component.handleView('right');
@@ -139,15 +139,15 @@ export default Ember.Component.extend({
         ? this.get('rightTimeLine')
         : this.get('leftTimeLine');
     resources.forEach(resource => {
-      let index = this.get('timeData')
+      let index = this.get('activities')
         .map(x => x)
         .indexOf(resource);
       let node = this.$(`.${position}-node-${index}`);
       let nodeX = parseInt(node.attr('cx'));
       let nodeY = parseInt(node.attr('cy'));
-      if (index < this.get('timeData').length - 1) {
+      if (index < this.get('activities').length - 1) {
         let nextIndex = index + 1;
-        let nextResource = this.get('timeData').get(nextIndex);
+        let nextResource = this.get('activities').get(nextIndex);
         let nextNode = this.$(`.${position}-node-${nextIndex}`);
         let nextNodeY = parseInt(nextNode.attr('cy'));
         if (nextResource && nextNode.length > 0) {
@@ -239,7 +239,7 @@ export default Ember.Component.extend({
    */
   drawNodes(timeLine, position) {
     let component = this;
-    let resources = this.get('timeData');
+    let resources = this.get('activities');
     let isLeft = position === 'left';
     const svg = d3
       .select(`#${position}-activities`)
@@ -294,9 +294,7 @@ export default Ember.Component.extend({
           : 'assessment-img';
       });
     group.on('click', d => {
-      let index = resources.map(x => x).indexOf(d);
-      component.set('activeIndex', index);
-      component.set('activeResource', d);
+      component.sendAction('onSelectCard', d);
     });
   },
 
@@ -322,11 +320,13 @@ export default Ember.Component.extend({
   scrollToCenter() {
     let component = this;
     let activeOffset = component.$('#active-resource').offset().left;
-    let leftWidthContainer = component.$('.left-activities').width();
-    let rightWidthContainer = component.$('.right-activities').width();
+    let activitiesOneHalfWidthContainer =
+      component.$('.student-activities').width() / 2;
+    let activeResourceWidth = component.$('#active-resource').width();
     component.$('.student-activities').animate(
       {
-        scrollLeft: activeOffset - (leftWidthContainer + rightWidthContainer)
+        scrollLeft:
+          activeOffset - (activitiesOneHalfWidthContainer + activeResourceWidth)
       },
       'slow'
     );
