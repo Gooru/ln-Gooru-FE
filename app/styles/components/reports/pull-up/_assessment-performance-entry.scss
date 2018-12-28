@@ -22,7 +22,8 @@
         display: grid;
         grid-template-columns: auto auto;
         columns-gap: 16px;
-        .timespent-hour, .timespent-mins {
+        .timespent-hour,
+        .timespent-mins {
           display: grid;
           grid-template-columns: auto auto;
           align-items: baseline;
@@ -36,7 +37,6 @@
           &:focus {
             outline: none;
           }
-
         }
         .placeholder-text {
           font-size: 50px;
@@ -80,7 +80,8 @@
       line-height: 14px;
       border-bottom: 1px solid #3e90fa;
       justify-content: center;
-      .question-seq, .question-max-score {
+      .question-seq,
+      .question-max-score {
         font-size: 10px;
         font-weight: bold;
         color: #3e5e67;
@@ -148,7 +149,7 @@
             width: 232px;
             height: inherit;
             line-height: 40px;
-            border-right: 2px dashed rgba(45,45,45, 0.3);
+            border-right: 2px dashed rgba(45, 45, 45, 0.3);
           }
           .question-score {
             padding-left: 8px;
@@ -183,7 +184,11 @@
           color: #212121;
           $line-height: 1.5;
           $lines-to-show: 4;
-          @include ellipsis($font-size: $font-size, $line-height: $line-height, $lines-to-show: $lines-to-show);
+          @include ellipsis(
+            $font-size: $font-size,
+            $line-height: $line-height,
+            $lines-to-show: $lines-to-show
+          );
           max-height: 92px;
         }
 

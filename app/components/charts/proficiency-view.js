@@ -67,7 +67,9 @@ export default Ember.Component.extend({
     domainDataSet.map(dataSet => {
       component.drawDomainVerticalChart(domainChartContainer, dataSet);
     });
-    let skylineContainer = proficiencyChartContainer.append('g').attr('id', 'skyline-container');
+    let skylineContainer = proficiencyChartContainer
+      .append('g')
+      .attr('id', 'skyline-container');
     component.set('skylineContainer', skylineContainer);
     component.drawSkyline();
   },
@@ -90,10 +92,12 @@ export default Ember.Component.extend({
       .enter()
       .append('rect')
       .attr('class', d => {
-        let skylineClassName = d.isSkyLineCompetency ? 'skyline-competency' : '';
-        return `${skylineClassName} domain-${domainSeq} competency-${d.competencySeq} fill-${
-          d.competencyStatus
-        }`;
+        let skylineClassName = d.isSkyLineCompetency
+          ? 'skyline-competency'
+          : '';
+        return `${skylineClassName} domain-${domainSeq} competency-${
+          d.competencySeq
+        } fill-${d.competencyStatus}`;
       })
       .attr('id', 'competency-cell')
       .attr('width', cellWidth)
@@ -121,7 +125,7 @@ export default Ember.Component.extend({
     skylineElements.each(function(index) {
       let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
       let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
-      y1 = y1 === 0 ? y1 : y1 + cellHeight ;
+      y1 = y1 === 0 ? y1 : y1 + cellHeight;
       let x2 = x1 + cellWidth;
       let y2 = y1;
       let linePoint = {

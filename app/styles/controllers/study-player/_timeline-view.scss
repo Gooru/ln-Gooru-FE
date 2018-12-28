@@ -1,6 +1,10 @@
+.study-player_timeline-view {
+  overflow-y: hidden !important;
+}
+
 .timeLineViewContainer {
   top: 100vh;
-  height: 0vh;
+  height: 0;
   position: relative;
 
   .charts.gru-x-bar-chart {
@@ -18,12 +22,12 @@
     height: 22px;
     margin-top: -5px;
     object-fit: contain;
-    background: url(gooru/images/hover-show-up.svg);
+    background: url("gooru/images/hover-show-up.svg");
     background-size: 100%;
   }
 
   .msaddon:hover {
-    background: url(gooru/images/close-up.svg);
+    background: url("gooru/images/close-up.svg");
     cursor: pointer;
   }
 
@@ -34,7 +38,7 @@
   .timeSession-icon {
     position: relative;
     border: 1px solid;
-    padding: 0px;
+    padding: 0;
     border-radius: 50px;
     line-height: 24px;
     height: 24px;
@@ -50,7 +54,7 @@
   }
 
   .completion-chart:hover .msaddon {
-    background: url(gooru/images/close-up.svg);
+    background: url("gooru/images/close-up.svg");
     cursor: pointer;
   }
 
@@ -58,8 +62,8 @@
     display: block;
     width: 100%;
     height: 100%;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     position: absolute;
     border: brown;
     z-index: 21;
@@ -77,12 +81,11 @@
       width: 22px;
       height: 22px;
       object-fit: contain;
-      background: url(gooru/images/closeup.svg);
+      background: url("gooru/images/closeup.svg");
       background-size: 100%;
     }
 
     .grucount {
-      /* background: url(gooru/images/navigation_assessment.svg); */
       -webkit-background-size: 25px 25px;
       background-size: 25px 25px;
       height: 25px;
@@ -90,7 +93,7 @@
     }
 
     .pers {
-      background: url(gooru/images/navigation_assessment.svg);
+      background: url("gooru/images/navigation_assessment.svg");
       -webkit-background-size: 25px 25px;
       background-size: 25px 25px;
       height: 25px;
@@ -100,7 +103,7 @@
     .timeSession-icon {
       position: relative;
       border: 1px solid;
-      padding: 0px;
+      padding: 0;
       border-radius: 50px;
       line-height: 45px;
       height: 40px;
@@ -122,8 +125,6 @@
       border: solid 1px rgba(151, 151, 151, 0.3);
       background-color: #ffffff;
       display: flex;
-
-      /* display: none; */
       flex-direction: column;
 
       .Oval-12 {
@@ -136,12 +137,10 @@
         margin-left: 13px;
         color: #4c95d7;
 
-        /* z-index: 2; */
-
         > i {
           $size: 30px;
-
           font-size: $size;
+          cursor: pointer;
         }
       }
 
@@ -161,8 +160,6 @@
       .vbar {
         flex: 1;
         display: flex;
-
-        /*  z-index: 1; */
 
         svg {
           position: relative;
@@ -195,7 +192,8 @@
     }
 
     .v-series-parent {
-      display: flex;
+      display: grid;
+      grid-template-columns: 77px 1fr 77px;
       padding-left: 20px;
       padding-right: 20px;
       padding-top: 15px;
@@ -206,9 +204,7 @@
         opacity: 0.3;
         border-radius: 3px;
         background-color: #ffffff;
-        margin: auto;
-        margin-bottom: 20px;
-        margin-top: 40px;
+        margin: 40px auto 20px;
       }
 
       .selectedTime {
@@ -223,7 +219,6 @@
         width: 70px;
 
         .performance {
-          /* flex: 1; */
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -240,7 +235,8 @@
         }
       }
 
-      .leftDate {
+      .leftDate,
+      .rightDate {
         align-self: center;
         font-size: 16px;
         font-weight: bold;
@@ -253,642 +249,181 @@
         margin-right: 10px;
       }
 
-      .rightDate {
-        align-self: center;
-        font-size: 16px;
-        font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #211238;
-        margin-right: 8px;
-        margin-left: 10px;
-      }
-
       .chrono-timeline {
-        margin-left: 20px;
-        margin-right: 120px;
+        display: grid;
         position: relative;
-        flex: 1;
 
-        .timeline {
-          display: flex;
-          height: 70px;
-          box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
-          background-color: #ffffff;
-          justify-content: space-between;
-          list-style: none;
+        .container {
+          width: 100%;
+          height: 100%;
+          display: grid;
+          grid-template-rows: max-content 1fr;
+          grid-gap: 70px;
 
-          .grucount::before {
-            content: "%";
-            height: 2px;
-            width: 2px;
-            margin-left: 4px;
-
-            /* position: relative */
+          &:after,
+          &:before {
+            content: none;
           }
 
-          li {
+          .header {
+            width: 100%;
+            height: 70px;
+            box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+            background-color: $white;
+          }
+
+          .class-activities {
+            height: 100%;
+            padding-bottom: 60px;
+            width: 100%;
+            display: flex;
+          }
+
+          #carousel {
+            position: relative;
+            overflow: hidden;
+          }
+
+          #carousel .student-activity {
+            height: 400px;
+            width: 288px;
+            border-radius: 8px;
             margin: auto;
-            cursor: pointer;
-
-            /* position: relative; */
-          }
-
-          li::after {
             position: absolute;
-            content: attr(data-content);
-            transform: scale(0);
-            transition: transform ease-out 150ms;
+            transition: transform 1s, left 1s, opacity 1s, z-index 0s;
+            box-shadow: 0 0 3px 3px rgba(93, 93, 93, 0.3);
+            opacity: 1;
           }
 
-          li::hover::after {
+          .student-activity.left-4 {
+            z-index: 5;
+            left: 8%;
+            transform: scale(0.8);
+            height: 300px;
+            width: 158px;
+          }
+
+          .student-activity.right-1 {
+            z-index: 5;
+            left: 67%;
+            transform: scale(0.8);
+            height: 300px;
+            width: 158px;
+          }
+
+          .student-activity.selected {
+            z-index: 10;
+            left: 38%;
             transform: scale(1);
           }
 
-          .divider {
-            flex-grow: 1;
-            border-top: 2px solid dodgerblue;
-          }
-        }
-
-        .cards-display {
-          display: flex;
-          justify-content: center;
-          align-items: flex-end;
-          list-style: none;
-          margin-left: -40px;
-          margin-top: 5vh;
-
-          .cardrowscore {
-            display: flex;
-            overflow: hidden;
-            justify-items: center;
-
-            .cardTitle {
-              flex: 1;
-              font-size: 15px;
-              flex-direction: column;
-            }
-
-            .cperformance {
-              flex: 1;
-              background-color: #319848;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-self: stretch;
-
-              /* .cscore { */
-              color: #fff;
-              font-weight: bold;
-              align-self: center;
-              flex: 1;
-              height: 10vh;
-
-              .scorelable {
-                font-size: 10px;
-                align-self: center;
-
-                /*flex: 1;
-                                                                                 margin: 14px; */
-              }
-
-              .scorevlaue {
-                font-size: 25px;
-
-                /*  flex: 1;
-                                                                                 margin: auto; */
-                align-self: center;
-              }
-
-              /* }
-                                                                                                   */
-            }
-
-            .timespent {
-              flex: 1;
-              align-self: center;
-              color: black;
-              font-weight: bold;
-              display: flex;
-              flex-direction: column;
-
-              .tslable {
-                font-size: 10px;
-
-                /* flex: 1; 
-                                                                                margin: 14px; */
-                align-self: center;
-              }
-
-              .tsvalue {
-                font-size: 25px;
-
-                /* flex: 1;
-                                                                                margin: auto; */
-                align-self: center;
-              }
-            }
+          .student-activity.right-0 {
+            left: 80%;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.5);
           }
 
-          .lastaccessed {
-            overflow: hidden;
-            margin-left: 10px;
-            font-size: 15px;
-            flex-direction: column;
-            height: 101px !important;
-            align-items: center;
-            padding-top: 40px;
-            font-weight: bold;
-            justify-content: unset !important;
-
-            .lastacessedLable {
-              font-size: 10px;
-              flex: unset !important;
-            }
-
-            span {
-              padding: 0px !important;
-            }
+          .student-activity.right-4 {
+            left: 80%;
+            opacity: 0;
+            transform: scale(0.5);
           }
 
-          .cardacessinfo {
-            display: none;
-
-            span {
-              font-weight: bold;
-            }
+          .student-activity.right-0 {
+            z-index: 4;
+            left: 80%;
+            transform: scale(0.5);
+            opacity: 0.7;
+            height: 40px;
+            width: 40px;
           }
 
-          .imgAttrs {
-            width: auto;
-            height: 22vh;
-            margin: 20px;
+          .student-activity.left-3 {
+            z-index: 4;
+            left: 3%;
+            transform: scale(0.7);
+            opacity: 0.7;
+            height: 100px;
+            width: 80px;
           }
 
-          .imgClassAssesment {
-            background: url("gooru/images/navigation_assessment_selected.svg");
-
-            @extend .imgAttrs;
-
-            background-size: 66%;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            background-repeat: space;
-            background-position: center;
+          .student-activity.left-2 {
+            z-index: 3;
+            left: -2%;
+            transform: scale(0.6);
+            opacity: 0.7;
+            height: 100px;
+            width: 80px;
           }
 
-          .imgClassCollection {
-            @extend .imgAttrs;
-
-            background: url("gooru/images/navigation_collection_selected_icon.svg");
-            background-size: 66%;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            background-repeat: space;
-            background-position: center;
+          .student-activity.right-2 {
+            z-index: 4;
+            left: 72%;
+            transform: scale(0.7);
+            opacity: 0.7;
           }
 
-          .cardmask {
-            margin-left: 20px;
-            margin-right: 20px;
-            width: 370px;
-            height: 55vh;
-            border-radius: 8px;
-            box-shadow: 0 0 3px 3px rgba(93, 93, 93, 0.3);
-            background-color: #ffffff;
-            overflow: hidden;
-
-            .cardTitle {
-              height: 70px;
-
-              /*  width: 20px; */
-              box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
-              border-top: 0.5px solid gainsboro;
-              background-color: #ffffff;
-              display: flex;
-              align-items: center;
-              justify-content: space-evenly;
-
-              span {
-                /* padding: 11px; */
-                flex: 1;
-              }
-            }
-
-            .cardTypeIcon {
-              align-self: center;
-              padding: 5px;
-            }
-
-            .titleCont {
-              display: flex;
-              flex-direction: column;
-              margin-left: 10px;
-
-              .cardSubTilte {
-                width: 159px;
-                height: 14px;
-                font-size: 10px;
-                font-weight: normal;
-                font-style: normal;
-                font-stretch: normal;
-                line-height: normal;
-                letter-spacing: normal;
-                text-align: left;
-                color: #5d5d5d;
-              }
-
-              .cardMainTitle {
-                width: 257px;
-                height: 20px;
-                font-size: 15px;
-                font-weight: bold;
-                font-style: normal;
-                font-stretch: normal;
-                line-height: normal;
-                letter-spacing: normal;
-                text-align: left;
-                color: #5d5d5d;
-              }
-            }
-
-            .cardacessinfo {
-              display: block;
-              padding: 20px;
-
-              span {
-                font-weight: 900;
-                font-size: 15px;
-              }
-            }
+          .student-activity.right-3 {
+            z-index: 3;
+            left: 77%;
+            transform: scale(0.6);
+            opacity: 0.7;
           }
 
-          .cardmask-mid {
-            border-radius: 8px;
-
-            /* margin-bottom: 20px; */
-            width: 370px;
-            height: 55vh;
-            box-shadow: 0 0 3px 3px rgba(93, 93, 93, 0.3);
-            background-color: #ffffff;
-            overflow: hidden;
-
-            .imgClassAssesment {
-              @extend .imgAttrs;
-
-              background: url("gooru/images/navigation_assessment_selected.svg");
-              border-top-left-radius: 8px;
-              border-top-right-radius: 8px;
-              background-size: 83%;
-              background-repeat: space;
-              background-position: center;
-              margin: 20px;
-            }
-
-            .imgClassCollection {
-              background: url("gooru/images/navigation_collection_selected_icon.svg");
-
-              @extend .imgAttrs;
-
-              background-size: 83%;
-              background-repeat: space;
-              background-position: center;
-              border-top-left-radius: 8px;
-              border-top-right-radius: 8px;
-              margin: 20px;
-            }
-
-            .imgClassPlaceHolder {
-              width: auto;
-              height: 162px;
-              background: url("gooru/question-placeholder-image.png");
-              background-size: 90%;
-              background-position: center;
-              border-top-left-radius: 8px;
-              border-top-right-radius: 8px;
-            }
-
-            .cardTitle {
-              height: 70px;
-
-              /* width: 20px; */
-              box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
-              border-top: 0.5px solid gainsboro;
-              background-color: #ffffff;
-              display: flex;
-
-              span {
-                padding: 11px;
-                flex: 1;
-              }
-            }
-
-            .cardTypeIcon {
-              /* width: 35px;
-                                                                                                                                                          
-                                                                                                                                                                                                                                                                                                                    height: 26px;
-                                                                                                                                                                                                                                                                                                                    object-fit: contain;
-                                                                                                                                                                                                                                                                                                                    background-color: #535e67; */
-              align-self: center;
-              padding: 5px;
-            }
-
-            .titleCont {
-              display: flex;
-              flex-direction: column;
-              margin-left: 10px;
-
-              .cardSubTilte {
-                width: 159px;
-                height: 14px;
-
-                /*  font-family: OpenSans; */
-                font-size: 10px;
-                font-weight: normal;
-                font-style: normal;
-                font-stretch: normal;
-                line-height: normal;
-                letter-spacing: normal;
-                text-align: left;
-                color: #5d5d5d;
-              }
-
-              .cardMainTitle {
-                width: 157px;
-                height: 20px;
-
-                /* font-family: OpenSans; */
-                font-size: 15px;
-                font-weight: bold;
-                font-style: normal;
-                font-stretch: normal;
-                line-height: normal;
-                letter-spacing: normal;
-                text-align: left;
-                color: #5d5d5d;
-              }
-            }
+          .student-activity.left-0 {
+            left: -30px;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.5);
           }
 
-          .cardmask-small {
-            width: 288px;
-            height: 419px;
-            border-radius: 8px;
-            box-shadow: 0 0 3px 3px rgba(93, 93, 93, 0.3);
-            background-color: #ffffff;
+          .student-activity.left-1 {
+            left: -70px;
+            opacity: 0;
+            transform: scale(0.5);
           }
-
-          .dummy-timecard-left {
-            border-radius: 8px;
-            margin-right: -290px;
-            overflow: hidden;
-
-            // align-self: center;
-            // margin-top: 80px;
-
-            @extend .cardmask-mid;
-          }
-
-          .dummy-timecard-right {
-            border-radius: 8px;
-            margin-left: -290px;
-
-            /*  width: 130px;
-                                     height: 277px; */
-            overflow: hidden;
-
-            // margin-top: 80px;
-            // align-self: center;
-
-            @extend .cardmask-mid;
-          }
-
-          /* li:nth-child(3) {
-                                  background-color: yellow !important;
-                                  border: solid 2px yellow !important;
-                              } */
-
-          li:nth-child(4) {
-            margin-left: -270px;
-
-            /*     background-color: blue;
-                                    border: solid 2px blue; */
-          }
-
-          li:nth-child(6) {
-            margin-right: -270px;
-
-            // background-color: blue !important;
-            // border: solid 2px blue !important;
-          }
-
-          // li.dummy-timecard-left:nth-child(1) {
-          //     background-color: #319848 !important;
-          //     border: solid 2px #319848 !important;
-          // }
-
-          // li.dummy-timecard-left:nth-child(2) {
-          //     background-color: red !important;
-          //     border: solid 2px red !important;
-          // }
-
-          // li.dummy-timecard-right:nth-child(8) {
-          //     background-color: #319848 !important;
-          //     border: solid 2px #319848 !important;
-          // }
-
-          // li.dummy-timecard-right:nth-child(9) {
-          //     background-color: red !important;
-          //     border: solid 2px red !important;
-          // }
-
-          @media (max-width: $screen-lptp-hidpi) {
-            .cardmask-mid-data-left:first-child {
-              margin-left: -70px;
+          @media screen and (max-width: 992px) {
+            .student-activity.right-4 {
+              left: calc(100% - 28vw);
             }
 
-            .cardmask-mid-data-right:first-child {
-              margin-right: -70px;
+            .student-activity.selected {
+              left: calc(100% - 54vw);
             }
 
-            .dummy-timecard-left {
-              display: none;
+            .student-activity.right-1 {
+              left: calc(100% - 43vw);
             }
 
-            .dummy-timecard-right {
-              display: none;
+            .student-activity.right-3 {
+              left: calc(100% - 33vw);
             }
 
-            li:nth-child(4) {
-              margin-left: -200px;
-
-              /*     background-color: blue;
-                                        border: solid 2px blue; */
+            .student-activity.right-2 {
+              left: calc(100% - 38vw);
             }
 
-            li:nth-child(6) {
-              margin-right: -200px;
-
-              // background-color: blue !important;
-              // border: solid 2px blue !important;
+            .student-activity.left-4 {
+              left: calc(100% - 65vw);
             }
 
-            //
-            .lastaccessed {
-              justify-content: unset !important;
-              padding: 0px !important;
-            }
-            //
-          }
-
-          @media (max-width: $screen-sm) {
-            .cardmask-mid-data-left:first-child {
-              margin-left: -70px;
-              display: none;
+            .student-activity.left-3 {
+              left: calc(100% - 70vw);
             }
 
-            .cardmask-mid-data-right:first-child {
-              margin-right: -70px;
-              display: none;
-            }
-
-            .dummy-timecard-left {
-              display: none;
-            }
-
-            .dummy-timecard-right {
-              display: none;
-            }
-          }
-
-          @media (max-width: $screen-360) {
-            .cardmask-mid-data-left:first-child {
-              margin-left: -70px;
-              display: none;
-            }
-
-            .cardmask-mid-data-right:first-child {
-              margin-right: -70px;
-              display: none;
-            }
-
-            .dummy-timecard-left {
-              display: none;
-            }
-
-            .dummy-timecard-right {
-              display: none;
-            }
-
-            .cardmask {
-              width: unset;
-              margin-left: -10px;
-            }
-          }
-
-          /*
-                    .cardmask-mid-data-left:last-child {
-                        box-shadow: unset;
-                    }
-
-                    .cardmask-mid-data-right:last-child {
-                        box-shadow: unset;
-                    } */
-
-          .cardTitle:last-child {
-            box-shadow: unset;
-          }
-        }
-
-        .carousel-control {
-          opacity: 1;
-          background: none;
-
-          &.left {
-            z-index: 2;
-            width: 23px;
-
-            .small-arrow-left {
-              width: 23px;
-              height: 23px;
-              display: block;
-              background-image: url("../assets/gooru/images/small-arrow-left.svg");
-              background-repeat: no-repeat;
-              position: relative;
-              top: 45%;
-            }
-          }
-
-          &.right {
-            z-index: 2;
-            width: 23px;
-
-            .small-arrow-right {
-              width: 23px;
-              height: 23px;
-              display: block;
-              background-image: url("../assets/gooru/images/small-arrow-right.svg");
-              background-repeat: no-repeat;
-              position: relative;
-              top: 45%;
+            .student-activity.left-2 {
+              left: calc(100% - 75vw);
             }
           }
         }
       }
-
-      /* @media only screen and (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-                                                    @content;
-                                                } */
-
-      /*  @media (max-width: $screen-lptp-hidpi) {
-                .cardmask-mid-data-left:first-child {
-                    margin-left: -70px;
-                }
-
-                .cardmask-mid-data-right:first-child {
-                    margin-right: -70px;
-                }
-
-                .dummy-timecard-left {
-                    display: none;
-                }
-
-                .dummy-timecard-right {
-                    display: none;
-                }
-            }
-
-            @media (max-width: $screen-sm) {
-                .cardmask-mid-data-left:first-child {
-                    margin-left: -70px;
-                    display: none;
-                }
-
-                .cardmask-mid-data-right:first-child {
-                    margin-right: -70px;
-                    display: none;
-                }
-
-                .dummy-timecard-left {
-                    display: none;
-                }
-
-                .dummy-timecard-right {
-                    display: none;
-                }
-            } */
     }
 
     .bottom-perf-line {
       margin-top: auto;
       width: 100%;
       height: 40px;
-
-      /* position: fixed; */
       top: 52px;
       left: 0;
       background-color: #fff;
@@ -898,8 +433,6 @@
       .completion-chart {
         padding: 15px 20px 0 15px;
       }
-
-      /* align-self: baseline; */
     }
   }
 }

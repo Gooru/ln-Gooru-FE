@@ -60,8 +60,6 @@
       }
     }
 
-
-
     .question-score.header {
       font-size: 12px;
       font-weight: bold;
@@ -83,7 +81,8 @@
       height: 14px;
       line-height: 14px;
       border-bottom: 1px solid #3e90fa;
-      .question-seq, .question-max-score {
+      .question-seq,
+      .question-max-score {
         font-size: 10px;
         font-weight: bold;
         color: #3e5e67;
@@ -166,7 +165,8 @@
               text-align: center;
             }
           }
-          .last-name, .first-name {
+          .last-name,
+          .first-name {
             text-transform: capitalize;
             font-size: 10px;
             font-weight: bold;
@@ -182,7 +182,6 @@
                 background-color: transparent;
                 outline: none;
               }
-
             }
           }
           &.scored {
@@ -200,7 +199,6 @@
               border-bottom: 1px solid red;
               outline: none;
             }
-
           }
         }
         &.selected-student {
@@ -229,7 +227,6 @@
         background-color: #d8d8d8;
         border-radius: 50%;
         display: block;
-
       }
       .next {
         cursor: pointer;

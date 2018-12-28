@@ -39,22 +39,45 @@ export default DS.JSONAPISerializer.extend({
    * @param {JSON Object } responseData, response data returned by service (snake_case)
    * @returns{JSON Object} data normalized, converted to the form used by application(non snake_case )
    */
-  normalizeUsageData(responseData, serializedFilterData) {
-    let newStartDate = new Date();
-    let cutomResponseData =
-      responseData && responseData.content && responseData.content.length > 0
-        ? responseData.content[0].usageData
-        : [];
-    cutomResponseData.filterOptions = serializedFilterData;
-    newStartDate.setMonth(
-      newStartDate.getMonth() === 0 ? 11 : newStartDate.getMonth() - 1
-    );
-    cutomResponseData.startDate =
-      responseData && responseData.content && responseData.content.length > 0
-        ? responseData.content[0].startDate
-        : newStartDate;
+  normalizeUsageData(payload) {
+    const serializer = this;
+    const timeData = Ember.Object.create({
+      activities: Ember.A()
+    });
+    if (payload.content && payload.content.length > 0) {
+      if (Ember.isArray(payload.content[0].usageData)) {
+        timeData.set('activityStartDate', payload.content[0].startDate);
+        let activityData = payload.content[0].usageData.map(function(
+          timelineData
+        ) {
+          return serializer.normalizeChronoPerformanceSummary(timelineData);
+        });
+        timeData.set('activities', activityData);
+      }
+    }
+    return timeData;
+  },
 
-    return cutomResponseData;
+  /**
+   * Normalize a ChronoPerformanceSummary
+   * @param {*} data
+   * @return {ChronoPerformanceSummary}
+   */
+  normalizeChronoPerformanceSummary: function(data) {
+    return Ember.Object.create({
+      id: data.collectionId || data.collection_id,
+      collectionId: data.collectionId || data.collection_id,
+      timeSpent: data.timeSpent,
+      attempts: data.attempts,
+      views: data.views,
+      score: data.scoreInPercentage,
+      pathId: data.pathId,
+      sessionId: data.lastSessionId,
+      status: data.status,
+      collectionType: data.collectionType,
+      pathType: data.pathType,
+      lastAccessedDate: data.lastAccessed
+    });
   },
 
   normalizeFetch: data => {

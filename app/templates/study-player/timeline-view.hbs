@@ -1,20 +1,43 @@
 <div class='timeLineRoot'>
-    <div class='v-series-parent'>
-        <div class='performance-v-view'>
-            <div class="badge Oval-12">
-                {{gru-icon name='equalizer'  }}
-            </div>
-
-            <div class='vbar'>
-            </div>
-        </div>
-        {{player/chrono-performance/chrono-timeline performanceSummary=model.performanceSummary timeData=model.timeData scrollLeft=(action 'scrollLeft') scrollRight=(action 'scrollRight')}}
+  <div class='v-series-parent'>
+    <div class='performance-v-view'>
+      <div class="badge Oval-12" {{action "showPullUp"}}>
+        {{gru-icon name='equalizer'}}
+      </div>
+      <div class='vbar'>
+      </div>
     </div>
-    <div class="bar-charts bottom-perf-line" data-content="{{performancePercentage}}% Completed">
-        {{#if model}}
-            <div class="completion-chart">
-                {{charts/gru-x-bar-chart data=model.barchartdata mileStone=mileStone mileStoneHandler=(action 'mileStoneHandler')}}
-            </div>
-        {{/if}}
-    </div>
+    {{#if isShowTimeSeries}}
+      <div class="time-series-container hidden-xs">
+        {{charts.monthly-time-series-chart onSelectMonth="onSelectMonth" startDate=timeSeriesStartDate}}
+      </div>
+    {{/if}}
+    {{player/chrono-performance/chrono-timeline performanceSummary=performanceSummary class=class course=course timeData=timeData startDate=startDate paginateNext="paginateNext"}}
+  </div>
+  <div class="bar-charts bottom-perf-line" data-content="{{performancePercentage}}% Completed">
+    {{#if barchartdata}}
+      <div class="completion-chart">
+        {{charts/gru-x-bar-chart data=barchartdata mileStone=mileStone mileStoneHandler=(action 'mileStoneHandler')}}
+      </div>
+    {{/if}}
+  </div>
+  {{#if showPullUp}}
+    {{#gru-pull-up pullUpType="proficiency-pullup" showPullUp=showPullUp onClosePullUp="onClosePullUp" as |pull-up|}}
+      {{#if pull-up.isShowHeader}}
+        {{proficiency.learner-proficiency-pull-up
+           student=activeStudent
+           subjectBucket=subjectBucket
+           class=class
+           course=course
+           onSelectCompetency="onSelectCompetency"
+           }}
+      {{/if}}
+    {{/gru-pull-up}}
+  {{/if}}
+  {{#if isShowCompetencyContentReport}}
+    {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc isStudent=isStudent showPullUp=isShowCompetencyContentReport
+      onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
+      {{reports.pull-up.competency-content-report competency=selectedCompetency userId=activeStudent.id isStudent=isStudent}}
+    {{/reports.pull-up.competency-report}}
+  {{/if}}
 </div>
