@@ -250,5 +250,27 @@ export default Ember.Service.extend({
           }
         );
     });
+  },
+  /**
+   * Fetches the Taxonomy Subjects
+   *
+   * @param category - The classification type
+   * @returns {Promise}
+   */
+  fetchSubjectFWKs: function(category) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('taxonomyAdapter')
+        .fetchSubjectFWKs(category)
+        .then(
+          function(response) {
+            resolve(response);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });
