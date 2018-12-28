@@ -15,6 +15,7 @@ export default Ember.Component.extend({
     'activities.[]',
     'activities.@each.selected',
     function() {
+      this.set('isLoading', false);
       this.drawTimeLinePath();
     }
   ),
@@ -26,6 +27,8 @@ export default Ember.Component.extend({
   activities: null,
 
   selectedIndex: null,
+
+  isLoading: false,
 
   activitiyEndDate: Ember.computed('activities', function() {
     let lastIndex = this.get('activities').length - 1;
@@ -63,15 +66,25 @@ export default Ember.Component.extend({
   },
 
   didRender() {
-    this.scrollToCenter();
+    const component = this;
+    if (component.get('positionToCenter')) {
+      component.scrollToCenter();
+    }
   },
 
   drawTimeLinePath() {
     const component = this;
     component.clearChart();
-    component.drawActiveResource();
-    component.calculateLeftNodes();
+    let selectedActivitiy = component
+      .get('activities')
+      .findBy('selected', true);
+    let selectedIndex = component.get('activities').indexOf(selectedActivitiy);
+    if (selectedIndex > -1) {
+      component.set('selectedIndex', selectedIndex);
+    }
     component.calculateRightNodes();
+    component.calculateLeftNodes();
+    component.drawActiveResource();
   },
 
   actions: {
@@ -89,7 +102,6 @@ export default Ember.Component.extend({
       .findBy('selected', true);
     let selectedIndex = component.get('activities').indexOf(selectedActivitiy);
     if (selectedIndex > -1) {
-      component.set('selectedIndex', selectedIndex);
       let svg = d3.select('#active-resource').select('svg');
       if (!svg[0][0]) {
         svg = d3
@@ -109,6 +121,73 @@ export default Ember.Component.extend({
             ? 'active-collection'
             : 'active-assessment';
         });
+      let currentNodeX = 0; //constant cx position
+      let currentNodeY = 35; //constant xy position
+      let previousIndex = selectedIndex - 1;
+      let nextIndex = selectedIndex + 1;
+      let previousResource = component
+        .get('activities')
+        .objectAt(previousIndex);
+      let nextResource = component.get('activities').objectAt(nextIndex);
+      if (nextResource) {
+        let nextNode = this.$(`.right-node-${nextIndex}`);
+        let nextNodeY = parseInt(nextNode.attr('cy'));
+        if (currentNodeY === nextNodeY) {
+          this.drawHorizontalLine(
+            {
+              x: 80, //constant startpoint position
+              y: currentNodeY - 5,
+              length: 20
+            },
+            nextResource.pathId,
+            'center'
+          );
+        } else {
+          this.drawCurve(
+            {
+              x: 80,
+              y: currentNodeY
+            },
+            {
+              x: nextNodeY - currentNodeY,
+              y: currentNodeY - 5,
+              curve: 20
+            },
+            nextResource.pathId,
+            'center'
+          );
+        }
+      }
+
+      if (previousResource) {
+        let previousNode = this.$(`.left-node-${previousIndex}`);
+        let prevNodeY = parseInt(previousNode.attr('cy'));
+        if (currentNodeY === prevNodeY) {
+          this.drawHorizontalLine(
+            {
+              x: currentNodeX,
+              y: currentNodeY - 5,
+              length: 20
+            },
+            selectedActivitiy.pathId,
+            'center'
+          );
+        } else {
+          this.drawCurve(
+            {
+              x: currentNodeX,
+              y: currentNodeY
+            },
+            {
+              x: currentNodeY - prevNodeY,
+              y: prevNodeY - 5,
+              curve: 20
+            },
+            selectedActivitiy.pathId,
+            'center'
+          );
+        }
+      }
     }
   },
 
@@ -161,56 +240,30 @@ export default Ember.Component.extend({
         let nextNode = this.$(`.${position}-node-${nextIndex}`);
         let nextNodeY = parseInt(nextNode.attr('cy'));
         if (nextResource && nextNode.length > 0) {
-          if (nextResource.pathId) {
-            if (nodeY === nextNodeY) {
-              this.drawHorizontalLine(
-                {
-                  x: nodeX,
-                  y: nodeY
-                },
-                nextResource.pathId,
-                position
-              );
-            } else {
-              this.drawCurve(
-                {
-                  x: nodeX,
-                  y: nodeY
-                },
-                {
-                  x: nextNodeY - nodeY,
-                  y: nodeY,
-                  curve: 0
-                },
-                nextResource.pathId,
-                position
-              );
-            }
+          if (nodeY === nextNodeY) {
+            this.drawHorizontalLine(
+              {
+                x: nodeX + 8,
+                y: nodeY,
+                length: 14
+              },
+              nextResource.pathId,
+              position
+            );
           } else {
-            if (nodeY === nextNodeY) {
-              this.drawHorizontalLine(
-                {
-                  x: nodeX,
-                  y: nodeY
-                },
-                nextResource.pathId,
-                position
-              );
-            } else {
-              this.drawCurve(
-                {
-                  x: nodeX,
-                  y: nodeY
-                },
-                {
-                  x: nextNodeY - nodeY,
-                  y: nodeY,
-                  curve: 0
-                },
-                nextResource.pathId,
-                position
-              );
-            }
+            this.drawCurve(
+              {
+                x: nodeX + 10,
+                y: nodeY
+              },
+              {
+                x: nextNodeY - nodeY,
+                y: nodeY,
+                curve: 10
+              },
+              nextResource.pathId,
+              position
+            );
           }
         }
       }
@@ -226,7 +279,7 @@ export default Ember.Component.extend({
       .attr('class', () => {
         return isSuggestion ? 'suggestion-line' : 'line';
       })
-      .attr('d', `M ${startPoint.x + 8} ${startPoint.y} l 14 0`);
+      .attr('d', `M ${startPoint.x} ${startPoint.y} l ${startPoint.length} 0`);
   },
 
   /**
@@ -240,7 +293,7 @@ export default Ember.Component.extend({
       })
       .attr(
         'd',
-        `M ${startPoint.x + 10} ${points.y} q 5 ${points.curve} 10 ${points.x}`
+        `M ${startPoint.x} ${points.y} q 5 0 ${points.curve} ${points.x}`
       );
   },
 
@@ -307,6 +360,7 @@ export default Ember.Component.extend({
           : 'assessment-img';
       });
     group.on('click', d => {
+      component.set('positionToCenter', true);
       component.sendAction('onSelectCard', d);
     });
   },
@@ -337,15 +391,20 @@ export default Ember.Component.extend({
     let activeResourceWidth = component.$('#active-resource').width();
     let scrollLeft =
       component.$('.student-activities').scrollLeft() +
-      (activeOffset - (activitiesOneHalfWidthContainer + activeResourceWidth));
+      (activeOffset -
+        (activitiesOneHalfWidthContainer + (activeResourceWidth + 50)));
     component.$('.student-activities').scrollLeft(scrollLeft);
+    component.set('positionToCenter', false);
   },
 
   paginateNext() {
     let component = this;
-    component.$('.student-activities').scroll(function() {
-      if (component.$(this).scrollLeft() === 0) {
-        component.sendAction('onPaginateNext');
+    component.$('.student-activities').scroll(() => {
+      if (component.$('.student-activities').scrollLeft() === 0) {
+        if (!component.get('isLoading')) {
+          component.sendAction('onPaginateNext');
+          component.set('isLoading', true);
+        }
       }
     });
   },

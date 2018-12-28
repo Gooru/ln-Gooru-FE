@@ -1,6 +1,6 @@
 <div class="container">
   <div class="header">
-    {{player.chrono-view.chrono-header performanceSummary=performanceSummary onOpenCourseReport="onOpenCourseReport" onPaginateNext="onPaginateNext" startDate=startDate activities=activities onSelectCard="onSelectCard"}}
+    {{player.chrono-view.chrono-header performanceSummary=performanceSummary positionToCenter=positionToCenter onOpenCourseReport="onOpenCourseReport" onPaginateNext="onPaginateNext" startDate=startDate activities=activities onSelectCard="onSelectCard"}}
   </div>
   <div class="body class-activities" id="carousel">
     {{#each activities as |activitiy index|}}
@@ -12,5 +12,5 @@
   {{reports.pull-up.student-course-report onClosePullUp="onClosePullUp" context=studentCourseReportContext showPullUp=showCourseReport}}
 {{/if}}
 {{#if showCollectionReport}}
-  {{class.gru-report-panel showPullUp=showCollectionReport reportData=studentCollectionReportContext isStudent=studentCollectionReportContext.isStudent onClosePullUp="onClosePullUp"}}
+  {{class.gru-report-panel showPullUp=showCollectionReport reportData=studentCollectionReportContext  model=studentCollectionReportContext.lesson isStudent=studentCollectionReportContext.isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}

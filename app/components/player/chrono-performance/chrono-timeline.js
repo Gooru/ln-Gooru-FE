@@ -9,6 +9,11 @@ export default Ember.Component.extend({
   // Dependencies
   session: Ember.inject.service('session'),
 
+  /**
+   * @requires {LessonService} Service to retrieve a lesson
+   */
+  lessonService: Ember.inject.service('api-sdk/lesson'),
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -21,6 +26,8 @@ export default Ember.Component.extend({
   studentCourseReportContext: null,
 
   studentCollectionReportContext: null,
+
+  positionToCenter: true,
 
   activities: Ember.computed(
     'timeData.[]',
@@ -61,6 +68,7 @@ export default Ember.Component.extend({
       component.checkPagination(selectedIndex);
       selectedTimeData.set('selected', false);
       activity.set('selected', true);
+      component.set('positionToCenter', true);
     }
   },
 
@@ -135,20 +143,35 @@ export default Ember.Component.extend({
 
   openStudentCollectionReport(collection, collectionType) {
     let component = this;
-    let params = {
-      userId: component.get('session.userId'),
-      classId: component.get('class.id'),
-      courseId: component.get('course.id'),
-      unitId: collection.get('unitId'),
-      lessonId: collection.get('lessonId'),
-      collectionId: collection.get('id'),
-      type: collectionType,
-      isStudent: true,
-      isTeacher: false,
-      collection
-    };
-    component.set('studentCollectionReportContext', params);
-    component.set('showCollectionReport', true);
+    const lessonPromise = component.get('course.id')
+      ? component
+        .get('lessonService')
+        .fetchById(
+          component.get('course.id'),
+          collection.get('unitId'),
+          collection.get('lessonId')
+        )
+      : null;
+    return Ember.RSVP.hashSettled({
+      lesson: lessonPromise
+    }).then(function(hash) {
+      let lesson = hash.lesson.state === 'fulfilled' ? hash.lesson.value : null;
+      let params = {
+        userId: component.get('session.userId'),
+        classId: component.get('class.id'),
+        courseId: component.get('course.id'),
+        unitId: collection.get('unitId'),
+        lessonId: collection.get('lessonId'),
+        collectionId: collection.get('id'),
+        lesson: lesson,
+        type: collectionType,
+        isStudent: true,
+        isTeacher: false,
+        collection
+      };
+      component.set('studentCollectionReportContext', params);
+      component.set('showCollectionReport', true);
+    });
   },
 
   openStudentCourseReport() {

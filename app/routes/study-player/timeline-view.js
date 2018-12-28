@@ -111,7 +111,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('class', model.class);
     controller.set('performanceSummary', model.performanceSummary);
     controller.set('course', model.course);
-    controller.set('limit', this.get('pageSize'));
     controller.set('barchartdata', model.barchartdata);
   },
 

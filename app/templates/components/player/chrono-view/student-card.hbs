@@ -10,24 +10,36 @@
       <div class="title ellipsis">
         <span class="ellipsis">{{collection.title}}</span>
       </div>
-      <div class="performance" {{action "onOpenCollectionReport" activitiy}} style="background-color:{{if activitiy (grade-color activitiy.score) defaultBarColor}}">
-        <span class="score">
-        {{#if activitiy}}
-          {{#if activitiy.score}}
-            {{activitiy.score}}%
-          {{else}}
-            0%
-          {{/if}}
-        {{else}}
-          --
-        {{/if}}
-      </span>
-      </div>
+      {{#if (eq type 'collection')}}
+        <div class="performance {{if (eq activitiy.timeSpent 0) 'in-progress'}}" {{action "onOpenCollectionReport"}} style="background-color:{{defaultBarColor}}">
+          <span class="time-spent">
+            {{#if activitiy.timeSpent}}
+              {{format-time activitiy.timeSpent}}
+            {{else}}
+              &dash;&dash;
+            {{/if}}
+          </span>
+        </div>
+      {{else}}
+        <div class="performance {{if (eq activitiy.status 'in-progress') 'in-progress'}}" {{action "onOpenCollectionReport"}} style="background-color:{{if activitiy (grade-color activitiy.score) defaultBarColor}}">
+          <span class="score">
+            {{#if activitiy}}
+              {{#if activitiy.score}}
+                {{activitiy.score}}%
+              {{else}}
+                0%
+              {{/if}}
+            {{else}}
+              --
+            {{/if}}
+          </span>
+        </div>
+      {{/if}}
     </div>
     <div class="collections">
       {{#each collection.children as |resource|}}
         <div class="resource">
-          {{#if (eq type "assessment")}}
+          {{#if (eq type 'assessment')}}
             <i class="question-img"></i>
           {{else}}
             <i class="resource-img {{resource.format}}"></i>

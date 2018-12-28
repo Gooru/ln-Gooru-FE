@@ -30,14 +30,16 @@ export default Ember.Controller.extend({
 
   barChartData: null,
 
-  limit: null,
+  limit: 15,
 
   offset: 0,
+
   isStudent: false,
 
   showPullUp: false,
 
   activeSubject: null,
+
   activeStudent: null,
 
   mileStone: Ember.computed(function() {
@@ -86,7 +88,6 @@ export default Ember.Controller.extend({
     },
     showPullUp() {
       let component = this;
-      console.log("pullllluppp");
       component.set('showPullUp', true);
     },
     onClosePullUp() {
@@ -94,10 +95,9 @@ export default Ember.Controller.extend({
     },
     onSelectCompetency(competency) {
       let controller = this;
-      console.log("competency", competency);
       controller.set('selectedCompetency', competency);
       controller.set('isShowCompetencyContentReport', true);
-    },
+    }
   },
   /**
    * @function fetchSubjectsByCategory
@@ -126,15 +126,10 @@ export default Ember.Controller.extend({
     component.set('isStudent', true);
     return Ember.RSVP.hash({
       studentDetails: Ember.RSVP.resolve(
-        component
-        .get('profileService')
-        .readUserProfile(userId)
+        component.get('profileService').readUserProfile(userId)
       )
-    }).then(({
-      studentDetails
-    }) => {
+    }).then(({ studentDetails }) => {
       component.set('activeStudent', studentDetails);
-      console.log("studentDetails", studentDetails);
     });
   },
   /**

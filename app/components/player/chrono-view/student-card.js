@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { STUDY_PLAYER_BAR_COLOR } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -34,16 +33,28 @@ export default Ember.Component.extend({
   /**
    * @property {String} color - Hex color value for the default bgd color of the bar chart
    */
-  defaultBarColor: STUDY_PLAYER_BAR_COLOR,
+  defaultBarColor: '#E3E5EA',
 
+  /**
+   * @property {collection}
+   */
   collection: null,
 
+  /**
+   * @property {type}
+   */
   type: Ember.computed('activitiy', function() {
     return this.get('activitiy.collectionType');
   }),
 
+  /**
+   * @property {activitiy}
+   */
   activitiy: null,
 
+  /**
+   * @property {loading}
+   */
   loading: true,
 
   init() {
@@ -52,7 +63,7 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function  getcollection summary report by student
+   * @function  getCollection summary report by student
    */
   getStundentCollectionReport() {
     let component = this;
