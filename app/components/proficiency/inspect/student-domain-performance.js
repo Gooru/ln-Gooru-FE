@@ -139,8 +139,15 @@ export default Ember.Component.extend({
   handleResize() {
     let component = this;
     let curDeviceVW = window.screen.width;
+    let curDeviceVH = window.screen.height;
     let mobilePotraitVW = component.get('mobilePotraitVW');
-    component.set('isMobilePotraitView', curDeviceVW <= mobilePotraitVW);
+    let domainsCoverageContainer = component.$('.domains-coverage-container');
+    let domainsPerformanceContainer = component.$(
+      '.domains-performance-container'
+    );
+    if (!component.get('isDestroyed') || component.get('isDestroying')) {
+      component.set('isMobilePotraitView', curDeviceVW <= mobilePotraitVW);
+    }
     let scrollableContainer = component.$('.scrollable-container');
     scrollableContainer.animate(
       {
@@ -148,5 +155,10 @@ export default Ember.Component.extend({
       },
       400
     );
+    if (curDeviceVH - 280 < domainsPerformanceContainer.height()) {
+      domainsCoverageContainer.addClass('scrollable-margin');
+    } else {
+      domainsCoverageContainer.removeClass('scrollable-margin');
+    }
   }
 });

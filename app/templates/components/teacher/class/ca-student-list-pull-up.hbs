@@ -3,11 +3,10 @@
   <div class="ca-student-list-header">
     <div class="ca-student-selected-ctn">
       {{#if (eq usersCount -1)}}
-        <span>Everyone</span>
-      {{else if (eq usersCount 0)}}
-        <span>No Students Selected</span>
+        <span>{{t 'common.everyone'}}</span> {{else if (eq usersCount 0)}}
+        <span>{{t 'common.no-students'}}</span>
       {{else}}
-        <span> {{usersCount}}  Students Selected</span>
+        <span> {{usersCount}}  {{t 'common.students'}}</span>
       {{/if}}
     </div>
     <div class="search-student-container">
@@ -22,6 +21,13 @@
         </label>
       </div>
     </div>
+  </div>
+  <div class="ca-student-list-select-ctn">
+    {{#if (eq usersCount -1)}}
+      <button class="btn btn-primary de-select" {{action 'onDeSelect'}}>{{t 'common.de-select'}}</button>
+    {{else}}
+      <button class="btn btn-primary select-all" {{action 'onSelectAll'}}>{{t 'common.select-all'}}</button>
+    {{/if}}
   </div>
   <div class="student-list-container">
     {{#each studentSearchResults as |student| }}
@@ -45,8 +51,8 @@
     {{/each}}
   </div>
   <div class="action-buttons">
-    <button class="btn" {{action 'onPullUpClose'}}>Cancel</button>
-    <button class="btn btn-primary save-users" {{action 'saveUsersToClassActivityContent'}}>Save</button>
+    <button class="btn" {{action 'onPullUpClose'}}>{{t 'common.cancel'}}</button>
+    <button class="btn btn-primary save-users" {{action 'saveUsersToClassActivityContent'}}>{{t 'common.save'}}</button>
   </div>
 </div>
 {{#if isLoading}}

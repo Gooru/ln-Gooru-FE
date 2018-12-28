@@ -60,14 +60,22 @@ export default Ember.Controller.extend(ModalMixin, {
         ☐  Student grade setting Button present before delete to apply the grade setting
     */
   classDisplayRules: function() {
-    let course = this.get('course.id'),
-      subject = this.get('subject'),
-      premium = this.get('isPremiumClass');
-
-    Ember.Logger.log(
-      `course: ${course}, subject : ${subject} , premium : ${premium}`
-    );
+    /* Set class display rules here */
   },
+
+  isClassBaselined: Ember.computed('class.members', function() {
+    let controller = this;
+    const classMembers = controller.get('class.members');
+    let isBaselined = true;
+    if (classMembers && classMembers.length > 0) {
+      let baselineMembers = classMembers.filter(
+        mem => mem.profileBaselineDone === true
+      );
+      isBaselined = baselineMembers && baselineMembers.length > 0;
+    }
+
+    return isBaselined;
+  }),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -283,6 +291,7 @@ export default Ember.Controller.extend(ModalMixin, {
         },
         callback: {
           success: function() {
+            controller.get('classMembers').removeObject(student);
             controller.get('sortedMembers').removeObject(student);
           }
         }
@@ -350,25 +359,14 @@ export default Ember.Controller.extend(ModalMixin, {
       const controller = this;
       if (controller.get('course.id') && controller.get('sanitizedSubject')) {
         let settings = {
-            grade_lower_bound: controller.get('class.gradeLowerBound'),
-            grade_upper_bound: controller.get('class.gradeUpperBound'),
-            grade_current: controller.get('class.gradeCurrent'),
-            route0: controller.get('class.route0Applicable')
+            grade_lower_bound: controller.get('tempClass.gradeLowerBound'),
+            grade_upper_bound: controller.get('tempClass.gradeUpperBound'),
+            grade_current: controller.get('tempClass.gradeCurrent'),
+            route0: controller.get('tempClass.route0Applicable')
           },
           akey = setKey ? setKey : 'route0';
 
         settings[akey] = value;
-
-        let normalizedClassSettings = {
-          gradeLowerBound: settings.grade_lower_bound,
-          gradeUpperBound: settings.grade_upper_bound,
-          gradeCurrent: settings.grade_current,
-          route0Applicable: settings.route0
-        };
-
-        let curClass = controller.get('class');
-        curClass.setProperties(normalizedClassSettings);
-        controller.set('class', curClass);
 
         let tClass = controller.get('tempClass');
         tClass.set('gradeLowerBound', settings.grade_lower_bound);
@@ -388,27 +386,26 @@ export default Ember.Controller.extend(ModalMixin, {
     updateClassMembersSettings: function(student, value, setKey) {
       const controller = this;
       if (controller.get('course.id') && controller.get('sanitizedSubject')) {
+        let oldDestination = student.get('gradeUpperBound');
+        let oldOrigin = student.get('gradeLowerBound');
+        student.set('regeneratePathway', false);
+
         let settings = {
-            grade_lower_bound: student.get('gradeLowerBound'),
-            grade_upper_bound: student.get('gradeUpperBound'),
+            grade_lower_bound: oldOrigin,
+            grade_upper_bound: oldDestination,
             users: [student.id]
           },
           akey = setKey ? setKey : '';
+
         settings[akey] = value;
         student.set('gradeLowerBound', settings.grade_lower_bound);
         student.set('gradeUpperBound', settings.grade_upper_bound);
-        /*  let normalizedClassSettings = {
-          gradeLowerBound: settings.grade_lower_bound,
-          gradeUpperBound: settings.grade_upper_bound,
-          gradeCurrent: settings.grade_current,
-          route0Applicable: settings.route0
-        };
 
-        let curClass = this.get('class');
-        curClass.setProperties(normalizedClassSettings); */
+        if (settings.grade_upper_bound !== oldDestination) {
+          student.set('regeneratePathway', true);
+        }
+
         controller.updateBondValueToSingleStudent(student);
-
-        //controller.updateClassMembersSettings(settings); // No Api calls on update only save settings
       } else {
         Ember.Logger.log(
           'Course or Subject not assigned to class, cannot update class settings'
@@ -442,20 +439,20 @@ export default Ember.Controller.extend(ModalMixin, {
       controller.saveClass();
     },
 
-    classMembersToggle: function(student) {
+    classMembersToggle: function(targetStatusActive, student) {
       const controller = this;
       if (controller.get('course.id') && controller.get('sanitizedSubject')) {
         let settings = {
           users: [student.id]
         };
 
-        if (student.isActive) {
-          controller.classMembersDeactivate(settings);
-        } else {
+        if (targetStatusActive) {
           controller.classMembersActivate(settings);
+        } else {
+          controller.classMembersDeactivate(settings);
         }
 
-        student.set('isActive', !student.isActive); //Toggle Status
+        student.set('isActive', targetStatusActive); //Toggle Status
         controller.updateBondValueToSingleStudent(student);
       } else {
         Ember.Logger.log(
@@ -468,10 +465,10 @@ export default Ember.Controller.extend(ModalMixin, {
       const controller = this;
       if (controller.get('course.id') && controller.get('sanitizedSubject')) {
         let settings = {
-          grade_lower_bound: controller.get('class.gradeLowerBound'),
-          grade_upper_bound: controller.get('class.gradeUpperBound'),
-          grade_current: controller.get('class.gradeCurrent'),
-          route0: controller.get('class.route0Applicable')
+          grade_lower_bound: controller.get('tempClass.gradeLowerBound'),
+          grade_upper_bound: controller.get('tempClass.gradeUpperBound'),
+          grade_current: controller.get('tempClass.gradeCurrent'),
+          route0: controller.get('tempClass.route0Applicable')
         };
         controller.updateClassSettings(settings); // Call api with whatever is saved
       } else {
@@ -484,54 +481,51 @@ export default Ember.Controller.extend(ModalMixin, {
       const controller = this;
       let classV = controller.get('class'),
         classLB = classV.gradeLowerBound,
-        classUB = classV.gradeUpperBound,
-        classCurrent = classV.classCurrent,
+        classCurrent = classV.gradeCurrent,
         source = controller.get('subjectTaxonomyGrades'),
-        sourceFilteredByClassRange = controller.filterRange(
-          source,
-          null,
-          classLB,
-          classUB
-        ),
         sourceFilteredByContext;
 
       // class filters
       if (posParam === 'student-origin' || posParam === 'student-destination') {
         if (posParam === 'student-origin') {
-          sourceFilteredByContext = controller.filterRange(
-            sourceFilteredByClassRange,
-            null,
-            classLB,
-            context.gradeUpperBound
-          );
+          if (classLB) {
+            sourceFilteredByContext = controller.filterRange(
+              source,
+              classLB,
+              context.gradeLowerBound || classCurrent
+            );
+          }
+          /* Student's lower bound can't be SET if class lower bound is null
+             Student's lower bound can't be lower than class lower bound
+             Student's destination can be set to any value greater than or equal to class grade
+             Shrinking is not allowed .i.e. student
+             */
         } else if (posParam === 'student-destination') {
-          sourceFilteredByContext = controller.filterRange(
-            sourceFilteredByClassRange,
-            null,
-            context.gradeLowerBound,
-            classUB
-          );
+          if (classCurrent) {
+            sourceFilteredByContext = controller.filterRange(
+              source,
+              context.gradeUpperBound ||
+                classCurrent ||
+                context.gradeLowerBound ||
+                classLB,
+              null
+            );
+          }
+          /* Student's upper bound can't be SET if class current bound is null */
         }
       } else if (posParam === 'class-origin') {
         sourceFilteredByContext = controller.filterRange(
           source,
-          null,
-          classLB,
-          context.gradeUpperBound
+          classLB ? 0 : null,
+          classLB ? classLB : controller.get('tempClass.gradeCurrent')
         );
-      } else if (posParam === 'class-destination') {
-        sourceFilteredByContext = controller.filterRange(
-          source,
-          classCurrent,
-          classLB,
-          context.gradeUpperBound // once set class ub should not be shrinked
-        );
+        /*  The grade_lower_bound should be less than or equal to current_grade
+        The grade_lower_bound can be modified multiple times. However, it can't be made higher than previous value  */
       } else if (posParam === 'class-current') {
         sourceFilteredByContext = controller.filterRange(
           source,
-          null,
-          classLB,
-          context.gradeUpperBound // once set class ub should not be shrinked
+          controller.get('tempClass.gradeLowerBound'),
+          classCurrent // Once set class current cant be updated so if would always be null, once called for
         );
       }
 
@@ -542,28 +536,25 @@ export default Ember.Controller.extend(ModalMixin, {
 
   currentFilterList: null, //Dynamic filtered list
 
-  filterRange: function(filterSource, current, lb, ub) {
-    if (current) {
-      lb = current; //Get value
-    }
+  filterRange: function(filterSource, lb, ub) {
     let filteredDest = null;
     if (filterSource && lb && ub) {
       // if ub and lb , cg is between lb and ub
-      filteredDest = filterSource.map(srcrow => {
-        if (srcrow && srcrow.id >= lb && srcrow.id <= ub) {
-          return srcrow;
+      filteredDest = filterSource.map(srcRow => {
+        if (srcRow && srcRow.id >= lb && srcRow.id <= ub) {
+          return srcRow;
         }
       });
     } else if (filterSource && (lb && !ub)) {
-      filteredDest = filterSource.map(srcrow => {
-        if (srcrow && srcrow.id >= lb) {
-          return srcrow;
+      filteredDest = filterSource.map(srcRow => {
+        if (srcRow && srcRow.id >= lb) {
+          return srcRow;
         }
       });
     } else if (filterSource && (!lb && ub)) {
-      filteredDest = filterSource.map(srcrow => {
-        if (srcrow && srcrow.id <= ub) {
-          return srcrow;
+      filteredDest = filterSource.map(srcRow => {
+        if (srcRow && srcRow.id <= ub) {
+          return srcRow;
         }
       });
     } else if (filterSource && (!lb && !ub)) {
@@ -588,6 +579,11 @@ export default Ember.Controller.extend(ModalMixin, {
    * @property {Course}
    */
   course: Ember.computed.alias('classController.course'),
+
+  /**
+   * @property {classMembers}
+   */
+  classMembers: Ember.computed.alias('classController.members.members'),
 
   /**
    * @type {Boolean}
@@ -744,37 +740,21 @@ export default Ember.Controller.extend(ModalMixin, {
   currentGradeDDValue: null,
   getCurrentGradeDDContent: Ember.computed(
     'subjectTaxonomyGrades',
-    'class.grade_lower_bound',
-    'class.grade_upper_bound',
+    'class.gradeLowerBound',
     function() {
       const controller = this;
-      let subjecttgs = controller.get('subjectTaxonomyGrades'),
-        classub = controller.get('class.gradeUpperBound'),
-        classlb = controller.get('class.gradeLowerBound'),
+      let subjectTGS = controller.get('subjectTaxonomyGrades'),
+        classLB = controller.get('tempClass.gradeLowerBound'),
         filteredGrades = null;
-      if (subjecttgs && classlb && classub) {
-        // if ub and lb , cg is btwn lb and ub
-        filteredGrades = subjecttgs.map(subg => {
-          if (subg.id >= classlb && subg.id <= classub) {
-            return subg;
+      if (subjectTGS && classLB) {
+        filteredGrades = subjectTGS.map(subjectGrade => {
+          if (subjectGrade.id >= classLB) {
+            return subjectGrade;
           }
         });
-      } else if (subjecttgs && (classlb && !classub)) {
-        filteredGrades = subjecttgs.map(subg => {
-          if (subg.id >= classlb) {
-            return subg;
-          }
-        });
-      } else if (subjecttgs && (!classlb && classub)) {
-        filteredGrades = subjecttgs.map(subg => {
-          if (subg.id <= classub) {
-            return subg;
-          }
-        });
-      } else if (subjecttgs && (!classlb && !classub)) {
-        filteredGrades = subjecttgs; //all
+      } else if (subjectTGS && !classLB) {
+        filteredGrades = subjectTGS; //all
       }
-
       controller.set('currentGradeDDValue', filteredGrades);
       return filteredGrades;
     }
@@ -835,8 +815,9 @@ export default Ember.Controller.extend(ModalMixin, {
     controller
       .get('classService')
       .profileBaseLine(classId, users)
-      .then(function(/* responseData */) {
-        /*    //Do noting for success  */
+      .then(() => {
+        controller.send('refreshRoute');
+        controller.refreshRouter();
       });
   },
 
@@ -901,8 +882,23 @@ export default Ember.Controller.extend(ModalMixin, {
 
         if (!controller.get('isPremiumClass')) {
           controller.generateClassPathway(); // Call LP // Baseline class on setting save for not premium
+        } else {
+          controller.send('refreshRoute');
+          controller.refreshRouter();
         }
       });
+  },
+
+  refreshRouter: function() {
+    const controller = this;
+    const queryParams = {
+      refresh: `_${Math.random()
+        .toString()
+        .substr(2)}`
+    };
+    controller.transitionToRoute({
+      queryParams
+    });
   },
 
   updateClassMembersSettings: function(settings) {

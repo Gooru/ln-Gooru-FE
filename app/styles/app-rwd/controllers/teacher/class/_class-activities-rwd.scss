@@ -1,16 +1,16 @@
 .controller.teacher.class.class-activities {
-  .dca-content-container {
-    .dca-list-container {
-      padding: 0px;
-      height: calc(100vh - 105px);
-    }
-  }
+  .ca-panel {
+    grid-template-columns: 1fr;
 
-  @media screen and (max-width: $screen-600) {
-    .dca-content-container {
-      .ca-date-and-add-content {
-        grid-template-columns: 1fr;
-        height: 100px;
+    .ca-left-panel {
+      .dca-content-container {
+        padding: 0;
+
+        .dca-list-container {
+          padding: 4px;
+          height: calc(100vh - 105px);
+          padding-bottom: 50px;
+        }
       }
     }
   }

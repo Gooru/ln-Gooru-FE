@@ -1,3 +1,14 @@
+{{#if userAlert }}
+<div class="ticker-wrap">
+  <i class="gru-icon material-icons ticker-close" {{action "onCloseAlert"}}>close</i>
+      <div class="ticker">
+        <div class="ticker__item"> 
+          {{userAlert}} 
+        </div>
+    </div>
+</div>
+{{/if}}
+
 {{#if isRedirectionDomainDone}}
   {{#if tenant}}
     {{tenant.gru-tenant-theme tenant=tenant}}

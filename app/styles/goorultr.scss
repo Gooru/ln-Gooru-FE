@@ -47,6 +47,7 @@ $box-shadow: 1px -1px;
 @import "controllers/profile/content/resources";
 @import "controllers/profile/content/rubrics";
 @import "controllers/profile/about";
+
 @import "controllers/profile/edit";
 @import "controllers/profile/courses";
 @import "controllers/profile/network";
@@ -191,6 +192,7 @@ $box-shadow: 1px -1px;
 @import "components/class/learner/gru-learner-accordion-unit";
 @import "components/class/learner/gru-learner-accordion-lesson";
 @import "components/profile/gru-navigation-tabs";
+@import "components/profile/_change-password";
 @import "components/content/assessments/gru-assessment-edit";
 @import "components/content/gru-audience";
 @import "components/content/gru-category";
@@ -344,9 +346,10 @@ $box-shadow: 1px -1px;
 @import "components/student/class/gru-class-navigation";
 @import "components/student/class/analytics/gru-performance-table";
 @import "components/teacher/class/gru-class-statistics";
-@import "components/teacher/class/search-content-pull-up";
+@import "components/teacher/class/ca-search-content-pull-up";
 @import "components/teacher/suggestion-pull-up";
-@import "components/teacher/class/dca-course-map-pull-up";
+@import "components/teacher/class/ca-course-map";
+@import "components/teacher/class/ca-unscheduled-items-pullup";
 @import "components/teacher/class/ca-student-list-pull-up";
 @import "components/teacher/navigator-math-banner";
 @import "components/taxonomy/gru-subject-course-picker";
@@ -369,6 +372,7 @@ $box-shadow: 1px -1px;
 @import "components/proficiency/learner-proficiency-domain-matrix";
 @import "components/proficiency/competency-content-info";
 @import "components/class/overview/route-suggestion-proficiency-matrix";
+@import "components/ca-date-picker";
 //ATC View
 @import "components/teacher/class-atc-view";
 @import "components/teacher/class-performance-chart";
@@ -411,3 +415,8 @@ $box-shadow: 1px -1px;
 // Chronological View
 @import "components/player/chrono-view/chrono-header";
 @import "components/player/chrono-view/student-card";
+// Performance Manual Entry
+@import "components/reports/pull-up/performance-manual-entry";
+@import "components/reports/pull-up/assessment-performance-entry";
+@import "components/reports/pull-up/external-assessment-performance-entry";
+@import "components/reports/pull-up/collection-performance-entry";

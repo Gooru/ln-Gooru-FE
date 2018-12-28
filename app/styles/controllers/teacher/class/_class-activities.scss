@@ -1,5 +1,7 @@
 .teacher_class_class-activities {
   .app-container {
+    overflow-y: hidden;
+
     .teacher.class {
       padding: 0;
     }
@@ -8,9 +10,8 @@
 
 .controller.teacher.class.class-activities {
   padding: 0;
-  margin: 20px 0;
-  max-width: 960px;
   margin: 0 auto;
+  color: #35424b;
   position: relative;
 
   .ca-title {
@@ -26,249 +27,251 @@
     }
   }
 
-  .loading-spinner {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    visibility: hidden;
-    &.active {
-      visibility: visible;
-    }
-  }
+  .ca-panel {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-column-gap: 50px;
 
-  .dca-content-container {
-    position: relative;
-
-    .ca-date-and-add-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background-color: #fff;
-      height: 50px;
-      border-radius: 4px;
-      user-select: none;
-
-      .ca-date-container {
+    .ca-left-panel {
+      .loading-spinner {
+        position: absolute;
+        z-index: 2;
         width: 100%;
-        position: relative;
-        display: grid;
-        grid-template-columns: 50px 1fr 50px;
+        height: 100%;
+        display: flex;
         align-items: center;
-        justify-items: center;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+        visibility: hidden;
 
-        .prev-cal-arrow {
-          height: 20px;
-          cursor: pointer;
-          color: #ccc;
+        &.active {
+          visibility: visible;
         }
+      }
 
-        .next-cal-arrow {
-          height: 20px;
-          cursor: pointer;
-          color: #ccc;
-        }
+      .dca-content-container {
+        padding-left: 20px;
 
-        .cal-mm-yyyy {
-          display: inline-flex;
-          height: 20px;
-          font-weight: bold;
-          pointer-events: none;
+        .ca-date-and-add-content {
+          display: grid;
+          grid-template-columns: 1fr;
+          background-color: #fff;
+          border-radius: 4px;
+          user-select: none;
+          grid-template-rows: 1fr 1fr;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+          position: relative;
 
-          .arrow_drop_up {
-            display: none;
-          }
+          .ca-date-selector {
+            position: relative;
+            height: 50px;
+            align-self: center;
+            justify-self: center;
+            width: 360px;
 
-          .arrow_drop_down {
-            display: none;
-          }
-
-          &.active {
-            .arrow_drop_up {
-              display: inline-block;
-            }
-
-            .arrow_drop_down {
-              display: none;
-            }
-          }
-        }
-
-        .ca-datepicker-container {
-          background: #fff;
-          position: absolute;
-          z-index: 1;
-          width: inherit;
-          box-shadow: 0 13px 16px 0 rgba(0, 0, 0, 0.13);
-          top: 50px;
-          display: none;
-
-          #ca-datepicker {
-            .datepicker {
+            .ca-date-picker-container {
+              position: absolute;
               width: 100%;
+              z-index: 1;
+              box-shadow: none;
 
-              .table-condensed {
-                width: 100%;
-
-                thead tr:first-child {
-                  display: none;
+              .ca-datepicker-container {
+                &.active {
+                  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.13);
                 }
+              }
+            }
+
+            .ca-date-nav-container {
+              height: 50px;
+              box-shadow: none;
+            }
+          }
+
+          .ca-add-content {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            height: 50px;
+            border-top: 1px solid #ccc;
+
+            .ca-contents-button {
+              display: inline-grid;
+              justify-items: center;
+              align-items: center;
+              grid-template-columns: 120px 20px 20px;
+              grid-gap: 15px;
+              padding-left: 15px;
+
+              p {
+                font-family: "Open Sans";
+                font-size: 13px;
+                font-weight: bold;
+                color: #666666;
+                text-transform: uppercase;
+                margin: 0;
+                padding: 0;
+              }
+
+              .collection-icon {
+                width: 20px;
+                height: 20px;
+                background-repeat: no-repeat;
+                background-size: 20px 20px;
+                background-image: url("../assets/gooru/images/add_collection.svg");
+                opacity: 0.8;
+                cursor: pointer;
+              }
+
+              .assessment-icon {
+                width: 20px;
+                height: 20px;
+                background-repeat: no-repeat;
+                background-size: 20px 20px;
+                background-image: url("../assets/gooru/images/add_assessment.svg");
+                opacity: 0.8;
+                cursor: pointer;
               }
             }
           }
         }
-      }
 
-      .ca-add-content {
-        display: grid;
-        align-items: center;
-        grid-template-columns: 1fr 1fr;
-        border-left: 1px solid #ccc;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-        position: relative;
-
-        .ca-contents-button {
-          display: inline-grid;
-          justify-items: center;
-          align-items: center;
-          grid-template-columns: 40px 20px 20px;
-          grid-gap: 15px;
-          padding-left: 15px;
-
-          p {
-            font-family: "Open Sans";
-            font-size: 13px;
-            font-weight: bold;
-            color: #666666;
-            text-transform: uppercase;
-            margin: 0;
-            padding: 0;
-          }
-
-          .collection-icon {
-            width: 20px;
-            height: 20px;
-            background-repeat: no-repeat;
-            background-size: 20px 20px;
-            background-image: url("../assets/gooru/images/add_collection.svg");
-            opacity: 0.8;
-            cursor: pointer;
-          }
-
-          .assessment-icon {
-            width: 20px;
-            height: 20px;
-            background-repeat: no-repeat;
-            background-size: 20px 20px;
-            background-image: url("../assets/gooru/images/add_assessment.svg");
-            opacity: 0.8;
-            cursor: pointer;
-          }
+        .no-content {
+          color: $gray-dove;
+          font-size: $font-size-lead;
+          text-align: center;
         }
 
-        .ca-course-map-button {
-          text-align: right;
-          cursor: pointer;
-          height: 20px;
-          padding-left: 15px;
-          padding-right: 15px;
+        .no-contentfont {
+          width: 100%;
+          font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size: 13px;
+        }
 
-          &.no-course {
-            pointer-events: none;
-            opacity: 0.5;
+        .no-content-image {
+          background-image: url("gooru/no-dca-student.png");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          height: 240px;
+          margin: 40px auto 0;
+        }
+
+        .dca-list-container {
+          height: calc(100vh - 205px);
+          overflow-y: auto;
+          padding-right: 20px;
+          padding-left: 20px;
+          padding-bottom: 55px;
+
+          .dca-content-list-container {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+            border-radius: 4px;
+
+            &.dca-content-list-container-today {
+              box-shadow: 0 0 11px 3px #4b9741;
+            }
           }
+
+          .dca-date-view-container {
+            display: inline-grid;
+            grid-template-columns: 200px 1fr;
+            align-items: center;
+            height: 50px;
+            width: 100%;
+
+            .dca-date-container {
+              display: inline-flex;
+              width: 100%;
+              align-items: center;
+
+              &.dca-date-container-today {
+                span {
+                  font-family: "Lato";
+                  font-size: 15px;
+                  font-weight: bold;
+                  color: #000000;
+                  text-transform: uppercase;
+                }
+              }
+
+              .calendar_today {
+                padding-left: 20px;
+              }
+
+              span {
+                padding-left: 20px;
+              }
+            }
+
+            hr {
+              width: 100%;
+              border-top: 1px solid #ccc;
+            }
+          }
+        }
+      }
+    }
+
+    .ca-right-panel {
+      .ca-unschedule-items-list-container {
+        padding-right: 20px;
+
+        .ca-unschedule-items-header {
+          height: 50px;
+          box-shadow: rgba(0, 0, 0, 0.13) 0 2px 4px 0;
+          background: #fff;
+          border-radius: 4px;
+          display: grid;
+          align-items: center;
+          justify-content: center;
+          grid-template-columns: 1fr;
+          position: relative;
 
           span {
-            font-family: "Lato";
-            font-size: 13px;
-            color: #1aa9eb;
             text-transform: uppercase;
+            padding-left: 20px;
+            font-size: 12px;
+            font-weight: bold;
           }
+        }
+
+        .ca-unscheduled-content-items {
+          padding: 20px;
+          height: calc(100vh - 155px);
+          overflow-y: auto;
+        }
+
+        .ca-unscheduled-no-content-items {
+          color: #666666;
+          font-size: 19px;
+          text-align: center;
+          margin-top: 5px;
         }
       }
     }
+  }
 
-    .no-content {
-      color: $gray-dove;
-      font-size: $font-size-lead;
-      text-align: center;
-    }
+  .ca-datepicker-schedule-container {
+    background: #fff;
+    position: absolute;
+    z-index: 1031;
+    width: inherit;
+    box-shadow: 0 13px 16px 0 rgba(0, 0, 0, 0.13);
+    top: 50px;
+    width: 250px;
+    display: none;
 
-    .no-contentfont {
-      width: 100%;
-      font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 13px;
-    }
-
-    .no-content-image {
-      background-image: url("gooru/no-dca-student.png");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: contain;
-      height: 240px;
-      margin: 40px auto 0;
-    }
-
-    .dca-list-container {
-      height: calc(100vh - 155px);
-      overflow-y: auto;
-      padding-right: 20px;
-      padding-left: 20px;
-      padding-bottom: 20px;
-
-      .dca-date-view-container {
-        display: inline-grid;
-        grid-template-columns: 200px 1fr;
-        align-items: center;
-        height: 50px;
+    #schedule-ca-datepicker {
+      .datepicker {
         width: 100%;
 
-        .dca-date-container {
-          display: inline-flex;
+        .table-condensed {
           width: 100%;
-          align-items: center;
 
-          .calendar_today {
-            padding-left: 20px;
-          }
-
-          span {
-            padding-left: 20px;
+          thead tr:first-child {
+            display: none;
           }
         }
-
-        hr {
-          width: 100%;
-          border-top: 1px solid #ccc;
-        }
-      }
-    }
-
-    .ca-unschedule-container {
-      height: 40px;
-      background: #fff;
-      display: grid;
-      width: 100%;
-      position: absolute;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      box-shadow: 0 3px 30px 0 rgba(0, 0, 0, 0.13);
-      cursor: pointer;
-      display: none;
-
-      .arrow_drop_up {
-        justify-self: right;
-        padding-right: 25px;
-        height: 20px;
-      }
-
-      .unscheduled-items {
-        padding-left: 25px;
-        height: 20px;
-        color: #4a4a4a;
-        font-weight: 400;
       }
     }
   }

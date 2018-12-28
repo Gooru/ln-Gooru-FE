@@ -89,6 +89,11 @@ export default Object.assign(quizzesTranslations, {
     accept: 'Accept',
     ignore: 'Ignore',
     add: 'Add',
+    'add-an-activity': 'Add an Activity',
+    Reschedule: 'Reschedule',
+    'no-unschedule-items':
+      'You don\'t have any activities that need scheduling for ',
+    'repeat-activity': 'Repeat Activity',
     'add-assessment': 'Create New Assessment',
     'add-century-skills': 'Add 21st Century Skills',
     'add-collaborator': 'Add Collaborator',
@@ -114,7 +119,7 @@ export default Object.assign(quizzesTranslations, {
     'add-standards-to-collection': 'Add Standards to Collection',
     'add-to': 'Add To',
     'add-to-classroom': 'Add to Classroom',
-    'add-to-daily-class': 'Add to Daily Class Activities',
+    'add-to-daily-class': 'Add to  Class Activities',
     'add-to-collection-success':
       'You\'ve added {{contentTitle}} to {{collectionTitle}}. Do you want to edit that {{collectionType}}?',
     'add-to-lesson-success':
@@ -202,7 +207,7 @@ export default Object.assign(quizzesTranslations, {
     'content-manager': 'Content Manager',
     contentUnavailable: 'Content not available',
     contentUnavailabletoday:
-      'No current activities. Add Daily Class Activities from the Course Map or My Content.',
+      'No current activities. Add  Class Activities from the Course Map or My Content.',
     contentUnavailableyesterday: 'No activities were added.',
     'contributed-by': 'Contributed by',
     copy: 'Copy',
@@ -509,6 +514,7 @@ export default Object.assign(quizzesTranslations, {
     password: 'Password',
     pending: 'Pending',
     performance: 'Show Performance',
+
     'performance-dashboard': 'Performance Dashboard',
     'personal-information': 'Personal Information',
     play: 'Play',
@@ -521,6 +527,7 @@ export default Object.assign(quizzesTranslations, {
     'published-by': 'Published by',
     'published-tooltip': 'Badged Content',
     publisher: 'Publisher',
+    prev: 'Prev',
     question: 'Question',
     questions: 'Questions',
     'questions-OE': 'Free Response Questions',
@@ -606,6 +613,13 @@ export default Object.assign(quizzesTranslations, {
     rubrics: 'Rubrics',
     'rubric-title': 'Rubric Title',
     save: 'Save',
+    'de-select': 'De Select',
+    'select-all': 'Select All',
+    'no-students': 'No Students',
+    'add-data': 'Add Data',
+    everyone: 'Everyone',
+    'unscheduled-items': 'Unscheduled Items',
+    'add-to-unschedule': 'Add to unscheduled list for',
     'save-next': 'Save and Next',
     'save-submit': 'Save and Submit All',
     'save-finish': 'Save and Finish',
@@ -801,7 +815,7 @@ export default Object.assign(quizzesTranslations, {
       title: 'Course Map',
       locate: 'Locate Me',
       'edit-content': 'Edit Content',
-      'add-to-daily-class-activities': 'Add to Daily Class Activities',
+      'add-to-daily-class-activities': 'Add to  Class Activities',
       'assigned-course': 'Your assigned course',
       'pre-study-title': 'Pre-study for your course',
       'course-map': {
@@ -996,7 +1010,7 @@ export default Object.assign(quizzesTranslations, {
       },
       'remove-class-activity': {
         confirmation:
-          'Are you sure you want to remove this {{type}} from your Daily Class Activities?',
+          'Are you sure you want to remove this {{type}} from your  Class Activities?',
         'delete-error':
           'Oops! Unable to remove this {{type}} right now. Please try again shortly.'
       },
@@ -1196,7 +1210,7 @@ export default Object.assign(quizzesTranslations, {
     'latest-assessment': 'Latest Assessment',
     'create-classroom': 'Create a classroom, assign contents, invite students',
     'dca-create-info':
-      'Click on the icons below and search for content from the Gooru Library to create a daily class activity. You can also add content to daily class activity from your course map by clicking on Course Map.',
+      'Click on the icons below and search for content from the Gooru Library to create a  class activity. You can also add content to  class activity from your course map by clicking on Course Map.',
     'schedule-for-later': 'Schedule For Later',
     'teach-this-activity-later': 'teach this activity later at DCA',
     'schedule-dca-instruction-1':
@@ -1248,8 +1262,11 @@ export default Object.assign(quizzesTranslations, {
         'student-id': 'Student ID',
         teachers: 'Teachers',
         'view-report': 'View Report',
+        'course-null': 'The classroom has no course assigned yet.',
+        'course-subject-null':
+          'The course assigned to classroom has not been tagged to a valid subject.',
         'students-null':
-          'Share the Class Code with students to have them join your Classroom.'
+          'Share the Class Code with your students to have them join the classroom.'
       },
       'students-tab': {
         'last-name': 'Lastname',
@@ -1267,11 +1284,13 @@ export default Object.assign(quizzesTranslations, {
         'class-statistics': 'Class Statistics',
         'proficiency-in': 'Proficiency in',
         'data-not-available': 'Data Not Available',
+        'course-coverage-label':
+          'Cumulative count of competencies for all students in class',
         'error-message':
-          'Possibly there is no a course assigned or there are none of students are joined or a valid subject is not assigned!'
+          'The class does not have a course assigned or does not have students rostered into the class yet. Once the course has been assigned to the class and the students are rostered, the class competency report will be shown here'
       },
       'class-activities': 'Class Activities',
-      'back-to-class-activities': 'Back to Daily Class Activities',
+      'back-to-class-activities': 'Back to  Class Activities',
       'class-activities-tab': {
         today: 'Today: ',
         yesterday: 'Yesterday: ',
@@ -1279,7 +1298,15 @@ export default Object.assign(quizzesTranslations, {
         'add-from-course-map': 'Add from Course Map',
         'add-from-my-content': 'Add from My Content',
         'welcome-dca':
-          'Welcome to your Daily Class Activities where you can assign collections and assessments for students to complete today. Please note: any reports generated will only be available today for the most recent attempt.'
+          'Welcome to your  Class Activities where you can assign collections and assessments for students to complete today. Please note: any reports generated will only be available today for the most recent attempt.',
+        'enter-max-timespent': 'Enter the Maximum Timespent for the Assessment',
+        'enter-max-score': 'Enter the Maximum Score for the Assessment',
+        hour: 'h',
+        min: 'm',
+        'question-score': 'Question Score',
+        'max-score': 'Max Score',
+        'assessment-score': 'Assessment Score',
+        'assessment-max-score': 'Assessment Max. Score'
       },
       'click-to-copy': 'Click to copy class code',
       'course-map': 'Course Map',
@@ -1293,7 +1320,7 @@ export default Object.assign(quizzesTranslations, {
       'view-more': 'View more',
       'class-settings': {
         'class-settings-sec': {
-          'generate-pathway': 'Generate Pathway',
+          'generate-pathway': 'Personalize Learning Path',
           'class-settings-sec-head': 'Class Settings',
           'class-settings-sec-desc': 'Minimum performance to pass',
           'class-code': 'Class Code',
@@ -1306,13 +1333,27 @@ export default Object.assign(quizzesTranslations, {
           'offline-class-label': 'This is an Offline classroom'
         },
         'student-settings-sec': {
-          'student-settings-sec-head': 'Student Settings'
+          'student-settings-sec-head': 'Student Settings',
+          'col-head-active': 'Active'
         },
         'course-settings-sec': {
           'course-settings-sec-head': 'Course Settings',
           'is-route0-applicable':
-            'Generated pathway should cover gaps at profile?',
-          'apply-settings': 'Apply Settings'
+            'Personalize Learning Path should cover gaps at profile?',
+          'apply-settings': 'Apply Settings',
+          'origin-info':
+            'What is the lowest grade level content that your students should study?',
+          'current-grade-info': 'What is the grade level of your class?'
+        },
+        'gen-baseline': {
+          'baseline-1':
+            '(1) You can generate the personalized learning path for each student based on class origin and destination.',
+          'baseline-2':
+            '(2) By default, all students have the grade level as their destination. You can adjust the destination to be a higher grade for students who are ahead in the class. Click Personalize Learning Path to generate a personalized course map based on the student’s skyline and their destination. ',
+          'baseline-3':
+            '(3) The path generation for the entire class can be actioned only once. After that, any updates will have to be done individually for each student.',
+          'baseline-4':
+            '(4) You can also adjust the destination grade for individual student. Click on the icon <i id="ember1600" class="ember-view gru-icon material-icons replay" style="vertical-align: middle;">replay </i> once you have confirmed the destination, to recompute the personalized path.'
         },
         origin: 'Origin',
         destination: 'Destination',
@@ -1621,6 +1662,15 @@ export default Object.assign(quizzesTranslations, {
     title: 'Reset password'
   },
 
+  'change-password': {
+    'change-password': 'Change password link',
+    title: 'Change Password',
+    'current-password-label': 'Enter your current password',
+    'change-success': 'Password Changed Successfully !!',
+    'new-password-required': 'Please enter your new password.',
+    'change-password-error':
+      'Uh oh! Something’s not right. Unable to change password. Please try again.'
+  },
   footer: {
     footerDescription:
       'Gooru is committed to keeping its platform open-source and community created content CC0.',
@@ -2340,7 +2390,7 @@ export default Object.assign(quizzesTranslations, {
       stepOne: {
         title: 'Welcome!',
         description:
-          'Welcome to your classroom. Here you will find your daily class activities, course map, and performance data. Let’s get started!'
+          'Welcome to your classroom. Here you will find your  class activities, course map, and performance data. Let’s get started!'
       },
       stepTopBar: {
         title: 'Course, Performance, Completion',
@@ -2348,7 +2398,7 @@ export default Object.assign(quizzesTranslations, {
           'See a summary of your course and overall performance so far.'
       },
       stepTwo: {
-        title: 'Daily Class Activities',
+        title: 'Class Activities',
         description:
           'Access and study today’s activities assigned by your teacher.'
       },

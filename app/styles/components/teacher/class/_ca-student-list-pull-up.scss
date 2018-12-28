@@ -136,9 +136,21 @@
       }
     }
 
+    .ca-student-list-select-ctn {
+      height: 30px;
+      width: 100%;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+
+      .de-select,
+      .select-all {
+        padding: 4px;
+        border-radius: 0;
+      }
+    }
+
     .student-list-container {
-      max-height: calc(90vh - 100px);
-      height: calc(90vh - 100px);
+      max-height: calc(90vh - 130px);
+      height: calc(90vh - 130px);
       overflow-y: auto;
       width: 100%;
 

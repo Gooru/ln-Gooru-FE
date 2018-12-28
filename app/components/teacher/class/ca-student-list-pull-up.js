@@ -125,6 +125,28 @@ export default Ember.Component.extend({
      */
     saveUsersToClassActivityContent() {
       this.saveUsersToCA();
+    },
+
+    /**
+     * Action triggered when de select all the students
+     */
+    onDeSelect() {
+      let students = this.get('students');
+      students.forEach(student => {
+        student.set('isSelected', false);
+      });
+      this.updateUserCount();
+    },
+
+    /**
+     * Action triggered when select all the students
+     */
+    onSelectAll() {
+      let students = this.get('students');
+      students.forEach(student => {
+        student.set('isSelected', true);
+      });
+      this.updateUserCount();
     }
   },
 
