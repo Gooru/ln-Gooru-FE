@@ -1,6 +1,4 @@
 import Ember from 'ember';
-import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
-import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import {CONTENT_TYPES, PLAYER_EVENT_SOURCE} from 'gooru-web/config/config';
 import {generateUUID, validateTime} from 'gooru-web/utils/utils';
 
@@ -25,7 +23,6 @@ export default Ember.Component.extend({
    */
   collectionObserver: Ember.observer('assessment', function() {
     let component = this;
-    console.log("observer call");
     component.resetProperties();
   }),
   didRender() {
@@ -76,10 +73,10 @@ export default Ember.Component.extend({
   timeValidator() {
     let component = this;
     component.$('.time').keyup(function() {
-    let hours = component.get('hours');
-    let mins = component.get('mins');
-    component.set('isValidtime', validateTime(hours,mins));
-    component.set('isTyping', true);
+      let hours = component.get('hours');
+      let mins = component.get('mins');
+      component.set('isValidtime', validateTime(hours,mins));
+      component.set('isTyping', true);
     });
   },
 
@@ -205,7 +202,6 @@ export default Ember.Component.extend({
       });
 
   },
-
 
 
   /**
