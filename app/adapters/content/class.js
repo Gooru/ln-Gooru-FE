@@ -424,5 +424,22 @@ export default Ember.Object.extend({
       data: JSON.stringify(users)
     };
     return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * @function updatePreference
+   * Method to update class preference
+   */
+  updatePreference(classid, preference) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/${classid}/preference`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({ preference: preference })
+    };
+    return Ember.$.ajax(url, options);
   }
 });

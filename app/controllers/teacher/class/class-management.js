@@ -397,8 +397,11 @@ export default Ember.Controller.extend(ModalMixin, {
       const controller = this;
       if (controller.get('course.id') && controller.get('sanitizedSubject')) {
         let tClass = controller.get('tempClass'),
-          preferenceJSON = controller.get('class.preference');
-        preferenceJSON.framework = value.code;
+          sourcePreferenceJSON = controller.get('class.preference'),
+          preferenceJSON = {
+            subject: sourcePreferenceJSON.subject,
+            framework: value.code
+          };
 
         tClass.set('preference', preferenceJSON);
         controller.set('tempClass', tClass);
@@ -905,19 +908,24 @@ export default Ember.Controller.extend(ModalMixin, {
     const controller = this;
     const classId = this.get('class.id');
 
-    controller
-      .get('classService')
-      .classSettings(classId, settings)
-      .then(function(/* responseData */) {
-        controller.set('enableApplySettings', false);
+    let promises = {
+      classPromise: controller
+        .get('classService')
+        .classSettings(classId, settings),
+      preferencePromise: controller
+        .get('classService')
+        .updatePreference(classId, settings.preference)
+    };
 
-        if (!controller.get('isPremiumClass')) {
-          controller.generateClassPathway(); // Call LP // Baseline class on setting save for not premium
-        } else {
-          controller.send('refreshRoute');
-          controller.refreshRouter();
-        }
-      });
+    Ember.RSVP.hash(promises).then(function(/* hash */) {
+      controller.set('enableApplySettings', false);
+      if (!controller.get('isPremiumClass')) {
+        controller.generateClassPathway(); // Call LP // Baseline class on setting save for not premium
+      } else {
+        controller.send('refreshRoute');
+        controller.refreshRouter();
+      }
+    });
   },
 
   refreshRouter: function() {
