@@ -1,27 +1,44 @@
 .add-course-ctrl {
   background-color: #37424b;
   min-height: 100vh;
-  .featured-courses-container {
-    display: flex;
-    overflow-x: auto;
-    .featured-course {
-      margin: 10px 15px;
-    }
-    &::-webkit-scrollbar {
-      height: 6px;
-      width: 8px;
-    }
 
-    &::-webkit-scrollbar-thumb {
-      background: $gray-light;
-      border: 1px solid $gray-light;
-      border-radius: 5px;
+  .course-main-container {
+    margin-left: 20px;
+    margin-right: 20px;
+
+    .featured-courses-container {
+      display: flex;
+      overflow-x: auto;
+
+      .featured-course {
+        margin: 10px 15px;
+        margin-left: 0px;
+      }
+      &::-webkit-scrollbar {
+        height: 6px;
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $gray-light;
+        border: 1px solid $gray-light;
+        border-radius: 5px;
+      }
     }
   }
 
   .content-catalogs-container {
     display: flex;
     overflow-x: auto;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20%;
+    grid-gap: 20px;
+    grid-column-gap: 16px;
+    grid-row-gap: 24px;
+    justify-content: center;
+    padding-top: 30px;
+    padding-bottom: 20px;
+
     .catalog-card {
       min-width: 202px;
       min-height: 192px;
@@ -29,11 +46,131 @@
       background-color: $white;
       margin: 0 5px;
       display: block;
+      .catalog-name {
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        color: #1aa9eb;
+        margin-top: 10px;
+      }
       .catalog-image {
         width: 93px;
         height: 93px;
         background-size: 93px 93px;
         display: block;
+        margin: auto;
+        margin-top: 25px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .course-main-container {
+      .featured-courses-container {
+        margin-left: 10px;
+      }
+    }
+    .content-catalogs-container {
+      display: grid;
+      grid-template-columns: 20% 20% 20%;
+      padding-top: 30px;
+      grid-column-gap: 75px;
+      grid-row-gap: 20px;
+      padding-bottom: 20px;
+
+      .catalog-card {
+        min-width: 202px;
+        min-height: 192px;
+        border-radius: 4px;
+        background-color: $white;
+        margin: auto;
+        display: block;
+        .catalog-name {
+          font-size: 12px;
+        }
+        .catalog-image {
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .course-main-container {
+      margin-left: 20px;
+      margin-right: 32px;
+      .featured-courses-container {
+        margin-left: 10px;
+      }
+    }
+    .content-catalogs-container {
+      grid-template-columns: auto;
+      padding-bottom: 20px;
+      grid-row-gap: 10px;
+      display: grid;
+
+      .catalog-card {
+        .catalog-name {
+          font-size: 12px;
+        }
+        .catalog-image {
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $screen-568) {
+    .course-main-container {
+      .featured-courses-container {
+        margin-left: 10px;
+      }
+    }
+
+    .content-catalogs-container {
+      grid-template-columns: auto;
+      display: grid;
+      overflow-x: auto;
+      padding-top: 30px;
+      padding-bottom: 20px;
+
+      .catalog-card {
+        min-width: 202px;
+        min-height: 192px;
+        border-radius: 4px;
+        background-color: $white;
+        margin: auto;
+        display: block;
+        .catalog-name {
+          font-size: 11px;
+        }
+        .catalog-image {
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 481px) {
+    .course-main-container {
+      .featured-courses-container {
+        margin-left: 10px;
+      }
+    }
+
+    .content-catalogs-container {
+      grid-template-columns: auto;
+      display: grid;
+
+      .catalog-card {
+        min-width: 202px;
+        min-height: 192px;
+        border-radius: 4px;
+        background-color: $white;
+        margin: auto;
+        display: block;
+        .catalog-name {
+          font-size: 12px;
+        }
+        .catalog-image {
+        }
       }
     }
   }
