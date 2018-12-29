@@ -7,43 +7,47 @@
         </div>
         <div class="timespent-container">
           <div class="timespent-hour">
-            <span>{{input type="text" class="time" value=maxTimeHour}}</span>
+            <span>
+              {{input type="text" class="time" value=maxTimespent.hour key-up="onEnterTimespent"}}
+            </span>
             <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.hour'}}</span>
           </div>
           <div class="timespent-mins">
-            <span>{{input type="text" class="time" value=maxTimeMins}}</span>
+            <span>
+              {{input type="text" class="time" value=maxTimespent.min key-up="onEnterTimespent"}}
+            </span>
             <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.min'}}</span>
           </div>
-          {{#if (and isTyping  (not isValidtime))}}
-           <div class="error">Enter the valid Time</div>
-         {{/if}}
         </div>
-        <div class="confirm-action-container {{unless isValidtime 'disabled'}}" {{action "onEnterMaxTimespent"}}>
+        {{#if (and isTyping (not isValidTimespent))}}
+         <span class="error">{{t 'teacher-landing.class.class-activities-tab.enter-valid-timespent'}}</span>
+       {{/if}}
+        <div class="confirm-action-container {{unless isValidTimespent 'disabled'}}" {{action "onEnterMaxTimespent"}}>
           {{t 'common.confirm'}}
         </div>
       </div>
     {{else}}
-    <div class="question-score header"><span>{{t 'teacher-landing.class.class-activities-tab.assessment-score'}}</span></div>
+    <!-- <div class="question-score header"><span>{{t 'teacher-landing.class.class-activities-tab.assessment-score'}}</span></div> -->
     <div class="active-question">
       <div class="question-seq">{{t 'common.question'}} {{activeQuestionSeq}}</div>
       <div class="question-max-score"> {{t 'teacher-landing.class.class-activities-tab.max-score'}}: {{activeQuestion.maxScore}}</div>
     </div>
     <div class="active-student">
       <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})"></div>
-      <div class="student-name ellipsis">{{activeStudent.fullName}} {{activeStudentSeq}}</div>
+      <div class="student-name ellipsis">{{activeStudent.fullName}}</div>
     </div>
     <div class="questions-container">
       {{#each questions as |question questionSeq|}}
         <div class="question-container question-{{questionSeq}}">
-          <div class="question-info-container {{if (eq question.id activeQuestion.id) 'selected-question'}}">
+          <div class="question-info-container {{if (eq question.id activeQuestion.id) 'selected-question'}}" {{action "onSelectQuestion" question questionSeq}}>
             <div class="question-thumbnail">{{gru-icon name="done_all"}}</div>
             <div class="question-title ellipsis" {{action "onToggleQuestion" question questionSeq}}>{{plus-one questionSeq}}{{concat '. ' question.title}}</div>
-            <div class="question-score" {{action "onSelectQuestion" question questionSeq}}>
+            <div class="question-score">
               {{input type="text" class=(concat 'question-score-entry' ' q-' questionSeq '-score')
-                focus-in=(action "onSelectQuestion" question questionSeq)
-                focus-out=(action "onEditScore" questionSeq)
+                key-up=(action "onEditScore" question questionSeq)
                 pattern="[0-9]*"
                 inputmode="numeric"
+                value=question.score
               }}
             </div>
           </div>
@@ -52,15 +56,21 @@
       {{/each}}
     </div>
     <div class="action-container">
-      <div class="prev action  {{if (and isDisablePrev isValid) 'disabled'}}" {{action "onMoveStudent" 'prev'}}>{{gru-icon name="fast_rewind" }}{{t 'common.prev'}}</div>
-        {{#if isDisableNext}}
-          <div {{action "onSubmitPerformance"}}>{{t 'common.submit'}}</div>
-        {{else}}
-          <div class="next action {{if isValid 'disabled'}}" {{action "onMoveStudent" 'next'}}>
-            {{t 'common.next'}}
-            {{gru-icon name="fast_forward" }}
-          </div>
-        {{/if}}
+      {{#unless isDisablePrev}}
+        <div class="prev action ellipsis" {{action "onMoveStudent" 'prev'}}>
+          {{gru-icon name="fast_rewind" }}<span class="ellipsis">{{prevStudent.fullName}}</span>
+        </div>
+      {{else}}
+        <div></div>
+      {{/unless}}
+      {{#if isDisableNext}}
+        <div {{action "onSubmitPerformance"}} class="next action">{{t 'common.done'}}</div>
+      {{else}}
+        <div class="next action {{unless isEnableNext 'disabled'}}" {{action "onMoveStudent" 'next'}}>
+          <span class="ellipsis">{{nextStudent.fullName}}</span>
+          {{gru-icon name="fast_forward" }}
+        </div>
+      {{/if}}
     </div>
   {{/if}}
 </div>
