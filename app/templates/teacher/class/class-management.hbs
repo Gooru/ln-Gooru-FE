@@ -374,7 +374,9 @@
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="true">
                       {{#if tempClass.preference.framework}}
-                        {{tempClass.preference.framework}}
+                        {{get-value 'source' source=subjectFWKDD.frameworks searchProp='code'
+                                              searchVal=tempClass.preference.framework
+                                              destProp='title' }}
                       {{else}}
                         {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
                       {{/if}}
