@@ -12,7 +12,7 @@
     .max-timespent-container {
       padding: 0 16px 16px 16px;
       .title-container {
-        font-size: 10px;
+        font-size: 12px;
         font-weight: bold;
         text-align: center;
         color: #3e5e67;
@@ -22,27 +22,32 @@
         display: grid;
         grid-template-columns: auto auto;
         columns-gap: 16px;
-        .timespent-hour, .timespent-mins {
+        .timespent-hour,
+        .timespent-mins {
           display: grid;
           grid-template-columns: auto auto;
           align-items: baseline;
         }
         input {
           width: 100%;
-          font-size: 100px;
+          font-size: 50px;
+          text-align: right;
           font-weight: bold;
           color: #3d5e67;
           outline: none;
           &:focus {
             outline: none;
           }
-
         }
         .placeholder-text {
-          font-size: 50px;
+          font-size: 25px;
           font-weight: bold;
           color: #3d5e67;
         }
+      }
+      .error {
+        color: $red-400;
+        font-size: 12px;
       }
       .confirm-action-container {
         width: 100px;
@@ -56,6 +61,8 @@
         line-height: 40px;
         text-transform: uppercase;
         margin: 15px auto;
+        cursor: pointer;
+
       }
     }
     .question-score.header {
@@ -76,18 +83,19 @@
     .active-question {
       display: grid;
       grid-template-columns: auto auto;
-      height: 14px;
-      line-height: 14px;
+      height: 24px;
       border-bottom: 1px solid #3e90fa;
-      justify-content: center;
-      .question-seq, .question-max-score {
+      justify-content: space-between;
+      padding: 5px 5px 5px 16px;
+      .question-seq,
+      .question-max-score {
         font-size: 10px;
         font-weight: bold;
         color: #3e5e67;
         text-transform: uppercase;
       }
       .question-seq {
-        margin-right: 8px;
+        margin-right: 16px;
       }
     }
     .active-student {
@@ -148,7 +156,8 @@
             width: 232px;
             height: inherit;
             line-height: 40px;
-            border-right: 2px dashed rgba(45,45,45, 0.3);
+            border-right: 2px dashed rgba(45, 45, 45, 0.3);
+            cursor: pointer;
           }
           .question-score {
             padding-left: 8px;
@@ -159,15 +168,8 @@
                 background-color: #c9e4f9;
                 outline: none;
               }
-              &.wrong-score {
-                color: red;
-                border-bottom: 1px solid red;
-                outline: none;
-              }
             }
-            &.disabled {
-              pointer-events: none;
-            }
+
           }
           &.selected-question {
             background-color: #c9e4f9;
@@ -178,12 +180,17 @@
           }
         }
         .question-description {
-          padding: 16px;
+          padding: 5px 16px;
+          border-bottom: 1px solid $gray-light;
           $font-size: 12px;
           color: #212121;
           $line-height: 1.5;
           $lines-to-show: 4;
-          @include ellipsis($font-size: $font-size, $line-height: $line-height, $lines-to-show: $lines-to-show);
+          @include ellipsis(
+            $font-size: $font-size,
+            $line-height: $line-height,
+            $lines-to-show: $lines-to-show
+          );
           max-height: 92px;
         }
 
@@ -192,6 +199,17 @@
             i {
               display: block;
               color: $white;
+            }
+          }
+        }
+        &.wrong-score {
+          .question-info-container {
+            .question-score {
+              .question-score-entry {
+                color: red;
+                border-bottom: 1px solid red;
+                outline: none;
+              }
             }
           }
         }
@@ -222,8 +240,25 @@
         display: flex;
         line-height: 40px;
         cursor: pointer;
-        &.disabled {
-          pointer-events: none;
+        text-transform: uppercase;
+        font-size: 12px;
+        i {
+          margin-top: 4px;
+          margin-right: 8px;
+          width: 32px;
+          height: 32px;
+          background-color: #d8d8d8;
+          border-radius: 50%;
+          text-align: center;
+          line-height: 32px;
+        }
+        &.next {
+          i {
+            margin-left: 4px;
+          }
+        }
+        span {
+          max-width: 122px;
         }
       }
       .student-thumbnail {
@@ -234,16 +269,10 @@
         display: block;
         margin-top: 4px;
       }
-      .prev {
-        .student-thumbnail {
-          margin-right: 8px;
-        }
-      }
-      .next {
-        .student-thumbnail {
-          margin-left: 8px;
-        }
-      }
+    }
+    .disabled {
+      pointer-events: none;
+      opacity: 0.5;
     }
   }
 }
