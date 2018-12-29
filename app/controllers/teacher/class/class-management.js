@@ -33,10 +33,20 @@ export default Ember.Controller.extend(ModalMixin, {
     return taxonomyGrades;
   }.property(),
 
-  gradeSubjetFWKDv: function() {
-    var taxonomyGrades = this.get('gradeSubjectFWK');
-    return taxonomyGrades;
-  }.property(),
+  gradeSubjetFWKDv: Ember.computed('class.preference.subject', function() {
+    const controller = this;
+    let subjectFwks;
+    let subject = controller.get('class.preference.subject');
+    if (this.get('course.id') && subject) {
+      let taxonomyService = controller.get('taxonomyService');
+      let filters = subject;
+      return taxonomyService.fetchSubjectFWKs(filters).then(respdata => {
+        controller.set('subjectFWKDD', respdata);
+      });
+    }
+
+    return subjectFwks;
+  }),
 
   /**
    * 1 . Course not assigned to class
@@ -383,6 +393,27 @@ export default Ember.Controller.extend(ModalMixin, {
       }
     },
 
+    updateFwkSettings: function(value) {
+      const controller = this;
+      if (controller.get('course.id') && controller.get('sanitizedSubject')) {
+        let tClass = controller.get('tempClass'),
+          sourcePreferenceJSON = controller.get('class.preference'),
+          preferenceJSON = {
+            subject: sourcePreferenceJSON.subject,
+            framework: value.code
+          };
+
+        tClass.set('preference', preferenceJSON);
+        controller.set('tempClass', tClass);
+
+        controller.set('enableApplySettings', true); // some UI interaction happened...enable apply button
+      } else {
+        Ember.Logger.log(
+          'Course or Subject not assigned to class, cannot update class settings'
+        );
+      }
+    },
+
     updateClassMembersSettings: function(student, value, setKey) {
       const controller = this;
       if (controller.get('course.id') && controller.get('sanitizedSubject')) {
@@ -468,7 +499,10 @@ export default Ember.Controller.extend(ModalMixin, {
           grade_lower_bound: controller.get('tempClass.gradeLowerBound'),
           grade_upper_bound: controller.get('tempClass.gradeUpperBound'),
           grade_current: controller.get('tempClass.gradeCurrent'),
-          route0: controller.get('tempClass.route0Applicable')
+          route0: controller.get('tempClass.route0Applicable'),
+          preference:
+            controller.get('tempClass.preference') ||
+            controller.get('class.preference')
         };
         controller.updateClassSettings(settings); // Call api with whatever is saved
       } else {
@@ -874,19 +908,24 @@ export default Ember.Controller.extend(ModalMixin, {
     const controller = this;
     const classId = this.get('class.id');
 
-    controller
-      .get('classService')
-      .classSettings(classId, settings)
-      .then(function(/* responseData */) {
-        controller.set('enableApplySettings', false);
+    let promises = {
+      classPromise: controller
+        .get('classService')
+        .classSettings(classId, settings),
+      preferencePromise: controller
+        .get('classService')
+        .updatePreference(classId, settings.preference)
+    };
 
-        if (!controller.get('isPremiumClass')) {
-          controller.generateClassPathway(); // Call LP // Baseline class on setting save for not premium
-        } else {
-          controller.send('refreshRoute');
-          controller.refreshRouter();
-        }
-      });
+    Ember.RSVP.hash(promises).then(function(/* hash */) {
+      controller.set('enableApplySettings', false);
+      if (!controller.get('isPremiumClass')) {
+        controller.generateClassPathway(); // Call LP // Baseline class on setting save for not premium
+      } else {
+        controller.send('refreshRoute');
+        controller.refreshRouter();
+      }
+    });
   },
 
   refreshRouter: function() {

@@ -563,5 +563,19 @@ export default Ember.Service.extend({
         .classMembersActivate(classid, filter)
         .then(resolve, reject);
     });
+  },
+
+  /**
+   * @function updatePreference
+   * Method to update class preference
+   */
+  updatePreference(classid, preference) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classAdapter')
+        .updatePreference(classid, preference)
+        .then(resolve, reject);
+    });
   }
 });
