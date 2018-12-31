@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import {CONTENT_TYPES, PLAYER_EVENT_SOURCE} from 'gooru-web/config/config';
-import {generateUUID, validateTime} from 'gooru-web/utils/utils';
+import {generateUUID, validateTimespent} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
 
@@ -40,7 +40,7 @@ export default Ember.Component.extend({
       component.set('startTime', new Date().getTime());
       component.set('isStarted', true);
       let externalUrl = component.get('assessment.url');
-      component.set('isDisableScoreEditor', false);
+      component.set('isDisableTimeEditor', false);
       if (externalUrl) {
         window.open(externalUrl, CONTENT_TYPES.EXTERNAL_ASSESSMENT);
       }
@@ -75,7 +75,7 @@ export default Ember.Component.extend({
     component.$('.time').keyup(function() {
       let hours = component.get('hours');
       let mins = component.get('mins');
-      component.set('isValidtime', validateTime(hours,mins));
+      component.set('isValidtime', validateTimespent(hours,mins));
       component.set('isTyping', true);
     });
   },
@@ -84,9 +84,9 @@ export default Ember.Component.extend({
   // Properties
 
   /**
-   * @property {Boolean} isDisableScoreEditor
+   * @property {Boolean} isDisableTimeEditor
    */
-  isDisableScoreEditor: true,
+  isDisableTimeEditor: true,
 
   /**
    * @property {Boolean} isTimeEntered
@@ -107,9 +107,6 @@ export default Ember.Component.extend({
    */
   isStarted: 'null',
 
-  /**
-   * @property {String} timeZone
-   */
 
   /**
    * @property {Boolean} isTyping
@@ -128,9 +125,9 @@ export default Ember.Component.extend({
   stopTime: 0,
 
   /**
-   * @property {String} score
+   * @property {String} time
    */
-  score: '',
+  time: '',
 
 
   /**
@@ -151,33 +148,32 @@ export default Ember.Component.extend({
    * Method to get structured data params which needs to be pass with post API
    */
   getDataParams() {
+    console.log("data params");
     let component = this;
+    let hours=component.get('hours');
+    let mins=component.get('mins');
     let mapLocation = component.get('mapLocation');
-    let score = component.get('hours') || null;
-    let max_score = component.get('mins') || null;
     let context = mapLocation.get('context');
     let userId = component.get('session.userId');
     let dataParams = {
-      score,
-      max_score,
       user_id: userId,
       class_id: context.get('classId') || null,
       course_id: context.get('courseId') || null,
       unit_id: context.get('unitId') || null,
       lesson_id: context.get('lessonId') || null,
-      collection_type: context.get('itemType') || null,
+      collection_type: 'collection-external',
       external_collection_id: context.get('collectionId'),
       collection_id: context.get('collectionId'),
       session_id: generateUUID(),
-      time_zone: component.get('timeZone'),
       partner_id: component.get('session.partnerId') || null,
       tenant_id: component.get('session.tenantId') || null,
       content_source: component.get('source') || null,
       path_id: context.get('pathId') || 0,
       path_type: context.get('pathType') || null,
-      time_spent: component.roundMilliseconds(component.get('stopTime') - component.get('startTime')),
+      time_spent: component.roundMilliseconds(component.get('hours'),component.get('mins')),
       evidence: [{TBD: 'True'}]
     };
+    console.log("dataParams",dataParams);
     return dataParams;
   },
 
@@ -190,15 +186,15 @@ export default Ember.Component.extend({
     let analyticsService = component.get('analyticsService');
     let dataParams = component.getDataParams();
     let selfReportedPromise = analyticsService.studentSelfReporting(dataParams);
-    component.set('score', '');
+    component.set('time', '');
     Ember.RSVP.hash({
       selfReport: selfReportedPromise
     })
       .then(function() {
-        component.set('score', component.getEnteredScore(dataParams));
+        component.set('time', component.getEnteredTime(dataParams));
       })
       .catch(function() {
-        component.set('score', null);
+        component.set('time', null);
       });
 
   },
@@ -208,22 +204,28 @@ export default Ember.Component.extend({
    * @function roundMilliseconds
    * Method to round milliseconds
    */
-  roundMilliseconds(milliseconds) {
-    return milliseconds - milliseconds % 1000;
+  roundMilliseconds(hour,mins) {
+    console.log("hour,mins",hour,mins);
+    let timeSpentInMilliSec = (hour * 60 * 60 + mins * 60) * 1000;
+    console.log("timeSpentInMilliSec",timeSpentInMilliSec);
+    return timeSpentInMilliSec;
   },
 
   /**
-   * @function getEnteredScore
+   * @function getEnteredTime
    * Method to get entered score after update
    */
-  getEnteredScore(dataParams) {
+  getEnteredTime(dataParams) {
     let component = this;
     let isStarted = component.get('isStarted');
-    let score = null;
+    let time = null;
     if (isStarted) {
-      score =  `${dataParams.score} h ${dataParams.max_score} m`;
+      let hours=component.get('hours');
+      let mins=component.get('mins');
+      time =  `${hours} h ${mins} m`;
+      console.log("time is ",time);
     }
-    return score;
+    return time;
   },
 
   /**
@@ -233,10 +235,10 @@ export default Ember.Component.extend({
   resetProperties() {
     let component = this;
     this._super(...arguments);
-    component.set('score', '');
+    component.set('time', '');
     component.set('isTimeEntered', false);
     component.set('isStarted', 'null');
-    component.set('isDisableScoreEditor',true);
+    component.set('isDisableTimeEditor',true);
     component.set('isValidScore', false);
     component.set('isValidtime', false);
     component.set('isValidmins', false);

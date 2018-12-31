@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { ROLES } from 'gooru-web/config/config';
+import {
+  ROLES
+} from 'gooru-web/config/config';
 
 /**
  * Study Player External Controller
@@ -134,8 +136,7 @@ export default Ember.Controller.extend({
    */
   steps: Ember.computed(function() {
     let controller = this;
-    let steps = Ember.A([
-      {
+    let steps = Ember.A([{
         title: controller
           .get('i18n')
           .t('gru-take-tour.study-player.stepOne.title'),
@@ -171,8 +172,7 @@ export default Ember.Controller.extend({
           .t('gru-take-tour.study-player.stepFour.description')
       },
       {
-        elementSelector:
-          '.header-panel .performance-completion-take-tour-info .completion',
+        elementSelector: '.header-panel .performance-completion-take-tour-info .completion',
         title: controller
           .get('i18n')
           .t('gru-take-tour.study-player.stepFive.title'),
@@ -181,8 +181,7 @@ export default Ember.Controller.extend({
           .t('gru-take-tour.study-player.stepFive.description')
       },
       {
-        elementSelector:
-          '.header-panel  .performance-completion-take-tour-info .performance',
+        elementSelector: '.header-panel  .performance-completion-take-tour-info .performance',
         title: controller
           .get('i18n')
           .t('gru-take-tour.study-player.stepSix.title'),
@@ -211,6 +210,12 @@ export default Ember.Controller.extend({
     let studyPlayerController = controller.get('studyPlayerController');
     let isFullScreen = studyPlayerController.get('isFullScreen');
     return isFullScreen;
+  }),
+
+  isAsssessment: Ember.computed(function() {
+    let controller = this;
+    let type = controller.get('type');
+    return type === 'external-external';
   }),
 
   // -------------------------------------------------------------------------

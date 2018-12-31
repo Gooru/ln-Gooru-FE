@@ -19,28 +19,28 @@
         {{assessment.learningObjectives}}
       </div>
       {{#if isTimeEntered}}
-        {{#if score}}
+        {{#if time}}
           <div class="entered-time">
             <div class="time">
-              {{score}}
+              {{time}}
             </div>
             <div class="time-label">
-               TIME SPENT
+                {{t 'self-report.time_spent'}}
             </div>
           </div>
         {{else}}
           {{three-bounce-spinner}}
         {{/if}}
       {{else}}
-        <div class="time-spent {{if isDisableScoreEditor 'disabled'}}">
+        <div class="time-spent {{if isDisableTimeEditor 'disabled'}}">
             {{input type="text" class="time" id="hours" value=hours}}<span>h</span>
             {{input type="text" class="time" id="mins" value=mins}}<span>m</span>
            {{#if (and isTyping  (not isValidtime))}}
-            <div class="error">Enter the valid Time</div>
+            <div class="error">{{t 'self-report.validation-error-time'}}</div>
           {{/if}}
         </div>
         <div class="time-label">
-          ENTER YOUR TIME SPENT HERE
+        {{t 'self-report.enter-timeSpent'}}
         </div>
       {{/if}}
     </div>
@@ -50,7 +50,7 @@
           <div class="btn cancel {{if isTimeEntered 'score-entered'}}" {{action "onCancel"}}>
             {{t 'common.cancel'}}
           </div>
-          {{#if isDisableScoreEditor}}
+          {{#if isDisableTimeEditor}}
             <div class="btn start" {{action "onStart"}}>
               {{t 'gru-assessment-confirmation.start'}}
             </div>

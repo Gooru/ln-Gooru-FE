@@ -1013,3 +1013,18 @@ export function validatePercentage(number) {
   }
   return isValidPercentValue;
 }
+
+/**
+*Time spent validateFractionScore
+*/
+export function validateTimespent(hour, min) {
+let isValidTime = false;
+hour = Number(hour);
+min = Number(min);
+if (hour || min) {
+let isValidHour = hour >= 0 && hour <= 24;
+let isValidMin = min >= 0 && min <= 60;
+isValidTime = isValidHour && isValidMin;
+}
+return isValidTime;
+}
