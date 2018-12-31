@@ -18,7 +18,7 @@
       {{/if}}
     </div>
 
-    {{#if (eq item.collectionType 'assessment-external')}}
+    {{#if (or (eq item.collectionType 'assessment-external' ) (eq item.collectionType 'collection-external'))}}
       <i class="external-icon"></i>
     {{/if}}
   </div>
