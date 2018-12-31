@@ -33,7 +33,8 @@
         grid-template-columns: 65px 1fr;
         align-items: center;
 
-        .collection-icon {
+        .collection-icon,
+        .collection-external-icon {
           width: 20px;
           height: 20px;
           background-repeat: no-repeat;
@@ -123,6 +124,7 @@
           background-repeat: no-repeat;
           background-size: 20px 20px;
           background-image: url("../assets/gooru/share.png");
+          margin-right: 5px;
         }
       }
 
