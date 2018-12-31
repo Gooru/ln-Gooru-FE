@@ -5,8 +5,8 @@
       {{gru-icon name="arrow_downward"}}
     </div>
     <div class="search-filter-container">
-      <span>{{activeCatalog.name}}</span>
-      <span {{action 'toggleMenuList'}}>{{gru-icon name="arrow_drop_down"}}</span>
+      <span class="selected-catalog">{{activeCatalog.name}}</span>
+      <span class="down-arrow"{{action 'toggleMenuList'}}>{{gru-icon name="arrow_drop_down"}}</span>
       <div class="search-filter-container-list {{if isMenuEnabled 'active'}}">
         {{#each contentCatalogs as |catalog|}}
           <p {{action 'onSelectCatalog' catalog}} class="{{if catalog.selected 'selected'}}">{{catalog.name}}</p>
@@ -32,11 +32,20 @@
       </div>
     {{/if}}
   </div>
-  <div class="course-cards-container">
-    {{#each courses as |course|}}
-      <div class="course-card-container">
-        {{activity.course-card course=course isHideCoursePerf=true onAddCourse="onAddCourse" onRemixCourse="onRemixCourse"}}
+  <div class="body-container">
+    {{#if isLoading}}
+      {{three-bounce-spinner}}
+    {{else}}
+      <div class="course-cards-container">
+        {{#each courses as |course|}}
+          <div class="course-card-container">
+            {{activity.course-card course=course isHideCoursePerf=true onAddCourse="onAddCourse" onRemixCourse="onRemixCourse"}}
+          </div>
+        {{/each}}
       </div>
-    {{/each}}
+      {{#if isCourseNotAvailable}}
+        <div class="course-not-found">{{t 'common.no-courses-to-display'}}</div>
+      {{/if}}
+    {{/if}}
   </div>
 </div>

@@ -1,3 +1,9 @@
+.teacher_class_add-course {
+  .teacher.class {
+    padding: 0;
+  }
+}
+
 .add-course-ctrl {
   background-color: #37424b;
   min-height: 100vh;
@@ -5,6 +11,15 @@
   .course-main-container {
     margin-left: 20px;
     margin-right: 20px;
+
+    .add-course-header {
+      opacity: 0.2;
+      font-family: "Playfair Display";
+      font-size: 30px;
+      font-style: italic;
+      text-align: center;
+      color: $white;
+    }
 
     .featured-courses-container {
       display: flex;
@@ -67,6 +82,10 @@
         display: block;
         margin: auto;
         margin-top: 25px;
+
+        &.gooru-logo {
+          background-image: url(gooru/images/gooru-logo.svg) !important;
+        }
       }
     }
   }

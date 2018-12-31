@@ -68,26 +68,28 @@
       }
     }
 
-    .unit-count-container {
-      height: 25px;
-      width: 100%;
-      border-bottom: 1px solid rgba(151, 151, 151, 0.4);
-      background-color: $white;
+    .count-container {
+      .unit-count-container {
+        height: 25px;
+        width: max-content;
+        border-bottom: 1px solid rgba(151, 151, 151, 0.4);
+        background-color: $white;
 
-      .icon {
-        background-size: 15px 15px;
-        width: 15px;
-        height: 15px;
-        display: block;
-        float: left;
-        margin-right: 6px;
-        margin-top: 5px;
-        background-image: url("../assets/gooru/images/units-gray.svg");
-        margin-left: 10px;
-      }
+        .icon {
+          background-size: 15px 15px;
+          width: 15px;
+          height: 15px;
+          display: block;
+          float: left;
+          margin-right: 6px;
+          margin-top: 5px;
+          background-image: url("../assets/gooru/images/units-gray.svg");
+          margin-left: 10px;
+        }
 
-      span {
-        font-size: 14px;
+        span {
+          font-size: 14px;
+        }
       }
     }
 
@@ -187,7 +189,6 @@
         .play-btn {
           border-right: 1px solid #f2f2f2;
           i {
-            margin-left: -62px;
             color: #0072bc;
           }
         }

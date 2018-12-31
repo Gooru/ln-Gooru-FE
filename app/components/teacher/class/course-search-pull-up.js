@@ -23,10 +23,6 @@ export default Ember.Component.extend({
       component.closePullUp();
     },
 
-    onChooseMenuItem(catalogItem) {
-      console.log('catalogItem', catalogItem);
-    },
-
     onRemixCourse(courseId) {
       let component = this;
       component.sendAction('onRemixCourse', courseId);
@@ -39,6 +35,7 @@ export default Ember.Component.extend({
 
     onSelectCatalog(catalog) {
       let component = this;
+      component.set('isLoading', true);
       component.sendAction('onSelectCatalog', catalog);
       this.toggleProperty('isMenuEnabled');
     },
@@ -50,6 +47,13 @@ export default Ember.Component.extend({
       this.toggleProperty('isMenuEnabled');
     }
   },
+
+  coursesObserver: Ember.observer('courses', function() {
+    let component = this;
+    let courses = component.get('courses');
+    component.set('isCourseNotAvailable', courses.length <= 0);
+    component.set('isLoading', false);
+  }),
 
   //--------------------------------------------------------------------------
   // Methods

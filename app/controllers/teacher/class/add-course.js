@@ -28,6 +28,11 @@ export default Ember.Controller.extend({
    */
   classController: Ember.inject.controller('teacher.class'),
 
+  /**
+   * @property {Controller} Application Controller
+   */
+  applicationController: Ember.inject.controller('application'),
+
   session: Ember.inject.service('session'),
 
   /**
@@ -37,21 +42,22 @@ export default Ember.Controller.extend({
 
   init() {
     let controller = this;
+    controller.set('isLoading', true);
     controller.fetchFeaturedCourses();
     controller.fetchLibraries();
-    controller.getUserDetails();
   },
 
   actions: {
     onAddCourse(courseId) {
       let controller = this;
-      controller.set('isShowSearchCoursePullUp', true);
+      console.log('add course id', courseId);
       // controller.addCourseToClass(courseId);
     },
 
     onRemixCourse(courseId) {
       let controller = this;
-      controller.remixCourse(courseId);
+      console.log('remix course id', courseId);
+      // controller.remixCourse(courseId);
     },
 
     onSelectCatalog(catalogLibrary) {
@@ -90,7 +96,7 @@ export default Ember.Controller.extend({
   observeLibraries: Ember.observer('libraries', function() {
     let controller = this;
     let libraries = controller.get('libraries');
-    console.log('libraries', libraries);
+    console.log('session', this.get('applicationController'));
     let contentCatalogs = controller.get('contentCatalogs');
     contentCatalogs = contentCatalogs.concat(libraries);
     controller.set('contentCatalogs', contentCatalogs);
@@ -109,16 +115,33 @@ export default Ember.Controller.extend({
 
   userDetails: null,
 
-  contentCatalogs: Ember.A([
-    {
-      id: 'catalog',
-      name: 'Gooru Catalog'
-    },
-    {
-      id: 'content',
-      name: 'My Content'
-    }
-  ]),
+  contentCatalogs: Ember.computed('applicationController', function() {
+    let controller = this;
+    let tenantLogo = controller.get('tenantLogo');
+    let userAvatar = controller.get('userDetails.avatarUrl');
+    return Ember.A([
+      {
+        id: 'catalog',
+        name: 'Gooru Catalog',
+        image: tenantLogo
+      },
+      {
+        id: 'content',
+        name: 'My Content',
+        image: userAvatar
+      }
+    ])
+  }),
+
+  classGrade: Ember.computed('class', function() {
+    let controller = this;
+    let classData = controller.get('class');
+    return classData.grade;
+  }),
+
+  tenantLogo: Ember.computed.alias('applicationController.tenant.theme.header.logo'),
+
+  userDetails: Ember.computed.alias('applicationController.profile'),
 
 
   /**
@@ -138,17 +161,6 @@ export default Ember.Controller.extend({
     return mappedCourses;
   },
 
-  getUserDetails() {
-    let controller = this;
-    let userId = controller.get('userId');
-    let profileService = controller.get('profileService');
-    return Ember.RSVP.hash({
-      userDetails: Ember.RSVP.resolve(profileService.readUserProfile(userId))
-    })
-      .then(({userDetails}) => {
-        controller.set('userDetails', userDetails);
-      });
-  },
 
   fetchFeaturedCourses() {
     let controller = this;
@@ -158,6 +170,7 @@ export default Ember.Controller.extend({
     })
       .then(({featuredCourses}) => {
         controller.set('featuredCourses', featuredCourses);
+        controller.set('isLoading', false);
       });
   },
 

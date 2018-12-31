@@ -5,9 +5,11 @@
     </div>
     <div class="badged-group"></div>
   </div>
-  <div class="unit-count-container" title="Units" data-toggle="tooltip">
-    <i class="icon"></i>
-    <span>{{course.unitCount}}</span>
+  <div class="count-container">
+    <div class="unit-count-container" title="Units" data-toggle="tooltip">
+      <i class="icon"></i>
+      <span>{{course.unitCount}}</span>
+    </div>
   </div>
   <div class="course-info-container">
     <div class="course-user-info">
@@ -30,7 +32,7 @@
   <div class="card-panel-footer">
     <div class="buttons-container">
       <div class="left-aligned">
-        <div class="play-btn action-btn" title="Play" data-toggle="tooltip" data-placement="right" {{action "onPlayCourse" course.id}}>{{gru-icon name="ic_play_arrow"}}</div>
+        <div class="play-btn action-btn" title="Play" data-toggle="tooltip" data-placement="right" {{action "onPlayCourse" course.id}}>{{gru-icon name="play_arrow"}}</div>
       </div>
       <div class="right-aligned">
         {{#unless isPremiumCourse}}

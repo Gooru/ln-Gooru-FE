@@ -62,7 +62,7 @@
         font-weight: bold;
         position: relative;
 
-        span {
+        span.down-arrow {
           height: 24px;
         }
 
@@ -72,11 +72,19 @@
           cursor: pointer;
         }
 
+        .selected-catalog {
+          margin-top: 18px;
+          $font-size: 10px;
+          $line-height: 1.2;
+          $lines-to-show: 2;
+          @include ellipsis($font-size: $font-size, $line-height: $line-height, $lines-to-show: $lines-to-show);
+        }
+
         .search-filter-container-list {
           position: absolute;
           background: $white;
           top: -3px;
-          z-index: 10;
+          z-index: 17;
           left: -30px;
           box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.1);
           visibility: hidden;
@@ -166,25 +174,31 @@
       }
     }
 
-    .course-cards-container {
+    .body-container {
       max-height: calc(100vh - 116px);
       height: calc(90vh - 100px);
       overflow-y: auto;
-      height: 100%;
       width: 100%;
       padding-top: 30px;
       padding-bottom: 30px;
       background: #f1f3f7;
-      display: grid;
-      grid-template-columns: auto auto auto;
-      justify-content: center;
-      grid-gap: 16px;
-      grid-row-gap: 0px;
-      .course-card-container {
-        .card-panel-container {
-          height: 340px;
-          margin-bottom: 15px;
+      .course-cards-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        .course-card-container {
+          .card-panel-container {
+            height: 340px;
+            margin-bottom: 15px;
+          }
         }
+        .course-card-container {
+          text-align: center;
+          font-size: 20px;
+        }
+      }
+      .course-not-found {
+        text-align: center;
+        font-size: 18px;
       }
     }
   }

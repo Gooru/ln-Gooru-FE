@@ -103,6 +103,7 @@ export default Object.assign(quizzesTranslations, {
     'add-content-prompt':
       'You haven\'t created <span>{{type}}</span> yet. Go on, be bold.',
     'add-course': 'Create New Course',
+    'add-coruse-to-class': 'Add Course',
     'add-domains-to-unit': 'Add Domains to Unit',
     'add-url': 'Add URL',
     'add-from-url': 'Add from URL',

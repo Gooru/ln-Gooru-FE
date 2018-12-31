@@ -1,24 +1,28 @@
 <div class="add-course-ctrl">
-  <div class="course-main-container">
-  <div class="featured-courses-container">
-    {{#each featuredCourses as |course|}}
-      <div class="featured-course">
-        {{cards.gru-add-course-card course=course onAddCourse="onAddCourse" onRemixCourse="onRemixCourse"}}
+  {{#if isLoading}}
+    {{three-bounce-spinner}}
+  {{else}}
+    <div class="course-main-container">
+      <div class="add-course-header">{{t 'common.add-coruse-to-class'}}</div>
+      <div class="featured-courses-container">
+        {{#each featuredCourses as |course|}}
+          <div class="featured-course">
+            {{cards.gru-add-course-card course=course onAddCourse="onAddCourse" onRemixCourse="onRemixCourse"}}
+          </div>
+        {{/each}}
       </div>
-    {{/each}}
-  </div>
-</div>
+    </div>
 
-  <div class="content-catalogs-container">
-    {{#each contentCatalogs as |catalog|}}
-      <div class="catalog-card" {{action "onSelectCatalog" catalog}}>
-        <div class="catalog-name">{{catalog.name}}</div>
-        <div class="catalog-image" style="background-image: url({{catalog.image}})"></div>
-      </div>
-    {{/each}}
-  </div>
+    <div class="content-catalogs-container">
+      {{#each contentCatalogs as |catalog|}}
+        <div class="catalog-card" {{action "onSelectCatalog" catalog}}>
+          <div class="catalog-name">{{catalog.name}}</div>
+          <div class="catalog-image {{unless catalog.image 'gooru-logo'}}" style="background-image: url({{catalog.image}})"></div>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
 </div>
-
 
 
 {{#if isShowSearchCoursePullUp}}
