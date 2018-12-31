@@ -24,7 +24,6 @@
   }
 
   .course-search-container {
-
     .search-header {
       height: 50px;
       display: inline-flex;
@@ -178,10 +177,59 @@
       background: #f1f3f7;
       display: grid;
       grid-template-columns: auto auto auto;
+      justify-content: center;
+      grid-gap: 16px;
+      grid-row-gap: 0px;
       .course-card-container {
         .card-panel-container {
           height: 340px;
           margin-bottom: 15px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .course-search-container {
+      .course-cards-container {
+        .course-card-container {
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .course-search-container {
+      .course-cards-container {
+      }
+    }
+  }
+  @media screen and (max-width: $screen-568 - 1) {
+    .course-search-container {
+      .course-cards-container {
+        display: grid;
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .course-search-container {
+      width: 100vw;
+      .course-cards-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: center;
+        grid-gap: 40px;
+      }
+    }
+  }
+  @media screen and (max-width: 481px) {
+    .course-search-container {
+      .course-cards-container {
+        display: grid;
+        grid-template-columns: auto;
+        .course-card-container {
+          margin: auto 45px;
         }
       }
     }
