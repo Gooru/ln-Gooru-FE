@@ -25,7 +25,8 @@ export default Ember.Component.extend({
     currentItemType: [
       { type: 'assessment', iconClass: 'grucount' },
       { type: 'collection', iconClass: 'view_comfy' },
-      { type: 'assessment-external', iconClass: 'grucount' }
+      { type: 'assessment-external', iconClass: 'grucount' },
+      { type: 'collection-external', iconClass: 'view_comfy' }
     ]
     /* ,'notificationTypeCurrentItem' : [ { '' } ] //TBD if required*/
   },
