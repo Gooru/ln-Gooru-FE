@@ -158,6 +158,9 @@
             text-align: center;
             text-transform: uppercase;
           }
+          &.disabled {
+            pointer-events: none;
+          }
 
           .no-performance {
             color: #37424b;
