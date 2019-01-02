@@ -32,7 +32,14 @@
       </div>
     {{/if}}
   </div>
-  <div class="body-container">
+  <div class="course-cards-container">
+    {{#each courses as |course|}}
+      <div class="course-card-container">
+        {{activity.course-card course=course isHideCoursePerf=true onAddCourse="onAddCourse" onRemixCourse="onRemixCourse"}}
+      </div>
+    {{/each}}
+  </div>
+  <!-- <div class="pull-up-body-container"> -->
     {{#if isLoading}}
       {{three-bounce-spinner}}
     {{else}}
@@ -47,5 +54,5 @@
         <div class="course-not-found">{{t 'common.no-courses-to-display'}}</div>
       {{/if}}
     {{/if}}
-  </div>
+  <!-- </div> -->
 </div>

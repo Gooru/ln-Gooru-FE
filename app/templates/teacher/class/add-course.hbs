@@ -13,14 +13,18 @@
       </div>
     </div>
 
+    <div class="browse-content">{{t 'class.quick-start.browse-content'}}</div>
     <div class="content-catalogs-container">
-      {{#each contentCatalogs as |catalog|}}
+      {{#each catalogListToShow as |catalog|}}
         <div class="catalog-card" {{action "onSelectCatalog" catalog}}>
           <div class="catalog-name">{{catalog.name}}</div>
           <div class="catalog-image {{unless catalog.image 'gooru-logo'}}" style="background-image: url({{catalog.image}})"></div>
         </div>
       {{/each}}
     </div>
+    {{#if isShowMoreCatalogs}}
+        <span class="show-more-results" {{action 'showMoreResults'}}>{{t "common.show-more-results"}}</span>
+    {{/if}}
   {{/if}}
 </div>
 

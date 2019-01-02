@@ -880,7 +880,8 @@ export default Object.assign(quizzesTranslations, {
       'choose-course': 'Choose Course',
       'remix-from-course': 'Remix a Featured Course',
       'featured-course': 'View Featured Courses',
-      'remix-desc': 'Copy and customize a featured course for your students'
+      'remix-desc': 'Copy and customize a featured course for your students',
+      'browse-content': 'or browse our content catalogs.'
     }
   },
   classes: {

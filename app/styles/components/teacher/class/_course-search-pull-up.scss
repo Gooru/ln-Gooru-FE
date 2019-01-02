@@ -174,16 +174,23 @@
       }
     }
 
-    .body-container {
-      max-height: calc(100vh - 116px);
-      height: calc(90vh - 100px);
-      overflow-y: auto;
-      width: 100%;
-      padding-top: 30px;
-      padding-bottom: 30px;
-      background: #f1f3f7;
+    // .pull-up-body-container {
+      // max-height: calc(100vh - 116px);
+      // height: calc(90vh - 100px);
+      // overflow-y: auto;
+      // width: 100%;
+      // padding-top: 30px;
+      // padding-bottom: 30px;
+      // background: #f1f3f7;
       .course-cards-container {
         display: grid;
+        max-height: calc(100vh - 116px);
+        height: calc(90vh - 100px);
+        overflow-y: auto;
+        width: 100%;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        background: #f1f3f7;
         grid-template-columns: auto auto auto;
         .course-card-container {
           .card-panel-container {
@@ -200,7 +207,7 @@
         text-align: center;
         font-size: 18px;
       }
-    }
+    // }
   }
 
   @media screen and (max-width: 992px) {

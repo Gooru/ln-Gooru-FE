@@ -42,6 +42,14 @@
     }
   }
 
+  .browse-content {
+    font-size: 30px;
+    font-weight: 300;
+    text-align: center;
+    color: $white;
+    opacity: 0.7;
+  }
+
   .content-catalogs-container {
     display: flex;
     overflow-x: auto;
@@ -62,7 +70,7 @@
       margin: 0 5px;
       display: block;
       .catalog-name {
-        font-size: 14px;
+        $font-size: 14px;
         $line-height: 0.94;
         $lines-to-show: 2;
         font-weight: bold;
@@ -70,10 +78,11 @@
         color: #1aa9eb;
         margin-top: 10px;
         @include ellipsis(
-          $font-size: 14px,
+          $font-size: $font-size,
           $line-height: $line-height,
           $lines-to-show: $lines-to-show
         );
+        height: 26.32px;
       }
       .catalog-image {
         width: 93px;
@@ -87,6 +96,10 @@
           background-image: url(gooru/images/gooru-logo.svg) !important;
         }
       }
+    }
+
+    .show-more-results {
+      padding: 10px 0;
     }
   }
 

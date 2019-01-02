@@ -50,20 +50,17 @@ export default Ember.Controller.extend({
   actions: {
     onAddCourse(courseId) {
       let controller = this;
-      console.log('add course id', courseId);
-      // controller.addCourseToClass(courseId);
+      controller.addCourseToClass(courseId);
     },
 
     onRemixCourse(courseId) {
       let controller = this;
-      console.log('remix course id', courseId);
-      // controller.remixCourse(courseId);
+      controller.remixCourse(courseId);
     },
 
     onSelectCatalog(catalogLibrary) {
       let controller = this;
       let dataSource = catalogLibrary.id;
-      let libraryCourses = Ember.A([]);
       if (dataSource === 'catalog') {
         controller.searchCourses().then(function(searchCourses) {
           controller.set('libraryCourses', searchCourses);
@@ -90,13 +87,19 @@ export default Ember.Controller.extend({
           controller.set('libraryCourses', searchCourses);
         });
       }
+    },
+
+    showMoreResults() {
+      let controller = this;
+      let contentCatalogs = controller.get('contentCatalogs');
+      controller.set('catalogListToShow', contentCatalogs);
+      controller.set('isShowMoreCatalogs', false);
     }
   },
 
   observeLibraries: Ember.observer('libraries', function() {
     let controller = this;
     let libraries = controller.get('libraries');
-    console.log('session', this.get('applicationController'));
     let contentCatalogs = controller.get('contentCatalogs');
     contentCatalogs = contentCatalogs.concat(libraries);
     controller.set('contentCatalogs', contentCatalogs);
@@ -113,8 +116,6 @@ export default Ember.Controller.extend({
 
   userId: Ember.computed.alias('session.userId'),
 
-  userDetails: null,
-
   contentCatalogs: Ember.computed('applicationController', function() {
     let controller = this;
     let tenantLogo = controller.get('tenantLogo');
@@ -130,7 +131,17 @@ export default Ember.Controller.extend({
         name: 'My Content',
         image: userAvatar
       }
-    ])
+    ]);
+  }),
+
+  catalogListToShow: Ember.computed('contentCatalogs', function() {
+    let controller = this;
+    let catalogListToShow = controller.get('contentCatalogs');
+    if (catalogListToShow.length > 4) {
+      catalogListToShow = catalogListToShow.slice(0, 4);
+      controller.set('isShowMoreCatalogs', true);
+    }
+    return catalogListToShow;
   }),
 
   classGrade: Ember.computed('class', function() {
@@ -142,6 +153,8 @@ export default Ember.Controller.extend({
   tenantLogo: Ember.computed.alias('applicationController.tenant.theme.header.logo'),
 
   userDetails: Ember.computed.alias('applicationController.profile'),
+
+  isShowMoreCatalogs: false,
 
 
   /**
@@ -165,8 +178,13 @@ export default Ember.Controller.extend({
   fetchFeaturedCourses() {
     let controller = this;
     let searchService = controller.get('searchService');
+    let classGrade = controller.get('classGrade');
+    let filters = {
+      'flt.subject': null,
+      'flt.grade': classGrade
+    };
     return Ember.RSVP.hash({
-      featuredCourses: Ember.RSVP.resolve(searchService.searchFeaturedCourses('*'))
+      featuredCourses: Ember.RSVP.resolve(searchService.searchFeaturedCourses('*', filters))
     })
       .then(({featuredCourses}) => {
         controller.set('featuredCourses', featuredCourses);
