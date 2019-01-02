@@ -2835,9 +2835,12 @@ export default Object.assign(quizzesTranslations, {
 
   'self-report': {
     'your-score': 'Your Score',
+    'time_spent': 'Time Spent',
     'update-error': 'Problem with updating score',
     'validation-error': 'Enter valid score',
-    'enter-score': 'Enter your score here'
+    'enter-score': 'Enter your score here',
+    'enter-timeSpent': 'Enter your time spent here',
+    'validation-error-time': 'Enter valid time'
   },
   notifications: {
     'notificationlist-header-title': 'NOTIFICATIONS',
