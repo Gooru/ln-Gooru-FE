@@ -1,9 +1,8 @@
 import Ember from 'ember';
-import {CONTENT_TYPES, PLAYER_EVENT_SOURCE} from 'gooru-web/config/config';
-import {generateUUID, validateTimespent} from 'gooru-web/utils/utils';
+import { CONTENT_TYPES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import { generateUUID, validateTimespent } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['gru-external-collection-page'],
@@ -16,7 +15,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-
 
   /**
    * Observe the assessment change
@@ -60,7 +58,6 @@ export default Ember.Component.extend({
      * Action triggered when change score type
      */
 
-
     /**
      * Action triggered when click cancel
      */
@@ -75,7 +72,7 @@ export default Ember.Component.extend({
     component.$('.time').keyup(function() {
       let hours = component.get('hours');
       let mins = component.get('mins');
-      component.set('isValidtime', validateTimespent(hours,mins));
+      component.set('isValidtime', validateTimespent(hours, mins));
       component.set('isTyping', true);
     });
   },
@@ -107,12 +104,11 @@ export default Ember.Component.extend({
    */
   isStarted: 'null',
 
-
   /**
    * @property {Boolean} isTyping
    */
   isHourTyping: false,
-  isMinTyping:false,
+  isMinTyping: false,
 
   /**
    * @property {Number} startTime
@@ -129,7 +125,6 @@ export default Ember.Component.extend({
    */
   time: '',
 
-
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags
    */
@@ -142,16 +137,14 @@ export default Ember.Component.extend({
    * Method to validate entered score
    */
 
-
   /**
    * @function getDataParams
    * Method to get structured data params which needs to be pass with post API
    */
   getDataParams() {
-    console.log("data params");
     let component = this;
-    let hours=component.get('hours');
-    let mins=component.get('mins');
+    let hours = component.get('hours');
+    let mins = component.get('mins');
     let mapLocation = component.get('mapLocation');
     let context = mapLocation.get('context');
     let userId = component.get('session.userId');
@@ -170,10 +163,13 @@ export default Ember.Component.extend({
       content_source: component.get('source') || null,
       path_id: context.get('pathId') || 0,
       path_type: context.get('pathType') || null,
-      time_spent: component.roundMilliseconds(component.get('hours'),component.get('mins')),
-      evidence: [{TBD: 'True'}]
+      time_spent: component.roundMilliseconds(hours, mins),
+      evidence: [
+        {
+          TBD: 'True'
+        }
+      ]
     };
-    console.log("dataParams",dataParams);
     return dataParams;
   },
 
@@ -191,23 +187,19 @@ export default Ember.Component.extend({
       selfReport: selfReportedPromise
     })
       .then(function() {
-        component.set('time', component.getEnteredTime(dataParams));
+        component.set('time', component.getEnteredTime());
       })
       .catch(function() {
         component.set('time', null);
       });
-
   },
-
 
   /**
    * @function roundMilliseconds
    * Method to round milliseconds
    */
-  roundMilliseconds(hour,mins) {
-    console.log("hour,mins",hour,mins);
+  roundMilliseconds(hour, mins) {
     let timeSpentInMilliSec = (hour * 60 * 60 + mins * 60) * 1000;
-    console.log("timeSpentInMilliSec",timeSpentInMilliSec);
     return timeSpentInMilliSec;
   },
 
@@ -215,15 +207,14 @@ export default Ember.Component.extend({
    * @function getEnteredTime
    * Method to get entered score after update
    */
-  getEnteredTime(dataParams) {
+  getEnteredTime() {
     let component = this;
     let isStarted = component.get('isStarted');
     let time = null;
     if (isStarted) {
-      let hours=component.get('hours');
-      let mins=component.get('mins');
-      time =  `${hours} h ${mins} m`;
-      console.log("time is ",time);
+      let hours = component.get('hours');
+      let mins = component.get('mins');
+      time = `${hours} h ${mins} m`;
     }
     return time;
   },
@@ -238,7 +229,7 @@ export default Ember.Component.extend({
     component.set('time', '');
     component.set('isTimeEntered', false);
     component.set('isStarted', 'null');
-    component.set('isDisableTimeEditor',true);
+    component.set('isDisableTimeEditor', true);
     component.set('isValidScore', false);
     component.set('isValidtime', false);
     component.set('isValidmins', false);
@@ -256,30 +247,32 @@ export default Ember.Component.extend({
     let context = component.get('mapLocation.context');
     let source = component.get('source');
     if (context.get('classId') && source === PLAYER_EVENT_SOURCE.COURSE_MAP) {
-      component.get('router').transitionTo(
-        'student.class.course-map',
-        context.get('classId'),
-        {
+      component
+        .get('router')
+        .transitionTo('student.class.course-map', context.get('classId'), {
           queryParams: {
             refresh: true
           }
-        }
-      );
-    } else if (context.get('classId') && source === PLAYER_EVENT_SOURCE.DAILY_CLASS) {
-      component.get('router').transitionTo(
-        'student.class.class-activities',
-        context.get('classId')
-      );
+        });
+    } else if (
+      context.get('classId') &&
+      source === PLAYER_EVENT_SOURCE.DAILY_CLASS
+    ) {
+      component
+        .get('router')
+        .transitionTo('student.class.class-activities', context.get('classId'));
     } else {
-      component.get('router').transitionTo(
-        'student.independent.course-map',
-        context.get('courseId'),
-        {
-          queryParams: {
-            refresh: true
+      component
+        .get('router')
+        .transitionTo(
+          'student.independent.course-map',
+          context.get('courseId'),
+          {
+            queryParams: {
+              refresh: true
+            }
           }
-        }
-      );
+        );
     }
   }
 });
