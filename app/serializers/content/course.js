@@ -79,13 +79,15 @@ export default Ember.Object.extend(ConfigurationMixin, {
 
   serializeCourse: function(courseModel) {
     const serializer = this;
+    let description = courseModel.get('description');
+    let thumbnailUrl = cleanFilename(
+      courseModel.get('thumbnailUrl'),
+      this.get('session.cdnUrls')
+    );
     let serializedCourse = {
       title: courseModel.get('title'),
-      description: courseModel.get('description'),
-      thumbnail: cleanFilename(
-        courseModel.get('thumbnailUrl'),
-        this.get('session.cdnUrls')
-      ),
+      description: description ? description : null,
+      thumbnail: thumbnailUrl ? thumbnailUrl : null,
       visible_on_profile: courseModel.get('isVisibleOnProfile'),
       taxonomy: serializer
         .get('taxonomySerializer')
