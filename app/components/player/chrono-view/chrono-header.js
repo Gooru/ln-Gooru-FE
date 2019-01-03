@@ -375,13 +375,13 @@ export default Ember.Component.extend({
         return `${className} ${position}-node-${index}`;
       })
       .attr('cx', (d, i) => {
-        let xAxis = 10 + i * 30;
+        let xAxis = 11 + i * 30;
         return isLeft ? xAxis + 70 : xAxis;
       })
       .attr('cy', d => {
         let position;
         if (d.pathId) {
-          position = d.pathType === 'teacher' ? 25 : 50;
+          position = d.pathType === 'teacher' ? 24 : 50;
         } else {
           position = 35;
         }
@@ -398,7 +398,7 @@ export default Ember.Component.extend({
       .attr('y', d => {
         let position;
         if (d.pathId) {
-          position = d.pathType === 'teacher' ? 14 : 39;
+          position = d.pathType === 'teacher' ? 13 : 39;
         } else {
           position = 24;
         }

@@ -297,7 +297,7 @@
 
           .student-activity.left-4 {
             z-index: 5;
-            left: 8%;
+            left: calc(100% - 76vw);
             transform: scale(0.8);
             height: 300px;
             width: 158px;
@@ -305,7 +305,7 @@
 
           .student-activity.right-1 {
             z-index: 5;
-            left: 67%;
+            left: calc(100% - 28vw);
             transform: scale(0.8);
             height: 300px;
             width: 158px;
@@ -325,7 +325,7 @@
           }
 
           .student-activity.right-4 {
-            left: 80%;
+            left: calc(100% - 16vw);
             opacity: 0;
             transform: scale(0.5);
           }
@@ -341,7 +341,7 @@
 
           .student-activity.left-3 {
             z-index: 4;
-            left: 3%;
+            left: calc(100% - 81vw);
             transform: scale(0.7);
             opacity: 0.7;
             height: 100px;
@@ -350,7 +350,7 @@
 
           .student-activity.left-2 {
             z-index: 3;
-            left: -2%;
+            left: calc(100% - 85vw);
             transform: scale(0.6);
             opacity: 0.7;
             height: 100px;
@@ -359,31 +359,70 @@
 
           .student-activity.right-2 {
             z-index: 4;
-            left: 72%;
+            left: calc(100% - 23vw);
             transform: scale(0.7);
             opacity: 0.7;
           }
 
           .student-activity.right-3 {
             z-index: 3;
-            left: 77%;
+            left: calc(100% - 19vw);
             transform: scale(0.6);
             opacity: 0.7;
           }
 
           .student-activity.left-0 {
-            left: -30px;
+            left: calc(100% - 89vw);
             opacity: 0;
             visibility: hidden;
             transform: scale(0.5);
           }
 
           .student-activity.left-1 {
-            left: -70px;
+            left: calc(100% - 88vw);
             opacity: 0;
             transform: scale(0.5);
           }
-          @media screen and (max-width: 992px) {
+          @media screen and (min-width: $screen-md) and(max-width: $screen-1280) {
+            .student-activity.right-4 {
+                left: calc(100% - 21vw);
+            }
+
+            .student-activity.selected {
+                left: calc(100% - 53vw);
+            }
+
+            .student-activity.right-1 {
+                left: calc(100% - 41vw);
+            }
+
+            .student-activity.right-3 {
+                left: calc(100% - 27vw);
+            }
+
+            .student-activity.right-2 {
+                left: calc(100% - 33vw);
+            }
+
+            .student-activity.left-4 {
+                left: calc(100% - 65vw);
+            }
+
+            .student-activity.left-3 {
+                left: calc(100% - 73vw);
+            }
+
+            .student-activity.left-2 {
+                left: calc(100% - 79vw);
+            }
+            .student-activity.left-1 {
+              left: calc(100% - 85vw);
+            }
+          }
+          @media screen and (max-width: $screen-md) {
+            .student-activity.left-1 {
+              left: calc(100% - 80vw);
+            }
             .student-activity.right-4 {
               left: calc(100% - 28vw);
             }
