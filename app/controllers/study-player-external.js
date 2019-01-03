@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {
-  ROLES
-} from 'gooru-web/config/config';
+import { ROLES } from 'gooru-web/config/config';
 
 /**
  * Study Player External Controller
@@ -60,9 +58,13 @@ export default Ember.Controller.extend({
       studyPlayerController.set('isFullScreen', !isFullScreen);
       controller.set('isFullScreen', !isFullScreen);
       if (isFullScreen) {
-        Ember.$('body').removeClass('fullscreen').addClass('fullscreen-exit');
+        Ember.$('body')
+          .removeClass('fullscreen')
+          .addClass('fullscreen-exit');
       } else {
-        Ember.$('body').removeClass('fullscreen-exit').addClass('fullscreen');
+        Ember.$('body')
+          .removeClass('fullscreen-exit')
+          .addClass('fullscreen');
       }
     }
   },
@@ -136,7 +138,8 @@ export default Ember.Controller.extend({
    */
   steps: Ember.computed(function() {
     let controller = this;
-    let steps = Ember.A([{
+    let steps = Ember.A([
+      {
         title: controller
           .get('i18n')
           .t('gru-take-tour.study-player.stepOne.title'),
@@ -172,7 +175,8 @@ export default Ember.Controller.extend({
           .t('gru-take-tour.study-player.stepFour.description')
       },
       {
-        elementSelector: '.header-panel .performance-completion-take-tour-info .completion',
+        elementSelector:
+          '.header-panel .performance-completion-take-tour-info .completion',
         title: controller
           .get('i18n')
           .t('gru-take-tour.study-player.stepFive.title'),
@@ -181,7 +185,8 @@ export default Ember.Controller.extend({
           .t('gru-take-tour.study-player.stepFive.description')
       },
       {
-        elementSelector: '.header-panel  .performance-completion-take-tour-info .performance',
+        elementSelector:
+          '.header-panel  .performance-completion-take-tour-info .performance',
         title: controller
           .get('i18n')
           .t('gru-take-tour.study-player.stepSix.title'),

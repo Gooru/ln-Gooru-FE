@@ -247,7 +247,9 @@ export function getReactionIcon(reactionValue, basePath) {
     if (reaction && reaction.value && reaction.unicode) {
       html = `<div class="emotion emotion-${reaction.value}">`;
       html += '  <svg class="svg-sprite">';
-      html += `    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="${basePath}assets/emoji-one/emoji.svg#${reaction.unicode}"></use>`;
+      html += `    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="${basePath}assets/emoji-one/emoji.svg#${
+        reaction.unicode
+      }"></use>`;
       html += ' </svg>';
       html += '</div>';
     } else {
@@ -290,7 +292,7 @@ export function generateUUID() {
   var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(
     c
   ) {
-    var r = ((d + Math.random() * 16) % 16) | 0;
+    var r = (d + Math.random() * 16) % 16 | 0;
     d = Math.floor(d / 16);
     return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
   });
@@ -687,7 +689,9 @@ function assessmentFileData(
     const prefixHeader =
       level === 'course'
         ? `U${index + 1} `
-        : level === 'unit' ? `L${index + 1} ` : `A${index + 1} `;
+        : level === 'unit'
+          ? `L${index + 1} `
+          : `A${index + 1} `;
     const scoreHeader = `${prefixHeader}${headerItem.get('title')} score`;
     const timeHeader = `${prefixHeader}${headerItem.get('title')} time`;
     dataHeaders.push(scoreHeader);
@@ -967,7 +971,6 @@ export function getRoutePathFirstOccurrence() {
   return currentLocationPath.split('/')[2];
 }
 
-
 /**
  * Extract subject id by ignoring framework code, if available
  * @return {String}
@@ -975,7 +978,8 @@ export function getRoutePathFirstOccurrence() {
 export function getSubjectIdFromSubjectBucket(subjectBucket) {
   let subjectBucketSize = subjectBucket.split('.');
   let taxonomySubject = subjectBucket;
-  if (subjectBucketSize.length > 2) {  //subject with framework
+  if (subjectBucketSize.length > 2) {
+    //subject with framework
     taxonomySubject = subjectBucket.substring(subjectBucket.indexOf('.') + 1);
   }
   return taxonomySubject;
@@ -986,8 +990,8 @@ export function getSubjectIdFromSubjectBucket(subjectBucket) {
  * @return {Number}
  */
 export function diffMonthBtwTwoDates(date1, date2) {
-  let diff =(date1.getTime() - date2.getTime()) / 1000;
-  diff /= (60 * 60 * 24 * 7 * 4);
+  let diff = (date1.getTime() - date2.getTime()) / 1000;
+  diff /= 60 * 60 * 24 * 7 * 4;
   let monthsDiff = Math.abs(Math.round(diff));
   return monthsDiff > 0 ? monthsDiff - 1 : monthsDiff;
 }
@@ -1001,13 +1005,14 @@ export function validatePercentage(number) {
   let isNumber = !isNaN(number);
   if (isNumber) {
     let parsedNumber = parseFloat(number);
-    let isValidPercent = (parsedNumber >= 0) && (parsedNumber <= 100);
+    let isValidPercent = parsedNumber >= 0 && parsedNumber <= 100;
     if (isValidPercent) {
       isValidPercentValue = true;
       let isDecimalNumberAvailable = number.indexOf('.');
       if (isDecimalNumberAvailable > 0) {
         let decimalNumbers = number.substring(isDecimalNumberAvailable + 1);
-        isValidPercentValue = (decimalNumbers.length > 0) && (decimalNumbers.length < 3);
+        isValidPercentValue =
+          decimalNumbers.length > 0 && decimalNumbers.length < 3;
       }
     }
   }
@@ -1015,16 +1020,19 @@ export function validatePercentage(number) {
 }
 
 /**
-*Time spent validateFractionScore
-*/
+ * Validate time
+ * hour should be between 0 and 24
+ * min should be between 0 and 60
+ * @return {Boolean}
+ */
 export function validateTimespent(hour, min) {
-let isValidTime = false;
-hour = Number(hour);
-min = Number(min);
-if (hour || min) {
-let isValidHour = hour >= 0 && hour <= 24;
-let isValidMin = min >= 0 && min <= 60;
-isValidTime = isValidHour && isValidMin;
-}
-return isValidTime;
+  let isValidTime = false;
+  hour = Number(hour) || 0;
+  min = Number(min) || 0;
+  if (hour || min) {
+    let isValidHour = hour >= 0 && hour <= 24;
+    let isValidMin = min >= 0 && min <= 60;
+    isValidTime = isValidHour && isValidMin;
+  }
+  return isValidTime;
 }

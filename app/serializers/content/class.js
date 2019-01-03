@@ -115,7 +115,8 @@ export default Ember.Object.extend({
         return ProfileModel.create({ id: collaboratorId });
       }),
       courseVersion: payload.course_version,
-      setting: payload.setting || null
+      setting: payload.setting || null,
+      preference: payload.preference
     });
   },
 

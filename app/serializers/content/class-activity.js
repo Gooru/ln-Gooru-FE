@@ -104,10 +104,16 @@ export default Ember.Object.extend(ConfigurationMixin, {
       });
     }
 
-    if (contentType === 'assessment-external') {
+    if (
+      contentType === 'assessment-external' ||
+      contentType === 'collection-external'
+    ) {
       const thumbnailUrl = data.thumbnail
         ? basePath + data.thumbnail
-        : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+        : appRootPath +
+          (contentType === 'assessment-external'
+            ? DEFAULT_IMAGES.ASSESSMENT
+            : DEFAULT_IMAGES.COLLECTION);
 
       content = Collection.create({
         id: data.content_id,

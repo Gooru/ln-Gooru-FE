@@ -8,15 +8,16 @@
     background-position: left !important;
   }
 }
+
 .gru-external-collection-page {
-  background-image: url("gooru/assessment-start-page.jpg");
+  background-image: url("gooru/collection-start-page.jpg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   width: 100%;
   height: 100vh;
   background-position: inherit;
-  .external-collection-landing-page {
 
+  .external-collection-landing-page {
     .external-collection-card {
       width: 499px;
       min-height: 315px;
@@ -27,26 +28,35 @@
       top: 137px;
       left: 75px;
       padding: 30px;
+
       .header {
         max-height: 155px;
+
         .title {
           $font-size: 34px;
           $line-height: 1.09;
           $lines-to-show: 2;
           color: $dark-500;
           margin-bottom: 15px;
-          @include ellipsis($font-size: $font-size, $line-height: $line-height, $lines-to-show: $lines-to-show);
+          @include ellipsis(
+            $font-size: $font-size,
+            $line-height: $line-height,
+            $lines-to-show: $lines-to-show
+          );
         }
+
         .taxonomy {
           .gru-taxonomy-tag {
             background-color: $charcoal-grey;
             cursor: pointer;
+
             .standard-tag {
               color: $white;
             }
           }
         }
       }
+
       i {
         font-size: 20px;
         margin-left: 5px;
@@ -56,6 +66,7 @@
         font-size: 28px;
         cursor: default;
         margin: 0 10px 0 0;
+
         &.resource {
           background-image: url("gooru/images/add_resource_icon.svg");
           width: 20px;
@@ -63,6 +74,7 @@
           background-size: 19px;
           background-repeat: no-repeat;
         }
+
         &.add_question {
           background-image: url("gooru/images/add_question.svg");
           width: 20px;
@@ -71,16 +83,20 @@
           background-repeat: no-repeat;
         }
       }
+
       span {
         margin-right: 5px;
         font-weight: 600;
       }
+
       .body {
         padding-top: 15px;
         position: relative;
         min-height: 80px;
+
         .time-spent {
           font-size: 22px;
+
           input {
             width: 100px;
             opacity: 0.9;
@@ -88,19 +104,22 @@
             font-weight: bold;
             text-align: center;
             color: $charcoal-grey-two;
+
             &:focus {
               outline: none;
             }
           }
+
           .fraction-of {
             height: 64px;
             line-height: 100px;
             font-size: 20px;
             text-align: center;
             color: $charcoal-grey-two;
-            border-bottom: 1px solid rgba(151,151,151, 0.3);
+            border-bottom: 1px solid rgba(151, 151, 151, 0.3);
           }
         }
+
         .time-label {
           clear: both;
           font-size: 12px;
@@ -109,29 +128,40 @@
           text-transform: uppercase;
           margin-top: 4px;
         }
+
         .description {
           $font-size: 12px;
           $line-height: 1.5;
           $lines-to-show: 4;
           color: $charcoal-grey-two;
-          @include ellipsis($font-size: $font-size, $line-height: $line-height, $lines-to-show: $lines-to-show);
+          @include ellipsis(
+            $font-size: $font-size,
+            $line-height: $line-height,
+            $lines-to-show: $lines-to-show
+          );
         }
+
         .score-type-selector {
           display: flex;
           padding: 8px 0;
+
           .percentage {
             margin-right: 15px;
           }
+
           &.disabled {
             opacity: 0.3;
             pointer-events: none;
           }
         }
+
         .time-spent {
           &.disabled {
             opacity: 0.3;
             pointer-events: none;
-            .hours,.mins {
+
+            .hours,
+            .mins {
               pointer-events: none;
             }
           }
@@ -145,10 +175,12 @@
               font-weight: bold;
               text-align: center;
               color: $charcoal-grey-two;
+
               &:focus {
                 outline: none;
               }
             }
+
             .percentage-symbol {
               font-size: 35px;
               text-align: right;
@@ -156,6 +188,7 @@
               color: $dark-400;
             }
           }
+
           %input-properties {
             width: 80px;
             opacity: 0.9;
@@ -164,33 +197,42 @@
             text-align: center;
             color: $charcoal-grey-two;
           }
+
           .time-spent {
             display: flex;
             font-size: 22px;
-            .hours,.mins {
-            @extend %input-properties;
+
+            .hours,
+            .mins {
+              @extend %input-properties;
+
               &:focus {
                 outline: none;
               }
             }
+
             .fraction-of {
               height: 64px;
               line-height: 100px;
               font-size: 20px;
               text-align: center;
               color: $charcoal-grey-two;
-              border-bottom: 1px solid rgba(151,151,151, 0.3);
+              border-bottom: 1px solid rgba(151, 151, 151, 0.3);
             }
           }
+
           .disabled-editor {
             display: flex;
+
             input {
               @extend %input-properties;
+
               &:focus {
                 outline: none;
               }
             }
           }
+
           .time-label {
             font-size: 12px;
             font-weight: bold;
@@ -198,6 +240,7 @@
             text-transform: uppercase;
             margin-top: 4px;
           }
+
           .error {
             color: $red-400;
             font-size: 10px;
@@ -205,6 +248,7 @@
             margin-right: 22%;
           }
         }
+
         .entered-time {
           .time {
             font-size: 80px;
@@ -213,10 +257,12 @@
             color: $charcoal-grey-two;
             height: 80px;
             line-height: 80px;
+
             span {
               font-weight: normal;
             }
           }
+
           .time-label {
             font-size: 12px;
             font-weight: bold;
@@ -227,16 +273,20 @@
           }
         }
       }
+
       .footer {
         padding-top: 15px;
+
         .actions {
           display: flex;
+
           .btn {
             width: 76px;
             height: 36px;
             border-radius: 3px;
             margin: 8px;
           }
+
           .cancel {
             margin-left: 130px;
             background-color: $light-200;
@@ -245,15 +295,17 @@
               margin-left: 180px;
             }
           }
-          .start, .submit {
+
+          .start,
+          .submit {
             background-color: $blue-400;
             color: $white;
+
             &.disabled {
               pointer-events: none;
             }
           }
         }
-
       }
     }
   }

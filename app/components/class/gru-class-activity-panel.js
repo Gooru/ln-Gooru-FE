@@ -33,7 +33,10 @@ export default Ember.Component.extend({
       let contentId = content.get('id');
       let collectionType = content.get('collectionType');
       let url = content.get('url');
-      if (collectionType === 'assessment-external') {
+      if (
+        collectionType === 'assessment-external' ||
+        collectionType === 'collection-external'
+      ) {
         window.open(url, '_top');
       } else {
         this.get('router').transitionTo('player', contentId, {
@@ -106,7 +109,8 @@ export default Ember.Component.extend({
       let component = this;
       let isOfflineClass = component.get('isOfflineClass');
       let activationData = !!component.get('classActivity.activation_date');
-      return isOfflineClass && activationData;
+      let isFutureDate = component.get('isActivityFuture');
+      return isOfflineClass && activationData && !isFutureDate;
     }
   ),
 
