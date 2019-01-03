@@ -2,7 +2,7 @@
   <div class="external-collection-card">
     <div class="header">
       <div class="title">
-        {{assessment.title}}
+        {{collection.title}}
       </div>
       <div class="taxonomy">
         {{#if tags.length}}
@@ -10,13 +10,9 @@
         {{/if}}
       </div>
     </div>
-    <i class="resource icon"></i>
-    <span>23</span>
-    <i class="add_question icon"></i>
-    <span>33</span>
     <div class="body">
       <div class="description">
-        {{assessment.learningObjectives}}
+        {{collection.learningObjectives}}
       </div>
       {{#if isTimeEntered}}
         {{#if time}}
@@ -25,7 +21,7 @@
               {{time}}
             </div>
             <div class="time-label">
-                {{t 'self-report.time_spent'}}
+              {{t 'self-report.time_spent'}}
             </div>
           </div>
         {{else}}
@@ -33,14 +29,14 @@
         {{/if}}
       {{else}}
         <div class="time-spent {{if isDisableTimeEditor 'disabled'}}">
-            {{input type="text" class="time" id="hours" value=hours}}<span>h</span>
-            {{input type="text" class="time" id="mins" value=mins}}<span>m</span>
-           {{#if (and isTyping  (not isValidtime))}}
+          {{input type="text" class="time" id="hours" value=hours}}<span>h</span> {{input type="text" class="time" id="mins" value=mins}}
+          <span>m</span>
+          {{#if (and isTyping (not isValidtime))}}
             <div class="error">{{t 'self-report.validation-error-time'}}</div>
           {{/if}}
         </div>
         <div class="time-label">
-        {{t 'self-report.enter-timeSpent'}}
+          {{t 'self-report.enter-timeSpent'}}
         </div>
       {{/if}}
     </div>

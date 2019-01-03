@@ -2,7 +2,6 @@ import Ember from 'ember';
 import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 
 export default Ember.Controller.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   queryParams: [
@@ -19,7 +18,6 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
-
     /**
      * Actrion triggered when close external assessment player
      */

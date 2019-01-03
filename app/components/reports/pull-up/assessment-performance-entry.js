@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { generateUUID } from 'gooru-web/utils/utils';
+import { generateUUID, validateTimespent } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -18,6 +18,7 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
+
   didInsertElement() {
     let component = this;
     component.loadAssessmentData();
@@ -50,16 +51,15 @@ export default Ember.Component.extend({
       component.fetchQuestionData(question.id);
       component
         .$(`.question-${questionSeq} .question-info-container`)
-        .removeClass('selected-question');
-      component
-        .$(`.question-${questionSeq} .question-info-container`)
+        .removeClass('selected-question')
         .addClass('selected-question');
+      component.$(`.q-${questionSeq}-score`).focus();
     },
 
     //Action triggered when edit score of a question
-    onEditScore(questionSeq) {
+    onEditScore(question, sequence) {
       let component = this;
-      component.updateScoredElement(questionSeq);
+      component.toggleScoredElement(question, sequence);
     },
 
     //Action triggered when move to prev/next student
@@ -99,6 +99,17 @@ export default Ember.Component.extend({
         maxTimeInMilliSec / component.get('questions.length');
       component.set('questionTimespent', questionTimespent);
       component.set('isCaptureTimespent', false);
+      component.set('isShowTimespent', true);
+    },
+
+    // Action triggered when enter timespent for an assessment
+    onEnterTimespent() {
+      let component = this;
+      let maxTimespent = component.get('maxTimespent');
+      let hour = maxTimespent.hour || null;
+      let min = maxTimespent.min || null;
+      component.set('isTyping', true);
+      component.set('isValidTimespent', validateTimespent(hour, min));
     }
   },
 
@@ -113,7 +124,46 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isCaptureTimespent
    */
+
   isCaptureTimespent: true,
+  /**
+   * @property {Number} isvalidtime
+   */
+
+  isValidtime: false,
+  /**
+   * @property {Number} isvalidmins
+   */
+
+  isValidmins: false,
+
+  /**
+   * @property {Boolean} isTyping
+   */
+  isTyping: false,
+
+  /**
+   * @property {Boolean} isHourTyping
+   */
+  isHourTyping: false,
+
+  /**
+   * @property {Boolean} isMinTyping
+   */
+
+  isMinTyping: false,
+
+  /**
+   * @property {Number} isShowTimespent
+   */
+
+  isShowTimespent: false,
+
+  /**
+   * @property {Boolean} isValidTimeSpent
+   */
+
+  isValidTimeSpent: null,
 
   /**
    * @property {Array} students
@@ -196,7 +246,7 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isValid
    */
-  isValid: true,
+  isEnableNext: true,
 
   /**
    * @property {Boolean} isDisablePrev
@@ -226,6 +276,35 @@ export default Ember.Component.extend({
    * @property {Number} assessmentMaxScore
    */
   assessmentMaxScore: null,
+
+  /**
+   * @property {Object} prevStudent
+   */
+  prevStudent: Ember.computed('activeStudentSeq', function() {
+    let component = this;
+    let activeStudentSeq = component.get('activeStudentSeq');
+    let students = component.get('students');
+    return students.objectAt(activeStudentSeq - 1) || null;
+  }),
+
+  /**
+   * @property {Object} nextStudent
+   */
+  nextStudent: Ember.computed('activeStudentSeq', function() {
+    let component = this;
+    let activeStudentSeq = component.get('activeStudentSeq');
+    let students = component.get('students');
+    return students.objectAt(activeStudentSeq + 1) || null;
+  }),
+
+  /**
+   * @property {JSON} maxTimespent
+   */
+
+  maxTimespent: {
+    hour: null,
+    min: null
+  },
 
   // -------------------------------------------------------------------------
   // Methods
@@ -292,31 +371,34 @@ export default Ember.Component.extend({
     resources.forEach(function(question, index) {
       let inputElement = component.$(`.q-${index}-score`);
       component.$(inputElement).val(question.score);
-
-      component.updateScoredElement(index);
+      component.toggleScoredElement(question, index);
     });
   },
 
   /**
    * @function updateScoredElement
    */
-  updateScoredElement(questionSeq) {
+  toggleScoredElement(question, sequence) {
     let component = this;
-    let enteredScore = component.$(`.q-${questionSeq}-score`).val();
-    if (component.validateQuestionScore(questionSeq, enteredScore)) {
-      component
-        .$(`.question-${questionSeq}`)
-        .removeClass('scored')
-        .addClass('scored');
-      component
-        .$(`.question-${questionSeq} .question-thumbnail`)
-        .css('background-color', '#538a32');
-    } else {
-      component.$(`.question-${questionSeq}`).removeClass('scored');
-      component
-        .$(`.question-${questionSeq} .question-thumbnail`)
-        .css('background-color', '#d8d8d8');
+    let enteredScore = question.score !== '' ? Number(question.score) : null;
+    component
+      .$(`.question-${sequence} .question-thumbnail`)
+      .css('background-color', '#d8d8d8');
+    component
+      .$(`.question-${sequence}`)
+      .removeClass('scored')
+      .removeClass('wrong-score');
+    if (enteredScore) {
+      if (component.validateQuestionScore(enteredScore)) {
+        component.$(`.question-${sequence}`).addClass('scored');
+        component
+          .$(`.question-${sequence} .question-thumbnail`)
+          .css('background-color', '#538a32');
+      } else {
+        component.$(`.question-${sequence}`).addClass('wrong-score');
+      }
     }
+    component.set('isEnableNext', component.doEnableNext());
   },
 
   /**
@@ -343,12 +425,8 @@ export default Ember.Component.extend({
     let assessmentResources = Ember.A([]);
     let activeStudent = component.get('activeStudent');
     let activityData = component.get('activityData');
-    let conductedOn =
-      new Date(component.get('activityData.activation_date')) || new Date();
+    let conductedOn = new Date(activityData.activation_date) || new Date();
     let classId = component.get('classId');
-    let courseId = activityData.get('context.courseId') || null;
-    let unitId = activityData.get('context.unitId') || null;
-    let lessonId = activityData.get('context.lessonId') || null;
     let assessment = component.get('assessment');
     inputElements.each(function(index, scoreElement) {
       let questionData = questions.objectAt(index);
@@ -368,9 +446,6 @@ export default Ember.Component.extend({
       student_id: activeStudent.get('id'),
       session_id: generateUUID(),
       class_id: classId,
-      course_id: courseId,
-      unit_id: unitId,
-      lesson_id: lessonId,
       collection_id: assessment.id,
       collection_type: 'assessment',
       content_source: component.get('contentSource'),
@@ -386,20 +461,18 @@ export default Ember.Component.extend({
   /**
    * @function validateQuestionScore
    */
-  validateQuestionScore(questionSeq, score) {
+  validateQuestionScore(score) {
     let component = this;
     let maxScore = component.get('activeQuestion.maxScore');
-    let isValid = !isNaN(score) && Number(score) <= maxScore;
-    if (isValid) {
-      component.$(`.q-${questionSeq}-score`).removeClass('wrong-score');
-    } else {
-      component
-        .$(`.q-${questionSeq}-score`)
-        .removeClass('wrong-score')
-        .addClass('wrong-score');
-    }
-    component.set('isValid', isValid);
-    return isValid;
+    return score <= maxScore && score >= 0;
+  },
+
+  /**
+   * @function doEnableNext
+   */
+  doEnableNext() {
+    let component = this;
+    return !component.$('.question-container.wrong-score').length > 0;
   },
 
   /**

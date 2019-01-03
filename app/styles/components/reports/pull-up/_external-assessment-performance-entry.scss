@@ -53,10 +53,6 @@
         cursor: pointer;
         margin: 20px 0;
         justify-self: center;
-        &.disabled {
-          pointer-events: none;
-          margin: 6px 0;
-        }
       }
     }
 
@@ -91,36 +87,29 @@
     }
     .active-student {
       display: grid;
-      grid-template-columns: 40px auto;
+      grid-template-columns: 170px 127px 40px;
       align-items: center;
       height: 40px;
       align-items: center;
       justify-content: left;
       box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
       padding: 0 12px;
-      .student-thumbnail {
-        width: 32px;
-        height: 32px;
-        background-size: 32px 32px;
-        display: block;
-        border: none;
-        border-radius: 50%;
-        i {
-          display: none;
-        }
-      }
-
-      .student-name {
-        text-transform: capitalize;
+      .first-name,
+      .last-name,
+      .score {
+        text-transform: uppercase;
         font-size: 10px;
         font-weight: bold;
         color: #3e5e67;
       }
+      .last-name {
+        margin-left: 40px;
+      }
     }
 
     .assessment-max-score {
-      height: 14px;
-      line-height: 14px;
+      height: 24px;
+      line-height: 24px;
       border-bottom: 1px solid #3e90fa;
       font-size: 10px;
       font-weight: bold;
@@ -172,7 +161,15 @@
             font-weight: bold;
             color: #3e5e67;
             margin-right: 8px;
+            height: inherit;
+            line-height: 40px;
           }
+
+          .first-name {
+            border-right: 2px dashed rgba(45, 45, 45, 0.3);
+            margin-right: 0;
+          }
+
           .student-score {
             input.student-score-entry {
               width: 100%;
@@ -210,7 +207,7 @@
     .action-container {
       display: grid;
       grid-template-columns: auto;
-      justify-content: space-between;
+      justify-content: right;
       padding: 0 16px;
       align-items: center;
       height: 40px;
@@ -235,6 +232,10 @@
           margin-top: 4px;
         }
       }
+    }
+    .disabled {
+      pointer-events: none;
+      opacity: 0.5;
     }
 
     @media screen and (max-width: 320px) {

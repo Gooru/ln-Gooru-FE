@@ -19,10 +19,11 @@ export default Ember.Component.extend({
   /**
    * Observe the assessment change
    */
-  collectionObserver: Ember.observer('assessment', function() {
+  collectionObserver: Ember.observer('collection', function() {
     let component = this;
     component.resetProperties();
   }),
+
   didRender() {
     let component = this;
     component.timeValidator();
@@ -35,9 +36,8 @@ export default Ember.Component.extend({
      */
     onStart() {
       let component = this;
-      component.set('startTime', new Date().getTime());
       component.set('isStarted', true);
-      let externalUrl = component.get('assessment.url');
+      let externalUrl = component.get('collection.url');
       component.set('isDisableTimeEditor', false);
       if (externalUrl) {
         window.open(externalUrl, CONTENT_TYPES.EXTERNAL_ASSESSMENT);
@@ -50,7 +50,6 @@ export default Ember.Component.extend({
     onSubmit() {
       let component = this;
       component.set('isTimeEntered', true);
-      component.set('stopTime', new Date().getTime());
       component.updateSelfReport();
     },
 
@@ -93,32 +92,12 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isValidScore
    */
-  isValidScore: false,
-
   isValidtime: null,
 
-  isValidmins: null,
-
   /**
-   * @property {String} isStarted
+   * @property {Boolean} isStarted
    */
-  isStarted: 'null',
-
-  /**
-   * @property {Boolean} isTyping
-   */
-  isHourTyping: false,
-  isMinTyping: false,
-
-  /**
-   * @property {Number} startTime
-   */
-  startTime: 0,
-
-  /**
-   * @property {Number} stopTime
-   */
-  stopTime: 0,
+  isStarted: null,
 
   /**
    * @property {String} time
@@ -126,16 +105,14 @@ export default Ember.Component.extend({
   time: '',
 
   /**
-   * @property {TaxonomyTag[]} List of taxonomy tags
+   * @property {String} timeZone
    */
+  timeZone: Ember.computed(function() {
+    return moment.tz.guess() || null;
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
-
-  /**
-   * @function timeValidator
-   * Method to validate entered score
-   */
 
   /**
    * @function getDataParams
@@ -164,6 +141,7 @@ export default Ember.Component.extend({
       path_id: context.get('pathId') || 0,
       path_type: context.get('pathType') || null,
       time_spent: component.roundMilliseconds(hours, mins),
+      time_zone: component.get('timeZone'),
       evidence: [
         {
           TBD: 'True'
@@ -210,10 +188,10 @@ export default Ember.Component.extend({
   getEnteredTime() {
     let component = this;
     let isStarted = component.get('isStarted');
-    let time = null;
+    let time;
     if (isStarted) {
-      let hours = component.get('hours');
-      let mins = component.get('mins');
+      let hours = component.get('hours') || 0;
+      let mins = component.get('mins') || 0;
       time = `${hours} h ${mins} m`;
     }
     return time;
@@ -228,15 +206,9 @@ export default Ember.Component.extend({
     this._super(...arguments);
     component.set('time', '');
     component.set('isTimeEntered', false);
-    component.set('isStarted', 'null');
+    component.set('isStarted', false);
     component.set('isDisableTimeEditor', true);
-    component.set('isValidScore', false);
     component.set('isValidtime', false);
-    component.set('isValidmins', false);
-    component.set('startTime', 0);
-    component.set('stopTime', 0);
-    component.set('isHourTyping', false);
-    component.set('isMinTyping', false);
   },
 
   /**

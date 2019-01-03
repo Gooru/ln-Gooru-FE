@@ -223,6 +223,27 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Gets an External Collection by id
+   * @param {string} collectionId
+   * @returns {Promise}
+   */
+  readExternalCollection: function(collectionId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('collectionAdapter')
+        .readExternalCollection(collectionId)
+        .then(function(responseData) {
+          resolve(
+            service
+              .get('collectionSerializer')
+              .normalizeReadCollection(responseData)
+          );
+        }, reject);
+    });
+  },
+
+  /**
    * Reorder collection resources
    *
    * @param collectionId the id of the Collection to be updated
