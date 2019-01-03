@@ -77,7 +77,10 @@ export default Ember.Component.extend({
         source: component.get('source'),
         type: collectionType
       };
-      if (collectionType === 'assessment-external') {
+      if (
+        collectionType === 'assessment-external' ||
+        collectionType === 'collection-external'
+      ) {
         component.get('router').transitionTo('player-external', {
           queryParams
         });

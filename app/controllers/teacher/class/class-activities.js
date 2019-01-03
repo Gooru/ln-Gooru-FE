@@ -266,8 +266,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       datepickerEle.hide();
       let scheduleMonth = parseInt(moment(scheduleDate).format('MM'));
       let scheduleYear = parseInt(moment(scheduleDate).format('YYYY'));
-      let forMonth = classActivity.get('forMonth');
-      let forYear = classActivity.get('forYear');
+      let forMonth = parseInt(classActivity.get('forMonth'));
+      let forYear = parseInt(classActivity.get('forYear'));
       let activationDate = classActivity.get('activation_date');
       if (
         forMonth === scheduleMonth &&
@@ -833,10 +833,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let controller = this;
     let classId = controller.get('classId');
     return Ember.RSVP.hash({
-      activityMembers: Ember.RSVP.resolve(controller.get('classActivityService').fetchUsersForClassActivity(classId, activityId))
-    })
-      .then(({activityMembers}) =>  {
-        return activityMembers;
-      });
+      activityMembers: Ember.RSVP.resolve(
+        controller
+          .get('classActivityService')
+          .fetchUsersForClassActivity(classId, activityId)
+      )
+    }).then(({ activityMembers }) => {
+      return activityMembers;
+    });
   }
 });
