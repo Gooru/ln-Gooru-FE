@@ -1018,3 +1018,21 @@ export function validatePercentage(number) {
   }
   return isValidPercentValue;
 }
+
+/**
+ * Validate time
+ * hour should be between 0 and 24
+ * min should be between 0 and 60
+ * @return {Boolean}
+ */
+export function validateTimespent(hour, min) {
+  let isValidTime = false;
+  hour = Number(hour);
+  min = Number(min);
+  if (hour || min) {
+    let isValidHour = hour >= 0 && hour <= 24;
+    let isValidMin = min >= 0 && min <= 60;
+    isValidTime = isValidHour && isValidMin;
+  }
+  return isValidTime;
+}

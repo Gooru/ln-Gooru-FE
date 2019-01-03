@@ -1318,6 +1318,10 @@ $canvas-height: 1254px;
         .course-sec-cont {
           margin-left: 31px;
 
+          .dropdown-menu {
+            z-index: 500;
+          }
+
           .no-course-message {
             color: whitesmoke;
             font-size: 14px;
@@ -1583,6 +1587,7 @@ $canvas-height: 1254px;
           position: absolute;
           top: auto;
           left: auto;
+          z-index: 500 !important;
         }
         .student-settings-sec {
           width: 667px;

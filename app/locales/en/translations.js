@@ -256,6 +256,7 @@ export default Object.assign(quizzesTranslations, {
     'download-print': 'Download/Print',
     'drag-drop-suggestions': 'Or Drag and Drop Suggestions ...',
     'download-report': 'Download Report',
+    done: 'Done',
     edit: 'Edit',
     showassessments: 'Show Assessments',
     showcollections: 'Show Collections',
@@ -1302,13 +1303,15 @@ export default Object.assign(quizzesTranslations, {
         'welcome-dca':
           'Welcome to your  Class Activities where you can assign collections and assessments for students to complete today. Please note: any reports generated will only be available today for the most recent attempt.',
         'enter-max-timespent': 'Enter the Maximum Timespent for the Assessment',
+        'enter-max-assessment-time-spent': 'Enter the time spent in completing the assessment',
         'enter-max-score': 'Enter the Maximum Score for the Assessment',
         hour: 'h',
         min: 'm',
         'question-score': 'Question Score',
         'max-score': 'Max Score',
         'assessment-score': 'Assessment Score',
-        'assessment-max-score': 'Assessment Max. Score'
+        'assessment-max-score': 'Assessment Max. Score',
+        'enter-valid-timespent': 'Enter the valid time spent'
       },
       'click-to-copy': 'Click to copy class code',
       'course-map': 'Course Map',
