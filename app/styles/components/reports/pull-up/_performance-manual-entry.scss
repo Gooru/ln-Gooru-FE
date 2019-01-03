@@ -9,7 +9,46 @@
   color: #37434d;
   background-color: $white;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
-
+  .cancel-body {
+    text-align: center;
+    top: 100%;
+    z-index: 1031;
+    width: 360px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    color: #37434d;
+    background-color: $white;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    height: 480px;
+    span {
+      font-size: 16px;
+      position: sticky;
+      top: 38%;
+    }
+    .close-actions {
+      display: grid;
+      grid-template-columns: auto auto;
+      height: 95%;
+      align-items: center;
+      .cancel-button,
+      .ok-button {
+        width: 100px;
+        height: 40px;
+        border-radius: 4px;
+        background-color: #1aa9eb;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+        color: #fff;
+        text-transform: uppercase;
+        line-height: 40px;
+        cursor: pointer;
+        justify-self: center;
+        margin: 10px;
+      }
+    }
+  }
   .backdrop {
     position: fixed;
     width: 100%;
