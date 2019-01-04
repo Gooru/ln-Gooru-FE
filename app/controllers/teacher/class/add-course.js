@@ -61,13 +61,23 @@ export default Ember.Controller.extend({
     // Action triggered when add a course
     onAddCourse(courseId) {
       let controller = this;
-      controller.addCourseToClass(courseId);
+      let classId = controller.get('classId');
+      controller.addCourseToClass(courseId).then(function() {
+        controller.transitionToRoute('teacher.class.course-map', classId, {
+          queryParams: { refresh: true }
+        });
+      });
     },
 
     //Action triggered when remix a course
     onRemixCourse(courseId) {
       let controller = this;
-      controller.remixCourse(courseId);
+      let classId = controller.get('classId');
+      controller.remixCourse(courseId).then(function() {
+        controller.transitionToRoute('teacher.class.course-map', classId, {
+          queryParams: { refresh: true }
+        });
+      });
     },
 
     //Action triggered when select a catalog type
@@ -253,7 +263,9 @@ export default Ember.Controller.extend({
     let controller = this;
     let courseService = controller.get('courseService');
     return Ember.RSVP.hash({
-      copiedCourse: Ember.RSVP.resolve(courseService.copyCourse(courseId))
+      newCourseId: Ember.RSVP.resolve(courseService.copyCourse(courseId))
+    }).then(({newCourseId}) => {
+      return newCourseId;
     });
   },
 
@@ -263,10 +275,8 @@ export default Ember.Controller.extend({
    */
   remixCourse(courseId) {
     let controller = this;
-    let classId = controller.get('classId');
-    let classService = controller.get('classService');
-    return controller.copyCourse().then(function(copiedCourseId) {
-      return controller.addCourseToClass(classId, classId);
+    return controller.copyCourse(courseId).then(function(copiedCourseId) {
+      return controller.addCourseToClass(copiedCourseId);
     });
   },
 
