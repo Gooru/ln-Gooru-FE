@@ -28,7 +28,10 @@
         {{#if collectionPerformanceSummary}}
           {{#if (not-eq item.collectionType 'collection')}}
             <div class="dca-panel-performance" {{action 'openDcaContentReport' classActivity}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
-              <span>{{collectionPerformanceSummary.score}}%</span>
+              <span class="assessment-score">{{collectionPerformanceSummary.score}}%</span>
+              {{#if collectionPerformanceSummary.timeSpent}}
+                <span class="assessment-timespent">{{format-time collectionPerformanceSummary.timeSpent}}</span>
+              {{/if}}
             </div>
           {{else}}
             <div class="dca-panel-performance collection" {{action 'openDcaContentReport' classActivity}}>
@@ -111,9 +114,9 @@
           {{/if}}
         </div>
       </div>
-      <div class="time-spent">
+      <div class="re-add-data {{if (eq classActivity.usersCount 0) 'disabled'}}">
         {{#if collectionPerformanceSummary}}
-          <span>{{format-time collectionPerformanceSummary.timeSpent}}</span>
+          <span {{action "onOpenPerformanceEntry" item classActivity}}>{{t 'common.add-data'}}</span>
         {{/if}}
       </div>
     </div>

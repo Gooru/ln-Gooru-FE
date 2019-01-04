@@ -381,7 +381,7 @@ export default Ember.Component.extend({
       .attr('cy', d => {
         let position;
         if (d.pathId) {
-          position = d.pathType === 'teacher' ? 24 : 50;
+          position = d.pathType === 'teacher' ? 25 : 45;
         } else {
           position = 35;
         }
@@ -389,18 +389,18 @@ export default Ember.Component.extend({
       });
     group
       .append('foreignObject')
-      .attr('width', 22)
-      .attr('height', 22)
+      .attr('width', 24)
+      .attr('height', 24)
       .attr('x', (d, i) => {
         let xAxis = i * 30;
-        return isLeft ? xAxis + 70 : xAxis;
+        return isLeft ? xAxis + 69 : xAxis - 1;
       })
       .attr('y', d => {
         let position;
         if (d.pathId) {
-          position = d.pathType === 'teacher' ? 13 : 39;
+          position = d.pathType === 'teacher' ? 13 : 33;
         } else {
-          position = 24;
+          position = 23;
         }
         return position;
       })

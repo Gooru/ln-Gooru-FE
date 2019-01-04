@@ -124,8 +124,8 @@
       box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
       border: solid 1px rgba(151, 151, 151, 0.3);
       background-color: #ffffff;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-rows: 100px 1fr;
 
       .Oval-12 {
         width: 42px;
@@ -133,8 +133,7 @@
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
         background-color: #ffffff;
         border-radius: 59px;
-        margin-top: 42px;
-        margin-left: 13px;
+        margin: auto;
         color: #4c95d7;
 
         > i {
@@ -160,6 +159,8 @@
       .vbar {
         flex: 1;
         display: flex;
+        justify-content: center;
+        padding-bottom: 10px;
 
         svg {
           position: relative;
@@ -385,35 +386,35 @@
           }
           @media screen and (min-width: $screen-md) and(max-width: $screen-1280) {
             .student-activity.right-4 {
-                left: calc(100% - 21vw);
+              left: calc(100% - 21vw);
             }
 
             .student-activity.selected {
-                left: calc(100% - 53vw);
+              left: calc(100% - 53vw);
             }
 
             .student-activity.right-1 {
-                left: calc(100% - 41vw);
+              left: calc(100% - 41vw);
             }
 
             .student-activity.right-3 {
-                left: calc(100% - 27vw);
+              left: calc(100% - 27vw);
             }
 
             .student-activity.right-2 {
-                left: calc(100% - 33vw);
+              left: calc(100% - 33vw);
             }
 
             .student-activity.left-4 {
-                left: calc(100% - 65vw);
+              left: calc(100% - 65vw);
             }
 
             .student-activity.left-3 {
-                left: calc(100% - 73vw);
+              left: calc(100% - 73vw);
             }
 
             .student-activity.left-2 {
-                left: calc(100% - 79vw);
+              left: calc(100% - 79vw);
             }
             .student-activity.left-1 {
               left: calc(100% - 85vw);

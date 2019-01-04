@@ -31,32 +31,26 @@ export default Ember.Controller.extend({
   classId: Ember.computed('class', function() {
     return this.get('class.id');
   }),
-
   /**
-   * @property {userId}
+   * @property {classId}
    */
   userId: Ember.computed.alias('session.userId'),
-
   /**
-   * @property {timelineData}
+   * @property {timeData}
    */
   timeData: null,
-
   /**
    * @property {startDate}
    */
   startDate: null,
-
   /**
    * @property {barChartData}
    */
   barChartData: null,
-
   /**
    * @property {limit}
    */
   limit: 15,
-
   /**
    * @property {offset}
    */
@@ -66,15 +60,24 @@ export default Ember.Controller.extend({
    * @property {ShowProficiencyPullup}
    */
   isShowProficiencyPullup: false,
+  /**
+   * @property {classId}
+   */
+  isStudent: false,
+
+  showPullUp: false,
+
+  activeSubject: null,
 
   /**
    * @property {activeStudent}
    */
   activeStudent: null,
 
-  /**
-   * @property {mileStone}
-   */
+  noMoreData: false,
+
+  competencyCount: null,
+
   mileStone: Ember.computed(function() {
     return {
       iconClass: 'msaddon',
@@ -101,9 +104,11 @@ export default Ember.Controller.extend({
   actions: {
     paginateNext() {
       let component = this;
-      let offset = component.get('limit') + component.get('offset') + 1;
-      component.set('offset', offset);
-      component.getStudentPerformance();
+      if (!component.get('noMoreData')) {
+        let offset = component.get('limit') + component.get('offset') + 1;
+        component.set('offset', offset);
+        component.getStudentPerformance();
+      }
     },
 
     mileStoneHandler: function() {
@@ -166,6 +171,8 @@ export default Ember.Controller.extend({
     }).then(hash => {
       if (hash.studentPerformance.state === 'fulfilled') {
         let activities = hash.studentPerformance.value.activities.reverse();
+        let noMoreData = activities.length < this.get('limit');
+        this.set('noMoreData', noMoreData);
         activities.map((activitiy, index) => {
           this.get('timeData').insertAt(index, activitiy);
         });

@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import PrivateRouteMixin from 'gooru-web/mixins/private-route-mixin';
-import d3 from 'd3';
 
 export default Ember.Route.extend(PrivateRouteMixin, {
   queryParams: {
@@ -38,20 +37,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     return this.modelFor('study-player').barChartData;
   }),
 
-  vbarData: null,
-
   /**
    * Default page size
    */
-  pageSize: 20,
-
-  vbarDataChanged: Ember.observer('vbarData', function() {
-    const route = this;
-    var graphdata = route.get('vbarData');
-    Ember.run.later(function() {
-      route.paintGraph(graphdata);
-    });
-  }),
+  pageSize: 30,
 
   beforeModel(transition) {
     if (!this.modelFor('study-player').barchartdata) {
@@ -95,7 +84,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       parentModel.timeData = timeLineData;
       parentModel.class = hash.class;
       parentModel.perfromanceData = route.getCompletion(competencyMatrix);
-      route.set('vbarData', parentModel.perfromanceData);
       return parentModel;
     });
   },
@@ -112,6 +100,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('performanceSummary', model.performanceSummary);
     controller.set('course', model.course);
     controller.set('barchartdata', model.barchartdata);
+    controller.set('competencyCount', model.perfromanceData);
   },
 
   actions: {
@@ -122,18 +111,12 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       }
       $('.timeLineViewContainer').animate(
         {
-          '-webkit-transform': 'translate(500px,1000px)',
+          transform: 'translate(500px,1000px)',
           top: '100vh',
           height: '0vh'
         },
         {
-          duration: 400,
-          complete: function() {
-            $('.timeLineViewContainer').css({
-              top: '100vh',
-              height: '0vh'
-            });
-          }
+          duration: 400
         }
       );
     },
@@ -145,11 +128,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       $('.timeLineViewContainer').css({
         top: '0vh'
       });
-      Ember.run.later(function() {
+      Ember.run.scheduleOnce('afterRender', this, () => {
         $('.timeLineViewContainer').animate(
           {
-            '-webkit-transform': 'translate(500px,1000px)',
-            /* top: '0vh', */
+            transform: 'translate(500px,1000px)',
             height: '100vh'
           },
           {
@@ -158,81 +140,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         );
       });
     }
-  },
-  paintGraph(graphdatajsn) {
-    var graphdata = [
-      graphdatajsn.inprogress,
-      graphdatajsn.notstarted,
-      graphdatajsn.completed
-    ];
-
-    //Logic to convert to percent and show
-    let total =
-      graphdatajsn.inprogress +
-      graphdatajsn.notstarted +
-      graphdatajsn.completed;
-
-    var graphdataper = graphdata;
-    graphdataper.completed =
-      graphdatajsn.completed === 0
-        ? 0
-        : Math.round((graphdatajsn.completed / total) * 100);
-    graphdataper.inprogress =
-      graphdatajsn.inprogress === 0
-        ? 0
-        : Math.round((graphdatajsn.inprogress / total) * 100);
-    graphdataper.notstarted =
-      graphdatajsn.notstarted === 0
-        ? 0
-        : Math.round((graphdatajsn.notstarted / total) * 100);
-
-    graphdata = [
-      {
-        value: graphdataper.completed,
-        colorcode: '#5d93d9'
-      },
-      {
-        value: graphdataper.inprogress,
-        colorcode: '#a8d4e4'
-      },
-      {
-        value: graphdataper.notstarted,
-        colorcode: '#cdd2d6'
-      }
-    ];
-
-    //graphdata = [20, 10, 70];
-    const height = 500,
-      dmn = 100;
-
-    var yoffset = 0;
-    var yScale = d3.scale
-      .linear()
-      .domain([0, dmn])
-      .range([0, height]);
-
-    var svgCanvas = d3
-      .select('.vbar')
-      .html('')
-      .append('svg')
-      .attr('background', 'green');
-
-    svgCanvas
-      .selectAll('rect')
-      .data(graphdata)
-      .enter()
-      .append('rect')
-      .attr('fill', d => d.colorcode)
-      .attr('x', 27)
-      .attr('rx', 3)
-      .attr('ry', 3)
-      .attr('y', function(d) {
-        let rt = yoffset;
-        yoffset = yoffset + yScale(d.value);
-        return rt;
-      })
-      .attr('width', 12)
-      .attr('height', d => yScale(d.value));
   },
 
   getTimeLineData(parentModel) {
