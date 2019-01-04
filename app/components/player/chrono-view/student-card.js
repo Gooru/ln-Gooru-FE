@@ -68,14 +68,20 @@ export default Ember.Component.extend({
   getStundentCollectionReport() {
     let component = this;
     let activitiy = component.get('activitiy');
-    const isCollection = activitiy.get('collectionType') === 'collection';
-    const collectionPromise = isCollection
-      ? component
+    let collectionPromise;
+    if (activitiy.get('collectionType') === 'collection') {
+      collectionPromise = component
         .get('collectionService')
-        .readCollection(activitiy.get('collectionId'))
-      : component
+        .readCollection(activitiy.get('collectionId'));
+    } else if (activitiy.get('collectionType') === 'assessment') {
+      collectionPromise = component
         .get('assessmentService')
         .readAssessment(activitiy.get('collectionId'));
+    } else if (activitiy.get('collectionType') === 'assessment-external') {
+      collectionPromise = component
+        .get('assessmentService')
+        .readExternalAssessment(activitiy.get('collectionId'));
+    }
     return Ember.RSVP.hashSettled({
       collection: collectionPromise
     }).then(hash => {
@@ -95,6 +101,13 @@ export default Ember.Component.extend({
     onOpenCollectionReport() {
       let component = this;
       let isActive = this.get('activitiy.selected');
+      let collection = component.get('collection');
+      collection.set(
+        'performance',
+        Ember.Object.create({
+          score: component.get('activitiy.score')
+        })
+      );
       if (isActive) {
         component.sendAction(
           'onOpenCollectionReport',

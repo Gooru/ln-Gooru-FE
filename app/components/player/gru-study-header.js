@@ -92,11 +92,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
     },
 
     mileStoneHandler: function() {
-      if (this.get('router').currentPath === 'study-player.index') {
+      let currentPath = this.get('router').currentPath;
+      if (currentPath === 'study-player.index') {
         this.get('router').transitionTo('study-player.timeline-view');
-      } else if (
-        this.get('router').currentPath === 'reports.study-student-collection'
-      ) {
+      } else if (currentPath === 'reports.study-student-collection') {
         this.get('router').transitionTo(
           'study-player.timeline-view',
           this.get('courseId')
