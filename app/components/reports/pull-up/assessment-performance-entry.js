@@ -327,9 +327,7 @@ export default Ember.Component.extend({
     let isStudentDataEntered = studentsOfflineAssessmentData[activeStudentSeq]
       ? studentsOfflineAssessmentData[activeStudentSeq]
       : null;
-    if (isStudentDataEntered) {
-      component.loadEnteredStudentData(isStudentDataEntered, direction);
-    } else {
+
       let assessmentPerformanceDataParams = component.getDataParams();
       studentsOfflineAssessmentData[
         activeStudentSeq - 1
@@ -341,6 +339,9 @@ export default Ember.Component.extend({
       component.updateStudentAssessmentPerformance(
         assessmentPerformanceDataParams
       );
+    if (isStudentDataEntered) {
+      component.loadEnteredStudentData(isStudentDataEntered, direction);
+    } else {
       component.resetElements();
     }
     component.set('activeStudent', activeStudent);
@@ -366,7 +367,6 @@ export default Ember.Component.extend({
   loadEnteredStudentData(studentData) {
     let component = this;
     let resources = studentData ? studentData.resources : Ember.A([]);
-    component.$('.question-score').addClass('disabled');
     component.$('.question-info-container').removeClass('selected-question');
     resources.forEach(function(question, index) {
       let inputElement = component.$(`.q-${index}-score`);
