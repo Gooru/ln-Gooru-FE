@@ -1469,6 +1469,7 @@ export default Object.assign(quizzesTranslations, {
     description:
       'You are about to end this attempt and submit all responses. Any skipped questions will be counted as incorrect.',
     cancel: 'Cancel',
+    ok: 'ok',
     confirm: 'Finish Quiz',
     'finish-description': 'Click “Finish Quiz” to submit your responses.'
   },

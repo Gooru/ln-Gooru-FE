@@ -214,7 +214,21 @@ export default (function() {
     /**
      * @property {boolean}
      */
-    isAssessment: Ember.computed.not('isCollection'),
+    isAssessment: Ember.computed.equal('collectionType', 'assessment'),
+    /**
+     * @property {boolean} isExternalAssessment
+     */
+    isExternalAssessment: Ember.computed.equal(
+      'collectionType',
+      'assessment-external'
+    ),
+    /**
+     * @property {boolean} isExternalCollection
+     */
+    isExternalCollection: Ember.computed.equal(
+      'collectionType',
+      'collection-external'
+    ),
 
     /**
      * @property {Ember.Array} resources - An children alias property

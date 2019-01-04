@@ -399,6 +399,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
           component.set('isShowAssessmentPerformanceEntryPullUp', false);
           component.set('isShowCollectionPerformanceEntryPullUp', true);
+        } else {
+          component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
+          component.set('isShowAssessmentPerformanceEntryPullUp', false);
+          component.set('isShowCollectionPerformanceEntryPullUp', false);
+          component.set('isShowExternalCollectionPeformanceEntryPullUp', true);
         }
       });
       component.set('selectedItem', item);
@@ -410,6 +415,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
       controller.set('isShowAssessmentPerformanceEntryPullUp', false);
       controller.set('isShowCollectionPerformanceEntryPullUp', false);
+      controller.set('isShowExternalCollectionPeformanceEntryPullUp', false);
       controller.loadData();
     }
   },
