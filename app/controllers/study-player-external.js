@@ -220,7 +220,7 @@ export default Ember.Controller.extend({
   isAsssessment: Ember.computed(function() {
     let controller = this;
     let type = controller.get('type');
-    return type === 'external-external';
+    return type === 'assessment-external';
   }),
 
   // -------------------------------------------------------------------------

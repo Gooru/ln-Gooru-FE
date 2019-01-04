@@ -71,21 +71,6 @@
       svg {
         height: 70px;
 
-        path {
-          stroke-dasharray: 20;
-          stroke-dashoffset: 0;
-          animation: dash 1s linear;
-        }
-        @keyframes dash {
-          from {
-            stroke-dashoffset: 20;
-          }
-
-          to {
-            stroke-dashoffset: 0;
-          }
-        }
-
         .suggestion-curve,
         .suggestion-line {
           stroke-width: 2;

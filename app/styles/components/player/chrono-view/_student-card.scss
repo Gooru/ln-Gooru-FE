@@ -28,7 +28,8 @@
       flex-direction: row;
       border-bottom: 1px solid rgba(109, 65, 65, 0.2);
 
-      .icon-assessment {
+      .icon-assessment,
+      .icon-assessment-external {
         width: 20%;
         background-image: url("gooru/images/add_assessment.svg");
         background-repeat: no-repeat;
@@ -37,7 +38,8 @@
         opacity: 0.8;
       }
 
-      .icon-collection {
+      .icon-collection,
+      .icon-collection-external {
         width: 20%;
         background-image: url("gooru/images/add_collection.svg");
         background-repeat: no-repeat;
@@ -70,7 +72,7 @@
         display: flex;
         cursor: pointer;
 
-        &.in-progress {
+        &.disable {
           pointer-events: none;
         }
 

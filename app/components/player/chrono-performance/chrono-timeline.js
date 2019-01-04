@@ -38,6 +38,11 @@ export default Ember.Component.extend({
   studentCourseReportContext: null,
 
   /**
+   * @property {showExternalAssessmentReport}
+   */
+  showExternalAssessmentReport: null,
+
+  /**
    * @property {studentCollectionReportContext}
    */
   studentCollectionReportContext: null,
@@ -203,7 +208,13 @@ export default Ember.Component.extend({
         collection
       };
       component.set('studentCollectionReportContext', params);
-      component.set('showCollectionReport', true);
+      if (collectionType === 'assessment-external') {
+        component.set('showExternalAssessmentReport', true);
+        component.set('showCollectionReport', false);
+      } else {
+        component.set('showExternalAssessmentReport', false);
+        component.set('showCollectionReport', true);
+      }
     });
   },
 
