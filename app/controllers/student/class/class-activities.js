@@ -69,6 +69,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
     onSelectDate(date) {
       this.handleScrollToSpecificDate(date);
+    },
+    onClosePerformanceEntry() {
+      this.loadData();
     }
   },
 

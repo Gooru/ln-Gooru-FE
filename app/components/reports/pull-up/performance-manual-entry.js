@@ -18,6 +18,15 @@ export default Ember.Component.extend({
     //Action triggered when close perf entry pullup
     onClosePerformanceEntry() {
       let component = this;
+      component.set('isClose', true);
+      // component.closePullUp();
+    },
+    cancel() {
+      let component = this;
+      component.set('isClose', false);
+    },
+    closePullUp() {
+      let component = this;
       component.closePullUp();
     }
   },
@@ -29,6 +38,10 @@ export default Ember.Component.extend({
    * @property {Boolean} isShowPullUp
    */
   isShowPullUp: false,
+  /**
+   * @property {Boolean} isClose
+   */
+  isClose: false,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -51,6 +64,7 @@ export default Ember.Component.extend({
       400,
       function() {
         component.set('isShowPullUp', false);
+        component.sendAction('onClosePerformanceEntry');
       }
     );
   }
