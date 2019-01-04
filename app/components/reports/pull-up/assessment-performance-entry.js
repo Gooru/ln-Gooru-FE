@@ -328,17 +328,17 @@ export default Ember.Component.extend({
       ? studentsOfflineAssessmentData[activeStudentSeq]
       : null;
 
-      let assessmentPerformanceDataParams = component.getDataParams();
-      studentsOfflineAssessmentData[
-        activeStudentSeq - 1
-      ] = assessmentPerformanceDataParams;
-      component.set(
-        'studentsOfflineAssessmentData',
-        studentsOfflineAssessmentData
-      );
-      component.updateStudentAssessmentPerformance(
-        assessmentPerformanceDataParams
-      );
+    let assessmentPerformanceDataParams = component.getDataParams();
+    studentsOfflineAssessmentData[
+      activeStudentSeq - 1
+    ] = assessmentPerformanceDataParams;
+    component.set(
+      'studentsOfflineAssessmentData',
+      studentsOfflineAssessmentData
+    );
+    component.updateStudentAssessmentPerformance(
+      assessmentPerformanceDataParams
+    );
     if (isStudentDataEntered) {
       component.loadEnteredStudentData(isStudentDataEntered, direction);
     } else {
