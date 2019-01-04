@@ -16,6 +16,8 @@ export default Ember.Object.extend({
 
   copierNamespace: '/api/nucleus/v1/copier/collections',
 
+  externalNamespace: '/api/nucleus/v1/collections-external',
+
   /**
    * Posts a new collection
    *
@@ -91,6 +93,25 @@ export default Ember.Object.extend({
     };
     return Ember.$.ajax(url, options);
   },
+
+  /**
+   * Reads an External Collection by id
+   *
+   * @param {string} collectionId
+   * @returns {Promise}
+   */
+  readExternalCollection: function(collectionId) {
+    const adapter = this;
+    const namespace = adapter.get('externalNamespace');
+    const url = `${namespace}/${collectionId}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   /**
    * Reads a Collection by id
    *

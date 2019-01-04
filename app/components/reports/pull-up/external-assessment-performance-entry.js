@@ -1,11 +1,17 @@
 import Ember from 'ember';
-import {getBarGradeColor, generateUUID, validatePercentage} from 'gooru-web/utils/utils';
+import {
+  getBarGradeColor,
+  generateUUID,
+  validatePercentage
+} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
-  classNames: ['performance-manual-entry', 'external-assessment-performance-entry'],
+  classNames: [
+    'performance-manual-entry',
+    'external-assessment-performance-entry'
+  ],
 
   // -------------------------------------------------------------------------
   // Services
@@ -145,11 +151,10 @@ export default Ember.Component.extend({
   submitStudentAssessmentScore() {
     let component = this;
     let students = component.get('students');
-    students.map( student =>  {
+    students.map(student => {
       component.updateStudentAssessmentScore(component.getDataParams(student));
     });
   },
-
 
   /**
    * @function toggleScoredElement
@@ -163,7 +168,9 @@ export default Ember.Component.extend({
     if (assessmentScore !== null && assessmentScore !== '') {
       if (component.validateAssessmentScore(assessmentScore)) {
         component.$(STUDENT_INFO_CONTAINER).addClass('scored');
-        component.$(`.student-${studentSeq} .student-thumbnail`).css('background-color', getBarGradeColor(assessmentScore));
+        component
+          .$(`.student-${studentSeq} .student-thumbnail`)
+          .css('background-color', getBarGradeColor(assessmentScore));
       } else {
         component.$(STUDENT_INFO_CONTAINER).addClass('wrong-score');
       }
@@ -180,19 +187,19 @@ export default Ember.Component.extend({
     let maxScore = component.get('assessmentMaxScore');
     let classId = component.get('classId');
     let reqBodyParams = {
-      'student_id': student.id,
-      'tenant_id': component.get('session.tenantId') || null,
-      'collection_type': 'assessment-external',
-      'session_id': generateUUID(),
-      'time_zone': component.get('timeZone'),
-      'class_id': classId,
-      'collection_id': component.get('assessment.id'),
-      'partner_id': component.get('session.partnerId') || null,
-      'content_source': 'dailyclassactivity',
-      'score': Number(student.score) || 0,
-      'max_score': Number(maxScore) || 0,
-      'time_spent': 0,
-      'conducted_on': conductedOn.toISOString()
+      student_id: student.id,
+      tenant_id: component.get('session.tenantId') || null,
+      collection_type: 'assessment-external',
+      session_id: generateUUID(),
+      time_zone: component.get('timeZone'),
+      class_id: classId,
+      collection_id: component.get('assessment.id'),
+      partner_id: component.get('session.partnerId') || null,
+      content_source: 'dailyclassactivity',
+      score: Number(student.score) || 0,
+      max_score: Number(maxScore) || 0,
+      time_spent: 0,
+      conducted_on: conductedOn.toISOString()
     };
     return reqBodyParams;
   },
@@ -216,7 +223,9 @@ export default Ember.Component.extend({
     let component = this;
     let performanceService = component.get('performanceService');
     return Ember.RSVP.hash({
-      studentPerformanceUpdated: Ember.RSVP.resolve(performanceService.updateCollectionOfflinePerformance(reqBodyParams))
+      studentPerformanceUpdated: Ember.RSVP.resolve(
+        performanceService.updateCollectionOfflinePerformance(reqBodyParams)
+      )
     });
   }
 });

@@ -1,0 +1,75 @@
+.performance-manual-entry.external-collection-performance-entry {
+  background-color: $white;
+
+  .external-collection-performance-container {
+    position: relative;
+    display: grid;
+
+    .external-collection-thumbnail {
+      width: 360px;
+      height: 220px;
+      background-size: 360px 220px;
+      background-repeat: no-repeat;
+      object-fit: contain;
+    }
+
+    .submit {
+      width: 100px;
+      height: 40px;
+      border-radius: 4px;
+      background-color: #1aa9eb;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: center;
+      color: $white;
+      text-transform: uppercase;
+      line-height: 40px;
+      cursor: pointer;
+      justify-self: center;
+      margin: 10px;
+
+      &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+    }
+
+    .external-collection-resource-container {
+      display: grid;
+      min-height: 200px;
+      overflow-y: auto;
+
+      .timespent-entry {
+        display: flex;
+        padding-left: 5px;
+        padding-right: 5px;
+
+        .timespent-hour,
+        .timespent-mins {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .timespent {
+            width: 70%;
+            text-align: center;
+            font-size: 40px;
+
+            &.invalid-time {
+              box-shadow: inset 0 -1px 0 red !important;
+            }
+          }
+
+          .placeholder-text {
+            justify-content: center;
+            padding: 4px;
+            display: flex;
+            font-size: 40px;
+            width: 30%;
+          }
+        }
+      }
+    }
+  }
+}

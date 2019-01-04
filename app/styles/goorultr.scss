@@ -161,6 +161,7 @@ $box-shadow: 1px -1px;
 @import "components/cards/suggest-confirmation";
 @import "components/cards/dca-search-collection-card";
 @import "components/charts/gru-bubble-chart";
+@import "components/charts/competency-progress-bar";
 @import "components/charts/gru-completion-chart";
 @import "components/charts/gru-pie-chart";
 @import "components/charts/gru-radial-chart";
@@ -286,6 +287,7 @@ $box-shadow: 1px -1px;
 @import "components/player/gru-player-done";
 @import "components/player/gru-player-summary-footer.scss";
 @import "components/player/gru-external-assessment-page";
+@import "components/player/gru-external-collection-page";
 @import "components/player/gru-external-assessment-footer";
 @import "components/reports/gru-assessment-report";
 @import "components/reports/assessment/gru-questions";
@@ -412,8 +414,12 @@ $box-shadow: 1px -1px;
 @import "components/proficiency/inspect/student-domain-competency-performance";
 @import "components/proficiency/inspect/student-class-proficiency";
 
+// Chronological View
+@import "components/player/chrono-view/chrono-header";
+@import "components/player/chrono-view/student-card";
 // Performance Manual Entry
 @import "components/reports/pull-up/performance-manual-entry";
 @import "components/reports/pull-up/assessment-performance-entry";
 @import "components/reports/pull-up/external-assessment-performance-entry";
+@import "components/reports/pull-up/external-collection-performance-entry";
 @import "components/reports/pull-up/collection-performance-entry";

@@ -73,7 +73,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * @returns {Object} returns a JSON Object
    */
   serializeUpdateCollectionTitle: function(title) {
-    return { title };
+    return {
+      title
+    };
   },
 
   serializeCollection: function(collectionModel) {
@@ -131,6 +133,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       resourceCount: payload.resource_count || 0,
       sequence: payload.sequence_id,
       thumbnailUrl: thumbnailUrl,
+      url: payload.url || null,
       standards: serializer
         .get('taxonomySerializer')
         .normalizeTaxonomyObject(payload.taxonomy),

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { GRU_FEATURE_FLAG } from 'gooru-web/config/config';
 /**
  * Content map controller
  *
@@ -26,6 +27,26 @@ export default Ember.Controller.extend({
    */
   session: Ember.inject.service(),
 
+  showLocateMe: Ember.computed(function() {
+    return this.get('isFeatureEnabled');
+  }),
+
+  isFeatureEnabled: Ember.computed(function() {
+    let feature = 'chronoView';
+    return GRU_FEATURE_FLAG[feature];
+  }),
+
+  /**
+   * @property {Number} barChartData
+   */
+  barChartData: Ember.computed(function() {
+    return this.get('studentClassController.barChartData');
+  }),
+
+  performancePercentage: Ember.computed(function() {
+    return this.get('studentClassController.performancePercentage');
+  }),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -45,6 +66,16 @@ export default Ember.Controller.extend({
 
   demo: false,
 
+  mileStone: Ember.computed(function() {
+    return {
+      iconClass: 'msaddonTop',
+      offset: {
+        left: '-20px',
+        top: '9px'
+      }
+    };
+  }),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -59,6 +90,14 @@ export default Ember.Controller.extend({
     updateLocation: function(newLocation) {
       this.set('location', newLocation);
     },
+
+    mileStoneHandler: function() {
+      this.transitionToRoute(
+        'study-player.timeline-view',
+        this.get('currentClass.courseId')
+      );
+    },
+
     updateUserLocation: function(newLocation) {
       this.set('userLocation', newLocation);
     },
@@ -410,5 +449,10 @@ export default Ember.Controller.extend({
   onClosePullUp() {
     let controller = this;
     controller.set('showCourseReport', false);
+  },
+  updateParent(objData) {
+    if (this.attrs && this.attrs.updateModel) {
+      this.attrs.updateModel(objData);
+    }
   }
 });

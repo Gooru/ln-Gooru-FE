@@ -179,7 +179,7 @@ export default Ember.Controller.extend({
               ? competencies.length
               : maxNumberOfCompetencies;
           let skyLineCompetency = 0;
-          competencies.forEach( function(competency, competencyIndex) {
+          competencies.forEach(function(competency, competencyIndex) {
             totalCompetencies++;
             let studentCompetencyPerformanceData = Ember.Object.create({
               competencyCode: competency.competencyCode,
@@ -240,12 +240,17 @@ export default Ember.Controller.extend({
               notStartedDomainCompetencyCoverage +
               masteredDomainCompetencyCoverage
           });
-          studentDomainCompetenciesInfo.objectAt(skyLineCompetency).set('isSkyLineCompetency', true);
+          studentDomainCompetenciesInfo
+            .objectAt(skyLineCompetency)
+            .set('isSkyLineCompetency', true);
           studentCompetencies.set(
             'competencies',
             studentDomainCompetenciesInfo.sortBy('competencyStatus').reverse()
           );
-          studentCompetencies.set('actualCompetencies', studentDomainCompetenciesInfo);
+          studentCompetencies.set(
+            'actualCompetencies',
+            studentDomainCompetenciesInfo
+          );
           studentCompetencies.set(
             'in-progress',
             inProgressDomainCompetencyCoverage

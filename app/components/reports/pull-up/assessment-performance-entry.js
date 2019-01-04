@@ -381,13 +381,16 @@ export default Ember.Component.extend({
   toggleScoredElement(question, sequence) {
     let component = this;
     let enteredScore = question.score !== '' ? Number(question.score) : null;
-    component.$(`.question-${sequence} .question-thumbnail`).css('background-color', '#d8d8d8');
-    component.$(`.question-${sequence}`).removeClass('scored').removeClass('wrong-score');
+    component
+      .$(`.question-${sequence} .question-thumbnail`)
+      .css('background-color', '#d8d8d8');
+    component
+      .$(`.question-${sequence}`)
+      .removeClass('scored')
+      .removeClass('wrong-score');
     if (enteredScore) {
       if (component.validateQuestionScore(enteredScore)) {
-        component
-          .$(`.question-${sequence}`)
-          .addClass('scored');
+        component.$(`.question-${sequence}`).addClass('scored');
         component
           .$(`.question-${sequence} .question-thumbnail`)
           .css('background-color', '#538a32');

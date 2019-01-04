@@ -47,7 +47,11 @@ export default Ember.Component.extend({
   didRender() {
     var component = this;
     component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
-    component.$('[data-toggle="tooltip"]').tooltip().removeClass('show-tooltip').addClass('show-tooltip');
+    component
+      .$('[data-toggle="tooltip"]')
+      .tooltip()
+      .removeClass('show-tooltip')
+      .addClass('show-tooltip');
   },
 
   // -------------------------------------------------------------------------
@@ -539,7 +543,10 @@ export default Ember.Component.extend({
     let domainBoundaryLineContainer = svg
       .append('g')
       .attr('id', 'domain-boundary-line-container');
-    let baseLineContainer = svg.append('g').attr('id', 'baseline-container').attr('class', 'hidden-line');
+    let baseLineContainer = svg
+      .append('g')
+      .attr('id', 'baseline-container')
+      .attr('class', 'hidden-line');
     component.set('skylineContainer', skylineContainer);
     component.set('baseLineContainer', baseLineContainer);
     component.set('domainBoundaryLineContainer', domainBoundaryLineContainer);
