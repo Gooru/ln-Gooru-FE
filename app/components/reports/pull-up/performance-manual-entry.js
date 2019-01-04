@@ -64,6 +64,7 @@ export default Ember.Component.extend({
       400,
       function() {
         component.set('isShowPullUp', false);
+        component.sendAction('onClosePerformanceEntry');
       }
     );
   }

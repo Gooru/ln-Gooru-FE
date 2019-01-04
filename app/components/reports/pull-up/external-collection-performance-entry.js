@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { validateTimespent } from 'gooru-web/utils/utils';
+import { validateTimespent, generateUUID } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -160,6 +160,7 @@ export default Ember.Component.extend({
       lesson_id: collection.get('lessonId'),
       collection_id: collection.get('id'),
       collection_type: 'collection-external',
+      session_id: generateUUID(),
       content_source: component.get('contentSource'),
       time_zone: component.get('timeZone'),
       conducted_on: conductedOn.toISOString(),
