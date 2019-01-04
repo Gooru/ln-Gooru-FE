@@ -1,13 +1,23 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  // -------------------------------------------------------------------------
+  // Dependencies
+  /**
+   * @type {SessionService} Service to retrieve session information
+   */
   session: Ember.inject.service('session'),
 
+  /**
+   * @type {ChronoPerformanceService} Service to retrieve performance information
+   */
   chronoPerformanceService: Ember.inject.service('api-sdk/chrono-performance'),
+
   /**
    * @type {ProfileService} Service to retrieve profile information
    */
   profileService: Ember.inject.service('api-sdk/profile'),
+
   /**
    * @property {courseId}
    */
@@ -22,26 +32,49 @@ export default Ember.Controller.extend({
     return this.get('class.id');
   }),
 
+  /**
+   * @property {userId}
+   */
   userId: Ember.computed.alias('session.userId'),
 
+  /**
+   * @property {timelineData}
+   */
   timeData: null,
 
+  /**
+   * @property {startDate}
+   */
   startDate: null,
 
+  /**
+   * @property {barChartData}
+   */
   barChartData: null,
 
+  /**
+   * @property {limit}
+   */
   limit: 15,
 
+  /**
+   * @property {offset}
+   */
   offset: 0,
 
-  isStudent: false,
+  /**
+   * @property {ShowProficiencyPullup}
+   */
+  isShowProficiencyPullup: false,
 
-  showPullUp: false,
-
-  activeSubject: null,
-
+  /**
+   * @property {activeStudent}
+   */
   activeStudent: null,
 
+  /**
+   * @property {mileStone}
+   */
   mileStone: Ember.computed(function() {
     return {
       iconClass: 'msaddon',
@@ -59,21 +92,12 @@ export default Ember.Controller.extend({
     let controller = this;
     return controller.get('course.subject') || 'K12.MA';
   }),
-  /**
-   * @property {JSON}
-   * Property to store currently selected month and year
-   */
-  timeLine: Ember.computed(function() {
-    let curDate = new Date();
-    return {
-      month: curDate.getMonth() + 1,
-      year: curDate.getFullYear()
-    };
-  }),
+
   init() {
     let component = this;
     component.fetchStudentDetails();
   },
+
   actions: {
     paginateNext() {
       let component = this;
@@ -86,35 +110,23 @@ export default Ember.Controller.extend({
       this.isSysEvent = 1;
       this.transitionToRoute('study-player');
     },
+
     showPullUp() {
       let component = this;
-      component.set('showPullUp', true);
+      component.set('isShowProficiencyPullup', true);
     },
+
     onClosePullUp() {
       this.set('isShowProficiencyPullup', false);
     },
+
     onSelectCompetency(competency) {
       let controller = this;
       controller.set('selectedCompetency', competency);
       controller.set('isShowCompetencyContentReport', true);
     }
   },
-  /**
-   * @function fetchSubjectsByCategory
-   * @param category
-   * Method to fetch list of student using category
-   */
-  fetchSubjectsByCategory(category) {
-    let component = this;
-    component
-      .get('taxonomyService')
-      .getTaxonomySubjects(category.value)
-      .then(subjects => {
-        let subject = component.getActiveSubject(subjects);
-        component.set('taxonomySubjects', subjects);
-        component.set('activeSubject', subject);
-      });
-  },
+
   /**
    * @function fetchStudentDetails
    * @param userId
@@ -123,7 +135,6 @@ export default Ember.Controller.extend({
   fetchStudentDetails() {
     let component = this;
     let userId = component.get('userId');
-    component.set('isStudent', true);
     return Ember.RSVP.hash({
       studentDetails: Ember.RSVP.resolve(
         component.get('profileService').readUserProfile(userId)
@@ -132,24 +143,10 @@ export default Ember.Controller.extend({
       component.set('activeStudent', studentDetails);
     });
   },
-  /**
-   * @function getActiveSubject
-   * Method to get active subject by using subject bucket
-   */
-  getActiveSubject(subjects) {
-    let component = this;
-    let activeSubject = subjects.objectAt(1);
-    let subjectBucket = component.get('subjectBucket');
-    subjects.map(subject => {
-      if (subjectBucket.split(subject.id).length > 1) {
-        activeSubject = subject;
-      }
-    });
-    return activeSubject;
-  },
+
   /**
    * @function getStudentPerformance
-   * Method to get active student details
+   * Method to get active student performance details
    */
   getStudentPerformance() {
     const userId = this.get('session.userId');

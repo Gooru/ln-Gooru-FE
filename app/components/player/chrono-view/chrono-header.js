@@ -1,46 +1,104 @@
 import Ember from 'ember';
 import d3 from 'd3';
-import { STUDY_PLAYER_BAR_COLOR } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['chrono-header'],
 
   /**
-   * @property {String} color - Hex color value for the default bgd color of the bar chart
+   * @property {String} color - Hex color value for the default bgd color
    */
-  defaultBarColor: STUDY_PLAYER_BAR_COLOR,
+  defaultBarColor: '#E3E5EA',
 
+  /**
+   * @property {draw observer}
+   * draw the timeline activities whenever data model changes
+   */
   draw: Ember.observer(
     'activities.[]',
     'activities.@each.selected',
     function() {
       this.set('isLoading', false);
-      this.drawTimeLinePath();
+      this.drawTimeLineActivities();
     }
   ),
 
+  /**
+   * @property {rightTimeLine}
+   */
   rightTimeLine: null,
 
+  /**
+   * @property {leftTimeLine}
+   */
   leftTimeLine: null,
 
+  /**
+   * @property {activities}
+   */
   activities: null,
 
+  /**
+   * @property {selectedIndex}
+   */
   selectedIndex: null,
 
+  /**
+   * @property {isLoading}
+   */
   isLoading: false,
 
+  /**
+   * @property {activitiyEndDate}
+   */
   activitiyEndDate: Ember.computed('activities', function() {
     let lastIndex = this.get('activities').length - 1;
     let lastAccesedResource = this.get('activities').objectAt(lastIndex);
     return this.uiDateFormat(lastAccesedResource.get('lastAccessedDate'));
   }),
 
+  /**
+   * @property {activityDate}
+   */
   activityDate: Ember.computed('startDate', function() {
     return this.uiDateFormat(this.get('startDate'));
   }),
 
-  uiDateFormat: function(givenDate) {
+  // -------------------------------------------------------------------------
+  // Events
+
+  didInsertElement() {
+    const component = this;
+    component.drawTimeLineActivities();
+    component.paginateNext();
+  },
+
+  didRender() {
+    const component = this;
+    if (component.get('positionToCenter')) {
+      component.scrollToCenter();
+    }
+  },
+
+  willDestroyElement() {
+    let component = this;
+    component.clearChart();
+  },
+
+  actions: {
+    onOpenCourseReport() {
+      this.sendAction('onOpenCourseReport');
+    }
+  },
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function uiDateFormat
+   * Method to parse given date
+   */
+  uiDateFormat(givenDate) {
     givenDate = givenDate || new Date();
     if (typeof givenDate === 'string') {
       givenDate = new Date(givenDate);
@@ -59,20 +117,11 @@ export default Ember.Component.extend({
     return dateDisplay;
   },
 
-  didInsertElement() {
-    const component = this;
-    component.drawTimeLinePath();
-    component.paginateNext();
-  },
-
-  didRender() {
-    const component = this;
-    if (component.get('positionToCenter')) {
-      component.scrollToCenter();
-    }
-  },
-
-  drawTimeLinePath() {
+  /**
+   * @function drawTimeLineActivities
+   * Method to draw timeline activities
+   */
+  drawTimeLineActivities() {
     const component = this;
     component.clearChart();
     let selectedActivitiy = component
@@ -87,12 +136,8 @@ export default Ember.Component.extend({
     component.drawActiveResource();
   },
 
-  actions: {
-    onOpenCourseReport() {
-      this.sendAction('onOpenCourseReport');
-    }
-  },
   /**
+   * @function drawActiveResource
    * Function to draw active resource
    */
   drawActiveResource() {
@@ -192,6 +237,7 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function calculateLeftNodes
    * Function to calculate left timeline
    */
   calculateLeftNodes() {
@@ -206,6 +252,7 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function calculateRightNodes
    * Function to calculate right timeline
    */
   calculateRightNodes() {
@@ -220,7 +267,8 @@ export default Ember.Component.extend({
   },
 
   /**
-   * Function to draw nodes
+   * @function drawPath
+   * Function to draw path
    */
   drawPath(position) {
     let resources =
@@ -271,6 +319,7 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function drawHorizontalLine
    * Function to draw horizontal line
    */
   drawHorizontalLine(startPoint, isSuggestion, position) {
@@ -283,6 +332,7 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function drawCurve
    * Function to draw curve line
    */
   drawCurve(startPoint, points, isSuggestion, position) {
@@ -298,6 +348,7 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function drawNodes
    * Function to draw nodes
    */
   drawNodes(timeLine, position) {
@@ -324,13 +375,13 @@ export default Ember.Component.extend({
         return `${className} ${position}-node-${index}`;
       })
       .attr('cx', (d, i) => {
-        let xAxis = 10 + i * 30;
+        let xAxis = 11 + i * 30;
         return isLeft ? xAxis + 70 : xAxis;
       })
       .attr('cy', d => {
         let position;
         if (d.pathId) {
-          position = d.pathType === 'teacher' ? 25 : 50;
+          position = d.pathType === 'teacher' ? 24 : 50;
         } else {
           position = 35;
         }
@@ -347,7 +398,7 @@ export default Ember.Component.extend({
       .attr('y', d => {
         let position;
         if (d.pathId) {
-          position = d.pathType === 'teacher' ? 14 : 39;
+          position = d.pathType === 'teacher' ? 13 : 39;
         } else {
           position = 24;
         }
@@ -366,6 +417,7 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function handleView
    * Function to handle svg view
    */
   handleView(position) {
@@ -380,7 +432,9 @@ export default Ember.Component.extend({
     svg.setAttribute('width', `${width}px`);
     svg.setAttribute('height', `${yPosition}px`);
   },
+
   /**
+   * @function scrollToCenter
    * Function to set scroll position
    */
   scrollToCenter() {
@@ -397,6 +451,10 @@ export default Ember.Component.extend({
     component.set('positionToCenter', false);
   },
 
+  /**
+   * @function paginateNext
+   * Function to call paginate when scroll reaches at the end
+   */
   paginateNext() {
     let component = this;
     component.$('.student-activities').scroll(() => {
@@ -409,12 +467,8 @@ export default Ember.Component.extend({
     });
   },
 
-  willDestroyElement() {
-    let component = this;
-    component.clearChart();
-  },
-
   /**
+   * @function clearChart
    * Function to clear svg
    */
   clearChart() {

@@ -17,18 +17,39 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
 
+  /**
+   * @property {timeData}
+   */
   timeData: Ember.A([]),
 
+  /**
+   * @property {showCourseReport}
+   */
   showCourseReport: null,
 
+  /**
+   * @property {showCollectionReport}
+   */
   showCollectionReport: null,
 
+  /**
+   * @property {studentCourseReportContext}
+   */
   studentCourseReportContext: null,
 
+  /**
+   * @property {studentCollectionReportContext}
+   */
   studentCollectionReportContext: null,
 
+  /**
+   * @property {positionToCenter}
+   */
   positionToCenter: true,
 
+  /**
+   * @property {activities}
+   */
   activities: Ember.computed(
     'timeData.[]',
     'timeData.@each.selected',
@@ -88,6 +109,10 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Methods
 
+  /**
+   * @function parseTimelineData
+   * Method to parse and set timeline data
+   */
   parseTimelineData() {
     let component = this;
     let timeData = component.get('timeData');
@@ -134,6 +159,10 @@ export default Ember.Component.extend({
     return activities;
   },
 
+  /**
+   * @function checkPagination
+   * Method to check and call paginate if condition is satisfied
+   */
   checkPagination(selectedIndex) {
     let component = this;
     if (selectedIndex < 4) {
@@ -141,6 +170,10 @@ export default Ember.Component.extend({
     }
   },
 
+  /**
+   * @function openStudentCollectionReport
+   * Method to open student collection report
+   */
   openStudentCollectionReport(collection, collectionType) {
     let component = this;
     const lessonPromise = component.get('course.id')
@@ -174,6 +207,10 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * @function openStudentCourseReport
+   * Method to open student course report
+   */
   openStudentCourseReport() {
     let component = this;
     component.set('showCourseReport', true);
@@ -190,6 +227,10 @@ export default Ember.Component.extend({
     component.set('studentCourseReportContext', params);
   },
 
+  /**
+   * @function updatePosition
+   * Method to update position in timeData
+   */
   updatePosition(timeData, startIndex, endIndex, position, positionSeq) {
     for (let index = startIndex; index < endIndex; index++) {
       let data = timeData.objectAt(index);

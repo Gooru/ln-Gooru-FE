@@ -6,7 +6,7 @@
 
   .timeline-container {
     display: grid;
-    grid-template-columns: 60px 1fr 60px;
+    grid-template-columns: 70px 1fr 70px;
 
     .start-date {
       flex-direction: row-reverse;
@@ -20,6 +20,7 @@
       display: flex;
       align-items: center;
       color: #211238;
+      padding: 6px;
 
       .loader {
         width: 20px;
@@ -111,12 +112,12 @@
       }
 
       .suggestion-activity {
-        r: 10;
+        r: 11;
         fill: #f9944b;
       }
 
       .activity {
-        r: 10;
+        r: 11;
         fill: #0094dc;
       }
 
@@ -195,12 +196,12 @@
       }
 
       .suggestion-activity {
-        r: 10;
+        r: 11;
         fill: #f9944b;
       }
 
       .activity {
-        r: 10;
+        r: 11;
         fill: #0094dc;
       }
 

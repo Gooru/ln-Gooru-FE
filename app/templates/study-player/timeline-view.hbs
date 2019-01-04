@@ -21,8 +21,8 @@
       </div>
     {{/if}}
   </div>
-  {{#if showPullUp}}
-    {{#gru-pull-up pullUpType="proficiency-pullup" showPullUp=showPullUp onClosePullUp="onClosePullUp" as |pull-up|}}
+  {{#if isShowProficiencyPullup}}
+    {{#gru-pull-up pullUpType="proficiency-pullup" showPullUp=isShowProficiencyPullup onClosePullUp="onClosePullUp" as |pull-up|}}
       {{#if pull-up.isShowHeader}}
         {{proficiency.learner-proficiency-pull-up
            student=activeStudent
@@ -35,9 +35,9 @@
     {{/gru-pull-up}}
   {{/if}}
   {{#if isShowCompetencyContentReport}}
-    {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc isStudent=isStudent showPullUp=isShowCompetencyContentReport
+    {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc isStudent=true showPullUp=isShowCompetencyContentReport
       onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
-      {{reports.pull-up.competency-content-report competency=selectedCompetency userId=activeStudent.id isStudent=isStudent}}
+      {{reports.pull-up.competency-content-report competency=selectedCompetency userId=activeStudent.id isStudent=true}}
     {{/reports.pull-up.competency-report}}
   {{/if}}
 </div>
