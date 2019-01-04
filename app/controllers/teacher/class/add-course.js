@@ -14,8 +14,14 @@ export default Ember.Controller.extend({
    */
   libraryService: Ember.inject.service('api-sdk/library'),
 
+  /**
+   * @type {classService} classService
+   */
   classService: Ember.inject.service('api-sdk/class'),
 
+  /**
+   * @type {courseService} courseService
+   */
   courseService: Ember.inject.service('api-sdk/course'),
 
   /**
@@ -24,7 +30,7 @@ export default Ember.Controller.extend({
   profileService: Ember.inject.service('api-sdk/profile'),
 
   /**
-   * classController
+   * @property {Controller} Class Controller
    */
   classController: Ember.inject.controller('teacher.class'),
 
@@ -40,6 +46,8 @@ export default Ember.Controller.extend({
    */
   i18n: Ember.inject.service(),
 
+  // -------------------------------------------------------------------------
+  // Events
   init() {
     let controller = this;
     controller.set('isLoading', true);
@@ -47,17 +55,22 @@ export default Ember.Controller.extend({
     controller.fetchLibraries();
   },
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+    // Action triggered when add a course
     onAddCourse(courseId) {
       let controller = this;
       controller.addCourseToClass(courseId);
     },
 
+    //Action triggered when remix a course
     onRemixCourse(courseId) {
       let controller = this;
       controller.remixCourse(courseId);
     },
 
+    //Action triggered when select a catalog type
     onSelectCatalog(catalogLibrary) {
       let controller = this;
       let dataSource = catalogLibrary.id;
@@ -78,6 +91,7 @@ export default Ember.Controller.extend({
       controller.set('selectedCatalog', catalogLibrary);
     },
 
+    // Action triggered when search course with a text
     onSearchCourse(searchText) {
       let controller = this;
       let selectedCatalog = controller.get('selectedCatalog');
@@ -89,6 +103,7 @@ export default Ember.Controller.extend({
       }
     },
 
+    //Action triggered when click show more results
     showMoreResults() {
       let controller = this;
       let contentCatalogs = controller.get('contentCatalogs');
@@ -97,6 +112,7 @@ export default Ember.Controller.extend({
     }
   },
 
+  // Observe libraries property changes
   observeLibraries: Ember.observer('libraries', function() {
     let controller = this;
     let libraries = controller.get('libraries');
@@ -105,6 +121,12 @@ export default Ember.Controller.extend({
     controller.set('contentCatalogs', contentCatalogs);
   }),
 
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {Boolean} isShowSearchCoursePullUp
+   */
   isShowSearchCoursePullUp: false,
 
   /**
@@ -112,10 +134,19 @@ export default Ember.Controller.extend({
    */
   class: Ember.computed.alias('classController.class'),
 
+  /**
+   * @property {classId}
+   */
   classId: Ember.computed.alias('class.id'),
 
+  /**
+   * @property {UUID} userId
+   */
   userId: Ember.computed.alias('session.userId'),
 
+  /**
+   * @property {Array} contentCatalogs
+   */
   contentCatalogs: Ember.computed('applicationController', function() {
     let controller = this;
     let tenantLogo = controller.get('tenantLogo');
@@ -134,6 +165,9 @@ export default Ember.Controller.extend({
     ]);
   }),
 
+  /**
+   * @property {Array} catalogListToShow
+   */
   catalogListToShow: Ember.computed('contentCatalogs', function() {
     let controller = this;
     let catalogListToShow = controller.get('contentCatalogs');
@@ -144,18 +178,33 @@ export default Ember.Controller.extend({
     return catalogListToShow;
   }),
 
+  /**
+   * @property {Number} classGrade
+   */
   classGrade: Ember.computed('class', function() {
     let controller = this;
     let classData = controller.get('class');
     return classData.grade;
   }),
 
+  /**
+   * @property {tenantLogo}
+   */
   tenantLogo: Ember.computed.alias('applicationController.tenant.theme.header.logo'),
 
+  /**
+   * @property {Object} userDetails
+   */
   userDetails: Ember.computed.alias('applicationController.profile'),
 
+  /**
+   * @property {Boolean} isShowMoreCatalogs
+   */
   isShowMoreCatalogs: false,
 
+
+  // -------------------------------------------------------------------------
+  // Methods
 
   /**
    * Map each course to their corresponding owner
@@ -175,6 +224,10 @@ export default Ember.Controller.extend({
   },
 
 
+  /**
+   * @function fetchFeaturedCourses
+   * Method to fetch featured courses
+   */
   fetchFeaturedCourses() {
     let controller = this;
     let searchService = controller.get('searchService');
@@ -192,17 +245,22 @@ export default Ember.Controller.extend({
       });
   },
 
+  /**
+   * @function copyCourse
+   * Method to copy a course
+   */
   copyCourse(courseId) {
     let controller = this;
     let courseService = controller.get('courseService');
     return Ember.RSVP.hash({
       copiedCourse: Ember.RSVP.resolve(courseService.copyCourse(courseId))
-    })
-      .then(({copiedCourse}) => {
-        console.log('copiedCourse', copiedCourse);
-      });
+    });
   },
 
+  /**
+   * @function remixCourse
+   * Method to remix a course
+   */
   remixCourse(courseId) {
     let controller = this;
     let classId = controller.get('classId');
@@ -212,6 +270,10 @@ export default Ember.Controller.extend({
     });
   },
 
+  /**
+   * @function addCourseToClass
+   * Method to add a course to a class
+   */
   addCourseToClass(courseId) {
     let controller = this;
     let classId = controller.get('classId');
@@ -219,6 +281,10 @@ export default Ember.Controller.extend({
     return Ember.RSVP.resolve(classService.associateCourseToClass(courseId, classId));
   },
 
+  /**
+   * @function fetchLibraries
+   * Method to fetch libraries
+   */
   fetchLibraries() {
     let controller = this;
     let libraryService = controller.get('libraryService');
@@ -230,6 +296,10 @@ export default Ember.Controller.extend({
       });
   },
 
+  /**
+   * @function getUserCourses
+   * Method to fetch user created courses
+   */
   getUserCourses() {
     let controller = this;
     let params = {
@@ -237,7 +307,6 @@ export default Ember.Controller.extend({
     };
     let profileService = controller.get('profileService');
     let userDetails = controller.get('userDetails');
-    console.log('userDetails', userDetails);
     return Ember.RSVP.hash({
       userCourses: Ember.RSVP.resolve(profileService.getCourses(userDetails, params))
     })
@@ -246,6 +315,10 @@ export default Ember.Controller.extend({
       });
   },
 
+  /**
+   * @function searchCourses
+   * Method to search courses
+   */
   searchCourses(filters = '*') {
     let controller = this;
     let searchService = controller.get('searchService');
@@ -257,6 +330,10 @@ export default Ember.Controller.extend({
       });
   },
 
+  /**
+   * @function fetchLibraryCourses
+   * Method to fetch library courses
+   */
   fetchLibraryCourses(libraryId) {
     let controller = this;
     let libraryService = controller.get('libraryService');

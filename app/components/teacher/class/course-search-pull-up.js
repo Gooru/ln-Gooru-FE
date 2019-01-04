@@ -3,11 +3,25 @@ import { KEY_CODES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
 
+  // -------------------------------------------------------------------------
+  // Attributes
+
   classNames: ['course-search-pull-up'],
 
+  // -------------------------------------------------------------------------
+  // Properties
+  /**
+   * @property {Boolean} showPullUp
+   */
   showPullUp: false,
 
+  /**
+   * @property {Boolean} isMenuEnabled
+   */
   isMenuEnabled: false,
+
+  // -------------------------------------------------------------------------
+  // Events
 
   didInsertElement() {
     let component = this;
@@ -17,6 +31,8 @@ export default Ember.Component.extend({
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
     onPullUpClose() {
       let component = this;
@@ -87,7 +103,6 @@ export default Ember.Component.extend({
   handleSearchBar() {
     let component = this;
     component.$('#search-courses').on('keyup', function(e) {
-      console.log('keyup');
       if (e.which === KEY_CODES.ENTER) {
         component.loadData();
       }
