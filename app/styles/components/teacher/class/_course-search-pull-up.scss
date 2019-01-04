@@ -73,11 +73,15 @@
         }
 
         .selected-catalog {
-          margin-top: 18px;
+          margin-top: 4px;
           $font-size: 10px;
           $line-height: 1.2;
           $lines-to-show: 2;
-          @include ellipsis($font-size: $font-size, $line-height: $line-height, $lines-to-show: $lines-to-show);
+          @include ellipsis(
+            $font-size: $font-size,
+            $line-height: $line-height,
+            $lines-to-show: $lines-to-show
+          );
         }
 
         .search-filter-container-list {
@@ -185,6 +189,7 @@
       .cards-container {
         display: grid;
         grid-template-columns: auto auto auto;
+        padding-left: 25px;
         .course-card-container {
           .card-panel-container {
             height: 340px;
@@ -201,17 +206,15 @@
 
   @media screen and (max-width: 992px) {
     .course-search-container {
-      .course-cards-container {
-        .course-card-container {
-          margin: 0 auto;
+      .pull-up-body-container {
+        .cards-container {
+          .course-card-container {
+            margin: 0 auto;
+            grid-template-columns: auto auto;
+            padding-left: 0px;
+            padding-right: 15px;
+          }
         }
-      }
-    }
-  }
-
-  @media screen and (max-width: 320px) {
-    .course-search-container {
-      .course-cards-container {
       }
     }
   }
@@ -224,23 +227,39 @@
   }
   @media screen and (max-width: 768px) {
     .course-search-container {
-      width: 100vw;
-      .course-cards-container {
-        display: grid;
-        grid-template-columns: auto auto;
-        justify-content: center;
-        grid-gap: 40px;
+      .pull-up-body-container {
+        width: 100vw;
+        .cards-container {
+          display: grid;
+          grid-template-columns: auto auto;
+          justify-content: center;
+          grid-gap: 20px;
+          padding-left: 5px;
+          .course-card-container {
+          }
+        }
       }
     }
   }
   @media screen and (max-width: 481px) {
     .course-search-container {
-      .course-cards-container {
-        display: grid;
-        grid-template-columns: auto;
-        .course-card-container {
-          margin: auto 45px;
+      .pull-up-body-container {
+        .cards-container {
+          display: grid;
+          grid-template-columns: auto;
+          .course-card-container {
+            margin: auto 45px;
+          }
         }
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) and (min-width: 568px) {
+  .course-search-container {
+    .pull-up-body-container {
+      .cards-container {
+        grid-template-columns: auto auto;
       }
     }
   }

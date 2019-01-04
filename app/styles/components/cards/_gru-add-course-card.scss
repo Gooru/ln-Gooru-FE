@@ -60,7 +60,7 @@
         position: absolute;
         right: 10px;
         top: 10px;
-        background-image: url('gooru/badge-group.svg');
+        background-image: url("gooru/badge-group.svg");
         width: 30px;
         height: 30px;
         background-size: 30px 30px;
@@ -71,7 +71,6 @@
     .count-container {
       .unit-count-container {
         height: 25px;
-        width: max-content;
         border-bottom: 1px solid rgba(151, 151, 151, 0.4);
         background-color: $white;
 
@@ -169,7 +168,6 @@
         justify-content: space-between;
 
         .left-aligned {
-
         }
         .right-aligned {
           display: grid;

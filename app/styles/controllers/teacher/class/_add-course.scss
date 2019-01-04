@@ -28,7 +28,9 @@
       .featured-course {
         margin: 10px 15px;
         margin-left: 0px;
-        // box-shadow: 2px 0px 17px 1px rgba(17, 145, 197,1);
+      }
+      .featured-course:hover {
+        box-shadow: 0 0 10px 5px #00a9e9;
       }
       &::-webkit-scrollbar {
         height: 6px;
