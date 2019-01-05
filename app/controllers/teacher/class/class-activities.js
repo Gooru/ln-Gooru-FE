@@ -378,7 +378,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       this.handleScrollToSpecificDate(date);
     },
 
-    onOpenPerformanceEntry(item, activity) {
+    onOpenPerformanceEntry(item, activity, isRepeatEntry) {
       let component = this;
       component.fetchActivityUsers(activity.id).then(function(activityMembers) {
         let classMembers = component.get('members');
@@ -408,6 +408,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       });
       component.set('selectedItem', item);
       component.set('selectedActivity', activity);
+      component.set('isRepeatEntry', isRepeatEntry);
     },
 
     onClosePerformanceEntry() {
@@ -437,6 +438,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
+
+  isRepeatEntry: false,
 
   isOfflineClass: Ember.computed('class', function() {
     let controller = this;

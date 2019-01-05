@@ -1,7 +1,9 @@
 <div class="assessment-performance-container">
-    <div class="assessment-thumbnail" style="background-image: url({{assessment.thumbnailUrl}})"></div>
-    {{#if isCaptureTimespent}}
-      <div class="max-timespent-container">
+  <div class="assessment-thumbnail" style="background-image: url({{assessment.thumbnailUrl}})"></div>
+    {{#if isLoading}}
+      <div class="loading-spinner">{{three-bounce-spinner}}</div>
+    {{/if}}
+      <div class="max-timespent-container {{if isCaptureTimespent 'visible-section'}}">
         <div class="title-container">
           {{t 'teacher-landing.class.class-activities-tab.enter-max-assessment-time-spent'}}
         </div>
@@ -26,50 +28,50 @@
           {{t 'common.confirm'}}
         </div>
       </div>
-    {{else}}
-    <div class="active-question">
-      <div class="question-seq">{{t 'common.question'}} {{activeQuestionSeq}}</div>
-      <div class="question-max-score"> {{t 'teacher-landing.class.class-activities-tab.max-score'}}: {{activeQuestion.maxScore}}</div>
-    </div>
-    <div class="active-student">
-      <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})"></div>
-      <div class="student-name ellipsis">{{activeStudent.fullName}}</div>
-    </div>
-    <div class="questions-container">
-      {{#each questions as |question questionSeq|}}
-        <div class="question-container question-{{questionSeq}}">
-          <div class="question-info-container {{if (eq question.id activeQuestion.id) 'selected-question'}}" {{action "onSelectQuestion" question questionSeq}}>
-            <div class="question-thumbnail">{{gru-icon name="done_all"}}</div>
-            <div class="question-title ellipsis" {{action "onToggleQuestion" question questionSeq}}>{{plus-one questionSeq}}{{concat '. ' question.title}}</div>
-            <div class="question-score">
-              {{input type="text" class=(concat 'question-score-entry' ' q-' questionSeq '-score')
-                key-up=(action "onEditScore" question questionSeq)
-                pattern="[0-9]*"
-                inputmode="numeric"
-                value=question.score
-              }}
+      <div class="performance-entry-container {{unless isCaptureTimespent 'visible-section'}}">
+      <div class="active-question">
+        <div class="question-seq">{{t 'common.question'}} {{activeQuestionSeq}}</div>
+        <div class="question-max-score"> {{t 'teacher-landing.class.class-activities-tab.max-score'}}: {{activeQuestion.maxScore}}</div>
+      </div>
+      <div class="active-student">
+        <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})"></div>
+        <div class="student-name ellipsis">{{activeStudent.fullName}}</div>
+      </div>
+      <div class="questions-container">
+        {{#each questions as |question questionSeq|}}
+          <div class="question-container question-{{questionSeq}}">
+            <div class="question-info-container {{if (eq question.id activeQuestion.id) 'selected-question'}}" {{action "onSelectQuestion" question questionSeq}}>
+              <div class="question-thumbnail">{{gru-icon name="done_all"}}</div>
+              <div class="question-title ellipsis" {{action "onToggleQuestion" question questionSeq}}>{{plus-one questionSeq}}{{concat '. ' question.title}}</div>
+              <div class="question-score">
+                {{input type="text" class=(concat 'question-score-entry' ' q-' questionSeq '-score')
+                  key-up=(action "onEditScore" question questionSeq)
+                  pattern="[0-9]*"
+                  inputmode="numeric"
+                  value=question.score
+                }}
+              </div>
             </div>
+            <div class="question-description hidden">{{safe-html question.text}}</div>
           </div>
-          <div class="question-description hidden">{{safe-html question.text}}</div>
-        </div>
-      {{/each}}
+        {{/each}}
+      </div>
+      <div class="action-container">
+        {{#unless isDisablePrev}}
+          <div class="prev action ellipsis" {{action "onMoveStudent" 'prev'}}>
+            {{gru-icon name="fast_rewind" }}<span class="ellipsis">{{prevStudent.fullName}}</span>
+          </div>
+        {{else}}
+          <div></div>
+        {{/unless}}
+        {{#if isDisableNext}}
+          <div {{action "onSubmitPerformance"}} class="next action">{{t 'common.done'}}</div>
+        {{else}}
+          <div class="next action {{unless isEnableNext 'disabled'}}" {{action "onMoveStudent" 'next'}}>
+            <span class="ellipsis">{{nextStudent.fullName}}</span>
+            {{gru-icon name="fast_forward" }}
+          </div>
+        {{/if}}
+      </div>
     </div>
-    <div class="action-container">
-      {{#unless isDisablePrev}}
-        <div class="prev action ellipsis" {{action "onMoveStudent" 'prev'}}>
-          {{gru-icon name="fast_rewind" }}<span class="ellipsis">{{prevStudent.fullName}}</span>
-        </div>
-      {{else}}
-        <div></div>
-      {{/unless}}
-      {{#if isDisableNext}}
-        <div {{action "onSubmitPerformance"}} class="next action">{{t 'common.done'}}</div>
-      {{else}}
-        <div class="next action {{unless isEnableNext 'disabled'}}" {{action "onMoveStudent" 'next'}}>
-          <span class="ellipsis">{{nextStudent.fullName}}</span>
-          {{gru-icon name="fast_forward" }}
-        </div>
-      {{/if}}
-    </div>
-  {{/if}}
 </div>
