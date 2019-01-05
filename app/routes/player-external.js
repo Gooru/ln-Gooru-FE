@@ -4,7 +4,6 @@ import Ember from 'ember';
  * External Assessment Player Route
  */
 export default Ember.Route.extend({
-
   // -------------------------------------------------------------------------
   // Dependencies
   /**
@@ -17,36 +16,51 @@ export default Ember.Route.extend({
    */
   assessmentService: Ember.inject.service('api-sdk/assessment'),
 
+  /**
+   * @requires service:api-sdk/collection
+   */
+  collectionService: Ember.inject.service('api-sdk/collection'),
+
   // -------------------------------------------------------------------------
   // Methods
 
   model: function(params) {
     const route = this;
+    let itemType = params.type;
+    let resource =
+      itemType === 'collection-external'
+        ? route
+          .get('collectionService')
+          .readExternalCollection(params.collectionId)
+        : route
+          .get('assessmentService')
+          .readExternalAssessment(params.collectionId);
     return Ember.RSVP.hash({
-      externalAssessment: route.get('assessmentService').readExternalAssessment(params.collectionId)
-    })
-      .then(({externalAssessment}) => {
-        let mapLocation = Ember.Object.create({
-          context: Ember.Object.create({
-            classId: params.classId,
-            courseId: externalAssessment.get('courseId'),
-            unitId: externalAssessment.get('unitId'),
-            collectionId: externalAssessment.get('id'),
-            itemType: 'assessment-external'
-          })
-        });
-        return {
-          source: params.source,
-          mapLocation,
-          externalAssessment
-        };
+      externalResource: resource
+    }).then(({ externalResource }) => {
+      let mapLocation = Ember.Object.create({
+        context: Ember.Object.create({
+          classId: params.classId,
+          courseId: externalResource.get('courseId'),
+          unitId: externalResource.get('unitId'),
+          collectionId: externalResource.get('id'),
+          lessonId: externalResource.get('lessonId'),
+          itemType: itemType
+        })
       });
+      return {
+        source: params.source,
+        mapLocation,
+        externalResource,
+        itemType
+      };
+    });
   },
 
   setupController(controller, model) {
     controller.set('mapLocation', model.mapLocation);
     controller.set('source', model.source);
-    controller.set('externalAssessment', model.externalAssessment);
+    controller.set('resourceType', model.itemType);
+    controller.set('externalResource', model.externalResource);
   }
-
 });

@@ -1,0 +1,62 @@
+<div class="external-collection-landing-page">
+  <div class="external-collection-card">
+    <div class="header">
+      <div class="title">
+        {{collection.title}}
+      </div>
+      <div class="taxonomy">
+        {{#if tags.length}}
+          {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+        {{/if}}
+      </div>
+    </div>
+    <div class="body">
+      <div class="description">
+        {{collection.learningObjectives}}
+      </div>
+      {{#if isTimeEntered}}
+        {{#if time}}
+          <div class="entered-time">
+            <div class="time">
+              {{time}}
+            </div>
+            <div class="time-label">
+              {{t 'self-report.time_spent'}}
+            </div>
+          </div>
+        {{else}}
+          {{three-bounce-spinner}}
+        {{/if}}
+      {{else}}
+        <div class="time-spent {{if isDisableTimeEditor 'disabled'}}">
+          {{input type="text" class="time" id="hours" value=hours}}<span>h</span> {{input type="text" class="time" id="mins" value=mins}}
+          <span>m</span>
+          {{#if (and isTyping (not isValidtime))}}
+            <div class="error">{{t 'self-report.validation-error-time'}}</div>
+          {{/if}}
+        </div>
+        <div class="time-label">
+          {{t 'self-report.enter-timeSpent'}}
+        </div>
+      {{/if}}
+    </div>
+    <div class="footer">
+      <div class="actions">
+        {{#if (not isTimeEntered)}}
+          <div class="btn cancel {{if isTimeEntered 'score-entered'}}" {{action "onCancel"}}>
+            {{t 'common.cancel'}}
+          </div>
+          {{#if isDisableTimeEditor}}
+            <div class="btn start" {{action "onStart"}}>
+              {{t 'gru-assessment-confirmation.start'}}
+            </div>
+          {{else}}
+            <div class="btn submit {{unless isValidtime 'disabled'}}" {{action "onSubmit"}}>
+              {{t 'gru-assessment-confirmation.submit'}}
+            </div>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>

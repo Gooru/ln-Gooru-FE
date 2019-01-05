@@ -1,357 +1,255 @@
 import Ember from 'ember';
-import d3 from 'd3';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['chrono-timeline'],
 
-  timeData: null,
-  selectedIndex: 0,
-  animateDirection: 'left',
-
-  timeLineRightDate: function() {
-    let todaysDate = new Date();
-    return this.uiDateFormat(todaysDate);
-  }.property(),
-
-  timeLineLeftDate: function() {
-    return this.uiDateFormat(this.timeData.startDate);
-  }.property(),
-
-  uiDateFormat: function(givenDate) {
-    givenDate = givenDate || new Date();
-    if (typeof givenDate === 'string') {
-      givenDate = new Date(givenDate);
-    }
-    let dateLocale = 'en-us',
-      dateMonth = givenDate.toLocaleString(dateLocale, { month: 'short' }),
-      dateYear = givenDate.toLocaleString(dateLocale, { year: '2-digit' }),
-      dateDisplay = { mon: dateMonth, year: dateYear };
-    return dateDisplay;
-  },
-
-  cardDisplayConfig: {
-    totalCardToDisplay: 9,
-    activeDisplay: 3,
-    activeSideWays: 3,
-    dummyleft: [
-      { collectionType: 'collection', title: null },
-      { collectionType: 'collection', title: null },
-      { collectionType: 'collection', title: null }
-    ],
-    dummyRight: {},
-    assessment: { imgUrl: '', iconClass: 'grucount' },
-    collection: { imgUrl: '', iconClass: 'view_comfy' },
-    'assessment-external': { imgUrl: '', iconClass: 'grucount' }
-  },
+  // -------------------------------------------------------------------------
+  // Dependencies
+  session: Ember.inject.service('session'),
 
   /**
-   * @description Property for getting itype icon
+   * @requires {LessonService} Service to retrieve a lesson
    */
-  cardTypeClass: function(timeSession) {
-    const component = this;
-    let icnclass =
-      component.cardDisplayConfig[timeSession.collectionType].iconClass;
-    return icnclass;
-  },
+  lessonService: Ember.inject.service('api-sdk/lesson'),
 
-  timeDataChanged: Ember.observer('timeData', function() {
-    const route = this;
-    Ember.run.later(function() {
-      route.didInsertElement();
-    });
-  }),
-  currentCard: null,
-  displayCards: null,
+  // -------------------------------------------------------------------------
+  // Properties
 
-  init() {
-    this._super(...arguments);
-    const component = this;
-    component.timeData.forEach(timeSession => {
-      timeSession.iconClass = component.cardTypeClass(timeSession);
-    });
-  },
+  /**
+   * @property {timeData}
+   */
+  timeData: Ember.A([]),
 
-  didInsertElement() {
-    if (this.timeData && this.timeData.length > 0) {
-      this.showSelCard(this.timeData[this.timeData.length - 1]);
+  /**
+   * @property {showCourseReport}
+   */
+  showCourseReport: null,
+
+  /**
+   * @property {showCollectionReport}
+   */
+  showCollectionReport: null,
+
+  /**
+   * @property {studentCourseReportContext}
+   */
+  studentCourseReportContext: null,
+
+  /**
+   * @property {showExternalAssessmentReport}
+   */
+  showExternalAssessmentReport: null,
+
+  /**
+   * @property {studentCollectionReportContext}
+   */
+  studentCollectionReportContext: null,
+
+  /**
+   * @property {positionToCenter}
+   */
+  positionToCenter: true,
+
+  /**
+   * @property {activities}
+   */
+  activities: Ember.computed(
+    'timeData.[]',
+    'timeData.@each.selected',
+    function() {
+      return this.parseTimelineData();
     }
-  },
+  ),
+
+  // -------------------------------------------------------------------------
+  // Actions
 
   actions: {
-    showCard(currentCard) {
-      const comp = this;
-      let cardpos = comp.getCardDisplayPos(currentCard);
-      cardpos = !cardpos && currentCard ? 0 : cardpos;
-      let resv = comp.animateCard(cardpos);
-      resv.then(function() {
-        comp.showSelCard(currentCard);
-      });
+    onPaginateNext() {
+      this.sendAction('paginateNext');
     },
-    scrollLeft() {
-      this.attrs.scrollLeft();
+
+    onClosePullUp() {
+      let component = this;
+      component.set('showCourseReport', false);
     },
-    scrollRight() {
-      this.attrs.scrollRight();
+
+    onOpenCourseReport() {
+      let component = this;
+      component.openStudentCourseReport();
     },
-    onClickRight() {
-      const comp = this;
-      let resv = comp.animateCard(1);
-      resv.then(function() {
-        let curcard = comp.get('currentCard');
-        comp.setDisplayPack(curcard, 1);
-        curcard = comp.get('currentCard');
-        comp.selectTimeSession(curcard);
-      });
-      //this.$('.cards-display').carousel('next');
+
+    onOpenCollectionReport(collection, collectionType) {
+      let component = this;
+      component.openStudentCollectionReport(collection, collectionType);
     },
-    onClickLeft() {
-      //this.$('.cards-display').carousel('next');
-      const comp = this;
-      let resv = this.animateCard(-1);
-      resv.then(function() {
-        let curcard = comp.get('currentCard');
-        comp.setDisplayPack(curcard, -1);
-        curcard = comp.get('currentCard');
-        comp.selectTimeSession(curcard);
-      });
+
+    onSelectCard(activity) {
+      let component = this;
+      let timeData = component.get('timeData');
+      let selectedTimeData = timeData.findBy('selected', true);
+      let selectedIndex = component.get('activities').indexOf(activity);
+      component.checkPagination(selectedIndex);
+      selectedTimeData.set('selected', false);
+      activity.set('selected', true);
+      component.set('positionToCenter', true);
     }
   },
 
-  showSelCard(currentCard) {
-    this.selectTimeSession(currentCard);
-    this.set('currentCard', currentCard);
-    this.setDisplayPack(currentCard, 0);
-  },
-  getCardDisplayPos(card) {
-    let retval;
-    if (card) {
-      let disCards = this.get('displayCards');
-      if (disCards) {
-        if (disCards.center && disCards.center.sessionId === card.sessionId) {
-          retval = 0;
-        }
-        if (disCards.left && retval === undefined) {
-          retval = disCards.left.findIndex(
-            timemom => timemom.sessionId === card.sessionId
-          );
-        }
-        if (disCards.right && retval === undefined) {
-          retval = disCards.rigth.findIndex(
-            timemom => timemom.sessionId === card.sessionId
-          );
-        }
-      }
-    }
-    return retval;
-  },
-  animateCard(offset) {
-    const component = this;
-    let curCard = this.get('currentCard');
-    if (curCard) {
-      let animateCompleted = new Ember.RSVP.Promise(function(resolve) {
-        let tIndx = component.getOffsetCardIdx(curCard, offset),
-          tSelector = `.c-${component.timeData[tIndx].sessionId}`,
-          tCard = d3.selectAll(tSelector),
-          tCardEl = tCard[0][0],
-          tOffX = tCardEl.offsetLeft;
+  // -------------------------------------------------------------------------
+  // Events
 
-        let cIndx = component.getOffsetCardIdx(curCard, 0),
-          cSelector = `.c-${component.timeData[cIndx].sessionId}`,
-          cCard = d3.selectAll(cSelector),
-          cCardEl = cCard[0][0],
-          cOffX = cCardEl.offsetLeft;
-
-        let movemnt = tOffX - cOffX;
-        let cbfunc = function() {
-          resolve('done');
-        };
-
-        component.animated3(tCard, movemnt, cbfunc);
-      });
-      return animateCompleted;
-    }
-  },
-  animated3All(tgt, movemnt, cbcomplete) {
-    var t = d3
-      .transition()
-      .delay(9000)
-      .duration(9000);
-    var tgt1 = tgt.transition(t);
-    tgt1.style('transform', `translateX(${movemnt}px)`).each('end', cbcomplete);
-
-    let displayCards = this.set('displayCards');
-    if (displayCards) {
-      // Animate all the cards in the carddeck
-    }
-  },
-  animated3(tgt, movemnt, cbcomplete) {
-    var t = d3
-      .transition()
-      .delay(9000)
-      .duration(9000);
-    var tgt1 = tgt.transition(t);
-    tgt1.style('transform', `translateX(${movemnt}px)`).each('end', cbcomplete);
-  },
-  animateJQ(cSelector, movemnt, cbcomplete) {
-    let cCard = $(cSelector);
-    //console.log('cSelector', cSelector);
-    cCard.animate(
-      {
-        transform: `translateX(${movemnt}px)`
-      },
-      {
-        duration: 9000,
-        complete: cbcomplete
-      }
-    );
-  },
-  animated3b(tgt, movemnt) {
-    //cbcomplete
-    var t = d3.transition().duration(500);
-
-    tgt.attr('transform', 'translate(20,20)');
-    tgt.transition(t).attr('translate', '200px)');
-    tgt.style('transform', `translateX(${movemnt}px)`);
-    //tgt.transform('translate', `${movemnt}px`);
+  init() {
+    let component = this;
+    component._super(...arguments);
+    let timeData = component.get('timeData');
+    let numberOfTimeData = timeData.length;
+    let lastIndex = numberOfTimeData - 1;
+    let selectedTimeData = timeData.objectAt(lastIndex);
+    selectedTimeData.set('selected', true);
   },
 
-  selectTimeSession(currentCard) {
-    $('ul.timeline >li > span.selectedTime').removeClass('selectedTime');
+  // -------------------------------------------------------------------------
+  // Methods
 
-    $(`ul.timeline >li.line-${currentCard.sessionId} > span`).addClass(
-      'selectedTime'
-    );
-  },
+  /**
+   * @function parseTimelineData
+   * Method to parse and set timeline data
+   */
+  parseTimelineData() {
+    let component = this;
+    let timeData = component.get('timeData');
 
-  getOffsetCardIdx(offsetCurrentCard, offset) {
-    let timeIndx;
+    let numberOfTimeData = timeData.length;
+    if (numberOfTimeData > 0) {
+      let selectedTimeData = timeData.findBy('selected', true);
+      let selectedIndex = timeData.indexOf(selectedTimeData);
+      let leftPosSeq = 1;
+      let leftStartIndex = selectedIndex - 4;
+      let leftEndIndex = leftStartIndex + 4;
 
-    if (offsetCurrentCard && this.timeData) {
-      /* Set display Wrt a given card- card selection case Find card from timdData*/
-      timeIndx = this.timeData.findIndex(
-        timemom => timemom.sessionId === offsetCurrentCard.sessionId
+      component.updatePosition(
+        timeData,
+        leftStartIndex,
+        leftEndIndex,
+        'left',
+        leftPosSeq
       );
-      if (offset) {
-        timeIndx = timeIndx + offset;
-      }
-    } else if (this.timeData && !offsetCurrentCard) {
-      /* if there is timesData but no card selected - init case show cards to left */
-      timeIndx = this.timeData.length;
-    } else if (!this.timeData) {
-      timeIndx = -1; // All empty cards
+      component.updatePosition(timeData, 0, leftStartIndex, 'left', 0);
+
+      let rightPosSeq = 1;
+      let rightStartIndex = selectedIndex + 1;
+      let rightEndIndex = rightStartIndex + 4;
+      component.updatePosition(
+        timeData,
+        rightStartIndex,
+        rightEndIndex,
+        'right',
+        rightPosSeq
+      );
+      component.updatePosition(
+        timeData,
+        rightEndIndex,
+        numberOfTimeData,
+        'right',
+        0
+      );
     }
-
-    timeIndx = timeIndx < 0 ? 0 : timeIndx;
-    timeIndx =
-      timeIndx >= this.timeData.length ? this.timeData.length - 1 : timeIndx;
-
-    return timeIndx;
+    let activities = Ember.A([]);
+    timeData.forEach(data => {
+      activities.pushObject(data);
+    });
+    return activities;
   },
 
   /**
-   * Get a pack of n cards where n = 'cardDisplayConfig.activeDisplay'
-   * if 'offsetcurrentCard' card is null, then starts a new display if has has 'timeData'
-   * else 'scroll' to side ways + or - of 'offsetCurrentCard'
-   * @param {timeDataItem} offsetCurrentCard
-   * @param {int} scroll ( center = 0 , left = -1, right=1)
+   * @function checkPagination
+   * Method to check and call paginate if condition is satisfied
    */
-  setDisplayPack: function(offsetCurrentCard, scroll) {
-    let displayCards = {},
-      cards,
-      timeIndx;
-    timeIndx = this.getOffsetCardIdx(offsetCurrentCard, scroll);
-    displayCards = this.getCenterCard(timeIndx);
-    cards = this.getAdjcentCards(
-      timeIndx,
-      this.cardDisplayConfig.activeSideWays
-    );
-    displayCards = Object.assign(displayCards, cards);
-    this.set('displayCards', displayCards);
+  checkPagination(selectedIndex) {
+    let component = this;
+    if (selectedIndex < 4) {
+      component.sendAction('paginateNext');
+    }
   },
 
-  getCenterCard: function(cardidx) {
-    let currentCard = this.timeData[cardidx],
-      card = { center: [currentCard] };
-    this.set('selectedIndex', cardidx);
-    this.set('currentCard', currentCard);
-    return card;
-  },
-
-  getAdjcentCards: function(cardidx, len) {
-    let cards = { left: [], right: [], dummyleft: [], dummyright: [] },
-      isFull = 1,
-      dummyCard = {
-        collectionType: 'dummy',
-        title: '',
-        scale: 0.8
-      },
-      zIndex = 1,
-      scaleprop = 4;
-
-    let curIndx = cardidx,
-      lenbound = len;
-    lenbound--;
-    for (let index = 0; index < lenbound; index++) {
-      curIndx--;
-      if (this.timeData[curIndx]) {
-        let curCard = Object.assign({}, this.timeData[curIndx]);
-        cards.left.push(curCard);
+  /**
+   * @function openStudentCollectionReport
+   * Method to open student collection report
+   */
+  openStudentCollectionReport(collection, collectionType) {
+    let component = this;
+    const lessonPromise = component.get('course.id')
+      ? component
+        .get('lessonService')
+        .fetchById(
+          component.get('course.id'),
+          collection.get('unitId'),
+          collection.get('lessonId')
+        )
+      : null;
+    return Ember.RSVP.hashSettled({
+      lesson: lessonPromise
+    }).then(function(hash) {
+      let lesson = hash.lesson.state === 'fulfilled' ? hash.lesson.value : null;
+      let params = {
+        userId: component.get('session.userId'),
+        classId: component.get('class.id'),
+        courseId: component.get('course.id'),
+        unitId: collection.get('unitId'),
+        lessonId: collection.get('lessonId'),
+        collectionId: collection.get('id'),
+        lesson: lesson,
+        type: collectionType,
+        isStudent: true,
+        isTeacher: false,
+        collection
+      };
+      component.set('studentCollectionReportContext', params);
+      if (collectionType === 'assessment-external') {
+        component.set('showExternalAssessmentReport', true);
+        component.set('showCollectionReport', false);
       } else {
-        isFull = 0;
+        component.set('showExternalAssessmentReport', false);
+        component.set('showCollectionReport', true);
       }
-    }
-    cards.left.reverse();
-    if (isFull === 1) {
-      cards.dummyleft.push({
-        collectionType: 'dummy',
-        title: '',
-        scale: 0.1 * scaleprop++,
-        zIndex: zIndex++
-      });
-      cards.dummyleft.push({
-        collectionType: 'dummy',
-        title: '',
-        scale: 0.1 * scaleprop++,
-        zIndex: zIndex++
-      });
-    }
-
-    cards.left.forEach(card => {
-      card.zIndex = zIndex++;
-      card.scale = 0.1 * scaleprop++;
     });
+  },
 
-    isFull = 1;
-    scaleprop = 7;
-    // leftcards cardidx =12, len=3
-    for (let index = cardidx + 1; index < cardidx + len; ++index) {
-      if (this.timeData[index]) {
-        let curCard = Object.assign({}, this.timeData[index]);
-        curCard.zIndex = zIndex--;
-        curCard.scale = 0.1 * scaleprop--;
-        cards.right.push(curCard);
-      } else {
-        isFull = 0;
+  /**
+   * @function openStudentCourseReport
+   * Method to open student course report
+   */
+  openStudentCourseReport() {
+    let component = this;
+    component.set('showCourseReport', true);
+    let params = Ember.Object.create({
+      userId: component.get('session.userId'),
+      classId: component.get('class.id'),
+      class: component.get('class'),
+      courseId: component.get('course.id'),
+      course: component.get('course'),
+      isTeacher: false,
+      isStudent: true,
+      loadUnitsPerformance: true
+    });
+    component.set('studentCourseReportContext', params);
+  },
+
+  /**
+   * @function updatePosition
+   * Method to update position in timeData
+   */
+  updatePosition(timeData, startIndex, endIndex, position, positionSeq) {
+    for (let index = startIndex; index < endIndex; index++) {
+      let data = timeData.objectAt(index);
+      let seq = positionSeq === 0 ? positionSeq : positionSeq++;
+      if (data) {
+        data.set('position', position);
+        data.set('positionSeq', seq);
       }
     }
-    if (isFull === 1) {
-      dummyCard.scale = 0.8;
-      cards.dummyright.push({
-        collectionType: 'dummy',
-        title: '',
-        scale: 0.1 * scaleprop--,
-        zIndex: zIndex--
-      });
-      dummyCard.scale = 0.9;
-      cards.dummyright.push({
-        collectionType: 'dummy',
-        title: '',
-        scale: 0.1 * scaleprop--,
-        zIndex: zIndex--
-      });
-    }
-    return cards;
   }
 });

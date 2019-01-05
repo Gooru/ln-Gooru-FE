@@ -103,6 +103,7 @@ export default Object.assign(quizzesTranslations, {
     'add-content-prompt':
       'You haven\'t created <span>{{type}}</span> yet. Go on, be bold.',
     'add-course': 'Create New Course',
+    'add-coruse-to-class': 'Add Course',
     'add-domains-to-unit': 'Add Domains to Unit',
     'add-url': 'Add URL',
     'add-from-url': 'Add from URL',
@@ -880,7 +881,8 @@ export default Object.assign(quizzesTranslations, {
       'choose-course': 'Choose Course',
       'remix-from-course': 'Remix a Featured Course',
       'featured-course': 'View Featured Courses',
-      'remix-desc': 'Copy and customize a featured course for your students'
+      'remix-desc': 'Copy and customize a featured course for your students',
+      'browse-content': 'or browse our content catalogs.'
     }
   },
   classes: {
@@ -1301,7 +1303,8 @@ export default Object.assign(quizzesTranslations, {
         'welcome-dca':
           'Welcome to your  Class Activities where you can assign collections and assessments for students to complete today. Please note: any reports generated will only be available today for the most recent attempt.',
         'enter-max-timespent': 'Enter the Maximum Timespent for the Assessment',
-        'enter-max-assessment-time-spent': 'Enter the time spent in completing the assessment',
+        'enter-max-assessment-time-spent':
+          'Enter the time spent in completing the assessment',
         'enter-max-score': 'Enter the Maximum Score for the Assessment',
         hour: 'h',
         min: 'm',
@@ -1468,6 +1471,7 @@ export default Object.assign(quizzesTranslations, {
     description:
       'You are about to end this attempt and submit all responses. Any skipped questions will be counted as incorrect.',
     cancel: 'Cancel',
+    ok: 'ok',
     confirm: 'Finish Quiz',
     'finish-description': 'Click “Finish Quiz” to submit your responses.'
   },
@@ -2838,9 +2842,12 @@ export default Object.assign(quizzesTranslations, {
 
   'self-report': {
     'your-score': 'Your Score',
+    time_spent: 'Time Spent',
     'update-error': 'Problem with updating score',
     'validation-error': 'Enter valid score',
-    'enter-score': 'Enter your score here'
+    'enter-score': 'Enter your score here',
+    'enter-timeSpent': 'Enter your time spent here',
+    'validation-error-time': 'Enter valid time'
   },
   notifications: {
     'notificationlist-header-title': 'NOTIFICATIONS',

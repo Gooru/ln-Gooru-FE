@@ -41,6 +41,16 @@ export default Ember.Component.extend({
         PLAYER_EVENT_SOURCE.RGO
       }`;
       window.open(playerURL, PLAYER_WINDOW_NAME);
+    },
+
+    onAddCourse(courseId) {
+      let component = this;
+      component.sendAction('onAddCourse', courseId);
+    },
+
+    onRemixCourse(courseId) {
+      let component = this;
+      component.sendAction('onRemixCourse', courseId);
     }
   }
 });

@@ -953,7 +953,8 @@ export default Ember.Service.extend({
     let service = this;
     let performanceAdapter = service.get('performanceAdapter');
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      performanceAdapter.updateCollectionOfflinePerformance(performanceData)
+      performanceAdapter
+        .updateCollectionOfflinePerformance(performanceData)
         .then(function(response) {
           resolve(response);
         }, reject);

@@ -2,7 +2,15 @@
   {{student.class.student-class-landing classData=class courseData=course}}
 {{else}}
   {{#if class.courseId}}
-
+    <!-- <div class="bar-charts" data-content="{{performancePercentage}}% Completed">
+      <div class="completion-chart">
+        {{#if showLocateMe }}
+          {{charts/gru-x-bar-chart data=barChartData mileStone=mileStone mileStoneHandler=(action 'mileStoneHandler')  }}
+        {{else}}
+          {{charts/gru-x-bar-chart data=barChartData }}
+        {{/if}}
+      </div>
+    </div> -->
     <div class="controller student course-map">
       <h5 class="course-title hidden visible-xs">{{class.title}}</h5>
       <div class="actions hidden-xs">
@@ -17,8 +25,7 @@
         {{class.overview.routesuggestion-preview route0=route0 routeSuggestAction=(action 'courseRouteSuggestAction' ) class=currentClass course=course }}
       {{/if}}
       {{#if showRoute0Suggestion}}
-        <h5 class="pre-study-title hidden-xs">{{t 'class.overview.pre-study-title'}}</h5>
-        {{class.overview.routesuggestion-coursemap route0=route0
+        <h5 class="pre-study-title hidden-xs">{{t 'class.overview.pre-study-title'}}</h5> {{class.overview.routesuggestion-coursemap route0=route0
            onLocationUpdate=(action 'updateUserLocation')
           userLocation=userLocation
           location=openingLocation
@@ -77,7 +84,6 @@
     <div class="no-course-content">{{t 'student-landing.no-course-assigned'}}</div>
   {{/if}}
 {{/if}}
-
 {{#if showCourseReport}}
   {{reports.pull-up.student-course-report onClosePullUp="onClosePullUp" context=studentCourseReportContext showPullUp=showCourseReport}}
 {{/if}}

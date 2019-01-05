@@ -2,11 +2,22 @@
 <div class="performance-entry-container">
   <div class="header-container">
     <div class="title"><span class="{{type}}"><i class="icon"></i></span>{{title}}</div>
+    {{#unless isClose }}
     <div class="performance-close-pullup" {{action 'onClosePerformanceEntry'}}>
       {{gru-icon name="close" }}
     </div>
+    {{/unless}}
   </div>
-  <div class="body-container">
-    {{yield this}}
+  <div class="body-container {{if isClose 'hidden'}}">
+      {{yield this}}
   </div>
+  {{#if isClose}}
+  <div class="cancel-body">
+      <span>{{t 'gru-user-sign-up-cancel.exit?'}}</span>
+      <div class="close-actions">
+      <div class="cancel-button" {{action 'cancel'}}>{{t 'gru-submit-confirmation.cancel'}}</div>
+      <div class="ok-button" {{action 'closePullUp'}}>{{t 'gru-submit-confirmation.ok'}}</div>
+    </div>
+  </div>
+  {{/if}}
 </div>

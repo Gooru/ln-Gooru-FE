@@ -327,20 +327,21 @@ export default Ember.Component.extend({
     let isStudentDataEntered = studentsOfflineAssessmentData[activeStudentSeq]
       ? studentsOfflineAssessmentData[activeStudentSeq]
       : null;
+
+    let assessmentPerformanceDataParams = component.getDataParams();
+    studentsOfflineAssessmentData[
+      activeStudentSeq - 1
+    ] = assessmentPerformanceDataParams;
+    component.set(
+      'studentsOfflineAssessmentData',
+      studentsOfflineAssessmentData
+    );
+    component.updateStudentAssessmentPerformance(
+      assessmentPerformanceDataParams
+    );
     if (isStudentDataEntered) {
       component.loadEnteredStudentData(isStudentDataEntered, direction);
     } else {
-      let assessmentPerformanceDataParams = component.getDataParams();
-      studentsOfflineAssessmentData[
-        activeStudentSeq - 1
-      ] = assessmentPerformanceDataParams;
-      component.set(
-        'studentsOfflineAssessmentData',
-        studentsOfflineAssessmentData
-      );
-      component.updateStudentAssessmentPerformance(
-        assessmentPerformanceDataParams
-      );
       component.resetElements();
     }
     component.set('activeStudent', activeStudent);
@@ -366,7 +367,6 @@ export default Ember.Component.extend({
   loadEnteredStudentData(studentData) {
     let component = this;
     let resources = studentData ? studentData.resources : Ember.A([]);
-    component.$('.question-score').addClass('disabled');
     component.$('.question-info-container').removeClass('selected-question');
     resources.forEach(function(question, index) {
       let inputElement = component.$(`.q-${index}-score`);
@@ -381,13 +381,16 @@ export default Ember.Component.extend({
   toggleScoredElement(question, sequence) {
     let component = this;
     let enteredScore = question.score !== '' ? Number(question.score) : null;
-    component.$(`.question-${sequence} .question-thumbnail`).css('background-color', '#d8d8d8');
-    component.$(`.question-${sequence}`).removeClass('scored').removeClass('wrong-score');
+    component
+      .$(`.question-${sequence} .question-thumbnail`)
+      .css('background-color', '#d8d8d8');
+    component
+      .$(`.question-${sequence}`)
+      .removeClass('scored')
+      .removeClass('wrong-score');
     if (enteredScore) {
       if (component.validateQuestionScore(enteredScore)) {
-        component
-          .$(`.question-${sequence}`)
-          .addClass('scored');
+        component.$(`.question-${sequence}`).addClass('scored');
         component
           .$(`.question-${sequence} .question-thumbnail`)
           .css('background-color', '#538a32');

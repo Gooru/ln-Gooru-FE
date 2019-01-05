@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import {
   ANONYMOUS_COLOR,
-  STUDY_PLAYER_BAR_COLOR
+  STUDY_PLAYER_BAR_COLOR,
+  GRU_FEATURE_FLAG
 } from 'gooru-web/config/config';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
@@ -39,13 +40,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
   sourceType: null,
 
   isFeatureEnabled: Ember.computed(function() {
-    let featureEnabled = false;
-    let GRU_FEATURE_FLAG = this.get('configuration.GRU_FEATURE_FLAG'),
-      feature = 'chronoView';
-    if (GRU_FEATURE_FLAG) {
-      featureEnabled = GRU_FEATURE_FLAG[feature];
-    }
-    return featureEnabled;
+    let feature = 'chronoView';
+    return GRU_FEATURE_FLAG[feature];
   }),
   // -------------------------------------------------------------------------
   // Attributes
@@ -96,11 +92,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
     },
 
     mileStoneHandler: function() {
-      if (this.get('router').currentPath === 'study-player.index') {
+      let currentPath = this.get('router').currentPath;
+      if (currentPath === 'study-player.index') {
         this.get('router').transitionTo('study-player.timeline-view');
-      } else if (
-        this.get('router').currentPath === 'reports.study-student-collection'
-      ) {
+      } else if (currentPath === 'reports.study-student-collection') {
         this.get('router').transitionTo(
           'study-player.timeline-view',
           this.get('courseId')
@@ -219,7 +214,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
       component.$('.gru-study-navbar').length > 0 &&
       Ember.$('.qz-player').length > 0
     ) {
-      Ember.$('.qz-player').css({ 'padding-top': '164px' });
+      Ember.$('.qz-player').css({
+        'padding-top': '164px'
+      });
     }
   },
 
@@ -307,7 +304,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
           percentage
         }
       ];
-      this.updateParent({ barchartdata: barchartdata });
+      this.updateParent({
+        barchartdata: barchartdata
+      });
       return barchartdata;
     }
   ),
@@ -345,7 +344,12 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.set('totalResources', totalResources);
     const courseId = component.get('courseId');
     if (classId) {
-      let classCourseId = Ember.A([{ classId, courseId }]);
+      let classCourseId = Ember.A([
+        {
+          classId,
+          courseId
+        }
+      ]);
       Ember.RSVP.hash({
         classPerformanceSummaryItems: component
           .get('performanceService')

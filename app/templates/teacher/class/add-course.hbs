@@ -1,0 +1,43 @@
+<div class="add-course-ctrl">
+  {{#if isLoading}}
+    {{three-bounce-spinner}}
+  {{else}}
+    <div class="course-main-container">
+      <div class="add-course-header">{{t 'common.add-coruse-to-class'}}</div>
+      <div class="featured-courses-container">
+        {{#each featuredCourses as |course|}}
+          <div class="featured-course">
+            {{cards.gru-add-course-card course=course onAddCourse="onAddCourse" onRemixCourse="onRemixCourse"}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="browse-content">{{t 'class.quick-start.browse-content'}}</div>
+    <div class="content-catalogs-container">
+      {{#each catalogListToShow as |catalog|}}
+        <div class="catalog-card" {{action "onSelectCatalog" catalog}}>
+          <div class="catalog-name">{{catalog.name}}</div>
+          <div class="catalog-image {{unless catalog.image 'gooru-logo'}}" style="background-image: url({{catalog.image}})"></div>
+        </div>
+      {{/each}}
+    </div>
+    {{#if isShowMoreCatalogs}}
+        <span class="show-more-results" {{action 'showMoreResults'}}>{{t "common.show-more-results"}}</span>
+    {{/if}}
+  {{/if}}
+</div>
+
+
+{{#if isShowSearchCoursePullUp}}
+  {{teacher.class.course-search-pull-up
+    showPullUp=isShowSearchCoursePullUp
+    courses=libraryCourses
+    contentCatalogs=contentCatalogs
+    activeCatalog=selectedCatalog
+    onAddCourse="onAddCourse"
+    onRemixCourse="onRemixCourse"
+    onSelectCatalog="onSelectCatalog"
+    onSearchCourse="onSearchCourse"
+  }}
+{{/if}}
