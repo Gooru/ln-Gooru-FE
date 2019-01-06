@@ -24,6 +24,11 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
+  /**
+   * @property {Ember.Service} Service to do retrieve language
+   */
+  lookupService: Ember.inject.service('api-sdk/lookup'),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -565,6 +570,12 @@ export default Ember.Controller.extend(ModalMixin, {
 
       controller.set('currentFilterList', sourceFilteredByContext);
       return sourceFilteredByContext;
+    },
+    updateLanguage(language) {
+      const controller = this;
+      const classId = this.get('class.id');
+      controller.get('classService').updateLanguage(classId, language.id);
+      // .then(resp => console.log(resp));
     }
   },
 
@@ -865,6 +876,13 @@ export default Ember.Controller.extend(ModalMixin, {
       });
     }
   },
+  fetchLanguage() {
+    const controller = this;
+    controller
+      .get('lookupService')
+      .getLanguages()
+      .then(languages => controller.set('languages', languages.languages));
+  },
   updateBondValuesToStudent() {
     let component = this;
     let members = component.get('class.members');
@@ -898,6 +916,7 @@ export default Ember.Controller.extend(ModalMixin, {
   },
   setupDisplayProperties() {
     let controller = this;
+    controller.fetchLanguage();
     controller.fetchTaxonomySubject();
     controller.fetchTaxonomyGrades();
     controller.updateBondValuesToStudent();

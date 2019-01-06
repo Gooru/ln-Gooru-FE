@@ -1337,7 +1337,8 @@ export default Object.assign(quizzesTranslations, {
           'co-teachers': 'Co-Teachers',
           'add-coteacher': 'Add another teacher',
           'offline-class-label': 'This is an Offline classroom',
-          'offline-msg': 'Once made Offline a class cannot be taken online'
+          'offline-msg': 'Once made Offline a class cannot be taken online',
+          language: 'language'
         },
         'student-settings-sec': {
           'student-settings-sec-head': 'Student Settings',
