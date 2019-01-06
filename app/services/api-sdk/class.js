@@ -577,5 +577,19 @@ export default Ember.Service.extend({
         .updatePreference(classid, preference)
         .then(resolve, reject);
     });
+  },
+
+  /**
+   * @function updatePreference
+   * Method to update class preference
+   */
+  updateLanguage(classid, language) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classAdapter')
+        .updateLanguage(classid, language)
+        .then(resolve, reject);
+    });
   }
 });

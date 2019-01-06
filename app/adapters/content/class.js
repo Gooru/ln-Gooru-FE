@@ -441,5 +441,21 @@ export default Ember.Object.extend({
       data: JSON.stringify({ preference: preference })
     };
     return Ember.$.ajax(url, options);
+  },
+  /**
+   * @function updateLanguage
+   * Method to update class language
+   */
+  updateLanguage(classid, language) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/${classid}/language/${language}`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
   }
 });

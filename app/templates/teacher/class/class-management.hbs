@@ -274,6 +274,34 @@
                 </div>
               </div>
             </div>
+            {{!-- language --}}
+            <div class='language-row'>
+              <div class='row-label'> {{t
+                  'teacher-landing.class.class-settings.class-settings-sec.language'}}
+              </div>
+              <div class='row-value'>
+                {{ log languages}}
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{#if tempClass.primaryLanguage}}
+                      {{get-value 'source' source=languages searchProp='id'
+                                              searchVal=tempClass.primaryLanguage
+                                              destProp='display_name' }}
+                    {{else}}
+                      {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
+                    {{/if}}
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    {{#each languages as |language|}}
+                      <li> <a data-item={{language}} {{ action 'updateLanguage'  language }}>{{language.display_name}}
+                        </a> </li>
+                    {{/each}}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            {{!-- language  ends--}}
             <div class='sub-sec-coteach'>
               <div class='row-offline-class sub-sec-row' style="border-top:unset;">
                 <div class='offline-icon'></div>
