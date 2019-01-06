@@ -2,7 +2,7 @@
   {{student.class.student-class-landing classData=class courseData=course}}
 {{else}}
   {{#if class.courseId}}
-    <!-- <div class="bar-charts" data-content="{{performancePercentage}}% Completed">
+    <div class="bar-charts" data-content="{{performancePercentage}}% Completed">
       <div class="completion-chart">
         {{#if showLocateMe }}
           {{charts/gru-x-bar-chart data=barChartData mileStone=mileStone mileStoneHandler=(action 'mileStoneHandler')  }}
@@ -10,7 +10,7 @@
           {{charts/gru-x-bar-chart data=barChartData }}
         {{/if}}
       </div>
-    </div> -->
+    </div>
     <div class="controller student course-map">
       <h5 class="course-title hidden visible-xs">{{class.title}}</h5>
       <div class="actions hidden-xs">

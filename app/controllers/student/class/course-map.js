@@ -92,10 +92,12 @@ export default Ember.Controller.extend({
     },
 
     mileStoneHandler: function() {
-      this.transitionToRoute(
-        'study-player.timeline-view',
-        this.get('currentClass.courseId')
-      );
+      this.transitionToRoute('student-locate', {
+        queryParams: {
+          classId: this.get('class.id'),
+          courseId: this.get('course.id')
+        }
+      });
     },
 
     updateUserLocation: function(newLocation) {

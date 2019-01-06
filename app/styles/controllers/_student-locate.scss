@@ -1,0 +1,259 @@
+.student-locate {
+  overflow: hidden !important;
+
+  .gru-header {
+    display: none;
+  }
+
+  .activity-panel {
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-image: url("gooru/timeline-view-bg.jpg");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+
+    .competency-container {
+      width: 77px;
+      height: 87vh;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+      border: solid 1px rgba(151, 151, 151, 0.3);
+      background-color: #ffffff;
+      display: grid;
+      grid-template-rows: 100px 1fr;
+
+      .chart-icon {
+        width: 42px;
+        height: 42px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+        background-color: #ffffff;
+        border-radius: 59px;
+        margin: auto;
+        color: #4c95d7;
+
+        i {
+          $size: 30px;
+          font-size: $size;
+          display: flex;
+          justify-content: center;
+          margin-top: 3px;
+          cursor: pointer;
+        }
+      }
+
+      .competency-progress-bar {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 10px;
+      }
+    }
+
+    .chrono-view {
+      display: grid;
+      grid-template-columns: 77px 1fr 77px;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 15px;
+
+      .chrono-timeline {
+        display: grid;
+        position: relative;
+
+        .container {
+          width: 100%;
+          height: 100%;
+          display: grid;
+          grid-template-rows: max-content 1fr;
+          grid-gap: 60px;
+
+          &:after,
+          &:before {
+            content: none;
+          }
+
+          .header {
+            width: 100%;
+            height: 70px;
+            box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+            background-color: $white;
+          }
+
+          .class-activities {
+            height: 100%;
+            padding-bottom: 60px;
+            width: 100%;
+            display: flex;
+          }
+
+          #carousel {
+            position: relative;
+            overflow: hidden;
+          }
+
+          #carousel .student-activity {
+            height: 380px;
+            width: 275px;
+            border-radius: 8px;
+            margin: auto;
+            position: absolute;
+            transition: transform 1s, left 1s, opacity 1s, z-index 0s;
+            box-shadow: 0 0 3px 3px rgba(93, 93, 93, 0.3);
+            opacity: 1;
+          }
+
+          .student-activity.selected {
+            z-index: 10;
+            left: calc(100% - 53vw);
+            transform: scale(0.9);
+          }
+
+          .student-activity.right-1 {
+            z-index: 5;
+            left: calc(100% - 29vw);
+            transform: scale(0.7);
+          }
+
+          .student-activity.right-2 {
+            z-index: 4;
+            left: calc(100% - 25vw);
+            transform: scale(0.6);
+          }
+
+          .student-activity.right-3 {
+            z-index: 3;
+            left: calc(100% - 21vw);
+            transform: scale(0.5);
+          }
+
+          .student-activity.right-4 {
+            z-index: 2;
+            left: calc(100% - 18vw);
+            transform: scale(0.4);
+          }
+
+          .student-activity.right-0 {
+            visibility: hidden;
+            left: calc(100% - 18vw);
+            transform: scale(0.4);
+          }
+
+          .student-activity.left-4 {
+            z-index: 5;
+            left: calc(100% - 77vw);
+            transform: scale(0.7);
+          }
+
+          .student-activity.left-3 {
+            z-index: 4;
+            left: calc(100% - 81vw);
+            transform: scale(0.6);
+          }
+
+          .student-activity.left-2 {
+            z-index: 3;
+            left: calc(100% - 85vw);
+            transform: scale(0.5);
+          }
+
+          .student-activity.left-1 {
+            left: calc(100% - 88vw);
+            z-index: 2;
+            transform: scale(0.4);
+          }
+
+          .student-activity.left-0 {
+            left: calc(100% - 88vw);
+            visibility: hidden;
+            transform: scale(0.4);
+          }
+          @media screen and (min-width: $screen-1024) and(max-width: $screen-in-1150) {
+            .student-activity.right-4 {
+              visibility: hidden;
+            }
+
+            .student-activity.left-1 {
+              visibility: hidden;
+            }
+          }
+          @media screen and (max-width: $screen-md) {
+            .student-activity.left-1 {
+              left: calc(100% - 80vw);
+            }
+
+            .student-activity.right-4 {
+              left: calc(100% - 28vw);
+            }
+
+            .student-activity.selected {
+              left: calc(100% - 54vw);
+            }
+
+            .student-activity.right-1 {
+              left: calc(100% - 43vw);
+            }
+
+            .student-activity.right-3 {
+              left: calc(100% - 33vw);
+            }
+
+            .student-activity.right-2 {
+              left: calc(100% - 38vw);
+            }
+
+            .student-activity.left-4 {
+              left: calc(100% - 65vw);
+            }
+
+            .student-activity.left-3 {
+              left: calc(100% - 70vw);
+            }
+
+            .student-activity.left-2 {
+              left: calc(100% - 75vw);
+            }
+          }
+        }
+      }
+    }
+
+    .bottom-perf-line {
+      margin-top: auto;
+      width: 100%;
+      height: 40px;
+      top: 52px;
+      left: 0;
+      background-color: #fff;
+      display: inline-block;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+
+      .completion-chart {
+        padding: 15px 20px 0 15px;
+        cursor: pointer;
+
+        .charts.gru-x-bar-chart {
+          background-color: #cdd2d6;
+          height: 10px;
+        }
+
+        .segment {
+          position: relative;
+        }
+
+        .msaddon {
+          position: absolute;
+          width: 22px;
+          height: 22px;
+          margin-top: -5px;
+          object-fit: contain;
+          background: url("gooru/images/close-up.svg");
+          background-size: 100%;
+        }
+      }
+    }
+  }
+}

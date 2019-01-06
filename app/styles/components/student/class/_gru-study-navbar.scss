@@ -53,7 +53,7 @@
       display: grid;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
       /*Default View */
-      grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
+      grid-template-columns: 88px 170px 145px 1fr 59px 59px 59px;
 
       .tab {
         &:hover {
@@ -238,7 +238,7 @@
       }
       /* Small devices (portrait tablets and large phones, 768px and up) */
       @media only screen and (min-width: 768px) {
-        grid-template-columns: 90px 50px 50px 50px 1fr 59px 59px 59px;
+        grid-template-columns: 90px 50px 50px 1fr 59px 59px 59px;
 
         .class-activities,
         .course-map.study-player,
@@ -254,7 +254,7 @@
       }
       /* Large devices (laptops/desktops, 992px and up) */
       @media only screen and (min-width: 992px) {
-        grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
+        grid-template-columns: 88px 170px 145px 1fr 59px 59px 59px;
 
         .class-activities,
         .course-map.study-player,
@@ -493,7 +493,7 @@
         width: 100%;
         height: 100%;
         display: grid;
-        grid-template-columns: calc(100% / 6);
+        grid-template-columns: calc(100% / 5);
 
         .tab {
           opacity: 0.3;
@@ -505,8 +505,7 @@
         }
 
         .action,
-        .dca,
-        .profile {
+        .dca {
           .no-course {
             pointer-events: none;
           }
@@ -594,32 +593,6 @@
                 display: flex;
                 justify-content: center;
               }
-            }
-          }
-        }
-
-        .profile {
-          display: flex;
-          border-right: 1px solid $white;
-          height: 51px;
-          position: relative;
-
-          a {
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            margin: auto;
-            color: $white;
-            height: 100%;
-            position: absolute;
-            align-items: center;
-            grid-gap: 5px;
-            display: grid;
-
-            i {
-              display: flex;
-              justify-content: center;
             }
           }
         }
