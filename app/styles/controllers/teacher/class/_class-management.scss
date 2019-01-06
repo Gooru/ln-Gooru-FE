@@ -1122,7 +1122,23 @@ $canvas-height: 1254px;
                 flex: 1;
               }
             }
-
+            .language-row {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              .row-label {
+                text-transform: uppercase;
+                height: 16px;
+                font-size: 13px;
+                font-weight: bold;
+                flex: 1;
+              }
+              .row-value {
+                // margin-left: auto;
+                // margin-right: 30px;
+                flex: 2;
+              }
+            }
             .sub-sec-coteach {
               margin-top: 25px;
               padding-bottom: 8px;
@@ -1209,6 +1225,18 @@ $canvas-height: 1254px;
                 /*padding-bottom: 20px; */
               }
 
+              .language-row {
+                background: 1px solid red;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .row-label {
+                  text-transform: uppercase;
+                }
+                .row-value {
+                  margin-left: auto;
+                }
+              }
               .row-offline-class {
                 margin-top: 10px;
                 padding-top: 10px;
@@ -1470,6 +1498,7 @@ $canvas-height: 1254px;
                 object-fit: contain;
               }
             }
+
             .row-offline-class {
               margin-top: 10px;
               padding-top: 10px;

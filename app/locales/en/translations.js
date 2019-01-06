@@ -103,6 +103,7 @@ export default Object.assign(quizzesTranslations, {
     'add-content-prompt':
       'You haven\'t created <span>{{type}}</span> yet. Go on, be bold.',
     'add-course': 'Create New Course',
+    'add-coruse-to-class': 'Add Course',
     'add-domains-to-unit': 'Add Domains to Unit',
     'add-url': 'Add URL',
     'add-from-url': 'Add from URL',
@@ -880,7 +881,8 @@ export default Object.assign(quizzesTranslations, {
       'choose-course': 'Choose Course',
       'remix-from-course': 'Remix a Featured Course',
       'featured-course': 'View Featured Courses',
-      'remix-desc': 'Copy and customize a featured course for your students'
+      'remix-desc': 'Copy and customize a featured course for your students',
+      'browse-content': 'or browse our content catalogs.'
     }
   },
   classes: {
@@ -1334,7 +1336,9 @@ export default Object.assign(quizzesTranslations, {
           'option-choose-one': 'Choose One',
           'co-teachers': 'Co-Teachers',
           'add-coteacher': 'Add another teacher',
-          'offline-class-label': 'This is an Offline classroom'
+          'offline-class-label': 'This is an Offline classroom',
+          'offline-msg': 'Once made Offline a class cannot be taken online',
+          language: 'language'
         },
         'student-settings-sec': {
           'student-settings-sec-head': 'Student Settings',

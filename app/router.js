@@ -91,15 +91,9 @@ Router.map(function() {
   });
 
   this.route('study-player-external');
-  this.route(
-    'study-player',
-    {
-      path: '/study-player/course/:courseId'
-    },
-    function() {
-      this.route('timeline-view');
-    }
-  );
+  this.route('study-player', {
+    path: '/study-player/course/:courseId'
+  });
   this.route('student-locate');
   this.route('resource-player', {
     path: '/study-player/course/:courseId/resource/:resourceId'
@@ -220,6 +214,7 @@ Router.map(function() {
         });
         this.route('students');
         this.route('students-proficiency');
+        this.route('add-course');
       }
     );
   });

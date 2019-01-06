@@ -135,6 +135,16 @@ export default Ember.Controller.extend({
   }),
 
   /**
+   * @property {Boolean}
+   * Property to enable edit course if it is not a premium course
+   */
+  isEditableCourse: Ember.computed('course', function() {
+    let controller = this;
+    let courseData = controller.get('course');
+    return courseData.version !== 'premium';
+  }),
+
+  /**
    * @type {Boolean}
    * Property to check whether a class is premium
    */

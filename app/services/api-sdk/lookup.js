@@ -33,11 +33,14 @@ export default Ember.Service.extend({
   readAudiences: function() {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('lookupAdapter').readAudiences().then(function(response) {
-        resolve(
-          service.get('lookupSerializer').normalizeReadAudiences(response)
-        );
-      }, reject);
+      service
+        .get('lookupAdapter')
+        .readAudiences()
+        .then(function(response) {
+          resolve(
+            service.get('lookupSerializer').normalizeReadAudiences(response)
+          );
+        }, reject);
     });
   },
 
@@ -68,11 +71,14 @@ export default Ember.Service.extend({
   readLicenses: function() {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('lookupAdapter').readLicenses().then(function(response) {
-        resolve(
-          service.get('lookupSerializer').normalizeReadLicenses(response)
-        );
-      }, reject);
+      service
+        .get('lookupAdapter')
+        .readLicenses()
+        .then(function(response) {
+          resolve(
+            service.get('lookupSerializer').normalizeReadLicenses(response)
+          );
+        }, reject);
     });
   },
 
@@ -83,10 +89,13 @@ export default Ember.Service.extend({
   readAudienceItems: function() {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('lookupAdapter').readAudienceItems().then(function(response) {
-        resolve(response);
-        //resolve(service.get('lookupSerializer').normalizeReadCountries(response));
-      }, reject);
+      service
+        .get('lookupAdapter')
+        .readAudienceItems()
+        .then(function(response) {
+          resolve(response);
+          //resolve(service.get('lookupSerializer').normalizeReadCountries(response));
+        }, reject);
     });
   },
 
@@ -148,6 +157,22 @@ export default Ember.Service.extend({
           resolve(
             service.get('lookupSerializer').normalizeReadDistricts(response)
           );
+        }, reject);
+    });
+  },
+
+  /**
+   * Gets the languages information new
+   * @returns {Promise}
+   */
+  getLanguages: function() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('lookupAdapter')
+        .getLanguages()
+        .then(function(response) {
+          resolve(response);
         }, reject);
     });
   }
