@@ -279,12 +279,12 @@
                 <div class='offline-icon'></div>
                 <div class='offline-label'> {{t
                   'teacher-landing.class.class-settings.class-settings-sec.offline-class-label'}}</div>
-                <div class='action-button-slide-yes' data-toggle="tooltip" title="{{t 'teacher-landing.class.class-settings.class-settings-sec.offline-msg'}}">
+                <div class='action-button-slide-yes {{ if class.isOffline "disabled" }}' data-toggle="tooltip" title="{{t 'teacher-landing.class.class-settings.class-settings-sec.offline-msg'}}">
                   {{gru-switch switchOptions=switchOptions onOptionSwitch='saveOffline'
                   isChecked=class.isOffline}}
                 </div>
               </div>
-              <div class='sub-sec-row' style="display:none"> </div>
+              <div class=' sub-sec-row' style="display:none"> </div>
               {{#if class.collaborators}}
                 <div class='sub-sec-head'>{{t 'teacher-landing.class.class-settings.class-settings-sec.co-teachers'}}</div>
                 {{#each class.collaborators as |coteacher|}}
