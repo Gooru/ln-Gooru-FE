@@ -574,8 +574,10 @@ export default Ember.Controller.extend(ModalMixin, {
     updateLanguage(language) {
       const controller = this;
       const classId = this.get('class.id');
-      controller.get('classService').updateLanguage(classId, language.id);
-      // .then(resp => console.log(resp));
+      controller
+        .get('classService')
+        .updateLanguage(classId, language.id)
+        .then(() => controller.tempClass.set('primaryLanguage', language.id));
     }
   },
 

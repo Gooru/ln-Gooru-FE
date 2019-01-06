@@ -283,9 +283,9 @@
                 {{ log languages}}
                 <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    {{#if class.primaryLanguage}}
+                    {{#if tempClass.primaryLanguage}}
                       {{get-value 'source' source=languages searchProp='id'
-                                              searchVal=class.primaryLanguage
+                                              searchVal=tempClass.primaryLanguage
                                               destProp='display_name' }}
                     {{else}}
                       {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
