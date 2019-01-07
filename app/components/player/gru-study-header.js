@@ -92,15 +92,22 @@ export default Ember.Component.extend(ConfigurationMixin, {
     },
 
     mileStoneHandler: function() {
-      let currentPath = this.get('router').currentPath;
-      if (currentPath === 'study-player.index') {
-        this.get('router').transitionTo('study-player.timeline-view');
-      } else if (currentPath === 'reports.study-student-collection') {
-        this.get('router').transitionTo(
-          'study-player.timeline-view',
-          this.get('courseId')
-        );
+      let params;
+      if (this.get('classId')) {
+        params = {
+          queryParams: {
+            classId: this.get('classId'),
+            courseId: this.get('courseId')
+          }
+        };
+      } else {
+        params = {
+          queryParams: {
+            courseId: this.get('courseId')
+          }
+        };
       }
+      this.get('router').transitionTo('student-locate', params);
     },
     /**
      * Go back to collection

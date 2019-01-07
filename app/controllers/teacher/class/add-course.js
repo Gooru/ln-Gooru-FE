@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-
   // -------------------------------------------------------------------------
   // Dependencies
   /**
@@ -93,9 +92,11 @@ export default Ember.Controller.extend({
           controller.set('libraryCourses', userCourses);
         });
       } else {
-        controller.fetchLibraryCourses(dataSource).then(function(libraryCourses) {
-          controller.set('libraryCourses', libraryCourses);
-        });
+        controller
+          .fetchLibraryCourses(dataSource)
+          .then(function(libraryCourses) {
+            controller.set('libraryCourses', libraryCourses);
+          });
       }
       controller.set('isShowSearchCoursePullUp', true);
       controller.set('selectedCatalog', catalogLibrary);
@@ -200,7 +201,9 @@ export default Ember.Controller.extend({
   /**
    * @property {tenantLogo}
    */
-  tenantLogo: Ember.computed.alias('applicationController.tenant.theme.header.logo'),
+  tenantLogo: Ember.computed.alias(
+    'applicationController.tenant.theme.header.logo'
+  ),
 
   /**
    * @property {Object} userDetails
@@ -211,7 +214,6 @@ export default Ember.Controller.extend({
    * @property {Boolean} isShowMoreCatalogs
    */
   isShowMoreCatalogs: false,
-
 
   // -------------------------------------------------------------------------
   // Methods
@@ -233,7 +235,6 @@ export default Ember.Controller.extend({
     return mappedCourses;
   },
 
-
   /**
    * @function fetchFeaturedCourses
    * Method to fetch featured courses
@@ -247,12 +248,13 @@ export default Ember.Controller.extend({
       'flt.grade': classGrade
     };
     return Ember.RSVP.hash({
-      featuredCourses: Ember.RSVP.resolve(searchService.searchFeaturedCourses('*', filters))
-    })
-      .then(({featuredCourses}) => {
-        controller.set('featuredCourses', featuredCourses);
-        controller.set('isLoading', false);
-      });
+      featuredCourses: Ember.RSVP.resolve(
+        searchService.searchFeaturedCourses('*', filters)
+      )
+    }).then(({ featuredCourses }) => {
+      controller.set('featuredCourses', featuredCourses);
+      controller.set('isLoading', false);
+    });
   },
 
   /**
@@ -264,7 +266,7 @@ export default Ember.Controller.extend({
     let courseService = controller.get('courseService');
     return Ember.RSVP.hash({
       newCourseId: Ember.RSVP.resolve(courseService.copyCourse(courseId))
-    }).then(({newCourseId}) => {
+    }).then(({ newCourseId }) => {
       return newCourseId;
     });
   },
@@ -288,7 +290,9 @@ export default Ember.Controller.extend({
     let controller = this;
     let classId = controller.get('classId');
     let classService = controller.get('classService');
-    return Ember.RSVP.resolve(classService.associateCourseToClass(courseId, classId));
+    return Ember.RSVP.resolve(
+      classService.associateCourseToClass(courseId, classId)
+    );
   },
 
   /**
@@ -300,10 +304,9 @@ export default Ember.Controller.extend({
     let libraryService = controller.get('libraryService');
     return Ember.RSVP.hash({
       libraries: Ember.RSVP.resolve(libraryService.fetchLibraries())
-    })
-      .then(({libraries}) => {
-        controller.set('libraries', libraries);
-      });
+    }).then(({ libraries }) => {
+      controller.set('libraries', libraries);
+    });
   },
 
   /**
@@ -318,11 +321,12 @@ export default Ember.Controller.extend({
     let profileService = controller.get('profileService');
     let userDetails = controller.get('userDetails');
     return Ember.RSVP.hash({
-      userCourses: Ember.RSVP.resolve(profileService.getCourses(userDetails, params))
-    })
-      .then(({userCourses}) => {
-        return userCourses;
-      });
+      userCourses: Ember.RSVP.resolve(
+        profileService.getCourses(userDetails, params)
+      )
+    }).then(({ userCourses }) => {
+      return userCourses;
+    });
   },
 
   /**
@@ -334,10 +338,9 @@ export default Ember.Controller.extend({
     let searchService = controller.get('searchService');
     return Ember.RSVP.hash({
       catalogCourses: Ember.RSVP.resolve(searchService.searchCourses(filters))
-    })
-      .then(({catalogCourses}) => {
-        return catalogCourses;
-      });
+    }).then(({ catalogCourses }) => {
+      return catalogCourses;
+    });
   },
 
   /**
@@ -351,11 +354,15 @@ export default Ember.Controller.extend({
       pageSize: 10
     };
     return Ember.RSVP.hash({
-      libraryContents: Ember.RSVP.resolve(libraryService.fetchLibraryContent(libraryId, 'course', pagination))
-    })
-      .then(({libraryContents}) => {
-        let libraryContent = libraryContents.libraryContent;
-        return controller.mapOwners(libraryContent.courses, libraryContent.ownerDetails);
-      });
+      libraryContents: Ember.RSVP.resolve(
+        libraryService.fetchLibraryContent(libraryId, 'course', pagination)
+      )
+    }).then(({ libraryContents }) => {
+      let libraryContent = libraryContents.libraryContent;
+      return controller.mapOwners(
+        libraryContent.courses,
+        libraryContent.ownerDetails
+      );
+    });
   }
 });

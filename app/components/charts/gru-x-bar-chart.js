@@ -62,6 +62,7 @@ export default Ember.Component.extend({
   msaddonclass: Ember.computed('msstyles', function() {
     return this.get('mileStone') ? this.get('mileStone').iconClass : '';
   }),
+
   msstyles: Ember.computed('data', function() {
     const component = this;
     return this.get('data').map(function(questionData) {

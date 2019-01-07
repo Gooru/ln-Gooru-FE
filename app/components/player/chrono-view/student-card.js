@@ -81,6 +81,10 @@ export default Ember.Component.extend({
       collectionPromise = component
         .get('assessmentService')
         .readExternalAssessment(activitiy.get('collectionId'));
+    } else {
+      collectionPromise = component
+        .get('collectionService')
+        .readExternalCollection(activitiy.get('collectionId'));
     }
     return Ember.RSVP.hashSettled({
       collection: collectionPromise
