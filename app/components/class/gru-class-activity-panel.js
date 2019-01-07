@@ -89,9 +89,9 @@ export default Ember.Component.extend({
       this.set('showStudentListPullup', true);
     },
 
-    onOpenPerformanceEntry(item, classActivity) {
+    onOpenPerformanceEntry(item, classActivity, isRepeatEntry) {
       let component = this;
-      component.sendAction('onOpenPerformanceEntry', item, classActivity);
+      component.sendAction('onOpenPerformanceEntry', item, classActivity, isRepeatEntry);
     }
   },
 
@@ -103,7 +103,7 @@ export default Ember.Component.extend({
    */
   isShowAddData: Ember.computed(
     'isOfflineClass',
-    'classActivity',
+    'classActivity.activation_date',
     'item',
     function() {
       let component = this;

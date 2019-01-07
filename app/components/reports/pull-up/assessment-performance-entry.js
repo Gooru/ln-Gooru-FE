@@ -14,6 +14,11 @@ export default Ember.Component.extend({
 
   performanceService: Ember.inject.service('api-sdk/performance'),
 
+  /**
+   * @requires service:api-sdk/analytics
+   */
+  analyticsService: Ember.inject.service('api-sdk/analytics'),
+
   session: Ember.inject.service('session'),
 
   // -------------------------------------------------------------------------
@@ -21,7 +26,19 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     let component = this;
-    component.loadAssessmentData();
+    component.set('isLoading', true);
+    component.set('studentsOfflineAssessmentData', Ember.A([]));
+    component.set('maxTimespent', {
+      hour: null,
+      min: null
+    });
+    component.loadAssessmentData().then(function() {
+      if (component.get('isRepeatEntry')) {
+        component.populateStudentAssessmentSummary();
+      } else {
+        component.set('isLoading', false);
+      }
+    });
   },
 
   // Detect keyDown event
@@ -53,7 +70,9 @@ export default Ember.Component.extend({
         .$(`.question-${questionSeq} .question-info-container`)
         .removeClass('selected-question')
         .addClass('selected-question');
-      component.$(`.q-${questionSeq}-score`).focus();
+      if (!component.$(`.q-${questionSeq}-score`).hasClass('disabled')) {
+        component.$(`.q-${questionSeq}-score`).focus();
+      }
     },
 
     //Action triggered when edit score of a question
@@ -92,8 +111,8 @@ export default Ember.Component.extend({
     //Action triggered when enter max timespent
     onEnterMaxTimespent() {
       let component = this;
-      let maxHour = component.get('maxTimeHour');
-      let maxMins = component.get('maxTimeMins');
+      let maxHour = component.get('maxTimespent.hour');
+      let maxMins = component.get('maxTimespent.min');
       let maxTimeInMilliSec = (maxHour * 60 * 60 + maxMins * 60) * 1000;
       let questionTimespent =
         maxTimeInMilliSec / component.get('questions.length');
@@ -306,6 +325,15 @@ export default Ember.Component.extend({
     min: null
   },
 
+  /**
+   * @property {Date} activityDate
+   */
+  activityDate: Ember.computed('activityData', function() {
+    let component = this;
+    let activityData = component.get('activityData');
+    return activityData.activation_date;
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -327,21 +355,20 @@ export default Ember.Component.extend({
     let isStudentDataEntered = studentsOfflineAssessmentData[activeStudentSeq]
       ? studentsOfflineAssessmentData[activeStudentSeq]
       : null;
-
-    let assessmentPerformanceDataParams = component.getDataParams();
-    studentsOfflineAssessmentData[
-      activeStudentSeq - 1
-    ] = assessmentPerformanceDataParams;
-    component.set(
-      'studentsOfflineAssessmentData',
-      studentsOfflineAssessmentData
-    );
-    component.updateStudentAssessmentPerformance(
-      assessmentPerformanceDataParams
-    );
     if (isStudentDataEntered) {
-      component.loadEnteredStudentData(isStudentDataEntered, direction);
+      component.prePopulateStudentData(isStudentDataEntered);
     } else {
+      let assessmentPerformanceDataParams = component.getDataParams();
+      studentsOfflineAssessmentData[
+        activeStudentSeq - 1
+      ] = assessmentPerformanceDataParams;
+      component.set(
+        'studentsOfflineAssessmentData',
+        studentsOfflineAssessmentData
+      );
+      component.updateStudentAssessmentPerformance(
+        assessmentPerformanceDataParams
+      );
       component.resetElements();
     }
     component.set('activeStudent', activeStudent);
@@ -357,17 +384,18 @@ export default Ember.Component.extend({
     component.$(inputElements).val(null);
     component.$('.question-thumbnail').css('background-color', '#d8d8d8');
     component.$('.question-container').removeClass('scored');
-    component.$('.question-score').removeClass('disabled');
+    component.$('.question-score input').removeAttr('disabled');
     component.$('.question-score-entry').removeClass('wrong-score');
   },
 
   /**
-   * @function loadEnteredStudentData
+   * @function prePopulateStudentData
    */
-  loadEnteredStudentData(studentData) {
+  prePopulateStudentData(studentData) {
     let component = this;
     let resources = studentData ? studentData.resources : Ember.A([]);
     component.$('.question-info-container').removeClass('selected-question');
+    component.$('.question-score input').attr('disabled', 'true');
     resources.forEach(function(question, index) {
       let inputElement = component.$(`.q-${index}-score`);
       component.$(inputElement).val(question.score);
@@ -407,7 +435,7 @@ export default Ember.Component.extend({
   loadAssessmentData() {
     let component = this;
     let assessment = component.get('assessment');
-    component.fetchAssessmentData(assessment.id).then(function(assessmentData) {
+    return component.fetchAssessmentData(assessment.id).then(function(assessmentData) {
       let questions = assessmentData
         ? assessmentData.get('children')
         : Ember.A([]);
@@ -476,6 +504,66 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function populateStudentAssessmentSummary
+   */
+  populateStudentAssessmentSummary() {
+    let component = this;
+    let assessment = component.get('assessment');
+    let questions = component.get('questions');
+    let students = component.get('students');
+    let classId = component.get('classId');
+    let activityDate = new Date(component.get('activityDate'));
+    let studentsOfflineAssessmentData = Ember.A([]);
+    let questionTimespent = 0;
+    component.fetchStudentsAssessmentPerformance().then(function(studentsPerformance) {
+      if (studentsPerformance.length !== students.length) {
+        component.set('isCaptureTimespent', false);
+        students.map( student => {
+          let studentAssessmentPerformance = studentsPerformance.findBy('user', student.id);
+          if (studentAssessmentPerformance) {
+            let studentQuestionsPerformance = studentAssessmentPerformance.resourceResults;
+            questionTimespent = studentAssessmentPerformance.assessment.timespent / questions.length || 0;
+            let assessmentResources = Ember.A([]);
+            questions.map( question => {
+              let questionPerformance = studentQuestionsPerformance.findBy('resourceId', question.id);
+              let questionPerfData = {
+                resource_id: question.id,
+                resource_type: 'question',
+                question_type: question.type,
+                score: Number(questionPerformance.score/100),
+                max_score: question.maxScore,
+                time_spent: questionTimespent
+              };
+              assessmentResources.push(questionPerfData);
+            });
+            let studentPerformanceData = {
+              tenant_id: component.get('session.tenantId') || null,
+              student_id: student.get('id'),
+              session_id: studentAssessmentPerformance.get('sessionId'),
+              class_id: classId,
+              collection_id: assessment.id,
+              collection_type: 'assessment',
+              content_source: component.get('contentSource'),
+              time_zone: component.get('timeZone'),
+              conducted_on: activityDate.toISOString(),
+              path_id: 0,
+              path_type: null,
+              resources: assessmentResources
+            };
+            studentsOfflineAssessmentData.push(studentPerformanceData);
+          }
+        });
+        component.set('studentsOfflineAssessmentData', studentsOfflineAssessmentData);
+        component.prePopulateStudentData(studentsOfflineAssessmentData.objectAt(0));
+        component.set('questionTimespent', questionTimespent);
+      } else {
+        component.set('isCaptureTimespent', true);
+      }
+      component.set('isLoading', false);
+    });
+  },
+
+  /**
    * @function fetchAssessmentData
    */
   fetchAssessmentData(assessmentId) {
@@ -518,5 +606,24 @@ export default Ember.Component.extend({
         performanceService.updateCollectionOfflinePerformance(dataParams)
       )
     });
+  },
+
+  /**
+   * @function fetchStudentsAssessmentPerformance
+   */
+  fetchStudentsAssessmentPerformance() {
+    let component = this;
+    let classId = component.get('classId');
+    let assessment = component.get('assessment');
+    let assessmentId = assessment.id;
+    let activityDate = component.get('activityDate');
+    return Ember.RSVP.hash({
+      performance: component
+        .get('analyticsService')
+        .getDCAPerformance(classId, assessmentId, 'assessment', activityDate)
+    })
+      .then(({performance}) => {
+        return performance;
+      });
   }
 });
