@@ -58,38 +58,36 @@
   <div class="row header-info">
     <div class="col-md-6 col-sm-7 col-xs-4 class-information">
       <div class="class-name">
-        <span>
-          < {{t 'teacher-landing.class.class-management-tab.class-name'}} </span>
+        <span>{{t 'teacher-landing.class.class-management-tab.class-name'}} </span>
         <div class="edit-text">
           {{#unless editingTitle}}
             <span class='class-title ellipsis'>{{class.title}}</span>
             <span title="{{t 'teacher-landing.class.class-management-tab.edit'}}" data-toggle="tooltip" class='edit-icon' {{action "editTitle" true}}>{{gru-icon name='edit'}}</span>
-            {{else}}
-              {{validation.gru-input model=tempClass valuePath='title' didValidate=didValidate onFocusOut="editTitle"
+          {{else}}
+            {{validation.gru-input model=tempClass valuePath='title' didValidate=didValidate onFocusOut="editTitle"
             autofocus=true maxLength=25}}
           {{/unless}}
         </div>
       </div>
       <div class="row class-code">
         <div class="col-md-7 col-sm-7 col-xs-7 out-of-scope">
-          <p>
-            < {{t 'teacher-landing.class.class-management-tab.attend-class-with-code'}} </p>
-              {{gru-switch switchOptions=switchOptions onOptionSwitch='updateClass' isChecked=isAttendClassWithCode}} </div>
+          <p>{{t 'teacher-landing.class.class-management-tab.attend-class-with-code'}} </p> {{gru-switch switchOptions=switchOptions onOptionSwitch='updateClass' isChecked=isAttendClassWithCode}}
+        </div>
       </div>
     </div>
     <div class="col-md-6 col-sm-12 col-xs-8 course-information">
       <div class="assessment-min-score col-xs-8">
         <span class="ellipsis col-xs-12">
-                < {{t 'teacher-landing.class.class-management-tab.assessment-min-score'}} </span>
+          {{t 'teacher-landing.class.class-management-tab.assessment-min-score'}} </span>
         <div class="edit-text">
           {{#unless editingScore}}
             <span class="col-xs-12">{{if class.minScore class.minScore '--'}} % </span>
             <span title="{{t 'teacher-landing.class.class-management-tab.edit'}}" data-toggle="tooltip" {{action "editScore"}}>{{gru-icon name='edit'}}</span>
-            {{else}}
-              <div class="col-xs-12">
-                {{validation.gru-input-number model=tempClass valuePath='minScore' min=1 max=100 step=1
+          {{else}}
+            <div class="col-xs-12">
+              {{validation.gru-input-number model=tempClass valuePath='minScore' min=1 max=100 step=1
                     didValidate=didValidate onFocusOut="saveScore" onFocusIn="editScore" autofocus=true}}
-              </div>
+            </div>
           {{/unless}}
         </div>
       </div>
@@ -217,8 +215,8 @@
                   <span class='class-title ellipsis'>{{class.title}}</span>
                   <span title="{{t 'teacher-landing.class.class-management-tab.edit'}}" data-toggle="tooltip" class='edit-icon' {{action "editTitle" true}}>{{gru-icon name='edit'}}</span>
                   <div class='sec-head-sep'></div>
-                  {{else}}
-                    {{validation.gru-input model=tempClass valuePath='title' didValidate=didValidate onFocusOut="editTitle"
+                {{else}}
+                  {{validation.gru-input model=tempClass valuePath='title' didValidate=didValidate onFocusOut="editTitle"
                 autofocus=true maxLength=25}}
                 {{/unless}}
                 <div class='sec-desc-min-perf'>
@@ -229,11 +227,11 @@
                     <div class='sec-dec-value'>{{if class.minScore class.minScore '--'}} %
                       <span title="{{t 'teacher-landing.class.class-management-tab.edit'}}" data-toggle="tooltip" {{action "editScore"}}>{{gru-icon name='edit'}}</span>
                     </div>
-                    {{else}}
-                      <div class="colscoreedit">
-                        {{validation.gru-input-number model=tempClass valuePath='minScore' min=1 max=100 step=1
+                  {{else}}
+                    <div class="colscoreedit">
+                      {{validation.gru-input-number model=tempClass valuePath='minScore' min=1 max=100 step=1
                     didValidate=didValidate onFocusOut="saveScore" onFocusIn="editScore" autofocus=true}}
-                      </div>
+                    </div>
                   {{/unless}}
                 </div>
               </div>
@@ -242,7 +240,8 @@
                   <div class='label-class-code'> {{t
                     'teacher-landing.class.class-settings.class-settings-sec.class-code'}}</div>
                   <div class='value-class-code'>
-                    {{gru-copy-value value=class.code tooltipCode="teacher-landing.class.click-to-copy"}} {{class.code}}
+                    {{gru-copy-value value=class.code tooltipCode="teacher-landing.class.click-to-copy"}}
+                    {{class.code}}
                   </div>
                 </div>
               </div>
@@ -266,7 +265,7 @@
                     <ul class="dropdown-menu">
                       {{#if getCurrentGradeDDContent}}
                         {{#each currentGradeDDValue as |grade|}}
-                          <li> <a data-item= {{grade}} {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
+                          <li> <a data-item={{grade}} {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
                             </a> </li>
                         {{/each}}
                       {{/if}}
@@ -275,17 +274,45 @@
                 </div>
               </div>
             </div>
+            {{!-- language --}}
+            <div class='language-row'>
+              <div class='row-label'> {{t
+                  'teacher-landing.class.class-settings.class-settings-sec.language'}}
+              </div>
+              <div class='row-value'>
+                {{ log languages}}
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{#if tempClass.primaryLanguage}}
+                      {{get-value 'source' source=languages searchProp='id'
+                                              searchVal=tempClass.primaryLanguage
+                                              destProp='display_name' }}
+                    {{else}}
+                      {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
+                    {{/if}}
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    {{#each languages as |language|}}
+                      <li> <a data-item={{language}} {{ action 'updateLanguage'  language }}>{{language.display_name}}
+                        </a> </li>
+                    {{/each}}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            {{!-- language  ends--}}
             <div class='sub-sec-coteach'>
-              <!-- <div class='row-offline-class sub-sec-row' style="border-top:unset;">
+              <div class='row-offline-class sub-sec-row' style="border-top:unset;">
                 <div class='offline-icon'></div>
                 <div class='offline-label'> {{t
                   'teacher-landing.class.class-settings.class-settings-sec.offline-class-label'}}</div>
-                <div class='action-button-slide-yes'>
+                <div class='action-button-slide-yes {{ if class.isOffline "disabled" }}' data-toggle="tooltip" title="{{t 'teacher-landing.class.class-settings.class-settings-sec.offline-msg'}}">
                   {{gru-switch switchOptions=switchOptions onOptionSwitch='saveOffline'
                   isChecked=class.isOffline}}
                 </div>
-              </div> -->
-              <div class='sub-sec-row' style="display:none"> </div>
+              </div>
+              <div class=' sub-sec-row' style="display:none"> </div>
               {{#if class.collaborators}}
                 <div class='sub-sec-head'>{{t 'teacher-landing.class.class-settings.class-settings-sec.co-teachers'}}</div>
                 {{#each class.collaborators as |coteacher|}}
@@ -376,7 +403,7 @@
                         {{log subjectFWKDD}} {{log subjectFWKDD.frameworks}}
                         {{#each subjectFWKDD.frameworks as |fwk|}}
                           {{#if fwk}}
-                            <li> <a data-item= {{fwk}} {{ action 'updateFwkSettings'  fwk 'framework'}}>{{fwk.title}}
+                            <li> <a data-item={{fwk}} {{ action 'updateFwkSettings'  fwk 'framework'}}>{{fwk.title}}
                               </a> </li>
                           {{/if}}
                         {{/each}}
@@ -420,7 +447,7 @@
                             {{#if getCurrentGradeDDContent}}
                               {{#each currentFilterList as |grade|}}
                                 {{#if grade}}
-                                  <li> <a data-item= {{grade}} {{ action 'updateClassSettings'  grade.id 'grade_lower_bound'}}>{{grade.grade}}
+                                  <li> <a data-item={{grade}} {{ action 'updateClassSettings'  grade.id 'grade_lower_bound'}}>{{grade.grade}}
                                     </a> </li>
                                 {{/if}}
                               {{/each}}
@@ -468,7 +495,7 @@
                               {{#if currentFilterList}}
                                 {{#each currentFilterList as |grade|}}
                                   {{#if grade}}
-                                    <li> <a data-item= {{grade}} {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
+                                    <li> <a data-item={{grade}} {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
                                       </a> </li>
                                   {{/if}}
                                 {{/each}}
@@ -584,7 +611,7 @@
                   {{!-- <div class='student-header'> <span class='origin-head'>{{t 'teacher-landing.class.class-settings.origin'}}
                     </span> </div> --}}
                   <div class='student-header'> <span class='destination-head'> {{t 'teacher-landing.class.class-settings.destination'}}</span></div>
-                  {{else }}
+                {{else }}
                   <div class='student-header' style="grid-column-start:span  2;"> <span class='name-head'>
                       {{t 'teacher-landing.class.class-settings.students'}}</span></div>
                 {{/if}}
@@ -660,7 +687,7 @@
                             {{#if getCurrentGradeDDContent}}
                               {{#each currentFilterList as |grade|}}
                                 {{#if grade}}
-                                  <li> <a data-item= {{grade}} {{ action 'updateClassMembersSettings'  student grade.id 'grade_upper_bound'}}>{{grade.grade}}
+                                  <li> <a data-item={{grade}} {{ action 'updateClassMembersSettings'  student grade.id 'grade_upper_bound'}}>{{grade.grade}}
                                     </a> </li>
                                 {{/if}}
                               {{/each}}
@@ -669,7 +696,7 @@
                         </div>
                       </div>
                     </div>
-                    {{else }}
+                  {{else }}
                     <div class="student-name {{if student.isActive "" "inActiveRow"}}  " style="grid-column-start:span 2;">
                       <span class="ellipsis">{{student.lastName}} {{student.firstName}}</span>
                     </div>
