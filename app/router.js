@@ -250,41 +250,35 @@ Router.map(function() {
     path: '/integration/:appType'
   });
   this.route('player-external');
-  this.route('not-found', {
-    path: '/not-found/:entity'
+  this.route('not-found', { path: '/not-found/:entity' });
+  this.route('profile', { path: '/:userId' }, function() {
+    this.route('about');
+    this.route('edit');
+    this.route('activity');
+    this.route('analytics');
+    this.route('preference');
+
+    this.route('content', function() {
+      this.route('courses');
+      this.route('resources');
+      this.route('questions');
+      this.route('collections');
+      this.route('assessments');
+      this.route('rubrics');
+    });
+
+    this.route('network', function() {
+      this.route('following');
+      this.route('followers');
+    });
+
+    this.route('proficiency');
   });
-  this.route(
-    'profile',
-    {
-      path: '/:userId'
-    },
-    function() {
-      this.route('about');
-      this.route('edit');
-      this.route('activity');
-      this.route('analytics');
-
-      this.route('content', function() {
-        this.route('courses');
-        this.route('resources');
-        this.route('questions');
-        this.route('collections');
-        this.route('assessments');
-        this.route('rubrics');
-      });
-
-      this.route('network', function() {
-        this.route('following');
-        this.route('followers');
-      });
-
-      this.route('proficiency');
-    }
-  );
   /**
    * IMPORTANT! the profile route should be the last one at this file, so we can handle the app urls
    * and the vanity urls for profiles like www.gooru.org/javier-perez
    */
+  this.route('preference');
 });
 
 export default Router;

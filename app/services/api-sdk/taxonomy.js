@@ -272,5 +272,42 @@ export default Ember.Service.extend({
           }
         );
     });
+  },
+  fetchCategories: function() {
+    const service = this;
+    /* const resp = {
+      subject_classifications: [
+        {
+          id: 'k_12',
+          title: 'K12',
+          code: 'K12'
+        },
+        {
+          id: 'higher_education',
+          title: 'Higher Education',
+          code: 'HE'
+        },
+        {
+          id: 'professional_learning',
+          title: 'Professional Learning',
+          code: 'PL'
+        },
+        {
+          id: 'skills_training',
+          title: 'Skills Training',
+          code: 'SK'
+        }
+      ]
+    }; */
+    return new Ember.RSVP.Promise(function(resolve) {
+      service
+        .get('taxonomyAdapter')
+        .fetchCategories()
+        .then(function(response) {
+          resolve(
+            service.get('taxonomySerializer').normalizeFetchCategories(response)
+          );
+        });
+    });
   }
 });
