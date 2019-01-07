@@ -178,7 +178,7 @@ export default Ember.Component.extend({
   /**
    * @property {Number} expandedCellHeight
    */
-  expandedCellHeight: 15,
+  expandedCellHeight: 32,
 
   /**
    * Width of the cell
