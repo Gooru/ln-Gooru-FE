@@ -194,7 +194,7 @@
                                                                 {{#each (get-value 'source' source=category.subjectFwks searchProp='code'
                                                                                 searchVal=sub
                                                                                 destProp='frameworks')  as |fwks |}}
-                                                                    <li> <a data-item={{fwks}} {{ action 'markSelectedFrameworks' fwks subjects category  }}>{{fwks.frameworkId}}
+                                                                    <li> <a data-item={{fwks}} {{ action 'updateFrameworkForSubjectCategory' fwks sub category  }}>{{fwks.frameworkId}}
                                                                         </a> </li>
                                                                 {{else}}
                                                                     <li> {{t 'profile.preference.no-data'}} </li>
