@@ -1127,16 +1127,16 @@ $canvas-height: 1254px;
               align-items: center;
               justify-content: space-between;
               .row-label {
-                text-transform: uppercase;
+                text-transform: capitalize;
                 height: 16px;
                 font-size: 13px;
-                font-weight: bold;
+                /* font-weight: bold; */
                 flex: 1;
               }
               .row-value {
                 // margin-left: auto;
                 // margin-right: 30px;
-                flex: 2;
+                flex: 0.8;
               }
             }
             .sub-sec-coteach {
@@ -1258,7 +1258,7 @@ $canvas-height: 1254px;
                   height: 29px;
                   font-family: Lato;
                   font-size: 13px;
-                  flex: 1;
+                  flex: 0.64;
                 }
 
                 .action-button-slide-yes {
