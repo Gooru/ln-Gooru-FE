@@ -81,6 +81,11 @@ export default Ember.Controller.extend({
       this.markSelectedFrameworks(fwk, subject, category);
     },
 
+    updateFrameworkForSubjectCategory: function(fwk, subject, category) {
+      let subjectObj = this.getSubjectForCategory(subject, category);
+      this.removeSubject(category, subject);
+      this.updateMarkedSelectionsAsAdded(fwk, subjectObj, category);
+    },
     savePreferences: function() {
       this.savePreferences();
       this.changeMode(false);
@@ -110,7 +115,17 @@ export default Ember.Controller.extend({
       controller.set('selectedLanguage', language);
     }
   },
+  //--- pro
 
+  getSubjectForCategory: function(subjectCode, category) {
+    const controller = this;
+
+    let categoriesMaster = controller.get('categoriesMaster');
+    let found = categoriesMaster.findBy('id', category.id);
+    if (found.subjectFwks) {
+      return found.subjectFwks.findBy('code', subjectCode);
+    }
+  },
   //------------------------------------------------------------------------------
   // Impl methods
   //------------------------------------------------------------------------------
@@ -303,7 +318,7 @@ export default Ember.Controller.extend({
 
     let addedCategories = controller.get('addedCategories');
     if (addedCategories) {
-      addedCategories.map(c => {
+      addedCategories = addedCategories.filter(c => {
         if (c.subjects) {
           c.subjects.map(s => {
             controller.markSelectedFrameworksParsed(
@@ -312,9 +327,13 @@ export default Ember.Controller.extend({
               c
             );
           });
+          if (c.subjects.length > 0) {
+            return c;
+          }
         }
       });
     }
+    controller.set('addedCategories', addedCategories);
 
     let selections = controller.get('selections');
     //Flatten Data array not expected
@@ -544,9 +563,3 @@ export default Ember.Controller.extend({
     });
   }
 });
-
-/* editCategory(category) {
-    let addedCategories = this.get('addedCategories');
-    addedCategories.pushObject(category);
-    this.set('addedCategories', addedCategories);
-  }, */
