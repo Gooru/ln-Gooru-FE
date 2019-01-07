@@ -303,7 +303,7 @@ export default Ember.Controller.extend({
 
     let addedCategories = controller.get('addedCategories');
     if (addedCategories) {
-      addedCategories.map(c => {
+      addedCategories = addedCategories.filter(c => {
         if (c.subjects) {
           c.subjects.map(s => {
             controller.markSelectedFrameworksParsed(
@@ -312,9 +312,13 @@ export default Ember.Controller.extend({
               c
             );
           });
+          if (c.subjects.length > 0) {
+            return c;
+          }
         }
       });
     }
+    controller.set('addedCategories', addedCategories);
 
     let selections = controller.get('selections');
     //Flatten Data array not expected
