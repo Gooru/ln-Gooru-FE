@@ -94,7 +94,7 @@ export default Ember.Controller.extend({
    */
   subjectBucket: Ember.computed('course', function() {
     let controller = this;
-    return controller.get('course.subject') || 'K12.MA';
+    return controller.get('course.subject') || null;
   }),
 
   init() {
