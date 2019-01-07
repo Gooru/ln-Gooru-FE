@@ -1952,7 +1952,10 @@ export default Object.assign(quizzesTranslations, {
       library: 'Library',
       'my-content': 'My Content',
       following: 'Following',
-      proficiency: 'Proficiency'
+      proficiency: 'Proficiency',
+      preference: {
+        preference: 'Preference'
+      }
     },
     edit: {
       'select-district': 'Select a district...'
@@ -1971,6 +1974,15 @@ export default Object.assign(quizzesTranslations, {
         'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
       'show-compressed-chart': 'Show Compressed Chart',
       'show-expanded-chart': 'Show Expanded Chart'
+    },
+    preference: {
+      'language-preference': 'Language Preference',
+      'choose-language': 'Choose language',
+      'choose-preferred-language': 'Select profile language',
+      language: 'Language',
+      'select-category-label': 'Select category to Add :',
+      'choose-category': 'Choose Category',
+      'no-data': 'No data'
     }
   },
 
