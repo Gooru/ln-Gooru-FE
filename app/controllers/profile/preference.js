@@ -544,9 +544,3 @@ export default Ember.Controller.extend({
     });
   }
 });
-
-/* editCategory(category) {
-    let addedCategories = this.get('addedCategories');
-    addedCategories.pushObject(category);
-    this.set('addedCategories', addedCategories);
-  }, */
