@@ -103,7 +103,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
   /**
-   * @property {Boolean} isShowAddData
+   * @property {Boolean} isStudentAvaliable
    */
   isStudentAvaliable: Ember.computed('classActivity.usersCount', function() {
     let component = this;
