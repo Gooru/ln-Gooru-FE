@@ -42,7 +42,7 @@
           {{/if}}
         {{else}}
           {{#if isShowAddData}}
-            <div class="dca-panel-performance add-data {{if (lt isStduentCount 1) 'disabled'}}" {{action "onOpenPerformanceEntry" item classActivity false}}>
+            <div class="dca-panel-performance add-data {{if isStduentCount 'disabled'}}" {{action "onOpenPerformanceEntry" item classActivity false}}>
               {{t 'common.add-data'}}
             </div>
           {{else}}

@@ -110,7 +110,7 @@ export default Ember.Component.extend({
     let students = component.get('members');
     if (students) {
       let studentsLength = students.length;
-      return studentsLength;
+      return studentsLength < 1;
     }
   }),
   /**
