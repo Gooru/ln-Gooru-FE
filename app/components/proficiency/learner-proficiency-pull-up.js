@@ -107,8 +107,10 @@ export default Ember.Component.extend({
     let activeSubject = subjects.objectAt(1);
     let subjectBucket = component.get('subjectBucket');
     subjects.map(subject => {
-      if (subjectBucket.split(subject.id).length > 1) {
-        activeSubject = subject;
+      if (subjectBucket) {
+        if (subjectBucket && subjectBucket.split(subject.id).length > 1) {
+          activeSubject = subject;
+        }
       }
     });
     return activeSubject;
