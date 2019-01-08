@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import d3 from 'd3';
+import { getGradeColor } from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -49,9 +50,9 @@ export default Ember.Component.extend({
   isLoading: false,
 
   /**
-   * @property {activitiyEndDate}
+   * @property {activityEndDate}
    */
-  activitiyEndDate: Ember.computed('activities', function() {
+  activityEndDate: Ember.computed('activities', function() {
     let lastIndex = this.get('activities').length - 1;
     let lastAccesedResource = this.get('activities').objectAt(lastIndex);
     return this.uiDateFormat(lastAccesedResource.get('lastAccessedDate'));
@@ -78,6 +79,7 @@ export default Ember.Component.extend({
     if (component.get('positionToCenter')) {
       component.scrollToCenter();
     }
+    this.fillActiveResource();
   },
 
   willDestroyElement() {
@@ -124,10 +126,8 @@ export default Ember.Component.extend({
   drawTimeLineActivities() {
     const component = this;
     component.clearChart();
-    let selectedActivitiy = component
-      .get('activities')
-      .findBy('selected', true);
-    let selectedIndex = component.get('activities').indexOf(selectedActivitiy);
+    let selectedactivity = component.get('activities').findBy('selected', true);
+    let selectedIndex = component.get('activities').indexOf(selectedactivity);
     if (selectedIndex > -1) {
       component.set('selectedIndex', selectedIndex);
     }
@@ -136,16 +136,23 @@ export default Ember.Component.extend({
     component.drawActiveResource();
   },
 
+  fillActiveResource() {
+    let component = this;
+    let selectedactivity = component.get('activities').findBy('selected', true);
+    if (selectedactivity) {
+      let color = getGradeColor(selectedactivity.get('score'));
+      component.$('.active-resource').css('background-color', color);
+    }
+  },
+
   /**
    * @function drawActiveResource
    * Function to draw active resource
    */
   drawActiveResource() {
     const component = this;
-    let selectedActivitiy = component
-      .get('activities')
-      .findBy('selected', true);
-    let selectedIndex = component.get('activities').indexOf(selectedActivitiy);
+    let selectedactivity = component.get('activities').findBy('selected', true);
+    let selectedIndex = component.get('activities').indexOf(selectedactivity);
     if (selectedIndex > -1) {
       let svg = d3.select('#active-resource').select('svg');
       if (!svg[0][0]) {
@@ -155,16 +162,19 @@ export default Ember.Component.extend({
           .attr('class', 'center-activities');
       }
       let activeResourceGroup = svg.append('g');
-      activeResourceGroup
-        .append('circle')
-        .attr('class', `active node-${selectedIndex}`);
+      activeResourceGroup.append('circle').attr('class', () => {
+        let className = selectedactivity.get('pathId') ? 'suggested' : '';
+        return `active node-${selectedIndex} ${className}`;
+      });
       activeResourceGroup
         .append('foreignObject')
         .append('xhtml:div')
         .attr('class', () => {
-          return selectedActivitiy.get('collectionType') === 'collection'
-            ? 'active-collection'
-            : 'active-assessment';
+          let className =
+            selectedactivity.get('collectionType') === 'collection'
+              ? 'active-collection'
+              : 'active-assessment';
+          return `active-resource ${className}`;
         });
       let currentNodeX = 0; //constant cx position
       let currentNodeY = 35; //constant xy position
@@ -214,7 +224,7 @@ export default Ember.Component.extend({
               y: currentNodeY - 5,
               length: 20
             },
-            selectedActivitiy.pathId,
+            selectedactivity.pathId,
             'center'
           );
         } else {
@@ -228,7 +238,7 @@ export default Ember.Component.extend({
               y: prevNodeY - 5,
               curve: 20
             },
-            selectedActivitiy.pathId,
+            selectedactivity.pathId,
             'center'
           );
         }

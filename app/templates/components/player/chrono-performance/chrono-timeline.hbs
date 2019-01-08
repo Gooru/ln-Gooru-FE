@@ -3,8 +3,8 @@
     {{player.chrono-view.chrono-header performanceSummary=performanceSummary positionToCenter=positionToCenter onOpenCourseReport="onOpenCourseReport" onPaginateNext="onPaginateNext" startDate=startDate activities=activities onSelectCard="onSelectCard"}}
   </div>
   <div class="body class-activities" id="carousel">
-    {{#each activities as |activitiy index|}}
-      {{player.chrono-view.student-card  activitiy=activitiy onOpenCollectionReport="onOpenCollectionReport" cardIndex=index onSelectCard="onSelectCard"}}
+    {{#each activities as |activity index|}}
+      {{player.chrono-view.student-card  activity=activity onOpenCollectionReport="onOpenCollectionReport" cardIndex=index onSelectCard="onSelectCard"}}
     {{/each}}
   </div>
 </div>

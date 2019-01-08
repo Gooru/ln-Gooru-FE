@@ -181,41 +181,28 @@ export default Ember.Component.extend({
    */
   openStudentCollectionReport(collection, collectionType) {
     let component = this;
-    const lessonPromise = component.get('course.id')
-      ? component
-        .get('lessonService')
-        .fetchById(
-          component.get('course.id'),
-          collection.get('unitId'),
-          collection.get('lessonId')
-        )
-      : null;
-    return Ember.RSVP.hashSettled({
-      lesson: lessonPromise
-    }).then(function(hash) {
-      let lesson = hash.lesson.state === 'fulfilled' ? hash.lesson.value : null;
-      let params = {
-        userId: component.get('session.userId'),
-        classId: component.get('class.id'),
-        courseId: component.get('course.id'),
-        unitId: collection.get('unitId'),
-        lessonId: collection.get('lessonId'),
-        collectionId: collection.get('id'),
-        lesson: lesson,
-        type: collectionType,
-        isStudent: true,
-        isTeacher: false,
-        collection
-      };
-      component.set('studentCollectionReportContext', params);
-      if (collectionType === 'assessment-external') {
-        component.set('showExternalAssessmentReport', true);
-        component.set('showCollectionReport', false);
-      } else {
-        component.set('showExternalAssessmentReport', false);
-        component.set('showCollectionReport', true);
-      }
-    });
+    let params = {
+      userId: component.get('session.userId'),
+      classId: collection.get('classId'),
+      courseId: collection.get('courseId'),
+      unitId: collection.get('unitId'),
+      lessonId: collection.get('lessonId'),
+      collectionId: collection.get('id'),
+      sessionId:
+        collectionType === 'assessment' ? collection.get('sessionId') : null,
+      type: collectionType,
+      isStudent: true,
+      isTeacher: false,
+      collection
+    };
+    component.set('studentCollectionReportContext', params);
+    if (collectionType === 'assessment-external') {
+      component.set('showExternalAssessmentReport', true);
+      component.set('showCollectionReport', false);
+    } else {
+      component.set('showExternalAssessmentReport', false);
+      component.set('showCollectionReport', true);
+    }
   },
 
   /**

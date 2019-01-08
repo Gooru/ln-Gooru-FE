@@ -1,7 +1,7 @@
 {{#if loading}}
   {{three-bounce-spinner}}
 {{else}}
-  <div class="card-container" {{action "onSelectCard" activitiy}}>
+  <div class="card-container" {{action "onSelectCard" activity}}>
     <div class="collection-img" style="background-image: url({{collection.thumbnailUrl}})">
     </div>
     <div class="collection-performance">
@@ -11,21 +11,21 @@
         <span class="ellipsis">{{collection.title}}</span>
       </div>
       {{#if (or (eq type 'collection' ) (eq type 'collection-external'))}}
-        <div class="performance {{if (or (eq type 'collection-external') (eq activitiy.timeSpent 0)) 'disable'}}" {{action "onOpenCollectionReport"}} style="background-color:{{defaultBarColor}}">
+        <div class="performance {{if (or (eq type 'collection-external') (eq activity.timeSpent 0)) 'disable'}}" {{action "onOpenCollectionReport"}} style="background-color:{{defaultBarColor}}">
           <span class="time-spent">
-            {{#if activitiy.timeSpent}}
-              {{format-time activitiy.timeSpent}}
+            {{#if activity.timeSpent}}
+              {{format-time activity.timeSpent}}
             {{else}}
               &dash;&dash;
             {{/if}}
           </span>
         </div>
       {{else}}
-        <div class="performance {{if (eq activitiy.status 'in-progress') 'in-progress'}}" {{action "onOpenCollectionReport"}} style="background-color:{{if activitiy (grade-color activitiy.score) defaultBarColor}}">
+        <div class="performance {{if (eq activity.status 'in-progress') 'in-progress'}}" {{action "onOpenCollectionReport"}} style="background-color:{{if activity (grade-color activity.score) defaultBarColor}}">
           <span class="score">
-            {{#if activitiy}}
-              {{#if activitiy.score}}
-                {{activitiy.score}}%
+            {{#if activity}}
+              {{#if activity.score}}
+                {{activity.score}}%
               {{else}}
                 0%
               {{/if}}
