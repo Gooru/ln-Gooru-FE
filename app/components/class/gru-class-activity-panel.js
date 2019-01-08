@@ -91,7 +91,12 @@ export default Ember.Component.extend({
 
     onOpenPerformanceEntry(item, classActivity, isRepeatEntry) {
       let component = this;
-      component.sendAction('onOpenPerformanceEntry', item, classActivity, isRepeatEntry);
+      component.sendAction(
+        'onOpenPerformanceEntry',
+        item,
+        classActivity,
+        isRepeatEntry
+      );
     }
   },
 
