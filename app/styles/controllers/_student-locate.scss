@@ -232,8 +232,32 @@
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
 
       .completion-chart {
-        padding: 15px 20px 0 15px;
+        display: grid;
+        align-items: center;
+        height: 40px;
+        grid-template-columns: 22px 1fr 20px;
         cursor: pointer;
+
+        .destination-point {
+          i {
+            float: right;
+          }
+        }
+
+        .start-point {
+          i {
+            float: left;
+          }
+        }
+
+        .destination-point,
+        .start-point {
+          height: 24px;
+
+          i {
+            color: #0072bc;
+          }
+        }
 
         .charts.gru-x-bar-chart {
           background-color: #cdd2d6;

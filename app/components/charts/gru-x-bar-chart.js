@@ -71,7 +71,7 @@ export default Ember.Component.extend({
           ? component.get('mileStone').offset.left
           : null;
       if (leftoffsetval && questionData.percentage < 20) {
-        leftoffsetval = '0px';
+        leftoffsetval = '20px';
       }
       let displayStyle = component.get('mileStone') ? 'block' : 'none';
       let leftoffsetstr = leftoffsetval
