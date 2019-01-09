@@ -611,6 +611,8 @@ export default Ember.Component.extend({
     let format = content.get('format');
     if (!format) {
       content.set('format', this.get('activeContentType'));
+    } else {
+      content.set('collectionType', format);
     }
 
     return Ember.Object.create({

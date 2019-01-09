@@ -100,7 +100,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
         lastName: collectionData.creatorLastname,
         avatarUrl: creatorThumbnailUrl,
         username: collectionData.creatornameDisplay
-      })
+      }),
+      format: collectionData.format || null
     });
   },
 
@@ -133,6 +134,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return AssessmentModel.create(Ember.getOwner(this).ownerInjection(), {
       id: assessmentData.id,
       title: assessmentData.title,
+      format: assessmentData.format || null,
       thumbnailUrl: thumbnailUrl,
       standards: serializer
         .get('taxonomySerializer')

@@ -340,7 +340,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
           : true,
       owner: filteredOwners.get('length')
         ? filteredOwners.get('firstObject')
-        : null
+        : null,
+      format: collectionData.format || null
     });
   },
 
