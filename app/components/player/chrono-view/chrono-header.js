@@ -126,8 +126,8 @@ export default Ember.Component.extend({
   drawTimeLineActivities() {
     const component = this;
     component.clearChart();
-    let selectedactivity = component.get('activities').findBy('selected', true);
-    let selectedIndex = component.get('activities').indexOf(selectedactivity);
+    let selectedActivity = component.get('activities').findBy('selected', true);
+    let selectedIndex = component.get('activities').indexOf(selectedActivity);
     if (selectedIndex > -1) {
       component.set('selectedIndex', selectedIndex);
     }
@@ -138,9 +138,9 @@ export default Ember.Component.extend({
 
   fillActiveResource() {
     let component = this;
-    let selectedactivity = component.get('activities').findBy('selected', true);
-    if (selectedactivity) {
-      let color = getGradeColor(selectedactivity.get('score'));
+    let selectedActivity = component.get('activities').findBy('selected', true);
+    if (selectedActivity) {
+      let color = getGradeColor(selectedActivity.get('score'));
       component.$('.active-resource').css('background-color', color);
     }
   },
@@ -151,8 +151,8 @@ export default Ember.Component.extend({
    */
   drawActiveResource() {
     const component = this;
-    let selectedactivity = component.get('activities').findBy('selected', true);
-    let selectedIndex = component.get('activities').indexOf(selectedactivity);
+    let selectedActivity = component.get('activities').findBy('selected', true);
+    let selectedIndex = component.get('activities').indexOf(selectedActivity);
     if (selectedIndex > -1) {
       let svg = d3.select('#active-resource').select('svg');
       if (!svg[0][0]) {
@@ -163,7 +163,7 @@ export default Ember.Component.extend({
       }
       let activeResourceGroup = svg.append('g');
       activeResourceGroup.append('circle').attr('class', () => {
-        let className = selectedactivity.get('pathId') ? 'suggested' : '';
+        let className = selectedActivity.get('pathId') ? 'suggested' : '';
         return `active node-${selectedIndex} ${className}`;
       });
       activeResourceGroup
@@ -171,7 +171,7 @@ export default Ember.Component.extend({
         .append('xhtml:div')
         .attr('class', () => {
           let className =
-            selectedactivity.get('collectionType') === 'collection'
+            selectedActivity.get('collectionType') === 'collection'
               ? 'active-collection'
               : 'active-assessment';
           return `active-resource ${className}`;
@@ -224,7 +224,7 @@ export default Ember.Component.extend({
               y: currentNodeY - 5,
               length: 20
             },
-            selectedactivity.pathId,
+            selectedActivity.pathId,
             'center'
           );
         } else {
@@ -238,7 +238,7 @@ export default Ember.Component.extend({
               y: prevNodeY - 5,
               curve: 20
             },
-            selectedactivity.pathId,
+            selectedActivity.pathId,
             'center'
           );
         }
