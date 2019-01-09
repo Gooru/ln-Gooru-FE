@@ -1127,7 +1127,6 @@ $canvas-height: 1254px;
               align-items: center;
               justify-content: space-between;
               .row-label {
-                text-transform: capitalize;
                 height: 16px;
                 font-size: 13px;
                 /* font-weight: bold; */
@@ -1230,9 +1229,6 @@ $canvas-height: 1254px;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                .row-label {
-                  text-transform: uppercase;
-                }
                 .row-value {
                   margin-left: auto;
                 }
@@ -1249,7 +1245,7 @@ $canvas-height: 1254px;
                   height: 30px;
                   background-size: contain;
                   background-repeat: no-repeat;
-                  margin: 10px 10px 0 20px;
+                  margin: 10px 10px 0 0;
                   background-image: url("gooru/sort-horizontal.svg");
                 }
 
@@ -1511,7 +1507,7 @@ $canvas-height: 1254px;
                 height: 30px;
                 background-size: contain;
                 background-repeat: no-repeat;
-                margin: 3px 10px 0 20px;
+                margin: 3px 10px 0 0px;
                 background-image: url("gooru/sort-horizontal.svg");
               }
 

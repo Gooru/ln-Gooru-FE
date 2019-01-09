@@ -1328,7 +1328,7 @@ export default Object.assign(quizzesTranslations, {
         'class-settings-sec': {
           'generate-pathway': 'Personalize Learning Path',
           'class-settings-sec-head': 'Class Settings',
-          'class-settings-sec-desc': 'Minimum performance to pass',
+          'class-settings-sec-desc': 'Minimum performance to earn a trophy',
           'class-code': 'Class Code',
           subject: 'Subject',
           framework: 'Framework',
@@ -1338,7 +1338,7 @@ export default Object.assign(quizzesTranslations, {
           'add-coteacher': 'Add another teacher',
           'offline-class-label': 'This is an Offline classroom',
           'offline-msg': 'Once made Offline a class cannot be taken online',
-          language: 'language'
+          language: 'Language of instruction'
         },
         'student-settings-sec': {
           'student-settings-sec-head': 'Student Settings',
