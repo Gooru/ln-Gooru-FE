@@ -104,11 +104,20 @@ export default Ember.Component.extend({
 
     onOpenCollectionReport() {
       let component = this;
-      let isActive = this.get('activity.selected');
+      let activity = component.get('activity');
+      let isActive = activity.get('selected');
+      let collection = component.get('collection');
+      collection.set(
+        'performance',
+        Ember.Object.create({
+          score: activity.score
+        })
+      );
       if (isActive) {
         component.sendAction(
           'onOpenCollectionReport',
-          component.get('activity'),
+          activity,
+          collection,
           component.get('type')
         );
       }

@@ -81,9 +81,13 @@ export default Ember.Component.extend({
       component.openStudentCourseReport();
     },
 
-    onOpenCollectionReport(collection, collectionType) {
+    onOpenCollectionReport(activity, collection, collectionType) {
       let component = this;
-      component.openStudentCollectionReport(collection, collectionType);
+      component.openStudentCollectionReport(
+        activity,
+        collection,
+        collectionType
+      );
     },
 
     onSelectCard(activity) {
@@ -179,17 +183,17 @@ export default Ember.Component.extend({
    * @function openStudentCollectionReport
    * Method to open student collection report
    */
-  openStudentCollectionReport(collection, collectionType) {
+  openStudentCollectionReport(activity, collection, collectionType) {
     let component = this;
     let params = {
       userId: component.get('session.userId'),
-      classId: collection.get('classId'),
-      courseId: collection.get('courseId'),
-      unitId: collection.get('unitId'),
-      lessonId: collection.get('lessonId'),
-      collectionId: collection.get('id'),
+      classId: activity.get('classId'),
+      courseId: activity.get('courseId'),
+      unitId: activity.get('unitId'),
+      lessonId: activity.get('lessonId'),
+      collectionId: activity.get('id'),
       sessionId:
-        collectionType === 'assessment' ? collection.get('sessionId') : null,
+        collectionType === 'assessment' ? activity.get('sessionId') : null,
       type: collectionType,
       isStudent: true,
       isTeacher: false,
