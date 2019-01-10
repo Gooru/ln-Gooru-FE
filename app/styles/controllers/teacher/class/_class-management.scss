@@ -1045,7 +1045,7 @@ $canvas-height: 1254px;
                 float: right;
                 position: relative;
                 .sec-dec-value {
-                  width: 34px;
+                  width: 40px;
                   height: 16px;
                   font-family: Lato;
                   font-size: 13px;
@@ -1153,6 +1153,12 @@ $canvas-height: 1254px;
                 line-height: normal;
                 text-transform: uppercase;
                 margin-bottom: 12px;
+              }
+              .sub-sec-row-offline-alert {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                padding: 5px;
               }
 
               .sub-sec-row {
