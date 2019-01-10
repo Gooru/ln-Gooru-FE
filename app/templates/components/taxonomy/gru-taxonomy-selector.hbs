@@ -1,17 +1,17 @@
 {{#if showCategories}}
-<div class="category">
-  <label>
+  <div class="category">
+    <label>
     <span>{{t "common.category"}}</span>
     {{#if isEditing}}
       <div class="btn-group categories">
         {{#each categories as |category|}}
-          {{#if (eq category.value selectedCategory)}}
-            <button type="button" class="btn btn-sm btn-primary" {{action 'setCategory' category.value}}>
-              {{t category.label}}
+          {{#if (eq category.id selectedCategory)}}
+            <button type="button" class="btn btn-sm btn-primary" {{action 'setCategory' category.id}}>
+              {{category.title}}
             </button>
           {{else}}
-            <button type="button" class="btn btn-sm btn-info" {{action 'setCategory' category.value}}>
-              {{t category.label}}
+            <button type="button" class="btn btn-sm btn-info" {{action 'setCategory' category.id}}>
+              {{ category.title}}
             </button>
           {{/if}}
         {{/each}}
@@ -19,14 +19,14 @@
     {{else}}
       <div class="categories">
         {{#each categories as |category|}}
-          {{#if (eq category.value selectedCategory)}}
-            <div class="btn-empty btn btn-sm category">{{t category.label}}</div>
+          {{#if (eq category.id selectedCategory)}}
+            <div class="btn-empty btn btn-sm category"> {{ category.title }}</div>
           {{/if}}
         {{/each}}
       </div>
     {{/if}}
   </label>
-</div>
+  </div>
 {{/if}}
 <div class="subject clearfix">
   <label>

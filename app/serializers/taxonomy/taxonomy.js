@@ -365,13 +365,12 @@ export default Ember.Object.extend({
    * @returns {Subject[]} an array of Categories
    */
   normalizeFetchCategories: function(payload) {
-    var result = {};
-    if (payload) {
-      result = payload.subject_classifications.sortBy('id');
-      /* result = Object.assign(result, payload);
-      result.subject_classifications; */
-      //result.subject_classifications.sortBy();
-    }
-    return result;
+    let resultSet = Ember.A();
+    payload = Ember.A(payload.subject_classifications);
+    payload.forEach(data => {
+      let result = Ember.Object.create(data);
+      resultSet.pushObject(result);
+    });
+    return resultSet;
   }
 });

@@ -21,6 +21,26 @@
     }
   },
   {
+    "description": "Fetch Taxonomy Classifications",
+    "request": {
+      "url": "^/api/nucleus/v2/taxonomy/classifications",
+      "query": {
+      },
+      "method": "GET",
+      "headers": {
+        "authorization": "Token (.+)"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "File not found!",
+      "file": "taxonomy-classification-200-response.json"
+    }
+  },
+  {
     "description": "Fetch Taxonomy Subjects for Higher Education",
     "request": {
       "url": "^/api/nucleus/v1/taxonomy/subjects",
