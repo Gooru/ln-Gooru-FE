@@ -178,6 +178,7 @@ export default Object.assign(quizzesTranslations, {
     category: 'Category',
     categoryOptions: {
       k12: 'K-12',
+      k12IN: 'K12IN',
       'higher-ed': 'Higher Education',
       'professional-dev': 'Professional Development'
     },

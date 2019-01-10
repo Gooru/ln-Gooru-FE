@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import { TAXONOMY_CATEGORIES } from 'gooru-web/config/config';
+import { DEFAULT_K12_SUBJECT } from 'gooru-web/config/config';
+
 import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
@@ -24,10 +25,10 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     let component = this;
-    let activeCategory = component.get('activeCategory');
-    if (component.get('activeCategory')) {
-      component.fetchSubjectsByCategory(activeCategory);
-    }
+    component.fetchCategories().then(() => {
+      let selectedCategory = component.get('selectedCategory');
+      component.fetchSubjectsByCategory(selectedCategory);
+    });
     Ember.$('body').css('overflow', 'hidden');
   },
 
@@ -58,6 +59,14 @@ export default Ember.Component.extend({
     },
 
     /**
+     * Action triggered when select a category
+     */
+    onSelectCategory(category) {
+      this.set('selectedCategory', category);
+      this.fetchSubjectsByCategory(category);
+    },
+
+    /**
      * Action triggered at once the baseline is drawn
      */
     onShownBaseLine(createdDate) {
@@ -81,6 +90,26 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Methods
+
+  /**
+   * @function fetchCategories
+   * Method  fetch list of taxonomy categories
+   */
+  fetchCategories() {
+    let component = this;
+    return new Ember.RSVP.Promise(reslove => {
+      component
+        .get('taxonomyService')
+        .getCategories()
+        .then(categories => {
+          let category = categories.objectAt(0);
+          component.set('selectedCategory', category);
+          component.set('categories', categories);
+          reslove();
+        });
+    });
+  },
+
   /**
    * @function fetchSubjectsByCategory
    * @param subjectCategory
@@ -90,7 +119,7 @@ export default Ember.Component.extend({
     let component = this;
     component
       .get('taxonomyService')
-      .getTaxonomySubjects(category.value)
+      .getTaxonomySubjects(category.get('id'))
       .then(subjects => {
         let subject = component.getActiveSubject(subjects);
         component.set('taxonomySubjects', subjects);
@@ -104,7 +133,8 @@ export default Ember.Component.extend({
    */
   getActiveSubject(subjects) {
     let component = this;
-    let activeSubject = subjects.objectAt(1);
+    let defaultSubject = subjects.findBy('id', DEFAULT_K12_SUBJECT);
+    let activeSubject = defaultSubject ? defaultSubject : subjects.objectAt(0);
     let subjectBucket = component.get('subjectBucket');
     subjects.map(subject => {
       if (subjectBucket) {
@@ -139,9 +169,9 @@ export default Ember.Component.extend({
 
   /**
    * @property {JSON}
-   * Property to store active category //TODO for now it is always K12
+   * Property to store active category
    */
-  activeCategory: TAXONOMY_CATEGORIES[0],
+  selectedCategory: null,
 
   /**
    * @property {Object}
