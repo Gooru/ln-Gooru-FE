@@ -89,12 +89,67 @@
           height: 40px;
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
           background-color: $white;
-
+          %image-container {
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+            opacity: 0.5;
+            width: 22px;
+            height: 22px;
+          }
           .resource-icon {
             margin: auto;
             width: 24px;
             height: 24px;
-            background-color: rgba(251, 191, 159, 0.5);
+            &.video {
+              background-image: url("gooru/images/video-resource-dark.svg");
+              @extend %image-container;
+            }
+
+            &.question {
+              background-image: url("gooru/images/collection-question-gray.svg");
+              @extend %image-container;
+            }
+
+            &.webpage {
+              background: url("quizzes-addon/quizzes/images/website-resource-dark.svg");
+              @extend %image-container;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: 100%;
+            }
+
+            &.interactive {
+              background: url("quizzes-addon/quizzes/images/interactive-resource-dark.svg");
+              @extend %image-container;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: 100%;
+            }
+
+            &.image {
+              background: url("quizzes-addon/quizzes/images/image-resource-dark.svg");
+              @extend %image-container;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: 100%;
+            }
+
+            &.text {
+              background: url("quizzes-addon/quizzes/images/text-resource-dark.svg");
+              @extend %image-container;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: 100%;
+            }
+
+            &.audio_resource {
+              background: url("quizzes-addon/quizzes/images/audio-resource-dark.svg");
+              @extend %image-container;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: 100%;
+            }
           }
 
           .resource-title {

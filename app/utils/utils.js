@@ -1027,11 +1027,9 @@ export function validatePercentage(number) {
  */
 export function validateTimespent(hour, min) {
   let isValidTime = false;
-  hour = Number(hour) || 0;
-  min = Number(min) || 0;
   if (hour || min) {
     let isValidHour = hour >= 0 && hour <= 24;
-    let isValidMin = min >= 0 && min <= 60;
+    let isValidMin = hour < 24 ? min >= 0 && min <= 60 : min == 0;
     isValidTime = isValidHour && isValidMin;
   }
   return isValidTime;

@@ -44,9 +44,29 @@ export default Ember.Component.extend({
   // Detect keyDown event
   keyDown(event) {
     //prevent triggering tab key event
+    let component = this;
     if (event.keyCode === 9) {
-      event.preventDefault();
+      let question=component.get('activeQuestion');
+      let questionSeq=component.get('activeQuestionSeq');
+      component.onSelectTab(question,questionSeq);
     }
+  },
+
+  onSelectTab(question, questionSeq) {
+    let component = this;
+    component.set('activeQuestion', question);
+    component.set('activeQuestionSeq', questionSeq + 1);
+    component.fetchQuestionData(question.id);
+    component
+      .$(`.question-${questionSeq - 1} .question-info-container`)
+      .removeClass('selected-question')
+    component
+      .$(`.question-${questionSeq} .question-info-container`)
+      .removeClass('selected-question')
+      .addClass('selected-question');
+      component
+        .$(`.question-${questionSeq + 1} .question-info-container`)
+        .removeClass('selected-question')
   },
 
   // -------------------------------------------------------------------------
@@ -59,6 +79,7 @@ export default Ember.Component.extend({
         .$(`.question-${questionSeq} .question-description`)
         .toggleClass('hidden');
     },
+
 
     //Action triggered when select a question
     onSelectQuestion(question, questionSeq) {
@@ -73,7 +94,9 @@ export default Ember.Component.extend({
       if (!component.$(`.q-${questionSeq}-score`).hasClass('disabled')) {
         component.$(`.q-${questionSeq}-score`).focus();
       }
+      component.onSelectTab(question, questionSeq);
     },
+
 
     //Action triggered when edit score of a question
     onEditScore(question, sequence) {
@@ -382,7 +405,6 @@ export default Ember.Component.extend({
     let component = this;
     let inputElements = component.$('.question-score-entry');
     component.$(inputElements).val(null);
-    component.$('.question-thumbnail').css('background-color', '#d8d8d8');
     component.$('.question-container').removeClass('scored');
     component.$('.question-score input').removeAttr('disabled');
     component.$('.question-score-entry').removeClass('wrong-score');
@@ -408,10 +430,10 @@ export default Ember.Component.extend({
    */
   toggleScoredElement(question, sequence) {
     let component = this;
-    let enteredScore = question.score !== '' ? Number(question.score) : null;
+    let enteredScore = question.score;
     component
       .$(`.question-${sequence} .question-thumbnail`)
-      .css('background-color', '#d8d8d8');
+      .css('background-color', 'unset');
     component
       .$(`.question-${sequence}`)
       .removeClass('scored')
@@ -491,8 +513,9 @@ export default Ember.Component.extend({
    */
   validateQuestionScore(score) {
     let component = this;
+    let isNumber = !isNaN(score);
     let maxScore = component.get('activeQuestion.maxScore');
-    return score <= maxScore && score >= 0;
+    return isNumber ? score <= maxScore && score >= 0 : false;
   },
 
   /**

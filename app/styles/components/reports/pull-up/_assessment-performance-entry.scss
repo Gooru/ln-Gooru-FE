@@ -32,7 +32,7 @@
         input {
           width: 100%;
           font-size: 50px;
-          text-align: right;
+          text-align: center;
           font-weight: bold;
           color: #3d5e67;
           outline: none;
@@ -139,8 +139,13 @@
             .question-thumbnail {
               width: 32px;
               height: 32px;
-              background-color: #d8d8d8;
               border-radius: 50%;
+              background-repeat: no-repeat;
+              display: block;
+              background-size: 24px 24px;
+              background-image: url(../assets/gooru/images/add_question.svg);
+              opacity: 0.8;
+              background-position: center;
               display: block;
               margin-right: 8px;
               i {
@@ -197,6 +202,7 @@
 
           &.scored {
             .question-thumbnail {
+              background-image: none;
               i {
                 display: block;
                 color: $white;
