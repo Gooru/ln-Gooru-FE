@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { generateUUID } from 'gooru-web/utils/utils';
+import { generateUUID, validateTimespent } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -78,53 +78,24 @@ export default Ember.Component.extend({
     /**
      * @function validateHour
      */
-    validateHour(value, resourceSeq) {
+
+    timeValidator(resource) {
       let component = this;
-      let isNumber = !isNaN(value);
-      if (isNumber) {
-        let hour = parseInt(value);
-        if (!hour || (hour > 0 && hour <= 24)) {
-          component.$(`.r-${resourceSeq}-hour`).removeClass('invalid-time');
-        } else {
-          component
-            .$(`.r-${resourceSeq}-hour`)
-            .removeClass('invalid-time')
-            .addClass('invalid-time');
-        }
-      }
-      else {
+      let hours = resource.maxHour ? resource.maxHour : null;
+      let mins = resource.maxMins ? resource.maxMins : null;
+      if (validateTimespent(hours, mins)) {
+        component.$('.timespent-entry').removeClass('invalid-time');
+      } else {
         component
-          .$(`.r-${resourceSeq}-hour`)
+          .$('.timespent-entry')
           .removeClass('invalid-time')
           .addClass('invalid-time');
       }
-      component.validateTimeSpent();
-    },
+      component.validateTime();
+    }
     /**
      * @function validateMinute
      */
-    validateMinute(value, resourceSeq) {
-      let component = this;
-      let isNumber = !isNaN(value);
-      if (isNumber) {
-        let min = parseInt(value);
-        if (!min || (min > 0 && min <= 60)) {
-          component.$(`.r-${resourceSeq}-minute`).removeClass('invalid-time');
-        } else {
-          component
-            .$(`.r-${resourceSeq}-minute`)
-            .removeClass('invalid-time')
-            .addClass('invalid-time');
-        }
-      }
-      else {
-        component
-          .$(`.r-${resourceSeq}-minute`)
-          .removeClass('invalid-time')
-          .addClass('invalid-time');
-      }
-      component.validateTimeSpent();
-    }
   },
 
   // -------------------------------------------------------------------------
@@ -139,7 +110,7 @@ export default Ember.Component.extend({
   /**
    * @function validateTimeSpent
    */
-  validateTimeSpent() {
+  validateTime() {
     let component = this;
     let isValid = component.$('.invalid-time').length > 0;
     component.set('isValid', isValid);

@@ -169,7 +169,16 @@
             display: flex;
             padding-left: 5px;
             padding-right: 5px;
-
+            &.invalid-time {
+              .timespent-hour,
+              .timespent-mins {
+                span {
+                  input {
+                    box-shadow: inset 0 -1px 0 red !important;
+                  }
+                }
+              }
+            }
             .timespent-hour,
             .timespent-mins {
               width: 50px;

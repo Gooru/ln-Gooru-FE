@@ -1027,12 +1027,12 @@ export function validatePercentage(number) {
  */
 export function validateTimespent(hour, min) {
   let isValidTime = false;
-
+  let mins = parseInt(min);
   if (hour || min) {
     if (!isNaN(hour || min)) {
       let isValidHour = hour >= 0 && hour <= 24;
       let isValidMin =
-        hour < 24 ? min >= 0 && min <= 60 : min === 0 || min === null;
+        hour < 24 ? min >= 0 && min <= 60 : mins === 0 || min === null;
       isValidTime = isValidHour && isValidMin;
     }
   }
