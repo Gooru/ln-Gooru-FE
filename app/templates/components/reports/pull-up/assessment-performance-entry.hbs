@@ -10,13 +10,13 @@
         <div class="timespent-container">
           <div class="timespent-hour">
             <span>
-              {{input type="text" class="time" value=maxTimespent.hour key-up="onEnterTimespent"}}
+              {{input type="text" class="time" value=maxTimespent.hour maxlength="2" key-up="onEnterTimespent"}}
             </span>
             <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.hour'}}</span>
           </div>
           <div class="timespent-mins">
             <span>
-              {{input type="text" class="time" value=maxTimespent.min key-up="onEnterTimespent"}}
+              {{input type="text" class="time" value=maxTimespent.min maxlength="2" key-up="onEnterTimespent"}}
             </span>
             <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.min'}}</span>
           </div>
