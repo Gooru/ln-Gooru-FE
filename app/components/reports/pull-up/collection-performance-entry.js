@@ -80,10 +80,19 @@ export default Ember.Component.extend({
      */
     validateHour(value, resourceSeq) {
       let component = this;
-      let hour = parseInt(value);
-      if (!hour || (hour > 0 && hour <= 24)) {
-        component.$(`.r-${resourceSeq}-hour`).removeClass('invalid-time');
-      } else {
+      let isNumber = !isNaN(value);
+      if (isNumber) {
+        let hour = parseInt(value);
+        if (!hour || (hour > 0 && hour <= 24)) {
+          component.$(`.r-${resourceSeq}-hour`).removeClass('invalid-time');
+        } else {
+          component
+            .$(`.r-${resourceSeq}-hour`)
+            .removeClass('invalid-time')
+            .addClass('invalid-time');
+        }
+      }
+      else {
         component
           .$(`.r-${resourceSeq}-hour`)
           .removeClass('invalid-time')
@@ -96,10 +105,19 @@ export default Ember.Component.extend({
      */
     validateMinute(value, resourceSeq) {
       let component = this;
-      let min = parseInt(value);
-      if (!min || (min > 0 && min <= 60)) {
-        component.$(`.r-${resourceSeq}-minute`).removeClass('invalid-time');
-      } else {
+      let isNumber = !isNaN(value);
+      if (isNumber) {
+        let min = parseInt(value);
+        if (!min || (min > 0 && min <= 60)) {
+          component.$(`.r-${resourceSeq}-minute`).removeClass('invalid-time');
+        } else {
+          component
+            .$(`.r-${resourceSeq}-minute`)
+            .removeClass('invalid-time')
+            .addClass('invalid-time');
+        }
+      }
+      else {
         component
           .$(`.r-${resourceSeq}-minute`)
           .removeClass('invalid-time')

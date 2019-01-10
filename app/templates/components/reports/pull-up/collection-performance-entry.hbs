@@ -17,7 +17,7 @@
               <div class="timespent-hour">
                 <span>  {{input type="text" class=(concat 'resource-time-hour' ' r-' resourceSeq '-hour')
                   pattern="[0-9]*"
-                  focus-out=(action "validateHour" resource.maxHour resourceSeq)
+                  key-up=(action "validateHour" resource.maxHour resourceSeq)
                   inputmode="numeric"
                   value=resource.maxHour
                 }}</span>
@@ -27,7 +27,7 @@
                 <span>{{input type="text" class=(concat 'resource-time-min' ' r-' resourceSeq '-minute')
                 pattern="[0-9]*"
                 inputmode="numeric"
-                focus-out=(action "validateMinute" resource.maxMins resourceSeq)
+                key-up=(action "validateMinute" resource.maxMins resourceSeq)
                 value=resource.maxMins
               }}</span>
                 <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.min'}}</span>

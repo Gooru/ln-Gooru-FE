@@ -65,7 +65,7 @@
           <div></div>
         {{/unless}}
         {{#if isDisableNext}}
-          <div {{action "onSubmitPerformance"}} class="next action">{{t 'common.done'}}</div>
+          <div {{action "onSubmitPerformance"}} class="next action {{unless isEnableNext 'disabled'}}">{{t 'common.done'}}</div>
         {{else}}
           <div class="next action {{unless isEnableNext 'disabled'}}" {{action "onMoveStudent" 'next'}}>
             <span class="ellipsis">{{nextStudent.fullName}}</span>
