@@ -114,11 +114,13 @@
           {{/if}}
         </div>
       </div>
+      {{#if isOfflineClass}}
       <div class="re-add-data {{if (eq classActivity.usersCount 0) 'disabled'}}">
         {{#if collectionPerformanceSummary}}
           <span {{action "onOpenPerformanceEntry" item classActivity true}}>{{t 'common.add-data'}}</span>
         {{/if}}
       </div>
+      {{/if}}
     </div>
   {{/unless}}
 </div>

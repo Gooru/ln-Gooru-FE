@@ -9,10 +9,12 @@
   color: #37434d;
   background-color: $white;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  min-height: 500px;
   .cancel-body {
     text-align: center;
     top: 100%;
     z-index: 1031;
+    display: grid;
     width: 360px;
     left: 0;
     right: 0;
@@ -21,16 +23,17 @@
     background-color: $white;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
     height: 480px;
+    min-height: 500px;
     span {
       font-size: 16px;
-      position: sticky;
-      top: 38%;
+      align-items: center;
+      height: 100%;
+      margin: auto;
+      display: flex;
     }
     .close-actions {
       display: grid;
       grid-template-columns: auto auto;
-      height: 95%;
-      align-items: center;
       .cancel-button,
       .ok-button {
         width: 100px;

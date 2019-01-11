@@ -10,13 +10,13 @@
         <div class="timespent-container">
           <div class="timespent-hour">
             <span>
-              {{input type="text" class="time" value=maxTimespent.hour key-up="onEnterTimespent"}}
+              {{input type="text" class="time" value=maxTimespent.hour maxlength="2" key-up="onEnterTimespent"}}
             </span>
             <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.hour'}}</span>
           </div>
           <div class="timespent-mins">
             <span>
-              {{input type="text" class="time" value=maxTimespent.min key-up="onEnterTimespent"}}
+              {{input type="text" class="time" value=maxTimespent.min maxlength="2" key-up="onEnterTimespent"}}
             </span>
             <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.min'}}</span>
           </div>
@@ -41,7 +41,7 @@
         {{#each questions as |question questionSeq|}}
           <div class="question-container question-{{questionSeq}}">
             <div class="question-info-container {{if (eq question.id activeQuestion.id) 'selected-question'}}" {{action "onSelectQuestion" question questionSeq}}>
-              <div class="question-thumbnail">{{gru-icon name="done_all"}}</div>
+              <div class="question-thumbnail"><i class="question-icon"></i>{{gru-icon name="done_all"}}</div>
               <div class="question-title ellipsis" {{action "onToggleQuestion" question questionSeq}}>{{plus-one questionSeq}}{{concat '. ' question.title}}</div>
               <div class="question-score">
                 {{input type="text" class=(concat 'question-score-entry' ' q-' questionSeq '-score')
@@ -65,7 +65,7 @@
           <div></div>
         {{/unless}}
         {{#if isDisableNext}}
-          <div {{action "onSubmitPerformance"}} class="next action">{{t 'common.done'}}</div>
+          <div {{action "onSubmitPerformance"}} class="next action {{unless isEnableNext 'disabled'}}">{{t 'common.done'}}</div>
         {{else}}
           <div class="next action {{unless isEnableNext 'disabled'}}" {{action "onMoveStudent" 'next'}}>
             <span class="ellipsis">{{nextStudent.fullName}}</span>
