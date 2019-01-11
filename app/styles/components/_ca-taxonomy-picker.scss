@@ -1,0 +1,20 @@
+.ca-taxonomy-picker {
+  .subjects-container {
+    display: flex;
+    overflow: auto;
+    .subject-container {
+      width: 200px;
+      height: 50px;
+      margin: 5px;
+    }
+  }
+  .taxonomy-hierarchy-container {
+    display: flex;
+    .hierarchy-level {
+      width: 200px;
+      min-height: 300px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  }
+}

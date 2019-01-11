@@ -117,6 +117,7 @@ export default Ember.Service.extend({
     let serializedData = service
       .get('collectionSerializer')
       .serializeUpdateCollection(collectionModel);
+    console.log('serializedData', serializedData);
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('collectionAdapter')
@@ -384,5 +385,35 @@ export default Ember.Service.extend({
       collectionId,
       'collection'
     );
+  },
+
+  /**
+   * Creates a new collection
+   *
+   * @param collectionData object with the collection data
+   * @returns {Promise}
+   */
+  createExternalCollection: function(collectionData) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      console.log('collectionData', collectionData);
+      let serializedClassData = service
+        .get('collectionSerializer')
+        .serializeCreateCollection(collectionData);
+      service
+        .get('collectionAdapter')
+        .createExternalCollection(serializedClassData)
+        .then(
+          function(responseData, textStatus, request) {
+            let collectionId = request.getResponseHeader('location');
+            collectionData.set('id', collectionId);
+            console.log('collectionData', collectionData);
+            resolve(collectionData);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });

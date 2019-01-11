@@ -134,18 +134,20 @@ export default Ember.Service.extend({
    */
   updateAssessment: function(assessmentId, assessmentModel) {
     const service = this;
+    console.log('assessmentModel', assessmentModel);
     let serializedData = service
       .get('assessmentSerializer')
       .serializeUpdateAssessment(assessmentModel);
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      service
-        .get('assessmentAdapter')
-        .updateAssessment(assessmentId, serializedData)
-        .then(function() {
-          service.notifyQuizzesAssessmentChange(assessmentId);
-          resolve();
-        }, reject);
-    });
+    console.log('serializedData', serializedData);
+    // return new Ember.RSVP.Promise(function(resolve, reject) {
+    //   service
+    //     .get('assessmentAdapter')
+    //     .updateAssessment(assessmentId, serializedData)
+    //     .then(function() {
+    //       service.notifyQuizzesAssessmentChange(assessmentId);
+    //       resolve();
+    //     }, reject);
+    // });
   },
 
   /**

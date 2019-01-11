@@ -418,6 +418,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('isShowCollectionPerformanceEntryPullUp', false);
       controller.set('isShowExternalCollectionPeformanceEntryPullUp', false);
       controller.loadData();
+    },
+
+    onClickCreateOfflineActivity() {
+      let controller = this;
+      controller.set('isShowCreateOfflineActivity', true);
     }
   },
 
@@ -438,6 +443,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
+
+  isShowCreateOfflineActivity: false,
 
   isRepeatEntry: false,
 
@@ -645,6 +652,14 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       return activities;
     }
   ),
+
+  classPreference: Ember.computed('class', function() {
+    let controller = this;
+    let classData = controller.get('class');
+    let classPreference = classData.preference ? classData.preference : null;
+    console.log('classPreference', classPreference);
+    return classPreference;
+  }),
 
   // -------------------------------------------------------------------------
   // Observers

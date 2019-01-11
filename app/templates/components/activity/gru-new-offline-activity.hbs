@@ -1,0 +1,40 @@
+<div class="create-activity-container">
+  <div class="header-container">
+    Create Activity
+  </div>
+  <div class="body-container">
+    <div class="title-container">
+      <span>Title</span>
+      {{input type="text" value=activityTitle class="activity-title"}}
+    </div>
+    <div class="description-container">
+      <span>Description</span>
+      {{textarea value=activityDescription class="activity-description"}}
+    </div>
+    <div class="competency-container">
+      {{#if isShowTaxonomyPicker}}
+        {{ca-taxonomy-picker classPreference=classPreference}}
+      {{else}}
+        Please select subject and framework
+      {{/if}}
+    </div>
+    <div class="audience-container">
+      {{#each audiences as |audience|}}
+        <span>{{audience.name}}</span>
+      {{/each}}
+    </div>
+      <div class="scheduler-container">
+        {{ca-date-picker
+          showToday=true
+          forMonth=forMonth
+          allowDateSelectorToggle=true
+          forYear=forYear
+          onSelectDate="onSelectDate"
+          onSelectToday="onSelectDate"
+          activities=scheduledClassActivitiesDatewise
+          highlightActivities=false
+        }}
+      </div>
+    <div class="unschedule-list-container"></div>
+  </div>
+</div>

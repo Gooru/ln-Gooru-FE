@@ -188,5 +188,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return {
       order: values
     };
+  },
+
+  serializeCreateExternalCollection(collectionData) {
+    return {
+
+    };
   }
 });
