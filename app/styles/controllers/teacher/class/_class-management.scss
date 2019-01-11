@@ -1045,7 +1045,7 @@ $canvas-height: 1254px;
                 float: right;
                 position: relative;
                 .sec-dec-value {
-                  width: 34px;
+                  width: 40px;
                   height: 16px;
                   font-family: Lato;
                   font-size: 13px;
@@ -1135,11 +1135,11 @@ $canvas-height: 1254px;
               .row-value {
                 // margin-left: auto;
                 // margin-right: 30px;
-                flex: 0.8;
+                flex: 0.4;
               }
             }
             .sub-sec-coteach {
-              margin-top: 25px;
+              margin-top: 5px;
               padding-bottom: 8px;
 
               .sub-sec-head {
@@ -1148,11 +1148,12 @@ $canvas-height: 1254px;
                 opacity: 0.8;
 
                 /* font-family: OpenSans; */
-                font-size: 10px;
+                font-size: 12px;
                 font-weight: bold;
                 line-height: normal;
                 text-transform: uppercase;
                 margin-bottom: 12px;
+                margin-top: 12px;
               }
 
               .sub-sec-row {
@@ -1160,7 +1161,8 @@ $canvas-height: 1254px;
                 border-top: 1px solid $sep-border-color;
                 display: flex;
                 align-items: center;
-                padding: 5px;
+                padding-top: 5px;
+                padding-bottom: 5px;
 
                 .teacher-icon {
                   display: inline;
@@ -1233,10 +1235,17 @@ $canvas-height: 1254px;
                   margin-left: auto;
                 }
               }
-              .row-offline-class {
-                margin-top: 10px;
-                padding-top: 10px;
+
+              .row-offline-alert {
                 padding-bottom: 20px;
+                align-items: center;
+                color: black;
+                font-weight: bolder;
+              }
+
+              .row-offline-class {
+                padding-top: 10px;
+                padding-bottom: 10px;
                 align-items: center;
 
                 .offline-icon {
@@ -1254,7 +1263,7 @@ $canvas-height: 1254px;
                   height: 29px;
                   font-family: Lato;
                   font-size: 13px;
-                  flex: 0.64;
+                  flex: 0.85;
                 }
 
                 .action-button-slide-yes {
@@ -1495,8 +1504,14 @@ $canvas-height: 1254px;
               }
             }
 
+            .row-offline-alert {
+              padding-bottom: 10px;
+              align-items: center;
+              color: black;
+              font-weight: bolder;
+            }
+
             .row-offline-class {
-              margin-top: 10px;
               padding-top: 10px;
               align-items: center;
               /*  padding-bottom: 20px; */
