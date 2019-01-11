@@ -190,6 +190,10 @@ export default Ember.Component.extend({
    */
   activityDate: null,
 
+  Members: Ember.computed('members', function() {
+    let members = this.get('members');
+    return members.sortBy('firstName');
+  }),
   /**
    * It is used to find activity is today or not
    * @return {Boolean}

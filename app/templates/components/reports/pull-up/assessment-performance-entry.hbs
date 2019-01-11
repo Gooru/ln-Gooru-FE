@@ -35,7 +35,7 @@
       </div>
       <div class="active-student">
         <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})"></div>
-        <div class="student-name ellipsis">{{activeStudent.fullName}}</div>
+        <div class="student-name ellipsis">{{concat activeStudent.firstName ' ' activeStudent.lastName}}</div>
       </div>
       <div class="questions-container">
         {{#each questions as |question questionSeq|}}
@@ -59,7 +59,7 @@
       <div class="action-container">
         {{#unless isDisablePrev}}
           <div class="prev action ellipsis" {{action "onMoveStudent" 'prev'}}>
-            {{gru-icon name="fast_rewind" }}<span class="ellipsis">{{prevStudent.fullName}}</span>
+            {{gru-icon name="fast_rewind" }}<span class="ellipsis">{{concat prevStudent.firstName ' ' prevStudent.lastName}}</span>
           </div>
         {{else}}
           <div></div>
@@ -68,7 +68,7 @@
           <div {{action "onSubmitPerformance"}} class="next action {{unless isEnableNext 'disabled'}}">{{t 'common.done'}}</div>
         {{else}}
           <div class="next action {{unless isEnableNext 'disabled'}}" {{action "onMoveStudent" 'next'}}>
-            <span class="ellipsis">{{nextStudent.fullName}}</span>
+            <span class="ellipsis">{{concat nextStudent.firstName ' ' activeStudent.lastName}}</span>
             {{gru-icon name="fast_forward" }}
           </div>
         {{/if}}
