@@ -112,7 +112,7 @@
             }
 
             &.webpage {
-              background: url("quizzes-addon/quizzes/images/website-resource-dark.svg");
+              background: url("gooru/images/website-resource-dark.svg");
               @extend %image-container;
               background-repeat: no-repeat;
               background-position: center;
@@ -120,7 +120,7 @@
             }
 
             &.interactive {
-              background: url("quizzes-addon/quizzes/images/interactive-resource-dark.svg");
+              background: url("gooru/images/interactive-resource-dark.svg");
               @extend %image-container;
               background-repeat: no-repeat;
               background-position: center;
@@ -128,7 +128,7 @@
             }
 
             &.image {
-              background: url("quizzes-addon/quizzes/images/image-resource-dark.svg");
+              background: url("gooru/images/image-resource-dark.svg");
               @extend %image-container;
               background-repeat: no-repeat;
               background-position: center;
@@ -136,7 +136,7 @@
             }
 
             &.text {
-              background: url("quizzes-addon/quizzes/images/text-resource-dark.svg");
+              background: url("gooru/images/text-resource-dark.svg");
               @extend %image-container;
               background-repeat: no-repeat;
               background-position: center;
@@ -144,7 +144,7 @@
             }
 
             &.audio_resource {
-              background: url("quizzes-addon/quizzes/images/audio-resource-dark.svg");
+              background: url("gooru/images/audio-resource-dark.svg");
               @extend %image-container;
               background-repeat: no-repeat;
               background-position: center;
