@@ -2,7 +2,7 @@ import Ember from 'ember';
 import APITaxonomyService from 'gooru-web/services/api-sdk/taxonomy';
 import TaxonomyItem from 'gooru-web/models/taxonomy/taxonomy-item';
 import { CODE_TYPES } from 'gooru-web/config/config';
-import { getCategoryFromSubjectId } from 'gooru-web/utils/taxonomy';
+import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
 
 /**
  * Service for the Taxonomy Singleton elements container
@@ -70,7 +70,7 @@ export default Ember.Service.extend({
             return apiTaxonomyService
               .fetchSubjects(category.get('id'))
               .then(function(subjects) {
-                taxonomyContainer[category.get('id')] = subjects;
+                taxonomyContainer[category.get('code')] = subjects;
               });
           });
           Ember.RSVP.all(promises).then(function() {
@@ -224,7 +224,7 @@ export default Ember.Service.extend({
   findSubjectById(subjectId, loadCourses = false) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve) {
-      const category = getCategoryFromSubjectId(subjectId);
+      const category = getCategoryCodeFromSubjectId(subjectId);
       if (category) {
         service.getSubjects(category).then(function() {
           var result = service.findSubject(category, subjectId);

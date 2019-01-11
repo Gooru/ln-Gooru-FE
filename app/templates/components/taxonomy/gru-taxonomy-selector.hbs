@@ -5,12 +5,12 @@
     {{#if isEditing}}
       <div class="btn-group categories">
         {{#each categories as |category|}}
-          {{#if (eq category.id selectedCategory)}}
-            <button type="button" class="btn btn-sm btn-primary" {{action 'setCategory' category.id}}>
+          {{#if (eq category.code selectedCategory)}}
+            <button type="button" class="btn btn-sm btn-primary" {{action 'setCategory' category.code}}>
               {{category.title}}
             </button>
           {{else}}
-            <button type="button" class="btn btn-sm btn-info" {{action 'setCategory' category.id}}>
+            <button type="button" class="btn btn-sm btn-info" {{action 'setCategory' category.code}}>
               {{ category.title}}
             </button>
           {{/if}}
@@ -19,7 +19,7 @@
     {{else}}
       <div class="categories">
         {{#each categories as |category|}}
-          {{#if (eq category.id selectedCategory)}}
+          {{#if (eq category.code selectedCategory)}}
             <div class="btn-empty btn btn-sm category"> {{ category.title }}</div>
           {{/if}}
         {{/each}}

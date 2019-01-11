@@ -2,6 +2,7 @@ import Ember from 'ember';
 import { DEFAULT_K12_SUBJECT } from 'gooru-web/config/config';
 
 import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
+import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
 
 export default Ember.Component.extend({
   classNames: ['learner-proficiency-pull-up'],
@@ -25,10 +26,7 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     let component = this;
-    component.fetchCategories().then(() => {
-      let selectedCategory = component.get('selectedCategory');
-      component.fetchSubjectsByCategory(selectedCategory);
-    });
+    component.loadData();
     Ember.$('body').css('overflow', 'hidden');
   },
 
@@ -59,14 +57,6 @@ export default Ember.Component.extend({
     },
 
     /**
-     * Action triggered when select a category
-     */
-    onSelectCategory(category) {
-      this.set('selectedCategory', category);
-      this.fetchSubjectsByCategory(category);
-    },
-
-    /**
      * Action triggered at once the baseline is drawn
      */
     onShownBaseLine(createdDate) {
@@ -90,6 +80,22 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Methods
+
+  /**
+   * This method will load the initial set  of data
+   */
+  loadData() {
+    let component = this;
+    component.fetchCategories().then(() => {
+      let categories = component.get('categories');
+      let categoryCode = component.get('categoryCode');
+      let selectedCategory = categories.findBy('code', categoryCode);
+      if (selectedCategory) {
+        component.set('selectedCategory', selectedCategory);
+        component.fetchSubjectsByCategory(selectedCategory);
+      }
+    });
+  },
 
   /**
    * @function fetchCategories
@@ -245,5 +251,16 @@ export default Ember.Component.extend({
   /**
    * @property {Date} timeSeriesStartDate
    */
-  timeSeriesStartDate: null
+  timeSeriesStartDate: null,
+
+  /**
+   * Parse  category from subject id
+   */
+  categoryCode: Ember.computed('course', function() {
+    let course = this.get('course');
+    let subject = this.get('subjectBucket');
+    if (course && course.get('id') && subject) {
+      return getCategoryCodeFromSubjectId(subject);
+    }
+  })
 });

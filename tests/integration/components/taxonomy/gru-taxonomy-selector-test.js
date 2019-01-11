@@ -117,7 +117,7 @@ test('View mode it renders - no show categories', function(assert) {
 
 test('Edit mode it renders when no selection is made - from non course content', function(assert) {
   this.render(
-    hbs`{{taxonomy/gru-taxonomy-selector selectedCategory='k_12' isEditing=true}}`
+    hbs`{{taxonomy/gru-taxonomy-selector selectedCategory='K12' isEditing=true}}`
   );
 
   const $component = this.$('.gru-taxonomy-selector');
@@ -156,11 +156,11 @@ test('Edit mode it renders when no selection is made - from course content', fun
 test('Edit mode category selection - from non course content', function(assert) {
   assert.expect(8);
   this.on('selectCategory', function(category) {
-    assert.equal(category, 'higher_education', 'Wrong category');
+    assert.equal(category, 'HE', 'Wrong category');
   });
 
   this.render(
-    hbs`{{taxonomy/gru-taxonomy-selector  selectedCategory='k_12' isEditing=true onCategorySelected='selectCategory'}}`
+    hbs`{{taxonomy/gru-taxonomy-selector  selectedCategory='K12' isEditing=true onCategorySelected='selectCategory'}}`
   );
 
   const $component = this.$('.gru-taxonomy-selector');
@@ -224,15 +224,14 @@ test('subject label of the higher school category selection - from course conten
     'Wrong subject label'
   );
 
-  $component.find('.categories .btn-info:eq(0)').click();
+  $component.find('.categories .btn-info:eq(1)').click();
   return wait().then(function() {
     $subjectLabel = $component.find('.subject > label span');
     assert.equal(
       T.text($subjectLabel),
       self
         .get('i18n')
-        .t('taxonomy.gru-taxonomy-selector.competency-subject-and-course')
-        .string,
+        .t('taxonomy.gru-taxonomy-selector.primary-subject-and-course').string,
       'Wrong subject label'
     );
   });
@@ -241,7 +240,7 @@ test('subject label of the higher school category selection - from course conten
 test('Edit mode category selection - from course content', function(assert) {
   assert.expect(8);
   this.on('selectCategory', function(category) {
-    assert.equal(category, 'k_12', 'Wrong category');
+    assert.equal(category, 'K12', 'Wrong category');
   });
 
   this.render(
