@@ -148,11 +148,18 @@
               background-position: center;
               display: block;
               margin-right: 8px;
-              background-color: unset !important;
+              background-color: unset;
               i {
                 display: none;
                 text-align: center;
                 line-height: 32px;
+              }
+              &.scored-background {
+                background-color: #538a32 !important;
+              }
+
+              &.default-background {
+                background-color: unset;
               }
             }
             .question-title {
@@ -204,7 +211,6 @@
           &.scored {
             .question-thumbnail {
               background-image: none;
-              background-color: #538a32 !important;
               i {
                 display: block;
                 color: $white;
