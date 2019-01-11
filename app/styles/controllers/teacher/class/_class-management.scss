@@ -1266,6 +1266,11 @@ $canvas-height: 1254px;
                   flex: 0.85;
                 }
 
+                .offline-info-icon {
+                  vertical-align: middle;
+                  display: inline-block;
+                }
+
                 .action-button-slide-yes {
                   /* Has icon / SVG class */
 
@@ -1532,6 +1537,11 @@ $canvas-height: 1254px;
                 font-family: Lato;
                 font-size: 13px;
                 flex: 1;
+              }
+
+              .offline-info-icon {
+                vertical-align: middle;
+                display: inline-block;
               }
 
               .action-button-slide-yes {
