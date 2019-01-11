@@ -59,14 +59,14 @@ export default Ember.Component.extend({
     component.fetchQuestionData(question.id);
     component
       .$(`.question-${questionSeq - 1} .question-info-container`)
-      .removeClass('selected-question')
+      .removeClass('selected-question');
     component
       .$(`.question-${questionSeq} .question-info-container`)
       .removeClass('selected-question')
       .addClass('selected-question');
-      component
-        .$(`.question-${questionSeq + 1} .question-info-container`)
-        .removeClass('selected-question')
+    component
+      .$(`.question-${questionSeq + 1} .question-info-container`)
+      .removeClass('selected-question');
   },
 
   // -------------------------------------------------------------------------
@@ -433,7 +433,7 @@ export default Ember.Component.extend({
     let enteredScore = question.score;
     component
       .$(`.question-${sequence} .question-thumbnail`)
-      .css('background-color', 'unset');
+      .removeClass('scored-background default-background');
     component
       .$(`.question-${sequence}`)
       .removeClass('scored')
@@ -443,7 +443,7 @@ export default Ember.Component.extend({
         component.$(`.question-${sequence}`).addClass('scored');
         component
           .$(`.question-${sequence} .question-thumbnail`)
-          .css('background-color', '#538a32');
+          .addClass('scored-background');
       } else {
         component.$(`.question-${sequence}`).addClass('wrong-score');
       }

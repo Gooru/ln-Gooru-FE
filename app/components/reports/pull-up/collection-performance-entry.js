@@ -72,8 +72,8 @@ export default Ember.Component.extend({
         component.updateStudentCollectionPerformance(
           collectionPerformanceDataParams
         );
-        component.sendAction('onClosePerformanceEntry');
       });
+      component.sendAction('onClosePerformanceEntry');
     },
     /**
      * @function validateHour
