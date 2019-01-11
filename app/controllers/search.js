@@ -2,7 +2,6 @@ import Ember from 'ember';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import ModalMixin from 'gooru-web/mixins/modal';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
-import { SEARCH_CATEGORIES } from 'gooru-web/config/config';
 
 export default Ember.Controller.extend(ModalMixin, {
   // -------------------------------------------------------------------------
@@ -35,9 +34,12 @@ export default Ember.Controller.extend(ModalMixin, {
     },
     setSubject: function(subject) {
       const controller = this;
-      controller.get('taxonomyService').getCourses(subject).then(function() {
-        controller.openTaxonomyModal(subject);
-      });
+      controller
+        .get('taxonomyService')
+        .getCourses(subject)
+        .then(function() {
+          controller.openTaxonomyModal(subject);
+        });
     }
   },
 
@@ -97,11 +99,6 @@ export default Ember.Controller.extend(ModalMixin, {
    * @property {selectedTags[]} selected tags
    */
   selectedTags: Ember.A([]),
-
-  /**
-   * @property {categories[]} list of categories for filtering subjects
-   */
-  categories: SEARCH_CATEGORIES,
 
   /**
    * The selected category
@@ -171,11 +168,13 @@ export default Ember.Controller.extend(ModalMixin, {
   },
 
   filterSubjects: function(category) {
-    this.get('taxonomyService').getSubjects(category.value).then(
-      function(subjects) {
-        this.set('subjects', subjects);
-      }.bind(this)
-    );
+    this.get('taxonomyService')
+      .getSubjects(category.get('code'))
+      .then(
+        function(subjects) {
+          this.set('subjects', subjects);
+        }.bind(this)
+      );
   },
 
   reloadTaxonomyTags: function() {

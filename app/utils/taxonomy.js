@@ -98,12 +98,6 @@ export function getCategoryFromSubjectId(subjectId) {
  * @return {Object} - An object with the category information
  */
 export function getCategoryCodeFromSubjectId(subjectId) {
-  let categoryCode = subjectId.split('.')[0];
-  let categories = Ember.A(TAXONOMY_CATEGORIES);
-  let category = categories.findBy('apiCode', categoryCode);
-  if (!category) {
-    categoryCode = subjectId.split('.')[1];
-    category = categories.findBy('apiCode', categoryCode);
-  }
-  return category ? category.apiCode : null;
+  let categoryCode = subjectId.split('.');
+  return categoryCode.length === 3 ? categoryCode[1] : categoryCode[0];
 }

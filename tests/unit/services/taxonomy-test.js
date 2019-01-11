@@ -446,13 +446,26 @@ test('organizeCodes', function(assert) {
 */
 
 test('findSubjectById for a loaded category and subject', function(assert) {
+  const test = this;
   const service = this.subject();
   const taxonomyContainer = {
     k_12: this.taxonomySubjects
   };
 
   service.set('taxonomyContainer', taxonomyContainer);
-
+  service.set(
+    'apiTaxonomyService',
+    Ember.Object.create({
+      fetchSubjects: function() {
+        assert.ok(true); // This assert should be evaluated for every subject category
+        return Ember.RSVP.resolve(test.taxonomySubjects);
+      },
+      fetchCategories: function() {
+        assert.ok(true); // This assert should be evaluated for  categories
+        return Ember.RSVP.resolve(test.taxonomyCategories);
+      }
+    })
+  );
   var done = assert.async();
   service.findSubjectById('GDF.K12.VPA').then(function(subject) {
     assert.equal(subject.get('id'), 'GDF.K12.VPA', 'Invalid subject id');
@@ -475,10 +488,23 @@ test('findSubjectById for a loaded category and subject', function(assert) {
 
 test('findSubjectById for a loaded category and non-loaded subject', function(assert) {
   const service = this.subject();
+  const test = this;
   const taxonomyContainer = {
     k_12: this.taxonomySubjects
   };
-
+  service.set(
+    'apiTaxonomyService',
+    Ember.Object.create({
+      fetchSubjects: function() {
+        assert.ok(true); // This assert should be evaluated for every subject category
+        return Ember.RSVP.resolve(test.taxonomySubjects);
+      },
+      fetchCategories: function() {
+        assert.ok(true); // This assert should be evaluated for  categories
+        return Ember.RSVP.resolve(test.taxonomyCategories);
+      }
+    })
+  );
   service.set('taxonomyContainer', taxonomyContainer);
   var done = assert.async();
   service.findSubjectById('non.existing.subject').then(function(subject) {

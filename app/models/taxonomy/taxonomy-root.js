@@ -1,8 +1,6 @@
 import Ember from 'ember';
-import {
-  TAXONOMY_CATEGORIES,
-  GOORU_DEFAULT_STANDARD
-} from 'gooru-web/config/config';
+import { GOORU_DEFAULT_STANDARD } from 'gooru-web/config/config';
+import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
 
 /**
  * Taxonomy Root
@@ -50,13 +48,9 @@ const TaxonomyRoot = Ember.Object.extend({
    * @property {string}
    */
   category: Ember.computed('id', function() {
-    let code = this.get('id').split('.')[0];
-    let category = Ember.A(TAXONOMY_CATEGORIES).findBy('apiCode', code);
-    if (!category) {
-      code = this.get('id').split('.')[1];
-      category = Ember.A(TAXONOMY_CATEGORIES).findBy('apiCode', code);
-    }
-    return category ? category.value : null;
+    let id = this.get('id');
+    let subjectId = id.split('-')[0];
+    return getCategoryCodeFromSubjectId(subjectId);
   }),
 
   /**

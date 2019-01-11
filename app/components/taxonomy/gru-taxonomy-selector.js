@@ -40,7 +40,6 @@ export default Ember.Component.extend({
       const component = this;
       component.set('selectedSubject', null);
       component.set('internalCategory', category);
-      component.loadSubjects(category);
       if (component.get('onCategorySelected')) {
         component.sendAction('onCategorySelected', category);
       }
@@ -273,9 +272,13 @@ export default Ember.Component.extend({
   /**
    * Sets the corresponding lists of subjects and courses when the primary subject changes
    */
-  onSelectedSubjectChanged: Ember.observer('selectedSubject', function() {
-    this.setupComponent();
-  }),
+  onSelectedSubjectChanged: Ember.observer(
+    'selectedSubject',
+    'selectedCategory',
+    function() {
+      this.setupComponent();
+    }
+  ),
 
   /**
    * Set the subject dropdown label - from course
