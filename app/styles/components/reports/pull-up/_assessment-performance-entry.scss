@@ -148,6 +148,7 @@
               background-position: center;
               display: block;
               margin-right: 8px;
+              background-color: unset !important;
               i {
                 display: none;
                 text-align: center;
@@ -203,6 +204,7 @@
           &.scored {
             .question-thumbnail {
               background-image: none;
+              background-color: #538a32 !important;
               i {
                 display: block;
                 color: $white;

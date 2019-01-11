@@ -79,15 +79,15 @@ export default Ember.Component.extend({
      * @function validateHour
      */
 
-    timeValidator(resource) {
+    timeValidator(resource, resourceSeq) {
       let component = this;
       let hours = resource.maxHour ? resource.maxHour : null;
       let mins = resource.maxMins ? resource.maxMins : null;
       if (validateTimespent(hours, mins)) {
-        component.$('.timespent-entry').removeClass('invalid-time');
+        component.$(`.r-${resourceSeq}`).removeClass('invalid-time');
       } else {
         component
-          .$('.timespent-entry')
+          .$(`.r-${resourceSeq}`)
           .removeClass('invalid-time')
           .addClass('invalid-time');
       }
