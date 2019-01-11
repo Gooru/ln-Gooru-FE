@@ -422,7 +422,7 @@ test('it shows an error message if the password and rePassword fields do not mat
   });
 });
 
-test('it shows an error message if the first name field has blanks', function(assert) {
+test('first name field has blanks', function(assert) {
   visit('/sign-up');
 
   andThen(function() {
@@ -431,12 +431,12 @@ test('it shows an error message if the first name field has blanks', function(as
     const $signUpContainer = find('.sign-up');
     const $firstNameField = $signUpContainer.find('.gru-input.firstName');
 
-    // Invalid
+    // Has blanks should be valid too....so check for error not there
     $firstNameField.find('input').val('one first name');
     $firstNameField.find('input').blur();
     return wait().then(function() {
       assert.ok(
-        $firstNameField.find('.error-messages .error').length,
+        !$firstNameField.find('.error-messages .error').length,
         'firstName error message visible'
       );
       // Valid
@@ -452,7 +452,7 @@ test('it shows an error message if the first name field has blanks', function(as
   });
 });
 
-test('it shows an error message if the last name field has invalid characters', function(assert) {
+test('last name field has blanks and special characters', function(assert) {
   visit('/sign-up');
 
   andThen(function() {
@@ -462,11 +462,11 @@ test('it shows an error message if the last name field has invalid characters', 
     const $lastNameField = $signUpContainer.find('.gru-input.lastName');
 
     // Invalid
-    $lastNameField.find('input').val('lastname#%');
+    $lastNameField.find('input').val('last #%name');
     $lastNameField.find('input').blur();
     return wait().then(function() {
       assert.ok(
-        $lastNameField.find('.error-messages .error').length,
+        !$lastNameField.find('.error-messages .error').length,
         'lastName error message visible'
       );
       // Valid
