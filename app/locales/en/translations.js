@@ -1336,11 +1336,13 @@ export default Object.assign(quizzesTranslations, {
           'option-choose-one': 'Choose One',
           'co-teachers': 'Co-Teachers',
           'add-coteacher': 'Add another teacher',
-          'offline-class-label':
+          'offline-class-label': 'This is an offline classroom',
+          'offline-msg':
+            'Once marked offline, the classroom cannot be made online again.',
+          'offline-toggle-tooltip':
             'Select Yes if you want to make this an offline classroom',
-          'offline-msg': 'Once made Offline a class cannot be taken online',
           'offline-tooltip':
-            'Classrooms, where students do not study online on Gooru, are marked as Offline. The teacher tracks students learning offline and enters data on behalf of the students',
+            'Classrooms, where students do not study online on Navigator, are marked as Offline. The teacher tracks students learning offline and enters data on behalf of the students',
           language: 'Language of instruction'
         },
         'student-settings-sec': {
