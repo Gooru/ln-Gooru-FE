@@ -179,7 +179,8 @@
                   {{else}}
                     {{#if userPerformanceData.hasStarted}}
                       <div class="content-score-value">
-                        {{#if userPerformanceData.isSkipped}}
+                        <!-- TODO need to revist this skipped logic -->
+                        {{#if (and userPerformanceData.isSkipped (lt userPerformanceData.score 0))}}
                           <div class="skipped">
                             <span>{{userPerformanceData.sequence}}</span> {{gru-icon name="not_interested"}}
                           </div>

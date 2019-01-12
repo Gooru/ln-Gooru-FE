@@ -406,6 +406,7 @@ export default Ember.Component.extend({
     component.$('.question-container').removeClass('scored');
     component.$('.question-score input').removeAttr('disabled');
     component.$('.question-score-entry').removeClass('wrong-score');
+    component.$('.question-thumbnail').removeClass('scored-background');
   },
 
   /**
@@ -515,7 +516,7 @@ export default Ember.Component.extend({
     let component = this;
     let isNumber = !isNaN(score);
     var enteredNumber = score.toString();
-    if (enteredNumber.indexOf('.') > 0) {
+    if (!isNumber || enteredNumber.indexOf('.') >= 0) {
       return false;
     } else {
       let maxScore = component.get('activeQuestion.maxScore');
