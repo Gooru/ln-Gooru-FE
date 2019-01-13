@@ -1,0 +1,261 @@
+.performance-manual-entry.external-assessment-performance-entry {
+  background-color: $white;
+  .external-assessment-performance-container {
+    position: relative;
+    .assessment-thumbnail {
+      width: 360px;
+      height: 220px;
+      background-size: 360px 220px;
+      background-repeat: no-repeat;
+      object-fit: contain;
+    }
+
+    .max-score-entry-container {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      .text-title {
+        font-size: 10px;
+        font-weight: bold;
+        text-align: center;
+        color: #3e5e67;
+        margin: 20px 0;
+      }
+
+      .score-entry {
+        width: 200px;
+        justify-self: center;
+        input {
+          font-size: 100px;
+          font-weight: bold;
+          color: #3e5e67;
+          width: 100%;
+          outline: none;
+          text-align: center;
+        }
+      }
+      .error {
+        color: $red-400;
+        font-size: 10px;
+      }
+
+      .action {
+        width: 100px;
+        height: 40px;
+        border-radius: 4px;
+        background-color: #1aa9eb;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+        color: $white;
+        text-transform: uppercase;
+        line-height: 40px;
+        cursor: pointer;
+        margin: 20px 0;
+        justify-self: center;
+      }
+    }
+
+    .question-score.header {
+      font-size: 12px;
+      font-weight: bold;
+      height: 40px;
+      text-transform: uppercase;
+      text-align: left;
+      padding-left: 16px;
+      border-bottom: 1px solid #3e90fa;
+      span {
+        border-bottom: 2px solid #3e90fa;
+        line-height: 40px;
+        color: #3e90fa;
+        padding-bottom: 10px;
+      }
+    }
+    .active-question {
+      display: grid;
+      grid-template-columns: auto auto;
+      height: 14px;
+      line-height: 14px;
+      border-bottom: 1px solid #3e90fa;
+      .question-seq,
+      .question-max-score {
+        font-size: 10px;
+        font-weight: bold;
+        color: #3e5e67;
+        text-transform: uppercase;
+      }
+    }
+    .active-student {
+      display: grid;
+      grid-template-columns: 170px 127px 40px;
+      align-items: center;
+      height: 40px;
+      align-items: center;
+      justify-content: left;
+      box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+      padding: 0 12px;
+      .first-name,
+      .last-name,
+      .score {
+        text-transform: uppercase;
+        font-size: 10px;
+        font-weight: bold;
+        color: #3e5e67;
+      }
+      .last-name {
+        margin-left: 40px;
+      }
+    }
+
+    .assessment-max-score {
+      height: 24px;
+      line-height: 24px;
+      border-bottom: 1px solid #3e90fa;
+      font-size: 10px;
+      font-weight: bold;
+      color: #3e5e67;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .students-container {
+      max-height: calc(100vh - 440px);
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        height: 3px;
+        width: 6px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: $gray-light;
+        border: 1px solid $gray-light;
+        border-radius: 5px;
+      }
+
+      .student-info-container {
+        .student-info {
+          display: grid;
+          grid-template-columns: 32px 120px 120px 32px;
+          column-gap: 8px;
+          align-items: center;
+          height: 40px;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+          .student-thumbnail {
+            width: 32px;
+            height: 32px;
+            background-size: 32px 32px;
+            display: block;
+            border: none;
+            border-radius: 50%;
+            i {
+              display: none;
+              line-height: 32px;
+              text-align: center;
+            }
+          }
+          .last-name,
+          .first-name {
+            text-transform: capitalize;
+            font-size: 10px;
+            font-weight: bold;
+            color: #3e5e67;
+            margin-right: 8px;
+            height: inherit;
+            line-height: 40px;
+          }
+
+          .first-name {
+            border-right: 2px dashed rgba(45, 45, 45, 0.3);
+            margin-right: 0;
+          }
+
+          .student-score {
+            input.student-score-entry {
+              width: 100%;
+              text-align: center;
+              background-color: transparent;
+              &:focus {
+                background-color: transparent;
+                outline: none;
+              }
+            }
+          }
+          &.scored {
+            .student-thumbnail {
+              background-image: unset !important;
+              i {
+                display: block;
+                color: $white;
+              }
+            }
+          }
+          &.wrong-score {
+            .student-score input {
+              color: red;
+              border-bottom: 1px solid red;
+              outline: none;
+            }
+          }
+        }
+        &.selected-student {
+          background-color: #c9e4f9;
+        }
+      }
+    }
+
+    .action-container {
+      display: grid;
+      grid-template-columns: auto;
+      justify-content: right;
+      padding: 0 16px;
+      align-items: center;
+      height: 40px;
+      box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.2);
+      background-color: $white;
+      width: 360px;
+      .action {
+        display: flex;
+        line-height: 40px;
+      }
+      .student-thumbnail {
+        width: 32px;
+        height: 32px;
+        background-color: #d8d8d8;
+        border-radius: 50%;
+        display: block;
+      }
+      .next {
+        cursor: pointer;
+        .student-thumbnail {
+          margin-left: 8px;
+          margin-top: 4px;
+        }
+      }
+    }
+    .disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    @media screen and (max-width: 320px) {
+      .max-score-entry-container {
+        .score-entry {
+          input {
+            font-size: 50px;
+          }
+        }
+      }
+    }
+
+    @media screen and (max-height: 481px) {
+      .max-score-entry-container {
+        .score-entry {
+          input {
+            font-size: 50px;
+          }
+        }
+      }
+    }
+  }
+}

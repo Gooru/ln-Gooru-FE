@@ -1,135 +1,249 @@
 .gru-class-activity-panel {
-  &:hover {
-    .dca-panel-container {
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-      position: relative;
-
-      .dca-panel-actions-performance {
-        .dca-panel-actions {
-          .dca-add {
-            visibility: visible;
-            opacity: 1;
-          }
-        }
-      }
-    }
-  }
+  background-color: #fff;
 
   .dca-panel-container {
-    display: inline-grid;
-    width: 100%;
-    grid-template-columns: 55% 15% 30%;
-    height: 45px;
-    border-bottom: solid 1px #cacaca;
     transition: background-color 2s linear;
 
     &.new {
       background-color: #ffc107ad;
     }
 
-    .dca-panel-info {
+    &.past-date {
+      .dca-assign-btn {
+        pointer-events: none;
+      }
+    }
+
+    &.unscheduled {
+      .ca-panel-container-1 {
+        grid-template-columns: 1fr 100px 80px;
+      }
+    }
+
+    .ca-panel-container-1 {
+      display: inline-grid;
       width: 100%;
-      display: inline-grid;
-      grid-template-columns: 65px 1fr;
-      align-items: center;
+      grid-template-columns: 1fr 100px 60px;
+      height: 60px;
+      border-bottom: solid 1px #cacaca;
 
-      .collection-icon {
-        width: 20px;
-        height: 20px;
-        background-repeat: no-repeat;
-        background-size: 20px 20px;
-        background-image: url("../assets/gooru/images/add_collection.svg");
-        opacity: 0.8;
-        justify-self: center;
+      .dca-panel-info {
+        width: 100%;
+        display: inline-grid;
+        grid-template-columns: 65px 1fr;
+        align-items: center;
+
+        .collection-icon,
+        .collection-external-icon {
+          width: 20px;
+          height: 20px;
+          background-repeat: no-repeat;
+          background-size: 20px 20px;
+          background-image: url("../assets/gooru/images/add_collection.svg");
+          opacity: 0.8;
+          justify-self: center;
+        }
+
+        .assessment-external-icon,
+        .assessment-icon {
+          width: 20px;
+          height: 20px;
+          background-repeat: no-repeat;
+          background-size: 20px 20px;
+          background-image: url("../assets/gooru/images/add_assessment.svg");
+          opacity: 0.8;
+          justify-self: center;
+        }
+
+        p {
+          margin: 0;
+          cursor: pointer;
+          font-family: "Open Sans";
+          color: #4a4a4a;
+          padding: 0 20px 0 0;
+          @include ellipsis(
+            $font-size: 15px,
+            $line-height: 1.5,
+            $lines-to-show: 1
+          );
+        }
       }
 
-      .assessment-external-icon,
-      .assessment-icon {
-        width: 20px;
-        height: 20px;
-        background-repeat: no-repeat;
-        background-size: 20px 20px;
-        background-image: url("../assets/gooru/images/add_assessment.svg");
-        opacity: 0.8;
-        justify-self: center;
+      .dca-content-counts {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .resource-count {
+          width: 40px;
+          display: inline-grid;
+          align-items: center;
+          grid-template-columns: 50% 50%;
+          justify-items: center;
+          height: 20px;
+
+          .resource-icon {
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-image: url("../assets/gooru/images/add_resource_icon.svg");
+            opacity: 0.8;
+          }
+
+          span {
+            height: 20px;
+          }
+        }
+
+        .question-count {
+          width: 40px;
+          display: inline-grid;
+          align-items: center;
+          grid-template-columns: 50% 50%;
+          justify-items: center;
+          height: 20px;
+
+          .question-icon {
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-image: url("../assets/gooru/images/add_question.svg");
+            opacity: 0.8;
+          }
+
+          span {
+            height: 20px;
+          }
+        }
+
+        .external-icon {
+          width: 20px;
+          height: 20px;
+          background-repeat: no-repeat;
+          background-size: 20px 20px;
+          background-image: url("../assets/gooru/share.png");
+          margin-right: 5px;
+        }
       }
 
-      p {
-        margin: 0;
+      .dca-panel-actions-performance {
+        .dca-panel-performance {
+          width: 100%;
+          height: 100%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          font-size: 18px;
+          font-weight: bold;
+          cursor: pointer;
+          border-top-right-radius: 4px;
+          display: grid;
+          align-items: center;
+          justify-content: center;
+
+          .assessment-score {
+            text-align: center;
+          }
+          .assessment-timespent {
+            font-size: 12px;
+            color: $white;
+            text-align: center;
+          }
+
+          &.collection {
+            background-color: #4e5e68;
+            font-size: 12px;
+            text-overflow: ellipsis;
+          }
+
+          &.not-started {
+            pointer-events: none;
+          }
+
+          &.add-data {
+            color: $white;
+            background-color: #4e5e67;
+            font-size: 10px;
+            text-align: center;
+            text-transform: uppercase;
+          }
+          &.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+          }
+
+          .no-performance {
+            color: #37424b;
+          }
+        }
+      }
+
+      .ca-panel-reschedule {
         cursor: pointer;
-        font-family: "Open Sans";
-        color: #4a4a4a;
-        padding: 0 20px 0 0;
-        @include ellipsis(
-          $font-size: 15px,
-          $line-height: 1.5,
-          $lines-to-show: 1
-        );
+        justify-self: center;
+        align-self: center;
+        color: #3589fb;
+        font-size: 13px;
+        font-weight: bold;
+
+        span {
+          pointer-events: none;
+        }
       }
     }
 
-    .dca-content-counts {
-      display: inline-flex;
+    .ca-panel-container-2 {
+      height: 20px;
+      grid-template-columns: 1fr 1fr 1fr 60px;
+      display: grid;
       align-items: center;
-      justify-content: space-evenly;
+      height: 30px;
+      border-bottom: solid 1px #cacaca;
 
-      .resource-count {
-        width: 40px;
-        display: inline-grid;
-        align-items: center;
-        grid-template-columns: 50% 50%;
-        justify-items: center;
-        height: 20px;
+      .student-count {
+        padding-left: 10px;
+        visibility: hidden;
 
-        .resource-icon {
-          width: 20px;
-          height: 20px;
-          background-repeat: no-repeat;
-          background-size: 20px 20px;
-          background-image: url("../assets/gooru/images/add_resource_icon.svg");
-          opacity: 0.8;
+        &.active {
+          visibility: visible;
         }
 
         span {
-          height: 20px;
+          cursor: pointer;
+
+          &:hover {
+            color: #000;
+          }
         }
       }
 
-      .question-count {
-        width: 40px;
-        display: inline-grid;
-        align-items: center;
-        grid-template-columns: 50% 50%;
-        justify-items: center;
-        height: 20px;
+      .re-schedule {
+        justify-self: center;
+        color: #3589fb;
+        font-size: 13px;
+        font-weight: bold;
 
-        .question-icon {
-          width: 20px;
-          height: 20px;
-          background-repeat: no-repeat;
-          background-size: 20px 20px;
-          background-image: url("../assets/gooru/images/add_question.svg");
-          opacity: 0.8;
-        }
+        .re-schedule-activity {
+          height: 22px;
+          cursor: pointer;
 
-        span {
-          height: 20px;
+          .update {
+            font-size: 20px;
+            pointer-events: none;
+          }
+
+          span {
+            pointer-events: none;
+
+            &:hover {
+              color: #000;
+            }
+          }
         }
       }
-
-      .external-icon {
-        width: 20px;
-        height: 20px;
-        background-repeat: no-repeat;
-        background-size: 20px 20px;
-        background-image: url("../assets/gooru/share.png");
-      }
-    }
-
-    .dca-panel-actions-performance {
-      display: inline-grid;
-      grid-template-columns: 1fr 53px;
-      align-items: center;
 
       .dca-panel-actions {
         display: inline-grid;
@@ -237,23 +351,13 @@
         }
       }
 
-      .dca-panel-performance {
-        width: 100%;
-        height: 100%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-size: 15px;
+      .re-add-data {
+        justify-self: right;
+        padding-right: 5px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #3589fb;
         cursor: pointer;
-
-        &.not-started {
-          pointer-events: none;
-        }
-
-        .no-performance {
-          color: #37424b;
-        }
       }
     }
   }

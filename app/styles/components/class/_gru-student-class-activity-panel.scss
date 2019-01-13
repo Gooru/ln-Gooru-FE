@@ -1,119 +1,179 @@
-.gru-student-class-activity-panel.panel {
-  $collection-icon-size: 48px;
-  margin: 0;
-  padding: 0;
-  height: 60px;
-  list-style: none;
-  &.visibility-off {
-    opacity: 0.5;
-  }
+.gru-student-class-activity-panel {
+  background-color: #fff;
+  border-radius: 4px;
+  margin-bottom: 10px;
 
-  .panel-heading {
-    border-bottom: $light-200 1px solid;
+  .ca-panel-container {
+    display: inline-grid;
     width: 100%;
-    display: inline-block;
-    border-radius: 0;
-    padding: 0;
+    grid-template-columns: 1fr 150px 60px 60px;
+    height: 60px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
 
-    .icon-container {
-      border-right: 1px solid $light-300;
-      height: 60px;
-      width: 95px;
-      img {
-        height: 100%;
-        width: 94px;
+    &.today {
+      &:hover {
+        position: relative;
+      }
+
+      .ca-play-container {
+        pointer-events: all;
+        cursor: pointer;
+
+        .ca-play-btn {
+          i {
+            color: #4b9741;
+          }
+        }
       }
     }
 
-    .title-container {
-      line-height: 1.4;
-      margin: 15px 0 0 10px;
-      width: 40%;
-      .title {
-        font-size: $font-size-lead;
-        font-weight: 300;
-        color: $dark-400;
-      }
-    }
+    .dca-panel-info {
+      width: 100%;
+      display: inline-grid;
+      grid-template-columns: 65px 1fr;
+      align-items: center;
 
-    .info {
-      height: 60px;
-      width: 33%;
-      .share {
-        width: 18px;
-        height: 15px;
-        object-fit: contain;
-        margin-left: 44%;
-      }
-      .content-count {
-        font-size: $font-navigator;
-        margin: 10px 10px 0 0;
-        color: $light-400;
-        float: $tab-float-dir;
-        width: 42%;
-        span {
-          vertical-align: middle;
-          i {
-            display: inline-block;
-            margin: 0 6px 0 0;
-            vertical-align: middle;
-            color: $light-200;
-            font-size: $font-unBookmark;
-            cursor: default;
-          }
-          &.question-count {
-            i.icon {
-              background: url("gooru/question-icon.png");
-              -webkit-background-size: 25px 25px;
-              background-size: 25px 25px;
-              height: 25px;
-              width: 25px;
-            }
-          }
-        }
+      .collection-icon,
+      .collection-external-icon {
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+        background-size: 20px 20px;
+        background-image: url("../assets/gooru/images/add_collection.svg");
+        opacity: 0.8;
+        justify-self: center;
       }
 
-      .play-btn {
-        border-left: 1px solid $light-100;
-        border-right: 1px solid $light-100;
-        display: inline-block;
-        height: 60px;
-        width: 90px;
-        .reporticon {
-          margin-top: 21%;
-          margin-right: 8px;
-        }
-        .btn.study-now {
-          background-color: $white;
-          font-size: $font-size-h6;
-          height: 40px;
-          margin: 10px 0;
-          i {
-            font-size: $font-size-h4;
-            color: $dark-300;
-          }
-        }
+      .assessment-external-icon,
+      .assessment-icon {
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+        background-size: 20px 20px;
+        background-image: url("../assets/gooru/images/add_assessment.svg");
+        opacity: 0.8;
+        justify-self: center;
       }
 
-      .performance {
-        display: inline-block;
-        height: 60px;
-        width: 75px;
+      p {
         margin: 0;
-        vertical-align: middle;
-        padding: 20px 5px 0;
-        text-align: center;
-        font-weight: 900;
+        font-family: "Open Sans";
+        color: #4a4a4a;
+        padding: 0 20px 0 0;
+        @include ellipsis(
+          $font-size: 15px,
+          $line-height: 1.5,
+          $lines-to-show: 1
+        );
+      }
+    }
+
+    .dca-content-counts {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-evenly;
+      justify-self: center;
+
+      .resource-count {
+        width: 40px;
+        display: inline-grid;
+        align-items: center;
+        grid-template-columns: 50% 50%;
+        justify-items: center;
+        height: 20px;
+
+        .resource-icon {
+          width: 20px;
+          height: 20px;
+          background-repeat: no-repeat;
+          background-size: 20px 20px;
+          background-image: url("../assets/gooru/images/add_resource_icon.svg");
+          opacity: 0.8;
+        }
+
         span {
-          vertical-align: middle;
+          height: 20px;
         }
-        .score {
-          font-size: $font-size-large;
-          line-height: $font-size-large;
+      }
+
+      .question-count {
+        width: 40px;
+        display: inline-grid;
+        align-items: center;
+        grid-template-columns: 50% 50%;
+        justify-items: center;
+        height: 20px;
+
+        .question-icon {
+          width: 20px;
+          height: 20px;
+          background-repeat: no-repeat;
+          background-size: 20px 20px;
+          background-image: url("../assets/gooru/images/add_question.svg");
+          opacity: 0.8;
         }
-        .time-spent {
-          font-size: $font-size-base;
-          color: $light-450;
+
+        span {
+          height: 20px;
+        }
+      }
+
+      .external-icon {
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+        background-size: 20px 20px;
+        background-image: url("../assets/gooru/share.png");
+        margin-right: 5px;
+      }
+    }
+
+    .ca-play-container {
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+
+      .ca-play-btn {
+        height: 30px;
+        border-radius: 50%;
+        width: 30px;
+
+        i {
+          margin-left: 3px;
+          margin-top: 3px;
+          color: #535e67;
+        }
+      }
+    }
+
+    .dca-panel-actions-performance {
+      .dca-panel-performance {
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+
+        &.collection {
+          background-color: #4e5e68;
+          font-size: 12px;
+          text-overflow: ellipsis;
+        }
+
+        &.not-started {
+          pointer-events: none;
+        }
+
+        .no-performance {
+          color: #37424b;
         }
       }
     }

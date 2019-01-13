@@ -1,4 +1,6 @@
 .student.course-map {
+  margin-top: 50px;
+
   .actions {
     display: inline-block;
     text-align: $menu-float-dir;
@@ -56,9 +58,9 @@
       height: 67px;
 
       &.study-active {
-        -webkit-box-shadow: 0px 0px 11px 3px rgba(75, 151, 65, 1);
-        -moz-box-shadow: 0px 0px 11px 3px rgba(75, 151, 65, 1);
-        box-shadow: 0px 0px 11px 3px rgba(75, 151, 65, 1);
+        -webkit-box-shadow: 0 0 11px 3px rgba(75, 151, 65, 1);
+        -moz-box-shadow: 0 0 11px 3px rgba(75, 151, 65, 1);
+        box-shadow: 0 0 11px 3px rgba(75, 151, 65, 1);
         z-index: 9;
 
         .info {
@@ -142,9 +144,9 @@
 }
 
 .study-active {
-  -webkit-box-shadow: 0px 0px 11px 3px rgba(75, 151, 65, 1);
-  -moz-box-shadow: 0px 0px 11px 3px rgba(75, 151, 65, 1);
-  box-shadow: 0px 0px 11px 3px rgba(75, 151, 65, 1);
+  -webkit-box-shadow: 0 0 11px 3px rgba(75, 151, 65, 1);
+  -moz-box-shadow: 0 0 11px 3px rgba(75, 151, 65, 1);
+  box-shadow: 0 0 11px 3px rgba(75, 151, 65, 1);
   z-index: 9;
 }
 
@@ -166,7 +168,6 @@
     border-radius: 4px;
     background-color: $white;
     box-shadow: 0 0 4px 2px $sun-color;
-
     // padding: 13px;
   }
 
@@ -224,8 +225,7 @@
       width: 61.6px;
       height: 61.6px;
       color: $sun-color;
-      padding: 0px;
-      padding-top: 8px;
+      padding: 8px 0 0;
 
       i {
         font-size: 61px;
@@ -263,9 +263,9 @@
     }
 
     .Mask {
-      -webkit-box-shadow: inset -1px -7px 48px 0px rgba(0, 0, 0, 0.52);
-      -moz-box-shadow: inset -1px -7px 48px 0px rgba(0, 0, 0, 0.52);
-      box-shadow: inset -1px -7px 48px 0px rgba(0, 0, 0, 0.52);
+      -webkit-box-shadow: inset -1px -7px 48px 0 rgba(0, 0, 0, 0.52);
+      -moz-box-shadow: inset -1px -7px 48px 0 rgba(0, 0, 0, 0.52);
+      box-shadow: inset -1px -7px 48px 0 rgba(0, 0, 0, 0.52);
     }
 
     .route-compgraph {
@@ -297,22 +297,26 @@
       .suggestion-accordion {
         .gru-accordion-course {
           width: 490px;
+
           .gru-accordion-unit {
             > .panel-collapse {
               max-height: 320px;
               overflow-y: auto;
             }
+
             .gru-accordion-lesson {
               .panel-heading {
                 .panel-title {
                   width: 100%;
                 }
               }
+
               .panel-body {
                 .collections {
                   .panel {
                     .panel-title {
                       width: 100%;
+
                       .title {
                         width: 100%;
                         cursor: default;

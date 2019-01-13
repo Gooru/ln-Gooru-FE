@@ -99,6 +99,15 @@
     .competency-report {
       .body {
         width: 100vw;
+        .collection-accordion {
+          .collection-content {
+            .collection-header {
+              .collection-info .title {
+                width: 73%;
+              }
+            }
+          }
+        }
       }
     }
   }

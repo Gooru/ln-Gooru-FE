@@ -362,6 +362,32 @@ export default Ember.Object.extend({
   },
 
   /**
+   * Changes the user password
+   * @param {string} oldPassword
+   * @param {string} newPassword
+   * @returns {Ember.RSVP.Promise}
+   */
+  changePassword: function(oldPassword, newPassword) {
+    const adapter = this;
+    const endpointUrl = EndPointsConfig.getEndpointSecureUrl();
+    const namespace = adapter.get('authNamespace');
+    const url = `${endpointUrl}${namespace}/users/change-password`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({
+        old_password: oldPassword,
+        new_password: newPassword
+      })
+    };
+
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
    * Gets network by user id
    *
    * @param {string} userId
@@ -404,6 +430,44 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * Get  Profile preference for current profile
+   *  @returns {Promise}
+   *  @yields { preference_settings: {"standard_preference": {"K12.MA": "TEKS"}   } }
+   *  @example http://nile-dev.gooru.org/api/nucleus/v2/profiles/preference
+   */
+  getProfilePreference: function() {
+    const adapter = this;
+    const namespace = adapter.get('namespaceV2');
+    const url = `${namespace}/preference`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Update Profile preference for current profile
+   *  @returns {Promise}
+   *  @payload {"standard_preference": {"K12.MA": "TEKS"}   }
+   *  @example http://nile-dev.gooru.org/api/nucleus/v2/profiles/preference
+   */
+  updateProfilePreference: function(data) {
+    const adapter = this;
+    const namespace = adapter.get('namespaceV2');
+    const url = `${namespace}/preference`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(data)
+    };
+    return Ember.$.ajax(url, options);
+  },
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

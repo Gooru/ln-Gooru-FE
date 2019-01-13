@@ -178,7 +178,7 @@ export default Ember.Object.extend({
    * @param term the term to search
    * @returns {Promise.<Course[]>}
    */
-  searchFeaturedCourses: function(term) {
+  searchFeaturedCourses: function(term, filters) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/course`;
@@ -194,6 +194,9 @@ export default Ember.Object.extend({
         'flt.courseType': 'featured'
       }
     };
+    if (filters) {
+      options.data = Object.assign(options.data, filters);
+    }
     return Ember.$.ajax(url, options);
   },
 

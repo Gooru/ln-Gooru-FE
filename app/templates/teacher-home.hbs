@@ -23,7 +23,7 @@
           </div>
         </div>
       {{else}}
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs hidden-xs" role="tablist">
           <li role="presentation" class="{{if showActiveClasses 'active'}} active-classes tab">
             <a href="#active-classes" aria-controls="activeClasses" role="tab" data-toggle="tab" {{action 'showClasses' 'active'}}>
               <span class="lead">{{t 'user.active-classrooms'}}</span>
@@ -35,7 +35,7 @@
             </a>
           </li>
         </ul>
-
+        <div class="heading hidden visible-xs">{{t 'user.classrooms'}}</div>
         {{#if showActiveClasses}}
           {{#unless hasClasses}}
             <div class="pull-left no-classes-found">

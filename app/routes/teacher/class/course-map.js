@@ -111,7 +111,7 @@ export default Ember.Route.extend({
     const currentClass = this.modelFor('teacher.class').class;
     const userId = this.get('session.userId');
     if (currentClass.isTeacher(userId) && !currentClass.get('courseId')) {
-      this.transitionTo('teacher.class.quick-start');
+      this.transitionTo('teacher.class.add-course');
     }
   },
 
@@ -191,6 +191,7 @@ export default Ember.Route.extend({
     controller.set('isStudentCourseMap', false);
     controller.getQuestionsToGrade();
     controller.init();
+    controller.getUnitLevelPerformance();
   },
 
   resetController(controller) {

@@ -4,6 +4,7 @@ import {
   STUDY_PLAYER_BAR_COLOR,
   GRU_FEATURE_FLAG
 } from 'gooru-web/config/config';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 /**
  * Study Player header
@@ -15,7 +16,7 @@ import {
  * @see controllers/study-player.js
  * @augments ember/Component
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -91,16 +92,22 @@ export default Ember.Component.extend({
     },
 
     mileStoneHandler: function() {
-      if (this.get('router').currentPath === 'study-player.index') {
-        this.get('router').transitionTo('study-player.timeline-view');
-      } else if (
-        this.get('router').currentPath === 'reports.study-student-collection'
-      ) {
-        this.get('router').transitionTo(
-          'study-player.timeline-view',
-          this.get('courseId')
-        );
+      let params;
+      if (this.get('classId')) {
+        params = {
+          queryParams: {
+            classId: this.get('classId'),
+            courseId: this.get('courseId')
+          }
+        };
+      } else {
+        params = {
+          queryParams: {
+            courseId: this.get('courseId')
+          }
+        };
       }
+      this.get('router').transitionTo('student-locate', params);
     },
     /**
      * Go back to collection
@@ -214,7 +221,9 @@ export default Ember.Component.extend({
       component.$('.gru-study-navbar').length > 0 &&
       Ember.$('.qz-player').length > 0
     ) {
-      Ember.$('.qz-player').css({ 'padding-top': '164px' });
+      Ember.$('.qz-player').css({
+        'padding-top': '164px'
+      });
     }
   },
 
@@ -302,7 +311,9 @@ export default Ember.Component.extend({
           percentage
         }
       ];
-      this.updateParent({ barchartdata: barchartdata });
+      this.updateParent({
+        barchartdata: barchartdata
+      });
       return barchartdata;
     }
   ),
@@ -340,7 +351,12 @@ export default Ember.Component.extend({
     component.set('totalResources', totalResources);
     const courseId = component.get('courseId');
     if (classId) {
-      let classCourseId = Ember.A([{ classId, courseId }]);
+      let classCourseId = Ember.A([
+        {
+          classId,
+          courseId
+        }
+      ]);
       Ember.RSVP.hash({
         classPerformanceSummaryItems: component
           .get('performanceService')

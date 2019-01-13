@@ -58,7 +58,8 @@ export default Ember.Object.extend({
     let data = {
       title: classModel.get('title'),
       class_sharing: classModel.get('classSharing'),
-      min_score: classModel.get('minScore') || 0
+      min_score: classModel.get('minScore') || 0,
+      is_offline: classModel.get('isOffline')
     };
 
     if (!update) {
@@ -94,7 +95,9 @@ export default Ember.Object.extend({
       courseId: payload.course_id,
       courseTitle: payload.course_title,
       greeting: payload.greeting,
-      grade: Array.isArray(payload.grade) ? payload.grade.objectAt(0) : payload.grade,
+      grade: Array.isArray(payload.grade)
+        ? payload.grade.objectAt(0)
+        : payload.grade,
       classSharing: payload.class_sharing,
       coverImage: payload.cover_image,
       minScore: payload.min_score === 0 ? null : payload.min_score,
@@ -103,11 +106,18 @@ export default Ember.Object.extend({
       creatorSystem: '',
       contentVisibility: payload.content_visibility || ClassModel.VISIBLE_NONE,
       isArchived: payload.is_archived,
+      isOffline: payload.is_offline,
+      route0Applicable: payload.route0_applicable,
+      gradeLowerBound: payload.grade_lower_bound,
+      gradeCurrent: payload.grade_current,
+      gradeUpperBound: payload.grade_upper_bound,
+      primaryLanguage: payload.primary_language,
       collaborators: collaborators.map(function(collaboratorId) {
         return ProfileModel.create({ id: collaboratorId });
       }),
       courseVersion: payload.course_version,
-      setting: payload.setting || null
+      setting: payload.setting || null,
+      preference: payload.preference
     });
   },
 
@@ -123,7 +133,8 @@ export default Ember.Object.extend({
         payload.details.findBy('id', payload.owner[0])
       ),
       collaborators: serializer.filterCollaborators(payload),
-      members: serializer.filterMembers(payload)
+      members: serializer.filterMembers(payload),
+      memberGradeBounds: serializer.filterMembersGradeBounds(payload)
     });
   },
 
@@ -186,6 +197,10 @@ export default Ember.Object.extend({
 
   filterMembers: function(payload) {
     return this.filterElements(payload, 'member');
+  },
+
+  filterMembersGradeBounds: function(payload) {
+    return payload.member_grade_bounds;
   },
 
   filterElements: function(payload, property) {

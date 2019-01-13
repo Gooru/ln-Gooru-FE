@@ -2,7 +2,8 @@
     <div class="panel-title">
         <a class="title collapsed ellipsis" role="button" data-toggle="collapse" href="#{{elementId}}-content" aria-expanded="false" aria-controls="{{elementId}}-content"
             {{action "selectLesson" model.lessonId}}>
-            <span class="lesson-prefix">{{course-sections-prefix  index=index type='lesson' longName=true}}</span>{{model.lessonTitle}}
+            <span class="lesson-prefix">{{course-sections-prefix  index=index type='lesson' longName=true}}</span>
+            <span class="ellipsis">{{model.lessonTitle}}</span>
         </a>
     </div>
     {{#if isPlayer}}
@@ -41,7 +42,7 @@
                                 {{/if}}
                             </div>
                             <a class="title {{item.collectionTitle}} truncate" {{action "selectResource" item}} >
-                                {{item.title}}
+                                <span class="ellipsis">{{item.title}}</span>
                             </a>
                         </div>
                         {{#if isPlayer}}
@@ -65,7 +66,7 @@
                                                     <span {{action 'studentReport' item}} class="score " style= {{safe-html (concat "color:" (grade-color item.performance.score))}}>
                                                         {{item.performance.score}}%
                                                     </span>
-                                               
+
                                             {{else}}
                                                 <span class="not-started">{{t 'common.not_started'}}</span>
                                             {{/if}}

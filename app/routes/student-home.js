@@ -85,7 +85,9 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       nextPromise
         .then(route.nextPromiseHandler)
         .then(queryParams => {
-          route.transitionTo('study-player', courseId, { queryParams });
+          route.transitionTo('study-player', courseId, {
+            queryParams
+          });
         })
         .catch(() => {
           let selectedClass = activeClasses.findBy('id', classData.get('id'));
@@ -103,7 +105,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
      * @param {string} item
      * @param {string} classId
      */
-    selectMenuItem: function(item, classId) {
+    selectMenuItem: function(item, classId, courseId) {
       const route = this;
       let queryParams = {
         queryParams: {
@@ -112,10 +114,19 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       };
       if (item === 'report') {
         route.transitionTo('student.class.course-map', classId, queryParams);
-      } else if(item === 'demo') {
-        route.transitionTo('student.class.course-map', classId, {queryParams: {demo: true}});
+      } else if (item === 'demo') {
+        route.transitionTo('student.class.course-map', classId, {
+          queryParams: {
+            demo: true
+          }
+        });
       } else if (item === 'profile') {
-        route.transitionTo('student.class.profile', classId);
+        route.transitionTo('student-locate', {
+          queryParams: {
+            classId: classId,
+            courseId: courseId
+          }
+        });
       } else if (item === 'course-map') {
         route.transitionTo('student.class.course-map', classId);
       } else if (item === 'class-activities') {
@@ -297,7 +308,12 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       featuredCourses.push(fourthFeaturedCourse);
 
       const activeClasses = hash.myClasses.getStudentActiveClasses(myId);
-      return { activeClasses, featuredCourses, tourSteps, loginCount };
+      return {
+        activeClasses,
+        featuredCourses,
+        tourSteps,
+        loginCount
+      };
     });
   },
 

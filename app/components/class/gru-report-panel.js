@@ -383,6 +383,13 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
+  didRender() {
+    this.handleAppContainerScroll();
+  },
+  didDestroyElement() {
+    this.handleAppContainerScroll();
+  },
+
   /**
    * Functionto triggered once when the component element is first rendered.
    */
@@ -435,6 +442,15 @@ export default Ember.Component.extend({
     this.getStundentCollectionReport(reportData);
   },
 
+  handleAppContainerScroll() {
+    let activePullUpCount = Ember.$(document.body).find('.backdrop-pull-ups')
+      .length;
+    if (activePullUpCount > 0) {
+      Ember.$(document.body).addClass('no-vertical-scroll');
+    } else if (activePullUpCount === 0) {
+      Ember.$(document.body).removeClass('no-vertical-scroll');
+    }
+  },
   /**
    * @function  get collection summary report by student
    */
@@ -458,12 +474,14 @@ export default Ember.Component.extend({
     const collectionPromise = isCollection
       ? component.get('collectionService').readCollection(params.collectionId)
       : component.get('assessmentService').readAssessment(params.collectionId);
-    const completedSessionsPromise = isCollection
-      ? []
-      : context.get('classId')
-        ? component.get('userSessionService').getCompletedSessions(context)
-        : component.get('learnerService').fetchLearnerSessions(context);
-
+    let completedSessionsPromise = [];
+    if (!params.sessionId) {
+      completedSessionsPromise = isCollection
+        ? []
+        : context.get('classId')
+          ? component.get('userSessionService').getCompletedSessions(context)
+          : component.get('learnerService').fetchLearnerSessions(context);
+    }
     return Ember.RSVP.hashSettled({
       collection: collectionPromise,
       completedSessions: completedSessionsPromise,
@@ -487,17 +505,19 @@ export default Ember.Component.extend({
           ? hash.completedSessions.value
           : null
       );
-      var completedSessions =
-        hash.completedSessions.state === 'fulfilled'
-          ? hash.completedSessions.value
+      if (!params.sessionId) {
+        var completedSessions =
+          hash.completedSessions.state === 'fulfilled'
+            ? hash.completedSessions.value
+            : null;
+        const totalSessions = completedSessions.length;
+        const session = totalSessions
+          ? completedSessions[totalSessions - 1]
           : null;
-      const totalSessions = completedSessions.length;
-      const session = totalSessions
-        ? completedSessions[totalSessions - 1]
-        : null;
-      if (session) {
-        //collections has no session
-        context.set('sessionId', session.sessionId);
+        if (session) {
+          //collections has no session
+          context.set('sessionId', session.sessionId);
+        }
       }
 
       if (context.get('classId')) {
@@ -584,6 +604,7 @@ export default Ember.Component.extend({
     const courseId = params.courseId;
     const unitId = params.unitId;
     const lessonId = params.lessonId;
+    const sessionId = params.sessionId;
 
     return Context.create({
       collectionType: params.type,
@@ -592,7 +613,8 @@ export default Ember.Component.extend({
       courseId: courseId,
       classId: params.classId,
       unitId: unitId,
-      lessonId: lessonId
+      lessonId: lessonId,
+      sessionId: sessionId
     });
   },
 

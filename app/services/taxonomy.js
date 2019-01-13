@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import APITaxonomyService from 'gooru-web/services/api-sdk/taxonomy';
 import TaxonomyItem from 'gooru-web/models/taxonomy/taxonomy-item';
-import { TAXONOMY_CATEGORIES, CODE_TYPES } from 'gooru-web/config/config';
-import { getCategoryFromSubjectId } from 'gooru-web/utils/taxonomy';
+import { CODE_TYPES } from 'gooru-web/config/config';
+import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
 
 /**
  * Service for the Taxonomy Singleton elements container
@@ -33,6 +33,12 @@ export default Ember.Service.extend({
    */
   taxonomySubjectContainer: null,
 
+  /**
+   * @property {Object} taxonomyCategoriesContainer
+   * An object to store taxonomy categories
+   */
+  taxonomyCategoriesContainer: null,
+
   init() {
     this._super(...arguments);
     this.set('taxonomyContainer', {});
@@ -41,6 +47,7 @@ export default Ember.Service.extend({
       APITaxonomyService.create(Ember.getOwner(this).ownerInjection())
     );
     this.set('taxonomySubjectContainer', {});
+    this.set('taxonomyClassificationContainer', null);
   },
 
   /**
@@ -58,15 +65,17 @@ export default Ember.Service.extend({
       if (taxonomyContainer[category]) {
         resolve(taxonomyContainer[category]);
       } else {
-        let promises = TAXONOMY_CATEGORIES.map(function(taxonomyCategory) {
-          return apiTaxonomyService
-            .fetchSubjects(taxonomyCategory.value)
-            .then(function(subjects) {
-              taxonomyContainer[taxonomyCategory.value] = subjects;
-            });
-        });
-        Ember.RSVP.all(promises).then(function() {
-          resolve(taxonomyContainer[category]);
+        service.getCategories().then(categories => {
+          let promises = categories.map(category => {
+            return apiTaxonomyService
+              .fetchSubjects(category.get('id'))
+              .then(function(subjects) {
+                taxonomyContainer[category.get('code')] = subjects;
+              });
+          });
+          Ember.RSVP.all(promises).then(function() {
+            resolve(taxonomyContainer[category]);
+          });
         });
       }
     });
@@ -215,7 +224,7 @@ export default Ember.Service.extend({
   findSubjectById(subjectId, loadCourses = false) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve) {
-      const category = getCategoryFromSubjectId(subjectId);
+      const category = getCategoryCodeFromSubjectId(subjectId);
       if (category) {
         service.getSubjects(category).then(function() {
           var result = service.findSubject(category, subjectId);
@@ -472,5 +481,29 @@ export default Ember.Service.extend({
       chain.push(this.findSubjectById(code, false));
     });
     return Ember.RSVP.all(chain);
+  },
+
+  /**
+   * Gets the Taxonomy classifications  from the cached taxonomy. If the classifications are not available then fetch
+   * them from the Taxonomy API.
+   *
+   * @returns {Promise}
+   */
+  getCategories() {
+    const service = this;
+    const apiTaxonomyService = service.get('apiTaxonomyService');
+    return new Ember.RSVP.Promise(function(resolve) {
+      let taxonomyCategoriesContainer = service.get(
+        'taxonomyCategoriesContainer'
+      );
+      if (taxonomyCategoriesContainer) {
+        resolve(taxonomyCategoriesContainer);
+      } else {
+        return apiTaxonomyService.fetchCategories().then(function(categories) {
+          service.set('taxonomyCategoriesContainer', categories);
+          resolve(categories);
+        });
+      }
+    });
   }
 });

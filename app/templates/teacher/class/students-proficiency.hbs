@@ -1,0 +1,71 @@
+<div class="students-proficiency-container">
+  {{#if isShowCompetencyReport}}
+    {{#unless domainLevelSummary}}
+      {{#if isDataNotAvailable}}
+        <div class="no-data">{{t 'teacher-landing.class.students-tab.data-not-available'}}</div>
+      {{else }}
+        {{three-bounce-spinner}}
+      {{/if}}
+    {{else}}
+      {{#if isShowCourseCompetencyReport}}
+        {{proficiency.inspect.student-domain-performance
+          studentsDomainPerformance=studentsDomainPerformance
+          domainCoverageCount=domainCoverageCount
+          courseCoverageCount=courseCoverageCount
+          totalCompetencies=totalCompetencies
+          subjectBucket=subjectBucket
+          numberOfStudents=numberOfStudents
+          subjectFramework=subjectFramework
+          onSelectDomain="onSelectDomain"
+          onClickClassView="onClickClassView"
+          onSelectStudent="onSelectStudent"
+        }}
+      {{else if isShowDomainCompetencyReport}}
+        {{proficiency.inspect.student-domain-competency-performance
+          domainLevelSummary=domainLevelSummary
+          classMembers=classMembers
+          activeDomain=activeDomain
+          onClickBack="onClickBack"
+        }}
+      {{else if isShowClassProficiencyReport}}
+        {{proficiency.inspect.student-class-proficiency
+          studentsDomainPerformance=studentsDomainPerformance
+          class=class
+          course=course
+          numberOfStudents=numberOfStudents
+          subjectBucket=subjectBucket
+          domainCoverageCount=domainCoverageCount
+          totalCompetencies=totalCompetencies
+          subjectFramework=subjectFramework
+          maxNumberOfCompetencies=maxNumberOfCompetencies
+          onClickCourseCompetencyView="onClickCourseCompetencyView"
+          onSelectStudent="onSelectStudent"
+        }}
+      {{/if}}
+    {{/unless}}
+  {{else}}
+    <div class="no-data">{{t 'teacher-landing.class.students-tab.error-message'}}</div>
+  {{/if}}
+</div>
+
+
+{{#if isShowProficiencyPullup}}
+  {{#gru-pull-up pullUpType="proficiency-pullup" showPullUp=isShowProficiencyPullup onClosePullUp="onClosePullUp" as |pull-up|}}
+    {{#if pull-up.isShowHeader}}
+      {{proficiency.learner-proficiency-pull-up
+         student=activeStudent
+         subjectBucket=subjectBucket
+         class=class
+         course=course
+         onSelectCompetency="onSelectCompetency"
+         }}
+    {{/if}}
+  {{/gru-pull-up}}
+{{/if}}
+
+{{#if isShowCompetencyContentReport}}
+  {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
+    onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
+    {{reports.pull-up.competency-content-report competency=selectedCompetency userId=activeStudent.id learningMapData=learningMapData onToggleGlobalCompetencyView="onToggleGlobalCompetencyView"}}
+  {{/reports.pull-up.competency-report}}
+{{/if}}

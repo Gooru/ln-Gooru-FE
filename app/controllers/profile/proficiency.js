@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { DEFAULT_K12_SUBJECT } from 'gooru-web/config/config';
 
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
@@ -40,14 +41,26 @@ export default Ember.Controller.extend({
 
   init() {
     let controller = this;
-    let subjectCategory = controller.get('selectedSubjectCategory');
-    controller.fetchSubjectsByCategory(subjectCategory);
+    controller.fetchCategories().then(() => {
+      let selectedCategory = controller.get('selectedCategory');
+      controller.fetchSubjectsByCategory(selectedCategory);
+    });
   },
 
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
+    /**
+     * Select category based on user selection.
+     * @param  {Object} item
+     */
+    onSelectCategory(category) {
+      let controller = this;
+      controller.set('selectedCategory', category);
+      controller.fetchSubjectsByCategory(category);
+    },
+
     //Action triggered when the user click a subject from the right panel
     onSelectItem(item) {
       let controller = this;
@@ -148,19 +161,42 @@ export default Ember.Controller.extend({
   // Methods
 
   /**
+   * @function fetchCategories
+   * Method  fetch list of taxonomy categories
+   */
+  fetchCategories() {
+    let component = this;
+    return new Ember.RSVP.Promise(reslove => {
+      component
+        .get('taxonomyService')
+        .getCategories()
+        .then(categories => {
+          let category = categories.objectAt(0);
+          component.set('selectedCategory', category);
+          component.set('categories', categories);
+          reslove();
+        });
+    });
+  },
+
+  /**
    * @function fetchSubjectsByCategory
    * @param subjectCategory
    * Method to fetch list of subjects using given category level
    */
   fetchSubjectsByCategory(subjectCategory) {
     let controller = this;
+    let selectedCategoryId = subjectCategory.get('id');
     controller
       .get('taxonomyService')
-      .getTaxonomySubjects(subjectCategory)
+      .getTaxonomySubjects(selectedCategoryId)
       .then(subjects => {
-        let subject = subjects.objectAt(1);
+        let defaultSubject = subjects.findBy('id', DEFAULT_K12_SUBJECT);
+        let selectedSubject = defaultSubject
+          ? defaultSubject
+          : subjects.objectAt(0);
         controller.set('taxonomySubjects', subjects);
-        controller.set('selectedSubject', subject);
+        controller.set('selectedSubject', selectedSubject);
       });
   },
 
@@ -168,10 +204,10 @@ export default Ember.Controller.extend({
   // Properties
 
   /**
-   * @property {String}
-   * Property to store user selected category level
+   * @property {JSON}
+   * Property to store active category
    */
-  selectedSubjectCategory: 'k_12',
+  selectedCategory: null,
 
   /**
    * @property {Array}

@@ -2,8 +2,9 @@
   .gru-header {
     display: none;
   }
+
   .external-player-container {
-    .header-container{
+    .header-container {
       top: 0;
       width: 100%;
       position: fixed;
@@ -17,8 +18,10 @@
         height: 64px;
         border-right: 2px solid #e3e5ea;
         cursor: pointer;
+
         .close-icon {
           padding: 21px;
+
           i {
             font-size: 25px;
             color: $white;
@@ -29,10 +32,11 @@
       .content-title {
         width: calc(100% - 200px);
         height: 64px;
+
         .title-info {
           height: 64px;
+
           i.icon {
-            background-image: url("gooru/images/navigation_assessment.svg");
             background-color: $white;
             width: 25px;
             height: 25px;
@@ -40,7 +44,15 @@
             display: block;
             background-repeat: no-repeat;
             background-color: transparent;
-            margin: 23px 15px 0 15px;
+            margin: 23px 15px 0;
+          }
+
+          i.assessment-external {
+            background-image: url("gooru/images/navigation_assessment.svg");
+          }
+
+          i.collection-external {
+            background-image: url("gooru/images/navigation_collection.svg");
           }
         }
 
@@ -51,10 +63,16 @@
           top: 50%;
           $line-height: 1.3;
           $lines-to-show: 2;
-          @include ellipsis($font-size: 16px, $line-height: $line-height, $lines-to-show: 2, $excerpt-bg: $blue-400);
+          @include ellipsis(
+            $font-size: 16px,
+            $line-height: $line-height,
+            $lines-to-show: 2,
+            $excerpt-bg: $blue-400
+          );
         }
       }
     }
+
     .player-container {
       .gru-external-assessment-page {
         height: calc(100vh - 60px);

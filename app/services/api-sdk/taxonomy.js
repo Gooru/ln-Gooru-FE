@@ -194,7 +194,9 @@ export default Ember.Service.extend({
         .then(
           function(response) {
             resolve(
-              service.get('taxonomySerializer').normalizeDomainGradeBoundary(response)
+              service
+                .get('taxonomySerializer')
+                .normalizeDomainGradeBoundary(response)
             );
           },
           function(error) {
@@ -223,6 +225,66 @@ export default Ember.Service.extend({
             reject(error);
           }
         );
+    });
+  },
+  /**
+   * Fetches the Taxonomy Subjects
+   *
+   * @param category - The classification type
+   * @returns {Promise}
+   */
+  fetchSubject: function(category) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('taxonomyAdapter')
+        .fetchSubject(category)
+        .then(
+          function(response) {
+            resolve(
+              service.get('taxonomySerializer').normalizeFetchSubject(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+  /**
+   * Fetches the Taxonomy Subjects
+   *
+   * @param category - The classification type
+   * @returns {Promise}
+   */
+  fetchSubjectFWKs: function(category) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('taxonomyAdapter')
+        .fetchSubjectFWKs(category)
+        .then(
+          function(response) {
+            resolve(response);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  fetchCategories: function() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve) {
+      service
+        .get('taxonomyAdapter')
+        .fetchCategories()
+        .then(function(response) {
+          resolve(
+            service.get('taxonomySerializer').normalizeFetchCategories(response)
+          );
+        });
     });
   }
 });

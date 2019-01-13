@@ -135,6 +135,16 @@ export default Ember.Controller.extend({
   }),
 
   /**
+   * @property {Boolean}
+   * Property to enable edit course if it is not a premium course
+   */
+  isEditableCourse: Ember.computed('course', function() {
+    let controller = this;
+    let courseData = controller.get('course');
+    return courseData.version !== 'premium';
+  }),
+
+  /**
    * @type {Boolean}
    * Property to check whether a class is premium
    */
@@ -242,6 +252,7 @@ export default Ember.Controller.extend({
       controller.set('activeStudent', student);
       controller.getStudentCourseMap(student.id);
       controller.getStudentClassPerformance(student.id);
+      controller.set('skippedContents', null);
       if (controller.get('isPremiumClass')) {
         controller.getRescopedData();
         controller.loadRoute0Data();
@@ -456,9 +467,6 @@ export default Ember.Controller.extend({
 
         if (skippedContents && isContentAvailable) {
           controller.toggleSkippedContents(skippedContents);
-          controller.set('isChecked', false);
-        } else {
-          controller.set('isChecked', true);
         }
       });
     }
@@ -539,14 +547,8 @@ export default Ember.Controller.extend({
    * Method to toggle content visibility
    */
   toggleContentVisibility(contentClassnames) {
-    let controller = this;
-    let isChecked = controller.get('isChecked');
     const $contentcontroller = Ember.$(contentClassnames.join());
-    if (isChecked) {
-      $contentcontroller.show().addClass('rescoped-content');
-    } else {
-      $contentcontroller.hide();
-    }
+    $contentcontroller.hide();
   },
 
   /**
@@ -621,8 +623,9 @@ export default Ember.Controller.extend({
    */
   loadRoute0Data() {
     let controller = this;
-    let isPremiumClass = controller.get('isPremiumClass');
-    if (isPremiumClass) {
+    let isPremiumClass = controller.get('isPremiumClass'),
+      isRoute0Applicable = controller.get('class.route0Applicable');
+    if (isPremiumClass && isRoute0Applicable) {
       let route0Promise = controller.fetchRoute0Contents();
       return route0Promise.then(function(route0Contents) {
         let isAccepted = route0Contents.status === 'accepted';

@@ -947,5 +947,17 @@ export default Ember.Service.extend({
           );
         }, reject);
     });
+  },
+
+  updateCollectionOfflinePerformance(performanceData) {
+    let service = this;
+    let performanceAdapter = service.get('performanceAdapter');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      performanceAdapter
+        .updateCollectionOfflinePerformance(performanceData)
+        .then(function(response) {
+          resolve(response);
+        }, reject);
+    });
   }
 });

@@ -2,14 +2,11 @@
 <div class="lesson-report-container">
   <div class="report-header">
     <div class="report-breadcrumb">
-      <div class="unit-title">
-        <i class="unit-icon"></i>
-        <p>{{t 'common.unit'}} {{unit.sequence}} : {{unit.title}}</p>
-      </div>
       <div class="lesson-title">
-        {{gru-icon name="keyboard_arrow_right"}}
-        <i class="lesson-icon"></i>
-        <p>{{t 'common.lesson'}} {{lesson.sequence}} : {{lesson.title}}</p>
+        <div>
+          <div>{{t 'common.lesson'}} {{lesson.sequence}} :</div>
+          <div class="lesson-title-value ellipsis">{{lesson.title}}</div>
+        </div>
       </div>
     </div>
     <div class="report-close-pullup" {{action 'onPullUpClose'}}>

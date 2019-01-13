@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Resource from 'gooru-web/models/content/resource';
 import Question from 'gooru-web/models/content/question';
 import PlayerCollection from 'gooru-web/models/collection/collection';
-import { TAXONOMY_CATEGORIES } from 'gooru-web/config/config';
+import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
 
 /**
  * Object with all of the properties in a collection
@@ -38,20 +38,10 @@ export default (function() {
      * @property {String} category - Category the course belongs to
      */
     category: Ember.computed('subject', function() {
-      var category = TAXONOMY_CATEGORIES[0].value; // Default to K12 category
-      if (this.get('subject')) {
-        let keys = this.get('subject').split('.');
-        if (keys.length > 1) {
-          for (var i = TAXONOMY_CATEGORIES.length - 1; i >= 0; i--) {
-            // The second part of the subjectId represents the category
-            if (keys[1] === TAXONOMY_CATEGORIES[i].apiCode) {
-              category = TAXONOMY_CATEGORIES[i].value;
-              break;
-            }
-          }
-        }
+      let subjectId = this.get('subject');
+      if (subjectId) {
+        return getCategoryCodeFromSubjectId(subjectId);
       }
-      return category;
     }),
 
     /**
@@ -214,7 +204,21 @@ export default (function() {
     /**
      * @property {boolean}
      */
-    isAssessment: Ember.computed.not('isCollection'),
+    isAssessment: Ember.computed.equal('collectionType', 'assessment'),
+    /**
+     * @property {boolean} isExternalAssessment
+     */
+    isExternalAssessment: Ember.computed.equal(
+      'collectionType',
+      'assessment-external'
+    ),
+    /**
+     * @property {boolean} isExternalCollection
+     */
+    isExternalCollection: Ember.computed.equal(
+      'collectionType',
+      'collection-external'
+    ),
 
     /**
      * @property {Ember.Array} resources - An children alias property

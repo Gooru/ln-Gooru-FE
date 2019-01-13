@@ -54,8 +54,9 @@ export default Ember.Component.extend({
      */
     selectItem: function(item) {
       const classId = this.get('class.id');
+      const courseId = this.get('course.id');
       if (this.get('onItemSelected')) {
-        this.sendAction('onItemSelected', item, classId);
+        this.sendAction('onItemSelected', item, classId, courseId);
       }
     },
 

@@ -37,9 +37,8 @@
     padding: 0;
 
     .controls {
-      width: 95px;
       padding: 15px 0;
-      margin: 0 20px 0 10px;
+      margin: 0 20px 0 10px !important;
       display: inline-block;
     }
 
@@ -78,12 +77,14 @@
     .info {
       float: $menu-float-dir;
       height: inherit;
+      display: flex;
 
       .content-count {
         font-size: $font-navigator;
-        margin: 10px 10px 0 0;
+        margin: 0 10px 0 0;
         color: $light-400;
-        display: inline-block;
+        display: flex;
+        align-items: center;
 
         span {
           vertical-align: middle;
@@ -150,12 +151,14 @@
           }
         }
       }
+
       .performance-container {
         cursor: pointer;
         width: 76px;
         display: inline-block;
         height: 67px;
         vertical-align: middle;
+
         &.not-started {
           pointer-events: none;
         }
@@ -163,6 +166,7 @@
         .container-box {
           height: 67px;
           border-bottom: 1px solid $white;
+
           .percentage {
             cursor: pointer;
           }
@@ -317,7 +321,7 @@
 
         .controls {
           padding: 15px 0;
-          margin: 0 5px 0 5px;
+          margin: 0 10px 0 5px !important;
           display: inline-block;
 
           .switch {
@@ -368,7 +372,6 @@
         }
 
         .panel-title {
-          width: 60% !important;
           float: $tab-float-dir;
           height: inherit;
           color: $gray;
@@ -416,6 +419,10 @@
             vertical-align: middle;
             margin: 0;
             padding: 5px 0 0 5px;
+            max-width: 65%;
+            @media only screen and (min-width: $screen-md) and (max-width: $screen-in-1024) {
+              max-width: 55%;
+            }
 
             .type {
               color: $light-500;
@@ -440,7 +447,6 @@
               display: inline-flex;
               color: $orange-400;
             }
-            max-width: 65%;
           }
 
           .typeCollection {
@@ -472,6 +478,8 @@
         }
 
         .info {
+          display: flex;
+          flex-direction: row-reverse;
           float: $menu-float-dir;
           height: inherit;
           max-width: 38% !important;
@@ -492,9 +500,10 @@
 
           .content-count {
             font-size: $font-navigator;
-            margin: 12px 10px 0 0;
+            margin: 0 10px 0 0;
             color: $light-400;
-            display: inline-block;
+            display: flex;
+            align-items: center;
 
             span {
               vertical-align: middle;
@@ -578,6 +587,7 @@
             &.not-started {
               pointer-events: none;
             }
+
             span {
               vertical-align: middle;
             }
@@ -612,10 +622,12 @@
             &.chart {
               float: $menu-float-dir;
               padding: 0;
+
               .time-spent {
                 line-height: 67px;
               }
             }
+
             &.non-clickable {
               pointer-events: none;
             }

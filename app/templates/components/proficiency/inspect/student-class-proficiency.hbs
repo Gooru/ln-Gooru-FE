@@ -1,0 +1,55 @@
+<div class="class-proficiency-container">
+  <div class="header-container">
+    <div class="proficiency-info">
+      <div class="subject">{{t 'teacher-landing.class.students-tab.proficiency'}}</div>
+      <div class="students-count">
+        <div class="count-container">
+          {{numberOfStudents}} {{t 'common.students'}} | {{domainCoverageCount.length}} {{t 'common.domains'}} , {{totalCompetencies}} {{t 'common.competencies'}}</div>
+        <div class="toggle-view" {{action "onClickClassView"}}>{{gru-icon name="view_carousel"}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="body-container">
+    <div class="proficiency-cards-container">
+      {{#each studentsDomainPerformance as |studentDomainPerformance studentSeq|}}
+        <div class="proficiency-card-container" {{action "onSelectStudentCard" studentDomainPerformance}}>
+          <div class="card-header">
+            <div class="thumbnail-container" style="background-image: url({{studentDomainPerformance.thumbnail}});"></div>
+            <div class="student-name">
+              <div class="first-name ellipsis">
+                {{studentDomainPerformance.firstName}}
+              </div>
+              <div class="last-name ellipsis">
+                {{studentDomainPerformance.lastName}}
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            {{charts.proficiency-view domainDataSet=studentDomainPerformance.domainCompetencies studentSeq=studentSeq maxNumberOfCompetencies=maxNumberOfCompetencies}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+{{#if isShowProficiencyPullup}}
+  {{#gru-pull-up pullUpType="proficiency-pullup" showPullUp=isShowProficiencyPullup onClosePullUp="onClosePullUp" as |pull-up|}}
+    {{#if pull-up.isShowHeader}}
+      {{proficiency.learner-proficiency-pull-up
+         student=activeStudent
+         subjectBucket=subjectBucket
+         class=class
+         course=course
+         onSelectCompetency="onSelectCompetency"
+         }}
+    {{/if}}
+  {{/gru-pull-up}}
+{{/if}}
+
+{{#if isShowCompetencyContentReport}}
+  {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
+    onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
+    {{reports.pull-up.competency-content-report competency=selectedCompetency userId=activeStudent.id learningMapData=learningMapData onToggleGlobalCompetencyView="onToggleGlobalCompetencyView"}}
+  {{/reports.pull-up.competency-report}}
+{{/if}}

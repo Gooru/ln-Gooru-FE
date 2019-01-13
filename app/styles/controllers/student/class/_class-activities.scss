@@ -1,42 +1,184 @@
+.student_class_class-activities {
+  .app-container {
+    overflow-y: hidden;
+
+    .student.class {
+      padding: 0;
+    }
+  }
+}
+
 .controller.student.class.class-activities {
   padding: 0;
-  margin: 35px 0 0;
+  margin: 20px 0;
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
 
-  .today {
-    background-color: $white;
-    border-radius: 4px 4px 0 0;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-    color: $gray-base;
-    font-size: $font-size-lead;
-    height: 52px;
-    padding: 8px 0 0 15px;
-  }
+  .ca-title {
+    opacity: 0.2;
+    font-family: "Playfair Display";
+    font-size: 30px;
+    font-style: italic;
+    text-align: center;
+    color: #000000;
 
-  .collections {
-    margin-top: 1px;
-    padding: 0;
-    .gru-student-class-activity-panel {
-      box-shadow: none;
-      margin: 0;
+    p {
+      margin-bottom: 0;
     }
   }
 
-  .no-content {
-    color: $gray-dove;
-    font-size: $font-size-lead;
-    text-align: center;
+  .loading-spinner {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+
+    &.active {
+      visibility: visible;
+    }
   }
-  .no-contentfont {
-    width: 100% !important;
-    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    font-size: 13px !important;
-  }
-  .no-content-image {
-    background-image: url(gooru/no-dca-student.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 240px;
-    margin: 40px auto 0;
+
+  .ca-content-container {
+    position: relative;
+
+    .ca-date-and-add-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      background-color: #fff;
+      height: 50px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+      user-select: none;
+      position: relative;
+
+      .ca-date-selector {
+        position: relative;
+        height: 50px;
+        width: 360px;
+        justify-self: center;
+
+        .ca-date-picker-container {
+          position: absolute;
+          width: 100%;
+          z-index: 1;
+          box-shadow: none;
+
+          .ca-date-nav-container {
+            box-shadow: none;
+          }
+
+          .ca-datepicker-container {
+            &.active {
+              box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.13);
+            }
+            .ca-datepicker-today {
+              background: #0072bc;
+            }
+          }
+        }
+
+        .ca-date-nav-container {
+          height: 50px;
+        }
+      }
+    }
+
+    .no-content {
+      color: $gray-dove;
+      font-size: $font-size-lead;
+      text-align: center;
+    }
+
+    .no-contentfont {
+      width: 100%;
+      font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 13px;
+    }
+
+    .no-content-image {
+      background-image: url("gooru/no-dca-student.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      height: 240px;
+      margin: 40px auto 0;
+    }
+
+    .dca-list-container {
+      height: calc(100vh - 155px);
+      overflow-y: auto;
+      padding-right: 20px;
+      padding-left: 20px;
+      padding-bottom: 20px;
+
+      .dca-content-list-container {
+        &.dca-content-list-container-today {
+          box-shadow: 0 0 11px 3px #0072bc;
+          border-radius: 4px;
+        }
+      }
+
+      .dca-date-view-container {
+        display: inline-grid;
+        grid-template-columns: 200px 1fr;
+        align-items: center;
+        height: 50px;
+        width: 100%;
+
+        .dca-date-container {
+          display: inline-flex;
+          width: 100%;
+          align-items: center;
+
+          &.dca-date-container-today {
+            span {
+              font-family: "Lato";
+              font-size: 15px;
+              font-weight: bold;
+              color: #000000;
+              text-transform: uppercase;
+            }
+          }
+
+          .calendar_today {
+            padding-left: 20px;
+          }
+
+          span {
+            padding-left: 20px;
+          }
+        }
+
+        hr {
+          width: 100%;
+          border-top: 1px solid #ccc;
+        }
+      }
+
+      .dca-content-list-container {
+        .gru-class-activity-panel {
+          background-color: #fff;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+          border-radius: 4px;
+          margin-bottom: 10px;
+        }
+
+        .gru-class-activity-panel:last-child {
+          .dca-panel-container {
+            border-bottom: none;
+          }
+        }
+
+        .gru-class-activity-panel:first-child {
+          .dca-panel-performance {
+            border-top-right-radius: 4px;
+          }
+        }
+      }
+    }
   }
 }

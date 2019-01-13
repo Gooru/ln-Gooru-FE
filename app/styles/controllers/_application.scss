@@ -1,16 +1,35 @@
 .application {
+  /*Hide tooltip for mobile and tablets*/
+  @media only screen and (max-width: $screen-1024) {
+    .tooltip {
+      visibility: hidden;
+    }
+  }
   overflow-x: hidden;
+
   &.no-vertical-scroll {
     overflow-y: hidden;
+  }
+
+  &.not-found {
+    .gru-header {
+      display: none;
+    }
+
+    .app-container {
+      padding: 0;
+    }
   }
 }
 
 .profile_proficiency {
   overflow-y: hidden;
+
   .app-container {
     overflow-y: auto;
   }
 }
+
 .app-container {
   height: 100vh;
   padding-top: 55px;
@@ -21,6 +40,7 @@
   > .backdrop-pull-ups .backdrop {
     background: none !important;
   }
+
   > .backdrop-pull-ups:last-child .backdrop {
     background-color: #000 !important;
   }
@@ -30,7 +50,6 @@
     @include flex-direction(column);
     @include align-content(flex-start);
     min-height: 100%;
-
     @media (min-width: $screen-md) {
       @include flex-direction(row);
     }
@@ -75,6 +94,154 @@
     }
   }
 }
+
 .popover {
   z-index: 99999;
 }
+
+.network-inprogress {
+  .network-progress-indicator {
+    content: "";
+    width: 100%;
+    height: 3px;
+    position: fixed;
+    -webkit-animation: network-progress-indicator 2s infinite;
+    /* Safari 4.0 - 8.0 */
+    animation: network-progress-indicator 2s infinite;
+    z-index: 9999;
+  }
+}
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes network-progress-indicator {
+  0% {
+    top: 0;
+    width: 0;
+    left: 0;
+    right: 0;
+    background: red;
+  }
+
+  50% {
+    top: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+    background: orange;
+  }
+
+  99% {
+    top: 0;
+    width: 0;
+    left: 100%;
+    right: 0;
+    background: red;
+  }
+}
+/* Standard syntax */
+@keyframes network-progress-indicator {
+  0% {
+    top: 0;
+    width: 0;
+    left: 0;
+    right: 0;
+    background: red;
+  }
+
+  50% {
+    top: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+    background: orange;
+  }
+
+  99% {
+    top: 0;
+    width: 0;
+    left: 100%;
+    right: 0;
+    background: red;
+  }
+}
+
+/* Ticker related styles - Start */
+* {
+  box-sizing: border-box;
+}
+$duration: 25s;
+@-webkit-keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.ticker-close {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  color: black;
+  font-size: 1.2rem;
+  margin: 10px;
+  z-index: 2005;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.ticker-wrap {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  height: 3rem;
+  background-color: rgba(#000, 0.9);
+  padding-left: 100%;
+  box-sizing: content-box;
+  z-index: 2000;
+
+  .ticker {
+    display: inline-block;
+    height: 3rem;
+    line-height: 3rem;
+    white-space: nowrap;
+    padding-right: 100%;
+    box-sizing: content-box;
+
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-name: ticker;
+    animation-name: ticker;
+    -webkit-animation-duration: $duration;
+    animation-duration: $duration;
+
+    &__item {
+      display: inline-block;
+      padding: 0 2.8rem;
+      font-size: 1.2rem;
+      color: white;
+    }
+  }
+}
+/* Ticker related styles - End */

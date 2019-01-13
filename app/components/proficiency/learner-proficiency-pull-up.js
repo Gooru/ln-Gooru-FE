@@ -1,6 +1,8 @@
 import Ember from 'ember';
-import { TAXONOMY_CATEGORIES } from 'gooru-web/config/config';
-import {getSubjectIdFromSubjectBucket} from 'gooru-web/utils/utils';
+import { DEFAULT_K12_SUBJECT } from 'gooru-web/config/config';
+
+import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
+import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
 
 export default Ember.Component.extend({
   classNames: ['learner-proficiency-pull-up'],
@@ -24,10 +26,12 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     let component = this;
-    let activeCategory = component.get('activeCategory');
-    if (component.get('activeCategory')) {
-      component.fetchSubjectsByCategory(activeCategory);
-    }
+    component.loadData();
+    Ember.$('body').css('overflow', 'hidden');
+  },
+
+  willDestroyElement() {
+    Ember.$('body').css('overflow', 'auto');
   },
 
   // -------------------------------------------------------------------------
@@ -57,7 +61,10 @@ export default Ember.Component.extend({
      */
     onShownBaseLine(createdDate) {
       let component = this;
-      component.set('timeSeriesStartDate', createdDate ? new Date(createdDate) : component.get('courseStartDate'));
+      component.set(
+        'timeSeriesStartDate',
+        createdDate ? new Date(createdDate) : component.get('courseStartDate')
+      );
       component.set('isShowTimeSeries', true);
     },
 
@@ -73,6 +80,42 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Methods
+
+  /**
+   * This method will load the initial set  of data
+   */
+  loadData() {
+    let component = this;
+    component.fetchCategories().then(() => {
+      let categories = component.get('categories');
+      let categoryCode = component.get('categoryCode');
+      let selectedCategory = categories.findBy('code', categoryCode);
+      if (selectedCategory) {
+        component.set('selectedCategory', selectedCategory);
+        component.fetchSubjectsByCategory(selectedCategory);
+      }
+    });
+  },
+
+  /**
+   * @function fetchCategories
+   * Method  fetch list of taxonomy categories
+   */
+  fetchCategories() {
+    let component = this;
+    return new Ember.RSVP.Promise(reslove => {
+      component
+        .get('taxonomyService')
+        .getCategories()
+        .then(categories => {
+          let category = categories.objectAt(0);
+          component.set('selectedCategory', category);
+          component.set('categories', categories);
+          reslove();
+        });
+    });
+  },
+
   /**
    * @function fetchSubjectsByCategory
    * @param subjectCategory
@@ -82,7 +125,7 @@ export default Ember.Component.extend({
     let component = this;
     component
       .get('taxonomyService')
-      .getTaxonomySubjects(category.value)
+      .getTaxonomySubjects(category.get('id'))
       .then(subjects => {
         let subject = component.getActiveSubject(subjects);
         component.set('taxonomySubjects', subjects);
@@ -96,11 +139,14 @@ export default Ember.Component.extend({
    */
   getActiveSubject(subjects) {
     let component = this;
-    let activeSubject = subjects.objectAt(1);
+    let defaultSubject = subjects.findBy('id', DEFAULT_K12_SUBJECT);
+    let activeSubject = defaultSubject ? defaultSubject : subjects.objectAt(0);
     let subjectBucket = component.get('subjectBucket');
     subjects.map(subject => {
-      if (subjectBucket.split(subject.id).length > 1) {
-        activeSubject = subject;
+      if (subjectBucket) {
+        if (subjectBucket && subjectBucket.split(subject.id).length > 1) {
+          activeSubject = subject;
+        }
       }
     });
     return activeSubject;
@@ -129,9 +175,9 @@ export default Ember.Component.extend({
 
   /**
    * @property {JSON}
-   * Property to store active category //TODO for now it is always K12
+   * Property to store active category
    */
-  activeCategory: TAXONOMY_CATEGORIES[0],
+  selectedCategory: null,
 
   /**
    * @property {Object}
@@ -164,8 +210,12 @@ export default Ember.Component.extend({
       let curMonth = courseCreatedDate.getMonth();
       let curYear = courseCreatedDate.getFullYear();
       let oneYearBeforeFromCurrentDate = courseCreatedDate;
-      courseCreatedDate = new Date(oneYearBeforeFromCurrentDate.setMonth(curMonth - 11));
-      courseCreatedDate = new Date(oneYearBeforeFromCurrentDate.setFullYear(curYear - 1));
+      courseCreatedDate = new Date(
+        oneYearBeforeFromCurrentDate.setMonth(curMonth - 11)
+      );
+      courseCreatedDate = new Date(
+        oneYearBeforeFromCurrentDate.setFullYear(curYear - 1)
+      );
     }
     return courseCreatedDate;
   }),
@@ -180,8 +230,13 @@ export default Ember.Component.extend({
     if (course.get('id')) {
       let taxonomySubjects = component.get('taxonomySubjects');
       let subjectBucket = component.get('subjectBucket');
-      let subjectCode = subjectBucket ? getSubjectIdFromSubjectBucket(subjectBucket) : null;
-      let isSupportedTaxonomySubject = taxonomySubjects.findBy('code', subjectCode);
+      let subjectCode = subjectBucket
+        ? getSubjectIdFromSubjectBucket(subjectBucket)
+        : null;
+      let isSupportedTaxonomySubject = taxonomySubjects.findBy(
+        'code',
+        subjectCode
+      );
       let aggregatedTaxonomy = course.get('aggregatedTaxonomy');
       isShowMatrixChart = !!(aggregatedTaxonomy && isSupportedTaxonomySubject);
     }
@@ -196,5 +251,16 @@ export default Ember.Component.extend({
   /**
    * @property {Date} timeSeriesStartDate
    */
-  timeSeriesStartDate: null
+  timeSeriesStartDate: null,
+
+  /**
+   * Parse  category from subject id
+   */
+  categoryCode: Ember.computed('course', function() {
+    let course = this.get('course');
+    let subject = this.get('subjectBucket');
+    if (course && course.get('id') && subject) {
+      return getCategoryCodeFromSubjectId(subject);
+    }
+  })
 });

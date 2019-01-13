@@ -1,0 +1,60 @@
+{{#if isExpanded}}
+  <div class="backdrop" {{action 'onClosePullUp'}}></div>
+{{/if}}
+<div class="pull-up-container">
+  {{#if (eq type "destination")}}
+    <div class="btn-container" {{action onMoveNext 'inspect-destination'}}>
+      {{gru-icon name="directions"}}
+    </div>
+  {{else}}
+    <div class="btn-container" {{action onMoveNext 'playNext'}}>
+      {{gru-icon name="near_me"}}
+    </div>
+  {{/if}}
+  <div class="pull-up-header" {{action 'onOpenPullUp'}}>
+    <div class="grade-title">{{grade.grade}}</div>
+    <div class="counts">{{t 'student-first-experience.units.other' count=courseData.unitCount}}
+    </div>
+  </div>
+  <div class="pull-up-content">
+    {{#if (eq type "destination")}}
+      <div class="destination-container">
+        <div class="grade-description">
+          {{safe-html grade.description}}
+        </div>
+      </div>
+    {{else}}
+      {{#if (and isRoute0Pending isRoute0)}}
+        <div class="route0-container">
+          <div class="route0-comment" {{action "onToggleRoute0View"}}>
+            <div class="suggestion-icon">{{gru-icon name="explore_outline"}}</div>
+            <div class="suggestion-note"> {{t 'class.overview.course-map.route0-bannerdesc'}}</div>
+          </div>
+          <div class="route0-body" style="display: none;">
+            <div class="route0-accordion-container">
+              {{class.overview.course-suggestions model=route0Contents index=index class=classData course=courseData}}
+            </div>
+          </div>
+        </div>
+        <div class="route0-action">
+          <div class="ignore" {{action "onRoute0Reject"}}>
+            <i></i>
+            <span>{{t 'student-first-experience.route0-action.ignore'}}</span>
+          </div>
+          <div class="accept" {{action "onRoute0Accept"}}>
+            <i></i>
+            <span>{{t 'student-first-experience.route0-action.accept'}}</span>
+          </div>
+        </div>
+      {{/if}}
+      <div class="course-map-accordion-container {{unless (and isRoute0Pending isRoute0) 'no-route0'}}">
+        {{student.class.destination.student-destination-course-accordion
+          courseData=courseData
+          classId=classId
+          courseId=courseId
+          isRoute0=isRoute0
+        }}
+      </div>
+    {{/if}}
+  </div>
+</div>

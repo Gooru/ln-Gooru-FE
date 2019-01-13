@@ -359,6 +359,10 @@
       }
     }
   }
+  .archive {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 }
 
 .gru-class-card {

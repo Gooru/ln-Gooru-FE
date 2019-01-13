@@ -16,9 +16,34 @@ export default Ember.Route.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
+  /**
+   * Toggle Options
+   * @property {Ember.Array}
+   */
+  switchOptions: Ember.A([
+    Ember.Object.create({
+      label: 'yes',
+      value: true
+    }),
+    Ember.Object.create({
+      label: 'no',
+      value: false
+    })
+  ]),
+
   // -------------------------------------------------------------------------
   // Actions
-
+  actions: {
+    onBackwardsChange: function(isChecked) {
+      if (isChecked) {
+        this.set('model.showFeedback', 'true');
+      }
+      //this.sendAction('action');
+    },
+    refreshRoute: function() {
+      this.refresh();
+    }
+  },
   // -------------------------------------------------------------------------
   // Methods
 
@@ -29,6 +54,8 @@ export default Ember.Route.extend({
   setupController: function(controller) {
     controller.resetValues();
     controller.set('tempClass', controller.get('class').copy());
+    controller.set('tempClass.preference', controller.get('class.preference'));
     controller.get('classController').selectMenuItem('class-management');
+    controller.setupDisplayProperties();
   }
 });

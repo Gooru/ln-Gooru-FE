@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import CourseModel from 'gooru-web/models/content/course';
-import { TAXONOMY_CATEGORIES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -10,6 +9,11 @@ export default Ember.Component.extend({
    * @property {Service} User service API SDK
    */
   courseService: Ember.inject.service('api-sdk/course'),
+
+  /**
+   * @property {Service} Taxonomy service API SDK
+   */
+  taxonomyService: Ember.inject.service('taxonomy'),
 
   /**
    * @property {Service} I18N service
@@ -44,27 +48,31 @@ export default Ember.Component.extend({
         function({ validations }) {
           if (validations.get('isValid')) {
             component.set('isLoading', true);
-            this.get('courseService').createCourse(course).then(
-              function(course) {
-                component.set('isLoading', false);
+            this.get('courseService')
+              .createCourse(course)
+              .then(
+                function(course) {
+                  component.set('isLoading', false);
 
-                component.triggerAction({
-                  action: 'closeModal'
-                });
-                component
-                  .get('router')
-                  .transitionTo('content.courses.edit', course.get('id'), {
-                    queryParams: { editing: true }
+                  component.triggerAction({
+                    action: 'closeModal'
                   });
-              },
-              function() {
-                const message = component
-                  .get('i18n')
-                  .t('common.errors.course-not-created').string;
-                component.get('notifications').error(message);
-                component.set('isLoading', false);
-              }
-            );
+                  component
+                    .get('router')
+                    .transitionTo('content.courses.edit', course.get('id'), {
+                      queryParams: {
+                        editing: true
+                      }
+                    });
+                },
+                function() {
+                  const message = component
+                    .get('i18n')
+                    .t('common.errors.course-not-created').string;
+                  component.get('notifications').error(message);
+                  component.set('isLoading', false);
+                }
+              );
           }
           this.set('didValidate', true);
         }.bind(this)
@@ -76,11 +84,20 @@ export default Ember.Component.extend({
   // Events
 
   init() {
-    this._super(...arguments);
+    let component = this;
+    component._super(...arguments);
     var course = CourseModel.create(Ember.getOwner(this).ownerInjection(), {
       title: null
     });
-    this.set('course', course);
+    component.set('course', course);
+    component
+      .get('taxonomyService')
+      .getCategories()
+      .then(categories => {
+        if (!component.get('isDestroyed')) {
+          component.set('categories', categories);
+        }
+      });
   },
 
   // -------------------------------------------------------------------------
@@ -89,7 +106,7 @@ export default Ember.Component.extend({
   /**
    * @type {Ember.A} categories - List of course categories
    */
-  categories: TAXONOMY_CATEGORIES,
+  categories: Ember.A([]),
 
   /**
    * @type {?String} specific class

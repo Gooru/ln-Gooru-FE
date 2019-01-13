@@ -58,9 +58,13 @@ export default Ember.Controller.extend({
       studyPlayerController.set('isFullScreen', !isFullScreen);
       controller.set('isFullScreen', !isFullScreen);
       if (isFullScreen) {
-        Ember.$('body').removeClass('fullscreen').addClass('fullscreen-exit');
+        Ember.$('body')
+          .removeClass('fullscreen')
+          .addClass('fullscreen-exit');
       } else {
-        Ember.$('body').removeClass('fullscreen-exit').addClass('fullscreen');
+        Ember.$('body')
+          .removeClass('fullscreen-exit')
+          .addClass('fullscreen');
       }
     }
   },
@@ -211,6 +215,12 @@ export default Ember.Controller.extend({
     let studyPlayerController = controller.get('studyPlayerController');
     let isFullScreen = studyPlayerController.get('isFullScreen');
     return isFullScreen;
+  }),
+
+  isAsssessment: Ember.computed(function() {
+    let controller = this;
+    let type = controller.get('type');
+    return type === 'assessment-external';
   }),
 
   // -------------------------------------------------------------------------

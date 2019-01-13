@@ -1,11 +1,20 @@
+.teacher_class_class-activities {
+  .app-container {
+    overflow-y: hidden;
+
+    .teacher.class {
+      padding: 0;
+    }
+  }
+}
+
 .controller.teacher.class.class-activities {
   padding: 0;
-  margin: 20px 0;
-  max-width: 960px;
   margin: 0 auto;
+  color: #35424b;
   position: relative;
 
-  .dca-title {
+  .ca-title {
     opacity: 0.2;
     font-family: "Playfair Display";
     font-size: 30px;
@@ -14,439 +23,254 @@
     color: #000000;
 
     p {
-      margin-bottom: 12px;
+      margin-bottom: 0;
     }
   }
 
-  .panel.welcome {
-    height: 65px;
-    border-radius: 5px;
-    line-height: $font-navigator;
-    margin: 0 0 20px;
+  .ca-panel {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-column-gap: 50px;
 
-    .panel-body {
-      padding: 15px 15px 0;
-    }
+    .ca-left-panel {
+      .loading-spinner {
+        position: absolute;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        visibility: hidden;
 
-    .description {
-      display: inline-block;
-      line-height: 1.3;
-      width: 98%;
-    }
-
-    .close {
-      display: inline-block;
-      font-size: $font-size-units-icon;
-      font-weight: bold;
-      float: $menu-float-dir;
-      line-height: 38px;
-
-      a {
-        color: $dark-100;
-      }
-    }
-  }
-
-  .loading-spinner {
-    position: absolute;
-    left: 50%;
-  }
-
-  .dca-content-container {
-    position: relative;
-
-    .dca-content-list-container {
-      height: calc(100vh - 270px);
-      overflow-y: auto;
-      padding-right: 20px;
-      padding-left: 20px;
-      padding-bottom: 20px;
-
-      .dca-future-date-list-container {
-        padding-bottom: 20px;
-        padding-top: 45px;
-
-        .dca-date-view-container {
-          display: inline-grid;
-          grid-template-columns: 200px 1fr;
-          align-items: center;
-          height: 50px;
-          width: 100%;
-
-          .dca-date-container {
-            display: inline-flex;
-            width: 100%;
-            align-items: center;
-
-            .update {
-              padding-left: 20px;
-            }
-
-            span {
-              padding-left: 20px;
-            }
-          }
-
-          hr {
-            width: 100%;
-            border-top: 1px solid #ccc;
-          }
-        }
-
-        .dca-future-list-container {
-          background-color: #fff;
-          border-radius: 4px;
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-
-          .dca-assign {
-            pointer-events: none;
-          }
-
-          .gru-class-activity-panel:last-child {
-            .dca-panel-container {
-              border-bottom: none;
-            }
-
-            .dca-panel-performance {
-              border-bottom-right-radius: 4px;
-            }
-          }
-
-          .gru-class-activity-panel:first-child {
-            .dca-panel-performance {
-              border-top-right-radius: 4px;
-            }
-          }
+        &.active {
+          visibility: visible;
         }
       }
 
-      .dca-todays-container {
-        .dca-todays-header {
-          font-family: "Lato";
-          font-size: 15px;
-          font-weight: bold;
-          color: #000000;
-          text-transform: uppercase;
-        }
+      .dca-content-container {
+        padding-left: 20px;
 
-        .dca-todays-action-list-container {
-          border-radius: 4px;
-          box-shadow: 0 0 2px 2px #0066ff;
+        .ca-date-and-add-content {
+          display: grid;
+          grid-template-columns: 1fr;
           background-color: #fff;
-          padding: 2px;
+          border-radius: 4px;
+          user-select: none;
+          grid-template-rows: 1fr 1fr;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+          position: relative;
 
-          .dca-todays-info-action-container {
-            min-height: 110px;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-            padding: 0 20px;
+          .ca-date-selector {
+            position: relative;
+            height: 50px;
+            align-self: center;
+            justify-self: center;
+            width: 360px;
 
-            .dca-info-container {
-              height: 67px;
-              display: flex;
-              align-items: center;
-              border-bottom: 1px solid #e3e5ea;
-
-              .user-profile-img {
-                width: 60px;
-
-                img {
-                  width: 40px;
-                  border-radius: 50%;
-                  border-color: transparent;
-                  height: 40px;
-
-                  &.selected {
-                    visibility: hidden;
-                  }
-                }
-              }
-
-              .info {
-                p {
-                  margin: 0;
-                  padding-left: 20px;
-                  padding-right: 20px;
-                  padding-bottom: 0;
-                  line-height: 1.5;
-                  font-family: "Lato";
-                  font-size: 13px;
-                  color: #b8bfc4;
-                }
-              }
-            }
-
-            .dca-action-container {
-              display: inline-grid;
-              grid-template-columns: 50% 50%;
+            .ca-date-picker-container {
+              position: absolute;
               width: 100%;
-              padding-top: 10px;
-              padding-bottom: 10px;
+              z-index: 1;
+              box-shadow: none;
 
-              .dca-action-buttons {
-                display: inline-grid;
-                justify-items: center;
-                align-items: center;
-                grid-template-columns: 40px 20px 20px;
-                grid-gap: 15px;
-
-                p {
-                  font-family: "Open Sans";
-                  font-size: 13px;
-                  font-weight: bold;
-                  color: #666666;
-                  text-transform: uppercase;
-                  margin: 0;
-                  padding: 0;
-                }
-
-                .collection-icon {
-                  width: 20px;
-                  height: 20px;
-                  background-repeat: no-repeat;
-                  background-size: 20px 20px;
-                  background-image: url("../assets/gooru/images/add_collection.svg");
-                  opacity: 0.8;
-                  cursor: pointer;
-                }
-
-                .assessment-icon {
-                  width: 20px;
-                  height: 20px;
-                  background-repeat: no-repeat;
-                  background-size: 20px 20px;
-                  background-image: url("../assets/gooru/images/add_assessment.svg");
-                  opacity: 0.8;
-                  cursor: pointer;
+              .ca-datepicker-container {
+                &.active {
+                  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.13);
                 }
               }
+            }
 
-              .dca-course-map-button {
-                text-align: right;
-                cursor: pointer;
+            .ca-date-nav-container {
+              height: 50px;
+              box-shadow: none;
+            }
+          }
+
+          .ca-add-content {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            height: 50px;
+            border-top: 1px solid #ccc;
+
+            .ca-contents-button {
+              display: inline-grid;
+              justify-items: center;
+              align-items: center;
+              grid-template-columns: 120px 20px 20px;
+              grid-gap: 15px;
+              padding-left: 15px;
+
+              p {
+                font-family: "Open Sans";
+                font-size: 13px;
+                font-weight: bold;
+                color: #666666;
+                text-transform: uppercase;
+                margin: 0;
+                padding: 0;
+              }
+
+              .collection-icon {
+                width: 20px;
                 height: 20px;
+                background-repeat: no-repeat;
+                background-size: 20px 20px;
+                background-image: url("../assets/gooru/images/add_collection.svg");
+                opacity: 0.8;
+                cursor: pointer;
+              }
 
-                &.no-course {
-                  pointer-events: none;
-                  opacity: 0.5;
-                }
+              .assessment-icon {
+                width: 20px;
+                height: 20px;
+                background-repeat: no-repeat;
+                background-size: 20px 20px;
+                background-image: url("../assets/gooru/images/add_assessment.svg");
+                opacity: 0.8;
+                cursor: pointer;
+              }
+            }
+          }
+        }
 
+        .no-content {
+          color: $gray-dove;
+          font-size: $font-size-lead;
+          text-align: center;
+        }
+
+        .no-contentfont {
+          width: 100%;
+          font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size: 13px;
+        }
+
+        .no-content-image {
+          background-image: url("gooru/no-dca-student.png");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          height: 240px;
+          margin: 40px auto 0;
+        }
+
+        .dca-list-container {
+          height: calc(100vh - 205px);
+          overflow-y: auto;
+          padding-right: 20px;
+          padding-left: 20px;
+          padding-bottom: 55px;
+
+          .dca-content-list-container {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+            border-radius: 4px;
+
+            &.dca-content-list-container-today {
+              box-shadow: 0 0 11px 3px #4b9741;
+            }
+          }
+
+          .dca-date-view-container {
+            display: inline-grid;
+            grid-template-columns: 200px 1fr;
+            align-items: center;
+            height: 50px;
+            width: 100%;
+
+            .dca-date-container {
+              display: inline-flex;
+              width: 100%;
+              align-items: center;
+
+              &.dca-date-container-today {
                 span {
                   font-family: "Lato";
-                  font-size: 13px;
-                  color: #1aa9eb;
+                  font-size: 15px;
+                  font-weight: bold;
+                  color: #000000;
                   text-transform: uppercase;
                 }
               }
-            }
-          }
 
-          .dca-todays-list-container {
-            .gru-class-activity-panel:last-child {
-              .dca-panel-container {
-                border-bottom: none;
+              .calendar_today {
+                padding-left: 20px;
               }
 
-              .dca-panel-performance {
-                border-radius: 0 0 4px 0;
+              span {
+                padding-left: 20px;
               }
             }
-          }
-        }
-      }
 
-      .dca-past-date-list-container {
-        padding-bottom: 50px;
-        .dca-past-activities-header {
-          padding-top: 20px;
-          font-family: "Lato";
-          font-size: 15px;
-          font-weight: bold;
-          color: #000000;
-          text-transform: uppercase;
-        }
-
-        .dca-date-view-container {
-          display: inline-grid;
-          grid-template-columns: 200px 1fr;
-          align-items: center;
-          height: 50px;
-          width: 100%;
-
-          .dca-date-container {
-            display: inline-flex;
-            width: 100%;
-            align-items: center;
-
-            .calendar_today {
-              padding-left: 20px;
-            }
-
-            span {
-              padding-left: 20px;
-            }
-          }
-
-          hr {
-            width: 100%;
-            border-top: 1px solid #ccc;
-          }
-        }
-
-        .dca-past-list-container {
-          background-color: #fff;
-          border-radius: 4px;
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-
-          .dca-assign {
-            pointer-events: none;
-          }
-
-          .gru-class-activity-panel:last-child {
-            .dca-panel-container {
-              border-bottom: none;
-            }
-
-            .dca-panel-performance {
-              border-bottom-right-radius: 4px;
-            }
-          }
-
-          .gru-class-activity-panel:first-child {
-            .dca-panel-performance {
-              border-top-right-radius: 4px;
+            hr {
+              width: 100%;
+              border-top: 1px solid #ccc;
             }
           }
         }
       }
     }
 
-    .dca-nav-to-todays-dca-list {
-      position: absolute;
-      width: calc(100% - 50px);
-      visibility: hidden;
-      opacity: 0;
-      transition: visibility 0s 0.5s, opacity 0.5s linear;
-      height: 50px;
-      margin-left: 15px;
-      z-index: 2;
-
-      &.top-section {
-        top: 0;
-
-        .dca-nav-action-panel {
-          box-shadow: 0 0 14px 10px #f1f3f7, 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-        }
-      }
-
-      &.bottom-section {
-        bottom: 0;
-
-        .dca-nav-action-panel {
-          box-shadow: 0 -11px 14px 10px #f1f3f7, 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-        }
-      }
-
-      &.active {
-        visibility: visible;
-        opacity: 1;
-        transition: opacity 0.5s linear;
-      }
-
-      .dca-nav-action-panel {
-        display: inline-grid;
-        grid-template-columns: 50% 50%;
-        height: 50px;
-        border-radius: 4px;
-        background-color: #ffffff;
-        padding-left: 20px;
+    .ca-right-panel {
+      .ca-unschedule-items-list-container {
         padding-right: 20px;
-        align-items: center;
-        width: 100%;
 
-        .dca-action-buttons {
-          display: inline-grid;
-          justify-items: center;
+        .ca-unschedule-items-header {
+          height: 50px;
+          box-shadow: rgba(0, 0, 0, 0.13) 0 2px 4px 0;
+          background: #fff;
+          border-radius: 4px;
+          display: grid;
           align-items: center;
-          grid-template-columns: 40px 20px 20px;
-          grid-gap: 15px;
-
-          p {
-            font-family: "Open Sans";
-            font-size: 13px;
-            font-weight: bold;
-            color: #666666;
-            text-transform: uppercase;
-            margin: 0;
-            padding: 0;
-          }
-
-          .collection-icon {
-            width: 20px;
-            height: 20px;
-            background-repeat: no-repeat;
-            background-size: 20px 20px;
-            background-image: url("../assets/gooru/images/add_collection.svg");
-            opacity: 0.8;
-            cursor: pointer;
-          }
-
-          .assessment-icon {
-            width: 20px;
-            height: 20px;
-            background-repeat: no-repeat;
-            background-size: 20px 20px;
-            background-image: url("../assets/gooru/images/add_assessment.svg");
-            opacity: 0.8;
-            cursor: pointer;
-          }
-        }
-
-        .dca-course-map-button {
-          text-align: right;
-          cursor: pointer;
-          height: 20px;
+          justify-content: center;
+          grid-template-columns: 1fr;
+          position: relative;
 
           span {
-            font-family: "Lato";
-            font-size: 13px;
-            color: #1aa9eb;
             text-transform: uppercase;
+            padding-left: 20px;
+            font-size: 12px;
+            font-weight: bold;
           }
+        }
+
+        .ca-unscheduled-content-items {
+          padding: 20px;
+          height: calc(100vh - 155px);
+          overflow-y: auto;
+        }
+
+        .ca-unscheduled-no-content-items {
+          color: #666666;
+          font-size: 19px;
+          text-align: center;
+          margin-top: 5px;
         }
       }
+    }
+  }
 
-      .todays-dca-list-arrow-container {
-        position: absolute;
-        top: -6px;
-        left: 46%;
+  .ca-datepicker-schedule-container {
+    background: #fff;
+    position: absolute;
+    z-index: 1031;
+    width: inherit;
+    box-shadow: 0 13px 16px 0 rgba(0, 0, 0, 0.13);
+    top: 50px;
+    width: 250px;
+    display: none;
 
-        .todays-dca-list-arrow {
-          width: 60px;
-          height: 60px;
-          background-color: #fff;
-          border-radius: 50%;
-          box-shadow: 0 6px 4px 0 rgba(0, 0, 0, 0.3),
-            0 1px 4px 0 rgba(0, 0, 0, 0.15), 0 6px 4px 0 rgba(0, 0, 0, 0.15),
-            0 2px 4px 0 rgba(0, 0, 0, 0.15);
-          margin-bottom: 10px;
-          cursor: pointer;
+    #schedule-ca-datepicker {
+      .datepicker {
+        width: 100%;
 
-          .arrow_downward,
-          .arrow_upward {
-            color: #1aa9eb;
-            font-size: 36px;
-            margin-left: 12px;
-            margin-top: 13px;
+        .table-condensed {
+          width: 100%;
+
+          thead tr:first-child {
+            display: none;
           }
-        }
-
-        span {
-          font-family: "Lato";
-          text-transform: uppercase;
-          display: block;
-          text-align: center;
-          color: #1aa9eb;
-          font-weight: bold;
         }
       }
     }

@@ -1748,7 +1748,8 @@ export default Object.assign(quizzesTranslations, {
       'skyline': 'क्षितिज',
       'baseline': 'बेसलाइन',
       'grade-line': 'वर्ग लाइन',
-      'not-tagged': 'कक्षा में कोई कोर्स नहीं है या पाठ्यक्रम को वैध विषय या मानकों पर टैग नहीं किया गया है।',
+      'not-tagged':
+        'कक्षा में कोई कोर्स नहीं है या पाठ्यक्रम को वैध विषय या मानकों पर टैग नहीं किया गया है।',
       'show-compressed-chart': 'संक्षिप्त चार्ट दिखाएं',
       'show-expanded-chart': 'विस्तारित चार्ट दिखाएं'
     },

@@ -47,7 +47,6 @@ export default Ember.Component.extend({
   // Actions
 
   actions: {
-
     /**
      * Action triggered when the user play collection
      * It'll open the player in new tab

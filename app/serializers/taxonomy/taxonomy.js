@@ -304,7 +304,7 @@ export default Ember.Object.extend({
   normalizeGrades(payload) {
     let normalizedGrades = Ember.A([]);
     if (payload && payload.grades) {
-      normalizedGrades = payload.grades;
+      normalizedGrades = payload.grades.sortBy('sequence');
     }
     return normalizedGrades;
   },
@@ -342,5 +342,35 @@ export default Ember.Object.extend({
       });
     }
     return Ember.A(taxonomyData);
+  },
+  /**
+   * Normalize the Fetch Taxonomy Subjects endpoint's response
+   *
+   * @param payload is the endpoint response in JSON format
+   * @returns {Subject[]} an array of subjects
+   */
+  normalizeFetchSubject: function(payload) {
+    var result = {};
+    if (payload) {
+      result = Object.assign(result, payload);
+      result.standardFrameworkId = result.standard_framework_id;
+      delete result.standard_framework_id;
+    }
+    return result;
+  },
+  /**
+   * Normalize the Fetch Taxonomy categories endpoint's response
+   *
+   * @param payload is the endpoint response in JSON format
+   * @returns {Subject[]} an array of Categories
+   */
+  normalizeFetchCategories: function(payload) {
+    let resultSet = Ember.A();
+    payload = Ember.A(payload.subject_classifications);
+    payload.forEach(data => {
+      let result = Ember.Object.create(data);
+      resultSet.pushObject(result);
+    });
+    return resultSet;
   }
 });

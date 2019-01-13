@@ -147,7 +147,13 @@ export default Ember.Object.extend(ConfigurationMixin, {
         followers: payload.followers,
         followings: payload.followings,
         isFollowing: !!payload.isFollowing,
-        fullName: `${payload.last_name  } ${  payload.first_name}`
+        fullName: `${payload.last_name} ${payload.first_name}`,
+        isActive:
+          payload.is_active && payload.is_active !== 'undefined'
+            ? payload.is_active
+            : null,
+        profileBaselineDone: payload.profile_baseline_done,
+        loginType: payload.login_type
       });
     }
   },
@@ -334,7 +340,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
           : true,
       owner: filteredOwners.get('length')
         ? filteredOwners.get('firstObject')
-        : null
+        : null,
+      format: collectionData.format || null
     });
   },
 

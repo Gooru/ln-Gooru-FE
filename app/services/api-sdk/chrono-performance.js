@@ -24,11 +24,32 @@ export default Ember.Service.extend({
     );
   },
 
-  getDummy() {
-    return new Ember.RSVP.Promise(function(resolve) {
-      resolve('dummy');
+  getStudentPerformanceOfIndepedentLearning: function(filter) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      let serializedFilterData = service
+        .get('chronoSerializer')
+        .serializedFilterData(filter);
+
+      service
+        .get('chronoAdapter')
+        .getStudentPerformanceOfIndepedentLearning({
+          body: serializedFilterData
+        })
+        .then(
+          function(responseData) {
+            responseData = service
+              .get('chronoSerializer')
+              .normalizeUsageData(responseData);
+            resolve(responseData);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
     });
   },
+
   getStudentPerformanceOfAllItemsInClass: function(filter) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -45,13 +66,11 @@ export default Ember.Service.extend({
           function(responseData) {
             responseData = service
               .get('chronoSerializer')
-              .normalizeUsageData(responseData, serializedFilterData);
+              .normalizeUsageData(responseData);
             resolve(responseData);
           },
           function(error) {
-            /*  const status = error.status; if (status === 404) { resolve({ status: '404' }); } else { */
             reject(error);
-            //}
           }
         );
     });

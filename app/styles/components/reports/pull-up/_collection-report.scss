@@ -49,6 +49,41 @@
       position: relative;
       z-index: 1;
 
+      .report-title {
+        width: calc(100% - 50px);
+
+        .collection-icon {
+          width: 34px;
+          height: 38px;
+          background-repeat: no-repeat;
+          background-size: 25px 25px;
+          display: inline-block;
+          float: left;
+
+          &.assessment {
+            background-image: url("../assets/gooru/images/assessment-gray.svg");
+          }
+
+          &.collection {
+            background-image: url("../assets/gooru/images/collection_gray.svg");
+          }
+        }
+
+        .title {
+          width: 100%;
+          font-size: 16px;
+          line-height: 20px;
+          padding-left: 15px;
+          letter-spacing: normal;
+          padding-top: 10px;
+          color: #37424b;
+
+          p {
+            margin: 0;
+          }
+        }
+      }
+
       .report-breadcrumb {
         width: calc(100% - 50px);
         display: flex;
@@ -111,6 +146,7 @@
           display: flex;
           align-items: center;
           max-width: 300px;
+          padding-left: 15px;
 
           p {
             margin: 0;

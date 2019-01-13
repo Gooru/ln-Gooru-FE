@@ -100,7 +100,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
         lastName: collectionData.creatorLastname,
         avatarUrl: creatorThumbnailUrl,
         username: collectionData.creatornameDisplay
-      })
+      }),
+      format: collectionData.format || null
     });
   },
 
@@ -133,6 +134,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return AssessmentModel.create(Ember.getOwner(this).ownerInjection(), {
       id: assessmentData.id,
       title: assessmentData.title,
+      format: assessmentData.format || null,
       thumbnailUrl: thumbnailUrl,
       standards: serializer
         .get('taxonomySerializer')
@@ -218,8 +220,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
    */
   normalizeQuestion: function(result) {
     const serializer = this;
-    const format = (result.contentFormat) || (result.resourceFormat.value || null); //value should be 'question'
-    const type = QuestionModel.normalizeQuestionType(result.typeName || result.contentSubFormat);
+    const format =
+      result.contentFormat || (result.resourceFormat.value || null); //value should be 'question'
+    const type = QuestionModel.normalizeQuestionType(
+      result.typeName || result.contentSubFormat
+    );
     const taxonomyInfo =
       (result.taxonomySet &&
         result.taxonomySet.curriculum &&
@@ -350,7 +355,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
         .get('taxonomySerializer')
         .normalizeTaxonomyArray(taxonomyInfo, TAXONOMY_LEVELS.COURSE),
       owner: result.owner ? serializer.normalizeOwner(result.owner) : null,
-      sequence: result.sequence
+      sequence: result.sequence,
+      version: result.version || null
     });
   },
 

@@ -286,8 +286,7 @@ $screen-in-1024: 1024px;
 $screen-xs-max: $screen-sm-min - 1 !default;
 $screen-sm-max: $screen-md-min - 1 !default;
 $screen-md-max: $screen-lg-min - 1 !default; //== Grid system
-$screen-lptp-hidpi: 1440px;
-//
+$screen-lptp-hidpi: 1440px; //
 //## Define your custom responsive grid.
 //** Number of columns in the grid.
 $grid-columns: 12 !default; //** Padding between columns. Gets divided in half for the left and right.
@@ -682,16 +681,35 @@ $greyish: #b2b2b2;
 $sm-width-max: 600px !default; //Extra small devices (phones)
 $lg-width-min: 600px !default; //Small devices (portrait tablets and large phones)
 // Custom screen sizes
+$screen-380: 380px !default;
 $screen-376: 376px;
 $screen-359: 359px;
 $screen-568: 568px !default;
 $screen-800: 800px !default;
 $screen-375: 375px !default;
+$screen-465: 465px !default;
 $screen-824: 824px !default;
 $screen-320: 320px !default;
+$screen-705: 705px !default;
 $screen-720: 720px !default;
 $screen-1024: 1024px !default;
 $screen-1366: 1366px !default;
 $screen-600: 600px !default;
 $screen-360: 360px !default;
 $screen-875: 875px !default;
+$screen-411: 411px !default;
+$screen-414: 414px !default;
+$screen-481: 481px !default;
+$screen-640: 640px !default;
+$screen-791: 791px !default;
+$screen-780: 780px !default;
+$screen-814: 814px !default;
+$screen-675: 675px !default;
+$screen-400: 400px !default;
+$bg-dark: #323232;
+$screen-639: 639px !default;
+$screen-569: 569px !default;
+$screen-669: 669px !default;
+$screen-1035: 1035px !default;
+$btn-blue: #0076ba;
+$screen-1280: 1280px !default;
