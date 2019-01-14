@@ -173,6 +173,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           if (!controller.isDestroyed) {
             classActivity.set('date', date);
             classActivity.set('added_date', date);
+            classActivity.set('activation_date', date);
             classActivity.set('isActive', true);
             if (scheduleDate) {
               let id = classActivity.get('id');
@@ -265,9 +266,14 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       datepickerEle.hide();
       let scheduleMonth = parseInt(moment(scheduleDate).format('MM'));
       let scheduleYear = parseInt(moment(scheduleDate).format('YYYY'));
-      let forMonth = classActivity.get('forMonth');
-      let forYear = classActivity.get('forYear');
-      if (forMonth === scheduleMonth && forYear === scheduleYear) {
+      let forMonth = parseInt(classActivity.get('forMonth'));
+      let forYear = parseInt(classActivity.get('forYear'));
+      let activationDate = classActivity.get('activation_date');
+      if (
+        forMonth === scheduleMonth &&
+        forYear === scheduleYear &&
+        !activationDate
+      ) {
         this.send('changeVisibility', classActivity, scheduleDate);
       } else {
         controller
@@ -372,23 +378,38 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       this.handleScrollToSpecificDate(date);
     },
 
-    onOpenPerformanceEntry(item, activity) {
+    onOpenPerformanceEntry(item, activity, isRepeatEntry) {
       let component = this;
-      if (item.format === 'assessment') {
-        component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-        component.set('isShowCollectionPerformanceEntryPullUp', false);
-        component.set('isShowAssessmentPerformanceEntryPullUp', true);
-      } else if (item.format === 'assessment-external') {
-        component.set('isShowAssessmentPerformanceEntryPullUp', false);
-        component.set('isShowCollectionPerformanceEntryPullUp', false);
-        component.set('isShowExternalAssessmentPeformanceEntryPullUp', true);
-      } else if (item.format === 'collection') {
-        component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-        component.set('isShowAssessmentPerformanceEntryPullUp', false);
-        component.set('isShowCollectionPerformanceEntryPullUp', true);
-      }
+      component.fetchActivityUsers(activity.id).then(function(activityMembers) {
+        let classMembers = component.get('members');
+        let classActivityStudents = Ember.A([]);
+        activityMembers.map(member => {
+          classActivityStudents.push(classMembers.findBy('id', member.id));
+        });
+
+        component.set('activityMembers', classActivityStudents.sortBy('firstName'));
+        if (item.format === 'assessment') {
+          component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
+          component.set('isShowCollectionPerformanceEntryPullUp', false);
+          component.set('isShowAssessmentPerformanceEntryPullUp', true);
+        } else if (item.format === 'assessment-external') {
+          component.set('isShowAssessmentPerformanceEntryPullUp', false);
+          component.set('isShowCollectionPerformanceEntryPullUp', false);
+          component.set('isShowExternalAssessmentPeformanceEntryPullUp', true);
+        } else if (item.format === 'collection') {
+          component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
+          component.set('isShowAssessmentPerformanceEntryPullUp', false);
+          component.set('isShowCollectionPerformanceEntryPullUp', true);
+        } else {
+          component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
+          component.set('isShowAssessmentPerformanceEntryPullUp', false);
+          component.set('isShowCollectionPerformanceEntryPullUp', false);
+          component.set('isShowExternalCollectionPeformanceEntryPullUp', true);
+        }
+      });
       component.set('selectedItem', item);
       component.set('selectedActivity', activity);
+      component.set('isRepeatEntry', isRepeatEntry);
     },
 
     onClosePerformanceEntry() {
@@ -396,6 +417,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
       controller.set('isShowAssessmentPerformanceEntryPullUp', false);
       controller.set('isShowCollectionPerformanceEntryPullUp', false);
+      controller.set('isShowExternalCollectionPeformanceEntryPullUp', false);
       controller.loadData();
     }
   },
@@ -417,6 +439,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
+
+  isRepeatEntry: false,
 
   isOfflineClass: Ember.computed('class', function() {
     let controller = this;
@@ -536,7 +560,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Class id
    * @property {String}
    */
-  members: Ember.computed.alias('classController.class.members'),
+  members: Ember.computed('classController.class.members', function() {
+    const controller = this;
+    let classMembers = controller.get('classController.class.members');
+    return classMembers.sortBy('firstName');
+  }),
   /**
    * Class id
    * @property {String}
@@ -764,14 +792,23 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   },
 
   serializerSearchContent(content, contentId, date, forMonth, forYear) {
+    let collection = Ember.Object.create({
+      id: content.get('id'),
+      title: content.get('title'),
+      format: content.get('format'),
+      collectionType: content.get('format'),
+      resourceCount: content.get('resourceCount'),
+      questionCount: content.get('questionCount'),
+      oeQuestionCount: content.get('oeQuestionCount')
+    });
     return Ember.Object.create({
       id: contentId,
       added_date: date,
       activityDate: date,
-      collection: content,
       forMonth,
       forYear,
       usersCount: -1,
+      collection,
       isActive: false
     });
   },
@@ -804,5 +841,19 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         1000
       );
     }
+  },
+
+  fetchActivityUsers(activityId) {
+    let controller = this;
+    let classId = controller.get('classId');
+    return Ember.RSVP.hash({
+      activityMembers: Ember.RSVP.resolve(
+        controller
+          .get('classActivityService')
+          .fetchUsersForClassActivity(classId, activityId)
+      )
+    }).then(({ activityMembers }) => {
+      return activityMembers;
+    });
   }
 });

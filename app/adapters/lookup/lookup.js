@@ -129,6 +129,23 @@ export default Ember.Object.extend({
   },
 
   /**
+   * Gets the languages information new
+   *
+   * @returns {Promise}
+   */
+  getLanguages: function() {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/languages`;
+
+    const options = {
+      type: 'GET',
+      //using default content type so this is serialized as query params
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+  /**
    *
    * @returns {{Authorization: string}}
    */

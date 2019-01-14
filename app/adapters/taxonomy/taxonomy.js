@@ -9,6 +9,7 @@ export default Ember.Object.extend({
   session: Ember.inject.service('session'),
 
   namespace: '/api/nucleus/v1/taxonomy',
+  namespaceV2: '/api/nucleus/v2/taxonomy',
 
   /**
    * @namespace taxonomyDSNamespace
@@ -192,6 +193,42 @@ export default Ember.Object.extend({
     };
     return Ember.$.ajax(url, options);
   },
+
+  /**
+   * Fetches the Subjects frameworks for the specified subject
+   *
+   * @param filters - The classification type
+   * @example GET /api/nucleus/:version/taxonomy/frameworks/subjects?subject=K12.SC
+   * 'http://staging.gooru.org/api/nucleus/v1/taxonomy/frameworks/subjects?subject=K12.SC'
+   * @returns {Promise}
+   */
+  fetchSubjectFWKs: function(filters) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/frameworks/subjects?subject=${filters}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Return list of  taxonomy subject classification details based  on tenant settings
+   */
+  fetchCategories: function() {
+    const adapter = this;
+    const namespace = adapter.get('namespaceV2');
+    const url = `${namespace}/classifications`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

@@ -31,14 +31,14 @@
         {{/if}}
       </div>
     {{/unless}}
-    {{#unless isILActivity}}
+    <!-- {{#unless isILActivity}}
       <div class="profile tab">
         <a {{action 'selectItem' 'profile'}} role="tab" data-toggle="tooltip" title="{{t 'common.myProfile'}} ">
               {{gru-icon name='account_circle'}}
               <span class="my-profile add-info">{{t 'common.myProfile'}}</span>
           </a>
       </div>
-    {{/unless}}
+    {{/unless}} -->
     {{#if navTitle}}
       <div class="studyplayer-title">
         <span>{{navTitle}}</span>
@@ -108,13 +108,6 @@
               {{/if}}
             </div>
           </div>
-          {{#unless isILActivity}}
-            <div class="profile tab">
-              <a {{action 'selectItem' 'profile'}}>
-                 {{gru-icon name='account_circle'}}
-              </a>
-            </div>
-          {{/unless}}
           {{#if isFeatureEnabled }}
             <div class="notification-tab">
               {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' classId=classId isTeacher=false }}

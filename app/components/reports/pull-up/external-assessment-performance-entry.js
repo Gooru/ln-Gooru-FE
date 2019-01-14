@@ -1,11 +1,17 @@
 import Ember from 'ember';
-import {getBarGradeColor, generateUUID, validatePercentage} from 'gooru-web/utils/utils';
+import {
+  getBarGradeColor,
+  generateUUID,
+  validatePercentage
+} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
-  classNames: ['performance-manual-entry', 'external-assessment-performance-entry'],
+  classNames: [
+    'performance-manual-entry',
+    'external-assessment-performance-entry'
+  ],
 
   // -------------------------------------------------------------------------
   // Services
@@ -15,16 +21,29 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-  keyDown(event) {
-    //prevent triggering tab key event
-    if (event.keyCode === 9) {
-      event.preventDefault();
+
+  keyDownEventHandler(event) {
+    let component = this;
+    let activeStudentSeq = component.get('activeStudentSeq');
+    //recognize enter key
+    if (event.keyCode === 13) {
+      component.$(`.s-${activeStudentSeq + 1}-score`).focus();
     }
   },
 
   didRender() {
     let component = this;
-    component.scoreValidator();
+    component.$('.student-score-entry').keyup(function(event) {
+      component.keyDownEventHandler(event);
+    });
+  },
+
+  didInsertElement() {
+    let component = this;
+    let numberOfStudents = component.get('students');
+    if (numberOfStudents.length > 0) {
+      component.$('.s-0-score').focus();
+    }
   },
 
   // -------------------------------------------------------------------------
@@ -37,34 +56,32 @@ export default Ember.Component.extend({
     },
 
     //Action triggered when edit score
-    onEditScore(studentSeq) {
+    onEditScore(student, studentSeq) {
       let component = this;
-      component.toggleScoredElement(studentSeq);
+      component.toggleScoredElement(student, studentSeq);
+      component.set('isEnableSubmit', !component.doEnableSubmit());
     },
 
     //Action triggered when move to next student
-    onMoveNext() {
+    onSubmitScore() {
       let component = this;
-      let activeStudentSeq = component.get('activeStudentSeq');
-      let students = component.get('students');
-      let numberOfStudents = students.length;
-      if (activeStudentSeq >= numberOfStudents) {
-        component.set('isDisableNext', true);
-      } else {
-        component.updateStudentAssessmentScore(component.getDataParams(activeStudentSeq));
-        activeStudentSeq++;
-        component.set('activeStudentSeq', activeStudentSeq);
-        component.set('activeStudent', students.objectAt(activeStudentSeq));
-      }
+      component.submitStudentAssessmentScore();
+      component.sendAction('onClosePerformanceEntry');
+    },
+
+    //Action triggered when type assessment max score
+    onTypeMaxAssessmentScore() {
+      let component = this;
+      component.set('isTypingMaxScore', true);
+      let assessmentMaxScore = component.get('assessmentMaxScore');
+      let isValidMaxScore = validatePercentage(assessmentMaxScore);
+      component.set('isValidMaxScore', isValidMaxScore);
     },
 
     //Action triggered when enter max score
     onEnterMaxScore() {
       let component = this;
-      let maxScore = component.get('assessmentMaxScore');
-      let isValidMaxScore = validatePercentage(maxScore);
-      component.set('isShowMaxScoreEntry', !isValidMaxScore);
-      component.set('isValidMaxScore', isValidMaxScore);
+      component.set('isShowMaxScoreEntry', false);
     }
   },
 
@@ -108,27 +125,34 @@ export default Ember.Component.extend({
   assessmentMaxScore: null,
 
   /**
-   * @property {Boolean} isValidScore
+   * @property {Boolean} isValidMaxScore
    */
-  isValidScore: false,
+  isValidMaxScore: false,
+
+  /**
+   * @property {Boolean} isTypingMaxScore
+   */
+  isTypingMaxScore: false,
+
+  isEnableSubmit: false,
 
   // -------------------------------------------------------------------------
   // Methods
 
-  /**
-   * @function scoreValidator
-   * Method to validate entered score
-   */
-  scoreValidator() {
+  doEnableSubmit() {
     let component = this;
-    component.$('.score-entry').keyup(function() {
-      let percentageScore = component.$('.max-score-entry').val();
-      if ( percentageScore  !== 0 ) {
-        component.set('isValidScore', validatePercentage(percentageScore));
-      } else {
-        component.set('isValidScore', false);
-      }
-      component.set('isTyping', true);
+    return component.$('.wrong-score').length > 0;
+  },
+
+  /**
+   * @function submitStudentAssessmentScore
+   * Method to submit student's external assessment score
+   */
+  submitStudentAssessmentScore() {
+    let component = this;
+    let students = component.get('students');
+    students.map(student => {
+      component.updateStudentAssessmentScore(component.getDataParams(student));
     });
   },
 
@@ -136,16 +160,20 @@ export default Ember.Component.extend({
    * @function toggleScoredElement
    * Method to toggle scored element
    */
-  toggleScoredElement(studentSeq) {
+  toggleScoredElement(student, studentSeq) {
     let component = this;
-    let assessmentScore = component.$(`.s-${studentSeq}-score`).val();
-    component.$(`.student-${studentSeq}`).removeClass('scored wrong-score');
-    if (component.validateAssessmentScore(studentSeq, assessmentScore)) {
-      component.$(`.student-${studentSeq}`).addClass('scored');
-      component.$(`.student-${studentSeq} .student-thumbnail`).css('background-color', getBarGradeColor(assessmentScore));
-    } else {
-      component.$(`.student-${studentSeq}`).addClass('wrong-score');
-      component.$(`.student-${studentSeq} .student-thumbnail`).css('background-color', '#d8d8d8');
+    let assessmentScore = student.score;
+    const STUDENT_INFO_CONTAINER = component.$(`.student-${studentSeq}`);
+    component.$(STUDENT_INFO_CONTAINER).removeClass('scored wrong-score');
+    if (assessmentScore !== null && assessmentScore !== '') {
+      if (component.validateAssessmentScore(assessmentScore)) {
+        component.$(STUDENT_INFO_CONTAINER).addClass('scored');
+        component
+          .$(`.student-${studentSeq} .student-thumbnail`)
+          .css('background-color', getBarGradeColor(assessmentScore));
+      } else {
+        component.$(STUDENT_INFO_CONTAINER).addClass('wrong-score');
+      }
     }
   },
 
@@ -153,33 +181,25 @@ export default Ember.Component.extend({
    * @function getDataParams
    * Method to construct request body params
    */
-  getDataParams(activeStudentSeq) {
+  getDataParams(student) {
     let component = this;
-    let activityData = component.get('activityData');
     let conductedOn = new Date(component.get('activityData.activation_date'));
     let maxScore = component.get('assessmentMaxScore');
     let classId = component.get('classId');
-    let courseId = activityData.get('context.courseId') || null;
-    let unitId = activityData.get('context.unitId') || null;
-    let lessonId = activityData.get('context.lessonId') || null;
-    let studentAssessmentScore = component.$(`.s-${activeStudentSeq}-score`).val();
     let reqBodyParams = {
-      'student_id': component.get('activeStudent.id'),
-      'tenant_id': component.get('session.tenantId') || null,
-      'collection_type': 'assessment-external',
-      'session_id': generateUUID(),
-      'time_zone': component.get('timeZone'),
-      'class_id': classId,
-      'course_id': courseId,
-      'unit_id': unitId,
-      'lesson_id': lessonId,
-      'collection_id': component.get('assessment.id'),
-      'partner_id': component.get('session.partnerId') || null,
-      'content_source': 'dailyclassactivity',
-      'score': Number(studentAssessmentScore) || 0,
-      'max_score': Number(maxScore) || 0,
-      'time_spent': 0,
-      'conducted_on': conductedOn.toISOString()
+      student_id: student.id,
+      tenant_id: component.get('session.tenantId') || null,
+      collection_type: 'assessment-external',
+      session_id: generateUUID(),
+      time_zone: component.get('timeZone'),
+      class_id: classId,
+      collection_id: component.get('assessment.id'),
+      partner_id: component.get('session.partnerId') || null,
+      content_source: 'dailyclassactivity',
+      score: Number(student.score) || 0,
+      max_score: Number(maxScore) || 0,
+      time_spent: 0,
+      conducted_on: conductedOn.toISOString()
     };
     return reqBodyParams;
   },
@@ -188,11 +208,11 @@ export default Ember.Component.extend({
    * @function validateAssessmentScore
    * Method to validate entered assessment score of a student
    */
-  validateAssessmentScore(studentSeq, score) {
+  validateAssessmentScore(score) {
     let component = this;
-    let maxScore = component.get('assessmentMaxScore');
-    let isValid = score === null || (Number(score) >= 0 && (Number(score) <= maxScore));
-    return isValid;
+    let maxScore = parseFloat(component.get('assessmentMaxScore'));
+    score = parseFloat(score);
+    return score >= 0 && score <= maxScore;
   },
 
   /**
@@ -203,7 +223,9 @@ export default Ember.Component.extend({
     let component = this;
     let performanceService = component.get('performanceService');
     return Ember.RSVP.hash({
-      studentPerformanceUpdated: Ember.RSVP.resolve(performanceService.updateCollectionOfflinePerformance(reqBodyParams))
+      studentPerformanceUpdated: Ember.RSVP.resolve(
+        performanceService.updateCollectionOfflinePerformance(reqBodyParams)
+      )
     });
   }
 });

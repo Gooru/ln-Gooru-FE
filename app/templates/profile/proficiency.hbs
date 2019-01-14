@@ -1,7 +1,16 @@
 <div class="user-proficiency">
   <div class="taxonomy-info">
+    <div class="dropdown categories">
+      <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{selectedCategory.title}}
+        <span class="caret"></span></button>
+      <ul class="dropdown-menu category-list">
+        {{#each categories as |category|}}
+          <li class="list-item category {{if (eq selectedCategory.id category.id) 'active'}}" {{action "onSelectCategory" category}}>{{category.title}}</li>
+        {{/each}}
+      </ul>
+    </div>
     <div class="dropdown subjects">
-      <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{t "common.subject"}}
+      <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{selectedSubject.title}}
         <span class="caret"></span></button>
       <ul class="dropdown-menu subject-list">
         {{#each taxonomySubjects as |subject|}}
@@ -77,8 +86,16 @@
   </div>
   <div class="panel right-panel">
     <div class="panel-header">
-      <div class="title">
-        {{t 'common.subject'}}
+      <div class="dropdown categories">
+        <div class="active-item active-categrory">
+          <div class="label ellipsis">{{selectedCategory.title}}</div>
+          <div class="icon">{{gru-icon name="arrow_drop_down"}}</div>
+        </div>
+        <div class="dropdown-content categrory-list">
+          {{#each categories as |category|}}
+            <div class="list-item categrory {{if (eq selectedCategory.id category.id) 'active'}}" {{action "onSelectCategory" category}}>{{category.title}}</div>
+          {{/each}}
+        </div>
       </div>
     </div>
     <div class="panel-body">

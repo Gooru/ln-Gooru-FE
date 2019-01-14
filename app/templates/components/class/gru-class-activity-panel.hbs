@@ -19,7 +19,7 @@
         {{/if}}
       </div>
 
-      {{#if (eq item.collectionType 'assessment-external')}}
+      {{#if (or (eq item.collectionType 'assessment-external' ) (eq item.collectionType 'collection-external'))}}
         <i class="external-icon"></i>
       {{/if}}
     </div>
@@ -28,7 +28,10 @@
         {{#if collectionPerformanceSummary}}
           {{#if (not-eq item.collectionType 'collection')}}
             <div class="dca-panel-performance" {{action 'openDcaContentReport' classActivity}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
-              <span>{{collectionPerformanceSummary.score}}%</span>
+              <span class="assessment-score">{{collectionPerformanceSummary.score}}%</span>
+              {{#if collectionPerformanceSummary.timeSpent}}
+                <span class="assessment-timespent">{{format-time collectionPerformanceSummary.timeSpent}}</span>
+              {{/if}}
             </div>
           {{else}}
             <div class="dca-panel-performance collection" {{action 'openDcaContentReport' classActivity}}>
@@ -39,7 +42,7 @@
           {{/if}}
         {{else}}
           {{#if isShowAddData}}
-            <div class="dca-panel-performance add-data" {{action "onOpenPerformanceEntry" item classActivity}}>
+            <div class="dca-panel-performance add-data {{if (eq classActivity.usersCount 0) 'disabled'}}" {{action "onOpenPerformanceEntry" item classActivity false}}>
               {{t 'common.add-data'}}
             </div>
           {{else}}
@@ -111,11 +114,13 @@
           {{/if}}
         </div>
       </div>
-      <div class="time-spent">
+      {{#if isOfflineClass}}
+      <div class="re-add-data {{if (eq classActivity.usersCount 0) 'disabled'}}">
         {{#if collectionPerformanceSummary}}
-          <span>{{format-time collectionPerformanceSummary.timeSpent}}</span>
+          <span {{action "onOpenPerformanceEntry" item classActivity true}}>{{t 'common.add-data'}}</span>
         {{/if}}
       </div>
+      {{/if}}
     </div>
   {{/unless}}
 </div>

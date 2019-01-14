@@ -142,7 +142,9 @@ export default Ember.Component.extend({
     let curDeviceVH = window.screen.height;
     let mobilePotraitVW = component.get('mobilePotraitVW');
     let domainsCoverageContainer = component.$('.domains-coverage-container');
-    let domainsPerformanceContainer = component.$('.domains-performance-container');
+    let domainsPerformanceContainer = component.$(
+      '.domains-performance-container'
+    );
     if (!component.get('isDestroyed') || component.get('isDestroying')) {
       component.set('isMobilePotraitView', curDeviceVW <= mobilePotraitVW);
     }

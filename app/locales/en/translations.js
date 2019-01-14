@@ -103,6 +103,7 @@ export default Object.assign(quizzesTranslations, {
     'add-content-prompt':
       'You haven\'t created <span>{{type}}</span> yet. Go on, be bold.',
     'add-course': 'Create New Course',
+    'add-coruse-to-class': 'Add Course',
     'add-domains-to-unit': 'Add Domains to Unit',
     'add-url': 'Add URL',
     'add-from-url': 'Add from URL',
@@ -177,6 +178,7 @@ export default Object.assign(quizzesTranslations, {
     category: 'Category',
     categoryOptions: {
       k12: 'K-12',
+      k12IN: 'K12IN',
       'higher-ed': 'Higher Education',
       'professional-dev': 'Professional Development'
     },
@@ -255,6 +257,7 @@ export default Object.assign(quizzesTranslations, {
     'download-print': 'Download/Print',
     'drag-drop-suggestions': 'Or Drag and Drop Suggestions ...',
     'download-report': 'Download Report',
+    done: 'Done',
     edit: 'Edit',
     showassessments: 'Show Assessments',
     showcollections: 'Show Collections',
@@ -879,7 +882,8 @@ export default Object.assign(quizzesTranslations, {
       'choose-course': 'Choose Course',
       'remix-from-course': 'Remix a Featured Course',
       'featured-course': 'View Featured Courses',
-      'remix-desc': 'Copy and customize a featured course for your students'
+      'remix-desc': 'Copy and customize a featured course for your students',
+      'browse-content': 'or browse our content catalogs.'
     }
   },
   classes: {
@@ -1300,13 +1304,16 @@ export default Object.assign(quizzesTranslations, {
         'welcome-dca':
           'Welcome to your  Class Activities where you can assign collections and assessments for students to complete today. Please note: any reports generated will only be available today for the most recent attempt.',
         'enter-max-timespent': 'Enter the Maximum Timespent for the Assessment',
+        'enter-max-assessment-time-spent':
+          'Enter the time spent in completing the assessment',
         'enter-max-score': 'Enter the Maximum Score for the Assessment',
         hour: 'h',
         min: 'm',
         'question-score': 'Question Score',
         'max-score': 'Max Score',
         'assessment-score': 'Assessment Score',
-        'assessment-max-score': 'Assessment Max. Score'
+        'assessment-max-score': 'Assessment Max. Score',
+        'enter-valid-timespent': 'Enter the valid time spent'
       },
       'click-to-copy': 'Click to copy class code',
       'course-map': 'Course Map',
@@ -1322,7 +1329,7 @@ export default Object.assign(quizzesTranslations, {
         'class-settings-sec': {
           'generate-pathway': 'Personalize Learning Path',
           'class-settings-sec-head': 'Class Settings',
-          'class-settings-sec-desc': 'Minimum performance to pass',
+          'class-settings-sec-desc': 'Minimum performance to earn a trophy',
           'class-code': 'Class Code',
           subject: 'Subject',
           framework: 'Framework',
@@ -1330,7 +1337,14 @@ export default Object.assign(quizzesTranslations, {
           'option-choose-one': 'Choose One',
           'co-teachers': 'Co-Teachers',
           'add-coteacher': 'Add another teacher',
-          'offline-class-label': 'This is an Offline classroom'
+          'offline-class-label': 'This is an offline classroom',
+          'offline-msg':
+            'Once marked offline, the classroom cannot be made online again.',
+          'offline-toggle-tooltip':
+            'Select Yes if you want to make this an offline classroom',
+          'offline-tooltip':
+            'Classrooms, where students do not study online on Navigator, are marked as Offline. The teacher tracks students learning offline and enters data on behalf of the students',
+          language: 'Language of instruction'
         },
         'student-settings-sec': {
           'student-settings-sec-head': 'Student Settings',
@@ -1465,6 +1479,7 @@ export default Object.assign(quizzesTranslations, {
     description:
       'You are about to end this attempt and submit all responses. Any skipped questions will be counted as incorrect.',
     cancel: 'Cancel',
+    ok: 'ok',
     confirm: 'Finish Quiz',
     'finish-description': 'Click “Finish Quiz” to submit your responses.'
   },
@@ -1943,7 +1958,10 @@ export default Object.assign(quizzesTranslations, {
       library: 'Library',
       'my-content': 'My Content',
       following: 'Following',
-      proficiency: 'Proficiency'
+      proficiency: 'Proficiency',
+      preference: {
+        preference: 'Preference'
+      }
     },
     edit: {
       'select-district': 'Select a district...'
@@ -1962,6 +1980,15 @@ export default Object.assign(quizzesTranslations, {
         'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
       'show-compressed-chart': 'Show Compressed Chart',
       'show-expanded-chart': 'Show Expanded Chart'
+    },
+    preference: {
+      'language-preference': 'Language Preference',
+      'choose-language': 'Choose language',
+      'choose-preferred-language': 'Select profile language',
+      language: 'Language',
+      'select-category-label': 'Select category to Add :',
+      'choose-category': 'Choose Category',
+      'no-data': 'No data'
     }
   },
 
@@ -2835,9 +2862,12 @@ export default Object.assign(quizzesTranslations, {
 
   'self-report': {
     'your-score': 'Your Score',
+    time_spent: 'Time Spent',
     'update-error': 'Problem with updating score',
     'validation-error': 'Enter valid score',
-    'enter-score': 'Enter your score here'
+    'enter-score': 'Enter your score here',
+    'enter-timeSpent': 'Enter your time spent here',
+    'validation-error-time': 'Enter valid time'
   },
   notifications: {
     'notificationlist-header-title': 'NOTIFICATIONS',

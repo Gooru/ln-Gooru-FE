@@ -6,7 +6,7 @@ module.exports = function(grunt) {
           return command;
         },
         options: {
-          maxBuffer: 200 * 1024 * 2
+          maxBuffer: Infinity
         }
       },
       'ember-server-stubby': 'ember serve --proxy http://localhost:8882',

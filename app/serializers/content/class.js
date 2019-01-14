@@ -111,11 +111,13 @@ export default Ember.Object.extend({
       gradeLowerBound: payload.grade_lower_bound,
       gradeCurrent: payload.grade_current,
       gradeUpperBound: payload.grade_upper_bound,
+      primaryLanguage: payload.primary_language,
       collaborators: collaborators.map(function(collaboratorId) {
         return ProfileModel.create({ id: collaboratorId });
       }),
       courseVersion: payload.course_version,
-      setting: payload.setting || null
+      setting: payload.setting || null,
+      preference: payload.preference
     });
   },
 

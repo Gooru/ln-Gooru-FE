@@ -34,11 +34,6 @@ export default buildValidations({
         min: 2,
         message: '{{description}}',
         descriptionKey: 'common.errors.sign-up-name-length'
-      }),
-      validator('format', {
-        regex: /^[a-z0-9-.']+$/i,
-        message: '{{description}}',
-        descriptionKey: 'common.errors.special-characters'
       })
     ]
   },
@@ -54,11 +49,6 @@ export default buildValidations({
         min: 2,
         message: '{{description}}',
         descriptionKey: 'common.errors.sign-up-name-length'
-      }),
-      validator('format', {
-        regex: /^[a-z0-9-.']+$/i,
-        message: '{{description}}',
-        descriptionKey: 'common.errors.special-characters'
       })
     ]
   },

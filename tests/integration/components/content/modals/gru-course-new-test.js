@@ -55,11 +55,7 @@ test('it renders', function(assert) {
   );
   assert.ok($body.find('form .gru-input.title').length, 'Course title field');
   assert.ok($body.find('form .btn-group').length, 'Category field');
-  assert.equal(
-    $body.find('form .btn-group a').length,
-    3,
-    'Number of options in the category field'
-  );
+
   /*
   // TODO: Fix test per changes in 1149
   assert.equal($body.find('form .btn-group a.selected').length, 1, 'Number of selected options in the category field');
@@ -75,9 +71,7 @@ test('it renders', function(assert) {
   assert.ok($body.find('.actions .create').length, 'Submit button');
 });
 
-test('it shows an error message if the course title field is left blank', function(
-  assert
-) {
+test('it shows an error message if the course title field is left blank', function(assert) {
   assert.expect(3);
 
   this.render(hbs`{{content/modals/gru-course-new}}`);
@@ -152,9 +146,7 @@ test('it transitions after creating a new course', function(assert) {
   });
 });
 
-test('it displays a notification if the course cannot be created', function(
-  assert
-) {
+test('it displays a notification if the course cannot be created', function(assert) {
   assert.expect(1);
 
   const context = this;
@@ -187,9 +179,7 @@ test('it displays a notification if the course cannot be created', function(
   });
 });
 
-test('Validate if the Course Title field has only whitespaces', function(
-  assert
-) {
+test('Validate if the Course Title field has only whitespaces', function(assert) {
   assert.expect(3);
 
   this.render(hbs`{{content/modals/gru-course-new}}`);
@@ -223,9 +213,7 @@ test('Validate if the Course Title field has only whitespaces', function(
   });
 });
 
-test('Validate the character limit in the Course title field', function(
-  assert
-) {
+test('Validate the character limit in the Course title field', function(assert) {
   this.render(hbs`{{content/modals/gru-course-new course=course}}`);
 
   const maxLenValue = this.$('.gru-course-new .gru-input.title input').prop(
@@ -234,9 +222,7 @@ test('Validate the character limit in the Course title field', function(
   assert.equal(maxLenValue, 50, 'Input max length');
 });
 
-test('show spinner button component while the server response, after clicking on the create button', function(
-  assert
-) {
+test('show spinner button component while the server response, after clicking on the create button', function(assert) {
   assert.expect(5);
 
   this.on('closeModal', function() {

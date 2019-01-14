@@ -243,24 +243,24 @@
           }
         }
       }
-    .performance-header-container {
-      min-height: unset;
-      .domain-details {
-        border-bottom: none;
-        .competency-count {
+      .performance-header-container {
+        min-height: unset;
+        .domain-details {
+          border-bottom: none;
+          .competency-count {
             margin-top: 7px;
-        }
-        .domain-info {
-          .back-arrow {
-            margin-top: 8px;
+          }
+          .domain-info {
+            .back-arrow {
+              margin-top: 8px;
+            }
           }
         }
-      }
-      .competency-performance-chartlist {
-        display: none;
+        .competency-performance-chartlist {
+          display: none;
+        }
       }
     }
-  }
 
     @media screen and (max-width: 320px) {
       .performance-header-container {

@@ -24,6 +24,85 @@
   .content {
     height: 100%;
 
+    .bar-charts {
+      width: 100%;
+      height: 40px;
+      position: fixed;
+      z-index: 99;
+      top: 52px;
+      left: 0;
+      background-color: $white;
+      display: inline-block;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+
+      .completion-chart {
+        display: grid;
+        cursor: pointer;
+        align-items: center;
+        height: 40px;
+        grid-template-columns: 22px 1fr 20px;
+
+        .destination-point {
+          i {
+            float: right;
+          }
+        }
+
+        .start-point {
+          i {
+            float: left;
+          }
+        }
+
+        .destination-point,
+        .start-point {
+          height: 24px;
+
+          i {
+            color: #0072bc;
+          }
+        }
+      }
+
+      .charts.gru-x-bar-chart {
+        background-color: $light-300;
+        height: 10px;
+      }
+
+      .msaddonTop {
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+        background: url("gooru/images/hover-show-up.svg");
+        background-size: 100%;
+      }
+
+      .msaddonTop:hover {
+        background: url("gooru/images/close-down.svg");
+        cursor: pointer;
+      }
+
+      .completion-chart:hover .msaddonTop {
+        background: url("gooru/images/close-down.svg");
+        cursor: pointer;
+      }
+
+      .completion-chart {
+        cursor: pointer;
+      }
+
+      &.non-clickable {
+        .gru-study-navbar {
+          pointer-events: none;
+        }
+      }
+
+      .popover {
+        color: $dark-400;
+      }
+    }
+
     .no-course-content {
       font-size: 20px;
       align-items: center;

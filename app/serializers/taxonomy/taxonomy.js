@@ -357,5 +357,20 @@ export default Ember.Object.extend({
       delete result.standard_framework_id;
     }
     return result;
+  },
+  /**
+   * Normalize the Fetch Taxonomy categories endpoint's response
+   *
+   * @param payload is the endpoint response in JSON format
+   * @returns {Subject[]} an array of Categories
+   */
+  normalizeFetchCategories: function(payload) {
+    let resultSet = Ember.A();
+    payload = Ember.A(payload.subject_classifications);
+    payload.forEach(data => {
+      let result = Ember.Object.create(data);
+      resultSet.pushObject(result);
+    });
+    return resultSet;
   }
 });

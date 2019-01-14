@@ -40,5 +40,29 @@ export default ApplicationAdapter.extend({
       }
     };
     return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * getStudentPerformanceOfAllItemsInClass for student view
+   * @returns {Promise.<[]>}
+   */
+  getStudentPerformanceOfIndepedentLearning(filterData) {
+    let { courseId, userId, startDate, limit, offset } = filterData.body;
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/learner/course/${courseId}/items/performance`;
+    const options = {
+      type: 'GET',
+      headers: adapter.get('headers'),
+      contentType: 'application/json; charset=utf-8',
+      data: {
+        userId,
+        courseId,
+        startDate,
+        limit,
+        offset
+      }
+    };
+    return Ember.$.ajax(url, options);
   }
 });
