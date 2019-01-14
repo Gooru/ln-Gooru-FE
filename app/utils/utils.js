@@ -6,7 +6,8 @@ import {
   DEFAULT_IMAGES,
   EMOTION_VALUES,
   GRADING_SCALE,
-  BARS_GRADING_SCALE
+  BARS_GRADING_SCALE,
+  MONTHS
 } from 'gooru-web/config/config';
 /**
  * Function for sorting strings alphabetically in ascending order
@@ -1035,4 +1036,13 @@ export function validateTimespent(hour, min) {
     isValidTime = isValidHour && isValidMin;
   }
   return isValidTime;
+}
+
+/**
+ * Parse month
+ * @param {int} month
+ * @returns {string} parse the given month.
+ */
+export function parseMonth(month) {
+  return MONTHS[month];
 }

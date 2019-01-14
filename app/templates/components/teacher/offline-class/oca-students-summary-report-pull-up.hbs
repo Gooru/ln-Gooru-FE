@@ -1,0 +1,57 @@
+{{#if showPullUp}}
+  <div class="backdrop" {{action 'onPullUpClose' true}}></div>
+{{/if}}
+<div class="oca-students-summary-report-container">
+  <div class="report-header">
+    <div class="header-title">
+      <i class="icon {{collection.collectionType}}"></i>
+      <span class="title">{{collection.title}}</span>
+    </div>
+    <div class="close" {{action 'onPullUpClose' false}}>
+      {{gru-icon name="close"}}
+    </div>
+  </div>
+  {{#if (or (eq collection.collectionType 'assessment') (eq collection.collectionType 'assessment-external'))}}
+    <div class="performance-activity" style="background-color:{{if collection (grade-color collection.performance.score)}}">
+      <div class="performance" style="background-color:{{if context (grade-color collection.performance.score)}}">
+        <span class="score">{{collection.performance.score}}%</span>
+        <span class="time-spent">{{format-time collection.performance.timeSpent}}</span>
+      </div>
+    </div>
+  {{else}}
+    <div class="collection-performance">
+      <div class="performance">
+        <span class="time-spent">{{format-time collection.performance.timeSpent}}</span>
+      </div>
+    </div>
+  {{/if}}
+  <div class="activity-info">
+    <div class="circle-img"></div>
+    <span class="students-count">{{students.length}} Students</span>
+    <div class="conducted-on">
+      <span class="title">Conducted On</span>
+      <span class="date">{{format-date context.activation_date 'DD MMM YY'}}</span>
+    </div>
+  </div>
+  <div class="students-report-container">
+    {{#each students as |student|}}
+      <div class="student-row-container">
+        <div class="student-info">
+          <div class="user-profile-img">
+            <img src="{{student.avatarUrl}}" />
+          </div>
+          <span class="username">{{student.name}}</span>
+        </div>
+        {{#if student.performance}}
+          {{#if (eq student.performance.type 'assessment')}}
+            <div class="score" style="background-color:{{if  student.performance (grade-color student.performance.score)}}">{{ student.performance.score}}%</div>
+          {{else}}
+            <div class="timespent">{{format-time student.performance.timeSpent}}</div>
+          {{/if}}
+        {{else}}
+          <div class="not-started">Not Started</div>
+        {{/if}}
+      </div>
+    {{/each}}
+  </div>
+</div>

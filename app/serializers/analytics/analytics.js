@@ -216,5 +216,37 @@ export default Ember.Object.extend({
       });
     }
     return normalizedClassPerformanceSummary;
+  },
+
+  /**
+   * @function normalizeDCAPerformanceSummary
+   * Normalize method for performance summary of DCA
+   */
+  normalizeDCAPerformanceSummary(payload) {
+    let normalizedDCAPerformanceSummary = Ember.Object.create({
+      performance: payload.usageData[0]
+    });
+    return normalizedDCAPerformanceSummary;
+  },
+
+  /**
+   * @function normalizeDCASummary
+   * Normalize method for summary report of DCA for yearly
+   */
+  normalizeDCAYearlySummary(payload) {
+    let normalizedDCAYearlySummary = Ember.A([]);
+    if (payload) {
+      let dcaSummary = payload.usageData;
+      dcaSummary.map(data => {
+        let summary = Ember.Object.create({
+          scoreInPercentage: data.scoreInPercentage,
+          timeSpent: data.timeSpent,
+          month: data.month,
+          year: data.year
+        });
+        normalizedDCAYearlySummary.push(summary);
+      });
+    }
+    return normalizedDCAYearlySummary;
   }
 });

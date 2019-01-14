@@ -58,6 +58,7 @@ export default Ember.Controller.extend({
       controller.set('isShowUnitReportPullUp', false);
       controller.set('isShowLessonReportPullUp', false);
       controller.set('isShowCollectionReportPullUp', false);
+      controller.set('isShowOCASummaryReportPullUp', false);
     },
 
     /**
@@ -101,6 +102,11 @@ export default Ember.Controller.extend({
       controller.set('selectedCompetency', competency);
       controller.set('selectedStudentUserId', userId);
       controller.set('isShowCompetencyContentReport', true);
+    },
+
+    onOpenOCAReport() {
+      let controller = this;
+      controller.set('isShowOCASummaryReportPullUp', true);
     }
   },
 
@@ -166,6 +172,16 @@ export default Ember.Controller.extend({
   isShowStudentReport: false,
 
   isShowCollectionReportPullUp: false,
+
+  /**
+   * @property {boolean} Indicates to show DCA summary report for offline class
+   */
+  isShowOCASummaryReportPullUp: false,
+
+  /**
+   * @property {boolean} Indicates if class is offline or not
+   */
+  isOfflineClass: false,
 
   // -------------------------------------------------------------------------
   // Methods

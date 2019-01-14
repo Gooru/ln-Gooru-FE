@@ -1,0 +1,32 @@
+{{#if showPullUp}}
+  <div class="backdrop" {{action 'onPullUpClose'}}></div>
+{{/if}}
+<div class="oca-report-container">
+  <div class="report-header">
+    <div class="title"><span>Class Report</span></div>
+    <div class="close" {{action 'onPullUpClose'}}>
+      {{gru-icon name="close"}}
+    </div>
+  </div>
+  <div class="performance-summary" style="background-color:{{if performanceSummary (grade-color performanceSummary.performance.scoreInPercentage)}}">
+    <div class="performance" style="background-color:{{if performanceSummary (grade-color performanceSummary.performance.scoreInPercentage)}}">
+      <span class="score">{{performanceSummary.performance.scoreInPercentage}}%</span>
+      <span class="time-spent">{{format-time timeSpent}}</span>
+    </div>
+  </div>
+  <div class="report-summary-container">
+    {{#each reportData as |summary|}}
+      <div class="summary-row-container" {{action 'onSelectMonth' summary}}>
+        <div class="summary-info">
+          <span class="time-spent">{{ format-time summary.timeSpent}}</span>
+          <span class="period">{{format-month summary.month}} {{summary.year}}</span>
+        </div>
+        <div class="performance" style="background-color:{{if summary (grade-color summary.scoreInPercentage)}}">{{summary.scoreInPercentage}}%</div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+{{#if isShowOCAMonthReportPullUp}}
+  {{teacher.offline-class.oca-month-report-pull-up classId=classId context=selectedMonthSummary onClosePullUp="closePullUp"}}
+{{/if}}

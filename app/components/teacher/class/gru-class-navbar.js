@@ -29,6 +29,57 @@ export default Ember.Component.extend(ConfigurationMixin, {
     let feature = 'notifications';
     return GRU_FEATURE_FLAG[feature];
   }),
+
+  // -------------------------------------------------------------------------
+  // Properties
+  /**
+   * @property {Class} class
+   */
+  class: null,
+
+  /**
+   * @property {String|Function} onItemSelected - event handler for when an menu item is selected
+   */
+  onItemSelected: null,
+
+  /**
+   * @property {String} selectedMenuItem - menu Item selected
+   */
+  selectedMenuItem: null,
+
+  /**
+   * @property {boolean|Function} onCollapseExpandClicked - event handler for when the toggle button is clicked
+   */
+  onCollapseExpandClicked: null,
+
+  /**
+   * @property {boolean} toggleState - indicates the toggle button state, false means open, true means closed
+   */
+  toggleState: false,
+
+  navTitle: null,
+
+  /**
+   * @property {Boolean}
+   * Computed property  to identify class is started or not
+   */
+  hasStarted: Ember.computed('class.performanceSummary', function() {
+    const scorePercentage = this.get('class.performanceSummary.score');
+    return scorePercentage !== null && scorePercentage >= 0;
+  }),
+
+  /**
+   * @property {Object}
+   * property  performanceSummaryForDCA
+   */
+  performanceSummaryForDCA: null,
+
+  /**
+   * @property {Boolean}
+   * property  to identify class is offline or not
+   */
+  isOfflineClass: false,
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -44,6 +95,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
       } else {
         component.sendAction('onOpenCourseReport');
       }
+    },
+
+    onOpenOCAReport() {
+      let component = this;
+      component.sendAction('onOpenOCAReport');
     },
 
     /**
@@ -84,7 +140,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   didInsertElement: function() {
     this._super(...arguments);
-
     const { getOwner } = Ember;
     let currentPath = getOwner(this).lookup('controller:application')
       .currentPath;
@@ -108,44 +163,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
     this.set('selectedMenuItem', null);
     Ember.$('header.gru-header').show();
   },
-
-  // -------------------------------------------------------------------------
-  // Properties
-  /**
-   * @property {Class} class
-   */
-  class: null,
-
-  /**
-   * @property {String|Function} onItemSelected - event handler for when an menu item is selected
-   */
-  onItemSelected: null,
-
-  /**
-   * @property {String} selectedMenuItem - menu Item selected
-   */
-  selectedMenuItem: null,
-
-  /**
-   * @property {boolean|Function} onCollapseExpandClicked - event handler for when the toggle button is clicked
-   */
-  onCollapseExpandClicked: null,
-
-  /**
-   * @property {boolean} toggleState - indicates the toggle button state, false means open, true means closed
-   */
-  toggleState: false,
-
-  navTitle: null,
-
-  /**
-   * @property {Boolean}
-   * Computed property  to identify class is started or not
-   */
-  hasStarted: Ember.computed('class.performanceSummary', function() {
-    const scorePercentage = this.get('class.performanceSummary.score');
-    return scorePercentage !== null && scorePercentage >= 0;
-  }),
 
   // -------------------------------------------------------------------------
   // Observers
