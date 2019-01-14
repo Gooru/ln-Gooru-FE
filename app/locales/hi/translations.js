@@ -115,7 +115,7 @@ export default Object.assign(quizzesTranslations, {
     'add-standards-to-collection': 'संकलन में मानकों को जोड़ें',
     'add-to': 'में जोड़े',
     'add-to-classroom': 'कक्षा में जोड़ें',
-    'add-to-daily-class': 'दैनिक कक्षा की गतिविधियों में जोड़ें',
+    'add-to-daily-class': 'कक्षा की गतिविधियों में जोड़ें',
     'add-to-collection-success':
       'आपने {{contenttitle}} को {{collectiontitle}} में जोड़ा है। क्या आप उस {{collectiontype}} को संपादित करना चाहते हैं?',
     'add-to-lesson-success':
@@ -200,11 +200,11 @@ export default Object.assign(quizzesTranslations, {
     community: 'समुदाय',
     confirm: 'पुष्टि करें',
     'confirm-copy': 'पुष्टि करें और प्रतिलिपि बनाएँ',
-    content: 'सामग्री',
-    'content-manager': 'सामग्री प्रबंधक',
-    contentUnavailable: 'सामग्री उपलब्ध नहीं',
+    content: 'विषय-वस्तु',
+    'content-manager': 'विषय-वस्तु प्रबंधक',
+    contentUnavailable: 'विषय-वस्तु उपलब्ध नहीं',
     contentUnavailabletoday:
-      'कोई मौजूदा गतिविधियां नहीं। पाठ्यक्रम मानचित्र या मेरी सामग्री से दैनिक कक्षा की गतिविधियों को जोड़ें।',
+      'कोई मौजूदा गतिविधियां नहीं। पाठ्यक्रम मानचित्र या मेरा विषयवस्तु से दैनिक कक्षा की गतिविधियों को जोड़ें।',
     contentUnavailableyesterday: 'कोई गतिविधि नहीं जोड़ी गई थी।',
     'contributed-by': 'योगदान कर्ता',
     copy: 'प्रतिलिपि',
@@ -242,7 +242,7 @@ export default Object.assign(quizzesTranslations, {
     'delete-instructions': {
       'links-inaccessible': 'सभी शेयर लिंक अगम्य होंगे',
       'content-inaccessible':
-        'सभी सामग्री इसके साथ जुड़े हुए कक्षा खण्डों  के लिए दुर्गम होगी'
+        'सभी विषयवस्तु इसके साथ जुड़े हुए कक्षा खण्डों  के लिए दुर्गम होगी'
     },
     'depth-of-knowledge': 'ज्ञान की गहराई',
     description: 'विवरण',
@@ -471,7 +471,7 @@ export default Object.assign(quizzesTranslations, {
     next: 'आगामी',
     no: 'नहीं',
     'no-archived': 'आपके पास कोई संकलित कक्षा नहीं है।',
-    'no-content': 'कोई सामग्री उपलब्ध नहीं है',
+    'no-content': 'कोई विषयवस्तु उपलब्ध नहीं है',
     'no-content-my-report':
       'अभी तक कोई रिपोर्ट उपलब्ध नहीं है। एक बार अध्ययन शुरू करने के बाद, आपकी रिपोर्ट उपलब्ध हो जाएगी।',
     'no-assessments-to-display':
@@ -817,8 +817,8 @@ export default Object.assign(quizzesTranslations, {
     overview: {
       title: 'पाठ्यक्रम मानचित्र',
       locate: 'मेरा ठिकाना ढूंढें ',
-      'edit-content': 'सामग्री संपादित करें',
-      'add-to-daily-class-activities': 'दैनिक कक्षा की गतिविधियों में जोड़ें',
+      'edit-content': 'विषयवस्तु संपादित करें',
+      'add-to-daily-class-activities': 'कक्षा की गतिविधियों में जोड़ें',
       'assigned-course': 'आपका निर्धारित पाठ्यक्रम',
       'pre-study-title': 'अपने पाठ्यक्रम के लिए पूर्व-अध्ययन',
       'course-map': {
@@ -855,7 +855,7 @@ export default Object.assign(quizzesTranslations, {
           }
         },
         'grade-items': 'वर्ग के लिए आइटम',
-        'no-grade-items': 'ऐसा लगता है कि आप सभी पकड़े गए हैं!',
+        'no-grade-items': 'लगता हैं आपने काम पूरा कर लिया!',
         'gru-grade-items': {
           students: {
             zero: '{{गिनती}} छात्र',
@@ -884,7 +884,7 @@ export default Object.assign(quizzesTranslations, {
       'featured-course': 'चुनिंदा पाठ्यक्रम देखें',
       'remix-desc':
         'अपने छात्रों के लिए एक विशेष पाठ्यक्रम की प्रतिलिपि बनाएं और अनुकूलित करें',
-      'browse-content': 'या हमारी सामग्री कैटलॉग ब्राउज़ करें।'
+      'browse-content': 'या हमारी विषयवस्तु कैटलॉग ब्राउज़ करें।'
     }
   },
   classes: {
@@ -903,7 +903,7 @@ export default Object.assign(quizzesTranslations, {
     classes: {
       create: {
         title: 'कक्षा बनाएं',
-        content: 'जहां छात्र सामग्री के साथ व्यस्त रहते हैं।',
+        content: 'जहां छात्र विषयवस्तु के साथ व्यस्त रहते हैं।',
         'class-name-input': 'अपनी कक्षा को एक नाम दें',
         'condition-prompt': 'छात्र आपकी कक्षा में कैसे शामिल होंगे?',
         'condition-prompt-code': 'कक्षा कोड के साथ कोई भी व्यक्ति',
@@ -1038,7 +1038,7 @@ export default Object.assign(quizzesTranslations, {
         'content-legend':
           '<span> {{type}} </span> {{index}} - {{titlename}} से {{title}}',
         'content-legend-header': '{{titlename}} से {{title}}',
-        'delete-warning': 'इस {{type}} में सभी सामग्री हटा दी जाएगी',
+        'delete-warning': 'इस {{type}} में सभी विषयवस्तु हटा दी जाएगी',
         'delete-error':
           'उफ़! अभी {{type}} को हटाने में असमर्थ। कृपया जल्द ही पुनः प्रयास करें।',
         confirmation:
@@ -1305,7 +1305,7 @@ export default Object.assign(quizzesTranslations, {
         yesterday: 'बीता कल:',
         month: 'महीना:',
         'add-from-course-map': 'पाठ्यक्रम मानचित्र से जोड़ें',
-        'add-from-my-content': 'मेरी सामग्री से जोड़ें',
+        'add-from-my-content': 'मेरा विषयवस्तु से जोड़ें',
         'welcome-dca':
           'अपनी कक्षा की दैनिक गतिविधियों में आपका स्वागत है जहां आप छात्रों को आज पूरा करने के लिए संकलन और मूल्यांकन का निरूपण कर सकते हैं। कृपया ध्यान दें: उत्पन्न की गई कोई भी रिपोर्ट आज के सबसे हालिया प्रयास के लिए उपलब्ध होगी।',
         'enter-max-timespent': 'मूल्यांकन के लिए अधिकतम समय दर्ज करें',
@@ -1456,7 +1456,7 @@ export default Object.assign(quizzesTranslations, {
     lead: 'इस प्रश्न में जोड़ने के लिए एक सुर्खी का चयन करें।',
     'no-rubrics':
       'आपने अभी तक कोई भी सुर्खी नहीं बनाई है जिसे इस मुफ्त प्रतिक्रिया प्रश्न से जोड़ा जा सके। आप मेरी सामग्री के तहत सुर्खी बना सकते हैं जिसे आपकी प्रोफ़ाइल से एक्सेस किया जा सकता है।',
-    'go-to-content': 'मेरी सामग्री पर जाएं'
+    'go-to-content': 'मेरा विषयवस्तु पर जाएं'
   },
   'gru-assessment-confirmation': {
     title: 'आप एक मूल्यांकन शुरू करने वाले हैं...',
@@ -1941,11 +1941,11 @@ export default Object.assign(quizzesTranslations, {
   profile: {
     'gru-navigation': {
       about: 'के बारे में',
-      'about-me': 'मेरे बारे में',
-      content: 'सामग्री',
+      'about-me': 'मेरा परिचय',
+      content: 'विषयवस्तु',
       followers: 'अनुसरण करने वालों',
       library: 'पुस्तकालय',
-      'my-content': 'मेरी सामग्री',
+      'my-content': 'मेरा विषयवस्तु',
       following: 'निम्नलिखित',
       proficiency: 'प्रवीणता',
       preference: {
@@ -2005,7 +2005,7 @@ export default Object.assign(quizzesTranslations, {
     'not-started': 'अभी तक शुरू नहीं हुआ'
   },
   'gru-performance': {
-    'no-content': 'कोई सामग्री उपलब्ध नहीं है'
+    'no-content': 'कोई विषयवस्तु उपलब्ध नहीं है'
   },
   'gru-performance-metrics': {
     assessment: 'मूल्यांकन',
@@ -2256,7 +2256,7 @@ export default Object.assign(quizzesTranslations, {
   'gru-icon-popover': {
     'settings-visibility-title': 'अपनी सामग्री को दृश्यमान बनाएं',
     'settings-visibility-content':
-      'यह सेटिंग आपकी सामग्री को आपकी उपयोगकर्ता प्रोफ़ाइल के माध्यम से दृश्यमान बनाती है। यदि आप सहकर्मियों के साथ बनाए गए पाठ्यक्रम, संकलन, मूल्यांकन, संसाधन, और/या प्रश्न साझा करना चाहते हैं, तो हमारा सुझाव है कि आप इस सुविधा को चालू करें।'
+      'यह सेटिंग आपकी विषयवस्तु को आपकी उपयोगकर्ता प्रोफ़ाइल के माध्यम से दृश्यमान बनाती है। यदि आप सहकर्मियों के साथ बनाए गए पाठ्यक्रम, संकलन, मूल्यांकन, संसाधन, और/या प्रश्न साझा करना चाहते हैं, तो हमारा सुझाव है कि आप इस सुविधा को चालू करें।'
   },
   'gru-take-tour': {
     text: 'दौरा',
@@ -2675,7 +2675,7 @@ export default Object.assign(quizzesTranslations, {
     content: {
       groups: {
         cognitive: 'महत्वपूर्ण संज्ञानात्मक कौशल और रणनीतियों',
-        content: 'मुख्य सामग्री ज्ञान',
+        content: 'मुख्य विषयवस्तु ज्ञान',
         learning: 'मुख्य सीखने के कौशल और तकनीकें'
       }
     }
