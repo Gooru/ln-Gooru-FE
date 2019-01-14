@@ -16,7 +16,9 @@
     <div class="bar-charts bottom-perf-line" data-content="{{performancePercentage}}% Completed">
       {{#if barChartData}}
         <div class="completion-chart">
+          <div class="start-point">{{gru-icon name="stars"}}</div>
           {{charts/gru-x-bar-chart data=barChartData mileStone=mileStone mileStoneHandler=(action 'mileStoneHandler')}}
+          <div class="destination-point">{{gru-icon name="place"}}</div>
         </div>
       {{/if}}
     </div>

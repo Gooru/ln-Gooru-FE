@@ -14,9 +14,9 @@
     <div class="btn-group">
       {{#each categories as |category index| }}
         <a href="#"
-           class="btn {{set-if-equal 'selected' category.value course.category}}"
-           data-value="{{category.value}}"
-          {{action 'selectCategory' category.value}}>{{t category.label}}</a>
+           class="btn {{set-if-equal 'selected' category.code course.category}}"
+           data-value="{{category.code}}"
+          {{action 'selectCategory' category.code}}>{{category.title}}</a>
       {{/each}}
     </div>
 

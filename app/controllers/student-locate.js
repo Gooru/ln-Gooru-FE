@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { getBarGradeColor } from 'gooru-web/utils/utils';
+import { ANONYMOUS_COLOR } from 'gooru-web/config/config';
 
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
@@ -32,14 +32,12 @@ export default Ember.Controller.extend({
   }),
 
   barChartData: Ember.computed('class', function() {
-    let score = this.get('class.performanceSummary.score');
-    let scoreColor = getBarGradeColor(score);
     const completed = this.get('class.performanceSummary.totalCompleted');
     const total = this.get('class.performanceSummary.total');
     const percentage = completed ? (completed / total) * 100 : 0;
     return [
       {
-        color: scoreColor,
+        color: ANONYMOUS_COLOR,
         percentage
       }
     ];

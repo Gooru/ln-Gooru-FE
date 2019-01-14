@@ -42,7 +42,7 @@
           {{/if}}
         {{else}}
           {{#if isShowAddData}}
-            <div class="dca-panel-performance add-data {{if (lt classActivity.usersCount 1) ''}}" {{action "onOpenPerformanceEntry" item classActivity false}}>
+            <div class="dca-panel-performance add-data {{if (eq classActivity.usersCount 0) 'disabled'}}" {{action "onOpenPerformanceEntry" item classActivity false}}>
               {{t 'common.add-data'}}
             </div>
           {{else}}
@@ -114,11 +114,13 @@
           {{/if}}
         </div>
       </div>
+      {{#if isOfflineClass}}
       <div class="re-add-data {{if (eq classActivity.usersCount 0) 'disabled'}}">
         {{#if collectionPerformanceSummary}}
           <span {{action "onOpenPerformanceEntry" item classActivity true}}>{{t 'common.add-data'}}</span>
         {{/if}}
       </div>
+      {{/if}}
     </div>
   {{/unless}}
 </div>
