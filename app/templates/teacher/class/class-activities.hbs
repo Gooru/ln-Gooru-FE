@@ -28,7 +28,9 @@
               <p>{{t 'common.add-an-activity'}}</p>
               <i class="collection-icon" {{action 'onAddDca' 'collection'}}></i>
               <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
-              <div class="create-offline-activity" {{action "onClickCreateOfflineActivity"}}>{{gru-icon name="add"}}</div>
+              {{#if isOfflineClass}}
+                <span class="create-offline-activity" {{action "onClickCreateOfflineActivity"}}>{{gru-icon name="add"}}</span>
+              {{/if}}
             </div>
           </div>
         </div>
@@ -166,6 +168,5 @@
 
 
 {{#if isShowCreateOfflineActivity}}
-check
-  {{activity.gru-new-offline-activity isShowPullUp=isShowCreateOfflineActivity classPreference=classPreference}}
+  {{activity.gru-new-offline-activity isShowPullUp=isShowCreateOfflineActivity classPreference=classPreference classId=classId addedContentToDCA="addedContentToDCA"}}
 {{/if}}

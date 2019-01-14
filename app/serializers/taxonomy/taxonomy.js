@@ -357,5 +357,21 @@ export default Ember.Object.extend({
       delete result.standard_framework_id;
     }
     return result;
+  },
+
+  serializeTaxonomyForExternalCollection(taxonomies) {
+    let serializedTaxonomy = {};
+    if (Ember.isArray(taxonomies)) {
+      taxonomies.map( taxonomy => {
+        serializedTaxonomy[taxonomy.id] = {
+          code: taxonomy.code || null,
+          title: taxonomy.title || null,
+          framework_code: taxonomy.frameworkCode || null,
+          description: taxonomy.description || null,
+          parent_title: taxonomy.parentTitle || null
+        };
+      });
+    }
+    return serializedTaxonomy;
   }
 });

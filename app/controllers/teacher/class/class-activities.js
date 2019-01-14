@@ -653,11 +653,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     }
   ),
 
+  /**
+   * @property {Json} classPreference
+   */
   classPreference: Ember.computed('class', function() {
     let controller = this;
     let classData = controller.get('class');
     let classPreference = classData.preference ? classData.preference : null;
-    console.log('classPreference', classPreference);
     return classPreference;
   }),
 

@@ -8,13 +8,44 @@
       margin: 5px;
     }
   }
+
   .taxonomy-hierarchy-container {
     display: flex;
     .hierarchy-level {
-      width: 200px;
-      min-height: 300px;
-      max-height: 300px;
-      overflow-y: auto;
+      .hierarchy-title-container {
+        padding-left: 6px;
+      }
+      width: 50%;
+      .title-card {
+        color: $dark-300;
+        padding: 5px;
+        cursor: pointer;
+        line-height: 15px;
+        &:hover, &.active-card {
+          background-color: $dark-300;
+          color: $white;
+        }
+      }
+      .cards-container {
+        border: 1px solid $dark-300;
+        min-height: 300px;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+
+      &.taxonomies-container {
+        .hierarchy-title-container {
+          position: relative;
+          .submit-selected {
+            position: absolute;
+            right: 0;
+            cursor: pointer;
+            i {
+              font-size: 17px;
+            }
+          }
+        }
+      }
     }
   }
 }

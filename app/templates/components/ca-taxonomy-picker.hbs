@@ -1,5 +1,4 @@
 <div class="taxonomy-picker-container">
-  {{categoryPreference}}
   <div class="subjects-container" style="display: none;">
     {{#each taxonomySubjects as |subject subjectSeq|}}
       <div class="subject-container" {{action "onExpandSubject" subject subjectSeq}}>
@@ -15,21 +14,31 @@
       </div>
     {{/each}}
   </div>
+
   <div class="taxonomy-hierarchy-container">
     <div class="courses-container hierarchy-level">
-      {{#each taxonomyCourses as |course|}}
-        <div class="course-container" {{action "onSelectItem" course 'course'}}>{{course.title}}</div>
-      {{/each}}
+      <div class="hierarchy-title-container">{{t 'common.courses'}}</div>
+      <div class="cards-container">
+        {{#each taxonomyCourses as |course|}}
+          <div class="course-container title-card {{if (eq course.id activeCourse.id) 'active-card'}}" {{action "onSelectItem" course 'course'}}>{{course.title}}</div>
+        {{/each}}
+      </div>
     </div>
     <div class="domains-container hierarchy-level" style="display: none;">
-      {{#each taxonomyDomains as |domain|}}
-        <div class="domain-container" {{action "onSelectItem" domain 'domain'}}>{{domain.title}}</div>
-      {{/each}}
+      <div class="hierarchy-title-container">{{t 'common.domains'}}</div>
+      <div class="cards-container">
+        {{#each taxonomyDomains as |domain|}}
+          <div class="domain-container title-card {{if (eq domain.id activeDomain.id) 'active-card'}}" {{action "onSelectItem" domain 'domain'}}>{{domain.title}}</div>
+        {{/each}}
+      </div>
     </div>
     <div class="taxonomies-container hierarchy-level" style="display: none;">
-      {{#each taxonomies as |taxonomy|}}
-        <div class="taxonomy-container" {{action "onSelectItem" taxonomy 'taxonomy'}}>{{taxonomy.code}}</div>
-      {{/each}}
+      <div class="hierarchy-title-container">{{t 'common.competencies'}} <span class="submit-selected" {{action "onSubmitCompetencies"}}>{{gru-icon name="done_all"}}</span></div>
+      <div class="cards-container">
+        {{#each taxonomies as |taxonomy taxonomySeq|}}
+          <div class="taxonomy-container title-card taxonomy-card-{{taxonomySeq}}" {{action "onSelectItem" taxonomy 'taxonomy' taxonomySeq}}>{{taxonomy.id}}</div>
+        {{/each}}
+      </div>
     </div>
   </div>
 </div>

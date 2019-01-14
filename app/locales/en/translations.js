@@ -1312,7 +1312,10 @@ export default Object.assign(quizzesTranslations, {
         'max-score': 'Max Score',
         'assessment-score': 'Assessment Score',
         'assessment-max-score': 'Assessment Max. Score',
-        'enter-valid-timespent': 'Enter the valid time spent'
+        'enter-valid-timespent': 'Enter the valid time spent',
+        'create-activity': 'Create Activity',
+        'schedule-activity': 'Schedule Activity',
+        'add-subject-framework': 'Please Select a Subject and Framework at Class Settings'
       },
       'click-to-copy': 'Click to copy class code',
       'course-map': 'Course Map',

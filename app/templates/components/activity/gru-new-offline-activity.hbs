@@ -1,29 +1,44 @@
+<div class="overlay"></div>
 <div class="create-activity-container">
   <div class="header-container">
-    Create Activity
+    <span class="back-icon" {{action "onCloseCreateActivity"}}>{{gru-icon name="keyboard_backspace"}}</span>
+    {{t 'teacher-landing.class.class-activities-tab.create-activity'}}
   </div>
   <div class="body-container">
+    {{#if isClassPreferenceMapped}}
     <div class="title-container">
-      <span>Title</span>
-      {{input type="text" value=activityTitle class="activity-title"}}
+      <div class="label-container">Title <span class="required">*</span></div>
+      <div class="input-container">{{input type="text" value=activityTitle class="activity-title"}}</div>
     </div>
     <div class="description-container">
-      <span>Description</span>
-      {{textarea value=activityDescription class="activity-description"}}
+      <div class="label-container">Description</div>
+      <div class="input-container">{{textarea value=activityDescription class="activity-description" id="description-editor"}}</div>
     </div>
-    <div class="competency-container">
-      {{#if isShowTaxonomyPicker}}
-        {{ca-taxonomy-picker classPreference=classPreference}}
-      {{else}}
-        Please select subject and framework
-      {{/if}}
-    </div>
-    <div class="audience-container">
-      {{#each audiences as |audience|}}
-        <span>{{audience.name}}</span>
-      {{/each}}
+      <div class="competency-container">
+        <div class="label-container">{{t 'common.competency'}}</div>
+        <div class="active-taxonomies-container">
+          {{#each visibleCompetencies as |competency|}}
+            <div class="active-taxonomy ellipsis"><span>{{competency.id}}</span> <span {{action "onRemoveCompetency" competency}}>{{gru-icon name="clear"}}</span></div>
+          {{/each}}
+          <div class="add-competency" {{action "onToggleTaxonomyPicker" 'show'}}>{{t 'common.add'}}</div>
+        </div>
+        <div class="taxonomy-picker-container" style="display: none;">
+          {{#if isShowTaxonomyPicker}}
+            {{ca-taxonomy-picker classPreference=classPreference onSelectCompetency="onSelectCompetency" onSubmitCompetencies="onToggleTaxonomyPicker"}}
+          {{/if}}
+        </div>
+      </div>
+
+    <div class="audience-list-container">
+      <div class="label-container">{{t 'common.audience'}}</div>
+      <div class="audience-container">
+        {{#each audiences as |audience|}}
+          <div class="audience-card ellipsis {{if audience.active 'active-card'}}" {{action "onSelectAudience" audience}}><span>{{audience.name}}</span></div>
+        {{/each}}
+      </div>
     </div>
       <div class="scheduler-container">
+        <div class="label-container">{{t 'teacher-landing.class.class-activities-tab.schedule-activity'}}</div>
         {{ca-date-picker
           showToday=true
           forMonth=forMonth
@@ -31,10 +46,21 @@
           forYear=forYear
           onSelectDate="onSelectDate"
           onSelectToday="onSelectDate"
-          activities=scheduledClassActivitiesDatewise
-          highlightActivities=false
         }}
       </div>
-    <div class="unschedule-list-container"></div>
+    <div class="unschedule-list-container">
+      <div class="label-container">{{t 'common.add-to-unschedule'}}</div>
+      <div class="unschedule-months-container">
+        {{#each months as |month|}}
+          <span class="{{if month.isPast 'past-month'}} month-card {{if (eq unscheduledMonth month) 'active-card'}}" {{action 'onSelectMonth' month }}>{{month.monthName}}</span>
+        {{/each}}
+      </div>
+    </div>
+    {{else}}
+      <div class="error-message">{{t 'teacher-landing.class.class-activities-tab.add-subject-framework'}}</div>
+    {{/if}}
+  </div>
+  <div class="footer-container">
+    <div class="create-activity {{unless isEnableCreateActivity 'disabled'}}" {{action "onCreateActivity"}}>{{t 'teacher-landing.class.class-activities-tab.create-activity'}}</div>
   </div>
 </div>

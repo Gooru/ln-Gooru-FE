@@ -190,9 +190,23 @@ export default Ember.Object.extend(ConfigurationMixin, {
     };
   },
 
+  /**
+   * @function serializeCreateExternalCollection
+   * Method to serialize external collection data
+   */
   serializeCreateExternalCollection(collectionData) {
-    return {
-
+    const serializer = this;
+    const taxonomySerializer = serializer.get('taxonomySerializer');
+    let serializedExternalCollectionData = {
+      title: collectionData.title,
+      metadata: {
+        audience: collectionData.audience
+      },
+      taxonomy: taxonomySerializer.serializeTaxonomyForExternalCollection(collectionData.taxonomy),
+      learning_objective: collectionData.description,
+      login_required: true,
+      url: collectionData.url
     };
+    return serializedExternalCollectionData;
   }
 });
