@@ -103,8 +103,8 @@ export default Ember.Controller.extend({
       this.changeMode();
     },
 
-    updateMarkedSelectionsAsAdded() {
-      this.updateMarkedSelectionsAsAdded();
+    updateMarkedSelectionsAsAdded(fwk, subjects, category) {
+      this.updateMarkedSelectionsAsAdded(fwk, subjects, category);
     },
 
     removeSubject(category, subject) {
@@ -221,13 +221,12 @@ export default Ember.Controller.extend({
   },
 
   markSelectedSubject(subject, category) {
-    const controller = this;
-    controller.set('currentSelectedCategory', category);
-    controller.set('currentSelectedSubject', subject);
+    /* const controller = this; */
+    Ember.set(category, 'currentSelectedSubject', subject);
   },
 
-  markSelectedFrameworks(fwk) {
-    this.set('currentSelectedFwk', fwk);
+  markSelectedFrameworks(fwk, subjects, category) {
+    Ember.set(category.currentSelectedSubject, 'currentSelectedFwk', fwk);
   },
 
   setSelectedSubjectFrameworks(fwk, subject, category) {
@@ -240,6 +239,10 @@ export default Ember.Controller.extend({
     subjectEntry[subject.code] = fwk.frameworkId;
     let addedCategories = controller.get('addedCategories');
     let found = addedCategories.findBy('id', category.id);
+    if (found) {
+      Ember.set(found, 'currentSelectedSubject', null);
+      //found.currentSelectedSubject = null;
+    }
     if (found.subjects) {
       if (found.subjects[subject.code]) {
         found.subjects.remove(subject.code);
@@ -288,20 +291,25 @@ export default Ember.Controller.extend({
 
   updateMarkedSelectionsAsAdded(fwk, subject, category) {
     const controller = this;
-    if (!subject) {
-      subject = controller.get('currentSelectedSubject');
-    }
+
     if (!category) {
       category = controller.get('currentSelectedCategory');
     }
-
+    if (!subject) {
+      subject =
+        category.currentSelectedSubject ||
+        category.get('currentSelectedSubject');
+    }
     if (!fwk) {
-      fwk = controller.get('currentSelectedFwk');
+      fwk = subject.currentSelectedFwk || subject.get('currentSelectedFwk');
     }
 
     if (subject && category && fwk) {
+      Ember.set(category, 'currentSelectedSubject', null);
+      //category.currentSelectedSubject = null;
       controller.setSelectedSubjectFrameworks(fwk, subject, category);
       controller.updateAddedCategories(category, subject, 'removeSub'); //here a
+
       controller.set('currentSelectedSubject', null);
       controller.set('currentSelectedCategory', null);
       controller.set('currentSelectedFwk', null);

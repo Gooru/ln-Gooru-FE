@@ -117,9 +117,9 @@
                                         <div class='sub'>
                                             <div class="dropdown">
                                                 <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                    {{#if currentSelectedSubject}}
+                                                    {{#if category.currentSelectedSubject}}
                                                         <div class="button-text sub">
-                                                            {{ currentSelectedSubject.title}}
+                                                            {{ category.currentSelectedSubject.title}}
                                                         </div>
                                                     {{else}}
                                                         {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
@@ -141,15 +141,16 @@
                                         <div class='fwk'>
                                             <div class="dropdown">
                                                 <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                    {{#if currentSelectedFwk}}
-                                                        {{ currentSelectedFwk.frameworkId}}
+                                                    {{log category}}
+                                                    {{#if category.currentSelectedSubject.currentSelectedFwk}}
+                                                        {{ category.currentSelectedSubject.currentSelectedFwk.frameworkId}}
                                                     {{else}}
                                                         {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
                                                     {{/if}}
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    {{#each currentSelectedSubject.frameworks as |fwk |}}
+                                                    {{#each category.currentSelectedSubject.frameworks as |fwk |}}
                                                         <li> <a data-item={{fwk}} {{ action 'markSelectedFrameworks' fwk subjects category  }}>{{fwk.frameworkId}}
                                                             </a> </li>
                                                     {{else}}
@@ -159,7 +160,8 @@
                                             </div>
                                         </div>
                                         {{!-- fwk drop down ends --}}
-                                        <div class="addSubjectFWK" {{action 'updateMarkedSelectionsAsAdded' }}>
+                                        {{log category}}
+                                        <div class="addSubjectFWK" {{action 'updateMarkedSelectionsAsAdded' fwk subjects category }}>
                                             {{gru-icon name='add'}}
                                         </div>
                                         {{!-- subject Dropdown with plus icon --}}
