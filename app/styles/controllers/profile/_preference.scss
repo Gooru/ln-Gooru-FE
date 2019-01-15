@@ -2,6 +2,13 @@
   .category-title {
     width: 300px !important;
   }
+  .display-language-pref-row {
+    display: flex;
+    justify-content: end;
+    .display-language-pref-label {
+      width: 350px;
+    }
+  }
 }
 .profile-preference {
   font-size: 14px;
