@@ -339,6 +339,7 @@ export default Ember.Controller.extend({
     if (addedCategories) {
       addedCategories = addedCategories.filter(c => {
         if (c.subjects) {
+          //let catSubjects = c.subjects.map;
           c.subjects.map(s => {
             controller.markSelectedFrameworksParsed(
               Object.values(s),
@@ -407,7 +408,9 @@ export default Ember.Controller.extend({
 
     const controller = this;
     let selections = controller.get('selections');
-    selections[subject] = fwk; //Push object for saving
+    if (fwk) {
+      selections[subject] = fwk; //Push object for saving
+    }
     controller.set('selections', selections);
   },
 
