@@ -374,8 +374,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       this.set('selectedClassActivityForSchedule', classActivity);
     },
 
-    onSelectDate(date) {
-      this.handleScrollToSpecificDate(date);
+    onSelectDate(date, reload) {
+      let controller = this;
+      if (reload) {
+        let forMonth = moment(date).format('MM');
+        let forYear = moment(date).format('YYYY');
+        controller.set('forMonth', forMonth);
+        controller.set('forYear', forYear);
+        controller.loadData();
+      } else {
+        this.handleScrollToSpecificDate(date);
+      }
     },
 
     onOpenPerformanceEntry(item, activity, isRepeatEntry) {
@@ -387,7 +396,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           classActivityStudents.push(classMembers.findBy('id', member.id));
         });
 
-        component.set('activityMembers', classActivityStudents.sortBy('firstName'));
+        component.set(
+          'activityMembers',
+          classActivityStudents.sortBy('firstName')
+        );
         if (item.format === 'assessment') {
           component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
           component.set('isShowCollectionPerformanceEntryPullUp', false);
