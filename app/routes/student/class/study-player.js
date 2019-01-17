@@ -190,9 +190,6 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
   },
 
   setupController(controller, model) {
-    //eslint-disable-next-line
-    console.log('study-player::setupController:model', model);
-
     this._super(...arguments);
     const isAnonymous = model.isAnonymous;
     const mapLocation = model.mapLocation;

@@ -354,7 +354,6 @@ export default Ember.Controller.extend({
       language_preference: languagePreferenceArray
     };
     controller.updateProfilePreference(preferenceData);
-    /*console.log('selections', selections); */
   },
 
   //------------------------------------------------------------------------------
@@ -389,7 +388,6 @@ export default Ember.Controller.extend({
       selections = controller.get('selections');
     tEntry[categorySubject] = fwk;
     selections.pushObject(tEntry); //Push object for saving
-    //console.log('this.selections', selections);
     controller.set('selections', selections);
   },
   markSelectedFrameworksParsed(fwkValue, subjectValue) {
@@ -397,10 +395,6 @@ export default Ember.Controller.extend({
       subject = Ember.isArray(subjectValue) ? subjectValue[0] : subjectValue;
 
     const controller = this;
-    // let tEntry = {},
-    //   selections = controller.get('selections');
-    // tEntry[subject] = fwk;
-    // selections.pushObject(tEntry); //Push object for saving
     let selections = controller.get('selections');
     selections[subject] = fwk; //Push object for saving
     controller.set('selections', selections);
@@ -434,9 +428,6 @@ export default Ember.Controller.extend({
   normalizeProfilePreference(response) {
     const controller = this;
     let data = response.standard_preference;
-    /* "K12.MA": "TEKS" its in form of category.subject : framework
-    console.log('data', data);
-     */
     for (let categorySubject in data) {
       let subject = {},
         fwk = {},
@@ -531,7 +522,6 @@ export default Ember.Controller.extend({
         );
         addedCategories.pushObject(category);
         controller.set('addedCategories', addedCategories);
-        /* console.log('categoriesSubjectFWKs', response); */
       });
     }
   },
