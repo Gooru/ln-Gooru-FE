@@ -306,13 +306,23 @@
               <div class='row-offline-class sub-sec-row' style="border-top:unset;">
                 <div class='offline-icon'></div>
                 <div class='offline-label'> {{t
-                  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label'}}</div>
-                <div class='action-button-slide-yes {{ if class.isOffline "disabled" }}' data-toggle="tooltip" title="{{t 'teacher-landing.class.class-settings.class-settings-sec.offline-msg'}}">
+                  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label'}}
+                  <div class="offline-info-icon">{{gru-icon tooltipTitle= "teacher-landing.class.class-settings.class-settings-sec.offline-tooltip" name='info_outline'}}                    
+                  </div> 
+                </div>
+                
+                <div class='action-button-slide-yes {{ if class.isOffline "disabled" }}' data-toggle="tooltip" title="{{t 'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip'}}">
                   {{gru-switch switchOptions=switchOptions onOptionSwitch='saveOffline'
                   isChecked=class.isOffline}}
                 </div>
+
               </div>
-              <div class=' sub-sec-row' style="display:none"> </div>
+
+              <div class='row-offline-alert'>
+                    {{t 'teacher-landing.class.class-settings.class-settings-sec.offline-msg'}}
+              </div>
+
+
               {{#if class.collaborators}}
                 <div class='sub-sec-head'>{{t 'teacher-landing.class.class-settings.class-settings-sec.co-teachers'}}</div>
                 {{#each class.collaborators as |coteacher|}}

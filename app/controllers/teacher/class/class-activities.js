@@ -386,7 +386,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         activityMembers.map(member => {
           classActivityStudents.push(classMembers.findBy('id', member.id));
         });
-        component.set('activityMembers', classActivityStudents);
+
+        component.set('activityMembers', classActivityStudents.sortBy('firstName'));
         if (item.format === 'assessment') {
           component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
           component.set('isShowCollectionPerformanceEntryPullUp', false);
@@ -566,7 +567,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Class id
    * @property {String}
    */
-  members: Ember.computed.alias('classController.class.members'),
+  members: Ember.computed('classController.class.members', function() {
+    const controller = this;
+    let classMembers = controller.get('classController.class.members');
+    return classMembers.sortBy('firstName');
+  }),
   /**
    * Class id
    * @property {String}

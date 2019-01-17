@@ -652,6 +652,50 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Get  Profile preference for current profile
+   *  @returns {Promise}
+   *  @yields { preference_settings: {"standard_preference": {"K12.MA": "TEKS"}   } }
+   */
+  getProfilePreference: function() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('profileAdapter')
+        .getProfilePreference()
+        .then(
+          function(response) {
+            resolve(response);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * Update Profile preference for current profile
+   *  @returns {Promise}
+   *  @payload {"standard_preference": {"K12.MA": "TEKS"}   }
+   */
+  updateProfilePreference: function(data) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('profileAdapter')
+        .updateProfilePreference(data)
+        .then(
+          function(response) {
+            resolve(response);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
    * Creates a new empty user model
    * @returns {User}
    */

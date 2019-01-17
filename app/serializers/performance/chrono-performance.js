@@ -72,11 +72,15 @@ export default DS.JSONAPISerializer.extend({
       views: data.views,
       score: data.scoreInPercentage,
       pathId: data.pathId,
-      sessionId: data.lastSessionId,
+      sessionId: data.sessionId,
       status: data.status,
       collectionType: data.collectionType,
       pathType: data.pathType,
-      lastAccessedDate: data.lastAccessed
+      lastAccessedDate: data.lastAccessed,
+      classId: data.classId,
+      unitId: data.unitId,
+      lessonId: data.lessonId,
+      courseId: data.courseId
     });
   },
 

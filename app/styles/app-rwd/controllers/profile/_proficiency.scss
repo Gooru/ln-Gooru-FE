@@ -4,6 +4,11 @@
 
     .taxonomy-info {
       display: grid;
+      padding-bottom: 15px;
+      align-items: center;
+      justify-items: center;
+      grid-template-columns: 1fr;
+      margin: 0;
 
       .dropdown-content {
         .list-item,

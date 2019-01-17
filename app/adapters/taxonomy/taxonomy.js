@@ -9,6 +9,7 @@ export default Ember.Object.extend({
   session: Ember.inject.service('session'),
 
   namespace: '/api/nucleus/v1/taxonomy',
+  namespaceV2: '/api/nucleus/v2/taxonomy',
 
   /**
    * @namespace taxonomyDSNamespace
@@ -205,6 +206,21 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/frameworks/subjects?subject=${filters}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Return list of  taxonomy subject classification details based  on tenant settings
+   */
+  fetchCategories: function() {
+    const adapter = this;
+    const namespace = adapter.get('namespaceV2');
+    const url = `${namespace}/classifications`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',

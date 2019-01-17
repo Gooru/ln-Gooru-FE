@@ -44,9 +44,29 @@ export default Ember.Component.extend({
   // Detect keyDown event
   keyDown(event) {
     //prevent triggering tab key event
+    let component = this;
     if (event.keyCode === 9) {
-      event.preventDefault();
+      let question = component.get('activeQuestion');
+      let questionSeq = component.get('activeQuestionSeq');
+      component.onSelectTab(question, questionSeq);
     }
+  },
+
+  onSelectTab(question, questionSeq) {
+    let component = this;
+    component.set('activeQuestion', question);
+    component.set('activeQuestionSeq', questionSeq + 1);
+    component.fetchQuestionData(question.id);
+    component
+      .$(`.question-${questionSeq - 1} .question-info-container`)
+      .removeClass('selected-question');
+    component
+      .$(`.question-${questionSeq} .question-info-container`)
+      .removeClass('selected-question')
+      .addClass('selected-question');
+    component
+      .$(`.question-${questionSeq + 1} .question-info-container`)
+      .removeClass('selected-question');
   },
 
   // -------------------------------------------------------------------------
@@ -73,6 +93,7 @@ export default Ember.Component.extend({
       if (!component.$(`.q-${questionSeq}-score`).hasClass('disabled')) {
         component.$(`.q-${questionSeq}-score`).focus();
       }
+      component.onSelectTab(question, questionSeq);
     },
 
     //Action triggered when edit score of a question
@@ -382,10 +403,10 @@ export default Ember.Component.extend({
     let component = this;
     let inputElements = component.$('.question-score-entry');
     component.$(inputElements).val(null);
-    component.$('.question-thumbnail').css('background-color', '#d8d8d8');
     component.$('.question-container').removeClass('scored');
     component.$('.question-score input').removeAttr('disabled');
     component.$('.question-score-entry').removeClass('wrong-score');
+    component.$('.question-thumbnail').removeClass('scored-background');
   },
 
   /**
@@ -408,10 +429,10 @@ export default Ember.Component.extend({
    */
   toggleScoredElement(question, sequence) {
     let component = this;
-    let enteredScore = question.score !== '' ? Number(question.score) : null;
+    let enteredScore = question.score;
     component
       .$(`.question-${sequence} .question-thumbnail`)
-      .css('background-color', '#d8d8d8');
+      .removeClass('scored-background default-background');
     component
       .$(`.question-${sequence}`)
       .removeClass('scored')
@@ -421,7 +442,7 @@ export default Ember.Component.extend({
         component.$(`.question-${sequence}`).addClass('scored');
         component
           .$(`.question-${sequence} .question-thumbnail`)
-          .css('background-color', '#538a32');
+          .addClass('scored-background');
       } else {
         component.$(`.question-${sequence}`).addClass('wrong-score');
       }
@@ -435,12 +456,14 @@ export default Ember.Component.extend({
   loadAssessmentData() {
     let component = this;
     let assessment = component.get('assessment');
-    return component.fetchAssessmentData(assessment.id).then(function(assessmentData) {
-      let questions = assessmentData
-        ? assessmentData.get('children')
-        : Ember.A([]);
-      component.set('questions', questions);
-    });
+    return component
+      .fetchAssessmentData(assessment.id)
+      .then(function(assessmentData) {
+        let questions = assessmentData
+          ? assessmentData.get('children')
+          : Ember.A([]);
+        component.set('questions', questions);
+      });
   },
 
   /**
@@ -491,8 +514,14 @@ export default Ember.Component.extend({
    */
   validateQuestionScore(score) {
     let component = this;
-    let maxScore = component.get('activeQuestion.maxScore');
-    return score <= maxScore && score >= 0;
+    let isNumber = !isNaN(score);
+    var enteredNumber = score.toString();
+    if (!isNumber || enteredNumber.indexOf('.') >= 0) {
+      return false;
+    } else {
+      let maxScore = component.get('activeQuestion.maxScore');
+      return isNumber ? score <= maxScore && score >= 0 : false;
+    }
   },
 
   /**
@@ -515,52 +544,68 @@ export default Ember.Component.extend({
     let activityDate = new Date(component.get('activityDate'));
     let studentsOfflineAssessmentData = Ember.A([]);
     let questionTimespent = 0;
-    component.fetchStudentsAssessmentPerformance().then(function(studentsPerformance) {
-      if (studentsPerformance.length !== students.length) {
-        component.set('isCaptureTimespent', false);
-        students.map( student => {
-          let studentAssessmentPerformance = studentsPerformance.findBy('user', student.id);
-          if (studentAssessmentPerformance) {
-            let studentQuestionsPerformance = studentAssessmentPerformance.resourceResults;
-            questionTimespent = studentAssessmentPerformance.assessment.timespent / questions.length || 0;
-            let assessmentResources = Ember.A([]);
-            questions.map( question => {
-              let questionPerformance = studentQuestionsPerformance.findBy('resourceId', question.id);
-              let questionPerfData = {
-                resource_id: question.id,
-                resource_type: 'question',
-                question_type: question.type,
-                score: Number(questionPerformance.score/100),
-                max_score: question.maxScore,
-                time_spent: questionTimespent
+    component
+      .fetchStudentsAssessmentPerformance()
+      .then(function(studentsPerformance) {
+        if (studentsPerformance.length !== students.length) {
+          component.set('isCaptureTimespent', false);
+          students.map(student => {
+            let studentAssessmentPerformance = studentsPerformance.findBy(
+              'user',
+              student.id
+            );
+            if (studentAssessmentPerformance) {
+              let studentQuestionsPerformance =
+                studentAssessmentPerformance.resourceResults;
+              questionTimespent =
+                studentAssessmentPerformance.assessment.timespent /
+                  questions.length || 0;
+              let assessmentResources = Ember.A([]);
+              questions.map(question => {
+                let questionPerformance = studentQuestionsPerformance.findBy(
+                  'resourceId',
+                  question.id
+                );
+                let questionPerfData = {
+                  resource_id: question.id,
+                  resource_type: 'question',
+                  question_type: question.type,
+                  score: Number(questionPerformance.score / 100),
+                  max_score: question.maxScore,
+                  time_spent: questionTimespent
+                };
+                assessmentResources.push(questionPerfData);
+              });
+              let studentPerformanceData = {
+                tenant_id: component.get('session.tenantId') || null,
+                student_id: student.get('id'),
+                session_id: studentAssessmentPerformance.get('sessionId'),
+                class_id: classId,
+                collection_id: assessment.id,
+                collection_type: 'assessment',
+                content_source: component.get('contentSource'),
+                time_zone: component.get('timeZone'),
+                conducted_on: activityDate.toISOString(),
+                path_id: 0,
+                path_type: null,
+                resources: assessmentResources
               };
-              assessmentResources.push(questionPerfData);
-            });
-            let studentPerformanceData = {
-              tenant_id: component.get('session.tenantId') || null,
-              student_id: student.get('id'),
-              session_id: studentAssessmentPerformance.get('sessionId'),
-              class_id: classId,
-              collection_id: assessment.id,
-              collection_type: 'assessment',
-              content_source: component.get('contentSource'),
-              time_zone: component.get('timeZone'),
-              conducted_on: activityDate.toISOString(),
-              path_id: 0,
-              path_type: null,
-              resources: assessmentResources
-            };
-            studentsOfflineAssessmentData.push(studentPerformanceData);
-          }
-        });
-        component.set('studentsOfflineAssessmentData', studentsOfflineAssessmentData);
-        component.prePopulateStudentData(studentsOfflineAssessmentData.objectAt(0));
-        component.set('questionTimespent', questionTimespent);
-      } else {
-        component.set('isCaptureTimespent', true);
-      }
-      component.set('isLoading', false);
-    });
+              studentsOfflineAssessmentData.push(studentPerformanceData);
+            }
+          });
+          component.set(
+            'studentsOfflineAssessmentData',
+            studentsOfflineAssessmentData
+          );
+          component.prePopulateStudentData(
+            studentsOfflineAssessmentData.objectAt(0)
+          );
+          component.set('questionTimespent', questionTimespent);
+        } else {
+          component.set('isCaptureTimespent', true);
+        }
+        component.set('isLoading', false);
+      });
   },
 
   /**
@@ -621,9 +666,8 @@ export default Ember.Component.extend({
       performance: component
         .get('analyticsService')
         .getDCAPerformance(classId, assessmentId, 'assessment', activityDate)
-    })
-      .then(({performance}) => {
-        return performance;
-      });
+    }).then(({ performance }) => {
+      return performance;
+    });
   }
 });

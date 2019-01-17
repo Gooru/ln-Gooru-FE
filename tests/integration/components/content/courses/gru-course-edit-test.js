@@ -7,7 +7,9 @@ const courseServiceStub = Ember.Service.extend({
   updateCourse(editedCourse) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       if (!editedCourse) {
-        reject({ status: 500 });
+        reject({
+          status: 500
+        });
       } else {
         resolve(editedCourse);
       }
@@ -19,7 +21,9 @@ const taxonomyServiceStub = Ember.Service.extend({
   getSubjects(category) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       if (!category) {
-        reject({ status: 500 });
+        reject({
+          status: 500
+        });
       } else {
         resolve({
           subjects: [
@@ -34,6 +38,27 @@ const taxonomyServiceStub = Ember.Service.extend({
         });
       }
     });
+  },
+  getCategories: function() {
+    const c1 = Ember.Object.create({
+      id: 'k_12',
+      code: 'K12',
+      title: 'K12'
+    });
+
+    const c2 = Ember.Object.create({
+      id: 'higher_education',
+      code: 'HE',
+      title: 'Higher Education'
+    });
+
+    const c3 = Ember.Object.create({
+      id: 'professional_learning',
+      code: 'PL',
+      title: 'Professional Development'
+    });
+
+    return new Ember.RSVP.resolve([c1, c2, c3]);
   }
 });
 

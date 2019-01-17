@@ -153,5 +153,12 @@ export default Ember.Route.extend({
       });
     });
     return score;
+  },
+
+  resetController(controller) {
+    var queryParams = controller.get('queryParams');
+    queryParams.forEach(function(param) {
+      controller.set(param, null);
+    });
   }
 });
