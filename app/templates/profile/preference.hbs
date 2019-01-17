@@ -42,6 +42,24 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="subject-fwk" style="display:none;">
+                                        <div class='subject'> {{t 'profile.preference.choose-preferred-language'}} </div>
+                                        <div></div>
+                                        <div class="fwk">
+                                            <div class="form-group1">
+                                                <select class="selectpicker form-control1" multiple mobile=true>
+                                                    {{!-- <ul class="dropdown-menu pull-right"> --}}
+                                                    {{#each languages as |language|}}
+                                                        <option data-item={{language}}>{{language.display_name}}
+                                                        </option>
+                                                    {{else}}
+                                                        <option> {{t 'profile.preference.no-data'}} </option>
+                                                    {{/each}}
+                                                    {{!-- </ul> --}}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
