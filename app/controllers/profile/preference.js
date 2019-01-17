@@ -102,8 +102,9 @@ export default Ember.Controller.extend({
       this.changeMode(showedit);
     },
     cancel() {
-      this.changeModeOnSaveAll();
-      this.changeMode();
+      this.getCategories().then(() => {
+        this.getProfilePreference();
+      });
     },
 
     updateMarkedSelectionsAsAdded(fwk, subjects, category) {
