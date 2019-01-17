@@ -106,7 +106,7 @@ export default Ember.Controller.extend({
 
     onOpenOCAReport() {
       let controller = this;
-      controller.set('isShowOCASummaryReportPullUp', true);
+      controller.openDCAReportForOfflineClass();
     }
   },
 
@@ -283,5 +283,10 @@ export default Ember.Controller.extend({
     };
     this.set('isShowCourseReport', true);
     this.set('courseReportData', params);
+  },
+
+  openDCAReportForOfflineClass() {
+    let controller = this;
+    controller.set('isShowOCASummaryReportPullUp', true);
   }
 });

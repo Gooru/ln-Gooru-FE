@@ -6,6 +6,11 @@ export default Ember.Component.extend({
   // Dependencies
 
   /**
+   * @type {AnalyticsService} Service to retrieve class performance summary
+   */
+  analyticsService: Ember.inject.service('api-sdk/analytics'),
+
+  /**
    * @requires service:i18n
    */
   i18n: Ember.inject.service(),
@@ -54,11 +59,30 @@ export default Ember.Component.extend({
   init: function() {
     const component = this;
     component._super(...arguments);
+    let isOfflineClass = component.get('isOfflineClass');
+    if (isOfflineClass) {
+      component.getDCAPerformanceForOfflineClass();
+    }
   },
 
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
+  },
+
+  getDCAPerformanceForOfflineClass() {
+    let component = this;
+    const classId = component.get('class.id');
+    return Ember.RSVP.hash({
+      performanceSummaryForDCA: component
+        .get('analyticsService')
+        .getDCASummaryPerformance(classId)
+    }).then(function(hash) {
+      const performanceSummaryForDCA = hash.performanceSummaryForDCA;
+      component.set('performanceSummaryForDCA', performanceSummaryForDCA);
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -185,5 +209,16 @@ export default Ember.Component.extend({
     let currentClass = controller.get('class');
     let classSetting = currentClass.setting;
     return classSetting ? classSetting['course.premium'] : false;
-  })
+  }),
+
+  /**
+   * The class is offline or not
+   * @property {Boolean}
+   */
+  isOfflineClass: Ember.computed('class', function() {
+    let component = this;
+    return component.get('class.isOffline');
+  }),
+
+  performanceSummaryForDCA: null
 });

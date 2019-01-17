@@ -115,6 +115,12 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
             tab: 'report'
           }
         });
+      } else if (item === 'ca-report') {
+        route.transitionTo('teacher.class.class-activities', classId, {
+          queryParams: {
+            tab: 'report'
+          }
+        });
       } else {
         route.transitionTo('teacher-home');
       }

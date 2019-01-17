@@ -16,20 +16,37 @@ export default Ember.Component.extend({
    */
   assessmentService: Ember.inject.service('api-sdk/assessment'),
 
+  /**
+   * Propery of class id
+   * @property {Number}
+   */
   classId: null,
 
+  /**
+   * Propery of student
+   * @property {Object}
+   */
   student: null,
 
+  /**
+   * @property {Object}
+   */
   collection: null,
 
+  /**
+   * @property {Array}
+   */
   resourcesCollection: null,
 
   /**
    * Propery to hide the default pullup.
-   * @property {showPullUp}
+   * @property {Boolean}
    */
   showPullUp: false,
 
+  /**
+   * @property {Boolean}
+   */
   isLoading: false,
 
   actions: {
@@ -55,11 +72,9 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this.openPullUp();
-  },
-
-  didRender() {
     this.handleAppContainerScroll();
   },
+
   didDestroyElement() {
     this.handleAppContainerScroll();
   },

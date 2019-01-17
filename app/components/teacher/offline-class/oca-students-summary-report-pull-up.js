@@ -15,25 +15,51 @@ export default Ember.Component.extend({
    */
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
+  /**
+   * Propery of class id
+   * @property {Number}
+   */
   classId: null,
 
+  /**
+   * Propery of context from parent
+   * @property {Object}
+   */
   context: null,
 
+  /**
+   * Propery of students
+   * @property {Array}
+   */
   students: Ember.A([]),
 
+  /**
+   * Propery of collection
+   * @property {Object}
+   */
   collection: Ember.computed('context', function() {
     return this.get('context.collection');
   }),
 
   /**
    * Propery to hide the default pullup.
-   * @property {showPullUp}
+   * @property {Boolean}
    */
   showPullUp: false,
 
+  /**
+   * @property {Boolean}
+   */
   isLoading: false,
 
+  /**
+   * @property {Object}
+   */
   selectedStudent: null,
+
+  /**
+   * @property {Boolean}
+   */
 
   isShowStudentActivityReport: false,
 
@@ -61,11 +87,9 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this.openPullUp();
-  },
-
-  didRender() {
     this.handleAppContainerScroll();
   },
+
   didDestroyElement() {
     this.handleAppContainerScroll();
   },
@@ -176,9 +200,10 @@ export default Ember.Component.extend({
   },
 
   parseCollectionPerformanceData(collectionType, collectionPerformance) {
-    let performance = collectionPerformance[0];
-    let component = this;
-    let isAssessment = collectionType === 'assessment';
+    let performance = collectionPerformance.objectAt(0);
+    let isAssessment =
+      collectionType === 'assessment' ||
+      collectionType === 'assessment-external';
     let collectionPerformanceData = null;
     if (performance) {
       collectionPerformanceData = Ember.Object.create({
@@ -186,18 +211,10 @@ export default Ember.Component.extend({
         score: isAssessment ? performance.assessment.score : 0,
         timeSpent: isAssessment
           ? performance.assessment.timespent
-          : component.calculateTimeSpentScore(performance.resourceResults),
+          : performance.collection.timeSpent,
         resources: performance.resourceResults
       });
     }
     return collectionPerformanceData;
-  },
-
-  calculateTimeSpentScore(resources) {
-    let timeSpent = 0;
-    resources.map(resource => {
-      timeSpent += resource.timeSpent;
-    });
-    return timeSpent;
   }
 });

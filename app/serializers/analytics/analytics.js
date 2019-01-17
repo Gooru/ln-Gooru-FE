@@ -44,6 +44,7 @@ export default Ember.Object.extend({
       isAttemptFinished: !!payload.isCompleteAttempt, // This value is used only by the RealTime dashboard
       resourceResults: serializer.normalizeResourceResults(usageData),
       assessment: payload.assessment || null,
+      collection: payload.collection || null,
       sessionId: sessionId
     });
   },

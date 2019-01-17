@@ -8,22 +8,44 @@ export default Ember.Component.extend({
    */
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
+  /**
+   * Propery of class id
+   * @property {Number}
+   */
   classId: null,
 
+  /**
+   * Propery of context from parent
+   * @property {Object}
+   */
   context: null,
 
+  /**
+   * Propery of class activities
+   * @property {Array}
+   */
   classActivities: null,
 
+  /**
+   * Propery of selected activity
+   * @property {Object}
+   */
   selectedActivity: null,
 
   /**
    * Propery to hide the default pullup.
-   * @property {showPullUp}
+   * @property {Boolean}
    */
   showPullUp: false,
 
+  /**
+   * @property {Boolean}
+   */
   isShowStudentsSummaryReport: false,
 
+  /**
+   * @property {Boolean}
+   */
   isLoading: false,
 
   actions: {
@@ -52,11 +74,9 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this.openPullUp();
-  },
-
-  didRender() {
     this.handleAppContainerScroll();
   },
+
   didDestroyElement() {
     this.handleAppContainerScroll();
   },

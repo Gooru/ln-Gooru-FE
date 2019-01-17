@@ -1293,6 +1293,12 @@ export default Object.assign(quizzesTranslations, {
           'The class does not have a course assigned or does not have students rostered into the class yet. Once the course has been assigned to the class and the students are rostered, the class competency report will be shown here'
       },
       'class-activities': 'Class Activities',
+      'offline-class-report': {
+        'class-report': 'Class Report',
+        'activity-report': 'Activity Report',
+        'conducted-on': 'Conducted On',
+        'not-started': 'Not Started'
+      },
       'back-to-class-activities': 'Back to  Class Activities',
       'class-activities-tab': {
         today: 'Today: ',

@@ -34,41 +34,39 @@
       {{gru-icon name="close"}}
     </div>
     <div class="conducted-on">
-      <span class="title">Conducted On</span>
+      <span class="title">{{t 'teacher-landing.class.offline-class-report.conducted-on'}}</span>
       <span class="date">{{format-date context.activation_date 'DD MMM YY'}}</span>
     </div>
   </div>
   {{#if isLoading}}
     {{three-bounce-spinner}}
   {{else}}
-  <div class="resources-report-container">
-    {{#each resourcesCollection as | resource|}}
-      <div class="resource">
-        <div class="resource-icon">
+    <div class="resources-report-container">
+      {{#each resourcesCollection as | resource|}}
+        <div class="resource">
+          <div class="resource-icon">
+            {{#if (eq resource.performance.resourceType 'question')}}
+              <i class="question-img"></i>
+            {{else}}
+              <i class="resource-img {{resource.format}}"></i>
+            {{/if}}
+          </div>
+          <div class="resource-title ellipsis">{{resource.title}}</div>
+          <div class="reaction"> {{reaction-icon resource.performance.reaction}}</div>
           {{#if (eq resource.performance.resourceType 'question')}}
-            <i class="question-img"></i>
+            <div class="performance" style="background-color:{{if resource (grade-color resource.performance.score)}}">
+              <div class="score">
+                <span class="graded-score">{{resource.performance.score}}</span>/<span class="max-score">{{resource.maxScore}}</span>
+              </div>
+              <span>{{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}</span>
+            </div>
           {{else}}
-            <i class="resource-img {{resource.format}}"></i>
+            <div class="timespent">
+              {{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}
+            </div>
           {{/if}}
         </div>
-        <div class="resource-title ellipsis">{{resource.title}}</div>
-        <div class="reaction"> {{reaction-icon resource.performance.reaction}}</div>
-        {{#if (eq resource.performance.resourceType 'question')}}
-          <div class="performance" style="background-color:{{if resource (grade-color resource.performance.score)}}">
-            {{#if resource.performance.correct}}
-              <span class="correct">{{gru-icon name="done_all"}}</span>
-            {{else}}
-              <span class="wrong">{{gru-icon name="close"}}</span>
-            {{/if}}
-            <span>{{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}</span>
-          </div>
-        {{else}}
-          <div class="timespent">
-            {{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}
-          </div>
-        {{/if}}
-      </div>
-    {{/each}}
-  </div>
+      {{/each}}
+    </div>
   {{/if}}
 </div>

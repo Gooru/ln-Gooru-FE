@@ -135,7 +135,7 @@ test('Performance Table Layout', function(assert) {
   );
   assert.equal(
     T.text($summaryRow.find('.performance-time')),
-    '4h 16m',
+    '1h 25m 33s',
     'Wrong summary time spent'
   );
   assert.notOk(

@@ -12,34 +12,40 @@ export default Ember.Component.extend({
   // Properties
 
   /**
-   * @property {reportData}
+   * @property {Array<Object>}
    */
   reportData: null,
 
   /**
    * Propery of class id
-   * @property {classId}
+   * @property {Number}
    */
   classId: null,
 
   /**
-   * @property {performanceSummary}
+   * @property {Object}
    */
   performanceSummary: null,
 
   /**
-   * @property {timeSpent}
+   * @property {Number}
    */
   timeSpent: null,
 
   /**
    * Propery to hide the default pullup.
-   * @property {showPullUp}
+   * @property {Boolean}
    */
   showPullUp: false,
 
+  /**
+   * @property {Boolean}
+   */
   isShowOCAMonthReportPullUp: false,
 
+  /**
+   * @property {Object}
+   */
   selectedMonthSummary: null,
 
   actions: {
@@ -68,11 +74,9 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this.openPullUp();
-  },
-
-  didRender() {
     this.handleAppContainerScroll();
   },
+
   didDestroyElement() {
     this.handleAppContainerScroll();
   },
