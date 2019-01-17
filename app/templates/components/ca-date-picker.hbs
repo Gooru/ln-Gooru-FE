@@ -5,7 +5,7 @@
   <div class="next-cal-arrow" {{action 'showNextMonth'}}>{{gru-icon name="keyboard_arrow_right"}}</div>
 </div>
 <div class="ca-datepicker-container {{if allowDateSelectorToggle 'ca-date-picker-toggle ca-date-picker-inline'}}">
-  {{#if (and showToday)}}
+  {{#if showToday}}
     <div class="ca-datepicker-today" {{action 'onSelectToday'}}>Today</div>
   {{/if}}
   <div id="ca-datepicker"></div>
