@@ -121,6 +121,9 @@ export default Ember.Controller.extend({
 
     showAddSub(category, show) {
       this.showHideSubjectsDDForCategory(category, show || true);
+    },
+    prepareSubjectList(category) {
+      this.prepareSubjectList(category);
     }
   },
   //--- pro
@@ -138,6 +141,19 @@ export default Ember.Controller.extend({
   showHideSubjectsDDForCategory(category, show) {
     let found = this.addedCategories.findBy('id', category.id);
     Ember.set(found, 'showAddSub', show);
+  },
+
+  prepareSubjectList(category) {
+    this.set('currentCategorySubjectFwks', null);
+    let subjectFwks = category.subjectFwks.copy();
+    if (category.subjects) {
+      category.subjects.forEach(subject => {
+        subjectFwks = subjectFwks.filter(sub1 => {
+          return Object.keys(subject)[0] !== sub1.code;
+        });
+      });
+    }
+    this.set('currentCategorySubjectFwks', subjectFwks);
   },
   //------------------------------------------------------------------------------
   // Impl methods

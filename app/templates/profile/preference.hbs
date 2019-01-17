@@ -163,7 +163,7 @@
                                         </div>
                                         <div class='subject-add'>
                                             <div class="dropdown">
-                                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareSubjectList' category }}>
                                                     {{#if category.currentSelectedSubject}}
                                                         <div class="button-text sub">
                                                             {{ category.currentSelectedSubject.title}}
@@ -174,7 +174,7 @@
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu pull-left">
-                                                    {{#each category.subjectFwks  as |subject |}}
+                                                    {{#each currentCategorySubjectFwks  as |subject |}}
                                                         <li> <a data-item={{subject}} {{ action 'markSelectedSubject'  subject category  }}>
                                                                 {{subject.title}}
                                                             </a> </li>
