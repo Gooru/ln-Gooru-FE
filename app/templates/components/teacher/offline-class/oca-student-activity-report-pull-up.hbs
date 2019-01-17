@@ -5,7 +5,7 @@
   <div class="report-header">
     <div class="header-title">
       <i class="icon {{collection.collectionType}}"></i>
-      <span class="title">{{collection.title}}</span>
+      <span class="title ellipsis">{{collection.title}}</span>
     </div>
     <div class="close" {{action 'onPullUpClose' false}}>
       {{gru-icon name="close"}}
@@ -15,13 +15,13 @@
     <div class="performance-activity" style="background-color:{{if collection (grade-color collection.performance.score)}}">
       <div class="performance" style="background-color:{{if collection (grade-color collection.performance.score)}}">
         <span class="score">{{collection.performance.score}}%</span>
-        <span class="time-spent">{{format-time collection.performance.timeSpent}}</span>
+        <span class="time-spent">{{if collection.performance.timeSpent (format-time  collection.performance.timeSpent) '--'}}</span>
       </div>
     </div>
   {{else}}
     <div class="collection-performance">
       <div class="performance">
-        <span class="time-spent">{{format-time collection.performance.timeSpent}}</span>
+        <span class="time-spent">{{if collection.performance.timeSpent (format-time  collection.performance.timeSpent) '--'}}</span>
       </div>
     </div>
   {{/if}}
@@ -30,7 +30,7 @@
       <img src="{{student.avatarUrl}}" />
     </div>
     <span class="username">{{student.name}}</span>
-    <div class="close" {{action 'onPullUpClose' false}}>
+    <div class="close" {{action 'onCloseStudentActivity'}}>
       {{gru-icon name="close"}}
     </div>
     <div class="conducted-on">
@@ -38,6 +38,9 @@
       <span class="date">{{format-date context.activation_date 'DD MMM YY'}}</span>
     </div>
   </div>
+  {{#if isLoading}}
+    {{three-bounce-spinner}}
+  {{else}}
   <div class="resources-report-container">
     {{#each resourcesCollection as | resource|}}
       <div class="resource">
@@ -48,7 +51,7 @@
             <i class="resource-img {{resource.format}}"></i>
           {{/if}}
         </div>
-        <div class="resource-title">{{resource.title}}</div>
+        <div class="resource-title ellipsis">{{resource.title}}</div>
         <div class="reaction"> {{reaction-icon resource.performance.reaction}}</div>
         {{#if (eq resource.performance.resourceType 'question')}}
           <div class="performance" style="background-color:{{if resource (grade-color resource.performance.score)}}">
@@ -57,14 +60,15 @@
             {{else}}
               <span class="wrong">{{gru-icon name="close"}}</span>
             {{/if}}
-            <span>{{format-time resource.performance.timeSpent}}</span>
+            <span>{{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}</span>
           </div>
         {{else}}
           <div class="timespent">
-            {{format-time resource.performance.timeSpent}}
+            {{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}
           </div>
         {{/if}}
       </div>
     {{/each}}
   </div>
+  {{/if}}
 </div>

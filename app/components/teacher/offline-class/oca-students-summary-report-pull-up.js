@@ -46,9 +46,7 @@ export default Ember.Component.extend({
     pullUpClose(closeAll) {
       let component = this;
       component.set('isShowStudentActivityReport', false);
-      if (closeAll) {
-        component.closePullUp(closeAll);
-      }
+      component.closePullUp(closeAll);
     },
 
     onSelectStudent(student) {
@@ -148,6 +146,7 @@ export default Ember.Component.extend({
           collectionType
         );
       }
+      component.set('isLoading', false);
     });
   },
 

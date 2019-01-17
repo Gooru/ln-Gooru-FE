@@ -35,6 +35,18 @@ export default Ember.Component.extend({
   actions: {
     onPullUpClose(closeAll) {
       this.closePullUp(closeAll);
+    },
+    onCloseStudentActivity() {
+      let component = this;
+      component.$().animate(
+        {
+          top: '100%'
+        },
+        400,
+        function() {
+          component.set('showPullUp', false);
+        }
+      );
     }
   },
 

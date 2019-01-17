@@ -5,7 +5,7 @@
   <div class="report-header">
     <div class="header-title">
       <i class="icon {{collection.collectionType}}"></i>
-      <span class="title">{{collection.title}}</span>
+      <span class="title ellipsis">{{collection.title}}</span>
     </div>
     <div class="close" {{action 'onPullUpClose' false}}>
       {{gru-icon name="close"}}
@@ -15,13 +15,13 @@
     <div class="performance-activity" style="background-color:{{if collection (grade-color collection.performance.score)}}">
       <div class="performance" style="background-color:{{if collection (grade-color collection.performance.score)}}">
         <span class="score">{{collection.performance.score}}%</span>
-        <span class="time-spent">{{format-time collection.performance.timeSpent}}</span>
+        <span class="time-spent">{{if collection.performance.timeSpent (format-time  collection.performance.timeSpent) '--'}}</span>
       </div>
     </div>
   {{else}}
     <div class="collection-performance">
       <div class="performance">
-        <span class="time-spent">{{format-time collection.performance.timeSpent}}</span>
+        <span class="time-spent">{{if collection.performance.timeSpent (format-time  collection.performance.timeSpent) '--'}}</span>
       </div>
     </div>
   {{/if}}
@@ -33,6 +33,9 @@
       <span class="date">{{format-date context.activation_date 'DD MMM YY'}}</span>
     </div>
   </div>
+  {{#if isLoading}}
+    {{three-bounce-spinner}}
+  {{else}}
   <div class="students-report-container">
     {{#each students as |student|}}
       <div class="student-row-container" {{action 'onSelectStudent' student}}>
@@ -46,7 +49,7 @@
           {{#if (eq student.performance.type 'assessment')}}
             <div class="score" style="background-color:{{if  student.performance (grade-color student.performance.score)}}">{{ student.performance.score}}%</div>
           {{else}}
-            <div class="timespent">{{format-time student.performance.timeSpent}}</div>
+            <div class="timespent">{{if student.performance.timeSpent (format-time  student.performance.timeSpent) '--'}}</div>
           {{/if}}
         {{else}}
           <div class="not-started">Not Started</div>
@@ -54,7 +57,8 @@
       </div>
     {{/each}}
   </div>
+  {{/if}}
 </div>
 {{#if isShowStudentActivityReport}}
-  {{teacher.offline-class.oca-student-activity-report-pull-up collection=collection student=selectedStudent classId=classId onClosePullUp="pullUpClose"}}
+  {{teacher.offline-class.oca-student-activity-report-pull-up collection=collection student=selectedStudent classId=classId showPullUp=isShowStudentActivityReport onClosePullUp="pullUpClose"}}
 {{/if}}
