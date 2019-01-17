@@ -166,7 +166,6 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        {{log category}}
                                         <div class="addSubjectFWK" {{action 'addSelectedSubject' category }} title="{{t 'profile.preference.add-subject'}}">
                                             {{gru-icon name='add'}}
                                         </div>
@@ -176,7 +175,6 @@
                                     <div class='panel-body'>
                                         {{!-- New section for added subject --}}
                                         {{!-- subject drop down with plus icon starts --}}
-                                        {{log category}}
                                         {{#if (eq category.showAddSub true)}}
                                             <div class="subject-fwk" style="display:none">
                                                 <div class='sub'>
@@ -209,7 +207,6 @@
                                                 <div class='fwk'>
                                                     <div class="dropdown pull-left">
                                                         <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                            {{log category}}
                                                             {{#if category.currentSelectedSubject.currentSelectedFwk}}
                                                                 {{ category.currentSelectedSubject.currentSelectedFwk.frameworkId}}
                                                             {{else}}
