@@ -80,11 +80,14 @@ export default Ember.Controller.extend({
     markSelectedFrameworks: function(fwk, subject, category) {
       this.markSelectedFrameworks(fwk, subject, category);
     },
-
+    addSelectedSubject: function(category) {
+      this.updateMarkedSelectionsAsAdded('dummy', null, category);
+    },
     updateFrameworkForSubjectCategory: function(fwk, subject, category) {
       let subjectObj = this.getSubjectForCategory(subject, category);
       this.removeSubject(category, subject);
       this.updateMarkedSelectionsAsAdded(fwk, subjectObj, category);
+      this.showHideSubjectsDDForCategory(category, false);
     },
     savePreferences: function() {
       this.savePreferences();
@@ -113,6 +116,10 @@ export default Ember.Controller.extend({
     updateLanguage(language) {
       const controller = this;
       controller.set('selectedLanguage', language);
+    },
+
+    showAddSub(category, show) {
+      this.showHideSubjectsDDForCategory(category, show || true);
     }
   },
   //--- pro
@@ -125,6 +132,11 @@ export default Ember.Controller.extend({
     if (found.subjectFwks) {
       return found.subjectFwks.findBy('code', subjectCode);
     }
+  },
+
+  showHideSubjectsDDForCategory(category, show) {
+    let found = this.addedCategories.findBy('id', category.id);
+    Ember.set(found, 'showAddSub', show);
   },
   //------------------------------------------------------------------------------
   // Impl methods
@@ -183,7 +195,7 @@ export default Ember.Controller.extend({
     categoriesDropDown.removeObject(category);
     this.get('categoriesDropDown', categoriesDropDown);
     this.getSubjectFrameworks(category);
-    this.changeMode(true);
+    //this.changeMode(false);
   },
 
   /**
@@ -221,7 +233,6 @@ export default Ember.Controller.extend({
   },
 
   markSelectedSubject(subject, category) {
-    /* const controller = this; */
     Ember.set(category, 'currentSelectedSubject', subject);
   },
 
