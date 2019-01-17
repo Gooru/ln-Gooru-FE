@@ -2,7 +2,6 @@ import Ember from 'ember';
 import { KEY_CODES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
 

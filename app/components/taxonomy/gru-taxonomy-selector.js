@@ -1,8 +1,4 @@
 import Ember from 'ember';
-import {
-  TAXONOMY_CATEGORIES,
-  CONTENT_CATEGORIES
-} from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 
 /**
@@ -44,7 +40,6 @@ export default Ember.Component.extend({
       const component = this;
       component.set('selectedSubject', null);
       component.set('internalCategory', category);
-      component.loadSubjects(category);
       if (component.get('onCategorySelected')) {
         component.sendAction('onCategorySelected', category);
       }
@@ -120,29 +115,38 @@ export default Ember.Component.extend({
     const component = this;
     const subject = component.get('selectedSubject');
     const category = component.get('selectedCategory');
-    if (category) {
-      component.loadSubjects(category);
-    }
+    component
+      .get('taxonomyService')
+      .getCategories()
+      .then(categories => {
+        if (!component.get('isDestroyed')) {
+          component.set('categories', categories);
+          if (category) {
+            component.loadSubjects(category);
+          }
 
-    if (subject) {
-      // Read the framework code from standard tags.
-      // Need to revisit on how to get framework details from course object.
-      let codes = subject.get('id').split('.');
-      if (this.get('showCourses') && codes.length === 2) {
-        let tags = this.get('tags');
-        if (tags && tags.length > 0) {
-          const tag = this.get('tags').objectAt(0);
-          if (tag && tag.data) {
-            let frameworkId = tag.data.frameworkCode || tag.data.frameworkId;
-            subject.frameworkId = frameworkId;
-            subject.set('id', `${frameworkId}.${subject.id}`);
+          if (subject) {
+            // Read the framework code from standard tags.
+            // Need to revisit on how to get framework details from course object.
+            let codes = subject.get('id').split('.');
+            if (this.get('showCourses') && codes.length === 2) {
+              let tags = this.get('tags');
+              if (tags && tags.length > 0) {
+                const tag = this.get('tags').objectAt(0);
+                if (tag && tag.data) {
+                  let frameworkId =
+                    tag.data.frameworkCode || tag.data.frameworkId;
+                  subject.frameworkId = frameworkId;
+                  subject.set('id', `${frameworkId}.${subject.id}`);
+                }
+              }
+            }
+            if (!subject.get('hasCourses')) {
+              component.get('taxonomyService').getCourses(subject);
+            }
           }
         }
-      }
-      if (!subject.get('hasCourses')) {
-        component.get('taxonomyService').getCourses(subject);
-      }
-    }
+      });
   },
   // -------------------------------------------------------------------------
   // Properties
@@ -152,13 +156,6 @@ export default Ember.Component.extend({
    * @property {string}
    */
   subjectLabelKey: 'taxonomy.gru-taxonomy-selector.primary-subject-and-course',
-
-  /**
-   * @type {Ember.A} categories - List of content categories
-   */
-  categories: Ember.computed('showCourses', function() {
-    return this.get('showCourses') ? TAXONOMY_CATEGORIES : CONTENT_CATEGORIES;
-  }),
 
   /**
    * @property {boolean}
@@ -275,9 +272,13 @@ export default Ember.Component.extend({
   /**
    * Sets the corresponding lists of subjects and courses when the primary subject changes
    */
-  onSelectedSubjectChanged: Ember.observer('selectedSubject', function() {
-    this.setupComponent();
-  }),
+  onSelectedSubjectChanged: Ember.observer(
+    'selectedSubject',
+    'selectedCategory',
+    function() {
+      this.setupComponent();
+    }
+  ),
 
   /**
    * Set the subject dropdown label - from course

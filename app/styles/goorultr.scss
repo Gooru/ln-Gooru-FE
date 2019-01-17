@@ -1,12 +1,10 @@
-@import "variables";
-// Variable which are specific to rtl & ltr languages
+@import "variables"; // Variable which are specific to rtl & ltr languages
 $tab-float-dir: left;
 $menu-float-dir: right;
 $border-right-side: 1px solid;
 $border-left-side: 0;
 $header-menu-rt-pos: 10px;
-$box-shadow: 1px -1px;
-// 2) import style file
+$box-shadow: 1px -1px; // 2) import style file
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
 @import "embedded";
 @import "gooru-theme";
@@ -47,6 +45,7 @@ $box-shadow: 1px -1px;
 @import "controllers/profile/content/resources";
 @import "controllers/profile/content/rubrics";
 @import "controllers/profile/about";
+@import "controllers/profile/preference";
 
 @import "controllers/profile/edit";
 @import "controllers/profile/courses";
@@ -92,6 +91,7 @@ $box-shadow: 1px -1px;
 @import "controllers/goals/manage";
 @import "controllers/student-independent-learning/learning-base";
 @import "controllers/not-found";
+@import "controllers/student-locate";
 
 // TODO: update these components so they follow the naming conventions
 @import "components/app-dropdown";
@@ -374,32 +374,26 @@ $box-shadow: 1px -1px;
 @import "components/proficiency/learner-proficiency-domain-matrix";
 @import "components/proficiency/competency-content-info";
 @import "components/class/overview/route-suggestion-proficiency-matrix";
-@import "components/ca-date-picker";
-//ATC View
+@import "components/ca-date-picker"; //ATC View
 @import "components/teacher/class-atc-view";
 @import "components/teacher/class-performance-chart";
 @import "components/teacher/class/atc-chart";
 @import "routes/student/class/performance";
-@import "routes/content/rubric/preview";
-//Pull Up
+@import "routes/content/rubric/preview"; //Pull Up
 @import "components/reports/pull-up/competency-report";
 @import "components/reports/pull-up/course-competency-report";
 @import "components/reports/pull-up/domain-competency-report";
 @import "components/reports/pull-up/competency-content-report";
 @import "components/reports/pull-up/accordion/collection-accordion";
-@import "components/reports/pull-up/activity-list";
-//Student Nav Math class join landing
+@import "components/reports/pull-up/activity-list"; //Student Nav Math class join landing
 @import "components/student/class/student-class-landing";
 @import "components/student/class/gru-class-grade";
 @import "components/student/class/student-inspect-destination";
 @import "components/proficiency/student-inspect-competency-chart";
 @import "components/student/class/destination/student-destination-course-accordion";
-@import "components/proficiency/taxonomy-grades";
-//Student Nav Math Class join landing for mobile view
-@import "components/student/class/student-inspect-destination-xs";
-// Student / Teacher grading
+@import "components/proficiency/taxonomy-grades"; //Student Nav Math Class join landing for mobile view
+@import "components/student/class/student-inspect-destination-xs"; // Student / Teacher grading
 @import "components/grade/pull-up/free-response-question-grade";
-
 // Activity card
 @import "components/activity/course-card";
 @import "components/activity/assessment-card";
@@ -408,16 +402,13 @@ $box-shadow: 1px -1px;
 @import "components/activity/unit-card";
 @import "components/activity/question-card";
 @import "components/activity/resource-card";
-
 // Inspect Competency
 @import "components/proficiency/inspect/student-domain-performance";
 @import "components/proficiency/inspect/student-domain-competency-performance";
 @import "components/proficiency/inspect/student-class-proficiency";
-
 // Chronological View
 @import "components/player/chrono-view/chrono-header";
-@import "components/player/chrono-view/student-card";
-// Performance Manual Entry
+@import "components/player/chrono-view/student-card"; // Performance Manual Entry
 @import "components/reports/pull-up/performance-manual-entry";
 @import "components/reports/pull-up/assessment-performance-entry";
 @import "components/reports/pull-up/external-assessment-performance-entry";

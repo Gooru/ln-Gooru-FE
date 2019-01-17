@@ -7,15 +7,15 @@ export default Ember.Component.extend({
   classNameBindings: ['cardPos'],
 
   cardPos: Ember.computed(
-    'activitiy.selected',
-    'activitiy.position',
-    'activitiy.positionSeq',
+    'activity.selected',
+    'activity.position',
+    'activity.positionSeq',
     function() {
-      let activitiy = this.get('activitiy');
-      if (activitiy.get('selected')) {
+      let activity = this.get('activity');
+      if (activity.get('selected')) {
         return 'selected';
       } else {
-        return `${activitiy.get('position')}-${activitiy.get('positionSeq')}`;
+        return `${activity.get('position')}-${activity.get('positionSeq')}`;
       }
     }
   ),
@@ -43,14 +43,14 @@ export default Ember.Component.extend({
   /**
    * @property {type}
    */
-  type: Ember.computed('activitiy', function() {
-    return this.get('activitiy.collectionType');
+  type: Ember.computed('activity', function() {
+    return this.get('activity.collectionType');
   }),
 
   /**
-   * @property {activitiy}
+   * @property {activity}
    */
-  activitiy: null,
+  activity: null,
 
   /**
    * @property {loading}
@@ -67,20 +67,24 @@ export default Ember.Component.extend({
    */
   getStundentCollectionReport() {
     let component = this;
-    let activitiy = component.get('activitiy');
+    let activity = component.get('activity');
     let collectionPromise;
-    if (activitiy.get('collectionType') === 'collection') {
+    if (activity.get('collectionType') === 'collection') {
       collectionPromise = component
         .get('collectionService')
-        .readCollection(activitiy.get('collectionId'));
-    } else if (activitiy.get('collectionType') === 'assessment') {
+        .readCollection(activity.get('collectionId'));
+    } else if (activity.get('collectionType') === 'assessment') {
       collectionPromise = component
         .get('assessmentService')
-        .readAssessment(activitiy.get('collectionId'));
-    } else if (activitiy.get('collectionType') === 'assessment-external') {
+        .readAssessment(activity.get('collectionId'));
+    } else if (activity.get('collectionType') === 'assessment-external') {
       collectionPromise = component
         .get('assessmentService')
-        .readExternalAssessment(activitiy.get('collectionId'));
+        .readExternalAssessment(activity.get('collectionId'));
+    } else {
+      collectionPromise = component
+        .get('collectionService')
+        .readExternalCollection(activity.get('collectionId'));
     }
     return Ember.RSVP.hashSettled({
       collection: collectionPromise
@@ -94,24 +98,26 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    onSelectCard(activitiy) {
-      this.sendAction('onSelectCard', activitiy);
+    onSelectCard(activity) {
+      this.sendAction('onSelectCard', activity);
     },
 
     onOpenCollectionReport() {
       let component = this;
-      let isActive = this.get('activitiy.selected');
+      let activity = component.get('activity');
+      let isActive = activity.get('selected');
       let collection = component.get('collection');
       collection.set(
         'performance',
         Ember.Object.create({
-          score: component.get('activitiy.score')
+          score: activity.score
         })
       );
       if (isActive) {
         component.sendAction(
           'onOpenCollectionReport',
-          component.get('collection'),
+          activity,
+          collection,
           component.get('type')
         );
       }

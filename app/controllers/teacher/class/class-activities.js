@@ -378,7 +378,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       this.handleScrollToSpecificDate(date);
     },
 
-    onOpenPerformanceEntry(item, activity) {
+    onOpenPerformanceEntry(item, activity, isRepeatEntry) {
       let component = this;
       component.fetchActivityUsers(activity.id).then(function(activityMembers) {
         let classMembers = component.get('members');
@@ -386,7 +386,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         activityMembers.map(member => {
           classActivityStudents.push(classMembers.findBy('id', member.id));
         });
-        component.set('activityMembers', classActivityStudents);
+
+        component.set('activityMembers', classActivityStudents.sortBy('firstName'));
         if (item.format === 'assessment') {
           component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
           component.set('isShowCollectionPerformanceEntryPullUp', false);
@@ -408,6 +409,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       });
       component.set('selectedItem', item);
       component.set('selectedActivity', activity);
+      component.set('isRepeatEntry', isRepeatEntry);
     },
 
     onClosePerformanceEntry() {
@@ -437,6 +439,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
+
+  isRepeatEntry: false,
 
   isOfflineClass: Ember.computed('class', function() {
     let controller = this;
@@ -556,7 +560,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Class id
    * @property {String}
    */
-  members: Ember.computed.alias('classController.class.members'),
+  members: Ember.computed('classController.class.members', function() {
+    const controller = this;
+    let classMembers = controller.get('classController.class.members');
+    return classMembers.sortBy('firstName');
+  }),
   /**
    * Class id
    * @property {String}

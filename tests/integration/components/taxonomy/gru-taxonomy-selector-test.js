@@ -30,6 +30,28 @@ const taxonomyServiceStub = Ember.Service.extend({
     return new Ember.RSVP.resolve([t1, t2]);
   },
 
+  getCategories: function() {
+    const c1 = Ember.Object.create({
+      id: 'k_12',
+      code: 'K12',
+      title: 'K12'
+    });
+
+    const c2 = Ember.Object.create({
+      id: 'higher_education',
+      code: 'HE',
+      title: 'Higher Education'
+    });
+
+    const c3 = Ember.Object.create({
+      id: 'professional_learning',
+      code: 'PL',
+      title: 'Professional Development'
+    });
+
+    return new Ember.RSVP.resolve([c1, c2, c3]);
+  },
+
   getCourses: function(subject) {
     const courses = [
       TaxonomyItem.create({
@@ -93,10 +115,10 @@ test('View mode it renders - no show categories', function(assert) {
   );
 });
 
-test('Edit mode it renders when no selection is made - from non course content', function(
-  assert
-) {
-  this.render(hbs`{{taxonomy/gru-taxonomy-selector isEditing=true}}`);
+test('Edit mode it renders when no selection is made - from non course content', function(assert) {
+  this.render(
+    hbs`{{taxonomy/gru-taxonomy-selector selectedCategory='K12' isEditing=true}}`
+  );
 
   const $component = this.$('.gru-taxonomy-selector');
 
@@ -112,9 +134,7 @@ test('Edit mode it renders when no selection is made - from non course content',
   );
 });
 
-test('Edit mode it renders when no selection is made - from course content', function(
-  assert
-) {
+test('Edit mode it renders when no selection is made - from course content', function(assert) {
   this.render(
     hbs`{{taxonomy/gru-taxonomy-selector isEditing=true showCourses=true}}`
   );
@@ -133,16 +153,14 @@ test('Edit mode it renders when no selection is made - from course content', fun
   );
 });
 
-test('Edit mode category selection - from non course content', function(
-  assert
-) {
+test('Edit mode category selection - from non course content', function(assert) {
   assert.expect(8);
   this.on('selectCategory', function(category) {
-    assert.equal(category, 'k_12', 'Wrong category');
+    assert.equal(category, 'HE', 'Wrong category');
   });
 
   this.render(
-    hbs`{{taxonomy/gru-taxonomy-selector isEditing=true onCategorySelected='selectCategory'}}`
+    hbs`{{taxonomy/gru-taxonomy-selector  selectedCategory='K12' isEditing=true onCategorySelected='selectCategory'}}`
   );
 
   const $component = this.$('.gru-taxonomy-selector');
@@ -157,8 +175,8 @@ test('Edit mode category selection - from non course content', function(
   return wait().then(function() {
     assert.equal(
       $component.find('.categories .btn-info').length,
-      1,
-      'There should be 1 non selected category buttons displayed'
+      2,
+      'There should be 2 non selected category buttons displayed'
     );
     assert.equal(
       $component.find('.categories .btn-primary').length,
@@ -186,13 +204,11 @@ test('Edit mode category selection - from non course content', function(
   });
 });
 
-test('subject label of the higher school category selection - from course content', function(
-  assert
-) {
+test('subject label of the higher school category selection - from course content', function(assert) {
   assert.expect(3);
 
   this.render(
-    hbs`{{taxonomy/gru-taxonomy-selector isEditing=true showCourses=true}}`
+    hbs`{{taxonomy/gru-taxonomy-selector selectedCategory='k_12' isEditing=true showCourses=true}}`
   );
 
   const self = this;
@@ -215,8 +231,7 @@ test('subject label of the higher school category selection - from course conten
       T.text($subjectLabel),
       self
         .get('i18n')
-        .t('taxonomy.gru-taxonomy-selector.competency-subject-and-course')
-        .string,
+        .t('taxonomy.gru-taxonomy-selector.primary-subject-and-course').string,
       'Wrong subject label'
     );
   });
@@ -225,7 +240,7 @@ test('subject label of the higher school category selection - from course conten
 test('Edit mode category selection - from course content', function(assert) {
   assert.expect(8);
   this.on('selectCategory', function(category) {
-    assert.equal(category, 'k_12', 'Wrong category');
+    assert.equal(category, 'K12', 'Wrong category');
   });
 
   this.render(

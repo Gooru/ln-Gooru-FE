@@ -81,9 +81,13 @@ export default Ember.Component.extend({
       component.openStudentCourseReport();
     },
 
-    onOpenCollectionReport(collection, collectionType) {
+    onOpenCollectionReport(activity, collection, collectionType) {
       let component = this;
-      component.openStudentCollectionReport(collection, collectionType);
+      component.openStudentCollectionReport(
+        activity,
+        collection,
+        collectionType
+      );
     },
 
     onSelectCard(activity) {
@@ -179,43 +183,30 @@ export default Ember.Component.extend({
    * @function openStudentCollectionReport
    * Method to open student collection report
    */
-  openStudentCollectionReport(collection, collectionType) {
+  openStudentCollectionReport(activity, collection, collectionType) {
     let component = this;
-    const lessonPromise = component.get('course.id')
-      ? component
-        .get('lessonService')
-        .fetchById(
-          component.get('course.id'),
-          collection.get('unitId'),
-          collection.get('lessonId')
-        )
-      : null;
-    return Ember.RSVP.hashSettled({
-      lesson: lessonPromise
-    }).then(function(hash) {
-      let lesson = hash.lesson.state === 'fulfilled' ? hash.lesson.value : null;
-      let params = {
-        userId: component.get('session.userId'),
-        classId: component.get('class.id'),
-        courseId: component.get('course.id'),
-        unitId: collection.get('unitId'),
-        lessonId: collection.get('lessonId'),
-        collectionId: collection.get('id'),
-        lesson: lesson,
-        type: collectionType,
-        isStudent: true,
-        isTeacher: false,
-        collection
-      };
-      component.set('studentCollectionReportContext', params);
-      if (collectionType === 'assessment-external') {
-        component.set('showExternalAssessmentReport', true);
-        component.set('showCollectionReport', false);
-      } else {
-        component.set('showExternalAssessmentReport', false);
-        component.set('showCollectionReport', true);
-      }
-    });
+    let params = {
+      userId: component.get('session.userId'),
+      classId: activity.get('classId'),
+      courseId: activity.get('courseId'),
+      unitId: activity.get('unitId'),
+      lessonId: activity.get('lessonId'),
+      collectionId: activity.get('id'),
+      sessionId:
+        collectionType === 'assessment' ? activity.get('sessionId') : null,
+      type: collectionType,
+      isStudent: true,
+      isTeacher: false,
+      collection
+    };
+    component.set('studentCollectionReportContext', params);
+    if (collectionType === 'assessment-external') {
+      component.set('showExternalAssessmentReport', true);
+      component.set('showCollectionReport', false);
+    } else {
+      component.set('showExternalAssessmentReport', false);
+      component.set('showCollectionReport', true);
+    }
   },
 
   /**

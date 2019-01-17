@@ -1,6 +1,9 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
-import { PLAYER_WINDOW_NAME, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  PLAYER_WINDOW_NAME,
+  PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
 
 export default Ember.Component.extend({
@@ -50,7 +53,6 @@ export default Ember.Component.extend({
   tags: Ember.computed('course.taxonomy.[]', function() {
     return TaxonomyTag.getTaxonomyTags(this.get('course.taxonomy'));
   }),
-
 
   isPremiumCourse: Ember.computed('course', function() {
     let controller = this;

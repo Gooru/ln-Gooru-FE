@@ -6,6 +6,13 @@ import TaxonomyItem from 'gooru-web/models/taxonomy/taxonomy-item';
 
 moduleForService('service:taxonomy', 'Unit | Service | taxonomy', {
   beforeEach: function() {
+    this.taxonomyCategories = Ember.A([
+      Ember.Object.create({
+        id: 'k_12',
+        code: 'K12',
+        title: 'K12'
+      })
+    ]);
     this.taxonomySubjects = Ember.A([
       TaxonomyRoot.create(Ember.getOwner(this).ownerInjection(), {
         id: 'GDF.K12.VPA',
@@ -80,9 +87,7 @@ moduleForService('service:taxonomy', 'Unit | Service | taxonomy', {
   }
 });
 
-test('getSubjects when taxonomy container has not been loaded', function(
-  assert
-) {
+test('getSubjects when taxonomy container has not been loaded', function(assert) {
   const test = this;
   const service = this.subject();
   assert.expect(3); // Just the first time the taxonomy data should be loaded for every category.
@@ -93,6 +98,10 @@ test('getSubjects when taxonomy container has not been loaded', function(
       fetchSubjects: function() {
         assert.ok(true); // This assert should be evaluated for every subject category
         return Ember.RSVP.resolve(test.taxonomySubjects);
+      },
+      fetchCategories: function() {
+        assert.ok(true); // This assert should be evaluated for  categories
+        return Ember.RSVP.resolve(test.taxonomyCategories);
       }
     })
   );
@@ -128,9 +137,7 @@ test('getSubjects when taxonomy is already loaded', function(assert) {
   });
 });
 
-test('getCourses when taxonomy courses does not exist for subject', function(
-  assert
-) {
+test('getCourses when taxonomy courses does not exist for subject', function(assert) {
   const test = this;
   const service = this.subject();
   service.set(
@@ -439,13 +446,26 @@ test('organizeCodes', function(assert) {
 */
 
 test('findSubjectById for a loaded category and subject', function(assert) {
+  const test = this;
   const service = this.subject();
   const taxonomyContainer = {
     k_12: this.taxonomySubjects
   };
 
   service.set('taxonomyContainer', taxonomyContainer);
-
+  service.set(
+    'apiTaxonomyService',
+    Ember.Object.create({
+      fetchSubjects: function() {
+        assert.ok(true); // This assert should be evaluated for every subject category
+        return Ember.RSVP.resolve(test.taxonomySubjects);
+      },
+      fetchCategories: function() {
+        assert.ok(true); // This assert should be evaluated for  categories
+        return Ember.RSVP.resolve(test.taxonomyCategories);
+      }
+    })
+  );
   var done = assert.async();
   service.findSubjectById('GDF.K12.VPA').then(function(subject) {
     assert.equal(subject.get('id'), 'GDF.K12.VPA', 'Invalid subject id');
@@ -466,14 +486,25 @@ test('findSubjectById for a loaded category and subject', function(assert) {
   });
 });
 
-test('findSubjectById for a loaded category and non-loaded subject', function(
-  assert
-) {
+test('findSubjectById for a loaded category and non-loaded subject', function(assert) {
   const service = this.subject();
+  const test = this;
   const taxonomyContainer = {
     k_12: this.taxonomySubjects
   };
-
+  service.set(
+    'apiTaxonomyService',
+    Ember.Object.create({
+      fetchSubjects: function() {
+        assert.ok(true); // This assert should be evaluated for every subject category
+        return Ember.RSVP.resolve(test.taxonomySubjects);
+      },
+      fetchCategories: function() {
+        assert.ok(true); // This assert should be evaluated for  categories
+        return Ember.RSVP.resolve(test.taxonomyCategories);
+      }
+    })
+  );
   service.set('taxonomyContainer', taxonomyContainer);
   var done = assert.async();
   service.findSubjectById('non.existing.subject').then(function(subject) {
@@ -668,9 +699,7 @@ test('Create standards hierarchy -one learning target', function(assert) {
   assert.equal(L2item.get('children').length, 1, 'Number of learning targets');
 });
 
-test('Create standards hierarchy -multi-level learning targets', function(
-  assert
-) {
+test('Create standards hierarchy -multi-level learning targets', function(assert) {
   const service = this.subject();
 
   const codes = [

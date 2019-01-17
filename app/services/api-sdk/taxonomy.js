@@ -272,5 +272,19 @@ export default Ember.Service.extend({
           }
         );
     });
+  },
+
+  fetchCategories: function() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve) {
+      service
+        .get('taxonomyAdapter')
+        .fetchCategories()
+        .then(function(response) {
+          resolve(
+            service.get('taxonomySerializer').normalizeFetchCategories(response)
+          );
+        });
+    });
   }
 });

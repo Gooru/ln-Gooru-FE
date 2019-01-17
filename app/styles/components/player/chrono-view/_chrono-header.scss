@@ -129,11 +129,15 @@
       }
 
       .active {
-        stroke: #359649;
+        stroke: #0094dc;
         fill: #fff;
         r: 30;
         cy: 35;
         cx: 50;
+
+        &.suggested {
+          stroke: #f9944b;
+        }
       }
 
       foreignObject {
@@ -145,7 +149,6 @@
         background-image: url("gooru/images/assessment-white.svg");
         display: block;
         width: 36.7px;
-        background-color: green;
         height: 27.5px;
         background-repeat: no-repeat;
         background-position: center;
@@ -156,7 +159,6 @@
         background-image: url("gooru/images/navigation_collection_selected.svg");
         display: block;
         width: 36.7px;
-        background-color: green;
         height: 27.5px;
         background-repeat: no-repeat;
         background-position: center;

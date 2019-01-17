@@ -1,0 +1,248 @@
+<div class="content_outlet">
+    <div class='profile-preference'>
+        <div class="category-wrapper">{{!-- A two row layout  --}}
+            {{#if isEditMode}}
+                <div class='category-head edit-head'>
+                    <button class='add-category btn btn-basic cancel' {{action 'cancel' false}}> {{t "common.cancel"}}
+                    </button>
+                    <button class='add-category btn btn-primary save' {{action 'savePreferences'}}> {{t "common.save"}}
+                    </button>
+                </div>
+                <div class="category-container-layout">
+                    <div class='category-container' style="">
+                        <div class='language-preference'>
+                            <div class="panel panel-default">
+                                <div class='panel-heading'>
+                                    <span class='category-title'>
+                                        {{t 'profile.preference.language-preference'}}
+                                    </span>
+                                </div>
+                                <div class='panel-body'>
+                                    <div class='add-cat category-head'>
+                                        <div class="add-category-section">
+                                            <div> {{t 'profile.preference.choose-preferred-language'}} </div>
+                                            <div class="dropdown language-dropdown">
+                                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    {{#if selectedLanguage}}
+                                                        {{selectedLanguage.display_name}}
+                                                    {{else}}
+                                                        {{t 'profile.preference.choose-language'}}
+                                                    {{/if}}
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    {{#each languages as |language|}}
+                                                        <li> <a data-item={{language}} {{ action 'updateLanguage' language}}>{{language.display_name}}
+                                                            </a> </li>
+                                                    {{else}}
+                                                        <li> {{t 'profile.preference.no-data'}} </li>
+                                                    {{/each}}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{else}}
+                {{#if (and addedCategories (not isEditMode) )}}
+                    <div class="category-head edit-head">
+                        <div class='edit-preference' {{action 'editCategory' }}> {{gru-icon name='mode_edit'}}</div>
+                    </div>
+                {{/if}}
+                <div class="category-container-layout">
+                    <div class='category-container' style="">
+                        <div class='language-preference'>
+                            <div class="panel panel-default">
+                                <div class='panel-heading'>
+                                    <span class='category-title'>
+                                        {{t 'profile.preference.language-preference'}}
+                                    </span>
+                                </div>
+                                <div class='panel-body'>
+                                    <div class='category-head'>
+                                        <div class="display-language-pref-row">
+                                            <div class="display-language-pref-label"> {{t 'profile.preference.language'}}: </div>
+                                            <div>
+                                                {{selectedLanguage.display_name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='add-cat'>
+                    <div class='add-cat-1'>
+                        <div class="category-container add-category-section">
+                            <div> {{t 'profile.preference.select-category-label'}} </div>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    {{#if currentSelectedCategory}}
+                                        {{currentSelectedCategory.title}}
+                                    {{else}}
+                                        {{t 'profile.preference.choose-category'}}
+                                    {{/if}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    {{#each categoriesDropDown as |category|}}
+                                        <li> <a data-item={{category}} {{ action 'addCategory' category}}>{{category.title}}
+                                            </a> </li>
+                                    {{else}}
+                                        <li> {{t 'profile.preference.no-data'}}</li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- <button class='add-category' {{action 'savePreferences'}}> Save </button> --}}
+                </div>
+            {{/if}}
+            <div class="category-container-layout">
+                <div class='category-container' style="">
+                    {{#each addedCategories as |category|}}
+                        {{#if (eq category.edit true)}}
+                            <div style='display:block;' class="edit-mode">
+                                <div class="panel panel-default">
+                                    <div class='panel-heading'>
+                                        <div class='category-title'>
+                                            {{category.title}}
+                                        </div>
+                                        <div>
+                                            <div class="removeCategory" {{action 'removeCategory' category}}>{{gru-icon name='remove_circle_outline'}}</div>
+                                        </div>
+                                        {{!-- subject drop down with plus icon starts --}}
+                                        <div class='sub'>
+                                            <div class="dropdown">
+                                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    {{#if category.currentSelectedSubject}}
+                                                        <div class="button-text sub">
+                                                            {{ category.currentSelectedSubject.title}}
+                                                        </div>
+                                                    {{else}}
+                                                        {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
+                                                    {{/if}}
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    {{#each category.subjectFwks  as |subject |}}
+                                                        <li> <a data-item={{subject}} {{ action 'markSelectedSubject'  subject category  }}>
+                                                                {{subject.title}}
+                                                            </a> </li>
+                                                    {{else}}
+                                                        <li> {{t 'profile.preference.no-data'}} </li>
+                                                    {{/each}}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        {{!-- fwk drop down --}}
+                                        <div class='fwk'>
+                                            <div class="dropdown">
+                                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    {{log category}}
+                                                    {{#if category.currentSelectedSubject.currentSelectedFwk}}
+                                                        {{ category.currentSelectedSubject.currentSelectedFwk.frameworkId}}
+                                                    {{else}}
+                                                        {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
+                                                    {{/if}}
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    {{#each category.currentSelectedSubject.frameworks as |fwk |}}
+                                                        <li> <a data-item={{fwk}} {{ action 'markSelectedFrameworks' fwk subjects category  }}>{{fwk.frameworkId}}
+                                                            </a> </li>
+                                                    {{else}}
+                                                        <li> {{t 'profile.preference.no-data'}} </li>
+                                                    {{/each}}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        {{!-- fwk drop down ends --}}
+                                        {{log category}}
+                                        <div class="addSubjectFWK" {{action 'updateMarkedSelectionsAsAdded' fwk subjects category }}>
+                                            {{gru-icon name='add'}}
+                                        </div>
+                                        {{!-- subject Dropdown with plus icon --}}
+                                    </div>
+                                    <div class='panel-body'>
+                                        {{#each category.subjects as |subjectFwk |}}
+                                            {{!--  {{log 'subjectFwk' subjectFwk}}
+                                            {{log 'forcst' category}}
+                                            {{log 'categoriesMaster category' (get-value 'source' source=categoriesMaster searchProp='id'
+                                                                                searchVal=category.id
+                                                                                destProp='subjectFwks' )}} --}}
+                                            <div class="subject-fwk">
+                                                {{#each-in subjectFwk as |sub fwk|}}
+                                                    <div class='subject'>
+                                                        {{get-value 'source' source=category.subjectFwks searchProp='code'
+                                                                                searchVal=sub
+                                                                                destProp='title' }}
+                                                    </div>
+                                                    <div>
+                                                        <div class="actionClass" {{action 'removeSubject' category sub}}>
+                                                            {{gru-icon name='remove_circle_outline'}}</div>
+                                                    </div>
+                                                    <div class='fwk'>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                {{!--  {{get-value 'source' source=(get-value 'source' source=category.subjectFwks searchProp='code' searchVal=sub destProp='frameworks') searchProp='frameworkId' searchVal=fwk destProp='title' }} 
+                                                            --}}
+                                                                {{fwk}}
+                                                                <span class="caret"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                {{#each (get-value 'source' source=category.subjectFwks searchProp='code'
+                                                                                searchVal=sub
+                                                                                destProp='frameworks')  as |fwks |}}
+                                                                    <li> <a data-item={{fwks}} {{ action 'updateFrameworkForSubjectCategory' fwks sub category  }}>{{fwks.frameworkId}}
+                                                                        </a> </li>
+                                                                {{else}}
+                                                                    <li> {{t 'profile.preference.no-data'}} </li>
+                                                                {{/each}}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                {{/each-in}}
+                                            </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        {{else}}
+                            <div class="display-mode">
+                                <div class="panel panel-default">
+                                    <div class='panel-heading'>
+                                        <span class='category-title'>
+                                            {{category.title}}
+                                        </span>
+                                        {{!-- <div class="updateCategory" {{action 'editCategory' category}}>edit</div> --}}
+                                    </div>
+                                    <div class='panel-body'>
+                                        {{#each category.subjects as |subjectFwk |}}
+                                            <div class="subject-fwk">
+                                                {{#each-in subjectFwk as |sub fwk|}}
+                                                    <div class='subject'>
+                                                        {{get-value 'source' source=category.subjectFwks searchProp='code'
+                                                                                searchVal=sub
+                                                                                destProp='title' }}
+                                                    </div>
+                                                    <div class='fwk'>
+                                                        {{fwk}}
+                                                    </div>
+                                                {{/each-in}}
+                                            </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
