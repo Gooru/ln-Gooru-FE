@@ -62,7 +62,9 @@
         align-items: center;
         // grid-template-columns: minmax(200px, 250px) minmax(200px, 200px) 20px;
         grid-template-columns: minmax(290px, 250px) minmax(110px, 200px) 20px;
-
+        @media (max-width: 360px) {
+          grid-template-columns: minmax(125px, 250px) minmax(80px, 200px) 20px;
+        }
         .category-title {
           cursor: pointer;
           font-weight: bold;
@@ -190,6 +192,9 @@
 
           .fwk-new-cat {
             margin-left: -22px;
+            @media (max-width: 360px) {
+              margin-left: -50px;
+            }
           }
         }
         .subject-fwk:hover .actionClass {
