@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['oca--students-summary-report-pull-up'],
+  classNames: ['oca-students-summary-report-pull-up'],
 
   // -------------------------------------------------------------------------
   // Dependencies
@@ -33,9 +33,28 @@ export default Ember.Component.extend({
 
   isLoading: false,
 
+  selectedStudent: null,
+
+  isShowStudentActivityReport: false,
+
   actions: {
     onPullUpClose(closeAll) {
-      this.closePullUp(closeAll);
+      let component = this;
+      component.closePullUp(closeAll);
+    },
+
+    pullUpClose(closeAll) {
+      let component = this;
+      component.set('isShowStudentActivityReport', false);
+      if (closeAll) {
+        component.closePullUp(closeAll);
+      }
+    },
+
+    onSelectStudent(student) {
+      let component = this;
+      component.set('isShowStudentActivityReport', true);
+      component.set('selectedStudent', student);
     }
   },
 

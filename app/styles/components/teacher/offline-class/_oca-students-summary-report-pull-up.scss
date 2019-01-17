@@ -1,4 +1,4 @@
-.oca--students-summary-report-pull-up {
+.oca-students-summary-report-pull-up {
   position: fixed;
   top: 100%;
   z-index: 1031;
@@ -191,6 +191,7 @@
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
         background-color: #ffffff;
         display: grid;
+        cursor: pointer;
         grid-template-columns: 1fr 56px;
 
         .student-info {
