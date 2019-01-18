@@ -18,9 +18,8 @@
                                     </span>
                                 </div>
                                 <div class='panel-body'>
-                                    <div class="subject-fwk">
+                                    <div class="subject-fwk-language">
                                         <div class='subject'> {{t 'profile.preference.choose-preferred-language'}} </div>
-                                        <div></div>
                                         <div class="fwk">
                                             <div class="dropdown language-dropdown pull-left">
                                                 <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -41,23 +40,49 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="subject-fwk" style="display:none;">
-                                        <div class='subject'> {{t 'profile.preference.choose-preferred-language'}} </div>
                                         <div></div>
+                                    </div>
+                                    <div class="subject-fwk-language">
+                                        <div class='subject'> {{t 'profile.preference.choose-preferred-other-languages'}} </div>
                                         <div class="fwk">
-                                            <div class="form-group1">
-                                                <select class="selectpicker form-control1" multiple mobile=true>
-                                                    {{!-- <ul class="dropdown-menu pull-right"> --}}
-                                                    {{#each languages as |language|}}
-                                                        <option data-item={{language}}>{{language.display_name}}
-                                                        </option>
+                                            <div class="dropdown language-dropdown pull-left">
+                                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    {{#if selectedSecLanguage}}
+                                                        {{selectedSecLanguage.display_name}}
                                                     {{else}}
-                                                        <option> {{t 'profile.preference.no-data'}} </option>
+                                                        {{t 'profile.preference.choose-language'}}
+                                                    {{/if}}
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu pull-right">
+                                                    {{#each languages as |language|}}
+                                                        <li> <a data-item={{language}} {{ action 'selectSecLanguage' language}}>{{language.display_name}}
+                                                            </a> </li>
+                                                    {{else}}
+                                                        <li> {{t 'profile.preference.no-data'}} </li>
                                                     {{/each}}
-                                                    {{!-- </ul> --}}
-                                                </select>
+                                                </ul>
                                             </div>
+                                        </div>
+                                        <div>
+                                            <div class="addSubjectFWK" {{ action 'updateSecLanguage' selectedSecLanguage}} title="{{t 'profile.preference.add-sec-language'}} ">
+                                                {{gru-icon name='add'}}
+                                            </div>
+                                        </div>
+                                        <div class="taxonomy  gru-taxonomy-tag-list">
+                                            {{log 'selectedOtherLanguages' selectedOtherLanguages}}
+                                            {{#if selectedOtherLanguages}}
+                                                {{#each selectedOtherLanguages as |otherLanguage|}}
+                                                    <div class="taxonomy gru-taxonomy-tag active read-only remove">
+                                                        <div class="content standard-tag" data-html="true" data-original-title="" title="">
+                                                            <b class="tag-label"><span class="tag-caption ellipsis">{{otherLanguage.display_name}}</span></b>
+                                                            <button class="remove" {{action 'removeSecLanguage'  otherLanguage}}>{{gru-icon name="clear"}}</button>
+                                                        </div>
+                                                    </div>
+                                                {{/each}}
+                                            {{else}}
+                                                {{t 'profile.preference.no-data'}}
+                                            {{/if}}
                                         </div>
                                     </div>
                                 </div>

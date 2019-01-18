@@ -55,6 +55,8 @@ export default Ember.Controller.extend({
 
   isEditMode: false,
 
+  selectedOtherLanguages: null,
+
   //------------------------------------------------------------------------------
   actions: {
     addCategory: function(category) {
@@ -118,7 +120,31 @@ export default Ember.Controller.extend({
       const controller = this;
       controller.set('selectedLanguage', language);
     },
-
+    selectSecLanguage(language) {
+      const controller = this;
+      controller.set('selectedSecLanguage', language);
+    },
+    updateSecLanguage(language) {
+      const controller = this;
+      if (!language) {
+        return;
+      }
+      let languagePreferenceArray = controller.get('selectedOtherLanguages')
+        ? controller.get('selectedOtherLanguages')
+        : Ember.A([]);
+      languagePreferenceArray.pushObject(language);
+      //controller.set('selectedOtherLanguages', languagePreferenceArray);
+      Ember.set(controller, 'selectedOtherLanguages', languagePreferenceArray);
+      controller.set('selectedSecLanguage', null);
+    },
+    removeSecLanguage(language) {
+      const controller = this;
+      let languagePreferenceArray = controller.get('selectedOtherLanguages')
+        ? controller.get('selectedOtherLanguages')
+        : [];
+      languagePreferenceArray.removeObject(language);
+      Ember.set(controller, 'selectedOtherLanguages', languagePreferenceArray);
+    },
     showAddSub(category, show) {
       this.showHideSubjectsDDForCategory(category, show || true);
     },
@@ -378,6 +404,12 @@ export default Ember.Controller.extend({
     let languagePreferenceArray = controller.get('selectedLanguage')
       ? [controller.get('selectedLanguage').id]
       : null;
+    if (controller.get('selectedOtherLanguages')) {
+      controller
+        .get('selectedOtherLanguages')
+        .forEach(secLanguage => languagePreferenceArray.push(secLanguage.id));
+    }
+
     let preferenceData = {
       standard_preference: flatSelections,
       language_preference: languagePreferenceArray
