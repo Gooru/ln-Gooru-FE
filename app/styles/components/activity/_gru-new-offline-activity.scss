@@ -88,23 +88,14 @@
           grid-template-columns: auto auto;
           row-gap: 5px;
           column-gap: 5px;
-          .active-taxonomy {
-            background-color: $dark-300;
-            max-width: max-content;
-            color: $white;
-            padding: 0 5px;
-            border-radius: 3px;
-            display: grid;
-            grid-template-columns: auto auto;
-            column-gap: 3px;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            height: 21px;
-            span {
-              i {
-                font-size: 13px;
-                cursor: pointer;
+          .gru-taxonomy-tag-list {
+            .taxonomy.gru-taxonomy-tag {
+              background-color: $dark-300;
+              color: $white;
+              .toggle {
+                .tag-label {
+                  color: $white;
+                }
               }
             }
           }

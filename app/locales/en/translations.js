@@ -683,6 +683,7 @@ export default Object.assign(quizzesTranslations, {
     tools: 'Tools',
     true: 'True',
     type: 'Type',
+    title: 'Title',
     unBookmark: 'Unbookmark',
     unexpectedError:
       'An unexpected error has occurred and has been reported. We\'re sorry for the inconvenience!',

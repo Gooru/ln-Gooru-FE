@@ -7,24 +7,24 @@
   <div class="body-container">
     {{#if isClassPreferenceMapped}}
     <div class="title-container">
-      <div class="label-container">Title <span class="required">*</span></div>
+      <div class="label-container">{{t 'common.title'}} <span class="required">*</span></div>
       <div class="input-container">{{input type="text" value=activityTitle class="activity-title"}}</div>
     </div>
     <div class="description-container">
-      <div class="label-container">Description</div>
+      <div class="label-container">{{t 'common.description'}}</div>
       <div class="input-container">{{textarea value=activityDescription class="activity-description" id="description-editor"}}</div>
     </div>
       <div class="competency-container">
         <div class="label-container">{{t 'common.competency'}}</div>
         <div class="active-taxonomies-container">
-          {{#each visibleCompetencies as |competency|}}
-            <div class="active-taxonomy ellipsis"><span>{{competency.id}}</span> <span {{action "onRemoveCompetency" competency}}>{{gru-icon name="clear"}}</span></div>
-          {{/each}}
-          <div class="add-competency" {{action "onToggleTaxonomyPicker" 'show'}}>{{t 'common.add'}}</div>
+          {{#if selectedCompetencies.length}}
+            {{taxonomy.gru-taxonomy-tag-list tags=selectedCompetencies}}
+          {{/if}}
+          <div class="add-competency" {{action "onToggleTaxonomyPicker"}}>{{t 'common.add'}}</div>
         </div>
         <div class="taxonomy-picker-container" style="display: none;">
           {{#if isShowTaxonomyPicker}}
-            {{ca-taxonomy-picker classPreference=classPreference onSelectCompetency="onSelectCompetency" onSubmitCompetencies="onToggleTaxonomyPicker"}}
+            {{ca-taxonomy-picker classPreference=classPreference selectedCompetencies=selectedCompetencies  onSubmitCompetencies="onSubmitCompetencies" course=course domain=domain onCloseTaxonomyPicker="onCloseTaxonomyPicker"}}
           {{/if}}
         </div>
       </div>

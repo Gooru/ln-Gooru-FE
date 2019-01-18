@@ -1,6 +1,5 @@
 import Ember from 'ember';
-import {TAXONOMY_CATEGORIES} from 'gooru-web/config/config';
-import {getSubjectIdFromSubjectBucket} from 'gooru-web/utils/utils';
+import {getCategoryCodeFromSubjectId} from 'gooru-web/utils/taxonomy';
 
 export default Ember.Component.extend({
 
@@ -11,12 +10,19 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Dependencies
-  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
+  taxonomyService: Ember.inject.service('taxonomy'),
+
+
+  /**
+   * @property {Service} I18N service
+   */
+  i18n: Ember.inject.service(),
 
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
     const component = this;
+    component.set('isLoadTaxonomyPicker', false);
     component.loadData();
   },
 
@@ -24,55 +30,50 @@ export default Ember.Component.extend({
   // Actions
   actions: {
 
-    //Action triggered when expand subject
-    onExpandSubject(subject, subjectSeq) {
+    updateSelectedTags(selectedTags, course, domain) {
       const component = this;
-      component.set('activeSubject', subject);
-      component.$(`.subject-${subjectSeq}`).toggle(1000);
+      var dataTags = selectedTags.map(function(taxonomyTag) {
+        return taxonomyTag.get('data');
+      });
+      const standards = Ember.A(dataTags);
+      component.set('selectedCompetencies', standards);
+      component.sendAction('onSubmitCompetencies', standards, course, domain);
     },
 
-    //Action triggered when select a hirarchy level
-    onSelectItem(item, type, sequence) {
-      const component = this;
-      if (type === 'framework') {
-        let frameworkId = item.frameworkId;
-        let subjectId = item.id;
-        component.set('activeFramework', item);
-        component.fetchCourses(frameworkId, subjectId);
-        component.set('taxonomyCourses', Ember.A([]));
-        component.set('taxonomyDomains', Ember.A([]));
-        component.set('taxonomies', Ember.A([]));
-      } else if (type === 'course') {
-        let frameworkId = component.get('frameworkPreference');
-        let subjectId = component.get('subjectPreference');
-        let courseId = item.id;
-        component.set('activeCourse', item);
-        component.fetchDomains(frameworkId, subjectId, courseId);
-        component.$('.domains-container').show(1000);
-        component.$('.taxonomies-container').hide(1000);
-        component.set('taxonomyDomains', Ember.A([]));
-        component.set('taxonomies', Ember.A([]));
-      } else if (type === 'domain') {
-        let frameworkId = component.get('frameworkPreference');
-        let subjectId = component.get('subjectPreference');
-        let courseId = component.get('activeCourse.id');
-        let domainId = item.id;
-        component.set('activeDomain', item);
-        component.fetchCompetencies(frameworkId, subjectId, courseId, domainId);
-        component.$('.courses-container').hide(1000);
-        component.$('.taxonomies-container').show(1000);
-      } else if (type === 'taxonomy') {
-        const taxonomyCard = component.$(`.taxonomy-card-${sequence}`);
-        component.$(taxonomyCard).toggleClass('active-card');
-        item.frameworkCode = component.get('frameworkPreference');
-        component.sendAction('onSelectCompetency', item);
-      }
+    loadTaxonomyData(path) {
+      return new Ember.RSVP.Promise(
+        function(resolve) {
+          var subject = this.get('taxonomyPickerData.subject');
+          var taxonomyService = this.get('taxonomyService');
+
+          if (path.length > 1) {
+            let courseId = path[0];
+            let domainId = path[1];
+            taxonomyService
+              .getCourseDomains(subject, courseId)
+              .then(function() {
+                taxonomyService
+                  .getDomainCodes(subject, courseId, domainId)
+                  .then(function(standards) {
+                    resolve(standards);
+                  });
+              });
+          } else {
+            let courseId = path[0];
+            taxonomyService
+              .getCourseDomains(subject, courseId)
+              .then(function(domains) {
+                resolve(domains);
+              });
+          }
+        }.bind(this)
+      );
     },
 
-    //Action triggered when submit selected competencies
-    onSubmitCompetencies() {
+    //Action triggered when close taxonomy picker
+    onCloseTaxonomyPicker() {
       const component = this;
-      component.sendAction('onSubmitCompetencies');
+      component.sendAction('onCloseTaxonomyPicker');
     }
   },
 
@@ -82,12 +83,7 @@ export default Ember.Component.extend({
   /**
    * @property {String} subjectPreference
    */
-  subjectPreference: Ember.computed('classPreference.subject', function() {
-    let component = this;
-    let subjectId = component.get('classPreference.subject');
-    let frameworkId = component.get('frameworkPreference');
-    return `${frameworkId  }.${  subjectId}`;
-  }),
+  subjectPreference: Ember.computed.alias('classPreference.subject'),
 
   /**
    * @property {String} categoryPreference
@@ -95,16 +91,42 @@ export default Ember.Component.extend({
   categoryPreference: Ember.computed('classPreference.subject', function() {
     const component = this;
     let subjectPreference = component.get('classPreference.subject');
-    let categoryPreference = subjectPreference.split('.');
-    let categoryAPIcode = categoryPreference.length > 1 ? categoryPreference.objectAt(0) : null;
-    let categoryInfo = categoryAPIcode ? TAXONOMY_CATEGORIES.findBy('apiCode', categoryAPIcode) : null;
-    return categoryInfo ? categoryInfo.value : null;
+    return getCategoryCodeFromSubjectId(subjectPreference);
   }),
 
   /**
    * @property {String} frameworkPreference
    */
   frameworkPreference: Ember.computed.alias('classPreference.framework'),
+
+  /**
+   * i18n key for the browse selector text
+   * @property {string}
+   */
+  browseSelectorText: Ember.computed('taxonomyPickerData.standardLabel', function() {
+    const standardLabel = this.get('taxonomyPickerData.standardLabel');
+    return standardLabel
+      ? 'taxonomy.modals.gru-standard-picker.browseSelectorText'
+      : 'taxonomy.modals.gru-standard-picker.browseCompetencySelectorText';
+  }),
+
+  /**
+   * i18n key for the selected text key
+   * @property {string}
+   */
+  selectedTextKey: Ember.computed('taxonomyPickerData.standardLabel', function() {
+    const standardLabel = this.get('taxonomyPickerData.standardLabel');
+
+    return standardLabel
+      ? 'taxonomy.modals.gru-standard-picker.selectedText'
+      : 'taxonomy.modals.gru-standard-picker.selectedCompetencyText';
+  }),
+
+  /**
+   * @property {Boolean} isLoadTaxonomyPicker
+   * property to show/hide taxonomy picker
+   */
+  isLoadTaxonomyPicker: false,
 
 
   // -------------------------------------------------------------------------
@@ -117,24 +139,31 @@ export default Ember.Component.extend({
   loadData() {
     const component = this;
     let category = component.get('categoryPreference');
-    component.fetchSubjects(category).then(function(subjects) {
-      component.set('taxonomySubjects', subjects);
+    component.getSubjects(category).then(function(subjects) {
       let subjectPreference = component.get('subjectPreference');
-      let frameworkPreference = component.get('frameworkPreference');
-      component.set('activeSubject', subjects.findBy('code', getSubjectIdFromSubjectBucket(subjectPreference)));
-      component.fetchCourses(frameworkPreference, subjectPreference);
+      let activeSubject = subjects.findBy('code', subjectPreference);
+      if (activeSubject) {
+        let frameworkId = component.get('frameworkPreference');
+        let subjectId = `${frameworkId  }.${  subjectPreference}`;
+        activeSubject.set('frameworkId', frameworkId);
+        activeSubject.set('id', subjectId);
+        component.set('activeSubject', activeSubject);
+        component.getCourses(activeSubject).then(function() {
+          component.loadTaxonomyPicker();
+        });
+      }
     });
   },
 
   /**
-   * @function fetchSubjects
-   * Method to fetch subjects
+   * @function getSubjects
+   * Method to get subjects
    */
-  fetchSubjects(category) {
+  getSubjects(category) {
     const component = this;
     const taxonomyService = component.get('taxonomyService');
     return Ember.RSVP.hash({
-      subjects: Ember.RSVP.resolve(taxonomyService.fetchSubjects(category))
+      subjects: taxonomyService.getSubjects(category)
     })
       .then(({subjects}) => {
         return subjects;
@@ -142,47 +171,44 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function fetchCourses
-   * Method to fetch courses
+   * @function getCourses
+   * Method to get courses
    */
-  fetchCourses(frameworkId, subjectId) {
+  getCourses(subject) {
     const component = this;
     const taxonomyService = component.get('taxonomyService');
     return Ember.RSVP.hash({
-      courses: Ember.RSVP.resolve(taxonomyService.fetchCourses(frameworkId, subjectId))
+      courses: Ember.RSVP.resolve(taxonomyService.getCourses(subject))
     })
       .then(({courses}) => {
-        component.set('taxonomyCourses', courses);
+        return courses;
       });
   },
 
   /**
-   * @function fetchDomains
-   * Method to fetch domains
+   * @function loadTaxonomyPicker
+   * Method to load taxonomy picker
    */
-  fetchDomains(frameworkId, subjectId, courseId) {
+  loadTaxonomyPicker() {
     const component = this;
-    const taxonomyService = component.get('taxonomyService');
-    return Ember.RSVP.hash({
-      domains: Ember.RSVP.resolve(taxonomyService.fetchDomains(frameworkId, subjectId, courseId))
-    })
-      .then(({domains}) => {
-        component.set('taxonomyDomains', domains);
-      });
-  },
+    var standards = component.get('selectedCompetencies') || [];
+    var subject = component.get('activeSubject');
+    var taxonomyPickerData = {
+      selected: standards,
+      shortcuts: null,
+      subject,
+      standardLabel: true
+    };
+    component.set('taxonomyPickerData', taxonomyPickerData);
+    const standardLabel = this.get('taxonomyPickerData.standardLabel')
+      ? 'common.standard'
+      : 'common.competency';
 
-  /**
-   * @function fetchCompetencies
-   * Method to fetch competencies
-   */
-  fetchCompetencies(frameworkId, subjectId, courseId, domainId) {
-    const component = this;
-    const taxonomyService = component.get('taxonomyService');
-    return Ember.RSVP.hash({
-      competencies: Ember.RSVP.resolve(taxonomyService.fetchCodes(frameworkId, subjectId, courseId, domainId))
-    })
-      .then(({competencies}) => {
-        component.set('taxonomies', competencies);
-      });
+    component.set('panelHeaders', [
+      component.get('i18n').t('common.course').string,
+      component.get('i18n').t('common.domain').string,
+      component.get('i18n').t(standardLabel).string
+    ]);
+    component.set('isLoadTaxonomyPicker', true);
   }
 });

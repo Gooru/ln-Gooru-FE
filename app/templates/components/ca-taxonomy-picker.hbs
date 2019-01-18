@@ -1,44 +1,18 @@
-<div class="taxonomy-picker-container">
-  <div class="subjects-container" style="display: none;">
-    {{#each taxonomySubjects as |subject subjectSeq|}}
-      <div class="subject-container" {{action "onExpandSubject" subject subjectSeq}}>
-        {{subject.title}}
-        <div class="selected-framework">{{subject.selectedFrameworkId}}</div>
-        <div class="frameworks-container subject-{{subjectSeq}}" style="display: none;">
-          {{#each subject.frameworks as |framework|}}
-            <div class="framework-container" {{action "onSelectItem" framework 'framework'}}>
-              {{framework.frameworkId}}
-            </div>
-          {{/each}}
-        </div>
-      </div>
-    {{/each}}
-  </div>
-
-  <div class="taxonomy-hierarchy-container">
-    <div class="courses-container hierarchy-level">
-      <div class="hierarchy-title-container">{{t 'common.courses'}}</div>
-      <div class="cards-container">
-        {{#each taxonomyCourses as |course|}}
-          <div class="course-container title-card {{if (eq course.id activeCourse.id) 'active-card'}}" {{action "onSelectItem" course 'course'}}>{{course.title}}</div>
-        {{/each}}
-      </div>
+{{#if isLoadTaxonomyPicker}}
+  <div class="gru-taxonomy-picker-container">
+    {{taxonomy.gru-taxonomy-picker
+      browseSelectorText=browseSelectorText
+      onSave=(action 'updateSelectedTags')
+      onSearchPath=(action 'loadTaxonomyData')
+      panelHeaders=panelHeaders
+      selected=taxonomyPickerData.selected
+      selectedTextKey=selectedTextKey
+      shortcuts=taxonomyPickerData.shortcuts
+      shortcutText=(t "taxonomy.modals.gru-standard-picker.shortcutText")
+      subject=taxonomyPickerData.subject
+      isCompatiableMode=true
+      course=course
+      domain=domain
+      onCloseTaxonomyPicker="onCloseTaxonomyPicker"}}
     </div>
-    <div class="domains-container hierarchy-level" style="display: none;">
-      <div class="hierarchy-title-container">{{t 'common.domains'}}</div>
-      <div class="cards-container">
-        {{#each taxonomyDomains as |domain|}}
-          <div class="domain-container title-card {{if (eq domain.id activeDomain.id) 'active-card'}}" {{action "onSelectItem" domain 'domain'}}>{{domain.title}}</div>
-        {{/each}}
-      </div>
-    </div>
-    <div class="taxonomies-container hierarchy-level" style="display: none;">
-      <div class="hierarchy-title-container">{{t 'common.competencies'}} <span class="submit-selected" {{action "onSubmitCompetencies"}}>{{gru-icon name="done_all"}}</span></div>
-      <div class="cards-container">
-        {{#each taxonomies as |taxonomy taxonomySeq|}}
-          <div class="taxonomy-container title-card taxonomy-card-{{taxonomySeq}}" {{action "onSelectItem" taxonomy 'taxonomy' taxonomySeq}}>{{taxonomy.id}}</div>
-        {{/each}}
-      </div>
-    </div>
-  </div>
-</div>
+{{/if}}

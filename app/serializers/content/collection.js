@@ -202,10 +202,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
       metadata: {
         audience: collectionData.audience
       },
-      taxonomy: taxonomySerializer.serializeTaxonomyForExternalCollection(collectionData.taxonomy),
-      learning_objective: collectionData.description,
-      login_required: true,
-      url: collectionData.url
+      taxonomy: taxonomySerializer
+        .serializeTaxonomy(collectionData.taxonomy),
+      learning_objective: collectionData.description
     };
     return serializedExternalCollectionData;
   }

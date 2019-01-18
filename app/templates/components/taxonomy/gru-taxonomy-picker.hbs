@@ -15,7 +15,7 @@
   {{/if}}
 
   <div class="browse-selector">
-    <span>{{t browseSelectorText}}</span>
+    <span class="{{if isCompatiableMode 'hidden'}}">{{t browseSelectorText}}</span>
 
     {{taxonomy.gru-browse-selector
     data=browseItems
@@ -23,7 +23,10 @@
     selectedPath=selectedPath
     onSelectItem=(action 'updatePath')
     onCheckItem=(action 'addSelectedTag')
-    onUncheckItem=(action 'removeSelectedTag')}}
+    onUncheckItem=(action 'removeSelectedTag')
+    isCompatiableMode=isCompatiableMode
+    course=course
+    domain=domain}}
   </div>
 
   <div class="selected-list">
@@ -34,7 +37,7 @@
   </div>
 
   <div class="actions">
-    <button type="button" class="btn btn-default cancel" data-dismiss="modal" aria-label="{{t 'common.cancel'}}">
+    <button type="button" class="btn btn-default cancel" data-dismiss="modal" aria-label="{{t 'common.cancel'}}" {{action "onCloseTaxonomyPicker"}}>
       <span aria-hidden="true">{{t 'common.cancel'}}</span>
     </button>
     <button type="submit" class="btn btn-primary save">{{if fromSearch (t "common.search") (t "common.add") }}</button>

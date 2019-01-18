@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import {getCategoryCodeFromSubjectId} from 'gooru-web/utils/taxonomy';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -7,13 +8,17 @@ export default Ember.Component.extend({
 
   lookupService: Ember.inject.service('api-sdk/lookup'),
 
-
   collectionService: Ember.inject.service('api-sdk/collection'),
 
   /**
    * @requires service:api-sdk/class-activity
    */
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
+
+  /**
+   * @property {Service} I18N service
+   */
+  i18n: Ember.inject.service(),
 
   // -------------------------------------------------------------------------
   // Events
@@ -58,18 +63,6 @@ export default Ember.Component.extend({
       component.set('selectedAudiences', selectedAudiences);
     },
 
-    //Action triggered when select competency
-    onSelectCompetency(competency) {
-      const component = this;
-      let selectedCompetencies = component.get('selectedCompetencies');
-      let indexOfSelectedCompetency = selectedCompetencies.indexOf(competency);
-      if (indexOfSelectedCompetency >= 0) {
-        selectedCompetencies.splice(indexOfSelectedCompetency, 1);
-      } else {
-        selectedCompetencies.push(competency);
-      }
-      component.set('selectedCompetencies', selectedCompetencies);
-    },
 
     //Action triggered when create activity
     onCreateActivity() {
@@ -100,25 +93,27 @@ export default Ember.Component.extend({
     },
 
     //Action triggered when toggle taxonomy picker
-    onToggleTaxonomyPicker(activity) {
+    onToggleTaxonomyPicker() {
       const component = this;
       const taxonomyPickerContainer = component.$('.taxonomy-picker-container');
-      if (activity === 'show') {
-        component.$(taxonomyPickerContainer).slideDown(1000, function() {
-          const $taxonomyPickerContainer = component.$('.taxonomy-picker-container');
-          const $bodyContainer = component.$('.body-container');
-          let bodyContainerTop = component.$($bodyContainer).scrollTop();
-          let scrollTop = component.$($taxonomyPickerContainer).offset().top - $bodyContainer.offset().top + bodyContainerTop;
-          component.set('isShowTaxonomyPicker', true);
-          component.$('.body-container').animate({scrollTop: scrollTop}, 600);
-        });
-      } else {
-        component.$(taxonomyPickerContainer).slideUp(1000, function() {
-          component.set('isShowTaxonomyPicker', false);
-          component.reloadVisibleCompetencies();
-        });
-      }
+      component.$(taxonomyPickerContainer).slideDown(1000, function() {
+        component.set('isShowTaxonomyPicker', true);
+      });
+    },
 
+    //Action triggered when submit selected competencies
+    onSubmitCompetencies(selectedCompetencies, course, domain) {
+      const component = this;
+      component.set('selectedCompetencies', selectedCompetencies);
+      component.set('course', course);
+      component.set('domain', domain);
+      component.set('isShowTaxonomyPicker', false);
+    },
+
+    //Action triggered when close taxonomy picker modal
+    onCloseTaxonomyPicker() {
+      const component = this;
+      component.set('isShowTaxonomyPicker', false);
     },
 
     //Action triggered when select unscheduled month
@@ -133,17 +128,8 @@ export default Ember.Component.extend({
     onCloseCreateActivity() {
       const component = this;
       component.closePullUp();
-    },
-
-    //Action triggered when remove a competency
-    onRemoveCompetency(competency) {
-      const component = this;
-      let selectedCompetencies = component.get('selectedCompetencies');
-      let competencyIndex = selectedCompetencies.indexOf(competency);
-      selectedCompetencies.splice(competencyIndex, 1);
-      component.set('selectedCompetencies', selectedCompetencies);
-      component.reloadVisibleCompetencies();
     }
+
   },
 
   // -------------------------------------------------------------------------
@@ -161,7 +147,7 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isShowTaxonomyPicker
    */
-  isShowTaxonomyPicker: true,
+  isShowTaxonomyPicker: false,
 
   /**
    * @property {Boolean} isClassPreferenceMapped
@@ -201,11 +187,6 @@ export default Ember.Component.extend({
    * @property {Array} selectedCompetencies
    */
   selectedCompetencies: Ember.A([]),
-
-  /**
-   * @property {Array} taxonomies
-   */
-  taxonomies: [],
 
   /**
    * @property {String} unscheduledMonth
@@ -308,21 +289,20 @@ export default Ember.Component.extend({
     return isClassPreferenceMapped && (activityTitle !== null && activityTitle !== '');
   }),
 
-  // -------------------------------------------------------------------------
-  // Methods
+  /**
+   * @property {String} course
+   * Property to hold selected course title
+   */
+  course: null,
 
   /**
-   * @function reloadVisibleCompetencies
-   * Method to refresh visible/selected competencies
+   * @property {String} domain
+   * Property to hold selected domain title
    */
-  reloadVisibleCompetencies() {
-    const component = this;
-    let selectedCompetencies = component.get('selectedCompetencies');
-    let visibleCompetencies = selectedCompetencies.map(competency => {
-      return competency;
-    });
-    component.set('visibleCompetencies', visibleCompetencies);
-  },
+  domain: null,
+
+  // -------------------------------------------------------------------------
+  // Methods
 
   /**
    * @function getDataParams
@@ -341,8 +321,7 @@ export default Ember.Component.extend({
       title,
       description,
       audience: audienceIds,
-      taxonomy,
-      url: ''
+      taxonomy
     };
   },
 
