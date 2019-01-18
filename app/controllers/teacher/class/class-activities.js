@@ -340,7 +340,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       );
       datepickerCtnEle.removeClass('ca-datepicker-orientation-top');
       datepickerCtnEle.removeClass('ca-datepicker-orientation-bottom');
-      datepickerCtnEle.removeClass('ca-datepicker-orientation-center');
+      datepickerCtnEle.removeClass('ca-datepicker-orientation-left');
       let selectedContentEle = Ember.$(event.target);
       let position = selectedContentEle.position();
       let top = position.top - datepickerEle.height();
@@ -351,8 +351,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let windowHeight = $(window).height();
       let allowedTop = windowHeight - controllerHeight + top;
       if (left < 0) {
-        left = position.left - datepickerEle.width() / 2;
-        datepickerCtnEle.addClass('ca-datepicker-orientation-center');
+        left = position.left;
+        datepickerCtnEle.addClass('ca-datepicker-orientation-left');
       }
       if (allowedTop < 0) {
         datepickerCtnEle.addClass('ca-datepicker-orientation-bottom');

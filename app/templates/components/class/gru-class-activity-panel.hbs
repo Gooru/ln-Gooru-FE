@@ -50,55 +50,44 @@
           {{/if}}
         {{/if}}
       </div>
-    {{else}}
-      <div class="ca-panel-reschedule ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
-        <span>{{t 'common.schedule'}}</span>
-      </div>
+      {{else}}
+        <div class="ca-panel-reschedule ca-datepicker-popover" onclick= {{action 'onScheduleContentToDCA' classActivity}}>
+          <span>{{t 'common.schedule'}}</span>
+        </div>
     {{/unless}}
   </div>
   {{#unless isUnScheduled}}
     <div class="ca-panel-container-2">
       <div class="student-count {{if showCohort 'active'}}">
+        {{gru-icon name="account_circle"}}
         {{#if (eq classActivity.usersCount -1)}}
-          <span {{action 'showStudentList'}}>{{t 'common.everyone'}}</span>
-        {{else if (eq classActivity.usersCount 0)}}
-          <span {{action 'showStudentList'}}>{{t 'common.no-students'}}</span>
+          <span {{action 'showStudentList'}}>{{t 'common.all'}}</span> {{else if (eq classActivity.usersCount 0)}}
+          <span {{action 'showStudentList'}}>{{t 'common.none'}}</span>
         {{else}}
-          <span {{action 'showStudentList'}}> {{classActivity.usersCount}} {{t 'common.students'}}</span>
+          <span {{action 'showStudentList'}}> {{classActivity.usersCount}}</span>
         {{/if}}
       </div>
       <div class="re-schedule">
-        <div class="re-schedule-activity ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
+        <div class="re-schedule-activity ca-datepicker-popover" onclick= {{action 'onScheduleContentToDCA' classActivity}}>
+          {{gru-icon name="update" class="hidden visible-xs"}}
           {{#if collectionPerformanceSummary}}
-            <span>{{t 'common.repeat-activity'}}</span>
+            <span class="hidden-xs">{{t 'common.repeat-activity'}}</span>
           {{else}}
-            <span>{{t 'common.Reschedule'}}</span>
+            <span class="hidden-xs">{{t 'common.Reschedule'}}</span>
           {{/if}}
         </div>
       </div>
       <div class="dca-panel-actions">
-        <div class="dca-add-btn">
-          {{#if showDcaAddButton}}
-            <span class="dca-add" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.add"}}" {{action 'onAddContentToDCA' item}}>
-              {{gru-icon name="add"}}
-            </span>
-          {{/if}}
-        </div>
         <div class="dca-rubric-icon">
           {{#if (gt item.oeQuestionCount 0)}}
             <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.rubric"}}" class="rubric-icon"></i>
           {{/if}}
         </div>
-        {{#if isOfflineClass}}
-          <div> {{!-- this is offline class --}}
-          </div>
-        {{else}}
-          <div class="dca-golive-btn">
-            {{#if (and showGolive (eq item.collectionType 'assessment'))}}
-              <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item.id}}></i>
-            {{/if}}
-          </div>
-        {{/if}}
+        <div class="dca-golive-btn">
+          {{#if (and showGolive (eq item.collectionType 'assessment') (not isOfflineClass)) }}
+            <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item.id}}></i>
+          {{/if}}
+        </div>
         <div class="dca-assign-btn">
           {{#if showDcaAssignButton}}
             <span class="dca-assign" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.assign"}}">
@@ -121,7 +110,7 @@
       {{#if isOfflineClass}}
         <div class="re-add-data {{if (eq classActivity.usersCount 0) 'disabled'}}">
           {{#if collectionPerformanceSummary}}
-            <span {{action "onOpenPerformanceEntry" item classActivity true}}>{{t 'common.add-data'}}</span>
+            <span {{action "onOpenPerformanceEntry" item classActivity true}}>{{t 'common.update-data'}}</span>
           {{/if}}
         </div>
       {{/if}}
