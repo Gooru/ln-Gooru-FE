@@ -618,9 +618,10 @@ export default Object.assign(quizzesTranslations, {
     save: 'Save',
     'de-select': 'De Select',
     'select-all': 'Select All',
-    'no-students': 'No Students',
+    none: 'None',
     'add-data': 'Add Data',
-    everyone: 'Everyone',
+    'update-data': 'Update Data',
+    all: 'All',
     'unscheduled-items': 'Unscheduled Items',
     'add-to-unschedule': 'Add to unscheduled list for',
     'save-next': 'Save and Next',
@@ -1986,9 +1987,13 @@ export default Object.assign(quizzesTranslations, {
       'choose-language': 'Choose language',
       'choose-preferred-language': 'Select profile language',
       language: 'Language',
-      'select-category-label': 'Select category to Add :',
+      'select-category-label': 'Add a new category',
       'choose-category': 'Choose Category',
-      'no-data': 'No data'
+      'no-data': 'No data',
+      'category-preference': 'Category Preference',
+      'choose-subject': 'Choose Subject',
+      'choose-fwk': 'Choose Framework',
+      'add-subject': 'Add Subject'
     }
   },
 

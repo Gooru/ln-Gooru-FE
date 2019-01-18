@@ -2,11 +2,12 @@
 <div class="ca-student-list-container {{if isActivityPast 'past-activity' }}">
   <div class="ca-student-list-header">
     <div class="ca-student-selected-ctn">
+      {{gru-icon name="account_circle"}}
       {{#if (eq usersCount -1)}}
-        <span>{{t 'common.everyone'}}</span> {{else if (eq usersCount 0)}}
-        <span>{{t 'common.no-students'}}</span>
+        <span>{{t 'common.all'}}</span> {{else if (eq usersCount 0)}}
+        <span>{{t 'common.none'}}</span>
       {{else}}
-        <span> {{usersCount}}  {{t 'common.students'}}</span>
+        <span> {{usersCount}}</span>
       {{/if}}
     </div>
     <div class="search-student-container">

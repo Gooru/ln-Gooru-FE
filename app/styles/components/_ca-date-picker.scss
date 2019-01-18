@@ -233,4 +233,12 @@
       left: calc(100% / 2);
     }
   }
+
+  &.ca-datepicker-orientation-left {
+    .ca-datepicker-bottom,
+    .ca-datepicker-top {
+      right: 0;
+      left: 2px;
+    }
+  }
 }

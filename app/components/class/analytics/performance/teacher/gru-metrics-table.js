@@ -1612,8 +1612,6 @@ export default Ember.Component.extend({
             });
 
             //user performancedata ends
-          } else {
-            //console.log('User present for course but no data present ');
           }
         });
         indxObj = indxObj + 1;

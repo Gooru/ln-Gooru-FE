@@ -32,7 +32,6 @@ export function hasSuggestions(context) {
  */
 export function currentLocationToMapContext(locationdatModeldata) {
   let data = locationdatModeldata;
-  console.log('currentLocationToMapContext', data); //eslint-disable-line
   let retModel = {
     courseId: data.courseId,
     classId: data.classId,
