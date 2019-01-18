@@ -48,6 +48,32 @@ export default Ember.Component.extend({
    */
   isLoading: false,
 
+  allSummaryData: null,
+
+  contextObserver: Ember.observer('context', function() {
+    this.loadData();
+  }),
+
+  selectedIndex: Ember.computed('context', function() {
+    let component = this;
+    let selectedSummary = component.get('context');
+    let allSummary = component.get('allSummaryData');
+    return allSummary.indexOf(selectedSummary);
+  }),
+
+  isToggleLeft: Ember.computed('context', function() {
+    let component = this;
+    let selectedIndex = component.get('selectedIndex');
+    return selectedIndex > 0;
+  }),
+
+  isToggleRight: Ember.computed('context', function() {
+    let component = this;
+    let selectedIndex = component.get('selectedIndex');
+    let length = component.get('allSummaryData').length;
+    return selectedIndex < length - 1;
+  }),
+
   actions: {
     onPullUpClose(closeAll) {
       let component = this;
@@ -66,6 +92,17 @@ export default Ember.Component.extend({
       let component = this;
       component.set('selectedActivity', activity);
       component.set('isShowStudentsSummaryReport', true);
+    },
+
+    toggle(isLeft) {
+      let component = this;
+      let currentIndex = component.get('selectedIndex');
+      let allSummary = component.get('allSummaryData');
+      let indexPosition = isLeft ? currentIndex - 1 : currentIndex + 1;
+      let summary = allSummary.objectAt(indexPosition);
+      if (summary) {
+        component.set('context', summary);
+      }
     }
   },
 
@@ -133,9 +170,9 @@ export default Ember.Component.extend({
 
   loadData() {
     let component = this;
-    const classId = component.get('classId');
     let forMonth = component.get('context.month');
     let forYear = component.get('context.year');
+    const classId = component.get('classId');
     component.set('isLoading', true);
     Ember.RSVP.hash({
       classActivities: component

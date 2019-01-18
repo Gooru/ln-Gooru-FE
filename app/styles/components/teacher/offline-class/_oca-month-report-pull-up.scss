@@ -104,7 +104,23 @@
         text-align: center;
         display: grid;
         font-weight: bold;
+        grid-template-columns: max-content 1fr max-content;
         color: $white;
+
+        .left,
+        .right {
+          align-self: center;
+          cursor: pointer;
+
+          &.disable {
+            pointer-events: none;
+            opacity: 0.5;
+          }
+
+          i {
+            font-size: 35px;
+          }
+        }
 
         .score {
           font-size: 100px;
