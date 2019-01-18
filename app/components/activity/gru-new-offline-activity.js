@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import {getCategoryCodeFromSubjectId} from 'gooru-web/utils/taxonomy';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------

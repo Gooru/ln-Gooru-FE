@@ -374,7 +374,7 @@ export default Ember.Object.extend({
     }
     return serializedTaxonomy;
   },
-  
+
   /**
    * Normalize the Fetch Taxonomy categories endpoint's response
    *
