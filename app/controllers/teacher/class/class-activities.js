@@ -374,8 +374,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       this.set('selectedClassActivityForSchedule', classActivity);
     },
 
-    onSelectDate(date) {
-      this.handleScrollToSpecificDate(date);
+    onSelectDate(date, reload) {
+      let controller = this;
+      if (reload) {
+        let forMonth = moment(date).format('MM');
+        let forYear = moment(date).format('YYYY');
+        controller.set('forMonth', forMonth);
+        controller.set('forYear', forYear);
+        controller.loadData();
+      } else {
+        this.handleScrollToSpecificDate(date);
+      }
     },
 
     onOpenPerformanceEntry(item, activity, isRepeatEntry) {

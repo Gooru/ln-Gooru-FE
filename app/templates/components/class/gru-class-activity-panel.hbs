@@ -11,14 +11,12 @@
           <span>{{item.resourceCount}}</span>
         {{/if}}
       </div>
-
       <div class="question-count">
         {{#if (gt item.questionCount 0)}}
           <i class="question-icon"></i>
           <span>{{item.questionCount}}</span>
         {{/if}}
       </div>
-
       {{#if (or (eq item.collectionType 'assessment-external' ) (eq item.collectionType 'collection-external'))}}
         <i class="external-icon"></i>
       {{/if}}
@@ -52,10 +50,10 @@
           {{/if}}
         {{/if}}
       </div>
-      {{else}}
-        <div class="ca-panel-reschedule ca-datepicker-popover" onclick= {{action 'onScheduleContentToDCA' classActivity}}>
-          <span>{{t 'common.schedule'}}</span>
-        </div>
+    {{else}}
+      <div class="ca-panel-reschedule ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
+        <span>{{t 'common.schedule'}}</span>
+      </div>
     {{/unless}}
   </div>
   {{#unless isUnScheduled}}
@@ -80,32 +78,44 @@
         </div>
       </div>
       <div class="dca-panel-actions">
+        <div class="dca-add-btn">
+          {{#if showDcaAddButton}}
+            <span class="dca-add" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.add"}}" {{action 'onAddContentToDCA' item}}>
+              {{gru-icon name="add"}}
+            </span>
+          {{/if}}
+        </div>
         <div class="dca-rubric-icon">
           {{#if (gt item.oeQuestionCount 0)}}
             <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.rubric"}}" class="rubric-icon"></i>
           {{/if}}
         </div>
-        <div class="dca-golive-btn">
-          {{#if (and showGolive (eq item.collectionType 'assessment'))}}
-            <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item.id}}></i>
-          {{/if}}
-        </div>
+        {{#if isOfflineClass}}
+          <div> {{!-- this is offline class --}}
+          </div>
+        {{else}}
+          <div class="dca-golive-btn">
+            {{#if (and showGolive (eq item.collectionType 'assessment'))}}
+              <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item.id}}></i>
+            {{/if}}
+          </div>
+        {{/if}}
         <div class="dca-assign-btn">
           {{#if showDcaAssignButton}}
             <span class="dca-assign" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.assign"}}">
-        {{#unless classActivity.isActive}}
-            {{gru-switch switchOptions=switchOptions onOptionSwitch='changeVisibility' isChecked=classActivity.isActive item=item}}
-        {{else}}
-          {{gru-switch class="assigned" switchOptions=switchOptions  isChecked=classActivity.isActive item=item}}
-        {{/unless}}
-        </span>
+              {{#unless classActivity.isActive}}
+                {{gru-switch switchOptions=switchOptions onOptionSwitch='changeVisibility' isChecked=classActivity.isActive item=item}}
+              {{else}}
+                {{gru-switch class="assigned" switchOptions=switchOptions  isChecked=classActivity.isActive item=item}}
+              {{/unless}}
+            </span>
           {{/if}}
         </div>
         <div class="dca-remove-btn">
           {{#if showDcaRemoveButton}}
             <span class="remove-dca" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.remove"}}" {{action 'removeClassActivity' classActivity}}>
-          {{gru-icon name="remove_circle" }}
-        </span>
+              {{gru-icon name="remove_circle" }}
+            </span>
           {{/if}}
         </div>
       </div>
@@ -119,7 +129,6 @@
     </div>
   {{/unless}}
 </div>
-
 {{#if showStudentListPullup}}
   {{teacher.class.ca-student-list-pull-up isActivityPast=isActivityPast classId=classId classActivity=classActivity members=members showPullUp=showStudentListPullup}}
 {{/if}}

@@ -319,7 +319,8 @@ export const PROFILE_NAV_MENU_ITEMS = [
   'content',
   'followers',
   'following',
-  'proficiency'
+  'proficiency',
+  'preference'
 ];
 
 export const SUGGESTION_FILTER_BY_CONTENT_TYPES = [
