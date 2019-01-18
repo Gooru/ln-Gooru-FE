@@ -102,8 +102,9 @@ export default Ember.Controller.extend({
       this.changeMode(showedit);
     },
     cancel() {
-      this.changeModeOnSaveAll();
-      this.changeMode();
+      this.getCategories().then(() => {
+        this.getProfilePreference();
+      });
     },
 
     updateMarkedSelectionsAsAdded(fwk, subjects, category) {
@@ -120,6 +121,9 @@ export default Ember.Controller.extend({
 
     showAddSub(category, show) {
       this.showHideSubjectsDDForCategory(category, show || true);
+    },
+    prepareSubjectList(category) {
+      this.prepareSubjectList(category);
     }
   },
   //--- pro
@@ -137,6 +141,19 @@ export default Ember.Controller.extend({
   showHideSubjectsDDForCategory(category, show) {
     let found = this.addedCategories.findBy('id', category.id);
     Ember.set(found, 'showAddSub', show);
+  },
+
+  prepareSubjectList(category) {
+    this.set('currentCategorySubjectFwks', null);
+    let subjectFwks = category.subjectFwks.copy();
+    if (category.subjects) {
+      category.subjects.forEach(subject => {
+        subjectFwks = subjectFwks.filter(sub1 => {
+          return Object.keys(subject)[0] !== sub1.code;
+        });
+      });
+    }
+    this.set('currentCategorySubjectFwks', subjectFwks);
   },
   //------------------------------------------------------------------------------
   // Impl methods
@@ -339,6 +356,7 @@ export default Ember.Controller.extend({
     if (addedCategories) {
       addedCategories = addedCategories.filter(c => {
         if (c.subjects) {
+          //let catSubjects = c.subjects.map;
           c.subjects.map(s => {
             controller.markSelectedFrameworksParsed(
               Object.values(s),
@@ -407,7 +425,9 @@ export default Ember.Controller.extend({
 
     const controller = this;
     let selections = controller.get('selections');
-    selections[subject] = fwk; //Push object for saving
+    if (fwk) {
+      selections[subject] = fwk; //Push object for saving
+    }
     controller.set('selections', selections);
   },
 
