@@ -146,6 +146,14 @@
                                             {{selectedLanguage.display_name}}
                                         </div>
                                     </div>
+                                    <div class="subject-fwk display-language-pref-row1">
+                                        <div class="subject display-language-pref-label"> {{t 'profile.preference.other-preferred-languages'}}: </div>
+                                        <div class="fwk">
+                                            {{#each selectedOtherLanguages as |secLanguage|}}
+                                                {{secLanguage.display_name}}
+                                            {{/each}}
+                                        </div>
+                                    </div>
                                     {{!-- </div> --}}
                                 </div>
                             </div>

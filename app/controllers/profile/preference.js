@@ -512,9 +512,22 @@ export default Ember.Controller.extend({
         response.language_preference &&
         response.language_preference.length > 0
       ) {
-        let languagePreSelection = controller
-          .get('languages')
-          .findBy('id', response.language_preference[0]); // First / primary language consideration as spec.
+        let languagePreSelection, // First / primary language consideration as spec.
+          selectedSecLanguage = [];
+        if (response.language_preference.length > 1) {
+          response.language_preference.forEach((secPref, indx) => {
+            if (indx === 0) {
+              languagePreSelection = controller
+                .get('languages')
+                .findBy('id', secPref);
+            } else {
+              selectedSecLanguage.push(
+                controller.get('languages').findBy('id', secPref)
+              );
+            }
+          });
+        }
+        controller.set('selectedOtherLanguages', selectedSecLanguage);
         controller.set('selectedLanguage', languagePreSelection);
       }
       controller.setSelectedSubjectFrameworks(fwk, subject, foundCategory); // fwk.frameworkId, subject.code, cat

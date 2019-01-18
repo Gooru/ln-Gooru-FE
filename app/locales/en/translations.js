@@ -2001,7 +2001,8 @@ export default Object.assign(quizzesTranslations, {
       'choose-subject': 'Choose Subject',
       'choose-fwk': 'Choose Framework',
       'add-subject': 'Add Subject',
-      'add-sec-language': 'Add other preferred language'
+      'add-sec-language': 'Add other preferred language',
+      'other-preferred-languages': 'Other preferred languages'
     }
   },
 
