@@ -75,6 +75,7 @@ export default Ember.Route.extend({
    * @param controller
    */
   resetController(controller) {
+    controller.set('tab', null);
     controller.set('classActivities', Ember.A([]));
   }
 });

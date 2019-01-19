@@ -1295,6 +1295,12 @@ export default Object.assign(quizzesTranslations, {
           'The class does not have a course assigned or does not have students rostered into the class yet. Once the course has been assigned to the class and the students are rostered, the class competency report will be shown here'
       },
       'class-activities': 'Class Activities',
+      'offline-class-report': {
+        'class-report': 'Class Report',
+        'activity-report': 'Activity Report',
+        'conducted-on': 'Conducted On',
+        'not-started': 'Not Started'
+      },
       'back-to-class-activities': 'Back to  Class Activities',
       'class-activities-tab': {
         today: 'Today: ',
@@ -2852,6 +2858,13 @@ export default Object.assign(quizzesTranslations, {
       wish: 'Congratulations! You scored',
       reference: 'This external assessment can be accessed '
     },
+    'external-collection-report': {
+      note:
+        'This is an external collection with student reported scores for the collection. Individual question level data is not available.',
+      wish: 'Congratulations! You scored',
+      reference: 'This external collection can be accessed '
+    },
+
     'competency-report': {
       title: 'Competency Report',
       'no-subject': 'No Subject Assigned',

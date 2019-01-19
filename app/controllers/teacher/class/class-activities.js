@@ -22,6 +22,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
   // -------------------------------------------------------------------------
+  // Attributes
+
+  queryParams: ['tab'],
+
+  tab: null,
+
+  // -------------------------------------------------------------------------
   // Actions
 
   actions: {
@@ -440,6 +447,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   initialize() {
     let controller = this;
     controller._super(...arguments);
+    let tab = controller.get('tab');
+    if (tab && tab === 'report') {
+      const classController = controller.get('classController');
+      classController.openDCAReportForOfflineClass();
+    }
     Ember.run.scheduleOnce('afterRender', controller, function() {
       controller.set('forMonth', moment().format('MM'));
       controller.set('forYear', moment().format('YYYY'));

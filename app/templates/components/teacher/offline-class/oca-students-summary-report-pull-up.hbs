@@ -1,0 +1,72 @@
+{{#if showPullUp}}
+  <div class="backdrop" {{action 'onPullUpClose' true}}></div>
+{{/if}}
+<div class="oca-students-summary-report-container">
+  <div class="report-header">
+    <div class="header-title">
+      <i class="icon {{collection.collectionType}}"></i>
+      <span class="title ellipsis">{{collection.title}}</span>
+    </div>
+    <div class="close" {{action 'onPullUpClose' false}}>
+      {{gru-icon name="close"}}
+    </div>
+  </div>
+  {{#if (or (eq collection.collectionType 'assessment') (eq collection.collectionType 'assessment-external'))}}
+    <div class="performance-activity" style="background-color:{{if collection (grade-color collection.performance.score)}}">
+      <div class="performance">
+        <span class="left {{unless isToggleLeft 'disable'}}" {{action 'toggle' true}}>{{gru-icon name="keyboard_arrow_left"}}</span>
+        <div class="score-container">
+          <span class="score">{{collection.performance.score}}%</span>
+          <span class="time-spent">{{if collection.performance.timeSpent (format-time  collection.performance.timeSpent) '--'}}</span>
+        </div>
+        <span class="right {{unless isToggleRight 'disable'}}" {{action 'toggle' false}}>{{gru-icon name="keyboard_arrow_right"}}</span>
+      </div>
+      <div class="performance-img" style="height: {{collection.performance.score}}% ;background-color:{{if collection (grade-color collection.performance.score)}}">
+      </div>
+    </div>
+  {{else}}
+    <div class="collection-performance">
+      <div class="performance">
+        <span class="left {{unless isToggleLeft 'disable'}}" {{action 'toggle' true}}>{{gru-icon name="keyboard_arrow_left"}}</span>
+        <span class="time-spent">{{if collection.performance.timeSpent (format-time  collection.performance.timeSpent) '--'}}</span>
+        <span class="right {{unless isToggleRight 'disable'}}" {{action 'toggle' false}}>{{gru-icon name="keyboard_arrow_right"}}</span>
+      </div>
+    </div>
+  {{/if}}
+  <div class="activity-info">
+    <div class="circle-img"></div>
+    <span class="students-count">{{students.length}} Students</span>
+    <div class="conducted-on">
+      <span class="title">{{t 'teacher-landing.class.offline-class-report.conducted-on'}}</span>
+      <span class="date">{{format-date context.activation_date 'DD MMM YY'}}</span>
+    </div>
+  </div>
+  {{#if isLoading}}
+    {{three-bounce-spinner}}
+  {{else}}
+    <div class="students-report-container">
+      {{#each students as |student|}}
+        <div class="student-row-container {{unless student.performance 'not-started'}}" {{action 'onSelectStudent' student}}>
+          <div class="student-info">
+            <div class="user-profile-img">
+              <img src="{{student.avatarUrl}}" />
+            </div>
+            <span class="username">{{student.name}}</span>
+          </div>
+          {{#if student.performance}}
+            {{#if (eq student.performance.type 'assessment')}}
+              <div class="score" style="background-color:{{if  student.performance (grade-color student.performance.score)}}">{{ student.performance.score}}%</div>
+            {{else}}
+              <div class="timespent">{{if student.performance.timeSpent (format-time  student.performance.timeSpent) '--'}}</div>
+            {{/if}}
+          {{else}}
+            <div class="not-started">{{t 'teacher-landing.class.offline-class-report.not-started'}}</div>
+          {{/if}}
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+</div>
+{{#if isShowStudentActivityReport}}
+  {{teacher.offline-class.oca-student-activity-report-pull-up students=students collection=collection student=selectedStudent classId=classId showPullUp=isShowStudentActivityReport onClosePullUp="pullUpClose"}}
+{{/if}}

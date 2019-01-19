@@ -226,7 +226,23 @@
         height: 51px;
         align-items: center;
 
-        &.not-started {
+        .dca-performance {
+          height: 100%;
+          color: white;
+          font-size: 16px;
+          width: 100%;
+          margin: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          cursor: pointer;
+          &.disabled {
+            pointer-events: none;
+          }
+        }
+
+        .not-started {
           pointer-events: none;
         }
 

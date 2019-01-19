@@ -130,13 +130,19 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   normalizeFetchUsersForClassActivity(payload) {
+    const serializer = this;
+    const basePath = serializer.get('session.cdnUrls.user');
+    const appRootPath = this.get('appRootPath'); //configuration appRootPath
     if (payload && payload.users && Ember.isArray(payload.users)) {
       return payload.users.map(function(user) {
+        const thumbnailUrl = user.thumbnail
+          ? basePath + user.thumbnail
+          : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
         return Ember.Object.create({
           id: user.id,
-          firstname: user.firstname,
-          lastname: user.lastname,
-          thumbnail: user.thumbnail_path,
+          firstname: user.first_name,
+          lastname: user.last_name,
+          thumbnail: thumbnailUrl,
           isActive: user.is_active
         });
       });
