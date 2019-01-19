@@ -27,6 +27,28 @@ const taxonomyServiceStub = Ember.Service.extend({
         });
       }
     });
+  },
+
+  getCategories: function() {
+    const c1 = Ember.Object.create({
+      id: 'k_12',
+      code: 'K12',
+      title: 'K12'
+    });
+
+    const c2 = Ember.Object.create({
+      id: 'higher_education',
+      code: 'HE',
+      title: 'Higher Education'
+    });
+
+    const c3 = Ember.Object.create({
+      id: 'professional_learning',
+      code: 'PL',
+      title: 'Professional Development'
+    });
+
+    return new Ember.RSVP.resolve([c1, c2, c3]);
   }
 });
 
@@ -814,9 +836,7 @@ test('Validate if the resource title field is left blank', function(assert) {
   });
 });
 
-test('Validate if the Resource Title field has only whitespaces', function(
-  assert
-) {
+test('Validate if the Resource Title field has only whitespaces', function(assert) {
   assert.expect(3);
   var ResourceValidation = Resource.extend(CreateResourceValidations);
   var resource = ResourceValidation.create(
@@ -862,9 +882,7 @@ test('Validate if the Resource Title field has only whitespaces', function(
   });
 });
 
-test('Validate the character limit in the Resource title field', function(
-  assert
-) {
+test('Validate the character limit in the Resource title field', function(assert) {
   var ResourceValidation = Resource.extend(CreateResourceValidations);
   var resource = ResourceValidation.create(
     Ember.getOwner(this).ownerInjection(),
@@ -902,9 +920,7 @@ test('Validate that settings component is present', function(assert) {
   assert.ok($settingsSection.length, 'Section component exists');
 });
 
-test('Validate if the I am the publisher checkbox is checked', function(
-  assert
-) {
+test('Validate if the I am the publisher checkbox is checked', function(assert) {
   assert.expect(2);
   var ResourceValidation = Resource.extend(CreateResourceValidations);
   var resource = ResourceValidation.create(
@@ -953,9 +969,7 @@ test('Validate if the I am the publisher checkbox is checked', function(
   });
 });
 
-test('Validate if the I am the publisher checkbox is unchecked', function(
-  assert
-) {
+test('Validate if the I am the publisher checkbox is unchecked', function(assert) {
   assert.expect(2);
   var ResourceValidation = Resource.extend(CreateResourceValidations);
   var resource = ResourceValidation.create(
@@ -997,9 +1011,7 @@ test('Validate if the I am the publisher checkbox is unchecked', function(
   });
 });
 
-test('Editing a video resource should disable the type dropdown', function(
-  assert
-) {
+test('Editing a video resource should disable the type dropdown', function(assert) {
   var ResourceValidation = Resource.extend(EditResourceValidations);
   var resource = ResourceValidation.create(
     Ember.getOwner(this).ownerInjection(),

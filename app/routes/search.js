@@ -69,10 +69,12 @@ export default Ember.Route.extend(PublicRouteMixin, {
       );
       subjects = this.get('taxonomyService').fetchSubjectsByIds(taxonomyIds);
     }
+    let categories = this.get('taxonomyService').getCategories();
 
     return Ember.RSVP.hash({
       taxonomyCodes: taxonomyCodes,
-      subjects: subjects
+      subjects: subjects,
+      categories: categories
     });
   },
 
@@ -84,6 +86,7 @@ export default Ember.Route.extend(PublicRouteMixin, {
   setupController: function(controller, model) {
     controller.set('subjects', model.subjects);
     controller.set('taxonomyCodes', model.taxonomyCodes);
+    controller.set('categories', model.categories);
     controller.reloadTaxonomyTags();
   },
 

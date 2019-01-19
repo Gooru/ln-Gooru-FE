@@ -178,6 +178,7 @@ export default Object.assign(quizzesTranslations, {
     category: 'Category',
     categoryOptions: {
       k12: 'K-12',
+      k12IN: 'K12IN',
       'higher-ed': 'Higher Education',
       'professional-dev': 'Professional Development'
     },
@@ -617,9 +618,10 @@ export default Object.assign(quizzesTranslations, {
     save: 'Save',
     'de-select': 'De Select',
     'select-all': 'Select All',
-    'no-students': 'No Students',
+    none: 'None',
     'add-data': 'Add Data',
-    everyone: 'Everyone',
+    'update-data': 'Update Data',
+    all: 'All',
     'unscheduled-items': 'Unscheduled Items',
     'add-to-unschedule': 'Add to unscheduled list for',
     'save-next': 'Save and Next',
@@ -1334,7 +1336,7 @@ export default Object.assign(quizzesTranslations, {
         'class-settings-sec': {
           'generate-pathway': 'Personalize Learning Path',
           'class-settings-sec-head': 'Class Settings',
-          'class-settings-sec-desc': 'Minimum performance to pass',
+          'class-settings-sec-desc': 'Minimum performance to earn a trophy',
           'class-code': 'Class Code',
           subject: 'Subject',
           framework: 'Framework',
@@ -1342,9 +1344,14 @@ export default Object.assign(quizzesTranslations, {
           'option-choose-one': 'Choose One',
           'co-teachers': 'Co-Teachers',
           'add-coteacher': 'Add another teacher',
-          'offline-class-label': 'This is an Offline classroom',
-          'offline-msg': 'Once made Offline a class cannot be taken online',
-          language: 'language'
+          'offline-class-label': 'This is an offline classroom',
+          'offline-msg':
+            'Once marked offline, the classroom cannot be made online again.',
+          'offline-toggle-tooltip':
+            'Select Yes if you want to make this an offline classroom',
+          'offline-tooltip':
+            'Classrooms, where students do not study online on Navigator, are marked as Offline. The teacher tracks students learning offline and enters data on behalf of the students',
+          language: 'Language of instruction'
         },
         'student-settings-sec': {
           'student-settings-sec-head': 'Student Settings',
@@ -1958,7 +1965,10 @@ export default Object.assign(quizzesTranslations, {
       library: 'Library',
       'my-content': 'My Content',
       following: 'Following',
-      proficiency: 'Proficiency'
+      proficiency: 'Proficiency',
+      preference: {
+        preference: 'Preference'
+      }
     },
     edit: {
       'select-district': 'Select a district...'
@@ -1977,6 +1987,19 @@ export default Object.assign(quizzesTranslations, {
         'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
       'show-compressed-chart': 'Show Compressed Chart',
       'show-expanded-chart': 'Show Expanded Chart'
+    },
+    preference: {
+      'language-preference': 'Language Preference',
+      'choose-language': 'Choose language',
+      'choose-preferred-language': 'Select profile language',
+      language: 'Language',
+      'select-category-label': 'Add a new category',
+      'choose-category': 'Choose Category',
+      'no-data': 'No data',
+      'category-preference': 'Category Preference',
+      'choose-subject': 'Choose Subject',
+      'choose-fwk': 'Choose Framework',
+      'add-subject': 'Add Subject'
     }
   },
 

@@ -11,23 +11,23 @@
       {{else}}
         {{#each resources as |resource resourceSeq|}}
           <div class="resource">
-            <span class="resource-icon"></span>
+            <span class="resource-icon {{resource.format}}"></span>
             <span class="resource-title ellipsis">{{resource.title}}</span>
             <div class="timespent-entry">
               <div class="timespent-hour">
-                <span>  {{input type="text" class=(concat 'resource-time-hour' ' r-' resourceSeq '-hour')
+                <span>  {{input type="text" class=(concat 'resource-time-hour' ' r-' resourceSeq)
                   pattern="[0-9]*"
-                  focus-out=(action "validateHour" resource.maxHour resourceSeq)
+                  key-up=(action "timeValidator" resource resourceSeq)
                   inputmode="numeric"
                   value=resource.maxHour
                 }}</span>
                 <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.hour'}}</span>
               </div>
               <div class="timespent-mins">
-                <span>{{input type="text" class=(concat 'resource-time-min' ' r-' resourceSeq '-minute')
+                <span>{{input type="text" class=(concat 'resource-time-min' ' r-' resourceSeq)
                 pattern="[0-9]*"
                 inputmode="numeric"
-                focus-out=(action "validateMinute" resource.maxMins resourceSeq)
+                key-up=(action "timeValidator" resource resourceSeq)
                 value=resource.maxMins
               }}</span>
                 <span class="placeholder-text">{{t 'teacher-landing.class.class-activities-tab.min'}}</span>

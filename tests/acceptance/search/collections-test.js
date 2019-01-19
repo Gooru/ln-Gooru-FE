@@ -44,9 +44,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('Changing term should filter the current result without changing the root url', function(
-  assert
-) {
+test('Changing term should filter the current result without changing the root url', function(assert) {
   assert.expect(2); //making sure all asserts are called
   visit('/search/collections?term=any');
   andThen(function() {
@@ -116,7 +114,7 @@ test('Apply category filter to standards', function(assert) {
             .find('.selected-category')
             .text()
             .trim(),
-          'K-12',
+          '',
           'The Category button should display the selected category'
         );
         assert.equal(

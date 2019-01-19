@@ -319,7 +319,8 @@ export const PROFILE_NAV_MENU_ITEMS = [
   'content',
   'followers',
   'following',
-  'proficiency'
+  'proficiency',
+  'preference'
 ];
 
 export const SUGGESTION_FILTER_BY_CONTENT_TYPES = [
@@ -367,3 +368,5 @@ export const NOTIFICATION_SETTINGS = {
 };
 
 export const PLAYER_WINDOW_NAME = 'rgo_player';
+
+export const DEFAULT_K12_SUBJECT = 'K12.MA';

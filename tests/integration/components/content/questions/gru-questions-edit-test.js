@@ -14,7 +14,9 @@ const questionServiceStub = Ember.Service.extend({
   updateQuestion(questionID, editedQuestion) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       if (questionID === 'question-id-fail' || !editedQuestion) {
-        reject({ status: 500 });
+        reject({
+          status: 500
+        });
       } else {
         resolve(editedQuestion);
       }
@@ -35,6 +37,27 @@ const taxonomyServiceStub = Ember.Service.extend({
         }
       ]
     });
+  },
+  getCategories: function() {
+    const c1 = Ember.Object.create({
+      id: 'k_12',
+      code: 'K12',
+      title: 'K12'
+    });
+
+    const c2 = Ember.Object.create({
+      id: 'higher_education',
+      code: 'HE',
+      title: 'Higher Education'
+    });
+
+    const c3 = Ember.Object.create({
+      id: 'professional_learning',
+      code: 'PL',
+      title: 'Professional Development'
+    });
+
+    return new Ember.RSVP.resolve([c1, c2, c3]);
   }
 });
 
@@ -384,9 +407,7 @@ test('Validate if the question title field is left blank', function(assert) {
   });
 });
 
-test('Validate if the Question Title field has only whitespaces', function(
-  assert
-) {
+test('Validate if the Question Title field has only whitespaces', function(assert) {
   assert.expect(3);
   var question = Question.create(Ember.getOwner(this).ownerInjection(), {
     title: null,
@@ -426,9 +447,7 @@ test('Validate if the Question Title field has only whitespaces', function(
   });
 });
 
-test('Validate the character limit in the Question title field', function(
-  assert
-) {
+test('Validate the character limit in the Question title field', function(assert) {
   var self = this;
   var question = Question.create(Ember.getOwner(this).ownerInjection(), {
     title: null,
@@ -793,7 +812,10 @@ test('Update answer text - (drag/drop) Reorder', function(assert) {
   var $options = $component.find('.answer-content .answer-text');
   assert.equal($options.length, 1, 'Starting options');
   assert.equal(
-    $options.eq(0).text().trim(),
+    $options
+      .eq(0)
+      .text()
+      .trim(),
     question.get('answers')[0].get('text'),
     'Option text'
   );
@@ -821,7 +843,10 @@ test('Update answer text - (drag/drop) Reorder', function(assert) {
         $options = $component.find('.answer-content');
         assert.equal($options.length, 2, 'Options after edit');
         assert.equal(
-          $options.eq(0).find('.gru-rich-text-editor .rich-editor').html(),
+          $options
+            .eq(0)
+            .find('.gru-rich-text-editor .rich-editor')
+            .html(),
           newText,
           'Option text after edit'
         );
@@ -866,7 +891,10 @@ test('Remove answer and cancel - (drag/drop) Reorder', function(assert) {
       $options = $component.find('.gru-reorder .panel');
       assert.ok($options.length, 1, 'Number of options after delete');
       assert.equal(
-        $options.eq(0).find('.gru-rich-text-editor .rich-editor').html(),
+        $options
+          .eq(0)
+          .find('.gru-rich-text-editor .rich-editor')
+          .html(),
         question.get('answers')[1].get('text'),
         'Text of remaining option'
       );
@@ -1258,9 +1286,7 @@ test('Layout view question image', function(assert) {
   });
 });
 
-test('Builder Edit with advanced edit button for the Multiple Choice answers', function(
-  assert
-) {
+test('Builder Edit with advanced edit button for the Multiple Choice answers', function(assert) {
   var question = Question.create(Ember.getOwner(this).ownerInjection(), {
     title: 'Question for testing',
     text: '',
@@ -1306,7 +1332,10 @@ test('Builder Edit with advanced edit button for the Multiple Choice answers', f
       'btn-toolbar should be hidden for the answers editors'
     );
 
-    $switchComponent.find('a input').prop('checked', true).change();
+    $switchComponent
+      .find('a input')
+      .prop('checked', true)
+      .change();
     return wait().then(function() {
       assert.ok(
         !$richEditorComponent.find('.btn-toolbar').hasClass('hidden'),

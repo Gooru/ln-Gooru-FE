@@ -6,7 +6,7 @@ module.exports = function(grunt) {
           return command;
         },
         options: {
-          maxBuffer: 200 * 1024 * 2
+          maxBuffer: Infinity
         }
       },
       'ember-server-stubby': 'ember serve --proxy http://localhost:8882',
@@ -16,7 +16,7 @@ module.exports = function(grunt) {
       'build-dev': 'ember build',
       'build-prod': 'ember build --environment=production',
       'build-prod-bamboo':
-        'ember build --environment=production --output-path gooru-web'
+        'node --max-old-space-size=2048 node_modules/.bin/ember build --environment=production --output-path gooru-web'
     },
 
     stubby: {

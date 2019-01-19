@@ -347,7 +347,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       );
       datepickerCtnEle.removeClass('ca-datepicker-orientation-top');
       datepickerCtnEle.removeClass('ca-datepicker-orientation-bottom');
-      datepickerCtnEle.removeClass('ca-datepicker-orientation-center');
+      datepickerCtnEle.removeClass('ca-datepicker-orientation-left');
       let selectedContentEle = Ember.$(event.target);
       let position = selectedContentEle.position();
       let top = position.top - datepickerEle.height();
@@ -358,8 +358,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let windowHeight = $(window).height();
       let allowedTop = windowHeight - controllerHeight + top;
       if (left < 0) {
-        left = position.left - datepickerEle.width() / 2;
-        datepickerCtnEle.addClass('ca-datepicker-orientation-center');
+        left = position.left;
+        datepickerCtnEle.addClass('ca-datepicker-orientation-left');
       }
       if (allowedTop < 0) {
         datepickerCtnEle.addClass('ca-datepicker-orientation-bottom');
@@ -381,11 +381,20 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       this.set('selectedClassActivityForSchedule', classActivity);
     },
 
-    onSelectDate(date) {
-      this.handleScrollToSpecificDate(date);
+    onSelectDate(date, reload) {
+      let controller = this;
+      if (reload) {
+        let forMonth = moment(date).format('MM');
+        let forYear = moment(date).format('YYYY');
+        controller.set('forMonth', forMonth);
+        controller.set('forYear', forYear);
+        controller.loadData();
+      } else {
+        this.handleScrollToSpecificDate(date);
+      }
     },
 
-    onOpenPerformanceEntry(item, activity) {
+    onOpenPerformanceEntry(item, activity, isRepeatEntry) {
       let component = this;
       component.fetchActivityUsers(activity.id).then(function(activityMembers) {
         let classMembers = component.get('members');
@@ -393,7 +402,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         activityMembers.map(member => {
           classActivityStudents.push(classMembers.findBy('id', member.id));
         });
-        component.set('activityMembers', classActivityStudents);
+
+        component.set(
+          'activityMembers',
+          classActivityStudents.sortBy('firstName')
+        );
         if (item.format === 'assessment') {
           component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
           component.set('isShowCollectionPerformanceEntryPullUp', false);
@@ -415,6 +428,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       });
       component.set('selectedItem', item);
       component.set('selectedActivity', activity);
+      component.set('isRepeatEntry', isRepeatEntry);
     },
 
     onClosePerformanceEntry() {
@@ -449,6 +463,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
+
+  isRepeatEntry: false,
 
   isOfflineClass: Ember.computed('class', function() {
     let controller = this;
@@ -568,7 +584,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Class id
    * @property {String}
    */
-  members: Ember.computed.alias('classController.class.members'),
+  members: Ember.computed('classController.class.members', function() {
+    const controller = this;
+    let classMembers = controller.get('classController.class.members');
+    return classMembers.sortBy('firstName');
+  }),
   /**
    * Class id
    * @property {String}

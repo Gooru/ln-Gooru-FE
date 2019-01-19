@@ -8,15 +8,15 @@
     </div>
     {{/unless}}
   </div>
-  <div class="body-container {{if isClose 'hidden'}}">
+  <div class="body-container {{if isClose 'hidden-show'}}">
       {{yield this}}
   </div>
   {{#if isClose}}
   <div class="cancel-body">
       <span>{{t 'gru-user-sign-up-cancel.exit?'}}</span>
       <div class="close-actions">
-      <div class="cancel-button" {{action 'cancel'}}>{{t 'gru-submit-confirmation.cancel'}}</div>
-      <div class="ok-button" {{action 'closePullUp'}}>{{t 'gru-submit-confirmation.ok'}}</div>
+      <div class="cancel-button" {{action 'cancel'}}>{{t 'gru-assessment-confirmation.cancel'}}</div>
+      <div class="confirm-button" {{action 'closePullUp'}}>{{t 'gru-assessment-confirmation.continue'}}</div>
     </div>
   </div>
   {{/if}}

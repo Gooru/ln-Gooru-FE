@@ -142,8 +142,8 @@
 
 
 {{#if isShowAssessmentPerformanceEntryPullUp}}
-  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowAssessmentPerformanceEntryPullUp title=selectedItem.title type='assessment' onClosePerformanceEntry='onClosePerformanceEntry' }}
-    {{reports.pull-up.assessment-performance-entry assessment=selectedItem students=activityMembers activityData=selectedActivity classId=classId onClosePerformanceEntry="onClosePerformanceEntry"}}
+  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowAssessmentPerformanceEntryPullUp title=selectedItem.title type='assessment' onClosePerformanceEntry='onClosePerformanceEntry'}}
+    {{reports.pull-up.assessment-performance-entry assessment=selectedItem students=activityMembers activityData=selectedActivity classId=classId onClosePerformanceEntry="onClosePerformanceEntry" isRepeatEntry=isRepeatEntry}}
   {{/reports.pull-up.performance-manual-entry}}
 {{/if}}
 

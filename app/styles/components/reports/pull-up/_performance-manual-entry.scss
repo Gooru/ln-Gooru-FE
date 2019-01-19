@@ -9,10 +9,13 @@
   color: #37434d;
   background-color: $white;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  min-height: 400px;
   .cancel-body {
     text-align: center;
     top: 100%;
     z-index: 1031;
+    display: grid;
+    grid-template-rows: auto auto;
     width: 360px;
     left: 0;
     right: 0;
@@ -20,32 +23,43 @@
     color: #37434d;
     background-color: $white;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
-    height: 480px;
+    height: 280px;
+    min-height: 250px;
     span {
       font-size: 16px;
-      position: sticky;
-      top: 38%;
+      align-items: flex-end;
+      height: 100%;
+      margin: auto;
+      display: flex;
     }
     .close-actions {
       display: grid;
       grid-template-columns: auto auto;
-      height: 95%;
-      align-items: center;
+      align-items: end;
+      margin-bottom: 30px;
       .cancel-button,
-      .ok-button {
+      .confirm-button {
         width: 100px;
         height: 40px;
         border-radius: 4px;
-        background-color: #1aa9eb;
         font-size: 15px;
         font-weight: bold;
         text-align: center;
-        color: #fff;
         text-transform: uppercase;
         line-height: 40px;
         cursor: pointer;
         justify-self: center;
         margin: 10px;
+        line-height: 36px;
+      }
+      .cancel-button {
+        background-color: #ffffff;
+        color: black;
+        border: 1px solid black;
+      }
+      .confirm-button {
+        background-color: #1aa9eb;
+        color: #fff;
       }
     }
   }
@@ -120,6 +134,36 @@
 
       i {
         cursor: pointer;
+      }
+    }
+  }
+  .body-container {
+    &.hidden-show {
+      %container-hide {
+        display: none !important;
+      }
+      .collection-performance-entry {
+        .collection-performance-container {
+          .collection-resource-container {
+            @extend %container-hide;
+          }
+          .performance-entry-container {
+            @extend %container-hide;
+          }
+          .submit {
+            display: none;
+          }
+        }
+      }
+      .assessment-performance-entry {
+        .assessment-performance-container {
+          .max-timespent-container {
+            @extend %container-hide;
+          }
+          .performance-entry-container {
+            @extend %container-hide;
+          }
+        }
       }
     }
   }

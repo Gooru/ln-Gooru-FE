@@ -1,0 +1,216 @@
+.profile-preference {
+  font-size: 14px;
+  @media (min-width: 360px) {
+    .layout-wrapper {
+      display: grid;
+    }
+  }
+
+  .actionClass {
+    cursor: pointer;
+  }
+  /*   default desktop */
+  .category-wrapper {
+    max-width: 1017px;
+
+    .category-head {
+      margin: 10px 0;
+      display: flex;
+      justify-content: flex-start;
+
+      .dropdown {
+        margin-left: 10px;
+      }
+      .add-category-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+
+      .add-category {
+        flex: 0.3;
+        width: 35px;
+        height: 35px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        // color: $white;
+      }
+
+      .edit-preference {
+        cursor: pointer;
+        margin-left: auto;
+      }
+    }
+    .category-container-layout {
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+    .category-container {
+      display: grid;
+      grid-gap: 17px;
+
+      grid-template-columns: minmax(345px, 475px) minmax(345px, 475px);
+      grid-template-rows: fit-content(100%);
+      @media (max-width: 360px) {
+        grid-template-columns: minmax(345px, 345px);
+      }
+
+      .panel-heading {
+        display: grid;
+        /*  justify-content: space-between; */
+        align-items: center;
+        // grid-template-columns: minmax(200px, 250px) minmax(200px, 200px) 20px;
+        grid-template-columns: minmax(290px, 250px) minmax(110px, 200px) 20px;
+        @media (max-width: 360px) {
+          grid-template-columns: minmax(125px, 250px) minmax(80px, 200px) 20px;
+        }
+        .category-title {
+          cursor: pointer;
+          font-weight: bold;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        .subject-add {
+          justify-self: start;
+        }
+
+        .button-text {
+          overflow: hidden;
+          overflow-wrap: break-word;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          display: inline-block;
+          height: 16px;
+          margin-left: 2px;
+          width: 70px;
+        }
+        // .fwk {
+        //   .dropdown {
+        //     width: 180px;
+        //     .dropdown-toggle {
+        //        width: 160px;
+        //     }
+        //   }
+        // }
+        // .sub {
+        //   .dropdown {
+        //     width: 180px;
+        //     .dropdown-toggle {
+        //       width: 150px;
+        //     }
+        //   }
+        // }
+        .removeCategory {
+          cursor: pointer;
+          display: none;
+          color: red;
+        }
+
+        .addSubjectFWK {
+          cursor: pointer;
+          font-size: 20px;
+          vertical-align: middle;
+          line-height: 32px;
+          width: 20px;
+          padding-left: 6px;
+          > i {
+            font-size: 12px;
+            width: 11px;
+            height: 26px;
+            font-size: 20px;
+            font-weight: bold;
+          }
+        }
+      }
+      .panel-heading:hover .removeCategory {
+        display: block;
+      }
+
+      .display-mode {
+        .category-title {
+          width: 300px;
+        }
+        .panel-body {
+          .subject-fwk {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            .subject {
+              flex: 1;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              font-weight: bold;
+            }
+            .fwk {
+              flex: 0.4;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+      }
+      .edit-mode {
+        .subject-fwk {
+          display: grid;
+          justify-content: space-between;
+          align-items: center;
+          grid-template-columns: 254px 30px 160px;
+
+          @media (max-width: 360px) {
+            grid-template-columns: 200px 30px 120px;
+          }
+          margin: 10px;
+          .subject {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-weight: bold;
+          }
+          .actionClass {
+            cursor: pointer;
+            display: none;
+            color: red;
+          }
+          .fwk {
+            /*  width: 250px; */
+            // overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            justify-self: baseline;
+            // .dropdown-toggle {
+            //   width: 160px;
+            // }
+            .btn-default {
+              background-color: $gray;
+              color: $white;
+            }
+          }
+
+          .fwk-new-cat {
+            margin-left: -22px;
+            @media (max-width: 360px) {
+              margin-left: -50px;
+            }
+          }
+        }
+        .subject-fwk:hover .actionClass {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .edit-head {
+    justify-content: flex-end !important;
+    > button {
+      flex: unset !important;
+      width: 100px !important;
+      justify-content: space-between;
+      margin: 10px;
+    }
+  }
+}
