@@ -103,8 +103,9 @@ export default Ember.Component.extend({
         item,
         classActivity,
         isRepeatEntry
-      );   
+      );
     },
+
     onPullUpClose(closeAll) {
       this.closePullUp(closeAll);
     }
