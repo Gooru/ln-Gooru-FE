@@ -86,6 +86,14 @@ export default Ember.Component.extend({
     onPullUpClose(closeAll) {
       this.closePullUp(closeAll);
     },
+
+    onToggleQuestion(resource, resourceSeq) {
+      let component = this;
+      component
+        .$(`.resource-${resourceSeq} .resource-description`)
+        .toggleClass('hidden');
+    },
+
     onCloseStudentActivity() {
       let component = this;
       component.$().animate(

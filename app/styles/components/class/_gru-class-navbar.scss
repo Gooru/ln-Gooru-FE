@@ -237,6 +237,9 @@
           justify-content: center;
           font-weight: bold;
           cursor: pointer;
+          &.disabled {
+            pointer-events: none;
+          }
         }
 
         .not-started {

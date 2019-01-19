@@ -50,8 +50,9 @@
     {{three-bounce-spinner}}
   {{else}}
     <div class="resources-report-container">
-      {{#each resourcesCollection as | resource|}}
-        <div class="resource">
+      {{#each resourcesCollection as | resource resourceSeq|}}
+        <div class="resource resource-{{resourceSeq}}">
+          <div class="resource-container">
           <div class="resource-icon">
             {{#if (eq resource.performance.resourceType 'question')}}
               <i class="question-img"></i>
@@ -59,7 +60,7 @@
               <i class="resource-img {{resource.format}}"></i>
             {{/if}}
           </div>
-          <div class="resource-title ellipsis">{{resource.title}}</div>
+          <div class="resource-title ellipsis" {{action "onToggleQuestion" resource resourceSeq}}>{{resource.title}}</div>
           <div class="reaction"> {{reaction-icon resource.performance.reaction}}</div>
           {{#if (eq resource.performance.resourceType 'question')}}
             <div class="performance" style="background-color:{{if resource (grade-color resource.performance.score)}}">
@@ -73,6 +74,8 @@
               {{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}
             </div>
           {{/if}}
+        </div>
+          <div class="resource-description hidden">{{safe-html resource.title}}</div>
         </div>
       {{/each}}
       {{#if (eq collection.collectionType 'collection-external')}}
