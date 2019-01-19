@@ -297,4 +297,55 @@
       }
     }
   }
+
+  @media screen and (min-width: 568px) and (max-width: 992px) {
+    .schedule-ca-datepicker-container {
+      top: 0px !important;
+      left: calc((100% - 250px) / 2) !important;
+      &.ca-datepicker-orientation-top {
+        .ca-datepicker-top {
+          display: none;
+        }
+      }
+
+      &.ca-datepicker-orientation-bottom {
+        .ca-datepicker-bottom {
+          display: none;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 568px) {
+    .schedule-ca-datepicker-container {
+      top: 49px !important;
+      left: calc((100% - 250px) / 2) !important;
+      &.ca-datepicker-orientation-top {
+        .ca-datepicker-top {
+          display: none;
+        }
+      }
+
+      &.ca-datepicker-orientation-bottom {
+        .ca-datepicker-bottom {
+          display: none;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 320px) {
+    .schedule-ca-datepicker-container {
+      left: calc((100% - 250px) / 2) !important;
+      &.ca-datepicker-orientation-top {
+        .ca-datepicker-top {
+          display: none;
+        }
+      }
+
+      &.ca-datepicker-orientation-bottom {
+        .ca-datepicker-bottom {
+          display: none;
+        }
+      }
+    }
+  }
 }
