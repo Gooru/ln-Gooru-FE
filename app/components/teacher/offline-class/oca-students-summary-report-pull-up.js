@@ -33,6 +33,10 @@ export default Ember.Component.extend({
    */
   students: Ember.A([]),
 
+  /**
+   * Propery of performance activities
+   * @property {Array}
+   */
   activitiesPerformance: Ember.computed('classActivities', function() {
     let component = this;
     let classActivities = component.get('classActivities');
@@ -46,11 +50,21 @@ export default Ember.Component.extend({
    * Propery of collection
    * @property {Object}
    */
-
   collection: Ember.computed('context', function() {
     return this.get('context.collection');
   }),
 
+  /**
+   * Propery of context observer
+   * @property {Observer}
+   */
+  contextObserver: Ember.observer('context', function() {
+    this.loadData();
+  }),
+
+  /**
+   * @property {Number}
+   */
   selectedIndex: Ember.computed('context', function() {
     let component = this;
     let selectedSummary = component.get('context');
@@ -58,12 +72,18 @@ export default Ember.Component.extend({
     return activitiesPerformance.indexOf(selectedSummary);
   }),
 
+  /**
+   * @property {Boolean}
+   */
   isToggleLeft: Ember.computed('context', function() {
     let component = this;
     let selectedIndex = component.get('selectedIndex');
     return selectedIndex > 0;
   }),
 
+  /**
+   * @property {Boolean}
+   */
   isToggleRight: Ember.computed('context', function() {
     let component = this;
     let selectedIndex = component.get('selectedIndex');
@@ -90,7 +110,6 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean}
    */
-
   isShowStudentActivityReport: false,
 
   actions: {
@@ -110,6 +129,7 @@ export default Ember.Component.extend({
       component.set('isShowStudentActivityReport', true);
       component.set('selectedStudent', student);
     },
+
     toggle(isLeft) {
       let component = this;
       let currentIndex = component.get('selectedIndex');
@@ -195,6 +215,7 @@ export default Ember.Component.extend({
         : 'assessment';
     const collectionId = component.get('context.collection.id');
     const activityDate = component.get('context.activation_date');
+    component.set('isLoading', true);
     return Ember.RSVP.hash({
       usersClassActivity: component
         .get('classActivityService')

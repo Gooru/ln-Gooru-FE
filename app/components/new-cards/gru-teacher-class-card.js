@@ -6,11 +6,6 @@ export default Ember.Component.extend({
   // Dependencies
 
   /**
-   * @type {AnalyticsService} Service to retrieve class performance summary
-   */
-  analyticsService: Ember.inject.service('api-sdk/analytics'),
-
-  /**
    * @requires service:i18n
    */
   i18n: Ember.inject.service(),
@@ -48,8 +43,9 @@ export default Ember.Component.extend({
     selectItem: function(item) {
       const classData = this.get('class');
       const classId = classData.id;
+      const isOffline = classData.get('isOffline');
       if (this.get('onItemSelected')) {
-        this.sendAction('onItemSelected', item, classId);
+        this.sendAction('onItemSelected', item, classId, isOffline);
       }
     }
   },
@@ -59,10 +55,6 @@ export default Ember.Component.extend({
   init: function() {
     const component = this;
     component._super(...arguments);
-    let isOfflineClass = component.get('isOfflineClass');
-    if (isOfflineClass) {
-      component.getDCAPerformanceForOfflineClass();
-    }
   },
 
   didRender() {
@@ -71,20 +63,6 @@ export default Ember.Component.extend({
       trigger: 'hover'
     });
   },
-
-  getDCAPerformanceForOfflineClass() {
-    let component = this;
-    const classId = component.get('class.id');
-    return Ember.RSVP.hash({
-      performanceSummaryForDCA: component
-        .get('analyticsService')
-        .getDCASummaryPerformance(classId)
-    }).then(function(hash) {
-      const performanceSummaryForDCA = hash.performanceSummaryForDCA;
-      component.set('performanceSummaryForDCA', performanceSummaryForDCA);
-    });
-  },
-
   // -------------------------------------------------------------------------
   // Properties
   /**
@@ -197,7 +175,7 @@ export default Ember.Component.extend({
    */
   hasStarted: Ember.computed('class.performanceSummary', function() {
     const scorePercentage = this.get('class.performanceSummary.score');
-    return scorePercentage !== null && scorePercentage >= 0;
+    return scorePercentage !== null;
   }),
 
   /**
@@ -209,16 +187,5 @@ export default Ember.Component.extend({
     let currentClass = controller.get('class');
     let classSetting = currentClass.setting;
     return classSetting ? classSetting['course.premium'] : false;
-  }),
-
-  /**
-   * The class is offline or not
-   * @property {Boolean}
-   */
-  isOfflineClass: Ember.computed('class', function() {
-    let component = this;
-    return component.get('class.isOffline');
-  }),
-
-  performanceSummaryForDCA: null
+  })
 });

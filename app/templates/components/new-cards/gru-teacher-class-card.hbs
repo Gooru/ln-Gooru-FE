@@ -1,7 +1,7 @@
 <div class="panel {{if course 'has-course' 'no-course'}}">
   {{#if course}}
-    {{#if (or isOfflineClass (and (gte performanceSummaryForDCA.performance.scoreInPercentage 0) performanceSummaryForDCA.performance.scoreInPercentage) (and (gte class.performanceSummary.score 0) class.performanceSummary.score ))}}
-      <div class="panel-heading" style="background-color:{{grade-color (if isOfflineClass performanceSummaryForDCA.performance.scoreInPercentage class.performanceSummary.score)}}">
+    {{#if (and (gte class.performanceSummary.score 0) class.performanceSummary.score )}}
+      <div class="panel-heading" style="background-color:{{grade-color class.performanceSummary.score}}">
         <div class="title ellipsis" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}">
           {{#link-to 'teacher.class.course-map' class.id}}
             {{truncate text=class.title maxLength=25}}
@@ -14,8 +14,8 @@
         {{/link-to}}
       </div>
     {{else}}
-      {{#if (or isOfflineClass (eq performanceSummaryForDCA.performance.scoreInPercentage 0) (eq class.performanceSummary.score 0))}}
-        <div class="panel-heading" style="background-color:{{grade-color (if isOfflineClass performanceSummaryForDCA.performance.scoreInPercentage class.performanceSummary.score)}}">
+      {{#if (eq class.performanceSummary.score 0)}}
+        <div class="panel-heading" style="background-color:{{grade-color class.performanceSummary.score}}">
           <div class="title ellipsis" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}">
             {{#link-to 'teacher.class.course-map' class.id}}
               {{truncate text=class.title maxLength=25}}
@@ -40,9 +40,12 @@
             </div>
           {{/link-to}}
         </div>
+
+
       {{/if}}
     {{/if}}
-    <div class="panel-body" style="background-color:{{grade-color (if isOfflineClass performanceSummaryForDCA.performance.scoreInPercentage class.performanceSummary.score)}}">
+
+    <div class="panel-body" style="background-color:{{grade-color class.performanceSummary.score}}">
       <div class="information" style="background-image: url({{course.thumbnailUrl}})">
         {{#if course}}
           <div class="current-activity">{{t "student-landing.class.assigned-course"}}</div>
@@ -87,43 +90,18 @@
           </li>
         </ul>
       </div>
-      <!-- offline class performance -->
-      {{#if isOfflineClass}}
-        {{#if (and (gte performanceSummaryForDCA.performance.scoreInPercentage 0) performanceSummaryForDCA.performance.scoreInPercentage)}}
-          <div class="performance" style="background-color:{{grade-color performanceSummaryForDCA.performance.scoreInPercentage}}">
-            <div class="code">
-              <div class="title">{{t 'student-landing.class-code'}}</div>
-              <div class="class-code">{{class.code}}</div>
-            </div>
-            <div class="pointer percentage" {{action 'selectItem' 'ca-report'}}>
-              {{performanceSummaryForDCA.performance.scoreInPercentage}}%
-            </div>
+      {{#if (and (gte class.performanceSummary.score 0) class.performanceSummary.score )}}
+        <div class="performance" style="background-color:{{grade-color class.performanceSummary.score}}">
+          <div class="code">
+            <div class="title">{{t 'student-landing.class-code'}}</div>
+            <div class="class-code">{{class.code}}</div>
           </div>
-        {{else}}
-          {{#if (eq performanceSummaryForDCA.performance.scoreInPercentage 0)}}
-            <div class="performance" style="background-color:{{grade-color performanceSummaryForDCA.performance.scoreInPercentage}}">
-              <div class="code">
-                <div class="title">{{t 'student-landing.class-code'}}</div>
-                <div class="class-code">{{class.code}}</div>
-              </div>
-              <div class="pointer percentage" {{action 'selectItem' 'ca-report'}}>
-                {{performanceSummaryForDCA.performance.scoreInPercentage}}%
-              </div>
-            </div>
-          {{else}}
-            <div class="no-performance">
-              <div class="code">
-                <div class="title">{{t 'student-landing.class-code'}}</div>
-                <div class="class-code">{{class.code}}</div>
-              </div>
-              <div class="percentage no-percentage">
-                <i class="icon"> </i>
-              </div>
-            </div>
-          {{/if}}
-        {{/if}}
+          <div class="pointer percentage" {{action 'selectItem' 'report'}}>
+            {{scorePercentage}}
+          </div>
+        </div>
       {{else}}
-        {{#if (and (gte class.performanceSummary.score 0) class.performanceSummary.score )}}
+        {{#if (eq class.performanceSummary.score 0)}}
           <div class="performance" style="background-color:{{grade-color class.performanceSummary.score}}">
             <div class="code">
               <div class="title">{{t 'student-landing.class-code'}}</div>
@@ -134,27 +112,15 @@
             </div>
           </div>
         {{else}}
-          {{#if (eq class.performanceSummary.score 0)}}
-            <div class="performance" style="background-color:{{grade-color class.performanceSummary.score}}">
-              <div class="code">
-                <div class="title">{{t 'student-landing.class-code'}}</div>
-                <div class="class-code">{{class.code}}</div>
-              </div>
-              <div class="pointer percentage" {{action 'selectItem' 'report'}}>
-                {{scorePercentage}}
-              </div>
+          <div class="no-performance">
+            <div class="code">
+              <div class="title">{{t 'student-landing.class-code'}}</div>
+              <div class="class-code">{{class.code}}</div>
             </div>
-          {{else}}
-            <div class="no-performance">
-              <div class="code">
-                <div class="title">{{t 'student-landing.class-code'}}</div>
-                <div class="class-code">{{class.code}}</div>
-              </div>
-              <div class="percentage no-percentage">
-                <i class="icon"> </i>
-              </div>
+            <div class="percentage no-percentage">
+              <i class="icon"> </i>
             </div>
-          {{/if}}
+          </div>
         {{/if}}
       {{/if}}
     </div>

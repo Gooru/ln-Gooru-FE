@@ -9,9 +9,11 @@
     </div>
   </div>
   <div class="performance-summary" style="background-color:{{if performanceSummary (grade-color performanceSummary.performance.scoreInPercentage)}}">
-    <div class="performance" style="background-color:{{if performanceSummary (grade-color performanceSummary.performance.scoreInPercentage)}}">
+    <div class="performance">
       <span class="score">{{performanceSummary.performance.scoreInPercentage}}%</span>
       <span class="time-spent">{{if timeSpent (format-time timeSpent) '--'}}</span>
+    </div>
+    <div class="performance-img" style="height: {{performanceSummary.performance.scoreInPercentage}}% ;background-color:{{if performanceSummary (grade-color performanceSummary.performance.scoreInPercentage)}}">
     </div>
   </div>
   <div class="report-summary-container">

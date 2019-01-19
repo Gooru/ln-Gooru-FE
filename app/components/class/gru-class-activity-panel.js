@@ -173,15 +173,16 @@ export default Ember.Component.extend({
     return this.get('isToday');
   }),
 
-  allClassActivities: Ember.computed('classActivities', function() {
+  activities: Ember.computed('classActivities', function() {
+    let filteredActivites = [];
     let classActivities = this.get('classActivities');
-    let filteredActivites = classActivities.filter(function(activity) {
-      return !!activity.classActivities;
+    classActivities.forEach(function(classActivity) {
+      classActivity.classActivities.forEach(activity => {
+        filteredActivites.push(activity);
+      });
     });
     return filteredActivites;
   }),
-
-  classAct: Ember.computed.alias('classActivities.classActivities'),
 
   /**
    * Maintains the flag to show remove content button or not.

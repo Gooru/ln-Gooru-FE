@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['oca-student-activity-report-pull-up'],
-
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -49,7 +48,11 @@ export default Ember.Component.extend({
    */
   isLoading: false,
 
-  activitiesStudents: Ember.computed('students', function() {
+  /**
+   * Propery to hide the default pullup.
+   * @property {Boolean}
+   */
+  performedStudents: Ember.computed('students', function() {
     let component = this;
     let students = component.get('students');
     let filteredStudents = students.filter(function(student) {
@@ -58,27 +61,40 @@ export default Ember.Component.extend({
     return filteredStudents;
   }),
 
-  collectionObserver: Ember.observer('student', function() {
+  /**
+   * Propery to student observer.
+   * @property {Observer}
+   */
+  studentObserver: Ember.observer('student', function() {
     this.loadData();
   }),
 
+  /**
+   * @property {Number}
+   */
   selectedIndex: Ember.computed('student', function() {
     let component = this;
     let selectedStudent = component.get('student');
-    let allStudents = component.get('activitiesStudents');
-    return allStudents.indexOf(selectedStudent);
+    let performedStudents = component.get('performedStudents');
+    return performedStudents.indexOf(selectedStudent);
   }),
 
+  /**
+   * @property {Boolean}
+   */
   isToggleLeft: Ember.computed('student', function() {
     let component = this;
     let selectedIndex = component.get('selectedIndex');
     return selectedIndex > 0;
   }),
 
+  /**
+   * @property {Boolean}
+   */
   isToggleRight: Ember.computed('student', function() {
     let component = this;
     let selectedIndex = component.get('selectedIndex');
-    let length = component.get('activitiesStudents').length;
+    let length = component.get('performedStudents').length;
     return selectedIndex < length - 1;
   }),
 
@@ -109,9 +125,9 @@ export default Ember.Component.extend({
     toggle(isLeft) {
       let component = this;
       let currentIndex = component.get('selectedIndex');
-      let allStudents = component.get('activitiesStudents');
+      let performedStudents = component.get('performedStudents');
       let indexPosition = isLeft ? currentIndex - 1 : currentIndex + 1;
-      let student = allStudents.objectAt(indexPosition);
+      let student = performedStudents.objectAt(indexPosition);
       if (student) {
         component.set('student', student);
       }

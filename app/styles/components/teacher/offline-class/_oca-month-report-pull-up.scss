@@ -72,7 +72,7 @@
       display: grid;
       grid-template-rows: 20px 1fr;
       position: relative;
-      min-height: 240px;
+      height: 240px;
 
       &:before {
         content: "";
@@ -98,14 +98,14 @@
       }
 
       .performance {
-        grid-row-start: 2;
-        @extend %webkit-container;
-        @extend %container;
         text-align: center;
         display: grid;
         font-weight: bold;
-        grid-template-columns: max-content 1fr max-content;
         color: $white;
+        justify-content: center;
+        z-index: 1;
+        grid-template-columns: 30px 1fr 30px;
+        height: 240px;
 
         .left,
         .right {
@@ -122,13 +122,31 @@
           }
         }
 
-        .score {
-          font-size: 100px;
-        }
+        .score-container {
+          display: grid;
+          justify-content: center;
 
-        .time-spent {
-          font-size: 20px;
+          .score {
+            font-size: 90px;
+            width: max-content;
+            height: max-content;
+          }
+
+          .time-spent {
+            font-size: 20px;
+            width: max-content;
+            height: max-content;
+            justify-self: center;
+          }
         }
+      }
+
+      .performance-img {
+        grid-row-start: 2;
+        @extend %webkit-container;
+        @extend %container;
+        display: grid;
+        align-self: end;
       }
     }
 

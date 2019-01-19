@@ -12,13 +12,15 @@
     </div>
   </div>
   <div class="performance-activity" style="background-color:{{if context (grade-color context.scoreInPercentage)}}">
-    <div class="performance" style="background-color:{{if context (grade-color context.scoreInPercentage)}}">
+    <div class="performance">
       <span class="left {{unless isToggleLeft 'disable'}}" {{action 'toggle' true}}>{{gru-icon name="keyboard_arrow_left"}}</span>
-      <div>
+      <div class="score-container">
         <span class="score">{{context.scoreInPercentage}}%</span>
         <span class="time-spent">{{if context.timeSpent (format-time context.timeSpent) '--'}}</span>
       </div>
       <span class="right {{unless isToggleRight 'disable'}}" {{action 'toggle' false}}>{{gru-icon name="keyboard_arrow_right"}}</span>
+    </div>
+    <div class="performance-img" style="height: {{context.scoreInPercentage}}% ;background-color:{{if context (grade-color context.scoreInPercentage)}}">
     </div>
   </div>
   {{#if isLoading}}

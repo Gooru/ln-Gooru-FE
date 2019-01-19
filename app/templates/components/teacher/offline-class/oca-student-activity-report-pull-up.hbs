@@ -12,23 +12,23 @@
     </div>
   </div>
   {{#if (or (eq collection.collectionType 'assessment') (eq collection.collectionType 'assessment-external'))}}
-    <div class="performance-activity" style="background-color:{{if collection (grade-color collection.performance.score)}}">
-      <div class="performance" style="background-color:{{if collection (grade-color collection.performance.score)}}">
+    <div class="performance-activity" style="background-color:{{if student (grade-color student.performance.score)}}">
+      <div class="performance">
         <span class="left {{unless isToggleLeft 'disable'}}" {{action 'toggle' true}}>{{gru-icon name="keyboard_arrow_left"}}</span>
-        <div>
-        <span class="score">{{collection.performance.score}}%</span>
-        <span class="time-spent">{{if collection.performance.timeSpent (format-time  collection.performance.timeSpent) '--'}}</span>
-      </div>
+        <div class="score-container">
+          <span class="score">{{student.performance.score}}%</span>
+          <span class="time-spent">{{if student.performance.timeSpent (format-time  student.performance.timeSpent) '--'}}</span>
+        </div>
         <span class="right {{unless isToggleRight 'disable'}}" {{action 'toggle' false}}>{{gru-icon name="keyboard_arrow_right"}}</span>
+      </div>
+      <div class="performance-img" style="height: {{student.performance.score}}% ;background-color:{{if student (grade-color student.performance.score)}}">
       </div>
     </div>
   {{else}}
     <div class="collection-performance">
       <div class="performance">
         <span class="left {{unless isToggleLeft 'disable'}}" {{action 'toggle' true}}>{{gru-icon name="keyboard_arrow_left"}}</span>
-        <div>
-          <span class="time-spent">{{if collection.performance.timeSpent (format-time  collection.performance.timeSpent) '--'}}</span>
-        </div>
+        <span class="time-spent">{{if student.performance.timeSpent (format-time  student.performance.timeSpent) '--'}}</span>
         <span class="right {{unless isToggleRight 'disable'}}" {{action 'toggle' false}}>{{gru-icon name="keyboard_arrow_right"}}</span>
       </div>
     </div>
@@ -79,15 +79,15 @@
         </div>
       {{/each}}
       {{#if (eq collection.collectionType 'collection-external')}}
-      <div class="external-collection-link">
-        <div class="note">{{t 'report.external-collection-report.note'}}</div>
-        <div>{{t 'report.external-collection-report.reference'}} <a class="link" target="_blank" href="{{collection.url}}">here</a></div>
-      </div>
-      {{else if (eq collection.collectionType 'assessment-external')}}
-      <div class="external-assessment-link">
-        <div class="note">{{t 'report.external-assessment-report.note'}}</div>
-        <div>This external assessment can be accessed <a class="link" target="_blank" href="{{collection.url}}">here</a></div>
-      </div>
+        <div class="external-collection-link">
+          <div class="note">{{t 'report.external-collection-report.note'}}</div>
+          <div>{{t 'report.external-collection-report.reference'}} <a class="link" target="_blank" href="{{collection.url}}">here</a></div>
+        </div>
+        {{else if (eq collection.collectionType 'assessment-external')}}
+        <div class="external-assessment-link">
+          <div class="note">{{t 'report.external-assessment-report.note'}}</div>
+          <div>This external assessment can be accessed <a class="link" target="_blank" href="{{collection.url}}">here</a></div>
+        </div>
       {{/if}}
     </div>
   {{/if}}
