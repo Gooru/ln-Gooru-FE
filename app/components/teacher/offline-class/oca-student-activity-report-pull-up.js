@@ -49,6 +49,39 @@ export default Ember.Component.extend({
    */
   isLoading: false,
 
+  activitiesStudents: Ember.computed('students', function() {
+    let component = this;
+    let students = component.get('students');
+    let filteredStudents = students.filter(function(student) {
+      return !!student.performance;
+    });
+    return filteredStudents;
+  }),
+
+  collectionObserver: Ember.observer('student', function() {
+    this.loadData();
+  }),
+
+  selectedIndex: Ember.computed('student', function() {
+    let component = this;
+    let selectedStudent = component.get('student');
+    let allStudents = component.get('activitiesStudents');
+    return allStudents.indexOf(selectedStudent);
+  }),
+
+  isToggleLeft: Ember.computed('student', function() {
+    let component = this;
+    let selectedIndex = component.get('selectedIndex');
+    return selectedIndex > 0;
+  }),
+
+  isToggleRight: Ember.computed('student', function() {
+    let component = this;
+    let selectedIndex = component.get('selectedIndex');
+    let length = component.get('activitiesStudents').length;
+    return selectedIndex < length - 1;
+  }),
+
   actions: {
     onPullUpClose(closeAll) {
       this.closePullUp(closeAll);
@@ -64,6 +97,16 @@ export default Ember.Component.extend({
           component.set('showPullUp', false);
         }
       );
+    },
+    toggle(isLeft) {
+      let component = this;
+      let currentIndex = component.get('selectedIndex');
+      let allStudents = component.get('activitiesStudents');
+      let indexPosition = isLeft ? currentIndex - 1 : currentIndex + 1;
+      let student = allStudents.objectAt(indexPosition);
+      if (student) {
+        component.set('student', student);
+      }
     }
   },
 

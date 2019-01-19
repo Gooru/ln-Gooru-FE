@@ -2835,6 +2835,13 @@ export default Object.assign(quizzesTranslations, {
       wish: 'Congratulations! You scored',
       reference: 'This external assessment can be accessed '
     },
+    'external-collection-report': {
+      note:
+        'This is an external collection with student reported scores for the collection. Individual question level data is not available.',
+      wish: 'Congratulations! You scored',
+      reference: 'This external collection can be accessed '
+    },
+
     'competency-report': {
       title: 'Competency Report',
       'no-subject': 'No Subject Assigned',

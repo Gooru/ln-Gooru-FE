@@ -33,12 +33,42 @@ export default Ember.Component.extend({
    */
   students: Ember.A([]),
 
+  activitiesPerformance: Ember.computed('classActivities', function() {
+    let component = this;
+    let classActivities = component.get('classActivities');
+    let filteredActivites = classActivities.filter(function(activity) {
+      return !!activity.collection.performance;
+    });
+    return filteredActivites;
+  }),
+
   /**
    * Propery of collection
    * @property {Object}
    */
+
   collection: Ember.computed('context', function() {
     return this.get('context.collection');
+  }),
+
+  selectedIndex: Ember.computed('context', function() {
+    let component = this;
+    let selectedSummary = component.get('context');
+    let activitiesPerformance = component.get('activitiesPerformance');
+    return activitiesPerformance.indexOf(selectedSummary);
+  }),
+
+  isToggleLeft: Ember.computed('context', function() {
+    let component = this;
+    let selectedIndex = component.get('selectedIndex');
+    return selectedIndex > 0;
+  }),
+
+  isToggleRight: Ember.computed('context', function() {
+    let component = this;
+    let selectedIndex = component.get('selectedIndex');
+    let length = component.get('activitiesPerformance').length;
+    return selectedIndex < length - 1;
   }),
 
   /**
@@ -79,6 +109,16 @@ export default Ember.Component.extend({
       let component = this;
       component.set('isShowStudentActivityReport', true);
       component.set('selectedStudent', student);
+    },
+    toggle(isLeft) {
+      let component = this;
+      let currentIndex = component.get('selectedIndex');
+      let allSummary = component.get('activitiesPerformance');
+      let indexPosition = isLeft ? currentIndex - 1 : currentIndex + 1;
+      let summary = allSummary.objectAt(indexPosition);
+      if (summary) {
+        component.set('context', summary);
+      }
     }
   },
 

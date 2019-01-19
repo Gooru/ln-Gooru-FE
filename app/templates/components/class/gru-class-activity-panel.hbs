@@ -26,7 +26,7 @@
     {{#unless isUnScheduled}}
       <div class="dca-panel-actions-performance">
         {{#if collectionPerformanceSummary}}
-          {{#if (not-eq item.collectionType 'collection')}}
+          {{#if (and (not-eq item.collectionType 'collection' ) (not-eq item.collectionType 'collection-external'))}}
             <div class="dca-panel-performance" {{action 'openDcaContentReport' classActivity}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
               <span class="assessment-score">{{collectionPerformanceSummary.score}}%</span>
               {{#if collectionPerformanceSummary.timeSpent}}
@@ -125,4 +125,8 @@
 
 {{#if showStudentListPullup}}
   {{teacher.class.ca-student-list-pull-up isActivityPast=isActivityPast classId=classId classActivity=classActivity members=members showPullUp=showStudentListPullup}}
+{{/if}}
+
+{{#if isShowStudentsSummaryReport}}
+  {{teacher.offline-class.oca-students-summary-report-pull-up classActivities=classAct classId=classId showPullUp=isShowStudentsSummaryReport onClosePullUp="pullUpClose"}}
 {{/if}}
