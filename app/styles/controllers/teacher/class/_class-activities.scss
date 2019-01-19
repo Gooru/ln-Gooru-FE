@@ -276,70 +276,34 @@
     }
   }
 
-  @media screen and (min-width: 568px) and (max-width: 992px) {
-    .ca-datepicker-schedule-container {
-      top: 0px !important;
+  @media screen and (max-width: 992px) {
+    .ca-datepicker-schedule-container,
+    .schedule-ca-datepicker-container {
       left: calc((100% - 250px) / 2) !important;
-      &.ca-datepicker-orientation-top {
+      .ca-datepicker-orientation-top {
         .ca-datepicker-top {
           display: none;
         }
       }
 
-      &.ca-datepicker-orientation-bottom {
+      .ca-datepicker-orientation-bottom {
         .ca-datepicker-bottom {
           display: none;
         }
       }
     }
   }
-  @media screen and (max-width: 568px) {
-    .ca-datepicker-schedule-container {
+  @media screen and (max-width: 992px) and (orientation: portrait) {
+    .ca-datepicker-schedule-container,
+    .schedule-ca-datepicker-container {
       top: 49px !important;
-      left: calc((100% - 250px) / 2) !important;
-      &.ca-datepicker-orientation-top {
-        .ca-datepicker-top {
-          display: none;
-        }
-      }
-
-      &.ca-datepicker-orientation-bottom {
-        .ca-datepicker-bottom {
-          display: none;
-        }
-      }
     }
   }
-  @media screen and (max-width: 320px) {
-    .ca-datepicker-schedule-container {
-      left: calc((100% - 250px) / 2) !important;
-    }
-    &.ca-datepicker-orientation-top {
-      .ca-datepicker-top {
-        display: none;
-      }
-    }
 
-    &.ca-datepicker-orientation-bottom {
-      .ca-datepicker-bottom {
-        display: none;
-      }
-    }
-  }
   @media screen and (max-width: 992px) and (orientation: landscape) {
-    .ca-datepicker-schedule-container {
+    .ca-datepicker-schedule-container,
+    .schedule-ca-datepicker-container {
       top: 0px !important;
-      &.ca-datepicker-orientation-top {
-        .ca-datepicker-top {
-          display: none;
-        }
-      }
-
-      &.ca-datepicker-orientation-bottom {
-        .ca-datepicker-bottom {
-          display: none;
-        }
-      }
     }
   }
 }
