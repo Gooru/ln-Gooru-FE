@@ -70,9 +70,9 @@
                                             </div>
                                         </div>
                                         <div class="taxonomy  gru-taxonomy-tag-list">
-                                            {{log 'selectedOtherLanguages' selectedOtherLanguages}}
-                                            {{#if selectedOtherLanguages}}
-                                                {{#each selectedOtherLanguages as |otherLanguage|}}
+                                            {{log 'otherLanguages' otherLanguages}}
+                                            {{#if otherLanguages}}
+                                                {{#each otherLanguages as |otherLanguage|}}
                                                     <div class="taxonomy gru-taxonomy-tag active read-only remove">
                                                         <div class="content standard-tag" data-html="true" data-original-title="" title="">
                                                             <b class="tag-label"><span class="tag-caption ellipsis">{{otherLanguage.display_name}}</span></b>
@@ -149,7 +149,7 @@
                                     <div class="subject-fwk display-language-pref-row1">
                                         <div class="subject display-language-pref-label"> {{t 'profile.preference.other-preferred-languages'}}: </div>
                                         <div class="fwk">
-                                            {{#each selectedOtherLanguages as |secLanguage|}}
+                                            {{#each otherLanguages as |secLanguage|}}
                                                 {{secLanguage.display_name}}
                                             {{/each}}
                                         </div>
