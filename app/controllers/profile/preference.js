@@ -150,6 +150,53 @@ export default Ember.Controller.extend({
     },
     prepareSubjectList(category) {
       this.prepareSubjectList(category);
+    },
+
+    prepareLanguageList() {
+      const controller = this;
+      let languageList = controller.get('languages');
+      let currentSelLanguage = [];
+      if (
+        controller.get('selectedLanguage') ||
+        controller.get('selectedOtherLanguages')
+      ) {
+        if (controller.get('selectedLanguage')) {
+          currentSelLanguage = Array.concat(
+            currentSelLanguage,
+            controller.get('selectedLanguage')
+          );
+        }
+
+        if (controller.get('selectedOtherLanguages')) {
+          currentSelLanguage = Array.concat(
+            currentSelLanguage,
+            controller.get('selectedOtherLanguages')
+          );
+        }
+        currentSelLanguage.forEach(sel => {
+          languageList = languageList.filter(ddLang => ddLang.id !== sel.id);
+          // console.log('sel', sel);
+          // console.log('languageList', languageList);
+        });
+      }
+
+      controller.set('languageList', languageList);
+    },
+
+    categoriesDropDownFilter() {
+      const controller = this;
+      let categoriesDropDownFilter,
+        addedCategories = controller.get('addedCategories'),
+        categoriesMaster = controller.get('categoriesMaster');
+
+      /* categoriesDropDownFilter = categoriesMaster.filter(
+        catg => catg.id !== addedCategories.id
+      ); */
+
+      categoriesDropDownFilter = categoriesMaster.filter(
+        masterCat => !addedCategories.findBy('id', masterCat.id)
+      );
+      controller.set('categoriesDropDownFilter', categoriesDropDownFilter);
     }
   },
   //--- pro
@@ -374,7 +421,7 @@ export default Ember.Controller.extend({
     const controller = this;
     let selectionsInit = controller.get('selections');
     if (selectionsInit) {
-      selectionsInit.clear();
+      selectionsInit = Ember.A([]);
     }
     controller.set('selections', selectionsInit); // Set clear
 
@@ -430,14 +477,6 @@ export default Ember.Controller.extend({
     categoriesDropDown.pushObject(category);
     controller.set('categoriesDropDown', categoriesDropDown);
   },
-
-  // markSubjectSelected(subject, category) {
-  //   this.set('currentSelectedSubject', subject);
-  //   let fwk,
-  //     categorySubject = `${category.id}.${subject.id}`, //eslint-disable-line
-  //     tEntry = { categorySubject: fwk };
-  //   this.selections.pushObject(tEntry); //Push object with empty frameworks
-  // },
 
   markSelectedFrameworksParsedWithCategrory(fwkValue, subjectValue, category) {
     let fwk = Ember.isArray(fwkValue) ? fwkValue[0] : fwkValue,
@@ -613,7 +652,7 @@ export default Ember.Controller.extend({
           Object.assign(Ember.A([]), response)
         );
         let addedCopy = response.copy();
-        addedCopy.clear();
+        addedCopy = Ember.A([]);
         controller.set('addedCategories', addedCopy); // Create a shallow copy of the original one
         controller.set('selections', addedCopy.copy());
         resolve(response);

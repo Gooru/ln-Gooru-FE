@@ -22,7 +22,7 @@
                                         <div class='subject'> {{t 'profile.preference.choose-preferred-language'}} </div>
                                         <div class="fwk">
                                             <div class="dropdown language-dropdown pull-left">
-                                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareLanguageList' }}>
                                                     {{#if selectedLanguage}}
                                                         {{selectedLanguage.display_name}}
                                                     {{else}}
@@ -31,7 +31,7 @@
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu pull-right">
-                                                    {{#each languages as |language|}}
+                                                    {{#each languageList as |language|}}
                                                         <li> <a data-item={{language}} {{ action 'updateLanguage' language}}>{{language.display_name}}
                                                             </a> </li>
                                                     {{else}}
@@ -46,7 +46,7 @@
                                         <div class='subject'> {{t 'profile.preference.choose-preferred-other-languages'}} </div>
                                         <div class="fwk">
                                             <div class="dropdown language-dropdown pull-left">
-                                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareLanguageList' }}>
                                                     {{#if selectedSecLanguage}}
                                                         {{selectedSecLanguage.display_name}}
                                                     {{else}}
@@ -55,7 +55,7 @@
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu pull-right">
-                                                    {{#each languages as |language|}}
+                                                    {{#each languageList as |language|}}
                                                         <li> <a data-item={{language}} {{ action 'selectSecLanguage' language}}>{{language.display_name}}
                                                             </a> </li>
                                                     {{else}}
@@ -101,7 +101,7 @@
                                         <div></div>
                                         <div class="fwk-new-cat">
                                             <div class="dropdown pull-left">
-                                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{ action 'categoriesDropDownFilter'}}>
                                                     {{#if currentSelectedCategory}}
                                                         {{currentSelectedCategory.title}}
                                                     {{else}}
@@ -110,7 +110,7 @@
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu pull-right">
-                                                    {{#each categoriesDropDown as |category|}}
+                                                    {{#each categoriesDropDownFilter as |category|}}
                                                         <li> <a data-item={{category}} {{ action 'addCategory' category}}>{{category.title}}
                                                             </a> </li>
                                                     {{else}}
