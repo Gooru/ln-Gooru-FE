@@ -7,6 +7,7 @@
   right: 0;
   margin: auto;
   color: #37434d;
+
   @media screen and (max-width: $screen-sm - 1) {
     width: 100%;
   }
@@ -230,6 +231,7 @@
           grid-template-columns: 56px 1fr 56px 56px;
           align-items: center;
           cursor: default;
+          height: 51px;
 
           .resource-icon {
             width: 100%;
@@ -401,6 +403,15 @@
         .title {
           font-size: 10px;
           display: block;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: $screen-824) {
+    .oca-student-activity-report-container {
+      .resource {
+        .resource-description {
+          padding-top: 10px;
         }
       }
     }
