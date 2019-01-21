@@ -49,7 +49,7 @@ test('aggregateCollectionPerformanceSummaryItems', function(assert) {
     collectionPerformanceSummaryItems
   );
   assert.equal(aggregated.get('collectionId'), 123, 'Wrong collection id');
-  assert.equal(aggregated.get('timeSpent'), 95, 'Wrong time spent');
+  assert.equal(aggregated.get('timeSpent'), 19, 'Wrong time spent');
   assert.equal(aggregated.get('attempts'), 30, 'Wrong attempts');
   assert.equal(aggregated.get('score'), 22, 'Wrong score');
 });
@@ -175,7 +175,7 @@ test('aggregateClassActivityPerformanceSummaryItems', function(assert) {
   );
   assert.equal(
     aggregatedFor2012_0_10.get('collectionPerformanceSummary.timeSpent'),
-    95,
+    19,
     'Wrong time spent'
   );
   assert.equal(

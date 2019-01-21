@@ -1,5 +1,5 @@
 <div class="teacher class"> {{gru-take-tour steps=steps containerClass='class-view-tour'}} {{teacher.class.gru-class-navbar navTitle= class.title class=class onItemSelected="selectMenuItem" selectedMenuItem=menuItem
-  isPremiumClass=isPremiumClass onOpenCourseReport="onOpenCourseReport" onOpenCompetencyReport="onOpenCompetencyReport"}}
+  isPremiumClass=isPremiumClass onOpenCourseReport="onOpenCourseReport" onOpenOCAReport="onOpenOCAReport" performanceSummaryForDCA=performanceSummaryForDCA isOfflineClass=isOfflineClass onOpenCompetencyReport="onOpenCompetencyReport"}}
 
   <div class="header clearfix">
     <div class="go-back-container">
@@ -62,4 +62,9 @@
 
 {{#if isShowCollectionReportPullUp}}
   {{reports.pull-up.collection-report onClosePullUp="onClosePullUp" context=teacherCollectionReportData showPullUp=isShowCollectionReportPullUp}}
+{{/if}}
+
+
+{{#if isShowOCASummaryReportPullUp}}
+  {{teacher.offline-class.oca-summary-report-pull-up  classId=class.id performanceSummary=performanceSummaryForDCA onClosePullUp="onClosePullUp"}}
 {{/if}}

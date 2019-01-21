@@ -22,6 +22,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   performanceService: Ember.inject.service('api-sdk/performance'),
 
   /**
+   * @type {AnalyticsService} Service to retrieve class performance summary
+   */
+  analyticsService: Ember.inject.service('api-sdk/analytics'),
+
+  /**
    * @type {CourseService} Service to retrieve course information
    */
   courseService: Ember.inject.service('api-sdk/course'),
@@ -167,9 +172,15 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       let classCourseId = null;
       if (classData.courseId) {
         classCourseId = Ember.A([
-          { classId: params.classId, courseId: classData.courseId }
+          {
+            classId: params.classId,
+            courseId: classData.courseId
+          }
         ]);
       }
+      const performanceSummaryForDCAPromise = classData.isOffline
+        ? route.get('analyticsService').getDCASummaryPerformance(classId)
+        : null;
       const performanceSummaryPromise = classCourseId
         ? route
           .get('performanceService')
@@ -178,11 +189,13 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       return Ember.RSVP.hash({
         class: classPromise,
         members: membersPromise,
-        classPerformanceSummaryItems: performanceSummaryPromise
+        classPerformanceSummaryItems: performanceSummaryPromise,
+        performanceSummaryForDCA: performanceSummaryForDCAPromise
       }).then(function(hash) {
         const aClass = hash.class;
         const members = hash.members;
         const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
+        const performanceSummaryForDCA = hash.performanceSummaryForDCA;
         let classPerformanceSummary = classPerformanceSummaryItems
           ? classPerformanceSummaryItems.findBy('classId', classId)
           : null;
@@ -213,7 +226,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             course,
             members,
             contentVisibility,
-            tourSteps
+            tourSteps,
+            performanceSummaryForDCA
           };
         });
       });
@@ -230,6 +244,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('course', model.course);
     controller.set('members', model.members);
     controller.set('contentVisibility', model.contentVisibility);
+    controller.set('performanceSummaryForDCA', model.performanceSummaryForDCA);
+    controller.set('isOfflineClass', model.class.isOffline);
     controller.set('steps', model.tourSteps);
     controller.set('router', this.get('router'));
     let classData = model.class;

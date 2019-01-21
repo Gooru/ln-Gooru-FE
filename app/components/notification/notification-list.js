@@ -155,7 +155,6 @@ export default Ember.Component.extend({
       var tkey = tgtkeys[i];
       fresult[tkey] = result[tkey] || tgtQueryParams[tkey];
     }
-    //console.log('transformQpms', fresult);
     return fresult;
   }
 });

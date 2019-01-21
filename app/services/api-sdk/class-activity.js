@@ -316,16 +316,18 @@ export default Ember.Service.extend({
               performance.get('collectionPerformanceSummary.collectionId')
             )
             .objectAt(0);
-
           if (classActivity) {
+            let classActivityIndex = classActivities.indexOf(classActivity);
             let performanceData = performance.get(
               'collectionPerformanceSummary'
             );
             performanceData.set('hasStarted', true);
-            classActivity.set('collection.performance', performanceData);
+            classActivities[classActivityIndex].set(
+              'collection.performance',
+              performanceData
+            );
           }
         });
-
         resolve(classActivities);
       }, reject);
     });
