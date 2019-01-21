@@ -384,5 +384,33 @@ export default Ember.Service.extend({
       collectionId,
       'collection'
     );
+  },
+
+  /**
+   * Creates a new collection
+   *
+   * @param collectionData object with the collection data
+   * @returns {Promise}
+   */
+  createExternalCollection: function(collectionData) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      let serializedExternalCollectionData = service
+        .get('collectionSerializer')
+        .serializeCreateExternalCollection(collectionData);
+      service
+        .get('collectionAdapter')
+        .createExternalCollection(serializedExternalCollectionData)
+        .then(
+          function(responseData, textStatus, request) {
+            let collectionId = request.getResponseHeader('location');
+            collectionData.id = collectionId;
+            resolve(collectionData);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });

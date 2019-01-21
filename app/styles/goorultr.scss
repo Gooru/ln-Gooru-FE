@@ -414,6 +414,10 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "controllers/teacher/class/add-course";
 @import "components/cards/gru-add-course-card";
 @import "components/teacher/class/course-search-pull-up";
+
+//Create Offline activity
+@import "components/activity/gru-new-offline-activity";
+@import "components/ca-taxonomy-picker";
 // DCA Offline reports
 @import "components/teacher/offline-class/oca-summary-report-pull-up";
 @import "components/teacher/offline-class/oca-month-report-pull-up";

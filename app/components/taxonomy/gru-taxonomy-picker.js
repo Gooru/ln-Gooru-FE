@@ -79,7 +79,9 @@ export default Ember.Component.extend({
     },
 
     saveSelectedTags: function(selectedTags) {
-      this.get('onSave')(selectedTags);
+      let course = this.get('course');
+      let domain = this.get('domain');
+      this.get('onSave')(selectedTags, course, domain);
     },
 
     /**
@@ -113,6 +115,13 @@ export default Ember.Component.extend({
     updatePath: function(item) {
       this.resetShortcuts();
       return this.updateSelectedPath(item);
+    },
+
+    onCloseTaxonomyPicker() {
+      const component = this;
+      if (component.get('isCompatiableMode')) {
+        component.sendAction('onCloseTaxonomyPicker');
+      }
     }
   },
 
@@ -132,13 +141,11 @@ export default Ember.Component.extend({
     var maxLevels = this.get('maxLevels');
     var browseItems = this.getBrowseItems(taxonomyItems, maxLevels);
     this.set('browseItems', browseItems);
-
     var selectedTags = this.getTaxonomyTags(selected, {
       isActive: true,
       isReadonly: true,
       isRemovable: true
     });
-
     var shortcutTags = this.getTaxonomyTags(shortcuts);
 
     this.set('selectedTags', selectedTags);
@@ -258,6 +265,21 @@ export default Ember.Component.extend({
    * @property {Boolean} fromSearch - show if the modal call was from search or not.
    */
   fromSearch: false,
+
+  /**
+   * @property {Boolean} isCompatiableMode
+   */
+  isCompatiableMode: false,
+
+  /**
+   * @property {String} course
+   */
+  course: null,
+
+  /**
+   * @property {String} domain
+   */
+  domain: null,
 
   // -------------------------------------------------------------------------
   // Methods
