@@ -50,7 +50,7 @@
                                                     {{#if selectedSecLanguage}}
                                                         {{selectedSecLanguage.display_name}}
                                                     {{else}}
-                                                        {{t 'profile.preference.choose-language'}}
+                                                        {{t 'profile.preference.choose-sec-language'}}
                                                     {{/if}}
                                                     <span class="caret"></span>
                                                 </button>
@@ -208,7 +208,7 @@
                                                     {{/if}}
                                                     <span class="caret"></span>
                                                 </button>
-                                                <ul class="dropdown-menu pull-left">
+                                                <ul class="dropdown-menu pull-right">
                                                     {{#each currentCategorySubjectFwks  as |subject |}}
                                                         <li> <a data-item={{subject}} {{ action 'markSelectedSubject'  subject category  }}>
                                                                 {{subject.title}}
