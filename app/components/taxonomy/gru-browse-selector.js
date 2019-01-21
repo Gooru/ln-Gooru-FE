@@ -224,16 +224,13 @@ export default Ember.Component.extend({
     const component = this;
     if (component.get('doAnimate')) {
       component.$('.hierarchy-1-container').show();
-      component.$('.hierarchy-2-container').hide();
-      component.$('.hierarchy-3-container').hide();
+      component.$('.hierarchy-2-container, .hierarchy-3-container').hide();
       if (component.get('course')) {
-        component.$('.hierarchy-1-container').hide();
+        component.$('.hierarchy-1-container, .hierarchy-3-container').hide();
         component.$('.hierarchy-2-container').show();
-        component.$('.hierarchy-3-container').hide();
       }
       if (component.get('domain')) {
-        component.$('.hierarchy-1-container').hide();
-        component.$('.hierarchy-2-container').hide();
+        component.$('.hierarchy-1-container, .hierarchy-2-container').hide();
         component.$('.hierarchy-3-container').show();
       }
     }
@@ -247,12 +244,10 @@ export default Ember.Component.extend({
     const component = this;
     if (component.get('doAnimate')) {
       if (level === 1) {
-        component.$(`.hierarchy-${level}-container`).hide(1000);
+        component.$(`.hierarchy-${level}-container, .hierarchy-${level + 2}-container`).hide(1000);
         component.$(`.hierarchy-${level + 1}-container`).show(1000);
-        component.$(`.hierarchy-${level + 2}-container`).hide(1000);
       } else if (level === 2) {
-        component.$(`.hierarchy-${level - 1}-container`).hide(1000);
-        component.$(`.hierarchy-${level}-container`).hide(1000);
+        component.$(`.hierarchy-${level - 1}-container, .hierarchy-${level}-container`).hide(1000);
         component.$(`.hierarchy-${level + 1}-container`).show(1000);
       }
     }
@@ -266,13 +261,11 @@ export default Ember.Component.extend({
     const component = this;
     if (level === 1) {
       component.$(`.hierarchy-${level}-container`).show(1000);
-      component.$(`.hierarchy-${level + 1}-container`).hide(1000);
-      component.$(`.hierarchy-${level + 2}-container`).hide(1000);
+      component.$(`.hierarchy-${level + 1}-container, .hierarchy-${level + 2}-container`).hide(1000);
       component.set('domain', null);
     } else if (level === 2) {
-      component.$(`.hierarchy-${level - 1}-container`).hide(1000);
+      component.$(`.hierarchy-${level - 1}-container, .hierarchy-${level + 1}-container`).hide(1000);
       component.$(`.hierarchy-${level}-container`).show(1000);
-      component.$(`.hierarchy-${level + 1}-container`).hide(1000);
     }
   },
 
