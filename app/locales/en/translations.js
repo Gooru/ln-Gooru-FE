@@ -1991,7 +1991,8 @@ export default Object.assign(quizzesTranslations, {
     preference: {
       'language-preference': 'Language Preference',
       'choose-language': 'Choose language',
-      'choose-preferred-language': 'Select profile language',
+      'choose-preferred-language': 'Select primary profile language',
+      'choose-preferred-other-languages': 'Select other preferred languages',
       language: 'Language',
       'select-category-label': 'Add a new category',
       'choose-category': 'Choose Category',
@@ -1999,7 +2000,9 @@ export default Object.assign(quizzesTranslations, {
       'category-preference': 'Category Preference',
       'choose-subject': 'Choose Subject',
       'choose-fwk': 'Choose Framework',
-      'add-subject': 'Add Subject'
+      'add-subject': 'Add Subject',
+      'add-sec-language': 'Add other preferred language',
+      'other-preferred-languages': 'Other preferred languages'
     }
   },
 
