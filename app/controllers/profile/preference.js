@@ -107,6 +107,8 @@ export default Ember.Controller.extend({
       const controller = this;
       controller.set('selectedSecLanguage', Ember.A([]));
       controller.set('otherLanguages', Ember.A([]));
+      let savedResponse = controller.get('savedResponse');
+      controller.normalizeLanguageResponse(savedResponse);
       this.getCategories().then(() => {
         this.getProfilePreference();
       });
@@ -550,46 +552,39 @@ export default Ember.Controller.extend({
       if (foundCategory && !foundAddedCategory) {
         controller.addCategory(foundCategory, false); //Complete category object
       }
-      if (
-        response.language_preference &&
-        response.language_preference.length > 0
-      ) {
-        let languagePreSelection, // First / primary language consideration as spec.
-          selectedSecLanguage = [];
-        if (response.language_preference.length > 1) {
-          response.language_preference.forEach((secPref, indx) => {
-            if (indx === 0) {
-              languagePreSelection = controller
-                .get('languages')
-                .findBy('id', secPref);
-            } else {
-              selectedSecLanguage.push(
-                controller.get('languages').findBy('id', secPref)
-              );
-            }
-          });
-        }
-        controller.set('otherLanguages', selectedSecLanguage);
-        controller.set('selectedLanguage', languagePreSelection);
-      }
       controller.setSelectedSubjectFrameworks(fwk, subject, foundCategory); // fwk.frameworkId, subject.code, cat
     }
-
+    controller.set('savedResponse', response);
+    controller.normalizeLanguageResponse(response);
     controller.changeModeOnSaveAll();
     controller.changeMode(false);
+  },
 
-    /* //following is the storage format
-
-    addedCategories.map(c => {
-      c.subjects.map(s => {
-        controller.markSelectedFrameworksParsed(
-          Object.values(s),
-          Object.keys(s),
-          c
-        );
-      });
-    }); */
-    //let selections = controller.get('selections');
+  normalizeLanguageResponse(response) {
+    const controller = this;
+    if (
+      response &&
+      response.language_preference &&
+      response.language_preference.length > 0
+    ) {
+      let languagePreSelection, // First / primary language consideration as spec.
+        selectedSecLanguage = [];
+      if (response.language_preference.length > 1) {
+        response.language_preference.forEach((secPref, indx) => {
+          if (indx === 0) {
+            languagePreSelection = controller
+              .get('languages')
+              .findBy('id', secPref);
+          } else {
+            selectedSecLanguage.push(
+              controller.get('languages').findBy('id', secPref)
+            );
+          }
+        });
+      }
+      controller.set('otherLanguages', selectedSecLanguage);
+      controller.set('selectedLanguage', languagePreSelection);
+    }
   },
   //------------------------------------------------------------------------------
   // Data Helpers

@@ -81,7 +81,7 @@
                                                     </div>
                                                 {{/each}}
                                             {{else}}
-                                                {{t 'profile.preference.no-data'}}
+                                                {{!-- {{t 'profile.preference.no-data'}} --}}
                                             {{/if}}
                                         </div>
                                     </div>
@@ -148,9 +148,11 @@
                                     </div>
                                     <div class="subject-fwk display-language-pref-row1">
                                         <div class="subject display-language-pref-label"> {{t 'profile.preference.other-preferred-languages'}}: </div>
-                                        <div class="fwk">
+                                        <div class="fwk sec-lang">
                                             {{#each otherLanguages as |secLanguage|}}
-                                                {{secLanguage.display_name}}
+                                                <span class='secLangDisplay'>
+                                                    {{secLanguage.display_name}}
+                                                </span>
                                             {{/each}}
                                         </div>
                                     </div>
