@@ -89,7 +89,7 @@ export default Ember.Object.extend({
   getAtcPerformanceSummaryPremiumClass(classId, courseId, subjectCode) {
     const adapter = this;
     const namespace = this.get('dsUsersNamespace');
-    const url = `${namespace}/nc/atc/pvc`;
+    const url = `${namespace}/nc/atc/recompute`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),

@@ -4,6 +4,11 @@
       {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
     </div>
     {{#unless class.isArchived}}
+    <div class="atc-view tab">
+      <a {{action 'selectItem' 'atc'}} class="atc" title="ATC" role="tab" data-toggle="tooltip">
+        <span class="add-info">ATC</span>
+      </a>
+    </div>
       <div class="class-activities tab">
         <a {{action 'selectItem' 'class-activities'}} class="dca" title="{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
           <span class="dca-pin"></span>

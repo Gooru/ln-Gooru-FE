@@ -201,19 +201,22 @@ export default Ember.Object.extend({
    */
   normalizeAtcPerformanceSummaryPremiumClass(payload) {
     let normalizedClassPerformanceSummary = Ember.A([]);
-    if (payload && payload.pvc) {
-      let performanceSummary = payload.pvc;
-      performanceSummary.map(performance => {
-        let userPerformanceData = {
-          progress: performance.percentCompletion || 0,
-          score: performance.percentScore || 0,
-          totalCompetency: performance.totalCompetencies || 0,
-          completedCompetency: performance.completedCompetencies || 0,
-          inprogressCompetencies: performance.inprogressCompetencies || 0,
-          userId: performance.userId
-        };
-        normalizedClassPerformanceSummary.push(userPerformanceData);
-      });
+    if (payload && payload.competencyStats) {
+      let performanceSummary = payload.competencyStats;
+      // performanceSummary.map(performance => {
+      //   let userPerformanceData = {
+      //     progress: performance.percentCompletion || 0,
+      //     score: performance.percentScore || 0,
+      //     totalCompetency: performance.totalCompetencies || 0,
+      //     completedCompetency: performance.completedCompetencies || 0,
+      //     inprogressCompetencies: performance.inprogressCompetencies || 0,
+      //     userId: performance.userId
+      //   };
+      //   normalizedClassPerformanceSummary.push(userPerformanceData);
+      // });
+
+        normalizedClassPerformanceSummary = performanceSummary;
+      // });
     }
     return normalizedClassPerformanceSummary;
   }

@@ -61,6 +61,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           route.transitionTo('teacher.class.performance');
         } else if (item === 'class-activities') {
           route.transitionTo('teacher.class.class-activities');
+        } else if (item === 'atc') {
+          route.transitionTo('teacher.class.atc');
         } else if (item === 'close') {
           let backurl = this.get('backUrls');
           backurl = backurl || controller.get('backUrls');
