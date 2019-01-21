@@ -24,6 +24,7 @@ export default Ember.Object.extend({
     };
     return Ember.$.ajax(url, options);
   },
+
   queryRecordForDCA: function(query) {
     const namespace = this.get('namespace');
     let includesessionIdParam = `sessionId=${query.sessionId}`;
@@ -35,6 +36,40 @@ export default Ember.Object.extend({
     const userId = query.userId;
     const collectionType = query.collectionType;
     const url = `${namespace}/dca/${collectionType}/${collectionId}/user/${userId}?${includesessionIdParam}&${includedateParam}`;
+    const options = {
+      type: 'GET',
+      dataType: 'json',
+      headers: this.defineHeaders(),
+      data: {}
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Get DCA class performance summary
+   * @param {UUID} classId
+   * @returns {Promise}
+   */
+  getDCASummaryPerformance: function(classId) {
+    const namespace = this.get('namespace');
+    const url = `${namespace}/dca/class/${classId}/performance`;
+    const options = {
+      type: 'GET',
+      dataType: 'json',
+      headers: this.defineHeaders(),
+      data: {}
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Get DCA class summary report
+   * @param {UUID} classId
+   * @returns {Promise}
+   */
+  getDCAYearlySummary: function(classId) {
+    const namespace = this.get('namespace');
+    const url = `${namespace}/dca/class/${classId}/summary`;
     const options = {
       type: 'GET',
       dataType: 'json',

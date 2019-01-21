@@ -92,7 +92,6 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "controllers/student-independent-learning/learning-base";
 @import "controllers/not-found";
 @import "controllers/student-locate";
-
 // TODO: update these components so they follow the naming conventions
 @import "components/app-dropdown";
 @import "components/standard-dropdown";
@@ -393,20 +392,17 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/student/class/destination/student-destination-course-accordion";
 @import "components/proficiency/taxonomy-grades"; //Student Nav Math Class join landing for mobile view
 @import "components/student/class/student-inspect-destination-xs"; // Student / Teacher grading
-@import "components/grade/pull-up/free-response-question-grade";
-// Activity card
+@import "components/grade/pull-up/free-response-question-grade"; // Activity card
 @import "components/activity/course-card";
 @import "components/activity/assessment-card";
 @import "components/activity/collection-card";
 @import "components/activity/lesson-card";
 @import "components/activity/unit-card";
 @import "components/activity/question-card";
-@import "components/activity/resource-card";
-// Inspect Competency
+@import "components/activity/resource-card"; // Inspect Competency
 @import "components/proficiency/inspect/student-domain-performance";
 @import "components/proficiency/inspect/student-domain-competency-performance";
-@import "components/proficiency/inspect/student-class-proficiency";
-// Chronological View
+@import "components/proficiency/inspect/student-class-proficiency"; // Chronological View
 @import "components/player/chrono-view/chrono-header";
 @import "components/player/chrono-view/student-card"; // Performance Manual Entry
 @import "components/reports/pull-up/performance-manual-entry";
@@ -414,7 +410,6 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/reports/pull-up/external-assessment-performance-entry";
 @import "components/reports/pull-up/external-collection-performance-entry";
 @import "components/reports/pull-up/collection-performance-entry";
-
 // Add course to class
 @import "controllers/teacher/class/add-course";
 @import "components/cards/gru-add-course-card";
@@ -423,3 +418,8 @@ $box-shadow: 1px -1px; // 2) import style file
 //Create Offline activity
 @import "components/activity/gru-new-offline-activity";
 @import "components/ca-taxonomy-picker";
+// DCA Offline reports
+@import "components/teacher/offline-class/oca-summary-report-pull-up";
+@import "components/teacher/offline-class/oca-month-report-pull-up";
+@import "components/teacher/offline-class/oca-students-summary-report-pull-up";
+@import "components/teacher/offline-class/oca-student-activity-report-pull-up";

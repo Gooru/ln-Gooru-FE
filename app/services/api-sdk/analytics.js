@@ -368,6 +368,56 @@ export default Ember.Service.extend({
   },
 
   /**
+   * This Method used to fetch DCA performance
+   * @param  {ClassId} classId  Unique Id of the class
+   */
+  getDCASummaryPerformance(classId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('analyticsAdapter')
+        .getDCASummaryPerformance(classId)
+        .then(
+          function(events) {
+            resolve(
+              service
+                .get('analyticsSerializer')
+                .normalizeDCAPerformanceSummary(events)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * This Method used to fetch DCA yearly summary for offline class
+   * @param  {ClassId} classId  Unique Id of the class
+   */
+  getDCAYearlySummary(classId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('analyticsAdapter')
+        .getDCAYearlySummary(classId)
+        .then(
+          function(events) {
+            resolve(
+              service
+                .get('analyticsSerializer')
+                .normalizeDCAYearlySummary(events)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
    * This Method used to fetch DCA collection/assesssment performance details for the specfic date.
    * @param  {ClassId} classId        Unique Id of the class
    * @param  {CollectionId} collectionId   Unique Id of the collection.

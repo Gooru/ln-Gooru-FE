@@ -618,9 +618,10 @@ export default Object.assign(quizzesTranslations, {
     save: 'Save',
     'de-select': 'De Select',
     'select-all': 'Select All',
-    'no-students': 'No Students',
+    none: 'None',
     'add-data': 'Add Data',
-    everyone: 'Everyone',
+    'update-data': 'Update Data',
+    all: 'All',
     'unscheduled-items': 'Unscheduled Items',
     'add-to-unschedule': 'Add to unscheduled list for',
     'save-next': 'Save and Next',
@@ -1295,6 +1296,12 @@ export default Object.assign(quizzesTranslations, {
           'The class does not have a course assigned or does not have students rostered into the class yet. Once the course has been assigned to the class and the students are rostered, the class competency report will be shown here'
       },
       'class-activities': 'Class Activities',
+      'offline-class-report': {
+        'class-report': 'Class Report',
+        'activity-report': 'Activity Report',
+        'conducted-on': 'Conducted On',
+        'not-started': 'Not Started'
+      },
       'back-to-class-activities': 'Back to  Class Activities',
       'class-activities-tab': {
         today: 'Today: ',
@@ -1988,11 +1995,18 @@ export default Object.assign(quizzesTranslations, {
     preference: {
       'language-preference': 'Language Preference',
       'choose-language': 'Choose language',
-      'choose-preferred-language': 'Select profile language',
+      'choose-preferred-language': 'Select primary profile language',
+      'choose-preferred-other-languages': 'Select other preferred languages',
       language: 'Language',
-      'select-category-label': 'Select category to Add :',
+      'select-category-label': 'Add a new category',
       'choose-category': 'Choose Category',
-      'no-data': 'No data'
+      'no-data': 'No data',
+      'category-preference': 'Category Preference',
+      'choose-subject': 'Choose Subject',
+      'choose-fwk': 'Choose Framework',
+      'add-subject': 'Add Subject',
+      'add-sec-language': 'Add other preferred language',
+      'other-preferred-languages': 'Other preferred languages'
     }
   },
 
@@ -2851,6 +2865,13 @@ export default Object.assign(quizzesTranslations, {
       wish: 'Congratulations! You scored',
       reference: 'This external assessment can be accessed '
     },
+    'external-collection-report': {
+      note:
+        'This is an external collection with student reported scores for the collection. Individual question level data is not available.',
+      wish: 'Congratulations! You scored',
+      reference: 'This external collection can be accessed '
+    },
+
     'competency-report': {
       title: 'Competency Report',
       'no-subject': 'No Subject Assigned',

@@ -58,18 +58,18 @@
       </div>
       <div class="action-container">
         {{#unless isDisablePrev}}
-          <div class="prev action ellipsis" {{action "onMoveStudent" 'prev'}}>
+          <div class="prev action ellipsis {{if (lt questions.length 1) 'disabled'}}" {{action "onMoveStudent" 'prev'}}>
             {{gru-icon name="fast_rewind" }}<span class="ellipsis">{{concat prevStudent.firstName ' ' prevStudent.lastName}}</span>
           </div>
         {{else}}
           <div></div>
         {{/unless}}
         {{#if isDisableNext}}
-          <div {{action "onSubmitPerformance"}} class="next action {{unless isEnableNext 'disabled'}}">{{t 'common.done'}}</div>
+          <div {{action "onSubmitPerformance"}} class="next action {{unless isEnableNext 'disabled'}} {{if (lt questions.length 1) 'disabled'}}">{{t 'common.done'}}</div>
         {{else}}
-          <div class="next action {{unless isEnableNext 'disabled'}}" {{action "onMoveStudent" 'next'}}>
+          <div class="next action {{unless isEnableNext 'disabled'}} {{if (lt questions.length 1) 'disabled'}}" {{action "onMoveStudent" 'next'}}>
             <span class="ellipsis">{{concat nextStudent.firstName ' ' activeStudent.lastName}}</span>
-            {{gru-icon name="fast_forward" }}
+          {{gru-icon name="fast_forward"}}
           </div>
         {{/if}}
       </div>
