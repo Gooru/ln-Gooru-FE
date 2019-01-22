@@ -460,9 +460,11 @@ export default Ember.Controller.extend({
       ? [controller.get('selectedLanguage').id]
       : null;
     if (controller.get('otherLanguages')) {
-      controller
-        .get('otherLanguages')
-        .forEach(secLanguage => languagePreferenceArray.push(secLanguage.id));
+      controller.get('otherLanguages').forEach(secLanguage => {
+        if (secLanguage && secLanguage.id) {
+          languagePreferenceArray.push(secLanguage.id);
+        }
+      });
     }
 
     let preferenceData = {
@@ -572,7 +574,7 @@ export default Ember.Controller.extend({
     ) {
       let languagePreSelection, // First / primary language consideration as spec.
         selectedSecLanguage = [];
-      if (response.language_preference.length > 1) {
+      if (response.language_preference.length > 0) {
         response.language_preference.forEach((secPref, indx) => {
           if (indx === 0) {
             languagePreSelection = controller
