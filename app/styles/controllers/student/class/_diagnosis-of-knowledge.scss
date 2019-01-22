@@ -1,0 +1,14 @@
+.student_class_diagnosis-of-knowledge {
+  .app-container {
+    @extend %bg-base64;
+
+    .gru-study-navbar {
+      .course-map {
+        pointer-events: none;
+      }
+    }
+
+    .diagnosis-of-knowledge {
+    }
+  }
+}
