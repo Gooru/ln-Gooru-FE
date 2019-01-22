@@ -88,6 +88,7 @@ export default Ember.Controller.extend({
         }
       });
     }
+    console.log('parsedPerformanceSummary', parsedPerformanceSummary);
     return parsedPerformanceSummary;
   },
 

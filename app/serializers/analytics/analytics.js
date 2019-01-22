@@ -215,7 +215,7 @@ export default Ember.Object.extend({
       //   normalizedClassPerformanceSummary.push(userPerformanceData);
       // });
 
-        normalizedClassPerformanceSummary = performanceSummary;
+      normalizedClassPerformanceSummary = performanceSummary;
       // });
     }
     return normalizedClassPerformanceSummary;
