@@ -311,6 +311,7 @@ export default Ember.Component.extend({
     const component = this;
     let title = component.get('activityTitle');
     let description = component.get('activityDescription');
+
     let taxonomy = component.get('selectedCompetencies');
     let selectedAudiences = component.get('selectedAudiences');
     let audienceIds = selectedAudiences.map(audience => {
@@ -318,7 +319,7 @@ export default Ember.Component.extend({
     });
     return {
       title,
-      description,
+      description: description ? description.length > 0 ? description : null : null,
       audience: audienceIds,
       taxonomy
     };

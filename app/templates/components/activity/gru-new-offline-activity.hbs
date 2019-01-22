@@ -12,7 +12,9 @@
     </div>
     <div class="description-container">
       <div class="label-container">{{t 'common.description'}}</div>
-      <div class="input-container">{{textarea value=activityDescription class="activity-description" id="description-editor"}}</div>
+      <div class="input-container">
+        {{gru-rich-text-editor isCustomEditor=true content=activityDescription}}
+      </div>
     </div>
       <div class="competency-container">
         <div class="label-container">{{t 'common.competency'}}</div>
@@ -40,12 +42,13 @@
       <div class="scheduler-container">
         <div class="label-container">{{t 'teacher-landing.class.class-activities-tab.schedule-activity'}}</div>
         {{ca-date-picker
-          showToday=true
+          showToday=false
           forMonth=forMonth
           allowDateSelectorToggle=true
           forYear=forYear
           onSelectDate="onSelectDate"
           onSelectToday="onSelectDate"
+          userStartDateAsToday=true
         }}
       </div>
     <div class="unschedule-list-container">

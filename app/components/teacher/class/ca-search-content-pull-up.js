@@ -413,6 +413,10 @@ export default Ember.Component.extend({
         datepickerEle.hide();
       }
       this.set('selectedContentForSchedule', content);
+    },
+
+    onClickCreateOfflineActivity() {
+      this.sendAction('onClickCreateOfflineActivity');
     }
   },
 

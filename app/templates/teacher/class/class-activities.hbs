@@ -28,9 +28,6 @@
               <p>{{t 'common.add-an-activity'}}</p>
               <i class="collection-icon" {{action 'onAddDca' 'collection'}}></i>
               <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
-              {{#if isOfflineClass}}
-                <span class="create-offline-activity" {{action "onClickCreateOfflineActivity"}}>{{gru-icon name="add"}}</span>
-              {{/if}}
             </div>
           </div>
         </div>
@@ -136,6 +133,8 @@
     context=contextParams
     selectedSearchContentType=selectedSearchContentType
     todaysClassActivities=todaysClassActivities.classActivities
+    isOfflineClass=isOfflineClass
+    onClickCreateOfflineActivity="onClickCreateOfflineActivity"
   }}
 {{/if}}
 
