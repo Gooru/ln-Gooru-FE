@@ -1,4 +1,4 @@
-import quizzesTranslations from './quizzes/translations';
+﻿import quizzesTranslations from './quizzes/translations';
 
 export default Object.assign(quizzesTranslations, {
   en: 'English',
@@ -10,7 +10,7 @@ export default Object.assign(quizzesTranslations, {
 
   errors: {
     description: 'हे फील्ड',
-    inclusion: '{{description}} सूचीमध्ये समाविष्ट नाही',
+    inclusion: '{{description}} सूचीमध्ये समाविष्ट नाही राखीव आहे',
     exclusion: '{{description}} राखीव आहे}}',
     invalid: '{{description}} अवैध आहे}}',
     confirmation: '{{description}}  शी जुळत नाही{{on}}',
