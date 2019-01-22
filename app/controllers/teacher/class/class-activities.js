@@ -448,6 +448,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Events
+  resetQueryParams() {
+    this.set('tab', null);
+  },
 
   initialize() {
     let controller = this;

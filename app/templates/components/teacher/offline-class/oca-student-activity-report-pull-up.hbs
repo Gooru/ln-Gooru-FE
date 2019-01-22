@@ -61,6 +61,11 @@
             {{/if}}
           </div>
           <div class="resource-title ellipsis" {{action "onToggleQuestion" resource resourceSeq}}>{{resource.title}}</div>
+          {{#if (eq resource.performance.questionType 'OE')}}
+          <div>
+            <i class="rubric-img"></i>
+          </div>
+          {{/if}}
           <div class="reaction"> {{reaction-icon resource.performance.reaction}}</div>
           {{#if (eq resource.performance.resourceType 'question')}}
             <div class="performance" style="background-color:{{if resource (grade-color resource.performance.score)}}">
@@ -81,7 +86,9 @@
       {{#if (eq collection.collectionType 'collection-external')}}
         <div class="external-collection-link">
           <div class="note">{{t 'report.external-collection-report.note'}}</div>
+          {{#if collection.url}}
           <div>{{t 'report.external-collection-report.reference'}} <a class="link" target="_blank" href="{{collection.url}}">here</a></div>
+          {{/if}}
         </div>
         {{else if (eq collection.collectionType 'assessment-external')}}
         <div class="external-assessment-link">

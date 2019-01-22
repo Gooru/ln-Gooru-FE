@@ -143,7 +143,9 @@ export default Ember.Component.extend({
     Ember.RSVP.hash({
       dcaYearlySummary: dcaYearlySummaryPromise
     }).then(function(hash) {
-      component.set('reportData', hash.dcaYearlySummary);
+      let period = hash.dcaYearlySummary;
+      let formatPeriod = period.sortBy('month');
+      component.set('reportData', formatPeriod);
       component.calculateTimeSpent();
     });
   },

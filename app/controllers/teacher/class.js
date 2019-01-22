@@ -10,6 +10,8 @@ export default Ember.Controller.extend({
    */
   courseService: Ember.inject.service('api-sdk/course'),
 
+  classController: Ember.inject.controller('teacher/class/class-activities'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -59,6 +61,8 @@ export default Ember.Controller.extend({
       controller.set('isShowLessonReportPullUp', false);
       controller.set('isShowCollectionReportPullUp', false);
       controller.set('isShowOCASummaryReportPullUp', false);
+      const classController = controller.get('classController');
+      classController.resetQueryParams();
     },
 
     /**
