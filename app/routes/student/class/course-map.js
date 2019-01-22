@@ -97,12 +97,31 @@ export default Ember.Route.extend({
 
   // -------------------------------------------------------------------------
   // Methods
+  beforeModel() {
+    const route = this;
+    let isPremiumCourse = route.modelFor('student.class').isPremiumCourse;
+    let isClassFullySetup = route.modelFor('student.class').isClassFullySetup;
+    let members = route.modelFor('student.class').members.members;
+    let userId = route.get('session.userId');
+    let member = members.findBy('id', userId);
+    let diagnosisRequired = true;
+    if (isPremiumCourse && !isClassFullySetup) {
+      return route.transitionTo('student.class.setup-in-complete');
+    } else if (isPremiumCourse && isClassFullySetup) {
+      if (!member.get('profileBaselineDone') && diagnosisRequired) {
+        return route.transitionTo('student.class.diagnosis-of-knowledge');
+      }
+    }
+  },
+
   model: function() {
     const route = this;
     const currentClass = route.modelFor('student.class').class;
     const course = route.modelFor('student.class').course;
     const units = route.modelFor('student.class').units;
     const userId = route.get('session.userId');
+    const isPremiumCourse = route.modelFor('student.class').isPremiumCourse;
+    const isClassFullySetup = route.modelFor('student.class').isClassFullySetup;
     const classMembers = currentClass.get('members');
     const courseId = course.get('id');
     if (!courseId) {
@@ -149,7 +168,9 @@ export default Ember.Route.extend({
       units: units,
       currentClass: currentClass,
       classMembers: classMembers,
-      route0: route0Promise
+      route0: route0Promise,
+      isPremiumCourse: isPremiumCourse,
+      isClassFullySetup: isClassFullySetup
     });
   },
   /**
@@ -173,6 +194,8 @@ export default Ember.Route.extend({
     controller.set('classMembers', model.classMembers);
     controller.set('route0', model.route0);
     controller.get('studentClassController').selectMenuItem('course-map');
+    controller.set('isClassFullySetup', model.isClassFullySetup);
+    controller.set('isPremiumCourse', model.isPremiumCourse);
     controller.init();
   },
 

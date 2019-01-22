@@ -30,7 +30,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     let component = this;
     component.set('isLoading', true);
-    component.fetchDomainLevelSummary();
+    component.loadDataAndDrawChart();
   },
 
   didRender() {
@@ -125,28 +125,6 @@ export default Ember.Component.extend({
    * @property {JSON} competencyStatus
    */
   competencyStatus: null,
-
-  // -------------------------------------------------------------------------
-  // Observers
-
-  domainSummaryObserver: Ember.observer('domainLevelSummary', function() {
-    let component = this;
-    component.loadChartData();
-  }),
-
-  route0Observer: Ember.observer('route0Contents', function() {
-    let component = this;
-    component.loadChartData();
-  }),
-
-  gradeChangeObserver: Ember.observer('activeGrade', function() {
-    let component = this;
-    if (!component.get('isProficiency')) {
-      component.getDomainGradeBoundry().then(() => {
-        component.loadChartData();
-      });
-    }
-  }),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -393,12 +371,14 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function fetchDomainLevelSummary
-   * Method to fetch domain level summary data
+   * @function loadDataAndDrawChart
+   * Method is to fetch necessary data to draw chart
    */
-  fetchDomainLevelSummary() {
+  loadDataAndDrawChart() {
     let component = this;
     let competencyService = component.get('competencyService');
+    let taxonomyService = component.get('taxonomyService');
+    let gradeId = component.get('activeGrade.id');
     let classId = component.get('classId');
     let courseId = component.get('courseId');
     let studentId = component.get('userId');
@@ -408,10 +388,14 @@ export default Ember.Component.extend({
       studentId
     };
     return Ember.RSVP.hash({
-      domainLevelSummary: competencyService.getDomainLevelSummary(filters)
-    }).then(({ domainLevelSummary }) => {
+      domainLevelSummary: competencyService.getDomainLevelSummary(filters),
+      domainBoundaries: taxonomyService.fetchDomainGradeBoundaryBySubjectId(
+        gradeId
+      )
+    }).then(({ domainLevelSummary, domainBoundaries }) => {
+      component.set('domainBoundaries', domainBoundaries);
       component.set('domainLevelSummary', domainLevelSummary);
-      return domainLevelSummary;
+      component.loadChartData();
     });
   },
 
@@ -518,40 +502,38 @@ export default Ember.Component.extend({
    */
   drawDomainBoundaryLine() {
     let component = this;
-    let isProficiency = component.get('isProficiency');
-    if (!isProficiency) {
-      let skylineElements = component.$('.domain-boundary');
-      let cellWidth = component.get('cellWidth');
-      let cellHeight = component.get('cellHeight');
-      let svg = component.get('domainBoundaryLineContainer');
-      let cellIndex = 0;
-      skylineElements.each(function(index) {
-        let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
-        let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
-        y1 = y1 === 0 ? y1 + 3 : y1 + cellHeight + 3;
-        let x2 = x1 + cellWidth;
-        let y2 = y1;
-        let linePoint = {
-          x1,
-          y1,
-          x2,
-          y2
-        };
-        svg
-          .append('line')
-          .attr('x1', linePoint.x1)
-          .attr('y1', linePoint.y1)
-          .attr('x2', linePoint.x2)
-          .attr('y2', linePoint.y2)
-          .attr(
-            'class',
-            `domain-boundary-line horizontal-line domain-boundary-line-${cellIndex}`
-          );
-        component.joinDomainBoundaryLinePoints(cellIndex, linePoint);
-        cellIndex++;
-      });
-      component.showDomainPopOver();
-    }
+    let skylineElements = component.$('.domain-boundary');
+    let cellWidth = component.get('cellWidth');
+    let cellHeight = component.get('cellHeight');
+    let svg = component.get('domainBoundaryLineContainer');
+    let cellIndex = 0;
+    skylineElements.each(function(index) {
+      let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
+      let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
+      y1 = y1 === 0 ? y1 + 3 : y1 + cellHeight + 3;
+      let x2 = x1 + cellWidth;
+      let y2 = y1;
+      let linePoint = {
+        x1,
+        y1,
+        x2,
+        y2
+      };
+      svg
+        .append('line')
+        .attr('x1', linePoint.x1)
+        .attr('y1', linePoint.y1)
+        .attr('x2', linePoint.x2)
+        .attr('y2', linePoint.y2)
+        .attr(
+          'class',
+          `domain-boundary-line horizontal-line domain-boundary-line-${cellIndex}`
+        );
+      component.joinDomainBoundaryLinePoints(cellIndex, linePoint);
+      cellIndex++;
+    });
+    component.showDomainPopOver();
+
     component.$('.scrollable-chart').scrollTop(component.get('chartHeight'));
     component.set('isLoading', false);
   },
@@ -608,24 +590,5 @@ export default Ember.Component.extend({
   clearChart() {
     let component = this;
     component.$('svg').remove();
-  },
-
-  /**
-   * @function getDomainGradeBoundry
-   * Method to fetch domain grade boundary
-   */
-  getDomainGradeBoundry() {
-    let component = this;
-    let taxonomyService = component.get('taxonomyService');
-    let destinationGrade = component.get('activeGrade');
-    let gradeId = destinationGrade.id;
-    return Ember.RSVP.hash({
-      domainBoundaries: Ember.RSVP.resolve(
-        taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
-      )
-    }).then(({ domainBoundaries }) => {
-      component.set('domainBoundaries', domainBoundaries);
-      return domainBoundaries;
-    });
   }
 });

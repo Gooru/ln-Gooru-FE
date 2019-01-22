@@ -330,6 +330,10 @@
         display: flex;
         border-right: 1px solid $white;
         height: 51px;
+        &.class-not-setup.premium-course {
+          pointer-events: none;
+          cursor: default;
+        }
 
         a {
           @extend %app-container;

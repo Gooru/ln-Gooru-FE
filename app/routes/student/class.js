@@ -190,62 +190,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   model: function(params) {
     const route = this;
     const myId = route.get('session.userId');
-
-    //Steps for Take a Tour functionality
-    let tourSteps = Ember.A([
-      {
-        title: route.get('i18n').t('gru-take-tour.student-class.stepOne.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-class.stepOne.description')
-      },
-      {
-        elementSelector: '.student .classroom-information',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.student-class.stepTopBar.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-class.stepTopBar.description')
-      },
-      {
-        elementSelector: '.gru-class-navigation .nav-tabs .class-activities',
-        title: route.get('i18n').t('gru-take-tour.student-class.stepTwo.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-class.stepTwo.description')
-      },
-      {
-        elementSelector: '.gru-class-navigation .nav-tabs .course-map',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.student-class.stepThree.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-class.stepThree.description')
-      },
-      {
-        elementSelector: '.gru-class-navigation .nav-tabs .performance',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.student-class.stepFour.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-class.stepFour.description')
-      },
-      {
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.student-class.stepFive.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-class.stepFive.description')
-      }
-    ]);
-
     const classId = params.classId;
     const classPromise = route.get('classService').readClassInfo(classId);
-
     const membersPromise = route.get('classService').readClassMembers(classId);
 
     return classPromise.then(function(classData) {
@@ -312,8 +258,9 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             members: members,
             units: course.get('children') || [],
             contentVisibility: contentVisibility,
-            tourSteps: tourSteps,
-            currentLocation: currentLocation
+            currentLocation: currentLocation,
+            isClassFullySetup: route.findClassIsFullySetup(aClass),
+            isPremiumCourse: route.findClassIsPermium(aClass)
           });
         });
       });
@@ -330,11 +277,48 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('course', model.course);
     controller.set('units', model.units);
     controller.set('contentVisibility', model.contentVisibility);
-    controller.set('steps', model.tourSteps);
+    controller.set('isClassFullySetup', model.isClassFullySetup);
+    controller.set('isPremiumCourse', model.isPremiumCourse);
     controller.set('classmodel', model);
   },
 
   resetController(controller) {
     controller.set('isNotAbleToStartPlayer', false);
+  },
+
+  /**
+   * Method used to identify whether class is fully setup or not.
+   * @param  {Object} aclass
+   * @param  {Object} course
+   * @return {Boolean}
+   */
+  findClassIsFullySetup(aClass) {
+    let grade = aClass.get('gradeCurrent');
+    let setting = aClass.get('setting');
+    let framework = aClass.get('preference.framework');
+    let subject = aClass.get('preference.subject');
+    let isPremiumCourse = setting['course.premium'];
+    let route0Applicable = aClass.get('route0Applicable');
+    let gradeLowerBound = aClass.get('gradeLowerBound');
+    let courseId = aClass.get('courseId');
+    return (
+      courseId != null &&
+      isPremiumCourse &&
+      grade &&
+      framework &&
+      subject &&
+      route0Applicable != null &&
+      gradeLowerBound != null
+    );
+  },
+
+  /**
+   * Method used to identify course is permium or not
+   * @return {Boolean}
+   */
+  findClassIsPermium(aClass) {
+    let setting = aClass.get('setting');
+    let isPremiumCourse = setting['course.premium'];
+    return isPremiumCourse;
   }
 });

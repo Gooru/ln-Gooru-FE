@@ -5,11 +5,7 @@ import {
   hasSuggestions
 } from 'gooru-web/utils/navigation-util';
 
-export default Ember.Component.extend({
-  // -------------------------------------------------------------------------
-  // Attributes
-  classNames: ['student-class-landing'],
-
+export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -25,17 +21,9 @@ export default Ember.Component.extend({
      * Action triggered when select next action
      */
     onMoveNext(curStep) {
-      let component = this;
-      if (curStep === 'proficiency') {
-        component.set('isShowInspectDestination', true);
-        component.set('isShowRoute0Destination', false);
-        component.set('isShowProficiencyLevel', false);
-      } else if (curStep === 'inspect-destination') {
-        component.set('isShowInspectDestination', false);
-        component.set('isShowRoute0Destination', true);
-        component.set('isShowProficiencyLevel', false);
-      } else if (curStep === 'playNext') {
-        component.startPlaying();
+      let controller = this;
+      if (curStep === 'playNext') {
+        controller.startPlaying();
       }
     }
   },
@@ -54,25 +42,20 @@ export default Ember.Component.extend({
   isShowInspectDestination: false,
 
   /**
-   * @property {Boolean} isShowProficiencyLevel
-   */
-  isShowProficiencyLevel: true,
-
-  /**
    * @property {Boolean} isRoute0Applicable
    */
-  isRoute0Applicable: Ember.computed('classData', function() {
-    let component = this;
-    let classData = component.get('classData');
+  isRoute0Applicable: Ember.computed('class', function() {
+    let controller = this;
+    let classData = controller.get('class');
     return classData.route0Applicable;
   }),
 
   /**
    * @property {Number} classGrade
    */
-  classGrade: Ember.computed('classData', function() {
+  classGrade: Ember.computed('class', function() {
     let controller = this;
-    let classData = controller.get('classData');
+    let classData = controller.get('class');
     let classGrade = classData.get('grade');
     return classGrade ? parseInt(classGrade) : null;
   }),
@@ -80,25 +63,29 @@ export default Ember.Component.extend({
   /**
    * @property {UUID} classId
    */
-  classId: Ember.computed('classData', function() {
-    let component = this;
-    let classData = component.get('classData');
+  classId: Ember.computed('class', function() {
+    let controller = this;
+    let classData = controller.get('class');
     return classData.get('id');
   }),
 
   /**
    * @property {UUID} courseId
    */
-  courseId: Ember.computed('classData', function() {
-    let component = this;
-    let classData = component.get('classData');
+  courseId: Ember.computed('class', function() {
+    let controller = this;
+    let classData = controller.get('class');
     return classData.get('courseId');
   }),
 
   /**
-   * @property {String} navMathSubjectCode
+   * @property {String} subjectCode
    */
-  navMathSubjectCode: 'K12.MA',
+  subjectCode: Ember.computed('class', function() {
+    let aClass = this.get('class');
+    let subject = aClass.get('preference.subject');
+    return subject;
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -108,9 +95,9 @@ export default Ember.Component.extend({
    * Method to play first item that needs to be played
    */
   startPlaying() {
-    const component = this;
-    let classData = component.get('classData');
-    let navigateMapService = component.get('navigateMapService');
+    const controller = this;
+    let classData = controller.get('class');
+    let navigateMapService = controller.get('navigateMapService');
     let classId = classData.get('id');
     let courseId = classData.get('courseId');
     let options = {
@@ -125,8 +112,8 @@ export default Ember.Component.extend({
       options.courseId,
       options.classId
     );
-    nextPromise.then(component.nextPromiseHandler).then(queryParams => {
-      component.get('router').transitionTo('study-player', courseId, {
+    nextPromise.then(controller.nextPromiseHandler).then(queryParams => {
+      controller.transitionToRoute('study-player', courseId, {
         queryParams
       });
     });

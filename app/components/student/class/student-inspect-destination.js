@@ -24,7 +24,6 @@ export default Ember.Component.extend({
     if (component.get('isRoute0') && component.get('isRoute0Applicable')) {
       component.fetchRout0Contents();
     }
-    component.getTaxonomyGrades();
   },
 
   didRender() {
@@ -34,33 +33,6 @@ export default Ember.Component.extend({
     });
     component.$('[data-toggle="popover"]').popover({
       trigger: 'hover'
-    });
-  },
-
-  /**
-   * @function getTaxonomyGrades
-   * Method to fetch taxonomy grades
-   */
-  getTaxonomyGrades() {
-    let component = this;
-    let taxonomyService = component.get('taxonomyService');
-    let filters = {
-      subject: component.get('subjectCode')
-    };
-    return Ember.RSVP.hash({
-      taxonomyGrades: Ember.RSVP.resolve(
-        taxonomyService.fetchGradesBySubject(filters)
-      )
-    }).then(({ taxonomyGrades }) => {
-      let activeGrade = taxonomyGrades.findBy(
-        'id',
-        component.get('classGrade')
-      );
-      component.set('activeGrade', activeGrade);
-      component.set(
-        'taxonomyGrades',
-        taxonomyGrades.sortBy('sequence').reverse()
-      );
     });
   },
 
@@ -94,6 +66,9 @@ export default Ember.Component.extend({
      */
     onMoveNext(curStep) {
       let component = this;
+      if (curStep !== 'playNext') {
+        component.set('type', curStep);
+      }
       component.sendAction('onMoveNext', curStep);
     },
     /**
@@ -122,6 +97,8 @@ export default Ember.Component.extend({
   route0Contents: null,
 
   taxonomyGrades: null,
+
+  type: 'proficiency',
 
   /**
    * @property {Boolean} isRoute0
@@ -158,14 +135,10 @@ export default Ember.Component.extend({
   /**
    * @property {JSON} activeGrade
    */
-  activeGrade: null,
-
-  /**
-   * @property {Number} destinationGradeLevel
-   */
-  destinationGradeLevel: Ember.computed('classGrade', function() {
-    let component = this;
-    return parseInt(component.get('classGrade')) - 1;
+  activeGrade: Ember.computed('taxonomyGrades', 'classGrade', function() {
+    let taxonomyGrades = this.get('taxonomyGrades');
+    let classGrade = this.get('classGrade');
+    return taxonomyGrades.findBy('id', classGrade);
   }),
 
   // -------------------------------------------------------------------------

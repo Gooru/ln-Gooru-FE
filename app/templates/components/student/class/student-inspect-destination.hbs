@@ -15,7 +15,7 @@
           </div>
           <div class="route0-body" style="display: none;">
             <div class="route0-accordion-container">
-              {{class.overview.course-suggestions model=route0Contents index=index class=classData course=courseData}}
+              {{class.overview.course-suggestions model=route0Contents index=index class=class course=course}}
             </div>
           </div>
         </div>
@@ -35,7 +35,7 @@
       </div>
       <div class="course-map-accordion-container {{unless (and isRoute0Pending isRoute0) 'no-route0'}}">
         {{student.class.destination.student-destination-course-accordion
-        courseData=courseData
+        courseData=course
         classId=classId
         courseId=courseId
         isRoute0=isRoute0
@@ -53,7 +53,7 @@
       <div class="grade-description">
         {{safe-html activeGrade.description}}
       </div>
-      <div class="next-route" {{action onMoveNext 'inspect-destination'}}>
+      <div class="next-route" {{action onMoveNext 'route'}}>
         {{gru-icon name="directions"}} {{t "student-first-experience.show-me-my-route"}}
       </div>
     </div>
@@ -84,7 +84,7 @@
           <div class="label"> {{t "student-first-experience.competency-level.your-skyline"}}</div>
         </div>
       </div>
-      <div class="show-destination" {{action onMoveNext 'proficiency'}}>
+      <div class="show-destination" {{action onMoveNext 'destination'}}>
         {{gru-icon name="directions"}} {{t "student-first-experience.show-my-destination"}}
       </div>
     </div>
@@ -94,7 +94,7 @@
       {{student.class.student-inspect-destination-xs
         type=type
         onMoveNext="onMoveNext"
-        courseData=courseData
+        courseData=course
         classId=classId
         courseId=courseId
         grade=activeGrade
