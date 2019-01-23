@@ -8,10 +8,6 @@
   margin: auto;
   color: #37434d;
 
-  @media screen and (max-width: $screen-sm - 1) {
-    width: 100%;
-  }
-
   .backdrop {
     position: fixed;
     width: 100%;
@@ -426,5 +422,17 @@
         }
       }
     }
+  }
+  @media screen and (max-width: $screen-sm - 1) {
+    .oca-student-activity-report-container {
+      .collection-performance {
+        .performance {
+          .time-spent {
+            font-size: 50px;
+          }
+        }
+      }
+    }
+    width: 100%;
   }
 }
