@@ -295,9 +295,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   findClassIsFullySetup(aClass) {
     let grade = aClass.get('gradeCurrent');
     let setting = aClass.get('setting');
-    let framework = aClass.get('preference.framework');
-    let subject = aClass.get('preference.subject');
-    let isPremiumCourse = setting['course.premium'];
+    let preference = aClass.get('preference');
+    let framework = preference ? preference.get('framework') : null;
+    let subject = preference ? preference.get('subject') : null;
+    let isPremiumCourse = setting ? setting['course.premium'] : false;
     let route0Applicable = aClass.get('route0Applicable');
     let gradeLowerBound = aClass.get('gradeLowerBound');
     let courseId = aClass.get('courseId');
@@ -318,7 +319,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   findClassIsPermium(aClass) {
     let setting = aClass.get('setting');
-    let isPremiumCourse = setting['course.premium'];
+    let isPremiumCourse = setting ? setting['course.premium'] : false;
     return isPremiumCourse;
   }
 });

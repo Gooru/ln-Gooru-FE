@@ -1,0 +1,67 @@
+.student_class_setup-in-complete {
+  @extend %bg-base64;
+
+  .student.class {
+    width: 100%;
+    height: auto;
+  }
+
+  .app-container {
+    .gru-study-navbar {
+      .course-map {
+        pointer-events: none;
+      }
+    }
+
+    .setup-in-complete {
+      .setup-in-complete-panel {
+        margin-left: 50px;
+        margin-top: 50px;
+        width: 499px;
+        min-height: 200px;
+        opacity: 0.9;
+        border-radius: 4px;
+        background-color: #ffffff;
+        padding: 20px;
+        @media screen and (max-width: $screen-600) {
+          width: 100%;
+          margin-left: 0;
+          margin-top: 0;
+        }
+
+        h2 {
+          font-size: 34px;
+          font-weight: normal;
+          color: #29323a;
+          padding: 0;
+          margin: 0;
+        }
+
+        .description {
+          padding-top: 20px;
+        }
+
+        .footer {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-top: 20px;
+          padding-bottom: 20px;
+
+          .back {
+            width: 76px;
+            height: 36px;
+            border-radius: 3px;
+            background-color: #e3e5ea;
+            color: #535e66;
+            font-size: 13px;
+            padding: 8px;
+            text-align: center;
+            margin-right: 10px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

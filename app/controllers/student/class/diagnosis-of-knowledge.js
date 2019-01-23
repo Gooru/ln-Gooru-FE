@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
    * @property {TaxonomyTag[]} List of taxonomy tags
    */
   tags: Ember.computed('assessment', function() {
-    let standards = this.get('assessment.taxonomy');
+    let standards = this.get('assessment.standards');
     if (standards) {
       standards = standards.filter(function(standard) {
         // Filter out learning targets (they're too long for the card)

@@ -59,6 +59,39 @@
           .question .icon {
             background-image: url("gooru/images/add_question.svg");
           }
+
+          .taxonomy {
+            margin: -1px 0 0 5px;
+
+            .gru-taxonomy-tag-list {
+              .gru-taxonomy-tag {
+                background-color: $charcoal-grey;
+
+                .tag-label {
+                  color: $white;
+                  font-size: 12px;
+                  font-weight: bold;
+                }
+
+                .tag-caption {
+                  display: none;
+                }
+              }
+
+              .non-visible-tags {
+                padding: 0;
+              }
+            }
+          }
+        }
+
+        .navigation-direction {
+          i {
+            font-size: 40px;
+          }
+          .info {
+            line-height: 0.5;
+          }
         }
 
         .footer {
