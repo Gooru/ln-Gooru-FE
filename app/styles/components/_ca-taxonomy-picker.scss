@@ -3,6 +3,7 @@
   .gru-taxonomy-picker-container {
     .taxonomy.gru-taxonomy-picker {
       .browse-selector {
+        position: relative;
         .taxonomy.gru-browse-selector {
           .breadcrumb-levels {
             display: flex;
@@ -110,6 +111,15 @@
                 }
               }
             }
+          }
+        }
+        .close-picker {
+          position: absolute;
+          right: 0;
+          top: 30px;
+          cursor: pointer;
+          i.clear {
+            font-size: 20px;
           }
         }
       }
