@@ -73,10 +73,13 @@
       .description-container {
         margin-bottom: 16px;
         .input-container {
-          .activity-description {
-            width: 100%;
-            outline: none;
-            background: transparent;
+          .gru-rich-text-editor {
+            .wysihtml5-editor {
+              min-height: 100px;
+            }
+            .error-messages {
+              display: none;
+            }
           }
         }
       }
@@ -101,6 +104,17 @@
           }
           .add-competency {
             cursor: pointer;
+            width: 50px;
+            height: 40px;
+            background-color: #4e5e67;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            i.add {
+              width: 100%;
+              text-align: center;
+              line-height: 40px;
+              color: $white;
+            }
           }
         }
       }
@@ -133,7 +147,7 @@
             padding: 0 5px;
             max-width: max-content;
             cursor: pointer;
-            &.active-card, &:hover {
+            &.active-card {
               background-color: $dark-300;
               color: $white;
             }
@@ -144,14 +158,19 @@
       .unschedule-list-container {
         .unschedule-months-container {
           padding-top: 5px;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          justify-content: center;
+          width: 70%;
+          align-items: center;
+          justify-items: left;
           .month-card {
-            font-size: 13px;
-            color: #35424b;
-            border-radius: 3px;
-            padding: 5px;
-            min-width: 70px;
             border: 1px solid #ccc;
+            border-radius: 4px;
             cursor: pointer;
+            width: 70px;
+            display: inline-block;
+            text-align: center;
             &.active-card, &:hover{
               background-color: $dark-300;
               color: $white;

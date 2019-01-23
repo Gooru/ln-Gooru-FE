@@ -20,9 +20,9 @@
         <div class="label-container">{{t 'common.competency'}}</div>
         <div class="active-taxonomies-container">
           {{#if selectedCompetencies.length}}
-            {{taxonomy.gru-taxonomy-tag-list tags=selectedCompetencies}}
+            {{taxonomy.gru-taxonomy-tag-list tags=visibleTaxonomyTags onRemove=(action 'onRemoveSelectedTag')}}
           {{/if}}
-          <div class="add-competency" {{action "onToggleTaxonomyPicker"}}>{{t 'common.add'}}</div>
+          <div class="add-competency" title="{{t 'common.add-competency'}}" {{action "onToggleTaxonomyPicker"}}>{{gru-icon name="add"}}</div>
         </div>
         <div class="taxonomy-picker-container" style="display: none;">
           {{#if isShowTaxonomyPicker}}

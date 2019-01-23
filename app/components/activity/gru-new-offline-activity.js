@@ -96,6 +96,10 @@ export default Ember.Component.extend({
       const component = this;
       const taxonomyPickerContainer = component.$('.taxonomy-picker-container');
       component.$(taxonomyPickerContainer).slideDown(1000, function() {
+        if (!component.get('selectedCompetencies.length')) {
+          component.set('course', null);
+          component.set('domain', null);
+        }
         component.set('isShowTaxonomyPicker', true);
       });
     },
@@ -127,6 +131,13 @@ export default Ember.Component.extend({
     onCloseCreateActivity() {
       const component = this;
       component.closePullUp();
+    },
+
+    //Action triggered when remove tag
+    onRemoveSelectedTag(tag) {
+      const component = this;
+      component.get('selectedCompetencies').removeObject(tag.get('data'));
+      component.get('visibleTaxonomyTags').removeObject(tag);
     }
 
   },
@@ -252,7 +263,7 @@ export default Ember.Component.extend({
     let firtDateOfCurrentMonth = moment(`${monthAndYearOfCurrentDate}-01`);
     if (showMonths && forFirstDateOfMonth) {
       let numberOfMonthsToShow = component.get('numberOfMonthsToShow');
-      for (let index = 1; index <= numberOfMonthsToShow; index++) {
+      for (let index = 0; index < numberOfMonthsToShow; index++) {
         let slectedMonth = moment(forFirstDateOfMonth).add(index, 'months');
         let monthName = moment(forFirstDateOfMonth)
           .add(index, 'months')
@@ -285,7 +296,7 @@ export default Ember.Component.extend({
     const component = this;
     let isClassPreferenceMapped = component.get('isClassPreferenceMapped');
     let activityTitle = component.get('activityTitle');
-    return isClassPreferenceMapped && (activityTitle !== null && activityTitle !== '');
+    return isClassPreferenceMapped && (activityTitle !== null && activityTitle.trim() !== '');
   }),
 
   /**
@@ -300,6 +311,24 @@ export default Ember.Component.extend({
    */
   domain: null,
 
+  /**
+   * @property {Array} visibleTaxonomyTags
+   * Properto to hold visible taxonomy tags
+   */
+  visibleTaxonomyTags: Ember.computed('selectedCompetencies', function() {
+    const component = this;
+    let selectedCompetencies = component.get('selectedCompetencies');
+    let visibleTaxonomyTags = selectedCompetencies.map(taxonomyTag => {
+      return Ember.Object.create({
+        data: taxonomyTag,
+        isActive: true,
+        isReadonly: true,
+        isRemovable: true
+      });
+    });
+    return Ember.A(visibleTaxonomyTags);
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -311,14 +340,14 @@ export default Ember.Component.extend({
     const component = this;
     let title = component.get('activityTitle');
     let description = component.get('activityDescription');
-    let taxonomy = component.get('selectedCompetencies');
+    let taxonomy = component.get('visibleTaxonomyTags');
     let selectedAudiences = component.get('selectedAudiences');
     let audienceIds = selectedAudiences.map(audience => {
       return audience.id;
     });
     return {
       title,
-      description: description && description.length ? description : null,
+      description: description && description.length ? description.trim() : null,
       audience: audienceIds,
       taxonomy
     };
