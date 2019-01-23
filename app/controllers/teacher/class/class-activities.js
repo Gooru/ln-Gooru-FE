@@ -28,6 +28,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   tab: null,
 
+  isShowOCASummaryReportPullUp: false,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -443,6 +445,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     onClickCreateOfflineActivity() {
       let controller = this;
       controller.set('isShowCreateOfflineActivity', true);
+    },
+
+    onClosePullUp() {
+      this.set('isShowOCASummaryReportPullUp', false);
+      this.set('tab', null);
     }
   },
 
@@ -454,8 +461,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     controller._super(...arguments);
     let tab = controller.get('tab');
     if (tab && tab === 'report') {
-      const classController = controller.get('classController');
-      classController.openDCAReportForOfflineClass();
+      controller.set('isShowOCASummaryReportPullUp', true);
     }
     Ember.run.scheduleOnce('afterRender', controller, function() {
       controller.set('forMonth', moment().format('MM'));

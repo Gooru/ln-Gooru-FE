@@ -172,3 +172,8 @@
 {{#if isShowCreateOfflineActivity}}
   {{activity.gru-new-offline-activity isShowPullUp=isShowCreateOfflineActivity classPreference=classPreference classId=classId addedContentToDCA="addedContentToDCA"}}
 {{/if}}
+
+
+{{#if isShowOCASummaryReportPullUp}}
+  {{teacher.offline-class.oca-summary-report-pull-up  classId=class.id performanceSummary=performanceSummaryForDCA onClosePullUp="onClosePullUp"}}
+{{/if}}
