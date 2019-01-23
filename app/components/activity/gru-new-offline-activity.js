@@ -318,7 +318,7 @@ export default Ember.Component.extend({
     });
     return {
       title,
-      description,
+      description: description && description.length ? description : null,
       audience: audienceIds,
       taxonomy
     };

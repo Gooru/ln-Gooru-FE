@@ -8,15 +8,31 @@
     <button type="button" class="btn btn-math underline" data-wysihtml5-command="underline" title="{{t 'gru-rich-text-editor.underline'}}">
       <u>U</u>
     </button>
-    <button type="button" class="btn btn-math superscript" data-wysihtml5-command="superscript" title="{{t 'gru-rich-text-editor.superscript'}}">
-      x<sup>2</sup>
-    </button>
-    <button type="button" class="btn btn-math subscript" data-wysihtml5-command="subscript" title="{{t 'gru-rich-text-editor.subscript'}}">
-      x<sub>2</sub>
-    </button>
-    <button type="button" class="btn  btn-math add-function {{if showExpressionsPanel 'active'}}" title="{{t 'gru-rich-text-editor.expression'}}" {{action 'toggleExpressionsPanel'}}>
-      {{t 'gru-rich-text-editor.expressions-panel.create-expression'}}
-    </button>
+    {{#unless isCustomEditor}}
+      <button type="button" class="btn btn-math superscript" data-wysihtml5-command="superscript" title="{{t 'gru-rich-text-editor.superscript'}}">
+        x<sup>2</sup>
+      </button>
+      <button type="button" class="btn btn-math subscript" data-wysihtml5-command="subscript" title="{{t 'gru-rich-text-editor.subscript'}}">
+        x<sub>2</sub>
+      </button>
+      <button type="button" class="btn  btn-math add-function {{if showExpressionsPanel 'active'}}" title="{{t 'gru-rich-text-editor.expression'}}" {{action 'toggleExpressionsPanel'}}>
+        {{t 'gru-rich-text-editor.expressions-panel.create-expression'}}
+      </button>
+    {{else}}
+      <button type="button" class="btn btn-math create-link" data-wysihtml5-command="createLink" title="{{t 'common.link'}}">
+        {{t 'common.link'}}
+      </button>
+      <div class="dialog-create-link" data-wysihtml5-dialog="createLink" style="display: none;">
+        <div class="input-container"><span>Link:</span><input data-wysihtml5-dialog-field="href" value="http://"></div>
+        <div class="action-container">
+          <a class="action-handler" data-wysihtml5-dialog-action="save">{{t 'gru-submit-confirmation.ok'}}</a>
+          <a class="action-handler" data-wysihtml5-dialog-action="cancel">{{t 'gru-submit-confirmation.cancel'}}</a>
+        </div>
+      </div>
+      <button type="button" class="btn btn-math unordered-list" data-wysihtml5-command="insertUnorderedList" title="{{t 'gru-rich-text-editor.bullets'}}">
+          {{t 'gru-rich-text-editor.bullets'}}
+      </button>
+    {{/unless}}
   <div class="expressions-panel {{if showExpressionsPanel 'show'}}">
     <div class="equation-editor">
         <div class="equation-wrapper">

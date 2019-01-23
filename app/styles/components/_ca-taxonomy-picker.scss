@@ -3,6 +3,7 @@
   .gru-taxonomy-picker-container {
     .taxonomy.gru-taxonomy-picker {
       .browse-selector {
+        position: relative;
         .taxonomy.gru-browse-selector {
           .breadcrumb-levels {
             display: flex;
@@ -63,6 +64,7 @@
                 padding: 5px;
                 border: 1px solid #4e5e67;
                 .standard {
+                  position: relative;
                   label {
                     display: grid;
                     grid-template-columns: auto auto;
@@ -70,6 +72,7 @@
                       display: grid;
                       span {
                         line-height: 15px;
+                        width: 87%;
                       }
                       &:hover {
                         color: $white;
@@ -78,9 +81,45 @@
                       }
                     }
                   }
+                  button[data-toggle] {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    background-color: $white;
+                    border: 1px solid $dark-300;
+                    i.keyboard_arrow_up {
+                      display: inline-block;
+                    }
+                    i.keyboard_arrow_down {
+                      display: none;
+                    }
+                    &.collapsed {
+                      i.keyboard_arrow_up {
+                        display: none;
+                      }
+                      i.keyboard_arrow_down {
+                        display: inline-block;
+                      }
+                    }
+                  }
+                  .level-panel.sublevel-1 {
+                    padding-left: 15px;
+                    .level-panel.sublevel-2 {
+                      padding-left: 15;
+                    }
+                  }
                 }
               }
             }
+          }
+        }
+        .close-picker {
+          position: absolute;
+          right: 0;
+          top: 30px;
+          cursor: pointer;
+          i.clear {
+            font-size: 20px;
           }
         }
       }

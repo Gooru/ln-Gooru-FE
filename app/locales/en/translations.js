@@ -405,6 +405,7 @@ export default Object.assign(quizzesTranslations, {
     'essential-questions': 'Essential Questions',
     example: 'example: ',
     exit: 'Exit',
+    'external-collection': 'External Collection',
     explanation: 'Explanation',
     explore: 'Explore',
     false: 'False',
@@ -2256,6 +2257,7 @@ export default Object.assign(quizzesTranslations, {
     subscript: 'Subscript',
     superscript: 'Superscript',
     underline: 'Underline',
+    bullets: 'Bullets',
     'expressions-panel': {
       tabs: {
         calculus: 'Calculus',

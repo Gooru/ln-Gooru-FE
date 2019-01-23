@@ -302,6 +302,11 @@ export default Ember.Component.extend({
     }, 100);
   }),
 
+  /**
+   * @property {Boolean} isCustomEditor
+   */
+  isCustomEditor: false,
+
   // -------------------------------------------------------------------------
   // Methods
 
