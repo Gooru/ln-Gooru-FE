@@ -44,11 +44,11 @@ export default Ember.Route.extend({
     const course = route.modelFor('student.class').course;
     route.set('course', course);
     const subjectCode = route.get('subjectCode');
-    const collectionId = 'bb589aab-9a97-43c8-ba50-bc06482d8f21';
+    const assessmentId = '8a7921e5-b7c3-4c13-95e3-4f96f9f731ee';
     return Ember.RSVP.hash({
       course: course,
       subject: route.get('taxonomyService').fetchSubject(subjectCode),
-      assessment: route.get('assessmentService').readAssessment(collectionId),
+      assessment: route.get('assessmentService').readAssessment(assessmentId),
       class: currentClass
     });
   },
@@ -62,5 +62,6 @@ export default Ember.Route.extend({
     controller.set('class', model.class);
     controller.set('course', model.course);
     controller.set('subject', model.subject);
+    controller.set('assessment', model.assessment);
   }
 });

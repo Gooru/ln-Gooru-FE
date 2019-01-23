@@ -127,20 +127,29 @@ export default QuizzesPlayer.extend(
        */
       onFinish: function() {
         let controller = this.get('controller');
-        let queryParams = {
-          collectionId: controller.get('collection.id'),
-          type: controller.get('type'),
-          role: controller.get('role'),
-          classId: controller.get('classId'),
-          contextId: controller.get('contextResult.contextId')
-        };
-        const reportController = this.controllerFor(
-          'reports.student-collection'
-        );
-
-        //this doesn't work when refreshing the page, TODO
-        reportController.set('backUrl', this.get('history.lastRoute.url'));
-        this.transitionTo('reports.student-collection', { queryParams });
+        let source = controller.get('eventContext.source');
+        if (source === PLAYER_EVENT_SOURCE.DIAGNOSTIC) {
+          this.transitionTo(
+            'student.class.proficiency',
+            controller.get('classId')
+          );
+        } else {
+          let queryParams = {
+            collectionId: controller.get('collection.id'),
+            type: controller.get('type'),
+            role: controller.get('role'),
+            classId: controller.get('classId'),
+            contextId: controller.get('contextResult.contextId')
+          };
+          const reportController = this.controllerFor(
+            'reports.student-collection'
+          );
+          //this doesn't work when refreshing the page, TODO
+          reportController.set('backUrl', this.get('history.lastRoute.url'));
+          this.transitionTo('reports.student-collection', {
+            queryParams
+          });
+        }
       },
 
       startAssessment: function() {
