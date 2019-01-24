@@ -661,6 +661,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   showUnScheduledItemsPullup: false,
 
+  performanceSummaryForDCA: Ember.computed.alias(
+    'classController.performanceSummaryForDCA'
+  ),
+
   /**
    * It Maintains the list of scheduled class activities datewise.
    * @type {Array}
