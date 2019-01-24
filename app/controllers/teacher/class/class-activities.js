@@ -440,6 +440,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('isShowCollectionPerformanceEntryPullUp', false);
       controller.set('isShowExternalCollectionPeformanceEntryPullUp', false);
       controller.loadData();
+      controller.get('classController').fetchDcaSummaryPerformance();
     },
 
     onClickCreateOfflineActivity() {

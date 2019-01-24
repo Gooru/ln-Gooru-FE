@@ -10,6 +10,11 @@ export default Ember.Controller.extend({
    */
   courseService: Ember.inject.service('api-sdk/course'),
 
+  /**
+   * @type {AnalyticsService} Service to retrieve class performance summary
+   */
+  analyticsService: Ember.inject.service('api-sdk/analytics'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -288,5 +293,24 @@ export default Ember.Controller.extend({
   openDCAReportForOfflineClass() {
     let controller = this;
     controller.set('isShowOCASummaryReportPullUp', true);
+  },
+
+  /**
+   * @function fetchDcaSummaryPerformance
+   * Method to fetch dca summary performance for offline class
+   */
+  fetchDcaSummaryPerformance() {
+    let controller = this;
+    let isOfflineClass = controller.get('isOfflineClass');
+    let classId = controller.get('class.id');
+    const performanceSummaryForDCAPromise = isOfflineClass
+      ? controller.get('analyticsService').getDCASummaryPerformance(classId)
+      : null;
+    return Ember.RSVP.hash({
+      performanceSummaryForDCA: performanceSummaryForDCAPromise
+    }).then(function(hash) {
+      const performanceSummaryForDCA = hash.performanceSummaryForDCA;
+      controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
+    });
   }
 });

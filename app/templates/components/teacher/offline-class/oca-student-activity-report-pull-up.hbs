@@ -17,7 +17,7 @@
         <span class="left {{unless isToggleLeft 'disable'}}" {{action 'toggle' true}}>{{gru-icon name="keyboard_arrow_left"}}</span>
         <div class="score-container">
           <span class="score">{{student.performance.score}}%</span>
-          <span class="time-spent">{{if student.performance.timeSpent (format-time  student.performance.timeSpent) '--'}}</span>
+          <span class="time-spent">{{if studentTimeSpent (format-time  studentTimeSpent) '--'}}</span>
         </div>
         <span class="right {{unless isToggleRight 'disable'}}" {{action 'toggle' false}}>{{gru-icon name="keyboard_arrow_right"}}</span>
       </div>
