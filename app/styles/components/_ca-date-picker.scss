@@ -150,11 +150,21 @@
             left: 10px;
           }
 
+          tr td.today:hover {
+            background-color: #fde19a;
+            background-image: -webkit-linear-gradient(top, #fdd49a, #fdf59a);
+          }
+
           tr td.active {
             background-color: #3386f7;
             background-image: unset;
             color: $white;
             text-shadow: none;
+
+            &:hover {
+              background-color: #3386f7;
+              background-image: unset;
+            }
           }
         }
       }
