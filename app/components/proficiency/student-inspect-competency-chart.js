@@ -56,19 +56,6 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * Different color range based on status
-   * @type {Object}
-   */
-  colorsBasedOnStatus: Ember.Object.create({
-    '0': '#e7e8e9',
-    '1': '#1aa9eb',
-    '2': '#006eb5',
-    '3': '#006eb5',
-    '4': '#006eb5',
-    '5': '#006eb5'
-  }),
-
-  /**
    * @property {String} route0SuggestedCompetency
    */
   route0SuggestedCompetency: '#ef8f2f',
@@ -310,7 +297,6 @@ export default Ember.Component.extend({
     let component = this;
     let numberOfColumns = component.get('taxonomyDomains.length');
     component.set('numberOfColumns', numberOfColumns);
-    const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
     const cellWidth = component.get('cellWidth');
     const cellHeight = component.get('cellHeight');
     const width = Math.round(numberOfColumns * cellWidth);
@@ -345,26 +331,20 @@ export default Ember.Component.extend({
       .attr('x', d => (d.xAxisSeq - 1) * cellWidth)
       .attr('y', d => (d.yAxisSeq - 1) * cellHeight)
       .attr('class', d => {
+        let cellColorClass = d.isRoute0SuggestedCompetency
+          ? 'route0-suggest-competency'
+          : `status-${d.status.toString()}`;
         let skylineClassName = d.skyline ? 'skyline-competency' : '';
         let domainBoundaryCompetency = d.isDoaminBoundaryCompetency
           ? 'domain-boundary'
           : '';
         return `competency competency-${d.xAxisSeq}-${
           d.yAxisSeq
-        } ${skylineClassName} ${domainBoundaryCompetency}`;
+        } ${skylineClassName} ${domainBoundaryCompetency} ${cellColorClass} competency-cell`;
       })
 
       .attr('width', cellWidth)
-      .attr('height', cellHeight)
-      .style('fill', '#EAEAEA')
-      .transition()
-      .duration(1000)
-      .style('fill', d => {
-        let colorCode = d.isRoute0SuggestedCompetency
-          ? component.get('route0SuggestedCompetency')
-          : colorsBasedOnStatus.get(d.status.toString());
-        return colorCode;
-      });
+      .attr('height', cellHeight);
     cards.exit().remove();
     component.drawSkyline();
     component.drawDomainBoundaryLine();

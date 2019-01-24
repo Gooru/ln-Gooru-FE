@@ -59,14 +59,29 @@
     </div>
   {{else}}
     <div class="competency-level-container">
-      <div class="grade-title">
-        {{'t' "student-first-experience.competency-level.title"}}
+      <div class="proficiency-info-1 proficiency-info">
+        <div class="grade-title">
+          {{'t' "student-first-experience.competency-level.title"}}
+        </div>
+        <div class="grade-description">
+          {{'t' "student-first-experience.competency-level-partial.desc1"}}
+          <span class="desc-title">{{activeGrade.grade}}</span> <br>
+          <p>This is your {{subject.title}} proficiency profile. Your math proficiency profile shows your mastery in standards (aka competencies) in the different focus areas in math (aka domains). The columns show domains and the boxes show the standards within each
+            math domain.</p>
+        </div>
       </div>
-      <div class="grade-description">
-        {{'t' "student-first-experience.competency-level-partial.desc1"}}
-        <span class="desc-title">{{activeGrade.grade}}</span> <br> {{'t' "student-first-experience.competency-level-partial.desc2"}}
-      </div>
-      <div class="competency-level-list">
+      <p class="proficiency-info-2 proficiency-info">
+          As you master each of the competencies, the corresponding box is updated to dark blue.
+      </p>
+      <p class="proficiency-info-3 proficiency-info">
+          And as you continue to study other competencies, they turn light blue to show progress.
+      </p>
+
+      <p class="proficiency-info-4 proficiency-info">
+        Your current location in {{subject.title}} is identified by the Skyline. The skyline is the thick white line that shows the highest competencies that you have mastered in each domain
+      </p>
+
+      <div class="competency-level-list proficiency-info-5 proficiency-info">
         <div class="mastery-container">
           <div class="legend" title= {{ t "student-first-experience.explanatory.master.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.master.desc"}} data-placement='left'></div>
           <div class="label"> {{t "student-first-experience.competency-level.mastery" count=competencyStatus.master}}</div>
@@ -84,7 +99,7 @@
           <div class="label"> {{t "student-first-experience.competency-level.your-skyline"}}</div>
         </div>
       </div>
-      <div class="show-destination" {{action onMoveNext 'destination'}}>
+      <div class="show-destination proficiency-info-6 proficiency-info" {{action onMoveNext 'destination'}}>
         {{gru-icon name="directions"}} {{t "student-first-experience.show-my-destination"}}
       </div>
     </div>

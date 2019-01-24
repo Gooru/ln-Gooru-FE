@@ -23,10 +23,53 @@
 
       .taxonomy-grades-container {
         pointer-events: none;
+
+        &.proficiency {
+          .taxonomy-grades {
+            .grade-list {
+              .grade-container {
+                &.active-grade {
+                  .grade-title {
+                    background-color: #fff;
+                    color: #535e67;
+                    box-shadow: none;
+                    font-weight: normal;
+
+                    &::after,
+                    &::before {
+                      display: none;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
 
       .domain-chart {
         overflow: auto;
+
+        .competency-cell {
+          fill: #e7e8e9;
+
+          &.status-0 {
+            fill: #e7e8e9;
+          }
+
+          &.status-1 {
+            animation: inprogress-color 2s ease-in both;
+            animation-delay: 6s;
+          }
+
+          &.status-2,
+          &.status-3,
+          &.status-4,
+          &.status-5 {
+            animation: mastered-color 2s ease-in both;
+            animation-delay: 4s;
+          }
+        }
 
         &::-webkit-scrollbar {
           height: 6px;
@@ -94,6 +137,7 @@
             margin-bottom: 20px;
             position: relative;
             transform: rotateX(180deg);
+
             &.proficiency {
               #popover,
               .domain-boundary-line {
@@ -119,6 +163,9 @@
               line {
                 stroke: $white;
                 stroke-width: 6px;
+                opacity: 0;
+                animation: fadeIn 2s ease-in both;
+                animation-delay: 8s;
               }
             }
 
@@ -135,7 +182,6 @@
             }
 
             .domain-boundary-line {
-              // stroke-dasharray: 6;
               stroke: #8fd383;
               stroke-width: 4px;
             }
@@ -160,6 +206,33 @@
         display: inline-block;
         cursor: pointer;
       }
+    }
+  }
+  @keyframes mastered-color {
+    0% {
+      fill: #e7e8e9;
+    }
+
+    100% {
+      fill: #006eb5;
+    }
+  }
+  @keyframes inprogress-color {
+    0% {
+      fill: #e7e8e9;
+    }
+
+    100% {
+      fill: #1aa9eb;
+    }
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
     }
   }
 }
