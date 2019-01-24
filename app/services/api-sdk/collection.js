@@ -403,9 +403,10 @@ export default Ember.Service.extend({
         .createExternalCollection(serializedExternalCollectionData)
         .then(
           function(responseData, textStatus, request) {
+            let createdCollectionData = Ember.Object.create(collectionData);
             let collectionId = request.getResponseHeader('location');
-            collectionData.id = collectionId;
-            resolve(collectionData);
+            createdCollectionData.set('id', collectionId);
+            resolve(createdCollectionData);
           },
           function(error) {
             reject(error);

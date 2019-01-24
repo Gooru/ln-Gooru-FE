@@ -75,7 +75,9 @@ export default Ember.Component.extend({
         let scheduledMonth = activityDate ? null : component.get('unscheduledMonth.monthNumber');
         let scheduledYear = activityDate ? null : component.get('unscheduledMonth.monthYear');
         component.addActivity(classId, contentId, activityDate, scheduledMonth, scheduledYear).then(function(activityId) {
-          externalCollection.collectionType = 'collection-external';
+          let contentType = 'collection-external';
+          externalCollection.set('collectionType', contentType);
+          externalCollection.set('format', contentType);
           let activityData = Ember.Object.create({
             collection: Ember.Object.create(externalCollection),
             id: activityId,
