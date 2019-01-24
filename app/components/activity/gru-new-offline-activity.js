@@ -27,6 +27,7 @@ export default Ember.Component.extend({
     component.fetchAudiences();
     component.set('forMonth', moment().format('MM'));
     component.set('forYear', moment().format('YYYY'));
+    component.$('.activity-title').focus();
   },
 
   // -------------------------------------------------------------------------
@@ -85,7 +86,7 @@ export default Ember.Component.extend({
             forMonth: parseInt(scheduledMonth),
             forYear: parseInt(scheduledYear)
           });
-          component.sendAction('addedContentToDCA', activityData, activityDate, scheduledMonth, scheduledYear);
+          component.sendAction('onAddExternalCollectionToDCA', activityData, activityDate, scheduledMonth, scheduledYear);
           component.closePullUp();
         });
       });
@@ -340,7 +341,7 @@ export default Ember.Component.extend({
     const component = this;
     let title = component.get('activityTitle');
     let description = component.get('activityDescription');
-    let taxonomy = component.get('visibleTaxonomyTags');
+    let taxonomy = component.get('selectedCompetencies');
     let selectedAudiences = component.get('selectedAudiences');
     let audienceIds = selectedAudiences.map(audience => {
       return audience.id;

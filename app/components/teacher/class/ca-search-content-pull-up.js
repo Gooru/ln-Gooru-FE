@@ -415,8 +415,37 @@ export default Ember.Component.extend({
       this.set('selectedContentForSchedule', content);
     },
 
+    //Action triggered when click + icon in the pullup
     onClickCreateOfflineActivity() {
-      this.sendAction('onClickCreateOfflineActivity');
+      this.set('isShowCreateOfflineActivity', true);
+    },
+
+    //Action triggered after created offline activity and add it to dca
+    onAddExternalCollectionToDCA(activityData, activityDate, scheduledMonth, scheduledYear) {
+      const component = this;
+      component.set('activeContentType', 'collection');
+      component.getMyContentByType().then(function(searchResults) {
+        if (!component.isDestroyed) {
+          component.set('isLoading', false);
+          component.set('searchResults', searchResults);
+          component.$('.search-list-container').scrollTop(0);
+          if (
+            searchResults &&
+            searchResults.length === component.get('defaultSearchPageSize')
+          ) {
+            component.set('isMoreDataExists', true);
+          }
+        }
+        let menuItems = component.get('menuItems');
+        menuItems.forEach(item => {
+          item.set('selected', false);
+          if (item.get('key') === 'myContent') {
+            item.set('selected', true);
+          }
+        });
+        component.set('isCourseMap', false);
+      });
+      component.sendAction('addedContentToDCA', activityData, activityDate, scheduledMonth, scheduledYear);
     }
   },
 

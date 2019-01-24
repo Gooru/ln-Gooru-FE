@@ -438,11 +438,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('isShowCollectionPerformanceEntryPullUp', false);
       controller.set('isShowExternalCollectionPeformanceEntryPullUp', false);
       controller.loadData();
-    },
-
-    onClickCreateOfflineActivity() {
-      let controller = this;
-      controller.set('isShowCreateOfflineActivity', true);
     }
   },
 

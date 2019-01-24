@@ -121,13 +121,18 @@
 
       .scheduler-container {
         margin-bottom: 16px;
-        .ca-date-picker-container {
-          .ca-datepicker {
-            .table-condensed {
-              .today {
-                background-color: $blue-400 !important;
+        .date-picker-container {
+          .ca-date-picker-container {
+            .ca-datepicker {
+              .table-condensed {
+                .today {
+                  background-color: $blue-400 !important;
+                }
               }
             }
+          }
+          &.month-selected {
+            opacity: 0.5;
           }
         }
       }
