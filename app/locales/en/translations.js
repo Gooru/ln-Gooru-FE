@@ -1326,9 +1326,7 @@ export default Object.assign(quizzesTranslations, {
         'create-activity': 'Create Activity',
         'schedule-activity': 'Schedule Activity',
         'add-subject-framework': 'Please Select a Subject and Framework at Class Settings',
-        'create-external-collection': 'Create an External Collection',
-        'add-subject-framework':
-          'Please Select a Subject and Framework at Class Settings'
+        'create-external-collection': 'Create an External Collection'
       },
       'click-to-copy': 'Click to copy class code',
       'course-map': 'Course Map',
