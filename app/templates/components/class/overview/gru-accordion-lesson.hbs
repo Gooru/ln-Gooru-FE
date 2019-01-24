@@ -91,12 +91,12 @@
             <li class="panel {{concat (if item.isAssessment 'a-' 'c-') item.id}} {{if item.isAssessment 'assessment' 'collection'}}
               {{if item.isSubmitted 'submitted'}}
               {{if (and (eq currentResource item.id) showLocation) 'selected'}}
-              {{if item.visible 'item-enabled' 'item-disabled'}}
+              {{if (or (or (eq item.source 'teacher_suggestions') item.visible)  (and (eq item.source 'system_suggestions') (not item.isAssessment))) 'item-enabled' 'item-disabled'}}
               {{if item.isOnAir 'on-air'}}
               {{if (eq activeElement item.id) 'study-active'}}">
 
               <div class="panel-heading {{if isTeacher 'teacher' 'student'}}">
-                <div class="panel-title">
+                <div class="panel-title {{if (or (eq item.source 'teacher_suggestions') (and (eq item.source 'system_suggestions') (not item.isAssessment))) 'keep-visible'}}">
                   <div class="icon-container">
                     {{#if item.isAssessment}}
                       {{#if item.thumbnailUrl}}
@@ -115,10 +115,13 @@
                   {{#if item.visible}}
                     <a class="title {{item.source}}" {{action "selectResource" item}}>
                       <div class="ellipsis" title="{{item.title}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">{{item.title}}</div>
+                      
                       {{#if (eq item.source 'system_suggestions')}}
-                        {{gru-icon name="explore"}} {{else if (eq item.source 'teacher_suggestions')}}
+                        {{gru-icon name="explore"}} 
+                      {{else if (eq item.source 'teacher_suggestions')}}
                         <i class="teacher_suggestions icon"></i>
                       {{/if}}
+
                     </a>
                     {{#if item.showTrophy}}
                       <span class="trophy"><i></i></span>

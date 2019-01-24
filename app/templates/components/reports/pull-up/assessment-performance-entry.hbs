@@ -68,10 +68,11 @@
           <div {{action "onSubmitPerformance"}} class="next action {{unless isEnableNext 'disabled'}} {{if (lt questions.length 1) 'disabled'}}">{{t 'common.done'}}</div>
         {{else}}
           <div class="next action {{unless isEnableNext 'disabled'}} {{if (lt questions.length 1) 'disabled'}}" {{action "onMoveStudent" 'next'}}>
-            <span class="ellipsis">{{concat nextStudent.firstName ' ' activeStudent.lastName}}</span>
+            <span class="ellipsis">{{concat nextStudent.firstName ' ' nextStudent.lastName}}</span>
           {{gru-icon name="fast_forward"}}
           </div>
         {{/if}}
       </div>
+
     </div>
 </div>

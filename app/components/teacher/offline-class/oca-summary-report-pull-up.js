@@ -144,7 +144,10 @@ export default Ember.Component.extend({
       dcaYearlySummary: dcaYearlySummaryPromise
     }).then(function(hash) {
       let dcaYearlySummary = hash.dcaYearlySummary;
-      let summarySortedByMonth = dcaYearlySummary.sortBy('month');
+      let summarySortedByMonth = dcaYearlySummary
+        .sortBy('month')
+        .sortBy('year')
+        .reverse();
       component.set('reportData', summarySortedByMonth);
       component.calculateTimeSpent();
     });
