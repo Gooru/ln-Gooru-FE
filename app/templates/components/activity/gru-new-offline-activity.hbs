@@ -8,12 +8,12 @@
     {{#if isClassPreferenceMapped}}
     <div class="title-container">
       <div class="label-container">{{t 'common.title'}} <span class="required">*</span></div>
-      <div class="input-container">{{input type="text" value=activityTitle class="activity-title"}}</div>
+      <div class="input-container">{{input type="text" value=activityTitle class="activity-title" autofocus="true"}}</div>
     </div>
-    <div class="description-container">
+      <div class="description-container">
       <div class="label-container">{{t 'common.description'}}</div>
       <div class="input-container">
-        {{gru-rich-text-editor isCustomEditor=true content=activityDescription}}
+        {{gru-rich-text-editor isCustomEditor=true content=activityDescription isAutoFocusDisabled="true"}}
       </div>
     </div>
       <div class="competency-container">
@@ -44,7 +44,7 @@
         {{ca-date-picker
           showToday=false
           forMonth=forMonth
-          allowDateSelectorToggle=true
+          allowDateSelectorToggle=false
           forYear=forYear
           onSelectDate="onSelectDate"
           onSelectToday="onSelectDate"
