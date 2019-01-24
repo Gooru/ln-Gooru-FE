@@ -404,10 +404,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         activityMembers.map(member => {
           let isActivityMember = classMembers.findBy('id', member.id);
           let isActiveMember = member.isActive;
-            if(isActivityMember && isActiveMember){
-              classActivityStudents.push(isActivityMember);
-            }
-
+          if (isActivityMember && isActiveMember) {
+            classActivityStudents.push(isActivityMember);
+          }
         });
         component.set(
           'activityMembers',
