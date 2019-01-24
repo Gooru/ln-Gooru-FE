@@ -282,20 +282,7 @@ export default Ember.Component.extend({
      */
     onChooseMenuItem(selectedItem) {
       let component = this;
-      let menuItems = component.get('menuItems');
-      menuItems.forEach(item => {
-        item.set('selected', false);
-        if (selectedItem.get('label') === item.get('label')) {
-          item.set('selected', true);
-        }
-      });
-      component.toggleProperty('isMenuEnabled');
-      if (selectedItem.get('key') === 'courseMap') {
-        component.set('isCourseMap', true);
-      } else {
-        component.set('isCourseMap', false);
-        component.loadData();
-      }
+      component.toggleMenuItem(selectedItem);
     },
 
     /**
@@ -424,27 +411,8 @@ export default Ember.Component.extend({
     onAddExternalCollectionToDCA(activityData, activityDate, scheduledMonth, scheduledYear) {
       const component = this;
       component.set('activeContentType', 'collection');
-      component.getMyContentByType().then(function(searchResults) {
-        if (!component.isDestroyed) {
-          component.set('isLoading', false);
-          component.set('searchResults', searchResults);
-          component.$('.search-list-container').scrollTop(0);
-          if (
-            searchResults &&
-            searchResults.length === component.get('defaultSearchPageSize')
-          ) {
-            component.set('isMoreDataExists', true);
-          }
-        }
-        let menuItems = component.get('menuItems');
-        menuItems.forEach(item => {
-          item.set('selected', false);
-          if (item.get('key') === 'myContent') {
-            item.set('selected', true);
-          }
-        });
-        component.set('isCourseMap', false);
-      });
+      let selectedItem = component.get('menuItems').findBy('key', 'myContent');
+      component.toggleMenuItem(selectedItem, true);
       component.sendAction('addedContentToDCA', activityData, activityDate, scheduledMonth, scheduledYear);
     }
   },
@@ -706,5 +674,29 @@ export default Ember.Component.extend({
       label: label,
       selected: selected
     });
+  },
+
+  /**
+   * @function toggleMenuItem
+   * Method to toggle selected menu item
+   */
+  toggleMenuItem(selectedItem, skipToggle) {
+    const component = this;
+    let menuItems = component.get('menuItems');
+    menuItems.forEach(item => {
+      item.set('selected', false);
+      if (selectedItem.get('label') === item.get('label')) {
+        item.set('selected', true);
+      }
+    });
+    if (!skipToggle) {
+      component.toggleProperty('isMenuEnabled');
+    }
+    if (selectedItem.get('key') === 'courseMap') {
+      component.set('isCourseMap', true);
+    } else {
+      component.set('isCourseMap', false);
+      component.loadData();
+    }
   }
 });
