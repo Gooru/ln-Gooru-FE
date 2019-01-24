@@ -407,7 +407,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           if(isActivityMember && isActiveMember){
             classActivityStudents.push(isActivityMember);
           }
-
         });
         component.set(
           'activityMembers',
