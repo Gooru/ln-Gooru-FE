@@ -223,14 +223,13 @@
         .resource-container {
           box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
           background-color: #ffffff;
-          display: grid;
-          grid-template-columns: 56px 1fr 56px 56px 56px;
+          display: flex;
           align-items: center;
           cursor: default;
           height: 51px;
 
           .resource-icon {
-            width: 100%;
+            width: 56px;
             height: 100%;
 
             .question-img {
@@ -239,7 +238,7 @@
               background-position: center;
               background-size: 50%;
               opacity: 0.5;
-              width: 100%;
+              width: 56px;
               display: block;
               height: 100%;
             }
@@ -316,6 +315,13 @@
             letter-spacing: normal;
             color: #37424b;
             display: block;
+            width: 100%;
+          }
+
+          .type {
+            grid-column-start: 4;
+            text-align: center;
+            min-width: 56px;
           }
 
           .rubric-img {
@@ -329,7 +335,7 @@
 
           .performance {
             height: 100%;
-            width: 100%;
+            min-width: 56px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -352,15 +358,14 @@
             font-size: 12px;
             height: 100%;
             grid-column-start: 5;
+            min-width: 56px;
           }
         }
 
         .resource-description {
           padding-left: 55px;
-          height: 50px;
           display: flex;
           align-items: center;
-          max-height: 90px;
           overflow-y: auto;
         }
       }
