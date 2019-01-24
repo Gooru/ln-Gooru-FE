@@ -117,7 +117,10 @@ export default Ember.Component.extend({
     function onLoad() {
       Ember.run(function() {
         if (editor.composer && editor.composer.commands) {
-          editor.focus();
+          let isAutoFocus = component.get('isAutoFocusDisabled');
+          if (!isAutoFocus) {
+            editor.focus();
+          }
           if (component.get('content')) {
             editor.composer.commands.exec(
               'insertHTML',

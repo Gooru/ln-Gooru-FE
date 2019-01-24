@@ -40,6 +40,9 @@ export default Ember.Component.extend({
         data: tagData
       });
       this.get('selectedTags').pushObject(newSelectedTag);
+      if (this.get('isCompatiableMode')) {
+        this.updateSelectedTags();
+      }
     },
 
     /**
@@ -76,12 +79,15 @@ export default Ember.Component.extend({
           break;
         }
       }
+      if (this.get('isCompatiableMode')) {
+        this.updateSelectedTags();
+      }
     },
 
     saveSelectedTags: function(selectedTags) {
       let course = this.get('course');
       let domain = this.get('domain');
-      this.get('onSave')(selectedTags, course, domain);
+      this.get('onSave')(selectedTags, course, domain, true);
     },
 
     /**
@@ -438,5 +444,13 @@ export default Ember.Component.extend({
         this.set('selectedPath', path);
       }.bind(this)
     );
+  },
+
+  updateSelectedTags() {
+    const component = this;
+    let selectedTags = component.get('selectedTags');
+    let course = component.get('course');
+    let domain = component.get('domain');
+    this.get('onSave')(selectedTags, course, domain);
   }
 });

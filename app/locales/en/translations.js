@@ -1325,8 +1325,8 @@ export default Object.assign(quizzesTranslations, {
         'enter-valid-timespent': 'Enter the valid time spent',
         'create-activity': 'Create Activity',
         'schedule-activity': 'Schedule Activity',
-        'add-subject-framework':
-          'Please Select a Subject and Framework at Class Settings'
+        'add-subject-framework': 'Please Select a Subject and Framework at Class Settings',
+        'create-external-collection': 'Create an External Collection'
       },
       'click-to-copy': 'Click to copy class code',
       'course-map': 'Course Map',

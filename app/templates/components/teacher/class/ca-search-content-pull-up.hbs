@@ -45,7 +45,7 @@
           </div>
         {{/each}}
         {{#if isOfflineClass}}
-          <span class="create-offline-activity" title="{{t 'common.external-collection'}}" data-toggle="tooltip" {{action "onClickCreateOfflineActivity"}}>{{gru-icon name="add"}}</span>
+          <span class="create-offline-activity" title="{{t 'teacher-landing.class.class-activities-tab.create-external-collection'}}" data-toggle="tooltip" {{action "onClickCreateOfflineActivity"}}>{{gru-icon name="add"}}</span>
         {{/if}}
       </div>
     </div>
@@ -74,3 +74,7 @@
 <div class="schedule-ca-datepicker-container ca-datepicker-popover-container">
   {{ca-date-picker  userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
 </div>
+
+{{#if isShowCreateOfflineActivity}}
+  {{activity.gru-new-offline-activity isShowPullUp=isShowCreateOfflineActivity classPreference=classPreference classId=classId onAddExternalCollectionToDCA="onAddExternalCollectionToDCA"}}
+{{/if}}

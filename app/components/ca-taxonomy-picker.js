@@ -30,14 +30,17 @@ export default Ember.Component.extend({
   // Actions
   actions: {
 
-    updateSelectedTags(selectedTags, course, domain) {
+    updateSelectedTags(selectedTags, course, domain, isCloseBrowser) {
       const component = this;
       var dataTags = selectedTags.map(function(taxonomyTag) {
         return taxonomyTag.get('data');
       });
       const standards = Ember.A(dataTags);
       component.set('selectedCompetencies', standards);
-      component.sendAction('onSubmitCompetencies', standards, course, domain);
+      if (isCloseBrowser) {
+        component.sendAction('onSubmitCompetencies', standards, course, domain);
+      }
+
     },
 
     loadTaxonomyData(path) {

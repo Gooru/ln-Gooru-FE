@@ -404,7 +404,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         activityMembers.map(member => {
           let isActivityMember = classMembers.findBy('id', member.id);
           let isActiveMember = member.isActive;
-          if (isActivityMember && isActiveMember) {
+          if(isActivityMember && isActiveMember){
             classActivityStudents.push(isActivityMember);
           }
         });
@@ -445,11 +445,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('isShowExternalCollectionPeformanceEntryPullUp', false);
       controller.loadData();
       controller.get('classController').fetchDcaSummaryPerformance();
-    },
-
-    onClickCreateOfflineActivity() {
-      let controller = this;
-      controller.set('isShowCreateOfflineActivity', true);
     },
 
     onClosePullUp() {

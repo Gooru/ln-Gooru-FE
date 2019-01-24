@@ -134,7 +134,8 @@
     selectedSearchContentType=selectedSearchContentType
     todaysClassActivities=todaysClassActivities.classActivities
     isOfflineClass=isOfflineClass
-    onClickCreateOfflineActivity="onClickCreateOfflineActivity"
+    classPreference=classPreference
+    classId=classId
   }}
 {{/if}}
 
@@ -166,12 +167,6 @@
     {{reports.pull-up.external-collection-performance-entry collection=selectedItem students=activityMembers activityData=selectedActivity classId=classId onClosePerformanceEntry="onClosePerformanceEntry"}}
   {{/reports.pull-up.performance-manual-entry}}
 {{/if}}
-
-
-{{#if isShowCreateOfflineActivity}}
-  {{activity.gru-new-offline-activity isShowPullUp=isShowCreateOfflineActivity classPreference=classPreference classId=classId addedContentToDCA="addedContentToDCA"}}
-{{/if}}
-
 
 {{#if isShowOCASummaryReportPullUp}}
   {{teacher.offline-class.oca-summary-report-pull-up  classId=class.id performanceSummary=performanceSummaryForDCA onClosePullUp="onClosePullUp"}}

@@ -66,13 +66,14 @@
                 .standard {
                   position: relative;
                   label {
+                    width: max-content;
                     display: grid;
                     grid-template-columns: auto auto;
                     div {
                       display: grid;
+                      width: 87%;
                       span {
                         line-height: 15px;
-                        width: 87%;
                       }
                       &:hover {
                         color: $white;
@@ -86,7 +87,7 @@
                     right: 0;
                     top: 0;
                     background-color: $white;
-                    border: 1px solid $dark-300;
+                    border: none;
                     i.keyboard_arrow_up {
                       display: inline-block;
                     }
@@ -100,6 +101,10 @@
                       i.keyboard_arrow_down {
                         display: inline-block;
                       }
+                    }
+                    &:focus {
+                      border: none;
+                      outline: none;
                     }
                   }
                   .level-panel.sublevel-1 {

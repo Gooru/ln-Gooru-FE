@@ -151,8 +151,9 @@
           }
 
           tr td.active {
-            background: none;
-            color: #35424b;
+            background-color: #3386f7;
+            background-image: unset;
+            color: $white;
             text-shadow: none;
           }
         }

@@ -244,7 +244,8 @@ export default Ember.Component.extend({
     let defaultParams = {
       maxViewMode: 0,
       format: 'yyyy-mm-dd',
-      todayHighlight: true
+      todayHighlight: true,
+      toggleActive: true
     };
     let startDate = this.get('startDate');
     let userStartDateAsToday = this.get('userStartDateAsToday');
