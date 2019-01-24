@@ -107,6 +107,8 @@ export default Ember.Controller.extend({
       const controller = this;
       controller.set('selectedSecLanguage', Ember.A([]));
       controller.set('otherLanguages', Ember.A([]));
+      let savedResponse = controller.get('savedResponse');
+      controller.normalizeLanguageResponse(savedResponse);
       this.getCategories().then(() => {
         this.getProfilePreference();
       });
@@ -188,17 +190,17 @@ export default Ember.Controller.extend({
 
     categoriesDropDownFilter() {
       const controller = this;
-      let categoriesDropDownFilter,
+      let categoriesDropDownFilter = Ember.A([]),
         addedCategories = controller.get('addedCategories'),
         categoriesMaster = controller.get('categoriesMaster');
 
-      /* categoriesDropDownFilter = categoriesMaster.filter(
-        catg => catg.id !== addedCategories.id
-      ); */
-
-      categoriesDropDownFilter = categoriesMaster.filter(
-        masterCat => !addedCategories.findBy('id', masterCat.id)
-      );
+      categoriesMaster.filter(masterCat => {
+        let foundcat = addedCategories.findBy('id', masterCat.id);
+        if (!foundcat && !categoriesDropDownFilter.findBy('id', masterCat.id)) {
+          categoriesDropDownFilter.pushObject(masterCat);
+          return masterCat;
+        }
+      });
       controller.set('categoriesDropDownFilter', categoriesDropDownFilter);
     }
   },
@@ -221,7 +223,10 @@ export default Ember.Controller.extend({
 
   prepareSubjectList(category) {
     this.set('currentCategorySubjectFwks', null);
-    let subjectFwks = category.subjectFwks.copy();
+    let subjectFwks =
+      category && category.subjectFwks && category.subjectFwks.copy
+        ? category.subjectFwks.copy()
+        : Object.assign({}, category.subjectFwks);
     if (category.subjects) {
       category.subjects.forEach(subject => {
         subjectFwks = subjectFwks.filter(sub1 => {
@@ -455,9 +460,11 @@ export default Ember.Controller.extend({
       ? [controller.get('selectedLanguage').id]
       : null;
     if (controller.get('otherLanguages')) {
-      controller
-        .get('otherLanguages')
-        .forEach(secLanguage => languagePreferenceArray.push(secLanguage.id));
+      controller.get('otherLanguages').forEach(secLanguage => {
+        if (secLanguage && secLanguage.id) {
+          languagePreferenceArray.push(secLanguage.id);
+        }
+      });
     }
 
     let preferenceData = {
@@ -550,46 +557,39 @@ export default Ember.Controller.extend({
       if (foundCategory && !foundAddedCategory) {
         controller.addCategory(foundCategory, false); //Complete category object
       }
-      if (
-        response.language_preference &&
-        response.language_preference.length > 0
-      ) {
-        let languagePreSelection, // First / primary language consideration as spec.
-          selectedSecLanguage = [];
-        if (response.language_preference.length > 1) {
-          response.language_preference.forEach((secPref, indx) => {
-            if (indx === 0) {
-              languagePreSelection = controller
-                .get('languages')
-                .findBy('id', secPref);
-            } else {
-              selectedSecLanguage.push(
-                controller.get('languages').findBy('id', secPref)
-              );
-            }
-          });
-        }
-        controller.set('otherLanguages', selectedSecLanguage);
-        controller.set('selectedLanguage', languagePreSelection);
-      }
       controller.setSelectedSubjectFrameworks(fwk, subject, foundCategory); // fwk.frameworkId, subject.code, cat
     }
-
+    controller.set('savedResponse', response);
+    controller.normalizeLanguageResponse(response);
     controller.changeModeOnSaveAll();
     controller.changeMode(false);
+  },
 
-    /* //following is the storage format
-
-    addedCategories.map(c => {
-      c.subjects.map(s => {
-        controller.markSelectedFrameworksParsed(
-          Object.values(s),
-          Object.keys(s),
-          c
-        );
-      });
-    }); */
-    //let selections = controller.get('selections');
+  normalizeLanguageResponse(response) {
+    const controller = this;
+    if (
+      response &&
+      response.language_preference &&
+      response.language_preference.length > 0
+    ) {
+      let languagePreSelection, // First / primary language consideration as spec.
+        selectedSecLanguage = [];
+      if (response.language_preference.length > 0) {
+        response.language_preference.forEach((secPref, indx) => {
+          if (indx === 0) {
+            languagePreSelection = controller
+              .get('languages')
+              .findBy('id', secPref);
+          } else {
+            selectedSecLanguage.push(
+              controller.get('languages').findBy('id', secPref)
+            );
+          }
+        });
+      }
+      controller.set('otherLanguages', selectedSecLanguage);
+      controller.set('selectedLanguage', languagePreSelection);
+    }
   },
   //------------------------------------------------------------------------------
   // Data Helpers
@@ -621,7 +621,7 @@ export default Ember.Controller.extend({
     /* If subjects are already fetched use them else fetch and cache */
     if (subjectFwksCategory) {
       addedCategories.removeObject(category);
-      Ember.set(category, 'subjectFwks', subjectFwksCategory);
+      Ember.set(category, 'subjectFwks', subjectFwksCategory.subjectFwks);
       addedCategories.pushObject(category);
       controller.set('addedCategories', addedCategories);
       /* controller.set('currentCategoriesSubjectFWKs', subjectFwks); */

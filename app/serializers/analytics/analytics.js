@@ -102,6 +102,8 @@ export default Ember.Object.extend({
 
         //fields only for student collection performance
         score: payload.score,
+        rawScore: payload.rawScore,
+
         resourceType: payload.resourceType,
         questionType: qtype,
         attempts: payload.attempts,

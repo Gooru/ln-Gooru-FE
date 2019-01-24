@@ -34,13 +34,13 @@
       </div>
     {{/if}}
     <div class="performance-summary">
-      {{#if (and isOfflineClass (eq selectedMenuItem 'class-activities'))}}
+      {{#if isOfflineClass}}
         <div class="dca-performance {{unless performanceSummaryForDCA.performance.scoreInPercentage 'disabled'}}" {{action 'onOpenOCAReport'}} style="background-color:{{if performanceSummaryForDCA (grade-color performanceSummaryForDCA.performance.scoreInPercentage)}}">
           {{#if performanceSummaryForDCA.performance.scoreInPercentage}}
             {{performanceSummaryForDCA.performance.scoreInPercentage}}%
           {{else}}
             --
-            {{/if}}
+          {{/if}}
         </div>
       {{else}}
         <div class="{{unless hasStarted 'not-started'}}" {{action 'onOpenCourseReport'}}>

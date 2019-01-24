@@ -66,6 +66,10 @@ export default Ember.Route.extend({
    * @param model
    */
   setupController: function(controller, model) {
+    let route = this;
+    let performanceSummaryForDCA = route.modelFor('teacher.class')
+      .performanceSummaryForDCA;
+    controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
     controller.parseClassActivityData(model.classActivities);
     controller.initialize();
   },
