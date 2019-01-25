@@ -22,12 +22,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
-  didRender() {
-    let component = this;
-    let isOfflineClass = component.get('isOfflineClass');
-    return isOfflineClass;
-  },
-
   // -------------------------------------------------------------------------
   // Actions
 
