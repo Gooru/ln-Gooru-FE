@@ -77,6 +77,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
+  /**
+   * Contains Offline classActivity
+   * @property {isOfflineClass[]} isOfflineClass
+   */
 
   isOfflineClass: Ember.computed('class', function() {
     let controller = this;
