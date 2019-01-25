@@ -60,7 +60,7 @@
               <i class="resource-img {{resource.format}}"></i>
             {{/if}}
           </div>
-          <div class="resource-title ellipsis">{{resource.title}}</div>
+          <div class="resource-title ellipsis">{{safe-html resource.title}}</div>
           {{#if (eq resource.performance.questionType 'OE')}}
             <i class="rubric-img"></i>
           {{/if}}

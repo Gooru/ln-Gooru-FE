@@ -51,7 +51,7 @@
             <div class="user-profile-img">
               <img src="{{student.avatarUrl}}" />
             </div>
-            <span class="username">{{student.name}}</span>
+            <span class="username">{{safe-html student.name}}</span>
           </div>
           {{#if student.performance}}
             {{#if (eq student.performance.type 'assessment')}}
