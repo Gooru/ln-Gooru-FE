@@ -5,7 +5,7 @@
   <div class="report-header">
     <div class="header-title">
       <i class="icon {{collection.collectionType}}"></i>
-      <span class="title ellipsis">{{collection.title}}</span>
+      <span class="title ellipsis">{{safe-html collection.title}}</span>
     </div>
     <div class="close" {{action 'onPullUpClose' false}}>
       {{gru-icon name="close"}}
@@ -51,7 +51,7 @@
             <div class="user-profile-img">
               <img src="{{student.avatarUrl}}" />
             </div>
-            <span class="username">{{safe-html student.name}}</span>
+            <span class="username">{{student.name}}</span>
           </div>
           {{#if student.performance}}
             {{#if (eq student.performance.type 'assessment')}}

@@ -5,7 +5,7 @@
   <div class="report-header">
     <div class="header-title">
       <i class="icon {{collection.collectionType}}"></i>
-      <span class="title ellipsis">{{collection.title}}</span>
+      <span class="title ellipsis">{{safe-html collection.title}}</span>
     </div>
     <div class="close" {{action 'onPullUpClose' false}}>
       {{gru-icon name="close"}}
