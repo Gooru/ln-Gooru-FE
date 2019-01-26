@@ -42,11 +42,14 @@ export default Ember.Component.extend({
       component.loadDataBySubject(component.get('subject.id'));
     }
     component.fetchTaxonomyGrades();
+    component.fetchSignatureCompetencyList();
   },
 
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
     component
       .$('[data-toggle="tooltip"]')
       .tooltip()
@@ -129,6 +132,7 @@ export default Ember.Component.extend({
       component.set('domainBoundariesContainer', Ember.A([]));
       component.loadDataBySubject(component.get('subject.id'));
       component.fetchTaxonomyGrades();
+      component.fetchSignatureCompetencyList();
     }
     return null;
   }),
@@ -209,6 +213,12 @@ export default Ember.Component.extend({
    * Property to show/hide loading spinner
    */
   isLoading: false,
+
+  /**
+   * It will have singature content competencty list for current active subject
+   * @type {Object}
+   */
+  signatureCompetencyList: null,
 
   /**
    * It  will have chart value width scroll width handling
@@ -357,6 +367,19 @@ export default Ember.Component.extend({
     }).then(({ userProficiencyBaseLine }) => {
       component.set('userProficiencyBaseLine', userProficiencyBaseLine);
       return userProficiencyBaseLine;
+    });
+  },
+
+  fetchSignatureCompetencyList() {
+    let component = this;
+    let subject = component.get('subjectCode');
+    let userId = component.get('userId');
+    return Ember.RSVP.hash({
+      competencyList: component
+        .get('competencyService')
+        .getUserSignatureCompetencies(userId, subject)
+    }).then(({ competencyList }) => {
+      component.set('signatureCompetencyList', competencyList);
     });
   },
 
@@ -574,6 +597,11 @@ export default Ember.Component.extend({
         }`;
       })
       .on('click', function(d) {
+        let signatureCompetencyList = component.get('signatureCompetencyList');
+        let showSignatureAssessment =
+          signatureCompetencyList[d.get('domainCode')] ===
+          d.get('competencyCode');
+        d.set('showSignatureAssessment', showSignatureAssessment);
         component.sendAction('onSelectCompetency', d);
       });
     cards.exit().remove();

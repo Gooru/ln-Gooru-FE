@@ -311,7 +311,8 @@ export const PLAYER_EVENT_SOURCE = {
   COURSE_MAP: 'coursemap',
   DAILY_CLASS: 'dailyclassactivity',
   INDEPENDENT_ACTIVITY: 'ILActivity',
-  RGO: 'rgo'
+  RGO: 'rgo',
+  MASTER_COMPETENCY: 'competencyMastery'
 };
 
 export const PROFILE_NAV_MENU_ITEMS = [
