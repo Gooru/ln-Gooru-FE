@@ -376,6 +376,7 @@ export default Ember.Component.extend({
       component.set('domainBoundaries', domainBoundaries);
       component.set('domainLevelSummary', domainLevelSummary);
       component.loadChartData();
+      component.sendAction('onChartDrawComplete');
     });
   },
 
@@ -403,13 +404,19 @@ export default Ember.Component.extend({
         x2,
         y2
       };
+      let strokeDasharray =
+        linePoint.x1 === linePoint.x2
+          ? Math.max(linePoint.y1, linePoint.y2)
+          : Math.max(linePoint.x1, linePoint.x2);
       svg
         .append('line')
         .attr('x1', linePoint.x1)
         .attr('y1', linePoint.y1)
         .attr('x2', linePoint.x2)
         .attr('y2', linePoint.y2)
-        .attr('class', `sky-line-${cellIndex}`);
+        .attr('stroke-dasharray', strokeDasharray)
+        .attr('stroke-dashoffset', strokeDasharray)
+        .attr('class', `sky-line sky-line-${cellIndex}`);
       component.joinSkyLinePoints(cellIndex, linePoint);
       cellIndex++;
     });
@@ -467,13 +474,22 @@ export default Ember.Component.extend({
   appendSkylines(point, cellIndex) {
     let component = this;
     let skyLineContainer = component.get('skylineContainer');
+    let strokeDasharray =
+      point.x1 === point.x2
+        ? Math.max(point.y1, point.y2)
+        : Math.max(point.x1, point.x2);
     skyLineContainer
       .append('line')
       .attr('x1', point.x1)
       .attr('y1', point.y1)
       .attr('x2', point.x2)
       .attr('y2', point.y2)
-      .attr('class', `sky-line-vertical-${cellIndex}`);
+      .attr('stroke-dashoffset', strokeDasharray)
+      .attr('stroke-dasharray', strokeDasharray)
+      .attr('class', `sky-line sky-line-vertical-${cellIndex}`);
+    component
+      .$(`.sky-line-vertical-${cellIndex}`)
+      .insertBefore(`.sky-line-${cellIndex}`);
   },
 
   /**

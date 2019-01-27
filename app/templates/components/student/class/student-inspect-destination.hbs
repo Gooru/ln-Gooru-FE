@@ -1,6 +1,6 @@
 <div class="inspect-destination-container">
   <div class="destination-chart-container">
-    {{proficiency.student-inspect-competency-chart competencyStatus=competencyStatus isProficiency=isProficiency title=activeGrade.grade route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode taxonomyGrades=taxonomyGrades activeGrade=activeGrade isRoute0Applicable=isRoute0Applicable}}
+    {{proficiency.student-inspect-competency-chart competencyStatus=competencyStatus isProficiency=isProficiency title=activeGrade.grade route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode taxonomyGrades=taxonomyGrades activeGrade=activeGrade isRoute0Applicable=isRoute0Applicable onChartDrawComplete='onChartDrawComplete'}}
   </div>
   {{#if (eq type "route")}}
     <div class="course-container hidden-xs">
@@ -66,21 +66,18 @@
         <div class="grade-description">
           {{'t' "student-first-experience.competency-level-partial.desc1"}}
           <span class="desc-title">{{activeGrade.grade}}</span> <br>
-          <p>This is your {{subject.title}} proficiency profile. Your math proficiency profile shows your mastery in standards (aka competencies) in the different focus areas in math (aka domains). The columns show domains and the boxes show the standards within each
-            math domain.</p>
+          <p>{{'t' "student-first-experience.competency-level-partial.desc2" title=subject.title}}</p>
         </div>
       </div>
       <p class="proficiency-info-2 proficiency-info">
-          As you master each of the competencies, the corresponding box is updated to dark blue.
+          {{'t' "student-first-experience.competency-level-partial.desc3"}}
       </p>
       <p class="proficiency-info-3 proficiency-info">
-          And as you continue to study other competencies, they turn light blue to show progress.
+        {{'t' "student-first-experience.competency-level-partial.desc4"}}
       </p>
-
       <p class="proficiency-info-4 proficiency-info">
-        Your current location in {{subject.title}} is identified by the Skyline. The skyline is the thick white line that shows the highest competencies that you have mastered in each domain
+        <p>{{'t' "student-first-experience.competency-level-partial.desc5" title=subject.title}}</p>
       </p>
-
       <div class="competency-level-list proficiency-info-5 proficiency-info">
         <div class="mastery-container">
           <div class="legend" title= {{ t "student-first-experience.explanatory.master.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.master.desc"}} data-placement='left'></div>

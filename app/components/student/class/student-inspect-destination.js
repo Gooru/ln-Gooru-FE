@@ -83,6 +83,14 @@ export default Ember.Component.extend({
       }
       component.$('.route0-container').toggleClass('expanded');
       component.toggleProperty('isRoute0ExpandedView');
+    },
+
+    /**
+     * On chart draw complete.
+     */
+    onChartDrawComplete() {
+      let component = this;
+      component.doAnimation();
     }
   },
 
@@ -183,5 +191,47 @@ export default Ember.Component.extend({
         route0Service.updateRouteAction(actionData)
       )
     });
+  },
+
+  doAnimation() {
+    let component = this;
+    let delay = 1000;
+    component
+      .$('.proficiency-info-1, .student-inspect-competency-chart')
+      .addClass('active');
+    let listOfMasteredEle = component.$(
+      '.status-2, .status-3, .status-4, .status-5'
+    );
+    delay = delay + 1000;
+    component.delay(component.$('.proficiency-info-2'), delay);
+    listOfMasteredEle.each(function(index, element) {
+      component.delay(element, delay);
+      delay = delay + 20;
+    });
+    delay = delay + 1000;
+    component.delay(component.$('.proficiency-info-3'), delay);
+    let listOfInprogressEle = component.$('.status-1');
+    listOfInprogressEle.each(function(index, element) {
+      component.delay(element, delay);
+      delay = delay + 20;
+    });
+    delay = delay + 1000;
+    component.delay(component.$('.proficiency-info-4'), delay);
+    let lines = component.$('#skyline-container line');
+    lines.each(function(index, element) {
+      component.delay(element, delay);
+      delay = delay + 300;
+    });
+    delay = delay + 1000;
+    component.delay(component.$('.proficiency-info-5'), delay);
+    delay = delay + 1000;
+    component.delay(component.$('.proficiency-info-6'), delay);
+  },
+
+  delay(element, delay) {
+    let component = this;
+    Ember.run.later(function() {
+      component.$(element).addClass('active');
+    }, delay);
   }
 });

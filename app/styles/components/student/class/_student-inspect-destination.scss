@@ -30,33 +30,18 @@
       padding-top: 30px;
       overflow-y: auto;
       color: #535e67;
+
       p {
         margin-bottom: 0;
         font-size: 15px;
       }
 
       .proficiency-info {
+        transition: visibility 1s linear, opacity 1s linear;
         opacity: 0;
-        animation: fadeIn 2s ease-in both;
-
-        &.proficiency-info-2 {
-          animation-delay: 4s;
-        }
-
-        &.proficiency-info-3 {
-          animation-delay: 6s;
-        }
-
-        &.proficiency-info-4 {
-          animation-delay: 8s;
-        }
-
-        &.proficiency-info-5 {
-          animation-delay: 10s;
-        }
-
-        &.proficiency-info-6 {
-          animation-delay: 12s;
+        &.active {
+          visibility: visible;
+          opacity: 1;
         }
       }
 
@@ -398,15 +383,6 @@
     position: absolute;
     left: 50%;
     top: 50%;
-  }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
   }
 }
 
