@@ -1,4 +1,4 @@
-<div class="heading">YOUR JOURNEY</div>
+<div class="heading">{{t 'student-journey.heading'}}</div>
 <div class="collections-accordion">
   {{#if collectionPerformances}}
     {{#each collectionPerformances as |collectionPerformance|}}
@@ -17,6 +17,6 @@
       </div>
     {{/each}}
   {{else}}
-    <span class="no-data">You are yet to start your journey for this competency</span>
+    <span class="no-data">{{t 'student-journey.nodata'}}</span>
   {{/if}}
 </div>
