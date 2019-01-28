@@ -101,3 +101,32 @@ export function getCategoryCodeFromSubjectId(subjectId) {
   let categoryCode = subjectId.split('.');
   return categoryCode.length === 3 ? categoryCode[1] : categoryCode[0];
 }
+
+/**
+ * Parse and read subject id for given string
+ * @param  {String} id
+ * @return {String}
+ */
+export function getSubjectId(id) {
+  return id.substring(0, id.indexOf('-'));
+}
+
+/**
+ * Parse and read course id for given string
+ * @param  {String} id
+ * @return {String}
+ */
+export function getCourseId(id) {
+  let ids = id.split('-');
+  return `${ids[0]}-${ids[1]}`;
+}
+
+/**
+ * Parse and read domain id for given string
+ * @param  {String} id
+ * @return {String}
+ */
+export function getDomainId(id) {
+  let ids = id.split('-');
+  return `${ids[0]}-${ids[1]}-${ids[2]}`;
+}
