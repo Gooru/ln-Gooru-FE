@@ -1,26 +1,39 @@
 <div class="heading">MICRO COMPETENCIES</div>
 <div class="micro-competencies">
-  {{#each microCompetencies as | microCompetency index|}}
-    <div>
-      <div class="panel-header collapsed" data-toggle="collapse" data-target="#collapse-{{index}}">
-        <span class="code">{{microCompetency.code}}</span>
+  {{#if microCompetencies}}
+    {{#each microCompetencies as | microCompetency index|}}
+      <div>
+        <div class="panel-header collapsed" data-toggle="collapse" data-target="#collapse-{{index}}">
+          <span class="code">{{microCompetency.code}}</span>
+        </div>
+        <div class="panel-content collapse" id="collapse-{{index}}">
+          <span class="description">{{microCompetency.title}}</span>
+        </div>
       </div>
-      <div class="panel-content collapse" id="collapse-{{index}}">
-        <span class="description">{{microCompetency.title}}</span>
-      </div>
-    </div>
-  {{/each}}
+    {{/each}}
+  {{else}}
+    <span class="no-data">There are no micro-competencies defined for this competency</span>
+  {{/if}}
 </div>
 <div class="heading">PREQUISITE COMPETENCIES</div>
-<div class="prequisite-competencies">
-  {{#each prequisiteCompetencies as | prerequisiteCompetency|}}
-    <div class="panel-container">
-      <div class="panel-header">
-        <div class="title">{{prerequisiteCompetency.code}}</div>
+<div class="prequisite-competencies {{unless prequisiteCompetencies 'no-competency'}}">
+  {{#if prequisiteCompetencies}}
+    {{#each prequisiteCompetencies as | prerequisiteCompetency|}}
+      <div class="panel-container">
+        <div class="panel-header">
+          <div class="title">{{prerequisiteCompetency.code}}</div>
+          <div class="competency-status status-{{prerequisiteCompetency.status}}"></div>
+        </div>
+        <div class="panel-body">
+          <div class="competency-description">{{prerequisiteCompetency.title}}</div>
+        </div>
       </div>
-      <div class="panel-body">
-        <div class="competency-description">{{prerequisiteCompetency.title}}</div>
-      </div>
-    </div>
-  {{/each}}
+    {{/each}}
+  {{else}}
+    <span class="no-data">There are no prerequisite-competencies defined for this competency</span>
+  {{/if}}
+</div>
+<div class="heading">ALT-CONCEPTS</div>
+<div class="alt-concepts">
+  <span class="no-data">There are no alt-concepts defined for this competency</span>
 </div>

@@ -1,18 +1,22 @@
 <div class="heading">YOUR JOURNEY</div>
 <div class="collections-accordion">
-  {{#each collectionPerformances as |collectionPerformance|}}
-    <div class="collection-panel">
-      <i class="icon {{collectionPerformance.collectionType}}"></i>
-      <div class="collection-title">{{collectionPerformance.title}}</div>
-      {{#if (eq collectionPerformance.collectionType 'assessment')}}
-        <div class="performance" style="background-color:{{grade-color collectionPerformance.score}}">
-          <span class="score">{{collectionPerformance.score}}%</span>
-        </div>
-      {{else}}
-        <div class="performance collection">
-          <span class="timespent">{{if collectionPerformance.timeSpent (format-time  collectionPerformance.timeSpent) '--'}}</span>
-        </div>
-      {{/if}}
-    </div>
-  {{/each}}
+  {{#if collectionPerformances}}
+    {{#each collectionPerformances as |collectionPerformance|}}
+      <div class="collection-panel">
+        <i class="icon {{collectionPerformance.collectionType}}"></i>
+        <div class="collection-title">{{collectionPerformance.title}}</div>
+        {{#if (eq collectionPerformance.collectionType 'assessment')}}
+          <div class="performance" style="background-color:{{grade-color collectionPerformance.score}}">
+            <span class="score">{{collectionPerformance.score}}%</span>
+          </div>
+        {{else}}
+          <div class="performance collection">
+            <span class="timespent">{{if collectionPerformance.timeSpent (format-time  collectionPerformance.timeSpent) '--'}}</span>
+          </div>
+        {{/if}}
+      </div>
+    {{/each}}
+  {{else}}
+    <span class="no-data">You are yet to start your journey for this competency</span>
+  {{/if}}
 </div>

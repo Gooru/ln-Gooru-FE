@@ -14,7 +14,7 @@
   {{else}}
     {{#if isStudent}}
       <div class="signature-content">
-        {{reports.pull-up.signature-content-report collectionPerformances=collectionPerformances showSignatureAssessment=showSignatureAssessment competency=competency}}
+        {{reports.pull-up.signature-content-report domainCompetencyList=domainCompetencyList collectionPerformances=collectionPerformances showSignatureAssessment=showSignatureAssessment competency=competency}}
       </div>
     {{/if}}
     {{#unless isStudent}}

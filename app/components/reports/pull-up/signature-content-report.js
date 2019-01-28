@@ -111,7 +111,9 @@ export default Ember.Component.extend({
         filters
       )
     }).then(({ learningMapData }) => {
-      component.set('prerequisites', learningMapData.prerequisites);
+      component.checkPrerequisiteCompetencyStatus(
+        learningMapData.prerequisites
+      );
       let signatureContentList = learningMapData.signatureContents;
       let showSignatureAssessment =
         component.get('showSignatureAssessment') &&
@@ -126,6 +128,22 @@ export default Ember.Component.extend({
         component.fetchContentSettings(content.id);
       }
     });
+  },
+
+  checkPrerequisiteCompetencyStatus(prerequisites) {
+    let component = this;
+    let domainCompetencyList = component.get(
+      'domainCompetencyList.competencies'
+    );
+    prerequisites.forEach(competency => {
+      let filteredCompetency = domainCompetencyList.findBy(
+        'competencyCode',
+        competency.id
+      );
+      let status = filteredCompetency ? filteredCompetency.status : 0;
+      competency.status = status;
+    });
+    component.set('prerequisites', prerequisites);
   },
 
   fetchContentSettings(contentId) {
