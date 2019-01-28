@@ -98,7 +98,9 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     const route = this;
     const controller = route.get('controller');
     const navMapServc = route.get('navigateMapService');
-    let locationContext = currentLocation ? currentLocationToMapContext(currentLocation) : null;
+    let locationContext = currentLocation
+      ? currentLocationToMapContext(currentLocation)
+      : null;
     controller.set('locationContext', locationContext);
     let options = {
         role: ROLES.STUDENT,
@@ -121,9 +123,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       nextPromise = route.nextPromiseHandler(locationContext);
     }
 
-    nextPromise.then(route.nextPromiseHandler).then(parsedOptions => {
-      return route.launchStudyPlayer(parsedOptions);
-    })
+    nextPromise
+      .then(route.nextPromiseHandler)
+      .then(parsedOptions => {
+        return route.launchStudyPlayer(parsedOptions);
+      })
       .catch(() => {
         controller.set('isNotAbleToStartPlayer', true);
       });
@@ -170,7 +174,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   launchStudyPlayer(queryParams) {
     const route = this;
-    console.log('launchStudyPlayer', queryParams); //eslint-disable-line
     if (queryParams.hasSuggestion) {
       route.transitionTo('reports.study-student-collection', { queryParams });
     } else {

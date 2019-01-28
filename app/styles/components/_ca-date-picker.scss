@@ -150,10 +150,21 @@
             left: 10px;
           }
 
+          tr td.today:hover {
+            background-color: #fde19a;
+            background-image: -webkit-linear-gradient(top, #fdd49a, #fdf59a);
+          }
+
           tr td.active {
-            background: none;
-            color: #35424b;
+            background-color: #3386f7;
+            background-image: unset;
+            color: $white;
             text-shadow: none;
+
+            &:hover {
+              background-color: #3386f7;
+              background-image: unset;
+            }
           }
         }
       }
@@ -231,6 +242,14 @@
     .ca-datepicker-top {
       right: 0;
       left: calc(100% / 2);
+    }
+  }
+
+  &.ca-datepicker-orientation-left {
+    .ca-datepicker-bottom,
+    .ca-datepicker-top {
+      right: 0;
+      left: 2px;
     }
   }
 }

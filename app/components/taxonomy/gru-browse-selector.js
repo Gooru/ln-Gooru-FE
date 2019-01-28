@@ -29,7 +29,14 @@ export default Ember.Component.extend({
      * @function actions:selectInsideItem
      */
     selectInsideItem: function(item) {
-      this.get('onSelectItem')(item);
+      const component = this;
+      component.get('onSelectItem')(item);
+      component.set('item', item);
+      if (component.get('isCompatiableMode')) {
+        component.set('doAnimate', true);
+        component.animateTaxonomyPicker(item.level);
+        component.showBreadcrumbLevels(item);
+      }
     },
 
     /**
@@ -46,14 +53,37 @@ export default Ember.Component.extend({
       } else {
         this.get('onUncheckItem')(item);
       }
+    },
+
+    //Action triggered when expand taxonomy browser
+    onExpandBrowser(level) {
+      this.set('doAnimate', false);
+      this.expandTaxonomyPicker(level);
     }
   },
 
   // -------------------------------------------------------------------------
   // Events
+
+  didInsertElement() {
+    const component = this;
+    if (component.get('isCompatiableMode')) {
+      component.set('doAnimate', true);
+    }
+  },
+
   didRender() {
     this._super(...arguments);
-    this.$('button[data-toggle="collapse"]').on('click', function(e) {
+    const component = this;
+    let isCompatiableMode = component.get('isCompatiableMode');
+    let item = component.get('item');
+    if (item && isCompatiableMode) {
+      component.animateTaxonomyPicker(item.level);
+    }
+    if (isCompatiableMode) {
+      component.populateTaxonomyPicker();
+    }
+    component.$('button[data-toggle="collapse"]').on('click', function(e) {
       e.preventDefault();
     });
   },
@@ -99,7 +129,6 @@ export default Ember.Component.extend({
     var previousPath = this.get('previousSelectedPath');
     var currentPath = this.get('selectedPath');
     var currentList, browseItem;
-
     // Clear and then update cached path
     this.clearActivePath(previousPath);
     this.set('previousSelectedPath', currentPath);
@@ -129,6 +158,12 @@ export default Ember.Component.extend({
   }),
 
   /**
+   * @property {Object} item
+   * Property to hold selected item
+   */
+  item: null,
+
+  /**
    * List of ids of selected panel items where each array index corresponds to a panel level.
    * @prop {String[]}
    */
@@ -139,6 +174,24 @@ export default Ember.Component.extend({
    * @prop {String[]}
    */
   previousSelectedPath: [],
+
+  /**
+   * @property {Boolean} isCompatiableMode
+   * Property to load the taxonomy picker in compatiable mode
+   */
+  isCompatiableMode: false,
+
+  /**
+   * @property {String} course
+   * Property to hold selected course title
+   */
+  course: null,
+
+  /**
+   * @property {String} domain
+   * Property to hold selected domain title
+   */
+  domain: null,
 
   // -------------------------------------------------------------------------
   // Properties
@@ -161,5 +214,74 @@ export default Ember.Component.extend({
         browseItem.set('isActive', false);
       }.bind(this)
     );
+  },
+
+  /**
+   * @function populateTaxonomyPicker
+   * Method to populate taxonomy picker hierarchy
+   */
+  populateTaxonomyPicker() {
+    const component = this;
+    if (component.get('doAnimate')) {
+      component.$('.hierarchy-1-container').show();
+      component.$('.hierarchy-2-container, .hierarchy-3-container').hide();
+      if (component.get('course')) {
+        component.$('.hierarchy-1-container, .hierarchy-3-container').hide();
+        component.$('.hierarchy-2-container').show();
+      }
+      if (component.get('domain')) {
+        component.$('.hierarchy-1-container, .hierarchy-2-container').hide();
+        component.$('.hierarchy-3-container').show();
+      }
+    }
+  },
+
+  /**
+   * @function animateTaxonomyPicker
+   * Method to animate taxonomy picker
+   */
+  animateTaxonomyPicker(level) {
+    const component = this;
+    if (component.get('doAnimate')) {
+      if (level === 1) {
+        component.$(`.hierarchy-${level}-container, .hierarchy-${level + 2}-container`).hide(1000);
+        component.$(`.hierarchy-${level + 1}-container`).show(1000);
+      } else if (level === 2) {
+        component.$(`.hierarchy-${level - 1}-container, .hierarchy-${level}-container`).hide(1000);
+        component.$(`.hierarchy-${level + 1}-container`).show(1000);
+      }
+    }
+  },
+
+  /**
+   * @function expandTaxonomyPicker
+   * Method to handle taxonomy picker expander operations
+   */
+  expandTaxonomyPicker(level) {
+    const component = this;
+    if (level === 1) {
+      component.$(`.hierarchy-${level}-container`).show(1000);
+      component.$(`.hierarchy-${level + 1}-container, .hierarchy-${level + 2}-container`).hide(1000);
+      component.set('domain', null);
+    } else if (level === 2) {
+      component.$(`.hierarchy-${level - 1}-container, .hierarchy-${level + 1}-container`).hide(1000);
+      component.$(`.hierarchy-${level}-container`).show(1000);
+    }
+  },
+
+  /**
+   * @function showBreadcrumbLevels
+   * Method to show breadcrumb levels
+   */
+  showBreadcrumbLevels(item) {
+    const component = this;
+    let level = item.level;
+    let title = item.title;
+    if (level === 1) {
+      component.set('course', title);
+      component.set('domain', null);
+    } else if (level === 2) {
+      component.set('domain', title);
+    }
   }
 });

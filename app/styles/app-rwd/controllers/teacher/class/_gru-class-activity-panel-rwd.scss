@@ -16,10 +16,9 @@
       }
 
       .ca-panel-container-2 {
-        grid-template-columns: 1fr 1fr 60px;
-
+        grid-template-columns: 1fr 1fr 1fr 60px;
         .dca-panel-actions {
-          display: none;
+          display: flex;
         }
       }
     }

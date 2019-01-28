@@ -202,8 +202,9 @@
  --}}
 <div class='controller teacher classbg '>
   <div class="controller teacher class class-settings">
-    <div class='sec-col-layout'> {{!-- two col layout ends1 --}}
-      <div class='sec-rows-layout'> {{!-- two rows in a col layout ends1 --}}
+    <div class='sec-col-layout'>  {{!-- two col layout ends1 --}}
+        <div class='sec-rows-layout'> {{!-- two rows in a col layout ends1 --}}
+        <div class="class-layout">
         <div class='class-sec-cont'>
           <div class='class-settings-label'>
             {{t 'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-head'}}
@@ -253,6 +254,7 @@
                 <div class='grade-info'>
                   <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      <span>
                       {{#if class.gradeCurrent}}
                         {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
                       searchVal=class.gradeCurrent
@@ -260,6 +262,7 @@
                       {{else}}
                         {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
                       {{/if}}
+                    </span>
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
@@ -307,10 +310,10 @@
                 <div class='offline-icon'></div>
                 <div class='offline-label'> {{t
                   'teacher-landing.class.class-settings.class-settings-sec.offline-class-label'}}
-                  <div class="offline-info-icon">{{gru-icon tooltipTitle= "teacher-landing.class.class-settings.class-settings-sec.offline-tooltip" name='info_outline'}}                    
-                  </div> 
+                  <div class="offline-info-icon">{{gru-icon tooltipTitle= "teacher-landing.class.class-settings.class-settings-sec.offline-tooltip" name='info_outline'}}
+                  </div>
                 </div>
-                
+
                 <div class='action-button-slide-yes {{ if class.isOffline "disabled" }}' data-toggle="tooltip" title="{{t 'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip'}}">
                   {{gru-switch switchOptions=switchOptions onOptionSwitch='saveOffline'
                   isChecked=class.isOffline}}
@@ -341,6 +344,7 @@
             </div>
           </div>
         </div>
+      </div>
         <div class='assessment-sec-cont'>
           <div class='assessment-setting-label'>
           </div>
@@ -348,6 +352,7 @@
             dddd
           </div>
         </div>
+        <div class="class-layout-btn">
         <div class="btn-panel">
           <div class='class-btn' {{action 'deleteClass'}}>
             {{t 'class.info.delete'}} {{gru-icon name='delete'}}
@@ -356,9 +361,12 @@
             {{t 'teacher-landing.class.class-management-tab.archive-classroom'}} {{gru-icon name="archive"}}
           </div>
         </div>
-      </div> {{!-- two col layout ends --}}
+      </div>
+      </div>
+        {{!-- two col layout ends --}}
       <div class='sec-rows-layout'>
         {{!-- Course Settings container  starts --}}
+        <div class="course-settings-layout">
         <div class='course-sec-cont'>
           <div class='course-settings-label'>
             {{t 'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head'}}
@@ -398,7 +406,8 @@
                 <div class='gradelevel-info'></div>
                 <div class='field-drop-down'>
                   <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="drop-down-span ellipsis"></span>
+                    <button class="btn btn-default dropdown-toggle ellipsis" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                       {{#if tempClass.preference.framework}}
                         {{get-value 'source' source=subjectFWKDD.frameworks searchProp='code'
                                               searchVal=tempClass.preference.framework
@@ -579,6 +588,7 @@
               {{/if}}
             </div>
           {{/if }}
+        </div>
         </div> {{!-- Course Settings container ends --}}
         {{!-- Generate pathway section starts here --}}
         <div class='gen-pathway-sec'>
@@ -684,13 +694,15 @@
                       <div class='grade-info'>
                         <div class="dropdown">
                           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' student 'student-destination'}}>
-                            {{#if (and student.gradeUpperBound ( not (eq student.gradeUpperBound 'undefined' ) ))}}
-                              {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
-                          searchVal=student.gradeUpperBound
-                          destProp='grade' }}
-                            {{else}}
-                              {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                            {{/if}}
+                            <span>
+                              {{#if (and student.gradeUpperBound ( not (eq student.gradeUpperBound 'undefined' ) ))}}
+                                {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
+                            searchVal=student.gradeUpperBound
+                            destProp='grade' }}
+                              {{else}}
+                                {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
+                              {{/if}}
+                              </span>
                             <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu">
