@@ -140,8 +140,12 @@
 {{/if}}
 
 {{#if showDcaCollectionReportPullUp}}
-  {{reports.pull-up.dca-collection-report context=dcaCollectionReportData showPullUp=showDcaCollectionReportPullUp}}
-{{/if}}
+{{#if (not-eq dcaCollectionReportData.collection.format 'collection-external')}}
+{{reports.pull-up.dca-collection-report context=dcaCollectionReportData showPullUp=showDcaCollectionReportPullUp}}
+{{else}}
+  {{reports.pull-up.dca-external-collection-report context=dcaCollectionReportData showPullUp=showDcaCollectionReportPullUp}}
+  {{/if}}
+  {{/if}}
 
 
 {{#if isShowAssessmentPerformanceEntryPullUp}}
