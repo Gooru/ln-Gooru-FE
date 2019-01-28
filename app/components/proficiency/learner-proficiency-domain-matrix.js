@@ -617,7 +617,7 @@ export default Ember.Component.extend({
     let signatureCompetencyList = component.get('signatureCompetencyList');
     let showSignatureAssessment =
       signatureCompetencyList[domainCode] === competency.get('competencyCode');
-    component.set('showSignatureAssessment', showSignatureAssessment);
+    competency.set('showSignatureAssessment', showSignatureAssessment);
     component.sendAction(
       'onSelectCompetency',
       competency,

@@ -65,7 +65,7 @@ export default Ember.Component.extend({
 
   microCompetencies: null,
 
-  loading: false,
+  isLoading: false,
 
   /**
    * @property {number} domainId
@@ -135,7 +135,6 @@ export default Ember.Component.extend({
     }).then(({ competencyCodes }) => {
       let microCompetencies = this.filterMicroCompetency(competencyCodes);
       component.set('microCompetencies', microCompetencies);
-      component.set('loading', false);
     });
   },
 
@@ -150,6 +149,7 @@ export default Ember.Component.extend({
     let filters = {
       isDisplayCode: true
     };
+    component.set('isLoading', true);
     return Ember.RSVP.hash({
       learningMapData: searchService.fetchLearningMapsContent(
         competencyCode,
@@ -168,6 +168,7 @@ export default Ember.Component.extend({
         ? signatureContentList.assessments
         : signatureContentList.collections;
       let content = signatureContent.objectAt(0);
+      component.set('isLoading', false);
       if (content) {
         component.set('signatureContent', content);
         component.fetchContentSettings(content.id);
@@ -213,7 +214,6 @@ export default Ember.Component.extend({
       content: contentPromise
     }).then(({ content }) => {
       component.set('content', content);
-      component.set('loading', false);
     });
   },
 

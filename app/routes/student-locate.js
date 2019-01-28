@@ -160,5 +160,7 @@ export default Ember.Route.extend({
     queryParams.forEach(function(param) {
       controller.set(param, null);
     });
+
+    controller.set('isShowCompetencyContentReport', false);
   }
 });
