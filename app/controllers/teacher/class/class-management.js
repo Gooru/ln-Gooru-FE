@@ -759,18 +759,31 @@ export default Ember.Controller.extend(ModalMixin, {
    * Method to fetch taxonomy grades
    */
   fetchTaxonomyGrades() {
-    let component = this;
+    let controller = this;
     if (this.get('course.id') && this.get('subject')) {
-      let taxonomyService = component.get('taxonomyService');
+      let taxonomyService = controller.get('taxonomyService');
       let filters = {
-        subject: component.get('sanitizedSubject')
+        subject: controller.get('sanitizedSubject')
       };
+
+      let grade_lower_bound = controller.get('class.gradeLowerBound'),
+        grade_upper_bound = controller.get('class.gradeUpperBound'),
+        grade_current = controller.get('class.gradeCurrent');
+
+      let fwkCode = controller.get('tempClass.preference.framework');
+      if (
+        fwkCode &&
+        !(grade_lower_bound || grade_upper_bound || grade_current)
+      ) {
+        filters.fw_code = fwkCode;
+      }
+
       return Ember.RSVP.hash({
         taxonomyGrades: Ember.RSVP.resolve(
           taxonomyService.fetchGradesBySubject(filters)
         )
       }).then(({ taxonomyGrades }) => {
-        component.set('subjectTaxonomyGrades', taxonomyGrades);
+        controller.set('subjectTaxonomyGrades', taxonomyGrades);
       });
     }
   },
