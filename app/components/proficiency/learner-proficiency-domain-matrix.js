@@ -597,18 +597,32 @@ export default Ember.Component.extend({
         }`;
       })
       .on('click', function(d) {
-        let signatureCompetencyList = component.get('signatureCompetencyList');
-        let showSignatureAssessment =
-          signatureCompetencyList[d.get('domainCode')] ===
-          d.get('competencyCode');
-        d.set('showSignatureAssessment', showSignatureAssessment);
-        component.sendAction('onSelectCompetency', d);
+        component.selectCompetency(d);
       });
     cards.exit().remove();
     component.$('.scrollable-chart').scrollTop(height);
     component.drawSkyline();
     component.drawBaseLine();
     component.drawDomainBoundaryLine();
+  },
+
+  selectCompetency(competency) {
+    let component = this;
+    let competencyMatrixDomains = component.get('competencyMatrixDomains');
+    let domainCode = competency.get('domainCode');
+    let domainCompetencyList = competencyMatrixDomains.findBy(
+      'domainCode',
+      domainCode
+    );
+    let signatureCompetencyList = component.get('signatureCompetencyList');
+    let showSignatureAssessment =
+      signatureCompetencyList[domainCode] === competency.get('competencyCode');
+    component.set('showSignatureAssessment', showSignatureAssessment);
+    component.sendAction(
+      'onSelectCompetency',
+      competency,
+      domainCompetencyList
+    );
   },
 
   /**

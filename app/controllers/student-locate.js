@@ -95,6 +95,8 @@ export default Ember.Controller.extend({
     return controller.get('course.subject') || null;
   }),
 
+  domainCompetencyList: null,
+
   init() {
     let component = this;
     component.fetchStudentDetails();
@@ -123,9 +125,10 @@ export default Ember.Controller.extend({
       this.set('isShowProficiencyPullup', false);
     },
 
-    onSelectCompetency(competency) {
+    onSelectCompetency(competency, userId, domainCompetencyList) {
       let controller = this;
       controller.set('selectedCompetency', competency);
+      controller.set('domainCompetencyList', domainCompetencyList);
       controller.set('isShowCompetencyContentReport', true);
     }
   },
