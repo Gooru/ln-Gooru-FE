@@ -1,12 +1,5 @@
 .student-inspect-competency-chart {
   margin: 0 auto;
-  opacity: 0;
-  transition: visibility 0.3s linear, opacity 0.3s linear;
-
-  &.active {
-    visibility: visible;
-    opacity: 1;
-  }
 
   .three-bounce-spinner {
     position: absolute;
@@ -19,6 +12,13 @@
   }
 
   .chart-container {
+    opacity: 0;
+    transition: visibility 0.3s linear, opacity 0.3s linear;
+
+    &.active {
+      visibility: visible;
+      opacity: 1;
+    }
     .graded-chart-container {
       display: grid;
       grid-template-columns: 100px auto;
@@ -168,13 +168,13 @@
 
             #skyline-container {
               filter: url(#shadow);
-
-              line {
+              polyline {
                 stroke: $white;
                 stroke-width: 6px;
+                fill: none;
 
                 &.active {
-                  animation: drawLine linear 0.3s forwards;
+                  animation: drawLine linear 5s forwards;
                 }
               }
             }

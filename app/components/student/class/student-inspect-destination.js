@@ -197,7 +197,9 @@ export default Ember.Component.extend({
     let component = this;
     let delay = 1000;
     component
-      .$('.proficiency-info-1, .student-inspect-competency-chart')
+      .$(
+        '.proficiency-info-1, .student-inspect-competency-chart .chart-container'
+      )
       .addClass('active');
     let listOfMasteredEle = component.$(
       '.status-2, .status-3, .status-4, .status-5'
@@ -217,12 +219,13 @@ export default Ember.Component.extend({
     });
     delay = delay + 1000;
     component.delay(component.$('.proficiency-info-4'), delay);
-    let lines = component.$('#skyline-container line');
-    lines.each(function(index, element) {
-      component.delay(element, delay);
-      delay = delay + 300;
-    });
-    delay = delay + 1000;
+    component.delay(
+      component.$(
+        '.student-inspect-competency-chart .chart-container polyline'
+      ),
+      delay
+    );
+    delay = delay + 2000;
     component.delay(component.$('.proficiency-info-5'), delay);
     delay = delay + 1000;
     component.delay(component.$('.proficiency-info-6'), delay);

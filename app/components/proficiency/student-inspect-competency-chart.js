@@ -335,12 +335,15 @@ export default Ember.Component.extend({
           ? 'route0-suggest-competency'
           : `status-${d.status.toString()}`;
         let skylineClassName = d.skyline ? 'skyline-competency' : '';
+        let masteredCompetencyClassName = d.mastered
+          ? 'mastered-competency'
+          : '';
         let domainBoundaryCompetency = d.isDoaminBoundaryCompetency
           ? 'domain-boundary'
           : '';
         return `competency competency-${d.xAxisSeq}-${
           d.yAxisSeq
-        } ${skylineClassName} ${domainBoundaryCompetency} ${cellColorClass} competency-cell`;
+        } ${skylineClassName} ${domainBoundaryCompetency} ${masteredCompetencyClassName} ${cellColorClass} competency-cell`;
       })
 
       .attr('width', cellWidth)
@@ -389,13 +392,17 @@ export default Ember.Component.extend({
     let skylineElements = component.$('.skyline-competency');
     let cellWidth = component.get('cellWidth');
     let cellHeight = component.get('cellHeight');
-    component.$('line').remove();
+    component.$('polyline').remove();
+    let polyLinePoints = [];
+    let strokeDasharray = 0;
     let svg = component.get('skylineContainer');
-    let cellIndex = 0;
     skylineElements.each(function(index) {
       let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
       let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
-      y1 = y1 === 0 ? y1 + 3 : y1 + cellHeight + 3;
+      let isMasteredCompetency = component
+        .$(skylineElements[index])
+        .hasClass('mastered-competency');
+      y1 = y1 === 0 && !isMasteredCompetency ? y1 + 3 : y1 + cellHeight + 3;
       let x2 = x1 + cellWidth;
       let y2 = y1;
       let linePoint = {
@@ -404,92 +411,20 @@ export default Ember.Component.extend({
         x2,
         y2
       };
-      let strokeDasharray =
-        linePoint.x1 === linePoint.x2
+      strokeDasharray =
+        strokeDasharray +
+        (linePoint.x1 === linePoint.x2
           ? Math.max(linePoint.y1, linePoint.y2)
-          : Math.max(linePoint.x1, linePoint.x2);
-      svg
-        .append('line')
-        .attr('x1', linePoint.x1)
-        .attr('y1', linePoint.y1)
-        .attr('x2', linePoint.x2)
-        .attr('y2', linePoint.y2)
-        .attr('stroke-dasharray', strokeDasharray)
-        .attr('stroke-dashoffset', strokeDasharray)
-        .attr('class', `sky-line sky-line-${cellIndex}`);
-      component.joinSkyLinePoints(cellIndex, linePoint);
-      cellIndex++;
+          : Math.max(linePoint.x1, linePoint.x2));
+      polyLinePoints.push(
+        ...[linePoint.x1, linePoint.y1, linePoint.x2, linePoint.y2]
+      );
     });
-  },
-
-  /**
-   * @function joinSkyLinePoints
-   * Method to draw vertical line to connects sky line points, if necessary
-   */
-  joinSkyLinePoints(cellIndex, curLinePoint) {
-    let component = this;
-    let lastSkyLineContainer;
-    if (cellIndex === 0) {
-      //Connect vertical skyline for first domain
-      let fisrtSkyLineContainer = component.$(`.sky-line-${cellIndex}`);
-      if (fisrtSkyLineContainer.attr('y1') > 0) {
-        let points = {
-          x1: 3,
-          y1: 0,
-          x2: 3,
-          y2: parseInt(fisrtSkyLineContainer.attr('y1'))
-        };
-        component.appendSkylines(points, cellIndex);
-      }
-    } else {
-      lastSkyLineContainer = component.$(`.sky-line-${cellIndex - 1}`);
-      let lastskyLinePoint = {
-        x2: parseInt(lastSkyLineContainer.attr('x2')),
-        y2: parseInt(lastSkyLineContainer.attr('y2'))
-      };
-      //Connect sky line points if last and current points are not same
-      if (
-        lastSkyLineContainer.length &&
-        lastskyLinePoint.y2 !== curLinePoint.y1
-      ) {
-        //Increase extra height to connect intersection points
-        if (lastskyLinePoint.y2 > curLinePoint.y1) {
-          lastskyLinePoint.y2 = lastskyLinePoint.y2 + 3;
-          curLinePoint.y1 = curLinePoint.y1 - 3;
-        } else {
-          lastskyLinePoint.y2 = lastskyLinePoint.y2 - 3;
-          curLinePoint.y1 = curLinePoint.y1 + 3;
-        }
-        let points = {
-          x1: lastskyLinePoint.x2,
-          y1: lastskyLinePoint.y2,
-          x2: curLinePoint.x1,
-          y2: curLinePoint.y1
-        };
-        component.appendSkylines(points, cellIndex);
-      }
-    }
-  },
-
-  appendSkylines(point, cellIndex) {
-    let component = this;
-    let skyLineContainer = component.get('skylineContainer');
-    let strokeDasharray =
-      point.x1 === point.x2
-        ? Math.max(point.y1, point.y2)
-        : Math.max(point.x1, point.x2);
-    skyLineContainer
-      .append('line')
-      .attr('x1', point.x1)
-      .attr('y1', point.y1)
-      .attr('x2', point.x2)
-      .attr('y2', point.y2)
-      .attr('stroke-dashoffset', strokeDasharray)
+    svg
+      .append('polyline')
+      .attr('points', polyLinePoints.toString())
       .attr('stroke-dasharray', strokeDasharray)
-      .attr('class', `sky-line sky-line-vertical-${cellIndex}`);
-    component
-      .$(`.sky-line-vertical-${cellIndex}`)
-      .insertBefore(`.sky-line-${cellIndex}`);
+      .attr('stroke-dashoffset', strokeDasharray);
   },
 
   /**
