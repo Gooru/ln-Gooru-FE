@@ -2882,7 +2882,9 @@ export default Object.assign(quizzesTranslations, {
       'signature-collections': 'Signature Collections',
       'show-global-data': 'Show Global Data',
       'show-student-data': 'Show Student Data',
-      'show-learning-map': 'Show Learning Map'
+      'show-learning-map': 'Show Learning Map',
+      note:
+        'Score 80% or more in our signature_assessment and show your mastery'
     },
     'domain-report': 'Domain Report'
   },

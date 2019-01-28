@@ -1,4 +1,7 @@
-<div class="signature-content">
+{{#if loading}}
+  {{three-bounce-spinner}}
+{{else}}
+  <div class="signature-content">
   {{#if signatureContent}}
     <div class="signature-accordion">
       <div class="signature-panel" data-toggle="collapse" data-target="#collapse-{{index}}">
@@ -50,4 +53,5 @@
     </div>
   {{/if}}
 </div>
+{{/if}}
 {{reports.pull-up.competency-meta-info  competency=competency microCompetencies=microCompetencies collectionPerformances=collectionPerformances userId=userId prequisiteCompetencies=prerequisites}}

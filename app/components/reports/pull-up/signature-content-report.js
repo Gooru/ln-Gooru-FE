@@ -16,12 +16,21 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Dependencies
+  /**
+   * @property {service} searchService
+   */
   searchService: Ember.inject.service('api-sdk/search'),
-
+  /**
+   * @property {service} taxonomyService
+   */
   taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
-
+  /**
+   * @property {service} assessmentService
+   */
   assessmentService: Ember.inject.service('api-sdk/assessment'),
-
+  /**
+   * @property {service} collectionService
+   */
   collectionService: Ember.inject.service('api-sdk/collection'),
 
   // -------------------------------------------------------------------------
@@ -32,23 +41,53 @@ export default Ember.Component.extend({
 
   signatureContent: Ember.Object.create({}),
 
+  /**
+   * @property {boolean} showSignatureAssessment
+   */
+
   showSignatureAssessment: false,
+
+  /**
+   * @property {boolean} content
+   */
 
   content: null,
 
+  /**
+   * @property {boolean} prerequisites
+   */
+
   prerequisites: null,
 
+  /**
+   * @property {boolean} microCompetencies
+   */
+
   microCompetencies: null,
+
+  loading: false,
+
+  /**
+   * @property {number} domainId
+   */
 
   domainId: Ember.computed('standardCode', function() {
     let code = this.get('standardCode');
     return getDomainId(code);
   }),
 
+  /**
+   * @property {number} subjectId
+   */
+
   subjectId: Ember.computed('standardCode', function() {
     let code = this.get('standardCode');
     return getSubjectId(code);
   }),
+
+  /**
+   * @property {number} courseId
+   */
 
   courseId: Ember.computed('standardCode', function() {
     let code = this.get('standardCode');
@@ -78,6 +117,11 @@ export default Ember.Component.extend({
     component.fetchCodes();
   },
 
+  /**
+   * @function fetchCodes
+   * Method to fetchCodes
+   */
+
   fetchCodes() {
     let component = this;
     let courseId = component.get('courseId');
@@ -91,6 +135,7 @@ export default Ember.Component.extend({
     }).then(({ competencyCodes }) => {
       let microCompetencies = this.filterMicroCompetency(competencyCodes);
       component.set('microCompetencies', microCompetencies);
+      component.set('loading', false);
     });
   },
 
@@ -128,6 +173,11 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * @function fetchContentSettings
+   * Method to fetchContentSettings
+   */
+
   fetchContentSettings(contentId) {
     let component = this;
     let collectionType = component.get('collectionType');
@@ -145,8 +195,14 @@ export default Ember.Component.extend({
       content: contentPromise
     }).then(({ content }) => {
       component.set('content', content);
+      component.set('loading', false);
     });
   },
+
+  /**
+   * @function filterMicroCompetency
+   * Method to filterMicroCompetency
+   */
 
   filterMicroCompetency(codes) {
     let regex = new RegExp(this.get('standardCode'));

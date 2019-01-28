@@ -2,6 +2,12 @@
   <div class="competency-name">
     {{competency.competencyName}}
   </div>
+  {{#if showSignatureAssessment}}
+  <div class="competency-content">
+    <div class="competency-img"></div>
+    <div class="competency-note">{{t 'report.competency-report.note'}}</div>
+    </div>
+    {{/if}}
   {{#if isShowGlobalInfo}}
     {{#if learningMapData}}
       <div class="student-data toggle-view" {{action "onToggleCompetencyInfoView"}}>{{t 'report.competency-report.show-student-data'}}</div>
