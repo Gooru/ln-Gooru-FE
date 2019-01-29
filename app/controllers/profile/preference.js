@@ -294,8 +294,12 @@ export default Ember.Controller.extend({
     this.get('categoriesDropDown', categoriesDropDown);
     this.getSubjectFrameworks(category);
     //this.changeMode(false);
+    this.scrollToEnd();
   },
 
+  scrollToEnd() {
+    $('html,body').animate({ scrollTop: document.body.scrollHeight }, 'fast');
+  },
   /**
    *
    * @param {object} category
