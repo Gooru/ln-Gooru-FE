@@ -1,0 +1,57 @@
+{{#if isLoading}}
+  {{three-bounce-spinner}}
+{{else}}
+  <div class="signature-content">
+    {{#if signatureContent}}
+      <div class="signature-accordion">
+        <div class="signature-panel" data-toggle="collapse" data-target="#collapse-{{index}}">
+          <div class="signature-header">
+            <i class="signature-icon {{collectionType}}"></i>
+            <div class="signature">
+              <div class="title ellipsis">{{signatureContent.title}}</div>
+              <span class="suggestion-icon">
+              {{gru-icon name='explore'}}
+            </span>
+            </div>
+          </div>
+          <div class="collapse" id="collapse-{{index}}">
+            <div class="signature-info">
+              <div class="properties">
+                {{#if (eq collectionType 'assessment')}}
+                  <div class="direction">
+                    {{#if content.bidirectional}}
+                      {{gru-icon name='swap_horiz'}}
+                      <div class="info bidirectional">
+                        {{t "gru-assessment-confirmation.setting-forward-backward"}}
+                      </div>
+                    {{else}}
+                      {{gru-icon name='trending_flat'}}
+                      <div class="info not-bidirectional">
+                        {{t "gru-assessment-confirmation.setting-forward"}}
+                      </div>
+                    {{/if}}
+                  </div>
+                  <div class="attempts">
+                    {{#if unlimited}}
+                      {{gru-icon name='cached'}}
+                      <div class="info unlimited">{{t "gru-assessment-confirmation.unlimited-attempts-left"}}</div>
+                    {{else}}
+                      <div class="attempt">{{content.attempts}}</div>
+                      <div class="info">{{t "gru-assessment-confirmation.attempts-left.other" count=content.attempts}}</div>
+                    {{/if}}
+                  </div>
+                {{/if}}
+              </div>
+              {{#link-to 'player' signatureContent.id (query-params type=collectionType role='student' source=source)}}
+                <div class="action">
+                  {{gru-icon name='play_arrow'}}
+                </div>
+              {{/link-to}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+  {{reports.pull-up.competency-meta-info  competency=competency microCompetencies=microCompetencies collectionPerformances=collectionPerformances userId=userId prequisiteCompetencies=prerequisites}}
+{{/if}}

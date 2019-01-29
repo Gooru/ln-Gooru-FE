@@ -423,3 +423,9 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/teacher/offline-class/oca-month-report-pull-up";
 @import "components/teacher/offline-class/oca-students-summary-report-pull-up";
 @import "components/teacher/offline-class/oca-student-activity-report-pull-up";
+
+//Signature Content
+@import "components/reports/pull-up/_signature-content-report";
+@import "components/reports/pull-up/_competency-meta-info";
+@import "components/reports/pull-up/_competency-meta-data";
+@import "components/reports/pull-up/_student-journey";
