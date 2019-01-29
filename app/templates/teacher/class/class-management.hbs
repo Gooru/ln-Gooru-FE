@@ -400,7 +400,7 @@
                               'teacher-landing.class.class-settings.class-settings-sec.framework'}}</div>
                   <div class='gradelevel-info'></div>
                   <div class='field-drop-down'>
-                    {{#if tempClass.preference.framework}}
+                    {{#if tempClass.preference.framework }}
                       <span class='subject-label'>
                         {{#if gradeSubjetFWKDv}}
                           {{get-value 'source' source=subjectFWKDD.frameworks searchProp='code'
@@ -409,24 +409,26 @@
                         {{/if}}
                       </span>
                     {{else}}
-                      <div class="dropdown">
-                        <span class="drop-down-span ellipsis"></span>
-                        <button class="btn btn-default dropdown-toggle ellipsis" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                          {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                          <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                          {{#if gradeSubjetFWKDv}}
-                            {{log subjectFWKDD}} {{log subjectFWKDD.frameworks}}
-                            {{#each subjectFWKDD.frameworks as |fwk|}}
-                              {{#if fwk}}
-                                <li> <a data-item={{fwk}} {{ action 'updateFwkSettings'  fwk 'framework'}}>{{fwk.title}}
-                                  </a> </li>
-                              {{/if}}
-                            {{/each}}
-                          {{/if}}
-                        </ul>
-                      </div>
+                      {{#if ( not (or class.gradeLowerBound class.gradeUpperBound or class.gradeCurrent )) }}
+                        <div class="dropdown">
+                          <span class="drop-down-span ellipsis"></span>
+                          <button class="btn btn-default dropdown-toggle ellipsis" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu">
+                            {{#if gradeSubjetFWKDv}}
+                              {{log subjectFWKDD}} {{log subjectFWKDD.frameworks}}
+                              {{#each subjectFWKDD.frameworks as |fwk|}}
+                                {{#if fwk}}
+                                  <li> <a data-item={{fwk}} {{ action 'updateFwkSettings'  fwk 'framework'}}>{{fwk.title}}
+                                    </a> </li>
+                                {{/if}}
+                              {{/each}}
+                            {{/if}}
+                          </ul>
+                        </div>
+                      {{/if}}
                     {{/if}}
                   </div>
                 </div>
