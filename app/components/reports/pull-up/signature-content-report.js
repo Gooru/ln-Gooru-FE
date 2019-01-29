@@ -180,7 +180,6 @@ export default Ember.Component.extend({
    * @function checkPrerequisiteCompetencyStatus
    * Method to checkPrerequisiteCompetencyStatus
    */
-
   checkPrerequisiteCompetencyStatus(prerequisites) {
     let component = this;
     let domainCompetencyList = component.get(

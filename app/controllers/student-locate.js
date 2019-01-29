@@ -130,7 +130,9 @@ export default Ember.Controller.extend({
 
     showPullUp() {
       let controller = this;
-      controller.set('isShowProficiencyPullup', true);
+      let userId = this.get('session.userId');
+      controller.transitionToRoute('student-learner-proficiency', userId);
+      // controller.set('isShowProficiencyPullup', true);
     },
 
     onClosePullUp() {
