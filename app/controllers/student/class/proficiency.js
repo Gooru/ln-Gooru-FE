@@ -1,5 +1,9 @@
 import Ember from 'ember';
-import { ROLES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  ROLES,
+  PLAYER_EVENT_SOURCE,
+  CLASS_SKYLINE_INITIAL_DESTINATION
+} from 'gooru-web/config/config';
 import {
   createStudyPlayerQueryParams,
   hasSuggestions
@@ -8,6 +12,11 @@ import {
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Dependencies
+
+  /**
+   * @type {SkylineInitialService} Service to retrieve skyline initial service
+   */
+  skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
 
   /**
    * @property {NavigateMapService}
@@ -63,32 +72,93 @@ export default Ember.Controller.extend({
   /**
    * @property {UUID} classId
    */
-  classId: Ember.computed('class', function() {
-    let controller = this;
-    let classData = controller.get('class');
-    return classData.get('id');
-  }),
+  classId: Ember.computed.alias('class.id'),
 
   /**
    * @property {UUID} courseId
    */
-  courseId: Ember.computed('class', function() {
-    let controller = this;
-    let classData = controller.get('class');
-    return classData.get('courseId');
-  }),
+  courseId: Ember.computed.alias('class.courseId'),
 
   /**
    * @property {String} subjectCode
    */
-  subjectCode: Ember.computed('class', function() {
-    let aClass = this.get('class');
-    let subject = aClass.get('preference.subject');
-    return subject;
-  }),
+  subjectCode: Ember.computed.alias('class.preference.subject'),
+
+  /**
+   * Property used to identify destination.
+   * @type {String}
+   */
+  destination: Ember.computed.alias('skylineInitialState.destination'),
+
+  /**
+   * Property used to identify the status of LP computation
+   * @type {Boolean}
+   */
+  isLPComputeInprogress: Ember.computed.equal(
+    'destination',
+    CLASS_SKYLINE_INITIAL_DESTINATION.ILPInProgress
+  ),
+
+  /**
+   * Maintains the status check interval value
+   * @return {Number}
+   */
+  pollingStatusCheckInterval: 5000,
+
+  /**
+   * Maintains state of chart needs to redraw or not.
+   * @type {Boolean}
+   */
+  reDrawChart: false,
 
   // -------------------------------------------------------------------------
   // Methods
+
+  initialize() {
+    let controller = this;
+    controller._super(...arguments);
+    Ember.run.scheduleOnce('afterRender', controller, function() {
+      controller.checkStateOfSkylineInitial();
+    });
+  },
+
+  /**
+   * Method used to check the status of  skyline initial.
+   */
+  checkStateOfSkylineInitial() {
+    let controller = this;
+    let isLPComputeInprogress = controller.get('isLPComputeInprogress');
+    if (isLPComputeInprogress) {
+      let pollingStatusCheckInterval = controller.get(
+        'pollingStatusCheckInterval'
+      );
+      Ember.run.later(function() {
+        controller.loadSkylineIntialState();
+      }, pollingStatusCheckInterval);
+    }
+  },
+
+  /**
+   * Method used to load the skyline intial state data
+   */
+  loadSkylineIntialState() {
+    let controller = this;
+    let classId = controller.get('classId');
+    controller
+      .get('skylineInitialService')
+      .fetchState(classId)
+      .then(skylineInitialState => {
+        if (!controller.get('isDestroyed')) {
+          controller.set('skylineInitialState', skylineInitialState);
+          let isLPComputeInprogress = controller.get('isLPComputeInprogress');
+          if (isLPComputeInprogress) {
+            controller.checkStateOfSkylineInitial();
+          } else {
+            controller.set('reDrawChart', true);
+          }
+        }
+      });
+  },
 
   /**
    * @function startPlaying

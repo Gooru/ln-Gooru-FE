@@ -19,12 +19,10 @@ export default Ember.Object.extend({
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/state`;
     const options = {
-      type: 'GET',
+      type: 'POST',
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
-      data: {
-        classId
-      }
+      data: JSON.stringify({ classId })
     };
     return Ember.RSVP.hashSettled({
       state: Ember.$.ajax(url, options)

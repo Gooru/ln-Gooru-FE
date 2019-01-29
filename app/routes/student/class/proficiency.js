@@ -11,6 +11,11 @@ export default Ember.Route.extend({
    */
   taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
+  /**
+   * @type {SkylineInitialService} Service to retrieve skyline initial service
+   */
+  skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -37,6 +42,7 @@ export default Ember.Route.extend({
     const route = this;
     const currentClass = route.modelFor('student.class').class;
     const course = route.modelFor('student.class').course;
+    const classId = currentClass.get('id');
     route.set('course', course);
     const subjectCode = route.get('subjectCode');
 
@@ -48,7 +54,10 @@ export default Ember.Route.extend({
       course: course,
       taxonomyGrades: taxonomyService.fetchGradesBySubject(filters),
       subject: route.get('taxonomyService').fetchSubject(subjectCode),
-      class: currentClass
+      class: currentClass,
+      skylineInitialState: route
+        .get('skylineInitialService')
+        .fetchState(classId)
     });
   },
 
@@ -61,6 +70,7 @@ export default Ember.Route.extend({
     controller.set('class', model.class);
     controller.set('course', model.course);
     controller.set('subject', model.subject);
+    controller.set('skylineInitialState', model.skylineInitialState);
     let taxonomyGrades = model.taxonomyGrades;
     if (taxonomyGrades) {
       controller.set(
@@ -68,5 +78,6 @@ export default Ember.Route.extend({
         taxonomyGrades.sortBy('sequence').reverse()
       );
     }
+    controller.initialize();
   }
 });

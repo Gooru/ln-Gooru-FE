@@ -113,7 +113,8 @@ export default Ember.Route.extend({
       ) {
         return route.transitionTo('student.class.setup-in-complete');
       } else if (
-        destination === CLASS_SKYLINE_INITIAL_DESTINATION.showDirections
+        destination === CLASS_SKYLINE_INITIAL_DESTINATION.showDirections ||
+        destination === CLASS_SKYLINE_INITIAL_DESTINATION.ILPInProgress
       ) {
         return route.transitionTo('student.class.proficiency');
       } else if (

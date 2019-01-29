@@ -39,6 +39,7 @@
       .proficiency-info {
         transition: visibility 1s linear, opacity 1s linear;
         opacity: 0;
+
         &.active {
           visibility: visible;
           opacity: 1;
@@ -383,6 +384,23 @@
     position: absolute;
     left: 50%;
     top: 50%;
+  }
+
+  .lp-compute-inprogress {
+    p:nth-child(1) {
+      padding-top: 20px;
+      font-size: 20px;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    p:nth-child(2),
+    p:nth-child(3) {
+      padding-top: 20px;
+      font-size: 15px;
+      line-height: 1.2;
+      margin: 0;
+    }
   }
 }
 

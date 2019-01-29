@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import d3 from 'd3';
+import { CLASS_SKYLINE_INITIAL_DESTINATION } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -41,6 +42,17 @@ export default Ember.Component.extend({
   },
 
   // -------------------------------------------------------------------------
+  // Observers
+
+  doReDraw: Ember.observer('reDrawChart', function() {
+    let component = this;
+    let reDrawChart = component.get('reDrawChart');
+    if (reDrawChart) {
+      component.loadDataAndDrawChart();
+    }
+  }),
+
+  // -------------------------------------------------------------------------
   // Actions
   actions: {},
 
@@ -50,15 +62,7 @@ export default Ember.Component.extend({
   /**
    * @property {UUID} userId
    */
-  userId: Ember.computed(function() {
-    let component = this;
-    return component.get('session.userId');
-  }),
-
-  /**
-   * @property {String} route0SuggestedCompetency
-   */
-  route0SuggestedCompetency: '#ef8f2f',
+  userId: Ember.computed.alias('session.userId'),
 
   /**
    * Width of the cell
@@ -112,6 +116,15 @@ export default Ember.Component.extend({
    * @property {JSON} competencyStatus
    */
   competencyStatus: null,
+
+  /**
+   * Property used to identify whether to show directions or not.
+   * @type {Boolean}
+   */
+  showDirections: Ember.computed.equal(
+    'skylineInitialState.destination',
+    CLASS_SKYLINE_INITIAL_DESTINATION.showDirections
+  ),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -379,7 +392,10 @@ export default Ember.Component.extend({
       component.set('domainBoundaries', domainBoundaries);
       component.set('domainLevelSummary', domainLevelSummary);
       component.loadChartData();
-      component.sendAction('onChartDrawComplete');
+      let showDirections = component.get('showDirections');
+      if (showDirections) {
+        component.sendAction('onChartDrawComplete');
+      }
     });
   },
 

@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
+import PrivateRouteMixin from 'gooru-web/mixins/private-route-mixin';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(PrivateRouteMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
 

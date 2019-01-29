@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { CLASS_SKYLINE_INITIAL_DESTINATION } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -9,6 +10,7 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Dependencies
+
   route0Service: Ember.inject.service('api-sdk/route0'),
 
   /**
@@ -111,20 +113,12 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isRoute0
    */
-  isRoute0: Ember.computed('type', function() {
-    let component = this;
-    let type = component.get('type');
-    return type === 'route';
-  }),
+  isRoute0: Ember.computed.equal('type', 'route'),
 
   /**
    * @property {Boolean} isProficiency
    */
-  isProficiency: Ember.computed('type', function() {
-    let component = this;
-    let type = component.get('type');
-    return type === 'proficiency';
-  }),
+  isProficiency: Ember.computed.equal('type', 'proficiency'),
 
   /**
    * @property {Boolean} isRoute0Pending
@@ -148,6 +142,15 @@ export default Ember.Component.extend({
     let classGrade = this.get('classGrade');
     return taxonomyGrades.findBy('id', classGrade);
   }),
+
+  /**
+   * Property used to identify whether to show directions or not.
+   * @type {Boolean}
+   */
+  showDirections: Ember.computed.equal(
+    'skylineInitialState.destination',
+    CLASS_SKYLINE_INITIAL_DESTINATION.showDirections
+  ),
 
   // -------------------------------------------------------------------------
   // Methods

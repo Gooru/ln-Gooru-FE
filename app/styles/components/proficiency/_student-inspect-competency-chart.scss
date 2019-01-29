@@ -12,13 +12,6 @@
   }
 
   .chart-container {
-    opacity: 0;
-    transition: visibility 0.3s linear, opacity 0.3s linear;
-
-    &.active {
-      visibility: visible;
-      opacity: 1;
-    }
     .graded-chart-container {
       display: grid;
       grid-template-columns: 100px auto;
@@ -62,6 +55,9 @@
 
           &.status-0 {
             fill: #e7e8e9;
+          }
+          &.route0-suggest-competency {
+            fill: #ef8f2f;
           }
 
           &.status-1 {
