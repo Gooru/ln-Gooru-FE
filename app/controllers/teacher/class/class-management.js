@@ -519,9 +519,11 @@ export default Ember.Controller.extend(ModalMixin, {
     prepareListData: function(context, posParam) {
       const controller = this;
       let classV = controller.get('class'),
-        classLB = classV.gradeLowerBound,
-        classCurrent = classV.gradeCurrent,
+        classLBId = classV.gradeLowerBound,
+        classCurrentId = classV.gradeCurrent,
         source = controller.get('subjectTaxonomyGrades'),
+        classLB = controller.getGradeSequenceById(classLBId, source),
+        classCurrent = controller.getGradeSequenceById(classCurrentId, source),
         sourceFilteredByContext;
 
       // class filters
@@ -556,14 +558,22 @@ export default Ember.Controller.extend(ModalMixin, {
         sourceFilteredByContext = controller.filterRange(
           source,
           classLB ? 0 : null,
-          classLB ? classLB : controller.get('tempClass.gradeCurrent')
+          classLB
+            ? classLB
+            : controller.getGradeSequenceById(
+              controller.get('tempClass.gradeCurrent'),
+              source
+            )
         );
         /*  The grade_lower_bound should be less than or equal to current_grade
         The grade_lower_bound can be modified multiple times. However, it can't be made higher than previous value  */
       } else if (posParam === 'class-current') {
         sourceFilteredByContext = controller.filterRange(
           source,
-          controller.get('tempClass.gradeLowerBound'),
+          controller.getGradeSequenceById(
+            controller.get('tempClass.gradeLowerBound'),
+            source
+          ),
           classCurrent // Once set class current cant be updated so if would always be null, once called for
         );
       }
@@ -571,6 +581,7 @@ export default Ember.Controller.extend(ModalMixin, {
       controller.set('currentFilterList', sourceFilteredByContext);
       return sourceFilteredByContext;
     },
+
     updateLanguage(language) {
       const controller = this;
       const classId = this.get('class.id');
@@ -584,6 +595,9 @@ export default Ember.Controller.extend(ModalMixin, {
     }
   },
 
+  getGradeSequenceById(id, source) {
+    return id && source ? source.findBy('id', id).sequence : id;
+  },
   currentFilterList: null, //Dynamic filtered list
 
   filterRange: function(filterSource, lb, ub) {
@@ -591,19 +605,19 @@ export default Ember.Controller.extend(ModalMixin, {
     if (filterSource && lb && ub) {
       // if ub and lb , cg is between lb and ub
       filteredDest = filterSource.map(srcRow => {
-        if (srcRow && srcRow.id >= lb && srcRow.id <= ub) {
+        if (srcRow && srcRow.sequence >= lb && srcRow.sequence <= ub) {
           return srcRow;
         }
       });
     } else if (filterSource && (lb && !ub)) {
       filteredDest = filterSource.map(srcRow => {
-        if (srcRow && srcRow.id >= lb) {
+        if (srcRow && srcRow.sequence >= lb) {
           return srcRow;
         }
       });
     } else if (filterSource && (!lb && ub)) {
       filteredDest = filterSource.map(srcRow => {
-        if (srcRow && srcRow.id <= ub) {
+        if (srcRow && srcRow.sequence <= ub) {
           return srcRow;
         }
       });
