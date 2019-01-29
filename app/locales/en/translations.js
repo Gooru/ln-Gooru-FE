@@ -2884,9 +2884,29 @@ export default Object.assign(quizzesTranslations, {
       'signature-collections': 'Signature Collections',
       'show-global-data': 'Show Global Data',
       'show-student-data': 'Show Student Data',
-      'show-learning-map': 'Show Learning Map'
+      'show-learning-map': 'Show Learning Map',
+      note:
+        'Score 80% or more in our signature assessment and show your mastery'
     },
     'domain-report': 'Domain Report'
+  },
+
+  'competency-meta-data': {
+    title: 'ALT-CONCEPTS',
+    heading: {
+      micro: 'MICRO COMPETENCIES',
+      prequisite: 'PREQUISITE COMPETENCIES'
+    },
+    nodata: {
+      micro: 'There are no micro-competencies defined for this competency',
+      prequisite:
+        'There are no prerequisite-competencies defined for this competency',
+      competency: 'There are no alt-concepts defined for this competency'
+    }
+  },
+  'student-journey': {
+    heading: 'YOUR JOURNEY',
+    nodata: 'You are yet to start your journey for this competency'
   },
 
   'self-report': {

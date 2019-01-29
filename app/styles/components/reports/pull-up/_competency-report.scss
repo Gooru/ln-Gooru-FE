@@ -90,15 +90,16 @@
       width: 760px;
       overflow-x: hidden;
       overflow-y: auto;
-      padding: 8px 10px 15px;
+      width: 100%;
     }
   }
-
   @media screen and (max-width: $screen-md) {
     width: 100vw;
+
     .competency-report {
       .body {
         width: 100vw;
+
         .collection-accordion {
           .collection-content {
             .collection-header {
