@@ -29,12 +29,12 @@ export default Ember.Service.extend({
    * Get state of skyline initialization
    * @returns {Promise.<[]>}
    */
-  fetchState: function(classId, courseId, userId) {
+  fetchState: function(classId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('skylineAdapter')
-        .fetchState(classId, courseId, userId)
+        .fetchState(classId)
         .then(function(response) {
           resolve(
             service.get('skylineSerializer').normalizeFetchState(response)

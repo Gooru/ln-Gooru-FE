@@ -14,18 +14,16 @@ export default Ember.Object.extend({
    * Get state of skyline initialization
    * @returns {Promise.<[]>}
    */
-  fetchState(classId, courseId, userId) {
+  fetchState(classId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v2/state`;
+    const url = `${namespace}/v1/state`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
       data: {
-        classId,
-        courseId,
-        userId
+        classId
       }
     };
     return Ember.RSVP.hashSettled({

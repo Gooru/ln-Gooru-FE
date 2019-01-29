@@ -371,3 +371,11 @@ export const NOTIFICATION_SETTINGS = {
 export const PLAYER_WINDOW_NAME = 'rgo_player';
 
 export const DEFAULT_K12_SUBJECT = 'K12.MA';
+
+export const CLASS_SKYLINE_INITIAL_DESTINATION = {
+  courseMap: 'course-map',
+  diagnosticPlay: 'diagnostic-play',
+  showDirections: 'show-directions',
+  ILPInProgress: 'ilp-in-progress',
+  classSetupInComplete: 'class-setup-incomplete'
+};

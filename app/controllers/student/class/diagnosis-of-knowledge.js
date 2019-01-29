@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
   actions: {
     start() {
       let assessment = this.get('assessment');
-      let courseId = this.get('course.id');
+      let courseId = this.get('class.courseId');
       let classId = this.get('class.id');
       this.transitionToRoute('player', assessment.get('id'), {
         queryParams: {

@@ -17,7 +17,7 @@
             </a>
         </div>
       {{/unless}}
-      <div class="course-map study-player tab {{unless isClassFullySetup 'class-not-setup'}} {{if isPremiumCourse 'premium-course'}}">
+      <div class="course-map study-player tab {{destination}} {{if isPremiumCourse 'premium-course'}}">
         {{#if (eq selectedMenuItem 'course-map')}}
           <a {{action 'selectItem' 'study-player'}} role="tab" data-toggle="tooltip" title="{{t 'student-landing.study-player'}}" class="{{unless isCourseMapped 'no-course'}}">
             {{gru-icon name='play_arrow'}}
@@ -88,7 +88,7 @@
             </div>
           {{/unless}}
           <div class="action">
-            <div class="course-map study-player tab {{unless isClassFullySetup 'class-not-setup'}} {{if isPremiumCourse 'premium-course'}}">
+            <div class="course-map study-player tab {{destination}} {{if isPremiumCourse 'premium-course'}}">
               {{#if (eq selectedMenuItem 'course-map')}}
                 <a {{action 'selectItem' 'study-player'}} class="{{unless isCourseMapped 'no-course'}}">
                 {{gru-icon name='play_arrow'}}

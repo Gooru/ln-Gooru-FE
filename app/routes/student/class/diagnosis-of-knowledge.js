@@ -44,11 +44,13 @@ export default Ember.Route.extend({
     const course = route.modelFor('student.class').course;
     route.set('course', course);
     const subjectCode = route.get('subjectCode');
-    const assessmentId = '8a7921e5-b7c3-4c13-95e3-4f96f9f731ee';
+    let skylineInitialState = route.modelFor('student.class')
+      .skylineInitialState;
+    let diagnosticId = skylineInitialState.get('context.diagnosticId');
     return Ember.RSVP.hash({
       course: course,
       subject: route.get('taxonomyService').fetchSubject(subjectCode),
-      assessment: route.get('assessmentService').readAssessment(assessmentId),
+      assessment: route.get('assessmentService').readAssessment(diagnosticId),
       class: currentClass
     });
   },

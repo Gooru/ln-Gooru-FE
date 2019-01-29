@@ -47,6 +47,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   i18n: Ember.inject.service(),
 
+  /**
+   * @type {SkylineInitialService} Service to retrieve skyline initial service
+   */
+  skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -76,8 +81,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           route.transitionTo('student.class.class-activities');
         } else if (item === 'study-player') {
           route.studyPlayer(controller.get('classmodel').currentLocation);
-        } else if (item === 'profile') {
-          route.transitionTo('student.class.profile');
         }
       }
     }
@@ -175,9 +178,13 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   launchStudyPlayer(queryParams) {
     const route = this;
     if (queryParams.hasSuggestion) {
-      route.transitionTo('reports.study-student-collection', { queryParams });
+      route.transitionTo('reports.study-student-collection', {
+        queryParams
+      });
     } else {
-      route.transitionTo('study-player', queryParams.courseId, { queryParams });
+      route.transitionTo('study-player', queryParams.courseId, {
+        queryParams
+      });
     }
   },
 
@@ -198,7 +205,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       let classCourseId = null;
       if (classData.courseId) {
         classCourseId = Ember.A([
-          { classId: params.classId, courseId: classData.courseId }
+          {
+            classId: params.classId,
+            courseId: classData.courseId
+          }
         ]);
       }
       const performanceSummaryPromise = classCourseId
@@ -224,12 +234,20 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         const courseId = aClass.get('courseId');
         let visibilityPromise = Ember.RSVP.resolve([]);
         let coursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
-
+        let skylineInitialStatePromise = Ember.RSVP.resolve(
+          Ember.Object.create({})
+        );
+        let isPremiumCourse = route.findClassIsPermium(aClass);
         if (courseId) {
           visibilityPromise = route
             .get('classService')
             .readClassContentVisibility(classId);
           coursePromise = route.get('courseService').fetchById(courseId);
+          if (isPremiumCourse) {
+            skylineInitialStatePromise = route
+              .get('skylineInitialService')
+              .fetchState(classId);
+          }
         }
 
         //Pass courseId as query param for student current location
@@ -243,11 +261,13 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         return Ember.RSVP.hash({
           contentVisibility: visibilityPromise,
           course: coursePromise,
+          skylineInitialState: skylineInitialStatePromise,
           currentLocation: userLocationPromise
         }).then(function(hash) {
           const contentVisibility = hash.contentVisibility;
           const course = hash.course;
           var currentLocation = hash.currentLocation;
+          const skylineInitialState = hash.skylineInitialState;
           aClass.set('owner', members.get('owner'));
           aClass.set('collaborators', members.get('collaborators'));
           aClass.set('members', members.get('members'));
@@ -259,8 +279,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             units: course.get('children') || [],
             contentVisibility: contentVisibility,
             currentLocation: currentLocation,
-            isClassFullySetup: route.findClassIsFullySetup(aClass),
-            isPremiumCourse: route.findClassIsPermium(aClass)
+            skylineInitialState: skylineInitialState,
+            isPremiumCourse: isPremiumCourse
           });
         });
       });
@@ -277,40 +297,13 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('course', model.course);
     controller.set('units', model.units);
     controller.set('contentVisibility', model.contentVisibility);
-    controller.set('isClassFullySetup', model.isClassFullySetup);
+    controller.set('skylineInitialState', model.skylineInitialState);
     controller.set('isPremiumCourse', model.isPremiumCourse);
     controller.set('classmodel', model);
   },
 
   resetController(controller) {
     controller.set('isNotAbleToStartPlayer', false);
-  },
-
-  /**
-   * Method used to identify whether class is fully setup or not.
-   * @param  {Object} aclass
-   * @param  {Object} course
-   * @return {Boolean}
-   */
-  findClassIsFullySetup(aClass) {
-    let grade = aClass.get('gradeCurrent');
-    let setting = aClass.get('setting');
-    let preference = aClass.get('preference');
-    let framework = preference ? preference.get('framework') : null;
-    let subject = preference ? preference.get('subject') : null;
-    let isPremiumCourse = setting ? setting['course.premium'] : false;
-    let route0Applicable = aClass.get('route0Applicable');
-    let gradeLowerBound = aClass.get('gradeLowerBound');
-    let courseId = aClass.get('courseId');
-    return (
-      courseId != null &&
-      isPremiumCourse &&
-      grade &&
-      framework &&
-      subject &&
-      route0Applicable != null &&
-      gradeLowerBound != null
-    );
   },
 
   /**

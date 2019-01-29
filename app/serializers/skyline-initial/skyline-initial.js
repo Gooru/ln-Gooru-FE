@@ -11,6 +11,6 @@ export default Ember.Object.extend({
    * @return {Object}
    */
   normalizeFetchState: function(response) {
-    return Ember.Object.create(response.state);
+    return Ember.Object.create(response);
   }
 });
