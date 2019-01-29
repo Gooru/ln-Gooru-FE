@@ -78,6 +78,7 @@ export default Ember.Controller.extend({
     },
     markSelectedSubject(subject, category) {
       this.markSelectedSubject(subject, category);
+      this.updateMarkedSelectionsAsAdded('dummy', null, category); // Removing + sign
     },
     markSelectedFrameworks: function(fwk, subject, category) {
       this.markSelectedFrameworks(fwk, subject, category);
