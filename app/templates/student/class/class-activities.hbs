@@ -56,7 +56,11 @@
 </div>
 
 {{#if showStudentDcaReport}}
-  {{reports.pull-up.dca-student-collection-report showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
+{{reports.pull-up.dca-student-collection-report showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
+{{/if}}
+
+{{#if isShowStudentExternalCollectionReport}}
+{{reports.pull-up.dca-student-external-collection-report showPullUp=isShowStudentExternalCollectionReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalAssessmentReport}}
