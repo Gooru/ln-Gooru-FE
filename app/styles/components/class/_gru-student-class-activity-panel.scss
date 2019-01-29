@@ -11,9 +11,6 @@
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
 
     &.today {
-      &.offline-activity {
-        pointer-events: none;
-      }
       &:hover {
         position: relative;
       }
@@ -24,6 +21,16 @@
         .ca-play-btn {
           i {
             color: #4b9741;
+          }
+        }
+      }
+      &.offline-activity {
+        .ca-play-container {
+          pointer-events: none;
+          .ca-play-btn {
+            i {
+              color: #535e67;
+            }
           }
         }
       }
