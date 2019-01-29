@@ -615,13 +615,16 @@ export default Object.assign(quizzesTranslations, {
     rubrics: 'रुब्रिक्स',
     'rubric-title': 'रूब्रिक शीर्षक',
     save: 'सेव्ह करा',
-    'de-select': 'De Select',
-    'select-all': 'Select All',
-    'no-students': 'No Students',
+    'de-select': 'निवडलेले खोडा',
+    'select-all': 'सर्व निवडा',
+    none: 'काहीही नाही',
+    'no-students': 'काहीही नाही',
     'add-data': 'माहिती भरा',
+    'update-data': 'माहिती Update करा',
+    all: 'सर्व',
     everyone: 'सर्व विद्यार्थी',
-    'unscheduled-items': 'Unscheduled Items',
-    'add-to-unschedule': 'Add to unscheduled list for',
+    'unscheduled-items': 'अनियोजित',
+    'add-to-unschedule': 'अनियोजित उपक्रमांच्या यादीत टाका',
     'save-next': 'सेव्ह आणि पुढे',
     'save-submit': 'सर्व से्व्ह आणि सबमिट करा',
     'save-finish': 'सेव्ह आणि समाप्त',
@@ -1257,6 +1260,9 @@ export default Object.assign(quizzesTranslations, {
         'student-id': 'विद्यार्थी ओळखपत्र',
         teachers: 'शिक्षक',
         'view-report': 'अहवाल पहा',
+        'course-null': 'The classroom has no course assigned yet.',
+        'course-subject-null':
+          'वर्गासाठी निवडलेला कोर्स योग्य विषयाशी जोडला गेला नाही.',
         'students-null':
           'त्यांना आपल्या वर्गात प्रवेश करण्यासाठी वर्ग कोड वापरा.'
       },
@@ -1282,6 +1288,12 @@ export default Object.assign(quizzesTranslations, {
           'या वर्गामध्ये सलंग्न अभ्यासक्रम किंवा विद्यार्थी नाहीत. जेव्हा वर्गात अभ्यासक्रम तसेच त्यातील विद्यार्थी भरले जातील तेव्हा वर्गाचा क्षमता अहवाल येथे दाखवला जाईल.'
       },
       'class-activities': 'दैनिक वर्ग कृती',
+      'offline-class-report': {
+        'class-report': 'वर्ग अहवाल',
+        'activity-report': 'कृती अहवाल',
+        'conducted-on': 'चालू',
+        'not-started': 'सुरु केली नाही'
+      },
       'back-to-class-activities': 'परत दैनंदिन कामकाजातील',
       'class-activities-tab': {
         today: 'आज:',
@@ -1303,7 +1315,11 @@ export default Object.assign(quizzesTranslations, {
         'assessment-score': 'मूल्यमापनाचे गुण',
         'assessment-max-score': 'मूल्यमापनाचे जास्तीत जास्त गुण',
         'enter-valid-timespent':
-          'लागलेला एकूण वैध वेळ भतास आणि मिनिटांमध्ये योग्य वेळ भरा'
+          'लागलेला एकूण वैध वेळ भतास आणि मिनिटांमध्ये योग्य वेळ भरा',
+        'create-activity': 'उपक्रम तयार करा',
+        'schedule-activity': 'नियोजित उपक्रम',
+        'add-subject-framework':
+          'कृपया वर्ग सेटिंग्जमध्ये विषय आणि अभ्यासक्रम आराखडा निवडा'
       },
       'click-to-copy': 'वर्ग कोड कॉपी करण्यासाठी क्लिक करा',
       'course-map': 'पाठ्यक्रम नकाशा',
@@ -1954,11 +1970,19 @@ export default Object.assign(quizzesTranslations, {
     preference: {
       'language-preference': 'भाषेचा प्राधान्य क्रम',
       'choose-language': 'भाषा निवडा',
+      'choose-sec-language': 'निवडा',
       'choose-preferred-language': 'प्रोफाईलसाठी भाषा निवडा',
+      'choose-preferred-other-languages': 'इतर भाषा निवडा',
       language: 'भाषा',
       'select-category-label': 'Add करण्यासाठी वर्ग निवडा',
       'choose-category': 'वर्ग निवडा',
-      'no-data': 'माहिती उपलब्ध नाही'
+      'no-data': 'माहिती उपलब्ध नाही',
+      'category-preference': 'श्रेणीनुसार प्राधन्यक्रम',
+      'choose-subject': 'विषय निवडा',
+      'choose-fwk': 'अभ्यासक्रम आराखडा निवडा',
+      'add-subject': 'विषय जोडा',
+      'add-sec-language': 'प्राधान्यानुसार इतर भाषा add करा',
+      'other-preferred-languages': 'प्राधान्यानुसार इतर भाषा'
     }
   },
   'gru-data-picker': {

@@ -1,0 +1,73 @@
+<div class="list-view-container">
+  <div class="table-fixed-left">
+    <table>
+      <tbody>
+        <tr>
+          <th class="tabular-header on-scroll-fixed">
+            <div class="header-filters">
+              <div class="name-filter">
+                <span class="name-header">{{t 'common.name'}}</span>
+                <span class="first-header {{if sortByFirstnameEnabled 'active'}}" {{action 'sortByFirstName'}}>
+                  <span>{{t 'common.first'}}</span>
+                {{#if sortByFirstnameEnabled}}
+                  {{gru-icon name="keyboard_arrow_up"}}
+                {{else}}
+                  {{gru-icon name="keyboard_arrow_down"}}
+                {{/if}}
+                </span>
+                <span class="last-header {{if sortByLastnameEnabled 'active'}}" {{action 'sortByLastName'}}>
+                  <span>{{t 'common.last'}}</span>
+                {{#if sortByLastnameEnabled}}
+                  {{gru-icon name="keyboard_arrow_up"}}
+                {{else}}
+                  {{gru-icon name="keyboard_arrow_down"}}
+                {{/if}}
+                </span>
+              </div>
+              <div class="timeSpent {{if sortByTimeSpentEnabled 'active'}}" {{action 'sortByTimeSpent'}}>
+                <span>{{t 'common.timeSpent'}}</span>
+                {{#if sortByTimeSpentEnabled}}
+                  {{gru-icon name="keyboard_arrow_up"}}
+                {{else}}
+                  {{gru-icon name="keyboard_arrow_down"}}
+                {{/if}}
+              </div>
+            </div>
+          </th>
+        </tr>
+        {{#each studentReportData as |student|}}
+          <tr>
+            <th>
+              <div class="user-profile-summary">
+                <div class="user-profile-details {{unless student.hasStarted 'not-started'}}" {{action 'studentReport' student}}>
+                  <div class="user-profile-img">
+                    <img src="{{student.avatarUrl}}" />
+                  </div>
+                  <div class="username">
+                    <span>{{student.firstName}}</span>
+                    <span>{{student.lastName}}</span>
+                  </div>
+                </div>
+                <div class="timeSpent-details">
+                  {{#if student.hasStarted}}
+                    <span style= {{safe-html (concat "color:" (grade-color student.timeSpent))}}>{{format-time student.timeSpent}}</span>
+                  {{else}}
+                    <span>--</span>
+                  {{/if}}
+                </div>
+              </div>
+            </th>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div class="external-collection-link">
+    <div class="note">{{t 'report.external-collection-report.note'}}</div>
+    {{#if collection.url}}
+    <div>{{t 'report.external-collection-report.reference'}}
+      <a class="link" target="_blank" href="{{collection.url}}">here</a>
+        </div>
+      {{/if}}
+  </div>
+</div>

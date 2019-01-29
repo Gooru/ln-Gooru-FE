@@ -152,7 +152,6 @@ export default Ember.Component.extend({
       component.set('isLoading', false);
     });
   },
-
   /**
    * @function resetActivityContentData
    * Method to reset activity content data to default
@@ -216,5 +215,10 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isStudent
    */
-  isStudent: false
+  isStudent: false,
+
+  showSignatureAssessment: Ember.computed('competency', function() {
+    let component = this;
+    return component.get('competency.showSignatureAssessment');
+  })
 });

@@ -577,7 +577,10 @@ export default Ember.Controller.extend(ModalMixin, {
       controller
         .get('classService')
         .updateLanguage(classId, language.id)
-        .then(() => controller.tempClass.set('primaryLanguage', language.id));
+        .then(() => {
+          controller.tempClass.set('primaryLanguage', language.id);
+          controller.set('class.primaryLanguage', language.id);
+        });
     }
   },
 
@@ -755,22 +758,49 @@ export default Ember.Controller.extend(ModalMixin, {
   subjectTaxonomyGrades: null,
 
   /**
+   * Changes to the frameworks and updates the grades
+   */
+  _subjectTaxonomyGrades: Ember.observer(
+    'tempClass.preference.framework',
+    function() {
+      const controller = this;
+      controller.fetchTaxonomyGrades();
+    }
+  ),
+
+  /**
    * @function fetchTaxonomyGrades
    * Method to fetch taxonomy grades
    */
-  fetchTaxonomyGrades() {
-    let component = this;
+  fetchTaxonomyGrades(isInit) {
+    let controller = this;
     if (this.get('course.id') && this.get('subject')) {
-      let taxonomyService = component.get('taxonomyService');
+      let taxonomyService = controller.get('taxonomyService');
       let filters = {
-        subject: component.get('sanitizedSubject')
+        subject: controller.get('sanitizedSubject')
       };
+
+      let grade_lower_bound = controller.get('class.gradeLowerBound'),
+        grade_upper_bound = controller.get('class.gradeUpperBound'),
+        grade_current = controller.get('class.gradeCurrent');
+
+      let fwkCode =
+        controller.get('tempClass.preference.framework') ||
+        controller.get('class.preference.framework');
+      if (
+        (fwkCode &&
+          !(grade_lower_bound || grade_upper_bound || grade_current)) ||
+        isInit
+      ) {
+        filters.fw_code = fwkCode;
+      }
+
       return Ember.RSVP.hash({
         taxonomyGrades: Ember.RSVP.resolve(
           taxonomyService.fetchGradesBySubject(filters)
         )
       }).then(({ taxonomyGrades }) => {
-        component.set('subjectTaxonomyGrades', taxonomyGrades);
+        controller.set('subjectTaxonomyGrades', taxonomyGrades);
       });
     }
   },
@@ -920,7 +950,7 @@ export default Ember.Controller.extend(ModalMixin, {
     let controller = this;
     controller.fetchLanguage();
     controller.fetchTaxonomySubject();
-    controller.fetchTaxonomyGrades();
+    controller.fetchTaxonomyGrades(true);
     controller.updateBondValuesToStudent();
     controller.classDisplayRules();
   },

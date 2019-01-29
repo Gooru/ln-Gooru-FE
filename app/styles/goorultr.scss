@@ -324,8 +324,11 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/reports/pull-up/collection-report-gridview";
 @import "components/reports/pull-up/question-report";
 @import "components/reports/pull-up/dca-collection-report";
+@import "components/reports/pull-up/dca-external-collection-report";
 @import "components/reports/pull-up/dca-collection-report-listview";
 @import "components/reports/pull-up/dca-collection-report-gridview";
+@import "components/reports/pull-up/dca-teacher-external-collection-report-list-view";
+@import "components/reports/pull-up/dca-teacher-external-collection-report-grid-view";
 @import "components/reports/pull-up/dca-question-report";
 @import "components/reports/pull-up/student-course-report";
 @import "components/reports/pull-up/student-unit-report";
@@ -334,6 +337,7 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/reports/pull-up/dca-teacher-external-assessment-report-list-view";
 @import "components/reports/pull-up/dca-teacher-external-assessment-report-grid-view";
 @import "components/reports/pull-up/dca-student-external-assessment-report";
+@import "components/reports/pull-up/dca-student-external-collection-report";
 @import "components/reports/pull-up/teacher-external-assessment-report-list-view";
 @import "components/reports/pull-up/teacher-external-assessment-report-grid-view";
 @import "components/reports/pull-up/open-ended-report-pull-up";
@@ -423,3 +427,9 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/teacher/offline-class/oca-month-report-pull-up";
 @import "components/teacher/offline-class/oca-students-summary-report-pull-up";
 @import "components/teacher/offline-class/oca-student-activity-report-pull-up";
+
+//Signature Content
+@import "components/reports/pull-up/_signature-content-report";
+@import "components/reports/pull-up/_competency-meta-info";
+@import "components/reports/pull-up/_competency-meta-data";
+@import "components/reports/pull-up/_student-journey";
