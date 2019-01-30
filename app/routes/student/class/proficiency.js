@@ -45,7 +45,7 @@ export default Ember.Route.extend({
   // -------------------------------------------------------------------------
   // Methods
 
-  beforeModel: function() {
+  beforeModel() {
     const route = this;
     const currentClass = route.modelFor('student.class').class;
     const classId = currentClass.get('id');
@@ -61,15 +61,11 @@ export default Ember.Route.extend({
           destination === CLASS_SKYLINE_INITIAL_DESTINATION.classSetupInComplete
         ) {
           return route.transitionTo('student.class.setup-in-complete');
-        } else if (
-          destination === CLASS_SKYLINE_INITIAL_DESTINATION.diagnosticPlay
-        ) {
-          return route.transitionTo('student.class.diagnosis-of-knowledge');
         }
       });
   },
 
-  model: function() {
+  model() {
     const route = this;
     const currentClass = route.modelFor('student.class').class;
     const course = route.modelFor('student.class').course;
@@ -93,7 +89,7 @@ export default Ember.Route.extend({
    * @param controller
    * @param model
    */
-  setupController: function(controller, model) {
+  setupController(controller, model) {
     controller.set('class', model.class);
     controller.set('course', model.course);
     controller.set('subject', model.subject);

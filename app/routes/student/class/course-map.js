@@ -132,7 +132,6 @@ export default Ember.Route.extend({
     const units = route.modelFor('student.class').units;
     const userId = route.get('session.userId');
     const isPremiumCourse = route.modelFor('student.class').isPremiumCourse;
-    const isClassFullySetup = route.modelFor('student.class').isClassFullySetup;
     const classMembers = currentClass.get('members');
     const courseId = course.get('id');
     if (!courseId) {
@@ -180,8 +179,7 @@ export default Ember.Route.extend({
       currentClass: currentClass,
       classMembers: classMembers,
       route0: route0Promise,
-      isPremiumCourse: isPremiumCourse,
-      isClassFullySetup: isClassFullySetup
+      isPremiumCourse: isPremiumCourse
     });
   },
   /**
@@ -205,7 +203,6 @@ export default Ember.Route.extend({
     controller.set('classMembers', model.classMembers);
     controller.set('route0', model.route0);
     controller.get('studentClassController').selectMenuItem('course-map');
-    controller.set('isClassFullySetup', model.isClassFullySetup);
     controller.set('isPremiumCourse', model.isPremiumCourse);
     controller.init();
   },

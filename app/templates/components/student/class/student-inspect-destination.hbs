@@ -124,9 +124,9 @@
     </div>
   {{else}}
     <div class="lp-compute-inprogress">
-      <span>Please wait.</span>
+      <span>{{t 'common.please-wait'}}.</span>
       <i class="compute-icon"></i>
-      <p>We are computing your initial proficiency profile in {{subject.title}}</p>
+      <p>{{'t' "student-first-experience.lp-compute-inprogress" title=subject.title}}</p>
     </div>
   {{/if}}
 </div>

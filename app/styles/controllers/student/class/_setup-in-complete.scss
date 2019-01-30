@@ -4,6 +4,13 @@
   .student.class {
     width: 100%;
     height: auto;
+
+    .content {
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      height: calc(100vh - 50px);
+    }
   }
 
   .app-container {

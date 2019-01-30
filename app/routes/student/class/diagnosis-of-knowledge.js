@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
 import PrivateRouteMixin from 'gooru-web/mixins/private-route-mixin';
+import { CLASS_SKYLINE_INITIAL_DESTINATION } from 'gooru-web/config/config';
 
 export default Ember.Route.extend(PrivateRouteMixin, {
   // -------------------------------------------------------------------------
@@ -39,7 +40,26 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   // -------------------------------------------------------------------------
   // Methods
 
-  model: function() {
+  beforeModel() {
+    const route = this;
+    let skylineInitialState = route.modelFor('student.class')
+      .skylineInitialState;
+    let destination = skylineInitialState.get('destination');
+    if (destination === CLASS_SKYLINE_INITIAL_DESTINATION.courseMap) {
+      return route.transitionTo('student.class.course-map');
+    } else if (
+      destination === CLASS_SKYLINE_INITIAL_DESTINATION.classSetupInComplete
+    ) {
+      return route.transitionTo('student.class.setup-in-complete');
+    } else if (
+      destination === CLASS_SKYLINE_INITIAL_DESTINATION.showDirections ||
+      destination === CLASS_SKYLINE_INITIAL_DESTINATION.ILPInProgress
+    ) {
+      return route.transitionTo('student.class.proficiency');
+    }
+  },
+
+  model() {
     const route = this;
     const currentClass = route.modelFor('student.class').class;
     const course = route.modelFor('student.class').course;

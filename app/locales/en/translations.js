@@ -623,6 +623,7 @@ export default Object.assign(quizzesTranslations, {
     'add-data': 'Add Data',
     'update-data': 'Update Data',
     all: 'All',
+    'please-wait': 'Please Wait',
     'unscheduled-items': 'Unscheduled Items',
     'add-to-unschedule': 'Add to unscheduled list for',
     'save-next': 'Save and Next',
@@ -1160,7 +1161,14 @@ export default Object.assign(quizzesTranslations, {
         'past-activities': 'Past Activities'
       },
       'my-report': 'My Report',
-      'my-location': 'My Location'
+      'my-location': 'My Location',
+      'establish-skyline': 'Let\'s Establish your Skyline',
+      'waiting-establish-skyline':
+        'Waiting for your teacher to complete setting up the class.',
+      'setup-in-complete-desc1': 'It looks like your teacher has not',
+      'setup-in-complete-desc2': 'updated class settings',
+      'setup-in-complete-desc3':
+        'Please get in touch with her to resolve the matter. Once everything is correctly set up, refresh this page.'
     },
     course: {
       'to-report': 'Usage summary',
@@ -1325,7 +1333,8 @@ export default Object.assign(quizzesTranslations, {
         'enter-valid-timespent': 'Enter the valid time spent',
         'create-activity': 'Create Activity',
         'schedule-activity': 'Schedule Activity',
-        'add-subject-framework': 'Please Select a Subject and Framework at Class Settings',
+        'add-subject-framework':
+          'Please Select a Subject and Framework at Class Settings',
         'create-external-collection': 'Create an External Collection'
       },
       'click-to-copy': 'Click to copy class code',
@@ -1858,6 +1867,8 @@ export default Object.assign(quizzesTranslations, {
 
   'student-first-experience': {
     preStudyTitle: 'Pre-Study for {{title}}',
+    'lp-compute-inprogress':
+      'We are computing your initial proficiency profile in {{title}}',
     'route0-action': {
       accept: 'Accept',
       ignore: 'Ignore'

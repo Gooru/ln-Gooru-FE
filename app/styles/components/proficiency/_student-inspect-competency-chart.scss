@@ -214,24 +214,7 @@
       }
     }
   }
-  @keyframes mastered-color {
-    0% {
-      fill: #e7e8e9;
-    }
 
-    100% {
-      fill: #006eb5;
-    }
-  }
-  @keyframes inprogress-color {
-    0% {
-      fill: #e7e8e9;
-    }
-
-    100% {
-      fill: #1aa9eb;
-    }
-  }
   @keyframes drawLine {
     to {
       stroke-dashoffset: 0;
