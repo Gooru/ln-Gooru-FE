@@ -1,4 +1,4 @@
-import quizzesTranslations from './quizzes/translations';
+﻿import quizzesTranslations from './quizzes/translations';
 
 export default Object.assign(quizzesTranslations, {
   en: 'English',
@@ -53,6 +53,7 @@ export default Object.assign(quizzesTranslations, {
     first: 'पहिला',
     last: 'शेवटचे',
     name: 'नाव',
+    user: 'वापरणारी व्यक्ती',
     'content-name': 'सामग्रीचे नाव',
     lastName: 'आडनाव',
     firstName: 'पहिले नाव',
@@ -85,6 +86,10 @@ export default Object.assign(quizzesTranslations, {
     accept: 'स्वीकार',
     ignore: 'दुर्लक्ष',
     add: 'जोडा',
+    'add-an-activity': 'हा उपक्रम संग्रहात टाका',
+    Reschedule: 'पुनर्नियोजन',
+    'no-unschedule-items': 'नियोजन करण्यसाठी उपक्रम उपलब्ध नाही',
+    'repeat-activity': 'उपक्रमाची पुनरावृत्ती',
     'add-assessment': 'नवीन मूल्यांकन तयार करा',
     'add-century-skills': ' 21 व्या    शतकाची कौशल्ये जोडा',
     'add-collaborator': 'सहयोगकर्ता जोडा',
@@ -94,6 +99,7 @@ export default Object.assign(quizzesTranslations, {
     'add-content-prompt':
       'आपण <span> {{Type}} </span> अजून तयार केले नाही ,चला धीट व्हा',
     'add-course': 'नवीन अभ्यासक्रम तयार करा',
+    'add-coruse-to-class': 'तुमच्या वर्गाशी अभ्यासक्रम जोडा',
     'add-domains-to-unit': 'युनिटमध्ये डोमेन्स जोडा',
     'add-url': 'url जोडा',
     'add-from-url': 'url मधून जोडा',
@@ -522,6 +528,7 @@ export default Object.assign(quizzesTranslations, {
     'published-by': 'द्वारा प्रकाशित',
     'published-tooltip': 'बॅज्ड सामग्री',
     publisher: 'प्रकाशक',
+    prev: 'मागे',
     question: 'प्रश्न',
     questions: 'प्रश्न',
     'questions-OE': 'मुक्त प्रतिसाद प्रश्न',
@@ -608,6 +615,16 @@ export default Object.assign(quizzesTranslations, {
     rubrics: 'रुब्रिक्स',
     'rubric-title': 'रूब्रिक शीर्षक',
     save: 'सेव्ह करा',
+    'de-select': 'निवडलेले खोडा',
+    'select-all': 'सर्व निवडा',
+    none: 'काहीही नाही',
+    'no-students': 'काहीही नाही',
+    'add-data': 'माहिती भरा',
+    'update-data': 'माहिती Update करा',
+    all: 'सर्व',
+    everyone: 'सर्व विद्यार्थी',
+    'unscheduled-items': 'अनियोजित',
+    'add-to-unschedule': 'अनियोजित उपक्रमांच्या यादीत टाका',
     'save-next': 'सेव्ह आणि पुढे',
     'save-submit': 'सर्व से्व्ह आणि सबमिट करा',
     'save-finish': 'सेव्ह आणि समाप्त',
@@ -855,7 +872,8 @@ export default Object.assign(quizzesTranslations, {
       'remix-from-course': 'एक वैशिष्ट्यपूर्ण अभ्यासक्रम रीमिक्स करा',
       'featured-course': 'वैशिष्ट्यीकृत अभ्यासक्रम पहा',
       'remix-desc':
-        'कॉपी करा आणि आपल्या विद्यार्थ्यांसाठी वैशिष्ट्यीकृत अभ्यासक्रम सानुकूल करा'
+        'कॉपी करा आणि आपल्या विद्यार्थ्यांसाठी वैशिष्ट्यीकृत अभ्यासक्रम सानुकूल करा',
+      'browse-content': 'मजकूर शोधा'
     }
   },
   classes: {
@@ -1126,7 +1144,7 @@ export default Object.assign(quizzesTranslations, {
       'course-map': 'पाठ्यक्रम नकाशा',
       unit: 'युनिट',
       lesson: 'धडा',
-      'class-activities': 'दैनिक वर्ग कृती',
+      'class-activities': 'दैनंदिन वर्ग कृती',
       'class-activities-tab': {
         today: 'आज',
         'past-activities': 'मागील क्रियाकलाप'
@@ -1242,6 +1260,9 @@ export default Object.assign(quizzesTranslations, {
         'student-id': 'विद्यार्थी ओळखपत्र',
         teachers: 'शिक्षक',
         'view-report': 'अहवाल पहा',
+        'course-null': 'The classroom has no course assigned yet.',
+        'course-subject-null':
+          'वर्गासाठी निवडलेला कोर्स योग्य विषयाशी जोडला गेला नाही.',
         'students-null':
           'त्यांना आपल्या वर्गात प्रवेश करण्यासाठी वर्ग कोड वापरा.'
       },
@@ -1254,10 +1275,25 @@ export default Object.assign(quizzesTranslations, {
         'currently-studying': 'सध्या अभ्यास करत आहे',
         'student-id': 'विद्यार्थी ओळखपत्र',
         remove: 'काढा',
-        mastered: 'मास्टर्ड',
-        'in-progress': 'प्रगतीपथावर'
+        mastered: 'प्रभुत्व मिळवले आहे',
+        'in-progress': 'प्रगतीपथावर',
+        'not-started': 'सुरु झालेले नाही',
+        'course-coverage': 'अभ्यासक्रमाची व्याप्ती',
+        'class-statistics': 'वर्गाची आकडेवारी',
+        'proficiency-in': 'मध्ये प्रभुत्व',
+        'data-not-available': 'माहिती उपलब्ध नाही',
+        'course-coverage-label':
+          'वर्गातील सर्व विद्यार्थ्यांनी आत्मसात केलेल्या क्षमतांचा आढावा',
+        'error-message':
+          'या वर्गामध्ये सलंग्न अभ्यासक्रम किंवा विद्यार्थी नाहीत. जेव्हा वर्गात अभ्यासक्रम तसेच त्यातील विद्यार्थी भरले जातील तेव्हा वर्गाचा क्षमता अहवाल येथे दाखवला जाईल.'
       },
       'class-activities': 'दैनिक वर्ग कृती',
+      'offline-class-report': {
+        'class-report': 'वर्ग अहवाल',
+        'activity-report': 'कृती अहवाल',
+        'conducted-on': 'चालू',
+        'not-started': 'सुरु केली नाही'
+      },
       'back-to-class-activities': 'परत दैनंदिन कामकाजातील',
       'class-activities-tab': {
         today: 'आज:',
@@ -1266,7 +1302,24 @@ export default Object.assign(quizzesTranslations, {
         'add-from-course-map': 'कोर्स नकाशावरून जोडा',
         'add-from-my-content': 'माझी सामग्री पासून जोडा',
         'welcome-dca':
-          'आपल्या दैनंदिन कामकाजामध्ये आपले स्वागत आहे जिथे आपण आज विद्यार्थी पूर्ण करण्यासाठी संकलने आणि आकलन देऊ शकता. कृपया लक्षात ठेवा: व्युत्पन्न केलेली कोणतीही अहवाल आजच सर्वात अलीकडील प्रयत्नासाठी उपलब्ध असेल.'
+          'आपल्या दैनंदिन कामकाजामध्ये आपले स्वागत आहे जिथे आपण आज विद्यार्थी पूर्ण करण्यासाठी संकलने आणि आकलन देऊ शकता. कृपया लक्षात ठेवा: व्युत्पन्न केलेली कोणतीही अहवाल आजच सर्वात अलीकडील प्रयत्नासाठी उपलब्ध असेल.',
+        'enter-max-timespent': 'मूल्यमापनासाठी लागलेला जास्तीत जास्त वेळ',
+        'enter-max-assessment-time-spent':
+          'मूल्यमापन पूर्ण करण्यासाठी लागलेला एकूण वेळ',
+        'enter-max-score':
+          'या मूल्यमापनासाठी दिले जाणारे जास्तीत जास्त गुण भरा',
+        hour: 'ता',
+        min: 'मि',
+        'question-score': 'प्रश्नाचे गुण',
+        'max-score': 'जास्तीत जास्त गुण',
+        'assessment-score': 'मूल्यमापनाचे गुण',
+        'assessment-max-score': 'मूल्यमापनाचे जास्तीत जास्त गुण',
+        'enter-valid-timespent':
+          'लागलेला एकूण वैध वेळ भतास आणि मिनिटांमध्ये योग्य वेळ भरा',
+        'create-activity': 'उपक्रम तयार करा',
+        'schedule-activity': 'नियोजित उपक्रम',
+        'add-subject-framework':
+          'कृपया वर्ग सेटिंग्जमध्ये विषय आणि अभ्यासक्रम आराखडा निवडा'
       },
       'click-to-copy': 'वर्ग कोड कॉपी करण्यासाठी क्लिक करा',
       'course-map': 'पाठ्यक्रम नकाशा',
@@ -1277,7 +1330,58 @@ export default Object.assign(quizzesTranslations, {
         assessments: 'मूल्यांकन',
         collections: 'संग्रह'
       },
-      'view-more': 'अधिक पहा'
+      'view-more': 'अधिक पहा',
+      'class-settings': {
+        'class-settings-sec': {
+          'generate-pathway': 'मुलनिहाय शिक्षणाचा मार्ग',
+          'class-settings-sec-head': 'वर्ग सेटिंग्ज',
+          'class-settings-sec-desc': 'पारितोषिक मिळवण्यासाठी किमान पात्रता',
+          'class-code': 'वर्ग संकेतांक',
+          subject: 'विषय',
+          framework: 'आराखडा',
+          'grade-level': 'इयत्तेनुसार',
+          'option-choose-one': 'पर्याय निवडा',
+          'co-teachers': 'सहशिक्षक',
+          'add-coteacher': 'आणखी शिक्षक जोडा',
+          'offline-class-label': 'हा ऑफलाईन वर्ग आहे',
+          'offline-msg':
+            'एकदा ऑफलाईन म्हणून नोंदवलेला वर्ग पुन्हा ऑनलाईन करता येणार नाही',
+          'offline-toggle-tooltip':
+            'जर हा वर्ग आपल्याला ऑफलाईन म्हणून नोंदवायचा असेल तर \'हो\' निवडा',
+          'offline-tooltip':
+            'ज्या वर्गात विद्यार्थी नेविगेटरवर ऑनलाईन शिकत नसतील तो वर्ग ऑफलाईन वर्ग म्हणून नोंदवला जातो. शिक्षक विद्यार्थ्यांच्या प्रगतीचा पाठपुरावा ऑफलाईन/प्रत्यक्ष वर्गात  घेतात आणि विद्यार्थ्यांच्या वतीने शिक्षकच नेविगेटर मध्ये माहिती भरतात.',
+          language: 'माध्यम'
+        },
+        'student-settings-sec': {
+          'student-settings-sec-head': 'विद्यार्थी सेटिंग्ज',
+          'col-head-active': 'Active'
+        },
+        'course-settings-sec': {
+          'course-settings-sec-head': 'अभ्यासक्रम सेटिंग्ज',
+          'is-route0-applicable':
+            'हा मुलनिहाय शैक्षणिक मार्ग मुलाच्या गरजांनुसार आहे का ?',
+          'apply-settings': 'Apply Settings',
+          'origin-info':
+            'तुमच्या वर्गामधील सर्वात खालची अभ्यासक्रमाची पातळी/इयत्ता कोणती?',
+          'current-grade-info': 'तुमच्या वर्गाची इयत्ता?'
+        },
+        'gen-baseline': {
+          'baseline-1':
+            '(१) विद्यार्थ्यांचा मुळचा स्तर आणि अपेक्षित स्तर यांवर आधारित मुलनिहाय शैक्षणिक मार्ग तुम्ही तयार करू शकता.',
+          'baseline-2':
+            '(२) विद्यार्थ्यांची अंतिम अपेक्षित पातळी त्यांच्या इयत्तेनुसार  मुलतःच ठरवलेली आहे. इतरांपेक्षा जास्त गतीने शिकणाऱ्या विद्यार्थ्यांसाठी तुम्ही अंतिम ध्येय्य हे पुढील इयत्तेचे ठेऊ शकता. विद्यार्थ्यांच्या स्काय लाईन आणि त्यांचे अंतिम अपेक्षित पातळी यावर आधारित मुलनिहाय अभ्यासक्रम आराखडा तयार करण्यासाठी मुलनिहाय शैक्षणिक मार्ग यावर क्लिक करा.',
+          'baseline-3':
+            '(३) संपूर्ण वर्गाचा शैक्षणिक मार्ग एकदाच तयार करता येऊ शकतो. त्यानंतर मात्र प्रत्येक विद्यार्थ्याच्या मुलनिहाय] शैक्षणिक मार्गात स्वतंत्रपणे बदल करत राहावे लागतील.',
+          'baseline-4':
+            '(४) एका विद्यार्थ्याची अंतिम अपेक्षित पातळीही तुम्ही परिस्थितीनुसार बदल करू शकता.  <i id="ember1600" class="ember-view gru-icon material-icons replay" style="vertical-align  middle;">replay </i> यावर क्लिक करा. एकदा अतिंम पातळी निश्चित केली असता तुम्ही पुन्हा नव्याने त्या विद्यार्थ्याचा/विद्यार्थिनीचा मुलनिहाय शैक्षणिक मार्ग पुन्हा निर्माण करू शकता.'
+        },
+        origin: 'मूळ',
+        destination: 'अंतिम अपेक्षित पातळी',
+        students: 'विद्यार्थी',
+        'student-id': 'विद्यार्थी आय डी',
+        'joined-on': 'वर्गात प्रवेश घेतल्याची तारीख',
+        'action-lable-add-student': 'आणखी एक विद्यार्थी भरा'
+      }
     },
     'no-classrooms':
       'आपण अद्याप कोणतेही वर्ग तयार केले नाहीत लायब्ररी टॅब अंतर्गत वैशिष्ट्यीकृत अभ्यासक्रमासाठी "वर्गाची निर्मिती करा" क्लिक करा किंवा </br> शोधा.',
@@ -1329,25 +1433,22 @@ export default Object.assign(quizzesTranslations, {
     }
   },
   'gru-add-to': {
-    'add-assessment-to-lesson': 'Add from my assessments',
-    'add-assessment-to-lesson-lead':
-      'Select an assessment to add to this lesson.',
-    'add-collection-to-lesson': 'Add from my collections',
-    'add-collection-to-lesson-lead':
-      'Select a collection to add to this lesson.',
-    'add-to-collection': 'Add to collection',
-    'add-to-collection-lead':
-      'Choose a collection you want to add {{contentTitle}} to',
+    'add-assessment-to-lesson': 'माझे मुल्यमापनमधून भरा ',
+    'add-assessment-to-lesson-lead': 'या धड्यासाठी मूल्यमापन निवडा',
+    'add-collection-to-lesson': 'माझे संग्रह मधून भरा ',
+    'add-collection-to-lesson-lead': 'या धड्यासाठी संग्रह निवडा',
+    'add-to-collection': 'संग्रहामध्ये भरा',
+    'add-to-collection-lead': '{{contentTitle}} हे नाव देण्यासाठी संग्रह निवडा',
     'add-to-existing-classroom': 'विद्यमान वर्गातीलमध्ये जोडा',
     'add-to-existing-classroom-lead':
       'आपण जोडण्यास इच्छुक असलेले एक वर्ग निवडा',
-    'add-to-assessment': 'Add to assessment or collection',
+    'add-to-assessment': 'मूल्यमापन किंवा संग्रहामध्ये भरा',
     'add-to-assessment-lead':
-      'Choose an assessment you want to add {{contentTitle}} to',
+      '{{contentTitle}} हे नाव देण्यासाठी मूल्यमापन निवडा',
     'assessments-info':
-      'The assessments listed here <b>do not</b> belong to another lesson or course',
+      'येथे दिलेले मूल्यमापन हे इतर कोणत्याही धड्याला किंवा अभ्यासक्रमाला लागू  <b> होत नाही </b>.',
     'collections-info':
-      'The collections listed here <b>do not</b> belong to another lesson or course'
+      'येथे दिलेले संग्रह हे इतर कोणत्याही धड्याला किंवा अभ्यासक्रमाला लागू  <b> होत नाही </b>.'
   },
   'gru-add-rubric-to-question': {
     title: 'माझ्या रूबरॅब्रिकमधून जोडा',
@@ -1375,66 +1476,67 @@ export default Object.assign(quizzesTranslations, {
     submit: 'सबमिट करा'
   },
   'gru-submit-confirmation': {
-    title: 'Finish this quiz and submit all',
+    title: 'ही प्रश्नमंजुषा पूर्ण करा आणि सर्व प्रश्नांची उत्तरे सबमिट करा',
     description:
-      'You are about to end this attempt and submit all responses. Any skipped questions will be counted as incorrect.',
-    cancel: 'Cancel',
-    confirm: 'Finish Quiz',
+      'तुम्ही सर्व प्रतिसाद सबमिट करत आहात. कोणताही अनुत्तरीत प्रश्न हा चुकीचे उत्तर म्हणून मोजला जाईल.',
+    cancel: 'कॅन्सल',
+    ok: 'ओके',
+    confirm: 'प्रश्नमंजुषा पूर्ण करा',
     'finish-description':
       'आपले प्रतिसाद सबमिट करण्यासाठी "समाप्त क्विझ" क्लिक करा'
   },
   'gru-quick-course-search': {
-    'add-from-course': 'Add from Existing Course',
-    'view-featured-courses': 'View Featured Courses',
-    assign: 'Assign'
+    'add-from-course': 'अस्तित्वात असणाऱ्या अभ्यासक्रमातून add करा',
+    'view-featured-courses': 'उपलब्ध अभ्यासक्रम बघा',
+    assign: 'नेमून द्या'
   },
   'gru-share-pop-over': {
-    copy: 'Copy',
-    'ios-tooltip': 'Hold tap to copy!',
-    'multiarch-tooltip': 'Press Ctrl + C to copy!',
-    'safari-osx-tooltip': 'Press Cmd + C to copy!',
-    'share-course': 'Share your course with link',
-    'share-question': 'Share your question with link',
-    'share-resource': 'Share your resource with link',
-    'share-assessment': 'Share your assessment with link',
+    copy: 'कॉपी',
+    'ios-tooltip': 'कॉपी करण्यासाठी बटण धरून ठेवा',
+    'multiarch-tooltip': 'कॉपी करण्यासाठी Ctrl + C वापरा',
+    'safari-osx-tooltip': 'कॉपी करण्यासाठी Cmd + C वापरा',
+    'share-course': 'लिंकसह तुमचा अभ्यासक्रम शेयर करा ',
+    'share-question': 'लिंकसह तुमचा प्रश्न शेयर करा ',
+    'share-resource': 'लिंकसह तुमचे संसाधन शेयर करा ',
+    'share-assessment': 'लिंकसह तुमचे मूल्यमापन शेयर करा ',
     'share-rubric': 'लिंकसह आपले रूब्ररी सामायिक करा',
-    'share-collection': 'Share your collection with link'
+    'share-collection': 'लिंकसह तुमचा संग्रह शेयर करा '
   },
   'gru-category-panel': {
     teacher: {
-      title: 'For Teachers',
+      title: 'शिक्षकांसाठी',
       body:
-        'Discover standards-aligned content, customize content, and track student progress through data analytics.',
-      cta: 'See Stories'
+        'इयात्तांशी संलग्न मजकूर शोधा, त्यात अनुकूल बदल करा, माहिती विश्लेषणाच्या आधारे तुमच्या विद्यार्थ्यांच्या प्रगतीचा मागोवा घ्या',
+      cta: 'गोष्टी बघा'
     },
     student: {
-      title: 'For Students',
+      title: 'विद्यार्थ्यांसाठी',
       body:
-        'Explore interests, build, and monitor progress through learning materials.',
+        'आवड शोधा, घडवा, शैक्षणिक साहित्याच्या आधारे प्रगतीचा मागोवा घ्या आणि त्यावर लक्ष ठेवा',
       cta: 'Enter',
-      'text-placeholder': 'Enter Classroom Code'
+      'text-placeholder': 'वर्गाचा संकेतांक भरा'
     },
     district: {
-      title: 'For Districts',
+      title: 'जिल्ह्यांसाठी',
       body:
-        'Collaborate with Gooru to unleash personalized learning and share a district-vetted curriculum.',
-      cta: 'See Our Impact'
+        'मुलनिहाय शैक्षणिक मार्ग तयार करण्यासाठी आणि जिल्हानिहाय अभ्यासक्रम शेयर करण्यासाठी गुरुसोबत सहकार्य करा.',
+      cta: 'आमचा प्रभाव'
     },
     partner: {
-      title: 'For Partners',
+      title: 'भागीदारांसाठी',
       body:
-        'Collaborate with mission-aligned partners to increase our collective impact on the education ecosystem.',
-      cta: 'Learn More'
+        'शिक्षण व्यवस्थेवरील आपला एकत्रित प्रभाव वाढवण्यासाठी समान ध्येय्य उराशी बाळगणाऱ्या भागीदारांसोबत सहकार्य करा.',
+      cta: 'आणखी शिका'
     }
   },
   'class.gru-class-navigation': {
     active: 'Active:',
-    members: 'Members',
-    greetings: 'Announcements',
-    overview: 'Course Map',
-    analytics: 'Data',
-    teams: 'Teams',
-    information: 'Classroom Information'
+    members: 'सदस्य',
+    greetings: 'घोषणा',
+    overview: 'अभ्यासक्रम आराखडा',
+    analytics: 'माहिती',
+    teams: 'गट',
+    information: 'वर्गाची माहिती'
   },
   'class.gru-class-statistics': {
     title: 'वर्ग आकडेवारी',
@@ -1483,53 +1585,57 @@ export default Object.assign(quizzesTranslations, {
     'dont-show-again': 'पुन्हा दाखवू नका'
   },
   'sign-up': {
-    'step-1-title': 'Hello!',
-    'step-1-description': 'We’re glad you’ve decided to join us.',
-    'step-child-title': 'Not so fast!',
-    'step-child-subtitle': 'We cannot complete your registration.',
+    'step-1-title': 'नमस्कार !',
+    'step-1-description':
+      'आपण आमच्यासोबत  या प्रवासात सहभागी होत आहात याचा आम्हाला आनंद आहे.',
+    'step-child-title': 'इतक्या जलद नाही',
+    'step-child-subtitle': 'तुमची नोंदणी आम्ही पूर्ण करू शकत नाही.',
     'step-child-description-1':
-      'Gooru could not create your account due to our ',
-    'step-child-age-requirements': 'Terms & Conditions',
-    'step-child-description-2': '. Keep learning and see you in a few years!',
-    'step-2-title': 'Basic Info',
-    'step-2-description': 'You’re not basic, but this info is.',
-    'log-in': 'Log In',
-    'log-in-description': 'if you already have an account.',
-    'google-button': 'Sign Up with Google',
-    username: 'Username',
+      'यामुळे गुरू आपली नाव नोंदणी पूर्ण करू शकत नाही.',
+    'step-child-age-requirements': 'नियम व अटी',
+    'step-child-description-2':
+      '. शिकणे चालू राहू द्या आणि आपण भेटूच काही वर्षात !',
+    'step-2-title': 'मुलभूत माहिती.',
+    'step-2-description': 'ही माहिती फारच महत्वाची आहे.',
+    'log-in': 'लॉग इन',
+    'log-in-description': 'जर आपले खाते आधीच अस्तित्वात असेल',
+    'google-button': 'गुगलसह साईन इन करा',
+    username: 'वापरकर्त्याचे नाव',
     dateOfBirth: {
-      title: 'Birthday',
-      day: 'Day',
-      month: 'Month',
+      title: 'जन्मतारीख',
+      day: 'वार',
+      month: 'महिना',
       months: {
-        january: 'January',
-        february: 'February',
-        march: 'March',
-        april: 'April',
-        may: 'May',
-        june: 'June',
-        july: 'July',
-        august: 'August',
-        september: 'September',
-        october: 'October',
-        november: 'November',
-        december: 'December'
+        january: 'जानेवारी',
+        february: 'फेब्रुवारी',
+        march: 'मार्च',
+        april: 'एप्रिल',
+        may: 'मे',
+        june: 'जून',
+        july: 'जुलै',
+        august: 'ऑगस्ट',
+        september: 'सप्टेंबर',
+        october: 'ऑक्टोबर',
+        november: 'नोव्हेंबर',
+        december: 'डिसेंबर'
       },
-      year: 'Year',
-      'error-message': 'Please enter your birth date.'
+      year: 'वर्ष',
+      'error-message': 'कृपया आपली जन्मतारीख टाका.'
     },
-    email: 'Email',
-    password: 'Password',
-    rePassword: 'Confirm Password',
-    state: 'State or Territory',
-    district: 'District or Charter Organization',
-    'error-username-taken': 'Aww, this username is taken. Try another.',
-    'error-email-taken': 'This email is taken. Try another.',
-    'error-role-message': 'Please select a role.',
-    'error-country-message': 'Please select your country.',
-    'error-state-message': 'Please select your state or territory.',
+    email: 'ईमेल',
+    password: 'पासवर्ड',
+    rePassword: 'पासवर्डची खात्री करा',
+    state: 'राज्य किंवा केंद्रशासित प्रदेश',
+    district: 'जिल्हा किंवा नोंदणीकृत संस्था',
+    'error-username-taken':
+      'अरेरे, हे युजरनेम याआधी कोणीतरी वापरलेले आहे. दुसऱ्या युजरनेमचा वापरून प्रयत्न करा.',
+    'error-email-taken':
+      'माफ करा, हा इमेल आयडी याआधी कोणीतरी वापरलेला आहे. दुसऱ्या इमेल आयडी वापरून प्रयत्न करा.',
+    'error-role-message': 'प्रोफाईलचे स्वरूप निवडा',
+    'error-country-message': 'तुमचा देश निवडा',
+    'error-state-message': 'तुमचे राज्य किंवा केंद्रशासित प्रदेश निवडा',
     'error-district-message':
-      'Please select your district/charter from the list or provide it in "Other".'
+      'दिलेल्या यादीतून तुमचा जिल्हा किंवा संस्थेच नाव निवडा अन्यथा \'इतर\' हा पर्याय निवडा'
   },
   'gru-user-sign-up-cancel': {
     title: 'रजा नोंदणी?',
@@ -1575,53 +1681,62 @@ export default Object.assign(quizzesTranslations, {
     'new-password-confirm': 'आपल्या संकेतशब्दाची पुष्टी करा',
     title: 'संकेतशब्द रीसेट करा'
   },
+  'change-password': {
+    'change-password': 'पासवर्डची लिंक बदला',
+    title: 'पासवर्ड बदला',
+    'current-password-label': 'तुमचा आताचा पासवर्ड टाका',
+    'change-success': 'पासवर्ड यशस्वीरित्या बदलला आहे !',
+    'new-password-required': 'तुमचा नवा पासवर्ड टाका ',
+    'change-password-error':
+      'काहीतरी चुकले आहे. तुमचा पासवर्ड बदलण्यात अपयश आले आहे. थोड्यावेळाने पुन्हा प्रयत्न करा.'
+  },
   footer: {
     footerDescription:
-      'Gooru is committed to keeping its platform open-source and community created content CC0.',
-    company: 'Company',
-    community: 'Community',
-    legal: 'Legal',
-    connect: 'Connect',
-    aboutGooru: 'About Gooru',
-    careers: 'Careers',
-    supportCenter: 'Support Center',
-    contactUs: 'Contact Us',
-    districts: 'Districts',
-    partners: 'Partners',
-    coaches: 'Coaches',
-    events: 'Events',
-    terms: 'Terms',
-    privacy: 'Privacy',
-    Copyright: 'Copyright'
+      'आपला प्लॅटफॉर्म हा मुक्त स्त्रोत ठेवण्यासाठी तसेच समुदायाने तयार केलेल्या मजकुरासाठी CC0 गुरु वचनबद्ध आहे.',
+    company: 'कंपनी',
+    community: 'समुदाय',
+    legal: 'कायदेशीर',
+    connect: 'संबंध',
+    aboutGooru: 'गुरु विषयी',
+    careers: 'करीयर्स',
+    supportCenter: 'सपोर्ट सेंटर',
+    contactUs: 'संपर्क करा',
+    districts: 'जिल्हे',
+    partners: 'भागीदार',
+    coaches: 'प्रशिक्षक',
+    events: 'घडामोडी',
+    terms: 'अटी',
+    privacy: 'गोपनीयता',
+    Copyright: 'कॉपीराइट'
   },
   'grade-dropdown': {
-    placeholder: 'grade(s)',
-    prompt: 'Select a grade',
-    'pre-k': 'Pre-K',
-    elementary: 'Elementary',
-    'middle-school': 'Middle School',
-    'high-school': 'High School',
-    'higher-ed': 'Higher Ed',
-    k: 'K',
-    first: '1',
-    second: '2',
-    third: '3',
-    fourth: '4',
-    fifth: '5',
-    sixth: '6',
-    seventh: '7',
-    eighth: '8',
-    ninth: '9',
-    tenth: '10',
-    eleventh: '11',
-    twelfth: '12'
+    placeholder: 'इयत्ता',
+    prompt: 'इयत्ता निवडा',
+    'pre-k': 'बालवाडी',
+    elementary: 'प्राथमिक',
+    'middle-school': 'माध्यमिक शाळा',
+    'high-school': 'उच्च माध्यमिक शाळा',
+    'higher-ed': 'उच्च शिक्षण',
+    k: 'बा',
+    first: '१',
+    second: '२',
+    third: '३',
+    fourth: '४',
+    fifth: '५',
+    sixth: '६',
+    seventh: '७',
+    eighth: '८',
+    ninth: '९',
+    tenth: '१०',
+    eleventh: '११',
+    twelfth: '१२'
   },
   'standard-dropdown': {
-    placeholder: 'Browse by Standard'
+    placeholder: 'वर्गानुसार शोध'
   },
   'subject-dropdown': {
-    placeholder: 'subject(s)',
-    prompt: 'Select a subject'
+    placeholder: 'विषय',
+    prompt: 'विषय निवडा'
   },
   'search-filter': {
     courses: 'अभ्यासक्रम',
@@ -1829,7 +1944,10 @@ export default Object.assign(quizzesTranslations, {
       library: 'ग्रंथालय',
       'my-content': 'माझा कंटेंट',
       following: 'पाळत आहोत',
-      proficiency: 'प्राविण्य'
+      proficiency: 'प्राविण्य',
+      preference: {
+        preference: 'प्राधान्यक्रम'
+      }
     },
     edit: {
       'select-district': 'एक जिल्हा निवडा ...'
@@ -1848,34 +1966,51 @@ export default Object.assign(quizzesTranslations, {
         'वर्गात कोणत्याही प्रकारचे नियुक्त केलेले नाही किंवा अर्थातच एखाद्या वैध विषयावर किंवा मानकांवर टॅग केले गेले नाही.',
       'show-compressed-chart': 'संक्षिप्त चार्ट दर्शवा',
       'show-expanded-chart': 'विस्तृत चार्ट दर्शवा'
+    },
+    preference: {
+      'language-preference': 'भाषेचा प्राधान्य क्रम',
+      'choose-language': 'भाषा निवडा',
+      'choose-sec-language': 'निवडा',
+      'choose-preferred-language': 'प्रोफाईलसाठी भाषा निवडा',
+      'choose-preferred-other-languages': 'इतर भाषा निवडा',
+      language: 'भाषा',
+      'select-category-label': 'Add करण्यासाठी वर्ग निवडा',
+      'choose-category': 'वर्ग निवडा',
+      'no-data': 'माहिती उपलब्ध नाही',
+      'category-preference': 'श्रेणीनुसार प्राधन्यक्रम',
+      'choose-subject': 'विषय निवडा',
+      'choose-fwk': 'अभ्यासक्रम आराखडा निवडा',
+      'add-subject': 'विषय जोडा',
+      'add-sec-language': 'प्राधान्यानुसार इतर भाषा add करा',
+      'other-preferred-languages': 'प्राधान्यानुसार इतर भाषा'
     }
   },
   'gru-data-picker': {
-    score: 'Score',
+    score: 'गुण',
     report: 'अहवाल',
-    completion: 'Completion',
-    timeSpent: 'Time',
+    completion: 'पूर्ण झाले',
+    timeSpent: 'वेळ',
     'time-spent': 'खर्च केलेला वेळ',
-    'study-time': 'Study Time',
-    reaction: 'Reaction',
-    attempts: 'Attempt'
+    'study-time': 'अभ्यासाचा वेळ',
+    reaction: 'प्रतिक्रिया',
+    attempts: 'प्रयत्न'
   },
   'gru-performance-summary': {
-    title: 'Title',
-    scores: 'Scores',
-    completion: 'Completion',
-    'time-spent': 'Total Time',
-    reaction: 'Reaction',
-    attempts: 'Attempts',
-    redo: 'Redo',
-    resume: 'Resume',
-    study: 'Study Now',
-    'view-report': 'View Report',
-    'not-applicable': 'N/A',
-    'not-started': 'Not started yet'
+    title: 'शीर्षक',
+    scores: 'गुण',
+    completion: 'पूर्ण झाले',
+    'time-spent': 'एकूण वेळ',
+    reaction: 'प्रतिक्रिया',
+    attempts: 'प्रयत्न',
+    redo: 'पुन्हा करा',
+    resume: 'पुन्हा सुरु करा',
+    study: 'आता अभ्यास करा',
+    'view-report': 'अहवाल बघा',
+    'not-applicable': 'लागू नाही',
+    'not-started': 'अद्याप सुरु झाले नाही'
   },
   'gru-performance': {
-    'no-content': 'No content available'
+    'no-content': 'मजकूर उपलब्ध नाही'
   },
   'gru-performance-metrics': {
     assessment: 'मूल्यांकन',
@@ -1888,10 +2023,10 @@ export default Object.assign(quizzesTranslations, {
   },
   'gru-metrics-sub-header': {
     assessment: 'मूल्यांकन',
-    student: 'Student',
-    score: 'Score',
+    student: 'विद्यार्थी',
+    score: 'गुण',
     report: 'अहवाल',
-    completion: 'Completion',
+    completion: 'पूर्ण झाले',
     'time-spent': 'वेळ'
   },
   'gru-resource-new': {
@@ -1972,10 +2107,10 @@ export default Object.assign(quizzesTranslations, {
       }
     },
     'gru-resource-card': {
-      add: 'Add to'
+      add: 'मध्ये add करा'
     },
     'gru-resource-result-card': {
-      skipped: 'Skipped'
+      skipped: 'वगळले आहे'
     },
     'gru-profile-card': {
       followers: 'अनुयायी',
@@ -2031,7 +2166,7 @@ export default Object.assign(quizzesTranslations, {
   taxonomy: {
     'gru-taxonomy-selector': {
       'add-secondary': 'Add secondary',
-      'choose-subject': 'Choose Subject',
+      'choose-subject': 'विषय निवडा',
       'competency-subject-and-course': 'क्षमता फ्रेमवर्क आणि अभ्यासक्रम',
       'primary-subject-and-course': 'क्षमता आराखडा आणि अभ्यासक्रम'
     }
@@ -2713,15 +2848,19 @@ export default Object.assign(quizzesTranslations, {
       'signature-assessments': 'Signature मूल्यांकन',
       'signature-collections': 'Signature संग्रह',
       'show-global-data': 'ग्लोबल डेटा दर्शवा',
-      'show-student-data': 'विद्यार्थी डेटा दर्शवा'
+      'show-student-data': 'विद्यार्थी डेटा दर्शवा',
+      'show-learning-map': 'शैक्षणिक आराखडा दाखवा'
     },
     'domain-report': 'डोमेन अहवाल'
   },
   'self-report': {
     'your-score': 'आपला स्कोअर',
+    time_spent: 'एकूण लागलेला वेळ',
     'update-error': 'स्कोअर अद्यतनित करताना समस्या',
     'validation-error': 'वैध गुण प्रविष्ट करा',
-    'enter-score': 'येथे आपला स्कोअर प्रविष्ट करा'
+    'enter-score': 'येथे आपला स्कोअर प्रविष्ट करा',
+    'enter-timeSpent': 'तुम्हाला लागलेला एकूण वेळ येथे भरा',
+    'validation-error-time': 'वैध वेळ भरा'
   },
   notifications: {
     'notificationlist-header-title': 'अधिसूचना',

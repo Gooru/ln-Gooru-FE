@@ -47,7 +47,11 @@ export default Ember.Service.extend({
    * Get user performance competency collections
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceCompetencyCollections: function(userId, competencyCode, status) {
+  getUserPerformanceCompetencyCollections: function(
+    userId,
+    competencyCode,
+    status
+  ) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
@@ -142,6 +146,25 @@ export default Ember.Service.extend({
         }, reject);
     });
   },
+  /**
+   * @function getUserSignatureContentList
+   * Method to fetch user competency list of signature content
+   */
+  getUserSignatureCompetencies(userId, subject) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('competencyAdapter')
+        .getUserSignatureCompetencies(userId, subject)
+        .then(function(response) {
+          resolve(
+            service
+              .get('competencySerializer')
+              .normalizeSignatureCompetencies(response)
+          );
+        }, reject);
+    });
+  },
 
   /**
    * @function getUserProficiencyBaseLine
@@ -169,14 +192,13 @@ export default Ember.Service.extend({
       service
         .get('competencyAdapter')
         .getDomainLevelSummary(filters)
-        .then(function(response) {
-          resolve(
-            response
-          );
-        },
-        function(error) {
-          reject(error);
-        }
+        .then(
+          function(response) {
+            resolve(response);
+          },
+          function(error) {
+            reject(error);
+          }
         );
     });
   }

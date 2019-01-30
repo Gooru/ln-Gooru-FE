@@ -405,6 +405,7 @@ export default Object.assign(quizzesTranslations, {
     'essential-questions': 'Essential Questions',
     example: 'example: ',
     exit: 'Exit',
+    'external-collection': 'External Collection',
     explanation: 'Explanation',
     explore: 'Explore',
     false: 'False',
@@ -684,6 +685,7 @@ export default Object.assign(quizzesTranslations, {
     tools: 'Tools',
     true: 'True',
     type: 'Type',
+    title: 'Title',
     unBookmark: 'Unbookmark',
     unexpectedError:
       'An unexpected error has occurred and has been reported. We\'re sorry for the inconvenience!',
@@ -1320,7 +1322,11 @@ export default Object.assign(quizzesTranslations, {
         'max-score': 'Max Score',
         'assessment-score': 'Assessment Score',
         'assessment-max-score': 'Assessment Max. Score',
-        'enter-valid-timespent': 'Enter the valid time spent'
+        'enter-valid-timespent': 'Enter the valid time spent',
+        'create-activity': 'Create Activity',
+        'schedule-activity': 'Schedule Activity',
+        'add-subject-framework': 'Please Select a Subject and Framework at Class Settings',
+        'create-external-collection': 'Create an External Collection'
       },
       'click-to-copy': 'Click to copy class code',
       'course-map': 'Course Map',
@@ -1997,7 +2003,9 @@ export default Object.assign(quizzesTranslations, {
     preference: {
       'language-preference': 'Language Preference',
       'choose-language': 'Choose language',
-      'choose-preferred-language': 'Select profile language',
+      'choose-sec-language': 'Choose',
+      'choose-preferred-language': 'Select primary profile language',
+      'choose-preferred-other-languages': 'Select other preferred languages',
       language: 'Language',
       'select-category-label': 'Add a new category',
       'choose-category': 'Choose Category',
@@ -2005,7 +2013,9 @@ export default Object.assign(quizzesTranslations, {
       'category-preference': 'Category Preference',
       'choose-subject': 'Choose Subject',
       'choose-fwk': 'Choose Framework',
-      'add-subject': 'Add Subject'
+      'add-subject': 'Add Subject',
+      'add-sec-language': 'Add other preferred language',
+      'other-preferred-languages': 'Other preferred languages'
     }
   },
 
@@ -2253,6 +2263,7 @@ export default Object.assign(quizzesTranslations, {
     subscript: 'Subscript',
     superscript: 'Superscript',
     underline: 'Underline',
+    bullets: 'Bullets',
     'expressions-panel': {
       tabs: {
         calculus: 'Calculus',
@@ -2879,9 +2890,29 @@ export default Object.assign(quizzesTranslations, {
       'signature-collections': 'Signature Collections',
       'show-global-data': 'Show Global Data',
       'show-student-data': 'Show Student Data',
-      'show-learning-map': 'Show Learning Map'
+      'show-learning-map': 'Show Learning Map',
+      note:
+        'Score 80% or more in our signature assessment and show your mastery'
     },
     'domain-report': 'Domain Report'
+  },
+
+  'competency-meta-data': {
+    title: 'ALT-CONCEPTS',
+    heading: {
+      micro: 'MICRO COMPETENCIES',
+      prequisite: 'PREQUISITE COMPETENCIES'
+    },
+    nodata: {
+      micro: 'There are no micro-competencies defined for this competency',
+      prequisite:
+        'There are no prerequisite-competencies defined for this competency',
+      competency: 'There are no alt-concepts defined for this competency'
+    }
+  },
+  'student-journey': {
+    heading: 'YOUR JOURNEY',
+    nodata: 'You are yet to start your journey for this competency'
   },
 
   'self-report': {

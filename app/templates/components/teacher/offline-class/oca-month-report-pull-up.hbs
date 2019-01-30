@@ -31,7 +31,7 @@
         <div class="activity-row-container {{unless activity.collection.performance 'not-started'}}" {{action 'onSelectActivity' activity}}>
           <div class="activity-info">
             <i class="icon {{activity.collection.collectionType}}"></i>
-            <div class="title ellipsis">{{activity.collection.title}}</div>
+            <div class="title ellipsis">{{safe-html activity.collection.title}}</div>
           </div>
           {{#if activity.collection.performance}}
             {{#if (or (eq activity.collection.collectionType 'assessment') (eq activity.collection.collectionType 'assessment-external'))}}

@@ -1026,15 +1026,8 @@ export function validatePercentage(number) {
  * @return {Boolean}
  */
 export function validateTimespent(hour, min) {
-  let isValidTime = false;
-  let mins = parseInt(min);
-  if (hour || min) {
-    if (!isNaN(hour || min)) {
-      let isValidHour = hour >= 0 && hour <= 24;
-      let isValidMin =
-        hour < 24 ? min >= 0 && min <= 60 : mins === 0 || min === null;
-      isValidTime = isValidHour && isValidMin;
-    }
-  }
+  let parseHour = hour && hour.length < 2 ? `0${hour}` : hour || '00';
+  let parseMin = min && min.length < 2 ? `0${min}` : min || '00';
+  var isValidTime = moment(`${parseHour}:${parseMin}`, 'HH:mm', true).isValid();
   return isValidTime;
 }

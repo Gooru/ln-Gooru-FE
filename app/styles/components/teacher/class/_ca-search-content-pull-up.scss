@@ -250,6 +250,10 @@
             }
           }
         }
+
+        .create-offline-activity {
+          cursor: pointer;
+        }
       }
     }
 
@@ -295,6 +299,34 @@
           }
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .schedule-ca-datepicker-container {
+      left: calc((100% - 250px) / 2) !important;
+      .ca-datepicker-orientation-top {
+        .ca-datepicker-top {
+          display: none;
+        }
+      }
+
+      .ca-datepicker-orientation-bottom {
+        .ca-datepicker-bottom {
+          display: none;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 992px) and (orientation: portrait) {
+    .schedule-ca-datepicker-container {
+      top: 49px !important;
+    }
+  }
+
+  @media screen and (max-width: 992px) and (orientation: landscape) {
+    .schedule-ca-datepicker-container {
+      top: 0px !important;
     }
   }
 }

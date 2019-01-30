@@ -18,12 +18,11 @@
                                     </span>
                                 </div>
                                 <div class='panel-body'>
-                                    <div class="subject-fwk">
+                                    <div class="subject-fwk-language">
                                         <div class='subject'> {{t 'profile.preference.choose-preferred-language'}} </div>
-                                        <div></div>
                                         <div class="fwk">
                                             <div class="dropdown language-dropdown pull-left">
-                                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareLanguageList' }}>
                                                     {{#if selectedLanguage}}
                                                         {{selectedLanguage.display_name}}
                                                     {{else}}
@@ -32,7 +31,7 @@
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu pull-right">
-                                                    {{#each languages as |language|}}
+                                                    {{#each languageList as |language|}}
                                                         <li> <a data-item={{language}} {{ action 'updateLanguage' language}}>{{language.display_name}}
                                                             </a> </li>
                                                     {{else}}
@@ -41,23 +40,49 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="subject-fwk" style="display:none;">
-                                        <div class='subject'> {{t 'profile.preference.choose-preferred-language'}} </div>
                                         <div></div>
+                                    </div>
+                                    <div class="subject-fwk-language">
+                                        <div class='subject'> {{t 'profile.preference.choose-preferred-other-languages'}} </div>
                                         <div class="fwk">
-                                            <div class="form-group1">
-                                                <select class="selectpicker form-control1" multiple mobile=true>
-                                                    {{!-- <ul class="dropdown-menu pull-right"> --}}
-                                                    {{#each languages as |language|}}
-                                                        <option data-item={{language}}>{{language.display_name}}
-                                                        </option>
+                                            <div class="dropdown language-dropdown pull-left">
+                                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareLanguageList' }}>
+                                                    {{#if selectedSecLanguage}}
+                                                        {{selectedSecLanguage.display_name}}
                                                     {{else}}
-                                                        <option> {{t 'profile.preference.no-data'}} </option>
+                                                        {{t 'profile.preference.choose-sec-language'}}
+                                                    {{/if}}
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu pull-right">
+                                                    {{#each languageList as |language|}}
+                                                        <li> <a data-item={{language}} {{ action 'updateSecLanguage' language}}>{{language.display_name}}
+                                                            </a> </li>
+                                                    {{else}}
+                                                        <li> {{t 'profile.preference.no-data'}} </li>
                                                     {{/each}}
-                                                    {{!-- </ul> --}}
-                                                </select>
+                                                </ul>
                                             </div>
+                                        </div>
+                                        <div>
+                                            <div class="addSubjectFWK hideMe" {{ action 'updateSecLanguage' selectedSecLanguage}} title="{{t 'profile.preference.add-sec-language'}} ">
+                                                {{gru-icon name='add'}}
+                                            </div>
+                                        </div>
+                                        <div class="taxonomy  gru-taxonomy-tag-list">
+                                            {{log 'otherLanguages' otherLanguages}}
+                                            {{#if otherLanguages}}
+                                                {{#each otherLanguages as |otherLanguage|}}
+                                                    <div class="taxonomy gru-taxonomy-tag active read-only remove">
+                                                        <div class="content standard-tag" data-html="true" data-original-title="" title="">
+                                                            <b class="tag-label"><span class="tag-caption ellipsis">{{otherLanguage.display_name}}</span></b>
+                                                            <button class="remove" {{action 'removeSecLanguage'  otherLanguage}}>{{gru-icon name="clear"}}</button>
+                                                        </div>
+                                                    </div>
+                                                {{/each}}
+                                            {{else}}
+                                                {{!-- {{t 'profile.preference.no-data'}} --}}
+                                            {{/if}}
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +101,7 @@
                                         <div></div>
                                         <div class="fwk-new-cat">
                                             <div class="dropdown pull-left">
-                                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{ action 'categoriesDropDownFilter'}}>
                                                     {{#if currentSelectedCategory}}
                                                         {{currentSelectedCategory.title}}
                                                     {{else}}
@@ -85,7 +110,7 @@
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu pull-right">
-                                                    {{#each categoriesDropDown as |category|}}
+                                                    {{#each categoriesDropDownFilter as |category|}}
                                                         <li> <a data-item={{category}} {{ action 'addCategory' category}}>{{category.title}}
                                                             </a> </li>
                                                     {{else}}
@@ -119,6 +144,16 @@
                                         <div class="subject display-language-pref-label"> {{t 'profile.preference.language'}}: </div>
                                         <div class="fwk">
                                             {{selectedLanguage.display_name}}
+                                        </div>
+                                    </div>
+                                    <div class="subject-fwk display-language-pref-row1">
+                                        <div class="subject display-language-pref-label"> {{t 'profile.preference.other-preferred-languages'}}: </div>
+                                        <div class="fwk sec-lang">
+                                            {{#each otherLanguages as |secLanguage|}}
+                                                <span class='secLangDisplay'>
+                                                    {{secLanguage.display_name}}
+                                                </span>
+                                            {{/each}}
                                         </div>
                                     </div>
                                     {{!-- </div> --}}
@@ -158,10 +193,11 @@
                                         <div class='category-title'>
                                             {{category.title}}
                                         </div>
-                                        <div style="display:none">
+                                        <div class="hideMe">
                                             <div class="removeCategory" {{action 'removeCategory' category}}>{{gru-icon name='remove_circle_outline'}}</div>
                                         </div>
                                         <div class='subject-add'>
+                                            {{log 'currentCategorySubjectFwks' currentCategorySubjectFwks}}
                                             <div class="dropdown">
                                                 <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareSubjectList' category }}>
                                                     {{#if category.currentSelectedSubject}}
@@ -173,7 +209,7 @@
                                                     {{/if}}
                                                     <span class="caret"></span>
                                                 </button>
-                                                <ul class="dropdown-menu pull-left">
+                                                <ul class="dropdown-menu pull-right">
                                                     {{#each currentCategorySubjectFwks  as |subject |}}
                                                         <li> <a data-item={{subject}} {{ action 'markSelectedSubject'  subject category  }}>
                                                                 {{subject.title}}
@@ -184,7 +220,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="addSubjectFWK" {{action 'addSelectedSubject' category }} title="{{t 'profile.preference.add-subject'}}">
+                                        <div class="addSubjectFWK hideMe" {{action 'addSelectedSubject' category }} title="{{t 'profile.preference.add-subject'}}">
                                             {{gru-icon name='add'}}
                                         </div>
                                         {{!-- {{action 'updateMarkedSelectionsAsAdded' fwk subjects category }} --}}
@@ -194,7 +230,7 @@
                                         {{!-- New section for added subject --}}
                                         {{!-- subject drop down with plus icon starts --}}
                                         {{#if (eq category.showAddSub true)}}
-                                            <div class="subject-fwk" style="display:none">
+                                            <div class="subject-fwk hideMe">
                                                 <div class='sub'>
                                                     <div class="dropdown">
                                                         <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

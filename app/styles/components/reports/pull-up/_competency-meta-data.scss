@@ -1,0 +1,149 @@
+.competency-meta-data {
+  $line-height: 1.2;
+  $lines-to-show: 4;
+
+  .heading {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    padding: 20px 10px 10px;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+  }
+
+  .no-data {
+    font-size: 16px;
+    margin: auto;
+    padding-left: 10px;
+  }
+
+  .micro-competencies {
+    background-color: #fff;
+    min-height: 50px;
+    display: grid;
+
+    .panel-header {
+      cursor: pointer;
+      height: 40px;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+      background-color: #ffffff;
+
+      .code {
+        height: 17px;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        font-weight: bold;
+        color: #37424b;
+        padding: 10px;
+      }
+
+      &:after {
+        font-family: "Material Icons";
+        content: "arrow_drop_up";
+        float: right;
+        font-size: 16px;
+        color: grey;
+      }
+
+      &.collapsed:after {
+        content: "arrow_drop_down";
+      }
+    }
+
+    .panel-content {
+      .description {
+        padding: 10px;
+        text-align: justify;
+        display: block;
+      }
+    }
+  }
+
+  .alt-concepts {
+    color: #36424b;
+    display: flex;
+    font-size: 16px;
+    padding: 10px;
+    justify-content: center;
+    background-color: #fff;
+  }
+
+  .prequisite-competencies {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 15px;
+    justify-content: center;
+    background-color: #fff;
+    grid-gap: 10px;
+    min-height: 50px;
+
+    &.no-competency {
+      grid-template-columns: none;
+    }
+
+    .panel-container {
+      max-width: 200px;
+      height: 142px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+      background-color: #fff;
+      margin: auto;
+
+      .panel-body {
+        padding: 10px;
+
+        .competency-description {
+          font-size: 13px;
+          @include ellipsis(
+            $font-size: $font-size-base,
+            $line-height: $line-height,
+            $lines-to-show: $lines-to-show,
+            $excerpt-bg: $white
+          );
+        }
+      }
+
+      .panel-header {
+        border-bottom: 3px solid #979797;
+        padding: 15px;
+        display: grid;
+        grid-template-columns: auto auto;
+
+        .title {
+          height: 27px;
+          font-size: 20px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          color: #37424b;
+        }
+
+        .competency-status {
+          width: 24px;
+          height: 24px;
+          justify-self: end;
+
+          &.status-0 {
+            opacity: 0.3;
+            background-color: #333c4f;
+          }
+
+          &.status-1 {
+            background-color: #99c5e6;
+          }
+
+          &.status-2 {
+            background-color: #6f9ce2;
+          }
+        }
+      }
+    }
+  }
+}

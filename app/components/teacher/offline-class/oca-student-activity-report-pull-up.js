@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { average } from 'gooru-web/utils/math';
 
 export default Ember.Component.extend({
   classNames: ['oca-student-activity-report-pull-up'],
@@ -47,6 +48,8 @@ export default Ember.Component.extend({
    * @property {Boolean}
    */
   isLoading: false,
+
+  studentTimeSpent: null,
 
   /**
    * Propery to hide the default pullup.
@@ -232,12 +235,17 @@ export default Ember.Component.extend({
   parseCollectionResource(resources) {
     let component = this;
     let resourcesPerformance = component.get('student.performance.resources');
+    let resourceTimeSpent = Ember.A();
     resources.map(resource => {
       let performance = resourcesPerformance
         .filterBy('resourceId', resource.id)
         .objectAt(0);
+      if (performance) {
+        resourceTimeSpent.push(performance.timeSpent);
+      }
       resource.set('performance', performance);
     });
+    component.set('studentTimeSpent', average(resourceTimeSpent));
     component.set('resourcesCollection', resources);
   }
 });

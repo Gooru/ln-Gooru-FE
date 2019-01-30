@@ -28,6 +28,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   tab: null,
 
+  isShowOCASummaryReportPullUp: false,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -400,13 +402,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         let classMembers = component.get('members');
         let classActivityStudents = Ember.A([]);
         activityMembers.map(member => {
-          classActivityStudents.push(classMembers.findBy('id', member.id));
+          let isActivityMember = classMembers.findBy('id', member.id);
+          let isActiveMember = member.isActive;
+          if(isActivityMember && isActiveMember){
+            classActivityStudents.push(isActivityMember);
+          }
         });
-
         component.set(
           'activityMembers',
           classActivityStudents.sortBy('firstName')
         );
+
         if (item.format === 'assessment') {
           component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
           component.set('isShowCollectionPerformanceEntryPullUp', false);
@@ -438,6 +444,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('isShowCollectionPerformanceEntryPullUp', false);
       controller.set('isShowExternalCollectionPeformanceEntryPullUp', false);
       controller.loadData();
+      controller.get('classController').fetchDcaSummaryPerformance();
+    },
+
+    onClosePullUp() {
+      this.set('isShowOCASummaryReportPullUp', false);
+      this.set('tab', null);
     }
   },
 
@@ -449,8 +461,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     controller._super(...arguments);
     let tab = controller.get('tab');
     if (tab && tab === 'report') {
-      const classController = controller.get('classController');
-      classController.openDCAReportForOfflineClass();
+      controller.set('isShowOCASummaryReportPullUp', true);
     }
     Ember.run.scheduleOnce('afterRender', controller, function() {
       controller.set('forMonth', moment().format('MM'));
@@ -463,6 +474,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
+
+  isShowCreateOfflineActivity: false,
 
   isRepeatEntry: false,
 
@@ -648,6 +661,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   showUnScheduledItemsPullup: false,
 
+  performanceSummaryForDCA: Ember.computed.alias(
+    'classController.performanceSummaryForDCA'
+  ),
+
   /**
    * It Maintains the list of scheduled class activities datewise.
    * @type {Array}
@@ -674,6 +691,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       return activities;
     }
   ),
+
+  /**
+   * @property {Json} classPreference
+   */
+  classPreference: Ember.computed.alias('class.preference'),
 
   // -------------------------------------------------------------------------
   // Observers
