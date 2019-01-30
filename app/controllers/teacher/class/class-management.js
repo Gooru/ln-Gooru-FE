@@ -409,6 +409,7 @@ export default Ember.Controller.extend(ModalMixin, {
 
         tClass.set('preference', preferenceJSON);
         controller.set('tempClass', tClass);
+        controller.resetGradeValues();
 
         controller.set('enableApplySettings', true); // some UI interaction happened...enable apply button
       } else {
@@ -520,8 +521,8 @@ export default Ember.Controller.extend(ModalMixin, {
       let classV = controller.get('class'),
         classLBId = classV.gradeLowerBound,
         classCurrentId = classV.gradeCurrent,
-        source = controller.get('subjectTaxonomyGrades'),
-        classLB = controller.getGradeSequenceById(classLBId, source),
+        source = controller.get('subjectTaxonomyGrades');
+      let classLB = controller.getGradeSequenceById(classLBId, source),
         classCurrent = controller.getGradeSequenceById(classCurrentId, source),
         sourceFilteredByContext;
 
@@ -603,8 +604,26 @@ export default Ember.Controller.extend(ModalMixin, {
     }
   },
 
+  /**
+   * called only iff current grade of class is null
+   */
+  resetGradeValues() {
+    const controller = this;
+    let tClass = controller.get('tempClass');
+    tClass.set('gradeLowerBound', null);
+    tClass.set('gradeUpperBound', null);
+    tClass.set('gradeCurrent', null);
+    controller.set('tempClass', tClass);
+
+    //controller.set('class.gradeLowerBound', null); //Re-setting this may give shrinikg error as its not allowed by api, thus  should set both grade lower and current atonce
+
+    controller.set('enableApplySettings', true); // some UI interaction happened...enable apply button
+  },
+
   getGradeSequenceById(id, source) {
-    return id && source ? source.findBy('id', id).sequence : id;
+    return id && source && source.findBy('id', id)
+      ? source.findBy('id', id).sequence
+      : id;
   },
   currentFilterList: null, //Dynamic filtered list
 
@@ -783,26 +802,17 @@ export default Ember.Controller.extend(ModalMixin, {
    * @function fetchTaxonomyGrades
    * Method to fetch taxonomy grades
    */
-  fetchTaxonomyGrades(isInit) {
+  fetchTaxonomyGrades() {
     let controller = this;
     if (this.get('course.id') && this.get('subject')) {
       let taxonomyService = controller.get('taxonomyService');
       let filters = {
         subject: controller.get('sanitizedSubject')
       };
-
-      let grade_lower_bound = controller.get('class.gradeLowerBound'),
-        grade_upper_bound = controller.get('class.gradeUpperBound'),
-        grade_current = controller.get('class.gradeCurrent');
-
       let fwkCode =
         controller.get('tempClass.preference.framework') ||
         controller.get('class.preference.framework');
-      if (
-        (fwkCode &&
-          !(grade_lower_bound || grade_upper_bound || grade_current)) ||
-        isInit
-      ) {
+      if (fwkCode) {
         filters.fw_code = fwkCode;
       }
 
