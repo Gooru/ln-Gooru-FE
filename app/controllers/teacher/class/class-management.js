@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import ModalMixin from 'gooru-web/mixins/modal';
-import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
 /**
  * Class management controller
  *
@@ -660,12 +659,10 @@ export default Ember.Controller.extend(ModalMixin, {
     return setting ? setting['course.premium'] : false;
   }),
 
-  subject: Ember.computed.alias('course.subject'),
+  subject: Ember.computed.alias('class.preference.subject'),
 
   sanitizedSubject: Ember.computed('subject', function() {
-    if (this.get('subject')) {
-      return getSubjectIdFromSubjectBucket(this.get('subject'));
-    }
+    return this.get('subject');
   }),
   /**
    * @param {Boolean } didValidate - value used to check if input has been validated or not
@@ -740,15 +737,6 @@ export default Ember.Controller.extend(ModalMixin, {
    * Property to show/hide proficiency pull up
    */
   isShowProficiencyPullup: false,
-
-  /**
-   * @property {String}
-   * Property to store coruse subject bucket or K12.MA will be default
-   */
-  subjectBucket: Ember.computed('course', function() {
-    let controller = this;
-    return controller.get('course.subject') || 'K12.MA';
-  }),
 
   /**
    * @property {Object}
