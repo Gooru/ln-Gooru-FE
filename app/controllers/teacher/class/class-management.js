@@ -532,7 +532,10 @@ export default Ember.Controller.extend(ModalMixin, {
             sourceFilteredByContext = controller.filterRange(
               source,
               classLB,
-              context.gradeLowerBound || classCurrent
+              controller.getGradeSequenceById(
+                context.gradeLowerBound,
+                source
+              ) || classCurrent
             );
           }
           /* Student's lower bound can't be SET if class lower bound is null
@@ -544,9 +547,15 @@ export default Ember.Controller.extend(ModalMixin, {
           if (classCurrent) {
             sourceFilteredByContext = controller.filterRange(
               source,
-              context.gradeUpperBound ||
+              controller.getGradeSequenceById(
+                context.gradeUpperBound,
+                source
+              ) ||
                 classCurrent ||
-                context.gradeLowerBound ||
+                controller.getGradeSequenceById(
+                  context.gradeLowerBound,
+                  source
+                ) ||
                 classLB,
               null
             );
