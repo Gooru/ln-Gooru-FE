@@ -34,6 +34,16 @@ export default Ember.Component.extend({
    */
   loading: false,
 
+  /**
+   *  Indicates showSignatureAssessment true or not
+   * @type {Boolean}
+   */
+
+  showSignatureAssessment: Ember.computed('competency', function() {
+    let component = this;
+    return component.get('competency.showSignatureAssessment');
+  }),
+
   // -------------------------------------------------------------------------
   // Actions
 

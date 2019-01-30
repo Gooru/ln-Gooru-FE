@@ -85,7 +85,7 @@ export default Ember.Controller.extend({
      * Triggered when an cell is selected
      * @param item
      */
-    onCompetencyPullOut(data) {
+    onCompetencyPullOut(data, competencyMatrixs) {
       let controller = this;
       controller.set('isLoading', true);
       controller.set('showPullOut', true);
@@ -135,6 +135,13 @@ export default Ember.Controller.extend({
           competencyName: data.competencyName
         };
         controller.set('competency', competency);
+        let domainCode = data.get('domainCode');
+        let domainCompetencyList = competencyMatrixs.findBy(
+          'domainCode',
+          domainCode
+        );
+        controller.set('domainCompetencyList', domainCompetencyList);
+        controller.set('data', data);
       });
     },
 

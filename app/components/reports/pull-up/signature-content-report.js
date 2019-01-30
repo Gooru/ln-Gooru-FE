@@ -110,7 +110,23 @@ export default Ember.Component.extend({
    */
   source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
 
+  /**
+   * competency  change will call the function
+   */
+
+  onChangeCompetency: Ember.observer('competency', function() {
+    let component = this;
+    component.loadData();
+  }),
+
   init() {
+    let component = this;
+    component._super(...arguments);
+    component.fetchLearningMapsContent();
+    component.fetchCodes();
+  },
+
+  loadData() {
     let component = this;
     component._super(...arguments);
     component.fetchLearningMapsContent();

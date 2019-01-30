@@ -3,11 +3,13 @@
 {{/if}}
 <div class="competency-report">
   <div class="header">
+    <div class="competency-status status-{{competency.status}}"></div>
     <div class="report-info">
       <div class="title-section {{if competency 'content'}}">
-        <div class="type">
-          {{type}}
-        </div>
+        <div class="domain-name">{{competency.domainName}}</div>
+        <div class="title-content">
+        <div class="competency-code">{{competency.competencyCode}}</div>
+      </div>
         {{#unless competency}}
           <div class="title">
             {{title}}

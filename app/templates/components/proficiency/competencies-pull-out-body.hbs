@@ -22,3 +22,8 @@
     {{proficiency.pull-out-accordion-collection collection=collection userId=userId}}
   {{/each}}
 </div>
+{{#if data}}
+<div class="signature-content">
+  {{reports.pull-up.signature-content-report domainCompetencyList=domainCompetencyList collectionPerformances=collection showSignatureAssessment=showSignatureAssessment competency=data}}
+</div>
+{{/if}}
