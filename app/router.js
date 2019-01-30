@@ -180,7 +180,9 @@ Router.map(function() {
         this.route('course-map');
         this.route('class-activities');
         this.route('performance');
-        this.route('profile');
+        this.route('setup-in-complete');
+        this.route('proficiency');
+        this.route('diagnosis-of-knowledge');
       }
     );
     this.route(
@@ -251,6 +253,7 @@ Router.map(function() {
   });
   this.route('player-external');
   this.route('not-found', { path: '/not-found/:entity' });
+  this.route('preference');
   this.route('profile', { path: '/:userId' }, function() {
     this.route('about');
     this.route('edit');
@@ -278,7 +281,6 @@ Router.map(function() {
    * IMPORTANT! the profile route should be the last one at this file, so we can handle the app urls
    * and the vanity urls for profiles like www.gooru.org/javier-perez
    */
-  this.route('preference');
 });
 
 export default Router;

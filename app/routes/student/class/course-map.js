@@ -1,5 +1,9 @@
 import Ember from 'ember';
-import { ROLES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  ROLES,
+  PLAYER_EVENT_SOURCE,
+  CLASS_SKYLINE_INITIAL_DESTINATION
+} from 'gooru-web/config/config';
 
 export default Ember.Route.extend({
   // -------------------------------------------------------------------------
@@ -97,12 +101,38 @@ export default Ember.Route.extend({
 
   // -------------------------------------------------------------------------
   // Methods
+  beforeModel() {
+    const route = this;
+    let isPremiumCourse = route.modelFor('student.class').isPremiumCourse;
+    if (isPremiumCourse) {
+      let skylineInitialState = route.modelFor('student.class')
+        .skylineInitialState;
+      let destination = skylineInitialState.get('destination');
+      if (
+        destination === CLASS_SKYLINE_INITIAL_DESTINATION.classSetupInComplete
+      ) {
+        return route.transitionTo('student.class.setup-in-complete');
+      } else if (
+        destination === CLASS_SKYLINE_INITIAL_DESTINATION.showDirections ||
+        destination === CLASS_SKYLINE_INITIAL_DESTINATION.ILPInProgress
+      ) {
+        return route.transitionTo('student.class.proficiency');
+      } else if (
+        destination === CLASS_SKYLINE_INITIAL_DESTINATION.diagnosticPlay
+      ) {
+        return route.transitionTo('student.class.diagnosis-of-knowledge');
+      }
+    }
+  },
+
   model: function() {
     const route = this;
     const currentClass = route.modelFor('student.class').class;
     const course = route.modelFor('student.class').course;
     const units = route.modelFor('student.class').units;
     const userId = route.get('session.userId');
+    const isPremiumCourse = route.modelFor('student.class').isPremiumCourse;
+    const isClassFullySetup = route.modelFor('student.class').isClassFullySetup;
     const classMembers = currentClass.get('members');
     const courseId = course.get('id');
     if (!courseId) {
@@ -149,7 +179,9 @@ export default Ember.Route.extend({
       units: units,
       currentClass: currentClass,
       classMembers: classMembers,
-      route0: route0Promise
+      route0: route0Promise,
+      isPremiumCourse: isPremiumCourse,
+      isClassFullySetup: isClassFullySetup
     });
   },
   /**
@@ -173,6 +205,8 @@ export default Ember.Route.extend({
     controller.set('classMembers', model.classMembers);
     controller.set('route0', model.route0);
     controller.get('studentClassController').selectMenuItem('course-map');
+    controller.set('isClassFullySetup', model.isClassFullySetup);
+    controller.set('isPremiumCourse', model.isPremiumCourse);
     controller.init();
   },
 

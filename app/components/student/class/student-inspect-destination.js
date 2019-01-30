@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { CLASS_SKYLINE_INITIAL_DESTINATION } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -9,6 +10,7 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Dependencies
+
   route0Service: Ember.inject.service('api-sdk/route0'),
 
   /**
@@ -24,7 +26,6 @@ export default Ember.Component.extend({
     if (component.get('isRoute0') && component.get('isRoute0Applicable')) {
       component.fetchRout0Contents();
     }
-    component.getTaxonomyGrades();
   },
 
   didRender() {
@@ -34,33 +35,6 @@ export default Ember.Component.extend({
     });
     component.$('[data-toggle="popover"]').popover({
       trigger: 'hover'
-    });
-  },
-
-  /**
-   * @function getTaxonomyGrades
-   * Method to fetch taxonomy grades
-   */
-  getTaxonomyGrades() {
-    let component = this;
-    let taxonomyService = component.get('taxonomyService');
-    let filters = {
-      subject: component.get('subjectCode')
-    };
-    return Ember.RSVP.hash({
-      taxonomyGrades: Ember.RSVP.resolve(
-        taxonomyService.fetchGradesBySubject(filters)
-      )
-    }).then(({ taxonomyGrades }) => {
-      let activeGrade = taxonomyGrades.findBy(
-        'id',
-        component.get('classGrade')
-      );
-      component.set('activeGrade', activeGrade);
-      component.set(
-        'taxonomyGrades',
-        taxonomyGrades.sortBy('sequence').reverse()
-      );
     });
   },
 
@@ -94,6 +68,9 @@ export default Ember.Component.extend({
      */
     onMoveNext(curStep) {
       let component = this;
+      if (curStep !== 'playNext') {
+        component.set('type', curStep);
+      }
       component.sendAction('onMoveNext', curStep);
     },
     /**
@@ -108,6 +85,14 @@ export default Ember.Component.extend({
       }
       component.$('.route0-container').toggleClass('expanded');
       component.toggleProperty('isRoute0ExpandedView');
+    },
+
+    /**
+     * On chart draw complete.
+     */
+    onChartDrawComplete() {
+      let component = this;
+      component.doAnimation();
     }
   },
 
@@ -123,23 +108,17 @@ export default Ember.Component.extend({
 
   taxonomyGrades: null,
 
+  type: 'proficiency',
+
   /**
    * @property {Boolean} isRoute0
    */
-  isRoute0: Ember.computed('type', function() {
-    let component = this;
-    let type = component.get('type');
-    return type === 'route';
-  }),
+  isRoute0: Ember.computed.equal('type', 'route'),
 
   /**
    * @property {Boolean} isProficiency
    */
-  isProficiency: Ember.computed('type', function() {
-    let component = this;
-    let type = component.get('type');
-    return type === 'proficiency';
-  }),
+  isProficiency: Ember.computed.equal('type', 'proficiency'),
 
   /**
    * @property {Boolean} isRoute0Pending
@@ -158,15 +137,20 @@ export default Ember.Component.extend({
   /**
    * @property {JSON} activeGrade
    */
-  activeGrade: null,
+  activeGrade: Ember.computed('taxonomyGrades', 'classGrade', function() {
+    let taxonomyGrades = this.get('taxonomyGrades');
+    let classGrade = this.get('classGrade');
+    return taxonomyGrades.findBy('id', classGrade);
+  }),
 
   /**
-   * @property {Number} destinationGradeLevel
+   * Property used to identify whether to show directions or not.
+   * @type {Boolean}
    */
-  destinationGradeLevel: Ember.computed('classGrade', function() {
-    let component = this;
-    return parseInt(component.get('classGrade')) - 1;
-  }),
+  showDirections: Ember.computed.equal(
+    'skylineInitialState.destination',
+    CLASS_SKYLINE_INITIAL_DESTINATION.showDirections
+  ),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -210,5 +194,50 @@ export default Ember.Component.extend({
         route0Service.updateRouteAction(actionData)
       )
     });
+  },
+
+  doAnimation() {
+    let component = this;
+    let delay = 1000;
+    component
+      .$(
+        '.proficiency-info-1, .student-inspect-competency-chart .chart-container'
+      )
+      .addClass('active');
+    let listOfMasteredEle = component.$(
+      '.status-2, .status-3, .status-4, .status-5'
+    );
+    delay = delay + 1000;
+    component.delay(component.$('.proficiency-info-2'), delay);
+    listOfMasteredEle.each(function(index, element) {
+      component.delay(element, delay);
+      delay = delay + 20;
+    });
+    delay = delay + 1000;
+    component.delay(component.$('.proficiency-info-3'), delay);
+    let listOfInprogressEle = component.$('.status-1');
+    listOfInprogressEle.each(function(index, element) {
+      component.delay(element, delay);
+      delay = delay + 20;
+    });
+    delay = delay + 1000;
+    component.delay(component.$('.proficiency-info-4'), delay);
+    component.delay(
+      component.$(
+        '.student-inspect-competency-chart .chart-container polyline'
+      ),
+      delay
+    );
+    delay = delay + 2000;
+    component.delay(component.$('.proficiency-info-5'), delay);
+    delay = delay + 1000;
+    component.delay(component.$('.proficiency-info-6'), delay);
+  },
+
+  delay(element, delay) {
+    let component = this;
+    Ember.run.later(function() {
+      component.$(element).addClass('active');
+    }, delay);
   }
 });

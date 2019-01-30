@@ -1,0 +1,40 @@
+<div class="diagnosis-of-knowledge">
+  <div class="diagnosis-of-knowledge-panel">
+    <h2>Let's Establish your Skyline </h2>
+    <div class="assessment-info">
+      <div class="question">
+        <span class="icon" data-toggle="tooltip" title="{{t 'common.question'}}"></span>
+        <span>{{assessment.questionCount}}</span>
+      </div>
+      <div class="taxonomy">
+        {{#if tags.length}}
+          {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+        {{/if}}
+      </div>
+    </div>
+    <div class="description">
+      {{assessment.learningObjectives}}
+    </div>
+    <div class="navigation-direction">
+      {{#if assessment.bidirectional}}
+        {{gru-icon name='swap_horiz'}}
+        <div class="info bidirectional">
+          {{t "qz-assessment-confirmation.forward-backward"}}
+        </div>
+      {{else}}
+        {{gru-icon name='trending_flat'}}
+        <div class="info not-bidirectional">
+          {{t "qz-assessment-confirmation.forward"}}
+        </div>
+      {{/if}}
+    </div>
+    <div class="footer">
+      <div class="cancel" {{action 'cancel'}}>
+        {{t 'common.cancel'}}
+      </div>
+      <div class="start" {{action 'start'}}>
+        {{t 'gru-assessment-confirmation.start'}}!
+      </div>
+    </div>
+  </div>
+</div>
