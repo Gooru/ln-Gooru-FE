@@ -140,7 +140,7 @@ export default Ember.Controller.extend({
     },
 
     //Action triggered when change month
-    onChaneMonth() {
+    onChangeMonth() {
       const controller = this;
       controller.loadData();
     }

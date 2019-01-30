@@ -8,8 +8,8 @@
             forMonth=activeMonth
             allowDateSelectorToggle=true
             forYear=activeYear
-            showPreviousMonth="onChaneMonth"
-            showNextMonth="onChaneMonth"
+            showPreviousMonth="onChangeMonth"
+            showNextMonth="onChangeMonth"
           }}
         </div>
         <div class="chart-area">
@@ -40,8 +40,8 @@
         <div class="activities-count-container">
           <div class="activity-count">{{activitiesCount.scheduled}}</div>
           <div class="activities-info"><span>{{gru-icon name="supervisor_account"}}</span>Class Activities Conducted</div>
-          <div class="activity-count">{{activitiesCount.unscheduled}}</div>
-          <div class="activities-info"><span>{{gru-icon name="supervisor_account"}}</span>Class Activities Conducted</div>
+          <div class="activity-count unscheduled-count">{{activitiesCount.unscheduled}}</div>
+          <div class="activities-info"><span>{{gru-icon name="supervisor_account"}}</span>Class Activities Yet To Be Done</div>
         </div>
       </div>
     </div>

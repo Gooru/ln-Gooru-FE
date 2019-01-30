@@ -87,16 +87,20 @@ export default Ember.Component.extend({
         let studentPerformanceData = Ember.Object.create({
           id: student.id,
           thumbnail: student.avatarUrl,
+          firstName: student.firstName,
+          lastName: student.lastName,
           fullName: `${student.lastName} ${student.firstName}`,
           percentScore: 0,
           completedCompetencies: 0
         });
         let studentPerformanceSummary = performanceSummary.findBy('userId', student.id);
         if (studentPerformanceSummary) {
-          togalMasteredCompetencies += studentPerformanceSummary.completedCompetencies - studentPerformanceSummary.inprogressCompetencies;
+          togalMasteredCompetencies += studentPerformanceSummary.completedCompetencies;
+          let notStartedCompetencies = studentPerformanceSummary.totalCompetencies - (studentPerformanceSummary.completedCompetencies + studentPerformanceSummary.inprogressCompetencies);
           studentPerformanceData.set('totalCompetencies', studentPerformanceSummary.totalCompetencies);
           studentPerformanceData.set('completedCompetencies', studentPerformanceSummary.completedCompetencies);
           studentPerformanceData.set('inprogressCompetencies', studentPerformanceSummary.inprogressCompetencies);
+          studentPerformanceData.set('notStartedCompetencies', notStartedCompetencies);
           studentPerformanceData.set('percentCompletion', studentPerformanceSummary.percentCompletion);
           studentPerformanceData.set('percentScore', studentPerformanceSummary.percentScore);
           studentPerformanceData.set('gradeId', studentPerformanceSummary.gradeId);
@@ -222,7 +226,6 @@ export default Ember.Component.extend({
       .attr('class', 'node-point')
       .on('mouseover', function(data) {
         tooltip.style('visibility', 'hidden');
-        tooltip.style('background-color', getGradeColor(data.percentScore));
         tooltip
           .html(component.renderTooltip(data))
           .style('left', `${d3.event.clientX}px`)
@@ -280,15 +283,12 @@ export default Ember.Component.extend({
    * Method to render tooltip
    */
   renderTooltip(data) {
-    var tooltipHtml = '<div class="user-profile-tooltip">';
-    tooltipHtml += `<div class="display-profile-url" style="background-image: url(${data.thumbnail})"></div>`;
-    tooltipHtml += `<div class="label-text">Fullname:</div><div>${data.fullName}</div>`;
-    tooltipHtml += `<div class="label-text">Grade:</div><div>${data.gradeId}</div>`;
-    tooltipHtml += `<div class="label-text">Score:</div><div class="user-performance-score">${data.percentScore}</div>`;
-    tooltipHtml += `<div class="label-text">Completed Competencies:</div><div class="user-proficiency-count">${data.completedCompetencies}</div>`;
-    tooltipHtml += `<div class="label-text">Inprogress Competencies:</div><div class="user-proficiency-count">${data.inprogressCompetencies}</div>`;
-    tooltipHtml += `<div class="label-text">Mastered Competencies:</div><div class="user-proficiency-count">${data.completedCompetencies - data.inprogressCompetencies}</div>`;
-    tooltipHtml += `<div class="label-text">Total Competencies:</div><div class="user-proficiency-count">${data.totalCompetencies}</div>`;
+    let tooltipHtml = '<div class="tooltip-container">';
+    tooltipHtml += `<div class="header-container"><img src="${data.thumbnail}"/><div class="student-name"><span class="ellipsis">${data.firstName}</span><span class="ellipsis">${data.lastName}</span></div><div class="competency-status-count"><span class="mastered">${data.completedCompetencies}</span>/<span class="inprogress">${data.inprogressCompetencies}</span>/<span class="not-started">${data.notStartedCompetencies}</span></div></div>`;
+    tooltipHtml += '<div class="body-container">';
+    tooltipHtml += `<div class="destination-container"><div class="grade-info"><span class="title-container">Destination</span><span class="grade-level">${data.gradeId}</span></div><div class="competencies"><span class="title-container">Competencies</span><span class="competency-count">${data.totalCompetencies}</span></div></div>`;
+    tooltipHtml += `<div class="performance-container"><div class="performance"><span class="score-count" style="color: ${getGradeColor(data.percentScore)};">${data.percentScore}%</span><span class="title-container">Performance</span></div><div class="progress-container"><span class="progress-count">${data.percentCompletion}%</span><span class="title-container">Progress</span></div></div>`;
+    tooltipHtml += '</div>';
     return tooltipHtml;
   }
 });

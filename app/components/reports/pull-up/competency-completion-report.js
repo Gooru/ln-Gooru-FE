@@ -2,15 +2,24 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+  // -------------------------------------------------------------------------
+  // Attributes
   classNames: ['pull-up', 'competency-completion-report'],
 
+  // -------------------------------------------------------------------------
+  // Dependencies
   competencyService: Ember.inject.service('api-sdk/competency'),
 
+  // -------------------------------------------------------------------------
+  // Events
   didInsertElement() {
     this.openPullUp();
   },
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+    //Action triggered when select a competency
     onSelectCompetency(competencyData, competencySeq) {
       const component = this;
       let domainData = component.get('domainData');
@@ -20,11 +29,15 @@ export default Ember.Component.extend({
       });
     },
 
+    //Action triggered when close pullup
     onClosePullup() {
       const component = this;
       component.closePullUp();
     }
   },
+
+  // -------------------------------------------------------------------------
+  // Functions
 
   /**
    * Function to animate the  pullup from bottom to top
@@ -52,6 +65,10 @@ export default Ember.Component.extend({
     );
   },
 
+  /**
+   * @function toggleCompetencyContainer
+   * Method to toggle competency container view
+   */
   toggleCompetencyContainer(competencySeq) {
     const component = this;
     const $competencyContainer = component.$('.competency-container .users-completion-container');
@@ -64,6 +81,10 @@ export default Ember.Component.extend({
     }
   },
 
+  /**
+   * @function fetchUsersCompetencyPerformanceSummary
+   * Method to fetch user competency performance summary
+   */
   fetchUsersCompetencyPerformanceSummary(domainCode, competencyCode) {
     const controller = this;
     const competencyService = controller.get('competencyService');
@@ -77,7 +98,7 @@ export default Ember.Component.extend({
       agent
     };
     return Ember.RSVP.hash({
-      usersPerformanceSummary: Ember.RSVP.resolve(competencyService.getUsersCompetencyPerformanceSummary(classId, domainCode, competencyCode, filters))
+      usersPerformanceSummary: competencyService.getUsersCompetencyPerformanceSummary(classId, domainCode, competencyCode, filters)
     })
       .then(({usersPerformanceSummary}) => {
         return usersPerformanceSummary;
