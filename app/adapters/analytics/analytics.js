@@ -86,10 +86,10 @@ export default Ember.Object.extend({
    * @function getAtcPerformanceSummaryPremiumClass
    * Method to fetch performance summary of a premium class for ATC view
    */
-  getAtcPerformanceSummaryPremiumClass(classId, courseId, subjectCode) {
+  getAtcPerformanceSummaryPremiumClass(classId, courseId, subjectCode, filters) {
     const adapter = this;
     const namespace = this.get('dsUsersNamespace');
-    const url = `${namespace}/nc/atc/recompute`;
+    const url = `${namespace}/nc/atc/pvc`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -99,6 +99,9 @@ export default Ember.Object.extend({
         subjectCode
       }
     };
+    if (filters) {
+      options.data = Object.assign(options.data, filters);
+    }
     return Ember.$.ajax(url, options);
   },
 

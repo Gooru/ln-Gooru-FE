@@ -1,5 +1,59 @@
 <div class="controller teacher class atc">
-  {{#if classAtcPerformanceSummary}}
-    {{teacher.class.navigator-atc-view dataset=classAtcPerformanceSummary}}
+  {{#if isPremiumClass}}
+    <div class="data-view-container navigator-class">
+      <div class="chart-container">
+        <div class="month-picker">
+              {{ca-date-picker
+            showToday=true
+            forMonth=activeMonth
+            allowDateSelectorToggle=true
+            forYear=activeYear
+            showPreviousMonth="onChaneMonth"
+            showNextMonth="onChaneMonth"
+          }}
+        </div>
+        <div class="chart-area">
+          {{teacher.class.navigator-atc-view classData=class month=activeMonth year=activeYear}}
+        </div>
+      </div>
+      <div class="data-analysis-cards-container hidden">
+        <div class="domains-card-container">
+          <div class="title-container">DOMAINS TO BE REVIEWED</div>
+          <div class="domains-completion-container">
+            {{#each domainsCompletionReport.domainsData as |domainData|}}
+              <div class="domain-completion-report" {{action "onSelectDomain" domainData}}>
+                <div class="domain-info-container">
+                  <div class="domain-code">{{domainData.domainCode}}</div>
+                  <div class="domain-title ellipsis">{{domainData.domainName}}</div>
+                </div>
+                <div class="domain-performance-container">
+                  <div class="completion-percentage">{{domainData.completionPercentage}}%</div>
+                  <div class="completion-box"><span style="background-color: {{safe-html (grade-color domainData.completionPercentage)}}; width: {{domainData.completionPercentage}}%;"></span></div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+          <div class="actions-container">
+            <div class="action-container">Show All</div>
+          </div>
+        </div>
+        <div class="activities-count-container">
+          <div class="activity-count">{{activitiesCount.scheduled}}</div>
+          <div class="activities-info"><span>{{gru-icon name="supervisor_account"}}</span>Class Activities Conducted</div>
+          <div class="activity-count">{{activitiesCount.unscheduled}}</div>
+          <div class="activities-info"><span>{{gru-icon name="supervisor_account"}}</span>Class Activities Conducted</div>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="data-view-container regular-class">
+      <div class="chart-container">
+        {{teacher.class.atc-chart classData=class isPremiumClass=isPremiumClass}}
+      </div>
+    </div>
   {{/if}}
 </div>
+
+{{#if isShowCompetencyCompletionReport}}
+  {{reports.pull-up.competency-completion-report showPullUp=isShowCompetencyCompletionReport activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent}}
+{{/if}}

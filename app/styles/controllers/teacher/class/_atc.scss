@@ -1,0 +1,218 @@
+.controller.teacher.class.atc {
+  .data-view-container {
+    display: grid;
+    grid-template-columns: auto 304px;
+    column-gap: 11px;
+    justify-content: center;
+    .chart-container {
+      justify-self: center;
+      width: 100%;
+      .month-picker {
+        .ca-date-picker-container {
+          box-shadow: none;
+          .ca-date-nav-container {
+            width: 50%;
+            background-color: $white;
+            margin: auto;
+            margin-bottom: 5px;
+            box-shadow: none;
+            .ca-date-picker-toggle {
+              pointer-events: none;
+              i {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+
+      .chart-area {
+        background-color: #202e32;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+      }
+      .class-info-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        margin: 0 15px;
+        .class-name {
+          font-size: 25px;
+          font-weight: bold;
+          color: $white;
+        }
+        .total-competencies {
+          .competency-count {
+            font-size: 25px;
+            font-weight: bold;
+            color: $white;
+          }
+          .competency-label {
+            font-size: 12px;
+            text-align: right;
+            color: $white;
+          }
+        }
+      }
+    }
+    .data-analysis-cards-container {
+      width: 304px;
+      .domains-card-container {
+        background-color: $white;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+        .title-container {
+          font-size: 15px;
+          font-weight: bold;
+          color: #37424b;
+          height: 38px;
+          line-height: 38px;
+          box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+          padding-left: 8px;
+        }
+        .domains-completion-container {
+          .domain-completion-report {
+            display: grid;
+            grid-template-columns: 209px auto;
+            border-bottom: 1px solid #979797;
+            padding: 4px 8px;
+            .domain-info-container {
+              .domain-title {
+                font-size: 12px;
+                font-weight: bold;
+                color: #37424b;
+              }
+              .domain-code {
+                font-size: 10px;
+                color: #37424b;
+              }
+            }
+            .domain-performance-container {
+              display: grid;
+              justify-content: right;
+              .completion-percentage {
+                font-size: 15px;
+                font-weight: bold;
+                text-align: right;
+                color: #3a444d;
+              }
+              .completion-box {
+                display: block;
+                height: 10px;
+                width: 75px;
+                background-color: rgba(191, 191, 191, 0.5);
+                span {
+                  height: inherit;
+                  float: right;
+                }
+              }
+            }
+          }
+        }
+        .actions-container {
+          height: 40px;
+          display: grid;
+          justify-content: center;
+          align-items: center;
+          .action-container {
+            font-size: 12px;
+            font-weight: bold;
+            color: #007ab8;
+            text-transform: uppercase;
+          }
+        }
+      }
+      .activities-count-container {
+        width: 305px;
+        height: 100px;
+        border-radius: 4px;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+        background-color: $white;
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        justify-content: space-around;
+        margin: 15px 0;
+        .activity-count {
+          font-size: 50px;
+          font-weight: 300;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.16;
+          letter-spacing: normal;
+          color: #37424b;
+        }
+        .activities-info {
+          font-size: 12px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          color: #37424b;
+          display: grid;
+          grid-template-columns: auto auto;
+          justify-content: left;
+          align-items: center;
+          span {
+            i {
+
+            }
+          }
+        }
+      }
+    }
+
+    &.regular-class {
+      grid-template-columns: auto;
+      .atc-chart {
+        width: max-content;
+        position: relative;
+        background-color: $white;
+        border-radius: 4px;
+        margin: auto;
+        .reset {
+          position: unset;
+          right: 0;
+          float: unset;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
+      .chart-container {
+        .chart-area {
+          zoom: 0.8;
+        }
+      }
+    }
+
+    @media screen and (max-width: 992px) {
+      grid-template-columns: auto;
+      row-gap: 15px;
+      .chart-container {
+        .month-picker {
+          margin-bottom: 15px;
+        }
+        .chart-area {
+          zoom: 0.9;
+        }
+      }
+      .data-analysis-cards-container {
+        width: 100%;
+
+        .activities-count-container {
+          width: 100%;
+        }
+      }
+    }
+
+    @media screen and (max-width: 481px) {
+      .chart-container {
+        .chart-area {
+          zoom: 0.55;
+        }
+      }
+    }
+  }
+}

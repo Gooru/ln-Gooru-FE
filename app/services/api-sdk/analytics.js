@@ -339,12 +339,12 @@ export default Ember.Service.extend({
    * @function getAtcPerformanceSummaryPremiumClass
    * Method to fetch performance summary of a premium class for ATC view
    */
-  getAtcPerformanceSummaryPremiumClass(classId, courseId, subjectCode) {
+  getAtcPerformanceSummaryPremiumClass(classId, courseId, subjectCode, filters) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('analyticsAdapter')
-        .getAtcPerformanceSummaryPremiumClass(classId, courseId, subjectCode)
+        .getAtcPerformanceSummaryPremiumClass(classId, courseId, subjectCode, filters)
         .then(function(classSummary) {
           resolve(
             service
