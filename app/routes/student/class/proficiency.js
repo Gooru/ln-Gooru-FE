@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
+import { CLASS_SKYLINE_INITIAL_DESTINATION } from 'gooru-web/config/config';
 
 export default Ember.Route.extend({
   // -------------------------------------------------------------------------
@@ -35,14 +36,43 @@ export default Ember.Route.extend({
     }
   }),
 
+  /**
+   * Property used to identify destination.
+   * @type {String}
+   */
+  destination: Ember.computed.alias('skylineInitialState.destination'),
+
   // -------------------------------------------------------------------------
   // Methods
+
+  beforeModel: function() {
+    const route = this;
+    const currentClass = route.modelFor('student.class').class;
+    const classId = currentClass.get('id');
+    return route
+      .get('skylineInitialService')
+      .fetchState(classId)
+      .then(skylineInitialState => {
+        route.set('skylineInitialState', skylineInitialState);
+        let destination = skylineInitialState.get('destination');
+        if (destination === CLASS_SKYLINE_INITIAL_DESTINATION.courseMap) {
+          return route.transitionTo('student.class.course-map');
+        } else if (
+          destination === CLASS_SKYLINE_INITIAL_DESTINATION.classSetupInComplete
+        ) {
+          return route.transitionTo('student.class.setup-in-complete');
+        } else if (
+          destination === CLASS_SKYLINE_INITIAL_DESTINATION.diagnosticPlay
+        ) {
+          return route.transitionTo('student.class.diagnosis-of-knowledge');
+        }
+      });
+  },
 
   model: function() {
     const route = this;
     const currentClass = route.modelFor('student.class').class;
     const course = route.modelFor('student.class').course;
-    const classId = currentClass.get('id');
     route.set('course', course);
     const subjectCode = route.get('subjectCode');
 
@@ -54,10 +84,7 @@ export default Ember.Route.extend({
       course: course,
       taxonomyGrades: taxonomyService.fetchGradesBySubject(filters),
       subject: route.get('taxonomyService').fetchSubject(subjectCode),
-      class: currentClass,
-      skylineInitialState: route
-        .get('skylineInitialService')
-        .fetchState(classId)
+      class: currentClass
     });
   },
 
@@ -70,7 +97,8 @@ export default Ember.Route.extend({
     controller.set('class', model.class);
     controller.set('course', model.course);
     controller.set('subject', model.subject);
-    controller.set('skylineInitialState', model.skylineInitialState);
+    let skylineInitialState = this.get('skylineInitialState');
+    controller.set('skylineInitialState', skylineInitialState);
     let taxonomyGrades = model.taxonomyGrades;
     if (taxonomyGrades) {
       controller.set(

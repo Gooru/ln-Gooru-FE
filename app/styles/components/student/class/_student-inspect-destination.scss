@@ -387,19 +387,33 @@
   }
 
   .lp-compute-inprogress {
-    p:nth-child(1) {
-      padding-top: 20px;
-      font-size: 20px;
-      line-height: 1.2;
-      margin: 0;
+    align-self: center;
+    justify-self: center;
+
+    span {
+      font-size: 40px;
+      display: flex;
+      align-items: center;
+      width: 300px;
+      margin: 0 auto;
     }
 
-    p:nth-child(2),
-    p:nth-child(3) {
+    .compute-icon {
+      background: url("gooru/images/ellipsis-loading-icon.svg") no-repeat;
+      display: block;
+      background-size: 150px 150px;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto;
+    }
+
+    p {
       padding-top: 20px;
-      font-size: 15px;
+      font-size: 35px;
       line-height: 1.2;
       margin: 0;
+      text-align: center;
+      padding-right: 20px;
     }
   }
 }
