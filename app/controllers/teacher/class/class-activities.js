@@ -402,13 +402,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         let classMembers = component.get('members');
         let classActivityStudents = Ember.A([]);
         activityMembers.map(member => {
-          classActivityStudents.push(classMembers.findBy('id', member.id));
+          let isActivityMember = classMembers.findBy('id', member.id);
+          let isActiveMember = member.isActive;
+          if(isActivityMember && isActiveMember){
+            classActivityStudents.push(isActivityMember);
+          }
         });
-
         component.set(
           'activityMembers',
           classActivityStudents.sortBy('firstName')
         );
+
         if (item.format === 'assessment') {
           component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
           component.set('isShowCollectionPerformanceEntryPullUp', false);
@@ -441,11 +445,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('isShowExternalCollectionPeformanceEntryPullUp', false);
       controller.loadData();
       controller.get('classController').fetchDcaSummaryPerformance();
-    },
-
-    onClickCreateOfflineActivity() {
-      let controller = this;
-      controller.set('isShowCreateOfflineActivity', true);
     },
 
     onClosePullUp() {

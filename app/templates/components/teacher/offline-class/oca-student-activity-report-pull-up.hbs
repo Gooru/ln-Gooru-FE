@@ -5,7 +5,7 @@
   <div class="report-header">
     <div class="header-title">
       <i class="icon {{collection.collectionType}}"></i>
-      <span class="title ellipsis">{{collection.title}}</span>
+      <span class="title ellipsis">{{safe-html collection.title}}</span>
     </div>
     <div class="close" {{action 'onPullUpClose' false}}>
       {{gru-icon name="close"}}
@@ -60,7 +60,7 @@
               <i class="resource-img {{resource.format}}"></i>
             {{/if}}
           </div>
-          <div class="resource-title ellipsis">{{resource.title}}</div>
+          <div class="resource-title ellipsis">{{safe-html resource.title}}</div>
           {{#if (eq resource.performance.questionType 'OE')}}
             <i class="rubric-img"></i>
           {{/if}}

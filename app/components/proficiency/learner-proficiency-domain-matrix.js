@@ -585,6 +585,7 @@ export default Ember.Component.extend({
       .attr('yaxis-seq', d => d.yAxisSeq)
       .attr('class', d => {
         let skylineClassName = d.skyline ? 'skyline-competency' : '';
+        let isMasteredCompetency = d.mastered ? 'mastered-competncy': '';
         let domainBoundaryCompetency = d.isDomainBoundaryCompetency
           ? 'domain-boundary'
           : '';
@@ -594,7 +595,7 @@ export default Ember.Component.extend({
           d.yAxisSeq
         } fillArea${d.status.toString()} ${domainBoundaryCompetency} ${
           d.boundaryClass
-        }`;
+        } ${isMasteredCompetency}`;
       })
       .on('click', function(d) {
         component.selectCompetency(d);
@@ -640,7 +641,8 @@ export default Ember.Component.extend({
     skylineElements.each(function(index) {
       let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
       let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
-      y1 = y1 === 0 ? y1 + 3 : y1 + cellHeight + 3;
+      let isMasteredCompetency = component.$(skylineElements[index]).hasClass('mastered-competncy');
+      y1 = y1 === 0 && !isMasteredCompetency ? y1 + 3 : y1 + cellHeight + 3;
       let x2 = x1 + cellWidth;
       let y2 = y1;
       let linePoint = {

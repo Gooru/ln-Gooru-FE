@@ -27,6 +27,7 @@ export default Ember.Component.extend({
     component.fetchAudiences();
     component.set('forMonth', moment().format('MM'));
     component.set('forYear', moment().format('YYYY'));
+    component.$('.activity-title').focus();
   },
 
   // -------------------------------------------------------------------------
@@ -74,7 +75,9 @@ export default Ember.Component.extend({
         let scheduledMonth = activityDate ? null : component.get('unscheduledMonth.monthNumber');
         let scheduledYear = activityDate ? null : component.get('unscheduledMonth.monthYear');
         component.addActivity(classId, contentId, activityDate, scheduledMonth, scheduledYear).then(function(activityId) {
-          externalCollection.collectionType = 'collection-external';
+          let contentType = 'collection-external';
+          externalCollection.set('collectionType', contentType);
+          externalCollection.set('format', contentType);
           let activityData = Ember.Object.create({
             collection: Ember.Object.create(externalCollection),
             id: activityId,
@@ -85,7 +88,7 @@ export default Ember.Component.extend({
             forMonth: parseInt(scheduledMonth),
             forYear: parseInt(scheduledYear)
           });
-          component.sendAction('addedContentToDCA', activityData, activityDate, scheduledMonth, scheduledYear);
+          component.sendAction('onAddExternalCollectionToDCA', activityData, activityDate, scheduledMonth, scheduledYear);
           component.closePullUp();
         });
       });
@@ -96,6 +99,10 @@ export default Ember.Component.extend({
       const component = this;
       const taxonomyPickerContainer = component.$('.taxonomy-picker-container');
       component.$(taxonomyPickerContainer).slideDown(1000, function() {
+        if (!component.get('selectedCompetencies.length')) {
+          component.set('course', null);
+          component.set('domain', null);
+        }
         component.set('isShowTaxonomyPicker', true);
       });
     },
@@ -127,6 +134,13 @@ export default Ember.Component.extend({
     onCloseCreateActivity() {
       const component = this;
       component.closePullUp();
+    },
+
+    //Action triggered when remove tag
+    onRemoveSelectedTag(tag) {
+      const component = this;
+      component.get('selectedCompetencies').removeObject(tag.get('data'));
+      component.get('visibleTaxonomyTags').removeObject(tag);
     }
 
   },
@@ -252,7 +266,7 @@ export default Ember.Component.extend({
     let firtDateOfCurrentMonth = moment(`${monthAndYearOfCurrentDate}-01`);
     if (showMonths && forFirstDateOfMonth) {
       let numberOfMonthsToShow = component.get('numberOfMonthsToShow');
-      for (let index = 1; index <= numberOfMonthsToShow; index++) {
+      for (let index = 0; index < numberOfMonthsToShow; index++) {
         let slectedMonth = moment(forFirstDateOfMonth).add(index, 'months');
         let monthName = moment(forFirstDateOfMonth)
           .add(index, 'months')
@@ -285,7 +299,7 @@ export default Ember.Component.extend({
     const component = this;
     let isClassPreferenceMapped = component.get('isClassPreferenceMapped');
     let activityTitle = component.get('activityTitle');
-    return isClassPreferenceMapped && (activityTitle !== null && activityTitle !== '');
+    return isClassPreferenceMapped && (activityTitle !== null && activityTitle.trim() !== '');
   }),
 
   /**
@@ -299,6 +313,24 @@ export default Ember.Component.extend({
    * Property to hold selected domain title
    */
   domain: null,
+
+  /**
+   * @property {Array} visibleTaxonomyTags
+   * Properto to hold visible taxonomy tags
+   */
+  visibleTaxonomyTags: Ember.computed('selectedCompetencies', function() {
+    const component = this;
+    let selectedCompetencies = component.get('selectedCompetencies');
+    let visibleTaxonomyTags = selectedCompetencies.map(taxonomyTag => {
+      return Ember.Object.create({
+        data: taxonomyTag,
+        isActive: true,
+        isReadonly: true,
+        isRemovable: true
+      });
+    });
+    return Ember.A(visibleTaxonomyTags);
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -317,8 +349,8 @@ export default Ember.Component.extend({
       return audience.id;
     });
     return {
-      title,
-      description,
+      title: title.trim(),
+      description: description && description.length ? description.trim() : null,
       audience: audienceIds,
       taxonomy
     };

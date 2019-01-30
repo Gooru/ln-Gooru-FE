@@ -1846,3 +1846,28 @@ $canvas-height: 1254px;
     }
   }
 }
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+  .controller.teacher.classbg {
+    .controller.teacher.class.class-settings {
+      .sec-col-layout {
+        .sec-rows-layout {
+          width: 43%;
+          .class-btn {
+            width: 203px;
+          }
+          .class-btn {
+            width: 212px;
+          }
+        }
+        .student-sec-cont {
+          .student-settings-sec {
+            width: 100%;
+            .student-grid {
+              grid-template-columns: 40px minmax(0px, auto) 93px 140px auto auto auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}
