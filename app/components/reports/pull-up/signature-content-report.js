@@ -39,7 +39,7 @@ export default Ember.Component.extend({
 
   standardCode: Ember.computed.alias('competency.competencyCode'),
 
-  signatureContent: Ember.Object.create({}),
+  signatureContent: null,
 
   /**
    * @property {boolean} showSignatureAssessment
