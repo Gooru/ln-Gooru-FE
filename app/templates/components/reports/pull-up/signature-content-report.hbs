@@ -1,7 +1,15 @@
 {{#if isLoading}}
   {{three-bounce-spinner}}
 {{else}}
+{{#if isStudent}}
+{{isStudent}}
   <div class="signature-content">
+    {{#if showSignatureAssessment}}
+      <div class="competency-content">
+        <div class="competency-img"></div>
+        <div class="competency-note">{{t 'report.competency-report.note'}}</div>
+      </div>
+    {{/if}}
     {{#if signatureContent}}
       <div class="signature-accordion">
         <div class="signature-panel" data-toggle="collapse" data-target="#collapse-{{index}}">
@@ -53,5 +61,6 @@
       </div>
     {{/if}}
   </div>
+  {{/if}}
   {{reports.pull-up.competency-meta-info  competency=competency microCompetencies=microCompetencies collectionPerformances=collectionPerformances userId=userId prequisiteCompetencies=prerequisites}}
 {{/if}}

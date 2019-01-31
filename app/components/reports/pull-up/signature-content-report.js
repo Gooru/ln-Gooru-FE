@@ -113,7 +113,6 @@ export default Ember.Component.extend({
   /**
    * competency  change will call the function
    */
-
   onChangeCompetency: Ember.observer('competency', function() {
     let component = this;
     component.loadData();
@@ -122,13 +121,11 @@ export default Ember.Component.extend({
   init() {
     let component = this;
     component._super(...arguments);
-    component.fetchLearningMapsContent();
-    component.fetchCodes();
+    component.loadData();
   },
 
   loadData() {
     let component = this;
-    component._super(...arguments);
     component.fetchLearningMapsContent();
     component.fetchCodes();
   },
@@ -196,7 +193,6 @@ export default Ember.Component.extend({
    * @function checkPrerequisiteCompetencyStatus
    * Method to checkPrerequisiteCompetencyStatus
    */
-
   checkPrerequisiteCompetencyStatus(prerequisites) {
     let component = this;
     let domainCompetencyList = component.get(

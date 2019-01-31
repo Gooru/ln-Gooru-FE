@@ -205,7 +205,6 @@ export default Ember.Component.extend({
    * @function fetchSignatureCompetencyList
    * Method to fetch fetchSignatureCompetencyList
    */
-
   fetchSignatureCompetencyList() {
     let component = this;
     let subject = component.get('subject.id');
@@ -268,7 +267,6 @@ export default Ember.Component.extend({
         if (className.indexOf('competency-more-cells') < 0) {
           component.blockChartContainer(d);
           component.checkSignatureAssessment(d, data);
-          //component.sendAction('onCompetencyPullOut', d, data);
         }
       });
 
@@ -386,9 +384,9 @@ export default Ember.Component.extend({
     let competencyMatrixs = component.get('competencyMatrixs');
     let domainCode = selectedCompetency.get('domainCode');
     let signatureCompetencyList = component.get('signatureCompetencyList');
-    let showSignatureAssessment =
-      signatureCompetencyList[domainCode] ===
-      selectedCompetency.get('competencyCode');
+    let showSignatureAssessment = signatureCompetencyList[domainCode].includes(
+      selectedCompetency.get('competencyCode')
+    );
     selectedCompetency.set('showSignatureAssessment', showSignatureAssessment);
     component.sendAction(
       'onCompetencyPullOut',
