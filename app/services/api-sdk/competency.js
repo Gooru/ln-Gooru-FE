@@ -189,12 +189,12 @@ export default Ember.Service.extend({
    * @function getDomainsCompletionReport
    * Method to get domain completion report
    */
-  getDomainsCompletionReport(classId, filters) {
+  getDomainsCompletionReport(requestBody) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('competencyAdapter')
-        .getDomainsCompletionReport(classId, filters)
+        .getDomainsCompletionReport(requestBody)
         .then(function(response) {
           resolve(
             service.get('competencySerializer').normalizeDomainsCompletionReport(response)
@@ -211,12 +211,17 @@ export default Ember.Service.extend({
    * @function getCompetencyCompletionReport
    * Method to fetch competency completion report
    */
-  getCompetencyCompletionReport(classId, domainCode, filters) {
+  getCompetencyCompletionReport(requestBody) {
     const service = this;
+    // return new Ember.RSVP.Promise(function(resolve, reject) {
+    //   resolve(
+    //     service.get('competencySerializer').normalizeCompetencyCompletionReport()
+    //   );
+    // });
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('competencyAdapter')
-        .getCompetencyCompletionReport(classId, domainCode, filters)
+        .getCompetencyCompletionReport(requestBody)
         .then(function(response) {
           resolve(
             service.get('competencySerializer').normalizeCompetencyCompletionReport(response)
@@ -233,12 +238,17 @@ export default Ember.Service.extend({
    * @function getUsersCompetencyPerformanceSummary
    * Method to fetch users compeletion performance summary
    */
-  getUsersCompetencyPerformanceSummary(classId, domainCode, competencyCode, filters) {
+  getUsersCompetencyPerformanceSummary(requestBody) {
     const service = this;
+    // return new Ember.RSVP.Promise(function(resolve, reject) {
+    //   resolve(
+    //     service.get('competencySerializer').normalizeUsersCompetencyPerformanceSummary()
+    //   );
+    // });
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('competencyAdapter')
-        .getUsersCompetencyPerformanceSummary(classId, domainCode, competencyCode, filters)
+        .getUsersCompetencyPerformanceSummary(requestBody)
         .then(function(response) {
           resolve(
             service.get('competencySerializer').normalizeUsersCompetencyPerformanceSummary(response)

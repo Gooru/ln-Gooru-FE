@@ -1295,6 +1295,14 @@ export default Object.assign(quizzesTranslations, {
         'error-message':
           'The class does not have a course assigned or does not have students rostered into the class yet. Once the course has been assigned to the class and the students are rostered, the class competency report will be shown here'
       },
+      'atc-view': {
+        'domains-reviewed': 'Domains to be reviewed',
+        'class-activities-conducted': 'Class Activities Conducted',
+        'class-activities-pending': 'Class Activities Yet To Be Done',
+        'show-all': 'Show All',
+        collapse: 'Collapse',
+        'total-competencies-gained': 'Total Competencies Gained'
+      },
       'class-activities': 'Class Activities',
       'back-to-class-activities': 'Back to  Class Activities',
       'class-activities-tab': {

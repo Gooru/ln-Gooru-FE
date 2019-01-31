@@ -143,24 +143,6 @@ export default Ember.Object.extend({
    * @function normalizeDomainsCompletionReport
    */
   normalizeDomainsCompletionReport(payload) {
-    // payload = {
-    //            	'member_count': 50,
-    //            	'domains': [{
-    //            		'domain': {
-    //            			'tx_domain_code': 'OAT',
-    //            			'tx_domain_name': 'Operations and Algebraic Thinking',
-    //            			'tx_domain_seq': 1
-    //            		},
-    //            		'average_completions': 56
-    //            	}, {
-    //            		'domain': {
-    //            			'tx_domain_code': 'NOBT',
-    //            			'tx_domain_name': 'Number and Operations in Base Ten',
-    //            			'tx_domain_seq': 4
-    //            		},
-    //            		'average_completions': 75
-    //            	}]
-    // };
     let normalizedCompletionReportData = Ember.Object.create({
       membersCount: 0,
       domainsData: Ember.A([])
@@ -171,7 +153,7 @@ export default Ember.Object.extend({
       domainsCompletionData.map( domainCompletionData => {
         let domainCompletionDomainInfo = domainCompletionData.domain || domainCompletionData.d;
         let domainData = Ember.Object.create({
-          completionPercentage: domainCompletionData.average_completions || domainCompletionData.avg,
+          completionPercentage: domainCompletionData.average_completions || domainCompletionData.avg || 0,
           domainCode: domainCompletionDomainInfo.tx_domain_code || domainCompletionDomainInfo.dc,
           domainName: domainCompletionDomainInfo.tx_domain_name || domainCompletionDomainInfo.dn,
           domainSeq: domainCompletionDomainInfo.tx_domain_seq || domainCompletionDomainInfo.seq
@@ -209,7 +191,7 @@ export default Ember.Object.extend({
           frameworkCompetencyCode: competencyCompletionData.fw_comp_code || competencyCompletionData.fc,
           competencyCode: competencyCompletionData.tx_comp_code || competencyCompletionData.gc,
           competencyName: competencyCompletionData.tx_comp_name || competencyCompletionData.nm,
-          completionPercentage: competencyCompletionData.completions || competencyCompletionData.avg
+          completionPercentage: competencyCompletionData.completions || competencyCompletionData.avg  || 0
         });
         normalizedCompetencyCompletionReport.pushObject(competencyData);
       });
@@ -248,7 +230,7 @@ export default Ember.Object.extend({
           firstName: userData.first_name || userData.fn,
           lastName: userData.last_name || userData.ln,
           thumbnail: userData.thumbnail || userData.th,
-          score: userPerformanceSummary.score || userPerformanceSummary.sc,
+          score: userPerformanceSummary.score || userPerformanceSummary.sc || 0,
           status: userPerformanceSummary.status || userPerformanceSummary.st
         });
         normalizedUsersCompetencyPerformanceSummary.pushObject(userPerformanceData);

@@ -62,6 +62,7 @@
         background-color: $white;
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
         border-radius: 4px;
+
         .title-container {
           font-size: 15px;
           font-weight: bold;
@@ -70,8 +71,27 @@
           line-height: 38px;
           box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
           padding-left: 8px;
+          text-transform: uppercase;
         }
         .domains-completion-container {
+          height: 98px;
+          overflow-y: hidden;
+          transition: height 0.2s ease-in;
+
+          &.expanded-view {
+            height: 294px;
+            overflow-y: auto;
+            &::-webkit-scrollbar {
+              height: 6px;
+              width: 4px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+              background: $gray-light;
+              border: 1px solid $gray-light;
+              border-radius: 5px;
+            }
+          }
           .domain-completion-report {
             display: grid;
             grid-template-columns: 209px auto;
@@ -115,6 +135,8 @@
           display: grid;
           justify-content: center;
           align-items: center;
+          box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+          cursor: pointer;
           .action-container {
             font-size: 12px;
             font-weight: bold;

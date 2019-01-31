@@ -207,28 +207,53 @@ export default Ember.Object.extend({
     });
   },
 
-  getDomainsCompletionReport(classId, filters) {
+  /**
+   * @function getDomainsCompletionReport
+   * Method to fetch domains completion report
+   */
+  getDomainsCompletionReport(requestBody) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v2/classes/${classId}/report/domain`;
+    const url = `${namespace}/v2/classes/reports/domains`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
-      data: filters
+      data: requestBody
     };
     return Ember.$.ajax(url, options);
   },
 
-  getCompetencyCompletionReport(classId, domainCode, filters) {
+  /**
+   * @function getCompetencyCompletionReport
+   * Method to fetch competency completion report
+   */
+  getCompetencyCompletionReport(requestBody) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v2/classes/${classId}/report/domains/${domainCode}/competencies`;
+    const url = `${namespace}/v2/classes/reports/domains/competencies`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
-      data: filters
+      data: requestBody
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * @function getUsersCompetencyPerformanceSummary
+   * Method to fetch users competency performance summary
+   */
+  getUsersCompetencyPerformanceSummary(requestBody) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/v2/classes/reports/domains/competencies/performance`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      data: requestBody
     };
     return Ember.$.ajax(url, options);
   },

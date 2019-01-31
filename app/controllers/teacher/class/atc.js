@@ -102,13 +102,16 @@ export default Ember.Controller.extend({
 
   /**
    * @property {Number} mediumDeviceWidth
+   * TODO for now we set the device width as 0 to since we have support only for desktop agent
    */
-  mediumDeviceWidth: 992,
+  mediumDeviceWidth: 0,
 
   /**
    * @property {String} userAgent
    */
   userAgent: 'desktop',
+
+  isExpandedView: false,
 
 
   // -------------------------------------------------------------------------
@@ -143,6 +146,11 @@ export default Ember.Controller.extend({
     onChangeMonth() {
       const controller = this;
       controller.loadData();
+    },
+
+    toggleView() {
+      const controller = this;
+      controller.set('isExpandedView', !controller.get('isExpandedView'));
     }
   },
 
@@ -156,10 +164,10 @@ export default Ember.Controller.extend({
     const controller = this;
     controller.set('isLoading', true);
     controller.fetchClassActivitiesCount();
-    // controller.fetchDomainsCompletionReport().then(function(domainsCompletionReport) {
-    //   controller.set('domainsCompletionReport', domainsCompletionReport);
-    //   controller.set('isLoading', false);
-    // });
+    controller.fetchDomainsCompletionReport().then(function(domainsCompletionReport) {
+      controller.set('domainsCompletionReport', domainsCompletionReport);
+      controller.set('isLoading', false);
+    });
   },
 
   /**
@@ -199,13 +207,14 @@ export default Ember.Controller.extend({
     let month = controller.get('activeMonth');
     let year = controller.get('activeYear');
     let agent = controller.get('userAgent');
-    let filters = {
+    let requestBody = {
+      classId,
       month,
       year,
       agent
     };
     return Ember.RSVP.hash({
-      domainsCompletionReport: Ember.RSVP.resolve(competencyService.getDomainsCompletionReport(classId, filters))
+      domainsCompletionReport: Ember.RSVP.resolve(competencyService.getDomainsCompletionReport(requestBody))
     })
       .then(({domainsCompletionReport}) => {
         return domainsCompletionReport;

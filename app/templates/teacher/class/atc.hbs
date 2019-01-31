@@ -16,12 +16,12 @@
           {{teacher.class.navigator-atc-view classData=class month=activeMonth year=activeYear}}
         </div>
       </div>
-      <div class="data-analysis-cards-container hidden">
+      <div class="data-analysis-cards-container">
         <div class="domains-card-container">
-          <div class="title-container">DOMAINS TO BE REVIEWED</div>
-          <div class="domains-completion-container">
+          <div class="title-container">{{t 'teacher-landing.class.atc-view.domains-reviewed'}}</div>
+          <div class="domains-completion-container {{if isExpandedView 'expanded-view'}}">
             {{#each domainsCompletionReport.domainsData as |domainData|}}
-              <div class="domain-completion-report" {{action "onSelectDomain" domainData}}>
+              <div class="domain-completion-report">
                 <div class="domain-info-container">
                   <div class="domain-code">{{domainData.domainCode}}</div>
                   <div class="domain-title ellipsis">{{domainData.domainName}}</div>
@@ -33,15 +33,23 @@
               </div>
             {{/each}}
           </div>
-          <div class="actions-container">
-            <div class="action-container">Show All</div>
-          </div>
+          {{#if (gt domainsCompletionReport.domainsData.length 2)}}
+            <div class="actions-container">
+              <div class="action-container" {{action "toggleView"}}>
+                {{#if isExpandedView}}
+                  {{t 'teacher-landing.class.atc-view.collapse'}}
+                {{else}}
+                  {{t 'teacher-landing.class.atc-view.show-all'}}
+                {{/if}}
+              </div>
+            </div>
+          {{/if}}
         </div>
         <div class="activities-count-container">
           <div class="activity-count">{{activitiesCount.scheduled}}</div>
-          <div class="activities-info"><span>{{gru-icon name="supervisor_account"}}</span>Class Activities Conducted</div>
+          <div class="activities-info"><span>{{gru-icon name="supervisor_account"}}</span>{{t 'teacher-landing.class.atc-view.class-activities-conducted'}}</div>
           <div class="activity-count unscheduled-count">{{activitiesCount.unscheduled}}</div>
-          <div class="activities-info"><span>{{gru-icon name="supervisor_account"}}</span>Class Activities Yet To Be Done</div>
+          <div class="activities-info"><span>{{gru-icon name="supervisor_account"}}</span>{{t 'teacher-landing.class.atc-view.class-activities-pending'}}</div>
         </div>
       </div>
     </div>
