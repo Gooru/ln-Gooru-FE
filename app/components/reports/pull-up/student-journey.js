@@ -25,11 +25,6 @@ export default Ember.Component.extend({
   collection: null,
 
   /**
-   * @property {loading}
-   */
-  loading: true,
-
-  /**
    * @property {isShowPullUp}
    */
   isShowPullUp: false,
@@ -84,9 +79,8 @@ export default Ember.Component.extend({
     /**
      * Action triggered when the user open student Report.
      **/
-    onOpenCollectionReport(collectionPerformance) {
+    onOpenCollectionReport(activity) {
       let component = this;
-      let activity = collectionPerformance;
       component.getStundentCollectionReport(activity);
     }
   },
