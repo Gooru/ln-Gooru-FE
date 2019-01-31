@@ -37,14 +37,12 @@ export default Ember.Component.extend({
   /**
    * @property {studentCollectionReport}
    */
-
   studentCollectionReport: null,
 
   /**
    * @function getStundentCollectionReport
    * Method to get student collection report
    */
-
   getStundentCollectionReport(activity) {
     let component = this;
     let collectionPromise;
@@ -59,21 +57,16 @@ export default Ember.Component.extend({
     }
     return Ember.RSVP.hash({
       collection: collectionPromise
-    })
-      .then(({ collection }) => {
-        component.set('collection', collection);
-        component.set('loading', false);
-        return collection;
-      })
-      .then(function(collection) {
-        collection.set(
-          'performance',
-          Ember.Object.create({
-            score: activity.score
-          })
-        );
-        component.openStudentCollectionReport(activity, collection);
-      });
+    }).then(({ collection }) => {
+      component.set('collection', collection);
+      collection.set(
+        'performance',
+        Ember.Object.create({
+          score: activity.score
+        })
+      );
+      component.openStudentCollectionReport(activity, collection);
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -102,7 +95,6 @@ export default Ember.Component.extend({
    * @function openStudentCollectionReport
    * Method to open student collection report pullup
    */
-
   openStudentCollectionReport(activity, collection) {
     let component = this;
     let collectionType = activity.get('collectionType');
