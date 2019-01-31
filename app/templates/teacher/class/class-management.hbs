@@ -400,7 +400,7 @@
                               'teacher-landing.class.class-settings.class-settings-sec.framework'}}</div>
                   <div class='gradelevel-info'></div>
                   <div class='field-drop-down'>
-                    {{#if tempClass.preference.framework }}
+                    {{#if (and tempClass.preference.framework  class.gradeCurrent )}}
                       <span class='subject-label'>
                         {{#if gradeSubjetFWKDv}}
                           {{get-value 'source' source=subjectFWKDD.frameworks searchProp='code'
@@ -409,11 +409,17 @@
                         {{/if}}
                       </span>
                     {{else}}
-                      {{#if ( not (or class.gradeLowerBound class.gradeUpperBound or class.gradeCurrent )) }}
+                      {{#if ( not (or class.gradeLowerBound class.gradeCurrent )) }}
                         <div class="dropdown">
                           <span class="drop-down-span ellipsis"></span>
                           <button class="btn btn-default dropdown-toggle ellipsis" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
+                            {{#if (and gradeSubjetFWKDv tempClass.preference.framework)  }}
+                              {{get-value 'source' source=subjectFWKDD.frameworks searchProp='code'
+                                              searchVal=tempClass.preference.framework
+                                              destProp='title' }}
+                            {{else}}
+                              {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
+                            {{/if}}
                             <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu">
@@ -445,7 +451,7 @@
                     </div>
                     <div class='field-drop-down'>
                       <div class='grade-info'>
-                        {{#if class.gradeLowerBound}}
+                        {{#if class.gradeLowerBound }}
                           <div class='grade-label'>
                             {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
                                               searchVal=class.gradeLowerBound
