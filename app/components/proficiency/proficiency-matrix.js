@@ -197,8 +197,8 @@ export default Ember.Component.extend({
     let component = this;
     if (component.get('subject')) {
       component.set('timeLine', component.getCurMonthYear());
+      component.fetchSignatureCompetencyList();
     }
-    component.fetchSignatureCompetencyList();
   },
 
   /**
@@ -267,7 +267,7 @@ export default Ember.Component.extend({
         let className = competencyNode.attr('class');
         if (className.indexOf('competency-more-cells') < 0) {
           component.blockChartContainer(d);
-          component.fetchSignatureAssessment(d, data);
+          component.checkSignatureAssessment(d, data);
           //component.sendAction('onCompetencyPullOut', d, data);
         }
       });
@@ -378,11 +378,10 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function fetchSignatureAssessment
-   * Method to fetch fetchSignatureAssessment
+   * @function checkSignatureAssessment
+   * Method to check SignatureAssessment
    */
-
-  fetchSignatureAssessment(selectedCompetency) {
+  checkSignatureAssessment(selectedCompetency) {
     let component = this;
     let competencyMatrixs = component.get('competencyMatrixs');
     let domainCode = selectedCompetency.get('domainCode');

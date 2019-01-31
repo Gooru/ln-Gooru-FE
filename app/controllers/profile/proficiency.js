@@ -24,6 +24,8 @@ export default Ember.Controller.extend({
    */
   showPullOut: false,
 
+  showSignatureAssessment: false,
+
   /**
    * Show loading spinner
    */
@@ -129,10 +131,19 @@ export default Ember.Controller.extend({
         );
         controller.set('description', data.competencyCode);
         let competency = {
-          status: status ? status : 'NA',
+          competencyStatus: status ? status : 'NA',
           date: data.date,
           statusMastered: statusMastered ? statusMastered : null,
-          competencyName: data.competencyName
+          competencyName: data.competencyName,
+          competencyCode: data.competencyCode,
+          competencySeq: data.competencySeq,
+          status: data.status,
+          domainCode: data.domainCode,
+          domainSeq: data.domainSeq,
+          showSignatureAssessment: data.showSignatureAssessment,
+          skyline: data.skyline,
+          xAxisSeq: data.xAxisSeq,
+          yAxisSeq: data.yAxisSeq
         };
         controller.set('competency', competency);
         let domainCode = data.get('domainCode');
@@ -141,7 +152,7 @@ export default Ember.Controller.extend({
           domainCode
         );
         controller.set('domainCompetencyList', domainCompetencyList);
-        controller.set('data', data);
+        controller.set('showSignatureAssessment', data.showSignatureAssessment);
       });
     },
 
