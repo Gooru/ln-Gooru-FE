@@ -409,7 +409,7 @@
                         {{/if}}
                       </span>
                     {{else}}
-                      {{#if (not class.gradeCurrent ) }}
+                      {{#if ( not (or class.gradeLowerBound class.gradeCurrent )) }}
                         <div class="dropdown">
                           <span class="drop-down-span ellipsis"></span>
                           <button class="btn btn-default dropdown-toggle ellipsis" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
