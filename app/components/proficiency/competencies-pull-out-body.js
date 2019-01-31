@@ -29,12 +29,6 @@ export default Ember.Component.extend({
   userId: null,
 
   /**
-   *  Indicates loading icon enabled or not
-   * @type {Boolean}
-   */
-  loading: false,
-
-  /**
    *  Indicates showSignatureAssessment true or not
    * @type {Boolean}
    */
@@ -54,7 +48,6 @@ export default Ember.Component.extend({
      */
     onClickCollectionTitle: function(collection) {
       let component = this;
-      component.set('loading', true);
       let userId = component.get('userId');
       let collectionId = collection.get('id');
       let sessionId = collection.get('sessionId');
@@ -87,7 +80,6 @@ export default Ember.Component.extend({
       Ember.RSVP.hash({
         resources: summaryReportPromise
       }).then(({ resources }) => {
-        component.set('loading', false);
         component.set('resources', resources);
         component.resetAccordionArrowBasedOnState();
       });
