@@ -88,6 +88,7 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "controllers/teacher/class/performance";
 @import "controllers/teacher/class/quick-start";
 @import "controllers/teacher/class/students-proficiency";
+@import "controllers/teacher/class/atc";
 @import "controllers/goals/manage";
 @import "controllers/student-independent-learning/learning-base";
 @import "controllers/not-found";
@@ -381,6 +382,8 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/teacher/class-atc-view";
 @import "components/teacher/class-performance-chart";
 @import "components/teacher/class/atc-chart";
+@import "components/teacher/class/navigator-atc-view";
+@import "components/reports/pull-up/competency-completion-report";
 @import "routes/student/class/performance";
 @import "routes/content/rubric/preview"; //Pull Up
 @import "components/reports/pull-up/competency-report";

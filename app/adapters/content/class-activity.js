@@ -11,6 +11,8 @@ export default Ember.Object.extend({
 
   namespace: '/api/nucleus/v2/classes',
 
+  reportsNamespace: '/api/reports/v1/ca/classes',
+
   /**
    * Adds a new content to class
    *
@@ -169,6 +171,26 @@ export default Ember.Object.extend({
       data: JSON.stringify({
         users: users
       })
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * @function getMonthlyActivitiesCount
+   * Method to fetch activities count for given class
+   */
+  getMonthlyActivitiesCount(classId, month, year) {
+    const adapter = this;
+    const namespace = adapter.get('reportsNamespace');
+    const url = `${namespace}/${classId}/activities`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: {
+        month,
+        year
+      }
     };
     return Ember.$.ajax(url, options);
   },

@@ -215,6 +215,7 @@ Router.map(function() {
         this.route('students');
         this.route('students-proficiency');
         this.route('add-course');
+        this.route('atc');
       }
     );
   });
