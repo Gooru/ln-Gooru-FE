@@ -71,13 +71,13 @@ export default Ember.Component.extend({
    */
   toggleCompetencyContainer(competencySeq) {
     const component = this;
-    const $competencyContainer = component.$('.competency-container .users-completion-container');
-    const $selectedCompletionContainer = component.$(`.competency-${competencySeq} .users-completion-container`);
-    if (component.$($selectedCompletionContainer).hasClass('collapsed')) {
-      component.$($competencyContainer).removeClass('expanded').addClass('collapsed');
-      component.$($selectedCompletionContainer).addClass('expanded').removeClass('collapsed');
+    const competencyContainer = component.$('.competency-container .users-completion-container');
+    const selectedCompletionContainer = component.$(`.competency-${competencySeq} .users-completion-container`);
+    if (selectedCompletionContainer.hasClass('collapsed')) {
+      competencyContainer.removeClass('expanded').addClass('collapsed');
+      selectedCompletionContainer.addClass('expanded').removeClass('collapsed');
     } else {
-      component.$($selectedCompletionContainer).toggleClass('expanded').addClass('collapsed');
+      selectedCompletionContainer.toggleClass('expanded').addClass('collapsed');
     }
   },
 
