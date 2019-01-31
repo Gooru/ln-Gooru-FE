@@ -6,7 +6,7 @@
         <i class="icon {{collectionPerformance.collectionType}}"></i>
         <div class="collection-title">{{collectionPerformance.title}}</div>
         {{#if (eq collectionPerformance.collectionType 'assessment')}}
-          <div class="performance"  {{action 'onOpenCollectionReport' collectionPerformance}} style="background-color:{{grade-color collectionPerformance.score}}">
+          <div class="performance" style="background-color:{{grade-color collectionPerformance.score}}">
             <span class="score">{{collectionPerformance.score}}%</span>
           </div>
         {{else}}
