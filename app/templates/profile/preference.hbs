@@ -56,7 +56,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu pull-right">
                                                     {{#each languageList as |language|}}
-                                                        <li> <a data-item={{language}} {{ action 'selectSecLanguage' language}}>{{language.display_name}}
+                                                        <li> <a data-item={{language}} {{ action 'updateSecLanguage' language}}>{{language.display_name}}
                                                             </a> </li>
                                                     {{else}}
                                                         <li> {{t 'profile.preference.no-data'}} </li>
@@ -65,7 +65,7 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <div class="addSubjectFWK" {{ action 'updateSecLanguage' selectedSecLanguage}} title="{{t 'profile.preference.add-sec-language'}} ">
+                                            <div class="addSubjectFWK hideMe" {{ action 'updateSecLanguage' selectedSecLanguage}} title="{{t 'profile.preference.add-sec-language'}} ">
                                                 {{gru-icon name='add'}}
                                             </div>
                                         </div>
@@ -193,10 +193,11 @@
                                         <div class='category-title'>
                                             {{category.title}}
                                         </div>
-                                        <div style="display:none">
+                                        <div class="hideMe">
                                             <div class="removeCategory" {{action 'removeCategory' category}}>{{gru-icon name='remove_circle_outline'}}</div>
                                         </div>
                                         <div class='subject-add'>
+                                            {{log 'currentCategorySubjectFwks' currentCategorySubjectFwks}}
                                             <div class="dropdown">
                                                 <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareSubjectList' category }}>
                                                     {{#if category.currentSelectedSubject}}
@@ -219,7 +220,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="addSubjectFWK" {{action 'addSelectedSubject' category }} title="{{t 'profile.preference.add-subject'}}">
+                                        <div class="addSubjectFWK hideMe" {{action 'addSelectedSubject' category }} title="{{t 'profile.preference.add-subject'}}">
                                             {{gru-icon name='add'}}
                                         </div>
                                         {{!-- {{action 'updateMarkedSelectionsAsAdded' fwk subjects category }} --}}
@@ -229,7 +230,7 @@
                                         {{!-- New section for added subject --}}
                                         {{!-- subject drop down with plus icon starts --}}
                                         {{#if (eq category.showAddSub true)}}
-                                            <div class="subject-fwk" style="display:none">
+                                            <div class="subject-fwk hideMe">
                                                 <div class='sub'>
                                                     <div class="dropdown">
                                                         <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
