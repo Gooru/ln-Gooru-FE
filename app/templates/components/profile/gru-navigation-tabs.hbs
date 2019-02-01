@@ -37,11 +37,13 @@
             <span>{{t "common.followers"}}</span>
           </a>
         {{/link-to}}
-        {{#link-to "profile.preference" tagName="li" class='preference'  }}
-          <a href='{{view.href}}' class="btn btn-category select" {{ action 'selectItem' 'preference'}}>
-            <span>{{t "profile.gru-navigation.preference.preference"}}</span>
-          </a>
-        {{/link-to}}
+        {{#if isMyProfile}}
+          {{#link-to "profile.preference" tagName="li" class='preference'  }}
+            <a href='{{view.href}}' class="btn btn-category select" {{ action 'selectItem' 'preference'}}>
+              <span>{{t "profile.gru-navigation.preference.preference"}}</span>
+            </a>
+          {{/link-to}}
+        {{/if}}
       {{/if}}
     </ul>
   </div>

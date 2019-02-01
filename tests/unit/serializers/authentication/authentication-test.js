@@ -37,6 +37,7 @@ test('normalizeResponse for anonymous account', function(assert) {
     'token-api3': 'token-api-3.0',
     user: {
       username: 'username',
+      userDisplayName: 'username',
       gooruUId: 'user-id',
       avatarUrl: `${appRootPath}${DEFAULT_IMAGES.USER_PROFILE}`,
       isNew: true,
@@ -79,6 +80,7 @@ test('normalizeResponse for normal account', function(assert) {
     'token-api3': 'token-api-3.0',
     user: {
       username: 'username',
+      userDisplayName: 'username',
       gooruUId: 'user-id',
       avatarUrl: 'user-url/image-id',
       isNew: true,
@@ -121,6 +123,7 @@ test('normalizeResponse for google account', function(assert) {
     'token-api3': 'token-api-3.0',
     user: {
       username: 'username',
+      userDisplayName: 'username',
       gooruUId: 'user-id',
       avatarUrl: `${appRootPath}${DEFAULT_IMAGES.USER_PROFILE}`,
       isNew: true,
@@ -168,6 +171,7 @@ test('normalizeResponse for google account containing user category', function(a
     'token-api3': 'token-api-3.0',
     user: {
       username: 'username',
+      userDisplayName: 'username',
       gooruUId: 'user-id',
       avatarUrl: `${appRootPath}${DEFAULT_IMAGES.USER_PROFILE}`,
       isNew: false,

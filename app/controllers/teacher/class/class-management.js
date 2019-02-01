@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import ModalMixin from 'gooru-web/mixins/modal';
-import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
 /**
  * Class management controller
  *
@@ -410,6 +409,7 @@ export default Ember.Controller.extend(ModalMixin, {
 
         tClass.set('preference', preferenceJSON);
         controller.set('tempClass', tClass);
+        controller.resetGradeValues();
 
         controller.set('enableApplySettings', true); // some UI interaction happened...enable apply button
       } else {
@@ -521,8 +521,8 @@ export default Ember.Controller.extend(ModalMixin, {
       let classV = controller.get('class'),
         classLBId = classV.gradeLowerBound,
         classCurrentId = classV.gradeCurrent,
-        source = controller.get('subjectTaxonomyGrades'),
-        classLB = controller.getGradeSequenceById(classLBId, source),
+        source = controller.get('subjectTaxonomyGrades');
+      let classLB = controller.getGradeSequenceById(classLBId, source),
         classCurrent = controller.getGradeSequenceById(classCurrentId, source),
         sourceFilteredByContext;
 
@@ -533,7 +533,10 @@ export default Ember.Controller.extend(ModalMixin, {
             sourceFilteredByContext = controller.filterRange(
               source,
               classLB,
-              context.gradeLowerBound || classCurrent
+              controller.getGradeSequenceById(
+                context.gradeLowerBound,
+                source
+              ) || classCurrent
             );
           }
           /* Student's lower bound can't be SET if class lower bound is null
@@ -545,9 +548,15 @@ export default Ember.Controller.extend(ModalMixin, {
           if (classCurrent) {
             sourceFilteredByContext = controller.filterRange(
               source,
-              context.gradeUpperBound ||
+              controller.getGradeSequenceById(
+                context.gradeUpperBound,
+                source
+              ) ||
                 classCurrent ||
-                context.gradeLowerBound ||
+                controller.getGradeSequenceById(
+                  context.gradeLowerBound,
+                  source
+                ) ||
                 classLB,
               null
             );
@@ -595,8 +604,27 @@ export default Ember.Controller.extend(ModalMixin, {
     }
   },
 
+  /**
+   * called only iff current grade of class is null
+   */
+  resetGradeValues() {
+    const controller = this;
+    let tClass = controller.get('tempClass');
+    tClass.set('gradeLowerBound', null);
+    tClass.set('gradeUpperBound', null);
+    tClass.set('gradeCurrent', null);
+    controller.set('tempClass', tClass);
+
+    //controller.set('class.gradeLowerBound', null);
+    //Re-setting this may give shrinking error as its not allowed by api, thus  should set both grade lower and current at-once
+
+    //controller.set('enableApplySettings', true); // some UI interaction happened...enable apply button
+  },
+
   getGradeSequenceById(id, source) {
-    return id && source ? source.findBy('id', id).sequence : id;
+    return id && source && source.findBy('id', id)
+      ? source.findBy('id', id).sequence
+      : id;
   },
   currentFilterList: null, //Dynamic filtered list
 
@@ -660,12 +688,10 @@ export default Ember.Controller.extend(ModalMixin, {
     return setting ? setting['course.premium'] : false;
   }),
 
-  subject: Ember.computed.alias('course.subject'),
+  subject: Ember.computed.alias('class.preference.subject'),
 
   sanitizedSubject: Ember.computed('subject', function() {
-    if (this.get('subject')) {
-      return getSubjectIdFromSubjectBucket(this.get('subject'));
-    }
+    return this.get('subject');
   }),
   /**
    * @param {Boolean } didValidate - value used to check if input has been validated or not
@@ -742,15 +768,6 @@ export default Ember.Controller.extend(ModalMixin, {
   isShowProficiencyPullup: false,
 
   /**
-   * @property {String}
-   * Property to store coruse subject bucket or K12.MA will be default
-   */
-  subjectBucket: Ember.computed('course', function() {
-    let controller = this;
-    return controller.get('course.subject') || 'K12.MA';
-  }),
-
-  /**
    * @property {Object}
    * Property to store selected student's data
    */
@@ -786,26 +803,17 @@ export default Ember.Controller.extend(ModalMixin, {
    * @function fetchTaxonomyGrades
    * Method to fetch taxonomy grades
    */
-  fetchTaxonomyGrades(isInit) {
+  fetchTaxonomyGrades() {
     let controller = this;
     if (this.get('course.id') && this.get('subject')) {
       let taxonomyService = controller.get('taxonomyService');
       let filters = {
         subject: controller.get('sanitizedSubject')
       };
-
-      let grade_lower_bound = controller.get('class.gradeLowerBound'),
-        grade_upper_bound = controller.get('class.gradeUpperBound'),
-        grade_current = controller.get('class.gradeCurrent');
-
       let fwkCode =
         controller.get('tempClass.preference.framework') ||
         controller.get('class.preference.framework');
-      if (
-        (fwkCode &&
-          !(grade_lower_bound || grade_upper_bound || grade_current)) ||
-        isInit
-      ) {
+      if (fwkCode) {
         filters.fw_code = fwkCode;
       }
 

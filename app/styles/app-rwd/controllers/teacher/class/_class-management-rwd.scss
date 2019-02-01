@@ -201,21 +201,43 @@
 .controller.teacher.classbg {
   .controller.teacher.class.class-settings {
     .sec-col-layout {
+      .sec-panel {
+        border-radius: 1px !important;
+      }
       display: grid;
       width: 100vw;
       margin: auto;
       .sec-rows-layout {
         width: 100vw;
         margin: auto;
+
+        .gen-pathway-sec {
+          margin-left: unset;
+          width: 100.2%;
+        }
         .class-layout {
           margin: auto;
           .class-sec-cont {
             @media screen and (max-width: 568px) {
               .class-settings-sec {
-                width: 306px;
+                width: auto !important;
                 .class-head-row-wrap {
+                  display: grid;
+                  margin-bottom: unset;
                   .sec-head-class-name {
-                    width: 179px;
+                    order: 2;
+                    width: unset;
+                    height: unset;
+                  }
+                  .class-code {
+                    width: unset;
+                    height: 60px;
+                    margin-left: -11px;
+                    .class-code-wrap {
+                      width: 100%;
+                      flex-direction: row;
+                      justify-content: space-evenly;
+                    }
                   }
                 }
               }
@@ -238,6 +260,9 @@
             }
           }
         }
+        .class-layout-btn {
+          display: none;
+        }
       }
       .class-layout-btn {
         .btn-panel {
@@ -254,7 +279,7 @@
       .course-settings-layout {
         .course-sec-cont {
           margin: auto;
-          width: 90%;
+          width: 101%;
           .course-settings-sec {
             .btn-panel {
               .sec-title {
@@ -277,13 +302,28 @@
       }
       .student-sec-cont {
         margin: auto;
-        width: 90%;
+        width: 100.2%;
         .student-settings-sec {
           width: 100%;
           margin-left: 0px;
           display: flex;
           .student-grid {
-            grid-template-columns: 27px minmax(25px, auto) 23px 71px auto auto auto;
+            grid-template-columns:
+              30px minmax(90px, max-content) minmax(120px, auto)
+              auto auto auto;
+
+            .student-delete {
+              margin-left: -6px !important;
+            }
+            .id-head {
+              display: none;
+            }
+            .student-id {
+              display: none;
+            }
+            .student-id-head {
+              display: none;
+            }
             .student-icon-col {
               .student-icon {
                 width: 25px;

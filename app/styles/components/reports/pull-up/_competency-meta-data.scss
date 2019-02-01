@@ -21,7 +21,7 @@
 
   .micro-competencies {
     background-color: #fff;
-    min-height: 50px;
+    min-height: 40px;
     display: grid;
 
     .panel-header {
@@ -81,7 +81,7 @@
     justify-content: center;
     background-color: #fff;
     grid-gap: 10px;
-    min-height: 50px;
+    min-height: 40px;
 
     &.no-competency {
       grid-template-columns: none;
