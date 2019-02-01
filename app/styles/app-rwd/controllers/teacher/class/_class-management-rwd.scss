@@ -297,6 +297,10 @@
                 }
               }
             }
+
+            .row-offline-class > .offline-label {
+              flex: 0.799;
+            }
           }
         }
       }
@@ -430,6 +434,11 @@
               }
             }
           }
+        }
+        .gen-pathway-sec {
+          width: 72% !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
         }
         .class-layout-btn {
           .btn-panel {
