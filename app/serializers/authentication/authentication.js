@@ -54,17 +54,17 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * @returns {user display name}
    */
   getUserDisplayName: function(payload) {
-    let userDisplayName = payload.username;
+    let userDisplayName;
 
-    if (payload !== undefined && payload.first_name !== undefined) {
+    if (payload.first_name) {
       userDisplayName = payload.first_name;
 
-      if (payload.last_name !== undefined) {
-        userDisplayName += ` ${  payload.last_name}`;
+      if (payload.last_name) {
+        userDisplayName += ` ${payload.last_name}`;
       }
-    } else if (payload !== undefined && payload.username !== undefined) {
+    } else if (payload.username) {
       userDisplayName = payload.username;
-    } else if (payload !== undefined && payload.email !== undefined) {
+    } else if (payload.email) {
       userDisplayName = payload.email.split('@')[0];
     }
 
