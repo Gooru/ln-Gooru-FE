@@ -401,5 +401,22 @@ export default Ember.Service.extend({
         .addUsersToActivity(classId, contentId, users)
         .then(resolve, reject);
     });
+  },
+
+  /**
+   * @function getMonthlyActivitiesCount
+   * Method to fetch monthly activities count
+   */
+  getMonthlyActivitiesCount(classId, month, year) {
+    const service = this;
+    const classActivityAdapter = service.get('classActivityAdapter');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      classActivityAdapter.getMonthlyActivitiesCount(classId, month, year).then(function(activitiesCount) {
+        resolve(activitiesCount);
+      },
+      function(error) {
+        reject(error);
+      });
+    });
   }
 });

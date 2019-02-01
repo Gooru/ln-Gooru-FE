@@ -93,14 +93,14 @@
               grid-template-columns: 30px 100px;
 
               .info {
-                height: 26px;
                 font-size: 9px;
                 font-weight: bold;
                 font-style: normal;
                 font-stretch: normal;
-                line-height: 2.5;
                 letter-spacing: normal;
                 color: #2d3749;
+                align-self: center;
+                line-height: normal;
               }
             }
 
@@ -109,14 +109,14 @@
               grid-template-columns: 30px 150px;
 
               .info {
-                height: 26px;
                 font-size: 9px;
                 font-weight: bold;
                 font-style: normal;
                 font-stretch: normal;
-                line-height: 2.5;
                 letter-spacing: normal;
                 color: #2d3749;
+                align-self: center;
+                line-height: normal;
               }
             }
           }

@@ -36,7 +36,7 @@
       display: grid;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
       /*Default View */
-      grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
+      grid-template-columns: 88px 60px 170px 145px 145px 1fr 59px 59px 59px;
 
       &.archived-class {
         grid-template-columns: 50px 1fr 40px 59px 40px;
@@ -59,8 +59,8 @@
       }
       /* Extra small devices (phones, 600px and down) */
       @media only screen and (max-width: $screen-sm - 1) {
-        grid-template-columns: 50px 40px 40px 40px 1fr 40px 40px 40px;
-
+        grid-template-columns: 50px 40px 40px 40px 40px 1fr 40px 40px 40px;
+        .atc-view,
         .class-activities,
         .course-map,
         .students {
@@ -81,8 +81,8 @@
       }
       /* Small devices (portrait tablets and large phones, 768px and up) */
       @media only screen and (min-width: 768px) {
-        grid-template-columns: 90px 50px 50px 50px 1fr 59px 59px 59px;
-
+        grid-template-columns: 90px 50px 50px 50px 50px 1fr 59px 59px 59px;
+        .atc-view,
         .class-activities,
         .course-map,
         .students {
@@ -97,8 +97,9 @@
       }
       /* Large devices (laptops/desktops, 992px and up) */
       @media only screen and (min-width: 992px) {
-        grid-template-columns: 88px 170px 145px 145px 1fr 59px 59px 59px;
+        grid-template-columns: 88px 145px 170px 145px 145px 1fr 59px 59px 59px;
 
+        .atc-view,
         .class-activities,
         .course-map,
         .students {
@@ -132,6 +133,30 @@
         }
       }
 
+      .atc-view {
+        display: flex;
+        border-right: 1px solid $white;
+        height: 51px;
+
+        a {
+          @extend %app-container;
+
+          .atc-menu {
+            background-image: url("gooru/atc-menu.png");
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 25px;
+            background-size: 24px 25px;
+            display: block;
+            margin-top: 2px;
+          }
+
+          .add-info {
+            @extend %app-info-container;
+          }
+        }
+      }
+
       .class-activities {
         display: flex;
         border-right: 1px solid $white;
@@ -156,7 +181,7 @@
         }
       }
 
-      .course-map {
+      .course-map{
         display: flex;
         border-right: 1px solid $white;
         height: 51px;

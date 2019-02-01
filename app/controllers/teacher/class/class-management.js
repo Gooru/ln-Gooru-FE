@@ -615,9 +615,10 @@ export default Ember.Controller.extend(ModalMixin, {
     tClass.set('gradeCurrent', null);
     controller.set('tempClass', tClass);
 
-    //controller.set('class.gradeLowerBound', null); //Re-setting this may give shrinikg error as its not allowed by api, thus  should set both grade lower and current atonce
+    //controller.set('class.gradeLowerBound', null);
+    //Re-setting this may give shrinking error as its not allowed by api, thus  should set both grade lower and current at-once
 
-    controller.set('enableApplySettings', true); // some UI interaction happened...enable apply button
+    //controller.set('enableApplySettings', true); // some UI interaction happened...enable apply button
   },
 
   getGradeSequenceById(id, source) {
