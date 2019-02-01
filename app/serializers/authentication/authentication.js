@@ -28,6 +28,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       'token-api3': accessToken ? accessToken : payload.access_token,
       user: {
         username: payload.username,
+        userDisplayName: this.getUserDisplayName(payload),
         gooruUId: payload.user_id,
         avatarUrl: payload.thumbnail
           ? basePath + payload.thumbnail
@@ -46,6 +47,28 @@ export default Ember.Object.extend(ConfigurationMixin, {
       },
       partnerId: payload.partner_id
     };
+  },
+
+  /**
+   * @param payload is the input for logic...Internal function
+   * @returns {user display name}
+   */
+  getUserDisplayName: function(payload) {
+    let userDisplayName = payload.username;
+
+    if (payload !== undefined && payload.first_name !== undefined) {
+      userDisplayName = payload.first_name;
+
+      if (payload.last_name !== undefined) {
+        userDisplayName += ` ${  payload.last_name}`;
+      }
+    } else if (payload !== undefined && payload.username !== undefined) {
+      userDisplayName = payload.username;
+    } else if (payload !== undefined && payload.email !== undefined) {
+      userDisplayName = payload.email.split('@')[0];
+    }
+
+    return userDisplayName;
   },
 
   /**
