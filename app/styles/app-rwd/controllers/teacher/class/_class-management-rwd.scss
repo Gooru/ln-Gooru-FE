@@ -309,8 +309,12 @@
           display: flex;
           .student-grid {
             grid-template-columns:
-              40px minmax(90px, max-content) minmax(120px, auto)
+              30px minmax(90px, max-content) minmax(120px, auto)
               auto auto auto;
+
+            .student-delete {
+              margin-left: -6px !important;
+            }
             .id-head {
               display: none;
             }
