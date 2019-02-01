@@ -29,7 +29,7 @@
         {{/if}}
       {{else}}
         <div class="time-spent {{if isDisableTimeEditor 'disabled'}}">
-          {{input type="text" class="time" id="hours" maxlength="2" value=hours}}<span>h</span> {{input type="text" class="time" id="mins" maxlength="2" value=mins}}
+          {{input type="number" min = "0"  max = "24" class="time" id="hours" maxlength="2" value=hours}}<span>h</span> {{input type="number" min = "0"  max = "59" class="time" id="mins" maxlength="2" value=mins}}
           <span>m</span>
           {{#if (and isTyping (not isValidtime))}}
             <div class="error">{{t 'self-report.validation-error-time'}}</div>
