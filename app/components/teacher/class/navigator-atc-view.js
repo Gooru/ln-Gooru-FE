@@ -224,12 +224,16 @@ export default Ember.Component.extend({
         ) - 20})`;
       })
       .attr('class', 'node-point')
-      .on('mouseover', function(data) {
-        tooltip.style('visibility', 'hidden');
+      .on('mouseover', function(studentData) {
+        component.set('studentData', studentData);
+        let clientY = d3.event.clientY;
+        let top = clientY > 420 ? clientY - 240 : clientY;
         tooltip
-          .html(component.renderTooltip(data))
+          .style('visibility', 'hidden')
           .style('left', `${d3.event.clientX}px`)
-          .style('top', `${d3.event.clientY}px`);
+          .style('top', `${top}px`);
+        let tooltipHtml = component.$('.tooltip-html-container').html();
+        tooltip.html(tooltipHtml);
         return tooltip.style('visibility', 'visible');
       })
       .on('mouseout', function() {
@@ -257,7 +261,6 @@ export default Ember.Component.extend({
         width: 24,
         height: 24
       });
-
     component.cleanUpChart();
 
   },
@@ -276,19 +279,5 @@ export default Ember.Component.extend({
         curAxisText.text(`${curAxisText.text()}%`);
       });
     });
-  },
-
-  /**
-   * @function renderTooltip
-   * Method to render tooltip
-   */
-  renderTooltip(data) {
-    let tooltipHtml = '<div class="tooltip-container">';
-    tooltipHtml += `<div class="header-container"><img src="${data.thumbnail}"/><div class="student-name"><span class="ellipsis">${data.firstName}</span><span class="ellipsis">${data.lastName}</span></div><div class="competency-status-count"><span class="mastered">${data.completedCompetencies}</span>/<span class="inprogress">${data.inprogressCompetencies}</span>/<span class="not-started">${data.notStartedCompetencies}</span></div></div>`;
-    tooltipHtml += '<div class="body-container">';
-    tooltipHtml += `<div class="destination-container"><div class="grade-info"><span class="title-container">Destination</span><span class="grade-level">${data.gradeId}</span></div><div class="competencies"><span class="title-container">Competencies</span><span class="competency-count">${data.totalCompetencies}</span></div></div>`;
-    tooltipHtml += `<div class="performance-container"><div class="performance"><span class="score-count" style="color: ${getGradeColor(data.percentScore)};">${data.percentScore}%</span><span class="title-container">Performance</span></div><div class="progress-container"><span class="progress-count">${data.percentCompletion}%</span><span class="title-container">Progress</span></div></div>`;
-    tooltipHtml += '</div>';
-    return tooltipHtml;
   }
 });

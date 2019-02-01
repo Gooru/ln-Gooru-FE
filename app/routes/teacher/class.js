@@ -240,7 +240,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('router', this.get('router'));
     let classData = model.class;
     classData.course = model.course;
-    controller.updateLastAccessedClass(classData);
     controller.fetchDcaSummaryPerformance();
   }
 });

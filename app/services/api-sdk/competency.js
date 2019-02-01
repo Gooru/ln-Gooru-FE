@@ -230,43 +230,11 @@ export default Ember.Service.extend({
   },
 
   /**
-   * @function getCompetencyCompletionReport
-   * Method to fetch competency completion report
-   */
-  getCompetencyCompletionReport(requestBody) {
-    const service = this;
-    // return new Ember.RSVP.Promise(function(resolve, reject) {
-    //   resolve(
-    //     service.get('competencySerializer').normalizeCompetencyCompletionReport()
-    //   );
-    // });
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      service
-        .get('competencyAdapter')
-        .getCompetencyCompletionReport(requestBody)
-        .then(function(response) {
-          resolve(
-            service.get('competencySerializer').normalizeCompetencyCompletionReport(response)
-          );
-        },
-        function(error) {
-          reject(error);
-        }
-        );
-    });
-  },
-
-  /**
    * @function getUsersCompetencyPerformanceSummary
    * Method to fetch users compeletion performance summary
    */
   getUsersCompetencyPerformanceSummary(requestBody) {
     const service = this;
-    // return new Ember.RSVP.Promise(function(resolve, reject) {
-    //   resolve(
-    //     service.get('competencySerializer').normalizeUsersCompetencyPerformanceSummary()
-    //   );
-    // });
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('competencyAdapter')

@@ -3,7 +3,7 @@
     {{#if (and (gte class.performanceSummary.score 0) class.performanceSummary.score )}}
       <div class="panel-heading" style="background-color:{{grade-color class.performanceSummary.score}}">
         <div class="title ellipsis" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}">
-          {{#link-to 'teacher.class.course-map' class.id}}
+          {{#link-to 'teacher.class.atc' class.id}}
             {{truncate text=class.title maxLength=25}}
           {{/link-to}}
         </div>

@@ -93,6 +93,16 @@ export default Ember.Controller.extend({
   }),
 
   /**
+   * @property {Boolean} isCurrentMonth
+   */
+  isCurrentMonth: Ember.computed('activeMonth', function() {
+    const controller = this;
+    let activeMonth = controller.get('activeMonth');
+    let currentMonth = moment().format('MM');
+    return activeMonth === currentMonth;
+  }),
+
+  /**
    * Maintains the value which of year activities displaying
    * @type {Integer}
    */
@@ -102,17 +112,18 @@ export default Ember.Controller.extend({
 
   /**
    * @property {Number} mediumDeviceWidth
-   * TODO for now we set the device width as 0 to since we have support only for desktop agent
    */
-  mediumDeviceWidth: 0,
+  mediumDeviceWidth: 992,
 
   /**
    * @property {String} userAgent
    */
   userAgent: 'desktop',
 
+  /**
+   * @property {Boolean} isExpandedView
+   */
   isExpandedView: false,
-
 
   // -------------------------------------------------------------------------
   // Events
@@ -134,12 +145,9 @@ export default Ember.Controller.extend({
     //Action triggered when click a domain
     onSelectDomain(domainData) {
       const controller = this;
-      let domainCode = domainData.get('domainCode');
-      controller.fetchCompetencyCompletionReport(domainCode).then(function(competencyCompletionReport) {
-        controller.set('selectedDomain', domainData);
-        controller.set('competencyCompletionReport', competencyCompletionReport);
-        controller.set('isShowCompetencyCompletionReport', true);
-      });
+      controller.set('competencyCompletionReport', domainData.get('competenciesData'));
+      controller.set('selectedDomain', domainData);
+      controller.set('isShowCompetencyCompletionReport', true);
     },
 
     //Action triggered when change month
@@ -148,9 +156,18 @@ export default Ember.Controller.extend({
       controller.loadData();
     },
 
+    //Action triggered when toggle domains to be reviewed list
     toggleView() {
       const controller = this;
       controller.set('isExpandedView', !controller.get('isExpandedView'));
+      controller.getDomainListToShow();
+    },
+
+    //Action triggered when click activities count box
+    onRedirectToCA() {
+      const controller = this;
+      const classId = controller.get('classId');
+      controller.transitionToRoute('teacher.class.class-activities', classId);
     }
   },
 
@@ -166,6 +183,7 @@ export default Ember.Controller.extend({
     controller.fetchClassActivitiesCount();
     controller.fetchDomainsCompletionReport().then(function(domainsCompletionReport) {
       controller.set('domainsCompletionReport', domainsCompletionReport);
+      controller.getDomainListToShow();
       controller.set('isLoading', false);
     });
   },
@@ -222,27 +240,25 @@ export default Ember.Controller.extend({
   },
 
   /**
-   * @function fetchCompetencyCompletionReport
-   * Method to fetch competency completion report
+   * @function getDomainListToShow
+   * Method to get domains list to show
    */
-  fetchCompetencyCompletionReport(domainCode) {
+  getDomainListToShow() {
     const controller = this;
-    const competencyService = controller.get('competencyService');
-    const classId = controller.get('classId');
-    let month = controller.get('activeMonth');
-    let year = controller.get('activeYear');
-    let agent = controller.get('userAgent');
-    let filters = {
-      month,
-      year,
-      agent
-    };
-    return Ember.RSVP.hash({
-      completionCompletionReport: Ember.RSVP.resolve(competencyService.getCompetencyCompletionReport(classId, domainCode, filters))
-    })
-      .then(({completionCompletionReport}) => {
-        return completionCompletionReport;
-      });
+    let domainsCompletionReportList = controller.get('domainsCompletionReport.domainsData');
+    let domainsCompletionList = Ember.A([]);
+    if (domainsCompletionReportList) {
+      let sortedReportList = domainsCompletionReportList.sortBy('completionPercentage');
+      if (!controller.get('isExpandedView')) {
+        domainsCompletionList = sortedReportList.filter(function(domain) {
+          return domain.completionPercentage;
+        });
+      } else {
+        domainsCompletionList = sortedReportList;
+      }
+    }
+    controller.set('domainsCompletionList', domainsCompletionList);
+    return domainsCompletionList;
   }
 
 });
