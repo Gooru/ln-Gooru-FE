@@ -92,14 +92,12 @@
               </div>
             </div>
 
-            {{#if isMyProfile}}
+            {{#if (and isMyProfile (eq profile.loginType 'credential')) }}
               <div class="row">
                 <div class="col-xs-12 col-sm-6">
                   <div class="bios">
                     <p>
-                      {{#if (eq profile.loginType 'credential')}}
-                        <a {{action 'showChangePass' true}}>{{t "change-password.title"}}</a>
-                      {{/if}}
+                      <a {{action 'showChangePass' true}}>{{t "change-password.title"}}</a>
                     </p>
                   </div>
                 </div>
