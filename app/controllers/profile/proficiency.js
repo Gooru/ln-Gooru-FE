@@ -13,12 +13,6 @@ export default Ember.Controller.extend({
   parentController: Ember.inject.controller('profile'),
 
   /**
-   * Competency service dependency injection
-   * @type {Object}
-   */
-  competencyService: Ember.inject.service('api-sdk/competency'),
-
-  /**
    * show pull out .
    * @type {boolean}
    */
@@ -90,70 +84,11 @@ export default Ember.Controller.extend({
     onCompetencyPullOut(data, competencyMatrixs) {
       let controller = this;
       controller.set('isLoading', true);
-      controller.set('showPullOut', true);
       controller.set('showMore', false);
       let userId = controller.get('userId');
-      return Ember.RSVP.hash({
-        collections: controller
-          .get('competencyService')
-          .getUserPerformanceCompetencyCollections(userId, data.competencyCode)
-      }).then(({ collections }) => {
-        controller.set('isLoading', false);
-        let collectionData = Ember.A();
-        let status;
-        let statusMastered;
-        if (
-          data.status === 2 ||
-          data.status === 3 ||
-          data.status === 4 ||
-          data.status === 5
-        ) {
-          status = 'Mastered';
-          statusMastered = controller.get('competencyStatus')
-            ? controller.get('competencyStatus')[data.status]
-            : null;
-          collectionData = collections;
-          if (!collectionData.length >= 1) {
-            statusMastered = controller.get('competencyStatus')
-              ? controller.get('competencyStatus')[2]
-              : null;
-          }
-        } else if (data.status === 1) {
-          status = 'in progress';
-          collectionData = collections;
-        } else {
-          status = 'Not Started';
-        }
-        controller.set('collection', collectionData);
-        controller.set(
-          'title',
-          data.courseName ? data.courseName : data.domainName
-        );
-        controller.set('description', data.competencyCode);
-        let competency = {
-          competencyStatus: status ? status : 'NA',
-          date: data.date,
-          statusMastered: statusMastered ? statusMastered : null,
-          competencyName: data.competencyName,
-          competencyCode: data.competencyCode,
-          competencySeq: data.competencySeq,
-          status: data.status,
-          domainCode: data.domainCode,
-          domainSeq: data.domainSeq,
-          showSignatureAssessment: data.showSignatureAssessment,
-          skyline: data.skyline,
-          xAxisSeq: data.xAxisSeq,
-          yAxisSeq: data.yAxisSeq
-        };
-        controller.set('competency', competency);
-        let domainCode = data.get('domainCode');
-        let domainCompetencyList = competencyMatrixs.findBy(
-          'domainCode',
-          domainCode
-        );
-        controller.set('domainCompetencyList', domainCompetencyList);
-        controller.set('showSignatureAssessment', data.showSignatureAssessment);
-      });
+      controller.set('userId', userId);
+      controller.set('competencyData', data);
+      controller.set('competencyMatrixs', competencyMatrixs);
     },
 
     /**

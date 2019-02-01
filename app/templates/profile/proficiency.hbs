@@ -106,12 +106,13 @@
   {{#gru-pull-out showPullOut=showPullOut title=description description=title showMore=showMore isLoading=isLoading as |section|}}
     {{#if section.isLessContent}}
       {{proficiency.competencies-pull-out-body
-        collection=collection
         userId=userId
-        competency=competency
+        competencyData=competencyData
         isLoading=isLoading
-        domainCompetencyList=domainCompetencyList
-        showSignatureAssessment=showSignatureAssessment
+        competencyMatrixs=competencyMatrixs
+        showPullOut=showPullOut
+        title=description
+        description=title
      }}
     {{/if}}
   {{/gru-pull-out}}
