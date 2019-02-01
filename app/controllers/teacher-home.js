@@ -282,56 +282,11 @@ export default Ember.Controller.extend(ModalMixin, {
         'lastAccessedClassData',
         controller.getSequencedActiveClass(classSeq)
       );
-    },
-
-    /**
-     * Action triggered when user change atc/class-room view
-     */
-    onToggleTeacherView(view) {
-      let controller = this;
-      let isShowAtcView = true;
-      if (view === 'classroom') {
-        isShowAtcView = false;
-      }
-      controller.set('isShowAtcView', isShowAtcView);
-    },
-
-    /**
-     * Action triggered when select a domain from pull up
-     */
-    onSelectDomain(domainSet) {
-      let controller = this;
-      controller.set('selectedDomain', domainSet);
-      controller.set('isShowDomainCompetencyReport', true);
-    },
-
-    /**
-     * Action triggered when close all competency report pull ups
-     */
-    onCloseCompetencyReportPullUp() {
-      let controller = this;
-      controller.set('isShowDomainCompetencyReport', false);
-      controller.set('isShowCompetencyReport', false);
-    },
-
-    /**
-     * Action triggered when select a competency from competency report
-     */
-    onSelectCompetency(competency, userId) {
-      let controller = this;
-      controller.set('selectedCompetency', competency);
-      controller.set('selectedStudentUserId', userId);
-      controller.set('isShowCompetencyContentReport', true);
     }
   },
 
   // -------------------------------------------------------------------------
   // Events
-  init: function() {
-    const controller = this;
-    controller._super(...arguments);
-    controller.getLastAccessedClassData();
-  },
 
   // -------------------------------------------------------------------------
   // Properties

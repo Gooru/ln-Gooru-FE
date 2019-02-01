@@ -2,7 +2,7 @@
   {{#if isPremiumClass}}
     <div class="data-view-container navigator-class">
       <div class="chart-container">
-        <div class="month-picker">
+        <div class="month-picker {{if isCurrentMonth 'current-month'}}">
               {{ca-date-picker
             showToday=true
             forMonth=activeMonth
@@ -20,8 +20,8 @@
         <div class="domains-card-container">
           <div class="title-container">{{t 'teacher-landing.class.atc-view.domains-reviewed'}}</div>
           <div class="domains-completion-container {{if isExpandedView 'expanded-view'}}">
-            {{#each domainsCompletionReport.domainsData as |domainData|}}
-              <div class="domain-completion-report">
+            {{#each domainsCompletionList as |domainData|}}
+              <div class="domain-completion-report {{if (lte domainData.completionPercentage 0) 'disabled'}}" {{action "onSelectDomain" domainData}}>
                 <div class="domain-info-container">
                   <div class="domain-code">{{domainData.domainCode}}</div>
                   <div class="domain-title ellipsis">{{domainData.domainName}}</div>
@@ -45,10 +45,10 @@
             </div>
           {{/if}}
         </div>
-        <div class="activities-count-container">
+        <div class="activities-count-container" {{action "onRedirectToCA"}}>
           <div class="activity-count">{{activitiesCount.scheduled}}</div>
           <div class="activities-info"><span>{{gru-icon name="supervisor_account"}}</span>{{t 'teacher-landing.class.atc-view.class-activities-conducted'}}</div>
-          <div class="activity-count unscheduled-count">{{activitiesCount.unscheduled}}</div>
+          <div class="activity-count">{{activitiesCount.unscheduled}}</div>
           <div class="activities-info"><span>{{gru-icon name="supervisor_account"}}</span>{{t 'teacher-landing.class.atc-view.class-activities-pending'}}</div>
         </div>
       </div>
@@ -63,5 +63,5 @@
 </div>
 
 {{#if isShowCompetencyCompletionReport}}
-  {{reports.pull-up.competency-completion-report showPullUp=isShowCompetencyCompletionReport activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent}}
+  {{reports.pull-up.competency-completion-report showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent}}
 {{/if}}

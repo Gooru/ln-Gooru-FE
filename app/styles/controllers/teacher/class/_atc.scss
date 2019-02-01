@@ -23,6 +23,15 @@
             }
           }
         }
+        &.current-month {
+          .ca-date-picker-container {
+            .ca-date-nav-container {
+              .next-cal-arrow {
+                display: none;
+              }
+            }
+          }
+        }
       }
 
       .chart-area {
@@ -97,6 +106,7 @@
             grid-template-columns: 209px auto;
             border-bottom: 1px solid #979797;
             padding: 4px 8px;
+            cursor: pointer;
             .domain-info-container {
               .domain-title {
                 font-size: 12px;
@@ -128,6 +138,9 @@
                 }
               }
             }
+            &.disabled {
+              pointer-events: none;
+            }
           }
         }
         .actions-container {
@@ -147,7 +160,7 @@
       }
       .activities-count-container {
         width: 305px;
-        height: 100px;
+        height: 115px;
         border-radius: 4px;
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
         background-color: $white;
@@ -165,9 +178,6 @@
           letter-spacing: normal;
           color: #37424b;
           text-align: right;
-          &.unscheduled-count {
-            font-size: 25px;
-          }
         }
         .activities-info {
           font-size: 12px;

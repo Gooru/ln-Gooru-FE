@@ -60,7 +60,7 @@
       /* Extra small devices (phones, 600px and down) */
       @media only screen and (max-width: $screen-sm - 1) {
         grid-template-columns: 50px 40px 40px 40px 40px 1fr 40px 40px 40px;
-        .atc-view,
+        .atc,
         .class-activities,
         .course-map,
         .students {
@@ -82,7 +82,7 @@
       /* Small devices (portrait tablets and large phones, 768px and up) */
       @media only screen and (min-width: 768px) {
         grid-template-columns: 90px 50px 50px 50px 50px 1fr 59px 59px 59px;
-        .atc-view,
+        .atc,
         .class-activities,
         .course-map,
         .students {
@@ -99,7 +99,7 @@
       @media only screen and (min-width: 992px) {
         grid-template-columns: 88px 145px 170px 145px 145px 1fr 59px 59px 59px;
 
-        .atc-view,
+        .atc,
         .class-activities,
         .course-map,
         .students {
@@ -133,7 +133,7 @@
         }
       }
 
-      .atc-view {
+      .atc {
         display: flex;
         border-right: 1px solid $white;
         height: 51px;
