@@ -8,6 +8,7 @@
     {{/if}}
   </h4>
   <div class="about-container row">
+
     <div class='change-password-cocoon-container'>
       {{#gru-pull-up showPullUp=showChangePassFlag}}
         <div class='change-password-cocoon'>
@@ -60,6 +61,7 @@
         </div>
       {{/gru-pull-up }}
     </div>
+
     <div class="personal-info col-md-6 col-xs-12">
       <div class="sub-title">
         {{t "common.personal-information"}}
@@ -89,20 +91,21 @@
                 <div class="image-container"><img class="img-responsive" src="{{profile.avatarUrl}}" /></div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-xs-12 col-sm-6">
-                {{!-- <h6>{{t "change-password.change-password"}} </h6> --}}
-                <div class="bios">
-                  <p>
-                    {{#if (eq profile.loginType 'credential')}}
-                      <a {{action 'showChangePass' true}}>{{t "change-password.title"}}</a>
-                    {{else}}
-                      <span class="italic">{{t "common.not-added"}}</span>
-                    {{/if}}
-                  </p>
+
+            {{#if isMyProfile}}
+              <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                  <div class="bios">
+                    <p>
+                      {{#if (eq profile.loginType 'credential')}}
+                        <a {{action 'showChangePass' true}}>{{t "change-password.title"}}</a>
+                      {{/if}}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            {{/if}}
+
             <div class="row">
               <div class="col-xs-12 col-sm-6">
                 <h6>{{t "common.biography"}}</h6>
