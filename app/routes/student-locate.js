@@ -49,7 +49,9 @@ export default Ember.Route.extend({
     const classId = params.classId;
     const courseId = params.courseId;
     const classPromise =
-      classId != null ? route.get('classService').readClassInfo(classId) : null;
+      classId && classId != null
+        ? route.get('classService').readClassInfo(classId)
+        : null;
     const coursePromise = route.get('courseService').fetchById(courseId);
     return coursePromise.then(function(courseData) {
       let classCourseId = null;
@@ -158,7 +160,7 @@ export default Ember.Route.extend({
   resetController(controller) {
     var queryParams = controller.get('queryParams');
     queryParams.forEach(function(param) {
-      controller.set(param, null);
+      controller.set(param, undefined);
     });
 
     controller.set('isShowCompetencyContentReport', false);

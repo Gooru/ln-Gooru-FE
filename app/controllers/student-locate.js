@@ -124,7 +124,10 @@ export default Ember.Controller.extend({
       if (classId) {
         controller.transitionToRoute('student.class.course-map', classId);
       } else {
-        controller.transitionToRoute('student.class.course', courseId);
+        controller.transitionToRoute(
+          'student.independent.course-map',
+          courseId
+        );
       }
     },
 
