@@ -1,0 +1,85 @@
+.student-journey {
+  background-color: #36424b;
+
+  .heading {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    padding: 20px 10px 10px;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+  }
+
+  .collections-accordion {
+    background-color: #fff;
+
+    .no-data {
+      font-size: 16px;
+      padding-left: 10px;
+    }
+
+    .collection-panel {
+      height: 48px;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+      background-color: #ffffff;
+      display: grid;
+      grid-template-columns: 49px 1fr 48px;
+      align-items: center;
+
+      .icon {
+        width: 100%;
+        background-position: center;
+        height: 100%;
+        background-repeat: no-repeat;
+
+        &.assessment {
+          background-image: url("/assets/gooru/images/add_assessment.svg");
+        }
+
+        &.collection {
+          background-image: url("/assets/gooru/images/add_collection.svg");
+        }
+      }
+
+      .performance {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #fff;
+
+        &.collection {
+          background-color: #283142;
+          opacity: 0.8;
+        }
+
+        .score,
+        .timespent {
+          height: 17px;
+          font-size: 12px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          color: #ffffff;
+        }
+      }
+
+      .collection-title {
+        height: 17px;
+        font-size: 13px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        cursor: default;
+        color: #37424b;
+      }
+    }
+  }
+}

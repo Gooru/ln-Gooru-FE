@@ -38,7 +38,7 @@
     {{#if isShowCompetencyContentReport}}
       {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc isStudent=true showPullUp=isShowCompetencyContentReport
         onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
-        {{reports.pull-up.competency-content-report competency=selectedCompetency userId=activeStudent.id isStudent=true}}
+        {{reports.pull-up.competency-content-report domainCompetencyList=domainCompetencyList competency=selectedCompetency userId=activeStudent.id isStudent=true}}
       {{/reports.pull-up.competency-report}}
     {{/if}}
   </div>

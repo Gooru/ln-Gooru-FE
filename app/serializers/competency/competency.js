@@ -84,6 +84,13 @@ export default Ember.Object.extend(ConfigurationMixin, {
     };
     return resultSet;
   },
+  /**
+   * Normalized data of signature content competencies
+   * @return {Object}
+   */
+  normalizeSignatureCompetencies: function(response) {
+    return response;
+  },
 
   /**
    * Normalized data of user  domain competency matrix

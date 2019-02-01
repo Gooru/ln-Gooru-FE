@@ -41,7 +41,7 @@ export function aggregateCollectionPerformanceSummaryItems(
   const collectionId = collectionPerformanceSummaryItems[0].get('collectionId');
   return CollectionPerformanceSummary.create({
     collectionId: collectionId,
-    timeSpent: timeSpentValues.length > 0 ? sumAll(timeSpentValues) : null,
+    timeSpent: timeSpentValues.length > 0 ? average(timeSpentValues) : null,
     score: scoreValues.length > 0 ? average(scoreValues) : null,
     attempts: attempts.length > 0 ? sumAll(attempts) : null
   });

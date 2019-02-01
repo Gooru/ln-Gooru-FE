@@ -181,6 +181,30 @@ export default Ember.Object.extend({
   },
 
   /**
+   * @function getUserSignatureContentList
+   * Method to fetch user competency list of signature content
+   */
+  getUserSignatureCompetencies(userId, subject) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/v2/tx/competency/next`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      data: {
+        subject: subject,
+        user: userId
+      }
+    };
+    return Ember.RSVP.hashSettled({
+      competencyMatrix: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.competencyMatrix.value;
+    });
+  },
+
+  /**
    * @function getDomainLevelSummary
    * Method to fetch domain level summary of a class
    */

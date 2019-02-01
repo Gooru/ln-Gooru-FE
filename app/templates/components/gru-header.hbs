@@ -165,7 +165,14 @@
                     <div class="img-container pull-left">
                       <img class="img-responsive" src="{{session.userData.avatarUrl}}" />
                     </div>
-                    <span class="username">{{truncate text=session.userData.username maxLength=18}}</span>
+
+                    {{#if session.userData.userDisplayName}}
+                      <span class="username">{{truncate text=session.userData.userDisplayName maxLength=18}} </span>
+                    {{else}}
+                      <!-- preserving old logic for those users whose token is still valid -->
+                      <span class="username">{{truncate text=session.userData.username maxLength=18}} </span>
+                    {{/if}}
+                    
                   {{/link-to}}
                 </li>
                 <li class="navbar-nav-list visible-md visible-lg dropdown">

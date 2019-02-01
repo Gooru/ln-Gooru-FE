@@ -1,0 +1,101 @@
+{{#if showPullUp}}
+  <div class="backdrop" {{action 'onPullUpClose' true}}></div>
+{{/if}}
+<div class="oca-student-activity-report-container">
+  <div class="report-header">
+    <div class="header-title">
+      <i class="icon {{collection.collectionType}}"></i>
+      <span class="title ellipsis">{{safe-html collection.title}}</span>
+    </div>
+    <div class="close" {{action 'onPullUpClose' false}}>
+      {{gru-icon name="close"}}
+    </div>
+  </div>
+  {{#if (or (eq collection.collectionType 'assessment') (eq collection.collectionType 'assessment-external'))}}
+    <div class="performance-activity" style="background-color:{{if student (grade-color student.performance.score)}}">
+      <div class="performance">
+        <span class="left {{unless isToggleLeft 'disable'}}" {{action 'toggle' true}}>{{gru-icon name="keyboard_arrow_left"}}</span>
+        <div class="score-container">
+          <span class="score">{{student.performance.score}}%</span>
+          <span class="time-spent">{{if studentTimeSpent (format-time  studentTimeSpent) '--'}}</span>
+        </div>
+        <span class="right {{unless isToggleRight 'disable'}}" {{action 'toggle' false}}>{{gru-icon name="keyboard_arrow_right"}}</span>
+      </div>
+      <div class="performance-img" style="height: {{student.performance.score}}% ;background-color:{{if student (grade-color student.performance.score)}}">
+      </div>
+    </div>
+  {{else}}
+    <div class="collection-performance">
+      <div class="performance">
+        <span class="left {{unless isToggleLeft 'disable'}}" {{action 'toggle' true}}>{{gru-icon name="keyboard_arrow_left"}}</span>
+        <span class="time-spent">{{if student.performance.timeSpent (format-time  student.performance.timeSpent) '--'}}</span>
+        <span class="right {{unless isToggleRight 'disable'}}" {{action 'toggle' false}}>{{gru-icon name="keyboard_arrow_right"}}</span>
+      </div>
+    </div>
+  {{/if}}
+  <div class="student-info">
+    <div class="user-profile-img">
+      <img src="{{student.avatarUrl}}" />
+    </div>
+    <span class="username">{{student.name}}</span>
+    <div class="close" {{action 'onCloseStudentActivity'}}>
+      {{gru-icon name="close"}}
+    </div>
+    <div class="conducted-on">
+      <span class="title">{{t 'teacher-landing.class.offline-class-report.conducted-on'}}</span>
+      <span class="date">{{format-date context.activation_date 'DD MMM YY'}}</span>
+    </div>
+  </div>
+  {{#if isLoading}}
+    {{three-bounce-spinner}}
+  {{else}}
+    <div class="resources-report-container">
+      {{#each resourcesCollection as | resource resourceSeq|}}
+        <div class="resource resource-{{resourceSeq}}">
+          <div class="resource-container" data-toggle="collapse" data-target="#collapse-{{resourceSeq}}">
+          <div class="resource-icon">
+            {{#if (eq resource.performance.resourceType 'question')}}
+              <i class="question-img"></i>
+            {{else}}
+              <i class="resource-img {{resource.format}}"></i>
+            {{/if}}
+          </div>
+          <div class="resource-title ellipsis">{{safe-html resource.title}}</div>
+          {{#if (eq resource.performance.questionType 'OE')}}
+            <i class="rubric-img"></i>
+          {{/if}}
+          {{#if (eq resource.performance.resourceType 'question')}}
+            <div class="type"> {{resource.performance.questionType}}</div>
+            <div class="performance" style="background-color:{{if resource (grade-color resource.performance.score)}}">
+              <div class="score">
+                <span class="graded-score">{{resource.performance.rawScore}}</span>/<span class="max-score">{{resource.maxScore}}</span>
+              </div>
+              <span>{{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}</span>
+            </div>
+          {{else}}
+            <div class="timespent">
+              {{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}
+            </div>
+          {{/if}}
+        </div>
+          <div class="collapse" id="collapse-{{resourceSeq}}">
+          <span class="resource-description">{{safe-html resource.title}}</span>
+          </div>
+        </div>
+      {{/each}}
+      {{#if (eq collection.collectionType 'collection-external')}}
+        <div class="external-collection-link">
+          <div class="note">{{t 'report.external-collection-report.note'}}</div>
+          {{#if collection.url}}
+          <div>{{t 'report.external-collection-report.reference'}} <a class="link" target="_blank" href="{{collection.url}}">here</a></div>
+          {{/if}}
+        </div>
+        {{else if (eq collection.collectionType 'assessment-external')}}
+        <div class="external-assessment-link">
+          <div class="note">{{t 'report.external-assessment-report.note'}}</div>
+          <div>This external assessment can be accessed <a class="link" target="_blank" href="{{collection.url}}">here</a></div>
+        </div>
+      {{/if}}
+    </div>
+  {{/if}}
+</div>

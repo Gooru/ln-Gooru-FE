@@ -10,6 +10,11 @@ export default Ember.Controller.extend({
    */
   courseService: Ember.inject.service('api-sdk/course'),
 
+  /**
+   * @type {AnalyticsService} Service to retrieve class performance summary
+   */
+  analyticsService: Ember.inject.service('api-sdk/analytics'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -58,6 +63,7 @@ export default Ember.Controller.extend({
       controller.set('isShowUnitReportPullUp', false);
       controller.set('isShowLessonReportPullUp', false);
       controller.set('isShowCollectionReportPullUp', false);
+      controller.set('isShowOCASummaryReportPullUp', false);
     },
 
     /**
@@ -101,6 +107,11 @@ export default Ember.Controller.extend({
       controller.set('selectedCompetency', competency);
       controller.set('selectedStudentUserId', userId);
       controller.set('isShowCompetencyContentReport', true);
+    },
+
+    onOpenOCAReport() {
+      let controller = this;
+      controller.openDCAReportForOfflineClass();
     }
   },
 
@@ -166,6 +177,16 @@ export default Ember.Controller.extend({
   isShowStudentReport: false,
 
   isShowCollectionReportPullUp: false,
+
+  /**
+   * @property {boolean} Indicates to show DCA summary report for offline class
+   */
+  isShowOCASummaryReportPullUp: false,
+
+  /**
+   * @property {boolean} Indicates if class is offline or not
+   */
+  isOfflineClass: false,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -267,5 +288,29 @@ export default Ember.Controller.extend({
     };
     this.set('isShowCourseReport', true);
     this.set('courseReportData', params);
+  },
+
+  openDCAReportForOfflineClass() {
+    let controller = this;
+    controller.set('isShowOCASummaryReportPullUp', true);
+  },
+
+  /**
+   * @function fetchDcaSummaryPerformance
+   * Method to fetch dca summary performance for offline class
+   */
+  fetchDcaSummaryPerformance() {
+    let controller = this;
+    let isOfflineClass = controller.get('isOfflineClass');
+    let classId = controller.get('class.id');
+    const performanceSummaryForDCAPromise = isOfflineClass
+      ? controller.get('analyticsService').getDCASummaryPerformance(classId)
+      : null;
+    return Ember.RSVP.hash({
+      performanceSummaryForDCA: performanceSummaryForDCAPromise
+    }).then(function(hash) {
+      const performanceSummaryForDCA = hash.performanceSummaryForDCA;
+      controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
+    });
   }
 });

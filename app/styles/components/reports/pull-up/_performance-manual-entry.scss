@@ -142,6 +142,16 @@
       %container-hide {
         display: none !important;
       }
+      .external-collection-performance-entry {
+        .external-collection-performance-container {
+          .external-collection-resource-container {
+            @extend %container-hide;
+          }
+          .submit {
+            @extend %container-hide;
+          }
+        }
+      }
       .collection-performance-entry {
         .collection-performance-container {
           .collection-resource-container {

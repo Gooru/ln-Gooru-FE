@@ -116,6 +116,12 @@ export default Ember.Object.extend({
     );
   }),
 
+  isExternalCollection: Ember.computed('isCollection', function() {
+    return (
+      this.get('isCollection') && this.get('format') === 'collection-external'
+    );
+  }),
+
   /**
    * Number of attempts for an assessment
    * @property {integer}
