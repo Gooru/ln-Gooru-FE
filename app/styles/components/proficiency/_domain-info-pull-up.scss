@@ -1,0 +1,17 @@
+.domain-info-pull-up {
+  width: 100%;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+  display: grid;
+  position: absolute;
+  grid-template-rows: auto 1fr;
+  height: 0;
+  transition: height 0.15s ease-out;
+  overflow: hidden;
+  bottom: 0;
+
+  &.open {
+    height: 100%;
+    transition: height 0.25s ease-in;
+  }
+}
