@@ -1,0 +1,128 @@
+.signature-content-container {
+  .signature-content {
+    .signature-accordion {
+      .signature-panel {
+        height: auto;
+        display: grid;
+        cursor: pointer;
+        align-items: center;
+
+        .signature-header {
+          display: grid;
+          height: 49px;
+          grid-template-columns: 49px 1fr;
+
+          .signature-icon {
+            width: 100%;
+            background-position: center;
+            height: 100%;
+            background-repeat: no-repeat;
+
+            &.assessment {
+              background-image: url("/assets/gooru/images/assessment-orange.svg");
+            }
+
+            &.collection {
+              background-image: url("/assets/gooru/images/collection-orange.svg");
+            }
+          }
+
+          .signature {
+            border-bottom: solid 1px #cacaca;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1fr 49px;
+            align-items: center;
+
+            .title {
+              height: 20px;
+              font-size: 15px;
+              font-weight: bold;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: normal;
+              color: #ef8f2f;
+            }
+
+            .suggestion-icon {
+              display: flex;
+              justify-content: center;
+              color: #f98e4e;
+            }
+          }
+        }
+
+        .signature-info {
+          display: grid;
+          grid-template-columns: 49px 1fr 49px;
+          align-items: center;
+          height: 46px;
+          border-bottom: 1px solid rgb(202, 202, 202);
+
+          .properties {
+            grid-column-start: 2;
+            display: flex;
+
+            .attempts {
+              display: grid;
+              grid-template-columns: 30px 100px;
+
+              .info {
+                font-size: 9px;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: normal;
+                color: #2d3749;
+                align-self: center;
+                line-height: normal;
+              }
+            }
+
+            .direction {
+              display: grid;
+              grid-template-columns: 30px 150px;
+
+              .info {
+                font-size: 9px;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: normal;
+                color: #2d3749;
+                align-self: center;
+                line-height: normal;
+              }
+            }
+          }
+
+          .content-count {
+            grid-column-start: 3;
+
+            .assessment-count,
+            .collection-count {
+              margin: auto;
+              display: flex;
+            }
+          }
+
+          a {
+            .action {
+              display: flex;
+              color: #f98e4e;
+              justify-content: center;
+              height: 46px;
+              width: 100%;
+              border-left: 1px solid #cacaca;
+
+              i {
+                margin: auto;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

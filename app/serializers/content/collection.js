@@ -188,5 +188,24 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return {
       order: values
     };
+  },
+
+  /**
+   * @function serializeCreateExternalCollection
+   * Method to serialize external collection data
+   */
+  serializeCreateExternalCollection(collectionData) {
+    const serializer = this;
+    const taxonomySerializer = serializer.get('taxonomySerializer');
+    let serializedExternalCollectionData = {
+      title: collectionData.title,
+      metadata: {
+        audience: collectionData.audience
+      },
+      taxonomy: taxonomySerializer
+        .serializeTaxonomy(collectionData.taxonomy),
+      learning_objective: collectionData.description
+    };
+    return serializedExternalCollectionData;
   }
 });

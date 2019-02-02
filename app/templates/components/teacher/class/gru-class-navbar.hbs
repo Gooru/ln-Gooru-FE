@@ -39,11 +39,23 @@
         {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' isTeacher=true classId=class.id }}
       </div>
     {{/if}}
-    <div class="performance-summary  {{unless hasStarted 'not-started'}}" {{action 'onOpenCourseReport'}}>
-      {{charts/gru-performance-chart performanceSummary=class.performanceSummary }}
+    <div class="performance-summary">
+      {{#if isOfflineClass}}
+        <div class="dca-performance {{unless performanceSummaryForDCA.performance.scoreInPercentage 'disabled'}}" {{action 'onOpenOCAReport'}} style="background-color:{{if performanceSummaryForDCA (grade-color performanceSummaryForDCA.performance.scoreInPercentage)}}">
+          {{#if performanceSummaryForDCA.performance.scoreInPercentage}}
+            {{performanceSummaryForDCA.performance.scoreInPercentage}}%
+          {{else}}
+            --
+          {{/if}}
+        </div>
+      {{else}}
+        <div class="{{unless hasStarted 'not-started'}}" {{action 'onOpenCourseReport'}}>
+          {{charts/gru-performance-chart performanceSummary=class.performanceSummary }}
+        </div>
+      {{/if}}
     </div>
-    <div class="class-management tab">
-      <a {{action 'selectItem' 'class-management'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.class-management'}}">
+    <div class="class-management tab ">
+      <a {{action 'selectItem' 'class-management'}} role="tab " data-toggle="tooltip " title=" {{t 'teacher-landing.class.class-management'}} ">
       {{gru-icon name="settings"}}
       </a>
     </div>

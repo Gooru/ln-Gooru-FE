@@ -9,6 +9,11 @@ export default Ember.Controller.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
   /**
+   * @type {AnalyticsService} Service to retrieve class performance summary
+   */
+  analyticsService: Ember.inject.service('api-sdk/analytics'),
+
+  /**
    * @requires service:api-sdk/class
    */
 
@@ -97,6 +102,7 @@ export default Ember.Controller.extend(ModalMixin, {
 
   loadClassPerformance(classes) {
     let route = this;
+    let offlineClasses = classes.filterBy('isOffline', true);
     let classCourseIds = route.getListOfClassCourseIds(classes);
     let courseIDs = route.getListOfCourseIds(classes);
     let courseCardsPromise = route
@@ -109,6 +115,7 @@ export default Ember.Controller.extend(ModalMixin, {
     Ember.RSVP.hash({
       courseCards: courseCardsPromise,
       perfSummary: perfSummaryPromise,
+      offlineClassPerfSummary: route.getOfflineClassPerformance(offlineClasses),
       classes: classes
     }).then(function(hash) {
       hash.classes.forEach(function(activeclass) {
@@ -122,10 +129,42 @@ export default Ember.Controller.extend(ModalMixin, {
           );
           activeclass.set('course', course);
         }
-        activeclass.set(
-          'performanceSummary',
-          hash.perfSummary.findBy('classId', classId)
-        );
+
+        if (activeclass.get('isOffline')) {
+          activeclass.set(
+            'performanceSummary',
+            hash.offlineClassPerfSummary.findBy('classId', classId)
+          );
+        } else {
+          activeclass.set(
+            'performanceSummary',
+            hash.perfSummary.findBy('classId', classId)
+          );
+        }
+      });
+    });
+  },
+
+  getOfflineClassPerformance(offlineClasses) {
+    let route = this;
+    return new Ember.RSVP.Promise(function(resolve) {
+      let promises = [];
+      offlineClasses.forEach((offlineClass, index) => {
+        promises[index] = Ember.RSVP.hash({
+          performanceSummary: route
+            .get('analyticsService')
+            .getDCASummaryPerformance(offlineClass.get('id'))
+        }).then(function(hash) {
+          let classPerformance = hash.performanceSummary.performance;
+          return Ember.Object.create({
+            classId: offlineClass.get('id'),
+            score: classPerformance.scoreInPercentage,
+            totalCompleted: classPerformance.completedCount
+          });
+        });
+      });
+      Ember.RSVP.all(promises).then(function(promiseResult) {
+        resolve(promiseResult);
       });
     });
   },

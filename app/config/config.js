@@ -268,7 +268,15 @@ export const CODE_TYPES = {
   LEARNING_TARGET_L2: 'learning_target_level_2'
 };
 
+export const MICRO_COMPETENCY_CODE_TYPES = [
+  'learning_target_level_0',
+  'learning_target_level_1',
+  'learning_target_level_2'
+];
+
 export const GOORU_DEFAULT_STANDARD = 'GDF';
+
+export const GOORU_DEFAULT_FRAMEWORK = 'GDT';
 
 export const ASSESSMENT_SHOW_VALUES = {
   IMMEDIATE: 'immediate',
@@ -311,7 +319,8 @@ export const PLAYER_EVENT_SOURCE = {
   COURSE_MAP: 'coursemap',
   DAILY_CLASS: 'dailyclassactivity',
   INDEPENDENT_ACTIVITY: 'ILActivity',
-  RGO: 'rgo'
+  RGO: 'rgo',
+  MASTER_COMPETENCY: 'competencyMastery'
 };
 
 export const PROFILE_NAV_MENU_ITEMS = [

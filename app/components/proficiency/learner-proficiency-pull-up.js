@@ -71,10 +71,15 @@ export default Ember.Component.extend({
     /**
      * Action triggered when select a competency
      */
-    onSelectCompetency(competency) {
+    onSelectCompetency(competency, domainCompetencyList) {
       let component = this;
       let userId = component.get('student.id');
-      component.sendAction('onSelectCompetency', competency, userId);
+      component.sendAction(
+        'onSelectCompetency',
+        competency,
+        userId,
+        domainCompetencyList
+      );
     }
   },
 
