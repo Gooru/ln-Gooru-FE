@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import {isMobileVW} from 'gooru-web/utils/utils';
 
 export default Ember.Controller.extend({
 
@@ -111,11 +112,6 @@ export default Ember.Controller.extend({
   }),
 
   /**
-   * @property {Number} mediumDeviceWidth
-   */
-  mediumDeviceWidth: 992,
-
-  /**
    * @property {String} userAgent
    */
   userAgent: 'desktop',
@@ -125,14 +121,22 @@ export default Ember.Controller.extend({
    */
   isExpandedView: false,
 
+  /**
+   * @property {Boolean} isShowAtcView
+   */
+  isShowAtcView: Ember.computed('students', 'courseId', function() {
+    const controller = this;
+    let isStudentsAvailable = controller.get('students.length');
+    let isCourseMapped = controller.get('courseId');
+    return isStudentsAvailable && isCourseMapped;
+  }),
+
   // -------------------------------------------------------------------------
   // Events
-  init() {
+  initializeController() {
     const controller = this;
     if (controller.get('isPremiumClass')) {
-      let screenWidth = window.screen.width;
-      let mediumDeviceWidth = controller.get('mediumDeviceWidth');
-      if (screenWidth <= mediumDeviceWidth) {
+      if (isMobileVW()) {
         controller.set('userAgent', 'mobile');
       }
       controller.loadData();
@@ -167,7 +171,13 @@ export default Ember.Controller.extend({
     onRedirectToCA() {
       const controller = this;
       const classId = controller.get('classId');
-      controller.transitionToRoute('teacher.class.class-activities', classId);
+      let month = controller.get('activeMonth');
+      let year = controller.get('activeYear');
+      let queryParams = {
+        month,
+        year
+      };
+      controller.transitionToRoute('teacher.class.class-activities', classId, {queryParams});
     }
   },
 
@@ -182,8 +192,8 @@ export default Ember.Controller.extend({
     controller.set('isLoading', true);
     controller.fetchClassActivitiesCount();
     controller.fetchDomainsCompletionReport().then(function(domainsCompletionReport) {
+      controller.set('domainsCompletionList', domainsCompletionReport.domainsData.sortBy('completionPercentage'));
       controller.set('domainsCompletionReport', domainsCompletionReport);
-      controller.getDomainListToShow();
       controller.set('isLoading', false);
     });
   },

@@ -70,6 +70,7 @@
             align-items: center;
             padding: 5px 0;
             margin-left: 15px;
+            cursor: pointer;
             .competency-info {
               .competency-name {
                 font-size: 12px;
@@ -165,6 +166,9 @@
               display: block;
             }
           }
+        }
+        .data-not-available {
+          text-align: center;
         }
       }
     }

@@ -370,3 +370,5 @@ export const NOTIFICATION_SETTINGS = {
 export const PLAYER_WINDOW_NAME = 'rgo_player';
 
 export const DEFAULT_K12_SUBJECT = 'K12.MA';
+
+export const MOBILE_VW = 992;

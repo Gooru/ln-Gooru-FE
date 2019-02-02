@@ -6,7 +6,8 @@ import {
   DEFAULT_IMAGES,
   EMOTION_VALUES,
   GRADING_SCALE,
-  BARS_GRADING_SCALE
+  BARS_GRADING_SCALE,
+  MOBILE_VW
 } from 'gooru-web/config/config';
 /**
  * Function for sorting strings alphabetically in ascending order
@@ -1037,4 +1038,13 @@ export function validateTimespent(hour, min) {
     }
   }
   return isValidTime;
+}
+
+/**
+ * Evaluate whether the current device is mobile version or not
+ * @return {Boolean}
+ */
+export function isMobileVW() {
+  let currentVW = window.screen.width;
+  return currentVW <= MOBILE_VW;
 }

@@ -59,6 +59,17 @@ export default Ember.Component.extend({
    */
   subjectCode: Ember.computed.alias('course.subject'),
 
+  /**
+   * @property {Date} firstDayOfMonth
+   */
+  firstDayOfMonth: Ember.computed('month', 'year', function() {
+    const component = this;
+    let month = component.get('month');
+    let year = component.get('year');
+    let date = `${year}-${month}-01`;
+    return moment(date).format('YYYY-MM-DD');
+  }),
+
   // -------------------------------------------------------------------------
   // Functions
 
