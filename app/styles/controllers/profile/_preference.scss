@@ -5,7 +5,9 @@
       display: grid;
     }
   }
-
+  .hideMe {
+    display: none;
+  }
   .actionClass {
     cursor: pointer;
   }
@@ -39,6 +41,7 @@
       .edit-preference {
         cursor: pointer;
         margin-left: auto;
+        padding-right: 15px;
       }
     }
     .category-container-layout {
@@ -154,6 +157,71 @@
         }
       }
       .edit-mode {
+        .subject-fwk-language {
+          display: grid;
+          justify-content: space-between;
+          align-items: center;
+          grid-template-columns: 280px 137px 30px;
+
+          @media (max-width: 360px) {
+            grid-template-columns: 200px 81px 30px;
+          }
+          margin: 10px;
+          .subject {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-weight: bold;
+          }
+          .actionClass {
+            cursor: pointer;
+            display: none;
+            color: red;
+            @media (max-width: 360px) {
+              display: block;
+            }
+          }
+          .fwk {
+            /*  width: 250px; */
+            // overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            justify-self: baseline;
+            // .dropdown-toggle {
+            //   width: 160px;
+            // }
+            .btn-default {
+              background-color: $gray;
+              color: $white;
+            }
+          }
+
+          .fwk-new-cat {
+            margin-left: -22px;
+            @media (max-width: 360px) {
+              margin-left: -50px;
+            }
+          }
+          .addSubjectFWK {
+            cursor: pointer;
+            font-size: 20px;
+            vertical-align: middle;
+            line-height: 32px;
+            width: 20px;
+            padding-left: 12px;
+            > i {
+              font-size: 12px;
+              width: 11px;
+              height: 26px;
+              font-size: 20px;
+              font-weight: bold;
+            }
+          }
+          .tag-caption {
+            color: $white !important;
+          }
+        }
+
         .subject-fwk {
           display: grid;
           justify-content: space-between;
@@ -174,6 +242,9 @@
             cursor: pointer;
             display: none;
             color: red;
+            @media (max-width: 360px) {
+              display: block;
+            }
           }
           .fwk {
             /*  width: 250px; */

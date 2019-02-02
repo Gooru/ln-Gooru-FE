@@ -274,6 +274,26 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * Creates a new external collection
+   *
+   * @param data collection data to be sent in the request body
+   * @returns {Promise}
+   */
+  createExternalCollection(collectionData) {
+    const adapter = this;
+    const url = this.get('externalNamespace');
+    const options = {
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(collectionData)
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

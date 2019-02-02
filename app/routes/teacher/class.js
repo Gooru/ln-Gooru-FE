@@ -169,7 +169,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       let classCourseId = null;
       if (classData.courseId) {
         classCourseId = Ember.A([
-          { classId: params.classId, courseId: classData.courseId }
+          {
+            classId: params.classId,
+            courseId: classData.courseId
+          }
         ]);
       }
       const performanceSummaryPromise = classCourseId
@@ -232,9 +235,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('course', model.course);
     controller.set('members', model.members);
     controller.set('contentVisibility', model.contentVisibility);
+    controller.set('isOfflineClass', model.class.isOffline);
     controller.set('steps', model.tourSteps);
     controller.set('router', this.get('router'));
     let classData = model.class;
     classData.course = model.course;
+    controller.fetchDcaSummaryPerformance();
   }
 });

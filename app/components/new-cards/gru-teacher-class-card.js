@@ -43,8 +43,9 @@ export default Ember.Component.extend({
     selectItem: function(item) {
       const classData = this.get('class');
       const classId = classData.id;
+      const isOffline = classData.get('isOffline');
       if (this.get('onItemSelected')) {
-        this.sendAction('onItemSelected', item, classId);
+        this.sendAction('onItemSelected', item, classId, isOffline);
       }
     }
   },
@@ -58,9 +59,10 @@ export default Ember.Component.extend({
 
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
-
   // -------------------------------------------------------------------------
   // Properties
   /**
@@ -173,7 +175,7 @@ export default Ember.Component.extend({
    */
   hasStarted: Ember.computed('class.performanceSummary', function() {
     const scorePercentage = this.get('class.performanceSummary.score');
-    return scorePercentage !== null && scorePercentage >= 0;
+    return scorePercentage !== null;
   }),
 
   /**

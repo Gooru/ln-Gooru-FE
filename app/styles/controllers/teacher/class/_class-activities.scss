@@ -98,7 +98,7 @@
               display: inline-grid;
               justify-items: center;
               align-items: center;
-              grid-template-columns: 120px 20px 20px;
+              grid-template-columns: 120px 20px 20px 20px;
               grid-gap: 15px;
               padding-left: 15px;
 
@@ -129,6 +129,11 @@
                 background-size: 20px 20px;
                 background-image: url("../assets/gooru/images/add_assessment.svg");
                 opacity: 0.8;
+                cursor: pointer;
+              }
+
+              .create-offline-activity {
+                line-height: 10px;
                 cursor: pointer;
               }
             }
@@ -273,6 +278,37 @@
           }
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .ca-datepicker-schedule-container,
+    .schedule-ca-datepicker-container {
+      left: calc((100% - 250px) / 2) !important;
+      .ca-datepicker-orientation-top {
+        .ca-datepicker-top {
+          display: none;
+        }
+      }
+
+      .ca-datepicker-orientation-bottom {
+        .ca-datepicker-bottom {
+          display: none;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 992px) and (orientation: portrait) {
+    .ca-datepicker-schedule-container,
+    .schedule-ca-datepicker-container {
+      top: 49px !important;
+    }
+  }
+
+  @media screen and (max-width: 992px) and (orientation: landscape) {
+    .ca-datepicker-schedule-container,
+    .schedule-ca-datepicker-container {
+      top: 0px !important;
     }
   }
 }

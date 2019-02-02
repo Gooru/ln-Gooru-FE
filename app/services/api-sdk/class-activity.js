@@ -199,12 +199,20 @@ export default Ember.Service.extend({
   ) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      const assessmentIds = classActivities
+      let assessmentIds = classActivities
         .filterBy('collection.isAssessment')
         .mapBy('collection.id');
-      const collectionIds = classActivities
+      let collectionIds = classActivities
         .filterBy('collection.isCollection')
         .mapBy('collection.id');
+      let externalCollectionIds = classActivities
+        .filterBy('collection.isExternalCollection')
+        .mapBy('collection.id');
+      collectionIds = collectionIds.concat(externalCollectionIds);
+      let externalAssessmentIds = classActivities
+        .filterBy('collection.isExternalAssessment')
+        .mapBy('collection.id');
+      assessmentIds = assessmentIds.concat(externalAssessmentIds);
       const performanceService = service.get('performanceService');
       Ember.RSVP.hash({
         activityCollectionPerformanceSummaryItems: collectionIds.length
@@ -316,16 +324,18 @@ export default Ember.Service.extend({
               performance.get('collectionPerformanceSummary.collectionId')
             )
             .objectAt(0);
-
           if (classActivity) {
+            let classActivityIndex = classActivities.indexOf(classActivity);
             let performanceData = performance.get(
               'collectionPerformanceSummary'
             );
             performanceData.set('hasStarted', true);
-            classActivity.set('collection.performance', performanceData);
+            classActivities[classActivityIndex].set(
+              'collection.performance',
+              performanceData
+            );
           }
         });
-
         resolve(classActivities);
       }, reject);
     });

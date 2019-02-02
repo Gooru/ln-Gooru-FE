@@ -53,7 +53,14 @@ export default Ember.Component.extend({
      * @param  {Object} collection
      */
     openDcaContentReport(selectedClassActivity) {
-      this.sendAction('openDcaContentReport', selectedClassActivity);
+      let component = this;
+      let isOfflineClass = component.get('isOfflineClass');
+      if (isOfflineClass) {
+        component.set('selectedActivity', selectedClassActivity);
+        component.set('isShowStudentsSummaryReport', true);
+      } else {
+        this.sendAction('openDcaContentReport', selectedClassActivity);
+      }
     },
 
     /**
@@ -97,7 +104,25 @@ export default Ember.Component.extend({
         classActivity,
         isRepeatEntry
       );
+    },
+
+    onPullUpClose(closeAll) {
+      this.closePullUp(closeAll);
     }
+  },
+
+  closePullUp(closeAll) {
+    let component = this;
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+        component.sendAction('onClosePullUp', closeAll);
+      }
+    );
   },
 
   // -------------------------------------------------------------------------
@@ -110,12 +135,14 @@ export default Ember.Component.extend({
     'isOfflineClass',
     'classActivity.activation_date',
     'item',
+    'members',
     function() {
       let component = this;
       let isOfflineClass = component.get('isOfflineClass');
       let activationData = !!component.get('classActivity.activation_date');
       let isFutureDate = component.get('isActivityFuture');
-      return isOfflineClass && activationData && !isFutureDate;
+      let isStudentsJoined = component.get('members.length') > 0;
+      return isOfflineClass && activationData && !isFutureDate && isStudentsJoined;
     }
   ),
 
@@ -152,6 +179,17 @@ export default Ember.Component.extend({
    */
   showGolive: Ember.computed('isToday', function() {
     return this.get('isToday');
+  }),
+
+  activities: Ember.computed('classActivities', function() {
+    let filteredActivites = [];
+    let classActivities = this.get('classActivities');
+    classActivities.forEach(function(classActivity) {
+      classActivity.classActivities.forEach(activity => {
+        filteredActivites.push(activity);
+      });
+    });
+    return filteredActivites;
   }),
 
   /**
