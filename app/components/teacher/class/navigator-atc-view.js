@@ -238,10 +238,12 @@ export default Ember.Component.extend({
       .on('mouseover', function(studentData) {
         component.set('studentData', studentData);
         let clientY = d3.event.clientY;
+        let clientX = d3.event.clientX;
         let top = clientY > 420 ? clientY - 240 : clientY;
+        let left = clientX > 600 ? clientX - 300 : clientX;
         tooltip
           .style('visibility', 'hidden')
-          .style('left', `${d3.event.clientX}px`)
+          .style('left', `${left}px`)
           .style('top', `${top}px`);
         let tooltipHtml = component.$('.tooltip-html-container').html();
         tooltip.html(tooltipHtml);
