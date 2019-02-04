@@ -702,7 +702,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   year: null,
 
-   /*
+  /*
    * @property {Json} classPreference
    */
   classPreference: Ember.computed.alias('class.preference'),

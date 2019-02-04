@@ -287,6 +287,14 @@
       }
     }
 
+    @media screen and (max-width: 320px) {
+      .chart-container {
+        .chart-area {
+          zoom: 0.35;
+        }
+      }
+    }
+
     @media screen and (min-width: 568px) and (max-width: 736px) and (orientation: landscape) {
       .chart-container {
         .chart-area {

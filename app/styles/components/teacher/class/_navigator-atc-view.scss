@@ -58,7 +58,7 @@
   border-radius: 5px;
 
   .tooltip-container {
-    width: 300px;
+    width: 225px;
     padding: 10px;
     .header-container {
       display: grid;
@@ -100,7 +100,7 @@
         display: grid;
         grid-template-columns: auto auto;
         .title-container {
-          font-size: 18px;
+          font-size: 15px;
         }
         .grade-info, .competencies {
           display: grid;
@@ -122,10 +122,10 @@
           align-items: center;
           justify-content: center;
           .score-count, .progress-count {
-            font-size: 32px;
+            font-size: 24px;
           }
           .title-container {
-            font-size: 18px;
+            font-size: 15px;
           }
         }
       }

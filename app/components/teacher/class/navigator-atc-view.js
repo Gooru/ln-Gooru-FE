@@ -114,7 +114,7 @@ export default Ember.Component.extend({
           studentPerformanceData.set('notStartedCompetencies', notStartedCompetencies);
           studentPerformanceData.set('percentCompletion', studentPerformanceSummary.percentCompletion);
           studentPerformanceData.set('percentScore', studentPerformanceSummary.percentScore);
-          studentPerformanceData.set('gradeId', studentPerformanceSummary.gradeId);
+          studentPerformanceData.set('gradeId', studentPerformanceSummary.gradeId || '--');
           parsedPerformanceSummary.push(studentPerformanceData);
         }
       });
@@ -239,18 +239,21 @@ export default Ember.Component.extend({
         component.set('studentData', studentData);
         let clientY = d3.event.clientY;
         let clientX = d3.event.clientX;
-        let top = clientY > 420 ? clientY - 240 : clientY;
-        let left = clientX > 600 ? clientX - 300 : clientX;
+        let top = clientY > 420 ? clientY - 210 : clientY;
+        let left = clientX > 600 ? clientX - 225 : clientX;
         tooltip
           .style('visibility', 'hidden')
           .style('left', `${left}px`)
           .style('top', `${top}px`);
         let tooltipHtml = component.$('.tooltip-html-container').html();
         tooltip.html(tooltipHtml);
-        return tooltip.style('visibility', 'visible');
+        tooltip.style('visibility', 'visible');
       })
       .on('mouseout', function() {
-        return tooltip.style('visibility', 'hidden');
+        tooltip.style('visibility', 'hidden');
+      })
+      .on('click', function() {
+        tooltip.style('visibility', 'visible');
       });
 
     studentNodes
