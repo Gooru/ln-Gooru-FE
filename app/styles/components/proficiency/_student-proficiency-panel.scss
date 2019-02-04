@@ -9,8 +9,92 @@
   .panel-content {
     width: 100%;
 
-    .proficiency-legends {
-      display: flex;
+    .proficiency-tags {
+      .last-updated {
+        text-align: right;
+        margin-top: 15px;
+        margin-right: 30px;
+        font-size: 12px;
+      }
+
+      .proficiency-legends {
+        margin: 15px auto auto;
+        width: max-content;
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto;
+        justify-content: space-around;
+
+        .legend {
+          display: flex;
+          margin-right: 30px;
+
+          .box {
+            display: block;
+            width: 15.6px;
+            height: 15.6px;
+            transform: rotate(90deg);
+            margin-right: 8.4px;
+          }
+
+          .box-baseline,
+          .box-grade-line {
+            width: 18px;
+            height: 5px;
+            margin-top: 4px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+            margin-right: 8.4px;
+          }
+
+          .box-skyline {
+            width: 18px;
+            height: 10px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+            margin-right: 8.4px;
+          }
+
+          .title {
+            line-height: 13px;
+            font-size: 12px;
+            color: $elephant-dark;
+          }
+
+          &.mastered {
+            .box {
+              background-color: $blue-400;
+            }
+          }
+
+          &.in-progress {
+            .box {
+              background-color: $in-progress;
+            }
+          }
+
+          &.not-started {
+            .box {
+              background-color: $not-started;
+            }
+          }
+
+          &.skyline {
+            .box-skyline {
+              background-color: $white;
+            }
+          }
+
+          &.baseline {
+            .box-baseline {
+              background-color: $dark-400;
+            }
+          }
+
+          &.grade-line {
+            .box-grade-line {
+              background-color: #8fd383;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -19,10 +103,14 @@
     width: 95%;
     border-bottom: 2px solid #979797;
     display: grid;
-    grid-template-columns: 30px 150px 1fr;
+    grid-template-columns: 30px 1fr 200px;
     grid-gap: 15px;
     padding: 10px;
     margin: auto;
+
+    .back {
+      cursor: pointer;
+    }
 
     .dropdown {
       position: relative;
@@ -96,7 +184,7 @@
         font-weight: bold;
         height: 48px;
         text-transform: capitalize;
-        margin: auto;
+        margin-left: 10px;
         line-height: normal;
         letter-spacing: normal;
         color: #36424b;

@@ -136,7 +136,8 @@ export default Ember.Controller.extend({
       controller.transitionToRoute('student-learner-proficiency', userId, {
         queryParams: {
           classId: classId,
-          courseId: courseId
+          courseId: courseId,
+          role: 'student'
         }
       });
       // controller.set('isShowProficiencyPullup', true);

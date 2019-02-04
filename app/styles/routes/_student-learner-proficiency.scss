@@ -1,6 +1,6 @@
 .student-learner-proficiency {
   .gru-header {
-    display: none;
+    display: none !important;
   }
 
   .student-proficiency-container {
@@ -17,6 +17,10 @@
     padding-bottom: 10px;
     display: grid;
     grid-template-columns: 100px 1fr 35%;
+
+    &.teacher {
+      background: #35424b;
+    }
 
     .pull-up-container {
       padding-right: 15px;

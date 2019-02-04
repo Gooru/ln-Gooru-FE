@@ -29,14 +29,6 @@ export default Ember.Controller.extend({
    */
   activeSubject: null,
 
-  // onSubjectChange: Ember.observer('activeSubject', function() {
-  //   let component = this;
-  //   component.set('showDomainInfo', false);
-  //   component.set('showCompetencyInfo', false);
-  //   component.fetchTaxonomyGrades();
-  //   component.loadDataBySubject();
-  // }),
-
   /**
    * @property {String}
    * Property to store course subject bucket or K12.MA will be default

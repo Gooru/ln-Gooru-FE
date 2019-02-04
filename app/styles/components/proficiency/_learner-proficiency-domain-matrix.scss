@@ -49,6 +49,30 @@
     display: grid;
     zoom: 0.9;
 
+    .matrix-chart {
+      #render-proficiency-matrix {
+        &.hover {
+          svg {
+            #cell-container {
+              rect {
+                opacity: 0.1;
+                stroke-width: 0;
+
+                &.active {
+                  opacity: 1;
+                  stroke-width: 1;
+                }
+              }
+            }
+
+            #skyline-container {
+              opacity: 0;
+            }
+          }
+        }
+      }
+    }
+
     &.compressed-view {
       .matrix-chart {
         .scrollable-chart {
