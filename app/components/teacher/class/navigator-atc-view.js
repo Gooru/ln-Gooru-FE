@@ -252,7 +252,8 @@ export default Ember.Component.extend({
       .on('mouseout', function() {
         tooltip.style('visibility', 'hidden');
       })
-      .on('click', function() {
+      .on('click', function(studentData) {
+        component.set('studentData', studentData);
         tooltip.style('visibility', 'visible');
       });
 

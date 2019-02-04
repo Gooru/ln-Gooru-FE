@@ -85,5 +85,7 @@ export default Ember.Route.extend({
   resetController(controller) {
     controller.set('tab', null);
     controller.set('classActivities', Ember.A([]));
+    controller.set('month', null);
+    controller.set('year', null);
   }
 });
