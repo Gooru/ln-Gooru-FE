@@ -1641,10 +1641,6 @@ $canvas-height: 1254px;
         }
         .student-settings-sec {
           width: 667px;
-
-          /*   height: 100vh;
-          overflow-x: scroll; */
-
           @extend .sec-panel;
 
           .grid-header-caps-label {
@@ -1861,9 +1857,8 @@ $canvas-height: 1254px;
         }
         .student-sec-cont {
           .student-settings-sec {
-            width: 100%;
             .student-grid {
-              grid-template-columns: 40px minmax(0px, auto) 93px 140px auto auto auto;
+              grid-template-columns: 40px minmax(0px, auto) minmax(0px, auto) 93px 140px auto auto auto;
             }
           }
         }
