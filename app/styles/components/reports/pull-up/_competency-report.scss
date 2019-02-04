@@ -15,21 +15,54 @@
 
     .competency-report-header {
       height: 60px;
-      padding: 8px 15px;
       display: flex;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+      display: grid;
+      grid-template-columns: 60px 1fr 30px;
+
+      .competency-status {
+        width: 24px;
+        height: 24px;
+        justify-self: center;
+        margin: auto;
+
+        &.status-0 {
+          opacity: 0.3;
+          background-color: #333c4f;
+        }
+
+        &.status-1 {
+          background-color: #99c5e6;
+        }
+
+        &.status-2,
+        .status-3,
+        .status-4,
+        .status-5 {
+          background-color: #6f9ce2;
+        }
+      }
 
       .report-info {
         width: 96%;
         display: flex;
 
         .title-section {
-          width: 73%;
+          width: 100%;
           font-size: 16px;
           color: $dark-400;
-
-          .type {
-            text-transform: uppercase;
+          .title-content {
+            display: grid;
+            grid-template-columns: 45% auto;
+          }
+          .title-content {
+            .competency-code {
+              font-size: 20px;
+              line-height: initial;
+            }
+            .type {
+              text-transform: uppercase;
+            }
           }
 
           .title {

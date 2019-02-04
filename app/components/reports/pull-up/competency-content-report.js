@@ -220,5 +220,15 @@ export default Ember.Component.extend({
   showSignatureAssessment: Ember.computed('competency', function() {
     let component = this;
     return component.get('competency.showSignatureAssessment');
+  }),
+
+  onCompetencyChange: Ember.observer('competency', function() {
+    let component = this;
+    component.set('learningMapData', null);
+    let showSignatureAssessment = component.get(
+      'competency.showSignatureAssessment'
+    );
+    component.set('showSignatureAssessment', showSignatureAssessment);
+    component.loadCompetencyPerformanceData();
   })
 });

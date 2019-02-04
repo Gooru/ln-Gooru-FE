@@ -217,14 +217,17 @@ export default Ember.Service.extend({
       service
         .get('competencyAdapter')
         .getDomainsCompletionReport(requestBody)
-        .then(function(response) {
-          resolve(
-            service.get('competencySerializer').normalizeDomainsCompletionReport(response)
-          );
-        },
-        function(error) {
-          reject(error);
-        }
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('competencySerializer')
+                .normalizeDomainsCompletionReport(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
         );
     });
   },
@@ -239,14 +242,17 @@ export default Ember.Service.extend({
       service
         .get('competencyAdapter')
         .getUsersCompetencyPerformanceSummary(requestBody)
-        .then(function(response) {
-          resolve(
-            service.get('competencySerializer').normalizeUsersCompetencyPerformanceSummary(response)
-          );
-        },
-        function(error) {
-          reject(error);
-        }
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('competencySerializer')
+                .normalizeUsersCompetencyPerformanceSummary(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
         );
     });
   }

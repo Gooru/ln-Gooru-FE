@@ -121,7 +121,12 @@ export default Ember.Object.extend({
    * @function getAtcPerformanceSummaryPremiumClass
    * Method to fetch performance summary of a premium class for ATC view
    */
-  getAtcPerformanceSummaryPremiumClass(classId, courseId, subjectCode, filters) {
+  getAtcPerformanceSummaryPremiumClass(
+    classId,
+    courseId,
+    subjectCode,
+    filters
+  ) {
     const adapter = this;
     const namespace = this.get('dsUsersNamespace');
     const url = `${namespace}/nc/atc/pvc`;

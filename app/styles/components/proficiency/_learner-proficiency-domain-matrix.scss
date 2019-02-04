@@ -1,9 +1,11 @@
 .learner-proficiency-domain-matrix {
   margin: 0 auto;
   background-color: $white;
+
   .show-tooltip + .tooltip {
     visibility: visible;
   }
+
   %scroll-style {
     &::-webkit-scrollbar {
       height: 6px;
@@ -44,9 +46,8 @@
 
   .chart-area {
     background-color: $gray-97;
-    width: 90%;
-    margin: 0 auto;
     display: grid;
+    zoom: 0.9;
 
     &.compressed-view {
       .matrix-chart {
@@ -82,108 +83,26 @@
 
     .matrix-chart {
       .chart-container {
-        display: grid;
-        grid-template-columns: auto auto;
-        grid-gap: 10px;
+        display: flex;
+        width: 100%;
         justify-content: center;
 
         &.no-grade {
-          grid-template-columns: auto;
-
           .domain-chart-container {
-            max-width: 100vw;
-          }
-        }
-
-        .taxonomy-grades-container {
-          .taxonomy-grades {
-            .grade-list {
-              max-height: 63vh;
-              @extend %scroll-style;
-
-              .grade-container {
-                cursor: pointer;
-              }
-            }
-          }
-
-          .baseline-toggle {
-            position: relative;
-            padding: 0;
-            margin: 0;
-            max-width: 100px;
-            width: max-content;
-            min-width: 100px;
-            text-align: right;
-            cursor: pointer;
-
-            .baseline-label {
-              border: none;
-              display: block;
-              padding-left: 10px;
-              padding-right: 10px;
-              height: 24px;
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              color: $dark-300;
-            }
-
-            &.active-baseline {
-              font-weight: bold;
-
-              .baseline-label {
-                background-color: $dark-300;
-                border: none;
-                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
-                opacity: 1;
-                font-weight: bold;
-                display: grid;
-                align-items: center;
-                justify-content: center;
-                color: $white;
-              }
-
-              .baseline-label:after,
-              .baseline-label:before {
-                content: "";
-                display: inline-block;
-                border-width: 16px;
-                border-style: solid;
-                width: 0;
-                height: 0;
-                left: 100%;
-                top: -1px;
-                position: absolute;
-                z-index: 1;
-              }
-
-              .baseline-label:after {
-                border-color: transparent transparent transparent transparent;
-              }
-
-              .baseline-label:before {
-                border-width: 12px;
-                display: block;
-                border-color: transparent transparent transparent $dark-300;
-                z-index: 0;
-                top: 0;
-              }
-            }
+            max-width: 100%;
           }
         }
         @extend %scroll-style;
 
         .domain-chart-container {
-          align-self: flex-end;
-          max-width: calc(100vw - 100px);
+          // align-self: flex-end;
+          // max-width: calc(100vw - 100px);
           overflow-x: auto;
           @extend %scroll-style;
 
           .scrollable-chart {
-            max-height: 63vh;
+            max-height: 50vh;
             overflow-y: auto;
-            width: max-content;
             display: grid;
             grid-template-columns: auto;
             justify-content: flex-end;

@@ -1,17 +1,14 @@
 import Ember from 'ember';
-import {getCategoryCodeFromSubjectId} from 'gooru-web/utils/taxonomy';
+import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['ca-taxonomy-picker'],
 
-
   // -------------------------------------------------------------------------
   // Dependencies
   taxonomyService: Ember.inject.service('taxonomy'),
-
 
   /**
    * @property {Service} I18N service
@@ -29,7 +26,6 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
-
     updateSelectedTags(selectedTags, course, domain, isCloseBrowser) {
       const component = this;
       var dataTags = selectedTags.map(function(taxonomyTag) {
@@ -40,7 +36,6 @@ export default Ember.Component.extend({
       if (isCloseBrowser) {
         component.sendAction('onSubmitCompetencies', standards, course, domain);
       }
-
     },
 
     loadTaxonomyData(path) {
@@ -106,31 +101,36 @@ export default Ember.Component.extend({
    * i18n key for the browse selector text
    * @property {string}
    */
-  browseSelectorText: Ember.computed('taxonomyPickerData.standardLabel', function() {
-    const standardLabel = this.get('taxonomyPickerData.standardLabel');
-    return standardLabel
-      ? 'taxonomy.modals.gru-standard-picker.browseSelectorText'
-      : 'taxonomy.modals.gru-standard-picker.browseCompetencySelectorText';
-  }),
+  browseSelectorText: Ember.computed(
+    'taxonomyPickerData.standardLabel',
+    function() {
+      const standardLabel = this.get('taxonomyPickerData.standardLabel');
+      return standardLabel
+        ? 'taxonomy.modals.gru-standard-picker.browseSelectorText'
+        : 'taxonomy.modals.gru-standard-picker.browseCompetencySelectorText';
+    }
+  ),
 
   /**
    * i18n key for the selected text key
    * @property {string}
    */
-  selectedTextKey: Ember.computed('taxonomyPickerData.standardLabel', function() {
-    const standardLabel = this.get('taxonomyPickerData.standardLabel');
+  selectedTextKey: Ember.computed(
+    'taxonomyPickerData.standardLabel',
+    function() {
+      const standardLabel = this.get('taxonomyPickerData.standardLabel');
 
-    return standardLabel
-      ? 'taxonomy.modals.gru-standard-picker.selectedText'
-      : 'taxonomy.modals.gru-standard-picker.selectedCompetencyText';
-  }),
+      return standardLabel
+        ? 'taxonomy.modals.gru-standard-picker.selectedText'
+        : 'taxonomy.modals.gru-standard-picker.selectedCompetencyText';
+    }
+  ),
 
   /**
    * @property {Boolean} isLoadTaxonomyPicker
    * property to show/hide taxonomy picker
    */
   isLoadTaxonomyPicker: false,
-
 
   // -------------------------------------------------------------------------
   // Methods
@@ -147,7 +147,7 @@ export default Ember.Component.extend({
       let activeSubject = subjects.findBy('code', subjectPreference);
       if (activeSubject) {
         let frameworkId = component.get('frameworkPreference');
-        let subjectId = `${frameworkId  }.${  subjectPreference}`;
+        let subjectId = `${frameworkId}.${subjectPreference}`;
         activeSubject.set('frameworkId', frameworkId);
         activeSubject.set('id', subjectId);
         component.set('activeSubject', activeSubject);
@@ -167,10 +167,9 @@ export default Ember.Component.extend({
     const taxonomyService = component.get('taxonomyService');
     return Ember.RSVP.hash({
       subjects: taxonomyService.getSubjects(category)
-    })
-      .then(({subjects}) => {
-        return subjects;
-      });
+    }).then(({ subjects }) => {
+      return subjects;
+    });
   },
 
   /**
@@ -182,10 +181,9 @@ export default Ember.Component.extend({
     const taxonomyService = component.get('taxonomyService');
     return Ember.RSVP.hash({
       courses: Ember.RSVP.resolve(taxonomyService.getCourses(subject))
-    })
-      .then(({courses}) => {
-        return courses;
-      });
+    }).then(({ courses }) => {
+      return courses;
+    });
   },
 
   /**
