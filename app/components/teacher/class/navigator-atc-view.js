@@ -59,6 +59,17 @@ export default Ember.Component.extend({
    */
   subjectCode: Ember.computed.alias('course.subject'),
 
+  /**
+   * @property {Date} firstDayOfMonth
+   */
+  firstDayOfMonth: Ember.computed('month', 'year', function() {
+    const component = this;
+    let month = component.get('month');
+    let year = component.get('year');
+    let date = `${year}-${month}-01`;
+    return moment(date).format('YYYY-MM-DD');
+  }),
+
   // -------------------------------------------------------------------------
   // Functions
 
@@ -103,7 +114,7 @@ export default Ember.Component.extend({
           studentPerformanceData.set('notStartedCompetencies', notStartedCompetencies);
           studentPerformanceData.set('percentCompletion', studentPerformanceSummary.percentCompletion);
           studentPerformanceData.set('percentScore', studentPerformanceSummary.percentScore);
-          studentPerformanceData.set('gradeId', studentPerformanceSummary.gradeId);
+          studentPerformanceData.set('gradeId', studentPerformanceSummary.gradeId || '--');
           parsedPerformanceSummary.push(studentPerformanceData);
         }
       });
@@ -227,17 +238,23 @@ export default Ember.Component.extend({
       .on('mouseover', function(studentData) {
         component.set('studentData', studentData);
         let clientY = d3.event.clientY;
-        let top = clientY > 420 ? clientY - 240 : clientY;
+        let clientX = d3.event.clientX;
+        let top = clientY > 420 ? clientY - 210 : clientY;
+        let left = clientX > 600 ? clientX - 225 : clientX;
         tooltip
           .style('visibility', 'hidden')
-          .style('left', `${d3.event.clientX}px`)
+          .style('left', `${left}px`)
           .style('top', `${top}px`);
         let tooltipHtml = component.$('.tooltip-html-container').html();
         tooltip.html(tooltipHtml);
-        return tooltip.style('visibility', 'visible');
+        tooltip.style('visibility', 'visible');
       })
       .on('mouseout', function() {
-        return tooltip.style('visibility', 'hidden');
+        tooltip.style('visibility', 'hidden');
+      })
+      .on('click', function(studentData) {
+        component.set('studentData', studentData);
+        tooltip.style('visibility', 'visible');
       });
 
     studentNodes

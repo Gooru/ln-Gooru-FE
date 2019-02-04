@@ -211,8 +211,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (usersPerformanceSummaryList) {
       usersPerformanceSummaryList.map( userPerformanceSummary => {
         let userData = userPerformanceSummary.user || userPerformanceSummary.u;
-        let thumbnail = (userData.thumbnail || userData.th)
-          ? basePath + (userData.thumbnail || userData.th)
+        let userThumbnail = userData.thumbnail || userData.th;
+        let thumbnail = userThumbnail
+          ? basePath + userThumbnail
           : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
         let userPerformanceData = Ember.Object.create({
           id: userData.id,

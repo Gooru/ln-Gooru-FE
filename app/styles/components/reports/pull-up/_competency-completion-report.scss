@@ -24,7 +24,6 @@
 
   .competency-completion-report-container {
     background: $white;
-    max-height: 85vh;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
     border-radius: 4px;
     .competencies-list-container {
@@ -49,8 +48,7 @@
         }
       }
       .competencies-container {
-        min-height: 70vh;
-        max-height: 78vh;
+        height: 83vh;
         overflow-y: auto;
         &::-webkit-scrollbar {
           height: 6px;
@@ -70,6 +68,7 @@
             align-items: center;
             padding: 5px 0;
             margin-left: 15px;
+            cursor: pointer;
             .competency-info {
               .competency-name {
                 font-size: 12px;
@@ -165,6 +164,9 @@
               display: block;
             }
           }
+        }
+        .data-not-available {
+          text-align: center;
         }
       }
     }

@@ -8,6 +8,7 @@ import ModalMixin from 'gooru-web/mixins/modal';
  * Controller responsible of the logic for the teacher class activities tab
  */
 export default Ember.Controller.extend(SessionMixin, ModalMixin, {
+
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -24,7 +25,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Attributes
 
-  queryParams: ['tab'],
+  queryParams: ['tab', 'month', 'year'],
 
   tab: null,
 
@@ -464,10 +465,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('isShowOCASummaryReportPullUp', true);
     }
     Ember.run.scheduleOnce('afterRender', controller, function() {
-      controller.set('forMonth', moment().format('MM'));
-      controller.set('forYear', moment().format('YYYY'));
       controller.closeCADatePickerOnClickOutSide();
-      let date = moment().format('YYYY-MM-DD');
+      let activeDate = `${controller.get('forYear')}-${controller.get('forMonth')}-01`;
+      let date = moment(activeDate).format('YYYY-MM-DD');
       controller.handleScrollToSpecificDate(date);
     });
   },
@@ -693,6 +693,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   ),
 
   /**
+   * @property {Number} month
+   */
+  month: null,
+
+  /**
+   * @property {Number} year
+   */
+  year: null,
+
+  /*
    * @property {Json} classPreference
    */
   classPreference: Ember.computed.alias('class.preference'),
