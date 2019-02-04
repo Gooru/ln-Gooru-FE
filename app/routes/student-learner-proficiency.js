@@ -7,6 +7,9 @@ export default Ember.Route.extend({
     },
     courseId: {
       refreshModel: true
+    },
+    role: {
+      refreshModel: true
     }
   },
   // -------------------------------------------------------------------------
@@ -45,6 +48,7 @@ export default Ember.Route.extend({
     let studentId = params.userId;
     const classId = params.classId;
     const courseId = params.courseId;
+    const isTeacher = params.role === 'teacher';
     return Ember.RSVP.hash({
       profilePromise: route.get('profileService').readUserProfile(studentId),
       classPromise: route.get('classService').readClassInfo(classId),
@@ -59,7 +63,8 @@ export default Ember.Route.extend({
         profile: studentProfile,
         categories: taxonomyCategories,
         class: aClass,
-        course: course
+        course: course,
+        isTeacher: isTeacher
       });
     });
   },
@@ -67,6 +72,7 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     controller.set('studentProfile', model.get('profile'));
     controller.set('class', model.get('class'));
+    controller.set('isTeacher', model.get('isTeacher'));
     controller.set('course', model.get('course'));
     controller.set('taxonomyCategories', model.get('categories'));
     controller.loadData();

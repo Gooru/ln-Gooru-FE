@@ -76,6 +76,7 @@ export default Ember.Component.extend({
       let component = this;
       component.sendAction('onDomainSelect', domain);
     },
+
     addHoverClass(index) {
       let component = this;
       let domainSeq = index + 1;
@@ -88,6 +89,7 @@ export default Ember.Component.extend({
         .removeClass('active')
         .addClass('active');
     },
+
     removeHoverClass() {
       let component = this;
       component.$('#render-proficiency-matrix').removeClass('hover');

@@ -103,10 +103,14 @@
     width: 95%;
     border-bottom: 2px solid #979797;
     display: grid;
-    grid-template-columns: 30px 150px 1fr;
+    grid-template-columns: 30px 1fr 200px;
     grid-gap: 15px;
     padding: 10px;
     margin: auto;
+
+    .back {
+      cursor: pointer;
+    }
 
     .dropdown {
       position: relative;
@@ -180,7 +184,7 @@
         font-weight: bold;
         height: 48px;
         text-transform: capitalize;
-        margin: auto;
+        margin-left: 10px;
         line-height: normal;
         letter-spacing: normal;
         color: #36424b;

@@ -1,6 +1,6 @@
-<div class="student-proficiency-container">
+<div class="student-proficiency-container {{if isTeacher 'teacher'}}">
   <div class="taxonomy-grades">
-    {{#if (gt taxonomyGrades.length 0)}}
+    {{#if (and (gt taxonomyGrades.length 0) isShowMatrixChart)}}
       <div class="taxonomy-grades-container">
         {{proficiency.taxonomy-grades
           taxonomyGrades=taxonomyGrades
@@ -24,6 +24,7 @@
        class=class
        selectedGrade=selectedGrade
        isSelectGrade=isSelectGrade
+       isTeacher=isTeacher
        competencyMatrixDomains=competencyMatrixDomains
        userProficiencyBaseLine=userProficiencyBaseLine
        competencyMatrixCoordinates=competencyMatrixCoordinates
@@ -38,9 +39,11 @@
        categories=taxonomyCategories}}
   </div>
   <div class="pull-up-container">
-    {{#proficiency.proficiency-subject-panel class=class studentId=studentProfile.id selectedCompetency=selectedCompetency domainCompetencyList=domainCompetencyList selectedDomain=selectedDomain competencyMatrixDomains=competencyMatrixDomains subject=activeSubject
-      competencyMatrixCoordinates=competencyMatrixCoordinates}}
-      {{proficiency.domain-info-pull-up showPullUp=showDomainInfo competencies=selectedDomainCompetencies domain=selectedDomain}} {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
-    {{/proficiency.proficiency-subject-panel}}
+    {{#if isShowMatrixChart}}
+      {{#proficiency.proficiency-subject-panel class=class studentId=studentProfile.id selectedCompetency=selectedCompetency domainCompetencyList=domainCompetencyList selectedDomain=selectedDomain competencyMatrixDomains=competencyMatrixDomains subject=activeSubject
+        competencyMatrixCoordinates=competencyMatrixCoordinates}}
+        {{proficiency.domain-info-pull-up showPullUp=showDomainInfo competencies=selectedDomainCompetencies domain=selectedDomain}} {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
+      {{/proficiency.proficiency-subject-panel}}
+    {{/if}}
   </div>
 </div>
