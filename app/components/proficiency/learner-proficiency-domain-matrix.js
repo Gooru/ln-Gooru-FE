@@ -75,6 +75,23 @@ export default Ember.Component.extend({
     onDomainSelect(domain) {
       let component = this;
       component.sendAction('onDomainSelect', domain);
+    },
+    addHoverClass(index) {
+      let component = this;
+      let domainSeq = index + 1;
+      component
+        .$('#render-proficiency-matrix')
+        .removeClass('hover')
+        .addClass('hover');
+      component
+        .$(`.competency-${domainSeq}`)
+        .removeClass('active')
+        .addClass('active');
+    },
+    removeHoverClass() {
+      let component = this;
+      component.$('#render-proficiency-matrix').removeClass('hover');
+      component.$('.competency').removeClass('active');
     }
   },
 
