@@ -105,9 +105,6 @@ export default Ember.Component.extend({
     onDomainSelect(domain) {
       let component = this;
       component.sendAction('onDomainSelect', domain);
-    },
-    onSelectBack() {
-      window.history.back();
     }
   }
 });
