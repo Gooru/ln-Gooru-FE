@@ -1,8 +1,3 @@
-{{#if isLoading}}
-  <div class="spinner">
-    {{three-bounce-spinner}}
-  </div>
-{{/if}}
 <div class="chart-area {{unless isExpandChartEnabled 'compressed-view'}}">
   <div class="toggle-chart" {{action "onToggleChart"}}>
     {{#if isExpandChartEnabled}}
@@ -12,8 +7,25 @@
     {{/if}}
 
   </div>
+  {{#if isLoading}}
+    <div class="spinner">
+      {{three-bounce-spinner}}
+    </div>
+  {{/if}}
   <div class="matrix-chart">
     <div class="chart-container {{if (lte taxonomyGrades.length 0) 'no-grade'}}">
+      {{#if (gt taxonomyGrades.length 0)}}
+        <div class="taxonomy-grades-container">
+          {{proficiency.taxonomy-grades
+            taxonomyGrades=taxonomyGrades
+            activeGrade=activeGrade
+            classGrade=classGrade
+            subjectCode=subjectCode
+            onSelectGrade="onSelectGrade"
+          }}
+          <div class="baseline-toggle" {{action "onToggleBaseline"}}><div class="baseline-label">{{t 'profile.proficiency.baseline'}}</div></div>
+        </div>
+      {{/if}}
       <div class="domain-chart-container">
         <div class="scrollable-chart">
           <div id="render-proficiency-matrix"></div>
@@ -21,7 +33,7 @@
         <div class="domain-sequence-container">
           <div class="domain-sequence" style="width:{{width}}px">
             {{#each taxonomyDomains as |taxonomyDomain index |}}
-              <li class="domain-counts" title="{{taxonomyDomain.domainName}}" {{action "onDomainSelect" taxonomyDomain}} data-toggle="tooltip">
+              <li class="domain-counts" title="{{taxonomyDomain.domainName}}" data-placement="auto right" onmouseover={{action "addHoverClass" index taxonomyDomain}} onmouseout={{action 'removeHoverClass'}} data-toggle="tooltip">
                 {{taxonomyDomain.domainSeq}}
               </li>
             {{/each}}
