@@ -42,9 +42,15 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       if (collection.get('format') === 'assessment-external') {
         component.set('isShowStudentExternalAssessmentReport', true);
         component.set('showStudentDcaReport', false);
+        component.set('isShowStudentExternalCollectionReport', false);
+      } else if (collection.get('format') === 'collection-external') {
+        component.set('showStudentDcaReport', false);
+        component.set('isShowStudentExternalAssessmentReport', false);
+        component.set('isShowStudentExternalCollectionReport', true);
       } else {
         component.set('showStudentDcaReport', true);
         component.set('isShowStudentExternalAssessmentReport', false);
+        component.set('isShowStudentExternalCollectionReport', false);
       }
       component.set('studentReportContextData', params);
     },
@@ -77,6 +83,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
+  /**
+   * To check whether offline or onlineclass
+   * @property {isOfflineClass} isOfflineClass
+   */
+  isOfflineClass: Ember.computed.alias('class.isOffline'),
 
   /**
    * Contains classActivity objects

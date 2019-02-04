@@ -29,6 +29,8 @@
       height: 40px;
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
       background-color: #ffffff;
+      display: grid;
+      grid-template-columns: 1fr 20px;
 
       .code {
         height: 17px;
@@ -81,7 +83,7 @@
     justify-content: center;
     background-color: #fff;
     grid-gap: 10px;
-    min-height: 50px;
+    min-height: 40px;
 
     &.no-competency {
       grid-template-columns: none;
@@ -139,7 +141,10 @@
             background-color: #99c5e6;
           }
 
-          &.status-2 {
+          &.status-2,
+          .status-3,
+          .status-4,
+          .status-5 {
             background-color: #6f9ce2;
           }
         }

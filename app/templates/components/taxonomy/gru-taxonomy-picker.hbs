@@ -16,7 +16,9 @@
 
   <div class="browse-selector">
     <span class="{{if isCompatiableMode 'hidden'}}">{{t browseSelectorText}}</span>
-
+    {{#if (and isCompatiableMode selectedTags.length)}}
+      <span class="close-picker" {{action "saveSelectedTags" selectedTags}}>{{gru-icon name="clear"}}</span>
+    {{/if}}
     {{taxonomy.gru-browse-selector
     data=browseItems
     headers=panelHeaders
@@ -26,7 +28,8 @@
     onUncheckItem=(action 'removeSelectedTag')
     isCompatiableMode=isCompatiableMode
     course=course
-    domain=domain}}
+    domain=domain
+    onCloseTaxonomyPicker="onCloseTaxonomyPicker"}}
   </div>
 
   <div class="selected-list">
@@ -36,10 +39,12 @@
     {{taxonomy.gru-taxonomy-tag-list tags=selectedTags onRemove=(action 'uncheckItem')}}
   </div>
 
-  <div class="actions">
-    <button type="button" class="btn btn-default cancel" data-dismiss="modal" aria-label="{{t 'common.cancel'}}" {{action "onCloseTaxonomyPicker"}}>
-      <span aria-hidden="true">{{t 'common.cancel'}}</span>
-    </button>
-    <button type="submit" class="btn btn-primary save">{{if fromSearch (t "common.search") (t "common.add") }}</button>
-  </div>
+  {{#unless isCompatiableMode}}
+    <div class="actions">
+      <button type="button" class="btn btn-default cancel" data-dismiss="modal" aria-label="{{t 'common.cancel'}}" {{action "onCloseTaxonomyPicker"}}>
+        <span aria-hidden="true">{{t 'common.cancel'}}</span>
+      </button>
+      <button type="submit" class="btn btn-primary save">{{if fromSearch (t "common.search") (t "common.add") }}</button>
+    </div>
+  {{/unless}}
 </form>

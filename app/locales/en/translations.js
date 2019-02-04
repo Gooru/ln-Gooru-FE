@@ -248,6 +248,7 @@ export default Object.assign(quizzesTranslations, {
     },
     'depth-of-knowledge': 'Depth of Knowledge',
     description: 'Description',
+    destination: 'Destination',
     'disappear-after-login': 'This will disappear after {{loginNumber}} logins',
     'disappear-next-login': 'This will not appear on the next login',
     district: 'District',
@@ -405,6 +406,7 @@ export default Object.assign(quizzesTranslations, {
     'essential-questions': 'Essential Questions',
     example: 'example: ',
     exit: 'Exit',
+    'external-collection': 'External Collection',
     explanation: 'Explanation',
     explore: 'Explore',
     false: 'False',
@@ -531,6 +533,7 @@ export default Object.assign(quizzesTranslations, {
     'published-tooltip': 'Badged Content',
     publisher: 'Publisher',
     prev: 'Prev',
+    progress: 'Progress',
     question: 'Question',
     questions: 'Questions',
     'questions-OE': 'Free Response Questions',
@@ -706,6 +709,7 @@ export default Object.assign(quizzesTranslations, {
     'upload-file': 'Upload File',
     'upload-thumbnail': 'Upload Thumbnail',
     'upload-photo': 'Upload Photo',
+    until: 'Until',
     'remove-photo': 'Remove Photo',
     'use-case': 'Use Case',
     'valid-extensions': 'Valid file extensions are: {{extensions}}',
@@ -1240,6 +1244,7 @@ export default Object.assign(quizzesTranslations, {
       'back-to': 'Back to Classrooms',
       'back-to-archived': 'Back to Archived Classrooms',
       'class-management': 'Class Management',
+      atc: 'ATC',
       'class-management-tab': {
         actions: 'Actions',
         'assessment-min-score': 'Assessment Minimum Score for Trophies',
@@ -1295,6 +1300,14 @@ export default Object.assign(quizzesTranslations, {
         'error-message':
           'The class does not have a course assigned or does not have students rostered into the class yet. Once the course has been assigned to the class and the students are rostered, the class competency report will be shown here'
       },
+      'atc-view': {
+        'domains-reviewed': 'Domains to be reviewed',
+        'class-activities-completed': 'Class Activities Completed',
+        'class-activities-pending': 'Class Activities Pending',
+        'show-all': 'Show All',
+        collapse: 'Collapse',
+        'total-competencies-gained': 'Total Competencies Gained'
+      },
       'class-activities': 'Class Activities',
       'offline-class-report': {
         'class-report': 'Class Report',
@@ -1325,7 +1338,8 @@ export default Object.assign(quizzesTranslations, {
         'create-activity': 'Create Activity',
         'schedule-activity': 'Schedule Activity',
         'add-subject-framework':
-          'Please Select a Subject and Framework at Class Settings'
+          'Please Select a Subject and Framework at Class Settings',
+        'create-external-collection': 'Create an External Collection'
       },
       'click-to-copy': 'Click to copy class code',
       'course-map': 'Course Map',
@@ -2256,6 +2270,7 @@ export default Object.assign(quizzesTranslations, {
     subscript: 'Subscript',
     superscript: 'Superscript',
     underline: 'Underline',
+    bullets: 'Bullets',
     'expressions-panel': {
       tabs: {
         calculus: 'Calculus',

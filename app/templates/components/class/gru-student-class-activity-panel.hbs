@@ -1,4 +1,4 @@
-<div class="ca-panel-container {{if isToday 'today'}}">
+<div class="ca-panel-container  {{if isToday 'today'}} {{if isOfflineClass 'offline-activity'}}">
   <div class="dca-panel-info">
     <i class="{{item.collectionType}}-icon" />
     <p>{{item.title}}</p>
@@ -29,7 +29,7 @@
   </div>
   <div class="dca-panel-actions-performance">
     {{#if collectionPerformanceSummary}}
-      {{#if (not-eq item.collectionType 'collection')}}
+      {{#if (and (not-eq item.collectionType 'collection') (not-eq item.collectionType 'collection-external'))}}
         <div class="dca-panel-performance" {{action 'studentDcaReport' item collectionPerformanceSummary activityDate}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
           <span>{{collectionPerformanceSummary.score}}%</span>
         </div>

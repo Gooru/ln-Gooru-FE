@@ -78,6 +78,7 @@ export default Ember.Controller.extend({
     },
     markSelectedSubject(subject, category) {
       this.markSelectedSubject(subject, category);
+      this.updateMarkedSelectionsAsAdded('dummy', null, category); // Removing + sign
     },
     markSelectedFrameworks: function(fwk, subject, category) {
       this.markSelectedFrameworks(fwk, subject, category);
@@ -294,8 +295,12 @@ export default Ember.Controller.extend({
     this.get('categoriesDropDown', categoriesDropDown);
     this.getSubjectFrameworks(category);
     //this.changeMode(false);
+    this.scrollToEnd();
   },
 
+  scrollToEnd() {
+    $('html,body').animate({ scrollTop: document.body.scrollHeight }, 'fast');
+  },
   /**
    *
    * @param {object} category

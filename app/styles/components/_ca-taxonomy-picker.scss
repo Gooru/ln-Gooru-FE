@@ -1,8 +1,8 @@
 .ca-taxonomy-picker {
-
   .gru-taxonomy-picker-container {
     .taxonomy.gru-taxonomy-picker {
       .browse-selector {
+        position: relative;
         .taxonomy.gru-browse-selector {
           .breadcrumb-levels {
             display: flex;
@@ -26,7 +26,8 @@
               list-style: none;
               width: 100%;
             }
-            .hierarchy-1-container, .hierarchy-2-container {
+            .hierarchy-1-container,
+            .hierarchy-2-container {
               .browse-panel {
                 padding: 0;
                 width: 100%;
@@ -63,11 +64,14 @@
                 padding: 5px;
                 border: 1px solid #4e5e67;
                 .standard {
+                  position: relative;
                   label {
+                    width: max-content;
                     display: grid;
                     grid-template-columns: auto auto;
                     div {
                       display: grid;
+                      width: 87%;
                       span {
                         line-height: 15px;
                       }
@@ -78,9 +82,49 @@
                       }
                     }
                   }
+                  button[data-toggle] {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    background-color: $white;
+                    border: none;
+                    i.keyboard_arrow_up {
+                      display: inline-block;
+                    }
+                    i.keyboard_arrow_down {
+                      display: none;
+                    }
+                    &.collapsed {
+                      i.keyboard_arrow_up {
+                        display: none;
+                      }
+                      i.keyboard_arrow_down {
+                        display: inline-block;
+                      }
+                    }
+                    &:focus {
+                      border: none;
+                      outline: none;
+                    }
+                  }
+                  .level-panel.sublevel-1 {
+                    padding-left: 15px;
+                    .level-panel.sublevel-2 {
+                      padding-left: 15;
+                    }
+                  }
                 }
               }
             }
+          }
+        }
+        .close-picker {
+          position: absolute;
+          right: 0;
+          top: 30px;
+          cursor: pointer;
+          i.clear {
+            font-size: 20px;
           }
         }
       }

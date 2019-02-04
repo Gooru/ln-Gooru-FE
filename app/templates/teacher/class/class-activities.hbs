@@ -28,9 +28,6 @@
               <p>{{t 'common.add-an-activity'}}</p>
               <i class="collection-icon" {{action 'onAddDca' 'collection'}}></i>
               <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
-              {{#if isOfflineClass}}
-                <span class="create-offline-activity" {{action "onClickCreateOfflineActivity"}}>{{gru-icon name="add"}}</span>
-              {{/if}}
             </div>
           </div>
         </div>
@@ -136,12 +133,19 @@
     context=contextParams
     selectedSearchContentType=selectedSearchContentType
     todaysClassActivities=todaysClassActivities.classActivities
+    isOfflineClass=isOfflineClass
+    classPreference=classPreference
+    classId=classId
   }}
 {{/if}}
 
 {{#if showDcaCollectionReportPullUp}}
-  {{reports.pull-up.dca-collection-report context=dcaCollectionReportData showPullUp=showDcaCollectionReportPullUp}}
-{{/if}}
+{{#if (not-eq dcaCollectionReportData.collection.format 'collection-external')}}
+{{reports.pull-up.dca-collection-report context=dcaCollectionReportData showPullUp=showDcaCollectionReportPullUp}}
+{{else}}
+  {{reports.pull-up.dca-external-collection-report context=dcaCollectionReportData showPullUp=showDcaCollectionReportPullUp}}
+  {{/if}}
+  {{/if}}
 
 
 {{#if isShowAssessmentPerformanceEntryPullUp}}
@@ -167,12 +171,6 @@
     {{reports.pull-up.external-collection-performance-entry collection=selectedItem students=activityMembers activityData=selectedActivity classId=classId onClosePerformanceEntry="onClosePerformanceEntry"}}
   {{/reports.pull-up.performance-manual-entry}}
 {{/if}}
-
-
-{{#if isShowCreateOfflineActivity}}
-  {{activity.gru-new-offline-activity isShowPullUp=isShowCreateOfflineActivity classPreference=classPreference classId=classId addedContentToDCA="addedContentToDCA"}}
-{{/if}}
-
 
 {{#if isShowOCASummaryReportPullUp}}
   {{teacher.offline-class.oca-summary-report-pull-up  classId=class.id performanceSummary=performanceSummaryForDCA onClosePullUp="onClosePullUp"}}

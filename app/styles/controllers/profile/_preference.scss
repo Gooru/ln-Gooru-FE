@@ -5,7 +5,9 @@
       display: grid;
     }
   }
-
+  .hideMe {
+    display: none;
+  }
   .actionClass {
     cursor: pointer;
   }

@@ -27,6 +27,7 @@ export default Ember.Component.extend({
     component.fetchAudiences();
     component.set('forMonth', moment().format('MM'));
     component.set('forYear', moment().format('YYYY'));
+    component.$('.activity-title').focus();
   },
 
   // -------------------------------------------------------------------------
@@ -62,33 +63,55 @@ export default Ember.Component.extend({
       component.set('selectedAudiences', selectedAudiences);
     },
 
-
     //Action triggered when create activity
     onCreateActivity() {
       const component = this;
       let requestBody = component.getDataParams();
-      component.get('collectionService').createExternalCollection(requestBody).then(function(externalCollection) {
-        let contentId = externalCollection.id;
-        let classId = component.get('classId');
-        let activityDate = component.get('activityDate');
-        let scheduledMonth = activityDate ? null : component.get('unscheduledMonth.monthNumber');
-        let scheduledYear = activityDate ? null : component.get('unscheduledMonth.monthYear');
-        component.addActivity(classId, contentId, activityDate, scheduledMonth, scheduledYear).then(function(activityId) {
-          externalCollection.collectionType = 'collection-external';
-          let activityData = Ember.Object.create({
-            collection: Ember.Object.create(externalCollection),
-            id: activityId,
-            added_date: activityDate,
-            activityDate: activityDate,
-            usersCount: -1,
-            isActive: false,
-            forMonth: parseInt(scheduledMonth),
-            forYear: parseInt(scheduledYear)
-          });
-          component.sendAction('addedContentToDCA', activityData, activityDate, scheduledMonth, scheduledYear);
-          component.closePullUp();
+      component
+        .get('collectionService')
+        .createExternalCollection(requestBody)
+        .then(function(externalCollection) {
+          let contentId = externalCollection.id;
+          let classId = component.get('classId');
+          let activityDate = component.get('activityDate');
+          let scheduledMonth = activityDate
+            ? null
+            : component.get('unscheduledMonth.monthNumber');
+          let scheduledYear = activityDate
+            ? null
+            : component.get('unscheduledMonth.monthYear');
+          component
+            .addActivity(
+              classId,
+              contentId,
+              activityDate,
+              scheduledMonth,
+              scheduledYear
+            )
+            .then(function(activityId) {
+              let contentType = 'collection-external';
+              externalCollection.set('collectionType', contentType);
+              externalCollection.set('format', contentType);
+              let activityData = Ember.Object.create({
+                collection: Ember.Object.create(externalCollection),
+                id: activityId,
+                added_date: activityDate,
+                activityDate: activityDate,
+                usersCount: -1,
+                isActive: false,
+                forMonth: parseInt(scheduledMonth),
+                forYear: parseInt(scheduledYear)
+              });
+              component.sendAction(
+                'onAddExternalCollectionToDCA',
+                activityData,
+                activityDate,
+                scheduledMonth,
+                scheduledYear
+              );
+              component.closePullUp();
+            });
         });
-      });
     },
 
     //Action triggered when toggle taxonomy picker
@@ -96,6 +119,10 @@ export default Ember.Component.extend({
       const component = this;
       const taxonomyPickerContainer = component.$('.taxonomy-picker-container');
       component.$(taxonomyPickerContainer).slideDown(1000, function() {
+        if (!component.get('selectedCompetencies.length')) {
+          component.set('course', null);
+          component.set('domain', null);
+        }
         component.set('isShowTaxonomyPicker', true);
       });
     },
@@ -127,8 +154,14 @@ export default Ember.Component.extend({
     onCloseCreateActivity() {
       const component = this;
       component.closePullUp();
-    }
+    },
 
+    //Action triggered when remove tag
+    onRemoveSelectedTag(tag) {
+      const component = this;
+      component.get('selectedCompetencies').removeObject(tag.get('data'));
+      component.get('visibleTaxonomyTags').removeObject(tag);
+    }
   },
 
   // -------------------------------------------------------------------------
@@ -154,7 +187,9 @@ export default Ember.Component.extend({
   isClassPreferenceMapped: Ember.computed('classPreference', function() {
     let component = this;
     let classPreference = component.get('classPreference');
-    return classPreference ? classPreference.subject && classPreference.framework : false;
+    return classPreference
+      ? classPreference.subject && classPreference.framework
+      : false;
   }),
 
   /**
@@ -252,7 +287,7 @@ export default Ember.Component.extend({
     let firtDateOfCurrentMonth = moment(`${monthAndYearOfCurrentDate}-01`);
     if (showMonths && forFirstDateOfMonth) {
       let numberOfMonthsToShow = component.get('numberOfMonthsToShow');
-      for (let index = 1; index <= numberOfMonthsToShow; index++) {
+      for (let index = 0; index < numberOfMonthsToShow; index++) {
         let slectedMonth = moment(forFirstDateOfMonth).add(index, 'months');
         let monthName = moment(forFirstDateOfMonth)
           .add(index, 'months')
@@ -281,12 +316,19 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isEnableCreateActivity
    */
-  isEnableCreateActivity: Ember.computed('isClassPreferenceMapped', 'activityTitle', function() {
-    const component = this;
-    let isClassPreferenceMapped = component.get('isClassPreferenceMapped');
-    let activityTitle = component.get('activityTitle');
-    return isClassPreferenceMapped && (activityTitle !== null && activityTitle !== '');
-  }),
+  isEnableCreateActivity: Ember.computed(
+    'isClassPreferenceMapped',
+    'activityTitle',
+    function() {
+      const component = this;
+      let isClassPreferenceMapped = component.get('isClassPreferenceMapped');
+      let activityTitle = component.get('activityTitle');
+      return (
+        isClassPreferenceMapped &&
+        (activityTitle !== null && activityTitle.trim() !== '')
+      );
+    }
+  ),
 
   /**
    * @property {String} course
@@ -299,6 +341,24 @@ export default Ember.Component.extend({
    * Property to hold selected domain title
    */
   domain: null,
+
+  /**
+   * @property {Array} visibleTaxonomyTags
+   * Properto to hold visible taxonomy tags
+   */
+  visibleTaxonomyTags: Ember.computed('selectedCompetencies', function() {
+    const component = this;
+    let selectedCompetencies = component.get('selectedCompetencies');
+    let visibleTaxonomyTags = selectedCompetencies.map(taxonomyTag => {
+      return Ember.Object.create({
+        data: taxonomyTag,
+        isActive: true,
+        isReadonly: true,
+        isRemovable: true
+      });
+    });
+    return Ember.A(visibleTaxonomyTags);
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -317,8 +377,9 @@ export default Ember.Component.extend({
       return audience.id;
     });
     return {
-      title,
-      description,
+      title: title.trim(),
+      description:
+        description && description.length ? description.trim() : null,
       audience: audienceIds,
       taxonomy
     };
@@ -365,10 +426,9 @@ export default Ember.Component.extend({
     const lookupService = component.get('lookupService');
     return Ember.RSVP.hash({
       audiences: Ember.RSVP.resolve(lookupService.readAudiences())
-    })
-      .then(({audiences}) => {
-        component.set('audiences', audiences);
-      });
+    }).then(({ audiences }) => {
+      component.set('audiences', audiences);
+    });
   },
 
   /**
@@ -378,7 +438,9 @@ export default Ember.Component.extend({
   createExternalCollection(collectionData) {
     const component = this;
     const collectionService = component.get('collectionService');
-    return Ember.RSVP.resolve(collectionService.createExternalCollection(collectionData));
+    return Ember.RSVP.resolve(
+      collectionService.createExternalCollection(collectionData)
+    );
   },
 
   /**
@@ -388,7 +450,16 @@ export default Ember.Component.extend({
   addActivity(classId, contentId, date, scheduledMonth, scheduledYear) {
     const component = this;
     const classActivityService = component.get('classActivityService');
-    return Ember.RSVP.resolve(classActivityService.addActivityToClass(classId, contentId, 'collection-external', date, scheduledMonth, scheduledYear));
+    return Ember.RSVP.resolve(
+      classActivityService.addActivityToClass(
+        classId,
+        contentId,
+        'collection-external',
+        date,
+        scheduledMonth,
+        scheduledYear
+      )
+    );
   },
 
   /**

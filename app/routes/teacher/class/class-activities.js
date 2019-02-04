@@ -47,16 +47,21 @@ export default Ember.Route.extend({
   // -------------------------------------------------------------------------
   // Methods
 
-  model: function() {
+  model: function(params) {
     const route = this;
     const currentClass = route.modelFor('teacher.class').class;
     const classId = currentClass.get('id');
-    let forMonth = moment().format('MM');
-    let forYear = moment().format('YYYY');
+    let forMonth = params.month || moment().format('MM');
+    let forYear = params.year || moment().format('YYYY');
+    let selectedPeriod = Ember.Object.create({
+      forMonth,
+      forYear
+    });
     return Ember.RSVP.hash({
       classActivities: route
         .get('classActivityService')
-        .findClassActivities(classId, null, forMonth, forYear)
+        .findClassActivities(classId, null, forMonth, forYear),
+      selectedPeriod
     });
   },
 
@@ -67,7 +72,10 @@ export default Ember.Route.extend({
    */
   setupController: function(controller, model) {
     controller.parseClassActivityData(model.classActivities);
+    controller.set('forMonth', model.selectedPeriod.forMonth);
+    controller.set('forYear', model.selectedPeriod.forYear);
     controller.initialize();
+    controller.get('classController').selectMenuItem('class-activities');
   },
 
   /**
@@ -77,5 +85,7 @@ export default Ember.Route.extend({
   resetController(controller) {
     controller.set('tab', null);
     controller.set('classActivities', Ember.A([]));
+    controller.set('month', null);
+    controller.set('year', null);
   }
 });

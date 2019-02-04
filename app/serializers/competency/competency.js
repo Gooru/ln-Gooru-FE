@@ -1,11 +1,15 @@
 import Ember from 'ember';
+import { DEFAULT_IMAGES } from 'gooru-web/config/config';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 /**
  * Serializer for Competency endpoints
  *
  * @typedef {Object} CompetencySerializer
  */
-export default Ember.Object.extend({
+export default Ember.Object.extend(ConfigurationMixin, {
+  session: Ember.inject.service('session'),
+
   /**
    * Normalized data of user competencies
    * @return {Object}
@@ -144,5 +148,112 @@ export default Ember.Object.extend({
       });
     }
     return resultSet;
+  },
+
+  /**
+   * @function normalizeDomainsCompletionReport
+   */
+  normalizeDomainsCompletionReport(payload) {
+    const serializer = this;
+    let normalizedCompletionReportData = Ember.Object.create({
+      membersCount: 0,
+      domainsData: Ember.A([])
+    });
+    if (payload) {
+      let normalizedDomainsCompletionData = Ember.A([]);
+      let domainsCompletionData = payload.domains || payload.dmns;
+      domainsCompletionData.map(domainCompletionData => {
+        let domainCompletionDomainInfo =
+          domainCompletionData.domain || domainCompletionData.d;
+        let domainData = Ember.Object.create({
+          completionPercentage:
+            domainCompletionData.average_completions ||
+            domainCompletionData.avg ||
+            0,
+          domainCode:
+            domainCompletionDomainInfo.tx_domain_code ||
+            domainCompletionDomainInfo.dc,
+          domainName:
+            domainCompletionDomainInfo.tx_domain_name ||
+            domainCompletionDomainInfo.dn,
+          domainSeq:
+            domainCompletionDomainInfo.tx_domain_seq ||
+            domainCompletionDomainInfo.seq,
+          competenciesData: serializer.serializeCompetencyCompletionData(
+            domainCompletionData.competencies || domainCompletionData.tx
+          )
+        });
+        normalizedDomainsCompletionData.pushObject(domainData);
+      });
+      normalizedCompletionReportData.set(
+        'membersCount',
+        payload.member_count || payload.cmc
+      );
+      normalizedCompletionReportData.set(
+        'domainsData',
+        normalizedDomainsCompletionData
+      );
+    }
+    return normalizedCompletionReportData;
+  },
+
+  /**
+   * @function normalizeCompetencyCompletionReport
+   */
+  serializeCompetencyCompletionData(competenciesData) {
+    let normalizedCompetencyCompletionReport = Ember.A([]);
+    if (competenciesData) {
+      competenciesData.map(competencyCompletionData => {
+        let competencyData = Ember.Object.create({
+          competencyCode:
+            competencyCompletionData.tx_comp_code ||
+            competencyCompletionData.gc,
+          competencyName:
+            competencyCompletionData.tx_comp_name ||
+            competencyCompletionData.nm,
+          competencyDesc:
+            competencyCompletionData.tx_comp_desc ||
+            competencyCompletionData.ds,
+          completionPercentage:
+            competencyCompletionData.completions ||
+            competencyCompletionData.pc ||
+            0
+        });
+        normalizedCompetencyCompletionReport.pushObject(competencyData);
+      });
+    }
+    return normalizedCompetencyCompletionReport;
+  },
+
+  /**
+   * @function normalizeUsersCompetencyPerformanceSummary
+   */
+  normalizeUsersCompetencyPerformanceSummary(payload) {
+    const serializer = this;
+    const basePath = serializer.get('session.cdnUrls.user');
+    const appRootPath = this.get('appRootPath'); //configuration appRootPath
+    let normalizedUsersCompetencyPerformanceSummary = Ember.A([]);
+    let usersPerformanceSummaryList = (payload && payload.users) || Ember.A([]);
+    if (usersPerformanceSummaryList) {
+      usersPerformanceSummaryList.map(userPerformanceSummary => {
+        let userData = userPerformanceSummary.user || userPerformanceSummary.u;
+        let userThumbnail = userData.thumbnail || userData.th;
+        let thumbnail = userThumbnail
+          ? basePath + userThumbnail
+          : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+        let userPerformanceData = Ember.Object.create({
+          id: userData.id,
+          firstName: userData.first_name || userData.fn,
+          lastName: userData.last_name || userData.ln,
+          thumbnail,
+          score: userPerformanceSummary.score || userPerformanceSummary.sc || 0,
+          status: userPerformanceSummary.status || userPerformanceSummary.st
+        });
+        normalizedUsersCompetencyPerformanceSummary.pushObject(
+          userPerformanceData
+        );
+      });
+    }
+    return normalizedUsersCompetencyPerformanceSummary;
   }
 });

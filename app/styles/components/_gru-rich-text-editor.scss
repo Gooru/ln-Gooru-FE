@@ -128,18 +128,7 @@
             height: 50px;
             width: 50px;
           }
-          //.over-left-arrow{
-          //  background: url("gooru/images/math-icons/over-left-arrow.svg");
-          //  background-size: 50px 50px;
-          //  height: 50px;
-          //  width: 50px;
-          //}
-          //.over-right-arrow{
-          //  background: url("gooru/images/math-icons/over-right-arrow.svg");
-          //  background-size: 50px 50px;
-          //  height: 50px;
-          //  width: 50px;
-          //}
+
           .overline {
             background: url("gooru/images/math-icons/overline.svg");
             background-size: 50px 50px;
@@ -296,6 +285,40 @@
             height: 50px;
             width: 40px;
           }
+        }
+      }
+    }
+    .dialog-create-link {
+      display: grid;
+      position: absolute;
+      background-color: $white;
+      top: 30px;
+      left: 137px;
+      box-shadow: 1px 1px 1px 1px;
+      .input-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        column-gap: 5px;
+        margin: 3px;
+        input {
+          outline: none;
+          border: none;
+          border-bottom: 1px solid gray;
+          &:focus {
+            outline: none;
+            border: none;
+            border-bottom: 1px solid $blue-300;
+          }
+        }
+      }
+      .action-container {
+        margin: 3px;
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        justify-content: space-around;
+        a {
         }
       }
     }

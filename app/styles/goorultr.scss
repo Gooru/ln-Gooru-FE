@@ -88,6 +88,7 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "controllers/teacher/class/performance";
 @import "controllers/teacher/class/quick-start";
 @import "controllers/teacher/class/students-proficiency";
+@import "controllers/teacher/class/atc";
 @import "controllers/goals/manage";
 @import "controllers/student-independent-learning/learning-base";
 @import "controllers/not-found";
@@ -324,8 +325,11 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/reports/pull-up/collection-report-gridview";
 @import "components/reports/pull-up/question-report";
 @import "components/reports/pull-up/dca-collection-report";
+@import "components/reports/pull-up/dca-external-collection-report";
 @import "components/reports/pull-up/dca-collection-report-listview";
 @import "components/reports/pull-up/dca-collection-report-gridview";
+@import "components/reports/pull-up/dca-teacher-external-collection-report-list-view";
+@import "components/reports/pull-up/dca-teacher-external-collection-report-grid-view";
 @import "components/reports/pull-up/dca-question-report";
 @import "components/reports/pull-up/student-course-report";
 @import "components/reports/pull-up/student-unit-report";
@@ -334,6 +338,7 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/reports/pull-up/dca-teacher-external-assessment-report-list-view";
 @import "components/reports/pull-up/dca-teacher-external-assessment-report-grid-view";
 @import "components/reports/pull-up/dca-student-external-assessment-report";
+@import "components/reports/pull-up/dca-student-external-collection-report";
 @import "components/reports/pull-up/teacher-external-assessment-report-list-view";
 @import "components/reports/pull-up/teacher-external-assessment-report-grid-view";
 @import "components/reports/pull-up/open-ended-report-pull-up";
@@ -377,6 +382,8 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/teacher/class-atc-view";
 @import "components/teacher/class-performance-chart";
 @import "components/teacher/class/atc-chart";
+@import "components/teacher/class/navigator-atc-view";
+@import "components/reports/pull-up/competency-completion-report";
 @import "routes/student/class/performance";
 @import "routes/content/rubric/preview"; //Pull Up
 @import "components/reports/pull-up/competency-report";
