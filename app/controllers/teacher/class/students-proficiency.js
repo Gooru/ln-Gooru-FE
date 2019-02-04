@@ -52,23 +52,23 @@ export default Ember.Controller.extend({
     //Action triggered when select a student
     onSelectStudent(student) {
       let controller = this;
-      let userId = student.id;
-      let courseId = this.get('courseId');
-      let classId = this.get('classId');
-      controller.transitionToRoute('student-learner-proficiency', userId, {
-        queryParams: {
-          classId: classId,
-          courseId: courseId,
-          isTeacher: true
-        }
+      let activeStudentData = Ember.Object.create({
+        firstName: student.firstName,
+        lastName: student.lastName,
+        avatarUrl: student.thumbnail,
+        fullName: student.fullName,
+        id: student.id
       });
+      controller.set('activeStudent', activeStudentData);
+      controller.set('isShowProficiencyPullup', true);
     },
 
     /**
      * Action triggered when select a competency
      */
-    onSelectCompetency(competency) {
+    onSelectCompetency(competency, userid, domainCompetencyList) {
       let controller = this;
+      controller.set('domainCompetencyList', domainCompetencyList);
       controller.set('selectedCompetency', competency);
       controller.set('isShowCompetencyContentReport', true);
     },
