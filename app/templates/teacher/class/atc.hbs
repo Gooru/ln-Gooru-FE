@@ -1,4 +1,7 @@
 <div class="controller teacher class atc">
+  {{#if isLoading}}
+    <div class="loading-spinner">{{three-bounce-spinner}}</div>
+  {{/if}}
   {{#if isShowAtcView}}
     {{#if isPremiumClass}}
       <div class="month-picker {{if isCurrentMonth 'current-month'}}">

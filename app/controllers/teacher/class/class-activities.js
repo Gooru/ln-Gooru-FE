@@ -9,7 +9,6 @@ import ModalMixin from 'gooru-web/mixins/modal';
  */
 export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
-  queryParams: ['month', 'year'],
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -26,7 +25,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Attributes
 
-  queryParams: ['tab'],
+  queryParams: ['tab', 'month', 'year'],
 
   tab: null,
 
@@ -702,7 +701,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * @property {Number} year
    */
   year: null,
-  
+
    /*
    * @property {Json} classPreference
    */
