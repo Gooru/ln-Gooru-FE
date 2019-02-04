@@ -43,10 +43,11 @@
   }
 
   .chart-area {
-    background-color: $gray-97;
-    width: 90%;
+    background-color: #f7f7f7;
+    width: 100%;
     margin: 0 auto;
     display: grid;
+    zoom: 0.9;
 
     &.compressed-view {
       .matrix-chart {
@@ -239,14 +240,20 @@
                 stroke-width: 1;
                 shape-rendering: crispedges;
                 stroke-opacity: 0.7;
+                &.in-active {
+                  opacity: 0.1;
+                  stroke-width: 0;
+                }
               }
 
               #skyline-container {
                 filter: url(#shadow);
-
                 line {
                   stroke: $white;
                   stroke-width: 6px;
+                  &.in-active {
+                    stroke-width: 0;
+                  }
                 }
               }
 

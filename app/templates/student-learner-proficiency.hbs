@@ -1,0 +1,41 @@
+<div class="student-proficiency-container {{if isTeacher 'isTeacher'}}">
+  <div class="taxonomy-grades">
+    {{#if (gt taxonomyGrades.length 0)}}
+      <div class="taxonomy-grades-container">
+        {{proficiency.taxonomy-grades
+          taxonomyGrades=taxonomyGrades
+          activeGrade=activeGrade
+          classGrade=classGrade
+          subjectCode=subjectCode
+          onSelectGrade="onSelectGrade"
+        }}
+        <div class="baseline-toggle" {{action "onToggleBaseline"}}>
+          <div class="baseline-label">{{t 'profile.proficiency.baseline'}}</div>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+  <div class="panel-container">
+    {{proficiency.student-proficiency-panel
+       studentProfile=studentProfile
+       course=course
+       activeSubject=activeSubject
+       timeLine=timeLine
+       class=class
+       selectedGrade=selectedGrade
+       isSelectGrade=isSelectGrade
+       competencyMatrixDomains=competencyMatrixDomains
+       userProficiencyBaseLine=userProficiencyBaseLine
+       competencyMatrixCoordinates=competencyMatrixCoordinates
+       subjectBucket=subjectBucket
+       taxonomySubjects=taxonomySubjects
+       isShowMatrixChart=isShowMatrixChart
+       isSelectBaseLine=isSelectBaseLine
+       onSelectMonth="onSelectMonth"
+       onDomainSelect="onDomainSelect"
+       categories=taxonomyCategories}}
+  </div>
+  <div class="pull-up-container">
+    {{proficiency.proficiency-subject-panel class=class selectedDomain=selectedDomain subject=activeSubject taxonomyDomains=competencyMatrixCoordinates}}
+  </div>
+</div>

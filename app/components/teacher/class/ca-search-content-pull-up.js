@@ -408,12 +408,23 @@ export default Ember.Component.extend({
     },
 
     //Action triggered after created offline activity and add it to dca
-    onAddExternalCollectionToDCA(activityData, activityDate, scheduledMonth, scheduledYear) {
+    onAddExternalCollectionToDCA(
+      activityData,
+      activityDate,
+      scheduledMonth,
+      scheduledYear
+    ) {
       const component = this;
       component.set('activeContentType', 'collection');
       let selectedItem = component.get('menuItems').findBy('key', 'myContent');
       component.toggleMenuItem(selectedItem, true);
-      component.sendAction('addedContentToDCA', activityData, activityDate, scheduledMonth, scheduledYear);
+      component.sendAction(
+        'addedContentToDCA',
+        activityData,
+        activityDate,
+        scheduledMonth,
+        scheduledYear
+      );
     }
   },
 

@@ -142,7 +142,9 @@ export default Ember.Component.extend({
       let activationData = !!component.get('classActivity.activation_date');
       let isFutureDate = component.get('isActivityFuture');
       let isStudentsJoined = component.get('members.length') > 0;
-      return isOfflineClass && activationData && !isFutureDate && isStudentsJoined;
+      return (
+        isOfflineClass && activationData && !isFutureDate && isStudentsJoined
+      );
     }
   ),
 

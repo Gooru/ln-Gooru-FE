@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['pull-up', 'competency-completion-report'],
@@ -25,13 +24,20 @@ export default Ember.Component.extend({
       let domainData = component.get('domainData');
       if (!competencyData.get('usersCompletionSummary')) {
         component.set('isLoading', true);
-        component.fetchUsersCompetencyPerformanceSummary(domainData.domainCode, competencyData.competencyCode).then(function(usersCompletionSummary) {
-          competencyData.set('usersCompletionSummary', usersCompletionSummary.sortBy('score'));
-          component.set('isLoading', false);
-        });
+        component
+          .fetchUsersCompetencyPerformanceSummary(
+            domainData.domainCode,
+            competencyData.competencyCode
+          )
+          .then(function(usersCompletionSummary) {
+            competencyData.set(
+              'usersCompletionSummary',
+              usersCompletionSummary.sortBy('score')
+            );
+            component.set('isLoading', false);
+          });
       }
       component.toggleCompetencyContainer(competencySeq);
-
     },
 
     //Action triggered when close pullup
@@ -76,8 +82,12 @@ export default Ember.Component.extend({
    */
   toggleCompetencyContainer(competencySeq) {
     const component = this;
-    const competencyContainer = component.$('.competency-container .users-completion-container');
-    const selectedCompletionContainer = component.$(`.competency-${competencySeq} .users-completion-container`);
+    const competencyContainer = component.$(
+      '.competency-container .users-completion-container'
+    );
+    const selectedCompletionContainer = component.$(
+      `.competency-${competencySeq} .users-completion-container`
+    );
     if (selectedCompletionContainer.hasClass('collapsed')) {
       competencyContainer.removeClass('expanded').addClass('collapsed');
       selectedCompletionContainer.addClass('expanded').removeClass('collapsed');
@@ -106,10 +116,11 @@ export default Ember.Component.extend({
       agent
     };
     return Ember.RSVP.hash({
-      usersPerformanceSummary: competencyService.getUsersCompetencyPerformanceSummary(requestBody)
-    })
-      .then(({usersPerformanceSummary}) => {
-        return usersPerformanceSummary;
-      });
+      usersPerformanceSummary: competencyService.getUsersCompetencyPerformanceSummary(
+        requestBody
+      )
+    }).then(({ usersPerformanceSummary }) => {
+      return usersPerformanceSummary;
+    });
   }
 });

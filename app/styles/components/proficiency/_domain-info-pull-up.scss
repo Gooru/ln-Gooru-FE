@@ -1,0 +1,75 @@
+.domain-info-pull-up {
+  width: 100%;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+  display: grid;
+  position: absolute;
+  grid-template-rows: auto 1fr;
+  height: 10px;
+  transition: height 0.5s ease-out;
+  overflow: hidden;
+  bottom: 0;
+
+  &.open {
+    height: 100%;
+    transition: height 0.5s ease-in;
+  }
+
+  .competency-container {
+    overflow-y: auto;
+
+    .title {
+      text-transform: uppercase;
+      font-weight: bold;
+      padding: 10px 10px 0 15px;
+    }
+
+    .competency-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 15px;
+      justify-content: center;
+      background-color: #fff;
+      grid-gap: 10px;
+
+      .competency {
+        max-width: 200px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+        background-color: #fff;
+        margin: auto;
+        padding: 10px;
+        height: 100%;
+        color: #1aa9eb;
+      }
+    }
+  }
+
+  .domain-panel-header {
+    padding: 16px;
+    border-bottom: solid 1px #979797;
+    display: grid;
+    grid-template-areas: "title title close" "sequence sequence sequence";
+
+    .domain-name {
+      font-size: 22px;
+      color: #1aa9eb;
+      line-height: 1;
+      grid-area: title;
+    }
+
+    .close {
+      grid-area: close;
+      justify-items: center;
+
+      i {
+        font-size: 26px;
+      }
+    }
+
+    .domain-seq {
+      font-weight: bold;
+      font-size: 14px;
+      grid-area: sequence;
+    }
+  }
+}

@@ -42,14 +42,11 @@ export default Ember.Component.extend({
       component.loadDataBySubject(component.get('subject.id'));
     }
     component.fetchTaxonomyGrades();
-    component.fetchSignatureCompetencyList();
   },
 
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({
-      trigger: 'hover'
-    });
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
     component
       .$('[data-toggle="tooltip"]')
       .tooltip()
@@ -115,6 +112,27 @@ export default Ember.Component.extend({
       let component = this;
       component.$('#baseline-container').toggleClass('hidden-line');
       component.$('.baseline-toggle').toggleClass('active-baseline');
+    },
+    addHoverClass(index) {
+      let domainSeq = index + 1;
+      Ember.$('.competency')
+        .removeClass('in-active')
+        .addClass('in-active');
+      Ember.$(`.competency-${domainSeq}`)
+        .removeClass('in-active')
+        .removeClass('active')
+        .addClass('active');
+      Ember.$('line')
+        .removeClass('in-active')
+        .addClass('in-active');
+    },
+    removeHoverClass() {
+      Ember.$('.competency')
+        .removeClass('in-active')
+        .removeClass('active');
+      Ember.$('line')
+        .removeClass('in-active')
+        .removeClass('active');
     }
   },
 
@@ -132,7 +150,6 @@ export default Ember.Component.extend({
       component.set('domainBoundariesContainer', Ember.A([]));
       component.loadDataBySubject(component.get('subject.id'));
       component.fetchTaxonomyGrades();
-      component.fetchSignatureCompetencyList();
     }
     return null;
   }),
@@ -213,12 +230,6 @@ export default Ember.Component.extend({
    * Property to show/hide loading spinner
    */
   isLoading: false,
-
-  /**
-   * It will have singature content competencty list for current active subject
-   * @type {Object}
-   */
-  signatureCompetencyList: null,
 
   /**
    * It  will have chart value width scroll width handling
@@ -367,19 +378,6 @@ export default Ember.Component.extend({
     }).then(({ userProficiencyBaseLine }) => {
       component.set('userProficiencyBaseLine', userProficiencyBaseLine);
       return userProficiencyBaseLine;
-    });
-  },
-
-  fetchSignatureCompetencyList() {
-    let component = this;
-    let subject = component.get('subjectCode');
-    let userId = component.get('userId');
-    return Ember.RSVP.hash({
-      competencyList: component
-        .get('competencyService')
-        .getUserSignatureCompetencies(userId, subject)
-    }).then(({ competencyList }) => {
-      component.set('signatureCompetencyList', competencyList);
     });
   },
 
@@ -585,7 +583,7 @@ export default Ember.Component.extend({
       .attr('yaxis-seq', d => d.yAxisSeq)
       .attr('class', d => {
         let skylineClassName = d.skyline ? 'skyline-competency' : '';
-        let isMasteredCompetency = d.mastered ? 'mastered-competncy': '';
+        let isMasteredCompetency = d.mastered ? 'mastered-competncy' : '';
         let domainBoundaryCompetency = d.isDomainBoundaryCompetency
           ? 'domain-boundary'
           : '';
@@ -598,32 +596,13 @@ export default Ember.Component.extend({
         } ${isMasteredCompetency}`;
       })
       .on('click', function(d) {
-        component.selectCompetency(d);
+        component.sendAction('onSelectCompetency', d);
       });
     cards.exit().remove();
     component.$('.scrollable-chart').scrollTop(height);
     component.drawSkyline();
     component.drawBaseLine();
     component.drawDomainBoundaryLine();
-  },
-
-  selectCompetency(competency) {
-    let component = this;
-    let competencyMatrixDomains = component.get('competencyMatrixDomains');
-    let domainCode = competency.get('domainCode');
-    let domainCompetencyList = competencyMatrixDomains.findBy(
-      'domainCode',
-      domainCode
-    );
-    let signatureCompetencyList = component.get('signatureCompetencyList');
-    let showSignatureAssessment =
-      signatureCompetencyList[domainCode] === competency.get('competencyCode');
-    competency.set('showSignatureAssessment', showSignatureAssessment);
-    component.sendAction(
-      'onSelectCompetency',
-      competency,
-      domainCompetencyList
-    );
   },
 
   /**
@@ -641,7 +620,9 @@ export default Ember.Component.extend({
     skylineElements.each(function(index) {
       let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
       let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
-      let isMasteredCompetency = component.$(skylineElements[index]).hasClass('mastered-competncy');
+      let isMasteredCompetency = component
+        .$(skylineElements[index])
+        .hasClass('mastered-competncy');
       y1 = y1 === 0 && !isMasteredCompetency ? y1 + 3 : y1 + cellHeight + 3;
       let x2 = x1 + cellWidth;
       let y2 = y1;
@@ -847,7 +828,6 @@ export default Ember.Component.extend({
       ) {
         baselinePoint.x2 = baselinePoint.x2 + 6;
       }
-
       let x2 = baselinePoint.x2;
       let x1 = baselinePoint.x1;
       let y1 = baselinePoint.y1;

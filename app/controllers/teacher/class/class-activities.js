@@ -8,7 +8,6 @@ import ModalMixin from 'gooru-web/mixins/modal';
  * Controller responsible of the logic for the teacher class activities tab
  */
 export default Ember.Controller.extend(SessionMixin, ModalMixin, {
-
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -405,7 +404,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         activityMembers.map(member => {
           let isActivityMember = classMembers.findBy('id', member.id);
           let isActiveMember = member.isActive;
-          if(isActivityMember && isActiveMember){
+          if (isActivityMember && isActiveMember) {
             classActivityStudents.push(isActivityMember);
           }
         });
@@ -466,7 +465,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     }
     Ember.run.scheduleOnce('afterRender', controller, function() {
       controller.closeCADatePickerOnClickOutSide();
-      let activeDate = `${controller.get('forYear')}-${controller.get('forMonth')}-01`;
+      let activeDate = `${controller.get('forYear')}-${controller.get(
+        'forMonth'
+      )}-01`;
       let date = moment(activeDate).format('YYYY-MM-DD');
       controller.handleScrollToSpecificDate(date);
     });

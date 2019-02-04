@@ -51,7 +51,7 @@ export default Ember.Route.extend({
     const route = this;
     const currentClass = route.modelFor('teacher.class').class;
     const classId = currentClass.get('id');
-    let forMonth = params.month ||  moment().format('MM');
+    let forMonth = params.month || moment().format('MM');
     let forYear = params.year || moment().format('YYYY');
     let selectedPeriod = Ember.Object.create({
       forMonth,

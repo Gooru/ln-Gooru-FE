@@ -17,7 +17,7 @@
         stroke-width: 2px;
         fill: none;
       }
-      .tick:nth-child(-n+3) {
+      .tick:nth-child(-n + 3) {
         text {
           display: none;
         }
@@ -34,7 +34,7 @@
 
     .node-point {
       .student-profile {
-        clip-path: circle(50.0% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
         -webkit-clip-path: circle(50% at 50% 50%);
         cursor: pointer;
       }
@@ -46,7 +46,6 @@
       font-weight: bold;
       text-transform: uppercase;
     }
-
   }
 }
 
@@ -102,12 +101,14 @@
         .title-container {
           font-size: 15px;
         }
-        .grade-info, .competencies {
+        .grade-info,
+        .competencies {
           display: grid;
           text-align: center;
           align-items: center;
           justify-content: center;
-          .grade-level, .competency-count {
+          .grade-level,
+          .competency-count {
             font-size: 16px;
             font-weight: bold;
           }
@@ -116,12 +117,14 @@
       .performance-container {
         display: grid;
         grid-template-columns: auto auto;
-        .performance, .progress-container {
+        .performance,
+        .progress-container {
           display: grid;
           text-align: center;
           align-items: center;
           justify-content: center;
-          .score-count, .progress-count {
+          .score-count,
+          .progress-count {
             font-size: 24px;
           }
           .title-container {

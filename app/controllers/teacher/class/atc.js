@@ -1,8 +1,7 @@
 import Ember from 'ember';
-import {isMobileVW} from 'gooru-web/utils/utils';
+import { isMobileVW } from 'gooru-web/utils/utils';
 
 export default Ember.Controller.extend({
-
   // -------------------------------------------------------------------------
   // Dependencies
   /**
@@ -149,7 +148,10 @@ export default Ember.Controller.extend({
     //Action triggered when click a domain
     onSelectDomain(domainData) {
       const controller = this;
-      controller.set('competencyCompletionReport', domainData.get('competenciesData'));
+      controller.set(
+        'competencyCompletionReport',
+        domainData.get('competenciesData')
+      );
       controller.set('selectedDomain', domainData);
       controller.set('isShowCompetencyCompletionReport', true);
     },
@@ -177,7 +179,9 @@ export default Ember.Controller.extend({
         month,
         year
       };
-      controller.transitionToRoute('teacher.class.class-activities', classId, {queryParams});
+      controller.transitionToRoute('teacher.class.class-activities', classId, {
+        queryParams
+      });
     }
   },
 
@@ -191,11 +195,16 @@ export default Ember.Controller.extend({
     const controller = this;
     controller.set('isLoading', true);
     controller.fetchClassActivitiesCount();
-    controller.fetchDomainsCompletionReport().then(function(domainsCompletionReport) {
-      controller.set('domainsCompletionList', domainsCompletionReport.domainsData.sortBy('completionPercentage'));
-      controller.set('domainsCompletionReport', domainsCompletionReport);
-      controller.set('isLoading', false);
-    });
+    controller
+      .fetchDomainsCompletionReport()
+      .then(function(domainsCompletionReport) {
+        controller.set(
+          'domainsCompletionList',
+          domainsCompletionReport.domainsData.sortBy('completionPercentage')
+        );
+        controller.set('domainsCompletionReport', domainsCompletionReport);
+        controller.set('isLoading', false);
+      });
   },
 
   /**
@@ -209,9 +218,11 @@ export default Ember.Controller.extend({
     let month = controller.get('activeMonth');
     let year = controller.get('activeYear');
     return Ember.RSVP.hash({
-      activitiesCount: Ember.RSVP.resolve(classActivitiesService.getMonthlyActivitiesCount(classId, month, year))
+      activitiesCount: Ember.RSVP.resolve(
+        classActivitiesService.getMonthlyActivitiesCount(classId, month, year)
+      )
     })
-      .then(({activitiesCount}) => {
+      .then(({ activitiesCount }) => {
         controller.set('activitiesCount', activitiesCount);
         return activitiesCount;
       })
@@ -242,11 +253,12 @@ export default Ember.Controller.extend({
       agent
     };
     return Ember.RSVP.hash({
-      domainsCompletionReport: Ember.RSVP.resolve(competencyService.getDomainsCompletionReport(requestBody))
-    })
-      .then(({domainsCompletionReport}) => {
-        return domainsCompletionReport;
-      });
+      domainsCompletionReport: Ember.RSVP.resolve(
+        competencyService.getDomainsCompletionReport(requestBody)
+      )
+    }).then(({ domainsCompletionReport }) => {
+      return domainsCompletionReport;
+    });
   },
 
   /**
@@ -255,10 +267,14 @@ export default Ember.Controller.extend({
    */
   getDomainListToShow() {
     const controller = this;
-    let domainsCompletionReportList = controller.get('domainsCompletionReport.domainsData');
+    let domainsCompletionReportList = controller.get(
+      'domainsCompletionReport.domainsData'
+    );
     let domainsCompletionList = Ember.A([]);
     if (domainsCompletionReportList) {
-      let sortedReportList = domainsCompletionReportList.sortBy('completionPercentage');
+      let sortedReportList = domainsCompletionReportList.sortBy(
+        'completionPercentage'
+      );
       if (!controller.get('isExpandedView')) {
         domainsCompletionList = sortedReportList.filter(function(domain) {
           return domain.completionPercentage;
@@ -270,5 +286,4 @@ export default Ember.Controller.extend({
     controller.set('domainsCompletionList', domainsCompletionList);
     return domainsCompletionList;
   }
-
 });

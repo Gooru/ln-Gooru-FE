@@ -105,6 +105,12 @@ export default Ember.Component.extend({
     return showSignatureAssessment ? 'assessment' : 'collection';
   }),
 
+  onCompetencyChange: Ember.observer('competency', function() {
+    let component = this;
+    component.fetchLearningMapsContent();
+    component.fetchCodes();
+  }),
+
   /**
    * @property {String} source value when playing a collection/assessment
    */
