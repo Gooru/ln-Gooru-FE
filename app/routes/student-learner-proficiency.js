@@ -70,5 +70,9 @@ export default Ember.Route.extend({
     controller.set('course', model.get('course'));
     controller.set('taxonomyCategories', model.get('categories'));
     controller.loadData();
+  },
+  resetController(controller) {
+    controller.set('showDomainInfo', false);
+    controller.set('showCompetencyInfo', false);
   }
 });

@@ -7,15 +7,7 @@ export default Ember.Component.extend({
 
   selectedDomain: null,
 
-  domains: Ember.computed.alias('taxonomyDomains.domains'),
+  domains: Ember.computed.alias('competencyMatrixCoordinates.domains'),
 
-  framework: Ember.computed.alias('class.preference.framework'),
-
-  onDomainSelect: Ember.observer('selectedDomain', function() {
-    let component = this;
-    let selectedDomain = component.get('selectedDomain');
-    if (selectedDomain) {
-      component.set('showDomainInfo', true);
-    }
-  })
+  framework: Ember.computed.alias('class.preference.framework')
 });

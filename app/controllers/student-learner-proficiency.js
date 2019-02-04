@@ -29,11 +29,13 @@ export default Ember.Controller.extend({
    */
   activeSubject: null,
 
-  onSubjectChange: Ember.observer('activeSubject', function() {
-    let component = this;
-    component.fetchTaxonomyGrades();
-    component.loadDataBySubject();
-  }),
+  // onSubjectChange: Ember.observer('activeSubject', function() {
+  //   let component = this;
+  //   component.set('showDomainInfo', false);
+  //   component.set('showCompetencyInfo', false);
+  //   component.fetchTaxonomyGrades();
+  //   component.loadDataBySubject();
+  // }),
 
   /**
    * @property {String}
@@ -90,6 +92,10 @@ export default Ember.Controller.extend({
     };
   }),
 
+  selectedCompetency: null,
+
+  domainCompetencyList: null,
+
   actions: {
     onSelectGrade(grade) {
       let component = this;
@@ -114,9 +120,39 @@ export default Ember.Controller.extend({
       this.loadDataBySubject();
     },
 
+    onSubjectChange(subject) {
+      let component = this;
+      component.set('activeSubject', subject);
+      component.set('showDomainInfo', false);
+      component.set('showCompetencyInfo', false);
+      component.fetchTaxonomyGrades();
+      component.loadDataBySubject();
+    },
+
+    /**
+     * Action triggered when select a competency
+     */
+    onSelectCompetency(competency, domainCompetencyList) {
+      let component = this;
+      component.set('selectedCompetency', competency);
+      component.set('domainCompetencyList', domainCompetencyList);
+      component.set('showCompetencyInfo', true);
+    },
+
     onDomainSelect(domain) {
       let component = this;
       component.set('selectedDomain', domain);
+      let domainCompetencies = component.get('competencyMatrixDomains');
+      let selectedDomainCompetencies = domainCompetencies.findBy(
+        'domainCode',
+        domain.get('domainCode')
+      );
+      component.set(
+        'selectedDomainCompetencies',
+        selectedDomainCompetencies.get('competencies')
+      );
+      component.set('showDomainInfo', true);
+      component.set('showCompetencyInfo', false);
     }
   },
   /**
@@ -147,6 +183,8 @@ export default Ember.Controller.extend({
         component.set('taxonomySubjects', subjects);
         component.set('activeSubject', subject);
         component.checkTaxonomySubject();
+        component.fetchTaxonomyGrades();
+        component.loadDataBySubject();
       });
   },
 

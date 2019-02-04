@@ -87,14 +87,20 @@ export default Ember.Component.extend({
     onSelectSubject(subject) {
       let component = this;
       component.set('activeSubject', subject);
+      component.sendAction('onSubjectChange', subject);
     },
 
     /**
      * Action triggered when select a competency
      */
-    // onSelectCompetency(competency, domainCompetencyList) {
-    //   console.log(competency);
-    // },
+    onSelectCompetency(competency, domainCompetencyList) {
+      let component = this;
+      component.sendAction(
+        'onSelectCompetency',
+        competency,
+        domainCompetencyList
+      );
+    },
 
     onDomainSelect(domain) {
       let component = this;

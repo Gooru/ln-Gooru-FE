@@ -32,10 +32,15 @@
        isShowMatrixChart=isShowMatrixChart
        isSelectBaseLine=isSelectBaseLine
        onSelectMonth="onSelectMonth"
+       onSelectCompetency="onSelectCompetency"
        onDomainSelect="onDomainSelect"
+       onSubjectChange="onSubjectChange"
        categories=taxonomyCategories}}
   </div>
   <div class="pull-up-container">
-    {{proficiency.proficiency-subject-panel class=class selectedDomain=selectedDomain subject=activeSubject taxonomyDomains=competencyMatrixCoordinates}}
+    {{#proficiency.proficiency-subject-panel class=class studentId=studentProfile.id selectedCompetency=selectedCompetency domainCompetencyList=domainCompetencyList selectedDomain=selectedDomain competencyMatrixDomains=competencyMatrixDomains subject=activeSubject
+      competencyMatrixCoordinates=competencyMatrixCoordinates}}
+      {{proficiency.domain-info-pull-up showPullUp=showDomainInfo competencies=selectedDomainCompetencies domain=selectedDomain}} {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
+    {{/proficiency.proficiency-subject-panel}}
   </div>
 </div>
