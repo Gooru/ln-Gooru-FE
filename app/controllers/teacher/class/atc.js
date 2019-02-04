@@ -166,7 +166,8 @@ export default Ember.Controller.extend({
     toggleView() {
       const controller = this;
       controller.set('isExpandedView', !controller.get('isExpandedView'));
-      controller.getDomainListToShow();
+      let domainsCompletionReport = controller.get('domainsCompletionReport');
+      controller.getDomainListToShow(domainsCompletionReport);
     },
 
     //Action triggered when click activities count box
@@ -195,16 +196,11 @@ export default Ember.Controller.extend({
     const controller = this;
     controller.set('isLoading', true);
     controller.fetchClassActivitiesCount();
-    controller
-      .fetchDomainsCompletionReport()
-      .then(function(domainsCompletionReport) {
-        controller.set(
-          'domainsCompletionList',
-          domainsCompletionReport.domainsData.sortBy('completionPercentage')
-        );
-        controller.set('domainsCompletionReport', domainsCompletionReport);
-        controller.set('isLoading', false);
-      });
+    controller.fetchDomainsCompletionReport().then(function(domainsCompletionReport) {
+      controller.set('domainsCompletionReport', domainsCompletionReport);
+      controller.getDomainListToShow(domainsCompletionReport);
+      controller.set('isLoading', false);
+    });
   },
 
   /**
@@ -265,25 +261,21 @@ export default Ember.Controller.extend({
    * @function getDomainListToShow
    * Method to get domains list to show
    */
-  getDomainListToShow() {
+  getDomainListToShow(domainsCompletionReport) {
     const controller = this;
-    let domainsCompletionReportList = controller.get(
-      'domainsCompletionReport.domainsData'
-    );
     let domainsCompletionList = Ember.A([]);
-    if (domainsCompletionReportList) {
-      let sortedReportList = domainsCompletionReportList.sortBy(
-        'completionPercentage'
-      );
-      if (!controller.get('isExpandedView')) {
-        domainsCompletionList = sortedReportList.filter(function(domain) {
-          return domain.completionPercentage;
-        });
-      } else {
-        domainsCompletionList = sortedReportList;
-      }
+    let notStartedCompletionList = Ember.A([]);
+    if (domainsCompletionReport) {
+      let domainsCompletionReportList = domainsCompletionReport.get('domainsData');
+      let sortedReportList = domainsCompletionReportList.sortBy('completionPercentage');
+      domainsCompletionList = sortedReportList.filter(function(domain) {
+        return domain.completionPercentage;
+      });
+      notStartedCompletionList = sortedReportList.filter(function(domain) {
+        return domain.completionPercentage === 0;
+      });
     }
-    controller.set('domainsCompletionList', domainsCompletionList);
+    controller.set('domainsCompletionList', domainsCompletionList.concat(notStartedCompletionList));
     return domainsCompletionList;
   }
 });

@@ -217,9 +217,8 @@
     &.regular-class {
       grid-template-columns: auto;
       .atc-chart {
-        width: max-content;
         position: relative;
-        background-color: $white;
+        background-color: #202e32;
         border-radius: 4px;
         margin: auto;
         .reset {
