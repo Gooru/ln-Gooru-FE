@@ -1,11 +1,16 @@
 import Ember from 'ember';
+import { DEFAULT_IMAGES } from 'gooru-web/config/config';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 /**
  * Serializer for Competency endpoints
  *
  * @typedef {Object} CompetencySerializer
  */
-export default Ember.Object.extend({
+export default Ember.Object.extend(ConfigurationMixin, {
+
+  session: Ember.inject.service('session'),
+
   /**
    * Normalized data of user competencies
    * @return {Object}
@@ -150,6 +155,7 @@ export default Ember.Object.extend({
    * @function normalizeDomainsCompletionReport
    */
   normalizeDomainsCompletionReport(payload) {
+    const serializer = this;
     let normalizedCompletionReportData = Ember.Object.create({
       membersCount: 0,
       domainsData: Ember.A([])
@@ -163,7 +169,8 @@ export default Ember.Object.extend({
           completionPercentage: domainCompletionData.average_completions || domainCompletionData.avg || 0,
           domainCode: domainCompletionDomainInfo.tx_domain_code || domainCompletionDomainInfo.dc,
           domainName: domainCompletionDomainInfo.tx_domain_name || domainCompletionDomainInfo.dn,
-          domainSeq: domainCompletionDomainInfo.tx_domain_seq || domainCompletionDomainInfo.seq
+          domainSeq: domainCompletionDomainInfo.tx_domain_seq || domainCompletionDomainInfo.seq,
+          competenciesData: serializer.serializeCompetencyCompletionData(domainCompletionData.competencies || domainCompletionData.tx)
         });
         normalizedDomainsCompletionData.pushObject(domainData);
       });
@@ -176,29 +183,15 @@ export default Ember.Object.extend({
   /**
    * @function normalizeCompetencyCompletionReport
    */
-  normalizeCompetencyCompletionReport(payload) {
-    // payload = {
-    //           	'competencies': [{
-    //           		'fw_comp_code': 'SBMH.K12IN.MA-MA5-FD-F.01',
-    //           		'tx_comp_code': 'K12IN.MA-MA5-FD-F.01',
-    //           		'tx_comp_name': 'performs the four operations on fractions',
-    //           		'completions': 35
-    //           	}, {
-    //           		'fw_comp_code': 'SBMH.K12IN.MA-MA4-FD-D.01',
-    //           		'tx_comp_code': 'K12IN.MA-MA4-FD-D.01',
-    //           		'tx_comp_name': 'compares and orders unit fractions',
-    //           		'completions': 70
-    //           	}]
-    // };
+  serializeCompetencyCompletionData(competenciesData) {
     let normalizedCompetencyCompletionReport = Ember.A([]);
-    if (payload) {
-      let completenciesCompletionData = payload.competencies || payload.tx;
-      completenciesCompletionData.map( competencyCompletionData => {
+    if (competenciesData) {
+      competenciesData.map( competencyCompletionData => {
         let competencyData = Ember.Object.create({
-          frameworkCompetencyCode: competencyCompletionData.fw_comp_code || competencyCompletionData.fc,
           competencyCode: competencyCompletionData.tx_comp_code || competencyCompletionData.gc,
           competencyName: competencyCompletionData.tx_comp_name || competencyCompletionData.nm,
-          completionPercentage: competencyCompletionData.completions || competencyCompletionData.avg  || 0
+          competencyDesc: competencyCompletionData.tx_comp_desc || competencyCompletionData.ds,
+          completionPercentage: competencyCompletionData.completions || competencyCompletionData.pc  || 0
         });
         normalizedCompetencyCompletionReport.pushObject(competencyData);
       });
@@ -210,33 +203,22 @@ export default Ember.Object.extend({
    * @function normalizeUsersCompetencyPerformanceSummary
    */
   normalizeUsersCompetencyPerformanceSummary(payload) {
+    const serializer = this;
+    const basePath = serializer.get('session.cdnUrls.user');
+    const appRootPath = this.get('appRootPath'); //configuration appRootPath
     let normalizedUsersCompetencyPerformanceSummary = Ember.A([]);
-    // payload = [{
-    //            	'user': {
-    //            		'id': 'aa4532d6-fd7c-4efd-89be-c99c8b6ebbc0',
-    //            		'first_name': 'Lena',
-    //            		'last_name': 'Peterson',
-    //            		'thumbnail': '//usercdn.gooru.org/952a2654-f016-468e-b3c3-619e338ebf6a.png'
-    //            	},
-    //            	'score': 67,
-    //            	'status': 4
-    // }, {
-    //            	'user': {
-    //            		'id': 'e7895bfe-88e8-4e20-a254-727153688203',
-    //            		'first_name': 'Julian',
-    //            		'last_name': 'Todd',
-    //            		'thumbnail': '//usercdn.gooru.org/952a2654-f016-468e-b3c3-619e338ebf6a.png'
-    //            	},
-    //            	'status': 1
-    // }];
-    if (payload) {
-      payload.map( userPerformanceSummary => {
+    let usersPerformanceSummaryList = (payload && payload.users) || Ember.A([]);
+    if (usersPerformanceSummaryList) {
+      usersPerformanceSummaryList.map( userPerformanceSummary => {
         let userData = userPerformanceSummary.user || userPerformanceSummary.u;
+        let thumbnail = (userData.thumbnail || userData.th)
+          ? basePath + (userData.thumbnail || userData.th)
+          : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
         let userPerformanceData = Ember.Object.create({
           id: userData.id,
           firstName: userData.first_name || userData.fn,
           lastName: userData.last_name || userData.ln,
-          thumbnail: userData.thumbnail || userData.th,
+          thumbnail,
           score: userPerformanceSummary.score || userPerformanceSummary.sc || 0,
           status: userPerformanceSummary.status || userPerformanceSummary.st
         });

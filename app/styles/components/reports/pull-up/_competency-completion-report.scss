@@ -3,7 +3,7 @@
   position: fixed;
   top: 100%;
   z-index: 1000;
-  width: 360px;
+  width: 50vw;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -24,9 +24,7 @@
 
   .competency-completion-report-container {
     background: $white;
-    height: 70vh;
-    max-height: 90vh;
-    overflow-y: auto;
+    max-height: 85vh;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
     border-radius: 4px;
     .competencies-list-container {
@@ -51,6 +49,19 @@
         }
       }
       .competencies-container {
+        min-height: 70vh;
+        max-height: 78vh;
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+          height: 6px;
+          width: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: $gray-light;
+          border: 1px solid $gray-light;
+          border-radius: 5px;
+        }
         .competency-container {
           .competency-completion-info-container {
             border-bottom: 2px solid rgba(0, 0, 0, 0.3);
@@ -83,7 +94,7 @@
               .completion-box {
                 display: block;
                 height: 10px;
-                width: 75px;
+                width: 100px;
                 background-color: rgba(191, 191, 191, 0.5);
                 span {
                   height: inherit;
@@ -115,6 +126,7 @@
                   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
                   height: inherit;
                   line-height: 40px;
+                  text-transform: capitalize;
                 }
               }
               .user-completion-performance {
@@ -133,7 +145,7 @@
                 .completion-box {
                   display: block;
                   height: 10px;
-                  width: 75px;
+                  width: 100px;
                   background-color: rgba(191, 191, 191, 0.5);
                   span {
                     height: inherit;
@@ -141,6 +153,10 @@
                   }
                 }
               }
+            }
+
+            .user-data-not-available {
+              text-align: center;
             }
             &.collapsed {
               display: none;
@@ -153,7 +169,7 @@
       }
     }
   }
-  @media screen and (max-width: 359px) {
+  @media screen and (max-width: 768px) {
     width: 100%;
   }
 }
