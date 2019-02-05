@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import d3 from 'd3';
-import { getGradeColor } from 'gooru-web/utils/utils';
+import { getGradeColor, isMobileVW } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -251,18 +251,24 @@ export default Ember.Component.extend({
       .attr('y', '415')
       .text('competencies');
 
-    var tooltip = d3
+    let tooltipInterval = null;
+    let tooltip = d3
       .select('body')
       .append('div')
-      .attr('class', 'navigator-atc-tooltip')
-      .on('mouseover', function() {
-        return tooltip.style('visibility', 'visible');
-      })
-      .on('mouseout', function() {
-        return tooltip.style('visibility', 'hidden');
-      });
+      .attr('class', 'navigator-atc-tooltip');
+    if (!isMobileVW()) {
+      tooltip
+        .on('mouseover', function() {
+          Ember.$('.navigator-atc-tooltip').addClass('active');
+        });
+    }
 
-    var studentNodes = svg
+    tooltip.on('mouseout', function() {
+      Ember.$('.navigator-atc-tooltip').removeClass('active');
+      Ember.run.cancel(tooltipInterval);
+    });
+
+    let studentNodes = svg
       .selectAll('.student-nodes')
       .data(dataset)
       .enter()
@@ -273,32 +279,14 @@ export default Ember.Component.extend({
       })
       .attr('class', 'node-point')
       .on('mouseover', function(studentData) {
-        component.set('studentData', studentData);
-        let clientY = d3.event.clientY;
-        let clientX = d3.event.clientX;
-        let top = clientY > 420 ? clientY - 210 : clientY;
-        let left = clientX > 600 ? clientX - 225 : clientX;
-        tooltip
-          .style('visibility', 'hidden')
-          .style('left', `${left}px`)
-          .style('top', `${top}px`);
-        let tooltipHtml = component.$('.tooltip-html-container').html();
-        tooltip
-          .html(tooltipHtml)
-          .style('visibility', 'visible');
+        tooltipInterval = component.studentProficiencyInfoTooltip(studentData, d3.event);
       })
       .on('mouseout', function() {
-        tooltip.style('visibility', 'hidden');
+        Ember.$('.navigator-atc-tooltip').removeClass('active');
+        Ember.run.cancel(tooltipInterval);
       })
       .on('click', function(studentData) {
-        component.set('studentData', studentData);
-        setTimeout(function() {
-          let tooltipHtml = component.$('.tooltip-html-container').html();
-          tooltip
-            .html(tooltipHtml)
-            .style('visibility', 'visible');
-          component.set('studentData', null);
-        }, 1000);
+        tooltipInterval = component.studentProficiencyInfoTooltip(studentData, d3.event);
       });
 
     studentNodes
@@ -339,5 +327,28 @@ export default Ember.Component.extend({
         curAxisText.text(`${curAxisText.text()}%`);
       });
     });
+  },
+
+  /**
+   * @function studentProficiencyInfoTooltip
+   * Method to show student info tooltip
+   */
+  studentProficiencyInfoTooltip(studentData, eventPos) {
+    let component = this;
+    component.set('studentData', studentData);
+    let tooltip = Ember.$('.navigator-atc-tooltip');
+    return Ember.run.later(function() {
+      let clientY = eventPos.clientY;
+      let clientX = eventPos.clientX;
+      let top = clientY > 420 ? clientY - 210 : clientY;
+      let left = clientX > 600 ? clientX - 225 : clientX;
+      tooltip.css({
+        'left': `${left}px`,
+        'top':  `${top}px`});
+      let tooltipHtml = component.$('.tooltip-html-container').html();
+      tooltip
+        .html(tooltipHtml);
+      Ember.$('.navigator-atc-tooltip').addClass('active');
+    }, 500);
   }
 });
