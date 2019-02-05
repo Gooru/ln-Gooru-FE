@@ -47,7 +47,7 @@
   .chart-area {
     background-color: $gray-97;
     display: grid;
-    zoom: 0.9;
+    min-height: calc(100vh - 235px);
 
     .matrix-chart {
       #render-proficiency-matrix {
