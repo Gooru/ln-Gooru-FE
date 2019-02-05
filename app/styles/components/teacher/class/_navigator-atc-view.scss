@@ -139,4 +139,10 @@
   &.active {
     visibility: visible;
   }
+
+  &.mobile-tooltip {
+    left: calc((100% - 225px)/2) !important;
+    bottom: 0;
+    top: unset !important;
+  }
 }

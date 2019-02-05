@@ -256,17 +256,7 @@ export default Ember.Component.extend({
       .select('body')
       .append('div')
       .attr('class', 'navigator-atc-tooltip');
-    if (!isMobileVW()) {
-      tooltip
-        .on('mouseover', function() {
-          Ember.$('.navigator-atc-tooltip').addClass('active');
-        });
-    }
-
-    tooltip.on('mouseout', function() {
-      Ember.$('.navigator-atc-tooltip').removeClass('active');
-      Ember.run.cancel(tooltipInterval);
-    });
+    let tooltipContainer = Ember.$('.navigator-atc-tooltip');
 
     let studentNodes = svg
       .selectAll('.student-nodes')
@@ -277,17 +267,41 @@ export default Ember.Component.extend({
         return `translate(${xScale(d.completedCompetencies) +
           12}, ${yScale(d.percentScore) - 20})`;
       })
-      .attr('class', 'node-point')
+      .attr('class', 'node-point');
+    studentNodes
       .on('mouseover', function(studentData) {
-        tooltipInterval = component.studentProficiencyInfoTooltip(studentData, d3.event);
+        let clientY = d3.event.clientY;
+        let clientX = d3.event.clientX;
+        let top = clientY > 420 ? clientY - 210 : clientY;
+        let left = clientX > 600 ? clientX - 225 : clientX;
+        let tooltipPos = {
+          top: `${top}px`,
+          left: `${left}px`
+        };
+        tooltipInterval = component.studentProficiencyInfoTooltip(studentData, tooltipPos);
       })
       .on('mouseout', function() {
-        Ember.$('.navigator-atc-tooltip').removeClass('active');
+        tooltipContainer.removeClass('active mobile-tooltip');
         Ember.run.cancel(tooltipInterval);
-      })
-      .on('click', function(studentData) {
-        tooltipInterval = component.studentProficiencyInfoTooltip(studentData, d3.event);
       });
+
+    tooltip.on('mouseout', function() {
+      tooltipContainer.removeClass('active mobile-tooltip');
+      Ember.run.cancel(tooltipInterval);
+    });
+
+    if (!isMobileVW()) {
+      tooltip
+        .on('mouseover', function() {
+          tooltipContainer.addClass('active');
+        });
+    } else {
+      studentNodes
+        .on('click', function(studentData) {
+          tooltipInterval = component.studentProficiencyInfoTooltip(studentData);
+          tooltipContainer.addClass('mobile-tooltip');
+        });
+    }
 
     studentNodes
       .append('circle')
@@ -333,18 +347,14 @@ export default Ember.Component.extend({
    * @function studentProficiencyInfoTooltip
    * Method to show student info tooltip
    */
-  studentProficiencyInfoTooltip(studentData, eventPos) {
+  studentProficiencyInfoTooltip(studentData, tooltipPos) {
     let component = this;
     component.set('studentData', studentData);
     let tooltip = Ember.$('.navigator-atc-tooltip');
     return Ember.run.later(function() {
-      let clientY = eventPos.clientY;
-      let clientX = eventPos.clientX;
-      let top = clientY > 420 ? clientY - 210 : clientY;
-      let left = clientX > 600 ? clientX - 225 : clientX;
-      tooltip.css({
-        'left': `${left}px`,
-        'top':  `${top}px`});
+      if (tooltipPos) {
+        tooltip.css(tooltipPos);
+      }
       let tooltipHtml = component.$('.tooltip-html-container').html();
       tooltip
         .html(tooltipHtml);
