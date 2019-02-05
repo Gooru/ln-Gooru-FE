@@ -257,10 +257,9 @@ export default Ember.Component.extend({
       .append('div')
       .attr('class', 'navigator-atc-tooltip');
     if (!isMobileVW()) {
-      tooltip
-        .on('mouseover', function() {
-          Ember.$('.navigator-atc-tooltip').addClass('active');
-        });
+      tooltip.on('mouseover', function() {
+        Ember.$('.navigator-atc-tooltip').addClass('active');
+      });
     }
 
     tooltip.on('mouseout', function() {
@@ -279,14 +278,20 @@ export default Ember.Component.extend({
       })
       .attr('class', 'node-point')
       .on('mouseover', function(studentData) {
-        tooltipInterval = component.studentProficiencyInfoTooltip(studentData, d3.event);
+        tooltipInterval = component.studentProficiencyInfoTooltip(
+          studentData,
+          d3.event
+        );
       })
       .on('mouseout', function() {
         Ember.$('.navigator-atc-tooltip').removeClass('active');
         Ember.run.cancel(tooltipInterval);
       })
       .on('click', function(studentData) {
-        tooltipInterval = component.studentProficiencyInfoTooltip(studentData, d3.event);
+        tooltipInterval = component.studentProficiencyInfoTooltip(
+          studentData,
+          d3.event
+        );
       });
 
     studentNodes
@@ -343,11 +348,11 @@ export default Ember.Component.extend({
       let top = clientY > 420 ? clientY - 210 : clientY;
       let left = clientX > 600 ? clientX - 225 : clientX;
       tooltip.css({
-        'left': `${left}px`,
-        'top':  `${top}px`});
+        left: `${left}px`,
+        top: `${top}px`
+      });
       let tooltipHtml = component.$('.tooltip-html-container').html();
-      tooltip
-        .html(tooltipHtml);
+      tooltip.html(tooltipHtml);
       Ember.$('.navigator-atc-tooltip').addClass('active');
     }, 500);
   }

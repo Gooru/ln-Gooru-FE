@@ -1,0 +1,125 @@
+.teacher_class_student-learner-proficiency {
+  .teacher.class {
+    padding: 0;
+  }
+
+  .student-proficiency-container {
+    @extend %bg-base64;
+    width: 100%;
+    height: 100%;
+    background: #35424b;
+    grid-gap: 20px;
+    padding: 10px 0;
+    display: grid;
+    min-height: 92vh;
+    grid-template-columns: 100px 1fr 35%;
+
+    .pull-up-container {
+      padding-right: 15px;
+    }
+
+    .taxonomy-grades {
+      .taxonomy-grades-container {
+        .taxonomy-grades {
+          .grade-list {
+            @extend %scroll-style;
+
+            .grade-container {
+              cursor: pointer;
+
+              &.active-grade {
+                background-color: #4190e0;
+                border: none;
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+                opacity: 1;
+                font-weight: 700;
+                display: grid;
+                align-items: center;
+                color: #fff;
+
+                .grade-title {
+                  background-color: #4190e0;
+                  opacity: 1;
+
+                  &:before {
+                    border-color: transparent transparent transparent #4190e0;
+                  }
+                }
+              }
+
+              .grade-title {
+                color: #fff;
+                opacity: 0.4;
+              }
+            }
+          }
+        }
+
+        .baseline-toggle {
+          position: relative;
+          padding: 0;
+          margin: 0;
+          max-width: 100px;
+          width: max-content;
+          min-width: 100px;
+          text-align: right;
+          cursor: pointer;
+
+          .baseline-label {
+            border: none;
+            display: block;
+            padding-left: 10px;
+            padding-right: 10px;
+            height: 24px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: $dark-300;
+          }
+
+          &.active-baseline {
+            font-weight: bold;
+
+            .baseline-label {
+              background-color: #4190e0;
+              border: none;
+              box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+              opacity: 1;
+              font-weight: bold;
+              display: grid;
+              align-items: center;
+              justify-content: center;
+              color: $white;
+            }
+
+            .baseline-label:after,
+            .baseline-label:before {
+              content: "";
+              display: inline-block;
+              border-width: 16px;
+              border-style: solid;
+              width: 0;
+              height: 0;
+              left: 100%;
+              top: -1px;
+              position: absolute;
+              z-index: 1;
+            }
+
+            .baseline-label:after {
+              border-color: transparent transparent transparent transparent;
+            }
+
+            .baseline-label:before {
+              border-width: 12px;
+              display: block;
+              border-color: transparent transparent transparent #4190e0;
+              z-index: 0;
+              top: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

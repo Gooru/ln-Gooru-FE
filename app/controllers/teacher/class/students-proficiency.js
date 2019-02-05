@@ -53,15 +53,14 @@ export default Ember.Controller.extend({
     onSelectStudent(student) {
       let controller = this;
       let userId = student.id;
-      let courseId = this.get('courseId');
-      let classId = this.get('classId');
-      controller.transitionToRoute('student-learner-proficiency', userId, {
-        queryParams: {
-          classId: classId,
-          courseId: courseId,
-          role: 'teacher'
+      controller.transitionToRoute(
+        'teacher.class.student-learner-proficiency',
+        {
+          queryParams: {
+            studentId: userId
+          }
         }
-      });
+      );
     },
 
     /**
