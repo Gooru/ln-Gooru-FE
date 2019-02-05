@@ -27,7 +27,7 @@
         <div class="move-left {{if (lte activeDomainSeq 1) 'disabled'}}" {{action "onChangeDomainSeq" 'left'}}>
           {{gru-icon name="chevron_left"}}
         </div>
-        <div class="move-right {{if (gte activeDomainSeq numberOfDomains) 'disabled'}}"{{action "onChangeDomainSeq" 'right'}}>
+        <div class="move-right {{if (gte activeDomainSeq numberOfDomains) 'disabled'}}" {{action "onChangeDomainSeq" 'right'}}>
           {{gru-icon name="chevron_right"}}
         </div>
       </div>
@@ -67,6 +67,6 @@
 {{#if isShowCompetencyContentReport}}
   {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
     onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
-    {{reports.pull-up.competency-content-report competency=selectedCompetency userId=selectedStudentUserId learningMapData=learningMapData onToggleGlobalCompetencyView="onToggleGlobalCompetencyView"}}
+    {{reports.pull-up.competency-content-report domainCompetencyList=domainCompetencyList competency=selectedCompetency userId=selectedStudentUserId learningMapData=learningMapData onToggleGlobalCompetencyView="onToggleGlobalCompetencyView"}}
   {{/reports.pull-up.competency-report}}
 {{/if}}
