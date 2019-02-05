@@ -1,0 +1,39 @@
+.student-proficiency-panel {
+  @media only screen and (max-width: $screen-sm - 1) {
+    .proficiency-tags,
+    .time-series-container {
+      display: none;
+    }
+
+    .learner-proficiency-domain-matrix {
+      .chart-area {
+        max-width: 100vw;
+        padding: 10px;
+        overflow-x: auto;
+
+        .toggle-chart {
+          justify-self: left;
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+  @media only screen and (min-width: $screen-sm) and (max-width: $screen-in-1024) {
+    .time-series-container {
+      display: none;
+    }
+
+    .learner-proficiency-domain-matrix {
+      .chart-area {
+        max-width: 100vw;
+        padding: 10px;
+        overflow-x: auto;
+
+        .toggle-chart {
+          justify-self: left;
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+}
