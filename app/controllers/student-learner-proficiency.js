@@ -24,6 +24,11 @@ export default Ember.Controller.extend({
   competencyService: Ember.inject.service('api-sdk/competency'),
 
   /**
+   * @type {AnalyticsService} Service to retrieve class performance summary
+   */
+  analyticsService: Ember.inject.service('api-sdk/analytics'),
+
+  /**
    * @property {Object}
    * Property to store active subject which is selected
    */
@@ -88,6 +93,23 @@ export default Ember.Controller.extend({
 
   domainCompetencyList: null,
 
+  /**
+   * The menuItem selected
+   * @property {String}
+   */
+  menuItem: null,
+
+  /**
+   * The class is premium or not
+   * @property {Boolean}
+   */
+  isPremiumClass: Ember.computed('class', function() {
+    let controller = this;
+    const currentClass = controller.get('class');
+    let setting = currentClass.get('setting');
+    return setting ? setting['course.premium'] : false;
+  }),
+
   actions: {
     onSelectGrade(grade) {
       let component = this;
@@ -145,7 +167,103 @@ export default Ember.Controller.extend({
       );
       component.set('showDomainInfo', true);
       component.set('showCompetencyInfo', false);
+    },
+
+    /**
+     * Selected the menu item
+     * @param {string} item
+     */
+    selectMenuItem: function(item) {
+      let controller = this;
+      let isPremiumClass = controller.get('isPremiumClass');
+      if (isPremiumClass && item === 'performance') {
+        controller.set('isShowCompetencyReport', true);
+      } else {
+        controller.set('menuItem', item);
+      }
+    },
+
+    onOpenOCAReport() {
+      let controller = this;
+      controller.set('isShowOCASummaryReportPullUp', true);
+    },
+
+    /**
+     *  Action to trigger the course level report
+     */
+    onOpenCourseReport() {
+      this.openTeacherCourseReport();
+    },
+
+    /**
+     *  Triggered the lesson report from inside unit report
+     */
+    onOpenLessonReport(lesson) {
+      this.openLessonReport(lesson);
+    },
+
+    onClosePullUp() {
+      let controller = this;
+      controller.set('isShowCourseReport', false);
+      controller.set('isShowUnitReportPullUp', false);
+      controller.set('isShowLessonReportPullUp', false);
+      controller.set('isShowCollectionReportPullUp', false);
+      controller.set('isShowOCASummaryReportPullUp', false);
+    },
+
+    /**
+     *  Triggered the unit report from inside course report
+     */
+    onOpenUnitReport(unit) {
+      let controller = this;
+      controller.openUnitReport(unit);
+    },
+
+    /**
+     *  Triggered the collection report from lesson report
+     */
+    teacherCollectionReport(params) {
+      this.openTeacherCollectionReport(params);
     }
+  },
+
+  openUnitReport(params) {
+    let controller = this;
+    controller.set('isShowUnitReportPullUp', true);
+    controller.set('unitReportData', params);
+  },
+
+  openLessonReport(params) {
+    let controller = this;
+    controller.set('isShowLessonReportPullUp', true);
+    controller.set('lessonReportData', params);
+  },
+
+  openTeacherCollectionReport(params) {
+    let controller = this;
+    controller.set('isShowCollectionReportPullUp', true);
+    controller.set('teacherCollectionReportData', params);
+  },
+
+  openTeacherCourseReport() {
+    let controller = this;
+    if (!controller.get('course.id')) {
+      return false;
+    }
+    let params = {
+      course: controller.get('course'),
+      class: controller.get('class'),
+      classId: controller.get('class.id'),
+      courseId: controller.get('course.id'),
+      classMembers: controller.get('class.members')
+    };
+    this.set('isShowCourseReport', true);
+    this.set('courseReportData', params);
+  },
+
+  openDCAReportForOfflineClass() {
+    let controller = this;
+    controller.set('isShowOCASummaryReportPullUp', true);
   },
   /**
    * This method will load the initial set  of data
@@ -292,6 +410,25 @@ export default Ember.Controller.extend({
         'taxonomyGrades',
         taxonomyGrades.sortBy('sequence').reverse()
       );
+    });
+  },
+
+  /**
+   * @function fetchDcaSummaryPerformance
+   * Method to fetch dca summary performance for offline class
+   */
+  fetchDcaSummaryPerformance() {
+    let controller = this;
+    let isOfflineClass = controller.get('isOfflineClass');
+    let classId = controller.get('class.id');
+    const performanceSummaryForDCAPromise = isOfflineClass
+      ? controller.get('analyticsService').getDCASummaryPerformance(classId)
+      : null;
+    return Ember.RSVP.hash({
+      performanceSummaryForDCA: performanceSummaryForDCAPromise
+    }).then(function(hash) {
+      const performanceSummaryForDCA = hash.performanceSummaryForDCA;
+      controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
     });
   }
 });
