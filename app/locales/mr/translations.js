@@ -2,11 +2,11 @@
 
 export default Object.assign(quizzesTranslations, {
   en: 'English',
-  sp: 'Español - preRelease',
-  ar: 'عربى - preRelease',
-  mr: 'मराठी - preRelease',
-  kn: 'ಕನ್ನಡ - preRelease',
-  hi: 'हिंदी - preRelease',
+  sp: 'Español',
+  ar: 'عربى',
+  mr: 'मराठी',
+  kn: 'ಕನ್ನಡ',
+  hi: 'हिंदी',
 
   errors: {
     description: 'हे फील्ड',
