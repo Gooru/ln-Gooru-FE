@@ -233,7 +233,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const basePath = serializer.get('session.cdnUrls.user');
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
     let normalizedUsersCompetencyPerformanceSummary = Ember.A([]);
-    let usersPerformanceSummaryList = (payload && payload.users) || Ember.A([]);
+    let usersPerformanceSummaryList =
+      (payload && (payload.users || payload.us)) || Ember.A([]);
     if (usersPerformanceSummaryList) {
       usersPerformanceSummaryList.map(userPerformanceSummary => {
         let userData = userPerformanceSummary.user || userPerformanceSummary.u;

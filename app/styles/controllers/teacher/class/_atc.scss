@@ -189,6 +189,9 @@
           letter-spacing: normal;
           color: #37424b;
           text-align: right;
+          &.unscheduled-count {
+            font-size: 40px;
+          }
         }
         .activities-info {
           font-size: 12px;

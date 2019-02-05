@@ -2,11 +2,12 @@ import quizzesTranslations from './quizzes/translations';
 
 export default Object.assign(quizzesTranslations, {
   en: 'English',
-  sp: 'Español - preRelease',
-  ar: 'عربى - preRelease',
-  mr: 'मराठी - preRelease',
-  kn: 'ಕನ್ನಡ - preRelease',
-  hi: 'हिंदी - preRelease',
+  sp: 'Español',
+  ar: 'عربى',
+  mr: 'मराठी',
+  kn: 'ಕನ್ನಡ',
+  hi: 'हिंदी',
+
   errors: {
     tooShort:
       '{{description}} es demasiado corta (el mínimo es {{min}} caracteres)',
