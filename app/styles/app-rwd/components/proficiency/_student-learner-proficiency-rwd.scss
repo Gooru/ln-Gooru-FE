@@ -7,11 +7,22 @@
     .inspect-competency {
       .competency-info-pull-up {
         &.open {
-          height: 125px;
+          height: 385px;
         }
 
         &.expand {
           height: 100%;
+        }
+
+        .body {
+          .competency-content-report {
+            .competency-performance {
+              .competency-name {
+                min-height: 230px;
+                align-items: center;
+              }
+            }
+          }
         }
       }
     }
