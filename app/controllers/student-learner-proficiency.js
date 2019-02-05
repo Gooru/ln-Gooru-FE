@@ -216,10 +216,7 @@ export default Ember.Controller.extend({
         'code',
         subjectCode
       );
-      let aggregatedTaxonomy = course.get('aggregatedTaxonomy');
-      let isShowMatrixChart = !!(
-        aggregatedTaxonomy && isSupportedTaxonomySubject
-      );
+      let isShowMatrixChart = !!isSupportedTaxonomySubject;
       component.set('isShowMatrixChart', isShowMatrixChart);
     }
   },
