@@ -709,6 +709,7 @@ export default Object.assign(quizzesTranslations, {
     'upload-file': 'फाइल अपलोड करें',
     'upload-thumbnail': 'थंबनेल अपलोड करें',
     'upload-photo': 'फोटो अपलोड करें',
+    until: 'Until',
     'remove-photo': 'तस्वीर हटाएं',
     'use-case': 'बड़े अक्षर का उपयोग करें',
     'valid-extensions': 'मान्य फ़ाइल एक्सटेंशन हैं: {{extension}}',
@@ -1303,7 +1304,7 @@ export default Object.assign(quizzesTranslations, {
       },
       'atc-view': {
         'domains-reviewed': 'समी़क्षा किये जाने वाले क्षेत्र',
-        'class-activities-conducted': 'कक्षा में आयोजित गतिविधियाँ',
+        'class-activities-completed': 'कक्षा में आयोजित गतिविधियाँ',
         'class-activities-pending':
           'कक्षा में आयोजित की जाने वाली आगामी  गतिविधियाँ',
         'show-all': 'सभी दिखाएं ',

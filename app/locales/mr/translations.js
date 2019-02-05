@@ -706,6 +706,7 @@ export default Object.assign(quizzesTranslations, {
     'upload-file': ' फाइल अपलोड करा',
     'upload-thumbnail': ' थंबनेल अपलोड करा',
     'upload-photo': 'फोटो अपलोड करा',
+    until: 'Until',
     'remove-photo': 'फोटो काढा',
     'use-case': 'केस वापरा',
     'valid-extensions': 'वैध फाइल एक्सटेन्शन्स हे आहेत: {{extensions}}',
@@ -1287,6 +1288,15 @@ export default Object.assign(quizzesTranslations, {
           'वर्गातील सर्व विद्यार्थ्यांनी आत्मसात केलेल्या क्षमतांचा आढावा',
         'error-message':
           'या वर्गामध्ये सलंग्न अभ्यासक्रम किंवा विद्यार्थी नाहीत. जेव्हा वर्गात अभ्यासक्रम तसेच त्यातील विद्यार्थी भरले जातील तेव्हा वर्गाचा क्षमता अहवाल येथे दाखवला जाईल.'
+      },
+      'atc-view': {
+        'domains-reviewed': 'समी़क्षा किये जाने वाले क्षेत्र',
+        'class-activities-completed': 'कक्षा में आयोजित गतिविधियाँ',
+        'class-activities-pending':
+          'कक्षा में आयोजित की जाने वाली आगामी  गतिविधियाँ',
+        'show-all': 'सभी दिखाएं ',
+        collapse: 'समेटें',
+        'total-competencies-gained': 'कुल हासिल दक्षताएँ'
       },
       'class-activities': 'दैनिक वर्ग कृती',
       'offline-class-report': {
