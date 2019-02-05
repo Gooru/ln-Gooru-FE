@@ -90,16 +90,14 @@
           .properties {
             grid-column-start: 2;
             display: grid;
-            grid-template-columns: 140px 95px 80px;
+            grid-template-columns: 140px 95px;
 
             .content-count {
               font-size: $font-navigator;
-              margin: 0 10px 0 0;
+              margin: auto;
               color: $light-400;
               display: flex;
               align-items: center;
-              display: grid;
-              grid-template-columns: 30px 24px 30px 30px;
 
               span {
                 vertical-align: middle;
@@ -151,6 +149,11 @@
               display: grid;
               grid-template-columns: 30px 100px;
               margin: auto;
+
+              .attempt {
+                display: grid;
+                margin: auto;
+              }
 
               .info {
                 font-size: 9px;
