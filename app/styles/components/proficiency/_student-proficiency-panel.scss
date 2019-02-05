@@ -19,14 +19,14 @@
 
       .proficiency-legends {
         margin: 15px auto auto;
-        width: max-content;
+        width: 100%;
         display: grid;
-        grid-template-columns: auto auto auto auto auto auto;
+        grid-template-columns: repeat(6, 1fr);
         justify-content: space-around;
 
         .legend {
           display: flex;
-          margin-right: 30px;
+          justify-content: center;
 
           .box {
             display: block;
