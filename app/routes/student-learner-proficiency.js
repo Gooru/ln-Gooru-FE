@@ -31,11 +31,6 @@ export default Ember.Route.extend({
   courseService: Ember.inject.service('api-sdk/course'),
 
   /**
-   * @type {PerformanceService} Service to retrieve class performance summary
-   */
-  performanceService: Ember.inject.service('api-sdk/performance'),
-
-  /**
    * taxonomy service dependency injection
    * @type {Object}
    */
@@ -47,47 +42,6 @@ export default Ember.Route.extend({
    */
   competencyService: Ember.inject.service('api-sdk/competency'),
 
-  actions: {
-    /**
-     * Triggered when a class menu item is selected
-     * @param {string} item
-     */
-    selectMenuItem: function(item) {
-      const route = this;
-      const controller = route.get('controller');
-      const currentItem = controller.get('menuItem');
-      const isPremiumClass = controller.get('isPremiumClass');
-      if (item !== currentItem) {
-        controller.selectMenuItem(item);
-        if (item === 'class-management') {
-          route.transitionTo('teacher.class.class-management');
-        } else if (item === 'students') {
-          route.transitionTo('teacher.class.students-proficiency');
-        } else if (item === 'course-map') {
-          route.transitionTo('teacher.class.course-map');
-        } else if (item === 'performance' && !isPremiumClass) {
-          route.transitionTo('teacher.class.performance');
-        } else if (item === 'class-activities') {
-          route.transitionTo('teacher.class.class-activities');
-        } else if (item === 'atc') {
-          route.transitionTo('teacher.class.atc');
-        } else if (item === 'close') {
-          let backurl = this.get('backUrls');
-          backurl = backurl || controller.get('backUrls');
-          if (backurl) {
-            route.transitionTo(backurl);
-          } else {
-            if (controller.class.isArchived) {
-              route.transitionTo('teacher-home'); //, (query - params showArchivedClasses = "true" showActiveClasses = "false") class="back-to" } }
-            } else {
-              route.transitionTo('teacher-home');
-            }
-          }
-        }
-      }
-    }
-  },
-
   model: function(params) {
     let route = this;
     route._super(...arguments);
@@ -95,45 +49,22 @@ export default Ember.Route.extend({
     const classId = params.classId;
     const courseId = params.courseId;
     const isTeacher = params.role === 'teacher';
-    const classPromise = route.get('classService').readClassInfo(classId);
-    return classPromise.then(function(classData) {
-      let classCourseId = null;
-      if (classData.courseId) {
-        classCourseId = Ember.A([
-          {
-            classId: params.classId,
-            courseId: classData.courseId
-          }
-        ]);
-      }
-      const performanceSummaryPromise = classCourseId
-        ? route
-          .get('performanceService')
-          .findClassPerformanceSummaryByClassIds(classCourseId)
-        : null;
-      return Ember.RSVP.hash({
-        class: classPromise,
-        classPerformanceSummaryItems: performanceSummaryPromise,
-        profilePromise: route.get('profileService').readUserProfile(studentId),
-        coursePromise: route.get('courseService').fetchById(courseId),
-        taxonomyCategories: route.get('taxonomyService').getCategories()
-      }).then(function(hash) {
-        const aClass = hash.class;
-        const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
-        let classPerformanceSummary = classPerformanceSummaryItems
-          ? classPerformanceSummaryItems.findBy('classId', classId)
-          : null;
-        aClass.set('performanceSummary', classPerformanceSummary);
-        const studentProfile = hash.profilePromise;
-        const taxonomyCategories = hash.taxonomyCategories;
-        const course = hash.coursePromise;
-        return Ember.Object.create({
-          profile: studentProfile,
-          categories: taxonomyCategories,
-          class: aClass,
-          course: course,
-          isTeacher: isTeacher
-        });
+    return Ember.RSVP.hash({
+      profilePromise: route.get('profileService').readUserProfile(studentId),
+      classPromise: route.get('classService').readClassInfo(classId),
+      coursePromise: route.get('courseService').fetchById(courseId),
+      taxonomyCategories: route.get('taxonomyService').getCategories()
+    }).then(function(hash) {
+      const studentProfile = hash.profilePromise;
+      const taxonomyCategories = hash.taxonomyCategories;
+      const aClass = hash.classPromise;
+      const course = hash.coursePromise;
+      return Ember.Object.create({
+        profile: studentProfile,
+        categories: taxonomyCategories,
+        class: aClass,
+        course: course,
+        isTeacher: isTeacher
       });
     });
   },
