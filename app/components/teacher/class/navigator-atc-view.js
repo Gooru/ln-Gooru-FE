@@ -283,15 +283,22 @@ export default Ember.Component.extend({
           .style('left', `${left}px`)
           .style('top', `${top}px`);
         let tooltipHtml = component.$('.tooltip-html-container').html();
-        tooltip.html(tooltipHtml);
-        tooltip.style('visibility', 'visible');
+        tooltip
+          .html(tooltipHtml)
+          .style('visibility', 'visible');
       })
       .on('mouseout', function() {
         tooltip.style('visibility', 'hidden');
       })
       .on('click', function(studentData) {
         component.set('studentData', studentData);
-        tooltip.style('visibility', 'visible');
+        setTimeout(function() {
+          let tooltipHtml = component.$('.tooltip-html-container').html();
+          tooltip
+            .html(tooltipHtml)
+            .style('visibility', 'visible');
+          component.set('studentData', null);
+        }, 1000);
       });
 
     studentNodes
