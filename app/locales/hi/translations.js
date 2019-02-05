@@ -1,4 +1,4 @@
-﻿import quizzesTranslations from './quizzes/translations';
+import quizzesTranslations from './quizzes/translations';
 
 export default Object.assign(quizzesTranslations, {
   en: 'English',
@@ -623,7 +623,8 @@ export default Object.assign(quizzesTranslations, {
     'select-all': 'सभी का चयन करे',
     'no-students': 'कोई छात्र नहीं',
     'add-data': 'डेटा जोड़ें',
-    everyone: 'हर कोई',
+    'update-data': 'आँकड़े जोड़ें',
+    all: 'सभी ',
     'unscheduled-items': 'अनिर्धारित सामग्री',
     'add-to-unschedule': 'के लिए अनिर्धारित सूची में जोड़ें',
     'save-next': 'सहेजें और अगला',
@@ -686,6 +687,7 @@ export default Object.assign(quizzesTranslations, {
     tools: 'टूल',
     true: 'सही',
     type: 'प्रकार',
+    title: 'शीर्षक',
     unBookmark: 'अनबुकमार्क करें',
     unexpectedError:
       'एक अनपेक्षित त्रुटि आई है और इसकी सूचना दी गई है। असुविधा के लिए हमें खेद है!',
@@ -707,6 +709,7 @@ export default Object.assign(quizzesTranslations, {
     'upload-file': 'फाइल अपलोड करें',
     'upload-thumbnail': 'थंबनेल अपलोड करें',
     'upload-photo': 'फोटो अपलोड करें',
+    until: 'Until',
     'remove-photo': 'तस्वीर हटाएं',
     'use-case': 'बड़े अक्षर का उपयोग करें',
     'valid-extensions': 'मान्य फ़ाइल एक्सटेंशन हैं: {{extension}}',
@@ -1243,6 +1246,7 @@ export default Object.assign(quizzesTranslations, {
       'back-to': 'कक्षाओं में वापस जाएं',
       'back-to-archived': 'संग्रहीत कक्षाओं में वापस जाएं',
       'class-management': 'कक्षा प्रबंधन',
+      atc: 'शीर्ष द़ृश्य',
       'class-management-tab': {
         actions: 'कार्रवाई',
         'assessment-min-score': 'ट्राफियों के लिए न्यूनतम स्कोर मूल्यांकन',
@@ -1298,6 +1302,15 @@ export default Object.assign(quizzesTranslations, {
         'error-message':
           'कक्षा में कोई पाठ्यक्रम निर्धारित नहीं है या छात्रों के पास कक्षा में अभी तक रोस्टेड नहीं है। एक बार पाठ्यक्रम कक्षा को सौंपा गया है और छात्रों को रोस्ट किया गया है, कक्षा की योग्यता रिपोर्ट यहां दिखाई जाएगी'
       },
+      'atc-view': {
+        'domains-reviewed': 'समी़क्षा किये जाने वाले क्षेत्र',
+        'class-activities-completed': 'कक्षा में आयोजित गतिविधियाँ',
+        'class-activities-pending':
+          'कक्षा में आयोजित की जाने वाली आगामी  गतिविधियाँ',
+        'show-all': 'सभी दिखाएं ',
+        collapse: 'समेटें',
+        'total-competencies-gained': 'कुल हासिल दक्षताएँ'
+      },
       'class-activities': 'कक्षा की दैनिक गतिविधियां',
       'back-to-class-activities': 'कक्षा की दैनिक गतिविधियों पर वापस जाएं',
       'class-activities-tab': {
@@ -1318,7 +1331,12 @@ export default Object.assign(quizzesTranslations, {
         'max-score': 'अधिकतम स्कोर',
         'assessment-score': 'मूल्यांकन स्कोर',
         'assessment-max-score': 'मूल्यांकन अधिकतम स्कोर',
-        'enter-valid-timespent': 'खर्च किए गए वैध समय में प्रवेश करें'
+        'enter-valid-timespent': 'बिताए गए वैध समय में प्रवेश करें',
+        'create-activity': 'गतिविधि का सृजन करें',
+        'schedule-activity': 'गतिविधि निर्धारण',
+        'add-subject-framework':
+          'कृपया कक्षा सेटिंग से विषय और रूपरेखा का चयन करें',
+        'create-external-collection': 'अतिरिक्त संकलन बनाएं'
       },
       'click-to-copy': 'कक्षा कोड कॉपी करने के लिए क्लिक करें',
       'course-map': 'पाठ्यक्रम मानचित्र',
@@ -2223,6 +2241,7 @@ export default Object.assign(quizzesTranslations, {
     subscript: 'सबस्क्रिप्ट',
     superscript: 'सुपरस्क्रिप्ट',
     underline: 'रेखांकित करना',
+    bullets: 'बुलेट्स',
     'expressions-panel': {
       tabs: {
         calculus: 'गणना',

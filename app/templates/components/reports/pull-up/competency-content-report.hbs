@@ -2,12 +2,6 @@
   <div class="competency-name">
     {{competency.competencyName}}
   </div>
-  {{#if showSignatureAssessment}}
-  <div class="competency-content">
-    <div class="competency-img"></div>
-    <div class="competency-note">{{t 'report.competency-report.note'}}</div>
-    </div>
-    {{/if}}
   {{#if isShowGlobalInfo}}
     {{#if learningMapData}}
       <div class="student-data toggle-view" {{action "onToggleCompetencyInfoView"}}>{{t 'report.competency-report.show-student-data'}}</div>
@@ -18,14 +12,14 @@
       {{three-bounce-spinner}}
     {{/if}}
   {{else}}
-    {{#if isStudent}}
-      <div class="signature-content">
-        {{reports.pull-up.signature-content-report domainCompetencyList=domainCompetencyList collectionPerformances=collectionPerformances showSignatureAssessment=showSignatureAssessment competency=competency}}
-      </div>
-    {{/if}}
     {{#unless isStudent}}
       <div class="global-data toggle-view" {{action "onToggleCompetencyInfoView"}}>{{t 'report.competency-report.show-learning-map'}}</div>
     {{/unless}}
+    {{#if competency}}
+      <div class="signature-content">
+        {{reports.pull-up.signature-content-report domainCompetencyList=domainCompetencyList collectionPerformances=collectionPerformances showSignatureAssessment=showSignatureAssessment competency=competency isStudent=isStudent}}
+      </div>
+    {{/if}}
   {{/if}}
 </div>
 

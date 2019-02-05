@@ -2,11 +2,12 @@ import quizzesTranslations from './quizzes/translations';
 
 export default Object.assign(quizzesTranslations, {
   en: 'English',
-  sp: 'Español - preRelease',
-  ar: 'عربى - preRelease',
-  mr: 'मराठी - preRelease',
-  kn: 'ಕನ್ನಡ - preRelease',
-  hi: 'हिंदी - preRelease',
+  sp: 'Español',
+  ar: 'عربى',
+  mr: 'मराठी',
+  kn: 'ಕನ್ನಡ',
+  hi: 'हिंदी',
+
   errors: {
     description: 'This field',
     inclusion: '{{description}} is not included in the list',
@@ -710,6 +711,7 @@ export default Object.assign(quizzesTranslations, {
     'upload-file': 'Upload File',
     'upload-thumbnail': 'Upload Thumbnail',
     'upload-photo': 'Upload Photo',
+    until: 'Until',
     'remove-photo': 'Remove Photo',
     'use-case': 'Use Case',
     'valid-extensions': 'Valid file extensions are: {{extensions}}',
@@ -1309,8 +1311,8 @@ export default Object.assign(quizzesTranslations, {
       },
       'atc-view': {
         'domains-reviewed': 'Domains to be reviewed',
-        'class-activities-conducted': 'Class Activities Conducted',
-        'class-activities-pending': 'Class Activities Yet To Be Done',
+        'class-activities-completed': 'Class Activities Completed',
+        'class-activities-pending': 'Class Activities Pending',
         'show-all': 'Show All',
         collapse: 'Collapse',
         'total-competencies-gained': 'Total Competencies Gained'

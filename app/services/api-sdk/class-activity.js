@@ -411,12 +411,14 @@ export default Ember.Service.extend({
     const service = this;
     const classActivityAdapter = service.get('classActivityAdapter');
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      classActivityAdapter.getMonthlyActivitiesCount(classId, month, year).then(function(activitiesCount) {
-        resolve(activitiesCount);
-      },
-      function(error) {
-        reject(error);
-      });
+      classActivityAdapter.getMonthlyActivitiesCount(classId, month, year).then(
+        function(activitiesCount) {
+          resolve(activitiesCount);
+        },
+        function(error) {
+          reject(error);
+        }
+      );
     });
   }
 });

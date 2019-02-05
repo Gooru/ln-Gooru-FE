@@ -91,10 +91,13 @@ Router.map(function() {
   });
 
   this.route('study-player-external');
+
   this.route('study-player', {
     path: '/study-player/course/:courseId'
   });
+
   this.route('student-locate');
+
   this.route('resource-player', {
     path: '/study-player/course/:courseId/resource/:resourceId'
   });
@@ -105,6 +108,10 @@ Router.map(function() {
   });
 
   this.route('classes');
+
+  this.route('student-learner-proficiency', {
+    path: '/student-learner-proficiency/:userId'
+  });
 
   this.route(
     'class',
@@ -180,9 +187,7 @@ Router.map(function() {
         this.route('course-map');
         this.route('class-activities');
         this.route('performance');
-        this.route('setup-in-complete');
-        this.route('proficiency');
-        this.route('diagnosis-of-knowledge');
+        this.route('profile');
       }
     );
     this.route(
@@ -218,6 +223,7 @@ Router.map(function() {
         this.route('students-proficiency');
         this.route('add-course');
         this.route('atc');
+        this.route('proficiency');
       }
     );
   });
@@ -253,35 +259,43 @@ Router.map(function() {
     path: '/integration/:appType'
   });
   this.route('player-external');
-  this.route('not-found', { path: '/not-found/:entity' });
-  this.route('preference');
-  this.route('profile', { path: '/:userId' }, function() {
-    this.route('about');
-    this.route('edit');
-    this.route('activity');
-    this.route('analytics');
-    this.route('preference');
-
-    this.route('content', function() {
-      this.route('courses');
-      this.route('resources');
-      this.route('questions');
-      this.route('collections');
-      this.route('assessments');
-      this.route('rubrics');
-    });
-
-    this.route('network', function() {
-      this.route('following');
-      this.route('followers');
-    });
-
-    this.route('proficiency');
+  this.route('not-found', {
+    path: '/not-found/:entity'
   });
+  this.route(
+    'profile',
+    {
+      path: '/:userId'
+    },
+    function() {
+      this.route('about');
+      this.route('edit');
+      this.route('activity');
+      this.route('analytics');
+      this.route('preference');
+
+      this.route('content', function() {
+        this.route('courses');
+        this.route('resources');
+        this.route('questions');
+        this.route('collections');
+        this.route('assessments');
+        this.route('rubrics');
+      });
+
+      this.route('network', function() {
+        this.route('following');
+        this.route('followers');
+      });
+
+      this.route('proficiency');
+    }
+  );
   /**
    * IMPORTANT! the profile route should be the last one at this file, so we can handle the app urls
    * and the vanity urls for profiles like www.gooru.org/javier-perez
    */
+  this.route('preference');
 });
 
 export default Router;

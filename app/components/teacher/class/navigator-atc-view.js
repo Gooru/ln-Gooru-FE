@@ -1,11 +1,8 @@
 import Ember from 'ember';
 import d3 from 'd3';
-import {
-  getGradeColor
-} from 'gooru-web/utils/utils';
+import { getGradeColor, isMobileVW } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['navigator-atc-view'],
@@ -59,6 +56,17 @@ export default Ember.Component.extend({
    */
   subjectCode: Ember.computed.alias('course.subject'),
 
+  /**
+   * @property {Date} firstDayOfMonth
+   */
+  firstDayOfMonth: Ember.computed('month', 'year', function() {
+    const component = this;
+    let month = component.get('month');
+    let year = component.get('year');
+    let date = `${year}-${month}-01`;
+    return moment(date).format('YYYY-MM-DD');
+  }),
+
   // -------------------------------------------------------------------------
   // Functions
 
@@ -70,7 +78,9 @@ export default Ember.Component.extend({
     const component = this;
     component.fetchClassAtcPerforamnceSummary().then(function(atcPerformance) {
       let students = component.get('students');
-      component.drawAtcChart(component.parseClassAtcPerformanceSummary(students, atcPerformance));
+      component.drawAtcChart(
+        component.parseClassAtcPerformanceSummary(students, atcPerformance)
+      );
     });
   },
 
@@ -93,17 +103,45 @@ export default Ember.Component.extend({
           percentScore: 0,
           completedCompetencies: 0
         });
-        let studentPerformanceSummary = performanceSummary.findBy('userId', student.id);
+        let studentPerformanceSummary = performanceSummary.findBy(
+          'userId',
+          student.id
+        );
         if (studentPerformanceSummary) {
-          togalMasteredCompetencies += studentPerformanceSummary.completedCompetencies;
-          let notStartedCompetencies = studentPerformanceSummary.totalCompetencies - (studentPerformanceSummary.completedCompetencies + studentPerformanceSummary.inprogressCompetencies);
-          studentPerformanceData.set('totalCompetencies', studentPerformanceSummary.totalCompetencies);
-          studentPerformanceData.set('completedCompetencies', studentPerformanceSummary.completedCompetencies);
-          studentPerformanceData.set('inprogressCompetencies', studentPerformanceSummary.inprogressCompetencies);
-          studentPerformanceData.set('notStartedCompetencies', notStartedCompetencies);
-          studentPerformanceData.set('percentCompletion', studentPerformanceSummary.percentCompletion);
-          studentPerformanceData.set('percentScore', studentPerformanceSummary.percentScore);
-          studentPerformanceData.set('gradeId', studentPerformanceSummary.gradeId);
+          togalMasteredCompetencies +=
+            studentPerformanceSummary.completedCompetencies;
+          let notStartedCompetencies =
+            studentPerformanceSummary.totalCompetencies -
+            (studentPerformanceSummary.completedCompetencies +
+              studentPerformanceSummary.inprogressCompetencies);
+          studentPerformanceData.set(
+            'totalCompetencies',
+            studentPerformanceSummary.totalCompetencies
+          );
+          studentPerformanceData.set(
+            'completedCompetencies',
+            studentPerformanceSummary.completedCompetencies
+          );
+          studentPerformanceData.set(
+            'inprogressCompetencies',
+            studentPerformanceSummary.inprogressCompetencies
+          );
+          studentPerformanceData.set(
+            'notStartedCompetencies',
+            notStartedCompetencies
+          );
+          studentPerformanceData.set(
+            'percentCompletion',
+            studentPerformanceSummary.percentCompletion
+          );
+          studentPerformanceData.set(
+            'percentScore',
+            studentPerformanceSummary.percentScore
+          );
+          studentPerformanceData.set(
+            'gradeId',
+            studentPerformanceSummary.gradeId || '--'
+          );
           parsedPerformanceSummary.push(studentPerformanceData);
         }
       });
@@ -143,46 +181,57 @@ export default Ember.Component.extend({
   drawAtcChart(dataset) {
     const component = this;
     component.$('svg').remove();
-    var margin = {top: 50, right: 20, bottom: 30, left: 50},
+    var margin = { top: 50, right: 20, bottom: 30, left: 50 },
       width = 830 - margin.left - margin.right,
       height = 450 - margin.top - margin.bottom;
 
-    var xScale = d3.scale.linear()
-      .domain([0, d3.max(dataset, function(d){ return d.totalCompetencies; })])
+    var xScale = d3.scale
+      .linear()
+      .domain([
+        0,
+        d3.max(dataset, function(d) {
+          return d.totalCompetencies;
+        })
+      ])
       .range([0, width]);
 
-    var yScale = d3.scale.linear()
+    var yScale = d3.scale
+      .linear()
       .domain([0, 100])
       .range([height, 0]);
 
-    var xAxis = d3.svg.axis()
+    var xAxis = d3.svg
+      .axis()
       .scale(xScale)
       .orient('bottom');
 
-
-    var yAxis = d3.svg.axis()
+    var yAxis = d3.svg
+      .axis()
       .scale(yScale)
       .orient('left')
       .innerTickSize(-width)
       .outerTickSize(0)
       .tickPadding(10);
 
-    var svg = d3.select(component.element).append('svg')
+    var svg = d3
+      .select(component.element)
+      .append('svg')
       .attr('class', 'navigator-atc-chart')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
       .append('g')
-      .attr('transform', `translate(${  margin.left  },${  margin.top  })`);
+      .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    svg.append('g')
+    svg
+      .append('g')
       .attr('class', 'x axis')
-      .attr('transform', `translate(0,${  height  })`)
+      .attr('transform', `translate(0,${height})`)
       .call(xAxis);
 
-    svg.append('g')
+    svg
+      .append('g')
       .attr('class', 'y axis')
       .call(yAxis);
-
 
     svg
       .append('g')
@@ -202,42 +251,47 @@ export default Ember.Component.extend({
       .attr('y', '415')
       .text('competencies');
 
-    var tooltip = d3
+    let tooltipInterval = null;
+    let tooltip = d3
       .select('body')
       .append('div')
-      .attr('class', 'navigator-atc-tooltip')
-      .on('mouseover', function() {
-        return tooltip.style('visibility', 'visible');
-      })
-      .on('mouseout', function() {
-        return tooltip.style('visibility', 'hidden');
+      .attr('class', 'navigator-atc-tooltip');
+    if (!isMobileVW()) {
+      tooltip.on('mouseover', function() {
+        Ember.$('.navigator-atc-tooltip').addClass('active');
       });
+    }
 
-    var studentNodes = svg
+    tooltip.on('mouseout', function() {
+      Ember.$('.navigator-atc-tooltip').removeClass('active');
+      Ember.run.cancel(tooltipInterval);
+    });
+
+    let studentNodes = svg
       .selectAll('.student-nodes')
       .data(dataset)
       .enter()
       .append('g')
       .attr('transform', function(d) {
-        return `translate(${xScale(d.completedCompetencies) + 12}, ${yScale(
-          d.percentScore
-        ) - 20})`;
+        return `translate(${xScale(d.completedCompetencies) +
+          12}, ${yScale(d.percentScore) - 20})`;
       })
       .attr('class', 'node-point')
       .on('mouseover', function(studentData) {
-        component.set('studentData', studentData);
-        let clientY = d3.event.clientY;
-        let top = clientY > 420 ? clientY - 240 : clientY;
-        tooltip
-          .style('visibility', 'hidden')
-          .style('left', `${d3.event.clientX}px`)
-          .style('top', `${top}px`);
-        let tooltipHtml = component.$('.tooltip-html-container').html();
-        tooltip.html(tooltipHtml);
-        return tooltip.style('visibility', 'visible');
+        tooltipInterval = component.studentProficiencyInfoTooltip(
+          studentData,
+          d3.event
+        );
       })
       .on('mouseout', function() {
-        return tooltip.style('visibility', 'hidden');
+        Ember.$('.navigator-atc-tooltip').removeClass('active');
+        Ember.run.cancel(tooltipInterval);
+      })
+      .on('click', function(studentData) {
+        tooltipInterval = component.studentProficiencyInfoTooltip(
+          studentData,
+          d3.event
+        );
       });
 
     studentNodes
@@ -262,7 +316,6 @@ export default Ember.Component.extend({
         height: 24
       });
     component.cleanUpChart();
-
   },
 
   /**
@@ -279,5 +332,28 @@ export default Ember.Component.extend({
         curAxisText.text(`${curAxisText.text()}%`);
       });
     });
+  },
+
+  /**
+   * @function studentProficiencyInfoTooltip
+   * Method to show student info tooltip
+   */
+  studentProficiencyInfoTooltip(studentData, eventPos) {
+    let component = this;
+    component.set('studentData', studentData);
+    let tooltip = Ember.$('.navigator-atc-tooltip');
+    return Ember.run.later(function() {
+      let clientY = eventPos.clientY;
+      let clientX = eventPos.clientX;
+      let top = clientY > 420 ? clientY - 210 : clientY;
+      let left = clientX > 600 ? clientX - 225 : clientX;
+      tooltip.css({
+        left: `${left}px`,
+        top: `${top}px`
+      });
+      let tooltipHtml = component.$('.tooltip-html-container').html();
+      tooltip.html(tooltipHtml);
+      Ember.$('.navigator-atc-tooltip').addClass('active');
+    }, 500);
   }
 });

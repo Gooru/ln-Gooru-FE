@@ -105,14 +105,33 @@ export default Ember.Component.extend({
     return showSignatureAssessment ? 'assessment' : 'collection';
   }),
 
+  onCompetencyChange: Ember.observer('competency', function() {
+    let component = this;
+    component.fetchLearningMapsContent();
+    component.fetchCodes();
+  }),
+
   /**
    * @property {String} source value when playing a collection/assessment
    */
   source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
 
+  /**
+   * competency  change will call the function
+   */
+  onChangeCompetency: Ember.observer('competency', function() {
+    let component = this;
+    component.loadData();
+  }),
+
   init() {
     let component = this;
     component._super(...arguments);
+    component.loadData();
+  },
+
+  loadData() {
+    let component = this;
     component.fetchLearningMapsContent();
     component.fetchCodes();
   },
@@ -180,7 +199,6 @@ export default Ember.Component.extend({
    * @function checkPrerequisiteCompetencyStatus
    * Method to checkPrerequisiteCompetencyStatus
    */
-
   checkPrerequisiteCompetencyStatus(prerequisites) {
     let component = this;
     let domainCompetencyList = component.get(

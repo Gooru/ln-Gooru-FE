@@ -388,3 +388,5 @@ export const CLASS_SKYLINE_INITIAL_DESTINATION = {
   ILPInProgress: 'ilp-in-progress',
   classSetupInComplete: 'class-setup-incomplete'
 };
+
+export const MOBILE_VW = 992;

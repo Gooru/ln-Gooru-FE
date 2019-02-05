@@ -1,4 +1,36 @@
 .controller.teacher.class.atc {
+  .month-picker {
+    width: 89%;
+    margin: auto;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+    .ca-date-picker-container {
+      box-shadow: none;
+      .ca-date-nav-container {
+        background-color: $white;
+        margin: auto;
+        margin-bottom: 10px;
+        box-shadow: none;
+        grid-template-columns: 50px auto 50px;
+        justify-content: center;
+        .ca-date-picker-toggle {
+          pointer-events: none;
+          i {
+            display: none;
+          }
+        }
+      }
+    }
+    &.current-month {
+      .ca-date-picker-container {
+        .ca-date-nav-container {
+          .next-cal-arrow {
+            pointer-events: none;
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+  }
   .data-view-container {
     display: grid;
     grid-template-columns: auto 304px;
@@ -7,32 +39,6 @@
     .chart-container {
       justify-self: center;
       width: 100%;
-      .month-picker {
-        .ca-date-picker-container {
-          box-shadow: none;
-          .ca-date-nav-container {
-            background-color: $white;
-            margin: auto;
-            margin-bottom: 10px;
-            box-shadow: none;
-            .ca-date-picker-toggle {
-              pointer-events: none;
-              i {
-                display: none;
-              }
-            }
-          }
-        }
-        &.current-month {
-          .ca-date-picker-container {
-            .ca-date-nav-container {
-              .next-cal-arrow {
-                display: none;
-              }
-            }
-          }
-        }
-      }
 
       .chart-area {
         background-color: #202e32;
@@ -48,6 +54,9 @@
           font-size: 25px;
           font-weight: bold;
           color: $white;
+          .until-month {
+            font-size: 12px;
+          }
         }
         .total-competencies {
           .competency-count {
@@ -66,7 +75,6 @@
     }
     .data-analysis-cards-container {
       width: 304px;
-      margin-top: 46px;
       .domains-card-container {
         background-color: $white;
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
@@ -83,23 +91,25 @@
           text-transform: uppercase;
         }
         .domains-completion-container {
-          height: 98px;
+          height: 355px;
           overflow-y: hidden;
           transition: height 0.2s ease-in;
+          overflow-y: auto;
+
+          &::-webkit-scrollbar {
+            height: 6px;
+            width: 4px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: $gray-light;
+            border: 1px solid $gray-light;
+            border-radius: 5px;
+          }
 
           &.expanded-view {
             height: 294px;
             overflow-y: auto;
-            &::-webkit-scrollbar {
-              height: 6px;
-              width: 4px;
-            }
-
-            &::-webkit-scrollbar-thumb {
-              background: $gray-light;
-              border: 1px solid $gray-light;
-              border-radius: 5px;
-            }
           }
           .domain-completion-report {
             display: grid;
@@ -169,6 +179,7 @@
         align-items: center;
         justify-content: space-around;
         margin: 15px 0;
+        cursor: pointer;
         .activity-count {
           font-size: 50px;
           font-weight: 300;
@@ -178,6 +189,9 @@
           letter-spacing: normal;
           color: #37424b;
           text-align: right;
+          &.unscheduled-count {
+            font-size: 40px;
+          }
         }
         .activities-info {
           font-size: 12px;
@@ -191,6 +205,14 @@
           grid-template-columns: auto auto;
           justify-content: left;
           align-items: center;
+          i.pin-icon {
+            background-image: url("gooru/pin.svg");
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+            background-size: 20px 20px;
+            display: block;
+          }
         }
       }
     }
@@ -198,9 +220,8 @@
     &.regular-class {
       grid-template-columns: auto;
       .atc-chart {
-        width: max-content;
         position: relative;
-        background-color: $white;
+        background-color: #202e32;
         border-radius: 4px;
         margin: auto;
         .reset {
@@ -268,6 +289,14 @@
       }
     }
 
+    @media screen and (max-width: 320px) {
+      .chart-container {
+        .chart-area {
+          zoom: 0.35;
+        }
+      }
+    }
+
     @media screen and (min-width: 568px) and (max-width: 736px) and (orientation: landscape) {
       .chart-container {
         .chart-area {
@@ -275,5 +304,15 @@
         }
       }
     }
+  }
+  .data-not-available {
+    text-align: center;
+    margin: 30px 0;
+  }
+
+  .loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
   }
 }

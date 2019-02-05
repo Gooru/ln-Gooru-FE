@@ -63,35 +63,55 @@ export default Ember.Component.extend({
       component.set('selectedAudiences', selectedAudiences);
     },
 
-
     //Action triggered when create activity
     onCreateActivity() {
       const component = this;
       let requestBody = component.getDataParams();
-      component.get('collectionService').createExternalCollection(requestBody).then(function(externalCollection) {
-        let contentId = externalCollection.id;
-        let classId = component.get('classId');
-        let activityDate = component.get('activityDate');
-        let scheduledMonth = activityDate ? null : component.get('unscheduledMonth.monthNumber');
-        let scheduledYear = activityDate ? null : component.get('unscheduledMonth.monthYear');
-        component.addActivity(classId, contentId, activityDate, scheduledMonth, scheduledYear).then(function(activityId) {
-          let contentType = 'collection-external';
-          externalCollection.set('collectionType', contentType);
-          externalCollection.set('format', contentType);
-          let activityData = Ember.Object.create({
-            collection: Ember.Object.create(externalCollection),
-            id: activityId,
-            added_date: activityDate,
-            activityDate: activityDate,
-            usersCount: -1,
-            isActive: false,
-            forMonth: parseInt(scheduledMonth),
-            forYear: parseInt(scheduledYear)
-          });
-          component.sendAction('onAddExternalCollectionToDCA', activityData, activityDate, scheduledMonth, scheduledYear);
-          component.closePullUp();
+      component
+        .get('collectionService')
+        .createExternalCollection(requestBody)
+        .then(function(externalCollection) {
+          let contentId = externalCollection.id;
+          let classId = component.get('classId');
+          let activityDate = component.get('activityDate');
+          let scheduledMonth = activityDate
+            ? null
+            : component.get('unscheduledMonth.monthNumber');
+          let scheduledYear = activityDate
+            ? null
+            : component.get('unscheduledMonth.monthYear');
+          component
+            .addActivity(
+              classId,
+              contentId,
+              activityDate,
+              scheduledMonth,
+              scheduledYear
+            )
+            .then(function(activityId) {
+              let contentType = 'collection-external';
+              externalCollection.set('collectionType', contentType);
+              externalCollection.set('format', contentType);
+              let activityData = Ember.Object.create({
+                collection: Ember.Object.create(externalCollection),
+                id: activityId,
+                added_date: activityDate,
+                activityDate: activityDate,
+                usersCount: -1,
+                isActive: false,
+                forMonth: parseInt(scheduledMonth),
+                forYear: parseInt(scheduledYear)
+              });
+              component.sendAction(
+                'onAddExternalCollectionToDCA',
+                activityData,
+                activityDate,
+                scheduledMonth,
+                scheduledYear
+              );
+              component.closePullUp();
+            });
         });
-      });
     },
 
     //Action triggered when toggle taxonomy picker
@@ -142,7 +162,6 @@ export default Ember.Component.extend({
       component.get('selectedCompetencies').removeObject(tag.get('data'));
       component.get('visibleTaxonomyTags').removeObject(tag);
     }
-
   },
 
   // -------------------------------------------------------------------------
@@ -168,7 +187,9 @@ export default Ember.Component.extend({
   isClassPreferenceMapped: Ember.computed('classPreference', function() {
     let component = this;
     let classPreference = component.get('classPreference');
-    return classPreference ? classPreference.subject && classPreference.framework : false;
+    return classPreference
+      ? classPreference.subject && classPreference.framework
+      : false;
   }),
 
   /**
@@ -295,12 +316,19 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isEnableCreateActivity
    */
-  isEnableCreateActivity: Ember.computed('isClassPreferenceMapped', 'activityTitle', function() {
-    const component = this;
-    let isClassPreferenceMapped = component.get('isClassPreferenceMapped');
-    let activityTitle = component.get('activityTitle');
-    return isClassPreferenceMapped && (activityTitle !== null && activityTitle.trim() !== '');
-  }),
+  isEnableCreateActivity: Ember.computed(
+    'isClassPreferenceMapped',
+    'activityTitle',
+    function() {
+      const component = this;
+      let isClassPreferenceMapped = component.get('isClassPreferenceMapped');
+      let activityTitle = component.get('activityTitle');
+      return (
+        isClassPreferenceMapped &&
+        (activityTitle !== null && activityTitle.trim() !== '')
+      );
+    }
+  ),
 
   /**
    * @property {String} course
@@ -350,7 +378,8 @@ export default Ember.Component.extend({
     });
     return {
       title: title.trim(),
-      description: description && description.length ? description.trim() : null,
+      description:
+        description && description.length ? description.trim() : null,
       audience: audienceIds,
       taxonomy
     };
@@ -397,10 +426,9 @@ export default Ember.Component.extend({
     const lookupService = component.get('lookupService');
     return Ember.RSVP.hash({
       audiences: Ember.RSVP.resolve(lookupService.readAudiences())
-    })
-      .then(({audiences}) => {
-        component.set('audiences', audiences);
-      });
+    }).then(({ audiences }) => {
+      component.set('audiences', audiences);
+    });
   },
 
   /**
@@ -410,7 +438,9 @@ export default Ember.Component.extend({
   createExternalCollection(collectionData) {
     const component = this;
     const collectionService = component.get('collectionService');
-    return Ember.RSVP.resolve(collectionService.createExternalCollection(collectionData));
+    return Ember.RSVP.resolve(
+      collectionService.createExternalCollection(collectionData)
+    );
   },
 
   /**
@@ -420,7 +450,16 @@ export default Ember.Component.extend({
   addActivity(classId, contentId, date, scheduledMonth, scheduledYear) {
     const component = this;
     const classActivityService = component.get('classActivityService');
-    return Ember.RSVP.resolve(classActivityService.addActivityToClass(classId, contentId, 'collection-external', date, scheduledMonth, scheduledYear));
+    return Ember.RSVP.resolve(
+      classActivityService.addActivityToClass(
+        classId,
+        contentId,
+        'collection-external',
+        date,
+        scheduledMonth,
+        scheduledYear
+      )
+    );
   },
 
   /**
