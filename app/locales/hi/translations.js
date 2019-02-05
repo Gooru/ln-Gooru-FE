@@ -623,7 +623,7 @@ export default Object.assign(quizzesTranslations, {
     'select-all': 'सभी का चयन करे',
     'no-students': 'कोई छात्र नहीं',
     'add-data': 'डेटा जोड़ें',
-    'update-data': 'आँकड़े अपडेट करें',
+    'update-data': 'आँकड़े जोड़ें',
     all: 'सभी ',
     'unscheduled-items': 'अनिर्धारित सामग्री',
     'add-to-unschedule': 'के लिए अनिर्धारित सूची में जोड़ें',
@@ -687,6 +687,7 @@ export default Object.assign(quizzesTranslations, {
     tools: 'टूल',
     true: 'सही',
     type: 'प्रकार',
+    title: 'शीर्षक',
     unBookmark: 'अनबुकमार्क करें',
     unexpectedError:
       'एक अनपेक्षित त्रुटि आई है और इसकी सूचना दी गई है। असुविधा के लिए हमें खेद है!',

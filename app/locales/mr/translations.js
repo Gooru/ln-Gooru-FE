@@ -620,7 +620,7 @@ export default Object.assign(quizzesTranslations, {
     none: 'काहीही नाही',
     'no-students': 'काहीही नाही',
     'add-data': 'माहिती भरा',
-    'update-data': 'माहिती Update करा',
+    'update-data': 'Update करा',
     all: 'सर्व',
     everyone: 'सर्व विद्यार्थी',
     'unscheduled-items': 'अनियोजित',
@@ -684,6 +684,7 @@ export default Object.assign(quizzesTranslations, {
     tools: 'औजारे',
     true: 'खरे',
     type: 'प्रकार',
+    title: 'शीर्षक',
     unBookmark: 'बुकमार्क काढा',
     unexpectedError:
       'एक अनपेक्षित त्रुटी आली आणि रिपोर्ट करण्यात आली आहे. असुविधेसाठी आम्ही दिलगीर आहोत!',
@@ -2228,6 +2229,7 @@ export default Object.assign(quizzesTranslations, {
     subscript: 'सबस्क्रिप्ट',
     superscript: 'सुपरस्क्रिप्ट',
     underline: 'अधोरेखित करा',
+    bullets: 'बुलेट्स',
     'expressions-panel': {
       tabs: {
         calculus: 'गणित',
