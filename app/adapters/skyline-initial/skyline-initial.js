@@ -11,7 +11,7 @@ export default Ember.Object.extend({
   namespace: '/api/skyline-initial',
 
   /**
-   * Get state of skyline initialization
+   * Fetch state of skyline initialization
    * @returns {Promise.<[]>}
    */
   fetchState(classId) {
@@ -22,13 +22,31 @@ export default Ember.Object.extend({
       type: 'POST',
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({ classId })
+      data: JSON.stringify({
+        classId
+      })
     };
-    return Ember.RSVP.hashSettled({
-      state: Ember.$.ajax(url, options)
-    }).then(function(hash) {
-      return hash.state.value;
-    });
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * calculate skyline
+   * @returns {Promise.<[]>}
+   */
+  calculateSkyline(classId, userIds) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/v1/calculate`;
+    const options = {
+      type: 'POST',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({
+        classId,
+        users: userIds
+      })
+    };
+    return Ember.$.ajax(url, options);
   },
 
   defineHeaders() {

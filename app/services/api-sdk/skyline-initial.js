@@ -41,5 +41,21 @@ export default Ember.Service.extend({
           );
         }, reject);
     });
+  },
+
+  /**
+   * calculate skyline
+   * @returns {Promise.<[]>}
+   */
+  calculateSkyline: function(classId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('skylineAdapter')
+        .fetchState(classId)
+        .then(function() {
+          resolve();
+        }, reject);
+    });
   }
 });
