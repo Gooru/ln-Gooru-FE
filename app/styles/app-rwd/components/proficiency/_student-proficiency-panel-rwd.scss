@@ -1,5 +1,11 @@
 .student-proficiency-panel {
   @media only screen and (max-width: $screen-sm - 1) {
+    .panel-header {
+      grid-gap: 0;
+      padding: 10px 0 0;
+      margin: 0;
+    }
+
     .proficiency-tags,
     .time-series-container {
       display: none;
