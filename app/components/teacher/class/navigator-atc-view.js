@@ -258,7 +258,7 @@ export default Ember.Component.extend({
       .attr('class', 'navigator-atc-tooltip');
     let tooltipContainer = Ember.$('.navigator-atc-tooltip');
 
-    let studentNodes = svg
+    let studentNode = svg
       .selectAll('.student-nodes')
       .data(dataset)
       .enter()
@@ -268,42 +268,44 @@ export default Ember.Component.extend({
           12}, ${yScale(d.percentScore) - 20})`;
       })
       .attr('class', 'node-point');
-    studentNodes
-      .on('mouseover', function(studentData) {
-        let clientY = d3.event.clientY;
-        let clientX = d3.event.clientX;
-        let top = clientY > 420 ? clientY - 210 : clientY;
-        let left = clientX > 600 ? clientX - 225 : clientX;
-        let tooltipPos = {
-          top: `${top}px`,
-          left: `${left}px`
-        };
-        tooltipInterval = component.studentProficiencyInfoTooltip(studentData, tooltipPos);
-      })
+
+    studentNode
       .on('mouseout', function() {
-        tooltipContainer.removeClass('active mobile-tooltip');
+        tooltipContainer.removeClass('active');
         Ember.run.cancel(tooltipInterval);
       });
 
     tooltip.on('mouseout', function() {
-      tooltipContainer.removeClass('active mobile-tooltip');
+      tooltipContainer.removeClass('active');
       Ember.run.cancel(tooltipInterval);
     });
 
     if (!isMobileVW()) {
+      studentNode
+        .on('mouseover', function(studentData) {
+          let clientY = d3.event.clientY;
+          let clientX = d3.event.clientX;
+          let top = clientY > 420 ? clientY - 210 : clientY;
+          let left = clientX > 600 ? clientX - 225 : clientX;
+          let tooltipPos = {
+            top: `${top}px`,
+            left: `${left}px`
+          };
+          tooltipInterval = component.studentProficiencyInfoTooltip(studentData, tooltipPos);
+        });
       tooltip
         .on('mouseover', function() {
           tooltipContainer.addClass('active');
         });
     } else {
-      studentNodes
+      studentNode
         .on('click', function(studentData) {
           tooltipInterval = component.studentProficiencyInfoTooltip(studentData);
-          tooltipContainer.addClass('mobile-tooltip');
+          tooltipContainer.addClass('active');
         });
     }
 
-    studentNodes
+    studentNode
       .append('circle')
       .attr('cx', 5)
       .attr('cy', 5)
@@ -312,7 +314,7 @@ export default Ember.Component.extend({
         return getGradeColor(d.percentScore);
       });
 
-    studentNodes
+    studentNode
       .append('svg:image')
       .attr('class', 'student-profile')
       .attr('x', -7)
