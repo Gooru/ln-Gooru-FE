@@ -24,6 +24,8 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
 
   classNames: ['gru-header', 'navbar-fixed-top'],
 
+  device_language_key: 'deviceLanguage',
+
   /**
    * Controls display of notification list, typical use from header is to hide it as required.
    */
@@ -74,20 +76,8 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     },
 
     setLocale(selVal) {
-      this.set('i18n.locale', selVal);
-      if (selVal === 'ar') {
-        const rootElement = Ember.$(Env.rootElement);
-        rootElement.addClass('changeDir');
-        rootElement.removeClass('changeDirDefault');
-        //this.get('themeChanger').set('theme', 'goorurtl');
-        Env.APP.isRTL = true;
-      } else {
-        const rootElement = Ember.$(Env.rootElement);
-        rootElement.removeClass('changeDir');
-        rootElement.addClass('changeDirDefault');
-        //this.get('themeChanger').set('theme', 'goorultr');
-        Env.APP.isRTL = false;
-      }
+      this.setLocale(selVal);
+      this.getLocalStorage().setItem(this.device_language_key, selVal);
     },
 
     searchTerm: function() {
@@ -164,8 +154,17 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
         }
       }.bind(this)
     );
-  },
 
+    let whichLocalSet = this.getLocalStorage().getItem(
+      this.device_language_key
+    );
+    if (whichLocalSet) {
+      this.send('setLocale', whichLocalSet);
+    }
+  },
+  getLocalStorage: function() {
+    return window.localStorage;
+  },
   /**
    * willDestroyElement event
    */
@@ -175,6 +174,22 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     this.set('isTyping', null);
   },
 
+  setLocale(selVal) {
+    this.set('i18n.locale', selVal);
+    if (selVal === 'ar') {
+      const rootElement = Ember.$(Env.rootElement);
+      rootElement.addClass('changeDir');
+      rootElement.removeClass('changeDirDefault');
+      //this.get('themeChanger').set('theme', 'goorurtl');
+      Env.APP.isRTL = true;
+    } else {
+      const rootElement = Ember.$(Env.rootElement);
+      rootElement.removeClass('changeDir');
+      rootElement.addClass('changeDirDefault');
+      //this.get('themeChanger').set('theme', 'goorultr');
+      Env.APP.isRTL = false;
+    }
+  },
   // -------------------------------------------------------------------------
   // Properties
 
