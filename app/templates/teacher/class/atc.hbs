@@ -39,10 +39,14 @@
             </div>
           </div>
           <div class="activities-count-container" {{action "onRedirectToCA"}}>
-            <div class="activity-count">{{activitiesCount.scheduled}}</div>
-            <div class="activities-info"><span><i class="pin-icon"></i></span>{{t 'teacher-landing.class.atc-view.class-activities-completed'}}</div>
-            <div class="activity-count unscheduled-count">{{activitiesCount.unscheduled}}</div>
-            <div class="activities-info"><span><i class="pin-icon"></i></span>{{t 'teacher-landing.class.atc-view.class-activities-pending'}}</div>
+            <div class="activities-container completed">
+              <div class="activity-count">{{activitiesCount.scheduled}}</div>
+              <div class="activities-info"><span><i class="pin-icon"></i></span>{{t 'teacher-landing.class.atc-view.class-activities-completed'}}</div>
+            </div>
+            <div class="activities-container pending">
+              <div class="activity-count">{{activitiesCount.unscheduled}}</div>
+              <div class="activities-info"><span><i class="pin-icon"></i></span>{{t 'teacher-landing.class.atc-view.class-activities-pending'}}</div>
+            </div>
           </div>
         </div>
       </div>

@@ -174,44 +174,50 @@
         border-radius: 4px;
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
         background-color: $white;
-        display: grid;
-        grid-template-columns: auto auto;
-        align-items: center;
-        justify-content: space-around;
         margin: 15px 0;
         cursor: pointer;
-        .activity-count {
-          font-size: 50px;
-          font-weight: 300;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: 1.16;
-          letter-spacing: normal;
-          color: #37424b;
-          text-align: right;
-          &.unscheduled-count {
-            font-size: 40px;
+        .activities-container {
+          display: flex;
+          .activity-count {
+            width: 30%;
+            text-align: center;
+            font-size: 50px;
+            font-weight: 300;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.16;
+            letter-spacing: normal;
+            color: #37424b;
           }
-        }
-        .activities-info {
-          font-size: 12px;
-          font-weight: bold;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: normal;
-          letter-spacing: normal;
-          color: #37424b;
-          display: grid;
-          grid-template-columns: auto auto;
-          justify-content: left;
-          align-items: center;
-          i.pin-icon {
-            background-image: url("gooru/pin.svg");
-            background-repeat: no-repeat;
-            width: 20px;
-            height: 20px;
-            background-size: 20px 20px;
-            display: block;
+          .activities-info {
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #37424b;
+            display: grid;
+            grid-template-columns: auto auto;
+            justify-content: left;
+            align-items: center;
+            i.pin-icon {
+              background-image: url("gooru/pin.svg");
+              background-repeat: no-repeat;
+              width: 20px;
+              height: 20px;
+              background-size: 20px 20px;
+              display: block;
+            }
+          }
+          &.completed {
+            border-bottom: 1px solid #37424b;
+          }
+          &.pending {
+            .activity-count {
+              font-size: 40px;
+            }
           }
         }
       }
