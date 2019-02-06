@@ -1,0 +1,46 @@
+<div class="backdrop" {{action "onClosePullup"}}></div>
+<div class="competency-completion-report-container">
+  <div class="competencies-list-container">
+    <div class="title-container"><span class="close-pullup" {{action "onClosePullup"}}>{{gru-icon name="keyboard_backspace"}}</span><span class="title-text">Competencies</span></div>
+    <div class="competencies-container">
+      {{#each competencyCompletionReport as |competencyData competencySeq|}}
+        <div class="competency-container competency-{{competencySeq}}" {{action "onSelectCompetency" competencyData competencySeq}}>
+          <div class="competency-completion-info-container">
+            <div class="competency-info">
+              <div class="competency-code">{{competencyData.competencyCode}}</div>
+              <div class="competency-name ellipsis">{{competencyData.competencyDesc}}</div>
+            </div>
+            <div class="competency-completion-performance">
+              <div class="completion-percentage">{{competencyData.completionPercentage}}%</div>
+              <div class="completion-box"><span style="background-color: {{safe-html (grade-color competencyData.completionPercentage)}}; width: {{competencyData.completionPercentage}}%;"></span></div>
+            </div>
+          </div>
+          <div class="users-completion-container collapsed">
+            {{#if isLoading}}
+              {{three-bounce-spinner}}
+            {{else}}
+              {{#each competencyData.usersCompletionSummary as |userCompletionData|}}
+                <div class="user-completion-container">
+                  <div class="user-info">
+                    <div class="user-thumbnail" style="background-image: url({{userCompletionData.thumbnail}})"></div>
+                    <div class="user-name ellipsis">{{concat userCompletionData.firstName ' ' userCompletionData.lastName}}</div>
+                  </div>
+                  <div class="user-completion-performance">
+                    <div class="completion-percentage">{{userCompletionData.score}}%</div>
+                    <div class="completion-box"><span style="background-color: {{safe-html (grade-color userCompletionData.score)}}; width: {{userCompletionData.score}}%;"></span></div>
+                  </div>
+                </div>
+              {{else}}
+                <div class="user-data-not-available">
+                  {{t 'teacher-landing.class.students-tab.data-not-available'}}
+                </div>
+              {{/each}}
+            {{/if}}
+          </div>
+        </div>
+      {{else}}
+          <div class="data-not-available">{{t 'teacher-landing.class.students-tab.data-not-available'}}</div>
+      {{/each}}
+    </div>
+  </div>
+</div>

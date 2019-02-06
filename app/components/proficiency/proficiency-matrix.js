@@ -99,6 +99,7 @@ export default Ember.Component.extend({
     let component = this;
     if (component.get('subject')) {
       component.loadDataBySubject(component.get('subject.id'));
+      component.fetchSignatureCompetencyList();
     }
     return null;
   }),
@@ -196,7 +197,25 @@ export default Ember.Component.extend({
     let component = this;
     if (component.get('subject')) {
       component.set('timeLine', component.getCurMonthYear());
+      component.fetchSignatureCompetencyList();
     }
+  },
+
+  /**
+   * @function fetchSignatureCompetencyList
+   * Method to fetch fetchSignatureCompetencyList
+   */
+  fetchSignatureCompetencyList() {
+    let component = this;
+    let subject = component.get('subject.id');
+    let userId = component.get('userId');
+    return Ember.RSVP.hash({
+      competencyList: component
+        .get('competencyService')
+        .getUserSignatureCompetencies(userId, subject)
+    }).then(({ competencyList }) => {
+      component.set('signatureCompetencyList', competencyList);
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -247,7 +266,7 @@ export default Ember.Component.extend({
         let className = competencyNode.attr('class');
         if (className.indexOf('competency-more-cells') < 0) {
           component.blockChartContainer(d);
-          component.sendAction('onCompetencyPullOut', d);
+          component.checkSignatureAssessment(d, data);
         }
       });
 
@@ -271,6 +290,7 @@ export default Ember.Component.extend({
     }).then(({ competencyMatrixs, competencyMatrixCoordinates }) => {
       if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
         component.set('isLoading', false);
+        component.set('competencyMatrixs', competencyMatrixs.domains);
         let resultSet = component.parseCompetencyData(
           competencyMatrixs.domains,
           competencyMatrixCoordinates
@@ -355,6 +375,26 @@ export default Ember.Component.extend({
     return resultSet;
   },
 
+  /**
+   * @function checkSignatureAssessment
+   * Method to check SignatureAssessment
+   */
+  checkSignatureAssessment(selectedCompetency) {
+    let component = this;
+    let competencyMatrixs = component.get('competencyMatrixs');
+    let domainCode = selectedCompetency.get('domainCode');
+    let signatureCompetencyList = component.get('signatureCompetencyList');
+    let showSignatureAssessment = signatureCompetencyList[domainCode].includes(
+      selectedCompetency.get('competencyCode')
+    );
+    selectedCompetency.set('showSignatureAssessment', showSignatureAssessment);
+    component.sendAction(
+      'onCompetencyPullOut',
+      selectedCompetency,
+      competencyMatrixs
+    );
+  },
+
   blockChartContainer(selectedCompetency) {
     let component = this;
     const cellWidth = component.get('cellWidth');
@@ -369,7 +409,7 @@ export default Ember.Component.extend({
     let yAxisSeq = selectedElement.attr('y');
     component.$('.block-container').remove();
     let container = `<div class="block-container" style="width:${width}px">`;
-    container += `<div class="selected-competency background${selectedCompetency.status.toString()}"  
+    container += `<div class="selected-competency background${selectedCompetency.status.toString()}"
                        style="width:${cellWidth}px; height:${cellHeight}px; top:${yAxisSeq}px; left:${xAxisSeq}px">
                   </div>`;
     container += '</div>';

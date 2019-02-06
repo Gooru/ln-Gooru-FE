@@ -24,7 +24,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Attributes
 
-  queryParams: ['tab'],
+  queryParams: ['tab', 'month', 'year'],
 
   tab: null,
 
@@ -404,7 +404,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         activityMembers.map(member => {
           let isActivityMember = classMembers.findBy('id', member.id);
           let isActiveMember = member.isActive;
-          if(isActivityMember && isActiveMember){
+          if (isActivityMember && isActiveMember) {
             classActivityStudents.push(isActivityMember);
           }
         });
@@ -464,10 +464,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('isShowOCASummaryReportPullUp', true);
     }
     Ember.run.scheduleOnce('afterRender', controller, function() {
-      controller.set('forMonth', moment().format('MM'));
-      controller.set('forYear', moment().format('YYYY'));
       controller.closeCADatePickerOnClickOutSide();
-      let date = moment().format('YYYY-MM-DD');
+      let activeDate = `${controller.get('forYear')}-${controller.get(
+        'forMonth'
+      )}-01`;
+      let date = moment(activeDate).format('YYYY-MM-DD');
       controller.handleScrollToSpecificDate(date);
     });
   },
@@ -693,6 +694,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   ),
 
   /**
+   * @property {Number} month
+   */
+  month: null,
+
+  /**
+   * @property {Number} year
+   */
+  year: null,
+
+  /*
    * @property {Json} classPreference
    */
   classPreference: Ember.computed.alias('class.preference'),

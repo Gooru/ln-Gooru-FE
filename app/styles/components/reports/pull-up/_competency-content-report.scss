@@ -1,10 +1,12 @@
 .competency-content-report {
+  overflow-x: hidden;
+
   .competency-performance {
     .competency-name {
       font-size: 15px;
       color: $dark-500;
-      padding: 20px 15px 20px 15px;
-      margin: 0 -15px;
+      padding: 20px 15px;
+      margin: auto;
       border-bottom: dashed 1px $nobel-gray;
       border-bottom-width: thin;
     }

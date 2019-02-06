@@ -2,11 +2,12 @@ import quizzesTranslations from './quizzes/translations';
 
 export default Object.assign(quizzesTranslations, {
   en: 'English',
-  sp: 'Español - preRelease',
-  ar: 'عربى - preRelease',
-  mr: 'मराठी - preRelease',
-  kn: 'ಕನ್ನಡ - preRelease',
-  hi: 'हिंदी - preRelease',
+  sp: 'Español',
+  ar: 'عربى',
+  mr: 'मराठी',
+  kn: 'ಕನ್ನಡ',
+  hi: 'हिंदी',
+
   errors: {
     description: 'This field',
     inclusion: '{{description}} is not included in the list',
@@ -248,6 +249,7 @@ export default Object.assign(quizzesTranslations, {
     },
     'depth-of-knowledge': 'Depth of Knowledge',
     description: 'Description',
+    destination: 'Destination',
     'disappear-after-login': 'This will disappear after {{loginNumber}} logins',
     'disappear-next-login': 'This will not appear on the next login',
     district: 'District',
@@ -532,6 +534,7 @@ export default Object.assign(quizzesTranslations, {
     'published-tooltip': 'Badged Content',
     publisher: 'Publisher',
     prev: 'Prev',
+    progress: 'Progress',
     question: 'Question',
     questions: 'Questions',
     'questions-OE': 'Free Response Questions',
@@ -707,6 +710,7 @@ export default Object.assign(quizzesTranslations, {
     'upload-file': 'Upload File',
     'upload-thumbnail': 'Upload Thumbnail',
     'upload-photo': 'Upload Photo',
+    until: 'Until',
     'remove-photo': 'Remove Photo',
     'use-case': 'Use Case',
     'valid-extensions': 'Valid file extensions are: {{extensions}}',
@@ -1241,6 +1245,7 @@ export default Object.assign(quizzesTranslations, {
       'back-to': 'Back to Classrooms',
       'back-to-archived': 'Back to Archived Classrooms',
       'class-management': 'Class Management',
+      atc: 'ATC',
       'class-management-tab': {
         actions: 'Actions',
         'assessment-min-score': 'Assessment Minimum Score for Trophies',
@@ -1296,6 +1301,14 @@ export default Object.assign(quizzesTranslations, {
         'error-message':
           'The class does not have a course assigned or does not have students rostered into the class yet. Once the course has been assigned to the class and the students are rostered, the class competency report will be shown here'
       },
+      'atc-view': {
+        'domains-reviewed': 'Domains to be reviewed',
+        'class-activities-completed': 'Class Activities Completed',
+        'class-activities-pending': 'Class Activities Pending',
+        'show-all': 'Show All',
+        collapse: 'Collapse',
+        'total-competencies-gained': 'Total Competencies Gained'
+      },
       'class-activities': 'Class Activities',
       'offline-class-report': {
         'class-report': 'Class Report',
@@ -1325,7 +1338,8 @@ export default Object.assign(quizzesTranslations, {
         'enter-valid-timespent': 'Enter the valid time spent',
         'create-activity': 'Create Activity',
         'schedule-activity': 'Schedule Activity',
-        'add-subject-framework': 'Please Select a Subject and Framework at Class Settings',
+        'add-subject-framework':
+          'Please Select a Subject and Framework at Class Settings',
         'create-external-collection': 'Create an External Collection'
       },
       'click-to-copy': 'Click to copy class code',
@@ -2884,9 +2898,29 @@ export default Object.assign(quizzesTranslations, {
       'signature-collections': 'Signature Collections',
       'show-global-data': 'Show Global Data',
       'show-student-data': 'Show Student Data',
-      'show-learning-map': 'Show Learning Map'
+      'show-learning-map': 'Show Learning Map',
+      note:
+        'Score 80% or more in our signature assessment and show your mastery'
     },
     'domain-report': 'Domain Report'
+  },
+
+  'competency-meta-data': {
+    title: 'ALT-CONCEPTS',
+    heading: {
+      micro: 'MICRO COMPETENCIES',
+      prequisite: 'PREQUISITE COMPETENCIES'
+    },
+    nodata: {
+      micro: 'There are no micro-competencies defined for this competency',
+      prequisite:
+        'There are no prerequisite-competencies defined for this competency',
+      competency: 'There are no alt-concepts defined for this competency'
+    }
+  },
+  'student-journey': {
+    heading: 'YOUR JOURNEY',
+    nodata: 'You are yet to start your journey for this competency'
   },
 
   'self-report': {

@@ -1,0 +1,142 @@
+.navigator-atc-view {
+  svg.navigator-atc-chart {
+    background-color: #202e32;
+    .y.axis {
+      .tick {
+        line {
+          stroke: $white;
+          stroke-dasharray: 4;
+          opacity: 0.5;
+        }
+      }
+    }
+
+    .axis {
+      path.domain {
+        stroke: $white;
+        stroke-width: 2px;
+        fill: none;
+      }
+      .tick:nth-child(-n + 3) {
+        text {
+          display: none;
+        }
+      }
+    }
+
+    .tick {
+      text {
+        fill: $white;
+        font-size: 10px;
+        font-weight: bold;
+      }
+    }
+
+    .node-point {
+      .student-profile {
+        clip-path: circle(50% at 50% 50%);
+        -webkit-clip-path: circle(50% at 50% 50%);
+        cursor: pointer;
+      }
+    }
+
+    .placeholder {
+      fill: $white;
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.navigator-atc-tooltip {
+  position: absolute;
+  z-index: 9999;
+  visibility: hidden;
+  background-color: $white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+
+  .tooltip-container {
+    width: 225px;
+    padding: 10px;
+    .header-container {
+      display: grid;
+      grid-template-columns: 60px auto auto;
+      border-bottom: 1px solid #979797;
+      padding-bottom: 5px;
+      align-items: end;
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+      .student-name {
+        display: grid;
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+      .competency-status-count {
+        font-size: 13px;
+        font-weight: bold;
+        justify-self: right;
+        .mastered {
+          color: #006eb5;
+        }
+        .inprogress {
+          color: #1aa9eb;
+        }
+        .not-started {
+          color: #979797;
+          font-weight: bold;
+        }
+      }
+    }
+    .body-container {
+      display: grid;
+      row-gap: 5px;
+      .destination-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        .title-container {
+          font-size: 15px;
+        }
+        .grade-info,
+        .competencies {
+          display: grid;
+          text-align: center;
+          align-items: center;
+          justify-content: center;
+          .grade-level,
+          .competency-count {
+            font-size: 16px;
+            font-weight: bold;
+          }
+        }
+      }
+      .performance-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        .performance,
+        .progress-container {
+          display: grid;
+          text-align: center;
+          align-items: center;
+          justify-content: center;
+          .score-count,
+          .progress-count {
+            font-size: 24px;
+          }
+          .title-container {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
+
+  &.active {
+    visibility: visible;
+  }
+}

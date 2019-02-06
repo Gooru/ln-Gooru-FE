@@ -1,0 +1,77 @@
+.competency-info-pull-up {
+  width: 100%;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+  display: grid;
+  position: absolute;
+  grid-template-rows: auto 1fr;
+  height: 0;
+  transition: height 0.5s ease-out;
+  overflow: hidden;
+  bottom: 0;
+  z-index: 1021;
+
+  &.open {
+    height: 100%;
+    transition: height 0.5s ease-in;
+  }
+
+  .competency-panel-header {
+    display: grid;
+    height: 53px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    align-items: center;
+    grid-template-columns: 53px 1fr 50px;
+
+    .competency-status {
+      justify-self: center;
+      width: 24px;
+      height: 24px;
+
+      &.status-0 {
+        opacity: 0.3;
+        background-color: #333c4f;
+      }
+
+      &.status-1 {
+        background-color: #99c5e6;
+      }
+
+      &.status-2,
+      &.status-3,
+      &.status-4,
+      &.status-5 {
+        background-color: #6f9ce2;
+      }
+    }
+
+    .competency-title {
+      .competency-name {
+        grid-column-start: 2;
+        font-size: 12px;
+        font-weight: bold;
+        color: #37424b;
+      }
+
+      .competency-domain {
+        font-size: 10px;
+        font-style: italic;
+        color: #37424b;
+      }
+    }
+
+    .close {
+      width: max-content;
+      height: max-content;
+      justify-self: center;
+
+      i {
+        font-size: 25px;
+      }
+    }
+  }
+
+  .body {
+    overflow-y: auto;
+  }
+}

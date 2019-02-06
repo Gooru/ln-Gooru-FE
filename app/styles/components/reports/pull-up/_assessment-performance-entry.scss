@@ -8,7 +8,15 @@
       background-size: 360px 220px;
       background-repeat: no-repeat;
       object-fit: contain;
+      display: none;
     }
+
+    @media (min-height: 500px) {
+      .assessment-thumbnail {
+        display: block;
+      }
+    }
+
     .max-timespent-container {
       display: none;
       padding: 0 16px 16px 16px;
@@ -127,6 +135,7 @@
       }
       .questions-container {
         max-height: calc(100vh - 440px);
+        min-height: 120px;
         overflow-y: auto;
         .question-container {
           .question-info-container {
