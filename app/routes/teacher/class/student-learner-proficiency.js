@@ -2,13 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   queryParams: {
-    classId: {
-      refreshModel: true
-    },
-    courseId: {
-      refreshModel: true
-    },
-    role: {
+    studentId: {
       refreshModel: true
     }
   },
@@ -45,26 +39,20 @@ export default Ember.Route.extend({
   model: function(params) {
     let route = this;
     route._super(...arguments);
-    let studentId = params.userId;
-    const classId = params.classId;
-    const courseId = params.courseId;
-    const isTeacher = params.role === 'teacher';
+    const studentId = params.studentId;
+    const currentClass = route.modelFor('teacher.class').class;
+    const course = route.modelFor('teacher.class').course;
     return Ember.RSVP.hash({
       profilePromise: route.get('profileService').readUserProfile(studentId),
-      classPromise: route.get('classService').readClassInfo(classId),
-      coursePromise: route.get('courseService').fetchById(courseId),
       taxonomyCategories: route.get('taxonomyService').getCategories()
     }).then(function(hash) {
       const studentProfile = hash.profilePromise;
       const taxonomyCategories = hash.taxonomyCategories;
-      const aClass = hash.classPromise;
-      const course = hash.coursePromise;
       return Ember.Object.create({
         profile: studentProfile,
         categories: taxonomyCategories,
-        class: aClass,
-        course: course,
-        isTeacher: isTeacher
+        class: currentClass,
+        course: course
       });
     });
   },
@@ -72,8 +60,8 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     controller.set('studentProfile', model.get('profile'));
     controller.set('class', model.get('class'));
-    controller.set('isTeacher', model.get('isTeacher'));
     controller.set('course', model.get('course'));
+    controller.set('isTeacher', true);
     controller.set('taxonomyCategories', model.get('categories'));
     controller.loadData();
   },

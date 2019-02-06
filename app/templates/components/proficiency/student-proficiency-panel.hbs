@@ -1,22 +1,24 @@
 <div class="panel-header">
-  <span>{{gru-icon name="arrow_back"}}</span>
+  <span class="back" {{action 'goBack'}}>{{gru-icon name="arrow_back"}}</span>
   <div class="student-profile">
     <div class="profile-img">
       <img class="img-responsive" src="{{studentProfile.avatarUrl}}" />
     </div>
     <span class="username">{{studentProfile.fullName}}</span>
   </div>
-  <div class="dropdown subjects">
-    <div class="active-item active-subject">
-      <div class="label ellipsis">{{activeSubject.title}}</div>
-      <div class="icon">{{gru-icon name="arrow_drop_down"}}</div>
+  {{#if isShowMatrixChart}}
+    <div class="dropdown subjects">
+      <div class="active-item active-subject">
+        <div class="label ellipsis">{{activeSubject.title}}</div>
+        <div class="icon">{{gru-icon name="arrow_drop_down"}}</div>
+      </div>
+      <div class="dropdown-content subject-list">
+        {{#each taxonomySubjects as |subject|}}
+          <div class="list-item subject {{if (eq activeSubject.id subject.id) 'active'}}" {{action "onSelectSubject" subject}}>{{subject.title}}</div>
+        {{/each}}
+      </div>
     </div>
-    <div class="dropdown-content subject-list">
-      {{#each taxonomySubjects as |subject|}}
-        <div class="list-item subject {{if (eq activeSubject.id subject.id) 'active'}}" {{action "onSelectSubject" subject}}>{{subject.title}}</div>
-      {{/each}}
-    </div>
-  </div>
+  {{/if}}
 </div>
 <div class="panel-content">
   {{#if isShowMatrixChart}}

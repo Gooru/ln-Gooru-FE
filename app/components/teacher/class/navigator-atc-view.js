@@ -356,8 +356,7 @@ export default Ember.Component.extend({
         tooltip.css(tooltipPos);
       }
       let tooltipHtml = component.$('.tooltip-html-container').html();
-      tooltip
-        .html(tooltipHtml);
+      tooltip.html(tooltipHtml);
       Ember.$('.navigator-atc-tooltip').addClass('active');
     }, 500);
   }

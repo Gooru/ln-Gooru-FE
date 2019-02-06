@@ -52,15 +52,15 @@ export default Ember.Controller.extend({
     //Action triggered when select a student
     onSelectStudent(student) {
       let controller = this;
-      let activeStudentData = Ember.Object.create({
-        firstName: student.firstName,
-        lastName: student.lastName,
-        avatarUrl: student.thumbnail,
-        fullName: student.fullName,
-        id: student.id
-      });
-      controller.set('activeStudent', activeStudentData);
-      controller.set('isShowProficiencyPullup', true);
+      let userId = student.id;
+      controller.transitionToRoute(
+        'teacher.class.student-learner-proficiency',
+        {
+          queryParams: {
+            studentId: userId
+          }
+        }
+      );
     },
 
     /**

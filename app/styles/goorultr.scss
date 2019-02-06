@@ -438,7 +438,8 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/reports/pull-up/_student-journey";
 
 //Student Proficiency
-@import "routes/_student-learner-proficiency";
+@import "routes/student-learner-proficiency";
+@import "controllers/teacher/class/student-learner-proficiency";
 @import "components/proficiency/student-proficiency-panel";
 @import "components/proficiency/proficiency-subject-panel";
 @import "components/proficiency/domain-info-pull-up";

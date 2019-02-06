@@ -5,10 +5,11 @@
   display: grid;
   position: absolute;
   grid-template-rows: auto 1fr;
-  height: 10px;
+  height: 0;
   transition: height 0.5s ease-out;
   overflow: hidden;
   bottom: 0;
+  z-index: 1021;
 
   &.open {
     height: 100%;

@@ -14,7 +14,9 @@ export default Ember.Component.extend({
 
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -109,6 +111,26 @@ export default Ember.Component.extend({
       ? domainsCompetencyPerformance.length
       : 0;
   }),
+
+  /**
+   * @property {Object} domainCompetencyList
+   */
+  domainCompetencyList: Ember.computed(
+    'selectedStudentUserId',
+    'activeDomain',
+    function() {
+      let competencies = this.get(
+        'activeDomainCompetencyPerformance.studentCompetencies'
+      );
+      let studentId = this.get('selectedStudentUserId');
+      let doaminCompetencies = competencies.findBy('userId', studentId);
+      let activeDomain = this.get('activeDomain');
+      return Ember.Object.create({
+        domainCode: activeDomain.domainCode,
+        competencies: doaminCompetencies.competencies
+      });
+    }
+  ),
 
   // -------------------------------------------------------------------------
   // Methods
