@@ -246,6 +246,7 @@ export default Object.assign(quizzesTranslations, {
     },
     'depth-of-knowledge': 'ज्ञान की गहराई',
     description: 'विवरण',
+    destination: 'मंजिल',
     'disappear-after-login': 'यह {{loginnumber}} लॉगिन के बाद गायब हो जाएगा',
     'disappear-next-login': 'यह अगले लॉगिन पर दिखाई नहीं देगा',
     district: 'जिला',
@@ -534,6 +535,7 @@ export default Object.assign(quizzesTranslations, {
     'published-tooltip': 'बैज सामग्री',
     publisher: 'प्रकाशक',
     prev: 'पिछला',
+    progress: 'प्रगति',
     question: 'प्रश्न',
     questions: 'प्रश्न',
     'questions-OE': 'मुक्त अनुक्रिया प्रश्न',
@@ -2868,6 +2870,25 @@ export default Object.assign(quizzesTranslations, {
     },
     'domain-report': 'डोमेन रिपोर्ट'
   },
+
+  'competency-meta-data': {
+    title: 'ALT-CONCEPTS',
+    heading: {
+      micro: 'MICRO COMPETENCIES',
+      prequisite: 'PREQUISITE COMPETENCIES'
+    },
+    nodata: {
+      micro: 'There are no micro-competencies defined for this competency',
+      prequisite:
+        'There are no prerequisite-competencies defined for this competency',
+      competency: 'There are no alt-concepts defined for this competency'
+    }
+  },
+  'student-journey': {
+    heading: 'YOUR JOURNEY',
+    nodata: 'You are yet to start your journey for this competency'
+  },
+
   'self-report': {
     'your-score': 'आपका स्कोर',
     time_spent: 'समय बिताया',

@@ -244,6 +244,7 @@ export default Object.assign(quizzesTranslations, {
     },
     'depth-of-knowledge': 'ज्ञानाची खोली',
     description: 'वर्णन',
+    destination: 'गंतव्य',
     'disappear-after-login': 'हे {{loginnumber}} लॉग-इन नंतर अदृश्य होईल',
     'disappear-next-login': 'हे पुढील लॉग-इन वर दिसणार नाही',
     district: 'जिल्हा',
@@ -529,6 +530,7 @@ export default Object.assign(quizzesTranslations, {
     'published-tooltip': 'बॅज्ड सामग्री',
     publisher: 'प्रकाशक',
     prev: 'मागे',
+    progress: 'प्रगति',
     question: 'प्रश्न',
     questions: 'प्रश्न',
     'questions-OE': 'मुक्त प्रतिसाद प्रश्न',
@@ -1234,6 +1236,7 @@ export default Object.assign(quizzesTranslations, {
       'back-to': 'क्लासरूम कडे परत',
       'back-to-archived': 'संग्रहित कक्षांमध्ये परत',
       'class-management': 'वर्ग व्यवस्थापन',
+      atc: 'शीर्ष द़ृश्य',
       'class-management-tab': {
         actions: 'क्रिया',
         'assessment-min-score': 'ट्रॉफीसाठी कमीत कमी गुण',
@@ -2865,6 +2868,25 @@ export default Object.assign(quizzesTranslations, {
     },
     'domain-report': 'डोमेन अहवाल'
   },
+
+  'competency-meta-data': {
+    title: 'ALT-CONCEPTS',
+    heading: {
+      micro: 'MICRO COMPETENCIES',
+      prequisite: 'PREQUISITE COMPETENCIES'
+    },
+    nodata: {
+      micro: 'There are no micro-competencies defined for this competency',
+      prequisite:
+        'There are no prerequisite-competencies defined for this competency',
+      competency: 'There are no alt-concepts defined for this competency'
+    }
+  },
+  'student-journey': {
+    heading: 'YOUR JOURNEY',
+    nodata: 'You are yet to start your journey for this competency'
+  },
+
   'self-report': {
     'your-score': 'आपला स्कोअर',
     time_spent: 'एकूण लागलेला वेळ',
