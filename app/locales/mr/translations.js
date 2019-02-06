@@ -663,6 +663,7 @@ export default Object.assign(quizzesTranslations, {
     study: 'अभ्यास',
     'study-now': 'आता अभ्यास करा',
     student: 'विद्यार्थी',
+    students: 'विद्यार्थी',
     'student-id': 'विद्यार्थी आयडी (प्रोफाइलवर प्रदर्शित नाही)',
     'studen-id-display':
       'विद्यार्थी आयडी (प्रोफाइलवर प्रदर्शित केला नाही, निनावी मोडमध्ये प्रदर्शित केला आहे)',
@@ -813,6 +814,8 @@ export default Object.assign(quizzesTranslations, {
       'edit-content': 'सामग्री संपादित करा',
       'add-to-daily-class-activities':
         'वर्गाच्या दैनंदिन कामकाजामध्ये सामील करा',
+      'assigned-course': 'आपका नियुक्त पाठ्यक्रम',
+      'pre-study-title': 'अपने पाठ्यक्रम के लिए पूर्व-अध्ययन',
       'course-map': {
         'rescope-toggle': 'पूर्ण कोर्स नकाशा दर्शवा',
         'rescope-info':
