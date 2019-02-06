@@ -5,6 +5,7 @@
 .controller.teacher.class.class-settings {
   margin: 0 auto;
   background-color: $bg-dark;
+  max-width: 1365px;
 
   .font-base {
     font-family: Lato;
@@ -30,13 +31,12 @@
   }
 
   .caps-field-label {
-    /* width: 55px; */
     height: 16px;
     font-size: 13px;
     font-weight: bold;
     text-transform: uppercase;
   }
-  //dd
+
   .arrowdropdown {
     > i {
       font-size: 18px;
@@ -45,7 +45,7 @@
 
   .grade-info {
     display: grid;
-    /* The container <div> - needed to position the dropdown content */
+
     .grade-label {
       padding-left: 16px;
     }
@@ -54,7 +54,7 @@
       position: relative;
       display: inline-block;
       width: max-content;
-      /*margin-top: -7px; */
+
       .active-item {
         display: flex;
         cursor: pointer;
@@ -181,7 +181,7 @@
 
   .sec-col-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 510px 1fr;
 
     .sec-rows-layout {
       &.left-panel {
@@ -210,17 +210,16 @@
           color: $gray-dove;
 
           .class-head-row-wrap {
-            display: flex;
+            display: grid;
             margin-bottom: 16px;
+            grid-template-columns: 1fr 140px;
 
             .sec-head-class-name {
-              width: 340px;
               height: 22px;
               font-size: 18px;
               margin-top: 20px;
-              /* border-bottom: 1px solid $sep-border-color; */
               padding-bottom: 25px;
-              margin-right: 25px;
+              padding-right: 20px;
 
               .gru-icon.edit {
                 opacity: 0.3;
@@ -233,50 +232,52 @@
             }
 
             .sec-head-sep {
-              width: 294px;
               height: 1px;
               margin-top: 6px;
               margin-bottom: 16px;
               border-bottom: 1px solid $sep-border-color;
-              /* border-bottom: solid $gray-dove; */
             }
 
-            .sec-desc-min-perf {
-              width: 249px;
-              height: 16px;
-              font-family: Lato;
-              font-size: 13px;
-              display: inline;
-            }
+            .min-score-container {
+              display: flex;
+              align-items: center;
 
-            .minscoresec {
-              float: right;
-              position: relative;
-
-              .sec-dec-value {
-                width: 40px;
+              .sec-desc-min-perf {
                 height: 16px;
                 font-family: Lato;
                 font-size: 13px;
-                text-align: center;
-                border-bottom: 1px solid $sep-border-color;
-                margin-top: 7px;
-                margin-right: 5px;
-                line-height: 6px;
+                display: inline;
               }
 
-              .gru-icon.edit {
-                opacity: 0.3;
-                font-size: 18px;
-                margin-left: 10px;
-                line-height: 1.2;
-                position: absolute;
-                top: 0;
-                cursor: pointer;
-              }
+              .minscoresec {
+                padding-left: 20px;
+                position: relative;
 
-              .colscoreedit {
-                margin: -10px;
+                .sec-dec-value {
+                  width: 40px;
+                  height: 16px;
+                  font-family: Lato;
+                  font-size: 13px;
+                  text-align: center;
+                  border-bottom: 1px solid $sep-border-color;
+                  margin-top: 7px;
+                  margin-right: 5px;
+                  line-height: 6px;
+                }
+
+                .gru-icon.edit {
+                  opacity: 0.3;
+                  font-size: 18px;
+                  margin-left: 10px;
+                  line-height: 1.2;
+                  position: absolute;
+                  top: 0;
+                  cursor: pointer;
+                }
+
+                .colscoreedit {
+                  margin: -10px;
+                }
               }
             }
 
@@ -317,7 +318,6 @@
             margin-top: 3px;
 
             .caps-field-label-class {
-              /* width: 55px; */
               @extend .caps-field-label;
               flex: 1;
             }
@@ -334,19 +334,14 @@
           .language-row {
             display: flex;
             align-items: center;
-            justify-content: space-between;
 
             .row-label {
               height: 16px;
               font-size: 13px;
-              /* font-weight: bold; */
-              flex: 1;
             }
 
             .row-value {
-              // margin-left: auto;
-              // margin-right: 30px;
-              flex: 0.4;
+              padding-right: 20px;
             }
           }
 
@@ -355,10 +350,8 @@
             padding-bottom: 8px;
 
             .sub-sec-head {
-              /* width: 68px; */
               height: 14px;
               opacity: 0.8;
-              /* font-family: OpenSans; */
               font-size: 12px;
               font-weight: bold;
               line-height: normal;
@@ -368,7 +361,6 @@
             }
 
             .sub-sec-row {
-              width: 422.9px;
               border-top: 1px solid $sep-border-color;
               display: flex;
               align-items: center;
@@ -395,13 +387,12 @@
               }
 
               .delete-co-teacher {
-                /* svg if needed icon_name 'delete' */
                 width: 14px;
                 height: 18px;
                 opacity: 0.3;
                 display: inline;
                 cursor: pointer;
-                /* margin-right: 10px; */
+                margin-right: 15px;
               }
               /*  .row-add-another-teacher { */
               /* This may be floating  */
@@ -456,6 +447,7 @@
               padding-top: 10px;
               padding-bottom: 10px;
               align-items: center;
+              display: flex;
 
               .offline-icon {
                 display: inline;
@@ -468,11 +460,10 @@
               }
 
               .offline-label {
-                width: 287px;
                 height: 29px;
                 font-family: Lato;
                 font-size: 13px;
-                flex: 0.85;
+                padding-right: 20px;
               }
 
               .offline-info-icon {
@@ -506,7 +497,7 @@
           justify-content: space-between;
           border-bottom: 1px solid #d7d7d7;
           margin-left: 15px;
-          /* padding: 20px; */
+
           .class-btn {
             margin: unset;
             align-self: unset;
@@ -514,7 +505,6 @@
 
           .top-btn {
             background-color: $btn-blue;
-            /* width: 211px; */
             height: 53px;
             border-radius: unset;
             padding: 15px;
@@ -621,21 +611,16 @@
           }
 
           .sub-sec-sep {
-            /* width: 422.9px; */
             border-top: 1px solid $sep-border-color;
             margin-top: 12px;
-            // opacity: 0.5;
           }
 
           .sub-sec-row {
-            /*  width: 422.9px; */
-            // border-top: 1px solid;
             display: flex;
             height: 36px;
             align-items: baseline;
 
             .field-dropdown-caps-label {
-              /* width: 55px; */
               @extend .caps-field-label;
               flex: 0.7;
               padding: 12px 0;
@@ -672,7 +657,6 @@
           }
 
           .sec-course-action {
-            width: 422.9px;
             border-top: 1px solid;
 
             .action-icon {
@@ -682,14 +666,12 @@
             }
 
             .action-rescope-label {
-              width: 287px;
               height: 16px;
               font-family: Lato;
               font-size: 13px;
             }
 
             .action-button {
-              /* svg-avalible ToDo: */
               width: 40px;
               height: 24px;
               object-fit: contain;
@@ -706,7 +688,7 @@
           .row-offline-class {
             padding-top: 10px;
             align-items: center;
-            /*  padding-bottom: 20px; */
+
             .offline-icon {
               display: inline;
               width: 22px;
@@ -731,30 +713,10 @@
             }
 
             .action-button-slide-yes {
-              /* Has icon / SVG class */
-              /*  width: 40px; */
-              /*  height: 24px; */
               margin-right: 30px;
               object-fit: contain;
             }
           }
-        }
-      }
-
-      .assessment-sec-cont {
-        display: none;
-
-        .assessment-setting-label {
-          @extend .white-font-label;
-          margin: 15px;
-          text-transform: uppercase;
-        }
-
-        .assessment-setting-sec {
-          width: 463px;
-          height: 299px;
-          overflow-x: scroll;
-          @extend .sec-panel;
         }
       }
 
@@ -812,8 +774,6 @@
         @extend .white-font-label;
         text-transform: uppercase;
         margin: 15px;
-        width: 113px;
-        height: 15px;
       }
 
       .dropdown-menu {
@@ -824,229 +784,123 @@
       }
 
       .student-settings-sec {
-        width: 667px;
         @extend .sec-panel;
+        padding-left: 10px;
+        padding-top: 10px;
 
-        .grid-header-caps-label {
-          @extend .caps-field-label;
-          /* width: 52px;
-            height: 14px; */
-          opacity: 0.7;
-          /* font-family: OpenSans; */
-          font-size: 10px;
-          font-weight: bold;
-        }
+        table {
+          width: 100%;
+          word-break: break-all;
 
-        .student-header {
-          @extend .grid-header-caps-label;
-          border-bottom: 1px solid $sep-border-color;
-          text-overflow: ellipsis;
-
-          .name-head {
-            margin-left: -10px;
-          }
-
-          .origin-head {
-            margin: 14px;
-          }
-
-          .destination-head {
-            margin: 14px;
-          }
-
-          .id-head {
-            margin: 14px;
-          }
-        }
-
-        .btn-panel {
-          display: flex;
-          align-items: baseline;
-          justify-content: flex-end;
-          padding: 20px;
-
-          .class-btn {
-            /*   margin: auto;
-            align-self: center; */
-          }
-
-          .class-btn {
-            background-color: #543c3c;
-            width: 211px;
-            height: 53px;
-            border-radius: 4px;
-            padding: 15px;
-            color: $white;
-            border-color: #f36463;
+          th {
+            border-bottom: 1px solid #d7d7d7;
+            overflow: hidden;
+            font-size: 10px;
             text-transform: uppercase;
-            cursor: pointer;
+            border-right: 2px dashed #d7d7d7;
+            padding-left: 10px;
 
-            > i {
-              vertical-align: bottom;
-              margin-left: 16px;
+            &:last-child {
+              border-right: none;
             }
           }
 
-          .disabled {
-            cursor: none;
-            opacity: 0.5;
-            pointer-events: none;
+          td {
+            height: 40px;
+            border-bottom: 1px solid #d7d7d7;
+            border-right: 2px dashed #d7d7d7;
+
+            &:last-child {
+              border-right: none;
+            }
           }
 
-          .btn-txt {
-            color: whitesmoke;
-            background: transparent;
+          .btn-panel {
+            display: flex;
+            align-items: baseline;
+            justify-content: flex-end;
+            padding: 20px;
+
+            .class-btn {
+              background-color: #543c3c;
+              width: 211px;
+              height: 53px;
+              border-radius: 4px;
+              padding: 15px;
+              color: $white;
+              border-color: #f36463;
+              text-transform: uppercase;
+              cursor: pointer;
+
+              > i {
+                vertical-align: bottom;
+                margin-left: 16px;
+              }
+            }
+
+            .disabled {
+              cursor: none;
+              opacity: 0.5;
+              pointer-events: none;
+            }
+
+            .btn-txt {
+              color: whitesmoke;
+              background: transparent;
+            }
           }
-        }
 
-        .student-grid {
-          padding-top: 20px;
-          display: grid;
-          grid-template-columns: 40px minmax(190px, auto) 140px 140px auto auto auto;
-          margin-left: 13px;
-          grid-column-gap: 0;
+          .student-info-container {
+            display: grid;
+            grid-template-columns: 50px 1fr;
+            align-items: center;
 
-          > div {
-            border-right: 2px dashed $sep-border-color;
-            border-bottom: 1px solid $sep-border-color;
-            padding: 3px;
+            .student-icon {
+              background-size: contain;
+              border-radius: 50%;
+              width: 30px;
+              height: 30px;
+              margin: auto;
+            }
+          }
+
+          .origin {
+            font-size: 13px;
+            color: $gray-dove;
+          }
+
+          .destination {
+            @extend .origin;
+          }
+
+          .student-id {
+            @extend .origin;
+            display: flex;
+            align-items: center;
             text-overflow: ellipsis;
-            /*  overflow: hidden; */
-            height: inherit;
-            width: auto;
-          }
-          // > div: div:nth-last-child(3)
-        }
 
-        .student-icon-col {
-          border-right: unset !important;
-          padding: unset;
-        }
-
-        .student-icon {
-          background-size: contain;
-          border-radius: 50%;
-          width: 30px;
-          height: 30px;
-          margin: auto;
-        }
-
-        .student-name {
-          /* width: 97px;
-              height: 15px; */
-          display: flex;
-          align-items: center;
-        }
-
-        .origin {
-          font-size: 13px;
-          color: $gray-dove;
-        }
-
-        .destination {
-          @extend .origin;
-        }
-
-        .student-id {
-          @extend .origin;
-          display: flex;
-          align-items: center;
-          text-overflow: ellipsis;
-
-          > span {
-            margin-left: 14px;
-            overflow-wrap: break-word;
-            max-width: 135px;
-          }
-        }
-
-        .joined-on {
-          @extend .origin;
-          text-align: right;
-        }
-
-        .student-action-col {
-          cursor: pointer;
-          background-size: contain;
-          height: 35px;
-          width: 35px;
-          display: flex;
-          justify-content: center;
-        }
-
-        .student-adj-lp {
-          margin-top: 4px;
-        }
-
-        .student-delete {
-          background-size: contain;
-          height: 30px;
-          width: 30px;
-          opacity: 0.3;
-        }
-
-        .student-delete :parent {
-        }
-
-        .student-act-de {
-          // display: none;
-        }
-
-        .sub-sec-row {
-          width: 422.9px;
-          /* border-top: 1px solid $sep-border-color; */
-          display: flex;
-          align-items: center;
-          padding: 13px;
-          display: none; // Hiding add student button as no interaction available
-
-          .add-student-icon {
-            background-size: contain;
-            border-radius: 50%;
-            margin: 10px 10px 0 20px;
-            box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
-            background-color: $gray-harder;
-            cursor: pointer;
-            color: $dark-400;
-            margin-right: 13px;
-
-            > i {
-              padding: 5px;
+            > span {
+              margin-left: 14px;
+              overflow-wrap: break-word;
+              max-width: 135px;
             }
           }
 
-          .add-student-label {
-            width: 126px;
-            height: 15px;
-            font-family: Lato;
-            font-size: 15px;
-            font-style: italic;
-            line-height: 1;
-            margin-left: 10px;
-            flex: 1;
-          }
-        }
-      }
-    }
-  }
-}
-@media screen and (min-width: 1024px) and (max-width: 1365px) {
-  .controller.teacher.class.class-settings {
-    .sec-col-layout {
-      .sec-rows-layout {
-        .class-btn {
-          width: 203px;
-        }
+          .actions-btn {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 50px 1fr 1fr;
+            justify-items: center;
 
-        .class-btn {
-          width: 212px;
-        }
-      }
+            .student-action-col {
+              cursor: pointer;
+              width: 30px;
+              height: 20px;
+            }
 
-      .student-sec-cont {
-        .student-settings-sec {
-          .student-grid {
-            grid-template-columns: 40px minmax(0px, auto) minmax(0px, auto) 93px 140px auto auto auto;
+            .student-delete {
+              opacity: 0.3;
+            }
           }
         }
       }

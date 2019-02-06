@@ -17,20 +17,22 @@
                     {{validation.gru-input model=tempClass valuePath='title' didValidate=didValidate onFocusOut="editTitle"
                 autofocus=true maxLength=25}}
                 {{/unless}}
-                <div class='sec-desc-min-perf'>
-                  {{t 'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-desc'}}
-                </div>
-                <div class='minscoresec'>
-                  {{#unless editingScore}}
-                    <div class='sec-dec-value'>{{if class.minScore class.minScore '--'}} %
-                      <span title="{{t 'teacher-landing.class.class-management-tab.edit'}}" data-toggle="tooltip" {{action "editScore"}}>{{gru-icon name='edit'}}</span>
-                    </div>
-                    {{else}}
-                      <div class="colscoreedit">
-                        {{validation.gru-input-number model=tempClass valuePath='minScore' min=1 max=100 step=1
-                    didValidate=didValidate onFocusOut="saveScore" onFocusIn="editScore" autofocus=true}}
+                <div class="min-score-container">
+                  <div class='sec-desc-min-perf'>
+                    {{t 'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-desc'}}
+                  </div>
+                  <div class='minscoresec'>
+                    {{#unless editingScore}}
+                      <div class='sec-dec-value'>{{if class.minScore class.minScore '--'}} %
+                        <span title="{{t 'teacher-landing.class.class-management-tab.edit'}}" data-toggle="tooltip" {{action "editScore"}}>{{gru-icon name='edit'}}</span>
                       </div>
-                  {{/unless}}
+                      {{else}}
+                        <div class="colscoreedit">
+                          {{validation.gru-input-number model=tempClass valuePath='minScore' min=1 max=100 step=1
+                    didValidate=didValidate onFocusOut="saveScore" onFocusIn="editScore" autofocus=true}}
+                        </div>
+                    {{/unless}}
+                  </div>
                 </div>
               </div>
               <div class='class-code'>
@@ -43,36 +45,7 @@
                 </div>
               </div>
             </div>
-            <div class='class-level-setting-field' style='display:none;'>
-              <div class='caps-field-label-class'> {{t
-                'teacher-landing.class.class-settings.class-settings-sec.grade-level'}}</div>
-              <div class='field-drop-down'>
-                <div class='grade-info'>
-                  <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <span>
-                          {{#if class.gradeCurrent}}
-                            {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
-                      searchVal=class.gradeCurrent
-                      destProp='grade' }}
-                          {{else}}
-                            {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                          {{/if}}
-                        </span>
-                        <span class="caret"></span>
-                      </button>
-                    <ul class="dropdown-menu">
-                      {{#if getCurrentGradeDDContent}}
-                        {{#each currentGradeDDValue as |grade|}}
-                          <li> <a data-item= {{grade}} {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
-                              </a> </li>
-                        {{/each}}
-                      {{/if}}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+
             {{!-- language --}}
             <div class='language-row'>
               <div class='row-label'> {{t
@@ -101,7 +74,7 @@
             </div>
             {{!-- language  ends--}}
             <div class='sub-sec-coteach'>
-              <div class='row-offline-class sub-sec-row' style="border-top:unset;">
+              <div class='row-offline-class'>
                 <div class='offline-icon'></div>
                 <div class='offline-label'> {{t
                   'teacher-landing.class.class-settings.class-settings-sec.offline-class-label'}}
@@ -125,21 +98,9 @@
                     <div class='delete-co-teacher' {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}" data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
                   </div>
                 {{/each}}
-                <div class='sub-sec-row' style='display:none;'>
-                  <div class='add-co-teacher-icon' {{action 'addCoteacher' }}> {{gru-icon name='add'}} </div>
-                  <div class='add-co-teacher-label'> {{t
-                  'teacher-landing.class.class-settings.class-settings-sec.add-coteacher'}}</div>
-                </div>
               {{/if}}
             </div>
           </div>
-        </div>
-      </div>
-      <div class='assessment-sec-cont'>
-        <div class='assessment-setting-label'>
-        </div>
-        <div class='assessment-setting-sec'>
-          dddd
         </div>
       </div>
       <div class="class-layout-btn">
@@ -389,8 +350,7 @@
             </div>
           {{/if }}
         </div>
-      </div> {{!-- Course Settings container ends --}}
-      {{!-- Generate pathway section starts here --}}
+      </div>
       <div class='gen-pathway-sec'>
         {{#if isPremiumClass}}
           <div class="btn-top-panel">
@@ -404,7 +364,6 @@
             <div class='top-btn {{if isClassBaselined "disabled" ""}} ' {{action 'generateClassPathway'}}>
               {{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}} {{gru-icon name='replay'}}
             </div>
-            {{!-- <div class='sub-sec-sep'></div> --}}
           </div>
           <div class='gen-baseline-info'>
             <div> {{t 'teacher-landing.class.class-settings.gen-baseline.baseline-1'}} </div>
@@ -413,142 +372,118 @@
             <div> {{t 'teacher-landing.class.class-settings.gen-baseline.baseline-4'}} </div>
           </div>
         {{/if}}
-      </div> {{!-- Generate pathway section ends --}}
-      {{!-- Student Settings starts here --}}
+      </div>
       <div class='student-sec-cont'>
-        <div class='student-settings-label'> {{t
-          'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head'}}</div>
+        <div class='student-settings-label'> {{t 'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head'}}</div>
         {{#if (gt sortedMembers.length 0)}}
           <div class="student-settings-sec">
-            {{!-- Student Table / Grid starts here --}}
-            <div class='student-grid'>
-              {{!-- Student table header starts here --}}
-              <div class='student-icon-col'>
-                <div class='student-header' style="border-bottom:unset;"> </div>
-              </div>
-              {{#if (and (and course subject) isPremiumClass) }}
-                <div class='student-header'> <span class='name-head'> {{t 'teacher-landing.class.class-settings.students'}}</span></div>
-                <div class='student-header'> <span class='origin-head'>{{t 'teacher-landing.class.class-settings.origin'}}
-                    </span> </div>
-                <div class='student-header'> <span class='destination-head'> {{t 'teacher-landing.class.class-settings.destination'}}</span></div>
-                {{else }}
-                <div class='student-header' style="grid-column-start:span  2;"> <span class='name-head'>
-                      {{t 'teacher-landing.class.class-settings.students'}}</span></div>
-              {{/if}}
-              <div class='student-header student-id-head' style="margin-left:-10px"> <span class='id-head'> {{t 'teacher-landing.class.class-settings.student-id'}}
-                  </span></div>
-              {{!-- <div class='student-header'> {{t 'teacher-landing.class.class-settings.joined-on'}}</div> --}}
-              <div class='student-header' style='border-right:unset;'><span class='id-head'> {{t 'teacher-landing.class.class-settings.student-settings-sec.col-head-active'}}
-                  </span></div> {{!-- Enable/Disable --}}
-              {{#if (and (and course subject) isPremiumClass) }}
-                <div class='student-header' style='border-right:unset;'></div> {{!-- Adjust LP --}}
-                <div class='student-header' style='border-right:unset;'></div> {{!-- Delete --}}
-              {{else }}
-                <div class='student-header' style="grid-column-start:span  2;border-right:unset;"></div>
-                {{!-- Delete --}}
-              {{/if}}
-              {{!-- Student table header -- ends --}}
-              {{!-- Each row of student goes here --}}
+            <table>
+              <tr>
+                <th>{{t 'teacher-landing.class.class-settings.students'}}</th>
+                {{#if isPremiumClass }}
+                  <th>{{t 'teacher-landing.class.class-settings.origin'}}</th>
+                  <th>{{t 'teacher-landing.class.class-settings.destination'}}</th>
+                {{/if}}
+                <th class="hidden-xs">{{t 'teacher-landing.class.class-settings.student-id'}}</th>
+                <th>{{t 'teacher-landing.class.class-settings.student-settings-sec.col-head-active'}}</th>
+              </tr>
               {{#each sortedMembers as |student|}}
-                <div class='student-icon-col'>
-                  <div class='student-icon' style="background-image: url({{student.avatarUrl}})"></div>
-                </div>
-                {{#if (and (and course subject) isPremiumClass) }}
-                  <div class="student-name {{if student.isActive "" "inActiveRow"}}  ">
-                    <span class="ellipsis">{{student.lastName}} {{student.firstName}}</span>
-                  </div>
-
-                  <div class="origin {{if student.isActive "" "inActiveRow"}}  ">
-                    <div class='grade-info'>
-                      <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' student 'student-origin'}}>
-                            {{#if (and student.gradeLowerBound ( not (eq student.gradeLowerBound 'undefined' ) ) )}}
-                              {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
-                          searchVal=student.gradeLowerBound
-                          destProp='grade' }}
-                            {{else}}
-                              {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                            {{/if}}
-                            <span class="caret"></span>
-                          </button>
-                        <ul class="dropdown-menu">
-                          {{#if getCurrentGradeDDContent}}
-                            {{#each currentFilterList as |grade|}}
-                              {{#if grade}}
-                                <li> <a data-item= {{grade}} {{action 'updateClassMembersSettings' student  grade.id 'grade_lower_bound'}}>{{grade.grade}}
-                                    </a> </li>
-                              {{/if}}
-                            {{/each}}
-                          {{/if}}
-                        </ul>
+                <tr>
+                  <td>
+                    <div class="student-info-container">
+                      <div class='student-icon-col'>
+                        <div class='student-icon' style="background-image: url({{student.avatarUrl}})"></div>
                       </div>
-
-                    </div>
-                  </div>
-                  <div class='destination {{if student.isActive "" "inActiveRow"}}  '>
-                    <div class='grade-info'>
-                      <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' student 'student-destination'}}>
-                            <span>
-                              {{#if (and student.gradeUpperBound ( not (eq student.gradeUpperBound 'undefined' ) ))}}
-                                {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
-                            searchVal=student.gradeUpperBound
-                            destProp='grade' }}
-                              {{else}}
-                                {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                              {{/if}}
-                            </span>
-                            <span class="caret"></span>
-                          </button>
-                        <ul class="dropdown-menu">
-                          {{#if getCurrentGradeDDContent}}
-                            {{#each currentFilterList as |grade|}}
-                              {{#if grade}}
-                                <li> <a data-item= {{grade}} {{ action 'updateClassMembersSettings'  student grade.id 'grade_upper_bound'}}>{{grade.grade}}
-                                    </a> </li>
-                              {{/if}}
-                            {{/each}}
-                          {{/if}}
-                        </ul>
+                      <div class="student-name ellipsis hidden-xs {{if student.isActive "" "inActiveRow"}}  ">
+                        <span>{{student.lastName}} {{student.firstName}}</span>
                       </div>
                     </div>
-                  </div>
-                  {{else }}
-                  <div class="student-name {{if student.isActive "" "inActiveRow"}}  " style="grid-column-start:span 2;">
-                    <span class="ellipsis">{{student.lastName}} {{student.firstName}}</span>
-                  </div>
-                {{/if}}
-                <div class="student-id {{if student.isActive "" "inActiveRow"}}  "> <span> {{student.studentId}}
-                    </span></div>
-                <div class='student-action-col' style='border-right:unset;align-items: center;'>
-                  {{gru-switch switchOptions=switchOptions onOptionSwitch='classMembersToggle' item=student data-toggle="tooltip"
-                  isChecked=student.isActive}}
-                </div>
-                {{!-- <div class='joined'> </div> --}}
-                {{#if (and (and course subject) isPremiumClass) }}
-                  <div class=" student-action-col
-                    {{if (and student.isActive  student.gradeUpperBound) "" "inActiveRow"}}
-                    {{if (and student.gradeUpperBound (or (not student.profileBaselineDone) student.regeneratePathway)) "baseline-active" "inActiveRow baseline-inactive" }}
-                    " style='border-right:unset;padding:5px;'>
-                    <div class='student-adj-lp' {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}" data-toggle="tooltip" style='border-right:unset;'> {{gru-icon name='replay'}}</div>
-                  </div>
-                  <div class='student-action-col' style="padding:5px; align-self:end;;border-right:unset;">
-                    <div class='student-delete' {{action "onRemoveStudent" student}} title="{{t 'common.remove'}}" data-toggle="tooltip">
-                      {{gru-icon name='delete'}}</div>
-                  </div>
-                {{else}}
-                  <div class='student-action-col' style="grid-column-start:span 2;padding:5px ;align-self:end;border-right:unset;">
-                    <div class='student-delete' {{action "onRemoveStudent" student}} title="{{t 'common.remove'}}" data-toggle="tooltip">
-                      {{gru-icon name='delete'}}</div>
-                  </div>
-                {{/if}}
-              {{/each}} {{!-- Each row of student -- ends --}}
-            </div> {{!-- Student Table / Grid ends --}}
-            {{!-- Add Student Section -- Hidden for now as there is flow not defined --}}
-            <div class='sub-sec-row'>
-              <div class='add-student-icon'> {{gru-icon name='add'}}</div>
-              <div class='add-student-label'> {{t 'teacher-landing.class.class-settings.action-lable-add-student'}}</div>
-            </div> {{!-- Add Student Section -- ends --}}
+                  </td>
+                  {{#if isPremiumClass }}
+                    <td>
+                      <div class="origin {{if student.isActive "" "inActiveRow"}}  ">
+                        <div class='grade-info'>
+                          <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' student 'student-origin'}}>
+                                {{#if (and student.gradeLowerBound ( not (eq student.gradeLowerBound 'undefined' ) ) )}}
+                                  {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
+                              searchVal=student.gradeLowerBound
+                              destProp='grade' }}
+                                {{else}}
+                                  {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
+                                {{/if}}
+                                <span class="caret"></span>
+                              </button>
+                            <ul class="dropdown-menu">
+                              {{#if getCurrentGradeDDContent}}
+                                {{#each currentFilterList as |grade|}}
+                                  {{#if grade}}
+                                    <li> <a data-item= {{grade}} {{action 'updateClassMembersSettings' student  grade.id 'grade_lower_bound'}}>{{grade.grade}}
+                                        </a> </li>
+                                  {{/if}}
+                                {{/each}}
+                              {{/if}}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class='destination {{if student.isActive "" "inActiveRow"}}  '>
+                        <div class='grade-info'>
+                          <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' student 'student-destination'}}>
+                                <span>
+                                  {{#if (and student.gradeUpperBound ( not (eq student.gradeUpperBound 'undefined' ) ))}}
+                                    {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
+                                searchVal=student.gradeUpperBound
+                                destProp='grade' }}
+                                  {{else}}
+                                    {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
+                                  {{/if}}
+                                </span>
+                                <span class="caret"></span>
+                              </button>
+                            <ul class="dropdown-menu">
+                              {{#if getCurrentGradeDDContent}}
+                                {{#each currentFilterList as |grade|}}
+                                  {{#if grade}}
+                                    <li> <a data-item= {{grade}} {{ action 'updateClassMembersSettings'  student grade.id 'grade_upper_bound'}}>{{grade.grade}}
+                                        </a> </li>
+                                  {{/if}}
+                                {{/each}}
+                              {{/if}}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  {{/if}}
+                  <td class="hidden-xs">
+                    <div class="student-id ellipsis {{if student.isActive "" "inActiveRow"}}  ">
+                      <span> {{student.studentId}}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="actions-btn">
+                      <div class="student-action-col">
+                        {{gru-switch switchOptions=switchOptions onOptionSwitch='classMembersToggle' item=student data-toggle="tooltip"
+                        isChecked=student.isActive}}
+                      </div>
+                      {{#if isPremiumClass }}
+                        <div class="student-action-col {{if (and student.isActive  student.gradeUpperBound) "" "inActiveRow"}} {{if (and student.gradeUpperBound (or (not student.profileBaselineDone) student.regeneratePathway)) "baseline-active" "inActiveRow baseline-inactive" }}">
+                          <div class='student-adj-lp' {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}" data-toggle="tooltip"> {{gru-icon name='replay'}}</div>
+                        </div>
+                      {{/if}}
+                      <div class='student-action-col'>
+                        <div class='student-delete' {{action "onRemoveStudent" student}} title="{{t 'common.remove'}}" data-toggle="tooltip">
+                          {{gru-icon name='delete'}}</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              {{/each}}
+            </table>
           </div>
         {{else}}
           <div class='no-students-message'>
