@@ -10,7 +10,6 @@
 @import "app-rwd/components/_gru-student-featured-courses-rwd";
 @import "app-rwd/components/player/_gru-external-assessment-page";
 @import "app-rwd/components/player/_gru-external-assessment-footer";
-@import "app-rwd/components/student/class/student-class-landing";
 @import "app-rwd/components/player/_gru-player-summary-footer-rwd";
 @import "app-rwd/components/reports/pull-up/_course-report-rwd";
 @import "app-rwd/components/reports/pull-up/_course-report-list-view-rwd";
@@ -52,7 +51,7 @@
 
 //Controllers
 @import "app-rwd/controllers/student/class-rwd";
-@import "app-rwd/controllers/student/class/profile";
+@import "app-rwd/controllers/student/class/proficiency";
 @import "app-rwd/controllers/student/class/course-map";
 @import "app-rwd/controllers/student/class/class-activities";
 @import "app-rwd/controllers/student/_student-home-rwd";

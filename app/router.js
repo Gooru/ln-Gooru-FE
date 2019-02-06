@@ -187,7 +187,9 @@ Router.map(function() {
         this.route('course-map');
         this.route('class-activities');
         this.route('performance');
-        this.route('profile');
+        this.route('setup-in-complete');
+        this.route('proficiency');
+        this.route('diagnosis-of-knowledge');
       }
     );
     this.route(

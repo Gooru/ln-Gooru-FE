@@ -1,494 +1,64 @@
-.controller.teacher.class.class-management {
-  width: 100vw;
-  //992px
-  @media only screen and (max-width: $screen-md) {
-    .assessment-min-score {
-      margin-left: 0;
-    }
-
-    .header-info {
-      .class-information {
-        .class-name > span {
-          width: max-content;
-        }
-
-        .assessment-min-score .edit-text {
-          span {
-            width: max-content;
-          }
-
-          .gru-input-number {
-            .form-group {
-              .error-messages {
-                .error {
-                  margin-top: 0;
-                  white-space: nowrap;
-                }
-              }
-            }
-          }
-        }
-
-        .class-name .edit-text {
-          span {
-            width: max-content;
-          }
-
-          .gru-input {
-            .form-group {
-              .error-messages {
-                .error {
-                  margin-top: 0;
-                  white-space: nowrap;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-    .panel.classroom-information {
-      .panel-body {
-        .taxonomy-standards {
-          width: 21%;
-        }
-
-        .class-code {
-          div.code {
-            font-size: 10px;
-            margin-top: 5px;
-          }
-        }
-
-        .course-image {
-          img {
-            width: 50px;
-          }
-        }
-
-        .performance-container,
-        .teacher-profile {
-          display: block;
-        }
-      }
-    }
+.controller.teacher.class.class-settings {
+  .sec-col-layout {
+    display: block;
   }
-  //600px
-  @media only screen and (max-width: $sm-width-max) {
-    .header-info {
-      .class-information {
-        .class-name {
-          .edit-text > span {
-            width: 100%;
-          }
-        }
-      }
-    }
-
-    .panel.classroom-information {
-      .panel-body {
-        .course-name {
-          width: 29%;
-        }
-
-        .class-code {
-          width: 12%;
-          padding: 18px 5px 6px;
-
-          div.code {
-            font-size: 10px;
-          }
-        }
-
-        .taxonomy-standards {
-          display: none;
-        }
-      }
-    }
-  }
-  @media only screen and (min-width: $screen-sm) {
-    .header-info {
-      display: flex;
-    }
-
-    .assessment-min-score {
-      margin-left: 0;
-    }
-  }
-  @media only screen and (max-width: $screen-568 - 1) {
-    .teachers-info-table {
-      .last-name {
-        display: none;
-      }
-
-      table {
-        .table-header {
-          th {
-            div {
-              padding: 0 0 10px;
-            }
-          }
-
-          .sm-last-name {
-            display: none;
-          }
-
-          .profile {
-            width: calc(100vw / 3);
-          }
-
-          .teacher-actions {
-            width: calc(100vw / 4);
-          }
-        }
-      }
-
-      .first-name {
-        width: calc(100vw / 2);
-      }
-
-      .last-name {
-        display: none;
-      }
-
-      .sm-last-name {
-        display: none;
-      }
-    }
-  }
-  @media only screen and (min-width: $screen-568) {
-    .teachers-info-table {
-      .teacher-actions {
-        width: calc(100vw / 4);
-      }
-
-      .teacherdatacolumn {
-        width: calc(100vw / 4);
-      }
-
-      .last-name {
-        width: calc(100vw / 4);
-      }
-
-      table {
-        .table-header {
-          th {
-            width: calc(100vw / 4);
-
-            div {
-              padding: 0 0 10px 27px;
-            }
-          }
-
-          .teachername {
-            display: none;
-          }
-
-          .sm-last-name {
-            width: calc(100vw / 4);
-          }
-
-          .teacher-actions {
-            width: calc(100vw / 4);
-          }
-        }
-      }
-    }
-  }
-}
-
-.controller.teacher.classbg {
-  .controller.teacher.class.class-settings {
+  @media screen and (max-width: $screen-xs) {
     .sec-col-layout {
-      .sec-panel {
-        border-radius: 1px !important;
-      }
-      display: grid;
-      width: 100vw;
-      margin: auto;
       .sec-rows-layout {
-        width: 100vw;
-        margin: auto;
+        &.left-panel,
+        &.right-panel {
+          margin: 0;
+        }
 
-        .gen-pathway-sec {
-          margin-left: unset;
-          width: 100.2%;
-          .btn-top-panel {
-            max-height: 70px;
-            .sec-title {
-              max-width: 240px;
-              height: unset;
-              // white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              display: -webkit-box;
-              -webkit-line-clamp: 2;
-              -webkit-box-orient: vertical;
-              overflow: hidden;
-            }
+        .class-sec-cont {
+          .class-settings-sec {
+            padding-left: 0;
 
-            .top-btn {
-              height: unset;
-              max-height: 69px;
-            }
-          }
-        }
-        .class-layout {
-          margin: auto;
-          .class-sec-cont {
-            @media screen and (max-width: 568px) {
-              .class-settings-sec {
-                width: auto !important;
-                .class-head-row-wrap {
-                  display: grid;
-                  margin-bottom: unset;
-                  .minscoresec > .sec-dec-value {
-                    margin-right: 15px;
-                  }
-                  .sec-head-class-name {
-                    order: 2;
-                    width: unset;
-                    height: unset;
-                  }
-                  .class-code {
-                    width: unset;
-                    height: 60px;
-                    .label-class-code {
-                      opacity: unset;
-                      font-weight: bold;
-                      width: 70px;
-                    }
-                    margin-left: -11px;
-                    .class-code-wrap {
-                      width: 100%;
-                      flex-direction: row;
-                      justify-content: space-evenly;
-                    }
-                  }
-                }
-              }
-            }
-            .class-settings-sec {
-              padding-left: 11px;
-              .sub-sec-coteach {
-                .sub-sec-row {
-                  width: 95%;
-                }
-                .sub-sec-row {
-                  display: flex;
-                  width: 95%;
-                }
-              }
-              .class-head-row-wrap {
-                .sec-head-class-name {
-                }
-              }
-            }
-          }
-        }
-        .class-layout-btn {
-          display: none;
-        }
-      }
-      .class-layout-btn {
-        .btn-panel {
-          margin: auto;
-          margin-top: 30px;
-          justify-content: center;
-          display: grid;
-          width: 284px;
-          grid-row-gap: 14px;
-        }
-      }
-    }
-    .sec-rows-layout {
-      .course-settings-layout {
-        .course-sec-cont {
-          margin: auto;
-          width: 101%;
-          .course-settings-sec {
-            .btn-panel {
-              .sec-title {
-                width: 150px;
-                height: 10px;
-              }
-            }
-            .sub-sec-row {
-              width: 420px;
-              .field-drop-down {
-                .dropdown {
-                  .btn.btn-default.dropdown-toggle {
-                    width: 127px;
-                  }
-                }
-              }
-            }
+            .class-head-row-wrap {
+              grid-template-columns: 1fr;
 
-            .row-offline-class > .offline-label {
-              flex: 0.799;
-            }
-          }
-        }
-      }
-      .student-sec-cont {
-        margin: auto;
-        width: 100.2%;
-        .student-settings-sec {
-          width: 100%;
-          margin-left: 0px;
-          display: flex;
-          .student-grid {
-            grid-template-columns:
-              30px minmax(90px, max-content) minmax(120px, auto)
-              auto auto auto;
+              .sec-head-class-name {
+                order: 2;
+                padding-left: 10px;
+                height: unset;
+                padding-right: 20px;
+              }
 
-            .student-delete {
-              margin-left: -6px !important;
-            }
-            .id-head {
-              display: none;
-            }
-            .student-id {
-              display: none;
-            }
-            .student-id-head {
-              display: none;
-            }
-            .student-icon-col {
-              .student-icon {
-                width: 25px;
-                height: 25px;
-              }
-            }
-            .student-action-col {
-              .student-delete {
-                height: 30px;
-                margin-left: 38px;
-                width: 30px;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+              .class-code {
+                width: unset;
+                height: 60px;
 
-@media screen and (min-width: 568px) {
-  .controller.teacher.classbg {
-    .controller.teacher.class.class-settings {
-      .sec-col-layout {
-        .sec-rows-layout {
-          .class-layout {
-            .class-sec-cont {
-              .class-settings-label {
-              }
-            }
-          }
-        }
-      }
-      .sec-rows-layout {
-        .course-settings-layout {
-          .course-sec-cont {
-            .course-settings-label {
-              margin-top: 20px;
-            }
-            .course-settings-sec {
-              .sub-sec-row {
-                .field-drop-down {
-                  .dropdown {
-                    .btn.btn-default.dropdown-toggle {
-                      width: 127px;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        .student-sec-cont {
-          .student-settings-sec {
-            .student-grid {
-              grid-template-columns: 27px minmax(0px, auto) 31px 78px auto auto auto;
-              width: 100%;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 568px) and (max-width: 992px) {
-  .controller.teacher.classbg {
-    .controller.teacher.class.class-settings {
-      .sec-col-layout {
-        margin-left: 0;
-        .sec-rows-layout {
-          margin: auto;
-          width: 100vw;
-        }
-        .class-layout {
-          width: 80%;
-          margin: auto;
-          .class-sec-cont {
-            .class-settings-label {
-              margin: 30px;
-            }
-            .class-settings-sec {
-              width: 90%;
-              margin: auto;
-              .class-head-row-wrap {
-                .class-code {
+                .class-code-wrap {
                   width: 100%;
+                  flex-direction: row;
+                  justify-content: space-evenly;
                 }
               }
             }
-          }
-        }
-        .sec-rows-layout {
-          margin: auto;
-          width: 100vw;
-          .course-settings-layout {
-            width: 90%;
-            margin: auto;
-            .course-sec-cont {
-              width: 80%;
-              margin: auto;
-              .course-settings-label {
-                margin-left: 3px;
-              }
+
+            .language-row,
+            .sub-sec-coteach {
+              padding-left: 10px;
             }
           }
         }
-        .gen-pathway-sec {
-          width: 72% !important;
-          margin-left: auto !important;
-          margin-right: auto !important;
-        }
+
         .class-layout-btn {
           .btn-panel {
-            margin-top: 30px;
-            display: flex;
-            width: 481px;
-            justify-content: space-evenly;
+            display: block;
+
+            .class-btn {
+              margin-top: 10px;
+            }
           }
         }
-        .sec-rows-layout {
-          .student-sec-cont {
-            margin: auto;
-            width: 80%;
-            .student-settings-label {
-              margin: 30px;
-            }
-            .student-settings-sec {
-              margin: auto;
-              width: 90%;
-              .student-grid {
-                grid-template-columns: 63px minmax(8px, auto) 71px 76px auto auto auto;
-                width: 100%;
-              }
+      }
+
+      .student-sec-cont {
+        .student-settings-sec {
+          table {
+            .student-info-container {
+              display: block;
             }
           }
         }

@@ -141,6 +141,18 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    */
   isNotAbleToStartPlayer: false,
 
+  /**
+   * Property used to identify destination.
+   * @type {String}
+   */
+  destination: Ember.computed.alias('skylineInitialState.destination'),
+
+  /**
+   * Property used to identify whether class has premium course or not.
+   * @type {Boolean}
+   */
+  isPremiumCourse: false,
+
   // -------------------------------------------------------------------------
   // Methods
 

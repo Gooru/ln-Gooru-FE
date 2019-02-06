@@ -29,9 +29,25 @@
     .competency-level-container {
       padding-top: 30px;
       overflow-y: auto;
+      color: #535e67;
+
+      p {
+        margin-bottom: 0;
+        font-size: 15px;
+      }
+
+      .proficiency-info {
+        transition: visibility 1s linear, opacity 1s linear;
+        opacity: 0;
+
+        &.active {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
 
       .grade-title {
-        height: 68px;
+        height: 50px;
         font-size: 35px;
         line-height: 0.8em;
         color: $dark-300;
@@ -128,6 +144,7 @@
         width: 220px;
         border-radius: 45px;
         font-size: 18px;
+        margin-left: 200px;
       }
     }
     //TODO new screen changes
@@ -367,6 +384,37 @@
     position: absolute;
     left: 50%;
     top: 50%;
+  }
+
+  .lp-compute-inprogress {
+    align-self: center;
+    justify-self: center;
+
+    span {
+      font-size: 40px;
+      display: flex;
+      align-items: center;
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    .compute-icon {
+      background: url("gooru/images/ellipsis-loading-icon.svg") no-repeat;
+      display: block;
+      background-size: 150px 150px;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto;
+    }
+
+    p {
+      padding-top: 20px;
+      font-size: 35px;
+      line-height: 1.2;
+      margin: 0;
+      text-align: center;
+      padding-right: 20px;
+    }
   }
 }
 
