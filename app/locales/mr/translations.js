@@ -2,11 +2,11 @@
 
 export default Object.assign(quizzesTranslations, {
   en: 'English',
-  sp: 'Español - preRelease',
-  ar: 'عربى - preRelease',
-  mr: 'मराठी - preRelease',
-  kn: 'ಕನ್ನಡ - preRelease',
-  hi: 'हिंदी - preRelease',
+  sp: 'Español',
+  ar: 'عربى',
+  mr: 'मराठी',
+  kn: 'ಕನ್ನಡ',
+  hi: 'हिंदी',
 
   errors: {
     description: 'हे फील्ड',
@@ -244,6 +244,7 @@ export default Object.assign(quizzesTranslations, {
     },
     'depth-of-knowledge': 'ज्ञानाची खोली',
     description: 'वर्णन',
+    destination: 'गंतव्य',
     'disappear-after-login': 'हे {{loginnumber}} लॉग-इन नंतर अदृश्य होईल',
     'disappear-next-login': 'हे पुढील लॉग-इन वर दिसणार नाही',
     district: 'जिल्हा',
@@ -529,6 +530,7 @@ export default Object.assign(quizzesTranslations, {
     'published-tooltip': 'बॅज्ड सामग्री',
     publisher: 'प्रकाशक',
     prev: 'मागे',
+    progress: 'प्रगति',
     question: 'प्रश्न',
     questions: 'प्रश्न',
     'questions-OE': 'मुक्त प्रतिसाद प्रश्न',
@@ -620,7 +622,7 @@ export default Object.assign(quizzesTranslations, {
     none: 'काहीही नाही',
     'no-students': 'काहीही नाही',
     'add-data': 'माहिती भरा',
-    'update-data': 'माहिती Update करा',
+    'update-data': 'Update करा',
     all: 'सर्व',
     everyone: 'सर्व विद्यार्थी',
     'unscheduled-items': 'अनियोजित',
@@ -661,6 +663,7 @@ export default Object.assign(quizzesTranslations, {
     study: 'अभ्यास',
     'study-now': 'आता अभ्यास करा',
     student: 'विद्यार्थी',
+    students: 'विद्यार्थी',
     'student-id': 'विद्यार्थी आयडी (प्रोफाइलवर प्रदर्शित नाही)',
     'studen-id-display':
       'विद्यार्थी आयडी (प्रोफाइलवर प्रदर्शित केला नाही, निनावी मोडमध्ये प्रदर्शित केला आहे)',
@@ -684,6 +687,7 @@ export default Object.assign(quizzesTranslations, {
     tools: 'औजारे',
     true: 'खरे',
     type: 'प्रकार',
+    title: 'शीर्षक',
     unBookmark: 'बुकमार्क काढा',
     unexpectedError:
       'एक अनपेक्षित त्रुटी आली आणि रिपोर्ट करण्यात आली आहे. असुविधेसाठी आम्ही दिलगीर आहोत!',
@@ -705,6 +709,7 @@ export default Object.assign(quizzesTranslations, {
     'upload-file': ' फाइल अपलोड करा',
     'upload-thumbnail': ' थंबनेल अपलोड करा',
     'upload-photo': 'फोटो अपलोड करा',
+    until: 'Until',
     'remove-photo': 'फोटो काढा',
     'use-case': 'केस वापरा',
     'valid-extensions': 'वैध फाइल एक्सटेन्शन्स हे आहेत: {{extensions}}',
@@ -809,6 +814,8 @@ export default Object.assign(quizzesTranslations, {
       'edit-content': 'सामग्री संपादित करा',
       'add-to-daily-class-activities':
         'वर्गाच्या दैनंदिन कामकाजामध्ये सामील करा',
+      'assigned-course': 'आपका नियुक्त पाठ्यक्रम',
+      'pre-study-title': 'अपने पाठ्यक्रम के लिए पूर्व-अध्ययन',
       'course-map': {
         'rescope-toggle': 'पूर्ण कोर्स नकाशा दर्शवा',
         'rescope-info':
@@ -1232,6 +1239,7 @@ export default Object.assign(quizzesTranslations, {
       'back-to': 'क्लासरूम कडे परत',
       'back-to-archived': 'संग्रहित कक्षांमध्ये परत',
       'class-management': 'वर्ग व्यवस्थापन',
+      atc: 'शीर्ष द़ृश्य',
       'class-management-tab': {
         actions: 'क्रिया',
         'assessment-min-score': 'ट्रॉफीसाठी कमीत कमी गुण',
@@ -1286,6 +1294,15 @@ export default Object.assign(quizzesTranslations, {
           'वर्गातील सर्व विद्यार्थ्यांनी आत्मसात केलेल्या क्षमतांचा आढावा',
         'error-message':
           'या वर्गामध्ये सलंग्न अभ्यासक्रम किंवा विद्यार्थी नाहीत. जेव्हा वर्गात अभ्यासक्रम तसेच त्यातील विद्यार्थी भरले जातील तेव्हा वर्गाचा क्षमता अहवाल येथे दाखवला जाईल.'
+      },
+      'atc-view': {
+        'domains-reviewed': 'समी़क्षा किये जाने वाले क्षेत्र',
+        'class-activities-completed': 'कक्षा में आयोजित गतिविधियाँ',
+        'class-activities-pending':
+          'कक्षा में आयोजित की जाने वाली आगामी  गतिविधियाँ',
+        'show-all': 'सभी दिखाएं ',
+        collapse: 'समेटें',
+        'total-competencies-gained': 'कुल हासिल दक्षताएँ'
       },
       'class-activities': 'दैनिक वर्ग कृती',
       'offline-class-report': {
@@ -2228,6 +2245,7 @@ export default Object.assign(quizzesTranslations, {
     subscript: 'सबस्क्रिप्ट',
     superscript: 'सुपरस्क्रिप्ट',
     underline: 'अधोरेखित करा',
+    bullets: 'बुलेट्स',
     'expressions-panel': {
       tabs: {
         calculus: 'गणित',
@@ -2853,6 +2871,25 @@ export default Object.assign(quizzesTranslations, {
     },
     'domain-report': 'डोमेन अहवाल'
   },
+
+  'competency-meta-data': {
+    title: 'ALT-CONCEPTS',
+    heading: {
+      micro: 'MICRO COMPETENCIES',
+      prequisite: 'PREQUISITE COMPETENCIES'
+    },
+    nodata: {
+      micro: 'There are no micro-competencies defined for this competency',
+      prequisite:
+        'There are no prerequisite-competencies defined for this competency',
+      competency: 'There are no alt-concepts defined for this competency'
+    }
+  },
+  'student-journey': {
+    heading: 'YOUR JOURNEY',
+    nodata: 'You are yet to start your journey for this competency'
+  },
+
   'self-report': {
     'your-score': 'आपला स्कोअर',
     time_spent: 'एकूण लागलेला वेळ',

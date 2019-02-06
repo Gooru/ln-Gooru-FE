@@ -47,7 +47,31 @@
   .chart-area {
     background-color: $gray-97;
     display: grid;
-    zoom: 0.9;
+    min-height: calc(100vh - 235px);
+
+    .matrix-chart {
+      #render-proficiency-matrix {
+        &.hover {
+          svg {
+            #cell-container {
+              rect {
+                opacity: 0.1;
+                stroke-width: 0;
+
+                &.active {
+                  opacity: 1;
+                  stroke-width: 1;
+                }
+              }
+            }
+
+            #skyline-container {
+              opacity: 0;
+            }
+          }
+        }
+      }
+    }
 
     &.compressed-view {
       .matrix-chart {

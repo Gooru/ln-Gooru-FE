@@ -70,6 +70,25 @@ export default Ember.Component.extend({
       this.sendAction('onSelectMonth', date);
     },
 
+    goBack() {
+      let component = this;
+      let isTeacher = component.get('isTeacher');
+      let classId = component.get('class.id');
+      let courseId = component.get('course.id');
+      if (isTeacher) {
+        component
+          .get('router')
+          .transitionTo('teacher.class.students-proficiency', classId);
+      } else {
+        component.get('router').transitionTo('student-locate', {
+          queryParams: {
+            classId: classId,
+            courseId: courseId
+          }
+        });
+      }
+    },
+
     /**
      * Action triggered at once the baseline is drawn
      */

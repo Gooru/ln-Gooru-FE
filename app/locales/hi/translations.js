@@ -246,6 +246,7 @@ export default Object.assign(quizzesTranslations, {
     },
     'depth-of-knowledge': 'ज्ञान की गहराई',
     description: 'विवरण',
+    destination: 'मंजिल',
     'disappear-after-login': 'यह {{loginnumber}} लॉगिन के बाद गायब हो जाएगा',
     'disappear-next-login': 'यह अगले लॉगिन पर दिखाई नहीं देगा',
     district: 'जिला',
@@ -534,6 +535,7 @@ export default Object.assign(quizzesTranslations, {
     'published-tooltip': 'बैज सामग्री',
     publisher: 'प्रकाशक',
     prev: 'पिछला',
+    progress: 'प्रगति',
     question: 'प्रश्न',
     questions: 'प्रश्न',
     'questions-OE': 'मुक्त अनुक्रिया प्रश्न',
@@ -621,10 +623,12 @@ export default Object.assign(quizzesTranslations, {
     save: 'सहेजें',
     'de-select': 'का चयन करने के लिए',
     'select-all': 'सभी का चयन करे',
+    none: 'कोई छात्र नहीं',
     'no-students': 'कोई छात्र नहीं',
     'add-data': 'डेटा जोड़ें',
-    'update-data': 'आँकड़े अपडेट करें',
+    'update-data': 'आँकड़े जोड़ें',
     all: 'सभी ',
+    everyone: 'सर्व विद्यार्थी',
     'unscheduled-items': 'अनिर्धारित सामग्री',
     'add-to-unschedule': 'के लिए अनिर्धारित सूची में जोड़ें',
     'save-next': 'सहेजें और अगला',
@@ -687,6 +691,7 @@ export default Object.assign(quizzesTranslations, {
     tools: 'टूल',
     true: 'सही',
     type: 'प्रकार',
+    title: 'शीर्षक',
     unBookmark: 'अनबुकमार्क करें',
     unexpectedError:
       'एक अनपेक्षित त्रुटि आई है और इसकी सूचना दी गई है। असुविधा के लिए हमें खेद है!',
@@ -708,6 +713,7 @@ export default Object.assign(quizzesTranslations, {
     'upload-file': 'फाइल अपलोड करें',
     'upload-thumbnail': 'थंबनेल अपलोड करें',
     'upload-photo': 'फोटो अपलोड करें',
+    until: 'Until',
     'remove-photo': 'तस्वीर हटाएं',
     'use-case': 'बड़े अक्षर का उपयोग करें',
     'valid-extensions': 'मान्य फ़ाइल एक्सटेंशन हैं: {{extension}}',
@@ -1302,7 +1308,7 @@ export default Object.assign(quizzesTranslations, {
       },
       'atc-view': {
         'domains-reviewed': 'समी़क्षा किये जाने वाले क्षेत्र',
-        'class-activities-conducted': 'कक्षा में आयोजित गतिविधियाँ',
+        'class-activities-completed': 'कक्षा में आयोजित गतिविधियाँ',
         'class-activities-pending':
           'कक्षा में आयोजित की जाने वाली आगामी  गतिविधियाँ',
         'show-all': 'सभी दिखाएं ',
@@ -2866,6 +2872,25 @@ export default Object.assign(quizzesTranslations, {
     },
     'domain-report': 'डोमेन रिपोर्ट'
   },
+
+  'competency-meta-data': {
+    title: 'ALT-CONCEPTS',
+    heading: {
+      micro: 'MICRO COMPETENCIES',
+      prequisite: 'PREQUISITE COMPETENCIES'
+    },
+    nodata: {
+      micro: 'There are no micro-competencies defined for this competency',
+      prequisite:
+        'There are no prerequisite-competencies defined for this competency',
+      competency: 'There are no alt-concepts defined for this competency'
+    }
+  },
+  'student-journey': {
+    heading: 'YOUR JOURNEY',
+    nodata: 'You are yet to start your journey for this competency'
+  },
+
   'self-report': {
     'your-score': 'आपका स्कोर',
     time_spent: 'समय बिताया',

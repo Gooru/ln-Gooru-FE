@@ -1,10 +1,10 @@
-<div class="competency-panel-header">
+<div class="competency-panel-header" {{action 'expandPullUp' bubbles=false}}>
   <div class="competency-status status-{{competency.status}}"></div>
   <div class="competency-title">
     <div class="competency-domain">{{competency.domainName}}</div>
     <div class="competency-name">{{competency.competencyCode}}</div>
   </div>
-  <span class="close" {{action 'closePullUp'}}>{{gru-icon name="close"}}</span>
+  <span class="close" {{action 'closePullUp' bubbles=false}}>{{gru-icon name="close"}}</span>
 </div>
 <div class="body">
   {{#if competency}}

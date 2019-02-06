@@ -1,24 +1,18 @@
-.student-learner-proficiency {
-  .gru-header {
-    display: none !important;
+.teacher_class_student-learner-proficiency {
+  .teacher.class {
+    padding: 0;
   }
 
   .student-proficiency-container {
+    @extend %bg-base64;
     width: 100%;
-    background: #35424b;
     height: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
+    background: #35424b;
     grid-gap: 20px;
-    padding-top: 55px;
-    padding-bottom: 10px;
+    padding: 10px 0;
     display: grid;
+    min-height: 92vh;
     grid-template-columns: 100px 1fr 35%;
-
-    &.teacher {
-      background: #35424b;
-    }
 
     .pull-up-container {
       padding-right: 15px;
