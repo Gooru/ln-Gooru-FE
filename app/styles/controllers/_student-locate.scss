@@ -63,6 +63,8 @@
       .chrono-timeline {
         display: grid;
         position: relative;
+        grid-column-start: 2;
+        height: 90vh;
 
         .container {
           width: 100%;
