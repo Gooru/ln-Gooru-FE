@@ -48,10 +48,9 @@ export default Ember.Route.extend({
     const userId = route.get('session.userId');
     const classId = params.classId;
     const courseId = params.courseId;
-    const classPromise =
-      classId && classId != null
-        ? route.get('classService').readClassInfo(classId)
-        : null;
+    const classPromise = classId
+      ? route.get('classService').readClassInfo(classId)
+      : null;
     const coursePromise = route.get('courseService').fetchById(courseId);
     return coursePromise.then(function(courseData) {
       let classCourseId = null;
