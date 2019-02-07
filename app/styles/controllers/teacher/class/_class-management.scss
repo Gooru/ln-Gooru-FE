@@ -222,8 +222,8 @@
               padding-right: 20px;
 
               .class-title {
-                width: 290px;
-                display: block;
+                max-width: 272px;
+                display: inline-block;
               }
 
               .gru-icon.edit {
