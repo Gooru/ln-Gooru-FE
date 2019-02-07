@@ -132,17 +132,6 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
         }
       }.bind(this)
     );
-
-    let whichLocalSet = this.getLocalStorage().getItem(
-      this.device_language_key
-    );
-    if (whichLocalSet) {
-      this.send('setLocale', whichLocalSet);
-    }
-  },
-
-  getLocalStorage: function() {
-    return window.localStorage;
   },
 
   /**
