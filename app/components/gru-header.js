@@ -41,15 +41,7 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
 
     var arr = Ember.A();
     this.get('i18n.locales').map(function(loc) {
-      if (
-        loc !== 'en/quizzes' &&
-        loc !== 'sp/quizzes' &&
-        loc !== 'ar/quizzes' &&
-        loc !== 'hi/quizzes' &&
-        loc !== 'mr/quizzes' &&
-        loc !== 'ta/quizzes' &&
-        loc !== 'kn/quizzes'
-      ) {
+      if (!loc.includes('/quizzes')) {
         arr.addObject({
           id: loc,
           text: i18n.t(loc)
@@ -129,20 +121,6 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       this.set('showDropMenu', EndPointsConfig.getLanguageSettingdropMenu());
     }
 
-    /*
-    if (EndPointsConfig.getLanguageSettingdefaultLang() !== undefined) {
-      this.set('i18n.locale', EndPointsConfig.getLanguageSettingdefaultLang());
-      if (EndPointsConfig.getLanguageSettingdefaultLang() === 'ar') {
-        const rootElement = Ember.$(Env.rootElement);
-        rootElement.addClass('changeDir');
-        rootElement.removeClass('changeDirDefault');
-      } else {
-        const rootElement = Ember.$(Env.rootElement);
-        rootElement.removeClass('changeDir');
-        rootElement.addClass('changeDirDefault');
-      }
-    } */
-
     $('.search-input').on(
       'keyup',
       function(e) {
@@ -162,9 +140,11 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       this.send('setLocale', whichLocalSet);
     }
   },
+
   getLocalStorage: function() {
     return window.localStorage;
   },
+
   /**
    * willDestroyElement event
    */
@@ -174,6 +154,9 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     this.set('isTyping', null);
   },
 
+  /**
+   * setLocale function
+   */
   setLocale(selVal) {
     this.set('i18n.locale', selVal);
     if (selVal === 'ar') {
@@ -190,6 +173,7 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       Env.APP.isRTL = false;
     }
   },
+
   // -------------------------------------------------------------------------
   // Properties
 
