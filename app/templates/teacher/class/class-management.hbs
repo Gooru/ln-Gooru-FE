@@ -205,15 +205,8 @@
                   </div>
                   <div class='field-drop-down'>
                     <div class='grade-info'>
-                      {{#if class.gradeLowerBound }}
-                        <div class='grade-label'>
-                          {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
-                                              searchVal=class.gradeLowerBound
-                                              destProp='grade' }}
-                        </div>
-                      {{else}}
-                        <div class="dropdown">
-                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' tempClass 'class-origin'}}>
+                      <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' tempClass 'class-origin'}}>
                               {{#if tempClass.gradeLowerBound}}
                                 {{get-value 'soruce' source=subjectTaxonomyGrades searchProp='id'
                                       searchVal=tempClass.gradeLowerBound
@@ -223,18 +216,17 @@
                               {{/if}}
                               <span class="caret"></span>
                             </button>
-                          <ul class="dropdown-menu">
-                            {{#if getCurrentGradeDDContent}}
-                              {{#each currentFilterList as |grade|}}
-                                {{#if grade}}
-                                  <li> <a data-item= {{grade}} {{ action 'updateClassSettings'  grade.id 'grade_lower_bound'}}>{{grade.grade}}
+                        <ul class="dropdown-menu">
+                          {{#if getCurrentGradeDDContent}}
+                            {{#each currentFilterList as |grade|}}
+                              {{#if grade}}
+                                <li> <a data-item= {{grade}} {{ action 'updateClassSettings'  grade.id 'grade_lower_bound'}}>{{grade.grade}}
                                       </a> </li>
-                                {{/if}}
-                              {{/each}}
-                            {{/if}}
-                          </ul>
-                        </div>
-                      {{/if}}
+                              {{/if}}
+                            {{/each}}
+                          {{/if}}
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -253,15 +245,8 @@
                     </div>
                     <div class='field-drop-down'>
                       <div class='grade-info'>
-                        {{#if class.gradeCurrent}}
-                          <div class='grade-label'>
-                            {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
-                                                searchVal=class.gradeCurrent
-                                                destProp='grade' }}
-                          </div>
-                        {{else}}
-                          <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' tempClass 'class-current'}}>
+                        <div class="dropdown">
+                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' tempClass 'class-current'}}>
                                 {{#if tempClass.gradeCurrent}}
                                   {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
                                                 searchVal=tempClass.gradeCurrent
@@ -271,18 +256,17 @@
                                 {{/if}}
                                 <span class="caret"></span>
                               </button>
-                            <ul class="dropdown-menu">
-                              {{#if currentFilterList}}
-                                {{#each currentFilterList as |grade|}}
-                                  {{#if grade}}
-                                    <li> <a data-item= {{grade}} {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
+                          <ul class="dropdown-menu">
+                            {{#if currentFilterList}}
+                              {{#each currentFilterList as |grade|}}
+                                {{#if grade}}
+                                  <li> <a data-item= {{grade}} {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
                                         </a> </li>
-                                  {{/if}}
-                                {{/each}}
-                              {{/if}}
-                            </ul>
-                          </div>
-                        {{/if}}
+                                {{/if}}
+                              {{/each}}
+                            {{/if}}
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>

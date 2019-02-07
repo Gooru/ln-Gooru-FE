@@ -1,7 +1,10 @@
 import Ember from 'ember';
 import PlayerRoute from 'gooru-web/routes/player';
 import PrivateRouteMixin from 'gooru-web/mixins/private-route-mixin';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  CONTENT_TYPES,
+  CLASS_SKYLINE_INITIAL_DESTINATION
+} from 'gooru-web/config/config';
 
 /**
  * Study Player Route
@@ -35,13 +38,23 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
 
   route0Service: Ember.inject.service('api-sdk/route0'),
 
+  /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
+  /**
+   * @type {SkylineInitialService} Service to retrieve skyline initial service
+   */
+  skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
     didTransition() {
       /*
-    * Pre load timeline data and set that data to model.
-    */
+       * Pre load timeline data and set that data to model.
+       */
       return true; // Bubble the didTransition event
     },
     /**
@@ -111,6 +124,14 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
 
   // -------------------------------------------------------------------------
   // Methods
+
+  beforeModel(transition) {
+    const queryParams = transition.queryParams;
+    if (queryParams && queryParams.classId) {
+      return this.doCheckClassDestination(queryParams.classId);
+    }
+  },
+
   model: function(params) {
     const route = this;
     if (params.isNotification) {
@@ -140,9 +161,10 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
         var lessonPromise = null;
         var notificationNextPromise = null;
         if (params.pathType === 'route0') {
-          let route0Model = route
-            .get('route0Service')
-            .getRoute0({ classId: params.classId, courseId: courseId });
+          let route0Model = route.get('route0Service').getRoute0({
+            classId: params.classId,
+            courseId: courseId
+          });
           if (route0Model) {
             let units = Ember.Object.create(),
               lessono = Ember.Object.create();
@@ -331,5 +353,52 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
 
   deactivate: function() {
     this.get('controller').resetValues();
+  },
+
+  doCheckClassDestination(classId) {
+    const route = this;
+    const classPromise = route.get('classService').readClassInfo(classId);
+    return classPromise.then(function(classData) {
+      if (route.findClassIsPermium(classData)) {
+        return route
+          .get('skylineInitialService')
+          .fetchState(classId)
+          .then(skylineInitialState => {
+            let destination = skylineInitialState.get('destination');
+            if (
+              destination ===
+              CLASS_SKYLINE_INITIAL_DESTINATION.classSetupInComplete
+            ) {
+              return route.transitionTo(
+                'student.class.setup-in-complete',
+                classId
+              );
+            } else if (
+              destination ===
+                CLASS_SKYLINE_INITIAL_DESTINATION.showDirections ||
+              destination === CLASS_SKYLINE_INITIAL_DESTINATION.ILPInProgress
+            ) {
+              return route.transitionTo('student.class.proficiency', classId);
+            } else if (
+              destination === CLASS_SKYLINE_INITIAL_DESTINATION.diagnosticPlay
+            ) {
+              return route.transitionTo(
+                'student.class.diagnosis-of-knowledge',
+                classId
+              );
+            }
+          });
+      }
+    });
+  },
+
+  /**
+   * Method used to identify course is permium or not
+   * @return {Boolean}
+   */
+  findClassIsPermium(aClass) {
+    let setting = aClass.get('setting');
+    let isPremiumCourse = setting ? setting['course.premium'] : false;
+    return isPremiumCourse;
   }
 });
