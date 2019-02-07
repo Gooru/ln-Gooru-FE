@@ -63,22 +63,6 @@ export default Ember.Component.extend({
     }
   ),
 
-  /**
-   * @property {onActivityChange}
-   */
-  onActivityChange: Ember.observer('activities.@each.selected', function() {
-    let component = this;
-    let activities = component.get('activities');
-    let selectedActivity = activities.findBy('selected', true);
-    let activeIndex = activities.indexOf(selectedActivity);
-    component.set('activeIndex', activeIndex);
-  }),
-
-  /**
-   * @property {activeIndex}
-   */
-  activeIndex: null,
-
   // -------------------------------------------------------------------------
   // Actions
 
@@ -108,67 +92,60 @@ export default Ember.Component.extend({
 
     onSelectCard(activity) {
       let component = this;
-      component.selectCard(activity);
+      let timeData = component.get('timeData');
+      let selectedTimeData = timeData.findBy('selected', true);
+      let selectedIndex = component.get('activities').indexOf(activity);
+      component.checkPagination(selectedIndex);
+      selectedTimeData.set('selected', false);
+      activity.set('selected', true);
+      component.set('positionToCenter', true);
     }
   },
 
   // -------------------------------------------------------------------------
   // Events
 
-  init() {
+  didInsertElement() {
     let component = this;
     component._super(...arguments);
     let timeData = component.get('timeData');
     let numberOfTimeData = timeData.length;
     let lastIndex = numberOfTimeData - 1;
-    component.set('activeIndex', lastIndex);
     let selectedTimeData = timeData.objectAt(lastIndex);
     selectedTimeData.set('selected', true);
-  },
-
-  /**
-   * @function changeActivity
-   * Method to change activity when keypress
-   */
-  changeActivity(index) {
-    let component = this;
-    let activities = component.get('activities');
-    let activity = activities.objectAt(index);
-    if (index >= 0 && index <= activities.length - 1) {
-      component.selectCard(activity);
-    }
-  },
-
-  didInsertElement() {
-    let component = this;
-    component.$(document).keydown(function(e) {
-      if (e.keyCode === 37) {
-        let activeIndex = component.get('activeIndex') - 1;
-        component.changeActivity(activeIndex);
-      } else if (e.keyCode === 39) {
-        let activeIndex = component.get('activeIndex') + 1;
-        component.changeActivity(activeIndex);
+    Ember.$(document).on('keydown', function(e) {
+      if (e.keyCode === 37 || e.keyCode === 39) {
+        component.onKeyPress(timeData, e);
       }
     });
   },
 
-  // -------------------------------------------------------------------------
-  // Methods
   /**
-   * @function selectCard
-   * Method to select the card on keypress based on the activity
+   * @function onKeyPress
+   * Method triggered when keypress
    */
-  selectCard(activity) {
+  onKeyPress(timeData, event) {
     let component = this;
-    let timeData = component.get('timeData');
     let selectedTimeData = timeData.findBy('selected', true);
-    let selectedIndex = component.get('activities').indexOf(activity);
-    component.checkPagination(selectedIndex);
-    selectedTimeData.set('selected', false);
-    activity.set('selected', true);
-    component.set('positionToCenter', true);
+    let selectedIndex = timeData.indexOf(selectedTimeData);
+    let incrementVal = event.keyCode === 37 ? 1 : -1;
+    let nextIndex = selectedIndex + incrementVal;
+    let activity = timeData.objectAt(nextIndex);
+    if (activity) {
+      component.send('onSelectCard', activity);
+    }
   },
 
+  /**
+   * @function didDestroyElement
+   * Method to destroy keypress
+   */
+  didDestroyElement() {
+    Ember.$(document).off('keydown');
+  },
+
+  // -------------------------------------------------------------------------
+  // Methods
   /**
    * @function parseTimelineData
    * Method to parse and set timeline data
