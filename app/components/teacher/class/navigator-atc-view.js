@@ -54,7 +54,7 @@ export default Ember.Component.extend({
   /**
    * @property {String} subjectCode
    */
-  subjectCode: Ember.computed.alias('course.subject'),
+  subjectCode: Ember.computed.alias('classData.preference.subject'),
 
   /**
    * @property {Date} firstDayOfMonth
