@@ -502,11 +502,6 @@ export default Ember.Component.extend({
   // Properties
 
   /**
-   * @property {Object} course
-   */
-  course: Ember.computed.alias('classData.course'),
-
-  /**
    * @property {String}
    * Property to store active class id
    */
