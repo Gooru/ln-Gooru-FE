@@ -116,16 +116,16 @@ export default Ember.Component.extend({
     Ember.$(document).on('keydown', function(e) {
       var keycode = e.keyCode;
       if (keycode === 37 || keycode === 39) {
-        component.HandleCardNavigation(keycode);
+        component.handleCardNavigation(keycode);
       }
     });
   },
 
   /**
-   * @function HandleCardNavigation
+   * @function handleCardNavigation
    * Method triggered on navigation of card
    */
-  HandleCardNavigation(keycode) {
+  handleCardNavigation(keycode) {
     let component = this;
     let timeData = component.get('timeData');
     let selectedTimeData = timeData.findBy('selected', true);
