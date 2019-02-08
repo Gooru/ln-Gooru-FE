@@ -479,9 +479,11 @@ export default Ember.Component.extend({
     let conductedOn = new Date(activityData.activation_date) || new Date();
     let classId = component.get('classId');
     let assessment = component.get('assessment');
+    let courseId = component.get('course') ? component.get('course').id : null;
     inputElements.each(function(index, scoreElement) {
       let questionData = questions.objectAt(index);
       let score = component.$(scoreElement).val();
+
       let resourceData = {
         resource_id: questionData.id,
         resource_type: 'question',
@@ -504,7 +506,8 @@ export default Ember.Component.extend({
       conducted_on: conductedOn.toISOString(),
       path_id: 0,
       path_type: null,
-      resources: assessmentResources
+      resources: assessmentResources,
+      course_id: courseId
     };
     return studentPerformanceData;
   },

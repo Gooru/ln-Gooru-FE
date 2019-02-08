@@ -1,8 +1,7 @@
 import Ember from 'ember';
 import d3 from 'd3';
 import {
-  getGradeColor,
-  getSubjectIdFromSubjectBucket
+  getGradeColor
 } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
@@ -520,14 +519,7 @@ export default Ember.Component.extend({
    * @property {String}
    * Property to store active class's course subject
    */
-  subjectCode: Ember.computed('classData', function() {
-    let component = this;
-    let classData = component.get('classData');
-    let courseSubjectCode = classData.courseSubjectCode;
-    return courseSubjectCode
-      ? getSubjectIdFromSubjectBucket(courseSubjectCode)
-      : null;
-  }),
+  subjectCode: Ember.computed.alias('classData.preference.subject'),
 
   /**
    * @property {Boolean}
