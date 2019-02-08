@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import d3 from 'd3';
-import { getGradeColor, isMobileVW } from 'gooru-web/utils/utils';
+import { getGradeColor, isMobileVW, getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -54,7 +54,13 @@ export default Ember.Component.extend({
   /**
    * @property {String} subjectCode
    */
-  subjectCode: Ember.computed.alias('course.subject'),
+  subjectCode: Ember.computed('course.subject', function() {
+    let component = this;
+    let subjectBucket = component.get('course.subject');
+    return subjectBucket
+      ? getSubjectIdFromSubjectBucket(subjectBucket)
+      : null;
+  }),
 
   /**
    * @property {Date} firstDayOfMonth

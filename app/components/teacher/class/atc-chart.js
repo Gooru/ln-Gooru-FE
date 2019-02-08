@@ -499,6 +499,11 @@ export default Ember.Component.extend({
   // Properties
 
   /**
+   * @property {Object} course
+   */
+  course: Ember.computed.alias('classData.course'),
+
+  /**
    * @property {String}
    * Property to store active class id
    */
@@ -520,12 +525,11 @@ export default Ember.Component.extend({
    * @property {String}
    * Property to store active class's course subject
    */
-  subjectCode: Ember.computed('classData', function() {
+  subjectCode: Ember.computed('course.subject', function() {
     let component = this;
-    let classData = component.get('classData');
-    let courseSubjectCode = classData.courseSubjectCode;
-    return courseSubjectCode
-      ? getSubjectIdFromSubjectBucket(courseSubjectCode)
+    let subjectBucket = component.get('course.subject');
+    return subjectBucket
+      ? getSubjectIdFromSubjectBucket(subjectBucket)
       : null;
   }),
 
