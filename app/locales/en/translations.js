@@ -1164,7 +1164,8 @@ export default Object.assign(quizzesTranslations, {
         'past-activities': 'Past Activities'
       },
       'my-report': 'My Report',
-      'my-location': 'My Location'
+      'my-location': 'My Location',
+      'my-proficiency': 'My Proficiency'
     },
     course: {
       'to-report': 'Usage summary',

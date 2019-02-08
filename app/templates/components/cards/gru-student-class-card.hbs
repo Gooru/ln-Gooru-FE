@@ -1,6 +1,5 @@
 <div class="panel {{if hasStarted 'has-course' 'no-course'}}">
   {{#if course}}
-
     <div class="panel-heading" style="background-color:{{grade-color class.performanceSummary.score}}">
       <div class="title ellipsis" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}">
         {{#link-to 'student.class.course-map' class.id}}
@@ -10,7 +9,7 @@
       <div class="code {{if isDemoClass 'demo-class'}}" {{action 'selectItem' (if isDemoClass 'demo' 'course-map')}}>
         <div class="title">{{t 'student-landing.class-code'}}</div>
         <div class="class-code ellipsis">
-            {{class.code}}
+          {{class.code}}
         </div>
       </div>
     </div>
@@ -20,18 +19,15 @@
           <div class="start-studying {{if class.isNotAbleToStartPlayer 'no-play'}}" {{action "playCollection"}}>
             {{t "student-landing.start-studying"}}
           </div>
-
-  {{else}}
-
-    <div class="current-activity">
-      {{#if isCompleted}}
-        {{t "student-landing.last-activity"}}
-      {{else}}
-        {{t "student-landing.resume-current-activity"}}
-      {{/if}}
-    </div>
+        {{else}}
+          <div class="current-activity">
+            {{#if isCompleted}}
+              {{t "student-landing.last-activity"}}
+            {{else}}
+              {{t "student-landing.resume-current-activity"}}
+            {{/if}}
+          </div>
         {{/unless}}
-
         {{#if class.currentLocation}}
           <div class="title-section">
             {{#if showCurrentLocation}}
@@ -60,7 +56,7 @@
             </li>
             <li class="performance">
               <a {{action 'selectItem' 'profile'}}>
-                <span>{{t 'student-landing.class.my-location'}}</span>
+                <span>{{t 'student-landing.class.my-proficiency'}}</span>
               </a>
             </li>
           </ul>
@@ -74,11 +70,11 @@
             <label>{{completedPercentage}}</label>
           </div>
         </div>
-  {{else}}
-    <div class="alert-player-error">
-      <span class="clear-alert" {{action 'onClearAlert'}}>{{gru-icon name="clear"}}</span>
-      <div class="alert-status">{{t 'common.errors.no-studymaterial'}}</div>
-    </div>
+      {{else}}
+        <div class="alert-player-error">
+          <span class="clear-alert" {{action 'onClearAlert'}}>{{gru-icon name="clear"}}</span>
+          <div class="alert-status">{{t 'common.errors.no-studymaterial'}}</div>
+        </div>
       {{/unless}}
     </div>
   {{else}}
@@ -111,7 +107,7 @@
           </li>
           <li class="performance">
             <a {{action 'selectItem' 'profile'}}>
-              <span>{{t 'student-landing.class.my-location'}}</span>
+              <span>{{t 'student-landing.class.proficiency'}}</span>
             </a>
           </li>
         </ul>
@@ -126,7 +122,5 @@
         </div>
       </div>
     </div>
-
   {{/if}}
-
 </div>
