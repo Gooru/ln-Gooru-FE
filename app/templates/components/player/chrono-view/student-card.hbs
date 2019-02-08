@@ -2,7 +2,7 @@
   {{three-bounce-spinner}}
 {{else}}
   <div class="card-container" {{action "onSelectCard" activity}}>
-    {{#if (or (eq type 'collection') (eq type 'collection-external'))}}
+    {{#if collection}}
     <div class="collection-img" style="background-image: url({{collection.thumbnailUrl}})">
     </div>
     <div class="collection-performance">
@@ -57,7 +57,7 @@
       {{/each}}
     </div>
     {{else}}
-    <div class="msg">
+    <div class="no-resource">
       <span> {{t 'student-card.message' type=type}}</span>
     </div>
     {{/if}}
