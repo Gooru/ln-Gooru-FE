@@ -1,14 +1,16 @@
 <div class="student-locate-container">
   <div class="activity-panel">
     <div class="chrono-view">
-      <div class="competency-container">
-        <div class="chart-icon" {{action "showPullUp"}}>
-          {{gru-icon name='equalizer'}}
+      {{#if classId}}
+        <div class="competency-container">
+          <div class="chart-icon" {{action "showPullUp"}}>
+            {{gru-icon name='equalizer'}}
+          </div>
+          <div class="competency-progress-bar">
+            {{charts/competency-progress-bar competency=competencyMatrix}}
+          </div>
         </div>
-        <div class="competency-progress-bar">
-          {{charts/competency-progress-bar competency=competencyMatrix}}
-        </div>
-      </div>
+      {{/if}}
       {{#if activities}}
         {{player/chrono-performance/chrono-timeline performanceSummary=performanceSummary class=class course=course timeData=activities startDate=activityStartDate paginateNext="paginateNext"}}
       {{/if}}
