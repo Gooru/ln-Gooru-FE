@@ -1,7 +1,11 @@
 import Ember from 'ember';
 import PrivateRouteMixin from 'gooru-web/mixins/private-route-mixin';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
-import { ROLES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  ROLES,
+  PLAYER_EVENT_SOURCE,
+  CLASS_SKYLINE_INITIAL_DESTINATION
+} from 'gooru-web/config/config';
 import {
   currentLocationToMapContext,
   createStudyPlayerQueryParams,
@@ -36,6 +40,11 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
    */
   i18n: Ember.inject.service(),
 
+  /**
+   * @type {SkylineInitialService} Service to retrieve skyline initial service
+   */
+  skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -48,56 +57,27 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
      */
     studyPlayer: function(currentLocation, classData) {
       const route = this;
-      const controller = route.get('controller');
-      let activeClasses = controller.get('activeClasses');
-      let navigateMapService = route.get('navigateMapService');
       let classId = currentLocation
         ? currentLocation.get('classId')
         : classData.get('id');
       let courseId = currentLocation
         ? currentLocation.get('courseId')
         : classData.get('courseId');
-      let options = {
-          role: ROLES.STUDENT,
-          source: PLAYER_EVENT_SOURCE.COURSE_MAP,
+      if (route.findClassIsPermium(classData)) {
+        route.doCheckClassDestination(
+          classData,
+          classId,
           courseId,
-          classId
-        },
-        nextPromise = null;
-      //start studying
-      if (currentLocation == null || currentLocation === '') {
-        nextPromise = navigateMapService.continueCourse(
-          options.courseId,
-          options.classId
-        );
-      } else if (currentLocation.get('status') === 'complete') {
-        //completed
-        nextPromise = navigateMapService.contentServedResource(
-          currentLocationToMapContext(currentLocation)
+          currentLocation
         );
       } else {
-        //in-progress
-        // Next not required, get the params from current location
-        nextPromise = route.nextPromiseHandler(
-          currentLocationToMapContext(currentLocation)
+        route.doCheckClassDestination(
+          classData,
+          classId,
+          courseId,
+          currentLocation
         );
       }
-      nextPromise
-        .then(route.nextPromiseHandler)
-        .then(queryParams => {
-          route.transitionTo('study-player', courseId, {
-            queryParams
-          });
-        })
-        .catch(() => {
-          let selectedClass = activeClasses.findBy('id', classData.get('id'));
-          selectedClass.set('isNotAbleToStartPlayer', true);
-          // Below logic is used to clear the left over state of study player,
-          // in order to avoid the conflict.
-          navigateMapService
-            .getLocalStorage()
-            .removeItem(navigateMapService.generateKey());
-        });
     },
 
     /**
@@ -433,5 +413,92 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     } else {
       return Ember.RSVP.reject(null);
     }
+  },
+
+  playContent(classData, classId, courseId, currentLocation) {
+    const route = this;
+    const controller = route.get('controller');
+    let activeClasses = controller.get('activeClasses');
+    let navigateMapService = route.get('navigateMapService');
+    let options = {
+        role: ROLES.STUDENT,
+        source: PLAYER_EVENT_SOURCE.COURSE_MAP,
+        courseId,
+        classId
+      },
+      nextPromise = null;
+    //start studying
+    if (currentLocation == null || currentLocation === '') {
+      nextPromise = navigateMapService.continueCourse(
+        options.courseId,
+        options.classId
+      );
+    } else if (currentLocation.get('status') === 'complete') {
+      //completed
+      nextPromise = navigateMapService.contentServedResource(
+        currentLocationToMapContext(currentLocation)
+      );
+    } else {
+      //in-progress
+      // Next not required, get the params from current location
+      nextPromise = route.nextPromiseHandler(
+        currentLocationToMapContext(currentLocation)
+      );
+    }
+    nextPromise
+      .then(route.nextPromiseHandler)
+      .then(queryParams => {
+        route.transitionTo('study-player', courseId, {
+          queryParams
+        });
+      })
+      .catch(() => {
+        let selectedClass = activeClasses.findBy('id', classData.get('id'));
+        selectedClass.set('isNotAbleToStartPlayer', true);
+        // Below logic is used to clear the left over state of study player,
+        // in order to avoid the conflict.
+        navigateMapService
+          .getLocalStorage()
+          .removeItem(navigateMapService.generateKey());
+      });
+  },
+
+  doCheckClassDestination(classData, classId, courseId, currentLocation) {
+    const route = this;
+    return route
+      .get('skylineInitialService')
+      .fetchState(classId)
+      .then(skylineInitialState => {
+        let destination = skylineInitialState.get('destination');
+        if (
+          destination === CLASS_SKYLINE_INITIAL_DESTINATION.classSetupInComplete
+        ) {
+          return route.transitionTo('student.class.setup-in-complete', classId);
+        } else if (
+          destination === CLASS_SKYLINE_INITIAL_DESTINATION.showDirections ||
+          destination === CLASS_SKYLINE_INITIAL_DESTINATION.ILPInProgress
+        ) {
+          return route.transitionTo('student.class.proficiency', classId);
+        } else if (
+          destination === CLASS_SKYLINE_INITIAL_DESTINATION.diagnosticPlay
+        ) {
+          return route.transitionTo(
+            'student.class.diagnosis-of-knowledge',
+            classId
+          );
+        } else {
+          route.playContent(classData, classId, courseId, currentLocation);
+        }
+      });
+  },
+
+  /**
+   * Method used to identify course is permium or not
+   * @return {Boolean}
+   */
+  findClassIsPermium(aClass) {
+    let setting = aClass.get('setting');
+    let isPremiumCourse = setting ? setting['course.premium'] : false;
+    return isPremiumCourse;
   }
 });
