@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import d3 from 'd3';
-import {
-  getGradeColor
-} from 'gooru-web/utils/utils';
+import { getGradeColor } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -496,6 +494,11 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {Object} course
+   */
+  course: Ember.computed.alias('classData.course'),
 
   /**
    * @property {String}
