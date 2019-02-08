@@ -1246,6 +1246,8 @@ export default Object.assign(quizzesTranslations, {
       'back-to-archived': 'Back to Archived Classrooms',
       'class-management': 'Class Management',
       atc: 'ATC',
+      'performance-overview': 'Performance Overview',
+      'student-proficiency': 'Student Proficiency',
       'class-management-tab': {
         actions: 'Actions',
         'assessment-min-score': 'Assessment Minimum Score for Trophies',

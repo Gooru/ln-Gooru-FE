@@ -107,7 +107,9 @@
             grid-gap: 5px;
 
             .add-info {
+              width: 70px;
               display: inline-block !important;
+              overflow-wrap: inherit;
             }
           }
         }
