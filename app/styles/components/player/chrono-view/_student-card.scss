@@ -19,6 +19,17 @@
       border-radius: 8px 8px 0 0;
       height: 167px;
     }
+    .msg {
+      text-align: center;
+      padding: 8px;
+      height: 56vh;
+      display: flex;
+      align-items: center;
+
+      span {
+        font-size: 18px;
+      }
+    }
 
     .collection-performance {
       height: 50px;
