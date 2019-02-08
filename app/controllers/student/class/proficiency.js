@@ -23,6 +23,11 @@ export default Ember.Controller.extend({
    */
   navigateMapService: Ember.inject.service('api-sdk/navigate-map'),
 
+  /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -33,6 +38,9 @@ export default Ember.Controller.extend({
       let controller = this;
       if (curStep === 'playNext') {
         controller.startPlaying();
+      } else if (curStep === 'destination') {
+        let classId = controller.get('classId');
+        controller.get('classService').updateProfileBaseline(classId);
       }
     }
   },

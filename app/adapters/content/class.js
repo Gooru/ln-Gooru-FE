@@ -438,7 +438,9 @@ export default Ember.Object.extend({
       type: 'PUT',
       contentType: 'application/json; charset=utf-8',
       headers: adapter.defineHeaders(),
-      data: JSON.stringify({ preference: preference })
+      data: JSON.stringify({
+        preference: preference
+      })
     };
     return Ember.$.ajax(url, options);
   },
@@ -450,6 +452,23 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/${classid}/language/${language}`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * @function updateProfileBaseline
+   * Method to update profile baseline
+   */
+  updateProfileBaseline(classId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/${classId}/profilebaseline/student`;
     const options = {
       type: 'PUT',
       contentType: 'application/json; charset=utf-8',
