@@ -114,21 +114,23 @@ export default Ember.Component.extend({
     let selectedTimeData = timeData.objectAt(lastIndex);
     selectedTimeData.set('selected', true);
     Ember.$(document).on('keydown', function(e) {
-      if (e.keyCode === 37 || e.keyCode === 39) {
-        component.onKeyPress(timeData, e);
+      var keycode = e.keyCode;
+      if (keycode === 37 || keycode === 39) {
+        component.HandleCardNavigation(keycode);
       }
     });
   },
 
   /**
-   * @function onKeyPress
-   * Method triggered when keypress
+   * @function HandleCardNavigation
+   * Method triggered on navigation of card
    */
-  onKeyPress(timeData, event) {
+  HandleCardNavigation(keycode) {
     let component = this;
+    let timeData = component.get('timeData');
     let selectedTimeData = timeData.findBy('selected', true);
     let selectedIndex = timeData.indexOf(selectedTimeData);
-    let incrementVal = event.keyCode === 37 ? 1 : -1;
+    let incrementVal = keycode === 37 ? 1 : -1;
     let nextIndex = selectedIndex + incrementVal;
     let activity = timeData.objectAt(nextIndex);
     if (activity) {
