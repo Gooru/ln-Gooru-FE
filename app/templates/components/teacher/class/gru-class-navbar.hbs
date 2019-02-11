@@ -4,12 +4,12 @@
       {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
     </div>
     {{#unless class.isArchived}}
-    <div class="atc tab">
-      <a {{action 'selectItem' 'atc'}} class="atc-link" title="ATC" role="tab" data-toggle="tooltip">
-        <span class="atc-menu"></span>
-        <span class="add-info">{{t 'teacher-landing.class.atc'}}</span>
-      </a>
-    </div>
+      <div class="atc tab">
+        <a {{action 'selectItem' 'atc'}} class="atc-link" title="{{t 'teacher-landing.class.performance-overview'}}" role="tab" data-toggle="tooltip">
+          <span class="atc-menu"></span>
+          <span class="add-info">{{t 'teacher-landing.class.performance-overview'}}</span>
+        </a>
+      </div>
       <div class="class-activities tab">
         <a {{action 'selectItem' 'class-activities'}} class="dca" title="{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
           <span class="dca-pin"></span>
@@ -23,9 +23,9 @@
         </a>
       </div>
       <div class="students tab">
-        <a {{action 'selectItem' 'students'}} role="tab" data-toggle="tooltip" title="{{t 'class.info.students' }}">
+        <a {{action 'selectItem' 'students'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.student-proficiency' }}">
           {{gru-icon name='account_circle'}}
-          <span class="add-info">{{t 'class.info.students' }}</span>
+          <span class="add-info">{{t 'teacher-landing.class.student-proficiency' }}</span>
         </a>
       </div>
     {{/unless}}
@@ -56,7 +56,7 @@
     </div>
     <div class="class-management tab ">
       <a {{action 'selectItem' 'class-management'}} role="tab " data-toggle="tooltip " title=" {{t 'teacher-landing.class.class-management'}} ">
-      {{gru-icon name="settings"}}
+        {{gru-icon name="settings"}}
       </a>
     </div>
   </div>

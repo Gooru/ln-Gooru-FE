@@ -47,6 +47,13 @@ export default Ember.Component.extend({
       if (this.get('onItemSelected')) {
         this.sendAction('onItemSelected', item, classId, isOffline);
       }
+    },
+
+    showAtc() {
+      const component = this;
+      component
+        .get('router')
+        .transitionTo('teacher.class.atc', component.get('class').id);
     }
   },
   // -------------------------------------------------------------------------

@@ -1166,6 +1166,7 @@ export default Object.assign(quizzesTranslations, {
       },
       'my-report': 'My Report',
       'my-location': 'My Location',
+      'my-proficiency': 'My Proficiency',
       'establish-skyline': 'Let\'s Establish your Skyline',
       'waiting-establish-skyline':
         'Waiting for your teacher to complete setting up the class.',
@@ -1254,6 +1255,8 @@ export default Object.assign(quizzesTranslations, {
       'back-to-archived': 'Back to Archived Classrooms',
       'class-management': 'Class Management',
       atc: 'ATC',
+      'performance-overview': 'Performance Overview',
+      'student-proficiency': 'Student Proficiency',
       'class-management-tab': {
         actions: 'Actions',
         'assessment-min-score': 'Assessment Minimum Score for Trophies',
