@@ -40,6 +40,8 @@ export default Ember.Object.extend({
     const options = {
       type: 'POST',
       headers: adapter.defineHeaders(),
+      dataType: 'text',
+      processData: false,
       contentType: 'application/json; charset=utf-8',
       data: JSON.stringify({
         classId,
