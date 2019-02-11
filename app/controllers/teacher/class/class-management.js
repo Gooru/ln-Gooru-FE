@@ -28,6 +28,11 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   lookupService: Ember.inject.service('api-sdk/lookup'),
 
+  /**
+   * @type {SkylineInitialService} Service to retrieve skyline initial service
+   */
+  skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -1022,6 +1027,9 @@ export default Ember.Controller.extend(ModalMixin, {
       .classMembersSettings(classId, settings)
       .then(function(/* responseData */) {
         if (isPremiumClass && isOffline) {
+          controller
+            .get('skylineInitialService')
+            .calculateSkyline(classId, [settings.users[0]]);
           controller.generateClassPathway(settings.users[0]);
         }
       });

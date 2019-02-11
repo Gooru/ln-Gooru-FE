@@ -47,12 +47,12 @@ export default Ember.Service.extend({
    * calculate skyline
    * @returns {Promise.<[]>}
    */
-  calculateSkyline: function(classId) {
+  calculateSkyline: function(classId, userIds) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('skylineAdapter')
-        .fetchState(classId)
+        .calculateSkyline(classId, userIds)
         .then(function() {
           resolve();
         }, reject);
