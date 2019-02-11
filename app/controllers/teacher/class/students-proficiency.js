@@ -308,9 +308,9 @@ export default Ember.Controller.extend({
   resetProperties() {
     let controller = this;
     controller.set('domainLevelSummary', null);
-    controller.set('isShowCourseCompetencyReport', true);
+    controller.set('isShowCourseCompetencyReport', false);
     controller.set('isShowDomainCompetencyReport', false);
-    controller.set('isShowClassProficiencyReport', false);
+    controller.set('isShowClassProficiencyReport', true);
     controller.set('studentDomainPerformance', Ember.A([]));
   },
 
@@ -384,7 +384,7 @@ export default Ember.Controller.extend({
   /**
    * @property {Boolean} isShowCourseCompetencyReport
    */
-  isShowCourseCompetencyReport: true,
+  isShowCourseCompetencyReport: false,
 
   /**
    * @property {Boolean} isShowDomainCompetencyReport
@@ -405,7 +405,7 @@ export default Ember.Controller.extend({
   /**
    * @property {Boolean} isShowClassProficiencyReport
    */
-  isShowClassProficiencyReport: false,
+  isShowClassProficiencyReport: true,
 
   /**
    * @property {Array} studentsDomainPerformance

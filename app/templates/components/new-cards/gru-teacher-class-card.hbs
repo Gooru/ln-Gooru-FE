@@ -40,13 +40,10 @@
             </div>
           {{/link-to}}
         </div>
-
-
       {{/if}}
     {{/if}}
-
     <div class="panel-body" style="background-color:{{grade-color class.performanceSummary.score}}">
-      <div class="information" style="background-image: url({{course.thumbnailUrl}})">
+      <div class="information" style="background-image: url({{course.thumbnailUrl}})" {{action 'showAtc' }}>
         {{#if course}}
           <div class="current-activity">{{t "student-landing.class.assigned-course"}}</div>
         {{else}}
@@ -124,7 +121,6 @@
         {{/if}}
       {{/if}}
     </div>
-
   {{else}}
     <div class="panel-heading">
       <div class="title" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}">
@@ -138,7 +134,6 @@
         </div>
       {{/link-to}}
     </div>
-
     <div class="panel-body">
       <div class="information">
         {{#if course}}
