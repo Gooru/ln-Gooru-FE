@@ -141,49 +141,48 @@
               {{!-- sub, fwk, grade level --}}
               <div class='sub-sec-row'>
                 <div class='field-dropdown-caps-label'> {{t
-                'teacher-landing.class.class-settings.class-settings-sec.subject'}}</div>
+      'teacher-landing.class.class-settings.class-settings-sec.subject'}}</div>
                 <div class='gradelevel-info'>
                 </div>
                 <div class='student-field field-drop-down '>
                   <span class='subject-label'>
-                      {{gradeSubjectFWK.title}}
-                      {{!-- {{class.preference.subject }} --}}
-                    </span>
+                    {{gradeSubjectFWK.title}}
+                  </span>
                 </div>
               </div>
               <div class='sub-sec-row'>
                 <div class='field-dropdown-caps-label'> {{t
-                              'teacher-landing.class.class-settings.class-settings-sec.framework'}}</div>
+                    'teacher-landing.class.class-settings.class-settings-sec.framework'}}</div>
                 <div class='gradelevel-info'></div>
                 <div class='field-drop-down'>
                   {{#if (and tempClass.preference.framework class.gradeCurrent )}}
                     <span class='subject-label'>
-                        {{#if gradeSubjetFWKDv}}
-                          {{get-value 'source' source=subjectFWKDD.frameworks searchProp='code'
-                                              searchVal=tempClass.preference.framework
-                                              destProp='title' }}
-                        {{/if}}
-                      </span>
+              {{#if gradeSubjetFWKDv}}
+                {{get-value 'source' source=subjectFWKDD.frameworks searchProp='code'
+                                    searchVal=tempClass.preference.framework
+                                    destProp='title' }}
+              {{/if}}
+            </span>
                   {{else}}
                     {{#if ( not (or class.gradeLowerBound class.gradeCurrent )) }}
                       <div class="dropdown">
                         <span class="drop-down-span ellipsis"></span>
                         <button class="btn btn-default dropdown-toggle ellipsis" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            {{#if (and gradeSubjetFWKDv tempClass.preference.framework)  }}
-                              {{get-value 'source' source=subjectFWKDD.frameworks searchProp='code'
-                                              searchVal=tempClass.preference.framework
-                                              destProp='title' }}
-                            {{else}}
-                              {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                            {{/if}}
-                            <span class="caret"></span>
-                          </button>
+                  {{#if (and gradeSubjetFWKDv tempClass.preference.framework)  }}
+                    {{get-value 'source' source=subjectFWKDD.frameworks searchProp='code'
+                                    searchVal=tempClass.preference.framework
+                                    destProp='title' }}
+                  {{else}}
+                    {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
+                  {{/if}}
+                  <span class="caret"></span>
+                </button>
                         <ul class="dropdown-menu">
                           {{#if gradeSubjetFWKDv}}
                             {{#each subjectFWKDD.frameworks as |fwk|}}
                               {{#if fwk}}
                                 <li> <a data-item= {{fwk}} {{ action 'updateFwkSettings'  fwk 'framework'}}>{{fwk.title}}
-                                    </a> </li>
+                          </a> </li>
                               {{/if}}
                             {{/each}}
                           {{/if}}
@@ -245,8 +244,15 @@
                     </div>
                     <div class='field-drop-down'>
                       <div class='grade-info'>
-                        <div class="dropdown">
-                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' tempClass 'class-current'}}>
+                        {{#if class.gradeCurrent}}
+                          <div class='grade-label'>
+                            {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
+                                                searchVal=class.gradeCurrent
+                                                destProp='grade' }}
+                          </div>
+                        {{else}}
+                          <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' tempClass 'class-current'}}>
                                 {{#if tempClass.gradeCurrent}}
                                   {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
                                                 searchVal=tempClass.gradeCurrent
@@ -256,17 +262,18 @@
                                 {{/if}}
                                 <span class="caret"></span>
                               </button>
-                          <ul class="dropdown-menu">
-                            {{#if currentFilterList}}
-                              {{#each currentFilterList as |grade|}}
-                                {{#if grade}}
-                                  <li> <a data-item= {{grade}} {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
+                            <ul class="dropdown-menu">
+                              {{#if currentFilterList}}
+                                {{#each currentFilterList as |grade|}}
+                                  {{#if grade}}
+                                    <li> <a data-item= {{grade}} {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
                                         </a> </li>
-                                {{/if}}
-                              {{/each}}
-                            {{/if}}
-                          </ul>
-                        </div>
+                                  {{/if}}
+                                {{/each}}
+                              {{/if}}
+                            </ul>
+                          </div>
+                        {{/if}}
                       </div>
                     </div>
                   </div>
