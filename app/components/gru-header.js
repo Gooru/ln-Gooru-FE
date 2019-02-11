@@ -24,6 +24,8 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
 
   classNames: ['gru-header', 'navbar-fixed-top'],
 
+  device_language_key: 'deviceLanguage',
+
   /**
    * Controls display of notification list, typical use from header is to hide it as required.
    */
@@ -39,15 +41,7 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
 
     var arr = Ember.A();
     this.get('i18n.locales').map(function(loc) {
-      if (
-        loc !== 'en/quizzes' &&
-        loc !== 'sp/quizzes' &&
-        loc !== 'ar/quizzes' &&
-        loc !== 'hi/quizzes' &&
-        loc !== 'mr/quizzes' &&
-        loc !== 'ta/quizzes' &&
-        loc !== 'kn/quizzes'
-      ) {
+      if (!loc.includes('/quizzes')) {
         arr.addObject({
           id: loc,
           text: i18n.t(loc)
@@ -74,20 +68,7 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     },
 
     setLocale(selVal) {
-      this.set('i18n.locale', selVal);
-      if (selVal === 'ar') {
-        const rootElement = Ember.$(Env.rootElement);
-        rootElement.addClass('changeDir');
-        rootElement.removeClass('changeDirDefault');
-        //this.get('themeChanger').set('theme', 'goorurtl');
-        Env.APP.isRTL = true;
-      } else {
-        const rootElement = Ember.$(Env.rootElement);
-        rootElement.removeClass('changeDir');
-        rootElement.addClass('changeDirDefault');
-        //this.get('themeChanger').set('theme', 'goorultr');
-        Env.APP.isRTL = false;
-      }
+      this.setLocale(selVal);
     },
 
     searchTerm: function() {
@@ -139,20 +120,6 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       this.set('showDropMenu', EndPointsConfig.getLanguageSettingdropMenu());
     }
 
-    /*
-    if (EndPointsConfig.getLanguageSettingdefaultLang() !== undefined) {
-      this.set('i18n.locale', EndPointsConfig.getLanguageSettingdefaultLang());
-      if (EndPointsConfig.getLanguageSettingdefaultLang() === 'ar') {
-        const rootElement = Ember.$(Env.rootElement);
-        rootElement.addClass('changeDir');
-        rootElement.removeClass('changeDirDefault');
-      } else {
-        const rootElement = Ember.$(Env.rootElement);
-        rootElement.removeClass('changeDir');
-        rootElement.addClass('changeDirDefault');
-      }
-    } */
-
     $('.search-input').on(
       'keyup',
       function(e) {
@@ -173,6 +140,26 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     this.set('term', null);
     this.set('searchErrorMessage', null);
     this.set('isTyping', null);
+  },
+
+  /**
+   * setLocale function
+   */
+  setLocale(selVal) {
+    this.set('i18n.locale', selVal);
+    if (selVal === 'ar') {
+      const rootElement = Ember.$(Env.rootElement);
+      rootElement.addClass('changeDir');
+      rootElement.removeClass('changeDirDefault');
+      //this.get('themeChanger').set('theme', 'goorurtl');
+      Env.APP.isRTL = true;
+    } else {
+      const rootElement = Ember.$(Env.rootElement);
+      rootElement.removeClass('changeDir');
+      rootElement.addClass('changeDirDefault');
+      //this.get('themeChanger').set('theme', 'goorultr');
+      Env.APP.isRTL = false;
+    }
   },
 
   // -------------------------------------------------------------------------

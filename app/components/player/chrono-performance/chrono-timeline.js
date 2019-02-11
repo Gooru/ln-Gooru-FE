@@ -105,7 +105,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  init() {
+  didInsertElement() {
     let component = this;
     component._super(...arguments);
     let timeData = component.get('timeData');
@@ -113,11 +113,41 @@ export default Ember.Component.extend({
     let lastIndex = numberOfTimeData - 1;
     let selectedTimeData = timeData.objectAt(lastIndex);
     selectedTimeData.set('selected', true);
+    Ember.$(document).on('keydown', function(e) {
+      var keycode = e.keyCode;
+      if (keycode === 37 || keycode === 39) {
+        component.handleCardNavigation(keycode);
+      }
+    });
+  },
+
+  /**
+   * @function handleCardNavigation
+   * Method triggered on navigation of card
+   */
+  handleCardNavigation(keycode) {
+    let component = this;
+    let timeData = component.get('timeData');
+    let selectedTimeData = timeData.findBy('selected', true);
+    let selectedIndex = timeData.indexOf(selectedTimeData);
+    let incrementVal = keycode === 37 ? 1 : -1;
+    let nextIndex = selectedIndex + incrementVal;
+    let activity = timeData.objectAt(nextIndex);
+    if (activity) {
+      component.send('onSelectCard', activity);
+    }
+  },
+
+  /**
+   * @function didDestroyElement
+   * Method to destroy keypress
+   */
+  didDestroyElement() {
+    Ember.$(document).off('keydown');
   },
 
   // -------------------------------------------------------------------------
   // Methods
-
   /**
    * @function parseTimelineData
    * Method to parse and set timeline data
@@ -125,7 +155,6 @@ export default Ember.Component.extend({
   parseTimelineData() {
     let component = this;
     let timeData = component.get('timeData');
-
     let numberOfTimeData = timeData.length;
     if (numberOfTimeData > 0) {
       let selectedTimeData = timeData.findBy('selected', true);

@@ -626,6 +626,7 @@ export default Object.assign(quizzesTranslations, {
     'add-data': 'Add Data',
     'update-data': 'Update Data',
     all: 'All',
+    'please-wait': 'Please Wait',
     'unscheduled-items': 'Unscheduled Items',
     'add-to-unschedule': 'Add to unscheduled list for',
     'save-next': 'Save and Next',
@@ -1165,7 +1166,14 @@ export default Object.assign(quizzesTranslations, {
       },
       'my-report': 'My Report',
       'my-location': 'My Location',
-      'my-proficiency': 'My Proficiency'
+      'my-proficiency': 'My Proficiency',
+      'establish-skyline': 'Let\'s Establish your Skyline',
+      'waiting-establish-skyline':
+        'Waiting for your teacher to complete setting up the class.',
+      'setup-in-complete-desc1': 'It looks like your teacher has not',
+      'setup-in-complete-desc2': 'updated class settings',
+      'setup-in-complete-desc3':
+        'Please get in touch with her to resolve the matter. Once everything is correctly set up, refresh this page.'
     },
     course: {
       'to-report': 'Usage summary',
@@ -1875,6 +1883,8 @@ export default Object.assign(quizzesTranslations, {
 
   'student-first-experience': {
     preStudyTitle: 'Pre-Study for {{title}}',
+    'lp-compute-inprogress':
+      'We are computing your initial proficiency profile in {{title}}',
     'route0-action': {
       accept: 'Accept',
       ignore: 'Ignore'
@@ -1917,7 +1927,13 @@ export default Object.assign(quizzesTranslations, {
     'competency-level-partial': {
       desc1: 'You are currently in ',
       desc2:
-        'Welcome to your Skyline map for Math. The Skyline (the thick white line) shows the highest standard that you have mastered in each domain. A domain is an area of math that you study, such as Number Systems and Expressions & Equations. Each column represents a math domain. And each box in the column represents a standard in the domain. Once you start learning and mastering the standards, your Skyline will continuously bump up.'
+        'This is your {{title}} proficiency profile. Your math proficiency profile shows your mastery in standards (aka competencies) in the different focus areas in math (aka domains). The columns show domains and the boxes show the standards within each math domain.',
+      desc3:
+        'As you master each of the competencies, the corresponding box is updated to dark blue.',
+      desc4:
+        'And as you continue to study other competencies, they turn light blue to show progress.',
+      desc5:
+        'Your current location in {{title}} is identified by the Skyline. The skyline is the thick white line that shows the highest competencies that you have mastered in each domain'
     },
     units: {
       other: '{{count}} Units'

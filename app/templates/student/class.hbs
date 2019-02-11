@@ -4,7 +4,6 @@
       <div class="alert-status">{{t 'common.errors.no-studymaterial'}}</div>
     </div>
   {{/if}}
-  {{gru-take-tour steps=steps containerClass='class-view-tour'}}
   <div class="header clearfix">
     <div class="go-back-container">
       {{#link-to 'student-home' class="back-to"}}
@@ -71,7 +70,7 @@
     </div>
   </div>
   {{#if class}}
-      {{student.class.gru-study-navbar performanceSummary=class.performanceSummary navTitle=class.title class=class classId=class.id onItemSelected="selectMenuItem" selectedMenuItem=menuItem isPremiumClass = isPremiumClass studyCurrent=studyPlayer hasClassInfo = 'true' openCourseReport='openCourseReport' isStudentLanding=isShowNavigatorLanding}}
+      {{student.class.gru-study-navbar destination=destination isPremiumCourse=isPremiumCourse performanceSummary=class.performanceSummary navTitle=class.title class=class classId=class.id onItemSelected="selectMenuItem" selectedMenuItem=menuItem isPremiumClass = isPremiumClass studyCurrent=studyPlayer hasClassInfo = 'true' openCourseReport='openCourseReport' isStudentLanding=isShowNavigatorLanding}}
   {{else}}
   {{student.class.gru-class-navigation
     class=class
