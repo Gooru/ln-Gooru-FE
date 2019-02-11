@@ -455,7 +455,7 @@
                         isChecked=student.isActive}}
                       </div>
                       {{#if isPremiumClass }}
-                        <div class="student-action-col {{if (and student.isActive  student.gradeUpperBound) "" "inActiveRow"}} {{if (and student.gradeUpperBound (or (not student.profileBaselineDone) student.regeneratePathway)) "baseline-active" "inActiveRow baseline-inactive" }}">
+                        <div class="student-action-col {{if (and student.isActive  student.gradeUpperBound) "" "inActiveRow"}}">
                           <div class='student-adj-lp' {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}" data-toggle="tooltip"> {{gru-icon name='replay'}}</div>
                         </div>
                       {{/if}}

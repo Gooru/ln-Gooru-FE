@@ -458,7 +458,6 @@ export default Ember.Controller.extend(ModalMixin, {
           users: [student.id]
         };
         controller.updateClassMembersSettings(settings); // Calling  Gen Path way once class settings save is success
-        //controller.generateClassPathway(student.id);
       } else {
         Ember.Logger.log(
           'Course or Subject not assigned to class, cannot update class settings'
@@ -1016,11 +1015,15 @@ export default Ember.Controller.extend(ModalMixin, {
   updateClassMembersSettings: function(settings) {
     const controller = this;
     const classId = this.get('class.id');
+    const isPremiumClass = controller.get('isPremiumClass');
+    const isOffline = controller.get('class.isOffline');
     controller
       .get('classService')
       .classMembersSettings(classId, settings)
       .then(function(/* responseData */) {
-        controller.generateClassPathway(settings.users[0]); // Call LP
+        if (isPremiumClass && isOffline) {
+          controller.generateClassPathway(settings.users[0]);
+        }
       });
   },
 
