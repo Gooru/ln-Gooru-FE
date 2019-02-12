@@ -172,7 +172,7 @@ export default Ember.Service.extend({
         .get('lookupAdapter')
         .getLanguages()
         .then(function(response) {
-          resolve(response);
+          resolve(service.get('lookupSerializer').normalizeLanguages(response));
         }, reject);
     });
   }

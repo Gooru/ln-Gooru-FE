@@ -302,11 +302,14 @@ export default Ember.Object.extend({
    * @function normalizeGrades
    */
   normalizeGrades(payload) {
-    let normalizedGrades = Ember.A([]);
-    if (payload && payload.grades) {
-      normalizedGrades = payload.grades.sortBy('sequence');
-    }
-    return normalizedGrades;
+    let resultSet = Ember.A();
+    payload = Ember.A(payload.grades);
+    payload.forEach(data => {
+      let result = Ember.Object.create(data);
+      resultSet.pushObject(result);
+    });
+    resultSet = resultSet.sortBy('sequence');
+    return resultSet;
   },
 
   /**
@@ -368,6 +371,22 @@ export default Ember.Object.extend({
   normalizeFetchCategories: function(payload) {
     let resultSet = Ember.A();
     payload = Ember.A(payload.subject_classifications);
+    payload.forEach(data => {
+      let result = Ember.Object.create(data);
+      resultSet.pushObject(result);
+    });
+    return resultSet;
+  },
+
+  /**
+   * Normalize the Fetch Taxonomy subject frameworks endpoint's response
+   *
+   * @param payload is the endpoint response in JSON format
+   * @returns {frameworks[]} an array of frameworks
+   */
+  normalizeFetchSubjectFrameworks: function(payload) {
+    let resultSet = Ember.A();
+    payload = Ember.A(payload.frameworks);
     payload.forEach(data => {
       let result = Ember.Object.create(data);
       resultSet.pushObject(result);

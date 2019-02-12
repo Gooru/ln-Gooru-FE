@@ -265,7 +265,11 @@ export default Ember.Service.extend({
         .fetchSubjectFWKs(category)
         .then(
           function(response) {
-            resolve(response);
+            resolve(
+              service
+                .get('taxonomySerializer')
+                .normalizeFetchSubjectFrameworks(response)
+            );
           },
           function(error) {
             reject(error);
