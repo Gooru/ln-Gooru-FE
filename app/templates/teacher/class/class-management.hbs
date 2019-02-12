@@ -52,24 +52,13 @@
                   'teacher-landing.class.class-settings.class-settings-sec.language'}}
               </div>
               <div class='row-value'>
-                <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      {{#if tempClass.primaryLanguage}}
-                        {{get-value 'source' source=languages searchProp='id'
-                                              searchVal=tempClass.primaryLanguage
-                                              destProp='display_name' }}
-                      {{else}}
-                        {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                      {{/if}}
-                      <span class="caret"></span>
-                    </button>
-                  <ul class="dropdown-menu">
-                    {{#each languages as |language|}}
-                      <li> <a data-item= {{language}} {{ action 'updateLanguage'  language }}>{{language.display_name}}
-                          </a> </li>
-                    {{/each}}
-                  </ul>
-                </div>
+                {{gru-dropdown
+                  selectedItemId=class.primaryLanguage
+                  placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
+                  items=languages
+                  displayLabelFieldKey="display_name"
+                  onChangeAction="updateLanguage"
+                  btn-group-size=btn-group-size}}
               </div>
             </div>
             {{!-- language  ends--}}
@@ -115,6 +104,7 @@
       </div>
     </div>
     {{!-- two col layout ends --}}
+
     <div class='sec-rows-layout right-panel'>
       {{!-- Course Settings container  starts --}}
       <div class="course-settings-layout">
@@ -150,50 +140,26 @@
                   </span>
                 </div>
               </div>
+
               <div class='sub-sec-row'>
                 <div class='field-dropdown-caps-label'> {{t
                     'teacher-landing.class.class-settings.class-settings-sec.framework'}}</div>
                 <div class='gradelevel-info'></div>
-                <div class='field-drop-down'>
-                  {{#if (and tempClass.preference.framework class.gradeCurrent )}}
-                    <span class='subject-label'>
-              {{#if gradeSubjetFWKDv}}
-                {{get-value 'source' source=subjectFWKDD.frameworks searchProp='code'
-                                    searchVal=tempClass.preference.framework
-                                    destProp='title' }}
-              {{/if}}
-            </span>
-                  {{else}}
-                    {{#if ( not (or class.gradeLowerBound class.gradeCurrent )) }}
-                      <div class="dropdown">
-                        <span class="drop-down-span ellipsis"></span>
-                        <button class="btn btn-default dropdown-toggle ellipsis" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  {{#if (and gradeSubjetFWKDv tempClass.preference.framework)  }}
-                    {{get-value 'source' source=subjectFWKDD.frameworks searchProp='code'
-                                    searchVal=tempClass.preference.framework
-                                    destProp='title' }}
-                  {{else}}
-                    {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                  {{/if}}
-                  <span class="caret"></span>
-                </button>
-                        <ul class="dropdown-menu">
-                          {{#if gradeSubjetFWKDv}}
-                            {{#each subjectFWKDD.frameworks as |fwk|}}
-                              {{#if fwk}}
-                                <li> <a data-item= {{fwk}} {{ action 'updateFwkSettings'  fwk 'framework'}}>{{fwk.title}}
-                          </a> </li>
-                              {{/if}}
-                            {{/each}}
-                          {{/if}}
-                        </ul>
-                      </div>
-                    {{/if}}
-                  {{/if}}
+                <div class="field-drop-down">
+                  {{gru-dropdown
+                    selectedItemKey='code'
+                    selectedItemId=class.preference.framework
+                    placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
+                    items=frameworks
+                    displayLabelFieldKey="title"
+                    onChangeAction="updateFwkSettings"
+                    btn-group-size=btn-group-size
+                    allowEdit=(if  ( or class.gradeCurrent class.gradeLowerBound) false true )
+                  }}
                 </div>
               </div>
 
-              {{#if (and course subject isPremiumClass) }}
+              {{#if (and (and course subject) isPremiumClass class.gradeLowerBound) }}
                 <div class='sub-sec-row'>
                   <div class='field-dropdown-caps-label'>
                     {{t 'teacher-landing.class.class-settings.origin'}}
@@ -203,121 +169,39 @@
                                   name='info_outline'}}
                   </div>
                   <div class='field-drop-down'>
-                    <div class='grade-info'>
-                      <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' tempClass 'class-origin'}}>
-                              {{#if tempClass.gradeLowerBound}}
-                                {{get-value 'soruce' source=subjectTaxonomyGrades searchProp='id'
-                                      searchVal=tempClass.gradeLowerBound
-                                      destProp='grade' }}
-                              {{else}}
-                                {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                              {{/if}}
-                              <span class="caret"></span>
-                            </button>
-                        <ul class="dropdown-menu">
-                          {{#if getCurrentGradeDDContent}}
-                            {{#each currentFilterList as |grade|}}
-                              {{#if grade}}
-                                <li> <a data-item= {{grade}} {{ action 'updateClassSettings'  grade.id 'grade_lower_bound'}}>{{grade.grade}}
-                                      </a> </li>
-                              {{/if}}
-                            {{/each}}
-                          {{/if}}
-                        </ul>
-                      </div>
-                    </div>
+                    {{gru-dropdown
+                      selectedItemId=class.gradeLowerBound
+                      allowItemsRangeSelection=true
+                      placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
+                      items=subjectTaxonomyGrades
+                      displayLabelFieldKey="grade"
+                      onChangeAction="updateClassGradeOrigin"
+                      btn-group-size=btn-group-size
+                    }}
                   </div>
                 </div>
               {{/if}}
-              {{!-- Current --}}
-              {{!-- if Grade is present show that grade and dont allow a change --}}
-              {{!-- Dont show grade if not present --}}
-              {{#if getCurrentGradeDDContent}}
-                {{#if currentGradeDDValue}}
-                  <div class='sub-sec-row'>
-                    <div class='field-dropdown-caps-label'> {{t
-                              'teacher-landing.class.class-settings.class-settings-sec.grade-level'}}</div>
-                    <div class='gradelevel-info'>
-                      {{gru-icon tooltipTitle="teacher-landing.class.class-settings.course-settings-sec.current-grade-info"
-                                  name='info_outline'}}
-                    </div>
-                    <div class='field-drop-down'>
-                      <div class='grade-info'>
-                        {{#if class.gradeCurrent}}
-                          <div class='grade-label'>
-                            {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
-                                                searchVal=class.gradeCurrent
-                                                destProp='grade' }}
-                          </div>
-                        {{else}}
-                          <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' tempClass 'class-current'}}>
-                                {{#if tempClass.gradeCurrent}}
-                                  {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
-                                                searchVal=tempClass.gradeCurrent
-                                                destProp='grade' }}
-                                {{else}}
-                                  {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                                {{/if}}
-                                <span class="caret"></span>
-                              </button>
-                            <ul class="dropdown-menu">
-                              {{#if currentFilterList}}
-                                {{#each currentFilterList as |grade|}}
-                                  {{#if grade}}
-                                    <li> <a data-item= {{grade}} {{ action 'updateClassSettings'  grade.id 'grade_current'}}>{{grade.grade}}
-                                        </a> </li>
-                                  {{/if}}
-                                {{/each}}
-                              {{/if}}
-                            </ul>
-                          </div>
-                        {{/if}}
-                      </div>
-                    </div>
-                  </div>
-                {{/if}}
-              {{/if}}
-              {{!-- current end --}}
-              {{!-- //Removing upper_bound for class settings
 
-                            {{#if (and (and course subject) isPremiumClass) }}
-                              <div class='sub-sec-row'>
-                                <div class='field-dropdown-caps-label'>
-                                  {{t 'teacher-landing.class.class-settings.destination'}}
-                                </div>
-                                <div class='field-drop-down'>
-                                  <div class='grade-info'>
-                                    <div class="dropdown">
-                                      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="true"
-                                        {{action 'prepareListData' class 'class-destination'}}>
-                                        {{#if class.gradeUpperBound}}
-                                          {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
-                                      searchVal=class.gradeUpperBound
-                                      destProp='grade' }}
-                                        {{else}}
-                                          {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                                        {{/if}}
-                                        <span class="caret"></span>
-                                      </button>
-                                      <ul class="dropdown-menu">
-                                        {{#if getCurrentGradeDDContent}}
-                                          {{#each currentFilterList as |grade|}}
-                                            {{#if grade}}
-                                              <li> <a data-item={{grade}}
-                                                  {{ action 'updateClassSettings'  grade.id 'grade_upper_bound'}}>{{grade.grade}}
-                                                </a> </li>
-                                            {{/if}}
-                                          {{/each}}
-                                        {{/if}}
-                                      </ul>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            {{/if}} --}}
+              <div class='sub-sec-row'>
+                <div class='field-dropdown-caps-label'> {{t
+                              'teacher-landing.class.class-settings.class-settings-sec.grade-level'}}</div>
+                <div class='gradelevel-info'>
+                  {{gru-icon tooltipTitle="teacher-landing.class.class-settings.course-settings-sec.current-grade-info"
+                                  name='info_outline'}}
+                </div>
+                <div class='field-drop-down'>
+                  {{gru-dropdown
+                    selectedItemId=class.gradeCurrent
+                    allowItemsRangeSelection=true
+                    rangeBound='upper'
+                    placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
+                    items=subjectTaxonomyGrades displayLabelFieldKey="grade"
+                    onChangeAction="updateClassGradeLevel"
+                    allowEdit=(if class.gradeCurrent false true )
+                    btn-group-size=btn-group-size}}
+                </div>
+              </div>
+
               {{#if (and (and course subject) isPremiumClass) }}
                 <div class='sub-sec-sep'></div>
                 <div class='row-offline-class sub-sec-row'>
@@ -342,28 +226,7 @@
           {{/if }}
         </div>
       </div>
-      <div class='gen-pathway-sec'>
-        {{#if isPremiumClass}}
-          <div class="btn-top-panel">
-            <div class='sec-title'>
-              {{#if course.title}}
-                {{course.title}}
-              {{else}}
-                {{t 'student-landing.class.no-course'}}
-              {{/if}}
-            </div>
-            <div class='top-btn {{if isClassBaselined "disabled" ""}} ' {{action 'generateClassPathway'}}>
-              {{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}} {{gru-icon name='replay'}}
-            </div>
-          </div>
-          <div class='gen-baseline-info'>
-            <div> {{t 'teacher-landing.class.class-settings.gen-baseline.baseline-1'}} </div>
-            <div> {{t 'teacher-landing.class.class-settings.gen-baseline.baseline-2'}} </div>
-            <div> {{t 'teacher-landing.class.class-settings.gen-baseline.baseline-3'}} </div>
-            <div> {{t 'teacher-landing.class.class-settings.gen-baseline.baseline-4'}} </div>
-          </div>
-        {{/if}}
-      </div>
+
       <div class='student-sec-cont'>
         <div class='student-settings-label'> {{t 'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head'}}</div>
         {{#if (gt sortedMembers.length 0)}}
@@ -394,58 +257,33 @@
                     <td>
                       <div class="origin {{if student.isActive "" "inActiveRow"}}  ">
                         <div class='grade-info'>
-                          <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' student 'student-origin'}}>
-                                {{#if (and student.gradeLowerBound ( not (eq student.gradeLowerBound 'undefined' ) ) )}}
-                                  {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
-                              searchVal=student.gradeLowerBound
-                              destProp='grade' }}
-                                {{else}}
-                                  {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                                {{/if}}
-                                <span class="caret"></span>
-                              </button>
-                            <ul class="dropdown-menu">
-                              {{#if getCurrentGradeDDContent}}
-                                {{#each currentFilterList as |grade|}}
-                                  {{#if grade}}
-                                    <li> <a data-item= {{grade}} {{action 'updateClassMembersSettings' student  grade.id 'grade_lower_bound'}}>{{grade.grade}}
-                                        </a> </li>
-                                  {{/if}}
-                                {{/each}}
-                              {{/if}}
-                            </ul>
-                          </div>
+                          {{gru-dropdown
+                            selectedItemId=student.gradeLowerBound
+                            allowItemsRangeSelection=true
+                            placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
+                            items=subjectTaxonomyGrades
+                            displayLabelFieldKey="grade"
+                            onChangeAction="updateClassStudentGradeOrigin"
+                            selectedItemAssocId=student.id
+                            btn-group-size=btn-group-size}}
                         </div>
                       </div>
                     </td>
                     <td>
-                      <div class='destination {{if student.isActive "" "inActiveRow"}}  '>
+                      <div class='destination {{if student.isActive "" "inActiveRow"}}'>
                         <div class='grade-info'>
-                          <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" {{action 'prepareListData' student 'student-destination'}}>
-                                <span>
-                                  {{#if (and student.gradeUpperBound ( not (eq student.gradeUpperBound 'undefined' ) ))}}
-                                    {{get-value 'source' source=subjectTaxonomyGrades searchProp='id'
-                                searchVal=student.gradeUpperBound
-                                destProp='grade' }}
-                                  {{else}}
-                                    {{t 'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'}}
-                                  {{/if}}
-                                </span>
-                                <span class="caret"></span>
-                              </button>
-                            <ul class="dropdown-menu">
-                              {{#if getCurrentGradeDDContent}}
-                                {{#each currentFilterList as |grade|}}
-                                  {{#if grade}}
-                                    <li> <a data-item= {{grade}} {{ action 'updateClassMembersSettings'  student grade.id 'grade_upper_bound'}}>{{grade.grade}}
-                                        </a> </li>
-                                  {{/if}}
-                                {{/each}}
-                              {{/if}}
-                            </ul>
-                          </div>
+                          {{gru-dropdown
+                            selectedItemId=student.gradeUpperBound
+                            allowItemsRangeSelection=true
+                            rangeBound='upper'
+                            placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
+                            items=subjectTaxonomyGrades
+                            displayLabelFieldKey="grade"
+                            onChangeAction="updateClassStudentGradeDestination"
+                            selectedItemAssocId=student.id
+                            btn-group-size=btn-group-size
+                            allowEdit=(if student.profileBaselineDone false true )
+                         }}
                         </div>
                       </div>
                     </td>
@@ -481,7 +319,7 @@
             {{t 'teacher-landing.class.class-management-tab.students-null'}}
           </div>
         {{/if}}
-      </div> {{!-- Student Settings section ends --}}
+      </div>
     </div>
-  </div> {{!-- two col layout ends --}}
+  </div>
 </div>

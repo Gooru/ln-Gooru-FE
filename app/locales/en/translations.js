@@ -1397,16 +1397,6 @@ export default Object.assign(quizzesTranslations, {
             'What is the lowest grade level content that your students should study?',
           'current-grade-info': 'What is the grade level of your class?'
         },
-        'gen-baseline': {
-          'baseline-1':
-            '(1) You can generate the personalized learning path for each student based on class origin and destination.',
-          'baseline-2':
-            '(2) By default, all students have the grade level as their destination. You can adjust the destination to be a higher grade for students who are ahead in the class. Click Personalize Learning Path to generate a personalized course map based on the student’s skyline and their destination. ',
-          'baseline-3':
-            '(3) The path generation for the entire class can be actioned only once. After that, any updates will have to be done individually for each student.',
-          'baseline-4':
-            '(4) You can also adjust the destination grade for individual student. Click on the icon <i id="ember1600" class="ember-view gru-icon material-icons replay" style="vertical-align: middle;">replay </i> once you have confirmed the destination, to recompute the personalized path.'
-        },
         origin: 'Origin',
         destination: 'Destination',
         students: 'Students',
