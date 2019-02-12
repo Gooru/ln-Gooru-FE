@@ -35,8 +35,10 @@
        onSelectMonth="onSelectMonth"
        onSelectCompetency="onSelectCompetency"
        onDomainSelect="onDomainSelect"
+       selectedDomain=selectedDomain
        onSubjectChange="onSubjectChange"
-       categories=taxonomyCategories}}
+       categories=taxonomyCategories
+       selectedCompetency=selectedCompetency}}
 
     <div class="inspect-competency hidden lg-visible">
       {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}

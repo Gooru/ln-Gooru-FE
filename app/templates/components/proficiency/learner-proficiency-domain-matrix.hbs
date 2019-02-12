@@ -21,7 +21,7 @@
         <div class="domain-sequence-container">
           <div class="domain-sequence" style="width:{{width}}px">
             {{#each taxonomyDomains as |taxonomyDomain index |}}
-              <li class="domain-counts" title="{{taxonomyDomain.domainName}}" data-placement="auto right" {{action "onDomainSelect" taxonomyDomain}} onmouseover={{action "addHoverClass" index}} onmouseout={{action 'removeHoverClass'}} data-toggle="tooltip">
+              <li class="domain-counts" title="{{taxonomyDomain.domainName}}" data-placement="auto right" {{action "onDomainSelect" taxonomyDomain taxonomyDomain.domainSeq}} onmouseover={{action "addHoverClass" taxonomyDomain.domainSeq}} onmouseout={{action 'removeHoverClass' taxonomyDomain.domainSeq}} data-toggle="tooltip">
                 {{taxonomyDomain.domainSeq}}
               </li>
             {{/each}}

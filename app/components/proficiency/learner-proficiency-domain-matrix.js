@@ -33,6 +33,13 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
+  onSelectDomain: null,
+
+  closeSlectedDomain: false,
+
+  selectedDomain: false,
+  selectedCell: false,
+
   init() {
     let component = this;
     component._super(...arguments);
@@ -70,31 +77,67 @@ export default Ember.Component.extend({
       component.set('height', maxNumberOfCellsInEachColumn * cellHeight);
       component.set('cellHeight', cellHeight);
       component.drawChart(component.get('chartData'));
+      if (component.get('onSelectDomain')) {
+        component.addDomainClass();
+      }
+      if (component.get('onSelectCell')) {
+        component.addSelectedCell();
+      }
     },
 
-    onDomainSelect(domain) {
+    onDomainSelect(domain, domainSeq) {
       let component = this;
       component.sendAction('onDomainSelect', domain);
-    },
-
-    addHoverClass(index) {
-      let component = this;
-      let domainSeq = index + 1;
-      component
-        .$('#render-proficiency-matrix')
-        .removeClass('hover')
-        .addClass('hover');
-      component
-        .$(`.competency-${domainSeq}`)
-        .removeClass('active')
-        .addClass('active');
-    },
-
-    removeHoverClass() {
-      let component = this;
-      component.$('#render-proficiency-matrix').removeClass('hover');
       component.$('.competency').removeClass('active');
+      component.set('onSelectDomain', domainSeq);
+      component.addDomainClass();
+    },
+
+    addHoverClass(domainSeq) {
+      let component = this;
+      component.addDomainClass(domainSeq);
+    },
+
+    removeHoverClass(domainSeq) {
+      let component = this;
+      component.removeDomainClass(domainSeq);
     }
+  },
+
+  addSelectedCell() {
+    let component = this;
+    let selectedCell = component.get('onSelectCell');
+    component.$('.competency').removeClass('active-cell');
+    component.$('#render-proficiency-matrix').addClass('hover');
+    component
+      .$(`.competency-${selectedCell.xAxisSeq}-${selectedCell.yAxisSeq}`)
+      .addClass('active-cell');
+  },
+
+  removeDomainClass(domainSeq) {
+    let component = this;
+    let selectedIndex = component.get('onSelectDomain');
+    let selectedCell = component.get('onSelectCell');
+    if (selectedIndex !== domainSeq) {
+      component.$(`.competency-${domainSeq}`).removeClass('active');
+    }
+    if (!selectedIndex && !selectedCell) {
+      component.$('#render-proficiency-matrix').removeClass('hover');
+    }
+  },
+
+  addDomainClass(domainSeq) {
+    let component = this;
+    if (
+      component.get('onSelectCell') &&
+      !domainSeq &&
+      component.get('onSelectDomain')
+    ) {
+      component.$('.competency').removeClass('active-cell');
+    }
+    component.$('#render-proficiency-matrix').addClass('hover');
+    let seq = domainSeq ? domainSeq : component.get('onSelectDomain');
+    component.$(`.competency-${seq}`).addClass('active');
   },
 
   // -------------------------------------------------------------------------
@@ -112,6 +155,32 @@ export default Ember.Component.extend({
       component.fetchSignatureCompetencyList();
     }
     return null;
+  }),
+
+  onChangeSelectedDomain: Ember.observer('selectedDomain', function() {
+    let component = this;
+    if (!component.get('selectedDomain')) {
+      let selectedIndex = component.get('onSelectDomain');
+      component.set('onSelectDomain', null);
+      component.$(`.competency-${selectedIndex}`).removeClass('active');
+      if (!component.get('onSelectCell')) {
+        component.$('#render-proficiency-matrix').removeClass('hover');
+      }
+    }
+  }),
+
+  onChangeSelectedCompetency: Ember.observer('selectedCompetency', function() {
+    let component = this;
+    if (!component.get('selectedCompetency')) {
+      let selectedCell = component.get('onSelectCell');
+      component
+        .$(`.competency-${selectedCell.xAxisSeq}-${selectedCell.yAxisSeq}`)
+        .removeClass('active-cell');
+      component.set('onSelectCell', null);
+      if (!component.get('onSelectDomain')) {
+        component.$('#render-proficiency-matrix').removeClass('hover');
+      }
+    }
   }),
 
   comptencyMatrixObserver: Ember.observer(
@@ -197,6 +266,8 @@ export default Ember.Component.extend({
    * @type {Object}
    */
   signatureCompetencyList: null,
+
+  onSelectCell: null,
 
   /**
    * It  will have chart value width scroll width handling
@@ -577,6 +648,8 @@ export default Ember.Component.extend({
       })
       .on('click', function(d) {
         component.selectCompetency(d);
+        component.set('onSelectCell', d);
+        component.addSelectedCell();
       });
     cards.exit().remove();
     component.$('.scrollable-chart').scrollTop(height);
