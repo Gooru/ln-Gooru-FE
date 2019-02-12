@@ -296,13 +296,12 @@
                   <td>
                     <div class="actions-btn">
                       <div class="student-action-col">
-                        {{#if student.isActive}}
-                          {{gru-switch switchOptions=switchOptions onOptionSwitch='classMembersToggle' item=student data-toggle="tooltip"
-                          isChecked=true}}
-                        {{else}}
-                          {{gru-switch switchOptions=switchOptions onOptionSwitch='classMembersToggle' item=student data-toggle="tooltip"
-                          isChecked=false}}
-                        {{/if}}
+                          {{gru-switch
+                            switchOptions=switchOptions
+                            onOptionSwitch='classMembersToggle'
+                            item=student data-toggle="tooltip"
+                            isChecked=(if student.isActive true false)
+                          }}
                       </div>
                       {{#if isPremiumClass }}
                         <div class="student-action-col {{if (and student.isActive  student.gradeUpperBound) "" "inActiveRow"}}">

@@ -73,10 +73,13 @@ export default Ember.Route.extend({
     const subjectCode = route.get('subjectCode');
 
     const taxonomyService = route.get('taxonomyService');
+    const fwCode = currentClass.get('preference.framework');
     const filters = {
-      subject: currentClass.get('preference.subject'),
-      fw_code: currentClass.get('preference.framework')
+      subject: currentClass.get('preference.subject')
     };
+    if (fwCode) {
+      filters.fw_code = fwCode;
+    }
     return Ember.RSVP.hash({
       course: course,
       taxonomyGrades: taxonomyService.fetchGradesBySubject(filters),
