@@ -75,6 +75,12 @@ export default Ember.Component.extend({
   selectedItemId: null,
 
   /**
+   * It maintains the selected item
+   * @type {String}
+   */
+  selectedItem: null,
+
+  /**
    * It maintains the  item key
    * @type {String}
    */
@@ -169,6 +175,13 @@ export default Ember.Component.extend({
     }
   ),
 
+  /**
+   * This will observer the  selectedItemId field value and render data based on it.
+   */
+  onChangeSelectedItem: Ember.observer('selectedItemId', function() {
+    this.chooseSelectedItem();
+  }),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -231,6 +244,8 @@ export default Ember.Component.extend({
       let itemKey = component.get('itemKey');
       let selectedItem = component.get('items').findBy(itemKey, selectedItemId);
       component.set('selectedItem', selectedItem);
+    } else {
+      component.set('selectedItem', null);
     }
   }
 });
