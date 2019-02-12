@@ -304,9 +304,29 @@ export default Ember.Controller.extend(ModalMixin, {
             student.get('gradeUpperBound'),
           users: [studentId]
         };
-        student.set('gradeLowerBound', settings.grade_lower_bound);
-        student.set('gradeUpperBound', settings.grade_upper_bound);
-        controller.updateClassMembersSettings(settings);
+
+        let lowBound = student.get('tempGradeLowerBound');
+        let upperBound = student.get('tempGradeUpperBound');
+        let doInitialSkyline = false;
+        let saveSettings = false;
+
+        if (lowBound && lowBound !== student.get('gradeLowerBound')) {
+          // change at lower bound value detected
+          // we may need to trigger initial skyline compute
+          saveSettings = true;
+          doInitialSkyline = true;
+          student.set('gradeLowerBound', settings.grade_lower_bound);
+        }
+
+        if (upperBound && upperBound !== student.get('gradeUpperBound')) {
+          // change at upper bound value detected
+          saveSettings = true;
+          student.set('gradeUpperBound', settings.grade_upper_bound);
+        }
+
+        if (saveSettings) {
+          controller.updateClassMembersSettings(settings, doInitialSkyline);
+        }
       } else {
         Ember.Logger.log(
           'Course or Subject not assigned to class, cannot update class settings'
@@ -585,7 +605,7 @@ export default Ember.Controller.extend(ModalMixin, {
     });
   },
 
-  updateClassMembersSettings: function(settings) {
+  updateClassMembersSettings: function(settings, doInitialSkyline) {
     const controller = this;
     const classId = this.get('class.id');
     const isPremiumClass = controller.get('isPremiumClass');
@@ -595,7 +615,7 @@ export default Ember.Controller.extend(ModalMixin, {
       .get('classService')
       .classMembersSettings(classId, settings)
       .then(function(/* responseData */) {
-        if (isPremiumClass && isOffline) {
+        if (isPremiumClass && isOffline && doInitialSkyline) {
           controller
             .get('skylineInitialService')
             .calculateSkyline(classId, [studentId]);
