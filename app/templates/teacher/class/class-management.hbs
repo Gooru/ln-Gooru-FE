@@ -147,7 +147,7 @@
                 <div class='gradelevel-info'></div>
                 <div class="field-drop-down">
                   {{gru-dropdown
-                    selectedItemKey='code'
+                    itemKey='code'
                     selectedItemId=class.preference.framework
                     placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
                     items=frameworks
@@ -171,6 +171,7 @@
                   <div class='field-drop-down'>
                     {{gru-dropdown
                       selectedItemId=class.gradeLowerBound
+                      rangeStartItemId=class.gradeLowerBound
                       allowItemsRangeSelection=true
                       placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
                       items=subjectTaxonomyGrades
@@ -192,6 +193,7 @@
                 <div class='field-drop-down'>
                   {{gru-dropdown
                     selectedItemId=class.gradeCurrent
+                    rangeStartItemId=class.gradeCurrent
                     allowItemsRangeSelection=true
                     rangeBound='upper'
                     placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
@@ -259,6 +261,9 @@
                         <div class='grade-info'>
                           {{gru-dropdown
                             selectedItemId=student.gradeLowerBound
+                            rangeStartItemId=class.gradeLowerBound
+                            rangeEndItemId=class.gradeCurrent
+                            rangeBound='between'
                             allowItemsRangeSelection=true
                             placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
                             items=subjectTaxonomyGrades
@@ -274,6 +279,7 @@
                         <div class='grade-info'>
                           {{gru-dropdown
                             selectedItemId=student.gradeUpperBound
+                            rangeStartItemId=class.gradeCurrent
                             allowItemsRangeSelection=true
                             rangeBound='upper'
                             placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")

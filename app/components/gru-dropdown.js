@@ -75,10 +75,22 @@ export default Ember.Component.extend({
   selectedItemId: null,
 
   /**
-   * It maintains the selected item key
+   * It maintains the  item key
    * @type {String}
    */
-  selectedItemKey: 'id',
+  itemKey: 'id',
+
+  /**
+   * It maintains the range start item id
+   * @type {String}
+   */
+  rangeStartItemId: null,
+
+  /**
+   * It maintains the range end item id
+   * @type {String}
+   */
+  rangeEndItemId: null,
 
   /**
    * @property {string} selection text
@@ -149,9 +161,13 @@ export default Ember.Component.extend({
   /**
    * This will observer the range slection field value and render data based on it.
    */
-  onChangeRange: Ember.observer('selectedItemId', function() {
-    this.renderDataBasedOnRangeSelection();
-  }),
+  onChangeRange: Ember.observer(
+    'rangeStartItemId',
+    'rangeEndItemId',
+    function() {
+      this.renderDataBasedOnRangeSelection();
+    }
+  ),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -183,19 +199,23 @@ export default Ember.Component.extend({
     component.set('displayItems', items);
     let allowItemsRangeSelection = component.get('allowItemsRangeSelection');
     if (allowItemsRangeSelection) {
-      let rangeSelectionFieldKey = component.get('selectedItemKey');
-      let rangeSelectionFieldValue = component.get('selectedItemId');
+      let itemKey = component.get('itemKey');
+      let rangeStartItemId = component.get('rangeStartItemId');
       let rangeBound = component.get('rangeBound');
-
-      let rangeSelectionItem = items.findBy(
-        rangeSelectionFieldKey,
-        rangeSelectionFieldValue
-      );
-      if (rangeSelectionItem) {
+      let rangeStartSelectionItem = items.findBy(itemKey, rangeStartItemId);
+      if (rangeStartSelectionItem) {
         let rangeSelectionItems = Ember.A();
-        let rangeSelectionIndex = items.indexOf(rangeSelectionItem);
+        let rangeSelectionIndex = items.indexOf(rangeStartSelectionItem);
         if (rangeBound === 'upper') {
           rangeSelectionItems = items.slice(rangeSelectionIndex);
+        } else if (rangeBound === 'between') {
+          let rangeEndItemId = component.get('rangeEndItemId');
+          let rangeEndSelectionItem = items.findBy(itemKey, rangeEndItemId);
+          let rangeEndSelectionIndex = items.indexOf(rangeEndSelectionItem);
+          rangeSelectionItems = items.slice(
+            rangeSelectionIndex,
+            rangeEndSelectionIndex + 1
+          );
         } else {
           rangeSelectionItems = items.slice(0, rangeSelectionIndex + 1);
         }
@@ -208,10 +228,8 @@ export default Ember.Component.extend({
     let component = this;
     let selectedItemId = component.get('selectedItemId');
     if (selectedItemId) {
-      let selectedItemKey = component.get('selectedItemKey');
-      let selectedItem = component
-        .get('items')
-        .findBy(selectedItemKey, selectedItemId);
+      let itemKey = component.get('itemKey');
+      let selectedItem = component.get('items').findBy(itemKey, selectedItemId);
       component.set('selectedItem', selectedItem);
     }
   }
