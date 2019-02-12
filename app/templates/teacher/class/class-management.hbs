@@ -147,7 +147,7 @@
                 <div class='gradelevel-info'></div>
                 <div class="field-drop-down">
                   {{gru-dropdown
-                    selectedItemKey='code'
+                    itemKey='code'
                     selectedItemId=class.preference.framework
                     placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
                     items=frameworks
@@ -159,18 +159,19 @@
                 </div>
               </div>
 
-              {{#if (and (and course subject) isPremiumClass class.gradeLowerBound) }}
-                <div class='sub-sec-row'>
-                  <div class='field-dropdown-caps-label'>
-                    {{t 'teacher-landing.class.class-settings.origin'}}
-                  </div>
-                  <div class='gradelevel-info'>
-                    {{gru-icon tooltipTitle= "teacher-landing.class.class-settings.course-settings-sec.origin-info"
+              {{#if (and (and course subject) isPremiumClass) }}
+                  <div class='sub-sec-row'>
+                    <div class='field-dropdown-caps-label'>
+                      {{t 'teacher-landing.class.class-settings.origin'}}
+                    </div>
+                    <div class='gradelevel-info'>
+                      {{gru-icon tooltipTitle= "teacher-landing.class.class-settings.course-settings-sec.origin-info"
                                   name='info_outline'}}
-                  </div>
-                  <div class='field-drop-down'>
-                    {{gru-dropdown
-                      selectedItemId=class.gradeLowerBound
+                    </div>
+                    <div class='field-drop-down'>
+                      {{gru-dropdown
+                      selectedItemId=tempClass.gradeLowerBound
+                      rangeStartItemId=tempClass.gradeLowerBound
                       allowItemsRangeSelection=true
                       placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
                       items=subjectTaxonomyGrades
@@ -178,20 +179,20 @@
                       onChangeAction="updateClassGradeOrigin"
                       btn-group-size=btn-group-size
                     }}
+                    </div>
                   </div>
-                </div>
-              {{/if}}
 
-              <div class='sub-sec-row'>
-                <div class='field-dropdown-caps-label'> {{t
+                <div class='sub-sec-row'>
+                  <div class='field-dropdown-caps-label'> {{t
                               'teacher-landing.class.class-settings.class-settings-sec.grade-level'}}</div>
-                <div class='gradelevel-info'>
-                  {{gru-icon tooltipTitle="teacher-landing.class.class-settings.course-settings-sec.current-grade-info"
+                  <div class='gradelevel-info'>
+                    {{gru-icon tooltipTitle="teacher-landing.class.class-settings.course-settings-sec.current-grade-info"
                                   name='info_outline'}}
-                </div>
-                <div class='field-drop-down'>
-                  {{gru-dropdown
-                    selectedItemId=class.gradeCurrent
+                  </div>
+                  <div class='field-drop-down'>
+                    {{gru-dropdown
+                    selectedItemId=tempClass.gradeCurrent
+                    rangeStartItemId=tempClass.gradeCurrent
                     allowItemsRangeSelection=true
                     rangeBound='upper'
                     placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
@@ -199,10 +200,10 @@
                     onChangeAction="updateClassGradeLevel"
                     allowEdit=(if class.gradeCurrent false true )
                     btn-group-size=btn-group-size}}
+                  </div>
                 </div>
-              </div>
 
-              {{#if (and (and course subject) isPremiumClass) }}
+
                 <div class='sub-sec-sep'></div>
                 <div class='row-offline-class sub-sec-row'>
                   <div class='offline-icon'></div>
@@ -234,7 +235,7 @@
             <table>
               <tr>
                 <th>{{t 'teacher-landing.class.class-settings.students'}}</th>
-                {{#if isPremiumClass }}
+                {{#if (and isPremiumClass class.gradeLowerBound class.gradeCurrent) }}
                   <th>{{t 'teacher-landing.class.class-settings.origin'}}</th>
                   <th>{{t 'teacher-landing.class.class-settings.destination'}}</th>
                 {{/if}}
@@ -253,12 +254,15 @@
                       </div>
                     </div>
                   </td>
-                  {{#if isPremiumClass }}
+                  {{#if (and isPremiumClass class.gradeLowerBound class.gradeCurrent) }}
                     <td>
                       <div class="origin {{if student.isActive "" "inActiveRow"}}  ">
                         <div class='grade-info'>
                           {{gru-dropdown
                             selectedItemId=student.gradeLowerBound
+                            rangeStartItemId=class.gradeLowerBound
+                            rangeEndItemId=tempClass.gradeCurrent
+                            rangeBound='between'
                             allowItemsRangeSelection=true
                             placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
                             items=subjectTaxonomyGrades
@@ -274,6 +278,7 @@
                         <div class='grade-info'>
                           {{gru-dropdown
                             selectedItemId=student.gradeUpperBound
+                            rangeStartItemId=class.gradeCurrent
                             allowItemsRangeSelection=true
                             rangeBound='upper'
                             placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
@@ -296,7 +301,7 @@
                   <td>
                     <div class="actions-btn">
                       <div class="student-action-col">
-                          {{gru-switch
+                        {{gru-switch
                             switchOptions=switchOptions
                             onOptionSwitch='classMembersToggle'
                             item=student data-toggle="tooltip"

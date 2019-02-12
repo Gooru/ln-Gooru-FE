@@ -260,8 +260,9 @@ export default Ember.Controller.extend(ModalMixin, {
           };
 
         tClass.set('preference', preferenceJSON);
-        controller.set('tempClass', tClass);
         controller.fetchTaxonomyGrades().then(() => {
+          tClass.set('gradeLowerBound', null);
+          tClass.set('gradeCurrent', null);
           controller.set('enableApplySettings', true); // some UI interaction happened...enable apply button
         });
       } else {
@@ -526,6 +527,24 @@ export default Ember.Controller.extend(ModalMixin, {
     }
   },
 
+  /**
+   * Fetch class member data to get class member bounds.
+   */
+  fetchClassMemberBounds() {
+    let controller = this;
+    const classId = controller.get('class.id');
+    controller
+      .get('classService')
+      .readClassMembers(classId)
+      .then(members => {
+        controller.set(
+          'class.memberGradeBounds',
+          members.get('memberGradeBounds')
+        );
+        controller.updateBoundValuesToStudent();
+      });
+  },
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -567,11 +586,12 @@ export default Ember.Controller.extend(ModalMixin, {
     );
   },
 
-  updateBondValuesToStudent(members) {
-    let component = this;
+  updateBoundValuesToStudent() {
+    let controller = this;
+    let members = controller.get('class.members');
     members.forEach(member => {
       let memberId = member.get('id');
-      let grade = component.get('memberGradeBounds').findBy(memberId);
+      let grade = controller.get('memberGradeBounds').findBy(memberId);
       if (grade) {
         let gradeBounds = grade.get(memberId);
         member.set('gradeLowerBound', gradeBounds.grade_lower_bound);
@@ -583,9 +603,7 @@ export default Ember.Controller.extend(ModalMixin, {
   setupDisplayProperties() {
     let controller = this;
     let members = controller.get('class.members');
-    let tempClassMembers = controller.get('tempClass.members');
-    controller.updateBondValuesToStudent(members);
-    controller.updateBondValuesToStudent(tempClassMembers);
+    controller.updateBoundValuesToStudent(members);
     controller.set('enableApplySettings', false);
   },
 
@@ -602,6 +620,8 @@ export default Ember.Controller.extend(ModalMixin, {
     };
     Ember.RSVP.hash(promises).then(function(/* hash */) {
       controller.set('enableApplySettings', false);
+      // TO-DO optmize, call only when bounds get change.
+      controller.fetchClassMemberBounds();
     });
   },
 
@@ -615,6 +635,8 @@ export default Ember.Controller.extend(ModalMixin, {
       .get('classService')
       .classMembersSettings(classId, settings)
       .then(function(/* responseData */) {
+        // TO-DO optmize
+        controller.fetchClassMemberBounds();
         if (isPremiumClass && isOffline && doInitialSkyline) {
           controller
             .get('skylineInitialService')
