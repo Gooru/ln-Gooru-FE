@@ -49,65 +49,6 @@
     .grade-label {
       padding-left: 16px;
     }
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-      width: max-content;
-
-      .active-item {
-        display: flex;
-        cursor: pointer;
-        height: 25px;
-
-        .label {
-          min-width: max-content;
-          font-size: 13px;
-          font-weight: normal;
-          font-style: italic;
-          color: $charcoal-grey;
-          padding: 5px;
-          text-align: left;
-        }
-
-        .icon {
-          font-size: 13px;
-          font-weight: bold;
-          color: $charcoal-grey;
-        }
-      }
-    }
-    /* Dropdown Content (Hidden by Default) */
-    .dropdown-content {
-      display: none;
-      position: fixed;
-      background-color: $white;
-      min-width: 94px;
-      width: auto;
-      max-width: max-content;
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-      max-height: 150px;
-      overflow-y: auto;
-      z-index: 1;
-      border-top: 1px solid;
-
-      .list-item {
-        height: 30px;
-        width: max-content;
-        line-height: 30px;
-        padding-left: 15px;
-        cursor: pointer;
-
-        &.active,
-        &:hover {
-          background-color: $light-200;
-        }
-      }
-    }
-    /* Show the dropdown menu on hover */
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
   }
 
   .inActiveRow {
@@ -480,70 +421,6 @@
         }
       }
 
-      .gen-pathway-sec {
-        @extend .sec-panel;
-        margin-top: 25px;
-
-        .sec-title {
-          height: 14px;
-          opacity: 0.7;
-          font-size: 12px;
-          font-weight: bold;
-        }
-
-        .sub-sec-sep {
-          border-top: 1px solid $sep-border-color;
-          margin-top: 12px;
-        }
-
-        .btn-top-panel {
-          display: flex;
-          align-items: baseline;
-          justify-content: space-between;
-          border-bottom: 1px solid #d7d7d7;
-          margin-left: 15px;
-
-          .class-btn {
-            margin: unset;
-            align-self: unset;
-          }
-
-          .top-btn {
-            background-color: $btn-blue;
-            height: 53px;
-            border-radius: unset;
-            padding: 15px;
-            color: $white;
-            border-color: #f36463;
-            text-transform: uppercase;
-            cursor: pointer;
-
-            > i {
-              vertical-align: bottom;
-              margin-left: 16px;
-            }
-          }
-
-          .disabled {
-            cursor: none;
-            opacity: 0.5;
-            pointer-events: none;
-          }
-
-          .btn-txt {
-            color: whitesmoke;
-            background: transparent;
-          }
-        }
-
-        .gen-baseline-info {
-          margin: 15px;
-          font-weight: bold;
-          font-size: 13px;
-          color: $bg-dark;
-        }
-      }
-
       .course-sec-cont {
         .dropdown-menu {
           z-index: 1000;
@@ -623,12 +500,13 @@
           .sub-sec-row {
             display: flex;
             height: 36px;
-            align-items: baseline;
+            align-items: center;
 
             .field-dropdown-caps-label {
               @extend .caps-field-label;
               flex: 0.7;
               padding: 12px 0;
+              line-height: 1.2;
             }
 
             .gradelevel-info {
@@ -901,6 +779,15 @@
               cursor: pointer;
               width: 30px;
               height: 20px;
+
+              .student-adj-lp {
+                &.updating {
+                  .replay {
+                    animation: rotating 0.5s linear infinite;
+                    color: #20a33c;
+                  }
+                }
+              }
             }
 
             .student-delete {
@@ -909,6 +796,15 @@
           }
         }
       }
+    }
+  }
+  @-webkit-keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
     }
   }
 }

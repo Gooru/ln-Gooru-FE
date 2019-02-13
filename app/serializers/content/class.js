@@ -202,7 +202,10 @@ export default Ember.Object.extend({
   },
 
   filterMembersGradeBounds: function(payload) {
-    return payload.member_grade_bounds;
+    const membersGradeBounds = payload.member_grade_bounds || [];
+    return membersGradeBounds.map(function(memberGradeBounds) {
+      return Ember.Object.create(memberGradeBounds);
+    });
   },
 
   filterElements: function(payload, property) {

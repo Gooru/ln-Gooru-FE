@@ -670,7 +670,7 @@ export default Ember.Controller.extend({
     controller
       .get('lookupService')
       .getLanguages()
-      .then(languages => controller.set('languages', languages.languages));
+      .then(languages => controller.set('languages', languages));
   },
   //------------------------------------------------------------------------------
   // Initialize the controller
