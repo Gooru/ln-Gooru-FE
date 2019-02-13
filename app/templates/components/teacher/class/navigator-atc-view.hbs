@@ -2,15 +2,16 @@
   <div class="class-name">{{classData.title}}
     <div class="until-month">{{t 'common.until'}} {{format-date firstDayOfMonth 'MMMM YYYY'}}</div>
   </div>
-  <div class="total-competencies"><div class="competency-count">{{togalMasteredCompetencies}}</div><div class="competency-label">{{t 'teacher-landing.class.atc-view.total-competencies-gained'}}</div></div>
+  <div class="total-competencies">
+    <div class="competency-count">{{togalMasteredCompetencies}}</div>
+    <div class="competency-label">{{t 'teacher-landing.class.atc-view.total-competencies-gained'}}</div>
+  </div>
 </div>
-
-
 {{#if studentData}}
   <div class="tooltip-html-container" style="display: none;">
     <div class="tooltip-container">
       <div class="header-container">
-        <img src="{{studentData.thumbnail}}"/>
+        <img src="{{studentData.thumbnail}}" />
         <div class="student-name">
           <span class="ellipsis">{{studentData.firstName}}</span>
           <span class="ellipsis">{{studentData.lastName}}</span>
@@ -25,7 +26,7 @@
         <div class="destination-container">
           <div class="grade-info">
             <span class="title-container">{{t 'common.destination'}}</span>
-            <span class="grade-level">{{studentData.gradeId}}</span>
+            <span class="grade-level">{{studentData.grade}}</span>
           </div>
           <div class="competencies">
             <span class="title-container">{{t 'common.competencies'}}</span>
