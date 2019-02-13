@@ -19,9 +19,9 @@ export default Ember.Component.extend({
 
     closePullUp() {
       let component = this;
-      component.set('competency', null);
       component.toggleProperty('isInspectCompetency');
       component.set('isExpand', false);
+      component.set('competency', null);
     }
   }
 });

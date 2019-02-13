@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import d3 from 'd3';
-import { getGradeColor, isMobileVW } from 'gooru-web/utils/utils';
+import { getGradeColor, isCompatibleVW } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -186,7 +186,12 @@ export default Ember.Component.extend({
   drawAtcChart(dataset) {
     const component = this;
     component.$('svg').remove();
-    var margin = { top: 50, right: 20, bottom: 30, left: 50 },
+    var margin = {
+        top: 50,
+        right: 20,
+        bottom: 30,
+        left: 50
+      },
       width = 830 - margin.left - margin.right,
       height = 450 - margin.top - margin.bottom;
 
@@ -284,7 +289,7 @@ export default Ember.Component.extend({
       Ember.run.cancel(tooltipInterval);
     });
 
-    if (!isMobileVW()) {
+    if (!isCompatibleVW('medium')) {
       studentNode.on('mouseover', function(studentData) {
         let clientY = d3.event.clientY;
         let clientX = d3.event.clientX;

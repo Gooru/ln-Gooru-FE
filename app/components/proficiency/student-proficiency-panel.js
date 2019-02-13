@@ -4,13 +4,7 @@ export default Ember.Component.extend({
   classNames: ['student-proficiency-panel'],
 
   // -------------------------------------------------------------------------
-  // Dependencies
-  /**
-   * taxonomy service dependency injection
-   * @type {Object}
-   */
-  taxonomyService: Ember.inject.service('taxonomy'),
-
+  // Properties
   /**
    * @property {Object}
    * Property to store student profile
@@ -18,10 +12,82 @@ export default Ember.Component.extend({
   studentProfile: null,
 
   /**
+   * @property {Object}
+   * Property to store active subject selected
+   */
+  activeSubject: null,
+
+  /**
+   * @property {Object}
+   * Property to store timeLine
+   */
+  timeLine: null,
+
+  /**
+   * @property {Object}
+   * Property to store class data
+   */
+  class: null,
+
+  /**
+   * @property {Object}
+   * Property to store selected grade
+   */
+  selectedGrade: null,
+
+  /**
+   * @property {Boolean}
+   * Property to find is student or not
+   */
+  isStudent: null,
+
+  /**
    * @property {Array}
    * Property to store taxonomy categories
    */
   categories: null,
+
+  /**
+   * @property {Boolean}
+   * Property to show matrix chart or not
+   */
+  isShowMatrixChart: null,
+
+  /**
+   * @property {Array}
+   * Property to store competency domains
+   */
+  competencyMatrixDomains: null,
+
+  /**
+   * @property {Object}
+   * Property to store user proficiency baseline data
+   */
+  userProficiencyBaseLine: null,
+
+  /**
+   * @property {Array}
+   * Property to store taxonomy subjects
+   */
+  taxonomySubjects: null,
+
+  /**
+   * @property {Array}
+   * Property to store competency coordinates
+   */
+  competencyMatrixCoordinates: null,
+
+  /**
+   * @property {Object}
+   * Property to store tagged subject bucket
+   */
+  subjectBucket: null,
+
+  /**
+   * @property {Array}
+   * Property to identify baseline is selected or not
+   */
+  isSelectBaseLine: null,
 
   /**
    * @property {Boolean} isShowTimeSeries
@@ -32,11 +98,6 @@ export default Ember.Component.extend({
    * @property {Date} timeSeriesStartDate
    */
   timeSeriesStartDate: null,
-
-  /**
-   * @property {Boolean} isShowMatrixChart
-   */
-  isShowMatrixChart: false,
 
   /**
    * @property {Date}
@@ -72,20 +133,20 @@ export default Ember.Component.extend({
 
     goBack() {
       let component = this;
-      let isTeacher = component.get('isTeacher');
+      let isStudent = component.get('isStudent');
       let classId = component.get('class.id');
       let courseId = component.get('course.id');
-      if (isTeacher) {
-        component
-          .get('router')
-          .transitionTo('teacher.class.students-proficiency', classId);
-      } else {
+      if (isStudent) {
         component.get('router').transitionTo('student-locate', {
           queryParams: {
             classId: classId,
             courseId: courseId
           }
         });
+      } else {
+        component
+          .get('router')
+          .transitionTo('teacher.class.students-proficiency', classId);
       }
     },
 
@@ -121,6 +182,9 @@ export default Ember.Component.extend({
       );
     },
 
+    /**
+     * Action triggered when select a domain
+     */
     onDomainSelect(domain) {
       let component = this;
       component.sendAction('onDomainSelect', domain);

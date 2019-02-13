@@ -389,4 +389,8 @@ export const CLASS_SKYLINE_INITIAL_DESTINATION = {
   classSetupInComplete: 'class-setup-incomplete'
 };
 
-export const MOBILE_VW = 992;
+export const SCREEN_SIZES = {
+  small: 768,
+  medium: 992,
+  large: 1024
+};

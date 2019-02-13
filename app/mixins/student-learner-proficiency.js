@@ -1,10 +1,16 @@
 import Ember from 'ember';
-import { DEFAULT_K12_SUBJECT } from 'gooru-web/config/config';
-import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
+import { DEFAULT_K12_SUBJECT, ROLES } from 'gooru-web/config/config';
+import {
+  getSubjectIdFromSubjectBucket,
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
 import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
 export default Ember.Mixin.create({
   // -------------------------------------------------------------------------
   // Dependencies
+
+  session: Ember.inject.service('session'),
+
   /**
    * taxonomy service dependency injection
    * @type {Object}
@@ -84,9 +90,29 @@ export default Ember.Mixin.create({
     };
   }),
 
+  /**
+   * @property {Boolean}
+   * Property to store given screen value is compatible
+   */
+  isMobile: isCompatibleVW('large'),
+
+  /**
+   * @property {Object}
+   * Property to store selected competency
+   */
   selectedCompetency: null,
 
+  /**
+   * @property {Array}
+   * Property to store selected domain competenceis
+   */
   domainCompetencyList: null,
+
+  /**
+   * @property {Boolean}
+   * Property to store is student or not
+   */
+  isStudent: Ember.computed.equal('session.role', ROLES.STUDENT),
 
   actions: {
     onSelectGrade(grade) {
@@ -143,8 +169,14 @@ export default Ember.Mixin.create({
         'selectedDomainCompetencies',
         selectedDomainCompetencies.get('competencies')
       );
+      component.set('selectedCompetency', null);
       component.set('showDomainInfo', true);
       component.set('showCompetencyInfo', false);
+    },
+
+    onClosePullUp() {
+      let component = this;
+      component.set('selectedCompetency', null);
     }
   },
   /**

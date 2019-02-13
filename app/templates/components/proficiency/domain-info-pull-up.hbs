@@ -1,13 +1,19 @@
 <div class="domain-panel-header">
   <div class="domain-name">{{domain.domainName}}</div>
-  <div class="domain-seq">Domain {{domain.domainSeq}}</div>
+  <div class="domain-seq">{{t 'common.domain'}} {{domain.domainSeq}}</div>
   <span class="close" {{action 'closePullUp'}}>{{gru-icon name="close"}}</span>
 </div>
 <div class="competency-container">
-  <div class="title">Competencies</div>
+  <div class="title">{{t 'common.competencies'}}</div>
   <div class="competency-list">
     {{#each competencies as |competency|}}
-      <div class="competency">{{competency.competencyCode}}</div>
+      <div class="competency-info" {{action 'onInspectCompetency' competency}}>
+        <div class="competency">
+          <div class="competency-status status-{{competency.status}}"></div>
+          <div class="title">{{competency.competencyCode}}</div>
+        </div>
+        <div class="competency-desc">{{competency.competencyStudentDesc}}</div>
+      </div>
     {{/each}}
   </div>
 </div>

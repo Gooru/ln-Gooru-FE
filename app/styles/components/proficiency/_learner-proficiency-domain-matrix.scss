@@ -51,37 +51,27 @@
 
     .matrix-chart {
       #render-proficiency-matrix {
-        &.hover {
+        &.highlight {
           svg {
             #cell-container {
               rect {
                 opacity: 0.1;
-                stroke-width: 0;
+                stroke-width: 1;
 
                 &.active {
                   opacity: 1;
-                  stroke-width: 1;
+                  stroke-width: 2;
                 }
 
                 &.active-cell {
                   opacity: 1;
-                  stroke-width: 1;
+                  stroke-width: 3;
                 }
               }
             }
 
             #skyline-container {
               opacity: 0;
-            }
-          }
-        }
-
-        svg {
-          #cell-container {
-            rect {
-              &.active-cell {
-                filter: url(#shadow);
-              }
             }
           }
         }

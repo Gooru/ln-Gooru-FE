@@ -33,13 +33,6 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  onSelectDomain: null,
-
-  closeSlectedDomain: false,
-
-  selectedDomain: false,
-  selectedCell: false,
-
   init() {
     let component = this;
     component._super(...arguments);
@@ -77,67 +70,76 @@ export default Ember.Component.extend({
       component.set('height', maxNumberOfCellsInEachColumn * cellHeight);
       component.set('cellHeight', cellHeight);
       component.drawChart(component.get('chartData'));
-      if (component.get('onSelectDomain')) {
-        component.addDomainClass();
+
+      if (component.get('isSelectBaseLine')) {
+        component.onToggleBaseline();
       }
-      if (component.get('onSelectCell')) {
-        component.addSelectedCell();
+
+      if (component.get('selectedDomain')) {
+        component.send('domainFocusIn', component.get('selectedDomain'));
+      }
+
+      if (component.get('selectedCompetency')) {
+        component.competencyFocusIn();
       }
     },
 
-    onDomainSelect(domain, domainSeq) {
+    // Action triggered when domain is selected
+    onDomainSelect(domain) {
       let component = this;
+      component.set('selectedDomain', domain);
       component.sendAction('onDomainSelect', domain);
+    },
+
+    // Action triggered when domain is clicked or hover in
+    domainFocusIn(domain) {
+      let component = this;
+      component.$('#render-proficiency-matrix').addClass('highlight');
+      component.$('.competency').removeClass('active active-cell');
+      component.$(`.competency-${domain.domainSeq}`).addClass('active');
+    },
+
+    // Action triggered when domain is un-clicked or hover out
+    domainFocusOut() {
+      let component = this;
+      let domain = component.get('selectedDomain');
+      let competency = component.get('selectedCompetency');
+      component.$('#render-proficiency-matrix').removeClass('highlight');
       component.$('.competency').removeClass('active');
-      component.set('onSelectDomain', domainSeq);
-      component.addDomainClass();
-    },
+      //Focus In when selected domain is already exists
+      if (domain) {
+        component.send('domainFocusIn', domain);
+      }
 
-    addHoverClass(domainSeq) {
-      let component = this;
-      component.addDomainClass(domainSeq);
-    },
-
-    removeHoverClass(domainSeq) {
-      let component = this;
-      component.removeDomainClass(domainSeq);
+      if (!domain && competency) {
+        component.competencyFocusIn();
+      }
     }
   },
 
-  addSelectedCell() {
+  // Action triggered when competency is clicked or hover in
+  competencyFocusIn() {
     let component = this;
-    let selectedCell = component.get('onSelectCell');
-    component.$('.competency').removeClass('active-cell');
-    component.$('#render-proficiency-matrix').addClass('hover');
+    let selectedCompetency = component.get('selectedCompetency');
+    let selectedDomain = component.get('selectedDomain');
+    component.$('#render-proficiency-matrix').addClass('highlight');
+    let domainSeq = selectedCompetency.domainSeq || selectedDomain.domainSeq;
+    component.$('.competency').removeClass('active active-cell');
     component
-      .$(`.competency-${selectedCell.xAxisSeq}-${selectedCell.yAxisSeq}`)
+      .$(`.competency-${domainSeq}-${selectedCompetency.competencySeq}`)
       .addClass('active-cell');
   },
 
-  removeDomainClass(domainSeq) {
+  // Action triggered when competency is un-clicked or hover out
+  competencyFocusOut() {
     let component = this;
-    let selectedIndex = component.get('onSelectDomain');
-    let selectedCell = component.get('onSelectCell');
-    if (selectedIndex !== domainSeq) {
-      component.$(`.competency-${domainSeq}`).removeClass('active');
+    let domain = component.get('selectedDomain');
+    if (!domain) {
+      component.$('#render-proficiency-matrix').removeClass('highlight');
+    } else {
+      component.send('domainFocusIn', domain);
     }
-    if (!selectedIndex && !selectedCell) {
-      component.$('#render-proficiency-matrix').removeClass('hover');
-    }
-  },
-
-  addDomainClass(domainSeq) {
-    let component = this;
-    if (
-      component.get('onSelectCell') &&
-      !domainSeq &&
-      component.get('onSelectDomain')
-    ) {
-      component.$('.competency').removeClass('active-cell');
-    }
-    component.$('#render-proficiency-matrix').addClass('hover');
-    let seq = domainSeq ? domainSeq : component.get('onSelectDomain');
-    component.$(`.competency-${seq}`).addClass('active');
+    component.$('.competency').removeClass('active-cell');
   },
 
   // -------------------------------------------------------------------------
@@ -157,29 +159,23 @@ export default Ember.Component.extend({
     return null;
   }),
 
-  onChangeSelectedDomain: Ember.observer('selectedDomain', function() {
+  onDomainChange: Ember.observer('selectedDomain', function() {
     let component = this;
-    if (!component.get('selectedDomain')) {
-      let selectedIndex = component.get('onSelectDomain');
-      component.set('onSelectDomain', null);
-      component.$(`.competency-${selectedIndex}`).removeClass('active');
-      if (!component.get('onSelectCell')) {
-        component.$('#render-proficiency-matrix').removeClass('hover');
-      }
+    let selectedDomain = component.get('selectedDomain');
+    if (selectedDomain) {
+      component.send('domainFocusIn', selectedDomain);
+    } else {
+      component.send('domainFocusOut');
     }
   }),
 
-  onChangeSelectedCompetency: Ember.observer('selectedCompetency', function() {
+  onCompetencyChange: Ember.observer('selectedCompetency', function() {
     let component = this;
-    if (!component.get('selectedCompetency')) {
-      let selectedCell = component.get('onSelectCell');
-      component
-        .$(`.competency-${selectedCell.xAxisSeq}-${selectedCell.yAxisSeq}`)
-        .removeClass('active-cell');
-      component.set('onSelectCell', null);
-      if (!component.get('onSelectDomain')) {
-        component.$('#render-proficiency-matrix').removeClass('hover');
-      }
+    let selectedCompetency = component.get('selectedCompetency');
+    if (selectedCompetency) {
+      component.competencyFocusIn();
+    } else {
+      component.competencyFocusOut();
     }
   }),
 
@@ -191,7 +187,6 @@ export default Ember.Component.extend({
       component.loadChartData();
     }
   ),
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -648,8 +643,7 @@ export default Ember.Component.extend({
       })
       .on('click', function(d) {
         component.selectCompetency(d);
-        component.set('onSelectCell', d);
-        component.addSelectedCell();
+        // component.addSelectedCell();
       });
     cards.exit().remove();
     component.$('.scrollable-chart').scrollTop(height);
@@ -660,6 +654,7 @@ export default Ember.Component.extend({
 
   selectCompetency(competency) {
     let component = this;
+    component.set('selectedCompetency', competency);
     let competencyMatrixDomains = component.get('competencyMatrixDomains');
     let domainCode = competency.get('domainCode');
     let domainCompetencyList = competencyMatrixDomains.findBy(

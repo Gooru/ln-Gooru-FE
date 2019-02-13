@@ -10,8 +10,19 @@ export default Ember.Component.extend({
   actions: {
     closePullUp() {
       let component = this;
-      component.set('domain', null);
       component.toggleProperty('showPullUp');
+      component.set('domain', null);
+    },
+
+    onInspectCompetency(selectedCompetency) {
+      let component = this;
+      let competencies = component.get('competencies');
+      selectedCompetency.set('domainName', component.get('domain.domainName'));
+      component.sendAction(
+        'onSelectCompetency',
+        selectedCompetency,
+        competencies
+      );
     }
   }
 });
