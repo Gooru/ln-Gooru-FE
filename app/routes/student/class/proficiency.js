@@ -107,5 +107,16 @@ export default Ember.Route.extend({
       );
     }
     controller.initialize();
+  },
+
+  /**
+   * Method will take cares of reset properties values on destroy
+   * @param {Controller} controller
+   */
+  resetController(controller) {
+    let stateCheckInterval = controller.get('stateCheckInterval');
+    if (stateCheckInterval) {
+      Ember.run.cancel(stateCheckInterval);
+    }
   }
 });
