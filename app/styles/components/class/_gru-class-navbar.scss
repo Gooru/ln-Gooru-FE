@@ -160,6 +160,20 @@
         }
       }
 
+      .app-close {
+        @extend .app-brand;
+        a {
+          background-image: unset;
+        }
+        a > i {
+          @extend a;
+          color: $gray-dark;
+          width: 36px;
+          display: inline-block;
+          position: relative;
+          top: -13px;
+        }
+      }
       .class-activities {
         display: flex;
         border-right: 1px solid $white;
