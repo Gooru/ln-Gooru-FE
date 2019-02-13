@@ -4,8 +4,6 @@ import { GRU_FEATURE_FLAG } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   classNames: ['gru-study-navbar'],
 
-  classNameBindings: ['isStudentLanding:student-landing'],
-
   session: Ember.inject.service('session'),
 
   isFeatureEnabled: Ember.computed(function() {
