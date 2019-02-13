@@ -119,6 +119,11 @@ export default Ember.Controller.extend({
    */
   reDrawChart: false,
 
+  /**
+   * Maintains the state check interval object
+   */
+  stateCheckInterval: null,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -140,9 +145,10 @@ export default Ember.Controller.extend({
       let pollingStatusCheckInterval = controller.get(
         'pollingStatusCheckInterval'
       );
-      Ember.run.later(function() {
+      let stateCheckInterval = Ember.run.later(function() {
         controller.loadSkylineIntialState();
       }, pollingStatusCheckInterval);
+      controller.set('stateCheckInterval', stateCheckInterval);
     }
   },
 
