@@ -500,12 +500,13 @@
           .sub-sec-row {
             display: flex;
             height: 36px;
-            align-items: baseline;
+            align-items: center;
 
             .field-dropdown-caps-label {
               @extend .caps-field-label;
               flex: 0.7;
               padding: 12px 0;
+              line-height: 1.2;
             }
 
             .gradelevel-info {
@@ -778,6 +779,15 @@
               cursor: pointer;
               width: 30px;
               height: 20px;
+
+              .student-adj-lp {
+                &.updating {
+                  .replay {
+                    animation: rotating 0.5s linear infinite;
+                    color: #20a33c;
+                  }
+                }
+              }
             }
 
             .student-delete {
@@ -786,6 +796,15 @@
           }
         }
       }
+    }
+  }
+  @-webkit-keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
     }
   }
 }

@@ -326,7 +326,11 @@ export default Ember.Controller.extend(ModalMixin, {
         }
 
         if (saveSettings) {
-          controller.updateClassMembersSettings(settings, doInitialSkyline);
+          controller.updateClassMembersSettings(
+            settings,
+            doInitialSkyline,
+            student
+          );
         }
       } else {
         Ember.Logger.log(
@@ -625,16 +629,18 @@ export default Ember.Controller.extend(ModalMixin, {
     });
   },
 
-  updateClassMembersSettings: function(settings, doInitialSkyline) {
+  updateClassMembersSettings: function(settings, doInitialSkyline, student) {
     const controller = this;
     const classId = this.get('class.id');
     const isPremiumClass = controller.get('isPremiumClass');
     const isOffline = controller.get('class.isOffline');
     const studentId = settings.users[0];
+    student.set('isRefreshing', true);
     controller
       .get('classService')
       .classMembersSettings(classId, settings)
       .then(function(/* responseData */) {
+        student.set('isRefreshing', false);
         // TO-DO optmize
         controller.fetchClassMemberBounds();
         if (isPremiumClass && isOffline && doInitialSkyline) {

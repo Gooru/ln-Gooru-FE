@@ -162,7 +162,7 @@
               {{#if (and (and course subject) isPremiumClass) }}
                   <div class='sub-sec-row'>
                     <div class='field-dropdown-caps-label'>
-                      {{t 'teacher-landing.class.class-settings.origin'}}
+                      {{gradeSubjectFWK.title}} {{t 'grading-player.level'}}
                     </div>
                     <div class='gradelevel-info'>
                       {{gru-icon tooltipTitle= "teacher-landing.class.class-settings.course-settings-sec.origin-info"
@@ -310,7 +310,7 @@
                       </div>
                       {{#if isPremiumClass }}
                         <div class="student-action-col {{if (and student.isActive  student.gradeUpperBound) "" "inActiveRow"}}">
-                          <div class='student-adj-lp' {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}" data-toggle="tooltip"> {{gru-icon name='replay'}}</div>
+                          <div class="student-adj-lp {{if student.isRefreshing 'updating'}}" {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}" data-toggle="tooltip"> {{gru-icon name='replay'}}</div>
                         </div>
                       {{/if}}
                       <div class='student-action-col'>
