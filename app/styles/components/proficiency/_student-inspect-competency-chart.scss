@@ -49,6 +49,7 @@
 
       .domain-chart {
         overflow: auto;
+        align-self: end;
 
         .competency-cell {
           fill: #e7e8e9;
@@ -90,7 +91,6 @@
         .scrollable-chart {
           overflow-y: auto;
           width: max-content;
-          height: 80vh;
 
           &::-webkit-scrollbar {
             height: 6px;

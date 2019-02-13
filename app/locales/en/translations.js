@@ -1888,8 +1888,7 @@ export default Object.assign(quizzesTranslations, {
     },
     'assigned-course-title': 'Assigned Course for {{title}}',
     'study-course': 'Study Course',
-    'show-my-destination': 'Show My Destination',
-    'show-me-my-route': 'Show My route',
+    'show-me-my-route': 'My route',
     'competency-level': {
       title: 'Your Proficiency Profile',
       mastery: '{{count}} Standards Mastered',
