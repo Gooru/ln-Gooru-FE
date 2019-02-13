@@ -136,12 +136,12 @@
         color: $white;
         align-items: center;
         cursor: pointer;
-        justify-content: space-evenly;
+        justify-content: center;
         height: 40px;
         display: grid;
-        grid-template-columns: 25px auto;
+        grid-template-columns: 30px auto;
         background-color: #4a8cdb;
-        width: 220px;
+        width: 160px;
         border-radius: 45px;
         font-size: 18px;
         margin-left: 200px;
@@ -183,12 +183,12 @@
         color: $white;
         align-items: center;
         cursor: pointer;
-        justify-content: space-evenly;
+        justify-content: center;
         height: 40px;
         display: grid;
-        grid-template-columns: 25px auto;
+        grid-template-columns: 30px auto;
         background-color: #4a8cdb;
-        width: 175px;
+        width: 160px;
         border-radius: 45px;
         font-size: 18px;
       }
