@@ -310,7 +310,7 @@
                       </div>
                       {{#if isPremiumClass }}
                         <div class="student-action-col {{if (and student.isActive  student.gradeUpperBound) "" "inActiveRow"}}">
-                          <div class="student-adj-lp {{if student.isRefreshing 'updating'}}" {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}" data-toggle="tooltip"> {{gru-icon name='replay'}}</div>
+                          <div class="student-adj-lp {{if student.enableRefreshButton 'active'}} {{if student.isRefreshing 'updating'}}" {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}" data-toggle="tooltip"> {{gru-icon name='replay'}}</div>
                         </div>
                       {{/if}}
                       <div class='student-action-col'>
