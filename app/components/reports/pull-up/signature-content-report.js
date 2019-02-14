@@ -177,6 +177,7 @@ export default Ember.Component.extend({
         filters
       )
     }).then(({ learningMapData }) => {
+      component.set('learningMapData', learningMapData);
       component.checkPrerequisiteCompetencyStatus(
         learningMapData.prerequisites
       );

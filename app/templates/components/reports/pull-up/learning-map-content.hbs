@@ -1,1 +1,15 @@
-{{yield}}
+{{#unless isStudent}}
+{{proficiency.competency-content-info learningMapData=learningMapData onSelectActivityContent="onSelectActivityContent"}}
+{{else}}
+<div class="no-data">{{t 'learning-map.nodata'}}</div>
+{{/unless}}
+{{#if isShowActivityPullup}}
+  {{reports.pull-up.activity-list
+    activityContents=activityContents
+    activityContentType=activityContentType
+    activityTotalHitCount=activityTotalHitCount
+    showPullUp=isShowActivityPullup
+    onResetPullUpData="onResetPullUpData"
+    onClickShowMoreActivity="onClickShowMoreActivity"
+  }}
+{{/if}}

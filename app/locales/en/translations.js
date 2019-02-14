@@ -2930,6 +2930,9 @@ export default Object.assign(quizzesTranslations, {
     heading: 'YOUR JOURNEY',
     nodata: 'You are yet to start your journey for this competency'
   },
+  'learning-map': {
+    nodata: 'You are yet to start your learning-map for this competency'
+  },
 
   'self-report': {
     'your-score': 'Your Score',

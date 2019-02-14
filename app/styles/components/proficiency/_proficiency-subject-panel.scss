@@ -6,6 +6,31 @@
   display: grid;
   grid-template-rows: auto 1fr;
   position: relative;
+  .competency-info-pull-up {
+    .body {
+      .competency-content-report .competency-performance {
+        .signature-content {
+          .signature-content-container {
+            .competency-info-content {
+              .panel-content {
+                .learning-map-content {
+                  .activity-list-pull-up {
+                    .activity-list {
+                      .activity-list-body {
+                        .activity-contents {
+                          grid-template-columns: auto;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 
   .domain-list {
     padding-left: 16px;
