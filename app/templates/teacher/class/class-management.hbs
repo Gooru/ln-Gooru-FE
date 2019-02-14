@@ -189,7 +189,7 @@
                     {{gru-icon tooltipTitle="teacher-landing.class.class-settings.course-settings-sec.current-grade-info"
                                   name='info_outline'}}
                   </div>
-                  <div class='field-drop-down'>
+                  <div class="field-drop-down {{unless tempClass.gradeLowerBound 'in-active'}}">
                     {{gru-dropdown
                     selectedItemId=tempClass.gradeCurrent
                     rangeStartItemId=tempClass.gradeLowerBound
