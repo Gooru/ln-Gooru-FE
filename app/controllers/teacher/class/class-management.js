@@ -292,6 +292,11 @@ export default Ember.Controller.extend(ModalMixin, {
     updateClassGradeOrigin: function(grade) {
       this.set('enableApplySettings', true);
       this.set('tempClass.gradeLowerBound', grade.get('id'));
+      let gradeCurrent = this.get('class.gradeCurrent');
+      let tempGradeCurrent = this.get('tempClass.gradeCurrent');
+      if (!gradeCurrent && tempGradeCurrent) {
+        this.set('tempClass.gradeCurrent', null);
+      }
     },
 
     applyClassMembersSettings: function(student) {
