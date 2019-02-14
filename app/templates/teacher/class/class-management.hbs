@@ -162,7 +162,7 @@
               {{#if (and (and course subject) isPremiumClass) }}
                   <div class='sub-sec-row'>
                     <div class='field-dropdown-caps-label'>
-                      {{gradeSubjectFWK.title}} {{t 'grading-player.level'}}
+                      {{t 'teacher-landing.class.class-settings.origin'}}
                     </div>
                     <div class='gradelevel-info'>
                       {{gru-icon tooltipTitle= "teacher-landing.class.class-settings.course-settings-sec.origin-info"
@@ -171,7 +171,7 @@
                     <div class='field-drop-down'>
                       {{gru-dropdown
                       selectedItemId=tempClass.gradeLowerBound
-                      rangeStartItemId=tempClass.gradeLowerBound
+                      rangeStartItemId=class.gradeLowerBound
                       allowItemsRangeSelection=true
                       placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
                       items=subjectTaxonomyGrades
@@ -192,7 +192,7 @@
                   <div class='field-drop-down'>
                     {{gru-dropdown
                     selectedItemId=tempClass.gradeCurrent
-                    rangeStartItemId=tempClass.gradeCurrent
+                    rangeStartItemId=tempClass.gradeLowerBound
                     allowItemsRangeSelection=true
                     rangeBound='upper'
                     placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
@@ -236,7 +236,7 @@
               <tr>
                 <th>{{t 'teacher-landing.class.class-settings.students'}}</th>
                 {{#if (and isPremiumClass class.gradeLowerBound class.gradeCurrent) }}
-                  <th>{{t 'teacher-landing.class.class-settings.origin'}}</th>
+                  <th>{{gradeSubjectFWK.title}} {{t 'grading-player.level'}}</th>
                   <th>{{t 'teacher-landing.class.class-settings.destination'}}</th>
                 {{/if}}
                 <th class="hidden-xs">{{t 'teacher-landing.class.class-settings.student-id'}}</th>
@@ -310,7 +310,13 @@
                       </div>
                       {{#if isPremiumClass }}
                         <div class="student-action-col {{if (and student.isActive  student.gradeUpperBound) "" "inActiveRow"}}">
-                          <div class="student-adj-lp {{if student.enableRefreshButton 'active'}} {{if student.isRefreshing 'updating'}}" {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}" data-toggle="tooltip"> {{gru-icon name='replay'}}</div>
+                          <div class="student-adj-lp {{if student.enableRefreshButton 'active'}} {{if student.isRefreshing 'updating'}}" {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}" data-toggle="tooltip">
+                            {{#if student.isRefreshing}}
+                              {{gru-icon name='replay'}}
+                            {{else}}
+                              {{gru-icon name='save'}}
+                            {{/if}}
+                          </div>
                         </div>
                       {{/if}}
                       <div class='student-action-col'>
