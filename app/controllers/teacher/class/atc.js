@@ -196,11 +196,13 @@ export default Ember.Controller.extend({
     const controller = this;
     controller.set('isLoading', true);
     controller.fetchClassActivitiesCount();
-    controller.fetchDomainsCompletionReport().then(function(domainsCompletionReport) {
-      controller.set('domainsCompletionReport', domainsCompletionReport);
-      controller.getDomainListToShow(domainsCompletionReport);
-      controller.set('isLoading', false);
-    });
+    controller
+      .fetchDomainsCompletionReport()
+      .then(function(domainsCompletionReport) {
+        controller.set('domainsCompletionReport', domainsCompletionReport);
+        controller.getDomainListToShow(domainsCompletionReport);
+        controller.set('isLoading', false);
+      });
   },
 
   /**
@@ -266,8 +268,12 @@ export default Ember.Controller.extend({
     let domainsCompletionList = Ember.A([]);
     let notStartedCompletionList = Ember.A([]);
     if (domainsCompletionReport) {
-      let domainsCompletionReportList = domainsCompletionReport.get('domainsData');
-      let sortedReportList = domainsCompletionReportList.sortBy('completionPercentage');
+      let domainsCompletionReportList = domainsCompletionReport.get(
+        'domainsData'
+      );
+      let sortedReportList = domainsCompletionReportList.sortBy(
+        'completionPercentage'
+      );
       domainsCompletionList = sortedReportList.filter(function(domain) {
         return domain.completionPercentage;
       });
@@ -275,7 +281,10 @@ export default Ember.Controller.extend({
         return domain.completionPercentage === 0;
       });
     }
-    controller.set('domainsCompletionList', domainsCompletionList.concat(notStartedCompletionList));
+    controller.set(
+      'domainsCompletionList',
+      domainsCompletionList.concat(notStartedCompletionList)
+    );
     return domainsCompletionList;
   }
 });

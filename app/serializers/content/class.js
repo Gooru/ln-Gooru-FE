@@ -116,8 +116,10 @@ export default Ember.Object.extend({
         return ProfileModel.create({ id: collaboratorId });
       }),
       courseVersion: payload.course_version,
-      setting: payload.setting || null,
+      setting: payload.setting ? Ember.Object.create(payload.setting) : null,
       preference: payload.preference
+        ? Ember.Object.create(payload.preference)
+        : null
     });
   },
 
@@ -200,7 +202,10 @@ export default Ember.Object.extend({
   },
 
   filterMembersGradeBounds: function(payload) {
-    return payload.member_grade_bounds;
+    const membersGradeBounds = payload.member_grade_bounds || [];
+    return membersGradeBounds.map(function(memberGradeBounds) {
+      return Ember.Object.create(memberGradeBounds);
+    });
   },
 
   filterElements: function(payload, property) {

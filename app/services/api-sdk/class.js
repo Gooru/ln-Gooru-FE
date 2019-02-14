@@ -160,9 +160,15 @@ export default Ember.Service.extend({
             //handling server errors
             const status = error.status;
             if (status === 400) {
-              reject({ status: status, code: 'restricted' });
+              reject({
+                status: status,
+                code: 'restricted'
+              });
             } else if (status === 404) {
-              reject({ status: status, code: 'not-found' });
+              reject({
+                status: status,
+                code: 'not-found'
+              });
             } else {
               reject(error);
             }
@@ -370,7 +376,9 @@ export default Ember.Service.extend({
       const reportInfo = JSON.parse(
         localStorage.getItem('report-info') || '{}'
       );
-      const userInfo = reportInfo[userId] || { classes: {} };
+      const userInfo = reportInfo[userId] || {
+        classes: {}
+      };
       userInfo.classes[classId] = status;
 
       reportInfo[userId] = userInfo;
@@ -389,7 +397,9 @@ export default Ember.Service.extend({
       const reportInfo = JSON.parse(
         localStorage.getItem('report-info') || '{}'
       );
-      const userInfo = reportInfo[userId] || { classes: {} };
+      const userInfo = reportInfo[userId] || {
+        classes: {}
+      };
       return userInfo.classes;
     }
     return null;
@@ -589,6 +599,20 @@ export default Ember.Service.extend({
       service
         .get('classAdapter')
         .updateLanguage(classid, language)
+        .then(resolve, reject);
+    });
+  },
+
+  /**
+   * @function updateProfileBaseline
+   * Method to update profile baseline
+   */
+  updateProfileBaseline(classid) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classAdapter')
+        .updateProfileBaseline(classid)
         .then(resolve, reject);
     });
   }

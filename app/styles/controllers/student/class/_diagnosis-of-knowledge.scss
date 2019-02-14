@@ -1,0 +1,134 @@
+.student_class_diagnosis-of-knowledge {
+  @extend %bg-base64;
+
+  .student.class {
+    width: 100%;
+    height: auto;
+  }
+
+  .app-container {
+    .gru-study-navbar {
+      .course-map {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+    }
+
+    .diagnosis-of-knowledge {
+      .diagnosis-of-knowledge-panel {
+        margin-left: 50px;
+        margin-top: 50px;
+        width: 499px;
+        min-height: 200px;
+        opacity: 0.9;
+        border-radius: 4px;
+        background-color: #ffffff;
+        padding: 20px;
+        @media screen and (max-width: $screen-600) {
+          width: 100%;
+          margin-left: 0;
+          margin-top: 0;
+        }
+
+        h2 {
+          font-size: 34px;
+          font-weight: normal;
+          color: #29323a;
+          padding: 0;
+          margin: 0;
+        }
+
+        .assessment-info {
+          display: flex;
+          padding: 15px 0;
+
+          .icon {
+            height: 17px;
+            width: 17px;
+            display: block;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-right: 9px;
+          }
+
+          .question {
+            display: flex;
+            line-height: 17px;
+            margin-bottom: 5px;
+          }
+
+          .question .icon {
+            background-image: url("gooru/images/add_question.svg");
+          }
+
+          .taxonomy {
+            margin: -1px 0 0 5px;
+
+            .gru-taxonomy-tag-list {
+              .gru-taxonomy-tag {
+                background-color: $charcoal-grey;
+
+                .tag-label {
+                  color: $white;
+                  font-size: 12px;
+                  font-weight: bold;
+                }
+
+                .tag-caption {
+                  display: none;
+                }
+              }
+
+              .non-visible-tags {
+                padding: 0;
+              }
+            }
+          }
+        }
+
+        .navigation-direction {
+          i {
+            font-size: 40px;
+          }
+          .info {
+            line-height: 0.5;
+          }
+        }
+
+        .footer {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-top: 20px;
+          padding-bottom: 20px;
+
+          .start {
+            width: 76px;
+            height: 36px;
+            border-radius: 3px;
+            background-color: #0072bc;
+            color: #ffffff;
+            font-size: 13px;
+            padding: 8px;
+            text-align: center;
+            margin-left: 10px;
+            cursor: pointer;
+          }
+
+          .cancel {
+            width: 76px;
+            height: 36px;
+            border-radius: 3px;
+            background-color: #e3e5ea;
+            color: #535e66;
+            font-size: 13px;
+            padding: 8px;
+            text-align: center;
+            margin-right: 10px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

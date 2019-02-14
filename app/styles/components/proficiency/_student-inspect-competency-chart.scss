@@ -23,10 +23,59 @@
 
       .taxonomy-grades-container {
         pointer-events: none;
+
+        &.proficiency {
+          .taxonomy-grades {
+            .grade-list {
+              .grade-container {
+                &.active-grade {
+                  .grade-title {
+                    background-color: #fff;
+                    color: #535e67;
+                    box-shadow: none;
+                    font-weight: normal;
+
+                    &::after,
+                    &::before {
+                      display: none;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
 
       .domain-chart {
         overflow: auto;
+        align-self: end;
+
+        .competency-cell {
+          fill: #e7e8e9;
+
+          &.status-0 {
+            fill: #e7e8e9;
+          }
+          &.route0-suggest-competency {
+            fill: #ef8f2f;
+          }
+
+          &.status-1 {
+            &.active {
+              fill: #1aa9eb;
+            }
+          }
+
+          &.status-2,
+          &.status-3,
+          &.status-4,
+          &.status-5 {
+            &.active {
+              fill: #006eb5;
+            }
+          }
+        }
 
         &::-webkit-scrollbar {
           height: 6px;
@@ -42,7 +91,6 @@
         .scrollable-chart {
           overflow-y: auto;
           width: max-content;
-          height: 80vh;
 
           &::-webkit-scrollbar {
             height: 6px;
@@ -95,6 +143,13 @@
             position: relative;
             transform: rotateX(180deg);
 
+            &.proficiency {
+              #popover,
+              .domain-boundary-line {
+                visibility: hidden;
+              }
+            }
+
             svg {
               padding-top: 5px;
               padding-left: 5px;
@@ -109,10 +164,14 @@
 
             #skyline-container {
               filter: url(#shadow);
-
-              line {
+              polyline {
                 stroke: $white;
                 stroke-width: 6px;
+                fill: none;
+
+                &.active {
+                  animation: drawLine linear 5s forwards;
+                }
               }
             }
 
@@ -129,7 +188,6 @@
             }
 
             .domain-boundary-line {
-              // stroke-dasharray: 6;
               stroke: #8fd383;
               stroke-width: 4px;
             }
@@ -154,6 +212,12 @@
         display: inline-block;
         cursor: pointer;
       }
+    }
+  }
+
+  @keyframes drawLine {
+    to {
+      stroke-dashoffset: 0;
     }
   }
 }

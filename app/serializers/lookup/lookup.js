@@ -106,5 +106,17 @@ export default Ember.Object.extend({
         code: district.code
       });
     });
+  },
+
+  /**
+   * Normalizes Language
+   * @param {} payload
+   * @returns {Language[]}
+   */
+  normalizeLanguages: function(payload) {
+    const languages = payload.languages || [];
+    return languages.map(function(language) {
+      return Ember.Object.create(language);
+    });
   }
 });

@@ -626,6 +626,7 @@ export default Object.assign(quizzesTranslations, {
     'add-data': 'Add Data',
     'update-data': 'Update Data',
     all: 'All',
+    'please-wait': 'Please Wait',
     'unscheduled-items': 'Unscheduled Items',
     'add-to-unschedule': 'Add to unscheduled list for',
     'save-next': 'Save and Next',
@@ -1165,7 +1166,14 @@ export default Object.assign(quizzesTranslations, {
       },
       'my-report': 'My Report',
       'my-location': 'My Location',
-      'my-proficiency': 'My Proficiency'
+      'my-proficiency': 'My Proficiency',
+      'establish-skyline': 'Let\'s Establish your Skyline',
+      'waiting-establish-skyline':
+        'Waiting for your teacher to complete setting up the class.',
+      'setup-in-complete-desc1': 'It looks like your teacher has not',
+      'setup-in-complete-desc2': 'updated class settings',
+      'setup-in-complete-desc3':
+        'Please get in touch with her to resolve the matter. Once everything is correctly set up, refresh this page.'
     },
     course: {
       'to-report': 'Usage summary',
@@ -1388,16 +1396,6 @@ export default Object.assign(quizzesTranslations, {
           'origin-info':
             'What is the lowest grade level content that your students should study?',
           'current-grade-info': 'What is the grade level of your class?'
-        },
-        'gen-baseline': {
-          'baseline-1':
-            '(1) You can generate the personalized learning path for each student based on class origin and destination.',
-          'baseline-2':
-            '(2) By default, all students have the grade level as their destination. You can adjust the destination to be a higher grade for students who are ahead in the class. Click Personalize Learning Path to generate a personalized course map based on the student’s skyline and their destination. ',
-          'baseline-3':
-            '(3) The path generation for the entire class can be actioned only once. After that, any updates will have to be done individually for each student.',
-          'baseline-4':
-            '(4) You can also adjust the destination grade for individual student. Click on the icon <i id="ember1600" class="ember-view gru-icon material-icons replay" style="vertical-align: middle;">replay </i> once you have confirmed the destination, to recompute the personalized path.'
         },
         origin: 'Origin',
         destination: 'Destination',
@@ -1875,6 +1873,8 @@ export default Object.assign(quizzesTranslations, {
 
   'student-first-experience': {
     preStudyTitle: 'Pre-Study for {{title}}',
+    'lp-compute-inprogress':
+      'We are computing your initial proficiency profile in {{title}}',
     'route0-action': {
       accept: 'Accept',
       ignore: 'Ignore'
@@ -1888,8 +1888,7 @@ export default Object.assign(quizzesTranslations, {
     },
     'assigned-course-title': 'Assigned Course for {{title}}',
     'study-course': 'Study Course',
-    'show-my-destination': 'Show My Destination',
-    'show-me-my-route': 'Show My route',
+    'show-me-my-route': 'My route',
     'competency-level': {
       title: 'Your Proficiency Profile',
       mastery: '{{count}} Standards Mastered',
@@ -1917,7 +1916,15 @@ export default Object.assign(quizzesTranslations, {
     'competency-level-partial': {
       desc1: 'You are currently in ',
       desc2:
-        'Welcome to your Skyline map for Math. The Skyline (the thick white line) shows the highest standard that you have mastered in each domain. A domain is an area of math that you study, such as Number Systems and Expressions & Equations. Each column represents a math domain. And each box in the column represents a standard in the domain. Once you start learning and mastering the standards, your Skyline will continuously bump up.'
+        'This is your {{title}} proficiency profile. It shows your mastery in standards (aka competencies) in the different focus areas in {{title}} (aka domains). The columns show domains and the boxes show the standards within each {{title}} domain.',
+      desc3:
+        'As you master each of the competencies, the corresponding box is updated to dark blue.',
+      desc4:
+        'Your current location in {{title}} is identified by the Skyline. The skyline is the thick white line that shows the highest competencies that you have mastered in each domain.',
+      desc5:
+        'If the skyline is at the bottom of a domain, it means the system is yet to determine your location for that domain. It does not signify that you have no proficiency at that domain. The skyline will get updated as soon as you begin to study and gain proficiency at competencies in that domain.',
+      desc6:
+        'The Baseline is the black line at each domain and determines your starting level at this class.'
     },
     units: {
       other: '{{count}} Units'

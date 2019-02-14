@@ -53,6 +53,8 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
    */
   navigateMapService: Ember.inject.service('api-sdk/navigate-map'),
 
+  device_language_key: 'deviceLanguage',
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -127,8 +129,12 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
         return route.get('classService').findMyClasses(userProfile);
       });
     }
+    let whichLocalSet = this.getLocalStorage().getItem(
+      this.device_language_key
+    );
 
-    route.setupDefaultLanguage(lang);
+    this.setupDefaultLanguage(whichLocalSet || lang);
+
     route.setupTheme(themeId);
 
     let accessToken = params.access_token;
@@ -175,6 +181,10 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
     } else {
       controller.set('isRedirectionDomainDone', true);
     }
+  },
+
+  getLocalStorage: function() {
+    return window.localStorage;
   },
 
   /**

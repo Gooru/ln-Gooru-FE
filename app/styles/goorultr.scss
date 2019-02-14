@@ -79,7 +79,9 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "controllers/student/performance";
 @import "controllers/student/class/course-map";
 @import "controllers/student/class/class-activities";
-@import "controllers/student/class/profile";
+@import "controllers/student/class/proficiency";
+@import "controllers/student/class/diagnosis-of-knowledge";
+@import "controllers/student/class/setup-in-complete";
 @import "controllers/teacher/class";
 @import "controllers/teacher/class/class-activities";
 @import "controllers/teacher/class/class-management";
@@ -93,6 +95,7 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "controllers/student-independent-learning/learning-base";
 @import "controllers/not-found";
 @import "controllers/student-locate";
+
 // TODO: update these components so they follow the naming conventions
 @import "components/app-dropdown";
 @import "components/standard-dropdown";
@@ -140,6 +143,7 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/gru-toggle-button";
 @import "components/gru-pull-out";
 @import "components/gru-pull-up";
+@import "components/gru-dropdown";
 @import "components/notification/gru-notification";
 @import "components/cards/gru-class-card";
 @import "components/cards/gru-student-class-card";
@@ -392,7 +396,6 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/reports/pull-up/competency-content-report";
 @import "components/reports/pull-up/accordion/collection-accordion";
 @import "components/reports/pull-up/activity-list"; //Student Nav Math class join landing
-@import "components/student/class/student-class-landing";
 @import "components/student/class/gru-class-grade";
 @import "components/student/class/student-inspect-destination";
 @import "components/proficiency/student-inspect-competency-chart";

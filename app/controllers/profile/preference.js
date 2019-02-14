@@ -344,30 +344,28 @@ export default Ember.Controller.extend({
   },
 
   setSelectedSubjectFrameworks(fwk, subject, category) {
-    /*  controller.set('currentSelectedSubject', null);
-    controller.set('currentSelectedCategory', null);
-    controller.set('currentSelectedFwk', null); */
-
-    const controller = this;
-    let subjectEntry = {};
-    subjectEntry[subject.code] = fwk.frameworkId;
-    let addedCategories = controller.get('addedCategories');
-    let found = addedCategories.findBy('id', category.id);
-    if (found) {
-      Ember.set(found, 'currentSelectedSubject', null);
-      //found.currentSelectedSubject = null;
-    }
-    if (found.subjects) {
-      if (found.subjects[subject.code]) {
-        found.subjects.remove(subject.code);
+    if (fwk && subject && category) {
+      const controller = this;
+      let subjectEntry = {};
+      subjectEntry[subject.code] = fwk.frameworkId;
+      let addedCategories = controller.get('addedCategories');
+      let found = addedCategories.findBy('id', category.id);
+      if (found) {
+        Ember.set(found, 'currentSelectedSubject', null);
+        //found.currentSelectedSubject = null;
       }
-      found.subjects.pushObject(subjectEntry);
-    } else {
-      Ember.set(found, 'subjects', Ember.A([]));
-      found.subjects.pushObject(subjectEntry);
+      if (found.subjects) {
+        if (found.subjects[subject.code]) {
+          found.subjects.remove(subject.code);
+        }
+        found.subjects.pushObject(subjectEntry);
+      } else {
+        Ember.set(found, 'subjects', Ember.A([]));
+        found.subjects.pushObject(subjectEntry);
+      }
+      addedCategories.sortBy('id');
+      controller.set('addedCategories', addedCategories);
     }
-    addedCategories.sortBy('id');
-    controller.set('addedCategories', addedCategories);
   },
 
   updateAddedCategories(category, subject, opCode) {
@@ -672,7 +670,7 @@ export default Ember.Controller.extend({
     controller
       .get('lookupService')
       .getLanguages()
-      .then(languages => controller.set('languages', languages.languages));
+      .then(languages => controller.set('languages', languages));
   },
   //------------------------------------------------------------------------------
   // Initialize the controller

@@ -1,100 +1,116 @@
 <div class="inspect-destination-container">
   <div class="destination-chart-container">
-    {{proficiency.student-inspect-competency-chart competencyStatus=competencyStatus isProficiency=isProficiency title=activeGrade.grade route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode taxonomyGrades=taxonomyGrades activeGrade=activeGrade isRoute0Applicable=isRoute0Applicable}}
+    {{proficiency.student-inspect-competency-chart reDrawChart=reDrawChart skylineInitialState=skylineInitialState competencyStatus=competencyStatus isProficiency=isProficiency title=activeGrade.grade route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode taxonomyGrades=taxonomyGrades activeGrade=activeGrade isRoute0Applicable=isRoute0Applicable onChartDrawComplete='onChartDrawComplete'}}
   </div>
-  {{#if (eq type "route")}}
-    <div class="course-container hidden-xs">
-      {{#if (and isRoute0Pending isRoute0)}}
-        <div class="pre-study-title">
-          {{t "student-first-experience.preStudyTitle" title=activeGrade.grade}}
-        </div>
-        <div class="route0-container">
-          <div class="route0-comment" {{action "onToggleRoute0View"}}>
-            <div class="suggestion-icon">{{gru-icon name="explore_outline"}}</div>
-            <div class="suggestion-note"> {{t 'class.overview.course-map.route0-bannerdesc'}}</div>
+  {{#if showDirections}}
+    {{#if (eq type "route")}}
+      <div class="course-container hidden-xs">
+        {{#if (and isRoute0Pending isRoute0)}}
+          <div class="pre-study-title">
+            {{t "student-first-experience.preStudyTitle" title=activeGrade.grade}}
           </div>
-          <div class="route0-body" style="display: none;">
-            <div class="route0-accordion-container">
-              {{class.overview.course-suggestions model=route0Contents index=index class=classData course=courseData}}
+          <div class="route0-container">
+            <div class="route0-comment" {{action "onToggleRoute0View"}}>
+              <div class="suggestion-icon">{{gru-icon name="explore_outline"}}</div>
+              <div class="suggestion-note"> {{t 'class.overview.course-map.route0-bannerdesc'}}</div>
+            </div>
+            <div class="route0-body" style="display: none;">
+              <div class="route0-accordion-container">
+                {{class.overview.course-suggestions model=route0Contents index=index class=class course=course}}
+              </div>
             </div>
           </div>
-        </div>
-        <div class="route0-action">
-          <div class="ignore" {{action "onRoute0Reject"}}>
-            <i></i>
-            <span>{{t 'student-first-experience.route0-action.ignore'}}</span>
+          <div class="route0-action">
+            <div class="ignore" {{action "onRoute0Reject"}}>
+              <i></i>
+              <span>{{t 'student-first-experience.route0-action.ignore'}}</span>
+            </div>
+            <div class="accept" {{action "onRoute0Accept"}}>
+              <i></i>
+              <span>{{t 'student-first-experience.route0-action.accept'}}</span>
+            </div>
           </div>
-          <div class="accept" {{action "onRoute0Accept"}}>
-            <i></i>
-            <span>{{t 'student-first-experience.route0-action.accept'}}</span>
-          </div>
+        {{/if}}
+        <div class="assigned-course-title">
+          {{t "student-first-experience.assigned-course-title" title=activeGrade.grade}}
         </div>
-      {{/if}}
-      <div class="assigned-course-title">
-        {{t "student-first-experience.assigned-course-title" title=activeGrade.grade}}
-      </div>
-      <div class="course-map-accordion-container {{unless (and isRoute0Pending isRoute0) 'no-route0'}}">
-        {{student.class.destination.student-destination-course-accordion
-        courseData=courseData
+        <div class="course-map-accordion-container {{unless (and isRoute0Pending isRoute0) 'no-route0'}}">
+          {{student.class.destination.student-destination-course-accordion
+        courseData=course
         classId=classId
         courseId=courseId
         isRoute0=isRoute0
       }}
-      </div>
-      <div class="study-course" {{action onMoveNext 'playNext'}}>
-        {{gru-icon name="near_me"}} {{t "student-first-experience.study-course"}}
-      </div>
-    </div>
-    {{else if (eq type "destination")}}
-    <div class="grade-data-container hidden-xs">
-      <div class="grade-title">
-        {{activeGrade.grade}}
-      </div>
-      <div class="grade-description">
-        {{safe-html activeGrade.description}}
-      </div>
-      <div class="next-route" {{action onMoveNext 'inspect-destination'}}>
-        {{gru-icon name="directions"}} {{t "student-first-experience.show-me-my-route"}}
-      </div>
-    </div>
-  {{else}}
-    <div class="competency-level-container">
-      <div class="grade-title">
-        {{'t' "student-first-experience.competency-level.title"}}
-      </div>
-      <div class="grade-description">
-        {{'t' "student-first-experience.competency-level-partial.desc1"}}
-        <span class="desc-title">{{activeGrade.grade}}</span> <br> {{'t' "student-first-experience.competency-level-partial.desc2"}}
-      </div>
-      <div class="competency-level-list">
-        <div class="mastery-container">
-          <div class="legend" title= {{ t "student-first-experience.explanatory.master.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.master.desc"}} data-placement='left'></div>
-          <div class="label"> {{t "student-first-experience.competency-level.mastery" count=competencyStatus.master}}</div>
         </div>
-        <div class="in-progress-container">
-          <div class="legend" title= {{ t "student-first-experience.explanatory.in-progress.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.in-progress.desc"}} data-placement='left'></div>
-          <div class="label"> {{t "student-first-experience.competency-level.in-progress" count=competencyStatus.inProgress}}</div>
-        </div>
-        <div class="not-started-container">
-          <div class="legend" title= {{ t "student-first-experience.explanatory.not-started.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.not-started.desc"}} data-placement='left'></div>
-          <div class="label"> {{t "student-first-experience.competency-level.not-started" count=competencyStatus.notStarted}}</div>
-        </div>
-        <div class="skyline-container">
-          <div class="legend"></div>
-          <div class="label"> {{t "student-first-experience.competency-level.your-skyline"}}</div>
+        <div class="study-course" {{action onMoveNext 'playNext'}}>
+          {{gru-icon name="near_me"}} {{t "student-first-experience.study-course"}}
         </div>
       </div>
-      <div class="show-destination" {{action onMoveNext 'proficiency'}}>
-        {{gru-icon name="directions"}} {{t "student-first-experience.show-my-destination"}}
+      {{else if (eq type "destination")}}
+      <div class="grade-data-container hidden-xs">
+        <div class="grade-title">
+          {{activeGrade.grade}}
+        </div>
+        <div class="grade-description">
+          {{safe-html activeGrade.description}}
+        </div>
+        <div class="next-route" {{action onMoveNext 'route'}}>
+          {{gru-icon name="directions"}} {{t "student-first-experience.show-me-my-route"}}
+        </div>
       </div>
-    </div>
-  {{/if}}
-  <div class="hidden visible-xs">
-    {{#unless (eq type "proficiency") }}
-      {{student.class.student-inspect-destination-xs
+    {{else}}
+      <div class="competency-level-container">
+        <div class="proficiency-info-1 proficiency-info">
+          <div class="grade-title">
+            {{'t' "student-first-experience.competency-level.title"}}
+          </div>
+          <div class="grade-description">
+            {{'t' "student-first-experience.competency-level-partial.desc1"}}
+            <span class="desc-title">{{activeGrade.grade}}</span> <br>
+            <p>{{'t' "student-first-experience.competency-level-partial.desc2" title=subject.title}}</p>
+          </div>
+        </div>
+        <p class="proficiency-info-2 proficiency-info">
+          {{'t' "student-first-experience.competency-level-partial.desc3"}}
+        </p>
+        <p class="proficiency-info-3 proficiency-info">
+          {{'t' "student-first-experience.competency-level-partial.desc4"}}
+        </p>
+        <p class="proficiency-info-4 proficiency-info">
+          <p>{{'t' "student-first-experience.competency-level-partial.desc5" title=subject.title}}</p>
+        </p>
+        <p class="proficiency-info-5 proficiency-info">
+          <p>{{'t' "student-first-experience.competency-level-partial.desc6"}}</p>
+        </p>
+        <div class="competency-level-list proficiency-info-6 proficiency-info">
+          <div class="mastery-container">
+            <div class="legend" title= {{ t "student-first-experience.explanatory.master.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.master.desc"}} data-placement='left'></div>
+            <div class="label"> {{t "student-first-experience.competency-level.mastery" count=competencyStatus.master}}</div>
+          </div>
+          <div class="in-progress-container">
+            <div class="legend" title= {{ t "student-first-experience.explanatory.in-progress.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.in-progress.desc"}} data-placement='left'></div>
+            <div class="label"> {{t "student-first-experience.competency-level.in-progress" count=competencyStatus.inProgress}}</div>
+          </div>
+          <div class="not-started-container">
+            <div class="legend" title= {{ t "student-first-experience.explanatory.not-started.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.not-started.desc"}} data-placement='left'></div>
+            <div class="label"> {{t "student-first-experience.competency-level.not-started" count=competencyStatus.notStarted}}</div>
+          </div>
+          <div class="skyline-container">
+            <div class="legend"></div>
+            <div class="label"> {{t "student-first-experience.competency-level.your-skyline"}}</div>
+          </div>
+        </div>
+        <div class="show-destination proficiency-info-7 proficiency-info" {{action onMoveNext 'destination'}}>
+          {{gru-icon name="directions"}} {{t "common.destination"}}
+        </div>
+      </div>
+    {{/if}}
+    <div class="hidden visible-xs">
+      {{#unless (eq type "proficiency") }}
+        {{student.class.student-inspect-destination-xs
         type=type
         onMoveNext="onMoveNext"
-        courseData=courseData
+        courseData=course
         classId=classId
         courseId=courseId
         grade=activeGrade
@@ -107,6 +123,13 @@
         index=index
         classData=classData
       }}
-    {{/unless}}
-  </div>
+      {{/unless}}
+    </div>
+  {{else}}
+    <div class="lp-compute-inprogress">
+      <span>{{t 'common.please-wait'}}.</span>
+      <i class="compute-icon"></i>
+      <p>{{'t' "student-first-experience.lp-compute-inprogress" title=subject.title}}</p>
+    </div>
+  {{/if}}
 </div>

@@ -118,28 +118,21 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   demoClass: Ember.computed.alias('configuration.demoClass'),
 
   /**
-   * @property {Boolean} isShowNavigatorLanding
-   */
-  isShowNavigatorLanding: Ember.computed(
-    'class.currentLocation',
-    'demoClass',
-    function() {
-      let controller = this;
-      let classData = controller.get('class');
-      let currentLocation = classData.get('currentLocation') || null;
-      let setting = classData.get('setting');
-      let isPremiumCourse = setting
-        ? setting['course.premium'] && setting['course.premium'] === true
-        : false;
-      let isGradeAdded = classData.get('grade');
-      return isPremiumCourse && !currentLocation && isGradeAdded;
-    }
-  ),
-
-  /**
    * Property to identify when there is no content to play
    */
   isNotAbleToStartPlayer: false,
+
+  /**
+   * Property used to identify destination.
+   * @type {String}
+   */
+  destination: Ember.computed.alias('skylineInitialState.destination'),
+
+  /**
+   * Property used to identify whether class has premium course or not.
+   * @type {Boolean}
+   */
+  isPremiumCourse: false,
 
   // -------------------------------------------------------------------------
   // Methods

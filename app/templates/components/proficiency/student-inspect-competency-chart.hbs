@@ -1,21 +1,17 @@
 <div class="chart-container">
-  <div class="graded-chart-container {{if isProficiency 'hide-grade'}}">
-    {{#unless isProficiency}}
-      <div class="taxonomy-grades-container">
+  <div class="graded-chart-container">
+      <div class="taxonomy-grades-container {{if isProficiency 'proficiency'}}">
         {{proficiency.taxonomy-grades taxonomyGrades=taxonomyGrades activeGrade=activeGrade classGrade=classGrade subjectCode="K12.MA"}}
       </div>
-    {{/unless}}
     <div class="domain-chart">
       <div class="scrollable-chart">
-        <div id="student-inspect-competency-chart">
-          {{#unless isProficiency}}
+        <div id="student-inspect-competency-chart" class="{{if isProficiency 'proficiency'}}">
             <div id="popover">
               <span class="title">{{t "student-first-experience.competency.popover.title" title=title}}</span>
               <span class="content">
             {{t "student-first-experience.competency.popover.content"}}
             </span>
             </div>
-          {{/unless}}
         </div>
       </div>
       <div class="domain-sequence">
