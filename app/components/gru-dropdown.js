@@ -170,6 +170,7 @@ export default Ember.Component.extend({
   onChangeRange: Ember.observer(
     'rangeStartItemId',
     'rangeEndItemId',
+    'items.[]',
     function() {
       this.renderDataBasedOnRangeSelection();
     }
