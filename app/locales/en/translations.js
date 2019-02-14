@@ -1916,13 +1916,15 @@ export default Object.assign(quizzesTranslations, {
     'competency-level-partial': {
       desc1: 'You are currently in ',
       desc2:
-        'This is your {{title}} proficiency profile. Your math proficiency profile shows your mastery in standards (aka competencies) in the different focus areas in math (aka domains). The columns show domains and the boxes show the standards within each math domain.',
+        'This is your {{title}} proficiency profile. It shows your mastery in standards (aka competencies) in the different focus areas in {{title}} (aka domains). The columns show domains and the boxes show the standards within each {{title}} domain.',
       desc3:
         'As you master each of the competencies, the corresponding box is updated to dark blue.',
       desc4:
-        'And as you continue to study other competencies, they turn light blue to show progress.',
+        'Your current location in {{title}} is identified by the Skyline. The skyline is the thick white line that shows the highest competencies that you have mastered in each domain.',
       desc5:
-        'Your current location in {{title}} is identified by the Skyline. The skyline is the thick white line that shows the highest competencies that you have mastered in each domain'
+        'If the skyline is at the bottom of a domain, it means the system is yet to determine your location for that domain. It does not signify that you have no proficiency at that domain. The skyline will get updated as soon as you begin to study and gain proficiency at competencies in that domain.',
+      desc6:
+        'The Baseline is the black line at each domain and determines your starting level at this class.'
     },
     units: {
       other: '{{count}} Units'

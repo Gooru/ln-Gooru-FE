@@ -213,15 +213,14 @@ export default Ember.Component.extend({
       component.delay(element, delay);
       delay = delay + 20;
     });
-    delay = delay + 1000;
-    component.delay(component.$('.proficiency-info-3'), delay);
+
     let listOfInprogressEle = component.$('.status-1');
     listOfInprogressEle.each(function(index, element) {
       component.delay(element, delay);
       delay = delay + 20;
     });
     delay = delay + 1000;
-    component.delay(component.$('.proficiency-info-4'), delay);
+    component.delay(component.$('.proficiency-info-3'), delay);
     component.delay(
       component.$(
         '.student-inspect-competency-chart .chart-container polyline'
@@ -229,9 +228,13 @@ export default Ember.Component.extend({
       delay
     );
     delay = delay + 2000;
+    component.delay(component.$('.proficiency-info-4'), delay);
+    delay = delay + 1000;
     component.delay(component.$('.proficiency-info-5'), delay);
     delay = delay + 1000;
     component.delay(component.$('.proficiency-info-6'), delay);
+    delay = delay + 1000;
+    component.delay(component.$('.proficiency-info-7'), delay);
   },
 
   delay(element, delay) {
