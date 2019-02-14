@@ -9,49 +9,26 @@ export default Ember.Component.extend({
    * @property {Object}
    * Property to store student profile
    */
-  studentProfile: null,
+
+  taxonomyService: Ember.inject.service('taxonomy'),
 
   /**
    * @property {Object}
    * Property to store active subject selected
    */
-  activeSubject: null,
+  studentProfile: null,
 
   /**
    * @property {Object}
-   * Property to store timeLine
+   * Property to store user selected subject info
    */
-  timeLine: null,
-
-  /**
-   * @property {Object}
-   * Property to store class data
-   */
-  class: null,
-
-  /**
-   * @property {Object}
-   * Property to store selected grade
-   */
-  selectedGrade: null,
-
-  /**
-   * @property {Boolean}
-   * Property to find is student or not
-   */
-  isStudent: null,
+  selectedSubject: null,
 
   /**
    * @property {Array}
    * Property to store taxonomy categories
    */
   categories: null,
-
-  /**
-   * @property {Boolean}
-   * Property to show matrix chart or not
-   */
-  isShowMatrixChart: null,
 
   /**
    * @property {Array}
@@ -100,6 +77,48 @@ export default Ember.Component.extend({
   timeSeriesStartDate: null,
 
   /**
+   * @property {Boolean} isShowMatrixChart
+   */
+  isShowMatrixChart: false,
+
+  selectedCategory: null,
+
+  subjectChange: Ember.observer('activeSubject', function() {
+    let component = this;
+    let subject = component.get('activeSubject');
+    if (subject) {
+      component.set('isShowMatrixChart', true);
+      component.sendAction('onSubjectChange', subject);
+    } else {
+      component.set('isShowMatrixChart', false);
+    }
+  }),
+
+  /**
+   * @function fetchSubjectsByCategory
+   * @param subjectCategory
+   * Method to fetch list of subjects using given category level
+   */
+  fetchSubjectsByCategory(subjectCategory) {
+    let controller = this;
+    let selectedCategoryId = subjectCategory.get('id');
+    controller
+      .get('taxonomyService')
+      .getTaxonomySubjects(selectedCategoryId)
+      .then(subjects => {
+        let defaultSubject = subjects.findBy(
+          'id',
+          this.get('selectedCategory')
+        );
+        let selectedSubject = defaultSubject
+          ? defaultSubject
+          : subjects.objectAt(0);
+        controller.set('taxonomySubjects', subjects);
+        controller.set('activeSubject', selectedSubject);
+      });
+  },
+
+  /**
    * @property {Date}
    * Property to store course started date or one year before date
    */
@@ -123,7 +142,22 @@ export default Ember.Component.extend({
     return courseCreatedDate;
   }),
 
+  onChangeCategories: Ember.observer('selectedCategory', function() {
+    let component = this;
+    let category = component.get('selectedCategory');
+    component.fetchSubjectsByCategory(category);
+  }),
+
   actions: {
+    onSelectCategory(category) {
+      let controller = this;
+      controller.set('selectedCategory', category);
+    },
+    //Action triggered when the user click a subject from the right panel
+    onSelectItem(item) {
+      let controller = this;
+      controller.set('selectedSubject', item);
+    },
     /**
      * Action triggered when select a month from chart
      */
@@ -167,7 +201,6 @@ export default Ember.Component.extend({
     onSelectSubject(subject) {
       let component = this;
       component.set('activeSubject', subject);
-      component.sendAction('onSubjectChange', subject);
     },
 
     /**

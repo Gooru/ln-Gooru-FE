@@ -120,9 +120,7 @@
 
       .active-item {
         display: flex;
-        cursor: pointer;
         height: 25px;
-        opacity: 0.3;
 
         .label {
           font-size: 17px;
@@ -165,9 +163,9 @@
       }
     }
     /* Show the dropdown menu on hover */
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+    // .dropdown:hover .dropdown-content {
+    //   display: block;
+    // }
 
     .student-profile {
       display: flex;
@@ -191,5 +189,128 @@
         color: #36424b;
       }
     }
+  }
+
+  .taxonomy-info {
+    // display: none;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    // margin: 15px 0;
+
+    .dropdown-menu > li {
+      padding: 3px 25px;
+    }
+
+    .dropdown {
+      .dropbtn {
+        background-color: #fff;
+        color: black;
+        padding: 3px;
+        font-size: 16px;
+        text-transform: capitalize;
+        border: none;
+        margin-top: 8px;
+        display: block !important;
+      }
+    }
+
+    .label {
+      font-size: 17px;
+      font-weight: bold;
+      color: $charcoal-grey;
+      padding: 0;
+      text-align: left;
+      margin-right: 10px;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      width: max-content;
+
+      .dropbtn {
+        display: block !important;
+      }
+
+      .active-item {
+        pointer-events: none;
+
+        .label {
+          font-size: 17px;
+          font-weight: bold;
+          color: $charcoal-grey;
+          padding: 0;
+          text-align: left;
+        }
+
+        .icon {
+          display: none;
+          font-size: 17px;
+          font-weight: bold;
+          color: $charcoal-grey;
+        }
+
+        &.active-subject {
+          .label {
+            min-width: 0;
+          }
+
+          .icon {
+            i {
+              line-height: 0;
+            }
+          }
+        }
+      }
+    }
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-menu > li {
+      font-weight: bold;
+      text-align: left;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .dropdown-menu > li.active {
+      background-color: $gray-light;
+    }
+
+    .dropdown-menu > li.active {
+      background-color: $gray-light;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: $white;
+      min-width: 187px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      max-height: 150px;
+      overflow-y: auto;
+      z-index: 1;
+      border-top: 1px solid;
+
+      .list-item {
+        height: 30px;
+        line-height: 30px;
+        padding-left: 15px;
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+          background-color: $light-200;
+        }
+      }
+
+      li.active i {
+        font-size: 20px;
+        color: black;
+      }
+
+      li.active > a > span {
+        color: black;
+      }
+    }
+    /* Show the dropdown menu on hover */
   }
 }

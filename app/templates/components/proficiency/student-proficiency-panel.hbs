@@ -6,7 +6,16 @@
     </div>
     <span class="username">{{studentProfile.fullName}}</span>
   </div>
-  {{#if isShowMatrixChart}}
+  <div class = "taxonomy-info">
+  <div class="dropdown categories">
+    <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{selectedCategory.title }}
+      <span class="caret"></span></button>
+    <ul class="dropdown-menu category-list">
+      {{#each taxonomyCategories as |category|}}
+        <li class="list-item category {{if (eq selectedCategory.id category.id) 'active'}}" {{action "onSelectCategory" category}}>{{category.title}}</li>
+      {{/each}}
+    </ul>
+  </div>
     <div class="dropdown subjects">
       <div class="active-item active-subject">
         <div class="label ellipsis">{{activeSubject.title}}</div>
@@ -18,7 +27,7 @@
         {{/each}}
       </div>
     </div>
-  {{/if}}
+  </div>
 </div>
 <div class="panel-content">
   {{#if isShowMatrixChart}}
