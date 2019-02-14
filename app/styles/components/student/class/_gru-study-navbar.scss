@@ -304,6 +304,7 @@
 
       .app-close {
         @extend .app-brand;
+        width: 59px;
         a {
           background-image: unset;
         }
