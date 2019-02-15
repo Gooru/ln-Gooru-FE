@@ -1,4 +1,35 @@
 .proficiency.taxonomy-grades {
+  .grade {
+    .dropdown {
+      &.open {
+        background-color: transparent;
+      }
+      button {
+        position: absolute;
+        background-color: $white;
+        min-width: 100px;
+        max-height: 150px;
+        overflow-y: auto;
+        color: #303a42;
+        z-index: 1;
+        font-size: 17px;
+        font-weight: bold;
+        padding: 0;
+        text-align: left;
+      }
+
+      ul {
+        padding: 20px;
+        margin-top: 32px;
+        border-radius: unset;
+
+        li {
+          padding: 2px;
+        }
+      }
+    }
+  }
+
   .grade-list {
     display: grid;
     height: 80vh;
@@ -29,7 +60,6 @@
         .grade-title {
           background-color: $dark-300;
           border: none;
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
           opacity: 1;
           font-weight: bold;
           display: grid;

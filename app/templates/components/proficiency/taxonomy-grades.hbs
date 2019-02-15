@@ -1,7 +1,12 @@
-<div class="grade-list">
-  {{#each taxonomyGrades as |taxonomyGrade|}}
-    <div class="grade-container grade-sequence-{{taxonomyGrade.sequence}} {{if (eq activeGrade.id taxonomyGrade.id) 'active-grade'}}" {{action "onSelectGrade" taxonomyGrade}}>
-      <span class="grade-title">{{taxonomyGrade.grade}}</span>
+<div class ="grade">
+    <div class = "dropdown">
+      <button class = "btn-primary dropdown-toggle btn" type ="button" data-toggle="dropdown">{{activeGrade.grade}}
+        <span class ="caret"></span>Grades</button>
+        <ul class= "dropdown-menu gradeData">
+          {{#each taxonomyGrades as |taxonomyGrade|}}
+           <li><label>{{input type="checkbox" checked = taxonomyGrade.checked click=(action 'onSelectGrade' taxonomyGrade)}}<span>{{taxonomyGrade.grade}}</span></label></li>
+           <li class ="list-item grade-{{taxonomyGrade.sequence}} {{if (eq activeGrade.id taxonomyGrade.id) 'active-grade'}}"></li>
+           {{/each}}
+        </ul>
     </div>
-  {{/each}}
-</div>
+  </div>

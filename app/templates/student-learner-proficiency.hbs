@@ -1,19 +1,5 @@
 <div class="student-proficiency-container">
   <div class="taxonomy-grades">
-    {{#if (and (gt taxonomyGrades.length 0) isShowMatrixChart)}}
-      <div class="taxonomy-grades-container">
-        {{proficiency.taxonomy-grades
-          taxonomyGrades=taxonomyGrades
-          activeGrade=activeGrade
-          classGrade=classGrade
-          subjectCode=subjectCode
-          onSelectGrade="onSelectGrade"
-        }}
-        <div class="baseline-toggle" {{action "onToggleBaseline"}}>
-          <div class="baseline-label">{{t 'profile.proficiency.baseline'}}</div>
-        </div>
-      </div>
-    {{/if}}
   </div>
   <div class="panel-container">
     {{proficiency.student-proficiency-panel
@@ -38,13 +24,18 @@
        onSelectCompetency="onSelectCompetency"
        onDomainSelect="onDomainSelect"
        onSubjectChange="onSubjectChange"
-       onSelectCategory="onSelectCategory"
-       categories=taxonomyCategories}}
-    {{#if isMobile}}
-      <div class="inspect-competency">
-        {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
-      </div>
-    {{/if}}
+       categories=taxonomyCategories
+       taxonomyGrades=taxonomyGrades
+       activeGrade=activeGrade
+       classGrade=classGrade
+       subjectCode=subjectCode
+       onSelectGrade="onSelectGrade"
+     }}
+
+    <div class="inspect-competency hidden lg-visible">
+      {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
+    </div>
+
   </div>
   <div class="pull-up-container">
     {{#if isShowMatrixChart}}

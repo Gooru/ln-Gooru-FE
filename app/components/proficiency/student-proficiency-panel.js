@@ -124,6 +124,10 @@ export default Ember.Component.extend({
     onSelectMonth(date) {
       this.sendAction('onSelectMonth', date);
     },
+    onSelectGrade(gradeData) {
+      let component = this;
+      component.sendAction('onSelectGrade', gradeData);
+    },
 
     goBack() {
       let component = this;
