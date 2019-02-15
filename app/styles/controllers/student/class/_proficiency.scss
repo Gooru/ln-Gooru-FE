@@ -1,7 +1,12 @@
 .student_class_proficiency {
+  background-color: $white;
+  .student.class {
+    width: 100%;
+  }
   .gru-study-navbar {
     .course-map {
       pointer-events: none;
+      opacity: 0.5;
     }
   }
 

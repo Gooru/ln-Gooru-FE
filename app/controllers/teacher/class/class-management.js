@@ -34,7 +34,7 @@ export default Ember.Controller.extend(ModalMixin, {
   skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
 
   // -------------------------------------------------------------------------
-  // Attributes
+  // Properties
 
   classGrades: function() {
     var taxonomyGrades = this.get('taxonomyGrades');
@@ -42,71 +42,9 @@ export default Ember.Controller.extend(ModalMixin, {
     return taxonomyGrades;
   }.property(),
 
-  gradeSubjetFWKDv: Ember.computed('class.preference.subject', function() {
-    const controller = this;
-    let subjectFwks;
-    let subject = controller.get('class.preference.subject');
-    if (this.get('course.id') && subject) {
-      let taxonomyService = controller.get('taxonomyService');
-      let filters = subject;
-      return taxonomyService.fetchSubjectFWKs(filters).then(respdata => {
-        controller.set('subjectFWKDD', respdata);
-      });
-    }
-
-    return subjectFwks;
-  }),
-
-  /**
-   * 1 . Course not assigned to class
-        ☐ Dont show Low(Origin) High(Destination) Subject Framework of class
-        ☐ Dont show Low(Origin) High(Destination) Subject Framework for each student ( the column in student table should be disabled / hidden )
-        2. Course assigned with NO subject
-        ☐ Dont show Low(Origin) High(Destination) Subject Framework for each student ( the column in student table should be disabled / hidden )
-        3. Course assigned with subject and is NOT premium
-        ☐ Dont show Low(Origin) High(Destination) Subject Framework for each student ( the column in student table should be disabled / hidden )
-        ☐ Disable turing route 0 on - Button on the course setting section (current text is Re-Scope change that to Route0)
-        4. Course is assigned , has subject and is premium
-        ☐ Show Low(Origin) High(Destination) Subject Framework of class
-        ☐ Show Low(Origin) High(Destination) Subject Framework for each student
-        ☐ Enable setting route 0 - Button on the course setting section (current text is Re-Scope change that to Route0)
-        5. Grade values range of Low(Origin) High(Destination) class
-            ☐ Values comes from GradeMaster ? to check
-            ☐ Range cannot be shrinked but can only be expanded.
-        6. Grade values range of Low(Origin) High(Destination) for each student
-        ☐  Student range does not cross the class range boundary
-        ☐  Origin cannot be greater the destination.
-        ☐  Student grade setting Button present before delete to apply the grade setting
-    */
-  classDisplayRules: function() {
-    /* Set class display rules here */
-  },
-
-  isClassBaselined: Ember.computed('class.members', function() {
-    let controller = this;
-    const classMembers = controller.get('class.members');
-    let isBaselined = true;
-    if (classMembers && classMembers.length > 0) {
-      let baselineMembers = classMembers.filter(
-        mem => mem.profileBaselineDone === true
-      );
-      isBaselined = baselineMembers && baselineMembers.length > 0;
-    }
-
-    return isBaselined;
-  }),
-
   // -------------------------------------------------------------------------
   // Actions
   actions: {
-    /**
-     * Action triggered when the user click outside of pullup.
-     **/
-    onClosePullUp() {
-      this.set('showReportPullUp', false);
-      this.set('isShowProficiencyPullup', false);
-      this.set('isShowCompetencyContentReport', false);
-    },
     /**
      * Archive class
      **/
@@ -218,19 +156,6 @@ export default Ember.Controller.extend(ModalMixin, {
       );
     },
 
-    profileStudent: function(student) {
-      let controller = this;
-      let studentId = student.get('id');
-      let classId = controller.get('class.id');
-      this.transitionToRoute(`/${studentId}/about?classId=${classId}`);
-    },
-
-    proficiencyStudent: function(student) {
-      let controller = this;
-      controller.set('isShowProficiencyPullup', true);
-      controller.set('selectedStudent', student);
-    },
-
     /**
      *
      * Triggered when a edit save score option is selected
@@ -240,6 +165,7 @@ export default Ember.Controller.extend(ModalMixin, {
       controller.set('editingScore', false);
       controller.saveClass();
     },
+
     /**
      *Sort student list by criteria
      */
@@ -251,6 +177,7 @@ export default Ember.Controller.extend(ModalMixin, {
         this.set('reverseSort', !this.get('reverseSort'));
       }
     },
+
     /**
      *
      * Triggered when a update class option is selected
@@ -277,22 +204,7 @@ export default Ember.Controller.extend(ModalMixin, {
           this.get('class').set('collaborators', classCollaborators);
         });
     },
-    /**
-     * UX not ready for add
-     */
-    addCoteacher: function() {
-      let classCollaboratorArr = [
-        '8bc34655-3704-4721-898f-8695ef262905',
-        '848d2f39-789c-459f-a3a9-ff6ca832a65b'
-      ];
-      var classCollaboratorsRef = this.get('class').get('collaborators');
-      let classCollaborators = classCollaboratorsRef.copy();
-      this.get('classService')
-        .removeCoTeacherFromClass(this.get('class.id'), classCollaboratorArr)
-        .then(() => {
-          this.get('class').set('collaborators', classCollaborators);
-        });
-    },
+
     /**
      *Remove student
      */
@@ -337,74 +249,9 @@ export default Ember.Controller.extend(ModalMixin, {
       controller.set('isLoading', true);
     },
 
-    /**
-     * Action triggered when select a competency
-     */
-    onSelectCompetency(competency) {
-      let controller = this;
-      controller.set('selectedCompetency', competency);
-      controller.set('isShowCompetencyContentReport', true);
-    },
-
-    /**
-     * Navigate to teacher profile page
-     * @param  {Object} teacher
-     */
-    profileTeacher: function(teacher) {
-      let controller = this;
-      let teacherId = teacher.get('id');
-      let classId = controller.get('class.id');
-      localStorage.setItem('classId', classId);
-      this.transitionToRoute(`/${teacherId}/about?classId=${classId}`);
-    },
-    /**
-     * Baseline class
-     * @requires course, subject
-     */
-    generateClassPathway: function(users) {
-      let ouser = users ? users : null;
-      if (this.get('course.id') && this.get('subject')) {
-        this.generateClassPathway(ouser);
-      } else {
-        Ember.Logger.log('Course or Subject not assigned to class');
-      }
-    },
-
-    /**
-     * update class settings
-     * @requires course, subject
-     */
-    updateClassSettings: function(value, setKey) {
-      const controller = this;
-      if (controller.get('course.id') && controller.get('sanitizedSubject')) {
-        let settings = {
-            grade_lower_bound: controller.get('tempClass.gradeLowerBound'),
-            grade_upper_bound: controller.get('tempClass.gradeUpperBound'),
-            grade_current: controller.get('tempClass.gradeCurrent'),
-            route0: controller.get('tempClass.route0Applicable')
-          },
-          akey = setKey ? setKey : 'route0';
-
-        settings[akey] = value;
-
-        let tClass = controller.get('tempClass');
-        tClass.set('gradeLowerBound', settings.grade_lower_bound);
-        tClass.set('gradeUpperBound', settings.grade_upper_bound);
-        tClass.set('gradeCurrent', settings.grade_current);
-        tClass.set('route0', settings.route0);
-        controller.set('tempClass', tClass);
-
-        controller.set('enableApplySettings', true); // some UI interaction happened...enable apply button
-      } else {
-        Ember.Logger.log(
-          'Course or Subject not assigned to class, cannot update class settings'
-        );
-      }
-    },
-
     updateFwkSettings: function(value) {
       const controller = this;
-      if (controller.get('course.id') && controller.get('sanitizedSubject')) {
+      if (controller.get('course.id') && controller.get('subject')) {
         let tClass = controller.get('tempClass'),
           sourcePreferenceJSON = controller.get('class.preference'),
           preferenceJSON = {
@@ -413,10 +260,11 @@ export default Ember.Controller.extend(ModalMixin, {
           };
 
         tClass.set('preference', preferenceJSON);
-        controller.set('tempClass', tClass);
-        controller.resetGradeValues();
-
-        controller.set('enableApplySettings', true); // some UI interaction happened...enable apply button
+        controller.fetchTaxonomyGrades().then(() => {
+          tClass.set('gradeLowerBound', null);
+          tClass.set('gradeCurrent', null);
+          controller.set('enableApplySettings', true); // some UI interaction happened...enable apply button
+        });
       } else {
         Ember.Logger.log(
           'Course or Subject not assigned to class, cannot update class settings'
@@ -424,51 +272,73 @@ export default Ember.Controller.extend(ModalMixin, {
       }
     },
 
-    updateClassMembersSettings: function(student, value, setKey) {
-      const controller = this;
-      if (controller.get('course.id') && controller.get('sanitizedSubject')) {
-        let oldDestination = student.get('gradeUpperBound');
-        let oldOrigin = student.get('gradeLowerBound');
-        student.set('regeneratePathway', false);
+    updateClassStudentGradeOrigin: function(grade, studentId) {
+      let student = this.get('class.members').findBy('id', studentId);
+      student.set('tempGradeLowerBound', grade.get('id'));
+    },
 
-        let settings = {
-            grade_lower_bound: oldOrigin,
-            grade_upper_bound: oldDestination,
-            users: [student.id]
-          },
-          akey = setKey ? setKey : '';
+    updateClassStudentGradeDestination: function(grade, studentId) {
+      let student = this.get('class.members').findBy('id', studentId);
+      student.set('tempGradeUpperBound', grade.get('id'));
+    },
 
-        settings[akey] = value;
-        student.set('gradeLowerBound', settings.grade_lower_bound);
-        student.set('gradeUpperBound', settings.grade_upper_bound);
+    updateClassGradeLevel: function(grade) {
+      this.set('enableApplySettings', true);
+      this.set('tempClass.gradeCurrent', grade.get('id'));
+    },
 
-        if (settings.grade_upper_bound !== oldDestination) {
-          student.set('regeneratePathway', true);
-        }
-
-        controller.updateBondValueToSingleStudent(student);
-      } else {
-        Ember.Logger.log(
-          'Course or Subject not assigned to class, cannot update class settings'
-        );
-      }
+    updateClassGradeOrigin: function(grade) {
+      this.set('enableApplySettings', true);
+      this.set('tempClass.gradeLowerBound', grade.get('id'));
     },
 
     applyClassMembersSettings: function(student) {
       const controller = this;
-      if (controller.get('course.id') && controller.get('sanitizedSubject')) {
+      if (controller.get('course.id') && controller.get('subject')) {
+        let studentId = student.get('id');
         let settings = {
-          grade_lower_bound: student.get('gradeLowerBound'),
-          grade_upper_bound: student.get('gradeUpperBound'),
-          users: [student.id]
+          grade_lower_bound:
+            student.get('tempGradeLowerBound') ||
+            student.get('gradeLowerBound'),
+          grade_upper_bound:
+            student.get('tempGradeUpperBound') ||
+            student.get('gradeUpperBound'),
+          users: [studentId]
         };
-        controller.updateClassMembersSettings(settings); // Calling  Gen Path way once class settings save is success
+
+        let lowBound = student.get('tempGradeLowerBound');
+        let upperBound = student.get('tempGradeUpperBound');
+        let doInitialSkyline = false;
+        let saveSettings = false;
+
+        if (lowBound && lowBound !== student.get('gradeLowerBound')) {
+          // change at lower bound value detected
+          // we may need to trigger initial skyline compute
+          saveSettings = true;
+          doInitialSkyline = true;
+          student.set('gradeLowerBound', settings.grade_lower_bound);
+        }
+
+        if (upperBound && upperBound !== student.get('gradeUpperBound')) {
+          // change at upper bound value detected
+          saveSettings = true;
+          student.set('gradeUpperBound', settings.grade_upper_bound);
+        }
+
+        if (saveSettings) {
+          controller.updateClassMembersSettings(
+            settings,
+            doInitialSkyline,
+            student
+          );
+        }
       } else {
         Ember.Logger.log(
           'Course or Subject not assigned to class, cannot update class settings'
         );
       }
     },
+
     /**
      *
      * Triggered when a edit save score option is selected
@@ -481,7 +351,7 @@ export default Ember.Controller.extend(ModalMixin, {
 
     classMembersToggle: function(targetStatusActive, student) {
       const controller = this;
-      if (controller.get('course.id') && controller.get('sanitizedSubject')) {
+      if (controller.get('course.id') && controller.get('subject')) {
         let settings = {
           users: [student.id]
         };
@@ -491,9 +361,7 @@ export default Ember.Controller.extend(ModalMixin, {
         } else {
           controller.classMembersDeactivate(settings);
         }
-
         student.set('isActive', targetStatusActive); //Toggle Status
-        controller.updateBondValueToSingleStudent(student);
       } else {
         Ember.Logger.log(
           'Course or Subject not assigned to class, cannot update class settings'
@@ -503,7 +371,7 @@ export default Ember.Controller.extend(ModalMixin, {
 
     applyClassSettings: function() {
       const controller = this;
-      if (controller.get('course.id') && controller.get('sanitizedSubject')) {
+      if (controller.get('course.id') && controller.get('subject')) {
         let settings = {
           grade_lower_bound: controller.get('tempClass.gradeLowerBound'),
           grade_upper_bound: controller.get('tempClass.gradeUpperBound'),
@@ -513,116 +381,27 @@ export default Ember.Controller.extend(ModalMixin, {
             controller.get('tempClass.preference') ||
             controller.get('class.preference')
         };
-        controller.updateClassSettings(settings); // Call api with whatever is saved
-      } else {
-        Ember.Logger.log(
-          'Course or Subject not assigned to class, cannot update class settings'
-        );
+        let classData = controller.get('class');
+        classData.set('gradeLowerBound', settings.grade_lower_bound);
+        classData.set('gradeUpperBound', settings.grade_upper_bound);
+        classData.set('gradeCurrent', settings.grade_current);
+        classData.set('route0', settings.route0);
+        classData.set('preference', settings.preference);
+        controller.updateClassSettings(settings);
       }
-    },
-    prepareListData: function(context, posParam) {
-      const controller = this;
-      let classV = controller.get('class'),
-        classLBId = classV.gradeLowerBound,
-        classCurrentId = classV.gradeCurrent,
-        source = controller.get('subjectTaxonomyGrades');
-      let classLB = controller.getGradeSequenceById(classLBId, source),
-        classCurrent = controller.getGradeSequenceById(classCurrentId, source),
-        sourceFilteredByContext;
-
-      // class filters
-      if (posParam === 'student-origin' || posParam === 'student-destination') {
-        if (posParam === 'student-origin') {
-          if (classLB) {
-            sourceFilteredByContext = controller.filterRange(
-              source,
-              classLB,
-              controller.getGradeSequenceById(
-                context.gradeLowerBound,
-                source
-              ) || classCurrent
-            );
-          }
-          /* Student's lower bound can't be SET if class lower bound is null
-             Student's lower bound can't be lower than class lower bound
-             Student's destination can be set to any value greater than or equal to class grade
-             Shrinking is not allowed .i.e. student
-             */
-        } else if (posParam === 'student-destination') {
-          if (classCurrent) {
-            sourceFilteredByContext = controller.filterRange(
-              source,
-              controller.getGradeSequenceById(
-                context.gradeUpperBound,
-                source
-              ) ||
-                classCurrent ||
-                controller.getGradeSequenceById(
-                  context.gradeLowerBound,
-                  source
-                ) ||
-                classLB,
-              null
-            );
-          }
-          /* Student's upper bound can't be SET if class current bound is null */
-        }
-      } else if (posParam === 'class-origin') {
-        sourceFilteredByContext = controller.filterRange(
-          source,
-          classLB ? 0 : null,
-          classLB
-            ? classLB
-            : controller.getGradeSequenceById(
-              controller.get('tempClass.gradeCurrent'),
-              source
-            )
-        );
-        /*  The grade_lower_bound should be less than or equal to current_grade
-        The grade_lower_bound can be modified multiple times. However, it can't be made higher than previous value  */
-      } else if (posParam === 'class-current') {
-        sourceFilteredByContext = controller.filterRange(
-          source,
-          controller.getGradeSequenceById(
-            controller.get('tempClass.gradeLowerBound'),
-            source
-          ),
-          classCurrent // Once set class current cant be updated so if would always be null, once called for
-        );
-      }
-
-      controller.set('currentFilterList', sourceFilteredByContext);
-      return sourceFilteredByContext;
     },
 
     updateLanguage(language) {
       const controller = this;
       const classId = this.get('class.id');
+      const languageId = language.get('id');
       controller
         .get('classService')
-        .updateLanguage(classId, language.id)
+        .updateLanguage(classId, languageId)
         .then(() => {
-          controller.tempClass.set('primaryLanguage', language.id);
-          controller.set('class.primaryLanguage', language.id);
+          controller.set('class.primaryLanguage', languageId);
         });
     }
-  },
-
-  /**
-   * called only iff current grade of class is null
-   */
-  resetGradeValues() {
-    const controller = this;
-    let tClass = controller.get('tempClass');
-    tClass.set('gradeLowerBound', null);
-    tClass.set('gradeUpperBound', null);
-    tClass.set('gradeCurrent', null);
-    controller.set('tempClass', tClass);
-
-    //controller.set('class.gradeLowerBound', null);
-    //Re-setting this may give shrinking error as its not allowed by api, thus  should set both grade lower and current at-once
-
-    //controller.set('enableApplySettings', true); // some UI interaction happened...enable apply button
   },
 
   getGradeSequenceById(id, source) {
@@ -630,36 +409,6 @@ export default Ember.Controller.extend(ModalMixin, {
       ? source.findBy('id', id).sequence
       : id;
   },
-  currentFilterList: null, //Dynamic filtered list
-
-  filterRange: function(filterSource, lb, ub) {
-    let filteredDest = null;
-    if (filterSource && lb && ub) {
-      // if ub and lb , cg is between lb and ub
-      filteredDest = filterSource.map(srcRow => {
-        if (srcRow && srcRow.sequence >= lb && srcRow.sequence <= ub) {
-          return srcRow;
-        }
-      });
-    } else if (filterSource && (lb && !ub)) {
-      filteredDest = filterSource.map(srcRow => {
-        if (srcRow && srcRow.sequence >= lb) {
-          return srcRow;
-        }
-      });
-    } else if (filterSource && (!lb && ub)) {
-      filteredDest = filterSource.map(srcRow => {
-        if (srcRow && srcRow.sequence <= ub) {
-          return srcRow;
-        }
-      });
-    } else if (filterSource && (!lb && !ub)) {
-      filteredDest = filterSource; //all
-    }
-    return filteredDest;
-  },
-
-  //------------end action ---
 
   // -------------------------------------------------------------------------
   // Events
@@ -694,9 +443,6 @@ export default Ember.Controller.extend(ModalMixin, {
 
   subject: Ember.computed.alias('class.preference.subject'),
 
-  sanitizedSubject: Ember.computed('subject', function() {
-    return this.get('subject');
-  }),
   /**
    * @param {Boolean } didValidate - value used to check if input has been validated or not
    */
@@ -718,32 +464,13 @@ export default Ember.Controller.extend(ModalMixin, {
   isAttendClassWithCode: Ember.computed.equal('class.classSharing', 'open'),
 
   /**
-   * @param {Boolean} reverseSort - default sort in ascending order
-   */
-  reverseSort: false,
-
-  /**
-   * @param {String} sortBy - sort criteria
-   */
-  sortBy: 'firstName',
-
-  /**
-   * @param {String} sortDefinition - List of sort criteria
-   */
-  sortDefinition: Ember.computed('sortBy', 'reverseSort', function() {
-    let sortOrder = this.get('reverseSort') ? 'desc' : 'asc';
-    return [`${this.get('sortBy')}:${sortOrder}`];
-  }),
-
-  /**
    * @param {[Student]} sortedMembers - Class members sorted
    */
-  sortedMembers: Ember.computed.sort('class.members', 'sortDefinition'),
+  sortedMembers: Ember.computed('class.members.[]', function() {
+    return this.get('class.members').sortBy('firstName');
+  }),
 
-  memberGradeBounds: Ember.computed.sort(
-    'class.memberGradeBounds',
-    'sortDefinition'
-  ),
+  memberGradeBounds: Ember.computed.alias('class.memberGradeBounds'),
 
   /**
    * Toggle Options
@@ -759,6 +486,7 @@ export default Ember.Controller.extend(ModalMixin, {
       value: false
     })
   ]),
+
   /**
    * Copy of the class model used for editing.
    * @property {Class}
@@ -766,42 +494,14 @@ export default Ember.Controller.extend(ModalMixin, {
   tempClass: null,
 
   /**
-   * @property {Boolean}
-   * Property to show/hide proficiency pull up
-   */
-  isShowProficiencyPullup: false,
-
-  /**
    * @property {Object}
    * Property to store selected student's data
    */
   selectedStudent: null,
 
-  /**
-   * @property {isCourseAssigned}
-   * Property to check whether a course is assigned to the class or not
-   */
-  isCourseAssigned: Ember.computed('class', function() {
-    let controller = this;
-    let classData = controller.get('class');
-    let isCourseAssigned = classData ? classData.courseId || false : false;
-    return isCourseAssigned;
-  }),
-
   enableApplySettings: false,
 
   subjectTaxonomyGrades: null,
-
-  /**
-   * Changes to the frameworks and updates the grades
-   */
-  _subjectTaxonomyGrades: Ember.observer(
-    'tempClass.preference.framework',
-    function() {
-      const controller = this;
-      controller.fetchTaxonomyGrades();
-    }
-  ),
 
   /**
    * @function fetchTaxonomyGrades
@@ -812,7 +512,7 @@ export default Ember.Controller.extend(ModalMixin, {
     if (this.get('course.id') && this.get('subject')) {
       let taxonomyService = controller.get('taxonomyService');
       let filters = {
-        subject: controller.get('sanitizedSubject')
+        subject: controller.get('subject')
       };
       let fwkCode =
         controller.get('tempClass.preference.framework') ||
@@ -831,45 +531,23 @@ export default Ember.Controller.extend(ModalMixin, {
     }
   },
 
-  getGrade: Ember.computed('subjectTaxonomyGrades', function() {
-    let fg = this.get('subjectTaxonomyGrades')
-      ? this.get('subjectTaxonomyGrades').filter(
-        tg => tg.id === this.get('class.gradeCurrent')
-      )
-      : null;
-    return fg ? fg[0].grade : '';
-  }),
-
-  currentGradeDDValue: null,
-  getCurrentGradeDDContent: Ember.computed(
-    'subjectTaxonomyGrades',
-    'class.gradeLowerBound',
-    function() {
-      const controller = this;
-      let subjectTGS = controller.get('subjectTaxonomyGrades'),
-        classLB = controller.get('tempClass.gradeLowerBound'),
-        filteredGrades = null;
-      if (subjectTGS && classLB) {
-        filteredGrades = subjectTGS.map(subjectGrade => {
-          if (subjectGrade.id >= classLB) {
-            return subjectGrade;
-          }
-        });
-      } else if (subjectTGS && !classLB) {
-        filteredGrades = subjectTGS; //all
-      }
-      controller.set('currentGradeDDValue', filteredGrades);
-      return filteredGrades;
-    }
-  ),
-
   /**
-   * @property {Boolean} isShowCompetencyContentReport
+   * Fetch class member data to get class member bounds.
    */
-  isShowCompetencyContentReport: false,
-
-  // -------------------------------------------------------------------------
-  // Observers
+  fetchClassMemberBounds() {
+    let controller = this;
+    const classId = controller.get('class.id');
+    controller
+      .get('classService')
+      .readClassMembers(classId)
+      .then(members => {
+        controller.set(
+          'class.memberGradeBounds',
+          members.get('memberGradeBounds')
+        );
+        controller.updateBoundValuesToStudent();
+      });
+  },
 
   // -------------------------------------------------------------------------
   // Methods
@@ -912,79 +590,30 @@ export default Ember.Controller.extend(ModalMixin, {
     );
   },
 
-  generateClassPathway: function(users) {
-    const controller = this;
-    const classId = this.get('class.id');
-    controller
-      .get('classService')
-      .profileBaseLine(classId, users)
-      .then(() => {
-        controller.send('refreshRoute');
-        controller.refreshRouter();
-      });
-  },
-
-  fetchTaxonomySubject() {
-    let component = this;
-    if (this.get('course.id') && this.get('subject')) {
-      let taxonomyService = component.get('taxonomyService');
-      let filters = component.get('sanitizedSubject');
-      return taxonomyService.fetchSubject(filters).then(respdata => {
-        component.set('gradeSubjectFWK', respdata);
-      });
-    }
-  },
-  fetchLanguage() {
-    const controller = this;
-    controller
-      .get('lookupService')
-      .getLanguages()
-      .then(languages => controller.set('languages', languages.languages));
-  },
-  updateBondValuesToStudent() {
-    let component = this;
-    let members = component.get('class.members');
-    members = members.map(m => {
-      let grade = component.get('memberGradeBounds').findBy(m.id);
+  updateBoundValuesToStudent() {
+    let controller = this;
+    let members = controller.get('class.members');
+    members.forEach(member => {
+      let memberId = member.get('id');
+      let grade = controller.get('memberGradeBounds').findBy(memberId);
       if (grade) {
-        m.gradeLowerBound = grade[m.id].grade_lower_bound;
-        m.gradeUpperBound = grade[m.id].grade_upper_bound;
-      } else {
-        m.gradeLowerBound = null;
-        m.gradeUpperBound = null;
+        let gradeBounds = grade.get(memberId);
+        member.set('gradeLowerBound', gradeBounds.grade_lower_bound);
+        member.set('gradeUpperBound', gradeBounds.grade_upper_bound);
       }
-      return m;
     });
-    component.set('class.members', members);
-    return members;
   },
 
-  updateBondValueToSingleStudent(student) {
-    let component = this;
-    let classmembers = component.get('class.members');
-    let members = classmembers.map(m => {
-      if (m.id === student.id) {
-        return student;
-      } else {
-        return m;
-      }
-    });
-    component.set('class.members', members);
-    return members;
-  },
   setupDisplayProperties() {
     let controller = this;
-    controller.fetchLanguage();
-    controller.fetchTaxonomySubject();
-    controller.fetchTaxonomyGrades(true);
-    controller.updateBondValuesToStudent();
-    controller.classDisplayRules();
+    let members = controller.get('class.members');
+    controller.updateBoundValuesToStudent(members);
+    controller.set('enableApplySettings', false);
   },
 
   updateClassSettings: function(settings) {
     const controller = this;
     const classId = this.get('class.id');
-
     let promises = {
       classPromise: controller
         .get('classService')
@@ -993,44 +622,31 @@ export default Ember.Controller.extend(ModalMixin, {
         .get('classService')
         .updatePreference(classId, settings.preference)
     };
-
     Ember.RSVP.hash(promises).then(function(/* hash */) {
       controller.set('enableApplySettings', false);
-      if (!controller.get('isPremiumClass')) {
-        controller.generateClassPathway(); // Call LP // Baseline class on setting save for not premium
-      } else {
-        controller.send('refreshRoute');
-        controller.refreshRouter();
-      }
+      // TO-DO optmize, call only when bounds get change.
+      controller.fetchClassMemberBounds();
     });
   },
 
-  refreshRouter: function() {
-    const controller = this;
-    const queryParams = {
-      refresh: `_${Math.random()
-        .toString()
-        .substr(2)}`
-    };
-    controller.transitionToRoute({
-      queryParams
-    });
-  },
-
-  updateClassMembersSettings: function(settings) {
+  updateClassMembersSettings: function(settings, doInitialSkyline, student) {
     const controller = this;
     const classId = this.get('class.id');
     const isPremiumClass = controller.get('isPremiumClass');
     const isOffline = controller.get('class.isOffline');
+    const studentId = settings.users[0];
+    student.set('isRefreshing', true);
     controller
       .get('classService')
       .classMembersSettings(classId, settings)
       .then(function(/* responseData */) {
-        if (isPremiumClass && isOffline) {
+        student.set('isRefreshing', false);
+        // TO-DO optmize
+        controller.fetchClassMemberBounds();
+        if (isPremiumClass && isOffline && doInitialSkyline) {
           controller
             .get('skylineInitialService')
-            .calculateSkyline(classId, [settings.users[0]]);
-          controller.generateClassPathway(settings.users[0]);
+            .calculateSkyline(classId, [studentId]);
         }
       });
   },
@@ -1045,6 +661,7 @@ export default Ember.Controller.extend(ModalMixin, {
         /*    //Do nothing for success  */
       });
   },
+
   classMembersActivate: function(settings) {
     const controller = this;
     const classId = this.get('class.id');

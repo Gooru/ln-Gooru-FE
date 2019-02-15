@@ -142,6 +142,11 @@ export default Ember.Component.extend({
             'gradeId',
             studentPerformanceSummary.gradeId || '--'
           );
+
+          studentPerformanceData.set(
+            'grade',
+            studentPerformanceSummary.grade || '--'
+          );
           parsedPerformanceSummary.push(studentPerformanceData);
         }
       });
@@ -269,11 +274,10 @@ export default Ember.Component.extend({
       })
       .attr('class', 'node-point');
 
-    studentNode
-      .on('mouseout', function() {
-        tooltipContainer.removeClass('active');
-        Ember.run.cancel(tooltipInterval);
-      });
+    studentNode.on('mouseout', function() {
+      tooltipContainer.removeClass('active');
+      Ember.run.cancel(tooltipInterval);
+    });
 
     tooltip.on('mouseout', function() {
       tooltipContainer.removeClass('active');
@@ -281,28 +285,28 @@ export default Ember.Component.extend({
     });
 
     if (!isMobileVW()) {
-      studentNode
-        .on('mouseover', function(studentData) {
-          let clientY = d3.event.clientY;
-          let clientX = d3.event.clientX;
-          let top = clientY > 420 ? clientY - 210 : clientY;
-          let left = clientX > 600 ? clientX - 225 : clientX;
-          let tooltipPos = {
-            top: `${top}px`,
-            left: `${left}px`
-          };
-          tooltipInterval = component.studentProficiencyInfoTooltip(studentData, tooltipPos);
-        });
-      tooltip
-        .on('mouseover', function() {
-          tooltipContainer.addClass('active');
-        });
+      studentNode.on('mouseover', function(studentData) {
+        let clientY = d3.event.clientY;
+        let clientX = d3.event.clientX;
+        let top = clientY > 420 ? clientY - 210 : clientY;
+        let left = clientX > 600 ? clientX - 225 : clientX;
+        let tooltipPos = {
+          top: `${top}px`,
+          left: `${left}px`
+        };
+        tooltipInterval = component.studentProficiencyInfoTooltip(
+          studentData,
+          tooltipPos
+        );
+      });
+      tooltip.on('mouseover', function() {
+        tooltipContainer.addClass('active');
+      });
     } else {
-      studentNode
-        .on('click', function(studentData) {
-          tooltipInterval = component.studentProficiencyInfoTooltip(studentData);
-          tooltipContainer.addClass('active');
-        });
+      studentNode.on('click', function(studentData) {
+        tooltipInterval = component.studentProficiencyInfoTooltip(studentData);
+        tooltipContainer.addClass('active');
+      });
     }
 
     studentNode
