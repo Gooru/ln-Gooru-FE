@@ -443,7 +443,11 @@ export default Ember.Component.extend({
         .get('competencyService')
         .getUserSignatureCompetencies(userId, subject)
     }).then(({ competencyList }) => {
-      component.set('signatureCompetencyList', competencyList);
+      if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
+        component.set('signatureCompetencyList', competencyList);
+      } else {
+        Ember.Logger.warn('comp is destroyed...');
+      }
     });
   },
 

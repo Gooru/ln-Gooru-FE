@@ -86,37 +86,8 @@ export default Ember.Component.extend({
   subjectChange: Ember.observer('activeSubject', function() {
     let component = this;
     let subject = component.get('activeSubject');
-    if (subject) {
-      component.set('isShowMatrixChart', true);
-      component.sendAction('onSubjectChange', subject);
-    } else {
-      component.set('isShowMatrixChart', false);
-    }
+    component.sendAction('onSubjectChange', subject);
   }),
-
-  /**
-   * @function fetchSubjectsByCategory
-   * @param subjectCategory
-   * Method to fetch list of subjects using given category level
-   */
-  fetchSubjectsByCategory(subjectCategory) {
-    let controller = this;
-    let selectedCategoryId = subjectCategory.get('id');
-    controller
-      .get('taxonomyService')
-      .getTaxonomySubjects(selectedCategoryId)
-      .then(subjects => {
-        let defaultSubject = subjects.findBy(
-          'id',
-          this.get('selectedCategory')
-        );
-        let selectedSubject = defaultSubject
-          ? defaultSubject
-          : subjects.objectAt(0);
-        controller.set('taxonomySubjects', subjects);
-        controller.set('activeSubject', selectedSubject);
-      });
-  },
 
   /**
    * @property {Date}
@@ -142,21 +113,10 @@ export default Ember.Component.extend({
     return courseCreatedDate;
   }),
 
-  onChangeCategories: Ember.observer('selectedCategory', function() {
-    let component = this;
-    let category = component.get('selectedCategory');
-    component.fetchSubjectsByCategory(category);
-  }),
-
   actions: {
     onSelectCategory(category) {
-      let controller = this;
-      controller.set('selectedCategory', category);
-    },
-    //Action triggered when the user click a subject from the right panel
-    onSelectItem(item) {
-      let controller = this;
-      controller.set('selectedSubject', item);
+      let component = this;
+      component.sendAction('onSelectCategory', category);
     },
     /**
      * Action triggered when select a month from chart

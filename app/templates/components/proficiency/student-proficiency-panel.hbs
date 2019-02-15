@@ -16,17 +16,17 @@
       {{/each}}
     </ul>
   </div>
+  {{#if activeSubject}}
     <div class="dropdown subjects">
-      <div class="active-item active-subject">
-        <div class="label ellipsis">{{activeSubject.title}}</div>
-        <div class="icon">{{gru-icon name="arrow_drop_down"}}</div>
-      </div>
-      <div class="dropdown-content subject-list">
+      <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{activeSubject.title}}
+        <span class="caret"></span></button>
+      <ul class="dropdown-menu subject-list">
         {{#each taxonomySubjects as |subject|}}
-          <div class="list-item subject {{if (eq activeSubject.id subject.id) 'active'}}" {{action "onSelectSubject" subject}}>{{subject.title}}</div>
+          <li class="list-item category {{if (eq activeSubject.id subject.id) 'active'}}" {{action "onSelectSubject" subject}}>{{subject.title}}</li>
         {{/each}}
-      </div>
+      </ul>
     </div>
+    {{/if}}
   </div>
 </div>
 <div class="panel-content">

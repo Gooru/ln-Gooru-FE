@@ -1,9 +1,5 @@
 import Ember from 'ember';
-import { DEFAULT_K12_SUBJECT, ROLES } from 'gooru-web/config/config';
-import {
-  getSubjectIdFromSubjectBucket,
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
 import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
 export default Ember.Mixin.create({
   // -------------------------------------------------------------------------
@@ -102,10 +98,8 @@ export default Ember.Mixin.create({
    */
   selectedCompetency: null,
 
-  /**
-   * @property {Array}
-   * Property to store selected domain competenceis
-   */
+  selectedCategory: null,
+
   domainCompetencyList: null,
 
   /**
@@ -115,6 +109,11 @@ export default Ember.Mixin.create({
   isStudent: Ember.computed.equal('session.role', ROLES.STUDENT),
 
   actions: {
+    onSelectCategory(category) {
+      let component = this;
+      component.set('selectedCategory', category);
+      component.fetchSubjectsByCategory(category);
+    },
     onSelectGrade(grade) {
       let component = this;
       component.toggleProperty('isSelectGrade');
@@ -188,6 +187,7 @@ export default Ember.Mixin.create({
     let categoryCode = component.get('categoryCode');
     let defaultCategory = categories.findBy('code', categoryCode);
     if (defaultCategory) {
+      component.set('selectedCategory', defaultCategory);
       component.fetchSubjectsByCategory(defaultCategory);
     }
   },
@@ -218,8 +218,7 @@ export default Ember.Mixin.create({
    */
   getActiveSubject(subjects) {
     let component = this;
-    let defaultSubject = subjects.findBy('id', DEFAULT_K12_SUBJECT);
-    let activeSubject = defaultSubject ? defaultSubject : subjects.objectAt(0);
+    let activeSubject = subjects.objectAt(0);
     let subjectBucket = component.get('subjectBucket');
     subjects.map(subject => {
       if (subjectBucket) {
@@ -265,25 +264,27 @@ export default Ember.Mixin.create({
     let subjectId = component.get('activeSubject.id');
     let userId = component.get('studentProfile.id');
     let timeLine = component.get('timeLine');
-    return Ember.RSVP.hash({
-      competencyMatrixs: component
-        .get('competencyService')
-        .getCompetencyMatrixDomain(userId, subjectId, timeLine),
-      competencyMatrixCoordinates: component
-        .get('competencyService')
-        .getCompetencyMatrixCoordinates(subjectId),
-      userProficiencyBaseLine: component.fetchBaselineCompetencies()
-    }).then(({ competencyMatrixs, competencyMatrixCoordinates }) => {
-      if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
-        component.set('competencyMatrixDomains', competencyMatrixs.domains);
-        component.set(
-          'competencyMatrixCoordinates',
-          competencyMatrixCoordinates
-        );
-      } else {
-        Ember.Logger.warn('comp is destroyed...');
-      }
-    }, this);
+    if (subjectId) {
+      return Ember.RSVP.hash({
+        competencyMatrixs: component
+          .get('competencyService')
+          .getCompetencyMatrixDomain(userId, subjectId, timeLine),
+        competencyMatrixCoordinates: component
+          .get('competencyService')
+          .getCompetencyMatrixCoordinates(subjectId),
+        userProficiencyBaseLine: component.fetchBaselineCompetencies()
+      }).then(({ competencyMatrixs, competencyMatrixCoordinates }) => {
+        if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
+          component.set('competencyMatrixDomains', competencyMatrixs.domains);
+          component.set(
+            'competencyMatrixCoordinates',
+            competencyMatrixCoordinates
+          );
+        } else {
+          Ember.Logger.warn('comp is destroyed...');
+        }
+      }, this);
+    }
   },
 
   /**
@@ -315,15 +316,17 @@ export default Ember.Mixin.create({
     let filters = {
       subject: component.get('subjectCode')
     };
-    return Ember.RSVP.hash({
-      taxonomyGrades: Ember.RSVP.resolve(
-        taxonomyService.fetchGradesBySubject(filters)
-      )
-    }).then(({ taxonomyGrades }) => {
-      component.set(
-        'taxonomyGrades',
-        taxonomyGrades.sortBy('sequence').reverse()
-      );
-    });
+    if (component.get('subjectCode')) {
+      return Ember.RSVP.hash({
+        taxonomyGrades: Ember.RSVP.resolve(
+          taxonomyService.fetchGradesBySubject(filters)
+        )
+      }).then(({ taxonomyGrades }) => {
+        component.set(
+          'taxonomyGrades',
+          taxonomyGrades.sortBy('sequence').reverse()
+        );
+      });
+    }
   }
 });

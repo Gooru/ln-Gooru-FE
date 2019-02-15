@@ -4,7 +4,7 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   background-color: #ffffff;
   display: grid;
-  grid-template-rows: 64px 1fr;
+  grid-template-rows: 82px 1fr;
 
   .panel-content {
     width: 100%;
@@ -99,17 +99,18 @@
   }
 
   .panel-header {
-    height: 65px;
+    height: 83px;
     width: 95%;
     border-bottom: 2px solid #979797;
     display: grid;
-    grid-template-columns: 30px 1fr 200px;
+    grid-template-columns: 30px 1fr auto;
     grid-gap: 15px;
-    padding: 10px;
+    padding: 0;
     margin: auto;
 
     .back {
       cursor: pointer;
+      margin: auto;
     }
 
     .dropdown {
@@ -117,55 +118,7 @@
       display: inline-block;
       width: max-content;
       justify-self: end;
-
-      .active-item {
-        display: flex;
-        height: 25px;
-
-        .label {
-          font-size: 17px;
-          font-weight: bold;
-          color: $charcoal-grey;
-          padding: 0;
-          text-align: left;
-        }
-
-        .icon {
-          font-size: 17px;
-          font-weight: bold;
-          color: $charcoal-grey;
-        }
-      }
     }
-    /* Dropdown Content (Hidden by Default) */
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: $white;
-      min-width: 187px;
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-      max-height: 150px;
-      right: 0;
-      overflow-y: auto;
-      z-index: 1;
-      border-top: 1px solid;
-
-      .list-item {
-        height: 30px;
-        line-height: 30px;
-        padding-left: 15px;
-        cursor: pointer;
-
-        &.active,
-        &:hover {
-          background-color: $light-200;
-        }
-      }
-    }
-    /* Show the dropdown menu on hover */
-    // .dropdown:hover .dropdown-content {
-    //   display: block;
-    // }
 
     .student-profile {
       display: flex;
@@ -175,6 +128,7 @@
         height: 48px;
         overflow: hidden;
         border-radius: 50%;
+        margin-top: 15px;
       }
 
       .username {
@@ -192,10 +146,11 @@
   }
 
   .taxonomy-info {
-    // display: none;
-    grid-template-columns: auto auto;
+    display: grid;
     justify-content: center;
-    // margin: 15px 0;
+    grid-template-columns: auto auto;
+    margin: auto;
+    grid-gap: 10px;
 
     .dropdown-menu > li {
       padding: 3px 25px;
@@ -209,7 +164,6 @@
         font-size: 16px;
         text-transform: capitalize;
         border: none;
-        margin-top: 8px;
         display: block !important;
       }
     }
@@ -227,40 +181,10 @@
       position: relative;
       display: inline-block;
       width: max-content;
+      margin: auto;
 
       .dropbtn {
         display: block !important;
-      }
-
-      .active-item {
-        pointer-events: none;
-
-        .label {
-          font-size: 17px;
-          font-weight: bold;
-          color: $charcoal-grey;
-          padding: 0;
-          text-align: left;
-        }
-
-        .icon {
-          display: none;
-          font-size: 17px;
-          font-weight: bold;
-          color: $charcoal-grey;
-        }
-
-        &.active-subject {
-          .label {
-            min-width: 0;
-          }
-
-          .icon {
-            i {
-              line-height: 0;
-            }
-          }
-        }
       }
     }
     /* Dropdown Content (Hidden by Default) */
@@ -269,48 +193,19 @@
       text-align: left;
       white-space: nowrap;
       cursor: pointer;
+
+      &.active,
+      &:hover {
+        background-color: $light-200;
+      }
     }
 
     .dropdown-menu > li.active {
-      background-color: $gray-light;
+      background-color: $light-200;
     }
 
     .dropdown-menu > li.active {
-      background-color: $gray-light;
+      background-color: $light-200;
     }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: $white;
-      min-width: 187px;
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-      max-height: 150px;
-      overflow-y: auto;
-      z-index: 1;
-      border-top: 1px solid;
-
-      .list-item {
-        height: 30px;
-        line-height: 30px;
-        padding-left: 15px;
-        cursor: pointer;
-
-        &.active,
-        &:hover {
-          background-color: $light-200;
-        }
-      }
-
-      li.active i {
-        font-size: 20px;
-        color: black;
-      }
-
-      li.active > a > span {
-        color: black;
-      }
-    }
-    /* Show the dropdown menu on hover */
   }
 }
