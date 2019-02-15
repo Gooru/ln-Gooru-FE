@@ -443,11 +443,7 @@ export default Ember.Component.extend({
         .get('competencyService')
         .getUserSignatureCompetencies(userId, subject)
     }).then(({ competencyList }) => {
-      if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
-        component.set('signatureCompetencyList', competencyList);
-      } else {
-        Ember.Logger.warn('comp is destroyed...');
-      }
+      component.set('signatureCompetencyList', competencyList);
     });
   },
 
@@ -647,7 +643,6 @@ export default Ember.Component.extend({
       })
       .on('click', function(d) {
         component.selectCompetency(d);
-        // component.addSelectedCell();
       });
     cards.exit().remove();
     component.$('.scrollable-chart').scrollTop(height);
