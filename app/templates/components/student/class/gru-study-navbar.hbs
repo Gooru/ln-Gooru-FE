@@ -3,18 +3,19 @@
     <div class="row-fluid network-progress-indicator">
     </div>
   {{/if}}
-
   <div class="nav-body hidden-xs {{if isILActivity  'independent-learning'}} {{if class.isArchived 'class-archived'}} {{unless hasClassInfo 'no-class-info'}}">
-    <div class="app-brand" {{action "onClickBrand"}}>
-      {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
+    <div class="app-close" {{action "onClickBrand"}}>
+      {{#link-to 'index' class="navbar-brand home-link" }}
+        <i class="gru-icon material-icons close">close</i>
+      {{/link-to}}
     </div>
     {{#unless class.isArchived}}
       {{#unless isILActivity}}
         <div class="class-activities tab">
           <a {{action 'selectItem' 'class-activities'}} title="{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
-              <i class="dca-pin"></i>
-              <span class="add-info dca-text">{{t 'teacher-landing.class.class-activities'}}</span>
-            </a>
+            <i class="dca-pin"></i>
+            <span class="add-info dca-text">{{t 'teacher-landing.class.class-activities'}}</span>
+          </a>
         </div>
       {{/unless}}
       <div class="course-map study-player tab {{destination}} {{if isPremiumCourse 'premium-course'}}">
@@ -22,12 +23,12 @@
           <a {{action 'selectItem' 'study-player'}} role="tab" data-toggle="tooltip" title="{{t 'student-landing.study-player'}}" class="{{unless isCourseMapped 'no-course'}}">
             {{gru-icon name='play_arrow'}}
             <span class="add-info">{{t 'student-landing.study-player'}}</span>
-        </a>
+          </a>
         {{else}}
           <a {{action 'selectItem' 'course-map'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}">
             {{gru-icon name='sort'}}
             <span class="add-info">{{t 'teacher-landing.class.course-map'}}</span>
-        </a>
+          </a>
         {{/if}}
       </div>
     {{/unless}}
@@ -49,7 +50,7 @@
       {{/if}}
       <div class="class-info">
         <a {{action 'selectItem' 'class-info'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.class-management-tab.class-information'}}">
-            <img src='/assets/gooru/info-outline-white.png'>
+          <img src='/assets/gooru/info-outline-white.png'>
         </a>
       </div>
     {{else}}
@@ -64,15 +65,13 @@
       <div class="performance-summary" style="background-color:{{if performanceSummary (grade-color performanceSummary.score) defaultBarColor}}">
         <span class="score">
           {{#if performanceSummary}}
-          {{#if performanceSummary.score}} {{performanceSummary.score}}% {{else}}0% {{/if}} {{else}}--
+            {{#if performanceSummary.score}} {{performanceSummary.score}}% {{else}}0% {{/if}} {{else}}--
           {{/if}}
         </span>
         <span class="label">{{t 'teacher-landing.class.performance'}} </span>
       </div>
     {{/if}}
   </div>
-
-
   <div class="hidden visible-xs">
     <div class="header-container">
       <div class="nav-bar">
@@ -83,20 +82,20 @@
           {{#unless isILActivity}}
             <div class="class-activities dca tab">
               <a {{action 'selectItem' 'class-activities'}}>
-              <i class="dca-pin"></i>
-            </a>
+                <i class="dca-pin"></i>
+              </a>
             </div>
           {{/unless}}
           <div class="action">
             <div class="course-map study-player tab {{destination}} {{if isPremiumCourse 'premium-course'}}">
               {{#if (eq selectedMenuItem 'course-map')}}
                 <a {{action 'selectItem' 'study-player'}} class="{{unless isCourseMapped 'no-course'}}">
-                {{gru-icon name='play_arrow'}}
-              </a>
+                  {{gru-icon name='play_arrow'}}
+                </a>
               {{else}}
                 <a {{action 'selectItem' 'course-map'}}>
-                {{gru-icon name='sort'}}
-              </a>
+                  {{gru-icon name='sort'}}
+                </a>
               {{/if}}
             </div>
           </div>
@@ -117,10 +116,10 @@
         {{else}}
           <div class="performance-summary" style="background-color:{{if performanceSummary (grade-color performanceSummary.score) defaultBarColor}}">
             <span class="score">
-                {{#if performanceSummary}}
+              {{#if performanceSummary}}
                 {{#if performanceSummary.score}} {{performanceSummary.score}}% {{else}}0% {{/if}} {{else}}--
-                {{/if}}
-              </span>
+              {{/if}}
+            </span>
           </div>
         {{/if}}
       </div>

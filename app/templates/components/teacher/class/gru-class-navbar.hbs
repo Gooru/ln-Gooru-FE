@@ -1,7 +1,10 @@
 <div class="header-panel" {{action 'closeNotificationList'}}>
   <div class="nav-body">
-    <div class="app-brand">
-      {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
+    <div class="app-close">
+      {{#link-to 'index' class="navbar-brand home-link material-icons close" }}
+        <i class="gru-icon material-icons close">close</i>
+        {{!-- {{gru-icon name='close'}} --}}
+      {{/link-to}}
     </div>
     {{#unless class.isArchived}}
       <div class="atc tab">
