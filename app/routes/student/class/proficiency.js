@@ -17,6 +17,12 @@ export default Ember.Route.extend({
    */
   skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
 
+  /**
+   * Maintains session object
+   * @type {Object}
+   */
+  session: Ember.inject.service(),
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -41,6 +47,20 @@ export default Ember.Route.extend({
    * @type {String}
    */
   destination: Ember.computed.alias('skylineInitialState.destination'),
+
+  /**
+   * Property used to identify the status of LP computation
+   * @type {Boolean}
+   */
+  isLPComputeInprogress: Ember.computed.equal(
+    'destination',
+    CLASS_SKYLINE_INITIAL_DESTINATION.ILPInProgress
+  ),
+
+  /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -69,9 +89,13 @@ export default Ember.Route.extend({
     const route = this;
     const currentClass = route.modelFor('student.class').class;
     const course = route.modelFor('student.class').course;
+    const members = route.modelFor('student.class').members.members;
+    const isLPComputeInprogress = route.get('isLPComputeInprogress');
+    let studentId = this.get('session.userId');
+    const student = members.findBy('id', studentId);
     route.set('course', course);
     const subjectCode = route.get('subjectCode');
-
+    const classId = currentClass.get('id');
     const taxonomyService = route.get('taxonomyService');
     const fwCode = currentClass.get('preference.framework');
     const filters = {
@@ -80,11 +104,16 @@ export default Ember.Route.extend({
     if (fwCode) {
       filters.fw_code = fwCode;
     }
+    let classService = route.get('classService');
     return Ember.RSVP.hash({
       course: course,
       taxonomyGrades: taxonomyService.fetchGradesBySubject(filters),
-      subject: route.get('taxonomyService').fetchSubject(subjectCode),
-      class: currentClass
+      subject: taxonomyService.fetchSubject(subjectCode),
+      class: currentClass,
+      updateProfileBaseline:
+        !isLPComputeInprogress && !student.get('profileBaselineDone')
+          ? classService.updateProfileBaseline(classId)
+          : null
     });
   },
 

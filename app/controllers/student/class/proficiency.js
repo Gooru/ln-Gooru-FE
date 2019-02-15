@@ -38,9 +38,6 @@ export default Ember.Controller.extend({
       let controller = this;
       if (curStep === 'playNext') {
         controller.startPlaying();
-      } else if (curStep === 'destination') {
-        let classId = controller.get('classId');
-        controller.get('classService').updateProfileBaseline(classId);
       }
     }
   },
@@ -168,7 +165,12 @@ export default Ember.Controller.extend({
           if (isLPComputeInprogress) {
             controller.checkStateOfSkylineInitial();
           } else {
-            controller.set('reDrawChart', true);
+            controller
+              .get('classService')
+              .updateProfileBaseline(classId)
+              .then(() => {
+                controller.set('reDrawChart', true);
+              });
           }
         }
       });
