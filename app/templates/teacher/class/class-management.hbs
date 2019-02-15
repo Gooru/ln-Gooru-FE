@@ -255,7 +255,7 @@
                     </div>
                   </td>
                   {{#if (and isPremiumClass class.gradeLowerBound class.gradeCurrent) }}
-                    <td>
+                    <td class="{{if student.originUpdated 'updated'}}">
                       <div class="origin {{if student.isActive "" "inActiveRow"}}  ">
                         <div class='grade-info'>
                           {{gru-dropdown
@@ -273,7 +273,7 @@
                         </div>
                       </div>
                     </td>
-                    <td>
+                    <td class="{{if student.destinationUpdated 'updated'}}">
                       <div class='destination {{if student.isActive "" "inActiveRow"}}'>
                         <div class='grade-info'>
                           {{gru-dropdown
@@ -308,17 +308,7 @@
                             isChecked=(if student.isActive true false)
                           }}
                       </div>
-                      {{#if isPremiumClass }}
-                        <div class="student-action-col {{if (and student.isActive  student.gradeUpperBound) "" "inActiveRow"}}">
-                          <div class="student-adj-lp {{if student.enableRefreshButton 'active'}} {{if student.isRefreshing 'updating'}}" {{action 'applyClassMembersSettings' student}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.generate-pathway'}}" data-toggle="tooltip">
-                            {{#if student.isRefreshing}}
-                              {{gru-icon name='replay'}}
-                            {{else}}
-                              {{gru-icon name='save'}}
-                            {{/if}}
-                          </div>
-                        </div>
-                      {{/if}}
+
                       <div class='student-action-col'>
                         <div class='student-delete' {{action "onRemoveStudent" student}} title="{{t 'common.remove'}}" data-toggle="tooltip">
                           {{gru-icon name='delete'}}</div>
