@@ -32,7 +32,9 @@
         </div>
         <div class="progress-container info-container">
           <div class="title-container">{{t 'common.progress'}}</div>
-          <div class="progress-bar-container"><span class="competency-progress-bar" style="width: {{studentData.percentCompletion}}%;"></span></div>
+          <div class="progress-bar-container">
+            <span class="competency-progress-bar" style="width: {{studentData.percentCompletion}}%;"></span>
+          </div>
           <div class="completion-percentage">{{studentData.percentCompletion}}%</div>
         </div>
         <div class="competencies-container info-container">
@@ -42,7 +44,13 @@
             <span class="inprogress-count count-box" style="width: {{find-percentage studentData.totalCompetencies studentData.inprogressCompetencies}}%;"></span>
             <span class="not-started-count count-box" style="width: {{find-percentage studentData.totalCompetencies studentData.notStartedCompetencies}}%;"></span>
           </div>
-          <div class="competency-count"><span class="mastered">{{studentData.completedCompetencies}}</span>/<span class="inprogress">{{studentData.inprogressCompetencies}}</span>/<span class="not-started">{{studentData.notStartedCompetencies}}</span></div>
+          <div class="competency-count">
+            <span class="mastered">{{studentData.completedCompetencies}}</span>
+            /
+            <span class="inprogress">{{studentData.inprogressCompetencies}}</span>
+            /
+            <span class="not-started">{{studentData.notStartedCompetencies}}</span>
+          </div>
         </div>
       </div>
     </div>
