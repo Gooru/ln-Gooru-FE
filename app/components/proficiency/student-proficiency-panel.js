@@ -129,6 +129,11 @@ export default Ember.Component.extend({
       component.sendAction('onSelectGrade', gradeData);
     },
 
+    onSelectGrade(gradeData) {
+      let component = this;
+      component.sendAction('onSelectGrade', gradeData);
+    },
+
     goBack() {
       let component = this;
       let isStudent = component.get('isStudent');
