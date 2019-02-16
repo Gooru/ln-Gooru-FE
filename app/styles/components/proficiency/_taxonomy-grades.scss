@@ -1,26 +1,18 @@
 .proficiency.taxonomy-grades {
   .grade {
     .dropdown {
-      &.open {
-        background-color: transparent;
-      }
-      button {
-        position: absolute;
-        background-color: $white;
-        min-width: 100px;
-        max-height: 150px;
-        overflow-y: auto;
-        color: #303a42;
-        z-index: 1;
-        font-size: 17px;
-        font-weight: bold;
-        padding: 0;
-        text-align: left;
+      .dropbtn {
+        background-color: #fff;
+        color: black;
+        padding: 3px;
+        font-size: 16px;
+        text-transform: capitalize;
+        border: none;
+        display: block !important;
       }
 
       ul {
         padding: 20px;
-        margin-top: 32px;
         border-radius: unset;
 
         li {
@@ -28,70 +20,25 @@
         }
       }
     }
-  }
 
-  .grade-list {
-    display: grid;
-    height: 80vh;
-    align-items: center;
-
-    .grade-container {
-      position: relative;
+    .label {
+      font-size: 17px;
+      font-weight: bold;
+      color: $charcoal-grey;
       padding: 0;
-      margin: 0;
-      max-width: 100px;
+      text-align: left;
+      margin-right: 10px;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
       width: max-content;
-      min-width: 100px;
-      text-align: right;
+      align-items: center;
+      display: flex;
 
-      .grade-title {
-        border: none;
-        display: block;
-        padding-left: 10px;
-        padding-right: 10px;
-        height: 24px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: $dark-300;
-      }
-
-      &.active-grade {
-        .grade-title {
-          background-color: $dark-300;
-          border: none;
-          opacity: 1;
-          font-weight: bold;
-          display: grid;
-          align-items: center;
-          color: $white;
-        }
-
-        .grade-title:after,
-        .grade-title:before {
-          content: "";
-          display: inline-block;
-          border-width: 16px;
-          border-style: solid;
-          width: 0;
-          height: 0;
-          left: 100%;
-          top: -1px;
-          position: absolute;
-          z-index: 1;
-        }
-
-        .grade-title:after {
-          border-color: transparent transparent transparent transparent;
-        }
-
-        .grade-title:before {
-          border-width: 12px;
-          display: block;
-          border-color: transparent transparent transparent $dark-300;
-          z-index: 0;
-          top: 0;
-        }
+      .dropbtn {
+        display: block !important;
       }
     }
   }

@@ -1,7 +1,7 @@
 <div class ="grade">
-    <div class = "dropdown">
-      <button class = "btn-primary dropdown-toggle btn" type ="button" data-toggle="dropdown">{{activeGrade.grade}}
-        <span class ="caret"></span>Grades</button>
+    <div class = "dropdown grade">
+        <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{activeGrade.grade}}Grades
+          <span class="caret"></span></button>
         <ul class= "dropdown-menu gradeData">
           {{#each taxonomyGrades as |taxonomyGrade|}}
            <li><label>{{input type="checkbox" checked = taxonomyGrade.checked click=(action 'onSelectGrade' taxonomyGrade)}}<span>{{taxonomyGrade.grade}}</span></label></li>
