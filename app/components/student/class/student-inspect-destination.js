@@ -233,8 +233,6 @@ export default Ember.Component.extend({
     component.delay(component.$('.proficiency-info-5'), delay);
     delay = delay + 1000;
     component.delay(component.$('.proficiency-info-6'), delay);
-    delay = delay + 1000;
-    component.delay(component.$('.proficiency-info-7'), delay);
   },
 
   delay(element, delay) {
