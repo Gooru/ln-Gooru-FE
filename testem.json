@@ -6,9 +6,7 @@
   "xunit_intermediate_output": false,
   "disable_watching": true,
   "parallel": 4,
-  "launch_in_ci": [
-    "PhantomJS"
-  ],
+  "launch_in_ci": ["PhantomJS"],
   "browser_args": {
     "Chrome": [
       "--no-sandbox",
@@ -18,10 +16,7 @@
       "--remote-debugging-port=9222"
     ]
   },
-  "launch_in_dev": [
-    "PhantomJS", 
-    "Chrome"
-  ],
+  "launch_in_dev": ["PhantomJS", "Chrome"],
   "proxies": {
     "/gooruapi": {
       "target": "http://localhost:8882"
