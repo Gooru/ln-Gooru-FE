@@ -204,6 +204,9 @@
             text-align: $tab-float-dir;
             padding: 5px 0 0 10px;
             list-style: none;
+            &.performance {
+              width: 100%;
+            }
 
             a {
               font-size: $font-size-base;
@@ -265,6 +268,7 @@
         text-align: center;
         padding: 0;
         display: inline-block;
+        width: 129px;
         height: 93px;
         vertical-align: top;
         border-bottom-right-radius: 4px;

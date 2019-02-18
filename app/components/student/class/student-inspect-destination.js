@@ -223,17 +223,11 @@ export default Ember.Component.extend({
     component.delay(component.$('.proficiency-info-3'), delay);
     component.delay(
       component.$(
-        '.student-inspect-competency-chart .chart-container #skyline-container polyline'
+        '.student-inspect-competency-chart .chart-container polyline'
       ),
       delay
     );
     delay = delay + 2000;
-    component.delay(
-      component.$(
-        '.student-inspect-competency-chart .chart-container #baseline-container polyline'
-      ),
-      delay
-    );
     component.delay(component.$('.proficiency-info-4'), delay);
     delay = delay + 1000;
     component.delay(component.$('.proficiency-info-5'), delay);
