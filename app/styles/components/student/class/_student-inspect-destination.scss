@@ -73,7 +73,6 @@
         grid-gap: 3px;
         grid-template-rows: auto auto;
 
-        .baseline-legend-container,
         .in-progress-container,
         .mastery-container,
         .not-started-container,
@@ -114,24 +113,13 @@
         }
 
         .skyline-container {
-          height: 25px;
+          height: 40px;
 
           .legend {
             width: 40px;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
             height: 10px;
             background-color: $white;
-          }
-        }
-
-        .baseline-legend-container {
-          height: 25px;
-
-          .legend {
-            width: 40px;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-            height: 10px;
-            background-color: $dark-400;
           }
         }
 
@@ -144,7 +132,7 @@
 
       .show-destination {
         position: fixed;
-        bottom: 10px;
+        bottom: 20px;
         color: $white;
         align-items: center;
         cursor: pointer;
@@ -156,6 +144,7 @@
         width: 160px;
         border-radius: 45px;
         font-size: 18px;
+        margin-left: 200px;
       }
     }
     //TODO new screen changes
@@ -190,7 +179,7 @@
 
       .next-route {
         position: fixed;
-        bottom: 10px;
+        bottom: 20px;
         color: $white;
         align-items: center;
         cursor: pointer;
@@ -375,7 +364,7 @@
 
       .study-course {
         position: fixed;
-        bottom: 10px;
+        bottom: 20px;
         color: $white;
         align-items: center;
         cursor: pointer;

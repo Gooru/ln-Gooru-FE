@@ -174,13 +174,9 @@
             }
 
             #baseline-container {
-              polyline {
+              line {
                 stroke: $dark-400;
                 stroke-width: 2px;
-                fill: none;
-                &.active {
-                  animation: drawLine linear 5s forwards;
-                }
               }
             }
 

@@ -1881,7 +1881,7 @@ export default Object.assign(quizzesTranslations, {
     },
     competency: {
       popover: {
-        title: '{{title}} HIGHLINE',
+        title: '{{title}} BOUNDARY',
         content:
           'You need to study all the standards between your skyline and this grade line to reach your destination.'
       }
@@ -1894,8 +1894,7 @@ export default Object.assign(quizzesTranslations, {
       mastery: '{{count}} Standards Mastered',
       'in-progress': '{{count}} Standards In Progress',
       'not-started': '{{count}} Standards Not Started',
-      'your-skyline': 'Your Skyline',
-      'your-baseline': 'Your Baseline'
+      'your-skyline': 'Your Skyline'
     },
     explanatory: {
       master: {
@@ -1921,9 +1920,11 @@ export default Object.assign(quizzesTranslations, {
       desc3:
         'As you master each of the competencies, the corresponding box is updated to dark blue.',
       desc4:
-        'The skyline is the thick white line that shows the highest competencies that you have mastered in each math domain. The Baseline is the black line at each domain and determines your starting level at this class.',
+        'Your current location in {{title}} is identified by the Skyline. The skyline is the thick white line that shows the highest competencies that you have mastered in each domain.',
       desc5:
-        'If the skyline is at the bottom of a domain, it means the system needs more information to be able to locate you in that topic. As soon as you start on the lessons and check for understandings, your skyline will bump up and update your proficiency in each domain.'
+        'If the skyline is at the bottom of a domain, it means the system is yet to determine your location for that domain. It does not signify that you have no proficiency at that domain. The skyline will get updated as soon as you begin to study and gain proficiency at competencies in that domain.',
+      desc6:
+        'The Baseline is the black line at each domain and determines your starting level at this class.'
     },
     units: {
       other: '{{count}} Units'

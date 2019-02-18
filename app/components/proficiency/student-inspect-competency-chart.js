@@ -126,12 +126,6 @@ export default Ember.Component.extend({
     CLASS_SKYLINE_INITIAL_DESTINATION.showDirections
   ),
 
-  /**
-   * @type {Array}
-   * Baseline points
-   */
-  baselinePoints: Ember.A([]),
-
   // -------------------------------------------------------------------------
   // Methods
 
@@ -188,10 +182,6 @@ export default Ember.Component.extend({
     let masterCount = 0;
     let inProgressCount = 0;
     let notStartedCount = 0;
-    let baselinePoints = Ember.A([]);
-    let baseLineDomains =
-      component.get('userProficiencyBaseLine.domains') || Ember.A([]);
-    let cellIndex = 0;
     domainCompetencies.map(domain => {
       let competencies = domain.competencies;
       let domainCode = domain.domainCode;
@@ -274,7 +264,6 @@ export default Ember.Component.extend({
         'isMastery',
         true
       );
-
       if (masteryCompetencies && masteryCompetencies.length === 0) {
         domainCompetenciesList.objectAt(0).set('skyline', true);
       } else {
@@ -296,14 +285,6 @@ export default Ember.Component.extend({
           ? domainCompetenciesList.length
           : maxNumberOfCompetencies;
       chartData = chartData.concat(domainCompetenciesList);
-      component.parseBaseLineData(
-        domain,
-        baseLineDomains,
-        baselinePoints,
-        cellIndex,
-        masteryCompetencies.length
-      );
-      cellIndex++;
     });
 
     component.set('competencyStatus', {
@@ -318,57 +299,7 @@ export default Ember.Component.extend({
     );
     component.set('taxonomyDomains', taxonomyDomains);
     component.set('chartData', chartData);
-    component.set('baselinePoints', baselinePoints);
     return chartData;
-  },
-
-  /**
-   * @function parseBaseLineData
-   * Method to parse base line data
-   */
-  parseBaseLineData(
-    domain,
-    baseLineDomains,
-    baselinePoints,
-    cellIndex,
-    numberOfMasteryCompetency
-  ) {
-    let component = this;
-    let cellWidth = component.get('cellWidth');
-    let cellHeight = component.get('cellHeight');
-    let domainData = baseLineDomains.findBy('domainCode', domain.domainCode);
-    let domainCompetencies = domainData ? domainData.competencies : [];
-    let domainWiseMasteredCompetencies = Ember.A([]);
-    domainCompetencies.map(competency => {
-      //Consider only the mastered competencies
-      if (competency.status === 4 || competency.status === 5) {
-        domainWiseMasteredCompetencies.push(competency);
-      }
-    });
-    let numberOfMasteredCompetency = domainWiseMasteredCompetencies.length;
-    let masteredCompetencyHighestSeq = numberOfMasteredCompetency
-      ? domainWiseMasteredCompetencies[numberOfMasteredCompetency - 1]
-        .competencySeq
-      : 0;
-    let x1 = cellIndex * cellWidth;
-    let y1 = cellHeight * masteredCompetencyHighestSeq; //stroke width
-    let x2 = x1 + cellWidth;
-    let y2 = y1;
-    y1 =
-      y1 === 0 || masteredCompetencyHighestSeq === numberOfMasteryCompetency
-        ? y1 + 3
-        : y1;
-    y2 =
-      y2 === 0 || masteredCompetencyHighestSeq === numberOfMasteryCompetency
-        ? y2 + 3
-        : y2;
-    let linePoint = {
-      x1: x1,
-      x2: x2,
-      y1: y1,
-      y2: y2
-    };
-    baselinePoints.push(linePoint);
   },
 
   /**
@@ -404,8 +335,6 @@ export default Ember.Component.extend({
     let domainBoundaryLineContainer = svg
       .append('g')
       .attr('id', 'course-covered-line-container');
-    let baseLineContainer = svg.append('g').attr('id', 'baseline-container');
-    component.set('baseLineContainer', baseLineContainer);
     component.set('skylineContainer', skylineContainer);
     component.set('domainBoundaryLineContainer', domainBoundaryLineContainer);
     const cards = cellContainer.selectAll('.competency').data(data);
@@ -434,7 +363,6 @@ export default Ember.Component.extend({
       .attr('height', cellHeight);
     cards.exit().remove();
     component.drawSkyline();
-    component.drawBaseline();
     component.drawDomainBoundaryLine();
   },
 
@@ -459,24 +387,16 @@ export default Ember.Component.extend({
       domainLevelSummary: competencyService.getDomainLevelSummary(filters),
       domainBoundaries: taxonomyService.fetchDomainGradeBoundaryBySubjectId(
         gradeId
-      ),
-      userProficiencyBaseLine: competencyService.getUserProficiencyBaseLine(
-        classId,
-        courseId,
-        studentId
       )
-    }).then(
-      ({ domainLevelSummary, domainBoundaries, userProficiencyBaseLine }) => {
-        component.set('domainBoundaries', domainBoundaries);
-        component.set('domainLevelSummary', domainLevelSummary);
-        component.set('userProficiencyBaseLine', userProficiencyBaseLine);
-        component.loadChartData();
-        let showDirections = component.get('showDirections');
-        if (showDirections) {
-          component.sendAction('onChartDrawComplete');
-        }
+    }).then(({ domainLevelSummary, domainBoundaries }) => {
+      component.set('domainBoundaries', domainBoundaries);
+      component.set('domainLevelSummary', domainLevelSummary);
+      component.loadChartData();
+      let showDirections = component.get('showDirections');
+      if (showDirections) {
+        component.sendAction('onChartDrawComplete');
       }
-    );
+    });
   },
 
   /**
@@ -620,37 +540,5 @@ export default Ember.Component.extend({
   clearChart() {
     let component = this;
     component.$('svg').remove();
-  },
-
-  /**
-   * @function drawBaseline
-   * Method to draw base line
-   */
-  drawBaseline() {
-    let component = this;
-    let baselinePoints = component.get('baselinePoints');
-    let baseLineContainer = d3.select('#baseline-container');
-    let strokeDasharray = 0;
-    let polyLinePoints = [];
-    baselinePoints.map(baselinePoint => {
-      strokeDasharray =
-        strokeDasharray +
-        (baselinePoint.x1 === baselinePoint.x2
-          ? Math.max(baselinePoint.y1, baselinePoint.y2)
-          : Math.max(baselinePoint.x1, baselinePoint.x2));
-      polyLinePoints.push(
-        ...[
-          baselinePoint.x1,
-          baselinePoint.y1,
-          baselinePoint.x2,
-          baselinePoint.y2
-        ]
-      );
-    });
-    baseLineContainer
-      .append('polyline')
-      .attr('points', polyLinePoints.toString())
-      .attr('stroke-dasharray', strokeDasharray)
-      .attr('stroke-dashoffset', strokeDasharray);
   }
 });
