@@ -531,7 +531,6 @@
               .subject-label {
                 padding-left: 16px;
               }
-
               &.in-active {
                 opacity: 0.5;
                 pointer-events: none;
@@ -699,12 +698,6 @@
             height: 40px;
             border-bottom: 1px solid #d7d7d7;
             border-right: 2px dashed #d7d7d7;
-            &.updated {
-              background-color: rgb(189, 220, 255);
-              button {
-                background-color: rgb(189, 220, 255);
-              }
-            }
 
             &:last-child {
               border-right: none;
@@ -802,6 +795,25 @@
               cursor: pointer;
               width: 30px;
               height: 20px;
+
+              .student-adj-lp {
+                cursor: default;
+                opacity: 0.5;
+
+                &.active {
+                  opacity: 1;
+                  cursor: pointer;
+                }
+
+                &.updating {
+                  opacity: 1;
+
+                  .replay {
+                    animation: rotating 1s linear infinite;
+                    color: #20a33c;
+                  }
+                }
+              }
             }
 
             .student-delete {

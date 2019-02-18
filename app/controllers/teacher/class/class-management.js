@@ -275,13 +275,13 @@ export default Ember.Controller.extend(ModalMixin, {
     updateClassStudentGradeOrigin: function(grade, studentId) {
       let student = this.get('class.members').findBy('id', studentId);
       student.set('tempGradeLowerBound', grade.get('id'));
-      this.send('applyClassMembersSettings', student);
+      student.set('enableRefreshButton', true);
     },
 
     updateClassStudentGradeDestination: function(grade, studentId) {
       let student = this.get('class.members').findBy('id', studentId);
       student.set('tempGradeUpperBound', grade.get('id'));
-      this.send('applyClassMembersSettings', student);
+      student.set('enableRefreshButton', true);
     },
 
     updateClassGradeLevel: function(grade) {
@@ -323,18 +323,20 @@ export default Ember.Controller.extend(ModalMixin, {
           saveSettings = true;
           doInitialSkyline = true;
           student.set('gradeLowerBound', settings.grade_lower_bound);
-          student.set('originUpdated', true);
         }
 
         if (upperBound && upperBound !== student.get('gradeUpperBound')) {
           // change at upper bound value detected
           saveSettings = true;
           student.set('gradeUpperBound', settings.grade_upper_bound);
-          student.set('destinationUpdated', true);
         }
 
         if (saveSettings) {
-          controller.updateClassMembersSettings(settings, doInitialSkyline);
+          controller.updateClassMembersSettings(
+            settings,
+            doInitialSkyline,
+            student
+          );
         }
       } else {
         Ember.Logger.log(
@@ -638,16 +640,21 @@ export default Ember.Controller.extend(ModalMixin, {
     });
   },
 
-  updateClassMembersSettings: function(settings, doInitialSkyline) {
+  updateClassMembersSettings: function(settings, doInitialSkyline, student) {
     const controller = this;
     const classId = this.get('class.id');
     const isPremiumClass = controller.get('isPremiumClass');
     const isOffline = controller.get('class.isOffline');
     const studentId = settings.users[0];
+    student.set('isRefreshing', true);
     controller
       .get('classService')
       .classMembersSettings(classId, settings)
       .then(function(/* responseData */) {
+        Ember.run.later(function() {
+          student.set('isRefreshing', false);
+        }, 1000);
+
         // TO-DO optmize
         controller.fetchClassMemberBounds();
         if (isPremiumClass && isOffline && doInitialSkyline) {
