@@ -317,6 +317,7 @@ export default Ember.Controller.extend(ModalMixin, {
         let upperBound = student.get('tempGradeUpperBound');
         let doInitialSkyline = false;
         let saveSettings = false;
+        student.set('enableRefreshButton', false);
         if (lowBound && lowBound !== student.get('gradeLowerBound')) {
           // change at lower bound value detected
           // we may need to trigger initial skyline compute
@@ -596,7 +597,7 @@ export default Ember.Controller.extend(ModalMixin, {
     );
   },
 
-  updateBoundValuesToStudent(reset) {
+  updateBoundValuesToStudent() {
     let controller = this;
     let members = controller.get('class.members');
     members.forEach(member => {
@@ -606,19 +607,14 @@ export default Ember.Controller.extend(ModalMixin, {
         let gradeBounds = grade.get(memberId);
         member.set('gradeLowerBound', gradeBounds.grade_lower_bound);
         member.set('gradeUpperBound', gradeBounds.grade_upper_bound);
-        if (reset) {
-          member.set('tempGradeLowerBound', null);
-          member.set('tempGradeUpperBound', null);
-          member.set('originUpdated', null);
-          member.set('destinationUpdated', null);
-        }
       }
     });
   },
 
   setupDisplayProperties() {
     let controller = this;
-    controller.updateBoundValuesToStudent(true);
+    let members = controller.get('class.members');
+    controller.updateBoundValuesToStudent(members);
     controller.set('enableApplySettings', false);
   },
 
