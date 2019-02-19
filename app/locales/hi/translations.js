@@ -1318,6 +1318,12 @@ export default Object.assign(quizzesTranslations, {
         'total-competencies-gained': 'कुल हासिल दक्षताएँ'
       },
       'class-activities': 'कक्षा की दैनिक गतिविधियां',
+      'offline-class-report': {
+        'class-report': 'कक्षा की रिपोर्ट',
+        'activity-report': 'गतिविधि रिपोर्ट',
+        'conducted-on': 'Conducted On',
+        'not-started': 'शुरू नही हुआ'
+      },
       'back-to-class-activities': 'कक्षा की दैनिक गतिविधियों पर वापस जाएं',
       'class-activities-tab': {
         today: 'आज:',
