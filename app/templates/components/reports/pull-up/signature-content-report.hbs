@@ -47,16 +47,9 @@
                 </div>
               {{/if}}
               <div class="content-count">
-                {{#if (eq collectionType 'assessment')}}
-                  {{#if content.questionCount}}
-                    <span class="{{if (gt content.resourceCount 0) '' 'invisible'}}" title="{{t "common.resources"}}">{{gru-icon name='local_library'}}  &nbsp; &nbsp;</span>
-                    <span class="{{if (gt content.questionCount 0) '' 'invisible'}}" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span class="{{if (gt content.questionCount 0) '' 'invisible'}}">{{content.questionCount}}</span>
-                  {{/if}}
-                {{else}}
-                  {{#if (or content.questionCount content.resourceCount)}}
-                    <span class="{{if (gt content.resourceCount 0) '' 'invisible'}}" title="{{t "common.resources"}}">{{gru-icon name='local_library'}}</span><span class="{{if (gt content.resourceCount 0) '' 'invisible'}}">{{content.resourceCount}}</span>
-                    <span class="{{if (gt content.questionCount 0) '' 'invisible'}}" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span class="{{if (gt content.questionCount 0) '' 'invisible'}}">{{content.questionCount}}</span>
-                  {{/if}}
+                {{#if (or content.questionCount content.resourceCount)}}
+                  <span class="{{if (gt content.resourceCount 0) '' 'invisible'}}" title="{{t "common.resources"}}">{{gru-icon name='local_library'}}</span><span class="{{if (gt content.resourceCount 0) '' 'invisible'}}">{{content.resourceCount}}</span>
+                  <span class="{{if (gt content.questionCount 0) '' 'invisible'}}" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span class="{{if (gt content.questionCount 0) '' 'invisible'}}">{{content.questionCount}}</span>
                 {{/if}}
               </div>
             </div>

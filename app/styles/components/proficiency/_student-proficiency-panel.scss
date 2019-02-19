@@ -123,6 +123,29 @@
     .student-profile {
       display: flex;
 
+      .label {
+        font-size: 17px;
+        font-weight: bold;
+        color: $charcoal-grey;
+        padding: 0;
+        text-align: left;
+        margin-right: 10px;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+        width: max-content;
+        align-items: center;
+        display: flex;
+        margin: auto;
+
+        .dropbtn {
+          display: block !important;
+          width: max-content;
+        }
+      }
+
       .taxonomy-grades-container {
         width: max-content;
         display: flex;

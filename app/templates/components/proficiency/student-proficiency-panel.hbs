@@ -5,38 +5,27 @@
       <img class="img-responsive" src="{{studentProfile.avatarUrl}}" />
     </div>
     <span class="username">{{studentProfile.fullName}}</span>
-    {{#if (and (gt taxonomyGrades.length 0) isShowMatrixChart)}}
-    <div class="taxonomy-grades-container">
-      {{proficiency.taxonomy-grades
-      taxonomyGrades=taxonomyGrades
-      activeGrade=activeGrade
-      classGrade=classGrade
-      subjectCode=subjectCode
-      onSelectGrade="onSelectGrade"
-    }}
   </div>
-    {{/if}}
-  </div>
-  <div class = "taxonomy-info">
-  <div class="dropdown categories">
-    <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{selectedCategory.title }}
+  <div class="taxonomy-info">
+    <div class="dropdown categories">
+      <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{selectedCategory.title }}
       <span class="caret"></span></button>
-    <ul class="dropdown-menu category-list">
-      {{#each taxonomyCategories as |category|}}
-        <li class="list-item category {{if (eq selectedCategory.id category.id) 'active'}}" {{action "onSelectCategory" category}}>{{category.title}}</li>
-      {{/each}}
-    </ul>
-  </div>
-  {{#if activeSubject}}
-    <div class="dropdown subjects">
-      <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{activeSubject.title}}
-        <span class="caret"></span></button>
-      <ul class="dropdown-menu subject-list">
-        {{#each taxonomySubjects as |subject|}}
-          <li class="list-item category {{if (eq activeSubject.id subject.id) 'active'}}" {{action "onSelectSubject" subject}}>{{subject.title}}</li>
+      <ul class="dropdown-menu category-list">
+        {{#each taxonomyCategories as |category|}}
+          <li class="list-item category {{if (eq selectedCategory.id category.id) 'active'}}" {{action "onSelectCategory" category}}>{{category.title}}</li>
         {{/each}}
       </ul>
     </div>
+    {{#if activeSubject}}
+      <div class="dropdown subjects">
+        <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{activeSubject.title}}
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu subject-list">
+          {{#each taxonomySubjects as |subject|}}
+            <li class="list-item category {{if (eq activeSubject.id subject.id) 'active'}}" {{action "onSelectSubject" subject}}>{{subject.title}}</li>
+          {{/each}}
+        </ul>
+      </div>
     {{/if}}
   </div>
 </div>
@@ -51,15 +40,17 @@
         class=class
         competencyMatrixDomains=competencyMatrixDomains
         competencyMatrixCoordinates=competencyMatrixCoordinates
-        isSelectGrade=isSelectGrade
         isSelectBaseLine=isSelectBaseLine
         userProficiencyBaseLine=userProficiencyBaseLine
-        selectedGrade=selectedGrade
         selectedCompetency=selectedCompetency
         selectedDomain=selectedDomain
         onShownBaseLine="onShownBaseLine"
+        isShowMatrixChart=isShowMatrixChart
         onDomainSelect="onDomainSelect"
         selectedDomain=selectedDomain
+        taxonomyGrades=taxonomyGrades
+        classGrade=classGrade
+        subjectCode=subjectCode
         onSelectCompetency="onSelectCompetency"
         selectedCompetency=selectedCompetency
       }}

@@ -9,26 +9,48 @@ export default Ember.Component.extend({
    * @property {Object}
    * Property to store student profile
    */
-
   taxonomyService: Ember.inject.service('taxonomy'),
 
   /**
    * @property {Object}
    * Property to store active subject selected
    */
-  studentProfile: null,
+  activeSubject: null,
 
   /**
    * @property {Object}
-   * Property to store user selected subject info
+   * Property to store timeLine
    */
-  selectedSubject: null,
+  timeLine: null,
+
+  /**
+   * @property {Object}
+   * Property to store class data
+   */
+  class: null,
+
+  /**
+   * @property {Object}
+   * Property to store selected grade
+   */
+  selectedGrade: null,
+
+  /**
+   * @property {Boolean}
+   * Property to find is student or not
+   */
+  isStudent: null,
 
   /**
    * @property {Array}
    * Property to store taxonomy categories
    */
   categories: null,
+  /**
+   * @property {Boolean}
+   * Property to show matrix chart or not
+   */
+  isShowMatrixChart: null,
 
   /**
    * @property {Array}
@@ -76,11 +98,6 @@ export default Ember.Component.extend({
    */
   timeSeriesStartDate: null,
 
-  /**
-   * @property {Boolean} isShowMatrixChart
-   */
-  isShowMatrixChart: false,
-
   selectedCategory: null,
 
   subjectChange: Ember.observer('activeSubject', function() {
@@ -124,16 +141,11 @@ export default Ember.Component.extend({
     onSelectMonth(date) {
       this.sendAction('onSelectMonth', date);
     },
-    onSelectGrade(gradeData) {
-      let component = this;
-      component.sendAction('onSelectGrade', gradeData);
-    },
 
-    onSelectGrade(gradeData) {
+    onToggleBaseline() {
       let component = this;
-      component.sendAction('onSelectGrade', gradeData);
+      component.toggleProperty('isSelectBaseLine');
     },
-
     goBack() {
       let component = this;
       let isStudent = component.get('isStudent');
@@ -169,6 +181,7 @@ export default Ember.Component.extend({
      */
     onSelectSubject(subject) {
       let component = this;
+      component.set('isSelectBaseLine', false);
       component.set('activeSubject', subject);
     },
 

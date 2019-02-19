@@ -1757,6 +1757,10 @@ export default Object.assign(quizzesTranslations, {
     twelfth: '12'
   },
 
+  'grade-selector': {
+    placeholder: 'Choose Grade Lines to Display'
+  },
+
   'standard-dropdown': {
     placeholder: 'Browse by Standard'
   },
@@ -2931,7 +2935,11 @@ export default Object.assign(quizzesTranslations, {
     nodata: 'You are yet to start your journey for this competency'
   },
   'learning-map': {
-    nodata: 'You are yet to start your learning-map for this competency'
+    'practice-question': 'practice questions',
+    'no-practice-questions':
+      'There are no practice questions for this competency',
+    'solved-examples': 'solved examples',
+    'no-solved-examples': 'There are no solved examples for this competency'
   },
 
   'self-report': {

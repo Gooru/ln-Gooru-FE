@@ -18,6 +18,7 @@ export default Ember.Component.extend({
       let component = this;
       let competencies = component.get('competencies');
       selectedCompetency.set('domainName', component.get('domain.domainName'));
+      selectedCompetency.set('domainCode', component.get('domain.domainCode'));
       component.sendAction(
         'onSelectCompetency',
         selectedCompetency,

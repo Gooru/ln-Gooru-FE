@@ -9,8 +9,8 @@
     {{#each competencies as |competency|}}
       <div class="competency-info" {{action 'onInspectCompetency' competency}}>
         <div class="competency">
-          <div class="competency-status status-{{competency.status}}"></div>
           <div class="title">{{competency.competencyCode}}</div>
+          <div class="competency-status status-{{competency.status}}"></div>
         </div>
         <div class="competency-desc">{{competency.competencyStudentDesc}}</div>
       </div>
