@@ -531,6 +531,7 @@
               .subject-label {
                 padding-left: 16px;
               }
+
               &.in-active {
                 opacity: 0.5;
                 pointer-events: none;
@@ -673,7 +674,24 @@
       .student-settings-sec {
         @extend .sec-panel;
         padding-left: 10px;
-        padding-top: 10px;
+
+        .apply-setting {
+          display: grid;
+          justify-items: end;
+          border-bottom: 1px solid #d7d7d7;
+
+          .apply-member-setting-btn {
+            width: 135px;
+            background: #0076ba;
+            color: #fff;
+            border-top-right-radius: 4px;
+            text-align: center;
+            text-transform: uppercase;
+            padding-top: 15px;
+            padding-bottom: 10px;
+            cursor: pointer;
+          }
+        }
 
         table {
           width: 100%;
@@ -685,8 +703,7 @@
             font-size: 10px;
             text-transform: uppercase;
             border-right: 2px dashed #d7d7d7;
-            padding-left: 10px;
-            padding-right: 10px;
+            padding: 10px;
             max-width: 100px;
 
             &:last-child {
@@ -698,7 +715,12 @@
             height: 40px;
             border-bottom: 1px solid #d7d7d7;
             border-right: 2px dashed #d7d7d7;
-
+            &.updated {
+              background-color: rgb(189, 220, 255);
+              button {
+                background-color: rgb(189, 220, 255);
+              }
+            }
             &:last-child {
               border-right: none;
             }
@@ -707,8 +729,7 @@
               .selected-item-label {
                 line-height: 1;
                 display: block;
-                text-align: center;
-                padding-left: 5px;
+                padding-left: 16px;
                 padding-right: 5px;
               }
             }
@@ -790,31 +811,6 @@
             align-items: center;
             grid-template-columns: 50px 1fr 1fr;
             justify-items: center;
-
-            .student-action-col {
-              cursor: pointer;
-              width: 30px;
-              height: 20px;
-
-              .student-adj-lp {
-                cursor: default;
-                opacity: 0.5;
-
-                &.active {
-                  opacity: 1;
-                  cursor: pointer;
-                }
-
-                &.updating {
-                  opacity: 1;
-
-                  .replay {
-                    animation: rotating 1s linear infinite;
-                    color: #20a33c;
-                  }
-                }
-              }
-            }
 
             .student-delete {
               opacity: 0.3;
