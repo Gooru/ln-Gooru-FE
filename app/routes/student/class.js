@@ -81,6 +81,19 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           route.transitionTo('student.class.class-activities');
         } else if (item === 'study-player') {
           route.studyPlayer(controller.get('classmodel').currentLocation);
+        } else if (item === 'profile-prof') {
+          let userId = this.get('session.userId');
+          controller.transitionToRoute(
+            'student.class.student-learner-proficiency',
+            {
+              queryParams: {
+                userId: userId,
+                classId: controller.get('class').id,
+                courseId: controller.get('course').id,
+                role: 'student'
+              }
+            }
+          );
         }
       }
     }
