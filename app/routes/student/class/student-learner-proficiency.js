@@ -20,6 +20,7 @@ export default Ember.Route.extend({
     didTransition: function() {
       Ember.run.later(function() {
         $('.student.class').css('margin', 'unset');
+        $('.student.class').css('width', '100vw');
       });
     }
   },
@@ -91,5 +92,10 @@ export default Ember.Route.extend({
   resetController(controller) {
     controller.set('showDomainInfo', false);
     controller.set('showCompetencyInfo', false);
+    // Ember.run.later(function() {
+    $('.student.class').css('margin', 'auto');
+    $('.student.class').css('width', '960px');
+
+    // });
   }
 });
