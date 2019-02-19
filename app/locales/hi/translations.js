@@ -1251,6 +1251,8 @@ export default Object.assign(quizzesTranslations, {
       'back-to-archived': 'संग्रहीत कक्षाओं में वापस जाएं',
       'class-management': 'कक्षा प्रबंधन',
       atc: 'शीर्ष द़ृश्य',
+      'performance-overview': 'प्रदर्शन सारांश',
+      'student-proficiency': 'छात्र कौशल',
       'class-management-tab': {
         actions: 'कार्रवाई',
         'assessment-min-score': 'ट्राफियों के लिए न्यूनतम स्कोर मूल्यांकन',
