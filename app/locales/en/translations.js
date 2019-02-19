@@ -2930,6 +2930,9 @@ export default Object.assign(quizzesTranslations, {
     heading: 'YOUR JOURNEY',
     nodata: 'You are yet to start your journey for this competency'
   },
+  'student-card': {
+    message: 'This {{type}} has been deleted'
+  },
 
   'self-report': {
     'your-score': 'Your Score',
