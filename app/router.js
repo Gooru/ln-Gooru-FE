@@ -190,12 +190,7 @@ Router.map(function() {
         this.route('setup-in-complete');
         this.route('proficiency');
         this.route('diagnosis-of-knowledge');
-        this.route('student-learner-proficiency', {
-          path: '/class/:classId/student-learner-proficiency',
-          function() {
-            this.transitionTo('student-learner-proficiency');
-          }
-        });
+        this.route('student-learner-proficiency');
       }
     );
     this.route(

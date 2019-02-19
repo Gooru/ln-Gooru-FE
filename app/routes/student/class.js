@@ -83,11 +83,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           route.studyPlayer(controller.get('classmodel').currentLocation);
         } else if (item === 'profile-prof') {
           let userId = this.get('session.userId');
-          route.transitionTo(
+          controller.transitionToRoute(
             'student.class.student-learner-proficiency',
-            userId,
             {
               queryParams: {
+                userId: userId,
                 classId: controller.get('class').id,
                 courseId: controller.get('course').id,
                 role: 'student'

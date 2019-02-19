@@ -101,12 +101,19 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
           }
         });
       } else if (item === 'profile') {
-        route.transitionTo('student-locate', {
-          queryParams: {
-            classId: classId,
-            courseId: courseId
+        let userId = this.get('session.userId');
+        route.transitionTo(
+          'student.class.student-learner-proficiency',
+          classId,
+          {
+            queryParams: {
+              userId: userId,
+              classId: classId,
+              courseId: courseId,
+              role: 'student'
+            }
           }
-        });
+        );
       } else if (item === 'course-map') {
         route.transitionTo('student.class.course-map', classId);
       } else if (item === 'class-activities') {
