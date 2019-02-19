@@ -130,11 +130,14 @@ export default Ember.Component.extend({
     let component = this;
     let ticksContainer = d3.selectAll('.tick');
     let startDate = new Date(component.get('startDate'));
-    var startDates = moment([startDate.getFullYear(), startDate.getMonth()]);
+    var timeSeriesStartDate = moment([
+      startDate.getFullYear(),
+      startDate.getMonth()
+    ]);
     ticksContainer.attr('y', function(date) {
       let tickCotainer = d3.select(this);
-      var currentDate = moment([date.getFullYear(), date.getMonth()]);
-      if (currentDate < startDates) {
+      var timeSeriesDate = moment([date.getFullYear(), date.getMonth()]);
+      if (timeSeriesDate < timeSeriesStartDate) {
         tickCotainer.attr('class', 'tick gray-out');
       }
     });
