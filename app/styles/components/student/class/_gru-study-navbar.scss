@@ -110,7 +110,7 @@
         }
         /* Large devices (laptops/desktops, 992px and up) */
         @media only screen and (min-width: 992px) {
-          grid-template-columns: 90px 120px 1fr 60px 120px 120px;
+          grid-template-columns: 59px 120px 1fr 60px 120px 120px;
 
           .class-activities,
           .course-map.study-player,
@@ -167,7 +167,7 @@
         }
         /* Large devices (laptops/desktops, 992px and up) */
         @media only screen and (min-width: 992px) {
-          grid-template-columns: 90px 120px 1fr 60px 60px 60px;
+          grid-template-columns: 59px 120px 1fr 60px 60px 60px;
 
           .class-activities,
           .course-map.study-player,
@@ -254,7 +254,7 @@
       }
       /* Large devices (laptops/desktops, 992px and up) */
       @media only screen and (min-width: 992px) {
-        grid-template-columns: 88px 170px 145px 1fr 59px 59px 59px;
+        grid-template-columns: 59px 170px 145px 1fr 59px 59px 59px;
 
         .class-activities,
         .course-map.study-player,

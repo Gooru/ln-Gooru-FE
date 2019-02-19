@@ -275,13 +275,13 @@ export default Ember.Controller.extend(ModalMixin, {
     updateClassStudentGradeOrigin: function(grade, studentId) {
       let student = this.get('class.members').findBy('id', studentId);
       student.set('tempGradeLowerBound', grade.get('id'));
-      this.send('applyClassMembersSettings', student);
+      student.set('enableRefreshButton', true);
     },
 
     updateClassStudentGradeDestination: function(grade, studentId) {
       let student = this.get('class.members').findBy('id', studentId);
       student.set('tempGradeUpperBound', grade.get('id'));
-      this.send('applyClassMembersSettings', student);
+      student.set('enableRefreshButton', true);
     },
 
     updateClassGradeLevel: function(grade) {
@@ -317,24 +317,27 @@ export default Ember.Controller.extend(ModalMixin, {
         let upperBound = student.get('tempGradeUpperBound');
         let doInitialSkyline = false;
         let saveSettings = false;
+        student.set('enableRefreshButton', false);
         if (lowBound && lowBound !== student.get('gradeLowerBound')) {
           // change at lower bound value detected
           // we may need to trigger initial skyline compute
           saveSettings = true;
           doInitialSkyline = true;
           student.set('gradeLowerBound', settings.grade_lower_bound);
-          student.set('originUpdated', true);
         }
 
         if (upperBound && upperBound !== student.get('gradeUpperBound')) {
           // change at upper bound value detected
           saveSettings = true;
           student.set('gradeUpperBound', settings.grade_upper_bound);
-          student.set('destinationUpdated', true);
         }
 
         if (saveSettings) {
-          controller.updateClassMembersSettings(settings, doInitialSkyline);
+          controller.updateClassMembersSettings(
+            settings,
+            doInitialSkyline,
+            student
+          );
         }
       } else {
         Ember.Logger.log(
@@ -594,7 +597,7 @@ export default Ember.Controller.extend(ModalMixin, {
     );
   },
 
-  updateBoundValuesToStudent(reset) {
+  updateBoundValuesToStudent() {
     let controller = this;
     let members = controller.get('class.members');
     members.forEach(member => {
@@ -604,19 +607,14 @@ export default Ember.Controller.extend(ModalMixin, {
         let gradeBounds = grade.get(memberId);
         member.set('gradeLowerBound', gradeBounds.grade_lower_bound);
         member.set('gradeUpperBound', gradeBounds.grade_upper_bound);
-        if (reset) {
-          member.set('tempGradeLowerBound', null);
-          member.set('tempGradeUpperBound', null);
-          member.set('originUpdated', null);
-          member.set('destinationUpdated', null);
-        }
       }
     });
   },
 
   setupDisplayProperties() {
     let controller = this;
-    controller.updateBoundValuesToStudent(true);
+    let members = controller.get('class.members');
+    controller.updateBoundValuesToStudent(members);
     controller.set('enableApplySettings', false);
   },
 
@@ -638,16 +636,21 @@ export default Ember.Controller.extend(ModalMixin, {
     });
   },
 
-  updateClassMembersSettings: function(settings, doInitialSkyline) {
+  updateClassMembersSettings: function(settings, doInitialSkyline, student) {
     const controller = this;
     const classId = this.get('class.id');
     const isPremiumClass = controller.get('isPremiumClass');
     const isOffline = controller.get('class.isOffline');
     const studentId = settings.users[0];
+    student.set('isRefreshing', true);
     controller
       .get('classService')
       .classMembersSettings(classId, settings)
       .then(function(/* responseData */) {
+        Ember.run.later(function() {
+          student.set('isRefreshing', false);
+        }, 1000);
+
         // TO-DO optmize
         controller.fetchClassMemberBounds();
         if (isPremiumClass && isOffline && doInitialSkyline) {
