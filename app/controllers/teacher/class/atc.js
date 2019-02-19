@@ -130,6 +130,12 @@ export default Ember.Controller.extend({
     return isStudentsAvailable && isCourseMapped;
   }),
 
+  /**
+   * @property {Boolean} isShowActivitySearchContentPullup
+   * Property to show/hide activity search content pullup
+   */
+  isShowActivitySearchContentPullup: false,
+
   // -------------------------------------------------------------------------
   // Events
   initializeController() {
@@ -183,6 +189,13 @@ export default Ember.Controller.extend({
       controller.transitionToRoute('teacher.class.class-activities', classId, {
         queryParams
       });
+    },
+
+    //Action triggered when click on competency suggestion
+    onSuggestAtCompetency(competency) {
+      const controller = this;
+      controller.set('selectedCompetencyData', competency);
+      controller.set('isShowActivitySearchContentPullup', true);
     }
   },
 

@@ -1,0 +1,83 @@
+<div class="backdrop" {{action 'onClosePullup'}}></div>
+<div class="activity-search-container">
+  <div class="header-container">
+    <div class="header-info-container">
+      <div class="close-pullup" {{action "onClosePullup"}}>{{gru-icon name="arrow_downward"}}</div>
+      <div class="library-type-container">
+        <div class="dropdown">
+          <div class="active-item">
+            <div class="label ellipsis">{{gru-icon name="explore"}}<span>{{t activeMenuItem.label}}</span></div>
+            <div class="icon">{{gru-icon name="arrow_drop_down"}}</div>
+          </div>
+          <div class="dropdown-content">
+            {{#each menuItems as |menuItem|}}
+              <div class="list-item {{if menuItem.selected 'active'}}" {{action "onChooseMenuItem" menuItem}}>{{t menuItem.label}}</div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+      {{#unless isShowCourseMapContents}}
+        <div class="search-container">
+          <div class="input-container">
+            {{input
+              type="text"
+              class="activity-search-term"
+              value=activitySearchTerm
+            }}
+          </div>
+          <div class="serach-icon-container" {{action "onSearchActivities"}}>
+            {{gru-icon name="search" class="activity-search-icon"}}
+          </div>
+        </div>
+      {{/unless}}
+    </div>
+    {{#unless isShowCourseMapContents}}
+      <div class="activity-filter-container">
+        <div class="activity-types">
+          {{#each contentTypes as |contentType|}}
+            <div class="{{contentType.format}} activity-type {{if (eq activeContentType contentType.format) 'active'}}" {{action "onFilterBy" contentType.format}}><i class="icon"></i></div>
+          {{/each}}
+        </div>
+      </div>
+    {{/unless}}
+  </div>
+  <div class="body-container">
+    {{#if isLoading}}
+      <div class="loading-spinner-container">
+        {{three-bounce-spinner}}
+      </div>
+    {{else}}
+      {{#if isShowCourseMapContents}}
+        <div class="ca-course-map-container">
+          {{teacher.class.ca-course-map onAddContentToDCA="onAddActivity" onScheduleContentToDCA="onScheduleActivity" classId=classId courseId=courseId}}
+        </div>
+      {{else}}
+        <div class="content-list-container">
+          {{#each contentList as |content|}}
+            <div class="content-container">
+              <div class="content-title">{{content.title}}</div>
+              <div class="content-info-container">
+                <div class="content-description">{{content.learningObjectives}}</div>
+                <div class="action-container">
+                  {{#if content.isAdded}}
+                    <div class="activity-added">{{gru-icon name="done"}}</div>
+                  {{else}}
+                    <div class="add-activity" {{action "onAddActivity" content}}>{{gru-icon name="add"}}</div>
+                  {{/if}}
+                  <div class="assign-date" onclick={{action "onScheduleActivity" content}}>{{gru-icon name="update"}}</div>
+                </div>
+              </div>
+            </div>
+          {{else}}
+            <div class="no-content-available">{{t 'teacher-landing.class.students-tab.data-not-available'}}</div>
+          {{/each}}
+        </div>
+      {{/if}}
+    {{/if}}
+  </div>
+</div>
+
+
+<div class="schedule-ca-datepicker-container ca-datepicker-popover-container">
+  {{ca-date-picker  userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
+</div>

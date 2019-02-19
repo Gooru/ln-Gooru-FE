@@ -64,7 +64,7 @@
           .competency-completion-info-container {
             border-bottom: 2px solid rgba(0, 0, 0, 0.3);
             display: grid;
-            grid-template-columns: 70% auto;
+            grid-template-columns: 70% auto auto;
             align-items: center;
             padding: 5px 0;
             margin-left: 15px;
@@ -80,6 +80,11 @@
                 font-weight: bold;
                 color: #37424b;
               }
+            }
+            .competency-suggestion {
+              justify-self: center;
+              color: #f98e4e;
+              line-height: 10px;
             }
             .competency-completion-performance {
               display: grid;

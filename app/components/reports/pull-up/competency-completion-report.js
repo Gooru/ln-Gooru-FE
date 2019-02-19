@@ -44,6 +44,12 @@ export default Ember.Component.extend({
     onClosePullup() {
       const component = this;
       component.closePullUp();
+    },
+
+    //Action triggered when click on competency suggestion
+    onSuggestAtCompetency(competency) {
+      const component = this;
+      component.sendAction('onSuggestAtCompetency', competency);
     }
   },
 
