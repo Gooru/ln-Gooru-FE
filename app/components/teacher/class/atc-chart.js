@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import d3 from 'd3';
-import {
-  getGradeColor
-} from 'gooru-web/utils/utils';
+import { getGradeColor } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
