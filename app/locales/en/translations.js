@@ -2945,6 +2945,9 @@ export default Object.assign(quizzesTranslations, {
       'There are no practice questions for this competency',
     'solved-examples': 'solved examples',
     'no-solved-examples': 'There are no solved examples for this competency'
+  }, 
+  'student-card': {
+    message: 'This {{type}} has been deleted'
   },
 
   'self-report': {

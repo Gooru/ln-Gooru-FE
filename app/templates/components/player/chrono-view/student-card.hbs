@@ -2,6 +2,7 @@
   {{three-bounce-spinner}}
 {{else}}
   <div class="card-container" {{action "onSelectCard" activity}}>
+    {{#if collection}}
     <div class="collection-img" style="background-image: url({{collection.thumbnailUrl}})">
     </div>
     <div class="collection-performance">
@@ -55,5 +56,10 @@
         </div>
       {{/each}}
     </div>
+    {{else}}
+    <div class="no-resource">
+      <span> {{t 'student-card.message' type=type}}</span>
+    </div>
+    {{/if}}
   </div>
 {{/if}}
