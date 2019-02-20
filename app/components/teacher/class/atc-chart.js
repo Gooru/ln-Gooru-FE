@@ -1,12 +1,6 @@
 import Ember from 'ember';
 import d3 from 'd3';
-<<<<<<< HEAD
 import { getGradeColor } from 'gooru-web/utils/utils';
-=======
-import {
-  getGradeColor
-} from 'gooru-web/utils/utils';
->>>>>>> Extract subject code from preference
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
