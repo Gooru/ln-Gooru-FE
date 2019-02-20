@@ -48,6 +48,12 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         if (resp && resp.default === false) {
           $('.navbar-default').css('display', 'none');
           this.tenantRedirectURL = resp.login_url;
+          var timer = window.localStorage.getItem('notificationtimer');
+          if (timer) {
+            clearInterval(timer);
+            window.localStorage.removeItem('logouturl');
+          }
+          window.localStorage.setItem('logouturl', this.tenantRedirectURL);
         } else {
           if (isProd && redirectUrl) {
             router.get('session').invalidate();

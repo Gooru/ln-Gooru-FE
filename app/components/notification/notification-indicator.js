@@ -257,6 +257,7 @@ export default Ember.Component.extend({
     this.timer = setInterval(() => {
       component.getNotifications(component.getDefaultFilter()); //Force default filter for first time load and refresh
     }, NOTIFICATION_SETTINGS.polling_interval);
+    window.localStorage.setItem('notificationtimer', this.timer);
   },
 
   // -------------------------------------------------------------------------
