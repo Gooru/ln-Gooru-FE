@@ -2215,6 +2215,7 @@ export default Object.assign(quizzesTranslations, {
     }
   },
   taxonomy: {
+    grades: 'Grades',
     'gru-taxonomy-selector': {
       'add-secondary': 'Add secondary',
       'choose-subject': 'Choose Subject',
@@ -2916,7 +2917,11 @@ export default Object.assign(quizzesTranslations, {
     },
     'domain-report': 'Domain Report'
   },
-
+  'competency-info-content': {
+    journey: 'JOURNEY',
+    metadata: 'METADATA',
+    'learning-map': 'LEARNING MAP'
+  },
   'competency-meta-data': {
     title: 'ALT-CONCEPTS',
     heading: {

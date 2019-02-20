@@ -6,7 +6,7 @@
 <div class="chart-area {{unless isExpandChartEnabled 'compressed-view'}}">
   <div class="actions">
     {{#if (and (gt taxonomyGrades.length 0) isShowMatrixChart)}}
-      {{proficiency.grade-selector taxonomyGrades=taxonomyGrades onSelectGrade="onSelectGrade" activeGrade=activeGrade}}
+      {{proficiency.grade-selector taxonomyGrades=taxonomyGrades onToggleBaseline="onToggleBaseline" onSelectGrade="onSelectGrade" activeGrade=activeGrade}}
     {{/if}}
     <div class="toggle-chart" {{action "onToggleChart"}}>
       {{#if isExpandChartEnabled}}

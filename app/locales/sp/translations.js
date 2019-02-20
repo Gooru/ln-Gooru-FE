@@ -945,6 +945,40 @@ export default Object.assign(quizzesTranslations, {
       }
     }
   },
+
+  'grade-selector': {
+    placeholder: 'Choose Grade Lines to Display'
+  },
+  'competency-info-content': {
+    journey: 'JOURNEY',
+    metadata: 'METADATA',
+    'learning-map': 'LEARNING MAP'
+  },
+  'competency-meta-data': {
+    title: 'ALT-CONCEPTS',
+    heading: {
+      micro: 'MICRO COMPETENCIES',
+      prequisite: 'PREQUISITE COMPETENCIES'
+    },
+    nodata: {
+      micro: 'There are no micro-competencies defined for this competency',
+      prequisite:
+        'There are no prerequisite-competencies defined for this competency',
+      competency: 'There are no alt-concepts defined for this competency'
+    }
+  },
+  'student-journey': {
+    heading: 'YOUR JOURNEY',
+    nodata: 'You are yet to start your journey for this competency'
+  },
+  'learning-map': {
+    'practice-question': 'practice questions',
+    'no-practice-questions':
+      'There are no practice questions for this competency',
+    'solved-examples': 'solved examples',
+    'no-solved-examples': 'There are no solved examples for this competency'
+  },
+
   user: {
     'joined-classes': {
       zero: 'Actualmente estás inscrito en aulas de {{count}}',
@@ -1710,6 +1744,7 @@ export default Object.assign(quizzesTranslations, {
     }
   },
   taxonomy: {
+    grades: 'Grades',
     'gru-taxonomy-selector': {
       'primary-subject-and-course': 'Marco y Curso de Normas',
       'add-secondary': 'Agregar secundario',

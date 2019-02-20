@@ -141,7 +141,7 @@
         margin: auto;
 
         .dropbtn {
-          display: block !important;
+          display: block;
           width: max-content;
         }
       }
@@ -193,7 +193,7 @@
         font-size: 16px;
         text-transform: capitalize;
         border: none;
-        display: block !important;
+        display: block;
       }
     }
 
@@ -213,7 +213,7 @@
       margin: auto;
 
       .dropbtn {
-        display: block !important;
+        display: block;
       }
     }
     /* Dropdown Content (Hidden by Default) */

@@ -37,8 +37,8 @@ export default Ember.Component.extend({
       trigger: 'hover',
       animation: true,
       placement: 'auto',
-      content: function() {
-        return $('.more-active-grades').html();
+      content: () => {
+        return component.$('.more-active-grades').html();
       }
     });
   },

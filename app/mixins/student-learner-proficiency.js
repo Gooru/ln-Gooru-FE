@@ -350,9 +350,7 @@ export default Ember.Mixin.create({
     };
     if (component.get('subjectCode')) {
       return Ember.RSVP.hash({
-        taxonomyGrades: Ember.RSVP.resolve(
-          taxonomyService.fetchGradesBySubject(filters)
-        )
+        taxonomyGrades: taxonomyService.fetchGradesBySubject(filters)
       }).then(({ taxonomyGrades }) => {
         component.set(
           'taxonomyGrades',

@@ -4,13 +4,11 @@ export default Ember.Component.extend({
   classNames: ['student-proficiency-panel'],
 
   // -------------------------------------------------------------------------
-  // Properties
-  /**
-   * @property {Object}
-   * Property to store student profile
-   */
+  // Dependencies
   taxonomyService: Ember.inject.service('taxonomy'),
 
+  // -------------------------------------------------------------------------
+  // Properties
   /**
    * @property {Object}
    * Property to store active subject selected
@@ -100,12 +98,6 @@ export default Ember.Component.extend({
 
   selectedCategory: null,
 
-  subjectChange: Ember.observer('activeSubject', function() {
-    let component = this;
-    let subject = component.get('activeSubject');
-    component.sendAction('onSubjectChange', subject);
-  }),
-
   /**
    * @property {Date}
    * Property to store course started date or one year before date
@@ -146,6 +138,7 @@ export default Ember.Component.extend({
       let component = this;
       component.toggleProperty('isSelectBaseLine');
     },
+
     goBack() {
       let component = this;
       let isStudent = component.get('isStudent');
@@ -183,6 +176,7 @@ export default Ember.Component.extend({
       let component = this;
       component.set('isSelectBaseLine', false);
       component.set('activeSubject', subject);
+      component.sendAction('onSubjectChange', subject);
     },
 
     /**

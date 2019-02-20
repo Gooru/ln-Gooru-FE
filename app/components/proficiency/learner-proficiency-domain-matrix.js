@@ -132,7 +132,8 @@ export default Ember.Component.extend({
     let selectedCompetency = component.get('selectedCompetency');
     let selectedDomain = component.get('selectedDomain');
     component.$('#render-proficiency-matrix').addClass('highlight');
-    let domainSeq = selectedCompetency.domainSeq || selectedDomain.domainSeq;
+    let domainSeq =
+      selectedCompetency.get('domainSeq') || selectedDomain.get('domainSeq');
     component.$('.competency').removeClass('active active-cell');
     component
       .$(`.competency-${domainSeq}-${selectedCompetency.competencySeq}`)
@@ -356,14 +357,8 @@ export default Ember.Component.extend({
     let component = this;
     if (!component.get('isSelectBaseLine')) {
       component.$('#baseline-container').addClass('hidden-line');
-      Ember.$(
-        '.taxonomy-grades .taxonomy-grades-container .baseline-toggle'
-      ).removeClass('active-baseline');
     } else {
       component.$('#baseline-container').removeClass('hidden-line');
-      Ember.$(
-        '.taxonomy-grades .taxonomy-grades-container .baseline-toggle'
-      ).addClass('active-baseline');
     }
   },
 
@@ -376,14 +371,10 @@ export default Ember.Component.extend({
     let activeGradeList = component.get('activeGradeList');
     let domainBoundariesContainer = component.get('domainBoundariesContainer');
     let selectedGradeSeq = gradeData.sequence;
-    let selectedGradeElement = Ember.$(
-      `.taxonomy-grades .taxonomy-grades-container .taxonomy-grades .grade-list .grade-sequence-${selectedGradeSeq}`
-    );
     let selectedGradeLine = component.$(`.grade-${gradeData.sequence}-line`);
     if (activeGradeList[`${selectedGradeSeq}`]) {
       delete activeGradeList[`${selectedGradeSeq}`];
       selectedGradeLine.addClass('hidden-line');
-      selectedGradeElement.removeClass('active-grade');
     } else {
       activeGradeList[`${gradeData.sequence}`] = gradeData;
       if (!domainBoundariesContainer[`${selectedGradeSeq}`]) {
@@ -397,7 +388,6 @@ export default Ember.Component.extend({
         component.loadChartData();
       }
       selectedGradeLine.removeClass('hidden-line');
-      selectedGradeElement.addClass('active-grade');
     }
     component.set('domainBoundariesContainer', domainBoundariesContainer);
     component.set('activeGradeList', activeGradeList);

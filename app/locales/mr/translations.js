@@ -2171,6 +2171,7 @@ export default Object.assign(quizzesTranslations, {
     }
   },
   taxonomy: {
+    grades: 'Grades',
     'gru-taxonomy-selector': {
       'add-secondary': 'Add secondary',
       'choose-subject': 'विषय निवडा',
@@ -2861,7 +2862,15 @@ export default Object.assign(quizzesTranslations, {
     },
     'domain-report': 'डोमेन अहवाल'
   },
+  'competency-info-content': {
+    journey: 'JOURNEY',
+    metadata: 'METADATA',
+    'learning-map': 'LEARNING MAP'
+  },
 
+  'grade-selector': {
+    placeholder: 'Choose Grade Lines to Display'
+  },
   'competency-meta-data': {
     title: 'ALT-CONCEPTS',
     heading: {
@@ -2878,6 +2887,13 @@ export default Object.assign(quizzesTranslations, {
   'student-journey': {
     heading: 'YOUR JOURNEY',
     nodata: 'You are yet to start your journey for this competency'
+  },
+  'learning-map': {
+    'practice-question': 'practice questions',
+    'no-practice-questions':
+      'There are no practice questions for this competency',
+    'solved-examples': 'solved examples',
+    'no-solved-examples': 'There are no solved examples for this competency'
   },
 
   'self-report': {
