@@ -6,8 +6,7 @@ import {
   DEFAULT_IMAGES,
   EMOTION_VALUES,
   GRADING_SCALE,
-  BARS_GRADING_SCALE,
-  SCREEN_SIZES
+  BARS_GRADING_SCALE
 } from 'gooru-web/config/config';
 /**
  * Function for sorting strings alphabetically in ascending order
@@ -1039,5 +1038,5 @@ export function validateTimespent(hour, min) {
  */
 export function isCompatibleVW(screenSize) {
   let currentVW = window.screen.width;
-  return currentVW <= SCREEN_SIZES[screenSize];
+  return currentVW <= screenSize;
 }

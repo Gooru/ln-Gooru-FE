@@ -41,8 +41,7 @@
         cursor: pointer;
 
         .competency-desc {
-          padding: 10px;
-          font-size: 11px;
+          margin-top: 10px;
           @include ellipsis(
             $font-size: $font-size-base,
             $line-height: $line-height,
