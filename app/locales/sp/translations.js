@@ -48,6 +48,9 @@ export default Object.assign(quizzesTranslations, {
   },
   common: {
     'choose-lang': 'Elige Lengua',
+    'plan-an-activities': 'Plan your activities',
+    'plan-an-activities-msg':
+      'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
     'assessment-pl': {
       zero: 'Evaluaciones',
       other: 'Evaluaciones',

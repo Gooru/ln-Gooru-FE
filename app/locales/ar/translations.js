@@ -55,6 +55,9 @@ export default Object.assign(quizzesTranslations, {
     'about-you': 'حولك',
     'about-me': 'حولي',
     add: 'ضِف',
+    'plan-an-activities': 'Plan your activities',
+    'plan-an-activities-msg':
+      'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
     'add-assessment': 'إنشاء تقييم جديد',
     'add-century-skills': 'ضَف مهارات القرن الحادي والعشرين',
     'add-collaborator': 'ضِف مشارك',

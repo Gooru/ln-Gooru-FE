@@ -90,7 +90,9 @@ export default Object.assign(quizzesTranslations, {
     accept: 'Accept',
     ignore: 'Ignore',
     add: 'Add',
-    'add-an-activity': 'Add an Activity',
+    'plan-an-activities': 'Plan your activities',
+    'plan-an-activities-msg':
+      'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
     Reschedule: 'Reschedule',
     'no-unschedule-items':
       'You don\'t have any activities that need scheduling for ',

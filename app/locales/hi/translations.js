@@ -84,7 +84,9 @@ export default Object.assign(quizzesTranslations, {
     accept: 'स्वीकार',
     ignore: 'ध्यान न दे',
     add: 'जोड़ें',
-    'add-an-activity': 'एक गतिविधि जोड़ें',
+    'plan-an-activities': 'Plan your activities',
+    'plan-an-activities-msg':
+      'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
     Reschedule: 'पुनर्निर्धारित',
     'no-unschedule-items':
       'आपके पास कोई भी ऐसी गतिविधि नहीं है जिसके लिए शेड्यूलिंग की आवश्यकता हो',
