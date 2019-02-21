@@ -14,21 +14,27 @@ export default Ember.Component.extend({
     return this.get('isMobileView') ? 1 : 4;
   }),
 
-  onSelectGrades: Ember.observer('taxonomyGrades.@each.checked', function() {
-    let component = this;
-    let taxonomyGrades = component.get('taxonomyGrades');
-    let showGradeLimit = component.get('showGradeLimit');
-    let selectedGrades = taxonomyGrades.filterBy('checked', true);
-    if (selectedGrades.length < showGradeLimit) {
-      component.set('visibleGrades', selectedGrades);
-    } else {
-      component.set('visibleGrades', selectedGrades.slice(0, showGradeLimit));
-      component.set(
-        'inVisibleGrades',
-        selectedGrades.slice(showGradeLimit, selectedGrades.length)
-      );
+  isSelectBaseLine: false,
+
+  onSelectGrades: Ember.observer(
+    'taxonomyGrades.@each.checked',
+    'isSelectBaseLine',
+    function() {
+      let component = this;
+      let taxonomyGrades = component.get('taxonomyGrades');
+      let showGradeLimit = component.get('showGradeLimit');
+      let selectedGrades = taxonomyGrades.filterBy('checked', true);
+      if (selectedGrades.length < showGradeLimit) {
+        component.set('visibleGrades', selectedGrades);
+      } else {
+        component.set('visibleGrades', selectedGrades.slice(0, showGradeLimit));
+        component.set(
+          'inVisibleGrades',
+          selectedGrades.slice(showGradeLimit, selectedGrades.length)
+        );
+      }
     }
-  }),
+  ),
 
   didRender() {
     let component = this;
@@ -44,13 +50,15 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    onSelectGrade(grade) {
+    selectGrade(grade) {
       let component = this;
+      grade.toggleProperty('checked');
       component.sendAction('onSelectGrade', grade);
     },
 
     onToggleBaseline() {
       let component = this;
+      component.toggleProperty('isSelectBaseLine');
       component.sendAction('onToggleBaseline');
     },
 

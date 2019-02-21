@@ -15,15 +15,6 @@ export default Ember.Route.extend({
       refreshModel: true
     }
   },
-
-  actions: {
-    didTransition: function() {
-      Ember.run.later(function() {
-        $('.student.class').css('margin', 'unset');
-        $('.student.class').css('width', '100vw');
-      });
-    }
-  },
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -89,13 +80,10 @@ export default Ember.Route.extend({
     controller.set('taxonomyCategories', model.get('categories'));
     controller.loadData();
   },
+
   resetController(controller) {
     controller.set('showDomainInfo', false);
     controller.set('showCompetencyInfo', false);
-    // Ember.run.later(function() {
-    $('.student.class').css('margin', 'auto');
-    $('.student.class').css('width', '960px');
-
-    // });
+    controller.set('selectedCompetency', null);
   }
 });

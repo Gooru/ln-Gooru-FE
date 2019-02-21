@@ -26,8 +26,11 @@
       li {
         padding: 2px;
 
-        span {
-          margin-left: 20px;
+        label {
+          width: 100%;
+          span {
+            margin-left: 20px;
+          }
         }
       }
     }
