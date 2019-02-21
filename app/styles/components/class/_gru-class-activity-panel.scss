@@ -225,7 +225,6 @@
       }
 
       .re-schedule {
-        justify-self: center;
         color: #1aa9eb;
         font-size: 13px;
         font-weight: bold;
@@ -233,14 +232,18 @@
         .re-schedule-activity {
           height: 22px;
           cursor: pointer;
+          display: flex;
+          align-items: center;
 
-          .update {
+          .update,
+          .replay {
             font-size: 20px;
             pointer-events: none;
           }
 
           span {
             pointer-events: none;
+            padding-left: 5px;
 
             &:hover {
               color: #000;

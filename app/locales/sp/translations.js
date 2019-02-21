@@ -48,6 +48,7 @@ export default Object.assign(quizzesTranslations, {
   },
   common: {
     'choose-lang': 'Elige Lengua',
+    'plan-an-activities': 'Plan your activities',
     'assessment-pl': {
       zero: 'Evaluaciones',
       other: 'Evaluaciones',

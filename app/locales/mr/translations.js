@@ -86,7 +86,7 @@ export default Object.assign(quizzesTranslations, {
     accept: 'स्वीकार',
     ignore: 'दुर्लक्ष',
     add: 'जोडा',
-    'add-an-activity': 'हा उपक्रम संग्रहात टाका',
+    'plan-an-activities': 'Plan your activities',
     Reschedule: 'पुनर्नियोजन',
     'no-unschedule-items': 'नियोजन करण्यसाठी उपक्रम उपलब्ध नाही',
     'repeat-activity': 'उपक्रमाची पुनरावृत्ती',

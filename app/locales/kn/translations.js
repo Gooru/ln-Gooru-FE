@@ -59,6 +59,7 @@ export default Object.assign(quizzesTranslations, {
     'about-you': 'ನಿನ್ನ ಬಗ್ಗೆ',
     'about-me': 'ನನ್ನ ಬಗ್ಗೆ',
     add: 'ಸೇರಿಸಿ',
+    'plan-an-activities': 'Plan your activities',
     'add-assessment': 'ಹೊಸ ಮೌಲ್ಯಮಾಪನವನ್ನು ರಚಿಸಿ',
     'add-century-skills': '21 ನೇ ಶತಮಾನದ ಕೌಶಲ್ಯಗಳನ್ನು ಸೇರಿಸಿ',
     'add-collaborator': 'ಸಹಯೋಗಿ ಸೇರಿಸಿ',

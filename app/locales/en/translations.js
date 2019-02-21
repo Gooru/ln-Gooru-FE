@@ -90,7 +90,7 @@ export default Object.assign(quizzesTranslations, {
     accept: 'Accept',
     ignore: 'Ignore',
     add: 'Add',
-    'add-an-activity': 'Add an Activity',
+    'plan-an-activities': 'Plan your activities',
     Reschedule: 'Reschedule',
     'no-unschedule-items':
       'You don\'t have any activities that need scheduling for ',

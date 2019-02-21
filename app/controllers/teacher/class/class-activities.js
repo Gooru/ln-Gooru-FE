@@ -465,10 +465,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     }
     Ember.run.scheduleOnce('afterRender', controller, function() {
       controller.closeCADatePickerOnClickOutSide();
-      let activeDate = `${controller.get('forYear')}-${controller.get(
-        'forMonth'
-      )}-01`;
-      let date = moment(activeDate).format('YYYY-MM-DD');
+      let date = moment().format('YYYY-MM-DD');
       controller.handleScrollToSpecificDate(date);
     });
   },
@@ -877,10 +874,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     if (dateEle.length > 0) {
       let scrollToContainer = Ember.$('.dca-list-container');
       let reduceHeight = 100;
-      let titleEle = Ember.$('.teacher_class_class-activities .ca-title');
-      if (titleEle.is(':visible')) {
-        reduceHeight += 50;
-      }
       let top =
         dateEle.position().top - reduceHeight + scrollToContainer.scrollTop();
       scrollToContainer.animate(

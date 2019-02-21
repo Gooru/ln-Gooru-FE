@@ -69,10 +69,11 @@
       </div>
       <div class="re-schedule">
         <div class="re-schedule-activity ca-datepicker-popover" onclick= {{action 'onScheduleContentToDCA' classActivity}}>
-          {{gru-icon name="update" class="hidden visible-xs"}}
           {{#if collectionPerformanceSummary}}
+          {{gru-icon name="replay"}}
             <span class="hidden-xs">{{t 'common.repeat-activity'}}</span>
           {{else}}
+          {{gru-icon name="update"}}
             <span class="hidden-xs">{{t 'common.Reschedule'}}</span>
           {{/if}}
         </div>
