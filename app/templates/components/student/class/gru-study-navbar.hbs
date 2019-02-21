@@ -105,6 +105,11 @@
               {{/if}}
             </div>
           </div>
+          <div class="study-player tab profile-prof ">
+            <a {{action 'selectItem' 'profile-prof'}} role="tab" data-toggle="tooltip" title="{{t 'student-landing.class.my-proficiency'}}">
+              {{gru-icon name='account_circle'}}
+            </a>
+          </div>
           {{#if isFeatureEnabled }}
             <div class="notification-tab">
               {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' classId=classId isTeacher=false }}
