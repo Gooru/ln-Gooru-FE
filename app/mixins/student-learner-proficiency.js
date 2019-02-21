@@ -1,10 +1,16 @@
 import Ember from 'ember';
-import { DEFAULT_K12_SUBJECT } from 'gooru-web/config/config';
-import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
+import { ROLES, SCREEN_SIZES } from 'gooru-web/config/config';
+import {
+  getSubjectIdFromSubjectBucket,
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
 import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
 export default Ember.Mixin.create({
   // -------------------------------------------------------------------------
   // Dependencies
+
+  session: Ember.inject.service('session'),
+
   /**
    * taxonomy service dependency injection
    * @type {Object}
@@ -84,22 +90,48 @@ export default Ember.Mixin.create({
     };
   }),
 
+  /**
+   * @property {Boolean}
+   * Property to store given screen value is compatible
+   */
+  isMobile: isCompatibleVW(SCREEN_SIZES.LARGE),
+
+  /**
+   * @property {Object}
+   * Property to store selected competency
+   */
   selectedCompetency: null,
 
+  /**
+   * Property to store selected category
+   * @type {Object}
+   */
+  selectedCategory: null,
+
+  /**
+   * Property to store domain competency list
+   * @type {Object}
+   */
   domainCompetencyList: null,
 
+  /**
+   * It will have singature content competencty list for current active subject
+   * @type {Object}
+   */
+  signatureCompetencyList: null,
+
+  /**
+   * @property {Boolean}
+   * Property to store is student or not
+   */
+  isStudent: Ember.computed.equal('session.role', ROLES.STUDENT),
+
   actions: {
-    onSelectGrade(grade) {
+    onSelectCategory(category) {
       let component = this;
-      component.toggleProperty('isSelectGrade');
-      component.set('selectedGrade', grade);
+      component.set('selectedCategory', category);
+      component.fetchSubjectsByCategory(category);
     },
-
-    onToggleBaseline() {
-      let component = this;
-      component.toggleProperty('isSelectBaseLine');
-    },
-
     /**
      * Action triggered when select a month from chart
      */
@@ -119,6 +151,7 @@ export default Ember.Mixin.create({
       component.set('showCompetencyInfo', false);
       component.fetchTaxonomyGrades();
       component.loadDataBySubject();
+      component.fetchSignatureCompetencyList();
     },
 
     /**
@@ -126,7 +159,7 @@ export default Ember.Mixin.create({
      */
     onSelectCompetency(competency, domainCompetencyList) {
       let component = this;
-      component.set('selectedCompetency', competency);
+      component.setSignatureContent(competency);
       component.set('domainCompetencyList', domainCompetencyList);
       component.set('showCompetencyInfo', true);
     },
@@ -143,9 +176,25 @@ export default Ember.Mixin.create({
         'selectedDomainCompetencies',
         selectedDomainCompetencies.get('competencies')
       );
+      component.set('selectedCompetency', null);
       component.set('showDomainInfo', true);
       component.set('showCompetencyInfo', false);
+    },
+
+    onClosePullUp() {
+      let component = this;
+      component.set('selectedCompetency', null);
     }
+  },
+
+  setSignatureContent(competency) {
+    let component = this;
+    let signatureCompetencyList = component.get('signatureCompetencyList');
+    let domainCode = competency.get('domainCode');
+    let showSignatureAssessment =
+      signatureCompetencyList[domainCode] === competency.get('competencyCode');
+    competency.set('showSignatureAssessment', showSignatureAssessment);
+    component.set('selectedCompetency', competency);
   },
   /**
    * This method will load the initial set  of data
@@ -156,8 +205,22 @@ export default Ember.Mixin.create({
     let categoryCode = component.get('categoryCode');
     let defaultCategory = categories.findBy('code', categoryCode);
     if (defaultCategory) {
+      component.set('selectedCategory', defaultCategory);
       component.fetchSubjectsByCategory(defaultCategory);
     }
+  },
+
+  fetchSignatureCompetencyList() {
+    let component = this;
+    let subject = component.get('subjectCode');
+    let userId = component.get('studentProfile.id');
+    return Ember.RSVP.hash({
+      competencyList: component
+        .get('competencyService')
+        .getUserSignatureCompetencies(userId, subject)
+    }).then(({ competencyList }) => {
+      component.set('signatureCompetencyList', competencyList);
+    });
   },
 
   /**
@@ -177,6 +240,7 @@ export default Ember.Mixin.create({
         component.checkTaxonomySubject();
         component.fetchTaxonomyGrades();
         component.loadDataBySubject();
+        component.fetchSignatureCompetencyList();
       });
   },
 
@@ -186,8 +250,7 @@ export default Ember.Mixin.create({
    */
   getActiveSubject(subjects) {
     let component = this;
-    let defaultSubject = subjects.findBy('id', DEFAULT_K12_SUBJECT);
-    let activeSubject = defaultSubject ? defaultSubject : subjects.objectAt(0);
+    let activeSubject = subjects.objectAt(0);
     let subjectBucket = component.get('subjectBucket');
     subjects.map(subject => {
       if (subjectBucket) {
@@ -233,25 +296,27 @@ export default Ember.Mixin.create({
     let subjectId = component.get('activeSubject.id');
     let userId = component.get('studentProfile.id');
     let timeLine = component.get('timeLine');
-    return Ember.RSVP.hash({
-      competencyMatrixs: component
-        .get('competencyService')
-        .getCompetencyMatrixDomain(userId, subjectId, timeLine),
-      competencyMatrixCoordinates: component
-        .get('competencyService')
-        .getCompetencyMatrixCoordinates(subjectId),
-      userProficiencyBaseLine: component.fetchBaselineCompetencies()
-    }).then(({ competencyMatrixs, competencyMatrixCoordinates }) => {
-      if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
-        component.set('competencyMatrixDomains', competencyMatrixs.domains);
-        component.set(
-          'competencyMatrixCoordinates',
-          competencyMatrixCoordinates
-        );
-      } else {
-        Ember.Logger.warn('comp is destroyed...');
-      }
-    }, this);
+    if (subjectId) {
+      return Ember.RSVP.hash({
+        competencyMatrixs: component
+          .get('competencyService')
+          .getCompetencyMatrixDomain(userId, subjectId, timeLine),
+        competencyMatrixCoordinates: component
+          .get('competencyService')
+          .getCompetencyMatrixCoordinates(subjectId),
+        userProficiencyBaseLine: component.fetchBaselineCompetencies()
+      }).then(({ competencyMatrixs, competencyMatrixCoordinates }) => {
+        if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
+          component.set('competencyMatrixDomains', competencyMatrixs.domains);
+          component.set(
+            'competencyMatrixCoordinates',
+            competencyMatrixCoordinates
+          );
+        } else {
+          Ember.Logger.warn('comp is destroyed...');
+        }
+      }, this);
+    }
   },
 
   /**
@@ -283,15 +348,15 @@ export default Ember.Mixin.create({
     let filters = {
       subject: component.get('subjectCode')
     };
-    return Ember.RSVP.hash({
-      taxonomyGrades: Ember.RSVP.resolve(
-        taxonomyService.fetchGradesBySubject(filters)
-      )
-    }).then(({ taxonomyGrades }) => {
-      component.set(
-        'taxonomyGrades',
-        taxonomyGrades.sortBy('sequence').reverse()
-      );
-    });
+    if (component.get('subjectCode')) {
+      return Ember.RSVP.hash({
+        taxonomyGrades: taxonomyService.fetchGradesBySubject(filters)
+      }).then(({ taxonomyGrades }) => {
+        component.set(
+          'taxonomyGrades',
+          taxonomyGrades.sortBy('sequence').reverse()
+        );
+      });
+    }
   }
 });

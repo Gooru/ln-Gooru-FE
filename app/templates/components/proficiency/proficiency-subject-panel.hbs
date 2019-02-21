@@ -3,10 +3,10 @@
   <div class="framework-title">{{framework}}</div>
 </div>
 <div class="domain-list">
-  <div class="title">Domains</div>
+  <div class="title">{{t 'common.domains'}}</div>
   <ol>
     {{#each domains as |domain|}}
-      <li>{{domain.domainName}}</li>
+      <li {{action 'onDomainSelect' domain }}>{{domain.domainName}}</li>
     {{/each}}
   </ol>
 </div>

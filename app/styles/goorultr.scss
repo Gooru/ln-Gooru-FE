@@ -435,10 +435,11 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/teacher/offline-class/oca-student-activity-report-pull-up";
 
 //Signature Content
-@import "components/reports/pull-up/_signature-content-report";
-@import "components/reports/pull-up/_competency-meta-info";
-@import "components/reports/pull-up/_competency-meta-data";
-@import "components/reports/pull-up/_student-journey";
+@import "components/reports/pull-up/signature-content-report";
+@import "components/reports/pull-up/competency-info-content";
+@import "components/reports/pull-up/competency-meta-data";
+@import "components/reports/pull-up/student-journey";
+@import "components/reports/pull-up/learning-map-content";
 
 //Student Proficiency
 @import "routes/student-learner-proficiency";
@@ -447,3 +448,5 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/proficiency/proficiency-subject-panel";
 @import "components/proficiency/domain-info-pull-up";
 @import "components/proficiency/competency-info-pull-up";
+
+@import "components/proficiency/grade-selector";

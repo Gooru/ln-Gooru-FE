@@ -1,0 +1,24 @@
+{{#unless isStudent}}
+  {{proficiency.competency-content-info learningMapData=learningMapData onSelectActivityContent="onSelectActivityContent"}}
+  {{else}}
+    <div class="student-learning-map">
+      <div class="practice-question">
+        <div class="title">{{t 'learning-map.practice-question'}}</div>
+        <div class="no-data">{{t 'learning-map.no-practice-questions'}}</div>
+      </div>
+      <div class="solved-examples">
+        <div class="title">{{t 'learning-map.solved-examples'}}</div>
+        <div class="no-data">{{t 'learning-map.no-solved-examples'}}</div>
+      </div>
+    </div>
+{{/unless}}
+{{#if isShowActivityPullup}}
+  {{reports.pull-up.activity-list
+    activityContents=activityContents
+    activityContentType=activityContentType
+    activityTotalHitCount=activityTotalHitCount
+    showPullUp=isShowActivityPullup
+    onResetPullUpData="onResetPullUpData"
+    onClickShowMoreActivity="onClickShowMoreActivity"
+  }}
+{{/if}}

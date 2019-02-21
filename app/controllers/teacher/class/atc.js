@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { isMobileVW } from 'gooru-web/utils/utils';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
@@ -135,7 +135,7 @@ export default Ember.Controller.extend({
   initializeController() {
     const controller = this;
     if (controller.get('isPremiumClass')) {
-      if (isMobileVW()) {
+      if (isCompatibleVW('medium')) {
         controller.set('userAgent', 'mobile');
       }
       controller.loadData();

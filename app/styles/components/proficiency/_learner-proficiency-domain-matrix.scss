@@ -47,20 +47,33 @@
   .chart-area {
     background-color: $gray-97;
     display: grid;
-    min-height: calc(100vh - 235px);
+    grid-template-rows: auto auto;
+
+    .actions {
+      grid-template-columns: auto max-content;
+      display: grid;
+      box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+    }
 
     .matrix-chart {
+      min-height: inherit;
+
       #render-proficiency-matrix {
-        &.hover {
+        &.highlight {
           svg {
             #cell-container {
               rect {
                 opacity: 0.1;
-                stroke-width: 0;
+                stroke-width: 1;
 
                 &.active {
                   opacity: 1;
-                  stroke-width: 1;
+                  stroke-width: 2;
+                }
+
+                &.active-cell {
+                  opacity: 1;
+                  stroke-width: 3;
                 }
               }
             }
@@ -98,6 +111,7 @@
       grid-template-columns: auto auto;
       align-items: center;
       justify-self: end;
+      align-self: center;
       margin: 8px 8px 8px 0;
 
       i {

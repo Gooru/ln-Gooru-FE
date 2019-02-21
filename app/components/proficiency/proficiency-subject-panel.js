@@ -3,11 +3,34 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['proficiency-subject-panel'],
 
+  /**
+   * @property {Object} competency
+   */
   subject: null,
+  /**
+   * @property {Array} competencyMatrixCoordinates
+   */
+  competencyMatrixCoordinates: null,
 
-  selectedDomain: null,
-
+  /**
+   * @property {Array} domains
+   */
   domains: Ember.computed.alias('competencyMatrixCoordinates.domains'),
 
-  framework: Ember.computed.alias('class.preference.framework')
+  /**
+   * @property {String} framework
+   */
+  framework: Ember.computed.alias('class.preference.framework'),
+
+  actions: {
+    onClosePullUp() {
+      let component = this;
+      component.sendAction('onClosePullUp');
+    },
+
+    onDomainSelect(selectedDomain) {
+      let component = this;
+      component.sendAction('onDomainSelect', selectedDomain);
+    }
+  }
 });

@@ -1,67 +1,44 @@
 .proficiency.taxonomy-grades {
-  .grade-list {
-    display: grid;
-    height: 80vh;
-    align-items: center;
-
-    .grade-container {
-      position: relative;
-      padding: 0;
-      margin: 0;
-      max-width: 100px;
-      width: max-content;
-      min-width: 100px;
-      text-align: right;
-
-      .grade-title {
+  .grade {
+    .dropdown {
+      .dropbtn {
+        background-color: #fff;
+        color: black;
+        padding: 3px;
+        font-size: 16px;
+        text-transform: capitalize;
         border: none;
-        display: block;
-        padding-left: 10px;
-        padding-right: 10px;
-        height: 24px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: $dark-300;
+        display: block !important;
       }
 
-      &.active-grade {
-        .grade-title {
-          background-color: $dark-300;
-          border: none;
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
-          opacity: 1;
-          font-weight: bold;
-          display: grid;
-          align-items: center;
-          color: $white;
-        }
+      ul {
+        padding: 20px;
+        border-radius: unset;
 
-        .grade-title:after,
-        .grade-title:before {
-          content: "";
-          display: inline-block;
-          border-width: 16px;
-          border-style: solid;
-          width: 0;
-          height: 0;
-          left: 100%;
-          top: -1px;
-          position: absolute;
-          z-index: 1;
+        li {
+          padding: 2px;
         }
+      }
+    }
 
-        .grade-title:after {
-          border-color: transparent transparent transparent transparent;
-        }
+    .label {
+      font-size: 17px;
+      font-weight: bold;
+      color: $charcoal-grey;
+      padding: 0;
+      text-align: left;
+      margin-right: 10px;
+    }
 
-        .grade-title:before {
-          border-width: 12px;
-          display: block;
-          border-color: transparent transparent transparent $dark-300;
-          z-index: 0;
-          top: 0;
-        }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      width: max-content;
+      align-items: center;
+      display: flex;
+
+      .dropbtn {
+        display: block !important;
       }
     }
   }
