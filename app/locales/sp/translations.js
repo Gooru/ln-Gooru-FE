@@ -982,7 +982,8 @@ export default Object.assign(quizzesTranslations, {
       classroom: 'Información del Aula',
       'back-to': 'Volver a las aulas',
       'back-to-independent': 'Volver a Aprendizaje Independiente',
-      'course-map': 'Mapa del curso'
+      'course-map': 'Mapa del curso',
+      'my-proficiency': 'My Proficiency'
     },
     course: {
       'total-time-spent': 'Tiempo total dedicado',
