@@ -1,20 +1,4 @@
-<div class="student-proficiency-container" style="width:100vw">
-  <div class="taxonomy-grades">
-    {{#if (and (gt taxonomyGrades.length 0) isShowMatrixChart)}}
-      <div class="taxonomy-grades-container">
-        {{proficiency.taxonomy-grades
-          taxonomyGrades=taxonomyGrades
-          activeGrade=activeGrade
-          classGrade=classGrade
-          subjectCode=subjectCode
-          onSelectGrade="onSelectGrade"
-        }}
-        <div class="baseline-toggle" {{action "onToggleBaseline"}}>
-          <div class="baseline-label">{{t 'profile.proficiency.baseline'}}</div>
-        </div>
-      </div>
-    {{/if}}
-  </div>
+<div class="student-proficiency-container">
   <div class="panel-container">
     {{proficiency.student-proficiency-panel
        studentProfile=studentProfile
@@ -22,32 +6,39 @@
        activeSubject=activeSubject
        timeLine=timeLine
        class=class
-       selectedGrade=selectedGrade
-       isSelectGrade=isSelectGrade
-       isTeacher=isTeacher
+       isStudent=isStudent
        competencyMatrixDomains=competencyMatrixDomains
        userProficiencyBaseLine=userProficiencyBaseLine
        competencyMatrixCoordinates=competencyMatrixCoordinates
        subjectBucket=subjectBucket
+       taxonomyCategories=taxonomyCategories
        taxonomySubjects=taxonomySubjects
        isShowMatrixChart=isShowMatrixChart
        isSelectBaseLine=isSelectBaseLine
+       selectedCategory=selectedCategory
+       selectedCompetency=selectedCompetency
+       selectedDomain=selectedDomain
        onSelectMonth="onSelectMonth"
        onSelectCompetency="onSelectCompetency"
        onDomainSelect="onDomainSelect"
        onSubjectChange="onSubjectChange"
-       categories=taxonomyCategories}}
-    <div class="inspect-competency hidden lg-visible">
-      {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
-    </div>
+       taxonomyGrades=taxonomyGrades
+       classGrade=classGrade
+       subjectCode=subjectCode
+       onSelectCategory="onSelectCategory"
+     }}
+    {{#if isMobile}}
+      <div class="inspect-competency">
+        {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo onClosePullUp="onClosePullUp" isStudent=isStudent competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
+      </div>
+    {{/if}}
   </div>
   <div class="pull-up-container">
     {{#if isShowMatrixChart}}
-      {{#proficiency.proficiency-subject-panel class=class studentId=studentProfile.id selectedCompetency=selectedCompetency domainCompetencyList=domainCompetencyList selectedDomain=selectedDomain competencyMatrixDomains=competencyMatrixDomains subject=activeSubject
-        competencyMatrixCoordinates=competencyMatrixCoordinates}}
-        {{proficiency.domain-info-pull-up showPullUp=showDomainInfo competencies=selectedDomainCompetencies domain=selectedDomain}} {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
+      {{#proficiency.proficiency-subject-panel onDomainSelect="onDomainSelect" class=class subject=activeSubject competencyMatrixCoordinates=competencyMatrixCoordinates}}
+        {{proficiency.domain-info-pull-up onSelectCompetency="onSelectCompetency" showPullUp=showDomainInfo competencies=selectedDomainCompetencies domain=selectedDomain}}
+        {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo onClosePullUp="onClosePullUp" isStudent=isStudent competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
       {{/proficiency.proficiency-subject-panel}}
     {{/if}}
   </div>
 </div>
-{{!-- </div> --}}
