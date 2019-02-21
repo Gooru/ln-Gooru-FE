@@ -1012,7 +1012,6 @@ export default Object.assign(quizzesTranslations, {
       other: 'أنت تٌعلِّم حالياً {{count}} صف دراسي'
     }
   },
-
   'grade-selector': {
     placeholder: 'Choose Grade Lines to Display'
   },

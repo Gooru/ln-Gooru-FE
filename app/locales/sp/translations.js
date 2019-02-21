@@ -945,7 +945,6 @@ export default Object.assign(quizzesTranslations, {
       }
     }
   },
-
   'grade-selector': {
     placeholder: 'Choose Grade Lines to Display'
   },
@@ -978,7 +977,6 @@ export default Object.assign(quizzesTranslations, {
     'solved-examples': 'solved examples',
     'no-solved-examples': 'There are no solved examples for this competency'
   },
-
   user: {
     'joined-classes': {
       zero: 'Actualmente estás inscrito en aulas de {{count}}',

@@ -2902,7 +2902,6 @@ export default Object.assign(quizzesTranslations, {
       wish: 'Congratulations! You scored',
       reference: 'This external collection can be accessed '
     },
-
     'competency-report': {
       title: 'Competency Report',
       'no-subject': 'No Subject Assigned',
@@ -2945,11 +2944,10 @@ export default Object.assign(quizzesTranslations, {
       'There are no practice questions for this competency',
     'solved-examples': 'solved examples',
     'no-solved-examples': 'There are no solved examples for this competency'
-  }, 
+  },
   'student-card': {
     message: 'This {{type}} has been deleted'
   },
-
   'self-report': {
     'your-score': 'Your Score',
     time_spent: 'Time Spent',

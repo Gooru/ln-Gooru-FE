@@ -2875,7 +2875,6 @@ export default Object.assign(quizzesTranslations, {
   'grade-selector': {
     placeholder: 'Choose Grade Lines to Display'
   },
-
   'competency-info-content': {
     journey: 'JOURNEY',
     metadata: 'METADATA',
@@ -2905,7 +2904,6 @@ export default Object.assign(quizzesTranslations, {
     'solved-examples': 'solved examples',
     'no-solved-examples': 'There are no solved examples for this competency'
   },
-
   'self-report': {
     'your-score': 'आपका स्कोर',
     time_spent: 'समय बिताया',
