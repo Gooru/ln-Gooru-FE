@@ -1,8 +1,4 @@
 .student-learner-proficiency {
-  .lg-visible {
-    display: block !important;
-  }
-
   .student-proficiency-container {
     .inspect-competency {
       .competency-info-pull-up {
@@ -38,7 +34,7 @@
       }
     }
   }
-  @media only screen and (min-width: $screen-sm) and (max-width: $screen-in-1024) {
+  @media only screen and (min-width: $screen-sm) and (max-width: $screen-md) {
     .student-proficiency-container {
       grid-template-columns: 100px 1fr;
       padding-bottom: 0;

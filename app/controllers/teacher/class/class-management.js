@@ -275,11 +275,13 @@ export default Ember.Controller.extend(ModalMixin, {
     updateClassStudentGradeOrigin: function(grade, studentId) {
       let student = this.get('class.members').findBy('id', studentId);
       student.set('tempGradeLowerBound', grade.get('id'));
+      student.set('enableRefreshButton', true);
     },
 
     updateClassStudentGradeDestination: function(grade, studentId) {
       let student = this.get('class.members').findBy('id', studentId);
       student.set('tempGradeUpperBound', grade.get('id'));
+      student.set('enableRefreshButton', true);
     },
 
     updateClassGradeLevel: function(grade) {
@@ -290,6 +292,11 @@ export default Ember.Controller.extend(ModalMixin, {
     updateClassGradeOrigin: function(grade) {
       this.set('enableApplySettings', true);
       this.set('tempClass.gradeLowerBound', grade.get('id'));
+      let gradeCurrent = this.get('class.gradeCurrent');
+      let tempGradeCurrent = this.get('tempClass.gradeCurrent');
+      if (!gradeCurrent && tempGradeCurrent) {
+        this.set('tempClass.gradeCurrent', null);
+      }
     },
 
     applyClassMembersSettings: function(student) {
@@ -310,7 +317,7 @@ export default Ember.Controller.extend(ModalMixin, {
         let upperBound = student.get('tempGradeUpperBound');
         let doInitialSkyline = false;
         let saveSettings = false;
-
+        student.set('enableRefreshButton', false);
         if (lowBound && lowBound !== student.get('gradeLowerBound')) {
           // change at lower bound value detected
           // we may need to trigger initial skyline compute
@@ -640,7 +647,10 @@ export default Ember.Controller.extend(ModalMixin, {
       .get('classService')
       .classMembersSettings(classId, settings)
       .then(function(/* responseData */) {
-        student.set('isRefreshing', false);
+        Ember.run.later(function() {
+          student.set('isRefreshing', false);
+        }, 1000);
+
         // TO-DO optmize
         controller.fetchClassMemberBounds();
         if (isPremiumClass && isOffline && doInitialSkyline) {

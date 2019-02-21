@@ -69,6 +69,7 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
 
     setLocale(selVal) {
       this.setLocale(selVal);
+      this.getLocalStorage().setItem(this.device_language_key, selVal);
     },
 
     searchTerm: function() {
@@ -162,6 +163,9 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     }
   },
 
+  getLocalStorage: function() {
+    return window.localStorage;
+  },
   // -------------------------------------------------------------------------
   // Properties
 

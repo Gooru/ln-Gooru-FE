@@ -4,13 +4,17 @@
   </div>
 {{/if}}
 <div class="chart-area {{unless isExpandChartEnabled 'compressed-view'}}">
-  <div class="toggle-chart" {{action "onToggleChart"}}>
-    {{#if isExpandChartEnabled}}
-      {{gru-icon name="unfold_less"}}<span>{{t 'profile.proficiency.show-compressed-chart'}}</span>
-    {{else}}
-      {{gru-icon name="unfold_more"}}<span>{{t 'profile.proficiency.show-expanded-chart'}}</span>
+  <div class="actions">
+    {{#if (and (gt taxonomyGrades.length 0) isShowMatrixChart)}}
+      {{proficiency.grade-selector taxonomyGrades=taxonomyGrades onToggleBaseline="onToggleBaseline" onSelectGrade="onSelectGrade" activeGrade=activeGrade}}
     {{/if}}
-
+    <div class="toggle-chart" {{action "onToggleChart"}}>
+      {{#if isExpandChartEnabled}}
+        {{gru-icon name="unfold_less"}}<span>{{t 'profile.proficiency.show-compressed-chart'}}</span>
+      {{else}}
+        {{gru-icon name="unfold_more"}}<span>{{t 'profile.proficiency.show-expanded-chart'}}</span>
+      {{/if}}
+    </div>
   </div>
   <div class="matrix-chart">
     <div class="chart-container {{if (lte taxonomyGrades.length 0) 'no-grade'}}">
@@ -21,7 +25,7 @@
         <div class="domain-sequence-container">
           <div class="domain-sequence" style="width:{{width}}px">
             {{#each taxonomyDomains as |taxonomyDomain index |}}
-              <li class="domain-counts" title="{{taxonomyDomain.domainName}}" data-placement="auto right" {{action "onDomainSelect" taxonomyDomain}} onmouseover={{action "addHoverClass" index}} onmouseout={{action 'removeHoverClass'}} data-toggle="tooltip">
+              <li class="domain-counts" title="{{taxonomyDomain.domainName}}" data-placement="auto right" {{action "onDomainSelect" taxonomyDomain}} onmouseover= {{action "domainFocusIn" taxonomyDomain}} onmouseout= {{action 'domainFocusOut'}} data-toggle="tooltip">
                 {{taxonomyDomain.domainSeq}}
               </li>
             {{/each}}

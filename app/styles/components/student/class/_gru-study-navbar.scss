@@ -53,7 +53,7 @@
       display: grid;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
       /*Default View */
-      grid-template-columns: 88px 170px 145px 1fr 59px 59px 59px;
+      grid-template-columns: 59px 170px 145px 145px 1fr 59px 59px 59px;
 
       .tab {
         &:hover {
@@ -110,7 +110,7 @@
         }
         /* Large devices (laptops/desktops, 992px and up) */
         @media only screen and (min-width: 992px) {
-          grid-template-columns: 90px 120px 1fr 60px 120px 120px;
+          grid-template-columns: 59px 120px 1fr 60px 120px 120px;
 
           .class-activities,
           .course-map.study-player,
@@ -167,7 +167,7 @@
         }
         /* Large devices (laptops/desktops, 992px and up) */
         @media only screen and (min-width: 992px) {
-          grid-template-columns: 90px 120px 1fr 60px 60px 60px;
+          grid-template-columns: 59px 120px 1fr 60px 60px 60px;
 
           .class-activities,
           .course-map.study-player,
@@ -205,7 +205,7 @@
         }
         /* Large devices (laptops/desktops, 992px and up) */
         @media only screen and (min-width: 992px) {
-          grid-template-columns: 90px 160px 120px 1fr 59px 105px 105px;
+          grid-template-columns: 90px 160px 120px 120px 1fr 59px 105px 105px;
         }
       }
       /* Extra small devices (phones, 767pxpx and down) */
@@ -254,7 +254,7 @@
       }
       /* Large devices (laptops/desktops, 992px and up) */
       @media only screen and (min-width: 992px) {
-        grid-template-columns: 88px 170px 145px 1fr 59px 59px 59px;
+        grid-template-columns: 59px 170px 145px 145px 1fr 59px 59px 59px;
 
         .class-activities,
         .course-map.study-player,
@@ -299,6 +299,22 @@
           background-position: 0 15px;
           top: 18px;
           opacity: 1 !important;
+        }
+      }
+
+      .app-close {
+        @extend .app-brand;
+        width: 59px;
+        a {
+          background-image: unset;
+        }
+        a > i {
+          @extend a;
+          color: $gray-dark;
+          width: 36px;
+          display: inline-block;
+          position: relative;
+          top: -13px;
         }
       }
 
@@ -348,6 +364,22 @@
         display: flex;
         border-right: 1px solid $white;
         height: 51px;
+
+        a {
+          @extend %app-container;
+        }
+
+        .add-info {
+          @extend %app-info-container;
+        }
+      }
+
+      .profile-prof {
+        display: flex;
+        border-right: 1px solid $white;
+        height: 51px;
+        justify-content: center;
+        align-items: center;
 
         a {
           @extend %app-container;

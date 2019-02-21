@@ -3,11 +3,13 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
-  classNames: ['competency-meta-info'],
+  classNames: ['competency-info-content'],
 
+  /**
+   * @property {String} selectedItem
+   * Property to store selected item
+   */
   selectedItem: 'metadata',
-
-  prequisiteCompetencies: null,
 
   actions: {
     selectItem(item) {

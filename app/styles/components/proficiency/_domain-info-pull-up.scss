@@ -1,4 +1,6 @@
 .domain-info-pull-up {
+  $line-height: 1.2;
+  $lines-to-show: 4;
   width: 100%;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   background-color: #ffffff;
@@ -26,20 +28,64 @@
 
     .competency-list {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       padding: 15px;
-      justify-content: center;
       background-color: #fff;
       grid-gap: 10px;
+      grid-template-columns: repeat(2, 1fr);
 
-      .competency {
-        max-width: 200px;
+      .competency-info {
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
         background-color: #fff;
-        margin: auto;
         padding: 10px;
         height: 100%;
-        color: #1aa9eb;
+        cursor: pointer;
+
+        .competency-desc {
+          margin-top: 10px;
+          @include ellipsis(
+            $font-size: $font-size-base,
+            $line-height: $line-height,
+            $lines-to-show: $lines-to-show,
+            $excerpt-bg: $white
+          );
+        }
+
+        .competency {
+          display: grid;
+          grid-template-columns: 1fr 24px;
+          grid-gap: 20px;
+          padding-bottom: 10px;
+          border-bottom: solid 2px;
+          border-bottom-style: outset;
+          font-size: 10px;
+
+          .title {
+            font-size: 11px;
+            color: #37424b;
+            padding: 0;
+          }
+
+          .competency-status {
+            width: 24px;
+            height: 24px;
+
+            &.status-0 {
+              opacity: 0.3;
+              background-color: #333c4f;
+            }
+
+            &.status-1 {
+              background-color: #99c5e6;
+            }
+
+            &.status-2,
+            &.status-3,
+            &.status-4,
+            &.status-5 {
+              background-color: #6f9ce2;
+            }
+          }
+        }
       }
     }
   }

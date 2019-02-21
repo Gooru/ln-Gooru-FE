@@ -3,7 +3,7 @@
   {{#if microCompetencies}}
     {{#each microCompetencies as | microCompetency index|}}
       <div>
-        <div class="mc-panel-header collapsed" data-toggle="collapse" data-target="#collapse-{{index}}">
+        <div class="mc-panel-header" data-toggle="collapse" data-target="#collapse-{{index}}">
           <span class="code">{{microCompetency.code}}</span>
         </div>
         <div class="panel-content collapse" id="collapse-{{index}}">
@@ -21,7 +21,7 @@
     {{#each prequisiteCompetencies as | prerequisiteCompetency|}}
       <div class="panel-container">
         <div class="panel-header">
-          <div class="title">{{prerequisiteCompetency.code}}</div>
+          <div class="title ellipsis" data-toggle="tooltip" title="{{prerequisiteCompetency.code}}">{{prerequisiteCompetency.code}}</div>
           <div class="competency-status status-{{prerequisiteCompetency.status}}"></div>
         </div>
         <div class="panel-body">

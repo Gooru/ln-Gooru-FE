@@ -531,6 +531,10 @@
               .subject-label {
                 padding-left: 16px;
               }
+              &.in-active {
+                opacity: 0.5;
+                pointer-events: none;
+              }
             }
           }
 
@@ -682,6 +686,8 @@
             text-transform: uppercase;
             border-right: 2px dashed #d7d7d7;
             padding-left: 10px;
+            padding-right: 10px;
+            max-width: 100px;
 
             &:last-child {
               border-right: none;
@@ -695,6 +701,16 @@
 
             &:last-child {
               border-right: none;
+            }
+
+            .gru-dropdown {
+              .selected-item-label {
+                line-height: 1;
+                display: block;
+                text-align: center;
+                padding-left: 5px;
+                padding-right: 5px;
+              }
             }
           }
 
@@ -781,9 +797,19 @@
               height: 20px;
 
               .student-adj-lp {
+                cursor: default;
+                opacity: 0.5;
+
+                &.active {
+                  opacity: 1;
+                  cursor: pointer;
+                }
+
                 &.updating {
+                  opacity: 1;
+
                   .replay {
-                    animation: rotating 0.5s linear infinite;
+                    animation: rotating 1s linear infinite;
                     color: #20a33c;
                   }
                 }

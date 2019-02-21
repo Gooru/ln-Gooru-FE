@@ -1251,6 +1251,8 @@ export default Object.assign(quizzesTranslations, {
       'back-to-archived': 'संग्रहीत कक्षाओं में वापस जाएं',
       'class-management': 'कक्षा प्रबंधन',
       atc: 'शीर्ष द़ृश्य',
+      'performance-overview': 'प्रदर्शन सारांश',
+      'student-proficiency': 'छात्र कौशल',
       'class-management-tab': {
         actions: 'कार्रवाई',
         'assessment-min-score': 'ट्राफियों के लिए न्यूनतम स्कोर मूल्यांकन',
@@ -1316,6 +1318,12 @@ export default Object.assign(quizzesTranslations, {
         'total-competencies-gained': 'कुल हासिल दक्षताएँ'
       },
       'class-activities': 'कक्षा की दैनिक गतिविधियां',
+      'offline-class-report': {
+        'class-report': 'कक्षा की रिपोर्ट',
+        'activity-report': 'गतिविधि रिपोर्ट',
+        'conducted-on': 'Conducted On',
+        'not-started': 'शुरू नही हुआ'
+      },
       'back-to-class-activities': 'कक्षा की दैनिक गतिविधियों पर वापस जाएं',
       'class-activities-tab': {
         today: 'आज:',
@@ -2171,6 +2179,7 @@ export default Object.assign(quizzesTranslations, {
     }
   },
   taxonomy: {
+    grades: 'Grades',
     'gru-taxonomy-selector': {
       'add-secondary': 'माध्यमिक जोड़ें',
       'choose-subject': 'विषय चुनें',
@@ -2863,6 +2872,14 @@ export default Object.assign(quizzesTranslations, {
     'domain-report': 'डोमेन रिपोर्ट'
   },
 
+  'grade-selector': {
+    placeholder: 'Choose Grade Lines to Display'
+  },
+  'competency-info-content': {
+    journey: 'JOURNEY',
+    metadata: 'METADATA',
+    'learning-map': 'LEARNING MAP'
+  },
   'competency-meta-data': {
     title: 'ALT-CONCEPTS',
     heading: {
@@ -2880,7 +2897,13 @@ export default Object.assign(quizzesTranslations, {
     heading: 'YOUR JOURNEY',
     nodata: 'You are yet to start your journey for this competency'
   },
-
+  'learning-map': {
+    'practice-question': 'practice questions',
+    'no-practice-questions':
+      'There are no practice questions for this competency',
+    'solved-examples': 'solved examples',
+    'no-solved-examples': 'There are no solved examples for this competency'
+  },
   'self-report': {
     'your-score': 'आपका स्कोर',
     time_spent: 'समय बिताया',

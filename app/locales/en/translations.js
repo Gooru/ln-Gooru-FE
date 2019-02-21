@@ -1757,6 +1757,10 @@ export default Object.assign(quizzesTranslations, {
     twelfth: '12'
   },
 
+  'grade-selector': {
+    placeholder: 'Choose Grade Lines to Display'
+  },
+
   'standard-dropdown': {
     placeholder: 'Browse by Standard'
   },
@@ -1916,13 +1920,13 @@ export default Object.assign(quizzesTranslations, {
     'competency-level-partial': {
       desc1: 'You are currently in ',
       desc2:
-        'This is your {{title}} proficiency profile. Your math proficiency profile shows your mastery in standards (aka competencies) in the different focus areas in math (aka domains). The columns show domains and the boxes show the standards within each math domain.',
+        'This is your {{title}} proficiency profile. It shows your mastery in standards (aka competencies) in the different focus areas in {{title}} (aka domains). The columns show domains and the boxes show the standards within each {{title}} domain.',
       desc3:
         'As you master each of the competencies, the corresponding box is updated to dark blue.',
       desc4:
-        'And as you continue to study other competencies, they turn light blue to show progress.',
+        'The skyline is the thick white line that shows the highest competencies that you have mastered in each math domain.',
       desc5:
-        'Your current location in {{title}} is identified by the Skyline. The skyline is the thick white line that shows the highest competencies that you have mastered in each domain'
+        'If the skyline is at the bottom of a domain, it means the system needs more information to be able to locate you in that topic. As soon as you start on the lessons and check for understandings, your skyline will bump up and update your proficiency in each domain.'
     },
     units: {
       other: '{{count}} Units'
@@ -2211,6 +2215,7 @@ export default Object.assign(quizzesTranslations, {
     }
   },
   taxonomy: {
+    grades: 'Grades',
     'gru-taxonomy-selector': {
       'add-secondary': 'Add secondary',
       'choose-subject': 'Choose Subject',
@@ -2897,7 +2902,6 @@ export default Object.assign(quizzesTranslations, {
       wish: 'Congratulations! You scored',
       reference: 'This external collection can be accessed '
     },
-
     'competency-report': {
       title: 'Competency Report',
       'no-subject': 'No Subject Assigned',
@@ -2912,7 +2916,11 @@ export default Object.assign(quizzesTranslations, {
     },
     'domain-report': 'Domain Report'
   },
-
+  'competency-info-content': {
+    journey: 'JOURNEY',
+    metadata: 'METADATA',
+    'learning-map': 'LEARNING MAP'
+  },
   'competency-meta-data': {
     title: 'ALT-CONCEPTS',
     heading: {
@@ -2930,7 +2938,16 @@ export default Object.assign(quizzesTranslations, {
     heading: 'YOUR JOURNEY',
     nodata: 'You are yet to start your journey for this competency'
   },
-
+  'learning-map': {
+    'practice-question': 'practice questions',
+    'no-practice-questions':
+      'There are no practice questions for this competency',
+    'solved-examples': 'solved examples',
+    'no-solved-examples': 'There are no solved examples for this competency'
+  },
+  'student-card': {
+    message: 'This {{type}} has been deleted'
+  },
   'self-report': {
     'your-score': 'Your Score',
     time_spent: 'Time Spent',

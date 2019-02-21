@@ -60,7 +60,7 @@
       }
       /* Extra small devices (phones, 600px and down) */
       @media only screen and (max-width: $screen-sm - 1) {
-        grid-template-columns: 50px 40px 40px 40px 40px 1fr 40px 40px 40px;
+        grid-template-columns: 54px 40px 40px 40px 40px 1fr 40px 53px 40px;
         .atc,
         .class-activities,
         .course-map,
@@ -160,6 +160,21 @@
         }
       }
 
+      .app-close {
+        @extend .app-brand;
+        width: 59px;
+        a {
+          background-image: unset;
+        }
+        a > i {
+          @extend a;
+          color: $gray-dark;
+          width: 36px;
+          display: inline-block;
+          position: relative;
+          top: -13px;
+        }
+      }
       .class-activities {
         display: flex;
         border-right: 1px solid $white;
