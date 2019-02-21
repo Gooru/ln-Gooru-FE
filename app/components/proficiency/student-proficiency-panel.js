@@ -198,5 +198,10 @@ export default Ember.Component.extend({
       let component = this;
       component.sendAction('onDomainSelect', domain);
     }
+  },
+
+  didDestroyElement() {
+    let component = this;
+    component.set('isSelectBaseLine', false);
   }
 });
