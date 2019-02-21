@@ -1066,7 +1066,8 @@ export default Object.assign(quizzesTranslations, {
         today: 'اليوم'
       },
       'my-report': 'تقريري',
-      'my-location': 'تقريري'
+      'my-location': 'تقريري',
+      'my-proficiency': 'My Proficiency'
     },
     course: {
       'to-report': 'ملخص الاستخدام',
