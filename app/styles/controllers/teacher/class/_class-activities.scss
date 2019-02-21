@@ -157,10 +157,17 @@
 
           .dca-content-list-container {
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-            border-radius: 4px;
 
             &.dca-content-list-container-today {
               box-shadow: 0 0 11px 3px #4b9741;
+
+              .add-content-message {
+                padding: 15px;
+                font-size: 18px;
+                background: #fff;
+                border-radius: 4px;
+                line-height: 1.2;
+              }
             }
           }
 
@@ -267,11 +274,11 @@
       }
     }
   }
-
   @media screen and (max-width: 992px) {
     .ca-datepicker-schedule-container,
     .schedule-ca-datepicker-container {
       left: calc((100% - 250px) / 2) !important;
+
       .ca-datepicker-orientation-top {
         .ca-datepicker-top {
           display: none;
@@ -291,11 +298,10 @@
       top: 49px !important;
     }
   }
-
   @media screen and (max-width: 992px) and (orientation: landscape) {
     .ca-datepicker-schedule-container,
     .schedule-ca-datepicker-container {
-      top: 0px !important;
+      top: 0 !important;
     }
   }
 }

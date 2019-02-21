@@ -60,6 +60,8 @@ export default Object.assign(quizzesTranslations, {
     'about-me': 'ನನ್ನ ಬಗ್ಗೆ',
     add: 'ಸೇರಿಸಿ',
     'plan-an-activities': 'Plan your activities',
+    'plan-an-activities-msg':
+      'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
     'add-assessment': 'ಹೊಸ ಮೌಲ್ಯಮಾಪನವನ್ನು ರಚಿಸಿ',
     'add-century-skills': '21 ನೇ ಶತಮಾನದ ಕೌಶಲ್ಯಗಳನ್ನು ಸೇರಿಸಿ',
     'add-collaborator': 'ಸಹಯೋಗಿ ಸೇರಿಸಿ',

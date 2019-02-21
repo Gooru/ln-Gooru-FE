@@ -45,23 +45,25 @@
               <div class="dca-content-list-container {{if (eq today classActivity.added_date) 'dca-content-list-container-today'}}">
                 {{#each classActivity.classActivities as |activity|}}
                   {{class.gru-class-activity-panel
-              classActivity=activity
-              classId=classId
-              members=members
-              classActivities=classActivities
-              onReportclick='changeStatusValue'
-              onGoLive='goLive'
-              showDcaAssignButton=true
-              showDcaAddButton=false
-              onChangeVisibility='changeVisibility'
-              onRemoveClassActivity='removeClassActivity'
-              openDcaContentReport='openDcaContentReport'
-              activityDate=classActivity.added_date
-              showCohort=true
-              onScheduleContentToDCA='onScheduleContentToDCA'
-              onOpenPerformanceEntry="onOpenPerformanceEntry"
-              isOfflineClass=isOfflineClass
-            }}
+                    classActivity=activity
+                    classId=classId
+                    members=members
+                    classActivities=classActivities
+                    onReportclick='changeStatusValue'
+                    onGoLive='goLive'
+                    showDcaAssignButton=true
+                    showDcaAddButton=false
+                    onChangeVisibility='changeVisibility'
+                    onRemoveClassActivity='removeClassActivity'
+                    openDcaContentReport='openDcaContentReport'
+                    activityDate=classActivity.added_date
+                    showCohort=true
+                    onScheduleContentToDCA='onScheduleContentToDCA'
+                    onOpenPerformanceEntry="onOpenPerformanceEntry"
+                    isOfflineClass=isOfflineClass
+                  }}
+                {{else}}
+                    <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
                 {{/each}}
               </div>
             {{/each}}
@@ -142,7 +144,7 @@
   {{/if}}
 {{/if}}
 {{#if isShowAssessmentPerformanceEntryPullUp}}
-  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowAssessmentPerformanceEntryPullUp title=selectedItem.title type='assessment' onClosePerformanceEntry='onClosePerformanceEntry'}}
+  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowAssessmentPerformanceEntryPullUp title=selectedItem.title type='assessment' onClosePerformanceEntry='onClosePerformanceEntry' }}
     {{reports.pull-up.assessment-performance-entry assessment=selectedItem course=course students=activityMembers activityData=selectedActivity classId=classId onClosePerformanceEntry="onClosePerformanceEntry" isRepeatEntry=isRepeatEntry}}
   {{/reports.pull-up.performance-manual-entry}}
 {{/if}}

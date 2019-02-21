@@ -87,6 +87,8 @@ export default Object.assign(quizzesTranslations, {
     ignore: 'दुर्लक्ष',
     add: 'जोडा',
     'plan-an-activities': 'Plan your activities',
+    'plan-an-activities-msg':
+      'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
     Reschedule: 'पुनर्नियोजन',
     'no-unschedule-items': 'नियोजन करण्यसाठी उपक्रम उपलब्ध नाही',
     'repeat-activity': 'उपक्रमाची पुनरावृत्ती',

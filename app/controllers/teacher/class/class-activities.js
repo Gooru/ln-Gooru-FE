@@ -507,7 +507,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           return classActivity;
         }
       });
-    return classActivities;
+    if (controller.get('isCurrentYearAndMonth')) {
+      let date = moment().format('YYYY-MM-DD');
+      let todayClassActivities = classActivities.findBy('added_date', date);
+      if (!todayClassActivities) {
+        let classActivity = Ember.Object.create({
+          added_date: date,
+          classActivities: Ember.A([])
+        });
+        classActivities.pushObject(classActivity);
+      }
+    }
+    return classActivities.sortBy('added_date').reverse();
   }),
 
   /**
@@ -704,6 +715,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * @property {Json} classPreference
    */
   classPreference: Ember.computed.alias('class.preference'),
+
+  /**
+   * Property used to identity activities list is for current month and year
+   * @type {Boolean}
+   */
+  isCurrentYearAndMonth: Ember.computed('forYear', 'forMonth', function() {
+    let year = this.get('forYear');
+    let month = this.get('forMonth');
+    let selectedYearAndMonth = `${year}-${month}`;
+    return moment().format('YYYY-MM') === selectedYearAndMonth;
+  }),
 
   // -------------------------------------------------------------------------
   // Observers
