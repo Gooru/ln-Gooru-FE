@@ -74,6 +74,7 @@ export default Ember.Component.extend({
       },
       400,
       function() {
+        component.$().css('top', 'calc(100% - 70px)');
         component.set('isExpanded', false);
       }
     );
