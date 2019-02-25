@@ -87,6 +87,7 @@ export default Ember.Route.extend({
   },
 
   resetController(controller) {
+    controller.set('class', null);
     controller.set('showDomainInfo', false);
     controller.set('showCompetencyInfo', false);
     controller.set('selectedCompetency', null);
