@@ -1860,9 +1860,9 @@ export default Object.assign(quizzesTranslations, {
       }
     },
     'assigned-course-title': '{{शीर्षक}} साठी नियुक्त केलेला कोर्स',
-    'study-course': 'अभ्यासक्रम',
-    'show-my-destination': 'माझे गंतव्य दर्शवा',
-    'show-me-my-route': 'माझा मार्ग दाखवा',
+    'start-studying': 'Start Studying',
+    'show-route': 'Show Route',
+    'review-destination': 'Review Destination',
     'competency-level': {
       title: 'आपल्या प्रवीण प्रोफाइल',
       mastery: '{{गणना}} मानके महारत',
