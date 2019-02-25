@@ -152,7 +152,7 @@ export default Ember.Controller.extend({
   // Events
   initializeController() {
     const controller = this;
-    if (controller.get('isPremiumClass')) {
+    if (controller.get('isPremiumClass') && controller.get('isShowAtcView')) {
       if (isMobileVW()) {
         controller.set('userAgent', 'mobile');
       }
