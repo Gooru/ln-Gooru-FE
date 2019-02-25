@@ -136,6 +136,18 @@ export default Ember.Controller.extend({
    */
   isShowActivitySearchContentPullup: false,
 
+  /**
+   * @property {String} defaultContentTypeToSuggest
+   * Property to hold default content suggstion
+   */
+  defaultContentTypeToSuggest: 'collection',
+
+  /**
+   * @property {Array} studentListToSuggest
+   * Property to hold list of students to suggest
+   */
+  studentListToSuggest: Ember.A([]),
+
   // -------------------------------------------------------------------------
   // Events
   initializeController() {
@@ -192,10 +204,12 @@ export default Ember.Controller.extend({
     },
 
     //Action triggered when click on competency suggestion
-    onSuggestAtCompetency(competency) {
+    onSuggestAtCompetency(competency, selectedContentType = null, students = []) {
       const controller = this;
       controller.set('selectedCompetencyData', competency);
       controller.set('isShowActivitySearchContentPullup', true);
+      controller.set('selectedContentType', selectedContentType || controller.get('defaultContentTypeToSuggest'));
+      controller.set('studentListToSuggest', students);
     }
   },
 

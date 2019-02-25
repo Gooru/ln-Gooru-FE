@@ -64,7 +64,12 @@
                   {{else}}
                     <div class="add-activity" {{action "onAddActivity" content}}>{{gru-icon name="add"}}</div>
                   {{/if}}
-                  <div class="assign-date" onclick={{action "onScheduleActivity" content}}>{{gru-icon name="update"}}</div>
+
+                  {{#if content.isScheduled}}
+                    <div class="activity-added">{{gru-icon name="done"}}</div>
+                  {{else}}
+                    <div class="assign-date" onclick={{action "onScheduleActivity" content}}>{{gru-icon name="update"}}</div>
+                  {{/if}}
                 </div>
               </div>
             </div>

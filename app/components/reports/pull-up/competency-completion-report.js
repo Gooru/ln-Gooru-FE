@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { SEARCH_FILTER_BY_CONTENT_TYPES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -13,6 +14,11 @@ export default Ember.Component.extend({
   // Events
   didInsertElement() {
     this.openPullUp();
+  },
+
+  willDestroyElement() {
+    const component = this;
+    component.set('selectedUserIds', Ember.A([]));
   },
 
   // -------------------------------------------------------------------------
@@ -37,6 +43,8 @@ export default Ember.Component.extend({
             component.set('isLoading', false);
           });
       }
+      component.resetSelectedUserIds(competencyData);
+      component.set('activeCompetency', competencyData);
       component.toggleCompetencyContainer(competencySeq);
     },
 
@@ -49,9 +57,56 @@ export default Ember.Component.extend({
     //Action triggered when click on competency suggestion
     onSuggestAtCompetency(competency) {
       const component = this;
+      component.resetSelectedUserIds(competency);
       component.sendAction('onSuggestAtCompetency', competency);
+    },
+
+    //Action triggered when filter by content type
+    onFilterBy(contentType) {
+      const component = this;
+      let activeCompetency = component.get('activeCompetency');
+      let userIds = component.get('selectedUserIds');
+      component.sendAction('onSuggestAtCompetency', activeCompetency, contentType, userIds);
+    },
+
+    //Action triggered when select/unselect a student
+    onSelectStudent(userCompletionData) {
+      const component = this;
+      let selectedUserIds = component.get('selectedUserIds');
+      if (userCompletionData.get('selected')) {
+        userCompletionData.set('selected', false);
+        selectedUserIds.removeObject(userCompletionData);
+      } else {
+        userCompletionData.set('selected', true);
+        selectedUserIds.pushObject(userCompletionData);
+      }
+      component.set('selectedUserIds', selectedUserIds);
+      component.set('isShowStudentSuggestion', selectedUserIds.length > 0);
     }
   },
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {Array} contentTypes
+   */
+  contentTypes: SEARCH_FILTER_BY_CONTENT_TYPES,
+
+  /**
+   * @property {Object} activeCompetency
+   */
+  activeCompetency: null,
+
+  /**
+   * @property {Array} selectedUserIds
+   */
+  selectedUserIds: Ember.A([]),
+
+  /**
+   * @property {Boolean} isShowStudentSuggestion
+   */
+  isShowStudentSuggestion: false,
 
   // -------------------------------------------------------------------------
   // Functions
@@ -128,5 +183,22 @@ export default Ember.Component.extend({
     }).then(({ usersPerformanceSummary }) => {
       return usersPerformanceSummary;
     });
+  },
+
+  /**
+   * @function resetSelectedUserIds
+   * Method to reset selected userIds
+   */
+  resetSelectedUserIds(competencyData) {
+    const component = this;
+    let activeCompetency = component.get('activeCompetency');
+    if (activeCompetency && (competencyData.get('competencyCode') !== activeCompetency.get('competencyCode'))) {
+      let selectedUsers = component.get('selectedUserIds');
+      component.set('selectedUserIds', Ember.A([]));
+      selectedUsers.map( selectedUser => {
+        selectedUser.set('selected', false);
+      });
+      component.set('isShowStudentSuggestion', false);
+    }
   }
 });

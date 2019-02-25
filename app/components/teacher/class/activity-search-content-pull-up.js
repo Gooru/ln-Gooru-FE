@@ -58,8 +58,9 @@ export default Ember.Component.extend({
       component
         .get('classActivityService')
         .addActivityToClass(classId, contentId, contentType, date)
-        .then(function() {
+        .then(function(contentId) {
           content.set('isAdded', true);
+          component.addStudents(contentId);
         });
     },
 
@@ -118,9 +119,10 @@ export default Ember.Component.extend({
       component
         .get('classActivityService')
         .addActivityToClass(classId, contentId, contentType, scheduleDate)
-        .then(function() {
+        .then(function(contentId) {
           if (!component.isDestroyed) {
-            content.set('isAdded', true);
+            content.set('isScheduled', true);
+            component.addStudents(contentId);
           }
         });
     },
@@ -146,9 +148,10 @@ export default Ember.Component.extend({
           forMonth,
           forYear
         )
-        .then(function() {
+        .then(function(contentId) {
           if (!component.isDestroyed) {
-            content.set('isAdded', true);
+            content.set('isScheduled', true);
+            component.addStudents(contentId);
           }
         });
     },
@@ -276,6 +279,12 @@ export default Ember.Component.extend({
     let activitySearchTerm = component.get('activitySearchTerm');
     return activitySearchTerm ? activitySearchTerm.length >= 3 : false;
   }),
+
+  /**
+   * @property {Array} students
+   * Property to hold list of selected students
+   */
+  students: Ember.A([]),
   //--------------------------------------------------------------------------
   // Methods
 
@@ -404,6 +413,33 @@ export default Ember.Component.extend({
       return component
         .get('profileService')
         .readAssessments(currentUserId, params);
+    }
+  },
+
+  /**
+   * @function assignStudentsToContent
+   * Method to assign list of students into an activity
+   */
+  assignStudentsToContent(users, contentId) {
+    const component = this;
+    const classId = component.get('classId');
+    component
+      .get('classActivityService')
+      .addUsersToActivity(classId, contentId, users);
+  },
+
+  /**
+   * @function addStudents
+   * Method to list of all the selected studentIds
+   */
+  addStudents(contentId) {
+    const component = this;
+    let students = component.get('students');
+    if (students.length) {
+      let users = students.map(student => {
+        return student.get('id');
+      });
+      return component.assignStudentsToContent(users, contentId);
     }
   },
 
