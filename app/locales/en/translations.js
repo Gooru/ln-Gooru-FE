@@ -1887,14 +1887,15 @@ export default Object.assign(quizzesTranslations, {
     },
     competency: {
       popover: {
-        title: '{{title}} BOUNDARY',
+        title: '{{title}} HIGHLINE',
         content:
           'You need to study all the standards between your skyline and this grade line to reach your destination.'
       }
     },
     'assigned-course-title': 'Assigned Course for {{title}}',
-    'study-course': 'Study Course',
-    'show-me-my-route': 'My route',
+    'start-studying': 'Start Studying',
+    'show-route': 'Show Route',
+    'review-destination': 'Review Destination',
     'competency-level': {
       title: 'Your Proficiency Profile',
       mastery: '{{count}} Standards Mastered',

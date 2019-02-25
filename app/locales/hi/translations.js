@@ -1871,9 +1871,9 @@ export default Object.assign(quizzesTranslations, {
       }
     },
     'assigned-course-title': '{{शीर्षक}} के लिए निर्धारित पाठ्यक्रम',
-    'study-course': 'अध्ययन पाठ्यक्रम',
-    'show-my-destination': 'मेरी मंजिल दिखाओ',
-    'show-me-my-route': 'मेरा मार्ग दिखाओ',
+    'start-studying': 'Start Studying',
+    'show-route': 'Show Route',
+    'review-destination': 'Review Destination',
     'competency-level': {
       title: 'आपकी प्रवीणता प्रोफ़ाइल',
       mastery: '{{गिनती}} मानकों में महारत हासिल है',

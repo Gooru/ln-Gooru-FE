@@ -1663,6 +1663,64 @@ export default Object.assign(quizzesTranslations, {
     instructions:
       'ಸರಿಯಾದ ಕ್ರಮದಲ್ಲಿ ಉತ್ತರಗಳನ್ನು ಮರುಕ್ರಮಗೊಳಿಸಿ, ಮತ್ತು \\\\\\\'{{action}}\\\\\\\' ಕ್ಲಿಕ್ ಮಾಡಿ.'
   },
+  'student-first-experience': {
+    preStudyTitle: 'Pre-Study for {{title}}',
+    'lp-compute-inprogress':
+      'We are computing your initial proficiency profile in {{title}}',
+    'route0-action': {
+      accept: 'Accept',
+      ignore: 'Ignore'
+    },
+    competency: {
+      popover: {
+        title: '{{title}} HIGHLINE',
+        content:
+          'You need to study all the standards between your skyline and this grade line to reach your destination.'
+      }
+    },
+    'assigned-course-title': 'Assigned Course for {{title}}',
+    'start-studying': 'Start Studying',
+    'show-route': 'Show Route',
+    'review-destination': 'Review Destination',
+    'competency-level': {
+      title: 'Your Proficiency Profile',
+      mastery: '{{count}} Standards Mastered',
+      'in-progress': '{{count}} Standards In Progress',
+      'not-started': '{{count}} Standards Not Started',
+      'your-skyline': 'Your Skyline'
+    },
+    explanatory: {
+      master: {
+        title: 'MASTERED',
+        desc:
+          'Indicates that there is evidence that you have successfully mastered the standards '
+      },
+      'in-progress': {
+        title: 'IN PROGRESS',
+        desc:
+          'Indicates that there is evidence that you have started studying the standards and are in progress towards achieving mastered '
+      },
+      'not-started': {
+        title: 'NOT STARTED',
+        desc:
+          'Indicates that there is no evidence and you are yet to begin studying the standards'
+      }
+    },
+    'competency-level-partial': {
+      desc1: 'You are currently in ',
+      desc2:
+        'This is your {{title}} proficiency profile. It shows your mastery in standards (aka competencies) in the different focus areas in {{title}} (aka domains). The columns show domains and the boxes show the standards within each {{title}} domain.',
+      desc3:
+        'As you master each of the competencies, the corresponding box is updated to dark blue.',
+      desc4:
+        'The skyline is the thick white line that shows the highest competencies that you have mastered in each math domain.',
+      desc5:
+        'If the skyline is at the bottom of a domain, it means the system needs more information to be able to locate you in that topic. As soon as you start on the lessons and check for understandings, your skyline will bump up and update your proficiency in each domain.'
+    },
+    units: {
+      other: '{{count}} Units'
+    }
+  },
   player: {
     'gru-navigation': {
       'view-report': 'ವೀಕ್ಷಣೆ ವರದಿ'
