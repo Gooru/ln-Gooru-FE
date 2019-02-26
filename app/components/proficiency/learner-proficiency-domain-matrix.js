@@ -476,7 +476,6 @@ export default Ember.Component.extend({
           });
           if (status > 1) {
             mergeDomainData.forEach(data => {
-              data.set('status', status);
               data.set('isMastery', true);
             });
             data.set('isMastery', true);
