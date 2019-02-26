@@ -132,7 +132,6 @@ export default Ember.Component.extend({
    * @property {Boolean} isShowAddData
    */
   isShowAddData: Ember.computed(
-    'isOfflineClass',
     'classActivity.activation_date',
     'item',
     'members',
