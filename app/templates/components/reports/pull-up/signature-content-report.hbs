@@ -54,7 +54,7 @@
               </div>
             </div>
             {{#if isStudent}}
-              {{#link-to 'player' signatureContent.id (query-params type=collectionType role='student' source=source) target=(if isStudent '_self' '_blank')}}
+              {{#link-to 'player' signatureContent.id (query-params type=collectionType role='student' source=source)}}
                 <div class="action">
                   {{gru-icon name='play_arrow'}}
                 </div>
