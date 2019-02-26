@@ -2893,7 +2893,9 @@ export default Object.assign(quizzesTranslations, {
   },
   'student-journey': {
     heading: 'YOUR JOURNEY',
+    'teacher-heading': 'STUDENT JOURNEY',
     nodata: 'You are yet to start your journey for this competency',
+    'no-data-teacher': 'Student are yet to start journey for this competency',
     'student-status-3':
       'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
     'student-status-2':
