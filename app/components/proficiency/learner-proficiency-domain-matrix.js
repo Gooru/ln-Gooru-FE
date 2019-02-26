@@ -133,7 +133,8 @@ export default Ember.Component.extend({
     let selectedDomain = component.get('selectedDomain');
     component.$('#render-proficiency-matrix').addClass('highlight');
     let domainSeq =
-      selectedCompetency.get('domainSeq') || selectedDomain.get('domainSeq');
+      selectedCompetency.get('domainSeq') ||
+      (selectedDomain && selectedDomain.get('domainSeq'));
     component.$('.competency').removeClass('active active-cell');
     component
       .$(`.competency-${domainSeq}-${selectedCompetency.competencySeq}`)
@@ -193,6 +194,8 @@ export default Ember.Component.extend({
     'competencyMatrixCoordinates',
     function() {
       let component = this;
+      component.set('selectedDomain', null);
+      component.set('selectedCompetency', null);
       component.loadChartData();
     }
   ),
@@ -473,7 +476,6 @@ export default Ember.Component.extend({
           });
           if (status > 1) {
             mergeDomainData.forEach(data => {
-              data.set('status', status);
               data.set('isMastery', true);
             });
             data.set('isMastery', true);
@@ -610,6 +612,7 @@ export default Ember.Component.extend({
       .on('click', function(d) {
         component.selectCompetency(d);
       });
+
     cards.exit().remove();
     component.$('.scrollable-chart').scrollTop(height);
     component.drawSkyline();

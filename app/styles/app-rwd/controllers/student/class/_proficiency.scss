@@ -1,20 +1,21 @@
 .student-class-proficiency {
+  .student-inspect-competency-chart
+    .chart-container
+    .graded-chart-container
+    .domain-chart
+    .scrollable-chart
+    #student-inspect-competency-chart {
+    box-shadow: unset;
+  }
+  .course-container,
+  .grade-data-container {
+    display: none;
+  }
+  .student-inspect-destination-sm {
+    display: block;
+  }
   .student-inspect-destination.proficiency {
     .inspect-destination-container {
-      .destination-chart-container {
-        .student-inspect-competency-chart {
-          .chart-container {
-            .graded-chart-container {
-              .domain-chart {
-                .scrollable-chart {
-                  height: auto;
-                }
-              }
-            }
-          }
-        }
-      }
-
       .competency-level-container {
         position: relative;
 
@@ -24,13 +25,15 @@
         }
       }
     }
-    @media screen and (max-width: $screen-sm - 1) {
+    @media screen and (max-width: $screen-sm) {
       .inspect-destination-container {
         grid-template-columns: unset;
 
         .destination-chart-container {
           margin-right: 0;
-          zoom: 0.8;
+          @media screen and (max-width: $screen-xs) {
+            zoom: 0.7;
+          }
         }
 
         .competency-level-container {
@@ -54,13 +57,6 @@
         }
       }
     }
-    @media screen and (max-width: $screen-359 + 1) {
-      .inspect-destination-container {
-        .destination-chart-container {
-          zoom: 0.6;
-        }
-      }
-    }
   }
 
   .student-inspect-destination.destination {
@@ -75,28 +71,8 @@
 
       .destination-chart-container {
         margin: 0;
-
-        .student-inspect-competency-chart {
-          zoom: 0.8;
-
-          .chart-container {
-            .graded-chart-container {
-              .taxonomy-grades-container {
-                .taxonomy-grades {
-                  .grade-list {
-                    padding-bottom: 10px;
-                    height: 545px;
-                  }
-                }
-              }
-
-              .domain-chart {
-                .scrollable-chart {
-                  height: 545px;
-                }
-              }
-            }
-          }
+        @media screen and (max-width: $screen-xs) {
+          zoom: 0.7;
         }
       }
 
@@ -124,7 +100,7 @@
     }
   }
 
-  .student-inspect-destination.route {
+  .student-inspect-destination.inspect-destination {
     .inspect-destination-container {
       grid-template-columns: unset;
       @media screen and (max-width: $screen-xs) {
@@ -136,28 +112,8 @@
 
       .destination-chart-container {
         margin: 0;
-
-        .student-inspect-competency-chart {
-          zoom: 0.8;
-
-          .chart-container {
-            .graded-chart-container {
-              .taxonomy-grades-container {
-                .taxonomy-grades {
-                  .grade-list {
-                    padding-bottom: 10px;
-                    height: 545px;
-                  }
-                }
-              }
-
-              .domain-chart {
-                .scrollable-chart {
-                  height: 545px;
-                }
-              }
-            }
-          }
+        @media screen and (max-width: $screen-xs) {
+          zoom: 0.7;
         }
       }
 
@@ -233,7 +189,7 @@
           position: unset;
           margin: 15px auto;
         }
-        @media screen and (max-width: $screen-359 + 1) {
+        @media screen and (max-width: $screen-sm) {
           .route0-container {
             width: 87%;
 

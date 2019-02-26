@@ -3,19 +3,19 @@
     {{three-bounce-spinner}}
   </div>
 {{/if}}
-<div class="chart-area {{unless isExpandChartEnabled 'compressed-view'}}">
-  <div class="actions">
-    {{#if (and (gt taxonomyGrades.length 0) isShowMatrixChart)}}
-      {{proficiency.grade-selector taxonomyGrades=taxonomyGrades onToggleBaseline="onToggleBaseline" onSelectGrade="onSelectGrade" activeGrade=activeGrade}}
+<div class="actions">
+  {{#if (and (gt taxonomyGrades.length 0) isShowMatrixChart)}}
+    {{proficiency.grade-selector taxonomyGrades=taxonomyGrades onToggleBaseline="onToggleBaseline" onSelectGrade="onSelectGrade" activeGrade=activeGrade}}
+  {{/if}}
+  <div class="toggle-chart" {{action "onToggleChart"}}>
+    {{#if isExpandChartEnabled}}
+      {{gru-icon name="unfold_less"}}<span class="hidden-xs">{{t 'profile.proficiency.show-compressed-chart'}}</span>
+    {{else}}
+      {{gru-icon name="unfold_more"}}<span class="hidden-xs">{{t 'profile.proficiency.show-expanded-chart'}}</span>
     {{/if}}
-    <div class="toggle-chart" {{action "onToggleChart"}}>
-      {{#if isExpandChartEnabled}}
-        {{gru-icon name="unfold_less"}}<span>{{t 'profile.proficiency.show-compressed-chart'}}</span>
-      {{else}}
-        {{gru-icon name="unfold_more"}}<span>{{t 'profile.proficiency.show-expanded-chart'}}</span>
-      {{/if}}
-    </div>
   </div>
+</div>
+<div class="chart-area {{unless isExpandChartEnabled 'compressed-view'}}">
   <div class="matrix-chart">
     <div class="chart-container {{if (lte taxonomyGrades.length 0) 'no-grade'}}">
       <div class="domain-chart-container">
