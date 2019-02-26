@@ -7,21 +7,6 @@
       </div>
     {{/each}}
   </div>
-  {{#if preRequisites}}
-    <div class="prerequisites-cotainer">
-      <div class="title">{{t 'report.competency-report.prerequisites'}}</div>
-      <div class="prerequisites-info-container">
-        {{#each preRequisites as |prerequisite|}}
-          <div class="prerequisite-code">
-            <span class="code">{{prerequisite.code}}</span>
-          </div>
-          <div class="prerequisite-title">
-            {{prerequisite.title}}
-          </div>
-        {{/each}}
-      </div>
-    </div>
-  {{/if}}
   <div class="signature-content-container signature-assessments">
     {{#if signatureAssessments}}
       <div class="title">{{t 'report.competency-report.signature-assessments'}}</div>

@@ -189,10 +189,14 @@ export default Ember.Mixin.create({
 
   setSignatureContent(competency) {
     let component = this;
-    let signatureCompetencyList = component.get('signatureCompetencyList');
-    let domainCode = competency.get('domainCode');
+    const signatureCompetencyList = component.get('signatureCompetencyList');
+    const domainCode = competency.get('domainCode');
+    const competencyStatus = competency.get('status');
     let showSignatureAssessment =
-      signatureCompetencyList[domainCode] === competency.get('competencyCode');
+      signatureCompetencyList[domainCode] ===
+        competency.get('competencyCode') ||
+      competencyStatus === 2 ||
+      competencyStatus === 4;
     competency.set('showSignatureAssessment', showSignatureAssessment);
     component.set('selectedCompetency', competency);
   },
