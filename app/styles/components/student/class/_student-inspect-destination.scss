@@ -14,6 +14,9 @@
       padding-top: 0;
     }
   }
+  .student-inspect-destination-sm {
+    display: none;
+  }
 
   .inspect-destination-container {
     display: grid;
@@ -141,10 +144,11 @@
         display: grid;
         grid-template-columns: 30px auto;
         background-color: #4a8cdb;
-        width: 160px;
         border-radius: 45px;
         font-size: 18px;
-        margin-left: 200px;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: 225px;
       }
     }
     //TODO new screen changes
@@ -188,9 +192,11 @@
         display: grid;
         grid-template-columns: 30px auto;
         background-color: #4a8cdb;
-        width: 160px;
         border-radius: 45px;
         font-size: 18px;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: 170px;
       }
     }
 
@@ -373,9 +379,10 @@
         display: grid;
         grid-template-columns: 25px auto;
         background-color: #4a8cdb;
-        width: 175px;
         border-radius: 45px;
         font-size: 18px;
+        padding-left: 15px;
+        padding-right: 15px;
       }
     }
   }

@@ -91,6 +91,8 @@ export default Ember.Component.extend({
       component.set('selectedMenuItem', 'course-map');
     } else if (currentPath === 'student.class.class-activities') {
       component.set('selectedMenuItem', 'class-activities');
+    } else if (currentPath === 'student.class.student-learner-proficiency') {
+      component.set('selectedMenuItem', 'profile-prof');
     }
 
     var item = component.get('selectedMenuItem');

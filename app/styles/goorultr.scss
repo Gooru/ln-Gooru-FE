@@ -400,7 +400,6 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/student/class/student-inspect-destination";
 @import "components/proficiency/student-inspect-competency-chart";
 @import "components/student/class/destination/student-destination-course-accordion";
-@import "components/proficiency/taxonomy-grades"; //Student Nav Math Class join landing for mobile view
 @import "components/student/class/student-inspect-destination-xs"; // Student / Teacher grading
 @import "components/grade/pull-up/free-response-question-grade"; // Activity card
 @import "components/activity/course-card";
@@ -435,10 +434,11 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/teacher/offline-class/oca-student-activity-report-pull-up";
 
 //Signature Content
-@import "components/reports/pull-up/_signature-content-report";
-@import "components/reports/pull-up/_competency-meta-info";
-@import "components/reports/pull-up/_competency-meta-data";
-@import "components/reports/pull-up/_student-journey";
+@import "components/reports/pull-up/signature-content-report";
+@import "components/reports/pull-up/competency-info-content";
+@import "components/reports/pull-up/competency-meta-data";
+@import "components/reports/pull-up/student-journey";
+@import "components/reports/pull-up/learning-map-content";
 
 //Student Proficiency
 @import "routes/student-learner-proficiency";
@@ -447,3 +447,5 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/proficiency/proficiency-subject-panel";
 @import "components/proficiency/domain-info-pull-up";
 @import "components/proficiency/competency-info-pull-up";
+
+@import "components/proficiency/grade-selector";

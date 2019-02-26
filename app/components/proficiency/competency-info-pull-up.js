@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { COMPETENCY_STATUS } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   classNames: ['competency-info-pull-up'],
@@ -6,6 +7,15 @@ export default Ember.Component.extend({
   classNameBindings: ['isInspectCompetency:open', 'isExpand:expand'],
 
   isExpand: false,
+
+  /**
+   * @property {String} competencyStatus
+   */
+  competencyStatus: Ember.computed('competency', function() {
+    let component = this;
+    let competency = component.get('competency');
+    return competency && COMPETENCY_STATUS[competency.status];
+  }),
 
   actions: {
     /**
@@ -19,9 +29,9 @@ export default Ember.Component.extend({
 
     closePullUp() {
       let component = this;
-      component.set('competency', null);
       component.toggleProperty('isInspectCompetency');
       component.set('isExpand', false);
+      component.set('competency', null);
     }
   }
 });

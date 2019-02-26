@@ -4,7 +4,7 @@
   </div>
   {{#if showDirections}}
     {{#if (eq type "route")}}
-      <div class="course-container hidden-xs">
+      <div class="course-container">
         {{#if (and isRoute0Pending isRoute0)}}
           <div class="pre-study-title">
             {{t "student-first-experience.preStudyTitle" title=activeGrade.grade}}
@@ -43,11 +43,11 @@
       }}
         </div>
         <div class="study-course" {{action onMoveNext 'playNext'}}>
-          {{gru-icon name="near_me"}} {{t "student-first-experience.study-course"}}
+          {{gru-icon name="near_me"}} {{t "student-first-experience.start-studying"}}
         </div>
       </div>
       {{else if (eq type "destination")}}
-      <div class="grade-data-container hidden-xs">
+      <div class="grade-data-container">
         <div class="grade-title">
           {{activeGrade.grade}}
         </div>
@@ -55,7 +55,7 @@
           {{safe-html activeGrade.description}}
         </div>
         <div class="next-route" {{action onMoveNext 'route'}}>
-          {{gru-icon name="directions"}} {{t "student-first-experience.show-me-my-route"}}
+          {{gru-icon name="directions"}} {{t "student-first-experience.show-route"}}
         </div>
       </div>
     {{else}}
@@ -79,10 +79,8 @@
         <p class="proficiency-info-4 proficiency-info">
           <p>{{'t' "student-first-experience.competency-level-partial.desc5" title=subject.title}}</p>
         </p>
-        <p class="proficiency-info-5 proficiency-info">
-          <p>{{'t' "student-first-experience.competency-level-partial.desc6"}}</p>
-        </p>
-        <div class="competency-level-list proficiency-info-6 proficiency-info">
+
+        <div class="competency-level-list proficiency-info-5 proficiency-info">
           <div class="mastery-container">
             <div class="legend" title= {{ t "student-first-experience.explanatory.master.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.master.desc"}} data-placement='left'></div>
             <div class="label"> {{t "student-first-experience.competency-level.mastery" count=competencyStatus.master}}</div>
@@ -100,12 +98,12 @@
             <div class="label"> {{t "student-first-experience.competency-level.your-skyline"}}</div>
           </div>
         </div>
-        <div class="show-destination proficiency-info-7 proficiency-info" {{action onMoveNext 'destination'}}>
-          {{gru-icon name="directions"}} {{t "common.destination"}}
+        <div class="show-destination proficiency-info-6 proficiency-info" {{action onMoveNext 'destination'}}>
+          {{gru-icon name="directions"}} {{t "student-first-experience.review-destination"}}
         </div>
       </div>
     {{/if}}
-    <div class="hidden visible-xs">
+    <div class="student-inspect-destination-sm">
       {{#unless (eq type "proficiency") }}
         {{student.class.student-inspect-destination-xs
         type=type

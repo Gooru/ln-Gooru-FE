@@ -61,7 +61,6 @@ export default Ember.Route.extend({
     controller.set('studentProfile', model.get('profile'));
     controller.set('class', model.get('class'));
     controller.set('course', model.get('course'));
-    controller.set('isTeacher', true);
     controller.set('taxonomyCategories', model.get('categories'));
     controller.loadData();
   },

@@ -1,3 +1,32 @@
+.student_class_student-learner-proficiency {
+  height: 100%;
+  margin: unset;
+  width: 100vw;
+
+  .student.class {
+    width: 100%;
+  }
+
+  .content
+    > .student-proficiency-container
+    > .panel-container
+    > .student-proficiency-panel
+    > .panel-header
+    > .back {
+    visibility: hidden;
+  }
+}
+
+.no-course-content {
+  font-size: 20px;
+  align-items: center;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  font-family: "Open Sans";
+}
+
+.student_class_student-learner-proficiency,
 .teacher_class_student-learner-proficiency {
   .teacher.class {
     padding: 0;
@@ -9,10 +38,10 @@
     height: 100%;
     background: #35424b;
     grid-gap: 20px;
-    padding: 10px 0;
+    padding: 10px 20px;
     display: grid;
     min-height: 92vh;
-    grid-template-columns: 100px 1fr 35%;
+    grid-template-columns: 1fr 35%;
 
     .pull-up-container {
       padding-right: 15px;
