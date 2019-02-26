@@ -19,17 +19,12 @@
     }
 
     .learner-proficiency-domain-matrix {
-      .chart-area {
-        max-width: 100vw;
-        overflow-x: auto;
-
-        .actions {
-          .grade-selector {
-            .dropdown {
-              .dropbtn {
-                font-size: 12px;
-                line-height: 12px;
-              }
+      .actions {
+        .grade-selector {
+          .dropdown {
+            .dropbtn {
+              font-size: 12px;
+              line-height: 12px;
             }
           }
         }
@@ -37,6 +32,21 @@
         .toggle-chart {
           justify-self: left;
           margin-left: 8px;
+        }
+      }
+
+      .chart-area {
+        max-width: 100vw;
+        overflow-x: auto;
+
+        .matrix-chart {
+          .chart-container {
+            .domain-chart-container {
+              .scrollable-chart {
+                max-height: 70vh;
+              }
+            }
+          }
         }
       }
     }

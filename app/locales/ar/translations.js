@@ -1038,14 +1038,25 @@ export default Object.assign(quizzesTranslations, {
   },
   'student-journey': {
     heading: 'YOUR JOURNEY',
-    nodata: 'You are yet to start your journey for this competency'
+    nodata: 'You are yet to start your journey for this competency',
+    'student-status-3':
+      'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
+    'student-status-2':
+      'You have not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+    'teacher-status-2':
+      'The student has not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+    'teacher-status-3':
+      'The student has asserted mastery in the competency and has not studied any learning activity on the Navigator for this competency.'
   },
   'learning-map': {
     'practice-question': 'practice questions',
     'no-practice-questions':
       'There are no practice questions for this competency',
     'solved-examples': 'solved examples',
-    'no-solved-examples': 'There are no solved examples for this competency'
+    'no-solved-examples': 'There are no solved examples for this competency',
+    'challenging-questions': 'challenging questions',
+    'no-challenging-questions':
+      'There are no challenging questions for this competency'
   },
   'student-landing': {
     announcement: 'إعلان',
@@ -1251,10 +1262,15 @@ export default Object.assign(quizzesTranslations, {
     'setting-forward-backward':
       'يمكنك التنقل إلى الأمام وإلى الخلف للإجابة على الأسئلة.',
     'unlimited-attempts-left': 'لديك عدد غير محدد من المحاولات.',
+    'setting-forward-teacher': 'Student can navigate forward only',
+    'setting-forward-backward-teacher':
+      'Student can navigate forward and backwards to answer questions',
+    'unlimited-attempts-left-teacher': 'Student have unlimited attempts',
     'attempts-left': {
       zero: 'لديك {{count}} من المحاولات.',
       one: 'تبقى لديك محاولة واحدة فقط.',
-      other: 'لديك {{count}} من المحاولات.'
+      other: 'لديك {{count}} من المحاولات.',
+      'other-teacher': 'Student have {{count}} attempts'
     },
     'unlimited-attempts': 'لديك عدد غير محدد من المحاولات.',
     cancel: 'إلغاء',

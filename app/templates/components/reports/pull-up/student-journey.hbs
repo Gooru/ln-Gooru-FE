@@ -17,7 +17,11 @@
       </div>
     {{/each}}
   {{else}}
-    <span class="no-data">{{t 'student-journey.nodata'}}</span>
+    {{#if isStudent}}
+      <span class="message">{{t (if (or (eq competency.status 2) (eq competency.status 3)) (concat 'student-journey.student-status-' competency.status) 'student-journey.nodata')}}</span>
+    {{else}}
+      <span class="message">{{t (if (or (eq competency.status 2) (eq competency.status 3)) (concat 'student-journey.teacher-status-' competency.status) 'student-journey.nodata')}}</span>
+    {{/if}}
   {{/if}}
 
   {{#if isShowPullUp}}

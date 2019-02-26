@@ -44,16 +44,37 @@
     fill: #006eb5;
   }
 
+  .actions {
+    grid-template-columns: auto max-content;
+    display: grid;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+
+    .toggle-chart {
+      width: max-content;
+      padding: 0 15px;
+      height: 25px;
+      border-radius: 45px;
+      background-color: #4190e0;
+      font-size: 12px;
+      color: $white;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: auto auto;
+      align-items: center;
+      justify-self: end;
+      align-self: center;
+      margin: 8px 8px 8px 0;
+
+      i {
+        font-size: 15px;
+      }
+    }
+  }
+
   .chart-area {
     background-color: $gray-97;
     display: grid;
     grid-template-rows: auto auto;
-
-    .actions {
-      grid-template-columns: auto max-content;
-      display: grid;
-      box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
-    }
 
     .matrix-chart {
       min-height: inherit;
@@ -98,27 +119,6 @@
       }
     }
 
-    .toggle-chart {
-      width: max-content;
-      padding: 0 15px;
-      height: 25px;
-      border-radius: 45px;
-      background-color: #4190e0;
-      font-size: 12px;
-      color: $white;
-      cursor: pointer;
-      display: grid;
-      grid-template-columns: auto auto;
-      align-items: center;
-      justify-self: end;
-      align-self: center;
-      margin: 8px 8px 8px 0;
-
-      i {
-        font-size: 15px;
-      }
-    }
-
     .matrix-chart {
       .chart-container {
         display: flex;
@@ -133,8 +133,6 @@
         @extend %scroll-style;
 
         .domain-chart-container {
-          // align-self: flex-end;
-          // max-width: calc(100vw - 100px);
           overflow-x: auto;
           @extend %scroll-style;
 

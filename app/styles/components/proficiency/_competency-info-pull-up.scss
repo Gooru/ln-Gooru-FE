@@ -20,7 +20,13 @@
     height: 53px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
     align-items: center;
-    grid-template-columns: 53px 1fr 50px;
+    grid-template-columns: 53px 1fr 100px 50px;
+
+    .status {
+      width: max-content;
+      justify-self: center;
+      font-weight: bold;
+    }
 
     .competency-status {
       justify-self: center;

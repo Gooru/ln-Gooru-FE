@@ -27,22 +27,22 @@
                   {{#if content.bidirectional}}
                     {{gru-icon name='swap_horiz'}}
                     <div class="info bidirectional">
-                      {{t "gru-assessment-confirmation.setting-forward-backward"}}
+                      {{t (if isStudent "gru-assessment-confirmation.setting-forward-backward" "gru-assessment-confirmation.setting-forward-backward-teacher")}}
                     </div>
                   {{else}}
                     {{gru-icon name='trending_flat'}}
                     <div class="info not-bidirectional">
-                      {{t "gru-assessment-confirmation.setting-forward"}}
+                      {{t (if isStudent "gru-assessment-confirmation.setting-forward" "gru-assessment-confirmation.setting-forward-teacher")}}
                     </div>
                   {{/if}}
                 </div>
                 <div class="attempts">
                   {{#if unlimited}}
                     {{gru-icon name='cached'}}
-                    <div class="info unlimited">{{t "gru-assessment-confirmation.unlimited-attempts-left"}}</div>
+                    <div class="info unlimited">{{t (if isStudent "gru-assessment-confirmation.unlimited-attempts-left" "gru-assessment-confirmation.unlimited-attempts-left-teacher")}}</div>
                   {{else}}
                     <div class="attempt">{{gru-icon name='rotate_right'}}</div>
-                    <div class="info">{{t "gru-assessment-confirmation.attempts-left.other" count=content.attempts}}</div>
+                    <div class="info">{{t (if isStudent "gru-assessment-confirmation.attempts-left.other" "gru-assessment-confirmation.attempts-left.other-teacher" count=content.attempts)}}</div>
                   {{/if}}
                 </div>
               {{/if}}
@@ -53,11 +53,13 @@
                 {{/if}}
               </div>
             </div>
-            {{#link-to 'player' signatureContent.id (query-params type=collectionType role='student' source=source) target=(if isStudent '_self' '_blank')}}
-              <div class="action">
-                {{gru-icon name='play_arrow'}}
-              </div>
-            {{/link-to}}
+            {{#if isStudent}}
+              {{#link-to 'player' signatureContent.id (query-params type=collectionType role='student' source=source) target=(if isStudent '_self' '_blank')}}
+                <div class="action">
+                  {{gru-icon name='play_arrow'}}
+                </div>
+              {{/link-to}}
+            {{/if}}
           </div>
         </div>
       </div>
