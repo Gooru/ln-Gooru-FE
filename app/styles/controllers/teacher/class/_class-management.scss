@@ -664,13 +664,6 @@
         margin: 15px;
       }
 
-      .dropdown-menu {
-        position: absolute;
-        top: auto;
-        left: auto;
-        z-index: 500 !important;
-      }
-
       .student-settings-sec {
         @extend .sec-panel;
         padding-left: 10px;
@@ -708,6 +701,7 @@
 
             &:last-child {
               border-right: none;
+              max-width: 80px;
             }
           }
 
@@ -715,14 +709,18 @@
             height: 40px;
             border-bottom: 1px solid #d7d7d7;
             border-right: 2px dashed #d7d7d7;
+
             &.updated {
               background-color: rgb(189, 220, 255);
+
               button {
                 background-color: rgb(189, 220, 255);
               }
             }
+
             &:last-child {
               border-right: none;
+              max-width: 80px;
             }
 
             .gru-dropdown {
@@ -782,6 +780,14 @@
               height: 30px;
               margin: auto;
             }
+
+            .student-name {
+              @include ellipsis(
+                $font-size: 13px,
+                $line-height: 1.2,
+                $lines-to-show: 1
+              );
+            }
           }
 
           .origin {
@@ -809,11 +815,12 @@
           .actions-btn {
             display: grid;
             align-items: center;
-            grid-template-columns: 50px 1fr 1fr;
+            grid-template-columns: 50px 50px;
             justify-items: center;
 
             .student-delete {
               opacity: 0.3;
+              height: 22px;
             }
           }
         }

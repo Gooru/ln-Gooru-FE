@@ -65,7 +65,7 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  queryParams: ['classId', 'courseId'],
+  queryParams: ['classId', 'courseId', 'studyPlayer'],
 
   /**
    * @property {limit}
@@ -80,6 +80,19 @@ export default Ember.Controller.extend({
    * @property {noMoreData}
    */
   noMoreData: false,
+
+  studyPlayer: false,
+
+  /**
+   * @property {String}
+   * Property to store course subject bucket or K12.MA will be default
+   */
+  subjectBucket: Ember.computed('course', function() {
+    let controller = this;
+    return controller.get('course.subject') || null;
+  }),
+
+  domainCompetencyList: null,
 
   init() {
     let controller = this;
@@ -100,7 +113,9 @@ export default Ember.Controller.extend({
       let controller = this;
       let classId = controller.get('classId');
       let courseId = controller.get('courseId');
-      if (classId) {
+      if (controller.get('studyPlayer')) {
+        window.history.back();
+      } else if (classId) {
         controller.transitionToRoute('student.class.course-map', classId);
       } else {
         controller.transitionToRoute(
