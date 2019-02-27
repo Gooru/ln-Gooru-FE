@@ -1,10 +1,12 @@
 import Ember from 'ember';
 import {
   SEARCH_FILTER_BY_CONTENT_TYPES,
-  KEY_CODES
+  KEY_CODES,
+  SCREEN_SIZES
 } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
+import {isCompatibleVW} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -223,7 +225,7 @@ export default Ember.Component.extend({
    * @property {Boolean} isShowListView
    * Property to toggle between list/grid view
    */
-  isShowListView: false,
+  isShowListView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
   // -------------------------------------------------------------------------
   // actions

@@ -50,7 +50,7 @@
 
 {{#if isShowStudentSuggestion}}
   <div class="trigger-suggestion">
-    <div class="label-text">Add</div>
+    <div class="label-text">{{t 'common.add'}}</div>
     {{#each contentTypes as |contentType|}}
       <div class="{{contentType.format}} activity-type {{if (eq activeContentType contentType.format) 'active'}}" {{action "onFilterBy" contentType.format}}><i class="icon"></i></div>
     {{/each}}
