@@ -9,6 +9,7 @@
   transition: height 0.5s ease-out;
   overflow: hidden;
   bottom: 0;
+  z-index: 1001;
 
   &.open {
     height: 100%;
