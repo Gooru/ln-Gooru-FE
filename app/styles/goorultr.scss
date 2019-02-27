@@ -1,10 +1,4 @@
 @import "variables"; // Variable which are specific to rtl & ltr languages
-$tab-float-dir: left;
-$menu-float-dir: right;
-$border-right-side: 1px solid;
-$border-left-side: 0;
-$header-menu-rt-pos: 10px;
-$box-shadow: 1px -1px; // 2) import style file
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
 @import "embedded";
 @import "gooru-theme";
