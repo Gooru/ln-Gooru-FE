@@ -65,7 +65,7 @@ export default Ember.Component.extend({
     let component = this;
     component.$().animate(
       {
-        top: '10%'
+        top: '9%'
       },
       400
     );

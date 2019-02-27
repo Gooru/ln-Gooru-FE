@@ -48,6 +48,9 @@ export default Object.assign(quizzesTranslations, {
   },
   common: {
     'choose-lang': 'Elige Lengua',
+    'plan-an-activities': 'Plan your activities',
+    'plan-an-activities-msg':
+      'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
     'assessment-pl': {
       zero: 'Evaluaciones',
       other: 'Evaluaciones',
@@ -945,6 +948,51 @@ export default Object.assign(quizzesTranslations, {
       }
     }
   },
+  'grade-selector': {
+    placeholder: 'Choose Grade Lines to Display'
+  },
+  'competency-info-content': {
+    journey: 'JOURNEY',
+    metadata: 'METADATA',
+    'learning-map': 'LEARNING MAP'
+  },
+  'competency-meta-data': {
+    title: 'ALT-CONCEPTS',
+    heading: {
+      micro: 'MICRO COMPETENCIES',
+      prequisite: 'PREQUISITE COMPETENCIES'
+    },
+    nodata: {
+      micro: 'There are no micro-competencies defined for this competency',
+      prequisite:
+        'There are no prerequisite-competencies defined for this competency',
+      competency: 'There are no alt-concepts defined for this competency'
+    }
+  },
+  'student-journey': {
+    heading: 'YOUR JOURNEY',
+    'teacher-heading': 'STUDENT JOURNEY',
+    nodata: 'You are yet to start your journey for this competency',
+    'no-data-teacher': 'Student are yet to start journey for this competency',
+    'student-status-3':
+      'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
+    'student-status-2':
+      'You have not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+    'teacher-status-2':
+      'The student has not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+    'teacher-status-3':
+      'The student has asserted mastery in the competency and has not studied any learning activity on the Navigator for this competency.'
+  },
+  'learning-map': {
+    'practice-question': 'practice questions',
+    'no-practice-questions':
+      'There are no practice questions for this competency',
+    'solved-examples': 'solved examples',
+    'no-solved-examples': 'There are no solved examples for this competency',
+    'challenging-questions': 'challenging questions',
+    'no-challenging-questions':
+      'There are no challenging questions for this competency'
+  },
   user: {
     'joined-classes': {
       zero: 'Actualmente estás inscrito en aulas de {{count}}',
@@ -982,7 +1030,8 @@ export default Object.assign(quizzesTranslations, {
       classroom: 'Información del Aula',
       'back-to': 'Volver a las aulas',
       'back-to-independent': 'Volver a Aprendizaje Independiente',
-      'course-map': 'Mapa del curso'
+      'course-map': 'Mapa del curso',
+      'my-proficiency': 'My Proficiency'
     },
     course: {
       'total-time-spent': 'Tiempo total dedicado',
@@ -1140,7 +1189,8 @@ export default Object.assign(quizzesTranslations, {
     'attempts-left': {
       zero: 'Tienes intentos de {{count}}',
       other: 'Tienes intentos de {{count}}',
-      one: 'Tienes 1 intento a la izquierda'
+      one: 'Tienes 1 intento a la izquierda',
+      'other-teacher': 'Student have {{count}} attempts'
     },
     'setting-forward-backward':
       'Puede navegar hacia adelante y hacia atrás para responder preguntas',
@@ -1148,6 +1198,10 @@ export default Object.assign(quizzesTranslations, {
     'setting-forward': 'Solo puede navegar hacia adelante',
     continue: 'Continuar',
     'unlimited-attempts-left': 'Tienes intentos ilimitados',
+    'setting-forward-teacher': 'Student can navigate forward only',
+    'setting-forward-backward-teacher':
+      'Student can navigate forward and backwards to answer questions',
+    'unlimited-attempts-left-teacher': 'Student have unlimited attempts',
     start: '¡Comienzo!',
     description: 'En esta evaluación, {{model.title}}',
     'unlimited-attempts': 'Tienes intentos ilimitados',
@@ -1496,6 +1550,65 @@ export default Object.assign(quizzesTranslations, {
     instructions:
       'Reorganice las respuestas en el orden correcto y haga clic en \'{{action}}\'.'
   },
+  'student-first-experience': {
+    preStudyTitle: 'Pre-Study for {{title}}',
+    'lp-compute-inprogress':
+      'We are computing your initial proficiency profile in {{title}}',
+    'route0-action': {
+      accept: 'Accept',
+      ignore: 'Ignore'
+    },
+    competency: {
+      popover: {
+        title: '{{title}} HIGHLINE',
+        content:
+          'You need to study all the standards between your skyline and this grade line to reach your destination.'
+      }
+    },
+    'assigned-course-title': 'Assigned Course for {{title}}',
+    'start-studying': 'Start Studying',
+    'show-route': 'Show Route',
+    'review-destination': 'Review Destination',
+    'competency-level': {
+      title: 'Your Proficiency Profile',
+      mastery: '{{count}} Standards Mastered',
+      'in-progress': '{{count}} Standards In Progress',
+      'not-started': '{{count}} Standards Not Started',
+      'your-skyline': 'Your Skyline'
+    },
+    explanatory: {
+      master: {
+        title: 'MASTERED',
+        desc:
+          'Indicates that there is evidence that you have successfully mastered the standards '
+      },
+      'in-progress': {
+        title: 'IN PROGRESS',
+        desc:
+          'Indicates that there is evidence that you have started studying the standards and are in progress towards achieving mastered '
+      },
+      'not-started': {
+        title: 'NOT STARTED',
+        desc:
+          'Indicates that there is no evidence and you are yet to begin studying the standards'
+      }
+    },
+    'competency-level-partial': {
+      desc1: 'You are currently in ',
+      desc2:
+        'This is your {{title}} proficiency profile. It shows your mastery in standards (aka competencies) in the different focus areas in {{title}} (aka domains). The columns show domains and the boxes show the standards within each {{title}} domain.',
+      desc3:
+        'As you master each of the competencies, the corresponding box is updated to dark blue.',
+      desc4:
+        'The skyline is the thick white line that shows the highest competencies that you have mastered in each math domain.',
+      desc5:
+        'If the skyline is at the bottom of a domain, it means the system needs more information to be able to locate you in that topic. As soon as you start on the lessons and check for understandings, your skyline will bump up and update your proficiency in each domain.'
+    },
+    units: {
+      other: '{{count}} Units'
+    }
+  },
+
   player: {
     'gru-navigation': {
       'view-report': 'Vista del informe'
@@ -1710,6 +1823,7 @@ export default Object.assign(quizzesTranslations, {
     }
   },
   taxonomy: {
+    grades: 'Grades',
     'gru-taxonomy-selector': {
       'primary-subject-and-course': 'Marco y Curso de Normas',
       'add-secondary': 'Agregar secundario',

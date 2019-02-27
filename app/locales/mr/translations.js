@@ -86,7 +86,9 @@ export default Object.assign(quizzesTranslations, {
     accept: 'स्वीकार',
     ignore: 'दुर्लक्ष',
     add: 'जोडा',
-    'add-an-activity': 'हा उपक्रम संग्रहात टाका',
+    'plan-an-activities': 'Plan your activities',
+    'plan-an-activities-msg':
+      'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
     Reschedule: 'पुनर्नियोजन',
     'no-unschedule-items': 'नियोजन करण्यसाठी उपक्रम उपलब्ध नाही',
     'repeat-activity': 'उपक्रमाची पुनरावृत्ती',
@@ -1157,7 +1159,8 @@ export default Object.assign(quizzesTranslations, {
         'past-activities': 'मागील क्रियाकलाप'
       },
       'my-report': 'माझा रिपो्र्ट',
-      'my-location': 'माझा स्थान'
+      'my-location': 'माझा स्थान',
+      'my-proficiency': 'My Proficiency'
     },
     course: {
       'to-report': 'वापर सारांश',
@@ -1471,10 +1474,15 @@ export default Object.assign(quizzesTranslations, {
     'setting-forward-backward':
       'आपण प्रश्नांची उत्तरे देण्यासाठी अग्रेषित व मागे नेव्हिगेट करू शकता',
     'unlimited-attempts-left': 'आपल्याकडे अमर्यादित प्रयत्न आहेत',
+    'setting-forward-teacher': 'Student can navigate forward only',
+    'setting-forward-backward-teacher':
+      'Student can navigate forward and backwards to answer questions',
+    'unlimited-attempts-left-teacher': 'Student have unlimited attempts',
     'attempts-left': {
       zero: 'आपण {{count}} प्रयत्न केले आहेत',
       one: 'आपल्याकडे 1 प्रयत्न शिल्लक आहे',
-      other: 'आपण {{count}} प्रयत्न केले आहेत'
+      other: 'आपण {{count}} प्रयत्न केले आहेत',
+      'other-teacher': 'Student have {{count}} attempts'
     },
     'unlimited-attempts': 'आपल्याकडे अमर्यादित प्रयत्न आहेत',
     cancel: 'रद्द करा',
@@ -1857,9 +1865,9 @@ export default Object.assign(quizzesTranslations, {
       }
     },
     'assigned-course-title': '{{शीर्षक}} साठी नियुक्त केलेला कोर्स',
-    'study-course': 'अभ्यासक्रम',
-    'show-my-destination': 'माझे गंतव्य दर्शवा',
-    'show-me-my-route': 'माझा मार्ग दाखवा',
+    'start-studying': 'Start Studying',
+    'show-route': 'Show Route',
+    'review-destination': 'Review Destination',
     'competency-level': {
       title: 'आपल्या प्रवीण प्रोफाइल',
       mastery: '{{गणना}} मानके महारत',
@@ -2171,6 +2179,7 @@ export default Object.assign(quizzesTranslations, {
     }
   },
   taxonomy: {
+    grades: 'Grades',
     'gru-taxonomy-selector': {
       'add-secondary': 'Add secondary',
       'choose-subject': 'विषय निवडा',
@@ -2861,7 +2870,14 @@ export default Object.assign(quizzesTranslations, {
     },
     'domain-report': 'डोमेन अहवाल'
   },
-
+  'competency-info-content': {
+    journey: 'JOURNEY',
+    metadata: 'METADATA',
+    'learning-map': 'LEARNING MAP'
+  },
+  'grade-selector': {
+    placeholder: 'Choose Grade Lines to Display'
+  },
   'competency-meta-data': {
     title: 'ALT-CONCEPTS',
     heading: {
@@ -2877,9 +2893,28 @@ export default Object.assign(quizzesTranslations, {
   },
   'student-journey': {
     heading: 'YOUR JOURNEY',
-    nodata: 'You are yet to start your journey for this competency'
+    'teacher-heading': 'STUDENT JOURNEY',
+    nodata: 'You are yet to start your journey for this competency',
+    'no-data-teacher': 'Student are yet to start journey for this competency',
+    'student-status-3':
+      'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
+    'student-status-2':
+      'You have not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+    'teacher-status-2':
+      'The student has not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+    'teacher-status-3':
+      'The student has asserted mastery in the competency and has not studied any learning activity on the Navigator for this competency.'
   },
-
+  'learning-map': {
+    'practice-question': 'practice questions',
+    'no-practice-questions':
+      'There are no practice questions for this competency',
+    'solved-examples': 'solved examples',
+    'no-solved-examples': 'There are no solved examples for this competency',
+    'challenging-questions': 'challenging questions',
+    'no-challenging-questions':
+      'There are no challenging questions for this competency'
+  },
   'self-report': {
     'your-score': 'आपला स्कोअर',
     time_spent: 'एकूण लागलेला वेळ',

@@ -90,7 +90,9 @@ export default Object.assign(quizzesTranslations, {
     accept: 'Accept',
     ignore: 'Ignore',
     add: 'Add',
-    'add-an-activity': 'Add an Activity',
+    'plan-an-activities': 'Plan your activities',
+    'plan-an-activities-msg':
+      'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
     Reschedule: 'Reschedule',
     'no-unschedule-items':
       'You don\'t have any activities that need scheduling for ',
@@ -1491,10 +1493,15 @@ export default Object.assign(quizzesTranslations, {
     'setting-forward-backward':
       'You can navigate forward and backwards to answer questions',
     'unlimited-attempts-left': 'You have unlimited attempts',
+    'setting-forward-teacher': 'Student can navigate forward only',
+    'setting-forward-backward-teacher':
+      'Student can navigate forward and backwards to answer questions',
+    'unlimited-attempts-left-teacher': 'Student have unlimited attempts',
     'attempts-left': {
       zero: 'You have {{count}} attempts',
       one: 'You have 1 attempt left',
-      other: 'You have {{count}} attempts'
+      other: 'You have {{count}} attempts',
+      'other-teacher': 'Student have {{count}} attempts'
     },
     'unlimited-attempts': 'You have unlimited attempts',
     cancel: 'Cancel',
@@ -1757,6 +1764,10 @@ export default Object.assign(quizzesTranslations, {
     twelfth: '12'
   },
 
+  'grade-selector': {
+    placeholder: 'Choose Grade Lines to Display'
+  },
+
   'standard-dropdown': {
     placeholder: 'Browse by Standard'
   },
@@ -1881,14 +1892,15 @@ export default Object.assign(quizzesTranslations, {
     },
     competency: {
       popover: {
-        title: '{{title}} BOUNDARY',
+        title: '{{title}} HIGHLINE',
         content:
           'You need to study all the standards between your skyline and this grade line to reach your destination.'
       }
     },
     'assigned-course-title': 'Assigned Course for {{title}}',
-    'study-course': 'Study Course',
-    'show-me-my-route': 'My route',
+    'start-studying': 'Start Studying',
+    'show-route': 'Show Route',
+    'review-destination': 'Review Destination',
     'competency-level': {
       title: 'Your Proficiency Profile',
       mastery: '{{count}} Standards Mastered',
@@ -2211,6 +2223,7 @@ export default Object.assign(quizzesTranslations, {
     }
   },
   taxonomy: {
+    grades: 'Grades',
     'gru-taxonomy-selector': {
       'add-secondary': 'Add secondary',
       'choose-subject': 'Choose Subject',
@@ -2897,7 +2910,6 @@ export default Object.assign(quizzesTranslations, {
       wish: 'Congratulations! You scored',
       reference: 'This external collection can be accessed '
     },
-
     'competency-report': {
       title: 'Competency Report',
       'no-subject': 'No Subject Assigned',
@@ -2912,7 +2924,11 @@ export default Object.assign(quizzesTranslations, {
     },
     'domain-report': 'Domain Report'
   },
-
+  'competency-info-content': {
+    journey: 'JOURNEY',
+    metadata: 'METADATA',
+    'learning-map': 'LEARNING MAP'
+  },
   'competency-meta-data': {
     title: 'ALT-CONCEPTS',
     heading: {
@@ -2928,12 +2944,31 @@ export default Object.assign(quizzesTranslations, {
   },
   'student-journey': {
     heading: 'YOUR JOURNEY',
-    nodata: 'You are yet to start your journey for this competency'
+    'teacher-heading': 'STUDENT JOURNEY',
+    nodata: 'You are yet to start your journey for this competency',
+    'no-data-teacher': 'Student are yet to start journey for this competency',
+    'student-status-3':
+      'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
+    'student-status-2':
+      'You have not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+    'teacher-status-2':
+      'The student has not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+    'teacher-status-3':
+      'The student has asserted mastery in the competency and has not studied any learning activity on the Navigator for this competency.'
+  },
+  'learning-map': {
+    'practice-question': 'practice questions',
+    'no-practice-questions':
+      'There are no practice questions for this competency',
+    'solved-examples': 'solved examples',
+    'no-solved-examples': 'There are no solved examples for this competency',
+    'challenging-questions': 'challenging questions',
+    'no-challenging-questions':
+      'There are no challenging questions for this competency'
   },
   'student-card': {
     message: 'This {{type}} has been deleted'
   },
-
   'self-report': {
     'your-score': 'Your Score',
     time_spent: 'Time Spent',

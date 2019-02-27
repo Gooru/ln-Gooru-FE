@@ -1,0 +1,28 @@
+<div class="dropdown grade">
+  <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">
+  <span>{{t 'grade-selector.placeholder'}}</span>
+  <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu gradeData">
+    {{#each taxonomyGrades as |taxonomyGrade|}}
+      <li><label>{{input type="checkbox" checked = taxonomyGrade.checked click=(action 'selectGrade' taxonomyGrade)}}<span {{action 'selectGrade' taxonomyGrade}}>{{taxonomyGrade.grade}}</span></label></li>
+    {{/each}}
+    <li><label>{{input type="checkbox" checked = isSelectBaseLine click=(action 'onToggleBaseline')}}<span class="baseline-label" {{action 'onToggleBaseline'}}>{{t 'profile.proficiency.baseline'}}</span></label></li>
+  </ul>
+</div>
+<div class="active-grade-list">
+  {{#each visibleGrades as |activeGrade|}}
+    <div class="active-grade"><span class="ellipsis" data-toggle="tooltip" title= {{activeGrade.grade}}>{{activeGrade.grade}}</span><span {{action 'onCloseGrade' activeGrade}}>{{gru-icon name="close"}}</span></div>
+  {{/each}}
+  {{#if isSelectBaseLine}}
+    <div class="active-grade"><span class="ellipsis" data-toggle="tooltip" title= {{t 'profile.proficiency.baseline'}}>{{t 'profile.proficiency.baseline'}}</span><span {{action 'onToggleBaseline'}}>{{gru-icon name="close"}}</span></div>
+  {{/if}}
+  {{#if inVisibleGrades}}
+    <span class="more">+{{inVisibleGrades.length}}</span>
+  {{/if}}
+  <div class="more-active-grades hidden">
+    {{#each inVisibleGrades as |activeGrade|}}
+      <div class="active-grade"><span class="ellipsis" data-toggle="tooltip" title= {{activeGrade.grade}}>{{activeGrade.grade}}</span></div>
+    {{/each}}
+  </div>
+</div>

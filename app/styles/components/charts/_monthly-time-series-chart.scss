@@ -1,16 +1,19 @@
 .monthly-time-series-chart {
+  display: flex;
 
   svg {
+    margin: auto;
     width: 700px;
     height: 65px;
   }
-  .axis path,
-  .axis line{
+
+  .axis line,
+  .axis path {
     fill: none;
     stroke: $charcoal-grey;
   }
 
-  .line{
+  .line {
     fill: none;
     stroke: blue;
     stroke-width: 2px;
@@ -21,20 +24,22 @@
     stroke: white;
     stroke-width: 3px;
   }
+
   .tick {
     cursor: pointer;
-    text{
+
+    text {
       font-size: 10px;
       text-transform: uppercase;
       color: $charcoal-grey;
       opacity: 0.8;
       font-weight: bold;
     }
+
     &.gray-out {
       opacity: 0.5 !important;
       cursor: default;
       pointer-events: none;
     }
   }
-
 }

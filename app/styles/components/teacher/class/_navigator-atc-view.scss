@@ -58,25 +58,53 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
 
   .tooltip-container {
-    width: 225px;
-    padding: 10px;
+    width: 340px;
+    height: 196px;
+    padding: 8px;
+    z-index: 11;
+    background-color: $white;
     .header-container {
       display: grid;
-      grid-template-columns: 60px auto auto;
+      grid-template-columns: 75px auto;
       border-bottom: 1px solid #979797;
       padding-bottom: 5px;
       align-items: end;
-      img {
-        width: 50px;
-        height: 50px;
+      height: 75px;
+      align-items: center;
+      .dp-container {
         border-radius: 50%;
-      }
-      .student-name {
+        height: 68px;
+        width: 68px;
         display: grid;
-        font-size: 13px;
-        font-weight: bold;
-        text-transform: capitalize;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+        }
       }
+      .student-info {
+        .student-name {
+          font-size: 20px;
+          font-weight: bold;
+          color: #37424b;
+          text-transform: capitalize;
+        }
+        .grade-info {
+          span {
+            font-size: 15px;
+            color: #37424b;
+          }
+          .title-container {
+            font-weight: bold;
+          }
+          .grade-level {
+            padding-left: 8px;
+          }
+        }
+      }
+
       .competency-status-count {
         font-size: 13px;
         font-weight: bold;
@@ -96,42 +124,92 @@
     .body-container {
       display: grid;
       row-gap: 5px;
-      .destination-container {
+      .info-container {
         display: grid;
-        grid-template-columns: auto auto;
-        .title-container {
-          font-size: 15px;
-        }
-        .grade-info,
-        .competencies {
-          display: grid;
-          text-align: center;
-          align-items: center;
-          justify-content: center;
-          .grade-level,
-          .competency-count {
-            font-size: 16px;
-            font-weight: bold;
+        grid-template-columns: 105px auto auto;
+        align-items: center;
+      }
+      .progress-container {
+        .progress-bar-container {
+          width: 160px;
+          background-color: rgba(191, 191, 191, 0.5);
+          height: 10px;
+          border-radius: 10px;
+          .competency-progress-bar {
+            height: inherit;
+            display: block;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            background-color: #007ab8;
           }
+        }
+        .completion-percentage {
+          font-size: 15px;
+          font-weight: bold;
+          color: #0076ba;
+          justify-self: right;
         }
       }
       .performance-container {
-        display: grid;
-        grid-template-columns: auto auto;
-        .performance,
-        .progress-container {
-          display: grid;
-          text-align: center;
-          align-items: center;
-          justify-content: center;
-          .score-count,
-          .progress-count {
-            font-size: 24px;
-          }
-          .title-container {
-            font-size: 15px;
+        .performance-bar-container {
+          width: 160px;
+          background-color: rgba(191, 191, 191, 0.5);
+          height: 10px;
+          border-radius: 10px;
+          .performance-bar {
+            height: inherit;
+            display: block;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
           }
         }
+        .performance-percentage {
+          font-size: 15px;
+          font-weight: bold;
+          justify-self: right;
+        }
+      }
+      .competencies-container {
+        .competency-count-container {
+          width: 126px;
+          height: 24px;
+          display: flex;
+          .count-box {
+            height: inherit;
+            display: block;
+          }
+          .mastered-count {
+            background-color: #0076ba;
+          }
+          .inprogress-count {
+            background-color: #00b1e5;
+          }
+          .not-started-count {
+            background-color: #e7e8e9;
+          }
+        }
+        .competency-count {
+          justify-self: right;
+          span {
+            font-size: 12px;
+            font-weight: bold;
+            color: #33424b;
+          }
+          .mastered {
+            color: #0076ba;
+          }
+          .inprogress {
+            color: #00b1e5;
+          }
+          .not-started {
+            color: #35424b;
+          }
+        }
+      }
+      .title-container {
+        font-size: 15px;
+        font-weight: bold;
+        color: #37424b;
       }
     }
   }
@@ -139,7 +217,7 @@
   &.active {
     visibility: visible;
     @media screen and (max-width: 992px) {
-      left: calc((100% - 225px)/2) !important;
+      left: calc((100% - 340px)/2) !important;
       bottom: 0;
       top: unset !important;
     }

@@ -9,7 +9,9 @@ export default Ember.Component.extend({
   // Events
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   actions: {
@@ -45,24 +47,24 @@ export default Ember.Component.extend({
         count: competencyContents.lesson.totalHitCount || 0
       },
       {
-        type: 'rubric',
-        count: competencyContents.rubric.totalHitCount || 0
+        type: 'collection',
+        count: competencyContents.collection.totalHitCount || 0
       },
       {
         type: 'assessment',
         count: competencyContents.assessment.totalHitCount || 0
       },
       {
-        type: 'collection',
-        count: competencyContents.collection.totalHitCount || 0
+        type: 'resource',
+        count: competencyContents.resource.totalHitCount || 0
       },
       {
         type: 'question',
         count: competencyContents.question.totalHitCount || 0
       },
       {
-        type: 'resource',
-        count: competencyContents.resource.totalHitCount || 0
+        type: 'rubric',
+        count: competencyContents.rubric.totalHitCount || 0
       }
     ]);
   }),

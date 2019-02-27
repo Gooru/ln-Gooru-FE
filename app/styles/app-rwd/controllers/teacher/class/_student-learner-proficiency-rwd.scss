@@ -1,8 +1,5 @@
+.student_class_student-learner-proficiency,
 .teacher_class_student-learner-proficiency {
-  .lg-visible {
-    display: block !important;
-  }
-
   .student-proficiency-container {
     .inspect-competency {
       .competency-info-pull-up {
@@ -30,7 +27,7 @@
   @media only screen and (max-width: $screen-sm - 1) {
     .student-proficiency-container {
       grid-template-columns: none;
-      padding-bottom: 0;
+      padding: 0;
 
       .pull-up-container,
       .taxonomy-grades {
@@ -40,8 +37,8 @@
   }
   @media only screen and (min-width: $screen-sm) and (max-width: $screen-in-1024) {
     .student-proficiency-container {
-      grid-template-columns: 100px 1fr;
-      padding-bottom: 0;
+      grid-template-columns: 1fr;
+      padding: 0;
 
       .pull-up-container {
         display: none;

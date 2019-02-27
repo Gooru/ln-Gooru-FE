@@ -39,7 +39,6 @@ export default Ember.Component.extend({
     component.set('isBaseLineDrawn', false);
     component.set('activeGradeList', Ember.A([]));
     component.set('domainBoundariesContainer', Ember.A([]));
-    component.fetchSignatureCompetencyList();
   },
 
   didRender() {
@@ -70,31 +69,88 @@ export default Ember.Component.extend({
       component.set('height', maxNumberOfCellsInEachColumn * cellHeight);
       component.set('cellHeight', cellHeight);
       component.drawChart(component.get('chartData'));
+
+      if (component.get('isSelectBaseLine')) {
+        component.onToggleBaseline();
+      }
+
+      if (component.get('selectedDomain')) {
+        component.send('domainFocusIn', component.get('selectedDomain'));
+      }
+
+      if (component.get('selectedCompetency')) {
+        component.competencyFocusIn();
+      }
     },
 
+    onToggleBaseline() {
+      let component = this;
+      component.toggleProperty('isSelectBaseLine');
+    },
+
+    onSelectGrade(gradeData) {
+      let component = this;
+      component.selectGrade(gradeData);
+    },
+
+    // Action triggered when domain is selected
     onDomainSelect(domain) {
       let component = this;
+      component.set('selectedDomain', domain);
       component.sendAction('onDomainSelect', domain);
     },
 
-    addHoverClass(index) {
+    // Action triggered when domain is clicked or hover in
+    domainFocusIn(domain) {
       let component = this;
-      let domainSeq = index + 1;
-      component
-        .$('#render-proficiency-matrix')
-        .removeClass('hover')
-        .addClass('hover');
-      component
-        .$(`.competency-${domainSeq}`)
-        .removeClass('active')
-        .addClass('active');
+      component.$('#render-proficiency-matrix').addClass('highlight');
+      component.$('.competency').removeClass('active active-cell');
+      component.$(`.competency-${domain.domainSeq}`).addClass('active');
     },
 
-    removeHoverClass() {
+    // Action triggered when domain is un-clicked or hover out
+    domainFocusOut() {
       let component = this;
-      component.$('#render-proficiency-matrix').removeClass('hover');
+      let domain = component.get('selectedDomain');
+      let competency = component.get('selectedCompetency');
+      component.$('#render-proficiency-matrix').removeClass('highlight');
       component.$('.competency').removeClass('active');
+      //Focus In when selected domain is already exists
+      if (domain) {
+        component.send('domainFocusIn', domain);
+      }
+
+      if (!domain && competency) {
+        component.competencyFocusIn();
+      }
     }
+  },
+
+  // Action triggered when competency is clicked or hover in
+  competencyFocusIn() {
+    let component = this;
+    let selectedCompetency = component.get('selectedCompetency');
+    let selectedDomain = component.get('selectedDomain');
+    component.$('#render-proficiency-matrix').addClass('highlight');
+    let domainSeq =
+      selectedCompetency.get('domainSeq') ||
+      (selectedDomain && selectedDomain.get('domainSeq'));
+    component.$('.competency').removeClass('active active-cell');
+    component
+      .$(`.competency-${domainSeq}-${selectedCompetency.competencySeq}`)
+      .addClass('active-cell');
+  },
+
+  // Action triggered when competency is un-clicked or hover out
+  competencyFocusOut() {
+    let component = this;
+    let domain = component.get('selectedDomain');
+    if (!domain) {
+      component.$('#render-proficiency-matrix').removeClass('highlight');
+    } else {
+      component.send('domainFocusIn', domain);
+    }
+    component.$('.competency').removeClass('active-cell');
   },
 
   // -------------------------------------------------------------------------
@@ -109,9 +165,28 @@ export default Ember.Component.extend({
       component.set('chartData', {});
       component.set('activeGradeList', Ember.A([]));
       component.set('domainBoundariesContainer', Ember.A([]));
-      component.fetchSignatureCompetencyList();
     }
     return null;
+  }),
+
+  onDomainChange: Ember.observer('selectedDomain', function() {
+    let component = this;
+    let selectedDomain = component.get('selectedDomain');
+    if (selectedDomain) {
+      component.send('domainFocusIn', selectedDomain);
+    } else {
+      component.send('domainFocusOut');
+    }
+  }),
+
+  onCompetencyChange: Ember.observer('selectedCompetency', function() {
+    let component = this;
+    let selectedCompetency = component.get('selectedCompetency');
+    if (selectedCompetency) {
+      component.competencyFocusIn();
+    } else {
+      component.competencyFocusOut();
+    }
   }),
 
   comptencyMatrixObserver: Ember.observer(
@@ -119,10 +194,11 @@ export default Ember.Component.extend({
     'competencyMatrixCoordinates',
     function() {
       let component = this;
+      component.set('selectedDomain', null);
+      component.set('selectedCompetency', null);
       component.loadChartData();
     }
   ),
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -191,12 +267,6 @@ export default Ember.Component.extend({
    * Property to show/hide loading spinner
    */
   isLoading: false,
-
-  /**
-   * It will have singature content competencty list for current active subject
-   * @type {Object}
-   */
-  signatureCompetencyList: null,
 
   /**
    * It  will have chart value width scroll width handling
@@ -272,16 +342,6 @@ export default Ember.Component.extend({
     let subject = component.get('subject');
     return subject ? subject.id : '';
   }),
-
-  /**
-   * Observer {Boolean} toggle grade select
-   */
-  gradeToggle: Ember.observer('isSelectGrade', function() {
-    let component = this;
-    let grade = component.get('selectedGrade');
-    component.onSelectGrade(grade);
-  }),
-
   /**
    * Observer {Boolean} toggle baseline select
    */
@@ -300,34 +360,24 @@ export default Ember.Component.extend({
     let component = this;
     if (!component.get('isSelectBaseLine')) {
       component.$('#baseline-container').addClass('hidden-line');
-      Ember.$(
-        '.taxonomy-grades .taxonomy-grades-container .baseline-toggle'
-      ).removeClass('active-baseline');
     } else {
       component.$('#baseline-container').removeClass('hidden-line');
-      Ember.$(
-        '.taxonomy-grades .taxonomy-grades-container .baseline-toggle'
-      ).addClass('active-baseline');
     }
   },
 
   /**
-   * @function onSelectGrade
+   * @function selectGrade
    * Action triggered when select a grade
    */
-  onSelectGrade(gradeData) {
+  selectGrade(gradeData) {
     let component = this;
     let activeGradeList = component.get('activeGradeList');
     let domainBoundariesContainer = component.get('domainBoundariesContainer');
     let selectedGradeSeq = gradeData.sequence;
-    let selectedGradeElement = Ember.$(
-      `.taxonomy-grades .taxonomy-grades-container .taxonomy-grades .grade-list .grade-sequence-${selectedGradeSeq}`
-    );
     let selectedGradeLine = component.$(`.grade-${gradeData.sequence}-line`);
     if (activeGradeList[`${selectedGradeSeq}`]) {
       delete activeGradeList[`${selectedGradeSeq}`];
       selectedGradeLine.addClass('hidden-line');
-      selectedGradeElement.removeClass('active-grade');
     } else {
       activeGradeList[`${gradeData.sequence}`] = gradeData;
       if (!domainBoundariesContainer[`${selectedGradeSeq}`]) {
@@ -341,7 +391,6 @@ export default Ember.Component.extend({
         component.loadChartData();
       }
       selectedGradeLine.removeClass('hidden-line');
-      selectedGradeElement.addClass('active-grade');
     }
     component.set('domainBoundariesContainer', domainBoundariesContainer);
     component.set('activeGradeList', activeGradeList);
@@ -367,20 +416,6 @@ export default Ember.Component.extend({
     }
     component.onToggleBaseline();
   },
-
-  fetchSignatureCompetencyList() {
-    let component = this;
-    let subject = component.get('subjectCode');
-    let userId = component.get('userId');
-    return Ember.RSVP.hash({
-      competencyList: component
-        .get('competencyService')
-        .getUserSignatureCompetencies(userId, subject)
-    }).then(({ competencyList }) => {
-      component.set('signatureCompetencyList', competencyList);
-    });
-  },
-
   /**
    * @function fetchDomainGradeBoundary
    * Method to fetch domain grade boundary
@@ -441,7 +476,6 @@ export default Ember.Component.extend({
           });
           if (status > 1) {
             mergeDomainData.forEach(data => {
-              data.set('status', status);
               data.set('isMastery', true);
             });
             data.set('isMastery', true);
@@ -578,6 +612,7 @@ export default Ember.Component.extend({
       .on('click', function(d) {
         component.selectCompetency(d);
       });
+
     cards.exit().remove();
     component.$('.scrollable-chart').scrollTop(height);
     component.drawSkyline();
@@ -587,16 +622,13 @@ export default Ember.Component.extend({
 
   selectCompetency(competency) {
     let component = this;
+    component.set('selectedCompetency', competency);
     let competencyMatrixDomains = component.get('competencyMatrixDomains');
     let domainCode = competency.get('domainCode');
     let domainCompetencyList = competencyMatrixDomains.findBy(
       'domainCode',
       domainCode
     );
-    let signatureCompetencyList = component.get('signatureCompetencyList');
-    let showSignatureAssessment =
-      signatureCompetencyList[domainCode] === competency.get('competencyCode');
-    competency.set('showSignatureAssessment', showSignatureAssessment);
     component.sendAction(
       'onSelectCompetency',
       competency,

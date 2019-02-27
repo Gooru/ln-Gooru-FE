@@ -60,7 +60,7 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  queryParams: ['classId', 'courseId'],
+  queryParams: ['classId', 'courseId', 'studyPlayer'],
 
   /**
    * @property {limit}
@@ -90,6 +90,8 @@ export default Ember.Controller.extend({
    * @property {noMoreData}
    */
   noMoreData: false,
+
+  studyPlayer: false,
 
   /**
    * @property {String}
@@ -121,7 +123,9 @@ export default Ember.Controller.extend({
       let controller = this;
       let classId = controller.get('classId');
       let courseId = controller.get('courseId');
-      if (classId) {
+      if (controller.get('studyPlayer')) {
+        window.history.back();
+      } else if (classId) {
         controller.transitionToRoute('student.class.course-map', classId);
       } else {
         controller.transitionToRoute(

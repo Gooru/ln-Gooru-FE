@@ -14,42 +14,9 @@
   .chart-container {
     .graded-chart-container {
       display: grid;
-      grid-template-columns: 100px auto;
-
-      &.hide-grade {
-        justify-content: center;
-        grid-template-columns: auto;
-      }
-
-      .taxonomy-grades-container {
-        pointer-events: none;
-
-        &.proficiency {
-          .taxonomy-grades {
-            .grade-list {
-              .grade-container {
-                &.active-grade {
-                  .grade-title {
-                    background-color: #fff;
-                    color: #535e67;
-                    box-shadow: none;
-                    font-weight: normal;
-
-                    &::after,
-                    &::before {
-                      display: none;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-
+      justify-items: center;
       .domain-chart {
         overflow: auto;
-        align-self: end;
 
         .competency-cell {
           fill: #e7e8e9;
