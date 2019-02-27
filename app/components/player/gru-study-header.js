@@ -162,10 +162,24 @@ export default Ember.Component.extend(ConfigurationMixin, {
           route.transitionTo('student.class.class-activities', classId);
         } else if (item === 'profile') {
           route.transitionTo('student.class.profile', classId);
+        } else if (item === 'profile-prof') {
+          let userId = this.get('session.userId');
+          route.transitionTo(
+            'student.class.student-learner-proficiency',
+            classId,
+            {
+              queryParams: {
+                userId: userId,
+                classId: classId,
+                courseId: this.get('courseId'),
+                role: 'student'
+              }
+            }
+          );
         } else {
           route.transitionTo('student.class');
-        }
-      } // end of if block
+        } // end of if block
+      }
     }
   },
 
