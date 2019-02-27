@@ -39,10 +39,14 @@ export default Ember.Controller.extend(ModalMixin, {
   studentsLevelSetting: Ember.computed(
     'class.members.@each.tempGradeLowerBound',
     'class.members.@each.tempGradeUpperBound',
+    'class.members.@each.isActive',
+    'class.members.[]',
     function() {
       return this.get('class.members').filter(member => {
         return (
-          member.get('tempGradeLowerBound') || member.get('tempGradeUpperBound')
+          member.get('isActive') &&
+          (member.get('tempGradeLowerBound') ||
+            member.get('tempGradeUpperBound'))
         );
       });
     }
