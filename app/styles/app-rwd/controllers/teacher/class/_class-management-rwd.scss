@@ -60,6 +60,52 @@
             .student-info-container {
               display: block;
             }
+
+            .student-info-container {
+              .student-name {
+                padding-right: 5px;
+
+                span {
+                  word-break: break-word;
+                }
+                @include ellipsis(
+                  $font-size: 13px,
+                  $line-height: 1.2,
+                  $lines-to-show: 2
+                );
+              }
+            }
+
+            .actions-container {
+              span.menu-icon {
+                color: $gray-dove;
+                display: block;
+                height: 22px;
+                i {
+                  pointer-events: none;
+                }
+              }
+
+              .actions-btn {
+                position: absolute;
+                background: #fff;
+                width: 100px;
+                border-radius: 4px;
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+                padding: 5px;
+                right: -102px;
+                z-index: 1;
+
+                &.active {
+                  animation: slide 0.5s forwards;
+                }
+              }
+              @keyframes slide {
+                100% {
+                  right: 0;
+                }
+              }
+            }
           }
         }
       }
