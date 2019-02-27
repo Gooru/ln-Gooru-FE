@@ -238,7 +238,9 @@ export default Ember.Component.extend({
   delay(element, delay) {
     let component = this;
     Ember.run.later(function() {
-      component.$(element).addClass('active');
+      if (!component.get('isDestroyed')) {
+        component.$(element).addClass('active');
+      }
     }, delay);
   }
 });
