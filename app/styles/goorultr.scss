@@ -164,6 +164,7 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/cards/no-suggest-result-found";
 @import "components/cards/suggest-confirmation";
 @import "components/cards/dca-search-collection-card";
+@import "components/cards/ca-activity-list";
 @import "components/charts/gru-bubble-chart";
 @import "components/charts/competency-progress-bar";
 @import "components/charts/gru-completion-chart";
@@ -388,7 +389,6 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/teacher/class/atc-chart";
 @import "components/teacher/class/navigator-atc-view";
 @import "components/reports/pull-up/competency-completion-report";
-@import "components/teacher/class/activity-search-content-pull-up";
 @import "routes/student/class/performance";
 @import "routes/content/rubric/preview"; //Pull Up
 @import "components/reports/pull-up/competency-report";

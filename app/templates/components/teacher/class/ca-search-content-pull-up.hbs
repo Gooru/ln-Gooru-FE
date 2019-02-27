@@ -51,7 +51,18 @@
     </div>
     <div class="search-list-container">
       {{#if (gt searchResults.length 0)}}
-        <div class="search-list">
+        <div class="search-list list-view">
+          {{#each searchResultSet as |result|}}
+            {{cards.ca-activity-list
+              content=result
+              onScheduleContentToDCA='onScheduleContentToDCA'
+              onAddContentToDCA="onAddContentToDCA"
+              addedScheduleContentToDCA='addedScheduleContentToDCA'
+              classId=classId
+            }}
+          {{/each}}
+        </div>
+        <div class="search-list grid-view hidden">
           {{#each searchResultSet as |result|}}
             {{cards.dca-search-collection-card onScheduleContentToDCA='onScheduleContentToDCA' collection=result contentType=activeContentType onAddContentToDCA="onAddContentToDCA" addedScheduleContentToDCA='addedScheduleContentToDCA' classId=classId}}
           {{/each}}

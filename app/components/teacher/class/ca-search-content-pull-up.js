@@ -213,6 +213,18 @@ export default Ember.Component.extend({
    */
   isCourseMap: false,
 
+  /**
+   * @property {Object} competencyData
+   * Property to hold selected competency data
+   */
+  competencyData: null,
+
+  /**
+   * @property {Boolean} isShowListView
+   * Property to toggle between list/grid view
+   */
+  isShowListView: false,
+
   // -------------------------------------------------------------------------
   // actions
 
@@ -309,6 +321,7 @@ export default Ember.Component.extend({
               newContentId,
               scheduleDate
             );
+            content.set('isScheduled', true);
             component.sendAction('addedContentToDCA', data, scheduleDate);
           }
         });
@@ -348,6 +361,7 @@ export default Ember.Component.extend({
               forMonth,
               forYear
             );
+            content.set('isScheduled', true);
             component.sendAction(
               'addedContentToDCA',
               data,
@@ -594,16 +608,23 @@ export default Ember.Component.extend({
       page: component.get('page'),
       pageSize: component.get('defaultSearchPageSize')
     };
+
     let term = component.getSearchTerm();
     if (!term) {
       let grade = component.get('class.grade');
       let subject = component.get('course.subject');
+      let competencyData = component.get('competencyData');
+      let gutCode = competencyData ? competencyData.get('competencyCode'): null;
       let filters = {};
       if (grade) {
         filters['flt.grade'] = grade;
       }
       if (subject) {
         filters['flt.subject'] = subject;
+      }
+
+      if (gutCode) {
+        filters['flt.gutCode'] = gutCode;
       }
       params.filters = filters;
     }

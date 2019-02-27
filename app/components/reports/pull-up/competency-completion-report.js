@@ -194,10 +194,10 @@ export default Ember.Component.extend({
     let activeCompetency = component.get('activeCompetency');
     if (activeCompetency && (competencyData.get('competencyCode') !== activeCompetency.get('competencyCode'))) {
       let selectedUsers = component.get('selectedUserIds');
-      component.set('selectedUserIds', Ember.A([]));
       selectedUsers.map( selectedUser => {
         selectedUser.set('selected', false);
       });
+      component.set('selectedUserIds', Ember.A([]));
       component.set('isShowStudentSuggestion', false);
     }
   }

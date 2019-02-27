@@ -1,0 +1,19 @@
+<div class="content-container">
+  <div class="content-title">{{content.title}}</div>
+  <div class="content-info-container">
+    <div class="content-description">{{content.learningObjectives}}</div>
+    <div class="action-container">
+      {{#if content.isAdded}}
+        <div class="activity-added">{{gru-icon name="done"}}</div>
+      {{else}}
+        <div class="add-activity" {{action "onAddCollectionToDCA" content}}>{{gru-icon name="add"}}</div>
+      {{/if}}
+
+      {{#if content.isScheduled}}
+        <div class="activity-added">{{gru-icon name="done"}}</div>
+      {{else}}
+        <div class="assign-date" onclick={{action 'onScheduleContentToDCA' content}}>{{gru-icon name="update"}}</div>
+      {{/if}}
+    </div>
+  </div>
+</div>
