@@ -166,6 +166,12 @@
               background-image: unset;
             }
           }
+          tr td.new {
+            display: none;
+          }
+          tr td.old {
+            visibility: hidden;
+          }
         }
       }
     }

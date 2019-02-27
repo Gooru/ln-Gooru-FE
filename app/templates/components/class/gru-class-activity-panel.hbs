@@ -40,7 +40,7 @@
           {{/if}}
         {{else}}
           {{#if isShowAddData}}
-            <div class="dca-panel-performance add-data {{if (eq classActivity.usersCount 0) 'disabled'}}" {{action "onOpenPerformanceEntry" item classActivity false}}>
+            <div class="dca-panel-performance add-data {{if (eq classActivity.usersCount 0)'disabled'}}" {{action "onOpenPerformanceEntry" item classActivity false}}>
               {{t 'common.add-data'}}
             </div>
           {{else}}
@@ -50,10 +50,10 @@
           {{/if}}
         {{/if}}
       </div>
-      {{else}}
-        <div class="ca-panel-reschedule ca-datepicker-popover" onclick= {{action 'onScheduleContentToDCA' classActivity}}>
-          <span>{{t 'common.schedule'}}</span>
-        </div>
+    {{else}}
+      <div class="ca-panel-reschedule ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
+        <span>{{t 'common.schedule'}}</span>
+      </div>
     {{/unless}}
   </div>
   {{#unless isUnScheduled}}
@@ -61,18 +61,20 @@
       <div class="student-count {{if showCohort 'active'}}">
         {{gru-icon name="account_circle"}}
         {{#if (eq classActivity.usersCount -1)}}
-          <span {{action 'showStudentList'}}>{{t 'common.all'}}</span> {{else if (eq classActivity.usersCount 0)}}
+          <span {{action 'showStudentList'}}>{{t 'common.all'}}</span>
+        {{else if (eq classActivity.usersCount 0)}}
           <span {{action 'showStudentList'}}>{{t 'common.none'}}</span>
         {{else}}
           <span {{action 'showStudentList'}}> {{classActivity.usersCount}}</span>
         {{/if}}
       </div>
       <div class="re-schedule">
-        <div class="re-schedule-activity ca-datepicker-popover" onclick= {{action 'onScheduleContentToDCA' classActivity}}>
-          {{gru-icon name="update" class="hidden visible-xs"}}
+        <div class="re-schedule-activity ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
           {{#if collectionPerformanceSummary}}
+            {{gru-icon name="replay"}}
             <span class="hidden-xs">{{t 'common.repeat-activity'}}</span>
           {{else}}
+            {{gru-icon name="update"}}
             <span class="hidden-xs">{{t 'common.Reschedule'}}</span>
           {{/if}}
         </div>
@@ -107,20 +109,17 @@
           {{/if}}
         </div>
       </div>
-      {{#if isOfflineClass}}
-        <div class="re-add-data {{if (eq classActivity.usersCount 0) 'disabled'}}">
-          {{#if collectionPerformanceSummary}}
-            <span {{action "onOpenPerformanceEntry" item classActivity true}}>{{t 'common.update-data'}}</span>
-          {{/if}}
-        </div>
-      {{/if}}
+      <div class="re-add-data {{if (eq classActivity.usersCount 0) 'disabled'}}">
+        {{#if collectionPerformanceSummary}}
+          <span {{action "onOpenPerformanceEntry" item classActivity true}}>{{t 'common.update-data'}}</span>
+        {{/if}}
+      </div>
     </div>
   {{/unless}}
 </div>
 {{#if showStudentListPullup}}
   {{teacher.class.ca-student-list-pull-up isActivityPast=isActivityPast classId=classId classActivity=classActivity members=members showPullUp=showStudentListPullup}}
 {{/if}}
-
 {{#if isShowStudentsSummaryReport}}
   {{teacher.offline-class.oca-students-summary-report-pull-up context=selectedActivity classActivities=activities classId=classId showPullUp=isShowStudentsSummaryReport onClosePullUp="pullUpClose"}}
 {{/if}}

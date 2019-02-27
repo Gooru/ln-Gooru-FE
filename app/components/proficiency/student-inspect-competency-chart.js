@@ -312,7 +312,7 @@ export default Ember.Component.extend({
     component.set('numberOfColumns', numberOfColumns);
     const cellWidth = component.get('cellWidth');
     const cellHeight = component.get('cellHeight');
-    const width = Math.round(numberOfColumns * cellWidth);
+    const width = Math.round(numberOfColumns * cellWidth) + 1;
     component.set('width', width);
     const height = component.get('chartHeight');
     component.clearChart();
@@ -412,6 +412,9 @@ export default Ember.Component.extend({
     let polyLinePoints = [];
     let strokeDasharray = 0;
     let svg = component.get('skylineContainer');
+    if (component.$('.mastered-competency').length > 0) {
+      svg.attr('class', 'apply-filter');
+    }
     skylineElements.each(function(index) {
       let x1 = parseInt(component.$(skylineElements[index]).attr('x'));
       let y1 = parseInt(component.$(skylineElements[index]).attr('y'));

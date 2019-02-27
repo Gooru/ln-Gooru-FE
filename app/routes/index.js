@@ -28,7 +28,11 @@ export default Ember.Route.extend(PublicRouteMixin, {
       let googleSignIn = url.indexOf('access_token') > 0; //if it has the access_token parameter
       if (anonymous && !googleSignIn && isProd) {
         transition.abort();
-        window.location = Env.marketingSiteUrl; //this is not an ember route, see nginx.conf
+        let islogouturl = window.localStorage.getItem('logouturl');
+        window.location = islogouturl || Env.marketingSiteUrl; //this is not an ember route, see nginx.conf
+        if (islogouturl) {
+          window.localStorage.removeItem('logouturl');
+        }
       }
     });
   },

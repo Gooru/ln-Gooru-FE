@@ -14,6 +14,14 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   tenantService: Ember.inject.service('api-sdk/tenant'),
 
+  tenantRedirectURL: 'sign-in',
+
+  actions: {
+    navigateLogout() {
+      window.location.replace(this.tenantRedirectURL);
+    }
+  },
+
   /**
    * Authentication (api-sdk/authentication) service.
    * @property {AuthenticationService} authService
@@ -33,15 +41,26 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     router
       .get('authenticationService')
       .signOut()
-      .then(() => {
+      .then(resp => {
         const isProd = Env.environment === 'production';
         let redirectUrl = null;
         redirectUrl = EndPointsConfig.getMarketingsiteURL();
-        if (isProd && redirectUrl) {
-          router.get('session').invalidate();
-          window.location.replace(redirectUrl);
+        if (resp && resp.default === false) {
+          $('.navbar-default').css('display', 'none');
+          this.tenantRedirectURL = resp.login_url;
+          var timer = window.localStorage.getItem('notificationtimer');
+          if (timer) {
+            clearInterval(timer);
+            window.localStorage.removeItem('logouturl');
+          }
+          window.localStorage.setItem('logouturl', this.tenantRedirectURL);
         } else {
-          router.get('session').invalidate();
+          if (isProd && redirectUrl) {
+            router.get('session').invalidate();
+            window.location.replace(redirectUrl);
+          } else {
+            router.get('session').invalidate();
+          }
         }
       });
   }

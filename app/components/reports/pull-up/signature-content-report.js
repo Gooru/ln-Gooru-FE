@@ -35,42 +35,50 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {Object} competency
+   */
   competency: null,
 
+  /**
+   * @property {String} standardCode
+   */
   standardCode: Ember.computed.alias('competency.competencyCode'),
 
+  /**
+   * @property {Object} signatureContent
+   */
   signatureContent: null,
 
   /**
    * @property {boolean} showSignatureAssessment
    */
-
   showSignatureAssessment: false,
 
   /**
-   * @property {boolean} content
+   * @property {Object} content
    */
-
   content: null,
 
   /**
-   * @property {boolean} prerequisites
+   * @property {Array} prerequisites
    */
-
   prerequisites: null,
 
   /**
-   * @property {boolean} microCompetencies
+   * @property {Array} microCompetencies
    */
-
   microCompetencies: null,
 
+  /**
+   * @property {boolean} isLoading
+   */
   isLoading: false,
 
   /**
    * @property {number} domainId
    */
-
   domainId: Ember.computed('standardCode', function() {
     let code = this.get('standardCode');
     return getDomainId(code);
@@ -79,7 +87,6 @@ export default Ember.Component.extend({
   /**
    * @property {number} subjectId
    */
-
   subjectId: Ember.computed('standardCode', function() {
     let code = this.get('standardCode');
     return getSubjectId(code);
@@ -88,7 +95,6 @@ export default Ember.Component.extend({
   /**
    * @property {number} courseId
    */
-
   courseId: Ember.computed('standardCode', function() {
     let code = this.get('standardCode');
     return getCourseId(code);
@@ -99,16 +105,13 @@ export default Ember.Component.extend({
    */
   unlimited: Ember.computed.equal('content.attempts', -1),
 
+  /**
+   * @property {String} collectionType
+   */
   collectionType: Ember.computed('showSignatureAssessment', function() {
     let component = this;
     let showSignatureAssessment = component.get('showSignatureAssessment');
     return showSignatureAssessment ? 'assessment' : 'collection';
-  }),
-
-  onCompetencyChange: Ember.observer('competency', function() {
-    let component = this;
-    component.fetchLearningMapsContent();
-    component.fetchCodes();
   }),
 
   /**
@@ -138,9 +141,8 @@ export default Ember.Component.extend({
 
   /**
    * @function fetchCodes
-   * Method to fetchCodes
+   * Method to fetch all competency code for domain
    */
-
   fetchCodes() {
     let component = this;
     let courseId = component.get('courseId');
@@ -175,6 +177,7 @@ export default Ember.Component.extend({
         filters
       )
     }).then(({ learningMapData }) => {
+      component.set('learningMapData', learningMapData);
       component.checkPrerequisiteCompetencyStatus(
         learningMapData.prerequisites
       );
@@ -197,24 +200,30 @@ export default Ember.Component.extend({
 
   /**
    * @function checkPrerequisiteCompetencyStatus
-   * Method to checkPrerequisiteCompetencyStatus
+   * Method to check prerequisite competency status
    */
   checkPrerequisiteCompetencyStatus(prerequisites) {
     let component = this;
     let domainCompetencyList = component.get(
       'domainCompetencyList.competencies'
     );
-    prerequisites.forEach(competency => {
-      let filteredCompetency = domainCompetencyList.findBy(
-        'competencyCode',
-        competency.id
-      );
-      let status = filteredCompetency ? filteredCompetency.status : 0;
-      competency.status = status;
-    });
-    component.set('prerequisites', prerequisites);
+    if (prerequisites && domainCompetencyList) {
+      prerequisites.forEach(competency => {
+        let filteredCompetency = domainCompetencyList.findBy(
+          'competencyCode',
+          competency.id
+        );
+        let status = filteredCompetency ? filteredCompetency.status : 0;
+        competency.status = status;
+      });
+      component.set('prerequisites', prerequisites);
+    }
   },
 
+  /**
+   * @function fetchContentSettings
+   * Method to fetch content setting
+   */
   fetchContentSettings(contentId) {
     let component = this;
     let collectionType = component.get('collectionType');
@@ -237,9 +246,8 @@ export default Ember.Component.extend({
 
   /**
    * @function filterMicroCompetency
-   * Method to filterMicroCompetency
+   * Method to filter micro competency
    */
-
   filterMicroCompetency(codes) {
     let regex = new RegExp(this.get('standardCode'));
     let microCompetencies = codes.filter(function(code) {

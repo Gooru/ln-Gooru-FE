@@ -465,10 +465,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     }
     Ember.run.scheduleOnce('afterRender', controller, function() {
       controller.closeCADatePickerOnClickOutSide();
-      let activeDate = `${controller.get('forYear')}-${controller.get(
-        'forMonth'
-      )}-01`;
-      let date = moment(activeDate).format('YYYY-MM-DD');
+      let date = moment().format('YYYY-MM-DD');
       controller.handleScrollToSpecificDate(date);
     });
   },
@@ -510,7 +507,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           return classActivity;
         }
       });
-    return classActivities;
+    if (controller.get('isCurrentYearAndMonth')) {
+      let date = moment().format('YYYY-MM-DD');
+      let todayClassActivities = classActivities.findBy('added_date', date);
+      if (!todayClassActivities) {
+        let classActivity = Ember.Object.create({
+          added_date: date,
+          classActivities: Ember.A([])
+        });
+        classActivities.pushObject(classActivity);
+      }
+    }
+    return classActivities.sortBy('added_date').reverse();
   }),
 
   /**
@@ -708,6 +716,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   classPreference: Ember.computed.alias('class.preference'),
 
+  /**
+   * Property used to identity activities list is for current month and year
+   * @type {Boolean}
+   */
+  isCurrentYearAndMonth: Ember.computed('forYear', 'forMonth', function() {
+    let year = this.get('forYear');
+    let month = this.get('forMonth');
+    let selectedYearAndMonth = `${year}-${month}`;
+    return moment().format('YYYY-MM') === selectedYearAndMonth;
+  }),
+
   // -------------------------------------------------------------------------
   // Observers
 
@@ -877,10 +896,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     if (dateEle.length > 0) {
       let scrollToContainer = Ember.$('.dca-list-container');
       let reduceHeight = 100;
-      let titleEle = Ember.$('.teacher_class_class-activities .ca-title');
-      if (titleEle.is(':visible')) {
-        reduceHeight += 50;
-      }
       let top =
         dateEle.position().top - reduceHeight + scrollToContainer.scrollTop();
       scrollToContainer.animate(

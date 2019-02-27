@@ -37,7 +37,7 @@
       display: grid;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
       /*Default View */
-      grid-template-columns: 88px 60px 170px 145px 145px 1fr 59px 59px 59px;
+      grid-template-columns: 59px 60px 170px 145px 145px 1fr 59px 59px 59px;
 
       &.archived-class {
         grid-template-columns: 50px 1fr 40px 59px 40px;
@@ -60,7 +60,7 @@
       }
       /* Extra small devices (phones, 600px and down) */
       @media only screen and (max-width: $screen-sm - 1) {
-        grid-template-columns: 50px 40px 40px 40px 40px 1fr 40px 40px 40px;
+        grid-template-columns: 54px 40px 40px 40px 40px 1fr 40px 53px 40px;
         .atc,
         .class-activities,
         .course-map,
@@ -82,7 +82,7 @@
       }
       /* Small devices (portrait tablets and large phones, 768px and up) */
       @media only screen and (min-width: 768px) {
-        grid-template-columns: 90px 50px 50px 50px 50px 1fr 59px 59px 59px;
+        grid-template-columns: 59px 50px 50px 50px 50px 1fr 59px 59px 59px;
         .atc,
         .class-activities,
         .course-map,
@@ -98,7 +98,7 @@
       }
       /* Large devices (laptops/desktops, 992px and up) */
       @media only screen and (min-width: 992px) {
-        grid-template-columns: 88px 145px 170px 145px 145px 1fr 59px 59px 59px;
+        grid-template-columns: 59px 145px 170px 145px 145px 1fr 59px 59px 59px;
 
         .atc,
         .class-activities,

@@ -233,14 +233,14 @@ export default Ember.Component.extend({
     component.delay(component.$('.proficiency-info-5'), delay);
     delay = delay + 1000;
     component.delay(component.$('.proficiency-info-6'), delay);
-    delay = delay + 1000;
-    component.delay(component.$('.proficiency-info-7'), delay);
   },
 
   delay(element, delay) {
     let component = this;
     Ember.run.later(function() {
-      component.$(element).addClass('active');
+      if (!component.get('isDestroyed')) {
+        component.$(element).addClass('active');
+      }
     }, delay);
   }
 });

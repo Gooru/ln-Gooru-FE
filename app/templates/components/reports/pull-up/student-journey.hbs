@@ -1,4 +1,4 @@
-<div class="heading">{{t 'student-journey.heading'}}</div>
+<div class="heading">{{t (if isStudent 'student-journey.heading' 'student-journey.teacher-heading')}}</div>
 <div class="collections-accordion">
   {{#if collectionPerformances}}
     {{#each collectionPerformances as |collectionPerformance|}}
@@ -17,7 +17,11 @@
       </div>
     {{/each}}
   {{else}}
-    <span class="no-data">{{t 'student-journey.nodata'}}</span>
+    {{#if isStudent}}
+      <span class="message">{{t (if (or (eq competency.status 2) (eq competency.status 3)) (concat 'student-journey.student-status-' competency.status) 'student-journey.nodata')}}</span>
+    {{else}}
+      <span class="message">{{t (if (or (eq competency.status 2) (eq competency.status 3)) (concat 'student-journey.teacher-status-' competency.status) 'student-journey.no-data-teacher')}}</span>
+    {{/if}}
   {{/if}}
 
   {{#if isShowPullUp}}
