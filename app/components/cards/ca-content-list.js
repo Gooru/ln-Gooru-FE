@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  classNames: ['ca-activity-list'],
+  classNames: ['ca-content-list'],
 
   // -------------------------------------------------------------------------
   // Dependencies
