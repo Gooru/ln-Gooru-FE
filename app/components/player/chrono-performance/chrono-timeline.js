@@ -58,7 +58,7 @@ export default Ember.Component.extend({
    * @property {Boolean}
    * Property to store given screen value is compatible
    */
-  isMobileView: isCompatibleVW(SCREEN_SIZES.LARGE),
+  isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
   /**
    * @property {activities}
@@ -82,7 +82,8 @@ export default Ember.Component.extend({
     Ember.$(document).on('keydown', function(e) {
       var keycode = e.keyCode;
       if (keycode === 37 || keycode === 39) {
-        component.handleCardNavigation(keycode);
+        let incrementVal = keycode === 37 ? 1 : -1;
+        component.handleCardNavigation(incrementVal);
       }
     });
 
@@ -92,36 +93,20 @@ export default Ember.Component.extend({
 
   swipeHandler() {
     let component = this;
-    component.$(function() {
-      component.$('#carousel').swipe({
-        //Generic swipe handler for all directions
-        swipe: function(event, direction) {
-          if (direction === 'down') {
-            window.scrollBy(0, -300);
-            let timeData = component.get('timeData');
-            let selectedCard = timeData.findBy('selected', true);
-            let selectedIndex = timeData.indexOf(selectedCard);
-            let incrementVal = -1;
-            let nextIndex = selectedIndex + incrementVal;
-            let activity = timeData.objectAt(nextIndex);
-            if (activity) {
-              component.send('onSelectCard', activity);
-            }
-          }
-          if (direction === 'up') {
-            window.scrollBy(0, 300);
-            let timeData = component.get('timeData');
-            let selectedCard = timeData.findBy('selected', true);
-            let selectedIndex = timeData.indexOf(selectedCard);
-            let incrementVal = 1;
-            let nextIndex = selectedIndex + incrementVal;
-            let activity = timeData.objectAt(nextIndex);
-            if (activity) {
-              component.send('onSelectCard', activity);
-            }
-          }
+    component.$('#carousel').swipe({
+      //Generic swipe handler for all directions
+      swipe: function(event, direction) {
+        if (direction === 'down') {
+          window.scrollBy(0, -300);
+          let incrementVal = -1;
+          component.handleCardNavigation(incrementVal);
         }
-      });
+        if (direction === 'up') {
+          window.scrollBy(0, 300);
+          let incrementVal = 1;
+          component.handleCardNavigation(incrementVal);
+        }
+      }
     });
   },
 
@@ -129,12 +114,11 @@ export default Ember.Component.extend({
    * @function handleCardNavigation
    * Method triggered on navigation of card
    */
-  handleCardNavigation(keycode) {
+  handleCardNavigation(incrementVal) {
     let component = this;
     let timeData = component.get('timeData');
     let selectedTimeData = timeData.findBy('selected', true);
     let selectedIndex = timeData.indexOf(selectedTimeData);
-    let incrementVal = keycode === 37 ? 1 : -1;
     let nextIndex = selectedIndex + incrementVal;
     let activity = timeData.objectAt(nextIndex);
     if (activity) {
