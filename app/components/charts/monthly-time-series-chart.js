@@ -129,15 +129,11 @@ export default Ember.Component.extend({
   bindNonClickableTicks() {
     let component = this;
     let ticksContainer = d3.selectAll('.tick');
-    let startDate = new Date(component.get('startDate'));
-    var timeSeriesStartDate = moment([
-      startDate.getFullYear(),
-      startDate.getMonth()
-    ]);
+    let startDate = moment(component.get('startDate'));
     ticksContainer.attr('y', function(date) {
       let tickCotainer = d3.select(this);
-      var timeSeriesDate = moment([date.getFullYear(), date.getMonth()]);
-      if (timeSeriesDate < timeSeriesStartDate) {
+      var timeSeriesDate = moment(date);
+      if (startDate.isAfter(timeSeriesDate, 'month')) {
         tickCotainer.attr('class', 'tick gray-out');
       }
     });
