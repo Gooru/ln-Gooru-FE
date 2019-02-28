@@ -2,8 +2,10 @@
 	.content {
 		.teacher-class-search-content-pull-up {
 			width: 100%;
+
 			.search-container {
 				width: 100%;
+
 				.search-header {
 					.search-pullup-close {
 						width: 38px;
@@ -19,11 +21,6 @@
 							}
 						}
 					}
-					.search-list-container {
-						.search-list {
-							grid-template-columns: auto auto !important;
-						}
-					}
 				}
 				@media screen and (min-width: $screen-sm) {
 					.search-header {
@@ -35,25 +32,15 @@
 							}
 						}
 					}
-					.search-list-container {
-						.search-list {
-							grid-template-columns: auto auto auto !important;
-						}
-					}
 				}
-				.search-list-container {
-					.search-list {
-						grid-template-columns: none;
-						width: 100%;
-						justify-content: center;
-					}
-				}
+
 				.search-header {
 					.search-filter-container {
 						font-size: 10px;
 						width: 140px;
 						display: inherit;
 					}
+
 					.search-right-menu {
 						.search-input-container {
 							#search-content {
