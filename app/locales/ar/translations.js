@@ -1137,6 +1137,7 @@ export default Object.assign(quizzesTranslations, {
       'back-to': 'العودة إلى الصفوف الدراسية',
       'back-to-archived': 'العودة للصفوف الدراسية المؤرشفة ',
       'class-management': 'إدارة الصف الدراسي. ',
+      'student-proficiency': 'Student Proficiency',
       'class-management-tab': {
         actions: 'أفعال',
         'assessment-min-score':
