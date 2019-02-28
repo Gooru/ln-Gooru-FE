@@ -52,21 +52,9 @@
     <div class="search-list-container {{if isShowListView 'list-view' 'grid-view'}}">
       {{#if (gt searchResults.length 0)}}
         <div class="search-list">
-          {{#if isShowListView}}
-            {{#each searchResultSet as |result|}}
-              {{cards.ca-content-list
-                content=result
-                onScheduleContentToDCA='onScheduleContentToDCA'
-                onAddContentToDCA="onAddContentToDCA"
-                addedScheduleContentToDCA='addedScheduleContentToDCA'
-                classId=classId
-              }}
-            {{/each}}
-          {{else}}
-            {{#each searchResultSet as |result|}}
-              {{cards.dca-search-collection-card onScheduleContentToDCA='onScheduleContentToDCA' collection=result contentType=activeContentType onAddContentToDCA="onAddContentToDCA" addedScheduleContentToDCA='addedScheduleContentToDCA' classId=classId}}
-            {{/each}}
-          {{/if}}
+          {{#each searchResultSet as |result|}}
+            {{cards.dca-search-collection-card onScheduleContentToDCA='onScheduleContentToDCA' collection=result contentType=activeContentType onAddContentToDCA="onAddContentToDCA" addedScheduleContentToDCA='addedScheduleContentToDCA' classId=classId}}
+          {{/each}}
         </div>
       {{else}}
         {{#unless isLoading}}
