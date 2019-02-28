@@ -8,7 +8,7 @@
         }
 
         &.expand {
-          height: 93%;
+          height: calc(100% - 51px);
         }
 
         .body {
