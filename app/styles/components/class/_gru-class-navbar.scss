@@ -60,7 +60,23 @@
       }
       /* Extra small devices (phones, 600px and down) */
       @media only screen and (max-width: $screen-sm - 1) {
-        grid-template-columns: 54px 40px 40px 40px 40px 1fr 40px 53px 40px;
+        .studyplayer-title {
+          display: none !important;
+        }
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+
+        .app-close {
+          width: 45px !important;
+          a {
+            padding: unset;
+          }
+          a > i {
+            width: 45px !important;
+            top: 2px !important;
+            left: -2px;
+          }
+        }
+
         .atc,
         .class-activities,
         .course-map,

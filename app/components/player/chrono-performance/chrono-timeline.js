@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -53,6 +55,12 @@ export default Ember.Component.extend({
   positionToCenter: true,
 
   /**
+   * @property {Boolean}
+   * Property to store given screen value is compatible
+   */
+  isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
+  /**
    * @property {activities}
    */
   activities: Ember.computed(
@@ -62,6 +70,63 @@ export default Ember.Component.extend({
       return this.parseTimelineData();
     }
   ),
+
+  didInsertElement() {
+    let component = this;
+    component._super(...arguments);
+    let timeData = component.get('timeData');
+    let numberOfTimeData = timeData.length;
+    let lastIndex = numberOfTimeData - 1;
+    let selectedTimeData = timeData.objectAt(lastIndex);
+    selectedTimeData.set('selected', true);
+    Ember.$(document).on('keydown', function(e) {
+      var keycode = e.keyCode;
+      if (keycode === 37 || keycode === 39) {
+        let incrementVal = keycode === 37 ? 1 : -1;
+        component.handleCardNavigation(incrementVal);
+      }
+    });
+    if (component.get('isMobileView')) {
+      component.swipeHandler();
+    }
+  },
+
+  /**
+   * @function swipeHandler
+   * Method triggered on swipe of card in mobile
+   */
+  swipeHandler() {
+    let component = this;
+    component.$('#carousel').swipe({
+      //Generic swipe handler for all directions
+      swipe: function(event, direction) {
+        if (direction === 'down') {
+          window.scrollBy(0, -300);
+          component.handleCardNavigation(-1);
+        }
+        if (direction === 'up') {
+          window.scrollBy(0, 300);
+          component.handleCardNavigation(1);
+        }
+      }
+    });
+  },
+
+  /**
+   * @function handleCardNavigation
+   * Method triggered on navigation of card
+   */
+  handleCardNavigation(incrementVal) {
+    let component = this;
+    let timeData = component.get('timeData');
+    let selectedTimeData = timeData.findBy('selected', true);
+    let selectedIndex = timeData.indexOf(selectedTimeData);
+    let nextIndex = selectedIndex + incrementVal;
+    let activity = timeData.objectAt(nextIndex);
+    if (activity) {
+      component.send('onSelectCard', activity);
+    }
+  },
 
   // -------------------------------------------------------------------------
   // Actions
@@ -79,6 +144,11 @@ export default Ember.Component.extend({
     onOpenCourseReport() {
       let component = this;
       component.openStudentCourseReport();
+    },
+
+    showStudentProficiency() {
+      let component = this;
+      component.sendAction('showStudentProficiency');
     },
 
     onOpenCollectionReport(activity, collection, collectionType) {
@@ -104,40 +174,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-
-  didInsertElement() {
-    let component = this;
-    component._super(...arguments);
-    let timeData = component.get('timeData');
-    let numberOfTimeData = timeData.length;
-    let lastIndex = numberOfTimeData - 1;
-    let selectedTimeData = timeData.objectAt(lastIndex);
-    selectedTimeData.set('selected', true);
-    Ember.$(document).on('keydown', function(e) {
-      var keycode = e.keyCode;
-      if (keycode === 37 || keycode === 39) {
-        component.handleCardNavigation(keycode);
-      }
-    });
-  },
-
-  /**
-   * @function handleCardNavigation
-   * Method triggered on navigation of card
-   */
-  handleCardNavigation(keycode) {
-    let component = this;
-    let timeData = component.get('timeData');
-    let selectedTimeData = timeData.findBy('selected', true);
-    let selectedIndex = timeData.indexOf(selectedTimeData);
-    let incrementVal = keycode === 37 ? 1 : -1;
-    let nextIndex = selectedIndex + incrementVal;
-    let activity = timeData.objectAt(nextIndex);
-    if (activity) {
-      component.send('onSelectCard', activity);
-    }
-  },
-
   /**
    * @function didDestroyElement
    * Method to destroy keypress
@@ -145,9 +181,9 @@ export default Ember.Component.extend({
   didDestroyElement() {
     Ember.$(document).off('keydown');
   },
-
   // -------------------------------------------------------------------------
   // Methods
+
   /**
    * @function parseTimelineData
    * Method to parse and set timeline data
@@ -155,6 +191,7 @@ export default Ember.Component.extend({
   parseTimelineData() {
     let component = this;
     let timeData = component.get('timeData');
+
     let numberOfTimeData = timeData.length;
     if (numberOfTimeData > 0) {
       let selectedTimeData = timeData.findBy('selected', true);

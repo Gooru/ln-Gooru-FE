@@ -48,6 +48,11 @@ export default Ember.Controller.extend({
     return data.percentage.toFixed(0);
   }),
 
+  /**
+   * @property {activeStudent}
+   */
+  activeStudent: null,
+
   mileStone: Ember.computed(function() {
     return {
       iconClass: 'msaddon',
@@ -60,7 +65,7 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  queryParams: ['classId', 'courseId'],
+  queryParams: ['classId', 'courseId', 'studyPlayer'],
 
   /**
    * @property {limit}
@@ -72,24 +77,11 @@ export default Ember.Controller.extend({
   offset: 0,
 
   /**
-   * @property {ShowProficiencyPullup}
-   */
-  isShowProficiencyPullup: false,
-
-  /**
-   * @property {showPullUp}
-   */
-  showPullUp: false,
-
-  /**
-   * @property {activeStudent}
-   */
-  activeStudent: null,
-
-  /**
    * @property {noMoreData}
    */
   noMoreData: false,
+
+  studyPlayer: false,
 
   /**
    * @property {String}
@@ -121,7 +113,9 @@ export default Ember.Controller.extend({
       let controller = this;
       let classId = controller.get('classId');
       let courseId = controller.get('courseId');
-      if (classId) {
+      if (controller.get('studyPlayer')) {
+        window.history.back();
+      } else if (classId) {
         controller.transitionToRoute('student.class.course-map', classId);
       } else {
         controller.transitionToRoute(
@@ -131,7 +125,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    showPullUp() {
+    showStudentProficiency() {
       let controller = this;
       let userId = this.get('session.userId');
       let courseId = this.get('courseId');
@@ -143,36 +137,7 @@ export default Ember.Controller.extend({
           role: 'student'
         }
       });
-      // controller.set('isShowProficiencyPullup', true);
-    },
-
-    onClosePullUp() {
-      this.set('isShowProficiencyPullup', false);
-    },
-
-    onSelectCompetency(competency, userId, domainCompetencyList) {
-      let controller = this;
-      controller.set('selectedCompetency', competency);
-      controller.set('domainCompetencyList', domainCompetencyList);
-      controller.set('isShowCompetencyContentReport', true);
     }
-  },
-
-  /**
-   * @function fetchStudentDetails
-   * @param userId
-   * Method to fetch list of student using given user id
-   */
-  fetchStudentDetails() {
-    let controller = this;
-    let userId = controller.get('session.userId');
-    return Ember.RSVP.hash({
-      studentDetails: Ember.RSVP.resolve(
-        controller.get('profileService').readUserProfile(userId)
-      )
-    }).then(({ studentDetails }) => {
-      controller.set('activeStudent', studentDetails);
-    });
   },
 
   /**
@@ -203,6 +168,22 @@ export default Ember.Controller.extend({
           this.get('activities').insertAt(index, activitiy);
         });
       }
+    });
+  },
+  /**
+   * @function fetchStudentDetails
+   * @param userId
+   * Method to fetch list of student using given user id
+   */
+  fetchStudentDetails() {
+    let controller = this;
+    let userId = controller.get('session.userId');
+    return Ember.RSVP.hash({
+      studentDetails: Ember.RSVP.resolve(
+        controller.get('profileService').readUserProfile(userId)
+      )
+    }).then(({ studentDetails }) => {
+      controller.set('activeStudent', studentDetails);
     });
   }
 });

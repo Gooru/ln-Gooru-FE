@@ -30,6 +30,7 @@
     "intro.js": "2.2.0",
     "firebase": "^3.0.0",
     "moment-timezone": "^0.5.13",
-    "blueimp-md5": "2.10.0"
+    "blueimp-md5": "2.10.0",
+    "jquery-touchswipe": "^1.6.19"
   }
 }

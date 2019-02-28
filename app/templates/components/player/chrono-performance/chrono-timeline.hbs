@@ -1,6 +1,21 @@
 <div class="container">
+  {{#if competency}}
+
+    <div class="competency-container">
+      <div class="chart-icon" {{action "showPullUp"}}>
+        {{gru-icon name='equalizer'}}
+      </div>
+      <div class="competency-progress-bar">
+        {{charts/competency-progress-bar competency=competency}}
+      </div>
+    </div>
+  {{/if}}
   <div class="header">
-    {{player.chrono-view.chrono-header performanceSummary=performanceSummary positionToCenter=positionToCenter onOpenCourseReport="onOpenCourseReport" onPaginateNext="onPaginateNext" startDate=startDate activities=activities onSelectCard="onSelectCard"}}
+    {{#if isMobileView}}
+      {{player.chrono-view.chrono-header-xs performanceSummary=performanceSummary positionToCenter=positionToCenter onOpenCourseReport="onOpenCourseReport" onPaginateNext="onPaginateNext" startDate=startDate activities=activities onSelectCard="onSelectCard"}}
+    {{else}}
+      {{player.chrono-view.chrono-header performanceSummary=performanceSummary positionToCenter=positionToCenter onOpenCourseReport="onOpenCourseReport" onPaginateNext="onPaginateNext" startDate=startDate activities=activities onSelectCard="onSelectCard"}}
+    {{/if}}
   </div>
   <div class="body class-activities" id="carousel">
     {{#each activities as |activity index|}}

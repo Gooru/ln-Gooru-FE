@@ -1,10 +1,4 @@
 @import "variables"; // Variable which are specific to rtl & ltr languages
-$tab-float-dir: left;
-$menu-float-dir: right;
-$border-right-side: 1px solid;
-$border-left-side: 0;
-$header-menu-rt-pos: 10px;
-$box-shadow: 1px -1px; // 2) import style file
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
 @import "embedded";
 @import "gooru-theme";
@@ -413,6 +407,7 @@ $box-shadow: 1px -1px; // 2) import style file
 @import "components/proficiency/inspect/student-domain-competency-performance";
 @import "components/proficiency/inspect/student-class-proficiency"; // Chronological View
 @import "components/player/chrono-view/chrono-header";
+@import "components/player/chrono-view/chrono-header-xs";
 @import "components/player/chrono-view/student-card"; // Performance Manual Entry
 @import "components/reports/pull-up/performance-manual-entry";
 @import "components/reports/pull-up/assessment-performance-entry";
