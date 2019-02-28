@@ -98,6 +98,10 @@ module.exports = function(defaults) {
     development: 'bower_components/jquery-ui/ui/sortable.js',
     production: 'bower_components/jquery-ui/ui/minified/sortable.min.js'
   });
+  app.import({
+    development: 'bower_components/jquery-touchswipe/jquery.touchSwipe.js',
+    production: 'bower_components/jquery-touchswipe/jquery.touchSwipe.min.js'
+  });
 
   app.import({
     development:
