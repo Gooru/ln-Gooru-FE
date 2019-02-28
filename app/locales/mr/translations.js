@@ -1243,6 +1243,7 @@ export default Object.assign(quizzesTranslations, {
       'back-to-archived': 'संग्रहित कक्षांमध्ये परत',
       'class-management': 'वर्ग व्यवस्थापन',
       'student-proficiency': 'विद्यार्थी प्रवीणता',
+      'performance-overview': 'Performance Overview',
       atc: 'शीर्ष द़ृश्य',
       'class-management-tab': {
         actions: 'क्रिया',
