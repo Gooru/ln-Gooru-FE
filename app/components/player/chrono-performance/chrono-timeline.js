@@ -86,11 +86,15 @@ export default Ember.Component.extend({
         component.handleCardNavigation(incrementVal);
       }
     });
-
-    //FOR MOBILE SILIDE UP AND DOWN
-    component.swipeHandler();
+    if (component.get('isMobileView')) {
+      component.swipeHandler();
+    }
   },
 
+  /**
+   * @function swipeHandler
+   * Method triggered on swipe of card in mobile
+   */
   swipeHandler() {
     let component = this;
     component.$('#carousel').swipe({
@@ -98,13 +102,11 @@ export default Ember.Component.extend({
       swipe: function(event, direction) {
         if (direction === 'down') {
           window.scrollBy(0, -300);
-          let incrementVal = -1;
-          component.handleCardNavigation(incrementVal);
+          component.handleCardNavigation(-1);
         }
         if (direction === 'up') {
           window.scrollBy(0, 300);
-          let incrementVal = 1;
-          component.handleCardNavigation(incrementVal);
+          component.handleCardNavigation(1);
         }
       }
     });
@@ -172,17 +174,13 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-
-  init() {
-    let component = this;
-    component._super(...arguments);
-    let timeData = component.get('timeData');
-    let numberOfTimeData = timeData.length;
-    let lastIndex = numberOfTimeData - 1;
-    let selectedTimeData = timeData.objectAt(lastIndex);
-    selectedTimeData.set('selected', true);
+  /**
+   * @function didDestroyElement
+   * Method to destroy keypress
+   */
+  didDestroyElement() {
+    Ember.$(document).off('keydown');
   },
-
   // -------------------------------------------------------------------------
   // Methods
 
