@@ -49,6 +49,7 @@
 @import "app-rwd/components/library/_gru-browse-library-rwd";
 @import "app-rwd/components/proficiency/student-proficiency-panel-rwd";
 @import "app-rwd/components/proficiency/student-learner-proficiency-rwd";
+@import "app-rwd/components/charts/competency-progress-bar-rwd";
 
 //Controllers
 @import "app-rwd/controllers/student/class-rwd";
@@ -84,3 +85,4 @@
 @import "app-rwd/controllers/reports/_collection-rwd";
 @import "app-rwd/controllers/teacher/class/_class-management-rwd";
 @import "app-rwd/controllers/teacher/class/student-learner-proficiency-rwd";
+@import "app-rwd/controllers/_student-locate-rwd";

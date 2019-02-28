@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -9,6 +11,12 @@ export default Ember.Component.extend({
    * @property {Object} competency
    */
   competency: null,
+
+  /**
+   * @property {Boolean}
+   * Property to store given screen value is compatible
+   */
+  isMobileView: isCompatibleVW(SCREEN_SIZES.LARGE),
 
   didInsertElement() {
     this.parseCompetency();
@@ -43,8 +51,9 @@ export default Ember.Component.extend({
       competency.notstarted === 0
         ? 0
         : Math.round((competency.notstarted / total) * 100);
-    component.$('.completed').height(`${completed}%`);
-    component.$('.in-progress').height(`${inProgress}%`);
-    component.$('.not-started').height(`${notStarted}%`);
+    let size = component.get('isMobileView') ? 'width' : 'height';
+    component.$('.completed').css(`${size}`, `${completed}%`);
+    component.$('.in-progress').css(`${size}`, `${inProgress}%`);
+    component.$('.not-started').css(`${size}`, `${notStarted}%`);
   }
 });

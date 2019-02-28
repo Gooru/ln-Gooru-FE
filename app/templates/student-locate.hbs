@@ -1,18 +1,8 @@
 <div class="student-locate-container">
   <div class="activity-panel">
     <div class="chrono-view">
-      {{#if classId}}
-        <div class="competency-container">
-          <div class="chart-icon" {{action "showPullUp"}}>
-            {{gru-icon name='equalizer'}}
-          </div>
-          <div class="competency-progress-bar">
-            {{charts/competency-progress-bar competency=competencyMatrix}}
-          </div>
-        </div>
-      {{/if}}
       {{#if activities}}
-        {{player/chrono-performance/chrono-timeline performanceSummary=performanceSummary class=class course=course timeData=activities startDate=activityStartDate paginateNext="paginateNext"}}
+        {{player/chrono-performance/chrono-timeline showStudentProficiency="showStudentProficiency" competency=competencyMatrix performanceSummary=performanceSummary class=class course=course timeData=activities startDate=activityStartDate paginateNext="paginateNext"}}
       {{/if}}
     </div>
     <div class="bar-charts bottom-perf-line" data-content="{{performancePercentage}}% Completed">
@@ -24,24 +14,5 @@
         </div>
       {{/if}}
     </div>
-    {{#if isShowProficiencyPullup}}
-      {{#gru-pull-up pullUpType="proficiency-pullup" showPullUp=isShowProficiencyPullup onClosePullUp="onClosePullUp" as |pull-up|}}
-        {{#if pull-up.isShowHeader}}
-          {{proficiency.learner-proficiency-pull-up
-             student=activeStudent
-             subjectBucket=subjectBucket
-             class=class
-             course=course
-             onSelectCompetency="onSelectCompetency"
-             }}
-        {{/if}}
-      {{/gru-pull-up}}
-    {{/if}}
-    {{#if isShowCompetencyContentReport}}
-      {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc isStudent=true showPullUp=isShowCompetencyContentReport
-        onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
-        {{reports.pull-up.competency-content-report domainCompetencyList=domainCompetencyList competency=selectedCompetency userId=activeStudent.id isStudent=true}}
-      {{/reports.pull-up.competency-report}}
-    {{/if}}
   </div>
 </div>
