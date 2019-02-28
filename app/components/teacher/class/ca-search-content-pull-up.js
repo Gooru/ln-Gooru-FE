@@ -323,7 +323,6 @@ export default Ember.Component.extend({
               newContentId,
               scheduleDate
             );
-            content.set('isScheduled', true);
             component.sendAction('addedContentToDCA', data, scheduleDate);
           }
         });
@@ -363,7 +362,6 @@ export default Ember.Component.extend({
               forMonth,
               forYear
             );
-            content.set('isScheduled', true);
             component.sendAction(
               'addedContentToDCA',
               data,

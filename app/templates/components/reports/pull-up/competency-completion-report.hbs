@@ -25,7 +25,9 @@
               {{#each competencyData.usersCompletionSummary as |userCompletionData|}}
                 <div class="user-completion-container">
                   <div class="user-info">
-                    <div class="user-thumbnail {{if userCompletionData.selected 'selected-student'}}" {{action "onSelectStudent" userCompletionData}} style="background-image: url({{userCompletionData.thumbnail}})">{{gru-icon name="done_all" class="tick-icon"}}</div>
+                    <div class="user-thumbnail {{if userCompletionData.selected 'selected-student'}}" {{action "onSelectStudent" userCompletionData}} style="background-image: url({{userCompletionData.thumbnail}})">
+                      {{gru-icon name="done_all" class="tick-icon"}}
+                    </div>
                     <div class="user-name ellipsis">{{concat userCompletionData.firstName ' ' userCompletionData.lastName}}</div>
                   </div>
                   <div class="user-competency-status">
@@ -42,7 +44,7 @@
           </div>
         </div>
       {{else}}
-          <div class="data-not-available">{{t 'teacher-landing.class.students-tab.data-not-available'}}</div>
+        <div class="data-not-available">{{t 'teacher-landing.class.students-tab.data-not-available'}}</div>
       {{/each}}
     </div>
   </div>
@@ -52,7 +54,9 @@
   <div class="trigger-suggestion">
     <div class="label-text">{{t 'common.add'}}</div>
     {{#each contentTypes as |contentType|}}
-      <div class="{{contentType.format}} activity-type {{if (eq activeContentType contentType.format) 'active'}}" {{action "onFilterBy" contentType.format}}><i class="icon"></i></div>
+      <div class="{{contentType.format}} activity-type {{if (eq activeContentType contentType.format) 'active'}}" {{action "onFilterBy" contentType.format}}>
+        <i class="icon"></i>
+      </div>
     {{/each}}
   </div>
 {{/if}}

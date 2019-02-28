@@ -80,8 +80,6 @@ export default Ember.Component.extend({
         userCompletionData.set('selected', true);
         selectedUserIds.pushObject(userCompletionData);
       }
-      component.set('selectedUserIds', selectedUserIds);
-      component.set('isShowStudentSuggestion', selectedUserIds.length > 0);
     }
   },
 
@@ -106,7 +104,9 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isShowStudentSuggestion
    */
-  isShowStudentSuggestion: false,
+  isShowStudentSuggestion: Ember.computed('selectedUserIds.[]', function() {
+    return this.get('selectedUserIds.length');
+  }),
 
   // -------------------------------------------------------------------------
   // Functions
@@ -194,11 +194,8 @@ export default Ember.Component.extend({
     let activeCompetency = component.get('activeCompetency');
     if (activeCompetency && (competencyData.get('competencyCode') !== activeCompetency.get('competencyCode'))) {
       let selectedUsers = component.get('selectedUserIds');
-      selectedUsers.map( selectedUser => {
-        selectedUser.set('selected', false);
-      });
+      selectedUsers.map( selectedUser => selectedUser.set('selected', false));
       component.set('selectedUserIds', Ember.A([]));
-      component.set('isShowStudentSuggestion', false);
     }
   }
 });
