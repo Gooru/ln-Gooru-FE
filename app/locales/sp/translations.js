@@ -1068,6 +1068,7 @@ export default Object.assign(quizzesTranslations, {
   },
   'teacher-landing': {
     class: {
+      'student-proficiency': 'Student Proficiency',
       'class-management-tab': {
         'student-name': 'Nombre del estudiante',
         'archive-class': 'Clase de archivo',

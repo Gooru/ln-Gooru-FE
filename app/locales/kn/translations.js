@@ -1151,6 +1151,7 @@ export default Object.assign(quizzesTranslations, {
       'back-to': 'ಮತ್ತೆ ತರಗತಿ ಕೊಠಡಿಗಳಿಗೆ',
       'back-to-archived': 'ಆರ್ಕೈವ್ ಮಾಡಲಾದ ಪಾಠದ ಕೊಠಡಿಗಳಿಗೆ ಮರಳಿ',
       'class-management': 'ವರ್ಗ ನಿರ್ವಹಣೆ',
+      'student-proficiency': 'Student Proficiency',
       'class-management-tab': {
         actions: 'ಕ್ರಮಗಳು',
         'assessment-min-score': 'ಟ್ರೋಫಿಗಳಿಗಾಗಿ ಅಂದಾಜು ಕನಿಷ್ಠ ಸ್ಕೋರ್',
