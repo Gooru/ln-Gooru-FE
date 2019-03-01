@@ -46,6 +46,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         let redirectUrl = null;
         redirectUrl = EndPointsConfig.getMarketingsiteURL();
         if (resp && resp.default === false) {
+          $('.logout-container').css('display', 'block');
           $('.navbar-default').css('display', 'none');
           this.tenantRedirectURL = resp.login_url;
           var timer = window.localStorage.getItem('notificationtimer');
