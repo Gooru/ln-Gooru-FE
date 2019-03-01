@@ -179,6 +179,12 @@ export default Object.assign(quizzesTranslations, {
     course: 'مساق دراسي',
     'course-title': 'عنوان المساق الدراسي',
     courses: 'المساقات الدراسية',
+    'competency-status-0': 'Not Started',
+    'competency-status-1': 'In Progress',
+    'competency-status-2': 'Mastered (Inferred)',
+    'competency-status-3': 'Mastered (Asserted)',
+    'competency-status-4': 'Mastered (Earned)',
+    'competency-status-5': 'Mastered (Demonstrated)',
     create: 'أنشئ',
     createClass: 'أنشئ مساق دراسي',
     'created-by': 'إعداد',
@@ -1137,6 +1143,8 @@ export default Object.assign(quizzesTranslations, {
       'back-to': 'العودة إلى الصفوف الدراسية',
       'back-to-archived': 'العودة للصفوف الدراسية المؤرشفة ',
       'class-management': 'إدارة الصف الدراسي. ',
+      'student-proficiency': 'Student Proficiency',
+      'performance-overview': 'Performance Overview',
       'class-management-tab': {
         actions: 'أفعال',
         'assessment-min-score':

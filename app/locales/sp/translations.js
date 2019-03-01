@@ -376,6 +376,12 @@ export default Object.assign(quizzesTranslations, {
     add: 'Añadir',
     'content-manager': 'Gestor de contenidos',
     courses: 'Cursos',
+    'competency-status-0': 'Not Started',
+    'competency-status-1': 'In Progress',
+    'competency-status-2': 'Mastered (Inferred)',
+    'competency-status-3': 'Mastered (Asserted)',
+    'competency-status-4': 'Mastered (Earned)',
+    'competency-status-5': 'Mastered (Demonstrated)',
     'search-placeholder': 'Buscar',
     unitInitial: 'Tu',
     if_questions: 'Si tienes alguna pregunta,',
@@ -1068,6 +1074,8 @@ export default Object.assign(quizzesTranslations, {
   },
   'teacher-landing': {
     class: {
+      'student-proficiency': 'Student Proficiency',
+      'performance-overview': 'Performance Overview',
       'class-management-tab': {
         'student-name': 'Nombre del estudiante',
         'archive-class': 'Clase de archivo',

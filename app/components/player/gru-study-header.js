@@ -97,7 +97,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
         params = {
           queryParams: {
             classId: this.get('classId'),
-            courseId: this.get('courseId')
+            courseId: this.get('courseId'),
+            studyPlayer: this.get('isStudyPlayer')
           }
         };
       } else {
@@ -161,10 +162,24 @@ export default Ember.Component.extend(ConfigurationMixin, {
           route.transitionTo('student.class.class-activities', classId);
         } else if (item === 'profile') {
           route.transitionTo('student.class.profile', classId);
+        } else if (item === 'profile-prof') {
+          let userId = this.get('session.userId');
+          route.transitionTo(
+            'student.class.student-learner-proficiency',
+            classId,
+            {
+              queryParams: {
+                userId: userId,
+                classId: classId,
+                courseId: this.get('courseId'),
+                role: 'student'
+              }
+            }
+          );
         } else {
           route.transitionTo('student.class');
-        }
-      } // end of if block
+        } // end of if block
+      }
     }
   },
 
@@ -272,16 +287,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
    * @property {String} color - Hex color value for the default bgd color of the bar chart
    */
   defaultBarColor: STUDY_PLAYER_BAR_COLOR,
-
-  /**
-   * Shows if the component is called from collection report
-   * @property {Boolean} fromReport
-   */
-  fromReport: false,
-
-  showLocateMe: Ember.computed(function() {
-    return !this.get('fromReport') && this.get('isFeatureEnabled');
-  }),
 
   /**
    * Indicates if PreTest is showing

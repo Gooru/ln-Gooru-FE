@@ -39,10 +39,14 @@ export default Ember.Controller.extend(ModalMixin, {
   studentsLevelSetting: Ember.computed(
     'class.members.@each.tempGradeLowerBound',
     'class.members.@each.tempGradeUpperBound',
+    'class.members.@each.isActive',
+    'class.members.[]',
     function() {
       return this.get('class.members').filter(member => {
         return (
-          member.get('tempGradeLowerBound') || member.get('tempGradeUpperBound')
+          member.get('isActive') &&
+          (member.get('tempGradeLowerBound') ||
+            member.get('tempGradeUpperBound'))
         );
       });
     }
@@ -51,6 +55,21 @@ export default Ember.Controller.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Actions
   actions: {
+    /**
+     * Action trigger to show toggle action menu dropdown
+     */
+    showActionButton(event) {
+      let element = Ember.$(event.target).next();
+      if (element.hasClass('active')) {
+        element.removeClass('active');
+      } else {
+        Ember.$(
+          '.teacher_class_class-management .student-settings-sec .actions-btn'
+        ).removeClass('active');
+        element.addClass('active');
+      }
+    },
+
     /**
      * Archive class
      **/
@@ -255,7 +274,7 @@ export default Ember.Controller.extend(ModalMixin, {
       controller.set('isLoading', true);
     },
 
-    updateFwkSettings: function(value) {
+    updateFwkSettings(value) {
       const controller = this;
       if (controller.get('course.id') && controller.get('subject')) {
         let tClass = controller.get('tempClass'),
@@ -278,7 +297,7 @@ export default Ember.Controller.extend(ModalMixin, {
       }
     },
 
-    updateClassStudentGradeOrigin: function(grade, studentId) {
+    updateClassStudentGradeOrigin(grade, studentId) {
       let student = this.get('class.members').findBy('id', studentId);
       let gradeLowerBound = student.get('gradeLowerBound');
       let tempGradeLowerBound = grade.get('id');
@@ -287,7 +306,7 @@ export default Ember.Controller.extend(ModalMixin, {
       }
     },
 
-    updateClassStudentGradeDestination: function(grade, studentId) {
+    updateClassStudentGradeDestination(grade, studentId) {
       let student = this.get('class.members').findBy('id', studentId);
       let gradeUpperBound = student.get('gradeUpperBound');
       let tempGradeUpperBound = grade.get('id');
@@ -296,12 +315,12 @@ export default Ember.Controller.extend(ModalMixin, {
       }
     },
 
-    updateClassGradeLevel: function(grade) {
+    updateClassGradeLevel(grade) {
       this.set('enableApplySettings', true);
       this.set('tempClass.gradeCurrent', grade.get('id'));
     },
 
-    updateClassGradeOrigin: function(grade) {
+    updateClassGradeOrigin(grade) {
       this.set('enableApplySettings', true);
       this.set('tempClass.gradeLowerBound', grade.get('id'));
       let gradeCurrent = this.get('class.gradeCurrent');
@@ -311,7 +330,7 @@ export default Ember.Controller.extend(ModalMixin, {
       }
     },
 
-    applyClassMembersSettings: function() {
+    applyClassMembersSettings() {
       this.updateClassMembersSettings();
     },
 
@@ -319,13 +338,13 @@ export default Ember.Controller.extend(ModalMixin, {
      *
      * Triggered when a edit save score option is selected
      */
-    saveOffline: function(value) {
+    saveOffline(value) {
       let controller = this;
       controller.set('tempClass.isOffline', value);
       controller.saveClass();
     },
 
-    classMembersToggle: function(targetStatusActive, student) {
+    classMembersToggle(targetStatusActive, student) {
       const controller = this;
       if (controller.get('course.id') && controller.get('subject')) {
         let settings = {
@@ -345,7 +364,7 @@ export default Ember.Controller.extend(ModalMixin, {
       }
     },
 
-    applyClassSettings: function() {
+    applyClassSettings() {
       const controller = this;
       if (controller.get('course.id') && controller.get('subject')) {
         let settings = {

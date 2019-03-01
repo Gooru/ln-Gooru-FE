@@ -49,7 +49,7 @@
         {{/if}}
       </div>
     </div>
-    <div class="search-list-container">
+    <div class="search-list-container {{if isShowListView 'list-view' 'grid-view'}}">
       {{#if (gt searchResults.length 0)}}
         <div class="search-list">
           {{#each searchResultSet as |result|}}

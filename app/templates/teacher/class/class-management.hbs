@@ -248,16 +248,16 @@
                   <th>{{t 'teacher-landing.class.class-settings.destination'}}</th>
                 {{/if}}
                 <th class="hidden-xs">{{t 'teacher-landing.class.class-settings.student-id'}}</th>
-                <th>{{t 'teacher-landing.class.class-settings.student-settings-sec.col-head-active'}}</th>
+                <th><span class="hidden-xs">{{t 'teacher-landing.class.class-settings.student-settings-sec.col-head-active'}}</span></th>
               </tr>
               {{#each sortedMembers as |student|}}
                 <tr>
-                  <td>
+                  <td class="student-info">
                     <div class="student-info-container">
-                      <div class='student-icon-col'>
+                      <div class='student-icon-col hidden-xs'>
                         <div class='student-icon' style="background-image: url({{student.avatarUrl}})"></div>
                       </div>
-                      <div class="student-name ellipsis hidden-xs {{if student.isActive "" "inActiveRow"}}  ">
+                      <div class="student-name  {{if student.isActive "" "inActiveRow"}}  ">
                         <span>{{student.lastName}} {{student.firstName}}</span>
                       </div>
                     </div>
@@ -305,21 +305,24 @@
                       <span> {{student.studentId}}</span>
                     </div>
                   </td>
-                  <td>
-                    <div class="actions-btn">
-                      <div class="student-action-col">
-                        {{gru-switch
-                            switchOptions=switchOptions
-                            onOptionSwitch='classMembersToggle'
-                            item=student data-toggle="tooltip"
-                            isChecked=(if student.isActive true false)
-                          }}
-                      </div>
-                      <div class='student-action-col'>
-                        <div class='student-delete' {{action "onRemoveStudent" student}} title="{{t 'common.remove'}}" data-toggle="tooltip">
-                          {{gru-icon name='delete'}}</div>
-                      </div>
-                    </div>
+                  <td class="actions-container">
+                      <span class="hidden visible-xs menu-icon" onclick={{action 'showActionButton'}}>
+                        {{gru-icon name='more_vert'}}
+                      </span>
+                      <div class="actions-btn">
+                       <div class="student-action-col">
+                         {{gru-switch
+                             switchOptions=switchOptions
+                             onOptionSwitch='classMembersToggle'
+                             item=student data-toggle="tooltip"
+                             isChecked=(if student.isActive true false)
+                           }}
+                       </div>
+                       <div class='student-action-col'>
+                         <div class='student-delete' {{action "onRemoveStudent" student}} title="{{t 'common.remove'}}" data-toggle="tooltip">
+                           {{gru-icon name='delete'}}</div>
+                       </div>
+                     </div>
                   </td>
                 </tr>
               {{/each}}

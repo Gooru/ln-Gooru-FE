@@ -63,5 +63,18 @@
 </div>
 
 {{#if isShowCompetencyCompletionReport}}
-  {{reports.pull-up.competency-completion-report showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent}}
+  {{reports.pull-up.competency-completion-report showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent onSuggestAtCompetency="onSuggestAtCompetency"}}
+{{/if}}
+
+{{#if isShowActivitySearchContentPullup}}
+  {{teacher.class.ca-search-content-pull-up
+    showPullUp=isShowActivitySearchContentPullup
+    addedContentToDCA="addedContentToDCA"
+    context=contextParams
+    selectedSearchContentType=selectedContentType
+    isOfflineClass=isOfflineClass
+    classPreference=classPreference
+    classId=classId
+    competencyData=selectedCompetencyData
+  }}
 {{/if}}
