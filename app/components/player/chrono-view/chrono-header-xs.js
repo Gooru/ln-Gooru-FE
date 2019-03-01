@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import d3 from 'd3';
-import { getGradeColor } from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -63,7 +62,6 @@ export default Ember.Component.extend({
     let leftTimeLineHeight = component.$('.left-timeline-activities')[0]
       .scrollHeight;
     component.$('.student-activities').scrollTop(leftTimeLineHeight - 294);
-    this.fillActiveResource();
   },
 
   willDestroyElement() {
@@ -131,15 +129,6 @@ export default Ember.Component.extend({
     component.drawNodes(rightTimeLine, 'right');
     component.drawPath('right');
     component.handleView('right');
-  },
-
-  fillActiveResource() {
-    let component = this;
-    let selectedActivity = component.get('activities').findBy('selected', true);
-    if (selectedActivity) {
-      let color = getGradeColor(selectedActivity.get('score'));
-      component.$('.active-resource').css('background-color', color);
-    }
   },
 
   /**
