@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
   }),
 
   activities: Ember.computed('studentActivities', function() {
-    return this.get('studentActivities.activities');
+    return this.get('studentActivities.activities').reverse();
   }),
 
   performanceSummary: Ember.computed('class', function() {
@@ -181,16 +181,21 @@ export default Ember.Controller.extend({
    */
   getStudentPerformance() {
     const userId = this.get('session.userId');
+    const classId = this.get('classId');
     let filter = {
       userId: userId,
       courseId: this.get('courseId'),
-      classId: this.get('classId'),
+      classId: classId,
       offset: this.get('offset'),
       limit: this.get('limit')
     };
-    let studentPerformancePromise = this.get(
-      'chronoPerformanceService'
-    ).getStudentPerformanceOfAllItemsInClass(filter);
+    let studentPerformancePromise = classId
+      ? this.get(
+        'chronoPerformanceService'
+      ).getStudentPerformanceOfAllItemsInClass(filter)
+      : this.get(
+        'chronoPerformanceService'
+      ).getStudentPerformanceOfIndepedentLearning(filter);
 
     return Ember.RSVP.hashSettled({
       studentPerformance: studentPerformancePromise

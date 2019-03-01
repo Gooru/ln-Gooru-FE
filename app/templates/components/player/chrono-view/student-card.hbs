@@ -24,7 +24,7 @@
         {{else}}
           <div class="performance {{if (eq activity.status 'in-progress') 'disable'}}" {{action "onOpenCollectionReport"}} style="background-color:{{if activity (grade-color activity.score) defaultBarColor}}">
             <span class="score">
-              {{#if activity.score}}
+              {{#if (eq activity.status 'complete')}}
                 {{activity.score}}%
               {{else}}
                 &dash;&dash;
