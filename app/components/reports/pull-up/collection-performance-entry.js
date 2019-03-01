@@ -164,8 +164,8 @@ export default Ember.Component.extend({
       maxMins = isNaN(maxMins) ? 0 : maxMins;
       let maxTimeInMilliSec = (maxHour * 60 * 60 + maxMins * 60) * 1000;
       let resourceData = {
-        resource_id: resource.id,
-        resource_type: 'resource',
+        resource_id: resource.get('id'),
+        resource_type: resource.get('content_format') || 'resource',
         time_spent: maxTimeInMilliSec
       };
       collectionResources.push(resourceData);
