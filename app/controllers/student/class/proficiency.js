@@ -28,6 +28,16 @@ export default Ember.Controller.extend({
    */
   classService: Ember.inject.service('api-sdk/class'),
 
+  /**
+   * @property {Service} I18N service
+   */
+  i18n: Ember.inject.service(),
+
+  /**
+   * @property {Service} Notifications service
+   */
+  notifications: Ember.inject.service(),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -196,11 +206,34 @@ export default Ember.Controller.extend({
       options.courseId,
       options.classId
     );
-    nextPromise.then(controller.nextPromiseHandler).then(queryParams => {
-      controller.transitionToRoute('study-player', courseId, {
-        queryParams
-      });
+    const errorMessage = controller
+      .get('i18n')
+      .t('common.errors.no-studymaterial').string;
+
+    controller.get('notifications').clear();
+    controller.get('notifications').setOptions({
+      positionClass: 'toast-top-full-width student-class-proficiency'
     });
+    nextPromise
+      .then(controller.nextPromiseHandler)
+      .then(queryParams => {
+        if (queryParams.collectionId) {
+          controller.transitionToRoute('study-player', courseId, {
+            queryParams
+          });
+        } else {
+          controller.get('notifications').warning(errorMessage);
+          navigateMapService
+            .getLocalStorage()
+            .removeItem(navigateMapService.generateKey());
+        }
+      })
+      .catch(() => {
+        controller.get('notifications').warning(errorMessage);
+        navigateMapService
+          .getLocalStorage()
+          .removeItem(navigateMapService.generateKey());
+      });
   },
 
   /**
