@@ -165,7 +165,7 @@ export default Ember.Component.extend({
       let maxTimeInMilliSec = (maxHour * 60 * 60 + maxMins * 60) * 1000;
       let resourceData = {
         resource_id: resource.get('id'),
-        resource_type: resource.get('content_format') || 'resource',
+        resource_type: resource.get('content_format'),
         time_spent: maxTimeInMilliSec
       };
       collectionResources.push(resourceData);
