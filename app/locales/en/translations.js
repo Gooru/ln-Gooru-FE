@@ -7,7 +7,6 @@ export default Object.assign(quizzesTranslations, {
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
   hi: 'हिंदी',
-
   errors: {
     description: 'This field',
     inclusion: '{{description}} is not included in the list',
@@ -44,9 +43,6 @@ export default Object.assign(quizzesTranslations, {
     phone: '{{description}} must be a valid phone number',
     url: '{{description}} must be a valid url'
   },
-  /*
-   * COMMON: Translations used globally in the app or shared between components
-   */
   common: {
     relevance: 'Relevance',
     engagement: 'Engagement',
@@ -528,7 +524,6 @@ export default Object.assign(quizzesTranslations, {
     password: 'Password',
     pending: 'Pending',
     performance: 'Show Performance',
-
     'performance-dashboard': 'Performance Dashboard',
     'personal-information': 'Personal Information',
     play: 'Play',
@@ -735,10 +730,6 @@ export default Object.assign(quizzesTranslations, {
     yes: 'Yes',
     'change-score': 'Change Score'
   },
-
-  /*
-   * CONTROLLERS: Translations used in a specific controller
-   */
   'not-found': {
     tenant: {
       'login-not-found-msg-1':
@@ -747,7 +738,6 @@ export default Object.assign(quizzesTranslations, {
       'login-not-found-msg-3': 'sec or click below button to login as'
     }
   },
-
   index: {
     joinUs: 'Join Us to <br/> Honor the Human Right to <br/> Education',
     browseContent: {
@@ -1461,10 +1451,6 @@ export default Object.assign(quizzesTranslations, {
       'updated-success-msg': 'You\'ve updated the goal'
     }
   },
-
-  /*
-   * COMPONENTS: Translations used in a specific component
-   */
   'gru-add-to': {
     'add-assessment-to-lesson': 'Add from my assessments',
     'add-assessment-to-lesson-lead':
@@ -1671,7 +1657,6 @@ export default Object.assign(quizzesTranslations, {
     'error-district-message':
       'Please select your district/charter from the list or provide it in "Other".'
   },
-
   'gru-user-sign-up-cancel': {
     title: 'Leave Registration?',
     'exit?': 'Are you sure you want to exit?',
@@ -1679,7 +1664,6 @@ export default Object.assign(quizzesTranslations, {
     leave: 'Leave Registration',
     continue: 'Continue with Registration'
   },
-
   login: {
     title: 'Welcome Back!',
     description: 'Learning is just around the corner.',
@@ -1695,7 +1679,6 @@ export default Object.assign(quizzesTranslations, {
     usernameOrEmail: 'Username or Email',
     'log-in': 'Log In'
   },
-
   'forgot-password': {
     description: 'It happens to all of us.',
     usernameOrEmail: 'Please enter your email',
@@ -1711,13 +1694,11 @@ export default Object.assign(quizzesTranslations, {
       'We\'ve sent you an email with a link to reset your password.',
     'secondStepDescription-2': 'If you have any questions, please contact'
   },
-
   'reset-password': {
     'new-password': 'Enter your new password',
     'new-password-confirm': 'Confirm your password',
     title: 'Reset password'
   },
-
   'change-password': {
     'change-password': 'Change password link',
     title: 'Change Password',
@@ -1746,7 +1727,6 @@ export default Object.assign(quizzesTranslations, {
     privacy: 'Privacy',
     Copyright: 'Copyright'
   },
-
   'grade-dropdown': {
     placeholder: 'grade(s)',
     prompt: 'Select a grade',
@@ -1769,20 +1749,16 @@ export default Object.assign(quizzesTranslations, {
     eleventh: '11',
     twelfth: '12'
   },
-
   'grade-selector': {
     placeholder: 'Choose Grade Lines to Display'
   },
-
   'standard-dropdown': {
     placeholder: 'Browse by Standard'
   },
-
   'subject-dropdown': {
     placeholder: 'subject(s)',
     prompt: 'Select a subject'
   },
-
   'search-filter': {
     courses: 'Courses',
     collections: 'Collections',
@@ -1810,7 +1786,6 @@ export default Object.assign(quizzesTranslations, {
       placeholder: 'Author'
     }
   },
-
   resource: {
     video: 'Video',
     webpage: 'Webpage',
@@ -1821,7 +1796,6 @@ export default Object.assign(quizzesTranslations, {
     audio: 'Audio',
     oer: 'OER'
   },
-
   'search-result': {
     resource: 'Resource',
     resources: 'Resources',
@@ -1831,7 +1805,6 @@ export default Object.assign(quizzesTranslations, {
     'in-this-collection': 'in this collection',
     'search-results-for': 'Search Results for'
   },
-
   'gru-image-picker': {
     chooseFile: 'Choose a file ...',
     instruction: 'Upload an image from a file on your computer.',
@@ -1842,7 +1815,6 @@ export default Object.assign(quizzesTranslations, {
     instructions:
       'Please type your answer(s) in the blank(s) provided, and click "{{action}}".'
   },
-
   'gru-hs-image': {
     instructions: 'Please select the correct image(s), and click "{{action}}".'
   },
@@ -1866,13 +1838,11 @@ export default Object.assign(quizzesTranslations, {
   'gru-multiple-choice': {
     instructions: 'Please select the correct answer, and click "{{action}}".'
   },
-
   'gru-open-ended': {
     instructions:
       'Please type your answer in the field below, and click the "{{action}}" button to save your response when you\'re done.',
     characterLimit: 'Character Limit'
   },
-
   'gru-question-viewer': {
     answer: 'Answer',
     question: 'Question'
@@ -1882,12 +1852,10 @@ export default Object.assign(quizzesTranslations, {
     true: 'True',
     false: 'False'
   },
-
   'gru-reorder': {
     instructions:
       'Please reorder the answers in correct order, and click "{{action}}".'
   },
-
   'student-first-experience': {
     preStudyTitle: 'Pre-Study for {{title}}',
     'lp-compute-inprogress':
@@ -1946,7 +1914,6 @@ export default Object.assign(quizzesTranslations, {
       other: '{{count}} Units'
     }
   },
-
   player: {
     'gru-navigation': {
       'view-report': 'View Report'
@@ -1973,7 +1940,6 @@ export default Object.assign(quizzesTranslations, {
       }
     }
   },
-
   'grading-player': {
     answer: 'Submitted Work',
     'back-to': 'Back',
@@ -2001,7 +1967,6 @@ export default Object.assign(quizzesTranslations, {
       points: '({{total}}pts)'
     }
   },
-
   profile: {
     'gru-navigation': {
       about: 'About',
@@ -2052,7 +2017,6 @@ export default Object.assign(quizzesTranslations, {
       'other-preferred-languages': 'Other preferred languages'
     }
   },
-
   'gru-data-picker': {
     score: 'Score',
     report: 'Report',
@@ -2246,7 +2210,6 @@ export default Object.assign(quizzesTranslations, {
     'featured-description':
       'Featured courses are curated by innovative teachers, vetted and reviewed by content experts, and implemented in classrooms with students. Discover, remix, and customize courses to personalize learning and increase student engagement! <a href=\'http://about.gooru.org/courses\' target=\'_blank\'>Learn more</a> about the development of these courses.'
   },
-
   locateme: {
     score: 'Score',
     timespent: 'Time Spent',
@@ -2254,7 +2217,6 @@ export default Object.assign(quizzesTranslations, {
     attempt: 'Attempt',
     lastAcessesed: 'Last Accessed'
   },
-
   'taxonomy.modals': {
     'gru-domain-picker': {
       browseSelectorText: 'What domains will this unit cover?',
@@ -2281,7 +2243,6 @@ export default Object.assign(quizzesTranslations, {
       shortcutText: 'Unit is tagged to'
     }
   },
-
   'account-settings': {
     title: 'Account Settings',
     'account-info': 'Account Info',
@@ -2290,7 +2251,6 @@ export default Object.assign(quizzesTranslations, {
     gender: 'Gender',
     birthday: 'Birthday'
   },
-
   'gru-rich-text-editor': {
     bold: 'Bold',
     expression: 'Expression',
@@ -2314,7 +2274,6 @@ export default Object.assign(quizzesTranslations, {
       'create-expression': 'Create Expression'
     }
   },
-
   'gru-settings-edit': {
     'answerkey-attempts': 'Answer Key and Attempts',
     'answer-key': 'Students can see the answer key at the end',
@@ -2881,7 +2840,6 @@ export default Object.assign(quizzesTranslations, {
     'take-resource': 'Study Resource',
     'end-of-course': 'You have reached the end of the course.'
   },
-
   'gru-content-suggestion': {
     header: 'We have a suggestion for you!',
     'suggestion-text': {
@@ -2891,18 +2849,15 @@ export default Object.assign(quizzesTranslations, {
         'Based on your performance on this topic, we recommend that you go through our suggested assessment to help you gain mastery.'
     }
   },
-
   'student-open-ended-summary': {
     'overall-comment': 'Overall Comment',
     'overall-score': 'Overall score',
     prompt: 'Question Prompt'
   },
-
   'gru-performance-chart': {
     'teacher-tooltip':
       'of your students have completed all the assessments in this lesson'
   },
-
   report: {
     'external-assessment-report': {
       note:

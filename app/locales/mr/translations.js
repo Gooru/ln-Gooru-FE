@@ -1,4 +1,4 @@
-﻿import quizzesTranslations from './quizzes/translations';
+import quizzesTranslations from './quizzes/translations';
 
 export default Object.assign(quizzesTranslations, {
   en: 'English',
@@ -7,7 +7,6 @@ export default Object.assign(quizzesTranslations, {
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
   hi: 'हिंदी',
-
   errors: {
     description: 'हे फील्ड',
     inclusion: '{{description}} सूचीमध्ये समाविष्ट नाही',
@@ -54,10 +53,10 @@ export default Object.assign(quizzesTranslations, {
     last: 'शेवटचे',
     name: 'नाव',
     user: 'वापरणारी व्यक्ती',
-    'content-name': 'सामग्रीचे नाव',
+    'content-name': 'आशयाचे नाव',
     lastName: 'आडनाव',
     firstName: 'पहिले नाव',
-    'filter-by': 'द्वारे फिल्टर',
+    'filter-by': 'द्वारे फिल्टर करा',
     more: 'अधिक',
     'avg-score': 'सरासरी गुण',
     frq: 'फ्रॅक',
@@ -69,10 +68,11 @@ export default Object.assign(quizzesTranslations, {
     'gooru-catalog': 'गुरू कॅटलॉग',
     'suggestion-made-to': 'सूचित केले',
     'student-selected': 'विद्यार्थी निवडले',
-    'no-suggest-result-message': ' कोणतीही जुळणारी सामग्री सापडली नाही',
+    'no-suggest-result-message':
+      'तुम्ही शोधत आहात त्याच्याशी साम्य असणारा मजकूर सापडला नाही',
     'no-suggest-results-message': 'आपण संबंधित सामग्री शोधू आणि शोधू शकता.',
     'no-suggest-search-results-message':
-      'आपले शब्दलेखन तपासा. आम्ही सर्व चुका करतो! किंवा त्याऐवजी समान शब्द शोधण्याचा प्रयत्न करा.',
+      'तुम्ही शोधण्यासाठी वापरलेले शब्द तपासा. त्या शब्दांसाठी पर्यायी शब्द वापरून पुन्हा प्रयत्न करा.',
     'a-collection': 'एक संग्रह',
     'a-course': 'एक कोर्स',
     'a-question': 'एक प्रश्न',
@@ -176,6 +176,7 @@ export default Object.assign(quizzesTranslations, {
     category: 'श्रेणी',
     categoryOptions: {
       k12: 'के -12',
+      k12IN: 'K12IN',
       'higher-ed': 'उच्च शिक्षण',
       'professional-dev': 'व्यावसायिक विकास'
     },
@@ -262,6 +263,7 @@ export default Object.assign(quizzesTranslations, {
     'download-print': 'डाउनलोड / प्रिंट',
     'drag-drop-suggestions': 'किंवा  ड्रॅग आणि ड्रॉप सूचना करा ...',
     'download-report': 'अहवाल  डाउनलोड करा',
+    done: 'Done',
     edit: 'संपादित करा',
     showassessments: 'मूल्यांकन दाखवा',
     showcollections: 'संकलन दर्शवा',
@@ -270,7 +272,7 @@ export default Object.assign(quizzesTranslations, {
     expand: 'विस्तृत करा',
     'edit-assessment': 'मूल्यांकन संपादित करा',
     'edit-collection': 'संग्रह संपादित करा',
-    'edit-course': 'कोर्स संपादित करा',
+    'edit-course': 'अभ्यासक्रम संपादित करा',
     'edit-question': 'प्रश्न संपादित करा',
     'edit-resource': 'स्त्रोत संपादित करा',
     'edit-rubric': 'रुब्रीक संपादित करा',
@@ -304,7 +306,7 @@ export default Object.assign(quizzesTranslations, {
       'assessment-not-updated':
         'अरेरे! आत्ता लगेच मूल्यांकन अ्पडेट करू शकत नाही. कृपया लवकरच पुन्हा प्रयत्न करा',
       'category-title-presence': 'श्रेणी शीर्षक प्रविष्ट करा.',
-      'class-min-score': 'किमान स्कोअर  ही 1 आणि 100 दरम्यानची संख्या असावी',
+      'class-min-score': 'किमान गुण हे १ ते १०० दरम्यान असावेत',
       'class-not-created':
         'अरेरे! आत्ताच वर्ग तयार करू शकत नाही. कृपया लवकरच पुन्हा प्रयत्न करा',
       'class-title-presence': 'कृपया आपल्या वर्गात एक नाव द्या.',
@@ -407,6 +409,7 @@ export default Object.assign(quizzesTranslations, {
     'essential-questions': 'आवश्यक प्रश्न',
     example: 'उदाहरण:',
     exit: 'बाहेर जा',
+    'external-collection': 'External Collection',
     explanation: 'स्पष्टीकरण',
     explore: 'अन्वेषण',
     false: 'खोटे',
@@ -628,11 +631,10 @@ export default Object.assign(quizzesTranslations, {
     'de-select': 'निवडलेले खोडा',
     'select-all': 'सर्व निवडा',
     none: 'काहीही नाही',
-    'no-students': 'काहीही नाही',
     'add-data': 'माहिती भरा',
     'update-data': 'Update करा',
     all: 'सर्व',
-    everyone: 'सर्व विद्यार्थी',
+    'please-wait': 'Please Wait',
     'unscheduled-items': 'अनियोजित',
     'add-to-unschedule': 'अनियोजित उपक्रमांच्या यादीत टाका',
     'save-next': 'सेव्ह आणि पुढे',
@@ -640,7 +642,7 @@ export default Object.assign(quizzesTranslations, {
     'save-finish': 'सेव्ह आणि समाप्त',
     school: 'शाळा',
     'school-info': 'शाळेची माहिती',
-    score: 'स्कोअर',
+    score: 'गुण',
     select: 'निवडा',
     'select-a-framework':
       'कृपया प्रथम वरील अभ्यासक्रम माहिती विभागात एक स्टॅंडर्ड्स फ्रेमवर्क निवडा.',
@@ -732,6 +734,14 @@ export default Object.assign(quizzesTranslations, {
     word: 'शब्द',
     yes: 'होय',
     'change-score': 'गुण बदला'
+  },
+  'not-found': {
+    tenant: {
+      'login-not-found-msg-1':
+        'Gooru tenant login not found, page will be automatically redirect to ',
+      'login-not-found-msg-2': 'login page in',
+      'login-not-found-msg-3': 'sec or click below button to login as'
+    }
   },
   index: {
     joinUs:
@@ -1003,7 +1013,7 @@ export default Object.assign(quizzesTranslations, {
           'feedback-grading': {
             title: 'अभिप्राय आणि ग्रेडिंग',
             'from-existing-rubric': 'विद्यमान रुब्रिक कडून',
-            scoring: 'स्कोअरिंग',
+            scoring: 'गुण',
             'maximum-points': 'जास्तीत जास्त गुण',
             increment: 'वाढ',
             'rubric-error': 'कृपया एक रुब्रिक जोडा'
@@ -1159,14 +1169,21 @@ export default Object.assign(quizzesTranslations, {
       'course-map': 'पाठ्यक्रम नकाशा',
       unit: 'युनिट',
       lesson: 'धडा',
-      'class-activities': 'दैनंदिन वर्ग कृती',
+      'class-activities': 'वर्गाचे नियोजन',
       'class-activities-tab': {
         today: 'आज',
         'past-activities': 'मागील क्रियाकलाप'
       },
       'my-report': 'माझा रिपो्र्ट',
       'my-location': 'माझा स्थान',
-      'my-proficiency': 'My Proficiency'
+      'my-proficiency': 'My Proficiency',
+      'establish-skyline': 'Let\'s Establish your Skyline',
+      'waiting-establish-skyline':
+        'Waiting for your teacher to complete setting up the class.',
+      'setup-in-complete-desc1': 'It looks like your teacher has not',
+      'setup-in-complete-desc2': 'updated class settings',
+      'setup-in-complete-desc3':
+        'Please get in touch with her to resolve the matter. Once everything is correctly set up, refresh this page.'
     },
     course: {
       'to-report': 'वापर सारांश',
@@ -1237,7 +1254,7 @@ export default Object.assign(quizzesTranslations, {
         'शिक्षण तंत्रज्ञानासाठी या जीपीएसचा वापर करून, आम्ही गणितासाठी नेव्हिगेटर तयार केले आहे जेणेकरुन प्रत्येक विद्यार्थी आत्मविश्वास मिळवू शकेल आणि गणितातील त्यांच्या शिक्षणास वेग वाढवू शकेल. <br/> गणितासाठी नेव्हिगेटर अभ्यासक्रमांचा अभ्यासक्रम आहे ज्यायोगे ग्रेड 2-12 मधील सर्व गणित संकल्पनांचा समावेश असेल. विद्यार्थ्यांना त्यांचे वर्तमान ज्ञान तयार करण्यासाठी डिझाइन केलेल्या वैयक्तिकृत मार्गाने मार्गक्रमण केले जाते आणि त्याचप्रमाणे त्यांच्या समजानुसार अंतर भरते. या व्यापक आणि वैयक्तिकृत शिक्षणाच्या अनुभवाद्वारे, प्रत्येक विद्यार्थी अधिक प्रगत गणितासाठी पूर्णपणे तयार होऊ शकतो.',
       join: 'डेमो क्लासमध्ये सामील व्हा',
       'success-message':
-        'आपण नेव्हिगेटर क्लासचे सह-शिक्षक म्हणून यशस्वीरित्या सामील झाले',
+        'नेव्हिगेटर क्लासमध्ये सह-शिक्षक म्हणून तुम्ही यशस्वीरित्या सामील झाले आहात',
       'error-message': 'वर्ग सामील सह समस्या'
     },
     class: {
@@ -1248,12 +1265,12 @@ export default Object.assign(quizzesTranslations, {
       'back-to': 'क्लासरूम कडे परत',
       'back-to-archived': 'संग्रहित कक्षांमध्ये परत',
       'class-management': 'वर्ग व्यवस्थापन',
-      'student-proficiency': 'विद्यार्थी प्रवीणता',
-      'performance-overview': 'Performance Overview',
       atc: 'शीर्ष द़ृश्य',
+      'performance-overview': 'वर्गाचा प्रगती आढावा',
+      'student-proficiency': 'विद्यार्थ्यांचे प्रभुत्व',
       'class-management-tab': {
         actions: 'क्रिया',
-        'assessment-min-score': 'ट्रॉफीसाठी कमीत कमी गुण',
+        'assessment-min-score': 'ट्रॉफीसाठी आवश्यक कमीत कमी गुण',
         'assigned-course': 'नियुक्त कोर्स',
         archive: 'संग्रह',
         'archive-class': 'संग्रह वर्ग',
@@ -1281,7 +1298,7 @@ export default Object.assign(quizzesTranslations, {
         'view-report': 'अहवाल पहा',
         'course-null': 'The classroom has no course assigned yet.',
         'course-subject-null':
-          'वर्गासाठी निवडलेला कोर्स योग्य विषयाशी जोडला गेला नाही.',
+          'वर्गाला नेमलेला अभ्यासक्रम वैध विषयाला जोडलेला नाही.',
         'students-null':
           'त्यांना आपल्या वर्गात प्रवेश करण्यासाठी वर्ग कोड वापरा.'
       },
@@ -1315,11 +1332,11 @@ export default Object.assign(quizzesTranslations, {
         collapse: 'समेटें',
         'total-competencies-gained': 'कुल हासिल दक्षताएँ'
       },
-      'class-activities': 'दैनिक वर्ग कृती',
+      'class-activities': 'वर्गाचे नियोजन',
       'offline-class-report': {
         'class-report': 'वर्ग अहवाल',
-        'activity-report': 'कृती अहवाल',
-        'conducted-on': 'चालू',
+        'activity-report': 'उपक्रम अहवाल',
+        'conducted-on': 'दिनांक',
         'not-started': 'सुरु केली नाही'
       },
       'back-to-class-activities': 'परत दैनंदिन कामकाजातील',
@@ -1347,7 +1364,8 @@ export default Object.assign(quizzesTranslations, {
         'create-activity': 'उपक्रम तयार करा',
         'schedule-activity': 'नियोजित उपक्रम',
         'add-subject-framework':
-          'कृपया वर्ग सेटिंग्जमध्ये विषय आणि अभ्यासक्रम आराखडा निवडा'
+          'कृपया वर्ग सेटिंग्जमध्ये विषय आणि अभ्यासक्रम आराखडा निवडा',
+        'create-external-collection': 'बाह्य संग्रह तयार करा'
       },
       'click-to-copy': 'वर्ग कोड कॉपी करण्यासाठी क्लिक करा',
       'course-map': 'पाठ्यक्रम नकाशा',
@@ -1387,7 +1405,7 @@ export default Object.assign(quizzesTranslations, {
         'course-settings-sec': {
           'course-settings-sec-head': 'अभ्यासक्रम सेटिंग्ज',
           'is-route0-applicable':
-            'हा मुलनिहाय शैक्षणिक मार्ग मुलाच्या गरजांनुसार आहे का ?',
+            'मुलनिहाय शैक्षणिक मार्गात विद्यार्थ्यांच्या प्रोफाईलमधील  त्रुटींचा विचार करायचा आहे का?',
           'apply-settings': 'Apply Settings',
           'origin-info':
             'तुमच्या वर्गामधील सर्वात खालची अभ्यासक्रमाची पातळी/इयत्ता कोणती?',
@@ -1406,11 +1424,11 @@ export default Object.assign(quizzesTranslations, {
     'no-course': 'आपण अद्याप या </br> कक्षामध्ये एक कोर्स नियुक्त केलेला नाही.',
     teach: 'गोरू वर्गाने शिकवा',
     'welcome-course-map':
-      'हा आपला अभ्यासक्रम नकाशा आहे जेथे आपण अभ्यासक्रमाची सामग्री पाहू शकता, मूल्यांकन चालू किंवा बंद करू शकता आणि रिअल टाईममध्ये मूल्यांकनास लाँच करू शकता. आपण एकंदर क्लास कामगिरी आणि पूर्णता पाहू शकता. वर्ग कामगिरीच्या तपशीलवार दृश्यासाठी, आपल्या कक्षाच्या अहवाल टॅबला भेट द्या.',
+      'अभ्यासक्रम नकाशामध्ये तुम्ही अभ्यासक्रमातील मजकूर पाहू शकता, मूल्यमापन सुरु किंवा बंद करू शकता तसेच चालू वेळेत मूल्यमापन घेऊन माहिती भरू शकता. तुम्ही तुमच्या वर्गाची एकूण कामगिरी पाहू शकता तसेच वर्गातील पूर्ण-अपूर्ण उपक्रम पाहू शकता. वर्गाच्या कामगिरीचा  सविस्तर आढावा बघण्यासाठी वर्गाच्या अहवाल टॅब वर जा.',
     'welcome-rescoped-course-map':
       'हा कोर्स वर्ग प्रत्येक विद्यार्थ्याला वैयक्तिकृत केले गेले आहे. आपण विद्यार्थ्यांच्या शिकण्याच्या मार्ग (वर्ण - आणि>) वर क्लिक करून वर्ग व्यवस्थापनातील प्रत्येक विद्यार्थ्याचे अभ्यासक्रम नकाशा पाहू शकता.',
     'welcome-premium-course-map':
-      'हे नॅव्हिगेटर कोर्स अनेक श्रेणींमध्ये वैयक्तिकृत अभ्यासक्रम मानके आहे. प्रत्येक विद्यार्थ्याला अंतर भरण्यासाठी, संकल्पना आणि सराव मजबूतीसाठी आणि त्यांचे शिक्षण वाढवण्यासाठी एक अद्वितीय अभ्यासक्रम प्रदान केला जातो. वैयक्तिकृत मार्ग तयार केले गेले आहेत आणि विद्यार्थ्यांना प्रत्येक विद्यार्थ्याच्या शिक्षणाची क्षमता वाढविण्यासाठी आणि त्यांच्या निर्धारित गंतव्यस्थानावर नेव्हिगेट करण्यासाठी रीअल-टाइममध्ये री-रूट केले जाते.'
+      'नेव्हिगेटर मधील अभ्यासक्रमात इयत्तांमधील विविध पातळ्यांना समाविष्ट करून तयार केलेला हा वैयक्तिक अभ्यासक्रम आहे. प्रत्येक विद्यार्थ्याला त्याच्या समजेतील त्रुटी भरून काढण्यासाठी, संकल्पनाच्या दृढीकरणासाठी, सरावासाठी आणि त्यांच्या शिकण्याचा वेग वाढवण्यासाठी वैशिष्ट्यपूर्ण असा अभ्यासक्रम उपलब्ध करून दिलेला आहे .विद्यार्थ्यांना त्यांच्या अपेक्षित अंतिम स्थानापर्यंत पोहोचवण्यासाठी वैयक्तिक शैक्षणिक मार्ग तयार केले जातात तसेच चालू वेळेत विद्यार्थ्यांच्या क्षमतांना पूर्ण न्याय देण्यासाठी गरजेनुसार त्यांच्या मार्गात बदल करून नवे मार्गही सुचवले जातात.'
   },
   goals: {
     manage: {
@@ -1754,6 +1772,9 @@ export default Object.assign(quizzesTranslations, {
     eleventh: '११',
     twelfth: '१२'
   },
+  'grade-selector': {
+    placeholder: 'Choose Grade Lines to Display'
+  },
   'standard-dropdown': {
     placeholder: 'वर्गानुसार शोध'
   },
@@ -1861,6 +1882,8 @@ export default Object.assign(quizzesTranslations, {
   },
   'student-first-experience': {
     preStudyTitle: '{{title}} साठी पूर्व-अभ्यास',
+    'lp-compute-inprogress':
+      'We are computing your initial proficiency profile in {{title}}',
     'route0-action': {
       accept: 'स्वीकार',
       ignore: 'दुर्लक्ष'
@@ -1902,7 +1925,16 @@ export default Object.assign(quizzesTranslations, {
     'competency-level-partial': {
       desc1: 'तू सध्या आहेस',
       desc2:
-        'गणितासाठी आपल्या स्काईलाइन नकाशात आपले स्वागत आहे. स्काईलाइन (जाड पांढरे ओळ) प्रत्येक डोमेनमध्ये आपण उच्च दर्जाचे उच्च दर्जा दर्शवितो. डोमेन म्हणजे गणित क्षेत्र आहे जे आपण अभ्यास करता, जसे की संख्या प्रणाली आणि अभिव्यक्ती आणि समीकरण. प्रत्येक स्तंभ गणित डोमेन प्रस्तुत करते. आणि स्तंभातील प्रत्येक बॉक्स डोमेनमधील मानक प्रस्तुत करते. एकदा आपण शिकणे सुरू केले आणि मानकांचे व्यवस्थापन केले, तर आपले स्कायलाइन सतत बंप होईल.'
+        'गणितासाठी आपल्या स्काईलाइन नकाशात आपले स्वागत आहे. स्काईलाइन (जाड पांढरे ओळ) प्रत्येक डोमेनमध्ये आपण उच्च दर्जाचे उच्च दर्जा दर्शवितो. डोमेन म्हणजे गणित क्षेत्र आहे जे आपण अभ्यास करता, जसे की संख्या प्रणाली आणि अभिव्यक्ती आणि समीकरण. प्रत्येक स्तंभ गणित डोमेन प्रस्तुत करते. आणि स्तंभातील प्रत्येक बॉक्स डोमेनमधील मानक प्रस्तुत करते. एकदा आपण शिकणे सुरू केले आणि मानकांचे व्यवस्थापन केले, तर आपले स्कायलाइन सतत बंप होईल.',
+      desc3:
+        'As you master each of the competencies, the corresponding box is updated to dark blue.',
+      desc4:
+        'The skyline is the thick white line that shows the highest competencies that you have mastered in each math domain.',
+      desc5:
+        'If the skyline is at the bottom of a domain, it means the system needs more information to be able to locate you in that topic. As soon as you start on the lessons and check for understandings, your skyline will bump up and update your proficiency in each domain.'
+    },
+    units: {
+      other: '{{count}} Units'
     }
   },
   player: {
@@ -2041,7 +2073,7 @@ export default Object.assign(quizzesTranslations, {
     completion: 'पूर्णत्व',
     report: 'अहवाल',
     student: 'विद्यार्थी',
-    score: 'स्कोअर',
+    score: 'गुण',
     'study-time': 'खर्च केलेला वेळ'
   },
   'gru-metrics-sub-header': {
@@ -2148,8 +2180,8 @@ export default Object.assign(quizzesTranslations, {
     student: 'विद्यार्थी',
     reaction: 'प्रतिक्रिया',
     reactions: 'प्रतिक्रिया',
-    score: 'स्कोअर',
-    scores: 'स्कोअर',
+    score: 'गुण',
+    scores: 'गुण',
     'study-time': 'अभ्यासाची वेळ',
     time: 'वेळ',
     'time-spent': 'खर्च केलेला वेळ',
@@ -2202,10 +2234,10 @@ export default Object.assign(quizzesTranslations, {
   featured: {
     'featured-title': 'प्रदर्शित अभ्यासक्रम',
     'featured-description':
-      'वैशिष्ट्यपूर्ण अभ्यासक्रम अभिनव शिक्षकांनी तयार केलेले आहेत, नमुने तपासलेले आणि सामग्री तज्ञांचे पुनरावलोकन केले आणि विद्यार्थ्यांसह कक्षांमध्ये कार्यान्वित केले. शोधा आणि रीमिक्स करा आणि अभ्यासक्रम वैयक्तिकृत करा आणि विद्यार्थी प्रतिबद्धता वाढवा! <a href=\' http://about.gooru.org/courses\' target=\'_blank\'> या अभ्यासक्रमांच्या विकासाबद्दल अधिक जाणून घ्या </a>.'
+      'येथे प्रसिद्ध झालेले अभ्यासक्रम हे सृजनशील शिक्षकांनी तयार केलेले असून ते तज्ञांनी तपासलेले, पुनरावलोकन केलेले आणि विद्यार्थ्यांसोबत सोबत वर्गात राबवलेले आहेत. वैयक्तिक शिक्षणाचा अनुभव निर्माण करण्यासाठी आणि विद्यार्थ्यांना वर्गात गुंतवण्यासाठी  अभ्यासक्रम शोधा, त्यांचे रिमिक्स करा आणि तुम्हाला हवे ते बदल करा. या अभ्यासक्रमांच्या निर्मिती बाबत <a href=\' http://about.gooru.org/courses\' target=\'_blank\'> अधिक माहिती इथे वाचा </a>.'
   },
   locateme: {
-    score: 'स्कोअर',
+    score: 'गुण',
     timespent: 'खर्च केलेला वेळ',
     view: 'पहा',
     attempt: 'प्रयत्न',
@@ -2512,7 +2544,7 @@ export default Object.assign(quizzesTranslations, {
           'आपल्या कोर्स नकाशावर परत येण्यासाठी कोणत्याही वेळी चिन्ह क्लिक करा.'
       },
       stepThree: {
-        title: 'कोर्सचे नाव',
+        title: 'अभ्यासक्रमाचे नाव',
         description: 'आपण ज्या पद्धतीने कार्य करीत आहात ते दर्शवितात.'
       },
       stepFour: {
@@ -2741,7 +2773,7 @@ export default Object.assign(quizzesTranslations, {
         best: 'सर्वोत्कृष्ट',
         levels: 'स्तर',
         'new-level': 'नवीन स्तर जोडा',
-        scoring: 'स्कोअरिंग',
+        scoring: 'गुण',
         worst: 'सर्वात वाईट',
         'name-error': 'कृपया स्तर शीर्षक प्रविष्ट करा.',
         'score-error': 'कृपया गुण मूल्य प्रविष्ट करा.',
@@ -2866,6 +2898,12 @@ export default Object.assign(quizzesTranslations, {
       wish: 'अभिनंदन! तुम्ही गोल केले',
       reference: 'हे बाह्य मूल्यांकन प्रवेश केला जाऊ शकतो '
     },
+    'external-collection-report': {
+      note:
+        'This is an external collection with student reported scores for the collection. Individual question level data is not available.',
+      wish: 'Congratulations! You scored',
+      reference: 'This external collection can be accessed '
+    },
     'competency-report': {
       title: 'क्षमता अहवाल',
       'no-subject': 'कोणताही विषय नियुक्त केला नाही',
@@ -2873,8 +2911,10 @@ export default Object.assign(quizzesTranslations, {
       'signature-assessments': 'Signature मूल्यांकन',
       'signature-collections': 'Signature संग्रह',
       'show-global-data': 'ग्लोबल डेटा दर्शवा',
-      'show-student-data': 'विद्यार्थी डेटा दर्शवा',
-      'show-learning-map': 'शैक्षणिक आराखडा दाखवा'
+      'show-student-data': 'विद्यार्थ्यांची माहिती दाखवा',
+      'show-learning-map': 'शैक्षणिक आराखडा दाखवा',
+      note:
+        'Score 80% or more in our signature assessment and show your mastery'
     },
     'domain-report': 'डोमेन अहवाल'
   },
@@ -2882,9 +2922,6 @@ export default Object.assign(quizzesTranslations, {
     journey: 'JOURNEY',
     metadata: 'METADATA',
     'learning-map': 'LEARNING MAP'
-  },
-  'grade-selector': {
-    placeholder: 'Choose Grade Lines to Display'
   },
   'competency-meta-data': {
     title: 'ALT-CONCEPTS',
@@ -2923,12 +2960,15 @@ export default Object.assign(quizzesTranslations, {
     'no-challenging-questions':
       'There are no challenging questions for this competency'
   },
+  'student-card': {
+    message: 'This {{type}} has been deleted'
+  },
   'self-report': {
-    'your-score': 'आपला स्कोअर',
+    'your-score': 'तुमचे गुण',
     time_spent: 'एकूण लागलेला वेळ',
-    'update-error': 'स्कोअर अद्यतनित करताना समस्या',
-    'validation-error': 'वैध गुण प्रविष्ट करा',
-    'enter-score': 'येथे आपला स्कोअर प्रविष्ट करा',
+    'update-error': 'तुमचे गुण अद्ययावत करताना अडचण येत आहे',
+    'validation-error': 'वैध गुण भरा',
+    'enter-score': 'आपले गुण येथे भरा',
     'enter-timeSpent': 'तुम्हाला लागलेला एकूण वेळ येथे भरा',
     'validation-error-time': 'वैध वेळ भरा'
   },
