@@ -7,7 +7,6 @@ export default Object.assign(quizzesTranslations, {
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
   hi: 'हिंदी',
-
   errors: {
     description: 'यह फील्ड',
     inclusion: '{{description}} सूची में शामिल नहीं है',
@@ -412,6 +411,7 @@ export default Object.assign(quizzesTranslations, {
     'essential-questions': 'आवश्यक प्रश्न',
     example: 'उदाहरण:',
     exit: 'बाहर जाएं',
+    'external-collection': 'External Collection',
     explanation: 'व्याख्या',
     explore: 'का पता लगाएं',
     false: 'ग़लत',
@@ -632,11 +632,10 @@ export default Object.assign(quizzesTranslations, {
     'de-select': 'का चयन करने के लिए',
     'select-all': 'सभी का चयन करे',
     none: 'कोई छात्र नहीं',
-    'no-students': 'कोई छात्र नहीं',
     'add-data': 'डेटा जोड़ें',
     'update-data': 'आँकड़े जोड़ें',
     all: 'सभी ',
-    everyone: 'सर्व विद्यार्थी',
+    'please-wait': 'Please Wait',
     'unscheduled-items': 'अनिर्धारित सामग्री',
     'add-to-unschedule': 'के लिए अनिर्धारित सूची में जोड़ें',
     'save-next': 'सहेजें और अगला',
@@ -1177,7 +1176,14 @@ export default Object.assign(quizzesTranslations, {
       },
       'my-report': 'मेरी रिपोर्ट',
       'my-location': 'मेरा स्थान',
-      'my-proficiency': 'My Proficiency'
+      'my-proficiency': 'My Proficiency',
+      'establish-skyline': 'Let\'s Establish your Skyline',
+      'waiting-establish-skyline':
+        'Waiting for your teacher to complete setting up the class.',
+      'setup-in-complete-desc1': 'It looks like your teacher has not',
+      'setup-in-complete-desc2': 'updated class settings',
+      'setup-in-complete-desc3':
+        'Please get in touch with her to resolve the matter. Once everything is correctly set up, refresh this page.'
     },
     course: {
       'to-report': 'उपयोग सारांश',
@@ -1763,6 +1769,9 @@ export default Object.assign(quizzesTranslations, {
     eleventh: '1 1',
     twelfth: '12'
   },
+  'grade-selector': {
+    placeholder: 'Choose Grade Lines to Display'
+  },
   'standard-dropdown': {
     placeholder: 'मानक के क्रम में ब्राउज़ करें'
   },
@@ -1870,6 +1879,8 @@ export default Object.assign(quizzesTranslations, {
   },
   'student-first-experience': {
     preStudyTitle: '{{शीर्षक}} के लिए पूर्व-अध्ययन',
+    'lp-compute-inprogress':
+      'We are computing your initial proficiency profile in {{title}}',
     'route0-action': {
       accept: 'स्वीकार करना',
       ignore: 'नज़रअंदाज़ करना'
@@ -1912,7 +1923,13 @@ export default Object.assign(quizzesTranslations, {
     'competency-level-partial': {
       desc1: 'आप वर्तमान में हैं',
       desc2:
-        'गणित के लिए अपने क्षितिज के नक्शे पर आपका स्वागत है। क्षितिज (मोटी सफेद रेखा) उच्चतम मानक को दर्शाता है जिसे आपने प्रत्येक डोमेन में महारत हासिल की है। डोमेन गणित का एक क्षेत्र है जिसका आप अध्ययन करते हैं, जैसे संख्या प्रणाली और भाव और समीकरण। प्रत्येक स्तंभ एक गणित डोमेन का प्रतिनिधित्व करता है। और कॉलम में प्रत्येक बॉक्स डोमेन में एक मानक का प्रतिनिधित्व करता है। एक बार जब आप सीखना शुरू करते हैं और मानकों को पूरा करते हैं, तो आपका क्षितिज लगातार टकराता रहेगा।'
+        'गणित के लिए अपने क्षितिज के नक्शे पर आपका स्वागत है। क्षितिज (मोटी सफेद रेखा) उच्चतम मानक को दर्शाता है जिसे आपने प्रत्येक डोमेन में महारत हासिल की है। डोमेन गणित का एक क्षेत्र है जिसका आप अध्ययन करते हैं, जैसे संख्या प्रणाली और भाव और समीकरण। प्रत्येक स्तंभ एक गणित डोमेन का प्रतिनिधित्व करता है। और कॉलम में प्रत्येक बॉक्स डोमेन में एक मानक का प्रतिनिधित्व करता है। एक बार जब आप सीखना शुरू करते हैं और मानकों को पूरा करते हैं, तो आपका क्षितिज लगातार टकराता रहेगा।',
+      desc3:
+        'As you master each of the competencies, the corresponding box is updated to dark blue.',
+      desc4:
+        'The skyline is the thick white line that shows the highest competencies that you have mastered in each math domain.',
+      desc5:
+        'If the skyline is at the bottom of a domain, it means the system needs more information to be able to locate you in that topic. As soon as you start on the lessons and check for understandings, your skyline will bump up and update your proficiency in each domain.'
     },
     units: {
       other: '{{गिनती}} इकाइयाँ'
@@ -2007,11 +2024,19 @@ export default Object.assign(quizzesTranslations, {
     preference: {
       'language-preference': 'भाषा का चयन',
       'choose-language': 'भाषा चुनें',
+      'choose-sec-language': 'Choose',
       'choose-preferred-language': 'प्रोफ़ाइल भाषा चुनें',
+      'choose-preferred-other-languages': 'Select other preferred languages',
       language: 'भाषा',
       'select-category-label': 'जोड़ने के लिए श्रेणी का चयन करें:',
       'choose-category': 'वर्ग चुने',
-      'no-data': 'कोई आकड़ा उपलब्ध नहीं है'
+      'no-data': 'कोई आकड़ा उपलब्ध नहीं है',
+      'category-preference': 'Category Preference',
+      'choose-subject': 'Choose Subject',
+      'choose-fwk': 'Choose Framework',
+      'add-subject': 'Add Subject',
+      'add-sec-language': 'Add other preferred language',
+      'other-preferred-languages': 'Other preferred languages'
     }
   },
   'gru-data-picker': {
@@ -2873,6 +2898,12 @@ export default Object.assign(quizzesTranslations, {
       wish: 'बधाई हो! आपने स्कोर किया',
       reference: 'इस बाहरी मूल्यांकन का उपयोग किया जा सकता है'
     },
+    'external-collection-report': {
+      note:
+        'This is an external collection with student reported scores for the collection. Individual question level data is not available.',
+      wish: 'Congratulations! You scored',
+      reference: 'This external collection can be accessed '
+    },
     'competency-report': {
       title: 'योग्यता रिपोर्ट',
       'no-subject': 'कोई विषय असाइन नहीं किया गया',
@@ -2881,13 +2912,11 @@ export default Object.assign(quizzesTranslations, {
       'signature-collections': 'Signature संकलन',
       'show-global-data': 'वैश्विक डेटा दिखाएं',
       'show-student-data': 'छात्र डेटा दिखाएं',
-      'show-learning-map': 'सीखने का नक्शा दिखाएं'
+      'show-learning-map': 'सीखने का नक्शा दिखाएं',
+      note:
+        'Score 80% or more in our signature assessment and show your mastery'
     },
     'domain-report': 'डोमेन रिपोर्ट'
-  },
-
-  'grade-selector': {
-    placeholder: 'Choose Grade Lines to Display'
   },
   'competency-info-content': {
     journey: 'JOURNEY',
@@ -2930,6 +2959,9 @@ export default Object.assign(quizzesTranslations, {
     'challenging-questions': 'challenging questions',
     'no-challenging-questions':
       'There are no challenging questions for this competency'
+  },
+  'student-card': {
+    message: 'This {{type}} has been deleted'
   },
   'self-report': {
     'your-score': 'आपका स्कोर',

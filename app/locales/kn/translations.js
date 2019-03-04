@@ -7,7 +7,6 @@ export default Object.assign(quizzesTranslations, {
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
   hi: 'हिंदी',
-
   errors: {
     description: 'ಈ ಕ್ಷೇತ್ರ',
     inclusion: '{{description}} ಪಟ್ಟಿಯಲ್ಲಿ ಸೇರಿಸಲಾಗಿಲ್ಲ',
@@ -48,6 +47,32 @@ export default Object.assign(quizzesTranslations, {
     relevance: 'ಪ್ರಸ್ತುತತೆ',
     engagement: 'ನಿಶ್ಚಿತಾರ್ಥ',
     efficacy: 'ಪರಿಣಾಮಕಾರಿತ್ವ',
+    grid: 'Grid',
+    list: 'List',
+    first: 'First',
+    last: 'Last',
+    name: 'Name',
+    user: 'user',
+    'content-name': 'Content Name',
+    lastName: 'Lastname',
+    firstName: 'Firstname',
+    'filter-by': 'Filter By',
+    more: 'more',
+    'avg-score': 'Avg Score',
+    frq: 'FRQ',
+    schedule: 'Schedule',
+    responses: 'Responses',
+    'no-lesson-info-message': 'This unit does have any lessons.',
+    'no-collection-info-message': 'This lesson does have any collections.',
+    'gooru-suggestions': 'Gooru Suggestions',
+    'gooru-catalog': 'Gooru Catalog',
+    'suggestion-made-to': 'Suggestion made to',
+    'student-selected': 'Student Selected',
+    'no-suggest-result-message': ' No matching content found',
+    'no-suggest-results-message':
+      'You can search and  find the related content.',
+    'no-suggest-search-results-message':
+      'Check your spelling. We all make mistakes! Or try searching for a similar word instead.',
     'a-collection': 'ಸಂಗ್ರಹ',
     'a-course': 'ಒಂದು ಕೋರ್ಸ್',
     'a-question': 'ಒಂದು ಪ್ರಶ್ನೆ',
@@ -58,10 +83,16 @@ export default Object.assign(quizzesTranslations, {
     about: 'ಸುಮಾರು',
     'about-you': 'ನಿನ್ನ ಬಗ್ಗೆ',
     'about-me': 'ನನ್ನ ಬಗ್ಗೆ',
+    accept: 'Accept',
+    ignore: 'Ignore',
     add: 'ಸೇರಿಸಿ',
     'plan-an-activities': 'Plan your activities',
     'plan-an-activities-msg':
       'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
+    Reschedule: 'Reschedule',
+    'no-unschedule-items':
+      'You don\'t have any activities that need scheduling for ',
+    'repeat-activity': 'Repeat Activity',
     'add-assessment': 'ಹೊಸ ಮೌಲ್ಯಮಾಪನವನ್ನು ರಚಿಸಿ',
     'add-century-skills': '21 ನೇ ಶತಮಾನದ ಕೌಶಲ್ಯಗಳನ್ನು ಸೇರಿಸಿ',
     'add-collaborator': 'ಸಹಯೋಗಿ ಸೇರಿಸಿ',
@@ -71,6 +102,7 @@ export default Object.assign(quizzesTranslations, {
     'add-content-prompt':
       'ನೀವು ಇನ್ನೂ <span> {{type}} </span> ಅನ್ನು ರಚಿಸಲಿಲ್ಲ. ಮುಂದುವರಿಯಿರಿ, ದಪ್ಪವಾಗಿರಿ.',
     'add-course': 'ಹೊಸ ಕೋರ್ಸ್ ರಚಿಸಿ',
+    'add-coruse-to-class': 'Add Course',
     'add-domains-to-unit': 'ಘಟಕಕ್ಕೆ ಡೊಮೇನ್ಗಳನ್ನು ಸೇರಿಸಿ',
     'add-url': 'url ಸೇರಿಸಿ',
     'add-from-url': 'url ನಿಂದ ಸೇರಿಸಿ',
@@ -146,6 +178,7 @@ export default Object.assign(quizzesTranslations, {
     category: 'ವರ್ಗದಲ್ಲಿ',
     categoryOptions: {
       k12: 'ಕೆ -12',
+      k12IN: 'K12IN',
       'higher-ed': 'ಉನ್ನತ ಶಿಕ್ಷಣ',
       'professional-dev': 'ವೃತ್ತಿಪರ ಅಭಿವೃದ್ಧಿ'
     },
@@ -183,6 +216,19 @@ export default Object.assign(quizzesTranslations, {
     'copy-to': 'ನಕಲಿಸಿ',
     correct: 'ಸರಿಯಾಗಿ',
     'correct-answer': 'ಸರಿಯಾದ ಉತ್ತರ',
+    'correct-answers': 'Correct Answer(s)',
+    'incorrect-answers': 'InCorrect Answer(s)',
+    'rubric-graded': 'Rubric Graded',
+    'self-graded': 'Self-Graded',
+    'rubric-grade': 'Rubric Grade',
+    brief: 'Brief',
+    'update-grade-score': 'Update grade score to complete your FRQ.',
+    'answer-this-rubric': 'Answer this rubric to complete your FRQ.',
+    'all-caught-up': 'You are all caught up!',
+    'no-users-to-grade': 'There are no users to grade for this FRQ.',
+    'rubric-needs-grading': 'Rubric Needs Grading',
+    'not-answered': 'Not Answered',
+    'rubric-not-answered': 'Rubric Not Answered',
     country: 'ದೇಶ',
     'course-map': 'ಕೋರ್ಸ್ ಮ್ಯಾಪ್',
     course: 'ಕೋರ್ಸ್',
@@ -208,6 +254,7 @@ export default Object.assign(quizzesTranslations, {
     },
     'depth-of-knowledge': 'ಜ್ಞಾನದ ಆಳ',
     description: 'ವಿವರಣೆ',
+    destination: 'Destination',
     'disappear-after-login': '{{loginnumber}} ಲಾಗಿನ್ನ ನಂತರ ಅದು ನಾಶವಾಗುತ್ತವೆ',
     'disappear-next-login': 'ಇದು ಮುಂದಿನ ಲಾಗಿನ್ನಲ್ಲಿ ಗೋಚರಿಸುವುದಿಲ್ಲ',
     district: 'ಜಿಲ್ಲೆ',
@@ -217,6 +264,7 @@ export default Object.assign(quizzesTranslations, {
     'download-print': 'ಡೌನ್ಲೋಡ್ / ಮುದ್ರಣ',
     'drag-drop-suggestions': 'ಅಥವಾ ಸಲಹೆಗಳನ್ನು ಎಳೆಯಿರಿ ಮತ್ತು ಬಿಡಿ ...',
     'download-report': 'ಡೌನ್ಲೋಡ್ ವರದಿ',
+    done: 'Done',
     edit: 'ಸಂಪಾದಿಸು',
     showassessments: 'ಪ್ರದರ್ಶನ ಮೌಲ್ಯಮಾಪನಗಳನ್ನು',
     showcollections: 'ಸಂಗ್ರಹಣೆಗಳನ್ನು ತೋರಿಸಿ',
@@ -356,11 +404,14 @@ export default Object.assign(quizzesTranslations, {
       'user-email-presence': 'ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಇಮೇಲ್ ಅನ್ನು ನಮೂದಿಸಿ.',
       'username-length': 'ಬಳಕೆದಾರಹೆಸರು 4 ಮತ್ತು 254 ಅಕ್ಷರಗಳ ನಡುವೆ ಇರಬೇಕು.',
       'forgot-password-gmail':
-        'ದಯವಿಟ್ಟು Google ಸೈನ್ಇನ್ ಅನ್ನು ಬಳಸಿ. ನಿಮ್ಮ ಪಾಸ್ವರ್ಡ್ ಮರುಹೊಂದಿಸಲು ನಮಗೆ ಸಾಧ್ಯವಿಲ್ಲ.'
+        'ದಯವಿಟ್ಟು Google ಸೈನ್ಇನ್ ಅನ್ನು ಬಳಸಿ. ನಿಮ್ಮ ಪಾಸ್ವರ್ಡ್ ಮರುಹೊಂದಿಸಲು ನಮಗೆ ಸಾಧ್ಯವಿಲ್ಲ.',
+      'no-studymaterial':
+        'The course assigned to this class does not have any study material in it. Please contact your teacher to fix this'
     },
     'essential-questions': 'ಅಗತ್ಯ ಪ್ರಶ್ನೆಗಳನ್ನು',
     example: 'ಉದಾಹರಣೆ:',
     exit: 'ನಿರ್ಗಮನ',
+    'external-collection': 'External Collection',
     explanation: 'ವಿವರಣೆ',
     explore: 'ಅನ್ವೇಷಿಸಿ',
     false: 'ಸುಳ್ಳು',
@@ -415,6 +466,7 @@ export default Object.assign(quizzesTranslations, {
     'more-details': 'ಹೆಚ್ಚಿನ ವಿವರಗಳಿಗಾಗಿ',
     move: 'ಸರಿಸಲು',
     myContent: 'ನನ್ನ ವಿಷಯ',
+    myProfile: 'My Location',
     library: 'ಗ್ರಂಥಾಲಯ',
     myPerformance: 'ನನ್ನ ಅಭಿನಯ',
     'edit-narration': 'ಸಂಪಾದನೆ ನಿರೂಪಣೆ',
@@ -489,6 +541,8 @@ export default Object.assign(quizzesTranslations, {
     'published-by': 'ಪ್ರಕಟಿಸಿದ',
     'published-tooltip': 'ಕೆಟ್ಟ ವಿಷಯ',
     publisher: 'ಪ್ರಕಾಶಕ',
+    prev: 'Prev',
+    progress: 'Progress',
     question: 'ಪ್ರಶ್ನೆ',
     questions: 'ಪ್ರಶ್ನೆಗಳು',
     'questions-OE': 'ಉಚಿತ ಪ್ರತಿಕ್ರಿಯೆ ಪ್ರಶ್ನೆಗಳು',
@@ -580,6 +634,15 @@ export default Object.assign(quizzesTranslations, {
     rubrics: 'ರಬ್ರಿಕ್ಸ್',
     'rubric-title': 'ರಬ್ರಿಕ್ ಶೀರ್ಷಿಕೆ',
     save: 'ಉಳಿಸು',
+    'de-select': 'De Select',
+    'select-all': 'Select All',
+    none: 'None',
+    'add-data': 'Add Data',
+    'update-data': 'Update Data',
+    all: 'All',
+    'please-wait': 'Please Wait',
+    'unscheduled-items': 'Unscheduled Items',
+    'add-to-unschedule': 'Add to unscheduled list for',
     'save-next': 'ಉಳಿಸಿ ಮತ್ತು ಮುಂದಿನದು',
     'save-submit': 'ಉಳಿಸಿ ಮತ್ತು ಎಲ್ಲವನ್ನೂ ಸಲ್ಲಿಸಿ',
     'save-finish': 'ಉಳಿಸಿ ಮತ್ತು ಮುಗಿಸಿ',
@@ -616,6 +679,7 @@ export default Object.assign(quizzesTranslations, {
     study: 'ಅಧ್ಯಯನ',
     'study-now': 'ಈಗ ಅಧ್ಯಯನ',
     student: 'ವಿದ್ಯಾರ್ಥಿ',
+    students: 'Students',
     'student-id': 'ವಿದ್ಯಾರ್ಥಿ ಐಡಿ (ಪ್ರೊಫೈಲ್ನಲ್ಲಿ ಪ್ರದರ್ಶಿಸುವುದಿಲ್ಲ)',
     'studen-id-display':
       'ವಿದ್ಯಾರ್ಥಿ ಐಡಿ (ಪ್ರೊಫೈಲ್ನಲ್ಲಿ ತೋರಿಸುವುದಿಲ್ಲ, ಅನಾಮಧೇಯ ಕ್ರಮದಲ್ಲಿ ಪ್ರದರ್ಶಿಸಲಾಗುತ್ತದೆ)',
@@ -639,6 +703,7 @@ export default Object.assign(quizzesTranslations, {
     tools: 'ಉಪಕರಣಗಳು',
     true: 'ನಿಜ',
     type: 'ಮಾದರಿ',
+    title: 'Title',
     unBookmark: 'unbookmark',
     unexpectedError:
       'ಅನಿರೀಕ್ಷಿತ ದೋಷ ಸಂಭವಿಸಿದೆ ಮತ್ತು ವರದಿಯಾಗಿದೆ. ಅನಾನುಕೂಲತೆಗಾಗಿ ನಾವು ವಿಷಾದಿಸುತ್ತೇವೆ!',
@@ -660,6 +725,7 @@ export default Object.assign(quizzesTranslations, {
     'upload-file': 'ಫೈಲ್ ಅಪ್ಲೋಡ್ ಮಾಡಿ',
     'upload-thumbnail': 'ಥಂಬ್ನೇಲ್ ಅಪ್ಲೋಡ್ ಮಾಡಿ',
     'upload-photo': 'ಫೋಟೋ ಅಪ್ಲೋಡ್ ಮಾಡಿ',
+    until: 'Until',
     'remove-photo': 'ಫೋಟೋ ತೆಗೆದುಹಾಕಿ',
     'use-case': 'ಬಳಕೆ ಪ್ರಕರಣ',
     'valid-extensions': 'ಮಾನ್ಯವಾದ ಫೈಲ್ ವಿಸ್ತರಣೆಗಳು: {{ವಿಸ್ತರಣೆಗಳು}}',
@@ -674,6 +740,14 @@ export default Object.assign(quizzesTranslations, {
     word: 'ಪದ',
     yes: 'ಹೌದು',
     'change-score': 'ಬದಲಾವಣೆ ಸ್ಕೋರ್'
+  },
+  'not-found': {
+    tenant: {
+      'login-not-found-msg-1':
+        'Gooru tenant login not found, page will be automatically redirect to ',
+      'login-not-found-msg-2': 'login page in',
+      'login-not-found-msg-3': 'sec or click below button to login as'
+    }
   },
   index: {
     joinUs: '<br/> ಶಿಕ್ಷಣಕ್ಕೆ ಮಾನವ ಹಕ್ಕು ಗೌರವಿಸಲು ನಮಗೆ ಸೇರಲು',
@@ -762,12 +836,16 @@ export default Object.assign(quizzesTranslations, {
       locate: 'ನನ್ನನ್ನು ಪತ್ತೆ ಮಾಡಿ',
       'edit-content': 'ವಿಷಯ ಸಂಪಾದಿಸಿ',
       'add-to-daily-class-activities': 'ದೈನಂದಿನ ವರ್ಗ ಚಟುವಟಿಕೆಗಳಿಗೆ ಸೇರಿಸಿ',
+      'assigned-course': 'Your assigned course',
+      'pre-study-title': 'Pre-study for your course',
       'course-map': {
         'rescope-toggle': 'ಸಂಪೂರ್ಣ ಪಠ್ಯ ನಕ್ಷೆ ತೋರಿಸಿ',
         'rescope-info':
           'ಈ ಕೋರ್ಸ್ ಗಣಿತ ಅಡಿಪಾಯ ಕೋರ್ಸ್ನಿಂದ ನಿಮಗಾಗಿ ವೈಯಕ್ತಿಕವಾಗಿ ಪ್ರತ್ಯೇಕಿಸಲ್ಪಟ್ಟಿದೆ. ಮೂಲ ಕೋರ್ಸ್ ಅನ್ನು ನೋಡಲು, ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ.',
         'custom-msg':
-          'ನಿಮ್ಮ ಕೌಶಲ್ಯದ ಆಧಾರದ ಮೇಲೆ ನಾವು ವಿಶೇಷವಾಗಿ ಈ ಕೋರ್ಸ್ ಅನ್ನು ವೈಯಕ್ತೀಕರಿಸುತ್ತೇವೆ. ದಯವಿಟ್ಟು ವೈಯಕ್ತೀಕರಿಸಿದ ಕೋರ್ಸ್ ನಕ್ಷೆಯನ್ನು ನೋಡಲು ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಪರಿಶೀಲಿಸಿ.'
+          'ನಿಮ್ಮ ಕೌಶಲ್ಯದ ಆಧಾರದ ಮೇಲೆ ನಾವು ವಿಶೇಷವಾಗಿ ಈ ಕೋರ್ಸ್ ಅನ್ನು ವೈಯಕ್ತೀಕರಿಸುತ್ತೇವೆ. ದಯವಿಟ್ಟು ವೈಯಕ್ತೀಕರಿಸಿದ ಕೋರ್ಸ್ ನಕ್ಷೆಯನ್ನು ನೋಡಲು ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಪರಿಶೀಲಿಸಿ.',
+        'route0-bannerdesc':
+          'As per your competency profile, there are some competencies that you need to master so that you can do well in this course. We have a route that we recommend you take to master these competencies. Click here to see the details.'
       }
     },
     analytics: {
@@ -794,6 +872,7 @@ export default Object.assign(quizzesTranslations, {
           }
         },
         'grade-items': 'ಗ್ರೇಡ್ ಗೆ ಐಟಂಗಳನ್ನು',
+        'no-grade-items': 'Looks like you’re all caught up!',
         'gru-grade-items': {
           students: {
             zero: '{{count}} ವಿದ್ಯಾರ್ಥಿಗಳು',
@@ -822,7 +901,8 @@ export default Object.assign(quizzesTranslations, {
       'remix-from-course': 'ವೈಶಿಷ್ಟ್ಯಗೊಳಿಸಿದ ಕೋರ್ಸ್ ರೀಮಿಕ್ಸ್',
       'featured-course': 'ವೈಶಿಷ್ಟ್ಯಗೊಳಿಸಿದ ಪಠ್ಯಗಳನ್ನು ವೀಕ್ಷಿಸಿ',
       'remix-desc':
-        'ನಿಮ್ಮ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ವೈಶಿಷ್ಟ್ಯಗೊಳಿಸಿದ ಕೋರ್ಸ್ ನಕಲಿಸಿ ಮತ್ತು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ'
+        'ನಿಮ್ಮ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ವೈಶಿಷ್ಟ್ಯಗೊಳಿಸಿದ ಕೋರ್ಸ್ ನಕಲಿಸಿ ಮತ್ತು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ',
+      'browse-content': 'or browse our content catalogs.'
     }
   },
   classes: {
@@ -857,6 +937,8 @@ export default Object.assign(quizzesTranslations, {
         'class-not-found':
           'ತರಗತಿ ಕಂಡುಬಂದಿಲ್ಲ. ನೀವು ಸರಿಯಾದ ತರಗತಿಯ ಕೋಡ್ ಅನ್ನು ಪ್ರವೇಶಿಸಿದ್ದೀರಿ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ',
         'invalid-code': 'ಅಮಾನ್ಯವಾದ ತರಗತಿಯ ಕೋಡ್.',
+        'join-not-allowed':
+          'The class you are trying to join is no longer active. Please contact your teacher for the correct class code.',
         'already-member': 'ನೀವು ಈಗಾಗಲೇ ಈ ತರಗತಿಯ ಒಂದು ಸದಸ್ಯರಾಗಿದ್ದೀರಿ.',
         'join-class': 'ತರಗತಿಯ ಸೇರಲು',
         'terms-and-conditions':
@@ -1097,11 +1179,19 @@ export default Object.assign(quizzesTranslations, {
       lesson: 'ಪಾಠ',
       'class-activities': 'ದೈನಂದಿನ ವರ್ಗ ಚಟುವಟಿಕೆಗಳು',
       'class-activities-tab': {
-        today: 'ಇಂದು'
+        today: 'ಇಂದು',
+        'past-activities': 'Past Activities'
       },
       'my-report': 'ನನ್ನ ವರದಿ',
       'my-location': 'ನನ್ನ ಸ್ಥಳ',
-      'my-proficiency': 'My Proficiency'
+      'my-proficiency': 'My Proficiency',
+      'establish-skyline': 'Let\'s Establish your Skyline',
+      'waiting-establish-skyline':
+        'Waiting for your teacher to complete setting up the class.',
+      'setup-in-complete-desc1': 'It looks like your teacher has not',
+      'setup-in-complete-desc2': 'updated class settings',
+      'setup-in-complete-desc3':
+        'Please get in touch with her to resolve the matter. Once everything is correctly set up, refresh this page.'
     },
     course: {
       'to-report': 'ಬಳಕೆಯ ಸಾರಾಂಶ',
@@ -1109,6 +1199,8 @@ export default Object.assign(quizzesTranslations, {
     },
     'current-activity': 'ಪ್ರಸ್ತುತ ಚಟುವಟಿಕೆ',
     'resume-current-activity': 'ಪ್ರಸ್ತುತ ಚಟುವಟಿಕೆ ಪುನರಾರಂಭಿಸಿ',
+    'last-activity': 'Last Activity',
+    'start-studying': 'Start Studying',
     'not-available': '-ಎ-',
     'join-classroom':
       'ಕಲಿಯಲು ಪ್ರಾರಂಭಿಸಲು ನಿಮ್ಮ ಶಿಕ್ಷಕನ ತರಗತಿಯಲ್ಲಿ ಸೇರ್ಪಡೆಗೊಳ್ಳಿ',
@@ -1128,11 +1220,14 @@ export default Object.assign(quizzesTranslations, {
       'time-period': 'ಸಮಯದ ಅವಧಿ',
       'update-report': 'ಅಪ್ಡೇಟ್ ವರದಿ'
     },
+    'study-player': 'Study Player',
     'my-study': 'ನನ್ನ ಅಧ್ಯಯನ',
     'no-classrooms':
       'ನೀವು ಯಾವುದೇ ತರಗತಿ ಕೊಠಡಿಗಳನ್ನು ಇನ್ನೂ ಸೇರಿಲ್ಲ. ನಿಮ್ಮ ಶಿಕ್ಷಕರ ವರ್ಗವನ್ನು ಸೇರಿಸಲು \\\\\\\'</br> ತರಗತಿಗೆ ಸೇರಲು\\\\\\\' ಕ್ಲಿಕ್ ಮಾಡಿ. ಲೈಬ್ರರಿ ಟ್ಯಾಬ್ನ ಅಡಿಯಲ್ಲಿ ನೀವು ವೈಶಿಷ್ಟ್ಯಗೊಳಿಸಿದ ಪಠ್ಯವನ್ನು ಸಹ ಹುಡುಕಬಹುದು.',
     'no-content-classrooms': 'ಈ ತರಗತಿಯಲ್ಲಿ ಪ್ರಸ್ತುತ ಯಾವುದೇ ವಿಷಯ ಲಭ್ಯವಿಲ್ಲ',
-    welcome: 'ಗೊರೂರಿಗೆ ಸ್ವಾಗತ.'
+    welcome: 'ಗೊರೂರಿಗೆ ಸ್ವಾಗತ.',
+    'no-course-assigned':
+      'No course has been assigned to this class yet. Please contact your teacher.'
   },
   'student-independent-learning': {
     'show-more': 'ಇನ್ನು ಹೆಚ್ಚು ತೋರಿಸು',
@@ -1153,12 +1248,34 @@ export default Object.assign(quizzesTranslations, {
     'latest-assessment': 'ಇತ್ತೀಚಿನ ಮೌಲ್ಯಮಾಪನ',
     'create-classroom':
       'ತರಗತಿಯೊಂದನ್ನು ರಚಿಸಿ, ವಿಷಯಗಳನ್ನು ನಿಯೋಜಿಸಿ, ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ಆಹ್ವಾನಿಸಿ',
+    'dca-create-info':
+      'Click on the icons below and search for content from the Gooru Library to create a  class activity. You can also add content to  class activity from your course map by clicking on Course Map.',
+    'schedule-for-later': 'Schedule For Later',
+    'teach-this-activity-later': 'teach this activity later at DCA',
+    'schedule-dca-instruction-1':
+      'Pick a later date on which to teach this activity.',
+    'schedule-dca-instruction-2':
+      'This activity will appear at DCA for the chosen date.',
+    'navigator-banner': {
+      title: 'Navigator for Math',
+      description:
+        'Utilizing this GPS for Learning technology, we have designed Navigator for Math to ensure that every student can gain confidence and accelerate their learning in math.<br/>Navigator for Math is a course of study covering all math concepts from grades 2-12. Students are routed and rerouted through an individualized pathway designed to build on their current knowledge, as well as fill gaps in their understanding. Through this comprehensive and personalized learning experience, every student can become fully prepared for more advanced math.',
+      join: 'Join Demo Class',
+      'success-message':
+        'You have successfully joined as a co-teacher of the Navigator class',
+      'error-message': 'Problem with joining class'
+    },
     class: {
+      manage: 'Manage',
+      reports: 'Reports',
+      'daily-activites': 'Daily Activites',
+      courses: 'Course',
       'back-to': 'ಮತ್ತೆ ತರಗತಿ ಕೊಠಡಿಗಳಿಗೆ',
       'back-to-archived': 'ಆರ್ಕೈವ್ ಮಾಡಲಾದ ಪಾಠದ ಕೊಠಡಿಗಳಿಗೆ ಮರಳಿ',
       'class-management': 'ವರ್ಗ ನಿರ್ವಹಣೆ',
-      'student-proficiency': 'Student Proficiency',
+      atc: 'ATC',
       'performance-overview': 'Performance Overview',
+      'student-proficiency': 'Student Proficiency',
       'class-management-tab': {
         actions: 'ಕ್ರಮಗಳು',
         'assessment-min-score': 'ಟ್ರೋಫಿಗಳಿಗಾಗಿ ಅಂದಾಜು ಕನಿಷ್ಠ ಸ್ಕೋರ್',
@@ -1187,6 +1304,9 @@ export default Object.assign(quizzesTranslations, {
         'student-id': 'ವಿದ್ಯಾರ್ಥಿಯ ಐಡಿ',
         teachers: 'ಶಿಕ್ಷಕರು',
         'view-report': 'ವೀಕ್ಷಣೆ ವರದಿ',
+        'course-null': 'The classroom has no course assigned yet.',
+        'course-subject-null':
+          'The course assigned to classroom has not been tagged to a valid subject.',
         'students-null':
           'ನಿಮ್ಮ ತರಗತಿಗೆ ಸೇರಲು ವಿದ್ಯಾರ್ಥಿಗಳೊಂದಿಗೆ ವರ್ಗ ಕೋಡ್ ಅನ್ನು ಹಂಚಿಕೊಳ್ಳಿ.'
       },
@@ -1200,9 +1320,32 @@ export default Object.assign(quizzesTranslations, {
         'student-id': 'ವಿದ್ಯಾರ್ಥಿಯ ಐಡಿ',
         remove: 'ತೆಗೆದುಹಾಕಿ',
         mastered: 'Mastered',
-        'in-progress': 'ಪ್ರಗತಿಯಲ್ಲಿದೆ'
+        'in-progress': 'ಪ್ರಗತಿಯಲ್ಲಿದೆ',
+        'not-started': 'Not Started',
+        'course-coverage': 'Course Coverage',
+        'class-statistics': 'Class Statistics',
+        'proficiency-in': 'Proficiency in',
+        'data-not-available': 'Data Not Available',
+        'course-coverage-label':
+          'Cumulative count of competencies for all students in class',
+        'error-message':
+          'The class does not have a course assigned or does not have students rostered into the class yet. Once the course has been assigned to the class and the students are rostered, the class competency report will be shown here'
+      },
+      'atc-view': {
+        'domains-reviewed': 'Domains to be reviewed',
+        'class-activities-completed': 'Class Activities Completed',
+        'class-activities-pending': 'Class Activities Pending',
+        'show-all': 'Show All',
+        collapse: 'Collapse',
+        'total-competencies-gained': 'Total Competencies Gained'
       },
       'class-activities': 'ದೈನಂದಿನ ವರ್ಗ ಚಟುವಟಿಕೆಗಳು',
+      'offline-class-report': {
+        'class-report': 'Class Report',
+        'activity-report': 'Activity Report',
+        'conducted-on': 'Conducted On',
+        'not-started': 'Not Started'
+      },
       'back-to-class-activities': 'ದೈನಂದಿನ ದರ್ಜೆಯ ಚಟುವಟಿಕೆಗಳಿಗೆ ಹಿಂತಿರುಗಿ',
       'class-activities-tab': {
         today: 'ಇಂದು:',
@@ -1211,7 +1354,23 @@ export default Object.assign(quizzesTranslations, {
         'add-from-course-map': 'ಕೋರ್ಸ್ ನಕ್ಷೆಯಿಂದ ಸೇರಿಸಿ',
         'add-from-my-content': 'ನನ್ನ ವಿಷಯದಿಂದ ಸೇರಿಸಿ',
         'welcome-dca':
-          'ಇಂದು ಪೂರ್ಣಗೊಳಿಸಲು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಸಂಗ್ರಹಣೆ ಮತ್ತು ಮೌಲ್ಯಮಾಪನಗಳನ್ನು ನೀವು ನಿಯೋಜಿಸಬಹುದಾದ ನಿಮ್ಮ ದೈನಂದಿನ ವರ್ಗ ಚಟುವಟಿಕೆಗಳಿಗೆ ಸ್ವಾಗತ. ದಯವಿಟ್ಟು ಗಮನಿಸಿ: ಇತ್ತೀಚಿನ ಪ್ರಯತ್ನಗಳಿಗಾಗಿ ರಚಿಸಲಾದ ಯಾವುದೇ ವರದಿಗಳು ಇಂದು ಮಾತ್ರ ಲಭ್ಯವಿರುತ್ತವೆ.'
+          'ಇಂದು ಪೂರ್ಣಗೊಳಿಸಲು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಸಂಗ್ರಹಣೆ ಮತ್ತು ಮೌಲ್ಯಮಾಪನಗಳನ್ನು ನೀವು ನಿಯೋಜಿಸಬಹುದಾದ ನಿಮ್ಮ ದೈನಂದಿನ ವರ್ಗ ಚಟುವಟಿಕೆಗಳಿಗೆ ಸ್ವಾಗತ. ದಯವಿಟ್ಟು ಗಮನಿಸಿ: ಇತ್ತೀಚಿನ ಪ್ರಯತ್ನಗಳಿಗಾಗಿ ರಚಿಸಲಾದ ಯಾವುದೇ ವರದಿಗಳು ಇಂದು ಮಾತ್ರ ಲಭ್ಯವಿರುತ್ತವೆ.',
+        'enter-max-timespent': 'Enter the Maximum Timespent for the Assessment',
+        'enter-max-assessment-time-spent':
+          'Enter the time spent in completing the assessment',
+        'enter-max-score': 'Enter the Maximum Score for the Assessment',
+        hour: 'h',
+        min: 'm',
+        'question-score': 'Question Score',
+        'max-score': 'Max Score',
+        'assessment-score': 'Assessment Score',
+        'assessment-max-score': 'Assessment Max. Score',
+        'enter-valid-timespent': 'Enter the valid time spent',
+        'create-activity': 'Create Activity',
+        'schedule-activity': 'Schedule Activity',
+        'add-subject-framework':
+          'Please Select a Subject and Framework at Class Settings',
+        'create-external-collection': 'Create an External Collection'
       },
       'click-to-copy': 'ವರ್ಗ ಕೋಡ್ ನಕಲಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ',
       'course-map': 'ಕೋರ್ಸ್ ಮ್ಯಾಪ್',
@@ -1222,7 +1381,48 @@ export default Object.assign(quizzesTranslations, {
         assessments: 'ಮೌಲ್ಯಮಾಪನಗಳು',
         collections: 'ಸಂಗ್ರಹಣೆಗಳು'
       },
-      'view-more': 'ಹೆಚ್ಚು ವೀಕ್ಷಿಸಿ'
+      'view-more': 'ಹೆಚ್ಚು ವೀಕ್ಷಿಸಿ',
+      'class-settings': {
+        'class-settings-sec': {
+          'generate-pathway': 'Personalize Learning Path',
+          'class-settings-sec-head': 'Class Settings',
+          'class-settings-sec-desc': 'Minimum performance to earn a trophy',
+          'class-code': 'Class Code',
+          subject: 'Subject',
+          framework: 'Framework',
+          'grade-level': 'Grade Level',
+          'option-choose-one': 'Choose One',
+          'co-teachers': 'Co-Teachers',
+          'add-coteacher': 'Add another teacher',
+          'offline-class-label': 'This is an offline classroom',
+          'offline-msg':
+            'Once marked offline, the classroom cannot be made online again.',
+          'offline-toggle-tooltip':
+            'Select Yes if you want to make this an offline classroom',
+          'offline-tooltip':
+            'Classrooms, where students do not study online on Navigator, are marked as Offline. The teacher tracks students learning offline and enters data on behalf of the students',
+          language: 'Language of instruction'
+        },
+        'student-settings-sec': {
+          'student-settings-sec-head': 'Student Settings',
+          'col-head-active': 'Active'
+        },
+        'course-settings-sec': {
+          'course-settings-sec-head': 'Course Settings',
+          'is-route0-applicable':
+            'Personalize Learning Path should cover gaps at profile?',
+          'apply-settings': 'Apply Settings',
+          'origin-info':
+            'What is the lowest grade level content that your students should study?',
+          'current-grade-info': 'What is the grade level of your class?'
+        },
+        origin: 'Origin',
+        destination: 'Destination',
+        students: 'Students',
+        'student-id': 'Student-Id',
+        'joined-on': 'Joined On',
+        'action-lable-add-student': 'Add onother student'
+      }
     },
     'no-classrooms':
       'ನೀವು ಇನ್ನೂ ಯಾವುದೇ ತರಗತಿ ಕೊಠಡಿಗಳನ್ನು ರಚಿಸಿಲ್ಲ. ಲೈಬ್ರರಿ ಟ್ಯಾಬ್ನ ಅಡಿಯಲ್ಲಿ ವೈಶಿಷ್ಟ್ಯಗೊಳಿಸಿದ ಪಠ್ಯಕ್ಕಾಗಿ \\\\\\\'ತರಗತಿಯನ್ನು ರಚಿಸು\\\\\\\' ಅಥವಾ ಹುಡುಕಾಟವನ್ನು </br> ಕ್ಲಿಕ್ ಮಾಡಿ.',
@@ -1231,7 +1431,9 @@ export default Object.assign(quizzesTranslations, {
     'welcome-course-map':
       'ಕೋರ್ಸ್ ವಿಷಯವನ್ನು ನೀವು ವೀಕ್ಷಿಸಬಹುದು, ಮೌಲ್ಯಮಾಪನಗಳನ್ನು ಆನ್ ಅಥವಾ ಆಫ್ ಮಾಡಿ ಮತ್ತು ಮೌಲ್ಯಮಾಪನಗಳನ್ನು ನೈಜ ಸಮಯದಲ್ಲಿ ಪ್ರಾರಂಭಿಸಲು ಇದು ನಿಮ್ಮ ಕೋರ್ಸ್ ಮ್ಯಾಪ್ ಆಗಿದೆ. ನೀವು ಒಟ್ಟಾರೆ ವರ್ಗ ಕಾರ್ಯಕ್ಷಮತೆ ಮತ್ತು ಪೂರ್ಣಗೊಳಿಸುವಿಕೆಯನ್ನು ಸಹ ವೀಕ್ಷಿಸಬಹುದು. ವರ್ಗ ಪ್ರದರ್ಶನದ ವಿವರವಾದ ನೋಟಕ್ಕಾಗಿ, ನಿಮ್ಮ ತರಗತಿಯ ವರದಿ ಟ್ಯಾಬ್ ಅನ್ನು ಭೇಟಿ ಮಾಡಿ.',
     'welcome-rescoped-course-map':
-      'ಈ ಕೋರ್ಸ್ ಅನ್ನು ಪ್ರತಿ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ವೈಯಕ್ತೀಕರಿಸಲಾಗಿದೆ. ನೀವು ವಿದ್ಯಾರ್ಥಿಯ ಕಲಿಕೆಯ ಹಾದಿ (ಪಾತ್ರಗಳು - ಮತ್ತು>) ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡುವ ಮೂಲಕ ವರ್ಗ ನಿರ್ವಹಣಾ ಪುಟದಲ್ಲಿ ಪ್ರತಿ ವಿದ್ಯಾರ್ಥಿಯ ಕೋರ್ಸ್ ನಕ್ಷೆಯನ್ನು ವೀಕ್ಷಿಸಬಹುದು.'
+      'ಈ ಕೋರ್ಸ್ ಅನ್ನು ಪ್ರತಿ ತರಗತಿಯ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ವೈಯಕ್ತೀಕರಿಸಲಾಗಿದೆ. ನೀವು ವಿದ್ಯಾರ್ಥಿಯ ಕಲಿಕೆಯ ಹಾದಿ (ಪಾತ್ರಗಳು - ಮತ್ತು>) ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡುವ ಮೂಲಕ ವರ್ಗ ನಿರ್ವಹಣಾ ಪುಟದಲ್ಲಿ ಪ್ರತಿ ವಿದ್ಯಾರ್ಥಿಯ ಕೋರ್ಸ್ ನಕ್ಷೆಯನ್ನು ವೀಕ್ಷಿಸಬಹುದು.',
+    'welcome-premium-course-map':
+      'This Navigator course is a personalized course covering standards across multiple grades. Each student is provided a unique course to help fill gaps, reinforce concepts and practices, and accelerate their learning. Personalized routes are designed and students are re-routed in real-time to maximize each student\'s learning potential and to navigate to their set destination.'
   },
   goals: {
     manage: {
@@ -1318,13 +1520,15 @@ export default Object.assign(quizzesTranslations, {
     'unlimited-attempts': 'ನಿಮಗೆ ಅಪರಿಮಿತ ಪ್ರಯತ್ನಗಳಿವೆ',
     cancel: 'ರದ್ದುಮಾಡಿ',
     continue: 'ಮುಂದುವರೆಯಿರಿ',
-    start: 'ಪ್ರಾರಂಭಿಸು!'
+    start: 'ಪ್ರಾರಂಭಿಸು!',
+    submit: 'Submit'
   },
   'gru-submit-confirmation': {
     title: 'ಈ ರಸಪ್ರಶ್ನೆಯನ್ನು ಮುಗಿಸಿ ಮತ್ತು ಎಲ್ಲವನ್ನೂ ಸಲ್ಲಿಸಿ',
     description:
       'ನೀವು ಈ ಪ್ರಯತ್ನವನ್ನು ಅಂತ್ಯಗೊಳಿಸಲು ಮತ್ತು ಎಲ್ಲಾ ಪ್ರತಿಕ್ರಿಯೆಗಳನ್ನು ಸಲ್ಲಿಸುವಿರಿ. ಯಾವುದೇ ಸ್ಕಿಪ್ಡ್ ಪ್ರಶ್ನೆಗಳನ್ನು ತಪ್ಪಾಗಿ ಪರಿಗಣಿಸಲಾಗುವುದು.',
     cancel: 'ರದ್ದುಮಾಡಿ',
+    ok: 'ok',
     confirm: 'ಮುಕ್ತಾಯ ರಸಪ್ರಶ್ನೆ',
     'finish-description':
       'ನಿಮ್ಮ ಪ್ರತಿಕ್ರಿಯೆಗಳನ್ನು ಸಲ್ಲಿಸಲು \\\\\\\'ರಸಪ್ರಶ್ನೆ ಮುಗಿಸಿ\\\\\\\' ಕ್ಲಿಕ್ ಮಾಡಿ.'
@@ -1525,6 +1729,15 @@ export default Object.assign(quizzesTranslations, {
     'new-password-confirm': 'ನಿಮ್ಮ ಗುಪ್ತಪದವನ್ನು ಖಚಿತಪಡಿಸಿ',
     title: 'ಪಾಸ್ವರ್ಡ್ ಮರುಹೊಂದಿಸಿ'
   },
+  'change-password': {
+    'change-password': 'Change password link',
+    title: 'Change Password',
+    'current-password-label': 'Enter your current password',
+    'change-success': 'Password Changed Successfully !!',
+    'new-password-required': 'Please enter your new password.',
+    'change-password-error':
+      'Uh oh! Something’s not right. Unable to change password. Please try again.'
+  },
   footer: {
     footerDescription:
       'ಗೋರು ಅದರ ಪ್ಲಾಟ್ಫಾರ್ಮ್ ತೆರೆದ ಮೂಲವನ್ನು ಮತ್ತು ಸಮುದಾಯವನ್ನು ವಿಷಯವನ್ನು cc0 ಅನ್ನು ಸೃಷ್ಟಿಸಲು ಬದ್ಧವಾಗಿದೆ.',
@@ -1565,6 +1778,9 @@ export default Object.assign(quizzesTranslations, {
     tenth: '10',
     eleventh: '11',
     twelfth: '12'
+  },
+  'grade-selector': {
+    placeholder: 'Choose Grade Lines to Display'
   },
   'standard-dropdown': {
     placeholder: 'ಪ್ರಮಾಣಿತ ಮೂಲಕ ಬ್ರೌಸ್ ಮಾಡಿ'
@@ -1797,7 +2013,10 @@ export default Object.assign(quizzesTranslations, {
       library: 'ಗ್ರಂಥಾಲಯ',
       'my-content': 'ನನ್ನ ವಿಷಯ',
       following: 'ಅನುಸರಿಸುತ್ತದೆ',
-      proficiency: 'ಕುಶಲತೆ'
+      proficiency: 'ಕುಶಲತೆ',
+      preference: {
+        preference: 'Preference'
+      }
     },
     edit: {
       'select-district': 'ಜಿಲ್ಲೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ...'
@@ -1811,10 +2030,28 @@ export default Object.assign(quizzesTranslations, {
       'not-started': 'ಪ್ರಾರಂಭಿಸಲಿಲ್ಲ',
       skyline: 'ಸ್ಕೈಲೈನ್',
       baseline: 'ಬೇಸ್ಲೈನ್',
+      'grade-line': 'Grade Line',
       'not-tagged':
         'ವರ್ಗವು ಯಾವುದೇ ಕೋರ್ಸ್ ಅನ್ನು ಹೊಂದಿಲ್ಲ ಅಥವಾ ಕೋರ್ಸ್ ಅನ್ನು ಮಾನ್ಯವಾದ ವಿಷಯ ಅಥವಾ ಮಾನದಂಡಗಳಿಗೆ ಟ್ಯಾಗ್ ಮಾಡಲಾಗಿಲ್ಲ.',
       'show-compressed-chart': 'ಸಂಕುಚಿತ ಚಾರ್ಟ್ ತೋರಿಸಿ',
       'show-expanded-chart': 'ವಿವರವಾದ ಚಾರ್ಟ್ ತೋರಿಸಿ'
+    },
+    preference: {
+      'language-preference': 'Language Preference',
+      'choose-language': 'Choose language',
+      'choose-sec-language': 'Choose',
+      'choose-preferred-language': 'Select primary profile language',
+      'choose-preferred-other-languages': 'Select other preferred languages',
+      language: 'Language',
+      'select-category-label': 'Add a new category',
+      'choose-category': 'Choose Category',
+      'no-data': 'No data',
+      'category-preference': 'Category Preference',
+      'choose-subject': 'Choose Subject',
+      'choose-fwk': 'Choose Framework',
+      'add-subject': 'Add Subject',
+      'add-sec-language': 'Add other preferred language',
+      'other-preferred-languages': 'Other preferred languages'
     }
   },
   'gru-data-picker': {
@@ -2020,7 +2257,6 @@ export default Object.assign(quizzesTranslations, {
     attempt: 'ಪ್ರಯತ್ನಗಳು',
     lastAcessesed: 'ಕೊನೆಯದಾಗಿ ಪ್ರವೇಶಿಸಲಾಗಿದೆ'
   },
-
   'taxonomy.modals': {
     'gru-domain-picker': {
       browseSelectorText: 'ಯಾವ ಘಟಕವು ಈ ಘಟಕವನ್ನು ಒಳಗೊಂಡಿದೆ?',
@@ -2062,6 +2298,7 @@ export default Object.assign(quizzesTranslations, {
     subscript: 'ಸಬ್ಸ್ಕ್ರಿಪ್ಟ್',
     superscript: 'ಸೂಪರ್ಸ್ಕ್ರಿಪ್ಟ್',
     underline: 'ಅಂಡರ್ಲೈನ್',
+    bullets: 'Bullets',
     'expressions-panel': {
       tabs: {
         calculus: 'ಕಲನಶಾಸ್ತ್ರ',
@@ -2653,6 +2890,15 @@ export default Object.assign(quizzesTranslations, {
     'take-resource': 'ಅಧ್ಯಯನ ಸಂಪನ್ಮೂಲ',
     'end-of-course': 'ನೀವು ಪಠ್ಯದ ಅಂತ್ಯವನ್ನು ತಲುಪಿದ್ದೀರಿ.'
   },
+  'gru-content-suggestion': {
+    header: 'We have a suggestion for you!',
+    'suggestion-text': {
+      collection:
+        'Based on your performance on this topic, we recommend that you go through our suggested collection to help you gain mastery.',
+      assessment:
+        'Based on your performance on this topic, we recommend that you go through our suggested assessment to help you gain mastery.'
+    }
+  },
   'student-open-ended-summary': {
     'overall-comment': 'ಒಟ್ಟಾರೆ ಕಾಮೆಂಟ್',
     'overall-score': 'ಒಟ್ಟಾರೆ ಸ್ಕೋರ್',
@@ -2669,6 +2915,12 @@ export default Object.assign(quizzesTranslations, {
       wish: 'ಅಭಿನಂದನೆಗಳು! ನೀವು ಗಳಿಸಿದ್ದೀರಿ',
       reference: 'ಈ ಬಾಹ್ಯ ಮೌಲ್ಯಮಾಪನವನ್ನು ಪ್ರವೇಶಿಸಬಹುದು '
     },
+    'external-collection-report': {
+      note:
+        'This is an external collection with student reported scores for the collection. Individual question level data is not available.',
+      wish: 'Congratulations! You scored',
+      reference: 'This external collection can be accessed '
+    },
     'competency-report': {
       title: 'ಸ್ಪರ್ಧಾತ್ಮಕ ವರದಿ',
       'no-subject': 'ವಿಷಯ ನಿಗದಿಪಡಿಸಲಾಗಿಲ್ಲ',
@@ -2676,13 +2928,12 @@ export default Object.assign(quizzesTranslations, {
       'signature-assessments': 'Signature ಮೌಲ್ಯಮಾಪನಗಳು',
       'signature-collections': 'Signature ಸಂಗ್ರಹಣೆಗಳು',
       'show-global-data': 'ಜಾಗತಿಕ ಡೇಟಾವನ್ನು ತೋರಿಸಿ',
-      'show-student-data': 'ವಿದ್ಯಾರ್ಥಿ ಡೇಟಾವನ್ನು ತೋರಿಸಿ'
+      'show-student-data': 'ವಿದ್ಯಾರ್ಥಿ ಡೇಟಾವನ್ನು ತೋರಿಸಿ',
+      'show-learning-map': 'Show Learning Map',
+      note:
+        'Score 80% or more in our signature assessment and show your mastery'
     },
     'domain-report': 'ಡೊಮೇನ್ ವರದಿ'
-  },
-
-  'grade-selector': {
-    placeholder: 'Choose Grade Lines to Display'
   },
   'competency-info-content': {
     journey: 'JOURNEY',
@@ -2726,11 +2977,17 @@ export default Object.assign(quizzesTranslations, {
     'no-challenging-questions':
       'There are no challenging questions for this competency'
   },
+  'student-card': {
+    message: 'This {{type}} has been deleted'
+  },
   'self-report': {
     'your-score': 'ನಿಮ್ಮ ಅಂಕ',
+    time_spent: 'Time Spent',
     'update-error': 'ಸ್ಕೋರ್ ಅನ್ನು ಅಪ್ಡೇಟ್ ಮಾಡುವಲ್ಲಿ ಸಮಸ್ಯೆ',
     'validation-error': 'ಮಾನ್ಯವಾದ ಸ್ಕೋರ್ ನಮೂದಿಸಿ',
-    'enter-score': 'ನಿಮ್ಮ ಸ್ಕೋರ್ ಅನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ'
+    'enter-score': 'ನಿಮ್ಮ ಸ್ಕೋರ್ ಅನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಿ',
+    'enter-timeSpent': 'Enter your time spent here',
+    'validation-error-time': 'Enter valid time'
   },
   notifications: {
     'notificationlist-header-title': 'ಸೂಚನೆ',
