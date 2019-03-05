@@ -157,7 +157,7 @@ export default Object.assign(quizzesTranslations, {
     back: 'मागे',
     'back-to-assessment': 'परत मूल्यांकन करण्यासाठी',
     'back-to-collection': 'संकलनावर परत',
-    'back-to-course-map': 'पाठ्यक्रमाच्या आराखड्या कडे परत',
+    'back-to-course-map': 'अभ्यासक्रम आराखड्याकडे परत',
     'back-to-data': 'डेटाकडे परत',
     'back-to-report': 'अहवालाकडे परत या',
     'best-practices': 'सर्वोत्कृष्ट प्रथा',
@@ -196,8 +196,8 @@ export default Object.assign(quizzesTranslations, {
     'collection-title': 'संग्रह शीर्षक',
     collections: 'संग्रह',
     collectionInitial: 'क',
-    competency: 'योग्यता',
-    competencies: 'अनेक योग्यता',
+    competency: 'क्षमता',
+    competencies: 'क्षमता',
     completed: 'पूर्ण केले',
     completion: 'पूर्णत्व',
     community: 'समुदाय',
@@ -229,7 +229,7 @@ export default Object.assign(quizzesTranslations, {
     'not-answered': 'उत्तर दिले नाही',
     'rubric-not-answered': 'रुब्रिक उत्तर दिले नाही',
     country: 'देश',
-    'course-map': 'पाठ्यक्रम नकाशा',
+    'course-map': 'अभ्यासक्रम आराखडा',
     course: 'अभ्यासक्रम',
     'course-title': 'अभ्यासक्रम शीर्षक',
     courses: 'अभ्यासक्रम',
@@ -632,7 +632,7 @@ export default Object.assign(quizzesTranslations, {
     'select-all': 'सर्व निवडा',
     none: 'काहीही नाही',
     'add-data': 'माहिती भरा',
-    'update-data': 'Update करा',
+    'update-data': 'अपडेट करा',
     all: 'सर्व',
     'please-wait': 'Please Wait',
     'unscheduled-items': 'अनियोजित',
@@ -823,7 +823,7 @@ export default Object.assign(quizzesTranslations, {
       'class-greetings-placeholder':
         'आपल्या विद्यार्थ्यांना अभिवादन करा, त्यांना प्रवृत्त करा, किंवा घोषणा करा इ.',
       'class-minscore': 'ट्रॉफीसाठी कमीत कमी गुण (1-100%)',
-      'course-map': 'पाठ्यक्रम नकाशा',
+      'course-map': 'अभ्यासक्रम आराखडा',
       'edit-class': 'कक्षा सेटिंग्ज संपादित करा'
     },
     overview: {
@@ -835,7 +835,7 @@ export default Object.assign(quizzesTranslations, {
       'assigned-course': 'आपका नियुक्त पाठ्यक्रम',
       'pre-study-title': 'अपने पाठ्यक्रम के लिए पूर्व-अध्ययन',
       'course-map': {
-        'rescope-toggle': 'पूर्ण कोर्स नकाशा दर्शवा',
+        'rescope-toggle': 'पूर्ण अभ्यासक्रम आराखडा दाखवा',
         'rescope-info':
           'हा कोर्स विशेषतः गणित पाया अभ्यासक्रम आपल्याकडून वैयक्तिकृत केला गेला आहे. मूळ कोर्स पाहण्यासाठी, हे वैशिष्ट्य सक्षम करा',
         'custom-msg':
@@ -1154,19 +1154,19 @@ export default Object.assign(quizzesTranslations, {
   },
   'student-landing': {
     announcement: 'घोषणा',
-    'browse-featured-courses': 'आमचे वैशिष्ट्यीकृत अभ्यासक्रम ब्राउझ करा',
+    'browse-featured-courses': 'उपलब्ध अभ्यासक्रम ब्राउझ करा',
     'browse-our': 'आमच्या ब्राउझ करा',
     'class-code': 'वर्ग कोड',
-    'featured-courses': 'प्रदर्शित अभ्यासक्रम',
+    'featured-courses': 'उपलब्ध अभ्यासक्रम',
     class: {
-      'assigned-course': 'नियुक्त कोर्स',
+      'assigned-course': 'नियुक्त अभ्यासक्रम ',
       'back-to': 'क्लासरूम कडे परत',
       'no-course': 'या वर्गात  संबंधित अभ्यासक्रम नाही.',
-      'no-course-assigned': 'कोणताही कोर्स सोपवला नाही',
+      'no-course-assigned': 'कोणताही \'अभ्यासक्रम नेमलेला नाही',
       'back-to-independent': 'स्वतंत्र शिक्षणाकडे परत',
       report: 'अहवाल',
       performance: 'कामगिरी',
-      'course-map': 'पाठ्यक्रम नकाशा',
+      'course-map': 'अभ्यासक्रम आराखडा',
       unit: 'युनिट',
       lesson: 'धडा',
       'class-activities': 'वर्गाचे नियोजन',
@@ -1220,7 +1220,7 @@ export default Object.assign(quizzesTranslations, {
       'या वर्गात सध्या कोणताही कंटेंटंत सामग्री उपलब्ध नाही',
     welcome: 'गोवरुमध्ये स्वागत आहे',
     'no-course-assigned':
-      'अद्याप या वर्गात कोणताही कोर्स नियुक्त केला गेला नाही. कृपया आपल्या शिक्षकांशी संपर्क साधा.'
+      'अद्याप या वर्गात कोणताही अभ्यासक्रम नियुक्त केला गेला नाही. कृपया आपल्या शिक्षकांशी संपर्क साधा.'
   },
   'student-independent-learning': {
     'show-more': 'अजून दाखवा',
@@ -1261,7 +1261,7 @@ export default Object.assign(quizzesTranslations, {
       manage: 'व्यवस्थापित करा',
       reports: 'अहवाल',
       'daily-activites': 'दररोज सक्रिय',
-      courses: 'अर्थातच',
+      courses: 'अभ्यासक्रम',
       'back-to': 'क्लासरूम कडे परत',
       'back-to-archived': 'संग्रहित कक्षांमध्ये परत',
       'class-management': 'वर्ग व्यवस्थापन',
@@ -1271,7 +1271,7 @@ export default Object.assign(quizzesTranslations, {
       'class-management-tab': {
         actions: 'क्रिया',
         'assessment-min-score': 'ट्रॉफीसाठी आवश्यक कमीत कमी गुण',
-        'assigned-course': 'नियुक्त कोर्स',
+        'assigned-course': 'नियुक्त अभ्यासक्रम',
         archive: 'संग्रह',
         'archive-class': 'संग्रह वर्ग',
         'archive-classroom': 'संग्रह वर्ग',
@@ -1324,13 +1324,12 @@ export default Object.assign(quizzesTranslations, {
           'या वर्गामध्ये सलंग्न अभ्यासक्रम किंवा विद्यार्थी नाहीत. जेव्हा वर्गात अभ्यासक्रम तसेच त्यातील विद्यार्थी भरले जातील तेव्हा वर्गाचा क्षमता अहवाल येथे दाखवला जाईल.'
       },
       'atc-view': {
-        'domains-reviewed': 'समी़क्षा किये जाने वाले क्षेत्र',
-        'class-activities-completed': 'कक्षा में आयोजित गतिविधियाँ',
-        'class-activities-pending':
-          'कक्षा में आयोजित की जाने वाली आगामी  गतिविधियाँ',
-        'show-all': 'सभी दिखाएं ',
-        collapse: 'समेटें',
-        'total-competencies-gained': 'कुल हासिल दक्षताएँ'
+        'domains-reviewed': 'दिलेल्या डोमेन्सचे पुनरावलोकन करा. ',
+        'class-activities-completed': 'वर्गातील पूर्ण झालेले उपक्रम ',
+        'class-activities-pending': 'वर्गातील प्रलंबित उपक्रम',
+        'show-all': 'सर्व दाखवा ',
+        collapse: 'कोलॅप्स करा',
+        'total-competencies-gained': 'एकूण प्राप्त क्षमता'
       },
       'class-activities': 'वर्गाचे नियोजन',
       'offline-class-report': {
@@ -1344,7 +1343,7 @@ export default Object.assign(quizzesTranslations, {
         today: 'आज:',
         yesterday: 'काल:',
         month: 'महिना:',
-        'add-from-course-map': 'कोर्स नकाशावरून जोडा',
+        'add-from-course-map': 'अभ्यासक्रम आराखड्यातून जोडा',
         'add-from-my-content': 'माझी सामग्री पासून जोडा',
         'welcome-dca':
           'आपल्या दैनंदिन कामकाजामध्ये आपले स्वागत आहे जिथे आपण आज विद्यार्थी पूर्ण करण्यासाठी संकलने आणि आकलन देऊ शकता. कृपया लक्षात ठेवा: व्युत्पन्न केलेली कोणतीही अहवाल आजच सर्वात अलीकडील प्रयत्नासाठी उपलब्ध असेल.',
@@ -1368,7 +1367,7 @@ export default Object.assign(quizzesTranslations, {
         'create-external-collection': 'बाह्य संग्रह तयार करा'
       },
       'click-to-copy': 'वर्ग कोड कॉपी करण्यासाठी क्लिक करा',
-      'course-map': 'पाठ्यक्रम नकाशा',
+      'course-map': 'अभ्यासक्रम आराखडा',
       management: 'रोस्टर व्यवस्थापन',
       report: 'अहवाल',
       performance: 'कामगिरी',
@@ -1421,12 +1420,13 @@ export default Object.assign(quizzesTranslations, {
     },
     'no-classrooms':
       'आपण अद्याप कोणतेही वर्ग तयार केले नाहीत लायब्ररी टॅब अंतर्गत वैशिष्ट्यीकृत अभ्यासक्रमासाठी "वर्गाची निर्मिती करा" क्लिक करा किंवा </br> शोधा.',
-    'no-course': 'आपण अद्याप या </br> कक्षामध्ये एक कोर्स नियुक्त केलेला नाही.',
-    teach: 'गोरू वर्गाने शिकवा',
+    'no-course':
+      'आपण अद्याप या </br> वर्गाला कोणताही अभ्यासक्रम नेमून दिलेला नाही.',
+    teach: 'गुरु वर्गाच्या सहाय्याने शिकवा',
     'welcome-course-map':
-      'अभ्यासक्रम नकाशामध्ये तुम्ही अभ्यासक्रमातील मजकूर पाहू शकता, मूल्यमापन सुरु किंवा बंद करू शकता तसेच चालू वेळेत मूल्यमापन घेऊन माहिती भरू शकता. तुम्ही तुमच्या वर्गाची एकूण कामगिरी पाहू शकता तसेच वर्गातील पूर्ण-अपूर्ण उपक्रम पाहू शकता. वर्गाच्या कामगिरीचा  सविस्तर आढावा बघण्यासाठी वर्गाच्या अहवाल टॅब वर जा.',
+      'अभ्यासक्रम आराखड्यामध्ये तुम्ही अभ्यासक्रमातील मजकूर पाहू शकता, मूल्यमापन सुरु किंवा बंद करू शकता तसेच चालू वेळेत मूल्यमापन घेऊन माहिती भरू शकता. तुम्ही तुमच्या वर्गाची एकूण कामगिरी पाहू शकता तसेच वर्गातील पूर्ण-अपूर्ण उपक्रम पाहू शकता. वर्गाच्या कामगिरीचा  सविस्तर आढावा बघण्यासाठी वर्गाच्या अहवाल टॅब वर जा.',
     'welcome-rescoped-course-map':
-      'हा कोर्स वर्ग प्रत्येक विद्यार्थ्याला वैयक्तिकृत केले गेले आहे. आपण विद्यार्थ्यांच्या शिकण्याच्या मार्ग (वर्ण - आणि>) वर क्लिक करून वर्ग व्यवस्थापनातील प्रत्येक विद्यार्थ्याचे अभ्यासक्रम नकाशा पाहू शकता.',
+      'वर्गातील प्रत्येक विद्यार्थ्यासाठी हा अभ्यासक्रम वैयक्तिक शिक्षणाचा मार्ग दाखवण्यासाठी तयार केलेला आहे. वर्ग व्यवस्थापन या पेज वर जाऊन प्रत्येक विद्यार्थ्याच्या \'शैक्षणिक मार्गावर  ("->")\' क्लिक करून तुम्ही विद्यार्थ्याचा अभ्यासक्रम आराखडा पाहू शकता.',
     'welcome-premium-course-map':
       'नेव्हिगेटर मधील अभ्यासक्रमात इयत्तांमधील विविध पातळ्यांना समाविष्ट करून तयार केलेला हा वैयक्तिक अभ्यासक्रम आहे. प्रत्येक विद्यार्थ्याला त्याच्या समजेतील त्रुटी भरून काढण्यासाठी, संकल्पनाच्या दृढीकरणासाठी, सरावासाठी आणि त्यांच्या शिकण्याचा वेग वाढवण्यासाठी वैशिष्ट्यपूर्ण असा अभ्यासक्रम उपलब्ध करून दिलेला आहे .विद्यार्थ्यांना त्यांच्या अपेक्षित अंतिम स्थानापर्यंत पोहोचवण्यासाठी वैयक्तिक शैक्षणिक मार्ग तयार केले जातात तसेच चालू वेळेत विद्यार्थ्यांच्या क्षमतांना पूर्ण न्याय देण्यासाठी गरजेनुसार त्यांच्या मार्गात बदल करून नवे मार्गही सुचवले जातात.'
   },
@@ -1773,7 +1773,7 @@ export default Object.assign(quizzesTranslations, {
     twelfth: '१२'
   },
   'grade-selector': {
-    placeholder: 'Choose Grade Lines to Display'
+    placeholder: 'ग्रेडलाईन निवडा '
   },
   'standard-dropdown': {
     placeholder: 'वर्गानुसार शोध'
@@ -1890,12 +1890,12 @@ export default Object.assign(quizzesTranslations, {
     },
     competency: {
       popover: {
-        title: '{{शीर्षक}} सीमा',
+        title: '{{title}} सीमा',
         content:
           'आपल्याला आपल्या स्काईलाइन आणि या ग्रेडलाइन दरम्यान आपल्या गंतव्यस्थानापर्यंत पोहोचण्यासाठी सर्व मानकांचा अभ्यास करण्याची आवश्यकता आहे.'
       }
     },
-    'assigned-course-title': '{{शीर्षक}} साठी नियुक्त केलेला कोर्स',
+    'assigned-course-title': '{{title}} साठी नियुक्त केलेला अभ्यासक्रम',
     'start-studying': 'Start Studying',
     'show-route': 'Show Route',
     'review-destination': 'Review Destination',
@@ -2009,18 +2009,18 @@ export default Object.assign(quizzesTranslations, {
     },
     proficiency: {
       'is-empty':
-        'अद्याप कोणताही डेटा उपलब्ध नाही एकदा आपण अभ्यास करणे सुरू केले की आपला डेटा उपलब्ध होईल.',
-      'expand-chart': 'चार्ट विस्तृत करा',
-      mastered: 'ताकदवान',
-      'in-progress': 'काम चालू',
+        'अद्याप कोणताही डेटा उपलब्ध नाही एकदा तुम्ही अभ्यास करायला सुरूवात केली की आपला डेटा उपलब्ध होईल.',
+      'expand-chart': 'विस्तृत चार्ट दाखवा',
+      mastered: 'प्रभुत्व',
+      'in-progress': 'प्रगतशील',
       'not-started': 'सुरु  केलेले नाही',
       skyline: 'स्काईलाइन',
       baseline: 'बेसलाइन',
-      'grade-line': 'ग्रेड ओळ',
+      'grade-line': 'ग्रेडलाईन',
       'not-tagged':
-        'वर्गात कोणत्याही प्रकारचे नियुक्त केलेले नाही किंवा अर्थातच एखाद्या वैध विषयावर किंवा मानकांवर टॅग केले गेले नाही.',
-      'show-compressed-chart': 'संक्षिप्त चार्ट दर्शवा',
-      'show-expanded-chart': 'विस्तृत चार्ट दर्शवा'
+        'वर्गाला कोणताही अभ्यासक्रम नेमलेला नाही किंवा अभ्यासक्रम वैध विषयाला किंवा इयत्तेला जोडलेला नाही.',
+      'show-compressed-chart': 'संक्षिप्त चार्ट दाखवा',
+      'show-expanded-chart': 'विस्तृत चार्ट दाखवा'
     },
     preference: {
       'language-preference': 'भाषेचा प्राधान्य क्रम',
@@ -2139,7 +2139,7 @@ export default Object.assign(quizzesTranslations, {
     'gru-collection-card': {
       courses: {
         zero: '{{count}} अभ्यासक्रम',
-        one: '{{count}} कोर्स',
+        one: '{{count}} अभ्यासक्रम',
         other: '{{count}} अभ्यासक्रम'
       },
       students: {
@@ -2205,7 +2205,7 @@ export default Object.assign(quizzesTranslations, {
         'button-text': 'वर्ग कोड प्रविष्ट करा'
       },
       'featured-courses': {
-        title: 'प्रदर्शित अभ्यासक्रम',
+        title: 'उपलब्ध अभ्यासक्रम',
         description:
           'गणित, विज्ञान, सामाजिक अभ्यास आणि एला अभ्यासक्रम ब्राउझ करा.',
         'button-text': 'प्रदर्शित अभ्यासक्रम'
@@ -2224,7 +2224,7 @@ export default Object.assign(quizzesTranslations, {
       'add-secondary': 'Add secondary',
       'choose-subject': 'विषय निवडा',
       'competency-subject-and-course': 'क्षमता फ्रेमवर्क आणि अभ्यासक्रम',
-      'primary-subject-and-course': 'क्षमता आराखडा आणि अभ्यासक्रम'
+      'primary-subject-and-course': 'इयत्ता फ्रेमवर्क आणि अभ्यासक्रम'
     }
   },
   validations: {
@@ -2245,17 +2245,18 @@ export default Object.assign(quizzesTranslations, {
   },
   'taxonomy.modals': {
     'gru-domain-picker': {
-      browseSelectorText: 'हे युनिट कोणते विषय कव्हर करेल?',
+      browseSelectorText:
+        'या युनिटमध्ये कोणकोणते डोमेन्स समाविष्ट केलेले आहेत?',
       selectedText: {
-        zero: '{{count}} डोमेन निवडले',
-        one: '{{count}} विषय निवडला आहे',
-        other: '{{count}} विषय निवडले आहेत'
+        zero: '{{count}} निवडलेले डोमेन्स ',
+        one: '{{count}} निवडलेला डोमेन',
+        other: '{{count}} निवडलेले डोमेन्स'
       },
       shortcutText: 'Course is in'
     },
     'gru-standard-picker': {
-      browseSelectorText: 'कुठल्या क्षमता समाविष्ट केल्या जातील?',
-      browseCompetencySelectorText: 'काय क्षमता समाविष्ट केले जाईल?',
+      browseSelectorText: 'कोणत्या इयत्ता समाविष्ट केल्या जातील?',
+      browseCompetencySelectorText: 'काय क्षमता समाविष्ट केल्या जातील?',
       selectedText: {
         zero: '{{count}} मानक निवडले',
         one: '{{count}} क्षमता निवडली आहे',
@@ -2380,7 +2381,7 @@ export default Object.assign(quizzesTranslations, {
           'फेरफटका आणि आपले मुख्यपृष्ठ घेण्यासाठी स्वागत आहे! आपल्या होमपेजवर आपल्यासाठी उपलब्ध असलेल्या वैशिष्ट्यांमधून फिरूया.'
       },
       stepFeaturedCourses: {
-        title: 'प्रदर्शित अभ्यासक्रम',
+        title: 'उपलब्ध अभ्यासक्रम',
         description:
           'आपल्याला स्वारस्य असलेल्या विषयांसाठी लर्निंग नेव्हिगेटरच्या सामग्री कॅटलॉगमध्ये वैशिष्ट्यीकृत अभ्यासक्रम ब्राउझ करा'
       },
@@ -2554,7 +2555,7 @@ export default Object.assign(quizzesTranslations, {
       },
       stepFive: {
         title: 'पूर्णत्व',
-        nuTitle: 'अनेक योग्यता',
+        nuTitle: 'क्षमता',
         description: 'आपण किती पूर्ण केले आहे हे दर्शविते.'
       },
       stepSix: {
@@ -2783,14 +2784,14 @@ export default Object.assign(quizzesTranslations, {
   },
   library: {
     'browse-library': 'ब्राउझ लायब्ररी',
-    'featured-courses': 'प्रदर्शित अभ्यासक्रम',
+    'featured-courses': 'उपलब्ध अभ्यासक्रम',
     'gru-library-card': {
-      'featured-course': 'वैशिष्ट्यीकृत अभ्यासक्रम'
+      'featured-course': 'उपलब्ध अभ्यासक्रम'
     },
     'gru-partner-library-card': {
       course: {
-        zero: '{{count}} कोर्स',
-        one: '{{count}} कोर्स',
+        zero: '{{count}} अभ्यासक्रम',
+        one: '{{count}} अभ्यासक्रम',
         other: '{{count}} अभ्यासक्रम'
       },
       collection: {
@@ -2799,8 +2800,8 @@ export default Object.assign(quizzesTranslations, {
         other: '{{count}} संग्रह'
       },
       assessment: {
-        zero: '{{count}} मूल्यांकन',
-        one: '{{count}} मूल्यांकन',
+        zero: '{{count}} मूल्यमापन',
+        one: '{{count}} मूल्यमापन',
         other: '{{count}} मूल्यमापन'
       },
       resource: {
@@ -2871,7 +2872,7 @@ export default Object.assign(quizzesTranslations, {
     'take-signature-assessment': 'अभ्यास सुचविले मूल्यांकन',
     'take-backfill-pretest': 'अभ्यास सुचवलेले संग्रह',
     'take-resource': 'अभ्यास संसाधन',
-    'end-of-course': 'आपण कोर्सच्या शेवटी पोहोचला आहात.'
+    'end-of-course': 'आपण अभ्यासक्रमाच्या शेवटी पोहोचला आहात.'
   },
   'gru-content-suggestion': {
     header: 'आमच्याकडे आपल्यासाठी एक सूचना आहे!',
