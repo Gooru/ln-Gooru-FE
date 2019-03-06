@@ -48,11 +48,21 @@ export default Ember.Route.extend({
   beforeModel() {
     const route = this;
     const currentClass = route.modelFor('student.class').class;
+    const skylineInitialState = route.modelFor('student.class')
+      .skylineInitialState;
     const classId = currentClass.get('id');
     return route
       .get('skylineInitialService')
       .fetchState(classId)
-      .then(skylineInitialState => {
+      .then(skylineInitialStateRes => {
+        skylineInitialState.set(
+          'destination',
+          skylineInitialStateRes.get('destination')
+        );
+        skylineInitialState.set(
+          'context',
+          skylineInitialStateRes.get('context')
+        );
         route.set('skylineInitialState', skylineInitialState);
         let destination = skylineInitialState.get('destination');
         if (destination === CLASS_SKYLINE_INITIAL_DESTINATION.courseMap) {

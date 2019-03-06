@@ -171,9 +171,17 @@ export default Ember.Controller.extend({
     controller
       .get('skylineInitialService')
       .fetchState(classId)
-      .then(skylineInitialState => {
+      .then(skylineInitialStateRes => {
         if (!controller.get('isDestroyed')) {
-          controller.set('skylineInitialState', skylineInitialState);
+          let skylineInitialState = controller.get('skylineInitialState');
+          skylineInitialState.set(
+            'destination',
+            skylineInitialStateRes.get('destination')
+          );
+          skylineInitialState.set(
+            'context',
+            skylineInitialStateRes.get('context')
+          );
           let isLPComputeInprogress = controller.get('isLPComputeInprogress');
           if (isLPComputeInprogress) {
             controller.checkStateOfSkylineInitial();
