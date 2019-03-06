@@ -6,7 +6,7 @@ import {
 } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import {isCompatibleVW} from 'gooru-web/utils/utils';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -614,7 +614,10 @@ export default Ember.Component.extend({
       let grade = component.get('class.grade');
       let subject = component.get('course.subject');
       let competencyData = component.get('competencyData');
-      let gutCode = competencyData ? competencyData.get('competencyCode'): null;
+      let primaryLanguage = component.get('class.primaryLanguage');
+      let gutCode = competencyData
+        ? competencyData.get('competencyCode')
+        : null;
       let filters = {};
       if (grade) {
         filters['flt.grade'] = grade;
@@ -625,6 +628,9 @@ export default Ember.Component.extend({
 
       if (gutCode) {
         filters['flt.gutCode'] = gutCode;
+      }
+      if (primaryLanguage) {
+        filters['flt.languageId'] = primaryLanguage;
       }
       params.filters = filters;
     }
