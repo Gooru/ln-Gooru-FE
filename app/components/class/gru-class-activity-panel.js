@@ -37,7 +37,7 @@ export default Ember.Component.extend({
         collectionType === 'assessment-external' ||
         collectionType === 'collection-external'
       ) {
-        window.open(url, '_top');
+        window.open(url, '_blank');
       } else {
         this.get('router').transitionTo('player', contentId, {
           queryParams: {
