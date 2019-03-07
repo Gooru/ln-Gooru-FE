@@ -166,7 +166,8 @@ export default Ember.Object.extend({
    * @param  {ClassId} classId        Unique Id of the class
    * @param  {CollectionId} collectionId   Unique Id of the collection.
    * @param  {CollectionType} collectionType Type of the collection, it should be collection/assessment.
-   * @param  {String} date           Date format should YYYY-MM-DD
+   * @param  {SessionId} sessionId          sessionId of the activity
+   * @param  {UserId} userId
    */
   getDCAPerformanceBySessionId(
     userId,
