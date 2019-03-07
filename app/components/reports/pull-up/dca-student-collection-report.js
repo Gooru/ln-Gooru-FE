@@ -51,6 +51,8 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
 
+  useSession: false,
+
   /**
    * Indicates the status of the spinner
    * @property {Boolean}
@@ -360,18 +362,25 @@ export default Ember.Component.extend({
         hash.collection.state === 'fulfilled' ? hash.collection.value : null
       );
       const analyticsService = component.get('analyticsService');
-      return analyticsService
-        .findResourcesByCollectionforDCA(
+      const performanceSummaryPromise = component.get('useSession')
+        ? analyticsService.getDCAPerformanceBySessionId(
+          userId,
+          classId,
+          collectionId,
+          collectionType,
+          sessionId
+        )
+        : analyticsService.findResourcesByCollectionforDCA(
           sessionId,
           collectionId,
           classId,
           userId,
           collectionType,
           activityDate
-        )
-        .then(function(assessmentResult) {
-          component.setAssessmentResult(assessmentResult);
-        });
+        );
+      performanceSummaryPromise.then(function(assessmentResult) {
+        component.setAssessmentResult(assessmentResult);
+      });
     });
   },
 

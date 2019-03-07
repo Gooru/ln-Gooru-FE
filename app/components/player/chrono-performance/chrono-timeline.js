@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { isCompatibleVW } from 'gooru-web/utils/utils';
-import { SCREEN_SIZES } from 'gooru-web/config/config';
+import { SCREEN_SIZES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -138,7 +138,11 @@ export default Ember.Component.extend({
 
     onClosePullUp() {
       let component = this;
-      component.set('showCourseReport', false);
+      component.set('showCollectionReport', false);
+      component.set('showExternalAssessmentReport', false);
+      component.set('showStudentDcaReport', false);
+      component.set('isShowStudentExternalCollectionReport', false);
+      component.set('isShowStudentExternalAssessmentReport', false);
     },
 
     onOpenCourseReport() {
@@ -251,6 +255,15 @@ export default Ember.Component.extend({
    */
   openStudentCollectionReport(activity, collection, collectionType) {
     let component = this;
+    if (activity.get('contentSource') === PLAYER_EVENT_SOURCE.DAILY_CLASS) {
+      component.showDCAReport(activity, collection, collectionType);
+    } else {
+      component.showCourseMapReport(activity, collection, collectionType);
+    }
+  },
+
+  showCourseMapReport(activity, collection, collectionType) {
+    let component = this;
     let params = {
       userId: component.get('session.userId'),
       classId: activity.get('classId'),
@@ -265,7 +278,6 @@ export default Ember.Component.extend({
       isTeacher: false,
       collection
     };
-    component.set('studentCollectionReportContext', params);
     if (collectionType === 'assessment-external') {
       component.set('showExternalAssessmentReport', true);
       component.set('showCollectionReport', false);
@@ -273,6 +285,72 @@ export default Ember.Component.extend({
       component.set('showExternalAssessmentReport', false);
       component.set('showCollectionReport', true);
     }
+    component.set('studentReportContextData', params);
+  },
+
+  showDCAReport(activity, collection, collectionType) {
+    let component = this;
+    let params = component.getStudentDCAReportData(
+      activity,
+      collection,
+      collectionType
+    );
+    if (collectionType === 'assessment-external') {
+      component.set('isShowStudentExternalAssessmentReport', true);
+      component.set('showStudentDcaReport', false);
+      component.set('isShowStudentExternalCollectionReport', false);
+    } else if (collectionType === 'collection-external') {
+      component.set('showStudentDcaReport', false);
+      component.set('isShowStudentExternalAssessmentReport', false);
+      component.set('isShowStudentExternalCollectionReport', true);
+    } else {
+      component.set('showStudentDcaReport', true);
+      component.set('isShowStudentExternalAssessmentReport', false);
+      component.set('isShowStudentExternalCollectionReport', false);
+    }
+    component.set('studentReportContextData', params);
+  },
+
+  getDCACollectionData(collection, collectionType) {
+    return Ember.Object.create({
+      collectionType: collectionType,
+      format: collectionType,
+      id: collection.get('id'),
+      title: collection.get('title'),
+      thumbnailUrl: collection.get('thumbnailUrl'),
+      questionCount: collection.get('questionCount'),
+      resourceCount: collection.get('resourceCount'),
+      oeQuestionCount: collection.get('oeQuestionCount')
+    });
+  },
+
+  getDCACollectionPerformance(activity) {
+    return Ember.Object.create({
+      attempts: activity.get('attempts'),
+      collectionId: activity.get('collectionId'),
+      hasStarted: true,
+      id: activity.get('id'),
+      sessionId: activity.get('sessionId'),
+      timeSpent: activity.get('timeSpent'),
+      status: activity.get('status'),
+      views: activity.get('views')
+    });
+  },
+
+  getStudentDCAReportData(activity, collection, collectionType) {
+    let component = this;
+    return Ember.Object.create({
+      activityDate: moment(activity.get('lastAccessedDate')).format(
+        'YYYY-MM-DD'
+      ),
+      collectionId: activity.get('collectionId'),
+      classId: activity.get('classId'),
+      isStudent: true,
+      type: collectionType,
+      userId: component.get('session.userId'),
+      collection: component.getDCACollectionData(collection, collectionType),
+      studentPerformance: component.getDCACollectionPerformance(activity)
+    });
   },
 
   /**
