@@ -247,8 +247,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
           firstName: userData.first_name || userData.fn,
           lastName: userData.last_name || userData.ln,
           thumbnail,
-          score: userPerformanceSummary.score || userPerformanceSummary.sc || 0,
-          status: userPerformanceSummary.status || userPerformanceSummary.st
+          status: userPerformanceSummary.status || userPerformanceSummary.st || 0
         });
         normalizedUsersCompetencyPerformanceSummary.pushObject(
           userPerformanceData

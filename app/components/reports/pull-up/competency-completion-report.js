@@ -25,7 +25,7 @@ export default Ember.Component.extend({
   // Actions
   actions: {
     //Action triggered when select a competency
-    onSelectCompetency(competencyData, competencySeq) {
+    onSelectCompetency(competencyData) {
       const component = this;
       let domainData = component.get('domainData');
       if (!competencyData.get('usersCompletionSummary')) {
@@ -38,14 +38,14 @@ export default Ember.Component.extend({
           .then(function(usersCompletionSummary) {
             competencyData.set(
               'usersCompletionSummary',
-              usersCompletionSummary.sortBy('score')
+              usersCompletionSummary.sortBy('status')
             );
             component.set('isLoading', false);
           });
       }
       component.resetSelectedUserIds(competencyData);
       component.set('activeCompetency', competencyData);
-      component.toggleCompetencyContainer(competencySeq);
+      component.toggleCompetencyContainer(competencyData);
     },
 
     //Action triggered when close pullup
@@ -141,19 +141,11 @@ export default Ember.Component.extend({
    * @function toggleCompetencyContainer
    * Method to toggle competency container view
    */
-  toggleCompetencyContainer(competencySeq) {
-    const component = this;
-    const competencyContainer = component.$(
-      '.competency-container .users-completion-container'
-    );
-    const selectedCompletionContainer = component.$(
-      `.competency-${competencySeq} .users-completion-container`
-    );
-    if (selectedCompletionContainer.hasClass('collapsed')) {
-      competencyContainer.removeClass('expanded').addClass('collapsed');
-      selectedCompletionContainer.addClass('expanded').removeClass('collapsed');
+  toggleCompetencyContainer(competencyData) {
+    if (competencyData.get('isExpanded')) {
+      competencyData.set('isExpanded', false);
     } else {
-      selectedCompletionContainer.toggleClass('expanded').addClass('collapsed');
+      competencyData.set('isExpanded', true);
     }
   },
 

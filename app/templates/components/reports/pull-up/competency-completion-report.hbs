@@ -4,9 +4,9 @@
     <div class="title-container"><span class="close-pullup" {{action "onClosePullup"}}>{{gru-icon name="keyboard_backspace"}}</span><span class="title-text">Competencies</span></div>
     <div class="competencies-container">
       {{#each competencyCompletionReport as |competencyData competencySeq|}}
-        <div class="competency-container competency-{{competencySeq}}">
+        <div class="competency-container competency-{{competencySeq}} {{if competencyData.isExpanded 'expanded' 'collapsed'}}">
           <div class="competency-completion-info-container">
-            <div class="competency-info" {{action "onSelectCompetency" competencyData competencySeq}}>
+            <div class="competency-info" {{action "onSelectCompetency" competencyData}}>
               <div class="competency-code">{{competencyData.competencyCode}}</div>
               <div class="competency-name ellipsis">{{competencyData.competencyDesc}}</div>
             </div>
@@ -17,8 +17,12 @@
               <div class="completion-percentage">{{competencyData.completionPercentage}}%</div>
               <div class="completion-box"><span style="background-color: {{safe-html (grade-color competencyData.completionPercentage)}}; width: {{competencyData.completionPercentage}}%;"></span></div>
             </div>
+            <div class="competency-toggle" {{action "onSelectCompetency" competencyData}}>
+              <span>{{gru-icon name="arrow_drop_down"}}</span>
+              <span>{{gru-icon name="arrow_drop_up"}}</span>
+            </div>
           </div>
-          <div class="users-completion-container collapsed">
+          <div class="users-completion-container">
             {{#if isLoading}}
               {{three-bounce-spinner}}
             {{else}}
