@@ -455,7 +455,9 @@ export default Ember.Service.extend({
         .then(
           function(events) {
             resolve(
-              service.get('analyticsSerializer').normalizeResponse(events)
+              service
+                .get('studentCollectionPerformanceSerializer')
+                .normalizeStudentCollection(events)
             );
           },
           function(error) {
