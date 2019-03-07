@@ -66,7 +66,7 @@
           .competency-completion-info-container {
             border-bottom: 2px solid rgba(0, 0, 0, 0.3);
             display: grid;
-            grid-template-columns: 70% auto auto;
+            grid-template-columns: 70% auto auto auto;
             align-items: center;
             padding: 5px 0;
             margin-left: 15px;
@@ -107,6 +107,11 @@
                   float: right;
                 }
               }
+            }
+
+            .competency-toggle {
+              cursor: pointer;
+              justify-self: center;
             }
           }
 
@@ -202,10 +207,35 @@
             .user-data-not-available {
               text-align: center;
             }
-            &.collapsed {
+          }
+
+          &.collapsed {
+            .competency-completion-info-container {
+              .competency-toggle {
+                .arrow_drop_up {
+                  display: none;
+                }
+                .arrow_drop_down {
+                  display: block;
+                }
+              }
+            }
+            .users-completion-container {
               display: none;
             }
-            &.expanded {
+          }
+          &.expanded {
+            .competency-completion-info-container {
+              .competency-toggle {
+                .arrow_drop_up {
+                  display: block;
+                }
+                .arrow_drop_down {
+                  display: none;
+                }
+              }
+            }
+            .users-completion-container {
               display: block;
             }
           }
@@ -218,6 +248,18 @@
   }
   @media screen and (max-width: 768px) {
     width: 100%;
+
+    .competency-completion-report-container {
+      .competencies-list-container {
+        .competencies-container {
+          .competency-container {
+            .competency-completion-info-container {
+              grid-template-columns: 50% auto auto auto;
+            }
+          }
+        }
+      }
+    }
   }
 
   .trigger-suggestion {
