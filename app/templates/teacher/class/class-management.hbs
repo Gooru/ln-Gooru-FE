@@ -277,7 +277,9 @@
                             displayLabelFieldKey="grade"
                             onChangeAction="updateClassStudentGradeOrigin"
                             selectedItemAssocId=student.id
-                            btn-group-size=btn-group-size}}
+                            btn-group-size=btn-group-size
+                            allowEdit= (if (eq student.diagAsmtState 2) false true)
+                          }}
                         </div>
                       </div>
                     </td>
@@ -295,6 +297,7 @@
                             onChangeAction="updateClassStudentGradeDestination"
                             selectedItemAssocId=student.id
                             btn-group-size=btn-group-size
+                            allowEdit= (if (eq student.diagAsmtState 2) false true)
                          }}
                         </div>
                       </div>
