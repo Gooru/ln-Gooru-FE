@@ -545,7 +545,13 @@ export default Ember.Component.extend({
                   );
                   if (!collection.get('isSuggestedContent')) {
                     component.set('showSuggestion', true);
-                    component.loadSuggestion();
+                    component
+                      .get('classService')
+                      .readClassInfo(context.get('classId'))
+                      .then(classData => {
+                        component.set('class', classData);
+                        component.loadSuggestion();
+                      });
                   }
                 });
             }
@@ -691,6 +697,7 @@ export default Ember.Component.extend({
   loadSuggestion: function() {
     let component = this;
     component.set('isSuggestionLoading', true);
+    let primaryLanguage = component.get('class.primaryLanguage');
     let collection = this.get('collections');
     let taxonomies = null;
     let tags = component.get('tags');
@@ -700,17 +707,22 @@ export default Ember.Component.extend({
       });
     }
     let maxSearchResult = component.get('maxSearchResult');
-    let filters = {
+    let params = {
       pageSize: maxSearchResult,
-      taxonomies: taxonomies
+      taxonomies: taxonomies,
+      filters: {}
     };
+    if (primaryLanguage) {
+      params.filters['flt.languageId'] = primaryLanguage;
+    }
+
     let term =
       taxonomies != null && taxonomies.length > 0
         ? '*'
         : collection.get('title');
     component
       .get('searchService')
-      .searchCollections(term, filters)
+      .searchCollections(term, params)
       .then(collectionSuggestResults => {
         if (!component.isDestroyed) {
           // To show appropriate suggest count, check is their any suggest found in assessment type if count is less than.
@@ -721,7 +733,7 @@ export default Ember.Component.extend({
           } else {
             component
               .get('searchService')
-              .searchAssessments(term, filters)
+              .searchAssessments(term, params)
               .then(assessmentSuggestResult => {
                 if (!component.isDestroyed) {
                   let assessmentSuggestCount = assessmentSuggestResult.length;
