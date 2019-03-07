@@ -15,7 +15,8 @@ export default AnalyticsSerializer.extend({
     if (found) {
       let content = payload.content[0];
       let collection = content.collection || content.assessment;
-      let resources = content.resources || content.questions;
+      let resources =
+        content.resources || content.questions || content.usageData;
       return AssessmentResult.create({
         sessionId: collection.sessionId,
         score: collection.score,

@@ -57,6 +57,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
     onClosePullUp() {
       let component = this;
+      component.set('isShowStudentExternalCollectionReport', false);
       component.set('isShowStudentExternalAssessmentReport', false);
       component.set('studentDcaReport', false);
     },
