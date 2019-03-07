@@ -167,7 +167,8 @@ export default Ember.Component.extend({
       let resourceData = {
         resource_id: resource.get('id'),
         resource_type: resource.get('content_format'),
-        time_spent: maxTimeInMilliSec
+        time_spent: maxTimeInMilliSec,
+        question_type: resource.get('type')
       };
       collectionResources.push(resourceData);
     });
