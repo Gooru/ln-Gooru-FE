@@ -211,10 +211,11 @@ export default Ember.Component.extend({
    * Function to triggered once when the component element is first rendered.
    */
   didInsertElement() {
-    this.set('activeContentType', this.get('defaultSuggestContentType'));
-    this.loadData();
-    this.openPullUp();
-    this.handleSearchBar();
+    let component = this;
+    component.set('activeContentType', this.get('defaultSuggestContentType'));
+    component.loadData();
+    component.openPullUp();
+    component.handleSearchBar();
   },
 
   //--------------------------------------------------------------------------
@@ -302,6 +303,7 @@ export default Ember.Component.extend({
       filters = suggestFiltersAndTerm.filters;
       term = suggestFiltersAndTerm.term;
     }
+
     if (activeContentType === 'collection') {
       return component.get('searchService').searchCollections(term, filters);
     } else if (activeContentType === 'assessment') {
@@ -328,6 +330,7 @@ export default Ember.Component.extend({
     let component = this;
     let maxSearchResult = component.get('maxSearchResult');
     let collection = component.get('collection');
+    let primaryLanguage = component.get('class.primaryLanguage');
     let tags = component.get('tags');
     let taxonomies = null;
     if (tags) {
@@ -335,18 +338,22 @@ export default Ember.Component.extend({
         return tag.data.id;
       });
     }
-    let filters = {
+    let params = {
       taxonomies:
         taxonomies != null && taxonomies.length > 0 ? taxonomies : null,
-      pageSize: maxSearchResult
+      pageSize: maxSearchResult,
+      filters: {}
     };
+    if (primaryLanguage) {
+      params.filters['flt.languageId'] = primaryLanguage;
+    }
     let term =
       taxonomies != null && taxonomies.length > 0
         ? '*'
         : collection.get('title');
     return {
       term: term,
-      filters: filters
+      filters: params
     };
   }
 });

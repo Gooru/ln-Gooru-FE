@@ -32,6 +32,11 @@ export default Ember.Component.extend({
    */
   searchService: Ember.inject.service('api-sdk/search'),
 
+  /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -508,6 +513,10 @@ export default Ember.Component.extend({
     if (collectionType === 'collection') {
       component.set('isTimeSpentFltApplied', true);
     }
+    let classService = component.get('classService');
+    let classDataPromise = classId
+      ? classService.readClassInfo(classId)
+      : Ember.RSVP.resolve({});
     return Ember.RSVP.hash({
       collection:
         format === 'assessment'
@@ -526,10 +535,12 @@ export default Ember.Component.extend({
           lessonId,
           collectionId,
           collectionType
-        )
-    }).then(({ collection, performance }) => {
+        ),
+      classData: classDataPromise
+    }).then(({ collection, performance, classData }) => {
       if (!component.isDestroyed) {
         component.set('collection', collection);
+        component.set('class', classData);
         if (format === 'assessment-external') {
           component.parseClassMemberAndExternalPerformanceData(performance);
         } else {
@@ -804,8 +815,13 @@ export default Ember.Component.extend({
     let component = this;
     let maxSearchResult = component.get('maxSearchResult');
     let params = {
-      pageSize: maxSearchResult
+      pageSize: maxSearchResult,
+      filters: {}
     };
+    let primaryLanguage = component.get('class.primaryLanguage');
+    if (primaryLanguage) {
+      params.filters['flt.languageId'] = primaryLanguage;
+    }
     return params;
   }
 });
