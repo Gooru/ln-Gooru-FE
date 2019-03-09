@@ -1247,6 +1247,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.domains-reviewed': 'Domains to be reviewed',
   'teacher-landing.class.atc-view.class-activities-completed':
     'Class Activities Completed',
+  'teacher-landing.class.atc-view.progress-label': 'Progress (# of competencies)',
   'teacher-landing.class.atc-view.class-activities-pending':
     'Class Activities Pending',
   'teacher-landing.class.atc-view.show-all': 'Show All',
@@ -2459,7 +2460,7 @@ export default Object.assign(quizzesTranslations, {
   'report.competency-report.note':
     'Score 80% or more in our signature assessment and show your mastery',
   'report.domain-report': 'Domain Report',
-  'competency-info-content.journey': 'JOURNEY',
+  'competency-info-content.portfolio': 'PORTFOLIO',
   'competency-info-content.metadata': 'METADATA',
   'competency-info-content.learning-map': 'LEARNING MAP',
   'competency-meta-data.title': 'ALT-CONCEPTS',

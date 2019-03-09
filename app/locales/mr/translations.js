@@ -1224,6 +1224,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.collapse': 'कोलॅप्स करा',
   'teacher-landing.class.atc-view.total-competencies-gained':
     'एकूण प्राप्त क्षमता',
+  'teacher-landing.class.atc-view.progress-label': 'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'वर्गाचे नियोजन',
   'teacher-landing.class.offline-class-report.class-report': 'वर्ग अहवाल',
   'teacher-landing.class.offline-class-report.activity-report': 'उपक्रम अहवाल',
@@ -2404,7 +2405,7 @@ export default Object.assign(quizzesTranslations, {
   'report.competency-report.note':
     'Score 80% or more in our signature assessment and show your mastery',
   'report.domain-report': 'डोमेन अहवाल',
-  'competency-info-content.journey': 'JOURNEY',
+  'competency-info-content.portfolio': 'PORTFOLIO',
   'competency-info-content.metadata': 'METADATA',
   'competency-info-content.learning-map': 'LEARNING MAP',
   'competency-meta-data.title': 'ALT-CONCEPTS',
