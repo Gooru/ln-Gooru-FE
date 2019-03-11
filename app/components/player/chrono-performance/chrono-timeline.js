@@ -1,6 +1,11 @@
 import Ember from 'ember';
-import { isCompatibleVW } from 'gooru-web/utils/utils';
-import { SCREEN_SIZES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
+import {
+  SCREEN_SIZES,
+  PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -271,8 +276,7 @@ export default Ember.Component.extend({
       unitId: activity.get('unitId'),
       lessonId: activity.get('lessonId'),
       collectionId: activity.get('id'),
-      sessionId:
-        collectionType === 'assessment' ? activity.get('sessionId') : null,
+      sessionId: collectionType === 'assessment' ? activity.get('sessionId') : null,
       type: collectionType,
       isStudent: true,
       isTeacher: false,
@@ -340,9 +344,7 @@ export default Ember.Component.extend({
   getStudentDCAReportData(activity, collection, collectionType) {
     let component = this;
     return Ember.Object.create({
-      activityDate: moment(activity.get('lastAccessedDate')).format(
-        'YYYY-MM-DD'
-      ),
+      activityDate: activity.get('lastAccessedDate'),
       collectionId: activity.get('collectionId'),
       classId: activity.get('classId'),
       isStudent: true,
