@@ -80,7 +80,8 @@ export default DS.JSONAPISerializer.extend({
       classId: data.classId,
       unitId: data.unitId,
       lessonId: data.lessonId,
-      courseId: data.courseId
+      courseId: data.courseId,
+      contentSource: data.contentSource
     });
   },
 

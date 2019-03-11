@@ -432,6 +432,47 @@ export default Ember.Service.extend({
    * @param  {ClassId} classId        Unique Id of the class
    * @param  {CollectionId} collectionId   Unique Id of the collection.
    * @param  {CollectionType} collectionType Type of the collection, it should be collection/assessment.
+   * @param  {SessionId} sessionId           sessionId of the activity
+   * @param  {UserId} userId
+   */
+  getDCAPerformanceBySessionId(
+    userId,
+    classId,
+    collectionId,
+    collectionType,
+    sessionId
+  ) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('analyticsAdapter')
+        .getDCAPerformanceBySessionId(
+          userId,
+          classId,
+          collectionId,
+          collectionType,
+          sessionId
+        )
+        .then(
+          function(events) {
+            resolve(
+              service
+                .get('studentCollectionPerformanceSerializer')
+                .normalizeStudentCollection(events)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * This Method used to fetch DCA collection/assesssment performance details for the specfic date.
+   * @param  {ClassId} classId        Unique Id of the class
+   * @param  {CollectionId} collectionId   Unique Id of the collection.
+   * @param  {CollectionType} collectionType Type of the collection, it should be collection/assessment.
    * @param  {String} date           Date format should YYYY-MM-DD
    */
   getDCAPerformance(classId, collectionId, collectionType, date) {

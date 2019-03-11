@@ -12,7 +12,7 @@
           <span class="ellipsis">{{collection.title}}</span>
         </div>
         {{#if (or (eq type 'collection' ) (eq type 'collection-external'))}}
-          <div class="performance {{if (or (eq type 'collection-external') (eq activity.status 'in-progress')) 'disable'}}" {{action "onOpenCollectionReport"}} style="background-color:{{defaultBarColor}}">
+          <div class="performance {{if (eq activity.status 'in-progress') 'disable'}}" {{action "onOpenCollectionReport"}} style="background-color:{{defaultBarColor}}">
             <span class="time-spent">
             {{#if activity.timeSpent}}
               {{format-time activity.timeSpent}}
