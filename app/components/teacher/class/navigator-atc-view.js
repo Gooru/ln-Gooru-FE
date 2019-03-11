@@ -14,6 +14,11 @@ export default Ember.Component.extend({
    */
   analyticsService: Ember.inject.service('api-sdk/analytics'),
 
+  /**
+   * @property {Service} I18N service
+   */
+  i18n: Ember.inject.service(),
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
@@ -250,7 +255,7 @@ export default Ember.Component.extend({
       .attr('class', 'placeholder')
       .attr('x', '130')
       .attr('y', '445')
-      .text('Performance');
+      .text(component.get('i18n').t('teacher-landing.class.class-management-tab.performance').string);
 
     svg
       .append('g')
@@ -259,7 +264,7 @@ export default Ember.Component.extend({
       .attr('class', 'placeholder')
       .attr('x', '50')
       .attr('y', '415')
-      .text('competencies');
+      .text(component.get('i18n').t('teacher-landing.class.atc-view.progress-label').string);
 
     let tooltipInterval = null;
     let tooltip = d3

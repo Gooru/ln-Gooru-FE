@@ -1248,6 +1248,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.collapse': 'Collapse',
   'teacher-landing.class.atc-view.total-competencies-gained':
     'Total Competencies Gained',
+  'teacher-landing.class.atc-view.progress-label': 'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'ದೈನಂದಿನ ವರ್ಗ ಚಟುವಟಿಕೆಗಳು',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
   'teacher-landing.class.offline-class-report.activity-report':
@@ -2456,7 +2457,7 @@ export default Object.assign(quizzesTranslations, {
   'report.competency-report.note':
     'Score 80% or more in our signature assessment and show your mastery',
   'report.domain-report': 'ಡೊಮೇನ್ ವರದಿ',
-  'competency-info-content.journey': 'JOURNEY',
+  'competency-info-content.portfolio': 'PORTFOLIO',
   'competency-info-content.metadata': 'METADATA',
   'competency-info-content.learning-map': 'LEARNING MAP',
   'competency-meta-data.title': 'ALT-CONCEPTS',
