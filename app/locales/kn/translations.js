@@ -438,6 +438,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'ನನ್ನ ಪ್ರಶ್ನೆಗಳಿಂದ',
   'common.from-my-resources': 'ನನ್ನ ಸಂಪನ್ಮೂಲಗಳಿಂದ',
   'common.hide-results': 'ಫಲಿತಾಂಶಗಳನ್ನು ಮರೆಮಾಡಿ',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'ಸುಳಿವುಗಳು',
   'common.home': 'ಮನೆ',
   'common.if_questions': 'ನಿಮಗೇನಾದರೂ ಪ್ರಶ್ನೆಗಳಿದ್ದರೆ,',

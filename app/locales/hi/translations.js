@@ -430,6 +430,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'मेरे प्रश्नों से',
   'common.from-my-resources': 'मेरे संसाधनों से',
   'common.hide-results': 'परिणाम छुपाएं',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'संकेत',
   'common.home': 'होम',
   'common.if_questions': 'अगर आपके पास कोई प्रश्न है,',
