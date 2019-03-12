@@ -2521,5 +2521,6 @@ export default Object.assign(quizzesTranslations, {
   'notifications.typeinclass.teacher-override-title':
     'ಶಿಕ್ಷಕರು ನಿಮ್ಮ ಸಲ್ಲಿಕೆಯನ್ನು ಸರಿಪಡಿಸಿದ್ದಾರೆ',
   'notifications.typeinclass.teacher-grading-complete-title':
-    'ಶಿಕ್ಷಕನು ನಿಮ್ಮ ಸಲ್ಲಿಕೆಗಳನ್ನು ತರಗತಿಯಲ್ಲಿ ವರ್ಗೀಕರಿಸಿದ್ದಾನೆ'
+    'ಶಿಕ್ಷಕನು ನಿಮ್ಮ ಸಲ್ಲಿಕೆಗಳನ್ನು ತರಗತಿಯಲ್ಲಿ ವರ್ಗೀಕರಿಸಿದ್ದಾನೆ',
+  'goahead.add.something': 'Go ahead, add something.'
 });

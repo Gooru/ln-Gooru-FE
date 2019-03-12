@@ -101,7 +101,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
      * @param {string} item
      * @param {string} classId
      */
-    selectMenuItem: function(item, classId, isOfflineClass) {
+    selectMenuItem: function(item, classId) {
       const route = this;
       if (item === 'students') {
         route.transitionTo('teacher.class.students-proficiency', classId);
@@ -109,20 +109,22 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
         route.transitionTo('teacher.class.course-map', classId);
       } else if (item === 'class-activities') {
         route.transitionTo('teacher.class.class-activities', classId);
-      } else if (item === 'report') {
-        if (isOfflineClass) {
-          route.transitionTo('teacher.class.class-activities', classId, {
-            queryParams: {
-              tab: 'report'
-            }
-          });
-        } else {
-          route.transitionTo('teacher.class.course-map', classId, {
-            queryParams: {
-              tab: 'report'
-            }
-          });
-        }
+      } else if (item === 'ca-report') {
+        route.transitionTo('teacher.class.class-activities', classId, {
+          queryParams: {
+            tab: 'report'
+          }
+        });
+      } else if (item === 'cm-report') {
+        route.transitionTo('teacher.class.course-map', classId, {
+          queryParams: {
+            tab: 'report'
+          }
+        });
+      } else if (item === 'atc') {
+        route.transitionTo('teacher.class.atc', classId);
+      } else if (item === 'class-management') {
+        route.transitionTo('teacher.class.class-management', classId);
       } else {
         route.transitionTo('teacher-home');
       }

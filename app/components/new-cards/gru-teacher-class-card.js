@@ -43,17 +43,9 @@ export default Ember.Component.extend({
     selectItem: function(item) {
       const classData = this.get('class');
       const classId = classData.id;
-      const isOffline = classData.get('isOffline');
       if (this.get('onItemSelected')) {
-        this.sendAction('onItemSelected', item, classId, isOffline);
+        this.sendAction('onItemSelected', item, classId);
       }
-    },
-
-    showAtc() {
-      const component = this;
-      component
-        .get('router')
-        .transitionTo('teacher.class.atc', component.get('class').id);
     }
   },
   // -------------------------------------------------------------------------
@@ -192,7 +184,7 @@ export default Ember.Component.extend({
   isPremiumClass: Ember.computed('class', function() {
     const controller = this;
     let currentClass = controller.get('class');
-    let classSetting = currentClass.setting;
+    let classSetting = currentClass.get('setting');
     return classSetting ? classSetting['course.premium'] : false;
   })
 });
