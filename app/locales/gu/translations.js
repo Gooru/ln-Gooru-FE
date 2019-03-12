@@ -1226,7 +1226,7 @@ export default Object.assign(quizzesTranslations, {
   'login.log-in': 'પ્રવેશ કરો',
   'forgot-password.description': 'તે આપણા બધા માટે થાય છે.',
   'forgot-password.usernameOrEmail': 'કૃપા કરીને તમારું ઇમેઇલ દાખલ કરો',
-  'forgot-password.footer-google-description-1': '[google] સાથે સાઇન ઇન કરીને [1] \ 'દબાવીને ફરી લૉગ ઇન કરવાનો પ્રયાસ કરો. [2]',
+  'forgot-password.footer-google-description-1': '[google] સાથે સાઇન ઇન કરીને [1] \'દબાવીને ફરી લૉગ ઇન કરવાનો પ્રયાસ કરો. [2]',
   'forgot-password.footer-description-1': 'તમને તમારો પાસવર્ડ ફરીથી સેટ કરવા માટે એક લિંક સાથે ઇમેઇલ પ્રાપ્ત થશે.',
   'forgot-password.footer-description-2': 'જો તમારી પાસે કોઈ પ્રશ્નો હોય, તો કૃપા કરીને સંપર્ક કરો',
   'forgot-password.mail': 'support@gooru.org',
