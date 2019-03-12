@@ -2468,5 +2468,6 @@ export default Object.assign(quizzesTranslations, {
   'notifications.typeinclass.teacher-override-title':
     'शिक्षकाने आपली सबमिशन दुरुस्त केली आहे',
   'notifications.typeinclass.teacher-grading-complete-title':
-    'शिक्षकाने आपली सबमिशन श्रेणीमध्ये केली आहे'
+    'शिक्षकाने आपली सबमिशन श्रेणीमध्ये केली आहे',
+  'goahead.add.something': 'Go ahead, add something.'
 });

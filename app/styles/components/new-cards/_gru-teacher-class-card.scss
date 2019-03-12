@@ -39,7 +39,7 @@
         }
       }
 
-      .class-management {
+      .class-settings {
         padding: 10px;
 
         i {
@@ -68,6 +68,45 @@
         font-weight: bold;
         position: relative;
         cursor: pointer;
+
+        &.has-course {
+          &:after {
+            display: block;
+            position: absolute;
+            z-index: 9;
+            background-image: linear-gradient(
+              to bottom,
+              rgba(255, 255, 255, 0) 0,
+              $gray-base 100%
+            );
+            margin-top: -19px;
+            height: 50%;
+            width: 100%;
+            content: "";
+          }
+        }
+
+        &.has-no-course {
+          display: grid;
+          align-items: center;
+          justify-items: center;
+          padding: 0;
+          opacity: 0.5;
+          font-family: Lato;
+          font-weight: 300;
+          font-style: italic;
+          text-align: center;
+          color: #35424b;
+          background-color: #e3e5ea;
+
+          p {
+            font-size: 23px;
+            line-height: 1;
+            font-weight: normal;
+            padding: 0;
+            margin: 0;
+          }
+        }
 
         .current-activity {
           position: absolute;
@@ -121,62 +160,81 @@
             }
           }
         }
-
-        &:after {
-          display: block;
-          position: absolute;
-          z-index: 9;
-          background-image: linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0) 0,
-            $gray-base 100%
-          );
-          margin-top: -19px;
-          height: 50%;
-          width: 100%;
-          content: "";
-        }
       }
 
       .card-action-container {
         display: grid;
-        grid-template-columns: 40px 110px 110px 40px;
+        grid-template-columns: 50px 100px 100px 50px;
         justify-items: center;
         height: 50px;
         box-shadow: 1px 0 4px 0 rgba(0, 0, 0, 0.5);
 
+        &.premium-class {
+          grid-template-columns: 50px 50px 50px 50px 100px;
+
+          .class-activities,
+          .course-map {
+            grid-template-columns: 50px;
+          }
+        }
+
         .completion-score {
-          display: none;
+          text-align: center;
+          color: $dark-600;
+
+          &.denominator {
+            background-color: #1aa9eb;
+            color: #fff;
+          }
+          width: 100px;
+          padding-top: 10px;
+
+          span {
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            padding-top: 10px;
+          }
         }
 
         .atc-view {
-          align-self: center;
+          border-right: 1px solid #ccc;
           cursor: pointer;
+          padding-top: 16px;
+          width: 50px;
 
           i.icon {
-            background: url("gooru/images/teacher-landing-class-activities.svg");
-            width: 10.2px;
-            height: 15.8px;
+            background: url("gooru/images/atc-view-blue.png");
+            width: 20px;
+            height: 20px;
             display: block;
             object-fit: contain;
+            background-size: 20px 20px;
+            margin: 0 auto;
           }
         }
 
         .course-map {
           display: grid;
-          grid-template-columns: 40px 70px;
-          align-items: center;
+          grid-template-columns: 50px 50px;
           justify-items: center;
-          border-right: 1px solid #ccc;
-          border-left: 1px solid #ccc;
 
           .course-map-icon {
             cursor: pointer;
+            padding-top: 13px;
+            border-right: 1px solid #ccc;
+            width: 50px;
+            text-align: center;
           }
 
           .course-map-score {
             font-weight: bold;
             font-size: 16px;
+            cursor: pointer;
+            padding-top: 10px;
+            border-right: 1px solid #ccc;
+            width: 50px;
+            text-align: center;
           }
 
           i {
@@ -192,20 +250,26 @@
 
         .class-activities {
           display: grid;
-          grid-template-columns: 40px 70px;
-          align-items: center;
+          grid-template-columns: 50px 50px;
           justify-items: center;
           font-weight: bold;
-          border-right: 1px solid #ccc;
-          border-left: 1px solid #ccc;
 
           .class-activities-icon {
             cursor: pointer;
+            padding-top: 18px;
+            border-right: 1px solid #ccc;
+            width: 50px;
+            text-align: center;
           }
 
           .class-activities-score {
             font-weight: bold;
             font-size: 16px;
+            cursor: pointer;
+            padding-top: 10px;
+            border-right: 1px solid #ccc;
+            width: 50px;
+            text-align: center;
           }
 
           &.grade-range-not-started {
@@ -220,12 +284,16 @@
             height: 15.8px;
             display: block;
             object-fit: contain;
+            margin: 0 auto;
           }
         }
 
         .student-proficiency {
-          align-self: center;
           cursor: pointer;
+          padding-top: 13px;
+          border-right: 1px solid #ccc;
+          width: 50px;
+          text-align: center;
 
           i {
             color: $dark-600;

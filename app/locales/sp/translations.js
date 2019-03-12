@@ -2523,5 +2523,6 @@ export default Object.assign(quizzesTranslations, {
   'notifications.typeinclass.teacher-override-title':
     'Teacher has corrected your submission',
   'notifications.typeinclass.teacher-grading-complete-title':
-    'Teacher has graded your submission at class'
+    'Teacher has graded your submission at class',
+  'goahead.add.something': 'Go ahead, add something.'
 });

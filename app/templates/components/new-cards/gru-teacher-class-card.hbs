@@ -3,52 +3,63 @@
     <div class="title ellipsis" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}" data-trigger="hover">
       {{truncate text=class.title maxLength=25}}
     </div>
-    <div title="{{t 'teacher-landing.class.class-management'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
+    <div class="class-settings" {{action 'selectItem' 'class-management'}} title="{{t 'teacher-landing.class.class-management'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
       {{gru-icon name="settings"}}
     </div>
   </div>
 
   <div class="panel-body">
-    <div class="information" style="background-image: url({{course.thumbnailUrl}})" {{action 'showAtc' }}>
+    <div class="information {{if course 'has-course' 'has-no-course'}}" style="background-image: url({{course.thumbnailUrl}})">
       <div class="current-activity">
-        {{t (if course "student-landing.class.assigned-course" "student-landing.class.no-course-assigned") }}
+        {{#if course}}
+          <span>{{t "student-landing.class.assigned-course"}}</span>
+        {{else}}
+          <p>{{t "student-landing.class.no-course-assigned"}}</p>
+          <p>{{t "goahead.add.something"}}</p>
+        {{/if}}
       </div>
-      <div class="title-section">
-        {{#if course.title}}
+      {{#if course}}
+        <div class="title-section">
           <div {{action 'selectItem' 'course-map'}} class="title pointer" alt="{{course.title}}">
             {{truncate text=course.title maxLength=90}}
           </div>
-        {{else}}
-          <span>{{t "student-landing.not-available"}}</span>
-        {{/if}}
-      </div>
+        </div>
+      {{/if}}
     </div>
-    <div class="card-action-container {{if class.isPremiumClass 'premium-class'}}">
-      <div class="atc-view" data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.atc'}}" data-trigger="hover">
+    <div class="card-action-container {{if isPremiumClass 'premium-class'}}">
+      <div class="atc-view" {{action 'selectItem' 'atc'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.atc'}}" data-trigger="hover">
         <i class="icon" />
       </div>
-      <div class="course-map grade-range-{{grade-range class.performanceSummary.score}}" data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}" data-trigger="hover">
-        <div class="course-map-icon">
+      <div class="course-map {{if (not isPremiumClass) (concat 'grade-range-' (grade-range class.performanceSummary.score))}}">
+        <div class="course-map-icon" {{action 'selectItem' 'course-map'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}" data-trigger="hover">
           {{gru-icon name="sort"}}
         </div>
-        <div class="course-map-score">
-          {{if (and (gte class.performanceSummary.score 0) class.performanceSummary.score ) (concat class.performanceSummary.score '%') '--' }}
-        </div>
+        {{#if (not isPremiumClass)}}
+          <div class="course-map-score" {{action 'selectItem' 'cm-report'}}>
+            {{if (and (gte class.performanceSummary.score 0) class.performanceSummary.score ) (concat class.performanceSummary.score '%') '--' }}
+          </div>
+        {{/if}}
       </div>
-      <div class="class-activities grade-range-{{grade-range class.performanceSummaryForDCA.score}}">
-        <div class="class-activities-icon" data-placement="bottom" data-toggle="tooltip" title="{{t 'student-landing.class.class-activities'}}" data-trigger="hover">
+      <div class="class-activities {{if (not isPremiumClass) (concat 'grade-range-' (grade-range class.performanceSummaryForDCA.score))}}">
+        <div class="class-activities-icon" {{action 'selectItem' 'class-activities'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'student-landing.class.class-activities'}}" data-trigger="hover">
           <i class="icon" />
         </div>
-        <div class="class-activities-score">
-          {{if (and (gte class.performanceSummaryForDCA.score 0) class.performanceSummaryForDCA.score ) (concat class.performanceSummaryForDCA.score '%') '--' }}
-        </div>
+        {{#if (not isPremiumClass)}}
+          <div class="class-activities-score" {{action 'selectItem' 'ca-report'}}>
+            {{if (and (gte class.performanceSummaryForDCA.score 0) class.performanceSummaryForDCA.score ) (concat class.performanceSummaryForDCA.score '%') '--' }}
+          </div>
+        {{/if}}
       </div>
-      <div class="student-proficiency" data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.student-proficiency'}}" data-trigger="hover">
+      <div class="student-proficiency" {{action 'selectItem' 'students'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.student-proficiency'}}" data-trigger="hover">
         {{gru-icon name="school"}}
       </div>
-      {{#if class.isPremiumClass}}
-        <div class="completion-score">
-          <span>{{totalCompleted}}/{{total}}</span>
+      {{#if isPremiumClass}}
+        <div class="completion-score {{if total 'denominator'}}" {{action 'selectItem' 'students'}}>
+          {{#if total}}
+            <span>{{totalCompleted}}/{{total}}</span>
+          {{else}}
+            <span>--</span>
+          {{/if}}
         </div>
       {{/if}}
     </div>
