@@ -30,16 +30,6 @@
       <div class="atc-view" {{action 'selectItem' 'atc'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.atc'}}" data-trigger="hover">
         <i class="icon" />
       </div>
-      <div class="course-map {{if (not isPremiumClass) (concat 'grade-range-' (grade-range class.performanceSummary.score))}}">
-        <div class="course-map-icon" {{action 'selectItem' 'course-map'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}" data-trigger="hover">
-          {{gru-icon name="sort"}}
-        </div>
-        {{#if (not isPremiumClass)}}
-          <div class="course-map-score" {{action 'selectItem' 'cm-report'}}>
-            {{if (and (gte class.performanceSummary.score 0) class.performanceSummary.score ) (concat class.performanceSummary.score '%') '--' }}
-          </div>
-        {{/if}}
-      </div>
       <div class="class-activities {{if (not isPremiumClass) (concat 'grade-range-' (grade-range class.performanceSummaryForDCA.score))}}">
         <div class="class-activities-icon" {{action 'selectItem' 'class-activities'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'student-landing.class.class-activities'}}" data-trigger="hover">
           <i class="icon" />
@@ -47,6 +37,16 @@
         {{#if (not isPremiumClass)}}
           <div class="class-activities-score" {{action 'selectItem' 'ca-report'}}>
             {{if (and (gte class.performanceSummaryForDCA.score 0) class.performanceSummaryForDCA.score ) (concat class.performanceSummaryForDCA.score '%') '--' }}
+          </div>
+        {{/if}}
+      </div>
+      <div class="course-map {{if (not isPremiumClass) (concat 'grade-range-' (grade-range class.performanceSummary.score))}}">
+        <div class="course-map-icon" {{action 'selectItem' 'course-map'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}" data-trigger="hover">
+          {{gru-icon name="sort"}}
+        </div>
+        {{#if (not isPremiumClass)}}
+          <div class="course-map-score" {{action 'selectItem' 'cm-report'}}>
+            {{if (and (gte class.performanceSummary.score 0) class.performanceSummary.score ) (concat class.performanceSummary.score '%') '--' }}
           </div>
         {{/if}}
       </div>
