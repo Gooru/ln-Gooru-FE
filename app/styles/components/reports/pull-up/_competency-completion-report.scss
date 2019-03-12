@@ -50,6 +50,8 @@
       .competencies-container {
         height: 83vh;
         overflow-y: auto;
+        padding-bottom: 35px;
+        padding-right: 5px;
         &::-webkit-scrollbar {
           height: 6px;
           width: 4px;
@@ -64,7 +66,7 @@
           .competency-completion-info-container {
             border-bottom: 2px solid rgba(0, 0, 0, 0.3);
             display: grid;
-            grid-template-columns: 70% auto;
+            grid-template-columns: 70% auto auto auto;
             align-items: center;
             padding: 5px 0;
             margin-left: 15px;
@@ -80,6 +82,11 @@
                 font-weight: bold;
                 color: #37424b;
               }
+            }
+            .competency-suggestion {
+              justify-self: center;
+              color: #f98e4e;
+              line-height: 10px;
             }
             .competency-completion-performance {
               display: grid;
@@ -101,6 +108,11 @@
                 }
               }
             }
+
+            .competency-toggle {
+              cursor: pointer;
+              justify-self: center;
+            }
           }
 
           .users-completion-container {
@@ -120,12 +132,50 @@
                   display: block;
                   background-repeat: no-repeat;
                   border-radius: 50%;
+                  cursor: pointer;
+
+                  i.tick-icon {
+                    display: none;
+                  }
+
+                  &.selected-student {
+                    background-image: unset !important;
+                    background-color: #f98e4e;
+
+                    i.tick-icon {
+                      display: block;
+                      text-align: center;
+                      line-height: 30px;
+                      color: $white;
+                    }
+                  }
                 }
                 .user-name {
                   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
                   height: inherit;
                   line-height: 40px;
                   text-transform: capitalize;
+                }
+              }
+
+              .user-competency-status {
+                display: grid;
+                justify-content: right;
+                grid-template-columns: auto auto;
+                align-items: center;
+                column-gap: 10px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+                .competency-status-text {
+                  font-size: 15px;
+                  font-weight: bold;
+                  text-align: right;
+                  color: #3a444d;
+                }
+                .competency-status-color {
+                  width: 30px;
+                  height: 30px;
+                  display: block;
+                  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
                 }
               }
               .user-completion-performance {
@@ -157,10 +207,35 @@
             .user-data-not-available {
               text-align: center;
             }
-            &.collapsed {
+          }
+
+          &.collapsed {
+            .competency-completion-info-container {
+              .competency-toggle {
+                .arrow_drop_up {
+                  display: none;
+                }
+                .arrow_drop_down {
+                  display: block;
+                }
+              }
+            }
+            .users-completion-container {
               display: none;
             }
-            &.expanded {
+          }
+          &.expanded {
+            .competency-completion-info-container {
+              .competency-toggle {
+                .arrow_drop_up {
+                  display: block;
+                }
+                .arrow_drop_down {
+                  display: none;
+                }
+              }
+            }
+            .users-completion-container {
               display: block;
             }
           }
@@ -173,5 +248,59 @@
   }
   @media screen and (max-width: 768px) {
     width: 100%;
+
+    .competency-completion-report-container {
+      .competencies-list-container {
+        .competencies-container {
+          .competency-container {
+            .competency-completion-info-container {
+              grid-template-columns: 50% auto auto auto;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .trigger-suggestion {
+    display: grid;
+    grid-template-columns: 40px 30px 30px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    height: 30px;
+    align-items: center;
+    justify-content: left;
+    padding: 0 15px;
+    box-shadow: 1px 15px 20px 20px rgba(0, 0, 0, 0.13);
+
+    .activity-type {
+      width: 40px;
+      height: 30px;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      opacity: 1;
+      cursor: pointer;
+      font-weight: bold;
+      i {
+        width:20px;
+        height: 20px;
+        background-size: 20px 20px;
+        display: block;
+      }
+    }
+    .collection {
+      i {
+        background-image: url("../assets/gooru/images/collection_gray.svg");
+      }
+    }
+
+    .assessment {
+      i {
+        background-image: url("../assets/gooru/images/assessment-gray.svg");
+      }
+    }
   }
 }

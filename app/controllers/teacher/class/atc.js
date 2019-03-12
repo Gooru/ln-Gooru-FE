@@ -130,11 +130,39 @@ export default Ember.Controller.extend({
     return isStudentsAvailable && isCourseMapped;
   }),
 
+  /**
+   * @property {Boolean} isShowActivitySearchContentPullup
+   * Property to show/hide activity search content pullup
+   */
+  isShowActivitySearchContentPullup: false,
+
+  /**
+   * @property {String} defaultContentTypeToSuggest
+   * Property to hold default content suggstion
+   */
+  defaultContentTypeToSuggest: 'collection',
+
+  /**
+   * @property {Array} selectedStudents
+   * Property to hold list of students to suggest
+   */
+  selectedStudents: Ember.A([]),
+
+  /**
+   * @property {Json} classPreference
+   */
+  classPreference: Ember.computed.alias('class.preference'),
+
+  /**
+   * @property {Boolean} isOfflineClass
+   */
+  isOfflineClass: Ember.computed.alias('class.isOffline'),
+
   // -------------------------------------------------------------------------
   // Events
   initializeController() {
     const controller = this;
-    if (controller.get('isPremiumClass')) {
+    if (controller.get('isPremiumClass') && controller.get('isShowAtcView')) {
       if (isCompatibleVW('medium')) {
         controller.set('userAgent', 'mobile');
       }
@@ -183,6 +211,35 @@ export default Ember.Controller.extend({
       controller.transitionToRoute('teacher.class.class-activities', classId, {
         queryParams
       });
+    },
+
+    //Action triggered when click on competency suggestion
+    onSuggestAtCompetency(competency, selectedContentType = null, selectedStudents = []) {
+      const controller = this;
+      let contextParams = {
+        classId: controller.get('classId'),
+        class: controller.get('class'),
+        course: controller.get('course'),
+        courseId: controller.get('courseId')
+      };
+      controller.set('contextParams', contextParams);
+      controller.set('selectedCompetencyData', competency);
+      controller.set('isShowActivitySearchContentPullup', true);
+      controller.set('selectedContentType', selectedContentType || controller.get('defaultContentTypeToSuggest'));
+      controller.set('selectedStudents', selectedStudents);
+    },
+
+    //Action triggered at once an activity added into the DCA
+    addedContentToDCA(activityData) {
+      const controller = this;
+      let selectedStudents = controller.get('selectedStudents');
+      if (selectedStudents.length) {
+        let studentIds = selectedStudents.map(student => {
+          return student.get('id');
+        });
+        let activityId = activityData.get('id');
+        controller.assignStudentsToContent(studentIds, activityId);
+      }
     }
   },
 
@@ -286,5 +343,17 @@ export default Ember.Controller.extend({
       domainsCompletionList.concat(notStartedCompletionList)
     );
     return domainsCompletionList;
+  },
+
+  /**
+   * @function assignStudentsToContent
+   * Method to assign list of students into an activity
+   */
+  assignStudentsToContent(studentIds, contentId) {
+    const controller = this;
+    const classId = controller.get('classId');
+    controller
+      .get('classActivitiesService')
+      .addUsersToActivity(classId, contentId, studentIds);
   }
 });

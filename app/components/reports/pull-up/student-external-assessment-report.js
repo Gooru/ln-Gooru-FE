@@ -36,6 +36,11 @@ export default Ember.Component.extend({
    */
   courseMapService: Ember.inject.service('api-sdk/course-map'),
 
+  /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -260,7 +265,13 @@ export default Ember.Component.extend({
           );
           if (!collection.get('isSuggestedContent')) {
             component.set('showSuggestion', true);
-            component.loadSuggestion();
+            component
+              .get('classService')
+              .readClassInfo(context.get('classId'))
+              .then(classData => {
+                component.set('class', classData);
+                component.loadSuggestion();
+              });
           }
         });
     }
@@ -270,6 +281,7 @@ export default Ember.Component.extend({
     let component = this;
     component.set('isSuggestionLoading', true);
     let collection = this.get('externalAssessmentContent');
+    let primaryLanguage = component.get('class.primaryLanguage');
     let taxonomies = null;
     let tags = component.get('tags');
     if (tags) {
@@ -278,17 +290,21 @@ export default Ember.Component.extend({
       });
     }
     let maxSearchResult = component.get('maxSearchResult');
-    let filters = {
+    let params = {
       pageSize: maxSearchResult,
-      taxonomies: taxonomies
+      taxonomies: taxonomies,
+      filters: {}
     };
+    if (primaryLanguage) {
+      params.filters['flt.languageId'] = primaryLanguage;
+    }
     let term =
       taxonomies != null && taxonomies.length > 0
         ? '*'
         : collection.get('title');
     component
       .get('searchService')
-      .searchCollections(term, filters)
+      .searchCollections(term, params)
       .then(collectionSuggestResults => {
         if (!component.isDestroyed) {
           // To show appropriate suggest count, check is their any suggest found in assessment type if count is less than.
@@ -299,7 +315,7 @@ export default Ember.Component.extend({
           } else {
             component
               .get('searchService')
-              .searchAssessments(term, filters)
+              .searchAssessments(term, params)
               .then(assessmentSuggestResult => {
                 if (!component.isDestroyed) {
                   let assessmentSuggestCount = assessmentSuggestResult.length;

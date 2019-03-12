@@ -153,7 +153,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
             ? payload.is_active
             : null,
         profileBaselineDone: payload.profile_baseline_done,
-        loginType: payload.login_type
+        loginType: payload.login_type,
+        diagAsmtState: payload.diag_asmt_state
       });
     }
   },

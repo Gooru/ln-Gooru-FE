@@ -157,6 +157,7 @@ export default Ember.Component.extend({
       new Date(component.get('activityData.activation_date')) || new Date();
     let classId = component.get('classId');
     let collection = component.get('collection');
+    let courseId = component.get('course') ? component.get('course').id : null;
     resources.forEach(function(resource) {
       let maxHour = parseInt(resource.maxHour);
       let maxMins = parseInt(resource.maxMins);
@@ -166,7 +167,8 @@ export default Ember.Component.extend({
       let resourceData = {
         resource_id: resource.get('id'),
         resource_type: resource.get('content_format'),
-        time_spent: maxTimeInMilliSec
+        time_spent: maxTimeInMilliSec,
+        question_type: resource.get('type')
       };
       collectionResources.push(resourceData);
     });
@@ -182,7 +184,8 @@ export default Ember.Component.extend({
       conducted_on: conductedOn.toISOString(),
       path_id: 0,
       path_type: null,
-      resources: collectionResources
+      resources: collectionResources,
+      course_id: courseId
     };
     return studentPerformanceData;
   },

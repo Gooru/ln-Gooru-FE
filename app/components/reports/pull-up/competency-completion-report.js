@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { SEARCH_FILTER_BY_CONTENT_TYPES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -15,11 +16,16 @@ export default Ember.Component.extend({
     this.openPullUp();
   },
 
+  willDestroyElement() {
+    const component = this;
+    component.set('selectedUserIds', Ember.A([]));
+  },
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
     //Action triggered when select a competency
-    onSelectCompetency(competencyData, competencySeq) {
+    onSelectCompetency(competencyData) {
       const component = this;
       let domainData = component.get('domainData');
       if (!competencyData.get('usersCompletionSummary')) {
@@ -32,20 +38,75 @@ export default Ember.Component.extend({
           .then(function(usersCompletionSummary) {
             competencyData.set(
               'usersCompletionSummary',
-              usersCompletionSummary.sortBy('score')
+              usersCompletionSummary.sortBy('status')
             );
             component.set('isLoading', false);
           });
       }
-      component.toggleCompetencyContainer(competencySeq);
+      component.resetSelectedUserIds(competencyData);
+      component.set('activeCompetency', competencyData);
+      component.toggleCompetencyContainer(competencyData);
     },
 
     //Action triggered when close pullup
     onClosePullup() {
       const component = this;
       component.closePullUp();
+    },
+
+    //Action triggered when click on competency suggestion
+    onSuggestAtCompetency(competency) {
+      const component = this;
+      component.resetSelectedUserIds(competency);
+      component.sendAction('onSuggestAtCompetency', competency);
+    },
+
+    //Action triggered when filter by content type
+    onFilterBy(contentType) {
+      const component = this;
+      let activeCompetency = component.get('activeCompetency');
+      let userIds = component.get('selectedUserIds');
+      component.sendAction('onSuggestAtCompetency', activeCompetency, contentType, userIds);
+    },
+
+    //Action triggered when select/unselect a student
+    onSelectStudent(userCompletionData) {
+      const component = this;
+      let selectedUserIds = component.get('selectedUserIds');
+      if (userCompletionData.get('selected')) {
+        userCompletionData.set('selected', false);
+        selectedUserIds.removeObject(userCompletionData);
+      } else {
+        userCompletionData.set('selected', true);
+        selectedUserIds.pushObject(userCompletionData);
+      }
     }
   },
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {Array} contentTypes
+   */
+  contentTypes: SEARCH_FILTER_BY_CONTENT_TYPES,
+
+  /**
+   * @property {Object} activeCompetency
+   */
+  activeCompetency: null,
+
+  /**
+   * @property {Array} selectedUserIds
+   */
+  selectedUserIds: Ember.A([]),
+
+  /**
+   * @property {Boolean} isShowStudentSuggestion
+   */
+  isShowStudentSuggestion: Ember.computed('selectedUserIds.[]', function() {
+    return this.get('selectedUserIds.length');
+  }),
 
   // -------------------------------------------------------------------------
   // Functions
@@ -80,19 +141,11 @@ export default Ember.Component.extend({
    * @function toggleCompetencyContainer
    * Method to toggle competency container view
    */
-  toggleCompetencyContainer(competencySeq) {
-    const component = this;
-    const competencyContainer = component.$(
-      '.competency-container .users-completion-container'
-    );
-    const selectedCompletionContainer = component.$(
-      `.competency-${competencySeq} .users-completion-container`
-    );
-    if (selectedCompletionContainer.hasClass('collapsed')) {
-      competencyContainer.removeClass('expanded').addClass('collapsed');
-      selectedCompletionContainer.addClass('expanded').removeClass('collapsed');
+  toggleCompetencyContainer(competencyData) {
+    if (competencyData.get('isExpanded')) {
+      competencyData.set('isExpanded', false);
     } else {
-      selectedCompletionContainer.toggleClass('expanded').addClass('collapsed');
+      competencyData.set('isExpanded', true);
     }
   },
 
@@ -122,5 +175,19 @@ export default Ember.Component.extend({
     }).then(({ usersPerformanceSummary }) => {
       return usersPerformanceSummary;
     });
+  },
+
+  /**
+   * @function resetSelectedUserIds
+   * Method to reset selected userIds
+   */
+  resetSelectedUserIds(competencyData) {
+    const component = this;
+    let activeCompetency = component.get('activeCompetency');
+    if (activeCompetency && (competencyData.get('competencyCode') !== activeCompetency.get('competencyCode'))) {
+      let selectedUsers = component.get('selectedUserIds');
+      selectedUsers.map( selectedUser => selectedUser.set('selected', false));
+      component.set('selectedUserIds', Ember.A([]));
+    }
   }
 });

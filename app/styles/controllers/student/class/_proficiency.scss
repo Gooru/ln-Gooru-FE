@@ -72,3 +72,27 @@
     }
   }
 }
+
+#toast-container.toast-top-full-width.student-class-proficiency {
+  top: 55px;
+  width: 100%;
+  position: fixed;
+  @media (min-width: $screen-md) {
+    top: 63px;
+  }
+
+  > div.toast-error {
+    width: inherit;
+    background-image: none !important;
+    background-color: $red-400;
+    opacity: 1;
+    @media (max-width: $screen-xs-min) {
+      padding: 10px;
+      margin: 0;
+    }
+
+    .toast-message {
+      text-align: center;
+    }
+  }
+}

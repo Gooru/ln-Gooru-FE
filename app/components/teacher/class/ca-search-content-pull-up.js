@@ -1,10 +1,12 @@
 import Ember from 'ember';
 import {
   SEARCH_FILTER_BY_CONTENT_TYPES,
-  KEY_CODES
+  KEY_CODES,
+  SCREEN_SIZES
 } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -212,6 +214,18 @@ export default Ember.Component.extend({
    * @type {Boolean}
    */
   isCourseMap: false,
+
+  /**
+   * @property {Object} competencyData
+   * Property to hold selected competency data
+   */
+  competencyData: null,
+
+  /**
+   * @property {Boolean} isShowListView
+   * Property to toggle between list/grid view
+   */
+  isShowListView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
   // -------------------------------------------------------------------------
   // actions
@@ -594,16 +608,29 @@ export default Ember.Component.extend({
       page: component.get('page'),
       pageSize: component.get('defaultSearchPageSize')
     };
+
     let term = component.getSearchTerm();
     if (!term) {
       let grade = component.get('class.grade');
       let subject = component.get('course.subject');
+      let competencyData = component.get('competencyData');
+      let primaryLanguage = component.get('class.primaryLanguage');
+      let gutCode = competencyData
+        ? competencyData.get('competencyCode')
+        : null;
       let filters = {};
       if (grade) {
         filters['flt.grade'] = grade;
       }
       if (subject) {
         filters['flt.subject'] = subject;
+      }
+
+      if (gutCode) {
+        filters['flt.gutCode'] = gutCode;
+      }
+      if (primaryLanguage) {
+        filters['flt.languageId'] = primaryLanguage;
       }
       params.filters = filters;
     }
