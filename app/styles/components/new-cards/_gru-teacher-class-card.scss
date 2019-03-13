@@ -198,7 +198,7 @@
         }
 
         .atc-view {
-          border-right: 1px solid #ccc;
+          border-right: 1px solid $gray-80;
           cursor: pointer;
           padding-top: 16px;
           width: 50px;
@@ -222,7 +222,7 @@
           .course-map-icon {
             cursor: pointer;
             padding-top: 13px;
-            border-right: 1px solid #ccc;
+            border-right: 1px solid $gray-80;
             width: 50px;
             text-align: center;
           }
@@ -232,7 +232,7 @@
             font-size: 16px;
             cursor: pointer;
             padding-top: 10px;
-            border-right: 1px solid #ccc;
+            border-right: 1px solid $gray-80;
             width: 50px;
             text-align: center;
           }
@@ -257,7 +257,7 @@
           .class-activities-icon {
             cursor: pointer;
             padding-top: 18px;
-            border-right: 1px solid #ccc;
+            border-right: 1px solid $gray-80;
             width: 50px;
             text-align: center;
           }
@@ -267,7 +267,7 @@
             font-size: 16px;
             cursor: pointer;
             padding-top: 10px;
-            border-right: 1px solid #ccc;
+            border-right: 1px solid $gray-80;
             width: 50px;
             text-align: center;
           }
@@ -291,7 +291,7 @@
         .student-proficiency {
           cursor: pointer;
           padding-top: 13px;
-          border-right: 1px solid #ccc;
+          border-right: 1px solid $gray-80;
           width: 50px;
           text-align: center;
 

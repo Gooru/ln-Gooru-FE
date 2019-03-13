@@ -74,12 +74,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   performanceSummaryForDCA: null,
 
-  /**
-   * @property {Boolean}
-   * property  to identify class is offline or not
-   */
-  isOfflineClass: false,
-
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -143,7 +137,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
     const { getOwner } = Ember;
     let currentPath = getOwner(this).lookup('controller:application')
       .currentPath;
-
     let component = this;
     if (currentPath === 'teacher.class.students') {
       component.set('selectedMenuItem', 'students');
