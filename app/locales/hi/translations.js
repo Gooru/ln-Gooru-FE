@@ -469,6 +469,10 @@ export default Object.assign(quizzesTranslations, {
   'common.loading': 'लोड हो रहा है ...',
   'common.login': 'लॉग इन करें',
   'common.logout': 'लॉग आउट',
+  'common.logout.head':
+    'Learning Navigator: \n Every Student \n Achieves Mastery',
+  'common.logout.description':
+    'Learning Navigator is designed as “GPS for Learning” — a way for each student to follow their own path to mastery. Schools ask every student to achieve the same level of proficiency, but each student begins with a different set of knowledge and skills. The Learning Navigator meets each student exactly where they are and navigates them to their learning goals. ',
   'common.mastery': 'दक्षता',
   'common.menu': 'मेन्यू',
   'common.more-details': 'अधिक जानकारी',
@@ -1246,7 +1250,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.collapse': 'समेटें',
   'teacher-landing.class.atc-view.total-competencies-gained':
     'कुल हासिल दक्षताएँ',
-  'teacher-landing.class.atc-view.progress-label': 'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'कक्षा की दैनिक गतिविधियां',
   'teacher-landing.class.offline-class-report.class-report': 'कक्षा की रिपोर्ट',
   'teacher-landing.class.offline-class-report.activity-report':

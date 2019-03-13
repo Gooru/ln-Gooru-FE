@@ -479,6 +479,10 @@ export default Object.assign(quizzesTranslations, {
   'common.loading': 'Cargando ...',
   'common.login': 'Iniciar sesión',
   'common.logout': 'Cerrar sesión',
+  'common.logout.head':
+    'Learning Navigator: \n Every Student \n Achieves Mastery',
+  'common.logout.description':
+    'Learning Navigator is designed as “GPS for Learning” — a way for each student to follow their own path to mastery. Schools ask every student to achieve the same level of proficiency, but each student begins with a different set of knowledge and skills. The Learning Navigator meets each student exactly where they are and navigates them to their learning goals. ',
   'common.mastery': 'Maestría',
   'common.menu': 'Menú',
   'common.more-details': 'Más detalles',
@@ -1256,7 +1260,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.domains-reviewed': 'Domains to be reviewed',
   'teacher-landing.class.atc-view.class-activities-completed':
     'Class Activities Completed',
-  'teacher-landing.class.atc-view.progress-label': 'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.atc-view.class-activities-pending':
     'Class Activities Pending',
   'teacher-landing.class.atc-view.show-all': 'Show All',

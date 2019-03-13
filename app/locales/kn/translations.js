@@ -477,6 +477,10 @@ export default Object.assign(quizzesTranslations, {
   'common.loading': 'ಲೋಡ್ ಆಗುತ್ತಿದೆ ...',
   'common.login': 'ಲಾಗ್ ಇನ್ ಮಾಡಿ',
   'common.logout': 'ಲಾಗ್ ಔಟ್',
+  'common.logout.head':
+    'Learning Navigator: \n Every Student \n Achieves Mastery',
+  'common.logout.description':
+    'Learning Navigator is designed as “GPS for Learning” — a way for each student to follow their own path to mastery. Schools ask every student to achieve the same level of proficiency, but each student begins with a different set of knowledge and skills. The Learning Navigator meets each student exactly where they are and navigates them to their learning goals. ',
   'common.mastery': 'ಪಾಂಡಿತ್ಯ',
   'common.menu': 'ಮೆನು',
   'common.more-details': 'ಹೆಚ್ಚಿನ ವಿವರಗಳಿಗಾಗಿ',
@@ -1257,7 +1261,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.collapse': 'Collapse',
   'teacher-landing.class.atc-view.total-competencies-gained':
     'Total Competencies Gained',
-  'teacher-landing.class.atc-view.progress-label': 'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'ದೈನಂದಿನ ವರ್ಗ ಚಟುವಟಿಕೆಗಳು',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
   'teacher-landing.class.offline-class-report.activity-report':
