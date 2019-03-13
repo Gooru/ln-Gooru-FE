@@ -161,7 +161,7 @@ export default Ember.Component.extend({
     /**
      * Action triggered at once the baseline is drawn
      */
-    onShownBaseLine(createdDate) {
+    onShownBaseLine() {
       let component = this;
       component.set('isShowTimeSeries', true);
     },
