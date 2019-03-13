@@ -94,7 +94,7 @@ export default Ember.Component.extend({
   /**
    * @property {Date} timeSeriesStartDate
    */
-  timeSeriesStartDate: null,
+  timeSeriesStartDate: Ember.computed.alias('class.startDate'),
 
   selectedCategory: null,
 
@@ -163,10 +163,6 @@ export default Ember.Component.extend({
      */
     onShownBaseLine(createdDate) {
       let component = this;
-      component.set(
-        'timeSeriesStartDate',
-        createdDate ? new Date(createdDate) : component.get('courseStartDate')
-      );
       component.set('isShowTimeSeries', true);
     },
     /**
