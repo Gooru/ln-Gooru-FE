@@ -1,9 +1,8 @@
 <div class="header-panel" {{action 'closeNotificationList'}}>
-  <div class="nav-body">
+  <div class="nav-body nav-menu-{{selectedMenuItem}} {{if isPremiumClass 'premium-class'}}">
     <div class="app-close">
       {{#link-to 'index' class="navbar-brand home-link material-icons close" }}
         <i class="gru-icon material-icons close">close</i>
-        {{!-- {{gru-icon name='close'}} --}}
       {{/link-to}}
     </div>
     {{#unless class.isArchived}}
@@ -13,17 +12,21 @@
           <span class="add-info">{{t 'teacher-landing.class.performance-overview'}}</span>
         </a>
       </div>
-      <div class="class-activities tab">
+      <div class="class-activities tab grade-range-{{grade-range performanceSummaryForDCA.performance.scoreInPercentage}} {{if (eq selectedMenuItem 'class-activities') 'vactive'}}">
         <a {{action 'selectItem' 'class-activities'}} class="dca" title="{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
           <span class="dca-pin"></span>
           <span class="add-info">{{t 'teacher-landing.class.class-activities'}}</span>
+          <span class="performance-score">{{if (and (gte performanceSummaryForDCA.performance.scoreInPercentage 0) performanceSummaryForDCA.performance.scoreInPercentage ) (concat performanceSummaryForDCA.performance.scoreInPercentage '%') '--' }}</span>
         </a>
+
       </div>
-      <div class="course-map tab">
+      <div class="course-map tab grade-range-{{grade-range class.performanceSummary.score}} {{if (eq selectedMenuItem 'course-map') 'vactive'}}">
         <a {{action 'selectItem' 'course-map'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}">
           {{gru-icon name='sort'}}
           <span class="add-info">{{t 'teacher-landing.class.course-map'}}</span>
+          <span class="performance-score">{{if (and (gte class.performanceSummary.score 0) class.performanceSummary.score ) (concat class.performanceSummary.score '%') '--' }}</span>
         </a>
+
       </div>
       <div class="students tab">
         <a {{action 'selectItem' 'students'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.student-proficiency' }}">
@@ -42,21 +45,16 @@
         {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' isTeacher=true classId=class.id }}
       </div>
     {{/if}}
-    <div class="performance-summary">
-      {{#if isOfflineClass}}
-        <div class="dca-performance {{unless performanceSummaryForDCA.performance.scoreInPercentage 'disabled'}}" {{action 'onOpenOCAReport'}} style="background-color:{{if performanceSummaryForDCA (grade-color performanceSummaryForDCA.performance.scoreInPercentage)}}">
-          {{#if performanceSummaryForDCA.performance.scoreInPercentage}}
-            {{performanceSummaryForDCA.performance.scoreInPercentage}}%
-          {{else}}
-            --
-          {{/if}}
-        </div>
-      {{else}}
-        <div class="{{unless hasStarted 'not-started'}}" {{action 'onOpenCourseReport'}}>
-          {{charts/gru-performance-chart performanceSummary=class.performanceSummary }}
-        </div>
-      {{/if}}
-    </div>
+    {{#if isPremiumClass}}
+      <div class="performance-summary {{if class.performanceSummary.total 'total'}}">
+        {{#if class.performanceSummary.total}}
+          <span class="numerator">{{class.performanceSummary.totalCompleted}}</span>
+          <span class="denominator">{{class.performanceSummary.total}}</span>
+        {{else}}
+          <span class="no-completion-score">--</span>
+        {{/if}}
+      </div>
+    {{/if}}
     <div class="class-management tab ">
       <a {{action 'selectItem' 'class-management'}} role="tab " data-toggle="tooltip " title=" {{t 'teacher-landing.class.class-management'}} ">
         {{gru-icon name="settings"}}
