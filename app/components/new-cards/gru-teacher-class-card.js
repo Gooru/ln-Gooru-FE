@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { getBarGradeColor } from 'gooru-web/utils/utils';
+import { isNumeric } from 'gooru-web/utils/math';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -170,11 +171,20 @@ export default Ember.Component.extend({
 
   /**
    * @property {Boolean}
-   * Computed property  to identify class is started or not
+   * Computed property  to identify class  CM is started or not
    */
-  hasStarted: Ember.computed('class.performanceSummary', function() {
+  hasCMStarted: Ember.computed('class.performanceSummary', function() {
     const scorePercentage = this.get('class.performanceSummary.score');
-    return scorePercentage !== null;
+    return scorePercentage !== null && isNumeric(scorePercentage);
+  }),
+
+  /**
+   * @property {Boolean}
+   * Computed property  to identify class CA is started or not
+   */
+  hasCAStarted: Ember.computed('class.performanceSummaryForDCA', function() {
+    const scorePercentage = this.get('class.performanceSummaryForDCA.score');
+    return scorePercentage !== null && isNumeric(scorePercentage);
   }),
 
   /**

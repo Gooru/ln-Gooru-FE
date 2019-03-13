@@ -27,7 +27,7 @@
       {{/if}}
     </div>
     <div class="card-action-container {{if isPremiumClass 'premium-class'}}">
-      <div class="atc-view" {{action 'selectItem' 'atc'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.atc'}}" data-trigger="hover">
+      <div class="atc-view" {{action 'selectItem' 'atc'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.performance-overview'}}" data-trigger="hover">
         <i class="icon" />
       </div>
       <div class="class-activities {{if (not isPremiumClass) (concat 'grade-range-' (grade-range class.performanceSummaryForDCA.score))}}">
@@ -35,8 +35,8 @@
           <i class="icon" />
         </div>
         {{#if (not isPremiumClass)}}
-          <div class="class-activities-score" {{action 'selectItem' 'ca-report'}}>
-            {{if (gte class.performanceSummaryForDCA.score 0) (concat class.performanceSummaryForDCA.score '%') '--' }}
+          <div class="class-activities-score {{if (not hasCAStarted) 'not-started'}}" {{action 'selectItem' 'ca-report'}}>
+            {{if hasCAStarted (concat class.performanceSummaryForDCA.score '%') '--' }}
           </div>
         {{/if}}
       </div>
@@ -45,8 +45,9 @@
           {{gru-icon name="sort"}}
         </div>
         {{#if (not isPremiumClass)}}
-          <div class="course-map-score" {{action 'selectItem' 'cm-report'}}>
-            {{if (gte class.performanceSummary.score 0) (concat class.performanceSummary.score '%') '--' }}
+          <div class="course-map-score {{if (not hasCMStarted) 'not-started'}}" {{action 'selectItem' 'cm-report'}}>
+            {{log class.performanceSummary.score}}
+            {{if hasCMStarted (concat class.performanceSummary.score '%') '--' }}
           </div>
         {{/if}}
       </div>
