@@ -36,7 +36,7 @@
         </div>
         {{#if (not isPremiumClass)}}
           <div class="class-activities-score" {{action 'selectItem' 'ca-report'}}>
-            {{if (and (gte class.performanceSummaryForDCA.score 0) class.performanceSummaryForDCA.score ) (concat class.performanceSummaryForDCA.score '%') '--' }}
+            {{if (gte class.performanceSummaryForDCA.score 0) (concat class.performanceSummaryForDCA.score '%') '--' }}
           </div>
         {{/if}}
       </div>
@@ -46,7 +46,7 @@
         </div>
         {{#if (not isPremiumClass)}}
           <div class="course-map-score" {{action 'selectItem' 'cm-report'}}>
-            {{if (and (gte class.performanceSummary.score 0) class.performanceSummary.score ) (concat class.performanceSummary.score '%') '--' }}
+            {{if (gte class.performanceSummary.score 0) (concat class.performanceSummary.score '%') '--' }}
           </div>
         {{/if}}
       </div>

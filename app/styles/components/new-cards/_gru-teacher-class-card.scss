@@ -2,7 +2,7 @@
   width: 300px;
   height: 300px;
   float: $tab-float-dir;
-  margin: 0 10px 30px;
+  margin: 0 10px 10px;
 
   .panel {
     @include border-top-radius(4px);
@@ -56,7 +56,7 @@
       padding: 0;
       border-bottom-right-radius: 4px;
       border-bottom-left-radius: 4px;
-      height: 260px;
+      height: 248px;
 
       .information {
         height: 167px;
@@ -176,6 +176,12 @@
           .course-map {
             grid-template-columns: 50px;
           }
+          .course-map-icon {
+            border-right: 1px solid $gray-80;
+          }
+          .class-activities-icon {
+            border-right: 1px solid $gray-80;
+          }
         }
 
         .completion-score {
@@ -222,7 +228,6 @@
           .course-map-icon {
             cursor: pointer;
             padding-top: 13px;
-            border-right: 1px solid $gray-80;
             width: 50px;
             text-align: center;
           }
@@ -257,7 +262,6 @@
           .class-activities-icon {
             cursor: pointer;
             padding-top: 18px;
-            border-right: 1px solid $gray-80;
             width: 50px;
             text-align: center;
           }
@@ -303,9 +307,8 @@
 
       .card-class-code {
         display: grid;
-        color: red;
         grid-template-columns: 1fr auto;
-        height: 40px;
+        height: 32px;
         align-items: center;
         justify-items: end;
         color: $dark-600;
@@ -323,5 +326,5 @@
 
 .gru-new-class-card {
   float: $tab-float-dir;
-  margin: 0 10px 30px;
+  margin: 0 10px 10px;
 }
