@@ -425,6 +425,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'माझ्या प्रश्नांमधून',
   'common.from-my-resources': 'माझ्या स्रोतांकडून',
   'common.hide-results': 'परिणाम लपवा',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'इशारे',
   'common.home': 'होम',
   'common.if_questions': 'तुम्हाला जर काही प्रश्न असतील तर,',

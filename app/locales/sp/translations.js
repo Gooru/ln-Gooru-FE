@@ -440,6 +440,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'De mis preguntas',
   'common.from-my-resources': 'De Mis Recursos',
   'common.hide-results': 'Ocultar resultados',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'Sugerencias',
   'common.home': 'Casa',
   'common.if_questions': 'Si tienes alguna pregunta,',

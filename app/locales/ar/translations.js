@@ -420,6 +420,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'من أسئلتي',
   'common.from-my-resources': 'من مصادري',
   'common.hide-results': 'إخفاء النتائج',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'تلميحات',
   'common.home': 'الصفحة الرئيسية',
   'common.if_questions': 'إذا كان لديك أية أسئلة،',

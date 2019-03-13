@@ -30,6 +30,11 @@ export default GruHSTextComponent.extend({
   // -------------------------------------------------------------------------
   // Properties
 
+  /**
+   * @property {String} itemType
+   */
+  itemType: 'hs-image',
+
   /*
    * @prop {String} instructions - Question instructions
    */

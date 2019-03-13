@@ -68,6 +68,11 @@ export default QuestionComponent.extend({
   // -------------------------------------------------------------------------
   // Properties
 
+  /**
+   * @property {String} itemType
+   */
+  itemType: 'hs-text',
+
   /*
    * @prop {Array} selectedAnswers - Array of ids for each one of the answers selected by the user
    */
