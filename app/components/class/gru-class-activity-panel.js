@@ -85,8 +85,13 @@ export default Ember.Component.extend({
     /**
      * @function goLive
      */
-    goLive: function(collectionId) {
-      this.sendAction('onGoLive', collectionId);
+    goLive: function(collection) {
+      let options = {
+        collectionId: collection.get('id'),
+        collectionType: collection.get('collectionType')
+      };
+
+      this.sendAction('onGoLive', options);
     },
 
     /**
