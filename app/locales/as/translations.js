@@ -481,10 +481,13 @@ export default Object.assign(quizzesTranslations, {
   'common.loading': 'ল\'ডিং.....',
   'common.login': 'লগ ইন ',
   'common.logout': 'লগ আওট ',
-  'common.logout.head':
-    'Learning Navigator: \n Every Student \n Achieves Mastery',
+  'common.logout.head_1': 'Learning Navigator: ',
+  'common.logout.head_2': 'Every Student',
+  'common.logout.head_3': 'Achieves Mastery',
   'common.logout.description':
     'Learning Navigator is designed as “GPS for Learning” — a way for each student to follow their own path to mastery. Schools ask every student to achieve the same level of proficiency, but each student begins with a different set of knowledge and skills. The Learning Navigator meets each student exactly where they are and navigates them to their learning goals. ',
+  'common.logout.logout-btn-msg1': 'You have been logout.',
+  'common.logout.logout-btn-msg2': 'Click here to login.',
   'common.mastery': 'পাৰদৰ্শিতা',
   'common.menu': 'তালিকা',
   'common.more-details': 'অধিক বিৱৰণ',
