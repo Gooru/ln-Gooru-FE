@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 import { GRU_FEATURE_FLAG } from 'gooru-web/config/config';
+import { isNumeric } from 'gooru-web/utils/math';
 
 /**
  * Teacher class navigation
@@ -61,11 +62,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   /**
    * @property {Boolean}
-   * Computed property  to identify class is started or not
+   * Computed property  to identify class CM is started or not
    */
-  hasStarted: Ember.computed('class.performanceSummary', function() {
+  hasCMStarted: Ember.computed('class.performanceSummary', function() {
     const scorePercentage = this.get('class.performanceSummary.score');
-    return scorePercentage !== null;
+    return scorePercentage !== null && isNumeric(scorePercentage);
   }),
 
   /**
@@ -73,6 +74,17 @@ export default Ember.Component.extend(ConfigurationMixin, {
    * property  performanceSummaryForDCA
    */
   performanceSummaryForDCA: null,
+
+  /**
+   * @property {Boolean}
+   * Computed property  to identify class CA is started or not
+   */
+  hasCAStarted: Ember.computed('performanceSummaryForDCA', function() {
+    const scorePercentage = this.get(
+      'performanceSummaryForDCA.performance.scoreInPercentage'
+    );
+    return scorePercentage !== null && isNumeric(scorePercentage);
+  }),
 
   // -------------------------------------------------------------------------
   // Actions

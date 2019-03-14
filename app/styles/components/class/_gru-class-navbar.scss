@@ -68,10 +68,10 @@
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
         &.premium-class {
-          grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
           .studyplayer-title {
-            grid-column: 2 / 8;
+            grid-column: 2 / 7;
           }
         }
 
@@ -87,7 +87,7 @@
         }
 
         .studyplayer-title {
-          grid-column: 2 / 9;
+          grid-column: 2 / 8;
           order: 2;
         }
 
@@ -104,10 +104,6 @@
           .class-activities {
             grid-column: 2 / 4;
           }
-
-          .class-management {
-            grid-column: 7 / 9;
-          }
         }
 
         .class-activities {
@@ -118,10 +114,6 @@
         &.nav-menu-course-map {
           .course-map {
             grid-column: 3 / 5;
-          }
-
-          .class-management {
-            grid-column: 7 / 9;
           }
         }
 
@@ -146,7 +138,6 @@
         .class-management {
           order: 9;
           border-top: 1px solid #ccc;
-          grid-column: 6 / 9;
           width: 100%;
 
           a {
@@ -342,6 +333,10 @@
             display: block;
             font-size: 18px;
             color: $dark-600;
+            &.not-started {
+              pointer-events: none;
+              cursor: default;
+            }
           }
 
           .dca-pin {
@@ -392,6 +387,10 @@
             display: block;
             font-size: 18px;
             color: $dark-600;
+            &.not-started {
+              pointer-events: none;
+              cursor: default;
+            }
           }
 
           &:not(.grade-range-not-started) {
@@ -467,16 +466,17 @@
       }
 
       .performance-summary {
-        border-left: 1px solid $gray-80;
         border-right: 1px solid $gray-80;
         height: 51px;
-        border-left: 1px solid $gray-80;
         text-align: center;
         font-weight: bold;
         font-size: 18px;
         line-height: 1;
         min-width: 50px;
-
+        cursor: pointer;
+        &:not(.total) {
+          pointer-events: none;
+        }
         .numerator {
           margin-bottom: 6px;
           display: block;
