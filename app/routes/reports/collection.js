@@ -47,11 +47,22 @@ export default QuizzesReport.extend(PrivateRouteMixin, ContextMixin, {
     const classId = params.classId;
     const anonymous = params.anonymous;
     let collection;
+    let collectionType = params.collectionType;
 
     // Get initialization data from analytics
-    return route
-      .get('assessmentService')
-      .readAssessment(collectionId)
+
+    let collectionPromise;
+    if (collectionType === 'assessment') {
+      collectionPromise = route
+        .get('assessmentService')
+        .readAssessment(collectionId);
+    } else {
+      collectionPromise = route
+        .get('collectionService')
+        .readCollection(collectionId);
+    }
+
+    return collectionPromise
       .then(function(assessment) {
         collection = assessment;
         return route.createContext(params, collection, true);

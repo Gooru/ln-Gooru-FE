@@ -86,8 +86,8 @@
           {{/if}}
         </div>
         <div class="dca-golive-btn">
-          {{#if (and showGolive (eq item.collectionType 'assessment') (not isOfflineClass)) }}
-            <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item.id}}></i>
+          {{#if (and showGolive  (not isOfflineClass)) }}
+            <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item}}></i>
           {{/if}}
         </div>
         <div class="dca-assign-btn">
