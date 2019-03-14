@@ -227,6 +227,17 @@ export default Ember.Component.extend({
    */
   isShowListView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
+  /**
+   * @property {Boolean} isClassPreferenceMapped
+   */
+  isClassPreferenceMapped: Ember.computed('classPreference', function() {
+    let component = this;
+    let classPreference = component.get('classPreference');
+    return classPreference
+      ? classPreference.subject && classPreference.framework
+      : false;
+  }),
+
   // -------------------------------------------------------------------------
   // actions
 
