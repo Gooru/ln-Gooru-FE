@@ -256,12 +256,12 @@
     line-height: 1.5em;
     font-weight: 399;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.91);
-    width: 41%;
+    width: 27%;
   }
 }
 
 .home-btn {
-  width: 41%;
+  width: 27%;
   margin-top: 20px;
   padding: 17px 23px 15px;
   border-radius: 100px;
@@ -277,7 +277,9 @@
   text-align: center;
   letter-spacing: 1px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.46);
+  cursor: pointer;
 }
+
 .lo-button {
   display: inline-block;
   padding: 9px 15px;
@@ -301,6 +303,10 @@
   }
   .hero-desc {
     font-size: 1.3em;
+    width: 53% !important;
+  }
+  .home-btn {
+    width: 53% !important;
   }
 }
 
@@ -316,6 +322,11 @@
     margin-top: 10px;
     font-size: 16px;
     text-align: center;
+    width: 53% !important;
+  }
+
+  .home-btn {
+    width: 53% !important;
   }
 }
 
@@ -340,6 +351,12 @@
   }
 
   .home-btn {
-    width: 100%;
+    width: 70% !important;
+    font-size: 14px;
+    line-height: 15px;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.46);
   }
 }
