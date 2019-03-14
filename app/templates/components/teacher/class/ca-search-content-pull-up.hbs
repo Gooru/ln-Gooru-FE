@@ -44,7 +44,9 @@
             <span>{{t contentType.label}}</span>
           </div>
         {{/each}}
-        <span class="create-offline-activity" title="{{t 'teacher-landing.class.class-activities-tab.create-external-collection'}}" data-toggle="tooltip" {{action "onClickCreateOfflineActivity"}}>{{gru-icon name="add"}}</span>
+        {{#if isClassPreferenceMapped}}
+          <span class="create-offline-activity" title="{{t 'teacher-landing.class.class-activities-tab.create-external-collection'}}" data-toggle="tooltip" {{action "onClickCreateOfflineActivity"}}>{{gru-icon name="add"}}</span>
+        {{/if}}
       </div>
     </div>
     <div class="search-list-container {{if isShowListView 'list-view' 'grid-view'}}">
