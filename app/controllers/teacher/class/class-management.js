@@ -606,8 +606,9 @@ export default Ember.Controller.extend(ModalMixin, {
 
   updateClassMembersSettings() {
     const controller = this;
-    const classId = this.get('class.id');
+    const classId = controller.get('class.id');
     const isPremiumClass = controller.get('isPremiumClass');
+    const forceCalculateILP = controller.get('class.forceCalculateILP');
     const studentsLevelSetting = controller.get('studentsLevelSetting');
     let studentsSetting = {
       users: []
@@ -634,7 +635,11 @@ export default Ember.Controller.extend(ModalMixin, {
       .classMembersSettings(classId, studentsSetting)
       .then(() => {
         controller.fetchClassMemberBounds();
-        if (isPremiumClass && lowerBoundUpdateStudentsId.length > 0) {
+        if (
+          forceCalculateILP &&
+          isPremiumClass &&
+          lowerBoundUpdateStudentsId.length > 0
+        ) {
           controller
             .get('skylineInitialService')
             .calculateSkyline(classId, lowerBoundUpdateStudentsId);

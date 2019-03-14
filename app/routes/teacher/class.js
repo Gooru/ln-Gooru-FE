@@ -36,6 +36,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   i18n: Ember.inject.service(),
 
+  /**
+   * @requires service:api-sdk/competency
+   */
+  competencyService: Ember.inject.service('api-sdk/competency'),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -101,70 +106,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   model: function(params) {
     const route = this;
-    //Steps for Take a Tour functionality
-    let tourSteps = Ember.A([
-      {
-        title: route.get('i18n').t('gru-take-tour.teacher-class.stepOne.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-class.stepOne.description')
-      },
-      {
-        elementSelector: '.teacher .classroom-information',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-class.stepTopBar.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-class.stepTopBar.description')
-      },
-      {
-        elementSelector: '.gru-class-navigation .nav-tabs .class-activities',
-        title: route.get('i18n').t('gru-take-tour.teacher-class.stepTwo.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-class.stepTwo.description')
-      },
-      {
-        elementSelector: '.gru-class-navigation .nav-tabs .course-map',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-class.stepThree.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-class.stepThree.description')
-      },
-      {
-        elementSelector: '.gru-class-navigation .nav-tabs .performance',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-class.stepFour.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-class.stepFour.description')
-      },
-      {
-        elementSelector: '.gru-class-navigation .nav-tabs .class-management',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-class.stepClassManagement.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-class.stepClassManagement.description')
-      },
-      {
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-class.stepFive.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-class.stepFive.description')
-      }
-    ]);
-
     const classId = params.classId;
     const classPromise = route.get('classService').readClassInfo(classId);
     const membersPromise = route.get('classService').readClassMembers(classId);
+
     return classPromise.then(function(classData) {
       let classCourseId = null;
       if (classData.courseId) {
@@ -192,10 +137,16 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           ? classPerformanceSummaryItems.findBy('classId', classId)
           : null;
         aClass.set('performanceSummary', classPerformanceSummary);
-
+        const setting = aClass.get('setting');
+        const isPremiumClass = setting != null && setting['course.premium'];
         const courseId = aClass.get('courseId');
         let visibilityPromise = Ember.RSVP.resolve([]);
         let coursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
+        const competencyCompletionStats = isPremiumClass
+          ? route
+            .get('competencyService')
+            .getCompetencyCompletionStats([classId])
+          : Ember.RSVP.resolve(Ember.A());
 
         if (courseId) {
           visibilityPromise = route
@@ -205,7 +156,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         }
         return Ember.RSVP.hash({
           contentVisibility: visibilityPromise,
-          course: coursePromise
+          course: coursePromise,
+          competencyStats: competencyCompletionStats
         }).then(function(hash) {
           const contentVisibility = hash.contentVisibility;
           const course = hash.course;
@@ -213,12 +165,15 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           aClass.set('collaborators', members.get('collaborators'));
           aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
           aClass.set('members', members.get('members'));
+          aClass.set(
+            'competencyStats',
+            hash.competencyStats.findBy('classId', classId)
+          );
           return {
             class: aClass,
             course,
             members,
-            contentVisibility,
-            tourSteps
+            contentVisibility
           };
         });
       });
@@ -235,8 +190,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('course', model.course);
     controller.set('members', model.members);
     controller.set('contentVisibility', model.contentVisibility);
-    controller.set('isOfflineClass', model.class.isOffline);
-    controller.set('steps', model.tourSteps);
     controller.set('router', this.get('router'));
     let classData = model.class;
     classData.course = model.course;

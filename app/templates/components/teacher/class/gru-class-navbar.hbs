@@ -47,10 +47,10 @@
       </div>
     {{/if}}
     {{#if isPremiumClass}}
-      <div class="performance-summary {{if class.performanceSummary.total 'total'}}" {{action 'selectItem' 'students'}}>
-        {{#if class.performanceSummary.total}}
-          <span class="numerator">{{class.performanceSummary.totalCompleted}}</span>
-          <span class="denominator">{{class.performanceSummary.total}}</span>
+      <div class="performance-summary {{if class.competencyStats 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
+        {{#if class.competencyStats}}
+          <span class="numerator">{{class.competencyStats.completedCompetencies}}</span>
+          <span class="denominator">{{class.competencyStats.totalCompetencies}}</span>
         {{else}}
           <span class="no-completion-score">--</span>
         {{/if}}

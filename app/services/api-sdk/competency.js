@@ -255,5 +255,30 @@ export default Ember.Service.extend({
           }
         );
     });
+  },
+
+  /**
+   * @function getCompetencyCompletionStats
+   * Provide Competency Completion Stats for Premium Classes"
+   */
+  getCompetencyCompletionStats(classIds) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('competencyAdapter')
+        .getCompetencyCompletionStats(classIds)
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('competencySerializer')
+                .normalizeCompetencyCompletionStats(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });

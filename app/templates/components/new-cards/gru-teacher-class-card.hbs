@@ -55,9 +55,9 @@
         {{gru-icon name="school"}}
       </div>
       {{#if isPremiumClass}}
-        <div class="completion-score {{if total 'denominator'}}" {{action 'selectItem' 'students'}}>
-          {{#if total}}
-            <span>{{totalCompleted}}/{{total}}</span>
+        <div class="completion-score {{if class.competencyStats 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
+          {{#if class.competencyStats}}
+            <span>{{class.competencyStats.completedCompetencies}}/{{class.competencyStats.totalCompetencies}}</span>
           {{else}}
             <span>--</span>
           {{/if}}
