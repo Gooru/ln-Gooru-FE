@@ -58,8 +58,7 @@ export default Ember.Object.extend({
     let data = {
       title: classModel.get('title'),
       class_sharing: classModel.get('classSharing'),
-      min_score: classModel.get('minScore') || 0,
-      is_offline: classModel.get('isOffline')
+      min_score: classModel.get('minScore') || 0
     };
 
     if (!update) {
