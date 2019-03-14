@@ -8,7 +8,7 @@
       {{else}}
         <span class="column">{{gru-icon name='radio_button_unchecked'}}</span>
       {{/if}}
-        <span class="answer-text">({{answer-letter index}}) {{{answer.text}}}</span>
+        <span class="answer-text {{if (and answer.selected answer.correct) 'correct-answer-text'}}"><span class="answer-letter">({{answer-letter index}})</span> {{{answer.text}}}</span>
     </li>
   {{/each}}
 </ul>

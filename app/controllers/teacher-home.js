@@ -129,18 +129,14 @@ export default Ember.Controller.extend(ModalMixin, {
           );
           activeclass.set('course', course);
         }
-
-        if (activeclass.get('isOffline')) {
-          activeclass.set(
-            'performanceSummary',
-            hash.offlineClassPerfSummary.findBy('classId', classId)
-          );
-        } else {
-          activeclass.set(
-            'performanceSummary',
-            hash.perfSummary.findBy('classId', classId)
-          );
-        }
+        activeclass.set(
+          'performanceSummaryForDCA',
+          hash.offlineClassPerfSummary.findBy('classId', classId)
+        );
+        activeclass.set(
+          'performanceSummary',
+          hash.perfSummary.findBy('classId', classId)
+        );
       });
     });
   },

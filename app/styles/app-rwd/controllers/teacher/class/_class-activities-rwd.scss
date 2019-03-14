@@ -9,9 +9,20 @@
         .dca-list-container {
           padding: 4px;
           height: calc(100vh - 105px);
+          @media only screen and (max-width: $screen-xs) {
+            height: calc(100vh - 210px);
+          }
           padding-bottom: 50px;
         }
       }
+    }
+  }
+}
+
+body.teacher_class_class-activities {
+  @media only screen and (max-width: $screen-xs) {
+    .app-container {
+      padding-top: 102px;
     }
   }
 }

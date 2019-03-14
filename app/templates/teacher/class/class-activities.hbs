@@ -61,6 +61,7 @@
                     onScheduleContentToDCA='onScheduleContentToDCA'
                     onOpenPerformanceEntry="onOpenPerformanceEntry"
                     isOfflineClass=isOfflineClass
+                    onPreviewContent="onPreviewContent"
                   }}
                 {{else}}
                     <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
@@ -98,6 +99,7 @@
             showDcaRemoveButton=false
             onScheduleContentToDCA='onScheduleContentToDCA'
             isUnScheduled=true
+            onPreviewContent="onPreviewContent"
           }}
             {{/each}}
           </div>
@@ -165,4 +167,8 @@
 {{/if}}
 {{#if isShowOCASummaryReportPullUp}}
   {{teacher.offline-class.oca-summary-report-pull-up classId=class.id performanceSummary=performanceSummaryForDCA onClosePullUp="onClosePullUp"}}
+{{/if}}
+
+{{#if isShowContentPreview}}
+  {{reports.pull-up.gru-collection-preview showPullUp=isShowContentPreview previewContentId=previewContent.id previewContentType='assessment'}}
 {{/if}}

@@ -438,6 +438,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'मेरे प्रश्नों से',
   'common.from-my-resources': 'मेरे संसाधनों से',
   'common.hide-results': 'परिणाम छुपाएं',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'संकेत',
   'common.home': 'होम',
   'common.if_questions': 'अगर आपके पास कोई प्रश्न है,',
@@ -468,6 +469,13 @@ export default Object.assign(quizzesTranslations, {
   'common.loading': 'लोड हो रहा है ...',
   'common.login': 'लॉग इन करें',
   'common.logout': 'लॉग आउट',
+  'common.logout.head_1': 'Learning Navigator: ',
+  'common.logout.head_2': 'Every Student',
+  'common.logout.head_3': 'Achieves Mastery',
+  'common.logout.description':
+    'Learning Navigator is designed as “GPS for Learning” — a way for each student to follow their own path to mastery. Schools ask every student to achieve the same level of proficiency, but each student begins with a different set of knowledge and skills. The Learning Navigator meets each student exactly where they are and navigates them to their learning goals. ',
+  'common.logout.logout-btn-msg1': 'You have been logout.',
+  'common.logout.logout-btn-msg2': 'Click here to login.',
   'common.mastery': 'दक्षता',
   'common.menu': 'मेन्यू',
   'common.more-details': 'अधिक जानकारी',
@@ -1245,7 +1253,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.collapse': 'समेटें',
   'teacher-landing.class.atc-view.total-competencies-gained':
     'कुल हासिल दक्षताएँ',
-  'teacher-landing.class.atc-view.progress-label': 'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'कक्षा की दैनिक गतिविधियां',
   'teacher-landing.class.offline-class-report.class-report': 'कक्षा की रिपोर्ट',
   'teacher-landing.class.offline-class-report.activity-report':
@@ -1314,14 +1323,6 @@ export default Object.assign(quizzesTranslations, {
     'सह-शिक्षकों',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'एक और शिक्षक जोड़ें',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'यह एक ऑफ़लाइन कक्षा है',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'एक बार ऑफ़लाइन चिह्नित करने के बाद, कक्षा को फिर से ऑनलाइन नहीं बनाया जा सकता है।',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'यदि आप इसे एक ऑफ़लाइन कक्षा बनाना चाहते हैं, तो हाँ का चयन करें',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'क्लासरूम, जहां छात्र नेविगेटर पर ऑनलाइन अध्ययन नहीं करते हैं, उन्हें ऑफ़लाइन के रूप में चिह्नित किया जाता है। शिक्षक ऑफ़लाइन सीखने वाले छात्रों को ट्रैक करता है और छात्रों की ओर से डेटा दर्ज करता है',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'निर्देश की भाषा',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
@@ -2501,5 +2502,6 @@ export default Object.assign(quizzesTranslations, {
   'notifications.typeinclass.teacher-override-title':
     'शिक्षक ने आपके सबमिशन को सही किया है',
   'notifications.typeinclass.teacher-grading-complete-title':
-    'शिक्षक ने कक्षा में आपके सबमिशन को ग्रेड किया है'
+    'शिक्षक ने कक्षा में आपके सबमिशन को ग्रेड किया है',
+  'goahead.add.something': 'Go ahead, add something.'
 });

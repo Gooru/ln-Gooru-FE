@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { getBarGradeColor } from 'gooru-web/utils/utils';
+import { isNumeric } from 'gooru-web/utils/math';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -43,17 +44,9 @@ export default Ember.Component.extend({
     selectItem: function(item) {
       const classData = this.get('class');
       const classId = classData.id;
-      const isOffline = classData.get('isOffline');
       if (this.get('onItemSelected')) {
-        this.sendAction('onItemSelected', item, classId, isOffline);
+        this.sendAction('onItemSelected', item, classId);
       }
-    },
-
-    showAtc() {
-      const component = this;
-      component
-        .get('router')
-        .transitionTo('teacher.class.atc', component.get('class').id);
     }
   },
   // -------------------------------------------------------------------------
@@ -178,11 +171,20 @@ export default Ember.Component.extend({
 
   /**
    * @property {Boolean}
-   * Computed property  to identify class is started or not
+   * Computed property  to identify class  CM is started or not
    */
-  hasStarted: Ember.computed('class.performanceSummary', function() {
+  hasCMStarted: Ember.computed('class.performanceSummary', function() {
     const scorePercentage = this.get('class.performanceSummary.score');
-    return scorePercentage !== null;
+    return scorePercentage !== null && isNumeric(scorePercentage);
+  }),
+
+  /**
+   * @property {Boolean}
+   * Computed property  to identify class CA is started or not
+   */
+  hasCAStarted: Ember.computed('class.performanceSummaryForDCA', function() {
+    const scorePercentage = this.get('class.performanceSummaryForDCA.score');
+    return scorePercentage !== null && isNumeric(scorePercentage);
   }),
 
   /**
@@ -192,7 +194,7 @@ export default Ember.Component.extend({
   isPremiumClass: Ember.computed('class', function() {
     const controller = this;
     let currentClass = controller.get('class');
-    let classSetting = currentClass.setting;
+    let classSetting = currentClass.get('setting');
     return classSetting ? classSetting['course.premium'] : false;
   })
 });

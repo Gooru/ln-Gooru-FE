@@ -1,0 +1,21 @@
+<div class="question-preview-container">
+  <div class="question-title-container">
+    <div class="question-icon"><i class="icon"></i></div>
+    <div class="title">{{safe-html question.title}}</div>
+  </div>
+  <div class="taxonomies-conatiner">
+    {{#if taxonomyTags.length}}
+      {{taxonomy.gru-taxonomy-tag-list tags=taxonomyTags tagsVisible=1 isInCard=true}}
+    {{/if}}
+  </div>
+  <div class="question-description">
+    {{safe-html question.text}}
+  </div>
+  <div class="answer-container">
+    {{#if isShowCorrectAnswer}}
+      {{{component (question-config question.type 'component.answer') question=question showCorrect=true}}}
+    {{else}}
+      {{{component (question-config question.type 'component.player') question=question readOnly=true}}}
+    {{/if}}
+  </div>
+</div>

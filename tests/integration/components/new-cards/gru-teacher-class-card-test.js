@@ -88,11 +88,11 @@ test('Class Card Layout', function(assert) {
 
   T.exists(
     assert,
-    $panelBody.find('.performance .code'),
+    $panelBody.find('.card-class-code .class-code'),
     'Missing class card code'
   );
   assert.equal(
-    T.text($panelBody.find('.performance .code .class-code')),
+    T.text($panelBody.find('.card-class-code .class-code')),
     'VZFMEWH',
     'Wrong class code text'
   );
@@ -101,24 +101,5 @@ test('Class Card Layout', function(assert) {
     assert,
     $panelBody.find('.information'),
     'Missing class information'
-  );
-
-  const $links = $panelBody.find('.links');
-
-  T.exists(assert, $links, 'Missing card links');
-
-  assert.equal($links.find('li a').length, 3, 'Number of card links');
-  T.exists(
-    assert,
-    $links.find('.class-activities'),
-    'Missing class activities link'
-  );
-  T.exists(assert, $links.find('.course-map'), 'Missing content map link');
-  T.exists(assert, $links.find('.performance'), 'Missing performance link');
-
-  T.exists(
-    assert,
-    $panelBody.find('.performance'),
-    'Missing class performance'
   );
 });

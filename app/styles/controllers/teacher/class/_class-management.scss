@@ -381,42 +381,6 @@
                 margin-left: auto;
               }
             }
-
-            .row-offline-alert {
-              padding-bottom: 20px;
-              align-items: center;
-              color: black;
-              font-weight: bolder;
-            }
-
-            .row-offline-class {
-              padding-top: 10px;
-              padding-bottom: 10px;
-              align-items: center;
-              display: flex;
-
-              .offline-icon {
-                display: inline;
-                width: 22px;
-                height: 30px;
-                background-size: contain;
-                background-repeat: no-repeat;
-                margin: 10px 10px 0 0;
-                background-image: url("gooru/sort-horizontal.svg");
-              }
-
-              .offline-label {
-                height: 29px;
-                font-family: Lato;
-                font-size: 13px;
-                padding-right: 20px;
-              }
-
-              .offline-info-icon {
-                vertical-align: middle;
-                display: inline-block;
-              }
-            }
           }
         }
       }

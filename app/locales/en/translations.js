@@ -434,6 +434,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'From My Questions',
   'common.from-my-resources': 'From My Resources',
   'common.hide-results': 'Hide Results',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'Hints',
   'common.home': 'Home',
   'common.if_questions': 'If you have any questions,',
@@ -464,6 +465,13 @@ export default Object.assign(quizzesTranslations, {
   'common.loading': 'Loading ...',
   'common.login': 'Log In',
   'common.logout': 'Logout',
+  'common.logout.head_1': 'Learning Navigator: ',
+  'common.logout.head_2': 'Every Student',
+  'common.logout.head_3': 'Achieves Mastery',
+  'common.logout.description':
+    'Learning Navigator is designed as “GPS for Learning” — a way for each student to follow their own path to mastery. Schools ask every student to achieve the same level of proficiency, but each student begins with a different set of knowledge and skills. The Learning Navigator meets each student exactly where they are and navigates them to their learning goals. ',
+  'common.logout.logout-btn-msg1': 'You have been logout.',
+  'common.logout.logout-btn-msg2': 'Click here to login.',
   'common.mastery': 'Mastery',
   'common.menu': 'Menu',
   'common.more-details': 'More Details',
@@ -1224,7 +1232,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.collapse': 'Collapse',
   'teacher-landing.class.atc-view.total-competencies-gained':
     'Total Competencies Gained',
-  'teacher-landing.class.atc-view.progress-label': 'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'Class Activities',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
   'teacher-landing.class.offline-class-report.activity-report':
@@ -1292,14 +1301,6 @@ export default Object.assign(quizzesTranslations, {
     'Co-Teachers',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'Add another teacher',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'This is an offline classroom',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'Once marked offline, the classroom cannot be made online again.',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'Select Yes if you want to make this an offline classroom',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'Classrooms, where students do not study online on Navigator, are marked as Offline. The teacher tracks students learning offline and enters data on behalf of the students',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'Language of instruction',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
@@ -2474,5 +2475,6 @@ export default Object.assign(quizzesTranslations, {
   'notifications.typeinclass.teacher-override-title':
     'Teacher has corrected your submission',
   'notifications.typeinclass.teacher-grading-complete-title':
-    'Teacher has graded your submission at class'
+    'Teacher has graded your submission at class',
+  'goahead.add.something': 'Go ahead, add something.'
 });

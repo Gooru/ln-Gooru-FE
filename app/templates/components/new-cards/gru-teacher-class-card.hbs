@@ -1,193 +1,72 @@
-<div class="panel {{if course 'has-course' 'no-course'}}">
-  {{#if course}}
-    {{#if (and (gte class.performanceSummary.score 0) class.performanceSummary.score )}}
-      <div class="panel-heading" style="background-color:{{grade-color class.performanceSummary.score}}">
-        <div class="title ellipsis" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}">
-          {{#link-to 'teacher.class.atc' class.id}}
-            {{truncate text=class.title maxLength=25}}
-          {{/link-to}}
-        </div>
-        {{#link-to 'teacher.class.class-management' class.id class="class-management" tagName="div" }}
-          <div title="{{t 'teacher-landing.class.class-management'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
-            <i class="icon"> </i>
-          </div>
-        {{/link-to}}
+<div class="panel">
+  <div class="panel-heading">
+    <div class="title ellipsis" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}" data-trigger="hover">
+      {{truncate text=class.title maxLength=25}}
+    </div>
+    <div class="class-settings" {{action 'selectItem' 'class-management'}} title="{{t 'teacher-landing.class.class-management'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
+      {{gru-icon name="settings"}}
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <div class="information {{if course 'has-course' 'has-no-course'}}" style="background-image: url({{course.thumbnailUrl}})">
+      <div class="current-activity">
+        {{#if course}}
+          <span>{{t "student-landing.class.assigned-course"}}</span>
+        {{else}}
+          <p>{{t "student-landing.class.no-course-assigned"}}</p>
+          <p>{{t "goahead.add.something"}}</p>
+        {{/if}}
       </div>
-    {{else}}
-      {{#if (eq class.performanceSummary.score 0)}}
-        <div class="panel-heading" style="background-color:{{grade-color class.performanceSummary.score}}">
-          <div class="title ellipsis" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}">
-            {{#link-to 'teacher.class.course-map' class.id}}
-              {{truncate text=class.title maxLength=25}}
-            {{/link-to}}
+      {{#if course}}
+        <div class="title-section">
+          <div {{action 'selectItem' 'course-map'}} class="title pointer" alt="{{course.title}}">
+            {{truncate text=course.title maxLength=90}}
           </div>
-          {{#link-to 'teacher.class.class-management' class.id class="class-management" tagName="div" }}
-            <div title="{{t 'teacher-landing.class.class-management'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
-              <i class="icon"> </i>
-            </div>
-          {{/link-to}}
-        </div>
-      {{else}}
-        <div class="no-percentage-header">
-          <div class="title ellipsis" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}">
-            {{#link-to 'teacher.class.course-map' class.id}}
-              {{truncate text=class.title maxLength=25}}
-            {{/link-to}}
-          </div>
-          {{#link-to 'teacher.class.class-management' class.id class="class-management" tagName="div" }}
-            <div title="{{t 'teacher-landing.class.class-management'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
-              <i class="icon"> </i>
-            </div>
-          {{/link-to}}
         </div>
       {{/if}}
-    {{/if}}
-    <div class="panel-body" style="background-color:{{grade-color class.performanceSummary.score}}">
-      <div class="information" style="background-image: url({{course.thumbnailUrl}})" {{action 'showAtc' }}>
-        {{#if course}}
-          <div class="current-activity">{{t "student-landing.class.assigned-course"}}</div>
-        {{else}}
-          <div class="current-activity">{{t "student-landing.class.no-course-assigned"}}</div>
+    </div>
+    <div class="card-action-container {{if isPremiumClass 'premium-class'}}">
+      <div class="atc-view" {{action 'selectItem' 'atc'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.performance-overview'}}" data-trigger="hover">
+        <i class="icon" />
+      </div>
+      <div class="class-activities {{if (not isPremiumClass) (concat 'grade-range-' (grade-range class.performanceSummaryForDCA.score))}}">
+        <div class="class-activities-icon" {{action 'selectItem' 'class-activities'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'student-landing.class.class-activities'}}" data-trigger="hover">
+          <i class="icon" />
+        </div>
+        {{#if (not isPremiumClass)}}
+          <div class="class-activities-score {{if (not hasCAStarted) 'not-started'}}" {{action 'selectItem' 'ca-report'}}>
+            {{if hasCAStarted (concat class.performanceSummaryForDCA.score '%') '--' }}
+          </div>
         {{/if}}
-        <div class="title-section">
-          {{#if course.title}}
-            <div {{action 'selectItem' 'course-map'}} class="title pointer" alt="{{course.title}}">
-              {{truncate text=course.title maxLength=90}}
-            </div>
+      </div>
+      <div class="course-map {{if (not isPremiumClass) (concat 'grade-range-' (grade-range class.performanceSummary.score))}}">
+        <div class="course-map-icon" {{action 'selectItem' 'course-map'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}" data-trigger="hover">
+          {{gru-icon name="sort"}}
+        </div>
+        {{#if (not isPremiumClass)}}
+          <div class="course-map-score {{if (not hasCMStarted) 'not-started'}}" {{action 'selectItem' 'cm-report'}}>
+            {{log class.performanceSummary.score}}
+            {{if hasCMStarted (concat class.performanceSummary.score '%') '--' }}
+          </div>
+        {{/if}}
+      </div>
+      <div class="student-proficiency" {{action 'selectItem' 'students'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.student-proficiency'}}" data-trigger="hover">
+        {{gru-icon name="school"}}
+      </div>
+      {{#if isPremiumClass}}
+        <div class="completion-score {{if total 'denominator'}}" {{action 'selectItem' 'students'}}>
+          {{#if total}}
+            <span>{{totalCompleted}}/{{total}}</span>
           {{else}}
-            <span>{{t "student-landing.not-available"}}</span>
+            <span>--</span>
           {{/if}}
         </div>
-      </div>
-      <div class="links">
-        <ul>
-          <li class="class-activities">
-            <div class="icon-class-activities">
-              <i class="icon"> </i>
-            </div>
-            <a {{action 'selectItem' 'class-activities'}}>
-              <span>{{t 'student-landing.class.class-activities'}}</span>
-            </a>
-          </li>
-          <li class="course-map">
-            <div class="icon-course-map">
-              <i class="icon"> </i>
-            </div>
-            <a {{action 'selectItem' 'course-map'}}>
-              <span>{{t 'student-landing.class.course-map'}}</span>
-            </a>
-          </li>
-          <li class="performance">
-            <div class="icon-performance">
-              <i class="icon"> </i>
-            </div>
-            <a {{action 'selectItem' 'students'}}>
-              <span>{{t 'teacher-landing.class.student-proficiency'}}</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-      {{#if (and (gte class.performanceSummary.score 0) class.performanceSummary.score )}}
-        <div class="performance" style="background-color:{{grade-color class.performanceSummary.score}}">
-          <div class="code">
-            <div class="title">{{t 'student-landing.class-code'}}</div>
-            <div class="class-code">{{class.code}}</div>
-          </div>
-          <div class="pointer percentage" {{action 'selectItem' 'report'}}>
-            {{scorePercentage}}
-          </div>
-        </div>
-      {{else}}
-        {{#if (eq class.performanceSummary.score 0)}}
-          <div class="performance" style="background-color:{{grade-color class.performanceSummary.score}}">
-            <div class="code">
-              <div class="title">{{t 'student-landing.class-code'}}</div>
-              <div class="class-code">{{class.code}}</div>
-            </div>
-            <div class="pointer percentage" {{action 'selectItem' 'report'}}>
-              {{scorePercentage}}
-            </div>
-          </div>
-        {{else}}
-          <div class="no-performance">
-            <div class="code">
-              <div class="title">{{t 'student-landing.class-code'}}</div>
-              <div class="class-code">{{class.code}}</div>
-            </div>
-            <div class="percentage no-percentage">
-              <i class="icon"> </i>
-            </div>
-          </div>
-        {{/if}}
       {{/if}}
     </div>
-  {{else}}
-    <div class="panel-heading">
-      <div class="title" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}">
-        {{#link-to 'teacher.class.course-map' class.id}}
-          {{truncate text=class.title maxLength=25}}
-        {{/link-to}}
-      </div>
-      {{#link-to 'teacher.class.class-management' class.id class="class-management-noCourse" tagName="div" }}
-        <div title="{{t 'teacher-landing.class.class-management'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
-          <i class="icon"> </i>
-        </div>
-      {{/link-to}}
+    <div class="card-class-code">
+      <span>{{t 'teacher-landing.class.class-management-tab.class-code'}}</span>
+      <span class="class-code">{{class.code}}</span>
     </div>
-    <div class="panel-body">
-      <div class="information">
-        {{#if course}}
-          <div class="current-activity">{{t "student-landing.class.assigned-course"}}</div>
-        {{else}}
-          <div class="current-activity">{{t "student-landing.class.no-course-assigned"}}</div>
-        {{/if}}
-        <div class="title-section">
-          {{#if course.title}}
-            <div {{action 'selectItem' 'course-map'}} class="title pointer" alt="{{course.title}}">
-              {{truncate text=course.title maxLength=90}}
-            </div>
-          {{else}}
-            <span>{{t "student-landing.not-available"}}</span>
-          {{/if}}
-        </div>
-      </div>
-      <div class="links">
-        <ul>
-          <li class="class-activities">
-            <div class="icon-class-activities">
-              <i class="icon"> </i>
-            </div>
-            <a {{action 'selectItem' 'class-activities'}}>
-              <span>{{t 'student-landing.class.class-activities'}}</span>
-            </a>
-          </li>
-          <li class="course-map">
-            <div class="icon-course-map">
-              <i class="icon"> </i>
-            </div>
-            <a {{action 'selectItem' 'course-map'}}>
-              <span>{{t 'student-landing.class.course-map'}}</span>
-            </a>
-          </li>
-          <li class="performance">
-            <div class="icon-performance">
-              <i class="icon"> </i>
-            </div>
-            <a {{action 'selectItem' 'students'}}>
-              <span>{{t 'teacher-landing.class.student-proficiency'}}</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="performance">
-        <div class="code">
-          <div class="title">{{t 'student-landing.class-code'}}</div>
-          <div class="class-code no-percentage-code">{{class.code}}</div>
-        </div>
-        <div class="percentage no-percentage">
-          <i class="icon"> </i>
-        </div>
-      </div>
-    </div>
-  {{/if}}
+  </div>
 </div>

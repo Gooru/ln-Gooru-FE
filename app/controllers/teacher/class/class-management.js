@@ -334,16 +334,6 @@ export default Ember.Controller.extend(ModalMixin, {
       this.updateClassMembersSettings();
     },
 
-    /**
-     *
-     * Triggered when a edit save score option is selected
-     */
-    saveOffline(value) {
-      let controller = this;
-      controller.set('tempClass.isOffline', value);
-      controller.saveClass();
-    },
-
     classMembersToggle(targetStatusActive, student) {
       const controller = this;
       if (controller.get('course.id') && controller.get('subject')) {
@@ -563,12 +553,7 @@ export default Ember.Controller.extend(ModalMixin, {
               controller.send('updateUserClasses');
               controller
                 .get('class')
-                .merge(editedClass, [
-                  'title',
-                  'minScore',
-                  'classSharing',
-                  'isOffline'
-                ]);
+                .merge(editedClass, ['title', 'minScore', 'classSharing']);
             });
         } else {
           var classForEditing = controller.get('class').copy();
@@ -623,7 +608,6 @@ export default Ember.Controller.extend(ModalMixin, {
     const controller = this;
     const classId = this.get('class.id');
     const isPremiumClass = controller.get('isPremiumClass');
-    const isOffline = controller.get('class.isOffline');
     const studentsLevelSetting = controller.get('studentsLevelSetting');
     let studentsSetting = {
       users: []
@@ -650,11 +634,7 @@ export default Ember.Controller.extend(ModalMixin, {
       .classMembersSettings(classId, studentsSetting)
       .then(() => {
         controller.fetchClassMemberBounds();
-        if (
-          isPremiumClass &&
-          isOffline &&
-          lowerBoundUpdateStudentsId.length > 0
-        ) {
+        if (isPremiumClass && lowerBoundUpdateStudentsId.length > 0) {
           controller
             .get('skylineInitialService')
             .calculateSkyline(classId, lowerBoundUpdateStudentsId);
