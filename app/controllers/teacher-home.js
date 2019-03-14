@@ -45,6 +45,11 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   session: Ember.inject.service('session'),
 
+  /**
+   * @requires service:api-sdk/competency
+   */
+  competencyService: Ember.inject.service('api-sdk/competency'),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -102,8 +107,21 @@ export default Ember.Controller.extend(ModalMixin, {
 
   loadClassPerformance(classes) {
     let route = this;
-    let offlineClasses = classes.filterBy('isOffline', true);
-    let classCourseIds = route.getListOfClassCourseIds(classes);
+
+    let nonPremiumClasses = classes.filter(classData => {
+      let setting = classData.get('setting');
+      return setting === null || !setting['course.premium'];
+    });
+    let premiumClassIds = classes
+      .filter(classData => {
+        let setting = classData.get('setting');
+        return setting !== null && setting['course.premium'];
+      })
+      .map(classData => {
+        return classData.get('id');
+      });
+
+    let classCourseIds = route.getListOfClassCourseIds(nonPremiumClasses);
     let courseIDs = route.getListOfCourseIds(classes);
     let courseCardsPromise = route
       .get('courseService')
@@ -111,12 +129,16 @@ export default Ember.Controller.extend(ModalMixin, {
     let perfSummaryPromise = route
       .get('performanceService')
       .findClassPerformanceSummaryByClassIds(classCourseIds);
+    let competencyCompletionStats = route
+      .get('competencyService')
+      .getCompetencyCompletionStats(premiumClassIds);
 
     Ember.RSVP.hash({
       courseCards: courseCardsPromise,
       perfSummary: perfSummaryPromise,
-      offlineClassPerfSummary: route.getOfflineClassPerformance(offlineClasses),
-      classes: classes
+      caClassPerfSummary: route.getCAClassPerformance(nonPremiumClasses),
+      classes: classes,
+      competencyStats: competencyCompletionStats
     }).then(function(hash) {
       hash.classes.forEach(function(activeclass) {
         let classId = activeclass.get('id');
@@ -131,29 +153,33 @@ export default Ember.Controller.extend(ModalMixin, {
         }
         activeclass.set(
           'performanceSummaryForDCA',
-          hash.offlineClassPerfSummary.findBy('classId', classId)
+          hash.caClassPerfSummary.findBy('classId', classId)
         );
         activeclass.set(
           'performanceSummary',
           hash.perfSummary.findBy('classId', classId)
         );
+        activeclass.set(
+          'competencyStats',
+          hash.competencyStats.findBy('classId', classId)
+        );
       });
     });
   },
 
-  getOfflineClassPerformance(offlineClasses) {
+  getCAClassPerformance(classes) {
     let route = this;
     return new Ember.RSVP.Promise(function(resolve) {
       let promises = [];
-      offlineClasses.forEach((offlineClass, index) => {
+      classes.forEach((classData, index) => {
         promises[index] = Ember.RSVP.hash({
           performanceSummary: route
             .get('analyticsService')
-            .getDCASummaryPerformance(offlineClass.get('id'))
+            .getDCASummaryPerformance(classData.get('id'))
         }).then(function(hash) {
           let classPerformance = hash.performanceSummary.performance;
           return Ember.Object.create({
-            classId: offlineClass.get('id'),
+            classId: classData.get('id'),
             score: classPerformance.scoreInPercentage,
             totalCompleted: classPerformance.completedCount
           });
