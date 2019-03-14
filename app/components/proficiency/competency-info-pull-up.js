@@ -33,7 +33,7 @@ export default Ember.Component.extend({
       let component = this;
       component.toggleProperty('isInspectCompetency');
       component.set('isExpand', false);
-      component.sendAction("onClosePullUp")
+      component.sendAction('onClosePullUp');
     }
   }
 });
