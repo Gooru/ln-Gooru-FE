@@ -1,10 +1,8 @@
 import Ember from 'ember';
 import d3 from 'd3';
 import {
+  isCompatibleVW,
   diffMonthBtwTwoDates
-} from 'gooru-web/utils/utils';
-import {
-  isCompatibleVW
 } from 'gooru-web/utils/utils';
 import {
   SCREEN_SIZES
@@ -99,7 +97,7 @@ export default Ember.Component.extend({
 
     if (!component.get('isMobileView')) {
       component.$('svg.time-series').remove();
-      component.drawChart();
+      component.drawChart(diffMonthBtwTwoDate);
     } else {
       component.setDates();
     }
@@ -127,7 +125,7 @@ export default Ember.Component.extend({
    * @function drawChart
    * Method to plot time series chart
    */
-  drawChart() {
+  drawChart(diffMonthBtwTwoDate) {
     let component = this;
     // Config SVG size
     let width = 700,
