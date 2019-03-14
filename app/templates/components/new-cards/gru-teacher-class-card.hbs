@@ -46,7 +46,6 @@
         </div>
         {{#if (not isPremiumClass)}}
           <div class="course-map-score {{if (not hasCMStarted) 'not-started'}}" {{action 'selectItem' 'cm-report'}}>
-            {{log class.performanceSummary.score}}
             {{if hasCMStarted (concat class.performanceSummary.score '%') '--' }}
           </div>
         {{/if}}
