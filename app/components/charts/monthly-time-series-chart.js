@@ -1,24 +1,51 @@
 import Ember from 'ember';
 import d3 from 'd3';
-import { diffMonthBtwTwoDates } from 'gooru-web/utils/utils';
-
+import {
+  diffMonthBtwTwoDates
+} from 'gooru-web/utils/utils';
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
+import {
+  SCREEN_SIZES
+} from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
   classNames: ['monthly-time-series-chart'],
 
+  /**
+   * @property {Boolean}
+   * Property to store given screen value is compatible
+   */
+  isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
   // -------------------------------------------------------------------------
   // Events
 
   didInsertElement() {
     let component = this;
-    component.$('svg.time-series').remove();
-    component.drawChart();
+    component.calculateDates();
   },
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {startDomainDate}
+   * Property to store time series start date
+   */
+  startDomainDate: null,
+
+  /**
+   * @property {endDomainDate}
+   * Property to store time series start date
+   */
+  endDomainDate: null,
+
+  dateSeries: Ember.A([]),
+
 
   /**
    * @property {startDate}
@@ -41,15 +68,9 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Methods
 
-  /**
-   * @function drawChart
-   * Method to plot time series chart
-   */
-  drawChart() {
+
+  calculateDates() {
     let component = this;
-    // Config SVG size
-    let width = 700,
-      height = 65;
     let domainEndDate = new Date();
     let domainEndYear = domainEndDate.getFullYear();
     let domainEndMonth = domainEndDate.getMonth();
@@ -70,15 +91,56 @@ export default Ember.Component.extend({
     //add default addon months if required
     let addOnMonths =
       diffMonthBtwTwoDate <= 5 ? 5 - (diffMonthBtwTwoDate - 1) : 0;
+
+    let startDomainDate = new Date(domainStartYear, domainStartMonth - addOnMonths);
+    let endDomainDate = new Date(domainEndYear, domainEndMonth);
+    component.set('startDomainDate', startDomainDate);
+    component.set('endDomainDate', endDomainDate);
+
+    if (!component.get('isMobileView')) {
+      component.$('svg.time-series').remove();
+      component.drawChart();
+    } else {
+      component.setDates();
+    }
+  },
+
+  /**
+   * @function drawChart
+   * Method to get dates between two date
+   */
+  setDates() {
+    let component = this;
+    let dates = [];
+    let startDate = moment(component.get('startDomainDate'));
+    let endDate = moment(component.get('endDomainDate'));
+    while (startDate.isBefore(endDate)) {
+      dates.push(new Date(startDate));
+      startDate.add(1, 'month');
+    }
+    component.set('dateSeries', dates);
+    component.set('activeDate', dates.objectAt(dates.length - 1));
+  },
+
+
+  /**
+   * @function drawChart
+   * Method to plot time series chart
+   */
+  drawChart() {
+    let component = this;
+    // Config SVG size
+    let width = 700,
+      height = 65;
+
     // Define d3 xScale
     let xScale = d3.time
       .scale()
       .domain([
-        new Date(domainStartYear, domainStartMonth - addOnMonths),
-        new Date(domainEndYear, domainEndMonth)
+        component.get('startDomainDate'),
+        component.get('endDomainDate')
       ])
       .range([0, width - 40]);
-
     // Define main d3 xAxis
     let xAxis = d3.svg
       .axis()
@@ -178,5 +240,13 @@ export default Ember.Component.extend({
           .attr('class', 'active-month');
         component.sendAction('onSelectMonth', date);
       });
+  },
+
+  actions: {
+    onDateSelect(date) {
+      let component = this;
+      component.set('activeDate', date);
+      component.sendAction('onSelectMonth', date);
+    }
   }
 });
