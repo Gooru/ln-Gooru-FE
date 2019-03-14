@@ -1306,14 +1306,6 @@ export default Object.assign(quizzesTranslations, {
     'സഹ-അദ്ധ്യാപകർ',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'മറ്റൊരു അധ്യാപകനെ ചേർക്കുക',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'ഇതാണ് ഓഫ്ലൈൻ ക്ലാസ്റൂം',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'ഒരിക്കൽ ഓഫ്ലൈനിൽ അടയാളപ്പെടുത്തിക്കഴിഞ്ഞാൽ ക്ലാസ്റൂം വീണ്ടും ഓൺലൈനാകില്ല.',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'ഇത് ഓഫ്ലൈൻ ക്ലാസ്റൂമിലേക്ക് മാറ്റണമെങ്കിൽ അതെ തിരഞ്ഞെടുക്കുക',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'വിദ്യാർത്ഥികൾ നാവിഗേറ്ററിൽ ഓൺലൈനായി പഠിക്കാത്ത ക്ലാസ്സ്മുറികൾ ഓഫ്ലൈൻ ആയി രേഖപ്പെടുത്തുന്നു. അദ്ധ്യാപകന് ഓഫ്ലൈനിൽ പഠിക്കുന്ന വിദ്യാർത്ഥികളെ ട്രാക്ക് ചെയ്യുകയും വിദ്യാർത്ഥികളുടെ പേരിൽ ഡാറ്റ നൽകുകയും ചെയ്യുന്നു',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'പ്രബോധന ഭാഷ',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':

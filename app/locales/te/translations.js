@@ -1278,14 +1278,6 @@ export default Object.assign(quizzesTranslations, {
     'సహ ఉపాధ్యాయులు',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'మరో ఉపాధ్యాయుడిని చేర్చండి',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'ఇది ఆఫ్ లైన్ తరగతిలో ఉంది',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'ఒకసారి ఆఫ్లైన్ గుర్తించబడింది, తరగతిని మళ్లీ ఆన్లైన్లో చేయడం సాధ్యం కాదు.',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'మీరు దీన్ని ఆఫ్లైన్ తరగతిలో చేయాలనుకుంటే అవును ఎంచుకోండి',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'విద్యార్థులు నావిగేటర్పై ఆన్లైన్లో అధ్యయనం చేయని తరగతి గదులు, ఆఫ్లైన్లో గుర్తించబడతాయి. ఉపాధ్యాయులు ఆఫ్ లైన్ నేర్చుకోవడం మరియు విద్యార్థులు తరపున డేటా ప్రవేశిస్తుంది',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'బోధనా భాష',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':

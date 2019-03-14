@@ -1269,14 +1269,6 @@ export default Object.assign(quizzesTranslations, {
     'સહ-શિક્ષકો',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'બીજા શિક્ષક ઉમેરો',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'આ એક ઑફલાઇન વર્ગખંડ છે',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'એકવાર ઑફલાઇન ચિહ્નિત કર્યા પછી, વર્ગખંડમાં ફરીથી ઑનલાઇન બનાવી શકાતો નથી.',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'જો તમે આને ઑફલાઇન વર્ગખંડ બનાવવા માંગતા હો, તો હા પસંદ કરો',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'વર્ગખંડ, જ્યાં વિદ્યાર્થીઓ નેવિગેટર પર ઑનલાઇન અભ્યાસ કરતા નથી, ને ઑફલાઇન તરીકે ચિહ્નિત કરવામાં આવે છે. શિક્ષક ઑફલાઇન શીખતા વિદ્યાર્થીઓને ટ્રેક કરે છે અને વિદ્યાર્થીઓની વતી ડેટા દાખલ કરે છે',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'સૂચનાની ભાષા',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':

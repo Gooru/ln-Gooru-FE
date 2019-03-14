@@ -1301,14 +1301,6 @@ export default Object.assign(quizzesTranslations, {
     'Co-Teachers',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'Add another teacher',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'This is an offline classroom',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'Once marked offline, the classroom cannot be made online again.',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'Select Yes if you want to make this an offline classroom',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'Classrooms, where students do not study online on Navigator, are marked as Offline. The teacher tracks students learning offline and enters data on behalf of the students',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'Language of instruction',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
