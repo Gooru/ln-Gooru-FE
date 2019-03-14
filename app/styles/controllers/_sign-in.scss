@@ -240,6 +240,7 @@
   padding-left: 5vw;
   flex-direction: column;
   align-items: start;
+  justify-content: center;
 
   .hero-head {
     color: #fff;
@@ -256,12 +257,13 @@
     line-height: 1.5em;
     font-weight: 399;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.91);
-    width: 27%;
+    width: 38%;
+    margin-top: -10px;
   }
 }
 
 .home-btn {
-  width: 27%;
+  width: 38%;
   margin-top: 20px;
   padding: 17px 23px 15px;
   border-radius: 100px;
@@ -296,6 +298,7 @@
   .logout-home-hero-update {
     flex-direction: column;
     text-align: center;
+    align-items: center;
   }
   .hero-head {
     font-size: 2.2em;
