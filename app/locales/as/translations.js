@@ -1305,14 +1305,6 @@ export default Object.assign(quizzesTranslations, {
     'সহ-শিক্ষক',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'বেলেগ শিক্ষক যোগ কৰক',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'এইটো এটা অফ্লাইন শ্ৰেণীকোঠা',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'এবাৰ অফ্লাইন হোৱাৰ পাছত শ্ৰেণীকোঠাটো পুনৰ অনলাইন কৰিব নোৱাৰিব।',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'যদি আপুনি এইটো এটা অফ্লাইন শ্ৰেণীকোঠা কৰিব বিচাৰে তেতিয়া yes বাচনি কৰক',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'যিবোৰ শ্ৰেণীকোঠাত শিক্ষাৰ্থীয়ে নেভিগেতৰত অনলাইন নপঢ়ে সেইবোৰ অফ্লাইন ধৰা হয় । অফ্লাইন পঢ়া শিক্ষাৰ্থীক শিক্ষকে ট্ৰেক কৰে আৰু শিক্ষাৰ্থীৰ হৈ ডাটা অনন্তৰ্ভুক্ত কৰে',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'নিৰ্দেশনাৰ ভাষা',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':

@@ -1313,14 +1313,6 @@ export default Object.assign(quizzesTranslations, {
     'ସହ-ଶିକ୍ଷକ',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'ଅନ୍ ଜଣେ ଶିକ୍ଷକ ଯୋଗ କରନ୍ତୁ',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'ଏହା ହେଉଛି ଏକ ଅଫଲାଇନ୍ କ୍ଲାସରୁମ୍',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'ଥରେ ଅଫଲାଇନ୍ ଚିହ୍ନିତ ହେବା ପରେ, କ୍ଲାସରୁମ୍ କୁ ପୁନର୍ବାର ଅନଲାଇନ କରାଯାଇପାରିବ ନାହିଁ ।',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'ଯଦି ଆପଣ ଏହାକୁ ଅଫଲାଇନ୍ କ୍ଲାସରୁମ୍ କରିବା ପାଇଁ ଚାହାନ୍ତି ତେବେ ହଁ କୁ ଚୟନ କରନ୍ତୁ',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'କ୍ଲାସରୁମ୍, ଯେଉଁଠାରେ ବିଦ୍ୟାର୍ଥୀମାନେ ନେଭିଗେଟରରେ ଅନଲାଇନରେ ଅଧ୍ୟୟନ କରନ୍ତି ନାହିଁ, ତାହାକୁ ଅଫଲାଇନ୍ ଭାବେ ଚିହ୍ନିତ କରାଯାଇଛି । ଶିକ୍ଷକ ବିଦ୍ୟାର୍ଥୀଙ୍କ ଶିକ୍ଷଣକୁ ଅଫଲାଇନ୍ ରେ ଟ୍ରାକ୍ ରଖନ୍ତି ଓ ବିଦ୍ୟାର୍ଥୀଙ୍କ ତରଫରୁ ତଥ୍ୟ ପ୍ରବେଶ କରନ୍ତି',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'ନିର୍ଦ୍ଦେଶାବଳୀର ଭାଷା',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':

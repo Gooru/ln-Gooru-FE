@@ -1275,14 +1275,6 @@ export default Object.assign(quizzesTranslations, {
     'ਸਹਿ-ਅਧਿਆਪਕ',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'ਇਕ ਹੋਰ ਅਧਿਆਪਕ ਨੂੰ ਸ਼ਾਮਿਲ ਕਰੋ',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'ਇਹ ਇੱਕ ਆਫਲਾਇਨ ਕਲਾਸਰੂਮ ਹੈ',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'ਇਕ ਵਾਰ ਆਫਲਾਈਨ ਵਿਖਾਇਆ ਗਿਆ, ਕਲਾਸਰਮ ਨੂੰ ਫਿਰ ਦੁਬਾਰਾ ਨਹੀਂ ਬਣਾਇਆ ਜਾ ਸਕਦਾ.',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'ਜੇ ਤੁਸੀਂ ਇਹ ਆਫਲਾਇਨ ਕਲਾਸਰੂਮ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ ਤਾਂ ਹਾਂ ਚੁਣੋ',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'ਕਲਾਸਰੂਮ, ਜਿੱਥੇ ਵਿਦਿਆਰਥੀ ਨੈਵੀਗੇਟਰ ਤੇ ਔਨਲਾਈਨ ਸਟੱਡੀ ਨਹੀਂ ਕਰਦੇ, ਨੂੰ ਆਫਲਾਈਨ ਵਜੋਂ ਚਿੰਨ੍ਹਿਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ. ਅਿਧਆਪਕ ਨੂੰ ਅਿਧਆਪਕ ਿਸੱਖਣ ਵਾਲੇ ਿਵਿਦਆਰਥੀਆਂ ਨੂੰ ਨਜ਼ਰ ਮਾਰਦਾ ਹੈਅਤੇਿਵਿਦਆਰਥੀਆਂਦੇਮੁਤਾਬਕ ਡਾਟਾ ਿਦੰਦਾ',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'ਪੜ੍ਹਾਈ ਦੀ ਭਾਸ਼ਾ',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':

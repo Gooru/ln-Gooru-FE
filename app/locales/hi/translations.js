@@ -1323,14 +1323,6 @@ export default Object.assign(quizzesTranslations, {
     'सह-शिक्षकों',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'एक और शिक्षक जोड़ें',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'यह एक ऑफ़लाइन कक्षा है',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'एक बार ऑफ़लाइन चिह्नित करने के बाद, कक्षा को फिर से ऑनलाइन नहीं बनाया जा सकता है।',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'यदि आप इसे एक ऑफ़लाइन कक्षा बनाना चाहते हैं, तो हाँ का चयन करें',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'क्लासरूम, जहां छात्र नेविगेटर पर ऑनलाइन अध्ययन नहीं करते हैं, उन्हें ऑफ़लाइन के रूप में चिह्नित किया जाता है। शिक्षक ऑफ़लाइन सीखने वाले छात्रों को ट्रैक करता है और छात्रों की ओर से डेटा दर्ज करता है',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'निर्देश की भाषा',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':

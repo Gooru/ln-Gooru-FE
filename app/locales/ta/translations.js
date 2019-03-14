@@ -1307,14 +1307,6 @@ export default Object.assign(quizzesTranslations, {
     'இணை ஆசிரியர்கள்',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'மற்றொரு ஆசிரியர் சேர்க்க',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'இது ஒரு ஆஃப்லைன் வகுப்பறை',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'ஒருமுறை ஆஃப்லைனில் குறித்தது, வகுப்பறை மீண்டும் ஆன்லைனில் செய்ய முடியாது.',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'இது ஒரு ஆஃப்லைன் வகுப்பறை செய்ய விரும்பினால் சரி என்பதைத் தேர்ந்தெடுக்கவும்',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'வகுப்பறைகள், மாணவர்களிடமிருந்து ஆன்லைனில் படிக்காத, ஆஃப்லைனில் குறிக்கப்பட்டுள்ளன. மாணவர் ஆஃப்லைன் கற்கும் மாணவர்களை கண்காணிக்கிறது மற்றும் மாணவர்களின் சார்பாக தரவுகளை நுழையும்',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'பயிற்று மொழி',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':

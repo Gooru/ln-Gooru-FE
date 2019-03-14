@@ -1251,14 +1251,6 @@ export default Object.assign(quizzesTranslations, {
     'সহ-শিক্ষক',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'অন্য শিক্ষক যোগ করুন',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'এটি একটি অফলাইন শ্রেণীকক্ষ',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'একবার অফলাইন হিসাবে চিহ্নিত, শ্রেণীকক্ষ আবার অনলাইনে তৈরি করা যাবে না।',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'আপনি যদি এটি একটি অফলাইন শ্রেণীকক্ষ করতে চান তবে হ্যাঁ নির্বাচন করুন',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'ক্লাসরুমে, যেখানে শিক্ষার্থীরা নেভিগেটকারীর উপর অনলাইন অধ্যয়ন না করে, অফলাইনে চিহ্নিত হয়। শিক্ষক অফলাইন শেখার ট্র্যাক ছাত্রদের পক্ষে তথ্য প্রবেশ করে',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'নির্দেশিকার ভাষা',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':

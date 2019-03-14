@@ -1307,14 +1307,6 @@ export default Object.assign(quizzesTranslations, {
     'सहशिक्षक',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'आणखी शिक्षक जोडा',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'हा ऑफलाईन वर्ग आहे',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'एकदा ऑफलाईन म्हणून नोंदवलेला वर्ग पुन्हा ऑनलाईन करता येणार नाही',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'जर हा वर्ग आपल्याला ऑफलाईन म्हणून नोंदवायचा असेल तर \'हो\' निवडा',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'ज्या वर्गात विद्यार्थी नेविगेटरवर ऑनलाईन शिकत नसतील तो वर्ग ऑफलाईन वर्ग म्हणून नोंदवला जातो. शिक्षक विद्यार्थ्यांच्या प्रगतीचा पाठपुरावा ऑफलाईन/प्रत्यक्ष वर्गात  घेतात आणि विद्यार्थ्यांच्या वतीने शिक्षकच नेविगेटर मध्ये माहिती भरतात.',
   'teacher-landing.class.class-settings.class-settings-sec.language': 'माध्यम',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
     'विद्यार्थी सेटिंग्ज',
