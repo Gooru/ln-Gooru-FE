@@ -94,7 +94,7 @@ export default Ember.Component.extend({
   /**
    * @property {Date} timeSeriesStartDate
    */
-  timeSeriesStartDate: null,
+  timeSeriesStartDate: Ember.computed.alias('class.startDate'),
 
   selectedCategory: null,
 
@@ -161,12 +161,8 @@ export default Ember.Component.extend({
     /**
      * Action triggered at once the baseline is drawn
      */
-    onShownBaseLine(createdDate) {
+    onShownBaseLine() {
       let component = this;
-      component.set(
-        'timeSeriesStartDate',
-        createdDate ? new Date(createdDate) : component.get('courseStartDate')
-      );
       component.set('isShowTimeSeries', true);
     },
     /**
