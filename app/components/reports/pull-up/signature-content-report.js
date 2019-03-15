@@ -119,13 +119,6 @@ export default Ember.Component.extend({
    */
   source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
 
-  /**
-   * competency  change will call the function
-   */
-  onChangeCompetency: Ember.observer('competency', function() {
-    let component = this;
-    component.loadData();
-  }),
 
   init() {
     let component = this;
@@ -153,7 +146,9 @@ export default Ember.Component.extend({
       competencyCodes: component
         .get('taxonomyService')
         .fetchCodes(frameworkId, subjectId, courseId, domainId)
-    }).then(({ competencyCodes }) => {
+    }).then(({
+      competencyCodes
+    }) => {
       let microCompetencies = this.filterMicroCompetency(competencyCodes);
       component.set('microCompetencies', microCompetencies);
     });
@@ -176,7 +171,9 @@ export default Ember.Component.extend({
         competencyCode,
         filters
       )
-    }).then(({ learningMapData }) => {
+    }).then(({
+      learningMapData
+    }) => {
       component.set('learningMapData', learningMapData);
       component.checkPrerequisiteCompetencyStatus(
         learningMapData.prerequisites
@@ -186,9 +183,9 @@ export default Ember.Component.extend({
         component.get('showSignatureAssessment') &&
         signatureContentList.assessments.length > 0;
       component.set('showSignatureAssessment', showSignatureAssessment);
-      let signatureContent = showSignatureAssessment
-        ? signatureContentList.assessments
-        : signatureContentList.collections;
+      let signatureContent = showSignatureAssessment ?
+        signatureContentList.assessments :
+        signatureContentList.collections;
       let content = signatureContent.objectAt(0);
       component.set('isLoading', false);
       if (content) {
@@ -206,7 +203,8 @@ export default Ember.Component.extend({
     let component = this;
     let domainCompetencyList = component.get(
       'domainCompetencyList.competencies'
-    );
+    ) || component.get(
+      'domainCompetencyList');
     if (prerequisites && domainCompetencyList) {
       prerequisites.forEach(competency => {
         let filteredCompetency = domainCompetencyList.findBy(
@@ -239,7 +237,9 @@ export default Ember.Component.extend({
     }
     return Ember.RSVP.hash({
       content: contentPromise
-    }).then(({ content }) => {
+    }).then(({
+      content
+    }) => {
       component.set('content', content);
     });
   },
