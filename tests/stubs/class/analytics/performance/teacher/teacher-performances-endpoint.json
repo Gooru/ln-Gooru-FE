@@ -104,5 +104,24 @@
       "body": "File not found!",
       "file": "teacher-ca-performance-200-response.json"
     }
+  },
+
+  {
+    "description": "Fetch Bulk CA performance",
+    "request": {
+      "url": "^/api/nucleus-insights/v2/dca/classes/performance",
+      "method": "POST",
+      "headers": {
+        "authorization": "Token (.+)"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "File not found!",
+      "file": "teacher-ca-bulk-performance-200-response.json"
+    }
   }
 ]

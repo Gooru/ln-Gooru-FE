@@ -191,7 +191,7 @@
         }
       }
       /* Small devices (portrait tablets and large phones, 768px and up) */
-      @media only screen and (min-width: 768px) {
+      @media only screen and (min-width: $screen-xs) and (max-width: $screen-sm) {
         grid-template-columns: 59px 50px 50px 50px 50px 1fr 59px 59px;
 
         &.premium-class {
@@ -494,7 +494,7 @@
         height: 51px;
         text-align: center;
         font-weight: bold;
-        font-size: 18px;
+        font-size: 16px;
         line-height: 1;
         min-width: 50px;
         cursor: pointer;
@@ -511,6 +511,7 @@
         .numerator {
           margin-bottom: 6px;
           display: block;
+          margin-top: 2px;
         }
 
         .denominator {
