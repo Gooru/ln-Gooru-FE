@@ -195,7 +195,9 @@ export default Ember.Component.extend({
    * Computed property  to identify class CA is started or not
    */
   hasCAStarted: Ember.computed('class.performanceSummaryForDCA', function() {
-    const scorePercentage = this.get('class.performanceSummaryForDCA.score');
+    const scorePercentage = this.get(
+      'class.performanceSummaryForDCA.scoreInPercentage'
+    );
     return scorePercentage !== null && isNumeric(scorePercentage);
   }),
 

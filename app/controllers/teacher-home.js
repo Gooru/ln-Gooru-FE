@@ -112,6 +112,9 @@ export default Ember.Controller.extend(ModalMixin, {
       let setting = classData.get('setting');
       return setting === null || !setting['course.premium'];
     });
+    let nonPremiumClassIds = nonPremiumClasses.map(classData => {
+      return classData.get('id');
+    });
     let premiumClassIds = classes
       .filter(classData => {
         let setting = classData.get('setting');
@@ -132,11 +135,14 @@ export default Ember.Controller.extend(ModalMixin, {
     let competencyCompletionStats = route
       .get('competencyService')
       .getCompetencyCompletionStats(premiumClassIds);
+    let caClassPerfSummaryPromise = route
+      .get('performanceService')
+      .getCAPerformanceData(nonPremiumClassIds);
 
     Ember.RSVP.hash({
       courseCards: courseCardsPromise,
       perfSummary: perfSummaryPromise,
-      caClassPerfSummary: route.getCAClassPerformance(nonPremiumClasses),
+      caClassPerfSummary: caClassPerfSummaryPromise,
       classes: classes,
       competencyStats: competencyCompletionStats
     }).then(function(hash) {
@@ -163,30 +169,6 @@ export default Ember.Controller.extend(ModalMixin, {
           'competencyStats',
           hash.competencyStats.findBy('classId', classId)
         );
-      });
-    });
-  },
-
-  getCAClassPerformance(classes) {
-    let route = this;
-    return new Ember.RSVP.Promise(function(resolve) {
-      let promises = [];
-      classes.forEach((classData, index) => {
-        promises[index] = Ember.RSVP.hash({
-          performanceSummary: route
-            .get('analyticsService')
-            .getDCASummaryPerformance(classData.get('id'))
-        }).then(function(hash) {
-          let classPerformance = hash.performanceSummary.performance;
-          return Ember.Object.create({
-            classId: classData.get('id'),
-            score: classPerformance.scoreInPercentage,
-            totalCompleted: classPerformance.completedCount
-          });
-        });
-      });
-      Ember.RSVP.all(promises).then(function(promiseResult) {
-        resolve(promiseResult);
       });
     });
   },

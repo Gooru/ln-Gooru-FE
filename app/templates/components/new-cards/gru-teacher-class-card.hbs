@@ -27,16 +27,16 @@
       {{/if}}
     </div>
     <div class="card-action-container {{if isPremiumClass 'premium-class'}}">
-      <div class="atc-view {{if  hasCAStarted 'has-ca-score'}}" {{action 'selectItem' 'atc'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.performance-overview'}}" data-trigger="hover">
+      <div class="atc-view" {{action 'selectItem' 'atc'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.performance-overview'}}" data-trigger="hover">
         <i class="icon" />
       </div>
-      <div class="class-activities {{if hasCMStarted 'has-cm-score'}} {{if (not isPremiumClass) (concat 'grade-range-' (grade-range class.performanceSummaryForDCA.score))}}">
+      <div class="class-activities  {{if (not isPremiumClass) (concat 'grade-range-' (grade-range class.performanceSummaryForDCA.scoreInPercentage))}}">
         <div class="class-activities-icon" {{action 'selectItem' 'class-activities'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'student-landing.class.class-activities'}}" data-trigger="hover">
           <i class="icon" />
         </div>
         {{#if (not isPremiumClass)}}
           <div class="class-activities-score {{if (not hasCAStarted) 'not-started'}}" {{action 'selectItem' 'ca-report'}}>
-            {{if hasCAStarted (concat class.performanceSummaryForDCA.score '%') '--' }}
+            {{if hasCAStarted (concat class.performanceSummaryForDCA.scoreInPercentage '%') '--' }}
           </div>
         {{/if}}
       </div>
@@ -50,7 +50,7 @@
           </div>
         {{/if}}
       </div>
-      <div class="student-proficiency {{if class.competencyStats 'has-competency-stats'}}" {{action 'selectItem' 'students'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.student-proficiency'}}" data-trigger="hover">
+      <div class="student-proficiency" {{action 'selectItem' 'students'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.student-proficiency'}}" data-trigger="hover">
         {{gru-icon name="school"}}
       </div>
       {{#if isPremiumClass}}

@@ -126,5 +126,19 @@ export default DS.JSONAPISerializer.extend({
       resultSet.pushObject(result);
     });
     return resultSet;
+  },
+
+  /**
+   * Normalized class activity performance data.
+   * @return {Array}
+   */
+  normalizeCAPerformanceData(response) {
+    let resultSet = Ember.A();
+    response = Ember.A(response.usageData);
+    response.forEach(data => {
+      let result = Ember.Object.create(data);
+      resultSet.pushObject(result);
+    });
+    return resultSet;
   }
 });
