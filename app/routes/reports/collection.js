@@ -52,7 +52,10 @@ export default QuizzesReport.extend(PrivateRouteMixin, ContextMixin, {
     // Get initialization data from analytics
 
     let collectionPromise;
-    if (collectionType === 'assessment') {
+    if (
+      collectionType === 'assessment' ||
+      collectionType === 'assessment-external'
+    ) {
       collectionPromise = route
         .get('assessmentService')
         .readAssessment(collectionId);

@@ -33,8 +33,7 @@ export default Ember.Component.extend({
       let collectionType = content.get('collectionType');
       if (collectionType === 'assessment' || collectionType === 'collection') {
         this.sendAction('onPreviewContent', content);
-      }
-      else {
+      } else {
         let url = content.get('url');
         window.open(url, '_blank');
       }
@@ -46,13 +45,10 @@ export default Ember.Component.extend({
      */
     openDcaContentReport(selectedClassActivity) {
       let component = this;
-      const forceCalculateILP = component.get('class.forceCalculateILP');
-      if (forceCalculateILP) {
-        component.set('selectedActivity', selectedClassActivity);
-        component.set('isShowStudentsSummaryReport', true);
-      } else {
-        this.sendAction('openDcaContentReport', selectedClassActivity);
-      }
+      component.set('selectedActivity', selectedClassActivity);
+      component.set('isShowStudentsSummaryReport', true);
+      // old style reporting at CA now replaced with above...
+      // this.sendAction('openDcaContentReport', selectedClassActivity);
     },
 
     /**
