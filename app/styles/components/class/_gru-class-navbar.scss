@@ -147,6 +147,12 @@
           }
         }
 
+        &.nav-menu-default {
+          .notification-tab {
+            grid-column: 5 / 7;
+          }
+        }
+
         .class-management {
           order: 9;
           border-top: 1px solid #ccc;

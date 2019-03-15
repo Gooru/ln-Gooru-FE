@@ -58,8 +58,8 @@ export default Ember.Component.extend({
      */
     openDcaContentReport(selectedClassActivity) {
       let component = this;
-      let isOfflineClass = component.get('isOfflineClass');
-      if (isOfflineClass) {
+      const forceCalculateILP = component.get('class.forceCalculateILP');
+      if (forceCalculateILP) {
         component.set('selectedActivity', selectedClassActivity);
         component.set('isShowStudentsSummaryReport', true);
       } else {
