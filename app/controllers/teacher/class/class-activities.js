@@ -34,7 +34,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Actions
 
   actions: {
-
     //Action triggered when click preview content
     onPreviewContent(content) {
       const controller = this;
@@ -500,15 +499,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * @property {Boolean} isRepeatEntry
    */
   isRepeatEntry: false,
-
-  /**
-   * @property {Boolean} isOfflineClass
-   */
-  isOfflineClass: Ember.computed('class', function() {
-    let controller = this;
-    let classData = controller.get('class');
-    return classData.isOffline;
-  }),
 
   /**
    * @property {Object} selectedActivity

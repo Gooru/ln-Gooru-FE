@@ -47,6 +47,18 @@ export default Ember.Component.extend({
       if (this.get('onItemSelected')) {
         this.sendAction('onItemSelected', item, classId);
       }
+    },
+
+    /**
+     * If course associated with class redirect to ATC View else add to course view
+     */
+    lanuchAddCourseOrATCView() {
+      let course = this.get('course');
+      if (course) {
+        this.send('selectItem', 'atc');
+      } else {
+        this.send('selectItem', 'course-map');
+      }
     }
   },
   // -------------------------------------------------------------------------

@@ -47,6 +47,7 @@
                   {{class.gru-class-activity-panel
                     classActivity=activity
                     classId=classId
+                    class=class
                     members=members
                     classActivities=classActivities
                     onReportclick='changeStatusValue'
@@ -60,7 +61,6 @@
                     showCohort=true
                     onScheduleContentToDCA='onScheduleContentToDCA'
                     onOpenPerformanceEntry="onOpenPerformanceEntry"
-                    isOfflineClass=isOfflineClass
                     onPreviewContent="onPreviewContent"
                   }}
                 {{else}}
@@ -119,6 +119,7 @@
   {{teacher.class.ca-unscheduled-items-pullup
     showPullUp=true
     classId=classId
+    class=class
     unScheduledClassActivities=unScheduledClassActivities
     onChangeVisibility='changeVisibility'
     onRemoveClassActivity='removeClassActivity'
@@ -133,7 +134,6 @@
     context=contextParams
     selectedSearchContentType=selectedSearchContentType
     todaysClassActivities=todaysClassActivities.classActivities
-    isOfflineClass=isOfflineClass
     classPreference=classPreference
     classId=classId
   }}
