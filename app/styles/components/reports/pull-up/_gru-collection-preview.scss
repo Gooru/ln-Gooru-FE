@@ -27,7 +27,6 @@
     position: relative;
     .header-container {
       height: 48px;
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
       background-color: #425e67;
       display: grid;
       grid-template-columns: 40px 1fr 40px;
@@ -52,7 +51,7 @@
         color: $white;
         text-transform: capitalize;
       }
-      .content-player {
+      .content-player, .print-preview {
         cursor: pointer;
         i {
           color: $white;
@@ -62,12 +61,12 @@
     }
     .body-container {
       .content-info-container {
+        box-shadow: 0 0 4px 0 rgba(102, 102, 102, 0.3);
         .title-info-container {
           display: grid;
           grid-template-columns: 80px 24px 1fr;
           align-items: center;
           column-gap: 16px;
-          box-shadow: 0 0 4px 0 rgba(102, 102, 102, 0.3);
           .thumbnail-container {
             width: 80px;
             height: 48px;
@@ -76,17 +75,21 @@
             background-repeat: no-repeat;
           }
           .content-title {
-            @include ellipsis($font-size: 15px, $line-height: 1.5, $lines-to-show: 2);
+            @include ellipsis($font-size: 16px, $line-height: 1.5, $lines-to-show: 2);
             color: #545e66;
           }
           .content-icon {
+            background-size: 24px 18px;
+            width: 24px;
+            height: 18px;
+            background-repeat: no-repeat;
+            display: block;
             &.assessment {
               background-image: url("gooru/images/add_assessment.svg");
-              background-size: 24px 18px;
-              width: 24px;
-              height: 18px;
-              background-repeat: no-repeat;
-              display: block;
+            }
+
+            &.collection {
+              background-image: url("gooru/images/add_collection.svg");
             }
           }
         }
@@ -94,7 +97,7 @@
           height: 48px;
           display: grid;
           align-items: center;
-          padding-left: 16px;
+          padding-left: 94px;
           .gru-taxonomy-tag-list {
             .gru-taxonomy-tag {
               min-width: 90px;
@@ -130,7 +133,6 @@
               }
             }
           }
-          box-shadow: 0 0 4px 0 rgba(102, 102, 102, 0.3);
         }
       }
       .content-items-container {

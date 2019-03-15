@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
+import { PLAYER_WINDOW_NAME, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
 
 export default Ember.Component.extend({
 
@@ -45,13 +47,15 @@ export default Ember.Component.extend({
     onPlayContent() {
       const component = this;
       let contentId = component.get('previewContentId');
-      let contentType = component.get('previewContentType');
-      component.get('router').transitionTo('player', contentId, {
-        queryParams: {
-          role: 'teacher',
-          type: contentType
-        }
-      });
+      let playerURL = `${getEndpointUrl()}/player/${contentId}?source=${
+        PLAYER_EVENT_SOURCE.RGO
+      }`;
+      window.open(playerURL, PLAYER_WINDOW_NAME);
+    },
+
+    //Action triggered when click print preview
+    onPrintPreview() {
+      window.print();
     }
   },
 
@@ -76,6 +80,11 @@ export default Ember.Component.extend({
    * @property {Boolean} isShowCorrectAnswer
    */
   isShowCorrectAnswer: true,
+
+  /**
+   * @property {Boolean} isQuestionAvailable
+   */
+  isQuestionAvailable: Ember.computed.alias('previewContent.questionCount'),
 
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags
@@ -135,7 +144,9 @@ export default Ember.Component.extend({
       assessment: assessmentService.readAssessment(assessmentId)
     })
       .then(({assessment}) => {
-        component.set('previewContent', assessment);
+        if (!component.isDestroyed) {
+          component.set('previewContent', assessment);
+        }
       });
   },
 
@@ -151,7 +162,9 @@ export default Ember.Component.extend({
       collection: collectionService.readCollection(collectionId)
     })
       .then(({collection}) => {
-        component.set('previewContent', collection);
+        if (!component.isDestroyed) {
+          component.set('previewContent', collection);
+        }
       });
   }
 });

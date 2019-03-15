@@ -30,25 +30,13 @@ export default Ember.Component.extend({
      * Action triggered when the user play collection
      */
     onPlayContent(content) {
-      let contentId = content.get('id');
       let collectionType = content.get('collectionType');
-      if (collectionType === 'assessment') {
+      if (collectionType === 'assessment' || collectionType === 'collection') {
         this.sendAction('onPreviewContent', content);
-      } else {
+      }
+      else {
         let url = content.get('url');
-        if (
-          collectionType === 'assessment-external' ||
-          collectionType === 'collection-external'
-        ) {
-          window.open(url, '_top');
-        } else {
-          this.get('router').transitionTo('player', contentId, {
-            queryParams: {
-              role: 'teacher',
-              type: collectionType
-            }
-          });
-        }
+        window.open(url, '_blank');
       }
     },
 
