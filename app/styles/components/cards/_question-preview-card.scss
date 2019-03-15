@@ -1,21 +1,26 @@
 .cards.question-preview-card {
   .question-preview-container {
-    padding: 16px;
+    padding: 8px 24px 8px 24px;
+    border-bottom: 1px solid rgba(102, 102, 102, 0.5);
+
     .question-title-container {
       display: grid;
-      grid-template-columns: 16px 1fr;
+      grid-template-columns: 16px 16px 1fr;
       align-items: center;
       column-gap: 8px;
       padding-bottom: 8px;
+      .question-order {
+        font-weight: bold;
+        color: #3e5e67;
+        font-size: 15px;
+      }
       .question-icon {
-        i {
-          background-image: url("gooru/images/navigation_question_selected.svg");
-          background-size: 16px 16px;
-          width: 16px;
-          height: 16px;
-          background-repeat: no-repeat;
-          display: block;
-        }
+        width: 16px;
+        height: 16px;
+        background-size: 16px 16px;
+        background-repeat: no-repeat;
+        display: block;
+        background-image: url("gooru/images/question-icon.svg") !important;
       }
       .title {
         font-weight: bold;
@@ -23,7 +28,7 @@
         $line-height: 1.5;
         $lines-to-show: 2;
         @include ellipsis(
-          $font-size: 14px,
+          $font-size: 15px,
           $line-height: $line-height,
           $lines-to-show: $lines-to-show
         );
@@ -44,6 +49,7 @@
               font-size: 14px;
               font-weight: bold;
               color: $white;
+              text-align: center;
             }
             .tag-caption {
               display: none;
@@ -67,7 +73,7 @@
     }
 
     .question-description {
-      $font-size: 12px;
+      $font-size: 14px;
       $line-height: 1.5;
       $lines-to-show: 4;
       @include ellipsis(
@@ -81,7 +87,7 @@
 
     .answer-container {
       %circle-tick-icon {
-        background: url("/assets/gooru/images/check-circle-light-blue.svg") no-repeat center;
+        background: url("/assets/gooru/images/check-circle-light-blue.svg") no-repeat center  !important;;
         background-size: contain;
         border: none;
         display: block;
@@ -161,7 +167,7 @@
           .fib-answers {
             .gru-math-text {
               p {
-                font-size: 12px;
+                font-size: 14px;
                 color: #666666;
               }
               input {
@@ -175,7 +181,7 @@
         .sentence {
           .gru-math-text {
             p {
-              font-size: 12px;
+              font-size: 14px;
               color: #666666;
             }
           }
@@ -186,7 +192,7 @@
           padding: 0;
 
           .gru-math-text {
-            font-size: 12px;
+            font-size: 14px;
             color: #4f95f6;
             font-weight: bold;
           }
@@ -200,7 +206,7 @@
 
         p {
           span {
-            font-size: 12px;
+            font-size: 14px;
             color: #666666;
 
             &.correct {
@@ -222,7 +228,7 @@
           .radio {
             margin: 8px 0;
             label {
-              border: 1px solid rgba(151, 151, 151, 0.1);
+              border: 1px solid rgba(151, 151, 151, 0.4);
               border-radius: 8px;
               height: 48px;
               width: inherit;
@@ -253,7 +259,7 @@
           width: 100%;
 
           li {
-            border: 1px solid rgba(151, 151, 151, 0.1);
+            border: 1px solid rgba(151, 151, 151, 0.4);
             border-radius: 8px;
             height: 48px;
             margin: 8px 0;
@@ -282,15 +288,13 @@
               }
             }
 
-            .gru-math-text {
-              p {
-                font-size: 14px;
-                font-weight: bold;
-                color: #3e5e67;
-                width: 100%;
-                line-height: 48px;
-                overflow: hidden;
-              }
+            .gru-math-text, > p {
+              font-size: 14px;
+              font-weight: bold;
+              color: #3e5e67;
+              width: 100%;
+              line-height: 48px;
+              overflow: hidden;
             }
 
             &.correct-answer {
@@ -314,7 +318,8 @@
                 .gru-math-text {
                   height: 48px;
                   display: block;
-
+                  color: #3c99f7;
+                  font-weight: bold;
                   p {
                     color: #3c99f7;
                   }
@@ -352,7 +357,7 @@
 
             tbody {
               tr {
-                border: 1px solid rgba(151, 151, 151, 0.1);
+                border: 1px solid rgba(151, 151, 151, 0.4);
                 border-radius: 8px;
                 height: 48px;
                 margin: 8px 0;
@@ -391,14 +396,15 @@
             display: grid;
             grid-template-columns: 40px 40px 1fr;
             padding-left: 10px;
-            border-right: 1px solid rgba(151, 151, 151, 0.1);
-            border-top: 1px solid rgba(151, 151, 151, 0.1);
+            border-right: 1px solid rgba(151, 151, 151, 0.4);
+            border-top: 1px solid rgba(151, 151, 151, 0.4);
+            border-left: 1px solid rgba(151, 151, 151, 0.4);
             border-radius: 8px;
             height: 48px;
             margin: 8px 0;
             align-items: center;
             &:last-child {
-              border-bottom: 1px solid rgba(151, 151, 151, 0.1);
+              border-bottom: 1px solid rgba(151, 151, 151, 0.4);
             }
             &.header {
               border: none;
@@ -451,7 +457,7 @@
             width: 100%;
             height: 48px;
             padding-left: 16px;
-            border: 1px solid rgba(151, 151, 151, 0.1);
+            border: 1px solid rgba(151, 151, 151, 0.4);
             border-radius: 8px;
             line-height: 48px;
             label {
@@ -474,7 +480,7 @@
             height: 48px;
             display: grid;
             grid-template-columns: 40px 1fr;
-            border: 1px solid rgba(151, 151, 151, 0.1);
+            border: 1px solid rgba(151, 151, 151, 0.4);
             border-radius: 8px;
             padding-left: 16px;
             align-items: center;
@@ -527,7 +533,7 @@
               width: inherit;
               height: 48px;
               padding-left: 16px;
-              border: 1px solid rgba(151, 151, 151, 0.1);
+              border: 1px solid rgba(151, 151, 151, 0.4);
               border-radius: 8px;
               margin: 8px 0;
 
@@ -558,7 +564,7 @@
             padding: 0;
             height: 48px;
             max-width: 100%;
-            border: 1px solid rgba(151, 151, 151, 0.1);
+            border: 1px solid rgba(151, 151, 151, 0.4);
             border-radius: 8px;
             overflow: hidden;
             margin: 8px 0;
@@ -594,6 +600,7 @@
         }
       }
 
+      //Re-Order question
       .gru-reorder {
         .instructions {
           display: none;
@@ -609,7 +616,7 @@
               padding: 0;
               height: 48px;
               max-width: 100%;
-              border: 1px solid rgba(151, 151, 151, 0.1);
+              border: 1px solid rgba(151, 151, 151, 0.4);
               border-radius: 8px;
               overflow: hidden;
               margin: 8px 0;
@@ -680,6 +687,12 @@
             }
           }
         }
+      }
+    }
+
+    &.FIB {
+      .question-description {
+        display: none;
       }
     }
   }
