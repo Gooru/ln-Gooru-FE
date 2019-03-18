@@ -190,7 +190,7 @@
                           <div class="go-live-cnt">
                             {{#if (and item.visible (not isPremiumClass))}}
                               {{#unless (or item.isExternalAssessment item.isExternalCollection) }}
-                                <button {{action 'goLive' item.id}} data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="on-air go-live enabled">{{t "common.launch-on-air"}}
+                                <button {{action 'goLive' item}} data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="on-air go-live enabled">{{t "common.launch-on-air"}}
                                 </button>
                               {{/unless}}
                             {{/if}}
