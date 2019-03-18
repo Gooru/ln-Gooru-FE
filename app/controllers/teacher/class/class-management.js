@@ -326,6 +326,8 @@ export default Ember.Controller.extend(ModalMixin, {
 
     updateClassForceCalculateILPSetting() {
       this.set('enableApplySettings', true);
+      let forceCalculateILP = this.get('tempClass.forceCalculateILP');
+      this.set('tempClass.forceCalculateILP', !forceCalculateILP);
     },
 
     updateClassGradeOrigin(grade) {

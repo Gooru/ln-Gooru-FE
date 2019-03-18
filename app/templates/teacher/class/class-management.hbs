@@ -208,7 +208,7 @@
                   </div>
                   <div class='action-button-slide-yes'>
                     {{gru-switch switchOptions=switchOptions onOptionSwitch='updateClassForceCalculateILPSetting'
-                              isChecked=tempClass.forceCalculateILP }}
+                              isChecked=(if (not tempClass.forceCalculateILP) true false) }}
                   </div>
                 </div>
               {{/if}}
