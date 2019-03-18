@@ -47,9 +47,20 @@ export default Ember.Component.extend({
     onPlayContent() {
       const component = this;
       let contentId = component.get('previewContentId');
-      let playerURL = `${getEndpointUrl()}/player/${contentId}?source=${
-        PLAYER_EVENT_SOURCE.RGO
-      }`;
+      let playerContext = component.get('playerContext');
+      let playerURL = `${getEndpointUrl()}/player`;
+      if (playerContext) {
+        let classId = playerContext.get('classId');
+        let courseId = playerContext.get('courseId');
+        let unitId = playerContext.get('unitId');
+        let lessonId = playerContext.get('lessonId');
+        let contentType = component.get('previewContentType');
+        playerURL += `/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${contentId}?role=teacher&type=${contentType}&source=${PLAYER_EVENT_SOURCE.RGO}`;
+      } else {
+        playerURL += `/${contentId}?source=${
+          PLAYER_EVENT_SOURCE.RGO
+        }`;
+      }
       window.open(playerURL, PLAYER_WINDOW_NAME);
     },
 
@@ -99,6 +110,11 @@ export default Ember.Component.extend({
     }
     return TaxonomyTag.getTaxonomyTags(standards);
   }),
+
+  /**
+   * @property {Object} playerContext
+   */
+  playerContext: null,
 
   //--------------------------------------------------------------------------
   // Methods

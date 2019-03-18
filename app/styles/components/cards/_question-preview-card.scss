@@ -165,11 +165,9 @@
 
         .answer-panel {
           .fib-answers {
-            .gru-math-text {
-              p {
-                font-size: 14px;
-                color: #666666;
-              }
+            .gru-math-text, p {
+              font-size: 14px;
+              color: #666666;
               input {
                 background-color: unset;
                 border-bottom: 1px solid;
@@ -179,11 +177,9 @@
         }
 
         .sentence {
-          .gru-math-text {
-            p {
-              font-size: 14px;
-              color: #666666;
-            }
+          .gru-math-text, p {
+            font-size: 14px;
+            color: #666666;
           }
         }
 
@@ -375,12 +371,10 @@
                       display: none;
                     }
 
-                    .gru-math-text {
-                      p {
-                        font-size: 14px;
-                        font-weight: bold;
-                        color: #3e5e67;
-                      }
+                    .gru-math-text, > p {
+                      font-size: 14px;
+                      font-weight: bold;
+                      color: #3e5e67;
                     }
                   }
                 }
@@ -434,12 +428,10 @@
                 display: none;
               }
 
-              .gru-math-text {
-                p {
-                  font-size: 14px;
-                  color: #4f95f6;
-                  font-weight: bold;
-                }
+              .gru-math-text, > p {
+                font-size: 14px;
+                color: #4f95f6;
+                font-weight: bold;
               }
             }
           }
@@ -537,14 +529,11 @@
               border-radius: 8px;
               margin: 8px 0;
 
-              .gru-math-text {
+              .gru-math-text, > p {
                 line-height: 48px;
-
-                p {
-                  font-size: 14px;
-                  font-weight: bold;
-                  color: #3e5e67;
-                }
+                font-size: 14px;
+                font-weight: bold;
+                color: #3e5e67;
               }
 
               div {
@@ -576,6 +565,7 @@
                 height: inherit;
                 line-height: 48px;
                 overflow: hidden;
+                color: #3e5e67;
 
                 p {
                   font-size: 14px;
@@ -589,10 +579,8 @@
               border: 1px solid #3c99f7;
 
               .text {
-                .gru-math-text {
-                  p {
-                    color: #3c99f7;
-                  }
+                .gru-math-text, > p {
+                  color: #3c99f7;
                 }
               }
             }
@@ -631,14 +619,12 @@
               div {
                 height: inherit;
 
-                .gru-math-text {
-                  p {
-                    height: 48px;
-                    line-height: 48px;
-                    font-size: 14px;
-                    font-weight: bold;
-                    color: #3e5e67;
-                  }
+                .gru-math-text, > p {
+                  height: 48px;
+                  line-height: 48px;
+                  font-size: 14px;
+                  font-weight: bold;
+                  color: #3e5e67;
                 }
               }
             }
@@ -677,12 +663,10 @@
             }
 
             .answer-text {
-              .gru-math-text {
-                p {
-                  font-size: 14px;
-                  font-weight: bold;
-                  color: #4f95f6;
-                }
+              .gru-math-text, > p {
+                font-size: 14px;
+                font-weight: bold;
+                color: #4f95f6;
               }
             }
           }

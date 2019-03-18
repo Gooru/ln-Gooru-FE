@@ -174,6 +174,26 @@ export default Ember.Controller.extend({
   studentClassScore: null,
 
   isGradeLoading: null,
+
+  /**
+   * @property {Object} previewContent
+   */
+  previewContent: null,
+
+  /**
+   * @property {Object} previewPlayerContext
+   */
+  previewPlayerContext: null,
+
+  /**
+   * @property {String} previewContentType
+   */
+  previewContentType: '',
+
+  /**
+   * @property {Object} isShowContentPreview
+   */
+  isShowContentPreview: false,
   // -------------------------------------------------------------------------
   // Actions
 
@@ -340,6 +360,25 @@ export default Ember.Controller.extend({
       });
       controller.set('studentCourseReportContext', params);
       controller.set('showCourseReport', true);
+    },
+
+    //Action triggered when click collection/assessment title
+    onPreviewContent(unitId, lessonId, content) {
+      const controller = this;
+      if (content.get('isExternalAssessment')) {
+        window.open(content.get('url'));
+      } else {
+        let previewPlayerContext = Ember.Object.create({
+          classId: controller.get('class.id'),
+          courseId: controller.get('course.id'),
+          unitId,
+          lessonId
+        });
+        controller.set('previewPlayerContext', previewPlayerContext);
+        controller.set('previewContent', content);
+        controller.set('previewContentType', content.get('format'));
+        controller.set('isShowContentPreview', true);
+      }
     }
   },
 
