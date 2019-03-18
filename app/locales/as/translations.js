@@ -2448,5 +2448,10 @@ export default Object.assign(quizzesTranslations, {
   'notifications.typeinclass.teacher-override-title':
     'শিক্ষকে আপোনাৰ কা্ৰ্য্য শুদ্ধ কৰিলে',
   'notifications.typeinclass.teacher-grading-complete-title':
-    'শিক্ষকে শ্ৰেণীকোঠাত আপোনাৰ কাৰ্য্য শ্ৰেণীবদ্ধ কৰিলে'
+    'শিক্ষকে শ্ৰেণীকোঠাত আপোনাৰ কাৰ্য্য শ্ৰেণীবদ্ধ কৰিলে',
+  'goahead.add.something': 'Go ahead, add something.',
+  'present.diagnostic.determine.not.know':
+    'Present a diagnostic to determine the student\'s current location, if not known?',
+  'present.diagnostic.determine.know':
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
 });
