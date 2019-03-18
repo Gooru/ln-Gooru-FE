@@ -365,7 +365,7 @@ export default Ember.Controller.extend({
     //Action triggered when click collection/assessment title
     onPreviewContent(unitId, lessonId, content) {
       const controller = this;
-      if (content.get('isExternalAssessment')) {
+      if (content.get('isExternalAssessment') || content.get('format') === 'collection-external') {
         window.open(content.get('url'));
       } else {
         let previewPlayerContext = Ember.Object.create({

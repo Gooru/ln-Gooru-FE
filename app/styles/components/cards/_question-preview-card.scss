@@ -284,7 +284,7 @@
               }
             }
 
-            .gru-math-text, > p {
+            .gru-math-text, p {
               font-size: 14px;
               font-weight: bold;
               color: #3e5e67;
@@ -371,7 +371,7 @@
                       display: none;
                     }
 
-                    .gru-math-text, > p {
+                    .gru-math-text, p {
                       font-size: 14px;
                       font-weight: bold;
                       color: #3e5e67;
@@ -428,7 +428,7 @@
                 display: none;
               }
 
-              .gru-math-text, > p {
+              .gru-math-text, p {
                 font-size: 14px;
                 color: #4f95f6;
                 font-weight: bold;
@@ -529,7 +529,7 @@
               border-radius: 8px;
               margin: 8px 0;
 
-              .gru-math-text, > p {
+              .gru-math-text, p {
                 line-height: 48px;
                 font-size: 14px;
                 font-weight: bold;
@@ -579,7 +579,7 @@
               border: 1px solid #3c99f7;
 
               .text {
-                .gru-math-text, > p {
+                .gru-math-text, p {
                   color: #3c99f7;
                 }
               }
@@ -619,7 +619,7 @@
               div {
                 height: inherit;
 
-                .gru-math-text, > p {
+                .gru-math-text, p {
                   height: 48px;
                   line-height: 48px;
                   font-size: 14px;
@@ -663,7 +663,7 @@
             }
 
             .answer-text {
-              .gru-math-text, > p {
+              .gru-math-text, p {
                 font-size: 14px;
                 font-weight: bold;
                 color: #4f95f6;

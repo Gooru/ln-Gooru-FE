@@ -24,7 +24,8 @@ module.exports = function(defaults) {
           'themes/bergen': '/assets/themes/bergen/styles.css',
           goorultr: '/assets/goorultr.css',
           goorurtl: '/assets/goorurtl.css',
-          apprwd: '/assets/gooru-rwd.css'
+          apprwd: '/assets/gooru-rwd.css',
+          printpreview: '/assets/gooru-print.css'
         }
       }
     },

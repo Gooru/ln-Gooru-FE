@@ -28,9 +28,7 @@
     .header-container {
       height: 48px;
       background-color: #425e67;
-      display: grid;
-      grid-template-columns: 40px 1fr 40px;
-      align-items: center;
+      display: flex;
       padding-left: 16px;
       .close-pullup {
         width: 32px;
@@ -39,23 +37,30 @@
         border-radius: 50%;
         text-align: center;
         cursor: pointer;
+        margin: 8px 0;
         i {
           color: $white;
           line-height: 32px;
+          width: 32px;
+          height: 32px;
         }
       }
       .preview-title {
         font-size: 15px;
         font-weight: bold;
-        line-height: 1.07;
+        line-height: 48px;
         color: $white;
         text-transform: capitalize;
+        padding: 0 16px;
+        width: 100%;
       }
-      .content-player, .print-preview {
+      .content-player, .print-preview, .content-remix {
+        width: 40px;
         cursor: pointer;
+        margin: 0 8px;
         i {
           color: $white;
-          line-height: 32px;
+          line-height: 48px;
         }
       }
     }
