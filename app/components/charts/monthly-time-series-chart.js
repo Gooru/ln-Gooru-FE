@@ -112,7 +112,7 @@ export default Ember.Component.extend({
     let dates = [];
     let startDate = moment(component.get('startDomainDate'));
     let endDate = moment(component.get('endDomainDate'));
-    while (startDate.isBefore(endDate)) {
+    while (startDate.isSameOrBefore(endDate)) {
       dates.push(new Date(startDate));
       startDate.add(1, 'month');
     }
