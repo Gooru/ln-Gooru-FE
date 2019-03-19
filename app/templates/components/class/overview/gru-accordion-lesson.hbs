@@ -186,7 +186,8 @@
                     {{/if}}
                     {{#if isTeacher}}
                       <div class="controls pull-right">
-                        {{#if (or item.isAssessment item.isCollection) }}
+                        {{!-- {{#if (or item.isAssessment item.isCollection) }} --}}
+                        {{#if item.isAssessment }}
                           <div class="go-live-cnt">
                             {{#if (and item.visible (not isPremiumClass))}}
                               {{#unless (or item.isExternalAssessment item.isExternalCollection) }}

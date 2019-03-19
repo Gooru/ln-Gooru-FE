@@ -86,7 +86,8 @@
           {{/if}}
         </div>
         <div class="dca-golive-btn">
-          {{#if (and showGolive (or (eq item.collectionType 'assessment') (eq item.collectionType 'collection'))) }}
+          {{!-- {{#if (and showGolive (or (eq item.collectionType 'assessment') (eq item.collectionType 'collection'))) }} --}}
+          {{#if (and showGolive (eq item.collectionType 'assessment') )  }}
             <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item}}></i>
           {{/if}}
         </div>
