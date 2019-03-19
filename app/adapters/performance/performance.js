@@ -235,7 +235,7 @@ export default Ember.Object.extend({
    * @function getCAPerformanceData
    * performance Data of Class Activities for ALL classes of a Student/Teacher
    */
-  getCAPerformanceData(classIds) {
+  getCAPerformanceData(classIds, userId) {
     const adapter = this;
     const namespace = adapter.get('insightsNamespace');
     const url = `${namespace}/dca/classes/performance`;
@@ -244,7 +244,10 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      data: JSON.stringify({ classIds })
+      data: JSON.stringify({
+        classIds,
+        userId
+      })
     };
     return Ember.$.ajax(url, options);
   },

@@ -86,9 +86,13 @@ test('Class Card Layout', function(assert) {
     'Wrong class title text'
   );
 
-  T.exists(assert, $panelHeading.find('.code'), 'Missing class card code');
+  T.exists(
+    assert,
+    $panelBody.find('.card-class-code'),
+    'Missing class card code'
+  );
   assert.equal(
-    T.text($panelHeading.find('.code .class-code')),
+    T.text($panelBody.find('.card-class-code .class-code')),
     'VZFMEWH',
     'Wrong class code text'
   );
@@ -97,41 +101,5 @@ test('Class Card Layout', function(assert) {
     assert,
     $panelBody.find('.information'),
     'Missing class information'
-  );
-
-  const $links = $panelBody.find('.links');
-
-  T.exists(assert, $links, 'Missing card links');
-
-  assert.equal($links.find('li a').length, 3, 'Number of card links');
-  T.exists(
-    assert,
-    $links.find('.class-activities'),
-    'Missing class activities link'
-  );
-  T.exists(assert, $links.find('.course-map'), 'Missing content map link');
-  T.exists(assert, $links.find('.performance'), 'Missing performance link');
-
-  T.exists(
-    assert,
-    $panelBody.find('.performance'),
-    'Missing class performance'
-  );
-
-  assert.equal(
-    T.text($panelBody.find('.performance .percentage')),
-    '90%',
-    'Wrong performance score of the chart'
-  );
-
-  T.exists(
-    assert,
-    $panelBody.find('.completion-chart .gru-x-bar-chart'),
-    'Missing completion-chart gru-x-bar-chart component'
-  );
-  assert.equal(
-    T.text($panelBody.find('.completion-chart label')),
-    '50% Completed',
-    'Wrong completed score of the chart'
   );
 });

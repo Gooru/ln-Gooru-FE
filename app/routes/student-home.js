@@ -45,6 +45,11 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
    */
   skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
 
+  /**
+   * @requires service:api-sdk/competency
+   */
+  competencyService: Ember.inject.service('api-sdk/competency'),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -71,12 +76,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
           currentLocation
         );
       } else {
-        route.doCheckClassDestination(
-          classData,
-          classId,
-          courseId,
-          currentLocation
-        );
+        route.playContent(classData, classId, courseId, currentLocation);
       }
     },
 
@@ -129,108 +129,6 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
   model: function() {
     let route = this;
     const configuration = this.get('configurationService.configuration');
-
-    //Steps for Take a Tour functionality
-    const tourSteps = Ember.A([
-      {
-        elementSelector: '.gru-take-tour',
-        title: route.get('i18n').t('gru-take-tour.student-home.stepOne.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepOne.description')
-      },
-      {
-        elementSelector: '.gru-header .home-link',
-        title: route.get('i18n').t('gru-take-tour.student-home.stepTwo.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepTwo.description')
-      },
-      {
-        elementSelector: '.gru-header .search-navbar-form',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepThree.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepThree.description')
-      },
-      {
-        elementSelector: '.gru-header .menu-navbar .study-link',
-        title: route.get('i18n').t('gru-take-tour.student-home.stepFour.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepFour.description')
-      },
-      {
-        elementSelector: '.gru-header .menu-navbar .library-link',
-        title: route.get('i18n').t('gru-take-tour.student-home.stepFive.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepFive.description')
-      },
-      {
-        elementSelector: '.gru-header .menu-navbar .profile-link',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepSeven.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepSeven.description')
-      },
-      {
-        elementSelector: '.gru-header .menu-navbar .dropdown .profile-more',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepEight.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepEight.description')
-      },
-      {
-        elementSelector: '.student-left-panel .featured-courses',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepFeaturedCourses.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepFeaturedCourses.description')
-      },
-      {
-        elementSelector: '.student-navigator .active-classes a',
-        title: route.get('i18n').t('gru-take-tour.student-home.stepTen.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepTen.description')
-      },
-      {
-        elementSelector: '.student-navigator .independent-learning a',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepEleven.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepEleven.description')
-      },
-      {
-        elementSelector: '.content .gru-join-class-card',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepTwelve.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepTwelve.description')
-      },
-      {
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepThirteen.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.student-home.stepThirteen.description')
-      }
-    ]);
-
     let localStorage = this.getLocalStorage();
     const userId = this.get('session.userId');
     const localStorageLogins = `${userId}_logins`;
@@ -298,7 +196,6 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       return {
         activeClasses,
         featuredCourses,
-        tourSteps,
         loginCount
       };
     });
@@ -313,21 +210,56 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     let classCourseIds = route.getListOfClassCourseIds(activeClasses);
     let courseIDs = route.getListOfCourseIds(activeClasses);
     let myId = route.get('session.userId');
+    let nonPremiumClasses = activeClasses.filter(classData => {
+      let setting = classData.get('setting');
+      return setting === null || !setting['course.premium'];
+    });
+    let nonPremiumClassCourseIds = route.getListOfClassCourseIds(
+      nonPremiumClasses
+    );
+    let nonPremiumClassIds = nonPremiumClasses.map(classData => {
+      return classData.get('id');
+    });
+    let premiumClassIds = activeClasses
+      .filter(classData => {
+        let setting = classData.get('setting');
+        return setting !== null && setting['course.premium'];
+      })
+      .map(classData => {
+        return classData.get('id');
+      });
 
     let courseCardsPromise = route
       .get('courseService')
       .fetchCoursesCardData(courseIDs);
     let perfPromise = route
       .get('performanceService')
-      .findClassPerformanceSummaryByStudentAndClassIds(myId, classCourseIds);
+      .findClassPerformanceSummaryByStudentAndClassIds(
+        myId,
+        nonPremiumClassCourseIds
+      );
     let locationPromise = route
       .get('analyticsService')
       .getUserCurrentLocationByClassIds(classCourseIds, myId);
+    let competencyCompletionStats =
+      premiumClassIds.length > 0
+        ? route
+          .get('competencyService')
+          .getCompetencyCompletionStats(premiumClassIds, myId)
+        : Ember.RSVP.resolve([]);
+    let caClassPerfSummaryPromise =
+      nonPremiumClassIds.length > 0
+        ? route
+          .get('performanceService')
+          .getCAPerformanceData(nonPremiumClassIds, myId)
+        : Ember.RSVP.resolve([]);
 
     Ember.RSVP.hash({
       classPerformanceSummaryItems: perfPromise,
       classesLocation: locationPromise,
-      courseCards: courseCardsPromise
+      courseCards: courseCardsPromise,
+      caClassPerfSummary: caClassPerfSummaryPromise,
+      competencyStats: competencyCompletionStats
     }).then(function(hash) {
       const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
       const classesLocation = hash.classesLocation;
@@ -344,6 +276,14 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
         activeClass.set(
           'performanceSummary',
           classPerformanceSummaryItems.findBy('classId', classId)
+        );
+        activeClass.set(
+          'performanceSummaryForDCA',
+          hash.caClassPerfSummary.findBy('classId', classId)
+        );
+        activeClass.set(
+          'competencyStats',
+          hash.competencyStats.findBy('classId', classId)
         );
 
         if (courseId) {
