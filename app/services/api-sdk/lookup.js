@@ -175,5 +175,21 @@ export default Ember.Service.extend({
           resolve(service.get('lookupSerializer').normalizeLanguages(response));
         }, reject);
     });
-  }
+  },
+
+  /**
+  * Gets the Educational information new
+  * @returns {Promise}
+  */
+ getEducationalUse: function() {
+   const service = this;
+   return new Ember.RSVP.Promise(function(resolve, reject) {
+     service
+       .get('lookupAdapter')
+       .getEducationalUse()
+       .then(function(response) {
+         resolve(service.get('lookupSerializer').normalizeEducations(response));
+       }, reject);
+   });
+ }
 });

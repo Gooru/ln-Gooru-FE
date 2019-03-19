@@ -21,11 +21,29 @@
           spellcheck="true"
           id="search-content"
         }}
-          <label for="search-content" class="search-icon">
+          <div class="filter-items">
+            {{#each filters as |selectedFilter index|}}
+              <div class="filter-item">
+                <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
+                <span class="clear" {{action 'clearFilter' index}}> {{gru-icon name="close"}}</span>
+              </div>
+            {{/each}}
+            {{#if moreFilters}}
+              <span class="more-pointer">+{{moreFilters.length}}</span>
+            {{/if}}
+            <div class="more-filters hidden">
+              {{#each moreFilters as |moreFilter|}}
+                <div class="filter-item">
+                  <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
+                </div>
+              {{/each}}
+            </div>
+          </div>
+          <label for="search-content" class="search-icon" {{action 'doSearch'}}>
             {{gru-icon name="search"}}
-        </label>
+          </label>
         </div>
-        <div class="search-filter-icon">
+        <div class="search-filter-icon" {{action 'toggleSearchFilter'}}>
           {{gru-icon name="filter_list"}}
         </div>
       </div>
@@ -48,6 +66,7 @@
           <span class="create-offline-activity" title="{{t 'teacher-landing.class.class-activities-tab.create-external-collection'}}" data-toggle="tooltip" {{action "onClickCreateOfflineActivity"}}>{{gru-icon name="add"}}</span>
         {{/if}}
       </div>
+      {{search.search-by-filter isShow=isShow hideAppScroll=false preference=class.preference selectedFilters=selectedFilters}}
     </div>
     <div class="search-list-container {{if isShowListView 'list-view' 'grid-view'}}">
       {{#if (gt searchResults.length 0)}}
@@ -72,7 +91,7 @@
 {{/if}}
 
 <div class="schedule-ca-datepicker-container ca-datepicker-popover-container">
-  {{ca-date-picker  userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
+  {{ca-date-picker userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
 </div>
 
 {{#if isShowCreateOfflineActivity}}

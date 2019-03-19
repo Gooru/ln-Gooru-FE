@@ -40,7 +40,7 @@ export default Ember.Component.extend({
         data: tagData
       });
       this.get('selectedTags').pushObject(newSelectedTag);
-      if (this.get('isCompatiableMode')) {
+      if (this.get('isCompatiableMode') || this.get('isCallBack')) {
         this.updateSelectedTags();
       }
     },
@@ -410,7 +410,9 @@ export default Ember.Component.extend({
     if (tagDataList && tagDataList.length) {
       tags = tagDataList.map(function(data) {
         let props = {};
-        $.extend(props, config, { data: data });
+        $.extend(props, config, {
+          data: data
+        });
 
         return TaxonomyTag.create(props);
       });

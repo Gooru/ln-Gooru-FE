@@ -6,8 +6,7 @@ export const RESOURCE_COMPONENT_MAP = {
   'vimeo/video': 'player.resources.gru-vimeo-resource'
 };
 
-export const UPLOADABLE_TYPES = [
-  {
+export const UPLOADABLE_TYPES = [{
     value: 'image',
     validExtensions: '.jpg, .jpeg, .gif, .png',
     validType: 'image/*'
@@ -103,8 +102,7 @@ export const VIEW_LAYOUT_PICKER_OPTIONS = {
   THUMBNAILS: 'thumbnails'
 };
 
-export const EMOTION_VALUES = [
-  {
+export const EMOTION_VALUES = [{
     value: 5,
     unicode: '1f601'
   },
@@ -139,8 +137,7 @@ export const SCORES = {
   EXCELLENT: 90
 };
 
-export const GRADING_SCALE = [
-  {
+export const GRADING_SCALE = [{
     LOWER_LIMIT: 0,
     COLOR: '#F46360',
     RANGE: '0-59'
@@ -167,8 +164,7 @@ export const GRADING_SCALE = [
   }
 ];
 
-export const BARS_GRADING_SCALE = [
-  {
+export const BARS_GRADING_SCALE = [{
     LOWER_LIMIT: 0,
     COLOR: '#D82100'
   },
@@ -303,8 +299,7 @@ export const RUBRIC_TYPE = {
 
 export const RUBRIC_OFF_OPTIONS = {
   MAX_SCORE: 200,
-  INCREMENT: [
-    {
+  INCREMENT: [{
       id: 0.5,
       name: 0.5
     },
@@ -333,8 +328,7 @@ export const PROFILE_NAV_MENU_ITEMS = [
   'preference'
 ];
 
-export const SUGGESTION_FILTER_BY_CONTENT_TYPES = [
-  {
+export const SUGGESTION_FILTER_BY_CONTENT_TYPES = [{
     format: 'collection',
     label: 'search-filter.collections'
   },
@@ -344,8 +338,7 @@ export const SUGGESTION_FILTER_BY_CONTENT_TYPES = [
   }
 ];
 
-export const SEARCH_FILTER_BY_CONTENT_TYPES = [
-  {
+export const SEARCH_FILTER_BY_CONTENT_TYPES = [{
     format: 'collection',
     label: 'search-filter.collections'
   },
@@ -393,4 +386,9 @@ export const SCREEN_SIZES = {
   SMALL: 768,
   LARGE: 992,
   MEDIUM: 1024
+};
+
+export const SEARCH_CONTEXT = {
+  HEADER: 'header',
+  DAILY_CLASS: 'dailyclassactivity'
 };

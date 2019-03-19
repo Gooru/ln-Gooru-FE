@@ -1,7 +1,13 @@
 import Ember from 'ember';
-import { isNumeric } from './math';
-import { formatTime as formatMilliseconds } from 'gooru-web/utils/utils';
-import { aggregateCollectionPerformanceSummaryItems } from 'gooru-web/utils/performance-summary';
+import {
+  isNumeric
+} from './math';
+import {
+  formatTime as formatMilliseconds
+} from 'gooru-web/utils/utils';
+import {
+  aggregateCollectionPerformanceSummaryItems
+} from 'gooru-web/utils/performance-summary';
 import {
   DEFAULT_IMAGES,
   EMOTION_VALUES,
@@ -429,9 +435,9 @@ export function cleanFilename(url, cdnUrls) {
     }
   }
 
-  return url && !isDefaultImage(defaultImages, url)
-    ? /([^/]*\/\/[^/]+\/)?(.+)/.exec(url)[2]
-    : '';
+  return url && !isDefaultImage(defaultImages, url) ?
+    /([^/]*\/\/[^/]+\/)?(.+)/.exec(url)[2] :
+    '';
 }
 
 /**
@@ -687,22 +693,22 @@ function assessmentFileData(
 
   performanceDataHeaders.forEach(function(headerItem, index) {
     const prefixHeader =
-      level === 'course'
-        ? `U${index + 1} `
-        : level === 'unit'
-          ? `L${index + 1} `
-          : `A${index + 1} `;
+      level === 'course' ?
+      `U${index + 1} ` :
+      level === 'unit' ?
+      `L${index + 1} ` :
+      `A${index + 1} `;
     const scoreHeader = `${prefixHeader}${headerItem.get('title')} score`;
     const timeHeader = `${prefixHeader}${headerItem.get('title')} time`;
     dataHeaders.push(scoreHeader);
     dataHeaders.push(timeHeader);
   });
   performanceAverageHeaders.forEach(function(avHeaderItem) {
-    const score = avHeaderItem.hideScore
-      ? 'N/A'
-      : avHeaderItem.hasScore && avHeaderItem.hasStarted
-        ? `${avHeaderItem.score}%`
-        : '--%';
+    const score = avHeaderItem.hideScore ?
+      'N/A' :
+      avHeaderItem.hasScore && avHeaderItem.hasStarted ?
+      `${avHeaderItem.score}%` :
+      '--%';
     const time = `${avHeaderItem.get('timeSpent')}`;
     averageHeaders.push(score);
     averageHeaders.push(time);
@@ -716,11 +722,11 @@ function assessmentFileData(
     data.push(student);
     performanceDataContent.forEach(function(dataContentItem) {
       if (dataContentItem) {
-        const score = dataContentItem.hideScore
-          ? 'N/A'
-          : dataContentItem.hasScore && dataContentItem.hasStarted
-            ? `${dataContentItem.score}%`
-            : '--%';
+        const score = dataContentItem.hideScore ?
+          'N/A' :
+          dataContentItem.hasScore && dataContentItem.hasStarted ?
+          `${dataContentItem.score}%` :
+          '--%';
         const time = `${dataContentItem.get('timeSpent')}`;
         data.push(score);
         data.push(time);
@@ -770,11 +776,11 @@ function lessonCollectionFileData(
     dataHeaders.push(timeHeader);
   });
   performanceAverageHeaders.forEach(function(avHeaderItem) {
-    const score = avHeaderItem.hideScore
-      ? 'N/A'
-      : avHeaderItem.hasScore && avHeaderItem.hasStarted
-        ? `${avHeaderItem.score}%`
-        : '--%';
+    const score = avHeaderItem.hideScore ?
+      'N/A' :
+      avHeaderItem.hasScore && avHeaderItem.hasStarted ?
+      `${avHeaderItem.score}%` :
+      '--%';
     const time = `${avHeaderItem.get('timeSpent')}`;
     averageHeaders.push(score);
     averageHeaders.push(time);
@@ -788,11 +794,11 @@ function lessonCollectionFileData(
     data.push(student);
     performanceDataContent.forEach(function(dataContentItem) {
       if (dataContentItem) {
-        const score = dataContentItem.hideScore
-          ? 'N/A'
-          : dataContentItem.hasScore && dataContentItem.hasStarted
-            ? `${dataContentItem.score}%`
-            : '--%';
+        const score = dataContentItem.hideScore ?
+          'N/A' :
+          dataContentItem.hasScore && dataContentItem.hasStarted ?
+          `${dataContentItem.score}%` :
+          '--%';
         const time = `${dataContentItem.get('timeSpent')}`;
         data.push(score);
         data.push(time);
@@ -930,9 +936,10 @@ export function getContentCount(data) {
   let questionCount = 0;
   if (Ember.isArray(data)) {
     data.map(contentItem => {
-      contentItem.content_format === 'resource'
-        ? resourceCount++
-        : questionCount++;
+      contentItem.content_format === 'resource' ?
+        resourceCount++
+        :
+        questionCount++;
     });
   }
   return {
@@ -1039,4 +1046,12 @@ export function validateTimespent(hour, min) {
 export function isCompatibleVW(screenSize) {
   let currentVW = window.screen.width;
   return currentVW <= screenSize;
+}
+
+/**
+ * Evaluate whether the value or key is exists in array or nit
+ * @return {Boolean}
+ */
+export function isExistInArray(array, keyValue, keyFieldName) {
+  return array.findBy(keyFieldName, keyValue) ? true : false;
 }
