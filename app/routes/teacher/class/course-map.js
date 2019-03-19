@@ -31,18 +31,19 @@ export default Ember.Route.extend({
      *
      * @function actions:goLive
      */
-    goLive: function(collectionId) {
+    goLive: function(options) {
       const currentClass = this.modelFor('teacher.class').class;
       const classId = currentClass.get('id');
       const queryParams = {
         queryParams: {
-          source: PLAYER_EVENT_SOURCE.COURSE_MAP
+          source: PLAYER_EVENT_SOURCE.COURSE_MAP,
+          collectionType: options.collectionType
         }
       };
       this.transitionTo(
         'reports.collection',
         classId,
-        collectionId,
+        options.collectionId,
         queryParams
       );
     },

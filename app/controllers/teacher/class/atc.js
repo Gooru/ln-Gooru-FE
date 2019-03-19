@@ -153,11 +153,6 @@ export default Ember.Controller.extend({
    */
   classPreference: Ember.computed.alias('class.preference'),
 
-  /**
-   * @property {Boolean} isOfflineClass
-   */
-  isOfflineClass: Ember.computed.alias('class.isOffline'),
-
   // -------------------------------------------------------------------------
   // Events
   initializeController() {
@@ -214,7 +209,11 @@ export default Ember.Controller.extend({
     },
 
     //Action triggered when click on competency suggestion
-    onSuggestAtCompetency(competency, selectedContentType = null, selectedStudents = []) {
+    onSuggestAtCompetency(
+      competency,
+      selectedContentType = null,
+      selectedStudents = []
+    ) {
       const controller = this;
       let contextParams = {
         classId: controller.get('classId'),
@@ -225,7 +224,10 @@ export default Ember.Controller.extend({
       controller.set('contextParams', contextParams);
       controller.set('selectedCompetencyData', competency);
       controller.set('isShowActivitySearchContentPullup', true);
-      controller.set('selectedContentType', selectedContentType || controller.get('defaultContentTypeToSuggest'));
+      controller.set(
+        'selectedContentType',
+        selectedContentType || controller.get('defaultContentTypeToSuggest')
+      );
       controller.set('selectedStudents', selectedStudents);
     },
 

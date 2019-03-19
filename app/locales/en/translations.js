@@ -1939,15 +1939,29 @@ export default Object.assign(quizzesTranslations, {
   'self-report.validation-error-time': 'Enter valid time',
   'notifications.notificationlist-header-title': 'NOTIFICATIONS',
   'notifications.show-more': 'SHOW MORE',
-  'notifications.type.teacher-suggestion-title': 'You have a new teacher suggestion in class : {{ classTitle }}',
-  'notifications.type.student-gradable-submission-title': 'You have {{occurrence}} item(s) to grade in class : {{ classTitle }}',
-  'notifications.type.student-self-report-title': '{{occurrence}} Student(s) reported performance at class : {{ classTitle }}',
-  'notifications.type.teacher-override-title': 'Teacher has corrected your submission at class : {{ classTitle }}  ',
-  'notifications.type.teacher-grading-complete-title': 'Teacher has graded your submission at class : {{ classTitle }}',
-  'notifications.typeinclass.teacher-suggestion-title': 'You have a new teacher suggestion',
-  'notifications.typeinclass.student-gradable-submission-title': 'You have {{occurrence}} student item(s) to grade',
-  'notifications.typeinclass.student-self-report-title': '{{occurrence}} Student(s) reported performance',
-  'notifications.typeinclass.teacher-override-title': 'Teacher has corrected your submission',
-  'notifications.typeinclass.teacher-grading-complete-title': 'Teacher has graded your submission at class',
-  'goahead.add.something': 'Go ahead, add something.'
+  'notifications.type.teacher-suggestion-title':
+    'You have a new teacher suggestion in class : {{ classTitle }}',
+  'notifications.type.student-gradable-submission-title':
+    'You have {{occurrence}} item(s) to grade in class : {{ classTitle }}',
+  'notifications.type.student-self-report-title':
+    '{{occurrence}} Student(s) reported performance at class : {{ classTitle }}',
+  'notifications.type.teacher-override-title':
+    'Teacher has corrected your submission at class : {{ classTitle }}  ',
+  'notifications.type.teacher-grading-complete-title':
+    'Teacher has graded your submission at class : {{ classTitle }}',
+  'notifications.typeinclass.teacher-suggestion-title':
+    'You have a new teacher suggestion',
+  'notifications.typeinclass.student-gradable-submission-title':
+    'You have {{occurrence}} student item(s) to grade',
+  'notifications.typeinclass.student-self-report-title':
+    '{{occurrence}} Student(s) reported performance',
+  'notifications.typeinclass.teacher-override-title':
+    'Teacher has corrected your submission',
+  'notifications.typeinclass.teacher-grading-complete-title':
+    'Teacher has graded your submission at class',
+  'goahead.add.something': 'Go ahead, add something.',
+  'present.diagnostic.determine.not.know':
+    'Present a diagnostic to determine the student\'s current location, if not known?',
+  'present.diagnostic.determine.know':
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
 });

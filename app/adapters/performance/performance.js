@@ -231,6 +231,27 @@ export default Ember.Object.extend({
     });
   },
 
+  /**
+   * @function getCAPerformanceData
+   * performance Data of Class Activities for ALL classes of a Student/Teacher
+   */
+  getCAPerformanceData(classIds, userId) {
+    const adapter = this;
+    const namespace = adapter.get('insightsNamespace');
+    const url = `${namespace}/dca/classes/performance`;
+    const options = {
+      type: 'POST',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: JSON.stringify({
+        classIds,
+        userId
+      })
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

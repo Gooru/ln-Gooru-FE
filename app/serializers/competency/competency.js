@@ -247,7 +247,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
           firstName: userData.first_name || userData.fn,
           lastName: userData.last_name || userData.ln,
           thumbnail,
-          status: userPerformanceSummary.status || userPerformanceSummary.st || 0
+          status:
+            userPerformanceSummary.status || userPerformanceSummary.st || 0
         });
         normalizedUsersCompetencyPerformanceSummary.pushObject(
           userPerformanceData
@@ -255,5 +256,21 @@ export default Ember.Object.extend(ConfigurationMixin, {
       });
     }
     return normalizedUsersCompetencyPerformanceSummary;
+  },
+
+  /**
+   * Normalized data of Competency Completion Stats for Classes
+   * @return {Object}
+   */
+  normalizeCompetencyCompletionStats: function(response) {
+    let resultSet = Ember.A();
+    if (response && Ember.isArray(response.competencyStats)) {
+      response = Ember.A(response.competencyStats);
+      response.forEach(data => {
+        let result = Ember.Object.create(data);
+        resultSet.pushObject(result);
+      });
+    }
+    return resultSet;
   }
 });

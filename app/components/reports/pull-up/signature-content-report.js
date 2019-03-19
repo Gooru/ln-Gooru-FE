@@ -119,14 +119,6 @@ export default Ember.Component.extend({
    */
   source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
 
-  /**
-   * competency  change will call the function
-   */
-  onChangeCompetency: Ember.observer('competency', function() {
-    let component = this;
-    component.loadData();
-  }),
-
   init() {
     let component = this;
     component._super(...arguments);
@@ -204,9 +196,9 @@ export default Ember.Component.extend({
    */
   checkPrerequisiteCompetencyStatus(prerequisites) {
     let component = this;
-    let domainCompetencyList = component.get(
-      'domainCompetencyList.competencies'
-    );
+    let domainCompetencyList =
+      component.get('domainCompetencyList.competencies') ||
+      component.get('domainCompetencyList');
     if (prerequisites && domainCompetencyList) {
       prerequisites.forEach(competency => {
         let filteredCompetency = domainCompetencyList.findBy(

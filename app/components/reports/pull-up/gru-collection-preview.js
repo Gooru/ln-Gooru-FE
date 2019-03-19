@@ -1,8 +1,11 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
+import { PLAYER_WINDOW_NAME, PLAYER_EVENT_SOURCE, ROLES } from 'gooru-web/config/config';
+import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
+import ModalMixin from 'gooru-web/mixins/modal';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Attributes
@@ -14,6 +17,8 @@ export default Ember.Component.extend({
 
   collectionService: Ember.inject.service('api-sdk/collection'),
 
+  session: Ember.inject.service('session'),
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
@@ -24,6 +29,7 @@ export default Ember.Component.extend({
     } else {
       component.fetchCollection();
     }
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
   },
 
   // -------------------------------------------------------------------------
@@ -45,13 +51,32 @@ export default Ember.Component.extend({
     onPlayContent() {
       const component = this;
       let contentId = component.get('previewContentId');
-      let contentType = component.get('previewContentType');
-      component.get('router').transitionTo('player', contentId, {
-        queryParams: {
-          role: 'teacher',
-          type: contentType
-        }
-      });
+      let playerContext = component.get('playerContext');
+      let playerURL = `${getEndpointUrl()}/player`;
+      if (playerContext) {
+        let classId = playerContext.get('classId');
+        let courseId = playerContext.get('courseId');
+        let unitId = playerContext.get('unitId');
+        let lessonId = playerContext.get('lessonId');
+        let contentType = component.get('previewContentType');
+        playerURL += `/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${contentId}?role=teacher&type=${contentType}&source=${PLAYER_EVENT_SOURCE.RGO}`;
+      } else {
+        playerURL += `/${contentId}?source=${
+          PLAYER_EVENT_SOURCE.RGO
+        }`;
+      }
+      window.open(playerURL, PLAYER_WINDOW_NAME);
+    },
+
+    //Action triggered when click print preview
+    onPrintPreview() {
+      window.print();
+    },
+
+    //Action triggered when click remix
+    onRemixContent() {
+      const component = this;
+      component.remixContent();
     }
   },
 
@@ -78,6 +103,11 @@ export default Ember.Component.extend({
   isShowCorrectAnswer: true,
 
   /**
+   * @property {Boolean} isQuestionAvailable
+   */
+  isQuestionAvailable: Ember.computed.alias('previewContent.questionCount'),
+
+  /**
    * @property {TaxonomyTag[]} List of taxonomy tags
    */
   taxonomyTags: Ember.computed('previewContent.standards.[]', function() {
@@ -90,6 +120,31 @@ export default Ember.Component.extend({
     }
     return TaxonomyTag.getTaxonomyTags(standards);
   }),
+
+  /**
+   * @property {Object} playerContext
+   */
+  playerContext: null,
+
+  /**
+   * @property {Boolean} isTeacher
+   */
+  isTeacher: Ember.computed.equal('session.role', ROLES.TEACHER),
+
+  /**
+   * @property {Boolean} isStudent
+   */
+  isStudent: Ember.computed.equal('session.role', ROLES.STUDENT),
+
+  /**
+   * @property {Boolean} isAnonymous
+   */
+  isAnonymous: Ember.computed.alias('session.isAnonymous'),
+
+  /**
+   * @property {Boolean} isRemixableContent
+   */
+  isRemixableContent: false,
 
   //--------------------------------------------------------------------------
   // Methods
@@ -135,7 +190,9 @@ export default Ember.Component.extend({
       assessment: assessmentService.readAssessment(assessmentId)
     })
       .then(({assessment}) => {
-        component.set('previewContent', assessment);
+        if (!component.isDestroyed) {
+          component.set('previewContent', assessment);
+        }
       });
   },
 
@@ -151,7 +208,31 @@ export default Ember.Component.extend({
       collection: collectionService.readCollection(collectionId)
     })
       .then(({collection}) => {
-        component.set('previewContent', collection);
+        if (!component.isDestroyed) {
+          component.set('previewContent', collection);
+        }
       });
+  },
+
+  /**
+   * @function remixContent
+   * Method to remix a collection/assessment
+   */
+  remixContent() {
+    const component = this;
+    if (component.get('isAnonymous')) {
+      component.send('showModal', 'content.modals.gru-login-prompt');
+    } else {
+      let previewContent = component.get('previewContent');
+      let previewContentType = component.get('previewContentType');
+      let remixModel = Ember.Object.create({
+        content: previewContent
+      });
+      component.send(
+        'showModal',
+        `content.modals.gru-${previewContentType}-remix`,
+        remixModel
+      );
+    }
   }
 });

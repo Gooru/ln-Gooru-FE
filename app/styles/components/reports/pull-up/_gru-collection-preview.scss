@@ -27,11 +27,8 @@
     position: relative;
     .header-container {
       height: 48px;
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
       background-color: #425e67;
-      display: grid;
-      grid-template-columns: 40px 1fr 40px;
-      align-items: center;
+      display: flex;
       padding-left: 16px;
       .close-pullup {
         width: 32px;
@@ -40,34 +37,41 @@
         border-radius: 50%;
         text-align: center;
         cursor: pointer;
+        margin: 8px 0;
         i {
           color: $white;
           line-height: 32px;
+          width: 32px;
+          height: 32px;
         }
       }
       .preview-title {
         font-size: 15px;
         font-weight: bold;
-        line-height: 1.07;
+        line-height: 48px;
         color: $white;
         text-transform: capitalize;
+        padding: 0 16px;
+        width: 100%;
       }
-      .content-player {
+      .content-player, .print-preview, .content-remix {
+        width: 40px;
         cursor: pointer;
+        margin: 0 8px;
         i {
           color: $white;
-          line-height: 32px;
+          line-height: 48px;
         }
       }
     }
     .body-container {
       .content-info-container {
+        box-shadow: 0 0 4px 0 rgba(102, 102, 102, 0.3);
         .title-info-container {
           display: grid;
           grid-template-columns: 80px 24px 1fr;
           align-items: center;
           column-gap: 16px;
-          box-shadow: 0 0 4px 0 rgba(102, 102, 102, 0.3);
           .thumbnail-container {
             width: 80px;
             height: 48px;
@@ -76,17 +80,21 @@
             background-repeat: no-repeat;
           }
           .content-title {
-            @include ellipsis($font-size: 15px, $line-height: 1.5, $lines-to-show: 2);
+            @include ellipsis($font-size: 16px, $line-height: 1.5, $lines-to-show: 2);
             color: #545e66;
           }
           .content-icon {
+            background-size: 24px 18px;
+            width: 24px;
+            height: 18px;
+            background-repeat: no-repeat;
+            display: block;
             &.assessment {
               background-image: url("gooru/images/add_assessment.svg");
-              background-size: 24px 18px;
-              width: 24px;
-              height: 18px;
-              background-repeat: no-repeat;
-              display: block;
+            }
+
+            &.collection {
+              background-image: url("gooru/images/add_collection.svg");
             }
           }
         }
@@ -94,7 +102,7 @@
           height: 48px;
           display: grid;
           align-items: center;
-          padding-left: 16px;
+          padding-left: 94px;
           .gru-taxonomy-tag-list {
             .gru-taxonomy-tag {
               min-width: 90px;
@@ -130,7 +138,6 @@
               }
             }
           }
-          box-shadow: 0 0 4px 0 rgba(102, 102, 102, 0.3);
         }
       }
       .content-items-container {
