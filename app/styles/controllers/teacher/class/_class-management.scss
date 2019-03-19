@@ -530,18 +530,14 @@
             }
           }
 
-          .row-offline-alert {
-            padding-bottom: 10px;
-            align-items: center;
-            color: black;
-            font-weight: bolder;
-          }
-
-          .row-offline-class {
+          .route-class-setting,
+          .force-calculate-ilp-class-setting {
             padding-top: 10px;
             align-items: center;
+            height: auto;
 
-            .offline-icon {
+            .route-class-icon,
+            .force-calculate-ilp-class-icon {
               display: inline;
               width: 22px;
               height: 30px;
@@ -551,17 +547,16 @@
               background-image: url("gooru/sort-horizontal.svg");
             }
 
-            .offline-label {
+            .route-class-label,
+            .force-calculate-ilp-class-label {
               width: 287px;
-              height: 30px;
               font-family: Lato;
               font-size: 13px;
               flex: 1;
-            }
-
-            .offline-info-icon {
-              vertical-align: middle;
-              display: inline-block;
+              p {
+                margin: 0;
+                padding: 0;
+              }
             }
 
             .action-button-slide-yes {

@@ -106,11 +106,6 @@ export default Ember.Controller.extend(ModalMixin, ConfigurationMixin, {
   }),
 
   /**
-   * @property {Json} - demoClass
-   */
-  demoClass: Ember.computed.alias('configuration.demoClass'),
-
-  /**
    * @property {Array[]} - featuredCourses
    */
   featuredCourses: null,

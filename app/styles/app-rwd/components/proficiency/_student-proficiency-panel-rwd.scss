@@ -13,8 +13,7 @@
       }
     }
 
-    .proficiency-tags,
-    .time-series-container {
+    .proficiency-tags {
       display: none;
     }
 
@@ -43,7 +42,7 @@
           .chart-container {
             .domain-chart-container {
               .scrollable-chart {
-                max-height: 70vh;
+                max-height: 60vh;
               }
             }
           }

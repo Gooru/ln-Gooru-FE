@@ -3,6 +3,7 @@
     display: block;
   }
   @media screen and (max-width: $screen-xs) {
+    padding-bottom: 55px;
     .sec-col-layout {
       .sec-rows-layout {
         &.left-panel,
@@ -109,6 +110,14 @@
           }
         }
       }
+    }
+  }
+}
+
+body.teacher_class_class-management {
+  @media only screen and (max-width: $screen-xs) {
+    .app-container {
+      padding-top: 102px;
     }
   }
 }

@@ -183,11 +183,6 @@ export default Ember.Controller.extend({
    */
   isShowOCASummaryReportPullUp: false,
 
-  /**
-   * @property {boolean} Indicates if class is offline or not
-   */
-  isOfflineClass: false,
-
   // -------------------------------------------------------------------------
   // Methods
 
@@ -301,11 +296,10 @@ export default Ember.Controller.extend({
    */
   fetchDcaSummaryPerformance() {
     let controller = this;
-    let isOfflineClass = controller.get('isOfflineClass');
     let classId = controller.get('class.id');
-    const performanceSummaryForDCAPromise = isOfflineClass
-      ? controller.get('analyticsService').getDCASummaryPerformance(classId)
-      : null;
+    const performanceSummaryForDCAPromise = controller
+      .get('analyticsService')
+      .getDCASummaryPerformance(classId);
     return Ember.RSVP.hash({
       performanceSummaryForDCA: performanceSummaryForDCAPromise
     }).then(function(hash) {

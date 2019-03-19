@@ -2,6 +2,7 @@
   .container-fluid {
     .student-landing {
       padding-top: 30px;
+      background-color: $dark-400;
 
       > * {
         margin: 0 auto;
@@ -12,12 +13,6 @@
         > * {
           display: inline-block;
         }
-      }
-
-      .gru-take-tour {
-        right: 80px;
-        top: 135px;
-        width: 40px;
       }
     }
   }
@@ -62,7 +57,7 @@
 
     .nav-tabs {
       box-shadow: none;
-      border-bottom: solid 1px $grey-light;
+      border-bottom: solid 1px $white;
       padding-right: 0;
 
       li {
@@ -86,10 +81,10 @@
         a {
           padding-bottom: 0;
           box-shadow: none;
-          border-bottom: solid 3px $gray-base;
+          border-bottom: solid 3px $white;
           padding-left: 10px;
           padding-right: 10px;
-          color: $gray-base;
+          color: $white;
         }
       }
 
@@ -103,11 +98,12 @@
         color: $light-400;
 
         &:hover {
-          color: $gray-base;
+          color: $white;
         }
 
         span {
           font-size: $font-navigator;
+          font-weight: 600;
         }
       }
     }

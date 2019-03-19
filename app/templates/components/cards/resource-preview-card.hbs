@@ -1,0 +1,20 @@
+<div class="resource-preview-container">
+  <div class="resource-title-container">
+    <div class="resource-order">{{contentSeq}}.</div>
+    <div class="resource-type {{resource.format}}"></div>
+    <div class="title">{{safe-html resource.title}}</div>
+  </div>
+  {{#if taxonomyTags.length}}
+    <div class="resource-taxonomies-container">
+      {{taxonomy.gru-taxonomy-tag-list tags=taxonomyTags tagsVisible=1 isInCard=true}}
+    </div>
+  {{/if}}
+  <div class="resource-description-container">
+    {{safe-html resource.description}}
+  </div>
+  {{#if resource.url}}
+    <div class="resource-url-container">
+      <span class="url-label">{{t 'gru-rubric-creation.url'}}: </span><span class="url-content"><a href="{{resource.url}}" target="_blank">{{resource.url}}</a></span>
+    </div>
+  {{/if}}
+</div>

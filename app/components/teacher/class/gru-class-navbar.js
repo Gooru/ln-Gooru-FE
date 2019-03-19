@@ -163,6 +163,13 @@ export default Ember.Component.extend(ConfigurationMixin, {
     Ember.$('header.gru-header').hide();
   },
 
+  didRender() {
+    const component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
+  },
+
   willDestroyElement() {
     this._super(...arguments);
     this.set('selectedMenuItem', null);

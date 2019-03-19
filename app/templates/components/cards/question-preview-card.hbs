@@ -1,6 +1,7 @@
-<div class="question-preview-container">
+<div class="question-preview-container {{question.type}} {{if isShowCorrectAnswer 'answer-visible'}}">
   <div class="question-title-container">
-    <div class="question-icon"><i class="icon"></i></div>
+    <div class="question-order">{{contentSeq}}.</div>
+    <div class="question-icon"></div>
     <div class="title">{{safe-html question.title}}</div>
   </div>
   <div class="taxonomies-conatiner">

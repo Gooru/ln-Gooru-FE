@@ -19,13 +19,13 @@ export default Object.assign(quizzesTranslations, {
   'errors.inclusion': '{{description}} তালিকাত অন্তৰ্গত কৰা নাই',
   'errors.exclusion': '{{description}} সঞ্চয় কৰা আছে',
   'errors.invalid': '{{description}} বৈধ নহয়',
-  'errors.confirmation': '{{description}} {{on}}ত মিলানাই',
+  'errors.confirmation': '{{description}} {{on}}ত মিলা নাই',
   'errors.accepted': '{{description}} গ্ৰহণ কৰিব লাগিব',
-  'errors.empty': '{{description}} খালি থাকিবনোৱাৰে',
-  'errors.blank': '{{description}} খালি থাকিবনোৱাৰে',
+  'errors.empty': '{{description}} খালি থাকিব নোৱাৰে',
+  'errors.blank': '{{description}} খালি থাকিব নোৱাৰে',
   'errors.present': '{{description}} খালি থাকিব লাগিব',
   'errors.collection': '{{description}} এটা সংকলন হ\'ব লাগিব',
-  'errors.singular': '{{description}} এটা সংকলন হ\'বনোৱাৰিব',
+  'errors.singular': '{{description}} এটা সংকলন হ\'ব নোৱাৰিব',
   'errors.tooLong':
     '{{description}} বহু বেছি দীঘল (অধিকতম হৈছে  {{max}}টা আখৰ) ',
   'errors.tooShort':
@@ -97,7 +97,7 @@ export default Object.assign(quizzesTranslations, {
   'common.add-an-activity': 'এটা কাৰ্যকলাপ যোগ কৰক',
   'common.Reschedule': 'পুনৰ কাৰ্যক্ৰম বনাওক',
   'common.no-unschedule-items':
-    'কাৰ্যক্ৰম নিৰ্মাণ কৰিবৰ বাবে আপোনাৰ কোনো কাৰ্যকলাপনাই',
+    'কাৰ্যক্ৰম নিৰ্মাণ কৰিবৰ বাবে আপোনাৰ কোনো কাৰ্যকলাপ নাই',
   'common.repeat-activity': 'কাৰ্যকলাপটো পুনৰ কৰক',
   'common.add-assessment': 'নতুন মূল্যায়ন কৰক',
   'common.add-century-skills': '21 শতিকাৰ কৌশল যোগ কৰক',
@@ -106,7 +106,7 @@ export default Object.assign(quizzesTranslations, {
   'common.add-collection-item': 'সম্পদ অথবা প্ৰশ্ন সৃষ্টি কৰক',
   'common.add-competency': 'ক্ষমতা যোগ কৰক',
   'common.add-content-prompt':
-    'আপুনি এতিয়ালৈকে [1]{{type}}[2] সৃষ্টি কৰানাই।আগবাঢ়ক, সাহসী হওক।',
+    'আপুনি এতিয়ালৈকে <span>{{type}}</span> সৃষ্টি কৰা নাই।আগবাঢ়ক, সাহসী হওক।',
   'common.add-course': 'নতুন কাৰ্যক্ৰম সৃষ্টি কৰক',
   'common.add-coruse-to-class': 'কাৰ্যক্ৰম যোগ কৰক',
   'common.add-domains-to-unit': 'এককত অনুক্ষেত্ৰ যোগ কৰক',
@@ -114,23 +114,23 @@ export default Object.assign(quizzesTranslations, {
   'common.add-from-url': 'URLৰ পৰা যোগ কৰক',
   'common.add-lessons': 'পাঠ যোগ কৰক',
   'common.add-new-lesson': 'নতুন পাঠ সৃষ্টি কৰক',
-  'common.add-new-unit': 'নতুন একক সৃষ্টি কৰক',
+  'common.add-new-unit': 'নতুন অধ্যায় সৃষ্টি কৰক',
   'common.add-new-resource': 'নতুন সম্পদ সৃষ্টি কৰক',
   'common.add-new-question': 'নতুন প্ৰশ্ন সৃষ্টি কৰক',
   'common.add-question': 'প্ৰশ্ন সৃষ্টি কৰক',
   'common.add-question-image': 'প্ৰশ্নৰ ছবি সৃষ্টি কৰক',
   'common.add-rubric': 'নতুন ৰুব্ৰিক যোগ কৰক',
-  'common.add-standard': 'সাধাৰণ মানক যোগ কৰক',
-  'common.add-standards': 'সাধাৰণ মানক যোগ কৰক',
-  'common.add-standards-to-collection': 'সাধাৰণ মানকবোৰ সংকলনত যোগ কৰক',
+  'common.add-standard': 'মানক যোগ কৰক',
+  'common.add-standards': 'মানক যোগ কৰক',
+  'common.add-standards-to-collection': 'মানকবোৰ সংকলনত যোগ কৰক',
   'common.add-to': 'ইয়াত যোগ কৰক',
   'common.add-to-classroom': 'শ্ৰেণীকোঠাত যোগ কৰক',
   'common.add-to-daily-class': 'শ্ৰেণী কাৰ্য্যকলাপত যোগ কৰক',
   'common.add-to-collection-success':
-    'আপুনি {{বিষয়বস্তৰ শিৰোনাম}}ৰ পৰা {{সংগৃহীত শিৰোনাম}} লৈ যোগ কৰক। আপুনি সেইটো {{সংগৃহীত শিৰোনাম}} সম্পাদন কৰিব বিছাৰিছে নেকি?',
+    'আপুনি {{contentTitle}}ৰ পৰা {{collectionTitle}} লৈ যোগ কৰক। আপুনি সেইটো {{collectionType}} সম্পাদন কৰিব বিছাৰিছে নেকি?',
   'common.add-to-lesson-success':
-    'আপুনি {{বিষয়বস্তৰ শিৰোনাম}}ৰ পৰা {{পাঠৰ শিৰোনাম}} লৈ যোগ কৰক। আপুনি সেইটো {{সংগৃহীত শিৰোনাম}} সম্পাদন কৰিব বিছাৰিছে নেকি?',
-  'common.add-type-question': 'আপুনি কেনেধৰণৰ প্ৰশ্ন যোগ কৰিবলৈ পচন্দ কৰিব?',
+    'আপুনি {{collectionTitle}}ৰ পৰা {{lessonTitleম}} লৈ যোগ কৰক। আপুনি সেইটো {{collectionType}} সম্পাদন কৰিব বিছাৰিছে নেকি?',
+  'common.add-type-question': 'আপুনি কেনেধৰণৰ প্ৰশ্ন যোগ কৰিবলৈ পছন্দ কৰিব?',
   'common.add-type-resource': 'এইটো কেনে প্ৰকাৰৰ সম্পদ?',
   'common.add-units': 'গোটসমূহ যোগ কৰক',
   'common.added': 'যোগ কৰা হ\'ল',
@@ -173,7 +173,7 @@ export default Object.assign(quizzesTranslations, {
   'common.bookmark': 'বুকমাৰ্ক',
   'common.bookmarks': 'বুকমাৰ্কসমূহ',
   'common.bookmarked-content-success':
-    'এই বুকমাৰ্কটো {{তালিকাৰ প্ৰকাৰ}} আপোনাৰ ইন্ডিপেন্ডেন্ট লাৰনিং পেজত যোগ কৰা হ\'ব।',
+    'এই বুকমাৰ্কটো {{contentType}} আপোনাৰ ইন্ডিপেন্ডেন্ট লাৰনিং পেজত যোগ কৰা হ\'ব।',
   'common.bookmarked-success':
     'সকলো বুকমাৰ্ক কৰা তালিকাই ইন্ডিপেন্ডেন্ট লাৰনিং পেজত যোগ কৰা হ\'ব।',
   'common.builder': 'সম্পাদক',
@@ -251,15 +251,15 @@ export default Object.assign(quizzesTranslations, {
   'common.depth-of-knowledge': 'জ্ঞানৰ গভীৰতা',
   'common.description': 'বিৱৰণ',
   'common.disappear-after-login':
-    'এইটো ল\'গ ইনৰ {{ল\'গ ইন নম্বৰ}} পাছত নোহোৱা হৈ যাব',
+    'এইটো ল\'গ ইনৰ {{loginNumber}} পাছত নোহোৱা হৈ যাব',
   'common.disappear-next-login': 'পাছৰ ল\'গ ইনত এইটো দেখা নাযাব',
   'common.district': 'জিলা',
   'common.domain': 'ক্ষেত্ৰ',
   'common.domains': 'ক্ষেত্ৰসমূহ',
-  'common.download': 'ডাউনল \'দ',
-  'common.download-print': 'ডাউনল\'দ ছপা',
+  'common.download': 'ডাউনল\'দ',
+  'common.download-print': 'ডাউনল\'দ/ছপা',
   'common.drag-drop-suggestions': 'বা টনা আৰু সৰি পৰাৰ উপদেশবোৰ',
-  'common.download-report': 'ডাউনল \'দ ৰিপৰ্ট',
+  'common.download-report': 'ডাউনল\'দ ৰিপৰ্ট',
   'common.done': 'কৰা হ\'ল',
   'common.edit': 'সম্পাদন',
   'common.showassessments': 'মূল্য়ায়নবোৰ দেখুওৱা',
@@ -339,7 +339,7 @@ export default Object.assign(quizzesTranslations, {
     'আপুনি উত্তৰ নিৰ্বাচনৰ শেষ সীমাত উপস্থিত হল ।',
   'common.errors.file-max-size': 'কেৱল 5MB ত কৈ সৰু ফাইল হে চাপৰ্ত কৰিব',
   'common.errors.file-upload-missing':
-    'অনুগ্ৰহ কৰি তলত দিয়া সম্প্ৰসাৰণৰ লগত ফাইল এটা নিৰ্বাচন কৰক:{{সম্প্ৰসাৰণসমূহ}}',
+    'অনুগ্ৰহ কৰি তলত দিয়া সম্প্ৰসাৰণৰ লগত ফাইল এটা নিৰ্বাচন কৰক:{{extensions}}',
   'common.errors.getting-next-resource':
     'আপোনাৰ উত্তৰ জমা কৰোতে এটা ভূল হৈ গৈছে । অনুগ্ৰহ কৰি পুনৰ চেস্টা কৰক ।',
   'common.errors.lesson-not-copied':
@@ -359,7 +359,7 @@ export default Object.assign(quizzesTranslations, {
   'common.errors.profile-not-updated':
     'ওপচ্ ! এতিয়া প্ৰফাইল উন্নীত কৰিব পৰা নাই। অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেষ্টা কৰক।',
   'common.errors.question-not-added-to':
-    'ওপচ্ ! এতিয়া প্ৰশ্ন {{সংগ্ৰহৰ প্ৰকাৰত}}যোগ কৰিব পৰা নাই। অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেষ্টা কৰক ।',
+    'ওপচ্ ! এতিয়া প্ৰশ্ন {{collectionType}}যোগ কৰিব পৰা নাই। অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেষ্টা কৰক ।',
   'common.errors.question-not-copied':
     'ওপচ্ ! এতিয়া প্ৰশ্ন নকল কৰিব পৰা নাই। অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেষ্টা কৰক ।',
   'common.errors.question-not-created':
@@ -367,11 +367,11 @@ export default Object.assign(quizzesTranslations, {
   'common.errors.question-not-updated':
     'ওপচ্ ! এতিয়া প্ৰশ্ন উন্নীত কৰিব পৰা নাই। অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেষ্টা কৰক।',
   'common.errors.reset-password-error':
-    'অহ হ ! কিবা এটা শুদ্ধ হোৱা নাই । পাছৱৰ্ড পুনৰ অন্তৰ্ভূক্ত কৰিব পৰা নাই । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেষ্টা কৰক।',
+    'অহ হ\' ! কিবা এটা শুদ্ধ হোৱা নাই । পাছৱৰ্ড পুনৰ অন্তৰ্ভূক্ত কৰিব পৰা নাই । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেষ্টা কৰক।',
   'common.errors.reset-google-account-exists':
     'আপোনাৰ ইমেইল ল\'গ ইন গুগল একাউন্টৰ লগত সৃষ্টি কৰা হৈছে আৰু আমি গুগল পাছৱৰ্ড পুনৰ অন্তৰ্ভূক্ত কৰিব পৰা নাই । যদিহে আপুনি আপোনাৰ গুগল পাছৱৰ্ড পাহৰি গৈছে, তেতিয়া আপুনি গুগল পাছৱৰ্ড পুনৰ গুগল এপছৰ যোগেদি অন্তৰ্ভূক্ত কৰিব লাগিব ।',
   'common.errors.resource-description-length':
-    'বৰ্ণনা 5০০আখৰতকৈ অধিক হব নোৱাৰিব।',
+    'বৰ্ণনা 500 আখৰতকৈ অধিক হব নোৱাৰিব।',
   'common.errors.resource-invalid-url': 'অগ্ৰহণযোগ্য URL',
   'common.errors.resource-missing-title':
     'অনুগ্ৰহ কৰি সমলৰ এটা শিৰোনাম অন্তৰ্ভূক্ত কৰক ।',
@@ -398,7 +398,7 @@ export default Object.assign(quizzesTranslations, {
   'common.errors.search-collections-length':
     'অনুগ্ৰহ কৰি অতি কমেও 3 টা আখৰ অন্তৰ্ভূক্ত কৰক ।',
   'common.errors.sign-in-credentials-not-valid':
-    'অহ হ ! কিবা এটা শুদ্ধ হোৱা নাই । অনুগ্ৰহ কৰি দ্বিতীয়বাৰৰ বাবে আপোনাৰ ইউজাৰ নেম আৰু পাছৱৰ্ড নিশ্চিত কৰক আৰু কিছু সময় পাছত পুনৰ চেস্টা কৰক ।',
+    'অহ হ\' ! কিবা এটা শুদ্ধ হোৱা নাই । অনুগ্ৰহ কৰি দ্বিতীয়বাৰৰ বাবে আপোনাৰ ইউজাৰ নেম আৰু পাছৱৰ্ড নিশ্চিত কৰক আৰু কিছু সময় পাছত পুনৰ চেস্টা কৰক ।',
   'common.errors.sign-in-google-account-exists':
     'অনুগ্ৰহ কৰি গুগল চাইন ইন ব্যবহাৰ কৰক । আমি আপোনাৰ পাচৱৰ্দ পুনৰ সংহতি কৰিব পৰা নাই ।',
   'common.errors.sign-up-error':
@@ -412,7 +412,7 @@ export default Object.assign(quizzesTranslations, {
   'common.errors.sign-up-name-only-letters':
     'অনুগ্ৰহ কৰি কেৱল আখৰহে অন্তৰ্ভুক্ত কৰিব ।',
   'common.errors.sign-up-valid-email':
-    'অনুগ্ৰহ কৰি এটা সক্ৰিয় ইমেইল এদ্ৰেচ অন্তৰ্ভুক্ত কৰক ।',
+    'অনুগ্ৰহ কৰি এটা সক্ৰিয় ইমেইল এড্ৰেছ অন্তৰ্ভুক্ত কৰক ।',
   'common.errors.special-characters':
     'আপুনি বিশেষ বৰ্ণ বা স্পেচেচ ব্যবহাৰ কৰিব নোৱৰিব ।',
   'common.errors.unit-not-copied':
@@ -434,7 +434,7 @@ export default Object.assign(quizzesTranslations, {
   'common.example': 'উদাহৰণ:',
   'common.exit': 'প্ৰস্থান',
   'common.external-collection': 'বাহিৰা সংগ্ৰহ',
-  'common.explanation': 'ব্যাখ্যা',
+  'common.explanation': 'বাখ্যা',
   'common.explore': 'অনুসন্ধান কৰক ',
   'common.false': 'অশুদ্ধ ',
   'common.featured-courses': 'বিশেষ মান থকা কাৰ্যক্ৰম',
@@ -476,18 +476,11 @@ export default Object.assign(quizzesTranslations, {
   'common.link': 'লিংক ',
   'common.link-out': 'লিংক-আউট ',
   'common.link-out-message':
-    '*যদি আপোনাৰ সমলবোৰে ওপৰৰ পূুৰ্বলোকনত খালী দেখাইছে,  তেতিয়া বেলেগ এখন পেজ খুলি বিষয়বস্তু চাবলৈ ইয়াৰ এটা লিংক-আওট প্ৰয়োজন হব ।',
+    '*যদি আপোনাৰ সমলবোৰে ওপৰৰ পূুৰ্বলোকনত খালী দেখাইছে,  তেতিয়া বেলেগ এখন পেজ খুলি বিষয়বস্তু চাবলৈ ইয়াৰ এটা  “link-out” ৰ প্ৰয়োজন হব ।',
   'common.live-assessments': 'পোনপটীয়া মূল্যায়নসমূহ',
   'common.loading': 'ল\'ডিং.....',
   'common.login': 'লগ ইন ',
   'common.logout': 'লগ আওট ',
-  'common.logout.head_1': 'Learning Navigator: ',
-  'common.logout.head_2': 'Every Student',
-  'common.logout.head_3': 'Achieves Mastery',
-  'common.logout.description':
-    'Learning Navigator is designed as “GPS for Learning” — a way for each student to follow their own path to mastery. Schools ask every student to achieve the same level of proficiency, but each student begins with a different set of knowledge and skills. The Learning Navigator meets each student exactly where they are and navigates them to their learning goals. ',
-  'common.logout.logout-btn-msg1': 'You have been logout.',
-  'common.logout.logout-btn-msg2': 'Click here to login.',
   'common.mastery': 'পাৰদৰ্শিতা',
   'common.menu': 'তালিকা',
   'common.more-details': 'অধিক বিৱৰণ',
@@ -502,27 +495,28 @@ export default Object.assign(quizzesTranslations, {
   'common.new-collection': 'নতুন সংগ্ৰহ ',
   'common.new-question': 'নতুন প্ৰশ্ন ',
   'common.new-question-text': 'প্ৰশ্ন পাঠ ইয়াত অন্তৰ্ভুক্ত কৰক ',
-  'common.new-fib-question-text': 'প্ৰশ্নৰ লগত [উত্তৰ] অন্তৰ্ভুক্ত কৰক ',
+  'common.new-fib-question-text': 'প্ৰশ্নৰ লগত [answer] অন্তৰ্ভুক্ত কৰক ',
   'common.new-resource': 'নতুন সমল ',
   'common.next': 'পৰৱৰ্তী ',
   'common.no': 'নহয় ',
   'common.no-archived': 'আপোনাৰ কোনো আৰ্কাইভদ শ্ৰেণীকোঠা নাই।',
   'common.no-content': 'কোনো বিষয়বস্তু নাই ',
   'common.no-content-my-report':
-    'কোনো ৰিপৰ্ট উপলব্ধ নাই। আপুনি এবাৰ অধ্যয়ন আৰম্ভ কৰাৰ পাচত ৰিপৰ্টসমূৰ উপলব্ধ হ\'ব।',
-  'common.no-assessments-to-display': 'দেখুৱাবলৈ কোনো [1]মূল্যায়ন[2] নাই।',
-  'common.no-collections-to-display': 'দেখুৱাবলৈ কোনো [1]সংকলন[2] নাই।',
-  'common.no-courses-to-display': 'দেখুৱাবলৈ কোনো [1]কাৰ্যক্ৰম[2] নাই।',
-  'common.no-questions-to-display': 'দেখুৱাবলৈ কোনো [1]প্ৰশ্ন[2] নাই।',
-  'common.no-resources-to-display': 'দেখুৱাবলৈ কোনো [1]সম্পদ[2] নাই।',
-  'common.no-rubrics-to-display': 'দেখুৱাবলৈ কোনো [1]ৰুব্ৰিক[2] নাই।',
+    'কোনো ৰিপ\'ৰ্ট উপলব্ধ নাই। আপুনি এবাৰ অধ্যয়ন আৰম্ভ কৰাৰ পাচত ৰিপ\'ৰ্টসমূৰ উপলব্ধ হ\'ব।',
+  'common.no-assessments-to-display':
+    'দেখুৱাবলৈ কোনো <span>মূল্যায়ন</span> নাই।',
+  'common.no-collections-to-display': 'দেখুৱাবলৈ কোনো <span>সংকলন</span> নাই।',
+  'common.no-courses-to-display': 'দেখুৱাবলৈ কোনো <span>কাৰ্যক্ৰম</span> নাই।',
+  'common.no-questions-to-display': 'দেখুৱাবলৈ কোনো <span>প্ৰশ্ন</span> নাই।',
+  'common.no-resources-to-display': 'দেখুৱাবলৈ কোনো <span>সম্পদ</span> নাই।',
+  'common.no-rubrics-to-display': 'দেখুৱাবলৈ কোনো <span>ৰুব্ৰিক</span> নাই।',
   'common.no-followers': 'আপোনাৰ এই পৰ্য্যন্ত অনুগামী নাই।',
   'common.no-independent-results':
-    'যেতিয়া আপুনি আপোনাৰ বুকমাৰ্কৰ অনুসন্ধান কৰে{{বিযয়বস্তৰ প্ৰকাৰ}}, সেইবিলাকক ইয়াত প্ৰত্যক্ষ কৰা হ\'ব।',
-  'common.no-results': 'কোনো ফলাফল পোৱা নগল',
+    'যেতিয়া আপুনি আপোনাৰ বুকমাৰ্কৰ অনুসন্ধান কৰে{{contentType}}, সেইবিলাকক ইয়াত প্ৰত্যক্ষ কৰা হ\'ব।',
+  'common.no-results': 'কোনো ফলাফল পোৱা নগ\'ল',
   'common.no-available-results': 'কোনো ফলাফল উপলব্ধ নহয়।',
   'common.no-results-message':
-    'আপোনাৰ উচ্চাৰণৰ সঠিকতা পৰীক্ষা কৰক। আমি সকলোৱে ভূল কৰোৱেই![1] বৰ্ডাৰলৈ যাওক আৰু কিছুমান ফিল্টাৰ আঁতৰাওক।[2] নাইবা ইয়াৰ সলনি এটা শব্দ বিচাৰিবলৈ চেষ্টা কৰক।',
+    'আপোনাৰ উচ্চাৰণৰ সঠিকতা পৰীক্ষা কৰক। আমি সকলোৱে ভূল কৰোৱেই!<br/> বৰ্ডাৰলৈ যাওক আৰু কিছুমান ফিল্টাৰ আঁতৰাওক।<br/> নাইবা ইয়াৰ সলনি এটা শব্দ বিচাৰিবলৈ চেষ্টা কৰক।',
   'common.no-more-attempts': 'আৰু কোনো প্ৰয়াস কৰিব পৰা নহয়',
   'common.no-dca-student':
     'আপোনাৰ শিক্ষকে এতিয়ালৈকে কোনো চয়ন নাইবা মূল্যায়ন শ্ৰেণীৰ কাৰ্য্যকলাপৰ বাবে অনুমোদন জনোৱা নাই।',
@@ -549,7 +543,7 @@ export default Object.assign(quizzesTranslations, {
   'common.password': 'পাছৱৰ্ড',
   'common.pending': 'অনিশ্চয়তা',
   'common.performance': 'সফলতা দেখুৱাওক',
-  'common.performance-dashboard': 'সফলতাৰ ডেছবৰ্ড',
+  'common.performance-dashboard': 'সফলতাৰ ডেছব\'ৰ্ড',
   'common.personal-information': 'ব্যক্তিগত তথ্য',
   'common.play': 'খেল',
   'common.please_contact': 'অনুগ্ৰহ কৰি যোগাযোগ কৰক',
@@ -578,25 +572,25 @@ export default Object.assign(quizzesTranslations, {
   'common.question-type.OE': 'সংযমহীন সঁহাৰি',
   'common.question-type.HS_TXT': 'বহু বৈকল্পিক-টেক্স',
   'common.question-type.HS_IMG': 'বহু বৈকল্পিক-ছবি',
-  'common.question-type.HT_TO': 'ড্ৰেদ আৰু ড্ৰপ অৰ্ডাৰ',
-  'common.question-type.HT_RO': 'ড্ৰেদ আৰু ড্ৰপ অৰ্ডাৰ',
+  'common.question-type.HT_TO': 'ড্ৰেদ আৰু ড্ৰ\'প অৰ্ডাৰ',
+  'common.question-type.HT_RO': 'ড্ৰেদ আৰু ড্ৰ\'প অৰ্ডাৰ',
   'common.question-type.HT_HL': 'হাইলাইটিং টেক্স',
   'common.reaction': 'প্ৰতিক্ৰিয়া',
-  'common.read-first': '	[1]এইটো প্ৰথমতে পঢ়ক![2]',
+  'common.read-first': '	<b>এইটো প্ৰথমতে পঢ়ক!</b>',
   'common.remaining': '{{number}} বাঁও',
   'common.remix': 'ৰিমিক্স',
   'common.remix-assessment': 'ৰিমিক্স মূল্যাংকন',
   'common.remix-assessment-lead': 'আপুনি এটা ৰিমিক্স মূল্যাংকন কৰিব।',
   'common.remix-assessment-success':
-    'আপুনি এটা মূল্যাংকন ৰিমিক্স কৰিলে{{মূল্যাংকনৰ শিৰোনাম}}। আপুনি সেই মূল্যাংকনটো সম্পাদন কৰিব বিচাৰে নেকি?',
+    'আপুনি এটা মূল্যাংকন ৰিমিক্স কৰিলে{{assessmentTitle}}। আপুনি সেই মূল্যাংকনটো সম্পাদন কৰিব বিচাৰে নেকি?',
   'common.remix-collection': 'ৰিমিক্স চয়ন',
   'common.remix-collection-lead': 'আপুনি এটা চয়ন ৰিমিক্স কৰিব।',
   'common.remix-collection-success':
-    'আপুনি এটা চয়ন ৰিমিক্স কৰিলে{{চয়নৰ শিৰোনাম}}। আপুনি সেই চয়ন সম্পাদন কৰিব বিচাৰে নেকি?',
+    'আপুনি এটা চয়ন ৰিমিক্স কৰিলে{{collectionTitle}}। আপুনি সেই চয়ন সম্পাদন কৰিব বিচাৰে নেকি?',
   'common.remix-course': 'ৰিমিক্স ক\'ৰ্চ',
   'common.remix-course-lead': 'আপুনি এটা কাৰ্যক্ৰম ৰিমিক্স কৰিবলৈ লৈছে',
   'common.remix-course-success':
-    'আপুনি এটা কাৰ্যক্ৰম {{collectionTitle}} ৰিমিক্সকৰিলে। আপুনি সেই কাৰ্যক্ৰমটো সম্পাদনা কৰিব বিচাৰে নে?',
+    'আপুনি এটা কাৰ্যক্ৰম {{collectionTitle}} ৰিমিক্স কৰিলে। আপুনি সেই কাৰ্যক্ৰমটো সম্পাদনা কৰিব বিচাৰে নে?',
   'common.remix-lesson': 'পাঠ ৰিমিক্স কৰক',
   'common.remix-lesson-lead': 'আপুনি এটা পাঠ ৰিমিক্স কৰিবলৈ লৈছে',
   'common.remix-lesson-success': 'আপুনি এটা পাঠ {{lessonTitle}} ৰিমিক্স কৰিলে।',
@@ -613,20 +607,20 @@ export default Object.assign(quizzesTranslations, {
   'common.remix-unit-success': 'আপুনি এটা একক {{unitTitle}} ৰিমিক্স কৰিলে।',
   'common.remixed-by': 'ইয়াৰ দ্বাৰা ৰিমিক্স কৰা হৈছে',
   'common.remix-warning':
-    'মন দিয়ক! এই কাৰ্যক্ৰমটোত বহুত ভাল বিষয়বস্তুআছে আৰু ইয়াৰ এটা কপি নিৰ্মাণ কৰিবলৈ সময় লাগিব। আপুনি প্ৰক্ৰিয়াটো আৰম্ভ কৰিব বিচাৰে বুলি নিশ্চয়তা প্ৰদান কৰক আৰু 15 মিনিটত আপুনি এই কাৰ্যক্ৰমটোৰ এটা কপি আপোনাৰ [1]প্ৰফাইল[2]ত পাব।',
+    'মন দিয়ক! এই কাৰ্যক্ৰমটোত বহুত ভাল বিষয়বস্তু আছে আৰু ইয়াৰ এটা কপি নিৰ্মাণ কৰিবলৈ সময় লাগিব। আপুনি প্ৰক্ৰিয়াটো আৰম্ভ কৰিব বিচাৰে বুলি নিশ্চয়তা প্ৰদান কৰক আৰু 15 মিনিটত আপুনি এই কাৰ্যক্ৰমটোৰ এটা কপি আপোনাৰ <b>প্ৰফাইল</b>ত পাব।',
   'common.remove': 'আঁতৰাওক',
-  'common.report': 'ৰিপৰ্ট',
-  'common.report-in-progress': 'ৰিপৰ্ট চলি আছে',
+  'common.report': 'ৰিপ\'ৰ্ট',
+  'common.report-in-progress': 'ৰিপ\'ৰ্ট চলি আছে',
   'common.request-to': 'এটা বেজৰ বাবে পুনৰীক্ষণ কৰিবলৈ অনুৰোধ কৰক',
-  'common.request-report': 'ৰিপৰ্টৰ বাবে অনুৰোধ কৰক',
+  'common.request-report': 'ৰিপ\'ৰ্টৰ বাবে অনুৰোধ কৰক',
   'common.resource': 'সম্পদ',
   'common.resources': 'সম্পদবোৰ',
   'common.resource-format.image': 'ছবি',
   'common.resource-format.text': 'পাঠ',
-  'common.resource-format.video': 'ভিডিঅ',
+  'common.resource-format.video': 'ভিডিঅ\'',
   'common.resource-format.interactive': 'সংবাদাত্মক',
   'common.resource-format.webpage': 'ৱেবপেজ',
-  'common.resource-format.audio': 'অডিঅ',
+  'common.resource-format.audio': 'অডিঅ\'',
   'common.resource-format.question': 'প্ৰশ্ন',
   'common.resource-pl.zero': 'সম্পদবোৰ',
   'common.resource-pl.one': 'সম্পদ',
@@ -686,7 +680,7 @@ export default Object.assign(quizzesTranslations, {
   'common.students': 'ছাত্ৰ-ছাত্ৰী',
   'common.student-id': 'ছাত্ৰ  ID (প্ৰফাইলত দেখুওৱা নহয়)',
   'common.studen-id-display':
-    'ছাত্ৰ  ID (প্ৰফাইলত দেখুওৱা নহয়, অজ্ঞাতৰুপত দেখুওৱা হয়)',
+    'ছাত্ৰ  ID (প্ৰফাইলত দেখুওৱা নহয়, অজ্ঞাতৰূপত দেখুওৱা হয়)',
   'common.subject-and-framework': 'বিষয় আৰু ফ্ৰেমৱৰ্ক',
   'common.subject': 'বিষয়',
   'common.submit': 'জমা কৰক',
@@ -710,7 +704,7 @@ export default Object.assign(quizzesTranslations, {
   'common.title': 'শীৰ্ষক',
   'common.unBookmark': 'বুকমাৰ্ক আঁতৰাওক',
   'common.unexpectedError':
-    'এটা অবাঞ্চিত বিজুটি ঘটিল আৰু তাৰ বিষয়ে ৰিপৰ্ট কৰা গৈছে। অসুবিধাৰ বাবে আমিক্ষমাপ্ৰাৰ্থী!',
+    'এটা অবাঞ্চিত বিজুটি ঘটিল আৰু তাৰ বিষয়ে ৰিপ\'ৰ্ট কৰা গৈছে। অসুবিধাৰ বাবে আমি ক্ষমাপ্ৰাৰ্থী!',
   'common.unfollow': 'আনফলো কৰক',
   'common.unit': 'একক',
   'common.unit-title': 'একক শীৰ্ষক',
@@ -734,18 +728,18 @@ export default Object.assign(quizzesTranslations, {
   'common.visibility-tooltip': 'আনৰ বাবে দৃশ্যমান নহয়',
   'common.visibility-available': 'আনৰ বাবে দৃশ্যমান',
   'common.warnings.on-air-connection-lost':
-    'গ লাইভ ডেছব ৰ্ডখনে সংযোগ হেৰুৱাইছে আৰু স্বয়ংক্ৰিয়ভাৱে পুনৰ চেষ্টা কৰি আছে। এইটোলোভনীয় কিন্ত আপোনাৰ স্ক্ৰীনখন ৰিফ্ৰেছ নকৰিব!',
+    'গ\' লাইভ ডেছব\'ৰ্ডখনে সংযোগ হেৰুৱাইছে আৰু স্বয়ংক্ৰিয়ভাৱে পুনৰ চেষ্টা কৰি আছে। এইটো লোভনীয় কিন্ত আপোনাৰ স্ক্ৰীনখন ৰিফ্ৰেছ ন কৰিব!',
   'common.warnings.character-limit': 'আপুনি আখৰৰ সীমা অতিক্ৰম কৰিলে।',
   'common.word': 'শব্দ',
   'common.yes': 'হয়',
   'common.change-score': 'সংখ্যা সলনি কৰক',
   'not-found.tenant.login-not-found-msg-1':
-    ' গুৰু টিনান্ট লগইন বিছাৰি পোৱা নগল, পৃষ্ঠাখন স্বংক্ৰিয়ভাৱে পুনৰ উভতি যাব',
+    ' গুৰু টিনান্ট লগইন বিছাৰি পোৱা নগ\'ল, পৃষ্ঠাখন স্বংক্ৰিয়ভাৱে পুনৰ উভতি যাব',
   'not-found.tenant.login-not-found-msg-2': 'লগইন পেজত',
   'not-found.tenant.login-not-found-msg-3':
     'হিচাপে লগইন কৰিবলৈ তলৰ বুটামত চেক নাইবা ক্লিক কৰক',
   'index.joinUs':
-    'আমাৰ সৈতে যোগদান কৰক  [1]  সন্মানীয় মানৱ অধিকাৰৰ পৰা [2]  শিক্ষালৈ',
+    'আমাৰ সৈতে যোগদান কৰক  <br/>  সন্মানীয় মানৱ অধিকাৰৰ পৰা <br/>  শিক্ষালৈ',
   'index.browseContent.title': 'নমস্কাৰ! আপুনি কি বিচাৰিছে?',
   'index.browseContent.description_1': 'মই বিচাৰি আছো',
   'index.browseContent.description_2': 'শিক্ষণ সামগ্ৰী',
@@ -782,7 +776,7 @@ export default Object.assign(quizzesTranslations, {
     'গুৰু শ্ৰেণীকোঠাৰ যোগেদি চয়ন সমূহ ছাত্ৰ-ছাত্ৰীৰ মাজত ভগাই দিয়ক।',
   'index.monitorDescription':
     'বাস্তৱিক সময়ত হস্তক্ষেপ কৰিবলৈ আপোনাৰ ছাত্ৰ -ছাত্ৰীসকলৰ প্ৰতিশ্ৰুতি আৰু  অগ্ৰগতিৰ হিচাপ কৰক।',
-  'index.freeAndOpen.title': 'মুক্ত আৰু প্ৰসাৰিত.[1]সদায়।',
+  'index.freeAndOpen.title': 'মুক্ত আৰু প্ৰসাৰিত.<br/>সদায়।',
   'index.freeAndOpen.description':
     'আমি বিশ্বাস কৰো যে শিক্ষা হৈছে মানৱ অধিকাৰ। বিশ্বজুৰি শিক্ষাগুৰু আৰু ছাত্ৰ-ছাত্ৰীৰ বাবে গুৰু সদায় বিনামূলীয়া আৰু বিজ্ঞাপনমুক্ত হ\'ব।',
   'index.freeAndOpen.button': 'আমাৰ পদক্ষেপৰ সম্পৰ্কে আৰু জানক',
@@ -827,7 +821,7 @@ export default Object.assign(quizzesTranslations, {
     'আপোনাৰ ছাত্ৰ-ছাত্ৰীয়ে এতিয়ালৈকে ক\'ৰ্চটো পঢ়িবলৈ আৰম্ভ কৰা নাই।',
   'class.analytics.performance.actions.share': 'শ্বেয়াৰ কৰক',
   'class.analytics.performance.actions.edit': 'বিষয়বস্তৰ সম্পাদন',
-  'class.analytics.performance.actions.download': 'ডাউনলদ',
+  'class.analytics.performance.actions.download': 'ডাউনল\'দ',
   'class.analytics.performance.actions.fullScreen': 'সম্পূৰ্ণ  স্ক্ৰীণ চাঁওক',
   'class.analytics.performance.actions.exitFullScreen':
     'সম্পূৰ্ণ  স্ক্ৰীণৰ পৰা বাহিৰলৈ যাওক',
@@ -873,10 +867,10 @@ export default Object.assign(quizzesTranslations, {
   'classes.noClassesJoined': 'আপুনি এতিয়ালৈকে কোনো শ্ৰেণীকোঠাত যোগদান কৰা নাই',
   'classes.noClassesTaught': 'আপুনি কোনো শ্ৰেণীকোঠা নিৰ্মাণ কৰা নাই।',
   'content.assessments.edit.best-practices':
-    '[1] এক মূল্যাংকন হৈছে স্কৰ কৰা প্ৰশ্নৰ এক সমষ্টি যাক আপুনি আৰু আপোনাৰ ছাত্ৰ-ছাত্ৰীয়ে নিৰীক্ষণ কৰি বুজি পায় আৰু পাৰদৰ্শিতা দেখুৱাব পাৰে। [2][3] আপোনাৰ মূল্যাংকনত বিভিন্ন প্ৰকাৰৰ প্ৰশ্ন (SBAC ত আধাৰিত) ৰ প্ৰয়োগ কৰক যাতে ছাত্ৰ-ছাত্ৰীয়ে বিভিন্ন প্ৰকাৰেৰে বুজি পায়।  আমি প্ৰতেকটো প্ৰশ্নৰ মানদণ্ড, সূক্ষ্ম-মানদণ্ড আৰু ৱেবৰ গভীৰত্বম জ্ঞানক টেগ কৰাৰ উপদেশ দিও।[4]',
+    '<p> এক মূল্যাংকন হৈছে স্ক\'ৰ কৰা প্ৰশ্নৰ এক সমষ্টি যাক আপুনি আৰু আপোনাৰ ছাত্ৰ-ছাত্ৰীয়ে নিৰীক্ষণ কৰি বুজি পায় আৰু পাৰদৰ্শিতা দেখুৱাব পাৰে। </p><p> আপোনাৰ মূল্যাংকনত বিভিন্ন প্ৰকাৰৰ প্ৰশ্ন (SBAC ত আধাৰিত) ৰ প্ৰয়োগ কৰক যাতে ছাত্ৰ-ছাত্ৰীয়ে বিভিন্ন প্ৰকাৰেৰে বুজি পায়।  আমি প্ৰতেকটো প্ৰশ্নৰ মানদণ্ড, সূক্ষ্ম-মানদণ্ড আৰু ৱেবৰ গভীৰত্বম জ্ঞানক টেগ কৰাৰ উপদেশ দিও।</p>',
   'content.classes.create.title': 'এটা শ্ৰেণীকোঠা নিৰ্মাণ কৰক',
   'content.classes.create.content':
-    'যত ছাত্ৰ-ছাত্ৰী সকল বিষয়বস্তৰ সৈতে প্ৰতিশ্ৰুতিবদ্ধ হৈ থাকে।',
+    'য\'ত ছাত্ৰ-ছাত্ৰী সকল বিষয়বস্তৰ সৈতে প্ৰতিশ্ৰুতিবদ্ধ হৈ থাকে।',
   'content.classes.create.class-name-input': 'আপোনাৰ শ্ৰেণীকোঠাৰ নাম',
   'content.classes.create.condition-prompt':
     'আপোনাৰ শ্ৰেণীকোঠাত ছাত্ৰ-ছাত্ৰীয়ে কেনেদৰে যোগদান কৰিব?',
@@ -886,11 +880,11 @@ export default Object.assign(quizzesTranslations, {
   'content.classes.create.get-started': 'আৰম্ভ কৰা হওঁক',
   'content.classes.join.title': 'এটা নতুন  শ্ৰেণীকোঠাত যোগদান কৰক',
   'content.classes.join.join-a-classroom': 'এটা শ্ৰেণীকোঠাত যোগদান কৰক',
-  'content.classes.join.content': 'কৰ পৰা যাত্ৰা আৰম্ভণি হয়।',
+  'content.classes.join.content': 'ক\'ৰ পৰা যাত্ৰা আৰম্ভণি হয়।',
   'content.classes.join.not-now': 'এতিয়া নহয়',
   'content.classes.join.class-code-input': 'এটা  শ্ৰেণীকোঠাৰ ক\'ড এন্টাৰ কৰক',
   'content.classes.join.class-not-found':
-    'শ্ৰেণীকোঠা বিচাৰি পোৱা নগল। নিশ্চিত কৰক যে আপুনি শুদ্ধ শ্ৰেণীকোঠাৰ ক\'ড এন্টাৰ কৰিছে',
+    'শ্ৰেণীকোঠা বিচাৰি পোৱা নগ\'ল। নিশ্চিত কৰক যে আপুনি শুদ্ধ শ্ৰেণীকোঠাৰ ক\'ড এন্টাৰ কৰিছে',
   'content.classes.join.invalid-code': 'অগ্ৰহণযোগ্য শ্ৰেণীকোঠাৰ ক\'ড ',
   'content.classes.join.join-not-allowed':
     'আপুনি যিটো শ্ৰেণীত যোগদান কৰিব বিছাৰিছে সেইটো সক্ৰিয় হৈ থকা নাই। অনুগ্ৰহ কৰি আপুনি আপোনাৰ শুদ্ধ শ্ৰেণী ক\'ডটোৰ বাবে শিক্ষকৰ সৈতে যোগাযোগ কৰক। ',
@@ -901,15 +895,15 @@ export default Object.assign(quizzesTranslations, {
     'ক্লিক কৰি শ্ৰেণীকোঠাত যোগদান কৰক, মই এই শ্ৰেণীৰ শিক্ষক(সকল)ৰ সৈতে এই গুৰু শ্ৰেণীকোঠাৰ অধ্যয়নৰ পৰা লাভ কৰা নিজৰ মূল্যাংকন আৰু অগ্ৰগতিৰ ডাটা শ্বেয়াৰ কৰিবলৈ একমত হয়।',
   'content.collections.edit.assign-to-course': 'পাঠ্যক্ৰমলৈ অনুমোদন জনাওক',
   'content.collections.edit.best-practices':
-    '[1] ছাত্ৰ-ছাত্ৰীসকলে সংগ্ৰহ স্তৰত আপোনাৰ বিষয়বস্তৰ সৈতে ভাৱ বিনিময় কৰে। শিকাৰ সংগ্ৰহ তৈয়াৰ কৰাৰ সময়ত, শিকাৰ উদ্দেশ্য সমূহ  সন্নিবিষ্ট কৰাটো নিশ্চিত কৰক, আৰু ছাত্ৰ-ছাত্ৰীসকলক নানা ধৰণেৰে অৱধাৰণাসমূহ জাগি তুলিবলৈ বিভিন্ন প্ৰকাৰৰ উপায় অৱলম্বন কৰাৰ ওপৰত বিচাৰ কৰে যেন। [2][3] অৱধাৰণাত নিৰ্মাণ কৰিবলৈ সংসাধনৰ ক্ৰমৰ প্ৰয়োগ কৰক। এক সংগ্ৰহৰ মাধ্যমৰ যোগেদি প্ৰগতি এক যুক্তিগতভাৱে প্ৰভাৱিত হ\'ব লাগে আৰু যদি উত্তম হয় নাইবা উপযুক্ত ৰূপে ছাত্ৰ-ছাত্ৰী সকলৰ বিচাৰৰ বাবে অনুমতি লাভ কৰিবলৈ সামান্য ৰূপে অধিক জটিল স্তৰলৈকে দৰ্শকসকলক লৈ যাব লাগে। [4][5] আমাৰ গুৰু প্ৰশ্ন নাইবা আমাৰ পাৰস্পৰিকভাৱে ক্ৰিয়াশীল মাধ্যমেৰে পথত বুজি পাবলৈ চেকৰ অন্তৰ্ভূক্ত কৰক। আমি সংগ্ৰহৰ উদ্দেশ্য পূৰ কৰিবলৈ পৰ্য্যাপ্ত সম্পদ আৰু/নাইবা  পৰ্য্যাপ্ত  সম্পদৰ আশ্বাস প্ৰদান কৰো আৰু এইটো সুনিশ্চিত কৰো যে প্ৰত্যেক সম্পদৰে ভূমিকা আৰু উদ্দেশ্য থাকে। [6]',
+    '<p> ছাত্ৰ-ছাত্ৰীসকলে সংগ্ৰহ স্তৰত আপোনাৰ বিষয়বস্তৰ সৈতে ভাৱ বিনিময় কৰে। শিকাৰ সংগ্ৰহ তৈয়াৰ কৰাৰ সময়ত, শিকাৰ উদ্দেশ্য সমূহ  সন্নিবিষ্ট কৰাটো নিশ্চিত কৰক, আৰু ছাত্ৰ-ছাত্ৰীসকলক নানা ধৰণেৰে অৱধাৰণাসমূহ জাগি তুলিবলৈ বিভিন্ন প্ৰকাৰৰ উপায় অৱলম্বন কৰাৰ ওপৰত বিচাৰ কৰে যেন। </p><p> অৱধাৰণাত নিৰ্মাণ কৰিবলৈ সংসাধনৰ ক্ৰমৰ প্ৰয়োগ কৰক। এক সংগ্ৰহৰ মাধ্যমৰ যোগেদি প্ৰগতি এক যুক্তিগতভাৱে প্ৰভাৱিত হ\'ব লাগে আৰু যদি উত্তম হয় নাইবা উপযুক্ত ৰূপে ছাত্ৰ-ছাত্ৰী সকলৰ বিচাৰৰ বাবে অনুমতি লাভ কৰিবলৈ সামান্য ৰূপে অধিক জটিল স্তৰলৈকে দৰ্শকসকলক লৈ যাব লাগে। </p><p> আমাৰ গুৰু প্ৰশ্ন নাইবা আমাৰ পাৰস্পৰিকভাৱে ক্ৰিয়াশীল মাধ্যমেৰে পথত বুজি পাবলৈ চেকৰ অন্তৰ্ভূক্ত কৰক। আমি সংগ্ৰহৰ উদ্দেশ্য পূৰ কৰিবলৈ পৰ্য্যাপ্ত সম্পদ আৰু/নাইবা  পৰ্য্যাপ্ত  সম্পদৰ আশ্বাস প্ৰদান কৰো আৰু এইটো সুনিশ্চিত কৰো যে প্ৰত্যেক সম্পদৰে ভূমিকা আৰু উদ্দেশ্য থাকে। </p>',
   'content.courses.edit.assign-to-class': 'শ্ৰেণীকোঠালৈ অনুমোদন জনাওক',
   'content.courses.edit.best-practices':
-    '[1] এক পাঠ্যক্ৰম হৈছে এক ফল্ডাৰ যি আপোনাক নিজৰ শিক্ষণ সামগ্ৰীক গোটলৈ আৰু পাঠসমূহ সংগঠিত কৰিবলৈ অনুমতি প্ৰদান কৰে। পাঠ্যক্ৰম তৈয়াৰ কৰা সময়ত আপোনাৰ দ্বাৰা সম্বোধিত কৰা আৱশ্যকীয় প্ৰশ্ন, শিক্ষণৰ উদ্দেশ্য আৰু আপোনাৰ সামগ্ৰীৰ সংগঠন বিচাৰ কৰক।[2][3] আপুনি আপোনাৰ ছাত্ৰৰ সংখ্যাৰ বাবে ভিন্ন অনুভৱ বৰ্তাই ৰাখিবলৈ পাঠ্যক্ৰমক একেলগ কৰিব পাৰিব (উদাহৰণস্বৰূপে, আপুনি আপোনাৰ গোটসমূহক কালানুক্ৰমিক ৰূপে, বিষয়ৰ দ্বাৰা, নাইবা মানদণ্ড ৰূপে অনুক্ৰমিক কৰিব পাৰে)। [4]',
+    '<p> এক পাঠ্যক্ৰম হৈছে এক ফ\'ল্ডাৰ যি আপোনাক নিজৰ শিক্ষণ সামগ্ৰীক গোটলৈ আৰু পাঠসমূহ সংগঠিত কৰিবলৈ অনুমতি প্ৰদান কৰে। পাঠ্যক্ৰম তৈয়াৰ কৰা সময়ত আপোনাৰ দ্বাৰা সম্বোধিত কৰা আৱশ্যকীয় প্ৰশ্ন, শিক্ষণৰ উদ্দেশ্য আৰু আপোনাৰ সামগ্ৰীৰ সংগঠন বিচাৰ কৰক।</p><p> আপুনি আপোনাৰ ছাত্ৰৰ সংখ্যাৰ বাবে ভিন্ন অনুভৱ বৰ্তাই ৰাখিবলৈ পাঠ্যক্ৰমক একেলগ কৰিব পাৰিব (উদাহৰণস্বৰূপে, আপুনি আপোনাৰ গোটসমূহক কালানুক্ৰমিক ৰূপে, বিষয়ৰ দ্বাৰা, নাইবা মানদণ্ড ৰূপে অনুক্ৰমিক কৰিব পাৰে)। </p>',
   'content.courses.edit.information.course-title': 'ক\'ৰ্চৰ শিৰোনাম',
   'content.courses.edit.information.description': 'বিৱৰণ',
   'content.questions.edit.add-to': 'যোগ কৰক',
   'content.questions.edit.best-practices':
-    '[1] এটা প্ৰশ্ন হৈছে এক সমাধান যি শিক্ষাৰ্থীৰ পৰা উত্তৰৰ প্ৰয়োজন হয়, আৰু আমি আপোনাৰ শিক্ষাৰ্থীৰ দ্বাৰা SBAC, PARCC আৰু অন্য মূল্যাংকনত দেখা প্ৰশ্নৰ সমৰ্থন কৰিবলৈ বিভিন্ন ধৰণৰ প্ৰশ্ন সোধা হয়। [2][3] শিক্ষাৰ্থীসকলক এই প্ৰশ্নৰ প্ৰদৰ্শনৰ বাবে আৰু ভিন্ন আকৃতি প্ৰদান কৰিবলৈ আপোনাৰ দ্বাৰা প্ৰয়োগ কৰা প্ৰশ্ন বিবেচনা কৰিব। [4][5]  আপোনাৰ প্ৰশ্নৰ মানদণ্ড সমূহ,  সূক্ষ্ম-মানদণ্ডসমূহ  আৰু ৱেবৰ জ্ঞানৰ গভীৰতাৰ সৈতে টেগ কৰক। আপুনি এইটো প্ৰতক্ষ্য কৰিব পাৰিব যে শিক্ষক ডেছবৰ্ডৰ মাধ্যমেৰে আপোনাৰ শিক্ষাৰ্থীয়ে কেনেধৰণৰ প্ৰশ্নৰ  উত্তৰ দিছে। [6]',
+    '<p> এটা প্ৰশ্ন হৈছে এক সমাধান যি শিক্ষাৰ্থীৰ পৰা উত্তৰৰ প্ৰয়োজন হয়, আৰু আমি আপোনাৰ শিক্ষাৰ্থীৰ দ্বাৰা SBAC, PARCC আৰু অন্য মূল্যাংকনত দেখা প্ৰশ্নৰ সমৰ্থন কৰিবলৈ বিভিন্ন ধৰণৰ প্ৰশ্ন সোধা হয়। </p><p> শিক্ষাৰ্থীসকলক এই প্ৰশ্নৰ প্ৰদৰ্শনৰ বাবে আৰু ভিন্ন আকৃতি প্ৰদান কৰিবলৈ আপোনাৰ দ্বাৰা প্ৰয়োগ কৰা প্ৰশ্ন বিবেচনা কৰিব। </p><p>  আপোনাৰ প্ৰশ্নৰ মানদণ্ড সমূহ,  সূক্ষ্ম-মানদণ্ডসমূহ  আৰু ৱেবৰ জ্ঞানৰ গভীৰতাৰ সৈতে টেগ কৰক। আপুনি এইটো প্ৰতক্ষ্য কৰিব পাৰিব যে শিক্ষক ডেছব\'ৰ্ডৰ মাধ্যমেৰে আপোনাৰ শিক্ষাৰ্থীয়ে কেনেধৰণৰ প্ৰশ্নৰ  উত্তৰ দিছে। </p>',
   'content.questions.edit.information.question-title': 'প্ৰশ্নৰ শিৰোনাম',
   'content.questions.edit.information.question-type': 'প্ৰশ্নৰ প্ৰকাৰ',
   'content.questions.edit.builder.add-answer-choice':
@@ -924,9 +918,9 @@ export default Object.assign(quizzesTranslations, {
   'content.questions.edit.builder.answer-instructions.HS_TXT':
     'আপুনি ১০ টা লৈকে উত্তৰ নিৰ্বাচন যোগ কৰিব পাৰিব আৰুএটা বা অধিক  শুদ্ধ উত্তৰ নিৰ্বাচন কৰিব পাৰিব ।',
   'content.questions.edit.builder.answer-instructions.HT_HL_ST':
-    'যেতিয়া আপুনি প্ৰশ্নটো লিখে, গুৰুত্বসহকাৰে দেখুওৱা বাক্যসমূহ বন্ধনিৰ দ্বাৰা সূচাব। এটা বন্ধনিত কেৱল এক সময়ত এটাহে বাক্য থাকিব, বন্ধনিৰ ভিতৰত অধ্যায় ব্যৱহাৰ কৰিব। উদাহৰণস্বৰূপে,  প্ৰথম গাহঁৰিটোৱে নিজৰ ঘৰৰ পৰা খেৰ-কুটা বনালে। [ডাঙৰ বেয়া কুকুৰনেচীয়া বাঘটোৱে ঘৰটো ভাঙি পেলালে]। দ্বিতীয় গাহঁৰিটোৱে নিজৰ ঘৰটো কাঠেৰ তৈয়াৰ কৰিলে।  আখৰৰ সৰ্ব্বোচ সীমা: 5000',
+    'যেতিয়া আপুনি প্ৰশ্নটো লিখে, গুৰুত্বসহকাৰে দেখুওৱা বাক্যসমূহ বন্ধনিৰ দ্বাৰা সূচাব। এটা বন্ধনিত কেৱল এক সময়ত এটাহে বাক্য থাকিব, বন্ধনিৰ ভিতৰত অধ্যায় ব্যৱহাৰ কৰিব। উদাহৰণস্বৰূপে,  প্ৰথম গাহঁৰিটোৱে নিজৰ ঘৰৰ পৰা খেৰ-কুটা বনালে। [The big bad wolf blew down the house]। দ্বিতীয় গাহঁৰিটোৱে নিজৰ ঘৰটো কাঠেৰ তৈয়াৰ কৰিলে।  আখৰৰ সৰ্ব্বোচ সীমা: 5000',
   'content.questions.edit.builder.answer-instructions.HT_HL_WD':
-    'যেতিয়া আপুনি প্ৰশ্নটো লিখে, গুৰুত্বসহকাৰে দেখুওৱা বাক্যসমূহ বন্ধনিৰ দ্বাৰা সূচাব। এটা বন্ধনিত কেৱল এক সময়ত এটাহে বাক্য থাকিব। উদাহৰণস্বৰূপে, [ডাঙৰ] বেয়া কুকুৰনেচীয়া বাঘটোৱে ঘৰটো [তললৈ] ভাঙি  পেলালে। আখৰৰ সৰ্ব্বোচ সীমা: 5000',
+    'যেতিয়া আপুনি প্ৰশ্নটো লিখে, গুৰুত্বসহকাৰে দেখুওৱা বাক্যসমূহ বন্ধনিৰ দ্বাৰা সূচাব। এটা বন্ধনিত কেৱল এক সময়ত এটাহে বাক্য থাকিব। উদাহৰণস্বৰূপে, [big] বেয়া কুকুৰনেচীয়া বাঘটোৱে ঘৰটো [down] ভাঙি  পেলালে। আখৰৰ সৰ্ব্বোচ সীমা: 5000',
   'content.questions.edit.builder.answer-instructions.HT_RO':
     'আপুনি ১০ টা লৈকে উত্তৰ নিৰ্বাচন শুদ্ধ শৃংখল ভাবে যোগ কৰিব পাৰিব । শৃংখলাটো ছাত্ৰ-ছত্ৰীৰ বাবে খেলিমেলিকৈ দিয়া থাকিব ।',
   'content.questions.edit.builder.answer-instructions.MA':
@@ -970,11 +964,11 @@ export default Object.assign(quizzesTranslations, {
   'content.modals.delete-bookmark.confirmation':
     'আপুনি চিহ্নটো আঁতৰাব খোজে নেকি {{type}}?',
   'content.modals.delete-bookmark.delete-error':
-    'অপচ !  এতিয়াই চিহ্নটো আঁতৰাব নোৱাৰিব {{type}} । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
+    'অ\'পচ !  এতিয়াই চিহ্নটো আঁতৰাব নোৱাৰিব {{type}} । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
   'content.modals.remove-class-activity.confirmation':
     'আপোনাৰ শ্ৰেণীৰ কাৰ্যকলাপৰ পৰা এইটো {{type}} আঁতৰাবলৈ আপুনি নিশ্চিত নে ?',
   'content.modals.remove-class-activity.delete-error':
-    'অপচ ! এই {{type}} এতিয়াই আঁতৰাবলৈ অসমৰ্থ । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
+    'অ\'পচ ! এই {{type}} এতিয়াই আঁতৰাবলৈ অসমৰ্থ । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
   'content.modals.delete-class.legend':
     'আপুনি আপোনাৰ শ্ৰেণীকোঠা মচি পেলাবলৈ গৈ আছে',
   'content.modals.delete-class.student-access':
@@ -994,21 +988,21 @@ export default Object.assign(quizzesTranslations, {
     'আপুনি গুদাম হব বিচৰাটো নিশ্চিত নে ?',
   'content.modals.delete-content.legend': 'আপুনি ডিলিট কৰিবলৈ লৈছে',
   'content.modals.delete-content.content-legend':
-    '[1]{{type}}[2] {{index}} - {{title}} পৰা {{parentName}}',
+    '<span>{{type}}</span> {{index}} - {{title}} পৰা {{parentName}}',
   'content.modals.delete-content.content-legend-header':
     '{{title}} পৰা {{parentName}}',
   'content.modals.delete-content.delete-warning':
     'এই ধৰণৰ {{type}} সকলো তালিকা মচি পেলোৱা হব',
   'content.modals.delete-content.delete-error':
-    'অপচ ! এতিয়াই মচি পেলোৱাত {{type}} অসমৰ্থ । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
+    'অ\'পচ ! এতিয়াই মচি পেলোৱাত {{type}} অসমৰ্থ । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
   'content.modals.delete-content.confirmation':
     'আপুনি অব্যাহত ৰাখিব বিছাৰেনে? অনুগ্ৰহ কৰি তলত "delete" লিখক আৰু "delete" ত ক্লিক কৰক।',
   'content.modals.delete-resource.legend':
-    'আপুনি নিশ্চিতভাৱে ডিলিট কৰিব বিচাৰেনে [1]{{title}}[2]',
+    'আপুনি নিশ্চিতভাৱে ডিলিট কৰিব বিচাৰেনে <b>{{title}}</b>',
   'content.modals.delete-resource.delete-warning':
     'এই ধৰণৰ {{type}} সকলো তালিকা মচি পেলোৱা হব',
   'content.modals.delete-resource.delete-error':
-    'অপচ ! এতিয়াই মচি পেলোৱাত {{type}} অসমৰ্থ । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
+    'অ\'পচ ! এতিয়াই মচি পেলোৱাত {{type}} অসমৰ্থ । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
   'content.modals.delete-resource.confirmation':
     'অব্য়াহত ৰাখিবলৈ আপুনি নিশ্চিত নে ? অনুগ্ৰহ কৰি “Permanently Delete” টিপি দিয়ক ।',
   'content.modals.delete-resource.first-check':
@@ -1016,19 +1010,19 @@ export default Object.assign(quizzesTranslations, {
   'content.modals.delete-resource.second-check':
     'এই সম্পদৰ কপিসমূহ, আপোনাৰ সংগ্ৰহৰ আৰু সমগ্ৰ অন্য উপভোক্তাৰ দ্বাৰা যি কোনো সংগ্ৰহক আঁতৰোৱা হ\'ব',
   'content.modals.delete-rubric.legend':
-    'আপুনি নিশ্চিতভাৱে ডিলিট কৰিব বিচাৰেনে [1]{{title}}[2]',
+    'আপুনি নিশ্চিতভাৱে ডিলিট কৰিব বিচাৰেনে <b>{{title}}</b>',
   'content.modals.delete-rubric.delete-warning':
     'ৰিউব্ৰিকত থকা সকলো তালিকা মচি দিয়া হব ।',
   'content.modals.delete-rubric.delete-error':
-    'অপচ ! এতিয়াই ৰিউব্ৰিক মচি পেলোৱাত অসমৰ্থ । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
+    'অ\'পচ ! এতিয়াই ৰিউব্ৰিক মচি পেলোৱাত অসমৰ্থ । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
   'content.modals.delete-rubric.confirmation':
     'অব্য়াহত ৰাখিবলৈ আপুনি নিশ্চিত নে ? অনুগ্ৰহ কৰি “Permanently Delete” টিপি দিয়ক ।',
   'content.modals.delete-rubric.first-check':
     'এইটো এটা স্থায়ী মচ্ আৰু ইয়াক নোহোৱা কৰিব নোৱাৰি',
   'content.modals.remove-content.legend':
-    'আপুনি [3]{{parentName}}[4] পৰা [1]{{title}}[2] আঁতৰাব গৈ আছে',
+    'আপুনি <b>{{parentName}}</b> পৰা <b>{{title}}</b> আঁতৰাব গৈ আছে',
   'content.modals.remove-content.remove-error':
-    'অপচ ! এতিয়াই {{type}} আঁতৰাই পেলোৱাত অসমৰ্থ । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
+    'অ\'পচ ! এতিয়াই {{type}} আঁতৰাই পেলোৱাত অসমৰ্থ । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
   'content.modals.remove-content.confirmation':
     'অব্য়াহত ৰাখিবলৈ আপুনি নিশ্চিত নে ? অনুগ্ৰহ কৰি তলত “remove” লিখক আৰু “remove” টিপক ।',
   'content.modals.remove-student.title':
@@ -1042,20 +1036,20 @@ export default Object.assign(quizzesTranslations, {
   'content.modals.remove-student.data-lost':
     'যদিহে তেঁওলোকে পুনৰ শ্ৰেণীকোঠাত যোগদান কৰে, তেতিয়া আগৰ সকলো তথ্য় লুপ্ত হব',
   'content.modals.remove-student.remove-error':
-    'অপচ ! এতিয়াই এই ছাত্ৰজনক আঁতৰাই পেলোৱাত অসমৰ্থ । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
+    'অ\'পচ ! এতিয়াই এই ছাত্ৰজনক আঁতৰাই পেলোৱাত অসমৰ্থ । অনুগ্ৰহ কৰি কিছু সময়ৰ পাছত পুনৰ চেস্টা কৰক ।',
   'content.modals.remove-student.confirmation':
     'আপুনি অব্যাহত ৰাখিব বিছাৰেনে? অনুগ্ৰহ কৰি তলত "delete" লিখক আৰু "delete" ত ক্লিক কৰক।',
   'content.modals.quick-remove-content.legend':
-    'আপুনি [3]{{parentName}}[4] পৰা [1]{{title}}[2] লৈ আঁতৰাই পেলাবলৈ নিশ্চিত কৰক ।',
+    'আপুনি <b>{{parentName}}</b> পৰা <b>{{title}}</b> লৈ আঁতৰাই পেলাবলৈ নিশ্চিত কৰক ।',
   'content.modals.quick-delete-content.legend':
-    'আপুনি [3]{{parentName}}[4] পৰা [1]{{title}}[2] লৈ স্থায়ীভাবে মচি পেলাবলৈ নিশ্চিত কৰক ।',
+    'আপুনি <b>{{parentName}}</b> পৰা <b>{{title}}</b> লৈ স্থায়ীভাবে মচি পেলাবলৈ নিশ্চিত কৰক ।',
   'content.modals.quick-delete-content.delete': 'স্থায়ীভাৱে মচি পেলোৱা',
   'content.resources.edit.best-practices':
-    '[1]সম্পদ ভিডিও, ইন্টাৰেক্টিভ, ৱেবচাইট, চিত্র, গুগল ডক্স আৰু অনেক কিছু যেনে ফৰম্যাট মাল্টিমিডিয়া সামগ্রী। সৃজনশীল হব আৰু আপোনাৰ নিজৰ সংস্থানসমূহৰ ব্যবহাৰ কৰক বা "সমলমূলক" পাব আৰু গুৰুত আমাৰ প্রচুৰ সৰবৰাহৰ অনুসন্ধান কৰক। [2][3] আপোনাৰ ছাত্র-ছাত্ৰী সকলৰ সৈতে জড়িত থকাৰ বাবে বিভিন্ন ধৰণৰ প্রকাৰ ব্যবহাৰ কৰক আৰু বর্ণনা অন্তর্ভুক্ত কৰক যাতে আপুনি সংস্থাৰ মাধ্যমেৰে আপোনাৰ শিক্ষার্থী সকলক গাইড কৰাত সহায়ক হ\'ব পাৰে।[4][5] আমাৰ প্রতিটো প্রশ্নৰ মানদণ্ড, সূক্ষ্ম-মানদণ্ড আৰু 21 শতিকাৰ দক্ষতাসমূহ টেগিং কৰাৰ পৰামর্শ দিয়ে। আপুনি শিক্ষকৰ ডেছবৰ্ডৰ মাধ্যমেৰে কি দৰে আপোনাৰ শিক্ষার্থীসকলৰ সৈতে যোগাযোগৰ লগত যোগাযোগ কৰি নিৰীক্ষণ কৰিব পাৰিব. [6]',
+    '<p>সম্পদ ভিডিও, ইন্টাৰেক্টিভ, ৱেবচাইট, চিত্র, গুগল ডক্স আৰু অনেক কিছু যেনে ফৰম্যাট মাল্টিমিডিয়া সামগ্রী। সৃজনশীল হব আৰু আপোনাৰ নিজৰ সংস্থানসমূহৰ ব্যবহাৰ কৰক বা "সমলমূলক" পাব আৰু গুৰুত আমাৰ প্রচুৰ সৰবৰাহৰ অনুসন্ধান কৰক। </p><p> আপোনাৰ ছাত্র-ছাত্ৰী সকলৰ সৈতে জড়িত থকাৰ বাবে বিভিন্ন ধৰণৰ প্রকাৰ ব্যবহাৰ কৰক আৰু বর্ণনা অন্তর্ভুক্ত কৰক যাতে আপুনি সংস্থাৰ মাধ্যমেৰে আপোনাৰ শিক্ষার্থী সকলক গাইড কৰাত সহায়ক হ\'ব পাৰে।</p><p> আমাৰ প্রতিটো প্রশ্নৰ মানদণ্ড, সূক্ষ্ম-মানদণ্ড আৰু 21 শতিকাৰ দক্ষতাসমূহ টেগিং কৰাৰ পৰামর্শ দিয়ে। আপুনি শিক্ষকৰ ডেছবৰ্ডৰ মাধ্যমেৰে কি দৰে আপোনাৰ শিক্ষার্থীসকলৰ সৈতে যোগাযোগৰ লগত যোগাযোগ কৰি নিৰীক্ষণ কৰিব পাৰিব. </p>',
   'content.resources.edit.placeholder-message':
-    'ইয়াত পূৰ্বদৰ্শন কৰিবলৈ [2] এটা সমল [1] যোগ কৰক ।',
+    'ইয়াত পূৰ্বদৰ্শন কৰিবলৈ </span> এটা সমল <span> যোগ কৰক ।',
   'content.resources.edit.not-implemented':
-    'সমল আৰ্হি পূৰ্বদৰ্শন [1] এতিয়ালৈকে প্ৰযোয্য় হোৱা নাই ।[2]',
+    'সমল আৰ্হি পূৰ্বদৰ্শন <span> এতিয়ালৈকে প্ৰযোয্য় হোৱা নাই ।</span>',
   'content.resources.edit.information.im-publisher': 'ময়েই প্ৰকাশক',
   'content.resources.edit.information.select-a-license':
     'অনুগ্ৰহ কৰি অনুজ্ঞাপত্ৰ এখন নিৰ্বাচন কৰক',
@@ -1069,18 +1063,18 @@ export default Object.assign(quizzesTranslations, {
   'user.join-class': 'শ্ৰেণীকোঠাত যোগদান কৰক',
   'user.joined-classes.zero':
     'আপুনি বৰ্তমান  {{count}} শ্ৰেণীকোঠাত পঞ্জীয়ন হৈ আছে',
-  'user.joined-classes.one': 'আপুনি বৰ্তমান  ১টা শ্ৰেণীকোঠাত পঞ্জীয়ন হৈ আছে',
+  'user.joined-classes.one': 'আপুনি বৰ্তমান  1 টা শ্ৰেণীকোঠাত পঞ্জীয়ন হৈ আছে',
   'user.joined-classes.other':
     'আপুনি বৰ্তমান  {{count}} শ্ৰেণীকোঠাত পঞ্জীয়ন হৈ আছে',
   'user.my-current-classes': 'মোৰ বৰ্তমান শ্ৰেণীকোঠা',
   'user.manage-goals': 'লক্ষ্য় পৰিচালনা',
   'user.my-classes': 'মোৰ শ্ৰেণীকোঠাসমূহ',
   'user.teaching-classes.zero':
-    'আপোনি বৰ্তমান {{count}} শ্ৰেণীকোঠাত শিক্ষশ্ৰেণীকোঠাণ প্ৰদান কৰি আছে',
+    'আপুনি বৰ্তমান {{count}} শ্ৰেণীকোঠাত শিক্ষা প্ৰদান কৰি আছে',
   'user.teaching-classes.one':
-    'আপোনি বৰ্তমান ১টা শ্ৰেণীকোঠাত শিক্ষশ্ৰেণীকোঠাণ প্ৰদান কৰি আছে',
+    'আপুনি বৰ্তমান 1 টা শ্ৰেণীকোঠাত শিক্ষা প্ৰদান কৰি আছে',
   'user.teaching-classes.other':
-    'আপোনি বৰ্তমান {{count}} শ্ৰেণীকোঠাত শিক্ষশ্ৰেণীকোঠাণ প্ৰদান কৰি আছে',
+    'আপুনি বৰ্তমান {{count}} শ্ৰেণীকোঠাত শিক্ষা প্ৰদান কৰি আছে',
   'student-landing.announcement': 'ঘোষণা',
   'student-landing.browse-featured-courses':
     'আমাৰ আনুষংগিক পাঠ্য়ক্ৰমসমূহ ব্ৰাউজ কৰক',
@@ -1093,7 +1087,7 @@ export default Object.assign(quizzesTranslations, {
   'student-landing.class.no-course-assigned':
     'কোনো পাঠ্য়ক্ৰমৰ দায়িত্ব দিয়া নাই',
   'student-landing.class.back-to-independent': 'স্বাধীন শিকনলৈ উভতি যোৱা',
-  'student-landing.class.report': 'ৰিপৰ্ট',
+  'student-landing.class.report': 'ৰিপ\'ৰ্ট',
   'student-landing.class.performance': 'প্ৰদৰ্শন',
   'student-landing.class.course-map': 'ক\'ৰ্চ মেপ',
   'student-landing.class.unit': 'একক',
@@ -1113,7 +1107,7 @@ export default Object.assign(quizzesTranslations, {
   'student-landing.not-available': '-NA-',
   'student-landing.join-classroom':
     'পঢ়া আৰম্ভ কৰিবলৈ আপোনাৰ শিক্ষকৰ শ্ৰেণীকোঠাত যোগদান কৰক',
-  'student-landing.learn': 'Gooru শ্ৰেণীকোঠাৰ সৈতে শিকক',
+  'student-landing.learn': 'গুৰু শ্ৰেণীকোঠাৰ সৈতে শিকক',
   'student-landing.my-performance.activity': 'কাৰ্যকলাপ',
   'student-landing.my-performance.activities.study': 'অধ্যয়ন',
   'student-landing.my-performance.assessments': 'মূল্যাংকনবোৰ',
@@ -1128,25 +1122,25 @@ export default Object.assign(quizzesTranslations, {
   'student-landing.study-player': 'শিক্ষা খেলৱৈ',
   'student-landing.my-study': 'মোৰ শিক্ষা',
   'student-landing.no-classrooms':
-    'আপুনি এতিয়ালৈকে কোনো শ্ৰেণীকোঠাত যোগদান কৰা নাই। আপোনাৰ শিক্ষকৰ শ্ৰেণীত যোগদান কৰিবলৈ “Join [1] Classroom” ত ক্লিক কৰক। আপুনি লাইব্ৰেৰি টেবৰ পৰা [2 ]এক বিশেষ ৰুপৰ পাঠ্যক্ৰম বিছাৰিব পাৰিব',
+    'আপুনি এতিয়ালৈকে কোনো শ্ৰেণীকোঠাত যোগদান কৰা নাই। আপোনাৰ শিক্ষকৰ শ্ৰেণীত যোগদান কৰিবলৈ “Join </br> Classroom” ত ক্লিক কৰক। আপুনি লাইব্ৰেৰি টেবৰ পৰা [2 ]এক বিশেষ ৰুপৰ পাঠ্যক্ৰম বিছাৰিব পাৰিব',
   'student-landing.no-content-classrooms':
     'বৰ্তমান এই শ্ৰেণীকোঠাত কোনো তালিকা মজুত নাই',
-  'student-landing.welcome': 'Gooru লৈ স্বাগতম ।',
+  'student-landing.welcome': 'গুৰুলৈ স্বাগতম ।',
   'student-landing.no-course-assigned':
-    'এই শ্ৰেণীটোক এতিয়ালৈকে কোনো কোৰ্স দিয়া হোৱা নাই । অনুগ্ৰহ কৰি শিক্ষকৰ লগত যোগাযোগ কৰক ।',
+    'এই শ্ৰেণীটোক এতিয়ালৈকে কোনো ক\'ৰ্চ দিয়া হোৱা নাই । অনুগ্ৰহ কৰি শিক্ষকৰ লগত যোগাযোগ কৰক ।',
   'student-independent-learning.show-more': 'বেছি দেখাওক',
   'student-independent-learning.show-less': 'কম দেখাওক',
   'student-independent-learning.no-courses':
-    'যেতিয়া আপুনি বোকমাৰ্কদ কোৰ্সবোৰ অনুসন্ধান কৰিবলৈ আৰম্ভ কৰিব তেতিয়া সেইবোৰ ইয়াত দেখা যাব।',
+    'যেতিয়া আপুনি বুকমাৰ্ক ক\'ৰ্চসমূহ অনুসন্ধান কৰিবলৈ আৰম্ভ কৰিব তেতিয়া সেইবোৰ ইয়াত দেখা যাব।',
   'student-independent-learning.no-collections':
-    'যেতিয়া আপুনি বোকমাৰ্কদ সংগ্ৰহবোৰ অনুসন্ধান কৰিবলৈ আৰম্ভ কৰিব তেতিয়া সেইবোৰ ইয়াত দেখা যাব।',
+    'যেতিয়া আপুনি বুকমাৰ্ক সংগ্ৰহবোৰ অনুসন্ধান কৰিবলৈ আৰম্ভ কৰিব তেতিয়া সেইবোৰ ইয়াত দেখা যাব।',
   'student-independent-learning.no-assessments':
-    'যেতিয়া আপুনি বোকমাৰ্কদ মূল্যায়নসমূহ অনুসন্ধান কৰিবলৈ আৰম্ভ কৰিব তেতিয়া সেইবোৰ ইয়াত দেখা যাব।',
+    'যেতিয়া আপুনি বুকমাৰ্ক মূল্যায়নসমূহ অনুসন্ধান কৰিবলৈ আৰম্ভ কৰিব তেতিয়া সেইবোৰ ইয়াত দেখা যাব।',
   'student-independent-learning.no-independent-results':
     'নতুন কিবা অধ্যয়ন কৰিবলৈ পুথিভঁৰালটোৰ অনুসন্ধান কৰক।',
   'student-independent-learning.no-bookmarks':
-    'যেতিয়া আপুনি কোৰ্সবোৰ, সংগ্ৰহবোৰ আৰু মূল্যায়নবোৰ বোকমাৰ্ক কৰিবলৈ আৰম্ভ কৰিব তেতিয়া সেইবোৰ ইয়াত দেখা যাব',
-  'student-independent-learning.add-bookmark': 'বোকমাৰ্ক যোগ কৰক',
+    'যেতিয়া আপুনি ক\'ৰ্চবোৰ, সংগ্ৰহবোৰ আৰু মূল্যায়নবোৰ বুকমাৰ্ক কৰিবলৈ আৰম্ভ কৰিব তেতিয়া সেইবোৰ ইয়াত দেখা যাব',
+  'student-independent-learning.add-bookmark': 'বুকমাৰ্ক যোগ কৰক',
   'teacher-landing.latest-announcement': 'শেহতীয়া ঘোষনা',
   'teacher-landing.latest-assessment': 'শেহতীয়া মূল্যাংকন',
   'teacher-landing.create-classroom':
@@ -1161,7 +1155,7 @@ export default Object.assign(quizzesTranslations, {
     'বাচনি কৰা তাৰিখটোত এই কাৰ্যকলাপ DCA ত দেখা যাব।',
   'teacher-landing.navigator-banner.title': 'অংকৰ বাবে নেভিগেতৰ',
   'teacher-landing.navigator-banner.description':
-    'লার্নিং প্রযুক্তিৰ জৰিয়তে এই GPS ব্যবহাৰ কৰি আমৰ গণিতৰ বাবে নেভিগেটৰ ডিজাইন কৰা হৈছে যাতে প্রতিজন ছাত্র-ছাত্ৰী আস্থা অর্জন কৰিব পাৰে আৰু গণিতৰ শিক্ষাৰ গতি বৃদ্ধি কৰিব পাৰে।[1] গণিতৰ বাবে নেভিগেটৰ হৈছে পাঠক্রমৰ এক পাঠ্যক্রম য\'ত সকলো গণিতৰ ধাৰণাক গ্রেড 2-12 লৈকে ক\'ভাৰ কৰে। ছাত্ৰ-ছাত্ৰীসকলৰ বর্তমান জ্ঞানৰ ওপৰত ভিত্তি কৰি ডিজাইন কৰা এক স্বতন্ত্র পথৰ মাধ্যমৰ ৰুট আৰু পুনঃপ্রবর্তিত হয়, সেইদৰে তেওঁলোকৰ বুজি পোৱাত সহায় কৰে। এই ব্যাপক আৰু ব্যক্তিগতকৃত শিক্ষাৰ অভিজ্ঞতাৰ জড়িয়তে, প্রতিটো ছাত্র আৰু উন্নত গণিতৰ বাবে সম্পূর্ণৰুপে প্রস্তত হ\'ব পাৰে।',
+    'লার্নিং প্রযুক্তিৰ জৰিয়তে এই GPS ব্যৱহাৰ কৰি আমৰ গণিতৰ বাবে নেভিগেটৰ ডিজাইন কৰা হৈছে যাতে প্রতিজন ছাত্র-ছাত্ৰী আস্থা অর্জন কৰিব পাৰে আৰু গণিতৰ শিক্ষাৰ গতি বৃদ্ধি কৰিব পাৰে।<br/> গণিতৰ বাবে নেভিগেটৰ হৈছে পাঠক্রমৰ এক পাঠ্যক্রম য\'ত সকলো গণিতৰ ধাৰণাক গ্রেড 2-12 লৈকে ক\'ভাৰ কৰে। ছাত্ৰ-ছাত্ৰীসকলৰ বর্তমান জ্ঞানৰ ওপৰত ভিত্তি কৰি ডিজাইন কৰা এক স্বতন্ত্র পথৰ মাধ্যমৰ ৰুট আৰু পুনঃপ্রবর্তিত হয়, সেইদৰে তেওঁলোকৰ বুজি পোৱাত সহায় কৰে। এই ব্যাপক আৰু ব্যক্তিগতকৃত শিক্ষাৰ অভিজ্ঞতাৰ জড়িয়তে, প্রতিটো ছাত্র আৰু উন্নত গণিতৰ বাবে সম্পূর্ণৰূপে প্রস্তত হ\'ব পাৰে।',
   'teacher-landing.navigator-banner.join': 'ডেম\' শ্ৰেণীত যোগদান কৰক',
   'teacher-landing.navigator-banner.success-message':
     'আপুনি সফলতাপূৰ্বক নেভিগেতৰ শ্ৰেণীৰ সহ-শিক্ষক হিচাপে যোগদান কৰিছে',
@@ -1203,7 +1197,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-management-tab.import-roster':
     'ৰোস্তাৰ আমদানি কৰক',
   'teacher-landing.class.class-management-tab.last-name': 'শেষ নাম ',
-  'teacher-landing.class.class-management-tab.message': 'খবৰ কৰক',
+  'teacher-landing.class.class-management-tab.message': 'বাৰ্তা',
   'teacher-landing.class.class-management-tab.performance': 'প্ৰদৰ্শন',
   'teacher-landing.class.class-management-tab.students': 'ছাত্ৰ-ছাত্ৰী',
   'teacher-landing.class.class-management-tab.student-name': 'শিক্ষাৰ্থীৰ নাম',
@@ -1236,12 +1230,12 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.students-tab.course-coverage-label':
     'শ্ৰেণীটোত থকা সকলো ছাত্ৰ-ছাত্ৰীৰ ক্ষমতাৰ গড় হিচাপ',
   'teacher-landing.class.students-tab.error-message':
-    'শ্ৰেণীটোক দিয়া কোনো কাৰ্যক্ৰম নাই অথবা শ্ৰেণীতোত এতিয়ালৈকে কোনো ছাত্ৰ-ছাত্ৰীয়ে নামাংকন কৰা নাই। শ্ৰেণীটোক কাৰ্যক্ৰম দিয়া পাচত আৰু ছাত্ৰ-ছাত্ৰীসকলে নামাংকন কৰাৰ পাচত শ্ৰেণীটোৰ দক্ষতাৰ ৰিপৰ্ট ইয়াত দেখুওৱা হ\'ব।',
+    'শ্ৰেণীটোক দিয়া কোনো কাৰ্যক্ৰম নাই অথবা শ্ৰেণীতোত এতিয়ালৈকে কোনো ছাত্ৰ-ছাত্ৰীয়ে নামাংকন কৰা নাই। শ্ৰেণীটোক কাৰ্যক্ৰম দিয়া পাচত আৰু ছাত্ৰ-ছাত্ৰীসকলে নামাংকন কৰাৰ পাচত শ্ৰেণীটোৰ দক্ষতাৰ ৰিপ\'ৰ্ট ইয়াত দেখুওৱা হ\'ব।',
   'teacher-landing.class.class-activities': 'শ্ৰেণী কাৰ্যকলাপ',
   'teacher-landing.class.offline-class-report.class-report': 'শ্ৰেণী প্ৰতিবেদন',
   'teacher-landing.class.offline-class-report.activity-report':
     'কাৰ্যকলাপ প্ৰতিবেদন',
-  'teacher-landing.class.offline-class-report.conducted-on': 'সম্পনা কৰা সময়',
+  'teacher-landing.class.offline-class-report.conducted-on': 'পৰিচালনা কৰা সময়',
   'teacher-landing.class.offline-class-report.not-started': 'আৰম্ভ হোৱা নাই',
   'teacher-landing.class.back-to-class-activities':
     'শ্ৰেণী কাৰ্যকলাপলৈ উভতি আহক',
@@ -1253,7 +1247,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-activities-tab.add-from-my-content':
     'মোৰ বিষয়বস্তুৰ পৰা যোগ কৰক',
   'teacher-landing.class.class-activities-tab.welcome-dca':
-    'আমাৰ শ্ৰেণীৰ কাৰ্যকলাপলৈ স্বাগতম য\'ত আপুনি আজি ছাত্ৰ-ছাত্ৰীসকলক জমা সংকলন আৰু মূল্যায়ন দিব পাৰিব। অনুগ্ৰহ কৰি মন কৰিব: আটাইতকৈ শেহতীয়া ৰিপৰ্টৰ বাবে কেৱল আজি নিৰ্মাণ কৰা ৰিপৰ্টাটসমূহ থাকিব।',
+    'আমাৰ শ্ৰেণীৰ কাৰ্যকলাপলৈ স্বাগতম য\'ত আপুনি আজি ছাত্ৰ-ছাত্ৰীসকলক জমা সংকলন আৰু মূল্যায়ন দিব পাৰিব। অনুগ্ৰহ কৰি মন কৰিব: আটাইতকৈ শেহতীয়া ৰিপ\'ৰ্টৰ বাবে কেৱল আজি নিৰ্মাণ কৰা ৰিপ\'ৰ্টাটসমূহ থাকিব।',
   'teacher-landing.class.class-activities-tab.enter-max-timespent':
     'মূল্যায়নত খৰচ হোৱা বেছিতকৈ বেছি সময় অন্তৰ্ভুক্ত কৰক',
   'teacher-landing.class.class-activities-tab.enter-max-assessment-time-spent':
@@ -1281,13 +1275,13 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.click-to-copy': 'শ্ৰেণীৰ ক\'ড নকল কৰিবলৈ ক্লিক কৰক',
   'teacher-landing.class.course-map': 'ক\'ৰ্চ মেপ',
   'teacher-landing.class.management': 'ৰোস্তাৰ ব্যৱস্থাপনা',
-  'teacher-landing.class.report': 'ৰিপৰ্ট',
+  'teacher-landing.class.report': 'ৰিপ\'ৰ্ট',
   'teacher-landing.class.performance': 'প্ৰদৰ্শন',
   'teacher-landing.class.performance-tab.assessments': 'মূল্যাংকনবোৰ',
   'teacher-landing.class.performance-tab.collections': 'সংগৃহীতসমূহ',
   'teacher-landing.class.view-more': 'বেছি চাওক',
   'teacher-landing.class.class-settings.class-settings-sec.generate-pathway':
-    'অধ্যয়ন পথ পাৰ্চনেলাইজ কৰক',
+    'অধ্যয়ন পথ ব্যক্তিগতকৰণ কৰক',
   'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-head':
     'শ্ৰেণী পটভূমি',
   'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-desc':
@@ -1305,6 +1299,14 @@ export default Object.assign(quizzesTranslations, {
     'সহ-শিক্ষক',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'বেলেগ শিক্ষক যোগ কৰক',
+  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
+    'এইটো এটা অফ্লাইন শ্ৰেণীকোঠা',
+  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
+    'এবাৰ অফ্লাইন হোৱাৰ পাছত শ্ৰেণীকোঠাটো পুনৰ অনলাইন কৰিব নোৱাৰিব।',
+  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
+    'যদি আপুনি এইটো এটা অফ্লাইন শ্ৰেণীকোঠা কৰিব বিচাৰে তেতিয়া yes বাচনি কৰক',
+  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
+    'যিবোৰ শ্ৰেণীকোঠাত শিক্ষাৰ্থীয়ে নেভিগেতৰত অনলাইন নপঢ়ে সেইবোৰ অফ্লাইন ধৰা হয় । অফ্লাইন পঢ়া শিক্ষাৰ্থীক শিক্ষকে ট্ৰেক কৰে আৰু শিক্ষাৰ্থীৰ হৈ ডাটা অনন্তৰ্ভুক্ত কৰে',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'নিৰ্দেশনাৰ ভাষা',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
@@ -1322,13 +1324,13 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
     'আপোনাৰ শ্ৰেণীৰ  গ্ৰেড স্তৰ কি হয় ',
   'teacher-landing.class.class-settings.gen-baseline.baseline-1':
-    '[1] আপুনি শ্ৰেণীৰ মূল আৰু গন্তব্যত ভিত্তি কৰি প্ৰত্যেক ছাত্ৰ-ছাত্ৰীৰ বাবে ব্যক্তিগত শিক্ষণ পথ সৃষ্টি কৰিব পাৰিব।',
+    '(1) আপুনি শ্ৰেণীৰ মূল আৰু গন্তব্যত ভিত্তি কৰি প্ৰত্যেক ছাত্ৰ-ছাত্ৰীৰ বাবে ব্যক্তিগত শিক্ষণ পথ সৃষ্টি কৰিব পাৰিব।',
   'teacher-landing.class.class-settings.gen-baseline.baseline-2':
-    '(2)  ডিফল্টৰূপে সকলো ছাত্ৰ-ছাত্ৰীৰ গ্ৰেডৰ স্তৰটো  লক্ষ্য হিচাপে থাকে। শ্ৰেণীটোৰ আগশাৰীৰ ছাত্ৰ-ছাত্ৰীৰ বাবে আপুনি লক্ষ্যটো অনুকূল কৰিব পাৰে। ছাত্ৰৰ স্কাইলাইন আৰু তেওঁলোকৰ ওপৰত ভিত্তি কৰি এখন নিজাকৃত কাৰ্যক্ৰম নক্সা বনাবলৈ শিকাৰ পথ নিজাকৃত কৰকত ক্লিক কৰক।',
+    '(2)  ডিফল্টৰূপে সকলো ছাত্ৰ-ছাত্ৰীৰ গ্ৰেডৰ স্তৰটো  লক্ষ্য হিচাপে থাকে। শ্ৰেণীটোৰ আগশাৰীৰ ছাত্ৰ-ছাত্ৰীৰ বাবে আপুনি লক্ষ্যটো অনুকূল কৰিব পাৰে। ছাত্ৰ ৰ স্কাইলাইন আৰু তেওঁলোকৰ ওপৰত ভিত্তি কৰি এখন নিজাকৃত কাৰ্যক্ৰম নক্সা বনাবলৈ শিকাৰ পথ নিজাকৃত কৰকত ক্লিক কৰক।',
   'teacher-landing.class.class-settings.gen-baseline.baseline-3':
     '(3) সম্পূৰ্ণ শ্ৰেণীটোৰ বাবে পথ নিৰ্মাণ কৰাৰ কাম মাত্ৰ এবাৰ কৰিব পাৰি। তাৰপাচত প্ৰতিটো ছাত্ৰৰ বাবে যিকোনো আপডেট এটা এটাকৈ কৰিব লাগিব।',
   'teacher-landing.class.class-settings.gen-baseline.baseline-4':
-    '(4) আপুনি এটা ছাত্ৰৰ বাবে লক্ষ্যৰ গ্ৰেড অনুকূল কৰিব পাৰে। আপুনি এবাৰ লক্ষ্য নিৰ্ণয় কৰাৰ পাচত নিজাকৃত পথটো পুনৰ কম্পিউট কৰিবলৈ ৰিপ্লে [1] আইকন ক্লিক কৰক।',
+    '(4) আপুনি এটা ছাত্ৰৰ বাবে লক্ষ্যৰ গ্ৰেড অনুকূল কৰিব পাৰে। আপুনি এবাৰ লক্ষ্য নিৰ্ণয় কৰাৰ পাচত নিজাকৃত পথটো পুনৰ কম্পিউট কৰিবলৈ ৰিপ্লে </i> আইকন ক্লিক কৰক।',
   'teacher-landing.class.class-settings.origin': 'মূল',
   'teacher-landing.class.class-settings.destination': 'গন্তব্য স্থান',
   'teacher-landing.class.class-settings.students': 'ছাত্ৰ-ছাত্ৰী',
@@ -1337,17 +1339,17 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-settings.action-lable-add-student':
     'বেলেগ এজন শিক্ষাৰ্থীক যোগ কৰক',
   'teacher-landing.no-classrooms':
-    'আপুনি এতিয়ালৈকে কোনো শ্ৰেণীকোঠা সৃষ্টি কৰা নাই। "শ্ৰেণীকোঠা সৃষ্টি কৰক"ত ক্লিক কৰক অথবা লাইব্ৰেৰী টেবৰ অধীনত এটা বিশেষ স্থানপ্ৰাপ্ত কাৰ্যক্ৰমৰ বাবে সন্ধান [1] কৰক।',
+    'আপুনি এতিয়ালৈকে কোনো শ্ৰেণীকোঠা সৃষ্টি কৰা নাই। "Create Classroo" ত ক্লিক কৰক অথবা লাইব্ৰেৰী টেবৰ অধীনত এটা বিশেষ স্থানপ্ৰাপ্ত কাৰ্যক্ৰমৰ বাবে সন্ধান </br> কৰক।',
   'teacher-landing.no-course':
-    'আপুনি এই [1] শ্ৰেণীকোঠাটোক এতিয়লৈকে কাৰ্যক্ৰম দিয়া নাই।',
+    'আপুনি এই </br> শ্ৰেণীকোঠাটোক এতিয়লৈকে কাৰ্যক্ৰম দিয়া নাই।',
   'teacher-landing.teach': 'এটা গুৰু শ্ৰেণীকোঠাৰ দ্বাৰা পঢ়াওক',
   'teacher-landing.welcome-course-map':
-    'এইখন আপোনাৰ কাৰ্যক্ৰমৰ নক্সা য\'ত আপুনি কাৰ্যক্ৰমৰ বিষয়বস্তু চাব পাৰে, মূল্যায়ন অন আৰু অফ কৰিব পাৰি আৰু আচল সময়ত মূল্যায়ন আৰম্ভ কৰিব পাৰিব। আপুনি শ্ৰেণীটোৰ মুঠ প্ৰদৰ্শন আৰু সম্পূৰ্ণতাও চাব পাৰিব। শ্ৰেণীকোঠাৰ প্ৰদৰ্শনৰ বাবে আপোনাৰ শ্ৰেণীকোঠাৰ ৰিপৰ্ট টেবলৈ যাওক।',
+    'এইখন আপোনাৰ কাৰ্যক্ৰমৰ নক্সা য\'ত আপুনি কাৰ্যক্ৰমৰ বিষয়বস্তু চাব পাৰে, মূল্যায়ন অন আৰু অফ কৰিব পাৰি আৰু আচল সময়ত মূল্যায়ন আৰম্ভ কৰিব পাৰিব। আপুনি শ্ৰেণীটোৰ মুঠ প্ৰদৰ্শন আৰু সম্পূৰ্ণতাও চাব পাৰিব। শ্ৰেণীকোঠাৰ প্ৰদৰ্শনৰ বাবে আপোনাৰ শ্ৰেণীকোঠা ৰ ৰিপ\'ৰ্ট টেবলৈ যাওক।',
   'teacher-landing.welcome-rescoped-course-map':
-    'এই কাৰ্যক্ৰমটো শ্ৰেণীটোৰ প্ৰতিটো ছাত্ৰৰ বাবে নিজাকৃত কৰা হৈছে। আপুনি শ্ৰেণী নিয়ন্ত্ৰণ পৃষ্ঠাত ছাত্ৰৰ শিকাৰ পথত ("->") ক্লিক কৰি প্ৰতিটো ছাত্ৰৰ কাৰ্যক্ৰম নক্সা চাব পাৰিব।',
+    ' কাৰ্যক্ৰমটো শ্ৰেণীটোৰ প্ৰতিটো ছাত্ৰৰ বাবে নিজাকৃত কৰা হৈছে। আপুনি শ্ৰেণী নিয়ন্ত্ৰণ পৃষ্ঠাত ছাত্ৰ ৰ শিকাৰ পথত ("->") ক্লিক কৰি প্ৰতিটো ছাত্ৰ ৰ কাৰ্যক্ৰম নক্সা চাব পাৰিব।',
   'teacher-landing.welcome-premium-course-map':
     'এই নেভিগেটৰ ক\'ৰ্চ বহুধা গ্ৰেডৰ মানক কভাৰ কৰা এক ব্যক্তিগত ক\'ৰ্চ হয়। প্ৰত্যেকজন ছাত্ৰ-ছাত্ৰীয়ে অন্তৰাল পূৰাবলৈ,  ধাৰণা সমূহ আৰু অনুশীলন সমূহ সুদৃঢ় কৰিবলৈ, আৰু তেওঁলোকৰ বিদ্যা ত্বৰাণ্বিত কৰিবলৈ বিশেষ ধৰণৰ ক\'ৰ্চ যোগান তেওঁলোকলৈ ধৰা হৈছে। ব্যক্তিগতকৃত মূল কাৰণ ডিজাইন কৰা হৈছে আৰু ছাত্ৰ-ছাত্ৰী সকলৰ বাস্তৱিক সময়ত প্ৰতেক ছাত্ৰ-ছাত্ৰীৰ শিকাৰ ক্ষমতাক অধিকতম কৰিবলৈ আৰু নিজে ধাৰ্য্য কৰা লক্ষ্যক নেভিগেট কৰিবলৈ আকৌ ৰুট কৰা হৈছে।',
-  'goals.manage.title': 'মোৰ লক্ষ্যবোৰ',
+  'goals.manage.title': 'মোৰ লক্ষ্যবোৰ!',
   'goals.manage.add-goal': 'লক্ষ্য যোগ কৰক',
   'goals.manage.goal-label': 'লক্ষ্য',
   'goals.manage.start-date-label': 'আৰম্ভ তাৰিখ',
@@ -1393,7 +1395,7 @@ export default Object.assign(quizzesTranslations, {
   'gru-add-to.add-to-assessment-lead':
     'এটা মূল্যায়ন বাচনি কৰক য\'ত আপুনি {{contentTitle}} যোগ কৰিব বিচাৰে',
   'gru-add-to.assessments-info':
-    'ইয়াত [1] সূচিত কৰা মূল্যায়ন কোনো বেলেগ পাঠ বা ক\'ৰ্চৰ নহয় [2]',
+    'ইয়াত <b> সূচিত কৰা মূল্যায়ন কোনো বেলেগ পাঠ বা ক\'ৰ্চৰ নহয় </b>',
   'gru-add-to.collections-info':
     'ইয়াত সূচিত কৰা সংগ্ৰহ কোনো বেলেগ পাঠ বা ক\'ৰ্চৰ নহয়',
   'gru-add-rubric-to-question.title': 'মোৰ ৰুব্ৰিকবোৰৰ পৰা যোগ কৰক',
@@ -1456,10 +1458,10 @@ export default Object.assign(quizzesTranslations, {
   'gru-category-panel.district.title': 'জিলাৰ বাবে',
   'gru-category-panel.district.body':
     'ব্যক্তিগতভাৱে নিৰ্মিত শিক্ষণ উলিয়াই আনিবলৈ আৰু জিলা ভিত্তিৰ পাঠ্যক্ৰম শ্বেয়াৰ কৰিবলৈ গৰোৰ লগত সহযোগ কৰক।',
-  'gru-category-panel.district.cta': 'আমাৰ প্ৰভাব চাওক',
+  'gru-category-panel.district.cta': 'আমাৰ প্ৰভাৱ চাওক',
   'gru-category-panel.partner.title': 'সহযোগীৰ বাবে ',
   'gru-category-panel.partner.body':
-    'শৈক্ষিক পৰিৱেশত আমাৰ সামুহিক প্ৰভাৱ যাতে বঢ়োৱাৰ বাবে মিচনৰ লগত শ্ৰেণীবদ্ধ হৈ থকা সহযোগীসকলৰ লগত সহযোগ কৰক।',
+    'শৈক্ষিক পৰিৱেশত আমাৰ সামূহিক প্ৰভাৱ বঢ়োৱাৰ বাবে মিচনৰ লগত শ্ৰেণীবদ্ধ হৈ থকা সহযোগীসকলৰ লগত সহযোগ কৰক।',
   'gru-category-panel.partner.cta': 'বেছি অধ্যয়ন কৰক',
   'class.gru-class-navigation.active': 'সক্ৰিয়:',
   'class.gru-class-navigation.members': 'সদস্যবোৰ',
@@ -1474,9 +1476,9 @@ export default Object.assign(quizzesTranslations, {
   'class.gru-class-statistics.completion': 'সম্পাদন',
   'class.gru-class-statistics.time-spent': 'কটোৱা সময়',
   'class.gru-class-statistics.no-performance': '--',
-  'gru-user-registration.joinTitle': 'গুৰু সমুদায়ত যোগদান কৰক',
+  'gru-user-registration.joinTitle': 'গুৰু সমুদায়ত যোগদান কৰক!',
   'gru-user-registration.joinDescription':
-    'আটাইতকৈ ভাল বিনামূলীয়া K-12 শিক্ষাৰ সম্পদ পাওক, ৰিমিক্স কৰক আৰু শ্বেয়াৰ কৰক',
+    'আটাইতকৈ ভাল বিনামূলীয়া K-12 শিক্ষাৰ সম্পদ পাওক, ৰিমিক্স কৰক আৰু শ্বেয়াৰ কৰক।',
   'gru-user-registration.googleButton': 'গুগলৰ লগত চাইন আপ কৰক',
   'gru-user-registration.whyGoogle': 'কিয় গুগলৰ লগত চাইন আপ',
   'gru-user-registration.descriptionWhyGoogle':
@@ -1485,7 +1487,7 @@ export default Object.assign(quizzesTranslations, {
   'gru-user-registration.noGoogleAccount': 'গুগল একাউন্ত নাই নেকি?',
   'gru-user-registration.signUpEmail': 'আপোনাৰ ইমেইল এড্ৰেছৰ লগত চাইন আপ কৰক',
   'gru-user-registration.haveAccount': 'ইতিমধ্যে এটা একাউন্ত আছে?',
-  'gru-user-registration.clickLogIn': 'লগ ইন কৰিবলৈ ইয়াত ক্লিক কৰক',
+  'gru-user-registration.clickLogIn': 'লগ ইন কৰিবলৈ ইয়াত ক্লিক কৰক।',
   'gru-welcome-message.title': 'গুৰুৰ লাৰ্নিং নেভিগেতৰলৈ স্বাগতম!',
   'gru-welcome-message.text-temporary-one':
     'আপুনি শিক্ষা নেভিগেটৰটোলৈ আগবাঢ়ি যোৱাৰ লগে লগে আমি আপোনাক আপোনাৰ যাত্ৰাত সহায় কৰিবলৈ পাই সুখী হৈছোঁ। এটা ভ্ৰমণ লওক আইকনটোৰ বাবে চাওক',
@@ -1498,16 +1500,16 @@ export default Object.assign(quizzesTranslations, {
     ': আমাৰ সুবিধাসমূহ কেনেকৈ ব্যৱহাৰ কৰিব তাৰ বাবে মাৰ্গদৰ্শন কৰি ভ্ৰমণ কৰোৱায়।',
   'gru-welcome-message.text-three.subtitle': 'সহায়',
   'gru-welcome-message.text-three.text':
-    ': অতিৰিত প্ৰশ্নৰ বাবে আপোনাৰ আঙুলিৰ টিপত সহায়',
+    ': অতিৰিক্ত প্ৰশ্নৰ বাবে আপোনাৰ আঙুলিৰ টিপত সহায়',
   'gru-welcome-message.text-four.subtitle': 'নতুন',
   'gru-welcome-message.text-four.text':
-    ': আপুনি কৰি চাবৰ বাবে নতুন সুবিধাসমূহ চিনাক্ত কৰে',
+    ': আপুনি কৰি চাবৰ বাবে নতুন সুবিধাসমূহ চিনাক্ত কৰক',
   'gru-welcome-message.text-five':
     'যিকোনো সময়ত আপুনি আপোনাৰ মূখ্যপৃষ্ঠালৈ ঘূৰি যাব বিচাৰে, তেন্তে সৰলভাৱে ইয়াত ক্লিক কৰক',
   'gru-welcome-message.dont-show-again': 'আকৌ নেদেখাব',
-  'sign-up.step-1-title': 'হেল্ল!',
+  'sign-up.step-1-title': 'হেল্ল\'!',
   'sign-up.step-1-description':
-    'আপুনি আমাৰ লগত অংশগ্ৰহণকৰিবলৈ নিৰ্ণয় কৰাৰ বাবে আমি আনন্দিত।',
+    'আপুনি আমাৰ লগত অংশগ্ৰহণ কৰিবলৈ নিৰ্ণয় কৰাৰ বাবে আমি আনন্দিত।',
   'sign-up.step-child-title': 'বৰ বেগী নহয়!',
   'sign-up.step-child-subtitle': 'আমি আপোনাৰ পঞ্জীয়ন সম্পূৰ্ণ কৰিব নোৱাৰোঁ।',
   'sign-up.step-child-description-1':
@@ -1516,7 +1518,7 @@ export default Object.assign(quizzesTranslations, {
   'sign-up.step-child-description-2':
     '। জ্ঞান লাভ কৰা জাৰি ৰাখক আৰু কেইবছৰমানৰ পাছত আপোনাক আকৌ লগ পাম!',
   'sign-up.step-2-title': 'প্ৰাথমিক তথ্য',
-  'sign-up.step-2-description': 'আপুনি প্ৰাথমিকনহয়, কিন্তু এই তথ্যখিনি হয়।',
+  'sign-up.step-2-description': 'আপুনি প্ৰাথমিক নহয়, কিন্তু এই তথ্যখিনি হয়।',
   'sign-up.log-in': 'লগ ইন ',
   'sign-up.log-in-description': 'যদি আপোনাৰ আগৰে পৰা একাউণ্ট আছে।',
   'sign-up.google-button': 'গুগলৰ দ্বাৰা চাইন আপ কৰক',
@@ -1551,7 +1553,7 @@ export default Object.assign(quizzesTranslations, {
   'sign-up.error-state-message':
     'অনুগ্ৰহ কৰি আপোনাৰ ৰাজ্য অথনা ক্ষেত্ৰ নিৰ্বাচন কৰক।',
   'sign-up.error-district-message':
-    'অনুগ্ৰহ কৰি তালিকাৰ পৰা আপোনাৰ জিলা। ক্ষেত্ৰ নিৰ্বাচন কৰক অথবা তাক "অন্য"ত দিয়ক।',
+    'অনুগ্ৰহ কৰি তালিকাৰ পৰা আপোনাৰ জিলা। ক্ষেত্ৰ নিৰ্বাচন কৰক অথবা তাক "অন্য" ত দিয়ক।',
   'gru-user-sign-up-cancel.title': 'পঞ্জীয়ন এৰে নে?',
   'gru-user-sign-up-cancel.exit?':
     'আপুনি নিশ্চিত নে যে আপুনি বন্ধ কৰিব বিচাৰে?',
@@ -1575,17 +1577,17 @@ export default Object.assign(quizzesTranslations, {
   'forgot-password.description': 'ই আমাৰ সকলোৰে লগত হয়।',
   'forgot-password.usernameOrEmail': 'অনুগ্ৰহ কৰি আপোনাৰ ইমেইল দিয়ক',
   'forgot-password.footer-google-description-1':
-    '[1]\'গুগলৰ দ্বাৰা চাইন ইন কৰক\'[2] টিপি পুনৰ লগ ইন কৰাৰ চেষ্টা কৰক।',
+    '<a href=\'/sign-in\'>\'গুগলৰ দ্বাৰা চাইন ইন কৰক\'</a> টিপি পুনৰ লগ ইন কৰাৰ চেষ্টা কৰক।',
   'forgot-password.footer-description-1':
     'আপোনাৰ পাছৱৰ্ড ৰিচেট কৰিবলৈ আপুনি এটা লিংক থকা এটা ইমেইল পাব।',
   'forgot-password.footer-description-2':
     'যদি আপোনাৰ কিবা প্ৰশ্ন আছে তেন্তে যোগাযোগ কৰক',
   'forgot-password.mail': 'support@gooru.org',
   'forgot-password.error-email-not-exists':
-    'ক্ষমা কৰিব, আমি এই ইমেইলটো চিনাক্ত কৰিবনোৱাৰিলোঁ।',
+    'ক্ষমা কৰিব, আমি এই ইমেইলটো চিনাক্ত কৰিব নোৱাৰিলোঁ।',
   'forgot-password.secondStepTitle': 'আপোনাৰ ইমেইল পৰীক্ষা কৰক',
   'forgot-password.secondStepDescription-1':
-    'আমি আপোনাৰ পাছৱৰ্ড ৰিচেট কৰিবলৈ আপুনি এটা লিংক থকা এটা ইমেইলপঠিয়াইছোঁ।',
+    'আমি আপোনাৰ পাছৱৰ্ড ৰিচেট কৰিবলৈ আপুনি এটা লিংক থকা এটা ইমেইল পঠিয়াইছোঁ।',
   'forgot-password.secondStepDescription-2':
     'যদি আপোনাৰ কিবা প্ৰশ্ন আছে তেন্তে যোগাযোগ কৰক',
   'reset-password.new-password': 'আপোনাৰ নতুন পাছৱৰ্ড দিয়ক',
@@ -1605,21 +1607,21 @@ export default Object.assign(quizzesTranslations, {
   'footer.community': 'সম্প্ৰদায়',
   'footer.legal': 'ন্যায়িক',
   'footer.connect': 'সংযোগ কৰক',
-  'footer.aboutGooru': 'গৰোৰ বিষয়ে',
+  'footer.aboutGooru': 'গুৰুৰ বিষয়ে',
   'footer.careers': 'কেৰিয়াৰ',
   'footer.supportCenter': 'সহায় কেন্দ্ৰ',
   'footer.contactUs': 'আমাৰ লগত যোগাযোগ কৰক',
   'footer.districts': 'জিলা',
   'footer.partners': 'সহযোগী',
   'footer.coaches': 'প্ৰশিক্ষক',
-  'footer.events': 'ইভেণ্ট',
-  'footer.terms': 'নিয়ম',
+  'footer.events': 'ঘটনাসমূহ',
+  'footer.terms': 'নিয়মসমূহ',
   'footer.privacy': 'গোপনীয়তা',
-  'footer.Copyright': 'কপিৰাইট',
-  'grade-dropdown.placeholder': 'গ্ৰেড',
+  'footer.Copyright': 'প্ৰতিলিপিৰ স্বত্ব',
+  'grade-dropdown.placeholder': 'গ্ৰেড(সমূহ)',
   'grade-dropdown.prompt': 'এটা গ্ৰেড নিৰ্বাচন কৰক',
   'grade-dropdown.pre-k': 'প্ৰাক-K',
-  'grade-dropdown.elementary': 'প্ৰাক্‌-প্ৰাথমিক',
+  'grade-dropdown.elementary': 'প্ৰাক-প্ৰাথমিক',
   'grade-dropdown.middle-school': 'মধ্য বিদ্যালয়',
   'grade-dropdown.high-school': 'উচ্চ বিদ্যালয়',
   'grade-dropdown.higher-ed': 'উচ শিক্ষা',
@@ -1651,22 +1653,22 @@ export default Object.assign(quizzesTranslations, {
   'search-filter.question-types.TOF': 'শুদ্ধ নাইবা অশুদ্ধ',
   'search-filter.question-types.MA': 'বহুধা উত্তৰ',
   'search-filter.question-types.HS_TXT': 'বহু বৈকল্পিক-টেক্স',
-  'search-filter.question-types.HSTXT': 'মাল্টিপল পাঠ নিৰ্বাচন কৰক',
-  'search-filter.question-types.HS_IMG': 'মাল্টিপল চিলেক্ট - ছবি',
-  'search-filter.question-types.HSIMG': 'মাল্টিপল চিলেক্ট ছবি',
-  'search-filter.question-types.HT_RO': 'ড্ৰেদ আৰু ড্ৰপ অৰ্ডাৰ',
+  'search-filter.question-types.HSTXT': 'বহুধা পাঠ নিৰ্বাচন কৰক',
+  'search-filter.question-types.HS_IMG': 'বহুধা চিলেক্ট - ছবি',
+  'search-filter.question-types.HSIMG': 'বহুধা চিলেক্ট ছবি',
+  'search-filter.question-types.HT_RO': 'ড্ৰেদ আৰু ড্ৰ\'প অৰ্ডাৰ',
   'search-filter.question-types.HT&RO': 'ড্ৰেগ আৰু ড্ৰপ অৰ্ডাৰ',
   'search-filter.question-types.HT_HL': 'হট টেক্সট- হাইলাইট',
   'search-filter.question-types.H-THL': 'হট টেক্সট- হাইলাইট',
   'search-filter.question-types.OE': 'সংযমহীন সঁহাৰি',
   'search-filter.author.placeholder': 'লেখক',
-  'resource.video': 'ভিডিঅ',
+  'resource.video': 'ভিডিঅ\'',
   'resource.webpage': 'ৱেবপেজ',
   'resource.interactive': 'সংবাদাত্মক',
   'resource.question': 'প্ৰশ্ন',
   'resource.image': 'ছবি',
   'resource.text': 'পাঠ',
-  'resource.audio': 'অডিঅ',
+  'resource.audio': 'অডিঅ\'',
   'resource.oer': 'OER',
   'search-result.resource': 'সম্পদ',
   'search-result.resources': 'সম্পদবোৰ',
@@ -1682,14 +1684,14 @@ export default Object.assign(quizzesTranslations, {
     'ছবিখন  JPG, GIF অথবা PNG ফাইল হ\'ব লাগিব আৰু 5 MBতকৈ সৰু হ\'ব লাগিব।',
   'gru-image-picker.submit': 'ছবি ব্যৱহাৰ কৰক',
   'gru-fib.instructions':
-    'অনুগ্ৰহ কৰি খালি ঠাইত আপোনাৰ উত্তৰ টাইপ কৰক, আৰু "{{action}}"ত ক্লিক কৰক।',
+    'অনুগ্ৰহ কৰি খালি ঠাইত আপোনাৰ উত্তৰ টাইপ কৰক, আৰু "{{action}}" ত ক্লিক কৰক।',
   'gru-hs-image.instructions':
-    'অগুগ্ৰহ কৰি শুদ্ধ ছবি নিৰ্বাচন কৰক আৰু "{{action}}"ত ক্লিক কৰক।',
+    'অগুগ্ৰহ কৰি শুদ্ধ ছবি নিৰ্বাচন কৰক আৰু "{{action}}" ত ক্লিক কৰক।',
   'gru-hs-text.instructions':
-    'অনুগ্ৰহ কৰি শুদ্ধ উত্তৰ নিৰ্বাচন কৰক, আৰু  "{{action}}" ক্লিক কৰক।',
+    'অনুগ্ৰহ কৰি শুদ্ধ উত্তৰ নিৰ্বাচন কৰক, আৰু "{{action}}" ক্লিক কৰক।',
   'gru-hot-text.instructions':
     'অনুগ্ৰহ কৰি শুদ্ধ উত্তৰটো বাছনি কৰক, আৰু "{{action}}" ত ক্লিক কৰক।',
-  'gru-login-prompt.title': 'গৰোলৈ স্বাগতম!',
+  'gru-login-prompt.title': 'গুৰুলৈ স্বাগতম!',
   'gru-login-prompt.instructions':
     'কাৰ্যটো সম্পূৰ্ণ কৰিবলৈ আপুনি চাইন ইন কৰাৰ প্ৰয়োজন।',
   'gru-login-prompt.existing-user': 'ইতিমধ্যে এটা একাউন্ত আছে?',
@@ -1710,7 +1712,7 @@ export default Object.assign(quizzesTranslations, {
   'gru-true-false.true': 'শুদ্ধ',
   'gru-true-false.false': 'অশুদ্ধ ',
   'gru-reorder.instructions':
-    'অনুগ্ৰহ কৰি শুদ্ধ ক্ৰম নিৰ্বাচন কৰক আৰু  "{{action}}" ক্লিক কৰক।',
+    'অনুগ্ৰহ কৰি শুদ্ধ ক্ৰম নিৰ্বাচন কৰক আৰু "{{action}}" ক্লিক কৰক।',
   'student-first-experience.preStudyTitle': '{{title}}ৰ বাবে প্ৰাক অধ্যয়ন',
   'student-first-experience.route0-action.accept': 'স্বীকাৰ কৰক',
   'student-first-experience.route0-action.ignore': 'উপেক্ষা কৰক',
@@ -1745,7 +1747,7 @@ export default Object.assign(quizzesTranslations, {
     'গণিতৰ স্কাইলাইন নক্সালৈ স্বাগতম। স্কাইলাইনে (ডাঠ বগা লাইনডাল) আপুনি প্ৰতিটো অনুক্ষেত্ৰত লাভ কৰা পাৰদৰ্শিতাৰ আটাইতকৈ উন্নত মানটো দেখুৱায়। অনুক্ষেত্ৰ হৈছে গণিতৰ এটা অংশ যিটো আপুনি পঢ়ে, যেনে সংখ্যা প্ৰণালী আৰু অভিব্যক্তি আৰু সমীকৰণ। প্ৰতিটো কলমে গণিতৰ এটা অনুক্ষেত্ৰ বুজায়। আৰু কলমত থকা প্ৰতিটো বাকচে অনুক্ষেত্ৰত থকা মানক বুজায়। আপুনি এবাৰ শিকিবলৈ আৰম্ভ কৰা আৰু মানকসমূহৰ পাৰদৰ্শিতা পাবলৈ লোৱাৰ পাচত আপোনাৰ স্কাইলাইন বাঢ়ি গৈ থাকিব। ',
   'student-first-experience.units.other': '{{count}}টা অধ্যায়',
   'player.gru-navigation.view-report': 'প্ৰতিবেদন চাওক',
-  'player.gru-navigator.see-usage-report': 'ব্যৱহাৰৰ ৰিপৰ্ট চাওক',
+  'player.gru-navigator.see-usage-report': 'ব্যৱহাৰৰ ৰিপ\'ৰ্ট চাওক',
   'player.gru-viewer.not-iframe-url.header_1':
     'এই সম্পদটো গৰোৰ ভিতৰত চাব নোৱাৰি',
   'player.gru-viewer.not-iframe-url.header_external_assessment_1':
@@ -1786,7 +1788,7 @@ export default Object.assign(quizzesTranslations, {
   'grading-player.rubric-panel.previous': 'প্ৰাক্তন ছাত্ৰ',
   'grading-player.rubric-panel.next': 'পাচৰ ছাত্ৰ',
   'grading-player.rubric-panel.total-score': 'মুঠ স্কোৰ',
-  'grading-player.rubric-panel.points': '({{total}}পইণ্ট)',
+  'grading-player.rubric-panel.points': '({{total}}pts)',
   'profile.gru-navigation.about': 'ইয়াৰ বিষয়ে',
   'profile.gru-navigation.about-me': 'মোৰ বিষয়ে',
   'profile.gru-navigation.content': 'বিষয়বস্ত',
@@ -1828,7 +1830,7 @@ export default Object.assign(quizzesTranslations, {
   'profile.preference.add-sec-language': 'অন্য পচন্দৰ ভাষা যোগ কৰক',
   'profile.preference.other-preferred-languages': 'অন্য পচন্দৰ ভাষা',
   'gru-data-picker.score': 'শ্ৰৌত',
-  'gru-data-picker.report': 'ৰিপৰ্ট',
+  'gru-data-picker.report': 'ৰিপ\'ৰ্ট',
   'gru-data-picker.completion': 'সম্পাদন',
   'gru-data-picker.timeSpent': 'সময়',
   'gru-data-picker.time-spent': 'কটোৱা সময়',
@@ -1841,7 +1843,7 @@ export default Object.assign(quizzesTranslations, {
   'gru-performance-summary.time-spent': 'সৰ্বমুঠ সময়',
   'gru-performance-summary.reaction': 'প্ৰতিক্ৰিয়া',
   'gru-performance-summary.attempts': 'প্ৰয়াসবোৰ',
-  'gru-performance-summary.redo': 'ৰেড',
+  'gru-performance-summary.redo': 'ৰেড\'',
   'gru-performance-summary.resume': 'পুনৰাম্ভ',
   'gru-performance-summary.study': 'এতিয়া অধ্যয়ন কৰক',
   'gru-performance-summary.view-report': 'প্ৰতিবেদন চাওক',
@@ -1851,14 +1853,14 @@ export default Object.assign(quizzesTranslations, {
   'gru-performance-metrics.assessment': 'মূল্যাংকন',
   'gru-performance-metrics.collection': 'সংগৃহীত',
   'gru-performance-metrics.completion': 'সম্পাদন',
-  'gru-performance-metrics.report': 'ৰিপৰ্ট',
+  'gru-performance-metrics.report': 'ৰিপ\'ৰ্ট',
   'gru-performance-metrics.student': 'ছাত্ৰ',
   'gru-performance-metrics.score': 'শ্ৰৌত',
   'gru-performance-metrics.study-time': 'কটোৱা সময়',
   'gru-metrics-sub-header.assessment': 'মূল্যাংকন',
   'gru-metrics-sub-header.student': 'ছাত্ৰ',
   'gru-metrics-sub-header.score': 'শ্ৰৌত',
-  'gru-metrics-sub-header.report': 'ৰিপৰ্ট',
+  'gru-metrics-sub-header.report': 'ৰিপ\'ৰ্ট',
   'gru-metrics-sub-header.completion': 'সম্পাদন',
   'gru-metrics-sub-header.time-spent': 'সময়',
   'gru-resource-new.resource-already-exist':
@@ -1928,7 +1930,7 @@ export default Object.assign(quizzesTranslations, {
   'home.no-classes-found.create-class.description':
     'এটা শ্ৰেণীকোঠা তৈয়াৰ কৰা হ\'ল, সামগ্ৰী বন্টন হ\'ল, আৰু ছাত্ৰ-ছাত্ৰী সকলক নিমন্ত্ৰণ কৰা হ\'ল।',
   'home.no-classes-found.create-class.button-text': 'শ্ৰেণীকোঠা সৃস্টি কৰক',
-  'home.no-classes-found.join-class.title': 'Gooru শ্ৰেণীকোঠাৰ সৈতে শিকক',
+  'home.no-classes-found.join-class.title': 'গুৰু শ্ৰেণীকোঠাৰ সৈতে শিকক',
   'home.no-classes-found.join-class.description':
     'শিকা আৰম্ভ কৰিবলৈ আপোনাৰ শিক্ষকৰ শ্ৰেণীত যোগদান কৰক।',
   'home.no-classes-found.join-class.button-text':
@@ -1952,7 +1954,7 @@ export default Object.assign(quizzesTranslations, {
     'আপোনাৰ সাল-সলনিসমূহ এতিয়ালৈকে সুৰক্ষিত নহ\'ল।আপুনি এই পেজখন এৰি যাবলৈ বিছাৰেনে?',
   'featured.featured-title': 'আনুষংগিক পাঠ্য়ক্ৰমসমূহ',
   'featured.featured-description':
-    'বিশেষ স্থানপ্ৰাপ্ত কাৰ্যক্ৰমবিলাক উদ্ভাৱক চিক্ষকসকলে চোৱা-চিতা কৰে,  বিষয়বস্তু বিশেষজ্ঞসকলে কৰে আৰু পুনৰীক্ষণ কৰে আৰু শ্ৰেণীকোঠাত ছাত্ৰ-ছাত্ৰীৰ লগত অৱলম্বন কৰা হয়। আৱস্কাৰ কৰক, ৰিমিক্স কৰক আৰু কাৰ্যক্ৰমসমূহ নিজাকৃত কৰক যাতে শিক্ষা নিজাকৃত হয় আৰু ছাত্ৰ-ছাত্ৰী একাগ্ৰতা বাঢ়ে! এই কাৰ্যক্ৰমবিলাকৰ বিকাশৰ বিষয়ে  [1]আৰু জানক[2]।',
+    'বিশেষ স্থানপ্ৰাপ্ত কাৰ্যক্ৰমবিলাক উদ্ভাৱক চিক্ষকসকলে চোৱা-চিতা কৰে,  বিষয়বস্তু বিশেষজ্ঞসকলে কৰে আৰু পুনৰীক্ষণ কৰে আৰু শ্ৰেণীকোঠাত ছাত্ৰ-ছাত্ৰীৰ লগত অৱলম্বন কৰা হয়। আৱস্কাৰ কৰক, ৰিমিক্স কৰক আৰু কাৰ্যক্ৰমসমূহ নিজাকৃত কৰক যাতে শিক্ষা নিজাকৃত হয় আৰু ছাত্ৰ-ছাত্ৰী একাগ্ৰতা বাঢ়ে! এই কাৰ্যক্ৰমবিলাকৰ বিকাশৰ বিষয়ে  <a href=\'http://about.gooru.org/courses\' target=\'_blank\'>আৰু জানক</a>।',
   'locateme.score': 'শ্ৰৌত',
   'locateme.timespent': 'কটোৱা সময়',
   'locateme.view': 'দৃষ্টিভংগি',
@@ -2220,7 +2222,7 @@ export default Object.assign(quizzesTranslations, {
     'আপোনাৰ শিক্ষাৰ মাইলষ্টোনসমূহ লাভ কৰাত সহায় হ\'বলৈ লক্ষ্য নিৰ্ধাৰণ আৰু ট্ৰেক কৰক।',
   'gru-take-tour.profile.stepFive.title': 'অনুগামী',
   'gru-take-tour.profile.stepFive.description':
-    'যদি আপুনি কাৰোবাৰ বিষয়বস্তু ভাল পায়, আপুনি তেওঁক ফ\'লো কৰিব পাৰে। আপোনাক কোনে ফ\'লো কৰিছে সেইটো আপুনি চাব পাৰিব।',
+    'যদি আপুনি কাৰোবা ৰ বিষয়বস্তু ভাল পায়, আপুনি তেওঁক ফ\'লো কৰিব পাৰে। আপোনাক কোনে ফ\'লো কৰিছে সেইটো আপুনি চাব পাৰিব।',
   'gru-take-tour.profile.stepSix.title': 'বেজ',
   'gru-take-tour.profile.stepSix.description':
     'আপুনি পোৱা বেজসমূহ পুনৰীক্ষণ কৰক। আপুনি যদি শিক্ষকে দিয়া এটা বেঞ্চমাৰ্ক মূল্যায়ন সম্পুৰ্ণ কৰে তেতিয়া আপুনি এটা বেজ পাব।',
@@ -2248,13 +2250,13 @@ export default Object.assign(quizzesTranslations, {
     'যেতিয়া আপুনি এটা শ্ৰেণীকোঠাত থাকে, আপোনাৰ ছাত্ৰ-ছাত্ৰীসকলক কৰিবলৈ দিয়া যিকোনো কাৰ্যক্ৰমৰ বস্তু সম্পাদনা কৰিবলৈ ইয়াত ক্লিক কৰক।',
   'gru-tour.overview.stepSix.title': 'আচল সময়ত প্ৰগতিৰ ওপৰত চকু ৰাখক!',
   'gru-tour.overview.stepSix.description':
-    'এটা মূল্যায়নত শ্ৰেণীৰ প্ৰগতিৰ ওপৰত আচল সময়ত চকু ৰাখিবলৈ ৰিয়েল-টাইম ডেছব\'ৰ্ড ব্যৱহাৰ কৰক।[1][2]ছাত্ৰ-ছাত্ৰীসকলৰ বাবে আচল সময়ৰ মূল্যায়ন আৰম্ভ কৰিবলৈ প্ৰতিটো মূল্যায়নৰ বাওঁফালে থকা "গ\' লাইভ" আইকনত ক্লিক কৰক। [3][4]',
+    'এটা মূল্যায়নত শ্ৰেণীৰ প্ৰগতিৰ ওপৰত আচল সময়ত চকু ৰাখিবলৈ ৰিয়েল-টাইম ডেছব\'ৰ্ড ব্যৱহাৰ কৰক।<br><br>ছাত্ৰ-ছাত্ৰীসকলৰ বাবে আচল সময়ৰ মূল্যায়ন আৰম্ভ কৰিবলৈ প্ৰতিটো মূল্যায়নৰ বাওঁফালে থকা "গ\' লাইভ" আইকনত ক্লিক কৰক। <br><br>',
   'gru-tour.quick-start.stepOne.title': 'আপোনাৰ শ্ৰেণীকোঠা সমূহ নেভিগেট কৰক',
   'gru-tour.quick-start.stepOne.description':
-    'নতুনকৈ সৃষ্টি কৰা শ্ৰেণীকোঠা এটা দেখিবলৈ এনেকুৱা। যিকোনো সময়ত শ্ৰেণীকোঠালৈ ঘুৰি যাবলৈ, "শ্ৰেণীকোঠা"ত ক্লিক কৰক আৰু ড্ৰপ ডাউন মেন্যুৰ পৰা আপুনি সোমাব বিচৰা শ্ৰেণীকোঠাটো নিৰ্বাচন কৰক।',
+    'নতুনকৈ সৃষ্টি কৰা শ্ৰেণীকোঠা এটা দেখিবলৈ এনেকুৱা। যিকোনো সময়ত শ্ৰেণীকোঠালৈ ঘুৰি যাবলৈ, "শ্ৰেণীকোঠা" ত ক্লিক কৰক আৰু ড্ৰপ ডাউন মেন্যুৰ পৰা আপুনি সোমাব বিচৰা শ্ৰেণীকোঠাটো নিৰ্বাচন কৰক।',
   'gru-tour.quick-start.stepTwo.title': 'আৰম্ভ হ\'লনে? এক মূল্যাংকন বনাওক!',
   'gru-tour.quick-start.stepTwo.description':
-    'গৰো আৰম্ভ কৰিবলৈ আৰু আপোনাৰ শ্ৰেণীৰ বৰ্তমান ছাত্ৰ-ছাত্ৰীৰ বুজাবুজিৰ স্তৰ পৰীক্ষা কৰিবলৈ আমি এটা মূল্যায়ন সৃষ্টি কৰাৰ পৰামৰ্শ  দিছোঁ  ',
+    'গুৰু আৰম্ভ কৰিবলৈ আৰু আপোনাৰ শ্ৰেণীৰ বৰ্তমান ছাত্ৰ-ছাত্ৰীৰ বুজাবুজিৰ স্তৰ পৰীক্ষা কৰিবলৈ আমি এটা মূল্যায়ন সৃষ্টি কৰাৰ পৰামৰ্শ  দিছোঁ  ',
   'gru-tour.real-time.stepOne.title': 'প্ৰতিক্ৰিয়াবোৰৰ বিকলতা',
   'gru-tour.real-time.stepOne.description':
     'ছাত্ৰ-ছাত্ৰীসকলে কেনেদৰে উত্তৰ দিলে, ইয়াৰ এক বিকলতা চাবলৈ প্ৰত্যেকটো প্ৰশ্ন ক্লিক কৰক।',
@@ -2345,7 +2347,7 @@ export default Object.assign(quizzesTranslations, {
   'library.gru-partner-library-card.rubric.other': '{{count}} নিৰ্দেশনাসমূহ',
   'library.partner-libraries': 'পুথিভঁৰালৰ অংশীদাৰ',
   'gru-study-header.lesson-legend': 'আপুনি বৰ্তমান পাঠত আছে',
-  'gru-study-header.resource-legend': 'আপোনি এই সামগ্ৰী নিৰীক্ষণ কৰি আছে।',
+  'gru-study-header.resource-legend': 'আপুনি এই সামগ্ৰী নিৰীক্ষণ কৰি আছে।',
   'gru-study-header.resources-collection-report': 'সংগ্ৰহ উপযোগী প্ৰতিবেদন',
   'gru-study-header.resources-assessment-report': 'মূল্যাংকন সাৰংশ প্ৰতিবেদন',
   'gru-study-header.check-summary': 'আপোনাৰ সাৰংশ প্ৰতিবেদন নিৰীক্ষণ কৰক',
@@ -2401,12 +2403,12 @@ export default Object.assign(quizzesTranslations, {
   'gru-performance-chart.teacher-tooltip':
     'আপোনাৰ ছাত্ৰ-ছাত্ৰীয়ে এই পাঠটোত থকা সকলো মূল্যায়ন সম্পূৰ্ণ কৰিলে',
   'report.external-assessment-report.note':
-    'এইটো এটা বাহ্যিক মূল্যায়ন আৰু ইয়াৰ ছাত্ৰৰ মূল্যায়নৰ স্কোৰ ৰিপৰ্ট কৰা হ\'ব। ব্যক্তিগত প্ৰশ্ন স্তৰৰ ডাটা উপলব্ধ নাই।',
+    'এইটো এটা বাহ্যিক মূল্যায়ন আৰু ইয়াৰ ছাত্ৰৰ মূল্যায়নৰ স্কোৰ ৰিপ\'ৰ্ট কৰা হ\'ব। ব্যক্তিগত প্ৰশ্ন স্তৰৰ ডাটা উপলব্ধ নাই।',
   'report.external-assessment-report.wish': 'অভিনন্দন! আপুনি নম্বৰ পালে',
   'report.external-assessment-report.reference':
     'এই বাহ্যিক মূল্যায়নটো চাব পাৰি',
   'report.external-collection-report.note':
-    'এইটো এটা বাহ্যিক সংকলন আৰু ইয়াৰ ছাত্ৰৰ সংকলনৰ স্কোৰ ৰিপৰ্ট কৰা হ\'ব। ব্যক্তিগত প্ৰশ্ন স্তৰৰ ডাটা উপলব্ধ নাই।',
+    'এইটো এটা বাহ্যিক সংকলন আৰু ইয়াৰ ছাত্ৰৰ সংকলনৰ স্কোৰ ৰিপ\'ৰ্ট কৰা হ\'ব। ব্যক্তিগত প্ৰশ্ন স্তৰৰ ডাটা উপলব্ধ নাই।',
   'report.external-collection-report.wish': 'অভিনন্দন! আপুনি নম্বৰ পালে',
   'report.external-collection-report.reference': 'এই বাহ্যিক সংকলনটো চাব পাৰি',
   'report.competency-report.title': 'পাৰদৰ্শিতা প্ৰতিবেদন',
@@ -2420,7 +2422,7 @@ export default Object.assign(quizzesTranslations, {
   'report.domain-report': 'প্ৰতিবেদনৰ পৰিসৰ',
   'self-report.your-score': 'আপোনাৰ নম্বৰ',
   'self-report.time_spent': 'কটোৱা সময়',
-  'self-report.update-error': 'নম্ব উন্নতীকৰণ কৰাত অসুবিধা হৈছে',
+  'self-report.update-error': 'নম্বৰ উন্নতীকৰণ কৰাত অসুবিধা হৈছে',
   'self-report.validation-error': 'বৈধ নম্বৰ এন্টাৰ কৰক',
   'self-report.enter-score': 'ইয়াত আপোনাৰ নম্বৰ এন্টাৰ কৰক',
   'self-report.enter-timeSpent': 'আপুনি ইয়াত অতিবাহিত কৰা সময় এন্টাৰ কৰক',
@@ -2432,7 +2434,7 @@ export default Object.assign(quizzesTranslations, {
   'notifications.type.student-gradable-submission-title':
     'শ্ৰেণীত গ্ৰেড দিবলৈ আপোনাৰ {{occurrence}}টা বস্তু আছে : {{ classTitle }}',
   'notifications.type.student-self-report-title':
-    '{{occurrence}}টা ছাত্ৰই শ্ৰেণীত প্ৰদৰ্শন ৰিপৰ্ট কৰিছে : {{ classTitle }} ',
+    '{{occurrence}}টা ছাত্ৰই শ্ৰেণীত প্ৰদৰ্শন ৰিপ\'ৰ্ট কৰিছে : {{ classTitle }} ',
   'notifications.type.teacher-override-title':
     'শিক্ষকে শ্ৰেণীত আপোনাৰ আনুগত্যক শুদ্ধ কৰি দিলে : {{ classTitle }}',
   'notifications.type.teacher-grading-complete-title':
@@ -2446,5 +2448,10 @@ export default Object.assign(quizzesTranslations, {
   'notifications.typeinclass.teacher-override-title':
     'শিক্ষকে আপোনাৰ কা্ৰ্য্য শুদ্ধ কৰিলে',
   'notifications.typeinclass.teacher-grading-complete-title':
-    'শিক্ষকে শ্ৰেণীকোঠাত আপোনাৰ কাৰ্য্য শ্ৰেণীবদ্ধ কৰিলে'
+    'শিক্ষকে শ্ৰেণীকোঠাত আপোনাৰ কাৰ্য্য শ্ৰেণীবদ্ধ কৰিলে',
+  'goahead.add.something': 'Go ahead, add something.',
+  'present.diagnostic.determine.not.know':
+    'Present a diagnostic to determine the student\'s current location, if not known?',
+  'present.diagnostic.determine.know':
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
 });

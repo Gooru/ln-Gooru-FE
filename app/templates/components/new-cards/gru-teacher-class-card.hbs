@@ -3,13 +3,13 @@
     <div class="title ellipsis" data-placement="bottom" data-toggle="tooltip" title="{{class.title}}" data-trigger="hover">
       {{truncate text=class.title maxLength=25}}
     </div>
-    <div class="class-settings" {{action 'selectItem' 'class-management'}} title="{{t 'teacher-landing.class.class-management'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
+    <div class="class-settings" {{action 'selectItem' 'class-management'}} title="{{t 'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-head'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
       {{gru-icon name="settings"}}
     </div>
   </div>
 
   <div class="panel-body">
-    <div class="information {{if course 'has-course' 'has-no-course'}}" style="background-image: url({{course.thumbnailUrl}})">
+    <div class="information {{if course 'has-course' 'has-no-course'}}" {{action 'lanuchAddCourseOrATCView'}} style="background-image: url({{course.thumbnailUrl}})">
       <div class="current-activity">
         {{#if course}}
           <span>{{t "student-landing.class.assigned-course"}}</span>
@@ -20,7 +20,7 @@
       </div>
       {{#if course}}
         <div class="title-section">
-          <div {{action 'selectItem' 'course-map'}} class="title pointer" alt="{{course.title}}">
+          <div  class="title pointer" alt="{{course.title}}">
             {{truncate text=course.title maxLength=90}}
           </div>
         </div>
@@ -30,13 +30,13 @@
       <div class="atc-view" {{action 'selectItem' 'atc'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.performance-overview'}}" data-trigger="hover">
         <i class="icon" />
       </div>
-      <div class="class-activities {{if (not isPremiumClass) (concat 'grade-range-' (grade-range class.performanceSummaryForDCA.score))}}">
+      <div class="class-activities  {{if (not isPremiumClass) (concat 'grade-range-' (grade-range class.performanceSummaryForDCA.scoreInPercentage))}}">
         <div class="class-activities-icon" {{action 'selectItem' 'class-activities'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'student-landing.class.class-activities'}}" data-trigger="hover">
           <i class="icon" />
         </div>
         {{#if (not isPremiumClass)}}
           <div class="class-activities-score {{if (not hasCAStarted) 'not-started'}}" {{action 'selectItem' 'ca-report'}}>
-            {{if hasCAStarted (concat class.performanceSummaryForDCA.score '%') '--' }}
+            {{if hasCAStarted (concat class.performanceSummaryForDCA.scoreInPercentage '%') '--' }}
           </div>
         {{/if}}
       </div>
@@ -46,7 +46,6 @@
         </div>
         {{#if (not isPremiumClass)}}
           <div class="course-map-score {{if (not hasCMStarted) 'not-started'}}" {{action 'selectItem' 'cm-report'}}>
-            {{log class.performanceSummary.score}}
             {{if hasCMStarted (concat class.performanceSummary.score '%') '--' }}
           </div>
         {{/if}}
@@ -55,9 +54,9 @@
         {{gru-icon name="school"}}
       </div>
       {{#if isPremiumClass}}
-        <div class="completion-score {{if total 'denominator'}}" {{action 'selectItem' 'students'}}>
-          {{#if total}}
-            <span>{{totalCompleted}}/{{total}}</span>
+        <div class="completion-score {{if class.competencyStats 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
+          {{#if class.competencyStats}}
+            <span>{{class.competencyStats.completedCompetencies}}/{{class.competencyStats.totalCompetencies}}</span>
           {{else}}
             <span>--</span>
           {{/if}}
