@@ -92,14 +92,15 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
           tab: 'report'
         }
       };
-      if (item === 'report') {
+      if (item === 'cm-report') {
         route.transitionTo('student.class.course-map', classId, queryParams);
-      } else if (item === 'demo') {
-        route.transitionTo('student.class.course-map', classId, {
-          queryParams: {
-            demo: true
-          }
-        });
+      }
+      if (item === 'ca-report') {
+        route.transitionTo(
+          'student.class.class-activities',
+          classId,
+          queryParams
+        );
       } else if (item === 'profile') {
         let userId = this.get('session.userId');
         route.transitionTo(
