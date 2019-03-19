@@ -526,21 +526,21 @@ export default Ember.Component.extend({
   openPullUp() {
     let component = this;
     component.$().animate({
-        top: '10%'
-      },
-      400
+      top: '10%'
+    },
+    400
     );
   },
 
   closePullUp() {
     let component = this;
     component.$().animate({
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-      }
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+    }
     );
   },
 
@@ -613,10 +613,8 @@ export default Ember.Component.extend({
   getSearchService() {
     let component = this;
     let activeContentType = component.get('activeContentType');
-    let filterItem = component.get('filters');
     let params = component.getSearchParams();
     let term = component.getSearchTerm() ? component.getSearchTerm() : '*';
-    console.log("params", params);
     if (activeContentType === 'collection') {
       return component.get('searchService').searchCollections(term, params);
     } else if (activeContentType === 'assessment') {
@@ -661,13 +659,12 @@ export default Ember.Component.extend({
     let term = component.getSearchTerm();
     let label = component.get('selectedMenuItem.label');
     if (label === 'common.myContent') {
-      filters['scopeKey'] = 'my-content';
+      filters.scopeKey = 'my-content';
       filters['flt.publishStatus'] = 'published,unpublished';
     } else {
       filters['flt.publishStatus'] = 'published';
     }
     if (!term) {
-      let grade = component.get('class.grade');
       let subject = component.get('course.subject');
       let competencyData = component.get('competencyData');
       let primaryLanguage = component.get('class.primaryLanguage');
@@ -692,7 +689,6 @@ export default Ember.Component.extend({
   filterBuilder() {
     const component = this;
     let filters = {};
-    let selectedFilters = component.get('selectedFilters');
     filters['flt.audience'] = component.filterSelectedItems('filter', 'flt.audience');
     filters['flt.educationalUse'] = component.filterSelectedItems('filter', 'flt.educationalUse');
     filters['flt.language'] = component.filterSelectedItems('filter', 'flt.language');

@@ -694,10 +694,10 @@ function assessmentFileData(
   performanceDataHeaders.forEach(function(headerItem, index) {
     const prefixHeader =
       level === 'course' ?
-      `U${index + 1} ` :
-      level === 'unit' ?
-      `L${index + 1} ` :
-      `A${index + 1} `;
+        `U${index + 1} ` :
+        level === 'unit' ?
+          `L${index + 1} ` :
+          `A${index + 1} `;
     const scoreHeader = `${prefixHeader}${headerItem.get('title')} score`;
     const timeHeader = `${prefixHeader}${headerItem.get('title')} time`;
     dataHeaders.push(scoreHeader);
@@ -707,8 +707,8 @@ function assessmentFileData(
     const score = avHeaderItem.hideScore ?
       'N/A' :
       avHeaderItem.hasScore && avHeaderItem.hasStarted ?
-      `${avHeaderItem.score}%` :
-      '--%';
+        `${avHeaderItem.score}%` :
+        '--%';
     const time = `${avHeaderItem.get('timeSpent')}`;
     averageHeaders.push(score);
     averageHeaders.push(time);
@@ -725,8 +725,8 @@ function assessmentFileData(
         const score = dataContentItem.hideScore ?
           'N/A' :
           dataContentItem.hasScore && dataContentItem.hasStarted ?
-          `${dataContentItem.score}%` :
-          '--%';
+            `${dataContentItem.score}%` :
+            '--%';
         const time = `${dataContentItem.get('timeSpent')}`;
         data.push(score);
         data.push(time);
@@ -779,8 +779,8 @@ function lessonCollectionFileData(
     const score = avHeaderItem.hideScore ?
       'N/A' :
       avHeaderItem.hasScore && avHeaderItem.hasStarted ?
-      `${avHeaderItem.score}%` :
-      '--%';
+        `${avHeaderItem.score}%` :
+        '--%';
     const time = `${avHeaderItem.get('timeSpent')}`;
     averageHeaders.push(score);
     averageHeaders.push(time);
@@ -797,8 +797,8 @@ function lessonCollectionFileData(
         const score = dataContentItem.hideScore ?
           'N/A' :
           dataContentItem.hasScore && dataContentItem.hasStarted ?
-          `${dataContentItem.score}%` :
-          '--%';
+            `${dataContentItem.score}%` :
+            '--%';
         const time = `${dataContentItem.get('timeSpent')}`;
         data.push(score);
         data.push(time);
@@ -1053,5 +1053,5 @@ export function isCompatibleVW(screenSize) {
  * @return {Boolean}
  */
 export function isExistInArray(array, keyValue, keyFieldName) {
-  return array.findBy(keyFieldName, keyValue) ? true : false;
+  return !!array.findBy(keyFieldName, keyValue);
 }

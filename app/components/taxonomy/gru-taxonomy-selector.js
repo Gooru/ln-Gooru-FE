@@ -290,8 +290,8 @@ export default Ember.Component.extend({
       if (this.get('showCourses')) {
         var subjectLabelKey =
           this.get('internalCategory') === 'higher_education' ?
-          'taxonomy.gru-taxonomy-selector.competency-subject-and-course' :
-          'taxonomy.gru-taxonomy-selector.primary-subject-and-course';
+            'taxonomy.gru-taxonomy-selector.competency-subject-and-course' :
+            'taxonomy.gru-taxonomy-selector.primary-subject-and-course';
         this.set('subjectLabelKey', subjectLabelKey);
       }
     }

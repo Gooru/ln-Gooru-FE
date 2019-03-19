@@ -1,11 +1,5 @@
 import Ember from 'ember';
 import {
-  SEARCH_CONTEXT
-} from 'gooru-web/config/config';
-import {
-  getRoutePathFirstOccurrence
-} from 'gooru-web/utils/utils';
-import {
   getCategoryCodeFromSubjectId
 } from 'gooru-web/utils/taxonomy';
 export default Ember.Component.extend({
@@ -285,7 +279,7 @@ export default Ember.Component.extend({
         return Ember.Object.create({
           name: audience.get('name'),
           filter: 'flt.audience'
-        })
+        });
       });
       component.set('audiences', Ember.A(serializeData));
     });
@@ -299,7 +293,7 @@ export default Ember.Component.extend({
         return Ember.Object.create({
           name: educationalUse.get('label'),
           filter: 'flt.educational'
-        })
+        });
       });
       component.set('educationalUses', Ember.A(serializeData));
     });
@@ -333,8 +327,8 @@ export default Ember.Component.extend({
         return Ember.Object.create({
           name: language.get('name'),
           filter: 'flt.language'
-        })
-      })
+        });
+      });
       component.set('languages', Ember.A(serializeData));
     });
   },
