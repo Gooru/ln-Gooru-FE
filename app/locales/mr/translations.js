@@ -7,6 +7,14 @@ export default Object.assign(quizzesTranslations, {
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
   hi: 'हिंदी',
+  as: 'অসমীয়া',
+  bn: 'বাংলা',
+  gu: 'ગુજરાતી',
+  ml: 'മല്യാലം',
+  or: ' ଓଡ଼ିଆ',
+  pa: 'ਪੰਜਾਬੀ',
+  ta: 'தமிழ்',
+  te: 'తెలుగు',
   'errors.description': 'हे फील्ड',
   'errors.inclusion': '{{description}} सूचीमध्ये समाविष्ट नाही',
   'errors.exclusion': '{{description}} राखीव आहे}}',
@@ -425,6 +433,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'माझ्या प्रश्नांमधून',
   'common.from-my-resources': 'माझ्या स्रोतांकडून',
   'common.hide-results': 'परिणाम लपवा',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'इशारे',
   'common.home': 'होम',
   'common.if_questions': 'तुम्हाला जर काही प्रश्न असतील तर,',
@@ -455,6 +464,13 @@ export default Object.assign(quizzesTranslations, {
   'common.loading': 'लोड करत आहे ...',
   'common.login': 'लॉग इन',
   'common.logout': 'लॉग-आऊट',
+  'common.logout.head_1': 'Learning Navigator: ',
+  'common.logout.head_2': 'Every Student',
+  'common.logout.head_3': 'Achieves Mastery',
+  'common.logout.description':
+    'Learning Navigator is designed as “GPS for Learning” — a way for each student to follow their own path to mastery. Schools ask every student to achieve the same level of proficiency, but each student begins with a different set of knowledge and skills. The Learning Navigator meets each student exactly where they are and navigates them to their learning goals. ',
+  'common.logout.logout-btn-msg1': 'You have been logout.',
+  'common.logout.logout-btn-msg2': 'Click here to login.',
   'common.mastery': 'प्रभुत्व',
   'common.menu': 'मेनू',
   'common.more-details': 'अधिक माहिती',
@@ -1224,7 +1240,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.collapse': 'कोलॅप्स करा',
   'teacher-landing.class.atc-view.total-competencies-gained':
     'एकूण प्राप्त क्षमता',
-  'teacher-landing.class.atc-view.progress-label': 'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'वर्गाचे नियोजन',
   'teacher-landing.class.offline-class-report.class-report': 'वर्ग अहवाल',
   'teacher-landing.class.offline-class-report.activity-report': 'उपक्रम अहवाल',
@@ -1290,14 +1307,6 @@ export default Object.assign(quizzesTranslations, {
     'सहशिक्षक',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'आणखी शिक्षक जोडा',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'हा ऑफलाईन वर्ग आहे',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'एकदा ऑफलाईन म्हणून नोंदवलेला वर्ग पुन्हा ऑनलाईन करता येणार नाही',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'जर हा वर्ग आपल्याला ऑफलाईन म्हणून नोंदवायचा असेल तर \'हो\' निवडा',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'ज्या वर्गात विद्यार्थी नेविगेटरवर ऑनलाईन शिकत नसतील तो वर्ग ऑफलाईन वर्ग म्हणून नोंदवला जातो. शिक्षक विद्यार्थ्यांच्या प्रगतीचा पाठपुरावा ऑफलाईन/प्रत्यक्ष वर्गात  घेतात आणि विद्यार्थ्यांच्या वतीने शिक्षकच नेविगेटर मध्ये माहिती भरतात.',
   'teacher-landing.class.class-settings.class-settings-sec.language': 'माध्यम',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
     'विद्यार्थी सेटिंग्ज',
@@ -2469,5 +2478,10 @@ export default Object.assign(quizzesTranslations, {
   'notifications.typeinclass.teacher-override-title':
     'शिक्षकाने आपली सबमिशन दुरुस्त केली आहे',
   'notifications.typeinclass.teacher-grading-complete-title':
-    'शिक्षकाने आपली सबमिशन श्रेणीमध्ये केली आहे'
+    'शिक्षकाने आपली सबमिशन श्रेणीमध्ये केली आहे',
+  'goahead.add.something': 'Go ahead, add something.',
+  'present.diagnostic.determine.not.know':
+    'Present a diagnostic to determine the student\'s current location, if not known?',
+  'present.diagnostic.determine.know':
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
 });

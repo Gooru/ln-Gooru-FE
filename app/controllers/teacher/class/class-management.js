@@ -320,6 +320,16 @@ export default Ember.Controller.extend(ModalMixin, {
       this.set('tempClass.gradeCurrent', grade.get('id'));
     },
 
+    updateClassRouteSetting() {
+      this.set('enableApplySettings', true);
+    },
+
+    updateClassForceCalculateILPSetting() {
+      this.set('enableApplySettings', true);
+      let forceCalculateILP = this.get('tempClass.forceCalculateILP');
+      this.set('tempClass.forceCalculateILP', !forceCalculateILP);
+    },
+
     updateClassGradeOrigin(grade) {
       this.set('enableApplySettings', true);
       this.set('tempClass.gradeLowerBound', grade.get('id'));
@@ -332,16 +342,6 @@ export default Ember.Controller.extend(ModalMixin, {
 
     applyClassMembersSettings() {
       this.updateClassMembersSettings();
-    },
-
-    /**
-     *
-     * Triggered when a edit save score option is selected
-     */
-    saveOffline(value) {
-      let controller = this;
-      controller.set('tempClass.isOffline', value);
-      controller.saveClass();
     },
 
     classMembersToggle(targetStatusActive, student) {
@@ -372,6 +372,7 @@ export default Ember.Controller.extend(ModalMixin, {
           grade_upper_bound: controller.get('tempClass.gradeUpperBound'),
           grade_current: controller.get('tempClass.gradeCurrent'),
           route0: controller.get('tempClass.route0Applicable'),
+          force_calculate_ilp: controller.get('tempClass.forceCalculateILP'),
           preference:
             controller.get('tempClass.preference') ||
             controller.get('class.preference')
@@ -380,8 +381,9 @@ export default Ember.Controller.extend(ModalMixin, {
         classData.set('gradeLowerBound', settings.grade_lower_bound);
         classData.set('gradeUpperBound', settings.grade_upper_bound);
         classData.set('gradeCurrent', settings.grade_current);
-        classData.set('route0', settings.route0);
+        classData.set('route0Applicable', settings.route0);
         classData.set('preference', settings.preference);
+        classData.set('forceCalculateILP', settings.force_calculate_ilp);
         controller.updateClassSettings(settings);
       }
     },
@@ -563,12 +565,7 @@ export default Ember.Controller.extend(ModalMixin, {
               controller.send('updateUserClasses');
               controller
                 .get('class')
-                .merge(editedClass, [
-                  'title',
-                  'minScore',
-                  'classSharing',
-                  'isOffline'
-                ]);
+                .merge(editedClass, ['title', 'minScore', 'classSharing']);
             });
         } else {
           var classForEditing = controller.get('class').copy();
@@ -621,9 +618,9 @@ export default Ember.Controller.extend(ModalMixin, {
 
   updateClassMembersSettings() {
     const controller = this;
-    const classId = this.get('class.id');
+    const classId = controller.get('class.id');
     const isPremiumClass = controller.get('isPremiumClass');
-    const isOffline = controller.get('class.isOffline');
+    const forceCalculateILP = controller.get('class.forceCalculateILP');
     const studentsLevelSetting = controller.get('studentsLevelSetting');
     let studentsSetting = {
       users: []
@@ -651,8 +648,8 @@ export default Ember.Controller.extend(ModalMixin, {
       .then(() => {
         controller.fetchClassMemberBounds();
         if (
+          forceCalculateILP &&
           isPremiumClass &&
-          isOffline &&
           lowerBoundUpdateStudentsId.length > 0
         ) {
           controller

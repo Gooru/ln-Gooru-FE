@@ -13,6 +13,7 @@
                       onOpenContentPlayer="openContentPlayer"
                       onOpenIndependentPlayer="onIndependentPlayer"
                       onBookmarkContent="onBookmarkContent"
+                      onPreviewContent="onPreviewContent"
                       }}
                   {{/each}}
                 {{else}}
@@ -22,3 +23,12 @@
         </div>
     </div>
 </div>
+
+{{#if isShowContentPreview}}
+  {{reports.pull-up.gru-collection-preview
+    showPullUp=isShowContentPreview
+    previewContentId=previewContent.id
+    previewContentType=previewContentType
+    isRemixableContent=true
+  }}
+{{/if}}

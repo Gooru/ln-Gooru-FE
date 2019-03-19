@@ -1,0 +1,52 @@
+<div class="backdrop" {{action "onClosePullUp"}}></div>
+<div class="preview-container">
+  <div class="header-container">
+    <div class="close-pullup" {{action "onClosePullUp"}}>
+      {{gru-icon name="arrow_downward"}}
+    </div>
+    <div class="preview-title {{previewContentType}}-preview">
+      {{previewContentType}} {{t 'common.preview'}}
+    </div>
+    <div class="content-player" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
+      {{gru-icon name="play_arrow"}}
+    </div>
+    {{#if (and isRemixableContent (or isTeacher isAnonymous))}}
+      <div class="content-remix" title="{{t 'common.remix'}}" data-toggle="tooltip" {{action "onRemixContent"}}>
+        {{gru-icon name="content_copy"}}
+      </div>
+    {{/if}}
+    {{#unless isAnonymous}}
+      <div class="print-preview" title="{{t 'common.download-print'}}" data-toggle="tooltip" {{action "onPrintPreview"}}>
+        {{gru-icon name="get_app"}}
+      </div>
+    {{/unless}}
+  </div>
+  <div class="body-container">
+    <div class="content-info-container">
+      <div class="title-info-container">
+        <div class="thumbnail-container" style="background-image: url({{previewContent.thumbnailUrl}}) !important;"></div>
+        <div class="content-icon {{previewContentType}}"></div>
+        <div class="content-title ellipsis">{{previewContent.title}}</div>
+      </div>
+      {{#if taxonomyTags.length}}
+          <div class="taxonomy-container">
+        {{taxonomy.gru-taxonomy-tag-list tags=taxonomyTags tagsVisible=2 isInCard=true}}
+          </div>
+      {{/if}}
+    </div>
+    <div class="content-items-container">
+      {{#each previewContent.children as |content seq|}}
+        {{#if (or (eq previewContentType 'assessment') (eq content.content_format 'question'))}}
+          {{cards.question-preview-card question=content isShowCorrectAnswer=isShowCorrectAnswer contentSeq=(plus-one seq)}}
+        {{else}}
+          {{cards.resource-preview-card resource=content contentSeq=(plus-one seq)}}
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+  {{#if isQuestionAvailable}}
+    <div class="footer-container" {{action "onToggleAnswer"}}>
+      {{t (if isShowCorrectAnswer 'common.hide-correct-answer'  'common.show-correct-answer')}}
+    </div>
+  {{/if}}
+</div>

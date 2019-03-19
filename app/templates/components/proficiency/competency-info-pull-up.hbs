@@ -10,7 +10,7 @@
   <span class="close" {{action 'closePullUp' bubbles=false}}>{{gru-icon name="close"}}</span>
 </div>
 <div class="body">
-  {{#if competency}}
-    {{reports.pull-up.competency-content-report competency=competency domainCompetencyList=domainCompetencyList competency=competency userId=studentId isStudent=isStudent}}
+  {{#if isInspectCompetency}}
+    {{reports.pull-up.competency-content-report domainCompetencyList=domainCompetencyList competency=competency userId=studentId isStudent=isStudent}}
   {{/if}}
 </div>

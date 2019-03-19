@@ -34,6 +34,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Actions
 
   actions: {
+    //Action triggered when click preview content
+    onPreviewContent(content) {
+      const controller = this;
+      controller.set('previewContentType', content.get('collectionType'));
+      controller.set('previewContent', content);
+      controller.set('isShowContentPreview', true);
+    },
     /**
      * Action triggered when add dca button got clicked.
      * @param  {String} selectedSearchContentType
@@ -473,20 +480,39 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Properties
 
+  /**
+   * @property {Boolean} isShowContentPreview
+   */
+  isShowContentPreview: false,
+
+  /**
+   * @property {Object}
+   */
+  previewContent: null,
+
+  /**
+   * @property {Boolean} isShowCreateOfflineActivity
+   */
   isShowCreateOfflineActivity: false,
 
+  /**
+   * @property {Boolean} isRepeatEntry
+   */
   isRepeatEntry: false,
 
-  isOfflineClass: Ember.computed('class', function() {
-    let controller = this;
-    let classData = controller.get('class');
-    return classData.isOffline;
-  }),
-
+  /**
+   * @property {Object} selectedActivity
+   */
   selectedActivity: null,
 
+  /**
+   * @property {String} selectedItem
+   */
   selectedItem: null,
 
+  /**
+   * @property {Boolean} isShowPerformanceEntryPullUp
+   */
   isShowPerformanceEntryPullUp: false,
 
   /**

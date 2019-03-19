@@ -30,21 +30,12 @@ export default Ember.Component.extend({
      * Action triggered when the user play collection
      */
     onPlayContent(content) {
-      let contentId = content.get('id');
       let collectionType = content.get('collectionType');
-      let url = content.get('url');
-      if (
-        collectionType === 'assessment-external' ||
-        collectionType === 'collection-external'
-      ) {
-        window.open(url, '_blank');
+      if (collectionType === 'assessment' || collectionType === 'collection') {
+        this.sendAction('onPreviewContent', content);
       } else {
-        this.get('router').transitionTo('player', contentId, {
-          queryParams: {
-            role: 'teacher',
-            type: collectionType
-          }
-        });
+        let url = content.get('url');
+        window.open(url, '_blank');
       }
     },
 
@@ -54,13 +45,10 @@ export default Ember.Component.extend({
      */
     openDcaContentReport(selectedClassActivity) {
       let component = this;
-      let isOfflineClass = component.get('isOfflineClass');
-      if (isOfflineClass) {
-        component.set('selectedActivity', selectedClassActivity);
-        component.set('isShowStudentsSummaryReport', true);
-      } else {
-        this.sendAction('openDcaContentReport', selectedClassActivity);
-      }
+      component.set('selectedActivity', selectedClassActivity);
+      component.set('isShowStudentsSummaryReport', true);
+      // old style reporting at CA now replaced with above...
+      // this.sendAction('openDcaContentReport', selectedClassActivity);
     },
 
     /**
@@ -81,8 +69,13 @@ export default Ember.Component.extend({
     /**
      * @function goLive
      */
-    goLive: function(collectionId) {
-      this.sendAction('onGoLive', collectionId);
+    goLive: function(collection) {
+      let options = {
+        collectionId: collection.get('id'),
+        collectionType: collection.get('collectionType')
+      };
+
+      this.sendAction('onGoLive', options);
     },
 
     /**

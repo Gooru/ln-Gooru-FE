@@ -2,10 +2,10 @@
   <div class="competency-name">
     {{competency.competencyName}}
   </div>
-    {{#if competency}}
-      <div class="signature-content">
-        {{reports.pull-up.signature-content-report competency=competency domainCompetencyList=domainCompetencyList collectionPerformances=collectionPerformances showSignatureAssessment=showSignatureAssessment competency=competency isStudent=isStudent}}
-      </div>
+  {{#if competency}}
+    <div class="signature-content">
+      {{reports.pull-up.signature-content-report domainCompetencyList=domainCompetencyList collectionPerformances=collectionPerformances showSignatureAssessment=showSignatureAssessment competency=competency isStudent=isStudent}}
+    </div>
   {{/if}}
 </div>
 

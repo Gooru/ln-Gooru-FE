@@ -959,5 +959,30 @@ export default Ember.Service.extend({
           resolve(response);
         }, reject);
     });
+  },
+
+  /**
+   * @function getCAPerformanceData
+   * performance Data of Class Activities for ALL classes of a Student/Teacher
+   */
+  getCAPerformanceData(classIds) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('performanceAdapter')
+        .getCAPerformanceData(classIds)
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('performanceSerializer')
+                .normalizeCAPerformanceData(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });

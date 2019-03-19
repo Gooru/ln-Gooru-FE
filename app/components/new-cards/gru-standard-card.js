@@ -142,18 +142,8 @@ export default Ember.Component.extend(ModalMixin, {
             component.send('showModal', 'gru-preview-course', model);
           });
       } else {
-        model.set('remixCollection', () => component.remixCollection());
-        model.set('bookmarkCollection', () =>
-          component.send('bookmarkContent', content, false)
-        );
-        model.set('playCollection', () =>
-          component.send('playIndependent', content, false)
-        );
-        component
-          .loadCollection(contentId, isCollection, model)
-          .then(function() {
-            component.send('showModal', 'gru-preview-collection', model);
-          });
+        let previewContentType = isCollection ? 'collection' : 'assessment';
+        component.sendAction('onPreviewContent', content, previewContentType);
       }
     }
   },
@@ -322,29 +312,6 @@ export default Ember.Component.extend(ModalMixin, {
         content: this.get('content')
       };
       this.send('showModal', 'content.modals.gru-course-remix', remixModel);
-    }
-  },
-
-  remixCollection: function() {
-    if (this.get('session.isAnonymous')) {
-      this.send('showModal', 'content.modals.gru-login-prompt');
-    } else {
-      var remixModel = {
-        content: this.get('content')
-      };
-      if (this.get('content.isCollection')) {
-        this.send(
-          'showModal',
-          'content.modals.gru-collection-remix',
-          remixModel
-        );
-      } else {
-        this.send(
-          'showModal',
-          'content.modals.gru-assessment-remix',
-          remixModel
-        );
-      }
     }
   },
 

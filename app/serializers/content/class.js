@@ -58,8 +58,7 @@ export default Ember.Object.extend({
     let data = {
       title: classModel.get('title'),
       class_sharing: classModel.get('classSharing'),
-      min_score: classModel.get('minScore') || 0,
-      is_offline: classModel.get('isOffline')
+      min_score: classModel.get('minScore') || 0
     };
 
     if (!update) {
@@ -108,6 +107,7 @@ export default Ember.Object.extend({
       isArchived: payload.is_archived,
       isOffline: payload.is_offline,
       route0Applicable: payload.route0_applicable,
+      forceCalculateILP: payload.force_calculate_ilp,
       gradeLowerBound: payload.grade_lower_bound,
       gradeCurrent: payload.grade_current,
       gradeUpperBound: payload.grade_upper_bound,

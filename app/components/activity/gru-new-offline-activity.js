@@ -182,17 +182,6 @@ export default Ember.Component.extend({
   isShowTaxonomyPicker: false,
 
   /**
-   * @property {Boolean} isClassPreferenceMapped
-   */
-  isClassPreferenceMapped: Ember.computed('classPreference', function() {
-    let component = this;
-    let classPreference = component.get('classPreference');
-    return classPreference
-      ? classPreference.subject && classPreference.framework
-      : false;
-  }),
-
-  /**
    * @property {String} activityTitle
    */
   activityTitle: null,
@@ -317,15 +306,12 @@ export default Ember.Component.extend({
    * @property {Boolean} isEnableCreateActivity
    */
   isEnableCreateActivity: Ember.computed(
-    'isClassPreferenceMapped',
     'activityTitle',
     function() {
       const component = this;
-      let isClassPreferenceMapped = component.get('isClassPreferenceMapped');
       let activityTitle = component.get('activityTitle');
       return (
-        isClassPreferenceMapped &&
-        (activityTitle !== null && activityTitle.trim() !== '')
+        activityTitle !== null && activityTitle.trim() !== ''
       );
     }
   ),

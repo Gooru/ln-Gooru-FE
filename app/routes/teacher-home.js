@@ -101,7 +101,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
      * @param {string} item
      * @param {string} classId
      */
-    selectMenuItem: function(item, classId, isOfflineClass) {
+    selectMenuItem: function(item, classId) {
       const route = this;
       if (item === 'students') {
         route.transitionTo('teacher.class.students-proficiency', classId);
@@ -109,20 +109,22 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
         route.transitionTo('teacher.class.course-map', classId);
       } else if (item === 'class-activities') {
         route.transitionTo('teacher.class.class-activities', classId);
-      } else if (item === 'report') {
-        if (isOfflineClass) {
-          route.transitionTo('teacher.class.class-activities', classId, {
-            queryParams: {
-              tab: 'report'
-            }
-          });
-        } else {
-          route.transitionTo('teacher.class.course-map', classId, {
-            queryParams: {
-              tab: 'report'
-            }
-          });
-        }
+      } else if (item === 'ca-report') {
+        route.transitionTo('teacher.class.class-activities', classId, {
+          queryParams: {
+            tab: 'report'
+          }
+        });
+      } else if (item === 'cm-report') {
+        route.transitionTo('teacher.class.course-map', classId, {
+          queryParams: {
+            tab: 'report'
+          }
+        });
+      } else if (item === 'atc') {
+        route.transitionTo('teacher.class.atc', classId);
+      } else if (item === 'class-management') {
+        route.transitionTo('teacher.class.class-management', classId);
       } else {
         route.transitionTo('teacher-home');
       }
@@ -137,97 +139,6 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
    */
   model: function() {
     let route = this;
-    // const configuration = this.get('configurationService.configuration');
-
-    //Steps for Take a Tour functionality
-    let tourSteps = Ember.A([
-      {
-        elementSelector: '.gru-take-tour',
-        title: route.get('i18n').t('gru-take-tour.teacher-home.stepOne.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepOne.description')
-      },
-      {
-        elementSelector: '.gru-header .home-link',
-        title: route.get('i18n').t('gru-take-tour.teacher-home.stepTwo.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepTwo.description')
-      },
-      {
-        elementSelector: '.gru-header .search-navbar-form',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepThree.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepThree.description')
-      },
-      {
-        elementSelector: '.gru-header .menu-navbar .classrooms-link',
-        title: route.get('i18n').t('gru-take-tour.teacher-home.stepFour.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepFour.description')
-      },
-      {
-        elementSelector: '.gru-header .menu-navbar .content-link',
-        title: route.get('i18n').t('gru-take-tour.teacher-home.stepFive.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepFive.description')
-      },
-      {
-        elementSelector: '.gru-header .menu-navbar .library-link',
-        title: route.get('i18n').t('gru-take-tour.teacher-home.stepSix.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepSix.description')
-      },
-      {
-        elementSelector: '.gru-header .menu-navbar .profile-link',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepSeven.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepSeven.description')
-      },
-      {
-        elementSelector: '.gru-header .menu-navbar .dropdown .profile-more',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepEight.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepEight.description')
-      },
-      {
-        elementSelector: '.teacher-navigator .active-classes a',
-        title: route.get('i18n').t('gru-take-tour.teacher-home.stepNine.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepNine.description')
-      },
-      {
-        elementSelector: '.teacher-navigator .archived-classes a',
-        title: route.get('i18n').t('gru-take-tour.teacher-home.stepTen.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepTen.description')
-      },
-      {
-        elementSelector: '.content .gru-new-class-card',
-        title: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepEleven.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.teacher-home.stepEleven.description')
-      }
-    ]);
-
     let myClassessPromise = Ember.RSVP.resolve(
       route.controllerFor('application').loadUserClasses()
     );
@@ -241,8 +152,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       const archivedClasses = myClasses.getTeacherArchivedClasses();
       return {
         activeClasses,
-        archivedClasses,
-        tourSteps
+        archivedClasses
       };
     });
   },
@@ -253,7 +163,6 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
    * @param model
    */
   setupController: function(controller, model) {
-    controller.set('steps', model.tourSteps);
     controller.set('featuredCourses', model.featuredCourses);
     controller.set('archivedClasses', model.archivedClasses);
     controller.set('activeClasses', model.activeClasses);

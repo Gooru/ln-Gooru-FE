@@ -1,5 +1,14 @@
-<div class="teacher class"> {{gru-take-tour steps=steps containerClass='class-view-tour'}} {{teacher.class.gru-class-navbar navTitle= class.title class=class onItemSelected="selectMenuItem" selectedMenuItem=menuItem
-  isPremiumClass=isPremiumClass onOpenCourseReport="onOpenCourseReport" onOpenOCAReport="onOpenOCAReport" performanceSummaryForDCA=performanceSummaryForDCA isOfflineClass=isOfflineClass onOpenCompetencyReport="onOpenCompetencyReport"}}
+<div class="teacher class">
+  {{teacher.class.gru-class-navbar
+    navTitle= class.title
+    class=class
+    onItemSelected="selectMenuItem"
+    selectedMenuItem=menuItem
+    isPremiumClass=isPremiumClass
+    onOpenCourseReport="onOpenCourseReport"
+    onOpenOCAReport="onOpenOCAReport"
+    performanceSummaryForDCA=performanceSummaryForDCA
+   onOpenCompetencyReport="onOpenCompetencyReport"}}
 
   <div class="header clearfix">
     <div class="go-back-container">

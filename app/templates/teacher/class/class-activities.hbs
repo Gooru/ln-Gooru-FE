@@ -47,6 +47,7 @@
                   {{class.gru-class-activity-panel
                     classActivity=activity
                     classId=classId
+                    class=class
                     members=members
                     classActivities=classActivities
                     onReportclick='changeStatusValue'
@@ -60,7 +61,7 @@
                     showCohort=true
                     onScheduleContentToDCA='onScheduleContentToDCA'
                     onOpenPerformanceEntry="onOpenPerformanceEntry"
-                    isOfflineClass=isOfflineClass
+                    onPreviewContent="onPreviewContent"
                   }}
                 {{else}}
                     <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
@@ -98,6 +99,7 @@
             showDcaRemoveButton=false
             onScheduleContentToDCA='onScheduleContentToDCA'
             isUnScheduled=true
+            onPreviewContent="onPreviewContent"
           }}
             {{/each}}
           </div>
@@ -117,6 +119,7 @@
   {{teacher.class.ca-unscheduled-items-pullup
     showPullUp=true
     classId=classId
+    class=class
     unScheduledClassActivities=unScheduledClassActivities
     onChangeVisibility='changeVisibility'
     onRemoveClassActivity='removeClassActivity'
@@ -131,7 +134,6 @@
     context=contextParams
     selectedSearchContentType=selectedSearchContentType
     todaysClassActivities=todaysClassActivities.classActivities
-    isOfflineClass=isOfflineClass
     classPreference=classPreference
     classId=classId
   }}
@@ -165,4 +167,8 @@
 {{/if}}
 {{#if isShowOCASummaryReportPullUp}}
   {{teacher.offline-class.oca-summary-report-pull-up classId=class.id performanceSummary=performanceSummaryForDCA onClosePullUp="onClosePullUp"}}
+{{/if}}
+
+{{#if isShowContentPreview}}
+  {{reports.pull-up.gru-collection-preview showPullUp=isShowContentPreview previewContentId=previewContent.id previewContentType=previewContentType}}
 {{/if}}

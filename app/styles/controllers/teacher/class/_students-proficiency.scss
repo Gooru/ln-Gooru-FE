@@ -1,7 +1,13 @@
 .teacher_class_students-proficiency {
+  @media only screen and (max-width: $screen-xs) {
+    .app-container {
+      padding-top: 102px;
+    }
+  }
   .teacher.class {
     padding: 0;
     .students-proficiency-container {
+      padding-bottom: 55px;
       .no-data {
         font-size: 15px;
         text-align: center;

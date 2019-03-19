@@ -63,21 +63,6 @@
             </div>
             {{!-- language  ends--}}
             <div class='sub-sec-coteach'>
-              <div class='row-offline-class'>
-                <div class='offline-icon'></div>
-                <div class='offline-label'> {{t
-                  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label'}}
-                  <div class="offline-info-icon">{{gru-icon tooltipTitle= "teacher-landing.class.class-settings.class-settings-sec.offline-tooltip" name='info_outline'}}
-                  </div>
-                </div>
-                <div class='action-button-slide-yes {{ if class.isOffline "disabled" }}' data-toggle="tooltip" title="{{t 'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip'}}">
-                  {{gru-switch switchOptions=switchOptions onOptionSwitch='saveOffline'
-                  isChecked=class.isOffline}}
-                </div>
-              </div>
-              <div class='row-offline-alert'>
-                {{t 'teacher-landing.class.class-settings.class-settings-sec.offline-msg'}}
-              </div>
               {{#if class.collaborators}}
                 <div class='sub-sec-head'>{{t 'teacher-landing.class.class-settings.class-settings-sec.co-teachers'}}</div>
                 {{#each class.collaborators as |coteacher|}}
@@ -205,13 +190,25 @@
 
 
                 <div class='sub-sec-sep'></div>
-                <div class='row-offline-class sub-sec-row'>
-                  <div class='offline-icon'></div>
-                  <div class='offline-label'> {{t
-                              'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable'}}</div>
+                <div class='route-class-setting sub-sec-row'>
+                  <div class='route-class-icon'></div>
+                  <div class='route-class-label'>
+                    <p>{{t 'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable'}}</p>
+                  </div>
                   <div class='action-button-slide-yes'>
-                    {{gru-switch switchOptions=switchOptions onOptionSwitch='updateClassSettings'
+                    {{gru-switch switchOptions=switchOptions onOptionSwitch='updateClassRouteSetting'
                               isChecked=tempClass.route0Applicable }}
+                  </div>
+                </div>
+                <div class='force-calculate-ilp-class-setting sub-sec-row'>
+                  <div class='force-calculate-ilp-class-icon'></div>
+                  <div class='force-calculate-ilp-class-label'>
+                    <p>{{t 'present.diagnostic.determine.not.know'}}</p>
+                    <p>{{t 'present.diagnostic.determine.know' subject=gradeSubjectFWK.title}}</p>
+                  </div>
+                  <div class='action-button-slide-yes'>
+                    {{gru-switch switchOptions=switchOptions onOptionSwitch='updateClassForceCalculateILPSetting'
+                              isChecked=(if (not tempClass.forceCalculateILP) true false) }}
                   </div>
                 </div>
               {{/if}}
