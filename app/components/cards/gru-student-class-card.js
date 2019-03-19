@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { getBarGradeColor } from 'gooru-web/utils/utils';
+import { isNumeric } from 'gooru-web/utils/math';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -37,7 +37,7 @@ export default Ember.Component.extend({
       let isPremiumCourse = setting
         ? setting['course.premium'] && setting['course.premium'] === true
         : false;
-      let isGradeAdded = classData.get('grade');
+      let isGradeAdded = classData.get('gradeCurrent');
       if (isPremiumCourse && !currentLocation && isGradeAdded) {
         component
           .get('router')
@@ -90,22 +90,6 @@ export default Ember.Component.extend({
   course: null,
 
   /**
-   * @property {boolean}
-   * Computed property to identify class is demo class or not
-   */
-  isDemoClass: Ember.computed('demoClass', function() {
-    let controller = this;
-    return controller.get('demoClass.code') === controller.get('class.code');
-  }),
-
-  /**
-   * @property {boolean} Show or not the current location
-   */
-  showCurrentLocation: Ember.computed('class.currentLocation', function() {
-    return this.get('class.currentLocation');
-  }),
-
-  /**
    * @property {Boolean} isCompleted
    */
   isCompleted: Ember.computed('showCurrentLocation', function() {
@@ -114,78 +98,6 @@ export default Ember.Component.extend({
     let currentLocation = controller.get('class.currentLocation');
     return showCurrentLocation && currentLocation.get('status') === 'complete';
   }),
-
-  /**
-   * @property {Number} total
-   * Computed property for performance total to add a default value
-   */
-  total: Ember.computed.alias('class.performanceSummary.total'),
-
-  /**
-   * @property {Number} totalCompleted
-   * Computed property for performance total completed to add a default value
-   */
-  totalCompleted: Ember.computed.alias(
-    'class.performanceSummary.totalCompleted'
-  ),
-
-  /**
-   * @property {Number} score percentage
-   * Computed property for performance score percentage
-   */
-  scorePercentage: Ember.computed('class.performanceSummary', function() {
-    const scorePercentage = this.get('class.performanceSummary.score');
-    return scorePercentage >= 0 && scorePercentage !== null
-      ? `${scorePercentage}%`
-      : '--';
-  }),
-
-  /**
-   * @property {Boolean}
-   * Computed property  to identify class is started or not
-   */
-  hasStarted: Ember.computed('class.performanceSummary', function() {
-    const scorePercentage = this.get('class.performanceSummary.score');
-    return scorePercentage !== null && scorePercentage >= 0;
-  }),
-
-  /**
-   * @property {Number} completed percentage
-   * Computed property for performance completed percentage
-   */
-  completedPercentage: Ember.computed('class.performanceSummary', function() {
-    const completed = this.get('class.performanceSummary.totalCompleted');
-    const total =
-      completed > this.get('class.performanceSummary.total')
-        ? completed
-        : this.get('class.performanceSummary.total');
-    const percentage = completed ? parseInt((completed / total) * 100) : 0;
-
-    return this.get('class.performanceSummary') !== null && percentage
-      ? `${percentage}% ${this.get('i18n').t('common.completed').string}`
-      : this.get('i18n').t('cards.gru-class-card.student.not-started').string;
-  }),
-
-  /**
-   * @property {[Number]} barChartData
-   */
-  barChartData: Ember.computed(
-    'class.performanceSummary',
-    'class.performanceSummary.score',
-    function() {
-      let score = this.get('class.performanceSummary.score');
-      let scoreColor = getBarGradeColor(score);
-      const completed = this.get('class.performanceSummary.totalCompleted');
-      const total = this.get('class.performanceSummary.total');
-      const percentage = completed ? (completed / total) * 100 : 0;
-      return [
-        {
-          color: scoreColor,
-          percentage
-        }
-      ];
-    }
-  ),
 
   /**
    * @property {String} current location title
@@ -205,5 +117,36 @@ export default Ember.Component.extend({
     let currentLocation = component.get('class.currentLocation');
     let collectionType = currentLocation.get('collectionType');
     return collectionType === 'collection' ? 'collection' : 'assessment';
+  }),
+
+  /**
+   * The class is premium
+   * @property {String}
+   */
+  isPremiumClass: Ember.computed('class', function() {
+    const controller = this;
+    let currentClass = controller.get('class');
+    let classSetting = currentClass.get('setting');
+    return classSetting ? classSetting['course.premium'] : false;
+  }),
+
+  /**
+   * @property {Boolean}
+   * Computed property  to identify class  CM is started or not
+   */
+  hasCMStarted: Ember.computed('class.performanceSummary', function() {
+    const scorePercentage = this.get('class.performanceSummary.score');
+    return scorePercentage !== null && isNumeric(scorePercentage);
+  }),
+
+  /**
+   * @property {Boolean}
+   * Computed property  to identify class CA is started or not
+   */
+  hasCAStarted: Ember.computed('class.performanceSummaryForDCA', function() {
+    const scorePercentage = this.get(
+      'class.performanceSummaryForDCA.scoreInPercentage'
+    );
+    return scorePercentage !== null && isNumeric(scorePercentage);
   })
 });

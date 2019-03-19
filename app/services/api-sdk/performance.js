@@ -965,12 +965,12 @@ export default Ember.Service.extend({
    * @function getCAPerformanceData
    * performance Data of Class Activities for ALL classes of a Student/Teacher
    */
-  getCAPerformanceData(classIds) {
+  getCAPerformanceData(classIds, userId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('performanceAdapter')
-        .getCAPerformanceData(classIds)
+        .getCAPerformanceData(classIds, userId)
         .then(
           function(response) {
             resolve(
