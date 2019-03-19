@@ -88,7 +88,7 @@
                 currentClass=class
                 currentCourse=course
                 classMembers=classMembers
-                onSelectResource="playResource"
+                onSelectResource="onPreviewContent"
                 onLocationUpdate=(action 'updateLocation')
                 onLaunchOnAir="launchOnAir"
                 location=location
@@ -162,4 +162,14 @@
 
 {{#if showCourseReport}}
   {{reports.pull-up.student-course-report onClosePullUp="onClosePullUp=" context=studentCourseReportContext showPullUp=showCourseReport}}
+{{/if}}
+
+
+{{#if isShowContentPreview}}
+  {{reports.pull-up.gru-collection-preview
+    showPullUp=isShowContentPreview
+    previewContentId=previewContent.id
+    previewContentType=previewContentType
+    playerContext=previewPlayerContext
+  }}
 {{/if}}

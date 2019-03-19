@@ -7,12 +7,19 @@
     <div class="preview-title {{previewContentType}}-preview">
       {{previewContentType}} {{t 'common.preview'}}
     </div>
-    <div class="content-player" {{action "onPlayContent"}}>
+    <div class="content-player" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
       {{gru-icon name="play_arrow"}}
     </div>
-    <div class="print-preview hidden" {{action "onPrintPreview"}}>
-      {{gru-icon name="get_app"}}
-    </div>
+    {{#if (and isRemixableContent (or isTeacher isAnonymous))}}
+      <div class="content-remix" title="{{t 'common.remix'}}" data-toggle="tooltip" {{action "onRemixContent"}}>
+        {{gru-icon name="content_copy"}}
+      </div>
+    {{/if}}
+    {{#unless isAnonymous}}
+      <div class="print-preview" title="{{t 'common.download-print'}}" data-toggle="tooltip" {{action "onPrintPreview"}}>
+        {{gru-icon name="get_app"}}
+      </div>
+    {{/unless}}
   </div>
   <div class="body-container">
     <div class="content-info-container">
@@ -28,11 +35,11 @@
       {{/if}}
     </div>
     <div class="content-items-container">
-      {{#each previewContent.children as |content|}}
+      {{#each previewContent.children as |content seq|}}
         {{#if (or (eq previewContentType 'assessment') (eq content.content_format 'question'))}}
-          {{cards.question-preview-card question=content isShowCorrectAnswer=isShowCorrectAnswer}}
+          {{cards.question-preview-card question=content isShowCorrectAnswer=isShowCorrectAnswer contentSeq=(plus-one seq)}}
         {{else}}
-          {{cards.resource-preview-card resource=content}}
+          {{cards.resource-preview-card resource=content contentSeq=(plus-one seq)}}
         {{/if}}
       {{/each}}
     </div>

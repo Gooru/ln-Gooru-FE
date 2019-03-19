@@ -204,7 +204,7 @@ export default Ember.Component.extend({
     let domainCompetencyList = component.get(
       'domainCompetencyList.competencies'
     ) || component.get(
-      'domainCompetencyList');
+        'domainCompetencyList');
     if (prerequisites && domainCompetencyList) {
       prerequisites.forEach(competency => {
         let filteredCompetency = domainCompetencyList.findBy(
