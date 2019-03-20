@@ -8,6 +8,7 @@
   margin: auto;
   color: #37434d;
   background-color: $white;
+  height: 90%;
 
   .backdrop {
     position: fixed;
@@ -23,6 +24,7 @@
     background-color: #000;
   }
   .preview-container {
+    height: 100%;
     background-color: $white;
     position: relative;
     .header-container {
@@ -80,7 +82,7 @@
             background-repeat: no-repeat;
           }
           .content-title {
-            @include ellipsis($font-size: 16px, $line-height: 1.5, $lines-to-show: 2);
+            font-size: 16px;
             color: #545e66;
           }
           .content-icon {
@@ -89,11 +91,11 @@
             height: 18px;
             background-repeat: no-repeat;
             display: block;
-            &.assessment {
+            &.assessment, &.assessment-external {
               background-image: url("gooru/images/add_assessment.svg");
             }
 
-            &.collection {
+            &.collection, &.collection-external {
               background-image: url("gooru/images/add_collection.svg");
             }
           }
@@ -141,7 +143,8 @@
         }
       }
       .content-items-container {
-        height: calc(100vh - 210px);
+        // height: calc(100vh - 210px);
+        height: 68vh;
         overflow-y: auto;
         padding-bottom: 48px;
         &::-webkit-scrollbar {
@@ -153,6 +156,27 @@
           background: $gray-light;
           border: 1px solid $gray-light;
           border-radius: 5px;
+        }
+
+        .external-content {
+          padding: 24px;
+          .content-description {
+            color: #666666;
+            font-size: 12px;
+            line-height: 1.5;
+          }
+          .content-url {
+            .url-label, .url-content {
+              font-size: 15px;
+              color: #3e5e67;
+            }
+            .url-label {
+              font-weight: bold;
+            }
+            .url-content {
+              font-style: italic;
+            }
+          }
         }
       }
     }
@@ -182,16 +206,6 @@
         .content-items-container {
           width: 100vw;
           overflow-x: hidden;
-        }
-      }
-    }
-  }
-
-  @media screen and (min-height: 812px) {
-    .preview-container {
-      .body-container {
-        .content-items-container {
-          height: calc(100vh - 250px);
         }
       }
     }

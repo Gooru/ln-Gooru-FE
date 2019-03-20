@@ -53,7 +53,7 @@
       {{#if (gt searchResults.length 0)}}
         <div class="search-list">
           {{#each searchResultSet as |result|}}
-            {{cards.dca-search-collection-card onScheduleContentToDCA='onScheduleContentToDCA' collection=result contentType=activeContentType onAddContentToDCA="onAddContentToDCA" addedScheduleContentToDCA='addedScheduleContentToDCA' classId=classId}}
+            {{cards.dca-search-collection-card onPreviewContent="onPreviewContent" onScheduleContentToDCA='onScheduleContentToDCA' collection=result contentType=activeContentType onAddContentToDCA="onAddContentToDCA" addedScheduleContentToDCA='addedScheduleContentToDCA' classId=classId}}
           {{/each}}
         </div>
       {{else}}

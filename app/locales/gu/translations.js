@@ -190,6 +190,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'અનબુક બુકમાર્ક પર ક્લિક કરો',
   'common.close': 'બંધ',
   'common.collection': 'સંગ્રહ',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'સંગ્રહ',
   'common.collection-pl.one': 'સંગ્રહ',
   'common.collection-pl.other': 'સંગ્રહ',

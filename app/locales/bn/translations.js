@@ -181,6 +181,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'unbookmark ক্লিক করুন',
   'common.close': 'ঘনিষ্ঠ',
   'common.collection': 'সংগ্রহ',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'সংগ্রহগুলি',
   'common.collection-pl.one': 'সংগ্রহ',
   'common.collection-pl.other': 'সংগ্রহগুলি',

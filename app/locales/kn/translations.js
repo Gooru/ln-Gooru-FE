@@ -193,6 +193,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'ಅನ್ಬುಕ್ಮಾರ್ಕ್ಗೆ ಕ್ಲಿಕ್ ಮಾಡಿ',
   'common.close': 'ಮುಚ್ಚಿ',
   'common.collection': 'ಸಂಗ್ರಹ',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'ಸಂಗ್ರಹಣೆಗಳು',
   'common.collection-pl.one': 'ಸಂಗ್ರಹ',
   'common.collection-pl.other': 'ಸಂಗ್ರಹಣೆಗಳು',
