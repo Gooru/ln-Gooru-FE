@@ -132,12 +132,18 @@ export default Ember.Controller.extend(ModalMixin, {
     let perfSummaryPromise = route
       .get('performanceService')
       .findClassPerformanceSummaryByClassIds(classCourseIds);
-    let competencyCompletionStats = route
-      .get('competencyService')
-      .getCompetencyCompletionStats(premiumClassIds);
-    let caClassPerfSummaryPromise = route
-      .get('performanceService')
-      .getCAPerformanceData(nonPremiumClassIds);
+    let competencyCompletionStats =
+      premiumClassIds.length > 0
+        ? route
+          .get('competencyService')
+          .getCompetencyCompletionStats(premiumClassIds)
+        : Ember.RSVP.resolve([]);
+    let caClassPerfSummaryPromise =
+      nonPremiumClassIds.length > 0
+        ? route
+          .get('performanceService')
+          .getCAPerformanceData(nonPremiumClassIds)
+        : Ember.RSVP.resolve([]);
 
     Ember.RSVP.hash({
       courseCards: courseCardsPromise,

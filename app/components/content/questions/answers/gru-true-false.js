@@ -32,12 +32,12 @@ export default Ember.Component.extend({
     if (this.get('answers').length === 0) {
       var options = Ember.A([
         Answer.create(Ember.getOwner(this).ownerInjection(), {
-          text: 'True',
+          text: this.get('i18n').t('common.true').string,
           isCorrect: true,
           type: 'text'
         }),
         Answer.create(Ember.getOwner(this).ownerInjection(), {
-          text: 'False',
+          text: this.get('i18n').t('common.false').string,
           isCorrect: false,
           type: 'text'
         })

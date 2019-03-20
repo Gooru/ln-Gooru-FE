@@ -7,6 +7,14 @@ export default Object.assign(quizzesTranslations, {
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
   hi: 'हिंदी',
+  as: 'অসমীয়া',
+  bn: 'বাংলা',
+  gu: 'ગુજરાતી',
+  ml: 'മല്യാലം',
+  or: ' ଓଡ଼ିଆ',
+  pa: 'ਪੰਜਾਬੀ',
+  ta: 'தமிழ்',
+  te: 'తెలుగు',
   'errors.description': 'এই মাঠ',
   'errors.inclusion': '{{description}} তালিকায় অন্তর্ভুক্ত করা হয় না',
   'errors.exclusion': '{{বর্ণনা}} সংরক্ষিত',
@@ -2376,5 +2384,10 @@ export default Object.assign(quizzesTranslations, {
   'notifications.typeinclass.teacher-override-title':
     'শিক্ষক আপনার জমা সংশোধন করা হয়েছে',
   'notifications.typeinclass.teacher-grading-complete-title':
-    'শিক্ষক ক্লাসে আপনার জমা গ্রেড করেছে'
+    'শিক্ষক ক্লাসে আপনার জমা গ্রেড করেছে',
+  'goahead.add.something': 'Go ahead, add something.',
+  'present.diagnostic.determine.not.know':
+    'Present a diagnostic to determine the student\'s current location, if not known?',
+  'present.diagnostic.determine.know':
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
 });

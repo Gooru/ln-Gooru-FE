@@ -2,6 +2,7 @@
   .container-fluid {
     .student-independent {
       padding-top: 30px;
+      background-color: $dark-400;
 
       > * {
         margin: 0 auto;
@@ -29,7 +30,7 @@
 
       .greetings {
         span {
-          color: $gray;
+          color: $white;
           font-size: $font-size-lead;
         }
 
@@ -136,9 +137,9 @@
         a {
           box-shadow: none;
           padding-bottom: 0;
-          border-bottom: solid 4px $gray-base;
+          border-bottom: solid 4px $white;
           padding-right: 10px;
-          color: $gray-base;
+          color: $white;
         }
       }
 
@@ -152,11 +153,12 @@
         color: $light-400;
 
         &:hover {
-          color: $gray-base;
+          color: $white;
         }
 
         span {
           font-size: $font-navigator;
+          font-weight: 600;
         }
       }
     }
