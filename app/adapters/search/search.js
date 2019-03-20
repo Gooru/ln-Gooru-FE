@@ -38,6 +38,7 @@ export default Ember.Object.extend({
       data: {
         q: term || '*',
         'flt.collectionType': 'collection',
+        'flt.publishStatus': 'published',
         start: page + 1,
         length: pageSize
       }

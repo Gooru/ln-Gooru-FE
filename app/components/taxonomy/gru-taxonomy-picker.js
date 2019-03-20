@@ -40,9 +40,7 @@ export default Ember.Component.extend({
         data: tagData
       });
       this.get('selectedTags').pushObject(newSelectedTag);
-      if (this.get('isCompatiableMode') || this.get('isCallBack')) {
-        this.updateSelectedTags();
-      }
+      this.updateSelectedTags();
     },
 
     /**
@@ -79,9 +77,7 @@ export default Ember.Component.extend({
           break;
         }
       }
-      if (this.get('isCompatiableMode')) {
-        this.updateSelectedTags();
-      }
+      this.updateSelectedTags();
     },
 
     saveSelectedTags: function(selectedTags) {
@@ -107,7 +103,6 @@ export default Ember.Component.extend({
           break;
         }
       }
-
       this.get('selectedTags').removeObject(taxonomyTag);
       browseItem.set('isSelected', false);
     },
@@ -135,60 +130,8 @@ export default Ember.Component.extend({
   // Events
   init() {
     this._super(...arguments);
+    this.loadTaxonomyData();
 
-    Ember.Logger.assert(
-      this.get('subject.courses'),
-      'Courses not found for subject'
-    );
-
-    var selected = this.get('selected');
-    var shortcuts = this.get('shortcuts');
-    var taxonomyItems = this.get('taxonomyItems');
-    var maxLevels = this.get('maxLevels');
-    var browseItems = this.getBrowseItems(taxonomyItems, maxLevels);
-    this.set('browseItems', browseItems);
-    var selectedTags = this.getTaxonomyTags(selected, {
-      isActive: true,
-      isReadonly: true,
-      isRemovable: true
-    });
-    var shortcutTags = this.getTaxonomyTags(shortcuts);
-
-    this.set('selectedTags', selectedTags);
-    this.set('shortcutTags', shortcutTags);
-
-    if (selected && selected.length) {
-      let component = this;
-      let selectedIds = selected.map(function(tagData) {
-        return tagData.get('id');
-      });
-
-      this.findBrowseItems(selectedIds, browseItems).then(function(
-        browseItems
-      ) {
-        Ember.run.scheduleOnce('afterRender', component, function() {
-          Ember.beginPropertyChanges();
-          browseItems.forEach(function(browseItem, index) {
-            Ember.Logger.assert(
-              browseItem,
-              'Unable to find browse item to mark as selected'
-            );
-
-            if (index === 0) {
-              // Set an initial default path to refresh the browse selector.
-              // The initial default path will be that of the first selected tag.
-              let path = browseItem.getPath();
-              path = path.length > 2 ? path.splice(0, 2) : path.splice(0, 1);
-              component.set('selectedPath', path);
-            }
-
-            // Mark the browse item as selected
-            browseItem.set('isSelected', true);
-          });
-          Ember.endPropertyChanges();
-        });
-      });
-    }
   },
 
   willDestroyElement: function() {
@@ -287,8 +230,74 @@ export default Ember.Component.extend({
    */
   domain: null,
 
+  /**
+   * @property {Observer} onUncheckItem - Observe whenever data changes
+   */
+  onUncheckItem: Ember.observer('unCheckedItems.[]', function() {
+    const component = this;
+    let unCheckedItems = component.get('unCheckedItems');
+    unCheckedItems.forEach((item) => {
+      component.send('uncheckItem', item);
+    });
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
+
+  loadTaxonomyData() {
+    Ember.Logger.assert(
+      this.get('subject.courses'),
+      'Courses not found for subject'
+    );
+
+    var selected = this.get('selected');
+    var shortcuts = this.get('shortcuts');
+    var taxonomyItems = this.get('taxonomyItems');
+    var maxLevels = this.get('maxLevels');
+    var browseItems = this.getBrowseItems(taxonomyItems, maxLevels);
+    this.set('browseItems', browseItems);
+    var selectedTags = this.getTaxonomyTags(selected, {
+      isActive: true,
+      isReadonly: true,
+      isRemovable: true
+    });
+    var shortcutTags = this.getTaxonomyTags(shortcuts);
+
+    this.set('selectedTags', selectedTags);
+    this.set('shortcutTags', shortcutTags);
+
+    if (selected && selected.length) {
+      let component = this;
+      let selectedIds = selected.map(function(tagData) {
+        return tagData.get('id');
+      });
+      this.findBrowseItems(selectedIds, browseItems).then(function(
+        browseItems
+      ) {
+        Ember.run.scheduleOnce('afterRender', component, function() {
+          Ember.beginPropertyChanges();
+          browseItems.forEach(function(browseItem, index) {
+            Ember.Logger.assert(
+              browseItem,
+              'Unable to find browse item to mark as selected'
+            );
+
+            if (index === 0) {
+              // Set an initial default path to refresh the browse selector.
+              // The initial default path will be that of the first selected tag.
+              let path = browseItem.getPath();
+              path = path.length > 2 ? path.splice(0, 2) : path.splice(0, 1);
+              component.set('selectedPath', path);
+            }
+
+            // Mark the browse item as selected
+            browseItem.set('isSelected', true);
+          });
+          Ember.endPropertyChanges();
+        });
+      });
+    }
+  },
 
   /**
    * Find the browse item with a specific ID from a list of browse items.
@@ -306,7 +315,6 @@ export default Ember.Component.extend({
         if (!browseItems.length) {
           resolve(null);
         }
-
         let filteredList = browseItems.filter(function(browseItem) {
           return browseItem.isSimilar(itemId);
         });

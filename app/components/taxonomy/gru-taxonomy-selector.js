@@ -269,9 +269,9 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Observers
 
-  // /**
-  //  * Sets the corresponding lists of subjects and courses when the primary subject changes
-  //  */
+  /**
+   * Sets the corresponding lists of subjects and courses when the primary subject changes
+   */
   onSelectedSubjectChanged: Ember.observer(
     'selectedSubject',
     'selectedCategory',

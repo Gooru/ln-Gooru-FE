@@ -24,8 +24,7 @@
               shortcuts=taxonomyPickerData.shortcuts
               shortcutText=(t "taxonomy.modals.gru-standard-picker.shortcutText")
               subject=taxonomyPickerData.subject
-              isCompatiableMode=false
-              isCallBack=true
+              unCheckedItems=unCheckedItems
               course=course
               domain=domain
             }}
@@ -74,11 +73,11 @@
           <div class="author-publisher-container collapse in" id="author">
             <div class="author-container">
               <span class="author-title">{{t 'search-filter.author.placeholder' }}</span>
-              {{input type="text" value=authorName class="author-name" focus-out="setAuthor" placeholder="Type author name here..." autofocus="true"}}
+              {{input type="text" value=authorName class="author-name" focus-out="setAuthor" placeholder=(t "search-filter.author-placeholder") autofocus="true"}}
             </div>
             <div class="publisher-container">
               <span class="publisher-title">{{t 'common.publisher' }}</span>
-              {{input type="text" value=publisherName class="publisher-name" focus-out="setPublisher" placeholder="Type publisher name here..." autofocus="true"}}
+              {{input type="text" value=publisherName class="publisher-name" focus-out="setPublisher" placeholder=(t "search-filter.publisher-placeholder") autofocus="true"}}
             </div>
           </div>
         </div>

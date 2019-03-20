@@ -29,23 +29,31 @@ export default Ember.Component.extend({
   // Properties
 
   /**
-   * @property {Array} Competency
+   * @property {Boolean}
    * Property to handle to show the component
    */
   isShow: false,
 
+  /**
+   * @property {Boolean}
+   * Property to handle to show the component
+   */
   hideAppScroll: false,
 
-  resourceTypes: Ember.A([{}]),
+  /**
+   * @property {Array}
+   * Property to store resourceTypes
+   */
+  resourceTypes: Ember.A([]),
 
   /**
-   * @property {Array} Competency
+   * @property {Array}
    * Property to hold selected subject courses
    */
   selectedCourse: null,
 
   /**
-   * @property {Array} Competency
+   * @property {Observer}
    * Observer to load taxonomy picker whenever subject changes
    */
   onSubjectSelected: Ember.observer('selectedSubject.courses.[]', function() {
@@ -53,12 +61,6 @@ export default Ember.Component.extend({
     component.set('selectedCourse', this.get('selectedSubject.courses'));
     component.loadTaxonomyPicker();
   }),
-
-  /**
-   * @property {Array} Competency
-   * Property to hold selected competency
-   */
-  selectedCompetencies: Ember.A([]),
 
   /**
    * i18n key for the browse selector text
@@ -102,18 +104,6 @@ export default Ember.Component.extend({
   course: null,
 
   /**
-   * @property {Object} filterItems
-   */
-  filterItems: Ember.Object.create({}),
-
-  selectedFilters: Ember.A([]),
-
-  /**
-   * @property {String} selectedFilterBy
-   */
-  selectedFilterBy: null,
-
-  /**
    * @type {String} the selected category
    */
   selectedCategory: Ember.computed(
@@ -136,6 +126,7 @@ export default Ember.Component.extend({
   },
 
   actions: {
+
     selectSubject(subject) {
       let component = this;
       component.set('selectedSubject', subject);
@@ -153,38 +144,39 @@ export default Ember.Component.extend({
 
     setAuthor() {
       let component = this;
-      let term = $.trim(this.get('authorName'));
+      let term = this.get('authorName').trim();
       let filterItems = component.get('selectedFilters');
       filterItems['flt.authorName'] = term;
     },
 
     setPublisher() {
       let component = this;
-      let term = $.trim(this.get('publisherName'));
+      let term = this.get('publisherName').trim();
       let filterItems = component.get('selectedFilters');
       filterItems['flt.publisherName'] = term;
     },
 
     updateSelectedTags(selectedTags) {
       const component = this;
-      var dataTags = selectedTags.map(function(taxonomyTag) {
-        return taxonomyTag.get('data');
-      });
-      const standards = Ember.A(dataTags);
-      component.set('selectedCompetencies', standards);
-      standards.map((standard) => {
-        component.get('selectedFilters').pushObject(Ember.Object.create({
-          name: standard.get('id'),
-          filter: 'flt.standard'
-        }));
+      component.set('taxonomyPickerData.selected', selectedTags);
+      let selectedFilters = component.get('selectedFilters');
+      selectedFilters.removeObjects(selectedFilters.filterBy('filter', 'flt.standard')); //remove previous object
+      selectedTags.map((standard) => {
+        standard.set('filter', 'flt.standard');
+        standard.set('name', standard.get('data.id'));
+        component.get('selectedFilters').pushObject(standard);
       });
     },
 
+    /**
+     * @function loadTaxonomyData
+     * Method to load taxonomy data
+     */
     loadTaxonomyData(path) {
       return new Ember.RSVP.Promise(
         function(resolve) {
-          var subject = this.get('taxonomyPickerData.subject');
-          var taxonomyService = this.get('taxonomyService');
+          const subject = this.get('taxonomyPickerData.subject');
+          const taxonomyService = this.get('taxonomyService');
 
           if (path.length > 1) {
             let courseId = path[0];
@@ -210,53 +202,71 @@ export default Ember.Component.extend({
       );
     },
 
+    /**
+     * @function onSelectResourceType
+     * Method to handle selected resource item
+     */
     onSelectResourceType(type) {
       const component = this;
-      type.set('active', !type.get('active'));
-      if (type.get('active')) {
-        component.get('selectedFilters').pushObject(type);
+      let selectedFilters = component.get('selectedFilters');
+      if (selectedFilters.indexOf(type) > -1) {
+        selectedFilters.removeObject(type);
       } else {
-        component.get('selectedFilters').removeObject(type);
+        selectedFilters.pushObject(type);
       }
+      component.set('selectedFilters', selectedFilters);
     },
 
-    //Action triggered when select audience card
+    /**
+     * @function onSelectAudience
+     * Method to handle selected audience item
+     */
     onSelectAudience(audience) {
       const component = this;
-      audience.set('active', !audience.get('active'));
-      if (audience.get('active')) {
-        component.get('selectedFilters').pushObject(audience);
+      let selectedFilters = component.get('selectedFilters');
+      if (selectedFilters.indexOf(audience) > -1) {
+        selectedFilters.removeObject(audience);
       } else {
-        component.get('selectedFilters').removeObject(audience);
+        selectedFilters.pushObject(audience);
       }
+      component.set('selectedFilters', selectedFilters);
     },
 
+    /**
+     * @function onSelectLanguage
+     * Method to handle selected language item
+     */
     onSelectLanguage(language) {
       const component = this;
-      language.set('active', !language.get('active'));
-      if (language.get('active')) {
-        component.get('selectedFilters').pushObject(language);
+      let selectedFilters = component.get('selectedFilters');
+      if (selectedFilters.indexOf(language) > -1) {
+        selectedFilters.removeObject(language);
       } else {
-        component.get('selectedFilters').removeObject(language);
+        selectedFilters.pushObject(language);
       }
+      component.set('selectedFilters', selectedFilters);
     },
 
+    /**
+     * @function onSelectEducational
+     * Method to handle selected educational item
+     */
     onSelectEducational(educational) {
       const component = this;
-      educational.set('active', !educational.get('active'));
-      if (educational.get('active')) {
-        component.get('selectedFilters').pushObject(educational);
+      let selectedFilters = component.get('selectedFilters');
+      if (selectedFilters.indexOf(educational) > -1) {
+        selectedFilters.removeObject(educational);
       } else {
-        component.get('selectedFilters').removeObject(educational);
+        selectedFilters.pushObject(educational);
       }
-    },
-
-    onSelectFilter(filterItem) {
-      const component = this;
-      component.set('selectedFilterBy', filterItem.get('type'));
+      component.set('selectedFilters', selectedFilters);
     }
   },
 
+  /**
+   * @function handleAppContainerScroll
+   * Method to handle app container scroll
+   */
   handleAppContainerScroll() {
     let component = this;
     let isOpen = component.get('isShow');
@@ -281,10 +291,16 @@ export default Ember.Component.extend({
           filter: 'flt.audience'
         });
       });
-      component.set('audiences', Ember.A(serializeData));
+      if (!component.isDestroyed) {
+        component.set('audiences', Ember.A(serializeData));
+      }
     });
   },
 
+  /**
+   * @function fetchEducationalUse
+   * Method to fetch educational uses
+   */
   fetchEducationalUse() {
     const component = this;
     const lookupService = component.get('lookupService');
@@ -295,7 +311,9 @@ export default Ember.Component.extend({
           filter: 'flt.educational'
         });
       });
-      component.set('educationalUses', Ember.A(serializeData));
+      if (!component.isDestroyed) {
+        component.set('educationalUses', Ember.A(serializeData));
+      }
     });
   },
 
@@ -311,7 +329,9 @@ export default Ember.Component.extend({
         let preference = component.get('preference');
         let preferedSubjects = subjects.findBy('code', preference.get('subject'));
         let subject = preferedSubjects.get('frameworks').findBy('frameworkId', preference.get('framework'));
-        component.set('selectedSubject', subject);
+        if (!component.isDestroyed) {
+          component.set('selectedSubject', subject);
+        }
       });
   },
 
@@ -329,7 +349,9 @@ export default Ember.Component.extend({
           filter: 'flt.language'
         });
       });
-      component.set('languages', Ember.A(serializeData));
+      if (!component.isDestroyed) {
+        component.set('languages', Ember.A(serializeData));
+      }
     });
   },
 
@@ -339,24 +361,22 @@ export default Ember.Component.extend({
       Ember.Object.create({
         name: component.get('i18n').t('resource.video').string,
         type: 'flt.resources'
-      }),
-      Ember.Object.create({
+      }, {
         name: component.get('i18n').t('resource.webpage').string,
         type: 'flt.resources'
-      }),
-      Ember.Object.create({
+      }, {
+        name: component.get('i18n').t('resource.webpage').string,
+        type: 'flt.resources'
+      }, {
         name: component.get('i18n').t('resource.interactive').string,
         type: 'flt.resources'
-      }),
-      Ember.Object.create({
+      }, {
         name: component.get('i18n').t('resource.image').string,
         type: 'flt.resources'
-      }),
-      Ember.Object.create({
+      }, {
         name: component.get('i18n').t('resource.text').string,
         type: 'flt.resources'
-      }),
-      Ember.Object.create({
+      }, {
         name: component.get('i18n').t('resource.audio').string,
         type: 'flt.resources'
       })
@@ -368,9 +388,9 @@ export default Ember.Component.extend({
    */
   loadTaxonomyPicker() {
     const component = this;
-    var standards = component.get('selectedCompetencies') || [];
-    var subject = component.get('selectedSubject');
-    var taxonomyPickerData = {
+    let standards = component.get('taxonomyPickerData.selected') || [];
+    let subject = component.get('selectedSubject');
+    let taxonomyPickerData = {
       selected: standards,
       shortcuts: null,
       subject,
@@ -394,20 +414,16 @@ export default Ember.Component.extend({
       Ember.Object.create({
         label: component.get('i18n').t('search-filter.courses').string,
         type: 'courses'
-      }),
-      Ember.Object.create({
+      }, {
         label: component.get('i18n').t('search-filter.collections').string,
         type: 'collections'
-      }),
-      Ember.Object.create({
+      }, {
         label: component.get('i18n').t('search-filter.assessments').string,
         type: 'assessments'
-      }),
-      Ember.Object.create({
+      }, {
         label: component.get('i18n').t('search-filter.resources').string,
         type: 'resources'
-      }),
-      Ember.Object.create({
+      }, {
         label: component.get('i18n').t('search-filter.rubrics').string,
         type: 'rubrics'
       })

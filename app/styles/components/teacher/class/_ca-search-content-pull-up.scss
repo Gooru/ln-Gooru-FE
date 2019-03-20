@@ -43,7 +43,8 @@
 
     .search-header {
       height: 50px;
-      display: inline-flex;
+      display: grid;
+      grid-template-columns: 50px 130px 1fr;
       border-bottom: 1px solid #ccc;
       align-items: center;
       width: 100%;
@@ -51,7 +52,7 @@
       color: $white;
 
       .search-pullup-close {
-        width: 70px;
+        width: auto;
         height: 22px;
 
         .arrow_downward {
@@ -129,8 +130,8 @@
       }
 
       .search-right-menu {
-        width: 532px;
-        display: flex;
+        display: grid;
+        grid-template-columns: auto auto;
 
         .search-input-container {
           grid-template-columns: auto 190px auto;
@@ -146,6 +147,7 @@
             display: flex;
             align-items: center;
             margin-right: 10px;
+            justify-content: flex-end;
 
             .more-pointer {
               color: #bbb;
@@ -225,7 +227,6 @@
 
         .search-filter-icon {
           color: #fff;
-          width: 30px;
           cursor: pointer;
 
           .filter_list {

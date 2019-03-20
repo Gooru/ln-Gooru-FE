@@ -229,15 +229,28 @@ export default Ember.Component.extend({
    */
   isShowListView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
+  /**
+   * @property {Number} selectedFiltersLimit
+   * Property to hold limit of selected filters to show
+   */
   selectedFiltersLimit: Ember.computed('isShowListView', function() {
     return this.get('isShowListView') ? 1 : 2;
   }),
 
   /**
-   * @property {Object} filters
+   * @property {Array} selectedFilters
    */
   selectedFilters: Ember.A([]),
 
+  /**
+   * @property {Array} unCheckedItems
+   * Property to hold unCheckedItems of taxonomy standards
+   */
+  unCheckedItems: Ember.A([]),
+
+  /**
+   * @property {Observe} onSelectFilter
+   */
   onSelectFilter: Ember.observer('selectedFilters.[]', function() {
     let component = this;
     let selectedFilters = component.get('selectedFilters');
@@ -258,9 +271,9 @@ export default Ember.Component.extend({
   isClassPreferenceMapped: Ember.computed('classPreference', function() {
     let component = this;
     let classPreference = component.get('classPreference');
-    return classPreference
-      ? classPreference.subject && classPreference.framework
-      : false;
+    return classPreference ?
+      classPreference.subject && classPreference.framework :
+      false;
   }),
 
   // -------------------------------------------------------------------------
@@ -274,18 +287,30 @@ export default Ember.Component.extend({
       this.closePullUp();
     },
 
+    /**
+     * Action get triggered when filter button is clicked
+     */
     toggleSearchFilter() {
       let component = this;
       component.toggleProperty('isShow');
     },
 
-    clearFilter(index) {
+    /**
+     * Action get triggered when clear button is clicked
+     */
+    clearFilter(item) {
       const component = this;
-      component.get('selectedFilters').removeAt(index);
+      if (item.get('filter') === 'flt.standard') {
+        component.get('unCheckedItems').pushObject(item);
+      }
+      component.get('selectedFilters').removeObject(item);
       component.send('doSearch');
 
     },
 
+    /**
+     * Action get triggered when search button is clicked
+     */
     doSearch() {
       const component = this;
       component.loadData();
@@ -513,6 +538,7 @@ export default Ember.Component.extend({
     component.handleSearchBar();
     component.handleShowMoreData();
     component.closeCADatePickerOnScroll();
+    component.set('selectedFilters', Ember.A([])); //initialize
   },
 
   didRender() {
@@ -701,7 +727,7 @@ export default Ember.Component.extend({
     const component = this;
     let filters = {};
     filters['flt.audience'] = component.filterSelectedItems('filter', 'flt.audience');
-    filters['flt.educationalUse'] = component.filterSelectedItems('filter', 'flt.educationalUse');
+    filters['flt.educationalUse'] = component.filterSelectedItems('filter', 'flt.educational');
     filters['flt.language'] = component.filterSelectedItems('filter', 'flt.language');
     filters['flt.audience'] = component.filterSelectedItems('filter', 'flt.audience');
     filters['flt.creator'] = component.get('selectedFilters').get('flt.authorName');
@@ -717,9 +743,8 @@ export default Ember.Component.extend({
   },
 
   toArray(filterList, key) {
-    let params = [];
-    filterList.map((filter) => {
-      params.push(filter[key]);
+    let params = filterList.map((filter) => {
+      return filter[key];
     });
     return params.length > 0 ? params.join(',') : null;
   },
