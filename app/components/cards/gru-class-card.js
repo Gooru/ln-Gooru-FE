@@ -5,6 +5,11 @@ export default Ember.Component.extend({
   // Dependencies
 
   /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
+  /**
    * @type {CourseService} Service to retrieve course information
    */
   courseService: Ember.inject.service('api-sdk/course'),
@@ -106,6 +111,16 @@ export default Ember.Component.extend({
       if (this.get('onItemSelected')) {
         this.sendAction('onItemSelected', item, classId);
       }
+    },
+
+    /**
+     * Action triggered when click on archived class report
+     */
+    onShowArchivedClassReport() {
+      const component = this;
+      component.fetchClassDetails().then(function(classData) {
+        component.sendAction('onShowArchivedClassReport', classData);
+      });
     }
   },
 
@@ -115,5 +130,31 @@ export default Ember.Component.extend({
   init: function() {
     const component = this;
     component._super(...arguments);
+  },
+
+  // -------------------------------------------------------------------------
+  // Functions
+
+  /**
+   * @function fetchClassDetails
+   * Method used to fetch class members and course data
+   */
+  fetchClassDetails() {
+    const component = this;
+    const classService = component.get('classService');
+    const courseService = component.get('courseService');
+    let classData = component.get('class');
+    return Ember.RSVP.hash({
+      classMembers: Ember.RSVP.resolve(classService.readClassMembers(classData.get('id'))),
+      course: Ember.RSVP.resolve(courseService.fetchById(classData.get('courseId')))
+    })
+      .then(({classMembers, course}) => {
+        classData.set('owner', classMembers.get('owner'));
+        classData.set('collaborators', classMembers.get('collaborators'));
+        classData.set('memberGradeBounds', classMembers.get('memberGradeBounds'));
+        classData.set('members', classMembers.get('members'));
+        classData.set('course', course);
+        return classData;
+      });
   }
 });

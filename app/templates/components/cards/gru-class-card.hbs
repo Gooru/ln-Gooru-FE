@@ -27,7 +27,7 @@
     <div class="links">
       <ul>
         <li class="performance {{unless hasStarted 'not-started'}}">
-          <a {{action 'selectItem' 'report'}}>
+          <a {{action "onShowArchivedClassReport"}}>
             <div class="icon-performance">
               <svg>
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/performance-report/report.svg#{{grade-range class.performanceSummary.score}}"></use>
