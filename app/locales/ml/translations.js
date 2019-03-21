@@ -1648,6 +1648,7 @@ export default Object.assign(quizzesTranslations, {
   'standard-dropdown.placeholder': 'സ്റ്റാൻഡേർഡ് ബ്രൗസുചെയ്യുക',
   'subject-dropdown.placeholder': 'വിഷയം (കൾ)',
   'subject-dropdown.prompt': 'ഒരു വിഷയം തിരഞ്ഞെടുക്കുക',
+  'search-filter.input-placeholder':'Type {{type}} name here...',
   'search-filter.courses': 'കോഴ്സുകൾ',
   'search-filter.collections': 'ശേഖരങ്ങൾ',
   'search-filter.resources': 'വിഭവങ്ങൾ',

@@ -203,78 +203,24 @@ export default Ember.Component.extend({
     },
 
     /**
-     * @function onSelectResourceType
-     * Method to handle selected resource item
+     * @function onSelectItem
+     * Method to handle selected item
      */
-    onSelectResourceType(type) {
+    onSelectItem(item) {
       const component = this;
-      let selectedFilters = component.get('selectedFilters');
-      if (selectedFilters.indexOf(type) > -1) {
-        selectedFilters.removeObject(type);
-      } else {
-        selectedFilters.pushObject(type);
-      }
-      component.set('selectedFilters', selectedFilters);
+      component.onSelectFilter(item);
     },
-
-    /**
-     * @function onSelectAudience
-     * Method to handle selected audience item
-     */
-    onSelectAudience(audience) {
-      const component = this;
-      let selectedFilters = component.get('selectedFilters');
-      if (selectedFilters.indexOf(audience) > -1) {
-        selectedFilters.removeObject(audience);
-      } else {
-        selectedFilters.pushObject(audience);
-      }
-      component.set('selectedFilters', selectedFilters);
-    },
-
-    /**
-     * @function onSelectLanguage
-     * Method to handle selected language item
-     */
-    onSelectLanguage(language) {
-      const component = this;
-      let selectedFilters = component.get('selectedFilters');
-      if (selectedFilters.indexOf(language) > -1) {
-        selectedFilters.removeObject(language);
-      } else {
-        selectedFilters.pushObject(language);
-      }
-      component.set('selectedFilters', selectedFilters);
-    },
-
-    /**
-     * @function onSelectEducational
-     * Method to handle selected educational item
-     */
-    onSelectEducational(educational) {
-      const component = this;
-      let selectedFilters = component.get('selectedFilters');
-      if (selectedFilters.indexOf(educational) > -1) {
-        selectedFilters.removeObject(educational);
-      } else {
-        selectedFilters.pushObject(educational);
-      }
-      component.set('selectedFilters', selectedFilters);
-    }
   },
 
-  /**
-   * @function handleAppContainerScroll
-   * Method to handle app container scroll
-   */
-  handleAppContainerScroll() {
-    let component = this;
-    let isOpen = component.get('isShow');
-    if (isOpen) {
-      Ember.$(document.body).addClass('no-vertical-scroll');
+  onSelectFilter(item) {
+    const component = this;
+    let selectedFilters = component.get('selectedFilters');
+    if (selectedFilters.includes(item)) {
+      selectedFilters.removeObject(item);
     } else {
-      Ember.$(document.body).removeClass('no-vertical-scroll');
+      selectedFilters.pushObject(item);
     }
+    component.set('selectedFilters', selectedFilters);
   },
 
   /**
@@ -359,31 +305,42 @@ export default Ember.Component.extend({
 
   loadResourceTypes() {
     const component = this;
-    component.set('resourceTypes', [
-      Ember.Object.create({
+    component.set('resourceTypes', component.getResourceTypes());
+  },
+
+  getResourceTypes() {
+    const component = this;
+    return Ember.A([Ember.Object.create({
         name: component.get('i18n').t('resource.video').string,
         type: 'flt.resources'
-      }, {
+      }),
+      Ember.Object.create({
         name: component.get('i18n').t('resource.webpage').string,
         type: 'flt.resources'
-      }, {
+      }),
+      Ember.Object.create({
         name: component.get('i18n').t('resource.webpage').string,
         type: 'flt.resources'
-      }, {
+      }),
+      Ember.Object.create({
         name: component.get('i18n').t('resource.interactive').string,
         type: 'flt.resources'
-      }, {
+      }),
+      Ember.Object.create({
         name: component.get('i18n').t('resource.image').string,
         type: 'flt.resources'
-      }, {
+      }),
+      Ember.Object.create({
         name: component.get('i18n').t('resource.text').string,
         type: 'flt.resources'
-      }, {
+      }),
+      Ember.Object.create({
         name: component.get('i18n').t('resource.audio').string,
         type: 'flt.resources'
       })
     ]);
   },
+
   /**
    * @function loadTaxonomyPicker
    * Method to load taxonomy picker
@@ -412,20 +369,29 @@ export default Ember.Component.extend({
 
   loadFilters() {
     const component = this;
-    component.set('filters', [
-      Ember.Object.create({
+    component.set('filters', component.getFilters());
+  },
+
+
+  getFilters() {
+    const component = this;
+    return Ember.A([Ember.Object.create({
         label: component.get('i18n').t('search-filter.courses').string,
         type: 'courses'
-      }, {
+      }),
+      Ember.Object.create({
         label: component.get('i18n').t('search-filter.collections').string,
         type: 'collections'
-      }, {
+      }),
+      Ember.Object.create({
         label: component.get('i18n').t('search-filter.assessments').string,
         type: 'assessments'
-      }, {
+      }),
+      Ember.Object.create({
         label: component.get('i18n').t('search-filter.resources').string,
         type: 'resources'
-      }, {
+      }),
+      Ember.Object.create({
         label: component.get('i18n').t('search-filter.rubrics').string,
         type: 'rubrics'
       })

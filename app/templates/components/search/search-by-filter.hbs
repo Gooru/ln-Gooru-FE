@@ -44,10 +44,7 @@
             </div>
           </div>
           <div class="audience-container collapse in" id="audience">
-            {{#each audiences as |audience|}}
-              <div class="audience-card ellipsis {{if (array-contains selectedFilters audience.name 'name') 'active-card'}}" {{action "onSelectAudience" audience}}><span>{{audience.name}}</span></div>
-            {{/each}}
-          </div>
+            {{gru-button-list items=audiences selectedFilters=selectedFilters onSelectItem="onSelectItem"}} </div>
         </div>
         <div class="language-list-container">
           <div class="label-container" data-toggle="collapse" data-target="#language">
@@ -58,9 +55,7 @@
             </div>
           </div>
           <div class="language-container collapse in" id="language">
-            {{#each languages as |language|}}
-              <div class="language-card ellipsis {{if (array-contains selectedFilters language.name 'name') 'active-card'}}" {{action "onSelectLanguage" language}}><span>{{language.name}}</span></div>
-            {{/each}}
+            {{gru-button-list items=languages selectedFilters=selectedFilters onSelectItem="onSelectItem"}}
           </div>
         </div>
         <div class="author-publisher-list-container">
@@ -74,11 +69,11 @@
           <div class="author-publisher-container collapse in" id="author">
             <div class="author-container">
               <span class="author-title">{{t 'search-filter.author.placeholder' }}</span>
-              {{input type="text" value=authorName class="author-name" focus-out="setAuthor" placeholder=(t "search-filter.author-placeholder") autofocus="true"}}
+              {{input type="text" value=authorName class="author-name" focus-out="setAuthor" placeholder=(t "search-filter.input-placeholder" type=(t "search-filter.author.placeholder")) autofocus="true"}}
             </div>
             <div class="publisher-container">
               <span class="publisher-title">{{t 'common.publisher' }}</span>
-              {{input type="text" value=publisherName class="publisher-name" focus-out="setPublisher" placeholder=(t "search-filter.publisher-placeholder") autofocus="true"}}
+              {{input type="text" value=publisherName class="publisher-name" focus-out="setPublisher" placeholder=(t "search-filter.input-placeholder" type=(t "common.publisher")) autofocus="true"}}
             </div>
           </div>
         </div>
@@ -91,27 +86,9 @@
             </div>
           </div>
           <div class="educational-container collapse in" id="educational">
-            {{#each educationalUses as |educationalUse|}}
-              <div class="educational-card ellipsis {{if (array-contains selectedFilters educationalUse.name 'name') 'active-card'}}" {{action "onSelectEducational" educationalUse}}><span>{{educationalUse.name}}</span></div>
-            {{/each}}
+            {{gru-button-list items=educationalUses selectedFilters=selectedFilters onSelectItem="onSelectItem"}}
           </div>
         </div>
-        {{#if (eq selectedFilterBy 'resources')}}
-          <div class="resource-list-container">
-            <div class="label-container" data-toggle="collapse" data-target="#resource">
-              <span>{{t 'common.resource-types'}}</span>
-              <div class="icons">
-                <span>{{gru-icon name="arrow_drop_up"}}</span>
-                <span>{{gru-icon name="arrow_drop_down"}}</span>
-              </div>
-            </div>
-            <div class="resource-container collapse in" id="resource">
-              {{#each resourceTypes as |resourceType|}}
-                <div class="resource-card ellipsis {{if resourceType.active 'active-card'}}" {{action "onSelectResourceType" resourceType}}><span>{{resourceType.name}}</span></div>
-              {{/each}}
-            </div>
-          </div>
-        {{/if}}
       </div>
     </div>
   </div>
