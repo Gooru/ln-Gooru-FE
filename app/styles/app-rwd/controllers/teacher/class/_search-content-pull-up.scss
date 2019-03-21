@@ -5,46 +5,60 @@
 
 			.search-container {
 				width: 100%;
-
-				.search-header {
-					.search-pullup-close {
-						width: 38px;
-					}
-				}
-				@media (orientation: landscape) {
+				@media screen and (max-width: $screen-sm - 1) {
 					.search-header {
+						grid-template-columns: 20px 130px 1fr;
+
+						.search-pullup-close {
+							i {
+								margin-left: 0;
+							}
+						}
+
+						.search-filter-container {
+							width: 100px;
+							margin-left: 10px;
+						}
+
 						.search-right-menu {
 							.search-input-container {
+								grid-template-columns: auto 90px auto;
+
 								#search-content {
-									width: 444px !important;
+									width: 100%;
 								}
 							}
 						}
 					}
-				}
-				@media screen and (min-width: $screen-sm) {
-					.search-header {
-						.search-right-menu {
-							.search-input-container {
-								#search-content {
-									width: 444px !important;
+
+					.search-content-type-filter {
+						.search-by-filter {
+							.search-panel {
+								.search-content {
+									padding: 0;
+
+									.subjects-panel {
+										grid-template-columns: none;
+
+										.left-panel-container,
+										.right-panel-container {
+											.gru-taxonomy-picker {
+												.browse-selector {
+													.taxonomy {
+														.gru-browser-selector-container {
+															.hierarchy-1-container,
+															.hierarchy-2-container,
+															.hierarchy-3-container {
+																max-width: 150px;
+																min-width: 100px;
+															}
+														}
+													}
+												}
+											}
+										}
+									}
 								}
-							}
-						}
-					}
-				}
-
-				.search-header {
-					.search-filter-container {
-						font-size: 10px;
-						width: 140px;
-						display: inherit;
-					}
-
-					.search-right-menu {
-						.search-input-container {
-							#search-content {
-								width: 200px;
 							}
 						}
 					}

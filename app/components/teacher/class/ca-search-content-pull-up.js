@@ -6,7 +6,9 @@ import {
 } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import { isCompatibleVW } from 'gooru-web/utils/utils';
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -228,14 +230,50 @@ export default Ember.Component.extend({
   isShowListView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
   /**
+   * @property {Number} selectedFiltersLimit
+   * Property to hold limit of selected filters to show
+   */
+  selectedFiltersLimit: Ember.computed('isShowListView', function() {
+    return this.get('isShowListView') ? 1 : 2;
+  }),
+
+  /**
+   * @property {Array} selectedFilters
+   */
+  selectedFilters: Ember.A([]),
+
+  /**
+   * @property {Object} unCheckedItems
+   * Property to hold unCheckedItems of taxonomy standards
+   */
+  unCheckedItem: null,
+
+  /**
+   * @property {Observe} onSelectFilter
+   */
+  onSelectFilter: Ember.observer('selectedFilters.[]', function() {
+    let component = this;
+    let selectedFilters = component.get('selectedFilters');
+    let selectedFiltersLimit = component.get('selectedFiltersLimit');
+    if (selectedFilters.length < selectedFiltersLimit) {
+      component.set('filters', selectedFilters);
+    } else {
+      component.set('filters', selectedFilters.slice(0, selectedFiltersLimit));
+      component.set(
+        'moreFilters',
+        selectedFilters.slice(selectedFiltersLimit, selectedFilters.length)
+      );
+    }
+  }),
+  /**
    * @property {Boolean} isClassPreferenceMapped
    */
   isClassPreferenceMapped: Ember.computed('classPreference', function() {
     let component = this;
     let classPreference = component.get('classPreference');
-    return classPreference
-      ? classPreference.subject && classPreference.framework
-      : false;
+    return classPreference ?
+      classPreference.subject && classPreference.framework :
+      false;
   }),
 
   // -------------------------------------------------------------------------
@@ -247,6 +285,35 @@ export default Ember.Component.extend({
      **/
     onPullUpClose() {
       this.closePullUp();
+    },
+
+    /**
+     * Action get triggered when filter button is clicked
+     */
+    toggleSearchFilter() {
+      let component = this;
+      component.toggleProperty('isShow');
+    },
+
+    /**
+     * Action get triggered when clear button is clicked
+     */
+    clearFilter(item) {
+      const component = this;
+      if (item.get('filter') === 'flt.standard') {
+        component.set('unCheckedItem', item);
+      }
+      component.get('selectedFilters').removeObject(item);
+      component.send('doSearch');
+
+    },
+
+    /**
+     * Action get triggered when search button is clicked
+     */
+    doSearch() {
+      const component = this;
+      component.loadData();
     },
 
     /**
@@ -471,6 +538,20 @@ export default Ember.Component.extend({
     component.handleSearchBar();
     component.handleShowMoreData();
     component.closeCADatePickerOnScroll();
+    component.set('selectedFilters', Ember.A([])); //initialize
+  },
+
+  didRender() {
+    let component = this;
+    component.$('.more-pointer').popover({
+      html: true,
+      trigger: 'hover',
+      animation: true,
+      placement: 'auto',
+      content: () => {
+        return component.$('.more-filters').html();
+      }
+    });
   },
 
   //--------------------------------------------------------------------------
@@ -481,24 +562,22 @@ export default Ember.Component.extend({
    */
   openPullUp() {
     let component = this;
-    component.$().animate(
-      {
-        top: '10%'
-      },
-      400
+    component.$().animate({
+      top: '10%'
+    },
+    400
     );
   },
 
   closePullUp() {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-      }
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+    }
     );
   },
 
@@ -523,10 +602,13 @@ export default Ember.Component.extend({
     component.set('isLoading', true);
     component.set('page', 0);
     component.set('isMoreDataExists', false);
+    component.set('isShow', false);
 
     Ember.RSVP.hash({
       searchResults: component.getSearchService()
-    }).then(({ searchResults }) => {
+    }).then(({
+      searchResults
+    }) => {
       if (!component.isDestroyed) {
         component.set('isLoading', false);
         component.set('searchResults', searchResults);
@@ -548,7 +630,9 @@ export default Ember.Component.extend({
     component.set('page', page);
     Ember.RSVP.hash({
       searchResults: component.getSearchService()
-    }).then(({ searchResults }) => {
+    }).then(({
+      searchResults
+    }) => {
       if (!component.isDestroyed) {
         component.set('isLoading', false);
         let searchResult = component.get('searchResults');
@@ -563,7 +647,7 @@ export default Ember.Component.extend({
     });
   },
 
-  getSearchServiceByType() {
+  getSearchService() {
     let component = this;
     let activeContentType = component.get('activeContentType');
     let params = component.getSearchParams();
@@ -595,20 +679,9 @@ export default Ember.Component.extend({
     }
   },
 
-  getSearchService() {
-    let component = this;
-    let searchService = null;
-    let label = component.get('selectedMenuItem.label');
-    if (label === 'common.myContent') {
-      searchService = component.getMyContentByType();
-    } else if (label === 'common.gooru-catalog') {
-      searchService = component.getSearchServiceByType();
-    }
-    return searchService;
-  },
-
   getSearchTerm() {
-    let searchText = this.$('#search-content').val();
+    let component = this;
+    let searchText = component.$('#search-content').val();
     return searchText;
   },
 
@@ -619,20 +692,22 @@ export default Ember.Component.extend({
       page: component.get('page'),
       pageSize: component.get('defaultSearchPageSize')
     };
-
+    let filters = component.filterBuilder();
     let term = component.getSearchTerm();
+    let label = component.get('selectedMenuItem.label');
+    if (label === 'common.myContent') {
+      filters.scopeKey = 'my-content';
+      filters['flt.publishStatus'] = 'published,unpublished';
+    } else {
+      filters['flt.publishStatus'] = 'published';
+    }
     if (!term) {
-      let grade = component.get('class.grade');
       let subject = component.get('course.subject');
       let competencyData = component.get('competencyData');
       let primaryLanguage = component.get('class.primaryLanguage');
-      let gutCode = competencyData
-        ? competencyData.get('competencyCode')
-        : null;
-      let filters = {};
-      if (grade) {
-        filters['flt.grade'] = grade;
-      }
+      let gutCode = competencyData ?
+        competencyData.get('competencyCode') :
+        null;
       if (subject) {
         filters['flt.subject'] = subject;
       }
@@ -643,9 +718,35 @@ export default Ember.Component.extend({
       if (primaryLanguage) {
         filters['flt.languageId'] = primaryLanguage;
       }
-      params.filters = filters;
     }
+    params.filters = filters;
     return params;
+  },
+
+  filterBuilder() {
+    const component = this;
+    let filters = {};
+    filters['flt.audience'] = component.filterSelectedItems('filter', 'flt.audience');
+    filters['flt.educationalUse'] = component.filterSelectedItems('filter', 'flt.educational');
+    filters['flt.language'] = component.filterSelectedItems('filter', 'flt.language');
+    filters['flt.audience'] = component.filterSelectedItems('filter', 'flt.audience');
+    filters['flt.creator'] = component.get('selectedFilters').get('flt.authorName');
+    filters['flt.publisherName'] = component.get('selectedFilters').get('flt.publisherName');
+    filters['flt.standard'] = component.filterSelectedItems('filter', 'flt.standard');
+    return filters;
+  },
+
+  filterSelectedItems(keyField, keyValue) {
+    const component = this;
+    let filterList = component.get('selectedFilters').filterBy(keyField, keyValue);
+    return component.toArray(filterList, 'name');
+  },
+
+  toArray(filterList, key) {
+    let params = filterList.map((filter) => {
+      return filter[key];
+    });
+    return params.length > 0 ? params.join(',') : null;
   },
 
   getMyContentParams() {

@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import ResourceModel from 'gooru-web/models/content/resource';
 import QuestionModel from 'gooru-web/models/content/question';
-import { DEFAULT_SEARCH_PAGE_SIZE } from 'gooru-web/config/config';
+import {
+  DEFAULT_SEARCH_PAGE_SIZE
+} from 'gooru-web/config/config';
 
 /**
  * Adapter to support the Search for Collections, Assessments, Resources and Questions
@@ -278,7 +280,9 @@ export default Ember.Object.extend({
       if (filterKeys) {
         for (let index = 0; index < filterKeys.length; index++) {
           let filterKey = filterKeys[index];
-          options.data[filterKey] = filters[filterKey];
+          if (filters[filterKey]) {
+            options.data[filterKey] = filters[filterKey];
+          }
         }
       }
     }

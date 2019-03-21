@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
-
 /**
  * Taxonomy selector component
  *
@@ -115,6 +114,9 @@ export default Ember.Component.extend({
     const component = this;
     const subject = component.get('selectedSubject');
     const category = component.get('selectedCategory');
+    if (!subject) {
+      component.set('subjects', Ember.A([]));
+    }
     component
       .get('taxonomyService')
       .getCategories()
@@ -219,9 +221,7 @@ export default Ember.Component.extend({
     'selectedSubject.category',
     'internalCategory',
     function() {
-      return (
-        this.get('selectedSubject.category') || this.get('internalCategory')
-      );
+      return this.get('selectedSubject.category') || this.get('internalCategory');
     }
   ),
 
@@ -289,9 +289,9 @@ export default Ember.Component.extend({
     function() {
       if (this.get('showCourses')) {
         var subjectLabelKey =
-          this.get('internalCategory') === 'higher_education'
-            ? 'taxonomy.gru-taxonomy-selector.competency-subject-and-course'
-            : 'taxonomy.gru-taxonomy-selector.primary-subject-and-course';
+          this.get('internalCategory') === 'higher_education' ?
+            'taxonomy.gru-taxonomy-selector.competency-subject-and-course' :
+            'taxonomy.gru-taxonomy-selector.primary-subject-and-course';
         this.set('subjectLabelKey', subjectLabelKey);
       }
     }

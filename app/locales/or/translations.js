@@ -1660,6 +1660,7 @@ export default Object.assign(quizzesTranslations, {
   'standard-dropdown.placeholder': 'ଷ୍ଟାଣ୍ଡାର୍ଡ ଦ୍ୱାରା ବ୍ରାଉଜ୍ କରନ୍ତୁ',
   'subject-dropdown.placeholder': 'ବିଷୟ(ଗୁଡ଼ିକ)',
   'subject-dropdown.prompt': 'ଗୋଟିଏ ବିଷୟ ଚୟନ କରନ୍ତୁ',
+  'search-filter.input-placeholder':'Type {{type}} name here...',
   'search-filter.courses': 'ପାଠ୍ୟକ୍ରମ ଗୁଡ଼ିକ',
   'search-filter.collections': 'ସଂଗ୍ରହଗୁଡ଼ିକ',
   'search-filter.resources': 'ସମ୍ୱଳଗୁଡ଼ିକ',
