@@ -50,6 +50,9 @@
             </div>
           {{/if}}
         </div>
+        <div class="my-proficiency" {{action 'selectItem' 'profile-prof'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'student-landing.class.my-proficiency'}}" data-trigger="hover">
+          {{gru-icon name="school"}}
+        </div>
 
         {{#if isPremiumClass}}
           <div class="completion-score {{if class.competencyStats 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>

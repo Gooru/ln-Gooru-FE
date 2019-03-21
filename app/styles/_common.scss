@@ -163,7 +163,7 @@ span.validation.warning {
   width: $emotion-icon-size;
   height: $emotion-icon-size;
   cursor: pointer;
-  @include transition(all 0.3s ease-out);
+  transition: all 0.3s ease-out;
   &.small {
     width: $emotion-icon-size-small;
     height: $emotion-icon-size-small;
@@ -240,7 +240,7 @@ span.validation.warning {
         }
         .tag-label,
         .tag-caption {
-          @include text-overflow;
+          text-overflow: ellipsis;
         }
       }
     }

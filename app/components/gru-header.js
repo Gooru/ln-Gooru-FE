@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import SessionMixin from '../mixins/session';
 import ModalMixin from '../mixins/modal';
-import { KEY_CODES, GRU_FEATURE_FLAG } from 'gooru-web/config/config';
+import { KEY_CODES } from 'gooru-web/config/config';
 import EndPointsConfig from 'gooru-web/utils/endpoint-config';
 import Env from 'gooru-web/config/environment';
 
@@ -30,11 +30,6 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
    * Controls display of notification list, typical use from header is to hide it as required.
    */
   displayNotificationList: null,
-
-  isFeatureEnabled: Ember.computed(function() {
-    let feature = 'notifications';
-    return GRU_FEATURE_FLAG[feature];
-  }),
 
   locales: Ember.computed('i18n.locale', 'i18n.locales', function() {
     const i18n = this.get('i18n');

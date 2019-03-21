@@ -3,8 +3,9 @@
     Example: @import "app-rwd/components/filename";
   */
 @import "variables";
-@import "quizzes-rwd";
 @import "mixins";
+@import "common";
+@import "quizzes-rwd";
 // Components
 @import "app-rwd/components/class/overview/routesuggestion-preview";
 @import "app-rwd/components/class/overview/routesuggestion-coursemap";

@@ -1,8 +1,7 @@
 import Ember from 'ember';
 import {
   ANONYMOUS_COLOR,
-  STUDY_PLAYER_BAR_COLOR,
-  GRU_FEATURE_FLAG
+  STUDY_PLAYER_BAR_COLOR
 } from 'gooru-web/config/config';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
@@ -39,10 +38,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   sourceType: null,
 
-  isFeatureEnabled: Ember.computed(function() {
-    let feature = 'chronoView';
-    return GRU_FEATURE_FLAG[feature];
-  }),
   // -------------------------------------------------------------------------
   // Attributes
 

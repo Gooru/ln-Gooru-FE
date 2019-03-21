@@ -4,7 +4,7 @@
       height: calc(100vh - 100px);
     }
   }
-  @media screen and (max-width: $screen-xs) {
+  @media only screen and (max-width: $screen-xs) {
     .ca-content-container {
       .ca-date-and-add-content {
         .ca-date-container {
@@ -24,6 +24,14 @@
           }
         }
       }
+    }
+  }
+}
+
+body.student_class_class-activities {
+  @media only screen and (max-width: $screen-xs) {
+    .app-container {
+      padding-top: 102px;
     }
   }
 }

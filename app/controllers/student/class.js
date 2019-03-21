@@ -107,17 +107,6 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   showCourseReport: false,
 
   /**
-   * @property {Boolean}
-   * Computed property  to identify class is started or not
-   */
-  hasStarted: Ember.computed('class.performanceSummary', function() {
-    const scorePercentage = this.get('class.performanceSummary.score');
-    return scorePercentage !== null && scorePercentage >= 0;
-  }),
-
-  demoClass: Ember.computed.alias('configuration.demoClass'),
-
-  /**
    * Property to identify when there is no content to play
    */
   isNotAbleToStartPlayer: false,
@@ -133,6 +122,17 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    * @type {Boolean}
    */
   isPremiumCourse: false,
+
+  /**
+   * The class is premium or not
+   * @property {Boolean}
+   */
+  isPremiumClass: Ember.computed('class', function() {
+    let controller = this;
+    const currentClass = controller.get('class');
+    let setting = currentClass.get('setting');
+    return setting ? setting['course.premium'] : false;
+  }),
 
   // -------------------------------------------------------------------------
   // Methods

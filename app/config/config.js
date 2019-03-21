@@ -365,12 +365,6 @@ export const COMPETENCY_STATUS = [
   'Mastered (Demonstrated)'
 ];
 
-//gruF-Feature-flag
-export const GRU_FEATURE_FLAG = {
-  notifications: true,
-  chronoView: true
-};
-
 //notifciation timer
 export const NOTIFICATION_SETTINGS = {
   polling_interval: 30000,
