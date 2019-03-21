@@ -1,10 +1,5 @@
-import {
-  moduleForComponent,
-  test
-} from 'ember-qunit';
-import {
-  generateTaxonomyTestTree
-} from 'gooru-web/utils/taxonomy';
+import { moduleForComponent, test } from 'ember-qunit';
+import { generateTaxonomyTestTree } from 'gooru-web/utils/taxonomy';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
 import T from 'gooru-web/tests/helpers/assert';
@@ -15,7 +10,8 @@ import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 
 moduleForComponent(
   'taxonomy/gru-taxonomy-picker',
-  'Integration | Component | taxonomy/gru taxonomy picker', {
+  'Integration | Component | taxonomy/gru taxonomy picker',
+  {
     integration: true,
     beforeEach: function() {
       this.i18n = this.container.lookup('service:i18n');
@@ -36,21 +32,13 @@ test('it renders a shortcut list of taxonomy tags, a browse selector and a list 
   var child2Id = '0-102-220';
 
   var shortcuts = [
-    TaxonomyTagData.create({
-      id: parent1Id
-    }),
-    TaxonomyTagData.create({
-      id: parent2Id
-    })
+    TaxonomyTagData.create({ id: parent1Id }),
+    TaxonomyTagData.create({ id: parent2Id })
   ];
 
   var selected = [
-    TaxonomyTagData.create({
-      id: child1Id
-    }),
-    TaxonomyTagData.create({
-      id: child2Id
-    })
+    TaxonomyTagData.create({ id: child1Id }),
+    TaxonomyTagData.create({ id: child2Id })
   ];
 
   this.on('loadData', function(path) {
@@ -87,7 +75,7 @@ test('it renders a shortcut list of taxonomy tags, a browse selector and a list 
   this.set('browseSelectorText', browseSelectorText);
   this.set('selectedTextKey', selectedTextKey);
 
-  this.render(hbs `{{
+  this.render(hbs`{{
     taxonomy/gru-taxonomy-picker
       browseSelectorText=browseSelectorText
       maxLevels=2
@@ -151,12 +139,8 @@ test('it opens the browse selector to the location of the first selected tag by 
 
   var shortcuts = [];
   var selected = [
-    TaxonomyTagData.create({
-      id: childB
-    }),
-    TaxonomyTagData.create({
-      id: childA
-    })
+    TaxonomyTagData.create({ id: childB }),
+    TaxonomyTagData.create({ id: childA })
   ];
 
   this.on('loadData', function(path) {
@@ -189,7 +173,7 @@ test('it opens the browse selector to the location of the first selected tag by 
   this.set('selected', selected);
   this.set('panelHeaders', ['Level 1', 'Level 2']);
 
-  this.render(hbs `{{
+  this.render(hbs`{{
     taxonomy/gru-taxonomy-picker
       browseSelectorText="Taxonomy Picker Title"
       maxLevels=2
@@ -217,8 +201,8 @@ test('it opens the browse selector to the location of the first selected tag by 
     );
     assert.equal(
       $browseSelector
-      .find('ul.browse-panel.level-2 > li:first-child > label > div > strong')
-      .text(),
+        .find('ul.browse-panel.level-2 > li:first-child > label > div > strong')
+        .text(),
       'Item : 2 : 2 : 0',
       'First item -last panel'
     );
@@ -237,12 +221,8 @@ test('it opens the browse selector to a specific location after clicking on a sh
   var childB = '0-102-220';
 
   var shortcuts = [
-    TaxonomyTagData.create({
-      id: parent1Id
-    }),
-    TaxonomyTagData.create({
-      id: parent2Id
-    })
+    TaxonomyTagData.create({ id: parent1Id }),
+    TaxonomyTagData.create({ id: parent2Id })
   ];
 
   var selected = [];
@@ -277,7 +257,7 @@ test('it opens the browse selector to a specific location after clicking on a sh
   this.set('selected', selected);
   this.set('panelHeaders', ['Level 1', 'Level 2']);
 
-  this.render(hbs `{{
+  this.render(hbs`{{
     taxonomy/gru-taxonomy-picker
       browseSelectorText="Taxonomy Picker Title"
       maxLevels=2
@@ -321,8 +301,8 @@ test('it opens the browse selector to a specific location after clicking on a sh
     );
     assert.equal(
       $browseSelector
-      .find('ul.browse-panel.level-2 > li:first-child > label > div > strong')
-      .text(),
+        .find('ul.browse-panel.level-2 > li:first-child > label > div > strong')
+        .text(),
       'Item : 2 : 0 : 0',
       'Last panel item -first shortcut'
     );
@@ -341,10 +321,10 @@ test('it opens the browse selector to a specific location after clicking on a sh
       );
       assert.equal(
         $browseSelector
-        .find(
-          'ul.browse-panel.level-2 > li:first-child > label > div > strong'
-        )
-        .text(),
+          .find(
+            'ul.browse-panel.level-2 > li:first-child > label > div > strong'
+          )
+          .text(),
         'Item : 2 : 2 : 0',
         'Last panel item -second shortcut'
       );
@@ -377,11 +357,6 @@ test('it adds/removes a tag from the selected tags after it has been checked/unc
 
   var shortcuts = [];
   var selected = [];
-
-  this.on('saveAction', function(selectedTags) {
-    assert.ok(true, 'Save action called');
-    assert.equal(selectedTags.length, selectedTags.length, 'Selected tags');
-  });
 
   this.on('loadData', function(path) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -427,11 +402,10 @@ test('it adds/removes a tag from the selected tags after it has been checked/unc
   this.set('selected', selected);
   this.set('panelHeaders', ['Level 1', 'Level 2']);
 
-  this.render(hbs `{{
+  this.render(hbs`{{
     taxonomy/gru-taxonomy-picker
       browseSelectorText="Taxonomy Picker Title"
       maxLevels=2
-      onSave=(action 'saveAction')
       onSearchPath=(action 'loadData')
       panelHeaders=panelHeaders
       selected=selected
@@ -502,15 +476,15 @@ test('it adds/removes a tag from the selected tags after it has been checked/unc
             );
             assert.equal(
               $selectedTags
-              .find('.gru-taxonomy-tag:eq(0) .content .tag-label')
-              .text(),
+                .find('.gru-taxonomy-tag:eq(0) .content .tag-label')
+                .text(),
               'Item : 2 : 0 : 1',
               'First selected tag text'
             );
             assert.equal(
               $selectedTags
-              .find('.gru-taxonomy-tag:eq(1) .content .tag-label')
-              .text(),
+                .find('.gru-taxonomy-tag:eq(1) .content .tag-label')
+                .text(),
               'Item : 2 : 2 : 1',
               'Second selected tag text'
             );
@@ -534,12 +508,8 @@ test('it unchecks a tag in the browse selector after its tags are removed from t
 
   var shortcuts = [];
   var selected = [
-    TaxonomyTagData.create({
-      id: childA
-    }),
-    TaxonomyTagData.create({
-      id: childB
-    })
+    TaxonomyTagData.create({ id: childA }),
+    TaxonomyTagData.create({ id: childB })
   ];
 
   this.on('loadData', function(path) {
@@ -570,7 +540,7 @@ test('it unchecks a tag in the browse selector after its tags are removed from t
   this.set('selected', selected);
   this.set('panelHeaders', ['Level 1', 'Level 2']);
 
-  this.render(hbs `{{
+  this.render(hbs`{{
     taxonomy/gru-taxonomy-picker
       browseSelectorText="Taxonomy Picker Title"
       maxLevels=2
@@ -663,7 +633,7 @@ test('it calls an external action when the save button is clicked', function(
 
   this.on('saveAction', function(selectedTags) {
     assert.ok(true, 'Save action called');
-    assert.equal(selectedTags.length, selectedTags.length, 'Selected tags');
+    assert.equal(selectedTags.length, 2, 'Selected tags');
   });
 
   this.on('loadData', function(path) {
@@ -695,7 +665,7 @@ test('it calls an external action when the save button is clicked', function(
   this.set('selected', selected);
   this.set('panelHeaders', ['Level 1', 'Level 2']);
 
-  this.render(hbs `{{
+  this.render(hbs`{{
     taxonomy/gru-taxonomy-picker
       browseSelectorText="Taxonomy Picker Title"
       maxLevels=2

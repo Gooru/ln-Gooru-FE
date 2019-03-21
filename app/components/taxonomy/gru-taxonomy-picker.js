@@ -40,7 +40,9 @@ export default Ember.Component.extend({
         data: tagData
       });
       this.get('selectedTags').pushObject(newSelectedTag);
-      this.updateSelectedTags();
+      if (this.get('publishSelectedItems')) {
+        this.updateSelectedTags();
+      }
     },
 
     /**
@@ -77,7 +79,9 @@ export default Ember.Component.extend({
           break;
         }
       }
-      this.updateSelectedTags();
+      if (this.get('publishSelectedItems')) {
+        this.updateSelectedTags();
+      }
     },
 
     saveSelectedTags: function(selectedTags) {
@@ -269,6 +273,11 @@ export default Ember.Component.extend({
    * @property {Boolean} isCompatiableMode
    */
   isCompatiableMode: false,
+
+  /**
+   * @property {Boolean} publishSelectedItems
+   */
+  publishSelectedItems: false,
 
   /**
    * @property {String} course

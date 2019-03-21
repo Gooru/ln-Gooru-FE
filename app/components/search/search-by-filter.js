@@ -110,7 +110,7 @@ export default Ember.Component.extend({
     'preference',
     function() {
       let subjectId = this.get('preference.subject');
-      return getCategoryCodeFromSubjectId(subjectId) || null;
+      return subjectId ? getCategoryCodeFromSubjectId(subjectId) : null;
     }
   ),
 
@@ -327,10 +327,12 @@ export default Ember.Component.extend({
       .getSubjects(component.get('selectedCategory'))
       .then(function(subjects) {
         let preference = component.get('preference');
-        let preferedSubjects = subjects.findBy('code', preference.get('subject'));
-        let subject = preferedSubjects.get('frameworks').findBy('frameworkId', preference.get('framework'));
-        if (!component.isDestroyed) {
-          component.set('selectedSubject', subject);
+        if (preference) {
+          let preferedSubjects = subjects.findBy('code', preference.get('subject'));
+          let subject = preferedSubjects.get('frameworks').findBy('frameworkId', preference.get('framework'));
+          if (!component.isDestroyed) {
+            component.set('selectedSubject', subject);
+          }
         }
       });
   },
