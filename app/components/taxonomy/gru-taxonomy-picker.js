@@ -292,12 +292,12 @@ export default Ember.Component.extend({
   /**
    * @property {Observer} onUncheckItem - Observe whenever data changes
    */
-  onUncheckItem: Ember.observer('unCheckedItems.[]', function() {
+  onUncheckItem: Ember.observer('unCheckedItem', function() {
     const component = this;
-    let unCheckedItems = component.get('unCheckedItems');
-    unCheckedItems.forEach((item) => {
-      component.send('uncheckItem', item);
-    });
+    let unCheckedItem = component.get('unCheckedItem');
+    if (unCheckedItem) {
+      component.send('uncheckItem', unCheckedItem);
+    }
   }),
 
   // -------------------------------------------------------------------------

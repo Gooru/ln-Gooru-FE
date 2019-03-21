@@ -243,10 +243,10 @@ export default Ember.Component.extend({
   selectedFilters: Ember.A([]),
 
   /**
-   * @property {Array} unCheckedItems
+   * @property {Object} unCheckedItems
    * Property to hold unCheckedItems of taxonomy standards
    */
-  unCheckedItems: Ember.A([]),
+  unCheckedItem: null,
 
   /**
    * @property {Observe} onSelectFilter
@@ -301,7 +301,7 @@ export default Ember.Component.extend({
     clearFilter(item) {
       const component = this;
       if (item.get('filter') === 'flt.standard') {
-        component.get('unCheckedItems').pushObject(item);
+        component.set('unCheckedItem', item);
       }
       component.get('selectedFilters').removeObject(item);
       component.send('doSearch');
