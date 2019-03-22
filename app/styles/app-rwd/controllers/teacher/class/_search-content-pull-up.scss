@@ -34,6 +34,8 @@
 					.search-content-type-filter {
 						.search-by-filter {
 							.search-panel {
+								padding: 5px;
+
 								.search-content {
 									padding: 0;
 
@@ -42,6 +44,8 @@
 
 										.left-panel-container,
 										.right-panel-container {
+											grid-template-columns: none;
+
 											.gru-taxonomy-picker {
 												.browse-selector {
 													.taxonomy {

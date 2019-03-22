@@ -108,7 +108,9 @@ export default Ember.Component.extend({
         }
       }
       this.get('selectedTags').removeObject(taxonomyTag);
-      browseItem.set('isSelected', false);
+      if (browseItem) {
+        browseItem.set('isSelected', false);
+      }
     },
 
     /**

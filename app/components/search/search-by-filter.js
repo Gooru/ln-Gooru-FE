@@ -2,6 +2,12 @@ import Ember from 'ember';
 import {
   getCategoryCodeFromSubjectId
 } from 'gooru-web/utils/taxonomy';
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
+import {
+  SCREEN_SIZES
+} from 'gooru-web/config/config';
 export default Ember.Component.extend({
 
   classNames: ['search-by-filter'],
@@ -61,6 +67,13 @@ export default Ember.Component.extend({
     component.set('selectedCourse', this.get('selectedSubject.courses'));
     component.loadTaxonomyPicker();
   }),
+
+  /**
+   * @property {Boolean} isCompatibleMode
+   * Property to handle is mobile view
+   */
+  isCompatibleMode: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
 
   /**
    * i18n key for the browse selector text
@@ -130,6 +143,9 @@ export default Ember.Component.extend({
     selectSubject(subject) {
       let component = this;
       component.set('selectedSubject', subject);
+      let selectedFilters = component.get('selectedFilters');
+      selectedFilters.removeObjects(selectedFilters.filterBy('filter', 'flt.standard')); //remove previous object
+      component.set('taxonomyPickerData.selected', Ember.A([]));
     },
 
     selectCategory(category) {
@@ -163,7 +179,7 @@ export default Ember.Component.extend({
       selectedFilters.removeObjects(selectedFilters.filterBy('filter', 'flt.standard')); //remove previous object
       selectedTags.map((standard) => {
         standard.set('filter', 'flt.standard');
-        standard.set('name', standard.get('data.id'));
+        standard.set('name', standard.get('data.code'));
         component.get('selectedFilters').pushObject(standard);
       });
     },

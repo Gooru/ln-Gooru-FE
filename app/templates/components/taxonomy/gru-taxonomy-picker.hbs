@@ -15,7 +15,7 @@
   {{/if}}
 
   <div class="browse-selector">
-    <span class="{{if isCompatiableMode 'hidden'}}">{{t browseSelectorText}}</span>
+    <span class="title {{if isCompatiableMode 'hidden'}}">{{t browseSelectorText}}</span>
     {{#if (and isCompatiableMode selectedTags.length)}}
       <span class="close-picker" {{action "saveSelectedTags" selectedTags}}>{{gru-icon name="clear"}}</span>
     {{/if}}
