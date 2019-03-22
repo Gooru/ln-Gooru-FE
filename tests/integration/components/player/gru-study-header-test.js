@@ -178,21 +178,3 @@ skip('Study player | NU Course : Completion metrics', function(assert) {
     'Wrong completion count!!'
   );
 });
-
-test('Study player | Non NU Course : Completion metrics', function(assert) {
-  this.set('courseId', 'course-1');
-  this.set('classId', 'class-1');
-  this.render(
-    hbs`{{player/gru-study-header courseId=courseId classId=classId }}`
-  );
-  var $component = this.$(); //component dom element
-  assert.equal(
-    T.text(
-      $component.find(
-        '.performance-completion-take-tour-info .completion .score'
-      )
-    ),
-    '4/5',
-    'Wrong completion count!!'
-  );
-});

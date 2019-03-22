@@ -59,10 +59,11 @@ export default Ember.Component.extend({
     /**
      * Action triggered when click brand logo
      */
-    onClickBrand() {
+    onCloseStudyClassPlayer() {
       Ember.$('body')
         .removeClass('fullscreen')
         .removeClass('fullscreen-exit');
+      this.get('router').transitionTo('student-home');
     },
 
     /**
@@ -190,22 +191,16 @@ export default Ember.Component.extend({
    * @property {Boolean}
    * Computed property  to identify class CM is started or not
    */
-  hasCMStarted: Ember.computed(
-    'class.performanceSummary',
-    'performanceSummary',
-    function() {
-      const scorePercentage =
-        this.get('class.performanceSummary.score') ||
-        this.get('performanceSummary.score');
-      return scorePercentage !== null && isNumeric(scorePercentage);
-    }
-  ),
+  hasCMStarted: Ember.computed('cmPerformanceSummary', function() {
+    const scorePercentage = this.get('cmPerformanceSummary.score');
+    return scorePercentage !== null && isNumeric(scorePercentage);
+  }),
 
   /**
    * Compute the performance summary data based on performance from IL or class.
    * @return {Object}
    */
-  performanceSummary: Ember.computed(
+  cmPerformanceSummary: Ember.computed(
     'class.performanceSummary',
     'performanceSummary',
     function() {
@@ -216,14 +211,50 @@ export default Ember.Component.extend({
   ),
 
   /**
+   * Compute the performance summary data  class CA.
+   * @return {Object}
+   */
+  caPerformanceSummary: Ember.computed(
+    'class.performanceSummaryForDCA',
+    'performanceSummaryForDCA',
+    function() {
+      return (
+        this.get('class.performanceSummaryForDCA') ||
+        this.get('performanceSummaryForDCA')
+      );
+    }
+  ),
+
+  /**
+   * Compute the competency completion status.
+   * @return {Object}
+   */
+  competencyCompletionStats: Ember.computed(
+    'class.competencyStats',
+    'competencyStats',
+    function() {
+      return this.get('class.competencyStats') || this.get('competencyStats');
+    }
+  ),
+
+  /**
    * @property {Boolean}
    * Computed property  to identify class CA is started or not
    */
-  hasCAStarted: Ember.computed('class.performanceSummaryForDCA', function() {
-    const scorePercentage = this.get(
-      'class.performanceSummaryForDCA.scoreInPercentage'
-    );
+  hasCAStarted: Ember.computed('caPerformanceSummary', function() {
+    const scorePercentage = this.get('caPerformanceSummary.scoreInPercentage');
     return scorePercentage !== null && isNumeric(scorePercentage);
+  }),
+
+  /**
+   * The class is premium or not
+   * @property {Boolean}
+   */
+  isPremiumClass: Ember.computed('class', function() {
+    let controller = this;
+    const currentClass = controller.get('class');
+    let setting = currentClass ? currentClass.get('setting') : null;
+    return setting ? setting['course.premium'] : false;
   }),
 
   // -------------------------------------------------------------------------

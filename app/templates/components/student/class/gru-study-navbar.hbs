@@ -1,31 +1,31 @@
 <div class="header-panel" {{action 'closeNotificationList'}}>
   <div class="nav-body nav-menu-{{if selectedMenuItem selectedMenuItem 'default'}} {{if isPremiumClass 'premium-class'}} {{if isILActivity  'independent-learning'}}  {{unless hasClassInfo 'no-class-info'}}">
-    <div class="app-close" {{action "onClickBrand"}}>
-      {{#link-to 'index' class="navbar-brand home-link" }}
-        <i class="gru-icon material-icons close">close</i>
-      {{/link-to}}
+    <div class="app-close" {{action "onCloseStudyClassPlayer"}}>
+      <a class="back-or-close-menu">
+        {{gru-icon name="close"}}
+      </a>
     </div>
     {{#unless isILActivity}}
-      <div class="class-activities tab grade-range-{{grade-range class.performanceSummaryForDCA.scoreInPercentage}} {{if (eq selectedMenuItem 'class-activities') 'vactive'}}">
+      <div class="class-activities tab grade-range-{{grade-range caPerformanceSummary.scoreInPercentage}} {{if (eq selectedMenuItem 'class-activities') 'vactive'}}">
         <a {{action 'selectItem' 'class-activities'}} class="tab-menu" title="{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
             <i class="dca-pin"></i>
             <span class="add-info dca-text">{{t 'teacher-landing.class.class-activities'}}</span>
-            <span class="performance-score {{if (not hasCAStarted) 'not-started'}}">{{if hasCAStarted (concat class.performanceSummaryForDCA.scoreInPercentage '%') '--' }}</span>
+            <span class="performance-score {{if (not hasCAStarted) 'not-started'}}">{{if hasCAStarted (concat caPerformanceSummary.scoreInPercentage '%') '--' }}</span>
           </a>
       </div>
     {{/unless}}
-    <div class="course-map study-player tab grade-range-{{grade-range performanceSummary.score}} {{destination}} {{if isPremiumCourse 'premium-course'}} {{if (or (eq selectedMenuItem 'course-map') (eq selectedMenuItem 'study-player')) 'vactive'}}">
+    <div class="course-map study-player tab grade-range-{{grade-range cmPerformanceSummary.score}} {{destination}} {{if isPremiumCourse 'premium-course'}} {{if (or (eq selectedMenuItem 'course-map') (eq selectedMenuItem 'study-player')) 'vactive'}}">
       {{#if (eq selectedMenuItem 'course-map')}}
         <a {{action 'selectItem' 'study-player'}} role="tab" data-toggle="tooltip" title="{{t 'student-landing.study-player'}}" class="{{unless isCourseMapped 'no-course'}} tab-menu">
             {{gru-icon name='play_arrow'}}
             <span class="add-info">{{t 'student-landing.study-player'}}</span>
-            <span class="performance-score {{if (not hasCMStarted) 'not-started'}}">{{if hasCMStarted (concat performanceSummary.score '%') '--' }}</span>
+            <span class="performance-score {{if (not hasCMStarted) 'not-started'}}">{{if hasCMStarted (concat cmPerformanceSummary.score '%') '--' }}</span>
           </a>
       {{else}}
         <a {{action 'selectItem' 'course-map'}} class="tab-menu" role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}">
             {{gru-icon name='sort'}}
             <span class="add-info">{{t 'teacher-landing.class.course-map'}}</span>
-            <span class="performance-score {{if (not hasCMStarted) 'not-started'}}">{{if hasCMStarted (concat performanceSummary.score '%') '--' }}</span>
+            <span class="performance-score {{if (not hasCMStarted) 'not-started'}}">{{if hasCMStarted (concat cmPerformanceSummary.score '%') '--' }}</span>
         </a>
       {{/if}}
     </div>
@@ -43,21 +43,22 @@
     <div class="notification-tab">
       {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' classId=classId isTeacher=false }}
     </div>
+
+    {{#if isPremiumClass}}
+      <div class="performance-summary {{if competencyCompletionStats 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
+        {{#if competencyCompletionStats}}
+          <span class="numerator">{{competencyCompletionStats.completedCompetencies}}</span>
+          <span class="denominator">{{competencyCompletionStats.totalCompetencies}}</span>
+        {{else}}
+          <span class="no-completion-score">--</span>
+        {{/if}}
+      </div>
+    {{/if}}
     {{#if hasClassInfo}}
       <div class="class-info">
         <a {{action 'selectItem' 'class-info'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.class-management-tab.class-information'}}">
           {{gru-icon name="info" style='material-icons-outlined'}}
       </a>
-      </div>
-    {{/if}}
-    {{#if isPremiumClass}}
-      <div class="performance-summary {{if class.competencyStats 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
-        {{#if class.competencyStats}}
-          <span class="numerator">{{class.competencyStats.completedCompetencies}}</span>
-          <span class="denominator">{{class.competencyStats.totalCompetencies}}</span>
-        {{else}}
-          <span class="no-completion-score">--</span>
-        {{/if}}
       </div>
     {{/if}}
   </div>

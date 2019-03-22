@@ -39,13 +39,49 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
       grid-template-columns: 59px 145px 145px 145px 1fr 59px 59px;
 
+      &.no-class-info {
+        grid-template-columns: 59px 145px 145px 145px 1fr 59px;
+      }
+
+      &.premium-class {
+        grid-template-columns: 59px 145px 145px 145px 1fr 59px 59px 59px;
+
+        &.no-class-info {
+          grid-template-columns: 59px 145px 145px 145px 1fr 59px 59px;
+        }
+      }
+
       &.nav-menu-class-activities {
         grid-template-columns: 59px 180px 145px 145px 1fr 59px 59px;
+
+        &.no-class-info {
+          grid-template-columns: 59px 180px 145px 145px 1fr 59px;
+        }
+
+        &.premium-class {
+          grid-template-columns: 59px 180px 145px 145px 1fr 59px 59px 59px;
+
+          &.no-class-info {
+            grid-template-columns: 59px 180px 145px 145px 1fr 59px 59px;
+          }
+        }
       }
 
       &.nav-menu-course-map,
       &.nav-menu-study-player {
         grid-template-columns: 59px 145px 180px 145px 1fr 59px 59px;
+
+        &.no-class-info {
+          grid-template-columns: 59px 145px 180px 145px 1fr 59px;
+        }
+
+        &.premium-class {
+          grid-template-columns: 59px 145px 180px 145px 1fr 59px 59px 59px;
+
+          &.no-class-info {
+            grid-template-columns: 59px 145px 180px 145px 1fr 59px 59px;
+          }
+        }
       }
 
       &.independent-learning {
@@ -68,10 +104,18 @@
       @media only screen and (max-width: $screen-xs) {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 
+        &.no-class-info {
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        }
+
         &.nav-menu-class-activities,
         &.nav-menu-course-map,
         &.nav-menu-study-player {
           grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+          &.no-class-info {
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+          }
         }
 
         &.independent-learning {
@@ -94,17 +138,21 @@
         &.premium-class {
           grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 
+          &.no-class-info {
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+          }
+
+          &.nav-menu-class-activities,
+          &.nav-menu-course-map,
+          &.nav-menu-study-player {
+            &.no-class-info {
+              grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+            }
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+          }
+
           .studyplayer-title {
             grid-column: 2 / 6;
-          }
-        }
-
-        .app-close {
-          order: 1;
-
-          a i.close {
-            top: -6px;
-            left: 17px;
           }
         }
 
@@ -225,23 +273,43 @@
         &.premium-class {
           grid-template-columns: 59px 59px 59px 59px 1fr 59px 75px 59px;
 
+          &.no-class-info {
+            grid-template-columns: 59px 59px 59px 59px 1fr 59px 75px;
+          }
+
           &.nav-menu-class-activities {
             grid-template-columns: 59px 89px 59px 59px 1fr 59px 89px 59px;
+
+            &.no-class-info {
+              grid-template-columns: 59px 89px 59px 59px 1fr 59px 89px;
+            }
           }
 
           &.nav-menu-course-map,
           &.nav-menu-study-player {
             grid-template-columns: 59px 59px 89px 59px 1fr 59px 89px 59px;
+
+            &.no-class-info {
+              grid-template-columns: 59px 59px 89px 59px 1fr 59px 89px;
+            }
           }
         }
 
         &.nav-menu-class-activities {
           grid-template-columns: 59px 89px 59px 59px 1fr 59px 59px;
+
+          &.no-class-info {
+            grid-template-columns: 59px 89px 59px 59px 1fr 59px;
+          }
         }
 
         &.nav-menu-course-map,
         &.nav-menu-study-player {
           grid-template-columns: 59px 59px 89px 59px 1fr 59px 59px;
+
+          &.no-class-info {
+            grid-template-columns: 59px 59px 89px 59px 1fr 59px;
+          }
         }
 
         .class-activities,
@@ -306,32 +374,23 @@
         }
       }
 
-      .app-brand {
-        padding: 0 8px;
-        background-color: $white;
+      .app-close {
         height: 51px;
+        background-color: $white;
 
         a {
-          margin: auto;
-          display: block;
-          width: 56px;
-          height: 30px;
-          background-position: 0 15px;
-          top: 18px;
-          opacity: 1;
-        }
-      }
+          @extend %app-container;
+          grid-template-columns: auto;
 
-      .app-close {
-        @extend .app-brand;
+          i.close {
+            margin: 0 auto;
+            opacity: 1;
+            color: $dark-600;
 
-        a > i {
-          @extend a;
-          color: $gray-dark;
-          width: 36px;
-          display: inline-block;
-          position: relative;
-          top: -7px;
+            &:hover {
+              color: $gray-base;
+            }
+          }
         }
       }
 

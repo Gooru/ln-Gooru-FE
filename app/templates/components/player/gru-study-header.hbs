@@ -3,14 +3,20 @@
   navTitle=courseTitle
   onItemSelected="selectMenuItem"
   selectedMenuItem=menuItem
-  isPremiumClass=isPremiumClass
   sourceType=sourceType
   performanceSummary=performanceSummary
-  isStudyPlayer=isStudyPlayer}}
+  isStudyPlayer=isStudyPlayer
+  competencyStats=competencyStats
+  class=class
+}}
 <div class="bar-charts" data-content="{{performancePercentage}}% Completed">
   <div class="completion-chart">
     <div class="start-point">{{gru-icon name="stars"}}</div>
-    {{charts/gru-x-bar-chart data=barChartData mileStone=mileStone mileStoneHandler=(action 'mileStoneHandler')  }}
+    {{charts/gru-x-bar-chart
+      data=barChartData
+      mileStone=mileStone
+      mileStoneHandler=(action 'mileStoneHandler')
+    }}
     <div class="destination-point">{{gru-icon name="place"}}</div>
   </div>
 </div>

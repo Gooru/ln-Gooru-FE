@@ -123,17 +123,6 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    */
   isPremiumCourse: false,
 
-  /**
-   * The class is premium or not
-   * @property {Boolean}
-   */
-  isPremiumClass: Ember.computed('class', function() {
-    let controller = this;
-    const currentClass = controller.get('class');
-    let setting = currentClass.get('setting');
-    return setting ? setting['course.premium'] : false;
-  }),
-
   // -------------------------------------------------------------------------
   // Methods
 

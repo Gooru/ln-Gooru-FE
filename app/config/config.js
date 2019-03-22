@@ -80,11 +80,6 @@ export const CONTENT_TYPES = {
 };
 
 export const ASSESSMENT_SUB_TYPES = {
-  PRE_TEST: 'pre-test',
-  POST_TEST: 'post-test',
-  BACKFILL: 'backfill',
-  BENCHMARK: 'benchmark',
-  RESOURCE: 'resource',
   SIGNATURE_ASSESSMENT: 'signature_assessment',
   SIGNATURE_COLLECTION: 'signature_collection'
 };

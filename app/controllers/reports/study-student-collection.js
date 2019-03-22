@@ -113,33 +113,6 @@ export default StudentCollection.extend({
           controller.toggleScreenMode();
         });
     },
-    /**
-     * If the user want to continue playing the post-test suggestion
-     */
-    playPostTestSuggestion: function() {
-      this.playSuggestedContent(this.get('mapLocation.postTestSuggestion'));
-    },
-
-    /**
-     * If the user want to continue playing the backfill suggestion
-     */
-    playBackFillSuggestion: function() {
-      this.playSuggestedContent(this.get('mapLocation.backFillSuggestion'));
-    },
-
-    /**
-     * If the user want to continue playing the resource suggestion
-     */
-    playResourceSuggestion: function() {
-      this.playSuggestedContent(this.get('mapLocation.resourceSuggestion'));
-    },
-
-    /**
-     * If the user want to continue playing the benchmark suggestion
-     */
-    playBenchmarkSuggestion: function() {
-      this.playSuggestedContent(this.get('mapLocation.benchmarkSuggestion'));
-    },
 
     playSignatureAssessmentSuggestions: function() {
       this.playSuggestedContent(
@@ -217,30 +190,6 @@ export default StudentCollection.extend({
   collection: null,
 
   /**
-   *Back fill backfill suggestion
-   * @property {String} typeSuggestion
-   */
-  backFillType: ASSESSMENT_SUB_TYPES.BACKFILL,
-
-  /**
-   *Post test suggestion
-   * @property {String} typeSuggestion
-   */
-  postTestType: ASSESSMENT_SUB_TYPES.POST_TEST,
-
-  /**
-   *Post Test resource suggestion
-   * @property {String} typeSuggestion
-   */
-  resourceType: ASSESSMENT_SUB_TYPES.RESOURCE,
-
-  /**
-   *Benchmark suggestion
-   * @property {String} benchmarkType
-   */
-  benchmarkType: ASSESSMENT_SUB_TYPES.BENCHMARK,
-
-  /**
    *signatureAssessmentType suggestion
    * @property {String} signatureAssessmentType
    */
@@ -269,34 +218,6 @@ export default StudentCollection.extend({
    * @property {integer}
    */
   minScore: null,
-
-  /**
-   * @property {boolean}
-   */
-  hasPreTestSuggestions: Ember.computed.alias(
-    'mapLocation.hasPreTestSuggestions'
-  ),
-
-  /**
-   * @property {boolean}
-   */
-  hasPostTestSuggestions: Ember.computed.alias(
-    'mapLocation.hasPostTestSuggestions'
-  ),
-
-  /**
-   * @property {boolean}
-   */
-  hasBackFillSuggestions: Ember.computed.alias(
-    'mapLocation.hasBackFillSuggestions'
-  ),
-
-  /**
-   * @property {boolean}
-   */
-  hasResourceSuggestions: Ember.computed.alias(
-    'mapLocation.hasResourceSuggestions'
-  ),
 
   /**
    * @property {boolean}
@@ -330,37 +251,17 @@ export default StudentCollection.extend({
    * @property {boolean}
    */
   hasAnySuggestion: Ember.computed(
-    'hasBackFillSuggestions',
-    'hasPostTestSuggestions',
-    'hasResourceSuggestions',
-    'hasBenchmarkSuggestions',
-    'hasSignatureCollectionSuggestions',
+    'hasSignatureAssessmentSuggestions',
     'hasSignatureCollectionSuggestions',
     'showSuggestion',
     function() {
       return (
-        (this.get('hasBackFillSuggestions') ||
-          this.get('hasPostTestSuggestions') ||
-          this.get('hasResourceSuggestions') ||
-          this.get('hasBenchmarkSuggestions') ||
-          this.get('hasSignatureCollectionSuggestions') ||
+        (this.get('hasSignatureCollectionSuggestions') ||
           this.get('hasSignatureAssessmentSuggestions')) &&
         this.get('showSuggestion')
       );
     }
   ),
-
-  /**
-   * @property {boolean}
-   */
-  hasBenchmarkSuggestions: Ember.computed.alias(
-    'mapLocation.hasBenchmarkSuggestions'
-  ),
-
-  /**
-   * @property {String} It decide to show the back to course map or not.
-   */
-  showBackToCourseMap: true,
 
   /**
    * confettiTruth  for all statisfactions
@@ -369,95 +270,10 @@ export default StudentCollection.extend({
   enableConfetti: false,
 
   /**
-   * @property {String} It decide to show the back to collection or not.
-   */
-  showBackToCollection: false,
-
-  /**
-   * Course version Name
-   * @property {String}
-   */
-  courseVersion: Ember.computed.alias('course.version'),
-
-  /**
    * Report Source Type
    * @property {String}
    */
   source: null,
-
-  /**
-   * Steps for Take a Tour functionality
-   * @return {Array}
-   */
-  steps: Ember.computed(function() {
-    let controller = this;
-    let steps = Ember.A([
-      {
-        title: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepOne.title'),
-        description: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepOne.description')
-      },
-      {
-        elementSelector: '.header-panel .course-map',
-        title: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepTwo.title'),
-        description: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepTwo.description')
-      },
-      {
-        elementSelector: '.header-panel .content-title',
-        title: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepThree.title'),
-        description: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepThree.description')
-      },
-      {
-        elementSelector: '.header-panel .suggest-player',
-        title: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepFour.title'),
-        description: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepFour.description')
-      },
-      {
-        elementSelector:
-          '.header-panel .performance-completion-take-tour-info .completion',
-        title: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepFive.title'),
-        description: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepFive.description')
-      },
-      {
-        elementSelector:
-          '.header-panel  .performance-completion-take-tour-info .performance',
-        title: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepSix.title'),
-        description: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepSix.description')
-      },
-      {
-        title: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepEight.title'),
-        description: controller
-          .get('i18n')
-          .t('gru-take-tour.study-player.stepEight.description')
-      }
-    ]);
-    return steps;
-  }),
 
   /**
    * @property {Json}
@@ -552,10 +368,6 @@ export default StudentCollection.extend({
       this.toPlayer();
     } else {
       this.set('mapLocation.context.status', 'done');
-      this.set('hasBackFillSuggestions', false);
-      this.set('hasPostTestSuggestions', false);
-      this.set('hasResourceSuggestions', false);
-      this.set('hasBenchmarkSuggestions', false);
       this.set('hasSignatureCollectionSuggestions', false);
       this.set('hasSignatureCollectionSuggestions', false);
     }

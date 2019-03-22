@@ -27,12 +27,6 @@ test('Layout as a student', function(assert) {
     );
     assert.ok($container.length, 'Missing course map container');
 
-    const $actions = find('.actions', $container);
-    assert.equal($actions.length, 1, 'Missing actions panel');
-
-    const $locateButton = $actions.find('.locate');
-    assert.equal($locateButton.length, 1, 'Missing Locate Me Button');
-
     const $expandedUnits = find('.gru-accordion-unit.expanded', $container);
     assert.equal(
       $expandedUnits.length,

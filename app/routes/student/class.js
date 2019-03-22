@@ -37,6 +37,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   unitService: Ember.inject.service('api-sdk/unit'),
 
   analyticsService: Ember.inject.service('api-sdk/analytics'),
+
   /**
    * @property {NavigateMapService}
    */
@@ -279,7 +280,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         const competencyCompletionStats = isPremiumCourse
           ? route
             .get('competencyService')
-            .getCompetencyCompletionStats([classId])
+            .getCompetencyCompletionStats([classId], myId)
           : Ember.RSVP.resolve(Ember.A());
 
         //Pass courseId as query param for student current location
