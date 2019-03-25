@@ -7,9 +7,11 @@
     </div>
     {{#unless isILActivity}}
       <div class="class-activities tab grade-range-{{grade-range caPerformanceSummary.scoreInPercentage}} {{if (eq selectedMenuItem 'class-activities') 'vactive'}}">
-        <a {{action 'selectItem' 'class-activities'}} class="tab-menu" title="{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
+        <a  class="tab-menu" title="{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
+          <span class="class-activity-tab" {{action 'selectItem' 'class-activities'}}>
             <i class="dca-pin"></i>
             <span class="add-info dca-text">{{t 'teacher-landing.class.class-activities'}}</span>
+          </span>
             <span class="performance-score {{if (not hasCAStarted) 'not-started'}}">{{if hasCAStarted (concat caPerformanceSummary.scoreInPercentage '%') '--' }}</span>
           </a>
       </div>
@@ -17,7 +19,7 @@
     <div class="course-map study-player tab grade-range-{{grade-range cmPerformanceSummary.score}} {{destination}} {{if isPremiumCourse 'premium-course'}} {{if (or (eq selectedMenuItem 'course-map') (eq selectedMenuItem 'study-player')) 'vactive'}}">
       {{#if (eq selectedMenuItem 'course-map')}}
         <a role="tab" data-toggle="tooltip" title="{{t 'student-landing.study-player'}}" class="{{unless isCourseMapped 'no-course'}} tab-menu">
-            <span {{action 'selectItem' 'study-player'}}>
+            <span class="course-map-tab" {{action 'selectItem' 'study-player'}}>
               {{gru-icon name='play_arrow'}}
               <span class="add-info">{{t 'student-landing.study-player'}}</span>
             </span>
@@ -25,7 +27,7 @@
           </a>
       {{else}}
         <a class="tab-menu" role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}">
-          <span {{action 'selectItem' 'course-map'}}>
+          <span class="course-map-tab" {{action 'selectItem' 'course-map'}}>
             {{gru-icon name='sort'}}
             <span class="add-info">{{t 'teacher-landing.class.course-map'}}</span>
           </span>
@@ -49,7 +51,7 @@
     </div>
 
     {{#if isPremiumClass}}
-      <div class="performance-summary {{if competencyCompletionStats 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
+      <div class="performance-summary {{if competencyCompletionStats 'has-competency-stats'}}" {{action 'selectItem' 'profile-prof'}}>
         {{#if competencyCompletionStats}}
           <span class="numerator">{{competencyCompletionStats.completedCompetencies}}</span>
           <span class="denominator">{{competencyCompletionStats.totalCompetencies}}</span>
