@@ -1,10 +1,5 @@
 <div class="student-independent-container">
   <div class="header clearfix">
-    <div class="go-back-container" style="display:none;">
-      {{#link-to 'student-independent-learning.learning-base' class="back-to" }}
-        {{gru-icon name='arrow_back'}} {{t 'student-landing.class.back-to-independent'}}
-      {{/link-to}}
-    </div>
     <div class="panel panel-default panel-primary course-information classroom-information hide-classroom-information">
       <div class="panel-body {{unless course.tags.length 'no-taxomony'}}">
         <div class="course-image">
@@ -48,7 +43,16 @@
     </div>
   </div>
 
-  {{student.class.gru-study-navbar  performanceSummary=performance navTitle=course.title onItemSelected="selectMenuItem" selectedMenuItem=menuItem  studyCurrent=studyPlayer hasClassInfo = 'true'  ILActivity ='true' openCourseReport='openCourseReport' }}
+  {{student.class.gru-study-navbar
+    performanceSummary=performance
+    navTitle=course.title
+    onItemSelected="selectMenuItem"
+    selectedMenuItem=menuItem
+    studyCurrent=studyPlayer
+    hasClassInfo=true
+    ILActivity=true
+    openCourseReport='openCourseReport'
+  }}
 
   <div class="content">
     {{outlet}}

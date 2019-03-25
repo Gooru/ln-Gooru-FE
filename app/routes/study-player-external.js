@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import PrivateRouteMixin from 'gooru-web/mixins/private-route-mixin';
+import { CLASS_SKYLINE_INITIAL_DESTINATION } from 'gooru-web/config/config';
 
 export default Ember.Route.extend(PrivateRouteMixin, {
   // -------------------------------------------------------------------------
@@ -40,8 +41,21 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   lessonService: Ember.inject.service('api-sdk/lesson'),
 
+  /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
   // -------------------------------------------------------------------------
   // Methods
+
+  beforeModel(transition) {
+    const queryParams = transition.queryParams;
+    if (queryParams && queryParams.classId) {
+      return this.doCheckClassDestination(queryParams.classId);
+    }
+  },
+
   model: function(params) {
     const route = this;
     return route
@@ -130,11 +144,62 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       lessonId: mapLocation.get('context.lessonId'),
       collectionId: model.collectionId,
       type: model.type,
-      content: mapLocation.content
+      content: mapLocation.content,
+      class: this.get('class')
     });
   },
 
   deactivate: function() {
     this.get('controller').resetValues();
+  },
+
+  doCheckClassDestination(classId) {
+    const route = this;
+    const classPromise = classId
+      ? route.get('classService').readClassInfo(classId)
+      : Ember.RSVP.resolve({});
+    return classPromise.then(function(classData) {
+      route.set('class', classData);
+      if (route.findClassIsPermium(classData)) {
+        return route
+          .get('skylineInitialService')
+          .fetchState(classId)
+          .then(skylineInitialState => {
+            let destination = skylineInitialState.get('destination');
+            if (
+              destination ===
+              CLASS_SKYLINE_INITIAL_DESTINATION.classSetupInComplete
+            ) {
+              return route.transitionTo(
+                'student.class.setup-in-complete',
+                classId
+              );
+            } else if (
+              destination ===
+                CLASS_SKYLINE_INITIAL_DESTINATION.showDirections ||
+              destination === CLASS_SKYLINE_INITIAL_DESTINATION.ILPInProgress
+            ) {
+              return route.transitionTo('student.class.proficiency', classId);
+            } else if (
+              destination === CLASS_SKYLINE_INITIAL_DESTINATION.diagnosticPlay
+            ) {
+              return route.transitionTo(
+                'student.class.diagnosis-of-knowledge',
+                classId
+              );
+            }
+          });
+      }
+    });
+  },
+
+  /**
+   * Method used to identify course is permium or not
+   * @return {Boolean}
+   */
+  findClassIsPermium(aClass) {
+    let setting = aClass.get('setting');
+    let isPremiumCourse = setting ? setting['course.premium'] : false;
+    return isPremiumCourse;
   }
 });

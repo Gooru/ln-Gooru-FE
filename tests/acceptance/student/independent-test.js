@@ -28,11 +28,6 @@ test('Layout', function(assert) {
 
     const $classHeader = $courseContainer.find('.header');
     T.exists(assert, $classHeader, 'Missing class header');
-    T.exists(
-      assert,
-      $classHeader.find('.go-back-container .back-to'),
-      'Missing back link'
-    );
 
     T.exists(
       assert,

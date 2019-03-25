@@ -1,20 +1,27 @@
 import Ember from 'ember';
-import { GRU_FEATURE_FLAG } from 'gooru-web/config/config';
+import { isNumeric } from 'gooru-web/utils/math';
 
 export default Ember.Component.extend({
+  // -------------------------------------------------------------------------
+  // Attributes
+
   classNames: ['gru-study-navbar'],
+
+  // -------------------------------------------------------------------------
+  // Dependencies
 
   session: Ember.inject.service('session'),
 
-  isFeatureEnabled: Ember.computed(function() {
-    let feature = 'notifications';
-    return GRU_FEATURE_FLAG[feature];
-  }),
+  // -------------------------------------------------------------------------
+  // Properties
 
   /**
    * Controls display of notification list, typical use from header is to hide it as required.
    */
   displayNotificationList: null,
+
+  // -------------------------------------------------------------------------
+  // Actions
 
   actions: {
     /**
@@ -27,7 +34,7 @@ export default Ember.Component.extend({
       if (component.get('onItemSelected')) {
         component.selectItem(item);
         if (item === 'class-info') {
-          $('.classroom-information').toggle(
+          Ember.$('.classroom-information').toggle(
             {
               direction: 'left'
             },
@@ -52,10 +59,11 @@ export default Ember.Component.extend({
     /**
      * Action triggered when click brand logo
      */
-    onClickBrand() {
+    onCloseStudyClassPlayer() {
       Ember.$('body')
         .removeClass('fullscreen')
         .removeClass('fullscreen-exit');
+      this.get('router').transitionTo('student-home');
     },
 
     /**
@@ -118,6 +126,7 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Properties
+
   /**
    * @property {String|Function} onItemSelected - event handler for when an menu item is selected
    */
@@ -138,23 +147,30 @@ export default Ember.Component.extend({
    */
   toggleState: false,
 
-  sourceType: null, // 'IlActivity/Other'
+  sourceType: null,
 
+  /**
+   * Maintains  the state of class info icon display or not.
+   * @type {Boolean}
+   */
   hasClassInfo: null,
 
+  /**
+   * It has the value of title to be display.
+   * @type {String}
+   */
   navTitle: null,
 
+  /**
+   * Maintains  the state of IL activity  or not.
+   * @type {Boolean}
+   */
   ILActivity: null,
 
   /**
-   * @property {Boolean}
-   * Computed property  to identify class is started or not
+   * Computed property to identify it's IL or not.
+   * @return {Boolean}
    */
-  hasStarted: Ember.computed('performanceSummary', function() {
-    const scorePercentage = this.get('performanceSummary.score');
-    return scorePercentage !== null && scorePercentage >= 0;
-  }),
-
   isILActivity: Ember.computed('sourceType', function() {
     let sourceType = this.get('sourceType');
     let ILActivity = this.get('ILActivity');
@@ -171,8 +187,79 @@ export default Ember.Component.extend({
     return isILActivity || (classData && classData.get('courseId'));
   }),
 
+  /**
+   * @property {Boolean}
+   * Computed property  to identify class CM is started or not
+   */
+  hasCMStarted: Ember.computed('cmPerformanceSummary', function() {
+    const scorePercentage = this.get('cmPerformanceSummary.score');
+    return scorePercentage !== null && isNumeric(scorePercentage);
+  }),
+
+  /**
+   * Compute the performance summary data based on performance from IL or class.
+   * @return {Object}
+   */
+  cmPerformanceSummary: Ember.computed(
+    'class.performanceSummary',
+    'performanceSummary',
+    function() {
+      return (
+        this.get('class.performanceSummary') || this.get('performanceSummary')
+      );
+    }
+  ),
+
+  /**
+   * Compute the performance summary data  class CA.
+   * @return {Object}
+   */
+  caPerformanceSummary: Ember.computed(
+    'class.performanceSummaryForDCA',
+    'performanceSummaryForDCA',
+    function() {
+      return (
+        this.get('class.performanceSummaryForDCA') ||
+        this.get('performanceSummaryForDCA')
+      );
+    }
+  ),
+
+  /**
+   * Compute the competency completion status.
+   * @return {Object}
+   */
+  competencyCompletionStats: Ember.computed(
+    'class.competencyStats',
+    'competencyStats',
+    function() {
+      return this.get('class.competencyStats') || this.get('competencyStats');
+    }
+  ),
+
+  /**
+   * @property {Boolean}
+   * Computed property  to identify class CA is started or not
+   */
+  hasCAStarted: Ember.computed('caPerformanceSummary', function() {
+    const scorePercentage = this.get('caPerformanceSummary.scoreInPercentage');
+    return scorePercentage !== null && isNumeric(scorePercentage);
+  }),
+
+  /**
+   * The class is premium or not
+   * @property {Boolean}
+   */
+  isPremiumClass: Ember.computed('class', function() {
+    let controller = this;
+    const currentClass = controller.get('class');
+    let setting = currentClass ? currentClass.get('setting') : null;
+    return setting ? setting['course.premium'] : false;
+  }),
+
   // -------------------------------------------------------------------------
   // Observers
+
   /**
    * Refreshes the left navigation with the selected menu item
    */
@@ -182,8 +269,8 @@ export default Ember.Component.extend({
   }.observes('selectedMenuItem'),
 
   // -------------------------------------------------------------------------
-
   // Methods
+
   /**
    * Triggered when a menu item is selected. Set the class icon for the item selected showing in the mobiles dropdown menu.
    * @param {string} item
@@ -200,7 +287,7 @@ export default Ember.Component.extend({
         this.$(itemElement).addClass('vactive');
       }
     }
-    if (selection === 'class-activities' && !this.get('hasStarted')) {
+    if (selection === 'class-activities' && !this.get('hasCMStarted')) {
       this.$('.course-map').addClass('enable');
     } else {
       this.$('.course-map').removeClass('enable');

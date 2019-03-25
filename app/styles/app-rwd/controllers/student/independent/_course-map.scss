@@ -65,7 +65,8 @@
                     margin: 0;
                     height: inherit;
                     line-height: 60px;
-                    .assessment-count, .collection-count {
+                    .assessment-count,
+                    .collection-count {
                       margin: 0;
                       margin-right: 5px;
                       i {
@@ -98,7 +99,8 @@
               }
               .panel-body {
                 .collections {
-                  .collection, .assessment {
+                  .collection,
+                  .assessment {
                     height: 52px;
                     .panel-heading {
                       height: 50px;
@@ -140,10 +142,11 @@
                               margin-right: 5px;
                             }
                           }
-                          .resource-count-text, .question-count-text {
-                              height: 30px;
-                              margin-top: 5px;
-                              display: inline-block;
+                          .resource-count-text,
+                          .question-count-text {
+                            height: 30px;
+                            margin-top: 5px;
+                            display: inline-block;
                           }
                         }
                         .play-btn {
@@ -178,7 +181,6 @@
                     }
                   }
                 }
-
               }
               &.expanded .panel-collapse.collapse.in {
                 margin: 0;
@@ -203,7 +205,8 @@
                   .panel-collapse {
                     .panel-body {
                       .collections {
-                        .collection, .assessment {
+                        .collection,
+                        .assessment {
                           .panel-heading {
                             height: 50px;
                             .panel-title {
@@ -231,6 +234,14 @@
           }
         }
       }
+    }
+  }
+}
+
+body.student_independent_course-map {
+  @media only screen and (max-width: $screen-xs) {
+    .app-container {
+      padding-top: 152px;
     }
   }
 }

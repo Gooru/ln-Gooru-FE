@@ -1,9 +1,5 @@
 import Ember from 'ember';
-import {
-  ANONYMOUS_COLOR,
-  STUDY_PLAYER_BAR_COLOR,
-  GRU_FEATURE_FLAG
-} from 'gooru-web/config/config';
+import { ANONYMOUS_COLOR } from 'gooru-web/config/config';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 /**
@@ -35,14 +31,16 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   learnerService: Ember.inject.service('api-sdk/learner'),
 
-  menuItem: null,
+  /**
+   * @requires service:api-sdk/competency
+   */
+  competencyService: Ember.inject.service('api-sdk/competency'),
 
-  sourceType: null,
+  /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
 
-  isFeatureEnabled: Ember.computed(function() {
-    let feature = 'chronoView';
-    return GRU_FEATURE_FLAG[feature];
-  }),
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -244,10 +242,16 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
+
+  menuItem: null,
+
+  sourceType: null,
+
   /**
-   * @property {Resource} actualResource
+   * @property {String} color - Hex color value for the bar in the bar chart
    */
-  actualResource: null,
+  color: ANONYMOUS_COLOR,
+
   /**
    * @property {String} collectionUrl
    */
@@ -269,59 +273,23 @@ export default Ember.Component.extend(ConfigurationMixin, {
   collection: null,
 
   /**
-   * @property {Number} resourceSequence - The resource sequence in the collection / assessment
-   */
-  resourceSequence: null,
-
-  /**
-   * @property {Number} totalResources - The collection / assessment total resources
-   */
-  totalResources: null,
-
-  /**
-   * @property {String} color - Hex color value for the bar in the bar chart
-   */
-  color: ANONYMOUS_COLOR,
-
-  /**
-   * @property {String} color - Hex color value for the default bgd color of the bar chart
-   */
-  defaultBarColor: STUDY_PLAYER_BAR_COLOR,
-
-  /**
-   * Indicates if PreTest is showing
-   * @property {Boolean} isPreTest
-   */
-  isPreTest: false,
-
-  /**
-   * Indicates if an external assessment is showing
-   * @property {Boolean} isExternalAssessment
-   */
-  isExternalAssessment: false,
-
-  /**
    * @property {Number} barChartData
    */
-  barChartData: Ember.computed(
-    'performanceSummary',
-    'courseCompetencyCompletion',
-    function() {
-      const completed = this.get('performanceSummary.totalCompleted');
-      const total = this.get('performanceSummary.total');
-      const percentage = completed ? (completed / total) * 100 : 0;
-      var barchartdata = [
-        {
-          color: this.get('color'),
-          percentage
-        }
-      ];
-      this.updateParent({
-        barchartdata: barchartdata
-      });
-      return barchartdata;
-    }
-  ),
+  barChartData: Ember.computed('performanceSummary', function() {
+    const completed = this.get('performanceSummary.totalCompleted');
+    const total = this.get('performanceSummary.total');
+    const percentage = completed ? (completed / total) * 100 : 0;
+    var barchartdata = [
+      {
+        color: this.get('color'),
+        percentage
+      }
+    ];
+    this.updateParent({
+      barchartdata: barchartdata
+    });
+    return barchartdata;
+  }),
 
   performancePercentage: Ember.computed('barChartData', function() {
     let data = this.get('barChartData').objectAt(0);
@@ -329,23 +297,28 @@ export default Ember.Component.extend(ConfigurationMixin, {
   }),
 
   /**
-   * Course version name
-   * @type {String}
-   */
-  courseVersion: null,
-
-  /**
    * @property {Boolean} isStudyPlayer
    * Property to find out whether the study player is loaded or not
    */
   isStudyPlayer: false,
+
+  /**
+   * The class is premium or not
+   * @property {Boolean}
+   */
+  isPremiumClass: Ember.computed('class', function() {
+    let component = this;
+    const currentClass = component.get('class');
+    let setting = currentClass ? currentClass.get('setting') : null;
+    return setting ? setting['course.premium'] : false;
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
   /**
    * Load Header Content
    */
-
   loadContent: function() {
     const component = this;
     const myId = component.get('session.userId');
@@ -362,19 +335,52 @@ export default Ember.Component.extend(ConfigurationMixin, {
           courseId
         }
       ]);
+      let classData = component.get('class');
+      const classPromise = classData
+        ? classData
+        : component.get('classService').readClassInfo(classId);
+      let caClassPerfSummaryPromise = component
+        .get('performanceService')
+        .getCAPerformanceData([classId], myId);
       Ember.RSVP.hash({
         classPerformanceSummaryItems: component
           .get('performanceService')
-          .findClassPerformanceSummaryByStudentAndClassIds(myId, classCourseId)
-      }).then(({ classPerformanceSummaryItems }) => {
-        component.set(
-          'performanceSummary',
-          classPerformanceSummaryItems.findBy('classId', classId)
-        );
-        component.updateParent({
-          performanceSummary: component.get('performanceSummary')
-        });
-      });
+          .findClassPerformanceSummaryByStudentAndClassIds(myId, classCourseId),
+        performanceSummaryForDCA: caClassPerfSummaryPromise,
+        classData: classPromise
+      }).then(
+        ({
+          classPerformanceSummaryItems,
+          performanceSummaryForDCA,
+          classData
+        }) => {
+          component.set('class', classData);
+          component.set(
+            'performanceSummary',
+            classPerformanceSummaryItems.findBy('classId', classId)
+          );
+          let isPremiumClass = component.get('isPremiumClass');
+          const competencyCompletionStats = isPremiumClass
+            ? component
+              .get('competencyService')
+              .getCompetencyCompletionStats([classId], myId)
+            : Ember.RSVP.resolve(Ember.A());
+          competencyCompletionStats.then(competencyStats => {
+            component.set(
+              'competencyStats',
+              competencyStats.findBy('classId', classId)
+            );
+          });
+
+          const performanceSummaryForCA = performanceSummaryForDCA
+            ? performanceSummaryForDCA.objectAt(0)
+            : null;
+          component.set('performanceSummaryForDCA', performanceSummaryForCA);
+          component.updateParent({
+            performanceSummary: component.get('performanceSummary')
+          });
+        }
+      );
     } else {
       Ember.RSVP.hash({
         coursePerformanceSummaryItems: component

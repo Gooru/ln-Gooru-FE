@@ -87,16 +87,6 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
       });
     },
 
-    /**
-     * When a pre-test needs to be loaded
-     */
-    loadPreTest: function() {
-      const navigateMapService = this.get('navigateMapService');
-      navigateMapService
-        .getStoredNext()
-        .then(mapLocation => navigateMapService.next(mapLocation.context))
-        .then(() => this.refresh());
-    },
     updateModelM(option) {
       var mdl = this.modelFor(this.routeName);
       Object.assign(mdl, option);
@@ -316,7 +306,8 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
       suggestedResources: model.suggestedResources,
       collectionSource: model.collectionSource,
       collectionSubType: model.collectionSubType,
-      isStudyPlayer: true
+      isStudyPlayer: true,
+      class: this.get('class')
     });
   },
 
@@ -357,7 +348,9 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
 
   doCheckClassDestination(classId) {
     const route = this;
-    const classPromise = route.get('classService').readClassInfo(classId);
+    const classPromise = classId
+      ? route.get('classService').readClassInfo(classId)
+      : Ember.RSVP.resolve({});
     return classPromise.then(function(classData) {
       if (route.findClassIsPermium(classData)) {
         return route
