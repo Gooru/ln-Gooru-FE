@@ -149,12 +149,14 @@ export default Ember.Component.extend({
       course: Ember.RSVP.resolve(courseService.fetchById(classData.get('courseId')))
     })
       .then(({classMembers, course}) => {
-        classData.set('owner', classMembers.get('owner'));
-        classData.set('collaborators', classMembers.get('collaborators'));
-        classData.set('memberGradeBounds', classMembers.get('memberGradeBounds'));
-        classData.set('members', classMembers.get('members'));
-        classData.set('course', course);
-        return classData;
+        if (!component.isDestroyed) {
+          classData.set('owner', classMembers.get('owner'));
+          classData.set('collaborators', classMembers.get('collaborators'));
+          classData.set('memberGradeBounds', classMembers.get('memberGradeBounds'));
+          classData.set('members', classMembers.get('members'));
+          classData.set('course', course);
+          return classData;
+        }
       });
   }
 });
