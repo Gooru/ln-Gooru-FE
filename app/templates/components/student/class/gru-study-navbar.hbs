@@ -2,7 +2,7 @@
   <div class="nav-body nav-menu-{{if selectedMenuItem selectedMenuItem 'default'}} {{if isPremiumClass 'premium-class'}} {{if isILActivity  'independent-learning'}}  {{unless hasClassInfo 'no-class-info'}}">
     <div class="app-close" {{action "onCloseStudyClassPlayer"}}>
       <a class="back-or-close-menu">
-        {{gru-icon name="close"}}
+        {{gru-icon name=(if isStudyPlayer 'keyboard_arrow_left' 'close')}}
       </a>
     </div>
     {{#unless isILActivity}}

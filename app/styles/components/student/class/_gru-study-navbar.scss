@@ -382,7 +382,8 @@
           @extend %app-container;
           grid-template-columns: auto;
 
-          i.close {
+          i.close,
+          i.keyboard_arrow_left {
             margin: 0 auto;
             opacity: 1;
             color: $dark-600;
@@ -390,6 +391,10 @@
             &:hover {
               color: $gray-base;
             }
+          }
+
+          i.keyboard_arrow_left {
+            font-size: 40px;
           }
         }
       }
