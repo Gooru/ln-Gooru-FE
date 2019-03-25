@@ -63,7 +63,24 @@ export default Ember.Component.extend({
       Ember.$('body')
         .removeClass('fullscreen')
         .removeClass('fullscreen-exit');
-      this.get('router').transitionTo('student-home');
+      let isStudyPlayer = this.get('isStudyPlayer');
+      let classId = this.get('classId');
+      let courseId = this.get('courseId');
+      let isILActivity = this.get('isILActivity');
+      let route = this.get('router');
+      if (isStudyPlayer) {
+        if (isILActivity) {
+          route.transitionTo('student.independent.course-map', courseId);
+        } else {
+          route.transitionTo('student.class.course-map', classId);
+        }
+      } else {
+        if (isILActivity) {
+          route.transitionTo('student-independent-learning');
+        } else {
+          route.transitionTo('student-home');
+        }
+      }
     },
 
     /**

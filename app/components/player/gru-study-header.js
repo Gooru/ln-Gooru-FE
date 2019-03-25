@@ -62,33 +62,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
   // Actions
 
   actions: {
-    /**
-     * Redirect to course map
-     */
-    redirectCourseMap() {
-      if (this.get('classId')) {
-        this.get('router').transitionTo(
-          'student.class.course-map',
-          this.get('classId'),
-          {
-            queryParams: {
-              refresh: true
-            }
-          }
-        );
-      } else {
-        this.get('router').transitionTo(
-          'student.independent.course-map',
-          this.get('courseId'),
-          {
-            queryParams: {
-              refresh: true
-            }
-          }
-        );
-      }
-    },
-
     mileStoneHandler: function() {
       let params;
       if (this.get('classId')) {
@@ -107,12 +80,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
         };
       }
       this.get('router').transitionTo('student-locate', params);
-    },
-    /**
-     * Go back to collection
-     */
-    backToCollection() {
-      window.location.href = this.get('collectionUrl');
     },
 
     selectMenuItem: function(item) {
