@@ -248,6 +248,8 @@ export default Ember.Component.extend({
    */
   unCheckedItem: null,
 
+  isShow: false,
+
   /**
    * @property {Observe} onSelectFilter
    */
@@ -545,7 +547,7 @@ export default Ember.Component.extend({
     let component = this;
     component.$('.more-pointer').popover({
       html: true,
-      trigger: 'hover',
+      trigger: 'click',
       animation: true,
       placement: 'auto',
       content: () => {
@@ -701,13 +703,13 @@ export default Ember.Component.extend({
     } else {
       filters['flt.publishStatus'] = 'published';
     }
-    if (!term) {
-      let subject = component.get('course.subject');
-      let competencyData = component.get('competencyData');
-      let primaryLanguage = component.get('class.primaryLanguage');
-      let gutCode = competencyData ?
-        competencyData.get('competencyCode') :
-        null;
+    let subject = component.get('course.subject');
+    let competencyData = component.get('competencyData');
+    let primaryLanguage = component.get('class.primaryLanguage');
+    let gutCode = competencyData ?
+      competencyData.get('competencyCode') :
+      null;
+    if (!component.get('selectedFilters').length && !term) {
       if (subject) {
         filters['flt.subject'] = subject;
       }
@@ -715,6 +717,7 @@ export default Ember.Component.extend({
       if (gutCode) {
         filters['flt.gutCode'] = gutCode;
       }
+
       if (primaryLanguage) {
         filters['flt.languageId'] = primaryLanguage;
       }
@@ -730,9 +733,9 @@ export default Ember.Component.extend({
     filters['flt.educationalUse'] = component.filterSelectedItems('filter', 'flt.educational');
     filters['flt.language'] = component.filterSelectedItems('filter', 'flt.language');
     filters['flt.audience'] = component.filterSelectedItems('filter', 'flt.audience');
+    filters['flt.standard'] = component.filterSelectedItems('filter', 'flt.standard');
     filters['flt.creator'] = component.get('selectedFilters').get('flt.authorName');
     filters['flt.publisherName'] = component.get('selectedFilters').get('flt.publisherName');
-    filters['flt.standard'] = component.filterSelectedItems('filter', 'flt.standard');
     return filters;
   },
 

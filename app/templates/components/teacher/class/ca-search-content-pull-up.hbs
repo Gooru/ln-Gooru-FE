@@ -35,6 +35,7 @@
               {{#each moreFilters as |moreFilter|}}
                 <div class="filter-item">
                   <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
+                  <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
                 </div>
               {{/each}}
             </div>
