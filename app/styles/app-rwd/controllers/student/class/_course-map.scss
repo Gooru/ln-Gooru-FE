@@ -55,6 +55,7 @@ body.student_class_course-map {
 
   .assigned-course-title {
     margin-left: 10px;
+    color: $white;
   }
 
   .rescope-section {
@@ -67,6 +68,10 @@ body.student_class_course-map {
 
       .info {
         width: 100% !important;
+        color: $white;
+      }
+      .action span {
+        color: $white;
       }
     }
   }

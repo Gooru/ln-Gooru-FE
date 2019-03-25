@@ -16,16 +16,20 @@
     {{/unless}}
     <div class="course-map study-player tab grade-range-{{grade-range cmPerformanceSummary.score}} {{destination}} {{if isPremiumCourse 'premium-course'}} {{if (or (eq selectedMenuItem 'course-map') (eq selectedMenuItem 'study-player')) 'vactive'}}">
       {{#if (eq selectedMenuItem 'course-map')}}
-        <a {{action 'selectItem' 'study-player'}} role="tab" data-toggle="tooltip" title="{{t 'student-landing.study-player'}}" class="{{unless isCourseMapped 'no-course'}} tab-menu">
-            {{gru-icon name='play_arrow'}}
-            <span class="add-info">{{t 'student-landing.study-player'}}</span>
-            <span class="performance-score {{if (not hasCMStarted) 'not-started'}}">{{if hasCMStarted (concat cmPerformanceSummary.score '%') '--' }}</span>
+        <a role="tab" data-toggle="tooltip" title="{{t 'student-landing.study-player'}}" class="{{unless isCourseMapped 'no-course'}} tab-menu">
+            <span {{action 'selectItem' 'study-player'}}>
+              {{gru-icon name='play_arrow'}}
+              <span class="add-info">{{t 'student-landing.study-player'}}</span>
+            </span>
+            <span class="performance-score {{if (not hasCMStarted) 'not-started'}}" {{action 'openCourseReport'}}>{{if hasCMStarted (concat cmPerformanceSummary.score '%') '--' }}</span>
           </a>
       {{else}}
-        <a {{action 'selectItem' 'course-map'}} class="tab-menu" role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}">
+        <a class="tab-menu" role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}">
+          <span {{action 'selectItem' 'course-map'}}>
             {{gru-icon name='sort'}}
             <span class="add-info">{{t 'teacher-landing.class.course-map'}}</span>
-            <span class="performance-score {{if (not hasCMStarted) 'not-started'}}">{{if hasCMStarted (concat cmPerformanceSummary.score '%') '--' }}</span>
+          </span>
+          <span class="performance-score {{if (not hasCMStarted) 'not-started'}}" {{action 'openCourseReport'}}>{{if hasCMStarted (concat cmPerformanceSummary.score '%') '--' }}</span>
         </a>
       {{/if}}
     </div>

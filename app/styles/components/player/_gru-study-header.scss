@@ -57,6 +57,33 @@
   &.non-clickable {
     .gru-study-navbar {
       pointer-events: none;
+
+      .header-panel {
+        .nav-body {
+          a {
+            i,
+            i.close,
+            span {
+              color: #ccc;
+            }
+
+            .dca-pin {
+              background-image: url("gooru/pin-gray.svg");
+            }
+          }
+
+          .notification-tab,
+          .performance-summary {
+            span {
+              color: #ccc;
+            }
+
+            .denominator {
+              border-top: 2px solid #ccc;
+            }
+          }
+        }
+      }
     }
   }
 
