@@ -63,24 +63,7 @@ export default Ember.Component.extend({
       Ember.$('body')
         .removeClass('fullscreen')
         .removeClass('fullscreen-exit');
-      let isStudyPlayer = this.get('isStudyPlayer');
-      let classId = this.get('classId');
-      let courseId = this.get('courseId');
-      let isILActivity = this.get('isILActivity');
-      let route = this.get('router');
-      if (isStudyPlayer) {
-        if (isILActivity) {
-          route.transitionTo('student.independent.course-map', courseId);
-        } else {
-          route.transitionTo('student.class.course-map', classId);
-        }
-      } else {
-        if (isILActivity) {
-          route.transitionTo('student-independent-learning');
-        } else {
-          route.transitionTo('student-home');
-        }
-      }
+      this.handlePlayerNavigation();
     },
 
     /**
@@ -308,6 +291,35 @@ export default Ember.Component.extend({
       this.$('.course-map').addClass('enable');
     } else {
       this.$('.course-map').removeClass('enable');
+    }
+  },
+
+  /**
+   * Handle Study  player navigation.
+   */
+  handlePlayerNavigation() {
+    let backUrl = this.get('backUrl');
+    if (backUrl) {
+      window.location.replace(backUrl);
+    } else {
+      let isStudyPlayer = this.get('isStudyPlayer');
+      let classId = this.get('classId');
+      let courseId = this.get('courseId');
+      let isILActivity = this.get('isILActivity');
+      let route = this.get('router');
+      if (isStudyPlayer) {
+        if (isILActivity) {
+          route.transitionTo('student.independent.course-map', courseId);
+        } else {
+          route.transitionTo('student.class.course-map', classId);
+        }
+      } else {
+        if (isILActivity) {
+          route.transitionTo('student-independent-learning');
+        } else {
+          route.transitionTo('student-home');
+        }
+      }
     }
   }
 });
