@@ -11,22 +11,14 @@
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
     height: 35px;
 
+    .next-cal-arrow,
     .prev-cal-arrow {
-      height: 20px;
       cursor: pointer;
       user-select: none;
 
       i {
-        pointer-events: none;
-      }
-    }
-
-    .next-cal-arrow {
-      height: 20px;
-      cursor: pointer;
-      user-select: none;
-
-      i {
+        display: flex;
+        font-size: 30px;
         pointer-events: none;
       }
     }
