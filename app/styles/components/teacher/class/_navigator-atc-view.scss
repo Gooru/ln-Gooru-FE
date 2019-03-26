@@ -33,10 +33,15 @@
     }
 
     .node-point {
+      z-index: 999;
       .student-profile {
         clip-path: circle(50% at 50% 50%);
         -webkit-clip-path: circle(50% at 50% 50%);
         cursor: pointer;
+      }
+      &.active-node {
+
+
       }
     }
 
@@ -47,22 +52,43 @@
       text-transform: uppercase;
     }
   }
+
+  .active-student-container {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    z-index: 999;
+    .student-performance-container {
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      .student-thumbnail-container {
+        display: block;
+        width: 24px;
+        height: 24px;
+        background-size: 24px 24px;
+        background-repeat: no-repeat;
+        border-radius: 50%;
+      }
+    }
+  }
 }
 
 .navigator-atc-tooltip {
-  position: absolute;
-  z-index: 9999;
   visibility: hidden;
-  background-color: $white;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+  position: absolute;
+  z-index: 99;
 
   .tooltip-container {
     width: 340px;
-    height: 196px;
+    height: 180px;
     padding: 8px;
-    z-index: 11;
     background-color: $white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
     .header-container {
       display: grid;
       grid-template-columns: 75px auto;
@@ -130,27 +156,13 @@
         align-items: center;
       }
       .progress-container {
-        .progress-bar-container {
-          width: 160px;
-          background-color: rgba(191, 191, 191, 0.5);
-          height: 10px;
-          border-radius: 10px;
-          .competency-progress-bar {
-            height: inherit;
-            display: block;
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-            background-color: #007ab8;
-          }
-        }
-        .completion-percentage {
-          font-size: 15px;
-          font-weight: bold;
-          color: #0076ba;
-          justify-self: right;
-        }
+        padding-left: 105px;
+        color: #37424b;
+        font-size: 13px;
+        font-weight: bold;
       }
       .performance-container {
+        cursor: pointer;
         .performance-bar-container {
           width: 160px;
           background-color: rgba(191, 191, 191, 0.5);
@@ -170,6 +182,7 @@
         }
       }
       .competencies-container {
+        cursor: pointer;
         .competency-count-container {
           width: 126px;
           height: 24px;
@@ -217,9 +230,17 @@
   &.active {
     visibility: visible;
     @media screen and (max-width: 992px) {
-      left: calc((100% - 340px)/2) !important;
-      bottom: 0;
-      top: unset !important;
+      width: 100%;
+      height: 100%;
+      top: 0 !important;
+      left: 0 !important;
+      background-color: rgba(44, 66, 74, 0.4);
+      .tooltip-container {
+        left: calc((100% - 340px)/2) !important;
+        bottom: 0;
+        position: absolute;
+        z-index: 9999;
+      }
     }
   }
 }

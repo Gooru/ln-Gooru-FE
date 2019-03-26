@@ -1166,6 +1166,7 @@ export default Object.assign(quizzesTranslations, {
     'நீங்கள் நேவிகேட்டர் வகுப்பில் இணை ஆசிரியராக சேர்ந்துள்ளீர்கள்',
   'teacher-landing.navigator-banner.error-message':
     'வர்க்கத்தில் சேர்வதற்கான பிரச்சனை',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.manage': 'நிர்வகிக்க',
   'teacher-landing.class.reports': 'அறிக்கைகள்',
   'teacher-landing.class.daily-activites': 'தினசரி செயற்பாடுகள்',

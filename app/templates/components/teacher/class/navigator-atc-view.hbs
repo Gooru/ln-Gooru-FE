@@ -24,21 +24,15 @@
 
       </div>
       <div class="body-container">
-        <div class="performance-container info-container">
+        <div class="performance-container info-container" {{action "onShowStudentPerformance" studentData 'report'}}>
           <div class="title-container">{{t 'teacher-landing.class.class-management-tab.performance'}}</div>
           <div class="performance-bar-container">
             <span class="performance-bar" style="background-color: {{safe-html (grade-color studentData.percentScore)}}; width: {{studentData.percentScore}}%;"></span>
           </div>
           <div class="performance-percentage" style="color: {{safe-html (grade-color studentData.percentScore)}};">{{studentData.percentScore}}%</div>
         </div>
-        <div class="progress-container info-container">
-          <div class="title-container">{{t 'common.progress'}}</div>
-          <div class="progress-bar-container">
-            <span class="competency-progress-bar" style="width: {{studentData.percentCompletion}}%;"></span>
-          </div>
-          <div class="completion-percentage">{{studentData.percentCompletion}}%</div>
-        </div>
-        <div class="competencies-container info-container">
+
+        <div class="competencies-container info-container" {{action "onShowStudentPerformance" studentData 'proficiency'}}>
           <div class="title-container">{{t 'common.competencies'}}</div>
           <div class="competency-count-container">
             <span class="mastered-count count-box" style="width: {{find-percentage studentData.totalCompetencies studentData.completedCompetencies}}%;"></span>
@@ -53,7 +47,19 @@
             <span class="not-started">{{studentData.notStartedCompetencies}}</span>
           </div>
         </div>
+        <div class="progress-container">
+          {{studentData.percentCompletion}}% {{t 'teacher-landing.class.atc-view.progress-to-destination'}}
+        </div>
       </div>
+    </div>
+  </div>
+{{/if}}
+
+{{#if (and isMobileView isShowTooltip)}}
+  <!-- Addon containers used to show backdrop in mobile background and active student -->
+  <div class="active-student-container hidden">
+    <div class="student-performance-container" style="background-color: {{safe-html (grade-color studentData.percentScore)}};">
+      <img class="student-thumbnail-container" src="{{studentData.thumbnail}}"/>
     </div>
   </div>
 {{/if}}

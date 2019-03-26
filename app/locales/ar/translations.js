@@ -1124,6 +1124,7 @@ export default Object.assign(quizzesTranslations, {
     'You have successfully joined as a co-teacher of the Navigator class',
   'teacher-landing.navigator-banner.error-message':
     'Problem with joining class',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.manage': 'Manage',
   'teacher-landing.class.reports': 'Reports',
   'teacher-landing.class.daily-activites': 'Daily Activites',

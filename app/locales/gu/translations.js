@@ -1136,6 +1136,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.navigator-banner.success-message':
     'તમે નેવિગેટર વર્ગના સહ-શિક્ષક તરીકે સફળતાપૂર્વક જોડાયા છો',
   'teacher-landing.navigator-banner.error-message': 'વર્ગ જોડાયા સાથે સમસ્યા',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.manage': 'મેનેજ કરો',
   'teacher-landing.class.reports': 'અહેવાલો',
   'teacher-landing.class.daily-activites': 'દૈનિક સક્રિયકરણ',

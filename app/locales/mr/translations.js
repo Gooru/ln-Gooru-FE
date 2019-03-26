@@ -1242,6 +1242,7 @@ export default Object.assign(quizzesTranslations, {
     'एकूण प्राप्त क्षमता',
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.class-activities': 'वर्गाचे नियोजन',
   'teacher-landing.class.offline-class-report.class-report': 'वर्ग अहवाल',
   'teacher-landing.class.offline-class-report.activity-report': 'उपक्रम अहवाल',

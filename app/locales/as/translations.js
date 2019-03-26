@@ -1160,6 +1160,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.navigator-banner.success-message':
     'আপুনি সফলতাপূৰ্বক নেভিগেতৰ শ্ৰেণীৰ সহ-শিক্ষক হিচাপে যোগদান কৰিছে',
   'teacher-landing.navigator-banner.error-message': 'শ্ৰেণী যোগদান কৰাত সমস্যা',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.manage': 'প্ৰবন্ধন কৰক',
   'teacher-landing.class.reports': 'প্ৰতিবেদনবোৰ',
   'teacher-landing.class.daily-activites': 'দৈনন্দিন কাৰ্যকলাপ সমূহ',

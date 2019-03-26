@@ -58,7 +58,7 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  queryParams: ['location', 'tab'],
+  queryParams: ['location', 'tab', 'studentId'],
 
   /**
    * Combination of unit, lesson and resource (collection or assessment)
@@ -69,6 +69,8 @@ export default Ember.Controller.extend({
   location: '',
 
   tab: null,
+
+  studentId: null,
 
   isFirstLoad: true,
 
@@ -347,19 +349,8 @@ export default Ember.Controller.extend({
      * Action triggered when open a student's course report
      */
     onOpenStudentCourseReport(student) {
-      let controller = this;
-      let params = Ember.Object.create({
-        userId: student.id,
-        classId: controller.get('class.id'),
-        class: controller.get('class'),
-        courseId: controller.get('course.id'),
-        course: controller.get('course'),
-        isTeacher: true,
-        isStudent: false,
-        loadUnitsPerformance: true
-      });
-      controller.set('studentCourseReportContext', params);
-      controller.set('showCourseReport', true);
+      const controller = this;
+      controller.onOpenStudentCourseReport(student.get('id'));
     },
 
     //Action triggered when click collection/assessment title
@@ -392,9 +383,12 @@ export default Ember.Controller.extend({
     const controller = this;
     controller._super(...arguments);
     let tab = controller.get('tab');
+    let studentId = controller.get('studentId');
     if (tab && tab === 'report') {
       const classController = controller.get('classController');
       classController.openTeacherCourseReport();
+    } else if (tab === 'student-report' && studentId) {
+      controller.openStudentCourseReport(studentId);
     }
   },
 
@@ -807,5 +801,21 @@ export default Ember.Controller.extend({
         }
       }
     }
+  },
+
+  openStudentCourseReport(studentId) {
+    const controller = this;
+    let params = Ember.Object.create({
+      userId: studentId,
+      classId: controller.get('class.id'),
+      class: controller.get('class'),
+      courseId: controller.get('course.id'),
+      course: controller.get('course'),
+      isTeacher: true,
+      isStudent: false,
+      loadUnitsPerformance: true
+    });
+    controller.set('studentCourseReportContext', params);
+    controller.set('showCourseReport', true);
   }
 });

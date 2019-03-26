@@ -197,6 +197,7 @@ export default Ember.Route.extend({
 
   resetController(controller) {
     controller.set('tab', null);
+    controller.set('studentId', null);
     controller.set('questionItems', null);
   }
 });

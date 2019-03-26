@@ -1242,6 +1242,7 @@ export default Object.assign(quizzesTranslations, {
     'Total Competencies Gained',
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.class-activities': 'Class Activities',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
   'teacher-landing.class.offline-class-report.activity-report':
