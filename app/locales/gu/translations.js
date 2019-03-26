@@ -2390,5 +2390,10 @@ export default Object.assign(quizzesTranslations, {
   'notifications.typeinclass.teacher-override-title':
     'શિક્ષક તમારા સબમિશન સુધારાઈ ગયું છે',
   'notifications.typeinclass.teacher-grading-complete-title':
-    'શિક્ષક વર્ગમાં તમારી સબમિશન ગ્રેડ કર્યું છે'
+    'શિક્ષક વર્ગમાં તમારી સબમિશન ગ્રેડ કર્યું છે',
+  'goahead.add.something': 'Go ahead, add something.',
+  'present.diagnostic.determine.not.know':
+    'Present a diagnostic to determine the student\'s current location, if not known?',
+  'present.diagnostic.determine.know':
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
 });

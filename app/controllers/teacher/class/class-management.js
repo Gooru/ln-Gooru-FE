@@ -320,6 +320,16 @@ export default Ember.Controller.extend(ModalMixin, {
       this.set('tempClass.gradeCurrent', grade.get('id'));
     },
 
+    updateClassRouteSetting() {
+      this.set('enableApplySettings', true);
+    },
+
+    updateClassForceCalculateILPSetting() {
+      this.set('enableApplySettings', true);
+      let forceCalculateILP = this.get('tempClass.forceCalculateILP');
+      this.set('tempClass.forceCalculateILP', !forceCalculateILP);
+    },
+
     updateClassGradeOrigin(grade) {
       this.set('enableApplySettings', true);
       this.set('tempClass.gradeLowerBound', grade.get('id'));
@@ -362,6 +372,7 @@ export default Ember.Controller.extend(ModalMixin, {
           grade_upper_bound: controller.get('tempClass.gradeUpperBound'),
           grade_current: controller.get('tempClass.gradeCurrent'),
           route0: controller.get('tempClass.route0Applicable'),
+          force_calculate_ilp: controller.get('tempClass.forceCalculateILP'),
           preference:
             controller.get('tempClass.preference') ||
             controller.get('class.preference')
@@ -370,8 +381,9 @@ export default Ember.Controller.extend(ModalMixin, {
         classData.set('gradeLowerBound', settings.grade_lower_bound);
         classData.set('gradeUpperBound', settings.grade_upper_bound);
         classData.set('gradeCurrent', settings.grade_current);
-        classData.set('route0', settings.route0);
+        classData.set('route0Applicable', settings.route0);
         classData.set('preference', settings.preference);
+        classData.set('forceCalculateILP', settings.force_calculate_ilp);
         controller.updateClassSettings(settings);
       }
     },

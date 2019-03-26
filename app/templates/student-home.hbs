@@ -1,6 +1,4 @@
 <div class="controller student-landing container-fluid">
-  {{gru-take-tour steps=steps containerClass='home-tour'}}
-
   <div class="student-left-panel">
     {{#unless (gt loginCount 5)}}
       <div class="greetings hidden-xs">
@@ -45,7 +43,6 @@
             class=class
             course=class.course
             onPlayCollection='studyPlayer'
-            demoClass= demoClass
             onItemSelected='selectMenuItem'
             }}
         {{/each}}
