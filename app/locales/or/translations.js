@@ -650,6 +650,7 @@ export default Object.assign(quizzesTranslations, {
   'common.update-data': 'ତଥ୍ୟ ଅଦ୍ୟତନ କରନ୍ତୁ',
   'common.all': 'ସମସ୍ତ',
   'common.unscheduled-items': 'ଅଣସୂଚୀଭୁକ୍ତ ସାମଗ୍ରୀ',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'ପାଇଁ ଅଣସୂଚୀଭୁକ୍ତ ତାଲିକାରେ ଯୋଗ କରନ୍ତୁ',
   'common.save-next': 'ସଞ୍ଚୟ ଓ ପରବର୍ତ୍ତୀ',
   'common.save-submit': 'ସଞ୍ଚୟ ଓ ସମସ୍ତ ଦାଖଲ କରନ୍ତୁ',

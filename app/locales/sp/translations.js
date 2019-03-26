@@ -654,6 +654,7 @@ export default Object.assign(quizzesTranslations, {
   'common.all': 'All',
   'common.please-wait': 'Please Wait',
   'common.unscheduled-items': 'Unscheduled Items',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'Add to unscheduled list for',
   'common.save-next': 'Guardar y Siguiente',
   'common.save-submit': 'Guardar y enviar todo',
