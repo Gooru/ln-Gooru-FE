@@ -1659,7 +1659,7 @@ export default Object.assign(quizzesTranslations, {
   'standard-dropdown.placeholder': 'मानक के क्रम में ब्राउज़ करें',
   'subject-dropdown.placeholder': 'विषय (यों)',
   'subject-dropdown.prompt': 'एक विषय चुनिए',
-  'search-filter.input-placeholder':'Type {{type}} name here...',
+  'search-filter.input-placeholder': 'Type {{type}} name here...',
   'search-filter.courses': 'पाठ्यक्रम',
   'search-filter.collections': 'संकलन',
   'search-filter.resources': 'साधन',

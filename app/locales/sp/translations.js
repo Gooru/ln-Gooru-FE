@@ -195,6 +195,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'Haga clic para desmarcar',
   'common.close': 'Cerca',
   'common.collection': 'Colección',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'Colecciones',
   'common.collection-pl.one': 'Colección',
   'common.collection-pl.other': 'Colecciones',
@@ -1267,14 +1268,14 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.domains-reviewed': 'Domains to be reviewed',
   'teacher-landing.class.atc-view.class-activities-completed':
     'Class Activities Completed',
-  'teacher-landing.class.atc-view.progress-label':
-    'Progress (# of competencies)',
   'teacher-landing.class.atc-view.class-activities-pending':
     'Class Activities Pending',
   'teacher-landing.class.atc-view.show-all': 'Show All',
   'teacher-landing.class.atc-view.collapse': 'Collapse',
   'teacher-landing.class.atc-view.total-competencies-gained':
     'Total Competencies Gained',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'Actividades de Clases Diarias',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
   'teacher-landing.class.offline-class-report.activity-report':
@@ -1679,14 +1680,14 @@ export default Object.assign(quizzesTranslations, {
   'standard-dropdown.placeholder': 'Navegar por Estándar',
   'subject-dropdown.placeholder': 'asignaturas)',
   'subject-dropdown.prompt': 'Seleccione un tema',
-  'search-filter.input-placeholder':'Type {{type}} name here...',
+  'search-filter.input-placeholder': 'Type {{type}} name here...',
   'search-filter.courses': 'Cursos',
   'search-filter.collections': 'Colecciones',
   'search-filter.resources': 'Recursos',
   'search-filter.assessments': 'Evaluaciones',
-  'search-filter.authors': 'Authors',
   'search-filter.questions': 'Preguntas',
   'search-filter.rubrics': 'Rúbricas',
+  'search-filter.authors': 'Authors',
   'search-filter.question-types.MC': 'Opción multiple',
   'search-filter.question-types.FIB': 'Llena el espacio en blanco',
   'search-filter.question-types.T/F': 'Verdadero Falso',
