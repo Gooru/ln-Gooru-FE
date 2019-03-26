@@ -643,6 +643,7 @@ export default Object.assign(quizzesTranslations, {
   'common.update-data': 'ডাটা আপডেট কৰক',
   'common.all': 'সকলো',
   'common.unscheduled-items': 'অনুসূচীত নকৰা বস্তু',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'ইয়াৰ বাবে অনুসূচীত নকৰাৰ তালিকাত যোগ কৰক',
   'common.save-next': 'চেভ কৰক আৰু আগবাঢ়ক',
   'common.save-submit': 'চেভ কৰক আৰু সকলো জমা কৰক',

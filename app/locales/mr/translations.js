@@ -641,6 +641,7 @@ export default Object.assign(quizzesTranslations, {
   'common.all': 'सर्व',
   'common.please-wait': 'Please Wait',
   'common.unscheduled-items': 'अनियोजित',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'अनियोजित उपक्रमांच्या यादीत टाका',
   'common.save-next': 'सेव्ह आणि पुढे',
   'common.save-submit': 'सर्व से्व्ह आणि सबमिट करा',

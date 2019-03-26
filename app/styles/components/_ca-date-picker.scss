@@ -33,7 +33,6 @@
 
     .cal-mm-yyyy {
       display: inline-flex;
-      height: 20px;
       font-weight: bold;
       pointer-events: none;
 
@@ -41,11 +40,14 @@
       .arrow_drop_up {
         display: none;
         pointer-events: none;
+        height: 20px;
+        align-self: center;
       }
 
       &.ca-date-picker-toggle {
         cursor: pointer;
         pointer-events: all;
+        font-size: 24px;
 
         .arrow_drop_up {
           display: none;
@@ -166,9 +168,11 @@
               background-image: unset;
             }
           }
+
           tr td.new {
             display: none;
           }
+
           tr td.old {
             visibility: hidden;
           }

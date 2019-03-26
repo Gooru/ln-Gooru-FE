@@ -546,6 +546,7 @@ export default Object.assign(quizzesTranslations, {
   'common.update-data': 'তথ্য আপডেট করুন',
   'common.all': 'সব',
   'common.unscheduled-items': 'অনির্দিষ্ট আইটেম',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'অনির্দিষ্ট তালিকা যোগ করুন',
   'common.save-next': 'সংরক্ষণ এবং পরবর্তী',
   'common.save-submit': 'সংরক্ষণ এবং সব জমা দিন',

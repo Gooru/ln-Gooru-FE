@@ -661,6 +661,7 @@ export default Object.assign(quizzesTranslations, {
   'common.all': 'All',
   'common.please-wait': 'Please Wait',
   'common.unscheduled-items': 'Unscheduled Items',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'Add to unscheduled list for',
   'common.save-next': 'ಉಳಿಸಿ ಮತ್ತು ಮುಂದಿನದು',
   'common.save-submit': 'ಉಳಿಸಿ ಮತ್ತು ಎಲ್ಲವನ್ನೂ ಸಲ್ಲಿಸಿ',

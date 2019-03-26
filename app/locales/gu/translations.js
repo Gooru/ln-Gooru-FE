@@ -627,6 +627,7 @@ export default Object.assign(quizzesTranslations, {
   'common.update-data': 'માહિતી અપડેટ કરો',
   'common.all': 'બધા',
   'common.unscheduled-items': 'અનચેડેડ વસ્તુઓ',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'અનચેડેડ સૂચિમાં ઉમેરો',
   'common.save-next': 'સાચવો અને આગળ',
   'common.save-submit': 'સાચવો અને બધા સબમિટ કરો',

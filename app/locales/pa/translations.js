@@ -634,6 +634,7 @@ export default Object.assign(quizzesTranslations, {
   'common.update-data': 'ਡਾਟਾ ਅਪਡੇਟ ਕਰੋ',
   'common.all': 'ਸਭ',
   'common.unscheduled-items': 'ਅਣਡਿੱਠੀਆਂ ਚੀਜ਼ਾਂ',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'ਲਈ ਸੂਚੀਬੱਧ ਸੂਚੀ ਵਿੱਚ ਸ਼ਾਮਿਲ',
   'common.save-next': 'ਬਚਾਓ ਅਤੇ ਅਗਲਾ',
   'common.save-submit': 'ਬਚਾਓ ਅਤੇ ਸਭ ਨੂੰ ਜਮ੍ਹਾਂ ਕਰੋ',
