@@ -286,7 +286,7 @@ export default Ember.Object.extend({
    * @function getCompetencyCompletionStats
    * Provide Competency Completion Stats for Premium Classes"
    */
-  getCompetencyCompletionStats(classIds, userId) {
+  getCompetencyCompletionStats(classIds, user) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v2/stats/competency`;
@@ -295,7 +295,7 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      data: JSON.stringify({ classIds, userId })
+      data: JSON.stringify({ classIds, user })
     };
     return Ember.$.ajax(url, options);
   },
