@@ -60,28 +60,31 @@
 
       .header-panel {
         .nav-body {
-          a {
-            i,
+          .app-close,
+          .class-activities,
+          .course-map,
+          .notification-tab,
+          .performance-summary,
+          .profile-prof,
+          .study-player {
+            &.grade-range-70-79,
+            &.grade-range-80-89 {
+              a i,
+              span {
+                color: #888;
+              }
+            }
+
+            a i,
             i.close,
             i.keyboard_arrow_left,
             span {
               color: #ccc;
-            }
-
-            .dca-pin {
-              background-image: url("gooru/pin-gray.svg");
-            }
-          }
-
-          .notification-tab,
-          .performance-summary {
-            span {
-              color: #ccc;
               border-color: #ccc;
-            }
 
-            .denominator {
-              border-top: 2px solid #ccc;
+              .dca-pin {
+                background-image: url("gooru/pin-gray.svg");
+              }
             }
           }
         }

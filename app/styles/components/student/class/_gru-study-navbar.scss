@@ -13,6 +13,8 @@
     display: inline-block;
     word-wrap: break-word;
     vertical-align: middle;
+    font-weight: 700;
+    font-size: 14px;
   }
 
   %app-container {
@@ -421,6 +423,7 @@
 
         &.grade-range-not-started {
           background: transparent;
+
           &.vactive {
             background-color: #1aa9eb;
           }
@@ -465,6 +468,7 @@
 
         &.grade-range-not-started {
           background: transparent;
+
           &.vactive {
             background-color: #1aa9eb;
           }
@@ -486,8 +490,6 @@
 
         .add-info {
           @extend %app-info-container;
-          font-size: 14px;
-          line-height: 1.3;
         }
       }
 
@@ -509,6 +511,7 @@
         .add-info {
           @extend %app-info-container;
         }
+
         &.vactive {
           background-color: #1aa9eb;
         }
