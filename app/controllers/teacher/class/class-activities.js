@@ -37,7 +37,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     //Action triggered when click preview content
     onPreviewContent(content) {
       const controller = this;
-      controller.set('previewContentType', content.get('collectionType'));
+      controller.set('previewContentType', content.get('format') || content.get('collectionType'));
       controller.set('previewContent', content);
       controller.set('isShowContentPreview', true);
     },

@@ -75,9 +75,9 @@ export default Ember.Component.extend({
      * Action triggered when the user play collection
      * It'll open the player in new tab
      */
-    onPlayCollection(collectionId) {
-      let collectionUrl = `${window.location.origin}/player/${collectionId}`;
-      window.open(collectionUrl);
+    onPlayCollection(collection) {
+      const component = this;
+      component.sendAction('onPreviewContent', collection);
     },
 
     /**

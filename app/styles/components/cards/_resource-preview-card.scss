@@ -47,13 +47,7 @@
       .title {
         font-weight: bold;
         color: #3e5e67;
-        $line-height: 1.5;
-        $lines-to-show: 2;
-        @include ellipsis(
-          $font-size: 15px,
-          $line-height: $line-height,
-          $lines-to-show: $lines-to-show
-        );
+        font-size: 15px;
       }
     }
     .resource-taxonomies-container {

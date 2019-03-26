@@ -192,6 +192,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'আনবুকমাৰ্ক কৰিবলৈ ক্লিক কৰক',
   'common.close': 'বন্ধ',
   'common.collection': 'সংগৃহীত',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'সংগৃহীতসমূহ',
   'common.collection-pl.one': 'সংগৃহীত',
   'common.collection-pl.other': 'সংগৃহীতসমূহ',

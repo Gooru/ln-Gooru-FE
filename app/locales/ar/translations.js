@@ -190,6 +190,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'انقر لإزالة المؤشر',
   'common.close': 'إغلاق',
   'common.collection': 'مجموعة',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'مجموعات',
   'common.collection-pl.one': 'مجموعة',
   'common.collection-pl.other': 'مجموعات',

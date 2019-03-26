@@ -282,6 +282,13 @@ export default Ember.Component.extend({
   // actions
 
   actions: {
+
+    /**
+     * Action triggered when the user preview content
+     */
+    onPreviewContent(content) {
+      this.sendAction('onPreviewContent', content);
+    },
     /**
      * Action triggered when the user close the pull up.
      **/

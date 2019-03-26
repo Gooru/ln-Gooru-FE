@@ -198,6 +198,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'ବୁକମାର୍କରୁ ପ୍ରତ୍ୟାହାର କରିବାକୁ କ୍ଲିକ୍ କରନ୍ତୁ',
   'common.close': 'ବନ୍ଦ',
   'common.collection': 'ସଂଗ୍ରହ',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'ସଂଗ୍ରହଗୁଡ଼ିକ',
   'common.collection-pl.one': 'ସଂଗ୍ରହ',
   'common.collection-pl.other': 'ସଂଗ୍ରହଗୁଡ଼ିକ',
