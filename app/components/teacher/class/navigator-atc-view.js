@@ -34,7 +34,10 @@ export default Ember.Component.extend({
     component.loadClassAtcData();
   }),
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+    //Action triggered when click on student perf in tooltip
     onShowStudentPerformance(student, type) {
       const component = this;
       const classId = component.get('classId');
@@ -92,8 +95,14 @@ export default Ember.Component.extend({
     return moment(date).format('YYYY-MM-DD');
   }),
 
+  /**
+   * @property {Boolean} isMobileView
+   */
   isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
+  /**
+   * @property {Boolean} isShowTooltip
+   */
   isShowTooltip: false,
 
   // -------------------------------------------------------------------------
@@ -424,6 +433,10 @@ export default Ember.Component.extend({
     }, 500);
   },
 
+  /**
+   * @function highlightStudentProfile
+   * Method to highlight selected student
+   */
   highlightStudentProfile(position) {
     const component = this;
     return Ember.run.later(function() {
@@ -432,6 +445,10 @@ export default Ember.Component.extend({
     }, 500);
   },
 
+  /**
+   * @function removeTooltip
+   * Method to remove tooltip from the atc chart
+   */
   removeTooltip(tooltipInterval) {
     const component = this;
     component.set('isShowTooltip', false);
