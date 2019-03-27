@@ -100,7 +100,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
           classId,
           queryParams
         );
-      } else if (item === 'profile') {
+      } else if (item === 'profile-prof') {
         let userId = this.get('session.userId');
         route.transitionTo(
           'student.class.student-learner-proficiency',
