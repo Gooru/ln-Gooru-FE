@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import d3 from 'd3';
 import { getGradeColor, isCompatibleVW } from 'gooru-web/utils/utils';
-import {SCREEN_SIZES} from 'gooru-web/config/config';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -38,7 +38,7 @@ export default Ember.Component.extend({
     onShowStudentPerformance(student, type) {
       const component = this;
       const classId = component.get('classId');
-      Ember.$('.navigator-atc-tooltip').removeClass('active');
+      component.$('.navigator-atc-tooltip').removeClass('active');
       let queryParams = {
         studentId: student.get('id')
       };
@@ -47,8 +47,9 @@ export default Ember.Component.extend({
         queryParams.tab = 'student-report';
         redirectTo = 'course-map';
       }
-      console.log('queryParams', queryParams);
-      component.get('router').transitionTo(`teacher.class.${redirectTo}`, classId, {queryParams});
+      component
+        .get('router')
+        .transitionTo(`teacher.class.${redirectTo}`, classId, { queryParams });
     }
   },
 
@@ -279,7 +280,11 @@ export default Ember.Component.extend({
       .attr('class', 'placeholder')
       .attr('x', '130')
       .attr('y', '445')
-      .text(component.get('i18n').t('teacher-landing.class.class-management-tab.performance').string);
+      .text(
+        component
+          .get('i18n')
+          .t('teacher-landing.class.class-management-tab.performance').string
+      );
 
     svg
       .append('g')
@@ -288,7 +293,10 @@ export default Ember.Component.extend({
       .attr('class', 'placeholder')
       .attr('x', '50')
       .attr('y', '415')
-      .text(component.get('i18n').t('teacher-landing.class.atc-view.progress-label').string);
+      .text(
+        component.get('i18n').t('teacher-landing.class.atc-view.progress-label')
+          .string
+      );
 
     let tooltipInterval = null;
     let tooltip = d3
@@ -422,7 +430,6 @@ export default Ember.Component.extend({
       let activeStudentContainer = component.$('.active-student-container');
       activeStudentContainer.css(position).removeClass('hidden');
     }, 500);
-
   },
 
   removeTooltip(tooltipInterval) {

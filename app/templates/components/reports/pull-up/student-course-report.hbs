@@ -20,13 +20,17 @@
               <div class="course-background-cover">
                 <div class="report-carousel-content">
                   <div class="performance-display-container">
-                    <div class="course-performance-average" style= {{safe-html (concat "background-color:" (grade-color performanceSummary.score))}}>
-                      {{#if (gte performanceSummary.score 0)}}
-                        {{performanceSummary.score}}%
-                      {{else}}
-                        --
-                      {{/if}}
-                    </div>
+                    {{#if isLoading}}
+                      {{three-bounce-spinner}}
+                    {{else}}
+                      <div class="course-performance-average" style= {{safe-html (concat "background-color:" (grade-color performanceSummary.score))}}>
+                        {{#if (gte performanceSummary.score 0)}}
+                          {{performanceSummary.score}}%
+                        {{else}}
+                          --
+                        {{/if}}
+                      </div>
+                    {{/if}}
                   </div>
                   <div class="course-description">
                     <p class="header-desc">{{t 'common.description'}}</p>
@@ -86,12 +90,6 @@
     </div>
   </div>
 </div>
-
-{{#if isLoading}}
-  <div class="loading-spinner">
-    {{three-bounce-spinner}}
-  </div>
-{{/if}}
 
 {{#if showUnitReport}}
   {{reports.pull-up.student-unit-report onClosePullUp="onClosePullUp" context=studentUnitReportContext showPullUp=showUnitReport}}
