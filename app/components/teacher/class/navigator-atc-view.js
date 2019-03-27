@@ -326,14 +326,6 @@ export default Ember.Component.extend({
       })
       .attr('class', 'node-point');
 
-    studentNode.on('mouseout', function() {
-      component.set('isShowTooltip', false);
-      tooltipContainer.removeClass('active');
-      component.$('.node-point').removeClass('active-node');
-      activeStudentContainer.addClass('hidden');
-      Ember.run.cancel(tooltipInterval);
-    });
-
     tooltip.on('mouseout', function() {
       component.removeTooltip(tooltipInterval);
     });
@@ -361,8 +353,12 @@ export default Ember.Component.extend({
         component.set('isShowTooltip', true);
         tooltipContainer.addClass('active');
       });
-      tooltip.on('mouseout', function() {
-        component.removeTooltip(tooltipInterval);
+      studentNode.on('mouseout', function() {
+        component.set('isShowTooltip', false);
+        tooltipContainer.removeClass('active');
+        component.$('.node-point').removeClass('active-node');
+        activeStudentContainer.addClass('hidden');
+        Ember.run.cancel(tooltipInterval);
       });
     } else {
       studentNode.on('click', function(studentData) {
