@@ -153,3 +153,11 @@
     }
   }
 }
+
+body.student_class_student-learner-proficiency {
+  @media only screen and (max-width: $screen-xs) {
+    .app-container {
+      padding-top: 102px;
+    }
+  }
+}

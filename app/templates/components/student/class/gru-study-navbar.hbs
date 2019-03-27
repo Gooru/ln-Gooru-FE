@@ -1,139 +1,71 @@
 <div class="header-panel" {{action 'closeNotificationList'}}>
-  {{#if session.networkStatus}}
-    <div class="row-fluid network-progress-indicator">
+  <div class="nav-body nav-menu-{{if selectedMenuItem selectedMenuItem 'default'}} {{if isPremiumClass 'premium-class'}} {{if isILActivity  'independent-learning'}}  {{unless hasClassInfo 'no-class-info'}}">
+    <div class="app-close" {{action "onCloseStudyClassPlayer"}}>
+      <a class="back-or-close-menu">
+        {{gru-icon name=(if isStudyPlayer 'keyboard_arrow_left' 'close')}}
+      </a>
     </div>
-  {{/if}}
-  <div class="nav-body hidden-xs {{if isILActivity  'independent-learning'}} {{if class.isArchived 'class-archived'}} {{unless hasClassInfo 'no-class-info'}}">
-    <div class="app-close" {{action "onClickBrand"}}>
-      {{#link-to 'index' class="navbar-brand home-link" }}
-        <i class="gru-icon material-icons close">close</i>
-      {{/link-to}}
-    </div>
-    {{#unless class.isArchived}}
-      {{#unless isILActivity}}
-        <div class="class-activities tab">
-          <a {{action 'selectItem' 'class-activities'}} title="{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
+    {{#unless isILActivity}}
+      <div class="class-activities tab grade-range-{{grade-range caPerformanceSummary.scoreInPercentage}} {{if (eq selectedMenuItem 'class-activities') 'vactive'}}">
+        <a  class="tab-menu" title="{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
+          <span class="class-activity-tab" {{action 'selectItem' 'class-activities'}}>
             <i class="dca-pin"></i>
             <span class="add-info dca-text">{{t 'teacher-landing.class.class-activities'}}</span>
+          </span>
+            <span class="performance-score {{if (not hasCAStarted) 'not-started'}}">{{if hasCAStarted (concat caPerformanceSummary.scoreInPercentage '%') '--' }}</span>
           </a>
-        </div>
-      {{/unless}}
-      <div class="course-map study-player tab {{destination}} {{if isPremiumCourse 'premium-course'}}">
-        {{#if (eq selectedMenuItem 'course-map')}}
-          <a {{action 'selectItem' 'study-player'}} role="tab" data-toggle="tooltip" title="{{t 'student-landing.study-player'}}" class="{{unless isCourseMapped 'no-course'}}">
-            {{gru-icon name='play_arrow'}}
-            <span class="add-info">{{t 'student-landing.study-player'}}</span>
+      </div>
+    {{/unless}}
+    <div class="course-map study-player tab grade-range-{{grade-range cmPerformanceSummary.score}} {{destination}} {{if isPremiumCourse 'premium-course'}} {{if (or (eq selectedMenuItem 'course-map') (eq selectedMenuItem 'study-player')) 'vactive'}}">
+      {{#if (eq selectedMenuItem 'course-map')}}
+        <a role="tab" data-toggle="tooltip" title="{{t 'student-landing.study-player'}}" class="{{unless isCourseMapped 'no-course'}} tab-menu">
+            <span class="course-map-tab" {{action 'selectItem' 'study-player'}}>
+              {{gru-icon name='play_arrow'}}
+              <span class="add-info">{{t 'student-landing.study-player'}}</span>
+            </span>
+            <span class="performance-score {{if (not hasCMStarted) 'not-started'}}" {{action 'openCourseReport'}}>{{if hasCMStarted (concat cmPerformanceSummary.score '%') '--' }}</span>
           </a>
-        {{else}}
-          <a {{action 'selectItem' 'course-map'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}">
+      {{else}}
+        <a class="tab-menu" role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}">
+          <span class="course-map-tab" {{action 'selectItem' 'course-map'}}>
             {{gru-icon name='sort'}}
             <span class="add-info">{{t 'teacher-landing.class.course-map'}}</span>
-          </a>
-        {{/if}}
-      </div>
+          </span>
+          <span class="performance-score {{if (not hasCMStarted) 'not-started'}}" {{action 'openCourseReport'}}>{{if hasCMStarted (concat cmPerformanceSummary.score '%') '--' }}</span>
+        </a>
+      {{/if}}
+    </div>
+    {{#unless isILActivity}}
       <div class="tab profile-prof ">
-        <a {{action 'selectItem' 'profile-prof'}} role="tab" data-toggle="tooltip" title="{{t 'student-landing.class.my-proficiency'}}">
-          {{gru-icon name='account_circle'}}
+        <a {{action 'selectItem' 'profile-prof'}} class="tab-menu" role="tab" data-toggle="tooltip" title="{{t 'student-landing.class.my-proficiency'}}">
+          {{gru-icon name='school'}}
           <span class="add-info">{{t 'student-landing.class.my-proficiency'}}</span>
         </a>
       </div>
     {{/unless}}
-    {{#if navTitle}}
-      <div class="studyplayer-title">
-        <span>{{navTitle}}</span>
+    <div class="studyplayer-title">
+      <span>{{navTitle}}</span>
+    </div>
+    <div class="notification-tab">
+      {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' classId=classId isTeacher=false }}
+    </div>
+
+    {{#if isPremiumClass}}
+      <div class="performance-summary {{if competencyCompletionStats 'has-competency-stats'}}" {{action 'selectItem' 'profile-prof'}}>
+        {{#if competencyCompletionStats}}
+          <span class="numerator">{{competencyCompletionStats.completedCompetencies}}</span>
+          <span class="denominator">{{competencyCompletionStats.totalCompetencies}}</span>
+        {{else}}
+          <span class="no-completion-score">--</span>
+        {{/if}}
       </div>
     {{/if}}
-    {{#if isFeatureEnabled }}
-      <div class="notification-tab">
-        {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' classId=classId isTeacher=false }}
-      </div>
-    {{/if}}
-    {{#if hasClassInfo }}
-      {{#if (not isPremiumClass)}}
-        <div class="performance-chart {{unless hasStarted 'not-started'}}" {{action 'openCourseReport'}}>
-          {{charts/gru-performance-chart performanceSummary=performanceSummary }}
-        </div>
-      {{/if}}
+    {{#if hasClassInfo}}
       <div class="class-info">
         <a {{action 'selectItem' 'class-info'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.class-management-tab.class-information'}}">
-          <img src='/assets/gooru/info-outline-white.png'>
-        </a>
-      </div>
-    {{else}}
-      <div class="performance">
-        {{#if performanceSummary}}
-          <span class="score">{{performanceSummary.totalCompleted}}/{{performanceSummary.total}}</span>
-        {{else}}
-          <span class="score">--</span>
-        {{/if}}
-        <span class="label">{{t 'common.completion'}}</span>
-      </div>
-      <div class="performance-summary" style="background-color:{{if performanceSummary (grade-color performanceSummary.score) defaultBarColor}}">
-        <span class="score">
-          {{#if performanceSummary}}
-            {{#if performanceSummary.score}} {{performanceSummary.score}}% {{else}}0% {{/if}} {{else}}--
-          {{/if}}
-        </span>
-        <span class="label">{{t 'teacher-landing.class.performance'}} </span>
+          {{gru-icon name="info" style='material-icons-outlined'}}
+      </a>
       </div>
     {{/if}}
-  </div>
-  <div class="hidden visible-xs">
-    <div class="header-container">
-      <div class="nav-bar">
-        <div class="close tab" {{action "onClickBrand"}}>
-          {{#link-to 'index' class="navbar-brand home-link" }} {{/link-to}}
-        </div>
-        {{#unless class.isArchived}}
-          {{#unless isILActivity}}
-            <div class="class-activities dca tab">
-              <a {{action 'selectItem' 'class-activities'}}>
-                <i class="dca-pin"></i>
-              </a>
-            </div>
-          {{/unless}}
-          <div class="action">
-            <div class="course-map study-player tab {{destination}} {{if isPremiumCourse 'premium-course'}}">
-              {{#if (eq selectedMenuItem 'course-map')}}
-                <a {{action 'selectItem' 'study-player'}} class="{{unless isCourseMapped 'no-course'}}">
-                  {{gru-icon name='play_arrow'}}
-                </a>
-              {{else}}
-                <a {{action 'selectItem' 'course-map'}}>
-                  {{gru-icon name='sort'}}
-                </a>
-              {{/if}}
-            </div>
-          </div>
-          <div class="tab profile-prof ">
-            <a {{action 'selectItem' 'profile-prof'}} role="tab" data-toggle="tooltip" title="{{t 'student-landing.class.my-proficiency'}}">
-              {{gru-icon name='account_circle'}}
-            </a>
-          </div>
-          {{#if isFeatureEnabled }}
-            <div class="notification-tab">
-              {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' classId=classId isTeacher=false }}
-            </div>
-          {{/if}}
-        {{/unless}}
-      </div>
-      <div class="report-container-bar">
-        {{#if hasClassInfo }}
-          {{#if (not isPremiumClass)}}
-            <div class="report {{unless hasStarted 'not-started'}}" {{action 'openCourseReport'}}>
-              {{charts/gru-performance-chart performanceSummary=performanceSummary }}
-            </div>
-          {{/if}}
-        {{else}}
-          <div class="performance-summary" style="background-color:{{if performanceSummary (grade-color performanceSummary.score) defaultBarColor}}">
-            <span class="score">
-              {{#if performanceSummary}}
-                {{#if performanceSummary.score}} {{performanceSummary.score}}% {{else}}0% {{/if}} {{else}}--
-              {{/if}}
-            </span>
-          </div>
-        {{/if}}
-      </div>
-    </div>
   </div>
 </div>

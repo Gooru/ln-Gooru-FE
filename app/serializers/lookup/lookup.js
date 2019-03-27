@@ -118,5 +118,17 @@ export default Ember.Object.extend({
     return languages.map(function(language) {
       return Ember.Object.create(language);
     });
+  },
+
+  /**
+   * Normalizes Educational
+   * @param {} payload
+   * @returns {Educational[]}
+   */
+  normalizeEducations: function(payload) {
+    const educationalUse = payload.educational_use || [];
+    return educationalUse.map(function(educational) {
+      return Ember.Object.create(educational);
+    });
   }
 });

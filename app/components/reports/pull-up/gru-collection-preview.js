@@ -24,10 +24,15 @@ export default Ember.Component.extend(ModalMixin, {
   didInsertElement() {
     const component = this;
     component.openPullUp();
-    if (component.get('previewContentType') === 'assessment') {
+    let previewContentType = component.get('previewContentType');
+    if (previewContentType === 'assessment') {
       component.fetchAssessment();
-    } else {
+    } else if (previewContentType === 'collection') {
       component.fetchCollection();
+    } else if (previewContentType === 'assessment-external') {
+      component.fetchExternalAssessment();
+    } else if (previewContentType === 'collection-external') {
+      component.fetchExternalCollection();
     }
     component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
   },
@@ -146,6 +151,15 @@ export default Ember.Component.extend(ModalMixin, {
    */
   isRemixableContent: false,
 
+  /**
+   * @property {Boolean} isExternalContent
+   */
+  isExternalContent: Ember.computed('previewContentType', function() {
+    const component = this;
+    let previewContentType = component.get('previewContentType');
+    return previewContentType.includes('external');
+  }),
+
   //--------------------------------------------------------------------------
   // Methods
 
@@ -210,6 +224,42 @@ export default Ember.Component.extend(ModalMixin, {
       .then(({collection}) => {
         if (!component.isDestroyed) {
           component.set('previewContent', collection);
+        }
+      });
+  },
+
+  /**
+   * @function fetchExternalAssessment
+   * Method to fetch an external assessment
+   */
+  fetchExternalAssessment() {
+    const component = this;
+    const externalAssessmentId = component.get('previewContentId');
+    const assessmentService = component.get('assessmentService');
+    return Ember.RSVP.hash({
+      externalAssessment: assessmentService.readExternalAssessment(externalAssessmentId)
+    })
+      .then(({externalAssessment}) => {
+        if (!component.isDestroyed) {
+          component.set('previewContent', externalAssessment);
+        }
+      });
+  },
+
+  /**
+   * @function fetchExternalCollection
+   * Method to fetch an external collection
+   */
+  fetchExternalCollection() {
+    const component = this;
+    const externalCollectionId = component.get('previewContentId');
+    const collectionService = component.get('collectionService');
+    return Ember.RSVP.hash({
+      externalCollection: collectionService.readExternalCollection(externalCollectionId)
+    })
+      .then(({externalCollection}) => {
+        if (!component.isDestroyed) {
+          component.set('previewContent', externalCollection);
         }
       });
   },

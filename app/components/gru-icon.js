@@ -23,9 +23,9 @@ export default Ember.Component.extend({
   // Attributes
   attributeBindings: ['tooltipData:title', 'dataToggle:data-toggle'],
 
-  classNames: ['gru-icon', 'material-icons'],
+  classNames: ['gru-icon'],
 
-  classNameBindings: ['name'],
+  classNameBindings: ['name', 'style'],
 
   tagName: 'i',
 
@@ -43,6 +43,14 @@ export default Ember.Component.extend({
    * @property {string}
    */
   name: null,
+
+  /**
+   * This property will decide which material style need to choose, google material icon supported
+   * styles are (material-icons, material-icons-outlined, material-icons-two-tone, material-icons-round
+   * and material-icons-sharp).  Default style is material-icons
+   * @type {String}
+   */
+  style: 'material-icons',
 
   tooltipTitle: null,
 

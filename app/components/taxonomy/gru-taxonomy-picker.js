@@ -40,7 +40,7 @@ export default Ember.Component.extend({
         data: tagData
       });
       this.get('selectedTags').pushObject(newSelectedTag);
-      if (this.get('isCompatiableMode')) {
+      if (this.get('publishSelectedItems')) {
         this.updateSelectedTags();
       }
     },
@@ -79,7 +79,7 @@ export default Ember.Component.extend({
           break;
         }
       }
-      if (this.get('isCompatiableMode')) {
+      if (this.get('publishSelectedItems')) {
         this.updateSelectedTags();
       }
     },
@@ -107,9 +107,10 @@ export default Ember.Component.extend({
           break;
         }
       }
-
       this.get('selectedTags').removeObject(taxonomyTag);
-      browseItem.set('isSelected', false);
+      if (browseItem) {
+        browseItem.set('isSelected', false);
+      }
     },
 
     /**
@@ -135,7 +136,6 @@ export default Ember.Component.extend({
   // Events
   init() {
     this._super(...arguments);
-
     Ember.Logger.assert(
       this.get('subject.courses'),
       'Courses not found for subject'
@@ -162,7 +162,6 @@ export default Ember.Component.extend({
       let selectedIds = selected.map(function(tagData) {
         return tagData.get('id');
       });
-
       this.findBrowseItems(selectedIds, browseItems).then(function(
         browseItems
       ) {
@@ -278,6 +277,11 @@ export default Ember.Component.extend({
   isCompatiableMode: false,
 
   /**
+   * @property {Boolean} publishSelectedItems
+   */
+  publishSelectedItems: false,
+
+  /**
    * @property {String} course
    */
   course: null,
@@ -287,9 +291,19 @@ export default Ember.Component.extend({
    */
   domain: null,
 
+  /**
+   * @property {Observer} onUncheckItem - Observe whenever data changes
+   */
+  onUncheckItem: Ember.observer('unCheckedItem', function() {
+    const component = this;
+    let unCheckedItem = component.get('unCheckedItem');
+    if (unCheckedItem) {
+      component.send('uncheckItem', unCheckedItem);
+    }
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
-
   /**
    * Find the browse item with a specific ID from a list of browse items.
    * If the browse item is not found in the list, then the search continues
@@ -306,7 +320,6 @@ export default Ember.Component.extend({
         if (!browseItems.length) {
           resolve(null);
         }
-
         let filteredList = browseItems.filter(function(browseItem) {
           return browseItem.isSimilar(itemId);
         });
@@ -410,7 +423,9 @@ export default Ember.Component.extend({
     if (tagDataList && tagDataList.length) {
       tags = tagDataList.map(function(data) {
         let props = {};
-        $.extend(props, config, { data: data });
+        $.extend(props, config, {
+          data: data
+        });
 
         return TaxonomyTag.create(props);
       });

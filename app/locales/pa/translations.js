@@ -93,7 +93,9 @@ export default Object.assign(quizzesTranslations, {
   'common.accept': 'ਸਵੀਕਾਰ ਕਰੋ',
   'common.ignore': 'ਅਣਡਿੱਠ ਕਰੋ',
   'common.add': 'ਜੋੜਨਾ',
-  'common.add-an-activity': 'ਇੱਕ ਗਤੀਸ਼ੀਲਤਾ ਜੋੜੋ',
+  'common.plan-an-activities': 'Plan your activities',
+  'common.plan-an-activities-msg':
+    'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'ਮੁੜ ਸਮਾਂ-ਤਹਿ',
   'common.no-unschedule-items':
     'ਤੁਹਾਡੇ ਕੋਲ ਕਿਸੇ ਵੀ ਗਤੀਵਿਧੀ ਨਹੀਂ ਹੈ ਜਿਸ ਲਈ ਸਮਾਂ ਸਾਰਣੀ ਦੀ ਲੋੜ ਹੈ',
@@ -191,6 +193,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'ਨਾ-ਬੁੱਕਮਾਰਕ ਤੇ ਕਲਿੱਕ ਕਰੋ',
   'common.close': 'ਬੰਦ',
   'common.collection': 'ਸੰਗ੍ਰਹਿ',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'ਸੰਗ੍ਰਹਿ',
   'common.collection-pl.one': 'ਸੰਗ੍ਰਹਿ',
   'common.collection-pl.other': 'ਸੰਗ੍ਰਹਿ',
@@ -235,6 +238,12 @@ export default Object.assign(quizzesTranslations, {
   'common.course': 'ਕੋਰਸ',
   'common.course-title': 'ਕੋਰਸ ਦਾ ਸਿਰਲੇਖ',
   'common.courses': 'ਕੋਰਸ',
+  'common.competency-status-0': 'Not Started',
+  'common.competency-status-1': 'In Progress',
+  'common.competency-status-2': 'Mastered (Inferred)',
+  'common.competency-status-3': 'Mastered (Asserted)',
+  'common.competency-status-4': 'Mastered (Earned)',
+  'common.competency-status-5': 'Mastered (Demonstrated)',
   'common.create': 'ਬਣਾਉ',
   'common.createClass': 'ਕਲਾਸ ਬਣਾਓ',
   'common.created-by': 'ਦੁਆਰਾ ਬਣਾਇਆ',
@@ -248,6 +257,7 @@ export default Object.assign(quizzesTranslations, {
     'ਸਾਰੀ ਸਮੱਗਰੀ ਇਸ ਨਾਲ ਜੁੜੇ ਕਲਾਸਰੂਮਾਂ ਲਈ ਪਹੁੰਚਯੋਗ ਨਹੀਂ ਹੋਵੇਗੀ',
   'common.depth-of-knowledge': 'ਗਿਆਨ ਦੀ ਗਹਿਰਾਈ',
   'common.description': 'ਵਰਣਨ',
+  'common.destination': 'Destination',
   'common.disappear-after-login':
     'ਇਹ {{loginnumber}} ਦੇ ਲਾਗਿੰਨ ਬਾਅਦ ਅਲੋਪ ਹੋ ਜਾਵੇਗਾ',
   'common.disappear-next-login': 'ਇਹ ਅਗਲੇ ਲਾਗਇਨ ਤੇ ਦਿਖਾਈ ਨਹੀਂ ਦੇਵੇਗਾ',
@@ -430,6 +440,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'ਮੇਰੇ ਸਵਾਲਾਂ ਤੋਂ',
   'common.from-my-resources': 'ਮੇਰੇ ਸਰੋਤਾਂ ਤੋਂ',
   'common.hide-results': 'ਨਤੀਜੇ ਛੁਪਾਓ',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'ਸੰਕੇਤ',
   'common.home': 'ਘਰ',
   'common.if_questions': 'ਜੇ ਤੁਹਾਡੇ ਕੋਈ ਸਵਾਲ ਹਨ,',
@@ -528,6 +539,9 @@ export default Object.assign(quizzesTranslations, {
   'common.on': 'ਤੇ',
   'common.other': 'ਹੋਰ',
   'common.overall-performance': 'ਕੁੱਲ ਪ੍ਰਦਰਸ਼ਨ',
+  'common.educational-use': 'Educational use',
+  'common.resource-types': 'Resource types',
+  'common.publishers': 'publishers',
   'common.password': 'ਪਾਸਵਰਡ',
   'common.pending': 'ਬਕਾਇਆ',
   'common.performance': 'ਪ੍ਰਦਰਸ਼ਨ ਦਿਖਾਓ',
@@ -545,6 +559,7 @@ export default Object.assign(quizzesTranslations, {
   'common.published-tooltip': 'ਬੈਡ ਸਮਗਰੀ',
   'common.publisher': 'ਪ੍ਰਕਾਸ਼ਕ',
   'common.prev': 'ਪਿਛਲਾ',
+  'common.progress': 'Progress',
   'common.question': 'ਸਵਾਲ',
   'common.questions': 'ਸਵਾਲ',
   'common.questions-OE': 'ਮੁਫ਼ਤ ਜਵਾਬ ਪ੍ਰਸ਼ਨ',
@@ -630,7 +645,9 @@ export default Object.assign(quizzesTranslations, {
   'common.add-data': 'ਡਾਟਾ ਜੋੜੋ',
   'common.update-data': 'ਡਾਟਾ ਅਪਡੇਟ ਕਰੋ',
   'common.all': 'ਸਭ',
+  'common.please-wait': 'Please Wait',
   'common.unscheduled-items': 'ਅਣਡਿੱਠੀਆਂ ਚੀਜ਼ਾਂ',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'ਲਈ ਸੂਚੀਬੱਧ ਸੂਚੀ ਵਿੱਚ ਸ਼ਾਮਿਲ',
   'common.save-next': 'ਬਚਾਓ ਅਤੇ ਅਗਲਾ',
   'common.save-submit': 'ਬਚਾਓ ਅਤੇ ਸਭ ਨੂੰ ਜਮ੍ਹਾਂ ਕਰੋ',
@@ -712,6 +729,7 @@ export default Object.assign(quizzesTranslations, {
   'common.upload-file': 'ਅਪਲੋਡ ਫਾਇਲ',
   'common.upload-thumbnail': 'ਥੰਮਨੇਲ ਅਪਲੋਡ ਕਰੋ',
   'common.upload-photo': 'ਫੋਟੋ ਅੱਪਲੋਡ ਕਰੋ',
+  'common.until': 'Until',
   'common.remove-photo': 'ਫੋਟੋ ਹਟਾਓ',
   'common.use-case': 'ਕੇਸ ਵਰਤੋ',
   'common.valid-extensions': 'ਵੈਧ ਫਾਇਲ ਐਕਸਟੈਨਸ਼ਨ ਇਹ ਹਨ: {{extensions}}',
@@ -1080,6 +1098,15 @@ export default Object.assign(quizzesTranslations, {
     'ਪਿਛਲੇ ਗਤੀਵਿਧੀਆਂ',
   'student-landing.class.my-report': 'ਮੇਰੀ ਰਿਪੋਰਟ',
   'student-landing.class.my-location': 'ਮੇਰੇ ਸਥਾਨ',
+  'student-landing.class.my-proficiency': 'My Proficiency',
+  'student-landing.class.establish-skyline': 'Let\'s Establish your Skyline',
+  'student-landing.class.waiting-establish-skyline':
+    'Waiting for your teacher to complete setting up the class.',
+  'student-landing.class.setup-in-complete-desc1':
+    'It looks like your teacher has not',
+  'student-landing.class.setup-in-complete-desc2': 'updated class settings',
+  'student-landing.class.setup-in-complete-desc3':
+    'Please get in touch with her to resolve the matter. Once everything is correctly set up, refresh this page.',
   'student-landing.course.to-report': 'ਵਰਤੋਂ ਸੰਖੇਪ',
   'student-landing.course.total-time-spent': 'ਕੁੱਲ ਸਮਾਂ ਬਿਤਾਇਆ',
   'student-landing.current-activity': 'ਮੌਜੂਦਾ ਸਰਗਰਮੀ',
@@ -1152,6 +1179,9 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.back-to': 'ਵਾਪਸ ਕਲਾਸਰੂਮ ਵਿੱਚ',
   'teacher-landing.class.back-to-archived': 'ਵਾਪਸ ਆਰਕਾਈਵ ਕਲਾਸਰੂਮ ਵਿੱਚ',
   'teacher-landing.class.class-management': 'ਕਲਾਸ ਪ੍ਰਬੰਧਨ',
+  'teacher-landing.class.atc': 'ATC',
+  'teacher-landing.class.performance-overview': 'Performance Overview',
+  'teacher-landing.class.student-proficiency': 'Student Proficiency',
   'teacher-landing.class.class-management-tab.actions': 'ਕਾਰਵਾਈਆਂ',
   'teacher-landing.class.class-management-tab.assessment-min-score':
     'ਟ੍ਰਾਫੀਆਂ ਲਈ ਨਿਊਨਤਮ ਸਕੋਰ',
@@ -1211,6 +1241,17 @@ export default Object.assign(quizzesTranslations, {
     'ਕਲਾਸ ਵਿੱਚ ਸਾਰੇ ਵਿਦਿਆਰਥੀਆਂ ਲਈ ਕੁਸ਼ਲਤਾ ਦੀ ਸੰਚਵ ਗਿਣਤੀ',
   'teacher-landing.class.students-tab.error-message':
     'ਕਲਾਸ ਦੇ ਕਿਸੇ ਕੋਰਸ ਨੂੰ ਨਿਰਧਾਰਤ ਨਹੀਂ ਕੀਤਾ ਗਿਆ ਹੈ ਜਾਂ ਵਿਦਿਆਰਥੀਆਂ ਨੂੰ ਕਲਾਸ ਵਿਚ ਰੁੱਕਿਆ ਨਹੀਂ ਹੈ. ਇੱਕ ਵਾਰ ਕੋਰਸ ਨੂੰ ਕਲਾਸ ਵਿੱਚ ਨਿਯੁਕਤ ਕੀਤਾ ਗਿਆ ਹੈ ਅਤੇ ਵਿਦਿਆਰਥੀਆਂ ਨੂੰ ਉਤਸ਼ਾਹਿਤ ਕੀਤਾ ਗਿਆ ਹੈ, ਕਲਾਸ ਦੀ ਯੋਗਤਾ ਰਿਪੋਰਟ ਇੱਥੇ ਦਿਖਾਈ ਜਾਵੇਗੀ',
+  'teacher-landing.class.atc-view.domains-reviewed': 'Domains to be reviewed',
+  'teacher-landing.class.atc-view.class-activities-completed':
+    'Class Activities Completed',
+  'teacher-landing.class.atc-view.class-activities-pending':
+    'Class Activities Pending',
+  'teacher-landing.class.atc-view.show-all': 'Show All',
+  'teacher-landing.class.atc-view.collapse': 'Collapse',
+  'teacher-landing.class.atc-view.total-competencies-gained':
+    'Total Competencies Gained',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'ਕਲਾਸ ਦੀਆਂ ਗਤੀਵਿਧੀਆਂ',
   'teacher-landing.class.offline-class-report.class-report': 'ਕਲਾਸ ਦੀ ਰਿਪੋਰਟ',
   'teacher-landing.class.offline-class-report.activity-report': 'ਸਰਗਰਮੀ ਰਿਪੋਰਟ',
@@ -1292,14 +1333,6 @@ export default Object.assign(quizzesTranslations, {
     'ਤੁਹਾਡੇ ਵਿਦਿਆਰਥੀਆਂ ਨੂੰ ਅਧਿਐਨ ਕਰਨ ਵਾਲੀ ਸਭ ਤੋਂ ਘੱਟ ਗ੍ਰੇਡ ਪੱਧਰ ਦੀ ਸਮੱਗਰੀ ਕੀ ਹੈ?',
   'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
     'ਤੁਹਾਡੀ ਕਲਾਸ ਦੀ ਗ੍ਰੇਡ ਲੈਵਲ ਕੀ ਹੈ?',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-1':
-    '(1) ਤੁਸੀਂ ਕਲਾਸ ਮੂਲ ਅਤੇ ਮੰਜ਼ਿਲ ਦੇ ਅਧਾਰ ਤੇ ਹਰੇਕ ਵਿਦਿਆਰਥੀ ਲਈ ਵਿਅਕਤੀਗਤ ਸਿੱਖਣ ਦਾ ਰਸਤਾ ਤਿਆਰ ਕਰ ਸਕਦੇ ਹੋ',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-2':
-    '(2) ਮੂਲ ਰੂਪ ਵਿੱਚ, ਸਾਰੇ ਵਿਦਿਆਰਥੀਆਂ ਦੇ ਗ੍ਰੇਡ ਪੱਧਰ ਦੇ ਉਨ੍ਹਾਂ ਦੇ ਮੰਜ਼ਿਲ ਹਨ ਤੁਸੀਂ ਉਨ੍ਹਾਂ ਵਿਦਿਆਰਥੀਆਂ ਲਈ ਉੱਚੇ ਗ੍ਰੇਡ ਬਣਨ ਲਈ ਮੰਜ਼ਿਲ ਨੂੰ ਐਡਜਸਟ ਕਰ ਸਕਦੇ ਹੋ ਜੋ ਕਲਾਸ ਵਿਚ ਅੱਗੇ ਹਨ. ਵਿਦਿਆਰਥੀਆਂ ਦੀਆਂ ਸਕਾਈਂਲਾਈਨ ਅਤੇ ਉਨ੍ਹਾਂ ਦੇ ਮੰਜ਼ਿਲ ਤੇ ਆਧਾਰਿਤ ਵਿਅਕਤੀਗਤ ਕੋਰਸ ਦਾ ਨਕਸ਼ਾ ਤਿਆਰ ਕਰਨ ਲਈ ਸਿੱਖਣ ਦੇ ਰਸਤੇ ਨੂੰ ਨਿੱਜੀ ਤੌਰ ਤੇ ਕਲਿੱਕ ਕਰੋ.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-3':
-    '(3) ਸਮੁੱਚੀ ਕਲਾਸ ਲਈ ਮਾਰਗ ਤਿਆਰ ਕਰਨ ਲਈ ਕੇਵਲ ਇੱਕ ਵਾਰ ਹੀ ਕਾਰਵਾਈ ਹੋ ਸਕਦੀ ਹੈ. ਉਸ ਤੋਂ ਬਾਅਦ, ਹਰੇਕ ਵਿਦਿਆਰਥੀ ਲਈ ਹਰ ਇਕ ਅਪਡੇਟਸ ਦੀ ਜ਼ਰੂਰਤ ਹੋਵੇਗੀ.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-4':
-    '(4) ਤੁਸੀਂ ਇਕੱਲੇ ਵਿਦਿਆਰਥੀ ਲਈ ਮੰਜ਼ਿਲ ਗ੍ਰੇਡ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰ ਸਕਦੇ ਹੋ. ਆਈਕੋਨ <i id =  "ember1600 " class =  "ember-view gru-icon ਸਮੱਗਰੀ-ਆਈਕਾਨ ਰੀਪਲੇਅ " ਸ਼ੈਲੀ =  "ਵਰਟੀਕਲ-ਲਾਈਨ: ਮੱਧ; "> ਰੀਪਲੇਅ [1] ਤੇ ਕਲਿਕ ਕਰੋ ਮੰਜ਼ਿਲ, ਵਿਅਕਤੀਗਤ ਮਾਰਗ ਨੂੰ ਮੁੜ ਕੰਪੋਪੂਟ ਕਰਨ ਲਈ.',
   'teacher-landing.class.class-settings.origin': 'ਮੂਲ',
   'teacher-landing.class.class-settings.destination': 'ਮੰਜ਼ਲ',
   'teacher-landing.class.class-settings.students': 'ਵਿਦਿਆਰਥੀ',
@@ -1378,12 +1411,20 @@ export default Object.assign(quizzesTranslations, {
     'ਤੁਸੀਂ ਪ੍ਰਸ਼ਨਾਂ ਦੇ ਉੱਤਰ ਦੇਣ ਲਈ ਅੱਗੇ ਅਤੇ ਪਿੱਛੇ ਵੱਲ ਪਿੱਛੇ ਜਾ ਸਕਦੇ ਹੋ',
   'gru-assessment-confirmation.unlimited-attempts-left':
     'ਤੁਹਾਡੇ ਕੋਲ ਬੇਅੰਤ ਕੋਸ਼ਿਸ਼ਾਂ ਹਨ',
+  'gru-assessment-confirmation.setting-forward-teacher':
+    'Student can navigate forward only',
+  'gru-assessment-confirmation.setting-forward-backward-teacher':
+    'Student can navigate forward and backwards to answer questions',
+  'gru-assessment-confirmation.unlimited-attempts-left-teacher':
+    'Student have unlimited attempts',
   'gru-assessment-confirmation.attempts-left.zero':
     'ਤੁਹਾਡੇ ਕੋਲ {{count}} ਕੋਸ਼ਿਸ਼ਾਂ ਹਨ',
   'gru-assessment-confirmation.attempts-left.one':
     'ਤੁਹਾਡੇ ਕੋਲ 1 ਕੋਸ਼ਿਸ਼ ਬਾਕੀ ਹੈ',
   'gru-assessment-confirmation.attempts-left.other':
     'ਤੁਹਾਡੇ ਕੋਲ {{count}} ਕੋਸ਼ਿਸ਼ਾਂ ਹਨ',
+  'gru-assessment-confirmation.attempts-left.other-teacher':
+    'Student have {{count}} attempts',
   'gru-assessment-confirmation.unlimited-attempts':
     'ਤੁਹਾਡੇ ਕੋਲ ਬੇਅੰਤ ਕੋਸ਼ਿਸ਼ਾਂ ਹਨ',
   'gru-assessment-confirmation.cancel': 'ਰੱਦ ਕਰੋ',
@@ -1603,15 +1644,18 @@ export default Object.assign(quizzesTranslations, {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
+  'grade-selector.placeholder': 'Choose Grade Lines to Display',
   'standard-dropdown.placeholder': 'ਮਿਆਰੀ ਦੁਆਰਾ ਝਲਕ',
   'subject-dropdown.placeholder': 'ਵਿਸ਼ਾ',
   'subject-dropdown.prompt': 'ਇੱਕ ਵਿਸ਼ਾ ਚੁਣੋ',
+  'search-filter.input-placeholder': 'Type {{type}} name here...',
   'search-filter.courses': 'ਕੋਰਸ',
   'search-filter.collections': 'ਸੰਗ੍ਰਹਿ',
   'search-filter.resources': 'ਸਰੋਤ',
   'search-filter.assessments': 'ਮੁਲਾਂਕਣ',
   'search-filter.questions': 'ਸਵਾਲ',
   'search-filter.rubrics': 'ਕਤਲੇਆਮ',
+  'search-filter.authors': 'Authors',
   'search-filter.question-types.MC': 'ਬਹੁ - ਚੋਣ',
   'search-filter.question-types.FIB': 'ਖਾਲੀ ਥਾਂ ਭਰੋ',
   'search-filter.question-types.T/F': 'ਸਹੀ / ਗਲਤ',
@@ -1679,15 +1723,17 @@ export default Object.assign(quizzesTranslations, {
   'gru-reorder.instructions':
     'ਕਿਰਪਾ ਕਰਕੇ ਜਵਾਬਾਂ ਨੂੰ ਠੀਕ ਕ੍ਰਮ ਵਿੱਚ ਦੁਬਾਰਾ ਕ੍ਰਮਬੱਧ ਕਰੋ, ਅਤੇ  "{{action}} " ਤੇ ਕਲਿਕ ਕਰੋ.',
   'student-first-experience.preStudyTitle': '{{title}} ਲਈ ਪੂਰਵ-ਅਧਿਐਨ',
+  'student-first-experience.lp-compute-inprogress':
+    'We are computing your initial proficiency profile in {{title}}',
   'student-first-experience.route0-action.accept': 'ਸਵੀਕਾਰ ਕਰੋ',
   'student-first-experience.route0-action.ignore': 'ਅਣਡਿੱਠ ਕਰੋ',
   'student-first-experience.competency.popover.title': '{{title}} ਸੀਮਾ',
   'student-first-experience.competency.popover.content':
     'ਤੁਹਾਨੂੰ ਆਪਣੇ ਮੰਜ਼ਿਲ ਤੇ ਪਹੁੰਚਣ ਲਈ ਆਪਣੀ ਸਕਾਈਲੀਨ ਅਤੇ ਇਸ ਗ੍ਰੇਡ ਲਾਈਨ ਦੇ ਸਾਰੇ ਮਾਪਦੰਡਾਂ ਦਾ ਅਧਿਐਨ ਕਰਨ ਦੀ ਲੋੜ ਹੈ.',
   'student-first-experience.assigned-course-title': '{{title}} ਲਈ ਨਿਰਧਾਰਤ ਕੋਰਸ',
-  'student-first-experience.study-course': 'ਸਟੱਡੀ ਕੋਰਸ',
-  'student-first-experience.show-my-destination': 'ਆਪਣਾ ਮੰਜ਼ਿਲ ਦਿਖਾਓ',
-  'student-first-experience.show-me-my-route': 'ਮੇਰੇ ਰੂਟ ਦਿਖਾਓ',
+  'student-first-experience.start-studying': 'Start Studying',
+  'student-first-experience.show-route': 'Show Route',
+  'student-first-experience.review-destination': 'Review Destination',
   'student-first-experience.competency-level.title':
     'ਤੁਹਾਡੀ ਪ੍ਰੋਵੀਜਨ ਦੀ ਪ੍ਰੋਫਾਇਲ',
   'student-first-experience.competency-level.mastery':
@@ -1710,6 +1756,12 @@ export default Object.assign(quizzesTranslations, {
     'ਤੁਸੀਂ ਵਰਤਮਾਨ ਵਿੱਚ ਹੋ',
   'student-first-experience.competency-level-partial.desc2':
     'ਮੈਥ ਲਈ ਤੁਹਾਡੀ ਸਕਾਈਲਾਈਨ ਨਕਸ਼ੇ ਤੇ ਸਵਾਗਤ ਕਰੋ. ਸਕਾਈਲਾਈਨ (ਮੋਟਾ ਚਿੱਟਾ ਲਾਈਨ) ਉਸ ਉੱਚਤਮ ਪੱਧਰ ਨੂੰ ਦਰਸਾਉਂਦੀ ਹੈ ਜਿਸ ਨੂੰ ਤੁਸੀਂ ਹਰ ਡੋਮੇਨ ਵਿੱਚ ਹਾਸਿਲ ਕੀਤਾ ਹੈ. ਇੱਕ ਡੋਮੇਨ ਗਣਿਤ ਦਾ ਖੇਤਰ ਹੈ ਜੋ ਤੁਸੀਂ ਪੜਦੇ ਹੋ, ਜਿਵੇਂ ਕਿ ਨੰਬਰ ਸਿਸਟਮ ਅਤੇ ਸਮੀਕਰਨ ਅਤੇ ਸਮੀਕਰਨਾਂ. ਹਰੇਕ ਕਾਲਮ ਇੱਕ ਗਣਿਤ ਡੋਮੇਨ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ. ਅਤੇ ਕਾਲਮ ਵਿਚ ਹਰੇਕ ਬਕਸੇ ਡੋਮੇਨ ਵਿਚ ਮਿਆਰੀ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ. ਇਕ ਵਾਰ ਜਦੋਂ ਤੁਸੀਂ ਮਿਆਰਾਂ ਨੂੰ ਸਿਖਣਾ ਅਤੇ ਮੁਹਾਰਤ ਸ਼ੁਰੂ ਕਰਦੇ ਹੋ, ਤਾਂ ਤੁਹਾਡੀ ਸਕਾਈਲੀਨ ਲਗਾਤਾਰ ਵਧਦੀ ਰਹੇਗੀ.',
+  'student-first-experience.competency-level-partial.desc3':
+    'As you master each of the competencies, the corresponding box is updated to dark blue.',
+  'student-first-experience.competency-level-partial.desc4':
+    'The skyline is the thick white line that shows the highest competencies that you have mastered in each math domain.',
+  'student-first-experience.competency-level-partial.desc5':
+    'If the skyline is at the bottom of a domain, it means the system needs more information to be able to locate you in that topic. As soon as you start on the lessons and check for understandings, your skyline will bump up and update your proficiency in each domain.',
   'student-first-experience.units.other': '{{ਗਿਣਤੀ}} ਇਕਾਈਆਂ',
   'player.gru-navigation.view-report': 'ਰਿਪੋਰਟ ਵੇਖੋ',
   'player.gru-navigator.see-usage-report': 'ਉਪਯੋਗ ਦੀ ਰਿਪੋਰਟ ਵੇਖੋ',
@@ -1906,6 +1958,7 @@ export default Object.assign(quizzesTranslations, {
   'home.no-classes-found.teacher-toolkit.description':
     'ਇਸ ਟੂਲਕਿੱਟ ਵਿੱਚ ਸ਼ੁਰੂਆਤ ਕਰਨ ਵਿੱਚ ਤੁਹਾਡੀ ਮਦਦ ਕਰਨ ਲਈ ਸਰੋਤ ਹਨ.',
   'home.no-classes-found.teacher-toolkit.button-text': 'ਅਧਿਆਪਕ ਟੂਲਕਿਟ',
+  'taxonomy.grades': 'Grades',
   'taxonomy.gru-taxonomy-selector.add-secondary': 'ਸੈਕੰਡਰੀ ਜੋੜੋ',
   'taxonomy.gru-taxonomy-selector.choose-subject': 'ਵਿਸ਼ਾ ਚੁਣੋ',
   'taxonomy.gru-taxonomy-selector.competency-subject-and-course':
@@ -2370,7 +2423,45 @@ export default Object.assign(quizzesTranslations, {
   'report.competency-report.show-global-data': 'ਗਲੋਬਲ ਡਾਟਾ ਦਿਖਾਓ',
   'report.competency-report.show-student-data': 'ਵਿਦਿਆਰਥੀ ਡੇਟਾ ਦਿਖਾਓ',
   'report.competency-report.show-learning-map': 'ਸਿਖਲਾਈ ਨਕਸ਼ਾ ਦਿਖਾਓ',
+  'report.competency-report.note':
+    'Score 80% or more in our signature assessment and show your mastery',
   'report.domain-report': 'ਡੋਮੇਨ ਰਿਪੋਰਟ',
+  'competency-info-content.portfolio': 'PORTFOLIO',
+  'competency-info-content.metadata': 'METADATA',
+  'competency-info-content.learning-map': 'LEARNING MAP',
+  'competency-meta-data.title': 'ALT-CONCEPTS',
+  'competency-meta-data.heading.micro': 'MICRO COMPETENCIES',
+  'competency-meta-data.heading.prequisite': 'PREQUISITE COMPETENCIES',
+  'competency-meta-data.nodata.micro':
+    'There are no micro-competencies defined for this competency',
+  'competency-meta-data.nodata.prequisite':
+    'There are no prerequisite-competencies defined for this competency',
+  'competency-meta-data.nodata.competency':
+    'There are no alt-concepts defined for this competency',
+  'student-journey.heading': 'YOUR JOURNEY',
+  'student-journey.teacher-heading': 'STUDENT JOURNEY',
+  'student-journey.nodata':
+    'You are yet to start your journey for this competency',
+  'student-journey.no-data-teacher':
+    'Student are yet to start journey for this competency',
+  'student-journey.student-status-3':
+    'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
+  'student-journey.student-status-2':
+    'You have not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+  'student-journey.teacher-status-2':
+    'The student has not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+  'student-journey.teacher-status-3':
+    'The student has asserted mastery in the competency and has not studied any learning activity on the Navigator for this competency.',
+  'learning-map.practice-question': 'practice questions',
+  'learning-map.no-practice-questions':
+    'There are no practice questions for this competency',
+  'learning-map.solved-examples': 'solved examples',
+  'learning-map.no-solved-examples':
+    'There are no solved examples for this competency',
+  'learning-map.challenging-questions': 'challenging questions',
+  'learning-map.no-challenging-questions':
+    'There are no challenging questions for this competency',
+  'student-card.message': 'This {{type}} has been deleted',
   'self-report.your-score': 'ਤੁਹਾਡਾ ਸਕੋਰ',
   'self-report.time_spent': 'ਸਮਾਂ ਬਿਤਾਇਆ',
   'self-report.update-error': 'ਸਕੋਰ ਨੂੰ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਸਮੱਸਿਆ',
