@@ -11,7 +11,7 @@
   <div class="tooltip-html-container" style="display: none;">
     <div class="tooltip-container">
       <div class="header-container">
-        <div class="dp-container" style="background-color: {{safe-html (grade-color studentData.percentScore)}};">
+        <div class="dp-container grade-range-{{grade-range studentData.percentScore}}">
           <img src="{{studentData.thumbnail}}"/>
         </div>
         <div class="student-info">
@@ -27,7 +27,7 @@
         <div class="performance-container info-container" {{action "onShowStudentPerformance" studentData 'report'}}>
           <div class="title-container">{{t 'teacher-landing.class.class-management-tab.performance'}}</div>
           <div class="performance-bar-container">
-            <span class="performance-bar" style="background-color: {{safe-html (grade-color studentData.percentScore)}}; width: {{studentData.percentScore}}%;"></span>
+            <span class="performance-bar grade-range-{{grade-range studentData.percentScore}}" style="width: {{studentData.percentScore}}%;"></span>
           </div>
           <div class="performance-percentage" style="color: {{safe-html (grade-color studentData.percentScore)}};">{{studentData.percentScore}}%</div>
         </div>
@@ -56,9 +56,9 @@
 {{/if}}
 
 {{#if (and isMobileView isShowTooltip)}}
-  <!-- Addon containers used to show backdrop in mobile background and active student -->
+  <!-- Elements to show active student profile -->
   <div class="active-student-container hidden">
-    <div class="student-performance-container" style="background-color: {{safe-html (grade-color studentData.percentScore)}};">
+    <div class="student-performance-container grade-range-{{grade-range studentData.percentScore}}">
       <img class="student-thumbnail-container" src="{{studentData.thumbnail}}"/>
     </div>
   </div>
