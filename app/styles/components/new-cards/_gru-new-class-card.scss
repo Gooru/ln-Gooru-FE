@@ -150,10 +150,6 @@
     .has-success + .info-form ~ .panel-footer {
       background: $blue-400;
       cursor: pointer;
-
-      .join-class-btn  {
-        cursor: pointer;
-      }
     }
 
     .has-success input {
