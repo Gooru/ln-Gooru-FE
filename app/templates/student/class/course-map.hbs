@@ -2,23 +2,11 @@
   <div class="bar-charts" data-content="{{performancePercentage}}% Completed">
     <div class="completion-chart">
       <div class="start-point">{{gru-icon name="stars"}}</div>
-      {{#if showLocateMe }}
         {{charts/gru-x-bar-chart data=barChartData mileStone=mileStone mileStoneHandler=(action 'mileStoneHandler')  }}
-      {{else}}
-        {{charts/gru-x-bar-chart data=barChartData }}
-      {{/if}}
       <div class="destination-point">{{gru-icon name="place"}}</div>
     </div>
   </div>
   <div class="controller student course-map">
-    <h5 class="course-title hidden visible-xs">{{class.title}}</h5>
-    <div class="actions hidden-xs">
-      <span class="min-score {{unless class.minScore 'hidden'}}">
-            <i></i> > {{class.minScore}} %</span>
-      <button {{action "locateMe" userLocation}} title="{{t 'class.overview.locate'}}" class="btn btn-info locate" data-toggle="tooltip" data-placement="auto">
-            <span>{{gru-icon name='near_me'}}</span>
-          </button>
-    </div>
     {{#if hasRouteSuggestion}}
       <h5 class="pre-study-title hidden-xs">{{t 'class.overview.pre-study-title'}}</h5>{{!-- ToDo: Move css out of HBS --}}
       {{class.overview.routesuggestion-preview route0=route0 routeSuggestAction=(action 'courseRouteSuggestAction' ) class=currentClass course=course }}

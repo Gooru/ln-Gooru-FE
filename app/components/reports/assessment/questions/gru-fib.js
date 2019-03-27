@@ -35,16 +35,32 @@ export default Ember.Component.extend(QuestionMixin, {
       userAnswers = questionUtil.getCorrectAnswer();
     }
 
-    let answers = userAnswers.map(function(userAnswer, index) {
-      let userAnswerCorrect = questionUtil.isAnswerChoiceCorrect(
-        userAnswer,
-        index
-      );
-      let elementClass = anonymous
-        ? 'anonymous'
-        : userAnswerCorrect ? 'correct' : 'incorrect';
+    let elementClass = 'anonymous';
+
+    // use the anwerobject overall status value to decide whether to underline
+    // the user answer in Green or in Red. If overall status value reports user
+    // got it incorrect, then try to look at individual answer object..needed
+    //    as there can be >=1 blanks at FIB and we try to point out as best as
+    //    we can as to the specific blank that is incorrectly answered by user
+    let userAnswerObjects = questionUtil.toAnswerObjects(userAnswers);
+    let answers = userAnswerObjects.map(function(userAnswerObject, index) {
+      if (!userAnswerObject.skip && userAnswerObject.status === 'correct') {
+        elementClass = anonymous ? 'anonymous' : 'correct';
+      } else {
+        let userAnswerCorrect = questionUtil.isAnswerChoiceCorrect(
+          userAnswerObject.get('text'),
+          index
+        );
+
+        elementClass = anonymous
+          ? 'anonymous'
+          : userAnswerCorrect
+            ? 'correct'
+            : 'incorrect';
+      }
+
       return {
-        text: userAnswer,
+        text: userAnswerObject.get('text'),
         class: `answer ${elementClass}`
       };
     });

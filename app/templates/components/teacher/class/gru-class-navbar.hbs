@@ -28,7 +28,6 @@
           <span class="performance-score {{if (not hasCMStarted) 'not-started'}}" {{action 'onOpenCourseReport'}}>{{if hasCMStarted (concat class.performanceSummary.score '%') '--' }}</span>
         </a>
       </div>
-
       <div class="students tab">
         <a {{action 'selectItem' 'students'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.student-proficiency' }}">
           {{gru-icon name='school'}}
@@ -41,11 +40,9 @@
         <span>{{navTitle}}</span>
       </div>
     {{/if}}
-    {{#if isFeatureEnabled }}
-      <div class="notification-tab">
-        {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' isTeacher=true classId=class.id }}
-      </div>
-    {{/if}}
+    <div class="notification-tab">
+      {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' isTeacher=true classId=class.id }}
+    </div>
     {{#if isPremiumClass}}
       <div class="performance-summary {{if class.competencyStats 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
         {{#if class.competencyStats}}

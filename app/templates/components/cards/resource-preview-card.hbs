@@ -2,7 +2,7 @@
   <div class="resource-title-container">
     <div class="resource-order">{{contentSeq}}.</div>
     <div class="resource-type {{resource.format}}"></div>
-    <div class="title">{{safe-html resource.title}}</div>
+    <div class="title ellipsis">{{safe-html resource.title}}</div>
   </div>
   {{#if taxonomyTags.length}}
     <div class="resource-taxonomies-container">

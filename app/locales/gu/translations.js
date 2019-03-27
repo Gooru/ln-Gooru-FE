@@ -93,7 +93,9 @@ export default Object.assign(quizzesTranslations, {
   'common.accept': 'સ્વીકારો',
   'common.ignore': 'અવગણો',
   'common.add': 'ઉમેરો',
-  'common.add-an-activity': 'એક પ્રવૃત્તિ ઉમેરો',
+  'common.plan-an-activities': 'Plan your activities',
+  'common.plan-an-activities-msg':
+    'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'પુન: નિર્ધારિત',
   'common.no-unschedule-items':
     'તમારી પાસે કોઈ એવી પ્રવૃત્તિઓ નથી જે માટે શેડ્યૂલ કરવાની જરૂર છે',
@@ -190,6 +192,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'અનબુક બુકમાર્ક પર ક્લિક કરો',
   'common.close': 'બંધ',
   'common.collection': 'સંગ્રહ',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'સંગ્રહ',
   'common.collection-pl.one': 'સંગ્રહ',
   'common.collection-pl.other': 'સંગ્રહ',
@@ -232,6 +235,12 @@ export default Object.assign(quizzesTranslations, {
   'common.course': 'કોર્સ',
   'common.course-title': 'અભ્યાસક્રમ મથાળું',
   'common.courses': 'અભ્યાસક્રમો',
+  'common.competency-status-0': 'Not Started',
+  'common.competency-status-1': 'In Progress',
+  'common.competency-status-2': 'Mastered (Inferred)',
+  'common.competency-status-3': 'Mastered (Asserted)',
+  'common.competency-status-4': 'Mastered (Earned)',
+  'common.competency-status-5': 'Mastered (Demonstrated)',
   'common.create': 'બનાવો',
   'common.createClass': 'વર્ગ બનાવો',
   'common.created-by': 'દ્વારા બનાવવામાં',
@@ -245,6 +254,7 @@ export default Object.assign(quizzesTranslations, {
     'બધી સામગ્રી તેનાથી જોડાયેલા વર્ગખંડ માટે અગમ્ય રહેશે',
   'common.depth-of-knowledge': 'જ્ઞાનની ઊંડાઈ',
   'common.description': 'વર્ણન',
+  'common.destination': 'Destination',
   'common.disappear-after-login': '{{loginnumber}} લૉગિન પછી આ અદૃશ્ય થઈ જશે',
   'common.disappear-next-login': 'આ આગલા લોગિન પર દેખાશે નહીં',
   'common.district': 'જિલ્લા',
@@ -428,6 +438,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'મારા પ્રશ્નોમાંથી',
   'common.from-my-resources': 'મારા સંસાધનોમાંથી',
   'common.hide-results': 'પરિણામો છુપાવો',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'સંકેતો',
   'common.home': 'ઘર',
   'common.if_questions': 'જો તમારી પાસે કોઈ પ્રશ્નો હોય તો,',
@@ -524,6 +535,9 @@ export default Object.assign(quizzesTranslations, {
   'common.on': 'ચાલુ',
   'common.other': 'અન્ય',
   'common.overall-performance': 'સમગ્ર કામગીરી',
+  'common.educational-use': 'Educational use',
+  'common.resource-types': 'Resource types',
+  'common.publishers': 'publishers',
   'common.password': 'પાસવર્ડ',
   'common.pending': 'બાકી',
   'common.performance': 'પ્રદર્શન બતાવો',
@@ -540,6 +554,7 @@ export default Object.assign(quizzesTranslations, {
   'common.published-tooltip': 'ખરાબ સામગ્રી',
   'common.publisher': 'પ્રકાશક',
   'common.prev': 'આગળ',
+  'common.progress': 'Progress',
   'common.question': 'પ્રશ્ન',
   'common.questions': 'પ્રશ્નો',
   'common.questions-OE': 'મફત પ્રતિસાદ પ્રશ્નો',
@@ -623,7 +638,9 @@ export default Object.assign(quizzesTranslations, {
   'common.add-data': 'ડેટા ઉમેરો',
   'common.update-data': 'માહિતી અપડેટ કરો',
   'common.all': 'બધા',
+  'common.please-wait': 'Please Wait',
   'common.unscheduled-items': 'અનચેડેડ વસ્તુઓ',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'અનચેડેડ સૂચિમાં ઉમેરો',
   'common.save-next': 'સાચવો અને આગળ',
   'common.save-submit': 'સાચવો અને બધા સબમિટ કરો',
@@ -705,6 +722,7 @@ export default Object.assign(quizzesTranslations, {
   'common.upload-file': 'ફાઈલ અપલોડ કરો',
   'common.upload-thumbnail': 'થંબનેલ અપલોડ કરો',
   'common.upload-photo': 'અપલોડ કરો ફોટો',
+  'common.until': 'Until',
   'common.remove-photo': 'ફોટો દૂર કરો',
   'common.use-case': 'કેસનો ઉપયોગ કરો',
   'common.valid-extensions': 'માન્ય ફાઇલ એક્સ્ટેન્શન્સ આ છે: {{એક્સ્ટેન્શન}}',
@@ -1073,6 +1091,15 @@ export default Object.assign(quizzesTranslations, {
     'ભૂતકાળની પ્રવૃત્તિઓ',
   'student-landing.class.my-report': 'મારી રિપોર્ટ',
   'student-landing.class.my-location': 'મારું સ્થાન',
+  'student-landing.class.my-proficiency': 'My Proficiency',
+  'student-landing.class.establish-skyline': 'Let\'s Establish your Skyline',
+  'student-landing.class.waiting-establish-skyline':
+    'Waiting for your teacher to complete setting up the class.',
+  'student-landing.class.setup-in-complete-desc1':
+    'It looks like your teacher has not',
+  'student-landing.class.setup-in-complete-desc2': 'updated class settings',
+  'student-landing.class.setup-in-complete-desc3':
+    'Please get in touch with her to resolve the matter. Once everything is correctly set up, refresh this page.',
   'student-landing.course.to-report': 'વપરાશ સારાંશ',
   'student-landing.course.total-time-spent': 'કુલ સમય પસાર કર્યો',
   'student-landing.current-activity': 'વર્તમાન પ્રવૃત્તિ',
@@ -1144,6 +1171,9 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.back-to': 'વર્ગખંડ પાછા',
   'teacher-landing.class.back-to-archived': 'આર્કાઇવ ક્લાસરૂમ્સ પર પાછા',
   'teacher-landing.class.class-management': 'વર્ગ વ્યવસ્થાપન',
+  'teacher-landing.class.atc': 'ATC',
+  'teacher-landing.class.performance-overview': 'Performance Overview',
+  'teacher-landing.class.student-proficiency': 'Student Proficiency',
   'teacher-landing.class.class-management-tab.actions': 'ક્રિયાઓ',
   'teacher-landing.class.class-management-tab.assessment-min-score':
     'ટ્રૉફિઝ માટે લઘુત્તમ સ્કોર આકારણી',
@@ -1204,6 +1234,17 @@ export default Object.assign(quizzesTranslations, {
     'વર્ગના તમામ વિદ્યાર્થીઓ માટે યોગ્યતાની ગણતરી',
   'teacher-landing.class.students-tab.error-message':
     'વર્ગમાં કોઈ કોર્સ સોંપેલ નથી અથવા હજી સુધી ક્લાસમાં વિદ્યાર્થીઓ રોસ્ટ કરેલા નથી. એકવાર અભ્યાસક્રમ વર્ગને સોંપવામાં આવ્યો છે અને વિદ્યાર્થીઓને રોસ્ટર કરવામાં આવે છે, વર્ગ સક્ષમતાની રિપોર્ટ અહીં બતાવવામાં આવશે',
+  'teacher-landing.class.atc-view.domains-reviewed': 'Domains to be reviewed',
+  'teacher-landing.class.atc-view.class-activities-completed':
+    'Class Activities Completed',
+  'teacher-landing.class.atc-view.class-activities-pending':
+    'Class Activities Pending',
+  'teacher-landing.class.atc-view.show-all': 'Show All',
+  'teacher-landing.class.atc-view.collapse': 'Collapse',
+  'teacher-landing.class.atc-view.total-competencies-gained':
+    'Total Competencies Gained',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'વર્ગ પ્રવૃત્તિઓ',
   'teacher-landing.class.offline-class-report.class-report': 'વર્ગ અહેવાલ',
   'teacher-landing.class.offline-class-report.activity-report':
@@ -1286,14 +1327,6 @@ export default Object.assign(quizzesTranslations, {
     'તમારા વિદ્યાર્થીઓએ જે અભ્યાસ કરવો જોઈએ તે સૌથી નીચો ગ્રેડ સ્તર કયો છે?',
   'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
     'તમારા વર્ગનું ગ્રેડ સ્તર શું છે?',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-1':
-    '(1) તમે ક્લાસ મૂળ અને ગંતવ્યના આધારે પ્રત્યેક વિદ્યાર્થી માટે વ્યક્તિગત કરેલ લર્નિંગ પાથ જનરેટ કરી શકો છો.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-2':
-    '(2) ડિફૉલ્ટ રૂપે, બધા વિદ્યાર્થીઓ તેમના લક્ષ્ય તરીકે ગ્રેડ સ્તર ધરાવે છે. તમે વર્ગમાં આગળના વિદ્યાર્થીઓ માટે ઉચ્ચ ગ્રેડ બનવા માટે ગંતવ્યને સમાયોજિત કરી શકો છો. વિદ્યાર્થીની સ્કાયલાઇન અને તેમના લક્ષ્યસ્થાનના આધારે વ્યક્તિગત કરેલ કોર્સ નકશા જનરેટ કરવા માટે પાથ પાર્ટને વ્યક્તિગત કરો ક્લિક કરો.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-3':
-    '(3) સંપૂર્ણ વર્ગ માટે પાથ જનરેશન માત્ર એક જ વાર કાર્યવાહી કરી શકાય છે. તે પછી, દરેક વિદ્યાર્થી માટે વ્યક્તિગત રીતે કોઈપણ અપડેટ્સ કરવાની જરૂર પડશે.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-4':
-    '(4) તમે વ્યક્તિગત વિદ્યાર્થી માટે ગંતવ્ય ગ્રેડ ગોઠવી શકો છો. આયકન પર ક્લિક કરો <i id =  "ember1600 " class =  "એમ્બર-વ્યૂ ગુરુ-આયકન સામગ્રી-આયકન્સ ફરીથી ચલાવો " શૈલી =  "વર્ટિકલ-એલાઇન: મધ્યમ; "> ફરીથી ચલાવો [1] એકવાર તમે પુષ્ટિ કરો વ્યક્તિગત માર્ગ પાછી મેળવવા માટે ગંતવ્ય.',
   'teacher-landing.class.class-settings.origin': 'મૂળ',
   'teacher-landing.class.class-settings.destination': 'ગંતવ્ય',
   'teacher-landing.class.class-settings.students': 'વિદ્યાર્થીઓ',
@@ -1373,12 +1406,20 @@ export default Object.assign(quizzesTranslations, {
     'તમે પ્રશ્નોના જવાબો માટે આગળ અને પાછળ નેવિગેટ કરી શકો છો',
   'gru-assessment-confirmation.unlimited-attempts-left':
     'તમારી પાસે અમર્યાદિત પ્રયત્નો છે',
+  'gru-assessment-confirmation.setting-forward-teacher':
+    'Student can navigate forward only',
+  'gru-assessment-confirmation.setting-forward-backward-teacher':
+    'Student can navigate forward and backwards to answer questions',
+  'gru-assessment-confirmation.unlimited-attempts-left-teacher':
+    'Student have unlimited attempts',
   'gru-assessment-confirmation.attempts-left.zero':
     'તમારી પાસે {{count}} પ્રયાસો છે',
   'gru-assessment-confirmation.attempts-left.one':
     'તમારી પાસે 1 પ્રયત્ન બાકી છે',
   'gru-assessment-confirmation.attempts-left.other':
     'તમારી પાસે {{count}} પ્રયાસો છે',
+  'gru-assessment-confirmation.attempts-left.other-teacher':
+    'Student have {{count}} attempts',
   'gru-assessment-confirmation.unlimited-attempts':
     'તમારી પાસે અમર્યાદિત પ્રયત્નો છે',
   'gru-assessment-confirmation.cancel': 'રદ કરો',
@@ -1596,15 +1637,18 @@ export default Object.assign(quizzesTranslations, {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
+  'grade-selector.placeholder': 'Choose Grade Lines to Display',
   'standard-dropdown.placeholder': 'ધોરણ દ્વારા બ્રાઉઝ કરો',
   'subject-dropdown.placeholder': 'વિષયો)',
   'subject-dropdown.prompt': 'વિષય પસંદ કરો',
+  'search-filter.input-placeholder': 'Type {{type}} name here...',
   'search-filter.courses': 'અભ્યાસક્રમો',
   'search-filter.collections': 'સંગ્રહ',
   'search-filter.resources': 'સ્રોતો',
   'search-filter.assessments': 'મૂલ્યાંકન',
   'search-filter.questions': 'પ્રશ્નો',
   'search-filter.rubrics': 'rubrics',
+  'search-filter.authors': 'Authors',
   'search-filter.question-types.MC': 'બહુવૈીકલ્પિક',
   'search-filter.question-types.FIB': 'ખાલી ભરો',
   'search-filter.question-types.T/F': 'સાચું ખોટું',
@@ -1672,6 +1716,8 @@ export default Object.assign(quizzesTranslations, {
   'gru-reorder.instructions':
     'કૃપા કરીને જવાબોને યોગ્ય ક્રમમાં પુનઃક્રમાંકિત કરો અને  "{{ક્રિયા}} " ને ક્લિક કરો.',
   'student-first-experience.preStudyTitle': '{{title}} માટે પૂર્વ અભ્યાસ',
+  'student-first-experience.lp-compute-inprogress':
+    'We are computing your initial proficiency profile in {{title}}',
   'student-first-experience.route0-action.accept': 'સ્વીકારો',
   'student-first-experience.route0-action.ignore': 'અવગણો',
   'student-first-experience.competency.popover.title': '{{શીર્ષક}} સીમા',
@@ -1679,9 +1725,9 @@ export default Object.assign(quizzesTranslations, {
     'તમારે તમારા ગંતવ્ય સુધી પહોંચવા માટે તમારી સ્કાયલાઇન અને આ ગ્રેડ લાઇન વચ્ચેના બધા ધોરણોનો અભ્યાસ કરવાની જરૂર છે.',
   'student-first-experience.assigned-course-title':
     '{{title}} માટે સોંપેલ કોર્સ',
-  'student-first-experience.study-course': 'અભ્યાસક્રમ',
-  'student-first-experience.show-my-destination': 'મારું લક્ષ્ય બતાવો',
-  'student-first-experience.show-me-my-route': 'મારો રસ્તો બતાવો',
+  'student-first-experience.start-studying': 'Start Studying',
+  'student-first-experience.show-route': 'Show Route',
+  'student-first-experience.review-destination': 'Review Destination',
   'student-first-experience.competency-level.title': 'તમારી કુશળતા પ્રોફાઇલ',
   'student-first-experience.competency-level.mastery':
     '{{ગણતરી}} ધોરણો mastered',
@@ -1702,6 +1748,12 @@ export default Object.assign(quizzesTranslations, {
   'student-first-experience.competency-level-partial.desc1': 'તમે હાલમાં છો',
   'student-first-experience.competency-level-partial.desc2':
     'ગણિત માટે તમારા સ્કાયલાઇન નકશા પર આપનું સ્વાગત છે. સ્કાયલાઇન (જાડા સફેદ રેખા) એ દરેક ડોમેનમાં તમે ઉચ્ચતમ ધોરણ ધરાવો છો તે ઉચ્ચતમ ધોરણ બતાવે છે. ડોમેન એ ગણિતનો વિસ્તાર છે જે તમે અભ્યાસ કરો છો, જેમ કે સંખ્યા સિસ્ટમ્સ અને સમીકરણો અને સમીકરણો. દરેક કૉલમ ગણિત ડોમેન રજૂ કરે છે. અને કૉલમના દરેક બૉક્સ ડોમેનમાં માનક રજૂ કરે છે. એકવાર તમે ધોરણો શીખવા અને માસ્ટરિંગ શરૂ કરો, તો તમારી સ્કાયલાઇન સતત બમ્પ થઈ જશે.',
+  'student-first-experience.competency-level-partial.desc3':
+    'As you master each of the competencies, the corresponding box is updated to dark blue.',
+  'student-first-experience.competency-level-partial.desc4':
+    'The skyline is the thick white line that shows the highest competencies that you have mastered in each math domain.',
+  'student-first-experience.competency-level-partial.desc5':
+    'If the skyline is at the bottom of a domain, it means the system needs more information to be able to locate you in that topic. As soon as you start on the lessons and check for understandings, your skyline will bump up and update your proficiency in each domain.',
   'student-first-experience.units.other': '{{ગણતરી}} એકમો',
   'player.gru-navigation.view-report': 'અહેવાલ જુઓ',
   'player.gru-navigator.see-usage-report': 'વપરાશ અહેવાલ જુઓ',
@@ -1896,6 +1948,7 @@ export default Object.assign(quizzesTranslations, {
   'home.no-classes-found.teacher-toolkit.description':
     'આ ટૂલકિટ પાસે તમને પ્રારંભ કરવામાં સહાય માટે સંસાધનો છે.',
   'home.no-classes-found.teacher-toolkit.button-text': 'શિક્ષક ટૂલકિટ',
+  'taxonomy.grades': 'Grades',
   'taxonomy.gru-taxonomy-selector.add-secondary': 'ગૌણ ઉમેરો',
   'taxonomy.gru-taxonomy-selector.choose-subject': 'વિષય પસંદ કરો',
   'taxonomy.gru-taxonomy-selector.competency-subject-and-course':
@@ -2361,7 +2414,45 @@ export default Object.assign(quizzesTranslations, {
   'report.competency-report.show-global-data': 'વૈશ્વિક ડેટા બતાવો',
   'report.competency-report.show-student-data': 'વિદ્યાર્થી માહિતી બતાવો',
   'report.competency-report.show-learning-map': 'શીખવાની નકશા બતાવો',
+  'report.competency-report.note':
+    'Score 80% or more in our signature assessment and show your mastery',
   'report.domain-report': 'ડોમેન રિપોર્ટ',
+  'competency-info-content.portfolio': 'PORTFOLIO',
+  'competency-info-content.metadata': 'METADATA',
+  'competency-info-content.learning-map': 'LEARNING MAP',
+  'competency-meta-data.title': 'ALT-CONCEPTS',
+  'competency-meta-data.heading.micro': 'MICRO COMPETENCIES',
+  'competency-meta-data.heading.prequisite': 'PREQUISITE COMPETENCIES',
+  'competency-meta-data.nodata.micro':
+    'There are no micro-competencies defined for this competency',
+  'competency-meta-data.nodata.prequisite':
+    'There are no prerequisite-competencies defined for this competency',
+  'competency-meta-data.nodata.competency':
+    'There are no alt-concepts defined for this competency',
+  'student-journey.heading': 'YOUR JOURNEY',
+  'student-journey.teacher-heading': 'STUDENT JOURNEY',
+  'student-journey.nodata':
+    'You are yet to start your journey for this competency',
+  'student-journey.no-data-teacher':
+    'Student are yet to start journey for this competency',
+  'student-journey.student-status-3':
+    'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
+  'student-journey.student-status-2':
+    'You have not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+  'student-journey.teacher-status-2':
+    'The student has not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+  'student-journey.teacher-status-3':
+    'The student has asserted mastery in the competency and has not studied any learning activity on the Navigator for this competency.',
+  'learning-map.practice-question': 'practice questions',
+  'learning-map.no-practice-questions':
+    'There are no practice questions for this competency',
+  'learning-map.solved-examples': 'solved examples',
+  'learning-map.no-solved-examples':
+    'There are no solved examples for this competency',
+  'learning-map.challenging-questions': 'challenging questions',
+  'learning-map.no-challenging-questions':
+    'There are no challenging questions for this competency',
+  'student-card.message': 'This {{type}} has been deleted',
   'self-report.your-score': 'તમારો સ્કોર',
   'self-report.time_spent': 'સમય પસાર કર્યો',
   'self-report.update-error': 'સ્કોર અપડેટ સાથે સમસ્યા',

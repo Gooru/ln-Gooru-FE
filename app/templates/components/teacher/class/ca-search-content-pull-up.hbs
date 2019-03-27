@@ -5,7 +5,7 @@
       {{gru-icon name="arrow_downward"}}
     </div>
     <div class="search-filter-container">
-      <span>{{t selectedMenuItem.label }}</span>
+      <span class="ellipsis">{{t selectedMenuItem.label }}</span>
       <span {{action 'toggleMenuList'}}>{{gru-icon name="arrow_drop_down"}}</span>
       <div class="search-filter-container-list {{if isMenuEnabled 'active'}}">
         {{#each menuItems as |item|}}
@@ -21,11 +21,30 @@
           spellcheck="true"
           id="search-content"
         }}
-          <label for="search-content" class="search-icon">
+          <div class="filter-items">
+            {{#each filters as |selectedFilter index|}}
+              <div class="filter-item">
+                <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
+                <span class="clear" {{action 'clearFilter' selectedFilter}}> {{gru-icon name="close"}}</span>
+              </div>
+            {{/each}}
+            {{#if moreFilters}}
+              <span class="more-pointer">+{{moreFilters.length}}</span>
+            {{/if}}
+            <div class="more-filters hidden">
+              {{#each moreFilters as |moreFilter|}}
+                <div class="filter-item">
+                  <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
+                  <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
+                </div>
+              {{/each}}
+            </div>
+          </div>
+          <label for="search-content" class="search-icon" {{action 'doSearch'}}>
             {{gru-icon name="search"}}
-        </label>
+          </label>
         </div>
-        <div class="search-filter-icon">
+        <div class="search-filter-icon" {{action 'toggleSearchFilter'}}>
           {{gru-icon name="filter_list"}}
         </div>
       </div>
@@ -48,12 +67,15 @@
           <span class="create-offline-activity" title="{{t 'teacher-landing.class.class-activities-tab.create-external-collection'}}" data-toggle="tooltip" {{action "onClickCreateOfflineActivity"}}>{{gru-icon name="add"}}</span>
         {{/if}}
       </div>
+      {{#if showPullUp}}
+        {{search.search-by-filter isShow=isShow hideAppScroll=false unCheckedItem=unCheckedItem preference=class.preference selectedFilters=selectedFilters}}
+      {{/if}}
     </div>
     <div class="search-list-container {{if isShowListView 'list-view' 'grid-view'}}">
       {{#if (gt searchResults.length 0)}}
         <div class="search-list">
           {{#each searchResultSet as |result|}}
-            {{cards.dca-search-collection-card onScheduleContentToDCA='onScheduleContentToDCA' collection=result contentType=activeContentType onAddContentToDCA="onAddContentToDCA" addedScheduleContentToDCA='addedScheduleContentToDCA' classId=classId}}
+            {{cards.dca-search-collection-card onPreviewContent="onPreviewContent" onScheduleContentToDCA='onScheduleContentToDCA' collection=result contentType=activeContentType onAddContentToDCA="onAddContentToDCA" addedScheduleContentToDCA='addedScheduleContentToDCA' classId=classId}}
           {{/each}}
         </div>
       {{else}}
@@ -72,7 +94,7 @@
 {{/if}}
 
 <div class="schedule-ca-datepicker-container ca-datepicker-popover-container">
-  {{ca-date-picker  userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
+  {{ca-date-picker userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
 </div>
 
 {{#if isShowCreateOfflineActivity}}

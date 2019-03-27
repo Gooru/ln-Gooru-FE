@@ -153,13 +153,10 @@
                   </a>
                   </li>
                 {{/unless}}
-                {{#if isFeatureEnabled }}
-
-                  <li class="navbar-nav-list visible-md visible-lg notifications-link">
-                    <a style="opacity:1;">
+                <li class="navbar-nav-list visible-md visible-lg notifications-link">
+                  <a style="opacity:1;">
                   {{notification/notification-indicator displayNotificationList=displayNotificationList}}                </a>
-                  </li>
-                {{/if}}
+                </li>
                 <li class="navbar-nav-list visible-md visible-lg profile-link">
                   {{#link-to 'profile.about' session.userData.gooruUId class="profile" }}
                     <div class="img-container pull-left">
@@ -172,7 +169,7 @@
                       <!-- preserving old logic for those users whose token is still valid -->
                       <span class="username">{{truncate text=session.userData.username maxLength=18}} </span>
                     {{/if}}
-                    
+
                   {{/link-to}}
                 </li>
                 <li class="navbar-nav-list visible-md visible-lg dropdown">

@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
-import { GRU_FEATURE_FLAG } from 'gooru-web/config/config';
 import { isNumeric } from 'gooru-web/utils/math';
 
 /**
@@ -25,11 +24,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
    * Controls display of notification list, typical use from header is to hide it as required.
    */
   displayNotificationList: null,
-
-  isFeatureEnabled: Ember.computed(function() {
-    let feature = 'notifications';
-    return GRU_FEATURE_FLAG[feature];
-  }),
 
   // -------------------------------------------------------------------------
   // Properties
