@@ -105,7 +105,6 @@ export default Ember.Object.extend({
       creatorSystem: '',
       contentVisibility: payload.content_visibility || ClassModel.VISIBLE_NONE,
       isArchived: payload.is_archived,
-      isOffline: payload.is_offline,
       route0Applicable: payload.route0_applicable,
       forceCalculateILP: payload.force_calculate_ilp,
       gradeLowerBound: payload.grade_lower_bound,
