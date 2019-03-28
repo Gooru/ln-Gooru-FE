@@ -238,10 +238,9 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             classCourseId
           )
         : null;
-      let caClassPerfSummaryPromise = route
-        .get('performanceService')
-        .getCAPerformanceData([classId], myId);
-
+      //  Disabling ca peformance score, Since  there is no ca drill down summary report for student. Enable it when needed.
+      //let caClassPerfSummaryPromise = route.get('performanceService').getCAPerformanceData([classId], myId);
+      let caClassPerfSummaryPromise = Ember.RSVP.resolve([]);
       return Ember.RSVP.hash({
         class: classPromise,
         members: membersPromise,
