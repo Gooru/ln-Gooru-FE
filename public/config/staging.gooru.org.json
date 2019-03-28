@@ -15,7 +15,7 @@
   },
 
   "quizzes-addon": {
-    "endpoint" : {
+    "endpoint": {
       "url": "",
       "secureUrl": "",
       "providerUrl": ""
@@ -42,15 +42,19 @@
   },
 
   "researcher": {
-      "redirectURL": "/research",
-      "userIds": [
-        "df956d5f-b7b2-43ae-98a1-c90a12eacaf9"
-      ]
+    "redirectURL": "/research",
+    "userIds": [
+      "df956d5f-b7b2-43ae-98a1-c90a12eacaf9"
+    ]
   },
 
   "demoClass": {
     "code": "DGNTIKN",
     "id": "71bfbc07-1b87-4e8e-a98a-1839e834cd20"
+  },
+
+  "GRU_FEATURE_FLAG": {
+    "searchFilter": false
   },
 
   "marketingSiteUrl": "/welcome"

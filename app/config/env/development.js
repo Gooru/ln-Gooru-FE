@@ -81,5 +81,9 @@ export default {
   demoClass: {
     code: 'FZRC834',
     id: '002b0b27-1b51-4343-a51f-76fae80534f8'
+  },
+
+  'GRU_FEATURE_FLAG': {
+    'searchFilter': false
   }
 };
