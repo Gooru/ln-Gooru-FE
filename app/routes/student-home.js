@@ -217,9 +217,9 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     let nonPremiumClassCourseIds = route.getListOfClassCourseIds(
       nonPremiumClasses
     );
-    let nonPremiumClassIds = nonPremiumClasses.map(classData => {
+    /* let nonPremiumClassIds = nonPremiumClasses.map(classData => {
       return classData.get('id');
-    });
+    }); */
     let premiumClassIds = activeClasses
       .filter(classData => {
         let setting = classData.get('setting');
@@ -247,13 +247,9 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
           .get('competencyService')
           .getCompetencyCompletionStats(premiumClassIds, myId)
         : Ember.RSVP.resolve([]);
-    let caClassPerfSummaryPromise =
-      nonPremiumClassIds.length > 0
-        ? route
-          .get('performanceService')
-          .getCAPerformanceData(nonPremiumClassIds, myId)
-        : Ember.RSVP.resolve([]);
-
+    //Disabling ca peformance score, Since  there is no ca drill down summary report for student. Enable it when needed.
+    //let caClassPerfSummaryPromise = nonPremiumClassIds.length > 0 ? route.get('performanceService').getCAPerformanceData(nonPremiumClassIds, myId) : Ember.RSVP.resolve([]);
+    let caClassPerfSummaryPromise = Ember.RSVP.resolve([]);
     Ember.RSVP.hash({
       classPerformanceSummaryItems: perfPromise,
       classesLocation: locationPromise,
