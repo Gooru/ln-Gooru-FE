@@ -45,17 +45,13 @@
 										.left-panel-container,
 										.right-panel-container {
 											grid-template-columns: none;
+											width: 100vw;
 
 											.gru-taxonomy-picker {
 												.browse-selector {
 													.taxonomy {
 														.gru-browser-selector-container {
-															.hierarchy-1-container,
-															.hierarchy-2-container,
-															.hierarchy-3-container {
-																max-width: 150px;
-																min-width: 100px;
-															}
+															grid-template-columns: none;
 														}
 													}
 												}

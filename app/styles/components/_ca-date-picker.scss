@@ -98,7 +98,31 @@
             display: none;
           }
 
-          tr td {
+          tr td.disabled:hover,
+          tr td.new:hover,
+          tr td.no-activities:hover,
+          tr td.old:hover {
+            background: none;
+            font-weight: normal;
+            color: #999;
+          }
+
+          tr td.disabled,
+          tr td.new,
+          tr td.no-activities,
+          tr td.old {
+            pointer-events: none;
+            font-weight: normal;
+            color: #999;
+          }
+
+          tr td.day:hover {
+            background: none;
+            font-weight: bold;
+            color: #000;
+          }
+
+          tr td.has-activities {
             font-weight: bold;
             color: #000;
           }
