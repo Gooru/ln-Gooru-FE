@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import d3 from 'd3';
 import { getGradeColor, isCompatibleVW } from 'gooru-web/utils/utils';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -32,6 +33,28 @@ export default Ember.Component.extend({
     const component = this;
     component.loadClassAtcData();
   }),
+
+  // -------------------------------------------------------------------------
+  // Actions
+  actions: {
+    //Action triggered when click on student perf in tooltip
+    onShowStudentPerformance(student, type) {
+      const component = this;
+      const classId = component.get('classId');
+      component.$('.navigator-atc-tooltip').removeClass('active');
+      let queryParams = {
+        studentId: student.get('id')
+      };
+      let redirectTo = 'student-learner-proficiency';
+      if (type === 'report') {
+        queryParams.tab = 'student-report';
+        redirectTo = 'course-map';
+      }
+      component
+        .get('router')
+        .transitionTo(`teacher.class.${redirectTo}`, classId, { queryParams });
+    }
+  },
 
   // -------------------------------------------------------------------------
   // Properties
@@ -71,6 +94,16 @@ export default Ember.Component.extend({
     let date = `${year}-${month}-01`;
     return moment(date).format('YYYY-MM-DD');
   }),
+
+  /**
+   * @property {Boolean} isMobileView
+   */
+  isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
+  /**
+   * @property {Boolean} isShowTooltip
+   */
+  isShowTooltip: false,
 
   // -------------------------------------------------------------------------
   // Functions
@@ -218,7 +251,8 @@ export default Ember.Component.extend({
     var xAxis = d3.svg
       .axis()
       .scale(xScale)
-      .orient('bottom');
+      .orient('bottom')
+      .tickPadding(7);
 
     var yAxis = d3.svg
       .axis()
@@ -255,23 +289,31 @@ export default Ember.Component.extend({
       .attr('class', 'placeholder')
       .attr('x', '130')
       .attr('y', '445')
-      .text(component.get('i18n').t('teacher-landing.class.class-management-tab.performance').string);
+      .text(
+        component
+          .get('i18n')
+          .t('teacher-landing.class.class-management-tab.performance').string
+      );
 
     svg
       .append('g')
-      .attr('transform', 'translate(-50, -30)')
+      .attr('transform', 'translate(-50, -25)')
       .append('text')
       .attr('class', 'placeholder')
       .attr('x', '50')
       .attr('y', '415')
-      .text(component.get('i18n').t('teacher-landing.class.atc-view.progress-label').string);
+      .text(
+        component.get('i18n').t('teacher-landing.class.atc-view.progress-label')
+          .string
+      );
 
     let tooltipInterval = null;
     let tooltip = d3
-      .select('body')
+      .select(component.element)
       .append('div')
       .attr('class', 'navigator-atc-tooltip');
-    let tooltipContainer = Ember.$('.navigator-atc-tooltip');
+    let tooltipContainer = component.$('.navigator-atc-tooltip');
+    let activeStudentContainer = component.$('.active-student-container');
 
     let studentNode = svg
       .selectAll('.student-nodes')
@@ -284,21 +326,19 @@ export default Ember.Component.extend({
       })
       .attr('class', 'node-point');
 
-    studentNode.on('mouseout', function() {
-      tooltipContainer.removeClass('active');
-      Ember.run.cancel(tooltipInterval);
-    });
-
     tooltip.on('mouseout', function() {
-      tooltipContainer.removeClass('active');
-      Ember.run.cancel(tooltipInterval);
+      component.removeTooltip(tooltipInterval);
     });
 
-    if (!isCompatibleVW('medium')) {
+    tooltip.on('click', function() {
+      component.removeTooltip(tooltipInterval);
+    });
+
+    if (!component.get('isMobileView')) {
       studentNode.on('mouseover', function(studentData) {
         let clientY = d3.event.clientY;
         let clientX = d3.event.clientX;
-        let top = clientY > 420 ? clientY - 210 : clientY;
+        let top = clientY > 420 ? clientY - 185 : clientY;
         let left = clientX > 600 ? clientX - 225 : clientX;
         let tooltipPos = {
           top: `${top}px`,
@@ -310,12 +350,24 @@ export default Ember.Component.extend({
         );
       });
       tooltip.on('mouseover', function() {
+        component.set('isShowTooltip', true);
         tooltipContainer.addClass('active');
+      });
+      studentNode.on('mouseout', function() {
+        component.set('isShowTooltip', false);
+        tooltipContainer.removeClass('active');
+        component.$('.node-point').removeClass('active-node');
+        activeStudentContainer.addClass('hidden');
+        Ember.run.cancel(tooltipInterval);
       });
     } else {
       studentNode.on('click', function(studentData) {
+        component.set('isShowTooltip', true);
         tooltipInterval = component.studentProficiencyInfoTooltip(studentData);
         tooltipContainer.addClass('active');
+        component.$(this).addClass('active-node');
+        let selectedNodePos = component.$(this).position();
+        component.highlightStudentProfile(selectedNodePos);
       });
     }
 
@@ -366,14 +418,38 @@ export default Ember.Component.extend({
   studentProficiencyInfoTooltip(studentData, tooltipPos) {
     let component = this;
     component.set('studentData', studentData);
-    let tooltip = Ember.$('.navigator-atc-tooltip');
+    let tooltip = component.$('.navigator-atc-tooltip');
     return Ember.run.later(function() {
+      let tooltipHtml = Ember.$('.tooltip-html-container').html();
+      tooltip.html(tooltipHtml);
       if (tooltipPos) {
         tooltip.css(tooltipPos);
       }
-      let tooltipHtml = component.$('.tooltip-html-container').html();
-      tooltip.html(tooltipHtml);
-      Ember.$('.navigator-atc-tooltip').addClass('active');
+      component.$('.navigator-atc-tooltip').addClass('active');
     }, 500);
+  },
+
+  /**
+   * @function highlightStudentProfile
+   * Method to highlight selected student
+   */
+  highlightStudentProfile(position) {
+    const component = this;
+    return Ember.run.later(function() {
+      let activeStudentContainer = component.$('.active-student-container');
+      activeStudentContainer.css(position).removeClass('hidden');
+    }, 500);
+  },
+
+  /**
+   * @function removeTooltip
+   * Method to remove tooltip from the atc chart
+   */
+  removeTooltip(tooltipInterval) {
+    const component = this;
+    component.set('isShowTooltip', false);
+    component.$('.navigator-atc-tooltip').removeClass('active');
+    component.$('.node-point').removeClass('active-node');
+    Ember.run.cancel(tooltipInterval);
   }
 });

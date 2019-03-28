@@ -1171,6 +1171,7 @@ export default Object.assign(quizzesTranslations, {
     'ਤੁਸੀਂ ਨੇਵੀਗੇਟਰ ਕਲਾਸ ਦੇ ਸਹਿ-ਅਧਿਆਪਕ ਵਜੋਂ ਸਫਲਤਾਪੂਰਵਕ ਸ਼ਾਮਲ ਹੋ ਗਏ ਹੋ',
   'teacher-landing.navigator-banner.error-message':
     'ਕਲਾਸ ਵਿਚ ਸ਼ਾਮਲ ਹੋਣ ਵਿਚ ਸਮੱਸਿਆ',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.manage': 'ਪ੍ਰਬੰਧ ਕਰਨਾ, ਕਾਬੂ ਕਰਨਾ',
   'teacher-landing.class.reports': 'ਰਿਪੋਰਟ',
   'teacher-landing.class.daily-activites': 'ਰੋਜ਼ਾਨਾ ਕਿਰਿਆਸ਼ੀਲ',

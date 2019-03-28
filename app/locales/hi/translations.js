@@ -1175,6 +1175,7 @@ export default Object.assign(quizzesTranslations, {
     'आप नेविगेटर कक्षा के सह-शिक्षक के रूप में सफलतापूर्वक शामिल हो गए हैं',
   'teacher-landing.navigator-banner.error-message':
     'कक्षा में शामिल होने में समस्या है',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.manage': 'संचालन',
   'teacher-landing.class.reports': 'रिपोर्ट',
   'teacher-landing.class.daily-activites': 'दैनिक गतिविधियां',

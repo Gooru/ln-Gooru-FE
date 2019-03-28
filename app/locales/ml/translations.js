@@ -1188,6 +1188,7 @@ export default Object.assign(quizzesTranslations, {
     'നാവിഗേറ്റർ ക്ലാസിലെ കോ-ടീച്ചറായി നിങ്ങൾ ചേർന്നു',
   'teacher-landing.navigator-banner.error-message':
     'ക്ലാസിൽ ചേരുന്നതിൽ പ്രശ്നം',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.manage': 'മാനേജ് ചെയ്യുക',
   'teacher-landing.class.reports': 'റിപ്പോർട്ടുകൾ',
   'teacher-landing.class.daily-activites': 'ദൈനംദിന പ്രവർത്തനങ്ങൾ',

@@ -1009,8 +1009,11 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.class-activities-pending': 'Class Activities Pending',
   'teacher-landing.class.atc-view.show-all': 'Show All',
   'teacher-landing.class.atc-view.collapse': 'Collapse',
-  'teacher-landing.class.atc-view.total-competencies-gained': 'Total Competencies Gained',
-  'teacher-landing.class.atc-view.progress-label': 'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.total-competencies-gained':
+    'Total Competencies Gained',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.class-activities': 'Class Activities',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
   'teacher-landing.class.offline-class-report.activity-report': 'Activity Report',
