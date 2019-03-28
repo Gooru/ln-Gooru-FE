@@ -13,6 +13,7 @@
     forMonth=forMonth
     allowDateSelectorToggle=true
     forYear=forYear
+    refreshDatePicker=refreshDatePicker
     showPreviousMonth="showPreviousMonth"
     showNextMonth="showNextMonth"
     onSelectDate="onSelectDate"
@@ -21,6 +22,7 @@
     highlightActivities=true
   }}
     </div>
+    <div class="ca-today" {{action 'onSelectToday'}}>{{t "student-landing.class.class-activities-tab.today"}}</div>
   </div>
   <div class="ca-panel">
     <div class="ca-left-panel">
@@ -29,7 +31,7 @@
       </div>
       <div class="dca-content-container">
         <div class="ca-schedule-items-header">
-          <span>{{t 'common.scheduled-items'}} ({{scheduledClassActivities.length}})</span>
+          <span>{{t 'common.scheduled-items'}} ({{totalScheduleditems}})</span>
         </div>
         {{#if showClassActivities}}
           <div class="dca-list-container">

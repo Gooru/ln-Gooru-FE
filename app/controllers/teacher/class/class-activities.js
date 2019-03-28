@@ -93,12 +93,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      */
     addedContentToDCA(classActivityData, addedDate, forMonth, forYear) {
       let controller = this;
-      let addedMonth = forMonth
-        ? parseInt(forMonth)
-        : parseInt(moment(addedDate).format('MM'));
-      let addedYear = forYear
-        ? parseInt(forYear)
-        : parseInt(moment(addedDate).format('YYYY'));
+      let addedMonth = forMonth ?
+        parseInt(forMonth) :
+        parseInt(moment(addedDate).format('MM'));
+      let addedYear = forYear ?
+        parseInt(forYear) :
+        parseInt(moment(addedDate).format('YYYY'));
       let forFirstDateOfMonth = controller.get('forFirstDateOfMonth');
       let selectedMonth = parseInt(moment(forFirstDateOfMonth).format('MM'));
       let selectedYear = parseInt(moment(forFirstDateOfMonth).format('YYYY'));
@@ -403,6 +403,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       }
     },
 
+    onSelectToday() {
+      let controller = this;
+      controller.incrementProperty('refreshDatePicker');
+    },
+
     onOpenPerformanceEntry(item, activity, isRepeatEntry) {
       let component = this;
       component.fetchActivityUsers(activity.id).then(function(activityMembers) {
@@ -547,6 +552,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     return classActivities.sortBy('added_date').reverse();
   }),
 
+
+  totalScheduleditems: Ember.computed('scheduledClassActivities.[]', function() {
+    let controller = this;
+    let scheduledClassActivities = controller.get('scheduledClassActivities');
+    let totalScheduleditems = scheduledClassActivities.map(function(classActivity) {
+      return classActivity.get('classActivities').length;
+    });
+    return totalScheduleditems.length ? totalScheduleditems.reduce((total, count) => (total + count)) : 0;
+  }),
+
   /**
    * It maintains the today's class activities data.
    */
@@ -575,9 +590,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         }
       });
     let unScheduledClassActivities = classActivities.objectAt(0);
-    return unScheduledClassActivities
-      ? unScheduledClassActivities.get('classActivities')
-      : null;
+    return unScheduledClassActivities ?
+      unScheduledClassActivities.get('classActivities') : [];
   }),
 
   /**
@@ -924,16 +938,14 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let reduceHeight = 100;
       let top =
         dateEle.position().top - reduceHeight + scrollToContainer.scrollTop();
-      scrollToContainer.animate(
-        {
+      scrollToContainer.animate({
           scrollTop: top
         },
         1000
       );
     } else if (isDefaultTop) {
       let scrollToContainer = Ember.$('.dca-list-container');
-      scrollToContainer.animate(
-        {
+      scrollToContainer.animate({
           scrollTop: 0
         },
         1000
@@ -947,10 +959,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     return Ember.RSVP.hash({
       activityMembers: Ember.RSVP.resolve(
         controller
-          .get('classActivityService')
-          .fetchUsersForClassActivity(classId, activityId)
+        .get('classActivityService')
+        .fetchUsersForClassActivity(classId, activityId)
       )
-    }).then(({ activityMembers }) => {
+    }).then(({
+      activityMembers
+    }) => {
       return activityMembers;
     });
   }

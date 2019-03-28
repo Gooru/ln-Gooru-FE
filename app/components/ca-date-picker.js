@@ -73,23 +73,7 @@ export default Ember.Component.extend({
       if (allowDateSelectorToggle) {
         component.toggleDatePicker();
       }
-      let isTodayExistInCurrentMonth = component.get(
-        'isTodayExistInCurrentMonth'
-      );
-      let date = moment().format('YYYY-MM-DD');
-      if (!isTodayExistInCurrentMonth) {
-        let datePickerEle = component.$('#ca-datepicker');
-        datePickerEle.datepicker('update', date);
-        let forMonth = moment(date).format('MM');
-        let forYear = moment(date).format('YYYY');
-        component.set('forMonth', forMonth);
-        component.set('forYear', forYear);
-        let forFirstDateOfMonth = `${forYear}-${forMonth}-01`;
-        component.set('forFirstDateOfMonth', forFirstDateOfMonth);
-        component.sendAction('onSelectToday', date, true);
-      } else {
-        component.sendAction('onSelectToday', date);
-      }
+      component.showTodayActivity();
     }
   },
 
@@ -234,6 +218,11 @@ export default Ember.Component.extend({
     }
   ),
 
+  onRefresh: Ember.observer('refreshDatePicker', function() {
+    let component = this;
+    component.showTodayActivity();
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -268,6 +257,27 @@ export default Ember.Component.extend({
     });
   },
 
+  showTodayActivity() {
+    let component = this;
+    let isTodayExistInCurrentMonth = component.get(
+      'isTodayExistInCurrentMonth'
+    );
+    let date = moment().format('YYYY-MM-DD');
+    if (!isTodayExistInCurrentMonth) {
+      let datePickerEle = component.$('#ca-datepicker');
+      datePickerEle.datepicker('update', date);
+      let forMonth = moment(date).format('MM');
+      let forYear = moment(date).format('YYYY');
+      component.set('forMonth', forMonth);
+      component.set('forYear', forYear);
+      let forFirstDateOfMonth = `${forYear}-${forMonth}-01`;
+      component.set('forFirstDateOfMonth', forFirstDateOfMonth);
+      component.sendAction('onSelectToday', date, true);
+    } else {
+      component.sendAction('onSelectToday', date);
+    }
+  },
+
   toggleDatePicker() {
     let component = this;
     let element = component.$('.ca-datepicker-container');
@@ -293,10 +303,6 @@ export default Ember.Component.extend({
         '#ca-datepicker .datepicker .datepicker-days  .table-condensed tbody tr td'
       );
       let activities = component.get('activities');
-      let todayActivity = activities.findBy('isToday', true);
-      if (todayActivity) {
-        component.$('.ca-datepicker-today').addClass('has-activities');
-      }
 
       dateEles.each(function(index, dateEle) {
         let dateElement = component.$(dateEle);
