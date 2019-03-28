@@ -55,7 +55,7 @@
         </div>
 
         {{#if isPremiumClass}}
-          <div class="completion-score {{if class.competencyStats 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
+          <div class="completion-score {{if class.competencyStats 'has-competency-stats'}}" {{action 'selectItem' 'profile-prof'}}>
             {{#if class.competencyStats}}
               <span>{{class.competencyStats.completedCompetencies}}/{{class.competencyStats.totalCompetencies}}</span>
             {{else}}
