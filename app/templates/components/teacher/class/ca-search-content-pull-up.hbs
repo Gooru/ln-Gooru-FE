@@ -44,9 +44,11 @@
             {{gru-icon name="search"}}
           </label>
         </div>
-        <div class="search-filter-icon" {{action 'toggleSearchFilter'}}>
-          {{gru-icon name="filter_list"}}
-        </div>
+        {{#if showFilter}}
+          <div class="search-filter-icon" {{action 'toggleSearchFilter'}}>
+            {{gru-icon name="filter_list"}}
+          </div>
+        {{/if}}
       </div>
     {{/unless}}
   </div>
@@ -67,7 +69,7 @@
           <span class="create-offline-activity" title="{{t 'teacher-landing.class.class-activities-tab.create-external-collection'}}" data-toggle="tooltip" {{action "onClickCreateOfflineActivity"}}>{{gru-icon name="add"}}</span>
         {{/if}}
       </div>
-      {{#if showPullUp}}
+      {{#if showFilter}}
         {{search.search-by-filter isShow=isShow hideAppScroll=false unCheckedItem=unCheckedItem preference=class.preference selectedFilters=selectedFilters}}
       {{/if}}
     </div>

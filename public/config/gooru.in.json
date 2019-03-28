@@ -14,7 +14,7 @@
     "url": "http://teams.gooru.org"
   },
   "quizzes-addon": {
-    "endpoint" : {
+    "endpoint": {
       "url": "",
       "secureUrl": "",
       "providerUrl": ""
@@ -41,14 +41,18 @@
   },
 
   "researcher": {
-      "redirectURL": "http://research.gooru.org",
-      "userIds": [ ]
+    "redirectURL": "http://research.gooru.org",
+    "userIds": []
   },
 
   "demoClass": {
     "code": "DGNTIKN",
     "id": "71bfbc07-1b87-4e8e-a98a-1839e834cd20"
   },
-  
+
+  "GRU_FEATURE_FLAG": {
+    "searchFilter": false
+  },
+
   "marketingSiteUrl": "/welcome"
 }
