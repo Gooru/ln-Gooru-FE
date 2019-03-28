@@ -266,6 +266,9 @@
           font-size: $font-size-xxsmall;
           font-weight: bold;
         }
+        &.not-started {
+          pointer-events: none;
+        }
       }
     }
 

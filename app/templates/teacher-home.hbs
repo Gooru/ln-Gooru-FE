@@ -28,7 +28,7 @@
         {{/unless}}
       {{/if}}
       {{#if isShowSortOptions}}
-        <div class="pull-right sort">
+        <div class="sort">
           <div class="filter-date-asc btn-group" role="group">
             <button type="button" title= {{t 'common.sort-most-recently'}} data-toggle="tooltip" {{action 'filterByDate'}} class="filter-date btn {{if (eq sortOn 'startDate') 'btn-primary' 'btn-info'}}">
               {{#if (eq sortOn 'startDate')}}
@@ -85,7 +85,7 @@
 </div>
 
 {{#if isShowArchiveClassReport}}
-  {{reports.pull-up.course-report context=classReportParams showPullUp=isShowArchiveClassReport onOpenUnitReport="onOpenUnitReport"  onClosePullUp="onClosePullUp" }}
+  {{reports.pull-up.course-report context=classReportParams showPullUp=isShowArchiveClassReport onOpenUnitReport="onOpenUnitReport"  onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowUnitReportPullUp}}
@@ -97,5 +97,5 @@
 {{/if}}
 
 {{#if isShowCollectionReportPullUp}}
-  {{reports.pull-up.collection-report onClosePullUp="onClosePullUp" context=teacherCollectionReportData showPullUp=isShowCollectionReportPullUp}}
+  {{reports.pull-up.collection-report onClosePullUp="onClosePullUp" context=teacherCollectionReportData showPullUp=isShowCollectionReportPullUp isArchivedClass=true}}
 {{/if}}
