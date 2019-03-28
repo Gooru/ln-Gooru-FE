@@ -1,7 +1,6 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
-import T from 'gooru-web/tests/helpers/assert';
 
 moduleForAcceptance('Acceptance | library', {
   beforeEach: function() {
@@ -96,29 +95,6 @@ test('Clicking card image should open the player', function(assert) {
       assert.equal(
         currentURL(),
         '/content/courses/play/b8336353-08c1-42ce-add9-3454227902c8'
-      );
-    });
-  });
-});
-
-test('Take A Tour', function(assert) {
-  assert.expect(2);
-  visit('/library');
-  andThen(function() {
-    let $tooltip;
-    click('.app-container .gru-take-tour button.start-tour');
-    andThen(function() {
-      $tooltip = $('div.introjs-tooltip');
-
-      T.exists(
-        assert,
-        $tooltip,
-        'First step of the tour should display a tooltip'
-      );
-      assert.equal(
-        T.text($tooltip.find('.tour-header h2')),
-        'Welcome!',
-        'First step title should be "Welcome!"'
       );
     });
   });

@@ -39,37 +39,6 @@ export default Ember.Route.extend({
    */
   model: function(params) {
     let route = this;
-    //Steps for Take a Tour functionality
-    const tourSteps = Ember.A([
-      {
-        title: route.get('i18n').t('gru-take-tour.profile.stepOne.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.profile.stepOne.description')
-      },
-      {
-        elementSelector: '.navigation .profile-menu .content',
-        title: route.get('i18n').t('gru-take-tour.profile.stepTwo.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.profile.stepTwo.description')
-      },
-      {
-        elementSelector: '.navigation .profile-menu .about',
-        title: route.get('i18n').t('gru-take-tour.profile.stepThree.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.profile.stepThree.description')
-      },
-      {
-        elementSelector: '.navigation .profile-menu .network',
-        title: route.get('i18n').t('gru-take-tour.profile.stepFive.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.profile.stepFive.description')
-      }
-    ]);
-
     let userId = params.userId;
     if (userId) {
       let isUsername = !/-.*-/.exec(userId);
@@ -92,14 +61,12 @@ export default Ember.Route.extend({
         editProfile.merge(profile, profile.modelProperties());
         return Ember.RSVP.hash({
           profile: editProfile,
-          tourSteps: tourSteps,
           loginUserProfile: loginUserProfile
         });
       });
     }
     return Ember.RSVP.hash({
       profile: null,
-      tourSteps: tourSteps,
       loginUserProfile: null
     });
   },
