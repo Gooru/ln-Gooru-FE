@@ -38,9 +38,13 @@
         height: 100%;
 
         .right-panel-container {
-          display: grid;
-          grid-template-columns: 50% 50%;
+          display: flex;
           grid-gap: 10px;
+
+          .filter-container {
+            width: 50%;
+            padding-right: 10px;
+          }
 
           .audience-list-container,
           .author-publisher-list-container,
@@ -144,6 +148,28 @@
             .browse-selector {
               .title {
                 display: none;
+              }
+
+              .taxonomy.gru-browse-selector {
+                margin-top: 10px;
+
+                .breadcrumb-levels {
+                  display: flex;
+
+                  .breadcrumb-level {
+                    background-color: #4e5e67;
+                    color: $white;
+                    margin-right: 5px;
+                    padding: 5px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                  }
+
+                  .separator-symbol {
+                    color: #4e5e67;
+                    font-size: 15px;
+                  }
+                }
               }
 
               .gru-browse-selector,

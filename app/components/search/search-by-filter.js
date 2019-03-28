@@ -72,7 +72,7 @@ export default Ember.Component.extend({
    * @property {Boolean} isCompatibleMode
    * Property to handle is mobile view
    */
-  isCompatibleMode: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+  isCompatiableMode: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
 
   /**
