@@ -31,6 +31,11 @@ export default Ember.Component.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
+  /**
+   * @requires service:api-sdk/search
+   */
+  searchService: Ember.inject.service('api-sdk/search'),
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -64,7 +69,7 @@ export default Ember.Component.extend({
    */
   onSubjectSelected: Ember.observer('selectedSubject.courses.[]', function() {
     let component = this;
-    component.set('selectedCourse', this.get('selectedSubject.courses'));
+    component.set('selectedCourse', component.get('selectedSubject.courses'));
     component.loadTaxonomyPicker();
   }),
 
@@ -72,7 +77,7 @@ export default Ember.Component.extend({
    * @property {Boolean} isCompatibleMode
    * Property to handle is mobile view
    */
-  isCompatibleMode: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+  isCompatiableMode: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
 
   /**
@@ -138,10 +143,32 @@ export default Ember.Component.extend({
     component.loadSubjects();
   },
 
+  didRender() {
+    let component = this;
+    component.$('#publisher').autocomplete({
+      delay: 100,
+      length: 3,
+      appendTo: '#publisher-suggestions',
+      source: function(request, response) {
+        component.get('searchService')
+          .autoCompleteSearch('publisher', request.term)
+          .then((results) => {
+            response(results.publishers);
+          });
+      }
+    });
+  },
+
   actions: {
+
+    hideHelp() {
+      let component = this;
+      component.set('hideHelpText', true);
+    },
 
     selectSubject(subject) {
       let component = this;
+      component.set('selectedSubject.courses', Ember.A([]));
       component.set('selectedSubject', subject);
       let selectedFilters = component.get('selectedFilters');
       selectedFilters.removeObjects(selectedFilters.filterBy('filter', 'flt.standard')); //remove previous object
@@ -168,8 +195,14 @@ export default Ember.Component.extend({
     setPublisher() {
       let component = this;
       let term = this.get('publisherName').trim();
-      let filterItems = component.get('selectedFilters');
-      filterItems['flt.publisherName'] = term;
+      let selectedFilters = component.get('selectedFilters');
+      selectedFilters.removeObjects(selectedFilters.filterBy('filter', 'flt.publisherName')); //remove previous object
+      if (term !== '') {
+        component.get('selectedFilters').pushObject(Ember.Object.create({
+          'filter': 'flt.publisherName',
+          'name': term
+        }));
+      }
     },
 
     updateSelectedTags(selectedTags) {
@@ -180,6 +213,7 @@ export default Ember.Component.extend({
       selectedTags.map((standard) => {
         standard.set('filter', 'flt.standard');
         standard.set('name', standard.get('data.code'));
+        standard.set('id', standard.get('data.id'));
         component.get('selectedFilters').pushObject(standard);
       });
     },

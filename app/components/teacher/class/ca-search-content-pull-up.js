@@ -9,8 +9,9 @@ import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import {
   isCompatibleVW
 } from 'gooru-web/utils/utils';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -78,6 +79,8 @@ export default Ember.Component.extend({
    * @type {Object}
    */
   context: null,
+
+  showFilter: Ember.computed.alias('configuration.GRU_FEATURE_FLAG.searchFilter'),
 
   /**
    * Class Id extract from context
@@ -282,6 +285,13 @@ export default Ember.Component.extend({
   // actions
 
   actions: {
+
+    /**
+     * Action triggered when the user preview content
+     */
+    onPreviewContent(content) {
+      this.sendAction('onPreviewContent', content);
+    },
     /**
      * Action triggered when the user close the pull up.
      **/
@@ -304,6 +314,8 @@ export default Ember.Component.extend({
       const component = this;
       if (item.get('filter') === 'flt.standard') {
         component.set('unCheckedItem', item);
+      } else if (item.get('filter') === 'flt.publisherName') {
+        component.set('publisherName', null);
       }
       component.get('selectedFilters').removeObject(item);
       component.send('doSearch');
@@ -545,6 +557,13 @@ export default Ember.Component.extend({
 
   didRender() {
     let component = this;
+    component.initializePopover();
+  },
+  //--------------------------------------------------------------------------
+  // Methods
+
+  initializePopover() {
+    let component = this;
     component.$('.more-pointer').popover({
       html: true,
       trigger: 'click',
@@ -554,10 +573,15 @@ export default Ember.Component.extend({
         return component.$('.more-filters').html();
       }
     });
-  },
 
-  //--------------------------------------------------------------------------
-  // Methods
+    component.$(document).click(function(event) {
+      if (event.target.className !== 'more-pointer') {
+        if (component.$('.more-pointer')) {
+          component.$('.more-pointer').popover('hide');
+        }
+      }
+    });
+  },
 
   /**
    * Function to animate the  pullup from bottom to top
@@ -734,15 +758,16 @@ export default Ember.Component.extend({
     filters['flt.language'] = component.filterSelectedItems('filter', 'flt.language');
     filters['flt.audience'] = component.filterSelectedItems('filter', 'flt.audience');
     filters['flt.standard'] = component.filterSelectedItems('filter', 'flt.standard');
-    filters['flt.creator'] = component.get('selectedFilters').get('flt.authorName');
-    filters['flt.publisherName'] = component.get('selectedFilters').get('flt.publisherName');
+    filters['flt.creator'] = component.get('selectedFilters')['flt.authorName'];
+    filters['flt.publisher'] = component.filterSelectedItems('filter', 'flt.publisherName');
     return filters;
   },
 
   filterSelectedItems(keyField, keyValue) {
     const component = this;
     let filterList = component.get('selectedFilters').filterBy(keyField, keyValue);
-    return component.toArray(filterList, 'name');
+    let keyName = keyValue === 'flt.standard' ? 'id' : 'name';
+    return component.toArray(filterList, keyName);
   },
 
   toArray(filterList, key) {
