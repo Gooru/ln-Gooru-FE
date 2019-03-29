@@ -63,7 +63,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'మొదటి పేరు',
   'common.filter-by': 'ద్వారా వడపోత',
   'common.more': 'మరింత',
-  'common.search-help-message': 'Once you have selected the filters, click on search icon above to refine your search',
+  'common.search-help-message':
+    'Once you have selected the filters, click on search icon above to refine your search',
   'common.avg-score': 'సగటు స్కోర్',
   'common.frq': 'frq',
   'common.schedule': 'షెడ్యూల్',
@@ -2510,5 +2511,6 @@ export default Object.assign(quizzesTranslations, {
   'present.diagnostic.determine.not.know':
     'Present a diagnostic to determine the student\'s current location, if not known?',
   'present.diagnostic.determine.know':
-    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
+  'add.to.todays.class': 'Add to Today\'s Class'
 });

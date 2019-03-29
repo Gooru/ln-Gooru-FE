@@ -150,7 +150,7 @@ export default Ember.Component.extend({
     let firtDateOfCurrentMonth = moment(`${monthAndYearOfCurrentDate}-01`);
     if (showMonths && forFirstDateOfMonth) {
       let numberOfMonthsToShow = component.get('numberOfMonthsToShow');
-      for (let index = 1; index <= numberOfMonthsToShow; index++) {
+      for (let index = 0; index < numberOfMonthsToShow; index++) {
         let slectedMonth = moment(forFirstDateOfMonth).add(index, 'months');
         let monthName = moment(forFirstDateOfMonth)
           .add(index, 'months')
