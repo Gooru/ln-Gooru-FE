@@ -31,6 +31,11 @@ export default Ember.Component.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
+  /**
+   * @requires service:api-sdk/search
+   */
+  searchService: Ember.inject.service('api-sdk/search'),
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -138,6 +143,22 @@ export default Ember.Component.extend({
     component.loadSubjects();
   },
 
+  didRender() {
+    let component = this;
+    component.$('#publisher').autocomplete({
+      delay: 100,
+      length: 3,
+      appendTo: '#publisher-suggestions',
+      source: function(request, response) {
+        component.get('searchService')
+          .autoCompleteSearch('publisher', request.term)
+          .then((results) => {
+            response(results.publishers);
+          });
+      }
+    });
+  },
+
   actions: {
 
     selectSubject(subject) {
@@ -169,7 +190,13 @@ export default Ember.Component.extend({
       let component = this;
       let term = this.get('publisherName').trim();
       let filterItems = component.get('selectedFilters');
-      filterItems['flt.publisherName'] = term;
+      filterItems.removeObjects(filterItems.filterBy('filter', 'flt.publisherName')); //remove previous object
+      if (term !== '') {
+        filterItems.push(Ember.Object.create({
+          'filter': 'flt.publisherName',
+          'name': term
+        }));
+      }
     },
 
     updateSelectedTags(selectedTags) {
@@ -180,6 +207,7 @@ export default Ember.Component.extend({
       selectedTags.map((standard) => {
         standard.set('filter', 'flt.standard');
         standard.set('name', standard.get('data.code'));
+        standard.set('id', standard.get('data.id'));
         component.get('selectedFilters').pushObject(standard);
       });
     },

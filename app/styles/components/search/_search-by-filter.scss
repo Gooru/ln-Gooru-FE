@@ -31,269 +31,352 @@
     .search-content {
       padding: 10px;
       overflow-y: auto;
+      width: 100%;
+      height: 100%;
 
-      .subjects-panel {
-        display: grid;
-        width: 100%;
-        height: 100%;
+      .bottom-panel-container {
+        display: flex;
+        grid-gap: 10px;
 
-        .right-panel-container {
-          display: flex;
-          grid-gap: 10px;
+        .filter-container {
+          width: 50%;
+          padding-right: 10px;
+        }
 
-          .filter-container {
-            width: 50%;
-            padding-right: 10px;
-          }
+        .audience-list-container,
+        .author-publisher-list-container,
+        .educational-list-container,
+        .language-list-container,
+        .resource-list-container {
+          margin-top: 15px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #ccc;
 
-          .audience-list-container,
-          .author-publisher-list-container,
-          .educational-list-container,
-          .language-list-container,
-          .resource-list-container {
-            margin-top: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ccc;
+          .label-container {
+            font-size: 15px;
+            font-weight: bold;
+            height: 20px;
+            cursor: pointer;
+            color: #37424b;
+            display: flex;
+            text-transform: uppercase;
+            justify-content: space-between;
 
-            .label-container {
-              font-size: 15px;
-              font-weight: bold;
-              height: 20px;
-              cursor: pointer;
-              color: #37424b;
-              display: flex;
-              text-transform: uppercase;
-              justify-content: space-between;
-
-              &.collapsed {
-                .icons {
-                  span {
-                    .arrow_drop_down {
-                      display: block;
-                    }
-
-                    .arrow_drop_up {
-                      display: none;
-                    }
-                  }
-                }
-              }
-
+            &.collapsed {
               .icons {
-                background-color: #ccc;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                width: 20px;
-                height: 20px;
-                opacity: 0.5;
-                justify-content: center;
-
                 span {
-                  width: auto;
-                  height: 20px;
+                  .arrow_drop_down {
+                    display: block;
+                  }
 
-                  i {
-                    font-size: 18px;
-
-                    &.arrow_drop_down {
-                      display: none;
-                    }
+                  .arrow_drop_up {
+                    display: none;
                   }
                 }
               }
             }
 
-            .audience-container,
-            .author-publisher-container,
-            .educational-container,
-            .language-container,
-            .resource-container {
+            .icons {
+              background-color: #ccc;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              width: 20px;
+              height: 20px;
+              opacity: 0.5;
+              justify-content: center;
+
+              span {
+                width: auto;
+                height: 20px;
+
+                i {
+                  font-size: 18px;
+
+                  &.arrow_drop_down {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+
+          .audience-container,
+          .author-publisher-container,
+          .educational-container,
+          .language-container,
+          .resource-container {
+            margin-top: 10px;
+
+            .publisher-container {
+              margin-top: 10px;
+            }
+
+            .author-container,
+            .publisher-container {
+              display: grid;
+              border-radius: 2px;
+              background-color: #d8d8d8;
+              padding: 5px;
+              height: 100%;
+              color: #37424b;
+
+              input {
+                background-color: #d8d8d8;
+                outline: none;
+                font-style: italic;
+                color: #37424b;
+              }
+            }
+
+            #publisher-suggestions {
+              position: relative;
+
+              .ui-autocomplete {
+                z-index: 1048;
+                box-shadow: 0 0 5px 2px #ccc;
+                border: none;
+
+                .ui-menu-item {
+                  color: #37424b;
+
+                  &.ui-state-focus {
+                    color: #fff;
+                    background-color: #37424b;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .top-panel-container {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        border-bottom: 1px solid #ccc;
+        min-height: 50px;
+        padding-bottom: 10px;
+
+        .label-container {
+          position: relative;
+          font-size: 15px;
+          font-weight: bold;
+          height: auto;
+          cursor: pointer;
+          color: #37424b;
+          display: flex;
+          text-transform: uppercase;
+
+          .icons {
+            position: absolute;
+            right: 10px;
+          }
+
+          &.collapsed {
+            .title {
+              display: block;
+            }
+
+            .icons {
+              span {
+                .arrow_drop_down {
+                  display: block;
+                }
+
+                .arrow_drop_up {
+                  display: none;
+                }
+              }
+            }
+          }
+
+          .icons {
+            background-color: #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            opacity: 0.5;
+            justify-content: center;
+
+            span {
+              width: auto;
+              height: 20px;
+
+              i {
+                font-size: 18px;
+
+                &.arrow_drop_down {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+
+        .standard-container {
+          .taxonomy.gru-taxonomy-selector > div {
+            margin-top: 0;
+          }
+        }
+
+        .gru-taxonomy-picker {
+          .actions,
+          .selected-list {
+            display: none;
+          }
+
+          .browse-selector {
+            .title {
+              display: none;
+            }
+
+            .taxonomy.gru-browse-selector {
               margin-top: 10px;
 
-              .publisher-container {
-                margin-top: 10px;
-              }
+              .breadcrumb-levels {
+                display: flex;
 
-              .author-container,
-              .publisher-container {
+                .breadcrumb-level {
+                  background-color: #4e5e67;
+                  color: $white;
+                  margin-right: 5px;
+                  padding: 5px;
+                  border-radius: 4px;
+                  cursor: pointer;
+                }
+
+                .separator-symbol {
+                  color: #4e5e67;
+                  font-size: 15px;
+                }
+              }
+            }
+
+            .gru-browse-selector,
+            .taxonomy {
+              .gru-browser-selector-container {
+                padding: 0;
+                list-style: none;
+                margin-top: 10px;
+                width: 100%;
+                grid-template-columns: auto auto auto;
                 display: grid;
-                border-radius: 2px;
-                background-color: #d8d8d8;
-                padding: 5px;
-                height: 100%;
-                color: #37424b;
 
-                input {
-                  background-color: #d8d8d8;
-                  outline: none;
-                  font-style: italic;
-                  color: #37424b;
-                }
-              }
-            }
-          }
-        }
+                .hierarchy-1-container,
+                .hierarchy-2-container,
+                .hierarchy-3-container {
+                  min-width: 150px;
 
-        .left-panel-container {
-          display: flex;
-          flex-direction: column;
-
-          .gru-taxonomy-picker {
-            .actions,
-            .selected-list {
-              display: none;
-            }
-
-            .browse-selector {
-              .title {
-                display: none;
-              }
-
-              .taxonomy.gru-browse-selector {
-                margin-top: 10px;
-
-                .breadcrumb-levels {
-                  display: flex;
-
-                  .breadcrumb-level {
-                    background-color: #4e5e67;
-                    color: $white;
-                    margin-right: 5px;
-                    padding: 5px;
-                    border-radius: 4px;
-                    cursor: pointer;
+                  strong {
+                    font-size: 13px;
+                    font-weight: bold;
+                    color: #37424b;
                   }
 
-                  .separator-symbol {
-                    color: #4e5e67;
-                    font-size: 15px;
-                  }
-                }
-              }
+                  .browse-panel {
+                    padding: 0;
+                    list-style: none;
+                    border: solid 1px #979797;
+                    position: relative;
+                    overflow-y: auto;
+                    height: 225px;
 
-              .gru-browse-selector,
-              .taxonomy {
-                .gru-browser-selector-container {
-                  padding: 0;
-                  list-style: none;
-                  margin-top: 10px;
-                  width: 100%;
-                  grid-template-columns: auto auto auto;
-                  display: grid;
-
-                  .hierarchy-1-container,
-                  .hierarchy-2-container,
-                  .hierarchy-3-container {
-                    min-width: 150px;
-
-                    strong {
-                      font-size: 13px;
-                      font-weight: bold;
-                      color: #37424b;
+                    &.level-2 {
+                      border-right: 0;
+                      border-left: 0;
                     }
 
-                    .browse-panel {
-                      padding: 0;
-                      list-style: none;
-                      border: solid 1px #979797;
-                      position: relative;
-                      overflow-y: auto;
-                      height: 225px;
+                    &.level-3 {
+                      li {
+                        .standard {
+                          position: relative;
 
-                      &.level-2 {
-                        border-right: 0;
-                        border-left: 0;
-                      }
+                          .level-panel {
+                            padding: 0;
+                            list-style: none;
+                          }
 
-                      &.level-3 {
-                        li {
-                          .standard {
-                            position: relative;
+                          button {
+                            background-color: transparent;
+                            border: 0 none;
+                            position: absolute;
+                            top: -7px;
+                            right: 5px;
 
-                            .level-panel {
-                              padding: 0;
-                              list-style: none;
+                            i.keyboard_arrow_up {
+                              display: none;
                             }
 
-                            button {
-                              background-color: transparent;
-                              border: 0 none;
-                              position: absolute;
-                              top: -7px;
-                              right: 5px;
-
+                            &.collapsed {
                               i.keyboard_arrow_up {
+                                display: inline-block;
+                              }
+
+                              i.keyboard_arrow_down {
                                 display: none;
                               }
+                            }
+                          }
 
-                              &.collapsed {
-                                i.keyboard_arrow_up {
-                                  display: inline-block;
-                                }
+                          label {
+                            display: flex;
 
-                                i.keyboard_arrow_down {
-                                  display: none;
-                                }
-                              }
+                            strong {
+                              display: block;
                             }
 
-                            label {
-                              display: flex;
+                            span {
+                              text-align: justify;
+                            }
 
-                              strong {
+                            input[type="checkbox"] {
+                              &:checked::after {
+                                background: url("/assets/gooru/images/tick-inside-circle-blue.svg") no-repeat center;
+                                background-size: contain;
+                                border: none;
                                 display: block;
+                                position: relative;
                               }
 
-                              span {
-                                text-align: justify;
-                              }
-
-                              input[type="checkbox"] {
-                                &:checked::after {
-                                  background: url("/assets/gooru/images/tick-inside-circle-blue.svg") no-repeat center;
-                                  background-size: contain;
-                                  border: none;
-                                  display: block;
-                                  position: relative;
-                                }
-
-                                &:after {
-                                  content: "";
-                                  display: block;
-                                  width: 18px;
-                                  height: 18px;
-                                  border-radius: 50%;
-                                  -webkit-transition: 240ms;
-                                  -o-transition: 240ms;
-                                  transition: 240ms;
-                                }
+                              &:after {
+                                content: "";
+                                display: block;
+                                width: 18px;
+                                height: 18px;
+                                border-radius: 50%;
+                                -webkit-transition: 240ms;
+                                -o-transition: 240ms;
+                                transition: 240ms;
                               }
                             }
                           }
                         }
                       }
+                    }
 
-                      li {
-                        padding-left: 5px;
+                    li {
+                      padding-left: 5px;
+
+                      a {
+                        font-size: 13px;
+                        line-height: normal;
+                        color: #37424b;
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+                        padding: 5px;
+                      }
+
+                      &.active {
+                        background-color: #37424b;
 
                         a {
-                          font-size: 13px;
-                          line-height: normal;
-                          color: #37424b;
-                          display: flex;
-                          align-items: center;
-                          cursor: pointer;
-                          padding: 5px;
-                        }
-
-                        &.active {
-                          background-color: #37424b;
-
-                          a {
-                            color: #ffffff;
-                            font-weight: bold;
-                          }
+                          color: #ffffff;
+                          font-weight: bold;
                         }
                       }
                     }
@@ -303,58 +386,54 @@
             }
           }
         }
+      }
 
-        .gru-taxonomy-selector {
-          .category {
-            label {
-              span {
-                font-size: 15px;
-                font-weight: bold;
-                color: #37424b;
-                text-transform: uppercase;
-                height: 20px;
-              }
-
-              .categories {
-                margin-top: 10px;
-
-                .btn-primary {
-                  background: #37424b;
-                }
-
-                .btn-info {
-                  opacity: 0.5;
-                  color: #37424b;
-                  background: #fff;
-                  border-radius: 3px;
-                  border: solid 1px #37424b;
-                }
-              }
-            }
-          }
-
-          .subject {
-            label {
-              span {
-                font-size: 15px;
-                font-weight: bold;
-                color: #37424b;
-                text-transform: uppercase;
-                height: 20px;
-              }
-            }
-
-            .not-selected {
+      .gru-taxonomy-selector {
+        .category {
+          label {
+            span {
               display: none;
             }
 
-            .gru-subject-picker {
-              margin-top: 5px;
+            .categories {
+              margin-top: 10px;
 
-              .dropdown-toggle,
-              .selected-subject {
+              .btn-primary {
                 background: #37424b;
               }
+
+              .btn-info {
+                opacity: 0.5;
+                color: #37424b;
+                background: #fff;
+                border-radius: 3px;
+                border: solid 1px #37424b;
+              }
+            }
+          }
+        }
+
+        .subject {
+          label {
+            span {
+              font-size: 15px;
+              font-weight: bold;
+              color: #37424b;
+              text-transform: uppercase;
+              height: 20px;
+            }
+          }
+
+          .not-selected {
+            display: none;
+          }
+
+          .gru-subject-picker {
+            margin-top: 5px;
+
+            .dropdown-toggle,
+            .selected-subject {
+              background: #37424b;
             }
           }
         }

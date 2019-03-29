@@ -1,97 +1,106 @@
 <div class="search-panel">
   <div class="search-content">
-    <div class="subjects-panel">
-      <div class="left-panel-container">
+    <div class="top-panel-container">
+      <div class="label-container" data-toggle="collapse" data-target="#standard">
+        <span class="title">{{t 'common.category'}}</span>
+        <div class="icons">
+          <span>{{gru-icon name="arrow_drop_up"}}</span>
+          <span>{{gru-icon name="arrow_drop_down"}}</span>
+        </div>
+      </div>
+      <div class="standard-container collapse in" id="standard">
         {{#unless (eq selectedFilterBy 'courses')}}
           <div class="category-standards">
             {{taxonomy.gru-taxonomy-selector
-            isEditing=true
-            onSubjectSelected="selectSubject"
-            onCategorySelected="selectCategory"
-            selectedCategory=selectedCategory
-            selectedSubject=selectedSubject
-            subjectLabelKey='common.subject-and-framework'
-            onlySubjectsWithStandards=true
-          }}
+                isEditing=true
+                onSubjectSelected="selectSubject"
+                onCategorySelected="selectCategory"
+                selectedCategory=selectedCategory
+                selectedSubject=selectedSubject
+                subjectLabelKey='common.subject-and-framework'
+                onlySubjectsWithStandards=true
+              }}
             {{#if selectedCourse}}
               {{taxonomy.gru-taxonomy-picker
-              browseSelectorText=browseSelectorText
-              onSave=(action 'updateSelectedTags')
-              onSearchPath=(action 'loadTaxonomyData')
-              panelHeaders=panelHeaders
-              selected=taxonomyPickerData.selected
-              selectedTextKey=selectedTextKey
-              isCompatiableMode=isCompatiableMode
-              shortcuts=taxonomyPickerData.shortcuts
-              shortcutText=(t "taxonomy.modals.gru-standard-picker.shortcutText")
-              subject=taxonomyPickerData.subject
-              unCheckedItem=unCheckedItem
-              publishSelectedItems=true
-              course=course
-              domain=domain
-            }}
+                  browseSelectorText=browseSelectorText
+                  onSave=(action 'updateSelectedTags')
+                  onSearchPath=(action 'loadTaxonomyData')
+                  panelHeaders=panelHeaders
+                  selected=taxonomyPickerData.selected
+                  selectedTextKey=selectedTextKey
+                  isCompatiableMode=isCompatiableMode
+                  shortcuts=taxonomyPickerData.shortcuts
+                  shortcutText=(t "taxonomy.modals.gru-standard-picker.shortcutText")
+                  subject=taxonomyPickerData.subject
+                  unCheckedItem=unCheckedItem
+                  publishSelectedItems=true
+                  course=course
+                  domain=domain
+                }}
             {{/if}}
           </div>
         {{/unless}}
-        <div class="habits-panel"></div>
       </div>
-      <div class="right-panel-container">
-        <div class="filter-container">
-          <div class="audience-list-container">
-            <div class="label-container" data-toggle="collapse" data-target="#audience">
-              <span>{{t 'common.audience'}}</span>
-              <div class="icons">
-                <span>{{gru-icon name="arrow_drop_up"}}</span>
-                <span>{{gru-icon name="arrow_drop_down"}}</span>
-              </div>
+      <div class="habits-panel"></div>
+    </div>
+    <div class="bottom-panel-container">
+      <div class="filter-container">
+        <div class="audience-list-container">
+          <div class="label-container" data-toggle="collapse" data-target="#audience">
+            <span>{{t 'common.audience'}}</span>
+            <div class="icons">
+              <span>{{gru-icon name="arrow_drop_up"}}</span>
+              <span>{{gru-icon name="arrow_drop_down"}}</span>
             </div>
-            <div class="audience-container collapse in" id="audience">
-              {{gru-button-list items=audiences selectedFilters=selectedFilters onSelectItem="onSelectItem"}} </div>
           </div>
-          <div class="language-list-container">
-            <div class="label-container" data-toggle="collapse" data-target="#language">
-              <span>{{t 'profile.preference.language'}}</span>
-              <div class="icons">
-                <span>{{gru-icon name="arrow_drop_up"}}</span>
-                <span>{{gru-icon name="arrow_drop_down"}}</span>
-              </div>
-            </div>
-            <div class="language-container collapse in" id="language">
-              {{gru-button-list items=languages selectedFilters=selectedFilters onSelectItem="onSelectItem"}}
-            </div>
+          <div class="audience-container collapse in" id="audience">
+            {{gru-button-list items=audiences selectedFilters=selectedFilters onSelectItem="onSelectItem"}}
           </div>
         </div>
-        <div class="filter-container">
-          <div class="author-publisher-list-container hidden">
-            <div class="label-container" data-toggle="collapse" data-target="#author">
-              <span>{{t 'search-filter.authors' }} {{t 'search-result.and' }} {{t 'common.publishers' }}</span>
-              <div class="icons">
-                <span>{{gru-icon name="arrow_drop_up"}}</span>
-                <span>{{gru-icon name="arrow_drop_down"}}</span>
-              </div>
-            </div>
-            <div class="author-publisher-container collapse in" id="author">
-              <div class="author-container">
-                <span class="author-title">{{t 'search-filter.author.placeholder' }}</span>
-                {{input type="text" value=authorName class="author-name" focus-out="setAuthor" placeholder=(t "search-filter.input-placeholder" type=(t "search-filter.author.placeholder")) autofocus="true"}}
-              </div>
-              <div class="publisher-container">
-                <span class="publisher-title">{{t 'common.publisher' }}</span>
-                {{input type="text" value=publisherName class="publisher-name" focus-out="setPublisher" placeholder=(t "search-filter.input-placeholder" type=(t "common.publisher")) autofocus="true"}}
-              </div>
+        <div class="language-list-container">
+          <div class="label-container" data-toggle="collapse" data-target="#language">
+            <span>{{t 'profile.preference.language'}}</span>
+            <div class="icons">
+              <span>{{gru-icon name="arrow_drop_up"}}</span>
+              <span>{{gru-icon name="arrow_drop_down"}}</span>
             </div>
           </div>
-          <div class="educational-list-container">
-            <div class="label-container" data-toggle="collapse" data-target="#educational">
-              <span>{{t 'common.educational-use'}}</span>
-              <div class="icons">
-                <span>{{gru-icon name="arrow_drop_up"}}</span>
-                <span>{{gru-icon name="arrow_drop_down"}}</span>
-              </div>
+          <div class="language-container collapse in" id="language">
+            {{gru-button-list items=languages selectedFilters=selectedFilters onSelectItem="onSelectItem"}}
+          </div>
+        </div>
+      </div>
+      <div class="filter-container">
+        <div class="author-publisher-list-container">
+          <div class="label-container" data-toggle="collapse" data-target="#author">
+            <span>{{t 'common.publishers' }}</span>
+            <div class="icons">
+              <span>{{gru-icon name="arrow_drop_up"}}</span>
+              <span>{{gru-icon name="arrow_drop_down"}}</span>
             </div>
-            <div class="educational-container collapse in" id="educational">
-              {{gru-button-list items=educationalUses selectedFilters=selectedFilters onSelectItem="onSelectItem"}}
+          </div>
+          <div class="author-publisher-container collapse in" id="author">
+            <div class="author-container hidden">
+              <span class="author-title">{{t 'search-filter.author.placeholder' }}</span>
+              {{input type="text" value=authorName class="author-name" focus-out="setAuthor" placeholder=(t "search-filter.input-placeholder" type=(t "search-filter.author.placeholder")) autofocus="true"}}
             </div>
+            <div class="publisher-container">
+              <span class="publisher-title">{{t 'common.publisher' }}</span>
+              {{input type="text" value=publisherName class="publisher-name" id="publisher" focus-out="setPublisher" placeholder=(t "search-filter.input-placeholder" type=(t "common.publisher")) autofocus="true"}}
+            </div>
+            <div id="publisher-suggestions"></div>
+          </div>
+        </div>
+        <div class="educational-list-container">
+          <div class="label-container" data-toggle="collapse" data-target="#educational">
+            <span>{{t 'common.educational-use'}}</span>
+            <div class="icons">
+              <span>{{gru-icon name="arrow_drop_up"}}</span>
+              <span>{{gru-icon name="arrow_drop_down"}}</span>
+            </div>
+          </div>
+          <div class="educational-container collapse in" id="educational">
+            {{gru-button-list items=educationalUses selectedFilters=selectedFilters onSelectItem="onSelectItem"}}
           </div>
         </div>
       </div>
