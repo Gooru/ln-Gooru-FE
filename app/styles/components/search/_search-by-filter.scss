@@ -134,6 +134,17 @@
 
               .ui-autocomplete {
                 z-index: 1048;
+                box-shadow: 0 0 5px 2px #ccc;
+                border: none;
+
+                .ui-menu-item {
+                  color: #37424b;
+
+                  &.ui-state-focus {
+                    color: #fff;
+                    background-color: #37424b;
+                  }
+                }
               }
             }
           }
