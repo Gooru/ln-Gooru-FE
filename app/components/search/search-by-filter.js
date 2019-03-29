@@ -69,7 +69,7 @@ export default Ember.Component.extend({
    */
   onSubjectSelected: Ember.observer('selectedSubject.courses.[]', function() {
     let component = this;
-    component.set('selectedCourse', this.get('selectedSubject.courses'));
+    component.set('selectedCourse', component.get('selectedSubject.courses'));
     component.loadTaxonomyPicker();
   }),
 
@@ -168,6 +168,7 @@ export default Ember.Component.extend({
 
     selectSubject(subject) {
       let component = this;
+      component.set('selectedSubject.courses', Ember.A([]));
       component.set('selectedSubject', subject);
       let selectedFilters = component.get('selectedFilters');
       selectedFilters.removeObjects(selectedFilters.filterBy('filter', 'flt.standard')); //remove previous object

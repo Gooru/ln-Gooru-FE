@@ -314,6 +314,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
       const component = this;
       if (item.get('filter') === 'flt.standard') {
         component.set('unCheckedItem', item);
+      } else if (item.get('filter') === 'flt.publisherName') {
+        component.set('publisherName', null);
       }
       component.get('selectedFilters').removeObject(item);
       component.send('doSearch');
