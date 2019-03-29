@@ -65,7 +65,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'પ્રથમ નામ',
   'common.filter-by': 'દ્વારા ફિલ્ટર કરો',
   'common.more': 'વધુ',
-  'common.search-help-message': 'Once you have selected the filters, click on search icon above to refine your search',
+  'common.search-help-message':
+    'Once you have selected the filters, click on search icon above to refine your search',
   'common.avg-score': 'સરેરાશ સ્કોર',
   'common.frq': 'ફ્રિક',
   'common.schedule': 'શેડ્યૂલ',
@@ -1164,7 +1165,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.navigator-banner.success-message':
     'તમે નેવિગેટર વર્ગના સહ-શિક્ષક તરીકે સફળતાપૂર્વક જોડાયા છો',
   'teacher-landing.navigator-banner.error-message': 'વર્ગ જોડાયા સાથે સમસ્યા',
-  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.class.manage': 'મેનેજ કરો',
   'teacher-landing.class.reports': 'અહેવાલો',
   'teacher-landing.class.daily-activites': 'દૈનિક સક્રિયકરણ',
@@ -2487,5 +2489,6 @@ export default Object.assign(quizzesTranslations, {
   'present.diagnostic.determine.not.know':
     'Present a diagnostic to determine the student\'s current location, if not known?',
   'present.diagnostic.determine.know':
-    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
+  'add.to.todays.class': 'Add to Today\'s Class'
 });

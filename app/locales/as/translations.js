@@ -66,7 +66,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'প্ৰথম নাম',
   'common.filter-by': 'ইয়াৰ দ্বাৰা ফিল্টাৰ কৰা হৈছে',
   'common.more': 'আৰু ',
-  'common.search-help-message': 'Once you have selected the filters, click on search icon above to refine your search',
+  'common.search-help-message':
+    'Once you have selected the filters, click on search icon above to refine your search',
   'common.avg-score': 'মাধ্য স্কোৰ',
   'common.frq': 'FRQ',
   'common.schedule': 'কাৰ্যক্ৰম',
@@ -1195,7 +1196,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.navigator-banner.success-message':
     'আপুনি সফলতাপূৰ্বক নেভিগেতৰ শ্ৰেণীৰ সহ-শিক্ষক হিচাপে যোগদান কৰিছে',
   'teacher-landing.navigator-banner.error-message': 'শ্ৰেণী যোগদান কৰাত সমস্যা',
-  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.class.manage': 'প্ৰবন্ধন কৰক',
   'teacher-landing.class.reports': 'প্ৰতিবেদনবোৰ',
   'teacher-landing.class.daily-activites': 'দৈনন্দিন কাৰ্যকলাপ সমূহ',
@@ -2545,5 +2547,6 @@ export default Object.assign(quizzesTranslations, {
   'present.diagnostic.determine.not.know':
     'Present a diagnostic to determine the student\'s current location, if not known?',
   'present.diagnostic.determine.know':
-    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
+  'add.to.todays.class': 'Add to Today\'s Class'
 });

@@ -5,6 +5,7 @@ import Assessment from 'gooru-web/models/content/assessment';
 import { parseDate } from 'gooru-web/utils/utils';
 import { DEFAULT_IMAGES } from 'gooru-web/config/config';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
+import TaxonomySerializer from 'gooru-web/serializers/taxonomy/taxonomy';
 
 /**
  * Serializer to support the Class Activity operations
@@ -13,6 +14,19 @@ import ConfigurationMixin from 'gooru-web/mixins/configuration';
  */
 export default Ember.Object.extend(ConfigurationMixin, {
   session: Ember.inject.service('session'),
+
+  /**
+   * @property {TaxonomySerializer} taxonomySerializer
+   */
+  taxonomySerializer: null,
+
+  init: function() {
+    this._super(...arguments);
+    this.set(
+      'taxonomySerializer',
+      TaxonomySerializer.create(Ember.getOwner(this).ownerInjection())
+    );
+  },
 
   /**
    * Normalizes class activities/contents
@@ -70,7 +84,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     let content = null;
     const basePath = serializer.get('session.cdnUrls.content');
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
-
+    const taxonomySerializer = this.get('taxonomySerializer');
     if (contentType === 'assessment') {
       const thumbnailUrl = data.thumbnail
         ? basePath + data.thumbnail
@@ -84,7 +98,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
         oeQuestionCount: data.oe_question_count,
         collectionType: data.content_type,
         format: data.content_type,
-        thumbnailUrl: thumbnailUrl
+        thumbnailUrl: thumbnailUrl,
+        standards: taxonomySerializer.normalizeTaxonomyObject(data.taxonomy)
       });
     }
 
@@ -100,7 +115,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
         questionCount: data.question_count,
         collectionType: data.content_type,
         thumbnailUrl: thumbnailUrl,
-        format: data.content_type
+        format: data.content_type,
+        standards: taxonomySerializer.normalizeTaxonomyObject(data.taxonomy)
       });
     }
 
@@ -121,7 +137,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
         thumbnailUrl: thumbnailUrl,
         collectionType: data.content_type,
         url: data.url ? data.url : '',
-        format: data.content_type
+        format: data.content_type,
+        standards: taxonomySerializer.normalizeTaxonomyObject(data.taxonomy)
       });
     }
 
