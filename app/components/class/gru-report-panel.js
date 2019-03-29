@@ -207,7 +207,7 @@ export default Ember.Component.extend({
    * Property to show/hide change score button
    */
 
-  showChangeScore: true,
+  showChangeScore: Ember.computed.not('isArchivedClass'),
 
   /**
    * Indicates the visibility of change score button
@@ -303,6 +303,16 @@ export default Ember.Component.extend({
       );
     }
   ),
+
+  /**
+   * @property {Boolean} isArchivedClass
+   */
+  isArchivedClass: Ember.computed.alias('class.isArchived'),
+
+  /**
+   * @property {Object} class
+   */
+  class: {},
 
   // -------------------------------------------------------------------------
   // Actions
@@ -413,18 +423,16 @@ export default Ember.Component.extend({
 
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-        if (closeAll) {
-          component.sendAction('onClosePullUp');
-        }
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+      if (closeAll) {
+        component.sendAction('onClosePullUp');
       }
-    );
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -482,89 +490,91 @@ export default Ember.Component.extend({
           ? component.get('userSessionService').getCompletedSessions(context)
           : component.get('learnerService').fetchLearnerSessions(context);
     }
-    return Ember.RSVP.hashSettled({
-      collection: collectionPromise,
-      completedSessions: completedSessionsPromise,
-      lesson: lessonPromise,
-      profile:
-        context.userId !== 'anonymous'
-          ? component.get('profileService').readUserProfile(context.userId)
-          : {}
-    }).then(function(hash) {
-      component.set(
-        'profile',
-        hash.profile.state === 'fulfilled' ? hash.profile.value : null
-      );
-      component.set(
-        'collection',
-        hash.collection.state === 'fulfilled' ? hash.collection.value : null
-      );
-      component.set(
-        'completedSessions',
-        hash.completedSessions.state === 'fulfilled'
-          ? hash.completedSessions.value
-          : null
-      );
-      if (!params.sessionId) {
-        var completedSessions =
+    return Ember.RSVP
+      .hashSettled({
+        collection: collectionPromise,
+        completedSessions: completedSessionsPromise,
+        lesson: lessonPromise,
+        profile:
+          context.userId !== 'anonymous'
+            ? component.get('profileService').readUserProfile(context.userId)
+            : {}
+      })
+      .then(function(hash) {
+        component.set(
+          'profile',
+          hash.profile.state === 'fulfilled' ? hash.profile.value : null
+        );
+        component.set(
+          'collection',
+          hash.collection.state === 'fulfilled' ? hash.collection.value : null
+        );
+        component.set(
+          'completedSessions',
           hash.completedSessions.state === 'fulfilled'
             ? hash.completedSessions.value
+            : null
+        );
+        if (!params.sessionId) {
+          var completedSessions =
+            hash.completedSessions.state === 'fulfilled'
+              ? hash.completedSessions.value
+              : null;
+          const totalSessions = completedSessions.length;
+          const session = totalSessions
+            ? completedSessions[totalSessions - 1]
             : null;
-        const totalSessions = completedSessions.length;
-        const session = totalSessions
-          ? completedSessions[totalSessions - 1]
-          : null;
-        if (session) {
-          //collections has no session
-          context.set('sessionId', session.sessionId);
+          if (session) {
+            //collections has no session
+            context.set('sessionId', session.sessionId);
+          }
         }
-      }
 
-      if (context.get('classId')) {
-        const performanceService = component.get('performanceService');
-        return performanceService
-          .findAssessmentResultByCollectionAndStudent(context)
-          .then(function(assessmentResult) {
-            component.setAssessmentResult(assessmentResult);
-            if (!component.get('isStudent')) {
-              component
-                .get('courseMapService')
-                .getLessonInfo(
-                  context.get('classId'),
-                  context.get('courseId'),
-                  context.get('unitId'),
-                  context.get('lessonId'),
-                  true,
-                  context.get('userId')
-                )
-                .then(lesson => {
-                  let collections = lesson.get('children');
-                  let collection = collections.findBy(
-                    'id',
-                    context.get('collectionId')
-                  );
-                  if (!collection.get('isSuggestedContent')) {
-                    component.set('showSuggestion', true);
-                    component
-                      .get('classService')
-                      .readClassInfo(context.get('classId'))
-                      .then(classData => {
-                        component.set('class', classData);
-                        component.loadSuggestion();
-                      });
-                  }
-                });
-            }
-          });
-      } else {
-        const learnerService = component.get('learnerService');
-        return learnerService
-          .fetchCollectionPerformance(context)
-          .then(function(assessmentResult) {
-            component.setAssessmentResult(assessmentResult);
-          });
-      }
-    });
+        if (context.get('classId')) {
+          const performanceService = component.get('performanceService');
+          return performanceService
+            .findAssessmentResultByCollectionAndStudent(context)
+            .then(function(assessmentResult) {
+              component.setAssessmentResult(assessmentResult);
+              if (!component.get('isStudent')) {
+                component
+                  .get('courseMapService')
+                  .getLessonInfo(
+                    context.get('classId'),
+                    context.get('courseId'),
+                    context.get('unitId'),
+                    context.get('lessonId'),
+                    true,
+                    context.get('userId')
+                  )
+                  .then(lesson => {
+                    let collections = lesson.get('children');
+                    let collection = collections.findBy(
+                      'id',
+                      context.get('collectionId')
+                    );
+                    if (!collection.get('isSuggestedContent')) {
+                      component.set('showSuggestion', true);
+                      component
+                        .get('classService')
+                        .readClassInfo(context.get('classId'))
+                        .then(classData => {
+                          component.set('class', classData);
+                          component.loadSuggestion();
+                        });
+                    }
+                  });
+              }
+            });
+        } else {
+          const learnerService = component.get('learnerService');
+          return learnerService
+            .fetchCollectionPerformance(context)
+            .then(function(assessmentResult) {
+              component.setAssessmentResult(assessmentResult);
+            });
+        }
+      });
   },
 
   setAssessmentResult: function(assessmentResult, session) {

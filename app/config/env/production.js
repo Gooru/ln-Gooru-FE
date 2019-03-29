@@ -77,5 +77,9 @@ export default {
   demoClass: {
     code: 'DGNTIKN',
     id: '71bfbc07-1b87-4e8e-a98a-1839e834cd20'
+  },
+
+  'GRU_FEATURE_FLAG': {
+    'searchFilter': true
   }
 };

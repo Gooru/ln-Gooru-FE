@@ -7,6 +7,14 @@ export default Object.assign(quizzesTranslations, {
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
   hi: 'हिंदी',
+  as: 'অসমীয়া',
+  bn: 'বাংলা',
+  gu: 'ગુજરાતી',
+  ml: 'മല്യാലം',
+  or: ' ଓଡ଼ିଆ',
+  pa: 'ਪੰਜਾਬੀ',
+  ta: 'தமிழ்',
+  te: 'తెలుగు',
   'errors.description': 'This field',
   'errors.inclusion': '{{description}} is not included in the list',
   'errors.exclusion': '{{description}} is reserved',
@@ -53,6 +61,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
   'common.more': 'more',
+  'common.search-help-message': 'Once you have selected the filters, click on search icon above to refine your search',
   'common.avg-score': 'Avg Score',
   'common.frq': 'FRQ',
   'common.schedule': 'Schedule',
@@ -127,7 +136,7 @@ export default Object.assign(quizzesTranslations, {
   'common.archive': 'Archive',
   'common.assessment': 'Assessment',
   'common.assessment-disabled': 'You can\'t attempt this assessment',
-  'common.assessment-external': 'Assessment-External',
+  'common.assessment-external': 'External Assessment',
   'common.assessment-pl.zero': 'Assessments',
   'common.assessment-pl.one': 'Assessment',
   'common.assessment-pl.other': 'Assessments',
@@ -171,6 +180,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'Click to unbookmark',
   'common.close': 'Close',
   'common.collection': 'Collection',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'Collections',
   'common.collection-pl.one': 'Collection',
   'common.collection-pl.other': 'Collections',
@@ -549,6 +559,7 @@ export default Object.assign(quizzesTranslations, {
   'common.all': 'All',
   'common.please-wait': 'Please Wait',
   'common.unscheduled-items': 'Unscheduled Items',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'Add to unscheduled list for',
   'common.save-next': 'Save and Next',
   'common.save-submit': 'Save and Submit All',
@@ -1001,6 +1012,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.collapse': 'Collapse',
   'teacher-landing.class.atc-view.total-competencies-gained': 'Total Competencies Gained',
   'teacher-landing.class.atc-view.progress-label': 'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.class-activities': 'Class Activities',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
   'teacher-landing.class.offline-class-report.activity-report': 'Activity Report',
@@ -1308,7 +1320,7 @@ export default Object.assign(quizzesTranslations, {
   'standard-dropdown.placeholder': 'Browse by Standard',
   'subject-dropdown.placeholder': 'subject(s)',
   'subject-dropdown.prompt': 'Select a subject',
-  'search-filter.input-placeholder':'Type {{type}} name here...',
+  'search-filter.input-placeholder': 'Type {{type}} name here...',
   'search-filter.courses': 'Courses',
   'search-filter.collections': 'Collections',
   'search-filter.resources': 'Resources',
@@ -1940,29 +1952,17 @@ export default Object.assign(quizzesTranslations, {
   'self-report.validation-error-time': 'Enter valid time',
   'notifications.notificationlist-header-title': 'NOTIFICATIONS',
   'notifications.show-more': 'SHOW MORE',
-  'notifications.type.teacher-suggestion-title':
-    'You have a new teacher suggestion in class : {{ classTitle }}',
-  'notifications.type.student-gradable-submission-title':
-    'You have {{occurrence}} item(s) to grade in class : {{ classTitle }}',
-  'notifications.type.student-self-report-title':
-    '{{occurrence}} Student(s) reported performance at class : {{ classTitle }}',
-  'notifications.type.teacher-override-title':
-    'Teacher has corrected your submission at class : {{ classTitle }}  ',
-  'notifications.type.teacher-grading-complete-title':
-    'Teacher has graded your submission at class : {{ classTitle }}',
-  'notifications.typeinclass.teacher-suggestion-title':
-    'You have a new teacher suggestion',
-  'notifications.typeinclass.student-gradable-submission-title':
-    'You have {{occurrence}} student item(s) to grade',
-  'notifications.typeinclass.student-self-report-title':
-    '{{occurrence}} Student(s) reported performance',
-  'notifications.typeinclass.teacher-override-title':
-    'Teacher has corrected your submission',
-  'notifications.typeinclass.teacher-grading-complete-title':
-    'Teacher has graded your submission at class',
+  'notifications.type.teacher-suggestion-title': 'You have a new teacher suggestion in class : {{ classTitle }}',
+  'notifications.type.student-gradable-submission-title': 'You have {{occurrence}} item(s) to grade in class : {{ classTitle }}',
+  'notifications.type.student-self-report-title': '{{occurrence}} Student(s) reported performance at class : {{ classTitle }}',
+  'notifications.type.teacher-override-title': 'Teacher has corrected your submission at class : {{ classTitle }}  ',
+  'notifications.type.teacher-grading-complete-title': 'Teacher has graded your submission at class : {{ classTitle }}',
+  'notifications.typeinclass.teacher-suggestion-title': 'You have a new teacher suggestion',
+  'notifications.typeinclass.student-gradable-submission-title': 'You have {{occurrence}} student item(s) to grade',
+  'notifications.typeinclass.student-self-report-title': '{{occurrence}} Student(s) reported performance',
+  'notifications.typeinclass.teacher-override-title': 'Teacher has corrected your submission',
+  'notifications.typeinclass.teacher-grading-complete-title': 'Teacher has graded your submission at class',
   'goahead.add.something': 'Go ahead, add something.',
-  'present.diagnostic.determine.not.know':
-    'Present a diagnostic to determine the student\'s current location, if not known?',
-  'present.diagnostic.determine.know':
-    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
+  'present.diagnostic.determine.not.know': 'Present a diagnostic to determine the student\'s current location, if not known?',
+  'present.diagnostic.determine.know': '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
 });

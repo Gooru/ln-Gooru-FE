@@ -195,10 +195,10 @@ export default Ember.Component.extend({
     setPublisher() {
       let component = this;
       let term = this.get('publisherName').trim();
-      let selectedFilters = component.get('selectedFilters');
-      selectedFilters.removeObjects(selectedFilters.filterBy('filter', 'flt.publisherName')); //remove previous object
+      let filterItems = component.get('selectedFilters');
+      filterItems.removeObjects(filterItems.filterBy('filter', 'flt.publisherName')); //remove previous object
       if (term !== '') {
-        component.get('selectedFilters').pushObject(Ember.Object.create({
+        filterItems.push(Ember.Object.create({
           'filter': 'flt.publisherName',
           'name': term
         }));

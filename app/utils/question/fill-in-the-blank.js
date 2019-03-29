@@ -44,7 +44,8 @@ const FillInTheBlankUtil = QuestionUtil.extend({
     let correctAnswer = this.getCorrectAnswer();
     return (
       correctAnswer[index] &&
-      correctAnswer[index].toUpperCase() === answerChoice.toUpperCase()
+      correctAnswer[index].trim().toUpperCase() ===
+        answerChoice.trim().toUpperCase()
     );
   },
 
@@ -154,7 +155,7 @@ FillInTheBlankUtil.reopenClass({
    * Gets the correct answers from a text
    * @param text
    * @returns {String[]}
-     */
+   */
   getCorrectAnswers: function(text) {
     const regExp = FillInTheBlankUtil.FIB_REGEX.global;
     let matches = regExp.exec(text);
@@ -175,7 +176,7 @@ FillInTheBlankUtil.reopenClass({
    * Convert a text into a fill in the blank display format
    * @param text
    * @returns {*}
-     */
+   */
   toFibText: function(text) {
     if (text) {
       const inputText = FillInTheBlankUtil.LEGACY_REGEX.text;

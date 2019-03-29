@@ -39,24 +39,16 @@
 								.search-content {
 									padding: 0;
 
-									.subjects-panel {
+									.bottom-panel-container,
+									.top-panel-container {
 										grid-template-columns: none;
+										width: 100vw;
 
-										.left-panel-container,
-										.right-panel-container {
-											grid-template-columns: none;
-
-											.gru-taxonomy-picker {
-												.browse-selector {
-													.taxonomy {
-														.gru-browser-selector-container {
-															.hierarchy-1-container,
-															.hierarchy-2-container,
-															.hierarchy-3-container {
-																max-width: 150px;
-																min-width: 100px;
-															}
-														}
+										.gru-taxonomy-picker {
+											.browse-selector {
+												.taxonomy {
+													.gru-browser-selector-container {
+														grid-template-columns: none;
 													}
 												}
 											}

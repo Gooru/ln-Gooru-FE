@@ -37,7 +37,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     //Action triggered when click preview content
     onPreviewContent(content) {
       const controller = this;
-      controller.set('previewContentType', content.get('collectionType'));
+      controller.set(
+        'previewContentType',
+        content.get('format') || content.get('collectionType')
+      );
       controller.set('previewContent', content);
       controller.set('isShowContentPreview', true);
     },
@@ -403,6 +406,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       }
     },
 
+    onSelectToday() {
+      let controller = this;
+      controller.incrementProperty('refreshDatePicker');
+    },
+
     onOpenPerformanceEntry(item, activity, isRepeatEntry) {
       let component = this;
       component.fetchActivityUsers(activity.id).then(function(activityMembers) {
@@ -547,6 +555,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     return classActivities.sortBy('added_date').reverse();
   }),
 
+  totalScheduleditems: Ember.computed(
+    'scheduledClassActivities.[]',
+    function() {
+      let controller = this;
+      let scheduledClassActivities = controller.get('scheduledClassActivities');
+      let totalScheduleditems = scheduledClassActivities.map(function(
+        classActivity
+      ) {
+        return classActivity.get('classActivities').length;
+      });
+      return totalScheduleditems.length
+        ? totalScheduleditems.reduce((total, count) => total + count)
+        : 0;
+    }
+  ),
+
   /**
    * It maintains the today's class activities data.
    */
@@ -577,7 +601,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let unScheduledClassActivities = classActivities.objectAt(0);
     return unScheduledClassActivities
       ? unScheduledClassActivities.get('classActivities')
-      : null;
+      : [];
   }),
 
   /**

@@ -1,32 +1,37 @@
 <div class="controller teacher class class-activities">
+  <div class="ca-date-and-add-content">
+    <div class="ca-add-content">
+      <div class="ca-contents-button">
+        <p>{{t 'common.plan-an-activities'}}</p>
+        <i class="collection-icon" {{action 'onAddDca' 'collection'}}></i>
+        <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
+      </div>
+    </div>
+    <div class="ca-date-selector">
+      {{ca-date-picker
+    showToday=true
+    forMonth=forMonth
+    allowDateSelectorToggle=true
+    forYear=forYear
+    refreshDatePicker=refreshDatePicker
+    showPreviousMonth="showPreviousMonth"
+    showNextMonth="showNextMonth"
+    onSelectDate="onSelectDate"
+    onSelectToday="onSelectDate"
+    activities=scheduledClassActivitiesDatewise
+    highlightActivities=true
+  }}
+    </div>
+    <div class="ca-today" {{action 'onSelectToday'}}>{{t "student-landing.class.class-activities-tab.today"}}</div>
+  </div>
   <div class="ca-panel">
     <div class="ca-left-panel">
       <div class="loading-spinner {{if isLoading 'active'}}">
         {{three-bounce-spinner}}
       </div>
       <div class="dca-content-container">
-        <div class="ca-date-and-add-content">
-          <div class="ca-date-selector">
-            {{ca-date-picker
-          showToday=true
-          forMonth=forMonth
-          allowDateSelectorToggle=true
-          forYear=forYear
-          showPreviousMonth="showPreviousMonth"
-          showNextMonth="showNextMonth"
-          onSelectDate="onSelectDate"
-          onSelectToday="onSelectDate"
-          activities=scheduledClassActivitiesDatewise
-          highlightActivities=true
-        }}
-          </div>
-          <div class="ca-add-content">
-            <div class="ca-contents-button">
-              <p>{{t 'common.plan-an-activities'}}</p>
-              <i class="collection-icon" {{action 'onAddDca' 'collection'}}></i>
-              <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
-            </div>
-          </div>
+        <div class="ca-schedule-items-header">
+          <span>{{t 'common.scheduled-items'}} ({{totalScheduleditems}})</span>
         </div>
         {{#if showClassActivities}}
           <div class="dca-list-container">
@@ -64,7 +69,7 @@
                     onPreviewContent="onPreviewContent"
                   }}
                 {{else}}
-                    <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
+                  <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
                 {{/each}}
               </div>
             {{/each}}
@@ -78,7 +83,7 @@
     <div class="ca-right-panel hidden-xs hidden-sm">
       <div class="ca-unschedule-items-list-container">
         <div class="ca-unschedule-items-header">
-          <span>{{t 'common.unscheduled-items'}}</span>
+          <span>{{t 'common.unscheduled-items'}} ({{unScheduledClassActivities.length}})</span>
         </div>
         {{#if unScheduledClassActivities}}
           <div class="ca-unscheduled-content-items">
@@ -136,6 +141,7 @@
     todaysClassActivities=todaysClassActivities.classActivities
     classPreference=classPreference
     classId=classId
+    onPreviewContent="onPreviewContent"
   }}
 {{/if}}
 {{#if showDcaCollectionReportPullUp}}

@@ -154,6 +154,7 @@
             a {
               font-size: $font-size-base;
               color: $dark-400;
+              display: block;
             }
 
             &:last-child {
@@ -265,6 +266,9 @@
           font-size: $font-size-xxsmall;
           font-weight: bold;
         }
+        &.not-started {
+          pointer-events: none;
+        }
       }
     }
 
@@ -358,10 +362,6 @@
         }
       }
     }
-  }
-  .archive {
-    cursor: not-allowed;
-    pointer-events: none;
   }
 }
 

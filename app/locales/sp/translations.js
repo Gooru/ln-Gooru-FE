@@ -67,6 +67,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
   'common.more': 'more',
+  'common.search-help-message': 'Once you have selected the filters, click on search icon above to refine your search',
   'common.avg-score': 'Avg Score',
   'common.frq': 'FRQ',
   'common.schedule': 'Schedule',
@@ -195,6 +196,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'Haga clic para desmarcar',
   'common.close': 'Cerca',
   'common.collection': 'Colección',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'Colecciones',
   'common.collection-pl.one': 'Colección',
   'common.collection-pl.other': 'Colecciones',
@@ -654,6 +656,7 @@ export default Object.assign(quizzesTranslations, {
   'common.all': 'All',
   'common.please-wait': 'Please Wait',
   'common.unscheduled-items': 'Unscheduled Items',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'Add to unscheduled list for',
   'common.save-next': 'Guardar y Siguiente',
   'common.save-submit': 'Guardar y enviar todo',
@@ -1188,6 +1191,7 @@ export default Object.assign(quizzesTranslations, {
     'You have successfully joined as a co-teacher of the Navigator class',
   'teacher-landing.navigator-banner.error-message':
     'Problem with joining class',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.manage': 'Manage',
   'teacher-landing.class.reports': 'Reports',
   'teacher-landing.class.daily-activites': 'Daily Activites',
@@ -1266,14 +1270,14 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.domains-reviewed': 'Domains to be reviewed',
   'teacher-landing.class.atc-view.class-activities-completed':
     'Class Activities Completed',
-  'teacher-landing.class.atc-view.progress-label':
-    'Progress (# of competencies)',
   'teacher-landing.class.atc-view.class-activities-pending':
     'Class Activities Pending',
   'teacher-landing.class.atc-view.show-all': 'Show All',
   'teacher-landing.class.atc-view.collapse': 'Collapse',
   'teacher-landing.class.atc-view.total-competencies-gained':
     'Total Competencies Gained',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'Actividades de Clases Diarias',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
   'teacher-landing.class.offline-class-report.activity-report':
@@ -1678,14 +1682,14 @@ export default Object.assign(quizzesTranslations, {
   'standard-dropdown.placeholder': 'Navegar por Estándar',
   'subject-dropdown.placeholder': 'asignaturas)',
   'subject-dropdown.prompt': 'Seleccione un tema',
-  'search-filter.input-placeholder':'Type {{type}} name here...',
+  'search-filter.input-placeholder': 'Type {{type}} name here...',
   'search-filter.courses': 'Cursos',
   'search-filter.collections': 'Colecciones',
   'search-filter.resources': 'Recursos',
   'search-filter.assessments': 'Evaluaciones',
-  'search-filter.authors': 'Authors',
   'search-filter.questions': 'Preguntas',
   'search-filter.rubrics': 'Rúbricas',
+  'search-filter.authors': 'Authors',
   'search-filter.question-types.MC': 'Opción multiple',
   'search-filter.question-types.FIB': 'Llena el espacio en blanco',
   'search-filter.question-types.T/F': 'Verdadero Falso',

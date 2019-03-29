@@ -1,13 +1,23 @@
-.gru-class-navbar {
+.gru-class-navbar,
+.gru-header {
   display: none !important;
 }
 
 .teacher.class-activities {
- display: none !important;
+  display: none !important;
 
- .ca-unschedule-items-list-container {
-   display: none !important;
- }
+  .ca-unschedule-items-list-container {
+    display: none !important;
+  }
+
+  .teacher-class-search-content-pull-up {
+    display: none !important;
+  }
+}
+
+.teacher.course-map,
+.controller.search .collection-results {
+  display: none !important;
 }
 
 .preview.gru-collection-preview {
@@ -37,10 +47,12 @@
           .content-icon {
             background-repeat: no-repeat !important;
             display: block !important;
-            &.assessment {
+            &.assessment,
+            &.assessment-external {
               background-image: url("gooru/images/add_assessment.svg") !important;
             }
-            &.collection {
+            &.collection,
+            &.collection-external {
               background-image: url("gooru/images/add_collection.svg") !important;
             }
           }
@@ -70,19 +82,46 @@
       .content-items-container {
         height: max-content;
         overflow-y: auto;
-        .question-preview-card, .resource-preview-card {
-          .question-preview-container, .resource-preview-container {
 
-            .question-title-container, .resource-title-container {
-              .question-order, .resource-order, .title {
+        .external-content {
+          .content-description,
+          * {
+            color: #666666 !important;
+            -webkit-line-clamp: unset !important;
+            max-height: unset !important;
+            text-overflow: unset !important;
+            overflow: visible !important;
+          }
+          .content-url {
+            .url-label,
+            .url-content {
+              color: #3e5e67 !important;
+              a[href]::after {
+                display: none !important;
+                visibility: none !important;
+              }
+            }
+          }
+        }
+        .question-preview-card,
+        .resource-preview-card {
+          .question-preview-container,
+          .resource-preview-container {
+            .question-title-container,
+            .resource-title-container {
+              .question-order,
+              .resource-order,
+              .title {
                 color: #3e5e67 !important;
               }
-              .question-icon, .resource-type {
+              .question-icon,
+              .resource-type {
                 background-repeat: no-repeat !important;
                 background-size: 16px 16px !important;
               }
             }
-            .taxonomies-conatiner, .resource-taxonomies-container {
+            .taxonomies-conatiner,
+            .resource-taxonomies-container {
               .gru-taxonomy-tag-list {
                 .gru-taxonomy-tag {
                   background-color: #2d2d2d !important;
@@ -100,7 +139,8 @@
                 }
               }
             }
-            .question-description, .resource-description-container {
+            .question-description,
+            .resource-description-container {
               -webkit-line-clamp: unset !important;
               max-height: unset !important;
               text-overflow: unset !important;
@@ -115,6 +155,10 @@
                 font-style: italic;
                 a {
                   color: #3e5e67 !important;
+                  &[href]::after {
+                    display: none !important;
+                    visibility: none !important;
+                  }
                 }
               }
             }
@@ -124,7 +168,8 @@
               .gru-fib {
                 .answer-panel {
                   .fib-answers {
-                    .gru-math-text {
+                    .gru-math-text,
+                    * {
                       p {
                         color: #666666 !important;
                       }
@@ -133,7 +178,8 @@
                 }
 
                 .sentence {
-                  .gru-math-text {
+                  .gru-math-text,
+                  * {
                     p {
                       color: #666666 !important;
                     }
@@ -142,7 +188,8 @@
 
                 .answer.correct {
                   border-bottom: 1px solid #4f95f6 !important;
-                  .gru-math-text {
+                  .gru-math-text,
+                  * {
                     color: #4f95f6 !important;
                   }
                 }
@@ -166,7 +213,8 @@
                     label {
                       border: 1px solid rgba(151, 151, 151, 0.1) !important;
                       .text {
-                        .gru-math-text p {
+                        .gru-math-text p,
+                        * {
                           color: #3e5e67 !important;
                         }
                       }
@@ -177,7 +225,8 @@
                 .multiple-choices {
                   li {
                     border: 1px solid rgba(151, 151, 151, 0.1) !important;
-                    .gru-math-text {
+                    .gru-math-text,
+                    * {
                       p {
                         color: #3e5e67 !important;
                       }
@@ -185,7 +234,8 @@
 
                     &.correct-answer {
                       .answer-text {
-                        .gru-math-text {
+                        .gru-math-text,
+                        * {
                           color: #3c99f7 !important;
                           p {
                             color: #3c99f7 !important;
@@ -212,7 +262,8 @@
                         border: 1px solid rgba(151, 151, 151, 0.1) !important;
                         td {
                           &.answer-text {
-                            .gru-math-text {
+                            .gru-math-text,
+                            * {
                               p {
                                 color: #3e5e67 !important;
                               }
@@ -238,7 +289,8 @@
                       }
                     }
                     .answer-text {
-                      .gru-math-text {
+                      .gru-math-text,
+                      * {
                         p {
                           color: #4f95f6 !important;
                         }
@@ -277,7 +329,8 @@
                   ul {
                     li.answer {
                       border: 1px solid rgba(151, 151, 151, 0.1) !important;
-                      .gru-math-text {
+                      .gru-math-text,
+                      * {
                         p {
                           color: #3e5e67 !important;
                         }
@@ -287,11 +340,11 @@
                 }
 
                 ul.hs-texts {
-
                   li {
                     border: 1px solid rgba(151, 151, 151, 0.1) !important;
                     .text {
-                      .gru-math-text {
+                      .gru-math-text,
+                      * {
                         p {
                           color: #3e5e67 !important;
                         }
@@ -302,7 +355,8 @@
                       border: 1px solid #3c99f7 !important;
 
                       .text {
-                        .gru-math-text {
+                        .gru-math-text,
+                        * {
                           p {
                             color: #3c99f7 !important;
                           }
@@ -320,7 +374,8 @@
                     li.ui-sortable-handle {
                       border: 1px solid rgba(151, 151, 151, 0.1) !important;
                       div {
-                        .gru-math-text {
+                        .gru-math-text,
+                        * {
                           p {
                             color: #3e5e67 !important;
                           }
@@ -340,7 +395,8 @@
                     }
 
                     .answer-text {
-                      .gru-math-text {
+                      .gru-math-text,
+                      * {
                         p {
                           color: #4f95f6 !important;
                         }

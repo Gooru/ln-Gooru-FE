@@ -164,13 +164,13 @@
 
       .card-action-container {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 50px;
         justify-items: center;
         height: 50px;
         box-shadow: 1px 0 4px 0 rgba(0, 0, 0, 0.5);
 
         &.premium-class {
-          grid-template-columns: 50px 50px 1fr;
+          grid-template-columns: 50px 50px 50px 1fr;
 
           .class-activities,
           .course-map {
@@ -179,6 +179,10 @@
 
           .course-map {
             border-right: 1px solid #aaa;
+          }
+          .my-proficiency {
+            border-right: 1px solid #aaa;
+            border-left: unset;
           }
         }
 
@@ -195,6 +199,7 @@
           &.has-competency-stats {
             background-color: #1aa9eb;
             color: #fff;
+            cursor: pointer;
           }
           width: 100px;
           padding-top: 10px;
@@ -208,10 +213,8 @@
 
         .course-map {
           display: grid;
-          grid-template-columns: 50px 50px;
+          grid-template-columns: 50px 75px;
           justify-items: center;
-          width: 100%;
-          justify-content: center;
 
           .course-map-icon {
             cursor: pointer;
@@ -247,12 +250,10 @@
 
         .class-activities {
           display: grid;
-          grid-template-columns: 50px 50px;
+          grid-template-columns: 50px 75px;
           justify-items: center;
           font-weight: bold;
           border-right: 1px solid #aaa;
-          width: 100%;
-          justify-content: center;
 
           .class-activities-icon {
             cursor: pointer;
@@ -289,6 +290,18 @@
             object-fit: contain;
             margin: 0 auto;
           }
+        }
+      }
+
+      .my-proficiency {
+        cursor: pointer;
+        padding-top: 13px;
+        width: 50px;
+        text-align: center;
+        border-left: 1px solid #aaa;
+
+        i {
+          color: $dark-600;
         }
       }
 

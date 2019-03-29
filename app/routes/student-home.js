@@ -94,14 +94,13 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       };
       if (item === 'cm-report') {
         route.transitionTo('student.class.course-map', classId, queryParams);
-      }
-      if (item === 'ca-report') {
+      } else if (item === 'ca-report') {
         route.transitionTo(
           'student.class.class-activities',
           classId,
           queryParams
         );
-      } else if (item === 'profile') {
+      } else if (item === 'profile-prof') {
         let userId = this.get('session.userId');
         route.transitionTo(
           'student.class.student-learner-proficiency',
@@ -218,9 +217,9 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     let nonPremiumClassCourseIds = route.getListOfClassCourseIds(
       nonPremiumClasses
     );
-    let nonPremiumClassIds = nonPremiumClasses.map(classData => {
+    /* let nonPremiumClassIds = nonPremiumClasses.map(classData => {
       return classData.get('id');
-    });
+    }); */
     let premiumClassIds = activeClasses
       .filter(classData => {
         let setting = classData.get('setting');
@@ -248,13 +247,9 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
           .get('competencyService')
           .getCompetencyCompletionStats(premiumClassIds, myId)
         : Ember.RSVP.resolve([]);
-    let caClassPerfSummaryPromise =
-      nonPremiumClassIds.length > 0
-        ? route
-          .get('performanceService')
-          .getCAPerformanceData(nonPremiumClassIds, myId)
-        : Ember.RSVP.resolve([]);
-
+    //Disabling ca peformance score, Since  there is no ca drill down summary report for student. Enable it when needed.
+    //let caClassPerfSummaryPromise = nonPremiumClassIds.length > 0 ? route.get('performanceService').getCAPerformanceData(nonPremiumClassIds, myId) : Ember.RSVP.resolve([]);
+    let caClassPerfSummaryPromise = Ember.RSVP.resolve([]);
     Ember.RSVP.hash({
       classPerformanceSummaryItems: perfPromise,
       classesLocation: locationPromise,

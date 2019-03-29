@@ -63,6 +63,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'మొదటి పేరు',
   'common.filter-by': 'ద్వారా వడపోత',
   'common.more': 'మరింత',
+  'common.search-help-message': 'Once you have selected the filters, click on search icon above to refine your search',
   'common.avg-score': 'సగటు స్కోర్',
   'common.frq': 'frq',
   'common.schedule': 'షెడ్యూల్',
@@ -91,7 +92,9 @@ export default Object.assign(quizzesTranslations, {
   'common.accept': 'అంగీకరించాలి',
   'common.ignore': 'పట్టించుకోకుండా',
   'common.add': 'జోడించడానికి',
-  'common.add-an-activity': 'ఒక కార్యాచరణను జోడించండి',
+  'common.plan-an-activities': 'Plan your activities',
+  'common.plan-an-activities-msg':
+    'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'వాయిదా',
   'common.no-unschedule-items': 'మీకు షెడ్యూల్ అవసరం ఏ కార్యకలాపాలు లేదు',
   'common.repeat-activity': 'పునరావృత చర్య',
@@ -187,6 +190,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'unbookmark క్లిక్ చేయండి',
   'common.close': 'Close',
   'common.collection': 'సేకరణ',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'సేకరణలు',
   'common.collection-pl.one': 'సేకరణ',
   'common.collection-pl.other': 'సేకరణలు',
@@ -230,6 +234,12 @@ export default Object.assign(quizzesTranslations, {
   'common.course': 'కోర్సు',
   'common.course-title': 'కోర్సు శీర్షిక',
   'common.courses': 'కోర్సులు',
+  'common.competency-status-0': 'Not Started',
+  'common.competency-status-1': 'In Progress',
+  'common.competency-status-2': 'Mastered (Inferred)',
+  'common.competency-status-3': 'Mastered (Asserted)',
+  'common.competency-status-4': 'Mastered (Earned)',
+  'common.competency-status-5': 'Mastered (Demonstrated)',
   'common.create': 'సృష్టించడానికి',
   'common.createClass': 'తరగతి సృష్టించండి',
   'common.created-by': 'సృష్టికర్త',
@@ -243,6 +253,7 @@ export default Object.assign(quizzesTranslations, {
     'అన్ని విషయాలు అది జతచేయబడిన తరగతులకు అందుబాటులో ఉండవు',
   'common.depth-of-knowledge': 'జ్ఞానం యొక్క లోతు',
   'common.description': 'వివరణ',
+  'common.destination': 'Destination',
   'common.disappear-after-login':
     'ఇది {{loginnumber}} లాగిన్ తర్వాత అదృశ్యమవుతుంది',
   'common.disappear-next-login': 'ఇది తదుపరి లాగిన్లో కనిపించదు',
@@ -429,6 +440,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'నా ప్రశ్నలకు',
   'common.from-my-resources': 'నా వనరులనుండి',
   'common.hide-results': 'ఫలితాలను దాచండి',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'సూచనలు',
   'common.home': 'హోమ్',
   'common.if_questions': 'మీకు ఏమైనా ప్రశ్నలు ఉన్న యెడల,',
@@ -543,6 +555,7 @@ export default Object.assign(quizzesTranslations, {
   'common.published-tooltip': 'బ్యాడ్జ్ కంటెంట్',
   'common.publisher': 'ప్రచురణకర్త',
   'common.prev': 'గత',
+  'common.progress': 'Progress',
   'common.question': 'ప్రశ్న',
   'common.questions': 'ప్రశ్నలు',
   'common.questions-OE': 'ఉచిత ప్రతిస్పందన ప్రశ్నలు',
@@ -626,7 +639,9 @@ export default Object.assign(quizzesTranslations, {
   'common.add-data': 'డేటాను జోడించండి',
   'common.update-data': 'డేటాను నవీకరించండి',
   'common.all': 'అన్ని',
+  'common.please-wait': 'Please Wait',
   'common.unscheduled-items': 'అనుకోని అంశాలు',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'కోసం అనుకోని జాబితాకు జోడించండి',
   'common.save-next': 'సేవ్ మరియు తదుపరి',
   'common.save-submit': 'అన్నింటినీ సేవ్ చేయండి మరియు సమర్పించండి',
@@ -709,6 +724,7 @@ export default Object.assign(quizzesTranslations, {
   'common.upload-file': 'ఫైల్ను అప్లోడ్ చేయండి',
   'common.upload-thumbnail': 'సూక్ష్మచిత్రం అప్లోడ్',
   'common.upload-photo': 'ఫోటోను అప్లోడ్ చేయండి',
+  'common.until': 'Until',
   'common.remove-photo': 'ఫోటో తీసివేయండి',
   'common.use-case': 'కేసుని వాడండి',
   'common.valid-extensions':
@@ -1080,6 +1096,15 @@ export default Object.assign(quizzesTranslations, {
     'గత కార్యకలాపాలు',
   'student-landing.class.my-report': 'నా నివేదిక',
   'student-landing.class.my-location': 'నా స్థానం',
+  'student-landing.class.my-proficiency': 'My Proficiency',
+  'student-landing.class.establish-skyline': 'Let\'s Establish your Skyline',
+  'student-landing.class.waiting-establish-skyline':
+    'Waiting for your teacher to complete setting up the class.',
+  'student-landing.class.setup-in-complete-desc1':
+    'It looks like your teacher has not',
+  'student-landing.class.setup-in-complete-desc2': 'updated class settings',
+  'student-landing.class.setup-in-complete-desc3':
+    'Please get in touch with her to resolve the matter. Once everything is correctly set up, refresh this page.',
   'student-landing.course.to-report': 'వినియోగ సారాంశం',
   'student-landing.course.total-time-spent': 'గడిపిన మొత్తం సమయం',
   'student-landing.current-activity': 'ప్రస్తుత కార్యాచరణ',
@@ -1151,6 +1176,9 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.back-to': 'తిరిగి తరగతులకు',
   'teacher-landing.class.back-to-archived': 'ఆర్కైవ్ చేయబడిన తరగతి గదులకు',
   'teacher-landing.class.class-management': 'తరగతి నిర్వహణ',
+  'teacher-landing.class.atc': 'ATC',
+  'teacher-landing.class.performance-overview': 'Performance Overview',
+  'teacher-landing.class.student-proficiency': 'Student Proficiency',
   'teacher-landing.class.class-management-tab.actions': 'చర్యలు',
   'teacher-landing.class.class-management-tab.assessment-min-score':
     'ట్రోఫీలకు అంచనా కనీస స్కోరు',
@@ -1215,6 +1243,17 @@ export default Object.assign(quizzesTranslations, {
     'తరగతిలోని అన్ని విద్యార్థుల కోసం సంభావ్యత యొక్క సంచిత సంఖ్యలు',
   'teacher-landing.class.students-tab.error-message':
     'తరగతి కేటాయించిన కోర్సు లేదు లేదా ఇంకా తరగతి లోకి rostered విద్యార్థులు లేదు. కోర్సుకు తరగతికి కేటాయించబడి, విద్యార్ధులు చదివేటప్పుడు, తరగతి యోగ్యతా నివేదిక ఇక్కడ చూపబడుతుంది',
+  'teacher-landing.class.atc-view.domains-reviewed': 'Domains to be reviewed',
+  'teacher-landing.class.atc-view.class-activities-completed':
+    'Class Activities Completed',
+  'teacher-landing.class.atc-view.class-activities-pending':
+    'Class Activities Pending',
+  'teacher-landing.class.atc-view.show-all': 'Show All',
+  'teacher-landing.class.atc-view.collapse': 'Collapse',
+  'teacher-landing.class.atc-view.total-competencies-gained':
+    'Total Competencies Gained',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'తరగతి కార్యకలాపాలు',
   'teacher-landing.class.offline-class-report.class-report': 'తరగతి నివేదిక',
   'teacher-landing.class.offline-class-report.activity-report':
@@ -1297,14 +1336,6 @@ export default Object.assign(quizzesTranslations, {
     'మీ విద్యార్థులు చదవాల్సిన అత్యల్ప గ్రేడ్ స్థాయి కంటెంట్ ఏమిటి?',
   'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
     'మీ తరగతి గ్రేడ్ స్థాయి ఏమిటి?',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-1':
-    '(1) మీరు తరగతి మూలం మరియు గమ్యం ఆధారంగా ప్రతి విద్యార్థి కోసం వ్యక్తిగతీకరించిన అభ్యాస మార్గం ఉత్పత్తి చేయవచ్చు.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-2':
-    '(2) అప్రమేయంగా, అన్ని విద్యార్ధులు వారి గమ్యంగా గ్రేడ్ స్థాయిని కలిగి ఉంటారు. మీరు క్లాస్లో ముందున్న విద్యార్థులకు ఉన్నత స్థాయిగా ఉండటానికి గమ్యాన్ని సర్దుబాటు చేయవచ్చు. విద్యార్థి స్కైలైన్ మరియు వారి గమ్యస్థానం ఆధారంగా వ్యక్తిగతీకరించిన కోర్సు మ్యాప్ను రూపొందించడానికి అభ్యాస మార్గాన్ని వ్యక్తిగతీకరించడానికి క్లిక్ చేయండి.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-3':
-    '(3) మొత్తం తరగతి కోసం మార్గం తరం ఒక్కసారి మాత్రమే చర్య తీసుకోవచ్చు. ఆ తర్వాత, ప్రతి విద్యార్ధులకు ఏవైనా నవీకరణలు వ్యక్తిగతంగా చేయవలసి ఉంటుంది.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-4':
-    '(4) మీరు కూడా వ్యక్తిగత విద్యార్థి కోసం గమ్యం గ్రేడ్ సర్దుబాటు చేయవచ్చు. చిహ్నం <i id = "ember1600" class = "ember-view gru-icon material-icons replay" style = "vertical-align: middle;"> రీప్లే [1] గమ్యస్థానం, వ్యక్తిగతీకరించిన మార్గాన్ని మళ్లీ కలుపుతుంది.',
   'teacher-landing.class.class-settings.origin': 'మూలం',
   'teacher-landing.class.class-settings.destination': 'గమ్యం',
   'teacher-landing.class.class-settings.students': 'విద్యార్థులు',
@@ -1385,12 +1416,20 @@ export default Object.assign(quizzesTranslations, {
     'మీరు ప్రశ్నలకు సమాధానం ఇవ్వడానికి ముందుకు మరియు వెనుకకు నావిగేట్ చేయవచ్చు',
   'gru-assessment-confirmation.unlimited-attempts-left':
     'మీకు అపరిమిత ప్రయత్నాలు ఉన్నాయి',
+  'gru-assessment-confirmation.setting-forward-teacher':
+    'Student can navigate forward only',
+  'gru-assessment-confirmation.setting-forward-backward-teacher':
+    'Student can navigate forward and backwards to answer questions',
+  'gru-assessment-confirmation.unlimited-attempts-left-teacher':
+    'Student have unlimited attempts',
   'gru-assessment-confirmation.attempts-left.zero':
     'మీరు {{count}} ప్రయత్నాలను కలిగి ఉన్నారు',
   'gru-assessment-confirmation.attempts-left.one':
     'మీకు 1 ప్రయత్నం మిగిలి ఉంది',
   'gru-assessment-confirmation.attempts-left.other':
     'మీరు {{count}} ప్రయత్నాలను కలిగి ఉన్నారు',
+  'gru-assessment-confirmation.attempts-left.other-teacher':
+    'Student have {{count}} attempts',
   'gru-assessment-confirmation.unlimited-attempts':
     'మీకు అపరిమిత ప్రయత్నాలు ఉన్నాయి',
   'gru-assessment-confirmation.cancel': 'రద్దు',
@@ -1610,17 +1649,18 @@ export default Object.assign(quizzesTranslations, {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
+  'grade-selector.placeholder': 'Choose Grade Lines to Display',
   'standard-dropdown.placeholder': 'ప్రామాణిక ద్వారా బ్రౌజ్ చేయండి',
   'subject-dropdown.placeholder': 'విషయం (లు)',
   'subject-dropdown.prompt': 'ఒక విషయం ఎంచుకోండి',
-  'search-filter.input-placeholder':'Type {{type}} name here...',
+  'search-filter.input-placeholder': 'Type {{type}} name here...',
   'search-filter.courses': 'కోర్సులు',
   'search-filter.collections': 'సేకరణలు',
   'search-filter.resources': 'వనరులు',
   'search-filter.assessments': 'లెక్కింపులు',
   'search-filter.questions': 'ప్రశ్నలు',
-  'search-filter.authors': 'Authors',
   'search-filter.rubrics': 'rubrics',
+  'search-filter.authors': 'Authors',
   'search-filter.question-types.MC':
     'సరైన సమాదానం ఉన్న జవాబుల్లో నుంచి గుర్తించు',
   'search-filter.question-types.FIB': 'ఖాళీలు పూరింపుము',
@@ -1689,6 +1729,8 @@ export default Object.assign(quizzesTranslations, {
   'gru-reorder.instructions':
     'దయచేసి సరైన క్రమంలో సమాధానాలను క్రమం చేయండి, మరియు "{{action}}" క్లిక్ చేయండి.',
   'student-first-experience.preStudyTitle': '{{title}} కోసం ముందు అధ్యయనం',
+  'student-first-experience.lp-compute-inprogress':
+    'We are computing your initial proficiency profile in {{title}}',
   'student-first-experience.route0-action.accept': 'అంగీకరించాలి',
   'student-first-experience.route0-action.ignore': 'పట్టించుకోకుండా',
   'student-first-experience.competency.popover.title': '{{title}} సరిహద్దు',
@@ -1696,9 +1738,9 @@ export default Object.assign(quizzesTranslations, {
     'మీరు మీ స్కైలైన్ మరియు మీ గమ్యాన్ని చేరుకోవడానికి ఈ గ్రేడ్ లైన్ మధ్య అన్ని ప్రమాణాలను అధ్యయనం చేయాలి.',
   'student-first-experience.assigned-course-title':
     '{{title}} కోసం కేటాయించిన కోర్సు',
-  'student-first-experience.study-course': 'అధ్యయనం కోర్సు',
-  'student-first-experience.show-my-destination': 'నా గమ్యాన్ని చూపించు',
-  'student-first-experience.show-me-my-route': 'నా మార్గం చూపించు',
+  'student-first-experience.start-studying': 'Start Studying',
+  'student-first-experience.show-route': 'Show Route',
+  'student-first-experience.review-destination': 'Review Destination',
   'student-first-experience.competency-level.title': 'మీ నైపుణ్యత ప్రొఫైల్',
   'student-first-experience.competency-level.mastery':
     '{{count}} ప్రమాణాలు స్వావలంబన',
@@ -1720,6 +1762,12 @@ export default Object.assign(quizzesTranslations, {
     'మీరు ప్రస్తుతం ఉన్నారు',
   'student-first-experience.competency-level-partial.desc2':
     'గణిత కోసం మీ స్కైలైన్ మ్యాప్కు స్వాగతం. స్కైలైన్ (మందపాటి తెల్లని గీత) మీరు ప్రతి డొమైన్లో స్వావలంబించిన అత్యధిక ప్రమాణాన్ని చూపిస్తుంది. ఒక డొమైన్ అనేది సంఖ్యా వ్యవస్థలు మరియు వ్యక్తీకరణలు & సమీకరణాలు వంటి మీరు అధ్యయనం చేసే గణిత ప్రాంతం. ప్రతి కాలమ్ ఒక గణిత డొమైన్ను సూచిస్తుంది. మరియు నిలువు వరుసలోని ప్రతి పెట్టె డొమైన్లోని ప్రామాణికతను సూచిస్తుంది. ఒకసారి మీరు ప్రమాణాలు నేర్చుకోవడం మరియు మాస్టరింగ్ చేయడం మొదలుపెట్టినప్పుడు, మీ స్కైలైన్ నిరంతరం బంప్ అవుతుంది.',
+  'student-first-experience.competency-level-partial.desc3':
+    'As you master each of the competencies, the corresponding box is updated to dark blue.',
+  'student-first-experience.competency-level-partial.desc4':
+    'The skyline is the thick white line that shows the highest competencies that you have mastered in each math domain.',
+  'student-first-experience.competency-level-partial.desc5':
+    'If the skyline is at the bottom of a domain, it means the system needs more information to be able to locate you in that topic. As soon as you start on the lessons and check for understandings, your skyline will bump up and update your proficiency in each domain.',
   'student-first-experience.units.other': '{{count}} యూనిట్లు',
   'player.gru-navigation.view-report': 'నివేదికను వీక్షించండి',
   'player.gru-navigator.see-usage-report': 'ఉపయోగ నివేదికను చూడండి',
@@ -1913,6 +1961,7 @@ export default Object.assign(quizzesTranslations, {
   'home.no-classes-found.teacher-toolkit.description':
     'ఈ ఉపకరణపట్టీ మీకు ప్రారంభించడానికి వనరులను కలిగి ఉంది.',
   'home.no-classes-found.teacher-toolkit.button-text': 'గురువు టూల్కిట్',
+  'taxonomy.grades': 'Grades',
   'taxonomy.gru-taxonomy-selector.add-secondary': 'సెకండరీ జోడించండి',
   'taxonomy.gru-taxonomy-selector.choose-subject': 'విషయం ఎంచుకోండి',
   'taxonomy.gru-taxonomy-selector.competency-subject-and-course':
@@ -2389,7 +2438,45 @@ export default Object.assign(quizzesTranslations, {
   'report.competency-report.show-global-data': 'ప్రపంచ డేటాను చూపించు',
   'report.competency-report.show-student-data': 'విద్యార్థి డేటాను చూపించు',
   'report.competency-report.show-learning-map': 'మ్యాప్ నేర్చుకోవడం చూపించు',
+  'report.competency-report.note':
+    'Score 80% or more in our signature assessment and show your mastery',
   'report.domain-report': 'డొమైన్ రిపోర్ట్',
+  'competency-info-content.portfolio': 'PORTFOLIO',
+  'competency-info-content.metadata': 'METADATA',
+  'competency-info-content.learning-map': 'LEARNING MAP',
+  'competency-meta-data.title': 'ALT-CONCEPTS',
+  'competency-meta-data.heading.micro': 'MICRO COMPETENCIES',
+  'competency-meta-data.heading.prequisite': 'PREQUISITE COMPETENCIES',
+  'competency-meta-data.nodata.micro':
+    'There are no micro-competencies defined for this competency',
+  'competency-meta-data.nodata.prequisite':
+    'There are no prerequisite-competencies defined for this competency',
+  'competency-meta-data.nodata.competency':
+    'There are no alt-concepts defined for this competency',
+  'student-journey.heading': 'YOUR JOURNEY',
+  'student-journey.teacher-heading': 'STUDENT JOURNEY',
+  'student-journey.nodata':
+    'You are yet to start your journey for this competency',
+  'student-journey.no-data-teacher':
+    'Student are yet to start journey for this competency',
+  'student-journey.student-status-3':
+    'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
+  'student-journey.student-status-2':
+    'You have not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+  'student-journey.teacher-status-2':
+    'The student has not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+  'student-journey.teacher-status-3':
+    'The student has asserted mastery in the competency and has not studied any learning activity on the Navigator for this competency.',
+  'learning-map.practice-question': 'practice questions',
+  'learning-map.no-practice-questions':
+    'There are no practice questions for this competency',
+  'learning-map.solved-examples': 'solved examples',
+  'learning-map.no-solved-examples':
+    'There are no solved examples for this competency',
+  'learning-map.challenging-questions': 'challenging questions',
+  'learning-map.no-challenging-questions':
+    'There are no challenging questions for this competency',
+  'student-card.message': 'This {{type}} has been deleted',
   'self-report.your-score': 'మీ స్కోర్',
   'self-report.time_spent': 'గడిపిన సమయం',
   'self-report.update-error': 'స్కోర్ నవీకరించుటకు సమస్య',

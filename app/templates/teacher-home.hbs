@@ -1,5 +1,4 @@
 <div class="controller teacher-landing row">
-  <iframe id="download_iframe" style="display:none;"></iframe> 
   {{#if isShowNavigatorBanner}}
     <div class="landing-banner">
       {{teacher.navigator-math-banner updateClass="updateClass"}}
@@ -28,8 +27,8 @@
           </div>
         {{/unless}}
       {{/if}}
-      {{#if (and showArchivedClasses (gt sortedArchivedClassrooms.length 0))}}
-        <div class="pull-right sort">
+      {{#if isShowSortOptions}}
+        <div class="sort">
           <div class="filter-date-asc btn-group" role="group">
             <button type="button" title= {{t 'common.sort-most-recently'}} data-toggle="tooltip" {{action 'filterByDate'}} class="filter-date btn {{if (eq sortOn 'startDate') 'btn-primary' 'btn-info'}}">
               {{#if (eq sortOn 'startDate')}}
@@ -58,7 +57,7 @@
           onUpdateUserClasses='updateClass'
           isLoading=isLoading}}
         {{#if hasClasses}}
-          {{#each activeClasses as |class|}}
+          {{#each sortedActiveClasses as |class|}}
             {{new-cards.gru-teacher-class-card
             class=class
             course=class.course
@@ -76,7 +75,7 @@
             course=class.course
             classStudentCount=myClasses.memberCount
             onPlayCollection='studyPlayer'
-            onItemSelected='selectMenuItem'}}
+            onShowArchivedClassReport='onShowArchivedClassReport'}}
   {{else}}
     <span class="no-archived">{{t 'common.no-archived'}}</span>
         {{/each}}
@@ -84,3 +83,19 @@
     </div>
   </div>
 </div>
+
+{{#if isShowArchiveClassReport}}
+  {{reports.pull-up.course-report context=classReportParams showPullUp=isShowArchiveClassReport onOpenUnitReport="onOpenUnitReport"  onClosePullUp="onClosePullUp"}}
+{{/if}}
+
+{{#if isShowUnitReportPullUp}}
+  {{reports.pull-up.unit-report context=unitReportData onClosePullUp="onClosePullUp" showPullUp=isShowUnitReportPullUp onOpenLessonReport="onOpenLessonReport"}}
+{{/if}}
+
+{{#if isShowLessonReportPullUp}}
+  {{reports.pull-up.lesson-report context=lessonReportData  onClosePullUp="onClosePullUp"  showPullUp=isShowLessonReportPullUp teacherCollectionReport="teacherCollectionReport"}}
+{{/if}}
+
+{{#if isShowCollectionReportPullUp}}
+  {{reports.pull-up.collection-report onClosePullUp="onClosePullUp" context=teacherCollectionReportData showPullUp=isShowCollectionReportPullUp isArchivedClass=true}}
+{{/if}}
