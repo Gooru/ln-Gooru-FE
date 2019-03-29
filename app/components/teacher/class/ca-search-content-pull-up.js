@@ -555,6 +555,18 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   didRender() {
     let component = this;
+    component.initializePopover();
+  },
+
+  didDestroyElement() {
+    Ember.$(document).off('click');
+  },
+
+  //--------------------------------------------------------------------------
+  // Methods
+
+  initializePopover() {
+    let component = this;
     component.$('.more-pointer').popover({
       html: true,
       trigger: 'click',
@@ -564,10 +576,13 @@ export default Ember.Component.extend(ConfigurationMixin, {
         return component.$('.more-filters').html();
       }
     });
-  },
 
-  //--------------------------------------------------------------------------
-  // Methods
+    component.$(document).click(function(event) {
+      if (event.target.className !== 'more-pointer') {
+        component.$('.more-pointer').popover('hide');
+      }
+    });
+  },
 
   /**
    * Function to animate the  pullup from bottom to top
@@ -575,21 +590,21 @@ export default Ember.Component.extend(ConfigurationMixin, {
   openPullUp() {
     let component = this;
     component.$().animate({
-      top: '10%'
-    },
-    400
+        top: '10%'
+      },
+      400
     );
   },
 
   closePullUp() {
     let component = this;
     component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-    }
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+      }
     );
   },
 
@@ -744,15 +759,16 @@ export default Ember.Component.extend(ConfigurationMixin, {
     filters['flt.language'] = component.filterSelectedItems('filter', 'flt.language');
     filters['flt.audience'] = component.filterSelectedItems('filter', 'flt.audience');
     filters['flt.standard'] = component.filterSelectedItems('filter', 'flt.standard');
-    filters['flt.creator'] = component.get('selectedFilters').get('flt.authorName');
-    filters['flt.publisherName'] = component.get('selectedFilters').get('flt.publisherName');
+    filters['flt.creator'] = component.get('selectedFilters')['flt.authorName'];
+    filters['flt.publisher'] = component.filterSelectedItems('filter', 'flt.publisherName');
     return filters;
   },
 
   filterSelectedItems(keyField, keyValue) {
     const component = this;
     let filterList = component.get('selectedFilters').filterBy(keyField, keyValue);
-    return component.toArray(filterList, 'name');
+    let keyName = keyValue === 'flt.standard' ? 'id' : 'name';
+    return component.toArray(filterList, keyName);
   },
 
   toArray(filterList, key) {

@@ -84,6 +84,6 @@ export default {
   },
 
   'GRU_FEATURE_FLAG': {
-    'searchFilter': false
+    'searchFilter': true
   }
 };
