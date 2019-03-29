@@ -1,3 +1,7 @@
+body.student_class_course-map {
+  @extend %bg-base64;
+}
+
 .student.class {
   .alert-player-error {
     height: max-content;
@@ -9,25 +13,6 @@
 .student.course-map {
   width: 100vw;
   @media only screen and (max-width: $screen-sm - 1) {
-    background-image: url("gooru/timeline-view-bg.jpg");
-    background-size: auto;
-    background-attachment: fixed;
-    height: 100%;
-
-    .course-title {
-      font-family: PlayfairDisplay;
-      font-size: 20px;
-      font-weight: normal;
-      font-style: italic;
-      font-stretch: normal;
-      margin: 0;
-      padding: 10px;
-      line-height: normal;
-      letter-spacing: normal;
-      text-align: center;
-      color: #ffffff;
-    }
-
     .actions {
       span {
         color: white;
@@ -70,6 +55,7 @@
 
   .assigned-course-title {
     margin-left: 10px;
+    color: $white;
   }
 
   .rescope-section {
@@ -82,6 +68,10 @@
 
       .info {
         width: 100% !important;
+        color: $white;
+      }
+      .action span {
+        color: $white;
       }
     }
   }
@@ -376,6 +366,14 @@
           }
         }
       }
+    }
+  }
+}
+
+body.student_class_course-map {
+  @media only screen and (max-width: $screen-xs) {
+    .app-container {
+      padding-top: 152px;
     }
   }
 }

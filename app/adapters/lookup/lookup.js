@@ -145,6 +145,25 @@ export default Ember.Object.extend({
     };
     return Ember.$.ajax(url, options);
   },
+
+  /**
+   * Gets the Educational information new
+   *
+   * @returns {Promise}
+   */
+  getEducationalUse: function() {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/educational-use`;
+
+    const options = {
+      type: 'GET',
+      //using default content type so this is serialized as query params
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   /**
    *
    * @returns {{Authorization: string}}

@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { ROLES } from 'gooru-web/config/config';
 
 /**
  * Library route
@@ -30,56 +29,13 @@ export default Ember.Route.extend({
   // Methods
 
   model: function() {
-    let route = this;
-
-    //Steps for Take a Tour functionality
-    const tourSteps = Ember.A([
-      {
-        title: route.get('i18n').t('gru-take-tour.library.stepOne.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.library.stepOne.description')
-      },
-      {
-        elementSelector: '.tab.featured-courses',
-        title: route.get('i18n').t('gru-take-tour.library.stepTwo.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.library.stepTwo.description')
-      },
-      {
-        elementSelector: '.gru-standard-card .panel-footer .preview-btn',
-        title: route.get('i18n').t('gru-take-tour.library.stepFour.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.library.stepFour.description')
-      },
-      {
-        elementSelector: '.gru-standard-card .panel-footer .share-btn',
-        title: route.get('i18n').t('gru-take-tour.library.stepFive.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.library.stepFive.description')
-      },
-      {
-        elementSelector: '.gru-standard-card .panel-footer .bookmark-btn',
-        title: route.get('i18n').t('gru-take-tour.library.stepSix.title'),
-        description: route
-          .get('i18n')
-          .t('gru-take-tour.library.stepSix.description'),
-        role: ROLES.STUDENT
-      }
-    ]);
-
     return Ember.RSVP.hash({
-      tourSteps: tourSteps,
       courses: this.get('searchService').searchFeaturedCourses('*'),
       libraries: this.get('libraryService').fetchLibraries()
     });
   },
 
   setupController: function(controller, model) {
-    controller.set('steps', model.tourSteps);
     controller.set('courses', model.courses);
     controller.set('libraries', model.libraries);
   }

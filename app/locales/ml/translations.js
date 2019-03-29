@@ -95,7 +95,9 @@ export default Object.assign(quizzesTranslations, {
   'common.accept': 'സ്വീകരിക്കൂ',
   'common.ignore': 'അവഗണിക്കുക',
   'common.add': 'ചേർക്കുക',
-  'common.add-an-activity': 'ഒരു പ്രവർത്തനം ചേർക്കുക',
+  'common.plan-an-activities': 'Plan your activities',
+  'common.plan-an-activities-msg':
+    'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'പുനരാരംഭിക്കുക',
   'common.no-unschedule-items': 'ഷെഡ്യൂൾ ചെയ്യേണ്ട പ്രവർത്തനങ്ങൾ നിങ്ങൾക്കില്ല',
   'common.repeat-activity': 'ആവർത്തിക്കുന്ന പ്രവർത്തനം',
@@ -192,6 +194,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'unbookmark ലേക്ക് ക്ലിക്കുചെയ്യുക',
   'common.close': 'അടയ്ക്കുക',
   'common.collection': 'ശേഖരണം',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'ശേഖരങ്ങൾ',
   'common.collection-pl.one': 'ശേഖരണം',
   'common.collection-pl.other': 'ശേഖരങ്ങൾ',
@@ -236,6 +239,12 @@ export default Object.assign(quizzesTranslations, {
   'common.course': 'കോഴ്സ്',
   'common.course-title': 'കോഴ്സ് ശീർഷകം',
   'common.courses': 'കോഴ്സുകൾ',
+  'common.competency-status-0': 'Not Started',
+  'common.competency-status-1': 'In Progress',
+  'common.competency-status-2': 'Mastered (Inferred)',
+  'common.competency-status-3': 'Mastered (Asserted)',
+  'common.competency-status-4': 'Mastered (Earned)',
+  'common.competency-status-5': 'Mastered (Demonstrated)',
   'common.create': 'സൃഷ്ടിക്കാൻ',
   'common.createClass': 'ക്ലാസ് സൃഷ്ടിക്കുക',
   'common.created-by': 'ഉണ്ടാക്കിയത്',
@@ -249,6 +258,7 @@ export default Object.assign(quizzesTranslations, {
     'എല്ലാ ഉള്ളടക്കവും അതിനെ കെട്ടിയിട്ടിരിക്കുന്ന ക്ലാസ്മുറികളിലേക്ക് പ്രവേശിക്കാൻ കഴിയില്ല',
   'common.depth-of-knowledge': 'അറിവിന്റെ ആഴം',
   'common.description': 'വിവരണം',
+  'common.destination': 'Destination',
   'common.disappear-after-login':
     'ഇത് {{loginnumber}} ലോഗിനുകൾക്കുശേഷം അപ്രത്യക്ഷമാകും',
   'common.disappear-next-login': 'ഇത് അടുത്ത പ്രവേശനത്തിൽ ദൃശ്യമാകില്ല',
@@ -434,6 +444,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'എന്റെ ചോദ്യങ്ങളിൽ നിന്ന്',
   'common.from-my-resources': 'എന്റെ വിഭവങ്ങളിൽ നിന്ന്',
   'common.hide-results': 'ഫലങ്ങൾ മറയ്ക്കൂ',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'സൂചനകൾ',
   'common.home': 'വീട്',
   'common.if_questions': 'നിങ്ങൾക്ക് എന്തെങ്കിലും ചോദ്യങ്ങൾ ഉണ്ടെങ്കിൽ,',
@@ -530,6 +541,9 @@ export default Object.assign(quizzesTranslations, {
   'common.on': 'ഓണാണ്',
   'common.other': 'മറ്റുള്ളവ',
   'common.overall-performance': 'മൊത്തത്തിലുള്ള പ്രകടനം',
+  'common.educational-use': 'Educational use',
+  'common.resource-types': 'Resource types',
+  'common.publishers': 'publishers',
   'common.password': 'password',
   'common.pending': 'തീർപ്പുകൽപ്പിച്ചിട്ടില്ല',
   'common.performance': 'പ്രകടനം കാണിക്കുക',
@@ -547,6 +561,7 @@ export default Object.assign(quizzesTranslations, {
   'common.published-tooltip': 'ബാഡ്ജ് ചെയ്ത ഉള്ളടക്കം',
   'common.publisher': 'പ്രസാധകൻ',
   'common.prev': 'മുമ്പത്തേത്',
+  'common.progress': 'Progress',
   'common.question': 'ചോദ്യം',
   'common.questions': 'ചോദ്യങ്ങൾ',
   'common.questions-OE': 'സൌജന്യ പ്രതികരണ ചോദ്യങ്ങൾ',
@@ -635,7 +650,9 @@ export default Object.assign(quizzesTranslations, {
   'common.add-data': 'ഡാറ്റ ചേർക്കുക',
   'common.update-data': 'ഡാറ്റ അപ്ഡേറ്റ് ചെയ്യുക',
   'common.all': 'എല്ലാം',
+  'common.please-wait': 'Please Wait',
   'common.unscheduled-items': 'ഷെഡ്യൂൾ ചെയ്ത ഇനങ്ങൾ',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'ഇതിനായി അവിസ്മരണീയ പട്ടികയിലേക്ക് ചേർക്കുക',
   'common.save-next': 'സംരക്ഷിക്കുക, അടുത്തത്',
   'common.save-submit': 'എല്ലാം സംരക്ഷിച്ച് സമർപ്പിക്കുക',
@@ -718,6 +735,7 @@ export default Object.assign(quizzesTranslations, {
   'common.upload-file': 'ഫയൽ അപ്ലോഡുചെയ്യുക',
   'common.upload-thumbnail': 'ലഘുചിത്ര അപ്ലോഡ് ചെയ്യുക',
   'common.upload-photo': 'ഫോട്ടോ അപ്ലോഡുചെയ്യുക',
+  'common.until': 'Until',
   'common.remove-photo': 'ഫോട്ടോ നീക്കംചെയ്യുക',
   'common.use-case': 'കേസ് ഉപയോഗിക്കുക',
   'common.valid-extensions':
@@ -1095,6 +1113,15 @@ export default Object.assign(quizzesTranslations, {
     'കഴിഞ്ഞ പ്രവർത്തനങ്ങൾ',
   'student-landing.class.my-report': 'എന്റെ റിപ്പോർട്ട്',
   'student-landing.class.my-location': 'എന്റെ ലൊക്കേഷൻ',
+  'student-landing.class.my-proficiency': 'My Proficiency',
+  'student-landing.class.establish-skyline': 'Let\'s Establish your Skyline',
+  'student-landing.class.waiting-establish-skyline':
+    'Waiting for your teacher to complete setting up the class.',
+  'student-landing.class.setup-in-complete-desc1':
+    'It looks like your teacher has not',
+  'student-landing.class.setup-in-complete-desc2': 'updated class settings',
+  'student-landing.class.setup-in-complete-desc3':
+    'Please get in touch with her to resolve the matter. Once everything is correctly set up, refresh this page.',
   'student-landing.course.to-report': 'ഉപയോഗ സംഗ്രഹം',
   'student-landing.course.total-time-spent': 'ചെലവഴിച്ച മൊത്തം സമയം',
   'student-landing.current-activity': 'നിലവിലെ പ്രവർത്തനം',
@@ -1161,6 +1188,7 @@ export default Object.assign(quizzesTranslations, {
     'നാവിഗേറ്റർ ക്ലാസിലെ കോ-ടീച്ചറായി നിങ്ങൾ ചേർന്നു',
   'teacher-landing.navigator-banner.error-message':
     'ക്ലാസിൽ ചേരുന്നതിൽ പ്രശ്നം',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.manage': 'മാനേജ് ചെയ്യുക',
   'teacher-landing.class.reports': 'റിപ്പോർട്ടുകൾ',
   'teacher-landing.class.daily-activites': 'ദൈനംദിന പ്രവർത്തനങ്ങൾ',
@@ -1169,6 +1197,9 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.back-to-archived':
     'തിരികെ ആർക്കൈവ് ചെയ്ത ക്ലാസ് മുറികൾ',
   'teacher-landing.class.class-management': 'ക്ലാസ് മാനേജ്മെന്റ്',
+  'teacher-landing.class.atc': 'ATC',
+  'teacher-landing.class.performance-overview': 'Performance Overview',
+  'teacher-landing.class.student-proficiency': 'Student Proficiency',
   'teacher-landing.class.class-management-tab.actions': 'പ്രവർത്തനങ്ങൾ',
   'teacher-landing.class.class-management-tab.assessment-min-score':
     'ട്രോഫികളുടെ മൂല്യനിർണ്ണയ കുറഞ്ഞ സ്കോർ',
@@ -1237,6 +1268,17 @@ export default Object.assign(quizzesTranslations, {
     'ക്ലാസിലെ എല്ലാ വിദ്യാർത്ഥികൾക്കും ശേഷിയുള്ള കൂട്ടായ എണ്ണം',
   'teacher-landing.class.students-tab.error-message':
     'ക്ലാസ്സിന് നിശ്ചയിച്ചിട്ടുള്ള ഒരു കോഴ്സ് ഇല്ല അല്ലെങ്കിൽ ഇതുവരെ വിദ്യാർത്ഥികൾ ക്ലാസിൽ കടന്നു rostered ഇല്ല. ക്ലാസ്സിന് കോഴ്സ് നൽകിയിട്ട് വിദ്യാർത്ഥികൾ അട്ടിമറിക്കപ്പെട്ടാൽ, ക്ലാസ് യോഗ്യതയുള്ള റിപ്പോർട്ട് ഇവിടെ പ്രദർശിപ്പിക്കും',
+  'teacher-landing.class.atc-view.domains-reviewed': 'Domains to be reviewed',
+  'teacher-landing.class.atc-view.class-activities-completed':
+    'Class Activities Completed',
+  'teacher-landing.class.atc-view.class-activities-pending':
+    'Class Activities Pending',
+  'teacher-landing.class.atc-view.show-all': 'Show All',
+  'teacher-landing.class.atc-view.collapse': 'Collapse',
+  'teacher-landing.class.atc-view.total-competencies-gained':
+    'Total Competencies Gained',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'ക്ലാസ് പ്രവർത്തനങ്ങൾ',
   'teacher-landing.class.offline-class-report.class-report':
     'ക്ലാസ് റിപ്പോർട്ട്',
@@ -1322,14 +1364,6 @@ export default Object.assign(quizzesTranslations, {
     'നിങ്ങളുടെ വിദ്യാർത്ഥികൾ പഠിക്കേണ്ട ഏറ്റവും കുറഞ്ഞ നിലവാരത്തിലുള്ള ഉള്ളടക്കം എന്താണ്?',
   'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
     'നിങ്ങളുടെ ക്ലാസ് ഗ്രേഡ് നില എന്താണ്?',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-1':
-    '(1) ക്ലാസ് ഉത്ഭവവും ലക്ഷ്യവും അടിസ്ഥാനമാക്കി ഓരോ വിദ്യാർത്ഥിക്കുമായി വ്യക്തിഗതമാക്കിയ പഠന പാത്ത് നിങ്ങൾക്ക് സൃഷ്ടിക്കാൻ കഴിയും.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-2':
-    '(2) സ്വതവേ, എല്ലാ വിദ്യാർത്ഥികൾക്കും അവരുടെ ലക്ഷ്യസ്ഥാനം പോലെ ഗ്രേഡ് നില ഉണ്ട്. നിങ്ങൾ ക്ലാസിൽ മുന്നോട്ടുപോകുന്ന വിദ്യാർത്ഥികൾ ഉയർന്ന ഗ്രേഡ് ആയി ലക്ഷ്യസ്ഥാനം ക്രമീകരിക്കാൻ കഴിയും. വിദ്യാർത്ഥികളുടെ സ്കൈലൈൻ, അവരുടെ ലക്ഷ്യസ്ഥാനം എന്നിവ അടിസ്ഥാനമാക്കി ഒരു വ്യക്തിഗതമാക്കിയ കോഴ്സ് മാപ്പിന് പഠന പാത്ത് വ്യക്തിഗതമാക്കുക ക്ലിക്കുചെയ്യുക.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-3':
-    '(3) മുഴുവൻ വർഗ്ഗത്തിന്റേയും പാത ഒരിക്കൽ മാത്രം നടപ്പിലാക്കാൻ കഴിയും. അതിന് ശേഷം, ഓരോ വിദ്യാർത്ഥിക്കും ഓരോ അപ്ഡേറ്റുകളും വ്യക്തിപരമായി ചെയ്യേണ്ടതാണ്.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-4':
-    '(4) ഓരോ വിദ്യാർത്ഥിനുമുള്ള ലക്ഷ്യ ഗ്രേഡ് ക്രമീകരിക്കാവുന്നതാണ്. നിങ്ങൾ ഒരിക്കൽ സ്ഥിരീകരിച്ചുകഴിഞ്ഞാൽ, <i id =  "ember1600  class = " ember-view gru- ഐക്കൺ മെറ്റീരിയൽ-ഐക്കൺ റീപ്ലേ  "ശൈലി = " ലംബമായ- align: middle;  "> വ്യക്തിഗത പാത പുനഃക്രമീകരിക്കാൻ ഉദ്ദിഷ്ടസ്ഥാനം.',
   'teacher-landing.class.class-settings.origin': 'ഉത്ഭവം',
   'teacher-landing.class.class-settings.destination': 'ഉദ്ദിഷ്ടസ്ഥാനം',
   'teacher-landing.class.class-settings.students': 'വിദ്യാർത്ഥികൾ',
@@ -1413,11 +1447,19 @@ export default Object.assign(quizzesTranslations, {
     'നിങ്ങൾക്ക് ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകാൻ മുന്നോട്ടു പിന്നോട്ട് നാവിഗേറ്റ് ചെയ്യാം',
   'gru-assessment-confirmation.unlimited-attempts-left':
     'നിങ്ങൾക്ക് പരിമിതികളില്ലാത്ത ശ്രമങ്ങളുണ്ട്',
+  'gru-assessment-confirmation.setting-forward-teacher':
+    'Student can navigate forward only',
+  'gru-assessment-confirmation.setting-forward-backward-teacher':
+    'Student can navigate forward and backwards to answer questions',
+  'gru-assessment-confirmation.unlimited-attempts-left-teacher':
+    'Student have unlimited attempts',
   'gru-assessment-confirmation.attempts-left.zero': 'നിങ്ങൾക്ക് ശ്രമങ്ങൾ ഉണ്ട്',
   'gru-assessment-confirmation.attempts-left.one':
     'നിങ്ങൾക്ക് 1 ശ്രമം ശേഷിക്കുന്നു',
   'gru-assessment-confirmation.attempts-left.other':
     'നിങ്ങൾക്ക് ശ്രമങ്ങൾ ഉണ്ട്',
+  'gru-assessment-confirmation.attempts-left.other-teacher':
+    'Student have {{count}} attempts',
   'gru-assessment-confirmation.unlimited-attempts':
     'നിങ്ങൾക്ക് പരിമിതികളില്ലാത്ത ശ്രമങ്ങളുണ്ട്',
   'gru-assessment-confirmation.cancel': 'റദ്ദാക്കുക',
@@ -1645,15 +1687,18 @@ export default Object.assign(quizzesTranslations, {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
+  'grade-selector.placeholder': 'Choose Grade Lines to Display',
   'standard-dropdown.placeholder': 'സ്റ്റാൻഡേർഡ് ബ്രൗസുചെയ്യുക',
   'subject-dropdown.placeholder': 'വിഷയം (കൾ)',
   'subject-dropdown.prompt': 'ഒരു വിഷയം തിരഞ്ഞെടുക്കുക',
+  'search-filter.input-placeholder': 'Type {{type}} name here...',
   'search-filter.courses': 'കോഴ്സുകൾ',
   'search-filter.collections': 'ശേഖരങ്ങൾ',
   'search-filter.resources': 'വിഭവങ്ങൾ',
   'search-filter.assessments': 'വിലയിരുത്തലുകൾ',
   'search-filter.questions': 'ചോദ്യങ്ങൾ',
   'search-filter.rubrics': 'തവിട്ടുകള്',
+  'search-filter.authors': 'Authors',
   'search-filter.question-types.MC': 'മൾട്ടിപ്പിൾ ചോയ്സ്',
   'search-filter.question-types.FIB': 'വിട്ട ഭാഗം പൂരിപ്പിക്കുക',
   'search-filter.question-types.T/F': 'ശരി തെറ്റ്',
@@ -1721,6 +1766,8 @@ export default Object.assign(quizzesTranslations, {
   'gru-reorder.instructions':
     'കൃത്യമായ ക്രമത്തിൽ ഉത്തരങ്ങൾ പുനഃക്രമീകരിക്കുക, തുടർന്ന്  "{{action}} " ക്ലിക്കുചെയ്യുക.',
   'student-first-experience.preStudyTitle': '{{title}} നായുള്ള പ്രീ-പഠനം',
+  'student-first-experience.lp-compute-inprogress':
+    'We are computing your initial proficiency profile in {{title}}',
   'student-first-experience.route0-action.accept': 'സ്വീകരിക്കൂ',
   'student-first-experience.route0-action.ignore': 'അവഗണിക്കുക',
   'student-first-experience.competency.popover.title': '{{title}} അതിർത്തി',
@@ -1728,10 +1775,9 @@ export default Object.assign(quizzesTranslations, {
     'നിങ്ങളുടെ ലക്ഷ്യ സ്ഥാനത്തേക്കുള്ള നിങ്ങളുടെ ആകാശവാണിക്കും ഈ ഗ്രേഡ് ലൈനും തമ്മിലുള്ള എല്ലാ മാനദണ്ഡങ്ങളും നിങ്ങൾ പഠിക്കേണ്ടതുണ്ട്.',
   'student-first-experience.assigned-course-title':
     '{{title}} എന്നതിനായി നിയുക്ത കോഴ്സ്',
-  'student-first-experience.study-course': 'പഠന കോഴ്സ്',
-  'student-first-experience.show-my-destination':
-    'എന്റെ ലക്ഷ്യസ്ഥാനം കാണിക്കുക',
-  'student-first-experience.show-me-my-route': 'എന്റെ വഴി കാണിക്കുക',
+  'student-first-experience.start-studying': 'Start Studying',
+  'student-first-experience.show-route': 'Show Route',
+  'student-first-experience.review-destination': 'Review Destination',
   'student-first-experience.competency-level.title':
     'നിങ്ങളുടെ പ്രൊഫിഷ്യൻസി പ്രൊഫൈൽ',
   'student-first-experience.competency-level.mastery':
@@ -1754,6 +1800,12 @@ export default Object.assign(quizzesTranslations, {
     'നിങ്ങൾ നിലവിൽ ഉള്ളിലുണ്ട്',
   'student-first-experience.competency-level-partial.desc2':
     'ഗണിതത്തിനുള്ള നിങ്ങളുടെ സ്കൈലൈൻ മാപ്പിലേക്ക് സ്വാഗതം. ഓരോ ഡൊമെയ്നിൽ നിങ്ങൾ ഏറ്റെടുത്തിട്ടുള്ള ഏറ്റവും ഉയർന്ന നിലവാരമാണ് ആകാശം (കട്ടിയുള്ള വെള്ള ലൈൻ). ഒരു സംഖ്യാസം നിങ്ങൾ പഠിക്കുന്ന ഒരു ഗണിത മേഖലയാണ്, അത്തരം സംഖ്യകൾ, എക്സ്പ്രഷനുകൾ, സമവാക്യങ്ങൾ തുടങ്ങിയവ. ഓരോ നിരയും ഒരു ഗണിത മണ്ഡലത്തെ പ്രതിനിധീകരിക്കുന്നു. കോളത്തിലെ ഓരോ ബോക്സും ഡൊമെയ്നിലെ ഒരു സ്റ്റാൻഡേർഡ് പ്രതിനിധീകരിക്കുന്നു. നിങ്ങൾ മാനദണ്ഡങ്ങൾ പഠിക്കുകയും മാനേജ് ചെയ്യുകയും ചെയ്തുകഴിഞ്ഞാൽ, നിങ്ങളുടെ സ്കൈലൈൻ നിരന്തരം വളരും.',
+  'student-first-experience.competency-level-partial.desc3':
+    'As you master each of the competencies, the corresponding box is updated to dark blue.',
+  'student-first-experience.competency-level-partial.desc4':
+    'The skyline is the thick white line that shows the highest competencies that you have mastered in each math domain.',
+  'student-first-experience.competency-level-partial.desc5':
+    'If the skyline is at the bottom of a domain, it means the system needs more information to be able to locate you in that topic. As soon as you start on the lessons and check for understandings, your skyline will bump up and update your proficiency in each domain.',
   'student-first-experience.units.other': '{{count}} യൂണിറ്റുകൾ',
   'player.gru-navigation.view-report': 'റിപ്പോർട്ട് കാണുക',
   'player.gru-navigator.see-usage-report': 'ഉപയോഗ റിപ്പോർട്ട് കാണുക',
@@ -1951,6 +2003,7 @@ export default Object.assign(quizzesTranslations, {
   'home.no-classes-found.teacher-toolkit.description':
     'ഈ ടൂൾക്കിറ്റ് ആരംഭിക്കുന്നതിന് നിങ്ങളെ സഹായിക്കാൻ ഉറവിടങ്ങളുണ്ട്.',
   'home.no-classes-found.teacher-toolkit.button-text': 'ടീച്ചർ ടൂൾകിറ്റ്',
+  'taxonomy.grades': 'Grades',
   'taxonomy.gru-taxonomy-selector.add-secondary': 'ദ്വിതീയ ചേർക്കുക',
   'taxonomy.gru-taxonomy-selector.choose-subject': 'വിഷയം തിരഞ്ഞെടുക്കുക',
   'taxonomy.gru-taxonomy-selector.competency-subject-and-course':
@@ -2438,7 +2491,45 @@ export default Object.assign(quizzesTranslations, {
   'report.competency-report.show-student-data':
     'വിദ്യാർത്ഥിയുടെ ഡാറ്റ കാണിക്കുക',
   'report.competency-report.show-learning-map': 'പഠന ഭൂപടം കാണിക്കുക',
+  'report.competency-report.note':
+    'Score 80% or more in our signature assessment and show your mastery',
   'report.domain-report': 'ഡൊമെയ്ൻ റിപ്പോർട്ട്',
+  'competency-info-content.portfolio': 'PORTFOLIO',
+  'competency-info-content.metadata': 'METADATA',
+  'competency-info-content.learning-map': 'LEARNING MAP',
+  'competency-meta-data.title': 'ALT-CONCEPTS',
+  'competency-meta-data.heading.micro': 'MICRO COMPETENCIES',
+  'competency-meta-data.heading.prequisite': 'PREQUISITE COMPETENCIES',
+  'competency-meta-data.nodata.micro':
+    'There are no micro-competencies defined for this competency',
+  'competency-meta-data.nodata.prequisite':
+    'There are no prerequisite-competencies defined for this competency',
+  'competency-meta-data.nodata.competency':
+    'There are no alt-concepts defined for this competency',
+  'student-journey.heading': 'YOUR JOURNEY',
+  'student-journey.teacher-heading': 'STUDENT JOURNEY',
+  'student-journey.nodata':
+    'You are yet to start your journey for this competency',
+  'student-journey.no-data-teacher':
+    'Student are yet to start journey for this competency',
+  'student-journey.student-status-3':
+    'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
+  'student-journey.student-status-2':
+    'You have not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+  'student-journey.teacher-status-2':
+    'The student has not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+  'student-journey.teacher-status-3':
+    'The student has asserted mastery in the competency and has not studied any learning activity on the Navigator for this competency.',
+  'learning-map.practice-question': 'practice questions',
+  'learning-map.no-practice-questions':
+    'There are no practice questions for this competency',
+  'learning-map.solved-examples': 'solved examples',
+  'learning-map.no-solved-examples':
+    'There are no solved examples for this competency',
+  'learning-map.challenging-questions': 'challenging questions',
+  'learning-map.no-challenging-questions':
+    'There are no challenging questions for this competency',
+  'student-card.message': 'This {{type}} has been deleted',
   'self-report.your-score': 'നിങ്ങളുടെ സ്കോർ',
   'self-report.time_spent': 'ചിലവഴിച്ച സമയം',
   'self-report.update-error': 'സ്കോർ അപ്ഡേറ്റ് ചെയ്യുന്നതിൽ പ്രശ്നം',

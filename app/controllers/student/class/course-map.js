@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { GRU_FEATURE_FLAG } from 'gooru-web/config/config';
+
 /**
  * Content map controller
  *
@@ -26,15 +26,6 @@ export default Ember.Controller.extend({
    * @type {Session}
    */
   session: Ember.inject.service(),
-
-  showLocateMe: Ember.computed(function() {
-    return this.get('isFeatureEnabled');
-  }),
-
-  isFeatureEnabled: Ember.computed(function() {
-    let feature = 'chronoView';
-    return GRU_FEATURE_FLAG[feature];
-  }),
 
   /**
    * @property {Number} barChartData

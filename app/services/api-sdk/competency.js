@@ -261,12 +261,12 @@ export default Ember.Service.extend({
    * @function getCompetencyCompletionStats
    * Provide Competency Completion Stats for Premium Classes"
    */
-  getCompetencyCompletionStats(classIds) {
+  getCompetencyCompletionStats(classIds, user) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('competencyAdapter')
-        .getCompetencyCompletionStats(classIds)
+        .getCompetencyCompletionStats(classIds, user)
         .then(
           function(response) {
             resolve(

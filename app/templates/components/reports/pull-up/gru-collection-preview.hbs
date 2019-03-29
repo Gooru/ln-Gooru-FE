@@ -5,11 +5,13 @@
       {{gru-icon name="arrow_downward"}}
     </div>
     <div class="preview-title {{previewContentType}}-preview">
-      {{previewContentType}} {{t 'common.preview'}}
+      {{t (concat 'common.' previewContentType)}} {{t 'common.preview'}}
     </div>
-    <div class="content-player" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
-      {{gru-icon name="play_arrow"}}
-    </div>
+    {{#unless isExternalContent}}
+      <div class="content-player" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
+        {{gru-icon name="play_arrow"}}
+      </div>
+    {{/unless}}
     {{#if (and isRemixableContent (or isTeacher isAnonymous))}}
       <div class="content-remix" title="{{t 'common.remix'}}" data-toggle="tooltip" {{action "onRemixContent"}}>
         {{gru-icon name="content_copy"}}
@@ -35,13 +37,28 @@
       {{/if}}
     </div>
     <div class="content-items-container">
-      {{#each previewContent.children as |content seq|}}
-        {{#if (or (eq previewContentType 'assessment') (eq content.content_format 'question'))}}
-          {{cards.question-preview-card question=content isShowCorrectAnswer=isShowCorrectAnswer contentSeq=(plus-one seq)}}
-        {{else}}
-          {{cards.resource-preview-card resource=content contentSeq=(plus-one seq)}}
-        {{/if}}
-      {{/each}}
+      {{#if isExternalContent}}
+        <div class="external-content">
+          {{#if previewContent.learningObjectives}}
+            <div class="content-description">
+              {{safe-html previewContent.learningObjectives}}
+            </div>
+          {{/if}}
+          {{#if previewContent.url}}
+            <div class="content-url">
+                <span class="url-label">{{t 'gru-rubric-creation.url'}}: </span><span class="url-content"><a href="{{previewContent.url}}" target="_blank">{{previewContent.url}}</a></span>
+            </div>
+          {{/if}}
+        </div>
+      {{else}}
+        {{#each previewContent.children as |content seq|}}
+          {{#if (or (eq previewContentType 'assessment') (eq content.content_format 'question'))}}
+            {{cards.question-preview-card question=content isShowCorrectAnswer=isShowCorrectAnswer contentSeq=(plus-one seq)}}
+          {{else}}
+            {{cards.resource-preview-card resource=content contentSeq=(plus-one seq)}}
+          {{/if}}
+        {{/each}}
+      {{/if}}
     </div>
   </div>
   {{#if isQuestionAvailable}}

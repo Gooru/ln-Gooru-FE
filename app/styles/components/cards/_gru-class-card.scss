@@ -154,6 +154,7 @@
             a {
               font-size: $font-size-base;
               color: $dark-400;
+              display: block;
             }
 
             &:last-child {
@@ -358,10 +359,6 @@
         }
       }
     }
-  }
-  .archive {
-    cursor: not-allowed;
-    pointer-events: none;
   }
 }
 

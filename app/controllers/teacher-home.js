@@ -271,6 +271,60 @@ export default Ember.Controller.extend(ModalMixin, {
   // Actions
 
   actions: {
+
+    /**
+     * Action triggered when close collection report pull up
+     */
+    onClosePullUp() {
+      let controller = this;
+      controller.set('isShowArchiveClassReport', false);
+      controller.set('isShowUnitReportPullUp', false);
+      controller.set('isShowLessonReportPullUp', false);
+      controller.set('isShowCollectionReportPullUp', false);
+    },
+
+    /**
+     * Action triggered when click on the archived class report
+     */
+    onShowArchivedClassReport(classData) {
+      const controller = this;
+      let classReportParams = {
+        course: classData.get('course'),
+        class: classData,
+        classId: classData.get('id'),
+        courseId: classData.get('courseId'),
+        classMembers: classData.get('members')
+      };
+      controller.set('isShowArchiveClassReport', true);
+      controller.set('classReportParams', classReportParams);
+    },
+
+    /**
+     * Action triggered when click on the archived class unit report
+     */
+    onOpenUnitReport(params) {
+      let controller = this;
+      controller.set('isShowUnitReportPullUp', true);
+      controller.set('unitReportData', params);
+    },
+
+    /**
+     * Action triggered when click on the archived class lesson report
+     */
+    onOpenLessonReport(params) {
+      let controller = this;
+      controller.set('isShowLessonReportPullUp', true);
+      controller.set('lessonReportData', params);
+    },
+
+    /**
+     * Action triggered when click on the archived class collection report
+     */
+    teacherCollectionReport(params) {
+      let controller = this;
+      controller.set('isShowCollectionReportPullUp', true);
+      controller.set('teacherCollectionReportData', params);
+    },
     /**
      *Filter by most recent
      */
@@ -341,6 +395,18 @@ export default Ember.Controller.extend(ModalMixin, {
   // Properties
 
   /**
+   * @property {Boolean} isShowSortOptions
+   */
+  isShowSortOptions: Ember.computed('showActiveClasses', 'showArchivedClasses', function() {
+    const controller = this;
+    let isShowActiveClassess = controller.get('showActiveClasses');
+    let isShowArchiveClassess = controller.get('showArchivedClasses');
+    let activeClassesCount = controller.get('sortedActiveClasses.length');
+    let archivedClassesCount = controller.get('sortedArchivedClassrooms.length');
+    return (isShowActiveClassess && activeClassesCount) || (isShowArchiveClassess && archivedClassesCount);
+  }),
+
+  /**
    * Indicates when then active classes are visible
    * @property {boolean}
    */
@@ -393,6 +459,14 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   sortedArchivedClassrooms: Ember.computed.sort(
     'archivedClasses',
+    'sortDefinition'
+  ),
+
+  /**
+   * @property {[Class]} sortedActiveClasses
+   */
+  sortedActiveClasses: Ember.computed.sort(
+    'activeClasses',
     'sortDefinition'
   ),
 

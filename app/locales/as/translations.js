@@ -94,7 +94,9 @@ export default Object.assign(quizzesTranslations, {
   'common.accept': 'স্বীকাৰ কৰক',
   'common.ignore': 'উপেক্ষা কৰক',
   'common.add': 'যোগ কৰক',
-  'common.add-an-activity': 'এটা কাৰ্যকলাপ যোগ কৰক',
+  'common.plan-an-activities': 'Plan your activities',
+  'common.plan-an-activities-msg':
+    'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'পুনৰ কাৰ্যক্ৰম বনাওক',
   'common.no-unschedule-items':
     'কাৰ্যক্ৰম নিৰ্মাণ কৰিবৰ বাবে আপোনাৰ কোনো কাৰ্যকলাপ নাই',
@@ -192,12 +194,13 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'আনবুকমাৰ্ক কৰিবলৈ ক্লিক কৰক',
   'common.close': 'বন্ধ',
   'common.collection': 'সংগৃহীত',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'সংগৃহীতসমূহ',
   'common.collection-pl.one': 'সংগৃহীত',
   'common.collection-pl.other': 'সংগৃহীতসমূহ',
   'common.collection-title': 'সংগৃহীত শিৰোনাম',
   'common.collections': 'সংগৃহীতসমূহ',
-  'common.collectionInitial': '	C',
+  'common.collectionInitial': '\tC',
   'common.competency': 'পাৰদৰ্শিতা',
   'common.competencies': 'সামৰ্থ্যসমূহ',
   'common.completed': 'সম্পূৰ্ণ  হোৱা',
@@ -237,6 +240,12 @@ export default Object.assign(quizzesTranslations, {
   'common.course': 'ক\'ৰ্চ',
   'common.course-title': 'ক\'ৰ্চৰ শিৰোনাম',
   'common.courses': 'ক\'ৰ্চসমূহ',
+  'common.competency-status-0': 'Not Started',
+  'common.competency-status-1': 'In Progress',
+  'common.competency-status-2': 'Mastered (Inferred)',
+  'common.competency-status-3': 'Mastered (Asserted)',
+  'common.competency-status-4': 'Mastered (Earned)',
+  'common.competency-status-5': 'Mastered (Demonstrated)',
   'common.create': 'সৃষ্টি',
   'common.createClass': 'সৃষ্ট শ্ৰেণী ',
   'common.created-by': 'ৰ দ্বাৰা সৃষ্ট',
@@ -250,6 +259,7 @@ export default Object.assign(quizzesTranslations, {
     'শ্ৰেণীকোঠাৰ লগত সংলগ্ন সকলো তালিকা অপ্ৰাপ্য হ\'ব',
   'common.depth-of-knowledge': 'জ্ঞানৰ গভীৰতা',
   'common.description': 'বিৱৰণ',
+  'common.destination': 'Destination',
   'common.disappear-after-login':
     'এইটো ল\'গ ইনৰ {{loginNumber}} পাছত নোহোৱা হৈ যাব',
   'common.disappear-next-login': 'পাছৰ ল\'গ ইনত এইটো দেখা নাযাব',
@@ -451,6 +461,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'মোৰ প্ৰশ্ন সমূহৰ পৰা ',
   'common.from-my-resources': 'মোৰ সমল সমূহৰ পৰা',
   'common.hide-results': 'ফলাফলসমূহ গোপন কৰক',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'আভাসবোৰ',
   'common.home': 'ঘৰ ',
   'common.if_questions': 'যদি আপোনাৰ কিবা প্ৰশ্ন আছে,',
@@ -481,6 +492,13 @@ export default Object.assign(quizzesTranslations, {
   'common.loading': 'ল\'ডিং.....',
   'common.login': 'লগ ইন ',
   'common.logout': 'লগ আওট ',
+  'common.logout.head_1': 'Learning Navigator: ',
+  'common.logout.head_2': 'Every Student',
+  'common.logout.head_3': 'Achieves Mastery',
+  'common.logout.description':
+    'Learning Navigator is designed as “GPS for Learning” — a way for each student to follow their own path to mastery. Schools ask every student to achieve the same level of proficiency, but each student begins with a different set of knowledge and skills. The Learning Navigator meets each student exactly where they are and navigates them to their learning goals. ',
+  'common.logout.logout-btn-msg1': 'You have been logout.',
+  'common.logout.logout-btn-msg2': 'Click here to login.',
   'common.mastery': 'পাৰদৰ্শিতা',
   'common.menu': 'তালিকা',
   'common.more-details': 'অধিক বিৱৰণ',
@@ -540,6 +558,9 @@ export default Object.assign(quizzesTranslations, {
   'common.on': 'ON',
   'common.other': 'অন্য',
   'common.overall-performance': 'সৰ্বমুঠ সফলতা',
+  'common.educational-use': 'Educational use',
+  'common.resource-types': 'Resource types',
+  'common.publishers': 'publishers',
   'common.password': 'পাছৱৰ্ড',
   'common.pending': 'অনিশ্চয়তা',
   'common.performance': 'সফলতা দেখুৱাওক',
@@ -556,6 +577,7 @@ export default Object.assign(quizzesTranslations, {
   'common.published-tooltip': 'প্ৰতীকৰ বিষয়বস্ত',
   'common.publisher': 'প্ৰকাশক',
   'common.prev': 'প্ৰেভ',
+  'common.progress': 'Progress',
   'common.question': 'প্ৰশ্ন',
   'common.questions': 'প্ৰশ্নসমূহ',
   'common.questions-OE': 'বিনামূলীয়া সমিধানৰ প্ৰশ্নসমূহ',
@@ -576,7 +598,7 @@ export default Object.assign(quizzesTranslations, {
   'common.question-type.HT_RO': 'ড্ৰেদ আৰু ড্ৰ\'প অৰ্ডাৰ',
   'common.question-type.HT_HL': 'হাইলাইটিং টেক্স',
   'common.reaction': 'প্ৰতিক্ৰিয়া',
-  'common.read-first': '	<b>এইটো প্ৰথমতে পঢ়ক!</b>',
+  'common.read-first': '\t<b>এইটো প্ৰথমতে পঢ়ক!</b>',
   'common.remaining': '{{number}} বাঁও',
   'common.remix': 'ৰিমিক্স',
   'common.remix-assessment': 'ৰিমিক্স মূল্যাংকন',
@@ -639,7 +661,9 @@ export default Object.assign(quizzesTranslations, {
   'common.add-data': 'ডাটা যোগ কৰক',
   'common.update-data': 'ডাটা আপডেট কৰক',
   'common.all': 'সকলো',
+  'common.please-wait': 'Please Wait',
   'common.unscheduled-items': 'অনুসূচীত নকৰা বস্তু',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'ইয়াৰ বাবে অনুসূচীত নকৰাৰ তালিকাত যোগ কৰক',
   'common.save-next': 'চেভ কৰক আৰু আগবাঢ়ক',
   'common.save-submit': 'চেভ কৰক আৰু সকলো জমা কৰক',
@@ -721,6 +745,7 @@ export default Object.assign(quizzesTranslations, {
   'common.upload-file': 'ফাইল আপল\'ড কৰক',
   'common.upload-thumbnail': 'থাম্বনেইল আপল\'ড কৰক',
   'common.upload-photo': 'ফটো আপল\'ড কৰক',
+  'common.until': 'Until',
   'common.remove-photo': 'ফটো আঁতৰাওক',
   'common.use-case': 'কেচ ব্যৱহাৰ কৰক',
   'common.valid-extensions': 'বৈধ ফাইল এক্সটেঞ্চ্যনবোৰ হৈছে: {{extensions}}',
@@ -1098,6 +1123,15 @@ export default Object.assign(quizzesTranslations, {
     'পুৰণি কাৰ্যকলাপ',
   'student-landing.class.my-report': 'মোৰ ৰিপৰ্ট',
   'student-landing.class.my-location': 'মোৰ অৱস্থান ',
+  'student-landing.class.my-proficiency': 'My Proficiency',
+  'student-landing.class.establish-skyline': 'Let\'s Establish your Skyline',
+  'student-landing.class.waiting-establish-skyline':
+    'Waiting for your teacher to complete setting up the class.',
+  'student-landing.class.setup-in-complete-desc1':
+    'It looks like your teacher has not',
+  'student-landing.class.setup-in-complete-desc2': 'updated class settings',
+  'student-landing.class.setup-in-complete-desc3':
+    'Please get in touch with her to resolve the matter. Once everything is correctly set up, refresh this page.',
   'student-landing.course.to-report': 'সাৰাংশ ব্য়ৱহাৰ কৰক',
   'student-landing.course.total-time-spent': 'সৰ্বমূঠ কটোৱা সময়',
   'student-landing.current-activity': 'বৰ্তমান কাৰ্যকলাপ',
@@ -1160,6 +1194,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.navigator-banner.success-message':
     'আপুনি সফলতাপূৰ্বক নেভিগেতৰ শ্ৰেণীৰ সহ-শিক্ষক হিচাপে যোগদান কৰিছে',
   'teacher-landing.navigator-banner.error-message': 'শ্ৰেণী যোগদান কৰাত সমস্যা',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.manage': 'প্ৰবন্ধন কৰক',
   'teacher-landing.class.reports': 'প্ৰতিবেদনবোৰ',
   'teacher-landing.class.daily-activites': 'দৈনন্দিন কাৰ্যকলাপ সমূহ',
@@ -1168,6 +1203,9 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.back-to-archived':
     'আৰকাইভদ শ্ৰেণীকোঠা সমূহলৈ উভতি আহক',
   'teacher-landing.class.class-management': 'শ্ৰেণী ব্যৱস্থাপনা ',
+  'teacher-landing.class.atc': 'ATC',
+  'teacher-landing.class.performance-overview': 'Performance Overview',
+  'teacher-landing.class.student-proficiency': 'Student Proficiency',
   'teacher-landing.class.class-management-tab.actions': 'কৰ্মবোৰ',
   'teacher-landing.class.class-management-tab.assessment-min-score':
     'ত্ৰফি সমূহৰ মূল্যায়ন নূন্যতম সংখ্যা',
@@ -1231,6 +1269,17 @@ export default Object.assign(quizzesTranslations, {
     'শ্ৰেণীটোত থকা সকলো ছাত্ৰ-ছাত্ৰীৰ ক্ষমতাৰ গড় হিচাপ',
   'teacher-landing.class.students-tab.error-message':
     'শ্ৰেণীটোক দিয়া কোনো কাৰ্যক্ৰম নাই অথবা শ্ৰেণীতোত এতিয়ালৈকে কোনো ছাত্ৰ-ছাত্ৰীয়ে নামাংকন কৰা নাই। শ্ৰেণীটোক কাৰ্যক্ৰম দিয়া পাচত আৰু ছাত্ৰ-ছাত্ৰীসকলে নামাংকন কৰাৰ পাচত শ্ৰেণীটোৰ দক্ষতাৰ ৰিপ\'ৰ্ট ইয়াত দেখুওৱা হ\'ব।',
+  'teacher-landing.class.atc-view.domains-reviewed': 'Domains to be reviewed',
+  'teacher-landing.class.atc-view.class-activities-completed':
+    'Class Activities Completed',
+  'teacher-landing.class.atc-view.class-activities-pending':
+    'Class Activities Pending',
+  'teacher-landing.class.atc-view.show-all': 'Show All',
+  'teacher-landing.class.atc-view.collapse': 'Collapse',
+  'teacher-landing.class.atc-view.total-competencies-gained':
+    'Total Competencies Gained',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'শ্ৰেণী কাৰ্যকলাপ',
   'teacher-landing.class.offline-class-report.class-report': 'শ্ৰেণী প্ৰতিবেদন',
   'teacher-landing.class.offline-class-report.activity-report':
@@ -1299,14 +1348,6 @@ export default Object.assign(quizzesTranslations, {
     'সহ-শিক্ষক',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'বেলেগ শিক্ষক যোগ কৰক',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-class-label':
-    'এইটো এটা অফ্লাইন শ্ৰেণীকোঠা',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-msg':
-    'এবাৰ অফ্লাইন হোৱাৰ পাছত শ্ৰেণীকোঠাটো পুনৰ অনলাইন কৰিব নোৱাৰিব।',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-toggle-tooltip':
-    'যদি আপুনি এইটো এটা অফ্লাইন শ্ৰেণীকোঠা কৰিব বিচাৰে তেতিয়া yes বাচনি কৰক',
-  'teacher-landing.class.class-settings.class-settings-sec.offline-tooltip':
-    'যিবোৰ শ্ৰেণীকোঠাত শিক্ষাৰ্থীয়ে নেভিগেতৰত অনলাইন নপঢ়ে সেইবোৰ অফ্লাইন ধৰা হয় । অফ্লাইন পঢ়া শিক্ষাৰ্থীক শিক্ষকে ট্ৰেক কৰে আৰু শিক্ষাৰ্থীৰ হৈ ডাটা অনন্তৰ্ভুক্ত কৰে',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'নিৰ্দেশনাৰ ভাষা',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
@@ -1323,14 +1364,6 @@ export default Object.assign(quizzesTranslations, {
     'নূন্যতম গ্ৰেড স্তৰ কি হয় যি শিক্ষাৰ্থীয়ে অধ্য়য়ন কৰিব লাগে?',
   'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
     'আপোনাৰ শ্ৰেণীৰ  গ্ৰেড স্তৰ কি হয় ',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-1':
-    '(1) আপুনি শ্ৰেণীৰ মূল আৰু গন্তব্যত ভিত্তি কৰি প্ৰত্যেক ছাত্ৰ-ছাত্ৰীৰ বাবে ব্যক্তিগত শিক্ষণ পথ সৃষ্টি কৰিব পাৰিব।',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-2':
-    '(2)  ডিফল্টৰূপে সকলো ছাত্ৰ-ছাত্ৰীৰ গ্ৰেডৰ স্তৰটো  লক্ষ্য হিচাপে থাকে। শ্ৰেণীটোৰ আগশাৰীৰ ছাত্ৰ-ছাত্ৰীৰ বাবে আপুনি লক্ষ্যটো অনুকূল কৰিব পাৰে। ছাত্ৰ ৰ স্কাইলাইন আৰু তেওঁলোকৰ ওপৰত ভিত্তি কৰি এখন নিজাকৃত কাৰ্যক্ৰম নক্সা বনাবলৈ শিকাৰ পথ নিজাকৃত কৰকত ক্লিক কৰক।',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-3':
-    '(3) সম্পূৰ্ণ শ্ৰেণীটোৰ বাবে পথ নিৰ্মাণ কৰাৰ কাম মাত্ৰ এবাৰ কৰিব পাৰি। তাৰপাচত প্ৰতিটো ছাত্ৰৰ বাবে যিকোনো আপডেট এটা এটাকৈ কৰিব লাগিব।',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-4':
-    '(4) আপুনি এটা ছাত্ৰৰ বাবে লক্ষ্যৰ গ্ৰেড অনুকূল কৰিব পাৰে। আপুনি এবাৰ লক্ষ্য নিৰ্ণয় কৰাৰ পাচত নিজাকৃত পথটো পুনৰ কম্পিউট কৰিবলৈ ৰিপ্লে </i> আইকন ক্লিক কৰক।',
   'teacher-landing.class.class-settings.origin': 'মূল',
   'teacher-landing.class.class-settings.destination': 'গন্তব্য স্থান',
   'teacher-landing.class.class-settings.students': 'ছাত্ৰ-ছাত্ৰী',
@@ -1412,11 +1445,19 @@ export default Object.assign(quizzesTranslations, {
     'প্ৰশ্নৰ উত্তৰ দিবলৈ আপুনি আগলৈ আৰু পিছলৈ নেভিগেট কৰিব পাৰিব',
   'gru-assessment-confirmation.unlimited-attempts-left':
     'আপোনাৰ অসীমীত চেষ্টা আছে',
+  'gru-assessment-confirmation.setting-forward-teacher':
+    'Student can navigate forward only',
+  'gru-assessment-confirmation.setting-forward-backward-teacher':
+    'Student can navigate forward and backwards to answer questions',
+  'gru-assessment-confirmation.unlimited-attempts-left-teacher':
+    'Student have unlimited attempts',
   'gru-assessment-confirmation.attempts-left.zero':
     'আপোনাৰ {{count}} চেষ্টা আছে',
   'gru-assessment-confirmation.attempts-left.one': 'আপোনাৰ কেৱল এটা চেষ্টা আছে',
   'gru-assessment-confirmation.attempts-left.other':
     'আপোনাৰ {{count}} চেষ্টা আছে',
+  'gru-assessment-confirmation.attempts-left.other-teacher':
+    'Student have {{count}} attempts',
   'gru-assessment-confirmation.unlimited-attempts': 'আপোনাৰ অসীমীত চেষ্টা আছে',
   'gru-assessment-confirmation.cancel': 'প্ৰত্যাহাৰ',
   'gru-assessment-confirmation.continue': 'জাৰি ৰাখক',
@@ -1638,15 +1679,18 @@ export default Object.assign(quizzesTranslations, {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
+  'grade-selector.placeholder': 'Choose Grade Lines to Display',
   'standard-dropdown.placeholder': 'মানকৰ মতে ব্ৰাউজ কৰক',
   'subject-dropdown.placeholder': 'বিষয়',
   'subject-dropdown.prompt': 'এটা বিষয় নিৰ্বাচন কৰক',
+  'search-filter.input-placeholder': 'Type {{type}} name here...',
   'search-filter.courses': 'ক\'ৰ্চসমূহ',
   'search-filter.collections': 'সংগৃহীতসমূহ',
   'search-filter.resources': 'সম্পদবোৰ',
   'search-filter.assessments': 'মূল্যাংকনবোৰ',
   'search-filter.questions': 'প্ৰশ্নসমূহ',
   'search-filter.rubrics': 'ৰুব্ৰিক',
+  'search-filter.authors': 'Authors',
   'search-filter.question-types.MC': 'বহু-বৈকল্পিক',
   'search-filter.question-types.FIB': 'খালি ঠাই পূৰ কৰক',
   'search-filter.question-types.T/F': 'শুদ্ধ / ভুল',
@@ -1714,6 +1758,8 @@ export default Object.assign(quizzesTranslations, {
   'gru-reorder.instructions':
     'অনুগ্ৰহ কৰি শুদ্ধ ক্ৰম নিৰ্বাচন কৰক আৰু "{{action}}" ক্লিক কৰক।',
   'student-first-experience.preStudyTitle': '{{title}}ৰ বাবে প্ৰাক অধ্যয়ন',
+  'student-first-experience.lp-compute-inprogress':
+    'We are computing your initial proficiency profile in {{title}}',
   'student-first-experience.route0-action.accept': 'স্বীকাৰ কৰক',
   'student-first-experience.route0-action.ignore': 'উপেক্ষা কৰক',
   'student-first-experience.competency.popover.title': '{{title}} সীমাৰেখা',
@@ -1721,9 +1767,9 @@ export default Object.assign(quizzesTranslations, {
     'আপোনাৰ লক্ষ্য পাবলৈ আপুনি আপুনাৰ স্কাইলাইন আৰু এই গ্ৰেড লাইনৰ মাজত থকা সকলো মানক পঢ়িব লাগিব।',
   'student-first-experience.assigned-course-title':
     '{{title}} বাবে দিয়া কাৰ্যক্ৰম',
-  'student-first-experience.study-course': 'অধ্যয়নৰ কাৰ্যক্ৰম',
-  'student-first-experience.show-my-destination': 'মোৰ গন্তব্য দেখুওৱাওক',
-  'student-first-experience.show-me-my-route': 'মোৰ মাৰ্গ দেখুৱাওক',
+  'student-first-experience.start-studying': 'Start Studying',
+  'student-first-experience.show-route': 'Show Route',
+  'student-first-experience.review-destination': 'Review Destination',
   'student-first-experience.competency-level.title': 'মোৰ দক্ষতাৰ প্ৰফাইল',
   'student-first-experience.competency-level.mastery':
     '{{count}}টা মানকত পাৰ্গতা প্ৰাপ্ত কৰা হৈছে',
@@ -1745,6 +1791,12 @@ export default Object.assign(quizzesTranslations, {
     'আপুনি বৰ্তমান আছে',
   'student-first-experience.competency-level-partial.desc2':
     'গণিতৰ স্কাইলাইন নক্সালৈ স্বাগতম। স্কাইলাইনে (ডাঠ বগা লাইনডাল) আপুনি প্ৰতিটো অনুক্ষেত্ৰত লাভ কৰা পাৰদৰ্শিতাৰ আটাইতকৈ উন্নত মানটো দেখুৱায়। অনুক্ষেত্ৰ হৈছে গণিতৰ এটা অংশ যিটো আপুনি পঢ়ে, যেনে সংখ্যা প্ৰণালী আৰু অভিব্যক্তি আৰু সমীকৰণ। প্ৰতিটো কলমে গণিতৰ এটা অনুক্ষেত্ৰ বুজায়। আৰু কলমত থকা প্ৰতিটো বাকচে অনুক্ষেত্ৰত থকা মানক বুজায়। আপুনি এবাৰ শিকিবলৈ আৰম্ভ কৰা আৰু মানকসমূহৰ পাৰদৰ্শিতা পাবলৈ লোৱাৰ পাচত আপোনাৰ স্কাইলাইন বাঢ়ি গৈ থাকিব। ',
+  'student-first-experience.competency-level-partial.desc3':
+    'As you master each of the competencies, the corresponding box is updated to dark blue.',
+  'student-first-experience.competency-level-partial.desc4':
+    'The skyline is the thick white line that shows the highest competencies that you have mastered in each math domain.',
+  'student-first-experience.competency-level-partial.desc5':
+    'If the skyline is at the bottom of a domain, it means the system needs more information to be able to locate you in that topic. As soon as you start on the lessons and check for understandings, your skyline will bump up and update your proficiency in each domain.',
   'student-first-experience.units.other': '{{count}}টা অধ্যায়',
   'player.gru-navigation.view-report': 'প্ৰতিবেদন চাওক',
   'player.gru-navigator.see-usage-report': 'ব্যৱহাৰৰ ৰিপ\'ৰ্ট চাওক',
@@ -1944,6 +1996,7 @@ export default Object.assign(quizzesTranslations, {
   'home.no-classes-found.teacher-toolkit.description':
     'আপোনাক আৰম্ভণি কৰাত এই টুলকিটটোত থকা সামগ্ৰী সমূহে সহায় কৰিব।',
   'home.no-classes-found.teacher-toolkit.button-text': 'শিক্ষকৰ টুলকিট',
+  'taxonomy.grades': 'Grades',
   'taxonomy.gru-taxonomy-selector.add-secondary': 'গৌণ যোগ কৰক',
   'taxonomy.gru-taxonomy-selector.choose-subject': 'বিষয় চয়ন কৰক',
   'taxonomy.gru-taxonomy-selector.competency-subject-and-course':
@@ -2288,7 +2341,7 @@ export default Object.assign(quizzesTranslations, {
   'gru-rubric-edit.upload-rubric': 'নিৰ্দেশনাৱলী আপল\'ড কৰক',
   'gru-rubric-edit.copy.success-message':
     'আপুনি নিৰ্দেশনাৱলীখন নকল কৰিলে{{title}}।আপুনি সেই নিৰ্দেশনাৱলীখন সম্পাদন কৰিব বিছাৰেনেকি?',
-  'gru-rubric-creation.url': '	URL',
+  'gru-rubric-creation.url': '\tURL',
   'gru-rubric-creation.upload-file': 'ফাইল আপল\'ড কৰক',
   'gru-rubric-creation.add-category': 'এক নতুন বৰ্গ অৰ্ন্তভূক্ত কৰক',
   'gru-rubric-creation.gru-preview-url.preview':
@@ -2419,7 +2472,45 @@ export default Object.assign(quizzesTranslations, {
   'report.competency-report.show-global-data': 'গ্ল\'বেল ডাটা দেখাওক',
   'report.competency-report.show-student-data': 'শিক্ষাৰ্থীৰ তাৰিখ দেখাওক',
   'report.competency-report.show-learning-map': 'লাৰ্নিং মেপ দেখাওক',
+  'report.competency-report.note':
+    'Score 80% or more in our signature assessment and show your mastery',
   'report.domain-report': 'প্ৰতিবেদনৰ পৰিসৰ',
+  'competency-info-content.portfolio': 'PORTFOLIO',
+  'competency-info-content.metadata': 'METADATA',
+  'competency-info-content.learning-map': 'LEARNING MAP',
+  'competency-meta-data.title': 'ALT-CONCEPTS',
+  'competency-meta-data.heading.micro': 'MICRO COMPETENCIES',
+  'competency-meta-data.heading.prequisite': 'PREQUISITE COMPETENCIES',
+  'competency-meta-data.nodata.micro':
+    'There are no micro-competencies defined for this competency',
+  'competency-meta-data.nodata.prequisite':
+    'There are no prerequisite-competencies defined for this competency',
+  'competency-meta-data.nodata.competency':
+    'There are no alt-concepts defined for this competency',
+  'student-journey.heading': 'YOUR JOURNEY',
+  'student-journey.teacher-heading': 'STUDENT JOURNEY',
+  'student-journey.nodata':
+    'You are yet to start your journey for this competency',
+  'student-journey.no-data-teacher':
+    'Student are yet to start journey for this competency',
+  'student-journey.student-status-3':
+    'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
+  'student-journey.student-status-2':
+    'You have not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+  'student-journey.teacher-status-2':
+    'The student has not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+  'student-journey.teacher-status-3':
+    'The student has asserted mastery in the competency and has not studied any learning activity on the Navigator for this competency.',
+  'learning-map.practice-question': 'practice questions',
+  'learning-map.no-practice-questions':
+    'There are no practice questions for this competency',
+  'learning-map.solved-examples': 'solved examples',
+  'learning-map.no-solved-examples':
+    'There are no solved examples for this competency',
+  'learning-map.challenging-questions': 'challenging questions',
+  'learning-map.no-challenging-questions':
+    'There are no challenging questions for this competency',
+  'student-card.message': 'This {{type}} has been deleted',
   'self-report.your-score': 'আপোনাৰ নম্বৰ',
   'self-report.time_spent': 'কটোৱা সময়',
   'self-report.update-error': 'নম্বৰ উন্নতীকৰণ কৰাত অসুবিধা হৈছে',

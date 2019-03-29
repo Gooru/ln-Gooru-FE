@@ -96,7 +96,9 @@ export default Object.assign(quizzesTranslations, {
   'common.accept': 'ஏற்க',
   'common.ignore': 'புறக்கணிக்க',
   'common.add': 'கூட்டு',
-  'common.add-an-activity': 'செயல்பாட்டைச் சேர்க்கவும்',
+  'common.plan-an-activities': 'Plan your activities',
+  'common.plan-an-activities-msg':
+    'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'மீண்டும் திட்டமிட',
   'common.no-unschedule-items':
     'திட்டமிடல் தேவைப்படும் எந்தவொரு செயல்பாடுகளையும் நீங்கள் கொண்டிருக்கவில்லை',
@@ -195,6 +197,7 @@ export default Object.assign(quizzesTranslations, {
   'common.click-unBookmark': 'unbookmark கிளிக் செய்யவும்',
   'common.close': 'நெருக்கமான',
   'common.collection': 'சேகரிப்பு',
+  'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'வசூல்',
   'common.collection-pl.one': 'சேகரிப்பு',
   'common.collection-pl.other': 'வசூல்',
@@ -239,6 +242,12 @@ export default Object.assign(quizzesTranslations, {
   'common.course': 'நிச்சயமாக',
   'common.course-title': 'பாடத்தின் தலைப்பு',
   'common.courses': 'படிப்புகள்',
+  'common.competency-status-0': 'Not Started',
+  'common.competency-status-1': 'In Progress',
+  'common.competency-status-2': 'Mastered (Inferred)',
+  'common.competency-status-3': 'Mastered (Asserted)',
+  'common.competency-status-4': 'Mastered (Earned)',
+  'common.competency-status-5': 'Mastered (Demonstrated)',
   'common.create': 'உருவாக்க',
   'common.createClass': 'வர்க்கத்தை உருவாக்குங்கள்',
   'common.created-by': 'உருவாக்கப்பட்டது',
@@ -252,6 +261,7 @@ export default Object.assign(quizzesTranslations, {
     'அனைத்து உள்ளடக்கமும் அதை இணைந்த வகுப்பறைகளுக்கு அணுக முடியாது',
   'common.depth-of-knowledge': 'அறிவு ஆழம்',
   'common.description': 'விளக்கம்',
+  'common.destination': 'Destination',
   'common.disappear-after-login':
     'இது {{loginnumber}} logins க்கு பின்னர் மறைந்துவிடும்',
   'common.disappear-next-login': 'இது அடுத்த உள்நுழைவில் தோன்றாது',
@@ -440,6 +450,7 @@ export default Object.assign(quizzesTranslations, {
   'common.from-my-questions': 'என் கேள்விகள்',
   'common.from-my-resources': 'என் வளங்களை இருந்து',
   'common.hide-results': 'முடிவுகளை மறை',
+  'common.hide-correct-answer': 'Hide Correct Answer',
   'common.hints': 'குறிப்புகள்',
   'common.home': 'வீட்டில்',
   'common.if_questions': 'உங்களுக்கு ஏதேனும் கேள்விகள் இருந்தால்,',
@@ -535,6 +546,9 @@ export default Object.assign(quizzesTranslations, {
   'common.on': 'மீது',
   'common.other': 'மற்ற',
   'common.overall-performance': 'ஒட்டுமொத்த செயல்திறன்',
+  'common.educational-use': 'Educational use',
+  'common.resource-types': 'Resource types',
+  'common.publishers': 'publishers',
   'common.password': 'கடவுச்சொல்',
   'common.pending': 'நிலுவையில்',
   'common.performance': 'செயல்திறன் காண்பி',
@@ -551,6 +565,7 @@ export default Object.assign(quizzesTranslations, {
   'common.published-tooltip': 'மோசமான உள்ளடக்கம்',
   'common.publisher': 'பதிப்பகத்தார்',
   'common.prev': 'முந்தைய',
+  'common.progress': 'Progress',
   'common.question': 'கேள்வி',
   'common.questions': 'கேள்விகள்',
   'common.questions-OE': 'இலவச விடையிறுப்பு கேள்விகள்',
@@ -642,7 +657,9 @@ export default Object.assign(quizzesTranslations, {
   'common.add-data': 'தரவு சேர்க்க',
   'common.update-data': 'தரவு புதுப்பிக்கவும்',
   'common.all': 'அனைத்து',
+  'common.please-wait': 'Please Wait',
   'common.unscheduled-items': 'திட்டமிடப்படாத பொருட்கள்',
+  'common.scheduled-items': 'Scheduled Items',
   'common.add-to-unschedule': 'திட்டமிடப்படாத பட்டியலில் சேர்க்க',
   'common.save-next': 'சேமித்து, அடுத்த',
   'common.save-submit': 'அனைத்தையும் சேமித்து சமர்ப்பிக்கவும்',
@@ -726,6 +743,7 @@ export default Object.assign(quizzesTranslations, {
   'common.upload-file': 'கோப்பு பதிவேற்ற',
   'common.upload-thumbnail': 'சிறுபடத்தை பதிவேற்றவும்',
   'common.upload-photo': 'புகைப்படத்தை பதிவேற்றவும்',
+  'common.until': 'Until',
   'common.remove-photo': 'புகைப்படத்தை அகற்று',
   'common.use-case': 'வழக்கு பயன்படுத்த',
   'common.valid-extensions':
@@ -1101,6 +1119,15 @@ export default Object.assign(quizzesTranslations, {
     'கடந்த கால நடவடிக்கைகள்',
   'student-landing.class.my-report': 'என் அறிக்கை',
   'student-landing.class.my-location': 'என் இடம்',
+  'student-landing.class.my-proficiency': 'My Proficiency',
+  'student-landing.class.establish-skyline': 'Let\'s Establish your Skyline',
+  'student-landing.class.waiting-establish-skyline':
+    'Waiting for your teacher to complete setting up the class.',
+  'student-landing.class.setup-in-complete-desc1':
+    'It looks like your teacher has not',
+  'student-landing.class.setup-in-complete-desc2': 'updated class settings',
+  'student-landing.class.setup-in-complete-desc3':
+    'Please get in touch with her to resolve the matter. Once everything is correctly set up, refresh this page.',
   'student-landing.course.to-report': 'பயன்பாடு சுருக்கம்',
   'student-landing.course.total-time-spent': 'மொத்த நேரம் கழிந்தது',
   'student-landing.current-activity': 'தற்போதைய செயல்பாடு',
@@ -1166,6 +1193,7 @@ export default Object.assign(quizzesTranslations, {
     'நீங்கள் நேவிகேட்டர் வகுப்பில் இணை ஆசிரியராக சேர்ந்துள்ளீர்கள்',
   'teacher-landing.navigator-banner.error-message':
     'வர்க்கத்தில் சேர்வதற்கான பிரச்சனை',
+  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.manage': 'நிர்வகிக்க',
   'teacher-landing.class.reports': 'அறிக்கைகள்',
   'teacher-landing.class.daily-activites': 'தினசரி செயற்பாடுகள்',
@@ -1173,6 +1201,9 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.back-to': 'மீண்டும் வகுப்பறைகளுக்கு',
   'teacher-landing.class.back-to-archived': 'மீண்டும் காப்பக வகுப்புகள்',
   'teacher-landing.class.class-management': 'வர்க்க மேலாண்மை',
+  'teacher-landing.class.atc': 'ATC',
+  'teacher-landing.class.performance-overview': 'Performance Overview',
+  'teacher-landing.class.student-proficiency': 'Student Proficiency',
   'teacher-landing.class.class-management-tab.actions': 'செயல்கள்',
   'teacher-landing.class.class-management-tab.assessment-min-score':
     'கோப்பைகளுக்கான மதிப்பீடு குறைந்தபட்ச ஸ்கோர்',
@@ -1237,6 +1268,17 @@ export default Object.assign(quizzesTranslations, {
     'வகுப்பில் அனைத்து மாணவர்களுக்கான திறன்களின் ஒட்டுமொத்த எண்ணிக்கை',
   'teacher-landing.class.students-tab.error-message':
     'வகுப்புக்கு ஒதுக்கப்பட்டுள்ள பாடநெறிக்கு இல்லை அல்லது இன்னும் வகுப்பினுள் நுழைந்த மாணவர்கள் இல்லை. வகுப்புக்கு வகுக்கப்பட்டு மாணவர்களின் படிப்பு முடிந்தவுடன், வர்க்க தகுதி அறிக்கை இங்கே காட்டப்படும்',
+  'teacher-landing.class.atc-view.domains-reviewed': 'Domains to be reviewed',
+  'teacher-landing.class.atc-view.class-activities-completed':
+    'Class Activities Completed',
+  'teacher-landing.class.atc-view.class-activities-pending':
+    'Class Activities Pending',
+  'teacher-landing.class.atc-view.show-all': 'Show All',
+  'teacher-landing.class.atc-view.collapse': 'Collapse',
+  'teacher-landing.class.atc-view.total-competencies-gained':
+    'Total Competencies Gained',
+  'teacher-landing.class.atc-view.progress-label':
+    'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'வர்க்க நடவடிக்கைகள்',
   'teacher-landing.class.offline-class-report.class-report': 'வர்க்க அறிக்கை',
   'teacher-landing.class.offline-class-report.activity-report':
@@ -1323,14 +1365,6 @@ export default Object.assign(quizzesTranslations, {
     'உங்கள் மாணவர்கள் படிக்க வேண்டும் என்று குறைந்த தரம் நிலை உள்ளடக்கம் என்ன?',
   'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
     'உங்கள் வர்க்கத்தின் தரம் என்ன?',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-1':
-    '(1) நீங்கள் வகுப்பு தோற்றம் மற்றும் இலக்கு அடிப்படையில் ஒவ்வொரு மாணவர் தனிப்பயனாக்கப்பட்ட கற்றல் பாதை உருவாக்க முடியும்.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-2':
-    '(2) முன்னிருப்பாக, அனைத்து மாணவர்களுக்கும் தரநிலையானது அவர்களின் இலக்காக இருக்கும். நீங்கள் வகுப்பில் முன்னேறும் மாணவர்களுக்கான உயர் வகுப்பிற்கு இலக்கைச் சரிசெய்யலாம். மாணவர் ஸ்கைலைன் மற்றும் அவற்றின் இலக்கு அடிப்படையில் தனிப்பயனாக்கப்பட்ட பாடநெறியை உருவாக்குவதற்கான கற்றல் பாதையை தனிப்பயனாக்கு என்பதைக் கிளிக் செய்க.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-3':
-    '(3) முழு வர்க்கத்திற்கும் பாதை தலைமுறை ஒருமுறை மட்டுமே செயல்பட முடியும். அதன்பிறகு, ஒவ்வொரு மாணவருக்கும் தனித்தனியாக எந்தவொரு புதுப்பிப்பையும் செய்ய வேண்டும்.',
-  'teacher-landing.class.class-settings.gen-baseline.baseline-4':
-    '(4) நீங்கள் தனிப்பட்ட மாணவர் இலக்கு தரத்தை சரிசெய்ய முடியும். <i id =  "ember1600 " class =  "ember-view gru-icon பொருள்-சின்னங்கள் மறுஅமைவு " பாணி =  "செங்குத்து-align: middle; "> இலக்கு, தனிப்பயனாக்கப்பட்ட பாதையை மறுசீரமைக்க.',
   'teacher-landing.class.class-settings.origin': 'தோற்றம்',
   'teacher-landing.class.class-settings.destination': 'இலக்கு',
   'teacher-landing.class.class-settings.students': 'மாணவர்கள்',
@@ -1415,12 +1449,20 @@ export default Object.assign(quizzesTranslations, {
     'கேள்விகளுக்கு பதிலளிக்க நீங்கள் முன்னோக்கி மற்றும் பின்னோக்கி செல்லவும் முடியும்',
   'gru-assessment-confirmation.unlimited-attempts-left':
     'உங்களுக்கு வரம்பற்ற முயற்சிகள் உள்ளன',
+  'gru-assessment-confirmation.setting-forward-teacher':
+    'Student can navigate forward only',
+  'gru-assessment-confirmation.setting-forward-backward-teacher':
+    'Student can navigate forward and backwards to answer questions',
+  'gru-assessment-confirmation.unlimited-attempts-left-teacher':
+    'Student have unlimited attempts',
   'gru-assessment-confirmation.attempts-left.zero':
     'நீங்கள் {{count}} முயற்சிகள்',
   'gru-assessment-confirmation.attempts-left.one':
     'உங்களுக்கு 1 முயற்சி உள்ளது',
   'gru-assessment-confirmation.attempts-left.other':
     'நீங்கள் {{count}} முயற்சிகள்',
+  'gru-assessment-confirmation.attempts-left.other-teacher':
+    'Student have {{count}} attempts',
   'gru-assessment-confirmation.unlimited-attempts':
     'உங்களுக்கு வரம்பற்ற முயற்சிகள் உள்ளன',
   'gru-assessment-confirmation.cancel': 'ரத்து',
@@ -1652,15 +1694,18 @@ export default Object.assign(quizzesTranslations, {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
+  'grade-selector.placeholder': 'Choose Grade Lines to Display',
   'standard-dropdown.placeholder': 'தரமான உலாவ',
   'subject-dropdown.placeholder': 'பாடம் (ங்கள்)',
   'subject-dropdown.prompt': 'ஒரு பொருளைத் தேர்ந்தெடுக்கவும்',
+  'search-filter.input-placeholder': 'Type {{type}} name here...',
   'search-filter.courses': 'படிப்புகள்',
   'search-filter.collections': 'வசூல்',
   'search-filter.resources': 'வளங்கள்',
   'search-filter.assessments': 'மதிப்பீடுகளை',
   'search-filter.questions': 'கேள்விகள்',
   'search-filter.rubrics': 'rubrics',
+  'search-filter.authors': 'Authors',
   'search-filter.question-types.MC': 'பல தேர்வு',
   'search-filter.question-types.FIB': 'கோடிட்ட இடங்களை நிரப்புக',
   'search-filter.question-types.T/F': 'சரி தவறு',
@@ -1728,15 +1773,17 @@ export default Object.assign(quizzesTranslations, {
   'gru-reorder.instructions':
     'சரியான வரிசையில் பதில்களை மறுவரிசைப்படுத்தவும்,  "{{action}} " என்பதைக் கிளிக் செய்யவும்.',
   'student-first-experience.preStudyTitle': '{{title}} க்கான முன் ஆய்வு',
+  'student-first-experience.lp-compute-inprogress':
+    'We are computing your initial proficiency profile in {{title}}',
   'student-first-experience.route0-action.accept': 'ஏற்க',
   'student-first-experience.route0-action.ignore': 'புறக்கணிக்க',
   'student-first-experience.competency.popover.title': '{{title}} எல்லை',
   'student-first-experience.competency.popover.content':
     'நீங்கள் உங்கள் இலக்கை அடைய உங்கள் ஸ்கைலைன் மற்றும் இந்த தர வரிசையில் உள்ள அனைத்து தரநிலைகளையும் படிக்க வேண்டும்.',
   'student-first-experience.assigned-course-title': '{{title}} க்கான ஒதுக்கீடு',
-  'student-first-experience.study-course': 'படிப்பு நிச்சயமாக',
-  'student-first-experience.show-my-destination': 'என் இலக்கு காட்டவும்',
-  'student-first-experience.show-me-my-route': 'என் வழியைக் காட்டு',
+  'student-first-experience.start-studying': 'Start Studying',
+  'student-first-experience.show-route': 'Show Route',
+  'student-first-experience.review-destination': 'Review Destination',
   'student-first-experience.competency-level.title':
     'உங்கள் நிபுணத்துவம் சுயவிவரத்தை',
   'student-first-experience.competency-level.mastery':
@@ -1759,6 +1806,12 @@ export default Object.assign(quizzesTranslations, {
     'நீங்கள் தற்போது உள்ளீர்கள்',
   'student-first-experience.competency-level-partial.desc2':
     'கணிதத்திற்கான உங்கள் வானூர்தி வரைபடத்திற்கு வரவேற்கிறோம். வானவில் (தடித்த வெள்ளை வரி) நீங்கள் ஒவ்வொரு களத்திலும் மாஸ்டர் என்று மிக உயர்ந்த தரத்தை காட்டுகிறது. ஒரு களம் நீங்கள் எண்ணிப்பார்க்கும் கணித பகுதியே, எண் அமைப்புகள் மற்றும் வெளிப்பாடுகள் மற்றும் சமன்பாடுகள் போன்றவை. ஒவ்வொரு நெடுவரிசையும் ஒரு கணித டொமைனைக் குறிக்கிறது. மற்றும் நெடுவரிசையில் உள்ள ஒவ்வொரு பெட்டியும் டொமைனில் ஒரு தரநிலையை பிரதிபலிக்கிறது. நீங்கள் கற்றல் மற்றும் மாஸ்டரிங் தரநிலைகளை தொடங்கினால், உங்கள் வானலை தொடர்ச்சியாக பம்ப் செய்யப்படும்.',
+  'student-first-experience.competency-level-partial.desc3':
+    'As you master each of the competencies, the corresponding box is updated to dark blue.',
+  'student-first-experience.competency-level-partial.desc4':
+    'The skyline is the thick white line that shows the highest competencies that you have mastered in each math domain.',
+  'student-first-experience.competency-level-partial.desc5':
+    'If the skyline is at the bottom of a domain, it means the system needs more information to be able to locate you in that topic. As soon as you start on the lessons and check for understandings, your skyline will bump up and update your proficiency in each domain.',
   'student-first-experience.units.other': '{{count}} அலகுகள்',
   'player.gru-navigation.view-report': 'அறிக்கை காண்க',
   'player.gru-navigator.see-usage-report': 'பயன்பாடு அறிக்கை காண்க',
@@ -1958,6 +2011,7 @@ export default Object.assign(quizzesTranslations, {
   'home.no-classes-found.teacher-toolkit.description':
     'இந்த கருவிக்கு நீங்கள் தொடங்குவதற்கு உதவுகிறது.',
   'home.no-classes-found.teacher-toolkit.button-text': 'ஆசிரியர் கருவி',
+  'taxonomy.grades': 'Grades',
   'taxonomy.gru-taxonomy-selector.add-secondary': 'இரண்டாம் நிலை சேர்',
   'taxonomy.gru-taxonomy-selector.choose-subject': 'பொருள் தேர்வு',
   'taxonomy.gru-taxonomy-selector.competency-subject-and-course':
@@ -2446,7 +2500,45 @@ export default Object.assign(quizzesTranslations, {
   'report.competency-report.show-global-data': 'உலக தரவைக் காண்பி',
   'report.competency-report.show-student-data': 'மாணவர் தரவு காண்பி',
   'report.competency-report.show-learning-map': 'கற்றல் வரைபடத்தை காண்பி',
+  'report.competency-report.note':
+    'Score 80% or more in our signature assessment and show your mastery',
   'report.domain-report': 'டொமைன் அறிக்கை',
+  'competency-info-content.portfolio': 'PORTFOLIO',
+  'competency-info-content.metadata': 'METADATA',
+  'competency-info-content.learning-map': 'LEARNING MAP',
+  'competency-meta-data.title': 'ALT-CONCEPTS',
+  'competency-meta-data.heading.micro': 'MICRO COMPETENCIES',
+  'competency-meta-data.heading.prequisite': 'PREQUISITE COMPETENCIES',
+  'competency-meta-data.nodata.micro':
+    'There are no micro-competencies defined for this competency',
+  'competency-meta-data.nodata.prequisite':
+    'There are no prerequisite-competencies defined for this competency',
+  'competency-meta-data.nodata.competency':
+    'There are no alt-concepts defined for this competency',
+  'student-journey.heading': 'YOUR JOURNEY',
+  'student-journey.teacher-heading': 'STUDENT JOURNEY',
+  'student-journey.nodata':
+    'You are yet to start your journey for this competency',
+  'student-journey.no-data-teacher':
+    'Student are yet to start journey for this competency',
+  'student-journey.student-status-3':
+    'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
+  'student-journey.student-status-2':
+    'You have not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+  'student-journey.teacher-status-2':
+    'The student has not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+  'student-journey.teacher-status-3':
+    'The student has asserted mastery in the competency and has not studied any learning activity on the Navigator for this competency.',
+  'learning-map.practice-question': 'practice questions',
+  'learning-map.no-practice-questions':
+    'There are no practice questions for this competency',
+  'learning-map.solved-examples': 'solved examples',
+  'learning-map.no-solved-examples':
+    'There are no solved examples for this competency',
+  'learning-map.challenging-questions': 'challenging questions',
+  'learning-map.no-challenging-questions':
+    'There are no challenging questions for this competency',
+  'student-card.message': 'This {{type}} has been deleted',
   'self-report.your-score': 'உங்கள் மதிப்பு',
   'self-report.time_spent': 'செலவிட்ட நேரம்',
   'self-report.update-error': 'ஸ்கோர் மேம்படுத்தும் பிரச்சனை',

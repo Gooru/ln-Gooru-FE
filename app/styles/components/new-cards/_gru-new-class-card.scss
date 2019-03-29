@@ -149,6 +149,7 @@
 
     .has-success + .info-form ~ .panel-footer {
       background: $blue-400;
+      cursor: pointer;
     }
 
     .has-success input {

@@ -46,6 +46,12 @@ export default Ember.Component.extend({
    */
   standardCode: Ember.computed.alias('competency.competencyCode'),
 
+
+  onCompetencyChange: Ember.observer('competency', function() {
+    let component = this;
+    component.loadData();
+  }),
+
   /**
    * @property {Object} signatureContent
    */
@@ -145,7 +151,9 @@ export default Ember.Component.extend({
       competencyCodes: component
         .get('taxonomyService')
         .fetchCodes(frameworkId, subjectId, courseId, domainId)
-    }).then(({ competencyCodes }) => {
+    }).then(({
+      competencyCodes
+    }) => {
       let microCompetencies = this.filterMicroCompetency(competencyCodes);
       component.set('microCompetencies', microCompetencies);
     });
@@ -168,7 +176,9 @@ export default Ember.Component.extend({
         competencyCode,
         filters
       )
-    }).then(({ learningMapData }) => {
+    }).then(({
+      learningMapData
+    }) => {
       component.set('learningMapData', learningMapData);
       component.checkPrerequisiteCompetencyStatus(
         learningMapData.prerequisites
@@ -178,9 +188,9 @@ export default Ember.Component.extend({
         component.get('showSignatureAssessment') &&
         signatureContentList.assessments.length > 0;
       component.set('showSignatureAssessment', showSignatureAssessment);
-      let signatureContent = showSignatureAssessment
-        ? signatureContentList.assessments
-        : signatureContentList.collections;
+      let signatureContent = showSignatureAssessment ?
+        signatureContentList.assessments :
+        signatureContentList.collections;
       let content = signatureContent.objectAt(0);
       component.set('isLoading', false);
       if (content) {
@@ -231,7 +241,9 @@ export default Ember.Component.extend({
     }
     return Ember.RSVP.hash({
       content: contentPromise
-    }).then(({ content }) => {
+    }).then(({
+      content
+    }) => {
       component.set('content', content);
     });
   },

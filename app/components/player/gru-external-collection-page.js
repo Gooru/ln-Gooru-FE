@@ -176,7 +176,7 @@ export default Ember.Component.extend({
    * @function roundMilliseconds
    * Method to round milliseconds
    */
-  roundMilliseconds(hour, mins) {
+  roundMilliseconds(hour = 0, mins = 0) {
     let timeSpentInMilliSec = (hour * 60 * 60 + mins * 60) * 1000;
     return timeSpentInMilliSec;
   },

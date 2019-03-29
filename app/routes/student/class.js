@@ -37,6 +37,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   unitService: Ember.inject.service('api-sdk/unit'),
 
   analyticsService: Ember.inject.service('api-sdk/analytics'),
+
   /**
    * @property {NavigateMapService}
    */
@@ -51,6 +52,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    * @type {SkylineInitialService} Service to retrieve skyline initial service
    */
   skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
+
+  /**
+   * @requires service:api-sdk/competency
+   */
+  competencyService: Ember.inject.service('api-sdk/competency'),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -232,10 +238,14 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             classCourseId
           )
         : null;
+      //  Disabling ca peformance score, Since  there is no ca drill down summary report for student. Enable it when needed.
+      //let caClassPerfSummaryPromise = route.get('performanceService').getCAPerformanceData([classId], myId);
+      let caClassPerfSummaryPromise = Ember.RSVP.resolve([]);
       return Ember.RSVP.hash({
         class: classPromise,
         members: membersPromise,
-        classPerformanceSummaryItems: performanceSummaryPromise
+        classPerformanceSummaryItems: performanceSummaryPromise,
+        performanceSummaryForDCA: caClassPerfSummaryPromise
       }).then(function(hash) {
         const aClass = hash.class;
         const members = hash.members;
@@ -244,6 +254,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           ? classPerformanceSummaryItems.findBy('classId', classId)
           : null;
         aClass.set('performanceSummary', classPerformanceSummary);
+        const performanceSummaryForDCA = hash.performanceSummaryForDCA
+          ? hash.performanceSummaryForDCA.objectAt(0)
+          : null;
+        aClass.set('performanceSummaryForDCA', performanceSummaryForDCA);
         const courseId = aClass.get('courseId');
         let visibilityPromise = Ember.RSVP.resolve([]);
         let coursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
@@ -262,6 +276,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
               .fetchState(classId);
           }
         }
+        const competencyCompletionStats = isPremiumCourse
+          ? route
+            .get('competencyService')
+            .getCompetencyCompletionStats([classId], myId)
+          : Ember.RSVP.resolve(Ember.A());
 
         //Pass courseId as query param for student current location
         let locationQueryParam = {
@@ -275,7 +294,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           contentVisibility: visibilityPromise,
           course: coursePromise,
           skylineInitialState: skylineInitialStatePromise,
-          currentLocation: userLocationPromise
+          currentLocation: userLocationPromise,
+          competencyStats: competencyCompletionStats
         }).then(function(hash) {
           const contentVisibility = hash.contentVisibility;
           const course = hash.course;
@@ -285,6 +305,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           aClass.set('collaborators', members.get('collaborators'));
           aClass.set('members', members.get('members'));
           aClass.set('currentLocation', currentLocation);
+          aClass.set(
+            'competencyStats',
+            hash.competencyStats.findBy('classId', classId)
+          );
           return Ember.RSVP.hash({
             class: aClass,
             course: course,
