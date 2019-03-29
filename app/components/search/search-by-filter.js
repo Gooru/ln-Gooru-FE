@@ -161,6 +161,11 @@ export default Ember.Component.extend({
 
   actions: {
 
+    hideHelp() {
+      let component = this;
+      component.set('hideHelpText', true);
+    },
+
     selectSubject(subject) {
       let component = this;
       component.set('selectedSubject', subject);

@@ -65,6 +65,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'प्रथम नाम',
   'common.filter-by': 'फ़िल्टर',
   'common.more': 'अधिक',
+  'common.search-help-message': 'Once you have selected the filters, click on search icon above to refine your search',
   'common.avg-score': 'औसत अंक',
   'common.frq': 'एफआर ',
   'common.schedule': 'कार्यक्रम',
