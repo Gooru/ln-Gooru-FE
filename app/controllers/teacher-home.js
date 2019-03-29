@@ -73,19 +73,21 @@ export default Ember.Controller.extend(ModalMixin, {
         ? lastAccessedClassData.courseId
         : null;
       if (courseId) {
-        Ember.RSVP.hash({
-          courseData: controller
-            .get('courseService')
-            .fetchByIdWithOutProfile(courseId)
-        }).then(({ courseData }) => {
-          lastAccessedClassData.course = courseData;
-          if (lastAccessedClassData) {
-            lastAccessedClassData = controller.updateLastAccessedClass(
-              lastAccessedClassData
-            );
-            controller.set('lastAccessedClassData', lastAccessedClassData);
-          }
-        });
+        Ember.RSVP
+          .hash({
+            courseData: controller
+              .get('courseService')
+              .fetchByIdWithOutProfile(courseId)
+          })
+          .then(({ courseData }) => {
+            lastAccessedClassData.course = courseData;
+            if (lastAccessedClassData) {
+              lastAccessedClassData = controller.updateLastAccessedClass(
+                lastAccessedClassData
+              );
+              controller.set('lastAccessedClassData', lastAccessedClassData);
+            }
+          });
       }
     }
     controller.set('lastAccessedClassData', lastAccessedClassData);
@@ -145,38 +147,40 @@ export default Ember.Controller.extend(ModalMixin, {
           .getCAPerformanceData(nonPremiumClassIds)
         : Ember.RSVP.resolve([]);
 
-    Ember.RSVP.hash({
-      courseCards: courseCardsPromise,
-      perfSummary: perfSummaryPromise,
-      caClassPerfSummary: caClassPerfSummaryPromise,
-      classes: classes,
-      competencyStats: competencyCompletionStats
-    }).then(function(hash) {
-      hash.classes.forEach(function(activeclass) {
-        let classId = activeclass.get('id');
-        let courseId = activeclass.get('courseId');
+    Ember.RSVP
+      .hash({
+        courseCards: courseCardsPromise,
+        perfSummary: perfSummaryPromise,
+        caClassPerfSummary: caClassPerfSummaryPromise,
+        classes: classes,
+        competencyStats: competencyCompletionStats
+      })
+      .then(function(hash) {
+        hash.classes.forEach(function(activeclass) {
+          let classId = activeclass.get('id');
+          let courseId = activeclass.get('courseId');
 
-        if (courseId) {
-          let course = hash.courseCards.findBy(
-            'id',
-            activeclass.get('courseId')
+          if (courseId) {
+            let course = hash.courseCards.findBy(
+              'id',
+              activeclass.get('courseId')
+            );
+            activeclass.set('course', course);
+          }
+          activeclass.set(
+            'performanceSummaryForDCA',
+            hash.caClassPerfSummary.findBy('classId', classId)
           );
-          activeclass.set('course', course);
-        }
-        activeclass.set(
-          'performanceSummaryForDCA',
-          hash.caClassPerfSummary.findBy('classId', classId)
-        );
-        activeclass.set(
-          'performanceSummary',
-          hash.perfSummary.findBy('classId', classId)
-        );
-        activeclass.set(
-          'competencyStats',
-          hash.competencyStats.findBy('classId', classId)
-        );
+          activeclass.set(
+            'performanceSummary',
+            hash.perfSummary.findBy('classId', classId)
+          );
+          activeclass.set(
+            'competencyStats',
+            hash.competencyStats.findBy('classId', classId)
+          );
+        });
       });
-    });
   },
 
   /**
@@ -271,7 +275,6 @@ export default Ember.Controller.extend(ModalMixin, {
   // Actions
 
   actions: {
-
     /**
      * Action triggered when close collection report pull up
      */
@@ -295,8 +298,8 @@ export default Ember.Controller.extend(ModalMixin, {
         courseId: classData.get('courseId'),
         classMembers: classData.get('members')
       };
-      controller.set('isShowArchiveClassReport', true);
       controller.set('classReportParams', classReportParams);
+      controller.set('isShowArchiveClassReport', true);
     },
 
     /**
@@ -391,20 +394,38 @@ export default Ember.Controller.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Events
 
+  init() {
+    const controller = this;
+    controller._super(...arguments);
+    //Functionality to integrate bootstrap tooltip
+    Ember.run.scheduleOnce('afterRender', controller, function() {
+      $('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    });
+  },
+
   // -------------------------------------------------------------------------
   // Properties
 
   /**
    * @property {Boolean} isShowSortOptions
    */
-  isShowSortOptions: Ember.computed('showActiveClasses', 'showArchivedClasses', function() {
-    const controller = this;
-    let isShowActiveClassess = controller.get('showActiveClasses');
-    let isShowArchiveClassess = controller.get('showArchivedClasses');
-    let activeClassesCount = controller.get('sortedActiveClasses.length');
-    let archivedClassesCount = controller.get('sortedArchivedClassrooms.length');
-    return (isShowActiveClassess && activeClassesCount) || (isShowArchiveClassess && archivedClassesCount);
-  }),
+  isShowSortOptions: Ember.computed(
+    'showActiveClasses',
+    'showArchivedClasses',
+    function() {
+      const controller = this;
+      let isShowActiveClassess = controller.get('showActiveClasses');
+      let isShowArchiveClassess = controller.get('showArchivedClasses');
+      let activeClassesCount = controller.get('sortedActiveClasses.length');
+      let archivedClassesCount = controller.get(
+        'sortedArchivedClassrooms.length'
+      );
+      return (
+        (isShowActiveClassess && activeClassesCount) ||
+        (isShowArchiveClassess && archivedClassesCount)
+      );
+    }
+  ),
 
   /**
    * Indicates when then active classes are visible
@@ -465,10 +486,7 @@ export default Ember.Controller.extend(ModalMixin, {
   /**
    * @property {[Class]} sortedActiveClasses
    */
-  sortedActiveClasses: Ember.computed.sort(
-    'activeClasses',
-    'sortDefinition'
-  ),
+  sortedActiveClasses: Ember.computed.sort('activeClasses', 'sortDefinition'),
 
   /**
    * sort Definition
