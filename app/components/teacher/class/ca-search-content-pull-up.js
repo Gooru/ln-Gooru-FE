@@ -9,8 +9,9 @@ import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import {
   isCompatibleVW
 } from 'gooru-web/utils/utils';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -78,6 +79,8 @@ export default Ember.Component.extend({
    * @type {Object}
    */
   context: null,
+
+  showFilter: Ember.computed.alias('configuration.GRU_FEATURE_FLAG.searchFilter'),
 
   /**
    * Class Id extract from context
@@ -571,7 +574,9 @@ export default Ember.Component.extend({
 
     component.$(document).click(function(event) {
       if (event.target.className !== 'more-pointer') {
-        component.$('.more-pointer').popover('hide');
+        if (component.$('.more-pointer')) {
+          component.$('.more-pointer').popover('hide');
+        }
       }
     });
   },

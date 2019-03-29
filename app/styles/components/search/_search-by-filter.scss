@@ -25,8 +25,21 @@
 
   .search-panel {
     display: grid;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: max-content 1fr auto;
     height: 100%;
+
+    .info-text {
+      padding: 0 10px;
+      color: #37424b;
+      font-size: 16px;
+      background-color: #ccc;
+
+      .close {
+        i {
+          font-size: 16px;
+        }
+      }
+    }
 
     .search-content {
       padding: 10px;
