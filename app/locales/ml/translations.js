@@ -66,7 +66,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'പേരിന്റെ ആദ്യഭാഗം',
   'common.filter-by': 'ഫിൽട്ടർ ചെയ്യുക',
   'common.more': 'കൂടുതൽ',
-  'common.search-help-message': 'Once you have selected the filters, click on search icon above to refine your search',
+  'common.search-help-message':
+    'Once you have selected the filters, click on search icon above to refine your search',
   'common.avg-score': 'ശരാശരി സ്കോർ',
   'common.frq': 'frq',
   'common.schedule': 'പട്ടിക',
@@ -1189,7 +1190,8 @@ export default Object.assign(quizzesTranslations, {
     'നാവിഗേറ്റർ ക്ലാസിലെ കോ-ടീച്ചറായി നിങ്ങൾ ചേർന്നു',
   'teacher-landing.navigator-banner.error-message':
     'ക്ലാസിൽ ചേരുന്നതിൽ പ്രശ്നം',
-  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.class.manage': 'മാനേജ് ചെയ്യുക',
   'teacher-landing.class.reports': 'റിപ്പോർട്ടുകൾ',
   'teacher-landing.class.daily-activites': 'ദൈനംദിന പ്രവർത്തനങ്ങൾ',
@@ -2564,5 +2566,6 @@ export default Object.assign(quizzesTranslations, {
   'present.diagnostic.determine.not.know':
     'Present a diagnostic to determine the student\'s current location, if not known?',
   'present.diagnostic.determine.know':
-    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
+  'add.to.todays.class': 'Add to Today\'s Class'
 });
