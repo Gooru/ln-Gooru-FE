@@ -69,11 +69,15 @@ export default Ember.Object.extend({
             let externalAssessmentCount = lessonData.external_assessment_count
               ? lessonData.external_assessment_count
               : 0;
+            let collectionCount = lessonData.collection_count
+              ? lessonData.collection_count
+              : 0;
+            let externalCollectionCount = lessonData.external_collection_count
+              ? lessonData.external_collection_count
+              : 0;
             return Lesson.create(Ember.getOwner(serializer).ownerInjection(), {
               assessmentCount: assessmentCount + externalAssessmentCount,
-              collectionCount: lessonData.collection_count
-                ? lessonData.collection_count
-                : 0,
+              collectionCount: collectionCount + externalCollectionCount,
               id: lessonData.lesson_id,
               sequence: lessonData.sequence_id,
               title: lessonData.title
@@ -120,7 +124,10 @@ export default Ember.Object.extend({
    */
   serializeReorderUnit: function(lessonIds) {
     const values = lessonIds.map(function(id, index) {
-      return { id: id, sequence_id: index + 1 };
+      return {
+        id: id,
+        sequence_id: index + 1
+      };
     });
 
     return {
