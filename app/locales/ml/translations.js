@@ -66,8 +66,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'പേരിന്റെ ആദ്യഭാഗം',
   'common.filter-by': 'ഫിൽട്ടർ ചെയ്യുക',
   'common.more': 'കൂടുതൽ',
-  'common.search-help-message':
-    'Once you have selected the filters, click on search icon above to refine your search',
+  'common.search-help-message': 'Click the search icon above to apply your filter',
   'common.avg-score': 'ശരാശരി സ്കോർ',
   'common.frq': 'frq',
   'common.schedule': 'പട്ടിക',

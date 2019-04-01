@@ -70,8 +70,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'ପ୍ରଥମ ନାମ',
   'common.filter-by': 'ଦ୍ୱାରା ଫିଲ୍ଟର ହୋଇଛି',
   'common.more': 'ଅଧିକ',
-  'common.search-help-message':
-    'Once you have selected the filters, click on search icon above to refine your search',
+  'common.search-help-message': 'Click the search icon above to apply your filter',
   'common.avg-score': 'ହାରାହାରି ସ୍କୋର୍',
   'common.frq': 'FRQ',
   'common.schedule': 'ସୂଚୀ',
