@@ -161,11 +161,6 @@ export default Ember.Component.extend({
 
   actions: {
 
-    hideHelp() {
-      let component = this;
-      component.set('hideHelpText', true);
-    },
-
     selectSubject(subject) {
       let component = this;
       component.set('selectedSubject.courses', Ember.A([]));
@@ -198,7 +193,7 @@ export default Ember.Component.extend({
       let filterItems = component.get('selectedFilters');
       filterItems.removeObjects(filterItems.filterBy('filter', 'flt.publisherName')); //remove previous object
       if (term !== '') {
-        filterItems.push(Ember.Object.create({
+        component.get('selectedFilters').pushObject(Ember.Object.create({
           'filter': 'flt.publisherName',
           'name': term
         }));

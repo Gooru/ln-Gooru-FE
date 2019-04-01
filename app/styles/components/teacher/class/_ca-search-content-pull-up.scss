@@ -247,13 +247,14 @@
 
       .search-by-filter {
         z-index: 99;
+
         .search-panel {
           .search-filter {
             display: none;
           }
 
           .search-content {
-            height: 75vh;
+            height: 65vh;
           }
         }
       }
