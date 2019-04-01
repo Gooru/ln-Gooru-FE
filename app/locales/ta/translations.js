@@ -67,7 +67,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'FIRSTNAME',
   'common.filter-by': 'மூலம் வடிகட்டி',
   'common.more': 'மேலும்',
-  'common.search-help-message': 'Once you have selected the filters, click on search icon above to refine your search',
+  'common.search-help-message': 'Click the search icon above to apply your filter',
   'common.avg-score': 'சராசரி ஸ்கோர்',
   'common.frq': 'frq',
   'common.schedule': 'அட்டவணை',
