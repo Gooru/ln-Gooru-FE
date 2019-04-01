@@ -146,35 +146,70 @@
 {{/if}}
 {{#if showDcaCollectionReportPullUp}}
   {{#if (not-eq dcaCollectionReportData.collection.format 'collection-external')}}
-    {{reports.pull-up.dca-collection-report context=dcaCollectionReportData showPullUp=showDcaCollectionReportPullUp}}
+    {{reports.pull-up.dca-collection-report
+      context=dcaCollectionReportData
+      showPullUp=showDcaCollectionReportPullUp}}
   {{else}}
-    {{reports.pull-up.dca-external-collection-report context=dcaCollectionReportData showPullUp=showDcaCollectionReportPullUp}}
+    {{reports.pull-up.dca-external-collection-report
+      context=dcaCollectionReportData
+      showPullUp=showDcaCollectionReportPullUp}}
   {{/if}}
 {{/if}}
 {{#if isShowAssessmentPerformanceEntryPullUp}}
   {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowAssessmentPerformanceEntryPullUp title=selectedItem.title type='assessment' onClosePerformanceEntry='onClosePerformanceEntry' }}
-    {{reports.pull-up.assessment-performance-entry assessment=selectedItem course=course students=activityMembers activityData=selectedActivity classId=classId onClosePerformanceEntry="onClosePerformanceEntry" isRepeatEntry=isRepeatEntry}}
+    {{reports.pull-up.assessment-performance-entry
+      assessment=selectedItem
+      course=course
+      students=activityMembers
+      activityData=selectedActivity
+      classId=classId
+      onClosePerformanceEntry="onClosePerformanceEntry"
+      isRepeatEntry=isRepeatEntry}}
   {{/reports.pull-up.performance-manual-entry}}
 {{/if}}
 {{#if isShowCollectionPerformanceEntryPullUp}}
   {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowCollectionPerformanceEntryPullUp title=selectedItem.title type='collection' onClosePerformanceEntry='onClosePerformanceEntry' }}
-    {{reports.pull-up.collection-performance-entry course=course collection=selectedItem students=activityMembers activityData=selectedActivity classId=classId onClosePerformanceEntry="onClosePerformanceEntry"}}
+    {{reports.pull-up.collection-performance-entry
+      course=course
+      collection=selectedItem
+      students=activityMembers
+      activityData=selectedActivity
+      classId=classId
+      onClosePerformanceEntry="onClosePerformanceEntry"}}
   {{/reports.pull-up.performance-manual-entry}}
 {{/if}}
 {{#if isShowExternalAssessmentPeformanceEntryPullUp}}
   {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowExternalAssessmentPeformanceEntryPullUp title=selectedItem.title type="assessment-external" onClosePerformanceEntry='onClosePerformanceEntry' }}
-    {{reports.pull-up.external-assessment-performance-entry course=course assessment=selectedItem students=activityMembers activityData=selectedActivity classId=classId onClosePerformanceEntry="onClosePerformanceEntry"}}
+    {{reports.pull-up.external-assessment-performance-entry
+      course=course
+      assessment=selectedItem
+      students=activityMembers
+      activityData=selectedActivity
+      classId=classId
+      onClosePerformanceEntry="onClosePerformanceEntry"}}
   {{/reports.pull-up.performance-manual-entry}}
 {{/if}}
 {{#if isShowExternalCollectionPeformanceEntryPullUp}}
   {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowExternalCollectionPeformanceEntryPullUp title=selectedItem.title type="collection-external" onClosePerformanceEntry='onClosePerformanceEntry' }}
-    {{reports.pull-up.external-collection-performance-entry course=course collection=selectedItem students=activityMembers activityData=selectedActivity classId=classId onClosePerformanceEntry="onClosePerformanceEntry"}}
+    {{reports.pull-up.external-collection-performance-entry
+      course=course
+      collection=selectedItem
+      students=activityMembers
+      activityData=selectedActivity
+      classId=classId
+      onClosePerformanceEntry="onClosePerformanceEntry"}}
   {{/reports.pull-up.performance-manual-entry}}
 {{/if}}
 {{#if isShowOCASummaryReportPullUp}}
-  {{teacher.offline-class.oca-summary-report-pull-up classId=class.id performanceSummary=performanceSummaryForDCA onClosePullUp="onClosePullUp"}}
+  {{teacher.offline-class.oca-summary-report-pull-up
+    classId=class.id
+    performanceSummary=performanceSummaryForDCA
+    onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowContentPreview}}
-  {{reports.pull-up.gru-collection-preview showPullUp=isShowContentPreview previewContentId=previewContent.id previewContentType=previewContentType}}
+  {{reports.pull-up.gru-collection-preview
+    showPullUp=isShowContentPreview
+    previewContentId=previewContent.id
+    previewContentType=previewContentType}}
 {{/if}}

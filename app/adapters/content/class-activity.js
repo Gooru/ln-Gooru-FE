@@ -61,20 +61,26 @@ export default Ember.Object.extend({
   enableClassActivity: function(
     classId,
     classActivityId,
-    activationDate = new Date()
+    activationDate = new Date(),
+    enable = true
   ) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/${classId}/contents/${classActivityId}`;
+    const data = {};
+    const date = formatDate(activationDate, 'YYYY-MM-DD');
+    if (enable) {
+      data.activation_date = date;
+    } else {
+      data.dca_added_date = date;
+    }
     const options = {
       type: 'PUT',
       contentType: 'application/json; charset=utf-8',
       dataType: 'text',
       processData: false,
       headers: adapter.defineHeaders(),
-      data: JSON.stringify({
-        activation_date: formatDate(activationDate, 'YYYY-MM-DD')
-      })
+      data: JSON.stringify(data)
     };
     return Ember.$.ajax(url, options);
   },
