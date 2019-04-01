@@ -81,13 +81,14 @@ export default Ember.Service.extend({
   enableClassActivity: function(
     classId,
     classActivityId,
-    activationDate = new Date()
+    activationDate = new Date(),
+    enable = true
   ) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('classActivityAdapter')
-        .enableClassActivity(classId, classActivityId, activationDate)
+        .enableClassActivity(classId, classActivityId, activationDate, enable)
         .then(function() {
           resolve(true);
         }, reject);
