@@ -160,7 +160,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      *
      * @function actions:changeVisibility
      */
-    changeVisibility: function(classActivity, scheduleDate) {
+    changeVisibility: function(classActivity, scheduleDate, enable = true) {
       const controller = this;
       const currentClass = controller.get('classController.class');
       const classId = currentClass.get('id');
@@ -187,13 +187,15 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       }
       controller
         .get('classActivityService')
-        .enableClassActivity(classId, classActivityId, date)
+        .enableClassActivity(classId, classActivityId, date, enable)
         .then(function() {
           if (!controller.isDestroyed) {
             classActivity.set('date', date);
             classActivity.set('added_date', date);
-            classActivity.set('activation_date', date);
-            classActivity.set('isActive', true);
+            if (enable) {
+              classActivity.set('activation_date', date);
+              classActivity.set('isActive', true);
+            }
             if (scheduleDate) {
               let id = classActivity.get('id');
               if (!dateWiseClassActivities) {
@@ -293,7 +295,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         forYear === scheduleYear &&
         !activationDate
       ) {
-        this.send('changeVisibility', classActivity, scheduleDate);
+        const isToday = moment().format('YYYY-MM-DD') === scheduleDate;
+        this.send('changeVisibility', classActivity, scheduleDate, isToday);
       } else {
         controller
           .get('classActivityService')
