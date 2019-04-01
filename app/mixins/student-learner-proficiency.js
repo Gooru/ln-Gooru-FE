@@ -30,11 +30,6 @@ export default Ember.Mixin.create({
   competencyService: Ember.inject.service('api-sdk/competency'),
 
   /**
-   * Teacher class controller
-   */
-  classController: Ember.inject.controller('teacher/class'),
-
-  /**
    * @property {Object}
    * Property to store active subject which is selected
    */
