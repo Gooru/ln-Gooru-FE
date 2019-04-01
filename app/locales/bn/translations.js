@@ -1153,7 +1153,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.navigator-banner.success-message':
     'আপনি সফলভাবে ন্যাভিগেটর ক্লাসের সহ-শিক্ষক হিসাবে যোগদান করেছেন',
   'teacher-landing.navigator-banner.error-message': 'ক্লাস যোগদান সঙ্গে সমস্যা',
-  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.class.manage': 'পরিচালনা করা',
   'teacher-landing.class.reports': 'রিপোর্ট',
   'teacher-landing.class.daily-activites': 'প্রতিদিন সক্রিয়',
@@ -2481,5 +2482,6 @@ export default Object.assign(quizzesTranslations, {
   'present.diagnostic.determine.not.know':
     'Present a diagnostic to determine the student\'s current location, if not known?',
   'present.diagnostic.determine.know':
-    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
+  'add.to.todays.class': 'Add to Today\'s Class'
 });

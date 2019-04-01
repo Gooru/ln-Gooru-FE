@@ -444,6 +444,18 @@ export default Ember.Component.extend(AccordionMixin, ModalMixin, {
 
   showLessonReportPullUp: false,
 
+  /**
+   * Property is used to identify lesson have content to play or not.
+   * @return {Boolean}
+   */
+  hasContentToPlay: Ember.computed('model', function() {
+    let component = this;
+    let lesson = component.get('model');
+    let hasContentPlay =
+      lesson.get('assessmentCount') > 0 || lesson.get('collectionCount') > 0;
+    return hasContentPlay;
+  }),
+
   // -------------------------------------------------------------------------
   // Observers
 

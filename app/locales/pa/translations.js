@@ -1172,7 +1172,8 @@ export default Object.assign(quizzesTranslations, {
     'ਤੁਸੀਂ ਨੇਵੀਗੇਟਰ ਕਲਾਸ ਦੇ ਸਹਿ-ਅਧਿਆਪਕ ਵਜੋਂ ਸਫਲਤਾਪੂਰਵਕ ਸ਼ਾਮਲ ਹੋ ਗਏ ਹੋ',
   'teacher-landing.navigator-banner.error-message':
     'ਕਲਾਸ ਵਿਚ ਸ਼ਾਮਲ ਹੋਣ ਵਿਚ ਸਮੱਸਿਆ',
-  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.class.manage': 'ਪ੍ਰਬੰਧ ਕਰਨਾ, ਕਾਬੂ ਕਰਨਾ',
   'teacher-landing.class.reports': 'ਰਿਪੋਰਟ',
   'teacher-landing.class.daily-activites': 'ਰੋਜ਼ਾਨਾ ਕਿਰਿਆਸ਼ੀਲ',
@@ -2496,5 +2497,6 @@ export default Object.assign(quizzesTranslations, {
   'present.diagnostic.determine.not.know':
     'Present a diagnostic to determine the student\'s current location, if not known?',
   'present.diagnostic.determine.know':
-    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
+  'add.to.todays.class': 'Add to Today\'s Class'
 });

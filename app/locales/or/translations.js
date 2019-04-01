@@ -1183,7 +1183,8 @@ export default Object.assign(quizzesTranslations, {
   'student-independent-learning.no-bookmarks':
     'ଯେତେବେଳେ ଆପଣ ପାଠ୍ୟକ୍ରମ, ସଂଗ୍ରହ ଓ  ମୂଲ୍ୟାଙ୍କନ ଗୁଡ଼ିକୁ ବୁକମାର୍କ କରିବା ଆରମ୍ଭ କରୁଛନ୍ତି, ତାହା ଏଠାରେ ଦେଖାଯିବ ।',
   'student-independent-learning.add-bookmark': 'ବୁକମାର୍କ ଯୋଗ କରନ୍ତୁ',
-  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.latest-announcement': 'ସଦ୍ୟତମ ଘୋଷଣା',
   'teacher-landing.latest-assessment': 'ସଦ୍ୟତମ ମୂଲ୍ୟାଙ୍କନ',
   'teacher-landing.create-classroom':
@@ -2565,5 +2566,6 @@ export default Object.assign(quizzesTranslations, {
   'present.diagnostic.determine.not.know':
     'Present a diagnostic to determine the student\'s current location, if not known?',
   'present.diagnostic.determine.know':
-    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
+  'add.to.todays.class': 'Add to Today\'s Class'
 });
