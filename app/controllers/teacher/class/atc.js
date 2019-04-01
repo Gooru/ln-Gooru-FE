@@ -173,7 +173,7 @@ export default Ember.Controller.extend({
       const controller = this;
       controller.set(
         'competencyCompletionReport',
-        domainData.get('competenciesData')
+        domainData.get('competenciesData').sortBy('completionPercentage')
       );
       controller.set('selectedDomain', domainData);
       controller.set('isShowCompetencyCompletionReport', true);
@@ -274,11 +274,12 @@ export default Ember.Controller.extend({
     const classId = controller.get('classId');
     let month = controller.get('activeMonth');
     let year = controller.get('activeYear');
-    return Ember.RSVP.hash({
-      activitiesCount: Ember.RSVP.resolve(
-        classActivitiesService.getMonthlyActivitiesCount(classId, month, year)
-      )
-    })
+    return Ember.RSVP
+      .hash({
+        activitiesCount: Ember.RSVP.resolve(
+          classActivitiesService.getMonthlyActivitiesCount(classId, month, year)
+        )
+      })
       .then(({ activitiesCount }) => {
         controller.set('activitiesCount', activitiesCount);
         return activitiesCount;
@@ -309,13 +310,15 @@ export default Ember.Controller.extend({
       year,
       agent
     };
-    return Ember.RSVP.hash({
-      domainsCompletionReport: Ember.RSVP.resolve(
-        competencyService.getDomainsCompletionReport(requestBody)
-      )
-    }).then(({ domainsCompletionReport }) => {
-      return domainsCompletionReport;
-    });
+    return Ember.RSVP
+      .hash({
+        domainsCompletionReport: Ember.RSVP.resolve(
+          competencyService.getDomainsCompletionReport(requestBody)
+        )
+      })
+      .then(({ domainsCompletionReport }) => {
+        return domainsCompletionReport;
+      });
   },
 
   /**
