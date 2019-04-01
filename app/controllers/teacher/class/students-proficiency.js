@@ -95,12 +95,14 @@ export default Ember.Controller.extend({
    */
   loadStudentsProficiencyData() {
     let controller = this;
-    return Ember.RSVP.hash({
-      domainLevelSummary: controller.fetchDomainLevelSummary()
-    }).then(({ domainLevelSummary }) => {
-      controller.set('domainLevelSummary', domainLevelSummary);
-      controller.parseStudentsDomainProficiencyData();
-    });
+    return Ember.RSVP
+      .hash({
+        domainLevelSummary: controller.fetchDomainLevelSummary()
+      })
+      .then(({ domainLevelSummary }) => {
+        controller.set('domainLevelSummary', domainLevelSummary);
+        controller.parseStudentsDomainProficiencyData();
+      });
   },
 
   /**
@@ -117,9 +119,10 @@ export default Ember.Controller.extend({
     let domainLevelSummaryPromise = Ember.RSVP.resolve(
       competencyService.getDomainLevelSummary(filters)
     );
-    return Ember.RSVP.hash({
-      domainLevelSummary: domainLevelSummaryPromise
-    })
+    return Ember.RSVP
+      .hash({
+        domainLevelSummary: domainLevelSummaryPromise
+      })
       .then(({ domainLevelSummary }) => {
         controller.set('isDataNotAvailable', false);
         return domainLevelSummary;
@@ -134,10 +137,10 @@ export default Ember.Controller.extend({
    * Method to parse students domain proficiency data
    */
   parseStudentsDomainProficiencyData() {
-    let component = this;
+    let controller = this;
     let studentsDomainPerformance = Ember.A([]);
-    let domainLevelSummary = component.get('domainLevelSummary');
-    let classMembers = component.get('classMembers');
+    let domainLevelSummary = controller.get('domainLevelSummary');
+    let classMembers = controller.get('classMembers');
     let totalCompetencies = 0;
     let maxNumberOfCompetencies = 0;
     if (domainLevelSummary) {
@@ -148,7 +151,7 @@ export default Ember.Controller.extend({
       let masteredCourseCompetencyCoverage = 0;
       let studentsDomainCompetencyCoverage = Ember.A([]);
       classMembers.map(member => {
-        let studentDomainPerformance = component.generateStudentData(member);
+        let studentDomainPerformance = controller.generateStudentData(member);
         let studentCompetencyMatrix = studentsCompetencyMatrix.findBy(
           'id',
           member.id
@@ -269,18 +272,24 @@ export default Ember.Controller.extend({
         );
         studentsDomainPerformance.push(studentDomainPerformance);
       });
-      component.set('domainCoverageCount', studentsDomainCompetencyCoverage);
+      controller.set('domainCoverageCount', studentsDomainCompetencyCoverage);
       let courseCoverageCount = Ember.Object.create({
         'not-started': notStartedCourseCompetencyCoverage,
         'in-progress': inProgressCourseCompetencyCoverage,
         mastered: masteredCourseCompetencyCoverage
       });
-      component.set('courseCoverageCount', courseCoverageCount);
+      controller.set('courseCoverageCount', courseCoverageCount);
     }
-    component.set('maxNumberOfCompetencies', maxNumberOfCompetencies);
-    component.set('studentsDomainPerformance', studentsDomainPerformance);
-    component.set('totalCompetencies', totalCompetencies / classMembers.length);
-    component.set('isLoading', false);
+    controller.set('maxNumberOfCompetencies', maxNumberOfCompetencies);
+    controller.set(
+      'studentsDomainPerformance',
+      studentsDomainPerformance.sortBy('lastName')
+    );
+    controller.set(
+      'totalCompetencies',
+      totalCompetencies / classMembers.length
+    );
+    controller.set('isLoading', false);
     return studentsDomainPerformance;
   },
 
@@ -442,8 +451,8 @@ export default Ember.Controller.extend({
    * @property {String} subjectFramework
    */
   subjectFramework: Ember.computed('subjectBucket', function() {
-    let component = this;
-    let subjectBucket = component.get('subjectBucket');
+    let controller = this;
+    let subjectBucket = controller.get('subjectBucket');
     return subjectBucket ? subjectBucket.replace(/\./g, ' | ') : '';
   })
 });

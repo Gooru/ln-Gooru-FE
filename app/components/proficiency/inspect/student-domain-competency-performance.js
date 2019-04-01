@@ -179,7 +179,9 @@ export default Ember.Component.extend({
           );
           parsedStudentCompetenctData.push(parsedData);
         });
-        studentLevelDomainCompetencyData.studentCompetencies = parsedStudentCompetenctData;
+        studentLevelDomainCompetencyData.studentCompetencies = parsedStudentCompetenctData.sortBy(
+          'lastName'
+        );
         domainLevelStudentSummaryData.push(studentLevelDomainCompetencyData);
       });
     }
@@ -233,12 +235,14 @@ export default Ember.Component.extend({
       length: 5,
       isCrosswalk: false
     };
-    return Ember.RSVP.hash({
-      learningMapData: Ember.RSVP.resolve(
-        searchService.fetchLearningMapsContent(competencyCode, filters)
-      )
-    }).then(({ learningMapData }) => {
-      controller.set('learningMapData', learningMapData);
-    });
+    return Ember.RSVP
+      .hash({
+        learningMapData: Ember.RSVP.resolve(
+          searchService.fetchLearningMapsContent(competencyCode, filters)
+        )
+      })
+      .then(({ learningMapData }) => {
+        controller.set('learningMapData', learningMapData);
+      });
   }
 });
