@@ -66,6 +66,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'প্ৰথম নাম',
   'common.filter-by': 'ইয়াৰ দ্বাৰা ফিল্টাৰ কৰা হৈছে',
   'common.more': 'আৰু ',
+  'common.search-help-message':
+    'Click the search icon above to apply your filter',
   'common.avg-score': 'মাধ্য স্কোৰ',
   'common.frq': 'FRQ',
   'common.schedule': 'কাৰ্যক্ৰম',
@@ -729,6 +731,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'বুকমাৰ্ক আঁতৰাওক',
   'common.unexpectedError':
     'এটা অবাঞ্চিত বিজুটি ঘটিল আৰু তাৰ বিষয়ে ৰিপ\'ৰ্ট কৰা গৈছে। অসুবিধাৰ বাবে আমি ক্ষমাপ্ৰাৰ্থী!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'আনফলো কৰক',
   'common.unit': 'একক',
   'common.unit-title': 'একক শীৰ্ষক',
@@ -1194,7 +1198,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.navigator-banner.success-message':
     'আপুনি সফলতাপূৰ্বক নেভিগেতৰ শ্ৰেণীৰ সহ-শিক্ষক হিচাপে যোগদান কৰিছে',
   'teacher-landing.navigator-banner.error-message': 'শ্ৰেণী যোগদান কৰাত সমস্যা',
-  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.class.manage': 'প্ৰবন্ধন কৰক',
   'teacher-landing.class.reports': 'প্ৰতিবেদনবোৰ',
   'teacher-landing.class.daily-activites': 'দৈনন্দিন কাৰ্যকলাপ সমূহ',

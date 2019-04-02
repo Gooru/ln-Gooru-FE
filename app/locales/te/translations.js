@@ -63,6 +63,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'మొదటి పేరు',
   'common.filter-by': 'ద్వారా వడపోత',
   'common.more': 'మరింత',
+  'common.search-help-message':
+    'Click the search icon above to apply your filter',
   'common.avg-score': 'సగటు స్కోర్',
   'common.frq': 'frq',
   'common.schedule': 'షెడ్యూల్',
@@ -707,6 +709,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'unbookmark',
   'common.unexpectedError':
     'ఊహించని లోపం సంభవించింది మరియు నివేదించబడింది. మేము అసౌకర్యానికి క్షమించండి!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'అనుసరించవద్దు',
   'common.unit': 'యూనిట్',
   'common.unit-title': 'యూనిట్ శీర్షిక',
