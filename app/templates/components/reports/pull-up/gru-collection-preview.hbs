@@ -61,7 +61,7 @@
       {{/if}}
     </div>
   </div>
-  {{#if isQuestionAvailable}}
+  {{#if isEnableToggleAnswer}}
     <div class="footer-container" {{action "onToggleAnswer"}}>
       {{t (if isShowCorrectAnswer 'common.hide-correct-answer'  'common.show-correct-answer')}}
     </div>
