@@ -195,6 +195,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
             if (enable) {
               classActivity.set('activation_date', date);
               classActivity.set('isActive', true);
+            } else {
+              classActivity.set('activation_date', null);
+              classActivity.set('isActive', false);
             }
             if (scheduleDate) {
               let id = classActivity.get('id');
