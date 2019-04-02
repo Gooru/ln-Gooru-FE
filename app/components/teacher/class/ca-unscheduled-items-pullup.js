@@ -48,8 +48,19 @@ export default Ember.Component.extend({
       let scheduleYear = parseInt(moment(scheduleDate).format('YYYY'));
       let forMonth = classActivity.get('forMonth');
       let forYear = classActivity.get('forYear');
-      if (forMonth === scheduleMonth && forYear === scheduleYear) {
-        this.sendAction('onChangeVisibility', classActivity, scheduleDate);
+      let activationDate = classActivity.get('activation_date');
+      if (
+        !activationDate &&
+        forMonth === scheduleMonth &&
+        forYear === scheduleYear
+      ) {
+        const isToday = moment().format('YYYY-MM-DD') === scheduleDate;
+        this.sendAction(
+          'onChangeVisibility',
+          classActivity,
+          scheduleDate,
+          isToday
+        );
       } else {
         let classId = component.get('classId');
         let content = classActivity.get('collection');
