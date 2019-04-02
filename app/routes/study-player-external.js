@@ -51,9 +51,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
 
   beforeModel(transition) {
     this._super(...arguments);
-    const queryParams = transition.queryParams;
-    if (queryParams && queryParams.classId) {
-      return this.doCheckClassDestination(queryParams.classId);
+    if (!this.get('session.isAnonymous')) {
+      const queryParams = transition.queryParams;
+      if (queryParams && queryParams.classId) {
+        return this.doCheckClassDestination(queryParams.classId);
+      }
     }
   },
 
