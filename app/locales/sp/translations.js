@@ -1356,7 +1356,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head':
     'Course Settings',
   'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable':
-    'Personalize Learning Path should cover gaps at profile?',
+    'Personalized Learning Path should cover gaps at profile?',
   'teacher-landing.class.class-settings.course-settings-sec.apply-settings':
     'Apply Settings',
   'teacher-landing.class.class-settings.course-settings-sec.origin-info':
