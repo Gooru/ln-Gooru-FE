@@ -67,7 +67,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
   'common.more': 'more',
-  'common.search-help-message': 'Click the search icon above to apply your filter',
+  'common.apply-filter': 'apply filter',
   'common.avg-score': 'Avg Score',
   'common.frq': 'FRQ',
   'common.schedule': 'Schedule',

@@ -7,17 +7,17 @@
 				width: 100%;
 				@media screen and (max-width: $screen-sm - 1) {
 					.search-header {
-						grid-template-columns: 20px 130px 1fr;
+						grid-template-columns: 20px 100px 1fr;
+
+						.search-filter-container {
+							width: 90px;
+							margin-left: 10px;
+						}
 
 						.search-pullup-close {
 							i {
 								margin-left: 0;
 							}
-						}
-
-						.search-filter-container {
-							width: 100px;
-							margin-left: 10px;
 						}
 
 						.search-right-menu {
@@ -41,8 +41,12 @@
 
 									.bottom-panel-container,
 									.top-panel-container {
-										grid-template-columns: none;
 										width: 100vw;
+										flex-direction: column;
+
+										.filter-container {
+											width: 100%;
+										}
 
 										.gru-taxonomy-picker {
 											.browse-selector {

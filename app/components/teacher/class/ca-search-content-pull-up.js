@@ -314,12 +314,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
       const component = this;
       if (item.get('filter') === 'flt.standard') {
         component.set('unCheckedItem', item);
-      } else if (item.get('filter') === 'flt.publisherName') {
-        component.set('publisherName', null);
       }
       component.get('selectedFilters').removeObject(item);
       component.send('doSearch');
-
     },
 
     /**
@@ -759,7 +756,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
     filters['flt.audience'] = component.filterSelectedItems('filter', 'flt.audience');
     filters['flt.standard'] = component.filterSelectedItems('filter', 'flt.standard');
     filters['flt.creator'] = component.get('selectedFilters')['flt.authorName'];
-    filters['flt.publisher'] = component.filterSelectedItems('filter', 'flt.publisherName');
     return filters;
   },
 
