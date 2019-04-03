@@ -394,7 +394,7 @@
           grid-template-columns: auto;
 
           i.close,
-          i.keyboard_arrow_left {
+          i.arrow_back {
             margin: 0 auto;
             opacity: 1;
             color: $dark-600;
@@ -404,7 +404,7 @@
             }
           }
 
-          i.keyboard_arrow_left {
+          i.arrow_back {
             font-size: 40px;
           }
         }

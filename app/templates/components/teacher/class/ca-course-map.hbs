@@ -53,10 +53,10 @@
                               {{/if}}
                             </div>
                             <div class="collection-action-btns">
-                              <div class="schedule-dca-content ca-datepicker-popover {{if collection.isScheduled 'has-scheduled'}}" onclick= {{action 'onScheduleContentToDCA' collection}}>
+                              <div class="schedule-dca-content ca-datepicker-popover {{if collection.isScheduled 'has-scheduled'}}" title="{{t 'teacher-landing.schedule-for-later'}}" data-toggle="tooltip" data-html="true" data-placement="bottom" data-trigger="hover" onclick= {{action 'onScheduleContentToDCA' collection}}>
                                 {{gru-icon name="update"}}
                               </div>
-                              <div class="add-dca-content {{if collection.isAdded 'added'}}" {{action 'onAddContentToDCA' collection}} data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.add"}}" data-trigger="hover">
+                              <div class="add-dca-content {{if collection.isAdded 'added'}}" {{action 'onAddContentToDCA' collection}} data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t 'add.to.todays.class'}}" data-trigger="hover">
                                 {{gru-icon name="add"}} {{gru-icon name="done"}}
                               </div>
                             </div>

@@ -1154,7 +1154,7 @@ export default Object.assign(quizzesTranslations, {
     'Create a classroom, assign contents, invite students',
   'teacher-landing.dca-create-info':
     'Click on the icons below and search for content from the Gooru Library to create a  class activity. You can also add content to  class activity from your course map by clicking on Course Map.',
-  'teacher-landing.schedule-for-later': 'Schedule For Later',
+  'teacher-landing.schedule-for-later': 'Schedule Later',
   'teacher-landing.teach-this-activity-later':
     'teach this activity later at DCA',
   'teacher-landing.schedule-dca-instruction-1':
@@ -1328,7 +1328,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head':
     'Course Settings',
   'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable':
-  'Personalized Learning Path should cover gaps at profile?',
+    'Personalized Learning Path should cover gaps at profile?',
   'teacher-landing.class.class-settings.course-settings-sec.apply-settings':
     'Apply Settings',
   'teacher-landing.class.class-settings.course-settings-sec.origin-info':
