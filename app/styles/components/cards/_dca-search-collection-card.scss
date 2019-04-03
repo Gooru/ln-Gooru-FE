@@ -223,6 +223,12 @@
           justify-self: end;
           cursor: pointer;
 
+          &.has-scheduled {
+            .update {
+              color: #4d9840;
+            }
+          }
+
           .schedule-dca-datepicker {
             margin-left: 8px;
           }
