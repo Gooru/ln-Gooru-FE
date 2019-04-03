@@ -31,10 +31,6 @@ export default Ember.Component.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
-  /**
-   * @requires service:api-sdk/search
-   */
-  searchService: Ember.inject.service('api-sdk/search'),
 
   // -------------------------------------------------------------------------
   // Properties
@@ -143,23 +139,14 @@ export default Ember.Component.extend({
     component.loadSubjects();
   },
 
-  didRender() {
-    let component = this;
-    component.$('#publisher').autocomplete({
-      delay: 100,
-      length: 3,
-      appendTo: '#publisher-suggestions',
-      source: function(request, response) {
-        component.get('searchService')
-          .autoCompleteSearch('publisher', request.term)
-          .then((results) => {
-            response(results.publishers);
-          });
-      }
-    });
-  },
 
   actions: {
+
+    applyFilter() {
+      let component = this;
+      component.toggleProperty('isShow');
+      component.sendAction('onFilterApply');
+    },
 
     selectSubject(subject) {
       let component = this;
@@ -185,19 +172,6 @@ export default Ember.Component.extend({
       let term = this.get('authorName').trim();
       let filterItems = component.get('selectedFilters');
       filterItems['flt.authorName'] = term;
-    },
-
-    setPublisher() {
-      let component = this;
-      let term = this.get('publisherName').trim();
-      let filterItems = component.get('selectedFilters');
-      filterItems.removeObjects(filterItems.filterBy('filter', 'flt.publisherName')); //remove previous object
-      if (term !== '') {
-        component.get('selectedFilters').pushObject(Ember.Object.create({
-          'filter': 'flt.publisherName',
-          'name': term
-        }));
-      }
     },
 
     updateSelectedTags(selectedTags) {

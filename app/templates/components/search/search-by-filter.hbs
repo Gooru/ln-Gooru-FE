@@ -1,5 +1,4 @@
 <div class="search-panel">
-  <div class="info-text"><span>{{t 'common.search-help-message'}}</span></div>
   <div class="search-content">
     <div class="top-panel-container">
       <div class="label-container" data-toggle="collapse" data-target="#standard">
@@ -72,26 +71,6 @@
         </div>
       </div>
       <div class="filter-container">
-        <div class="author-publisher-list-container">
-          <div class="label-container" data-toggle="collapse" data-target="#author">
-            <span>{{t 'common.publishers' }}</span>
-            <div class="icons">
-              <span>{{gru-icon name="arrow_drop_up"}}</span>
-              <span>{{gru-icon name="arrow_drop_down"}}</span>
-            </div>
-          </div>
-          <div class="author-publisher-container collapse in" id="author">
-            <div class="author-container hidden">
-              <span class="author-title">{{t 'search-filter.author.placeholder' }}</span>
-              {{input type="text" value=authorName class="author-name" focus-out="setAuthor" placeholder=(t "search-filter.input-placeholder" type=(t "search-filter.author.placeholder")) autofocus="true"}}
-            </div>
-            <div class="publisher-container">
-              <span class="publisher-title">{{t 'common.publisher' }}</span>
-              {{input type="text" value=publisherName class="publisher-name" id="publisher" focus-out="setPublisher" placeholder=(t "search-filter.input-placeholder" type=(t "common.publisher")) autofocus="true"}}
-            </div>
-            <div id="publisher-suggestions"></div>
-          </div>
-        </div>
         <div class="educational-list-container">
           <div class="label-container" data-toggle="collapse" data-target="#educational">
             <span>{{t 'common.educational-use'}}</span>
@@ -107,4 +86,5 @@
       </div>
     </div>
   </div>
+  <div class="apply-filter" {{action 'applyFilter'}}>{{t 'common.apply-filter'}}</div>
 </div>
