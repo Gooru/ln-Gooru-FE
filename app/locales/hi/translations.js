@@ -65,8 +65,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'प्रथम नाम',
   'common.filter-by': 'फ़िल्टर',
   'common.more': 'अधिक',
-  'common.search-help-message':
-    'Click the search icon above to apply your filter',
+  'common.apply-filter': 'apply filter',
   'common.avg-score': 'औसत अंक',
   'common.frq': 'एफआर ',
   'common.schedule': 'कार्यक्रम',
@@ -2520,5 +2519,6 @@ export default Object.assign(quizzesTranslations, {
   'present.diagnostic.determine.not.know':
     'Present a diagnostic to determine the student\'s current location, if not known?',
   'present.diagnostic.determine.know':
-    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
+  'add.to.todays.class': 'Add to Today\'s Class'
 });

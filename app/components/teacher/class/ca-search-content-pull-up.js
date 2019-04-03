@@ -317,7 +317,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
       }
       component.get('selectedFilters').removeObject(item);
       component.send('doSearch');
-
     },
 
     /**
@@ -555,6 +554,13 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   didRender() {
     let component = this;
+    component.initializePopover();
+  },
+  //--------------------------------------------------------------------------
+  // Methods
+
+  initializePopover() {
+    let component = this;
     component.$('.more-pointer').popover({
       html: true,
       trigger: 'click',
@@ -564,10 +570,15 @@ export default Ember.Component.extend(ConfigurationMixin, {
         return component.$('.more-filters').html();
       }
     });
-  },
 
-  //--------------------------------------------------------------------------
-  // Methods
+    component.$(document).click(function(event) {
+      if (event.target.className !== 'more-pointer') {
+        if (component.$('.more-pointer')) {
+          component.$('.more-pointer').popover('hide');
+        }
+      }
+    });
+  },
 
   /**
    * Function to animate the  pullup from bottom to top
@@ -744,15 +755,15 @@ export default Ember.Component.extend(ConfigurationMixin, {
     filters['flt.language'] = component.filterSelectedItems('filter', 'flt.language');
     filters['flt.audience'] = component.filterSelectedItems('filter', 'flt.audience');
     filters['flt.standard'] = component.filterSelectedItems('filter', 'flt.standard');
-    filters['flt.creator'] = component.get('selectedFilters').get('flt.authorName');
-    filters['flt.publisherName'] = component.get('selectedFilters').get('flt.publisherName');
+    filters['flt.creator'] = component.get('selectedFilters')['flt.authorName'];
     return filters;
   },
 
   filterSelectedItems(keyField, keyValue) {
     const component = this;
     let filterList = component.get('selectedFilters').filterBy(keyField, keyValue);
-    return component.toArray(filterList, 'name');
+    let keyName = keyValue === 'flt.standard' ? 'id' : 'name';
+    return component.toArray(filterList, keyName);
   },
 
   toArray(filterList, key) {

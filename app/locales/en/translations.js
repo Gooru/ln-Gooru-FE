@@ -67,8 +67,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
   'common.more': 'more',
-  'common.search-help-message':
-    'Click the search icon above to apply your filter',
+  'common.apply-filter': 'apply filter',
   'common.avg-score': 'Avg Score',
   'common.frq': 'FRQ',
   'common.schedule': 'Schedule',
@@ -1329,7 +1328,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head':
     'Course Settings',
   'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable':
-    'Personalize Learning Path should cover gaps at profile?',
+  'Personalized Learning Path should cover gaps at profile?',
   'teacher-landing.class.class-settings.course-settings-sec.apply-settings':
     'Apply Settings',
   'teacher-landing.class.class-settings.course-settings-sec.origin-info':
@@ -2501,5 +2500,6 @@ export default Object.assign(quizzesTranslations, {
   'present.diagnostic.determine.not.know':
     'Present a diagnostic to determine the student\'s current location, if not known?',
   'present.diagnostic.determine.know':
-    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
+  'add.to.todays.class': 'Add to Today\'s Class'
 });

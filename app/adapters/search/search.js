@@ -226,6 +226,29 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+
+  /**
+   * Fetches results that match with the term
+   *
+   * @param term the term to search
+   * @returns {Promise.<Array[]>}
+   */
+  autoCompleteSearch: function(type, term) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/autocomplete/${type}`;
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: {
+        q: term || '*'
+      }
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   /**
    * Function to retrieve learning maps content
    */

@@ -124,11 +124,11 @@
           overflow: hidden;
           text-overflow: ellipsis;
           display: block;
-          color: #0072bc;
         }
       }
 
       .collection-description {
+        height: 60px;
         $line-height: 1.5;
         $lines-to-show: 3;
         @include ellipsis(

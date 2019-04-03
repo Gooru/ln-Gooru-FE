@@ -31,6 +31,7 @@ export default Ember.Component.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -64,7 +65,7 @@ export default Ember.Component.extend({
    */
   onSubjectSelected: Ember.observer('selectedSubject.courses.[]', function() {
     let component = this;
-    component.set('selectedCourse', this.get('selectedSubject.courses'));
+    component.set('selectedCourse', component.get('selectedSubject.courses'));
     component.loadTaxonomyPicker();
   }),
 
@@ -138,10 +139,18 @@ export default Ember.Component.extend({
     component.loadSubjects();
   },
 
+
   actions: {
+
+    applyFilter() {
+      let component = this;
+      component.toggleProperty('isShow');
+      component.sendAction('onFilterApply');
+    },
 
     selectSubject(subject) {
       let component = this;
+      component.set('selectedSubject.courses', Ember.A([]));
       component.set('selectedSubject', subject);
       let selectedFilters = component.get('selectedFilters');
       selectedFilters.removeObjects(selectedFilters.filterBy('filter', 'flt.standard')); //remove previous object
@@ -165,13 +174,6 @@ export default Ember.Component.extend({
       filterItems['flt.authorName'] = term;
     },
 
-    setPublisher() {
-      let component = this;
-      let term = this.get('publisherName').trim();
-      let filterItems = component.get('selectedFilters');
-      filterItems['flt.publisherName'] = term;
-    },
-
     updateSelectedTags(selectedTags) {
       const component = this;
       component.set('taxonomyPickerData.selected', selectedTags);
@@ -180,6 +182,7 @@ export default Ember.Component.extend({
       selectedTags.map((standard) => {
         standard.set('filter', 'flt.standard');
         standard.set('name', standard.get('data.code'));
+        standard.set('id', standard.get('data.id'));
         component.get('selectedFilters').pushObject(standard);
       });
     },
