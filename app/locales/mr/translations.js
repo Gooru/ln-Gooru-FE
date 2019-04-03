@@ -66,6 +66,7 @@ export default Object.assign(quizzesTranslations, {
   'common.filter-by': 'द्वारे फिल्टर करा',
   'common.more': 'अधिक',
   'common.apply-filter': 'apply filter',
+  'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'सरासरी गुण',
   'common.frq': 'फ्रॅक',
   'common.schedule': 'वेळापत्रक',
