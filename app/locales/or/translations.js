@@ -70,6 +70,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'ପ୍ରଥମ ନାମ',
   'common.filter-by': 'ଦ୍ୱାରା ଫିଲ୍ଟର ହୋଇଛି',
   'common.more': 'ଅଧିକ',
+  'common.search-help-message':
+    'Click the search icon above to apply your filter',
   'common.avg-score': 'ହାରାହାରି ସ୍କୋର୍',
   'common.frq': 'FRQ',
   'common.schedule': 'ସୂଚୀ',
@@ -732,6 +734,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'ବୁକମାର୍କ ତ୍ୟାଗ',
   'common.unexpectedError':
     'ଏକ ଅପ୍ରତ୍ୟାଶିତ ତ୍ରୁଟି ହୋଇଛି ଓ ଏହା ରିପୋର୍ଟ କରାଯାଇଛି । ଅସୁବିଧା ପାଇଁ ଆମେ ଦୁଃଖିତ !',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'ଅନୁସରଣ କରନ୍ତୁ ନାହିଁ',
   'common.unit': 'ବିଭାଗ (ୟୁନିଟ୍)',
   'common.unit-title': 'ବିଭାଗ ଶୀର୍ଷକ',
@@ -1182,7 +1186,8 @@ export default Object.assign(quizzesTranslations, {
   'student-independent-learning.no-bookmarks':
     'ଯେତେବେଳେ ଆପଣ ପାଠ୍ୟକ୍ରମ, ସଂଗ୍ରହ ଓ  ମୂଲ୍ୟାଙ୍କନ ଗୁଡ଼ିକୁ ବୁକମାର୍କ କରିବା ଆରମ୍ଭ କରୁଛନ୍ତି, ତାହା ଏଠାରେ ଦେଖାଯିବ ।',
   'student-independent-learning.add-bookmark': 'ବୁକମାର୍କ ଯୋଗ କରନ୍ତୁ',
-  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.latest-announcement': 'ସଦ୍ୟତମ ଘୋଷଣା',
   'teacher-landing.latest-assessment': 'ସଦ୍ୟତମ ମୂଲ୍ୟାଙ୍କନ',
   'teacher-landing.create-classroom':

@@ -67,6 +67,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'FIRSTNAME',
   'common.filter-by': 'மூலம் வடிகட்டி',
   'common.more': 'மேலும்',
+  'common.search-help-message':
+    'Click the search icon above to apply your filter',
   'common.avg-score': 'சராசரி ஸ்கோர்',
   'common.frq': 'frq',
   'common.schedule': 'அட்டவணை',
@@ -727,6 +729,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'unbookmark',
   'common.unexpectedError':
     'எதிர்பாராத பிழை ஏற்பட்டது மற்றும் புகாரளிக்கப்பட்டது. நாம் \'சிரமத்திற்கு வருந்துகிறோம்!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'பின்தொடராமல்',
   'common.unit': 'அலகு',
   'common.unit-title': 'அலகு தலைப்பு',
@@ -1193,7 +1197,8 @@ export default Object.assign(quizzesTranslations, {
     'நீங்கள் நேவிகேட்டர் வகுப்பில் இணை ஆசிரியராக சேர்ந்துள்ளீர்கள்',
   'teacher-landing.navigator-banner.error-message':
     'வர்க்கத்தில் சேர்வதற்கான பிரச்சனை',
-  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.class.manage': 'நிர்வகிக்க',
   'teacher-landing.class.reports': 'அறிக்கைகள்',
   'teacher-landing.class.daily-activites': 'தினசரி செயற்பாடுகள்',

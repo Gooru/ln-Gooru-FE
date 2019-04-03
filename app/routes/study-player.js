@@ -116,6 +116,7 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
   // Methods
 
   beforeModel(transition) {
+    this._super(...arguments);
     const queryParams = transition.queryParams;
     if (queryParams && queryParams.classId) {
       return this.doCheckClassDestination(queryParams.classId);

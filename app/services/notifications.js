@@ -58,6 +58,7 @@ export default Service.extend({
    * @return {undefined}
    */
   success(message, title) {
+    this.remove();
     toastr.success(message, title);
     this.restoreOptions();
   },
@@ -71,6 +72,7 @@ export default Service.extend({
    * @return {undefined}
    */
   info(message, title) {
+    this.remove();
     toastr.info(message, title);
     this.restoreOptions();
   },
@@ -84,6 +86,7 @@ export default Service.extend({
    * @return {undefined}
    */
   warning(message, title) {
+    this.remove();
     toastr.warning(message, title);
     this.restoreOptions();
   },
@@ -97,6 +100,7 @@ export default Service.extend({
    * @return {undefined}
    */
   error(message, title) {
+    this.remove();
     toastr.error(message, title);
     this.restoreOptions();
   },

@@ -65,6 +65,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
   'common.more': 'more',
+  'common.search-help-message':
+    'Click the search icon above to apply your filter',
   'common.avg-score': 'Avg Score',
   'common.frq': 'FRQ',
   'common.schedule': 'Schedule',
@@ -728,6 +730,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'unbookmark',
   'common.unexpectedError':
     'ಅನಿರೀಕ್ಷಿತ ದೋಷ ಸಂಭವಿಸಿದೆ ಮತ್ತು ವರದಿಯಾಗಿದೆ. ಅನಾನುಕೂಲತೆಗಾಗಿ ನಾವು ವಿಷಾದಿಸುತ್ತೇವೆ!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'ಅನುಸರಿಸಬೇಡಿ',
   'common.unit': 'ಘಟಕ',
   'common.unit-title': 'ಘಟಕ ಶೀರ್ಷಿಕೆ',
@@ -1189,7 +1193,8 @@ export default Object.assign(quizzesTranslations, {
     'You have successfully joined as a co-teacher of the Navigator class',
   'teacher-landing.navigator-banner.error-message':
     'Problem with joining class',
-  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.class.manage': 'Manage',
   'teacher-landing.class.reports': 'Reports',
   'teacher-landing.class.daily-activites': 'Daily Activites',

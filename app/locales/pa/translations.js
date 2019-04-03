@@ -65,6 +65,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'ਪਹਿਲਾ ਨਾਂ',
   'common.filter-by': 'ਦੁਆਰਾ ਫਿਲਟਰ',
   'common.more': 'ਹੋਰ',
+  'common.search-help-message':
+    'Click the search icon above to apply your filter',
   'common.avg-score': 'ਔਸਤ ਸਕੋਰ',
   'common.frq': 'frq',
   'common.schedule': 'ਸਮਾਸੂਚੀ, ਕਾਰਜ - ਕ੍ਰਮ',
@@ -713,6 +715,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'ਬੁੱਕ ਬੁੱਕ',
   'common.unexpectedError':
     'ਇੱਕ ਅਚਾਨਕ ਤਰੁੱਟੀ ਉਤਪੰਨ ਹੋਈ ਹੈ ਅਤੇ ਰਿਪੋਰਟ ਕੀਤੀ ਗਈ ਹੈ. ਅਸੁਵਿਧਾ ਲਈ ਅਸੀਂ ਮੁਆਫੀ ਮੰਗਦੇ ਹਾਂ!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'ਅਨਲੌਕ ਕਰੋ',
   'common.unit': 'ਇਕਾਈ',
   'common.unit-title': 'ਇਕਾਈ ਦਾ ਸਿਰਲੇਖ',
@@ -1171,7 +1175,8 @@ export default Object.assign(quizzesTranslations, {
     'ਤੁਸੀਂ ਨੇਵੀਗੇਟਰ ਕਲਾਸ ਦੇ ਸਹਿ-ਅਧਿਆਪਕ ਵਜੋਂ ਸਫਲਤਾਪੂਰਵਕ ਸ਼ਾਮਲ ਹੋ ਗਏ ਹੋ',
   'teacher-landing.navigator-banner.error-message':
     'ਕਲਾਸ ਵਿਚ ਸ਼ਾਮਲ ਹੋਣ ਵਿਚ ਸਮੱਸਿਆ',
-  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.class.manage': 'ਪ੍ਰਬੰਧ ਕਰਨਾ, ਕਾਬੂ ਕਰਨਾ',
   'teacher-landing.class.reports': 'ਰਿਪੋਰਟ',
   'teacher-landing.class.daily-activites': 'ਰੋਜ਼ਾਨਾ ਕਿਰਿਆਸ਼ੀਲ',

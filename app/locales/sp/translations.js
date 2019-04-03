@@ -67,6 +67,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
   'common.more': 'more',
+  'common.search-help-message':
+    'Click the search icon above to apply your filter',
   'common.avg-score': 'Avg Score',
   'common.frq': 'FRQ',
   'common.schedule': 'Schedule',
@@ -722,6 +724,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'Unbookmark',
   'common.unexpectedError':
     'Se ha producido un error inesperado y se ha informado. ¡Lo sentimos por las molestias!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'No seguir',
   'common.unit': 'Unidad',
   'common.unit-title': 'Título de la Unidad',
@@ -1190,7 +1194,8 @@ export default Object.assign(quizzesTranslations, {
     'You have successfully joined as a co-teacher of the Navigator class',
   'teacher-landing.navigator-banner.error-message':
     'Problem with joining class',
-  'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.class.manage': 'Manage',
   'teacher-landing.class.reports': 'Reports',
   'teacher-landing.class.daily-activites': 'Daily Activites',
