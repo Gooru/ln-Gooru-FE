@@ -709,6 +709,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'unbookmark',
   'common.unexpectedError':
     'ఊహించని లోపం సంభవించింది మరియు నివేదించబడింది. మేము అసౌకర్యానికి క్షమించండి!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'అనుసరించవద్దు',
   'common.unit': 'యూనిట్',
   'common.unit-title': 'యూనిట్ శీర్షిక',

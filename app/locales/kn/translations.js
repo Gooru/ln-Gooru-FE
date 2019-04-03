@@ -730,6 +730,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'unbookmark',
   'common.unexpectedError':
     'ಅನಿರೀಕ್ಷಿತ ದೋಷ ಸಂಭವಿಸಿದೆ ಮತ್ತು ವರದಿಯಾಗಿದೆ. ಅನಾನುಕೂಲತೆಗಾಗಿ ನಾವು ವಿಷಾದಿಸುತ್ತೇವೆ!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'ಅನುಸರಿಸಬೇಡಿ',
   'common.unit': 'ಘಟಕ',
   'common.unit-title': 'ಘಟಕ ಶೀರ್ಷಿಕೆ',
@@ -1352,7 +1354,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head':
     'Course Settings',
   'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable':
-    'Personalize Learning Path should cover gaps at profile?',
+    'Personalized Learning Path should cover gaps at profile?',
   'teacher-landing.class.class-settings.course-settings-sec.apply-settings':
     'Apply Settings',
   'teacher-landing.class.class-settings.course-settings-sec.origin-info':

@@ -80,7 +80,14 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
         jqXHR.status !== 401 &&
         !route.isGetCollectionWithRefreshRequest(settings)
       ) {
-        route.trackEndPointError(event, jqXHR, settings);
+        if (jqXHR.readyState === 0 && jqXHR.status === 0) {
+          const networkErrorMessage = route
+            .get('i18n')
+            .t('common.networkError');
+          route.get('notifications').warning(networkErrorMessage);
+        } else {
+          route.trackEndPointError(event, jqXHR, settings);
+        }
       }
     });
   }),

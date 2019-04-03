@@ -703,6 +703,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'unbookmark',
   'common.unexpectedError':
     'একটি অপ্রত্যাশিত ত্রুটি ঘটেছে এবং রিপোর্ট করা হয়েছে। আমরা অসুবিধার জন্য দুঃখিত!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'অনুসরণ মুক্ত',
   'common.unit': 'একক',
   'common.unit-title': 'ইউনিট শিরোনাম',

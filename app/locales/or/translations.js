@@ -734,6 +734,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'ବୁକମାର୍କ ତ୍ୟାଗ',
   'common.unexpectedError':
     'ଏକ ଅପ୍ରତ୍ୟାଶିତ ତ୍ରୁଟି ହୋଇଛି ଓ ଏହା ରିପୋର୍ଟ କରାଯାଇଛି । ଅସୁବିଧା ପାଇଁ ଆମେ ଦୁଃଖିତ !',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'ଅନୁସରଣ କରନ୍ତୁ ନାହିଁ',
   'common.unit': 'ବିଭାଗ (ୟୁନିଟ୍)',
   'common.unit-title': 'ବିଭାଗ ଶୀର୍ଷକ',
