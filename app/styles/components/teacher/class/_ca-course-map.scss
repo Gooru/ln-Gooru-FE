@@ -227,6 +227,7 @@
                     opacity: 0.8;
                   }
 
+                  .collection-external-icon,
                   .collection-icon {
                     background-image: url("../assets/gooru/images/add_collection.svg");
                   }
@@ -312,6 +313,9 @@
                     align-items: center;
                     justify-content: center;
                     cursor: pointer;
+                    &.has-scheduled {
+                      color: #4d9840;
+                    }
 
                     .schedule-dca-datepicker {
                       margin-left: 8px;
