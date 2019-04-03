@@ -155,6 +155,8 @@ export default Ember.Component.extend({
       let selectedFilters = component.get('selectedFilters');
       selectedFilters.removeObjects(selectedFilters.filterBy('filter', 'flt.standard')); //remove previous object
       component.set('taxonomyPickerData.selected', Ember.A([]));
+      component.set('course', null);
+      component.set('domain', null);
     },
 
     selectCategory(category) {
@@ -164,6 +166,8 @@ export default Ember.Component.extend({
       } else {
         component.set('selectedCategory', category);
       }
+      component.set('course', null);
+      component.set('domain', null);
       component.set('selectedSubject', null);
     },
 
