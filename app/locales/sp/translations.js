@@ -723,6 +723,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'Unbookmark',
   'common.unexpectedError':
     'Se ha producido un error inesperado y se ha informado. ¡Lo sentimos por las molestias!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'No seguir',
   'common.unit': 'Unidad',
   'common.unit-title': 'Título de la Unidad',

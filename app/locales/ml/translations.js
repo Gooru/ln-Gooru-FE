@@ -720,6 +720,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'unbookmark',
   'common.unexpectedError':
     'ഒരു അപ്രതീക്ഷിത പിശക് സംഭവിച്ചു, റിപ്പോർട്ടുചെയ്തു. അസൗകര്യത്തിൽ ഞങ്ങൾ ഖേദിക്കുന്നു!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'പിന്തുടരാതിരിക്കുക',
   'common.unit': 'യൂണിറ്റ്',
   'common.unit-title': 'യൂണിറ്റ് ശീർഷകം',

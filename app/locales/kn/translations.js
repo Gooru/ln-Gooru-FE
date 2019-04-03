@@ -729,6 +729,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'unbookmark',
   'common.unexpectedError':
     'ಅನಿರೀಕ್ಷಿತ ದೋಷ ಸಂಭವಿಸಿದೆ ಮತ್ತು ವರದಿಯಾಗಿದೆ. ಅನಾನುಕೂಲತೆಗಾಗಿ ನಾವು ವಿಷಾದಿಸುತ್ತೇವೆ!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'ಅನುಸರಿಸಬೇಡಿ',
   'common.unit': 'ಘಟಕ',
   'common.unit-title': 'ಘಟಕ ಶೀರ್ಷಿಕೆ',

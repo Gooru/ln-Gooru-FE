@@ -711,6 +711,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'Unbookmark',
   'common.unexpectedError':
     'An unexpected error has occurred and has been reported. We\'re sorry for the inconvenience!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'Unfollow',
   'common.unit': 'Unit',
   'common.unit-title': 'Unit Title',
@@ -1326,7 +1328,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head':
     'Course Settings',
   'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable':
-    'Personalized Learning Path should cover gaps at profile?',
+  'Personalized Learning Path should cover gaps at profile?',
   'teacher-landing.class.class-settings.course-settings-sec.apply-settings':
     'Apply Settings',
   'teacher-landing.class.class-settings.course-settings-sec.origin-info':

@@ -728,6 +728,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'unbookmark',
   'common.unexpectedError':
     'எதிர்பாராத பிழை ஏற்பட்டது மற்றும் புகாரளிக்கப்பட்டது. நாம் \'சிரமத்திற்கு வருந்துகிறோம்!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'பின்தொடராமல்',
   'common.unit': 'அலகு',
   'common.unit-title': 'அலகு தலைப்பு',

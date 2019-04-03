@@ -714,6 +714,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'ਬੁੱਕ ਬੁੱਕ',
   'common.unexpectedError':
     'ਇੱਕ ਅਚਾਨਕ ਤਰੁੱਟੀ ਉਤਪੰਨ ਹੋਈ ਹੈ ਅਤੇ ਰਿਪੋਰਟ ਕੀਤੀ ਗਈ ਹੈ. ਅਸੁਵਿਧਾ ਲਈ ਅਸੀਂ ਮੁਆਫੀ ਮੰਗਦੇ ਹਾਂ!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'ਅਨਲੌਕ ਕਰੋ',
   'common.unit': 'ਇਕਾਈ',
   'common.unit-title': 'ਇਕਾਈ ਦਾ ਸਿਰਲੇਖ',

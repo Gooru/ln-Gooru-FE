@@ -707,6 +707,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'બિન બુકમાર્ક',
   'common.unexpectedError':
     'એક અણધારી ભૂલ આવી છે અને જાણ કરવામાં આવી છે. અસુવિધા બદલ માફ કરશો!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'અનુસરવું',
   'common.unit': 'એકમ',
   'common.unit-title': 'એકમ શીર્ષક',
