@@ -29,6 +29,7 @@ $left-cell-margin: 20vw;
   .avg-row {
     border-top: 1px solid #afb4b9 !important;
     border-bottom: 1px solid #afb4b9;
+    min-width: 80px;
   }
 
   .table-wrapper {
@@ -54,6 +55,11 @@ $left-cell-margin: 20vw;
       font-weight: normal;
       padding: 0 2px;
       height: 32px;
+    }
+
+    th[scope="col"] {
+      border-bottom: 1px solid #afb4b9;
+      border-color: #afb4b9;
     }
 
     .first-tier,
@@ -113,9 +119,15 @@ $left-cell-margin: 20vw;
         &.row-header {
           text-align: $tab-float-dir;
           padding: 4px;
+          border-bottom: unset;
 
           > span {
             width: auto;
+            > i {
+              font-size: 19px;
+              line-height: 27px;
+              vertical-align: -5px;
+            }
           }
         }
         &:hover {
@@ -320,6 +332,8 @@ $left-cell-margin: 20vw;
     }
     .answer-correct {
       border-color: $brand-success !important;
+      color: $brand-success !important;
+
       i {
         margin-left: -72px;
         pointer-events: none;
@@ -327,6 +341,7 @@ $left-cell-margin: 20vw;
     }
     .answer-incorrect {
       border-color: $brand-incorrect !important;
+      color: $brand-incorrect !important;
     }
     .grey-circle {
       background: url("gooru/images/baseline-block-24px.svg");
