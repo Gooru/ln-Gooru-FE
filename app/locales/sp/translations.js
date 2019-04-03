@@ -1179,7 +1179,7 @@ export default Object.assign(quizzesTranslations, {
     'Crear un aula, asignar contenidos, invitar a los estudiantes',
   'teacher-landing.dca-create-info':
     'Click on the icons below and search for content from the Gooru Library to create a  class activity. You can also add content to  class activity from your course map by clicking on Course Map.',
-  'teacher-landing.schedule-for-later': 'Schedule For Later',
+  'teacher-landing.schedule-for-later': 'Schedule  Later',
   'teacher-landing.teach-this-activity-later':
     'teach this activity later at DCA',
   'teacher-landing.schedule-dca-instruction-1':
