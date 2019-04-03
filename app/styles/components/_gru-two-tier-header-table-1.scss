@@ -9,9 +9,9 @@ $left-cell-margin: 20vw;
   display: inline-block;
 
   .std-circle {
-    padding-left: 3%;
     margin-left: 15px;
     margin-bottom: 15px;
+    text-align: center;
     width: 24px;
     height: 24px;
     border-radius: 50%;
@@ -43,9 +43,6 @@ $left-cell-margin: 20vw;
 
   table {
     font-size: $font-size-h6;
-    // background: $white;
-    //box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.07);
-    // border-top: 15px solid $dark-400;
     border-radius: 0 5px 5px 0;
     border-collapse: inherit;
 
@@ -287,13 +284,7 @@ $left-cell-margin: 20vw;
           // }
 
           .score {
-            // border-radius: 4px;
-            // text-align: center;
-            // width: 42px;
-            // height: 25px;
-            padding-left: 10%;
             display: block;
-            // // color: $white;
             > i {
               display: none;
             }
@@ -350,6 +341,7 @@ $left-cell-margin: 20vw;
       display: block;
       background-size: cover;
       border-color: $light-200 !important;
+      text-align: center;
       opacity: 0.2;
     }
     .answer-not-started {
