@@ -20,6 +20,33 @@
   display: none !important;
 }
 
+.partner-library {
+  .side-panel {
+    display: none !important;
+  }
+  .content {
+    .partner-library-content,
+    .dropdown.nav_dropdown,
+    .content_outlet .controller.content-collections,
+    .controller.content-assessments {
+      display: none !important;
+    }
+  }
+}
+
+.controller.profile {
+  .content {
+    .user-profile-container,
+    .profile.gru-navigation-tabs,
+    .profile-content.content-navigation,
+    .filters,
+    .controller.content-assessments,
+    .controller.content-collections {
+      display: none !important;
+    }
+  }
+}
+
 .preview.gru-collection-preview {
   top: 0% !important;
   width: 100% !important;

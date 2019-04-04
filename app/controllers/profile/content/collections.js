@@ -23,10 +23,12 @@ export default Ember.Controller.extend({
   // Actions
 
   actions: {
+    //Action triggered when click play icon
     openContentPlayer: function(collection) {
-      this.transitionToRoute('player', collection.id, {
-        queryParams: { type: collection.get('collectionType') }
-      });
+      const controller = this;
+      controller.set('previewContent', collection);
+      controller.set('previewContentType', collection.get('format'));
+      controller.set('isShowContentPreview', true);
     },
 
     showMoreResults: function() {
