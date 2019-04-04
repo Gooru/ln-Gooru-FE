@@ -46,8 +46,8 @@ export default Ember.Component.extend({
       let classActivity = component.get('selectedClassActivityForSchedule');
       let scheduleMonth = parseInt(moment(scheduleDate).format('MM'));
       let scheduleYear = parseInt(moment(scheduleDate).format('YYYY'));
-      let forMonth = classActivity.get('forMonth');
-      let forYear = classActivity.get('forYear');
+      let forMonth = parseInt(classActivity.get('forMonth'));
+      let forYear = parseInt(classActivity.get('forYear'));
       let activationDate = classActivity.get('activation_date');
       if (
         !activationDate &&
