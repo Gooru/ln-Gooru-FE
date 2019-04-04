@@ -38,7 +38,7 @@
         </li>
       </ul>
     </div>
-    <div class="performance-percentage {{unless hasStarted 'not-started'}}" {{action 'selectItem' 'report'}}>
+    <div class="performance-percentage {{unless hasStarted 'not-started'}}" {{action "onShowArchivedClassReport"}}>
       <div class="code">
         <div class="title">{{t 'student-landing.class-code'}}</div>
         <div class="class-code">{{class.code}}</div>

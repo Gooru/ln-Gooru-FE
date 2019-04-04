@@ -9,17 +9,24 @@
       float: $tab-float-dir;
       padding-left: 5px;
       padding-right: 5px;
-      span {
+      div {
         i {
-          font-size: 32px;
+          font-size: 25px;
+          margin-top: 2px;
         }
+      }
+      .nav-title {
+        text-transform: uppercase;
+        line-height: 2.2;
       }
     }
     a {
-      color: $gray-light;
+      color: $gray-80;
+      opacity: 0.5;
     }
     div.active a {
-      color: $dark-300;
+      color: $white;
+      opacity: 1;
     }
   }
 }

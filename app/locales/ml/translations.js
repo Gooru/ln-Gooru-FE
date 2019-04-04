@@ -66,8 +66,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'പേരിന്റെ ആദ്യഭാഗം',
   'common.filter-by': 'ഫിൽട്ടർ ചെയ്യുക',
   'common.more': 'കൂടുതൽ',
-  'common.search-help-message':
-    'Click the search icon above to apply your filter',
+  'common.apply-filter': 'apply filter',
+  'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'ശരാശരി സ്കോർ',
   'common.frq': 'frq',
   'common.schedule': 'പട്ടിക',
@@ -1692,7 +1692,7 @@ export default Object.assign(quizzesTranslations, {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Choose Grade Lines to Display',
+  'grade-selector.placeholder': 'Grade Lines',
   'standard-dropdown.placeholder': 'സ്റ്റാൻഡേർഡ് ബ്രൗസുചെയ്യുക',
   'subject-dropdown.placeholder': 'വിഷയം (കൾ)',
   'subject-dropdown.prompt': 'ഒരു വിഷയം തിരഞ്ഞെടുക്കുക',
@@ -2568,5 +2568,6 @@ export default Object.assign(quizzesTranslations, {
   'present.diagnostic.determine.not.know':
     'Present a diagnostic to determine the student\'s current location, if not known?',
   'present.diagnostic.determine.know':
-    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)'
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
+  'add.to.todays.class': 'Add to Today\'s Class'
 });

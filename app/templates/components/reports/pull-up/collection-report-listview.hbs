@@ -50,7 +50,7 @@
           <th>
             <div class="user-profile-summary">
               <div class="user-profile-details {{unless student.hasStarted 'not-started'}}">
-                <div class="user-profile-img">
+                <div class="user-profile-img {{if isArchivedClass 'disable-event'}}">
                   {{#if student.selectedForSuggestion}}
                     <div class="selected-user-for-suggestion">
                       {{gru-icon name="done_all"}}

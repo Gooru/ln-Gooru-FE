@@ -29,7 +29,7 @@
       {{else}}
         <div class={{if isTeacher 'controls pull-right' 'play-btn pull-right'}}>
           {{#unless isTeacher}}
-            <button class="btn btn-info study-now" {{action "studyNow" 'lesson' model}} data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.play"}}">
+            <button class="btn btn-info study-now {{unless hasContentToPlay 'disable-event' }}" {{action "studyNow" 'lesson' model}} data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.play"}}">
               {{gru-icon name='play_arrow'}}
             </button>
           {{/unless}}

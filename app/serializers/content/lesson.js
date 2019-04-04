@@ -78,9 +78,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
               title: lessonItemData.title
             });
 
-            const defaultImage = lessonItem.get('isCollection')
-              ? appRootPath + DEFAULT_IMAGES.COLLECTION
-              : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+            const defaultImage =
+              lessonItemData.format === 'collection' ||
+              lessonItemData.format === 'collection-external'
+                ? appRootPath + DEFAULT_IMAGES.COLLECTION
+                : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
             const thumbnailUrl = lessonItemData.thumbnail
               ? basePath + lessonItemData.thumbnail
               : defaultImage;

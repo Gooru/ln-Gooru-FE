@@ -418,6 +418,12 @@ export default Ember.Component.extend({
    */
   isShowStudentExternalAssessmentReport: false,
 
+  /**
+   * Property to check, whether it is an archived class or not
+   * @type {Boolean}
+   */
+  isArchivedClass: false,
+
   //--------------------------------------------------------------------------
   // Methods
 
@@ -436,18 +442,16 @@ export default Ember.Component.extend({
 
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-        if (closeAll) {
-          component.sendAction('onClosePullUp');
-        }
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+      if (closeAll) {
+        component.sendAction('onClosePullUp');
       }
-    );
+    });
   },
 
   handleAppContainerScroll() {
@@ -517,39 +521,44 @@ export default Ember.Component.extend({
     let classDataPromise = classId
       ? classService.readClassInfo(classId)
       : Ember.RSVP.resolve({});
-    return Ember.RSVP.hash({
-      collection:
-        format === 'assessment'
-          ? component.get('assessmentService').readAssessment(collectionId)
-          : format === 'assessment-external'
-            ? component
-              .get('assessmentService')
-              .readExternalAssessment(collectionId)
-            : component.get('collectionService').readCollection(collectionId),
-      performance: component
-        .get('analyticsService')
-        .findResourcesByCollection(
-          classId,
-          courseId,
-          unitId,
-          lessonId,
-          collectionId,
-          collectionType
-        ),
-      classData: classDataPromise
-    }).then(({ collection, performance, classData }) => {
-      if (!component.isDestroyed) {
-        component.set('collection', collection);
-        component.set('class', classData);
-        if (format === 'assessment-external') {
-          component.parseClassMemberAndExternalPerformanceData(performance);
-        } else {
-          component.parseClassMemberAndPerformanceData(collection, performance);
+    return Ember.RSVP
+      .hash({
+        collection:
+          format === 'assessment'
+            ? component.get('assessmentService').readAssessment(collectionId)
+            : format === 'assessment-external'
+              ? component
+                .get('assessmentService')
+                .readExternalAssessment(collectionId)
+              : component.get('collectionService').readCollection(collectionId),
+        performance: component
+          .get('analyticsService')
+          .findResourcesByCollection(
+            classId,
+            courseId,
+            unitId,
+            lessonId,
+            collectionId,
+            collectionType
+          ),
+        classData: classDataPromise
+      })
+      .then(({ collection, performance, classData }) => {
+        if (!component.isDestroyed) {
+          component.set('collection', collection);
+          component.set('class', classData);
+          if (format === 'assessment-external') {
+            component.parseClassMemberAndExternalPerformanceData(performance);
+          } else {
+            component.parseClassMemberAndPerformanceData(
+              collection,
+              performance
+            );
+          }
+          component.set('isLoading', false);
+          component.loadSuggestion();
         }
-        component.set('isLoading', false);
-        component.loadSuggestion();
-      }
-    });
+      });
   },
 
   parseClassMemberAndExternalPerformanceData(performance) {
@@ -684,7 +693,7 @@ export default Ember.Component.extend({
     });
 
     let overAllScore = Math.floor(
-      (numberOfCorrectAnswers / numberOfQuestionsStarted) * 100
+      numberOfCorrectAnswers / numberOfQuestionsStarted * 100
     );
 
     let resultSet = {
@@ -741,7 +750,7 @@ export default Ember.Component.extend({
   calculateTimeSpentScore(users, maxTimeSpent) {
     users.forEach(data => {
       let timeSpentScore = Math.round(
-        (data.get('totalTimeSpent') / maxTimeSpent) * 100
+        data.get('totalTimeSpent') / maxTimeSpent * 100
       );
       data.set('timeSpentScore', timeSpentScore);
       data.set('timeSpentDifference', 100 - timeSpentScore);
