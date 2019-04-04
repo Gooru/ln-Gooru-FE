@@ -43,7 +43,7 @@
         {{#if (gt index caAverage) }}
           <td class='avg-row'>
             <div class='class-avg'>{{t 'class.analytics.performance.teacher.metricsTable.class-average'}}</div>
-            <div class="{{if content.label 'pointer'}}" title="{{content.label}}" data-toggle="tooltip" data-placement="auto" style='display: inline-block;width:99%'>{{avgScore}}</div>
+            <div class="avg-score {{if content.label 'pointer'}}" title="{{content.label}}" data-toggle="tooltip" data-placement="auto" style='display: inline-block;width:99%'>{{avgScore}}</div>
           </td>
         {{else}}
           <td class="hidden avg-row">
