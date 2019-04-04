@@ -66,7 +66,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'প্ৰথম নাম',
   'common.filter-by': 'ইয়াৰ দ্বাৰা ফিল্টাৰ কৰা হৈছে',
   'common.more': 'আৰু ',
-  'common.search-help-message': 'Click the search icon above to apply your filter',
+  'common.apply-filter': 'apply filter',
+  'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'মাধ্য স্কোৰ',
   'common.frq': 'FRQ',
   'common.schedule': 'কাৰ্যক্ৰম',
@@ -730,6 +731,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'বুকমাৰ্ক আঁতৰাওক',
   'common.unexpectedError':
     'এটা অবাঞ্চিত বিজুটি ঘটিল আৰু তাৰ বিষয়ে ৰিপ\'ৰ্ট কৰা গৈছে। অসুবিধাৰ বাবে আমি ক্ষমাপ্ৰাৰ্থী!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'আনফলো কৰক',
   'common.unit': 'একক',
   'common.unit-title': 'একক শীৰ্ষক',
@@ -1681,7 +1684,7 @@ export default Object.assign(quizzesTranslations, {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Choose Grade Lines to Display',
+  'grade-selector.placeholder': 'Grade Lines',
   'standard-dropdown.placeholder': 'মানকৰ মতে ব্ৰাউজ কৰক',
   'subject-dropdown.placeholder': 'বিষয়',
   'subject-dropdown.prompt': 'এটা বিষয় নিৰ্বাচন কৰক',

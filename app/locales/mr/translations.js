@@ -65,7 +65,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'पहिले नाव',
   'common.filter-by': 'द्वारे फिल्टर करा',
   'common.more': 'अधिक',
-  'common.search-help-message': 'Click the search icon above to apply your filter',
+  'common.apply-filter': 'apply filter',
+  'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'सरासरी गुण',
   'common.frq': 'फ्रॅक',
   'common.schedule': 'वेळापत्रक',
@@ -710,6 +711,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'बुकमार्क काढा',
   'common.unexpectedError':
     'एक अनपेक्षित त्रुटी आली आणि रिपोर्ट करण्यात आली आहे. असुविधेसाठी आम्ही दिलगीर आहोत!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'अन-फॉलो (फॉलो न करणे)',
   'common.unit': 'युनिट',
   'common.unit-title': 'युनिट शीर्षक',

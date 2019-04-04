@@ -39,7 +39,7 @@
       <div class="play-btn" title="Play" data-toggle="tooltip" data-placement="bottom" {{action "onPlayCollection" collection}}>
         {{gru-icon name="ic_play_arrow"}}
       </div>
-      <div class="schedule-dca-content ca-datepicker-popover" title="{{t 'teacher-landing.schedule-for-later'}}" data-toggle="tooltip" data-placement="bottom"  onclick={{action 'onScheduleContentToDCA' collection}}>
+      <div class="schedule-dca-content ca-datepicker-popover {{if collection.isScheduled 'has-scheduled'}}" title="{{t 'teacher-landing.schedule-for-later'}}" data-toggle="tooltip" data-placement="bottom"  onclick={{action 'onScheduleContentToDCA' collection}}>
         {{gru-icon name="update"}}
       </div>
       <div class="dca-add-btn {{if collection.isAdded 'added'}}" title="{{t 'add.to.todays.class'}}" data-toggle="tooltip" data-placement="bottom" {{action "onAddCollectionToDCA" collection}}>

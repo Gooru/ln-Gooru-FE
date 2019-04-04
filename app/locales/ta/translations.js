@@ -67,7 +67,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'FIRSTNAME',
   'common.filter-by': 'மூலம் வடிகட்டி',
   'common.more': 'மேலும்',
-  'common.search-help-message': 'Click the search icon above to apply your filter',
+  'common.apply-filter': 'apply filter',
+  'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'சராசரி ஸ்கோர்',
   'common.frq': 'frq',
   'common.schedule': 'அட்டவணை',
@@ -728,6 +729,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'unbookmark',
   'common.unexpectedError':
     'எதிர்பாராத பிழை ஏற்பட்டது மற்றும் புகாரளிக்கப்பட்டது. நாம் \'சிரமத்திற்கு வருந்துகிறோம்!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'பின்தொடராமல்',
   'common.unit': 'அலகு',
   'common.unit-title': 'அலகு தலைப்பு',
@@ -1696,7 +1699,7 @@ export default Object.assign(quizzesTranslations, {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Choose Grade Lines to Display',
+  'grade-selector.placeholder': 'Grade Lines',
   'standard-dropdown.placeholder': 'தரமான உலாவ',
   'subject-dropdown.placeholder': 'பாடம் (ங்கள்)',
   'subject-dropdown.prompt': 'ஒரு பொருளைத் தேர்ந்தெடுக்கவும்',

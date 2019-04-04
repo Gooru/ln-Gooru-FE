@@ -54,7 +54,13 @@
   </div>
   {{#if isCourseMap}}
     <div class="ca-course-map-container">
-      {{teacher.class.ca-course-map onAddContentToDCA="onAddContentToDCA" onScheduleContentToDCA="onScheduleContentToDCA" classId=classId courseId=courseId}}
+      {{teacher.class.ca-course-map
+        onAddContentToDCA="onAddContentToDCA"
+        onScheduleContentToDCA="onScheduleContentToDCA"
+        classId=classId
+        courseId=courseId
+        todaysClassActivities=todaysClassActivities
+      }}
     </div>
   {{else}}
     <div class="search-content-type-filter">
@@ -70,14 +76,26 @@
         {{/if}}
       </div>
       {{#if showFilter}}
-        {{search.search-by-filter publisherName=publisherName isShow=isShow hideAppScroll=false unCheckedItem=unCheckedItem preference=class.preference selectedFilters=selectedFilters}}
+        {{search.search-by-filter
+          isShow=isShow
+          onFilterApply="doSearch"
+          hideAppScroll=false
+          unCheckedItem=unCheckedItem
+          preference=class.preference
+          selectedFilters=selectedFilters}}
       {{/if}}
     </div>
     <div class="search-list-container {{if isShowListView 'list-view' 'grid-view'}}">
       {{#if (gt searchResults.length 0)}}
         <div class="search-list">
           {{#each searchResultSet as |result|}}
-            {{cards.dca-search-collection-card onPreviewContent="onPreviewContent" onScheduleContentToDCA='onScheduleContentToDCA' collection=result contentType=activeContentType onAddContentToDCA="onAddContentToDCA" addedScheduleContentToDCA='addedScheduleContentToDCA' classId=classId}}
+            {{cards.dca-search-collection-card
+              onPreviewContent="onPreviewContent"
+              onScheduleContentToDCA='onScheduleContentToDCA'
+              collection=result contentType=activeContentType
+              onAddContentToDCA="onAddContentToDCA"
+              addedScheduleContentToDCA='addedScheduleContentToDCA'
+              classId=classId}}
           {{/each}}
         </div>
       {{else}}
@@ -96,9 +114,17 @@
 {{/if}}
 
 <div class="schedule-ca-datepicker-container ca-datepicker-popover-container">
-  {{ca-date-picker userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
+  {{ca-date-picker
+    userStartDateAsToday=true
+    onSelectDate='onScheduleDate'
+    showMonths=true
+    onSelectMonth='onScheduleForMonth'}}
 </div>
 
 {{#if isShowCreateOfflineActivity}}
-  {{activity.gru-new-offline-activity isShowPullUp=isShowCreateOfflineActivity classPreference=classPreference classId=classId onAddExternalCollectionToDCA="onAddExternalCollectionToDCA"}}
+  {{activity.gru-new-offline-activity
+    isShowPullUp=isShowCreateOfflineActivity
+    classPreference=classPreference
+    classId=classId
+    onAddExternalCollectionToDCA="onAddExternalCollectionToDCA"}}
 {{/if}}

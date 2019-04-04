@@ -66,7 +66,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'പേരിന്റെ ആദ്യഭാഗം',
   'common.filter-by': 'ഫിൽട്ടർ ചെയ്യുക',
   'common.more': 'കൂടുതൽ',
-  'common.search-help-message': 'Click the search icon above to apply your filter',
+  'common.apply-filter': 'apply filter',
+  'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'ശരാശരി സ്കോർ',
   'common.frq': 'frq',
   'common.schedule': 'പട്ടിക',
@@ -720,6 +721,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'unbookmark',
   'common.unexpectedError':
     'ഒരു അപ്രതീക്ഷിത പിശക് സംഭവിച്ചു, റിപ്പോർട്ടുചെയ്തു. അസൗകര്യത്തിൽ ഞങ്ങൾ ഖേദിക്കുന്നു!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'പിന്തുടരാതിരിക്കുക',
   'common.unit': 'യൂണിറ്റ്',
   'common.unit-title': 'യൂണിറ്റ് ശീർഷകം',
@@ -1689,7 +1692,7 @@ export default Object.assign(quizzesTranslations, {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Choose Grade Lines to Display',
+  'grade-selector.placeholder': 'Grade Lines',
   'standard-dropdown.placeholder': 'സ്റ്റാൻഡേർഡ് ബ്രൗസുചെയ്യുക',
   'subject-dropdown.placeholder': 'വിഷയം (കൾ)',
   'subject-dropdown.prompt': 'ഒരു വിഷയം തിരഞ്ഞെടുക്കുക',

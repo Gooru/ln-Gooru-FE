@@ -62,6 +62,24 @@ export default Ember.Component.extend({
    */
   selectedContentForSchedule: null,
 
+  /**
+   * Maintains the list of added collection ids from today's class activities
+   * @type {Object}
+   */
+  addedCollectionIdsInTodayClassActivities: Ember.computed(
+    'todaysClassActivities',
+    function() {
+      let classActivities = this.get('todaysClassActivities');
+      let collectionIds = Ember.A([]);
+      if (classActivities) {
+        collectionIds = classActivities.map(classActivity => {
+          return classActivity.get('collection.id');
+        });
+      }
+      return collectionIds;
+    }
+  ),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -106,6 +124,7 @@ export default Ember.Component.extend({
       let lessonId = selectedLesson.get('id');
       let element = `#dca-lesson-${lessonId}`;
       let courseId = component.get('courseId');
+      let collectionIds = this.get('addedCollectionIdsInTodayClassActivities');
       if (selectedLesson.get('isActive')) {
         component.$(element).slideUp(400, function() {
           selectedLesson.set('isActive', false);
@@ -120,7 +139,23 @@ export default Ember.Component.extend({
         .getLessonInfo(classId, courseId, unitId, lessonId, true)
         .then(lesson => {
           if (!component.isDestroyed) {
-            selectedLesson.set('children', lesson.get('children'));
+            let lessonItems = lesson.get('children');
+            let collections = Ember.A();
+            lessonItems.forEach(collection => {
+              let id = collection.get('id');
+              if (collectionIds.includes(id)) {
+                collection.set('isAdded', true);
+              }
+              if (
+                (collection.get('format') === 'collection' ||
+                  collection.get('format') === 'assessment') &&
+                (collection.get('resourceCount') > 0 ||
+                  collection.get('questionCount') > 0)
+              ) {
+                collections.pushObject(collection);
+              }
+            });
+            selectedLesson.set('children', collections);
             selectedLesson.set('hasCollectionFetched', true);
           }
         });

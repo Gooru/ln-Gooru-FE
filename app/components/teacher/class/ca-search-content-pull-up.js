@@ -318,8 +318,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
       const component = this;
       if (item.get('filter') === 'flt.standard') {
         component.set('unCheckedItem', item);
-      } else if (item.get('filter') === 'flt.publisherName') {
-        component.set('publisherName', null);
       }
       component.get('selectedFilters').removeObject(item);
       component.send('doSearch');
@@ -418,6 +416,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
               newContentId,
               scheduleDate
             );
+            content.set('isScheduled', true);
             component.sendAction('addedContentToDCA', data, scheduleDate);
           }
         });
@@ -632,7 +631,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.set('page', 0);
     component.set('isMoreDataExists', false);
     component.set('isShow', false);
-
     Ember.RSVP
       .hash({
         searchResults: component.getSearchService()
@@ -658,21 +656,18 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.set('isLoading', true);
     let page = component.get('page') + 1;
     component.set('page', page);
-    Ember.RSVP
-      .hash({
-        searchResults: component.getSearchService()
-      })
-      .then(({ searchResults }) => {
-        if (!component.isDestroyed) {
-          component.set('isLoading', false);
-          let searchResult = component.get('searchResults');
-          component.set('searchResults', searchResult.concat(searchResults));
-          if (
-            searchResults &&
-            searchResults.length === component.get('defaultSearchPageSize')
-          ) {
-            component.set('isMoreDataExists', true);
-          }
+    Ember.RSVP.hash({
+      searchResults: component.getSearchService()
+    }).then(({ searchResults }) => {
+      if (!component.isDestroyed) {
+        component.set('isLoading', false);
+        let searchResult = component.get('searchResults');
+        component.set('searchResults', searchResult.concat(searchResults));
+        if (
+          searchResults &&
+          searchResults.length === component.get('defaultSearchPageSize')
+        ) {
+          component.set('isMoreDataExists', true);
         }
       });
   },
@@ -776,10 +771,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
       'flt.standard'
     );
     filters['flt.creator'] = component.get('selectedFilters')['flt.authorName'];
-    filters['flt.publisher'] = component.filterSelectedItems(
-      'filter',
-      'flt.publisherName'
-    );
     return filters;
   },
 

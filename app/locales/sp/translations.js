@@ -67,7 +67,8 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
   'common.more': 'more',
-  'common.search-help-message': 'Click the search icon above to apply your filter',
+  'common.apply-filter': 'apply filter',
+  'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'Avg Score',
   'common.frq': 'FRQ',
   'common.schedule': 'Schedule',
@@ -723,6 +724,8 @@ export default Object.assign(quizzesTranslations, {
   'common.unBookmark': 'Unbookmark',
   'common.unexpectedError':
     'Se ha producido un error inesperado y se ha informado. ¡Lo sentimos por las molestias!',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'No seguir',
   'common.unit': 'Unidad',
   'common.unit-title': 'Título de la Unidad',
@@ -1176,7 +1179,7 @@ export default Object.assign(quizzesTranslations, {
     'Crear un aula, asignar contenidos, invitar a los estudiantes',
   'teacher-landing.dca-create-info':
     'Click on the icons below and search for content from the Gooru Library to create a  class activity. You can also add content to  class activity from your course map by clicking on Course Map.',
-  'teacher-landing.schedule-for-later': 'Schedule For Later',
+  'teacher-landing.schedule-for-later': 'Schedule  Later',
   'teacher-landing.teach-this-activity-later':
     'teach this activity later at DCA',
   'teacher-landing.schedule-dca-instruction-1':
@@ -1679,7 +1682,7 @@ export default Object.assign(quizzesTranslations, {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Choose Grade Lines to Display',
+  'grade-selector.placeholder': 'Grade Lines',
   'standard-dropdown.placeholder': 'Navegar por Estándar',
   'subject-dropdown.placeholder': 'asignaturas)',
   'subject-dropdown.prompt': 'Seleccione un tema',
