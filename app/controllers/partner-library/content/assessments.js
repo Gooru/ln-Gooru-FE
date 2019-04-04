@@ -31,6 +31,14 @@ export default Ember.Controller.extend({
 
     showMoreResults: function() {
       this.showMoreResults();
+    },
+
+    //Action triggered when click preview button
+    onPreviewContent(previewContent, previewContentType) {
+      const component = this;
+      component.set('previewContent', previewContent);
+      component.set('previewContentType', previewContentType);
+      component.set('isShowContentPreview', true);
     }
   },
 

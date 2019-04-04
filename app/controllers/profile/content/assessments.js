@@ -6,14 +6,15 @@ export default Ember.Controller.extend({
   // Actions
 
   actions: {
+    //Action triggered when click on the play icon
     openContentPlayer: function(assessment) {
-      if (assessment.get('isExternalAssessment')) {
-        window.open(assessment.get('url')); //TODO url?
-      } else {
-        this.transitionToRoute('player', assessment.get('id'), {
-          queryParams: { type: assessment.get('collectionType') }
-        });
-      }
+      const controller = this;
+      let previewContentType = assessment.get('isExternalAssessment')
+        ? 'assessment-external'
+        : 'assessment';
+      controller.set('previewContent', assessment);
+      controller.set('previewContentType', previewContentType);
+      controller.set('isShowContentPreview', true);
     },
 
     showMoreResults: function() {
