@@ -87,6 +87,9 @@
               justify-self: center;
               color: #f98e4e;
               line-height: 10px;
+              i {
+                transform: rotate(90deg);
+              }
             }
             .competency-completion-performance {
               display: grid;
@@ -264,42 +267,70 @@
 
   .trigger-suggestion {
     display: grid;
-    grid-template-columns: 40px 30px 30px;
+    grid-template-columns: 40px auto 1fr 24px;
     position: absolute;
     bottom: 0;
     width: 100%;
     background: white;
-    height: 30px;
+    height: 40px;
     align-items: center;
     justify-content: left;
-    padding: 0 15px;
+    padding: 0 23px 0 11px;
     box-shadow: 1px 15px 20px 20px rgba(0, 0, 0, 0.13);
+    background-color: #f98e4e;
 
-    .activity-type {
-      width: 40px;
-      height: 30px;
-      display: grid;
-      justify-content: center;
-      align-items: center;
+    .clear-suggestion {
+      color: $white;
+      font-size: 24px;
       opacity: 1;
+      font-weight: 600;
       cursor: pointer;
-      font-weight: bold;
+      height: 40px;
       i {
-        width:20px;
-        height: 20px;
-        background-size: 20px 20px;
-        display: block;
-      }
-    }
-    .collection {
-      i {
-        background-image: url("../assets/gooru/images/collection_gray.svg");
+        line-height: 40px;
       }
     }
 
-    .assessment {
+    .selected-student-count {
+      height: 40px;
+      font-size: 16px;
+      color: $white;
+      font-weight: 600;
+      line-height: 40px;
+    }
+
+    .label-text {
+      color: $white;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 30px;
+      justify-self: end;
+    }
+
+    .students-suggestion {
+      height: 40px;
+      justify-self: end;
+      position: relative;
+      cursor: pointer;
       i {
-        background-image: url("../assets/gooru/images/assessment-gray.svg");
+        line-height: 40px;
+        color: $white;
+        transform: rotate(90deg);
+      }
+      .suggestion-count {
+        width: 16px;
+        border-radius: 50%;
+        background: #fff;
+        position: absolute;
+        line-height: 14px;
+        top: 5px;
+        height: 16px;
+        left: 14px;
+        color: #37424a;
+        border: 1px solid #37424a;
+        font-size: 9px;
+        text-align: center;
       }
     }
   }

@@ -63,7 +63,7 @@
 </div>
 
 {{#if isShowCompetencyCompletionReport}}
-  {{reports.pull-up.competency-completion-report showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent onSuggestAtCompetency="onSuggestAtCompetency"}}
+  {{reports.pull-up.competency-completion-report showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent onSuggestAtCompetency="onSuggestAtCompetency" maxLimitToSuggestContent=maxLimitToSuggestContent}}
 {{/if}}
 
 {{#if isShowActivitySearchContentPullup}}
@@ -75,5 +75,7 @@
     classPreference=classPreference
     classId=classId
     competencyData=selectedCompetencyData
+    defaultSearchPageSize=maxLimitToSuggestContent
+    isShowMoreEnabled=false
   }}
 {{/if}}
