@@ -30,6 +30,9 @@ $left-cell-margin: 20vw;
     border-top: 1px solid #afb4b9 !important;
     border-bottom: 1px solid #afb4b9;
     min-width: 80px;
+    .avg-score {
+      font-size: 25px;
+    }
   }
 
   .table-wrapper {
