@@ -355,6 +355,8 @@ $left-cell-margin: 20vw;
     }
     .answer-extended_text {
       @extend .std-circle;
+      margin-left: 2px;
+      margin-bottom: unset;
       border-color: $blue-400 !important;
     }
   }
