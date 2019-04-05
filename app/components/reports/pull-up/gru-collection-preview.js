@@ -189,9 +189,9 @@ export default Ember.Component.extend(ModalMixin, {
   openPullUp() {
     let component = this;
     component.$().animate({
-        top: '10%'
-      },
-      400
+      top: '10%'
+    },
+    400
     );
   },
 

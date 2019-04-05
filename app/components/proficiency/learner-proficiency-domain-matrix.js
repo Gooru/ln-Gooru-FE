@@ -781,7 +781,7 @@ export default Ember.Component.extend({
         let numberOfMasteredCompetency = domainWiseMasteredCompetencies.length;
         let masteredCompetencyHighestSeq = numberOfMasteredCompetency ?
           domainWiseMasteredCompetencies[numberOfMasteredCompetency - 1]
-          .competencySeq :
+            .competencySeq :
           0;
         let x1 = cellIndex * cellWidth;
         let y1 = cellHeight * masteredCompetencyHighestSeq; //stroke width
@@ -793,8 +793,8 @@ export default Ember.Component.extend({
           y1 === parseInt(isSkyLineContainer.attr('y1')) - 6 ||
           y1 === parseInt(isSkyLineContainer.attr('y1')) ||
           y1 === 0 ?
-          y1 + 3 :
-          y1;
+            y1 + 3 :
+            y1;
 
         let x2 = x1 + cellWidth;
         let y2 = y1;

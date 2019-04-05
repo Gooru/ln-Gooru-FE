@@ -73,8 +73,6 @@ export default Ember.Component.extend({
           score: activity.score
         })
       );
-      console.log(activity, "ACTIVITY");
-      console.log(collection, "collection");
       component.openStudentCollectionReport(activity, collection, contentType);
     });
   },
@@ -96,7 +94,6 @@ export default Ember.Component.extend({
      **/
     onOpenCollectionReport(activity) {
       let component = this;
-      console.log(component.get('isStudent'))
       component.getStundentCollectionReport(activity);
     },
 
@@ -107,7 +104,7 @@ export default Ember.Component.extend({
         classId: collection.get('classId'),
         courseId: collection.get('courseId'),
         unitId: collection.get('unitId'),
-        lessonId: collection.get('lessonId'),
+        lessonId: collection.get('lessonId')
       });
       component.set('previewPlayerContext', previewPlayerContext);
       component.set('previewContent', collection);
