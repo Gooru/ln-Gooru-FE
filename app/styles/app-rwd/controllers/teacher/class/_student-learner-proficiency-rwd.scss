@@ -1,5 +1,9 @@
 .student_class_student-learner-proficiency,
 .teacher_class_student-learner-proficiency {
+  @media only screen and (max-width: $screen-sm - 1) {
+    padding-top: 50px;
+  }
+
   .student-proficiency-container {
     .inspect-competency {
       .competency-info-pull-up {

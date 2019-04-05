@@ -58,157 +58,54 @@
             border-bottom: solid 1px #cacaca;
             height: 100%;
             display: grid;
-            grid-template-columns: 1fr 49px;
+            grid-template-columns: 1fr max-content 49px 49px;
             align-items: center;
 
+            &.hide-play {
+              grid-template-columns: 1fr max-content 49px;
+            }
+
             .title {
-              height: 20px;
+              height: auto;
               font-size: 15px;
               font-weight: bold;
-              font-style: normal;
-              font-stretch: normal;
-              line-height: normal;
-              letter-spacing: normal;
               color: #ef8f2f;
+            }
+
+            .content-count {
+              display: flex;
+              margin: 0 5px;
+              align-items: center;
+              justify-content: space-around;
+
+              span {
+                opacity: 0.5;
+                display: flex;
+
+                &.invisible {
+                  width: 0;
+                }
+              }
+            }
+
+            .action {
+              align-items: center;
+              display: flex;
+              justify-content: center;
+              color: #f98e4e;
+              height: 49px;
+              border-left: 1px solid #ccc;
+              border-right: 1px solid #ccc;
+
+              i {
+                height: 24px;
+              }
             }
 
             .suggestion-icon {
               display: flex;
               justify-content: center;
               color: #f98e4e;
-            }
-          }
-        }
-
-        .signature-info {
-          display: grid;
-          grid-template-columns: 49px 1fr 49px;
-          align-items: center;
-          height: 54px;
-          border-bottom: 1px solid rgb(202, 202, 202);
-
-          .properties {
-            grid-column-start: 2;
-            display: grid;
-            grid-template-columns: 140px 95px;
-
-            .content-count {
-              font-size: $font-navigator;
-              margin: auto;
-              color: $light-400;
-              display: flex;
-              align-items: center;
-
-              span {
-                vertical-align: middle;
-
-                i {
-                  display: inline-block;
-                  margin: 0 5px 0 0;
-                  vertical-align: middle;
-                  color: $light-200;
-                  font-size: 23px;
-                  cursor: default;
-                }
-
-                &.question-count {
-                  i.icon {
-                    background: url("gooru/question-icon.png");
-                    -webkit-background-size: 25px 25px;
-                    background-size: 25px 25px;
-                    height: 25px;
-                    width: 25px;
-                  }
-                }
-
-                &.assessment-count {
-                  margin: 0 0 0 15px;
-
-                  i.icon {
-                    background: url("gooru/images/navigation_assessment.svg");
-                    -webkit-background-size: 25px 25px;
-                    background-size: 25px 25px;
-                    height: 25px;
-                    width: 25px;
-                  }
-                }
-
-                &.collection-count {
-                  i.icon {
-                    background: url("gooru/images/navigation_collection.svg");
-                    -webkit-background-size: 25px 25px;
-                    background-size: 25px 25px;
-                    height: 25px;
-                    width: 25px;
-                  }
-                }
-              }
-            }
-
-            .attempts {
-              display: grid;
-              grid-template-columns: 30px 100px;
-              margin: auto;
-
-              .attempt {
-                display: grid;
-                margin: auto;
-              }
-
-              .info {
-                font-size: 9px;
-                font-weight: bold;
-                font-style: normal;
-                font-stretch: normal;
-                letter-spacing: normal;
-                color: #2d3749;
-                align-self: center;
-                line-height: normal;
-                width: 90px;
-              }
-            }
-
-            .direction {
-              display: grid;
-              grid-template-columns: 30px 150px;
-              margin: auto;
-
-              .info {
-                font-size: 9px;
-                font-weight: bold;
-                font-style: normal;
-                font-stretch: normal;
-                letter-spacing: normal;
-                color: #2d3749;
-                align-self: center;
-                line-height: normal;
-                width: 110px;
-              }
-            }
-          }
-
-          .content-count {
-            grid-column-start: 3;
-
-            .assessment-count,
-            .collection-count {
-              margin: auto;
-              display: flex;
-            }
-          }
-
-          a {
-            .action {
-              display: flex;
-              color: #f98e4e;
-              justify-content: center;
-              height: 46px;
-              width: 100%;
-              border-left: 1px solid #cacaca;
-
-              i {
-                margin: auto;
-              }
             }
           }
         }

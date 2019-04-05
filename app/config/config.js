@@ -380,8 +380,8 @@ export const CLASS_SKYLINE_INITIAL_DESTINATION = {
 
 export const SCREEN_SIZES = {
   SMALL: 768,
-  LARGE: 992,
-  MEDIUM: 1024
+  MEDIUM: 992,
+  LARGE: 1024
 };
 
 export const SEARCH_CONTEXT = {

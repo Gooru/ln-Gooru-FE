@@ -80,6 +80,36 @@
       min-height: inherit;
 
       #render-proficiency-matrix {
+        .block-container {
+          position: absolute;
+          display: block;
+          background: rgba(0, 0, 0, 0.5);
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          cursor: default;
+
+          .selected-competency {
+            box-shadow: 0 0 6px 5px rgba(255, 255, 255, 0.5);
+            position: relative;
+
+            &.background0 {
+              background-color: #e7e8e9;
+            }
+
+            &.background1 {
+              background-color: #1aa9eb;
+            }
+
+            &.background2,
+            &.background3,
+            &.background4,
+            &.background5 {
+              background-color: #006eb5;
+            }
+          }
+        }
+
         &.highlight {
           svg {
             #cell-container {
