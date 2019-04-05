@@ -56,12 +56,15 @@ $left-cell-margin: 20vw;
       border: none;
       font-weight: normal;
       padding: 0 2px;
-      height: 32px;
+      height: 48px;
     }
 
     th[scope="col"] {
       border-bottom: 1px solid #afb4b9;
       border-color: #afb4b9;
+      cursor: default !important;
+      pointer-events: none;
+      opacity: 0.7;
     }
 
     .first-tier,
@@ -99,7 +102,7 @@ $left-cell-margin: 20vw;
         > span {
           display: block;
           font-weight: normal;
-          opacity: 0.6;
+          opacity: 1;
           min-width: $table-cell-width;
           white-space: nowrap;
           &:after {
@@ -122,7 +125,11 @@ $left-cell-margin: 20vw;
           text-align: $tab-float-dir;
           padding: 4px;
           border-bottom: unset;
-
+          font-weight: 400;
+          //font-size: 17px;
+          opacity: 0.8;
+          border-bottom: 1px solid #afb4b9;
+          border-color: #afb4b9;
           > span {
             width: auto;
             > i {
@@ -273,9 +280,10 @@ $left-cell-margin: 20vw;
             width: 38px;
             height: 18px;
             object-fit: contain;
-            opacity: 0.5;
+            opacity: 0.7;
             font-family: Lato;
             font-size: 15px;
+            font-weight: bold;
           }
           span {
             display: block;
@@ -347,6 +355,24 @@ $left-cell-margin: 20vw;
       text-align: center;
       opacity: 0.2;
     }
+    .cross-circle {
+      border: 1px solid gray;
+      width: 24px;
+      height: 24px;
+      border-radius: 14px;
+      position: relative;
+    }
+
+    .cross-circle:after {
+      content: "";
+      position: absolute;
+      border-top: 1px solid gray;
+      width: 24px;
+      margin-top: 13px;
+      transform: rotate(135deg);
+      transform-origin: 52% 0%;
+    }
+
     .answer-not-started {
       @extend .grey-circle;
     }
