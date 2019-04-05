@@ -138,13 +138,15 @@ export default Ember.Component.extend({
     );
     let xAxisSeq = selectedElement.attr('x');
     let yAxisSeq = parseInt(selectedElement.attr('y')) + 3;
-    component.$('.block-container').remove();
-    let container = `<div class="block-container" style="width:${width}px">`;
-    container += `<div class="selected-competency background${selectedCompetency.status.toString()}"
-                       style="width:${cellWidth}px; height:${cellHeight}px; top:${yAxisSeq}px; left:${xAxisSeq}px">
-                  </div>`;
-    container += '</div>';
-    component.$('#render-proficiency-matrix').prepend(container);
+    component.$('.block-container').removeClass('hidden').addClass('visible');
+    component.set('blockAttribute', Ember.Object.create({
+      containerWidth: width,
+      status: selectedCompetency.status,
+      width: cellWidth,
+      height: cellHeight,
+      top: yAxisSeq,
+      left: xAxisSeq
+    }));
   },
 
   // Action triggered when competency is clicked or hover in
@@ -157,7 +159,7 @@ export default Ember.Component.extend({
   // Action triggered when competency is un-clicked or hover out
   competencyFocusOut() {
     let component = this;
-    component.$('.block-container').remove();
+    component.$('.block-container').removeClass('visible').addClass('hidden');
   },
 
   // -------------------------------------------------------------------------
@@ -356,6 +358,8 @@ export default Ember.Component.extend({
     let component = this;
     component.onToggleBaseline();
   }),
+
+  blockAttribute: null,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -571,7 +575,7 @@ export default Ember.Component.extend({
     var width = Math.round(numberOfCellsInEachColumn * cellWidth) + 5;
     component.set('width', width);
     var height = component.get('height') + extendedChartHeight;
-    component.$('#render-proficiency-matrix').empty();
+    component.$('#render-proficiency-matrix svg').remove();
     component.$('#render-proficiency-matrix').height(height);
     const svg = d3
       .select('#render-proficiency-matrix')

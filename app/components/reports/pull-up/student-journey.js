@@ -138,7 +138,6 @@ export default Ember.Component.extend({
       sessionId: collectionType === 'assessment' ? activity.get('sessionId') : null,
       type: collectionType,
       isStudent: component.get('isStudent'),
-      isTeacher: component.get('isStudent'),
       collection
     };
     if (collectionType === 'assessment-external') {
