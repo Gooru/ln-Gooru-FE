@@ -12,6 +12,11 @@
   <div class="question-description">
     {{{gru-math-text text=question.text}}}
   </div>
+  {{#if question.thumbnail}}
+    <div class="question-thumbnail">
+      <img src="{{question.thumbnail}}"/>
+    </div>
+  {{/if}}
   <div class="answer-container">
     {{#if isShowCorrectAnswer}}
       {{{component (question-config question.type 'component.answer') question=question showCorrect=true}}}

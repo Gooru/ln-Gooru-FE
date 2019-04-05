@@ -1,5 +1,7 @@
 import Ember from 'ember';
-
+import {
+  PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -41,18 +43,29 @@ export default Ember.Component.extend({
   getStundentCollectionReport(activity) {
     let component = this;
     let collectionPromise;
-    if (activity.get('collectionType') === 'collection') {
+    let contentType = activity.get('collectionType');
+    if (contentType === 'collection') {
       collectionPromise = component
         .get('collectionService')
         .readCollection(activity.get('id'));
-    } else if (activity.get('collectionType') === 'assessment') {
+    } else if (contentType === 'assessment') {
       collectionPromise = component
         .get('assessmentService')
         .readAssessment(activity.get('id'));
+    } else if (contentType === 'assessment-external') {
+      collectionPromise = component
+        .get('assessmentService')
+        .readExternalAssessment(activity.get('id'));
+    } else {
+      collectionPromise = component
+        .get('collectionService')
+        .readExternalCollection(activity.get('id'));
     }
     return Ember.RSVP.hash({
       collection: collectionPromise
-    }).then(({ collection }) => {
+    }).then(({
+      collection
+    }) => {
       component.set('collection', collection);
       collection.set(
         'performance',
@@ -60,7 +73,9 @@ export default Ember.Component.extend({
           score: activity.score
         })
       );
-      component.openStudentCollectionReport(activity, collection);
+      console.log(activity, "ACTIVITY");
+      console.log(collection, "collection");
+      component.openStudentCollectionReport(activity, collection, contentType);
     });
   },
 
@@ -81,32 +96,124 @@ export default Ember.Component.extend({
      **/
     onOpenCollectionReport(activity) {
       let component = this;
+      console.log(component.get('isStudent'))
       component.getStundentCollectionReport(activity);
+    },
+
+    //Action triggered when click collection/assessment title
+    onPreviewContent(collection) {
+      const component = this;
+      let previewPlayerContext = Ember.Object.create({
+        classId: collection.get('classId'),
+        courseId: collection.get('courseId'),
+        unitId: collection.get('unitId'),
+        lessonId: collection.get('lessonId'),
+      });
+      component.set('previewPlayerContext', previewPlayerContext);
+      component.set('previewContent', collection);
+      component.set('previewContentType', collection.get('collectionType'));
+      component.set('isShowContentPreview', true);
     }
   },
 
   /**
    * @function openStudentCollectionReport
-   * Method to open student collection report pullup
+   * Method to open student collection report
    */
-  openStudentCollectionReport(activity, collection) {
+  openStudentCollectionReport(activity, collection, collectionType) {
     let component = this;
-    let collectionType = activity.get('collectionType');
+    if (activity.get('contentSource') === PLAYER_EVENT_SOURCE.DAILY_CLASS) {
+      component.showDCAReport(activity, collection, collectionType);
+    } else {
+      component.showCourseMapReport(activity, collection, collectionType);
+    }
+  },
+
+  showCourseMapReport(activity, collection, collectionType) {
+    let component = this;
     let params = {
-      userId: component.get('session.userId'),
+      userId: component.get('isStudent') ? component.get('session.userId') : component.get('userId'),
       classId: activity.get('classId'),
       courseId: activity.get('courseId'),
       unitId: activity.get('unitId'),
       lessonId: activity.get('lessonId'),
       collectionId: activity.get('id'),
-      sessionId:
-        collectionType === 'assessment' ? activity.get('sessionId') : null,
+      sessionId: collectionType === 'assessment' ? activity.get('sessionId') : null,
       type: collectionType,
-      isStudent: true,
-      isTeacher: false,
+      isStudent: component.get('isStudent'),
+      isTeacher: component.get('isStudent'),
       collection
     };
-    component.set('isShowPullUp', true);
-    component.set('studentCollectionReport', params);
+    if (collectionType === 'assessment-external') {
+      component.set('showExternalAssessmentReport', true);
+      component.set('showCollectionReport', false);
+    } else {
+      component.set('showExternalAssessmentReport', false);
+      component.set('showCollectionReport', true);
+    }
+    component.set('studentReportContextData', params);
+  },
+
+  showDCAReport(activity, collection, collectionType) {
+    let component = this;
+    let params = component.getStudentDCAReportData(
+      activity,
+      collection,
+      collectionType
+    );
+    if (collectionType === 'assessment-external') {
+      component.set('isShowStudentExternalAssessmentReport', true);
+      component.set('showStudentDcaReport', false);
+      component.set('isShowStudentExternalCollectionReport', false);
+    } else if (collectionType === 'collection-external') {
+      component.set('showStudentDcaReport', false);
+      component.set('isShowStudentExternalAssessmentReport', false);
+      component.set('isShowStudentExternalCollectionReport', true);
+    } else {
+      component.set('showStudentDcaReport', true);
+      component.set('isShowStudentExternalAssessmentReport', false);
+      component.set('isShowStudentExternalCollectionReport', false);
+    }
+    component.set('studentReportContextData', params);
+  },
+
+  getStudentDCAReportData(activity, collection, collectionType) {
+    let component = this;
+    return Ember.Object.create({
+      activityDate: activity.get('lastAccessedDate'),
+      collectionId: activity.get('id'),
+      classId: activity.get('classId'),
+      isStudent: component.get('isStudent'),
+      type: collectionType,
+      userId: component.get('isStudent') ? component.get('session.userId') : component.get('userId'),
+      collection: component.getDCACollectionData(collection, collectionType),
+      studentPerformance: component.getDCACollectionPerformance(activity)
+    });
+  },
+
+  getDCACollectionData(collection, collectionType) {
+    return Ember.Object.create({
+      collectionType: collectionType,
+      format: collectionType,
+      id: collection.get('id'),
+      title: collection.get('title'),
+      thumbnailUrl: collection.get('thumbnailUrl'),
+      questionCount: collection.get('questionCount'),
+      resourceCount: collection.get('resourceCount'),
+      oeQuestionCount: collection.get('oeQuestionCount')
+    });
+  },
+
+  getDCACollectionPerformance(activity) {
+    return Ember.Object.create({
+      attempts: activity.get('attempts'),
+      collectionId: activity.get('id'),
+      hasStarted: true,
+      id: activity.get('id'),
+      sessionId: activity.get('sessionId'),
+      timeSpent: activity.get('timeSpent'),
+      status: activity.get('status'),
+      views: activity.get('views')
+    });
   }
 });

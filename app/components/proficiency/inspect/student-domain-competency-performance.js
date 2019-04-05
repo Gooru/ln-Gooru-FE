@@ -57,8 +57,8 @@ export default Ember.Component.extend({
      * Action triggered when click global view
      */
     onToggleGlobalCompetencyView(gutCode) {
-      let controller = this;
-      controller.fetchLearningMapsContent(gutCode);
+      let component = this;
+      component.fetchLearningMapsContent(gutCode);
     }
   },
 
@@ -132,6 +132,11 @@ export default Ember.Component.extend({
     }
   ),
 
+  /**
+   * @property {String} sortCriteria
+   */
+  sortCriteria: 'lastName',
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -179,7 +184,9 @@ export default Ember.Component.extend({
           );
           parsedStudentCompetenctData.push(parsedData);
         });
-        studentLevelDomainCompetencyData.studentCompetencies = parsedStudentCompetenctData;
+        studentLevelDomainCompetencyData.studentCompetencies = parsedStudentCompetenctData.sortBy(
+          component.get('sortCriteria')
+        );
         domainLevelStudentSummaryData.push(studentLevelDomainCompetencyData);
       });
     }
@@ -226,19 +233,24 @@ export default Ember.Component.extend({
    * Method to fetch learning maps content
    */
   fetchLearningMapsContent(competencyCode) {
-    let controller = this;
-    let searchService = controller.get('searchService');
+    let component = this;
+    let searchService = component.get('searchService');
     let filters = {
       startAt: 0,
       length: 5,
       isCrosswalk: false
     };
-    return Ember.RSVP.hash({
-      learningMapData: Ember.RSVP.resolve(
-        searchService.fetchLearningMapsContent(competencyCode, filters)
-      )
-    }).then(({ learningMapData }) => {
-      controller.set('learningMapData', learningMapData);
-    });
+    return Ember.RSVP
+      .hash({
+        learningMapData: searchService.fetchLearningMapsContent(
+          competencyCode,
+          filters
+        )
+      })
+      .then(({ learningMapData }) => {
+        if (!component.isDestroyed) {
+          component.set('learningMapData', learningMapData);
+        }
+      });
   }
 });

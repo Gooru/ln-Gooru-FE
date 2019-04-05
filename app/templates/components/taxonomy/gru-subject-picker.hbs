@@ -14,7 +14,7 @@
     {{#if onlySubjectsWithStandards}}
       {{#each subjectsWithStandards as |subject|}}
         {{#if subject.frameworksWithStandards}}
-          <li class="subject has-children">
+          <li class="subject has-children {{if isCompatiableMode 'compatiable'}}">
             <a class="trigger">
               {{#if (eq alignment 'left' )}}
                 {{gru-icon name="keyboard_arrow_left"}}
@@ -23,6 +23,9 @@
               {{#unless (eq alignment 'left' )}}
                 {{gru-icon name="keyboard_arrow_right"}}
               {{/unless}}
+              {{#if isCompatiableMode}}
+                {{gru-icon name="keyboard_arrow_down"}}
+              {{/if}}
             </a>
             <ul class="dropdown-menu sub-menu {{if (eq alignment 'left' ) 'dropdown-menu-right' 'dropdown-menu-left'}}">
               {{#each subject.frameworksWithStandards as |framework|}}

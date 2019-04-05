@@ -17,6 +17,9 @@
 
     .message {
       font-size: 16px;
+      display: block;
+      text-align: justify;
+      padding: 10px;
     }
 
     .collection-panel {
@@ -72,11 +75,7 @@
         height: 17px;
         font-size: 13px;
         font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        cursor: default;
+        cursor: pointer;
         color: #37424b;
       }
     }

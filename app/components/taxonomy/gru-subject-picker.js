@@ -1,5 +1,10 @@
 import Ember from 'ember';
-
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
+import {
+  SCREEN_SIZES
+} from 'gooru-web/config/config';
 /**
  * Taxonomy subject picker component
  *
@@ -38,6 +43,15 @@ export default Ember.Component.extend({
 
   //
   // Methods
+
+  didRender() {
+    const component = this;
+    if (component.get('isCompatiableMode')) {
+      component.$('.trigger').click(function(e) {
+        e.stopPropagation();
+      });
+    }
+  },
 
   // -------------------------------------------------------------------------
   // Properties
@@ -86,5 +100,11 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} indicates if the control is disabled
    */
-  disabled: false
+  disabled: false,
+
+  /**
+   * @property {Boolean} isCompatibleMode
+   * Property to handle is mobile view
+   */
+  isCompatiableMode: isCompatibleVW(SCREEN_SIZES.MEDIUM)
 });

@@ -79,9 +79,20 @@
       color: #666666;
     }
 
+    .question-thumbnail {
+      width: 100%;
+      border-bottom: 1px solid rgba(151, 151, 151, 0.4);
+      padding-bottom: 10px;
+      img {
+        width: 96px;
+        height: 96px;
+      }
+    }
+
     .answer-container {
       %circle-tick-icon {
-        background: url("/assets/gooru/images/check-circle-light-blue.svg") no-repeat center  !important;;
+        background: url("/assets/gooru/images/check-circle-light-blue.svg")
+          no-repeat center !important;
         background-size: contain;
         border: none;
         display: block;
@@ -159,7 +170,8 @@
 
         .answer-panel {
           .fib-answers {
-            .gru-math-text, p {
+            .gru-math-text,
+            p {
               font-size: 14px;
               color: #666666;
               input {
@@ -171,7 +183,8 @@
         }
 
         .sentence {
-          .gru-math-text, p {
+          .gru-math-text,
+          p {
             font-size: 14px;
             color: #666666;
           }
@@ -278,7 +291,8 @@
               }
             }
 
-            .gru-math-text, p {
+            .gru-math-text,
+            p {
               font-size: 14px;
               font-weight: bold;
               color: #3e5e67;
@@ -329,7 +343,6 @@
 
         .answer-choices {
           .table {
-
             thead {
               tr {
                 width: 100%;
@@ -365,7 +378,8 @@
                       display: none;
                     }
 
-                    .gru-math-text, p {
+                    .gru-math-text,
+                    p {
                       font-size: 14px;
                       font-weight: bold;
                       color: #3e5e67;
@@ -422,7 +436,8 @@
                 display: none;
               }
 
-              .gru-math-text, p {
+              .gru-math-text,
+              p {
                 font-size: 14px;
                 color: #4f95f6;
                 font-weight: bold;
@@ -471,13 +486,13 @@
             padding-left: 16px;
             align-items: center;
             margin: 8px 0;
-            .correct  {
+            .correct {
               @extend %circle-tick-icon;
               i {
                 visibility: hidden;
               }
             }
-            .column  {
+            .column {
               i {
                 position: relative;
                 opacity: 0.4;
@@ -523,7 +538,8 @@
               border-radius: 8px;
               margin: 8px 0;
 
-              .gru-math-text, p {
+              .gru-math-text,
+              p {
                 line-height: 48px;
                 font-size: 14px;
                 font-weight: bold;
@@ -573,7 +589,8 @@
               border: 1px solid #3c99f7;
 
               .text {
-                .gru-math-text, p {
+                .gru-math-text,
+                p {
                   color: #3c99f7;
                 }
               }
@@ -613,7 +630,8 @@
               div {
                 height: inherit;
 
-                .gru-math-text, p {
+                .gru-math-text,
+                p {
                   height: 48px;
                   line-height: 48px;
                   font-size: 14px;
@@ -657,7 +675,8 @@
             }
 
             .answer-text {
-              .gru-math-text, p {
+              .gru-math-text,
+              p {
                 font-size: 14px;
                 font-weight: bold;
                 color: #4f95f6;

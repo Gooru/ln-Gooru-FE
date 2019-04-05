@@ -5,11 +5,7 @@
   .heading {
     font-size: 14px;
     font-weight: bold;
-    font-style: normal;
     padding: 20px 10px 10px;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
     color: #ffffff;
   }
 
@@ -33,28 +29,41 @@
       grid-template-columns: 1fr 20px;
 
       .code {
-        height: 17px;
         font-size: 12px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
         font-weight: bold;
         color: #37424b;
-        padding: 10px;
+        height: auto;
+        padding: 0 0 0 10px;
+        align-items: center;
+        display: flex;
       }
 
-      &:after {
-        font-family: "Material Icons";
-        content: "arrow_drop_up";
-        float: right;
-        font-size: 16px;
-        color: grey;
+      .icon {
+        align-items: center;
+        display: flex;
+
+        i {
+          font-size: 16px;
+          color: grey;
+        }
       }
 
-      &.collapsed:after {
-        content: "arrow_drop_down";
+      &[aria-expanded="true"] {
+        .icon.arrow_up {
+          display: none;
+        }
+
+        .icon.arrow_down {
+          display: flex;
+        }
+      }
+
+      .icon.arrow_up {
+        display: flex;
+      }
+
+      .icon.arrow_down {
+        display: none;
       }
     }
 
@@ -101,12 +110,7 @@
 
         .competency-description {
           font-size: 13px;
-          @include ellipsis(
-            $font-size: $font-size-base,
-            $line-height: $line-height,
-            $lines-to-show: $lines-to-show,
-            $excerpt-bg: $white
-          );
+          @include ellipsis($font-size: $font-size-base, $line-height: $line-height, $lines-to-show: $lines-to-show, $excerpt-bg: $white);
         }
       }
 

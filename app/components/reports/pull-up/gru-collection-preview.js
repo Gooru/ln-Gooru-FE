@@ -1,12 +1,15 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import { PLAYER_WINDOW_NAME, PLAYER_EVENT_SOURCE, ROLES } from 'gooru-web/config/config';
+import {
+  PLAYER_WINDOW_NAME,
+  PLAYER_EVENT_SOURCE,
+  ROLES
+} from 'gooru-web/config/config';
 import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
 import ModalMixin from 'gooru-web/mixins/modal';
 
 export default Ember.Component.extend(ModalMixin, {
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['preview', 'gru-collection-preview'],
@@ -34,7 +37,9 @@ export default Ember.Component.extend(ModalMixin, {
     } else if (previewContentType === 'collection-external') {
       component.fetchExternalCollection();
     }
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -66,9 +71,7 @@ export default Ember.Component.extend(ModalMixin, {
         let contentType = component.get('previewContentType');
         playerURL += `/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${contentId}?role=teacher&type=${contentType}&source=${PLAYER_EVENT_SOURCE.RGO}`;
       } else {
-        playerURL += `/${contentId}?source=${
-          PLAYER_EVENT_SOURCE.RGO
-        }`;
+        playerURL += `/${contentId}?source=${PLAYER_EVENT_SOURCE.RGO}`;
       }
       window.open(playerURL, PLAYER_WINDOW_NAME);
     },
@@ -103,14 +106,31 @@ export default Ember.Component.extend(ModalMixin, {
   previewContentType: null,
 
   /**
-   * @property {Boolean} isShowCorrectAnswer
+   * @property {Boolean} playContent
    */
-  isShowCorrectAnswer: true,
+  playContent: true,
 
   /**
-   * @property {Boolean} isQuestionAvailable
+   * @property {Boolean} isShowCorrectAnswer
    */
-  isQuestionAvailable: Ember.computed.alias('previewContent.questionCount'),
+  isShowCorrectAnswer: Ember.computed('isTeacher', function() {
+    const component = this;
+    return component.get('isTeacher');
+  }),
+
+  /**
+   * @property {Boolean} isEnableToggleAnswer
+   */
+  isEnableToggleAnswer: Ember.computed(
+    'previewContent.questionCount',
+    'isTeacher',
+    function() {
+      const component = this;
+      let isTeacher = component.get('isTeacher');
+      let questionCount = component.get('previewContent.questionCount');
+      return questionCount && isTeacher;
+    }
+  ),
 
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags
@@ -168,8 +188,7 @@ export default Ember.Component.extend(ModalMixin, {
    */
   openPullUp() {
     let component = this;
-    component.$().animate(
-      {
+    component.$().animate({
         top: '10%'
       },
       400
@@ -181,15 +200,13 @@ export default Ember.Component.extend(ModalMixin, {
    */
   closePullUp() {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-      }
-    );
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+    });
   },
 
   /**
@@ -200,10 +217,11 @@ export default Ember.Component.extend(ModalMixin, {
     const component = this;
     const assessmentId = component.get('previewContentId');
     const assessmentService = component.get('assessmentService');
-    return Ember.RSVP.hash({
-      assessment: assessmentService.readAssessment(assessmentId)
-    })
-      .then(({assessment}) => {
+    return Ember.RSVP
+      .hash({
+        assessment: assessmentService.readAssessment(assessmentId)
+      })
+      .then(({ assessment }) => {
         if (!component.isDestroyed) {
           component.set('previewContent', assessment);
         }
@@ -218,10 +236,11 @@ export default Ember.Component.extend(ModalMixin, {
     const component = this;
     const collectionId = component.get('previewContentId');
     const collectionService = component.get('collectionService');
-    return Ember.RSVP.hash({
-      collection: collectionService.readCollection(collectionId)
-    })
-      .then(({collection}) => {
+    return Ember.RSVP
+      .hash({
+        collection: collectionService.readCollection(collectionId)
+      })
+      .then(({ collection }) => {
         if (!component.isDestroyed) {
           component.set('previewContent', collection);
         }
@@ -236,10 +255,13 @@ export default Ember.Component.extend(ModalMixin, {
     const component = this;
     const externalAssessmentId = component.get('previewContentId');
     const assessmentService = component.get('assessmentService');
-    return Ember.RSVP.hash({
-      externalAssessment: assessmentService.readExternalAssessment(externalAssessmentId)
-    })
-      .then(({externalAssessment}) => {
+    return Ember.RSVP
+      .hash({
+        externalAssessment: assessmentService.readExternalAssessment(
+          externalAssessmentId
+        )
+      })
+      .then(({ externalAssessment }) => {
         if (!component.isDestroyed) {
           component.set('previewContent', externalAssessment);
         }
@@ -254,10 +276,13 @@ export default Ember.Component.extend(ModalMixin, {
     const component = this;
     const externalCollectionId = component.get('previewContentId');
     const collectionService = component.get('collectionService');
-    return Ember.RSVP.hash({
-      externalCollection: collectionService.readExternalCollection(externalCollectionId)
-    })
-      .then(({externalCollection}) => {
+    return Ember.RSVP
+      .hash({
+        externalCollection: collectionService.readExternalCollection(
+          externalCollectionId
+        )
+      })
+      .then(({ externalCollection }) => {
         if (!component.isDestroyed) {
           component.set('previewContent', externalCollection);
         }

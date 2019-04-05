@@ -6,9 +6,7 @@ import {
 } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 export default Ember.Component.extend(ConfigurationMixin, {
@@ -80,7 +78,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   context: null,
 
-  showFilter: Ember.computed.alias('configuration.GRU_FEATURE_FLAG.searchFilter'),
+  showFilter: Ember.computed.alias(
+    'configuration.GRU_FEATURE_FLAG.searchFilter'
+  ),
 
   /**
    * Class Id extract from context
@@ -276,16 +276,15 @@ export default Ember.Component.extend(ConfigurationMixin, {
   isClassPreferenceMapped: Ember.computed('classPreference', function() {
     let component = this;
     let classPreference = component.get('classPreference');
-    return classPreference ?
-      classPreference.subject && classPreference.framework :
-      false;
+    return classPreference
+      ? classPreference.subject && classPreference.framework
+      : false;
   }),
 
   // -------------------------------------------------------------------------
   // actions
 
   actions: {
-
     /**
      * Action triggered when the user preview content
      */
@@ -314,12 +313,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
       const component = this;
       if (item.get('filter') === 'flt.standard') {
         component.set('unCheckedItem', item);
-      } else if (item.get('filter') === 'flt.publisherName') {
-        component.set('publisherName', null);
       }
       component.get('selectedFilters').removeObject(item);
       component.send('doSearch');
-
     },
 
     /**
@@ -415,6 +411,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
               newContentId,
               scheduleDate
             );
+            content.set('isScheduled', true);
             component.sendAction('addedContentToDCA', data, scheduleDate);
           }
         });
@@ -588,22 +585,24 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   openPullUp() {
     let component = this;
-    component.$().animate({
-      top: '10%'
-    },
-    400
+    component.$().animate(
+      {
+        top: '10%'
+      },
+      400
     );
   },
 
   closePullUp() {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-    }
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+      }
     );
   },
 
@@ -632,9 +631,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
     Ember.RSVP.hash({
       searchResults: component.getSearchService()
-    }).then(({
-      searchResults
-    }) => {
+    }).then(({ searchResults }) => {
       if (!component.isDestroyed) {
         component.set('isLoading', false);
         component.set('searchResults', searchResults);
@@ -656,9 +653,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.set('page', page);
     Ember.RSVP.hash({
       searchResults: component.getSearchService()
-    }).then(({
-      searchResults
-    }) => {
+    }).then(({ searchResults }) => {
       if (!component.isDestroyed) {
         component.set('isLoading', false);
         let searchResult = component.get('searchResults');
@@ -730,9 +725,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
     let subject = component.get('course.subject');
     let competencyData = component.get('competencyData');
     let primaryLanguage = component.get('class.primaryLanguage');
-    let gutCode = competencyData ?
-      competencyData.get('competencyCode') :
-      null;
+    let gutCode = competencyData ? competencyData.get('competencyCode') : null;
     if (!component.get('selectedFilters').length && !term) {
       if (subject) {
         filters['flt.subject'] = subject;
@@ -753,25 +746,41 @@ export default Ember.Component.extend(ConfigurationMixin, {
   filterBuilder() {
     const component = this;
     let filters = {};
-    filters['flt.audience'] = component.filterSelectedItems('filter', 'flt.audience');
-    filters['flt.educationalUse'] = component.filterSelectedItems('filter', 'flt.educational');
-    filters['flt.language'] = component.filterSelectedItems('filter', 'flt.language');
-    filters['flt.audience'] = component.filterSelectedItems('filter', 'flt.audience');
-    filters['flt.standard'] = component.filterSelectedItems('filter', 'flt.standard');
+    filters['flt.audience'] = component.filterSelectedItems(
+      'filter',
+      'flt.audience'
+    );
+    filters['flt.educationalUse'] = component.filterSelectedItems(
+      'filter',
+      'flt.educational'
+    );
+    filters['flt.language'] = component.filterSelectedItems(
+      'filter',
+      'flt.language'
+    );
+    filters['flt.audience'] = component.filterSelectedItems(
+      'filter',
+      'flt.audience'
+    );
+    filters['flt.standard'] = component.filterSelectedItems(
+      'filter',
+      'flt.standard'
+    );
     filters['flt.creator'] = component.get('selectedFilters')['flt.authorName'];
-    filters['flt.publisher'] = component.filterSelectedItems('filter', 'flt.publisherName');
     return filters;
   },
 
   filterSelectedItems(keyField, keyValue) {
     const component = this;
-    let filterList = component.get('selectedFilters').filterBy(keyField, keyValue);
+    let filterList = component
+      .get('selectedFilters')
+      .filterBy(keyField, keyValue);
     let keyName = keyValue === 'flt.standard' ? 'id' : 'name';
     return component.toArray(filterList, keyName);
   },
 
   toArray(filterList, key) {
-    let params = filterList.map((filter) => {
+    let params = filterList.map(filter => {
       return filter[key];
     });
     return params.length > 0 ? params.join(',') : null;
