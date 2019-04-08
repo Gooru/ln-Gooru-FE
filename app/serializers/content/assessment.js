@@ -223,5 +223,19 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return {
       order: values
     };
+  },
+
+  /**
+   * Normalized data of assessments mastery accrual.
+   * @return {Object}
+   */
+  normalizeAssessmentsMasteryAccrual: function(response) {
+    let resultSet = Ember.A();
+    response = Ember.A(response.masteryAccrualCompetencies);
+    response.forEach(data => {
+      let result = Ember.Object.create(data);
+      resultSet.pushObject(result);
+    });
+    return resultSet;
   }
 });

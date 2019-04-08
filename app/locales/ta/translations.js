@@ -2578,5 +2578,18 @@ export default Object.assign(quizzesTranslations, {
     'Present a diagnostic to determine the student\'s current location, if not known?',
   'present.diagnostic.determine.know':
     '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
-  'add.to.todays.class': 'Add to Today\'s Class'
+  'add.to.todays.class': 'Add to Today\'s Class',
+  warning: 'warning',
+  'ca.warn.multiple-competencies-1':
+    'The assessment is tagged to multiple competencies.',
+  'ca.warn.multiple-competencies-2':
+    'Students will gain mastery on all the competencies on successfully completing the assessment.',
+  'ca.warn.multiple-competencies-3':
+    'You can remix (copy) the assessment and tag it to the competency(ies) for which the students should gain masterymatery, before adding it to the Class Activity',
+  'ca.warn.trun-off.mastery-accrual-1':
+    'Any student who has already successfully completed the assessment will have gained mastery.',
+  'ca.warn.trun-off.mastery-accrual-2':
+    'Turning mastery off will not update the mastery status for these students.',
+  'ca.warn.trun-on.mastery-accrual':
+    'Turning mastery accrual on now will not result in update to mastery status for students who have already completed the assessment.'
 });
