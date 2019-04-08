@@ -41,8 +41,11 @@ export default Ember.Component.extend({
           });
         })
         .catch(function(error) {
-          //TO-DO update message.
-          //component.get('notifications').error(message);
+          let message = component
+            .get('i18n')
+            .t('ca.mastery-accrual.update.error').string;
+          component.get('notifications').error(message);
+          component.set('isLoading', false);
           Ember.Logger.error(error);
         });
     },

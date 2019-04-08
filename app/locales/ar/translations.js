@@ -2466,5 +2466,7 @@ export default Object.assign(quizzesTranslations, {
   'ca.warn.trun-off.mastery-accrual-2':
     'Turning mastery off will not update the mastery status for these students.',
   'ca.warn.trun-on.mastery-accrual':
-    'Turning mastery accrual on now will not result in update to mastery status for students who have already completed the assessment.'
+    'Turning mastery accrual on now will not result in update to mastery status for students who have already completed the assessment.',
+  'ca.mastery-accrual.update.error':
+    'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.'
 });
