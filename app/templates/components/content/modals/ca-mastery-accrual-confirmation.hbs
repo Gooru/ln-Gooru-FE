@@ -1,0 +1,26 @@
+<div class="modal-body">
+  <div class="warning-container">
+    {{gru-icon name="info" class="warning-icon"}}
+    <span class="warning-text">{{t 'warning'}}</span>
+  </div>
+  {{#if model.hasMultipleCompetencies}}
+    <p>
+      {{t 'ca.warn.multiple-competencies-1'}}<br/> {{t 'ca.warn.multiple-competencies-2'}} <br/> {{t 'ca.warn.multiple-competencies-3'}}
+    </p>
+  {{/if}}
+  {{#if model.allowMasteryAccrual}}
+    <p>
+      {{t 'ca.warn.trun-off.mastery-accrual-1'}}<br/> {{t 'ca.warn.trun-off.mastery-accrual-2'}}
+    </p>
+  {{else}}
+    <p>
+      {{t 'ca.warn.trun-on.mastery-accrual'}}
+    </p>
+  {{/if}}
+</div>
+<div class="actions">
+  <div class="back-btn" {{action 'cancel'}}>{{t 'common.back'}}</div>
+  {{#gru-spinner-button classes='btn btn-primary' text=(t 'common.loading') isLoading=isLoading}}
+    <div class="ok-btn" {{action 'confirm'}}>{{t 'gru-submit-confirmation.ok'}}</div>
+  {{/gru-spinner-button}}
+</div>

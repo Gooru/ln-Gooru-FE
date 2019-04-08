@@ -270,5 +270,27 @@ export default Ember.Service.extend({
       assessmentId,
       'assessment'
     );
+  },
+
+  /**
+   * Find  the mastery accrual for the given list of assessmentIds
+   *
+   * @param {string} assessmentIds
+   * @returns {Promise}
+   */
+  assessmentsMasteryAccrual: function(assessmentIds) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('assessmentAdapter')
+        .assessmentsMasteryAccrual(assessmentIds)
+        .then(function(responseData) {
+          resolve(
+            service
+              .get('assessmentSerializer')
+              .normalizeAssessmentsMasteryAccrual(responseData)
+          );
+        }, reject);
+    });
   }
 });
