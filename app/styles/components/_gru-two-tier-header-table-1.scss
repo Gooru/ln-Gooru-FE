@@ -295,17 +295,6 @@ $left-cell-margin: 20vw;
       tr.data {
         th {
           /* max-width: 12rem; */
-          // .col-label {
-          //   width: 38px;
-          //   height: 18px;
-          //   object-fit: contain;
-          //   font-family: Lato;
-          //   font-size: 15px;
-          //   font-weight: 400;
-          //   font-size: 17px;
-          //   opacity: 1 !important;
-          //   margin-top: -10px;
-          // }
           span {
             display: block;
             @include text-overflow();
