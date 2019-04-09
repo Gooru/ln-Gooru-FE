@@ -157,6 +157,7 @@ export default Ember.Component.extend({
       new Date(component.get('activityData.activation_date')) || new Date();
     let classId = component.get('classId');
     let collection = component.get('collection');
+    let activityId = component.get('activityData.id');
     let courseId = component.get('course') ? component.get('course').id : null;
     resources.forEach(function(resource) {
       let maxHour = parseInt(resource.maxHour);
@@ -185,7 +186,8 @@ export default Ember.Component.extend({
       path_id: 0,
       path_type: null,
       resources: collectionResources,
-      course_id: courseId
+      course_id: courseId,
+      additionalContext: btoa(JSON.stringify({ dcaContentId: activityId }))
     };
     return studentPerformanceData;
   },
