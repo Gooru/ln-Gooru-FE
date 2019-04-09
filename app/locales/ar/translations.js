@@ -266,6 +266,7 @@ export default Object.assign(quizzesTranslations, {
   'common.download-report': 'تنزيل  التقرير',
   'common.done': 'Done',
   'common.edit': 'تعديل',
+  'common.date': 'Date',
   'common.showassessments': 'أظهر التقييمات',
   'common.showcollections': 'أظهر المجموعات',
   'common.showlessons': 'أظهر الدروس',
@@ -1218,6 +1219,8 @@ export default Object.assign(quizzesTranslations, {
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'أنشطة الصف اليومية',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report':
     'Activity Report',
   'teacher-landing.class.offline-class-report.conducted-on': 'Conducted On',

@@ -1,0 +1,87 @@
+<div class="monthly-summary-report-container">
+  <div class="monthly-performance-chart-container">
+    <div class="carousel-months">
+      <div class="previous-month month-slider {{unless isPrevEnabled 'disable-event'}}" {{action "onCarouselMonth" 'prev'}}>
+        {{gru-icon name="keyboard_arrow_left"}}
+      </div>
+      <div class="next-month month-slider {{unless isNextEnabled 'disable-event'}}" {{action "onCarouselMonth" 'next'}}>
+        {{gru-icon name="keyboard_arrow_right"}}
+      </div>
+    </div>
+    {{charts.score-fill-gauge-chart
+      scoreInPercentage = reportContext.scoreInPercentage
+      timeSpent = reportContext.timeSpent}}
+  </div>
+  <div class="activity-list-filter-container">
+    <div class="sort-action">
+      <div class="date-sort sort-item" {{action "onSortByDate"}}>
+        <span class="sort-label">
+          {{gru-icon name="date_range"}}
+          <span class="text">{{t 'common.date'}}</span>
+        </span>
+        <span class="icon">
+          {{#if isSortedByDate}}
+            {{gru-icon name="keyboard_arrow_down"}}
+          {{else}}
+            {{gru-icon name="keyboard_arrow_up"}}
+          {{/if}}
+        </span>
+      </div>
+      <div class="title-sort sort-item" {{action "onSortByTitle"}}>
+        <span class="sort-label">
+          {{gru-icon name="text_format"}}
+          <span class="text">{{t 'gru-performance-summary.title'}}</span>
+        </span>
+        <span class="icon">
+          {{#if isSortedByTitle}}
+            {{gru-icon name="keyboard_arrow_down"}}
+          {{else}}
+            {{gru-icon name="keyboard_arrow_up"}}
+          {{/if}}
+        </span>
+      </div>
+    </div>
+    <div class="filter-action">
+      <div class="assessment-filter filter-item {{if isAssessmentFilterActive 'active'}}" {{action "onFilterByAssessment"}}>
+        <i class="icon"/>
+        <span class="text">{{t 'common.assessment'}}</span>
+      </div>
+      <div class="collection-filter filter-item {{if isCollectionFilterActive 'active'}}" {{action "onFilterByCollection"}}>
+        <i class="icon"/>
+        <span class="text">{{t 'common.collection'}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="activity-list-container">
+    {{#if isLoading}}
+      <div class="loading-spinner">
+        {{three-bounce-spinner}}
+      </div>
+    {{/if}}
+    {{#each activitySummaryList as |activitySummary|}}
+      <div class="activity-container">
+        <div class="icon-container {{activitySummary.contentType}}">
+          <i class="icon" />
+        </div>
+        <div class="activity-info-container">
+          <div class="activity-title">
+            {{activitySummary.title}}
+          </div>
+          <div class="activity-date">
+            {{format-date activitySummary.date 'MMMM DD, YYYY'}}
+          </div>
+        </div>
+        <div class="activity-performance-container {{unless activitySummary.performanceSummary 'not-started' (if (gte activitySummary.performanceSummary.score 0) (concat 'grade-range-' (grade-range activitySummary.performanceSummary.score)) 'timespent')}}">
+          {{#if activitySummary.performanceSummary}}
+            {{if (gte activitySummary.performanceSummary.score 0)
+              (concat activitySummary.performanceSummary.score '%')
+              (if activity.collection.performance.timeSpent (format-time  activity.collection.performance.timeSpent) '--')
+            }}
+          {{else}}
+            {{t 'teacher-landing.class.students-tab.not-started'}}
+          {{/if}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>

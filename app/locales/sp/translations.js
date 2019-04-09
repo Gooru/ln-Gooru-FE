@@ -252,6 +252,7 @@ export default Object.assign(quizzesTranslations, {
   'common.create-rubric': 'Crear nueva rúbrica',
   'common.current-attempt': 'Intento actual',
   'common.currently-studying': 'Currently Studying',
+  'common.date': 'Date',
   'common.delete': 'Borrar',
   'common.delete-instructions.links-inaccessible':
     'Todos los enlaces compartidos serán inaccesibles',
@@ -1284,6 +1285,8 @@ export default Object.assign(quizzesTranslations, {
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'Actividades de Clases Diarias',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report':
     'Activity Report',
   'teacher-landing.class.offline-class-report.conducted-on': 'Conducted On',

@@ -1,0 +1,35 @@
+<div class="class-summary-report-container">
+  <div class="class-performance-chart-container">
+    {{charts.score-fill-gauge-chart
+      scoreInPercentage = classSummary.scoreInPercentage
+      timeSpent = timeSpent}}
+  </div>
+  <div class="monthly-summary-list-container">
+    {{#if isLoading}}
+      <div class="loading-spinner">
+        {{three-bounce-spinner}}
+      </div>
+    {{/if}}
+    {{#each classSummaryReportData as |reportData|}}
+      <div class="month-summary-container" {{action "onShowMonthlyReport" reportData}}>
+        <div class="info-container">
+          <div class="activity-timespent">{{if reportData.timeSpent (format-time reportData.timeSpent) '--'}}</div>
+          <div class="activity-month">{{format-date (concat reportData.month '/' 01 '/' reportData.year) 'MMMM YYYY'}}</div>
+        </div>
+        <div class="activity-performance grade-range-{{grade-range reportData.scoreInPercentage}}">{{reportData.scoreInPercentage}}%</div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+
+{{#if isShowMonthlySummaryReport}}
+  {{#reports.pull-up.student-activity-report showPullUp=isShowMonthlySummaryReport title=(t 'teacher-landing.class.offline-class-report.activity-report') reportPeriod=reportPeriod}}
+    {{reports.pull-up.activity.monthly-summary-report
+      classId = classId
+      userId = userId
+      reportContext = monthlyReportContext
+      classSummary=classSummaryReportData
+    }}
+  {{/reports.pull-up.student-activity-report}}
+{{/if}}

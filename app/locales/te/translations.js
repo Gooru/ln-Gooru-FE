@@ -247,6 +247,7 @@ export default Object.assign(quizzesTranslations, {
   'common.create-rubric': 'కొత్త రబ్బర్ని సృష్టించండి',
   'common.current-attempt': 'ప్రస్తుత ప్రయత్నం',
   'common.currently-studying': 'ప్రస్తుతం చదువుతున్నారు',
+  'common.date': 'Date',
   'common.delete': 'తొలగించండి',
   'common.delete-instructions.links-inaccessible':
     'అన్ని వాటా లింకులు అందుబాటులో ఉండవు',
@@ -1259,6 +1260,8 @@ export default Object.assign(quizzesTranslations, {
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'తరగతి కార్యకలాపాలు',
   'teacher-landing.class.offline-class-report.class-report': 'తరగతి నివేదిక',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report':
     'కార్యాచరణ నివేదిక',
   'teacher-landing.class.offline-class-report.conducted-on': 'నిర్వహించిన',

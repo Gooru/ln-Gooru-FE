@@ -252,6 +252,7 @@ export default Object.assign(quizzesTranslations, {
   'common.create-rubric': 'ਨਵਾਂ ਰੂਬਰੂ ਬਣਾਓ',
   'common.current-attempt': 'ਮੌਜੂਦਾ ਕੋਸ਼ਿਸ਼',
   'common.currently-studying': 'ਵਰਤਮਾਨ ਵਿੱਚ ਪੜ੍ਹ ਰਿਹਾ ਹੈ',
+  'common.date': 'Date',
   'common.delete': 'ਮਿਟਾਓ',
   'common.delete-instructions.links-inaccessible':
     'ਸਾਰੇ ਸ਼ੇਅਰ ਲਿੰਕ ਪਹੁੰਚਯੋਗ ਨਹੀਂ ਹੋਣਗੇ',
@@ -1259,6 +1260,8 @@ export default Object.assign(quizzesTranslations, {
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'ਕਲਾਸ ਦੀਆਂ ਗਤੀਵਿਧੀਆਂ',
   'teacher-landing.class.offline-class-report.class-report': 'ਕਲਾਸ ਦੀ ਰਿਪੋਰਟ',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report': 'ਸਰਗਰਮੀ ਰਿਪੋਰਟ',
   'teacher-landing.class.offline-class-report.conducted-on': 'ਤੇ ਆਯੋਜਿਤ',
   'teacher-landing.class.offline-class-report.not-started': 'ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਇਆ',

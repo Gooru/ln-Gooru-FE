@@ -75,6 +75,11 @@ export default Ember.Component.extend({
 
     closeNotificationList() {
       this.set('displayNotificationList', false);
+    },
+
+    //Action triggered when open student CA report
+    onOpenCAReport() {
+      this.sendAction('onOpenCAReport');
     }
   },
 

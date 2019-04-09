@@ -254,6 +254,7 @@ export default Object.assign(quizzesTranslations, {
   'common.create-rubric': 'নতুন ৰিউবিক সৃষ্টি কৰক',
   'common.current-attempt': 'বৰ্তমান প্ৰয়াস',
   'common.currently-studying': 'বৰ্তমান অধ্যয়ন কৰি আছে',
+  'common.date': 'Date',
   'common.delete': 'মচি পেলাওক',
   'common.delete-instructions.links-inaccessible':
     'সকলো অংশীদাৰী সংযোগেই অপ্ৰাপ্য হ\'ব।',
@@ -1287,6 +1288,8 @@ export default Object.assign(quizzesTranslations, {
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'শ্ৰেণী কাৰ্যকলাপ',
   'teacher-landing.class.offline-class-report.class-report': 'শ্ৰেণী প্ৰতিবেদন',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report':
     'কাৰ্যকলাপ প্ৰতিবেদন',
   'teacher-landing.class.offline-class-report.conducted-on': 'পৰিচালনা কৰা সময়',

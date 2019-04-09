@@ -176,29 +176,31 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       route.modelFor('application').myClasses || // when refreshing the page the variable is accessible at the route
       route.controllerFor('application').get('myClasses'); // after login the variable is refreshed at the controller
 
-    return Ember.RSVP.hash({
-      firstCourse: firstCoursePromise,
-      secondCourse: secondCoursePromise,
-      thirdCourse: thirdCoursePromise,
-      fourthCourse: fourthCoursePromise,
-      myClasses: myClasses
-    }).then(function(hash) {
-      const firstFeaturedCourse = hash.firstCourse;
-      const secondFeaturedCourse = hash.secondCourse;
-      const thirdFeaturedCourse = hash.thirdCourse;
-      const fourthFeaturedCourse = hash.fourthCourse;
-      featuredCourses.push(firstFeaturedCourse);
-      featuredCourses.push(secondFeaturedCourse);
-      featuredCourses.push(thirdFeaturedCourse);
-      featuredCourses.push(fourthFeaturedCourse);
+    return Ember.RSVP
+      .hash({
+        firstCourse: firstCoursePromise,
+        secondCourse: secondCoursePromise,
+        thirdCourse: thirdCoursePromise,
+        fourthCourse: fourthCoursePromise,
+        myClasses: myClasses
+      })
+      .then(function(hash) {
+        const firstFeaturedCourse = hash.firstCourse;
+        const secondFeaturedCourse = hash.secondCourse;
+        const thirdFeaturedCourse = hash.thirdCourse;
+        const fourthFeaturedCourse = hash.fourthCourse;
+        featuredCourses.push(firstFeaturedCourse);
+        featuredCourses.push(secondFeaturedCourse);
+        featuredCourses.push(thirdFeaturedCourse);
+        featuredCourses.push(fourthFeaturedCourse);
 
-      const activeClasses = hash.myClasses.getStudentActiveClasses(myId);
-      return {
-        activeClasses,
-        featuredCourses,
-        loginCount
-      };
-    });
+        const activeClasses = hash.myClasses.getStudentActiveClasses(myId);
+        return {
+          activeClasses,
+          featuredCourses,
+          loginCount
+        };
+      });
   },
 
   afterModel(resolvedModel) {
@@ -217,9 +219,9 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     let nonPremiumClassCourseIds = route.getListOfClassCourseIds(
       nonPremiumClasses
     );
-    /* let nonPremiumClassIds = nonPremiumClasses.map(classData => {
+    let nonPremiumClassIds = nonPremiumClasses.map(classData => {
       return classData.get('id');
-    }); */
+    });
     let premiumClassIds = activeClasses
       .filter(classData => {
         let setting = classData.get('setting');
@@ -247,47 +249,52 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
           .get('competencyService')
           .getCompetencyCompletionStats(premiumClassIds, myId)
         : Ember.RSVP.resolve([]);
-    //Disabling ca peformance score, Since  there is no ca drill down summary report for student. Enable it when needed.
-    //let caClassPerfSummaryPromise = nonPremiumClassIds.length > 0 ? route.get('performanceService').getCAPerformanceData(nonPremiumClassIds, myId) : Ember.RSVP.resolve([]);
-    let caClassPerfSummaryPromise = Ember.RSVP.resolve([]);
-    Ember.RSVP.hash({
-      classPerformanceSummaryItems: perfPromise,
-      classesLocation: locationPromise,
-      courseCards: courseCardsPromise,
-      caClassPerfSummary: caClassPerfSummaryPromise,
-      competencyStats: competencyCompletionStats
-    }).then(function(hash) {
-      const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
-      const classesLocation = hash.classesLocation;
-      const courseCards = hash.courseCards;
+    let caClassPerfSummaryPromise =
+      nonPremiumClassIds.length > 0
+        ? route
+          .get('performanceService')
+          .getCAPerformanceData(nonPremiumClassIds, myId)
+        : Ember.RSVP.resolve([]);
+    Ember.RSVP
+      .hash({
+        classPerformanceSummaryItems: perfPromise,
+        classesLocation: locationPromise,
+        courseCards: courseCardsPromise,
+        caClassPerfSummary: caClassPerfSummaryPromise,
+        competencyStats: competencyCompletionStats
+      })
+      .then(function(hash) {
+        const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
+        const classesLocation = hash.classesLocation;
+        const courseCards = hash.courseCards;
 
-      activeClasses.forEach(function(activeClass) {
-        const classId = activeClass.get('id');
-        const courseId = activeClass.get('courseId');
+        activeClasses.forEach(function(activeClass) {
+          const classId = activeClass.get('id');
+          const courseId = activeClass.get('courseId');
 
-        activeClass.set(
-          'currentLocation',
-          classesLocation.findBy('classId', classId)
-        );
-        activeClass.set(
-          'performanceSummary',
-          classPerformanceSummaryItems.findBy('classId', classId)
-        );
-        activeClass.set(
-          'performanceSummaryForDCA',
-          hash.caClassPerfSummary.findBy('classId', classId)
-        );
-        activeClass.set(
-          'competencyStats',
-          hash.competencyStats.findBy('classId', classId)
-        );
+          activeClass.set(
+            'currentLocation',
+            classesLocation.findBy('classId', classId)
+          );
+          activeClass.set(
+            'performanceSummary',
+            classPerformanceSummaryItems.findBy('classId', classId)
+          );
+          activeClass.set(
+            'performanceSummaryForDCA',
+            hash.caClassPerfSummary.findBy('classId', classId)
+          );
+          activeClass.set(
+            'competencyStats',
+            hash.competencyStats.findBy('classId', classId)
+          );
 
-        if (courseId) {
-          let course = courseCards.findBy('id', activeClass.get('courseId'));
-          activeClass.set('course', course);
-        }
+          if (courseId) {
+            let course = courseCards.findBy('id', activeClass.get('courseId'));
+            activeClass.set('course', course);
+          }
+        });
       });
-    });
   },
 
   /**

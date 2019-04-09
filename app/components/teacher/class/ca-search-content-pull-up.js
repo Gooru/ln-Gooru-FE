@@ -656,18 +656,21 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.set('isLoading', true);
     let page = component.get('page') + 1;
     component.set('page', page);
-    Ember.RSVP.hash({
-      searchResults: component.getSearchService()
-    }).then(({ searchResults }) => {
-      if (!component.isDestroyed) {
-        component.set('isLoading', false);
-        let searchResult = component.get('searchResults');
-        component.set('searchResults', searchResult.concat(searchResults));
-        if (
-          searchResults &&
-          searchResults.length === component.get('defaultSearchPageSize')
-        ) {
-          component.set('isMoreDataExists', true);
+    Ember.RSVP
+      .hash({
+        searchResults: component.getSearchService()
+      })
+      .then(({ searchResults }) => {
+        if (!component.isDestroyed) {
+          component.set('isLoading', false);
+          let searchResult = component.get('searchResults');
+          component.set('searchResults', searchResult.concat(searchResults));
+          if (
+            searchResults &&
+            searchResults.length === component.get('defaultSearchPageSize')
+          ) {
+            component.set('isMoreDataExists', true);
+          }
         }
       });
   },
