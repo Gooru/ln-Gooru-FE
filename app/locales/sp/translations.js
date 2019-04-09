@@ -1862,7 +1862,8 @@ export default Object.assign(quizzesTranslations, {
   'profile.proficiency.not-started': 'Not Started',
   'profile.proficiency.skyline': 'Skyline',
   'profile.proficiency.baseline': 'Baseline',
-  'profile.proficiency.grade-line': 'Grade Line',
+  'profile.proficiency.grade-line': 'Other Grade Hilines',
+  'profile.proficiency.class-grade-line': 'Class Grade Hiline',
   'profile.proficiency.not-tagged':
     'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
   'profile.proficiency.show-compressed-chart': 'Show Compressed Chart',

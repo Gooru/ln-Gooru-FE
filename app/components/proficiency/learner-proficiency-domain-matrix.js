@@ -136,9 +136,9 @@ export default Ember.Component.extend({
         selectedCompetency.yAxisSeq
       }`
     );
-    let xAxisSeq = selectedElement.attr('x');
-    let yAxisSeq = parseInt(selectedElement.attr('y')) + 3;
-    component.$('.block-container').removeClass('hidden').addClass('visible');
+    let xAxisSeq = parseInt(selectedElement.attr('x')) + 1;
+    let yAxisSeq = parseInt(selectedElement.attr('y')) + 1;
+    component.$('.selected-competency').removeClass('hidden').addClass('visible');
     component.set('blockAttribute', Ember.Object.create({
       containerWidth: width,
       status: selectedCompetency.status,
@@ -162,7 +162,7 @@ export default Ember.Component.extend({
   // Action triggered when competency is un-clicked or hover out
   competencyFocusOut() {
     let component = this;
-    component.$('.block-container').removeClass('visible').addClass('hidden');
+    component.$('.selected-competency').removeClass('visible').addClass('hidden');
   },
 
   // -------------------------------------------------------------------------
@@ -177,6 +177,7 @@ export default Ember.Component.extend({
       component.set('chartData', {});
       component.set('activeGradeList', Ember.A([]));
       component.set('domainBoundariesContainer', Ember.A([]));
+      component.competencyFocusOut();
     }
     return null;
   }),
@@ -929,6 +930,7 @@ export default Ember.Component.extend({
     let cellHeight = component.get('cellHeight');
     let svg = component.get('domainBoundaryLineContainer');
     activeGradeList.forEach(function(gradeData, gradeSeq) {
+      let isClassGrade = gradeData.get('id') === component.get('classGrade');
       let boundaryLineElements = component.$(`.boundary-line-${gradeSeq}`);
       boundaryLineElements.each(function(boundaryLineSeq) {
         let x1 = parseInt(
@@ -954,12 +956,16 @@ export default Ember.Component.extend({
           .attr('y2', linePoint.y2)
           .attr(
             'class',
-            `boundary-line horizontal-line boundary-line-${gradeSeq}-${boundaryLineSeq} grade-${gradeSeq}-line`
-          );
+            function() {
+              let className = isClassGrade ? 'class-boundary-line' : 'boundary-line';
+              return `${className} horizontal-line boundary-line-${gradeSeq}-${boundaryLineSeq} grade-${gradeSeq}-line`;
+            });
+
         component.joinDomainBoundaryLinePoints(
           linePoint,
           boundaryLineSeq - 1,
-          gradeSeq
+          gradeSeq,
+          isClassGrade
         );
       });
     });
@@ -971,7 +977,7 @@ export default Ember.Component.extend({
    * @function joinDomainBoundaryLinePoints
    * Method to draw vertical line to connects domain boundary line points, if necessary
    */
-  joinDomainBoundaryLinePoints(curLinePoint, lastBoundaryLineSeq, gradeSeq) {
+  joinDomainBoundaryLinePoints(curLinePoint, lastBoundaryLineSeq, gradeSeq, isClassGrade) {
     let component = this;
     let lastBoundaryLineContainer = component.$(
       `.boundary-line-${gradeSeq}-${lastBoundaryLineSeq}`
@@ -994,7 +1000,10 @@ export default Ember.Component.extend({
         .attr('y1', lastBoundaryLinePoint.y2)
         .attr('x2', curLinePoint.x1)
         .attr('y2', curLinePoint.y1)
-        .attr('class', `boundary-line vertical-line grade-${gradeSeq}-line`);
+        .attr('class', () => {
+          let className = isClassGrade ? 'class-boundary-line' : 'boundary-line';
+          return `${className} vertical-line grade-${gradeSeq}-line`;
+        });
     }
   },
 

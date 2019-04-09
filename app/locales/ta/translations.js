@@ -1880,7 +1880,8 @@ export default Object.assign(quizzesTranslations, {
   'profile.proficiency.not-started': 'துவங்கவில்லை',
   'profile.proficiency.skyline': 'வானலைகளில்',
   'profile.proficiency.baseline': 'அடிப்படை',
-  'profile.proficiency.grade-line': 'தர வரிசை',
+  'profile.proficiency.grade-line': 'Other Grade Hilines',
+  'profile.proficiency.class-grade-line': 'Class Grade Hiline',
   'profile.proficiency.not-tagged':
     'வகுப்புக்கு நிச்சயமாக ஒதுக்கப்படவில்லை அல்லது நிச்சயமாக ஒரு செல்லுபடியாகாத பொருள் அல்லது தரத்திற்கு குறிக்கப்படவில்லை.',
   'profile.proficiency.show-compressed-chart': 'சுருக்கப்பட்ட அட்டவணையை காட்டு',

@@ -5,7 +5,7 @@
 {{/if}}
 <div class="actions">
   {{#if (and (gt taxonomyGrades.length 0) isShowMatrixChart)}}
-    {{proficiency.grade-selector taxonomyGrades=taxonomyGrades onToggleBaseline="onToggleBaseline" onSelectGrade="onSelectGrade" activeGrade=activeGrade}}
+    {{proficiency.grade-selector classGrade=classGrade taxonomyGrades=taxonomyGrades onToggleBaseline="onToggleBaseline" onSelectGrade="onSelectGrade" activeGrade=activeGrade}}
   {{/if}}
   <div class="toggle-chart" {{action "onToggleChart"}}>
     {{#if isExpandChartEnabled}}
@@ -21,9 +21,7 @@
       <div class="domain-chart-container">
         <div class="scrollable-chart">
           <div id="render-proficiency-matrix">
-            <div class="block-container hidden" style="width:{{blockAttribute.containerWidth}}px">
-              <div class="selected-competency background{{blockAttribute.status}}" style="width:{{blockAttribute.width}}px; height:{{blockAttribute.height}}px; top:{{blockAttribute.top}}px; left:{{blockAttribute.left}}px">
-              </div>
+            <div class="selected-competency background{{blockAttribute.status}}" style="width:{{blockAttribute.width}}px; height:{{blockAttribute.height}}px; top:{{blockAttribute.top}}px; left:{{blockAttribute.left}}px">
             </div>
           </div>
         </div>

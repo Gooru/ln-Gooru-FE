@@ -6,7 +6,10 @@
   <div class="title">{{t 'common.domains'}}</div>
   <ol>
     {{#each domains as |domain|}}
-      <li {{action 'onDomainSelect' domain }}>{{domain.domainName}}</li>
+      <li {{action 'onDomainSelect' domain }}>
+        <span class="domain-title">{{domain.domainName}}</span>
+        <span class="competency-count">{{domain.competencyCount}} {{t 'common.competencies'}}</span>
+      </li>
     {{/each}}
   </ol>
 </div>
