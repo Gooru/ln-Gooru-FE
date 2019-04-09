@@ -7,6 +7,9 @@ $left-cell-margin: 20vw;
   padding-bottom: 1px;
   margin-left: $left-cell-margin;
   display: inline-block;
+  .score {
+    background-color: unset !important; // remove inline color applied
+  }
 
   .std-circle {
     margin-left: 2px;
@@ -313,7 +316,6 @@ $left-cell-margin: 20vw;
             > i {
               display: none;
             }
-            background-color: unset !important; // remove inline color applied
           }
           td > span.score:before {
             content: counter(td);
@@ -346,7 +348,8 @@ $left-cell-margin: 20vw;
     }
     .answer-correct {
       border-color: $brand-success !important;
-      color: $brand-success !important;
+      background-color: $brand-success !important;
+      color: $white !important;
 
       i {
         margin-left: -72px;
@@ -355,7 +358,8 @@ $left-cell-margin: 20vw;
     }
     .answer-incorrect {
       border-color: $brand-incorrect !important;
-      color: $brand-incorrect !important;
+      background-color: $brand-incorrect !important;
+      color: $white !important;
     }
     .grey-circle {
       background: url("gooru/images/baseline-block-24px.svg");
@@ -365,6 +369,7 @@ $left-cell-margin: 20vw;
       background-size: cover;
       border-color: $light-200 !important;
       text-align: center;
+      line-height: 27px;
       opacity: 0.2;
     }
     .cross-circle {
