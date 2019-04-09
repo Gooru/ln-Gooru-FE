@@ -476,6 +476,7 @@ export default Ember.Component.extend({
     let assessmentResources = Ember.A([]);
     let activeStudent = component.get('activeStudent');
     let activityData = component.get('activityData');
+    let activityId = activityData.get('id');
     let conductedOn = new Date(activityData.activation_date) || new Date();
     let classId = component.get('classId');
     let assessment = component.get('assessment');
@@ -507,7 +508,8 @@ export default Ember.Component.extend({
       path_id: 0,
       path_type: null,
       resources: assessmentResources,
-      course_id: courseId
+      course_id: courseId,
+      additionalContext: btoa(JSON.stringify({ dcaContentId: activityId }))
     };
     return studentPerformanceData;
   },

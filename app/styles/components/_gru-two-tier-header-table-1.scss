@@ -7,11 +7,14 @@ $left-cell-margin: 20vw;
   padding-bottom: 1px;
   margin-left: $left-cell-margin;
   display: inline-block;
+  .score {
+    background-color: unset !important; // remove inline color applied
+  }
 
   .std-circle {
     margin-left: 2px;
     margin-top: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 11px;
     font-size: 12px;
     text-align: center;
     width: 24px;
@@ -29,7 +32,7 @@ $left-cell-margin: 20vw;
     display: inline;
   }
   .avg-row {
-    border-top: 1px solid #afb4b9 !important;
+    // border-top: 1px solid #afb4b9 !important; // now we have border for each row so this is not required
     border-bottom: 1px solid #afb4b9;
     min-width: 80px;
     .avg-score {
@@ -56,12 +59,15 @@ $left-cell-margin: 20vw;
       border: none;
       font-weight: normal;
       padding: 0 2px;
-      height: 32px;
+      height: 48px;
     }
 
     th[scope="col"] {
       border-bottom: 1px solid #afb4b9;
       border-color: #afb4b9;
+      cursor: default !important;
+      pointer-events: none;
+      opacity: 0.7;
     }
 
     .first-tier,
@@ -99,7 +105,7 @@ $left-cell-margin: 20vw;
         > span {
           display: block;
           font-weight: normal;
-          opacity: 0.6;
+          opacity: 1;
           min-width: $table-cell-width;
           white-space: nowrap;
           &:after {
@@ -107,6 +113,17 @@ $left-cell-margin: 20vw;
             overflow: hidden;
             text-overflow: ellipsis;
             width: auto;
+          }
+          .col-label {
+            width: 38px;
+            height: 18px;
+            object-fit: contain;
+            font-family: Lato;
+            font-weight: 400;
+            font-size: 17px;
+            opacity: 1 !important;
+            color: black;
+            margin-top: -10px;
           }
         }
 
@@ -122,6 +139,14 @@ $left-cell-margin: 20vw;
           text-align: $tab-float-dir;
           padding: 4px;
           border-bottom: unset;
+          font-weight: 400;
+          font-size: 17px;
+          opacity: 1;
+          border-bottom: 1px solid #afb4b9;
+          border-color: #afb4b9;
+          pointer-events: unset;
+          cursor: pointer !important;
+          //margin-top: 0px;
 
           > span {
             width: auto;
@@ -160,13 +185,15 @@ $left-cell-margin: 20vw;
         th,
         td {
           &.fixed {
-            height: 32px;
+            height: 48px;
           }
         }
       }
     }
 
     > .data {
+      border-bottom: 1px solid #afb4b9;
+
       th {
         border-left: 0;
 
@@ -188,6 +215,8 @@ $left-cell-margin: 20vw;
       position: absolute;
       left: 0 !important;
       width: $left-cell-margin;
+      padding-top: 10px;
+      border-bottom: 1px solid #afb4b9;
     }
     .emotion {
       display: block;
@@ -269,14 +298,6 @@ $left-cell-margin: 20vw;
       tr.data {
         th {
           /* max-width: 12rem; */
-          .col-label {
-            width: 38px;
-            height: 18px;
-            object-fit: contain;
-            opacity: 0.5;
-            font-family: Lato;
-            font-size: 15px;
-          }
           span {
             display: block;
             @include text-overflow();
@@ -284,6 +305,8 @@ $left-cell-margin: 20vw;
         }
         td {
           white-space: nowrap;
+          border-bottom: 1px solid #afb4b9;
+
           // &:nth-child(3n-1) {
           //   border-left: 1px solid $gray-lighter;
           // }
@@ -293,7 +316,6 @@ $left-cell-margin: 20vw;
             > i {
               display: none;
             }
-            background-color: unset !important; // remove inline color applied
           }
           td > span.score:before {
             content: counter(td);
@@ -326,7 +348,8 @@ $left-cell-margin: 20vw;
     }
     .answer-correct {
       border-color: $brand-success !important;
-      color: $brand-success !important;
+      background-color: $brand-success !important;
+      color: $white !important;
 
       i {
         margin-left: -72px;
@@ -335,7 +358,8 @@ $left-cell-margin: 20vw;
     }
     .answer-incorrect {
       border-color: $brand-incorrect !important;
-      color: $brand-incorrect !important;
+      background-color: $brand-incorrect !important;
+      color: $white !important;
     }
     .grey-circle {
       background: url("gooru/images/baseline-block-24px.svg");
@@ -345,8 +369,27 @@ $left-cell-margin: 20vw;
       background-size: cover;
       border-color: $light-200 !important;
       text-align: center;
+      line-height: 27px;
       opacity: 0.2;
     }
+    .cross-circle {
+      border: 1px solid gray;
+      width: 24px;
+      height: 24px;
+      border-radius: 14px;
+      position: relative;
+    }
+
+    .cross-circle:after {
+      content: "";
+      position: absolute;
+      border-top: 1px solid gray;
+      width: 24px;
+      margin-top: 13px;
+      transform: rotate(135deg);
+      transform-origin: 52% 0%;
+    }
+
     .answer-not-started {
       @extend .grey-circle;
     }

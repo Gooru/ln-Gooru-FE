@@ -201,6 +201,35 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * Update Mastery Accrual Class Activity
+   *
+   * @param {string} classId
+   * @param {string} classActivityId
+   * @param {Boolean} allow_mastery_accrual
+   * @returns {boolean}
+   */
+  updateMasteryAccrualClassActivity: function(
+    classId,
+    classActivityId,
+    allow_mastery_accrual
+  ) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${classId}/contents/${classActivityId}/mastery-accrual`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({
+        allow_mastery_accrual
+      })
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

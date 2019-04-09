@@ -1,0 +1,40 @@
+.charts.score-fill-gauge-chart {
+  svg {
+    text.score-percentage,
+    text.total-timespent {
+      fill: $white;
+      font-weight: bold;
+    }
+
+    text.score-percentage {
+      font-size: 90px;
+    }
+    text.total-timespent {
+      font-size: 20px;
+    }
+
+    &.transparent-grade-range-not-started {
+      background-color: #fff;
+    }
+
+    &.transparent-grade-range-0-59 {
+      background-color: rgba(244, 99, 96, 0.3);
+    }
+
+    &.transparent-grade-range-60-69 {
+      background-color: rgba(237, 142, 54, 0.3);
+    }
+
+    &.transparent-grade-range-70-79 {
+      background-color: rgba(250, 186, 54, 0.3);
+    }
+
+    &.transparent-grade-range-80-89 {
+      background-color: rgba(168, 201, 156, 0.3);
+    }
+
+    &.transparent-grade-range-90-100 {
+      background-color: rgba(75, 151, 64, 0.3);
+    }
+  }
+}

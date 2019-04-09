@@ -21,6 +21,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
+  /**
+   * @requires service:api-sdk/assessment
+   */
+  assessmentService: Ember.inject.service('api-sdk/assessment'),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -153,6 +158,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           'classActivities',
           classActivities.sortBy('added_date').reverse()
         );
+        controller.fetchAssessmentsMasteryAccrual();
       }
     },
 
@@ -471,6 +477,41 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     onClosePullUp() {
       this.set('isShowOCASummaryReportPullUp', false);
       this.set('tab', null);
+    },
+
+    onUpdateMasteryAccrual(classActivity) {
+      let controller = this;
+      let collection = classActivity.get('collection');
+      let contentId = classActivity.get('id');
+      let classId = controller.get('classId');
+      let allowMasteryAccrual = !classActivity.get('allowMasteryAccrual');
+      let model = {
+        hasMultipleCompetencies:
+          collection.get('masteryAccrualCompetencies.length') > 1,
+        allowMasteryAccrual: classActivity.get('allowMasteryAccrual'),
+        onConfirm: function() {
+          return controller
+            .get('classActivityService')
+            .updateMasteryAccrualClassActivity(
+              classId,
+              contentId,
+              allowMasteryAccrual
+            );
+        },
+        callback: {
+          success: function() {
+            classActivity.set(
+              'allowMasteryAccrual',
+              !classActivity.get('allowMasteryAccrual')
+            );
+          }
+        }
+      };
+      this.actions.showModal.call(
+        this,
+        'content.modals.ca-mastery-accrual-confirmation',
+        model
+      );
     }
   },
 
@@ -783,6 +824,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     return moment().format('YYYY-MM') === selectedYearAndMonth;
   }),
 
+  /**
+   * This property decide to show the mastery accrual toggle button or not
+   * @return {Boolean}
+   */
+  showMasteryAccrual: Ember.computed('class.preference', function() {
+    let controller = this;
+    let preference = controller.get('class.preference');
+    let framework = preference ? preference.get('framework') : null;
+    let subject = preference ? preference.get('subject') : null;
+    return framework && subject;
+  }),
+
   // -------------------------------------------------------------------------
   // Observers
 
@@ -855,6 +908,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         if (classActivities && classActivities.length > 0) {
           controller.parseClassActivityData(classActivities);
         }
+        controller.fetchAssessmentsMasteryAccrual(classActivities);
         controller.set('isLoading', false);
         Ember.run.later(function() {
           let date = moment().format('YYYY-MM-DD');
@@ -975,13 +1029,63 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let controller = this;
     let classId = controller.get('classId');
     return Ember.RSVP.hash({
-      activityMembers: Ember.RSVP.resolve(
-        controller
-          .get('classActivityService')
-          .fetchUsersForClassActivity(classId, activityId)
-      )
+      activityMembers: controller
+        .get('classActivityService')
+        .fetchUsersForClassActivity(classId, activityId)
     }).then(({ activityMembers }) => {
       return activityMembers;
     });
+  },
+
+  fetchAssessmentsMasteryAccrual() {
+    let controller = this;
+    let assessments = Ember.A();
+    controller.get('scheduledClassActivities').forEach(classActivity => {
+      let activities = classActivity.get('classActivities');
+      activities.forEach(activity => {
+        let collectionType =
+          activity.get('collection.format') ||
+          activity.get('collection.collectionType');
+        let collection = activity.get('collection');
+        let standards = activity.get('collection.standards');
+        if (
+          collectionType === 'assessment' &&
+          standards &&
+          standards.length > 0
+        ) {
+          assessments.pushObject(collection);
+        }
+      });
+    });
+    let assessmentIds = assessments.map(assessment => {
+      return assessment.get('id');
+    });
+    if (assessmentIds.length > 0) {
+      Ember.RSVP.hash({
+        assessmentsMasteryAccrual: controller
+          .get('assessmentService')
+          .assessmentsMasteryAccrual(assessmentIds)
+      }).then(({ assessmentsMasteryAccrual }) => {
+        if (!controller.get('isDestroyed')) {
+          assessments.forEach(assessment => {
+            let assessmentId = assessment.get('id');
+            let assessmentMasteryAccrual = assessmentsMasteryAccrual.findBy(
+              assessmentId
+            );
+            if (assessmentMasteryAccrual) {
+              let masteryAccrualCompetencies = assessmentMasteryAccrual.get(
+                assessmentId
+              );
+              if (masteryAccrualCompetencies) {
+                assessment.set(
+                  'masteryAccrualCompetencies',
+                  masteryAccrualCompetencies
+                );
+              }
+            }
+          });
+        }
+      });
+    }
   }
 });

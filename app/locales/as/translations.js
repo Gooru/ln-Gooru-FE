@@ -235,6 +235,7 @@ export default Object.assign(quizzesTranslations, {
   'common.create-rubric': 'নতুন ৰিউবিক সৃষ্টি কৰক',
   'common.current-attempt': 'বৰ্তমান প্ৰয়াস',
   'common.currently-studying': 'বৰ্তমান অধ্যয়ন কৰি আছে',
+  'common.date': 'Date',
   'common.delete': 'মচি পেলাওক',
   'common.delete-instructions.links-inaccessible': 'সকলো অংশীদাৰী সংযোগেই অপ্ৰাপ্য হ\'ব।',
   'common.delete-instructions.content-inaccessible': 'শ্ৰেণীকোঠাৰ লগত সংলগ্ন সকলো তালিকা অপ্ৰাপ্য হ\'ব',
@@ -1017,7 +1018,10 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-label': 'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'শ্ৰেণী কাৰ্যকলাপ',
   'teacher-landing.class.offline-class-report.class-report': 'শ্ৰেণী প্ৰতিবেদন',
-  'teacher-landing.class.offline-class-report.activity-report': 'কাৰ্যকলাপ প্ৰতিবেদন',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
+  'teacher-landing.class.offline-class-report.activity-report':
+    'কাৰ্যকলাপ প্ৰতিবেদন',
   'teacher-landing.class.offline-class-report.conducted-on': 'পৰিচালনা কৰা সময়',
   'teacher-landing.class.offline-class-report.not-started': 'আৰম্ভ হোৱা নাই',
   'teacher-landing.class.back-to-class-activities': 'শ্ৰেণী কাৰ্যকলাপলৈ উভতি আহক',
@@ -1966,7 +1970,24 @@ export default Object.assign(quizzesTranslations, {
   'notifications.typeinclass.teacher-override-title': 'শিক্ষকে আপোনাৰ কা্ৰ্য্য শুদ্ধ কৰিলে',
   'notifications.typeinclass.teacher-grading-complete-title': 'শিক্ষকে শ্ৰেণীকোঠাত আপোনাৰ কাৰ্য্য শ্ৰেণীবদ্ধ কৰিলে',
   'goahead.add.something': 'Go ahead, add something.',
-  'present.diagnostic.determine.not.know': 'Present a diagnostic to determine the student\'s current location, if not known?',
-  'present.diagnostic.determine.know': '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
-  'add.to.todays.class': 'Add to Today\'s Class'
+  'present.diagnostic.determine.not.know':
+    'Present a diagnostic to determine the student\'s current location, if not known?',
+  'present.diagnostic.determine.know':
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
+  'add.to.todays.class': 'Add to Today\'s Class',
+  warning: 'warning',
+  'ca.warn.turn-on.multiple-competencies':
+    'This assessment is tagged to multiple competencies. Turning ON mastery will mean students can acquire mastery against all the competencies tagged to this assessment.',
+  'ca.warn.turn-on.multiple-competencies.question':
+    'Do you want to allow multiple competencies to be mastered via single assessment ?',
+  'ca.warn.turn-on.multiple-competencies.note':
+    'Note: You can remix (copy) any assessment and tag the right competency intended for students to gain mastery, before adding it at class acitivities.',
+  'ca.warn.trun-off.mastery-accrual':
+    'Turning OFF mastery will not revert any existing student data. Students who have already accrued mastery against competencies tagged to this assessment will have their data continue to reflect so.',
+  'ca.warn.trun-on.mastery-accrual':
+    'Turning ON mastery accrual  will not update mastery status for students who have already completed the assessment.',
+  'ca.mastery-accrual.update.error':
+    'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.',
+  'want.to.proceed': 'Do you want to proceed ?',
+  proceed: 'Proceed'
 });

@@ -235,6 +235,7 @@ export default Object.assign(quizzesTranslations, {
   'common.create-rubric': 'नवीन रुब्रिक तयार करा',
   'common.current-attempt': 'वर्तमान प्रयत्न',
   'common.currently-studying': 'सध्या हा अभ्यास करत आहे',
+  'common.date': 'Date',
   'common.delete': 'हटवा',
   'common.delete-instructions.links-inaccessible': 'सर्व शेअर लिंक्सना प्रवेश असणार नाहीत',
   'common.delete-instructions.content-inaccessible': 'सर्व आशयास त्याच्याशी संलग्न कक्षांसाठी प्रवेश असणार नाही',
@@ -1017,6 +1018,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.class-activities': 'वर्गाचे नियोजन',
   'teacher-landing.class.offline-class-report.class-report': 'वर्ग अहवाल',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report': 'उपक्रम अहवाल',
   'teacher-landing.class.offline-class-report.conducted-on': 'दिनांक',
   'teacher-landing.class.offline-class-report.not-started': 'सुरु केली नाही',
@@ -1966,7 +1969,24 @@ export default Object.assign(quizzesTranslations, {
   'notifications.typeinclass.teacher-override-title': 'शिक्षकाने आपली सबमिशन दुरुस्त केली आहे',
   'notifications.typeinclass.teacher-grading-complete-title': 'शिक्षकाने आपली सबमिशन श्रेणीमध्ये केली आहे',
   'goahead.add.something': 'Go ahead, add something.',
-  'present.diagnostic.determine.not.know': 'Present a diagnostic to determine the student\'s current location, if not known?',
-  'present.diagnostic.determine.know': '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
-  'add.to.todays.class': 'Add to Today\'s Class'
+  'present.diagnostic.determine.not.know':
+    'Present a diagnostic to determine the student\'s current location, if not known?',
+  'present.diagnostic.determine.know':
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
+  'add.to.todays.class': 'Add to Today\'s Class',
+  warning: 'warning',
+  'ca.warn.turn-on.multiple-competencies':
+    'This assessment is tagged to multiple competencies. Turning ON mastery will mean students can acquire mastery against all the competencies tagged to this assessment.',
+  'ca.warn.turn-on.multiple-competencies.question':
+    'Do you want to allow multiple competencies to be mastered via single assessment ?',
+  'ca.warn.turn-on.multiple-competencies.note':
+    'Note: You can remix (copy) any assessment and tag the right competency intended for students to gain mastery, before adding it at class acitivities.',
+  'ca.warn.trun-off.mastery-accrual':
+    'Turning OFF mastery will not revert any existing student data. Students who have already accrued mastery against competencies tagged to this assessment will have their data continue to reflect so.',
+  'ca.warn.trun-on.mastery-accrual':
+    'Turning ON mastery accrual  will not update mastery status for students who have already completed the assessment.',
+  'ca.mastery-accrual.update.error':
+    'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.',
+  'want.to.proceed': 'Do you want to proceed ?',
+  proceed: 'Proceed'
 });

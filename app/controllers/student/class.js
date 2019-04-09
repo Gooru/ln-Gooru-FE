@@ -28,6 +28,11 @@ export default Ember.Controller.extend(ConfigurationMixin, {
      */
     openCourseReport: function() {
       this.openStudentCourseReport();
+    },
+
+    //Action triggered when click on CA score
+    onOpenCAReport() {
+      this.populateClassActivityReport();
     }
   },
 
@@ -86,7 +91,7 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   barChartData: Ember.computed(function() {
     const completed = this.get('class.performanceSummary.totalCompleted');
     const total = this.get('class.performanceSummary.total');
-    const percentage = completed ? (completed / total) * 100 : 0;
+    const percentage = completed ? completed / total * 100 : 0;
     return [
       {
         color: ANONYMOUS_COLOR,
@@ -123,6 +128,11 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    */
   isPremiumCourse: false,
 
+  /**
+   * @property {Boolean} isShowClassActivityReport
+   */
+  isShowClassActivityReport: false,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -153,5 +163,14 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   onClosePullUp() {
     let controller = this;
     controller.set('showCourseReport', false);
+  },
+
+  /**
+   * @function populateClassActivityReport
+   * Method to bring class activity report
+   */
+  populateClassActivityReport() {
+    const controller = this;
+    controller.set('isShowClassActivityReport', true);
   }
 });

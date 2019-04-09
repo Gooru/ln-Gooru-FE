@@ -235,6 +235,7 @@ export default Object.assign(quizzesTranslations, {
   'common.create-rubric': 'নতুন রুব্রিক তৈরি করুন',
   'common.current-attempt': 'বর্তমান প্রচেষ্টা',
   'common.currently-studying': 'বর্তমানে অধ্যয়নরত',
+  'common.date': 'Date',
   'common.delete': 'মুছে ফেলা',
   'common.delete-instructions.links-inaccessible': 'সমস্ত শেয়ার লিঙ্ক প্রবেশযোগ্য হবে',
   'common.delete-instructions.content-inaccessible': 'সমস্ত কন্টেন্ট এটি বাঁধা ক্লাসরুমে প্রবেশযোগ্য হবে',
@@ -1018,6 +1019,10 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-activities': 'ক্লাস কার্যক্রম',
   'teacher-landing.class.offline-class-report.class-report': 'ক্লাস রিপোর্ট',
   'teacher-landing.class.offline-class-report.activity-report': 'কার্যকলাপের প্রতিবেদন',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
+  'teacher-landing.class.offline-class-report.activity-report':
+    'কার্যকলাপের প্রতিবেদন',
   'teacher-landing.class.offline-class-report.conducted-on': 'উপর পরিচালিত',
   'teacher-landing.class.offline-class-report.not-started': 'শুরু না',
   'teacher-landing.class.back-to-class-activities': 'ফিরে ক্লাস কার্যক্রম',
@@ -1966,7 +1971,24 @@ export default Object.assign(quizzesTranslations, {
   'notifications.typeinclass.teacher-override-title': 'শিক্ষক আপনার জমা সংশোধন করা হয়েছে',
   'notifications.typeinclass.teacher-grading-complete-title': 'শিক্ষক ক্লাসে আপনার জমা গ্রেড করেছে',
   'goahead.add.something': 'Go ahead, add something.',
-  'present.diagnostic.determine.not.know': 'Present a diagnostic to determine the student\'s current location, if not known?',
-  'present.diagnostic.determine.know': '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
-  'add.to.todays.class': 'Add to Today\'s Class'
+  'present.diagnostic.determine.not.know':
+    'Present a diagnostic to determine the student\'s current location, if not known?',
+  'present.diagnostic.determine.know':
+    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
+  'add.to.todays.class': 'Add to Today\'s Class',
+  warning: 'warning',
+  'ca.warn.turn-on.multiple-competencies':
+    'This assessment is tagged to multiple competencies. Turning ON mastery will mean students can acquire mastery against all the competencies tagged to this assessment.',
+  'ca.warn.turn-on.multiple-competencies.question':
+    'Do you want to allow multiple competencies to be mastered via single assessment ?',
+  'ca.warn.turn-on.multiple-competencies.note':
+    'Note: You can remix (copy) any assessment and tag the right competency intended for students to gain mastery, before adding it at class acitivities.',
+  'ca.warn.trun-off.mastery-accrual':
+    'Turning OFF mastery will not revert any existing student data. Students who have already accrued mastery against competencies tagged to this assessment will have their data continue to reflect so.',
+  'ca.warn.trun-on.mastery-accrual':
+    'Turning ON mastery accrual  will not update mastery status for students who have already completed the assessment.',
+  'ca.mastery-accrual.update.error':
+    'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.',
+  'want.to.proceed': 'Do you want to proceed ?',
+  proceed: 'Proceed'
 });

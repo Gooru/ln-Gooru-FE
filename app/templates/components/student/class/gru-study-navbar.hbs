@@ -12,7 +12,7 @@
             <i class="dca-pin"></i>
             <span class="add-info dca-text">{{t 'teacher-landing.class.class-activities'}}</span>
           </span>
-            <span class="performance-score {{if (not hasCAStarted) 'not-started'}}">{{if hasCAStarted (concat caPerformanceSummary.scoreInPercentage '%') '--' }}</span>
+            <span class="performance-score {{if (not hasCAStarted) 'not-started'}}" {{action 'onOpenCAReport'}}>{{if hasCAStarted (concat caPerformanceSummary.scoreInPercentage '%') '--' }}</span>
           </a>
       </div>
     {{/unless}}
