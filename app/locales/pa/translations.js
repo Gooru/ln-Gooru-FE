@@ -2508,7 +2508,7 @@ export default Object.assign(quizzesTranslations, {
   'ca.warn.multiple-competencies-2':
     'Students will gain mastery on all the competencies on successfully completing the assessment.',
   'ca.warn.multiple-competencies-3':
-    'You can remix (copy) the assessment and tag it to the competency(ies) for which the students should gain masterymatery, before adding it to the Class Activity',
+    'You can remix (copy) the assessment and tag it to the competency(ies) for which the students should gain mastery, before adding it to the Class Activity',
   'ca.warn.trun-off.mastery-accrual-1':
     'Any student who has already successfully completed the assessment will have gained mastery.',
   'ca.warn.trun-off.mastery-accrual-2':
