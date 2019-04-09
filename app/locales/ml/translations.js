@@ -2580,7 +2580,7 @@ export default Object.assign(quizzesTranslations, {
   'ca.warn.trun-off.mastery-accrual':
     'Turning OFF mastery will not revert any existing student data. Students who have already accrued mastery against competencies tagged to this assessment will have their data continue to reflect so.',
   'ca.warn.trun-on.mastery-accrual':
-    'Turning ON mastery accrual on now will not update mastery status for students who have already completed the assessment.',
+    'Turning ON mastery accrual  will not update mastery status for students who have already completed the assessment.',
   'ca.mastery-accrual.update.error':
     'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.',
   'want.to.proceed': 'Do you want to proceed ?',
