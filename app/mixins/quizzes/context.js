@@ -25,13 +25,20 @@ export default Ember.Mixin.create({
       isCollection: collection.get('isCollection')
     });
     if (hasContext) {
+      let contextInfo = null;
+      if (params.caContentId) {
+        contextInfo = btoa(
+          JSON.stringify({ dcaContentId: params.caContentId })
+        );
+      }
       context.setProperties({
         classId: params.classId,
         contextMapping: {
           courseId: params.courseId || collection.get('courseId'),
           unitId: params.unitId || collection.get('unitId'),
           lessonId: params.lessonId || collection.get('lessonId'),
-          eventSource: params.source
+          eventSource: params.source,
+          contextInfo
         }
       });
     }
