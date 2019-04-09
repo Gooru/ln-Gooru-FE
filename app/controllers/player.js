@@ -17,7 +17,8 @@ export default QuizzesPlayerController.extend({
     'sourceId',
     'source',
     'classId',
-    'isStudyPlayer'
+    'isStudyPlayer',
+    'caContentId'
   ],
 
   // -------------------------------------------------------------------------
@@ -65,6 +66,7 @@ export default QuizzesPlayerController.extend({
       source: null,
       sourceId: null,
       resourceId: null,
+      caContentId: null,
       type: null
     });
   }
