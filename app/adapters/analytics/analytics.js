@@ -67,14 +67,16 @@ export default Ember.Object.extend({
    * @param {UUID} classId
    * @returns {Promise}
    */
-  getDCAYearlySummary: function(classId) {
+  getDCAYearlySummary: function(classId, userId = undefined) {
     const namespace = this.get('namespace');
     const url = `${namespace}/dca/class/${classId}/summary`;
     const options = {
       type: 'GET',
       dataType: 'json',
       headers: this.defineHeaders(),
-      data: {}
+      data: {
+        userId
+      }
     };
     return Ember.$.ajax(url, options);
   },

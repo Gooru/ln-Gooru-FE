@@ -250,6 +250,7 @@ export default Object.assign(quizzesTranslations, {
   'common.create-rubric': 'ಹೊಸ ರಬ್ರಿಕ್ ಅನ್ನು ರಚಿಸಿ',
   'common.current-attempt': 'ಪ್ರಸ್ತುತ ಪ್ರಯತ್ನ',
   'common.currently-studying': 'ಪ್ರಸ್ತುತ ಅಧ್ಯಯನ',
+  'common.date': 'Date',
   'common.delete': 'ಅಳಿಸು',
   'common.delete-instructions.links-inaccessible':
     'ಎಲ್ಲಾ ಪಾಲು ಲಿಂಕ್ಗಳು ​​ಪ್ರವೇಶಿಸಲಾಗುವುದಿಲ್ಲ',
@@ -1279,6 +1280,8 @@ export default Object.assign(quizzesTranslations, {
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'ದೈನಂದಿನ ವರ್ಗ ಚಟುವಟಿಕೆಗಳು',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report':
     'Activity Report',
   'teacher-landing.class.offline-class-report.conducted-on': 'Conducted On',

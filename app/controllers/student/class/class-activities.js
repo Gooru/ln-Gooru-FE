@@ -85,6 +85,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Properties
 
+  queryParams: ['tab'],
+
+  /**
+   * @property {String} tab
+   */
+  tab: null,
+
   /**
    * Contains classActivity objects
    * @property {classActivity[]} classActivities
@@ -204,6 +211,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let date = moment().format('YYYY-MM-DD');
       controller.handleScrollToSpecificDate(date);
       controller.slideUpCAInlineDatePickerOnClickOutSide();
+      if (controller.get('tab') === 'report') {
+        controller.get('classController').populateClassActivityReport();
+      }
     });
   },
 

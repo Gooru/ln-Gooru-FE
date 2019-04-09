@@ -173,6 +173,7 @@
 @import "components/charts/domain-competency-chart";
 @import "components/charts/student-domain-performance";
 @import "components/charts/proficiency-view";
+@import "components/charts/score-fill-gauge-chart";
 @import "components/class/gru-class-navigation";
 @import "components/class/gru-class-navbar";
 @import "components/class/gru-class-activity-panel";
@@ -344,6 +345,9 @@
 @import "components/reports/pull-up/open-ended-report-pull-up";
 @import "components/reports/pull-up/student-external-assessment-report";
 @import "components/reports/pull-up/gru-collection-preview";
+@import "components/reports/pull-up/student-activity-report";
+@import "components/reports/pull-up/activity/class-summary-report";
+@import "components/reports/pull-up/activity/monthly-summary-report";
 @import "components/search/gru-question-options";
 @import "components/search/gru-resource-options";
 @import "components/student/gru-performance-filter-panel";

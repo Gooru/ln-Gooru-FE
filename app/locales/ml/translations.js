@@ -253,6 +253,7 @@ export default Object.assign(quizzesTranslations, {
   'common.create-rubric': 'പുതിയ റബ്രിക്ക് സൃഷ്ടിക്കുക',
   'common.current-attempt': 'നിലവിലുള്ള ശ്രമം',
   'common.currently-studying': 'നിലവിൽ പഠിക്കുന്നു',
+  'common.date': 'Date',
   'common.delete': 'ഇല്ലാതാക്കുക',
   'common.delete-instructions.links-inaccessible':
     'എല്ലാ പങ്കിടൽ ലിങ്കുകളും പ്രവേശനക്ഷമമാകും',
@@ -1287,6 +1288,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-activities': 'ക്ലാസ് പ്രവർത്തനങ്ങൾ',
   'teacher-landing.class.offline-class-report.class-report':
     'ക്ലാസ് റിപ്പോർട്ട്',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report':
     'പ്രവർത്തന റിപ്പോർട്ട്',
   'teacher-landing.class.offline-class-report.conducted-on': 'നടന്നത്',

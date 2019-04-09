@@ -248,6 +248,7 @@ export default Object.assign(quizzesTranslations, {
   'common.create-rubric': 'নতুন রুব্রিক তৈরি করুন',
   'common.current-attempt': 'বর্তমান প্রচেষ্টা',
   'common.currently-studying': 'বর্তমানে অধ্যয়নরত',
+  'common.date': 'Date',
   'common.delete': 'মুছে ফেলা',
   'common.delete-instructions.links-inaccessible':
     'সমস্ত শেয়ার লিঙ্ক প্রবেশযোগ্য হবে',
@@ -1241,6 +1242,8 @@ export default Object.assign(quizzesTranslations, {
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'ক্লাস কার্যক্রম',
   'teacher-landing.class.offline-class-report.class-report': 'ক্লাস রিপোর্ট',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report':
     'কার্যকলাপের প্রতিবেদন',
   'teacher-landing.class.offline-class-report.conducted-on': 'উপর পরিচালিত',

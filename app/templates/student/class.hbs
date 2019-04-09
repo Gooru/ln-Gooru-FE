@@ -95,3 +95,11 @@
 {{#if showCourseReport}}
   {{reports.pull-up.student-course-report onClosePullUp="onClosePullUp" context=studentCourseReportContext showPullUp=showCourseReport}}
 {{/if}}
+
+{{#if isShowClassActivityReport}}
+  {{#reports.pull-up.student-activity-report showPullUp=isShowClassActivityReport title=(t 'teacher-landing.class.offline-class-report.class-activity-report')}}
+    {{reports.pull-up.activity.class-summary-report
+      classSummary = class.performanceSummaryForDCA
+    }}
+  {{/reports.pull-up.student-activity-report}}
+{{/if}}

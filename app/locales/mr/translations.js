@@ -250,6 +250,7 @@ export default Object.assign(quizzesTranslations, {
   'common.create-rubric': 'नवीन रुब्रिक तयार करा',
   'common.current-attempt': 'वर्तमान प्रयत्न',
   'common.currently-studying': 'सध्या हा अभ्यास करत आहे',
+  'common.date': 'Date',
   'common.delete': 'हटवा',
   'common.delete-instructions.links-inaccessible':
     'सर्व शेअर लिंक्सना प्रवेश असणार नाहीत',
@@ -1255,6 +1256,8 @@ export default Object.assign(quizzesTranslations, {
     'progress to destination',
   'teacher-landing.class.class-activities': 'वर्गाचे नियोजन',
   'teacher-landing.class.offline-class-report.class-report': 'वर्ग अहवाल',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report': 'उपक्रम अहवाल',
   'teacher-landing.class.offline-class-report.conducted-on': 'दिनांक',
   'teacher-landing.class.offline-class-report.not-started': 'सुरु केली नाही',
