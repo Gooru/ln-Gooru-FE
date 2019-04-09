@@ -3,24 +3,27 @@
     {{gru-icon name="info" class="warning-icon"}}
     <span class="warning-text">{{t 'warning'}}</span>
   </div>
-  {{#if model.hasMultipleCompetencies}}
+  {{#if (and model.hasMultipleCompetencies (not model.allowMasteryAccrual))}}
     <p>
-      {{t 'ca.warn.multiple-competencies-1'}}<br/> {{t 'ca.warn.multiple-competencies-2'}} <br/> {{t 'ca.warn.multiple-competencies-3'}}
+      {{t 'ca.warn.turn-on.multiple-competencies'}}
     </p>
-  {{/if}}
-  {{#if model.allowMasteryAccrual}}
+    <p class="question">{{t 'ca.warn.turn-on.multiple-competencies.question'}}</p>
+    <p class="note">{{t 'ca.warn.turn-on.multiple-competencies.note'}}</p>
+  {{else if  model.allowMasteryAccrual}}
     <p>
-      {{t 'ca.warn.trun-off.mastery-accrual-1'}}<br/> {{t 'ca.warn.trun-off.mastery-accrual-2'}}
+      {{t 'ca.warn.trun-off.mastery-accrual'}}
     </p>
+    <p class="question">{{t 'want.to.proceed'}}</p>
   {{else}}
     <p>
       {{t 'ca.warn.trun-on.mastery-accrual'}}
     </p>
+    <p class="question">{{t 'want.to.proceed'}}</p>
   {{/if}}
 </div>
 <div class="actions">
-  <div class="back-btn" {{action 'cancel'}}>{{t 'common.back'}}</div>
+  <div class="cancel-btn" {{action 'cancel'}}>{{t 'common.cancel'}}</div>
   {{#gru-spinner-button classes='btn btn-primary' text=(t 'common.loading') isLoading=isLoading}}
-    <div class="ok-btn" {{action 'confirm'}}>{{t 'gru-submit-confirmation.ok'}}</div>
+    <div class="proceed-btn" {{action 'confirm'}}>{{t 'proceed'}}</div>
   {{/gru-spinner-button}}
 </div>

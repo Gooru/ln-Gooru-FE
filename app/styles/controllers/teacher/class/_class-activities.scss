@@ -6,6 +6,18 @@
       padding: 0;
     }
   }
+
+  &.modal-open {
+    .gru-modal {
+      display: grid !important;
+      align-items: center;
+      justify-content: center;
+      .modal-dialog {
+        width: auto;
+        margin: 0;
+      }
+    }
+  }
 }
 
 .controller.teacher.class.class-activities {
@@ -20,7 +32,7 @@
     background-color: #9ad5f2;
     border-radius: 4px;
     user-select: none;
-    grid-template-areas: 'activity picker';
+    grid-template-areas: "activity picker";
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     position: relative;
 
