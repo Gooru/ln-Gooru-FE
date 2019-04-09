@@ -28,6 +28,11 @@ export default Ember.Controller.extend(ConfigurationMixin, {
      */
     openCourseReport: function() {
       this.openStudentCourseReport();
+    },
+
+    //Action triggered when click on CA score
+    onOpenCAReport() {
+      this.populateClassActivityReport();
     }
   },
 

@@ -408,7 +408,7 @@ export default Ember.Service.extend({
    * This Method used to fetch DCA yearly summary for offline class
    * @param  {ClassId} classId  Unique Id of the class
    */
-  getDCAYearlySummary(classId, userId = undefined) {
+  getDCAYearlySummary(classId, userId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service

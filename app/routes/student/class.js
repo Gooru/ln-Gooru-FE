@@ -105,10 +105,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             }
           );
         }
-      } else {
-        if (item === 'class-activities') {
-          controller.populateClassActivityReport();
-        }
       }
     }
   },

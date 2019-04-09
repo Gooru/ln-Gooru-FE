@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import d3 from 'd3';
-import { getGradeRange, formatTime, generateUUID } from 'gooru-web/utils/utils';
+import { getGradeRange, formatTime } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -46,13 +46,6 @@ export default Ember.Component.extend({
   chartWidth: '100%',
 
   /**
-   * @property {String} chartElementId
-   */
-  chartElementId: Ember.computed(function() {
-    return `scoreFillGauge-${generateUUID()}`;
-  }),
-
-  /**
    * @property {Object} chartProperties
    */
   chartProperties: Ember.computed(function() {
@@ -80,8 +73,8 @@ export default Ember.Component.extend({
     let scoreInPercentage = component.get('scoreInPercentage');
     let timeSpent = component.get('timeSpent');
     let chartProperties = component.get('chartProperties');
-    let elementId = `#${component.get('chartElementId')}`;
-    let fillGaugeElement = d3.select(elementId);
+    let elementId = `#${component.elementId}`;
+    let fillGaugeElement = d3.select(`${elementId} svg`);
     let fillGaugeElementWidth = parseInt(fillGaugeElement.style('width'));
     let fillPercent =
       Math.max(
