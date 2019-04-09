@@ -69,7 +69,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
       collection: content,
       forYear: data.for_year,
       forMonth: data.for_month,
-      usersCount: data.users_count
+      usersCount: data.users_count,
+      allowMasteryAccrual: data.allow_mastery_accrual
     });
   },
 

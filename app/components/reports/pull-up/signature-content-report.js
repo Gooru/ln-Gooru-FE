@@ -125,6 +125,18 @@ export default Ember.Component.extend({
    */
   source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
 
+  actions: {
+
+    //Action triggered when click collection/assessment title
+    onPreviewContent() {
+      const component = this;
+      let collection = component.get('content');
+      component.set('previewContent', collection);
+      component.set('previewContentType', component.get('collectionType'));
+      component.set('isShowContentPreview', true);
+    }
+  },
+
   init() {
     let component = this;
     component._super(...arguments);

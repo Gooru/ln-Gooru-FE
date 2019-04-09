@@ -70,12 +70,14 @@ export default Ember.Component.extend({
       let collectionType = content.get('collectionType');
       let classData = component.get('class');
       let classId = classData.get('id');
+      let caContentId = classActivity.get('id');
       let queryParams = {
         collectionId: content.get('id'),
         classId,
         role: 'student',
         source: component.get('source'),
-        type: collectionType
+        type: collectionType,
+        caContentId
       };
       if (
         collectionType === 'assessment-external' ||

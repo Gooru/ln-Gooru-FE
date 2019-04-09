@@ -3,6 +3,54 @@
   display: none !important;
 }
 
+.student-proficiency-container {
+  grid-template-columns: none !important;
+
+  .panel-container {
+    display: none !important;
+  }
+
+  .pull-up-container {
+    .domain-list {
+      display: none !important;
+
+      .domain-info-pull-up {
+        display: none !important;
+      }
+    }
+
+    .competency-info-pull-up {
+      position: unset !important;
+
+      .signature-content-container {
+        .signature-content {
+          display: none !important;
+        }
+      }
+
+      .competency-info-content {
+        .header-tab-panel {
+          display: none !important;
+        }
+
+        .panel-content {
+          .student-journey {
+            .heading {
+              display: none !important;
+            }
+
+            .collections-accordion {
+              .collection-panel {
+                display: none !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .teacher.class-activities {
   display: none !important;
 
@@ -15,8 +63,8 @@
   }
 }
 
-.teacher.course-map,
-.controller.search .collection-results {
+.controller.search .collection-results,
+.teacher.course-map {
   display: none !important;
 }
 
@@ -48,18 +96,21 @@
 }
 
 .preview.gru-collection-preview {
-  top: 0% !important;
+  top: 0 !important;
   width: 100% !important;
   position: absolute !important;
 
   .preview-container {
     background-color: #fff !important;
+
     .header-container {
       display: none;
     }
+
     .body-container {
       .content-info-container {
         box-shadow: 0 0 4px 0 rgba(102, 102, 102, 0.3) !important;
+
         .title-info-container {
           .thumbnail-container {
             display: block !important;
@@ -68,37 +119,46 @@
             height: 48px !important;
             background-size: 80px 48px !important;
           }
+
           .content-title {
             color: #545e66 !important;
           }
+
           .content-icon {
             background-repeat: no-repeat !important;
             display: block !important;
+
             &.assessment,
             &.assessment-external {
               background-image: url("gooru/images/add_assessment.svg") !important;
             }
+
             &.collection,
             &.collection-external {
               background-image: url("gooru/images/add_collection.svg") !important;
             }
           }
         }
+
         .taxonomy-container {
           .gru-taxonomy-tag-list {
             .gru-taxonomy-tag {
               background-color: #2d2d2d !important;
+
               .standard-tag {
                 .tag-label {
                   color: #fff !important;
                 }
+
                 .tag-caption {
                   display: none !important;
                 }
               }
             }
+
             .non-visible-tags {
               background-color: #2d2d2d !important;
+
               span {
                 color: #fff !important;
               }
@@ -106,23 +166,26 @@
           }
         }
       }
+
       .content-items-container {
         height: max-content;
         overflow-y: auto;
 
         .external-content {
-          .content-description,
-          * {
+          *,
+          .content-description {
             color: #666666 !important;
             -webkit-line-clamp: unset !important;
             max-height: unset !important;
             text-overflow: unset !important;
             overflow: visible !important;
           }
+
           .content-url {
-            .url-label,
-            .url-content {
+            .url-content,
+            .url-label {
               color: #3e5e67 !important;
+
               a[href]::after {
                 display: none !important;
                 visibility: none !important;
@@ -130,6 +193,7 @@
             }
           }
         }
+
         .question-preview-card,
         .resource-preview-card {
           .question-preview-container,
@@ -141,31 +205,37 @@
               .title {
                 color: #3e5e67 !important;
               }
+
               .question-icon,
               .resource-type {
                 background-repeat: no-repeat !important;
                 background-size: 16px 16px !important;
               }
             }
-            .taxonomies-conatiner,
-            .resource-taxonomies-container {
+
+            .resource-taxonomies-container,
+            .taxonomies-conatiner {
               .gru-taxonomy-tag-list {
                 .gru-taxonomy-tag {
                   background-color: #2d2d2d !important;
+
                   .standard-tag {
                     .tag-label {
                       color: #fff !important;
                     }
                   }
                 }
+
                 .non-visible-tags {
                   background-color: #2d2d2d !important;
+
                   span {
                     color: #fff !important;
                   }
                 }
               }
             }
+
             .question-description,
             .resource-description-container {
               -webkit-line-clamp: unset !important;
@@ -178,10 +248,13 @@
               .url-label {
                 color: #3e5e67 !important;
               }
+
               .url-content {
                 font-style: italic;
+
                 a {
                   color: #3e5e67 !important;
+
                   &[href]::after {
                     display: none !important;
                     visibility: none !important;
@@ -195,8 +268,8 @@
               .gru-fib {
                 .answer-panel {
                   .fib-answers {
-                    .gru-math-text,
-                    * {
+                    *,
+                    .gru-math-text {
                       p {
                         color: #666666 !important;
                       }
@@ -205,8 +278,8 @@
                 }
 
                 .sentence {
-                  .gru-math-text,
-                  * {
+                  *,
+                  .gru-math-text {
                     p {
                       color: #666666 !important;
                     }
@@ -215,8 +288,9 @@
 
                 .answer.correct {
                   border-bottom: 1px solid #4f95f6 !important;
-                  .gru-math-text,
-                  * {
+
+                  *,
+                  .gru-math-text {
                     color: #4f95f6 !important;
                   }
                 }
@@ -226,6 +300,7 @@
                 p {
                   span {
                     color: #666666 !important;
+
                     &.correct {
                       background-color: #4f95f6 !important;
                       color: #fff !important;
@@ -239,9 +314,10 @@
                   .radio {
                     label {
                       border: 1px solid rgba(151, 151, 151, 0.1) !important;
+
                       .text {
-                        .gru-math-text p,
-                        * {
+                        *,
+                        .gru-math-text p {
                           color: #3e5e67 !important;
                         }
                       }
@@ -252,8 +328,9 @@
                 .multiple-choices {
                   li {
                     border: 1px solid rgba(151, 151, 151, 0.1) !important;
-                    .gru-math-text,
-                    * {
+
+                    *,
+                    .gru-math-text {
                       p {
                         color: #3e5e67 !important;
                       }
@@ -261,9 +338,10 @@
 
                     &.correct-answer {
                       .answer-text {
-                        .gru-math-text,
-                        * {
+                        *,
+                        .gru-math-text {
                           color: #3c99f7 !important;
+
                           p {
                             color: #3c99f7 !important;
                           }
@@ -284,13 +362,15 @@
                         }
                       }
                     }
+
                     tbody {
                       tr {
                         border: 1px solid rgba(151, 151, 151, 0.1) !important;
+
                         td {
                           &.answer-text {
-                            .gru-math-text,
-                            * {
+                            *,
+                            .gru-math-text {
                               p {
                                 color: #3e5e67 !important;
                               }
@@ -306,18 +386,22 @@
                   li {
                     border-right: 1px solid rgba(151, 151, 151, 0.1) !important;
                     border-top: 1px solid rgba(151, 151, 151, 0.1) !important;
+
                     &:last-child {
                       border-bottom: 1px solid rgba(151, 151, 151, 0.1) !important;
                     }
+
                     &.header {
                       border: none !important;
+
                       .column {
                         color: #3e5e67 !important;
                       }
                     }
+
                     .answer-text {
-                      .gru-math-text,
-                      * {
+                      *,
+                      .gru-math-text {
                         p {
                           color: #4f95f6 !important;
                         }
@@ -326,22 +410,25 @@
                   }
                 }
               }
-
               //True or False
               .gru-true-false {
                 .answer-choices {
                   .radio {
                     border: 1px solid rgba(151, 151, 151, 0.1) !important;
+
                     label {
                       color: #3e5e67 !important;
                     }
                   }
                 }
+
                 ul {
                   li {
                     border: 1px solid rgba(151, 151, 151, 0.1) !important;
+
                     .answer-text {
                       color: #3e5e67 !important;
+
                       &.correct-answer-text {
                         color: #4f95f6 !important;
                       }
@@ -349,15 +436,15 @@
                   }
                 }
               }
-
               //Hotspot text
               .gru-hs-text {
                 .answer-choices.hs-text {
                   ul {
                     li.answer {
                       border: 1px solid rgba(151, 151, 151, 0.1) !important;
-                      .gru-math-text,
-                      * {
+
+                      *,
+                      .gru-math-text {
                         p {
                           color: #3e5e67 !important;
                         }
@@ -369,9 +456,10 @@
                 ul.hs-texts {
                   li {
                     border: 1px solid rgba(151, 151, 151, 0.1) !important;
+
                     .text {
-                      .gru-math-text,
-                      * {
+                      *,
+                      .gru-math-text {
                         p {
                           color: #3e5e67 !important;
                         }
@@ -382,8 +470,8 @@
                       border: 1px solid #3c99f7 !important;
 
                       .text {
-                        .gru-math-text,
-                        * {
+                        *,
+                        .gru-math-text {
                           p {
                             color: #3c99f7 !important;
                           }
@@ -393,16 +481,16 @@
                   }
                 }
               }
-
               //Re-Order question
               .gru-reorder {
                 .answer-choices {
                   ul.sortable {
                     li.ui-sortable-handle {
                       border: 1px solid rgba(151, 151, 151, 0.1) !important;
+
                       div {
-                        .gru-math-text,
-                        * {
+                        *,
+                        .gru-math-text {
                           p {
                             color: #3e5e67 !important;
                           }
@@ -422,8 +510,8 @@
                     }
 
                     .answer-text {
-                      .gru-math-text,
-                      * {
+                      *,
+                      .gru-math-text {
                         p {
                           color: #4f95f6 !important;
                         }

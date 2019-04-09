@@ -153,6 +153,11 @@ export default Ember.Controller.extend({
    */
   classPreference: Ember.computed.alias('class.preference'),
 
+  /**
+   * @property {Number} maxLimitToSuggestContent
+   */
+  maxLimitToSuggestContent: 6,
+
   // -------------------------------------------------------------------------
   // Events
   initializeController() {

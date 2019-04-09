@@ -13,57 +13,39 @@
         <div class="signature-panel">
           <div class="signature-header">
             <i class="signature-icon {{collectionType}}"></i>
-            <div class="signature">
-              <div class="title ellipsis">{{signatureContent.title}}</div>
-              <span class="suggestion-icon">
-              {{gru-icon name='explore'}}
-            </span>
-            </div>
-          </div>
-          <div class="signature-info">
-            <div class="properties">
-              {{#if (eq collectionType 'assessment')}}
-                <div class="direction">
-                  {{#if content.bidirectional}}
-                    {{gru-icon name='swap_horiz'}}
-                    <div class="info bidirectional">
-                      {{t (if isStudent "gru-assessment-confirmation.setting-forward-backward" "gru-assessment-confirmation.setting-forward-backward-teacher")}}
-                    </div>
-                  {{else}}
-                    {{gru-icon name='trending_flat'}}
-                    <div class="info not-bidirectional">
-                      {{t (if isStudent "gru-assessment-confirmation.setting-forward" "gru-assessment-confirmation.setting-forward-teacher")}}
-                    </div>
-                  {{/if}}
-                </div>
-                <div class="attempts">
-                  {{#if unlimited}}
-                    {{gru-icon name='cached'}}
-                    <div class="info unlimited">{{t (if isStudent "gru-assessment-confirmation.unlimited-attempts-left" "gru-assessment-confirmation.unlimited-attempts-left-teacher")}}</div>
-                  {{else}}
-                    <div class="attempt">{{gru-icon name='rotate_right'}}</div>
-                    <div class="info">{{t (if isStudent "gru-assessment-confirmation.attempts-left.other" "gru-assessment-confirmation.attempts-left.other-teacher" count=content.attempts)}}</div>
-                  {{/if}}
-                </div>
-              {{/if}}
+            <div class="signature {{unless isStudent 'hide-play'}}">
+              <div class="title ellipsis" {{action 'onPreviewContent'}} title="{{signatureContent.title}}">{{signatureContent.title}}</div>
               <div class="content-count">
                 {{#if (or content.questionCount content.resourceCount)}}
-                  <span class="{{if (gt content.resourceCount 0) '' 'invisible'}}" title="{{t "common.resources"}}">{{gru-icon name='local_library'}}</span><span class="{{if (gt content.resourceCount 0) '' 'invisible'}}">{{content.resourceCount}}</span>
-                  <span class="{{if (gt content.questionCount 0) '' 'invisible'}}" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span class="{{if (gt content.questionCount 0) '' 'invisible'}}">{{content.questionCount}}</span>
+                  <span class="{{if (gt content.resourceCount 0) '' 'invisible'}}" title="{{t "common.resources"}}">{{gru-icon name='local_library'}}</span><span
+                    class="{{if (gt content.resourceCount 0) '' 'invisible'}}">{{content.resourceCount}}</span>
+                  <span class="{{if (gt content.questionCount 0) '' 'invisible'}}" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span
+                    class="{{if (gt content.questionCount 0) '' 'invisible'}}">{{content.questionCount}}</span>
                 {{/if}}
               </div>
+              {{#if isStudent}}
+                {{#link-to 'player' signatureContent.id (query-params type=collectionType role='student' source=source) target="_blank"}}
+                  <div class="action">
+                    {{gru-icon name='play_arrow'}}
+                  </div>
+                {{/link-to}}
+              {{/if}}
+              <span class="suggestion-icon">
+                {{gru-icon name='explore'}}
+              </span>
             </div>
-            {{#if isStudent}}
-              {{#link-to 'player' signatureContent.id (query-params type=collectionType role='student' source=source)}}
-                <div class="action">
-                  {{gru-icon name='play_arrow'}}
-                </div>
-              {{/link-to}}
-            {{/if}}
           </div>
         </div>
       </div>
     {{/if}}
   </div>
-  {{reports.pull-up.competency-info-content  competency=competency microCompetencies=microCompetencies collectionPerformances=collectionPerformances userId=userId prequisiteCompetencies=prerequisites learningMapData=learningMapData isStudent=isStudent}}
+  {{reports.pull-up.competency-info-content userId=userId competency=competency microCompetencies=microCompetencies collectionPerformances=collectionPerformances userId=userId prequisiteCompetencies=prerequisites learningMapData=learningMapData isStudent=isStudent}}
+{{/if}}
+{{#if (and isShowContentPreview (not isStudent))}}
+  {{reports.pull-up.gru-collection-preview
+    showPullUp=isShowContentPreview
+    previewContentId=previewContent.id
+    previewContentType=previewContentType
+    playContent=false
+  }}
 {{/if}}

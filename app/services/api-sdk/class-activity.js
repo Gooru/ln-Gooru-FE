@@ -421,5 +421,33 @@ export default Ember.Service.extend({
         }
       );
     });
+  },
+
+  /**
+   * Update Mastery Accrual Class Activity
+   *
+   * @param {string} classId
+   * @param {string} classActivityId
+   * @param {Boolean} allow_mastery_accrual
+   * @returns {boolean}
+   */
+  updateMasteryAccrualClassActivity: function(
+    classId,
+    classActivityId,
+    allow_mastery_accrual = false
+  ) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .updateMasteryAccrualClassActivity(
+          classId,
+          classActivityId,
+          allow_mastery_accrual
+        )
+        .then(function() {
+          resolve(true);
+        }, reject);
+    });
   }
 });

@@ -48,6 +48,11 @@
 
     .back {
       position: relative;
+      > i {
+        font-size: 33px;
+        line-height: 50px;
+        cursor: pointer;
+      }
       .close-txt {
         text-transform: uppercase;
         line-height: 4;

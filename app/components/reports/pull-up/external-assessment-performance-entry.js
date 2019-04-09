@@ -186,6 +186,7 @@ export default Ember.Component.extend({
     let conductedOn = new Date(component.get('activityData.activation_date'));
     let maxScore = component.get('assessmentMaxScore');
     let classId = component.get('classId');
+    let activityId = component.get('activityData.id');
     let reqBodyParams = {
       student_id: student.id,
       tenant_id: component.get('session.tenantId') || null,
@@ -199,7 +200,8 @@ export default Ember.Component.extend({
       score: Number(student.score) || 0,
       max_score: Number(maxScore) || 0,
       time_spent: 0,
-      conducted_on: conductedOn.toISOString()
+      conducted_on: conductedOn.toISOString(),
+      additionalContext: btoa(JSON.stringify({ dcaContentId: activityId }))
     };
     return reqBodyParams;
   },
