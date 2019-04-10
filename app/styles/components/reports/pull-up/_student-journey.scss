@@ -53,6 +53,10 @@
         cursor: pointer;
         color: #fff;
 
+        &.disable {
+          pointer-events: none;
+        }
+
         &.collection {
           background-color: #283142;
           opacity: 0.8;

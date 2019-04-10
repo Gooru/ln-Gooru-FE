@@ -19,7 +19,6 @@
           .competency-content-report {
             .competency-performance {
               .competency-name {
-                min-height: 230px;
                 align-items: center;
               }
             }
@@ -32,6 +31,24 @@
     .student-proficiency-container {
       grid-template-columns: none;
       padding: 0;
+
+      .inspect-competency {
+        .competency-info-pull-up {
+          .competency-panel-header {
+            height: auto;
+
+            .close {
+              grid-column-start: 4;
+            }
+
+            .status {
+              justify-self: start;
+              grid-row-start: 2;
+              grid-column-start: 2;
+            }
+          }
+        }
+      }
 
       .pull-up-container,
       .taxonomy-grades {

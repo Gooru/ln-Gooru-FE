@@ -6,31 +6,6 @@
   display: grid;
   grid-template-rows: auto 1fr;
   position: relative;
-  .competency-info-pull-up {
-    .body {
-      .competency-content-report .competency-performance {
-        .signature-content {
-          .signature-content-container {
-            .competency-info-content {
-              .panel-content {
-                .learning-map-content {
-                  .activity-list-pull-up {
-                    .activity-list {
-                      .activity-list-body {
-                        .activity-contents {
-                          grid-template-columns: auto;
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
 
   .domain-list {
     padding-left: 16px;
@@ -43,7 +18,20 @@
 
     ol {
       cursor: pointer;
-      padding: 10px 16px;
+      padding: 10px 0 10px 16px;
+
+      li {
+        cursor: default;
+        padding-bottom: 10px;
+        margin-bottom: 5px;
+        border-bottom: 1px solid #ccc;
+
+        .domain-title {
+          display: block;
+          color: #1aa9eb;
+          cursor: pointer;
+        }
+      }
     }
   }
 

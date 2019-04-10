@@ -1832,7 +1832,8 @@ export default Object.assign(quizzesTranslations, {
   'profile.proficiency.not-started': 'ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਇਆ',
   'profile.proficiency.skyline': 'ਸਕਾਈਲਾਈਨ',
   'profile.proficiency.baseline': 'ਬੇਸਲਾਈਨ',
-  'profile.proficiency.grade-line': 'ਗ੍ਰੇਡ ਲਾਈਨ',
+  'profile.proficiency.grade-line': 'Other Grade Hilines',
+  'profile.proficiency.class-grade-line': 'Class Grade Hiline',
   'profile.proficiency.not-tagged':
     'ਕਲਾਸ ਦੇ ਕਿਸੇ ਵੀ ਕੋਰਸ ਨੂੰ ਨਿਰਧਾਰਤ ਨਹੀਂ ਕੀਤਾ ਗਿਆ ਹੈ ਜਾਂ ਕੋਰਸ ਕਿਸੇ ਯੋਗ ਵਿਸ਼ਾ ਜਾਂ ਮਿਆਰਾਂ ਲਈ ਨਹੀਂ ਟੈਗ ਕੀਤਾ ਗਿਆ ਹੈ.',
   'profile.proficiency.show-compressed-chart': 'ਕੰਪਰੈੱਸਡ ਚਾਰਟ ਦਿਖਾਓ',
