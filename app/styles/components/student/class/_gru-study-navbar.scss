@@ -163,6 +163,7 @@
           grid-column: 2 / 7;
           order: 2;
           border-right: 1px solid #ccc;
+          border-bottom: 1px solid #ccc;
           width: 100%;
           text-align: center;
         }
@@ -174,7 +175,6 @@
 
         .class-activities {
           order: 4;
-          border-top: 1px solid #ccc;
 
           .class-activities-tab {
             grid-template-columns: auto auto;
@@ -190,7 +190,6 @@
 
         .course-map {
           order: 5;
-          border-top: 1px solid #ccc;
 
           .course-map-tab {
             grid-template-columns: auto auto;
@@ -206,19 +205,17 @@
 
         .profile-prof {
           order: 6;
-          border-top: 1px solid #ccc;
           border-right: unset;
 
           &.vactive {
-            grid-column: 3 / 5;
+            grid-column: 3 / 4;
           }
         }
 
         .notification-tab {
           order: 7;
-          border-top: 1px solid #ccc;
+          grid-column-start: 5;
           border-right: 1px solid #cccccc;
-          border-left: unset !important;
 
           &.vactive {
             grid-column: 4 / 6;
@@ -393,8 +390,8 @@
           @extend %app-container;
           grid-template-columns: auto;
 
-          i.close,
-          i.arrow_back {
+          i.arrow_back,
+          i.close {
             margin: 0 auto;
             opacity: 1;
             color: $dark-600;
