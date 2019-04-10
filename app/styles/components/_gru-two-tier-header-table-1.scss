@@ -26,14 +26,14 @@ $left-cell-margin: 20vw;
   .class-avg {
     font-size: 15px;
     width: 55px;
-    margin-left: -124px;
+    // margin-left: -124px; //extra
     color: #37424b;
     margin-right: 35px;
     display: inline;
   }
   .avg-row {
     // border-top: 1px solid #afb4b9 !important; // now we have border for each row so this is not required
-    border-bottom: 1px solid #afb4b9;
+    border-bottom: 1px solid #ccd2d8;
     min-width: 80px;
     .avg-score {
       font-size: 25px;
@@ -123,7 +123,7 @@ $left-cell-margin: 20vw;
             font-size: 17px;
             opacity: 1 !important;
             color: black;
-            margin-top: -10px;
+            // margin-top: -10px;
           }
         }
 
@@ -137,7 +137,7 @@ $left-cell-margin: 20vw;
 
         &.row-header {
           text-align: $tab-float-dir;
-          padding: 4px;
+          padding-top: 15px;
           border-bottom: unset;
           font-weight: 400;
           font-size: 17px;
@@ -154,6 +154,7 @@ $left-cell-margin: 20vw;
               font-size: 19px;
               line-height: 27px;
               vertical-align: -5px;
+              display: initial;
             }
           }
         }
@@ -189,6 +190,39 @@ $left-cell-margin: 20vw;
           }
         }
       }
+
+      i {
+        // .resource-type {
+        width: 16px;
+        height: 16px;
+        background-size: 16px 16px;
+        background-repeat: no-repeat;
+        display: block;
+        &.video_resource-icon {
+          background-image: url("gooru/images/video-resource-dark.svg") !important;
+        }
+        &.webpage_resource-icon {
+          background-image: url("gooru/images/website-resource-dark.svg") !important;
+        }
+        &.interactive_resource-icon {
+          background-image: url("gooru/images/interactive-resource-dark.svg") !important;
+        }
+        &.question-icon {
+          background-image: url("gooru/images/question-resource-dark.svg") !important;
+        }
+        &.image_resource-icon {
+          background-image: url("gooru/images/image-resource-dark.svg") !important;
+        }
+        &.text_resource-icon {
+          background-image: url("gooru/images/text-resource-dark.svg") !important;
+        }
+        &.audio_resource-icon {
+          background-image: url("gooru/images/audio-resource-dark.svg") !important;
+        }
+        &.audio {
+          background-image: url("gooru/images/audio-resource-dark.svg") !important;
+        }
+      }
     }
 
     > .data {
@@ -216,7 +250,7 @@ $left-cell-margin: 20vw;
       left: 0 !important;
       width: $left-cell-margin;
       padding-top: 10px;
-      border-bottom: 1px solid #afb4b9;
+      border-bottom: 1px solid #ccd2d8;
     }
     .emotion {
       display: block;
@@ -305,7 +339,7 @@ $left-cell-margin: 20vw;
         }
         td {
           white-space: nowrap;
-          border-bottom: 1px solid #afb4b9;
+          border-bottom: 1px solid #ccd2d8;
 
           // &:nth-child(3n-1) {
           //   border-left: 1px solid $gray-lighter;

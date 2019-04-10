@@ -15,10 +15,17 @@
       {{#each firstTierHeaders as |firstTierHeader firstTierIndex|}}
         {{#each secondTierHeaders as |secondTierHeader secondTierIndex|}}
           <th scope="col" class="{{secondTierHeader.value}} hidden" {{action "updateSortCriteria" firstTierIndex secondTierIndex}}>
-            <span>
-              {{gru-icon name='help_outline' }}
-              <div class="col-label hidden">{{secondTierHeader.label}} </div>
-            </span>
+            {{#if isCollectionType}}
+              <span>
+                <i class="{{firstTierHeader.type}}-icon" />
+                <div class="col-label hidden ">{{firstTierHeader.type}} </div>
+              </span>
+            {{else}}
+              <span>
+                {{gru-icon name='help_outline' }}
+                <div class="col-label hidden">{{secondTierHeader.label}} </div>
+              </span>
+            {{/if}}
           </th>
         {{/each}}
       {{/each}}
@@ -35,22 +42,18 @@
         {{/each}}
       </tr>
     {{/each}}
-    <tr class="data avg-row">
-      <th scope="row avg-row" class="fixed">
-        <span></span>
-      </th>
-      {{#each sortedData.firstObject.content as |content index|}}
-        {{#if (gt index caAverage) }}
-          <td class='avg-row'>
+    {{#if isCollectionType}}
+    {{else}}
+      <tr class="data avg-row">
+        <th scope="row avg-row" class="fixed">
+          <span>
             <div class='class-avg'>{{t 'class.analytics.performance.teacher.metricsTable.class-average'}}</div>
-            <div class="avg-score {{if content.label 'pointer'}}" title="{{content.label}}" data-toggle="tooltip" data-placement="auto" style='display: inline-block;width:99%'>{{averageScore}}%</div>
-          </td>
-        {{else}}
-          <td class="hidden avg-row">
-            <span class="{{if content.label 'pointer'}}" title="{{content.label}}" data-toggle="tooltip" data-placement="auto"></span>
-          </td>
-        {{/if}}
-      {{/each}}
-    </tr>
+          </span>
+        </th>
+        <td class='avg-row' colspan="100%">
+          <div class="avg-score {{if content.label 'pointer'}}" title="{{content.label}}" data-toggle="tooltip" data-placement="auto" style='display: inline-block;width:99%'>{{averageScore}}%</div>
+        </td>
+      </tr>
+    {{/if}}
   </table>
 </div>
