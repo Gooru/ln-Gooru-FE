@@ -101,6 +101,7 @@
   {{#reports.pull-up.student-activity-report showPullUp=isShowClassActivityReport title=(t 'teacher-landing.class.offline-class-report.class-activity-report')}}
     {{reports.pull-up.activity.class-summary-report
       classSummary = class.performanceSummaryForDCA
+      showPullUp=isShowClassActivityReport
     }}
   {{/reports.pull-up.student-activity-report}}
 {{/if}}

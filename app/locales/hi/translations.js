@@ -96,6 +96,7 @@ export default Object.assign(quizzesTranslations, {
   'common.ignore': 'ध्यान न दे',
   'common.add': 'जोड़ें',
   'common.plan-an-activities': 'Plan your activities',
+  'common.plan-activities': 'Plan Activities',
   'common.plan-an-activities-msg':
     'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'पुनर्निर्धारित',

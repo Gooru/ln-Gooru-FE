@@ -84,11 +84,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         } else if (item === 'course-map') {
           route.transitionTo('student.class.course-map');
         } else if (item === 'class-activities') {
-          route.transitionTo('student.class.class-activities', {
-            queryParams: {
-              tab: 'report'
-            }
-          });
+          route.transitionTo('student.class.class-activities');
         } else if (item === 'study-player') {
           route.studyPlayer(controller.get('classmodel').currentLocation);
         } else if (item === 'profile-prof') {

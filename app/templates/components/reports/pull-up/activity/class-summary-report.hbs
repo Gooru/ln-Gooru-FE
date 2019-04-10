@@ -2,7 +2,7 @@
   <div class="class-performance-chart-container">
     {{charts.score-fill-gauge-chart
       scoreInPercentage = classSummary.scoreInPercentage
-      timeSpent = timeSpent}}
+    }}
   </div>
   <div class="monthly-summary-list-container">
     {{#if isLoading}}
@@ -24,7 +24,7 @@
 
 
 {{#if isShowMonthlySummaryReport}}
-  {{#reports.pull-up.student-activity-report showPullUp=isShowMonthlySummaryReport title=(t 'teacher-landing.class.offline-class-report.activity-report') reportPeriod=reportPeriod}}
+  {{#reports.pull-up.student-activity-report showPullUp=isShowMonthlySummaryReport title=(t 'teacher-landing.class.offline-class-report.class-activity-report') reportPeriod=reportPeriod onClosePullUp="onClosePullUp"}}
     {{reports.pull-up.activity.monthly-summary-report
       classId = classId
       userId = userId

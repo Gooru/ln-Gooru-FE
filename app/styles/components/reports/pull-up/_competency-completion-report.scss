@@ -22,6 +22,19 @@
     background-color: #000;
   }
 
+  %scroll-style {
+    &::-webkit-scrollbar {
+      height: 6px;
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $gray-light;
+      border: 1px solid $gray-light;
+      border-radius: 5px;
+    }
+  }
+
   .competency-completion-report-container {
     background: $white;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
@@ -52,16 +65,7 @@
         overflow-y: auto;
         padding-bottom: 35px;
         padding-right: 5px;
-        &::-webkit-scrollbar {
-          height: 6px;
-          width: 4px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background: $gray-light;
-          border: 1px solid $gray-light;
-          border-radius: 5px;
-        }
+        @extend %scroll-style;
         .competency-container {
           .competency-completion-info-container {
             border-bottom: 2px solid rgba(0, 0, 0, 0.3);
@@ -84,12 +88,14 @@
               }
             }
             .competency-suggestion {
+              width: 20px;
+              height: 20px;
+              background-size: 20px 20px;
+              opacity: 0.8;
               justify-self: center;
-              color: #f98e4e;
-              line-height: 10px;
-              i {
-                transform: rotate(90deg);
-              }
+              background-repeat: no-repeat;
+              display: block;
+              background-image: url("gooru/images/add_collection.svg");
             }
             .competency-completion-performance {
               display: grid;
@@ -119,6 +125,10 @@
           }
 
           .users-completion-container {
+            max-height: 280px;
+            overflow-y: auto;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+            @extend %scroll-style;
             .user-completion-container {
               display: grid;
               grid-template-columns: auto auto;
@@ -242,6 +252,18 @@
               display: block;
             }
           }
+
+          &.empty-suggestion {
+            .users-completion-container {
+              .user-completion-container {
+                .user-info {
+                  .selected-student {
+                    background-color: rgba(55, 66, 75, 0.7);
+                  }
+                }
+              }
+            }
+          }
         }
         .data-not-available {
           text-align: center;
@@ -313,7 +335,7 @@
       justify-self: end;
       position: relative;
       cursor: pointer;
-      i {
+      i.explore {
         line-height: 40px;
         color: $white;
         transform: rotate(90deg);
@@ -331,6 +353,29 @@
         border: 1px solid #37424a;
         font-size: 9px;
         text-align: center;
+      }
+    }
+
+    &.empty-suggestion {
+      background-color: $white;
+      .students-suggestion {
+        display: grid;
+        align-items: center;
+        i.collection-icon {
+          width: 20px;
+          height: 20px;
+          background-size: 20px 20px;
+          opacity: 0.8;
+          justify-self: center;
+          background-repeat: no-repeat;
+          display: block;
+          background-image: url("gooru/images/add_collection.svg");
+        }
+      }
+      .clear-suggestion,
+      .selected-student-count,
+      .label-text {
+        color: #37424b;
       }
     }
   }

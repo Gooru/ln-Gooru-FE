@@ -236,12 +236,12 @@ export default Ember.Component.extend({
       .fetchLearningMapsContent(gutCode)
       .then(function(learningMapsContent) {
         let learningMapContents = learningMapsContent.get('contents');
-        let assessmentCount = learningMapContents.assessment.totalHitCount || 0;
+        let collectionCount = learningMapContents.collection.totalHitCount || 0;
         competencyData.set(
           'suggestionContentCount',
-          assessmentCount > maxLimitToSuggestContent
+          collectionCount > maxLimitToSuggestContent
             ? maxLimitToSuggestContent
-            : assessmentCount
+            : collectionCount
         );
       });
   }

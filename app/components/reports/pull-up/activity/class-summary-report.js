@@ -33,6 +33,11 @@ export default Ember.Component.extend({
       const component = this;
       component.set('monthlyReportContext', reportData);
       component.set('isShowMonthlySummaryReport', true);
+    },
+
+    //Action triggered when click on close pullup
+    onClosePullUp() {
+      this.set('showPullUp', false);
     }
   },
 
@@ -59,6 +64,9 @@ export default Ember.Component.extend({
    */
   isLoading: false,
 
+  /**
+   * @property {String} reportPeriod
+   */
   reportPeriod: Ember.computed('monthlyReportContext', function() {
     const component = this;
     let reportData = component.get('monthlyReportContext');
@@ -86,7 +94,13 @@ export default Ember.Component.extend({
       })
       .then(({ classSummaryReportData }) => {
         if (!component.isDestroyed) {
-          component.set('classSummaryReportData', classSummaryReportData);
+          component.set(
+            'classSummaryReportData',
+            classSummaryReportData
+              .sortBy('month')
+              .sortBy('year')
+              .reverse()
+          );
           component.set('isLoading', false);
         }
       });
