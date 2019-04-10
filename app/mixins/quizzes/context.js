@@ -38,6 +38,7 @@ export default Ember.Mixin.create({
           unitId: params.unitId || collection.get('unitId'),
           lessonId: params.lessonId || collection.get('lessonId'),
           eventSource: params.source,
+          version: 1,
           contextInfo
         }
       });
