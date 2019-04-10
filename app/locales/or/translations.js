@@ -1888,7 +1888,8 @@ export default Object.assign(quizzesTranslations, {
   'profile.proficiency.not-started': 'ଆରମ୍ଭ କରିନାହାନ୍ତି',
   'profile.proficiency.skyline': 'ସ୍କାଏଲାଇନ',
   'profile.proficiency.baseline': 'ବେସଲାଇନ',
-  'profile.proficiency.grade-line': 'ଗ୍ରେଡ ଲାଇନ',
+  'profile.proficiency.grade-line': 'Other Grade Hilines',
+  'profile.proficiency.class-grade-line': 'Class Grade Hiline',
   'profile.proficiency.not-tagged':
     'ଶ୍ରେଣୀରେ କୌଣସି ପାଠ୍ୟକ୍ରମ ଦିଆ ଯାଇନାହିଁ ଅବା ଉଦ୍ଦିଷ୍ଟ ବିଷୟବସ୍ତୁ ଅବା ଷ୍ଟାଣ୍ଡାର୍ଡ ସହିତ ପାଠ୍ୟକ୍ରମକୁ ଟ୍ୟାଗ୍ କରାଯାଇ ନାହିଁ |',
   'profile.proficiency.show-compressed-chart': 'ସଙ୍କୁଚିତ ଚାର୍ଟ ଦେଖାନ୍ତୁ ',

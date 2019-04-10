@@ -6,11 +6,11 @@
         <i class="icon {{collectionPerformance.collectionType}}"></i>
         <div class="collection-title" {{action 'onPreviewContent' collectionPerformance}}>{{collectionPerformance.title}}</div>
         {{#if (eq collectionPerformance.collectionType 'assessment')}}
-          <div class="performance" {{action 'onOpenCollectionReport' collectionPerformance}} style="background-color:{{grade-color collectionPerformance.score}}">
+          <div class="performance {{unless isStudent 'disable'}}" {{action 'onOpenCollectionReport' collectionPerformance}} style="background-color:{{grade-color collectionPerformance.score}}">
             <span class="score">{{collectionPerformance.score}}%</span>
           </div>
         {{else}}
-          <div class="performance collection" {{action 'onOpenCollectionReport' collectionPerformance}}>
+          <div class="performance collection {{unless isStudent 'disable'}}">
             <span class="timespent"> {{if collectionPerformance.timeSpent (format-time  collectionPerformance.timeSpent) '--'}}</span>
           </div>
         {{/if}}
@@ -25,25 +25,25 @@
   {{/if}}
 </div>
 {{#if showCollectionReport}}
-  {{class.gru-report-panel showPullUp=showCollectionReport reportData=studentReportContextData  model=studentReportContextData.lesson isStudent=studentReportContextData.isStudent onClosePullUp="onClosePullUp"}}
+  {{class.gru-report-panel showPullUp=showCollectionReport reportData=studentReportContextData  model=studentReportContextData.lesson isStudent=isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if showExternalAssessmentReport}}
   {{reports.pull-up.student-external-assessment-report
     showPullUp=showExternalAssessmentReport
     reportData=studentReportContextData
-    isStudent=studentReportContextData.isStudent
+    isStudent=isStudent
     onClosePullUp="onClosePullUp"
   }}
 {{/if}}
 
 
 {{#if showStudentDcaReport}}
-  {{reports.pull-up.dca-student-collection-report useSession=true showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=studentReportContextData.isStudent onClosePullUp="onClosePullUp"}}
+  {{reports.pull-up.dca-student-collection-report useSession=true showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalCollectionReport}}
-  {{reports.pull-up.dca-student-external-collection-report showPullUp=isShowStudentExternalCollectionReport reportData=studentReportContextData isStudent=studentReportContextData.isStudent onClosePullUp="onClosePullUp"}}
+  {{reports.pull-up.dca-student-external-collection-report showPullUp=isShowStudentExternalCollectionReport reportData=studentReportContextData isStudent=isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalAssessmentReport}}
@@ -51,7 +51,7 @@
       reports.pull-up.dca-student-external-assessment-report
       reportData=studentReportContextData
       showPullUp=isShowStudentExternalAssessmentReport
-      isStudent=studentReportContextData.isStudent
+      isStudent=isStudent
       onClosePullUp="onClosePullUp"
     }}
 {{/if}}

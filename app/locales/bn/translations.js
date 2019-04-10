@@ -1243,10 +1243,10 @@ export default Object.assign(quizzesTranslations, {
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'ক্লাস কার্যক্রম',
   'teacher-landing.class.offline-class-report.class-report': 'ক্লাস রিপোর্ট',
-  'teacher-landing.class.offline-class-report.class-activity-report':
-    'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report':
     'কার্যকলাপের প্রতিবেদন',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
   'teacher-landing.class.offline-class-report.conducted-on': 'উপর পরিচালিত',
   'teacher-landing.class.offline-class-report.not-started': 'শুরু না',
   'teacher-landing.class.back-to-class-activities': 'ফিরে ক্লাস কার্যক্রম',
@@ -1816,7 +1816,8 @@ export default Object.assign(quizzesTranslations, {
   'profile.proficiency.not-started': 'শুরু না',
   'profile.proficiency.skyline': 'দিগন্ত',
   'profile.proficiency.baseline': 'বেসলাইন',
-  'profile.proficiency.grade-line': 'গ্রেড লাইন',
+  'profile.proficiency.grade-line': 'Other Grade Hilines',
+  'profile.proficiency.class-grade-line': 'Class Grade Hiline',
   'profile.proficiency.not-tagged':
     'ক্লাসের কোন কোর্স নির্ধারিত নেই অথবা কোর্সটিকে কোনও বৈধ বিষয় বা মানগুলিতে ট্যাগ করা হয়নি।',
   'profile.proficiency.show-compressed-chart': 'সংক্ষেপিত চার্ট প্রদর্শন করুন',

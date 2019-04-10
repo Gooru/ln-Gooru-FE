@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import QuizzesContext from 'quizzes-addon/models/context/context';
+import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 
 /**
  * Convenience mixin for accesing the quizzes context service
@@ -26,10 +27,15 @@ export default Ember.Mixin.create({
     });
     if (hasContext) {
       let contextInfo = null;
+      let version;
       if (params.caContentId) {
         contextInfo = btoa(
           JSON.stringify({ dcaContentId: params.caContentId })
         );
+      }
+
+      if (params.source === PLAYER_EVENT_SOURCE.DAILY_CLASS) {
+        version = '1';
       }
       context.setProperties({
         classId: params.classId,
@@ -38,6 +44,7 @@ export default Ember.Mixin.create({
           unitId: params.unitId || collection.get('unitId'),
           lessonId: params.lessonId || collection.get('lessonId'),
           eventSource: params.source,
+          version,
           contextInfo
         }
       });
