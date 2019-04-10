@@ -90,7 +90,9 @@ export default Object.assign(quizzesTranslations, {
   'common.ignore': 'Ignore',
   'common.add': 'ಸೇರಿಸಿ',
   'common.plan-an-activities': 'Plan your activities',
-  'common.plan-an-activities-msg': 'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
+  'common.plan-activities': 'Plan Activities',
+  'common.plan-an-activities-msg':
+    'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'Reschedule',
   'common.no-unschedule-items': 'You don\'t have any activities that need scheduling for ',
   'common.repeat-activity': 'Repeat Activity',

@@ -90,7 +90,9 @@ export default Object.assign(quizzesTranslations, {
   'common.ignore': 'दुर्लक्ष',
   'common.add': 'जोडा',
   'common.plan-an-activities': 'Plan your activities',
-  'common.plan-an-activities-msg': 'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
+  'common.plan-activities': 'Plan Activities',
+  'common.plan-an-activities-msg':
+    'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'पुनर्नियोजन',
   'common.no-unschedule-items': 'नियोजन करण्यसाठी उपक्रम उपलब्ध नाही',
   'common.repeat-activity': 'उपक्रमाची पुनरावृत्ती',

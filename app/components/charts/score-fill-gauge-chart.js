@@ -179,15 +179,17 @@ export default Ember.Component.extend({
       .attr('x', 0)
       .text(`${scoreInPercentage}%`);
 
-    fillGaugeElement
-      .append('text')
-      .attr('y', 200)
-      .attr('transform', `translate(${fillGaugeElementWidth / 2})`)
-      .attr('class', 'total-timespent')
-      .append('tspan')
-      .attr('text-anchor', 'middle')
-      .attr('x', 0)
-      .text(`${timeSpent ? formatTime(timeSpent) : '--'}`);
+    if (timeSpent !== null && timeSpent !== undefined) {
+      fillGaugeElement
+        .append('text')
+        .attr('y', 200)
+        .attr('transform', `translate(${fillGaugeElementWidth / 2})`)
+        .attr('class', 'total-timespent')
+        .append('tspan')
+        .attr('text-anchor', 'middle')
+        .attr('x', 0)
+        .text(`${timeSpent ? formatTime(timeSpent) : '--'}`);
+    }
 
     let waveGroupXPosition = fillGaugeElementWidth * 2 - waveClipWidth;
     // Make the wave rise. wave and waveGroup are separate so that horizontal and vertical movement can be controlled independently.

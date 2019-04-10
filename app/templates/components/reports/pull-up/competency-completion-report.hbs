@@ -4,14 +4,13 @@
     <div class="title-container"><span class="close-pullup" {{action "onClosePullup"}}>{{gru-icon name="keyboard_backspace"}}</span><span class="title-text">Competencies</span></div>
     <div class="competencies-container">
       {{#each competencyCompletionReport as |competencyData competencySeq|}}
-        <div class="competency-container competency-{{competencySeq}} {{if competencyData.isExpanded 'expanded' 'collapsed'}}">
+        <div class="competency-container {{unless activeCompetency.suggestionContentCount 'empty-suggestion'}} competency-{{competencySeq}} {{if competencyData.isExpanded 'expanded' 'collapsed'}}">
           <div class="competency-completion-info-container">
             <div class="competency-info" {{action "onSelectCompetency" competencyData}}>
               <div class="competency-code">{{competencyData.competencyCode}} {{competencyData.suggestionContentCount}}</div>
               <div class="competency-name ellipsis">{{competencyData.competencyDesc}}</div>
             </div>
             <div class="competency-suggestion" {{action "onSuggestAtCompetency" competencyData}}>
-              {{gru-icon name="explore"}}
             </div>
             <div class="competency-completion-performance">
               <div class="completion-percentage">{{competencyData.completionPercentage}}%</div>
@@ -55,16 +54,21 @@
 </div>
 
 {{#if isShowStudentSuggestion}}
-  <div class="trigger-suggestion">
+  <div class="trigger-suggestion {{unless activeCompetency.suggestionContentCount 'empty-suggestion'}}">
     <div class="clear-suggestion" {{action "onClearStudents"}}>
       {{gru-icon name="clear"}}
     </div>
     <div class="selected-student-count">
       {{selectedUserIds.length}} {{t 'common.student-selected'}}
     </div>
-    <div class="label-text">{{t 'common.plan-an-activities'}}</div>
+    <div class="label-text">{{t 'common.plan-activities'}}</div>
     <div class="students-suggestion" {{action "onSuggestAtStudents" competencyData}}>
-      {{gru-icon name="explore"}} <span class="suggestion-count">{{activeCompetency.suggestionContentCount}}</span>
+      {{#if activeCompetency.suggestionContentCount}}
+        {{gru-icon name="explore"}}
+        <span class="suggestion-count">{{activeCompetency.suggestionContentCount}}</span>
+      {{else}}
+        <i class="collection-icon" />
+      {{/if}}
     </div>
   </div>
 {{/if}}

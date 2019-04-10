@@ -1,6 +1,6 @@
-<div class="backdrop" {{action "onClosePullUp"}}></div>
+<div class="backdrop" {{action "onClosePullUp" true}}></div>
 <div class="activity-report-container">
-  <div class="header-container">
+  <div class="report-header-container">
     <div class="title-container">
       <div class="report-title">
         {{title}}
@@ -15,7 +15,7 @@
       {{gru-icon name="clear"}}
     </div>
   </div>
-  <div class="body-container">
+  <div class="report-body-container">
     {{yield}}
   </div>
 </div>

@@ -12,8 +12,9 @@
         grid-template-columns: 1fr 56px;
         height: 56px;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        cursor: pointer;
         .info-container {
-          padding-left: 15px;
+          padding: 13px 0 0 15px;
           .activity-timespent {
             font-size: 12px;
             font-weight: 400;
@@ -35,7 +36,10 @@
           border-bottom: 1px solid $white;
         }
 
-        .info-container,
+        &:first-child .activity-performance {
+          border-top: 1px solid $white;
+        }
+
         .activity-performance {
           display: grid;
           align-items: center;

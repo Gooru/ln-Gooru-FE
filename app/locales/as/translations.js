@@ -90,6 +90,7 @@ export default Object.assign(quizzesTranslations, {
   'common.ignore': 'উপেক্ষা কৰক',
   'common.add': 'যোগ কৰক',
   'common.plan-an-activities': 'Plan your activities',
+  'common.plan-activities': 'Plan Activities',
   'common.plan-an-activities-msg': 'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'পুনৰ কাৰ্যক্ৰম বনাওক',
   'common.no-unschedule-items': 'কাৰ্যক্ৰম নিৰ্মাণ কৰিবৰ বাবে আপোনাৰ কোনো কাৰ্যকলাপ নাই',
