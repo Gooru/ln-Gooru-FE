@@ -45,9 +45,9 @@ export default Ember.Component.extend({
       }
       component.toggleCompetencyContainer(competencyData);
       if (
+        competencyData.get('isExpanded') ||
         component.get('activeCompetency.competencyCode') !==
-          competencyData.get('competencyCode') ||
-        competencyData.get('isExpanded')
+          competencyData.get('competencyCode')
       ) {
         component.selectAllStudents(
           competencyData.get('usersCompletionSummary')

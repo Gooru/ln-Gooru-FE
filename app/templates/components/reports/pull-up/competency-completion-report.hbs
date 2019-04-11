@@ -1,7 +1,7 @@
 <div class="backdrop" {{action "onClosePullup"}}></div>
 <div class="competency-completion-report-container">
   <div class="competencies-list-container">
-    <div class="title-container"><span class="close-pullup" {{action "onClosePullup"}}>{{gru-icon name="keyboard_backspace"}}</span><span class="title-text">Competencies</span></div>
+    <div class="title-container"><span class="close-pullup" {{action "onClosePullup"}}>{{gru-icon name="keyboard_backspace"}}</span><span class="title-text">{{t 'common.competencies'}}</span></div>
     <div class="competencies-container">
       {{#each competencyCompletionReport as |competencyData competencySeq|}}
         <div class="competency-container {{unless activeCompetency.suggestionContentCount 'empty-suggestion'}} competency-{{competencySeq}} {{if competencyData.isExpanded 'expanded' 'collapsed'}}">
