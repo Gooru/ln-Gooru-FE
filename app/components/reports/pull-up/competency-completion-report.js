@@ -35,7 +35,9 @@ export default Ember.Component.extend({
           .then(function(usersCompletionSummary) {
             competencyData.set(
               'usersCompletionSummary',
-              usersCompletionSummary.sortBy('status')
+              component
+                .selectAllStudents(usersCompletionSummary)
+                .sortBy('status')
             );
             component.set('isLoading', false);
           });
@@ -43,10 +45,13 @@ export default Ember.Component.extend({
       }
       component.toggleCompetencyContainer(competencyData);
       if (
+        competencyData.get('isExpanded') ||
         component.get('activeCompetency.competencyCode') !==
-        competencyData.get('competencyCode')
+          competencyData.get('competencyCode')
       ) {
-        component.resetSelectedUserIds();
+        component.selectAllStudents(
+          competencyData.get('usersCompletionSummary')
+        );
       }
       component.set('activeCompetency', competencyData);
     },
@@ -124,7 +129,7 @@ export default Ember.Component.extend({
    * @property {Boolean} isShowStudentSuggestion
    */
   isShowStudentSuggestion: Ember.computed('selectedUserIds.[]', function() {
-    return this.get('selectedUserIds.length');
+    return this.get('selectedUserIds.length') >= 0;
   }),
 
   /**
@@ -165,6 +170,15 @@ export default Ember.Component.extend({
    * Method to toggle competency container view
    */
   toggleCompetencyContainer(competencyData) {
+    const component = this;
+    let activeCompetency = component.get('activeCompetency');
+    if (
+      activeCompetency &&
+      competencyData.get('competencyCode') !==
+        activeCompetency.get('competencyCode')
+    ) {
+      activeCompetency.set('isExpanded', !activeCompetency.get('isExpanded'));
+    }
     competencyData.set('isExpanded', !competencyData.get('isExpanded'));
   },
 
@@ -207,6 +221,28 @@ export default Ember.Component.extend({
     let selectedUsers = component.get('selectedUserIds');
     selectedUsers.map(selectedUser => selectedUser.set('selected', false));
     component.set('selectedUserIds', Ember.A([]));
+  },
+
+  /**
+   * @function selectAllStudents
+   * Method to select all the students in a competency
+   */
+  selectAllStudents(usersCompletionSummary) {
+    const component = this;
+    let usersCompletionSummarybyDefaultAllSelected = Ember.A([]);
+    component.resetSelectedUserIds();
+    if (usersCompletionSummary) {
+      let selectedUsers = component.get('selectedUserIds');
+      usersCompletionSummarybyDefaultAllSelected = usersCompletionSummary.map(
+        userCompletionData => {
+          userCompletionData.set('selected', true);
+          selectedUsers.pushObject(userCompletionData);
+          return userCompletionData;
+        }
+      );
+      component.set('selectedUserIds', selectedUsers);
+    }
+    return usersCompletionSummarybyDefaultAllSelected;
   },
 
   /**

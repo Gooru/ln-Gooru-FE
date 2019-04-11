@@ -118,11 +118,61 @@ export default Ember.Component.extend({
         component.get('classSummary').objectAt(activeIndex)
       );
       component.loadClassActivityData();
+    },
+
+    //Action triggered when click on the content performance
+    onOpenContentReport(activityContent) {
+      const component = this;
+      let contentType = activityContent.get('contentType');
+      let params = {
+        userId: component.get('userId'),
+        classId: component.get('classId'),
+        collectionId: activityContent.get('content.id'),
+        type: contentType,
+        isStudent: true,
+        collection: activityContent.get('content'),
+        activityDate: moment(activityContent.get('date')).format('YYYY-MM-DD'),
+        studentPerformance: activityContent.get('performanceSummary')
+      };
+      if (contentType === 'assessment-external') {
+        component.set('isShowStudentExternalAssessmentReport', true);
+      } else if (contentType === 'collection-external') {
+        component.set('isShowStudentExternalCollectionReport', true);
+      } else {
+        component.set('showStudentDcaReport', true);
+      }
+      component.set('studentReportContextData', params);
+    },
+
+    //Action triggered when click close pullup
+    onClosePullUp(isCloseAll) {
+      const component = this;
+      component.set('showStudentDcaReport', false);
+      component.set('isShowStudentExternalAssessmentReport', false);
+      component.set('isShowStudentExternalCollectionReport', false);
+      if (isCloseAll) {
+        component.sendAction('onClosePullUp', isCloseAll);
+      }
     }
   },
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {Booean} isShowStudentExternalAssessmentReport
+   */
+  isShowStudentExternalAssessmentReport: false,
+
+  /**
+   * @property {Boolean} showStudentDcaReport
+   */
+  showStudentDcaReport: false,
+
+  /**
+   * @property {Boolean} isShowStudentExternalCollectionReport
+   */
+  isShowStudentExternalCollectionReport: false,
 
   /**
    * @property {Number} activeIndex
