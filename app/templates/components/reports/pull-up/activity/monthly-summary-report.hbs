@@ -57,7 +57,7 @@
       </div>
     {{/if}}
     {{#each activitySummaryList as |activitySummary|}}
-      <div class="activity-container">
+      <div class="activity-container {{unless activitySummary.performanceSummary 'disable-event'}}" {{action "onOpenContentReport" activitySummary}}>
         <div class="icon-container {{activitySummary.contentType}}">
           <i class="icon" />
         </div>
@@ -73,7 +73,7 @@
           {{#if activitySummary.performanceSummary}}
             {{if (gte activitySummary.performanceSummary.score 0)
               (concat activitySummary.performanceSummary.score '%')
-              (if activity.collection.performance.timeSpent (format-time  activity.collection.performance.timeSpent) '--')
+              (if (gte activitySummary.performanceSummary.timeSpent 0) (format-time  activitySummary.performanceSummary.timeSpent) '--')
             }}
           {{else}}
             {{t 'teacher-landing.class.students-tab.not-started'}}
@@ -83,3 +83,21 @@
     {{/each}}
   </div>
 </div>
+
+{{#if showStudentDcaReport}}
+  {{reports.pull-up.dca-student-collection-report showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
+{{/if}}
+
+{{#if isShowStudentExternalCollectionReport}}
+  {{reports.pull-up.dca-student-external-collection-report showPullUp=isShowStudentExternalCollectionReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
+{{/if}}
+
+{{#if isShowStudentExternalAssessmentReport}}
+  {{
+    reports.pull-up.dca-student-external-assessment-report
+    reportData=studentReportContextData
+    showPullUp=isShowStudentExternalAssessmentReport
+    isStudent=true
+    onClosePullUp="onClosePullUp"
+  }}
+{{/if}}

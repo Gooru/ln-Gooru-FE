@@ -174,18 +174,16 @@ export default Ember.Component.extend({
 
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-        if (closeAll) {
-          component.sendAction('onClosePullUp');
-        }
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+      if (closeAll) {
+        component.sendAction('onClosePullUp', closeAll);
       }
-    );
+    });
   },
 
   handleAppContainerScroll() {
@@ -210,14 +208,16 @@ export default Ember.Component.extend({
         .readExternalCollection(context.collectionId)
     );
 
-    return Ember.RSVP.hash({
-      profile: profilePromise,
-      externalCollection: collectionContentPromise
-    }).then(function(hash) {
-      component.set('profile', hash.profile);
-      component.set('externalCollectionContent', hash.externalCollection);
-      component.loadTeacherSuggestions();
-    });
+    return Ember.RSVP
+      .hash({
+        profile: profilePromise,
+        externalCollection: collectionContentPromise
+      })
+      .then(function(hash) {
+        component.set('profile', hash.profile);
+        component.set('externalCollectionContent', hash.externalCollection);
+        component.loadTeacherSuggestions();
+      });
   },
 
   loadTeacherSuggestions() {

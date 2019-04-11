@@ -10,8 +10,6 @@
               <div class="competency-code">{{competencyData.competencyCode}} {{competencyData.suggestionContentCount}}</div>
               <div class="competency-name ellipsis">{{competencyData.competencyDesc}}</div>
             </div>
-            <div class="competency-suggestion" {{action "onSuggestAtCompetency" competencyData}}>
-            </div>
             <div class="competency-completion-performance">
               <div class="completion-percentage">{{competencyData.completionPercentage}}%</div>
               <div class="completion-box"><span style="background-color: {{safe-html (grade-color competencyData.completionPercentage)}}; width: {{competencyData.completionPercentage}}%;"></span></div>
@@ -53,14 +51,25 @@
   </div>
 </div>
 
-{{#if isShowStudentSuggestion}}
+{{#if activeCompetency.isExpanded}}
   <div class="trigger-suggestion {{unless activeCompetency.suggestionContentCount 'empty-suggestion'}}">
     <div class="clear-suggestion" {{action "onClearStudents"}}>
       {{gru-icon name="clear"}}
     </div>
-    <div class="selected-student-count">
-      {{selectedUserIds.length}} {{t 'common.student-selected'}}
-    </div>
+    {{#if (eq activeCompetency.usersCompletionSummary.length selectedUserIds.length)}}
+      <div class="selected-all" {{action "onClearStudents"}}>
+        <span class="selected-icon">
+          {{gru-icon name="done_all" class="tick-icon"}}
+        </span>
+        <span class="selected-all-text">
+          {{t 'common.all'}} {{t 'common.students'}}
+        </span>
+      </div>
+    {{else}}
+      <div class="selected-student-count">
+        {{selectedUserIds.length}} {{t (if (lt selectedUserIds.length 2) 'common.student' 'common.students')}}
+      </div>
+    {{/if}}
     <div class="label-text">{{t 'common.plan-activities'}}</div>
     <div class="students-suggestion" {{action "onSuggestAtStudents" competencyData}}>
       {{#if activeCompetency.suggestionContentCount}}
