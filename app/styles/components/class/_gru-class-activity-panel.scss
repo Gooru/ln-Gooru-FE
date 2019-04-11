@@ -302,11 +302,8 @@
         .mastery-accrual-text {
           height: 22px;
           font-size: 13px;
-
-          &.selected {
-            color: #1aa9eb;
-            font-weight: bold;
-          }
+          color: #1aa9eb;
+          font-weight: bold;
         }
       }
 
@@ -376,7 +373,7 @@
           height: 25px;
           background-repeat: no-repeat;
           background-size: 25px 25px;
-          background-image: url("../assets/gooru/images/rubric-green.svg");
+          background-image: url("../assets/gooru/images/check-circle-1.svg");
           display: block;
         }
 
