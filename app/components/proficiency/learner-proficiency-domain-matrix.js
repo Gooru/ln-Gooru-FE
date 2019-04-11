@@ -338,16 +338,6 @@ export default Ember.Component.extend({
   taxonomyGrades: Ember.A([]),
 
   /**
-   * @property {Number} classGrade
-   */
-  classGrade: Ember.computed('class', function() {
-    let controller = this;
-    let classData = controller.get('class');
-    let classGrade = classData.get('grade');
-    return classGrade ? parseInt(classGrade) : null;
-  }),
-
-  /**
    * @property {String} subjectCode
    */
   subjectCode: Ember.computed('subject', function() {
@@ -1010,6 +1000,8 @@ export default Ember.Component.extend({
   willDestroyElement() {
     let component = this;
     component.clearChart();
+    component.set('isShowMatrixChart', false);
+    component.set('taxonomyGrades', []);
   },
 
   clearChart() {
