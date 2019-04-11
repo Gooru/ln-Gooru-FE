@@ -55,11 +55,11 @@
           {{/if}}
         {{/if}}
       </div>
-    {{else}}
-      <div class="ca-panel-reschedule ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
-        <span class="icon"> {{gru-icon name="update"}}</span>
-        <span>{{t 'common.schedule'}}</span>
-      </div>
+      {{else}}
+        <div class="ca-panel-reschedule ca-datepicker-popover" onclick= {{action 'onScheduleContentToDCA' classActivity}}>
+          <span class="icon"> {{gru-icon name="update"}}</span>
+          <span>{{t 'common.schedule'}}</span>
+        </div>
     {{/unless}}
   </div>
   {{#unless isUnScheduled}}
@@ -67,15 +67,14 @@
       <div class="student-count {{if showCohort 'active'}}">
         {{gru-icon name="account_circle"}}
         {{#if (eq classActivity.usersCount -1)}}
-          <span {{action 'showStudentList'}}>{{t 'common.all'}}</span>
-        {{else if (eq classActivity.usersCount 0)}}
+          <span {{action 'showStudentList'}}>{{t 'common.all'}}</span> {{else if (eq classActivity.usersCount 0)}}
           <span {{action 'showStudentList'}}>{{t 'common.none'}}</span>
         {{else}}
           <span {{action 'showStudentList'}}> {{classActivity.usersCount}}</span>
         {{/if}}
       </div>
       <div class="re-schedule">
-        <div class="re-schedule-activity ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
+        <div class="re-schedule-activity ca-datepicker-popover" onclick= {{action 'onScheduleContentToDCA' classActivity}}>
           {{#if collectionPerformanceSummary}}
             {{gru-icon name="replay"}}
             <span class="hidden-xs">{{t 'common.repeat-activity'}}</span>
@@ -102,8 +101,8 @@
           {{/if}}
         </div>
         <div class="dca-golive-btn">
-          {{#if (and showGolive (or (eq item.collectionType 'assessment') (eq item.collectionType 'collection'))) }}
-            {{!-- {{#if (and showGolive (eq item.collectionType 'assessment') ) }} --}}
+          {{!-- {{#if (and showGolive (or (eq item.collectionType 'assessment') (eq item.collectionType 'collection'))) }} --}}
+          {{#if (and showGolive (eq item.collectionType 'assessment') ) }}
             <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item}}></i>
           {{/if}}
         </div>
