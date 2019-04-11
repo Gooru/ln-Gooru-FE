@@ -463,7 +463,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       });
     }
 
-    const returnObjects = {
+    const returnObjects = Ember.Object.create({
       owner: Ember.getOwner(this).ownerInjection(),
       title: learningMapsContent.title,
       code: learningMapsContent.code,
@@ -477,7 +477,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       learningMapsContent: serializer.normalizeSearchLearningMapsContentInfo(
         learningMapsContent.contents
       )
-    };
+    });
     return returnObjects;
   },
 

@@ -9,7 +9,7 @@
   <div class="taxonomy-info">
     <div class="dropdown categories">
       <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{selectedCategory.title }}
-      <span class="caret"></span></button>
+        <span class="caret"></span></button>
       <ul class="dropdown-menu category-list">
         {{#each taxonomyCategories as |category|}}
           <li class="list-item category {{if (eq selectedCategory.id category.id) 'active'}}" {{action "onSelectCategory" category}}>{{category.title}}</li>
@@ -19,7 +19,7 @@
     {{#if activeSubject}}
       <div class="dropdown subjects">
         <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{activeSubject.title}}
-        <span class="caret"></span></button>
+          <span class="caret"></span></button>
         <ul class="dropdown-menu subject-list">
           {{#each taxonomySubjects as |subject|}}
             <li class="list-item category {{if (eq activeSubject.id subject.id) 'active'}}" {{action "onSelectSubject" subject}}>{{subject.title}}</li>
@@ -74,6 +74,10 @@
         <div class="baseline legend">
           <span class="box-baseline"></span>
           <span class="title">{{t 'profile.proficiency.baseline'}}</span>
+        </div>
+        <div class="class-grade-line legend">
+          <span class="box-class-grade-line"></span>
+          <span class="title">{{t 'profile.proficiency.class-grade-line'}}</span>
         </div>
         <div class="grade-line legend">
           <span class="box-grade-line"></span>

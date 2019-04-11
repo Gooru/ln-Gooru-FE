@@ -152,6 +152,7 @@ export default Ember.Component.extend({
     let conductedOn =
       new Date(component.get('activityData.activation_date')) || new Date();
     let classId = component.get('classId');
+    let activityId = component.get('activityData.id');
     let studentPerformanceData = {
       tenant_id: component.get('session.tenantId') || null,
       student_id: studentIds,
@@ -169,7 +170,8 @@ export default Ember.Component.extend({
       time_spent:
         (component.get('maxHour') * 60 * 60 + component.get('maxMins') * 60) *
         1000,
-      path_type: null
+      path_type: null,
+      additionalContext: btoa(JSON.stringify({ dcaContentId: activityId }))
     };
     return studentPerformanceData;
   },

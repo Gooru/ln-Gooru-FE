@@ -55,11 +55,11 @@
           {{/if}}
         {{/if}}
       </div>
-      {{else}}
-        <div class="ca-panel-reschedule ca-datepicker-popover" onclick= {{action 'onScheduleContentToDCA' classActivity}}>
-          <span class="icon"> {{gru-icon name="update"}}</span>
-          <span>{{t 'common.schedule'}}</span>
-        </div>
+    {{else}}
+      <div class="ca-panel-reschedule ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
+        <span class="icon"> {{gru-icon name="update"}}</span>
+        <span>{{t 'common.schedule'}}</span>
+      </div>
     {{/unless}}
   </div>
   {{#unless isUnScheduled}}
@@ -67,14 +67,15 @@
       <div class="student-count {{if showCohort 'active'}}">
         {{gru-icon name="account_circle"}}
         {{#if (eq classActivity.usersCount -1)}}
-          <span {{action 'showStudentList'}}>{{t 'common.all'}}</span> {{else if (eq classActivity.usersCount 0)}}
+          <span {{action 'showStudentList'}}>{{t 'common.all'}}</span>
+        {{else if (eq classActivity.usersCount 0)}}
           <span {{action 'showStudentList'}}>{{t 'common.none'}}</span>
         {{else}}
           <span {{action 'showStudentList'}}> {{classActivity.usersCount}}</span>
         {{/if}}
       </div>
       <div class="re-schedule">
-        <div class="re-schedule-activity ca-datepicker-popover" onclick= {{action 'onScheduleContentToDCA' classActivity}}>
+        <div class="re-schedule-activity ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
           {{#if collectionPerformanceSummary}}
             {{gru-icon name="replay"}}
             <span class="hidden-xs">{{t 'common.repeat-activity'}}</span>
@@ -84,6 +85,16 @@
           {{/if}}
         </div>
       </div>
+      <div class="mastery-accrual">
+        {{#if (and showMasteryAccrual item.masteryAccrualCompetencies)}}
+          <div class="mastery-accrual-btn" {{action "onUpdateMasteryAccrual"}}>
+            <span class="mastery-accrual-icon mastery-accrual-{{if classActivity.allowMasteryAccrual 'checked' 'unchecked'}}">
+              {{gru-icon name=(concat 'radio_button_' (if  classActivity.allowMasteryAccrual 'checked' 'unchecked'))}}
+            </span>
+            <span class="mastery-accrual-text  hidden-xs">{{t 'common.mastery'}}</span>
+          </div>
+        {{/if}}
+      </div>
       <div class="dca-panel-actions">
         <div class="dca-rubric-icon">
           {{#if (gt item.oeQuestionCount 0)}}
@@ -91,9 +102,15 @@
           {{/if}}
         </div>
         <div class="dca-golive-btn">
-          {{!-- {{#if (and showGolive (or (eq item.collectionType 'assessment') (eq item.collectionType 'collection'))) }} --}}
-          {{#if (and showGolive (eq item.collectionType 'assessment') ) }}
-            <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item}}></i>
+          {{#if enableCollectionLiveLearning}}
+            {{#if (and showGolive (or (eq item.collectionType 'assessment') (eq item.collectionType 'collection'))) }}
+              {{!-- {{#if (and showGolive (eq item.collectionType 'assessment') ) }} --}}
+              <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item}}></i>
+            {{/if}}
+          {{else}}
+            {{#if (and showGolive (eq item.collectionType 'assessment') ) }}
+              <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item}}></i>
+            {{/if}}
           {{/if}}
         </div>
         <div class="dca-assign-btn">

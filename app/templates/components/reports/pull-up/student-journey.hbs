@@ -4,13 +4,13 @@
     {{#each collectionPerformances as |collectionPerformance|}}
       <div class="collection-panel">
         <i class="icon {{collectionPerformance.collectionType}}"></i>
-        <div class="collection-title">{{collectionPerformance.title}}</div>
+        <div class="collection-title" {{action 'onPreviewContent' collectionPerformance}}>{{collectionPerformance.title}}</div>
         {{#if (eq collectionPerformance.collectionType 'assessment')}}
-          <div class="performance" style="background-color:{{grade-color collectionPerformance.score}}">
+          <div class="performance {{unless isStudent 'disable'}}" {{action 'onOpenCollectionReport' collectionPerformance}} style="background-color:{{grade-color collectionPerformance.score}}">
             <span class="score">{{collectionPerformance.score}}%</span>
           </div>
         {{else}}
-          <div class="performance collection">
+          <div class="performance collection {{unless isStudent 'disable'}}">
             <span class="timespent"> {{if collectionPerformance.timeSpent (format-time  collectionPerformance.timeSpent) '--'}}</span>
           </div>
         {{/if}}
@@ -23,8 +23,44 @@
       <span class="message">{{t (if (or (eq competency.status 2) (eq competency.status 3)) (concat 'student-journey.teacher-status-' competency.status) 'student-journey.no-data-teacher')}}</span>
     {{/if}}
   {{/if}}
-
-  {{#if isShowPullUp}}
-    {{class.gru-report-panel showPullUp=isShowPullUp reportData=studentCollectionReport isStudent=true onClosePullUp="onClosePullUp"}}
-  {{/if}}
 </div>
+{{#if showCollectionReport}}
+  {{class.gru-report-panel showPullUp=showCollectionReport reportData=studentReportContextData  model=studentReportContextData.lesson isStudent=isStudent onClosePullUp="onClosePullUp"}}
+{{/if}}
+
+{{#if showExternalAssessmentReport}}
+  {{reports.pull-up.student-external-assessment-report
+    showPullUp=showExternalAssessmentReport
+    reportData=studentReportContextData
+    isStudent=isStudent
+    onClosePullUp="onClosePullUp"
+  }}
+{{/if}}
+
+
+{{#if showStudentDcaReport}}
+  {{reports.pull-up.dca-student-collection-report useSession=true showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=isStudent onClosePullUp="onClosePullUp"}}
+{{/if}}
+
+{{#if isShowStudentExternalCollectionReport}}
+  {{reports.pull-up.dca-student-external-collection-report showPullUp=isShowStudentExternalCollectionReport reportData=studentReportContextData isStudent=isStudent onClosePullUp="onClosePullUp"}}
+{{/if}}
+
+{{#if isShowStudentExternalAssessmentReport}}
+  {{
+      reports.pull-up.dca-student-external-assessment-report
+      reportData=studentReportContextData
+      showPullUp=isShowStudentExternalAssessmentReport
+      isStudent=isStudent
+      onClosePullUp="onClosePullUp"
+    }}
+{{/if}}
+
+{{#if isShowContentPreview}}
+  {{reports.pull-up.gru-collection-preview
+      showPullUp=isShowContentPreview
+      previewContentId=previewContent.id
+      previewContentType=previewContentType
+      playerContext=previewPlayerContext
+    }}
+{{/if}}

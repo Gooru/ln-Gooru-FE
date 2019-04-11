@@ -98,6 +98,7 @@ export default Object.assign(quizzesTranslations, {
   'common.ignore': 'അവഗണിക്കുക',
   'common.add': 'ചേർക്കുക',
   'common.plan-an-activities': 'Plan your activities',
+  'common.plan-activities': 'Plan Activities',
   'common.plan-an-activities-msg':
     'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'പുനരാരംഭിക്കുക',
@@ -253,6 +254,7 @@ export default Object.assign(quizzesTranslations, {
   'common.create-rubric': 'പുതിയ റബ്രിക്ക് സൃഷ്ടിക്കുക',
   'common.current-attempt': 'നിലവിലുള്ള ശ്രമം',
   'common.currently-studying': 'നിലവിൽ പഠിക്കുന്നു',
+  'common.date': 'Date',
   'common.delete': 'ഇല്ലാതാക്കുക',
   'common.delete-instructions.links-inaccessible':
     'എല്ലാ പങ്കിടൽ ലിങ്കുകളും പ്രവേശനക്ഷമമാകും',
@@ -1287,6 +1289,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-activities': 'ക്ലാസ് പ്രവർത്തനങ്ങൾ',
   'teacher-landing.class.offline-class-report.class-report':
     'ക്ലാസ് റിപ്പോർട്ട്',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report':
     'പ്രവർത്തന റിപ്പോർട്ട്',
   'teacher-landing.class.offline-class-report.conducted-on': 'നടന്നത്',
@@ -1873,7 +1877,8 @@ export default Object.assign(quizzesTranslations, {
   'profile.proficiency.not-started': 'ആരംഭിച്ചില്ല',
   'profile.proficiency.skyline': 'ആകാശം',
   'profile.proficiency.baseline': 'അടിസ്ഥാനരേഖ',
-  'profile.proficiency.grade-line': 'ഗ്രേഡ് ലൈൻ',
+  'profile.proficiency.grade-line': 'Other Grade',
+  'profile.proficiency.class-grade-line': 'Class Grade',
   'profile.proficiency.not-tagged':
     'ക്ലാസ് ഒന്നും തന്നെ നിശ്ചയിച്ചിട്ടില്ല, അല്ലെങ്കിൽ കോഴ്സ് ഒരു സാധുതയുള്ള വിഷയം അല്ലെങ്കിൽ നിലവാരത്തിലേക്ക് ടാഗുചെയ്തിട്ടില്ല.',
   'profile.proficiency.show-compressed-chart':
@@ -2569,5 +2574,20 @@ export default Object.assign(quizzesTranslations, {
     'Present a diagnostic to determine the student\'s current location, if not known?',
   'present.diagnostic.determine.know':
     '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
-  'add.to.todays.class': 'Add to Today\'s Class'
+  'add.to.todays.class': 'Add to Today\'s Class',
+  warning: 'warning',
+  'ca.warn.turn-on.multiple-competencies':
+    'This assessment is tagged to multiple competencies. Turning ON mastery will mean students can acquire mastery against all the competencies tagged to this assessment.',
+  'ca.warn.turn-on.multiple-competencies.question':
+    'Do you want to allow multiple competencies to be mastered via single assessment ?',
+  'ca.warn.turn-on.multiple-competencies.note':
+    'Note: You can remix (copy) any assessment and tag the right competency intended for students to gain mastery, before adding it at class acitivities.',
+  'ca.warn.trun-off.mastery-accrual':
+    'Turning OFF mastery will not revert any existing student data. Students who have already accrued mastery against competencies tagged to this assessment will have their data continue to reflect so.',
+  'ca.warn.trun-on.mastery-accrual':
+    'Turning ON mastery accrual  will not update mastery status for students who have already completed the assessment.',
+  'ca.mastery-accrual.update.error':
+    'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.',
+  'want.to.proceed': 'Do you want to proceed ?',
+  proceed: 'Proceed'
 });

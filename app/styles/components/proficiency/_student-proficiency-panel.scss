@@ -21,7 +21,7 @@
         margin: 15px auto auto;
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(7, 1fr);
         justify-content: space-around;
 
         .legend {
@@ -37,6 +37,7 @@
           }
 
           .box-baseline,
+          .box-class-grade-line,
           .box-grade-line {
             width: 18px;
             height: 5px;
@@ -88,6 +89,12 @@
             }
           }
 
+          &.class-grade-line {
+            .box-class-grade-line {
+              background-color: #c77;
+            }
+          }
+
           &.grade-line {
             .box-grade-line {
               background-color: #8fd383;
@@ -111,6 +118,7 @@
     .back {
       cursor: pointer;
       margin: auto;
+      display: flex;
     }
 
     .dropdown {

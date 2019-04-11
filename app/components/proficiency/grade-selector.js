@@ -1,6 +1,10 @@
 import Ember from 'ember';
-import { SCREEN_SIZES } from 'gooru-web/config/config';
-import { isCompatibleVW } from 'gooru-web/utils/utils';
+import {
+  SCREEN_SIZES
+} from 'gooru-web/config/config';
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
   classNames: ['grade-selector'],
 
@@ -45,6 +49,20 @@ export default Ember.Component.extend({
       placement: 'auto',
       content: () => {
         return component.$('.more-active-grades').html();
+      }
+    });
+  },
+
+  didInsertElement() {
+    let component = this;
+    Ember.run.schedule('afterRender', component, function() {
+      if (component.get('classGrade')) {
+        let taxonomyGrades = component.get('taxonomyGrades');
+        let classGrade = taxonomyGrades.findBy('id', component.get('classGrade'));
+        if (classGrade) {
+          classGrade.set('isClassGrade', true);
+          component.send('selectGrade', classGrade);
+        }
       }
     });
   },

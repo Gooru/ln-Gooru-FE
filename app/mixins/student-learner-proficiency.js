@@ -1,10 +1,15 @@
 import Ember from 'ember';
-import { ROLES, SCREEN_SIZES } from 'gooru-web/config/config';
+import {
+  ROLES,
+  SCREEN_SIZES
+} from 'gooru-web/config/config';
 import {
   getSubjectIdFromSubjectBucket,
   isCompatibleVW
 } from 'gooru-web/utils/utils';
-import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
+import {
+  getCategoryCodeFromSubjectId
+} from 'gooru-web/utils/taxonomy';
 export default Ember.Mixin.create({
   // -------------------------------------------------------------------------
   // Dependencies
@@ -62,12 +67,7 @@ export default Ember.Mixin.create({
   /**
    * @property {Number} classGrade
    */
-  classGrade: Ember.computed('class', function() {
-    let controller = this;
-    let classData = controller.get('class');
-    let classGrade = classData.get('grade');
-    return classGrade ? parseInt(classGrade) : null;
-  }),
+  classGrade: Ember.computed.alias('class.gradeCurrent'),
 
   /**
    * @property {String} subjectCode
@@ -195,7 +195,7 @@ export default Ember.Mixin.create({
     const competencyStatus = competency.get('status');
     let showSignatureAssessment =
       signatureCompetencyList[domainCode] ===
-        competency.get('competencyCode') ||
+      competency.get('competencyCode') ||
       competencyStatus === 2 ||
       competencyStatus === 4;
     competency.set('showSignatureAssessment', showSignatureAssessment);
@@ -224,7 +224,9 @@ export default Ember.Mixin.create({
           .get('competencyService')
           .getUserSignatureCompetencies(userId, subject)
       })
-      .then(({ competencyList }) => {
+      .then(({
+        competencyList
+      }) => {
         component.set('signatureCompetencyList', competencyList);
       });
   },
@@ -278,9 +280,9 @@ export default Ember.Mixin.create({
     if (course.get('id')) {
       let taxonomySubjects = component.get('taxonomySubjects');
       let subjectBucket = component.get('subjectBucket');
-      let subjectCode = subjectBucket
-        ? getSubjectIdFromSubjectBucket(subjectBucket)
-        : null;
+      let subjectCode = subjectBucket ?
+        getSubjectIdFromSubjectBucket(subjectBucket) :
+        null;
       let isSupportedTaxonomySubject = taxonomySubjects.findBy(
         'code',
         subjectCode
@@ -313,7 +315,10 @@ export default Ember.Mixin.create({
             .getCompetencyMatrixCoordinates(subjectId),
           userProficiencyBaseLine: component.fetchBaselineCompetencies()
         })
-        .then(({ competencyMatrixs, competencyMatrixCoordinates }) => {
+        .then(({
+          competencyMatrixs,
+          competencyMatrixCoordinates
+        }) => {
           if (
             !(component.get('isDestroyed') || component.get('isDestroying'))
           ) {
@@ -322,6 +327,7 @@ export default Ember.Mixin.create({
               'competencyMatrixCoordinates',
               competencyMatrixCoordinates
             );
+            this.setCompetencyCount();
           } else {
             Ember.Logger.warn('comp is destroyed...');
           }
@@ -344,10 +350,22 @@ export default Ember.Mixin.create({
           .get('competencyService')
           .getUserProficiencyBaseLine(classId, courseId, userId)
       })
-      .then(({ userProficiencyBaseLine }) => {
+      .then(({
+        userProficiencyBaseLine
+      }) => {
         component.set('userProficiencyBaseLine', userProficiencyBaseLine);
         return userProficiencyBaseLine;
       });
+  },
+
+  setCompetencyCount() {
+    let controller = this;
+    let domainMatrixs = controller.get('competencyMatrixDomains');
+    let competencyMatrixCoordinates = controller.get('competencyMatrixCoordinates');
+    competencyMatrixCoordinates.domains.map((domain) => {
+      let domainCompetency = domainMatrixs.findBy('domainCode', domain.get('domainCode'));
+      domain.set('competencyCount', domainCompetency.competencies.length);
+    });
   },
 
   /**
@@ -360,12 +378,18 @@ export default Ember.Mixin.create({
     let filters = {
       subject: component.get('subjectCode')
     };
+    let fwCode = component.get('class.preference.framework');
+    if (fwCode) {
+      filters.fw_code = fwCode;
+    }
     if (component.get('subjectCode')) {
       return Ember.RSVP
         .hash({
           taxonomyGrades: taxonomyService.fetchGradesBySubject(filters)
         })
-        .then(({ taxonomyGrades }) => {
+        .then(({
+          taxonomyGrades
+        }) => {
           component.set(
             'taxonomyGrades',
             taxonomyGrades.sortBy('sequence').reverse()

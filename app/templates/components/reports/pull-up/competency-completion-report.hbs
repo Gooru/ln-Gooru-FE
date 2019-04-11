@@ -1,17 +1,14 @@
 <div class="backdrop" {{action "onClosePullup"}}></div>
 <div class="competency-completion-report-container">
   <div class="competencies-list-container">
-    <div class="title-container"><span class="close-pullup" {{action "onClosePullup"}}>{{gru-icon name="keyboard_backspace"}}</span><span class="title-text">Competencies</span></div>
+    <div class="title-container"><span class="close-pullup" {{action "onClosePullup"}}>{{gru-icon name="keyboard_backspace"}}</span><span class="title-text">{{t 'common.competencies'}}</span></div>
     <div class="competencies-container">
       {{#each competencyCompletionReport as |competencyData competencySeq|}}
-        <div class="competency-container competency-{{competencySeq}} {{if competencyData.isExpanded 'expanded' 'collapsed'}}">
+        <div class="competency-container {{unless activeCompetency.suggestionContentCount 'empty-suggestion'}} competency-{{competencySeq}} {{if competencyData.isExpanded 'expanded' 'collapsed'}}">
           <div class="competency-completion-info-container">
             <div class="competency-info" {{action "onSelectCompetency" competencyData}}>
-              <div class="competency-code">{{competencyData.competencyCode}}</div>
+              <div class="competency-code">{{competencyData.competencyCode}} {{competencyData.suggestionContentCount}}</div>
               <div class="competency-name ellipsis">{{competencyData.competencyDesc}}</div>
-            </div>
-            <div class="competency-suggestion" {{action "onSuggestAtCompetency" competencyData}}>
-              {{gru-icon name="explore"}}
             </div>
             <div class="competency-completion-performance">
               <div class="completion-percentage">{{competencyData.completionPercentage}}%</div>
@@ -54,13 +51,33 @@
   </div>
 </div>
 
-{{#if isShowStudentSuggestion}}
-  <div class="trigger-suggestion">
-    <div class="label-text">{{t 'common.add'}}</div>
-    {{#each contentTypes as |contentType|}}
-      <div class="{{contentType.format}} activity-type {{if (eq activeContentType contentType.format) 'active'}}" {{action "onFilterBy" contentType.format}}>
-        <i class="icon"></i>
+{{#if activeCompetency.isExpanded}}
+  <div class="trigger-suggestion {{unless activeCompetency.suggestionContentCount 'empty-suggestion'}}">
+    <div class="clear-suggestion" {{action "onClearStudents"}}>
+      {{gru-icon name="clear"}}
+    </div>
+    {{#if (eq activeCompetency.usersCompletionSummary.length selectedUserIds.length)}}
+      <div class="selected-all" {{action "onClearStudents"}}>
+        <span class="selected-icon">
+          {{gru-icon name="done_all" class="tick-icon"}}
+        </span>
+        <span class="selected-all-text">
+          {{t 'common.all'}} {{t 'common.students'}}
+        </span>
       </div>
-    {{/each}}
+    {{else}}
+      <div class="selected-student-count">
+        {{selectedUserIds.length}} {{t (if (lt selectedUserIds.length 2) 'common.student' 'common.students')}}
+      </div>
+    {{/if}}
+    <div class="label-text">{{t 'common.plan-activities'}}</div>
+    <div class="students-suggestion" {{action "onSuggestAtStudents" competencyData}}>
+      {{#if activeCompetency.suggestionContentCount}}
+        {{gru-icon name="explore"}}
+        <span class="suggestion-count">{{activeCompetency.suggestionContentCount}}</span>
+      {{else}}
+        <i class="collection-icon" />
+      {{/if}}
+    </div>
   </div>
 {{/if}}

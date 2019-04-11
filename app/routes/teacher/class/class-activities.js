@@ -75,6 +75,7 @@ export default Ember.Route.extend({
     controller.parseClassActivityData(model.classActivities);
     controller.set('forMonth', model.selectedPeriod.forMonth);
     controller.set('forYear', model.selectedPeriod.forYear);
+    controller.fetchAssessmentsMasteryAccrual(model.classActivities);
     controller.initialize();
     controller.get('classController').selectMenuItem('class-activities');
   },

@@ -98,6 +98,11 @@ export default Ember.Component.extend({
 
     onPullUpClose(closeAll) {
       this.closePullUp(closeAll);
+    },
+
+    onUpdateMasteryAccrual() {
+      let classActivity = this.get('classActivity');
+      this.sendAction('onUpdateMasteryAccrual', classActivity);
     }
   },
 
@@ -118,6 +123,9 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
 
+  enableCollectionLiveLearning: Ember.computed.alias(
+    'configuration.GRU_FEATURE_FLAG.enableCollectionLiveLearning'
+  ),
   /**
    * @property {Boolean} isShowAddData
    */

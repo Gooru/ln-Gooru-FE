@@ -7,7 +7,8 @@
     <div class="preview-title {{previewContentType}}-preview">
       {{t (concat 'common.' previewContentType)}} {{t 'common.preview'}}
     </div>
-    {{#unless isExternalContent}}
+
+    {{#unless (or (not playContent) isExternalContent)}}
       <div class="content-player" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
         {{gru-icon name="play_arrow"}}
       </div>
@@ -31,9 +32,9 @@
         <div class="content-title ellipsis">{{previewContent.title}}</div>
       </div>
       {{#if taxonomyTags.length}}
-          <div class="taxonomy-container">
-        {{taxonomy.gru-taxonomy-tag-list tags=taxonomyTags tagsVisible=2 isInCard=true}}
-          </div>
+        <div class="taxonomy-container">
+          {{taxonomy.gru-taxonomy-tag-list tags=taxonomyTags tagsVisible=2 isInCard=true}}
+        </div>
       {{/if}}
     </div>
     <div class="content-items-container">
@@ -46,7 +47,7 @@
           {{/if}}
           {{#if previewContent.url}}
             <div class="content-url">
-                <span class="url-label">{{t 'gru-rubric-creation.url'}}: </span><span class="url-content"><a href="{{previewContent.url}}" target="_blank">{{previewContent.url}}</a></span>
+              <span class="url-label">{{t 'gru-rubric-creation.url'}}: </span><span class="url-content"><a href="{{previewContent.url}}" target="_blank">{{previewContent.url}}</a></span>
             </div>
           {{/if}}
         </div>

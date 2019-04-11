@@ -80,7 +80,8 @@
         selectedMenuItem=menuItem
         studyCurrent=studyPlayer
         hasClassInfo=true
-        openCourseReport='openCourseReport'}}
+        openCourseReport='openCourseReport'
+        onOpenCAReport='onOpenCAReport'}}
   {{else}}
   {{student.class.gru-class-navigation
     class=class
@@ -94,4 +95,13 @@
 </div>
 {{#if showCourseReport}}
   {{reports.pull-up.student-course-report onClosePullUp="onClosePullUp" context=studentCourseReportContext showPullUp=showCourseReport}}
+{{/if}}
+
+{{#if isShowClassActivityReport}}
+  {{#reports.pull-up.student-activity-report showPullUp=isShowClassActivityReport title=(t 'teacher-landing.class.offline-class-report.class-activity-report')}}
+    {{reports.pull-up.activity.class-summary-report
+      classSummary = class.performanceSummaryForDCA
+      showPullUp=isShowClassActivityReport
+    }}
+  {{/reports.pull-up.student-activity-report}}
 {{/if}}

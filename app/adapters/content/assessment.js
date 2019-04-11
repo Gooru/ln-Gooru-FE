@@ -222,6 +222,25 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * Find  the mastery accrual for the given list of assessmentIds
+   *
+   * @param {string} assessmentIds
+   * @returns {Promise}
+   */
+  assessmentsMasteryAccrual: function(assessmentIds) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/mastery-accrual`;
+    const options = {
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({ assessmentIds })
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

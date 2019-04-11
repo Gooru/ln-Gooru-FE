@@ -265,11 +265,47 @@
 
     .ca-panel-container-2 {
       height: 20px;
-      grid-template-columns: 1fr 1fr 1fr 80px;
+      grid-template-columns: 65px 130px 100px 1fr 80px;
       display: grid;
       align-items: center;
       height: 40px;
       border-bottom: solid 1px #cacaca;
+
+      .mastery-accrual-btn {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 28px 1fr;
+
+        .mastery-accrual-icon {
+          height: 22px;
+
+          &.mastery-accrual-checked {
+            background: url("/assets/gooru/images/check-circle-1.svg") no-repeat
+              center;
+            background-size: contain;
+            border: none;
+            display: block;
+            width: 18px;
+            height: 18px;
+
+            i {
+              visibility: hidden;
+            }
+          }
+
+          i {
+            color: #4e5e67;
+            height: 22px;
+          }
+        }
+
+        .mastery-accrual-text {
+          height: 22px;
+          font-size: 13px;
+          color: #1aa9eb;
+          font-weight: bold;
+        }
+      }
 
       .student-count {
         padding-left: 10px;
@@ -288,6 +324,11 @@
           display: block;
           padding-left: 5px;
         }
+      }
+
+      .mastery-accrual {
+        height: 22px;
+        cursor: pointer;
       }
 
       .re-schedule {

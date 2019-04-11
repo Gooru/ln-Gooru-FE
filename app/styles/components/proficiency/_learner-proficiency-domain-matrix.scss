@@ -80,6 +80,28 @@
       min-height: inherit;
 
       #render-proficiency-matrix {
+        .selected-competency {
+          position: absolute;
+
+          &.background0 {
+            box-shadow: 0 0 6px 5px rgba(0, 0, 0, 0.5);
+            background-color: #e7e8e9;
+          }
+
+          &.background1 {
+            box-shadow: 0 0 6px 5px rgba(0, 0, 0, 0.5);
+            background-color: #1aa9eb;
+          }
+
+          &.background2,
+          &.background3,
+          &.background4,
+          &.background5 {
+            box-shadow: 0 0 6px 5px rgb(222, 223, 224);
+            background-color: #006eb5;
+          }
+        }
+
         &.highlight {
           svg {
             #cell-container {
@@ -218,6 +240,11 @@
 
               .boundary-line {
                 stroke: #8fd383;
+                stroke-width: 4px;
+              }
+
+              .class-boundary-line {
+                stroke: #c77;
                 stroke-width: 4px;
               }
 

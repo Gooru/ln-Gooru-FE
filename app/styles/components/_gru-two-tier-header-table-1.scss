@@ -1,17 +1,20 @@
 $left-cell-margin: 20vw;
 .gru-two-tier-header-table-1 {
   $table-cell-width: auto;
-  width: 100vw;
+  // width: 100vw;
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 1px;
   margin-left: $left-cell-margin;
   display: inline-block;
+  .score {
+    background-color: unset !important; // remove inline color applied
+  }
 
   .std-circle {
     margin-left: 2px;
     margin-top: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 11px;
     font-size: 12px;
     text-align: center;
     width: 24px;
@@ -23,14 +26,14 @@ $left-cell-margin: 20vw;
   .class-avg {
     font-size: 15px;
     width: 55px;
-    margin-left: -124px;
+    // margin-left: -124px; //extra
     color: #37424b;
     margin-right: 35px;
     display: inline;
   }
   .avg-row {
-    border-top: 1px solid #afb4b9 !important;
-    border-bottom: 1px solid #afb4b9;
+    // border-top: 1px solid #afb4b9 !important; // now we have border for each row so this is not required
+    border-bottom: 1px solid #ccd2d8;
     min-width: 80px;
     .avg-score {
       font-size: 25px;
@@ -120,6 +123,7 @@ $left-cell-margin: 20vw;
             font-size: 17px;
             opacity: 1 !important;
             color: black;
+            // margin-top: -10px;
           }
         }
 
@@ -133,7 +137,7 @@ $left-cell-margin: 20vw;
 
         &.row-header {
           text-align: $tab-float-dir;
-          padding: 4px;
+          padding-top: 15px;
           border-bottom: unset;
           font-weight: 400;
           font-size: 17px;
@@ -142,6 +146,7 @@ $left-cell-margin: 20vw;
           border-color: #afb4b9;
           pointer-events: unset;
           cursor: pointer !important;
+          //margin-top: 0px;
 
           > span {
             width: auto;
@@ -149,6 +154,7 @@ $left-cell-margin: 20vw;
               font-size: 19px;
               line-height: 27px;
               vertical-align: -5px;
+              display: initial;
             }
           }
         }
@@ -180,13 +186,83 @@ $left-cell-margin: 20vw;
         th,
         td {
           &.fixed {
-            height: 32px;
+            height: 48px;
           }
+        }
+      }
+
+      i {
+        // .resource-type {
+        width: 16px;
+        height: 16px;
+        background-size: 16px 16px;
+        background-repeat: no-repeat;
+        display: block;
+        margin: 0 4px;
+        &.video_resource-icon {
+          background-image: url("gooru/images/video-resource-dark.svg") !important;
+        }
+        &.webpage_resource-icon {
+          background-image: url("gooru/images/website-resource-dark.svg") !important;
+        }
+        &.interactive_resource-icon {
+          background-image: url("gooru/images/interactive-resource-dark.svg") !important;
+        }
+        &.question-icon {
+          background-image: url("gooru/images/question-resource-dark.svg") !important;
+        }
+        &.image_resource-icon {
+          background-image: url("gooru/images/image-resource-dark.svg") !important;
+        }
+        &.text_resource-icon {
+          background-image: url("gooru/images/text-resource-dark.svg") !important;
+        }
+        &.audio_resource-icon {
+          background-image: url("gooru/images/audio-resource-dark.svg") !important;
+        }
+        &.audio {
+          background-image: url("gooru/images/audio-resource-dark.svg") !important;
+        }
+        &.true_false-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.single_choice-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.multiple_choice-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.drag_and_drop-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.hot_text_word-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.text_entry-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.multiple_choice_image-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.hot_text_sentence-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.extended_text-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.text_entry-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+
+        &.question {
+          background-image: url("gooru/images/question-resource-dark.svg") !important;
         }
       }
     }
 
     > .data {
+      border-bottom: 1px solid #afb4b9;
+
       th {
         border-left: 0;
 
@@ -208,6 +284,21 @@ $left-cell-margin: 20vw;
       position: absolute;
       left: 0 !important;
       width: $left-cell-margin;
+      padding-top: 10px;
+      border-bottom: 1px solid #ccd2d8;
+      .student-name {
+        display: inline-block !important;
+        margin-left: 5px;
+      }
+
+      .student-circle {
+        @extend .std-circle;
+        margin-top: unset;
+        margin-bottom: 16px;
+        width: 29px;
+        height: 29px;
+        border: dotted 1px $sky-400;
+      }
     }
     .emotion {
       display: block;
@@ -289,16 +380,6 @@ $left-cell-margin: 20vw;
       tr.data {
         th {
           /* max-width: 12rem; */
-          .col-label {
-            width: 38px;
-            height: 18px;
-            object-fit: contain;
-            font-family: Lato;
-            font-size: 15px;
-            font-weight: 400;
-            font-size: 17px;
-            opacity: 1 !important;
-          }
           span {
             display: block;
             @include text-overflow();
@@ -306,6 +387,8 @@ $left-cell-margin: 20vw;
         }
         td {
           white-space: nowrap;
+          border-bottom: 1px solid #ccd2d8;
+
           // &:nth-child(3n-1) {
           //   border-left: 1px solid $gray-lighter;
           // }
@@ -315,7 +398,6 @@ $left-cell-margin: 20vw;
             > i {
               display: none;
             }
-            background-color: unset !important; // remove inline color applied
           }
           td > span.score:before {
             content: counter(td);
@@ -348,7 +430,8 @@ $left-cell-margin: 20vw;
     }
     .answer-correct {
       border-color: $brand-success !important;
-      color: $brand-success !important;
+      background-color: $brand-success !important;
+      color: $white !important;
 
       i {
         margin-left: -72px;
@@ -357,7 +440,8 @@ $left-cell-margin: 20vw;
     }
     .answer-incorrect {
       border-color: $brand-incorrect !important;
-      color: $brand-incorrect !important;
+      background-color: $brand-incorrect !important;
+      color: $white !important;
     }
     .grey-circle {
       background: url("gooru/images/baseline-block-24px.svg");
@@ -367,6 +451,7 @@ $left-cell-margin: 20vw;
       background-size: cover;
       border-color: $light-200 !important;
       text-align: center;
+      line-height: 27px;
       opacity: 0.2;
     }
     .cross-circle {

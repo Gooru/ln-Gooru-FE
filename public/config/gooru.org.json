@@ -14,7 +14,7 @@
     "url": "http://teams.gooru.org"
   },
   "quizzes-addon": {
-    "endpoint" : {
+    "endpoint": {
       "url": "",
       "secureUrl": "",
       "providerUrl": ""
@@ -41,8 +41,8 @@
   },
 
   "researcher": {
-      "redirectURL": "http://research.gooru.org",
-      "userIds": [ ]
+    "redirectURL": "http://research.gooru.org",
+    "userIds": []
   },
 
   "demoClass": {
@@ -51,7 +51,8 @@
   },
 
   "GRU_FEATURE_FLAG": {
-    "searchFilter": true
+    "searchFilter": true,
+    "enableCollectionLiveLearning": false
   },
 
   "marketingSiteUrl": "/welcome"

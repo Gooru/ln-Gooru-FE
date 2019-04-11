@@ -281,6 +281,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
       : false;
   }),
 
+  /**
+   * @property {Boolean} isShowMoreEnabled
+   */
+  isShowMoreEnabled: true,
+
   // -------------------------------------------------------------------------
   // actions
 
@@ -595,15 +600,13 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   closePullUp() {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-      }
-    );
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+    });
   },
 
   handleSearchBar() {
@@ -628,22 +631,24 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.set('page', 0);
     component.set('isMoreDataExists', false);
     component.set('isShow', false);
-
-    Ember.RSVP.hash({
-      searchResults: component.getSearchService()
-    }).then(({ searchResults }) => {
-      if (!component.isDestroyed) {
-        component.set('isLoading', false);
-        component.set('searchResults', searchResults);
-        component.$('.search-list-container').scrollTop(0);
-        if (
-          searchResults &&
-          searchResults.length === component.get('defaultSearchPageSize')
-        ) {
-          component.set('isMoreDataExists', true);
+    Ember.RSVP
+      .hash({
+        searchResults: component.getSearchService()
+      })
+      .then(({ searchResults }) => {
+        if (!component.isDestroyed) {
+          component.set('isLoading', false);
+          component.set('searchResults', searchResults);
+          component.$('.search-list-container').scrollTop(0);
+          if (
+            searchResults &&
+            searchResults.length === component.get('defaultSearchPageSize') &&
+            component.get('isShowMoreEnabled')
+          ) {
+            component.set('isMoreDataExists', true);
+          }
         }
-      }
-    });
+      });
   },
 
   loadMoreData() {
@@ -651,21 +656,23 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.set('isLoading', true);
     let page = component.get('page') + 1;
     component.set('page', page);
-    Ember.RSVP.hash({
-      searchResults: component.getSearchService()
-    }).then(({ searchResults }) => {
-      if (!component.isDestroyed) {
-        component.set('isLoading', false);
-        let searchResult = component.get('searchResults');
-        component.set('searchResults', searchResult.concat(searchResults));
-        if (
-          searchResults &&
-          searchResults.length === component.get('defaultSearchPageSize')
-        ) {
-          component.set('isMoreDataExists', true);
+    Ember.RSVP
+      .hash({
+        searchResults: component.getSearchService()
+      })
+      .then(({ searchResults }) => {
+        if (!component.isDestroyed) {
+          component.set('isLoading', false);
+          let searchResult = component.get('searchResults');
+          component.set('searchResults', searchResult.concat(searchResults));
+          if (
+            searchResults &&
+            searchResults.length === component.get('defaultSearchPageSize')
+          ) {
+            component.set('isMoreDataExists', true);
+          }
         }
-      }
-    });
+      });
   },
 
   getSearchService() {

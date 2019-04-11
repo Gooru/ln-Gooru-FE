@@ -247,7 +247,7 @@ export default Ember.Object.extend({
         let summary = Ember.Object.create({
           scoreInPercentage: data.scoreInPercentage,
           timeSpent: data.timeSpent,
-          month: data.month,
+          month: data.month.toString().padStart(2, '0'),
           year: data.year
         });
         normalizedDCAYearlySummary.push(summary);

@@ -43,9 +43,7 @@
 
   "researcher": {
     "redirectURL": "/research",
-    "userIds": [
-      "df956d5f-b7b2-43ae-98a1-c90a12eacaf9"
-    ]
+    "userIds": ["df956d5f-b7b2-43ae-98a1-c90a12eacaf9"]
   },
 
   "demoClass": {
@@ -54,7 +52,8 @@
   },
 
   "GRU_FEATURE_FLAG": {
-    "searchFilter": true
+    "searchFilter": true,
+    "enableCollectionLiveLearning": false
   },
 
   "marketingSiteUrl": "/welcome"

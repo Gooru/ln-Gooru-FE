@@ -37,7 +37,9 @@ export default Ember.Component.extend(ModalMixin, {
     } else if (previewContentType === 'collection-external') {
       component.fetchExternalCollection();
     }
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -102,6 +104,11 @@ export default Ember.Component.extend(ModalMixin, {
    * @property {String} previewContentType
    */
   previewContentType: null,
+
+  /**
+   * @property {Boolean} playContent
+   */
+  playContent: true,
 
   /**
    * @property {Boolean} isShowCorrectAnswer
@@ -181,11 +188,10 @@ export default Ember.Component.extend(ModalMixin, {
    */
   openPullUp() {
     let component = this;
-    component.$().animate(
-      {
-        top: '10%'
-      },
-      400
+    component.$().animate({
+      top: '10%'
+    },
+    400
     );
   },
 
