@@ -79,7 +79,8 @@ export default {
     id: '71bfbc07-1b87-4e8e-a98a-1839e834cd20'
   },
 
-  'GRU_FEATURE_FLAG': {
-    'searchFilter': true
+  GRU_FEATURE_FLAG: {
+    searchFilter: true,
+    enableCollectionLiveLearning: false
   }
 };

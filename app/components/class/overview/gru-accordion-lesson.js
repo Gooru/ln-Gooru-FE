@@ -90,6 +90,9 @@ export default Ember.Component.extend(AccordionMixin, ModalMixin, {
     return `l-${this.get('model.id')}`;
   }),
 
+  enableCollectionLiveLearning: Ember.computed.alias(
+    'configuration.GRU_FEATURE_FLAG.enableCollectionLiveLearning'
+  ),
   // -------------------------------------------------------------------------
   // Actions
   actions: {
