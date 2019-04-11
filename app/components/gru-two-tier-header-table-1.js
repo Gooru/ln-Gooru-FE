@@ -1,4 +1,6 @@
 import gruTwoTierHeaderTable from 'gooru-web/components/gru-two-tier-header-table';
+import { DEFAULT_IMAGES } from 'gooru-web/config/config';
+
 import Ember from 'ember';
 
 export default gruTwoTierHeaderTable.extend({
@@ -14,6 +16,7 @@ export default gruTwoTierHeaderTable.extend({
   didReceiveAttrs() {
     this._super(...arguments);
     this.classNames[1] = 'gru-two-tier-header-table-1';
+    this.setSortedData();
   },
   resourceCount: 1,
 
@@ -21,7 +24,24 @@ export default gruTwoTierHeaderTable.extend({
     let cavg = this.get('sortedData')[0].content.length - 1;
     return cavg - 1;
   }),
-
+  /**
+   * Get students avatar url if present,
+   * if not returns the default profile img
+   */
+  setSortedData: function() {
+    const appRootPath = this.get(
+      'configurationService.configuration.appRootPath'
+    )
+      ? this.get('configurationService.configuration.appRootPath')
+      : '/';
+    let imageUrl = appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+    this.get('sortedData').map(data => {
+      data.avatarUrl =
+        data.avatarUrl && data.avatarUrl !== 'undefined'
+          ? data.avatarUrl
+          : imageUrl;
+    });
+  },
   /**
    * Set default visibility to
    */

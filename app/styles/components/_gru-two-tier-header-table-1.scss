@@ -1,7 +1,7 @@
 $left-cell-margin: 20vw;
 .gru-two-tier-header-table-1 {
   $table-cell-width: auto;
-  width: 100vw;
+  // width: 100vw;
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 1px;
@@ -198,6 +198,7 @@ $left-cell-margin: 20vw;
         background-size: 16px 16px;
         background-repeat: no-repeat;
         display: block;
+        margin: 0 4px;
         &.video_resource-icon {
           background-image: url("gooru/images/video-resource-dark.svg") !important;
         }
@@ -251,6 +252,19 @@ $left-cell-margin: 20vw;
       width: $left-cell-margin;
       padding-top: 10px;
       border-bottom: 1px solid #ccd2d8;
+      .student-name {
+        display: inline-block !important;
+        margin-left: 5px;
+      }
+
+      .student-circle {
+        @extend .std-circle;
+        margin-top: unset;
+        margin-bottom: 16px;
+        width: 29px;
+        height: 29px;
+        border: dotted 1px $sky-400;
+      }
     }
     .emotion {
       display: block;

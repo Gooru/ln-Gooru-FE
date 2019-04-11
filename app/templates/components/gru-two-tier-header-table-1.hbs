@@ -33,7 +33,12 @@
     {{#each sortedData as |row|}}
       <tr class="data">
         <th scope="row" class="fixed" {{action "selectRowHeader" row.id}}>
-          <span>{{row.lastFirstName}}</span>
+          {{#if anonymous}}
+            <img class='student-circle' />
+          {{else}}
+            <img class='student-circle' src={{row.avatarUrl}} />
+          {{/if}}
+          <span class='student-name'>{{row.lastFirstName}}</span>
         </th>
         {{#each row.content as |content index|}}
           <td class="hidden">
