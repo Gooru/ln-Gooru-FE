@@ -83,8 +83,16 @@
       background-color: $dark-400;
       color: $white;
       width: 102vw;
+      margin-left: -30px;
+      grid-template-columns: auto auto 1fr;
+
       margin-left: -$gutter-width;
       @include clearfix();
+      .back {
+        display: inline-block;
+        margin-left: 15px;
+        padding-left: 27px;
+      }
 
       .title {
         float: $tab-float-dir;
