@@ -223,6 +223,40 @@ $left-cell-margin: 20vw;
         &.audio {
           background-image: url("gooru/images/audio-resource-dark.svg") !important;
         }
+        &.true_false-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.single_choice-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.multiple_choice-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.drag_and_drop-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.hot_text_word-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.text_entry-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.multiple_choice_image-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.hot_text_sentence-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.extended_text-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        &.text_entry-icon {
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+
+        &.question {
+          background-image: url("gooru/images/question-resource-dark.svg") !important;
+        }
       }
     }
 

@@ -123,6 +123,9 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
 
+  enableCollectionLiveLearning: Ember.computed.alias(
+    'configuration.GRU_FEATURE_FLAG.enableCollectionLiveLearning'
+  ),
   /**
    * @property {Boolean} isShowAddData
    */
