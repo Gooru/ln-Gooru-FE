@@ -67,12 +67,7 @@ export default Ember.Mixin.create({
   /**
    * @property {Number} classGrade
    */
-  classGrade: Ember.computed('class', function() {
-    let controller = this;
-    let classData = controller.get('class');
-    let classGrade = classData.get('grade');
-    return classGrade ? parseInt(classGrade) : null;
-  }),
+  classGrade: Ember.computed.alias('class.gradeCurrent'),
 
   /**
    * @property {String} subjectCode
@@ -383,6 +378,10 @@ export default Ember.Mixin.create({
     let filters = {
       subject: component.get('subjectCode')
     };
+    let fwCode = component.get('class.preference.framework');
+    if (fwCode) {
+      filters.fw_code = fwCode;
+    }
     if (component.get('subjectCode')) {
       return Ember.RSVP
         .hash({

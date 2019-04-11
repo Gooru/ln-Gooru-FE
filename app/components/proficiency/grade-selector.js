@@ -59,8 +59,10 @@ export default Ember.Component.extend({
       if (component.get('classGrade')) {
         let taxonomyGrades = component.get('taxonomyGrades');
         let classGrade = taxonomyGrades.findBy('id', component.get('classGrade'));
-        classGrade.set('isClassGrade', true);
-        component.send('selectGrade', classGrade);
+        if (classGrade) {
+          classGrade.set('isClassGrade', true);
+          component.send('selectGrade', classGrade);
+        }
       }
     });
   },
