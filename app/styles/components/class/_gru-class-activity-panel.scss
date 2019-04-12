@@ -275,6 +275,11 @@
         display: grid;
         align-items: center;
         grid-template-columns: 28px 1fr;
+        cursor: pointer;
+        &.disable-event {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
 
         .mastery-accrual-icon {
           height: 22px;
@@ -331,7 +336,6 @@
 
       .mastery-accrual {
         height: 22px;
-        cursor: pointer;
       }
 
       .re-schedule {
