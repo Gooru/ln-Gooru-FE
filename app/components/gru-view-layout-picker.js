@@ -60,6 +60,14 @@ export default Ember.Component.extend({
    */
   didInsertElement: function() {
     this.set('viewLayouts', this.setLayoutFilter());
+    this.send(
+      'setLayout',
+      Ember.Object.create({
+        view: VIEW_LAYOUT_PICKER_OPTIONS.THUMBNAILS,
+        isActive: true,
+        icon: 'view_module'
+      })
+    );
   },
 
   // -------------------------------------------------------------------------
