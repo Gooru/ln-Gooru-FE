@@ -1,0 +1,28 @@
+<div class="question-container {{if question.active 'expanded'}}">
+  <div class="question-header-container" {{action "onToggleQuestion" seq}}>
+    <div class="question-icon"> </div>
+    <div class="question-title ellipsis">Q{{plus-one seq}}. {{question.title}}</div>
+    <div class="question-accordion">
+      {{#if question.active}}
+        {{gru-icon name="arrow_drop_up"}}
+      {{else}}
+        {{gru-icon name="arrow_drop_down"}}
+      {{/if}}
+    </div>
+  </div>
+  <div class="toggle-container {{if question.active 'expanded-view' 'collapsed-view'}}">
+    <div class="question-info-container">
+      {{cards.question-preview-card question=question isShowCorrectAnswer=true contentSeq=(plus-one seq)}}
+    </div>
+    <div class="question-score-container">
+      {{#if isBooleanScore}}
+        <div class="boolean-score-box correct-score question-score {{if (eq question.score 1) 'active-score'}}" {{action "onAddQuestionScore" 1}}>Yes</div>
+        <div class="boolean-score-box wrong-score question-score {{if (eq question.score 0) 'active-score'}}" {{action "onAddQuestionScore" 0}}>No</div>
+      {{else}}
+        {{#each questionScores as |questionScore|}}
+          <div class="question-score {{if (eq question.score questionScore) 'active-score'}}" {{action "onAddQuestionScore" questionScore}}>{{questionScore}}</div>
+        {{/each}}
+      {{/if}}
+    </div>
+  </div>
+</div>

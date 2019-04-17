@@ -416,7 +416,12 @@
 @import "components/proficiency/inspect/student-class-proficiency"; // Chronological View
 @import "components/player/chrono-view/chrono-header";
 @import "components/player/chrono-view/chrono-header-xs";
-@import "components/player/chrono-view/student-card"; // Performance Manual Entry
+@import "components/player/chrono-view/student-card";
+// Performance Manual Entry
+@import "components/reports/pull-up/activity/add-performance-data";
+@import "components/reports/pull-up/activity/add-student-performance-data";
+@import "components/reports/pull-up/activity/add-question-score";
+
 @import "components/reports/pull-up/performance-manual-entry";
 @import "components/reports/pull-up/assessment-performance-entry";
 @import "components/reports/pull-up/external-assessment-performance-entry";
