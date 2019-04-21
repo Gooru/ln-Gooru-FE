@@ -1,0 +1,134 @@
+<div class="header-container">
+  <div class="back">
+    {{#link-to 'librarys'}}
+      {{gru-icon name="arrow_back"}}
+    {{/link-to}}
+  </div>
+  <div class="info-section">
+    <div class="profile">
+      {{#if library}}
+        <img class="image" src="{{library.image}}" />
+        <span class="library-name">{{library.shortName}}</span>
+      {{else}}
+        <span class="my-content-title">My Content</span>
+      {{/if}}
+    </div>
+    <div class="search-input-section">
+      <div class="search-box">
+        <form {{action "doSearch" on="submit"}} class="form-inline">
+          {{input type="text" class="form-control search-input"
+              value=tempTerm
+              placeholder="Search for anything within the library…"
+              spellcheck="true"
+              id="searchId"
+            }}
+        </form>
+      </div>
+      <div class="filter-items">
+        {{#each filters as |selectedFilter index|}}
+          <div class="filter-item">
+            <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
+            <span class="clear" {{action 'clearFilter' selectedFilter}}> {{gru-icon name="close"}}</span>
+          </div>
+        {{/each}}
+        {{#if moreFilters}}
+          <span class="more-pointer">+{{moreFilters.length}}</span>
+        {{/if}}
+        <div class="more-filters hidden">
+          {{#each moreFilters as |moreFilter|}}
+            <div class="filter-item">
+              <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
+              <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <span>{{gru-icon name="search"}}</span>
+    <span {{action 'toggleSearchFilter'}} class="filter">{{gru-icon name="filter_list"}}</span>
+  </div>
+</div>
+<div class="filters-container">
+  <span>{{t 'common.filter-by'}}</span>
+  <div class="filters">
+    {{#each filterByList as |filter|}}
+      <li class="{{filter.type}} {{if (eq activeContentType filter.type) 'active'}}" {{action 'onSelectFilterBy' filter}}>
+        <i class="icon"></i>
+        <span class="label">{{filter.label}}</span>
+      </li>
+    {{/each}}
+  </div>
+</div>
+<div class="filters">
+  {{search.search-by-filter
+      isShow=isShow
+      activeContentType=activeContentType
+      onFilterApply="doSearch"
+      unCheckedItem=unCheckedItem
+      selectedFilters=selectedFilters}}
+</div>
+<div class="search-result-container">
+  <div class="contents">
+    {{#if isLoading}}
+      {{three-bounce-spinner}}
+    {{else}}
+      {{#each searchResults as |content|}}
+        <div class="card">
+          {{#if (eq activeContentType 'course')}}
+            {{new-cards.gru-standard-card
+            profile=sessionProfile
+            isCourse=true
+            isOnProfile=true
+            cardSize="md"
+            content=content
+            onOpenIndependentPlayer="playIndependentContent"
+            onOpenContentPlayer="playCourse"
+            onBookmarkContent="onBookmarkCourse"
+          }}
+          {{/if}}
+          {{#if (or (eq activeContentType 'assessment') (eq activeContentType 'collection'))}}
+            {{new-cards.gru-standard-card
+            profile=sessionProfile
+            isOnProfile=true
+            cardSize="md"
+            content=content
+            onOpenIndependentPlayer="playIndependentContent"
+            onOpenContentPlayer="openContentPlayer"
+            onBookmarkContent="onBookmarkContent"
+            onPreviewContent="onPreviewContent"
+            }}
+          {{/if}}
+          {{#if (eq activeContentType 'resource')}}
+            {{new-cards.gru-resource-card
+            resource=content
+            onRemixQuestion="remixQuestion"
+            onPlayResource="playResource"
+            profile=sessionProfile
+            addEnabled=true
+            editEnabled=false
+            partnerLibrary=true
+            isOnProfile=true
+          }}
+          {{/if}}
+        </div>
+      {{else}}
+        <div class="no-content panel add-content panel-default">
+          <div class="panel-body">
+            {{gru-icon name='explore'}}
+            <p>{{{t "common.no-content"}}}</p>
+          </div>
+        </div>
+      {{/each}}
+    {{/if}}
+  </div>
+</div>
+
+{{#if isShowContentPreview}}
+  {{reports.pull-up.gru-collection-preview
+    showPullUp=isShowContentPreview
+    previewContentId=previewContent.id
+    previewContentType=previewContentType
+  }}
+{{/if}}

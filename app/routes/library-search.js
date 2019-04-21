@@ -17,14 +17,13 @@ export default Ember.Route.extend({
   // Methods
 
   model: function(params) {
+    const libraryId = params.id;
     return Ember.RSVP.hash({
-      library: this.get('libraryService').fetchById(params.id)
+      library: libraryId ? this.get('libraryService').fetchById(libraryId) : null
     });
   },
 
   setupController: function(controller, model) {
-    console.log(model.library)
     controller.set('library', model.library);
   }
-
 });

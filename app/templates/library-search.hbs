@@ -1,19 +1,3 @@
 <div class="panel-container">
-  <div class="header-container">
-    {{link-to}}
-    <div class="back">{{gru-icon name="arrow_back"}}</div>
-    <div class="info-section">
-      <div class="profile">
-        <img class="image" src="{{library.image}}" />
-        <span class="library-name">{{library.shortName}}</span>
-      </div>
-      <div></div>
-    </div>
-    <div class="actions">
-      <span>{{gru-icon name="search"}}</span>
-      <span>{{gru-icon name="filter_list"}}</span>
-    </div>
-  </div>
-  <div class="filter-container"></div>
-  <div class="search-result-container"></div>
+  {{content-search library=library sessionProfile=sessionProfile}}
 </div>

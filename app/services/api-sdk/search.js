@@ -159,12 +159,12 @@ export default Ember.Service.extend({
    * @param term the term to search
    * @returns {Promise.<Question[]>}
    */
-  searchCourses: function(term) {
+  searchCourses: function(term, params, resetPagination = false) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('searchAdapter')
-        .searchCourses(term)
+        .searchCourses(term, params, resetPagination)
         .then(
           function(response) {
             resolve(

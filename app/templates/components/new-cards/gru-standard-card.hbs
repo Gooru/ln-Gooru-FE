@@ -15,14 +15,14 @@
               {{#if hasResources}}
                 {{gru-icon name="format_align_center"}}
                 <span class="resource-count">
-            {{content.resourceCount}}
-          </span>
+                  {{content.resourceCount}}
+                </span>
               {{/if}}
               {{#if hasQuestions}}
                 {{gru-icon name="format_align_center"}}
                 <span class="question-count">
-            {{content.questionCount}}
-          </span>
+                  {{content.questionCount}}
+                </span>
               {{/if}}
             {{/if}}
           </div>
@@ -41,22 +41,22 @@
               {{#if isCourse}}
                 <span class="units" title="{{t 'common.unit'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
                   {{gru-icon name="format_align_center"}}
-                    <span class="unit-count">
-                      {{content.unitCount}}
-                    </span>
+                  <span class="unit-count">
+                    {{content.unitCount}}
+                  </span>
                 </span>
               {{else}}
                 {{#if hasResources}}
                   {{gru-icon name="format_align_center"}}
                   <span class="resource-count">
-              {{content.resourceCount}}
-            </span>
+                    {{content.resourceCount}}
+                  </span>
                 {{/if}}
                 {{#if hasQuestions}}
                   {{gru-icon name="format_align_center"}}
                   <span class="question-count">
-              {{content.questionCount}}
-            </span>
+                    {{content.questionCount}}
+                  </span>
                 {{/if}}
               {{/if}}
             </div>
@@ -76,22 +76,22 @@
                 {{#if isCourse}}
                   <span class="units" title="{{t 'common.unit'}}" data-toggle="tooltip" data-placement="right" data-trigger="hover">
                     {{gru-icon name="format_align_center"}}
-                      <span class="unit-count">
-                        {{content.unitCount}}
-                      </span>
+                    <span class="unit-count">
+                      {{content.unitCount}}
+                    </span>
                   </span>
                 {{else}}
                   {{#if hasResources}}
                     {{gru-icon name="format_align_center"}}
                     <span class="resource-count">
-               {{content.resourceCount}}
-             </span>
+                      {{content.resourceCount}}
+                    </span>
                   {{/if}}
                   {{#if hasQuestions}}
                     {{gru-icon name="format_align_center"}}
                     <span class="question-count">
-               {{content.questionCount}}
-             </span>
+                      {{content.questionCount}}
+                    </span>
                   {{/if}}
                 {{/if}}
               </div>
@@ -109,22 +109,22 @@
                 {{#if isCourse}}
                   <span class="units" title="{{t 'common.unit'}}" data-toggle="tooltip" data-placement="right" data-trigger="hover">
                     {{gru-icon name="format_align_center"}}
-                      <span class="unit-count">
-                        {{content.unitCount}}
-                      </span>
+                    <span class="unit-count">
+                      {{content.unitCount}}
+                    </span>
                   </span>
                 {{else}}
                   {{#if hasResources}}
                     {{gru-icon name="format_align_center"}}
                     <span class="resource-count">
-               {{content.resourceCount}}
-             </span>
+                      {{content.resourceCount}}
+                    </span>
                   {{/if}}
                   {{#if hasQuestions}}
                     {{gru-icon name="format_align_center"}}
                     <span class="question-count">
-               {{content.questionCount}}
-             </span>
+                      {{content.questionCount}}
+                    </span>
                   {{/if}}
                 {{/if}}
               </div>
@@ -216,8 +216,8 @@
             <img class="img-responsive" src="{{content.owner.avatarUrl}}">
             <span class="owner">{{content.owner.displayName}}</span>
             {{#if content.remixCount}}
-               <span class="remix-counts">+{{content.remixCount}} </span>
-           {{/if}}
+              <span class="remix-counts">+{{content.remixCount}} </span>
+            {{/if}}
           {{/link-to}}
         {{/if}}
       {{/if}}
@@ -230,35 +230,26 @@
           <div class="ca-desc">
             <p class="truncate learning-objective">{{ content.learningObjectives }}</p>
           </div>
-          <div class="cca-standards">
-            <div class="standards ">
-              {{#if tags.length}}
-                {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
-              {{/if}}
-            </div>
-          </div>
         {{/if}}
 
       </div>
     {{/if}}
     {{#if (and featuresCourse publishVisible content.isPublished)}}
-          <div class="publish-icon" title="{{t 'common.published-tooltip'}}" data-toggle="tooltip" data-placement="top">
-            <div class="badge-icon"></div>
-          </div>
+      <div class="publish-icon" title="{{t 'common.published-tooltip'}}" data-toggle="tooltip" data-placement="top">
+        <div class="badge-icon"></div>
+      </div>
     {{/if}}
   </div>
 
 
   {{#if (eq cardSize "md")}}
-    {{#if isCourse}}
-      <div class="panel-body cca-standards">
-        <div class="standards ">
-          {{#if tags.length}}
-            {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
-          {{/if}}
-        </div>
+    <div class="panel-body cca-standards">
+      <div class="standards ">
+        {{#if tags.length}}
+          {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+        {{/if}}
       </div>
-    {{/if}}
+    </div>
   {{/if}}
 
 
@@ -295,7 +286,7 @@
           {{/unless}}
         {{/if}}
       {{else}}
-        <div class="share-box" title= {{t 'common.share'}} data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+        <div class="share-box" title={{t 'common.share'}} data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
           {{#if isCourse}}
             {{#gru-share-pop-over tagName="button" class="btn share-btn no-bgd" type="course" contentId=content.id}}
               {{gru-icon name="share"}}
@@ -307,7 +298,8 @@
           {{/if}}
         </div>
         {{#if isStudent}}
-          <button class="btn bookmark-btn no-bgd {{if disabledBookmark 'btn-disabled'}}" title="{{t 'common.bookmark'}}" {{action 'bookmarkContent' content true}} data-toggle="tooltip" data-placement="bottom" data-trigger="hover" disabled= {{disabledBookmark}}>
+          <button class="btn bookmark-btn no-bgd {{if disabledBookmark 'btn-disabled'}}" title="{{t 'common.bookmark'}}" {{action 'bookmarkContent' content true}} data-toggle="tooltip" data-placement="bottom" data-trigger="hover"
+            disabled={{disabledBookmark}}>
             {{gru-icon name="turned_in_not"}}
           </button>
         {{/if}}
