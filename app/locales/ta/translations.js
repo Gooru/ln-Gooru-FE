@@ -20,6 +20,8 @@ export default Object.assign(quizzesTranslations, {
   'errors.exclusion': '{{விளக்கம்}} ஒதுக்கப்பட்டுள்ளது',
   'errors.invalid': '{{description}} செல்லாதது',
   'errors.confirmation': '{{description}} பொருந்தவில்லை {{on}}',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'errors.accepted': '{{விளக்கம்}} ஏற்றுக்கொள்ளப்பட வேண்டும்',
   'errors.empty': '{{description}} காலியாக இருக்க முடியாது',
   'errors.blank': '{{description}} முடியாது',

@@ -1,4 +1,6 @@
-.content-search {
+.library-search-header {
+  z-index: 99;
+
   .header-container {
     width: 100%;
     display: flex;
@@ -127,35 +129,6 @@
     }
   }
 
-  .search-result-container {
-    .contents {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      justify-content: center;
-      grid-gap: 15px;
-      margin-top: 10px;
-
-      .no-content,
-      .three-bounce-spinner {
-        grid-column-start: 3;
-      }
-
-      .card {
-        display: flex;
-        justify-content: center;
-
-        .new-cards.gru-standard-card {
-          height: auto;
-
-          .panel .panel-body {
-            height: auto;
-            min-height: 48px;
-          }
-        }
-      }
-    }
-  }
-
   .filters-container {
     width: 100%;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
@@ -270,6 +243,15 @@
           .icon {
             -webkit-mask-image: url("gooru/images/add_course.svg");
             mask-image: url("gooru/images/add_course.svg");
+            @extend %bg-container;
+          }
+        }
+
+        &.question {
+          .icon {
+            -webkit-mask-image: url("gooru/images/add_question.svg");
+            mask-image: url("gooru/images/add_question.svg");
+            -webkit-mask-size: cover;
             @extend %bg-container;
           }
         }

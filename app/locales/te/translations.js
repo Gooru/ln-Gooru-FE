@@ -24,6 +24,8 @@ export default Object.assign(quizzesTranslations, {
   'errors.empty': '{{వివరణ}} ఖాళీగా వుండదు',
   'errors.blank': '{{వివరణ}} ఖాళీగా ఉండకూడదు',
   'errors.present': '{{వివరణ}} ఖాళీగా ఉండాలి',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'errors.collection': '{{వివరణ}} తప్పనిసరిగా సేకరణ అయి ఉండాలి',
   'errors.singular': '{{వివరణ}} ఒక సేకరణ కాదు',
   'errors.tooLong': '{{వివరణ}} చాలా పొడవుగా ఉంది (గరిష్టంగా {{max}} అక్షరాలు)',

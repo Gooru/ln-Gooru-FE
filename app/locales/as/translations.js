@@ -57,6 +57,8 @@ export default Object.assign(quizzesTranslations, {
   'common.name': 'নাম',
   'common.user': 'ব্যৱহাৰকাৰী',
   'common.content-name': 'বিষয়বস্তুৰ নাম',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'common.lastName': 'শেষ নাম',
   'common.firstName': 'প্ৰথম নাম',
   'common.filter-by': 'ইয়াৰ দ্বাৰা ফিল্টাৰ কৰা হৈছে',

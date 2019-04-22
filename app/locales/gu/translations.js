@@ -18,6 +18,8 @@ export default Object.assign(quizzesTranslations, {
   'errors.description': 'આ ક્ષેત્ર',
   'errors.inclusion': '{{description}} સૂચિમાં સમાવેલ નથી',
   'errors.exclusion': '{{વર્ણન}} આરક્ષિત છે',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'errors.invalid': '{{વર્ણન}} અમાન્ય છે',
   'errors.confirmation': '{{વર્ણન}} મેળ ખાતું નથી {{on}}',
   'errors.accepted': '{{વર્ણન}} સ્વીકારવું આવશ્યક છે',

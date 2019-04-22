@@ -18,6 +18,8 @@ export default Object.assign(quizzesTranslations, {
   'errors.description': 'This field',
   'errors.inclusion': '{{description}} is not included in the list',
   'errors.exclusion': '{{description}} is reserved',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'errors.invalid': '{{description}} is invalid',
   'errors.confirmation': '{{description}} doesn\'t match {{on}}',
   'errors.accepted': '{{description}} must be accepted',

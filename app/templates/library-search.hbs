@@ -1,3 +1,13 @@
 <div class="panel-container">
-  {{content-search library=library sessionProfile=sessionProfile}}
+  {{ library.library-search-header
+     selectedFilters=selectedFilters
+     activeContentType=activeContentType
+     library=library
+     onSearch="doSearch"
+   }}
+  {{#if isLoading}}
+    {{three-bounce-spinner}}
+  {{else}}
+    {{library.library-content-result-grid-view paginateNext="doPaginate" isTeacher=isTeacher isMyProfile=isMyProfile onRemixQuestion="remixQuestion" searchResults=searchResults activeContentType=activeContentType}}
+  {{/if}}
 </div>

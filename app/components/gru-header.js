@@ -67,20 +67,6 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       this.getLocalStorage().setItem(this.device_language_key, selVal);
     },
 
-    searchTerm: function() {
-      var term = $.trim(this.get('tempTerm'));
-      var isIncorrectTermSize = this.get('isIncorrectTermSize');
-      if (!isIncorrectTermSize) {
-        this.set('term', term);
-        this.set('isInvalidSearchTerm', false);
-        this.sendAction('onSearch', this.get('term'));
-      }
-    },
-
-    inputValueChange: function() {
-      this.set('isTyping', false);
-    },
-
     navigateToSupport() {
       let component = this;
       let supportUrl = component.get('supportSiteUrl');
@@ -115,27 +101,13 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     if (EndPointsConfig.getLanguageSettingdropMenu() !== undefined) {
       this.set('showDropMenu', EndPointsConfig.getLanguageSettingdropMenu());
     }
-
-    $('.search-input').on(
-      'keyup',
-      function(e) {
-        e.stopPropagation();
-        if (e.which === KEY_CODES.ENTER) {
-          this.set('isTyping', false);
-        } else {
-          this.set('isTyping', true);
-        }
-      }.bind(this)
-    );
   },
 
   /**
    * willDestroyElement event
    */
   willDestroyElement: function() {
-    this.set('term', null);
     this.set('searchErrorMessage', null);
-    this.set('isTyping', null);
   },
 
   /**
@@ -165,15 +137,6 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
   // Properties
 
   /**
-   * Validate if the property term has the correct number of characters
-   * @property
-   */
-  isIncorrectTermSize: Ember.computed('tempTerm', function() {
-    var term = $.trim(this.get('tempTerm'));
-    return !term || term.length < 3;
-  }),
-
-  /**
    * @property {?string} action to send up when a user logs out
    */
   onLogout: null,
@@ -182,22 +145,6 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
    * @property {?string} action to send up when searching for a term
    */
   onSearch: null,
-
-  /**
-   * Search term
-   * @property {string}
-   */
-  term: null,
-
-  /**
-   * isTyping
-   * @property {Boolean}
-   */
-  isTyping: null,
-
-  isInvalidSearchTerm: false,
-
-  tempTerm: Ember.computed.oneWay('term'),
 
   /**
    * @property {Array} list of classes related to current user
@@ -218,26 +165,6 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Observers
-
-  /**
-   * @param {Computed } searchErrorMessage - computed property that defines if show searchErrorMessage
-   */
-  searchErrorMessage: Ember.computed(
-    'isIncorrectTermSize',
-    'isTyping',
-    'tempTerm',
-    function() {
-      const isIncorrectTermSize = this.get('isIncorrectTermSize');
-      const term = this.get('tempTerm');
-      const isTyping = this.get('isTyping');
-      return term !== '' && isIncorrectTermSize && isTyping === false;
-    }
-  ),
-
-  /**
-   * @param {Computed } searchInputDirty - computed property that defines whether the term is null or not.
-   */
-  searchInputDirty: Ember.computed.notEmpty('tempTerm'),
 
   /**
    * Marketing site url

@@ -20,6 +20,8 @@ export default Object.assign(quizzesTranslations, {
   'errors.exclusion': '{{description}} ସଂରକ୍ଷିତ ଅଛି',
   'errors.invalid': '{{description}}ଅମାନ୍ୟ ଅଛି',
   'errors.confirmation': '{{description}}ମେଳ ହେଉନାହିଁ{{on}}',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'errors.accepted': '{{description}} ଗ୍ରହଣ କରିବାକୁ ହେବ',
   'errors.empty': '{{description}} ଶୂନ୍ୟ ରଖାଯିବ ନାହିଁ',
   'errors.blank': '{{description}} ଖାଲି ରଖାଯିବ ନାହିଁ',

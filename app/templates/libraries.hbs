@@ -1,0 +1,21 @@
+<div class="container">
+  {{log isAnonymousUser}}
+  {{#unless isAnonymousUser}}
+    <div class="card-container">
+      {{#link-to "library-search"}}
+        <div class="card-panel">
+          <div class="title">{{t 'my-content'}}</div>
+          <i class="image"></i>
+        </div>
+      {{/link-to}}
+    </div>
+  {{/unless}}
+  <div class="partner-libraries">
+    <div class="heading"><span>{{t 'featured-libraries'}}</span></div>
+    <div class="libraries-container">
+      {{#each libraries as |library|}}
+        {{library.gru-partner-library-card content=library}}
+      {{/each}}
+    </div>
+  </div>
+</div>

@@ -292,7 +292,7 @@ Router.map(function() {
    * and the vanity urls for profiles like www.gooru.org/javier-perez
    */
   this.route('preference');
-  this.route('librarys');
+  this.route('libraries');
   this.route('library-search');
 });
 

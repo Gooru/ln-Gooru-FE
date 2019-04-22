@@ -20,18 +20,25 @@ export default Ember.Route.extend({
    */
   libraryService: Ember.inject.service('api-sdk/library'),
 
+  /**
+   * @property {Service} session
+   */
+  session: Ember.inject.service('session'),
+
   // -------------------------------------------------------------------------
   // Methods
 
   model: function() {
     return Ember.RSVP.hash({
       courses: this.get('searchService').searchFeaturedCourses('*'),
-      libraries: this.get('libraryService').fetchLibraries()
+      libraries: this.get('libraryService').fetchLibraries(),
+      isAnonymous: this.get('session.isAnonymous')
     });
   },
 
   setupController: function(controller, model) {
     controller.set('courses', model.courses);
     controller.set('libraries', model.libraries);
+    controller.set('isAnonymousUser', model.isAnonymous);
   }
 });

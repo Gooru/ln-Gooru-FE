@@ -19,6 +19,8 @@ export default Object.assign(quizzesTranslations, {
   'errors.inclusion': '{{description}} പട്ടികയിൽ ഉൾപ്പെടുത്തിയിട്ടില്ല',
   'errors.exclusion': '{{വിവരണം}} സംവരണം ചെയ്തിരിക്കുന്നു',
   'errors.invalid': '{{description}} അസാധുവാണ്',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'errors.confirmation': '{{വിവരണം}} പൊരുത്തമില്ല {{on}}',
   'errors.accepted': '{{വിവരണം}} അംഗീകരിക്കണം',
   'errors.empty': '{{description}} എന്നത് ശൂന്യമാവില്ല',

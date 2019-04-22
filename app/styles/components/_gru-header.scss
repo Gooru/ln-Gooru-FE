@@ -35,7 +35,7 @@
         height: 55px;
         min-width: 111px;
         @media (min-width: $screen-sm) {
-          @include justify-content(center);
+          @include justify-content(flex-start);
           @include flex-grow(1);
         }
         @media (min-width: $screen-md) {
@@ -50,64 +50,9 @@
           height: 32px;
           padding: 0;
           width: 111px;
+          margin-left: 40px;
           @media (min-width: $screen-sm) {
             @include scale(1, 1);
-          }
-        }
-      }
-
-      .search-navbar-form {
-        @include flex-basis(60%);
-        @include flex-grow(2);
-        @media (min-width: $screen-md) {
-          @include flex-grow(0);
-          @include flex-basis(34%);
-        }
-
-        .form-group {
-          @include justify-content(center);
-          @include align-items(center);
-          @include inline-flex;
-          height: 55px;
-          margin-bottom: 0;
-          width: 100%;
-          @media (min-width: $screen-md) {
-            height: 58px;
-            width: 50%;
-            display: -webkit-box;
-          }
-
-          span {
-            height: 24px;
-            margin: 0 5px 0 0;
-            min-width: 24px;
-
-            i {
-              color: $gray-base;
-            }
-          }
-
-          .input-group {
-            width: 90%;
-            @media (min-width: $screen-md) {
-              width: 100%;
-            }
-
-            input.form-control {
-              box-shadow: none;
-              border: none;
-              font-size: $font-size-h6;
-
-              &:focus {
-                box-shadow: inset 0 -2px 0 $blue-400;
-              }
-            }
-
-            &.has-error {
-              input.form-control {
-                box-shadow: inset 0 -2px 0 $red-400;
-              }
-            }
           }
         }
       }
@@ -195,8 +140,7 @@
 
                 a {
                   color: $text-color;
-                  padding: ($link-vertical-padding / 2)
-                    ($link-horizontal-padding / 2);
+                  padding: ($link-vertical-padding / 2) ($link-horizontal-padding / 2);
                 }
               }
             }
@@ -231,10 +175,7 @@
               @include border-bottom-radius(0);
               @include gradient-horizontal($blue-400, $blue-500, 0%, 100%);
               @include transition(all 0.5s ease-out);
-              @include box-shadow(
-                inset 0 1px 3px 0 rgba(0, 0, 0, 0.5),
-                0 0 40px 0 rgba(50, 50, 50, 0.5)
-              );
+              @include box-shadow(inset 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 0 40px 0 rgba(50, 50, 50, 0.5));
               @media (min-width: $screen-sm) {
                 min-width: 40%;
               }
@@ -249,8 +190,7 @@
 
                 a {
                   color: $white;
-                  padding: ($link-vertical-padding / 2)
-                    ($link-horizontal-padding);
+                  padding: ($link-vertical-padding / 2) ($link-horizontal-padding);
 
                   &:focus,
                   &:hover {
@@ -353,40 +293,6 @@
     }
   }
 
-  .search-input-dirty {
-    @media (max-width: $screen-xs) {
-      &.container-fluid {
-        .navbar-default {
-          .navbar-header {
-            display: none;
-          }
-
-          .search-navbar-form {
-            @include flex-basis(95%);
-            padding: 0 0 0 20px;
-
-            .form-inline {
-              display: flex;
-              width: 90%;
-            }
-
-            .form-group {
-              width: 100%;
-
-              .input-group {
-                width: 100%;
-              }
-            }
-          }
-        }
-      }
-
-      .navbar-collapse {
-        display: none;
-      }
-    }
-  }
-
   .back-to {
     color: $white;
     font-size: 17px;
@@ -408,7 +314,7 @@
         @include align-items(center);
         @include flex-basis(111px);
         @include flex-grow(0);
-        @include justify-content(center);
+        @include justify-content(flex-start);
         height: 55px;
         min-width: 111px;
 
@@ -423,7 +329,7 @@
 
       .action-bar {
         display: grid;
-        grid-template-columns: 24px 30px 20px;
+        grid-template-columns: 30px 20px;
         align-items: center;
         justify-content: right;
         padding-right: 10px;
@@ -434,30 +340,6 @@
 
           .profile {
             display: none;
-          }
-        }
-
-        .search-bar {
-          form {
-            display: flex;
-            align-items: center;
-            flex-direction: row-reverse;
-
-            &:hover .search-input input {
-              width: 125px;
-            }
-
-            .search-input {
-              input {
-                width: 0;
-                -webkit-transition: all 0.7s ease-in-out;
-                -moz-transition: all 0.7s ease-in-out;
-                -o-transition: all 0.7s ease-in-out;
-                transition: all 0.7s ease-in-out;
-                box-shadow: none;
-                border-bottom: solid 1px #0072bc;
-              }
-            }
           }
         }
 
@@ -528,10 +410,7 @@
                 @include border-bottom-radius(0);
                 @include gradient-horizontal($blue-400, $blue-500, 0%, 100%);
                 @include transition(all 0.5s ease-out);
-                @include box-shadow(
-                  inset 0 1px 3px 0 rgba(0, 0, 0, 0.5),
-                  0 0 40px 0 rgba(50, 50, 50, 0.5)
-                );
+                @include box-shadow(inset 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 0 40px 0 rgba(50, 50, 50, 0.5));
 
                 * {
                   color: $white;
@@ -543,8 +422,7 @@
 
                   a {
                     color: $white;
-                    padding: ($link-vertical-padding / 2)
-                      ($link-horizontal-padding);
+                    padding: ($link-vertical-padding / 2) ($link-horizontal-padding);
 
                     &:focus,
                     &:hover {

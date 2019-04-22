@@ -25,5 +25,14 @@ export default Ember.Route.extend({
 
   setupController: function(controller, model) {
     controller.set('library', model.library);
+    controller.fetchContent();
+  },
+
+  resetController(controller) {
+    var queryParams = controller.get('queryParams');
+    queryParams.forEach(function(param) {
+      controller.set(param, undefined);
+    });
+    controller.resetProperties();
   }
 });

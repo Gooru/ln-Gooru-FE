@@ -1,0 +1,32 @@
+.library-content-result-grid {
+  overflow: auto;
+
+  .contents {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: center;
+    grid-gap: 15px;
+    margin-top: 10px;
+
+    .no-content,
+    .three-bounce-spinner {
+      grid-column-start: 3;
+    }
+
+    .card {
+      display: flex;
+      justify-content: center;
+
+      .new-cards.gru-standard-card {
+        height: auto;
+
+        .panel .panel-body {
+          height: auto;
+          min-height: 48px;
+          display: flex;
+          justify-content: space-evenly;
+        }
+      }
+    }
+  }
+}

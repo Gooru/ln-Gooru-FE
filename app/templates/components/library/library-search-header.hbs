@@ -1,6 +1,6 @@
 <div class="header-container">
   <div class="back">
-    {{#link-to 'librarys'}}
+    {{#link-to 'libraries'}}
       {{gru-icon name="arrow_back"}}
     {{/link-to}}
   </div>
@@ -15,9 +15,9 @@
     </div>
     <div class="search-input-section">
       <div class="search-box">
-        <form {{action "doSearch" on="submit"}} class="form-inline">
+        <form {{action "searchContent" on="submit"}} class="form-inline">
           {{input type="text" class="form-control search-input"
-              value=tempTerm
+              value=searchTerm
               placeholder="Search for anything within the library…"
               spellcheck="true"
               id="searchInput"
@@ -65,70 +65,7 @@
   {{search.search-by-filter
       isShow=isShow
       activeContentType=activeContentType
-      onFilterApply="doSearch"
+      onFilterApply="searchContent"
       unCheckedItem=unCheckedItem
       selectedFilters=selectedFilters}}
 </div>
-<div class="search-result-container">
-  <div class="contents">
-    {{#if isLoading}}
-      {{three-bounce-spinner}}
-    {{else}}
-      {{#each searchResults as |content|}}
-        <div class="card">
-          {{#if (eq activeContentType 'course')}}
-            {{new-cards.gru-standard-card
-            profile=sessionProfile
-            isCourse=true
-            isOnProfile=true
-            cardSize="md"
-            content=content
-            onOpenIndependentPlayer="playIndependentContent"
-            onOpenContentPlayer="playCourse"
-            onBookmarkContent="onBookmarkCourse"
-          }}
-          {{/if}}
-          {{#if (or (eq activeContentType 'assessment') (eq activeContentType 'collection'))}}
-            {{new-cards.gru-standard-card
-            profile=sessionProfile
-            isOnProfile=true
-            cardSize="md"
-            content=content
-            onOpenIndependentPlayer="playIndependentContent"
-            onOpenContentPlayer="openContentPlayer"
-            onBookmarkContent="onBookmarkContent"
-            onPreviewContent="onPreviewContent"
-            }}
-          {{/if}}
-          {{#if (eq activeContentType 'resource')}}
-            {{new-cards.gru-resource-card
-            resource=content
-            onRemixQuestion="remixQuestion"
-            onPlayResource="playResource"
-            profile=sessionProfile
-            addEnabled=true
-            editEnabled=false
-            partnerLibrary=true
-            isOnProfile=true
-          }}
-          {{/if}}
-        </div>
-      {{else}}
-        <div class="no-content panel add-content panel-default">
-          <div class="panel-body">
-            {{gru-icon name='explore'}}
-            <p>{{{t "common.no-content"}}}</p>
-          </div>
-        </div>
-      {{/each}}
-    {{/if}}
-  </div>
-</div>
-
-{{#if isShowContentPreview}}
-  {{reports.pull-up.gru-collection-preview
-    showPullUp=isShowContentPreview
-    previewContentId=previewContent.id
-    previewContentType=previewContentType
-  }}
-{{/if}}

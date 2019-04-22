@@ -19,6 +19,8 @@ export default Object.assign(quizzesTranslations, {
   'errors.inclusion': '{{description}} सूची में शामिल नहीं है',
   'errors.exclusion': '{{description}} आरक्षित है',
   'errors.invalid': '{{description}} अमान्य है',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'errors.confirmation': '{{description}} {{on}} से मेल नहीं खाता है',
   'errors.accepted': '{{विवरण}} स्वीकार किया जाना चाहिए',
   'errors.empty': '{{description}} रिक्त नहीं रह सकता है',

@@ -22,6 +22,8 @@ export default Object.assign(quizzesTranslations, {
   'errors.confirmation': '{{description}} no coincide {{on}}',
   'errors.accepted': 'Se debe aceptar {{description}}',
   'errors.empty': '{{description}} no puede estar vacío',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'errors.blank': '{{description}} no puede estar en blanco',
   'errors.present': '{{description}} debe estar en blanco',
   'errors.collection': '{{description}} debe ser una colección',
