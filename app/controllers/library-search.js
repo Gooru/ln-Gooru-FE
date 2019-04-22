@@ -164,7 +164,7 @@ export default Ember.Controller.extend(ModalMixin, {
     }
     if (controller.get('library')) {
       filters.scopeKey = 'open-library';
-      filters['scopeTargetNames'] = controller.get('library.shortName');
+      filters.scopeTargetNames = controller.get('library.shortName');
     } else {
       filters.scopeKey = 'my-content';
     }

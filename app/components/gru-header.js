@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import SessionMixin from '../mixins/session';
 import ModalMixin from '../mixins/modal';
-import { KEY_CODES } from 'gooru-web/config/config';
 import EndPointsConfig from 'gooru-web/utils/endpoint-config';
 import Env from 'gooru-web/config/environment';
 
