@@ -1242,6 +1242,9 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'ক্লাস কার্যক্রম',
+  'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
+  'teacher-landing.class.class-activities.warning-message':
+    'You have not entered data for {{unAnsweredQuestion}} of the {{totalQuestion}} questions. The score for these questions will be marked as 0. Do you want to continue',
   'teacher-landing.class.offline-class-report.class-report': 'ক্লাস রিপোর্ট',
   'teacher-landing.class.offline-class-report.activity-report':
     'কার্যকলাপের প্রতিবেদন',
@@ -1818,7 +1821,8 @@ export default Object.assign(quizzesTranslations, {
   'profile.proficiency.baseline': 'বেসলাইন',
   'profile.proficiency.grade-line': 'Other Grade',
   'profile.proficiency.class-grade-line': 'Class Grade',
-  'profile.proficiency.not-tagged': 'ক্লাসের কোন কোর্স নির্ধারিত নেই অথবা কোর্সটিকে কোনও বৈধ বিষয় বা মানগুলিতে ট্যাগ করা হয়নি।',
+  'profile.proficiency.not-tagged':
+    'ক্লাসের কোন কোর্স নির্ধারিত নেই অথবা কোর্সটিকে কোনও বৈধ বিষয় বা মানগুলিতে ট্যাগ করা হয়নি।',
   'profile.proficiency.show-compressed-chart': 'সংক্ষেপিত চার্ট প্রদর্শন করুন',
   'profile.proficiency.show-expanded-chart': 'প্রসারিত তালিকা প্রদর্শন করুন',
   'profile.preference.language-preference': 'ভাষা পছন্দ',

@@ -47,8 +47,6 @@
 
       .question-score-container {
         display: grid;
-        grid-template-columns: auto auto;
-        column-gap: 15px;
         justify-content: left;
         align-items: center;
 
@@ -75,6 +73,39 @@
 
         .wrong-score {
           background-color: #d93939;
+        }
+
+        &.true-false-score {
+          grid-template-columns: auto auto;
+          column-gap: 15px;
+        }
+
+        &.multi-score {
+          display: flex;
+          height: 38px;
+
+          .arrow-left,
+          .arrow-right {
+            width: 38px;
+            border-right: 1px solid #cccccc;
+          }
+          .scores-list {
+            max-width: 150px;
+            overflow-x: auto;
+            display: -webkit-box;
+            .question-score {
+              width: 38px;
+              text-align: center;
+              border-right: 1px solid #cccccc;
+              font-size: 12px;
+              font-weight: bold;
+              color: #425e67;
+            }
+
+            &::-webkit-scrollbar {
+              width: 0;
+            }
+          }
         }
       }
 

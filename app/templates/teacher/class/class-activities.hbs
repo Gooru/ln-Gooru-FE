@@ -164,6 +164,7 @@
     showPullUp = isShowAssessmentPerformanceEntryPullUp
     activityDate = selectedActivity.activation_date
     activityTitle = selectedItem.title
+    onClosePullUp = "onClosePerformanceEntry"
   }}
     {{reports.pull-up.activity.add-student-performance-data
       collection=selectedItem
@@ -175,18 +176,6 @@
   {{/reports.pull-up.activity.add-performance-data}}
 {{/if}}
 
-<!-- {{#if isShowAssessmentPerformanceEntryPullUp}}
-  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowAssessmentPerformanceEntryPullUp title=selectedItem.title type='assessment' onClosePerformanceEntry='onClosePerformanceEntry' }}
-    {{reports.pull-up.assessment-performance-entry
-      assessment=selectedItem
-      course=course
-      students=activityMembers
-      activityData=selectedActivity
-      classId=classId
-      onClosePerformanceEntry="onClosePerformanceEntry"
-      isRepeatEntry=isRepeatEntry}}
-  {{/reports.pull-up.performance-manual-entry}}
-{{/if}} -->
 {{#if isShowCollectionPerformanceEntryPullUp}}
   {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowCollectionPerformanceEntryPullUp title=selectedItem.title type='collection' onClosePerformanceEntry='onClosePerformanceEntry' }}
     {{reports.pull-up.collection-performance-entry

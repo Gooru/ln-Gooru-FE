@@ -14,14 +14,22 @@
     <div class="question-info-container">
       {{cards.question-preview-card question=question isShowCorrectAnswer=true contentSeq=(plus-one seq)}}
     </div>
-    <div class="question-score-container">
+    <div class="question-score-container {{if isBooleanScore 'true-false-score' 'multi-score'}}">
       {{#if isBooleanScore}}
-        <div class="boolean-score-box correct-score question-score {{if (eq question.score 1) 'active-score'}}" {{action "onAddQuestionScore" 1}}>Yes</div>
-        <div class="boolean-score-box wrong-score question-score {{if (eq question.score 0) 'active-score'}}" {{action "onAddQuestionScore" 0}}>No</div>
+        <div class="boolean-score-box correct-score question-score {{if (eq question.score 1) 'active-score'}}" {{action "onAddQuestionScore" 1}}>Correct</div>
+        <div class="boolean-score-box wrong-score question-score {{if (eq question.score 0) 'active-score'}}" {{action "onAddQuestionScore" 0}}>Wrong</div>
       {{else}}
-        {{#each questionScores as |questionScore|}}
-          <div class="question-score {{if (eq question.score questionScore) 'active-score'}}" {{action "onAddQuestionScore" questionScore}}>{{questionScore}}</div>
-        {{/each}}
+        <div class="arrow-left">
+          le
+        </div>
+        <div class="scores-list">
+          {{#each questionScores as |questionScore|}}
+            <div class="question-score {{if (eq question.score questionScore) 'active-score'}}" {{action "onAddQuestionScore" questionScore}}>{{questionScore}}</div>
+          {{/each}}
+        </div>
+        <div class="arrow-right">
+          ri
+        </div>
       {{/if}}
     </div>
   </div>

@@ -18,7 +18,7 @@ export default Ember.Component.extend({
 
   question: null,
 
-  questionScore: Ember.computed('question.maxScore', function() {
+  questionScores: Ember.computed('question.maxScore', function() {
     const component = this;
     let questionMaxScore = component.get('question.maxScore');
     let questionScores = Ember.A([]);

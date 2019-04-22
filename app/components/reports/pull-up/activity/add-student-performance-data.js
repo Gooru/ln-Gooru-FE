@@ -1,7 +1,9 @@
 import Ember from 'ember';
-import { generateUUID } from 'gooru-web/utils/utils';
+import { generateUUID, validateTimespent } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
+  // -------------------------------------------------------------------------
+  // Attributes
   classNames: ['add-data', 'add-student-performance-data'],
 
   // -------------------------------------------------------------------------
@@ -16,70 +18,150 @@ export default Ember.Component.extend({
 
   session: Ember.inject.service('session'),
 
+  // -------------------------------------------------------------------------
+  // Events
   didInsertElement() {
     const component = this;
     component.loadAssessmentData();
   },
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+    //Action triggered when select a student
     onSelectStudent(student) {
       const component = this;
-      if (component.doCheckQuestionScoreSubmitted()) {
-        component.submitAssessmentPerformanceData();
-      } else {
+      const activeStudent = component.get('activeStudent');
+      if (
+        activeStudent &&
+        activeStudent.get('id') !== student.get('id') &&
+        !component.doCheckQuestionScoreSubmitted()
+      ) {
         component.set('isShowWarningMessage', true);
+      } else {
+        component.submitAssessmentPerformanceData();
       }
       component.set('activeStudentTemp', student);
     },
 
+    //Action triggered when search student list
     onSearchStudent() {
       const component = this;
-      if (component.doCheckQuestionScoreSubmitted()) {
-        let searchPattern = component.get('studentSearchPattern').toLowerCase();
-        let students = component.get('students');
-        let filteredStudents = students.filter(student =>
-          student
-            .get('fullName')
-            .toLowerCase()
-            .includes(searchPattern)
-        );
-        component.set('studentsList', filteredStudents);
-      } else {
-        component.set('isShowWarningMessage', true);
-      }
+      let searchPattern = component.get('studentSearchPattern').toLowerCase();
+      let students = component.get('students');
+      let filteredStudents = students.filter(student =>
+        student
+          .get('fullName')
+          .toLowerCase()
+          .includes(searchPattern)
+      );
+      component.set('studentsList', filteredStudents);
     },
 
+    //Action triggered when toggle question
     onToggleQuestion(questionSeq) {
       const component = this;
       component.toggleQuestionVisibility(questionSeq);
     },
 
+    //Action triggered when dimiss warning popup
     onDismissWarning() {
       const component = this;
       component.set('isShowWarningMessage', false);
     },
 
-    onAcceptWarning() {
+    //Action triggered when submit question scores
+    onSubmitQuestionScores() {
       const component = this;
-      component.submitAssessmentPerformanceData();
+      component.submitQuestionDataSelectNextStudent();
+      component.set('isShowWarningMessage', false);
+    },
+
+    //Action triggered when click save and next
+    onClickSaveAndNext() {
+      const component = this;
+      if (component.doCheckQuestionScoreSubmitted()) {
+        component.submitQuestionDataSelectNextStudent();
+      } else {
+        component.set('isShowWarningMessage', true);
+      }
+    },
+
+    //Action triggered when clear question scores
+    onClearQuestionScores() {
+      const component = this;
+      component.resetQuestionScores();
+    },
+
+    //Action triggered when enter timespent
+    onEnterTimespent() {
+      const component = this;
+      let maxHour = component.get('maxHour');
+      let maxMinute = component.get('maxMinute');
+      component.set(
+        'isValidMaxTimespent',
+        validateTimespent(maxHour, maxMinute)
+      );
+    },
+
+    //Action triggered when submit max timespent
+    onSubmitMaxTimespent() {
+      const component = this;
+      const maxHour = component.get('maxHour');
+      const maxMinute = component.get('maxMinute');
+      let maxTimeInMilliSec = (maxHour * 60 * 60 + maxMinute * 60) * 1000;
+      let questionTimespent =
+        maxTimeInMilliSec / component.get('questions.length');
+      component.set('questionTimespent', questionTimespent);
+      component.set('isCaptureQuestionScore', true);
+    },
+
+    //Action triggered when clear search student list
+    onClearSearchStudent() {
+      const component = this;
+      component.set('studentSearchPattern', '');
+      component.set('studentsList', component.get('students'));
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {Object} activeStudent
+   */
   activeStudent: Ember.computed(function() {
     const component = this;
     return component.get('students').objectAt(0);
   }),
 
+  /**
+   * @property {Object} activeStudentTemp
+   */
   activeStudentTemp: Ember.computed('activeStudent', function() {
     return this.get('activeStudent');
   }),
 
+  /**
+   * @property {Number} activeQuestionSeq
+   */
   activeQuestionSeq: 0,
 
-  studentsList: Ember.computed.alias('students'),
+  /**
+   * @property {Array} studentsList
+   */
+  studentsList: Ember.computed('students', function() {
+    return this.get('students');
+  }),
 
+  /**
+   * @property {Array} students
+   */
   students: Ember.A([]),
 
+  /**
+   * @property {Object} collection
+   */
   collection: null,
 
   /**
@@ -87,9 +169,35 @@ export default Ember.Component.extend({
    */
   questionTimespent: 0,
 
+  /**
+   * @property {String} studentSearchPattern
+   */
   studentSearchPattern: '',
 
+  /**
+   * @property {Array} questions
+   */
   questions: Ember.A([]),
+
+  /**
+   * @property {Number} maxHour
+   */
+  maxHour: 0,
+
+  /**
+   * @property {Number} maxMinute
+   */
+  maxMinute: 0,
+
+  /**
+   * @property {Boolean} isValidMaxTimespent
+   */
+  isValidMaxTimespent: false,
+
+  /**
+   * @property {Boolean} isCaptureQuestionScore
+   */
+  isCaptureQuestionScore: false,
 
   /**
    * @property {String} timeZone
@@ -102,6 +210,39 @@ export default Ember.Component.extend({
    * @property {String} contentSource
    */
   contentSource: 'dailyclassactivity',
+
+  /**
+   * @property {Boolean} isShowClearStudentSearch
+   */
+  isShowClearStudentSearch: Ember.computed('studentSearchPattern', function() {
+    const component = this;
+    return component.get('studentSearchPattern.length');
+  }),
+
+  /**
+   * @property {Number} unAnsweredQuestionCount
+   */
+  unAnsweredQuestionCount: 0,
+
+  // -------------------------------------------------------------------------
+  // Functions
+
+  /**
+   * @function submitQuestionDataSelectNextStudent
+   * Method to submit question scores and select next student
+   */
+  submitQuestionDataSelectNextStudent() {
+    const component = this;
+    component.submitAssessmentPerformanceData();
+    component.resetQuestionScores();
+    component.toggleQuestionVisibility();
+    let students = component.get('students');
+    let activeStudentIndex = students.indexOf(component.get('activeStudent'));
+    if (activeStudentIndex !== students.length) {
+      component.set('activeStudent', students.objectAt(activeStudentIndex + 1));
+      component.$('.question-list-container').scrollTop(0);
+    }
+  },
 
   /**
    * @function loadAssessmentData
@@ -130,6 +271,9 @@ export default Ember.Component.extend({
     return assessmentService.readAssessment(assessmentId);
   },
 
+  /**
+   * @function submitAssessmentPerformanceData
+   */
   submitAssessmentPerformanceData() {
     const component = this;
     const performanceService = component.get('performanceService');
@@ -148,27 +292,40 @@ export default Ember.Component.extend({
       });
   },
 
+  /**
+   * @function resetQuestionScores
+   */
   resetQuestionScores() {
     const component = this;
     let questions = component.get('questions');
     questions.map(question => question.set('score', null));
   },
 
+  /**
+   * @function toggleQuestionVisibility
+   */
   toggleQuestionVisibility(activePos = 0) {
     const component = this;
     let questions = component.get('questions');
-    let activeQuestion = questions.objectAt(activePos);
-    if (component.get('activeQuestionSeq') !== activePos) {
+    if (questions.length !== activePos) {
+      let activeQuestion = questions.objectAt(activePos);
       questions.map(question => question.set('active', false));
+      activeQuestion.set('active', !activeQuestion.get('active'));
+      component.set('activeQuestionSeq', activePos);
     }
-    activeQuestion.set('active', !activeQuestion.get('active'));
-    component.set('activeQuestionSeq', activePos);
   },
 
+  /**
+   * @function doCheckQuestionScoreSubmitted
+   */
   doCheckQuestionScoreSubmitted() {
     const component = this;
     let questions = component.get('questions');
-    let numberOfQuestionsNotSubmitted = questions.findBy('score', null);
+    let numberOfQuestionsNotSubmitted = questions.filterBy('score', null);
+    component.set(
+      'unAnsweredQuestionCount',
+      numberOfQuestionsNotSubmitted.length
+    );
     return !numberOfQuestionsNotSubmitted;
   },
 

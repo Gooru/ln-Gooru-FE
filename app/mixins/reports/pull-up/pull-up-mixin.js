@@ -39,6 +39,7 @@ export default Ember.Mixin.create({
     400,
     function() {
       mixin.set('showPullUp', false);
+      mixin.sendAction('onClosePullUp');
     });
   }
 });

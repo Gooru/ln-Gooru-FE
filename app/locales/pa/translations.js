@@ -1260,6 +1260,9 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'ਕਲਾਸ ਦੀਆਂ ਗਤੀਵਿਧੀਆਂ',
+  'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
+  'teacher-landing.class.class-activities.warning-message':
+    'You have not entered data for {{unAnsweredQuestion}} of the {{totalQuestion}} questions. The score for these questions will be marked as 0. Do you want to continue',
   'teacher-landing.class.offline-class-report.class-report': 'ਕਲਾਸ ਦੀ ਰਿਪੋਰਟ',
   'teacher-landing.class.offline-class-report.class-activity-report':
     'Class Activity Report',
