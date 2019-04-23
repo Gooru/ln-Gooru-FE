@@ -1,0 +1,27 @@
+<div class="timepicker-container">
+  <div class="hour-picker">
+    <div class="up-arrow arrow-container" {{action "onIncrementHour"}}>
+      {{gru-icon name="expand_less"}}
+    </div>
+    <div class="hour-value value-container">
+      {{hour}}
+    </div>
+    <div class="down-arrow arrow-container" {{action "onDecrementHour"}}>
+      {{gru-icon name="expand_more"}}
+    </div>
+  </div>
+  <div class="picker-separator">
+    :
+  </div>
+  <div class="minute-picker">
+    <div class="up-arrow arrow-container" {{action "onIncrementMinute"}}>
+      {{gru-icon name="expand_less"}}
+    </div>
+    <div class="minute-value value-container">
+      {{minute}}
+    </div>
+    <div class="down-arrow arrow-container" {{action "onDecrementMinute"}}>
+      {{gru-icon name="expand_more"}}
+    </div>
+  </div>
+</div>

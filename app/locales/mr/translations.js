@@ -1258,7 +1258,9 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-activities': 'वर्गाचे नियोजन',
   'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
   'teacher-landing.class.class-activities.warning-message':
-    'You have not entered data for {{unAnsweredQuestion}} of the {{totalQuestion}} questions. The score for these questions will be marked as 0. Do you want to continue',
+    'You have not entered data for n questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
+  'teacher-landing.class.class-activities.info-message':
+    'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
   'teacher-landing.class.offline-class-report.class-report': 'वर्ग अहवाल',
   'teacher-landing.class.offline-class-report.class-activity-report':
     'Class Activity Report',

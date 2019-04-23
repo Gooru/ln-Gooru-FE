@@ -32,14 +32,12 @@ export default Ember.Component.extend({
     onSelectStudent(student) {
       const component = this;
       const activeStudent = component.get('activeStudent');
-      if (
-        activeStudent &&
-        activeStudent.get('id') !== student.get('id') &&
-        !component.doCheckQuestionScoreSubmitted()
-      ) {
-        component.set('isShowWarningMessage', true);
-      } else {
-        component.submitAssessmentPerformanceData();
+      if (activeStudent && activeStudent.get('id') !== student.get('id')) {
+        if (!component.doCheckQuestionScoreSubmitted()) {
+          component.set('isShowWarningMessage', true);
+        } else {
+          component.set('isShowSaveInformation', true);
+        }
       }
       component.set('activeStudentTemp', student);
     },
@@ -71,10 +69,10 @@ export default Ember.Component.extend({
     },
 
     //Action triggered when submit question scores
-    onSubmitQuestionScores() {
+    onAcceptSaveAndNext() {
       const component = this;
       component.submitQuestionDataSelectNextStudent();
-      component.set('isShowWarningMessage', false);
+      component.set('isShowSaveInformation', false);
     },
 
     //Action triggered when click save and next
@@ -88,13 +86,17 @@ export default Ember.Component.extend({
     },
 
     //Action triggered when clear question scores
-    onClearQuestionScores() {
+    onAcceptWarning() {
       const component = this;
       component.resetQuestionScores();
+      component.toggleQuestionVisibility();
+      component.scrollToFirstQuestion();
+      component.set('activeStudent', component.get('activeStudentTemp'));
+      component.set('isShowWarningMessage', false);
     },
 
     //Action triggered when enter timespent
-    onEnterTimespent() {
+    onChangeTime() {
       const component = this;
       let maxHour = component.get('maxHour');
       let maxMinute = component.get('maxMinute');
@@ -121,11 +123,31 @@ export default Ember.Component.extend({
       const component = this;
       component.set('studentSearchPattern', '');
       component.set('studentsList', component.get('students'));
+    },
+
+    //Action triggered when dismiss infor popup
+    onDismissInfoPopup() {
+      const component = this;
+      component.set('activeStudent', component.get('activeStudentTemp'));
+      component.resetQuestionScores();
+      component.toggleQuestionVisibility();
+      component.scrollToFirstQuestion();
+      component.set('isShowSaveInformation', false);
     }
   },
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {Boolean} isEnableSaveNext
+   */
+  isEnableSaveNext: false,
+
+  /**
+   * @property {Boolean} isShowSaveInformation
+   */
+  isShowSaveInformation: false,
 
   /**
    * @property {Object} activeStudent
@@ -228,6 +250,15 @@ export default Ember.Component.extend({
   // Functions
 
   /**
+   * @function scrollToFirstQuestion
+   * Method to scroll to top of the questions list container
+   */
+  scrollToFirstQuestion() {
+    const component = this;
+    component.$('.question-list-container').scrollTop(0);
+  },
+
+  /**
    * @function submitQuestionDataSelectNextStudent
    * Method to submit question scores and select next student
    */
@@ -238,9 +269,10 @@ export default Ember.Component.extend({
     component.toggleQuestionVisibility();
     let students = component.get('students');
     let activeStudentIndex = students.indexOf(component.get('activeStudent'));
-    if (activeStudentIndex !== students.length) {
+    if (activeStudentIndex !== students.length - 1) {
       component.set('activeStudent', students.objectAt(activeStudentIndex + 1));
-      component.$('.question-list-container').scrollTop(0);
+      component.scrollToFirstQuestion();
+      component.set('activeStudentIndex', activeStudentIndex + 1);
     }
   },
 
@@ -312,6 +344,8 @@ export default Ember.Component.extend({
       questions.map(question => question.set('active', false));
       activeQuestion.set('active', !activeQuestion.get('active'));
       component.set('activeQuestionSeq', activePos);
+    } else {
+      component.set('isEnableSaveNext', true);
     }
   },
 
@@ -321,11 +355,9 @@ export default Ember.Component.extend({
   doCheckQuestionScoreSubmitted() {
     const component = this;
     let questions = component.get('questions');
-    let numberOfQuestionsNotSubmitted = questions.filterBy('score', null);
-    component.set(
-      'unAnsweredQuestionCount',
-      numberOfQuestionsNotSubmitted.length
-    );
+    let unAnsweredQuestions = questions.filterBy('score', null);
+    let numberOfQuestionsNotSubmitted = unAnsweredQuestions.length;
+    component.set('unAnsweredQuestionCount', numberOfQuestionsNotSubmitted);
     return !numberOfQuestionsNotSubmitted;
   },
 

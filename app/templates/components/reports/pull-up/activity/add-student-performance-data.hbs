@@ -38,7 +38,7 @@
           }}
         {{/each}}
         <div class="question-action-container">
-          <div class="save-score-btn action-btn" {{action "onClickSaveAndNext"}}>{{t 'common.save-next'}}</div>
+          <div class="save-score-btn action-btn {{if isEnableSaveNext 'enabled'}}" {{action "onClickSaveAndNext"}}>{{t 'common.save-next'}}</div>
           <div class="cancel-btn action-btn" {{action "onClearQuestionScores"}}>{{t 'common.cancel'}}</div>
         </div>
       </div>
@@ -48,7 +48,7 @@
           {{t 'teacher-landing.class.class-activities.input-timespent'}}
         </div>
         <div class="timepicker">
-          {{cards.gru-timepicker-card hour=maxHour minute=maxMinute onEnterTimespent="onEnterTimespent"}}
+          {{cards.gru-timepicker-card hour=maxHour minute=maxMinute onChangeTime="onChangeTime"}}
         </div>
         <div class="action-container">
           <div class="confirm-btn {{unless isValidMaxTimespent 'disable-event'}}" {{action "onSubmitMaxTimespent"}}>
@@ -61,25 +61,38 @@
 
 </div>
 
-{{#if isShowWarningMessage}}
+{{#if (or isShowWarningMessage isShowSaveInformation)}}
   <div class="back-shadow"></div>
-  <div class="warning-popup">
+  <div class="warning-popup {{if isShowWarningMessage 'warning-dialog' 'information-dialog'}}">
     <div class="warning-info-container">
       <div class="warning-icon">
         {{gru-icon name="error"}}
         <span class="warning-label">{{t 'warning'}}</span>
       </div>
       <div class="warning-message">
-        {{t 'teacher-landing.class.class-activities.warning-message' unAnsweredQuestion=unAnsweredQuestionCount totalQuestion=questions.length}}
+        {{#if isShowSaveInformation}}
+          {{t 'teacher-landing.class.class-activities.info-message' studentName = activeStudent.fullName}}
+        {{else if isShowWarningMessage}}
+          {{t 'teacher-landing.class.class-activities.warning-message' studentName = activeStudent.fullName}}
+        {{/if}}
       </div>
     </div>
     <div class="warning-action-container">
-      <div class="back-action action-btn" {{action "onDismissWarning"}}>
-        {{t 'common.no'}}
-      </div>
-      <div class="ok-action action-btn" {{action "onSubmitQuestionScores"}}>
-        {{t 'common.yes'}}
-      </div>
+      {{#if isShowSaveInformation}}
+        <div class="back-action action-btn" {{action "onDismissInfoPopup"}}>
+          {{t 'common.no'}}
+        </div>
+        <div class="ok-action action-btn" {{action "onAcceptSaveAndNext"}}>
+          {{t 'common.yes'}}
+        </div>
+      {{else if isShowWarningMessage}}
+        <div class="back-action action-btn" {{action "onDismissWarning"}}>
+          {{t 'common.no'}}
+        </div>
+        <div class="ok-action action-btn" {{action "onAcceptWarning"}}>
+          {{t 'common.yes'}}
+        </div>
+      {{/if}}
     </div>
   </div>
 {{/if}}
