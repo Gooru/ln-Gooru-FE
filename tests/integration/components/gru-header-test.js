@@ -2,7 +2,6 @@ import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import T from 'gooru-web/tests/helpers/assert';
-import wait from 'ember-test-helpers/wait';
 import ClassModel from 'gooru-web/models/content/class';
 
 moduleForComponent('gru-header', 'Integration | Component | Header', {
@@ -13,7 +12,7 @@ moduleForComponent('gru-header', 'Integration | Component | Header', {
 });
 
 test('header layout for anonymous', function(assert) {
-  assert.expect(10); //making sure all asserts are called
+  assert.expect(8); //making sure all asserts are called
 
   this.set(
     'session',
@@ -39,10 +38,6 @@ test('header layout for anonymous', function(assert) {
   var $navHeader = $component.find('.navbar-header');
   T.exists(assert, $navHeader, 'Missing nav header');
   T.exists(assert, $navHeader.find('.home-link'), 'Missing home link');
-
-  var $navSearch = $component.find('.search-navbar-form');
-  T.exists(assert, $navSearch, 'Missing nav search form');
-  T.exists(assert, $navSearch.find('.search-input'), 'Missing search input');
 
   var $navMenu = $component.find('.menu-navbar');
   T.notExists(
@@ -125,76 +120,6 @@ test('header layout with user', function(assert) {
     'jperez',
     'Wrong username'
   );
-});
-
-test('Do search by clicking search button', function(assert) {
-  assert.expect(4); //making sure all asserts are called
-
-  this.on('mySearchAction', function(term) {
-    assert.equal(term, 'test', 'onSearchAction should be called once');
-  });
-
-  this.render(hbs`{{gru-header user=myUser onSearch='mySearchAction'}}`);
-
-  const $component = this.$(); //component dom element
-
-  const $navSearch = $component.find('.search-navbar-form');
-  T.exists(assert, $navSearch, 'Missing nav search form');
-  T.exists(assert, $navSearch.find('.search-input'), 'Missing search input');
-
-  const $searchInput = $navSearch.find('.search-input');
-  $searchInput.val('test');
-  $searchInput.change();
-  this.$('form').submit();
-});
-
-test('Do search by hitting Enter', function(assert) {
-  assert.expect(2); //making sure all asserts are called
-
-  const ANY_TERM = 'any term';
-
-  this.on('searchAction', function(term) {
-    assert.equal(term, ANY_TERM, 'onSearchAction should be called once');
-  });
-
-  this.render(hbs`{{gru-header onSearch='searchAction'}}`);
-
-  var $searchInput = this.$('.search-input');
-  $searchInput.val(ANY_TERM);
-  $searchInput.change();
-  this.$('form').submit();
-});
-
-test('Do search with a blank space', function(assert) {
-  assert.expect(1);
-  const ANY_TERM = ' ';
-  this.render(hbs`{{gru-header onSearch='searchAction'}}`);
-  var $searchInput = this.$('.search-input');
-  $searchInput.val(ANY_TERM);
-  $searchInput.change();
-  this.$('form').submit();
-  T.notExists(assert, this.$('.results'), 'Result of search should not appear');
-});
-
-test('Search terms under 3 letters', function(assert) {
-  assert.expect(1); //making sure all asserts are called
-
-  this.render(hbs`{{gru-header}}`);
-
-  const $component = this.$(); //component dom element
-
-  const $navSearch = $component.find('.search-navbar-form');
-  const $searchInput = $navSearch.find('.search-input');
-  $searchInput.val('te');
-  $searchInput.blur();
-
-  return wait().then(function() {
-    T.exists(
-      assert,
-      $navSearch.find('.error'),
-      'error message should be visible'
-    );
-  });
 });
 
 test('Links as student', function(assert) {

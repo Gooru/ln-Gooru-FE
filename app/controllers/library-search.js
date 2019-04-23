@@ -159,7 +159,8 @@ export default Ember.Controller.extend(ModalMixin, {
     };
     let filters = controller.filterBuilder();
 
-    if (controller.get('isTeacher') && controller.get('activeContentType') !== 'course') {
+    if (controller.get('isTeacher') && controller.get('activeContentType') !== 'course' &&
+      controller.get('activeContentType') !== 'rubric') {
       filters['flt.audience'] = 'All Students,Teachers';
     }
     if (controller.get('library')) {

@@ -154,6 +154,31 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Search for rubrics
+   *
+   * @param term the term to search
+   * @returns {Promise.<Rubrics[]>}
+   */
+  searchRubrics: function(term, filters) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('searchAdapter')
+        .searchRubrics(term, filters)
+        .then(
+          function(response) {
+            resolve(
+              service.get('searchSerializer').normalizeSearchRubrics(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
    * Search for courses
    *
    * @param term the term to search

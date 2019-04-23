@@ -1,5 +1,4 @@
 import Ember from 'ember';
-
 /**
  * Library route
  *

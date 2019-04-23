@@ -51,14 +51,28 @@
   </div>
 </div>
 <div class="filters-container">
-  <span>{{t 'common.filter-by'}}</span>
+  <span class="title">{{t 'common.filter-by'}}</span>
   <div class="filters">
     {{#each filterByList as |filter|}}
-      <li class="{{filter.type}} {{if (eq activeContentType filter.type) 'active'}}" {{action 'onSelectFilterBy' filter}}>
+      <li class="list {{filter.type}} {{if (eq activeContentType filter.type) 'active'}}" {{action 'onSelectFilterBy' filter}}>
         <i class="icon"></i>
         <span class="label">{{filter.label}}</span>
       </li>
     {{/each}}
+    {{#if isAnonymousUser}}
+      <div class="btn-group hidden-xs hidden-sm col-sm-2">
+        <a href="#" class="btn btn-primary create-dropdown" data-toggle="dropdown"><span class="hidden-sm hidden-md">{{t "common.create"}}</span>{{gru-icon name="add" class="visible-sm-inline visible-md-inline symbol"}}</a>
+        <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a class="course" href="#" {{action "showModal" "content.modals.gru-course-new"}}><i></i>{{t "common.course"}}</a></li>
+          <li><a class="collection" href="#" {{action "showModal" "content.modals.gru-collection-new"}}><i></i>{{t "common.collection"}}</a></li>
+          <li><a class="assessment" href="#" {{action "showModal" "content.modals.gru-assessment-new"}}><i></i>{{t "common.assessment"}}</a></li>
+          <li><a class="resource" href="#" {{action "showModal" "content.modals.gru-resource-new" }}><i></i>{{t "common.resource"}}</a></li>
+          <li><a class="question" href="#" {{action "showModal" "content.modals.gru-question-new"}}><i></i>{{t "common.question"}}</a></li>
+          <li><a class="rubric" href="#" {{action "showModal" "content.modals.gru-rubric-new"}}><i></i>{{t "common.rubric"}}</a></li>
+        </ul>
+      </div>
+    {{/if}}
   </div>
 </div>
 <div class="filters">

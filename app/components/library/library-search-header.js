@@ -105,6 +105,11 @@ export default Ember.Component.extend({
       const component = this;
       component.set('activeContentType', item.get('type'));
       component.send('searchContent');
+    },
+
+    showModal(item) {
+      let component = this;
+      component.sendAction('onShowModal', item);
     }
   },
 
@@ -177,6 +182,10 @@ export default Ember.Component.extend({
     Ember.Object.create({
       label: component.get('i18n').t('search-filter.questions').string,
       type: 'question'
+    }),
+    Ember.Object.create({
+      label: component.get('i18n').t('search-filter.rubrics').string,
+      type: 'rubric'
     })
     ]);
   }

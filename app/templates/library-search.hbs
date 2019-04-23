@@ -3,11 +3,19 @@
      selectedFilters=selectedFilters
      activeContentType=activeContentType
      library=library
+     onShowModal="showModal"
+     isAnonymousUser=sessionProfile.isAnonymous
      onSearch="doSearch"
    }}
   {{#if isLoading}}
     {{three-bounce-spinner}}
   {{else}}
-    {{library.library-content-result-grid-view paginateNext="doPaginate" isTeacher=isTeacher isMyProfile=isMyProfile onRemixQuestion="remixQuestion" searchResults=searchResults activeContentType=activeContentType}}
+    {{library.library-content-result-grid-view
+       paginateNext="doPaginate"
+       isTeacher=isTeacher
+       onRemixQuestion="remixQuestion"
+       searchResults=searchResults
+       activeContentType=activeContentType
+     }}
   {{/if}}
 </div>
