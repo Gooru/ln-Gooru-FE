@@ -1,0 +1,12 @@
+.library-search {
+  .library-content-result-grid {
+    .contents {
+      grid-template-columns: repeat(3, 1fr);
+
+      .no-content,
+      .three-bounce-spinner {
+        grid-column-start: 2;
+      }
+    }
+  }
+}
