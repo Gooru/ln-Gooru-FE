@@ -15,54 +15,6 @@ moduleForAcceptance('Acceptance | search/collections', {
   }
 });
 
-test('Layout', function(assert) {
-  assert.expect(6); //making sure all asserts are called
-  visit('/search/collections?term=any');
-  andThen(function() {
-    assert.equal(currentURL(), '/search/collections?term=any');
-    T.exists(
-      assert,
-      find('.gru-taxonomy-tag-list'),
-      'Missing gru-taxonomy-tag-list'
-    );
-    T.exists(assert, find('.collection-results'), 'Missing collection-results');
-    assert.equal(
-      find('.gru-header .search-input').val(),
-      'any',
-      'Wrong input value'
-    );
-    T.exists(
-      assert,
-      find('.content-navigation .taxonomy.gru-category-picker'),
-      'Categories filter missing'
-    );
-    T.exists(
-      assert,
-      find('.content-navigation .taxonomy.gru-subject-picker'),
-      'Standards filter missing'
-    );
-  });
-});
-
-test('Changing term should filter the current result without changing the root url', function(assert) {
-  assert.expect(2); //making sure all asserts are called
-  visit('/search/collections?term=any');
-  andThen(function() {
-    assert.equal(currentURL(), '/search/collections?term=any');
-
-    const $appHeader = find('.gru-header');
-    const $searchInput = find('.gru-header .search-input');
-
-    fillIn($searchInput, 'europe');
-    $searchInput.val('europe');
-    $searchInput.change();
-    $appHeader.find('form').submit();
-    andThen(function() {
-      assert.equal(currentURL(), '/search/collections?term=europe');
-    });
-  });
-});
-
 test('No results found', function(assert) {
   assert.expect(5);
   visit('/search/collections?term=noResultFound');
