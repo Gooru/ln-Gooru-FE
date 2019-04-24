@@ -157,18 +157,26 @@
       showPullUp=showDcaCollectionReportPullUp}}
   {{/if}}
 {{/if}}
+
+<!-- Assessment Performance Entry -->
 {{#if isShowAssessmentPerformanceEntryPullUp}}
-  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowAssessmentPerformanceEntryPullUp title=selectedItem.title type='assessment' onClosePerformanceEntry='onClosePerformanceEntry' }}
-    {{reports.pull-up.assessment-performance-entry
-      assessment=selectedItem
+  {{#reports.pull-up.activity.add-performance-data
+    showPullUp = isShowAssessmentPerformanceEntryPullUp
+    activityDate = selectedActivity.activation_date
+    activityTitle = selectedItem.title
+    onClosePullUp = "onClosePerformanceEntry"
+    populatedTopPos = '8%'
+  }}
+    {{reports.pull-up.activity.add-student-performance-data
+      collection=selectedItem
       course=course
       students=activityMembers
       activityData=selectedActivity
       classId=classId
-      onClosePerformanceEntry="onClosePerformanceEntry"
-      isRepeatEntry=isRepeatEntry}}
-  {{/reports.pull-up.performance-manual-entry}}
+    }}
+  {{/reports.pull-up.activity.add-performance-data}}
 {{/if}}
+
 {{#if isShowCollectionPerformanceEntryPullUp}}
   {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowCollectionPerformanceEntryPullUp title=selectedItem.title type='collection' onClosePerformanceEntry='onClosePerformanceEntry' }}
     {{reports.pull-up.collection-performance-entry

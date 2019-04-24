@@ -700,7 +700,8 @@ export default Object.assign(quizzesTranslations, {
   'common.title': 'Title',
   'common.unBookmark': 'إشارة مرجعية',
   'common.unexpectedError': 'حدث خطأ غير متوقع وتم الإبلاغ عنه، نعتذر عن ذلك!',
-  'common.networkError': 'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
+  'common.networkError':
+    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'إلغاء المتابعة',
   'common.unit': 'وحدة',
   'common.unit-title': 'عنوان الوحدة',
@@ -1218,6 +1219,11 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'أنشطة الصف اليومية',
+  'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
+  'teacher-landing.class.class-activities.warning-message':
+    'You have not entered data for n questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
+  'teacher-landing.class.class-activities.info-message':
+    'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
   'teacher-landing.class.offline-class-report.class-activity-report':
     'Class Activity Report',
@@ -1277,19 +1283,32 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-settings.class-settings-sec.class-code':
     'Class Code',
   'teacher-landing.class.class-settings.class-settings-sec.subject': 'Subject',
-  'teacher-landing.class.class-settings.class-settings-sec.framework': 'Framework',
-  'teacher-landing.class.class-settings.class-settings-sec.grade-level': 'Grade Level',
-  'teacher-landing.class.class-settings.class-settings-sec.option-choose-one': 'Choose One',
-  'teacher-landing.class.class-settings.class-settings-sec.co-teachers': 'Co-Teachers',
-  'teacher-landing.class.class-settings.class-settings-sec.add-coteacher': 'Add another teacher',
-  'teacher-landing.class.class-settings.class-settings-sec.language': 'Language of instruction',
-  'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head': 'Student Settings',
-  'teacher-landing.class.class-settings.student-settings-sec.col-head-active': 'Active',
-  'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head': 'Course Settings',
-  'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable': 'Personalized Learning Path should cover gaps at profile?',
-  'teacher-landing.class.class-settings.course-settings-sec.apply-settings': 'Apply Settings',
-  'teacher-landing.class.class-settings.course-settings-sec.origin-info': 'What is the lowest grade level content that your students should study?',
-  'teacher-landing.class.class-settings.course-settings-sec.current-grade-info': 'What is the grade level of your class?',
+  'teacher-landing.class.class-settings.class-settings-sec.framework':
+    'Framework',
+  'teacher-landing.class.class-settings.class-settings-sec.grade-level':
+    'Grade Level',
+  'teacher-landing.class.class-settings.class-settings-sec.option-choose-one':
+    'Choose One',
+  'teacher-landing.class.class-settings.class-settings-sec.co-teachers':
+    'Co-Teachers',
+  'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
+    'Add another teacher',
+  'teacher-landing.class.class-settings.class-settings-sec.language':
+    'Language of instruction',
+  'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
+    'Student Settings',
+  'teacher-landing.class.class-settings.student-settings-sec.col-head-active':
+    'Active',
+  'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head':
+    'Course Settings',
+  'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable':
+    'Personalized Learning Path should cover gaps at profile?',
+  'teacher-landing.class.class-settings.course-settings-sec.apply-settings':
+    'Apply Settings',
+  'teacher-landing.class.class-settings.course-settings-sec.origin-info':
+    'What is the lowest grade level content that your students should study?',
+  'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
+    'What is the grade level of your class?',
   'teacher-landing.class.class-settings.origin': 'Origin',
   'teacher-landing.class.class-settings.destination': 'Destination',
   'teacher-landing.class.class-settings.students': 'Students',
@@ -1771,7 +1790,8 @@ export default Object.assign(quizzesTranslations, {
   'profile.proficiency.baseline': 'Baseline',
   'profile.proficiency.grade-line': 'Other Grade',
   'profile.proficiency.class-grade-line': 'Class Grade',
-  'profile.proficiency.not-tagged': 'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
+  'profile.proficiency.not-tagged':
+    'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
   'profile.proficiency.show-compressed-chart': 'Show Compressed Chart',
   'profile.proficiency.show-expanded-chart': 'Show Expanded Chart',
   'profile.preference.language-preference': 'Language Preference',
