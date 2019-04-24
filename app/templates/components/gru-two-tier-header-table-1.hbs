@@ -17,7 +17,8 @@
           <th scope="col" class="{{secondTierHeader.value}} hidden" {{action "updateSortCriteria" firstTierIndex secondTierIndex}}>
             {{#if isCollectionType}}
               <span>
-                <i class="{{firstTierHeader.type}}-icon" />
+                {{!-- data-container="body" --}}
+                <i class="{{firstTierHeader.type}}-icon" data-toggle="tooltip" data-html="true" title="{{firstTierHeader.title}}" data-placement="auto" />
                 <div class="col-label hidden ">{{firstTierHeader.type}} </div>
               </span>
             {{else}}

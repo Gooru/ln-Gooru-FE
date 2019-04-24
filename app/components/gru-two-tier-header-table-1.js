@@ -13,6 +13,13 @@ export default gruTwoTierHeaderTable.extend({
    */
   i18n: Ember.inject.service(),
 
+  didRender() {
+    this._super(...arguments);
+    Ember.run.later(function() {
+      $('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    });
+  },
+
   didReceiveAttrs() {
     this._super(...arguments);
     this.classNames[1] = 'gru-two-tier-header-table-1';
