@@ -1,6 +1,22 @@
 import Ember from 'ember';
+import Bookmark from 'gooru-web/models/content/bookmark';
+import {
+  CONTENT_TYPES,
+  ROLES,
+  PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
+
+  /**
+   * @requires service:api-sdk/bookmark
+   */
+  bookmarkService: Ember.inject.service('api-sdk/bookmark'),
+
+  /**
+   * @requires service:notifications
+   */
+  notifications: Ember.inject.service(),
 
   classNames: ['library-content-result-grid'],
 
@@ -12,10 +28,148 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    openContentPlayer(collection) {
-      this.get('router').transitionTo('player', collection.id, {
+    //Action triggered when click on the play icon
+    openContentPlayer: function(assessment) {
+      const component = this;
+      let previewContentType = assessment.get('isExternalAssessment') ?
+        'assessment-external' :
+        'assessment';
+      component.set('previewContent', assessment);
+      component.set('previewContentType', previewContentType);
+      component.set('isShowContentPreview', true);
+    },
+
+    //Action triggered when click play icon
+    openCollectionContentPlayer: function(collection) {
+      const component = this;
+      component.set('previewContent', collection);
+      component.set('previewContentType', collection.get('format'));
+      component.set('isShowContentPreview', true);
+    },
+
+    /**
+     * On card edit collection button click
+     * @param {Collection} collection
+     */
+    editCollection: function(collection) {
+      this.get('router').transitionTo('content.collections.edit', collection.get('id'));
+    },
+
+
+    /**
+     * Remix course action, when clicking remix at the course card
+     * @param {Content/Course}
+     */
+    remixCourse: function(course) {
+      var remixModel = {
+        content: course
+      };
+      this.sendAction('onRemixCourse', remixModel);
+    },
+
+    /**
+     * Triggers the refresh of user classes
+     */
+    updateClass: function() {
+      this.sendAction('updateUserClasses');
+    },
+
+    /**
+     * Action triggered to bookmark a course
+     * @param {Course} course
+     */
+    onBookmarkCourse: function({
+      title,
+      id
+    }, showType) {
+      let bookmark = Bookmark.create(Ember.getOwner(this).ownerInjection(), {
+        title,
+        contentId: id,
+        contentType: CONTENT_TYPES.COURSE
+      });
+      this.createBookmark(bookmark).then(() =>
+        this.notifyBookmarkSuccess(bookmark, showType)
+      );
+    },
+
+    /**
+     * Edit course action, when clicking Play at the course card
+     * @param {Content/Course}
+     */
+    playIndependentContent: function({
+      title,
+      id,
+      collectionType
+    }) {
+      let isCourse = !collectionType;
+      let bookmark = Bookmark.create(Ember.getOwner(this).ownerInjection(), {
+        title,
+        contentId: id,
+        contentType: isCourse ? CONTENT_TYPES.COURSE : collectionType
+      });
+      return this.createBookmark(bookmark).then(() => {
+        if (isCourse) {
+          this.get('router').transitionTo('student.independent', id);
+        } else {
+          let queryParams = {
+            role: ROLES.STUDENT,
+            source: PLAYER_EVENT_SOURCE.INDEPENDENT_ACTIVITY
+          };
+          this.get('router').transitionTo('player', id, {
+            queryParams
+          });
+        }
+      });
+    },
+
+    /**
+     * Action triggered to bookmark a collection or assessment
+     * @param {Collection/Assessment} content
+     */
+    onBookmarkContent: function({
+      title,
+      id,
+      collectionType
+    }, showType) {
+      let bookmark = Bookmark.create(Ember.getOwner(this).ownerInjection(), {
+        title,
+        contentId: id,
+        contentType: collectionType
+      });
+      this.createBookmark(bookmark).then(() =>
+        this.notifyBookmarkSuccess(bookmark, showType)
+      );
+    },
+
+    /**
+     * Edit course action, when clicking Edit at the course card
+     * @param {Content/Course}
+     */
+    editCourse: function(course) {
+      let queryParams = {
+        userId: course.get('ownerId')
+      };
+      this.get('router').transitionTo('content.courses.edit', course.get('id'), {
+        queryParams
+      });
+    },
+
+    /**
+     * Edit course action, when clicking Play at the course card
+     * @param {Content/Course}
+     */
+    playCourse(course) {
+      this.get('router').transitionTo('content.courses.play', course.get('id'));
+    },
+
+    /**
+     * On card edit assessment button click
+     * @param {Assessment} assessment
+     */
+    editAssessment: function(assessment) {
+      this.get('router').transitionTo('content.assessments.edit', assessment.get('id'), {
         queryParams: {
-          type: collection.get('collectionType')
+          editingContent: true
         }
       });
     },
@@ -38,6 +192,15 @@ export default Ember.Component.extend({
     },
 
     /**
+     * On card edit question button click
+     * @param {Question} question
+     */
+    editQuestion: function(question) {
+      this.get('router').transitionTo('content.questions.edit', question.get('id'));
+    },
+
+
+    /**
      * On card remix question button click
      * @param {Question} question
      */
@@ -50,19 +213,68 @@ export default Ember.Component.extend({
      */
     editRubric: function(resource) {
       this.get('router').transitionTo('content.rubric.edit', resource.get('id'));
+    },
+
+    /**
+     * On card edit resource button click
+     * @param {Resource} resource
+     */
+    editResource: function(resource) {
+      this.get('router').transitionTo('content.resources.edit', resource.get('id'));
+    },
+
+    /**
+     * On card play resource button click
+     * @param {Resource} resource
+     */
+    playResource: function(resource) {
+      this.get('router').transitionTo('content.resources.play', resource.get('id'));
     }
   },
 
   handleShowMoreData() {
     let component = this;
-    let container = component.$(component.element);
-    container.scroll(function() {
-      let scrollTop = container.scrollTop();
-      let listContainerHeight = container.height();
-      let isScrollReachedBottom = scrollTop === container.prop('scrollHeight') - listContainerHeight;
+    let container = Ember.$('.library-content-result-grid');
+    component.$(container).scroll(function() {
+      let scrollTop = Ember.$(container).scrollTop();
+      let listContainerHeight = Ember.$(container).height();
+      let isScrollReachedBottom = scrollTop === (component.$(container).prop('scrollHeight') - listContainerHeight);
       if (isScrollReachedBottom) {
         component.sendAction('paginateNext');
       }
     });
+  },
+
+  /**
+   * Send bookmark info to BE for creation
+   * @param bookmark
+   */
+  createBookmark: function(bookmark) {
+    return this.get('bookmarkService').createBookmark(bookmark);
+  },
+
+  /**
+   * Show notification on bookmark success
+   * @param bookmark
+   * @param showType
+   */
+  notifyBookmarkSuccess: function(bookmark, showType) {
+    this.get('notifications').setOptions({
+      positionClass: 'toast-top-full-width',
+      toastClass: 'gooru-toast',
+      timeOut: 10000
+    });
+    const successMsg = showType ?
+      this.get('i18n').t('common.bookmarked-content-success', {
+        contentType: bookmark.get('contentType')
+      }) :
+      this.get('i18n').t('common.bookmarked-success');
+    const independentLearningURL = this.get('target.router').generate(
+      'student-independent-learning'
+    );
+    const buttonText = this.get('i18n').t('common.take-me-there');
+    this.get('notifications').success(
+      `${successMsg} <a class="btn btn-success" href="${independentLearningURL}">${buttonText}</a>`
+    );
   }
 });

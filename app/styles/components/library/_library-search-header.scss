@@ -133,8 +133,7 @@
     width: 100%;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
     background-color: #ffffff;
-    display: grid;
-    grid-template-columns: 100px 1fr;
+    display: flex;
     margin-top: 3px;
     height: 50px;
     align-items: center;
@@ -144,21 +143,19 @@
       text-align: center;
       color: #4b5667;
       font-size: 12px;
+      width: 100px;
       text-transform: uppercase;
     }
 
-    .filters {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      align-items: center;
-      text-align: center;
+    .actions {
+      width: 400px;
+      display: flex;
       height: 50px;
-      padding: 5px;
+      justify-content: center;
+      align-items: center;
 
       .btn-group {
-        display: flex;
         width: auto;
-        justify-content: center;
 
         .dropdown-menu {
           padding: 0;
@@ -221,6 +218,15 @@
           }
         }
       }
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      align-items: center;
+      text-align: center;
+      height: 50px;
+      width: calc(100% - 500px);
 
       .list {
         display: grid;

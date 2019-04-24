@@ -31,13 +31,13 @@ export default Ember.Route.extend({
     return Ember.RSVP.hash({
       courses: this.get('searchService').searchFeaturedCourses('*'),
       libraries: this.get('libraryService').fetchLibraries(),
-      isAnonymous: this.get('session.isAnonymous')
+      session: this.get('session')
     });
   },
 
   setupController: function(controller, model) {
     controller.set('courses', model.courses);
     controller.set('libraries', model.libraries);
-    controller.set('isAnonymousUser', model.isAnonymous);
+    controller.set('session', model.session);
   }
 });

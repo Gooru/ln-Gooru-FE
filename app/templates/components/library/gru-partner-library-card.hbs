@@ -2,12 +2,12 @@
   <div class="panel-heading">
 
     <div class="title-section">
-      {{#link-to "library-search" (query-params id=content.id)}}{{truncate text=content.name maxLength=40}}{{/link-to}}
+      {{#link-to "library-search" (query-params libraryId=content.id type="library")}}{{truncate text=content.name maxLength=40}}{{/link-to}}
     </div>
   </div>
   <div class="panel-body">
     <div class="image">
-      {{#link-to "library-search" (query-params id=content.id)}}<img class="img-responsive" src="{{content.image}}">{{/link-to}}
+      {{#link-to "library-search" (query-params libraryId=content.id type="library")}}<img class="img-responsive" src="{{content.image}}">{{/link-to}}
     </div>
     <div class="description">
       {{#if content.description}}

@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import ContentEditMixin from 'gooru-web/mixins/content/edit';
 import ModalMixin from 'gooru-web/mixins/modal';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
   // -------------------------------------------------------------------------
@@ -60,10 +62,12 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
       } else {
         component
           .get('router')
-          .transitionTo(
-            'profile.content.courses',
-            component.get('session.userId')
-          );
+          .transitionTo('library-search', {
+            queryParams: {
+              profileId: component.get('session.userId'),
+              type: 'my-content'
+            }
+          });
       }
     },
 
@@ -121,7 +125,9 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
       let component = this;
       var editedCourse = component.get('tempCourse');
       let course = component.get('course');
-      editedCourse.validate().then(function({ validations }) {
+      editedCourse.validate().then(function({
+        validations
+      }) {
         if (validations.get('isValid')) {
           let imageIdPromise = new Ember.RSVP.resolve(
             editedCourse.get('thumbnailUrl')

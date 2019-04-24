@@ -1,9 +1,10 @@
-<div class="contents">
+<div class="contents {{activeContentType}}">
   {{#each searchResults as |content|}}
     <div class="card">
       {{#if (eq activeContentType 'course')}}
-        {{new-cards.gru-standard-card
-          profile=sessionProfile
+        {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
+          {{new-cards.gru-standard-card
+          profile=profile
           isCourse=true
           isOnProfile=true
           cardSize="md"
@@ -12,52 +13,152 @@
           onOpenContentPlayer="playCourse"
           onBookmarkContent="onBookmarkCourse"
         }}
+        {{else}}
+          {{new-cards.gru-standard-card
+            profile=profile
+            isCourse=true
+            cardSize="md"
+            content=content
+            classroomList=activeClasses
+            classStudentCount=myClasses
+            isMyProfile=isMyProfile
+            isOnProfile=true
+            publishVisible=true
+            onOpenContentPlayer="playCourse"
+            onEditContent="editCourse"
+            onUpdateUserClasses="updateClass"
+            onOpenIndependentPlayer="playIndependentContent"
+            onBookmarkContent="onBookmarkCourse"
+            }}
+        {{/if}}
       {{/if}}
-      {{#if (or (eq activeContentType 'assessment') (eq activeContentType 'collection'))}}
-        {{new-cards.gru-standard-card
-          profile=sessionProfile
-          isOnProfile=true
-          cardSize="md"
-          content=content
-          onOpenIndependentPlayer="playIndependentContent"
-          onOpenContentPlayer="openContentPlayer"
-          onBookmarkContent="onBookmarkContent"
-          onPreviewContent="onPreviewContent"
-        }}
+      {{#if (eq activeContentType 'assessment')}}
+        {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
+          {{new-cards.gru-standard-card
+            profile=profile
+            isOnProfile=true
+            cardSize="md"
+            content=content
+            onOpenIndependentPlayer="playIndependentContent"
+            onOpenContentPlayer="openContentPlayer"
+            onBookmarkContent="onBookmarkContent"
+            onPreviewContent="onPreviewContent"
+          }}
+        {{else}}
+          {{new-cards.gru-standard-card
+            profile=profile
+            cardSize="md"
+            content=content
+            isMyProfile=isMyProfile
+            isOnProfile=true
+            publishVisible=true
+            classroomList=activeClasses
+            classStudentCount=myClasses
+            onOpenContentPlayer="openContentPlayer"
+            onEditContent="editAssessment"
+            onOpenIndependentPlayer="playIndependentContent"
+            onBookmarkContent="onBookmarkContent"
+          }}
+        {{/if}}
+      {{/if}}
+      {{#if (eq activeContentType 'collection')}}
+        {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
+          {{new-cards.gru-standard-card
+              profile=profile
+              isOnProfile=true
+              cardSize="md"
+              content=content
+              onOpenIndependentPlayer="playIndependentContent"
+              onOpenContentPlayer="openCollectionContentPlayer"
+              onBookmarkContent="onBookmarkContent"
+              onPreviewContent="onPreviewContent"
+            }}
+        {{else}}
+          {{new-cards.gru-standard-card
+              profile=profile
+              content=content
+              cardSize="md"
+              isCollection=true
+              isMyProfile=isMyProfile
+              classroomList=activeClasses
+              classStudentCount=myClasses
+              isOnProfile=true
+              publishVisible=true
+              onOpenContentPlayer="openCollectionContentPlayer"
+              onEditContent="editCollection"
+              onOpenIndependentPlayer="playIndependentContent"
+              onBookmarkContent="onBookmarkContent"
+            }}
+        {{/if}}
       {{/if}}
       {{#if (eq activeContentType 'resource')}}
-        {{new-cards.gru-resource-card
+        {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
+          {{new-cards.gru-resource-card
           resource=content
           onRemixQuestion="remixQuestion"
           onPlayResource="playResource"
-          profile=sessionProfile
+          profile=profile
           addEnabled=true
           editEnabled=false
           partnerLibrary=true
           isOnProfile=true
         }}
+        {{else}}
+          {{new-cards.gru-resource-card
+          resource=content
+          publishVisible=true
+          isOnProfile=true
+          addEnabled=isMyProfile
+          editEnabled=isMyProfile
+          onEditResource="editResource"
+          onPlayResource="playResource"}}
+        {{/if}}
       {{/if}}
       {{#if (eq activeContentType 'question')}}
-        {{new-cards.gru-resource-card
-        resource=content
-        addEnabled=true
-        remixEnabled=true
-        isMyProfile=true
-        onRemixQuestion="remixQuestion"
-        onPlayResource="playQuestion"
-        profile=sessionProfile
-        partnerLibrary=true
-        isOnProfile=true}}
+        {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
+          {{new-cards.gru-resource-card
+            resource=content
+            addEnabled=true
+            remixEnabled=true
+            isMyProfile=true
+            onRemixQuestion="remixQuestion"
+            onPlayResource="playQuestion"
+            profile=profile
+            partnerLibrary=true
+            isOnProfile=true
+          }}
+        {{else}}
+          {{new-cards.gru-resource-card
+            resource=content
+            addEnabled=isMyProfile
+            publishVisible=true
+            isOnProfile=true
+            editEnabled=isMyProfile
+            onPlayResource="playQuestion"
+            onEditResource="editQuestion"
+            onRemixQuestion="remixQuestion"
+          }}
+        {{/if}}
       {{/if}}
       {{#if (eq activeContentType 'rubric')}}
-        {{new-cards.gru-resource-card
+        {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
+          {{new-cards.gru-resource-card
           resource=content
-          editEnabled=content.isMyProfile
+          editEnabled=isMyProfile
           onEditResource='editRubric'
           isRubric=true
-          profile=sessionProfile
+          profile=profile
           isOnProfile=true
         }}
+        {{else}}
+          {{new-cards.gru-resource-card
+          resource=content
+          editEnabled=isMyProfile
+          onEditResource='editRubric'
+          isRubric=true
+          isOnProfile=true
+          }}
+        {{/if}}
       {{/if}}
     </div>
   {{else}}
