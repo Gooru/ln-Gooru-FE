@@ -109,6 +109,7 @@ export default gruTwoTierHeaderTable.extend({
         icn.css('display', 'none');
         let tsColTitle = this.get('i18n').t('gru-data-picker.timeSpent').string;
         lbl.text(tsColTitle);
+        sortIcn.addClass('cursor-pointer');
       } else {
         //Applicable to score i.e. questions
         let innerSpan = this.$(cssSelector).find('span > span.score');
@@ -139,11 +140,6 @@ export default gruTwoTierHeaderTable.extend({
         }
 
         let scoreCol = $('table tr.second-tier th.correct:first >span');
-        // scoreCol.parent().css('pointer-events', 'unset');
-        // let icn = scoreCol.find('i');
-        // let lbl = scoreCol.find('div');
-        // icn.css('display', 'none');
-        // lbl.removeClass('hidden');
 
         let icn = scoreCol.find('i:first'),
           lbl = scoreCol.find('div.col-label'),
@@ -153,6 +149,7 @@ export default gruTwoTierHeaderTable.extend({
 
         let sortIcn = scoreCol.find('.sortIcn');
         sortIcn.css('display', 'inline-block');
+        sortIcn.addClass('cursor-pointer');
         icn.css('display', 'none');
       }
     }
