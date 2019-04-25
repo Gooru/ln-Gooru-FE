@@ -84,7 +84,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'مصدر',
   'common.a-rubric': 'سلم تقييم',
   'common.all-completed': 'تم إنجاز الكل',
-  'common.an-assessment': 'تقييم',
+  'common.a-assessment': 'تقييم',
   'common.about': 'حول',
   'common.about-you': 'حولك',
   'common.about-me': 'حولي',

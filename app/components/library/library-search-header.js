@@ -103,6 +103,8 @@ export default Ember.Component.extend({
      */
     onSelectFilterBy(item) {
       const component = this;
+      component.get('selectedResourceTypes').clear();
+      component.get('selectedQuestionTypes').clear();
       component.set('activeContentType', item.get('type'));
       component.send('searchContent');
     },
@@ -110,6 +112,32 @@ export default Ember.Component.extend({
     showModal(item) {
       let component = this;
       component.sendAction('onShowModal', item);
+    },
+
+    selectResourceOption(item) {
+      let component = this;
+      let selectedResourceTypes = component.get('selectedResourceTypes');
+      if (selectedResourceTypes.includes(item)) {
+        selectedResourceTypes.removeObject(item);
+      } else {
+        selectedResourceTypes.pushObject(item);
+      }
+      component.send('searchContent');
+    },
+
+    selectQuestionOption(item) {
+      let component = this;
+      let selectedQuestionTypes = component.get('selectedQuestionTypes');
+      if (selectedQuestionTypes.includes(item)) {
+        selectedQuestionTypes.removeObject(item);
+      } else {
+        selectedQuestionTypes.pushObject(item);
+      }
+      component.send('searchContent');
+    },
+
+    goBack() {
+      window.history.back();
     }
   },
 

@@ -1,8 +1,6 @@
 <div class="header-container">
-  <div class="back">
-    {{#link-to 'libraries'}}
-      {{gru-icon name="arrow_back"}}
-    {{/link-to}}
+  <div class="back" {{action 'goBack'}}>
+    {{gru-icon name="arrow_back"}}
   </div>
   <div class="info-section">
     <div class="profile">
@@ -65,7 +63,7 @@
     {{/each}}
   </div>
   <div class="actions">
-    {{#unless isAnonymousUser}}
+    {{#if isMyProfile}}
       <div class="btn-group hidden-xs hidden-sm col-sm-2">
         <a href="#" class="btn btn-primary create-dropdown" data-toggle="dropdown"><span class="hidden-sm hidden-md">{{t "common.create"}}</span>{{gru-icon name="add" class="visible-sm-inline visible-md-inline symbol"}}</a>
         <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
@@ -78,9 +76,27 @@
           <li><a class="rubric" href="#" {{action "showModal" "content.modals.gru-rubric-new"}}><i></i>{{t "common.rubric"}}</a></li>
         </ul>
       </div>
-    {{/unless}}
+    {{/if}}
   </div>
 </div>
+{{#if (or (eq activeContentType 'question') (eq activeContentType 'resource'))}}
+  <div class="sub-filters-container">
+    <span class="title">Sub-Filter</span>
+    <div class="filters">
+      {{#if (eq activeContentType 'resource')}}
+        {{ search.gru-resource-options
+         selectedOptionTypes=selectedResourceTypes
+         onSelectedOption="selectResourceOption"
+       }}
+      {{else}}
+        {{ search.gru-question-options
+           selectedOptionTypes=selectedQuestionTypes
+           onSelectedOption="selectQuestionOption"
+        }}
+      {{/if}}
+    </div>
+  </div>
+{{/if}}
 <div class="filters">
   {{search.search-by-filter
       isShow=isShow

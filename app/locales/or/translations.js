@@ -95,7 +95,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'ଏକ ଉତ୍ସ',
   'common.a-rubric': 'ଏକ ଶୀର୍ଷକ',
   'common.all-completed': 'ସମସ୍ତ ସଂପୂର୍ଣ୍ଣ',
-  'common.an-assessment': 'ଏକ ମୂଲ୍ୟାଙ୍କନ',
+  'common.a-assessment': 'ଏକ ମୂଲ୍ୟାଙ୍କନ',
   'common.about': 'ବିଷୟରେ',
   'common.about-you': 'ଆପଣଙ୍କ ବିଷୟରେ',
   'common.about-me': 'ମୋ ବିଷୟରେ',

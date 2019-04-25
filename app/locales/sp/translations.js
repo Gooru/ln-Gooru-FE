@@ -92,7 +92,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'un recurso',
   'common.a-rubric': 'Una rúbrica',
   'common.all-completed': 'Todo completado',
-  'common.an-assessment': 'Una evaluación',
+  'common.a-assessment': 'Una evaluación',
   'common.about': 'Acerca de',
   'common.about-you': 'Acerca de ti',
   'common.about-me': 'About Me',

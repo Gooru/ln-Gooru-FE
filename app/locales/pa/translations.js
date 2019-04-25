@@ -90,7 +90,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'ਇੱਕ ਸਰੋਤ',
   'common.a-rubric': 'ਇੱਕ ਚਰਬੀਕਾਰ',
   'common.all-completed': 'ਸਭ ਨੂੰ ਪੂਰਾ ਕੀਤਾ',
-  'common.an-assessment': 'ਇੱਕ ਮੁਲਾਂਕਣ',
+  'common.a-assessment': 'ਇੱਕ ਮੁਲਾਂਕਣ',
   'common.about': 'ਬਾਰੇ',
   'common.about-you': 'ਤੁਹਾਡੇ ਬਾਰੇ',
   'common.about-me': 'ਮੇਰੇ ਬਾਰੇ ਵਿੱਚ',

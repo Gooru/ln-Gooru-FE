@@ -3,12 +3,14 @@
      selectedFilters=selectedFilters
      activeContentType=activeContentType
      library=library
+     isMyProfile=isMyProfile
      profile=profile
+     selectedResourceTypes=selectedResourceTypes
+     selectedQuestionTypes=selectedQuestionTypes
      onShowModal="showModal"
      isAnonymousUser=session.isAnonymous
      onSearch="doSearch"
    }}
-  {{log profile}}
   {{#if isLoading}}
     {{three-bounce-spinner}}
   {{else}}
@@ -21,6 +23,7 @@
        isMyProfile=isMyProfile
        onRemixQuestion="remixQuestion"
        onRemixCourse="remixCourse"
+       onShowCreateModal="onShowModal"
        updateUserClasses=updateClass
        searchResults=searchResults
        profile=profile

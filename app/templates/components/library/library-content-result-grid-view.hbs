@@ -1,8 +1,8 @@
-<div class="contents {{activeContentType}}">
+<div class="contents {{activeContentType}} {{unless searchResults 'no-content'}}">
   {{#each searchResults as |content|}}
     <div class="card">
       {{#if (eq activeContentType 'course')}}
-        {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
+        {{#if (eq type 'library')}}
           {{new-cards.gru-standard-card
           profile=profile
           isCourse=true
@@ -11,6 +11,18 @@
           content=content
           onOpenIndependentPlayer="playIndependentContent"
           onOpenContentPlayer="playCourse"
+          onBookmarkContent="onBookmarkCourse"
+        }}
+        {{else if  (eq type 'gooru-catalog')}}
+          {{new-cards.gru-standard-card
+          content=content
+          cardSize="md"
+          profile=profile
+          isCourse=true
+          novisibility=true
+          onOpenContentPlayer="playCourse"
+          onOpenIndependentPlayer="playIndependentContent"
+          onRemixCourse="remixCourse"
           onBookmarkContent="onBookmarkCourse"
         }}
         {{else}}
@@ -33,7 +45,7 @@
         {{/if}}
       {{/if}}
       {{#if (eq activeContentType 'assessment')}}
-        {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
+        {{#if (eq type 'library')}}
           {{new-cards.gru-standard-card
             profile=profile
             isOnProfile=true
@@ -44,6 +56,18 @@
             onBookmarkContent="onBookmarkContent"
             onPreviewContent="onPreviewContent"
           }}
+        {{else if  (eq type 'gooru-catalog')}}
+          {{new-cards.gru-standard-card
+            content=content
+            cardSize="md"
+            isCollection=true
+            profile=profile
+            novisibility=true
+            onOpenContentPlayer="openContentPlayer"
+            onOpenIndependentPlayer="onIndependentPlayer"
+            onBookmarkContent="onBookmarkContent"
+            onPreviewContent="onPreviewContent"
+            }}
         {{else}}
           {{new-cards.gru-standard-card
             profile=profile
@@ -62,7 +86,7 @@
         {{/if}}
       {{/if}}
       {{#if (eq activeContentType 'collection')}}
-        {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
+        {{#if (eq type 'library') }}
           {{new-cards.gru-standard-card
               profile=profile
               isOnProfile=true
@@ -73,6 +97,18 @@
               onBookmarkContent="onBookmarkContent"
               onPreviewContent="onPreviewContent"
             }}
+        {{else if  (eq type 'gooru-catalog')}}
+          {{new-cards.gru-standard-card
+          content=content
+          cardSize="md"
+          isCollection=true
+          profile=profile
+          novisibility=true
+          onOpenContentPlayer="openCollectionContentPlayer"
+          onOpenIndependentPlayer="onIndependentPlayer"
+          onBookmarkContent="onBookmarkContent"
+          onPreviewContent="onPreviewContent"
+          }}
         {{else}}
           {{new-cards.gru-standard-card
               profile=profile
@@ -92,7 +128,7 @@
         {{/if}}
       {{/if}}
       {{#if (eq activeContentType 'resource')}}
-        {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
+        {{#if (eq type 'library')}}
           {{new-cards.gru-resource-card
           resource=content
           onRemixQuestion="remixQuestion"
@@ -102,6 +138,14 @@
           editEnabled=false
           partnerLibrary=true
           isOnProfile=true
+        }}
+        {{else if (eq type 'gooru-catalog')}}
+          {{new-cards.gru-resource-card
+          resource=content
+          profile=profile
+          isSearch=true
+          onRemixQuestion="remixQuestion"
+          onPlayResource="playResource"
         }}
         {{else}}
           {{new-cards.gru-resource-card
@@ -115,7 +159,7 @@
         {{/if}}
       {{/if}}
       {{#if (eq activeContentType 'question')}}
-        {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
+        {{#if (eq type 'library')}}
           {{new-cards.gru-resource-card
             resource=content
             addEnabled=true
@@ -126,6 +170,14 @@
             profile=profile
             partnerLibrary=true
             isOnProfile=true
+          }}
+        {{else if  (eq type 'gooru-catalog')}}
+          {{new-cards.gru-resource-card
+            resource=content
+            profile=profile
+            isSearch=true
+            onRemixQuestion="remixQuestion"
+            onPlayResource="playResource"
           }}
         {{else}}
           {{new-cards.gru-resource-card
@@ -144,11 +196,8 @@
         {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
           {{new-cards.gru-resource-card
           resource=content
-          editEnabled=isMyProfile
-          onEditResource='editRubric'
           isRubric=true
           profile=profile
-          isOnProfile=true
         }}
         {{else}}
           {{new-cards.gru-resource-card
@@ -162,10 +211,17 @@
       {{/if}}
     </div>
   {{else}}
-    <div class="no-content panel add-content panel-default">
+    <div class="panel add-content panel-default">
       <div class="panel-body">
         {{gru-icon name='explore'}}
-        <p>{{{t "common.no-content"}}}</p>
+        {{#if isMyProfile}}
+          <p>{{{t "common.add-content-prompt" type=(t (concat "common.a-" activeContentType))}}}</p>
+          <button class="btn btn-success" {{action "showModal" (concat "content.modals.gru-" activeContentType "-new")}}>
+            {{t "common.add"}} {{t (concat "common." activeContentType)}}
+          </button>
+        {{else}}
+          <p>{{{t (concat "common.no-" activeContentType "s-to-display")}}}</p>
+        {{/if}}
       </div>
     </div>
   {{/each}}
@@ -175,5 +231,6 @@
     showPullUp=isShowContentPreview
     previewContentId=previewContent.id
     previewContentType=previewContentType
+    isRemixableContent=isRemixableContent
   }}
 {{/if}}

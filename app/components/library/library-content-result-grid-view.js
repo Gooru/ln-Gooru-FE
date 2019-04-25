@@ -22,6 +22,8 @@ export default Ember.Component.extend({
 
   searchResults: null,
 
+  isRemixableContent: Ember.computed.equal('type', 'gooru-catalog'),
+
   didRender() {
     let component = this;
     component.handleShowMoreData();
@@ -42,8 +44,9 @@ export default Ember.Component.extend({
     //Action triggered when click play icon
     openCollectionContentPlayer: function(collection) {
       const component = this;
+      let type = collection.get('format') || 'collection';
       component.set('previewContent', collection);
-      component.set('previewContentType', collection.get('format'));
+      component.set('previewContentType', type);
       component.set('isShowContentPreview', true);
     },
 
@@ -229,6 +232,10 @@ export default Ember.Component.extend({
      */
     playResource: function(resource) {
       this.get('router').transitionTo('content.resources.play', resource.get('id'));
+    },
+
+    showModal(type) {
+      this.sendAction('onShowCreateModal', type);
     }
   },
 

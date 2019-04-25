@@ -93,7 +93,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'ஒரு வள',
   'common.a-rubric': 'ஒரு ரூபிக்',
   'common.all-completed': 'எல்லாம் முடிந்தது',
-  'common.an-assessment': 'மதிப்பீடு',
+  'common.a-assessment': 'மதிப்பீடு',
   'common.about': 'பற்றி',
   'common.about-you': 'உன்னை பற்றி',
   'common.about-me': 'என்னை பற்றி',

@@ -45,6 +45,10 @@ export default Ember.Controller.extend(ModalMixin, {
 
   isLoading: false,
 
+  selectedResourceTypes: Ember.A([]),
+
+  selectedQuestionTypes: Ember.A([]),
+
   /**
    * @property {Class[]} Active class without course
    */
@@ -139,6 +143,10 @@ export default Ember.Controller.extend(ModalMixin, {
       this.send('updateUserClasses');
     },
 
+    onShowModal(type) {
+      this.send('showModal', type);
+    },
+
     /**
      * On card remix question button click
      * @param {Question} question
@@ -153,7 +161,9 @@ export default Ember.Controller.extend(ModalMixin, {
     doPaginate() {
       const controller = this;
       if (controller.get('selectedFilters').length > 0 ||
-        controller.get('searchTerm') || controller.get('type') === 'gooru-catalog') {
+        controller.get('searchTerm') || controller.get('selectedQuestionTypes').length > 0 ||
+        controller.get('selectedResourceTypes').length > 0 ||
+        controller.get('type') === 'gooru-catalog') {
         controller.loadMoreDataForSearch();
       } else {
         if (controller.get('type') === 'library') {
@@ -169,7 +179,9 @@ export default Ember.Controller.extend(ModalMixin, {
     const controller = this;
     controller.get('searchResults').clear();
     if (controller.get('selectedFilters').length > 0 ||
-      controller.get('searchTerm') || controller.get('type') === 'gooru-catalog') {
+      controller.get('searchTerm') || controller.get('selectedQuestionTypes').length > 0 ||
+      controller.get('selectedResourceTypes').length > 0 ||
+      controller.get('type') === 'gooru-catalog') {
       controller.fetchSearchContent();
     } else {
       if (controller.get('type') === 'library') {
@@ -370,7 +382,7 @@ export default Ember.Controller.extend(ModalMixin, {
     };
     let filters = controller.filterBuilder();
 
-    if (controller.get('isTeacher') && controller.get('activeContentType') !== 'course' &&
+    if (!controller.get('selectedFilters').length > 0 && controller.get('isTeacher') && controller.get('activeContentType') !== 'course' &&
       controller.get('activeContentType') !== 'rubric') {
       filters['flt.audience'] = 'All Students,Teachers';
     }
@@ -379,9 +391,23 @@ export default Ember.Controller.extend(ModalMixin, {
       filters.scopeTargetNames = controller.get('library.shortName');
     } else if (controller.get('type') === 'my-content') {
       filters.scopeKey = 'my-content';
+
+      if (!controller.get('isMyProfile')) {
+        filters['flt.owner'] = controller.get('profile.username');
+      }
+
     } else {
       filters.scopeKey = 'open-all';
     }
+
+    if (controller.get('activeContentType') === 'resource') {
+      params.formats = controller.get('selectedResourceTypes');
+    }
+
+    if (controller.get('activeContentType') === 'question') {
+      params.formats = controller.get('selectedQuestionTypes');
+    }
+
     filters['flt.publishStatus'] = 'published,unpublished';
     params.filters = filters;
     return params;

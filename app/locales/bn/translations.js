@@ -89,7 +89,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'একটি সম্পদ',
   'common.a-rubric': 'একটি রুব্রিক',
   'common.all-completed': 'সব সম্পন্ন',
-  'common.an-assessment': 'একটি মূল্যায়ন',
+  'common.a-assessment': 'একটি মূল্যায়ন',
   'common.about': 'সম্পর্কিত',
   'common.about-you': 'তোমার সম্পর্কে',
   'common.about-me': 'আমার সম্পর্কে',

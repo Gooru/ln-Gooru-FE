@@ -84,7 +84,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'એક સાધન',
   'common.a-rubric': 'રુબ્રિક',
   'common.all-completed': 'બધું પૂરું થયું',
-  'common.an-assessment': 'મૂલ્યાંકન',
+  'common.a-assessment': 'મૂલ્યાંકન',
   'common.about': 'લગભગ',
   'common.about-you': 'તમારા વિશે',
   'common.about-me': 'મારા વિશે',

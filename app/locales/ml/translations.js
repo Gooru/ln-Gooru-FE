@@ -92,7 +92,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'ഒരു വിഭവം',
   'common.a-rubric': 'ഒരു റബ്രിക്ക്',
   'common.all-completed': 'എല്ലാം പൂർത്തിയായി',
-  'common.an-assessment': 'ഒരു വിലയിരുത്തൽ',
+  'common.a-assessment': 'ഒരു വിലയിരുത്തൽ',
   'common.about': 'കുറിച്ച്',
   'common.about-you': 'നിന്നേക്കുറിച്ച്',
   'common.about-me': 'എന്നെ പറ്റി',
