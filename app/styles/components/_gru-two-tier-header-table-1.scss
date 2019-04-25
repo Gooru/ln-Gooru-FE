@@ -122,7 +122,17 @@ $left-cell-margin: 20vw;
             font-size: 17px;
             opacity: 1 !important;
             color: black;
+            display: inline-block;
+            cursor: pointer;
             // margin-top: -10px;
+          }
+          .sortIcn {
+            display: inline-block;
+            > i {
+              font-size: 19px;
+              // line-height: 27px;
+              vertical-align: -5px;
+            }
           }
         }
 
