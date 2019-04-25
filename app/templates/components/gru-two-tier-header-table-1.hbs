@@ -14,7 +14,7 @@
       {{/if}}
       {{#each firstTierHeaders as |firstTierHeader firstTierIndex|}}
         {{#each secondTierHeaders as |secondTierHeader secondTierIndex|}}
-          <th scope="col" class="{{secondTierHeader.value}} hidden" {{action "updateSortCriteria" firstTierIndex secondTierIndex}}>
+          <th scope="col" class="{{secondTierHeader.value}} hidden" {{action "updateSortCriteria" 0 1}}>
             {{#if isCollectionType}}
               <span>
                 {{!-- data-container="body" --}}
