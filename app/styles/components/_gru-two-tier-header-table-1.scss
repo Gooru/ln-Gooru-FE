@@ -1,7 +1,7 @@
 $left-cell-margin: 20vw;
 .gru-two-tier-header-table-1 {
   $table-cell-width: auto;
-  // width: 100vw;
+  width: 77vw;
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 1px;
@@ -10,7 +10,9 @@ $left-cell-margin: 20vw;
   .score {
     background-color: unset !important; // remove inline color applied
   }
-
+  .cursor-pointer {
+    cursor: pointer;
+  }
   .std-circle {
     margin-left: 2px;
     margin-top: 12px;
@@ -122,7 +124,17 @@ $left-cell-margin: 20vw;
             font-size: 17px;
             opacity: 1 !important;
             color: black;
+            display: inline-block;
+            cursor: pointer;
             // margin-top: -10px;
+          }
+          .sortIcn {
+            display: inline-block;
+            > i {
+              font-size: 19px;
+              // line-height: 27px;
+              vertical-align: -5px;
+            }
           }
         }
 
@@ -136,7 +148,7 @@ $left-cell-margin: 20vw;
 
         &.row-header {
           text-align: $tab-float-dir;
-          padding-top: 15px;
+          // padding-top: 15px;
           border-bottom: unset;
           font-weight: 400;
           font-size: 17px;
