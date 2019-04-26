@@ -1,4 +1,4 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent, test, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import T from 'gooru-web/tests/helpers/assert';
 
@@ -35,7 +35,7 @@ test('View-Layout-Picker Layout', function(assert) {
   T.exists(assert, $viewLayoutPicker.find('.view_list'), 'Missing list icon');
 });
 
-test('Select option', function(assert) {
+skip('Select option', function(assert) {
   assert.expect(3);
 
   this.on('parentAction', function(option) {

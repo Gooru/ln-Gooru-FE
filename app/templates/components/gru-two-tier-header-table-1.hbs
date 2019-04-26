@@ -14,16 +14,27 @@
       {{/if}}
       {{#each firstTierHeaders as |firstTierHeader firstTierIndex|}}
         {{#each secondTierHeaders as |secondTierHeader secondTierIndex|}}
-          <th scope="col" class="{{secondTierHeader.value}} hidden" {{action "updateSortCriteria" firstTierIndex secondTierIndex}}>
+          <th scope="col" class="{{secondTierHeader.value}} hidden" {{action "updateSortCriteria" 0 1}}>
             {{#if isCollectionType}}
               <span>
-                <i class="{{firstTierHeader.type}}-icon" />
-                <div class="col-label hidden ">{{firstTierHeader.type}} </div>
+                {{!-- data-container="body" --}}
+                <i class="{{firstTierHeader.type}}-icon" data-toggle="tooltip" data-html="true" title="{{firstTierHeader.title}}" data-placement="auto" />
+                <div class="col-label hidden ">{{firstTierHeader.type}}</div>
+                <div class='sortIcn hidden'>
+                  {{gru-icon name='swap_vert' }}
+                  {{gru-icon name='arrow_upward' }}
+                  {{gru-icon name='arrow_downward' }}
+                </div>
               </span>
             {{else}}
               <span>
                 {{gru-icon name='help_outline' }}
                 <div class="col-label hidden">{{secondTierHeader.label}} </div>
+                <div class='sortIcn hidden'>
+                  {{gru-icon name='swap_vert' }}
+                  {{gru-icon name='arrow_upward' }}
+                  {{gru-icon name='arrow_downward' }}
+                </div>
               </span>
             {{/if}}
           </th>
