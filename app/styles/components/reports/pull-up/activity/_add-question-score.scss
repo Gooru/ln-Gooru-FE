@@ -29,6 +29,10 @@
       .question-accordion {
         justify-self: right;
       }
+
+      &.scored {
+        background-color: #9ad5f2;
+      }
     }
     .toggle-container {
       background-color: $white;
@@ -82,28 +86,52 @@
 
         &.multi-score {
           display: flex;
-          height: 38px;
 
           .arrow-left,
           .arrow-right {
-            width: 38px;
-            border-right: 1px solid #cccccc;
+            width: 56px;
+            height: 56px;
+            text-align: center;
+            cursor: pointer;
+            i {
+              color: #a1a1a1;
+              font-size: 45px;
+              line-height: 56px;
+            }
           }
           .scores-list {
-            max-width: 150px;
+            max-width: 336px;
             overflow-x: auto;
             display: -webkit-box;
+            border-top: 1px solid #979797;
+            border-bottom: 1px solid #979797;
             .question-score {
-              width: 38px;
+              width: 56px;
+              height: 56px;
               text-align: center;
-              border-right: 1px solid #cccccc;
-              font-size: 12px;
+              border-right: 1px solid #979797;
+              font-size: 14px;
               font-weight: bold;
               color: #425e67;
+              opacity: 0.5;
+              line-height: 56px;
+              cursor: pointer;
+
+              &:first-child {
+                border-left: 1px solid #979797;
+              }
+
+              &.active-score,
+              &:hover {
+                opacity: 1;
+                background-color: #4f95f6;
+                color: $white;
+              }
             }
 
+            //Hide scroll bar but it still scrollable
             &::-webkit-scrollbar {
-              width: 0;
+              display: none;
             }
           }
         }
@@ -122,7 +150,7 @@
     &.expanded {
       .question-header-container {
         border: none;
-        padding: 15px 15px 0 15px;
+        height: 56px;
         .question-icon {
           display: block;
         }

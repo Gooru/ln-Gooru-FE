@@ -439,25 +439,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           'activityMembers',
           classActivityStudents.sortBy('firstName')
         );
-
-        if (item.format === 'assessment') {
-          component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-          component.set('isShowCollectionPerformanceEntryPullUp', false);
-          component.set('isShowAssessmentPerformanceEntryPullUp', true);
-        } else if (item.format === 'assessment-external') {
-          component.set('isShowAssessmentPerformanceEntryPullUp', false);
-          component.set('isShowCollectionPerformanceEntryPullUp', false);
-          component.set('isShowExternalAssessmentPeformanceEntryPullUp', true);
-        } else if (item.format === 'collection') {
-          component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-          component.set('isShowAssessmentPerformanceEntryPullUp', false);
-          component.set('isShowCollectionPerformanceEntryPullUp', true);
-        } else {
-          component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-          component.set('isShowAssessmentPerformanceEntryPullUp', false);
-          component.set('isShowCollectionPerformanceEntryPullUp', false);
-          component.set('isShowExternalCollectionPeformanceEntryPullUp', true);
-        }
+        component.set('isShowAddData', true);
       });
       component.set('selectedItem', item);
       component.set('selectedActivity', activity);
@@ -466,10 +448,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
     onClosePerformanceEntry() {
       let controller = this;
-      controller.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-      controller.set('isShowAssessmentPerformanceEntryPullUp', false);
-      controller.set('isShowCollectionPerformanceEntryPullUp', false);
-      controller.set('isShowExternalCollectionPeformanceEntryPullUp', false);
+      controller.set('isShowAddData', false);
       controller.loadData();
       controller.get('classController').fetchDcaSummaryPerformance();
     },
@@ -1028,13 +1007,15 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   fetchActivityUsers(activityId) {
     let controller = this;
     let classId = controller.get('classId');
-    return Ember.RSVP.hash({
-      activityMembers: controller
-        .get('classActivityService')
-        .fetchUsersForClassActivity(classId, activityId)
-    }).then(({ activityMembers }) => {
-      return activityMembers;
-    });
+    return Ember.RSVP
+      .hash({
+        activityMembers: controller
+          .get('classActivityService')
+          .fetchUsersForClassActivity(classId, activityId)
+      })
+      .then(({ activityMembers }) => {
+        return activityMembers;
+      });
   },
 
   fetchAssessmentsMasteryAccrual() {
@@ -1061,31 +1042,33 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       return assessment.get('id');
     });
     if (assessmentIds.length > 0) {
-      Ember.RSVP.hash({
-        assessmentsMasteryAccrual: controller
-          .get('assessmentService')
-          .assessmentsMasteryAccrual(assessmentIds)
-      }).then(({ assessmentsMasteryAccrual }) => {
-        if (!controller.get('isDestroyed')) {
-          assessments.forEach(assessment => {
-            let assessmentId = assessment.get('id');
-            let assessmentMasteryAccrual = assessmentsMasteryAccrual.findBy(
-              assessmentId
-            );
-            if (assessmentMasteryAccrual) {
-              let masteryAccrualCompetencies = assessmentMasteryAccrual.get(
+      Ember.RSVP
+        .hash({
+          assessmentsMasteryAccrual: controller
+            .get('assessmentService')
+            .assessmentsMasteryAccrual(assessmentIds)
+        })
+        .then(({ assessmentsMasteryAccrual }) => {
+          if (!controller.get('isDestroyed')) {
+            assessments.forEach(assessment => {
+              let assessmentId = assessment.get('id');
+              let assessmentMasteryAccrual = assessmentsMasteryAccrual.findBy(
                 assessmentId
               );
-              if (masteryAccrualCompetencies) {
-                assessment.set(
-                  'masteryAccrualCompetencies',
-                  masteryAccrualCompetencies
+              if (assessmentMasteryAccrual) {
+                let masteryAccrualCompetencies = assessmentMasteryAccrual.get(
+                  assessmentId
                 );
+                if (masteryAccrualCompetencies) {
+                  assessment.set(
+                    'masteryAccrualCompetencies',
+                    masteryAccrualCompetencies
+                  );
+                }
               }
-            }
-          });
-        }
-      });
+            });
+          }
+        });
     }
   }
 });

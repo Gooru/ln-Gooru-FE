@@ -1,98 +1,21 @@
 <div class="student-performance-data-container">
-  <div class="left-container">
-    <div class="students-container">
-      <div class="search-student">
-        {{#if isShowClearStudentSearch}}
-          <span class="clear-search-student" {{action "onClearSearchStudent"}}>
-            {{gru-icon name="clear"}}
-          </span>
-        {{/if}}
-        {{input
-          class = "search-student-input"
-          type = "text"
-          key-up = "onSearchStudent"
-          value = studentSearchPattern
-          placeholder = "search students"
-          }}
-        <span class="search-icon">{{gru-icon name="search"}}</span>
-      </div>
-      <div class="student-list-container">
-        {{#each studentsList as |student|}}
-          <div class="student-info-container {{if (eq activeStudent.id student.id) 'active-student'}}" {{action "onSelectStudent" student}}>
-            <div class="student-thumbnail" style="background-image: url({{student.avatarUrl}})"></div>
-            <div class="student-name">{{student.fullName}}</div>
-          </div>
-        {{/each}}
-      </div>
-    </div>
-  </div>
-  <div class="right-container">
-    {{#if isCaptureQuestionScore}}
-      <div class="question-list-container">
-        {{isScoreSubmittedForAllQuestion}}
-        {{#each questions as |question seq|}}
-          {{reports.pull-up.activity.add-question-score
-            question = question
-            seq = seq
-            onToggleQuestion = "onToggleQuestion"
-          }}
-        {{/each}}
-        <div class="question-action-container">
-          <div class="save-score-btn action-btn {{if isEnableSaveNext 'enabled'}}" {{action "onClickSaveAndNext"}}>{{t 'common.save-next'}}</div>
-          <div class="cancel-btn action-btn" {{action "onClearQuestionScores"}}>{{t 'common.cancel'}}</div>
-        </div>
-      </div>
-    {{else}}
-      <div class="assessment-timespent-container">
-        <div class="input-label">
-          {{t 'teacher-landing.class.class-activities.input-timespent'}}
-        </div>
-        <div class="timepicker">
-          {{cards.gru-timepicker-card hour=maxHour minute=maxMinute onChangeTime="onChangeTime"}}
-        </div>
-        <div class="action-container">
-          <div class="confirm-btn {{unless isValidMaxTimespent 'disable-event'}}" {{action "onSubmitMaxTimespent"}}>
-            {{t 'common.confirm'}}
-          </div>
-        </div>
-      </div>
-    {{/if}}
-  </div>
-
+  {{#if isAssessmentPerformanceEntry}}
+    {{reports.pull-up.activity.assessment-performance-data
+      course = course
+      activityData = activityData
+      classId = classId
+      assessment = collection
+      students = students
+      onClosePullUp = "onClosePullUp"
+    }}
+  {{else}}
+    {{reports.pull-up.activity.collection-performance-data
+      course = course
+      activityData = activityData
+      classId = classId
+      collection = collection
+      students = students
+      onClosePullUp = "onClosePullUp"
+    }}
+  {{/if}}
 </div>
-
-{{#if (or isShowWarningMessage isShowSaveInformation)}}
-  <div class="back-shadow"></div>
-  <div class="warning-popup {{if isShowWarningMessage 'warning-dialog' 'information-dialog'}}">
-    <div class="warning-info-container">
-      <div class="warning-icon">
-        {{gru-icon name="error"}}
-        <span class="warning-label">{{t 'warning'}}</span>
-      </div>
-      <div class="warning-message">
-        {{#if isShowSaveInformation}}
-          {{t 'teacher-landing.class.class-activities.info-message' studentName = activeStudent.fullName}}
-        {{else if isShowWarningMessage}}
-          {{t 'teacher-landing.class.class-activities.warning-message' studentName = activeStudent.fullName}}
-        {{/if}}
-      </div>
-    </div>
-    <div class="warning-action-container">
-      {{#if isShowSaveInformation}}
-        <div class="back-action action-btn" {{action "onDismissInfoPopup"}}>
-          {{t 'common.no'}}
-        </div>
-        <div class="ok-action action-btn" {{action "onAcceptSaveAndNext"}}>
-          {{t 'common.yes'}}
-        </div>
-      {{else if isShowWarningMessage}}
-        <div class="back-action action-btn" {{action "onDismissWarning"}}>
-          {{t 'common.no'}}
-        </div>
-        <div class="ok-action action-btn" {{action "onAcceptWarning"}}>
-          {{t 'common.yes'}}
-        </div>
-      {{/if}}
-    </div>
-  </div>
-{{/if}}

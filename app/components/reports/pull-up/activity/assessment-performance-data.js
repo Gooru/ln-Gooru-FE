@@ -1,17 +1,19 @@
 import Ember from 'ember';
-import { generateUUID, validateTimespent } from 'gooru-web/utils/utils';
+import {
+  generateUUID,
+  validateTimespent,
+  validatePercentage
+} from 'gooru-web/utils/utils';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
-  classNames: ['add-data', 'add-student-performance-data'],
+  classNames: ['add-data', 'assessment-performance-data'],
 
   // -------------------------------------------------------------------------
   // Serevices
   assessmentService: Ember.inject.service('api-sdk/assessment'),
-
-  questionService: Ember.inject.service('api-sdk/question'),
 
   performanceService: Ember.inject.service('api-sdk/performance'),
 
@@ -23,15 +25,12 @@ export default Ember.Component.extend({
   // Events
   didInsertElement() {
     const component = this;
-    const contentFormat = component.get('contentFormat');
-    if (
-      contentFormat === CONTENT_TYPES.ASSESSMENT ||
-      contentFormat === CONTENT_TYPES.EXTERNAL_ASSESSMENT
-    ) {
-      component.set('isAssessmentPerformanceEntry', true);
+    if (component.get('isAssessment')) {
+      component.loadAssessmentData();
     } else {
-      component.set('isCollectionPerformanceEntry', true);
+      component.loadExternalAssessmentData();
     }
+    component.resetStudentScores();
   },
 
   // -------------------------------------------------------------------------
@@ -41,12 +40,20 @@ export default Ember.Component.extend({
     onSelectStudent(student) {
       const component = this;
       const activeStudent = component.get('activeStudent');
-      if (activeStudent && activeStudent.get('id') !== student.get('id')) {
-        if (!component.doCheckQuestionScoreSubmitted()) {
-          component.set('isShowWarningMessage', true);
-        } else {
-          component.set('isShowSaveInformation', true);
+      if (component.get('isSessionStarted')) {
+        if (activeStudent && activeStudent.get('id') !== student.get('id')) {
+          if (
+            !component.doCheckQuestionScoreSubmitted() &&
+            component.get('isAssessment')
+          ) {
+            component.set('isShowWarningMessage', true);
+          } else {
+            component.set('isShowSaveInformation', true);
+          }
         }
+      } else {
+        component.set('activeStudent', student);
+        component.set('isSessionStarted', false);
       }
       component.set('activeStudentTemp', student);
     },
@@ -68,6 +75,7 @@ export default Ember.Component.extend({
     //Action triggered when toggle question
     onToggleQuestion(questionSeq) {
       const component = this;
+      component.set('isSessionStarted', true);
       component.toggleQuestionVisibility(questionSeq);
     },
 
@@ -75,23 +83,6 @@ export default Ember.Component.extend({
     onDismissWarning() {
       const component = this;
       component.set('isShowWarningMessage', false);
-    },
-
-    //Action triggered when submit question scores
-    onAcceptSaveAndNext() {
-      const component = this;
-      component.submitQuestionDataSelectNextStudent();
-      component.set('isShowSaveInformation', false);
-    },
-
-    //Action triggered when click save and next
-    onClickSaveAndNext() {
-      const component = this;
-      if (component.doCheckQuestionScoreSubmitted()) {
-        component.submitQuestionDataSelectNextStudent();
-      } else {
-        component.set('isShowWarningMessage', true);
-      }
     },
 
     //Action triggered when clear question scores
@@ -102,6 +93,44 @@ export default Ember.Component.extend({
       component.scrollToFirstQuestion();
       component.set('activeStudent', component.get('activeStudentTemp'));
       component.set('isShowWarningMessage', false);
+      component.set('isSessionStarted', false);
+    },
+
+    //Action triggered when submit question scores
+    onAcceptSaveAndNext() {
+      const component = this;
+      if (component.get('isAssessment')) {
+        component.submitQuestionDataSelectNextStudent();
+      } else {
+        component.submitExternalAssessmentDataSelectNextStudent();
+      }
+      component.set('isSessionStarted', false);
+      component.set('isShowSaveInformation', false);
+    },
+
+    //Action triggered when dismiss infor popup
+    onDismissInfoPopup() {
+      const component = this;
+      if (component.get('isAssessment')) {
+        component.resetQuestionScores();
+        component.toggleQuestionVisibility();
+        component.scrollToFirstQuestion();
+      } else {
+        component.set('activeStudent.score', null);
+      }
+      component.set('activeStudent', component.get('activeStudentTemp'));
+      component.set('isShowSaveInformation', false);
+      component.set('isSessionStarted', false);
+    },
+
+    //Action triggered when click save and next
+    onClickSaveAndNext() {
+      const component = this;
+      if (component.doCheckQuestionScoreSubmitted()) {
+        component.submitQuestionDataSelectNextStudent();
+      } else {
+        component.set('isShowWarningMessage', true);
+      }
     },
 
     //Action triggered when enter timespent
@@ -134,29 +163,60 @@ export default Ember.Component.extend({
       component.set('studentsList', component.get('students'));
     },
 
-    //Action triggered when dismiss infor popup
-    onDismissInfoPopup() {
+    //Action triggered when click cancel button
+    onClearQuestionScores() {
       const component = this;
-      component.set('activeStudent', component.get('activeStudentTemp'));
       component.resetQuestionScores();
       component.toggleQuestionVisibility();
       component.scrollToFirstQuestion();
-      component.set('isShowSaveInformation', false);
     },
 
-    onClosePullUp() {
-      this.sendAction('onClosePullUp');
+    //Action triggered when submit external assessment student's score
+    onSubmitExternalAssessmentStudentScore() {
+      const component = this;
+      component.submitExternalAssessmentDataSelectNextStudent();
+    },
+
+    //Actio triggered when submit external assessment max score
+    onSubmitExternalAssessmentMaxScore() {
+      const component = this;
+      component.set('isCaptureExternalAssessmentStudentScore', true);
+    },
+
+    //Action triggered when type external assessment student score
+    onEnterExternalAssessmentStudentScore() {
+      const component = this;
+      const externalAssessmentMaxScore = parseFloat(
+        component.get('externalAssessmentMaxScore')
+      );
+      const studentScore = parseFloat(component.get('activeStudent.score'));
+      component.set('isSessionStarted', true);
+      component.set(
+        'isValidExternalAssessmentStudentScore',
+        studentScore >= 0 && studentScore <= externalAssessmentMaxScore
+      );
+    },
+
+    //Action triggered when enter external assessment max score
+    onEnterExternalAssessmentMaxScore() {
+      const component = this;
+      const externalAssessmentMaxScore = component.get(
+        'externalAssessmentMaxScore'
+      );
+      component.set(
+        'isValidExternalAssessmentMaxScore',
+        validatePercentage(externalAssessmentMaxScore)
+      );
     }
   },
 
   // -------------------------------------------------------------------------
   // Properties
 
-  isAssessmentPerformanceEntry: false,
-
-  isCollectionPerformanceEntry: false,
-
-  contentFormat: Ember.computed.alias('collection.format'),
+  isAssessment: Ember.computed.equal(
+    'assessment.format',
+    CONTENT_TYPES.ASSESSMENT
+  ),
 
   /**
    * @property {Boolean} isEnableSaveNext
@@ -201,9 +261,9 @@ export default Ember.Component.extend({
   students: Ember.A([]),
 
   /**
-   * @property {Object} collection
+   * @property {Object} assessment
    */
-  collection: null,
+  assessment: null,
 
   /**
    * @property {Number} questionTimespent
@@ -265,6 +325,41 @@ export default Ember.Component.extend({
    */
   unAnsweredQuestionCount: 0,
 
+  /**
+   * @property {Number} externalAssessmentMaxScore
+   */
+  externalAssessmentMaxScore: 0,
+
+  /**
+   * @property {Boolean} isCaptureExternalAssessmentStudentScore
+   */
+  isCaptureExternalAssessmentStudentScore: false,
+
+  /**
+   * @property {Boolean} isValidExternalAssessmentMaxScore
+   */
+  isValidExternalAssessmentMaxScore: false,
+
+  /**
+   * @property {Boolean} isValidExternalAssessmentStudentScore
+   */
+  isValidExternalAssessmentStudentScore: false,
+
+  /**
+   * @property {Boolean} isLastStudentActive
+   */
+  isLastStudentActive: Ember.computed('activeStudent', function() {
+    const component = this;
+    const activeStudent = component.get('activeStudent');
+    const students = component.get('students');
+    return students.indexOf(activeStudent) === students.length - 1;
+  }),
+
+  /**
+   * @property {Boolean} isSessionStarted
+   */
+  isSessionStarted: false,
+
   // -------------------------------------------------------------------------
   // Functions
 
@@ -283,16 +378,41 @@ export default Ember.Component.extend({
    */
   submitQuestionDataSelectNextStudent() {
     const component = this;
-    component.submitAssessmentPerformanceData();
-    component.resetQuestionScores();
-    component.toggleQuestionVisibility();
-    let students = component.get('students');
-    let activeStudentIndex = students.indexOf(component.get('activeStudent'));
-    if (activeStudentIndex !== students.length - 1) {
-      component.set('activeStudent', students.objectAt(activeStudentIndex + 1));
-      component.scrollToFirstQuestion();
-      component.set('activeStudentIndex', activeStudentIndex + 1);
-    }
+    component.submitAssessmentPerformanceData().then(function() {
+      component.resetQuestionScores();
+      component.toggleQuestionVisibility();
+      let students = component.get('students');
+      let activeStudentIndex = students.indexOf(component.get('activeStudent'));
+      if (activeStudentIndex !== students.length - 1) {
+        component.set(
+          'activeStudent',
+          students.objectAt(activeStudentIndex + 1)
+        );
+        component.scrollToFirstQuestion();
+      } else {
+        component.sendAction('onClosePullUp');
+      }
+    });
+  },
+
+  /**
+   * @function submitExternalAssessmentDataSelectNextStudent
+   * Method to submit external assessment score and select next student
+   */
+  submitExternalAssessmentDataSelectNextStudent() {
+    const component = this;
+    component.submitExternalAssessmentPerformanceData().then(function() {
+      let students = component.get('students');
+      let activeStudentIndex = students.indexOf(component.get('activeStudent'));
+      if (activeStudentIndex !== students.length - 1) {
+        component.set(
+          'activeStudent',
+          students.objectAt(activeStudentIndex + 1)
+        );
+      } else {
+        component.sendAction('onClosePullUp');
+      }
+    });
   },
 
   /**
@@ -300,9 +420,9 @@ export default Ember.Component.extend({
    */
   loadAssessmentData() {
     let component = this;
-    let assessment = component.get('collection');
+    let assessment = component.get('assessment');
     return component
-      .fetchAssessmentData(assessment.id)
+      .fetchAssessmentData(assessment.get('id'))
       .then(function(assessmentData) {
         let questions = assessmentData
           ? assessmentData.get('children')
@@ -314,12 +434,35 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function loadExternalAssessmentData
+   * Method to load external assessment data
+   */
+  loadExternalAssessmentData() {
+    let component = this;
+    let assessment = component.get('assessment');
+    return component
+      .fetchExternalAssessmentData(assessment.get('id'))
+      .then(function(assessmentData) {
+        component.set('assessment', assessmentData);
+      });
+  },
+
+  /**
    * @function fetchAssessmentData
    */
   fetchAssessmentData(assessmentId) {
     let component = this;
     let assessmentService = component.get('assessmentService');
     return assessmentService.readAssessment(assessmentId);
+  },
+
+  /**
+   * @function fetchExternalAssessmentData
+   */
+  fetchExternalAssessmentData(assessmentId) {
+    let component = this;
+    let assessmentService = component.get('assessmentService');
+    return assessmentService.readExternalAssessment(assessmentId);
   },
 
   /**
@@ -338,6 +481,26 @@ export default Ember.Component.extend({
       })
       .then(() => {
         component.resetQuestionScores();
+        component.set('activeStudent', component.get('activeStudentTemp'));
+        component.set('activeStudent.isSubmitted', true);
+      });
+  },
+
+  /**
+   * @function submitAssessmentPerformanceData
+   */
+  submitExternalAssessmentPerformanceData() {
+    const component = this;
+    const performanceService = component.get('performanceService');
+    return Ember.RSVP
+      .hash({
+        studentPerformanceUpdated: Ember.RSVP.resolve(
+          performanceService.updateCollectionOfflinePerformance(
+            component.getExternalAssessmentDataParams()
+          )
+        )
+      })
+      .then(() => {
         component.set('activeStudent', component.get('activeStudentTemp'));
         component.set('activeStudent.isSubmitted', true);
       });
@@ -392,7 +555,7 @@ export default Ember.Component.extend({
     let activityId = activityData.get('id');
     let conductedOn = new Date(activityData.activation_date) || new Date();
     let classId = component.get('classId');
-    let assessment = component.get('collection');
+    let assessment = component.get('assessment');
     let courseId = component.get('course') ? component.get('course').id : null;
     questions.map(question => {
       let resourceData = {
@@ -422,5 +585,46 @@ export default Ember.Component.extend({
       additionalContext: btoa(JSON.stringify({ dcaContentId: activityId }))
     };
     return studentPerformanceData;
+  },
+
+  /**
+   * @function getExternalAssessmentDataParams
+   * Method to construct external assessment data params
+   */
+  getExternalAssessmentDataParams() {
+    let component = this;
+    let student = component.get('activeStudent');
+    let conductedOn =
+      new Date(component.get('activityData.activation_date')) || new Date();
+    let maxScore = component.get('externalAssessmentMaxScore');
+    let classId = component.get('classId');
+    let activityId = component.get('activityData.id');
+    let studentPerformanceData = {
+      student_id: student.get('id'),
+      tenant_id: component.get('session.tenantId') || null,
+      collection_type: 'assessment-external',
+      session_id: generateUUID(),
+      time_zone: component.get('timeZone'),
+      class_id: classId,
+      collection_id: component.get('assessment.id'),
+      partner_id: component.get('session.partnerId') || null,
+      content_source: component.get('contentSource'),
+      score: parseInt(student.get('score')) || 0,
+      max_score: parseInt(maxScore) || 0,
+      time_spent: 0,
+      conducted_on: conductedOn.toISOString(),
+      additionalContext: btoa(JSON.stringify({ dcaContentId: activityId }))
+    };
+    return studentPerformanceData;
+  },
+
+  /**
+   * @function resetStudentScores
+   * Method to reset student scores
+   */
+  resetStudentScores() {
+    const component = this;
+    const students = component.get('students');
+    students.map(student => student.set('score', null));
   }
 });
