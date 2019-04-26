@@ -37,16 +37,33 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   libraryService: Ember.inject.service('api-sdk/library'),
 
-  queryParams: ['libraryId', 'type', 'profileId'],
+  queryParams: ['libraryId', 'type', 'profileId', 'isBack'],
 
+  // -------------------------------------------------------------------------
+  // Properties
+  /**
+   * @property {String} activeContentType
+   */
   activeContentType: 'course',
 
+  /**
+   * @property {Object} library
+   */
   library: null,
 
+  /**
+   * @property {Boolean} isLoading
+   */
   isLoading: false,
 
+  /**
+   * @property {Array[]}
+   */
   selectedResourceTypes: Ember.A([]),
 
+  /**
+   * @property {Array[]}
+   */
   selectedQuestionTypes: Ember.A([]),
 
   /**
@@ -62,7 +79,6 @@ export default Ember.Controller.extend(ModalMixin, {
           .filterBy('courseId', null) : [];
     }
   ),
-
 
   /**
    * Current user id
@@ -82,9 +98,7 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   isMyProfile: Ember.computed('profile', function() {
     let controller = this;
-    return (
-      controller.get('profile') ? controller.get('profile').get('id') === controller.get('currentUserId') : null
-    );
+    return controller.get('profileId') === controller.get('currentUserId');
   }),
 
   /**
@@ -116,6 +130,9 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   selectedFilters: Ember.A([]),
 
+  /**
+   * @property {Array} searchResults
+   */
   searchResults: Ember.A([]),
 
   actions: {
@@ -389,13 +406,13 @@ export default Ember.Controller.extend(ModalMixin, {
     if (controller.get('type') === 'library') {
       filters.scopeKey = 'open-library';
       filters.scopeTargetNames = controller.get('library.shortName');
+      filters['flt.publishStatus'] = 'published,unpublished';
     } else if (controller.get('type') === 'my-content') {
       filters.scopeKey = 'my-content';
-
+      filters['flt.publishStatus'] = 'published,unpublished';
       if (!controller.get('isMyProfile')) {
-        filters['flt.owner'] = controller.get('profile.username');
+        filters['flt.creatorId'] = controller.get('profile.id');
       }
-
     } else {
       filters.scopeKey = 'open-all';
     }
@@ -408,7 +425,6 @@ export default Ember.Controller.extend(ModalMixin, {
       params.formats = controller.get('selectedQuestionTypes');
     }
 
-    filters['flt.publishStatus'] = 'published,unpublished';
     params.filters = filters;
     return params;
   },

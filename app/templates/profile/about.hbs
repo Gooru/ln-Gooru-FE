@@ -120,7 +120,7 @@
             </div>
             <div class="row">
               <div class="col-xs-12 col-sm-12">
-                {{#link-to "library-search" (query-params profileId=profile.id  type="my-content")}}
+                {{#link-to "library-search" (query-params profileId=profile.id  type="my-content" isBack=true)}}
                   <h5 class="library-link">{{profile.firstName}}{{profile.lastName}}'s Content Library </h5>
                 {{/link-to}}
               </div>

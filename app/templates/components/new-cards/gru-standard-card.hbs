@@ -200,7 +200,7 @@
   <div class="panel-body cca-description">
     <div class="{{if isAssessment 'author' 'remixed-by'}}">
       {{#if isAssessment}}
-        {{#link-to 'library-search' (query-params type="my-content" profileId=content.owner.id) class="pointer" tagName="div"}}
+        {{#link-to 'library-search' (query-params type="my-content" profileId=content.owner.id  isBack=true) class="pointer" tagName="div"}}
           <span class="title">
             {{t (if content.sameOwnerAndCreator "common.created-by" "common.remixed-by")}}
           </span>
@@ -209,7 +209,7 @@
         {{/link-to}}
       {{else}}
         {{#if content.owner}}
-          {{#link-to 'library-search' (query-params type="my-content" profileId=content.owner.id) class="pointer" tagName="div" }}
+          {{#link-to 'library-search' (query-params type="my-content" profileId=content.owner.id  isBack=true) class="pointer" tagName="div" }}
             <span class="title">
               {{t (if content.sameOwnerAndCreator "common.created-by" "common.remixed-by")}}
             </span>

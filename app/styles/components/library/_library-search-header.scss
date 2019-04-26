@@ -434,6 +434,8 @@
         opacity: 0.5;
         font-size: 12px;
         color: #37424b;
+        height: 100%;
+        align-items: center;
 
         .label {
           opacity: 0.3;
@@ -446,15 +448,16 @@
         }
 
         &.active {
+          border-bottom: 2px solid #00a7e4;
+
           .icon {
             opacity: 1;
             color: #00a7e4;
           }
 
           span {
-            opacity: 1;
             color: #00a7e4;
-            border-bottom: 2px solid #00a7e4;
+            opacity: 1;
           }
         }
 
@@ -513,6 +516,22 @@
             -webkit-mask-size: cover;
             @extend %bg-container;
           }
+        }
+      }
+    }
+  }
+
+  .filters {
+    .search-by-filter {
+      max-height: none;
+
+      .search-panel {
+        .search-content {
+          height: calc(100vh - 294px);
+        }
+
+        .apply-filter {
+          position: relative;
         }
       }
     }

@@ -137,7 +137,12 @@ export default Ember.Component.extend({
     },
 
     goBack() {
-      window.history.back();
+      const component = this;
+      if (component.get('useBackUrl')) {
+        window.history.back();
+      } else {
+        component.get('router').transitionTo('libraries');
+      }
     }
   },
 

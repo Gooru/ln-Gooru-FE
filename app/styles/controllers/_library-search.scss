@@ -14,8 +14,10 @@
   }
 
   .panel-container {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     height: 100%;
+    width: 100%;
 
     .search-result-container {
       overflow: auto;

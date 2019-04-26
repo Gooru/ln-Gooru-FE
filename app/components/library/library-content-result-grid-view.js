@@ -14,6 +14,11 @@ export default Ember.Component.extend({
   bookmarkService: Ember.inject.service('api-sdk/bookmark'),
 
   /**
+   * @property {Service} I18N service
+   */
+  i18n: Ember.inject.service(),
+
+  /**
    * @requires service:notifications
    */
   notifications: Ember.inject.service(),
@@ -22,7 +27,9 @@ export default Ember.Component.extend({
 
   searchResults: null,
 
-  isRemixableContent: Ember.computed.equal('type', 'gooru-catalog'),
+  isRemixableContent: Ember.computed('type', function() {
+    return this.get('type') === 'gooru-catalog' || this.get('type') === 'library';
+  }),
 
   didRender() {
     let component = this;
@@ -276,7 +283,7 @@ export default Ember.Component.extend({
         contentType: bookmark.get('contentType')
       }) :
       this.get('i18n').t('common.bookmarked-success');
-    const independentLearningURL = this.get('target.router').generate(
+    const independentLearningURL = this.get('router').generate(
       'student-independent-learning'
     );
     const buttonText = this.get('i18n').t('common.take-me-there');

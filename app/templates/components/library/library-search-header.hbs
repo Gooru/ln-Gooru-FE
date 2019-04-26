@@ -4,10 +4,10 @@
   </div>
   <div class="info-section">
     <div class="profile">
-      {{#if library}}
+      {{#if (eq type 'library')}}
         <img class="image" src="{{library.image}}" />
         <span class="library-name">{{library.shortName}}</span>
-      {{else if profile}}
+      {{else if (eq type 'my-content')}}
         <img class="image" src="{{profile.avatarUrl}}" />
         <span class="my-content-title">My Content</span>
       {{else}}

@@ -2,7 +2,9 @@ import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import ModalMixin from 'gooru-web/mixins/modal';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 
 /**
  * Collection, Assessment and Course card
@@ -152,7 +154,9 @@ export default Ember.Component.extend(ModalMixin, {
   // Events
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -178,9 +182,9 @@ export default Ember.Component.extend(ModalMixin, {
    * @property {contentType} content type
    */
   contentType: Ember.computed('content', function() {
-    return this.get('content.isCollection')
-      ? CONTENT_TYPES.COLLECTION
-      : CONTENT_TYPES.ASSESSMENT;
+    return this.get('content.isCollection') ?
+      CONTENT_TYPES.COLLECTION :
+      CONTENT_TYPES.ASSESSMENT;
   }),
 
   /**
@@ -361,10 +365,10 @@ export default Ember.Component.extend(ModalMixin, {
    */
   studentCount: function(studentCount, classroom) {
     let classStudentCount = studentCount;
-    return classStudentCount && Ember.keys(classStudentCount).length
-      ? classStudentCount[classroom.get('id')]
-        ? classStudentCount[classroom.get('id')]
-        : 0
-      : 0;
+    return classStudentCount && Ember.keys(classStudentCount).length ?
+      classStudentCount[classroom.get('id')] ?
+        classStudentCount[classroom.get('id')] :
+        0 :
+      0;
   }
 });

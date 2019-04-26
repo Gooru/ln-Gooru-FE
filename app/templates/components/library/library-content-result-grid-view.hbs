@@ -82,6 +82,7 @@
             onEditContent="editAssessment"
             onOpenIndependentPlayer="playIndependentContent"
             onBookmarkContent="onBookmarkContent"
+            onPreviewContent="onPreviewContent"
           }}
         {{/if}}
       {{/if}}
@@ -124,6 +125,7 @@
               onEditContent="editCollection"
               onOpenIndependentPlayer="playIndependentContent"
               onBookmarkContent="onBookmarkContent"
+              onPreviewContent="onPreviewContent"
             }}
         {{/if}}
       {{/if}}
@@ -230,6 +232,7 @@
   {{reports.pull-up.gru-collection-preview
     showPullUp=isShowContentPreview
     previewContentId=previewContent.id
+    showPrintPreview=false
     previewContentType=previewContentType
     isRemixableContent=isRemixableContent
   }}

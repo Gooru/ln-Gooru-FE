@@ -1,12 +1,54 @@
 .library-search {
+  .library-search-header {
+    @media screen and (max-width: $screen-sm - 1) {
+      .filters-container,
+      .sub-filters-container {
+        grid-template-columns: none;
+
+        .actions,
+        .title {
+          display: none;
+        }
+
+        .filters {
+          .gru-resource-options {
+            .options {
+              ul {
+                li {
+                  .btn-option {
+                    span.text {
+                      display: none;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .filters {
+          .list {
+            span {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .library-content-result-grid {
     .contents {
-      grid-template-columns: repeat(3, 1fr);
-
-      .no-content,
-      .three-bounce-spinner {
-        grid-column-start: 2;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (max-width: $screen-sm - 1) {
+      .contents {
+        grid-template-columns: repeat(1, 1fr);
       }
+    }
+
+    .three-bounce-spinner {
+      grid-column-start: 2;
     }
   }
 }
