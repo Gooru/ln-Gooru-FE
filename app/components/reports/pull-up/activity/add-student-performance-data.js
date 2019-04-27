@@ -8,18 +8,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-  didInsertElement() {
-    const component = this;
-    const contentFormat = component.get('contentFormat');
-    if (
-      contentFormat === CONTENT_TYPES.ASSESSMENT ||
-      contentFormat === CONTENT_TYPES.EXTERNAL_ASSESSMENT
-    ) {
-      component.set('isAssessmentPerformanceEntry', true);
-    } else {
-      component.set('isCollectionPerformanceEntry', true);
-    }
-  },
 
   // -------------------------------------------------------------------------
   // Actions
@@ -32,9 +20,12 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
 
-  isAssessmentPerformanceEntry: false,
-
-  isCollectionPerformanceEntry: false,
-
-  contentFormat: Ember.computed.alias('collection.format')
+  isAsessmentAddData: Ember.computed('collection.format', function() {
+    const component = this;
+    const contentFormat = component.get('collection.format');
+    return (
+      contentFormat === CONTENT_TYPES.ASSESSMENT ||
+      contentFormat === CONTENT_TYPES.EXTERNAL_ASSESSMENT
+    );
+  })
 });
