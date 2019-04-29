@@ -1,8 +1,14 @@
-import { test } from 'qunit';
+import {
+  test
+} from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
-import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
+import {
+  authenticateSession
+} from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
-import { KEY_CODES } from 'gooru-web/config/config';
+import {
+  KEY_CODES
+} from 'gooru-web/config/config';
 
 moduleForAcceptance('Acceptance | Edit Collection', {
   beforeEach: function() {
@@ -85,8 +91,8 @@ test('Click share button and check clipboard functionality', function(assert) {
       T.exists(assert, $input, 'Missing readonly input');
       assert.ok(
         $input
-          .val()
-          .indexOf('/player/all-question-types-assessment-id?type=collection'),
+        .val()
+        .indexOf('/player/all-question-types-assessment-id?type=collection'),
         'Missing input url'
       );
 
@@ -144,7 +150,7 @@ test('Delete Collection', function(assert) {
               var $deleteButton = $deleteContentModal.find('button.delete');
               click($deleteButton);
               andThen(function() {
-                assert.equal(currentURL(), '/id-for-pochita/content/courses');
+                assert.equal(currentURL(), '/library-search?profileId=id-for-pochita&type=my-content');
               });
             });
           });

@@ -272,7 +272,7 @@
       {{#if isOnProfile}}
         {{#if (and profile isMyProfile)}}
           <div class="course-icon-btn cca-edit" title="Edit" data-toggle="tooltip">
-            <a {{action "editContent"}} class="edit-btn course-mode-edit">{{gru-icon name="mode_edit"}}</a>
+            <a {{action "editContent"}} class="edit-btn course-mode-edit {{if (eq content.format 'collection-external') 'disable-event'}}">{{gru-icon name="mode_edit"}}</a>
           </div>
           <!-- {{#unless content.isVisibleOnProfile }}
             <div class="visibility course-add-btn"  title="{{t 'common.visibility-tooltip'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
