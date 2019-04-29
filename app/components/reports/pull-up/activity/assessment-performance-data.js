@@ -512,7 +512,10 @@ export default Ember.Component.extend({
   resetQuestionScores() {
     const component = this;
     let questions = component.get('questions');
-    questions.map(question => question.set('score', null));
+    questions.map(question => {
+      question.set('score', null);
+      question.set('isScored', false);
+    });
   },
 
   /**
