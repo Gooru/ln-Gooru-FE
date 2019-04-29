@@ -20,12 +20,12 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
 
-  isAsessmentAddData: Ember.computed('collection.format', function() {
+  isAsessmentAddData: Ember.computed('contentType', function() {
     const component = this;
-    const contentFormat = component.get('collection.format');
+    const contentType = component.get('contentType');
     return (
-      contentFormat === CONTENT_TYPES.ASSESSMENT ||
-      contentFormat === CONTENT_TYPES.EXTERNAL_ASSESSMENT
+      contentType === CONTENT_TYPES.ASSESSMENT ||
+      contentType === CONTENT_TYPES.EXTERNAL_ASSESSMENT
     );
   })
 });

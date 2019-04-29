@@ -441,6 +441,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         );
         component.set('isShowAddData', true);
       });
+      component.set('addDataContentType', item.get('format'));
       component.set('selectedItem', item);
       component.set('selectedActivity', activity);
       component.set('isRepeatEntry', isRepeatEntry);
@@ -449,7 +450,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     onClosePerformanceEntry() {
       let controller = this;
       controller.set('isShowAddData', false);
-      controller.loadData();
+      controller.fetchActivityPerformanceSummary(
+        controller.get('selectedActivity')
+      );
       controller.get('classController').fetchDcaSummaryPerformance();
     },
 
@@ -847,6 +850,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     }
   ),
 
+  /**
+   * @property {Boolean} isShowAddData
+   */
+  isShowAddData: false,
+
+  /**
+   * @property {String} addDataContentType
+   */
+  addDataContentType: '',
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -893,6 +906,48 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           let date = moment().format('YYYY-MM-DD');
           controller.handleScrollToSpecificDate(date, true);
         }, 1000);
+      });
+  },
+
+  /**
+   * @function fetchActivityPerformanceSummary
+   * Method to fetch given activity performance summary
+   */
+  fetchActivityPerformanceSummary(activity) {
+    const controller = this;
+    const classActivityService = controller.get('classActivityService');
+    const classId = controller.get('classId');
+    const forYear = controller.get('forYear');
+    const forMonth = controller.get('forMonth');
+    const startDate = moment(`${forYear}-${forMonth}-01`).format('YYYY-MM-DD');
+    const endDate = moment(startDate)
+      .endOf('month')
+      .format('YYYY-MM-DD');
+    let classActivities = controller.get('classActivities');
+    return Ember.RSVP
+      .hash({
+        activityPerformance: classActivityService.findClassActivitiesPerformanceSummary(
+          classId,
+          Ember.A([activity]),
+          startDate,
+          endDate
+        )
+      })
+      .then(({ activityPerformance }) => {
+        activityPerformance = activityPerformance.objectAt(0);
+        let dateWiseClassActivities = classActivities.findBy(
+          'added_date',
+          activityPerformance.get('added_date')
+        );
+        let classActivityItems = dateWiseClassActivities.get('classActivities');
+        let selectedActivityIndex = classActivityItems.indexOf(
+          activityPerformance
+        );
+        classActivityItems.splice(
+          selectedActivityIndex,
+          1,
+          activityPerformance
+        );
       });
   },
 
