@@ -324,9 +324,10 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
         return this.get('rubricService').deleteRubric(this.get('rubric.id'));
       }.bind(this),
       redirect: {
-        route: 'profile.content.courses',
+        route: 'library-search',
         params: {
-          id: myId
+          profileId: myId,
+          type: 'my-content'
         }
       }
     };

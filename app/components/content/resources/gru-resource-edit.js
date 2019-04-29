@@ -10,36 +10,37 @@ import {
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import ModalMixin from 'gooru-web/mixins/modal';
-import { isVideoURL } from 'gooru-web/utils/utils';
+import {
+  isVideoURL
+} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend(
   ContentEditMixin,
   ModalMixin,
-  ProtocolMixin,
-  {
+  ProtocolMixin, {
     // -------------------------------------------------------------------------
     // Dependencies
 
     session: Ember.inject.service('session'),
 
     /**
-   * @requires service:notifications
-   */
+     * @requires service:notifications
+     */
     notifications: Ember.inject.service(),
 
     /**
-   * @requires service:api-sdk/resource
-   */
+     * @requires service:api-sdk/resource
+     */
     resourceService: Ember.inject.service('api-sdk/resource'),
 
     /**
-   * @requires service:api-sdk/profile
-   */
+     * @requires service:api-sdk/profile
+     */
     profileService: Ember.inject.service('api-sdk/profile'),
 
     /**
-   * @property {Service} I18N service
-   */
+     * @property {Service} I18N service
+     */
     i18n: Ember.inject.service(),
 
     // -------------------------------------------------------------------------
@@ -54,8 +55,8 @@ export default Ember.Component.extend(
 
     actions: {
       /**
-     * Edit Content
-     */
+       * Edit Content
+       */
       editContent: function() {
         var resourceForEditing = this.get('resource').copy();
         this.set('tempResource', resourceForEditing);
@@ -65,22 +66,22 @@ export default Ember.Component.extend(
       },
 
       /**
-     * Select resource type
-     */
+       * Select resource type
+       */
       selectType: function(type) {
         this.set('tempResource.format', type);
       },
 
       /**
-     * Save updated content
-     */
+       * Save updated content
+       */
       updateContent: function() {
         this.saveContent();
       },
 
       /**
-     * Save settings profile visibility option
-     */
+       * Save settings profile visibility option
+       */
       publishToProfile: function() {
         var resourceForEditing = this.get('resource').copy();
         this.set('tempResource', resourceForEditing);
@@ -88,8 +89,8 @@ export default Ember.Component.extend(
       },
 
       /**
-     * Delete resource
-     */
+       * Delete resource
+       */
       deleteResource: function() {
         const myId = this.get('session.userId');
         const collection = this.get('collection');
@@ -103,9 +104,10 @@ export default Ember.Component.extend(
           }.bind(this),
           type: CONTENT_TYPES.RESOURCE,
           redirect: {
-            route: 'profile.content.courses',
+            route: 'library-search',
             params: {
-              id: myId
+              profileId: myId,
+              type: 'my-content'
             }
           }
         };
@@ -132,8 +134,7 @@ export default Ember.Component.extend(
             .then(function(collections) {
               component.send(
                 'showModal',
-                'content.modals.gru-add-to-collection',
-                {
+                'content.modals.gru-add-to-collection', {
                   content: component.get('resource'),
                   collections
                 },
@@ -154,8 +155,8 @@ export default Ember.Component.extend(
       },
 
       /**
-     * Remove tag data from the taxonomy list in tempUnit
-     */
+       * Remove tag data from the taxonomy list in tempUnit
+       */
       removeTag: function(taxonomyTag) {
         var tagData = taxonomyTag.get('data');
         this.get('tempResource.standards').removeObject(tagData);
@@ -186,8 +187,8 @@ export default Ember.Component.extend(
       },
 
       /**
-     * Remove century skill id
-     */
+       * Remove century skill id
+       */
       removeSkill: function(skillItemId) {
         this.get('tempResource.centurySkills').removeObject(skillItemId);
       }
@@ -197,69 +198,69 @@ export default Ember.Component.extend(
     // Properties
 
     /**
-   * Indicates if the url is a video url
-   * @property {boolean}
-   */
+     * Indicates if the url is a video url
+     * @property {boolean}
+     */
     isVideo: Ember.computed('resource.url', function() {
       return isVideoURL(this.get('resource.url'));
     }),
 
     /**
-   * Copy of the resource model used for editing.
-   * @property {Resource}
-   */
+     * Copy of the resource model used for editing.
+     * @property {Resource}
+     */
     tempResource: null,
 
     /**
-   * List of resource types
-   * @property {Array}
-   */
+     * List of resource types
+     * @property {Array}
+     */
     resourceTypes: RESOURCE_TYPES,
 
     /**
-   * Determines the name of the component that renders the resource
-   * @property {String}
-   */
+     * Determines the name of the component that renders the resource
+     * @property {String}
+     */
     resourceComponent: Ember.computed('resource.resourceType', function() {
       return RESOURCE_COMPONENT_MAP[this.get('resource.resourceType')];
     }),
 
     /**
-   *
-   * @property {TaxonomyRoot}
-   */
+     *
+     * @property {TaxonomyRoot}
+     */
     selectedSubject: null,
 
     /**
-   * i18n key for the standard/competency dropdown label
-   * @property {string}
-   */
+     * i18n key for the standard/competency dropdown label
+     * @property {string}
+     */
     standardLabelKey: Ember.computed('standardLabel', function() {
-      return this.get('standardLabel')
-        ? 'common.standards'
-        : 'common.competencies';
+      return this.get('standardLabel') ?
+        'common.standards' :
+        'common.competencies';
     }),
 
     /**
-   * @property {boolean}
-   */
+     * @property {boolean}
+     */
     standardLabel: true,
 
     /**
-   * @property {boolean}
-   */
+     * @property {boolean}
+     */
     standardDisabled: Ember.computed.not('selectedSubject'),
 
     /**
-   * @property {TaxonomyTag[]} List of taxonomy tags
-   */
+     * @property {TaxonomyTag[]} List of taxonomy tags
+     */
     tags: Ember.computed('resource.standards.[]', function() {
       return TaxonomyTag.getTaxonomyTags(this.get('resource.standards'), false);
     }),
 
     /**
-   * @property {TaxonomyTag[]} List of taxonomy tags
-   */
+     * @property {TaxonomyTag[]} List of taxonomy tags
+     */
     editableTags: Ember.computed('tempResource.standards.[]', function() {
       return TaxonomyTag.getTaxonomyTags(
         this.get('tempResource.standards'),
@@ -269,9 +270,9 @@ export default Ember.Component.extend(
     }),
 
     /**
-   * Toggle Options
-   * @property {Ember.Array}
-   */
+     * Toggle Options
+     * @property {Ember.Array}
+     */
     switchOptions: Ember.A([
       Ember.Object.create({
         label: 'On',
@@ -284,25 +285,25 @@ export default Ember.Component.extend(
     ]),
 
     /**
-   * Indicates if the current resource type is resource
-   * @property {boolean}
-   */
+     * Indicates if the current resource type is resource
+     * @property {boolean}
+     */
     isNotIframeUrl: Ember.computed('resource', function() {
       const resource = this.get('resource');
       return resource && resource.displayGuide;
     }),
 
     /**
-   * Indicates is the resource type edit option should be disabled
-   * @property {boolean}
-   */
+     * Indicates is the resource type edit option should be disabled
+     * @property {boolean}
+     */
     disableTypeEdition: Ember.computed('resource.url', function() {
       return isVideoURL(this.get('resource.url'));
     }),
 
     /**
-   * @property {CenturySkill[]} List of selected century skills
-   */
+     * @property {CenturySkill[]} List of selected century skills
+     */
     tempSelectedSkills: Ember.computed(
       'tempResource.centurySkills.[]',
       'centurySkills.[]',
@@ -314,8 +315,8 @@ export default Ember.Component.extend(
     ),
 
     /**
-   * @property {CenturySkill[]} List of selected century skills
-   */
+     * @property {CenturySkill[]} List of selected century skills
+     */
     selectedSkills: Ember.computed(
       'resource.centurySkills.[]',
       'centurySkills.[]',
@@ -327,9 +328,9 @@ export default Ember.Component.extend(
     ),
 
     /**
-   * List of Century Skills
-   * @prop {CenturySkill[]}
-   */
+     * List of Century Skills
+     * @prop {CenturySkill[]}
+     */
     centurySkills: Ember.A([]),
 
     // -------------------------------------------------------------------------
@@ -378,13 +379,15 @@ export default Ember.Component.extend(
     },
 
     /**
-   * Save Content
-   */
+     * Save Content
+     */
     saveContent: function() {
       const component = this;
       const collection = component.get('collection');
       var editedResource = component.get('tempResource');
-      editedResource.validate().then(function({ validations }) {
+      editedResource.validate().then(function({
+        validations
+      }) {
         if (validations.get('isValid')) {
           if (editedResource.description === '') {
             Ember.set(editedResource, 'description', null);
@@ -435,10 +438,10 @@ export default Ember.Component.extend(
     },
 
     /**
-   * Returns selectedCenturySkills data
-   * @param {Number[]} selectedCenturySkills ids
-   * @return {centurySkill[]}
-   */
+     * Returns selectedCenturySkills data
+     * @param {Number[]} selectedCenturySkills ids
+     * @return {centurySkill[]}
+     */
     selectedCenturySkillsData: function(selectedCenturySkillsIds) {
       var selectedCenturySkillsData = Ember.A([]);
       let centurySkills = this.get('centurySkills');
@@ -458,9 +461,9 @@ export default Ember.Component.extend(
     },
 
     /**
-    * Check it can be render inside player or not
-    * @property {boolean}
-    */
+     * Check it can be render inside player or not
+     * @property {boolean}
+     */
 
     isLinkOut: Ember.computed('resource', function() {
       let currentProtocol = this.get('currentProtocol');

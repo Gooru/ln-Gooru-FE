@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import ModalMixin from 'gooru-web/mixins/modal';
 import {
+  SEARCH_CONTEXT,
+  CONTENT_TYPES,
   ROLES
 } from 'gooru-web/config/config';
 export default Ember.Controller.extend(ModalMixin, {
@@ -14,13 +16,6 @@ export default Ember.Controller.extend(ModalMixin, {
    * @type {Controller} Application controller
    */
   appController: Ember.inject.controller('application'),
-
-  /**
-   * A link to the parent application controller
-   * @see controllers/application.js
-   * @property {ClassesModel}
-   */
-  myClasses: Ember.computed.alias('appController.myClasses'),
 
   /**
    * @requires service:api-sdk/search
@@ -37,10 +32,21 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   libraryService: Ember.inject.service('api-sdk/library'),
 
+  // -------------------------------------------------------------------------
+  // Attributes
+
   queryParams: ['libraryId', 'type', 'profileId', 'isBack'],
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * A link to the parent application controller
+   * @see controllers/application.js
+   * @property {ClassesModel}
+   */
+  myClasses: Ember.computed.alias('appController.myClasses'),
+
   /**
    * @property {String} activeContentType
    */
@@ -175,15 +181,19 @@ export default Ember.Controller.extend(ModalMixin, {
       this.send('showModal', 'content.modals.gru-question-remix', remixModel);
     },
 
+    /**
+     * Action will trigger when scroll reaches at bottom
+     * @param {Question} question
+     */
     doPaginate() {
       const controller = this;
       if (controller.get('selectedFilters').length > 0 ||
         controller.get('searchTerm') || controller.get('selectedQuestionTypes').length > 0 ||
         controller.get('selectedResourceTypes').length > 0 ||
-        controller.get('type') === 'gooru-catalog') {
+        controller.get('type') === SEARCH_CONTEXT.GOORU_CATALOG) {
         controller.loadMoreDataForSearch();
       } else {
-        if (controller.get('type') === 'library') {
+        if (controller.get('type') === SEARCH_CONTEXT.LIBRARY) {
           controller.loadMoreDataForLibrary();
         } else {
           controller.loadMoreDataForMyContent();
@@ -192,16 +202,19 @@ export default Ember.Controller.extend(ModalMixin, {
     }
   },
 
+  /**
+   * Method is used to fetch contents based on context
+   */
   fetchContent() {
     const controller = this;
     controller.get('searchResults').clear();
     if (controller.get('selectedFilters').length > 0 ||
       controller.get('searchTerm') || controller.get('selectedQuestionTypes').length > 0 ||
       controller.get('selectedResourceTypes').length > 0 ||
-      controller.get('type') === 'gooru-catalog') {
+      controller.get('type') === SEARCH_CONTEXT.GOORU_CATALOG) {
       controller.fetchSearchContent();
     } else {
-      if (controller.get('type') === 'library') {
+      if (controller.get('type') === SEARCH_CONTEXT.LIBRARY) {
         controller.fetchLibraryContent();
       } else {
         controller.fetchMyContent();
@@ -209,6 +222,9 @@ export default Ember.Controller.extend(ModalMixin, {
     }
   },
 
+  /**
+   * Method is used to fetch Search contents
+   */
   fetchSearchContent() {
     const controller = this;
     controller.set('isLoading', true);
@@ -227,6 +243,9 @@ export default Ember.Controller.extend(ModalMixin, {
       });
   },
 
+  /**
+   * Method is used to fetch my contents
+   */
   fetchMyContent() {
     const controller = this;
     controller.set('isLoading', true);
@@ -245,6 +264,9 @@ export default Ember.Controller.extend(ModalMixin, {
       });
   },
 
+  /**
+   * Method is used to fetch library contents
+   */
   fetchLibraryContent() {
     let controller = this;
     controller.set('isLoading', true);
@@ -264,6 +286,9 @@ export default Ember.Controller.extend(ModalMixin, {
       });
   },
 
+  /**
+   * Method is used to fetch more search contents
+   */
   loadMoreDataForSearch() {
     let controller = this;
     if (!controller.get('isPaginate')) {
@@ -286,6 +311,9 @@ export default Ember.Controller.extend(ModalMixin, {
     }
   },
 
+  /**
+   * Method is used to fetch more my contents
+   */
   loadMoreDataForMyContent() {
     let controller = this;
     if (!controller.get('isPaginate')) {
@@ -308,6 +336,9 @@ export default Ember.Controller.extend(ModalMixin, {
     }
   },
 
+  /**
+   * Method is used to fetch more library contents
+   */
   loadMoreDataForLibrary() {
     let controller = this;
     if (!controller.get('isPaginate')) {
@@ -331,6 +362,9 @@ export default Ember.Controller.extend(ModalMixin, {
     }
   },
 
+  /**
+   * Method is used to get library service
+   */
   getLibraryService() {
     let controller = this;
     const libraryId = controller.get('library.id');
@@ -342,6 +376,9 @@ export default Ember.Controller.extend(ModalMixin, {
     return controller.get('libraryService').fetchLibraryContent(libraryId, activeContentType, pagination);
   },
 
+  /**
+   * Method is used to get my content service
+   */
   getMyContentService() {
     let controller = this;
     let activeContentType = controller.get('activeContentType');
@@ -350,47 +387,55 @@ export default Ember.Controller.extend(ModalMixin, {
       page: controller.get('page'),
       pageSize: controller.get('defaultPageSize')
     };
-    if (activeContentType === 'collection') {
+    if (activeContentType === CONTENT_TYPES.COLLECTION) {
       return controller.get('profileService').readCollections(profile.get('id'), params);
-    } else if (activeContentType === 'assessment') {
+    } else if (activeContentType === CONTENT_TYPES.ASSESSMENT) {
       return controller.get('profileService').readAssessments(profile.get('id'), params);
-    } else if (activeContentType === 'course') {
+    } else if (activeContentType === CONTENT_TYPES.COURSE) {
       return controller.get('profileService').getCourses(profile, null, params);
-    } else if (activeContentType === 'resource') {
+    } else if (activeContentType === CONTENT_TYPES.RESOURCE) {
       return controller.get('profileService').readResources(profile.get('id'), params);
-    } else if (activeContentType === 'question') {
+    } else if (activeContentType === CONTENT_TYPES.QUESTION) {
       return controller.get('profileService').readQuestions(profile.get('id'), params);
     } else {
       return controller.get('profileService').readRubrics(profile.get('id'), params);
     }
   },
 
-
+  /**
+   * Method is used to get search service
+   */
   getSearchService() {
     let controller = this;
     let activeContentType = controller.get('activeContentType');
     let params = controller.getSearchParams();
     let term = controller.getSearchTerm() ? controller.getSearchTerm() : '*';
-    if (activeContentType === 'collection') {
+    if (activeContentType === CONTENT_TYPES.COLLECTION) {
       return controller.get('searchService').searchCollections(term, params);
-    } else if (activeContentType === 'assessment') {
+    } else if (activeContentType === CONTENT_TYPES.ASSESSMENT) {
       return controller.get('searchService').searchAssessments(term, params);
-    } else if (activeContentType === 'course') {
+    } else if (activeContentType === CONTENT_TYPES.COURSE) {
       return controller.get('searchService').searchCourses(term, params);
-    } else if (activeContentType === 'resource') {
+    } else if (activeContentType === CONTENT_TYPES.RESOURCE) {
       return controller.get('searchService').searchResources(term, params);
-    } else if (activeContentType === 'question') {
+    } else if (activeContentType === CONTENT_TYPES.QUESTION) {
       return controller.get('searchService').searchQuestions(term, params);
     } else {
       return controller.get('searchService').searchRubrics(term, params);
     }
   },
 
+  /**
+   * Method is used to get search text
+   */
   getSearchTerm() {
     let controller = this;
     return controller.get('searchTerm');
   },
 
+  /**
+   * Method is used to get search params
+   */
   getSearchParams() {
     let controller = this;
     let params = {
@@ -403,11 +448,11 @@ export default Ember.Controller.extend(ModalMixin, {
       controller.get('activeContentType') !== 'rubric') {
       filters['flt.audience'] = 'All Students,Teachers';
     }
-    if (controller.get('type') === 'library') {
+    if (controller.get('type') === SEARCH_CONTEXT.LIBRARY) {
       filters.scopeKey = 'open-library';
       filters.scopeTargetNames = controller.get('library.shortName');
       filters['flt.publishStatus'] = 'published,unpublished';
-    } else if (controller.get('type') === 'my-content') {
+    } else if (controller.get('type') === SEARCH_CONTEXT.MY_CONTENT) {
       filters.scopeKey = 'my-content';
       filters['flt.publishStatus'] = 'published,unpublished';
       if (!controller.get('isMyProfile')) {
@@ -417,11 +462,11 @@ export default Ember.Controller.extend(ModalMixin, {
       filters.scopeKey = 'open-all';
     }
 
-    if (controller.get('activeContentType') === 'resource') {
+    if (controller.get('activeContentType') === CONTENT_TYPES.RESOURCE) {
       params.formats = controller.get('selectedResourceTypes');
     }
 
-    if (controller.get('activeContentType') === 'question') {
+    if (controller.get('activeContentType') === CONTENT_TYPES.QUESTION) {
       params.formats = controller.get('selectedQuestionTypes');
     }
 
@@ -429,6 +474,9 @@ export default Ember.Controller.extend(ModalMixin, {
     return params;
   },
 
+  /**
+   * Method is used to build the filters
+   */
   filterBuilder() {
     const controller = this;
     let filters = {};
@@ -456,6 +504,9 @@ export default Ember.Controller.extend(ModalMixin, {
     return filters;
   },
 
+  /**
+   * Method is used to filter out selected items
+   */
   filterSelectedItems(keyField, keyValue) {
     const controller = this;
     let filterList = controller
@@ -465,6 +516,9 @@ export default Ember.Controller.extend(ModalMixin, {
     return controller.toArray(filterList, keyName);
   },
 
+  /**
+   * Method is used to join values by comma seperator
+   */
   toArray(filterList, key) {
     let params = filterList.map(filter => {
       return filter[key];
@@ -490,12 +544,16 @@ export default Ember.Controller.extend(ModalMixin, {
     return mappedContents;
   },
 
-
+  /**
+   * Method is used to reset properties
+   */
   resetProperties() {
     const controller = this;
     controller.get('selectedFilters').clear();
     controller.set('activeContentType', 'course');
     controller.set('searchTerm', null);
+    controller.set('profile', null);
+    controller.set('library', null);
     controller.get('searchResults').clear();
   }
 });

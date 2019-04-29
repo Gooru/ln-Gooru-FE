@@ -48,7 +48,7 @@ export default Ember.Component.extend({
    * Property to hold limit of selected filters to show
    */
   selectedFiltersLimit: Ember.computed('isMobileView', function() {
-    return this.get('isShowListView') ? 1 : 5;
+    return this.get('isMobileView') ? 7 : 5;
   }),
 
   /**
@@ -89,7 +89,6 @@ export default Ember.Component.extend({
       component.get('selectedFilters').removeObject(item);
       component.send('searchContent');
     },
-
     /**
      * Action get triggered when search button is clicked
      */

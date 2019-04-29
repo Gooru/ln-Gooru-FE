@@ -38,7 +38,7 @@ export default Ember.Route.extend({
 
   model: function(params) {
     const libraryId = params.libraryId;
-    const profileId = params.profileId || this.get('session.userId');
+    const profileId = params.profileId ? params.profileId : !this.get('session.isAnonymous') ? this.get('session.userId') : null;
     return Ember.RSVP.hash({
       library: libraryId ? this.get('libraryService').fetchById(libraryId) : null,
       profile: profileId ? this.get('profileService').readUserProfile(profileId) : null

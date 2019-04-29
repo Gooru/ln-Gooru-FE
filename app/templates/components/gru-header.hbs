@@ -82,7 +82,7 @@
                     {{/link-to}}
                   </li>
                   <li class="navbar-nav-list visible-md visible-lg content-link">
-                    {{#link-to 'profile.content.courses' session.userData.gooruUId}}
+                    {{#link-to 'library-search' (query-params type="my-content" profileId=session.userData.gooruUId)}}
                       <span>{{t "common.content-manager"}}</span>
                     {{/link-to}}
                   </li>
@@ -96,7 +96,7 @@
                         </a>
                       </li>
                       <li class="navbar-nav-list content-link">
-                        {{#link-to 'profile.content.courses' session.userData.gooruUId}}
+                        {{#link-to 'library-search' (query-params type="my-content" profileId=session.userData.gooruUId)}}
                           <a class="navbar-link">
                             {{t "common.content-manager"}}
                           </a>

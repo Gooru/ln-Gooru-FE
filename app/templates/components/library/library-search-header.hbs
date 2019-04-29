@@ -9,10 +9,10 @@
         <span class="library-name">{{library.shortName}}</span>
       {{else if (eq type 'my-content')}}
         <img class="image" src="{{profile.avatarUrl}}" />
-        <span class="my-content-title">My Content</span>
+        <span class="my-content-title">{{t "my-content"}}</span>
       {{else}}
         <img class="image" src="assets/gooru/images/gooru-logo.svg" />
-        <span class="my-content-title">Gooru Catalog</span>
+        <span class="my-content-title">{{t "common.gooru-catalog"}}</span>
       {{/if}}
     </div>
     <div class="search-input-section">
@@ -20,13 +20,13 @@
         <form {{action "searchContent" on="submit"}} class="form-inline">
           {{input type="text" class="form-control search-input"
               value=searchTerm
-              placeholder="Search for anything within the library…"
+              placeholder=(if isMobileView (t 'common.search-placeholder-text') (t 'library-search-placeholder'))
               spellcheck="true"
               id="searchInput"
             }}
         </form>
       </div>
-      <div class="filter-items">
+      <div class="filter-items hidden-xs">
         {{#each filters as |selectedFilter index|}}
           <div class="filter-item">
             <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
@@ -51,6 +51,35 @@
     <span>{{gru-icon name="search"}}</span>
     <span {{action 'toggleSearchFilter'}} class="filter">{{gru-icon name="filter_list"}}</span>
   </div>
+</div>
+<div class="filters">
+  <div class="hidden visible-xs">
+    <div class="filter-items {{unless filters 'hidden'}}">
+      {{#each filters as |selectedFilter index|}}
+        <div class="filter-item">
+          <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
+          <span class="clear" {{action 'clearFilter' selectedFilter}}> {{gru-icon name="close"}}</span>
+        </div>
+      {{/each}}
+      {{#if moreFilters}}
+        <span class="more-pointer">+{{moreFilters.length}}</span>
+      {{/if}}
+      <div class="more-filters hidden">
+        {{#each moreFilters as |moreFilter|}}
+          <div class="filter-item">
+            <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
+            <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  {{search.search-by-filter
+      isShow=isShow
+      activeContentType=activeContentType
+      onFilterApply="searchContent"
+      unCheckedItem=unCheckedItem
+      selectedFilters=selectedFilters}}
 </div>
 <div class="filters-container">
   <span class="title">{{t 'common.filter-by'}}</span>
@@ -81,7 +110,7 @@
 </div>
 {{#if (or (eq activeContentType 'question') (eq activeContentType 'resource'))}}
   <div class="sub-filters-container">
-    <span class="title">Sub-Filter</span>
+    <span class="title">{{t 'common.sub-filter'}}</span>
     <div class="filters">
       {{#if (eq activeContentType 'resource')}}
         {{ search.gru-resource-options
@@ -97,11 +126,3 @@
     </div>
   </div>
 {{/if}}
-<div class="filters">
-  {{search.search-by-filter
-      isShow=isShow
-      activeContentType=activeContentType
-      onFilterApply="searchContent"
-      unCheckedItem=unCheckedItem
-      selectedFilters=selectedFilters}}
-</div>

@@ -20,6 +20,7 @@ export default Object.assign(quizzesTranslations, {
   'errors.exclusion': '{{description}} आरक्षित है',
   'errors.invalid': '{{description}} अमान्य है',
   'my-content': 'My Content',
+  'common.sub-filter': 'Sub-Filter',
   'featured-libraries': 'featured libraries',
   'errors.confirmation': '{{description}} {{on}} से मेल नहीं खाता है',
   'errors.accepted': '{{विवरण}} स्वीकार किया जाना चाहिए',
@@ -78,6 +79,7 @@ export default Object.assign(quizzesTranslations, {
   'common.gooru-suggestions': 'Gooru सुझाव',
   'common.gooru-catalog': 'Gooru Catalog',
   'common.suggestion-made-to': 'सुझाव दिया गया',
+  'library-search-placeholder': 'Search for anything within the library…',
   'common.student-selected': 'छात्र चुने गए',
   'common.no-suggest-result-message': ' कोई मिलान सामग्री नहीं मिली',
   'common.no-suggest-results-message':

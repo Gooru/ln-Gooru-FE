@@ -3,11 +3,14 @@ import Bookmark from 'gooru-web/models/content/bookmark';
 import {
   CONTENT_TYPES,
   ROLES,
-  PLAYER_EVENT_SOURCE
+  PLAYER_EVENT_SOURCE,
+  SEARCH_CONTEXT
 } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
 
+  // -------------------------------------------------------------------------
+  // Dependencies
   /**
    * @requires service:api-sdk/bookmark
    */
@@ -23,19 +26,33 @@ export default Ember.Component.extend({
    */
   notifications: Ember.inject.service(),
 
+  // -------------------------------------------------------------------------
+  // Attributes
   classNames: ['library-content-result-grid'],
 
+  // -------------------------------------------------------------------------
+  // Properties
+  /**
+   * @property {Array} searchResults
+   */
   searchResults: null,
 
+  /**
+   * @property {Boolean} isRemixableContent
+   */
   isRemixableContent: Ember.computed('type', function() {
-    return this.get('type') === 'gooru-catalog' || this.get('type') === 'library';
+    return this.get('type') === SEARCH_CONTEXT.GOORU_CATALOG || this.get('type') === SEARCH_CONTEXT.LIBRARY;
   }),
 
+  // -------------------------------------------------------------------------
+  // Events
   didRender() {
     let component = this;
     component.handleShowMoreData();
   },
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
     //Action triggered when click on the play icon
     openContentPlayer: function(assessment) {
@@ -246,15 +263,24 @@ export default Ember.Component.extend({
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Methods
+
   handleShowMoreData() {
     let component = this;
+    let loading = false;
     let container = Ember.$('.library-content-result-grid');
     component.$(container).scroll(function() {
+      if (loading) {
+        return false;
+      }
       let scrollTop = Ember.$(container).scrollTop();
-      let listContainerHeight = Ember.$(container).height();
-      let isScrollReachedBottom = scrollTop === (component.$(container).prop('scrollHeight') - listContainerHeight);
+      let listContainerHeight = Ember.$(container).height() + 500;
+      let isScrollReachedBottom = scrollTop >= (component.$(container).prop('scrollHeight') - listContainerHeight);
       if (isScrollReachedBottom) {
+        loading = true;
         component.sendAction('paginateNext');
+        loading = false;
       }
     });
   },

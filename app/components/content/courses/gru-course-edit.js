@@ -100,9 +100,10 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
         }.bind(this),
         type: CONTENT_TYPES.COURSE,
         redirect: {
-          route: 'profile.content.courses',
+          route: 'library-search',
           params: {
-            id: myId
+            profileId: myId,
+            type: 'my-content'
           }
         }
       };

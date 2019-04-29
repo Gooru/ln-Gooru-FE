@@ -140,6 +140,79 @@
     -webkit-mask-repeat: no-repeat;
   }
 
+  .filters {
+    .filter-items {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      height: auto;
+      background-color: #f2f2f2;
+      padding: 5px 0 0 5px;
+      grid-gap: 5px;
+      margin-bottom: 10px;
+
+      .more-pointer {
+        cursor: pointer;
+      }
+
+      .popover-content {
+        display: grid;
+        grid-gap: 10px;
+      }
+
+      .filter-item {
+        border-radius: 9px;
+        justify-content: space-around;
+        display: flex;
+        height: 20px;
+        width: 80px;
+        padding: 10px;
+        margin-right: 5px;
+        align-items: center;
+        background-color: #898b8e;
+
+        .name {
+          font-size: 12px;
+          font-weight: bold;
+          line-height: 1.25;
+          text-align: right;
+          color: #ffffff;
+        }
+
+        .clear {
+          height: auto;
+          margin-left: 5px;
+
+          i {
+            height: 100%;
+            font-size: 12px;
+            color: #fff;
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .search-by-filter.active {
+      .search-panel {
+        .apply-filter {
+          height: 48px;
+          transition: height 0.25s ease-out;
+        }
+      }
+    }
+
+    .search-by-filter {
+      .search-panel {
+        .apply-filter {
+          height: 0;
+          position: fixed;
+          z-index: 2;
+          transition: height 0.25s ease-in;
+        }
+      }
+    }
+  }
+
   .sub-filters-container {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
     background-color: #ffffff;
@@ -182,7 +255,6 @@
               margin: 0 0.7em;
 
               .btn-option {
-                color: $gray-light;
                 border-radius: 0;
                 height: $optionsHeightSM;
                 background-color: $white;
@@ -245,7 +317,6 @@
 
             li {
               .btn-option {
-                color: $gray-light;
                 padding: 0 5px;
                 height: $optionsHeightSM;
                 background-color: $white;
@@ -431,33 +502,31 @@
         justify-content: center;
         list-style: none;
         cursor: pointer;
-        opacity: 0.5;
         font-size: 12px;
         color: #37424b;
         height: 100%;
         align-items: center;
 
         .label {
-          opacity: 0.3;
+          font-weight: normal;
           font-size: 12px;
           color: #37424b;
         }
 
         .icon {
-          opacity: 0.3;
+          opacity: 0.5;
         }
 
         &.active {
           border-bottom: 2px solid #00a7e4;
 
           .icon {
-            opacity: 1;
             color: #00a7e4;
           }
 
           span {
+            font-weight: bold;
             color: #00a7e4;
-            opacity: 1;
           }
         }
 
@@ -516,22 +585,6 @@
             -webkit-mask-size: cover;
             @extend %bg-container;
           }
-        }
-      }
-    }
-  }
-
-  .filters {
-    .search-by-filter {
-      max-height: none;
-
-      .search-panel {
-        .search-content {
-          height: calc(100vh - 294px);
-        }
-
-        .apply-filter {
-          position: relative;
         }
       }
     }

@@ -5,6 +5,7 @@
   background: #fff;
   max-height: calc(90vh - 100px);
   position: relative;
+  width: 100%;
 
   &.active {
     height: 100vh;

@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import CollectionEdit from 'gooru-web/components/content/collections/gru-collection-edit';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 
 export default CollectionEdit.extend({
@@ -55,7 +57,9 @@ export default CollectionEdit.extend({
       let component = this;
       let editedAssessment = component.get('tempCollection');
       let assessment = component.get('collection');
-      editedAssessment.validate().then(function({ validations }) {
+      editedAssessment.validate().then(function({
+        validations
+      }) {
         if (validations.get('isValid')) {
           let imageIdPromise = new Ember.RSVP.resolve(
             editedAssessment.get('thumbnailUrl')
@@ -63,7 +67,7 @@ export default CollectionEdit.extend({
           if (
             editedAssessment.get('thumbnailUrl') &&
             editedAssessment.get('thumbnailUrl') !==
-              assessment.get('thumbnailUrl')
+            assessment.get('thumbnailUrl')
           ) {
             imageIdPromise = component
               .get('mediaService')
@@ -167,9 +171,10 @@ export default CollectionEdit.extend({
         }.bind(this),
         type: CONTENT_TYPES.ASSESSMENT,
         redirect: {
-          route: 'profile.content.courses',
+          route: 'library-search',
           params: {
-            id: myId
+            profileId: myId,
+            type: 'my-content'
           }
         }
       };

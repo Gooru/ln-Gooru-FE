@@ -121,7 +121,7 @@
             <div class="row">
               <div class="col-xs-12 col-sm-12">
                 {{#link-to "library-search" (query-params profileId=profile.id  type="my-content" isBack=true)}}
-                  <h5 class="library-link">{{profile.firstName}}{{profile.lastName}}'s Content Library </h5>
+                  <h5 class="library-link">{{profile.firstName}}{{profile.lastName}} {{t 'common.content'}} {{t 'common.library'}}</h5>
                 {{/link-to}}
               </div>
             </div>
