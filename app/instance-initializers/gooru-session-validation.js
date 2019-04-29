@@ -15,6 +15,8 @@ export function initialize(application) {
       } else {
         sessionService.invalidate();
       }
+    } else if (jqXHR.status === 403) {
+      window.location.href = '/';
     }
   });
 }
