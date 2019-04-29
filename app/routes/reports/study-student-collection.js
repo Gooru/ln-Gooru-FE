@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import StudentCollection from 'gooru-web/routes/reports/student-collection';
+import PrivateRouteMixin from 'gooru-web/mixins/private-route-mixin';
 
 /**
  *
@@ -9,7 +10,7 @@ import StudentCollection from 'gooru-web/routes/reports/student-collection';
  * @module
  * @augments ember/Route
  */
-export default StudentCollection.extend({
+export default StudentCollection.extend(PrivateRouteMixin, {
   templateName: 'reports/study-student-collection',
 
   // -------------------------------------------------------------------------
