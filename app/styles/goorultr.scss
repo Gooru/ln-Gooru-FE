@@ -418,16 +418,14 @@
 @import "components/player/chrono-view/chrono-header";
 @import "components/player/chrono-view/chrono-header-xs";
 @import "components/player/chrono-view/student-card";
+
 // Performance Manual Entry
 @import "components/reports/pull-up/activity/add-performance-data";
 @import "components/reports/pull-up/activity/add-student-performance-data";
 @import "components/reports/pull-up/activity/add-question-score";
+@import "components/reports/pull-up/activity/assessment-performance-data";
+@import "components/reports/pull-up/activity/collection-performance-data";
 
-@import "components/reports/pull-up/performance-manual-entry";
-@import "components/reports/pull-up/assessment-performance-entry";
-@import "components/reports/pull-up/external-assessment-performance-entry";
-@import "components/reports/pull-up/external-collection-performance-entry";
-@import "components/reports/pull-up/collection-performance-entry";
 // Add course to class
 @import "controllers/teacher/class/add-course";
 @import "components/cards/gru-add-course-card";

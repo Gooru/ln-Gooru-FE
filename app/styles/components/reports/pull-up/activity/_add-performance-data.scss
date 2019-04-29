@@ -25,6 +25,7 @@
 
   .add-performance-data-container {
     background-color: $white;
+    height: 100%;
     .add-data-header-container {
       display: grid;
       grid-template-columns: 32px 1fr auto;
@@ -51,6 +52,10 @@
       .activity-info-container {
         display: grid;
         align-items: center;
+        grid-template-columns: auto auto;
+        justify-content: left;
+        column-gap: 15px;
+        height: 56px;
         .date-container {
           font-size: 10px;
           font-style: italic;
@@ -68,6 +73,10 @@
         opacity: 0.4;
         cursor: pointer;
       }
+    }
+
+    .add-data-body-container {
+      height: calc(100% - 56px);
     }
   }
 }

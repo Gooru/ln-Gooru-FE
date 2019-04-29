@@ -1,0 +1,63 @@
+<div class="collection-performance-container {{if isCollection 'collection-performance' 'external-collection-performance'}}">
+  {{#if isCollection}}
+    <div class="resource-list-container">
+      <div class="search-resource">
+        {{#if isShowClearSearchResources}}
+          <span class="clear-search-student" {{action "onClearSearchResources"}}>
+            {{gru-icon name="clear"}}
+          </span>
+        {{/if}}
+        {{input
+          class = "search-resource-input"
+          type = "text"
+          key-up = "onSearchResource"
+          value = resourceSearchPattern
+          placeholder = (t 'search-resource-question')
+          }}
+        <span class="search-icon">{{gru-icon name="search"}}</span>
+      </div>
+      <div class="resources-container">
+        {{#each resourceList as |resource seq|}}
+          <div class="resource-container {{if (eq resource.id activeResource.id) 'active-resource'}}" {{action "onSelectResource" resource}}>
+            <div class="resource-title ellipsis"><span class="resource-seq">{{plus-one seq}}. </span>{{resource.title}}</div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="timespent-container">
+      <div class="timespent-card">
+        <div class="timespent-title">
+          {{t 'enter-resource-timespent'}}
+        </div>
+        <div class="timespent-selector">
+          {{cards.gru-timepicker-card hour=maxHour minute=maxMinute}}
+        </div>
+        <div class="timespent-action-container">
+          <div class="next-action {{unless isValidTimeSpent 'disable-event'}}" {{action "onSaveTimeSpent"}}>
+            {{#if isLastResource}}
+              {{t 'common.save-submit'}}
+            {{else}}
+              {{t 'common.save-next'}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="external-collection-timespent-container">
+      <div class="external-timespent-card">
+        <div class="timespent-title">
+          {{t 'enter-collection-timespent'}}
+        </div>
+        <div class="timespent-selector">
+          {{cards.gru-timepicker-card hour=maxHour minute=maxMinute}}
+        </div>
+        <div class="timespent-action-container">
+          <div class="next-action {{unless isValidTimeSpent 'disable-event'}}" {{action "onSubmitExternalCollectionTimeSpent"}}>
+            {{t 'common.save-submit'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</div>

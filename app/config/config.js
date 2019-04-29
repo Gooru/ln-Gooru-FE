@@ -71,6 +71,7 @@ export const CONTENT_TYPES = {
   COLLECTION: 'collection',
   ASSESSMENT: 'assessment',
   EXTERNAL_ASSESSMENT: 'assessment-external',
+  EXTERNAL_COLLECTION: 'collection-external',
   COURSE: 'course',
   UNIT: 'unit',
   LESSON: 'lesson',
