@@ -93,8 +93,8 @@ test('Click share button and check clipboard functionality', function(assert) {
       T.exists(assert, $input, 'Missing readonly input');
       assert.ok(
         $input
-        .val()
-        .indexOf('/player/all-question-types-assessment-id?type=assessment'),
+          .val()
+          .indexOf('/player/all-question-types-assessment-id?type=assessment'),
         'Wrong share url'
       );
       var $copyBtn = $popOverContent.find('.share-actions .copy-btn');

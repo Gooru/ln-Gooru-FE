@@ -91,8 +91,8 @@ test('Click share button and check clipboard functionality', function(assert) {
       T.exists(assert, $input, 'Missing readonly input');
       assert.ok(
         $input
-        .val()
-        .indexOf('/player/all-question-types-assessment-id?type=collection'),
+          .val()
+          .indexOf('/player/all-question-types-assessment-id?type=collection'),
         'Missing input url'
       );
 
