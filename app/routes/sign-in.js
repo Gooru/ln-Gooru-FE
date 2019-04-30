@@ -38,19 +38,23 @@ export default Ember.Route.extend(PublicRouteMixin, {
   },
 
   beforeModel(transition) {
-    let nonce = transition.queryParams.nonce;
     let route = this;
-    let authenticationService = this.get('authenticationService');
-    return authenticationService.authenticateAsAnonymous(nonce).then(data => {
-      route.set('anonymousSessionData', data);
-      return route
-        .get('session')
-        .authenticateAsAnonymousWithData(data)
-        .then(() => {
-          let applicationController = route.controllerFor('application');
-          return Ember.RSVP.all([applicationController.setupTenant()]);
-        });
-    });
+    if (!route.get('session.isAnonymous')) {
+      return route.transitionTo('index');
+    } else {
+      let nonce = transition.queryParams.nonce;
+      let authenticationService = this.get('authenticationService');
+      return authenticationService.authenticateAsAnonymous(nonce).then(data => {
+        route.set('anonymousSessionData', data);
+        return route
+          .get('session')
+          .authenticateAsAnonymousWithData(data)
+          .then(() => {
+            let applicationController = route.controllerFor('application');
+            return Ember.RSVP.all([applicationController.setupTenant()]);
+          });
+      });
+    }
   },
 
   /**
