@@ -271,16 +271,15 @@ export default Ember.Component.extend({
     let loading = false;
     let container = Ember.$('.library-content-result-grid');
     component.$(container).scroll(function() {
-      if (loading) {
-        return false;
-      }
-      let scrollTop = Ember.$(container).scrollTop();
-      let listContainerHeight = Ember.$(container).height() + 500;
-      let isScrollReachedBottom = scrollTop >= (component.$(container).prop('scrollHeight') - listContainerHeight);
-      if (isScrollReachedBottom) {
-        loading = true;
-        component.sendAction('paginateNext');
-        loading = false;
+      if (!loading) {
+        let scrollTop = Ember.$(container).scrollTop();
+        let listContainerHeight = Ember.$(container).height() + 500;
+        let isScrollReachedBottom = scrollTop >= (component.$(container).prop('scrollHeight') - listContainerHeight);
+        if (isScrollReachedBottom) {
+          loading = true;
+          component.sendAction('paginateNext');
+          loading = false;
+        }
       }
     });
   },

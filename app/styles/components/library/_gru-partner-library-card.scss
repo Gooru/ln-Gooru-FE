@@ -2,17 +2,7 @@
   margin: 10px auto;
   width: max-content;
   height: 351px;
-  // @media (min-width: $screen-xs) {
-  //   width: 80%;
-  //   margin-bottom: 30px;
-  // }
-  // @media (min-width: $screen-md) {
-  //   margin: 20px 8px;
-  //   width: 45%;
-  // }
-  // @media (min-width: $screen-lg) {
-  //   width: 30%;
-  // }
+
   .panel-body,
   .panel-footer {
     @include flexbox;

@@ -196,18 +196,20 @@
       .search-panel {
         .apply-filter {
           height: 48px;
-          transition: height 0.25s ease-out;
+          transition: height 0.45s ease-out;
         }
       }
     }
 
     .search-by-filter {
+      max-height: none;
+
       .search-panel {
         .apply-filter {
           height: 0;
           position: fixed;
           z-index: 2;
-          transition: height 0.25s ease-in;
+          transition: height 0.45s ease-in;
         }
       }
     }

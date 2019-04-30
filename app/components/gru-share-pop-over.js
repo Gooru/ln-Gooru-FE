@@ -81,26 +81,26 @@ export default Ember.Component.extend({
     let questionId = params ? params.questionId : this.get('contentId');
     let rubricId = params ? params.rubricId : this.get('contentId');
     switch (type) {
-    case 'course':
-      return `${window
+      case 'course':
+        return `${window
         .location.protocol}//${window.location.host}/content/courses/play/${courseId}`;
-    case 'assessment':
-      return `${window
+      case 'assessment':
+        return `${window
         .location.protocol}//${window.location.host}/player/${assessmentId}?type=${type}`;
-    case 'collection':
-      return `${window
+      case 'collection':
+        return `${window
         .location.protocol}//${window.location.host}/player/${collectionId}?type=${type}`;
-    case 'resource':
-      return `${window
+      case 'resource':
+        return `${window
         .location.protocol}//${window.location.host}/content/resources/play/${resourceId}`;
-    case 'question':
-      return `${window
+      case 'question':
+        return `${window
         .location.protocol}//${window.location.host}/content/questions/play/${questionId}`;
-    case 'rubric':
-      return `${window
+      case 'rubric':
+        return `${window
         .location.protocol}//${window.location.host}/content/rubric/preview/${rubricId}`;
-    default:
-      break;
+      default:
+        break;
     }
   }),
 
@@ -118,10 +118,13 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  /**
-  * Overwrites didInsertElement hook to add clipboard and popover functionality
-  */
+  didRender() {
+    this.closePopover();
+  },
 
+  /**
+   * Overwrites didInsertElement hook to add clipboard and popover functionality
+   */
   didInsertElement: function() {
     var component = this;
     component.$().popover({
@@ -146,6 +149,17 @@ export default Ember.Component.extend({
         $('.copy-btn').tooltip('show');
       })
     );
+  },
+
+  closePopover() {
+    var component = this;
+    component.$(document).click(function(event) {
+      if (!event.toElement.classList.contains('share-btn')) {
+        if (Ember.$('.gru-share-pop-over-window').length > 0) {
+          component.$().popover('destroy');
+        }
+      }
+    });
   },
 
   /**
