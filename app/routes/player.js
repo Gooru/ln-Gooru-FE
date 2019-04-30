@@ -255,6 +255,9 @@ export default QuizzesPlayer.extend(
       const collectionId = params.collectionId;
       const type = params.type;
       const role = params.role || ROLES.TEACHER;
+      params.lessonId =
+        params.lessonId === 'undefined' ? null : params.lessonId;
+      params.unitId = params.unitId === 'undefined' ? null : params.unitId;
       params.sourceUrl = location.host;
       params.partnerId = this.get('session.partnerId');
       params.tenantId = this.get('session.tenantId');
@@ -278,6 +281,7 @@ export default QuizzesPlayer.extend(
           params.role = route.get('profile.role');
           params.isTeacher = route.get('profile.role') === ROLES.TEACHER;
           params.profileId = route.get('session.userData.gooruUId');
+
           return route.quizzesModel(params);
         });
     },
