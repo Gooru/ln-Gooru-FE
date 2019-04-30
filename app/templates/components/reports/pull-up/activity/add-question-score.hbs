@@ -14,12 +14,12 @@
     <div class="question-info-container">
       {{cards.question-preview-card question=question isShowCorrectAnswer=true contentSeq=(plus-one seq)}}
     </div>
-    <div class="question-score-container {{if isBooleanScore 'true-false-score' 'multi-score'}}">
+    <div class="question-score-container {{if disableScoreOverwite 'disable-event'}} {{if isBooleanScore 'true-false-score' 'multi-score'}}">
       {{#if isBooleanScore}}
         <div class="boolean-score-box correct-score question-score {{if (eq question.score 1) 'active-score'}}" {{action "onAddQuestionScore" 1}}>Correct</div>
         <div class="boolean-score-box wrong-score question-score {{if (eq question.score 0) 'active-score'}}" {{action "onAddQuestionScore" 0}}>Wrong</div>
       {{else}}
-        {{#if isScrollableMultiScore}}
+        {{#if isShowScrollableScores}}
           <div class="arrow-left" {{action "onScrollScore" 'left'}}>
             {{gru-icon name="arrow_left"}}
           </div>
@@ -29,7 +29,7 @@
             <div class="question-score {{if (eq question.score questionScore) 'active-score'}}" {{action "onAddQuestionScore" questionScore}}>{{questionScore}}</div>
           {{/each}}
         </div>
-        {{#if isScrollableMultiScore}}
+        {{#if isShowScrollableScores}}
           <div class="arrow-right" {{action "onScrollScore" 'right'}}>
             {{gru-icon name="arrow_right"}}
           </div>

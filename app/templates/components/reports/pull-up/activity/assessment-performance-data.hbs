@@ -21,6 +21,7 @@
           <div class="student-info-container {{if (eq activeStudent.id student.id) 'active-student'}}" {{action "onSelectStudent" student}}>
             <div class="student-thumbnail" style="background-image: url({{student.avatarUrl}})"></div>
             <div class="student-name">{{student.fullName}}</div>
+            <div class="student-performance grade-range-{{grade-range student.performance.score}}">{{if student.performance (concat student.performance.score '%') ''}}</div>
           </div>
         {{/each}}
       </div>
@@ -28,7 +29,7 @@
   </div>
   <div class="right-container">
     {{#if isAssessment}}
-      {{#if isCaptureQuestionScore}}
+      {{#if (or isCaptureQuestionScore isOverwriteScore)}}
         <div class="question-list-container">
           {{isScoreSubmittedForAllQuestion}}
           {{#each questions as |question seq|}}
@@ -36,11 +37,20 @@
               question = question
               seq = seq
               onToggleQuestion = "onToggleQuestion"
+              isOverwriteScore = isOverwriteScore
             }}
           {{/each}}
           <div class="question-action-container">
-            <div class="save-score-btn action-btn {{if isEnableSaveNext 'enabled'}}" {{action "onClickSaveAndNext"}}>{{t 'common.save-next'}}</div>
-            <div class="cancel-btn action-btn" {{action "onClearQuestionScores"}}>{{t 'common.cancel'}}</div>
+            <div class="save-score-btn action-btn {{if (or isEnableSaveNext isOverwriteScore) 'enabled'}}" {{action (if isOverwriteScore "onOverwriteScore" "onClickSaveAndNext")}}>
+              {{#if isOverwriteScore}}
+                {{t 'goals.manage.update'}} {{t 'common.score'}}
+              {{else}}
+                {{t (if isLastStudentActive 'common.save-finish' 'common.save-next' )}}
+              {{/if}}
+            </div>
+            {{#unless isOverwriteScore}}
+              <div class="cancel-btn action-btn" {{action "onClearQuestionScores"}}>{{t 'common.cancel'}}</div>
+            {{/unless}}
           </div>
         </div>
       {{else}}
@@ -130,5 +140,11 @@
         </div>
       {{/if}}
     </div>
+  </div>
+{{/if}}
+
+{{#if isLoading}}
+  <div class="loading-spinner">
+    {{three-bounce-spinner}}
   </div>
 {{/if}}
