@@ -14,16 +14,6 @@ moduleForAcceptance('Acceptance | integration', {
   }
 });
 
-test('integration route to not valid page', function(assert) {
-  visit(
-    '/integration/teams?token=any-token&classId=class-for-pochita-as-teacher&page=unexistant-page'
-  );
-  andThen(function() {
-    assert.expect(1);
-    assert.equal(currentURL(), '/sign-in');
-  });
-});
-
 test('integration route to info', function(assert) {
   visit(
     '/integration/teams?token=any-token&classId=class-for-pochita-as-teacher&page=class-info'
