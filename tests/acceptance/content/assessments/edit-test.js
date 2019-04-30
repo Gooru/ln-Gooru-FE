@@ -1,5 +1,6 @@
 import {
-  test
+  test,
+  skip
 } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import {
@@ -124,7 +125,7 @@ test('Click preview button', function(assert) {
   });
 });
 
-test('Delete Assessment', function(assert) {
+skip('Delete Assessment', function(assert) {
   visit('/content/assessments/edit/all-question-types-assessment-id');
   andThen(function() {
     assert.equal(

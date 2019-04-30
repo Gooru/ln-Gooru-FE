@@ -1,5 +1,6 @@
 import {
-  test
+  test,
+  skip
 } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import {
@@ -122,7 +123,7 @@ test('Click preview button', function(assert) {
   });
 });
 
-test('Delete Collection', function(assert) {
+skip('Delete Collection', function(assert) {
   visit('/content/collections/edit/all-resource-types-collection-id');
   andThen(function() {
     assert.equal(

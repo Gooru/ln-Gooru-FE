@@ -1,5 +1,5 @@
 import {
-  test
+  skip
 } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import {
@@ -38,7 +38,7 @@ test('Click share button and check clipboard functionality', function (assert) {
   });
 });
 */
-test('Delete Question', function(assert) {
+skip('Delete Question', function(assert) {
   visit('/content/questions/edit/1');
   andThen(function() {
     assert.equal(currentURL(), '/content/questions/edit/1');
