@@ -147,8 +147,21 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
           mapLocation.get('context.itemType') ||
           mapLocation.get('context.collectionType');
         params.classId = params.classId || mapLocation.get('context.classId');
+        params.courseId =
+          params.courseId || mapLocation.get('context.courseId');
         if (params.type === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
-          route.transitionTo('study-player-external');
+          let queryParams = {
+            role: params.role,
+            type: params.type,
+            sourceId: params.sourceId,
+            classId: params.classId,
+            courseId: params.courseId,
+            collectionId: params.collectionId,
+            source: params.source
+          };
+          route.transitionTo('study-player-external', {
+            queryParams
+          });
         }
         var unitPromise = null;
         var lessonPromise = null;
