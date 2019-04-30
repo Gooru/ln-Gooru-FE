@@ -1,7 +1,10 @@
 import Ember from 'ember';
 import ContentEditMixin from 'gooru-web/mixins/content/edit';
 import ModalMixin from 'gooru-web/mixins/modal';
-import { CONTENT_TYPES, EDUCATION_CATEGORY } from 'gooru-web/config/config';
+import {
+  CONTENT_TYPES,
+  EDUCATION_CATEGORY
+} from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 
@@ -112,7 +115,9 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
       let editedCollection = component.get('tempCollection');
       let collection = component.get('collection');
       editedCollection.validate().then(
-        function({ validations }) {
+        function({
+          validations
+        }) {
           if (validations.get('isValid')) {
             let imageIdPromise = new Ember.RSVP.resolve(
               editedCollection.get('thumbnailUrl')
@@ -120,7 +125,7 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
             if (
               editedCollection.get('thumbnailUrl') &&
               editedCollection.get('thumbnailUrl') !==
-                collection.get('thumbnailUrl')
+              collection.get('thumbnailUrl')
             ) {
               imageIdPromise = component
                 .get('mediaService')
@@ -185,9 +190,10 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
         }.bind(this),
         type: CONTENT_TYPES.COLLECTION,
         redirect: {
-          route: 'profile.content.courses',
+          route: 'library-search',
           params: {
-            id: myId
+            profileId: myId,
+            type: 'my-content'
           }
         }
       };
@@ -298,9 +304,9 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
    * @property {string}
    */
   standardLabelKey: Ember.computed('standardLabel', function() {
-    return this.get('standardLabel')
-      ? 'common.standards'
-      : 'common.competencies';
+    return this.get('standardLabel') ?
+      'common.standards' :
+      'common.competencies';
   }),
 
   /**

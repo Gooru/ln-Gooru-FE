@@ -1,4 +1,4 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent, test, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
 import Ember from 'ember';
@@ -603,7 +603,7 @@ test('Layout of the information section on edit mode', function(assert) {
   );
 });
 
-test('Update Resource Information', function(assert) {
+skip('Update Resource Information', function(assert) {
   assert.expect(1);
   var newTitle = 'Edited resource for testing';
   var ResourceValidation = Resource.extend(EditResourceValidations);
@@ -704,7 +704,7 @@ test('Update Resource Information', function(assert) {
   });
 });
 
-test('Edit resource with incorrect URL', function(assert) {
+skip('Edit resource with incorrect URL', function(assert) {
   assert.expect(1);
   var newTitle = 'Edited resource for testing';
   var ResourceValidation = Resource.extend(EditResourceValidations);

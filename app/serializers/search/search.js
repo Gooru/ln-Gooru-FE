@@ -6,9 +6,13 @@ import AssessmentModel from 'gooru-web/models/content/assessment';
 import CollectionModel from 'gooru-web/models/content/collection';
 import CourseModel from 'gooru-web/models/content/course';
 import ProfileModel from 'gooru-web/models/profile/profile';
-import { DEFAULT_IMAGES, TAXONOMY_LEVELS } from 'gooru-web/config/config';
+import {
+  DEFAULT_IMAGES,
+  TAXONOMY_LEVELS
+} from 'gooru-web/config/config';
 import TaxonomySerializer from 'gooru-web/serializers/taxonomy/taxonomy';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
+import Rubric from 'gooru-web/models/rubric/rubric';
 
 /**
  * Serializer to support Search functionality
@@ -56,20 +60,19 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const basePath = serializer.get('session.cdnUrls.content');
     const userBasePath = serializer.get('session.cdnUrls.user');
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
-    const thumbnailUrl = collectionData.thumbnail
-      ? basePath + collectionData.thumbnail
-      : appRootPath + DEFAULT_IMAGES.COLLECTION;
-    const userThumbnailUrl = collectionData.userProfileImage
-      ? userBasePath + collectionData.userProfileImage
-      : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
-    const creatorThumbnailUrl = collectionData.creatorProfileImage
-      ? userBasePath + collectionData.creatorProfileImage
-      : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+    const thumbnailUrl = collectionData.thumbnail ?
+      basePath + collectionData.thumbnail :
+      appRootPath + DEFAULT_IMAGES.COLLECTION;
+    const userThumbnailUrl = collectionData.userProfileImage ?
+      userBasePath + collectionData.userProfileImage :
+      appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+    const creatorThumbnailUrl = collectionData.creatorProfileImage ?
+      userBasePath + collectionData.creatorProfileImage :
+      appRootPath + DEFAULT_IMAGES.USER_PROFILE;
     const taxonomyInfo =
       (collectionData.taxonomySet &&
         collectionData.taxonomySet.curriculum &&
-        collectionData.taxonomySet.curriculum.curriculumInfo) ||
-      [];
+        collectionData.taxonomySet.curriculum.curriculumInfo) || [];
 
     const course = collectionData.course || {};
     return CollectionModel.create(Ember.getOwner(this).ownerInjection(), {
@@ -101,7 +104,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
         avatarUrl: creatorThumbnailUrl,
         username: collectionData.creatornameDisplay
       }),
-      format: collectionData.format || null
+      format: collectionData.format || collectionData.type || null
     });
   },
 
@@ -115,38 +118,35 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const basePath = serializer.get('session.cdnUrls.content');
     const userBasePath = serializer.get('session.cdnUrls.user');
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
-    const thumbnailUrl = assessmentData.thumbnail
-      ? basePath + assessmentData.thumbnail
-      : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
-    const ownerThumbnailUrl = assessmentData.userProfileImage
-      ? userBasePath + assessmentData.userProfileImage
-      : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
-    const creatorThumbnailUrl = assessmentData.creatorProfileImage
-      ? userBasePath + assessmentData.creatorProfileImage
-      : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+    const thumbnailUrl = assessmentData.thumbnail ?
+      basePath + assessmentData.thumbnail :
+      appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+    const ownerThumbnailUrl = assessmentData.userProfileImage ?
+      userBasePath + assessmentData.userProfileImage :
+      appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+    const creatorThumbnailUrl = assessmentData.creatorProfileImage ?
+      userBasePath + assessmentData.creatorProfileImage :
+      appRootPath + DEFAULT_IMAGES.USER_PROFILE;
     const taxonomyInfo =
       (assessmentData.taxonomySet &&
         assessmentData.taxonomySet.curriculum &&
-        assessmentData.taxonomySet.curriculum.curriculumInfo) ||
-      [];
+        assessmentData.taxonomySet.curriculum.curriculumInfo) || [];
 
     const course = assessmentData.course || {};
     return AssessmentModel.create(Ember.getOwner(this).ownerInjection(), {
       id: assessmentData.id,
       title: assessmentData.title,
-      format: assessmentData.format || null,
+      format: assessmentData.format || assessmentData.type || null,
       thumbnailUrl: thumbnailUrl,
       standards: serializer
         .get('taxonomySerializer')
         .normalizeTaxonomyArray(taxonomyInfo),
       publishStatus: assessmentData.publishStatus,
       learningObjectives: assessmentData.languageObjective,
-      resourceCount: assessmentData.resourceCount
-        ? Number(assessmentData.resourceCount)
-        : 0,
-      questionCount: assessmentData.questionCount
-        ? Number(assessmentData.questionCount)
-        : 0,
+      resourceCount: assessmentData.resourceCount ?
+        Number(assessmentData.resourceCount) : 0,
+      questionCount: assessmentData.questionCount ?
+        Number(assessmentData.questionCount) : 0,
       remixCount: assessmentData.scollectionRemixCount || 0,
       course: course.title,
       courseId: course.id,
@@ -199,6 +199,77 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
+   * Normalize the rubrics
+   * @param payload
+   * @returns {Rubric[]}
+   */
+  normalizeSearchRubrics: function(payload) {
+    let rubrics = payload.searchResults;
+    const serializer = this;
+    return rubrics.map(function(rubricData) {
+      return serializer.normalizeRubric(rubricData);
+    });
+  },
+
+  /**
+   * Normalizes a rubric
+   * @param {*} data
+   * @return {Rubric}
+   */
+  normalizeRubric: function(rubric) {
+    if (rubric) {
+      const serializer = this;
+      const categories = rubric.categories;
+      const basePath = serializer.get('session.cdnUrls.content');
+      const userBasePath = serializer.get('session.cdnUrls.user');
+      const appRootPath = this.get('appRootPath'); //configuration appRootPath
+      const thumbnail = rubric.thumbnail ? basePath + rubric.thumbnail : null;
+      const taxonomyInfo =
+        (rubric.taxonomy &&
+          rubric.taxonomy.curriculum &&
+          rubric.taxonomy.curriculum.curriculumInfo) || [];
+      const ownerThumbnailUrl = rubric.creator.profileImage ?
+        userBasePath + rubric.creator.profileImage :
+        appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+      return Rubric.create(Ember.getOwner(this).ownerInjection(), {
+        id: rubric.id,
+        title: rubric.title,
+        description: rubric.description,
+        thumbnail: thumbnail,
+        standards: serializer
+          .get('taxonomySerializer')
+          .normalizeTaxonomyObject(taxonomyInfo),
+        audience: rubric.audience,
+        url: rubric.url,
+        isMyProfile: serializer.get('session.userId') === rubric.creator.id,
+        owner: ProfileModel.create({
+          id: rubric.creator.id,
+          firstName: rubric.creator.userFirstName,
+          lastName: rubric.creator.userLastName,
+          avatarUrl: ownerThumbnailUrl,
+          username: rubric.creator.usernameDisplay
+        }),
+        creator: ProfileModel.create({
+          id: rubric.creator.id,
+          firstName: rubric.creator.userFirstName,
+          lastName: rubric.creator.userLastName,
+          avatarUrl: ownerThumbnailUrl,
+          username: rubric.creator.usernameDisplay
+        }),
+        isPublished: rubric.publishStatus === 'published',
+        categories: categories ?
+          categories.map(category =>
+            serializer.normalizeRubricCategory(category)
+          ) : Ember.A(),
+        createdDate: rubric.createdAt,
+        updatedDate: rubric.updatedAt,
+        modifierId: rubric.lastModifiedBy,
+        originalCreatorId: rubric.originalCreator ? rubric.originalCreator.id : null
+      });
+    }
+  },
+
+  /**
    * Normalize the Search question response
    *
    * @param payload is the endpoint response in JSON format
@@ -228,8 +299,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const taxonomyInfo =
       (result.taxonomySet &&
         result.taxonomySet.curriculum &&
-        result.taxonomySet.curriculum.curriculumInfo) ||
-      [];
+        result.taxonomySet.curriculum.curriculumInfo) || [];
 
     return QuestionModel.create(Ember.getOwner(this).ownerInjection(), {
       id: result.gooruOid,
@@ -259,8 +329,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const taxonomyInfo =
       (result.taxonomySet &&
         result.taxonomySet.curriculum &&
-        result.taxonomySet.curriculum.curriculumInfo) ||
-      [];
+        result.taxonomySet.curriculum.curriculumInfo) || [];
 
     return ResourceModel.create(Ember.getOwner(this).ownerInjection(), {
       id: result.gooruOid,
@@ -268,9 +337,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
       description: result.description,
       format: format,
       url: result.url,
-      creator: result.creator
-        ? serializer.normalizeOwner(result.creator)
-        : null,
+      creator: result.creator ?
+        serializer.normalizeOwner(result.creator) : null,
       owner: result.user ? serializer.normalizeOwner(result.user) : null,
       standards: serializer
         .get('taxonomySerializer')
@@ -292,9 +360,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.user');
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
-    const thumbnailUrl = ownerData.profileImage
-      ? basePath + ownerData.profileImage
-      : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+    const thumbnailUrl = ownerData.profileImage ?
+      basePath + ownerData.profileImage :
+      appRootPath + DEFAULT_IMAGES.USER_PROFILE;
 
     return ProfileModel.create(Ember.getOwner(this).ownerInjection(), {
       id: ownerData.gooruUId || ownerData.id,
@@ -329,24 +397,21 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
-    const thumbnailUrl = result.thumbnail
-      ? basePath + result.thumbnail
-      : appRootPath + DEFAULT_IMAGES.COURSE;
+    const thumbnailUrl = result.thumbnail ?
+      basePath + result.thumbnail :
+      appRootPath + DEFAULT_IMAGES.COURSE;
     const taxonomyInfo =
       (result.taxonomy &&
         result.taxonomy.curriculum &&
-        result.taxonomy.curriculum.curriculumInfo) ||
-      [];
+        result.taxonomy.curriculum.curriculumInfo) || [];
     return CourseModel.create(Ember.getOwner(this).ownerInjection(), {
       id: result.id,
       title: result.title,
       description: result.description,
       thumbnailUrl: thumbnailUrl,
       subject: result.subjectBucket,
-      subjectName:
-        result.taxonomy && result.taxonomy.subject
-          ? result.taxonomy.subject[0]
-          : null,
+      subjectName: result.taxonomy && result.taxonomy.subject ?
+        result.taxonomy.subject[0] : null,
       subjectSequence: result.subjectSequence,
       isVisibleOnProfile: result.visibleOnProfile,
       isPublished: result.publishStatus === 'published',
@@ -369,14 +434,13 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
-    const thumbnailUrl = result.thumbnail
-      ? basePath + result.thumbnail
-      : appRootPath + DEFAULT_IMAGES.COLLECTION;
+    const thumbnailUrl = result.thumbnail ?
+      basePath + result.thumbnail :
+      appRootPath + DEFAULT_IMAGES.COLLECTION;
     const taxonomyInfo =
       (result.taxonomy &&
         result.taxonomy.curriculum &&
-        result.taxonomy.curriculum.curriculumInfo) ||
-      [];
+        result.taxonomy.curriculum.curriculumInfo) || [];
     return CourseModel.create(Ember.getOwner(this).ownerInjection(), {
       id: result.id,
       title: result.title,
@@ -390,11 +454,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
       assessmentCount: result.assessmentCount,
       collectionCount: result.collectionCount,
       lessonCount: result.lessonCount,
-      standards: taxonomyInfo
-        ? serializer
+      standards: taxonomyInfo ?
+        serializer
           .get('taxonomySerializer')
-          .normalizeTaxonomyArray(taxonomyInfo, TAXONOMY_LEVELS.COURSE)
-        : {},
+          .normalizeTaxonomyArray(taxonomyInfo, TAXONOMY_LEVELS.COURSE) : {},
       owner: result.owner ? serializer.normalizeOwner(result.owner) : null,
       sequence: result.sequence,
       relevance: result.relevance,
@@ -413,9 +476,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
-    const thumbnailUrl = result.thumbnail
-      ? basePath + result.thumbnail
-      : appRootPath + DEFAULT_IMAGES.COLLECTION;
+    const thumbnailUrl = result.thumbnail ?
+      basePath + result.thumbnail :
+      appRootPath + DEFAULT_IMAGES.COLLECTION;
     return CourseModel.create(Ember.getOwner(this).ownerInjection(), {
       id: result.id,
       title: result.title,
@@ -450,16 +513,16 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const signatureData = learningMapsContent.signatureContents;
     if (signatureData && signatureData.assessments) {
       signatureData.assessments.forEach(function(item) {
-        item.thumbnail = item.thumbnail
-          ? basePath + item.thumbnail
-          : appRootPath + DEFAULT_IMAGES.COLLECTION;
+        item.thumbnail = item.thumbnail ?
+          basePath + item.thumbnail :
+          appRootPath + DEFAULT_IMAGES.COLLECTION;
       });
     }
     if (signatureData && signatureData.collections) {
       signatureData.collections.forEach(function(item) {
-        item.thumbnail = item.thumbnail
-          ? basePath + item.thumbnail
-          : appRootPath + DEFAULT_IMAGES.COLLECTION;
+        item.thumbnail = item.thumbnail ?
+          basePath + item.thumbnail :
+          appRootPath + DEFAULT_IMAGES.COLLECTION;
       });
     }
 
@@ -542,12 +605,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
         let courseInfo = serializer.normalizeCourse(course);
         courseInfo.id = course.id;
         courseInfo.description = course.description;
-        courseInfo.creator = course.creator
-          ? serializer.normalizeOwner(course.creator)
-          : {};
-        courseInfo.owner = course.owner
-          ? serializer.normalizeOwner(course.owner)
-          : {};
+        courseInfo.creator = course.creator ?
+          serializer.normalizeOwner(course.creator) : {};
+        courseInfo.owner = course.owner ?
+          serializer.normalizeOwner(course.owner) : {};
         courseInfo.efficacy = course.efficacy;
         courseInfo.engagement = course.engagement;
         courseInfo.relevance = course.relevance;
@@ -566,12 +627,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
         let resourceInfo = serializer.normalizeResource(resource);
         resourceInfo.id = resource.id;
         resourceInfo.description = resource.description;
-        resourceInfo.creator = resource.creator
-          ? serializer.normalizeOwner(resource.creator)
-          : {};
-        resourceInfo.owner = resource.user
-          ? serializer.normalizeOwner(resource.user)
-          : {};
+        resourceInfo.creator = resource.creator ?
+          serializer.normalizeOwner(resource.creator) : {};
+        resourceInfo.owner = resource.user ?
+          serializer.normalizeOwner(resource.user) : {};
         resourceInfo.standards = serializer
           .get('taxonomySerializer')
           .normalizeLearningMapsTaxonomyArray(
@@ -607,12 +666,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
         let unitInfo = serializer.normalizeUnit(unit);
         unitInfo.id = unit.id;
         unitInfo.description = unit.learningObjective;
-        unitInfo.creator = unit.creator
-          ? serializer.normalizeOwner(unit.creator)
-          : {};
-        unitInfo.owner = unit.owner
-          ? serializer.normalizeOwner(unit.owner)
-          : {};
+        unitInfo.creator = unit.creator ?
+          serializer.normalizeOwner(unit.creator) : {};
+        unitInfo.owner = unit.owner ?
+          serializer.normalizeOwner(unit.owner) : {};
         unitInfo.standards = serializer
           .get('taxonomySerializer')
           .normalizeLearningMapsTaxonomyArray(
@@ -628,12 +685,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
         let lessonInfo = serializer.normalizeLesson(lesson);
         lessonInfo.id = lesson.id;
         lessonInfo.description = lesson.learningObjective;
-        lessonInfo.creator = lesson.creator
-          ? serializer.normalizeOwner(lesson.creator)
-          : {};
-        lessonInfo.owner = lesson.owner
-          ? serializer.normalizeOwner(lesson.owner)
-          : {};
+        lessonInfo.creator = lesson.creator ?
+          serializer.normalizeOwner(lesson.creator) : {};
+        lessonInfo.owner = lesson.owner ?
+          serializer.normalizeOwner(lesson.owner) : {};
         lessonInfo.standards = serializer
           .get('taxonomySerializer')
           .normalizeLearningMapsTaxonomyArray(

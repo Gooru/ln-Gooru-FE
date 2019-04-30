@@ -1,14 +1,15 @@
 .search-by-filter {
   height: 0;
-  transition: height 0.25s ease-out;
+  transition: height 0.45s ease-out;
   overflow: hidden;
   background: #fff;
   max-height: calc(90vh - 100px);
   position: relative;
+  width: 100%;
 
   &.active {
     height: 100vh;
-    transition: height 0.25s ease-in;
+    transition: height 0.45s ease-in;
   }
 
   .backdrop {

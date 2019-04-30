@@ -1,8 +1,6 @@
 <div class="header-action">
   {{#if isStudent}}
-    <button class="btn bookmark-btn no-bgd" title="{{t 'common.bookmark'}}"
-            data-toggle="tooltip" data-placement="auto" data-trigger="hover"
-      {{action 'bookmarkCourse' content}}  disabled={{model.disabledBookmark}}>
+    <button class="btn bookmark-btn no-bgd" title="{{t 'common.bookmark'}}" data-toggle="tooltip" data-placement="auto" data-trigger="hover" {{action 'bookmarkCourse' content}} disabled={{model.disabledBookmark}}>
       {{gru-icon name="turned_in_not"}}
     </button>
   {{/if}}
@@ -22,7 +20,7 @@
     </div>
     <div class="remixed-by">
       {{#if course.owner}}
-        {{#link-to 'profile.content.courses' course.owner.id class="pointer" tagName="div"}}
+        {{#link-to 'library-search' (query-params type="my-content" profileId=course.owner.id) class="pointer" tagName="div"}}
           <span class="title">
             {{t (if course.sameOwnerAndCreator "common.created-by" "common.remixed-by")}}
           </span>

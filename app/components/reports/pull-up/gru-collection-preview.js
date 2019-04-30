@@ -6,7 +6,9 @@ import {
   PLAYER_EVENT_SOURCE,
   ROLES
 } from 'gooru-web/config/config';
-import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
+import {
+  getEndpointUrl
+} from 'gooru-web/utils/endpoint-config';
 import ModalMixin from 'gooru-web/mixins/modal';
 
 export default Ember.Component.extend(ModalMixin, {
@@ -118,6 +120,7 @@ export default Ember.Component.extend(ModalMixin, {
     return component.get('isTeacher');
   }),
 
+  showPrintPreview: true,
   /**
    * @property {Boolean} isEnableToggleAnswer
    */
@@ -221,7 +224,9 @@ export default Ember.Component.extend(ModalMixin, {
       .hash({
         assessment: assessmentService.readAssessment(assessmentId)
       })
-      .then(({ assessment }) => {
+      .then(({
+        assessment
+      }) => {
         if (!component.isDestroyed) {
           component.set('previewContent', assessment);
         }
@@ -240,7 +245,9 @@ export default Ember.Component.extend(ModalMixin, {
       .hash({
         collection: collectionService.readCollection(collectionId)
       })
-      .then(({ collection }) => {
+      .then(({
+        collection
+      }) => {
         if (!component.isDestroyed) {
           component.set('previewContent', collection);
         }
@@ -261,7 +268,9 @@ export default Ember.Component.extend(ModalMixin, {
           externalAssessmentId
         )
       })
-      .then(({ externalAssessment }) => {
+      .then(({
+        externalAssessment
+      }) => {
         if (!component.isDestroyed) {
           component.set('previewContent', externalAssessment);
         }
@@ -282,7 +291,9 @@ export default Ember.Component.extend(ModalMixin, {
           externalCollectionId
         )
       })
-      .then(({ externalCollection }) => {
+      .then(({
+        externalCollection
+      }) => {
         if (!component.isDestroyed) {
           component.set('previewContent', externalCollection);
         }
