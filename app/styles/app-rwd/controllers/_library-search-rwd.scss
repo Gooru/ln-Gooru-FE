@@ -129,6 +129,21 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+    @media screen and (max-width: $screen-814) and (min-width: $screen-sm - 1) {
+      .contents {
+        grid-template-columns: repeat(2, 1fr);
+
+        &.course {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        &.question,
+        &.resource,
+        &.rubric {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    }
     @media screen and (max-width: $screen-sm - 1) {
       .contents {
         grid-template-columns: repeat(1, 1fr);
