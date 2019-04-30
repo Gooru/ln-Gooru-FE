@@ -111,6 +111,7 @@ export default Ember.Object.extend({
       gradeCurrent: payload.grade_current,
       gradeUpperBound: payload.grade_upper_bound,
       primaryLanguage: payload.primary_language,
+      milestoneViewApplicable: payload.milestone_view_applicable,
       collaborators: collaborators.map(function(collaboratorId) {
         return ProfileModel.create({ id: collaboratorId });
       }),
