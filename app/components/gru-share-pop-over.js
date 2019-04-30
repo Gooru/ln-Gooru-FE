@@ -120,13 +120,6 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  didRender() {
-    let component = this;
-    if (component.get('closePopover')) {
-      component.onClosePopover();
-    }
-  },
-
   /**
    * Overwrites didInsertElement hook to add clipboard and popover functionality
    */
@@ -154,17 +147,6 @@ export default Ember.Component.extend({
         $('.copy-btn').tooltip('show');
       })
     );
-  },
-
-  onClosePopover() {
-    var component = this;
-    component.$(document).click(function(event) {
-      if (!event.toElement.classList.contains('share-btn')) {
-        if (Ember.$('.gru-share-pop-over-window').length > 0) {
-          component.$().popover('destroy');
-        }
-      }
-    });
   },
 
   /**
