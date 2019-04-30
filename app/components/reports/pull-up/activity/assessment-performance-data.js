@@ -21,6 +21,8 @@ export default Ember.Component.extend({
 
   session: Ember.inject.service('session'),
 
+  classActivityService: Ember.inject.service('api-sdk/class-activity'),
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
@@ -31,6 +33,7 @@ export default Ember.Component.extend({
       component.loadExternalAssessmentData();
     }
     component.resetStudentScores();
+    component.loadStudentsActivityPerformanceData();
   },
 
   // -------------------------------------------------------------------------
@@ -40,7 +43,10 @@ export default Ember.Component.extend({
     onSelectStudent(student) {
       const component = this;
       const activeStudent = component.get('activeStudent');
-      if (component.get('isSessionStarted')) {
+      if (
+        component.get('isSessionStarted') &&
+        !component.get('isOverwriteScore')
+      ) {
         if (activeStudent && activeStudent.get('id') !== student.get('id')) {
           if (
             !component.doCheckQuestionScoreSubmitted() &&
@@ -54,6 +60,13 @@ export default Ember.Component.extend({
       } else {
         component.set('activeStudent', student);
         component.set('isSessionStarted', false);
+        if (student.get('performance')) {
+          component.loadActivityQuestionsPerformanceData();
+        } else {
+          component.resetQuestionScores();
+        }
+        component.scrollToFirstQuestion();
+        component.toggleQuestionVisibility();
       }
       component.set('activeStudentTemp', student);
     },
@@ -94,15 +107,22 @@ export default Ember.Component.extend({
       component.set('activeStudent', component.get('activeStudentTemp'));
       component.set('isShowWarningMessage', false);
       component.set('isSessionStarted', false);
+      if (component.get('isOverwriteScore')) {
+        component.loadActivityQuestionsPerformanceData();
+      }
     },
 
     //Action triggered when submit question scores
     onAcceptSaveAndNext() {
       const component = this;
-      if (component.get('isAssessment')) {
-        component.submitQuestionDataSelectNextStudent();
+      if (component.get('isOverwriteScore')) {
+        component.overwriteAssessmentQuestionScores();
       } else {
-        component.submitExternalAssessmentDataSelectNextStudent();
+        if (component.get('isAssessment')) {
+          component.submitQuestionDataSelectNextStudent();
+        } else {
+          component.submitExternalAssessmentDataSelectNextStudent();
+        }
       }
       component.set('isSessionStarted', false);
       component.set('isShowSaveInformation', false);
@@ -207,6 +227,12 @@ export default Ember.Component.extend({
         'isValidExternalAssessmentMaxScore',
         validatePercentage(externalAssessmentMaxScore)
       );
+    },
+
+    //Action triggered when click overwrite score
+    onOverwriteScore() {
+      const component = this;
+      component.overwriteAssessmentQuestionScores();
     }
   },
 
@@ -360,6 +386,13 @@ export default Ember.Component.extend({
    */
   isSessionStarted: false,
 
+  /**
+   * @property {Boolean} isOverwriteScore
+   */
+  isOverwriteScore: Ember.computed('activeStudent.performance', function() {
+    return this.get('activeStudent.performance');
+  }),
+
   // -------------------------------------------------------------------------
   // Functions
 
@@ -373,25 +406,34 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function activateNextStudent
+   * Method to activate next student
+   */
+  activateNextStudent() {
+    const component = this;
+    let students = component.get('students');
+    let activeStudentIndex = students.indexOf(component.get('activeStudent'));
+    if (activeStudentIndex !== students.length - 1) {
+      component.set('activeStudent', students.objectAt(activeStudentIndex + 1));
+    } else {
+      component.sendAction('onClosePullUp');
+    }
+  },
+
+  /**
    * @function submitQuestionDataSelectNextStudent
    * Method to submit question scores and select next student
    */
   submitQuestionDataSelectNextStudent() {
     const component = this;
     component.submitAssessmentPerformanceData().then(function() {
+      component.loadStudentActivityPerformanceData(
+        component.get('activeStudent')
+      );
       component.resetQuestionScores();
       component.toggleQuestionVisibility();
-      let students = component.get('students');
-      let activeStudentIndex = students.indexOf(component.get('activeStudent'));
-      if (activeStudentIndex !== students.length - 1) {
-        component.set(
-          'activeStudent',
-          students.objectAt(activeStudentIndex + 1)
-        );
-        component.scrollToFirstQuestion();
-      } else {
-        component.sendAction('onClosePullUp');
-      }
+      component.activateNextStudent();
+      component.scrollToFirstQuestion();
     });
   },
 
@@ -402,17 +444,25 @@ export default Ember.Component.extend({
   submitExternalAssessmentDataSelectNextStudent() {
     const component = this;
     component.submitExternalAssessmentPerformanceData().then(function() {
-      let students = component.get('students');
-      let activeStudentIndex = students.indexOf(component.get('activeStudent'));
-      if (activeStudentIndex !== students.length - 1) {
-        component.set(
-          'activeStudent',
-          students.objectAt(activeStudentIndex + 1)
-        );
-      } else {
-        component.sendAction('onClosePullUp');
-      }
+      component.activateNextStudent();
     });
+  },
+
+  /**
+   * @function overwriteAssessmentQuestionScores
+   * Method to trigger score overwrite method and update student perf score
+   */
+  overwriteAssessmentQuestionScores() {
+    const component = this;
+    component
+      .updateQuestionScore(component.getOverwriteQuestionScoresPayload())
+      .then(function() {
+        component.loadStudentActivityPerformanceData(
+          component.get('activeStudent')
+        );
+        component.scrollToFirstQuestion();
+        component.toggleQuestionVisibility();
+      });
   },
 
   /**
@@ -448,11 +498,85 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function loadStudentsActivityPerformanceData
+   * Method to load all students activity performance data
+   */
+  loadStudentsActivityPerformanceData() {
+    const component = this;
+    const classActivityService = component.get('classActivityService');
+    const activityData = component.get('activityData');
+    const activityDate = activityData.get('activation_date');
+    const classId = component.get('classId');
+    return Ember.RSVP
+      .hash({
+        studentsActivityPerformanceData: classActivityService.fetchStudentsActivityPerformance(
+          classId,
+          activityData,
+          activityDate,
+          activityDate
+        )
+      })
+      .then(({ studentsActivityPerformanceData }) => {
+        component.parseStudentsActivityPerforamanceData(
+          studentsActivityPerformanceData
+        );
+      });
+  },
+
+  /**
+   * @function loadActivityQuestionsPerformanceData
+   * Method to load activity questions performance data
+   */
+  loadActivityQuestionsPerformanceData() {
+    const component = this;
+    component.set('isLoading', true);
+    const activeStudent = component.get('activeStudent');
+    component
+      .fetchAssessmentPerformanceBySession(
+        activeStudent.get('performance.sessionId')
+      )
+      .then(function(activityQuestionsPerformance) {
+        component.populateActivityQuestionsPerformance(
+          activityQuestionsPerformance
+        );
+      });
+  },
+
+  /**
+   * @function loadStudentActivityPerformanceData
+   * Method to load given student activity performance data
+   */
+  loadStudentActivityPerformanceData(student) {
+    const component = this;
+    const classActivityService = component.get('classActivityService');
+    const activityData = Ember.A([component.get('activityData')]);
+    const userId = student.get('id');
+    const classId = component.get('classId');
+    const activityDate = component.get('activityData.activation_date');
+    return Ember.RSVP
+      .hash({
+        studentActivityPerformance: classActivityService.findStudentActivitiesPerformanceSummary(
+          userId,
+          classId,
+          activityData,
+          activityDate,
+          activityDate
+        )
+      })
+      .then(({ studentActivityPerformance }) => {
+        student.set(
+          'performance',
+          studentActivityPerformance.objectAt(0).get('collection.performance')
+        );
+      });
+  },
+
+  /**
    * @function fetchAssessmentData
    */
   fetchAssessmentData(assessmentId) {
-    let component = this;
-    let assessmentService = component.get('assessmentService');
+    const component = this;
+    const assessmentService = component.get('assessmentService');
     return assessmentService.readAssessment(assessmentId);
   },
 
@@ -460,9 +584,39 @@ export default Ember.Component.extend({
    * @function fetchExternalAssessmentData
    */
   fetchExternalAssessmentData(assessmentId) {
-    let component = this;
-    let assessmentService = component.get('assessmentService');
+    const component = this;
+    const assessmentService = component.get('assessmentService');
     return assessmentService.readExternalAssessment(assessmentId);
+  },
+
+  /**
+   * @function fetchAssessmentPerformanceBySession
+   * Method to load assessment performance data by given session ID
+   */
+  fetchAssessmentPerformanceBySession() {
+    const component = this;
+    const analyticsService = component.get('analyticsService');
+    const userId = component.get('activeStudent.id');
+    const sessionId = component.get('activeStudent.performance.sessionId');
+    const classId = component.get('classId');
+    const assessmentId = component.get('assessment.id');
+    return analyticsService.getDCAPerformanceBySessionId(
+      userId,
+      classId,
+      assessmentId,
+      'assessment',
+      sessionId
+    );
+  },
+
+  /**
+   * @function updateQuestionScore
+   * Method to update question score
+   */
+  updateQuestionScore(questionsData) {
+    const component = this;
+    const analyticsService = component.get('analyticsService');
+    return analyticsService.updateQuestionScore(questionsData);
   },
 
   /**
@@ -629,5 +783,82 @@ export default Ember.Component.extend({
     const component = this;
     const students = component.get('students');
     students.map(student => student.set('score', null));
+  },
+
+  /**
+   * @function parseStudentsActivityPerforamanceData
+   * Method to parse student activity performance data
+   */
+  parseStudentsActivityPerforamanceData(studentsActivityPerformanceData) {
+    const component = this;
+    let students = component.get('students');
+    students.map(student => {
+      let studentActivityPerformanceData = studentsActivityPerformanceData.findBy(
+        'userId',
+        student.get('id')
+      );
+      student.set(
+        'performance',
+        studentActivityPerformanceData
+          ? studentActivityPerformanceData.get('collectionPerformanceSummary')
+          : null
+      );
+    });
+    if (component.get('activeStudent.performance')) {
+      component.loadActivityQuestionsPerformanceData();
+    }
+  },
+
+  /**
+   * @function populateActivityQuestionsPerformance
+   * Method to populate activity questions performance data
+   */
+  populateActivityQuestionsPerformance(questionsPerformanceData) {
+    const component = this;
+    let questionsPerformance = questionsPerformanceData.get('resourceResults');
+    let questions = component.get('questions');
+    if (!component.isDestroyed) {
+      questions.map(question => {
+        let questionPerformance = questionsPerformance.findBy(
+          'resourceId',
+          question.get('id')
+        );
+        question.set('score', questionPerformance.get('rawScore'));
+        question.set('isScored', true);
+      });
+      component.set('isLoading', false);
+    }
+  },
+
+  /**
+   * @function getOverwriteQuestionScoresPayload
+   * Method to construct overwrite questions score payload
+   */
+  getOverwriteQuestionScoresPayload() {
+    const component = this;
+    const questions = component.get('questions');
+    const activeStudent = component.get('activeStudent');
+    const assessment = component.get('assessment');
+    const activityId = component.get('activityData.id');
+    let resourcesContext = Ember.A([]);
+    questions.map(question => {
+      let resourceContext = {
+        resource_id: question.get('id'),
+        score: question.get('score'),
+        max_score: question.get('maxScore')
+      };
+      resourcesContext.push(resourceContext);
+    });
+    const qustionsScorePayload = {
+      student_id: activeStudent.get('id'),
+      session_id: activeStudent.get('performance.sessionId'),
+      collection_id: assessment.get('id'),
+      class_id: component.get('classId'),
+      collection_type: 'assessment',
+      content_source: component.get('contentSource'),
+      additional_context: btoa(JSON.stringify({ dcaContentId: activityId })),
+      resources: resourcesContext
+    };
+    return qustionsScorePayload;
   }
 });

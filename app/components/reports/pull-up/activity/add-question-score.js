@@ -65,11 +65,30 @@ export default Ember.Component.extend({
   isBooleanScore: Ember.computed.lte('question.maxScore', 1),
 
   /**
-   * @property {Boolean} isScrollableMultiScore
+   * @property {Boolean} isShowScrollableScores
    */
-  isScrollableMultiScore: Ember.computed(function() {
+  isShowScrollableScores: Ember.computed(function() {
     const component = this;
     const numberOfScores = component.get('questionScores.length');
     return numberOfScores > 5;
-  })
+  }),
+
+  /**
+   * @property {Boolean} isOverwriteScore
+   */
+  isOverwriteScore: false,
+
+  /**
+   * @property {Boolean} disableScoreOverwite
+   */
+  disableScoreOverwite: Ember.computed(
+    'isOverwriteScore',
+    'question.type',
+    function() {
+      const component = this;
+      const isOverwriteScore = component.get('isOverwriteScore');
+      const questionType = component.get('question.type');
+      return isOverwriteScore && questionType === 'OE';
+    }
+  )
 });

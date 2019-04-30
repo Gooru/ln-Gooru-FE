@@ -79,9 +79,9 @@
         .student-list-container {
           @extend %desktop-height;
           .student-info-container {
-            padding: 0 15px;
+            padding-left: 15px;
             display: grid;
-            grid-template-columns: 32px auto;
+            grid-template-columns: 32px 1fr auto;
             column-gap: 8px;
             align-items: center;
             height: 48px;
@@ -103,7 +103,21 @@
               text-transform: capitalize;
             }
 
-            &.active-student {
+            .student-performance {
+              height: 48px;
+              color: $white;
+              width: 48px;
+              font-size: 14px;
+              font-weight: bold;
+              text-align: center;
+              line-height: 48px;
+              &.grade-range-not-started {
+                background-color: transparent;
+              }
+            }
+
+            &.active-student,
+            &:hover {
               background-color: #e1e1e1;
 
               .student-name {
@@ -324,5 +338,11 @@
         }
       }
     }
+  }
+
+  .loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
   }
 }
