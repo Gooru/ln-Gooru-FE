@@ -34,6 +34,8 @@ export default Ember.Component.extend({
    */
   contentId: null,
 
+  closePopover: false,
+
   /**
    * @property {string} template to be used for the popover window
    */
@@ -119,7 +121,10 @@ export default Ember.Component.extend({
   // Events
 
   didRender() {
-    this.closePopover();
+    let component = this;
+    if (component.get('closePopover')) {
+      component.onClosePopover();
+    }
   },
 
   /**
@@ -151,7 +156,7 @@ export default Ember.Component.extend({
     );
   },
 
-  closePopover() {
+  onClosePopover() {
     var component = this;
     component.$(document).click(function(event) {
       if (!event.toElement.classList.contains('share-btn')) {
