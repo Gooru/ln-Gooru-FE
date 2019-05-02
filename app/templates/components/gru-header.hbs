@@ -77,11 +77,6 @@
                       <span>{{t "user.classrooms"}}</span>
                     {{/link-to}}
                   </li>
-                  <li class="navbar-nav-list visible-md visible-lg content-link">
-                    {{#link-to 'library-search' (query-params type="my-content" profileId=session.userData.gooruUId)}}
-                      <span>{{t "common.content-manager"}}</span>
-                    {{/link-to}}
-                  </li>
                   <li class="navbar-nav-list visible-md visible-lg tools-link dropdown out-of-scope">
                     <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="tools">{{t "common.tools"}}{{gru-icon name='arrow_drop_down'}}</span>
                     </a>
@@ -90,13 +85,6 @@
                         <a class="navbar-link">
                           {{t "common.live-assessments"}}
                         </a>
-                      </li>
-                      <li class="navbar-nav-list content-link">
-                        {{#link-to 'library-search' (query-params type="my-content" profileId=session.userData.gooruUId)}}
-                          <a class="navbar-link">
-                            {{t "common.content-manager"}}
-                          </a>
-                        {{/link-to}}
                       </li>
                       <li class="navbar-nav-list performance-dashboard-link out-of-scope">
                         <a class="navbar-link">
