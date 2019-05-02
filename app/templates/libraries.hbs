@@ -1,6 +1,6 @@
 <div class="container">
   <div class="card-container">
-    {{#if (and (not session.isAnonymous) (not (eq session.role 'student')))}}
+    {{#if (and (not session.isAnonymous)  (eq session.role 'teacher'))}}
       {{#link-to "library-search" (query-params type="my-content" profileId=session.userId)}}
         <div class="card-panel">
           <div class="title">{{t 'my-content'}}</div>
