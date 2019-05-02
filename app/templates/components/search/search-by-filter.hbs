@@ -4,13 +4,14 @@
     {{#unless (eq activeContentType 'course')}}
       <div class="top-panel-container">
         <div class="label-container" data-toggle="collapse" data-target="#standard">
-          <span class="title">{{t 'common.competency'}} {{t 'common.category'}}</span>
+          <div class="title">{{t 'common.competency'}}</div>
           <div class="icons">
             <span>{{gru-icon name="arrow_drop_up"}}</span>
             <span>{{gru-icon name="arrow_drop_down"}}</span>
           </div>
         </div>
         <div class="standard-container collapse in" id="standard">
+          <span class="sub-title">{{t 'common.category'}}</span>
           <div class="category-standards">
             {{taxonomy.gru-taxonomy-selector
                 isEditing=true

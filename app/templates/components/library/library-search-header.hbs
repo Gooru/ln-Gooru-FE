@@ -52,7 +52,7 @@
     <span {{action 'toggleSearchFilter'}} class="filter">{{gru-icon name="filter_list"}}</span>
   </div>
 </div>
-<div class="filters">
+<div class="filters {{activeContentType}}">
   <div class="hidden visible-xs">
     <div class="filter-items {{unless filters 'hidden'}}">
       {{#each filters as |selectedFilter index|}}
