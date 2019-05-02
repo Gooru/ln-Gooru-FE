@@ -184,10 +184,6 @@ test('tools tab as teacher', function(assert) {
     'Live assessments link should not appear'
   );
   assert.ok(
-    $toolsMenu.find('.content-link').length,
-    'Missing content manager link'
-  );
-  assert.ok(
     $toolsMenu.find('.performance-dashboard-link').hasClass('out-of-scope'),
     'Performance dashboard link should not appear'
   );
