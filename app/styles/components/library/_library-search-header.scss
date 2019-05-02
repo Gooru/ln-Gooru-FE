@@ -192,18 +192,27 @@
       }
     }
 
-    .search-by-filter.active {
-      .search-panel {
-        .apply-filter {
-          height: 48px;
-          transition: height 0.45s ease-out;
+    &.question,
+    &.resource {
+      .search-by-filter {
+        max-height: calc(100vh - 255px);
+      }
+    }
+
+    .search-by-filter {
+      max-height: calc(100vh - 215px);
+
+      &.active {
+        .search-panel {
+          .apply-filter {
+            height: 48px;
+            transition: height 0.45s ease-out;
+          }
         }
       }
     }
 
     .search-by-filter {
-      max-height: none;
-
       .search-panel {
         .apply-filter {
           height: 0;
@@ -218,7 +227,7 @@
   .sub-filters-container {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
     background-color: #ffffff;
-    height: 50px;
+    height: 40px;
     align-items: center;
     width: 100vw;
     border-top: 1px solid #cccc;
@@ -229,7 +238,7 @@
       font-weight: bold;
       text-align: center;
       color: #4b5667;
-      font-size: 12px;
+      font-size: 11px;
       width: 100px;
       text-transform: uppercase;
     }
@@ -272,7 +281,7 @@
                 span {
                   vertical-align: middle;
                   display: inline-block;
-                  font-size: 13px;
+                  font-size: 12px;
 
                   &.icon {
                     margin: 0 5px 0 0;
@@ -327,7 +336,8 @@
                 span {
                   vertical-align: middle;
                   display: inline-block;
-                  font-size: 13px;
+                  font-size: 12px;
+                  height: 20px;
 
                   i {
                     font-size: 13px;
@@ -335,8 +345,7 @@
                   }
 
                   &.icon-container {
-                    height: 30px;
-                    margin: 3px 2px 0 0;
+                    height: auto;
                   }
                 }
               }
@@ -350,6 +359,8 @@
                   -webkit-mask-image: url("gooru/images/video-resource.svg");
                   mask-image: url("gooru/images/video-resource.svg");
                   @extend %bg-container;
+                  width: 20px;
+                  height: 20px;
                 }
               }
 
@@ -358,6 +369,8 @@
                   -webkit-mask-image: url("gooru/images/website-resource.svg");
                   mask-image: url("gooru/images/website-resource.svg");
                   @extend %bg-container;
+                  width: 20px;
+                  height: 20px;
                 }
               }
 
@@ -366,6 +379,8 @@
                   -webkit-mask-image: url("gooru/images/interactive-resource.svg");
                   mask-image: url("gooru/images/interactive-resource.svg");
                   @extend %bg-container;
+                  width: 20px;
+                  height: 20px;
                 }
               }
 
@@ -374,6 +389,8 @@
                   -webkit-mask-image: url("gooru/images/image-resource.svg");
                   mask-image: url("gooru/images/image-resource.svg");
                   @extend %bg-container;
+                  width: 20px;
+                  height: 20px;
                 }
               }
 
@@ -382,6 +399,8 @@
                   -webkit-mask-image: url("gooru/images/text-resource.svg");
                   mask-image: url("gooru/images/text-resource.svg");
                   @extend %bg-container;
+                  width: 20px;
+                  height: 20px;
                 }
               }
 
@@ -390,6 +409,8 @@
                   -webkit-mask-image: url("gooru/images/audio-resource.svg");
                   mask-image: url("gooru/images/audio-resource.svg");
                   @extend %bg-container;
+                  width: 20px;
+                  height: 20px;
                 }
               }
             }
@@ -511,7 +532,7 @@
 
         .label {
           font-weight: normal;
-          font-size: 12px;
+          font-size: 13px;
           color: #37424b;
         }
 
