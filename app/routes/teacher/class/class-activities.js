@@ -89,5 +89,6 @@ export default Ember.Route.extend({
     controller.set('classActivities', Ember.A([]));
     controller.set('month', null);
     controller.set('year', null);
+    controller.set('isShowAddData', false);
   }
 });

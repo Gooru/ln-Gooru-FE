@@ -413,10 +413,15 @@ export default Ember.Component.extend({
     const component = this;
     let students = component.get('students');
     let activeStudentIndex = students.indexOf(component.get('activeStudent'));
-    if (activeStudentIndex !== students.length - 1) {
-      component.set('activeStudent', students.objectAt(activeStudentIndex + 1));
-    } else {
-      component.sendAction('onClosePullUp');
+    if (!component.isDestroyed) {
+      if (activeStudentIndex !== students.length - 1) {
+        component.set(
+          'activeStudent',
+          students.objectAt(activeStudentIndex + 1)
+        );
+      } else {
+        component.sendAction('onClosePullUp');
+      }
     }
   },
 
@@ -434,6 +439,9 @@ export default Ember.Component.extend({
       component.toggleQuestionVisibility();
       component.activateNextStudent();
       component.scrollToFirstQuestion();
+      if (component.get('isOverwriteScore')) {
+        component.loadActivityQuestionsPerformanceData();
+      }
     });
   },
 
@@ -474,12 +482,14 @@ export default Ember.Component.extend({
     return component
       .fetchAssessmentData(assessment.get('id'))
       .then(function(assessmentData) {
-        let questions = assessmentData
-          ? assessmentData.get('children')
-          : Ember.A([]);
-        component.set('questions', questions);
-        component.resetQuestionScores();
-        component.toggleQuestionVisibility();
+        if (!component.isDestroyed) {
+          let questions = assessmentData
+            ? assessmentData.get('children')
+            : Ember.A([]);
+          component.set('questions', questions);
+          component.resetQuestionScores();
+          component.toggleQuestionVisibility();
+        }
       });
   },
 
@@ -493,7 +503,9 @@ export default Ember.Component.extend({
     return component
       .fetchExternalAssessmentData(assessment.get('id'))
       .then(function(assessmentData) {
-        component.set('assessment', assessmentData);
+        if (!component.isDestroyed) {
+          component.set('assessment', assessmentData);
+        }
       });
   },
 
@@ -564,10 +576,12 @@ export default Ember.Component.extend({
         )
       })
       .then(({ studentActivityPerformance }) => {
-        student.set(
-          'performance',
-          studentActivityPerformance.objectAt(0).get('collection.performance')
-        );
+        if (!component.isDestroyed) {
+          student.set(
+            'performance',
+            studentActivityPerformance.objectAt(0).get('collection.performance')
+          );
+        }
       });
   },
 
@@ -634,9 +648,11 @@ export default Ember.Component.extend({
         )
       })
       .then(() => {
-        component.resetQuestionScores();
-        component.set('activeStudent', component.get('activeStudentTemp'));
-        component.set('activeStudent.isSubmitted', true);
+        if (!component.isDestroyed) {
+          component.resetQuestionScores();
+          component.set('activeStudent', component.get('activeStudentTemp'));
+          component.set('activeStudent.isSubmitted', true);
+        }
       });
   },
 
@@ -655,8 +671,10 @@ export default Ember.Component.extend({
         )
       })
       .then(() => {
-        component.set('activeStudent', component.get('activeStudentTemp'));
-        component.set('activeStudent.isSubmitted', true);
+        if (!component.isDestroyed) {
+          component.set('activeStudent', component.get('activeStudentTemp'));
+          component.set('activeStudent.isSubmitted', true);
+        }
       });
   },
 
@@ -804,7 +822,7 @@ export default Ember.Component.extend({
           : null
       );
     });
-    if (component.get('activeStudent.performance')) {
+    if (component.get('isOverwriteScore')) {
       component.loadActivityQuestionsPerformanceData();
     }
   },

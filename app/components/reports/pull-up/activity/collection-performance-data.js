@@ -86,6 +86,7 @@ export default Ember.Component.extend({
     onClearSearchResources() {
       const component = this;
       component.set('resourceSearchPattern', '');
+      component.set('resourceList', component.get('resources'));
     },
 
     //Action triggered when submit external collection timespent
