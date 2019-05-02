@@ -163,7 +163,7 @@ test('hidden links as teacher', function(assert) {
 });
 
 test('tools tab as teacher', function(assert) {
-  assert.expect(4); //making sure all asserts are called
+  assert.expect(3); //making sure all asserts are called
 
   let profile = Ember.Object.create({
     isTeacher: true
@@ -182,10 +182,6 @@ test('tools tab as teacher', function(assert) {
   assert.ok(
     $toolsMenu.find('.assessments-link').hasClass('out-of-scope'),
     'Live assessments link should not appear'
-  );
-  assert.ok(
-    $toolsMenu.find('.content-link').length,
-    'Missing content manager link'
   );
   assert.ok(
     $toolsMenu.find('.performance-dashboard-link').hasClass('out-of-scope'),
