@@ -15,6 +15,10 @@ export default Ember.Component.extend(PullUpMixin, {
     component.openPullUp();
   },
 
+  didRender() {
+    this.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
+
   // -------------------------------------------------------------------------
   // Properties
   /**
