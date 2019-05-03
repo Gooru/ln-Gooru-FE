@@ -1,7 +1,7 @@
 <div class="question-container {{if question.active 'expanded'}}">
   <div class="question-header-container {{if question.isScored 'scored'}}" {{action "onToggleQuestion" seq}}>
     <div class="question-icon"> </div>
-    <div class="question-title ellipsis">Q{{plus-one seq}}. {{question.title}}</div>
+    <div class="question-title ellipsis" data-toggle="tooltip" title="{{question.title}}">Q{{plus-one seq}}. {{question.title}}</div>
     <div class="question-accordion">
       {{#if question.active}}
         {{gru-icon name="arrow_drop_up"}}
