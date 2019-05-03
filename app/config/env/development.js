@@ -10,10 +10,10 @@ export default {
   },
 
   realTime: {
-    webServiceUrl: 'http://staging.gooru.org',
-    webServiceUri: '/nucleus/realtime',
-    webSocketUrl: 'https://rt.staging.gooru.org',
-    webSocketUri: '/ws/realtime'
+    webServiceUrl: 'https://staging.gooru.org',
+    webServiceUri: 'https://staging.gooru.org/',
+    webSocketUrl: 'https://rt-stag.gooru.org',
+    webSocketUri: '/ws/quizzes-realtime'
   },
 
   teams: {
@@ -49,7 +49,7 @@ export default {
     realTime: {
       webServiceUrl: 'https://staging.gooru.org',
       webServiceUri: '/',
-      webSocketUrl: 'https://staging.gooru.org',
+      webSocketUrl: 'https://rt-stag.gooru.org',
       webSocketUri: '/ws/quizzes-realtime'
     }
   },
@@ -85,6 +85,6 @@ export default {
 
   GRU_FEATURE_FLAG: {
     searchFilter: true,
-    enableCollectionLiveLearning: false
+    enableCollectionLiveLearning: true
   }
 };

@@ -1,0 +1,239 @@
+<div class="contents {{activeContentType}} {{unless searchResults 'no-content'}}">
+  {{#each searchResults as |content|}}
+    <div class="card">
+      {{#if (eq activeContentType 'course')}}
+        {{#if (eq type 'library')}}
+          {{new-cards.gru-standard-card
+          profile=profile
+          isCourse=true
+          isOnProfile=true
+          cardSize="md"
+          content=content
+          onOpenIndependentPlayer="playIndependentContent"
+          onOpenContentPlayer="playCourse"
+          onBookmarkContent="onBookmarkCourse"
+        }}
+        {{else if  (eq type 'gooru-catalog')}}
+          {{new-cards.gru-standard-card
+          content=content
+          cardSize="md"
+          profile=profile
+          isCourse=true
+          novisibility=true
+          onOpenContentPlayer="playCourse"
+          onOpenIndependentPlayer="playIndependentContent"
+          onRemixCourse="remixCourse"
+          onBookmarkContent="onBookmarkCourse"
+        }}
+        {{else}}
+          {{new-cards.gru-standard-card
+            profile=profile
+            isCourse=true
+            cardSize="md"
+            content=content
+            classroomList=activeClasses
+            classStudentCount=myClasses
+            isMyProfile=isMyProfile
+            isOnProfile=true
+            publishVisible=true
+            onOpenContentPlayer="playCourse"
+            onEditContent="editCourse"
+            onUpdateUserClasses="updateClass"
+            onOpenIndependentPlayer="playIndependentContent"
+            onBookmarkContent="onBookmarkCourse"
+            }}
+        {{/if}}
+      {{/if}}
+      {{#if (eq activeContentType 'assessment')}}
+        {{#if (eq type 'library')}}
+          {{new-cards.gru-standard-card
+            profile=profile
+            isOnProfile=true
+            cardSize="md"
+            content=content
+            onOpenIndependentPlayer="playIndependentContent"
+            onOpenContentPlayer="openContentPlayer"
+            onBookmarkContent="onBookmarkContent"
+            onPreviewContent="onPreviewContent"
+          }}
+        {{else if  (eq type 'gooru-catalog')}}
+          {{new-cards.gru-standard-card
+            content=content
+            cardSize="md"
+            isCollection=true
+            profile=profile
+            novisibility=true
+            onOpenContentPlayer="openContentPlayer"
+            onOpenIndependentPlayer="onIndependentPlayer"
+            onBookmarkContent="onBookmarkContent"
+            onPreviewContent="onPreviewContent"
+            }}
+        {{else}}
+          {{new-cards.gru-standard-card
+            profile=profile
+            cardSize="md"
+            content=content
+            isMyProfile=isMyProfile
+            isOnProfile=true
+            publishVisible=true
+            classroomList=activeClasses
+            classStudentCount=myClasses
+            onOpenContentPlayer="openContentPlayer"
+            onEditContent="editAssessment"
+            onOpenIndependentPlayer="playIndependentContent"
+            onBookmarkContent="onBookmarkContent"
+            onPreviewContent="onPreviewContent"
+          }}
+        {{/if}}
+      {{/if}}
+      {{#if (eq activeContentType 'collection')}}
+        {{#if (eq type 'library') }}
+          {{new-cards.gru-standard-card
+              profile=profile
+              isOnProfile=true
+              cardSize="md"
+              content=content
+              onOpenIndependentPlayer="playIndependentContent"
+              onOpenContentPlayer="openCollectionContentPlayer"
+              onBookmarkContent="onBookmarkContent"
+              onPreviewContent="onPreviewContent"
+            }}
+        {{else if  (eq type 'gooru-catalog')}}
+          {{new-cards.gru-standard-card
+          content=content
+          cardSize="md"
+          isCollection=true
+          profile=profile
+          novisibility=true
+          onOpenContentPlayer="openCollectionContentPlayer"
+          onOpenIndependentPlayer="onIndependentPlayer"
+          onBookmarkContent="onBookmarkContent"
+          onPreviewContent="onPreviewContent"
+          }}
+        {{else}}
+          {{new-cards.gru-standard-card
+              profile=profile
+              content=content
+              cardSize="md"
+              isCollection=true
+              isMyProfile=isMyProfile
+              classroomList=activeClasses
+              classStudentCount=myClasses
+              isOnProfile=true
+              publishVisible=true
+              onOpenContentPlayer="openCollectionContentPlayer"
+              onEditContent="editCollection"
+              onOpenIndependentPlayer="playIndependentContent"
+              onBookmarkContent="onBookmarkContent"
+              onPreviewContent="onPreviewContent"
+            }}
+        {{/if}}
+      {{/if}}
+      {{#if (eq activeContentType 'resource')}}
+        {{#if (eq type 'library')}}
+          {{new-cards.gru-resource-card
+          resource=content
+          onRemixQuestion="remixQuestion"
+          onPlayResource="playResource"
+          profile=profile
+          addEnabled=true
+          editEnabled=false
+          partnerLibrary=true
+          isOnProfile=true
+        }}
+        {{else if (eq type 'gooru-catalog')}}
+          {{new-cards.gru-resource-card
+          resource=content
+          profile=profile
+          isSearch=true
+          onRemixQuestion="remixQuestion"
+          onPlayResource="playResource"
+        }}
+        {{else}}
+          {{new-cards.gru-resource-card
+          resource=content
+          publishVisible=true
+          isOnProfile=true
+          addEnabled=isMyProfile
+          editEnabled=isMyProfile
+          onEditResource="editResource"
+          onPlayResource="playResource"}}
+        {{/if}}
+      {{/if}}
+      {{#if (eq activeContentType 'question')}}
+        {{#if (eq type 'library')}}
+          {{new-cards.gru-resource-card
+            resource=content
+            addEnabled=true
+            remixEnabled=true
+            isMyProfile=true
+            onRemixQuestion="remixQuestion"
+            onPlayResource="playQuestion"
+            profile=profile
+            partnerLibrary=true
+            isOnProfile=true
+          }}
+        {{else if  (eq type 'gooru-catalog')}}
+          {{new-cards.gru-resource-card
+            resource=content
+            profile=profile
+            isSearch=true
+            onRemixQuestion="remixQuestion"
+            onPlayResource="playResource"
+          }}
+        {{else}}
+          {{new-cards.gru-resource-card
+            resource=content
+            addEnabled=isMyProfile
+            publishVisible=true
+            isOnProfile=true
+            editEnabled=isMyProfile
+            onPlayResource="playQuestion"
+            onEditResource="editQuestion"
+            onRemixQuestion="remixQuestion"
+          }}
+        {{/if}}
+      {{/if}}
+      {{#if (eq activeContentType 'rubric')}}
+        {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
+          {{new-cards.gru-resource-card
+          resource=content
+          isRubric=true
+          profile=profile
+        }}
+        {{else}}
+          {{new-cards.gru-resource-card
+          resource=content
+          editEnabled=isMyProfile
+          onEditResource='editRubric'
+          isRubric=true
+          isOnProfile=true
+          }}
+        {{/if}}
+      {{/if}}
+    </div>
+  {{else}}
+    <div class="panel add-content panel-default">
+      <div class="panel-body">
+        {{gru-icon name='explore'}}
+        {{#if isMyProfile}}
+          <p>{{{t "common.add-content-prompt" type=(t (concat "common.a-" activeContentType))}}}</p>
+          <button class="btn btn-success" {{action "showModal" (concat "content.modals.gru-" activeContentType "-new")}}>
+            {{t "common.add"}} {{t (concat "common." activeContentType)}}
+          </button>
+        {{else}}
+          <p>{{{t (concat "common.no-" activeContentType "s-to-display")}}}</p>
+        {{/if}}
+      </div>
+    </div>
+  {{/each}}
+</div>
+{{#if isShowContentPreview}}
+  {{reports.pull-up.gru-collection-preview
+    showPullUp=isShowContentPreview
+    previewContentId=previewContent.id
+    showPrintPreview=false
+    previewContentType=previewContentType
+    isRemixableContent=isRemixableContent
+  }}
+{{/if}}

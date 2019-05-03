@@ -22,21 +22,29 @@
     <div class="collection-info">
       <div class="title-section">
         {{#if (and isOnProfile isMyProfile)}}
-          <a class="edit-content" {{action "editContent"}}> <h3 class="title" alt="{{content.title}}">{{truncate text=content.title maxLength=40}}
-          </h3></a>
+          <a class="edit-content" {{action "editContent"}}>
+            <h3 class="title" alt="{{content.title}}">{{truncate text=content.title maxLength=40}}
+            </h3>
+          </a>
         {{else}}
           {{#unless isStudent}}
             {{#if isCourse}}
               {{#link-to 'content.courses.play' content.id}}
-                <a class="play-content"><h3 class="title" alt="{{ content.title }}">{{truncate text=content.title maxLength=40}}</h3></a>
+                <a class="play-content">
+                  <h3 class="title" alt="{{ content.title }}">{{truncate text=content.title maxLength=40}}</h3>
+                </a>
               {{/link-to}}
             {{else}}
               {{#link-to 'player' content.id (query-params type=contentType)}}
-                <a class="play-content"><h3 class="title" alt="{{ content.title }}">{{truncate text=content.title maxLength=40}}</h3></a>
+                <a class="play-content">
+                  <h3 class="title" alt="{{ content.title }}">{{truncate text=content.title maxLength=40}}</h3>
+                </a>
               {{/link-to}}
             {{/if}}
           {{else}}
-            <a class="preview-content" {{action "previewContent" content}}><h3 class="title" alt="{{content.title}}">{{truncate text=content.title maxLength=40}}</h3></a>
+            <a class="preview-content" {{action "previewContent" content}}>
+              <h3 class="title" alt="{{content.title}}">{{truncate text=content.title maxLength=40}}</h3>
+            </a>
           {{/unless}}
         {{/if}}
       </div>
@@ -49,17 +57,19 @@
           {{/if}}
         {{else}}
           {{#if hasResources}}
-            <span class="bar resource-count">| </span><p>{{t "cards.gru-course-card.resource" count=content.resourceCount}}</p>
+            <span class="bar resource-count">| </span>
+            <p>{{t "cards.gru-course-card.resource" count=content.resourceCount}}</p>
           {{/if}}
           {{#if hasQuestions}}
-            <span class="bar question-count">| </span><p>{{t "cards.gru-course-card.question" count=content.questionCount}}</p>
+            <span class="bar question-count">| </span>
+            <p>{{t "cards.gru-course-card.question" count=content.questionCount}}</p>
           {{/if}}
         {{/if}}
       </span>
     </div>
     {{#if publishVisible}}
       {{#if content.isPublished}}
-        <div class="publish-icon" title="{{t 'common.published-tooltip'}}" data-toggle="tooltip"  data-placement="top"></div>
+        <div class="publish-icon" title="{{t 'common.published-tooltip'}}" data-toggle="tooltip" data-placement="top"></div>
       {{/if}}
     {{/if}}
   </div>
@@ -71,7 +81,7 @@
     </div>
     <div class="{{if isAssessment 'author' 'remixed-by'}}">
       {{#if isAssessment}}
-        {{#link-to 'profile.content.courses' content.owner.id class="pointer" tagName="div"}}
+        {{#link-to 'library-search' (query-params type="my-content" profileId=content.owner.id) class="pointer" tagName="div"}}
           <span class="title">
             {{t (if content.sameOwnerAndCreator "common.created-by" "common.remixed-by")}}
           </span>
@@ -80,7 +90,7 @@
         {{/link-to}}
       {{else}}
         {{#if content.owner}}
-          {{#link-to 'profile.content.courses' content.owner.id class="pointer" tagName="div"}}
+          {{#link-to 'library-search' (query-params type="my-content" profileId=content.owner.id) class="pointer" tagName="div"}}
             <span class="title">
               {{t (if content.sameOwnerAndCreator "common.created-by" "common.remixed-by")}}
             </span>
@@ -130,7 +140,7 @@
       {{#if isOnProfile}}
         {{#if (and profile isMyProfile)}}
           {{#unless content.isVisibleOnProfile }}
-            <div class="visibility"  title="{{t 'common.visibility-tooltip'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+            <div class="visibility" title="{{t 'common.visibility-tooltip'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
               {{gru-icon name="visibility_off" class='pull-right'}}
             </div>
           {{/unless}}
@@ -153,9 +163,8 @@
           {{/if}}
         </div>
         {{#if isStudent}}
-          <button class="btn bookmark-btn no-bgd {{if disabledBookmark 'btn-disabled'}}" title="{{t 'common.bookmark'}}"
-              {{action 'bookmarkContent' content true}} data-toggle="tooltip"
-              data-placement="bottom" data-trigger="hover" disabled={{disabledBookmark}}>
+          <button class="btn bookmark-btn no-bgd {{if disabledBookmark 'btn-disabled'}}" title="{{t 'common.bookmark'}}" {{action 'bookmarkContent' content true}} data-toggle="tooltip" data-placement="bottom" data-trigger="hover"
+            disabled={{disabledBookmark}}>
             {{gru-icon name="turned_in_not"}}
           </button>
         {{/if}}

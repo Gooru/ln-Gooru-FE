@@ -1,0 +1,35 @@
+<div class="panel-container">
+  {{ library.library-search-header
+     selectedFilters=selectedFilters
+     activeContentType=activeContentType
+     library=library
+     isMyProfile=isMyProfile
+     useBackUrl=isBack
+     profile=profile
+     type=type
+     selectedResourceTypes=selectedResourceTypes
+     selectedQuestionTypes=selectedQuestionTypes
+     onShowModal="showModal"
+     isAnonymousUser=session.isAnonymous
+     onSearch="doSearch"
+   }}
+  {{#if isLoading}}
+    {{three-bounce-spinner}}
+  {{else}}
+    {{library.library-content-result-grid-view
+       paginateNext="doPaginate"
+       isTeacher=isTeacher
+       activeClasses=activeClasses
+       myClasses=myClasses
+       type=type
+       isMyProfile=isMyProfile
+       onRemixQuestion="remixQuestion"
+       onRemixCourse="remixCourse"
+       onShowCreateModal="onShowModal"
+       updateUserClasses=updateClass
+       searchResults=searchResults
+       profile=profile
+       activeContentType=activeContentType
+     }}
+  {{/if}}
+</div>

@@ -63,7 +63,7 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
 
     // Ultimately all server and javascript errors will be caught by this handler
     Ember.onerror = function(error) {
-      if (error.status !== 401) {
+      if (error.status !== 401 && error.status !== 403) {
         const errorMessage = route.get('i18n').t('common.unexpectedError')
           .string;
         route.get('notifications').error(errorMessage);

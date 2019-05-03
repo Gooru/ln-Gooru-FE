@@ -16,30 +16,6 @@ moduleForAcceptance('Acceptance | application', {
   }
 });
 
-test('searchTerm: Search box navigation', function(assert) {
-  visit('/');
-
-  andThen(function() {
-    assert.expect(3); //making sure all asserts are called
-
-    assert.equal(currentURL(), '/');
-
-    const $appHeader = find('.gru-header');
-    assert.ok($appHeader.length, 'Missing header');
-    const $searchInput = $appHeader.find('.search-input');
-
-    fillIn($searchInput, 'europe');
-    $searchInput.val('europe');
-    $searchInput.change();
-
-    $appHeader.find('form').submit();
-
-    andThen(function() {
-      assert.equal(currentURL(), '/search/courses?term=europe');
-    });
-  });
-});
-
 test('Theme support - no theme', function(assert) {
   visit('/');
 

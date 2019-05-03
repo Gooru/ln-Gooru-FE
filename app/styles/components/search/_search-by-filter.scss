@@ -1,14 +1,15 @@
 .search-by-filter {
   height: 0;
-  transition: height 0.25s ease-out;
+  transition: height 0.45s ease-out;
   overflow: hidden;
   background: #fff;
   max-height: calc(90vh - 100px);
   position: relative;
+  width: 100%;
 
   &.active {
     height: 100vh;
-    transition: height 0.25s ease-in;
+    transition: height 0.45s ease-in;
   }
 
   .backdrop {
@@ -188,13 +189,17 @@
 
         .label-container {
           position: relative;
-          font-size: 15px;
-          font-weight: bold;
           height: auto;
           cursor: pointer;
           color: #37424b;
-          display: flex;
+          display: grid;
+          font-size: 15px;
+          font-weight: bold;
           text-transform: uppercase;
+
+          .sub-title {
+            opacity: 0.8;
+          }
 
           .icons {
             position: absolute;
@@ -245,6 +250,15 @@
         }
 
         .standard-container {
+          .sub-title {
+            color: #37424b;
+            display: grid;
+            font-size: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            opacity: 0.8;
+          }
+
           .taxonomy.gru-taxonomy-selector > div {
             margin-top: 0;
           }
@@ -455,6 +469,11 @@
               color: #37424b;
               text-transform: uppercase;
               height: 20px;
+              opacity: 0.8;
+
+              &.no-subject {
+                display: none;
+              }
             }
           }
 

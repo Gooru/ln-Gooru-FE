@@ -19,6 +19,8 @@ export default Object.assign(quizzesTranslations, {
   'errors.inclusion': '{{description}} তালিকায় অন্তর্ভুক্ত করা হয় না',
   'errors.exclusion': '{{বর্ণনা}} সংরক্ষিত',
   'errors.invalid': '{{বর্ণনা}} অবৈধ',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'errors.confirmation': '{{বর্ণনা}} মেলে না {{on}}',
   'errors.accepted': '{{বর্ণনা}} গ্রহণ করা আবশ্যক',
   'errors.empty': '{{বর্ণনা}} খালি হতে পারে না',
@@ -59,12 +61,14 @@ export default Object.assign(quizzesTranslations, {
   'common.last': 'গত',
   'common.name': 'নাম',
   'common.user': 'ব্যবহারকারী',
+  'common.sub-filter': 'Sub-Filter',
   'common.content-name': 'কন্টেন্ট নাম',
   'common.lastName': 'নামের শেষাংশ',
   'common.firstName': 'নামের প্রথম অংশ',
   'common.filter-by': 'দ্বারা ফিল্টার',
   'common.more': 'অধিক',
   'common.apply-filter': 'apply filter',
+  'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'গড় স্কোর',
   'common.frq': 'frq',
@@ -87,7 +91,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'একটি সম্পদ',
   'common.a-rubric': 'একটি রুব্রিক',
   'common.all-completed': 'সব সম্পন্ন',
-  'common.an-assessment': 'একটি মূল্যায়ন',
+  'common.a-assessment': 'একটি মূল্যায়ন',
   'common.about': 'সম্পর্কিত',
   'common.about-you': 'তোমার সম্পর্কে',
   'common.about-me': 'আমার সম্পর্কে',
@@ -1242,6 +1246,11 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'ক্লাস কার্যক্রম',
+  'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
+  'teacher-landing.class.class-activities.warning-message':
+    'You have not entered data for {{questionCount}} questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
+  'teacher-landing.class.class-activities.info-message':
+    'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
   'teacher-landing.class.offline-class-report.class-report': 'ক্লাস রিপোর্ট',
   'teacher-landing.class.offline-class-report.activity-report':
     'কার্যকলাপের প্রতিবেদন',
@@ -1818,7 +1827,8 @@ export default Object.assign(quizzesTranslations, {
   'profile.proficiency.baseline': 'বেসলাইন',
   'profile.proficiency.grade-line': 'Other Grade',
   'profile.proficiency.class-grade-line': 'Class Grade',
-  'profile.proficiency.not-tagged': 'ক্লাসের কোন কোর্স নির্ধারিত নেই অথবা কোর্সটিকে কোনও বৈধ বিষয় বা মানগুলিতে ট্যাগ করা হয়নি।',
+  'profile.proficiency.not-tagged':
+    'ক্লাসের কোন কোর্স নির্ধারিত নেই অথবা কোর্সটিকে কোনও বৈধ বিষয় বা মানগুলিতে ট্যাগ করা হয়নি।',
   'profile.proficiency.show-compressed-chart': 'সংক্ষেপিত চার্ট প্রদর্শন করুন',
   'profile.proficiency.show-expanded-chart': 'প্রসারিত তালিকা প্রদর্শন করুন',
   'profile.preference.language-preference': 'ভাষা পছন্দ',
@@ -2505,5 +2515,11 @@ export default Object.assign(quizzesTranslations, {
   'ca.mastery-accrual.update.error':
     'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.',
   'want.to.proceed': 'Do you want to proceed ?',
-  proceed: 'Proceed'
+  proceed: 'Proceed',
+  'enter-student-score': 'Enter Student Score',
+  'enter-assessment-max-score': 'Enter Assessment Max Score',
+  'student-score': 'Student Score',
+  'search-resource-question': 'Search Resource/Question',
+  'enter-resource-timespent': 'Enter Resource Time Spent',
+  'enter-collection-timespent': 'Enter Collection Time Spent'
 });

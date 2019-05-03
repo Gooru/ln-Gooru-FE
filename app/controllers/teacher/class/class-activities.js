@@ -439,26 +439,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           'activityMembers',
           classActivityStudents.sortBy('firstName')
         );
-
-        if (item.format === 'assessment') {
-          component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-          component.set('isShowCollectionPerformanceEntryPullUp', false);
-          component.set('isShowAssessmentPerformanceEntryPullUp', true);
-        } else if (item.format === 'assessment-external') {
-          component.set('isShowAssessmentPerformanceEntryPullUp', false);
-          component.set('isShowCollectionPerformanceEntryPullUp', false);
-          component.set('isShowExternalAssessmentPeformanceEntryPullUp', true);
-        } else if (item.format === 'collection') {
-          component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-          component.set('isShowAssessmentPerformanceEntryPullUp', false);
-          component.set('isShowCollectionPerformanceEntryPullUp', true);
-        } else {
-          component.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-          component.set('isShowAssessmentPerformanceEntryPullUp', false);
-          component.set('isShowCollectionPerformanceEntryPullUp', false);
-          component.set('isShowExternalCollectionPeformanceEntryPullUp', true);
-        }
+        component.set('isShowAddData', true);
       });
+      component.set('addDataContentType', item.get('format'));
       component.set('selectedItem', item);
       component.set('selectedActivity', activity);
       component.set('isRepeatEntry', isRepeatEntry);
@@ -466,11 +449,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
     onClosePerformanceEntry() {
       let controller = this;
-      controller.set('isShowExternalAssessmentPeformanceEntryPullUp', false);
-      controller.set('isShowAssessmentPerformanceEntryPullUp', false);
-      controller.set('isShowCollectionPerformanceEntryPullUp', false);
-      controller.set('isShowExternalCollectionPeformanceEntryPullUp', false);
-      controller.loadData();
+      controller.set('isShowAddData', false);
+      controller.fetchActivityPerformanceSummary(
+        controller.get('selectedActivity')
+      );
       controller.get('classController').fetchDcaSummaryPerformance();
     },
 
@@ -868,6 +850,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     }
   ),
 
+  /**
+   * @property {Boolean} isShowAddData
+   */
+  isShowAddData: false,
+
+  /**
+   * @property {String} addDataContentType
+   */
+  addDataContentType: '',
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -914,6 +906,48 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           let date = moment().format('YYYY-MM-DD');
           controller.handleScrollToSpecificDate(date, true);
         }, 1000);
+      });
+  },
+
+  /**
+   * @function fetchActivityPerformanceSummary
+   * Method to fetch given activity performance summary
+   */
+  fetchActivityPerformanceSummary(activity) {
+    const controller = this;
+    const classActivityService = controller.get('classActivityService');
+    const classId = controller.get('classId');
+    const forYear = controller.get('forYear');
+    const forMonth = controller.get('forMonth');
+    const startDate = moment(`${forYear}-${forMonth}-01`).format('YYYY-MM-DD');
+    const endDate = moment(startDate)
+      .endOf('month')
+      .format('YYYY-MM-DD');
+    let classActivities = controller.get('classActivities');
+    return Ember.RSVP
+      .hash({
+        activityPerformance: classActivityService.findClassActivitiesPerformanceSummary(
+          classId,
+          Ember.A([activity]),
+          startDate,
+          endDate
+        )
+      })
+      .then(({ activityPerformance }) => {
+        activityPerformance = activityPerformance.objectAt(0);
+        let dateWiseClassActivities = classActivities.findBy(
+          'added_date',
+          activityPerformance.get('added_date')
+        );
+        let classActivityItems = dateWiseClassActivities.get('classActivities');
+        let selectedActivityIndex = classActivityItems.indexOf(
+          activityPerformance
+        );
+        classActivityItems.splice(
+          selectedActivityIndex,
+          1,
+          activityPerformance
+        );
       });
   },
 
@@ -1028,13 +1062,15 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   fetchActivityUsers(activityId) {
     let controller = this;
     let classId = controller.get('classId');
-    return Ember.RSVP.hash({
-      activityMembers: controller
-        .get('classActivityService')
-        .fetchUsersForClassActivity(classId, activityId)
-    }).then(({ activityMembers }) => {
-      return activityMembers;
-    });
+    return Ember.RSVP
+      .hash({
+        activityMembers: controller
+          .get('classActivityService')
+          .fetchUsersForClassActivity(classId, activityId)
+      })
+      .then(({ activityMembers }) => {
+        return activityMembers;
+      });
   },
 
   fetchAssessmentsMasteryAccrual() {
@@ -1061,31 +1097,33 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       return assessment.get('id');
     });
     if (assessmentIds.length > 0) {
-      Ember.RSVP.hash({
-        assessmentsMasteryAccrual: controller
-          .get('assessmentService')
-          .assessmentsMasteryAccrual(assessmentIds)
-      }).then(({ assessmentsMasteryAccrual }) => {
-        if (!controller.get('isDestroyed')) {
-          assessments.forEach(assessment => {
-            let assessmentId = assessment.get('id');
-            let assessmentMasteryAccrual = assessmentsMasteryAccrual.findBy(
-              assessmentId
-            );
-            if (assessmentMasteryAccrual) {
-              let masteryAccrualCompetencies = assessmentMasteryAccrual.get(
+      Ember.RSVP
+        .hash({
+          assessmentsMasteryAccrual: controller
+            .get('assessmentService')
+            .assessmentsMasteryAccrual(assessmentIds)
+        })
+        .then(({ assessmentsMasteryAccrual }) => {
+          if (!controller.get('isDestroyed')) {
+            assessments.forEach(assessment => {
+              let assessmentId = assessment.get('id');
+              let assessmentMasteryAccrual = assessmentsMasteryAccrual.findBy(
                 assessmentId
               );
-              if (masteryAccrualCompetencies) {
-                assessment.set(
-                  'masteryAccrualCompetencies',
-                  masteryAccrualCompetencies
+              if (assessmentMasteryAccrual) {
+                let masteryAccrualCompetencies = assessmentMasteryAccrual.get(
+                  assessmentId
                 );
+                if (masteryAccrualCompetencies) {
+                  assessment.set(
+                    'masteryAccrualCompetencies',
+                    masteryAccrualCompetencies
+                  );
+                }
               }
-            }
-          });
-        }
-      });
+            });
+          }
+        });
     }
   }
 });

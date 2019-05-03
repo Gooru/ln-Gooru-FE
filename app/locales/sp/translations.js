@@ -16,12 +16,15 @@ export default Object.assign(quizzesTranslations, {
   ta: 'தமிழ்',
   te: 'తెలుగు',
   'errors.description': 'Este campo',
+  'common.sub-filter': 'Sub-Filter',
   'errors.inclusion': '{{description}} no está incluido en la lista',
   'errors.exclusion': '{{description}} está reservado',
   'errors.invalid': '{{description}} no es válido',
   'errors.confirmation': '{{description}} no coincide {{on}}',
   'errors.accepted': 'Se debe aceptar {{description}}',
   'errors.empty': '{{description}} no puede estar vacío',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'errors.blank': '{{description}} no puede estar en blanco',
   'errors.present': '{{description}} debe estar en blanco',
   'errors.collection': '{{description}} debe ser una colección',
@@ -68,6 +71,7 @@ export default Object.assign(quizzesTranslations, {
   'common.filter-by': 'Filter By',
   'common.more': 'more',
   'common.apply-filter': 'apply filter',
+  'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'Avg Score',
   'common.frq': 'FRQ',
@@ -90,7 +94,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'un recurso',
   'common.a-rubric': 'Una rúbrica',
   'common.all-completed': 'Todo completado',
-  'common.an-assessment': 'Una evaluación',
+  'common.a-assessment': 'Una evaluación',
   'common.about': 'Acerca de',
   'common.about-you': 'Acerca de ti',
   'common.about-me': 'About Me',
@@ -1285,6 +1289,11 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'Actividades de Clases Diarias',
+  'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
+  'teacher-landing.class.class-activities.warning-message':
+    'You have not entered data for {{questionCount}} questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
+  'teacher-landing.class.class-activities.info-message':
+    'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
   'teacher-landing.class.offline-class-report.class-activity-report':
     'Class Activity Report',
@@ -2572,5 +2581,11 @@ export default Object.assign(quizzesTranslations, {
   'ca.mastery-accrual.update.error':
     'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.',
   'want.to.proceed': 'Do you want to proceed ?',
-  proceed: 'Proceed'
+  proceed: 'Proceed',
+  'enter-student-score': 'Enter Student Score',
+  'enter-assessment-max-score': 'Enter Assessment Max Score',
+  'student-score': 'Student Score',
+  'search-resource-question': 'Search Resource/Question',
+  'enter-resource-timespent': 'Enter Resource Time Spent',
+  'enter-collection-timespent': 'Enter Collection Time Spent'
 });

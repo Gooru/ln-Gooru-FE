@@ -13,6 +13,13 @@ export default gruTwoTierHeaderTable.extend({
    */
   i18n: Ember.inject.service(),
 
+  didRender() {
+    this._super(...arguments);
+    Ember.run.later(function() {
+      $('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    });
+  },
+
   didReceiveAttrs() {
     this._super(...arguments);
     this.classNames[1] = 'gru-two-tier-header-table-1';
@@ -42,6 +49,31 @@ export default gruTwoTierHeaderTable.extend({
           : imageUrl;
     });
   },
+
+  updateSortClasses: Ember.observer('sortCriteria', function() {
+    this._super(...arguments);
+    const sortCriteria = this.get('sortCriteria');
+
+    if (sortCriteria.secondTierIndex === 1) {
+      const totalSecondTierHeaders = this.get('secondTierHeaders').length;
+      const headers = this.$('.second-tier th');
+
+      var currentHeaderIndex =
+        sortCriteria.firstTierIndex * totalSecondTierHeaders +
+        sortCriteria.secondTierIndex;
+
+      headers.removeClass('ascending').removeClass('descending');
+
+      if (currentHeaderIndex >= 0) {
+        if (sortCriteria.order > 0) {
+          headers.eq(currentHeaderIndex).addClass('ascending');
+        } else {
+          headers.eq(currentHeaderIndex).addClass('descending');
+        }
+      }
+    }
+  }),
+
   /**
    * Set default visibility to
    */
@@ -66,12 +98,18 @@ export default gruTwoTierHeaderTable.extend({
 
       if (this.isCollectionType) {
         let scoreCol = $('table tr.second-tier th.correct:first >span');
-        let icn = scoreCol.find('i'),
-          lbl = scoreCol.find('div');
-        icn.css('display', 'none');
+        let icn = scoreCol.find('i[data-toggle="tooltip"]'),
+          lbl = scoreCol.find('div.col-label'),
+          lbl1 = scoreCol.find('div.sortIcn');
         lbl.removeClass('hidden');
+        lbl1.removeClass('hidden');
+
+        let sortIcn = scoreCol.find('.sortIcn');
+        sortIcn.css('display', 'inline-block');
+        icn.css('display', 'none');
         let tsColTitle = this.get('i18n').t('gru-data-picker.timeSpent').string;
         lbl.text(tsColTitle);
+        sortIcn.addClass('cursor-pointer');
       } else {
         //Applicable to score i.e. questions
         let innerSpan = this.$(cssSelector).find('span > span.score');
@@ -102,10 +140,17 @@ export default gruTwoTierHeaderTable.extend({
         }
 
         let scoreCol = $('table tr.second-tier th.correct:first >span');
-        let icn = scoreCol.find('i'),
-          lbl = scoreCol.find('div');
-        icn.css('display', 'none');
+
+        let icn = scoreCol.find('i:first'),
+          lbl = scoreCol.find('div.col-label'),
+          lbl1 = scoreCol.find('div.sortIcn');
         lbl.removeClass('hidden');
+        lbl1.removeClass('hidden');
+
+        let sortIcn = scoreCol.find('.sortIcn');
+        sortIcn.css('display', 'inline-block');
+        sortIcn.addClass('cursor-pointer');
+        icn.css('display', 'none');
       }
     }
   )

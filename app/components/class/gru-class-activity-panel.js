@@ -124,9 +124,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Properties
 
-  enableCollectionLiveLearning: Ember.computed.alias(
-    'configuration.GRU_FEATURE_FLAG.enableCollectionLiveLearning'
-  ),
+  enableCollectionLiveLearning: function() {
+    return true;
+  }.property(),
   /**
    * @property {Boolean} isShowAddData
    */

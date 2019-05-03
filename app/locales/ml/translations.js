@@ -19,6 +19,9 @@ export default Object.assign(quizzesTranslations, {
   'errors.inclusion': '{{description}} പട്ടികയിൽ ഉൾപ്പെടുത്തിയിട്ടില്ല',
   'errors.exclusion': '{{വിവരണം}} സംവരണം ചെയ്തിരിക്കുന്നു',
   'errors.invalid': '{{description}} അസാധുവാണ്',
+  'my-content': 'My Content',
+  'common.sub-filter': 'Sub-Filter',
+  'featured-libraries': 'featured libraries',
   'errors.confirmation': '{{വിവരണം}} പൊരുത്തമില്ല {{on}}',
   'errors.accepted': '{{വിവരണം}} അംഗീകരിക്കണം',
   'errors.empty': '{{description}} എന്നത് ശൂന്യമാവില്ല',
@@ -68,6 +71,7 @@ export default Object.assign(quizzesTranslations, {
   'common.more': 'കൂടുതൽ',
   'common.apply-filter': 'apply filter',
   'search-help-message': 'Choose filters to apply',
+  'library-search-placeholder': 'Search for anything within the library…',
   'common.avg-score': 'ശരാശരി സ്കോർ',
   'common.frq': 'frq',
   'common.schedule': 'പട്ടിക',
@@ -90,7 +94,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'ഒരു വിഭവം',
   'common.a-rubric': 'ഒരു റബ്രിക്ക്',
   'common.all-completed': 'എല്ലാം പൂർത്തിയായി',
-  'common.an-assessment': 'ഒരു വിലയിരുത്തൽ',
+  'common.a-assessment': 'ഒരു വിലയിരുത്തൽ',
   'common.about': 'കുറിച്ച്',
   'common.about-you': 'നിന്നേക്കുറിച്ച്',
   'common.about-me': 'എന്നെ പറ്റി',
@@ -1287,6 +1291,11 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'ക്ലാസ് പ്രവർത്തനങ്ങൾ',
+  'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
+  'teacher-landing.class.class-activities.warning-message':
+    'You have not entered data for {{questionCount}} questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
+  'teacher-landing.class.class-activities.info-message':
+    'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
   'teacher-landing.class.offline-class-report.class-report':
     'ക്ലാസ് റിപ്പോർട്ട്',
   'teacher-landing.class.offline-class-report.class-activity-report':
@@ -2589,5 +2598,11 @@ export default Object.assign(quizzesTranslations, {
   'ca.mastery-accrual.update.error':
     'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.',
   'want.to.proceed': 'Do you want to proceed ?',
-  proceed: 'Proceed'
+  proceed: 'Proceed',
+  'enter-student-score': 'Enter Student Score',
+  'enter-assessment-max-score': 'Enter Assessment Max Score',
+  'student-score': 'Student Score',
+  'search-resource-question': 'Search Resource/Question',
+  'enter-resource-timespent': 'Enter Resource Time Spent',
+  'enter-collection-timespent': 'Enter Collection Time Spent'
 });

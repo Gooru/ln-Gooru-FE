@@ -19,6 +19,9 @@ export default Object.assign(quizzesTranslations, {
   'errors.inclusion': '{{description}} सूची में शामिल नहीं है',
   'errors.exclusion': '{{description}} आरक्षित है',
   'errors.invalid': '{{description}} अमान्य है',
+  'my-content': 'My Content',
+  'common.sub-filter': 'Sub-Filter',
+  'featured-libraries': 'featured libraries',
   'errors.confirmation': '{{description}} {{on}} से मेल नहीं खाता है',
   'errors.accepted': '{{विवरण}} स्वीकार किया जाना चाहिए',
   'errors.empty': '{{description}} रिक्त नहीं रह सकता है',
@@ -76,6 +79,7 @@ export default Object.assign(quizzesTranslations, {
   'common.gooru-suggestions': 'Gooru सुझाव',
   'common.gooru-catalog': 'Gooru Catalog',
   'common.suggestion-made-to': 'सुझाव दिया गया',
+  'library-search-placeholder': 'Search for anything within the library…',
   'common.student-selected': 'छात्र चुने गए',
   'common.no-suggest-result-message': ' कोई मिलान सामग्री नहीं मिली',
   'common.no-suggest-results-message':
@@ -88,7 +92,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'एक संसाधन',
   'common.a-rubric': 'एक सुर्खी',
   'common.all-completed': 'सब पूरा हो गया',
-  'common.an-assessment': 'एक मूल्यांकन',
+  'common.a-assessment': 'एक मूल्यांकन',
   'common.about': 'के बारे में',
   'common.about-you': 'आपके बारे में',
   'common.about-me': 'मेरा परिचय',
@@ -1269,6 +1273,11 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'कक्षा की दैनिक गतिविधियां',
+  'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
+  'teacher-landing.class.class-activities.warning-message':
+    'You have not entered data for {{questionCount}} questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
+  'teacher-landing.class.class-activities.info-message':
+    'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
   'teacher-landing.class.offline-class-report.class-report': 'कक्षा की रिपोर्ट',
   'teacher-landing.class.offline-class-report.class-activity-report':
     'Class Activity Report',
@@ -2541,5 +2550,11 @@ export default Object.assign(quizzesTranslations, {
   'ca.mastery-accrual.update.error':
     'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.',
   'want.to.proceed': 'Do you want to proceed ?',
-  proceed: 'Proceed'
+  proceed: 'Proceed',
+  'enter-student-score': 'Enter Student Score',
+  'enter-assessment-max-score': 'Enter Assessment Max Score',
+  'student-score': 'Student Score',
+  'search-resource-question': 'Search Resource/Question',
+  'enter-resource-timespent': 'Enter Resource Time Spent',
+  'enter-collection-timespent': 'Enter Collection Time Spent'
 });

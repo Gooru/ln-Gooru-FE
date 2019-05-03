@@ -1,13 +1,7 @@
 import Ember from 'ember';
-import {
-  isNumeric
-} from './math';
-import {
-  formatTime as formatMilliseconds
-} from 'gooru-web/utils/utils';
-import {
-  aggregateCollectionPerformanceSummaryItems
-} from 'gooru-web/utils/performance-summary';
+import { isNumeric } from './math';
+import { formatTime as formatMilliseconds } from 'gooru-web/utils/utils';
+import { aggregateCollectionPerformanceSummaryItems } from 'gooru-web/utils/performance-summary';
 import {
   DEFAULT_IMAGES,
   EMOTION_VALUES,
@@ -253,9 +247,7 @@ export function getReactionIcon(reactionValue, basePath) {
     if (reaction && reaction.value && reaction.unicode) {
       html = `<div class="emotion emotion-${reaction.value}">`;
       html += '  <svg class="svg-sprite">';
-      html += `    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="${basePath}assets/emoji-one/emoji.svg#${
-        reaction.unicode
-      }"></use>`;
+      html += `    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="${basePath}assets/emoji-one/emoji.svg#${reaction.unicode}"></use>`;
       html += ' </svg>';
       html += '</div>';
     } else {
@@ -298,7 +290,7 @@ export function generateUUID() {
   var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(
     c
   ) {
-    var r = (d + Math.random() * 16) % 16 | 0;
+    var r = ((d + Math.random() * 16) % 16) | 0;
     d = Math.floor(d / 16);
     return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
   });
@@ -435,9 +427,9 @@ export function cleanFilename(url, cdnUrls) {
     }
   }
 
-  return url && !isDefaultImage(defaultImages, url) ?
-    /([^/]*\/\/[^/]+\/)?(.+)/.exec(url)[2] :
-    '';
+  return url && !isDefaultImage(defaultImages, url)
+    ? /([^/]*\/\/[^/]+\/)?(.+)/.exec(url)[2]
+    : '';
 }
 
 /**
@@ -693,22 +685,20 @@ function assessmentFileData(
 
   performanceDataHeaders.forEach(function(headerItem, index) {
     const prefixHeader =
-      level === 'course' ?
-        `U${index + 1} ` :
-        level === 'unit' ?
-          `L${index + 1} ` :
-          `A${index + 1} `;
+      level === 'course'
+        ? `U${index + 1} `
+        : level === 'unit' ? `L${index + 1} ` : `A${index + 1} `;
     const scoreHeader = `${prefixHeader}${headerItem.get('title')} score`;
     const timeHeader = `${prefixHeader}${headerItem.get('title')} time`;
     dataHeaders.push(scoreHeader);
     dataHeaders.push(timeHeader);
   });
   performanceAverageHeaders.forEach(function(avHeaderItem) {
-    const score = avHeaderItem.hideScore ?
-      'N/A' :
-      avHeaderItem.hasScore && avHeaderItem.hasStarted ?
-        `${avHeaderItem.score}%` :
-        '--%';
+    const score = avHeaderItem.hideScore
+      ? 'N/A'
+      : avHeaderItem.hasScore && avHeaderItem.hasStarted
+        ? `${avHeaderItem.score}%`
+        : '--%';
     const time = `${avHeaderItem.get('timeSpent')}`;
     averageHeaders.push(score);
     averageHeaders.push(time);
@@ -722,11 +712,11 @@ function assessmentFileData(
     data.push(student);
     performanceDataContent.forEach(function(dataContentItem) {
       if (dataContentItem) {
-        const score = dataContentItem.hideScore ?
-          'N/A' :
-          dataContentItem.hasScore && dataContentItem.hasStarted ?
-            `${dataContentItem.score}%` :
-            '--%';
+        const score = dataContentItem.hideScore
+          ? 'N/A'
+          : dataContentItem.hasScore && dataContentItem.hasStarted
+            ? `${dataContentItem.score}%`
+            : '--%';
         const time = `${dataContentItem.get('timeSpent')}`;
         data.push(score);
         data.push(time);
@@ -776,11 +766,11 @@ function lessonCollectionFileData(
     dataHeaders.push(timeHeader);
   });
   performanceAverageHeaders.forEach(function(avHeaderItem) {
-    const score = avHeaderItem.hideScore ?
-      'N/A' :
-      avHeaderItem.hasScore && avHeaderItem.hasStarted ?
-        `${avHeaderItem.score}%` :
-        '--%';
+    const score = avHeaderItem.hideScore
+      ? 'N/A'
+      : avHeaderItem.hasScore && avHeaderItem.hasStarted
+        ? `${avHeaderItem.score}%`
+        : '--%';
     const time = `${avHeaderItem.get('timeSpent')}`;
     averageHeaders.push(score);
     averageHeaders.push(time);
@@ -794,11 +784,11 @@ function lessonCollectionFileData(
     data.push(student);
     performanceDataContent.forEach(function(dataContentItem) {
       if (dataContentItem) {
-        const score = dataContentItem.hideScore ?
-          'N/A' :
-          dataContentItem.hasScore && dataContentItem.hasStarted ?
-            `${dataContentItem.score}%` :
-            '--%';
+        const score = dataContentItem.hideScore
+          ? 'N/A'
+          : dataContentItem.hasScore && dataContentItem.hasStarted
+            ? `${dataContentItem.score}%`
+            : '--%';
         const time = `${dataContentItem.get('timeSpent')}`;
         data.push(score);
         data.push(time);
@@ -936,10 +926,9 @@ export function getContentCount(data) {
   let questionCount = 0;
   if (Ember.isArray(data)) {
     data.map(contentItem => {
-      contentItem.content_format === 'resource' ?
-        resourceCount++
-        :
-        questionCount++;
+      contentItem.content_format === 'resource'
+        ? resourceCount++
+        : questionCount++;
     });
   }
   return {
@@ -1033,9 +1022,12 @@ export function validatePercentage(number) {
  * @return {Boolean}
  */
 export function validateTimespent(hour, min) {
-  let parseHour = hour && hour.length < 2 ? `0${hour}` : hour || '00';
-  let parseMin = min && min.length < 2 ? `0${min}` : min || '00';
-  var isValidTime = moment(`${parseHour}:${parseMin}`, 'HH:mm', true).isValid();
+  let isValidTime = false;
+  if (hour || min) {
+    let parseHour = hour ? hour.toString().padStart(2, '0') : '00';
+    let parseMin = min ? min.toString().padStart(2, '0') : '00';
+    isValidTime = moment(`${parseHour}:${parseMin}`, 'HH:mm', true).isValid();
+  }
   return isValidTime;
 }
 

@@ -16,10 +16,13 @@ export default Object.assign(quizzesTranslations, {
   ta: 'தமிழ்',
   te: 'తెలుగు',
   'errors.description': 'ଏହି କ୍ଷେତ୍ର',
+  'common.sub-filter': 'Sub-Filter',
   'errors.inclusion': '{{description}} ତାଲିକାରେ ଅନ୍ତର୍ଭୁକ୍ତ ନାହିଁ',
   'errors.exclusion': '{{description}} ସଂରକ୍ଷିତ ଅଛି',
   'errors.invalid': '{{description}}ଅମାନ୍ୟ ଅଛି',
   'errors.confirmation': '{{description}}ମେଳ ହେଉନାହିଁ{{on}}',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'errors.accepted': '{{description}} ଗ୍ରହଣ କରିବାକୁ ହେବ',
   'errors.empty': '{{description}} ଶୂନ୍ୟ ରଖାଯିବ ନାହିଁ',
   'errors.blank': '{{description}} ଖାଲି ରଖାଯିବ ନାହିଁ',
@@ -79,6 +82,7 @@ export default Object.assign(quizzesTranslations, {
   'common.no-lesson-info-message': 'ଏହି ୟୁନିଟରେ କୌଣସି ଅଧ୍ୟାୟ ନାହିଁ ।',
   'common.no-collection-info-message': 'ଏହି ୟୁନିଟରେ କୌଣସି ସଂଗ୍ରହ ନାହିଁ ।',
   'common.gooru-suggestions': 'Gooru ପରାମର୍ଶଗୁଡ଼ିକ',
+  'library-search-placeholder': 'Search for anything within the library…',
   'common.gooru-catalog': 'Gooru ସୂଚୀ',
   'common.suggestion-made-to': 'କୁ ପରାମର୍ଶ ଦିଆଯାଇଛି',
   'common.student-selected': 'ନିର୍ବାଚିତ ବିଦ୍ୟାର୍ଥୀ',
@@ -93,7 +97,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'ଏକ ଉତ୍ସ',
   'common.a-rubric': 'ଏକ ଶୀର୍ଷକ',
   'common.all-completed': 'ସମସ୍ତ ସଂପୂର୍ଣ୍ଣ',
-  'common.an-assessment': 'ଏକ ମୂଲ୍ୟାଙ୍କନ',
+  'common.a-assessment': 'ଏକ ମୂଲ୍ୟାଙ୍କନ',
   'common.about': 'ବିଷୟରେ',
   'common.about-you': 'ଆପଣଙ୍କ ବିଷୟରେ',
   'common.about-me': 'ମୋ ବିଷୟରେ',
@@ -1293,6 +1297,11 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'କ୍ଲାସ୍ କାର୍ଯ୍ୟକଳାପ',
+  'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
+  'teacher-landing.class.class-activities.warning-message':
+    'You have not entered data for {{questionCount}} questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
+  'teacher-landing.class.class-activities.info-message':
+    'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
   'teacher-landing.class.offline-class-report.class-report': 'କ୍ଲାସ୍ ରିପୋର୍ଟ',
   'teacher-landing.class.offline-class-report.class-activity-report':
     'Class Activity Report',
@@ -2590,5 +2599,11 @@ export default Object.assign(quizzesTranslations, {
   'ca.mastery-accrual.update.error':
     'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.',
   'want.to.proceed': 'Do you want to proceed ?',
-  proceed: 'Proceed'
+  proceed: 'Proceed',
+  'enter-student-score': 'Enter Student Score',
+  'enter-assessment-max-score': 'Enter Assessment Max Score',
+  'student-score': 'Student Score',
+  'search-resource-question': 'Search Resource/Question',
+  'enter-resource-timespent': 'Enter Resource Time Spent',
+  'enter-collection-timespent': 'Enter Collection Time Spent'
 });

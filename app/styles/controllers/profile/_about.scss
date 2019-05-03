@@ -45,8 +45,7 @@
         color: $green-400;
 
         .gru-icon {
-          background: url("/assets/gooru/images/icon-verified-green.svg")
-            no-repeat center center;
+          background: url("/assets/gooru/images/icon-verified-green.svg") no-repeat center center;
           display: inline-block;
           height: 24px;
           width: 24px;
@@ -121,6 +120,7 @@
     border-radius: 2px;
     background-color: #ffffff;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.07);
+    min-height: 455px;
 
     .panel-body {
       .username {
@@ -141,6 +141,11 @@
       color: $gray-dove;
       margin-top: 0;
       margin-bottom: 3px;
+    }
+
+    .library-link {
+      color: #0072bc;
+      text-transform: capitalize;
     }
 
     p {

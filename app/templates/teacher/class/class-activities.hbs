@@ -157,51 +157,28 @@
       showPullUp=showDcaCollectionReportPullUp}}
   {{/if}}
 {{/if}}
-{{#if isShowAssessmentPerformanceEntryPullUp}}
-  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowAssessmentPerformanceEntryPullUp title=selectedItem.title type='assessment' onClosePerformanceEntry='onClosePerformanceEntry' }}
-    {{reports.pull-up.assessment-performance-entry
-      assessment=selectedItem
-      course=course
-      students=activityMembers
-      activityData=selectedActivity
-      classId=classId
-      onClosePerformanceEntry="onClosePerformanceEntry"
-      isRepeatEntry=isRepeatEntry}}
-  {{/reports.pull-up.performance-manual-entry}}
-{{/if}}
-{{#if isShowCollectionPerformanceEntryPullUp}}
-  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowCollectionPerformanceEntryPullUp title=selectedItem.title type='collection' onClosePerformanceEntry='onClosePerformanceEntry' }}
-    {{reports.pull-up.collection-performance-entry
-      course=course
+
+<!-- Acitvity Add Performance Data -->
+{{#if isShowAddData}}
+  {{#reports.pull-up.activity.add-performance-data
+    showPullUp = isShowAddData
+    activityDate = selectedActivity.activation_date
+    activityTitle = selectedItem.title
+    onClosePullUp = "onClosePerformanceEntry"
+    contentType = addDataContentType
+  }}
+    {{reports.pull-up.activity.add-student-performance-data
       collection=selectedItem
-      students=activityMembers
-      activityData=selectedActivity
-      classId=classId
-      onClosePerformanceEntry="onClosePerformanceEntry"}}
-  {{/reports.pull-up.performance-manual-entry}}
-{{/if}}
-{{#if isShowExternalAssessmentPeformanceEntryPullUp}}
-  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowExternalAssessmentPeformanceEntryPullUp title=selectedItem.title type="assessment-external" onClosePerformanceEntry='onClosePerformanceEntry' }}
-    {{reports.pull-up.external-assessment-performance-entry
       course=course
-      assessment=selectedItem
       students=activityMembers
       activityData=selectedActivity
       classId=classId
-      onClosePerformanceEntry="onClosePerformanceEntry"}}
-  {{/reports.pull-up.performance-manual-entry}}
+      onClosePullUp = "onClosePerformanceEntry"
+      contentType = addDataContentType
+    }}
+  {{/reports.pull-up.activity.add-performance-data}}
 {{/if}}
-{{#if isShowExternalCollectionPeformanceEntryPullUp}}
-  {{#reports.pull-up.performance-manual-entry isShowPullUp=isShowExternalCollectionPeformanceEntryPullUp title=selectedItem.title type="collection-external" onClosePerformanceEntry='onClosePerformanceEntry' }}
-    {{reports.pull-up.external-collection-performance-entry
-      course=course
-      collection=selectedItem
-      students=activityMembers
-      activityData=selectedActivity
-      classId=classId
-      onClosePerformanceEntry="onClosePerformanceEntry"}}
-  {{/reports.pull-up.performance-manual-entry}}
-{{/if}}
+
 {{#if isShowOCASummaryReportPullUp}}
   {{teacher.offline-class.oca-summary-report-pull-up
     classId=class.id

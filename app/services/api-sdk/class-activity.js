@@ -215,51 +215,53 @@ export default Ember.Service.extend({
         .mapBy('collection.id');
       assessmentIds = assessmentIds.concat(externalAssessmentIds);
       const performanceService = service.get('performanceService');
-      Ember.RSVP.hash({
-        activityCollectionPerformanceSummaryItems: collectionIds.length
-          ? performanceService.findStudentActivityPerformanceSummaryByIds(
-            userId,
-            classId,
-            collectionIds,
-            'collection',
-            startDate,
-            endDate
-          )
-          : [],
-        activityAssessmentPerformanceSummaryItems: assessmentIds.length
-          ? performanceService.findStudentActivityPerformanceSummaryByIds(
-            userId,
-            classId,
-            assessmentIds,
-            'assessment',
-            startDate,
-            endDate
-          )
-          : []
-      }).then(function(hash) {
-        let performances = hash.activityCollectionPerformanceSummaryItems.concat(
-          hash.activityAssessmentPerformanceSummaryItems
-        );
-        performances.forEach(performance => {
-          let classActivity = classActivities
-            .filterBy('activation_date', performance.get('activation_date'))
-            .filterBy(
-              'collection.id',
-              performance.get('collectionPerformanceSummary.collectionId')
+      Ember.RSVP
+        .hash({
+          activityCollectionPerformanceSummaryItems: collectionIds.length
+            ? performanceService.findStudentActivityPerformanceSummaryByIds(
+              userId,
+              classId,
+              collectionIds,
+              'collection',
+              startDate,
+              endDate
             )
-            .objectAt(0);
+            : [],
+          activityAssessmentPerformanceSummaryItems: assessmentIds.length
+            ? performanceService.findStudentActivityPerformanceSummaryByIds(
+              userId,
+              classId,
+              assessmentIds,
+              'assessment',
+              startDate,
+              endDate
+            )
+            : []
+        })
+        .then(function(hash) {
+          let performances = hash.activityCollectionPerformanceSummaryItems.concat(
+            hash.activityAssessmentPerformanceSummaryItems
+          );
+          performances.forEach(performance => {
+            let classActivity = classActivities
+              .filterBy('activation_date', performance.get('activation_date'))
+              .filterBy(
+                'collection.id',
+                performance.get('collectionPerformanceSummary.collectionId')
+              )
+              .objectAt(0);
 
-          if (classActivity) {
-            let performanceData = performance.get(
-              'collectionPerformanceSummary'
-            );
-            performanceData.set('hasStarted', true);
-            classActivity.set('collection.performance', performanceData);
-          }
-        });
+            if (classActivity) {
+              let performanceData = performance.get(
+                'collectionPerformanceSummary'
+              );
+              performanceData.set('hasStarted', true);
+              classActivity.set('collection.performance', performanceData);
+            }
+          });
 
-        resolve(classActivities);
-      }, reject);
+          resolve(classActivities);
+        }, reject);
     });
   },
 
@@ -294,51 +296,83 @@ export default Ember.Service.extend({
         .mapBy('collection.id');
       assessmentIds = assessmentIds.concat(externalAssessmentIds);
       const performanceService = service.get('performanceService');
-      Ember.RSVP.hash({
-        activityCollectionPerformanceSummaryItems: collectionIds.length
-          ? performanceService.findClassActivityPerformanceSummaryByIds(
-            classId,
-            collectionIds,
-            'collection',
-            startDate,
-            endDate
-          )
-          : [],
-        activityAssessmentPerformanceSummaryItems: assessmentIds.length
-          ? performanceService.findClassActivityPerformanceSummaryByIds(
-            classId,
-            assessmentIds,
-            'assessment',
-            startDate,
-            endDate
-          )
-          : []
-      }).then(function(hash) {
-        let performances = hash.activityCollectionPerformanceSummaryItems.concat(
-          hash.activityAssessmentPerformanceSummaryItems
-        );
-        performances.forEach(performance => {
-          let classActivity = classActivities
-            .filterBy('activation_date', performance.get('activation_date'))
-            .filterBy(
-              'collection.id',
-              performance.get('collectionPerformanceSummary.collectionId')
+      Ember.RSVP
+        .hash({
+          activityCollectionPerformanceSummaryItems: collectionIds.length
+            ? performanceService.findClassActivityPerformanceSummaryByIds(
+              classId,
+              collectionIds,
+              'collection',
+              startDate,
+              endDate
             )
-            .objectAt(0);
-          if (classActivity) {
-            let classActivityIndex = classActivities.indexOf(classActivity);
-            let performanceData = performance.get(
-              'collectionPerformanceSummary'
-            );
-            performanceData.set('hasStarted', true);
-            classActivities[classActivityIndex].set(
-              'collection.performance',
-              performanceData
-            );
-          }
-        });
-        resolve(classActivities);
-      }, reject);
+            : [],
+          activityAssessmentPerformanceSummaryItems: assessmentIds.length
+            ? performanceService.findClassActivityPerformanceSummaryByIds(
+              classId,
+              assessmentIds,
+              'assessment',
+              startDate,
+              endDate
+            )
+            : []
+        })
+        .then(function(hash) {
+          let performances = hash.activityCollectionPerformanceSummaryItems.concat(
+            hash.activityAssessmentPerformanceSummaryItems
+          );
+          performances.forEach(performance => {
+            let classActivity = classActivities
+              .filterBy('activation_date', performance.get('activation_date'))
+              .filterBy(
+                'collection.id',
+                performance.get('collectionPerformanceSummary.collectionId')
+              )
+              .objectAt(0);
+            if (classActivity) {
+              let classActivityIndex = classActivities.indexOf(classActivity);
+              let performanceData = performance.get(
+                'collectionPerformanceSummary'
+              );
+              performanceData.set('hasStarted', true);
+              classActivities[classActivityIndex].set(
+                'collection.performance',
+                performanceData
+              );
+            }
+          });
+          resolve(classActivities);
+        }, reject);
+    });
+  },
+
+  /**
+   * @function fetchStudentsActivityPerformance
+   * Method to fetch students activity performance data
+   */
+  fetchStudentsActivityPerformance(classId, classActivity, startDate, endDate) {
+    const service = this;
+    const performanceService = service.get('performanceService');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      let activityType =
+        classActivity.get('collection.isAssessment') ||
+        classActivity.get('collection.isExternalAssessment')
+          ? 'assessment'
+          : 'collection';
+      let activityId = Ember.A([classActivity.get('collection.id')]);
+      Ember.RSVP
+        .hash({
+          activityStudentsPerformanceData: performanceService.fetchStudentsActivityPerformance(
+            classId,
+            activityId,
+            activityType,
+            startDate,
+            endDate
+          )
+        })
+        .then(({ activityStudentsPerformanceData }) => {
+          resolve(activityStudentsPerformanceData);
+        }, reject);
     });
   },
 

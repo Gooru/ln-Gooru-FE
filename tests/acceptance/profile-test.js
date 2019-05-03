@@ -46,22 +46,6 @@ test('menu option \'about\' is selected when navigating directly to profile.abou
   });
 });
 
-test('menu option \'content/courses \' is selected when navigating directly to profile.content', function(assert) {
-  visit('/id-for-pochita/content/courses');
-
-  andThen(function() {
-    var $menu = find(
-      '.controller.profile > .content > .gru-navigation-tabs > .profile-navigation > .category-menu '
-    );
-
-    assert.equal(currentURL(), '/id-for-pochita/content/courses');
-    assert.ok(
-      $menu.find('.content').hasClass('selected'),
-      'Menu option \'content\' should be selected'
-    );
-  });
-});
-
 test('menu option \'network\' is selected when navigating directly to profile.network', function(assert) {
   visit('/id-for-pochita/network');
 

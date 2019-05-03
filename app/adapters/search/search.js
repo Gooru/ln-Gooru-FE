@@ -131,6 +131,8 @@ export default Ember.Object.extend({
     if (publishStatus) {
       options.data['flt.publishStatus'] = publishStatus;
     }
+
+    adapter.appendFilters(params, options);
     return Ember.$.ajax(url, options);
   },
 
@@ -171,6 +173,7 @@ export default Ember.Object.extend({
       options.data['flt.standard'] = taxonomies.join(',');
     }
 
+    adapter.appendFilters(params, options);
     return Ember.$.ajax(url, options);
   },
 
@@ -208,10 +211,12 @@ export default Ember.Object.extend({
    * @param term the term to search
    * @returns {Promise.<Course[]>}
    */
-  searchCourses: function(term) {
+  searchCourses: function(term, params = {}, resetPagination = false) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/course`;
+    const page = !params.page || resetPagination ? 0 : params.page;
+    const pageSize = params.pageSize || DEFAULT_SEARCH_PAGE_SIZE;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -219,10 +224,38 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       data: {
         q: term || '*',
-        start: 1,
-        length: 20
+        start: page + 1,
+        length: pageSize
       }
     };
+    adapter.appendFilters(params, options);
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Fetches rubrics that match with the term
+   *
+   * @param term the term to search
+   * @returns {Promise.<Rubric[]>}
+   */
+  searchRubrics: function(term, params = {}, resetPagination = false) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/rubric`;
+    const page = !params.page || resetPagination ? 0 : params.page;
+    const pageSize = params.pageSize || DEFAULT_SEARCH_PAGE_SIZE;
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: {
+        q: term || '*',
+        start: page + 1,
+        length: pageSize
+      }
+    };
+    adapter.appendFilters(params, options);
     return Ember.$.ajax(url, options);
   },
 

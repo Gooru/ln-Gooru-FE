@@ -71,6 +71,7 @@ export const CONTENT_TYPES = {
   COLLECTION: 'collection',
   ASSESSMENT: 'assessment',
   EXTERNAL_ASSESSMENT: 'assessment-external',
+  EXTERNAL_COLLECTION: 'collection-external',
   COURSE: 'course',
   UNIT: 'unit',
   LESSON: 'lesson',
@@ -379,12 +380,14 @@ export const CLASS_SKYLINE_INITIAL_DESTINATION = {
 };
 
 export const SCREEN_SIZES = {
+  EXTRA_SMALL: 480,
   SMALL: 768,
   MEDIUM: 992,
   LARGE: 1024
 };
 
 export const SEARCH_CONTEXT = {
-  HEADER: 'header',
-  DAILY_CLASS: 'dailyclassactivity'
+  LIBRARY: 'library',
+  GOORU_CATALOG: 'gooru-catalog',
+  MY_CONTENT: 'my-content'
 };

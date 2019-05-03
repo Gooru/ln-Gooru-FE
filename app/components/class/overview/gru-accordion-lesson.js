@@ -96,9 +96,9 @@ export default Ember.Component.extend(
       return `l-${this.get('model.id')}`;
     }),
 
-    enableCollectionLiveLearning: Ember.computed.alias(
-      'configuration.GRU_FEATURE_FLAG.enableCollectionLiveLearning'
-    ),
+    enableCollectionLiveLearning: function() {
+      return true;
+    }.property(),
     // -------------------------------------------------------------------------
     // Actions
     actions: {

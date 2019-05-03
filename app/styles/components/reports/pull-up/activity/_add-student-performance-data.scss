@@ -1,0 +1,18 @@
+.add-data.add-student-performance-data {
+  position: relative;
+  height: 100%;
+  .student-performance-data-container {
+    height: 100%;
+  }
+
+  .back-shadow {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+    opacity: 0.8;
+    background-color: #000;
+  }
+}

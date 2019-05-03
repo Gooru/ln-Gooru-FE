@@ -16,11 +16,15 @@ export default Object.assign(quizzesTranslations, {
   ta: 'தமிழ்',
   te: 'తెలుగు',
   'errors.description': 'இந்த புலம்',
+  'common.sub-filter': 'Sub-Filter',
   'errors.inclusion': '{{description}} பட்டியலில் சேர்க்கப்படவில்லை',
   'errors.exclusion': '{{விளக்கம்}} ஒதுக்கப்பட்டுள்ளது',
   'errors.invalid': '{{description}} செல்லாதது',
   'errors.confirmation': '{{description}} பொருந்தவில்லை {{on}}',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'errors.accepted': '{{விளக்கம்}} ஏற்றுக்கொள்ளப்பட வேண்டும்',
+  'library-search-placeholder': 'Search for anything within the library…',
   'errors.empty': '{{description}} காலியாக இருக்க முடியாது',
   'errors.blank': '{{description}} முடியாது',
   'errors.present': '{{description}} வெற்று இருக்க வேண்டும்',
@@ -91,7 +95,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'ஒரு வள',
   'common.a-rubric': 'ஒரு ரூபிக்',
   'common.all-completed': 'எல்லாம் முடிந்தது',
-  'common.an-assessment': 'மதிப்பீடு',
+  'common.a-assessment': 'மதிப்பீடு',
   'common.about': 'பற்றி',
   'common.about-you': 'உன்னை பற்றி',
   'common.about-me': 'என்னை பற்றி',
@@ -1287,6 +1291,11 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'வர்க்க நடவடிக்கைகள்',
+  'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
+  'teacher-landing.class.class-activities.warning-message':
+    'You have not entered data for {{questionCount}} questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
+  'teacher-landing.class.class-activities.info-message':
+    'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
   'teacher-landing.class.offline-class-report.class-report': 'வர்க்க அறிக்கை',
   'teacher-landing.class.offline-class-report.class-activity-report':
     'Class Activity Report',
@@ -2598,5 +2607,11 @@ export default Object.assign(quizzesTranslations, {
   'ca.mastery-accrual.update.error':
     'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.',
   'want.to.proceed': 'Do you want to proceed ?',
-  proceed: 'Proceed'
+  proceed: 'Proceed',
+  'enter-student-score': 'Enter Student Score',
+  'enter-assessment-max-score': 'Enter Assessment Max Score',
+  'student-score': 'Student Score',
+  'search-resource-question': 'Search Resource/Question',
+  'enter-resource-timespent': 'Enter Resource Time Spent',
+  'enter-collection-timespent': 'Enter Collection Time Spent'
 });

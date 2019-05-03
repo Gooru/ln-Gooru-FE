@@ -16,9 +16,12 @@ export default Object.assign(quizzesTranslations, {
   ta: 'தமிழ்',
   te: 'తెలుగు',
   'errors.description': 'ਇਹ ਫੀਲਡ',
+  'common.sub-filter': 'Sub-Filter',
   'errors.inclusion': '{{description}} ਨੂੰ ਸੂਚੀ ਵਿੱਚ ਸ਼ਾਮਲ ਨਹੀਂ ਕੀਤਾ ਗਿਆ ਹੈ',
   'errors.exclusion': '{{description}} ਰਿਜ਼ਰਵਡ ਹੈ',
   'errors.invalid': '{{description}} ਅਯੋਗ ਹੈ',
+  'my-content': 'My Content',
+  'featured-libraries': 'featured libraries',
   'errors.confirmation': '{{description}} ਮੇਲ ਨਹੀਂ ਖਾਂਦਾ {{on}}',
   'errors.accepted': '{{description}} ਨੂੰ ਸਵੀਕਾਰ ਕਰਨਾ ਲਾਜ਼ਮੀ ਹੈ',
   'errors.empty': '{{description}} ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦਾ',
@@ -88,8 +91,9 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'ਇੱਕ ਸਰੋਤ',
   'common.a-rubric': 'ਇੱਕ ਚਰਬੀਕਾਰ',
   'common.all-completed': 'ਸਭ ਨੂੰ ਪੂਰਾ ਕੀਤਾ',
-  'common.an-assessment': 'ਇੱਕ ਮੁਲਾਂਕਣ',
+  'common.a-assessment': 'ਇੱਕ ਮੁਲਾਂਕਣ',
   'common.about': 'ਬਾਰੇ',
+  'library-search-placeholder': 'Search for anything within the library…',
   'common.about-you': 'ਤੁਹਾਡੇ ਬਾਰੇ',
   'common.about-me': 'ਮੇਰੇ ਬਾਰੇ ਵਿੱਚ',
   'common.accept': 'ਸਵੀਕਾਰ ਕਰੋ',
@@ -1260,6 +1264,11 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'ਕਲਾਸ ਦੀਆਂ ਗਤੀਵਿਧੀਆਂ',
+  'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
+  'teacher-landing.class.class-activities.warning-message':
+    'You have not entered data for {{questionCount}} questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
+  'teacher-landing.class.class-activities.info-message':
+    'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
   'teacher-landing.class.offline-class-report.class-report': 'ਕਲਾਸ ਦੀ ਰਿਪੋਰਟ',
   'teacher-landing.class.offline-class-report.class-activity-report':
     'Class Activity Report',
@@ -2521,5 +2530,11 @@ export default Object.assign(quizzesTranslations, {
   'ca.mastery-accrual.update.error':
     'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.',
   'want.to.proceed': 'Do you want to proceed ?',
-  proceed: 'Proceed'
+  proceed: 'Proceed',
+  'enter-student-score': 'Enter Student Score',
+  'enter-assessment-max-score': 'Enter Assessment Max Score',
+  'student-score': 'Student Score',
+  'search-resource-question': 'Search Resource/Question',
+  'enter-resource-timespent': 'Enter Resource Time Spent',
+  'enter-collection-timespent': 'Enter Collection Time Spent'
 });

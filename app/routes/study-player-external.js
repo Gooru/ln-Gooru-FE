@@ -69,6 +69,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         const unitId = mapLocation.get('context.unitId');
         const lessonId = mapLocation.get('context.lessonId');
         params.collectionId =
+          params.collectionId ||
           mapLocation.get('context.itemId') ||
           mapLocation.get('context.collectionId');
 
@@ -86,6 +87,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           //setting query params using the map location
 
           params.type =
+            params.type ||
             mapLocation.get('context.itemType') ||
             mapLocation.get('context.collectionType');
           params.classId = params.classId || mapLocation.get('context.classId');

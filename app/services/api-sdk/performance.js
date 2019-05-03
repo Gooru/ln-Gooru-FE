@@ -787,6 +787,36 @@ export default Ember.Service.extend({
   },
 
   /**
+   * @function fetchStudentsActivityPerformance
+   * Method to fetch students activity performance
+   */
+  fetchStudentsActivityPerformance(
+    classId,
+    activityId,
+    activityType,
+    startDate = new Date(),
+    endDate = new Date()
+  ) {
+    const service = this;
+    return service
+      .get('activityPerformanceSummaryAdapter')
+      .findClassActivityPerformanceSummaryByIds(
+        undefined,
+        classId,
+        activityId,
+        activityType,
+        startDate,
+        endDate
+      )
+      .then(function(data) {
+        const activities = service
+          .get('activityPerformanceSummarySerializer')
+          .normalizeAllActivityPerformanceSummary(data);
+        return activities;
+      });
+  },
+
+  /**
    * Finds class activity performance summary for the ids provided
    * @param {string} userId user id
    * @param {string} classId optional class id filter

@@ -1,0 +1,128 @@
+<div class="header-container">
+  <div class="back" {{action 'goBack'}}>
+    {{gru-icon name="arrow_back"}}
+  </div>
+  <div class="info-section">
+    <div class="profile">
+      {{#if (eq type 'library')}}
+        <img class="image" src="{{library.image}}" />
+        <span class="library-name">{{library.shortName}}</span>
+      {{else if (eq type 'my-content')}}
+        <img class="image" src="{{profile.avatarUrl}}" />
+        <span class="my-content-title">{{t "my-content"}}</span>
+      {{else}}
+        <img class="image" src="assets/gooru/images/gooru-logo.svg" />
+        <span class="my-content-title">{{t "common.gooru-catalog"}}</span>
+      {{/if}}
+    </div>
+    <div class="search-input-section">
+      <div class="search-box">
+        <form {{action "searchContent" on="submit"}} class="form-inline">
+          {{input type="text" class="form-control search-input"
+              value=searchTerm
+              placeholder=(if isMobileView (t 'common.search-placeholder-text') (t 'library-search-placeholder'))
+              spellcheck="true"
+              id="searchInput"
+            }}
+        </form>
+      </div>
+      <div class="filter-items hidden-xs">
+        {{#each filters as |selectedFilter index|}}
+          <div class="filter-item">
+            <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
+            <span class="clear" {{action 'clearFilter' selectedFilter}}> {{gru-icon name="close"}}</span>
+          </div>
+        {{/each}}
+        {{#if moreFilters}}
+          <span class="more-pointer">+{{moreFilters.length}}</span>
+        {{/if}}
+        <div class="more-filters hidden">
+          {{#each moreFilters as |moreFilter|}}
+            <div class="filter-item">
+              <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
+              <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <span>{{gru-icon name="search"}}</span>
+    <span {{action 'toggleSearchFilter'}} class="filter">{{gru-icon name="filter_list"}}</span>
+  </div>
+</div>
+<div class="filters {{activeContentType}}">
+  <div class="hidden visible-xs">
+    <div class="filter-items {{unless filters 'hidden'}}">
+      {{#each filters as |selectedFilter index|}}
+        <div class="filter-item">
+          <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
+          <span class="clear" {{action 'clearFilter' selectedFilter}}> {{gru-icon name="close"}}</span>
+        </div>
+      {{/each}}
+      {{#if moreFilters}}
+        <span class="more-pointer">+{{moreFilters.length}}</span>
+      {{/if}}
+      <div class="more-filters hidden">
+        {{#each moreFilters as |moreFilter|}}
+          <div class="filter-item">
+            <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
+            <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  {{search.search-by-filter
+      isShow=isShow
+      activeContentType=activeContentType
+      onFilterApply="searchContent"
+      unCheckedItem=unCheckedItem
+      selectedFilters=selectedFilters}}
+</div>
+<div class="filters-container">
+  <span class="title">{{t 'common.filter-by'}}</span>
+  <div class="filters">
+    {{#each filterByList as |filter|}}
+      <li class="list {{filter.type}} {{if (eq activeContentType filter.type) 'active'}}" {{action 'onSelectFilterBy' filter}}>
+        <i class="icon"></i>
+        <span class="label">{{filter.label}}</span>
+      </li>
+    {{/each}}
+  </div>
+  <div class="actions">
+    {{#if isMyProfile}}
+      <div class="btn-group hidden-xs hidden-sm col-sm-2">
+        <a href="#" class="btn btn-primary create-dropdown" data-toggle="dropdown"><span class="hidden-sm hidden-md">{{t "common.create"}}</span>{{gru-icon name="add" class="visible-sm-inline visible-md-inline symbol"}}</a>
+        <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a class="course" href="#" {{action "showModal" "content.modals.gru-course-new"}}><i></i>{{t "common.course"}}</a></li>
+          <li><a class="collection" href="#" {{action "showModal" "content.modals.gru-collection-new"}}><i></i>{{t "common.collection"}}</a></li>
+          <li><a class="assessment" href="#" {{action "showModal" "content.modals.gru-assessment-new"}}><i></i>{{t "common.assessment"}}</a></li>
+          <li><a class="resource" href="#" {{action "showModal" "content.modals.gru-resource-new" }}><i></i>{{t "common.resource"}}</a></li>
+          <li><a class="question" href="#" {{action "showModal" "content.modals.gru-question-new"}}><i></i>{{t "common.question"}}</a></li>
+          <li><a class="rubric" href="#" {{action "showModal" "content.modals.gru-rubric-new"}}><i></i>{{t "common.rubric"}}</a></li>
+        </ul>
+      </div>
+    {{/if}}
+  </div>
+</div>
+{{#if (or (eq activeContentType 'question') (eq activeContentType 'resource'))}}
+  <div class="sub-filters-container">
+    <span class="title">{{t 'common.sub-filter'}}</span>
+    <div class="filters">
+      {{#if (eq activeContentType 'resource')}}
+        {{ search.gru-resource-options
+         selectedOptionTypes=selectedResourceTypes
+         onSelectedOption="selectResourceOption"
+       }}
+      {{else}}
+        {{ search.gru-question-options
+           selectedOptionTypes=selectedQuestionTypes
+           onSelectedOption="selectQuestionOption"
+        }}
+      {{/if}}
+    </div>
+  </div>
+{{/if}}
