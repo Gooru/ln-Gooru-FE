@@ -121,10 +121,12 @@
             <div class="row">
               <div class="col-xs-12 col-sm-12">
                 {{#link-to "library-search" (query-params profileId=profile.id  type="my-content" isBack=true)}}
-                  {{#if isMyProfile}}
-                    <h5 class="library-link">{{t "profile.gru-navigation.my-content"}}</h5>
-                  {{else}}
-                    <h5 class="library-link">{{profile.firstName}} {{profile.lastName}}'s {{t 'common.content'}} {{t 'common.library'}}</h5>
+                  {{#if (eq profile.role 'teacher')}}
+                    {{#if isMyProfile}}
+                      <h5 class="library-link">{{t "profile.gru-navigation.my-content"}}</h5>
+                    {{else}}
+                      <h5 class="library-link">{{profile.firstName}} {{profile.lastName}}'s {{t 'common.content'}} {{t 'common.library'}}</h5>
+                    {{/if}}
                   {{/if}}
                 {{/link-to}}
               </div>
