@@ -1,0 +1,343 @@
+.student-class-milestone-course-map {
+  width: 650px;
+  padding-top: 20px;
+
+  .loading-spinner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .milestone-course-map-container {
+    width: 100%;
+
+    .milestone-course-map {
+      margin-bottom: 5px;
+
+      .milestone-course-map-panel {
+        height: 50px;
+        background-color: #5c8fd2;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+        display: inline-grid;
+        width: 100%;
+        grid-template-columns: 70px 1fr 50px 60px;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+
+        &.active {
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .milestone-flag-icon {
+          font-family: "Lato";
+          font-size: 18px;
+          font-weight: bold;
+          line-height: 1;
+          letter-spacing: normal;
+          text-align: center;
+          border-radius: 50%;
+          background: #fff;
+          width: 30px;
+          height: 30px;
+          align-self: center;
+          justify-self: center;
+
+          i {
+            font-size: 16px;
+            margin-top: 7px;
+            margin-left: 1px;
+            color: #5c8fd2;
+          }
+        }
+
+        .milestone-title {
+          p {
+            margin: 0;
+            font-family: "Lato";
+            color: #fff;
+            font-weight: bold;
+            @include ellipsis(
+              $font-size: 15px,
+              $line-height: 1.5,
+              $lines-to-show: 1
+            );
+            width: 100%;
+          }
+        }
+
+        .milestone-caret {
+          color: #fff;
+          align-self: center;
+          height: 26px;
+          text-align: center;
+
+          i {
+            font-size: 30px;
+          }
+        }
+
+        .milestone-peformance {
+          width: 60px;
+          height: 50px;
+          display: grid;
+          align-items: center;
+          justify-items: center;
+          color: #fff;
+          font-size: 16px;
+          font-weight: bold;
+
+          &.grade-range-not-started {
+            background: transparent;
+          }
+        }
+      }
+
+      .milestone-course-map-lesson-container {
+        display: none;
+        background-image: linear-gradient(to top, #e7e7e7, #cfcfcf);
+
+        .no-lesson {
+          text-align: center;
+          font-size: 15px;
+        }
+
+        .lesson-load-spinner {
+          height: 60px;
+          display: inline-flex;
+          align-items: center;
+          width: 100%;
+
+          .three-bounce-spinner {
+            margin: 0 auto;
+          }
+        }
+
+        .milestone-course-map-lesson {
+          &.active {
+            .milestone-course-map-lesson-panel {
+              box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+              position: relative;
+            }
+          }
+
+          &:last-child {
+            .milestone-course-map-lesson-panel {
+              border-bottom: none;
+            }
+
+            .milestone-course-map-collection-container {
+              .no-collection {
+                padding-bottom: 0;
+              }
+            }
+          }
+
+          .milestone-course-map-lesson-panel {
+            height: 60px;
+            background: #fff;
+            display: inline-grid;
+            width: 100%;
+            grid-template-columns: 70px 1fr 50px 50px 60px;
+            align-items: center;
+            border-bottom: 1px solid #e3e5ea;
+            cursor: pointer;
+
+            .lesson-name-sequence {
+              font-family: "Lato";
+              font-size: 18px;
+              font-weight: bold;
+              line-height: 1;
+              letter-spacing: normal;
+              text-align: center;
+              color: #3c4452;
+              padding-top: 8px;
+              padding-bottom: 8px;
+            }
+
+            .lesson-title {
+              p {
+                margin: 0;
+                font-family: "Lato";
+                color: #666666;
+                @include ellipsis(
+                  $font-size: 18px,
+                  $line-height: 1.5,
+                  $lines-to-show: 1
+                );
+                width: 100%;
+              }
+            }
+
+            .lesson-peformance {
+              width: 60px;
+              height: 60px;
+              display: grid;
+              align-items: center;
+              justify-items: center;
+              font-size: 16px;
+              font-weight: bold;
+              color: #fff;
+
+              &.grade-range-not-started {
+                background: transparent;
+                color: #666;
+              }
+            }
+          }
+
+          .milestone-course-map-collection-container {
+            display: none;
+
+            .no-collection {
+              text-align: center;
+              font-size: 15px;
+              padding-top: 20px;
+              padding-bottom: 20px;
+            }
+
+            .collection-load-spinner {
+              height: 50px;
+              display: inline-flex;
+              align-items: center;
+              width: 100%;
+
+              .three-bounce-spinner {
+                margin: 0 auto;
+              }
+            }
+
+            .milestone-course-map-collection {
+              &:last-child {
+                .milestone-course-map-collection-panel {
+                  border-bottom: 1px solid #e3e5ea;
+                }
+              }
+
+              .milestone-course-map-collection-panel {
+                height: 50px;
+                background: #fff;
+                display: inline-grid;
+                width: 100%;
+                grid-template-columns: 70px 1fr 100px 60px;
+                align-items: center;
+
+                .collection-img-container {
+                  img {
+                    width: 60px;
+                    height: 50px;
+                    border-top: 1px solid #fff;
+                    border-bottom: 1px solid #fff;
+                  }
+                }
+
+                .collection-peformance {
+                  width: 60px;
+                  height: 50px;
+                  display: grid;
+                  align-items: center;
+                  justify-items: center;
+                  font-size: 16px;
+                  font-weight: bold;
+                  color: #fff;
+
+                  &.grade-range-not-started {
+                    background: transparent;
+                    color: #666;
+                  }
+                }
+
+                .collection-title-container {
+                  display: inline-flex;
+                  align-items: center;
+                  cursor: pointer;
+
+                  i {
+                    width: 20px;
+                    height: 20px;
+                    background-repeat: no-repeat;
+                    background-size: 20px 20px;
+                    padding-left: 20px;
+                    opacity: 0.8;
+                  }
+
+                  .collection-external-icon,
+                  .collection-icon {
+                    background-image: url("../assets/gooru/images/add_collection.svg");
+                  }
+
+                  .assessment-external-icon,
+                  .assessment-icon {
+                    background-image: url("../assets/gooru/images/add_assessment.svg");
+                  }
+
+                  p {
+                    margin: 0;
+                    font-family: "Open Sans";
+                    color: #545e66;
+                    @include ellipsis(
+                      $font-size: 15px,
+                      $line-height: 2,
+                      $lines-to-show: 1
+                    );
+                    width: 100%;
+                  }
+                }
+
+                .collection-content-counts {
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: space-evenly;
+
+                  .resource-count {
+                    width: 40px;
+                    display: inline-grid;
+                    align-items: center;
+                    grid-template-columns: 50% 50%;
+                    justify-items: center;
+
+                    .resource-icon {
+                      width: 20px;
+                      height: 20px;
+                      background-repeat: no-repeat;
+                      background-size: 20px 20px;
+                      background-image: url("../assets/gooru/images/add_resource_icon.svg");
+                      opacity: 0.8;
+                    }
+                  }
+
+                  .question-count {
+                    width: 40px;
+                    display: inline-grid;
+                    align-items: center;
+                    grid-template-columns: 50% 50%;
+                    justify-items: center;
+
+                    .question-icon {
+                      width: 20px;
+                      height: 20px;
+                      background-repeat: no-repeat;
+                      background-size: 20px 20px;
+                      background-image: url("../assets/gooru/images/add_question.svg");
+                      opacity: 0.8;
+                    }
+                  }
+
+                  .external-icon {
+                    width: 20px;
+                    height: 20px;
+                    background-repeat: no-repeat;
+                    background-size: 20px 20px;
+                    background-image: url("../assets/gooru/share.png");
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.student_class_milestone {
+  @extend %bg-base64;
+
+  .student.class {
+    width: 100%;
+    height: auto;
+
+    .content {
+      display: grid;
+      justify-content: center;
+    }
+  }
+}

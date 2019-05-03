@@ -103,7 +103,8 @@ Router.map(function() {
   });
 
   this.route('context-player', {
-    path: '/player/class/:classId/course/:courseId/unit/:unitId/lesson/:lessonId/collection/:collectionId'
+    path:
+      '/player/class/:classId/course/:courseId/unit/:unitId/lesson/:lessonId/collection/:collectionId'
   });
 
   this.route('classes');
@@ -113,7 +114,8 @@ Router.map(function() {
   });
 
   this.route(
-    'class', {
+    'class',
+    {
       path: '/class/:classId'
     },
     function() {
@@ -174,7 +176,8 @@ Router.map(function() {
   this.route('student', function() {
     this.route('performance');
     this.route(
-      'class', {
+      'class',
+      {
         path: '/class/:classId'
       },
       function() {
@@ -182,6 +185,7 @@ Router.map(function() {
           this.route('performance');
         });
         this.route('course-map');
+        this.route('milestone');
         this.route('class-activities');
         this.route('performance');
         this.route('setup-in-complete');
@@ -191,7 +195,8 @@ Router.map(function() {
       }
     );
     this.route(
-      'independent', {
+      'independent',
+      {
         path: '/course/:courseId'
       },
       function() {
@@ -205,7 +210,8 @@ Router.map(function() {
 
   this.route('teacher', function() {
     this.route(
-      'class', {
+      'class',
+      {
         path: '/class/:classId'
       },
       function() {
@@ -234,7 +240,8 @@ Router.map(function() {
 
   this.route('library');
   this.route(
-    'partner-library', {
+    'partner-library',
+    {
       path: '/library/:id'
     },
     function() {
@@ -260,7 +267,8 @@ Router.map(function() {
     path: '/not-found/:entity'
   });
   this.route(
-    'profile', {
+    'profile',
+    {
       path: '/:userId'
     },
     function() {

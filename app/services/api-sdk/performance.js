@@ -7,6 +7,8 @@ import ActivityPerformanceSummarySerializer from 'gooru-web/serializers/performa
 import ActivityPerformanceSummaryAdapter from 'gooru-web/adapters/performance/activity-performance-summary';
 import CourseCompetencyCompletionAdapter from 'gooru-web/adapters/performance/course-competency-completion';
 import CourseCompetencyCompletionSerializer from 'gooru-web/serializers/performance/course-competency-completion';
+import MilestonePerformanceAdapter from 'gooru-web/adapters/performance/milestone-performance';
+import MilestonePerformanceSerializer from 'gooru-web/serializers/performance/milestone-performance';
 import { aggregateClassActivityPerformanceSummaryItems } from 'gooru-web/utils/performance-summary';
 import PerformanceAdapter from 'gooru-web/adapters/performance/performance';
 import PerformanceSerializer from 'gooru-web/serializers/performance/performance';
@@ -132,6 +134,17 @@ export default Ember.Service.extend({
     this.set(
       'performanceSerializer',
       PerformanceSerializer.create(Ember.getOwner(this).ownerInjection())
+    );
+
+    this.set(
+      'milestonePerformanceSerializer',
+      MilestonePerformanceSerializer.create(
+        Ember.getOwner(this).ownerInjection()
+      )
+    );
+    this.set(
+      'milestonePerformanceAdapter',
+      MilestonePerformanceAdapter.create(Ember.getOwner(this).ownerInjection())
     );
   },
 
@@ -1007,6 +1020,82 @@ export default Ember.Service.extend({
               service
                 .get('performanceSerializer')
                 .normalizeCAPerformanceData(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * @function getPerformanceForMilestones
+   * Get Performance Data for course milestones
+   */
+  getPerformanceForMilestones(
+    classId,
+    courseId,
+    collectionType,
+    userUid,
+    fwCode
+  ) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('milestonePerformanceAdapter')
+        .getPerformanceForMilestones(
+          classId,
+          courseId,
+          collectionType,
+          userUid,
+          fwCode
+        )
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('milestonePerformanceSerializer')
+                .normalizePerformanceDataForMilestones(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * @function getPerformanceByMilestoneId
+   * Get Performance Data by  milestone Id
+   */
+  getPerformanceByMilestoneId(
+    classId,
+    courseId,
+    milestoneId,
+    collectionType,
+    userUid,
+    fwCode
+  ) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('milestonePerformanceAdapter')
+        .getPerformanceByMilestoneId(
+          classId,
+          courseId,
+          milestoneId,
+          collectionType,
+          userUid,
+          fwCode
+        )
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('milestonePerformanceSerializer')
+                .normalizePerformanceDataForMilestone(response)
             );
           },
           function(error) {

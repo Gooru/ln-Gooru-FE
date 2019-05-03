@@ -1,0 +1,128 @@
+<div class="milestone-course-map-container">
+  {{#each milestones as | milestone index |}}
+    <div class="milestone-course-map">
+      <div class="milestone-course-map-panel {{if milestone.isActive 'active'}}" {{action 'toggleMilestoneItems' milestone }}>
+        <div class="milestone-flag-icon">
+          {{gru-icon name="flag"}}
+        </div>
+        <div class="milestone-title">
+          <p>Milestone {{plus-one index}} ({{milestone.performance.completedInPrecentage}}% Complete)</p>
+        </div>
+        <div class="milestone-caret">
+          {{#if milestone.isActive}}
+            {{gru-icon name="arrow_drop_up"}}
+          {{else}}
+            {{gru-icon name="arrow_drop_down"}}
+          {{/if}}
+        </div>
+        <div class="milestone-peformance grade-range-{{grade-range milestone.performance.scoreInPercentage}}">
+          {{#if (gte milestone.performance.scoreInPercentage 0)}}
+            {{milestone.performance.scoreInPercentage}}%
+          {{else}}
+            --
+          {{/if}}
+        </div>
+      </div>
+      <div class="milestone-course-map-lesson-container" id="milestone-{{milestone.milestone_id}}">
+        {{#if milestone.hasLessonFetched}}
+          {{#if milestone.lessons}}
+            {{#each milestone.lessons as | lesson index |}}
+              <div class="milestone-course-map-lesson {{if lesson.isActive 'active'}}">
+                <div class="milestone-course-map-lesson-panel" {{action 'toggleLessonItems' lesson }}>
+                  <div class="lesson-name-sequence">
+
+                  </div>
+                  <div class="lesson-title">
+                    <p>{{lesson.lesson_title}}</p>
+                  </div>
+                  <div class="lesson-badge"></div>
+                  <div class="lesson-info"></div>
+                  <div class="lesson-peformance grade-range-{{grade-range lesson.performance.scoreInPercentage}}">
+                    {{#if (gte lesson.performance.scoreInPercentage 0)}}
+                      {{lesson.performance.scoreInPercentage}}%
+                    {{else}}
+                      --
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="milestone-course-map-collection-container" id="milestone-lesson-{{lesson.lesson_id}}">
+                  {{#if lesson.hasCollectionFetched}}
+                    {{#if lesson.collections}}
+                      {{#each lesson.collections as | collection |}}
+                        <div class="milestone-course-map-collection">
+                          <div class="milestone-course-map-collection-panel">
+                            <div class="collection-icon-container">
+                              <i class="{{collection.format}}-icon"></i>
+                            </div>
+                            <div class="collection-title-container" {{action 'playContent' unit.id lesson.id collection}}>
+                              <p>{{collection.title}}</p>
+                            </div>
+                            <div class="collection-content-counts">
+                              <div class="resource-count" title="{{t 'common.resource'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+                                {{#if (gt collection.resourceCount 0)}}
+                                  <i class="resource-icon"></i>
+                                  <span>{{collection.resourceCount}}</span>
+                                {{/if}}
+                              </div>
+                              <div class="question-count" title="{{t 'common.question'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+                                {{#if (gt collection.questionCount 0)}}
+                                  <i class="question-icon"></i>
+                                  <span>{{collection.questionCount}}</span>
+                                {{/if}}
+                              </div>
+                              {{#if (or (eq collection.format 'assessment-external') (eq collection.format 'collection-external'))}}
+                                <i class="external-icon" title="{{t 'common.assessment-external'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover"></i>
+                              {{/if}}
+                            </div>
+                            {{#if (gte lesson.performance.scoreInPercentage 0)}}
+                              <div class="collection-peformance grade-range-{{grade-range lesson.performance.scoreInPercentage}}">
+                                {{#if (gte lesson.performance.scoreInPercentage 0)}}
+                                  {{lesson.performance.scoreInPercentage}}%
+                                {{else}}
+                                  --
+                                {{/if}}
+                              </div>
+                            {{else}}
+                              <div class="collection-img-container">
+                                <img src="{{collection.thumbnailUrl}}" />
+                              </div>
+                            {{/if}}
+                          </div>
+                        </div>
+                      {{/each}}
+                    {{else}}
+                      <div class="no-collection">
+                        <span>{{t 'common.no-collection-info-message'}}</span>
+                      </div>
+                    {{/if}}
+                  {{else}}
+                    <div class="collection-load-spinner">
+                      {{#if lesson.isActive}}
+                        {{three-bounce-spinner}}
+                      {{/if}}
+                    </div>
+                  {{/if}}
+                </div>
+              </div>
+            {{/each}}
+          {{else}}
+            <div class="no-lesson">
+              <span>{{t 'common.no-lesson-info-message'}}</span>
+            </div>
+          {{/if}}
+        {{else}}
+          <div class="lesson-load-spinner">
+            {{#if milestone.isActive}}
+              {{three-bounce-spinner}}
+            {{/if}}
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  {{/each}}
+</div>
+{{#if isLoading}}
+  <div class="loading-spinner">
+    {{three-bounce-spinner}}
+  </div>
+{{/if}}
