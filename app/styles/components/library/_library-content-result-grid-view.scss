@@ -72,6 +72,16 @@
       .gru-resource-card {
         margin-bottom: 15px;
 
+        .panel-heading {
+          .header {
+            .resource-info {
+              .search-type-position {
+                margin-left: 0;
+              }
+            }
+          }
+        }
+
         .title.rubric {
           display: inline-block;
           width: 79%;
