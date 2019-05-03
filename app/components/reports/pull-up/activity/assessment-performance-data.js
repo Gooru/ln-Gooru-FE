@@ -36,15 +36,14 @@ export default Ember.Component.extend({
     }
     component.resetStudentScores();
     component.loadStudentsActivityPerformanceData();
+    if (component.get('isMobileView')) {
+      component.set('rightElementContainer', component.$('.right-container'));
+    }
   },
 
   didRender() {
     const component = this;
-    if (component.get('isMobileView')) {
-      component
-        .$('.active-student .student-score-details')
-        .append(component.$('.right-container'));
-    }
+    component.renderMobileView();
   },
 
   // -------------------------------------------------------------------------
@@ -224,6 +223,8 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
 
+  rightElementContainer: null,
+
   isAssessment: Ember.computed.equal(
     'assessment.format',
     CONTENT_TYPES.ASSESSMENT
@@ -352,7 +353,13 @@ export default Ember.Component.extend({
   isValidExternalAssessmentMaxScore: Ember.computed(
     'externalAssessmentMaxScore',
     function() {
-      return validatePercentage(String(this.get('externalAssessmentMaxScore')));
+      const component = this;
+      const externalAssessmentMaxScore = component.get(
+        'externalAssessmentMaxScore'
+      );
+      return parseInt(externalAssessmentMaxScore) > 0
+        ? validatePercentage(externalAssessmentMaxScore)
+        : false;
     }
   ),
 
@@ -401,6 +408,19 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Functions
+
+  /**
+   * @function renderMobileView
+   * Method to render assessment score container in mobile view
+   */
+  renderMobileView() {
+    const component = this;
+    if (component.get('isMobileView')) {
+      component
+        .$('.active-student .student-score-details')
+        .append(component.get('rightElementContainer'));
+    }
+  },
 
   /**
    * @function scrollToFirstQuestion
@@ -488,8 +508,6 @@ export default Ember.Component.extend({
         component.loadStudentActivityPerformanceData(
           component.get('activeStudent')
         );
-        component.scrollToFirstQuestion();
-        component.toggleQuestionVisibility();
       });
   },
 

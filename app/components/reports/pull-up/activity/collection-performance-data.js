@@ -29,6 +29,12 @@ export default Ember.Component.extend({
     if (component.get('isCollection')) {
       component.loadCollectionData();
     }
+    if (component.get('isMobileView')) {
+      component.set(
+        'timeSpentElementContainer',
+        component.$('.timespent-container')
+      );
+    }
   },
 
   didRender() {
@@ -36,7 +42,7 @@ export default Ember.Component.extend({
     if (component.get('isMobileView') && component.get('isCollection')) {
       component
         .$('.active-resource .resource-timespent-details')
-        .append(component.$('.timespent-container'));
+        .append(component.get('timeSpentElementContainer'));
     }
   },
 
@@ -108,6 +114,8 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Properties
+
+  timeSpentElementContainer: null,
 
   /**
    * @property {Boolean} isMobileView
