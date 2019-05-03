@@ -22,7 +22,6 @@ export default Ember.Component.extend({
       }
       component.set('hour', hour);
       component.set('minute', minute);
-      component.sendAction('onChangeTime');
     },
 
     //Action triggered when decrement hour
@@ -35,7 +34,6 @@ export default Ember.Component.extend({
       minute = hour === maxHour ? 0 : minute;
       component.set('hour', hour);
       component.set('minute', minute);
-      component.sendAction('onChangeTime');
     },
 
     //Action triggered when increment minute
@@ -54,7 +52,6 @@ export default Ember.Component.extend({
       }
       component.set('minute', minute);
       component.set('hour', hour);
-      component.sendAction('onChangeTime');
     },
 
     //Action triggered when decrement minute
@@ -67,7 +64,6 @@ export default Ember.Component.extend({
       hour = minute === maxMinute && hour > 0 ? hour - 1 : hour;
       component.set('minute', minute);
       component.set('hour', hour);
-      component.sendAction('onChangeTime');
     }
   },
 
