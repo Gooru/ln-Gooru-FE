@@ -143,6 +143,14 @@ export default Ember.Route.extend({
     let locationQueryParam = {
       courseId
     };
+    if (
+      currentClass.milestoneViewApplicable &&
+      currentClass.milestoneViewApplicable === true &&
+      currentClass.preference &&
+      currentClass.preference.framework
+    ) {
+      locationQueryParam.fwCode = currentClass.preference.framework;
+    }
     const userLocation = route
       .get('analyticsService')
       .getUserCurrentLocation(
