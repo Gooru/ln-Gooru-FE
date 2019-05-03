@@ -2,9 +2,10 @@ import Ember from 'ember';
 import {
   generateUUID,
   validateTimespent,
-  validatePercentage
+  validatePercentage,
+  isCompatibleVW
 } from 'gooru-web/utils/utils';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import { CONTENT_TYPES, SCREEN_SIZES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -25,6 +26,7 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
+
   didInsertElement() {
     const component = this;
     if (component.get('isAssessment')) {
@@ -34,6 +36,15 @@ export default Ember.Component.extend({
     }
     component.resetStudentScores();
     component.loadStudentsActivityPerformanceData();
+  },
+
+  didRender() {
+    const component = this;
+    if (component.get('isMobileView')) {
+      component
+        .$('.active-student .student-score-details')
+        .append(component.$('.right-container'));
+    }
   },
 
   // -------------------------------------------------------------------------
@@ -203,32 +214,6 @@ export default Ember.Component.extend({
       component.set('isCaptureExternalAssessmentStudentScore', true);
     },
 
-    //Action triggered when type external assessment student score
-    onEnterExternalAssessmentStudentScore() {
-      const component = this;
-      const externalAssessmentMaxScore = parseFloat(
-        component.get('externalAssessmentMaxScore')
-      );
-      const studentScore = parseFloat(component.get('activeStudent.score'));
-      component.set('isSessionStarted', true);
-      component.set(
-        'isValidExternalAssessmentStudentScore',
-        studentScore >= 0 && studentScore <= externalAssessmentMaxScore
-      );
-    },
-
-    //Action triggered when enter external assessment max score
-    onEnterExternalAssessmentMaxScore() {
-      const component = this;
-      const externalAssessmentMaxScore = component.get(
-        'externalAssessmentMaxScore'
-      );
-      component.set(
-        'isValidExternalAssessmentMaxScore',
-        validatePercentage(externalAssessmentMaxScore)
-      );
-    },
-
     //Action triggered when click overwrite score
     onOverwriteScore() {
       const component = this;
@@ -354,7 +339,7 @@ export default Ember.Component.extend({
   /**
    * @property {Number} externalAssessmentMaxScore
    */
-  externalAssessmentMaxScore: 0,
+  externalAssessmentMaxScore: null,
 
   /**
    * @property {Boolean} isCaptureExternalAssessmentStudentScore
@@ -364,12 +349,28 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isValidExternalAssessmentMaxScore
    */
-  isValidExternalAssessmentMaxScore: false,
+  isValidExternalAssessmentMaxScore: Ember.computed(
+    'externalAssessmentMaxScore',
+    function() {
+      return validatePercentage(String(this.get('externalAssessmentMaxScore')));
+    }
+  ),
 
   /**
    * @property {Boolean} isValidExternalAssessmentStudentScore
    */
-  isValidExternalAssessmentStudentScore: false,
+  isValidExternalAssessmentStudentScore: Ember.computed(
+    'activeStudent.score',
+    function() {
+      const component = this;
+      const externalAssessmentMaxScore = parseFloat(
+        component.get('externalAssessmentMaxScore')
+      );
+      const studentScore = parseFloat(component.get('activeStudent.score'));
+      component.set('isSessionStarted', true);
+      return studentScore >= 0 && studentScore <= externalAssessmentMaxScore;
+    }
+  ),
 
   /**
    * @property {Boolean} isLastStudentActive
@@ -393,6 +394,11 @@ export default Ember.Component.extend({
     return this.get('activeStudent.performance');
   }),
 
+  /**
+   * @property {Boolean} isMobileView
+   */
+  isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
   // -------------------------------------------------------------------------
   // Functions
 
@@ -414,13 +420,24 @@ export default Ember.Component.extend({
     let students = component.get('students');
     let activeStudentIndex = students.indexOf(component.get('activeStudent'));
     if (!component.isDestroyed) {
-      if (activeStudentIndex !== students.length - 1) {
-        component.set(
-          'activeStudent',
-          students.objectAt(activeStudentIndex + 1)
-        );
+      if (
+        component.get('activeStudentTemp.id') !==
+        component.get('activeStudent.id')
+      ) {
+        component.set('activeStudent', component.get('activeStudentTemp'));
       } else {
-        component.sendAction('onClosePullUp');
+        if (activeStudentIndex !== students.length - 1) {
+          component.set(
+            'activeStudent',
+            students.objectAt(activeStudentIndex + 1)
+          );
+          component.set(
+            'activeStudentTemp',
+            students.objectAt(activeStudentIndex + 1)
+          );
+        } else {
+          component.sendAction('onClosePullUp');
+        }
       }
     }
   },
@@ -452,6 +469,9 @@ export default Ember.Component.extend({
   submitExternalAssessmentDataSelectNextStudent() {
     const component = this;
     component.submitExternalAssessmentPerformanceData().then(function() {
+      component.loadStudentActivityPerformanceData(
+        component.get('activeStudent')
+      );
       component.activateNextStudent();
     });
   },
