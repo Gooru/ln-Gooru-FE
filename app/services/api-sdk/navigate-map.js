@@ -90,13 +90,19 @@ export default Ember.Service.extend({
    * This method is used to start a course or continue a course without knowing the exact location
    * @param {string} courseId
    * @param {string} classId optional
+   * @param {string} milestoneId optional
    * @returns {Promise.<MapLocation>}
    */
-  continueCourse: function(courseId, classId = undefined) {
+  continueCourse: function(
+    courseId,
+    classId = undefined,
+    milestoneId = undefined
+  ) {
     const service = this;
     const mapContext = MapContext.create({
       courseId,
       classId,
+      milestoneId,
       status: 'continue'
     });
     return service.next(mapContext);
@@ -111,6 +117,7 @@ export default Ember.Service.extend({
    * @param {string} collectionId
    * @param {string} collectionType
    * @param {string} classId
+   * @param {string} milestoneId optional
    * @returns {Promise.<MapLocation>}
    */
   startCollection: function(
@@ -121,7 +128,8 @@ export default Ember.Service.extend({
     collectionType,
     classId = undefined,
     pathId,
-    pathType
+    pathType,
+    milestoneId = undefined
   ) {
     const service = this;
     const mapContext = MapContext.create({
@@ -135,7 +143,8 @@ export default Ember.Service.extend({
       classId,
       status: 'start',
       pathId,
-      pathType
+      pathType,
+      milestoneId
     });
     return service.next(mapContext);
   },
@@ -264,6 +273,7 @@ export default Ember.Service.extend({
    * @param {string} pathId
    * @param {string} pathType
    * @param {string} classId
+   * @param {string} milestoneId
    * @returns {Promise.<MapLocation>}
    */
   contentServedResource: function(options) {
@@ -379,7 +389,8 @@ export default Ember.Service.extend({
     const resourceId = params.resourceId;
     const continueCourse = !unitId;
     const startLesson = lessonId && !collectionId;
-    const pathType = params.pathType === 'null' ? null : params.pathType || null;
+    const pathType =
+      params.pathType === 'null' ? null : params.pathType || null;
     const navigateMapService = this;
     let mapLocationPromise = null;
     const storedResponse = navigateMapService
