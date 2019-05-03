@@ -1,9 +1,10 @@
 import Ember from 'ember';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import { CONTENT_TYPES, SCREEN_SIZES } from 'gooru-web/config/config';
 import {
   validateTimespent,
   generateUUID,
-  formatTime as formatMilliseconds
+  formatTime as formatMilliseconds,
+  isCompatibleVW
 } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
@@ -27,6 +28,15 @@ export default Ember.Component.extend({
     const component = this;
     if (component.get('isCollection')) {
       component.loadCollectionData();
+    }
+  },
+
+  didRender() {
+    const component = this;
+    if (component.get('isMobileView') && component.get('isCollection')) {
+      component
+        .$('.active-resource .resource-timespent-details')
+        .append(component.$('.timespent-container'));
     }
   },
 
@@ -98,6 +108,11 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {Boolean} isMobileView
+   */
+  isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
   /**
    * @property {Boolean} isCollection
