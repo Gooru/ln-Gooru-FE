@@ -165,6 +165,7 @@ export default Ember.Service.extend({
       current_item_id: options.suggested_content_id,
       current_item_type: options.suggested_content_type,
       current_item_subtype: options.suggested_content_subtype,
+      milestone_id: options.milestone_id,
       state: 'start',
       score_percent: options.score || 0,
       path_id: parseInt(options.pathId),
@@ -201,7 +202,8 @@ export default Ember.Service.extend({
     collectionType,
     collectionSubType,
     pathId,
-    classId
+    classId,
+    milestoneId = undefined
   ) {
     const service = this;
     let isBackfillOrResource =
@@ -219,6 +221,7 @@ export default Ember.Service.extend({
       itemType: collectionType,
       itemSubType: subType,
       pathId: +pathId,
+      milestoneId: milestoneId,
       classId,
       status: 'start'
     });
@@ -244,7 +247,8 @@ export default Ember.Service.extend({
     collectionId,
     resourceId,
     pathId,
-    classId
+    classId,
+    milestoneId = undefined
   ) {
     const service = this;
     const mapContext = MapContext.create({
@@ -256,7 +260,8 @@ export default Ember.Service.extend({
       itemType: 'resource',
       pathId: +pathId,
       classId,
-      status: 'start'
+      status: 'start',
+      milestoneId: milestoneId
     });
     return service.next(mapContext);
   },
@@ -298,7 +303,8 @@ export default Ember.Service.extend({
     unitId,
     lessonId,
     classId = undefined,
-    pathType
+    pathType,
+    milestoneId
   ) {
     const service = this;
     const mapContext = MapContext.create({
@@ -307,7 +313,8 @@ export default Ember.Service.extend({
       lessonId,
       classId,
       status: 'start',
-      pathType: pathType
+      pathType: pathType,
+      milestoneId: milestoneId
     });
     return service.next(mapContext);
   },
