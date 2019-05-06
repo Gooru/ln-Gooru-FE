@@ -15,22 +15,6 @@ moduleForAcceptance('Acceptance | profile', {
   }
 });
 
-test('Layout', function(assert) {
-  visit('/id-for-pochita/content/courses');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/id-for-pochita/content/courses');
-
-    const $profileContainer = find('.controller.profile');
-    T.exists(assert, $profileContainer, 'Missing profile container');
-    T.exists(
-      assert,
-      $profileContainer.find('> .content'),
-      'Missing profile content'
-    );
-  });
-});
-
 test('menu option \'about\' is selected when navigating directly to profile.about', function(assert) {
   visit('/id-for-pochita/about');
 
