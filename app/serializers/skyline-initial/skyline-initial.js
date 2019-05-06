@@ -11,7 +11,7 @@ export default Ember.Object.extend({
    * @return {Object}
    */
   normalizeFetchState: function(response) {
-    response.destination = 'course-map';
+    //response.destination = 'course-map';
     return Ember.Object.create(response);
   }
 });

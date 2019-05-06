@@ -57,7 +57,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
       path_id: model.get('pathId') || 0,
       path_type: model.get('pathType') || path_type,
       score_percent: model.get('score'),
-      context_data: model.get('contextData')
+      context_data: model.get('contextData'),
+      milestone_id: model.get('milestoneId')
     };
   },
 

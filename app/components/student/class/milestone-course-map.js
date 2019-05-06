@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { ROLES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -28,6 +29,16 @@ export default Ember.Component.extend({
    * @type {performanceService} Service to retrieve milestone performance information
    */
   performanceService: Ember.inject.service('api-sdk/performance'),
+
+  /**
+   * @requires service:api-sdk/analytics
+   */
+  analyticsService: Ember.inject.service('api-sdk/analytics'),
+
+  /**
+   * @property {NavigateMapService}
+   */
+  navigateMapService: Ember.inject.service('api-sdk/navigate-map'),
 
   // -------------------------------------------------------------------------
   // Properties
@@ -88,24 +99,26 @@ export default Ember.Component.extend({
     /**
      * Open the player with the specific collection/assessment
      *
-     * @function actions:playContent
+     * @function actions:studyPlayer
+     * @param {string} milestone - Identifier for a milestone
      * @param {string} unitId - Identifier for a unit
      * @param {string} lessonId - Identifier for lesson
-     * @param {string} collection - collection or assessment
+     * @param {string} item - collection, assessment, lesson or resource
      */
-    playContent: function(unitId, lessonId, collection) {
-      let component = this;
-      let classId = component.get('classId');
-      let courseId = component.get('courseId');
-      let collectionId = collection.get('id');
-      let collectionType = collection.get('collectionType');
-      let url = `${
-        window.location.origin
-      }/player/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${collectionId}?role=teacher&type=${collectionType}`;
-      if (collection.get('isExternalAssessment')) {
-        url = collection.get('url');
-      }
-      window.open(url);
+    studyPlayer: function(type, milestoneId, unitId, lessonId, item) {
+      const component = this;
+      const classId = component.get('classId');
+      const minScore = component.get('class.minScore');
+      const courseId = component.get('courseId');
+      item.set('minScore', minScore);
+      component.startCollectionStudyPlayer(
+        classId,
+        courseId,
+        unitId,
+        lessonId,
+        item,
+        milestoneId
+      );
     }
   },
 
@@ -141,6 +154,7 @@ export default Ember.Component.extend({
         if (!component.isDestroyed) {
           component.set('milestones', milestones);
           component.fetchMilestonePerformance();
+          component.identifyUserLocationAndLocate();
           component.set('isLoading', false);
         }
       });
@@ -261,5 +275,105 @@ export default Ember.Component.extend({
           selectedLesson.set('hasCollectionFetched', true);
         }
       });
+  },
+
+  identifyUserLocationAndLocate() {
+    let component = this;
+    let classId = component.get('classId');
+    let courseId = component.get('courseId');
+    let userId = component.get('session.userId');
+    let locationQueryParam = {
+      courseId
+    };
+    component
+      .get('analyticsService')
+      .getUserCurrentLocation(classId, userId, locationQueryParam)
+      .then(userCurrentLocation => {
+        if (!component.isDestroyed) {
+          component.set('userCurrentLocation', userCurrentLocation);
+        }
+      });
+  },
+
+  /**
+   * Navigates to collection
+   * @param {string} classId
+   * @param {string} courseId
+   * @param {string} unitId
+   * @param {string} lessonId
+   * @param {Collection} collection
+   * @param {string} milestoneId
+   */
+  startCollectionStudyPlayer: function(
+    classId,
+    courseId,
+    unitId,
+    lessonId,
+    collection,
+    milestoneId
+  ) {
+    let component = this;
+    let role = ROLES.STUDENT;
+    let source = PLAYER_EVENT_SOURCE.COURSE_MAP;
+    let collectionId = collection.get('id');
+    let collectionType = collection.get('collectionType');
+    let collectionSubType = collection.get('collectionSubType');
+    let minScore = collection.get('minScore');
+    let pathId = collection.get('pathId') || 0;
+    let pathType = collection.get('pathType') || '';
+    let queryParams = {
+      classId,
+      milestoneId,
+      unitId,
+      lessonId,
+      collectionId,
+      role,
+      source,
+      type: collectionType,
+      subtype: collectionSubType,
+      pathId,
+      minScore,
+      collectionSource: collection.source || 'course_map',
+      isStudyPlayer: true,
+      pathType
+    };
+
+    let suggestionPromise = null;
+    // Verifies if it is a suggested Collection/Assessment
+    if (collectionSubType) {
+      suggestionPromise = component
+        .get('navigateMapService')
+        .startSuggestion(
+          courseId,
+          unitId,
+          lessonId,
+          collectionId,
+          collectionType,
+          collectionSubType,
+          pathId,
+          classId,
+          pathType,
+          milestoneId
+        );
+    } else {
+      suggestionPromise = component
+        .get('navigateMapService')
+        .startCollection(
+          courseId,
+          unitId,
+          lessonId,
+          collectionId,
+          collectionType,
+          classId,
+          pathId,
+          pathType,
+          milestoneId
+        );
+    }
+    suggestionPromise.then(() =>
+      component.get('router').transitionTo('study-player', courseId, {
+        queryParams
+      })
+    );
   }
 });

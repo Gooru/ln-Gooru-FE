@@ -319,6 +319,7 @@ export default StudentCollection.extend({
     }
     if (suggestion) {
       queryParams.courseId = context.courseId;
+      queryParams.milestoneId = context.get('milestoneId');
       queryParams.unitId = context.get('unitId');
       queryParams.lessonId = context.lessonId;
       queryParams.collectionId = suggestion.get('id');
@@ -386,6 +387,7 @@ export default StudentCollection.extend({
         mapContext.ctx_course_id = mapContext.courseId;
         mapContext.ctx_lesson_id = mapContext.lessonId;
         mapContext.ctx_collection_id = mapContext.collectionId;
+        mapContext.ctx_milestone_id = mapContext.milestoneId;
         mapContext.ctx_unit_id = mapContext.unitId;
         mapContext.suggested_content_type = suggestion.type;
         mapContext.suggested_content_id = suggestion.id;
@@ -420,6 +422,7 @@ export default StudentCollection.extend({
       source: null,
       classId: '',
       unitId: null,
+      milestoneId: null,
       lessonId: null,
       collectionId: null,
       type: null
