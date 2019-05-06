@@ -35,7 +35,7 @@ export default Ember.Controller.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Attributes
 
-  queryParams: ['libraryId', 'type', 'profileId', 'isBack'],
+  queryParams: ['libraryId', 'type', 'profileId', 'isBack', 'term'],
 
   // -------------------------------------------------------------------------
   // Properties
@@ -199,6 +199,16 @@ export default Ember.Controller.extend(ModalMixin, {
           controller.loadMoreDataForMyContent();
         }
       }
+    }
+  },
+
+  /**
+   * Method is used to search contents by the params
+   */
+  searchByParams(term) {
+    const controller = this;
+    if (term) {
+      controller.send('doSearch', term);
     }
   },
 

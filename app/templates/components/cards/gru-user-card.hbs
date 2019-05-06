@@ -1,8 +1,8 @@
 {{#if isStudentCard}}
-  {{#link-to "profile.content.courses" user.id tagName="span"}}
+  {{#link-to 'library-search' (query-params type="my-content" profileId=user.id) tagName="span"}}
     <img class="avatar" src="{{user.avatarUrl}}">
   {{/link-to}}
-  {{#link-to "profile.content.courses" user.id tagName="span" class="user-name display-name"}}
+  {{#link-to 'library-search' (query-params type="my-content" profileId=user.id) tagName="span" class="user-name display-name"}}
     {{#if user.firstName}}
       {{truncate text=user.firstName maxLength=10}} <br> {{truncate text=user.lastName maxLength=10}}
     {{else}}
@@ -22,6 +22,6 @@
 
 {{#if isTeacherAndStudentCard}}
   <span class="remove" {{action 'removeStudent'}}>
-      {{t 'common.remove'}}
+    {{t 'common.remove'}}
   </span>
 {{/if}}

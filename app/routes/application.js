@@ -219,9 +219,9 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
    */
   setupTheme: function(themeId) {
     const route = this;
-    themeId = route.get('configuration.themeId')
-      ? route.get('configuration.themeId')
-      : themeId;
+    themeId = route.get('configuration.themeId') ?
+      route.get('configuration.themeId') :
+      themeId;
     if (themeId) {
       const theme = GruTheme.create({
         id: themeId
@@ -284,15 +284,14 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
     }
 
     const targetElement =
-      event.currentTarget && event.currentTarget.activeElement
-        ? event.currentTarget.activeElement
-        : false;
+      event.currentTarget && event.currentTarget.activeElement ?
+        event.currentTarget.activeElement :
+        false;
     const model = Error.create({
       type: 'url',
       timestamp: new Date().getTime(),
-      userId: route.get('session.isAnonymous')
-        ? 'anonymous'
-        : route.get('session.userId'),
+      userId: route.get('session.isAnonymous') ?
+        'anonymous' : route.get('session.userId'),
       details: {
         route: route.get('router.url'),
         userAgent: navigator.userAgent,
@@ -331,9 +330,8 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
     const model = Error.create({
       type: 'page',
       timestamp: new Date().getTime(),
-      userId: route.get('session.isAnonymous')
-        ? 'anonymous'
-        : route.get('session.userId'),
+      userId: route.get('session.isAnonymous') ?
+        'anonymous' : route.get('session.userId'),
       details: {
         route: route.get('router.url'),
         userAgent: navigator.userAgent,
@@ -367,9 +365,9 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
     configurationService.merge(Env.APP.awProps);
 
     const authService = route.get('authService');
-    const authPromise = token
-      ? authService.signInWithToken(token)
-      : authService.get('session').authenticateAsAnonymous();
+    const authPromise = token ?
+      authService.signInWithToken(token) :
+      authService.get('session').authenticateAsAnonymous();
 
     return authPromise;
   },
@@ -443,21 +441,6 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
      */
     logout: function() {
       this.transitionTo('logout');
-    },
-
-    /**
-     * Action triggered when the user search for collections
-     * @see application.hbs
-     * @see gru-header.js
-     */
-    searchTerm: function(term) {
-      const routeName = this.get('controller.currentRouteName');
-      if (routeName.indexOf('search') >= 0) {
-        this.set('controller.term', term);
-      } else {
-        var termParam = `?term=${term}`;
-        this.transitionTo(`/search/courses${termParam}`);
-      }
     },
 
     onCloseAlert: function() {
