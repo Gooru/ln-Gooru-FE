@@ -1,5 +1,4 @@
 import Ember from 'ember';
-
 /**
  * Library route
  *
@@ -21,9 +20,9 @@ export default Ember.Route.extend({
   libraryService: Ember.inject.service('api-sdk/library'),
 
   /**
-   * @dependency {i18nService} Service to retrieve translations information
+   * @property {Service} session
    */
-  i18n: Ember.inject.service(),
+  session: Ember.inject.service('session'),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -31,12 +30,14 @@ export default Ember.Route.extend({
   model: function() {
     return Ember.RSVP.hash({
       courses: this.get('searchService').searchFeaturedCourses('*'),
-      libraries: this.get('libraryService').fetchLibraries()
+      libraries: this.get('libraryService').fetchLibraries(),
+      session: this.get('session')
     });
   },
 
   setupController: function(controller, model) {
     controller.set('courses', model.courses);
     controller.set('libraries', model.libraries);
+    controller.set('session', model.session);
   }
 });

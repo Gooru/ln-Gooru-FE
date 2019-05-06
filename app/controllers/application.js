@@ -15,11 +15,6 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    */
   profileService: Ember.inject.service('api-sdk/profile'),
 
-  /**
-   * This dependency is here so that the header search input is linked to the controller
-   * @property {SearchController}
-   */
-  searchController: Ember.inject.controller('search'),
 
   classService: Ember.inject.service('api-sdk/class'),
 
@@ -43,11 +38,6 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    */
   lang: null,
 
-  /**
-   * This is a link to the search controller so the header is updated
-   * @property {string} term
-   */
-  term: Ember.computed.alias('searchController.term'),
 
   /**
    * @property {Tenant} tenant
@@ -77,22 +67,8 @@ export default Ember.Controller.extend(ConfigurationMixin, {
      */
     logout: function() {
       return true;
-    },
-
-    /**
-     * Action triggered when the user searches for collections
-     * @see application.hbs
-     * @see gru-header.js
-     */
-    searchTerm: function() {
-      return true;
     }
   },
-  isInvalidSearchTerm: false,
-  setInvalidSearchTerm: function(value) {
-    this.set('isInvalidSearchTerm', value);
-  },
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -116,9 +92,9 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   loadUserClasses: function() {
     const controller = this;
     const profile = controller.get('profile');
-    let profilePromise = profile
-      ? Ember.RSVP.resolve(profile)
-      : controller
+    let profilePromise = profile ?
+      Ember.RSVP.resolve(profile) :
+      controller
         .get('profileService')
         .readUserProfile(controller.get('session.userId'));
 
@@ -139,9 +115,9 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   loadSessionProfile: function(profile) {
     const controller = this;
     const sessionId = controller.get('session.userId');
-    let profilePromise = profile
-      ? Ember.RSVP.resolve(profile)
-      : controller.get('profileService').readUserProfile(sessionId);
+    let profilePromise = profile ?
+      Ember.RSVP.resolve(profile) :
+      controller.get('profileService').readUserProfile(sessionId);
 
     return profilePromise.then(function(userProfile) {
       controller.set('profile', userProfile);

@@ -140,7 +140,7 @@ export default Ember.Component.extend({
       if (component.get('useBackUrl')) {
         window.history.back();
       } else {
-        component.get('router').transitionTo('libraries');
+        component.get('router').transitionTo('library');
       }
     }
   },

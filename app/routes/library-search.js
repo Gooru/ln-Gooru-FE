@@ -14,6 +14,9 @@ export default Ember.Route.extend({
     },
     isBack: {
       refreshModel: true
+    },
+    term: {
+      refreshModel: true
     }
   },
 
@@ -49,6 +52,9 @@ export default Ember.Route.extend({
     controller.set('library', model.library);
     controller.set('profile', model.profile);
     controller.fetchContent();
+    if (controller.get('term')) {
+      controller.searchByParams(controller.get('term'));
+    }
   },
 
   resetController(controller) {

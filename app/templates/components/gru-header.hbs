@@ -30,7 +30,7 @@
             <ul class="nav navbar-nav menu-navbar">
               {{#if session.isAnonymous}}
                 <li class="navbar-nav-list visible-md visible-lg library-link">
-                  {{#link-to 'libraries'}}
+                  {{#link-to 'library'}}
                     <span>{{t "common.library"}}</span>
                   {{/link-to}}
                 </li>
@@ -47,7 +47,7 @@
                       <button class="btn dropdown-toggle" data-toggle="dropdown">{{gru-icon name='close'}}</button>
                     </li>
                     <li class="navbar-nav-list">
-                      {{#link-to 'libraries'}} {{t "common.library"}} {{/link-to}}
+                      {{#link-to 'library'}} {{t "common.library"}} {{/link-to}}
                     </li>
                     <li class="navbar-nav-list">
                       {{#link-to 'sign-in' class="navbar-link sign-in-link" }} {{t "common.login"}} {{/link-to}}
@@ -95,7 +95,7 @@
                   </li>
                 {{/unless}}
                 <li class="navbar-nav-list visible-md visible-lg library-link">
-                  {{#link-to 'libraries'}}
+                  {{#link-to 'library'}}
                     <span>{{t "common.library"}}</span>
                   {{/link-to}}
                 </li>
@@ -165,14 +165,20 @@
                       </li>
                     {{/unless}}
                     <li class="navbar-nav-list">
-                      {{#link-to 'libraries'}}
+                      {{#link-to 'library'}}
                         <span>{{t "common.library"}}</span>
                       {{/link-to}}
                     </li>
                     <li class="navbar-nav-list">
-                      {{#link-to (if profile.isStudent 'profile.proficiency' 'profile.content.courses') session.userData.gooruUId class="navbar-link" }}
-                        <span class="">{{t "common.profile"}}</span>
-                      {{/link-to}}
+                      {{#if profile.isStudent}}
+                        {{#link-to 'profile.proficiency' session.userData.gooruUId class="navbar-link" }}
+                          <span class="">{{t "common.profile"}}</span>
+                        {{/link-to}}
+                      {{else}}
+                        {{#link-to 'library-search' (query-params type="my-content" profileId=session.userData.gooruUId)  class="navbar-link" }}
+                          <span class="">{{t "common.profile"}}</span>
+                        {{/link-to}}
+                      {{/if}}
                     </li>
                     <li class="navbar-nav-list">
                       <a {{action 'navigateToSupport' }} target="_blank" class="navbar-link">
@@ -218,7 +224,7 @@
                 <button class="btn dropdown-toggle" data-toggle="dropdown">{{gru-icon name='close'}}</button>
               </li>
               <li class="navbar-nav-list">
-                {{#link-to 'libraries'}} {{t "common.library"}} {{/link-to}}
+                {{#link-to 'library'}} {{t "common.library"}} {{/link-to}}
               </li>
               <li class="navbar-nav-list">
                 {{#link-to 'sign-in' class="navbar-link sign-in-link" }} {{t "common.login"}} {{/link-to}}
@@ -256,14 +262,20 @@
                 </li>
               {{/unless}}
               <li class="navbar-nav-list">
-                {{#link-to 'libraries'}}
+                {{#link-to 'library'}}
                   <span>{{t "common.library"}}</span>
                 {{/link-to}}
               </li>
               <li class="navbar-nav-list">
-                {{#link-to (if profile.isStudent 'profile.proficiency' 'profile.content.courses') session.userData.gooruUId class="navbar-link" }}
-                  <span class="">{{t "common.profile"}}</span>
-                {{/link-to}}
+                {{#if profile.isStudent}}
+                  {{#link-to 'profile.proficiency' session.userData.gooruUId class="navbar-link" }}
+                    <span class="">{{t "common.profile"}}</span>
+                  {{/link-to}}
+                {{else}}
+                  {{#link-to 'library-search' (query-params type="my-content" profileId=session.userData.gooruUId)  class="navbar-link" }}
+                    <span class="">{{t "common.profile"}}</span>
+                  {{/link-to}}
+                {{/if}}
               </li>
               <li class="navbar-nav-list">
                 <a {{action 'navigateToSupport' }} target="_blank" class="navbar-link">
