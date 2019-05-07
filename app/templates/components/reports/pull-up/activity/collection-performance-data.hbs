@@ -21,6 +21,9 @@
           <div class="resource-details {{if (eq resource.id activeResource.id) 'active-resource'}}">
             <div class="resource-container" {{action "onSelectResource" resource}} data-toggle="tooltip" title="{{resource.title}}">
               <div class="resource-title ellipsis"><span class="resource-seq">{{plus-one seq}}. </span>{{resource.title}}</div>
+              {{#if resource.timeSpent}}
+                <div class="resource-timespent">{{format-time resource.timeSpent}}</div>
+              {{/if}}
             </div>
             <div class="resource-timespent-details">
             </div>
@@ -39,7 +42,11 @@
         <div class="timespent-action-container">
           <div class="next-action {{unless isValidTimeSpent 'disable-event'}}" {{action "onSaveTimeSpent"}}>
             {{#if isLastResource}}
-              {{t 'common.save-submit'}}
+              {{#if isOverwritePerformance}}
+                {{t 'goals.manage.update'}} {{t 'common.timeSpent'}}
+              {{else}}
+                {{t 'common.save-submit'}}
+              {{/if}}
             {{else}}
               {{t 'common.save-next'}}
             {{/if}}
