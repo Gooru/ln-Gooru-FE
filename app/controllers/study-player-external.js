@@ -15,6 +15,9 @@ export default Ember.Controller.extend({
     'classId',
     'courseId',
     'collectionId',
+    'unitId',
+    'lessonId',
+    'milestoneId',
     'source'
   ],
 

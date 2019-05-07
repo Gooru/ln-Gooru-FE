@@ -1,0 +1,465 @@
+.student-class-milestone-course-map {
+  width: 650px;
+
+  .milestone-course-map-container {
+    width: 100%;
+
+    .milestone-course-map {
+      margin-bottom: 5px;
+
+      .milestone-course-map-panel {
+        height: 50px;
+        background-color: #5c8fd2;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+        display: inline-grid;
+        width: 100%;
+        grid-template-columns: 70px 1fr 50px 60px;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+
+        &.active {
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .milestone-flag-icon {
+          font-family: "Lato";
+          font-size: 18px;
+          font-weight: bold;
+          line-height: 1;
+          letter-spacing: normal;
+          text-align: center;
+          border-radius: 50%;
+          background: #fff;
+          width: 30px;
+          height: 30px;
+          align-self: center;
+          justify-self: center;
+
+          i {
+            font-size: 16px;
+            margin-top: 7px;
+            margin-left: 1px;
+            color: #5c8fd2;
+          }
+        }
+
+        .milestone-title {
+          p {
+            margin: 0;
+            font-family: "Lato";
+            color: #fff;
+            font-weight: bold;
+            @include ellipsis(
+              $font-size: 15px,
+              $line-height: 1.5,
+              $lines-to-show: 1
+            );
+            width: 100%;
+          }
+        }
+
+        .milestone-caret {
+          color: #fff;
+          align-self: center;
+          height: 26px;
+          text-align: center;
+
+          i {
+            font-size: 30px;
+          }
+        }
+
+        .milestone-peformance {
+          width: 60px;
+          height: 50px;
+          display: grid;
+          align-items: center;
+          justify-items: center;
+          color: #fff;
+          font-size: 16px;
+          font-weight: bold;
+          border-bottom: 1px solid #fff;
+
+          &.grade-range-not-started {
+            background: transparent;
+            border-bottom: none;
+          }
+        }
+      }
+
+      .milestone-course-map-lesson-container {
+        display: none;
+        background-image: linear-gradient(to top, #e7e7e7, #cfcfcf);
+
+        .no-lesson {
+          text-align: center;
+          font-size: 15px;
+        }
+
+        .lesson-icon-container {
+          display: grid;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+
+          i {
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-image: url("../assets/gooru/images/lesson-dark-outline.svg");
+          }
+
+          .lesson-icon-upward-line {
+            position: absolute;
+            top: -16px;
+            left: 34px;
+
+            svg {
+              stroke: #ccc;
+              stroke-width: 3;
+            }
+          }
+
+          .lesson-icon-downward-line {
+            position: absolute;
+            bottom: -22px;
+            left: 34px;
+
+            svg {
+              stroke: #ccc;
+              stroke-width: 3;
+            }
+          }
+        }
+
+        .lesson-load-spinner {
+          height: 50px;
+          display: inline-flex;
+          align-items: center;
+          width: 100%;
+
+          .three-bounce-spinner {
+            margin: 0 auto;
+          }
+        }
+
+        .milestone-course-map-lesson {
+          &.active {
+            .milestone-course-map-lesson-panel {
+              box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+              position: relative;
+            }
+          }
+
+          &:last-child {
+            .milestone-course-map-lesson-panel {
+              border-bottom: none;
+            }
+
+            .milestone-course-map-collection-container {
+              .no-collection {
+                padding-bottom: 0;
+              }
+            }
+          }
+
+          .milestone-course-map-lesson-panel {
+            height: 50px;
+            background: #fff;
+            display: inline-grid;
+            width: 100%;
+            grid-template-columns: 70px 1fr 50px 50px 60px;
+            align-items: center;
+            border-bottom: 1px solid #e3e5ea;
+            cursor: pointer;
+
+            &.has-activity {
+              .lesson-icon-container {
+                .lesson-icon {
+                  background-image: url("../assets/gooru/images/lesson-blue-outline.svg");
+                }
+
+                .lesson-icon-downward-line,
+                .lesson-icon-upward-line {
+                  svg {
+                    stroke: #5c8ee2;
+                  }
+                }
+              }
+            }
+
+            .lesson-title {
+              p {
+                margin: 0;
+                font-family: "Lato";
+                color: #666666;
+                @include ellipsis(
+                  $font-size: 18px,
+                  $line-height: 1.5,
+                  $lines-to-show: 1
+                );
+                width: 100%;
+              }
+            }
+
+            .lesson-peformance {
+              width: 60px;
+              height: 50px;
+              display: grid;
+              align-items: center;
+              justify-items: center;
+              font-size: 16px;
+              font-weight: bold;
+              color: #fff;
+
+              &.grade-range-not-started {
+                background: transparent;
+                color: #666;
+              }
+            }
+          }
+
+          .milestone-course-map-collection-container {
+            display: none;
+
+            .no-collection {
+              text-align: center;
+              font-size: 15px;
+              padding-top: 20px;
+              padding-bottom: 20px;
+            }
+
+            .collection-load-spinner {
+              height: 50px;
+              display: inline-flex;
+              align-items: center;
+              width: 100%;
+
+              .three-bounce-spinner {
+                margin: 0 auto;
+              }
+            }
+
+            .milestone-course-map-collection {
+              &:last-child {
+                .milestone-course-map-collection-panel {
+                  border-bottom: 1px solid #e3e5ea;
+                }
+              }
+
+              .milestone-course-map-collection-panel {
+                height: 50px;
+                background: #fff;
+                display: inline-grid;
+                width: 100%;
+                grid-template-columns: 70px 1fr 50px 100px 60px;
+                align-items: center;
+
+                &.has-activity {
+                  .collection-icon-container {
+                    .collection-icon {
+                      &.format-collection {
+                        background-image: url("../assets/gooru/images/collection-dark-blue.svg");
+                      }
+
+                      &.format-assessment {
+                        background-image: url("../assets/gooru/images/assessment-dark-blue.svg");
+                      }
+                    }
+
+                    .collection-icon-downward-line,
+                    .collection-icon-upward-line {
+                      svg {
+                        stroke: #5c8ee2;
+                      }
+                    }
+                  }
+                }
+
+                &.last-played-collection {
+                  .colllection-play-btn {
+                    visibility: visible;
+                    opacity: 1;
+                  }
+
+                  .collection-title-container {
+                    p {
+                      color: #5c8ee2;
+                      font-weight: bold;
+                    }
+                  }
+                }
+
+                &:hover {
+                  .colllection-play-btn {
+                    visibility: visible;
+                    opacity: 1;
+                    transition: visibility 0s linear 0s, opacity 300ms;
+                  }
+                }
+
+                .collection-icon-container {
+                  display: grid;
+                  align-items: center;
+                  justify-content: center;
+                  position: relative;
+
+                  i {
+                    width: 20px;
+                    height: 20px;
+                    background-repeat: no-repeat;
+                    background-size: 20px 20px;
+
+                    &.format-collection,
+                    &.format-collection-external {
+                      background-image: url("../assets/gooru/images/collection_gray.svg");
+                    }
+
+                    &.format-assessment,
+                    &.format-assessment-external {
+                      background-image: url("../assets/gooru/images/assessment-gray.svg");
+                    }
+                  }
+
+                  .collection-icon-upward-line {
+                    position: absolute;
+                    top: -16px;
+                    left: 34px;
+
+                    svg {
+                      stroke: #ccc;
+                      stroke-width: 3;
+                    }
+                  }
+
+                  .collection-icon-downward-line {
+                    position: absolute;
+                    bottom: -22px;
+                    left: 34px;
+
+                    svg {
+                      stroke: #ccc;
+                      stroke-width: 3;
+                    }
+                  }
+                }
+
+                .colllection-play-btn {
+                  color: #4a8cdb;
+                  visibility: hidden;
+                  opacity: 0;
+                  transition: visibility 0s linear 300ms, opacity 300ms;
+                  cursor: pointer;
+                  align-self: center;
+                  justify-self: center;
+
+                  i {
+                    font-size: 30px;
+                  }
+                }
+
+                .collection-img-container {
+                  img {
+                    width: 60px;
+                    height: 50px;
+                    border-bottom: 1px solid #fff;
+                  }
+                }
+
+                .collection-peformance {
+                  width: 60px;
+                  height: 50px;
+                  display: grid;
+                  align-items: center;
+                  justify-items: center;
+                  font-size: 16px;
+                  font-weight: bold;
+                  color: #fff;
+                  border-bottom: 1px solid #fff;
+                  line-height: 1;
+                  text-align: center;
+
+                  &.grade-range-not-started {
+                    background: transparent;
+                    color: #666;
+                  }
+
+                  &.format-collection {
+                    background: #ccc;
+                  }
+                }
+
+                .collection-title-container {
+                  display: inline-flex;
+                  align-items: center;
+
+                  p {
+                    margin: 0;
+                    font-family: "Open Sans";
+                    color: #545e66;
+                    @include ellipsis(
+                      $font-size: 15px,
+                      $line-height: 2,
+                      $lines-to-show: 1
+                    );
+                    width: 100%;
+                  }
+                }
+
+                .collection-content-counts {
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: space-evenly;
+
+                  .resource-count {
+                    width: 40px;
+                    display: inline-grid;
+                    align-items: center;
+                    grid-template-columns: 50% 50%;
+                    justify-items: center;
+
+                    .resource-icon {
+                      width: 20px;
+                      height: 20px;
+                      background-repeat: no-repeat;
+                      background-size: 20px 20px;
+                      background-image: url("../assets/gooru/images/add_resource_icon.svg");
+                      opacity: 0.8;
+                    }
+                  }
+
+                  .question-count {
+                    width: 40px;
+                    display: inline-grid;
+                    align-items: center;
+                    grid-template-columns: 50% 50%;
+                    justify-items: center;
+
+                    .question-icon {
+                      width: 20px;
+                      height: 20px;
+                      background-repeat: no-repeat;
+                      background-size: 20px 20px;
+                      background-image: url("../assets/gooru/images/add_question.svg");
+                      opacity: 0.8;
+                    }
+                  }
+
+                  .external-icon {
+                    width: 20px;
+                    height: 20px;
+                    background-repeat: no-repeat;
+                    background-size: 20px 20px;
+                    background-image: url("../assets/gooru/share.png");
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

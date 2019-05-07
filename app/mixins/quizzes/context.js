@@ -42,6 +42,7 @@ export default Ember.Mixin.create({
         contextMapping: {
           courseId: params.courseId || collection.get('courseId'),
           unitId: params.unitId || collection.get('unitId'),
+          milestoneId: params.milestoneId || collection.get('milestoneId'),
           lessonId: params.lessonId || collection.get('lessonId'),
           eventSource: params.source,
           version,
