@@ -74,6 +74,7 @@ export default Object.assign(quizzesTranslations, {
   'common.frq': 'frq',
   'common.schedule': 'তফসিল',
   'common.responses': 'প্রতিক্রিয়া',
+  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.no-lesson-info-message': 'এই ইউনিট কোন পাঠ আছে।',
   'common.no-collection-info-message': 'এই পাঠ কোন সংগ্রহ আছে।',
   'common.gooru-suggestions': 'গুরুর পরামর্শ',

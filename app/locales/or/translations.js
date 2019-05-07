@@ -78,6 +78,7 @@ export default Object.assign(quizzesTranslations, {
   'common.avg-score': 'ହାରାହାରି ସ୍କୋର୍',
   'common.frq': 'FRQ',
   'common.schedule': 'ସୂଚୀ',
+  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.responses': 'ଉତ୍ତରଗୁଡ଼ିକ',
   'common.no-lesson-info-message': 'ଏହି ୟୁନିଟରେ କୌଣସି ଅଧ୍ୟାୟ ନାହିଁ ।',
   'common.no-collection-info-message': 'ଏହି ୟୁନିଟରେ କୌଣସି ସଂଗ୍ରହ ନାହିଁ ।',

@@ -94,6 +94,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-question': 'ஒரு கேள்வி',
   'common.a-resource': 'ஒரு வள',
   'common.a-rubric': 'ஒரு ரூபிக்',
+  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.all-completed': 'எல்லாம் முடிந்தது',
   'common.a-assessment': 'மதிப்பீடு',
   'common.about': 'பற்றி',
