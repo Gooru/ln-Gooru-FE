@@ -38,6 +38,11 @@
         width: 100%;
         margin-top: 30px;
         padding: 60px 50px 40px;
+        margin: auto;
+
+        &.search {
+          width: 50%;
+        }
 
         .panel-body {
           text-align: center;
@@ -71,6 +76,16 @@
 
       .gru-resource-card {
         margin-bottom: 15px;
+
+        .panel-heading {
+          .header {
+            .resource-info {
+              .search-type-position {
+                margin-left: 0;
+              }
+            }
+          }
+        }
 
         .title.rubric {
           display: inline-block;

@@ -100,6 +100,7 @@ export default Object.assign(quizzesTranslations, {
   'common.about-me': 'About Me',
   'common.accept': 'Accept',
   'common.ignore': 'Ignore',
+  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.add': 'Añadir',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',

@@ -1141,6 +1141,21 @@ export default Ember.Service.extend({
             reject(error);
           }
         );
+    },
+                                  
+   * @function overwriteCollectionPerformance
+   * Method to overwrite collection performance
+   */
+  overwriteCollectionPerformance(performanceData) {
+    const service = this;
+    const performanceAdapter = service.get('performanceAdapter');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      performanceAdapter
+        .overwriteCollectionPerformance(performanceData)
+        .then(function(response) {
+          resolve(response);
+        }, reject);
+
     });
   }
 });

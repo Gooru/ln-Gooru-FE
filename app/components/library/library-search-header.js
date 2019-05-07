@@ -140,7 +140,7 @@ export default Ember.Component.extend({
       if (component.get('useBackUrl')) {
         window.history.back();
       } else {
-        component.get('router').transitionTo('libraries');
+        component.get('router').transitionTo('library');
       }
     }
   },
@@ -164,6 +164,7 @@ export default Ember.Component.extend({
    */
   initializePopover() {
     const component = this;
+    component.$('[data-toggle="tooltip"]').tooltip();
     component.$('.more-pointer').popover({
       html: true,
       trigger: 'click',

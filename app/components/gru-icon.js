@@ -54,10 +54,14 @@ export default Ember.Component.extend({
 
   tooltipTitle: null,
 
+  tooltipTitleData: null,
+
   tooltipData: Ember.computed('tooltipTitle', function() {
     return this.get('tooltipTitle')
       ? this.get('i18n').t(this.get('tooltipTitle'))
-      : undefined;
+      : this.get('tooltipTitleData')
+        ? this.get('tooltipTitleData')
+        : undefined;
   }),
 
   dataToggle: Ember.computed('tooltipTitle', function() {

@@ -6,10 +6,14 @@
     <div class="profile">
       {{#if (eq type 'library')}}
         <img class="image" src="{{library.image}}" />
-        <span class="library-name">{{library.shortName}}</span>
+        <span class="library-name ellipsis">{{library.shortName}}</span>
       {{else if (eq type 'my-content')}}
         <img class="image" src="{{profile.avatarUrl}}" />
-        <span class="my-content-title">{{t "my-content"}}</span>
+        {{#if isMyProfile}}
+          <span class="my-content-title">{{t "my-content"}}</span>
+        {{else}}
+          <span class="my-content-title ellipsis">{{profile.username}}</span>
+        {{/if}}
       {{else}}
         <img class="image" src="assets/gooru/images/gooru-logo.svg" />
         <span class="my-content-title">{{t "common.gooru-catalog"}}</span>
@@ -49,10 +53,10 @@
   </div>
   <div class="actions">
     <span>{{gru-icon name="search"}}</span>
-    <span {{action 'toggleSearchFilter'}} class="filter">{{gru-icon name="filter_list"}}</span>
+    <span {{action 'toggleSearchFilter'}} class="filter" data-placement="bottom" data-toggle="tooltip" title={{t 'student-landing.my-performance.filter'}}>{{gru-icon name="filter_list"}}</span>
   </div>
 </div>
-<div class="filters">
+<div class="filters {{activeContentType}}">
   <div class="hidden visible-xs">
     <div class="filter-items {{unless filters 'hidden'}}">
       {{#each filters as |selectedFilter index|}}

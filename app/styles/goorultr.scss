@@ -22,8 +22,6 @@
 @import "controllers/content/classes/modals";
 @import "controllers/content/classes/create";
 @import "controllers/content/classes/join";
-@import "controllers/library";
-@import "controllers/partner-library";
 @import "controllers/content/courses/edit";
 @import "controllers/content/courses/play";
 @import "controllers/content/questions/edit";
@@ -32,12 +30,6 @@
 @import "controllers/content/resources/play";
 @import "controllers/partials/player";
 @import "controllers/profile";
-@import "controllers/profile/content";
-@import "controllers/profile/content/assessments";
-@import "controllers/profile/content/collections";
-@import "controllers/profile/content/questions";
-@import "controllers/profile/content/resources";
-@import "controllers/profile/content/rubrics";
 @import "controllers/profile/about";
 @import "controllers/profile/preference";
 
@@ -50,7 +42,6 @@
 @import "controllers/reports/student-collection-analytics";
 @import "controllers/reports/study-student-collection";
 @import "controllers/reports/student-open-ended-summary";
-@import "controllers/search";
 @import "controllers/sign-in";
 @import "controllers/sign-up";
 @import "controllers/home";
@@ -463,7 +454,7 @@
 
 @import "components/gru-button-list";
 
-@import "controllers/libraries";
+@import "controllers/library";
 @import "controllers/library-search";
 @import "components/library/library-search-header";
 @import "components/library/library-content-result-grid-view";

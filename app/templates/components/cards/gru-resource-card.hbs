@@ -69,15 +69,15 @@
         <b class="publisher-name">{{resource.publisher}}</b>
       {{else}}
         <img class="img-responsive" src="{{ resource.owner.avatarUrl }}">
-          <span class="owner">
-            {{#if allowProfileNavigation}}
-              {{#link-to 'profile.content.courses' resource.owner.id class="pointer enable"}}
-                {{resource.owner.displayName}}
-              {{/link-to}}
-            {{else}}
-              <a class="disabled">{{resource.owner.displayName}}</a>
-            {{/if}}
-          </span>
+        <span class="owner">
+          {{#if allowProfileNavigation}}
+            {{#link-to 'library-search' (query-params type="my-content" profileId=resource.owner.id)  class="pointer enable"}}
+              {{resource.owner.displayName}}
+            {{/link-to}}
+          {{else}}
+            <a class="disabled">{{resource.owner.displayName}}</a>
+          {{/if}}
+        </span>
       {{/if}}
     </div>
     <div class="description">
@@ -93,7 +93,7 @@
           {{#if (or profile.isTeacher session.isAnonymous)}}
             <button class="add-to-btn btn btn-success btn-sm" {{action "addToCollection"}}>{{t "common.add-to"}}</button>
             {{#if isQuestion}}
-                <button class="remix-btn btn btn-success btn-sm" {{action "remixQuestion"}}>{{t "common.remix"}}</button>
+              <button class="remix-btn btn btn-success btn-sm" {{action "remixQuestion"}}>{{t "common.remix"}}</button>
             {{/if}}
           {{else}}
             <button class="study-btn btn btn-success btn-sm" {{action "playResource"}}>{{t "common.study"}}</button>

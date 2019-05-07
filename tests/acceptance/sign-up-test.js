@@ -1,6 +1,10 @@
-import { test } from 'qunit';
+import {
+  test
+} from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
-import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
+import {
+  authenticateSession
+} from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
 
 moduleForAcceptance('Acceptance | sign-up', {
@@ -618,28 +622,6 @@ test('Sign up as student', function(assert) {
       click($role);
       andThen(function() {
         click($signUpContainer.find('button.submit-sign-up'));
-        andThen(function() {
-          visit('/search/courses?term=water');
-          andThen(function() {
-            assert.equal(currentURL(), '/search/courses?term=water');
-            const $courseCard = find('.new-cards.gru-standard-card');
-            assert.ok(
-              $courseCard.find('.bookmark-btn').length,
-              'Missing bookmark on card'
-            );
-            const $previewButton = find(
-              '.new-cards.gru-standard-card:first-child .preview-btn'
-            );
-            click($previewButton);
-            andThen(function() {
-              const $previewModal = find('.gru-preview-course');
-              assert.ok(
-                $previewModal.find('.bookmark-btn').length,
-                'Missing bookmark on preview on modal'
-              );
-            });
-          });
-        });
       });
     });
   });

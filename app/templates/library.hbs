@@ -1,23 +1,26 @@
-<div class="libraries">
-  {{content.gru-header options=options selected=selected}}
-  {{#if (eq selected 'featured-courses')}}
-    <div id="featured-courses">
-      {{library.gru-browse-library
-        courses=courses
-        onOpenContentPlayer="playCourse"
-        onBookmarkCourse='onBookmarkCourse'
-        onOpenIndependentPlayer="playIndependentContent"
-        profile=profile
-      }}
-    </div>
-  {{/if}}
-  {{#if (eq selected 'partner-libraries')}}
-    <div id="partner-libraries">
-      <div class="libraries-container">
+<div class="container">
+  <div class="card-container">
+    {{#if (and (not session.isAnonymous)  (eq session.role 'teacher'))}}
+      {{#link-to "library-search" (query-params type="my-content" profileId=session.userId)}}
+        <div class="card-panel">
+          <div class="title">{{t 'my-content'}}</div>
+          <i class="image my-content"></i>
+        </div>
+      {{/link-to}}
+    {{/if}}
+    {{#link-to "library-search" (query-params type="gooru-catalog")}}
+      <div class="card-panel">
+        <div class="title">{{t 'common.gooru-catalog'}}</div>
+        <i class="image catalog"></i>
+      </div>
+    {{/link-to}}
+  </div>
+  <div class="partner-libraries">
+    <div class="heading"><span>{{t 'featured-libraries'}}</span></div>
+    <div class="libraries-container">
       {{#each libraries as |library|}}
         {{library.gru-partner-library-card content=library}}
       {{/each}}
-      </div>
     </div>
-  {{/if}}
+  </div>
 </div>

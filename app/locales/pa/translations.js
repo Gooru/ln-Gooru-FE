@@ -87,6 +87,7 @@ export default Object.assign(quizzesTranslations, {
     'ਆਪਣੇ ਸਪੈਲਿੰਗਾਂ ਦੀ ਜਾਂਚ ਕਰੋ ਅਸੀਂ ਸਾਰੇ ਗ਼ਲਤੀਆਂ ਕਰਦੇ ਹਾਂ! ਜਾਂ ਇਸਦੀ ਬਜਾਏ ਇਸੇ ਸ਼ਬਦ ਦੀ ਖੋਜ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ.',
   'common.a-collection': 'ਇੱਕ ਸੰਗ੍ਰਹਿ',
   'common.a-course': 'ਇੱਕ ਕੋਰਸ',
+  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.a-question': 'ਇੱਕ ਸਵਾਲ',
   'common.a-resource': 'ਇੱਕ ਸਰੋਤ',
   'common.a-rubric': 'ਇੱਕ ਚਰਬੀਕਾਰ',

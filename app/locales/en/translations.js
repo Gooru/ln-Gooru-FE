@@ -360,6 +360,7 @@ export default Object.assign(quizzesTranslations, {
   'common.essential-questions': 'Essential Questions',
   'common.example': 'example: ',
   'common.exit': 'Exit',
+  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.external-collection': 'External Collection',
   'common.explanation': 'Explanation',
   'common.explore': 'Explore',
@@ -628,10 +629,8 @@ export default Object.assign(quizzesTranslations, {
   'common.type': 'Type',
   'common.title': 'Title',
   'common.unBookmark': 'Unbookmark',
-  'common.unexpectedError':
-    'An unexpected error has occurred and has been reported. We\'re sorry for the inconvenience!',
-  'common.networkError':
-    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
+  'common.unexpectedError': 'An unexpected error has occurred and has been reported. We\'re sorry for the inconvenience!',
+  'common.networkError': 'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'Unfollow',
   'common.unit': 'Unit',
   'common.unit-title': 'Unit Title',
@@ -947,17 +946,12 @@ export default Object.assign(quizzesTranslations, {
   'student-independent-learning.add-bookmark': 'Add Bookmark',
   'teacher-landing.latest-announcement': 'Latest Announcement',
   'teacher-landing.latest-assessment': 'Latest Assessment',
-  'teacher-landing.create-classroom':
-    'Create a classroom, assign contents, invite students',
-  'teacher-landing.dca-create-info':
-    'Click on the icons below and search for content from the Gooru Library to create a  class activity. You can also add content to  class activity from your course map by clicking on Course Map.',
+  'teacher-landing.create-classroom': 'Create a classroom, assign contents, invite students',
+  'teacher-landing.dca-create-info': 'Click on the icons below and search for content from the Gooru Library to create a  class activity. You can also add content to  class activity from your course map by clicking on Course Map.',
   'teacher-landing.schedule-for-later': 'Schedule Later',
-  'teacher-landing.teach-this-activity-later':
-    'teach this activity later at DCA',
-  'teacher-landing.schedule-dca-instruction-1':
-    'Pick a later date on which to teach this activity.',
-  'teacher-landing.schedule-dca-instruction-2':
-    'This activity will appear at DCA for the chosen date.',
+  'teacher-landing.teach-this-activity-later': 'teach this activity later at DCA',
+  'teacher-landing.schedule-dca-instruction-1': 'Pick a later date on which to teach this activity.',
+  'teacher-landing.schedule-dca-instruction-2': 'This activity will appear at DCA for the chosen date.',
   'teacher-landing.navigator-banner.title': 'Navigator for Math',
   'teacher-landing.navigator-banner.description': 'Utilizing this GPS for Learning technology, we have designed Navigator for Math to ensure that every student can gain confidence and accelerate their learning in math.<br/>Navigator for Math is a course of study covering all math concepts from grades 2-12. Students are routed and rerouted through an individualized pathway designed to build on their current knowledge, as well as fill gaps in their understanding. Through this comprehensive and personalized learning experience, every student can become fully prepared for more advanced math.',
   'teacher-landing.navigator-banner.join': 'Join Demo Class',
@@ -1030,10 +1024,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-to-destination': 'progress to destination',
   'teacher-landing.class.class-activities': 'Class Activities',
   'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
-  'teacher-landing.class.class-activities.warning-message':
-    'You have not entered data for {{questionCount}} questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
-  'teacher-landing.class.class-activities.info-message':
-    'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
+  'teacher-landing.class.class-activities.warning-message': 'You have not entered data for {{questionCount}} questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
+  'teacher-landing.class.class-activities.info-message': 'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
   'teacher-landing.class.offline-class-report.class-activity-report': 'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report': 'Activity Report',
@@ -1073,32 +1065,19 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-desc': 'Minimum performance to earn a trophy',
   'teacher-landing.class.class-settings.class-settings-sec.class-code': 'Class Code',
   'teacher-landing.class.class-settings.class-settings-sec.subject': 'Subject',
-  'teacher-landing.class.class-settings.class-settings-sec.framework':
-    'Framework',
-  'teacher-landing.class.class-settings.class-settings-sec.grade-level':
-    'Grade Level',
-  'teacher-landing.class.class-settings.class-settings-sec.option-choose-one':
-    'Choose One',
-  'teacher-landing.class.class-settings.class-settings-sec.co-teachers':
-    'Co-Teachers',
-  'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
-    'Add another teacher',
-  'teacher-landing.class.class-settings.class-settings-sec.language':
-    'Language of instruction',
-  'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
-    'Student Settings',
-  'teacher-landing.class.class-settings.student-settings-sec.col-head-active':
-    'Active',
-  'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head':
-    'Course Settings',
-  'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable':
-    'Personalized Learning Path should cover gaps at profile?',
-  'teacher-landing.class.class-settings.course-settings-sec.apply-settings':
-    'Apply Settings',
-  'teacher-landing.class.class-settings.course-settings-sec.origin-info':
-    'What is the lowest grade level content that your students should study?',
-  'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
-    'What is the grade level of your class?',
+  'teacher-landing.class.class-settings.class-settings-sec.framework': 'Framework',
+  'teacher-landing.class.class-settings.class-settings-sec.grade-level': 'Grade Level',
+  'teacher-landing.class.class-settings.class-settings-sec.option-choose-one': 'Choose One',
+  'teacher-landing.class.class-settings.class-settings-sec.co-teachers': 'Co-Teachers',
+  'teacher-landing.class.class-settings.class-settings-sec.add-coteacher': 'Add another teacher',
+  'teacher-landing.class.class-settings.class-settings-sec.language': 'Language of instruction',
+  'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head': 'Student Settings',
+  'teacher-landing.class.class-settings.student-settings-sec.col-head-active': 'Active',
+  'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head': 'Course Settings',
+  'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable': 'Personalized Learning Path should cover gaps at profile?',
+  'teacher-landing.class.class-settings.course-settings-sec.apply-settings': 'Apply Settings',
+  'teacher-landing.class.class-settings.course-settings-sec.origin-info': 'What is the lowest grade level content that your students should study?',
+  'teacher-landing.class.class-settings.course-settings-sec.current-grade-info': 'What is the grade level of your class?',
   'teacher-landing.class.class-settings.origin': 'Origin',
   'teacher-landing.class.class-settings.destination': 'Destination',
   'teacher-landing.class.class-settings.students': 'Students',
@@ -1495,8 +1474,7 @@ export default Object.assign(quizzesTranslations, {
   'profile.proficiency.baseline': 'Baseline',
   'profile.proficiency.grade-line': 'Other Grade',
   'profile.proficiency.class-grade-line': 'Class Grade',
-  'profile.proficiency.not-tagged':
-    'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
+  'profile.proficiency.not-tagged': 'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
   'profile.proficiency.show-compressed-chart': 'Show Compressed Chart',
   'profile.proficiency.show-expanded-chart': 'Show Expanded Chart',
   'profile.preference.language-preference': 'Language Preference',
@@ -1966,18 +1944,12 @@ export default Object.assign(quizzesTranslations, {
   'competency-meta-data.nodata.competency': 'There are no alt-concepts defined for this competency',
   'student-journey.heading': 'YOUR JOURNEY',
   'student-journey.teacher-heading': 'STUDENT JOURNEY',
-  'student-journey.nodata':
-    'You are yet to start studying this competency on the Navigator',
-  'student-journey.no-data-teacher':
-    'Student is yet to start studying this competency on the Navigator',
-  'student-journey.student-status-3':
-    'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
-  'student-journey.student-status-2':
-    'The status for this competency is inferred mastery based on evidence of mastery in another competency in the domain.  You have not yet studied any learning content on the Navigator for this competency.',
-  'student-journey.teacher-status-2':
-    'The status for this competency is inferred mastery based on evidence of mastery in another competency in the domain.  The student has not yet studied any learning content on the Navigator for this competency.',
-  'student-journey.teacher-status-3':
-    'The student has asserted mastery in the competency and has not studied any learning activity on the Navigator for this competency.',
+  'student-journey.nodata': 'You are yet to start studying this competency on the Navigator',
+  'student-journey.no-data-teacher': 'Student is yet to start studying this competency on the Navigator',
+  'student-journey.student-status-3': 'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
+  'student-journey.student-status-2': 'The status for this competency is inferred mastery based on evidence of mastery in another competency in the domain.  You have not yet studied any learning content on the Navigator for this competency.',
+  'student-journey.teacher-status-2': 'The status for this competency is inferred mastery based on evidence of mastery in another competency in the domain.  The student has not yet studied any learning content on the Navigator for this competency.',
+  'student-journey.teacher-status-3': 'The student has asserted mastery in the competency and has not studied any learning activity on the Navigator for this competency.',
   'learning-map.practice-question': 'practice questions',
   'learning-map.no-practice-questions': 'There are no practice questions for this competency',
   'learning-map.solved-examples': 'solved examples',
