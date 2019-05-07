@@ -32,11 +32,13 @@ export default Ember.Object.extend({
     if (classId) {
       options.data.classId = classId;
     }
-    return Ember.RSVP.hashSettled({
-      userPerformanceUnits: Ember.$.ajax(url, options)
-    }).then(function(hash) {
-      return hash.userPerformanceUnits.value;
-    });
+    return Ember.RSVP
+      .hashSettled({
+        userPerformanceUnits: Ember.$.ajax(url, options)
+      })
+      .then(function(hash) {
+        return hash.userPerformanceUnits.value;
+      });
   },
 
   /**
@@ -60,11 +62,13 @@ export default Ember.Object.extend({
     if (classId) {
       options.data.classId = classId;
     }
-    return Ember.RSVP.hashSettled({
-      userPerformanceLessons: Ember.$.ajax(url, options)
-    }).then(function(hash) {
-      return hash.userPerformanceLessons.value;
-    });
+    return Ember.RSVP
+      .hashSettled({
+        userPerformanceLessons: Ember.$.ajax(url, options)
+      })
+      .then(function(hash) {
+        return hash.userPerformanceLessons.value;
+      });
   },
 
   /**
@@ -89,11 +93,13 @@ export default Ember.Object.extend({
     if (classId) {
       options.data.classId = classId;
     }
-    return Ember.RSVP.hashSettled({
-      userPerformanceCollections: Ember.$.ajax(url, options)
-    }).then(function(hash) {
-      return hash.userPerformanceCollections.value;
-    });
+    return Ember.RSVP
+      .hashSettled({
+        userPerformanceCollections: Ember.$.ajax(url, options)
+      })
+      .then(function(hash) {
+        return hash.userPerformanceCollections.value;
+      });
   },
 
   /**
@@ -134,11 +140,13 @@ export default Ember.Object.extend({
     if (lessonId) {
       options.data.lessonId = lessonId;
     }
-    return Ember.RSVP.hashSettled({
-      userResourceInAssessment: Ember.$.ajax(url, options)
-    }).then(function(hash) {
-      return hash.userResourceInAssessment.value;
-    });
+    return Ember.RSVP
+      .hashSettled({
+        userResourceInAssessment: Ember.$.ajax(url, options)
+      })
+      .then(function(hash) {
+        return hash.userResourceInAssessment.value;
+      });
   },
 
   /**
@@ -179,11 +187,13 @@ export default Ember.Object.extend({
     if (lessonId) {
       options.data.lessonId = lessonId;
     }
-    return Ember.RSVP.hashSettled({
-      userResourceInCollection: Ember.$.ajax(url, options)
-    }).then(function(hash) {
-      return hash.userResourceInCollection.value;
-    });
+    return Ember.RSVP
+      .hashSettled({
+        userResourceInCollection: Ember.$.ajax(url, options)
+      })
+      .then(function(hash) {
+        return hash.userResourceInCollection.value;
+      });
   },
 
   /**
@@ -206,11 +216,13 @@ export default Ember.Object.extend({
         collectionType: type
       }
     };
-    return Ember.RSVP.hashSettled({
-      collectionPerformance: Ember.$.ajax(url, options)
-    }).then(function(hash) {
-      return hash.collectionPerformance.value;
-    });
+    return Ember.RSVP
+      .hashSettled({
+        collectionPerformance: Ember.$.ajax(url, options)
+      })
+      .then(function(hash) {
+        return hash.collectionPerformance.value;
+      });
   },
 
   updateCollectionOfflinePerformance(performanceData) {
@@ -224,11 +236,13 @@ export default Ember.Object.extend({
       dataType: 'text',
       data: JSON.stringify(performanceData)
     };
-    return Ember.RSVP.hashSettled({
-      updatedPerformance: Ember.$.ajax(url, options)
-    }).then(function(hash) {
-      return hash.updatedPerformance;
-    });
+    return Ember.RSVP
+      .hashSettled({
+        updatedPerformance: Ember.$.ajax(url, options)
+      })
+      .then(function(hash) {
+        return hash.updatedPerformance;
+      });
   },
 
   /**
@@ -250,6 +264,30 @@ export default Ember.Object.extend({
       })
     };
     return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * @function overwriteCollectionPerformance
+   * Method to overwrite collection performance data
+   */
+  overwriteCollectionPerformance(performanceData) {
+    const adapter = this;
+    const namespace = adapter.get('insightsNamespace');
+    const url = `${namespace}/perf-update`;
+    const options = {
+      type: 'PUT',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      data: JSON.stringify(performanceData)
+    };
+    return Ember.RSVP
+      .hashSettled({
+        overwritedPerformance: Ember.$.ajax(url, options)
+      })
+      .then(function(hash) {
+        return hash.overwritedPerformance;
+      });
   },
 
   defineHeaders() {

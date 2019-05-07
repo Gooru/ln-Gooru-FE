@@ -25,6 +25,6 @@ export default Ember.Component.extend(PullUpMixin, {
    * @property {String} populatedTopPos
    */
   populatedTopPos: Ember.computed(function() {
-    return isCompatibleVW(SCREEN_SIZES.EXTRA_SMALL) ? '14%' : '51px';
+    return isCompatibleVW(SCREEN_SIZES.EXTRA_SMALL) ? '14%' : '52px';
   })
 });

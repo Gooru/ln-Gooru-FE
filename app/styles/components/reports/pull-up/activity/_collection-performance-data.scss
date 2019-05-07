@@ -101,9 +101,11 @@
           @extend %desktop-height;
 
           .resource-details {
+            opacity: 0.5;
             .resource-container {
+              display: grid;
+              grid-template-columns: 1fr auto;
               height: 45px;
-              opacity: 0.5;
               box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
               background-color: $white;
               cursor: pointer;
@@ -114,6 +116,17 @@
                 color: #3e5e67;
                 padding-left: 15px;
                 line-height: 45px;
+              }
+
+              .resource-timespent {
+                height: 45px;
+                color: $white;
+                width: 56px;
+                font-size: 14px;
+                font-weight: bold;
+                text-align: center;
+                line-height: 45px;
+                background-color: #4e5e67;
               }
             }
             &.active-resource,

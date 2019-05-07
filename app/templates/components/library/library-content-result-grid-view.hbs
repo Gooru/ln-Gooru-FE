@@ -213,16 +213,24 @@
       {{/if}}
     </div>
   {{else}}
-    <div class="panel add-content panel-default">
+    <div class="panel add-content panel-default {{if isSearch 'search'}}">
       <div class="panel-body">
         {{gru-icon name='explore'}}
         {{#if isMyProfile}}
-          <p>{{{t "common.add-content-prompt" type=(t (concat "common.a-" activeContentType))}}}</p>
-          <button class="btn btn-success" {{action "showModal" (concat "content.modals.gru-" activeContentType "-new")}}>
-            {{t "common.add"}} {{t (concat "common." activeContentType)}}
-          </button>
+          {{#if isSearch}}
+            <p>{{{t "common.no-search-result" contentType=activeContentType}}}</p>
+          {{else}}
+            <p>{{{t "common.add-content-prompt" type=(t (concat "common.a-" activeContentType))}}}</p>
+            <button class="btn btn-success" {{action "showModal" (concat "content.modals.gru-" activeContentType "-new")}}>
+              {{t "common.add"}} {{t (concat "common." activeContentType)}}
+            </button>
+          {{/if}}
         {{else}}
-          <p>{{{t (concat "common.no-" activeContentType "s-to-display")}}}</p>
+          {{#if isSearch}}
+            <p>{{{t "common.no-search-result" contentType=activeContentType}}}</p>
+          {{else}}
+            <p>{{{t (concat "common.no-" activeContentType "s-to-display")}}}</p>
+          {{/if}}
         {{/if}}
       </div>
     </div>

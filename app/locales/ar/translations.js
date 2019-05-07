@@ -82,6 +82,7 @@ export default Object.assign(quizzesTranslations, {
   'common.no-suggest-search-results-message': 'Check your spelling. We all make mistakes! Or try searching for a similar word instead.',
   'common.a-collection': 'مجموعة',
   'common.a-course': 'مساق دراسي\n',
+  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.a-question': 'سؤال',
   'common.a-resource': 'مصدر',
   'common.a-rubric': 'سلم تقييم',

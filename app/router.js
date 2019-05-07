@@ -12,14 +12,6 @@ Router.map(function() {
     path: '/'
   });
 
-  this.route('search', function() {
-    this.route('courses');
-    this.route('collections');
-    this.route('assessments');
-    this.route('questions');
-    this.route('resources');
-  });
-
   this.route('sign-in');
   this.route('forgot-password');
   this.route('reset-password');
@@ -232,22 +224,6 @@ Router.map(function() {
 
   this.route('featured');
 
-  this.route('library');
-  this.route(
-    'partner-library', {
-      path: '/library/:id'
-    },
-    function() {
-      this.route('content', function() {
-        this.route('courses');
-        this.route('resources');
-        this.route('questions');
-        this.route('collections');
-        this.route('assessments');
-      });
-    }
-  );
-
   this.route('account-settings', {
     path: '/account-settings/:userId'
   });
@@ -270,15 +246,6 @@ Router.map(function() {
       this.route('analytics');
       this.route('preference');
 
-      this.route('content', function() {
-        this.route('courses');
-        this.route('resources');
-        this.route('questions');
-        this.route('collections');
-        this.route('assessments');
-        this.route('rubrics');
-      });
-
       this.route('network', function() {
         this.route('following');
         this.route('followers');
@@ -292,7 +259,7 @@ Router.map(function() {
    * and the vanity urls for profiles like www.gooru.org/javier-perez
    */
   this.route('preference');
-  this.route('libraries');
+  this.route('library');
   this.route('library-search');
 });
 

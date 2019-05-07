@@ -6,6 +6,12 @@ export default Ember.Component.extend({
   classNames: ['add-data', 'add-question-score'],
 
   // -------------------------------------------------------------------------
+  // Events
+  didInsertElement() {
+    this.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
+
+  // -------------------------------------------------------------------------
   // Actions
   actions: {
     //Action triggered when add question score
@@ -19,7 +25,11 @@ export default Ember.Component.extend({
     //Action triggered when toggle question
     onToggleQuestion(seq) {
       const component = this;
-      component.sendAction('onToggleQuestion', seq);
+      if (component.get('question.active')) {
+        component.set('question.active', false);
+      } else {
+        component.sendAction('onToggleQuestion', seq);
+      }
     },
 
     //Action triggered when scroll multi scores

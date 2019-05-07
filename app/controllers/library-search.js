@@ -35,7 +35,7 @@ export default Ember.Controller.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Attributes
 
-  queryParams: ['libraryId', 'type', 'profileId', 'isBack'],
+  queryParams: ['libraryId', 'type', 'profileId', 'isBack', 'term'],
 
   // -------------------------------------------------------------------------
   // Properties
@@ -86,6 +86,7 @@ export default Ember.Controller.extend(ModalMixin, {
     }
   ),
 
+  isSearch: false,
   /**
    * Current user id
    */
@@ -203,6 +204,16 @@ export default Ember.Controller.extend(ModalMixin, {
   },
 
   /**
+   * Method is used to search contents by the params
+   */
+  searchByParams(term) {
+    const controller = this;
+    if (term) {
+      controller.send('doSearch', term);
+    }
+  },
+
+  /**
    * Method is used to fetch contents based on context
    */
   fetchContent() {
@@ -212,8 +223,10 @@ export default Ember.Controller.extend(ModalMixin, {
       controller.get('searchTerm') || controller.get('selectedQuestionTypes').length > 0 ||
       controller.get('selectedResourceTypes').length > 0 ||
       controller.get('type') === SEARCH_CONTEXT.GOORU_CATALOG) {
+      controller.set('isSearch', true);
       controller.fetchSearchContent();
     } else {
+      controller.set('isSearch', false);
       if (controller.get('type') === SEARCH_CONTEXT.LIBRARY) {
         controller.fetchLibraryContent();
       } else {

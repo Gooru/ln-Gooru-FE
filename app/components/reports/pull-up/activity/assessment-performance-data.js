@@ -163,17 +163,6 @@ export default Ember.Component.extend({
       }
     },
 
-    //Action triggered when enter timespent
-    onChangeTime() {
-      const component = this;
-      let maxHour = component.get('maxHour');
-      let maxMinute = component.get('maxMinute');
-      component.set(
-        'isValidMaxTimespent',
-        validateTimespent(maxHour, maxMinute)
-      );
-    },
-
     //Action triggered when submit max timespent
     onSubmitMaxTimespent() {
       const component = this;
@@ -305,7 +294,12 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isValidMaxTimespent
    */
-  isValidMaxTimespent: false,
+  isValidMaxTimespent: Ember.computed('maxHour', 'maxMinute', function() {
+    const component = this;
+    const maxHour = component.get('maxHour');
+    const maxMinute = component.get('maxMinute');
+    return validateTimespent(parseInt(maxHour), parseInt(maxMinute));
+  }),
 
   /**
    * @property {Boolean} isCaptureQuestionScore
@@ -524,7 +518,10 @@ export default Ember.Component.extend({
           let questions = assessmentData
             ? assessmentData.get('children')
             : Ember.A([]);
-          component.set('questions', questions);
+          let filteredQuestions = questions.filter(
+            question => question.get('type') !== 'OE'
+          );
+          component.set('questions', filteredQuestions);
           component.resetQuestionScores();
           component.toggleQuestionVisibility();
         }

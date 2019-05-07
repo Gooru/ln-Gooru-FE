@@ -88,6 +88,7 @@ export default Object.assign(quizzesTranslations, {
     'अपनी वर्तनी की जाँच करें। हम सब गलतियाँ करते हैं! या इसके बजाय एक समान शब्द खोजने की कोशिश करें।',
   'common.a-collection': 'एक संकलन',
   'common.a-course': 'एक पाठ्यक्रम',
+  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.a-question': 'एक प्रश्न',
   'common.a-resource': 'एक संसाधन',
   'common.a-rubric': 'एक सुर्खी',
