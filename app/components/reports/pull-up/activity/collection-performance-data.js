@@ -28,6 +28,16 @@ export default Ember.Component.extend({
     const component = this;
     if (component.get('isCollection')) {
       component.loadCollectionData();
+    } else {
+      //pre populate external collection timespent
+      const activityData = component.get('activityData');
+      if (activityData.get('collection.performance')) {
+        component.resetHourMinute(
+          formatMilliseconds(
+            activityData.get('collection.performance.timeSpent')
+          )
+        );
+      }
     }
     if (component.get('isMobileView')) {
       component.set(
@@ -93,7 +103,9 @@ export default Ember.Component.extend({
     //Action triggered when search for a resource
     onSearchResource() {
       const component = this;
-      let resourceSearchPattern = component.get('resourceSearchPattern');
+      let resourceSearchPattern = component
+        .get('resourceSearchPattern')
+        .toLowerCase();
       let resources = component.get('resources');
       let filteredResources = resources.filter(resource =>
         resource
