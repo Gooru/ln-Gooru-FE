@@ -1070,7 +1070,7 @@ export default Ember.Service.extend({
    * @function getPerformanceByMilestoneId
    * Get Performance Data by  milestone Id
    */
-  getPerformanceByMilestoneId(
+  getLessonsPerformanceByMilestoneId(
     classId,
     courseId,
     milestoneId,
@@ -1082,7 +1082,7 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('milestonePerformanceAdapter')
-        .getPerformanceByMilestoneId(
+        .getLessonsPerformanceByMilestoneId(
           classId,
           courseId,
           milestoneId,
@@ -1095,7 +1095,46 @@ export default Ember.Service.extend({
             resolve(
               service
                 .get('milestonePerformanceSerializer')
-                .normalizePerformanceDataForMilestone(response)
+                .normalizeLessonsPerformanceDataForMilestone(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * @function getCollectionsPerformanceByLessonId
+   * Get Collection Performance Data by  lesson Id
+   */
+  getCollectionsPerformanceByLessonId(
+    classId,
+    courseId,
+    unitId,
+    lessonId,
+    collectionType,
+    userUid
+  ) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('collectionPerformanceSummaryAdapter')
+        .getCollectionsPerformanceByLessonId(
+          classId,
+          courseId,
+          unitId,
+          lessonId,
+          collectionType,
+          userUid
+        )
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('collectionPerformanceSummarySerializer')
+                .normalizeCollectionsPerformanceDataForLesson(response)
             );
           },
           function(error) {

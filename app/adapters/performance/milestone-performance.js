@@ -39,10 +39,10 @@ export default Ember.Object.extend({
   },
 
   /**
-   * @function getPerformanceByMilestoneId
-   * Get Performance Data by  milestone Id
+   * @function getLessonsPerformanceByMilestoneId
+   * Get Lessons Performance Data by  milestone Id
    */
-  getPerformanceByMilestoneId(
+  getLessonsPerformanceByMilestoneId(
     classId,
     courseId,
     milestoneId,

@@ -44,5 +44,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   setupController: function(controller, model) {
     controller.set('class', model.currentClass);
+    controller.get('studentClassController').selectMenuItem('course-map');
   }
 });

@@ -101,7 +101,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
       pathId: data.path_id,
       pathType: data.path_type,
       score: data.score_percent,
-      contextData: data.context_data
+      contextData: data.context_data,
+      milestoneId: data.milestone_id
     });
   },
 

@@ -1,5 +1,14 @@
-{{student.class.milestone-course-map
-  onAddContentToDCA="onAddContentToDCA"
-  onScheduleContentToDCA="onScheduleContentToDCA"
-  class=class
-}}
+<div class="bar-charts" data-content="{{performancePercentage}}% Completed">
+  <div class="completion-chart">
+    <div class="start-point">{{gru-icon name="stars"}}</div>
+    {{charts/gru-x-bar-chart data=barChartData mileStone=mileStone mileStoneHandler=(action 'mileStoneHandler')  }}
+    <div class="destination-point">{{gru-icon name="place"}}</div>
+  </div>
+</div>
+<div class="milestone-course-map-view">
+  {{student.class.milestone-course-map
+    onAddContentToDCA="onAddContentToDCA"
+    onScheduleContentToDCA="onScheduleContentToDCA"
+    class=class
+  }}
+</div>

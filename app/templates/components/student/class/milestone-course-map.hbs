@@ -6,7 +6,9 @@
           {{gru-icon name="flag"}}
         </div>
         <div class="milestone-title">
-          <p>Milestone {{plus-one index}} ({{milestone.performance.completedInPrecentage}}% Complete)</p>
+          <p>Milestone {{plus-one index}}
+            {{#if (gte milestone.performance.completedInPrecentage 0) }} ({{milestone.performance.completedInPrecentage}}% Completed) {{/if}}
+          </p>
         </div>
         <div class="milestone-caret">
           {{#if milestone.isActive}}
@@ -15,20 +17,22 @@
             {{gru-icon name="arrow_drop_down"}}
           {{/if}}
         </div>
-        <div class="milestone-peformance grade-range-{{grade-range milestone.performance.scoreInPercentage}}">
-          {{#if (gte milestone.performance.scoreInPercentage 0)}}
-            {{milestone.performance.scoreInPercentage}}%
-          {{else}}
-            --
-          {{/if}}
-        </div>
+        {{#if showPerformance}}
+          <div class="milestone-peformance grade-range-{{grade-range milestone.performance.scoreInPercentage}}">
+            {{#if (gte milestone.performance.scoreInPercentage 0)}}
+              {{milestone.performance.scoreInPercentage}}%
+            {{else}}
+              --
+            {{/if}}
+          </div>
+        {{/if}}
       </div>
       <div class="milestone-course-map-lesson-container" id="milestone-{{milestone.milestone_id}}">
         {{#if milestone.hasLessonFetched}}
           {{#if milestone.lessons}}
             {{#each milestone.lessons as | lesson index |}}
               <div class="milestone-course-map-lesson {{if lesson.isActive 'active'}}">
-                <div class="milestone-course-map-lesson-panel" {{action 'toggleLessonItems' lesson }}>
+                <div class="milestone-course-map-lesson-panel {{if lesson.has-activity 'has-activity'}}" {{action 'toggleLessonItems' lesson }}>
                   <div class="lesson-icon-container">
                     <div class="lesson-icon-upward-line">
                       <svg height="15" width="20">
@@ -47,20 +51,22 @@
                   </div>
                   <div class="lesson-badge"></div>
                   <div class="lesson-info"></div>
-                  <div class="lesson-peformance grade-range-{{grade-range lesson.performance.scoreInPercentage}}">
-                    {{#if (gte lesson.performance.scoreInPercentage 0)}}
-                      {{lesson.performance.scoreInPercentage}}%
-                    {{else}}
-                      --
-                    {{/if}}
-                  </div>
+                  {{#if showPerformance}}
+                    <div class="lesson-peformance grade-range-{{grade-range lesson.performance.scoreInPercentage}}">
+                      {{#if (gte lesson.performance.scoreInPercentage 0)}}
+                        {{lesson.performance.scoreInPercentage}}%
+                      {{else}}
+                        --
+                      {{/if}}
+                    </div>
+                  {{/if}}
                 </div>
                 <div class="milestone-course-map-collection-container" id="milestone-lesson-{{lesson.lesson_id}}">
                   {{#if lesson.hasCollectionFetched}}
                     {{#if lesson.collections}}
                       {{#each lesson.collections as | collection |}}
                         <div class="milestone-course-map-collection">
-                          <div class="milestone-course-map-collection-panel">
+                          <div class="milestone-course-map-collection-panel {{if collection.has-activity 'has-activity'}} {{if collection.last-played-collection 'last-played-collection'}}">
                             <div class="collection-icon-container">
                               <div class="collection-icon-upward-line">
                                 <svg height="17" width="20">
@@ -98,10 +104,14 @@
                                 <i class="external-icon" title="{{t 'common.assessment-external'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover"></i>
                               {{/if}}
                             </div>
-                            {{#if (gte lesson.performance.scoreInPercentage 0)}}
-                              <div class="collection-peformance grade-range-{{grade-range lesson.performance.scoreInPercentage}}">
-                                {{#if (gte lesson.performance.scoreInPercentage 0)}}
-                                  {{lesson.performance.scoreInPercentage}}%
+                            {{#if (and showPerformance collection.performance) }}
+                              <div class="collection-peformance format-{{collection.format}} grade-range-{{grade-range collection.performance.scoreInPercentage}}">
+                                {{#if collection.performance}}
+                                  {{#if (or (eq collection.format 'assessment') (eq collection.format 'assessment-external'))}}
+                                    {{collection.performance.scoreInPercentage}}%
+                                  {{else}}
+                                    {{format-time collection.performance.timeSpent}}
+                                  {{/if}}
                                 {{else}}
                                   --
                                 {{/if}}

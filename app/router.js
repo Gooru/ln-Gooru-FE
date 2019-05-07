@@ -185,7 +185,9 @@ Router.map(function() {
           this.route('performance');
         });
         this.route('course-map');
-        this.route('milestone');
+        this.route('milestone', {
+          path: '/course-map-milestone'
+        });
         this.route('class-activities');
         this.route('performance');
         this.route('setup-in-complete');

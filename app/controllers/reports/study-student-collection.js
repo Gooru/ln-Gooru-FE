@@ -317,6 +317,10 @@ export default StudentCollection.extend({
     if (classId) {
       queryParams.classId = classId;
     }
+    let milestoneId = context.get('milestoneId');
+    if (milestoneId) {
+      queryParams.milestoneId = milestoneId;
+    }
     if (suggestion) {
       queryParams.courseId = context.courseId;
       queryParams.milestoneId = context.get('milestoneId');

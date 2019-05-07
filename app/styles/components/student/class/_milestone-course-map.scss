@@ -1,6 +1,5 @@
 .student-class-milestone-course-map {
   width: 650px;
-  padding-top: 20px;
 
   .milestone-course-map-container {
     width: 100%;
@@ -80,6 +79,7 @@
           color: #fff;
           font-size: 16px;
           font-weight: bold;
+          border-bottom: 1px solid #fff;
 
           &.grade-range-not-started {
             background: transparent;
@@ -116,7 +116,7 @@
             left: 34px;
 
             svg {
-              stroke: #5d5d5d;
+              stroke: #ccc;
               stroke-width: 3;
             }
           }
@@ -127,7 +127,7 @@
             left: 34px;
 
             svg {
-              stroke: #5d5d5d;
+              stroke: #ccc;
               stroke-width: 3;
             }
           }
@@ -174,16 +174,19 @@
             border-bottom: 1px solid #e3e5ea;
             cursor: pointer;
 
-            .lesson-name-sequence {
-              font-family: "Lato";
-              font-size: 18px;
-              font-weight: bold;
-              line-height: 1;
-              letter-spacing: normal;
-              text-align: center;
-              color: #3c4452;
-              padding-top: 8px;
-              padding-bottom: 8px;
+            &.has-activity {
+              .lesson-icon-container {
+                .lesson-icon {
+                  background-image: url("../assets/gooru/images/lesson-blue-outline.svg");
+                }
+
+                .lesson-icon-downward-line,
+                .lesson-icon-upward-line {
+                  svg {
+                    stroke: #5c8ee2;
+                  }
+                }
+              }
             }
 
             .lesson-title {
@@ -253,6 +256,41 @@
                 grid-template-columns: 70px 1fr 50px 100px 60px;
                 align-items: center;
 
+                &.has-activity {
+                  .collection-icon-container {
+                    .collection-icon {
+                      &.format-collection {
+                        background-image: url("../assets/gooru/images/collection-dark-blue.svg");
+                      }
+
+                      &.format-assessment {
+                        background-image: url("../assets/gooru/images/assessment-dark-blue.svg");
+                      }
+                    }
+
+                    .collection-icon-downward-line,
+                    .collection-icon-upward-line {
+                      svg {
+                        stroke: #5c8ee2;
+                      }
+                    }
+                  }
+                }
+
+                &.last-played-collection {
+                  .colllection-play-btn {
+                    visibility: visible;
+                    opacity: 1;
+                  }
+
+                  .collection-title-container {
+                    p {
+                      color: #5c8ee2;
+                      font-weight: bold;
+                    }
+                  }
+                }
+
                 &:hover {
                   .colllection-play-btn {
                     visibility: visible;
@@ -275,12 +313,12 @@
 
                     &.format-collection,
                     &.format-collection-external {
-                      background-image: url("../assets/gooru/images/add_collection.svg");
+                      background-image: url("../assets/gooru/images/collection_gray.svg");
                     }
 
                     &.format-assessment,
                     &.format-assessment-external {
-                      background-image: url("../assets/gooru/images/add_assessment.svg");
+                      background-image: url("../assets/gooru/images/assessment-gray.svg");
                     }
                   }
 
@@ -290,7 +328,7 @@
                     left: 34px;
 
                     svg {
-                      stroke: #5d5d5d;
+                      stroke: #ccc;
                       stroke-width: 3;
                     }
                   }
@@ -301,7 +339,7 @@
                     left: 34px;
 
                     svg {
-                      stroke: #5d5d5d;
+                      stroke: #ccc;
                       stroke-width: 3;
                     }
                   }
@@ -313,9 +351,11 @@
                   opacity: 0;
                   transition: visibility 0s linear 300ms, opacity 300ms;
                   cursor: pointer;
+                  align-self: center;
+                  justify-self: center;
 
                   i {
-                    font-size: 35px;
+                    font-size: 30px;
                   }
                 }
 
@@ -323,7 +363,6 @@
                   img {
                     width: 60px;
                     height: 50px;
-                    border-top: 1px solid #fff;
                     border-bottom: 1px solid #fff;
                   }
                 }
@@ -338,10 +377,16 @@
                   font-weight: bold;
                   color: #fff;
                   border-bottom: 1px solid #fff;
+                  line-height: 1;
+                  text-align: center;
 
                   &.grade-range-not-started {
                     background: transparent;
                     color: #666;
+                  }
+
+                  &.format-collection {
+                    background: #ccc;
                   }
                 }
 
