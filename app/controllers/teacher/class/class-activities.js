@@ -441,6 +441,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         );
         component.set('isShowAddData', true);
       });
+      activity.set('isUpdatePerformance', isRepeatEntry);
       component.set('addDataContentType', item.get('format'));
       component.set('selectedItem', item);
       component.set('selectedActivity', activity);

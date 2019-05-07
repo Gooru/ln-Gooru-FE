@@ -4,7 +4,7 @@
       {{gru-icon name="expand_less"}}
     </div>
     <div class="hour-value value-container">
-      {{input type="text" value=(pad-start hour '0' 2) class="time-value"}}
+      {{input type="text" maxlength="2" value=hour class="time-value hour-value"}}
     </div>
     <div class="down-arrow arrow-container" {{action "onDecrementHour"}}>
       {{gru-icon name="expand_more"}}
@@ -21,7 +21,7 @@
       {{gru-icon name="expand_less"}}
     </div>
     <div class="minute-value value-container">
-      {{input type="text" value=(pad-start minute '0' 2) class="time-value"}}
+      {{input type="text" maxlength="2" value=minute class="time-value min-value"}}
     </div>
     <div class="down-arrow arrow-container" {{action "onDecrementMinute"}}>
       {{gru-icon name="expand_more"}}
