@@ -164,6 +164,7 @@ export default Ember.Component.extend({
    */
   initializePopover() {
     const component = this;
+    component.$('[data-toggle="tooltip"]').tooltip();
     component.$('.more-pointer').popover({
       html: true,
       trigger: 'click',
