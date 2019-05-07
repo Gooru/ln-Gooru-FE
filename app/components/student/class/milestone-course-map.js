@@ -365,8 +365,8 @@ export default Ember.Component.extend({
               component.fetchMilestoneLessonsPerformance(milestoneId, lessons);
             }
             selectedMilestone.set('hasLessonFetched', true);
-            if (locateLastPlayedItem) {
-              let userCurrentLocation = component.get('userCurrentLocation');
+            let userCurrentLocation = component.get('userCurrentLocation');
+            if (locateLastPlayedItem && userCurrentLocation) {
               let lessonId = userCurrentLocation.get('lessonId');
               let selectedLesson = lessons.findBy('lesson_id', lessonId);
               if (selectedLesson) {
@@ -407,8 +407,8 @@ export default Ember.Component.extend({
             let collections = lesson.get('children');
             selectedLesson.set('collections', collections);
             selectedLesson.set('hasCollectionFetched', true);
-            if (locateLastPlayedItem) {
-              let userCurrentLocation = component.get('userCurrentLocation');
+            let userCurrentLocation = component.get('userCurrentLocation');
+            if (locateLastPlayedItem && userCurrentLocation) {
               let collectionId = userCurrentLocation.get('collectionId');
               let selectedCollection = collections.findBy('id', collectionId);
               if (selectedCollection) {
@@ -439,12 +439,14 @@ export default Ember.Component.extend({
       .then(userCurrentLocation => {
         if (!component.isDestroyed) {
           component.set('userCurrentLocation', userCurrentLocation);
-          let milestoneId = userCurrentLocation.get('milestoneId');
-          let selectedMilestone = component
-            .get('milestones')
-            .findBy('milestone_id', milestoneId);
-          if (selectedMilestone) {
-            component.handleMilestoneToggle(selectedMilestone);
+          if (userCurrentLocation) {
+            let milestoneId = userCurrentLocation.get('milestoneId');
+            let selectedMilestone = component
+              .get('milestones')
+              .findBy('milestone_id', milestoneId);
+            if (selectedMilestone) {
+              component.handleMilestoneToggle(selectedMilestone);
+            }
           }
         }
       });
