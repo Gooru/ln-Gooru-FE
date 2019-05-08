@@ -148,6 +148,12 @@
       .contents {
         grid-template-columns: repeat(1, 1fr);
 
+        &.no-content {
+          .panel.add-content.search {
+            width: 100%;
+          }
+        }
+
         &.course {
           grid-template-columns: repeat(1, 1fr);
         }
