@@ -25,7 +25,8 @@ export default PlayerController.extend({
     'isStudyPlayer',
     'pathType',
     'itemId',
-    'isNotification'
+    'isNotification',
+    'milestoneId'
   ],
 
   // -------------------------------------------------------------------------
@@ -72,6 +73,11 @@ export default PlayerController.extend({
    * @property {string}
    */
   classId: null,
+
+  /**
+   * @property {string}
+   */
+  milestoneId: null,
 
   /**
    * @property {string}
@@ -150,6 +156,7 @@ export default PlayerController.extend({
     this.setProperties({
       showSuggestion: true,
       classId: null,
+      milestoneId: null,
       unitId: null,
       lessonId: null,
       collectionId: null,
