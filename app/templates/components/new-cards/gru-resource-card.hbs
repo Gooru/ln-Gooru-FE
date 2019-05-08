@@ -3,7 +3,7 @@
     <div class="header">
       <div class="image resource-data">
         {{#if externalAssessment}}
-          <a href= {{resource.url}} target="_blank" class="external-assessment">
+          <a href={{resource.url}} target="_blank" class="external-assessment">
             <img class="img-responsive" src="{{resource.thumbnail}}">
           </a>
         {{else}}
@@ -42,7 +42,7 @@
 
         <div class="title-section">
           {{#if externalAssessment}}
-            <a href= {{resource.url}} target="_blank">
+            <a href={{resource.url}} target="_blank">
               <h6 class="title truncate pointer">{{{resource.title}}}</h6>
             </a>
           {{else}}
@@ -108,7 +108,7 @@
           {{/link-to}}
           <span class="owner">
             {{#if allowProfileNavigation}}
-            {{#link-to 'profile.edit' resource.owner.id class="pointer enable"}}
+              {{#link-to 'profile.edit' resource.owner.id class="pointer enable"}}
                 {{resource.owner.displayName}}
               {{/link-to}}
             {{else}}
@@ -140,31 +140,31 @@
               {{#unless (and isOnProfile (not isMyProfile))}}
                 {{#if isQuestion}}
                   {{#if remixEnabled}}
-                  {{#if (not profile.isStudent)}}
-                    <div class="remix-btn {{if session.isAnonymous 'remix-anonymous'}}">
-                      <a class="copy-btn" {{action "remixQuestion"}}>{{gru-icon name="content_copy"}}{{t "common.remix"}}</a>
-                    </div>
-                  {{/if}}
+                    {{#if (not profile.isStudent)}}
+                      <div class="remix-btn {{if session.isAnonymous 'remix-anonymous'}}">
+                        <a class="copy-btn" {{action "remixQuestion"}}>{{gru-icon name="content_copy"}}{{t "common.remix"}}</a>
+                      </div>
+                    {{/if}}
                   {{/if}}
                 {{/if}}
               {{/unless}}
             {{/unless}}
             {{#unless (or isRubric session.isAnonymous isTeacherSearch (not isOnProfile))}}
               {{#if profile.isStudent}}
-              <div class="resource-icon-btn play" title="{{t (if (or isSearch addEnabled) 'common.play' 'common.study')}}" data-toggle="tooltip">
-                <a {{action "playResource"}} class="play-btn">{{gru-icon name="play_arrow"}}</a>
-              </div>
-            {{/if}}
+                <div class="resource-icon-btn play" title="{{t (if (or isSearch addEnabled) 'common.play' 'common.study')}}" data-toggle="tooltip">
+                  <a {{action "playResource"}} class="play-btn">{{gru-icon name="play_arrow"}}</a>
+                </div>
+              {{/if}}
             {{/unless}}
           </div>
           <div class="right-btns">
             {{#unless (or isRubric isStudentSearch)}}
               {{#if addEnabled}}
-               {{#if (not profile.isStudent)}}
-                <div class="resource-icon-btn add" title="Add to" data-toggle="tooltip">
-                  <a {{action "addToCollection"}} class="add-to-btn">{{gru-icon name="add"}}</a>
-                </div>
-               {{/if}}
+                {{#if (not profile.isStudent)}}
+                  <div class="resource-icon-btn add" title="Add to" data-toggle="tooltip">
+                    <a {{action "addToCollection"}} class="add-to-btn">{{gru-icon name="add"}}</a>
+                  </div>
+                {{/if}}
               {{/if}}
             {{/unless}}
             {{#if editEnabled }}
@@ -219,7 +219,7 @@
             {{/if}}
             {{#unless (or editEnabled isExistingResource)}}
               {{#unless isOnProfile}}
-                <div class="resource-icon-btn share" title= {{t 'common.share'}} data-toggle="tooltip" data-placement="auto" data-trigger="hover">
+                <div class="resource-icon-btn share" title={{t 'common.share'}} data-toggle="tooltip" data-placement="auto" data-trigger="hover">
                   {{#gru-share-pop-over tagName="a" class="share-btn no-bgd" type=(if isQuestion 'question' 'resource') contentId=resource.id}}
                     {{gru-icon name="share"}}
                   {{/gru-share-pop-over}}

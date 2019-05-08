@@ -1,4 +1,4 @@
-<div class="performance-data-container">
+<div class="performance-data-container {{if isMobileView 'mobile-view' 'desktop-view'}}">
   <div class="left-container">
     <div class="students-container">
       <div class="search-student">
@@ -18,9 +18,17 @@
       </div>
       <div class="student-list-container">
         {{#each studentsList as |student|}}
-          <div class="student-info-container {{if (eq activeStudent.id student.id) 'active-student'}}" {{action "onSelectStudent" student}}>
-            <div class="student-thumbnail" style="background-image: url({{student.avatarUrl}})"></div>
-            <div class="student-name">{{student.fullName}}</div>
+          <div class="student-details {{if (eq activeStudent.id student.id) 'active-student'}}">
+            <div class="student-info-container" {{action "onSelectStudent" student}}>
+              <div class="student-thumbnail" style="background-image: url({{student.avatarUrl}})"></div>
+              <div class="student-name">{{student.fullName}}</div>
+              <div class="student-performance grade-range-{{grade-range student.performance.score}}">{{if student.performance (concat student.performance.score '%') ''}}</div>
+            </div>
+            {{#if isMobileView}}
+              <div class="student-score-details">
+                <!-- Container to load right question list in mobile view  -->
+              </div>
+            {{/if}}
           </div>
         {{/each}}
       </div>
@@ -28,7 +36,7 @@
   </div>
   <div class="right-container">
     {{#if isAssessment}}
-      {{#if isCaptureQuestionScore}}
+      {{#if (or isCaptureQuestionScore isOverwriteScore)}}
         <div class="question-list-container">
           {{isScoreSubmittedForAllQuestion}}
           {{#each questions as |question seq|}}
@@ -36,11 +44,20 @@
               question = question
               seq = seq
               onToggleQuestion = "onToggleQuestion"
+              isOverwriteScore = isOverwriteScore
             }}
           {{/each}}
           <div class="question-action-container">
-            <div class="save-score-btn action-btn {{if isEnableSaveNext 'enabled'}}" {{action "onClickSaveAndNext"}}>{{t 'common.save-next'}}</div>
-            <div class="cancel-btn action-btn" {{action "onClearQuestionScores"}}>{{t 'common.cancel'}}</div>
+            <div class="save-score-btn action-btn {{if (or isEnableSaveNext isOverwriteScore) 'enabled'}}" {{action (if isOverwriteScore "onOverwriteScore" "onClickSaveAndNext")}}>
+              {{#if isOverwriteScore}}
+                {{t 'goals.manage.update'}} {{t 'common.score'}}
+              {{else}}
+                {{t (if isLastStudentActive 'common.save-finish' 'common.save-next' )}}
+              {{/if}}
+            </div>
+            {{#unless isOverwriteScore}}
+              <div class="cancel-btn action-btn" {{action "onClearQuestionScores"}}>{{t 'common.cancel'}}</div>
+            {{/unless}}
           </div>
         </div>
       {{else}}
@@ -49,7 +66,7 @@
             {{t 'teacher-landing.class.class-activities.input-timespent'}}
           </div>
           <div class="timepicker">
-            {{cards.gru-timepicker-card hour=maxHour minute=maxMinute onChangeTime="onChangeTime"}}
+            {{cards.gru-timepicker-card hour=maxHour minute=maxMinute}}
           </div>
           <div class="action-container">
             <div class="confirm-btn {{unless isValidMaxTimespent 'disable-event'}}" {{action "onSubmitMaxTimespent"}}>
@@ -69,12 +86,12 @@
         </div>
         {{#if isCaptureExternalAssessmentStudentScore}}
           <div class="score-container student-score">
-            {{input type="text" class="student-score score-input" value=activeStudent.score key-up="onEnterExternalAssessmentStudentScore"}}
+            {{input type="text" class="student-score score-input" value=activeStudent.score}}
             <span class="score-label">{{t 'student-score'}}</span>
           </div>
         {{/if}}
         <div class="score-container max-score">
-            {{input type="text" class="max-score score-input" value=externalAssessmentMaxScore key-up="onEnterExternalAssessmentMaxScore" disabled=isCaptureExternalAssessmentStudentScore}}
+            {{input type="text" class="max-score score-input" value=externalAssessmentMaxScore disabled=isCaptureExternalAssessmentStudentScore}}
             <span class="score-label">{{t 'teacher-landing.class.class-activities-tab.max-score'}}</span>
         </div>
         <div class="score-action-container">
@@ -95,6 +112,7 @@
       </div>
     {{/if}}
   </div>
+
 </div>
 
 {{#if (and (or isShowWarningMessage isShowSaveInformation) isSessionStarted)}}
@@ -130,5 +148,11 @@
         </div>
       {{/if}}
     </div>
+  </div>
+{{/if}}
+
+{{#if isLoading}}
+  <div class="loading-spinner">
+    {{three-bounce-spinner}}
   </div>
 {{/if}}

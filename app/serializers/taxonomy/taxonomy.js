@@ -251,7 +251,7 @@ export default Ember.Object.extend({
               title: taxonomy.title,
               parentTitle: taxonomy.parent_title ? taxonomy.parent_title : '',
               description: taxonomy.description ? taxonomy.description : '',
-              frameworkCode: taxonomy.framework_code,
+              frameworkCode: taxonomy.framework_code || taxonomy.frameworkCode,
               taxonomyLevel: level
                 ? level
                 : isMicroStandard

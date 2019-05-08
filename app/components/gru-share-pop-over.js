@@ -34,6 +34,8 @@ export default Ember.Component.extend({
    */
   contentId: null,
 
+  closePopover: false,
+
   /**
    * @property {string} template to be used for the popover window
    */
@@ -119,9 +121,8 @@ export default Ember.Component.extend({
   // Events
 
   /**
-  * Overwrites didInsertElement hook to add clipboard and popover functionality
-  */
-
+   * Overwrites didInsertElement hook to add clipboard and popover functionality
+   */
   didInsertElement: function() {
     var component = this;
     component.$().popover({

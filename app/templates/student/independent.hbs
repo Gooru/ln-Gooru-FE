@@ -25,7 +25,7 @@
             <div class="title pull-left">
               {{t (if course.sameOwnerAndCreator "common.created-by" "common.remixed-by")}}
             </div>
-            {{#link-to 'profile.content.courses' course.owner.id class="pointer pull-left profile-container" tagName="div" }}
+            {{#link-to 'library-search'  (query-params type="my-content" profileId=course.owner.id) class="pointer pull-left profile-container" tagName="div" }}
               <img class="img-responsive pull-left" src="{{course.owner.avatarUrl}}">
               <span class="owner">{{course.owner.displayName}}</span>
             {{/link-to}}

@@ -23,15 +23,18 @@
     opacity: 0.8;
     background-color: #000;
   }
+
   .preview-container {
     height: 100%;
     background-color: $white;
     position: relative;
+
     .header-container {
       height: 48px;
       background-color: #425e67;
       display: flex;
       padding-left: 16px;
+
       .close-pullup {
         width: 32px;
         height: 32px;
@@ -40,6 +43,7 @@
         text-align: center;
         cursor: pointer;
         margin: 8px 0;
+
         i {
           color: $white;
           line-height: 32px;
@@ -47,6 +51,7 @@
           height: 32px;
         }
       }
+
       .preview-title {
         font-size: 15px;
         font-weight: bold;
@@ -56,24 +61,34 @@
         padding: 0 16px;
         width: 100%;
       }
-      .content-player, .print-preview, .content-remix {
+
+      .content-player,
+      .content-remix,
+      .print-preview {
         width: 40px;
         cursor: pointer;
         margin: 0 8px;
+
         i {
           color: $white;
           line-height: 48px;
         }
       }
     }
+
     .body-container {
+      height: 100%;
+      width: 100%;
+
       .content-info-container {
         box-shadow: 0 0 4px 0 rgba(102, 102, 102, 0.3);
+
         .title-info-container {
           display: grid;
           grid-template-columns: 80px 24px 1fr;
           align-items: center;
           column-gap: 16px;
+
           .thumbnail-container {
             width: 80px;
             height: 48px;
@@ -81,30 +96,37 @@
             display: block;
             background-repeat: no-repeat;
           }
+
           .content-title {
             font-size: 16px;
             color: #545e66;
           }
+
           .content-icon {
             background-size: 24px 18px;
             width: 24px;
             height: 18px;
             background-repeat: no-repeat;
             display: block;
-            &.assessment, &.assessment-external {
+
+            &.assessment,
+            &.assessment-external {
               background-image: url("gooru/images/add_assessment.svg");
             }
 
-            &.collection, &.collection-external {
+            &.collection,
+            &.collection-external {
               background-image: url("gooru/images/add_collection.svg");
             }
           }
         }
+
         .taxonomy-container {
           height: 48px;
           display: grid;
           align-items: center;
           padding-left: 94px;
+
           .gru-taxonomy-tag-list {
             .gru-taxonomy-tag {
               min-width: 90px;
@@ -112,20 +134,24 @@
               height: 23px;
               border-radius: 12px;
               background-color: #2d2d2d;
+
               .standard-tag {
                 text-align: center;
                 padding: 0;
+
                 .tag-label {
                   font-size: 14px;
                   font-weight: bold;
                   color: $white;
                   line-height: 21px;
                 }
+
                 .tag-caption {
                   display: none;
                 }
               }
             }
+
             .non-visible-tags {
               width: 81px;
               height: 23px;
@@ -133,6 +159,7 @@
               background-color: #2d2d2d;
               color: $white;
               padding: 0;
+
               span {
                 font-weight: bold;
                 font-size: 14px;
@@ -142,10 +169,12 @@
           }
         }
       }
+
       .content-items-container {
-        height: 68vh;
+        height: calc(100% - 100px);
         overflow-y: auto;
         padding-bottom: 48px;
+
         &::-webkit-scrollbar {
           height: 6px;
           width: 8px;
@@ -159,19 +188,24 @@
 
         .external-content {
           padding: 24px;
+
           .content-description {
             color: #666666;
             font-size: 12px;
             line-height: 1.5;
           }
+
           .content-url {
-            .url-label, .url-content {
+            .url-content,
+            .url-label {
               font-size: 15px;
               color: #3e5e67;
             }
+
             .url-label {
               font-weight: bold;
             }
+
             .url-content {
               font-style: italic;
             }
@@ -179,6 +213,7 @@
         }
       }
     }
+
     .footer-container {
       height: 48px;
       width: 100%;
@@ -197,9 +232,9 @@
       bottom: 0;
     }
   }
-
   @media screen and (max-width: $screen-sm) {
     width: 100%;
+
     .preview-container {
       .body-container {
         .content-items-container {

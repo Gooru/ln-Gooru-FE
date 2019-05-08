@@ -135,6 +135,10 @@
             }
           }
         }
+
+        &.disable-event {
+          opacity: 0.5;
+        }
       }
 
       &.expanded-view {

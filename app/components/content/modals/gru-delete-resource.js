@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 /**
  * Delete resource component
  *
@@ -65,12 +67,19 @@ export default Ember.Component.extend({
             model.callback.success();
           }
           component.set('isLoading', false);
-          component.triggerAction({ action: 'closeModal' });
+          component.triggerAction({
+            action: 'closeModal'
+          });
 
           if (model.redirect) {
             component
               .get('router')
-              .transitionTo(model.redirect.route, model.redirect.params.id);
+              .transitionTo(model.redirect.route, {
+                queryParams: {
+                  profileId: model.redirect.params.profileId,
+                  type: model.redirect.params.type
+                }
+              });
           }
         })
         .catch(function(error) {

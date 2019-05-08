@@ -12,14 +12,6 @@ Router.map(function() {
     path: '/'
   });
 
-  this.route('search', function() {
-    this.route('courses');
-    this.route('collections');
-    this.route('assessments');
-    this.route('questions');
-    this.route('resources');
-  });
-
   this.route('sign-in');
   this.route('forgot-password');
   this.route('reset-password');
@@ -103,8 +95,7 @@ Router.map(function() {
   });
 
   this.route('context-player', {
-    path:
-      '/player/class/:classId/course/:courseId/unit/:unitId/lesson/:lessonId/collection/:collectionId'
+    path: '/player/class/:classId/course/:courseId/unit/:unitId/lesson/:lessonId/collection/:collectionId'
   });
 
   this.route('classes');
@@ -114,8 +105,7 @@ Router.map(function() {
   });
 
   this.route(
-    'class',
-    {
+    'class', {
       path: '/class/:classId'
     },
     function() {
@@ -176,8 +166,7 @@ Router.map(function() {
   this.route('student', function() {
     this.route('performance');
     this.route(
-      'class',
-      {
+      'class', {
         path: '/class/:classId'
       },
       function() {
@@ -194,8 +183,7 @@ Router.map(function() {
       }
     );
     this.route(
-      'independent',
-      {
+      'independent', {
         path: '/course/:courseId'
       },
       function() {
@@ -209,8 +197,7 @@ Router.map(function() {
 
   this.route('teacher', function() {
     this.route(
-      'class',
-      {
+      'class', {
         path: '/class/:classId'
       },
       function() {
@@ -237,23 +224,6 @@ Router.map(function() {
 
   this.route('featured');
 
-  this.route('library');
-  this.route(
-    'partner-library',
-    {
-      path: '/library/:id'
-    },
-    function() {
-      this.route('content', function() {
-        this.route('courses');
-        this.route('resources');
-        this.route('questions');
-        this.route('collections');
-        this.route('assessments');
-      });
-    }
-  );
-
   this.route('account-settings', {
     path: '/account-settings/:userId'
   });
@@ -266,8 +236,7 @@ Router.map(function() {
     path: '/not-found/:entity'
   });
   this.route(
-    'profile',
-    {
+    'profile', {
       path: '/:userId'
     },
     function() {
@@ -276,15 +245,6 @@ Router.map(function() {
       this.route('activity');
       this.route('analytics');
       this.route('preference');
-
-      this.route('content', function() {
-        this.route('courses');
-        this.route('resources');
-        this.route('questions');
-        this.route('collections');
-        this.route('assessments');
-        this.route('rubrics');
-      });
 
       this.route('network', function() {
         this.route('following');
@@ -299,6 +259,8 @@ Router.map(function() {
    * and the vanity urls for profiles like www.gooru.org/javier-perez
    */
   this.route('preference');
+  this.route('library');
+  this.route('library-search');
 });
 
 export default Router;

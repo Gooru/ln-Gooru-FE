@@ -1,9 +1,10 @@
 import Ember from 'ember';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import { CONTENT_TYPES, SCREEN_SIZES } from 'gooru-web/config/config';
 import {
   validateTimespent,
   generateUUID,
-  formatTime as formatMilliseconds
+  formatTime as formatMilliseconds,
+  isCompatibleVW
 } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
@@ -27,7 +28,33 @@ export default Ember.Component.extend({
     const component = this;
     if (component.get('isCollection')) {
       component.loadCollectionData();
+    } else {
+      //pre populate external collection timespent
+      const activityData = component.get('activityData');
+      if (activityData.get('collection.performance')) {
+        component.resetHourMinute(
+          formatMilliseconds(
+            activityData.get('collection.performance.timeSpent')
+          )
+        );
+      }
     }
+    if (component.get('isMobileView')) {
+      component.set(
+        'timeSpentElementContainer',
+        component.$('.timespent-container')
+      );
+    }
+  },
+
+  didRender() {
+    const component = this;
+    if (component.get('isMobileView') && component.get('isCollection')) {
+      component
+        .$('.active-resource .resource-timespent-details')
+        .append(component.get('timeSpentElementContainer'));
+    }
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
   },
 
   // -------------------------------------------------------------------------
@@ -54,7 +81,11 @@ export default Ember.Component.extend({
       let timeSpentInmIlliSec = (maxHour * 60 * 60 + maxMinute * 60) * 1000;
       component.set('activeResource.timeSpent', timeSpentInmIlliSec);
       if (component.get('isLastResource')) {
-        component.submitCollectionPerformanceData();
+        if (component.get('isOverwritePerformance')) {
+          component.overwriteCollectionPerformance();
+        } else {
+          component.submitCollectionPerformanceData();
+        }
       } else {
         const resources = component.get('resources');
         let curResourceIndex = resources.indexOf(
@@ -65,13 +96,16 @@ export default Ember.Component.extend({
         component.resetHourMinute(
           formatMilliseconds(nextResource.get('timeSpent'))
         );
+        component.clearFilteredResources();
       }
     },
 
     //Action triggered when search for a resource
     onSearchResource() {
       const component = this;
-      let resourceSearchPattern = component.get('resourceSearchPattern');
+      let resourceSearchPattern = component
+        .get('resourceSearchPattern')
+        .toLowerCase();
       let resources = component.get('resources');
       let filteredResources = resources.filter(resource =>
         resource
@@ -85,7 +119,7 @@ export default Ember.Component.extend({
     //Action triggered when clear search resources text pattern
     onClearSearchResources() {
       const component = this;
-      component.set('resourceSearchPattern', '');
+      component.clearFilteredResources();
     },
 
     //Action triggered when submit external collection timespent
@@ -97,6 +131,13 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Properties
+
+  timeSpentElementContainer: null,
+
+  /**
+   * @property {Boolean} isMobileView
+   */
+  isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
   /**
    * @property {Boolean} isCollection
@@ -189,8 +230,21 @@ export default Ember.Component.extend({
     return moment.tz.guess() || null;
   }),
 
+  /**
+   * @property {Boolean} isOverwritePerformance
+   */
+  isOverwritePerformance: Ember.computed.alias(
+    'activityData.isUpdatePerformance'
+  ),
+
   // -------------------------------------------------------------------------
   // Functions
+
+  clearFilteredResources() {
+    const component = this;
+    component.set('resourceSearchPattern', '');
+    component.set('resourceList', component.get('resources'));
+  },
 
   /**
    * @function resetHourMinute
@@ -228,6 +282,37 @@ export default Ember.Component.extend({
       .fetchCollectionData(collection.get('id'))
       .then(function(collectionData) {
         component.set('resources', collectionData.get('children'));
+        if (component.get('isOverwritePerformance')) {
+          component.loadStudentsActivityPerformance();
+        }
+      });
+  },
+
+  /**
+   * @function loadStudentsActivityPerformance
+   * Method to load students activity performance
+   */
+  loadStudentsActivityPerformance() {
+    const component = this;
+    const analyticsService = component.get('analyticsService');
+    const activityData = component.get('activityData');
+    const activityDate = activityData.get('activation_date');
+    const collectionId = activityData.get('collection.id');
+    const collectionType = 'collection';
+    const classId = component.get('classId');
+    return Ember.RSVP
+      .hash({
+        studentsActivityPerformance: analyticsService.getDCAPerformance(
+          classId,
+          collectionId,
+          collectionType,
+          activityDate
+        )
+      })
+      .then(({ studentsActivityPerformance }) => {
+        component.parseStudentsActivityPerformanceData(
+          studentsActivityPerformance
+        );
       });
   },
 
@@ -272,6 +357,46 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function overwriteCollectionPerformance
+   * Method to overwrite collection performance
+   */
+  overwriteCollectionPerformance() {
+    const component = this;
+    const students = component.get('students');
+    const activityData = component.get('activityData');
+    let studentCollectionPerformanceData = component.getCollectionDataParams();
+    let requestBodyKeysToRest = [
+      'conducted_on',
+      'path_id',
+      'path_type',
+      'tenant_id',
+      'course_id',
+      'additionalContext'
+    ];
+    studentCollectionPerformanceData = component.resetRequestBodyByKeys(
+      studentCollectionPerformanceData,
+      requestBodyKeysToRest
+    );
+    let overwriteSpecifcParams = {
+      activity_date: activityData.get('activation_date'),
+      additional_context: btoa(
+        JSON.stringify({ dcaContentId: activityData.get('id') })
+      )
+    };
+    studentCollectionPerformanceData = Object.assign(
+      studentCollectionPerformanceData,
+      overwriteSpecifcParams
+    );
+    students.map(student => {
+      studentCollectionPerformanceData.student_id = student.get('id');
+      component.overwriteStudentCollectionPerformance(
+        studentCollectionPerformanceData
+      );
+    });
+    component.sendAction('onClosePullUp');
+  },
+
+  /**
    * @function saveStudentCollectionPerformanceData
    * Method to save student collection performance data
    */
@@ -284,6 +409,16 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function overwriteStudentCollectionPerformance
+   * Method to overwrite student collection performance
+   */
+  overwriteStudentCollectionPerformance(collectionParams) {
+    const component = this;
+    const performanceService = component.get('performanceService');
+    return performanceService.overwriteCollectionPerformance(collectionParams);
+  },
+
+  /**
    * @function getCollectionDataParams
    * Method to generate collection data params
    */
@@ -291,36 +426,17 @@ export default Ember.Component.extend({
     const component = this;
     let resources = component.get('resources');
     let collectionResources = Ember.A([]);
-    let conductedOn =
-      new Date(component.get('activityData.activation_date')) || new Date();
-    let classId = component.get('classId');
-    let collection = component.get('collection');
-    let activityId = component.get('activityData.id');
-    let courseId = component.get('course') ? component.get('course').id : null;
     resources.forEach(function(resource) {
-      let resourceData = {
-        resource_id: resource.get('id'),
-        resource_type: resource.get('content_format'),
-        time_spent: resource.get('timeSpent'),
-        question_type: resource.get('type')
-      };
-      collectionResources.push(resourceData);
+      collectionResources.push(component.getResourceRequestBody(resource));
     });
     let studentPerformanceData = {
-      tenant_id: component.get('session.tenantId') || null,
-      class_id: classId,
-      collection_id: collection.get('id'),
       collection_type: 'collection',
-      content_source: component.get('contentSource'),
-      time_zone: component.get('timeZone'),
-      conducted_on: conductedOn.toISOString(),
-      path_id: 0,
-      path_type: null,
-      resources: collectionResources,
-      course_id: courseId,
-      additionalContext: btoa(JSON.stringify({ dcaContentId: activityId }))
+      resources: collectionResources
     };
-    return studentPerformanceData;
+    return Object.assign(
+      studentPerformanceData,
+      component.getCollectionRequestBody()
+    );
   },
 
   /**
@@ -329,34 +445,107 @@ export default Ember.Component.extend({
    */
   getExternalCollectionDataParams() {
     const component = this;
-    let collection = component.get('collection');
+    const collection = component.get('collection');
     let studentIds = component.get('students').mapBy('id');
-    let conductedOn =
-      new Date(component.get('activityData.activation_date')) || new Date();
-    let classId = component.get('classId');
-    let activityId = component.get('activityData.id');
     let timeSpentInmIlliSec =
       (parseInt(component.get('maxHour')) * 60 * 60 +
         parseInt(component.get('maxMinute')) * 60) *
       1000;
     let studentPerformanceData = {
-      tenant_id: component.get('session.tenantId') || null,
       student_id: studentIds,
-      class_id: classId,
       unit_id: collection.get('unitId'),
       lesson_id: collection.get('lessonId'),
-      collection_id: collection.get('id'),
       collection_type: 'collection-external',
-      session_id: generateUUID(),
+      time_spent: timeSpentInmIlliSec,
+      session_id: generateUUID()
+    };
+    return Object.assign(
+      studentPerformanceData,
+      component.getCollectionRequestBody()
+    );
+  },
+
+  /**
+   * @function parseStudentsActivityPerformanceData
+   * Method to parse students activity performance data
+   */
+  parseStudentsActivityPerformanceData(studentsActivityPerformance) {
+    const component = this;
+    let students = component.get('students');
+    let resources = component.get('resources');
+    let resourcesPerformance = studentsActivityPerformance
+      .objectAt(0)
+      .get('resourceResults');
+    students.map(student => {
+      let studentActivityPerformance = studentsActivityPerformance.findBy(
+        'user',
+        student.get('id')
+      );
+      student.set('performance', studentActivityPerformance.get('collection'));
+    });
+    resources.map(resource => {
+      let resourcePerformance = resourcesPerformance.findBy(
+        'resourceId',
+        resource.get('id')
+      );
+      resource.set('performance', resourcePerformance);
+      resource.set('timeSpent', resourcePerformance.get('timeSpent'));
+    });
+    //First resource active by default
+    component.resetHourMinute(
+      formatMilliseconds(resources.objectAt(0).get('timeSpent'))
+    );
+  },
+
+  /**
+   * @function getResourceRequestBody
+   * Method to get resource request body
+   */
+  getResourceRequestBody(resource) {
+    return {
+      resource_id: resource.get('id'),
+      resource_type: resource.get('content_format'),
+      time_spent: resource.get('timeSpent'),
+      question_type: resource.get('type')
+    };
+  },
+
+  /**
+   * @function getCollectionRequestBody
+   * Method to get collection requestion body param
+   */
+  getCollectionRequestBody() {
+    const component = this;
+    const collection = component.get('collection');
+    const conductedOn =
+      new Date(component.get('activityData.activation_date')) || new Date();
+    const classId = component.get('classId');
+    const activityId = component.get('activityData.id');
+    const courseId = component.get('course')
+      ? component.get('course.id')
+      : null;
+    return {
+      tenant_id: component.get('session.tenantId') || null,
+      class_id: classId,
+      collection_id: collection.get('id'),
       content_source: component.get('contentSource'),
       time_zone: component.get('timeZone'),
       conducted_on: conductedOn.toISOString(),
-      course_id: collection.get('courseId'),
       path_id: 0,
-      time_spent: timeSpentInmIlliSec,
       path_type: null,
+      course_id: courseId,
       additionalContext: btoa(JSON.stringify({ dcaContentId: activityId }))
     };
-    return studentPerformanceData;
+  },
+
+  /**
+   * @function resetRequestBodyByKeys
+   * Method to reset request body keys
+   */
+  resetRequestBodyByKeys(dataToRest, jsonKeys) {
+    jsonKeys.map(key => {
+      dataToRest[`${key}`] = undefined;
+    });
+    return dataToRest;
   }
 });

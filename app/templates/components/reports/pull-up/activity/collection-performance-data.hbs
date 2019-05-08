@@ -1,9 +1,9 @@
-<div class="collection-performance-container {{if isCollection 'collection-performance' 'external-collection-performance'}}">
+<div class="collection-performance-container  {{if isMobileView 'mobile-view' 'desktop-view'}} {{if isCollection 'collection-performance' 'external-collection-performance'}}">
   {{#if isCollection}}
     <div class="resource-list-container">
       <div class="search-resource">
         {{#if isShowClearSearchResources}}
-          <span class="clear-search-student" {{action "onClearSearchResources"}}>
+          <span class="clear-search-resource" {{action "onClearSearchResources"}}>
             {{gru-icon name="clear"}}
           </span>
         {{/if}}
@@ -18,8 +18,15 @@
       </div>
       <div class="resources-container">
         {{#each resourceList as |resource seq|}}
-          <div class="resource-container {{if (eq resource.id activeResource.id) 'active-resource'}}" {{action "onSelectResource" resource}}>
-            <div class="resource-title ellipsis"><span class="resource-seq">{{plus-one seq}}. </span>{{resource.title}}</div>
+          <div class="resource-details {{if (eq resource.id activeResource.id) 'active-resource'}}">
+            <div class="resource-container" {{action "onSelectResource" resource}} data-toggle="tooltip" title="{{resource.title}}">
+              <div class="resource-title ellipsis"><span class="resource-seq">{{plus-one seq}}. </span>{{resource.title}}</div>
+              {{#if resource.timeSpent}}
+                <div class="resource-timespent">{{format-time resource.timeSpent}}</div>
+              {{/if}}
+            </div>
+            <div class="resource-timespent-details">
+            </div>
           </div>
         {{/each}}
       </div>
@@ -35,7 +42,11 @@
         <div class="timespent-action-container">
           <div class="next-action {{unless isValidTimeSpent 'disable-event'}}" {{action "onSaveTimeSpent"}}>
             {{#if isLastResource}}
-              {{t 'common.save-submit'}}
+              {{#if isOverwritePerformance}}
+                {{t 'goals.manage.update'}} {{t 'common.timeSpent'}}
+              {{else}}
+                {{t 'common.save-submit'}}
+              {{/if}}
             {{else}}
               {{t 'common.save-next'}}
             {{/if}}

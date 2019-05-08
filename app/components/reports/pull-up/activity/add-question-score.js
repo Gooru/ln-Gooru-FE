@@ -6,6 +6,12 @@ export default Ember.Component.extend({
   classNames: ['add-data', 'add-question-score'],
 
   // -------------------------------------------------------------------------
+  // Events
+  didInsertElement() {
+    this.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
+
+  // -------------------------------------------------------------------------
   // Actions
   actions: {
     //Action triggered when add question score
@@ -19,7 +25,11 @@ export default Ember.Component.extend({
     //Action triggered when toggle question
     onToggleQuestion(seq) {
       const component = this;
-      component.sendAction('onToggleQuestion', seq);
+      if (component.get('question.active')) {
+        component.set('question.active', false);
+      } else {
+        component.sendAction('onToggleQuestion', seq);
+      }
     },
 
     //Action triggered when scroll multi scores
@@ -65,11 +75,30 @@ export default Ember.Component.extend({
   isBooleanScore: Ember.computed.lte('question.maxScore', 1),
 
   /**
-   * @property {Boolean} isScrollableMultiScore
+   * @property {Boolean} isShowScrollableScores
    */
-  isScrollableMultiScore: Ember.computed(function() {
+  isShowScrollableScores: Ember.computed(function() {
     const component = this;
     const numberOfScores = component.get('questionScores.length');
     return numberOfScores > 5;
-  })
+  }),
+
+  /**
+   * @property {Boolean} isOverwriteScore
+   */
+  isOverwriteScore: false,
+
+  /**
+   * @property {Boolean} disableScoreOverwite
+   */
+  disableScoreOverwite: Ember.computed(
+    'isOverwriteScore',
+    'question.type',
+    function() {
+      const component = this;
+      const isOverwriteScore = component.get('isOverwriteScore');
+      const questionType = component.get('question.type');
+      return isOverwriteScore && questionType === 'OE';
+    }
+  )
 });
