@@ -165,12 +165,11 @@ export default Ember.Service.extend({
       current_item_id: options.suggested_content_id,
       current_item_type: options.suggested_content_type,
       current_item_subtype: options.suggested_content_subtype,
-      milestone_id: options.milestone_id,
       state: 'start',
       score_percent: options.score || 0,
       path_id: parseInt(options.pathId),
       path_type: 'system',
-      milestone_id: options.ctx_class_id
+      milestone_id: options.milestone_id
     };
     return service
       .get('adapter')
@@ -223,7 +222,6 @@ export default Ember.Service.extend({
       itemType: collectionType,
       itemSubType: subType,
       pathId: +pathId,
-      milestoneId: milestoneId,
       classId,
       status: 'start',
       milestoneId
