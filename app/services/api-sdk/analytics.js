@@ -169,22 +169,22 @@ export default Ember.Service.extend({
 
   /**
    * Loads the current location for a student within several classes
-   * @param {string[]} classIds
+   * @param {string[]} {classIds, course, fwCode? }
    * @param {string} userId
    * @param {boolean} fetchAll when true load dependencies for current location
    * @returns {Ember.RSVP.Promise.<CurrentLocation>}
    */
   getUserCurrentLocationByClassIds: function(
-    classCourseIds,
+    classCourseIdsFwCode,
     userId,
     fetchAll = false
   ) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (classCourseIds && classCourseIds.length) {
+      if (classCourseIdsFwCode && classCourseIdsFwCode.length) {
         service
           .get('currentLocationAdapter')
-          .getUserCurrentLocationByClassIds(classCourseIds, userId)
+          .getUserCurrentLocationByClassIds(classCourseIdsFwCode, userId)
           .then(function(response) {
             const currentLocations = service
               .get('currentLocationSerializer')
@@ -266,37 +266,35 @@ export default Ember.Service.extend({
             .readAssessment(collectionId);
         }
       }
-      Ember.RSVP
-        .hash({
-          course: courseId
-            ? service.get('courseService').fetchByIdWithOutProfile(courseId)
-            : undefined,
-          unit: unitId
-            ? service.get('unitService').fetchById(courseId, unitId)
-            : undefined,
-          lesson: lessonId
-            ? service.get('lessonService').fetchById(courseId, unitId, lessonId)
-            : undefined,
-          collection: collection
-        })
-        .then(
-          function(hash) {
-            currentLocation.set('course', hash.course);
-            currentLocation.set('unit', hash.unit);
-            currentLocation.set('lesson', hash.lesson);
-            currentLocation.set('collection', hash.collection);
-            resolve(currentLocation);
-          },
-          function(error) {
-            //handling server errors
-            const status = error.status;
-            if (status === 404) {
-              resolve();
-            } else {
-              reject(error);
-            }
+      Ember.RSVP.hash({
+        course: courseId
+          ? service.get('courseService').fetchByIdWithOutProfile(courseId)
+          : undefined,
+        unit: unitId
+          ? service.get('unitService').fetchById(courseId, unitId)
+          : undefined,
+        lesson: lessonId
+          ? service.get('lessonService').fetchById(courseId, unitId, lessonId)
+          : undefined,
+        collection: collection
+      }).then(
+        function(hash) {
+          currentLocation.set('course', hash.course);
+          currentLocation.set('unit', hash.unit);
+          currentLocation.set('lesson', hash.lesson);
+          currentLocation.set('collection', hash.collection);
+          resolve(currentLocation);
+        },
+        function(error) {
+          //handling server errors
+          const status = error.status;
+          if (status === 404) {
+            resolve();
+          } else {
+            reject(error);
           }
-        );
+        }
+      );
     });
   },
 

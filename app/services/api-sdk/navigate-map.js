@@ -90,13 +90,19 @@ export default Ember.Service.extend({
    * This method is used to start a course or continue a course without knowing the exact location
    * @param {string} courseId
    * @param {string} classId optional
+   * @param {string} milestoneId optional
    * @returns {Promise.<MapLocation>}
    */
-  continueCourse: function(courseId, classId = undefined) {
+  continueCourse: function(
+    courseId,
+    classId = undefined,
+    milestoneId = undefined
+  ) {
     const service = this;
     const mapContext = MapContext.create({
       courseId,
       classId,
+      milestoneId,
       status: 'continue'
     });
     return service.next(mapContext);
@@ -111,7 +117,7 @@ export default Ember.Service.extend({
    * @param {string} collectionId
    * @param {string} collectionType
    * @param {string} classId
-   * @param {string} milestoneId
+   * @param {string} milestoneId optional
    * @returns {Promise.<MapLocation>}
    */
   startCollection: function(
@@ -159,6 +165,7 @@ export default Ember.Service.extend({
       current_item_id: options.suggested_content_id,
       current_item_type: options.suggested_content_type,
       current_item_subtype: options.suggested_content_subtype,
+      milestone_id: options.milestone_id,
       state: 'start',
       score_percent: options.score || 0,
       path_id: parseInt(options.pathId),
@@ -216,6 +223,7 @@ export default Ember.Service.extend({
       itemType: collectionType,
       itemSubType: subType,
       pathId: +pathId,
+      milestoneId: milestoneId,
       classId,
       status: 'start',
       milestoneId
