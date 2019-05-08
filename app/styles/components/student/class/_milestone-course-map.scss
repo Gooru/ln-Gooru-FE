@@ -196,17 +196,27 @@
               }
             }
 
-            .lesson-title {
+            .domain-lesson-title {
               p {
                 margin: 0;
                 font-family: "Lato";
                 color: #666666;
+                font-weight: bold;
                 @include ellipsis(
-                  $font-size: 18px,
-                  $line-height: 1.5,
+                  $font-size: 16px,
+                  $line-height: 1.2,
                   $lines-to-show: 1
                 );
                 width: 100%;
+
+                &.domain-name {
+                  font-weight: normal;
+                  @include ellipsis(
+                    $font-size: 13px,
+                    $line-height: 1.2,
+                    $lines-to-show: 1
+                  );
+                }
               }
             }
 
@@ -310,6 +320,12 @@
                 }
 
                 &:hover {
+                  &.rescope {
+                    .colllection-play-btn {
+                      visibility: hidden;
+                    }
+                  }
+
                   .colllection-play-btn {
                     visibility: visible;
                     opacity: 1;
