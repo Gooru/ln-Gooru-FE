@@ -1,5 +1,8 @@
 .student-class-milestone-course-map {
-  width: 650px;
+  width: 768px;
+  @media screen and (max-width: $screen-sm) {
+    width: 100%;
+  }
 
   .milestone-course-map-container {
     width: 100%;
@@ -90,7 +93,6 @@
 
       .milestone-course-map-lesson-container {
         display: none;
-        background-image: linear-gradient(to top, #e7e7e7, #cfcfcf);
 
         .no-lesson {
           text-align: center;
@@ -175,6 +177,10 @@
             border-bottom: 1px solid #e3e5ea;
             cursor: pointer;
 
+            &.rescope {
+              background-color: rgba(204, 204, 204, 0.6);
+            }
+
             &.has-activity {
               .lesson-icon-container {
                 .lesson-icon {
@@ -256,6 +262,17 @@
                 width: 100%;
                 grid-template-columns: 70px 1fr 50px 100px 60px;
                 align-items: center;
+                @media screen and (max-width: $screen-sm) {
+                  grid-template-columns: 70px 1fr 50px 60px;
+                }
+
+                &.rescope {
+                  .colllection-play-btn {
+                    pointer-events: none;
+                    visibility: hidden;
+                  }
+                  background-color: rgba(204, 204, 204, 0.6);
+                }
 
                 &.has-activity {
                   .collection-icon-container {
@@ -412,6 +429,9 @@
                   display: inline-flex;
                   align-items: center;
                   justify-content: space-evenly;
+                  @media screen and (max-width: $screen-sm) {
+                    display: none;
+                  }
 
                   .resource-count {
                     width: 40px;

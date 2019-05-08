@@ -170,21 +170,25 @@ export default Ember.Component.extend({
     let fwCode = component.get('fwCode');
     let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
-    component
-      .get('courseService')
-      .getCourseMilestones(courseId, fwCode)
-      .then(milestones => {
-        if (!component.isDestroyed) {
-          component.set('milestones', milestones);
-          if (showPerformance) {
-            component.fetchMilestonePerformance();
-          }
-          if (locateLastPlayedItem) {
-            component.identifyUserLocationAndLocate();
-          }
-          component.set('isLoading', false);
+
+    Ember.RSVP.hash({
+      milestones: component
+        .get('courseService')
+        .getCourseMilestones(courseId, fwCode),
+      rescopedContents: component.getRescopedContents()
+    }).then(({ milestones, rescopedContents }) => {
+      if (!component.isDestroyed) {
+        component.set('milestones', milestones);
+        component.set('rescopedContents', rescopedContents);
+        if (showPerformance) {
+          component.fetchMilestonePerformance();
         }
-      });
+        if (locateLastPlayedItem) {
+          component.identifyUserLocationAndLocate();
+        }
+        component.set('isLoading', false);
+      }
+    });
   },
 
   fetchMilestonePerformance() {
@@ -354,12 +358,20 @@ export default Ember.Component.extend({
         selectedMilestone.set('isActive', true);
       });
     }
+    let rescopedLessonContents = component.get('rescopedContents.lessons');
+
     if (!component.get('hasLessonFetched')) {
       component
         .get('courseService')
         .getCourseMilestoneLessons(courseId, milestoneId)
         .then(lessons => {
           if (!component.isDestroyed) {
+            rescopedLessonContents.forEach(rescopedLessonId => {
+              let lesson = lessons.findBy('lesson_id', rescopedLessonId);
+              if (lesson) {
+                lesson.set('rescope', true);
+              }
+            });
             selectedMilestone.set('lessons', lessons);
             if (showPerformance) {
               component.fetchMilestoneLessonsPerformance(milestoneId, lessons);
@@ -405,6 +417,13 @@ export default Ember.Component.extend({
         .then(lesson => {
           if (!component.isDestroyed) {
             let collections = lesson.get('children');
+            let rescopeCollectionIds = component.getRescopeCollectionIds();
+            rescopeCollectionIds.forEach(rescopeCollectionId => {
+              let collection = collections.findBy('id', rescopeCollectionId);
+              if (collection) {
+                collection.set('rescope', true);
+              }
+            });
             selectedLesson.set('collections', collections);
             selectedLesson.set('hasCollectionFetched', true);
             let userCurrentLocation = component.get('userCurrentLocation');
@@ -464,14 +483,33 @@ export default Ember.Component.extend({
       classId,
       courseId
     };
-    component
-      .get('rescopeService')
-      .getSkippedContents(filter)
-      .then(skippedContents => {
-        if (!component.isDestroyed) {
-          component.set('skippedContents', skippedContents);
-        }
-      });
+    return component.get('rescopeService').getSkippedContents(filter);
+  },
+
+  /**
+   * Merge all  the collection content family, rescoped ids
+   * @type {Array}
+   */
+  getRescopeCollectionIds() {
+    let component = this;
+    let collectionIds = Ember.A([]);
+    let rescopedCollectionContents = component.get(
+      'rescopedContents.collections'
+    );
+    let rescopedCollectionsExternalContents = component.get(
+      'rescopedContents.collectionsExternal'
+    );
+    let rescopedAssessmentsExternalContents = component.get(
+      'rescopedContents.assessmentsExternal'
+    );
+    let rescopedAssessmentsContents = component.get(
+      'rescopedContents.assessments'
+    );
+    collectionIds.pushObjects(rescopedCollectionContents);
+    collectionIds.pushObjects(rescopedAssessmentsContents);
+    collectionIds.pushObjects(rescopedCollectionsExternalContents);
+    collectionIds.pushObjects(rescopedAssessmentsExternalContents);
+    return collectionIds;
   },
 
   /**
