@@ -78,13 +78,12 @@ export default StudentCollection.extend({
       controller
         .get('quizzesAttemptService')
         .getAttemptIds(contextId, profileId)
-        .then(
-          attemptIds =>
-            !attemptIds || !attemptIds.length
-              ? {}
-              : this.get('quizzesAttemptService').getAttemptData(
-                attemptIds[attemptIds.length - 1]
-              )
+        .then(attemptIds =>
+          !attemptIds || !attemptIds.length
+            ? {}
+            : this.get('quizzesAttemptService').getAttemptData(
+              attemptIds[attemptIds.length - 1]
+            )
         )
         .then(attemptData =>
           Ember.RSVP.hash({
@@ -393,6 +392,7 @@ export default StudentCollection.extend({
         mapContext.ctx_collection_id = mapContext.collectionId;
         mapContext.ctx_milestone_id = mapContext.milestoneId;
         mapContext.ctx_unit_id = mapContext.unitId;
+        mapContext.milestone_id = mapContext.milestoneId;
         mapContext.suggested_content_type = suggestion.type;
         mapContext.suggested_content_id = suggestion.id;
         mapContext.suggested_content_subtype =

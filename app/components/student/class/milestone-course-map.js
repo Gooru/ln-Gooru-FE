@@ -358,6 +358,7 @@ export default Ember.Component.extend({
         selectedMilestone.set('isActive', true);
       });
     }
+
     let rescopedLessonContents = component.get('rescopedContents.lessons');
 
     if (!component.get('hasLessonFetched')) {
@@ -366,6 +367,7 @@ export default Ember.Component.extend({
         .getCourseMilestoneLessons(courseId, milestoneId)
         .then(lessons => {
           if (!component.isDestroyed) {
+
             rescopedLessonContents.forEach(rescopedLessonId => {
               let lesson = lessons.findBy('lesson_id', rescopedLessonId);
               if (lesson) {
@@ -424,6 +426,7 @@ export default Ember.Component.extend({
                 collection.set('rescope', true);
               }
             });
+
             selectedLesson.set('collections', collections);
             selectedLesson.set('hasCollectionFetched', true);
             let userCurrentLocation = component.get('userCurrentLocation');
@@ -483,6 +486,7 @@ export default Ember.Component.extend({
       classId,
       courseId
     };
+
     return component.get('rescopeService').getSkippedContents(filter);
   },
 
