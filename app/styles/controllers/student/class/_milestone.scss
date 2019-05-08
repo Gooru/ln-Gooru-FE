@@ -1,10 +1,4 @@
 .student_class_milestone {
-  @extend %bg-base64;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  background-attachment: fixed;
-
   .app-container {
     padding-top: 100px;
   }
@@ -16,6 +10,9 @@
     .content {
       display: grid;
       justify-content: center;
+      @media screen and (max-width: $screen-sm) {
+        display: block;
+      }
     }
   }
 }
