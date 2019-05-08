@@ -65,5 +65,35 @@ export default Ember.Object.extend({
       sessionId: data.lastSessionId,
       status: data.status
     });
+  },
+
+  /**
+   * Normalized collections performance data for lesson.
+   * @return {Array}
+   */
+
+  normalizeCollectionsPerformanceDataForLesson(response) {
+    let resultSet = Ember.A();
+    if (response.content !== undefined && response.content.length > 0) {
+      response = Ember.A(response.content);
+      response.forEach(data => {
+        let result = Ember.Object.create(data);
+        let usageData = result.get('usageData');
+        if (usageData && usageData.length > 0) {
+          usageData.forEach(data => {
+            let collectionPerformance = Ember.Object.create({
+              performance: Ember.Object.create({
+                timeSpent: data.timeSpent,
+                scoreInPercentage: data.scoreInPercentage
+              }),
+              collectionId: data.collectionId || data.assessmentId,
+              userUid: result.get('userUid')
+            });
+            resultSet.pushObject(collectionPerformance);
+          });
+        }
+      });
+    }
+    return resultSet;
   }
 });

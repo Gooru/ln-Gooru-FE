@@ -320,5 +320,33 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return {
       order: values
     };
+  },
+
+  /**
+   * Normalized data of course milestones
+   * @return {Object}
+   */
+  normalizeCourseMilestones: function(response) {
+    let resultSet = Ember.A();
+    response = Ember.A(response.milestones);
+    response.forEach(data => {
+      let result = Ember.Object.create(data);
+      resultSet.pushObject(result);
+    });
+    return resultSet;
+  },
+
+  /**
+   * Normalized data of course milestone lessons
+   * @return {Object}
+   */
+  normalizeCourseMilestoneLessons: function(response) {
+    let resultSet = Ember.A();
+    response = Ember.A(response.lessons);
+    response.forEach(data => {
+      let result = Ember.Object.create(data);
+      resultSet.pushObject(result);
+    });
+    return resultSet;
   }
 });

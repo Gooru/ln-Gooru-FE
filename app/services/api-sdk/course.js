@@ -259,5 +259,41 @@ export default Ember.Service.extend(StoreMixin, {
           .get('serializer')
           .normalizeCourseStructure(courseData, collectionType);
       });
+  },
+
+  /**
+   * Returns the milestones for the course.
+   * @param {string} courseId
+   * @param {string} fwCode
+   * @returns {Promise.<Milestones>}
+   */
+  getCourseMilestones(courseId, fwCode) {
+    const service = this;
+    return service
+      .get('adapter')
+      .getCourseMilestones(courseId, fwCode)
+      .then(function(courseData) {
+        return service
+          .get('serializer')
+          .normalizeCourseMilestones(courseData, fwCode);
+      });
+  },
+
+  /**
+   * Returns the lessons for the course milestone.
+   * @param {string} courseId
+   * @param {string} milestoneId
+   * @returns {Promise.<Lessons>}
+   */
+  getCourseMilestoneLessons(courseId, milestoneId) {
+    const service = this;
+    return service
+      .get('adapter')
+      .getCourseMilestoneLessons(courseId, milestoneId)
+      .then(function(courseData) {
+        return service
+          .get('serializer')
+          .normalizeCourseMilestoneLessons(courseData, milestoneId);
+      });
   }
 });

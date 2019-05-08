@@ -129,7 +129,7 @@ export default Ember.Service.extend({
     classId = undefined,
     pathId,
     pathType,
-    milestoneId = undefined
+    milestoneId
   ) {
     const service = this;
     const mapContext = MapContext.create({
@@ -169,7 +169,8 @@ export default Ember.Service.extend({
       state: 'start',
       score_percent: options.score || 0,
       path_id: parseInt(options.pathId),
-      path_type: 'system'
+      path_type: 'system',
+      milestone_id: options.ctx_class_id
     };
     return service
       .get('adapter')
@@ -192,6 +193,7 @@ export default Ember.Service.extend({
    * @param {string} collectionSubType
    * @param {string} pathId
    * @param {string} classId
+   * @param {string} milestoneId
    * @returns {Promise.<MapLocation>}
    */
   startSuggestion: function(
@@ -203,7 +205,7 @@ export default Ember.Service.extend({
     collectionSubType,
     pathId,
     classId,
-    milestoneId = undefined
+    milestoneId
   ) {
     const service = this;
     let isBackfillOrResource =
@@ -223,8 +225,10 @@ export default Ember.Service.extend({
       pathId: +pathId,
       milestoneId: milestoneId,
       classId,
-      status: 'start'
+      status: 'start',
+      milestoneId
     });
+
     return service.next(mapContext);
   },
 
@@ -238,6 +242,7 @@ export default Ember.Service.extend({
    * @param {string} resourceId
    * @param {string} pathId
    * @param {string} classId
+   * @param {string} milestoneId
    * @returns {Promise.<MapLocation>}
    */
   startResource: function(
@@ -248,7 +253,7 @@ export default Ember.Service.extend({
     resourceId,
     pathId,
     classId,
-    milestoneId = undefined
+    milestoneId
   ) {
     const service = this;
     const mapContext = MapContext.create({
@@ -261,8 +266,9 @@ export default Ember.Service.extend({
       pathId: +pathId,
       classId,
       status: 'start',
-      milestoneId: milestoneId
+      milestoneId
     });
+
     return service.next(mapContext);
   },
 
@@ -296,6 +302,7 @@ export default Ember.Service.extend({
    * @param {string} unitId
    * @param {string} lessonId
    * @param {string} classId
+   * @param {string} milestoneId
    * @returns {Promise.<MapLocation>}
    */
   startLesson: function(
@@ -314,8 +321,9 @@ export default Ember.Service.extend({
       classId,
       status: 'start',
       pathType: pathType,
-      milestoneId: milestoneId
+      milestoneId
     });
+
     return service.next(mapContext);
   },
 
@@ -386,6 +394,7 @@ export default Ember.Service.extend({
   getMapLocation: function(params) {
     const classId = params.classId;
     const courseId = params.courseId;
+    const milestoneId = params.milestoneId;
     const unitId = params.unitId;
     const lessonId = params.lessonId;
     const collectionType = params.type;
@@ -394,7 +403,7 @@ export default Ember.Service.extend({
     const collectionSubType = params.subtype;
     const collectionUrl = params.collectionUrl;
     const resourceId = params.resourceId;
-    const continueCourse = !unitId;
+    const continueCourse = !unitId || !milestoneId;
     const startLesson = lessonId && !collectionId;
     const pathType =
       params.pathType === 'null' ? null : params.pathType || null;
@@ -414,7 +423,8 @@ export default Ember.Service.extend({
         courseId,
         unitId,
         lessonId,
-        classId
+        classId,
+        milestoneId
       );
     } else if (collectionSubType && collectionSubType !== 'null') {
       mapLocationPromise = navigateMapService.startSuggestion(
@@ -425,10 +435,15 @@ export default Ember.Service.extend({
         collectionType,
         collectionSubType,
         pathId,
-        classId
+        classId,
+        milestoneId
       );
     } else if (collectionUrl && resourceId) {
       const ctxUnitId = Utils.getParameterByName('unitId', collectionUrl);
+      const ctxMilestoneId = Utils.getParameterByName(
+        'milestoneId',
+        collectionUrl
+      );
       const ctxLessonId = Utils.getParameterByName('lessonId', collectionUrl);
       const ctxCollectionType = Utils.getParameterByName('type', collectionUrl);
       mapLocationPromise = navigateMapService.startCollection(
@@ -437,7 +452,8 @@ export default Ember.Service.extend({
         ctxLessonId,
         collectionId,
         ctxCollectionType,
-        classId
+        classId,
+        ctxMilestoneId
       );
     } else {
       mapLocationPromise = navigateMapService.startCollection(
@@ -448,7 +464,8 @@ export default Ember.Service.extend({
         collectionType,
         classId,
         parseInt(pathId),
-        pathType
+        pathType,
+        milestoneId
       );
     }
     return mapLocationPromise;

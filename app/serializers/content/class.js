@@ -39,8 +39,22 @@ export default Ember.Object.extend({
    */
   serializeUpdateContentVisibility: function(id, visibility, type) {
     return type === 'assessment'
-      ? { assessments: [{ id: id, visible: visibility ? 'on' : 'off' }] }
-      : { collections: [{ id: id, visible: visibility ? 'on' : 'off' }] };
+      ? {
+        assessments: [
+          {
+            id: id,
+            visible: visibility ? 'on' : 'off'
+          }
+        ]
+      }
+      : {
+        collections: [
+          {
+            id: id,
+            visible: visibility ? 'on' : 'off'
+          }
+        ]
+      };
   },
   /**
    * Serialize a Class object into a JSON representation required by the Update Class endpoint
@@ -82,7 +96,11 @@ export default Ember.Object.extend({
 
     //when teachers are not provided is creates an onwers from creatorId
     const teachersWrapper = Ember.A(
-      teachers || [ProfileModel.create({ id: creatorId })]
+      teachers || [
+        ProfileModel.create({
+          id: creatorId
+        })
+      ]
     );
     return ClassModel.create(Ember.getOwner(this).ownerInjection(), {
       id: payload.id,
@@ -113,13 +131,16 @@ export default Ember.Object.extend({
       primaryLanguage: payload.primary_language,
       milestoneViewApplicable: payload.milestone_view_applicable,
       collaborators: collaborators.map(function(collaboratorId) {
-        return ProfileModel.create({ id: collaboratorId });
+        return ProfileModel.create({
+          id: collaboratorId
+        });
       }),
       courseVersion: payload.course_version,
       setting: payload.setting ? Ember.Object.create(payload.setting) : null,
       preference: payload.preference
         ? Ember.Object.create(payload.preference)
-        : null
+        : null,
+      milestoneViewApplicable: payload.milestone_view_applicable
     });
   },
 
