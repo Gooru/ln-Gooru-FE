@@ -1158,5 +1158,61 @@ export default Ember.Service.extend({
           resolve(response);
         }, reject);
     });
+  },
+
+  /**
+   * @function getPerformanceForUnits
+   * Get units Performance Data for route0
+   */
+  getPerformanceForUnits(classId, courseId, collectionType, userUid) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('performanceAdapter')
+        .getPerformanceForUnits(classId, courseId, collectionType, userUid)
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('performanceSerializer')
+                .normalizeUnitsPerformanceDataForCourse(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * @function getPerformanceForLessons
+   * Get lessons Performance Data for route0
+   */
+  getPerformanceForLessons(classId, courseId, unitId, collectionType, userUid) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('performanceAdapter')
+        .getPerformanceForLessons(
+          classId,
+          courseId,
+          unitId,
+          collectionType,
+          userUid
+        )
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('performanceSerializer')
+                .normalizeLessonsPerformanceDataForUnit(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });
