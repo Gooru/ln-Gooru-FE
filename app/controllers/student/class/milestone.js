@@ -48,7 +48,7 @@ export default Ember.Controller.extend({
    * Decide Whether need to show route0 accepted or preview view.
    * @return {Boolean}
    */
-  showRoute0Suggestion: Ember.computed('class', function() {
+  showRoute0Suggestion: Ember.computed('route0', 'route0.status', function() {
     let controller = this;
     const route0 = controller.get('route0');
     let showRoute0Suggestion = route0.status === 'accepted';

@@ -15,7 +15,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
     data.pathType = 'route0';
     let result = Ember.Object.create({
       status: data.status,
-      pathType: 'route0'
+      pathType: 'route0',
+      userCompetencyRoute: data.userCompetencyRoute
     });
     let route0Content = Ember.Object.create({
       units: Ember.A([])

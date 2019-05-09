@@ -40,6 +40,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   model: function() {
     const route = this;
     const currentClass = route.modelFor('student.class').class;
+    const course = route.modelFor('student.class').course;
     const isRoute0Applicable = currentClass.get('route0Applicable');
     let route0Promise = Ember.RSVP.resolve({});
     if (isRoute0Applicable) {
@@ -50,6 +51,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     }
     return Ember.RSVP.hash({
       currentClass: currentClass,
+      course: course,
       route0: route0Promise
     });
   },
@@ -62,6 +64,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   setupController: function(controller, model) {
     controller.set('class', model.currentClass);
     controller.set('route0', model.route0);
+    controller.set('course', model.course);
     controller.get('studentClassController').selectMenuItem('course-map');
   }
 });
