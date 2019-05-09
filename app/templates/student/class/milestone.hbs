@@ -5,10 +5,18 @@
     <div class="destination-point">{{gru-icon name="place"}}</div>
   </div>
 </div>
+
+{{#if route0Applicable}}
+  <h5 class="pre-study-title hidden-xs">{{t 'class.overview.pre-study-title'}}</h5>
+  {{#if showRoute0Suggestion}}
+    <div class="milestone-course-map-view-route0">
+      {{student.class.milestone-course-map-route0  class=class}}
+    </div>
+  {{/if}}
+{{/if}}
+
+<h2>Your assigned course</h2>
+
 <div class="milestone-course-map-view">
-  {{student.class.milestone-course-map
-    onAddContentToDCA="onAddContentToDCA"
-    onScheduleContentToDCA="onScheduleContentToDCA"
-    class=class
-  }}
+  {{student.class.milestone-course-map class=class}}
 </div>

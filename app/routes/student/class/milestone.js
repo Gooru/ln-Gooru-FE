@@ -4,6 +4,14 @@ import { CLASS_SKYLINE_INITIAL_DESTINATION } from 'gooru-web/config/config';
 
 export default Ember.Route.extend(PrivateRouteMixin, {
   // -------------------------------------------------------------------------
+  // Dependencies
+
+  /**
+   * route0 Service to perform route0 data operations
+   */
+  route0Service: Ember.inject.service('api-sdk/route0'),
+
+  // -------------------------------------------------------------------------
   // Methods
   beforeModel() {
     const route = this;
@@ -32,8 +40,17 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   model: function() {
     const route = this;
     const currentClass = route.modelFor('student.class').class;
+    const isRoute0Applicable = currentClass.get('route0Applicable');
+    let route0Promise = Ember.RSVP.resolve({});
+    if (isRoute0Applicable) {
+      route0Promise = route.get('route0Service').fetchInClass({
+        courseId: currentClass.courseId,
+        classId: currentClass.id
+      });
+    }
     return Ember.RSVP.hash({
-      currentClass: currentClass
+      currentClass: currentClass,
+      route0: route0Promise
     });
   },
 
@@ -44,6 +61,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   setupController: function(controller, model) {
     controller.set('class', model.currentClass);
+    controller.set('route0', model.route0);
     controller.get('studentClassController').selectMenuItem('course-map');
   }
 });
