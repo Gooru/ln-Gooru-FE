@@ -2,7 +2,7 @@
   <div class="title">
     <span class="bookmark-section">
       <span class="section-header">{{t 'common.bookmarks'}}</span>
-    {{#link-to 'search.collections' tagName="span" class='add-bookmark' }}
+    {{#link-to "library-search" (query-params type="gooru-catalog" isBack=true) tagName="span" class='add-bookmark' }}
       <span title="{{t 'student-independent-learning.add-bookmark'}}">
           {{gru-icon name="add"}}
         </span>
