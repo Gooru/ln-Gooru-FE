@@ -77,6 +77,7 @@
   "dependencies": {
     "broccoli-sass": "^0.7.0",
     "broccoli-static-compiler": "^0.2.2",
+    "broccoli-stew": "^2.1.0",
     "ember-cli-deprecation-workflow": "^0.2.3",
     "ember-cli-sass": "^5.6.0",
     "ember-d3": "^0.2.0",
@@ -93,5 +94,10 @@
     "loader.js": "^4.0.11",
     "quizzes-addon": "4.7.18",
     "url-search-params": "^0.10.0"
+  },
+  "ember-addon": {
+    "paths": [
+      "lib/remove"
+    ]
   }
 }
