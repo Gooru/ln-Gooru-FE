@@ -31,20 +31,17 @@
         {{#if milestone.hasLessonFetched}}
           {{#if milestone.lessons}}
             {{#each milestone.lessons as | lesson index |}}
-              <div class="milestone-course-map-lesson {{if lesson.isActive 'active'}}">
-                <div class="milestone-course-map-lesson-panel {{if lesson.rescope 'rescope'}} {{if lesson.has-activity 'has-activity'}}" {{action 'toggleLessonItems' lesson }}>
+              <div class="milestone-course-map-lesson {{if lesson.isNextActive 'next-active'}} {{if lesson.isPrevActive 'prev-active'}} {{if lesson.isActive 'active'}}">
+                <div class="milestone-course-map-lesson-panel first-path-{{lesson.firstCollHasSuggsType}} prev-col-path-{{lesson.prevLeCollHasSuggsType}} {{if lesson.rescope 'rescope'}} {{if lesson.has-activity 'has-activity'}}" {{action 'toggleLessonItems' lessons lesson }}>
                   <div class="lesson-icon-container">
                     <div class="lesson-icon-upward-line">
-                      <svg height="15" width="20">
-                          <line x1="0" y1="0" x2="0" y2="25" />
-                        </svg>
+                      <svg height="35" width="20">
+                        <line x1="0" y1="0" x2="0" y2="35" />
+                        <path class="path-right" d="M 0 0  t 8 17 -5 60"  />
+                        <path class="path-left" d="M 15 0  t -8 17 5 60" />
+                      </svg>
                     </div>
                     <i class="lesson-icon"></i>
-                    <div class="lesson-icon-downward-line">
-                      <svg height="15" width="20">
-                          <line x1="0" y1="0" x2="0" y2="25" />
-                        </svg>
-                    </div>
                   </div>
                   <div class="domain-lesson-title">
                     <p class="domain-name">{{lesson.tx_domain_name}}</p>
@@ -67,19 +64,16 @@
                     {{#if lesson.collections}}
                       {{#each lesson.collections as | collection |}}
                         <div class="milestone-course-map-collection">
-                          <div class="milestone-course-map-collection-panel {{if collection.rescope 'rescope'}} {{if collection.has-activity 'has-activity'}} {{if collection.last-played-collection 'last-played-collection'}}">
+                          <div class="milestone-course-map-collection-panel prev-coll-path-{{collection.prevCollHasSuggsType}} next-coll-path-{{nextCollHasSuggsType}} path-{{collection.pathType}} {{if collection.rescope 'rescope'}} {{if collection.has-activity 'has-activity'}} {{if collection.last-played-collection 'last-played-collection'}}">
                             <div class="collection-icon-container">
                               <div class="collection-icon-upward-line">
-                                <svg height="17" width="20">
-                                    <line x1="0" y1="0" x2="0" y2="25" />
+                                <svg height="35" width="20">
+                                      <line x1="0" y1="0" x2="0" y2="35" />
+                                      <path class="path-right" d="M 0 0  t 8 17 -5 60"  />
+                                      <path class="path-left" d="M 15 0  t -8 17 5 60" />
                                   </svg>
                               </div>
-                              <i class="collection-icon format-{{collection.format}}"></i>
-                              <div class="collection-icon-downward-line">
-                                <svg height="17" width="20">
-                                    <line x1="0" y1="0" x2="0" y2="25" />
-                                </svg>
-                              </div>
+                              <i class="collection-icon path-{{collection.pathType}}  format-{{collection.format}}"></i>
                             </div>
                             <div class="collection-title-container">
                               <p>{{collection.title}}</p>

@@ -115,23 +115,21 @@
 
           .lesson-icon-upward-line {
             position: absolute;
-            top: -16px;
+            top: -32px;
             left: 34px;
 
             svg {
-              stroke: #ccc;
-              stroke-width: 3;
-            }
-          }
+              line {
+                stroke: #ccc;
+                stroke-width: 3;
+              }
 
-          .lesson-icon-downward-line {
-            position: absolute;
-            bottom: -22px;
-            left: 34px;
-
-            svg {
-              stroke: #ccc;
-              stroke-width: 3;
+              path {
+                stroke: #ec8f42;
+                stroke-width: 2;
+                fill: none;
+                display: none;
+              }
             }
           }
         }
@@ -187,10 +185,11 @@
                   background-image: url("../assets/gooru/images/lesson-blue-outline.svg");
                 }
 
-                .lesson-icon-downward-line,
                 .lesson-icon-upward-line {
                   svg {
-                    stroke: #5c8ee2;
+                    line {
+                      stroke: #5c8ee2;
+                    }
                   }
                 }
               }
@@ -277,11 +276,39 @@
                 }
 
                 &.rescope {
-                  .colllection-play-btn {
-                    pointer-events: none;
-                    visibility: hidden;
-                  }
                   background-color: rgba(204, 204, 204, 0.6);
+                }
+
+                &.path-system {
+                  .collection-icon-container {
+                    .collection-icon.path-system {
+                      &.format-collection {
+                        background-image: url("../assets/gooru/images/collection-orange.svg");
+                      }
+
+                      &.format-assessment {
+                        background-image: url("../assets/gooru/images/assessment-orange.svg");
+                      }
+                    }
+                  }
+
+                  .collection-icon.path-system {
+                    margin-left: 15px;
+                  }
+                }
+
+                &.prev-coll-path-.next-coll-path-.path-system {
+                  .collection-icon-container {
+                    .collection-icon-upward-line {
+                      line {
+                        display: none;
+                      }
+
+                      .path-right {
+                        display: block;
+                      }
+                    }
+                  }
                 }
 
                 &.has-activity {
@@ -296,10 +323,11 @@
                       }
                     }
 
-                    .collection-icon-downward-line,
                     .collection-icon-upward-line {
                       svg {
-                        stroke: #5c8ee2;
+                        line {
+                          stroke: #5c8ee2;
+                        }
                       }
                     }
                   }
@@ -320,12 +348,6 @@
                 }
 
                 &:hover {
-                  &.rescope {
-                    .colllection-play-btn {
-                      visibility: hidden;
-                    }
-                  }
-
                   .colllection-play-btn {
                     visibility: visible;
                     opacity: 1;
@@ -358,23 +380,21 @@
 
                   .collection-icon-upward-line {
                     position: absolute;
-                    top: -16px;
+                    top: -32px;
                     left: 34px;
 
                     svg {
-                      stroke: #ccc;
-                      stroke-width: 3;
-                    }
-                  }
+                      line {
+                        stroke: #ccc;
+                        stroke-width: 3;
+                      }
 
-                  .collection-icon-downward-line {
-                    position: absolute;
-                    bottom: -22px;
-                    left: 34px;
-
-                    svg {
-                      stroke: #ccc;
-                      stroke-width: 3;
+                      path {
+                        stroke: #ec8f42;
+                        stroke-width: 2;
+                        fill: none;
+                        display: none;
+                      }
                     }
                   }
                 }
