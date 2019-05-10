@@ -45,7 +45,7 @@ export default Ember.Controller.extend({
   }),
 
   /**
-   * Decide Whether need to show route0 accepted or preview view.
+   * Decide Whether need to show route0 accepted view or not.
    * @return {Boolean}
    */
   showRoute0Suggestion: Ember.computed('route0', 'route0.status', function() {
@@ -54,6 +54,21 @@ export default Ember.Controller.extend({
     let showRoute0Suggestion = route0.status === 'accepted';
     return showRoute0Suggestion;
   }),
+
+  /**
+   * Decide Whether need to show route0  preview view or not.
+   * @return {Boolean}
+   */
+  showRoute0SuggestionPreview: Ember.computed(
+    'route0',
+    'route0.status',
+    function() {
+      let controller = this;
+      const route0 = controller.get('route0');
+      let showRoute0Suggestion = route0.status === 'pending';
+      return showRoute0Suggestion;
+    }
+  ),
 
   /**
    * Maintains the property value of whether route0 suggestion need to show or not
