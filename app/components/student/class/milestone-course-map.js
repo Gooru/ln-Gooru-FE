@@ -405,9 +405,10 @@ export default Ember.Component.extend({
     let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
     let courseId = component.get('courseId');
+
     let selectedLessonIndex = lessons.indexOf(selectedLesson);
-    let prevLesson = lessons.objectAt(selectedLessonIndex - 1);
-    let nextLesson = lessons.objectAt(selectedLessonIndex + 1);
+    let prevLesson = lessons.objectAt(selectedLessonIndex + 1);
+    let nextLesson = lessons.objectAt(selectedLessonIndex - 1);
     if (selectedLesson.get('isActive')) {
       component.$(element).slideUp(400, function() {
         selectedLesson.set('isActive', false);
@@ -422,10 +423,10 @@ export default Ember.Component.extend({
       component.$(element).slideDown(400, function() {
         selectedLesson.set('isActive', true);
         if (nextLesson) {
-          nextLesson.set('isNextActive', false);
+          nextLesson.set('isNextActive', true);
         }
         if (prevLesson) {
-          prevLesson.set('isprevActive', false);
+          prevLesson.set('isPrevActive', true);
         }
       });
     }
@@ -480,7 +481,8 @@ export default Ember.Component.extend({
             'firstCollHasSuggsType',
             collectionSuggestion.get('pathType')
           );
-        } else if (collections.length === indexOfCollection + 1) {
+        }
+        if (collections.length === indexOfCollection + 1) {
           let selectedLessonIndex = lessons.indexOf(selectedLesson);
           let nextLesson = lessons.objectAt(selectedLessonIndex + 1);
           if (nextLesson) {
@@ -489,25 +491,32 @@ export default Ember.Component.extend({
               collectionSuggestion.get('pathType')
             );
           }
-        } else {
-          let prevCollection = collections.objectAt(indexOfCollection - 1);
-          if (prevCollection) {
-            if (prevCollection.get('pathId') > 0) {
-              collectionSuggestion.set(
-                'prevCollHasSuggsType',
-                prevCollection.get('pathType')
-              );
-            }
+        }
+        let prevCollection = collections.objectAt(indexOfCollection - 1);
+        if (prevCollection) {
+          if (prevCollection.get('pathId') > 0) {
+            collectionSuggestion.set(
+              'prevCollHasSuggsType',
+              prevCollection.get('pathType')
+            );
           }
-          let nextCollection = collections.objectAt(indexOfCollection + 1);
-          if (nextCollection) {
-            if (nextCollection.get('pathId') > 0) {
-              collectionSuggestion.set(
-                'nextCollHasSuggsType',
-                nextCollection.get('pathType')
-              );
-            }
+          prevCollection.set(
+            'nextCollHasSuggsType',
+            collectionSuggestion.get('pathType')
+          );
+        }
+        let nextCollection = collections.objectAt(indexOfCollection + 1);
+        if (nextCollection) {
+          if (nextCollection.get('pathId') > 0) {
+            collectionSuggestion.set(
+              'nextCollHasSuggsType',
+              nextCollection.get('pathType')
+            );
           }
+          nextCollection.set(
+            'prevCollHasSuggsType',
+            collectionSuggestion.get('pathType')
+          );
         }
       });
     }
