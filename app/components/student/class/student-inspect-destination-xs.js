@@ -96,10 +96,5 @@ export default Ember.Component.extend({
   /**
    * @property {JSON} activeGrade
    */
-  grade: null,
-
-  /**
-   * @property {Boolean} isRoute0
-   */
-  isRoute0: false
+  grade: null
 });

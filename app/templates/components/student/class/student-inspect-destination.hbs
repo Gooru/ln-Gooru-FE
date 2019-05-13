@@ -1,6 +1,21 @@
 <div class="inspect-destination-container">
   <div class="destination-chart-container">
-    {{proficiency.student-inspect-competency-chart reDrawChart=reDrawChart skylineInitialState=skylineInitialState competencyStatus=competencyStatus isProficiency=isProficiency title=activeGrade.grade route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode taxonomyGrades=taxonomyGrades activeGrade=activeGrade isRoute0Applicable=isRoute0Applicable onChartDrawComplete='onChartDrawComplete'}}
+    {{proficiency.student-inspect-competency-chart
+      reDrawChart=reDrawChart
+      skylineInitialState=skylineInitialState
+      competencyStatus=competencyStatus
+      isProficiency=isProficiency
+      title=activeGrade.grade
+      route0Contents=route0Contents
+      isRoute0Chart=isRoute0
+      classId=classId
+      courseId=courseId
+      classGrade=classGrade
+      subjectCode=subjectCode
+      taxonomyGrades=taxonomyGrades
+      activeGrade=activeGrade
+      isRoute0Applicable=isRoute0Applicable
+      onChartDrawComplete='onChartDrawComplete'}}
   </div>
   {{#if showDirections}}
     {{#if (eq type "route")}}
@@ -9,38 +24,65 @@
           <div class="pre-study-title">
             {{t "student-first-experience.preStudyTitle" title=activeGrade.grade}}
           </div>
-          <div class="route0-container">
-            <div class="route0-comment" {{action "onToggleRoute0View"}}>
-              <div class="suggestion-icon">{{gru-icon name="explore_outline"}}</div>
-              <div class="suggestion-note"> {{t 'class.overview.course-map.route0-bannerdesc'}}</div>
-            </div>
-            <div class="route0-body" style="display: none;">
-              <div class="route0-accordion-container">
-                {{class.overview.course-suggestions model=route0Contents index=index class=class course=course}}
+          <div class="route0-container {{if class.milestoneViewApplicable 'milestone'}}">
+            {{#unless class.milestoneViewApplicable}}
+              <div class="route0-comment" {{action "onToggleRoute0View"}}>
+                <div class="suggestion-icon">{{gru-icon name="explore_outline"}}</div>
+                <div class="suggestion-note"> {{t 'class.overview.course-map.route0-bannerdesc'}}</div>
               </div>
-            </div>
+              <div class="route0-body" style="display: none;">
+                <div class="route0-accordion-container">
+                  {{class.overview.course-suggestions
+                  model=route0Contents
+                  index=index
+                  class=class course=course}}
+                </div>
+              </div>
+              <div class="route0-action">
+                <div class="ignore" {{action "onRoute0Reject"}}>
+                  <i></i>
+                  <span>{{t 'student-first-experience.route0-action.ignore'}}</span>
+                </div>
+                <div class="accept" {{action "onRoute0Accept"}}>
+                  <i></i>
+                  <span>{{t 'student-first-experience.route0-action.accept'}}</span>
+                </div>
+              </div>
+        {{else}}
+          <div class="milestone-course-map-view-route0">
+            {{student.class.milestone-course-map-route0-preview
+                   class=class
+                   route0=route0Contents
+                   course=course
+                   showChart=false
+                  }}
           </div>
-          <div class="route0-action">
-            <div class="ignore" {{action "onRoute0Reject"}}>
-              <i></i>
-              <span>{{t 'student-first-experience.route0-action.ignore'}}</span>
-            </div>
-            <div class="accept" {{action "onRoute0Accept"}}>
-              <i></i>
-              <span>{{t 'student-first-experience.route0-action.accept'}}</span>
-            </div>
+            {{/unless}}
           </div>
+        {{/if}}
+        {{#if isRoute0Accepted}}
+          {{student.class.milestone-course-map-route0
+          showPerformance=false
+          locateLastPlayedItem=false
+          class=class
+          }}
         {{/if}}
         <div class="assigned-course-title">
           {{t "student-first-experience.assigned-course-title" title=activeGrade.grade}}
         </div>
-        <div class="course-map-accordion-container {{unless (and isRoute0Pending isRoute0) 'no-route0'}}">
-          {{student.class.destination.student-destination-course-accordion
-        courseData=course
-        classId=classId
-        courseId=courseId
-        isRoute0=isRoute0
-      }}
+        <div class="course-map-accordion-container {{if class.milestoneViewApplicable 'milestone'}} {{unless (and isRoute0Pending isRoute0) 'no-route0'}}">
+          {{#if class.milestoneViewApplicable}}
+            {{student.class.milestone-course-map
+              class=class
+            }}
+          {{else}}
+            {{student.class.destination.student-destination-course-accordion
+            courseData=course
+            classId=classId
+            courseId=courseId
+            isRoute0=isRoute0
+          }}
+          {{/if}}
         </div>
         <div class="study-course" {{action onMoveNext 'playNext'}}>
           {{gru-icon name="near_me"}} {{t "student-first-experience.start-studying"}}
@@ -119,7 +161,9 @@
         onRoute0Reject="onRoute0Reject"
         route0Contents=route0Contents
         index=index
+        class=class
         classData=classData
+        isRoute0Accepted=isRoute0Accepted
       }}
       {{/unless}}
     </div>
