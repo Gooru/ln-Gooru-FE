@@ -28,7 +28,7 @@ export default Ember.Component.extend({
   /**
    * @property {Number} scoreInPercentage
    */
-  scoreInPercentage: 0,
+  scoreInPercentage: null,
 
   /**
    * @property {Number} timeSpent
@@ -59,6 +59,26 @@ export default Ember.Component.extend({
       waveOffset: 0.25 // The amount to initially offset the wave. 0 = no offset. 1 = offset of one full wave.
     });
   }),
+
+  /**
+   * @property {Number} timeSpentPos
+   */
+  timeSpentPos: 200,
+
+  /**
+   * @property {Number} scorePos
+   */
+  scorePos: 120,
+
+  /**
+   * @property {Number} placeholderPos
+   */
+  placeholderPos: -1,
+
+  /**
+   * @property {String} placeholderText
+   */
+  placeholderText: null,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -169,26 +189,40 @@ export default Ember.Component.extend({
       .attr('y', 0)
       .attr('class', `fill-range-${getGradeRange(scoreInPercentage)}`);
 
-    fillGaugeElement
-      .append('text')
-      .attr('transform', `translate(${fillGaugeElementWidth / 2})`)
-      .attr('y', 120)
-      .attr('class', 'score-percentage')
-      .append('tspan')
-      .attr('text-anchor', 'middle')
-      .attr('x', 0)
-      .text(`${scoreInPercentage}%`);
+    if (scoreInPercentage) {
+      fillGaugeElement
+        .append('text')
+        .attr('transform', `translate(${fillGaugeElementWidth / 2})`)
+        .attr('y', component.get('scorePos'))
+        .attr('class', 'score-percentage')
+        .append('tspan')
+        .attr('text-anchor', 'middle')
+        .attr('x', 0)
+        .text(`${scoreInPercentage}%`);
+    }
 
     if (timeSpent !== null && timeSpent !== undefined) {
       fillGaugeElement
         .append('text')
-        .attr('y', 200)
+        .attr('y', component.get('timeSpentPos'))
         .attr('transform', `translate(${fillGaugeElementWidth / 2})`)
         .attr('class', 'total-timespent')
         .append('tspan')
         .attr('text-anchor', 'middle')
         .attr('x', 0)
         .text(`${timeSpent ? formatTime(timeSpent) : '--'}`);
+    }
+
+    if (component.get('placeholderText')) {
+      fillGaugeElement
+        .append('text')
+        .attr('y', component.get('placeholderPos'))
+        .attr('transform', `translate(${fillGaugeElementWidth / 2})`)
+        .attr('class', 'placeholder-text')
+        .append('tspan')
+        .attr('text-anchor', 'middle')
+        .attr('x', 0)
+        .text(component.get('placeholderText'));
     }
 
     let waveGroupXPosition = fillGaugeElementWidth * 2 - waveClipWidth;

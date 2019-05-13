@@ -1,0 +1,56 @@
+<div class="student-milestone-lesson-performance-container">
+  <div class="lesson-info-container" {{action "onToggleLesson"}}>
+    <div class="lesson-icon {{if lesson.performance 'started'}}">
+      <svg width="20" height="15">
+        <line class="lesson-connector" x1="10" y1="0" x2="10" y2="15" />
+      </svg>
+      <i class="icon"></i>
+      <svg width="20" height="15">
+        <line class="lesson-connector"  x1="10" y1="0" x2="10" y2="15" />
+      </svg>
+    </div>
+    <div class="title-container">
+      <div class="domain-name">{{lesson.tx_domain_name}}</div>
+      <div class="lesson-title">{{lesson.lesson_title}}</div>
+    </div>
+  </div>
+  <div class="lesson-performance-container grade-range-{{grade-range lesson.performance.scoreInPercentage}}">
+    {{if lesson.performance (concat lesson.performance.scoreInPercentage '%') '--'}}
+  </div>
+</div>
+<div class="collections-info-container {{if isExpanded 'expanded' 'collapsed'}}">
+  {{#if isLoading}}
+    {{three-bounce-spinner}}
+  {{else}}
+    {{#each collections as |collection|}}
+      <div class="collection-info-container">
+        <div class="collection-icon {{if collection.performance 'started'}}">
+          <svg width="20" height="15">
+            <line class="collection-connector" x1="10" y1="0" x2="10" y2="15" />
+          </svg>
+          <i class="icon {{collection.format}}"></i>
+          <svg width="20" height="15">
+            <line class="collection-connector" x1="10" y1="0" x2="10" y2="15" />
+          </svg>
+        </div>
+        <div class="collection-title-container">
+          {{collection.title}}
+        </div>
+        {{#if collection.performance}}
+          <div class="collection-performance-container {{collection.format}} {{if (eq collection.format 'assessment') (concat 'grade-range-' (grade-range collection.performance.scoreInPercentage))}}">
+            {{#if (eq collection.format 'assessment')}}
+              {{collection.performance.scoreInPercentage}}%
+            {{else}}
+              {{format-time collection.performance.timeSpent}}
+            {{/if}}
+          </div>
+        {{else}}
+          <div class="collection-thumbnail-container" style="background-image: url({{collection.thumbnailUrl}});">
+          </div>
+        {{/if}}
+
+      </div>
+    {{/each}}
+  {{/if}}
+
+</div>

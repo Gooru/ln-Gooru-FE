@@ -1,0 +1,152 @@
+.milestone-report.student-milestone-lesson-performance-accordion {
+  .student-milestone-lesson-performance-container {
+    display: grid;
+    grid-template-columns: 1fr 50px;
+    .lesson-info-container {
+      display: grid;
+      grid-template-columns: 55px 1fr;
+      height: inherit;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      .lesson-icon {
+        justify-self: center;
+        align-self: center;
+        display: grid;
+        .icon {
+          width: 20px;
+          height: 20px;
+          background-repeat: no-repeat;
+          background-size: 20px 20px;
+          background-image: url("../assets/gooru/images/lesson-dark-outline.svg");
+          display: block;
+          line-height: 50px;
+        }
+
+        .lesson-connector {
+          stroke: #ccc;
+          stroke-width: 2;
+        }
+
+        &.started {
+          .lesson-connector {
+            stroke: #548fe2;
+          }
+
+          .icon {
+            background-image: url("../assets/gooru/images/lesson-blue-outline.svg");
+          }
+        }
+      }
+      .title-container {
+        display: grid;
+        .domain-name,
+        .lesson-title {
+          color: #5d5d5d;
+        }
+        .domain-name {
+          font-size: 10px;
+          align-self: end;
+        }
+        .lesson-title {
+          font-size: 15px;
+          font-weight: bold;
+          line-height: 15px;
+        }
+      }
+    }
+    .lesson-performance-container {
+      width: 50px;
+      height: 50px;
+      font-size: 13px;
+      font-weight: bold;
+      color: $white;
+      text-align: center;
+      line-height: 50px;
+      border-top: 2px solid rgba(0, 0, 0, 0.1);
+
+      &.grade-range-not-started {
+        background-color: #e4e5ea;
+        color: #666;
+      }
+    }
+  }
+  .collections-info-container {
+    .collection-info-container {
+      display: grid;
+      grid-template-columns: 55px 1fr 50px;
+      height: inherit;
+      align-items: center;
+      .collection-icon {
+        justify-self: center;
+        display: grid;
+
+        .collection-connector {
+          stroke: #ccc;
+          stroke-width: 2;
+        }
+
+        .icon {
+          width: 20px;
+          height: 20px;
+          background-repeat: no-repeat;
+          background-size: 20px 20px;
+          display: block;
+          line-height: 50px;
+
+          &.assessment {
+            background-image: url("../assets/gooru/images/assessment-gray.svg");
+          }
+
+          &.collection {
+            background-image: url("../assets/gooru/images/collection_gray.svg");
+          }
+        }
+
+        &.started {
+          .collection-connector {
+            stroke: #548fe2;
+          }
+          .icon {
+            color: #548fe2;
+
+            &.assessment {
+              background-image: url("../assets/gooru/images/assessment-dark-blue.svg");
+            }
+
+            &.collection {
+              background-image: url("../assets/gooru/images/collection-dark-blue.svg");
+            }
+          }
+        }
+      }
+      .collection-title-container {
+        display: block;
+        font-size: 12px;
+        color: #5d5d5d;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        height: 50px;
+        line-height: 50px;
+      }
+      .collection-performance-container {
+        width: 50px;
+        height: 50px;
+        color: $white;
+        font-size: 13px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 50px;
+        border-top: 2px solid rgba(0, 0, 0, 0.1);
+        &.collection {
+          background-color: #e4e5ea;
+          color: #666;
+        }
+      }
+      .collection-thumbnail-container {
+        width: 50px;
+        height: 50px;
+        display: block;
+        background-size: cover;
+      }
+    }
+  }
+}
