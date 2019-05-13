@@ -11,18 +11,27 @@
       margin-bottom: 5px;
 
       .milestone-course-map-panel {
-        height: 50px;
-        background-color: #5c8fd2;
-        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
         display: inline-grid;
         width: 100%;
-        grid-template-columns: 70px 1fr 50px 60px;
         align-items: center;
         cursor: pointer;
         position: relative;
+        grid-template-columns: 1fr 60px;
+        height: 50px;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+        .milestone-info-container {
+          height: inherit;
+          background-color: #5c8fd2;
+          display: inline-grid;
+          width: 100%;
+          grid-template-columns: 70px 1fr 50px;
+          align-items: center;
+          cursor: pointer;
+          position: relative;
 
-        &.active {
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+          &.active {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+          }
         }
 
         .milestone-flag-icon {
@@ -47,31 +56,53 @@
             margin-left: 1px;
             color: #5c8fd2;
           }
-        }
 
-        .milestone-title {
-          p {
-            margin: 0;
+          .milestone-flag-icon {
             font-family: "Lato";
-            color: #fff;
+            font-size: 18px;
             font-weight: bold;
-            @include ellipsis(
-              $font-size: 15px,
-              $line-height: 1.5,
-              $lines-to-show: 1
-            );
-            width: 100%;
+            line-height: 1;
+            letter-spacing: normal;
+            text-align: center;
+            border-radius: 50%;
+            background: #fff;
+            width: 30px;
+            height: 30px;
+            align-self: center;
+            justify-self: center;
+
+            i {
+              font-size: 16px;
+              margin-top: 7px;
+              margin-left: 1px;
+              color: #5c8fd2;
+            }
           }
-        }
 
-        .milestone-caret {
-          color: #fff;
-          align-self: center;
-          height: 26px;
-          text-align: center;
+          .milestone-title {
+            p {
+              margin: 0;
+              font-family: "Lato";
+              color: #fff;
+              font-weight: bold;
+              @include ellipsis(
+                $font-size: 15px,
+                $line-height: 1.5,
+                $lines-to-show: 1
+              );
+              width: 100%;
+            }
+          }
 
-          i {
-            font-size: 30px;
+          .milestone-caret {
+            color: #fff;
+            align-self: center;
+            height: 26px;
+            text-align: center;
+
+            i {
+              font-size: 30px;
+            }
           }
         }
 
@@ -89,6 +120,7 @@
           &.grade-range-not-started {
             background: transparent;
             border-bottom: none;
+            color: #666;
           }
         }
       }

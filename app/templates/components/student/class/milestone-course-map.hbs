@@ -1,24 +1,26 @@
 <div class="milestone-course-map-container">
   {{#each milestones as | milestone index |}}
     <div class="milestone-course-map">
-      <div class="milestone-course-map-panel {{if milestone.isActive 'active'}}" {{action 'toggleMilestoneItems' milestone }}>
-        <div class="milestone-flag-icon">
-          {{gru-icon name="flag"}}
-        </div>
-        <div class="milestone-title">
-          <p>Milestone {{plus-one index}}
-            {{#if (gte milestone.performance.completedInPrecentage 0) }} ({{milestone.performance.completedInPrecentage}}% Completed) {{/if}}
-          </p>
-        </div>
-        <div class="milestone-caret">
-          {{#if milestone.isActive}}
-            {{gru-icon name="arrow_drop_up"}}
-          {{else}}
-            {{gru-icon name="arrow_drop_down"}}
-          {{/if}}
+      <div class="milestone-course-map-panel {{if milestone.isActive 'active'}}">
+        <div class="milestone-info-container"  {{action 'toggleMilestoneItems' milestone }}>
+          <div class="milestone-flag-icon">
+            {{gru-icon name="flag"}}
+          </div>
+          <div class="milestone-title">
+            <p>Milestone {{plus-one index}}
+              {{#if (gte milestone.performance.completedInPrecentage 0) }} ({{milestone.performance.completedInPrecentage}}% Completed) {{/if}}
+            </p>
+          </div>
+          <div class="milestone-caret">
+            {{#if milestone.isActive}}
+              {{gru-icon name="arrow_drop_up"}}
+            {{else}}
+              {{gru-icon name="arrow_drop_down"}}
+            {{/if}}
+          </div>
         </div>
         {{#if showPerformance}}
-          <div class="milestone-peformance grade-range-{{grade-range milestone.performance.scoreInPercentage}}">
+          <div class="milestone-peformance grade-range-{{grade-range milestone.performance.scoreInPercentage}}" {{action "onShowMilestoneReport" milestone}}>
             {{#if (gte milestone.performance.scoreInPercentage 0)}}
               {{milestone.performance.scoreInPercentage}}%
             {{else}}
@@ -154,4 +156,19 @@
   <div class="loading-spinner">
     {{three-bounce-spinner}}
   </div>
+{{/if}}
+
+{{#if isShowMilestoneReport}}
+  {{#reports.pull-up.milestone.student-milestone-report
+    showPullUp = isShowMilestoneReport
+    scoreInPercentage = selectedMilestone.performance.scoreInPercentage
+    activeMilestoneIndex = activeMilestoneIndex
+  }}
+    {{reports.pull-up.milestone.student-milestone-summary-report
+      activeMilestone = selectedMilestone
+      class = class
+      milestones = milestones
+      activeMilestoneIndex = activeMilestoneIndex
+    }}
+  {{/reports.pull-up.milestone.student-milestone-report}}
 {{/if}}
