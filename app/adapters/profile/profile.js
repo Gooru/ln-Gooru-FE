@@ -512,5 +512,19 @@ export default Ember.Object.extend({
     return {
       Authorization: `Token ${this.get('session.token-api3')}`
     };
+  },
+  loadScript: function(script) {
+    const adapter = this;
+    const namespace = 'locales';
+    const url = `${namespace}/${script}`;
+
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      url: url,
+      dataType: 'script'
+    };
+
+    return Ember.$.ajax(url, options);
   }
 });

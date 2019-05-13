@@ -16,6 +16,8 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
 
   i18n: Ember.inject.service(),
 
+  //i18nLoader: Ember.inject.service('i18n-loader'),
+
   /**
    * @type {ClassService} Service to retrieve user information
    */
@@ -95,8 +97,13 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
   beforeModel: function(transition) {
     const route = this;
 
+    // route.get('profileService').loadScript('hi/translations.js'); // This does not works and gives 404 as we have already removed the files in mail appjs
+    // current build system uses broccoli, where these options aren't there
+    // With ember > 2.14, this can be done with webpack inclusion
+
     // Below logic is used to clear the left over state of study player,
     // in order to avoid the conflict.
+
     let navigateMapService = route.get('navigateMapService');
     navigateMapService
       .getLocalStorage()

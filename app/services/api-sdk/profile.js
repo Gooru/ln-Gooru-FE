@@ -723,5 +723,9 @@ export default Ember.Service.extend({
    */
   newUser: function() {
     return this.get('store').createRecord('user/user');
+  },
+
+  loadScript: function(script) {
+    return this.get('profileAdapter').loadScript(script);
   }
 });
