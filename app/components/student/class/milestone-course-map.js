@@ -113,8 +113,8 @@ export default Ember.Component.extend({
      * Handle toggle functionality of hide/show lesson items
      * @return {Object}
      */
-    toggleLessonItems(selectedLesson) {
-      this.handleMilestoneLessonToggle(selectedLesson);
+    toggleLessonItems(lessons, selectedLesson) {
+      this.handleMilestoneLessonToggle(lessons, selectedLesson);
     },
 
     /**
@@ -367,7 +367,6 @@ export default Ember.Component.extend({
         .getCourseMilestoneLessons(courseId, milestoneId)
         .then(lessons => {
           if (!component.isDestroyed) {
-
             rescopedLessonContents.forEach(rescopedLessonId => {
               let lesson = lessons.findBy('lesson_id', rescopedLessonId);
               if (lesson) {
@@ -385,7 +384,10 @@ export default Ember.Component.extend({
               let selectedLesson = lessons.findBy('lesson_id', lessonId);
               if (selectedLesson) {
                 Ember.run.later(function() {
-                  component.handleMilestoneLessonToggle(selectedLesson);
+                  component.handleMilestoneLessonToggle(
+                    lessons,
+                    selectedLesson
+                  );
                 }, 500);
               }
             }
@@ -394,7 +396,7 @@ export default Ember.Component.extend({
     }
   },
 
-  handleMilestoneLessonToggle(selectedLesson) {
+  handleMilestoneLessonToggle(lessons, selectedLesson) {
     let component = this;
     let classId = component.get('classId');
     let unitId = selectedLesson.get('unit_id');
@@ -403,13 +405,29 @@ export default Ember.Component.extend({
     let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
     let courseId = component.get('courseId');
+
+    let selectedLessonIndex = lessons.indexOf(selectedLesson);
+    let prevLesson = lessons.objectAt(selectedLessonIndex + 1);
+    let nextLesson = lessons.objectAt(selectedLessonIndex - 1);
     if (selectedLesson.get('isActive')) {
       component.$(element).slideUp(400, function() {
         selectedLesson.set('isActive', false);
+        if (nextLesson) {
+          nextLesson.set('isNextActive', false);
+        }
+        if (prevLesson) {
+          prevLesson.set('isPrevActive', false);
+        }
       });
     } else {
       component.$(element).slideDown(400, function() {
         selectedLesson.set('isActive', true);
+        if (nextLesson) {
+          nextLesson.set('isNextActive', true);
+        }
+        if (prevLesson) {
+          prevLesson.set('isPrevActive', true);
+        }
       });
     }
     if (!selectedLesson.get('hasCollectionFetched')) {
@@ -427,6 +445,11 @@ export default Ember.Component.extend({
               }
             });
 
+            component.updateSuggestionDetails(
+              lessons,
+              selectedLesson,
+              collections
+            );
             selectedLesson.set('collections', collections);
             selectedLesson.set('hasCollectionFetched', true);
             let userCurrentLocation = component.get('userCurrentLocation');
@@ -442,6 +465,60 @@ export default Ember.Component.extend({
             }
           }
         });
+    }
+  },
+
+  updateSuggestionDetails(lessons, selectedLesson, collections) {
+    let collectionSuggestions = collections.filter(collection => {
+      let pathType = collection.get('pathType');
+      return pathType === 'system' || pathType === 'teacher';
+    });
+    if (collectionSuggestions.length > 0) {
+      collectionSuggestions.forEach(collectionSuggestion => {
+        let indexOfCollection = collections.indexOf(collectionSuggestion);
+        if (indexOfCollection === 0) {
+          selectedLesson.set(
+            'firstCollHasSuggsType',
+            collectionSuggestion.get('pathType')
+          );
+        }
+        if (collections.length === indexOfCollection + 1) {
+          let selectedLessonIndex = lessons.indexOf(selectedLesson);
+          let nextLesson = lessons.objectAt(selectedLessonIndex + 1);
+          if (nextLesson) {
+            nextLesson.set(
+              'prevLeCollHasSuggsType',
+              collectionSuggestion.get('pathType')
+            );
+          }
+        }
+        let prevCollection = collections.objectAt(indexOfCollection - 1);
+        if (prevCollection) {
+          if (prevCollection.get('pathId') > 0) {
+            collectionSuggestion.set(
+              'prevCollHasSuggsType',
+              prevCollection.get('pathType')
+            );
+          }
+          prevCollection.set(
+            'nextCollHasSuggsType',
+            collectionSuggestion.get('pathType')
+          );
+        }
+        let nextCollection = collections.objectAt(indexOfCollection + 1);
+        if (nextCollection) {
+          if (nextCollection.get('pathId') > 0) {
+            collectionSuggestion.set(
+              'nextCollHasSuggsType',
+              nextCollection.get('pathType')
+            );
+          }
+          nextCollection.set(
+            'prevCollHasSuggsType',
+            collectionSuggestion.get('pathType')
+          );
+        }
+      });
     }
   },
 

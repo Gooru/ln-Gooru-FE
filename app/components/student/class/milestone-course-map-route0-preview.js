@@ -40,12 +40,32 @@ export default Ember.Component.extend({
    */
   courseId: Ember.computed.alias('class.courseId'),
 
+  /**
+   * Maintains the state of route0 preview expand or collapse
+   * @type {Boolean}
+   */
+  isRoute0PreviewExpand: false,
+
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
     updateRoute0: function(status) {
       this.updateRoute0(status);
+    },
+
+    showRoute0Preview() {
+      let element = '.route0-preview-container';
+      let component = this;
+      if (component.get('isRoute0PreviewExpand')) {
+        component.$(element).slideUp(400, function() {
+          component.set('isRoute0PreviewExpand', false);
+        });
+      } else {
+        component.$(element).slideDown(400, function() {
+          component.set('isRoute0PreviewExpand', true);
+        });
+      }
     }
   },
 
@@ -61,7 +81,6 @@ export default Ember.Component.extend({
       status: status
     };
     let route0 = component.get('route0');
-
     component
       .get('route0Service')
       .updateRouteAction(data)

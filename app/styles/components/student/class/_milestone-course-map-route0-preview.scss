@@ -19,6 +19,7 @@
       padding-top: 15px;
       padding-bottom: 15px;
       border-bottom: 2px solid #ccc;
+      cursor: pointer;
 
       .milestone-route0-suggest-icon {
         i {
@@ -75,6 +76,7 @@
     }
 
     .route0-preview-container {
+      display: none;
       .route0-preview-author-info-container {
         padding-top: 10px;
         padding-bottom: 10px;

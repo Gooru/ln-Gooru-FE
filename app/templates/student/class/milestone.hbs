@@ -6,7 +6,7 @@
   </div>
 </div>
 
-{{#if route0Applicable}}
+{{#if (and route0Applicable (or showRoute0SuggestionPreview showRoute0Suggestion))}}
   <h5 class="pre-study-title hidden-xs">{{t 'class.overview.pre-study-title'}}</h5>
   <div class="milestone-course-map-view-route0">
     {{#if showRoute0Suggestion}}

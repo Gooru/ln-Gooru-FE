@@ -425,48 +425,6 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function getRescopedContents
-   * Method to get rescoped contents
-   */
-  getRescopedContents() {
-    let component = this;
-    let classId = component.get('classId');
-    let courseId = component.get('courseId');
-    let filter = {
-      classId,
-      courseId
-    };
-
-    return component.get('rescopeService').getSkippedContents(filter);
-  },
-
-  /**
-   * Merge all  the collection content family, rescoped ids
-   * @type {Array}
-   */
-  getRescopeCollectionIds() {
-    let component = this;
-    let collectionIds = Ember.A([]);
-    let rescopedCollectionContents = component.get(
-      'rescopedContents.collections'
-    );
-    let rescopedCollectionsExternalContents = component.get(
-      'rescopedContents.collectionsExternal'
-    );
-    let rescopedAssessmentsExternalContents = component.get(
-      'rescopedContents.assessmentsExternal'
-    );
-    let rescopedAssessmentsContents = component.get(
-      'rescopedContents.assessments'
-    );
-    collectionIds.pushObjects(rescopedCollectionContents);
-    collectionIds.pushObjects(rescopedAssessmentsContents);
-    collectionIds.pushObjects(rescopedCollectionsExternalContents);
-    collectionIds.pushObjects(rescopedAssessmentsExternalContents);
-    return collectionIds;
-  },
-
-  /**
    * Navigates to collection
    * @param {string} classId
    * @param {string} courseId
