@@ -206,25 +206,28 @@ export default Ember.Component.extend({
       filters.fw_code = fwkCode;
     }
 
-    Ember.RSVP.hash({
-      milestones: component
-        .get('courseService')
-        .getCourseMilestones(courseId, fwCode),
-      rescopedContents: component.getRescopedContents(),
-      grades: taxonomyService.fetchGradesBySubject(filters)
-    }).then(({ milestones, rescopedContents, grades }) => {
-      if (!component.isDestroyed) {
-        let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
-          grades,
-          milestones
-        );
-        component.set('milestones', milestoneData);
-        component.set('rescopedContents', rescopedContents);
-        if (showPerformance) {
-          component.fetchMilestonePerformance();
-        }
-        if (locateLastPlayedItem) {
-          component.identifyUserLocationAndLocate();
+    Ember.RSVP
+      .hash({
+        milestones: component
+          .get('courseService')
+          .getCourseMilestones(courseId, fwCode),
+        rescopedContents: component.getRescopedContents(),
+        grades: taxonomyService.fetchGradesBySubject(filters)
+      })
+      .then(({ milestones, rescopedContents, grades }) => {
+        if (!component.isDestroyed) {
+          let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
+            grades,
+            milestones
+          );
+          component.set('milestones', milestoneData);
+          component.set('rescopedContents', rescopedContents);
+          if (showPerformance) {
+            component.fetchMilestonePerformance();
+          }
+          if (locateLastPlayedItem) {
+            component.identifyUserLocationAndLocate();
+          }
         }
       });
   },
