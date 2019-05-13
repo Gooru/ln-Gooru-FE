@@ -46,6 +46,12 @@ export default Ember.Component.extend({
    */
   isRoute0PreviewExpand: false,
 
+  /**
+   * Maintains the state whether we need to show chart or not.
+   * @type {Boolean}
+   */
+  showChart: true,
+
   // -------------------------------------------------------------------------
   // Actions
 
