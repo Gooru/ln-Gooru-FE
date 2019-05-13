@@ -49,6 +49,12 @@ export default Ember.Component.extend({
    */
   rescopeService: Ember.inject.service('api-sdk/rescope'),
 
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -191,25 +197,34 @@ export default Ember.Component.extend({
     let fwCode = component.get('fwCode');
     let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
+    let taxonomyService = component.get('taxonomyService');
+    let filters = {
+      subject: component.get('class.preference.subject')
+    };
+    let fwkCode = component.get('class.preference.framework');
+    if (fwkCode) {
+      filters.fw_code = fwkCode;
+    }
 
-    Ember.RSVP
-      .hash({
-        milestones: component
-          .get('courseService')
-          .getCourseMilestones(courseId, fwCode),
-        rescopedContents: component.getRescopedContents()
-      })
-      .then(({ milestones, rescopedContents }) => {
-        if (!component.isDestroyed) {
-          component.set('milestones', milestones);
-          component.set('rescopedContents', rescopedContents);
-          if (showPerformance) {
-            component.fetchMilestonePerformance();
-          }
-          if (locateLastPlayedItem) {
-            component.identifyUserLocationAndLocate();
-          }
-          component.set('isLoading', false);
+    Ember.RSVP.hash({
+      milestones: component
+        .get('courseService')
+        .getCourseMilestones(courseId, fwCode),
+      rescopedContents: component.getRescopedContents(),
+      grades: taxonomyService.fetchGradesBySubject(filters)
+    }).then(({ milestones, rescopedContents, grades }) => {
+      if (!component.isDestroyed) {
+        let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
+          grades,
+          milestones
+        );
+        component.set('milestones', milestoneData);
+        component.set('rescopedContents', rescopedContents);
+        if (showPerformance) {
+          component.fetchMilestonePerformance();
+        }
+        if (locateLastPlayedItem) {
+          component.identifyUserLocationAndLocate();
         }
       });
   },
@@ -592,6 +607,41 @@ export default Ember.Component.extend({
     };
 
     return component.get('rescopeService').getSkippedContents(filter);
+  },
+
+  /**
+   * This Method is responsible for milestone display based on students class grade.
+   * @return {Array}
+   */
+  renderMilestonesBasedOnStudentGradeRange(grades, milestones) {
+    let component = this;
+    let gradeBounds = component.get('class.memberGradeBounds');
+    let studentId = component.get('session.userId');
+    let gradeBound = gradeBounds.findBy(studentId);
+    let milestoneData = Ember.A([]);
+    let studentGradeBound = Ember.Object.create(gradeBound.get(studentId));
+    let classGradeUpperBound = component.get('class.gradeUpperBound');
+    component.set('studentGradeBound', studentGradeBound);
+    component.set('grades', grades);
+    let gradeLowerBound = studentGradeBound.get('grade_lower_bound');
+    let gradeUpperBound = studentGradeBound.get('grade_upper_bound');
+    let startGrade = grades.findBy('id', gradeLowerBound);
+    let startGradeIndex = grades.indexOf(startGrade);
+    let endGrade = grades.findBy('id', gradeUpperBound);
+    let endGradeIndex = grades.indexOf(endGrade);
+    let studentGrades = grades.slice(startGradeIndex, endGradeIndex + 1);
+    let classGrade = grades.findBy('id', classGradeUpperBound);
+    studentGrades.forEach(studentGrade => {
+      let gradeId = studentGrade.get('id');
+      let milestone = milestones.findBy('grade_id', gradeId);
+      if (milestone) {
+        if (studentGrade.get('sequence') > classGrade.get('sequence')) {
+          milestone.set('higherThanClassGrade', true);
+        }
+        milestoneData.pushObject(milestone);
+      }
+    });
+    return milestoneData;
   },
 
   /**
