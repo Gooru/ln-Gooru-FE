@@ -314,6 +314,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           aClass.set('owner', members.get('owner'));
           aClass.set('collaborators', members.get('collaborators'));
           aClass.set('members', members.get('members'));
+          aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
           aClass.set('currentLocation', currentLocation);
           aClass.set(
             'competencyStats',
