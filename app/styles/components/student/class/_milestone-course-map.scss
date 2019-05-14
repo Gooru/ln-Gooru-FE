@@ -199,6 +199,24 @@
                   }
                 }
               }
+
+              &.first-path-.prev-col-path-teacher {
+                .lesson-icon-container {
+                  .lesson-icon-upward-line {
+                    left: 26px;
+
+                    svg {
+                      line {
+                        display: none;
+                      }
+
+                      .path-right {
+                        display: block;
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
 
@@ -316,11 +334,13 @@
                   background-color: rgba(204, 204, 204, 0.6);
                 }
 
-                &.prev-coll-path-teacher.next-coll-path-system.path-teacher,
+                &.prev-coll-path-teacher.next-coll-path-.path-teacher,
                 &.prev-coll-path-teacher.next-coll-path-teacher.path-teacher,
-                &.prev-coll-path-teacher.next-coll-path-.path-teacher {
+                &.prev-coll-path-teacher.next-coll-path-system.path-teacher {
                   .collection-icon-container {
                     .collection-icon-upward-line {
+                      left: 28px;
+
                       svg {
                         line {
                           stroke: #ec8f42;
@@ -331,9 +351,64 @@
                 }
 
                 &.prev-coll-path-system.next-coll-path-.path-teacher,
-                &.prev-coll-path-system.next-coll-path-system.path-,
-                &.prev-coll-path-system.next-coll-path-teacher.path-teacher,
-                &.prev-coll-path-system.next-coll-path-system.path-teacher {
+                &.prev-coll-path-system.next-coll-path-system.path-teacher,
+                &.prev-coll-path-system.next-coll-path-teacher.path-teacher {
+                  .collection-icon-container {
+                    .collection-icon-upward-line {
+                      left: 26px;
+
+                      svg {
+                        line {
+                          display: none;
+                        }
+
+                        .path-left {
+                          display: block;
+                        }
+                      }
+                    }
+                  }
+                }
+
+                &.prev-coll-path-.next-coll-path-teacher.path-teacher,
+                &.prev-coll-path-.next-coll-path-system.path-teacher {
+                  .collection-icon-container {
+                    .collection-icon-upward-line {
+                      left: 23px;
+
+                      svg {
+                        line {
+                          display: none;
+                        }
+
+                        .path-left {
+                          display: block;
+                        }
+                      }
+                    }
+                  }
+                }
+
+                &.prev-coll-path-teacher.next-coll-path-.path- {
+                  .collection-icon-container {
+                    .collection-icon-upward-line {
+                      left: 26px;
+
+                      svg {
+                        line {
+                          display: none;
+                        }
+
+                        .path-right {
+                          display: block;
+                        }
+                      }
+                    }
+                  }
+                }
+
+                &.prev-coll-path-system.next-coll-path-.path-,
+                &.prev-coll-path-system.next-coll-path-system.path- {
                   .collection-icon-container {
                     .collection-icon-upward-line {
                       left: 30px;
@@ -352,6 +427,7 @@
                 }
 
                 &.prev-coll-path-system.next-coll-path-.path-system,
+                &.prev-coll-path-system.next-coll-path-system.path-system,
                 &.prev-coll-path-system.next-coll-path-teacher.path-system {
                   .collection-icon-container {
                     .collection-icon-upward-line {
@@ -384,14 +460,18 @@
                   .collection-icon.path-system {
                     margin-left: 15px;
                   }
+
+                  .collection-icon.path-teacher {
+                    margin-left: -15px;
+                  }
                 }
 
                 &.prev-coll-path-.next-coll-path-.path-system,
-                &.prev-coll-path-teacher.next-coll-path-.path-system,
                 &.prev-coll-path-.next-coll-path-system.path-system,
-                &.prev-coll-path-teacher.next-coll-path-teacher.path-system,
+                &.prev-coll-path-.next-coll-path-teacher.path-system,
+                &.prev-coll-path-teacher.next-coll-path-.path-system,
                 &.prev-coll-path-teacher.next-coll-path-system.path-system,
-                &.prev-coll-path-.next-coll-path-teacher.path-system {
+                &.prev-coll-path-teacher.next-coll-path-teacher.path-system {
                   .collection-icon-container {
                     .collection-icon-upward-line {
                       line {
