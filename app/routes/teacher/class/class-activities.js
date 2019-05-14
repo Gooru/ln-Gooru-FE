@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 
 export default Ember.Route.extend({
   // -------------------------------------------------------------------------
@@ -89,6 +91,7 @@ export default Ember.Route.extend({
     controller.set('classActivities', Ember.A([]));
     controller.set('month', null);
     controller.set('year', null);
+    controller.set('selectedDate', null);
     controller.set('isShowAddData', false);
   }
 });

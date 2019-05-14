@@ -295,6 +295,20 @@ export default Ember.Component.extend({
     }
   },
 
+  doHighlightFirstDayOfMonth() {
+    let component = this;
+    let dateEles = component.$(
+      '#ca-datepicker .datepicker .datepicker-days  .table-condensed tbody tr td'
+    );
+    dateEles.each(function(index, dateEle) {
+      let dateElement = component.$(dateEle);
+      let day = dateElement.html();
+      if (day === '1') {
+        dateElement.addClass('active');
+      }
+    });
+  },
+
   doHighlightActivity() {
     let component = this;
     let highlightActivities = component.get('highlightActivities');
@@ -308,6 +322,9 @@ export default Ember.Component.extend({
         let dateElement = component.$(dateEle);
         if (!(dateElement.hasClass('new') || dateElement.hasClass('old'))) {
           let day = dateElement.html();
+          if (day.length === 1) {
+            day = `0${day}`;
+          }
           let activity = activities.findBy('day', day);
           if (activity) {
             dateElement.removeClass('no-activities');
