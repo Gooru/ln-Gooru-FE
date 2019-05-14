@@ -2,16 +2,20 @@ import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
   teacherFetch(data) {
-    // data = data ? data : { classId: '', limit: 10, boundary: null };
     return data;
   },
 
   studentFetch(data) {
-    //data = data ? data : { classId: '', limit: 10, boundary: null };
     return data;
   },
 
   normalizeFetch: data => {
+    data.notifications.forEach(d => {
+      if (d.milestoneId) {
+        d.ctxMilestoneId = d.milestoneId;
+        delete d.milestoneId;
+      }
+    });
     return data;
   },
 

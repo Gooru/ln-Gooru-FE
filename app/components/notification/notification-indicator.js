@@ -126,6 +126,7 @@ export default Ember.Component.extend({
               minScore: 0,
               collectionSource: 'course_map',
               isStudyPlayer: true,
+              milestoneId: 0,
               pathType: '',
               isNotification: true
             }
