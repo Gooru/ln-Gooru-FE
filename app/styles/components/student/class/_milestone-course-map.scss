@@ -170,6 +170,9 @@
             &.show-all-rescoped-content {
               display: block;
             }
+            &.class-grade-milestone {
+              display: block;
+            }
           }
 
           &.active {
@@ -327,6 +330,9 @@
                 display: none;
 
                 &.show-all-rescoped-content {
+                  display: block;
+                }
+                &.class-grade-milestone {
                   display: block;
                 }
               }
