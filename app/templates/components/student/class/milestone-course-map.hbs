@@ -102,7 +102,7 @@
                               {{/if}}
                             </div>
                             {{#if (and showPerformance collection.performance) }}
-                              <div class="collection-peformance format-{{collection.format}} grade-range-{{grade-range collection.performance.scoreInPercentage}}">
+                              <div class="collection-peformance format-{{collection.format}} grade-range-{{grade-range collection.performance.scoreInPercentage}}" {{action "onShowStudentMilestoneCollectionReport" lesson collection}}>
                                 {{#if collection.performance}}
                                   {{#if (or (eq collection.format 'assessment') (eq collection.format 'assessment-external'))}}
                                     {{collection.performance.scoreInPercentage}}%
@@ -169,6 +169,27 @@
       class = class
       milestones = milestones
       activeMilestoneIndex = activeMilestoneIndex
+      rescopedContents = rescopedContents
     }}
   {{/reports.pull-up.milestone.student-milestone-report}}
+{{/if}}
+
+{{#if isShowStudentCollectionReport}}
+  {{
+    class.gru-report-panel
+    showPullUp=isShowStudentCollectionReport
+    reportData=studentCollectionReportContext
+    model=studentCollectionReportContext.lesson
+    isStudent=true
+  }}
+{{/if}}
+
+{{#if isShowStudentExternalAssessmentReport}}
+  {{
+    reports.pull-up.student-external-assessment-report
+    showPullUp=isShowStudentExternalAssessmentReport
+    reportData=studentCollectionReportContext
+    showPullUp=isShowStudentExternalAssessmentReport
+    isStudent=true
+  }}
 {{/if}}

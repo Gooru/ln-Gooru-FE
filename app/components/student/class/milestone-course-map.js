@@ -113,6 +113,16 @@ export default Ember.Component.extend({
    */
   activeMilestoneIndex: 1,
 
+  /**
+   * @property {Object} rescopedContents
+   */
+  rescopedContents: null,
+
+  /**
+   * @property {UUID} userId
+   */
+  userId: Ember.computed.alias('session.userId'),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -167,6 +177,34 @@ export default Ember.Component.extend({
         component.get('milestones').indexOf(milestone)
       );
       component.set('isShowMilestoneReport', true);
+    },
+
+    //Action triggered when click on collection performance
+    onShowStudentMilestoneCollectionReport(lesson, collection) {
+      const component = this;
+      let studentCollectionReportContext = {
+        userId: component.get('userId'),
+        classId: component.get('classId'),
+        courseId: component.get('courseId'),
+        unitId: lesson.get('unit_id'),
+        lessonId: lesson.get('lesson_id'),
+        collectionId: collection.get('id'),
+        type: collection.get('format'),
+        lesson,
+        isStudent: true,
+        isTeacher: false,
+        collection
+      };
+      let reportType = collection.get('format');
+      if (reportType === 'assessment-external') {
+        component.set('isShowStudentExternalAssessmentReport', true);
+      } else {
+        component.set('isShowStudentCollectionReport', true);
+      }
+      component.set(
+        'studentCollectionReportContext',
+        studentCollectionReportContext
+      );
     }
   },
 
@@ -205,13 +243,16 @@ export default Ember.Component.extend({
     if (fwkCode) {
       filters.fw_code = fwkCode;
     }
+    let rescopedContents = component.get('rescopedContents');
 
     Ember.RSVP
       .hash({
         milestones: component
           .get('courseService')
           .getCourseMilestones(courseId, fwCode),
-        rescopedContents: component.getRescopedContents(),
+        rescopedContents: rescopedContents
+          ? rescopedContents
+          : component.getRescopedContents(),
         grades: taxonomyService.fetchGradesBySubject(filters)
       })
       .then(({ milestones, rescopedContents, grades }) => {
@@ -403,7 +444,6 @@ export default Ember.Component.extend({
         selectedMilestone.set('isActive', true);
       });
     }
-
     let rescopedLessonContents = component.get('rescopedContents.lessons');
 
     if (!component.get('hasLessonFetched')) {
@@ -608,7 +648,6 @@ export default Ember.Component.extend({
       classId,
       courseId
     };
-
     return component.get('rescopeService').getSkippedContents(filter);
   },
 

@@ -11,6 +11,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   route0Service: Ember.inject.service('api-sdk/route0'),
 
+  /**
+   * rescope service to fetch rescope contents
+   */
+  rescopeService: Ember.inject.service('api-sdk/rescope'),
+
   // -------------------------------------------------------------------------
   // Methods
   beforeModel() {
@@ -43,16 +48,21 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     const course = route.modelFor('student.class').course;
     const isRoute0Applicable = currentClass.get('route0Applicable');
     let route0Promise = Ember.RSVP.resolve({});
+    const courseIdContext = {
+      courseId: currentClass.courseId,
+      classId: currentClass.id
+    };
     if (isRoute0Applicable) {
-      route0Promise = route.get('route0Service').fetchInClass({
-        courseId: currentClass.courseId,
-        classId: currentClass.id
-      });
+      route0Promise = route.get('route0Service').fetchInClass(courseIdContext);
     }
+    let rescopePromise = route
+      .get('rescopeService')
+      .getSkippedContents(courseIdContext);
     return Ember.RSVP.hash({
       currentClass: currentClass,
       course: course,
-      route0: route0Promise
+      route0: route0Promise,
+      rescopedContents: rescopePromise
     });
   },
 
@@ -65,6 +75,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('class', model.currentClass);
     controller.set('route0', model.route0);
     controller.set('course', model.course);
+    controller.set('rescopedContents', model.rescopedContents);
     controller.get('studentClassController').selectMenuItem('course-map');
   }
 });

@@ -151,6 +151,11 @@ export default Ember.Component.extend({
     );
   }),
 
+  /**
+   * @property {Array} rescopedCollectionIds
+   */
+  rescopedCollectionIds: Ember.A([]),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -163,9 +168,11 @@ export default Ember.Component.extend({
     if (!activeMilestone.get('lessons')) {
       component.fetchMilestoneLessons().then(function() {
         component.loadMilestoneReportPerformanceData();
+        component.parseRescopedContents();
       });
     } else {
       component.loadMilestoneReportPerformanceData();
+      component.parseRescopedContents();
     }
   },
 
@@ -275,17 +282,71 @@ export default Ember.Component.extend({
   parseLessonsPerformanceTimespent(lessonsPerformance) {
     const component = this;
     let milestone = component.get('activeMilestone');
+    let lessons = milestone.get('lessons');
     let milestoneTimespent = 0;
     if (lessonsPerformance) {
       if (!component.isDestroyed) {
         lessonsPerformance.map(lessonPerformance => {
           let lessonTimespent = lessonPerformance.get('performance.timeSpent');
+          let lessonData = lessons.findBy(
+            'lesson_id',
+            lessonPerformance.get('lessonId')
+          );
+          if (lessonData.get('performance')) {
+            lessonData.set('performance.timeSpent', lessonTimespent);
+          } else {
+            lessonData.set(
+              'performance',
+              Ember.Object.create({ timeSpent: lessonTimespent })
+            );
+          }
           milestoneTimespent += lessonTimespent;
         });
       }
     }
     if (!component.isDestroyed) {
       milestone.set('performance.timeSpent', milestoneTimespent);
+    }
+  },
+
+  /**
+   * @function parseRescopedContents
+   */
+  parseRescopedContents() {
+    const component = this;
+    let rescopedContents = component.get('rescopedContents');
+    if (rescopedContents) {
+      let milestoneLessons = component.get('activeMilestone.lessons');
+      let rescopedLessons = rescopedContents.lessons;
+      if (!component.isDestroyed) {
+        rescopedLessons.map(rescopedLesson => {
+          let milestoneLesson = milestoneLessons.findBy(
+            'lesson_id',
+            rescopedLesson
+          );
+          if (milestoneLesson) {
+            milestoneLesson.set('isRescopedLesson', true);
+          }
+        });
+      }
+    }
+    component.extractRescopedCollections();
+  },
+
+  /**
+   * @function extractRescopedCollections
+   * Method to extract all content type ids which is rescoped
+   */
+  extractRescopedCollections() {
+    const component = this;
+    let rescopedContents = component.get('rescopedContents');
+    let rescopedCollectionIds = Ember.A([]);
+    rescopedCollectionIds.pushObjects(rescopedContents.assessments);
+    rescopedCollectionIds.pushObjects(rescopedContents.collections);
+    rescopedCollectionIds.pushObjects(rescopedContents.assessmentsExternal);
+    rescopedCollectionIds.pushObjects(rescopedContents.collectionsExternal);
+    if (!component.isDestroyed) {
+      component.set('rescopedCollectionIds', rescopedCollectionIds);
     }
   }
 });
