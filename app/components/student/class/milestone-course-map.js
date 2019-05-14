@@ -269,6 +269,7 @@ export default Ember.Component.extend({
           if (locateLastPlayedItem) {
             component.identifyUserLocationAndLocate();
           }
+          component.set('isLoading', false);
         }
       });
   },
@@ -530,13 +531,15 @@ export default Ember.Component.extend({
               }
             });
 
+            selectedLesson.set('collections', collections);
+            selectedLesson.set('hasCollectionFetched', true);
+
             component.updateSuggestionDetails(
               lessons,
               selectedLesson,
               collections
             );
-            selectedLesson.set('collections', collections);
-            selectedLesson.set('hasCollectionFetched', true);
+
             let userCurrentLocation = component.get('userCurrentLocation');
             if (locateLastPlayedItem && userCurrentLocation) {
               let collectionId = userCurrentLocation.get('collectionId');
@@ -673,11 +676,11 @@ export default Ember.Component.extend({
     let endGradeIndex = grades.indexOf(endGrade);
     let studentGrades = grades.slice(startGradeIndex, endGradeIndex + 1);
     let classGrade = grades.findBy('id', classGradeUpperBound);
-    studentGrades.forEach(studentGrade => {
-      let gradeId = studentGrade.get('id');
-      let milestone = milestones.findBy('grade_id', gradeId);
-      if (milestone) {
-        if (studentGrade.get('sequence') > classGrade.get('sequence')) {
+    milestones.forEach(milestone => {
+      let gradeId = milestone.get('grade_id');
+      let grade = studentGrades.findBy('id', gradeId);
+      if (grade) {
+        if (grade.get('sequence') > classGrade.get('sequence')) {
           milestone.set('higherThanClassGrade', true);
         }
         milestoneData.pushObject(milestone);
