@@ -161,6 +161,17 @@
         }
 
         .milestone-course-map-lesson {
+          &.rescope {
+            .milestone-course-map-lesson-panel {
+              background-color: rgba(204, 204, 204, 0.6);
+            }
+            display: none;
+
+            &.show-all-rescoped-content {
+              display: block;
+            }
+          }
+
           &.active {
             .milestone-course-map-lesson-panel {
               box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
@@ -229,10 +240,6 @@
             align-items: center;
             border-bottom: 1px solid #e3e5ea;
             cursor: pointer;
-
-            &.rescope {
-              background-color: rgba(204, 204, 204, 0.6);
-            }
 
             &.has-activity {
               .lesson-icon-container {
@@ -313,6 +320,17 @@
             }
 
             .milestone-course-map-collection {
+              &.rescope {
+                .milestone-course-map-collection-panel {
+                  background-color: rgba(204, 204, 204, 0.6);
+                }
+                display: none;
+
+                &.show-all-rescoped-content {
+                  display: block;
+                }
+              }
+
               &:last-child {
                 .milestone-course-map-collection-panel {
                   border-bottom: 1px solid #e3e5ea;
@@ -330,13 +348,9 @@
                   grid-template-columns: 70px 1fr 50px 60px;
                 }
 
-                &.rescope {
-                  background-color: rgba(204, 204, 204, 0.6);
-                }
-
                 &.prev-coll-path-teacher.next-coll-path-.path-teacher,
-                &.prev-coll-path-teacher.next-coll-path-teacher.path-teacher,
-                &.prev-coll-path-teacher.next-coll-path-system.path-teacher {
+                &.prev-coll-path-teacher.next-coll-path-system.path-teacher,
+                &.prev-coll-path-teacher.next-coll-path-teacher.path-teacher {
                   .collection-icon-container {
                     .collection-icon-upward-line {
                       left: 28px;
@@ -370,8 +384,8 @@
                   }
                 }
 
-                &.prev-coll-path-.next-coll-path-teacher.path-teacher,
-                &.prev-coll-path-.next-coll-path-system.path-teacher {
+                &.prev-coll-path-.next-coll-path-system.path-teacher,
+                &.prev-coll-path-.next-coll-path-teacher.path-teacher {
                   .collection-icon-container {
                     .collection-icon-upward-line {
                       left: 23px;

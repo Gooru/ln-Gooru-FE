@@ -1,7 +1,10 @@
 <div class="bar-charts" data-content="{{performancePercentage}}% Completed">
   <div class="completion-chart">
     <div class="start-point">{{gru-icon name="stars"}}</div>
-    {{charts/gru-x-bar-chart data=barChartData mileStone=mileStone mileStoneHandler=(action 'mileStoneHandler')  }}
+    {{charts/gru-x-bar-chart
+      data=barChartData
+      mileStone=mileStone
+      mileStoneHandler=(action 'mileStoneHandler')  }}
     <div class="destination-point">{{gru-icon name="place"}}</div>
   </div>
 </div>
@@ -14,7 +17,7 @@
         class=class
       }}
     {{else}}
-        {{student.class.milestone-course-map-route0-preview
+      {{student.class.milestone-course-map-route0-preview
           class=class
           route0=route0
           course=course
@@ -23,8 +26,23 @@
   </div>
 {{/if}}
 
-<h2>Your assigned course</h2>
+<h5>{{t 'class.overview.assigned-course'}}</h5>
+<div class="rescope-content-preview">
+  <div class="rescope-content-preview-msg">
+    {{t 'class.overview.course-map.rescope-info'}}
+  </div>
+  <div class="show-completed-course">
+    {{t 'class.overview.course-map.rescope-toggle'}}
+  </div>
+  <div class="show-completed-course-btn">
+    {{gru-toggle-button
+      isChecked=showAllRescopedContent
+      onToggleButton="onToggleRescope" }}
+  </div>
+</div>
 
 <div class="milestone-course-map-view">
-  {{student.class.milestone-course-map class=class}}
+  {{student.class.milestone-course-map
+    showAllRescopedContent=showAllRescopedContent
+    class=class}}
 </div>
