@@ -391,7 +391,7 @@ export default Ember.Component.extend({
       Object.assign(
         notndetail,
         component.get('notificationModel') &&
-          component.get('notificationModel').notifications
+        component.get('notificationModel').notifications
           ? component.get('notificationModel').notifications
           : {}
       );

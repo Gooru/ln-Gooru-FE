@@ -40,6 +40,31 @@ export default Ember.Component.extend({
       } else {
         component.lessonAccordionToggleHandler();
       }
+    },
+
+    //Action triggered when click on collection performance
+    onOpenCollectionReport(collection) {
+      const component = this;
+      let collectionReportContext = {
+        userId: component.get('userId'),
+        classId: component.get('classId'),
+        courseId: component.get('courseId'),
+        unitId: component.get('unitId'),
+        lessonId: component.get('lessonId'),
+        collectionId: collection.get('id'),
+        type: collection.get('format'),
+        lesson: component.get('lesson'),
+        isStudent: true,
+        isTeacher: false,
+        collection
+      };
+      let reportType = collection.get('format');
+      if (reportType === 'assessment-external') {
+        component.set('isShowStudentExternalAssessmentReport', true);
+      } else {
+        component.set('isShowCollectionReport', true);
+      }
+      component.set('collectionReportContext', collectionReportContext);
     }
   },
 
@@ -70,6 +95,27 @@ export default Ember.Component.extend({
    * @property {Boolean} isExpanded
    */
   isExpanded: false,
+
+  /**
+   * @property {Boolean} isRescopedLesson
+   */
+  isRescopedLesson: Ember.computed(
+    'lesson.isRescopedLesson',
+    'lesson.performance',
+    function() {
+      const component = this;
+      const isRescopedLesson = component.get('lesson.isRescopedLesson');
+      const isLessonPerformed =
+        component.get('lesson.isPerformed') ||
+        component.get('lesson.performance');
+      return isRescopedLesson && !isLessonPerformed;
+    }
+  ),
+
+  /**
+   * @property {Array} rescopedCollectionIds
+   */
+  rescopedCollectionIds: Ember.A([]),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -103,6 +149,7 @@ export default Ember.Component.extend({
                 collectionsPerformance.concat(assessmentsPerformance)
               )
             );
+            component.parseRescopedCollections(collections);
             component.set('isLoading', false);
           }
         }
@@ -164,9 +211,24 @@ export default Ember.Component.extend({
           'performance',
           collectionPerformance.get('performance')
         );
+        component.set('lesson.isPerformed', true);
       });
     }
     return collections;
+  },
+
+  /**
+   * @function parseRescopedCollections
+   */
+  parseRescopedCollections(collections) {
+    const component = this;
+    let rescopedCollectionIds = component.get('rescopedCollectionIds');
+    rescopedCollectionIds.map(collectionId => {
+      let collection = collections.findBy('id', collectionId);
+      if (collection) {
+        collection.set('isRescopedCollection', true);
+      }
+    });
   },
 
   /**

@@ -1,6 +1,6 @@
-<div class="student-milestone-lesson-performance-container">
+<div class="student-milestone-lesson-performance-container {{if isRescopedLesson 'hidden'}}">
   <div class="lesson-info-container" {{action "onToggleLesson"}}>
-    <div class="lesson-icon {{if lesson.performance 'started'}}">
+    <div class="lesson-icon {{if (or lesson.performance lesson.isPerformed) 'started'}}">
       <svg width="20" height="15">
         <line class="lesson-connector" x1="10" y1="0" x2="10" y2="15" />
       </svg>
@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="lesson-performance-container grade-range-{{grade-range lesson.performance.scoreInPercentage}}">
-    {{if lesson.performance (concat lesson.performance.scoreInPercentage '%') '--'}}
+    {{if lesson.performance.scoreInPercentage (concat lesson.performance.scoreInPercentage '%') '--'}}
   </div>
 </div>
 <div class="collections-info-container {{if isExpanded 'expanded' 'collapsed'}}">
@@ -23,7 +23,7 @@
     {{three-bounce-spinner}}
   {{else}}
     {{#each collections as |collection|}}
-      <div class="collection-info-container">
+      <div class="collection-info-container {{if (and collection.isRescopedCollection (not collection.performance)) 'hidden'}}">
         <div class="collection-icon {{if collection.performance 'started'}}">
           <svg width="20" height="15">
             <line class="collection-connector" x1="10" y1="0" x2="10" y2="15" />
@@ -37,7 +37,7 @@
           {{collection.title}}
         </div>
         {{#if collection.performance}}
-          <div class="collection-performance-container {{collection.format}} {{if (eq collection.format 'assessment') (concat 'grade-range-' (grade-range collection.performance.scoreInPercentage))}}">
+          <div class="collection-performance-container {{collection.format}} {{if (eq collection.format 'assessment') (concat 'grade-range-' (grade-range collection.performance.scoreInPercentage))}}" {{action "onOpenCollectionReport" collection}}>
             {{#if (eq collection.format 'assessment')}}
               {{collection.performance.scoreInPercentage}}%
             {{else}}
@@ -54,3 +54,23 @@
   {{/if}}
 
 </div>
+
+{{#if isShowCollectionReport}}
+  {{
+    class.gru-report-panel
+    showPullUp=isShowCollectionReport
+    reportData=collectionReportContext
+    model=studentCollectionReportContext.lesson
+    isStudent=true
+  }}
+{{/if}}
+
+{{#if isShowExternalAssessmentReport}}
+  {{
+    reports.pull-up.student-external-assessment-report
+    showPullUp=isShowExternalAssessmentReport
+    reportData=collectionReportContext
+    showPullUp=isShowStudentExternalAssessmentReport
+    isStudent=true
+  }}
+{{/if}}
