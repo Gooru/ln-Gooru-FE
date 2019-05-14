@@ -76,6 +76,12 @@ export default Ember.Controller.extend({
    */
   route0Applicable: Ember.computed.alias('class.route0Applicable'),
 
+  /**
+   * Maintains the state of whether need to show all the rescoped content or not.
+   * @type {Boolean}
+   */
+  showAllRescopedContent: false,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -91,6 +97,10 @@ export default Ember.Controller.extend({
           courseId: component.get('class.courseId')
         }
       });
+    },
+
+    onToggleRescope() {
+      this.toggleProperty('showAllRescopedContent');
     }
   }
 });

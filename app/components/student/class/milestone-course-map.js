@@ -113,6 +113,12 @@ export default Ember.Component.extend({
    */
   activeMilestoneIndex: 1,
 
+  /**
+   * Maintains the state of show all rescope content or not.
+   * @type {Boolean}
+   */
+  showAllRescopedContent: false,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -638,6 +644,9 @@ export default Ember.Component.extend({
       if (grade) {
         if (grade.get('sequence') > classGrade.get('sequence')) {
           milestone.set('higherThanClassGrade', true);
+        }
+        if (classGrade.get('sequence') === grade.get('sequence')) {
+          milestone.set('milestoneHasClassGrade', true);
         }
         milestoneData.pushObject(milestone);
       }
