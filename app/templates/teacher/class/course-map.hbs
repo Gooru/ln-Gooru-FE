@@ -59,32 +59,52 @@
             </div>
             {{#if isStudentCourseMap}}
               {{#if (and isPremiumClass isAccepted)}}
-                {{class.overview.routesuggestion-coursemap isEnablePlayer=false route0=route0Contents }}
+                {{#unless class.milestoneViewApplicable}}
+                  {{class.overview.routesuggestion-coursemap
+                  isEnablePlayer=false
+                  route0=route0Contents }}
+              {{else}}
+                {{student.class.milestone-course-map-route0
+                   class=class
+                   studentId=activeStudent.id
+                 }}
+                {{/unless}}
               {{/if}}
               <div class="student-coursemap">
-                {{#each units as |unit index|}}
-                  {{class.learner.gru-learner-accordion-unit
-                  currentClass=class
-                  studentId=activeStudent.id
-                  currentCourse=course
-                  classMembers=classMembers
-                  collectionReport="collectionReport"
-                  onOpenStudentUnitLevelReport="onOpenStudentUnitLevelReport"
-                  onOpenStudentLessonReport="onOpenStudentLessonReport"
-                  model=unit
-                  units=units
-                  index=index
-                  isTeacher=false
-                  isStudent=true
-                  toggleLocation=toggleLocation
-                  onSelectItem="onSelectItem"}}
+                {{#unless class.milestoneViewApplicable}}
+                  {{#each units as |unit index|}}
+                    {{class.learner.gru-learner-accordion-unit
+                    currentClass=class
+                    studentId=activeStudent.id
+                    currentCourse=course
+                    classMembers=classMembers
+                    collectionReport="collectionReport"
+                    onOpenStudentUnitLevelReport="onOpenStudentUnitLevelReport"
+                    onOpenStudentLessonReport="onOpenStudentLessonReport"
+                    model=unit
+                    units=units
+                    index=index
+                    isTeacher=false
+                    isStudent=true
+                    toggleLocation=toggleLocation
+                    onSelectItem="onSelectItem"}}
             {{else}}
-              <li>{{t "common.contentUnavailable"}}</li>
-                {{/each}}
+              <li>
+                {{t "common.contentUnavailable"}}
+              </li>
+                  {{/each}}
+            {{else}}
+              {{student.class.milestone-course-map
+                  class=class
+                  studentId=activeStudent.id
+                }}
+                {{/unless}}
+
               </div>
             {{else}}
               <div class="teacher-coursemap">
-                {{class.overview.gru-accordion-course
+                {{#unless class.milestoneViewApplicable}}
+                  {{class.overview.gru-accordion-course
                 currentClass=class
                 currentCourse=course
                 classMembers=classMembers
@@ -103,8 +123,12 @@
                 teacherCollectionReport="teacherCollectionReport"
                 isPremiumClass=isPremiumClass
                 showLocationReport= tab
-
               }}
+            {{else}}
+              {{teacher.class.milestone-course-map
+                    class=class
+                  }}
+                {{/unless}}
               </div>
             {{/if}}
           {{/if}}

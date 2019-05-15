@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['student-class-milestone-course-map'],
+  classNames: ['teacher-class-milestone-course-map'],
 
   // -------------------------------------------------------------------------
   // Dependencies
@@ -43,11 +43,6 @@ export default Ember.Component.extend({
    * @property {NavigateMapService}
    */
   navigateMapService: Ember.inject.service('api-sdk/navigate-map'),
-
-  /**
-   * Rescope Service to perform rescope data operations
-   */
-  rescopeService: Ember.inject.service('api-sdk/rescope'),
 
   /**
    * taxonomy service dependency injection
@@ -119,16 +114,15 @@ export default Ember.Component.extend({
   rescopedContents: null,
 
   /**
+   * @property {UUID} userId
+   */
+  userId: Ember.computed.alias('session.userId'),
+
+  /**
    * Maintains the state of show all rescope content or not.
    * @type {Boolean}
    */
   showAllRescopedContent: false,
-
-  /**
-   * Maintains the student Id, by default this will be NULL
-   * @type {String}
-   */
-  studentId: null,
 
   // -------------------------------------------------------------------------
   // Actions
@@ -189,10 +183,8 @@ export default Ember.Component.extend({
     //Action triggered when click on collection performance
     onShowStudentMilestoneCollectionReport(lesson, collection) {
       const component = this;
-      let studentId = component.get('studentId');
-      let userUid = studentId ? studentId : component.get('session.userId');
       let studentCollectionReportContext = {
-        userId: userUid,
+        userId: component.get('userId'),
         classId: component.get('classId'),
         courseId: component.get('courseId'),
         unitId: lesson.get('unit_id'),
@@ -243,7 +235,6 @@ export default Ember.Component.extend({
     component.set('isLoading', true);
     let fwCode = component.get('fwCode');
     let showPerformance = component.get('showPerformance');
-    let locateLastPlayedItem = component.get('locateLastPlayedItem');
     let taxonomyService = component.get('taxonomyService');
     let filters = {
       subject: component.get('class.preference.subject')
@@ -252,29 +243,17 @@ export default Ember.Component.extend({
     if (fwkCode) {
       filters.fw_code = fwkCode;
     }
-    let rescopedContents = component.get('rescopedContents');
 
     Ember.RSVP.hash({
       milestones: component
         .get('courseService')
         .getCourseMilestones(courseId, fwCode),
-      rescopedContents: rescopedContents
-        ? rescopedContents
-        : component.getRescopedContents(),
       grades: taxonomyService.fetchGradesBySubject(filters)
-    }).then(({ milestones, rescopedContents, grades }) => {
+    }).then(({ milestones }) => {
       if (!component.isDestroyed) {
-        let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
-          grades,
-          milestones
-        );
-        component.set('milestones', milestoneData);
-        component.set('rescopedContents', rescopedContents);
+        component.set('milestones', milestones);
         if (showPerformance) {
           component.fetchMilestonePerformance();
-        }
-        if (locateLastPlayedItem) {
-          component.identifyUserLocationAndLocate();
         }
         component.set('isLoading', false);
       }
@@ -287,15 +266,13 @@ export default Ember.Component.extend({
     let classId = component.get('classId');
     let courseId = component.get('courseId');
     let fwCode = component.get('fwCode');
-    let studentId = component.get('studentId');
-    let userUid = studentId ? studentId : component.get('session.userId');
     let milestones = component.get('milestones');
     performanceService
       .getPerformanceForMilestones(
         classId,
         courseId,
         'assessment',
-        userUid,
+        undefined,
         fwCode
       )
       .then(milestonesPerformance => {
@@ -318,8 +295,6 @@ export default Ember.Component.extend({
     let classId = component.get('classId');
     let courseId = component.get('courseId');
     let fwCode = component.get('fwCode');
-    let studentId = component.get('studentId');
-    let userUid = studentId ? studentId : component.get('session.userId');
 
     Ember.RSVP.hash({
       milestoneAssessmentLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
@@ -327,7 +302,7 @@ export default Ember.Component.extend({
         courseId,
         milestoneId,
         CONTENT_TYPES.ASSESSMENT,
-        userUid,
+        undefined,
         fwCode
       ),
       milestoneCollectionLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
@@ -335,7 +310,7 @@ export default Ember.Component.extend({
         courseId,
         milestoneId,
         CONTENT_TYPES.COLLECTION,
-        userUid,
+        undefined,
         fwCode
       )
     }).then(
@@ -381,8 +356,7 @@ export default Ember.Component.extend({
 
   fetchCollectionPerformance(lesson, collections) {
     let component = this;
-    let studentId = component.get('studentId');
-    let userUid = studentId ? studentId : component.get('session.userId');
+    let userUid = component.get('session.userId');
     let classId = component.get('classId');
     let courseId = component.get('courseId');
     let unitId = lesson.get('unit_id');
@@ -459,7 +433,6 @@ export default Ember.Component.extend({
         selectedMilestone.set('isActive', true);
       });
     }
-    let rescopedLessonContents = component.get('rescopedContents.lessons');
 
     if (!component.get('hasLessonFetched')) {
       component
@@ -467,12 +440,6 @@ export default Ember.Component.extend({
         .getCourseMilestoneLessons(courseId, milestoneId)
         .then(lessons => {
           if (!component.isDestroyed) {
-            rescopedLessonContents.forEach(rescopedLessonId => {
-              let lesson = lessons.findBy('lesson_id', rescopedLessonId);
-              if (lesson) {
-                lesson.set('rescope', true);
-              }
-            });
             selectedMilestone.set('lessons', lessons);
             if (showPerformance) {
               component.fetchMilestoneLessonsPerformance(milestoneId, lessons);
@@ -539,14 +506,6 @@ export default Ember.Component.extend({
         .then(lesson => {
           if (!component.isDestroyed) {
             let collections = lesson.get('children');
-            let rescopeCollectionIds = component.getRescopeCollectionIds();
-            rescopeCollectionIds.forEach(rescopeCollectionId => {
-              let collection = collections.findBy('id', rescopeCollectionId);
-              if (collection) {
-                collection.set('rescope', true);
-              }
-            });
-
             component.updateSuggestionDetails(
               lessons,
               selectedLesson,
@@ -623,120 +582,6 @@ export default Ember.Component.extend({
         }
       });
     }
-  },
-
-  identifyUserLocationAndLocate() {
-    let component = this;
-    let classId = component.get('classId');
-    let courseId = component.get('courseId');
-    let studentId = component.get('studentId');
-    let userId = studentId ? studentId : component.get('session.userId');
-    let fwCode = component.get('fwCode');
-    let locationQueryParam = {
-      courseId,
-      fwCode
-    };
-    component
-      .get('analyticsService')
-      .getUserCurrentLocation(classId, userId, locationQueryParam)
-      .then(userCurrentLocation => {
-        if (!component.isDestroyed) {
-          component.set('userCurrentLocation', userCurrentLocation);
-          if (userCurrentLocation) {
-            let milestoneId = userCurrentLocation.get('milestoneId');
-            let selectedMilestone = component
-              .get('milestones')
-              .findBy('milestone_id', milestoneId);
-            if (selectedMilestone) {
-              component.handleMilestoneToggle(selectedMilestone);
-            }
-          }
-        }
-      });
-  },
-
-  /**
-   * @function getRescopedContents
-   * Method to get rescoped contents
-   */
-  getRescopedContents() {
-    let component = this;
-    let classId = component.get('classId');
-    let courseId = component.get('courseId');
-    let filter = {
-      classId,
-      courseId
-    };
-    let studentId = component.get('studentId');
-    if (studentId) {
-      filter.userId = studentId;
-    }
-    return component.get('rescopeService').getSkippedContents(filter);
-  },
-
-  /**
-   * This Method is responsible for milestone display based on students class grade.
-   * @return {Array}
-   */
-  renderMilestonesBasedOnStudentGradeRange(grades, milestones) {
-    let component = this;
-    let gradeBounds = component.get('class.memberGradeBounds');
-    let studentId = component.get('studentId');
-    let userUid = studentId ? studentId : component.get('session.userId');
-    let gradeBound = gradeBounds.findBy(studentId);
-    let milestoneData = Ember.A([]);
-    let studentGradeBound = Ember.Object.create(gradeBound.get(userUid));
-    let classGradeUpperBound = component.get('class.gradeUpperBound');
-    component.set('studentGradeBound', studentGradeBound);
-    component.set('grades', grades);
-    let gradeLowerBound = studentGradeBound.get('grade_lower_bound');
-    let gradeUpperBound = studentGradeBound.get('grade_upper_bound');
-    let startGrade = grades.findBy('id', gradeLowerBound);
-    let startGradeIndex = grades.indexOf(startGrade);
-    let endGrade = grades.findBy('id', gradeUpperBound);
-    let endGradeIndex = grades.indexOf(endGrade);
-    let studentGrades = grades.slice(startGradeIndex, endGradeIndex + 1);
-    let classGrade = grades.findBy('id', classGradeUpperBound);
-    milestones.forEach(milestone => {
-      let gradeId = milestone.get('grade_id');
-      let grade = studentGrades.findBy('id', gradeId);
-      if (grade) {
-        if (grade.get('sequence') > classGrade.get('sequence')) {
-          milestone.set('higherThanClassGrade', true);
-        }
-        if (classGrade.get('sequence') === grade.get('sequence')) {
-          milestone.set('milestoneHasClassGrade', true);
-        }
-        milestoneData.pushObject(milestone);
-      }
-    });
-    return milestoneData;
-  },
-
-  /**
-   * Merge all  the collection content family, rescoped ids
-   * @type {Array}
-   */
-  getRescopeCollectionIds() {
-    let component = this;
-    let collectionIds = Ember.A([]);
-    let rescopedCollectionContents = component.get(
-      'rescopedContents.collections'
-    );
-    let rescopedCollectionsExternalContents = component.get(
-      'rescopedContents.collectionsExternal'
-    );
-    let rescopedAssessmentsExternalContents = component.get(
-      'rescopedContents.assessmentsExternal'
-    );
-    let rescopedAssessmentsContents = component.get(
-      'rescopedContents.assessments'
-    );
-    collectionIds.pushObjects(rescopedCollectionContents);
-    collectionIds.pushObjects(rescopedAssessmentsContents);
-    collectionIds.pushObjects(rescopedCollectionsExternalContents);
-    collectionIds.pushObjects(rescopedAssessmentsExternalContents);
-    return collectionIds;
   },
 
   /**

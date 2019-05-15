@@ -78,6 +78,12 @@ export default Ember.Component.extend({
    */
   locateLastPlayedItem: true,
 
+  /**
+   * Maintains the student Id, by default this will be NULL
+   * @type {String}
+   */
+  studentId: null,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -148,30 +154,39 @@ export default Ember.Component.extend({
     let classId = component.get('classId');
     component.set('isLoading', true);
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
-
-    component
-      .get('route0Service')
-      .fetchInClass({
+    let userId = component.get('studentId');
+    let route0Promise;
+    if (userId) {
+      route0Promise = component.get('route0Service').fetchInClassByTeacher({
+        courseId,
+        classId,
+        userId
+      });
+    } else {
+      route0Promise = component.get('route0Service').fetchInClass({
         courseId,
         classId
-      })
-      .then(route0 => {
-        if (!component.isDestroyed) {
-          component.set(
-            'milestone',
-            component.mergeUnitsToMilestone(route0.route0Content.units)
-          );
-          if (locateLastPlayedItem) {
-            component.identifyUserLocationAndLocate();
-          }
-          component.set('isLoading', false);
-        }
       });
+    }
+
+    route0Promise.then(route0 => {
+      if (!component.isDestroyed) {
+        component.set(
+          'milestone',
+          component.mergeUnitsToMilestone(route0.route0Content.units)
+        );
+        if (locateLastPlayedItem) {
+          component.identifyUserLocationAndLocate();
+        }
+        component.set('isLoading', false);
+      }
+    });
   },
 
   fetchCollectionPerformance(lesson, collections) {
     let component = this;
-    let userUid = component.get('session.userId');
+    let studentId = component.get('studentId');
+    let userUid = studentId ? studentId : component.get('session.userId');
     let classId = component.get('classId');
     let courseId = component.get('courseId');
     let unitId = lesson.get('unitId');
