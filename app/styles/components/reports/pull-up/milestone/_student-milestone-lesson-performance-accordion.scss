@@ -118,6 +118,23 @@
             }
           }
         }
+
+        &.suggestion {
+          .collection-connector {
+            stroke: #ec8f42;
+          }
+          .icon {
+            color: #ec8f42;
+
+            &.collection {
+              background-image: url("../assets/gooru/images/collection-orange.svg");
+            }
+
+            &.assessment {
+              background-image: url("../assets/gooru/images/assessment-orange.svg");
+            }
+          }
+        }
       }
       .collection-title-container {
         display: block;

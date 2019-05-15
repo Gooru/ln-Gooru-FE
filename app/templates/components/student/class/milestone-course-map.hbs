@@ -161,8 +161,7 @@
 {{#if isShowMilestoneReport}}
   {{#reports.pull-up.milestone.student-milestone-report
     showPullUp = isShowMilestoneReport
-    scoreInPercentage = selectedMilestone.performance.scoreInPercentage
-    activeMilestoneIndex = activeMilestoneIndex
+    title = (concat 'Milestone' (plus-one activeMilestoneIndex))
   }}
     {{reports.pull-up.milestone.student-milestone-summary-report
       activeMilestone = selectedMilestone

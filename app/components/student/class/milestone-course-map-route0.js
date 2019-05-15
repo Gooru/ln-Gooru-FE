@@ -78,6 +78,16 @@ export default Ember.Component.extend({
    */
   locateLastPlayedItem: true,
 
+  /**
+   * @property {Boolean} isShowRoute0CollectionReport
+   */
+  isShowRoute0CollectionReport: false,
+
+  /**
+   * @property {Boolean} isShowRoute0ExternalAssessmentReport
+   */
+  isShowRoute0ExternalAssessmentReport: false,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -118,6 +128,34 @@ export default Ember.Component.extend({
         unitId,
         lessonId,
         item
+      );
+    },
+
+    //Action triggered when click on collection performance
+    onOpenRoute0CollectionReport(unitId, lesson, collection) {
+      const component = this;
+      let studentCollectionReportContext = {
+        userId: component.get('session.userId'),
+        classId: component.get('classId'),
+        courseId: component.get('courseId'),
+        unitId,
+        lessonId: lesson.get('lessonId'),
+        collectionId: collection.get('collectionId'),
+        type: collection.get('collectionType'),
+        lesson,
+        isStudent: true,
+        isTeacher: false,
+        collection
+      };
+      let reportType = collection.get('collectionType');
+      if (reportType === 'assessment-external') {
+        component.set('isShowRoute0ExternalAssessmentReport', true);
+      } else {
+        component.set('isShowRoute0CollectionReport', true);
+      }
+      component.set(
+        'studentCollectionReportContext',
+        studentCollectionReportContext
       );
     }
   },
@@ -178,33 +216,35 @@ export default Ember.Component.extend({
     let lessonId = lesson.get('lessonId');
     let performanceService = component.get('performanceService');
 
-    Ember.RSVP.hash({
-      performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
-        classId,
-        courseId,
-        unitId,
-        lessonId,
-        CONTENT_TYPES.ASSESSMENT,
-        userUid
-      ),
-      performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
-        classId,
-        courseId,
-        unitId,
-        lessonId,
-        CONTENT_TYPES.COLLECTION,
-        userUid
-      )
-    }).then(({ performanceAssessment, performanceCollection }) => {
-      component.setMilestoneCollectionPerformanceData(
-        collections,
-        performanceAssessment
-      );
-      component.setMilestoneCollectionPerformanceData(
-        collections,
-        performanceCollection
-      );
-    });
+    Ember.RSVP
+      .hash({
+        performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
+          classId,
+          courseId,
+          unitId,
+          lessonId,
+          CONTENT_TYPES.ASSESSMENT,
+          userUid
+        ),
+        performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
+          classId,
+          courseId,
+          unitId,
+          lessonId,
+          CONTENT_TYPES.COLLECTION,
+          userUid
+        )
+      })
+      .then(({ performanceAssessment, performanceCollection }) => {
+        component.setMilestoneCollectionPerformanceData(
+          collections,
+          performanceAssessment
+        );
+        component.setMilestoneCollectionPerformanceData(
+          collections,
+          performanceCollection
+        );
+      });
   },
 
   setMilestoneCollectionPerformanceData(
