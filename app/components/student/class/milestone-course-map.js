@@ -145,8 +145,8 @@ export default Ember.Component.extend({
      * Handle toggle functionality of hide/show lesson items
      * @return {Object}
      */
-    toggleLessonItems(lessons, selectedLesson) {
-      this.handleMilestoneLessonToggle(lessons, selectedLesson);
+    toggleLessonItems(milestone, lessons, selectedLesson) {
+      this.handleMilestoneLessonToggle(milestone, lessons, selectedLesson);
     },
 
     /**
@@ -479,6 +479,7 @@ export default Ember.Component.extend({
               if (selectedLesson) {
                 Ember.run.later(function() {
                   component.handleMilestoneLessonToggle(
+                    selectedMilestone,
                     lessons,
                     selectedLesson
                   );
@@ -490,12 +491,13 @@ export default Ember.Component.extend({
     }
   },
 
-  handleMilestoneLessonToggle(lessons, selectedLesson) {
+  handleMilestoneLessonToggle(milestone, lessons, selectedLesson) {
     let component = this;
     let classId = component.get('classId');
     let unitId = selectedLesson.get('unit_id');
     let lessonId = selectedLesson.get('lesson_id');
-    let element = `#milestone-lesson-${lessonId}`;
+    let milestoneId = milestone.get('milestone_id');
+    let element = `#milestone-lesson-${milestoneId}-${lessonId}`;
     let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
     let courseId = component.get('courseId');

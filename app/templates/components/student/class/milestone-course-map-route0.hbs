@@ -1,13 +1,11 @@
 <div class="milestone-course-map-route0-container">
-  {{#each milestones as | milestone index |}}
     <div class="milestone-course-map-route0">
       <div class="milestone-course-map-route0-panel {{if milestone.isActive 'active'}}" {{action 'toggleMilestoneItems' milestone }}>
         <div class="milestone-flag-icon">
           {{gru-icon name="flag"}}
         </div>
         <div class="milestone-title">
-          <p>Milestone {{plus-one index}}
-            {{#if (gte milestone.performance.completedInPrecentage 0) }} ({{milestone.performance.completedInPrecentage}}% Completed) {{/if}}
+          <p>Milestone {{milestone.milestoneId}}
           </p>
         </div>
         <div class="milestone-caret">
@@ -17,22 +15,13 @@
             {{gru-icon name="arrow_drop_down"}}
           {{/if}}
         </div>
-        {{#if showPerformance}}
-          <div class="milestone-peformance grade-range-{{grade-range milestone.performance.scoreInPercentage}}">
-            {{#if (gte milestone.performance.scoreInPercentage 0)}}
-              {{milestone.performance.scoreInPercentage}}%
-            {{else}}
-              --
-            {{/if}}
-          </div>
-        {{/if}}
       </div>
-      <div class="milestone-course-map-route0-lesson-container" id="milestone-{{milestone.unitId}}">
+      <div class="milestone-course-map-route0-lesson-container" id="milestone-{{milestone.milestoneId}}">
         {{#if milestone.hasLessonFetched}}
           {{#if milestone.lessons}}
             {{#each milestone.lessons as | lesson index |}}
               <div class="milestone-course-map-route0-lesson {{if lesson.isActive 'active'}}">
-                <div class="milestone-course-map-route0-lesson-panel  {{if lesson.has-activity 'has-activity'}}" {{action 'toggleLessonItems' milestone lesson }}>
+                <div class="milestone-course-map-route0-lesson-panel" {{action 'toggleLessonItems'  lesson }}>
                   <div class="lesson-icon-container">
                     <div class="lesson-icon-upward-line">
                       <svg height="15" width="20">
@@ -47,22 +36,13 @@
                     </div>
                   </div>
                   <div class="domain-lesson-title">
-                    <p class="domain-name">{{milestone.unitTitle}}</p>
+                    <p class="domain-name">{{lesson.unitTitle}}</p>
                     <p>{{lesson.lessonTitle}}</p>
                   </div>
                   <div class="lesson-badge"></div>
                   <div class="lesson-info"></div>
-                  {{#if showPerformance}}
-                    <div class="lesson-peformance grade-range-{{grade-range lesson.performance.scoreInPercentage}}">
-                      {{#if (gte lesson.performance.scoreInPercentage 0)}}
-                        {{lesson.performance.scoreInPercentage}}%
-                      {{else}}
-                        --
-                      {{/if}}
-                    </div>
-                  {{/if}}
                 </div>
-                <div class="milestone-course-map-route0-collection-container" id="milestone-lesson-{{lesson.lessonId}}">
+                <div class="milestone-course-map-route0-collection-container" id="milestone-lesson-{{lesson.unitId}}-{{lesson.lessonId}}">
                   {{#if lesson.hasCollectionFetched}}
                     {{#if lesson.collections}}
                       {{#each lesson.collections as | collection |}}
@@ -84,7 +64,7 @@
                             <div class="collection-title-container">
                               <p>{{collection.title}}</p>
                             </div>
-                            <div class="colllection-play-btn" {{action 'studyPlayer' 'collection'  milestone.unitId lesson.lessonId collection}}>
+                            <div class="colllection-play-btn" {{action 'studyPlayer' 'collection'  lesson.unitId lesson.lessonId collection}}>
                               {{gru-icon style="material-icons-outlined" name="play_circle_filled_white"}}
                             </div>
 
@@ -154,7 +134,6 @@
         {{/if}}
       </div>
     </div>
-  {{/each}}
 </div>
 {{#if isLoading}}
   <div class="loading-spinner">
