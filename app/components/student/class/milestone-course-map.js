@@ -402,6 +402,14 @@ export default Ember.Component.extend({
       });
     } else {
       component.$(element).slideDown(400, function() {
+        component.get('milestones').forEach(milestone => {
+          if (milestone.get('isActive')) {
+            let milestoneId = milestone.get('milestone_id');
+            let element = `#milestone-${milestoneId}`;
+            component.$(element).hide();
+            milestone.set('isActive', false);
+          }
+        });
         selectedMilestone.set('isActive', true);
       });
     }
