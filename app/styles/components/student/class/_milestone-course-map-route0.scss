@@ -72,23 +72,6 @@
             font-size: 30px;
           }
         }
-
-        .milestone-peformance {
-          width: 60px;
-          height: 50px;
-          display: grid;
-          align-items: center;
-          justify-items: center;
-          color: #fff;
-          font-size: 16px;
-          font-weight: bold;
-          border-bottom: 1px solid #fff;
-
-          &.grade-range-not-started {
-            background: transparent;
-            border-bottom: none;
-          }
-        }
       }
 
       .milestone-course-map-route0-lesson-container {
@@ -213,22 +196,6 @@
                     $lines-to-show: 1
                   );
                 }
-              }
-            }
-
-            .lesson-peformance {
-              width: 60px;
-              height: 50px;
-              display: grid;
-              align-items: center;
-              justify-items: center;
-              font-size: 16px;
-              font-weight: bold;
-              color: #fff;
-
-              &.grade-range-not-started {
-                background: transparent;
-                color: #666;
               }
             }
           }

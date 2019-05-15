@@ -94,8 +94,8 @@ export default Ember.Component.extend({
      * Handle toggle functionality of hide/show lesson items
      * @return {Object}
      */
-    toggleLessonItems(selectedMilestone, selectedLesson) {
-      this.handleMilestoneLessonToggle(selectedMilestone, selectedLesson);
+    toggleLessonItems(selectedLesson) {
+      this.handleMilestoneLessonToggle(selectedLesson);
     },
 
     /**
@@ -147,7 +147,6 @@ export default Ember.Component.extend({
     let courseId = component.get('courseId');
     let classId = component.get('classId');
     component.set('isLoading', true);
-    let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
 
     component
@@ -158,10 +157,10 @@ export default Ember.Component.extend({
       })
       .then(route0 => {
         if (!component.isDestroyed) {
-          component.set('milestones', route0.route0Content.units);
-          if (showPerformance) {
-            component.fetchMilestonePerformance();
-          }
+          component.set(
+            'milestone',
+            component.mergeUnitsToMilestone(route0.route0Content.units)
+          );
           if (locateLastPlayedItem) {
             component.identifyUserLocationAndLocate();
           }
@@ -170,104 +169,12 @@ export default Ember.Component.extend({
       });
   },
 
-  fetchMilestonePerformance() {
-    let component = this;
-    let performanceService = component.get('performanceService');
-    let classId = component.get('classId');
-    let courseId = component.get('courseId');
-    let userUid = component.get('session.userId');
-    let milestones = component.get('milestones');
-    performanceService
-      .getPerformanceForUnits(
-        classId,
-        courseId,
-        CONTENT_TYPES.ASSESSMENT,
-        userUid
-      )
-      .then(milestonesPerformance => {
-        milestonesPerformance.forEach(milestonePerformance => {
-          let milestoneId = milestonePerformance.get('unitId');
-          let milestone = milestones.findBy('unitId', milestoneId);
-          if (milestone) {
-            milestone.set(
-              'performance',
-              milestonePerformance.get('performance')
-            );
-          }
-        });
-      });
-  },
-
-  fetchMilestoneLessonsPerformance(selectedMilestone, lessons) {
-    let component = this;
-    let performanceService = component.get('performanceService');
-    let classId = component.get('classId');
-    let courseId = component.get('courseId');
-    let unitId = selectedMilestone.get('unitId');
-    let userUid = component.get('session.userId');
-
-    Ember.RSVP.hash({
-      milestoneAssessmentLessonsPerformance: performanceService.getPerformanceForLessons(
-        classId,
-        courseId,
-        unitId,
-        CONTENT_TYPES.ASSESSMENT,
-        userUid
-      ),
-      milestoneCollectionLessonsPerformance: performanceService.getPerformanceForLessons(
-        classId,
-        courseId,
-        unitId,
-        CONTENT_TYPES.COLLECTION,
-        userUid
-      )
-    }).then(
-      ({
-        milestoneAssessmentLessonsPerformance,
-        milestoneCollectionLessonsPerformance
-      }) => {
-        if (!component.isDestroyed) {
-          component.setMilestoneLessonPerformanceData(
-            CONTENT_TYPES.COLLECTION,
-            lessons,
-            milestoneCollectionLessonsPerformance
-          );
-          component.setMilestoneLessonPerformanceData(
-            CONTENT_TYPES.ASSESSMENT,
-            lessons,
-            milestoneAssessmentLessonsPerformance
-          );
-        }
-      }
-    );
-  },
-
-  setMilestoneLessonPerformanceData(
-    type,
-    lessons,
-    milestoneLessonsPerformance
-  ) {
-    milestoneLessonsPerformance.forEach(milestoneLessonPerformance => {
-      let lessonId = milestoneLessonPerformance.get('lessonId');
-      let lesson = lessons.findBy('lessonId', lessonId);
-      if (lesson) {
-        if (type === CONTENT_TYPES.ASSESSMENT) {
-          lesson.set(
-            'performance',
-            milestoneLessonPerformance.get('performance')
-          );
-        }
-        lesson.set('has-activity', true);
-      }
-    });
-  },
-
-  fetchCollectionPerformance(selectedMilestone, lesson, collections) {
+  fetchCollectionPerformance(lesson, collections) {
     let component = this;
     let userUid = component.get('session.userId');
     let classId = component.get('classId');
     let courseId = component.get('courseId');
-    let unitId = selectedMilestone.get('unitId');
+    let unitId = lesson.get('unitId');
     let lessonId = lesson.get('lessonId');
     let performanceService = component.get('performanceService');
 
@@ -319,9 +226,8 @@ export default Ember.Component.extend({
 
   handleMilestoneToggle(selectedMilestone) {
     let component = this;
-    let unitId = selectedMilestone.get('unitId');
-    let element = `#milestone-${unitId}`;
-    let showPerformance = component.get('showPerformance');
+    let milestoneId = selectedMilestone.get('milestoneId');
+    let element = `#milestone-${milestoneId}`;
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
     if (selectedMilestone.get('isActive')) {
       component.$(element).slideUp(400, function() {
@@ -329,33 +235,19 @@ export default Ember.Component.extend({
       });
     } else {
       component.$(element).slideDown(400, function() {
-        component.get('milestones').forEach(milestone => {
-          if (milestone.get('isActive')) {
-            let unitId = milestone.get('unitId');
-            let element = `#milestone-${unitId}`;
-            component.$(element).hide();
-            milestone.set('isActive', false);
-          }
-        });
         selectedMilestone.set('isActive', true);
       });
     }
 
     if (!component.get('hasLessonFetched')) {
       let lessons = selectedMilestone.get('lessons');
-      if (showPerformance) {
-        component.fetchMilestoneLessonsPerformance(selectedMilestone, lessons);
-      }
       let userCurrentLocation = component.get('userCurrentLocation');
       if (locateLastPlayedItem && userCurrentLocation) {
         let lessonId = userCurrentLocation.get('lessonId');
         let selectedLesson = lessons.findBy('lessonId', lessonId);
         if (selectedLesson) {
           Ember.run.later(function() {
-            component.handleMilestoneLessonToggle(
-              selectedMilestone,
-              selectedLesson
-            );
+            component.handleMilestoneLessonToggle(selectedLesson);
           }, 500);
         }
       }
@@ -363,10 +255,11 @@ export default Ember.Component.extend({
     }
   },
 
-  handleMilestoneLessonToggle(selectedMilestone, selectedLesson) {
+  handleMilestoneLessonToggle(selectedLesson) {
     let component = this;
     let lessonId = selectedLesson.get('lessonId');
-    let element = `#milestone-lesson-${lessonId}`;
+    let unitId = selectedLesson.get('unitId');
+    let element = `#milestone-lesson-${unitId}-${lessonId}`;
     let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
 
@@ -395,11 +288,7 @@ export default Ember.Component.extend({
         }
       }
       if (showPerformance) {
-        component.fetchCollectionPerformance(
-          selectedMilestone,
-          selectedLesson,
-          collections
-        );
+        component.fetchCollectionPerformance(selectedLesson, collections);
       }
     }
   },
@@ -420,16 +309,30 @@ export default Ember.Component.extend({
         if (!component.isDestroyed) {
           component.set('userCurrentLocation', userCurrentLocation);
           if (userCurrentLocation) {
-            let unitId = userCurrentLocation.get('unitId');
-            let selectedMilestone = component
-              .get('milestones')
-              .findBy('unitId', unitId);
+            let selectedMilestone = component.get('milestone');
             if (selectedMilestone) {
               component.handleMilestoneToggle(selectedMilestone);
             }
           }
         }
       });
+  },
+
+  mergeUnitsToMilestone(units) {
+    let lessonData = Ember.A([]);
+    let milestone = Ember.Object.create();
+    units.forEach(unit => {
+      let lessons = unit.get('lessons');
+      lessons.forEach(lesson => {
+        lesson.set('unitId', unit.get('unitId'));
+        lesson.set('ulId', `${unit.get('unitId') - unit.get('lessonId')}`);
+        lesson.set('unitTitle', unit.get('unitTitle'));
+      });
+      lessonData.pushObjects(lessons);
+    });
+    milestone.set('milestoneId', 0);
+    milestone.set('lessons', lessonData);
+    return milestone;
   },
 
   /**
