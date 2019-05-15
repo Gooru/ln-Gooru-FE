@@ -1,0 +1,82 @@
+.milestone-report.student-milestone-performance-report {
+  background-color: $white;
+  .student-milestones-performance-container {
+    .header-container {
+      height: 240px;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+    }
+    .body-container {
+      height: calc(80vh - 230px);
+      overflow-y: auto;
+      .student-milestone-container {
+        display: grid;
+        grid-template-columns: 1fr 50px;
+        height: 50px;
+        margin-top: 5px;
+        cursor: pointer;
+        .student-milestone-info-container {
+          display: grid;
+          grid-template-columns: 55px 1fr;
+          height: inherit;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+          align-items: center;
+          background-color: #5c8fd2;
+          .milestone-icon-container {
+            font-family: "Lato";
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1;
+            letter-spacing: normal;
+            text-align: center;
+            border-radius: 50%;
+            background: $white;
+            width: 30px;
+            height: 30px;
+            align-self: center;
+            justify-self: center;
+            position: relative;
+            z-index: 1;
+
+            i {
+              font-size: 16px;
+              margin-top: 7px;
+              margin-left: 1px;
+              color: #5c8fd2;
+            }
+          }
+          .milestone-title-container {
+            font-size: 15px;
+            font-weight: bold;
+            color: $white;
+          }
+        }
+        .student-milesont-performance-container {
+          width: 50px;
+          height: 50px;
+          font-size: 13px;
+          font-weight: bold;
+          color: $white;
+          text-align: center;
+          line-height: 50px;
+          border-top: 2px solid rgba(0, 0, 0, 0.1);
+
+          &.grade-range-not-started {
+            background-color: #e4e5ea;
+            color: #666;
+          }
+        }
+      }
+
+      &::-webkit-scrollbar {
+        height: 6px;
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $gray-light;
+        border: 1px solid $gray-light;
+        border-radius: 5px;
+      }
+    }
+  }
+}

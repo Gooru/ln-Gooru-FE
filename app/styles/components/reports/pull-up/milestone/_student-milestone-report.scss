@@ -44,30 +44,7 @@
         padding-left: 50px;
         justify-self: right;
         width: 100%;
-
-        &.text-color-not-started {
-          color: #e4e5ea;
-        }
-
-        &.text-color-0-59 {
-          color: #f46360;
-        }
-
-        &.text-color-60-69 {
-          color: #ed8e36;
-        }
-
-        &.text-color-70-79 {
-          color: #faba36;
-        }
-
-        &.text-color-80-89 {
-          color: #a8c99c;
-        }
-
-        &.text-color-90-100 {
-          color: #4b9740;
-        }
+        color: #5d5d5d;
       }
 
       .close-container {

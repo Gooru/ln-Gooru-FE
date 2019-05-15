@@ -24,6 +24,11 @@ export default Ember.Component.extend({
   session: Ember.inject.service('session'),
 
   /**
+   * @requires service:api-sdk/rescope
+   */
+  rescopeService: Ember.inject.service('api-sdk/rescope'),
+
+  /**
    * @requires service:i18n
    */
   i18n: Ember.inject.service(),
@@ -156,6 +161,11 @@ export default Ember.Component.extend({
    */
   rescopedCollectionIds: Ember.A([]),
 
+  /**
+   * @property {Object} rescopedContents
+   */
+  rescopedContents: null,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -165,15 +175,21 @@ export default Ember.Component.extend({
   loadMilestoneReportData() {
     const component = this;
     let activeMilestone = component.get('activeMilestone');
-    if (!activeMilestone.get('lessons')) {
-      component.fetchMilestoneLessons().then(function() {
-        component.loadMilestoneReportPerformanceData();
-        component.parseRescopedContents();
+    let rescopedContents = component.get('rescopedContents');
+    return Ember.RSVP
+      .hash({
+        milestoneLessons:
+          activeMilestone.get('lessons') || component.fetchMilestoneLessons(),
+        rescopedContents: rescopedContents || component.fetchRescopedContents()
+      })
+      .then(hash => {
+        if (!component.isDestroyed) {
+          component.set('rescopedContents', hash.rescopedContents);
+          component.set('activeMilestone.lessons', hash.milestoneLessons);
+          component.loadMilestoneReportPerformanceData();
+          component.parseRescopedContents();
+        }
       });
-    } else {
-      component.loadMilestoneReportPerformanceData();
-      component.parseRescopedContents();
-    }
   },
 
   /**
@@ -242,18 +258,21 @@ export default Ember.Component.extend({
     const courseService = component.get('courseService');
     const courseId = component.get('courseId');
     const milestoneId = component.get('milestoneId');
-    return Ember.RSVP
-      .hash({
-        milestoneLessons: courseService.getCourseMilestoneLessons(
-          courseId,
-          milestoneId
-        )
-      })
-      .then(({ milestoneLessons }) => {
-        if (!component.isDestroyed) {
-          component.set('activeMilestone.lessons', milestoneLessons);
-        }
-      });
+    return courseService.getCourseMilestoneLessons(courseId, milestoneId);
+  },
+
+  /**
+   * @function fetchRescopedContents
+   * Method to get rescoped contents
+   */
+  fetchRescopedContents() {
+    let component = this;
+    let classId = component.get('classId');
+    let courseId = component.get('courseId');
+    return component.get('rescopeService').getSkippedContents({
+      classId,
+      courseId
+    });
   },
 
   /**
@@ -329,8 +348,8 @@ export default Ember.Component.extend({
           }
         });
       }
+      component.extractRescopedCollections();
     }
-    component.extractRescopedCollections();
   },
 
   /**

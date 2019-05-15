@@ -86,7 +86,7 @@
                               {{/if}}
                             </div>
                             {{#if (and showPerformance collection.performance) }}
-                              <div class="collection-peformance format-{{collection.collectionType}} grade-range-{{grade-range collection.performance.scoreInPercentage}}">
+                              <div class="collection-peformance {{unless collection.performance 'disable-event'}} format-{{collection.collectionType}} grade-range-{{grade-range collection.performance.scoreInPercentage}}" {{action "onOpenRoute0CollectionReport" milestone.unitId lesson collection}}>
                                 {{#if collection.performance}}
                                   {{#if (or (eq collection.collectionType 'assessment') (eq collection.collectionType 'assessment-external'))}}
                                     {{collection.performance.scoreInPercentage}}%
@@ -139,4 +139,24 @@
   <div class="loading-spinner">
     {{three-bounce-spinner}}
   </div>
+{{/if}}
+
+{{#if isShowRoute0CollectionReport}}
+  {{
+    class.gru-report-panel
+    showPullUp=isShowRoute0CollectionReport
+    reportData=studentCollectionReportContext
+    model=studentCollectionReportContext.lesson
+    isStudent=true
+  }}
+{{/if}}
+
+{{#if isShowRoute0ExternalAssessmentReport}}
+  {{
+    reports.pull-up.student-external-assessment-report
+    showPullUp=isShowRoute0ExternalAssessmentReport
+    reportData=studentCollectionReportContext
+    showPullUp=isShowStudentExternalAssessmentReport
+    isStudent=true
+  }}
 {{/if}}

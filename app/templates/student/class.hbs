@@ -105,3 +105,14 @@
     }}
   {{/reports.pull-up.student-activity-report}}
 {{/if}}
+
+{{#if isShowMilestoneReport}}
+  {{#reports.pull-up.milestone.student-milestone-report
+    showPullUp = isShowMilestoneReport
+    title = course.title
+  }}
+    {{reports.pull-up.milestone.student-milestone-performance-report
+      class = class
+    }}
+  {{/reports.pull-up.milestone.student-milestone-report}}
+{{/if}}
