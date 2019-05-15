@@ -37,6 +37,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   isActive: false,
 
+  isToggleUnScheduleItem: false,
+
   toggleDatePicker() {
     let element = Ember.$('.ca-date-selector');
     let dateDisplayEle = Ember.$('.ca-date-picker-container');
@@ -57,6 +59,19 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Actions
 
   actions: {
+
+    toggleUnScheduleItem() {
+      let controller = this;
+      controller.toggleProperty('isToggleUnScheduleItem');
+      Ember.run.later(function() {
+        let unScheduledContainerHeight = Ember.$('.ca-unschedule-items-list-container').height() + 41;
+        let heightAttr = controller.get('isToggleUnScheduleItem') ? unScheduledContainerHeight : 100;
+        Ember.$('.dca-content-container').css({
+          'height': `calc(100% - ${heightAttr}px)`
+        });
+      }, 500);
+    },
+
     toggleDatePicker() {
       let controller = this;
       controller.toggleProperty('isActive');

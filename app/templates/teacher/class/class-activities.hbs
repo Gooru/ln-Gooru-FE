@@ -9,7 +9,7 @@
           <div class="ca-schedule-items-header">
             <div class="ca-add-content">
               <div class="ca-contents-button">
-                <p>Add an Activity</p>
+                <p>Plan Your Activities</p>
                 <i class="collection-icon" {{action 'onAddDca' 'collection'}}></i>
                 <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
               </div>
@@ -34,9 +34,9 @@
                 <div class="backdrop" {{action 'toggleDatePicker'}}></div>
               {{/if}}
               {{ca-date-picker
-                showToday=false
+                showToday=true
                 forMonth=forMonth
-                allowDateSelectorToggle=false
+                allowDateSelectorToggle=true
                 forYear=forYear
                 refreshDatePicker=refreshDatePicker
                 showPreviousMonth="showPreviousMonth"
@@ -49,22 +49,23 @@
             </div>
           </div>
           {{#if showClassActivities}}
-            <div class="dca-list-container">
-              {{#each scheduledClassActivities as |classActivity|}}
-                <div class="dca-date-view-container dca-date-view-container-{{format-date classActivity.added_date 'YYYY-MM-DD'}}">
-                  <div class="dca-date-container {{if (eq today classActivity.added_date) 'dca-date-container-today'}}">
-                    {{#if (eq today classActivity.added_date)}}
-                      <span>{{t 'student-landing.class.class-activities-tab.today'}}</span>
-                    {{else}}
-                      {{gru-icon name="calendar_today"}}
-                      <span>{{format-date classActivity.added_date 'MMMM DD, YYYY'}}</span>
-                    {{/if}}
+            <div class="ca-schedule-section">
+              <div class="dca-list-container">
+                {{#each scheduledClassActivities as |classActivity|}}
+                  <div class="dca-date-view-container dca-date-view-container-{{format-date classActivity.added_date 'YYYY-MM-DD'}}">
+                    <div class="dca-date-container {{if (eq today classActivity.added_date) 'dca-date-container-today'}}">
+                      {{#if (eq today classActivity.added_date)}}
+                        <span>{{t 'student-landing.class.class-activities-tab.today'}}</span>
+                      {{else}}
+                        {{gru-icon name="calendar_today"}}
+                        <span>{{format-date classActivity.added_date 'MMMM DD, YYYY'}}</span>
+                      {{/if}}
+                    </div>
+                    <hr />
                   </div>
-                  <hr />
-                </div>
-                <div class="dca-content-list-container {{if (eq today classActivity.added_date) 'dca-content-list-container-today'}}">
-                  {{#each classActivity.classActivities as |activity|}}
-                    {{class.gru-class-activity-panel
+                  <div class="dca-content-list-container {{if (eq today classActivity.added_date) 'dca-content-list-container-today'}}">
+                    {{#each classActivity.classActivities as |activity|}}
+                      {{class.gru-class-activity-panel
                     classActivity=activity
                     classId=classId
                     class=class
@@ -85,26 +86,26 @@
                     onUpdateMasteryAccrual="onUpdateMasteryAccrual"
                     showMasteryAccrual=showMasteryAccrual
                   }}
-                  {{else}}
-                    <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
-                  {{/each}}
-                </div>
-              {{/each}}
+                    {{else}}
+                      <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
+                    {{/each}}
+                  </div>
+                {{/each}}
+              </div>
             </div>
           {{else}}
             <div class="no-content">{{t "common.no-dca-teacher"}}</div>
-            <div class="no-content-image"></div>
           {{/if}}
         </div>
         <div class="ca-unschedule-items-list-container hidden-xs hidden-sm`">
-          <div class="ca-unschedule-items-header" data-toggle="collapse" data-target="#unschedule">
+          <div class="ca-unschedule-items-header" data-toggle="collapse" data-target="#unschedule" {{action 'toggleUnScheduleItem'}}>
             <span>{{t 'common.unscheduled-items'}} ({{unScheduledClassActivities.length}})</span>
             <div class="icons">
               {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
               {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
             </div>
           </div>
-          <div class="ca-unscheduled-content-items collapse in" id="unschedule">
+          <div class="ca-unscheduled-content-items collapse" id="unschedule">
             {{#each unScheduledClassActivities as |classActivity|}}
               {{class.gru-class-activity-panel
               classActivity=classActivity
