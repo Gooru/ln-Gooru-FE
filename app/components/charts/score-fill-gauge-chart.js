@@ -189,7 +189,7 @@ export default Ember.Component.extend({
       .attr('y', 0)
       .attr('class', `fill-range-${getGradeRange(scoreInPercentage)}`);
 
-    if (scoreInPercentage) {
+    if (scoreInPercentage >= 0) {
       fillGaugeElement
         .append('text')
         .attr('transform', `translate(${fillGaugeElementWidth / 2})`)

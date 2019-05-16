@@ -133,9 +133,18 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * @property {boolean}showAttempts
+   * @property {boolean} isShowAttempts
    */
-  showAttempts: false,
+  isShowAttempts: Ember.computed(
+    'collections.isAssessment',
+    'attempts',
+    function() {
+      const component = this;
+      const attempts = component.get('attempts');
+      const isAssessment = component.get('collections.isAssessment');
+      return attempts.length > 1 && isAssessment;
+    }
+  ),
 
   /**
    * @type {JSON}
@@ -152,9 +161,7 @@ export default Ember.Component.extend({
   /**
    * @property {[]}
    */
-  attempts: Ember.computed('assessmentResult.totalAttempts', function() {
-    return this.getAttemptList();
-  }),
+  attempts: Ember.computed.alias('completedSessions'),
 
   /**
    * calculate  the class average by student performance score as a width
@@ -314,6 +321,25 @@ export default Ember.Component.extend({
    */
   class: {},
 
+  /**
+   * @property {Object} visibleAttempt
+   * Property to hold data of currently rendered report session
+   */
+
+  visibleAttempt: Ember.computed('assessmentResult', function() {
+    const component = this;
+    let completedSessions = component.get('completedSessions');
+    let visibleAttempt = null;
+    let assessmentResult = component.get('assessmentResult');
+    if (completedSessions && assessmentResult.get('sessionId')) {
+      visibleAttempt = completedSessions.findBy(
+        'sessionId',
+        assessmentResult.get('sessionId')
+      );
+    }
+    return visibleAttempt;
+  }),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -387,6 +413,14 @@ export default Ember.Component.extend({
       component.set('showSuggestionPullup', false);
       component.set('showOpenEndedPullup', false);
       component.closePullUp(true);
+    },
+
+    //Action triggered when select a different session to bring up report
+    onSelectAttempt(attemptData) {
+      const component = this;
+      if (!Ember.isEqual(attemptData, component.get('visibleAttempt'))) {
+        component.loadSession(attemptData);
+      }
     }
   },
 
@@ -529,7 +563,6 @@ export default Ember.Component.extend({
             context.set('sessionId', session.sessionId);
           }
         }
-
         if (context.get('classId')) {
           const performanceService = component.get('performanceService');
           return performanceService
@@ -597,15 +630,15 @@ export default Ember.Component.extend({
    * @returns {Context}
    */
   getAttemptList: function() {
-    var attempts = [];
-    var totalAttempts = this.get('assessmentResult.totalAttempts');
-
-    for (; totalAttempts > 0; totalAttempts--) {
-      attempts.push({
-        label: totalAttempts,
-        value: totalAttempts
+    const component = this;
+    let attempts = Ember.A([]);
+    let completedSessions = component.get('completedSessions');
+    if (completedSessions) {
+      completedSessions.map(completedSession => {
+        attempts.pushObject(completedSession);
       });
     }
+
     return attempts;
   },
 
@@ -669,6 +702,7 @@ export default Ember.Component.extend({
    */
   loadSession: function(session) {
     const component = this;
+    component.set('isLoading', true);
     const context = component.getContext(component.get('reportData'));
     if (session) {
       //collections has no session
