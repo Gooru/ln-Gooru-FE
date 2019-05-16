@@ -116,8 +116,8 @@ export default Ember.Component.extend({
      * Handle toggle functionality of hide/show lesson items
      * @return {Object}
      */
-    toggleLessonItems(selectedLesson) {
-      this.handleMilestoneLessonToggle(selectedLesson);
+    toggleLessonItems(selectedLesson, lessonIndex) {
+      this.handleMilestoneLessonToggle(selectedLesson, lessonIndex);
     },
 
     /**
@@ -304,9 +304,10 @@ export default Ember.Component.extend({
       if (locateLastPlayedItem && userCurrentLocation) {
         let lessonId = userCurrentLocation.get('lessonId');
         let selectedLesson = lessons.findBy('lessonId', lessonId);
+        let lessonIndex = lessons.indexOf(selectedLesson);
         if (selectedLesson) {
           Ember.run.later(function() {
-            component.handleMilestoneLessonToggle(selectedLesson);
+            component.handleMilestoneLessonToggle(selectedLesson, lessonIndex);
           }, 500);
         }
       }
@@ -314,11 +315,11 @@ export default Ember.Component.extend({
     }
   },
 
-  handleMilestoneLessonToggle(selectedLesson) {
+  handleMilestoneLessonToggle(selectedLesson, lessonIndex) {
     let component = this;
     let lessonId = selectedLesson.get('lessonId');
     let unitId = selectedLesson.get('unitId');
-    let element = `#milestone-lesson-${unitId}-${lessonId}`;
+    let element = `#milestone-lesson-${unitId}-${lessonId}-${lessonIndex}`;
     let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
 
@@ -368,8 +369,12 @@ export default Ember.Component.extend({
         if (!component.isDestroyed) {
           component.set('userCurrentLocation', userCurrentLocation);
           if (userCurrentLocation) {
-            let selectedMilestone = component.get('milestone');
-            if (selectedMilestone) {
+            let lessonId = userCurrentLocation.get('lessonId');
+            let selectedLesson = component
+              .get('milestone.lessons')
+              .findBy('lessonId', lessonId);
+            if (selectedLesson) {
+              let selectedMilestone = component.get('milestone');
               component.handleMilestoneToggle(selectedMilestone);
             }
           }

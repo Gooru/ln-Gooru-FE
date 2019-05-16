@@ -98,6 +98,8 @@
                   class=class
                   studentId=activeStudent.id
                   allowToPlay=false
+                  gradeSubject=gradeSubject
+                  locateLastPlayedItem=false
                 }}
                 {{/unless}}
 
@@ -128,6 +130,9 @@
             {{else}}
               {{teacher.class.milestone-course-map
                     class=class
+                    gradeSubject=gradeSubject
+                    onPreviewContent='onPreviewContent'
+                    onGoLive="goLive"
                   }}
                 {{/unless}}
               </div>

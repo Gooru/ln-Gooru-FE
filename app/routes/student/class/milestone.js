@@ -16,6 +16,12 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   rescopeService: Ember.inject.service('api-sdk/rescope'),
 
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
+
   // -------------------------------------------------------------------------
   // Methods
   beforeModel() {
@@ -52,18 +58,38 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       courseId: currentClass.courseId,
       classId: currentClass.id
     };
+    const subject = currentClass.get('preference.subject');
+    let taxonomyService = route.get('taxonomyService');
     if (isRoute0Applicable) {
       route0Promise = route.get('route0Service').fetchInClass(courseIdContext);
     }
-    let rescopePromise = route
-      .get('rescopeService')
-      .getSkippedContents(courseIdContext);
+
     return Ember.RSVP.hash({
       currentClass: currentClass,
       course: course,
       route0: route0Promise,
-      rescopedContents: rescopePromise
+      rescopedContents: route.getRescopedContents(courseIdContext),
+      gradeSubject: subject ? taxonomyService.fetchSubject(subject) : {}
     });
+  },
+
+  /**
+   * @function getRescopedContents
+   * Method to get rescoped contents
+   */
+  getRescopedContents(courseIdContext) {
+    let component = this;
+    return Ember.RSVP.hash({
+      rescopedContents: component
+        .get('rescopeService')
+        .getSkippedContents(courseIdContext)
+    })
+      .then(rescopedContents => {
+        return rescopedContents.rescopedContents;
+      })
+      .catch(function() {
+        return {};
+      });
   },
 
   /**
@@ -76,6 +102,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('route0', model.route0);
     controller.set('course', model.course);
     controller.set('rescopedContents', model.rescopedContents);
+    controller.set('gradeSubject', model.gradeSubject);
     controller.get('studentClassController').selectMenuItem('course-map');
   }
 });

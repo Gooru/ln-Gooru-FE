@@ -1,9 +1,5 @@
 import Ember from 'ember';
-import {
-  ROLES,
-  PLAYER_EVENT_SOURCE,
-  CONTENT_TYPES
-} from 'gooru-web/config/config';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -43,12 +39,6 @@ export default Ember.Component.extend({
    * @property {NavigateMapService}
    */
   navigateMapService: Ember.inject.service('api-sdk/navigate-map'),
-
-  /**
-   * taxonomy service dependency injection
-   * @type {Object}
-   */
-  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
   // -------------------------------------------------------------------------
   // Properties
@@ -140,33 +130,34 @@ export default Ember.Component.extend({
      * Handle toggle functionality of hide/show lesson items
      * @return {Object}
      */
-    toggleLessonItems(milestone, lessons, selectedLesson) {
-      this.handleMilestoneLessonToggle(milestone, lessons, selectedLesson);
+    toggleLessonItems(milestone, lessons, selectedLesson, lessonIndex) {
+      this.handleMilestoneLessonToggle(
+        milestone,
+        lessons,
+        selectedLesson,
+        lessonIndex
+      );
     },
 
     /**
-     * Open the player with the specific collection/assessment
-     *
-     * @function actions:studyPlayer
-     * @param {string} milestone - Identifier for a milestone
-     * @param {string} unitId - Identifier for a unit
-     * @param {string} lessonId - Identifier for lesson
-     * @param {string} item - collection, assessment, lesson or resource
+     * @function goLive
      */
-    studyPlayer: function(type, milestoneId, unitId, lessonId, item) {
-      const component = this;
-      const classId = component.get('classId');
-      const minScore = component.get('class.minScore');
-      const courseId = component.get('courseId');
-      item.set('minScore', minScore);
-      component.startCollectionStudyPlayer(
-        classId,
-        courseId,
-        unitId,
-        lessonId,
-        item,
-        milestoneId
-      );
+    goLive: function(collection) {
+      let options = {
+        collectionId: collection.get('id'),
+        collectionType: collection.get('collectionType')
+      };
+      this.sendAction('onGoLive', options);
+    },
+
+    /**
+     * Action is responsible to preview the collection / assessment.
+     * @param  {String} unitId
+     * @param  {String} lessonId
+     * @param  {String} collection
+     */
+    openCollectionPreview(unitId, lessonId, collection) {
+      this.sendAction('onPreviewContent', unitId, lessonId, collection);
     },
 
     //Action triggered when click on milestone performance
@@ -235,7 +226,6 @@ export default Ember.Component.extend({
     component.set('isLoading', true);
     let fwCode = component.get('fwCode');
     let showPerformance = component.get('showPerformance');
-    let taxonomyService = component.get('taxonomyService');
     let filters = {
       subject: component.get('class.preference.subject')
     };
@@ -247,12 +237,10 @@ export default Ember.Component.extend({
     Ember.RSVP.hash({
       milestones: component
         .get('courseService')
-        .getCourseMilestones(courseId, fwCode),
-      grades: taxonomyService.fetchGradesBySubject(filters)
-    }).then(({ milestones, grades }) => {
+        .getCourseMilestones(courseId, fwCode)
+    }).then(({ milestones }) => {
       if (!component.isDestroyed) {
         let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
-          grades,
           milestones
         );
         component.set('milestones', milestoneData);
@@ -453,12 +441,14 @@ export default Ember.Component.extend({
             if (locateLastPlayedItem && userCurrentLocation) {
               let lessonId = userCurrentLocation.get('lessonId');
               let selectedLesson = lessons.findBy('lesson_id', lessonId);
+              let lessonIndex = lessons.indexOf(selectedLesson);
               if (selectedLesson) {
                 Ember.run.later(function() {
                   component.handleMilestoneLessonToggle(
                     selectedMilestone,
                     lessons,
-                    selectedLesson
+                    selectedLesson,
+                    lessonIndex
                   );
                 }, 500);
               }
@@ -468,13 +458,13 @@ export default Ember.Component.extend({
     }
   },
 
-  handleMilestoneLessonToggle(milestone, lessons, selectedLesson) {
+  handleMilestoneLessonToggle(milestone, lessons, selectedLesson, lessonIndex) {
     let component = this;
     let classId = component.get('classId');
     let unitId = selectedLesson.get('unit_id');
     let lessonId = selectedLesson.get('lesson_id');
     let milestoneId = milestone.get('milestone_id');
-    let element = `#milestone-lesson-${milestoneId}-${lessonId}`;
+    let element = `#milestone-lesson-${milestoneId}-${lessonId}-${lessonIndex}`;
     let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
     let courseId = component.get('courseId');
@@ -592,11 +582,10 @@ export default Ember.Component.extend({
    * This Method is responsible for milestone display based on students class grade.
    * @return {Array}
    */
-  renderMilestonesBasedOnStudentGradeRange(grades, milestones) {
+  renderMilestonesBasedOnStudentGradeRange(milestones) {
     let component = this;
     let milestoneData = Ember.A([]);
     let classGradeId = component.get('class.gradeCurrent');
-    component.set('grades', grades);
     milestones.forEach(milestone => {
       let gradeId = milestone.get('grade_id');
       if (classGradeId === gradeId) {
@@ -605,87 +594,5 @@ export default Ember.Component.extend({
       milestoneData.pushObject(milestone);
     });
     return milestoneData;
-  },
-
-  /**
-   * Navigates to collection
-   * @param {string} classId
-   * @param {string} courseId
-   * @param {string} unitId
-   * @param {string} lessonId
-   * @param {Collection} collection
-   * @param {string} milestoneId
-   */
-  startCollectionStudyPlayer: function(
-    classId,
-    courseId,
-    unitId,
-    lessonId,
-    collection,
-    milestoneId
-  ) {
-    let component = this;
-    let role = ROLES.STUDENT;
-    let source = PLAYER_EVENT_SOURCE.COURSE_MAP;
-    let collectionId = collection.get('id');
-    let collectionType = collection.get('collectionType');
-    let collectionSubType = collection.get('collectionSubType');
-    let minScore = collection.get('minScore');
-    let pathId = collection.get('pathId') || 0;
-    let pathType = collection.get('pathType') || '';
-    let queryParams = {
-      classId,
-      milestoneId,
-      unitId,
-      lessonId,
-      collectionId,
-      role,
-      source,
-      type: collectionType,
-      subtype: collectionSubType,
-      pathId,
-      minScore,
-      collectionSource: collection.source || 'course_map',
-      isStudyPlayer: true,
-      pathType
-    };
-
-    let suggestionPromise = null;
-    // Verifies if it is a suggested Collection/Assessment
-    if (collectionSubType) {
-      suggestionPromise = component
-        .get('navigateMapService')
-        .startSuggestion(
-          courseId,
-          unitId,
-          lessonId,
-          collectionId,
-          collectionType,
-          collectionSubType,
-          pathId,
-          classId,
-          pathType,
-          milestoneId
-        );
-    } else {
-      suggestionPromise = component
-        .get('navigateMapService')
-        .startCollection(
-          courseId,
-          unitId,
-          lessonId,
-          collectionId,
-          collectionType,
-          classId,
-          pathId,
-          pathType,
-          milestoneId
-        );
-    }
-    suggestionPromise.then(() =>
-      component.get('router').transitionTo('study-player', courseId, {
-        queryParams
-      })
-    );
   }
 });
