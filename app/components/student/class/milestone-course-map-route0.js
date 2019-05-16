@@ -85,14 +85,20 @@ export default Ember.Component.extend({
   studentId: null,
 
   /**
-  * @property {Boolean} isShowRoute0CollectionReport
-  */
+   * @property {Boolean} isShowRoute0CollectionReport
+   */
   isShowRoute0CollectionReport: false,
 
   /**
    * @property {Boolean} isShowRoute0ExternalAssessmentReport
    */
   isShowRoute0ExternalAssessmentReport: false,
+
+  /**
+   * Property will decided to show the play button or not
+   * @type {Boolean}
+   */
+  allowToPlay: true,
 
   // -------------------------------------------------------------------------
   // Actions
@@ -231,35 +237,33 @@ export default Ember.Component.extend({
     let lessonId = lesson.get('lessonId');
     let performanceService = component.get('performanceService');
 
-    Ember.RSVP
-      .hash({
-        performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
-          classId,
-          courseId,
-          unitId,
-          lessonId,
-          CONTENT_TYPES.ASSESSMENT,
-          userUid
-        ),
-        performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
-          classId,
-          courseId,
-          unitId,
-          lessonId,
-          CONTENT_TYPES.COLLECTION,
-          userUid
-        )
-      })
-      .then(({ performanceAssessment, performanceCollection }) => {
-        component.setMilestoneCollectionPerformanceData(
-          collections,
-          performanceAssessment
-        );
-        component.setMilestoneCollectionPerformanceData(
-          collections,
-          performanceCollection
-        );
-      });
+    Ember.RSVP.hash({
+      performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
+        classId,
+        courseId,
+        unitId,
+        lessonId,
+        CONTENT_TYPES.ASSESSMENT,
+        userUid
+      ),
+      performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
+        classId,
+        courseId,
+        unitId,
+        lessonId,
+        CONTENT_TYPES.COLLECTION,
+        userUid
+      )
+    }).then(({ performanceAssessment, performanceCollection }) => {
+      component.setMilestoneCollectionPerformanceData(
+        collections,
+        performanceAssessment
+      );
+      component.setMilestoneCollectionPerformanceData(
+        collections,
+        performanceCollection
+      );
+    });
   },
 
   setMilestoneCollectionPerformanceData(

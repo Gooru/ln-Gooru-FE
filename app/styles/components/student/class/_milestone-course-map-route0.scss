@@ -264,6 +264,10 @@
                   .colllection-play-btn {
                     visibility: visible;
                     opacity: 1;
+                    &.not-allowed-to-play {
+                      pointer-events: none;
+                      visibility: hidden;
+                    }
                   }
 
                   .collection-title-container {
@@ -279,6 +283,10 @@
                     visibility: visible;
                     opacity: 1;
                     transition: visibility 0s linear 0s, opacity 300ms;
+                    &.not-allowed-to-play {
+                      pointer-events: none;
+                      visibility: hidden;
+                    }
                   }
                 }
 
@@ -336,6 +344,10 @@
                   cursor: pointer;
                   align-self: center;
                   justify-self: center;
+                  &.not-allowed-to-play {
+                    pointer-events: none;
+                    visibility: hidden;
+                  }
 
                   i {
                     font-size: 30px;

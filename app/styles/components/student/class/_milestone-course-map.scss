@@ -170,6 +170,7 @@
             &.show-all-rescoped-content {
               display: block;
             }
+
             &.class-grade-milestone {
               display: block;
             }
@@ -332,6 +333,7 @@
                 &.show-all-rescoped-content {
                   display: block;
                 }
+
                 &.class-grade-milestone {
                   display: block;
                 }
@@ -390,9 +392,9 @@
                   }
                 }
 
+                &.prev-coll-path-.next-coll-path-.path-teacher,
                 &.prev-coll-path-.next-coll-path-system.path-teacher,
-                &.prev-coll-path-.next-coll-path-teacher.path-teacher,
-                &.prev-coll-path-.next-coll-path-.path-teacher {
+                &.prev-coll-path-.next-coll-path-teacher.path-teacher {
                   .collection-icon-container {
                     .collection-icon-upward-line {
                       left: 23px;
@@ -532,6 +534,10 @@
                   .colllection-play-btn {
                     visibility: visible;
                     opacity: 1;
+                    &.not-allowed-to-play {
+                      pointer-events: none;
+                      visibility: hidden;
+                    }
                   }
 
                   .collection-title-container {
@@ -547,6 +553,10 @@
                     visibility: visible;
                     opacity: 1;
                     transition: visibility 0s linear 0s, opacity 300ms;
+                    &.not-allowed-to-play {
+                      pointer-events: none;
+                      visibility: hidden;
+                    }
                   }
                 }
 
@@ -604,6 +614,11 @@
                   cursor: pointer;
                   align-self: center;
                   justify-self: center;
+
+                  &.not-allowed-to-play {
+                    pointer-events: none;
+                    visibility: hidden;
+                  }
 
                   i {
                     font-size: 30px;
