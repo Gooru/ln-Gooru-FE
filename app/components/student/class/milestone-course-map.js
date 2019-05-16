@@ -473,12 +473,14 @@ export default Ember.Component.extend({
         .getCourseMilestoneLessons(courseId, milestoneId)
         .then(lessons => {
           if (!component.isDestroyed) {
-            rescopedLessonContents.forEach(rescopedLessonId => {
-              let lesson = lessons.findBy('lesson_id', rescopedLessonId);
-              if (lesson) {
-                lesson.set('rescope', true);
-              }
-            });
+            if (rescopedLessonContents) {
+              rescopedLessonContents.forEach(rescopedLessonId => {
+                let lesson = lessons.findBy('lesson_id', rescopedLessonId);
+                if (lesson) {
+                  lesson.set('rescope', true);
+                }
+              });
+            }
             selectedMilestone.set('lessons', lessons);
             if (showPerformance) {
               component.fetchMilestoneLessonsPerformance(milestoneId, lessons);
@@ -677,7 +679,17 @@ export default Ember.Component.extend({
     if (studentId) {
       filter.userId = studentId;
     }
-    return component.get('rescopeService').getSkippedContents(filter);
+    return Ember.RSVP.hash({
+      rescopedContents: component
+        .get('rescopeService')
+        .getSkippedContents(filter)
+    })
+      .then(rescopedContents => {
+        return rescopedContents;
+      })
+      .catch(function() {
+        return null;
+      });
   },
 
   /**
@@ -692,7 +704,7 @@ export default Ember.Component.extend({
     let gradeBound = gradeBounds.findBy(userUid);
     let milestoneData = Ember.A([]);
     let studentGradeBound = Ember.Object.create(gradeBound.get(userUid));
-    let classGradeUpperBound = component.get('class.gradeUpperBound');
+    let classGradeId = component.get('class.gradeCurrent');
     component.set('studentGradeBound', studentGradeBound);
     component.set('grades', grades);
     let gradeLowerBound = studentGradeBound.get('grade_lower_bound');
@@ -702,17 +714,15 @@ export default Ember.Component.extend({
     let endGrade = grades.findBy('id', gradeUpperBound);
     let endGradeIndex = grades.indexOf(endGrade);
     let studentGrades = grades.slice(startGradeIndex, endGradeIndex + 1);
-    let classGrade = grades.findBy('id', classGradeUpperBound);
-    milestones.forEach(milestone => {
+
+    milestones.forEach((milestone, index) => {
       let gradeId = milestone.get('grade_id');
       let grade = studentGrades.findBy('id', gradeId);
       if (grade) {
-        if (grade.get('sequence') > classGrade.get('sequence')) {
-          milestone.set('higherThanClassGrade', true);
+        if (gradeId === classGradeId) {
+          milestone.set('isClassGrade', true);
         }
-        if (classGrade.get('sequence') === grade.get('sequence')) {
-          milestone.set('milestoneHasClassGrade', true);
-        }
+        milestone.set('milestoneIndex', index + 1);
         milestoneData.pushObject(milestone);
       }
     });
@@ -726,22 +736,25 @@ export default Ember.Component.extend({
   getRescopeCollectionIds() {
     let component = this;
     let collectionIds = Ember.A([]);
-    let rescopedCollectionContents = component.get(
-      'rescopedContents.collections'
-    );
-    let rescopedCollectionsExternalContents = component.get(
-      'rescopedContents.collectionsExternal'
-    );
-    let rescopedAssessmentsExternalContents = component.get(
-      'rescopedContents.assessmentsExternal'
-    );
-    let rescopedAssessmentsContents = component.get(
-      'rescopedContents.assessments'
-    );
-    collectionIds.pushObjects(rescopedCollectionContents);
-    collectionIds.pushObjects(rescopedAssessmentsContents);
-    collectionIds.pushObjects(rescopedCollectionsExternalContents);
-    collectionIds.pushObjects(rescopedAssessmentsExternalContents);
+    let rescopedContents = component.get('rescopedContents');
+    if (rescopedContents) {
+      let rescopedCollectionContents = component.get(
+        'rescopedContents.collections'
+      );
+      let rescopedCollectionsExternalContents = component.get(
+        'rescopedContents.collectionsExternal'
+      );
+      let rescopedAssessmentsExternalContents = component.get(
+        'rescopedContents.assessmentsExternal'
+      );
+      let rescopedAssessmentsContents = component.get(
+        'rescopedContents.assessments'
+      );
+      collectionIds.pushObjects(rescopedCollectionContents);
+      collectionIds.pushObjects(rescopedAssessmentsContents);
+      collectionIds.pushObjects(rescopedCollectionsExternalContents);
+      collectionIds.pushObjects(rescopedAssessmentsExternalContents);
+    }
     return collectionIds;
   },
 
