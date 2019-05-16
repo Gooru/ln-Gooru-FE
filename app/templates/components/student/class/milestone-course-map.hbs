@@ -7,7 +7,7 @@
             {{gru-icon name="flag"}}
           </div>
           <div class="milestone-title">
-            <p>Milestone {{plus-one milestoneIndex}}
+            <p>Milestone {{plus-one milestone.grade_seq}}
               {{#if (gte milestone.performance.completedInPrecentage 0) }} ({{milestone.performance.completedInPrecentage}}% Completed) {{/if}}
             </p>
           </div>
@@ -80,7 +80,7 @@
                             <div class="collection-title-container">
                               <p>{{collection.title}}</p>
                             </div>
-                            <div class="colllection-play-btn" {{action 'studyPlayer' 'collection' milestone.milestone_id lesson.unit_id lesson.lesson_id collection}}>
+                            <div class="colllection-play-btn {{unless allowToPlay 'not-allowed-to-play'}}" {{action 'studyPlayer' 'collection' milestone.milestone_id lesson.unit_id lesson.lesson_id collection}}>
                               {{gru-icon style="material-icons-outlined" name="play_circle_filled_white"}}
                             </div>
 

@@ -130,6 +130,12 @@ export default Ember.Component.extend({
    */
   studentId: null,
 
+  /**
+   * Property will decided to show the play button or not
+   * @type {Boolean}
+   */
+  allowToPlay: true,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -683,7 +689,7 @@ export default Ember.Component.extend({
     let gradeBounds = component.get('class.memberGradeBounds');
     let studentId = component.get('studentId');
     let userUid = studentId ? studentId : component.get('session.userId');
-    let gradeBound = gradeBounds.findBy(studentId);
+    let gradeBound = gradeBounds.findBy(userUid);
     let milestoneData = Ember.A([]);
     let studentGradeBound = Ember.Object.create(gradeBound.get(userUid));
     let classGradeUpperBound = component.get('class.gradeUpperBound');
