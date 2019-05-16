@@ -275,7 +275,7 @@ export default Ember.Component.extend({
           milestones
         );
         component.set('milestones', milestoneData);
-        component.set('rescopedContents', rescopedContents);
+        component.set('rescopedContents', rescopedContents.rescopedContents);
         if (showPerformance) {
           component.fetchMilestonePerformance();
         }
