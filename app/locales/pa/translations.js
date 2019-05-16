@@ -87,7 +87,8 @@ export default Object.assign(quizzesTranslations, {
     'ਆਪਣੇ ਸਪੈਲਿੰਗਾਂ ਦੀ ਜਾਂਚ ਕਰੋ ਅਸੀਂ ਸਾਰੇ ਗ਼ਲਤੀਆਂ ਕਰਦੇ ਹਾਂ! ਜਾਂ ਇਸਦੀ ਬਜਾਏ ਇਸੇ ਸ਼ਬਦ ਦੀ ਖੋਜ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ.',
   'common.a-collection': 'ਇੱਕ ਸੰਗ੍ਰਹਿ',
   'common.a-course': 'ਇੱਕ ਕੋਰਸ',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.a-question': 'ਇੱਕ ਸਵਾਲ',
   'common.a-resource': 'ਇੱਕ ਸਰੋਤ',
   'common.a-rubric': 'ਇੱਕ ਚਰਬੀਕਾਰ',
@@ -2537,5 +2538,8 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material'
 });

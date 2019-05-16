@@ -90,7 +90,8 @@ export default Object.assign(quizzesTranslations, {
     'നിങ്ങളുടെ അക്ഷരപ്പിശക് പരിശോധിക്കുക. നമ്മൾ എല്ലാവരും തെറ്റ് ചെയ്യുന്നു! അല്ലെങ്കിൽ സമാനമായ പദം തിരയാൻ ശ്രമിക്കുക.',
   'common.a-collection': 'ഒരു ശേഖരം',
   'common.a-course': 'ഒരു കോഴ്സ്',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.a-question': 'ഒരു ചോദ്യം',
   'common.a-resource': 'ഒരു വിഭവം',
   'common.a-rubric': 'ഒരു റബ്രിക്ക്',
@@ -2605,5 +2606,8 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material'
 });
