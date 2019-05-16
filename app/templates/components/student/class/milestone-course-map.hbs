@@ -1,13 +1,13 @@
 <div class="milestone-course-map-container">
   {{#each milestones as | milestone milestoneIndex | }}
-    <div class="milestone-course-map">
+    <div class="milestone-course-map {{if milestone.isClassGrade 'class-grade'}}">
       <div class="milestone-course-map-panel  {{if milestone.isActive 'active'}}">
         <div class="milestone-info-container"  {{action 'toggleMilestoneItems' milestone }}>
           <div class="milestone-flag-icon">
             {{gru-icon name="flag"}}
           </div>
           <div class="milestone-title">
-            <p>Milestone {{milestone.milestoneIndex}}
+            <p> {{gradeSubject.title}} - {{milestone.grade_name}}
               {{#if (gte milestone.performance.completedInPrecentage 0) }} ({{milestone.performance.completedInPrecentage}}% Completed) {{/if}}
             </p>
           </div>
@@ -32,9 +32,9 @@
       <div class="milestone-course-map-lesson-container" id="milestone-{{milestone.milestone_id}}">
         {{#if milestone.hasLessonFetched}}
           {{#if milestone.lessons}}
-            {{#each milestone.lessons as | lesson |}}
+            {{#each milestone.lessons as | lesson lessonIndex |}}
               <div class="milestone-course-map-lesson {{if milestoneHasClassGrade 'class-grade-milestone'}} {{if showAllRescopedContent 'show-all-rescoped-content'}} {{if lesson.rescope 'rescope'}} {{if lesson.isNextActive 'next-active'}} {{if lesson.isPrevActive 'prev-active'}} {{if lesson.isActive 'active'}}">
-                <div class="milestone-course-map-lesson-panel first-path-{{lesson.firstCollHasSuggsType}} prev-col-path-{{lesson.prevLeCollHasSuggsType}}  {{if lesson.has-activity 'has-activity'}}" {{action 'toggleLessonItems'milestone milestone.lessons lesson }}>
+                <div class="milestone-course-map-lesson-panel first-path-{{lesson.firstCollHasSuggsType}} prev-col-path-{{lesson.prevLeCollHasSuggsType}}  {{if lesson.has-activity 'has-activity'}}" {{action 'toggleLessonItems'milestone milestone.lessons lesson lessonIndex}}>
                   <div class="lesson-icon-container">
                     <div class="lesson-icon-upward-line">
                       <svg height="35" width="20">
@@ -61,11 +61,11 @@
                     </div>
                   {{/if}}
                 </div>
-                <div class="milestone-course-map-collection-container" id="milestone-lesson-{{milestone.milestone_id}}-{{lesson.lesson_id}}">
+                <div class="milestone-course-map-collection-container" id="milestone-lesson-{{milestone.milestone_id}}-{{lesson.lesson_id}}-{{lessonIndex}}">
                   {{#if lesson.hasCollectionFetched}}
                     {{#if lesson.collections}}
                       {{#each lesson.collections as | collection |}}
-                        <div class="milestone-course-map-collection {{if milestoneHasClassGrade 'class-grade-milestone'}} {{if showAllRescopedContent 'show-all-rescoped-content'}} {{if collection.rescope 'rescope'}}">
+                        <div class="milestone-course-map-collection  {{if showAllRescopedContent 'show-all-rescoped-content'}} {{if collection.rescope 'rescope'}}">
                           <div class="milestone-course-map-collection-panel prev-coll-path-{{collection.prevCollHasSuggsType}} next-coll-path-{{collection.nextCollHasSuggsType}} path-{{collection.pathType}}  {{if collection.has-activity 'has-activity'}} {{if collection.last-played-collection 'last-played-collection'}}">
                             <div class="collection-icon-container">
                               <div class="collection-icon-upward-line">
