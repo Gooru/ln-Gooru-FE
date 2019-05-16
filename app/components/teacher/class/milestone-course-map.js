@@ -249,9 +249,13 @@ export default Ember.Component.extend({
         .get('courseService')
         .getCourseMilestones(courseId, fwCode),
       grades: taxonomyService.fetchGradesBySubject(filters)
-    }).then(({ milestones }) => {
+    }).then(({ milestones, grades }) => {
       if (!component.isDestroyed) {
-        component.set('milestones', milestones);
+        let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
+          grades,
+          milestones
+        );
+        component.set('milestones', milestoneData);
         if (showPerformance) {
           component.fetchMilestonePerformance();
         }
@@ -582,6 +586,25 @@ export default Ember.Component.extend({
         }
       });
     }
+  },
+
+  /**
+   * This Method is responsible for milestone display based on students class grade.
+   * @return {Array}
+   */
+  renderMilestonesBasedOnStudentGradeRange(grades, milestones) {
+    let component = this;
+    let milestoneData = Ember.A([]);
+    let classGradeId = component.get('class.gradeCurrent');
+    component.set('grades', grades);
+    milestones.forEach(milestone => {
+      let gradeId = milestone.get('grade_id');
+      if (classGradeId === gradeId) {
+        milestone.set('isClassGrade', true);
+      }
+      milestoneData.pushObject(milestone);
+    });
+    return milestoneData;
   },
 
   /**
