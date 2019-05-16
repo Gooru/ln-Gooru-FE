@@ -176,31 +176,29 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       route.modelFor('application').myClasses || // when refreshing the page the variable is accessible at the route
       route.controllerFor('application').get('myClasses'); // after login the variable is refreshed at the controller
 
-    return Ember.RSVP
-      .hash({
-        firstCourse: firstCoursePromise,
-        secondCourse: secondCoursePromise,
-        thirdCourse: thirdCoursePromise,
-        fourthCourse: fourthCoursePromise,
-        myClasses: myClasses
-      })
-      .then(function(hash) {
-        const firstFeaturedCourse = hash.firstCourse;
-        const secondFeaturedCourse = hash.secondCourse;
-        const thirdFeaturedCourse = hash.thirdCourse;
-        const fourthFeaturedCourse = hash.fourthCourse;
-        featuredCourses.push(firstFeaturedCourse);
-        featuredCourses.push(secondFeaturedCourse);
-        featuredCourses.push(thirdFeaturedCourse);
-        featuredCourses.push(fourthFeaturedCourse);
+    return Ember.RSVP.hash({
+      firstCourse: firstCoursePromise,
+      secondCourse: secondCoursePromise,
+      thirdCourse: thirdCoursePromise,
+      fourthCourse: fourthCoursePromise,
+      myClasses: myClasses
+    }).then(function(hash) {
+      const firstFeaturedCourse = hash.firstCourse;
+      const secondFeaturedCourse = hash.secondCourse;
+      const thirdFeaturedCourse = hash.thirdCourse;
+      const fourthFeaturedCourse = hash.fourthCourse;
+      featuredCourses.push(firstFeaturedCourse);
+      featuredCourses.push(secondFeaturedCourse);
+      featuredCourses.push(thirdFeaturedCourse);
+      featuredCourses.push(fourthFeaturedCourse);
 
-        const activeClasses = hash.myClasses.getStudentActiveClasses(myId);
-        return {
-          activeClasses,
-          featuredCourses,
-          loginCount
-        };
-      });
+      const activeClasses = hash.myClasses.getStudentActiveClasses(myId);
+      return {
+        activeClasses,
+        featuredCourses,
+        loginCount
+      };
+    });
   },
 
   afterModel(resolvedModel) {
@@ -209,7 +207,9 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
 
   loadClassCardsData(activeClasses) {
     let route = this;
-    let classCourseIds = route.getListOfClassCourseIds(activeClasses);
+    let classCourseIdsFwCode = route.getListOfClassCourseIdsFwCode(
+      activeClasses
+    );
     let courseIDs = route.getListOfCourseIds(activeClasses);
     let myId = route.get('session.userId');
     let nonPremiumClasses = activeClasses.filter(classData => {
@@ -242,7 +242,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       );
     let locationPromise = route
       .get('analyticsService')
-      .getUserCurrentLocationByClassIds(classCourseIds, myId);
+      .getUserCurrentLocationByClassIds(classCourseIdsFwCode, myId);
     let competencyCompletionStats =
       premiumClassIds.length > 0
         ? route
@@ -255,51 +255,49 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
           .get('performanceService')
           .getCAPerformanceData(nonPremiumClassIds, myId)
         : Ember.RSVP.resolve([]);
-    Ember.RSVP
-      .hash({
-        classPerformanceSummaryItems: perfPromise,
-        classesLocation: locationPromise,
-        courseCards: courseCardsPromise,
-        caClassPerfSummary: caClassPerfSummaryPromise,
-        competencyStats: competencyCompletionStats
-      })
-      .then(function(hash) {
-        const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
-        const classesLocation = hash.classesLocation;
-        const courseCards = hash.courseCards;
+    Ember.RSVP.hash({
+      classPerformanceSummaryItems: perfPromise,
+      classesLocation: locationPromise,
+      courseCards: courseCardsPromise,
+      caClassPerfSummary: caClassPerfSummaryPromise,
+      competencyStats: competencyCompletionStats
+    }).then(function(hash) {
+      const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
+      const classesLocation = hash.classesLocation;
+      const courseCards = hash.courseCards;
 
-        activeClasses.forEach(function(activeClass) {
-          const classId = activeClass.get('id');
-          const courseId = activeClass.get('courseId');
+      activeClasses.forEach(function(activeClass) {
+        const classId = activeClass.get('id');
+        const courseId = activeClass.get('courseId');
 
-          activeClass.set(
-            'currentLocation',
-            classesLocation.findBy('classId', classId)
-          );
-          activeClass.set(
-            'performanceSummary',
-            classPerformanceSummaryItems.findBy('classId', classId)
-          );
-          activeClass.set(
-            'performanceSummaryForDCA',
-            hash.caClassPerfSummary.findBy('classId', classId)
-          );
-          activeClass.set(
-            'competencyStats',
-            hash.competencyStats.findBy('classId', classId)
-          );
+        activeClass.set(
+          'currentLocation',
+          classesLocation.findBy('classId', classId)
+        );
+        activeClass.set(
+          'performanceSummary',
+          classPerformanceSummaryItems.findBy('classId', classId)
+        );
+        activeClass.set(
+          'performanceSummaryForDCA',
+          hash.caClassPerfSummary.findBy('classId', classId)
+        );
+        activeClass.set(
+          'competencyStats',
+          hash.competencyStats.findBy('classId', classId)
+        );
 
-          if (courseId) {
-            let course = courseCards.findBy('id', activeClass.get('courseId'));
-            activeClass.set('course', course);
-          }
-        });
+        if (courseId) {
+          let course = courseCards.findBy('id', activeClass.get('courseId'));
+          activeClass.set('course', course);
+        }
       });
+    });
   },
 
   /**
    * @function getListOfClassCourseIds
-   * Method to fetch class and course ids from the list of classess
+   * Method to fetch class and course ids from the list of classes
    */
   getListOfClassCourseIds(activeClasses) {
     let listOfActiveClassCourseIds = Ember.A([]);
@@ -315,6 +313,31 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     return listOfActiveClassCourseIds;
   },
 
+  /**
+   * @function getListOfClassCourseIdsFwCode
+   * Method to fetch class, course ids and fwCode from the list of classes
+   */
+  getListOfClassCourseIdsFwCode(activeClasses) {
+    let listOfActiveClassCourseIdsFwCode = Ember.A([]);
+    activeClasses.map(activeClass => {
+      if (activeClass.courseId) {
+        let classCourseId = {
+          classId: activeClass.id,
+          courseId: activeClass.courseId
+        };
+        if (
+          activeClass.milestoneViewApplicable &&
+          activeClass.milestoneViewApplicable === true &&
+          activeClass.preference &&
+          activeClass.preference.framework
+        ) {
+          classCourseId.fwCode = activeClass.preference.framework;
+        }
+        listOfActiveClassCourseIdsFwCode.push(classCourseId);
+      }
+    });
+    return listOfActiveClassCourseIdsFwCode;
+  },
   /**
    * @function getListOfCourseIds
    * Method to fetch course ids from the list of classess

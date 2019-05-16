@@ -21,12 +21,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-  didInsertElement() {
-    let component = this;
-    if (component.get('isRoute0') && component.get('isRoute0Applicable')) {
-      component.fetchRout0Contents();
-    }
-  },
 
   didRender() {
     var component = this;
@@ -123,11 +117,28 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isRoute0Pending
    */
-  isRoute0Pending: Ember.computed('route0Contents', function() {
-    let component = this;
-    let route0Contents = component.get('route0Contents');
-    return route0Contents ? route0Contents.status === 'pending' : false;
-  }),
+  isRoute0Pending: Ember.computed(
+    'route0Contents',
+    'route0Contents.status',
+    function() {
+      let component = this;
+      let route0Contents = component.get('route0Contents');
+      return route0Contents ? route0Contents.status === 'pending' : false;
+    }
+  ),
+
+  /**
+   * @property {Boolean} isRoute0Accepted
+   */
+  isRoute0Accepted: Ember.computed(
+    'route0Contents',
+    'route0Contents.status',
+    function() {
+      let component = this;
+      let route0Contents = component.get('route0Contents');
+      return route0Contents ? route0Contents.status === 'accepted' : false;
+    }
+  ),
 
   /**
    * @property {Boolean} isRoute0ExpandedView
@@ -152,28 +163,17 @@ export default Ember.Component.extend({
     CLASS_SKYLINE_INITIAL_DESTINATION.showDirections
   ),
 
+  isRouteView: Ember.observer('isRoute0', function() {
+    let isRoute0 = this.get('isRoute0');
+    if (isRoute0) {
+      this.fetchRout0Contents().then(data => {
+        this.set('route0Contents', data);
+      });
+    }
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
-
-  /**
-   * @function fetchRout0Contents
-   * Method to retch route0 suggestions
-   */
-  fetchRout0Contents() {
-    let component = this;
-    let courseId = component.get('courseId');
-    let classId = component.get('classId');
-    let route0Service = component.get('route0Service');
-    let filters = {
-      courseId,
-      classId
-    };
-    return Ember.RSVP.hash({
-      route0Contents: Ember.RSVP.resolve(route0Service.fetchInClass(filters))
-    }).then(({ route0Contents }) => {
-      component.set('route0Contents', route0Contents);
-    });
-  },
 
   /**
    * @function updateRoute0Action
@@ -194,6 +194,27 @@ export default Ember.Component.extend({
         route0Service.updateRouteAction(actionData)
       )
     });
+  },
+
+  /**
+   * @function fetchRout0Contents
+   * Method to retch route0 suggestions
+   */
+  fetchRout0Contents() {
+    let component = this;
+    let classData = component.get('class');
+    let courseId = classData.get('courseId');
+    let classId = classData.get('id');
+    let route0Service = component.get('route0Service');
+    let filters = {
+      courseId,
+      classId
+    };
+    let route0Promise = classData.get('route0Applicable')
+      ? route0Service.fetchInClass(filters)
+      : Ember.RSVP.resolve();
+
+    return route0Promise;
   },
 
   doAnimation() {

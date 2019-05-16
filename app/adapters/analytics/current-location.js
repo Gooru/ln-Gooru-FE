@@ -27,11 +27,11 @@ export default Ember.Object.extend({
 
   /**
    * Get user location in class provided
-   * @param {string[]} classIds
+   * @param {string[]} {classIds, course, fwCode? }
    * @param {string} userId
    * @returns {*}
-     */
-  getUserCurrentLocationByClassIds: function(classCourseIds, userId) {
+   */
+  getUserCurrentLocationByClassIds: function(classCourseIdsFwCode, userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/classes/location?userId=${userId}`;
@@ -41,7 +41,7 @@ export default Ember.Object.extend({
       dataType: 'json',
       headers: this.defineHeaders(),
       data: JSON.stringify({
-        classes: classCourseIds
+        classes: classCourseIdsFwCode
       })
     };
     return Ember.$.ajax(url, options);

@@ -19,6 +19,13 @@ export default Ember.Route.extend({
    * @type {Service} i18n
    */
   i18n: Ember.inject.service(),
+
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -123,11 +130,14 @@ export default Ember.Route.extend({
     const units = course.get('children') || [];
     const classMembers = currentClass.get('members');
     route.getUnitLevelPerformance(units, classMembers);
+    const subject = currentClass.get('preference.subject');
+    let taxonomyService = route.get('taxonomyService');
     return Ember.RSVP.hash({
       course: course,
       units: units,
       currentClass: currentClass,
-      classMembers: classMembers
+      classMembers: classMembers,
+      gradeSubject: subject ? taxonomyService.fetchSubject(subject) : {}
     });
   },
 
@@ -146,38 +156,36 @@ export default Ember.Route.extend({
         classMembers
       )
     );
-    return Ember.RSVP
-      .hash({
-        unitPerformances: unitPerformancePromise
-      })
-      .then(function(hash) {
-        let classPerformance = hash.unitPerformances;
-        units.map(unit => {
-          let unitId = unit.id;
-          let score = classPerformance.calculateAverageScoreByItem(unitId);
-          let timeSpent = classPerformance.calculateAverageTimeSpentByItem(
-            unitId
-          );
-          let completionDone = classPerformance.calculateSumCompletionDoneByItem(
-            unitId
-          );
-          let completionTotal = classPerformance.calculateSumCompletionTotalByItem(
-            unitId
-          );
-          let numberOfStudents = classPerformance.findNumberOfStudentsByItem(
-            unitId
-          );
-          let performance = {
-            score,
-            timeSpent,
-            completionDone,
-            completionTotal,
-            numberOfStudents
-          };
-          unit.set('performance', performance);
-        });
-        return units;
+    return Ember.RSVP.hash({
+      unitPerformances: unitPerformancePromise
+    }).then(function(hash) {
+      let classPerformance = hash.unitPerformances;
+      units.map(unit => {
+        let unitId = unit.id;
+        let score = classPerformance.calculateAverageScoreByItem(unitId);
+        let timeSpent = classPerformance.calculateAverageTimeSpentByItem(
+          unitId
+        );
+        let completionDone = classPerformance.calculateSumCompletionDoneByItem(
+          unitId
+        );
+        let completionTotal = classPerformance.calculateSumCompletionTotalByItem(
+          unitId
+        );
+        let numberOfStudents = classPerformance.findNumberOfStudentsByItem(
+          unitId
+        );
+        let performance = {
+          score,
+          timeSpent,
+          completionDone,
+          completionTotal,
+          numberOfStudents
+        };
+        unit.set('performance', performance);
       });
+      return units;
+    });
   },
   /**
    * Set all controller properties from the model
@@ -192,6 +200,7 @@ export default Ember.Route.extend({
     controller.set('currentClass', model.currentClass);
     controller.get('classController').selectMenuItem('course-map');
     controller.set('isStudentCourseMap', false);
+    controller.set('gradeSubject', model.gradeSubject);
     controller.getQuestionsToGrade();
     controller.init();
     controller.getUnitLevelPerformance();

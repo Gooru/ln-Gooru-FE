@@ -83,7 +83,7 @@ export default ApplicationAdapter.extend({
    * @param {string} classId optional class id filter
    * @param {string} timePeriod optional time period filter
    * @returns {Ember.RSVP.Promise}
-     */
+   */
   findCollectionPerformanceSummaryByIds: function(
     userId,
     collectionIds,
@@ -110,5 +110,33 @@ export default ApplicationAdapter.extend({
         resolve(responseData);
       }, reject);
     });
+  },
+
+  /**
+   * @function getCollectionsPerformanceByLessonId
+   * Get Collection Performance Data by  lesson Id
+   */
+  getCollectionsPerformanceByLessonId(
+    classId,
+    courseId,
+    unitId,
+    lessonId,
+    collectionType,
+    userUid
+  ) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/performance`;
+    const options = {
+      type: 'GET',
+      headers: adapter.get('headers'),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: {
+        collectionType,
+        userUid
+      }
+    };
+    return Ember.$.ajax(url, options);
   }
 });

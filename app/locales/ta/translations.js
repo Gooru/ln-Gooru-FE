@@ -94,7 +94,8 @@ export default Object.assign(quizzesTranslations, {
   'common.a-question': 'ஒரு கேள்வி',
   'common.a-resource': 'ஒரு வள',
   'common.a-rubric': 'ஒரு ரூபிக்',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.all-completed': 'எல்லாம் முடிந்தது',
   'common.a-assessment': 'மதிப்பீடு',
   'common.about': 'பற்றி',
@@ -2614,5 +2615,8 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material'
 });

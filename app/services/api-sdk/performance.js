@@ -7,6 +7,8 @@ import ActivityPerformanceSummarySerializer from 'gooru-web/serializers/performa
 import ActivityPerformanceSummaryAdapter from 'gooru-web/adapters/performance/activity-performance-summary';
 import CourseCompetencyCompletionAdapter from 'gooru-web/adapters/performance/course-competency-completion';
 import CourseCompetencyCompletionSerializer from 'gooru-web/serializers/performance/course-competency-completion';
+import MilestonePerformanceAdapter from 'gooru-web/adapters/performance/milestone-performance';
+import MilestonePerformanceSerializer from 'gooru-web/serializers/performance/milestone-performance';
 import { aggregateClassActivityPerformanceSummaryItems } from 'gooru-web/utils/performance-summary';
 import PerformanceAdapter from 'gooru-web/adapters/performance/performance';
 import PerformanceSerializer from 'gooru-web/serializers/performance/performance';
@@ -132,6 +134,17 @@ export default Ember.Service.extend({
     this.set(
       'performanceSerializer',
       PerformanceSerializer.create(Ember.getOwner(this).ownerInjection())
+    );
+
+    this.set(
+      'milestonePerformanceSerializer',
+      MilestonePerformanceSerializer.create(
+        Ember.getOwner(this).ownerInjection()
+      )
+    );
+    this.set(
+      'milestonePerformanceAdapter',
+      MilestonePerformanceAdapter.create(Ember.getOwner(this).ownerInjection())
     );
   },
 
@@ -1017,7 +1030,122 @@ export default Ember.Service.extend({
   },
 
   /**
-   * @function overwriteCollectionPerformance
+   * @function getPerformanceForMilestones
+   * Get Performance Data for course milestones
+   */
+  getPerformanceForMilestones(
+    classId,
+    courseId,
+    collectionType,
+    userUid,
+    fwCode
+  ) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('milestonePerformanceAdapter')
+        .getPerformanceForMilestones(
+          classId,
+          courseId,
+          collectionType,
+          userUid,
+          fwCode
+        )
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('milestonePerformanceSerializer')
+                .normalizePerformanceDataForMilestones(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * @function getPerformanceByMilestoneId
+   * Get Performance Data by  milestone Id
+   */
+  getLessonsPerformanceByMilestoneId(
+    classId,
+    courseId,
+    milestoneId,
+    collectionType,
+    userUid,
+    fwCode
+  ) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('milestonePerformanceAdapter')
+        .getLessonsPerformanceByMilestoneId(
+          classId,
+          courseId,
+          milestoneId,
+          collectionType,
+          userUid,
+          fwCode
+        )
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('milestonePerformanceSerializer')
+                .normalizeLessonsPerformanceDataForMilestone(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * @function getCollectionsPerformanceByLessonId
+   * Get Collection Performance Data by  lesson Id
+   */
+  getCollectionsPerformanceByLessonId(
+    classId,
+    courseId,
+    unitId,
+    lessonId,
+    collectionType,
+    userUid
+  ) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('collectionPerformanceSummaryAdapter')
+        .getCollectionsPerformanceByLessonId(
+          classId,
+          courseId,
+          unitId,
+          lessonId,
+          collectionType,
+          userUid
+        )
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('collectionPerformanceSummarySerializer')
+                .normalizeCollectionsPerformanceDataForLesson(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   *  @function overwriteCollectionPerformance
    * Method to overwrite collection performance
    */
   overwriteCollectionPerformance(performanceData) {
@@ -1029,6 +1157,62 @@ export default Ember.Service.extend({
         .then(function(response) {
           resolve(response);
         }, reject);
+    });
+  },
+
+  /**
+   * @function getPerformanceForUnits
+   * Get units Performance Data for route0
+   */
+  getPerformanceForUnits(classId, courseId, collectionType, userUid) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('performanceAdapter')
+        .getPerformanceForUnits(classId, courseId, collectionType, userUid)
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('performanceSerializer')
+                .normalizeUnitsPerformanceDataForCourse(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * @function getPerformanceForLessons
+   * Get lessons Performance Data for route0
+   */
+  getPerformanceForLessons(classId, courseId, unitId, collectionType, userUid) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('performanceAdapter')
+        .getPerformanceForLessons(
+          classId,
+          courseId,
+          unitId,
+          collectionType,
+          userUid
+        )
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('performanceSerializer')
+                .normalizeLessonsPerformanceDataForUnit(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
     });
   }
 });

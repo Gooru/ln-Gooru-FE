@@ -181,8 +181,6 @@ export default Ember.Controller.extend({
         }
         currentSelLanguage.forEach(sel => {
           languageList = languageList.filter(ddLang => ddLang.id !== sel.id);
-          // console.log('sel', sel);
-          // console.log('languageList', languageList);
         });
       }
 

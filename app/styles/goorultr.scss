@@ -67,6 +67,7 @@
 @import "controllers/student/class/proficiency";
 @import "controllers/student/class/diagnosis-of-knowledge";
 @import "controllers/student/class/setup-in-complete";
+@import "controllers/student/class/milestone";
 @import "controllers/teacher/class";
 @import "controllers/teacher/class/class-activities";
 @import "controllers/teacher/class/class-management";
@@ -349,6 +350,9 @@
 @import "components/student/class/_gru-study-navbar";
 @import "components/student/class/gru-class-navigation";
 @import "components/student/class/analytics/gru-performance-table";
+@import "components/student/class/milestone-course-map";
+@import "components/student/class/milestone-course-map-route0";
+@import "components/student/class/milestone-course-map-route0-preview";
 @import "components/teacher/class/gru-class-statistics";
 @import "components/teacher/class/ca-search-content-pull-up";
 @import "components/teacher/suggestion-pull-up";
@@ -356,6 +360,7 @@
 @import "components/teacher/class/ca-unscheduled-items-pullup";
 @import "components/teacher/class/ca-student-list-pull-up";
 @import "components/teacher/navigator-math-banner";
+@import "components/teacher/class/milestone-course-map";
 @import "components/taxonomy/gru-subject-course-picker";
 @import "components/taxonomy/gru-subject-picker";
 @import "components/taxonomy/gru-taxonomy-selector";
@@ -456,3 +461,9 @@
 @import "controllers/library-search";
 @import "components/library/library-search-header";
 @import "components/library/library-content-result-grid-view";
+
+//Milestone reports
+@import "components/reports/pull-up/milestone/student-milestone-report";
+@import "components/reports/pull-up/milestone/student-milestone-performance-report";
+@import "components/reports/pull-up/milestone/student-milestone-summary-report";
+@import "components/reports/pull-up/milestone/student-milestone-lesson-performance-accordion";

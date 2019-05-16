@@ -83,7 +83,8 @@ export default Object.assign(quizzesTranslations, {
   'common.student-selected': 'विद्यार्थी निवडले',
   'common.no-suggest-result-message':
     'तुम्ही शोधत आहात त्याच्याशी साम्य असणारा मजकूर सापडला नाही',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.no-suggest-results-message':
     'आपण संबंधित सामग्री शोधू आणि शोधू शकता.',
   'common.no-suggest-search-results-message':
@@ -2533,5 +2534,8 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material'
 });

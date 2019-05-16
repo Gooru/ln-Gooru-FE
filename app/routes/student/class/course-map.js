@@ -94,6 +94,7 @@ export default Ember.Route.extend({
         );
       }
     },
+
     updateCourseMap: function() {
       this.refresh(true);
     }
@@ -104,23 +105,28 @@ export default Ember.Route.extend({
   beforeModel() {
     const route = this;
     let isPremiumCourse = route.modelFor('student.class').isPremiumCourse;
+    const currentClass = route.modelFor('student.class').class;
     if (isPremiumCourse) {
-      let skylineInitialState = route.modelFor('student.class')
-        .skylineInitialState;
-      let destination = skylineInitialState.get('destination');
-      if (
-        destination === CLASS_SKYLINE_INITIAL_DESTINATION.classSetupInComplete
-      ) {
-        return route.transitionTo('student.class.setup-in-complete');
-      } else if (
-        destination === CLASS_SKYLINE_INITIAL_DESTINATION.showDirections ||
-        destination === CLASS_SKYLINE_INITIAL_DESTINATION.ILPInProgress
-      ) {
-        return route.transitionTo('student.class.proficiency');
-      } else if (
-        destination === CLASS_SKYLINE_INITIAL_DESTINATION.diagnosticPlay
-      ) {
-        return route.transitionTo('student.class.diagnosis-of-knowledge');
+      if (currentClass.get('milestoneViewApplicable')) {
+        return route.transitionTo('student.class.milestone');
+      } else {
+        let skylineInitialState = route.modelFor('student.class')
+          .skylineInitialState;
+        let destination = skylineInitialState.get('destination');
+        if (
+          destination === CLASS_SKYLINE_INITIAL_DESTINATION.classSetupInComplete
+        ) {
+          return route.transitionTo('student.class.setup-in-complete');
+        } else if (
+          destination === CLASS_SKYLINE_INITIAL_DESTINATION.showDirections ||
+          destination === CLASS_SKYLINE_INITIAL_DESTINATION.ILPInProgress
+        ) {
+          return route.transitionTo('student.class.proficiency');
+        } else if (
+          destination === CLASS_SKYLINE_INITIAL_DESTINATION.diagnosticPlay
+        ) {
+          return route.transitionTo('student.class.diagnosis-of-knowledge');
+        }
       }
     }
   },
@@ -143,6 +149,14 @@ export default Ember.Route.extend({
     let locationQueryParam = {
       courseId
     };
+    if (
+      currentClass.milestoneViewApplicable &&
+      currentClass.milestoneViewApplicable === true &&
+      currentClass.preference &&
+      currentClass.preference.framework
+    ) {
+      locationQueryParam.fwCode = currentClass.preference.framework;
+    }
     const userLocation = route
       .get('analyticsService')
       .getUserCurrentLocation(

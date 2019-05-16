@@ -1,0 +1,30 @@
+<div class="student-milestone-summary-report-container">
+  <div class="report-header-container">
+    {{charts.score-fill-gauge-chart
+      scoreInPercentage = activeMilestone.performance.scoreInPercentage
+      timeSpent = activeMilestone.performance.timeSpent
+      timeSpentPos = 50
+      scorePos = 150
+      placeholderPos = (if isMilestoneNotStarted '50%' 200)
+      placeholderText = placeholderText
+    }}
+    <div class="left-arrow {{if isSlideLeftDisabled 'disable-event'}}" {{action "onSlideMilestone" 'left'}}>
+      {{gru-icon name="keyboard_arrow_left"}}
+    </div>
+    <div class="right-arrow {{if isSlideRightDisabled 'disable-event'}}" {{action "onSlideMilestone" 'right'}}>
+      {{gru-icon name="keyboard_arrow_right"}}
+    </div>
+  </div>
+  <div class="report-body-container">
+    <div class="milestone-lessons-container {{if isMilestoneNotStarted 'milestone-not-started'}}">
+      {{#each activeMilestone.lessons as |milestoneLesson|}}
+        {{reports.pull-up.milestone.student-milestone-lesson-performance-accordion
+          lesson = milestoneLesson
+          classId = classId
+          courseId = courseId
+          rescopedCollectionIds = rescopedCollectionIds
+        }}
+      {{/each}}
+    </div>
+  </div>
+</div>

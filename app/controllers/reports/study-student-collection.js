@@ -78,13 +78,12 @@ export default StudentCollection.extend({
       controller
         .get('quizzesAttemptService')
         .getAttemptIds(contextId, profileId)
-        .then(
-          attemptIds =>
-            !attemptIds || !attemptIds.length
-              ? {}
-              : this.get('quizzesAttemptService').getAttemptData(
-                attemptIds[attemptIds.length - 1]
-              )
+        .then(attemptIds =>
+          !attemptIds || !attemptIds.length
+            ? {}
+            : this.get('quizzesAttemptService').getAttemptData(
+              attemptIds[attemptIds.length - 1]
+            )
         )
         .then(attemptData =>
           Ember.RSVP.hash({
@@ -317,8 +316,13 @@ export default StudentCollection.extend({
     if (classId) {
       queryParams.classId = classId;
     }
+    let milestoneId = context.get('milestoneId');
+    if (milestoneId) {
+      queryParams.milestoneId = milestoneId;
+    }
     if (suggestion) {
       queryParams.courseId = context.courseId;
+      queryParams.milestoneId = context.get('milestoneId');
       queryParams.unitId = context.get('unitId');
       queryParams.lessonId = context.lessonId;
       queryParams.collectionId = suggestion.get('id');
@@ -386,7 +390,9 @@ export default StudentCollection.extend({
         mapContext.ctx_course_id = mapContext.courseId;
         mapContext.ctx_lesson_id = mapContext.lessonId;
         mapContext.ctx_collection_id = mapContext.collectionId;
+        mapContext.ctx_milestone_id = mapContext.milestoneId;
         mapContext.ctx_unit_id = mapContext.unitId;
+        mapContext.milestone_id = mapContext.milestoneId;
         mapContext.suggested_content_type = suggestion.type;
         mapContext.suggested_content_id = suggestion.id;
         mapContext.suggested_content_subtype =
@@ -420,6 +426,7 @@ export default StudentCollection.extend({
       source: null,
       classId: '',
       unitId: null,
+      milestoneId: null,
       lessonId: null,
       collectionId: null,
       type: null

@@ -125,7 +125,8 @@ export default Object.assign(quizzesTranslations, {
   'common.add-new-unit': 'ಹೊಸ ಘಟಕವನ್ನು ರಚಿಸಿ',
   'common.add-new-resource': 'ಹೊಸ ಸಂಪನ್ಮೂಲವನ್ನು ರಚಿಸಿ',
   'common.add-new-question': 'ಹೊಸ ಪ್ರಶ್ನೆಯನ್ನು ರಚಿಸಿ',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.add-question': 'ಪ್ರಶ್ನೆ ರಚಿಸಿ',
   'common.add-question-image': 'ಪ್ರಶ್ನೆ ಚಿತ್ರ ಸೇರಿಸಿ',
   'common.add-rubric': 'ಹೊಸ ರಬ್ರಿಕ್ ಸೇರಿಸಿ',
@@ -2585,5 +2586,8 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material'
 });

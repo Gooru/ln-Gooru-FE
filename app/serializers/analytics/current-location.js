@@ -61,7 +61,8 @@ export default Ember.Object.extend({
       pathType: locationPayload.pathType || null,
       scoreInPercentage: locationPayload.scoreInPercentage || null,
       collectionTitle:
-        locationPayload.collectionTitle || locationPayload.assessmentTitle
+        locationPayload.collectionTitle || locationPayload.assessmentTitle,
+      milestoneId: locationPayload.milestoneId
     });
     return currentLocation;
   }

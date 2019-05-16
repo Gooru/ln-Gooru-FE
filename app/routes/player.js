@@ -256,7 +256,7 @@ export default QuizzesPlayer.extend(
       const type = params.type;
       const role = params.role || ROLES.TEACHER;
       params.lessonId =
-        params.lessonId === 'undefined' ? null : params.lessonId;
+      params.lessonId === 'undefined' ? null : params.lessonId;
       params.unitId = params.unitId === 'undefined' ? null : params.unitId; // Add more undefined to sanitize as required
       params.sourceUrl = location.host;
       params.partnerId = this.get('session.partnerId');
