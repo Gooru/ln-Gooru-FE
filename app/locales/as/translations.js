@@ -73,7 +73,8 @@ export default Object.assign(quizzesTranslations, {
   'common.sub-filter': 'Sub-Filter',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'মাধ্য স্কোৰ',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.frq': 'FRQ',
   'common.schedule': 'কাৰ্যক্ৰম',
   'common.responses': 'উত্তৰ',
@@ -2586,5 +2587,8 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material'
 });
