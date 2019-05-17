@@ -2618,5 +2618,8 @@ export default Object.assign(quizzesTranslations, {
   'enter-collection-timespent': 'Enter Collection Time Spent',
   'suggested-lessons': 'Suggested Lessons',
   'created-by-kangoorus': 'Created by Kangoorus',
-  'preparatory-material': 'Preparatory Material'
+  'preparatory-material': 'Preparatory Material',
+  milestones: 'Milestones',
+  'show-course-map': 'Show course Map',
+  'show-milestones': 'Show Milestones'
 });
