@@ -79,11 +79,6 @@ export default Ember.Component.extend({
   milestoneId: Ember.computed.alias('activeMilestone.milestone_id'),
 
   /**
-   * @property {UUID} userId
-   */
-  userId: Ember.computed.alias('session.userId'),
-
-  /**
    * @property {String} frameworkCode
    */
   frameworkCode: Ember.computed.alias('class.preference.framework'),
@@ -337,7 +332,7 @@ export default Ember.Component.extend({
     if (rescopedContents) {
       let milestoneLessons = component.get('activeMilestone.lessons');
       let rescopedLessons = rescopedContents.lessons;
-      if (!component.isDestroyed) {
+      if (!component.isDestroyed && rescopedLessons) {
         rescopedLessons.map(rescopedLesson => {
           let milestoneLesson = milestoneLessons.findBy(
             'lesson_id',
@@ -347,8 +342,8 @@ export default Ember.Component.extend({
             milestoneLesson.set('isRescopedLesson', true);
           }
         });
+        component.extractRescopedCollections();
       }
-      component.extractRescopedCollections();
     }
   },
 

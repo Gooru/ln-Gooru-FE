@@ -1,4 +1,4 @@
-.milestone-report.student-milestone-report {
+.milestone-report-pull-up {
   position: fixed;
   top: 100%;
   z-index: 1031;
@@ -27,7 +27,7 @@
     background-color: #000;
   }
 
-  .student-milestone-report-container {
+  .milestone-report-container {
     background-color: $white;
     .milestone-report-header-container {
       display: grid;
