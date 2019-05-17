@@ -1,8 +1,20 @@
 <div class="milestone-course-map-container">
+  {{#if showToggleButtonToViewFullCourse}}
+    <div class="ms-rescope-content-preview">
+      <div class="show-completed-course">
+        {{t 'class.overview.course-map.rescope-toggle'}}
+      </div>
+      <div class="show-completed-course-btn">
+        {{gru-toggle-button
+        isChecked=showAllRescopedContent
+        onToggleButton="onToggleRescope" }}
+      </div>
+    </div>
+  {{/if}}
   {{#each milestones as | milestone milestoneIndex | }}
     <div class="milestone-course-map {{if milestone.isClassGrade 'class-grade'}}">
       <div class="milestone-course-map-panel  {{if milestone.isActive 'active'}}">
-        <div class="milestone-info-container"  {{action 'toggleMilestoneItems' milestone }}>
+        <div class="milestone-info-container" {{action 'toggleMilestoneItems' milestone }}>
           <div class="milestone-flag-icon">
             {{gru-icon name="flag"}}
           </div>
@@ -159,10 +171,7 @@
 {{/if}}
 
 {{#if isShowMilestoneReport}}
-  {{#reports.pull-up.milestone.milestone-report
-    showPullUp = isShowMilestoneReport
-    title = (concat gradeSubject.title ' - ' selectedMilestone.grade_name)
-  }}
+  {{#reports.pull-up.milestone.milestone-report showPullUp=isShowMilestoneReport title=( concat gradeSubject.title ' - ' selectedMilestone.grade_name) }}
     {{reports.pull-up.milestone.student-milestone-summary-report
       activeMilestone = selectedMilestone
       class = class
