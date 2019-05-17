@@ -2,6 +2,14 @@
   .milestone-course-map-container {
     width: 100%;
 
+    .ms-rescope-content-preview {
+      display: grid;
+      grid-template-columns: 140px 70px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      align-items: center;
+    }
+
     .milestone-course-map {
       margin-bottom: 5px;
 

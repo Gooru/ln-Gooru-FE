@@ -141,6 +141,12 @@ export default Ember.Component.extend({
    */
   allowToPlay: true,
 
+  /**
+   * Maintains the value of show full course button toggle or not.
+   * @type {Boolean}
+   */
+  showToggleButtonToViewFullCourse: false,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -238,6 +244,13 @@ export default Ember.Component.extend({
         'studentCollectionReportContext',
         studentCollectionReportContext
       );
+    },
+
+    /**
+     * This action is responsible for toggle the property of @property showAllRescopedContent
+     */
+    onToggleRescope() {
+      this.toggleProperty('showAllRescopedContent');
     }
   },
 
