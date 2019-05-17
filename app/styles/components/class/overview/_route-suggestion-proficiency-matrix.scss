@@ -1,7 +1,5 @@
 .route-suggestion-proficiency-matrix {
-
   .matrix-chart {
-    width: 450px;
     overflow: auto;
     margin: 8px;
 
@@ -46,7 +44,6 @@
           shape-rendering: crispedges;
           stroke-opacity: 0.4;
         }
-
       }
     }
 
@@ -63,5 +60,4 @@
       }
     }
   }
-
 }

@@ -151,7 +151,7 @@
             background: #fff;
             display: inline-grid;
             width: 100%;
-            grid-template-columns: 70px 1fr 50px 50px 60px;
+            grid-template-columns: 70px 1fr 60px;
             align-items: center;
             border-bottom: 1px solid #e3e5ea;
             cursor: pointer;
@@ -340,6 +340,7 @@
                   cursor: pointer;
                   align-self: center;
                   justify-self: center;
+                  height: 30px;
                   &.not-allowed-to-play {
                     pointer-events: none;
                     visibility: hidden;
