@@ -18,6 +18,24 @@
     }
   },
   {
+    "description": "Get class scheduled activities by user - any class and any user",
+    "request": {
+      "url": "^/api/nucleus/v2/classes/(.+)/contents/online/scheduled$",
+      "method": "GET",
+      "headers": {
+        "Authorization": "Token (.+)"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "File not found!",
+      "file": "find-class-activities-by-user-200-response.json"
+    }
+  },
+  {
     "description": "Add content to class",
     "request": {
       "url": "^/api/nucleus/v2/classes/(.+)/contents",
