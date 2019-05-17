@@ -87,12 +87,12 @@ export default Ember.Service.extend({
     });
   },
 
-  resetTeacherNotifcation: function(actionId) {
+  resetTeacherNotification: function(actionId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('notificationAdapter')
-        .resetTeacherNotifcation(actionId)
+        .resetTeacherNotification(actionId)
         .then(
           function(responseData) {
             resolve(responseData);
@@ -109,12 +109,12 @@ export default Ember.Service.extend({
     });
   },
 
-  resetStudentNotifcation: function(actionId) {
+  resetStudentNotification: function(actionId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('notificationAdapter')
-        .resetStudentNotifcation(actionId)
+        .resetStudentNotification(actionId)
         .then(
           function(responseData) {
             resolve(responseData);
