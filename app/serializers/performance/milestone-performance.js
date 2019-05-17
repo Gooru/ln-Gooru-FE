@@ -28,7 +28,7 @@ export default DS.JSONAPISerializer.extend({
               totalCount: data.totalCount,
               completedInPrecentage:
                 data.totalCount > 0
-                  ? Math.round((data.completedCount / data.totalCount) * 100)
+                  ? Math.round(data.completedCount / data.totalCount * 100)
                   : undefined
             }),
             milestoneId: result.get('milestoneId'),
@@ -39,7 +39,6 @@ export default DS.JSONAPISerializer.extend({
         }
       });
     }
-
     return resultSet;
   },
 
@@ -48,28 +47,35 @@ export default DS.JSONAPISerializer.extend({
    * @return {Array}
    */
 
-  normalizeLessonsPerformanceDataForMilestone(response) {
-    let resultSet = Ember.A();
-    if (response.content !== undefined && response.content.length > 0) {
-      response = Ember.A(response.content);
-      response.forEach(data => {
-        let result = Ember.Object.create(data);
-        let usageData = result.get('usageData');
-        if (usageData && usageData.length > 0) {
-          usageData.forEach(data => {
-            let lessonPerformance = Ember.Object.create({
+  normalizeLessonsPerformanceDataForMilestone(responsePayload) {
+    let normalizedLessonsPerformance = Ember.A([]);
+    if (
+      responsePayload.content !== undefined &&
+      responsePayload.content.length
+    ) {
+      let usersLessonsPerformance = responsePayload.content;
+      usersLessonsPerformance.map(userLessonsPerformance => {
+        if (
+          userLessonsPerformance.usageData &&
+          userLessonsPerformance.usageData.length
+        ) {
+          let lessonsPerforamanceData = userLessonsPerformance.usageData;
+          lessonsPerforamanceData.map(lessonPerformanceData => {
+            let normalizedLessonPerformanceData = Ember.Object.create({
+              lessonId: lessonPerformanceData.lessonId,
               performance: Ember.Object.create({
-                timeSpent: data.timeSpent,
-                scoreInPercentage: data.scoreInPercentage
+                scoreInPercentage: lessonPerformanceData.scoreInPercentage,
+                timeSpent: lessonPerformanceData.timeSpent
               }),
-              lessonId: data.lessonId,
-              userUid: result.get('userUid')
+              userUid: userLessonsPerformance.userUid
             });
-            resultSet.pushObject(lessonPerformance);
+            normalizedLessonsPerformance.pushObject(
+              normalizedLessonPerformanceData
+            );
           });
         }
       });
     }
-    return resultSet;
+    return normalizedLessonsPerformance;
   }
 });

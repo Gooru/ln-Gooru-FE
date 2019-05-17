@@ -1,0 +1,37 @@
+.milestone-report.teacher-milestone-performance-report {
+  background-color: $white;
+  .report-header-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    height: 251px;
+    background-image: linear-gradient(#35424b, #35424b);
+    background-blend-mode: multiply;
+    justify-items: center;
+    align-items: center;
+    .milestone-performance-container {
+      width: 185px;
+      height: 185px;
+      border-radius: 50%;
+      line-height: 185px;
+      text-align: center;
+      font-weight: bold;
+      text-indent: 10px;
+      font-size: 60px;
+      color: $white;
+    }
+    .students-performance-chart-bar-container {
+      display: flex;
+      align-items: center;
+      width: 445px;
+      position: relative;
+
+      .report-bar-chart {
+        margin-left: 28px;
+      }
+    }
+  }
+  .report-body-container {
+    height: calc(80vh - 241px);
+    overflow-y: auto;
+  }
+}
