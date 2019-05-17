@@ -106,7 +106,7 @@ export default Ember.Component.extend({
       .range([0, chartProperties.waveHeight, 0])
       .domain([0, 50, 100]);
     let waveHeight = fillGaugeElementWidth * waveHeightScale(fillPercent * 100);
-    let waveLength = fillGaugeElementWidth * 2 / chartProperties.waveCount;
+    let waveLength = (fillGaugeElementWidth * 2) / chartProperties.waveCount;
     let waveClipCount = 1 + chartProperties.waveCount;
     let waveClipWidth = waveLength * waveClipCount;
     let chartHeight = component.get('chartHeight');
@@ -189,7 +189,7 @@ export default Ember.Component.extend({
       .attr('y', 0)
       .attr('class', `fill-range-${getGradeRange(scoreInPercentage)}`);
 
-    if (scoreInPercentage) {
+    if (scoreInPercentage >= 0) {
       fillGaugeElement
         .append('text')
         .attr('transform', `translate(${fillGaugeElementWidth / 2})`)

@@ -10,6 +10,10 @@
     .milestone-course-map {
       margin-bottom: 5px;
 
+      &.class-grade {
+        box-shadow: 0 0 40px 0 #4cc32b;
+      }
+
       .milestone-course-map-panel {
         display: inline-grid;
         width: 100%;
@@ -534,6 +538,7 @@
                   .colllection-play-btn {
                     visibility: visible;
                     opacity: 1;
+
                     &.not-allowed-to-play {
                       pointer-events: none;
                       visibility: hidden;
@@ -546,6 +551,10 @@
                       font-weight: bold;
                     }
                   }
+
+                  .collection-icon {
+                    zoom: 1.5;
+                  }
                 }
 
                 &:hover {
@@ -553,6 +562,7 @@
                     visibility: visible;
                     opacity: 1;
                     transition: visibility 0s linear 0s, opacity 300ms;
+
                     &.not-allowed-to-play {
                       pointer-events: none;
                       visibility: hidden;

@@ -5,8 +5,7 @@
           {{gru-icon name="flag"}}
         </div>
         <div class="milestone-title">
-          <p>Milestone {{milestone.milestoneId}}
-          </p>
+          <p>{{t 'preparatory-material'}}</p>
         </div>
         <div class="milestone-caret">
           {{#if milestone.isActive}}
@@ -19,9 +18,9 @@
       <div class="milestone-course-map-route0-lesson-container" id="milestone-{{milestone.milestoneId}}">
         {{#if milestone.hasLessonFetched}}
           {{#if milestone.lessons}}
-            {{#each milestone.lessons as | lesson index |}}
+            {{#each milestone.lessons as | lesson lessonIndex |}}
               <div class="milestone-course-map-route0-lesson {{if lesson.isActive 'active'}}">
-                <div class="milestone-course-map-route0-lesson-panel" {{action 'toggleLessonItems'  lesson }}>
+                <div class="milestone-course-map-route0-lesson-panel" {{action 'toggleLessonItems'  lesson lessonIndex }}>
                   <div class="lesson-icon-container">
                     <div class="lesson-icon-upward-line">
                       <svg height="15" width="20">
@@ -42,7 +41,7 @@
                   <div class="lesson-badge"></div>
                   <div class="lesson-info"></div>
                 </div>
-                <div class="milestone-course-map-route0-collection-container" id="milestone-lesson-{{lesson.unitId}}-{{lesson.lessonId}}">
+                <div class="milestone-course-map-route0-collection-container" id="milestone-lesson-{{lesson.unitId}}-{{lesson.lessonId}}-{{lessonIndex}}">
                   {{#if lesson.hasCollectionFetched}}
                     {{#if lesson.collections}}
                       {{#each lesson.collections as | collection |}}

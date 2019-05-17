@@ -10,6 +10,10 @@
     .milestone-course-map {
       margin-bottom: 5px;
 
+      &.class-grade {
+        box-shadow: 0 0 40px 0 #4cc32b;
+      }
+
       .milestone-course-map-panel {
         display: inline-grid;
         width: 100%;
@@ -362,9 +366,9 @@
                   }
                 }
 
+                &.prev-coll-path-.next-coll-path-.path-teacher,
                 &.prev-coll-path-.next-coll-path-system.path-teacher,
-                &.prev-coll-path-.next-coll-path-teacher.path-teacher,
-                &.prev-coll-path-.next-coll-path-.path-teacher {
+                &.prev-coll-path-.next-coll-path-teacher.path-teacher {
                   .collection-icon-container {
                     .collection-icon-upward-line {
                       left: 23px;
@@ -500,28 +504,6 @@
                   }
                 }
 
-                &.last-played-collection {
-                  .colllection-play-btn {
-                    visibility: visible;
-                    opacity: 1;
-                  }
-
-                  .collection-title-container {
-                    p {
-                      color: #5c8ee2;
-                      font-weight: bold;
-                    }
-                  }
-                }
-
-                &:hover {
-                  .colllection-play-btn {
-                    visibility: visible;
-                    opacity: 1;
-                    transition: visibility 0s linear 0s, opacity 300ms;
-                  }
-                }
-
                 .collection-icon-container {
                   display: grid;
                   align-items: center;
@@ -568,17 +550,18 @@
                   }
                 }
 
-                .colllection-play-btn {
+                .colllection-go-live {
                   color: #4a8cdb;
-                  visibility: hidden;
-                  opacity: 0;
-                  transition: visibility 0s linear 300ms, opacity 300ms;
                   cursor: pointer;
                   align-self: center;
                   justify-self: center;
 
-                  i {
-                    font-size: 30px;
+                  i.go-live-icon {
+                    background-image: url("gooru/on-air-icon.png");
+                    display: block;
+                    width: 30px;
+                    height: 30px;
+                    background-size: 30px 30px;
                   }
                 }
 
@@ -616,6 +599,7 @@
                 .collection-title-container {
                   display: inline-flex;
                   align-items: center;
+                  cursor: pointer;
 
                   p {
                     margin: 0;

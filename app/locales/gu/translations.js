@@ -75,7 +75,8 @@ export default Object.assign(quizzesTranslations, {
   'common.frq': 'ફ્રિક',
   'common.schedule': 'શેડ્યૂલ',
   'common.responses': 'જવાબો',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.no-lesson-info-message': 'આ એકમ પાસે કોઈ પાઠ છે.',
   'common.no-collection-info-message': 'આ પાઠમાં કોઈ સંગ્રહ છે.',
   'common.gooru-suggestions': 'ગોરો સૂચનો',
@@ -2528,5 +2529,8 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material'
 });

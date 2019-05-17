@@ -249,8 +249,6 @@ export default Ember.Component.extend({
    */
   notificationModel: {},
 
-  timer: null,
-
   init() {
     this._super(...arguments);
     this.model = this.model || {
@@ -259,12 +257,12 @@ export default Ember.Component.extend({
 
     const component = this;
     component.getNotifications(component.getDefaultFilter()); // Initial call, all the rest calls would be made with the setinterval
-    this.timer = setInterval(() => {
-      component.getNotifications(component.getDefaultFilter()); //Force default filter for first time load and refresh
-    }, NOTIFICATION_SETTINGS.polling_interval);
-    window.localStorage.setItem('notificationtimer', this.timer);
   },
 
+  didReceiveAttrs() {
+    const component = this;
+    component.getNotifications(component.getDefaultFilter()); // Refresh
+  },
   // -------------------------------------------------------------------------
   // Location based setting [starts]
   // -------------------------------------------------------------------------
@@ -456,13 +454,5 @@ export default Ember.Component.extend({
         : ''; // from page Options passed to instance
     filter.limit = component.get('rowsPerPage');
     return filter;
-  },
-
-  destroy() {
-    this._super(...arguments);
-    if (this.timer) {
-      clearInterval(this.timer);
-      this.timer = null;
-    }
   }
 });

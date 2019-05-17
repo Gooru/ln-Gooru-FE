@@ -100,7 +100,8 @@ export default Object.assign(quizzesTranslations, {
   'common.about-me': 'About Me',
   'common.accept': 'Accept',
   'common.ignore': 'Ignore',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.add': 'Añadir',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
@@ -2588,5 +2589,8 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material'
 });

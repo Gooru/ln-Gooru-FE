@@ -35,7 +35,8 @@
                   {{class.overview.course-suggestions
                   model=route0Contents
                   index=index
-                  class=class course=course}}
+                  class=class
+                  course=course}}
                 </div>
               </div>
               <div class="route0-action">
@@ -74,6 +75,8 @@
           {{#if class.milestoneViewApplicable}}
             {{student.class.milestone-course-map
               class=class
+              gradeSubject=subject
+              locateLastPlayedItem=false
             }}
           {{else}}
             {{student.class.destination.student-destination-course-accordion
@@ -164,6 +167,7 @@
         class=class
         classData=classData
         isRoute0Accepted=isRoute0Accepted
+        subject=subject
       }}
       {{/unless}}
     </div>
