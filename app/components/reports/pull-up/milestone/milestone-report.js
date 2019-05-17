@@ -6,7 +6,7 @@ import { SCREEN_SIZES } from 'gooru-web/config/config';
 export default Ember.Component.extend(PullUpMixin, {
   // -------------------------------------------------------------------------
   // Attributes
-  classNames: ['milestone-report', 'student-milestone-report'],
+  classNames: ['milestone-report-pull-up'],
 
   // -------------------------------------------------------------------------
   // Events

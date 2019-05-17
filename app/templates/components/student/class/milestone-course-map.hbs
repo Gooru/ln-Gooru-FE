@@ -159,9 +159,9 @@
 {{/if}}
 
 {{#if isShowMilestoneReport}}
-  {{#reports.pull-up.milestone.student-milestone-report
+  {{#reports.pull-up.milestone.milestone-report
     showPullUp = isShowMilestoneReport
-    title = (concat 'Milestone' (plus-one activeMilestoneIndex))
+    title = (concat gradeSubject.title ' - ' selectedMilestone.grade_name)
   }}
     {{reports.pull-up.milestone.student-milestone-summary-report
       activeMilestone = selectedMilestone
@@ -169,8 +169,9 @@
       milestones = milestones
       activeMilestoneIndex = activeMilestoneIndex
       rescopedContents = rescopedContents
+      userId = studentId
     }}
-  {{/reports.pull-up.milestone.student-milestone-report}}
+  {{/reports.pull-up.milestone.milestone-report}}
 {{/if}}
 
 {{#if isShowStudentCollectionReport}}

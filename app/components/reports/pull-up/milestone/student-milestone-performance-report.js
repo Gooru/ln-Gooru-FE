@@ -27,11 +27,18 @@ export default Ember.Component.extend({
    */
   session: Ember.inject.service('session'),
 
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
     const component = this;
     component.loadMilestonesPerformanceData();
+    component.setGradeSubject();
   },
 
   // -------------------------------------------------------------------------
@@ -71,6 +78,11 @@ export default Ember.Component.extend({
   frameworkCode: Ember.computed.alias('class.preference.framework'),
 
   /**
+   * @property {String} subject
+   */
+  subject: Ember.computed.alias('class.preference.subject'),
+
+  /**
    * @property {Array} milestones
    */
   milestones: Ember.A([]),
@@ -100,12 +112,17 @@ export default Ember.Component.extend({
       .hash({
         milestones: component.fetchMilestones(),
         milestonesPerformanceScore: component.fetchMilestonesPerformanceScore(),
-        milestonesPerformanceTimespent: component.fetchMilestonesPerformanceTimespent()
+        milestonesPerformanceTimespent: component.fetchMilestonesPerformanceTimespent(),
+        grades: component.fetchGradesBySubject()
       })
       .then(hash => {
         if (!component.isDestroyed) {
+          let milestones = component.filterOutMilestonesBasedOnGrade(
+            hash.grades,
+            hash.milestones
+          );
           component.parseMilestonesPerformance(
-            hash.milestones,
+            milestones,
             hash.milestonesPerformanceScore,
             hash.milestonesPerformanceTimespent
           );
@@ -166,6 +183,40 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function fetchGradesBySubject
+   * Method to fetch grades by subject code
+   */
+  fetchGradesBySubject() {
+    const component = this;
+    let filters = {
+      subject: component.get('subject')
+    };
+    let fwkCode = component.get('frameworkCode');
+    if (fwkCode) {
+      filters.fw_code = fwkCode;
+    }
+    return component.get('taxonomyService').fetchGradesBySubject(filters);
+  },
+
+  /**
+   * @function setGradeSubject
+   * Method to set grade subject object
+   */
+  setGradeSubject() {
+    const component = this;
+    const subject = component.get('subject');
+    return Ember.RSVP
+      .hash({
+        gradeSubject: subject
+          ? component.get('taxonomyService').fetchSubject(subject)
+          : {}
+      })
+      .then(({ gradeSubject }) => {
+        component.set('gradeSubject', gradeSubject);
+      });
+  },
+
+  /**
    * @function parseMilestonesPerformance
    * Method to parse milestones perforamance data
    */
@@ -211,5 +262,42 @@ export default Ember.Component.extend({
     if (!component.isDestroyed) {
       component.set('milestones', milestones);
     }
+  },
+
+  /**
+   * @function filterOutMilestonesBasedOnGrade
+   * Method to filter oute milestones based on the grade boundaries
+   */
+  filterOutMilestonesBasedOnGrade(grades, milestones) {
+    let component = this;
+    let gradeBounds = component.get('class.memberGradeBounds');
+    let studentId = component.get('studentId');
+    let userUid = studentId ? studentId : component.get('session.userId');
+    let gradeBound = gradeBounds.findBy(userUid);
+    let milestoneData = Ember.A([]);
+    let studentGradeBound = Ember.Object.create(gradeBound.get(userUid));
+    let classGradeId = component.get('class.gradeCurrent');
+    component.set('studentGradeBound', studentGradeBound);
+    component.set('grades', grades);
+    let gradeLowerBound = studentGradeBound.get('grade_lower_bound');
+    let gradeUpperBound = studentGradeBound.get('grade_upper_bound');
+    let startGrade = grades.findBy('id', gradeLowerBound);
+    let startGradeIndex = grades.indexOf(startGrade);
+    let endGrade = grades.findBy('id', gradeUpperBound);
+    let endGradeIndex = grades.indexOf(endGrade);
+    let studentGrades = grades.slice(startGradeIndex, endGradeIndex + 1);
+
+    milestones.forEach((milestone, index) => {
+      let gradeId = milestone.get('grade_id');
+      let grade = studentGrades.findBy('id', gradeId);
+      if (grade) {
+        if (gradeId === classGradeId) {
+          milestone.set('isClassGrade', true);
+        }
+        milestone.set('milestoneIndex', index + 1);
+        milestoneData.pushObject(milestone);
+      }
+    });
+    return milestoneData;
   }
 });
