@@ -69,7 +69,7 @@ export default Ember.Object.extend({
   ) {
     const adapter = this;
     const namespace = this.get('namespace');
-    const url = `${namespace}/${classId}/contents/${classActivityId}`;
+    const url = `${namespace}/${classId}/contents/${classActivityId}/enable`;
     const data = {};
     const date = formatDate(activationDate, 'YYYY-MM-DD');
     if (enable) {

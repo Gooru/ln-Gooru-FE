@@ -72,6 +72,7 @@ export default Object.assign(quizzesTranslations, {
   'common.apply-filter': 'apply filter',
   'common.sub-filter': 'Sub-Filter',
   'search-help-message': 'Choose filters to apply',
+  'common.offline-activites':'offline activites',
   'common.avg-score': 'মাধ্য স্কোৰ',
   'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.frq': 'FRQ',

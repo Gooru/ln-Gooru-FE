@@ -37,7 +37,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   isActive: false,
 
-  isToggleUnScheduleItem: false,
   // -------------------------------------------------------------------------
   // Actions
 
@@ -47,9 +46,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let controller = this;
       controller.toggleProperty('isToggleUnScheduleItem');
       Ember.run.later(function() {
-        let unScheduledContainerHeight = Ember.$('.ca-unschedule-items-list-container').height() + 41;
+        let unScheduledContainerHeight = Ember.$('.controller.teacher.class .ca-unschedule-items-list-container').height() + 41;
         let heightAttr = controller.get('isToggleUnScheduleItem') ? unScheduledContainerHeight : 100;
-        Ember.$('.dca-content-container').css({
+        Ember.$('.controller.teacher.class .dca-content-container').css({
           'height': `calc(100% - ${heightAttr}px)`
         });
       }, 500);
@@ -508,10 +507,15 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   initialize() {
     let controller = this;
     controller._super(...arguments);
+    let todayDate = controller.get('selectedDate');
+    controller.loadActivityForDate(todayDate);
     let tab = controller.get('tab');
     if (tab && tab === 'report') {
       controller.set('isShowOCASummaryReportPullUp', true);
     }
+    Ember.run.scheduleOnce('afterRender', controller, function() {
+      controller.closeCADatePickerOnClickOutSide();
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -522,9 +526,23 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   isShowContentPreview: false,
 
+  /**
+   * it maintains date which user is selected
+   * @property {String}
+   */
   selectedDate: moment().format('YYYY-MM-DD'),
 
+  /**
+   * it maintains date which user selected is today or not
+   * @property {Boolean} isToday
+   */
   isToday: true,
+
+  /**
+   * it maintains whether user clicked on unScheduled element or not
+   * @property {Boolean} isToggleUnScheduleItem
+   */
+  isToggleUnScheduleItem: false,
 
   /**
    * @property {Object}
@@ -556,6 +574,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   isShowPerformanceEntryPullUp: false,
 
+  /**
+   * It Maintains the list of class activities for a month
+   * @property {Array}
+   */
   classActivitiesOfMonth: Ember.A([]),
 
   /**
@@ -898,7 +920,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     controller.set('isLoading', true);
     controller
       .get('classActivityService')
-      .getScheduledActivities(classId, startDate, endDate)
+      .getClassScheduledActivities(classId, startDate, endDate)
       .then(classActivities => {
         controller.set('classActivitiesOfMonth', classActivities);
         controller.set('isLoading', false);
@@ -916,7 +938,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     controller.set('isLoading', true);
     controller
       .get('classActivityService')
-      .getScheduledActivities(classId, startDate, endDate)
+      .getClassScheduledActivities(classId, startDate, endDate)
       .then(classActivities => {
         controller.set('classActivities', Ember.A([]));
         if (classActivities && classActivities.length > 0) {
@@ -990,6 +1012,50 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           activityPerformance
         );
       });
+  },
+
+
+  closeCADatePickerOnClickOutSide() {
+    let controller = this;
+    Ember.$('.teacher_class_class-activities').on('click', function(e) {
+      if (
+        !Ember.$(e.target).hasClass('ca-datepicker-popover') &&
+        Ember.$('.ca-datepicker-popover-container').has(e.target).length === 0
+      ) {
+        Ember.$('.ca-datepicker-popover-container').hide();
+        Ember.$('.ca-datepicker-popover').removeClass('active');
+      }
+      if (
+        !Ember.$(e.target).hasClass('ca-date-picker-toggle') &&
+        Ember.$('.ca-date-picker-container').has(e.target).length === 0
+      ) {
+        controller.slideUpCAInlineDatePickerOnClickOutSide();
+      }
+    });
+
+    Ember.$(
+      '.teacher_class_class-activities .dca-list-container, .teacher_class_class-activities .ca-unscheduled-content-items'
+    ).on('scroll', function() {
+      if (Ember.$('.ca-datepicker-popover-container').is(':visible')) {
+        Ember.$('.ca-datepicker-popover-container').hide();
+        Ember.$('.ca-datepicker-popover').removeClass('active');
+      }
+    });
+  },
+
+  slideUpCAInlineDatePickerOnClickOutSide() {
+    let element = Ember.$(
+      '.teacher_class_class-activities .ca-date-picker-inline'
+    );
+    if (element.length > 0 && element.hasClass('active')) {
+      let dateDisplayEle = Ember.$(
+        '.teacher_class_class-activities .dca-content-container .cal-mm-yyyy'
+      );
+      element.slideUp(400, function() {
+        element.removeClass('active');
+        dateDisplayEle.removeClass('active');
+      });
+    }
   },
 
   parseClassActivityData(classActivitiesData) {

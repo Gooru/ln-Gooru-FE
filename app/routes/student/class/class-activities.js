@@ -23,6 +23,7 @@ export default Ember.Route.extend({
   model: function() {
     const route = this;
     const currentClass = route.modelFor('student.class').class;
+    let userId = route.get('session.userId');
     const classId = currentClass.get('id');
     let forMonth = moment().format('MM');
     let forYear = moment().format('YYYY');
@@ -30,7 +31,7 @@ export default Ember.Route.extend({
     var endDate = moment(startDate).endOf('month').format('YYYY-MM-DD');
     return Ember.RSVP.hash({
       classActivities: route.get('classActivityService')
-        .getScheduledActivities(classId, startDate, endDate)
+        .getStudentScheduledActivities(userId, classId, startDate, endDate)
     });
   },
 

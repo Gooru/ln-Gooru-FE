@@ -68,6 +68,7 @@ export default Object.assign(quizzesTranslations, {
   'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'Avg Score',
+  'common.offline-activites':'offline activites',
   'common.frq': 'FRQ',
   'common.schedule': 'Schedule',
   'common.responses': 'Responses',

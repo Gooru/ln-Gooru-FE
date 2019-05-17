@@ -78,6 +78,7 @@ export default Object.assign(quizzesTranslations, {
   'common.no-collection-info-message': 'इस पाठ में कोई संग्रह नहीं है।',
   'common.gooru-suggestions': 'Gooru सुझाव',
   'common.gooru-catalog': 'Gooru Catalog',
+  'common.offline-activites':'offline activites',
   'common.suggestion-made-to': 'सुझाव दिया गया',
   'library-search-placeholder': 'Search for anything within the library…',
   'common.student-selected': 'छात्र चुने गए',
