@@ -222,11 +222,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     const classId = controller.get('classId');
     let forMonth = controller.get('forMonth');
     let forYear = controller.get('forYear');
-    const userId = controller.get('session.userId');
+    let startDate = `${forYear}-${forMonth}-01`;
+    var endDate = moment(startDate).endOf('month').format('YYYY-MM-DD');
     controller.set('isLoading', true);
     controller
       .get('classActivityService')
-      .findStudentClassActivities(userId, classId, null, forMonth, forYear)
+      .getScheduledActivities(classId, startDate, endDate)
       .then(classActivities => {
         controller.set('classActivities', Ember.A([]));
         if (classActivities && classActivities.length > 0) {
@@ -266,19 +267,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let reduceHeight = 50;
       let top =
         dateEle.position().top - reduceHeight + scrollToContainer.scrollTop();
-      scrollToContainer.animate(
-        {
-          scrollTop: top
-        },
-        1000
+      scrollToContainer.animate({
+        scrollTop: top
+      },
+      1000
       );
     } else if (isDefaultTop) {
       let scrollToContainer = Ember.$('.dca-list-container');
-      scrollToContainer.animate(
-        {
-          scrollTop: 0
-        },
-        1000
+      scrollToContainer.animate({
+        scrollTop: 0
+      },
+      1000
       );
     }
   },

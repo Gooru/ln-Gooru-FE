@@ -36,12 +36,13 @@
               {{ca-date-picker
                 showToday=true
                 forMonth=forMonth
-                allowDateSelectorToggle=true
+                allowDateSelectorToggle=false
                 forYear=forYear
                 refreshDatePicker=refreshDatePicker
                 showPreviousMonth="showPreviousMonth"
                 showNextMonth="showNextMonth"
                 onSelectDate="onSelectDate"
+                highlightFirstDayOfMonth=true
                 onSelectToday="onSelectDate"
                 activities=scheduledClassActivitiesDatewise
                 highlightActivities=true
@@ -144,6 +145,17 @@
           </div>
         </div>
         <div class="ca-grade-content-items collapse" id="grade">
+        </div>
+      </div>
+      <div class="ca-offline-activities-list-container">
+        <div class="ca-offline-activities-header" data-toggle="collapse" data-target="#offline-activitiy">
+          <span>offline activities</span>
+          <div class="icons">
+            {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+            {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+          </div>
+        </div>
+        <div class="ca-grade-content-items collapse" id="offline-activitiy">
         </div>
       </div>
     </div>

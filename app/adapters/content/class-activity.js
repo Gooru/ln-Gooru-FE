@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { formatDate } from 'gooru-web/utils/utils';
+import {
+  formatDate
+} from 'gooru-web/utils/utils';
 
 /**
  * Adapter to support the class activity CRUD operations
@@ -45,7 +47,8 @@ export default Ember.Object.extend({
         content_type: contentType,
         dca_added_date: addedDate ? formatDate(addedDate, 'YYYY-MM-DD') : null,
         for_month: parseInt(forMonth),
-        for_year: parseInt(forYear)
+        for_year: parseInt(forYear),
+        end_date: addedDate ? formatDate(addedDate, 'YYYY-MM-DD') : null
       })
     };
     return Ember.$.ajax(url, options);
@@ -109,6 +112,38 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       data: {
         content_type: contentType,
+        for_month: forMonth,
+        for_year: forYear
+      }
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  getScheduledActivities(classId, startDate, endDate) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${classId}/contents/online/scheduled`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: {
+        start_date: startDate,
+        end_date: endDate
+      }
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  getUnScheduledActivities(classId, forMonth, forYear) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${classId}/contents/all/unscheduled`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: {
         for_month: forMonth,
         for_year: forYear
       }
