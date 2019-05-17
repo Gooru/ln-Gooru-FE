@@ -954,8 +954,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Method to animate date picker
    */
   animateDatePicker() {
-    let element = Ember.$('.ca-date-selector');
-    let dateDisplayEle = Ember.$('.ca-date-picker-container');
+    let element = Ember.$('.ca-schedule-items-header .ca-date-selector');
+    let dateDisplayEle = Ember.$('.ca-date-selector .ca-date-picker-container');
     if (!element.hasClass('active')) {
       element.slideDown(400, function() {
         element.addClass('active');
