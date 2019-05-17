@@ -114,6 +114,8 @@ export default Ember.Component.extend({
    */
   showAllRescopedContent: false,
 
+  classMembers: Ember.A([]),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -234,22 +236,24 @@ export default Ember.Component.extend({
       filters.fw_code = fwkCode;
     }
 
-    Ember.RSVP.hash({
-      milestones: component
-        .get('courseService')
-        .getCourseMilestones(courseId, fwCode)
-    }).then(({ milestones }) => {
-      if (!component.isDestroyed) {
-        let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
-          milestones
-        );
-        component.set('milestones', milestoneData);
-        if (showPerformance) {
-          component.fetchMilestonePerformance();
+    Ember.RSVP
+      .hash({
+        milestones: component
+          .get('courseService')
+          .getCourseMilestones(courseId, fwCode)
+      })
+      .then(({ milestones }) => {
+        if (!component.isDestroyed) {
+          let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
+            milestones
+          );
+          component.set('milestones', milestoneData);
+          if (showPerformance) {
+            component.fetchMilestonePerformance();
+          }
+          component.set('isLoading', false);
         }
-        component.set('isLoading', false);
-      }
-    });
+      });
   },
 
   fetchMilestonePerformance() {
@@ -288,42 +292,44 @@ export default Ember.Component.extend({
     let courseId = component.get('courseId');
     let fwCode = component.get('fwCode');
 
-    Ember.RSVP.hash({
-      milestoneAssessmentLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
-        classId,
-        courseId,
-        milestoneId,
-        CONTENT_TYPES.ASSESSMENT,
-        undefined,
-        fwCode
-      ),
-      milestoneCollectionLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
-        classId,
-        courseId,
-        milestoneId,
-        CONTENT_TYPES.COLLECTION,
-        undefined,
-        fwCode
-      )
-    }).then(
-      ({
-        milestoneAssessmentLessonsPerformance,
-        milestoneCollectionLessonsPerformance
-      }) => {
-        if (!component.isDestroyed) {
-          component.setMilestoneLessonPerformanceData(
-            CONTENT_TYPES.COLLECTION,
-            lessons,
-            milestoneCollectionLessonsPerformance
-          );
-          component.setMilestoneLessonPerformanceData(
-            CONTENT_TYPES.ASSESSMENT,
-            lessons,
-            milestoneAssessmentLessonsPerformance
-          );
+    Ember.RSVP
+      .hash({
+        milestoneAssessmentLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
+          classId,
+          courseId,
+          milestoneId,
+          CONTENT_TYPES.ASSESSMENT,
+          undefined,
+          fwCode
+        ),
+        milestoneCollectionLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
+          classId,
+          courseId,
+          milestoneId,
+          CONTENT_TYPES.COLLECTION,
+          undefined,
+          fwCode
+        )
+      })
+      .then(
+        ({
+          milestoneAssessmentLessonsPerformance,
+          milestoneCollectionLessonsPerformance
+        }) => {
+          if (!component.isDestroyed) {
+            component.setMilestoneLessonPerformanceData(
+              CONTENT_TYPES.COLLECTION,
+              lessons,
+              milestoneCollectionLessonsPerformance
+            );
+            component.setMilestoneLessonPerformanceData(
+              CONTENT_TYPES.ASSESSMENT,
+              lessons,
+              milestoneAssessmentLessonsPerformance
+            );
+          }
         }
-      }
-    );
+      );
   },
 
   setMilestoneLessonPerformanceData(
@@ -355,33 +361,35 @@ export default Ember.Component.extend({
     let lessonId = lesson.get('lesson_id');
     let performanceService = component.get('performanceService');
 
-    Ember.RSVP.hash({
-      performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
-        classId,
-        courseId,
-        unitId,
-        lessonId,
-        CONTENT_TYPES.ASSESSMENT,
-        userUid
-      ),
-      performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
-        classId,
-        courseId,
-        unitId,
-        lessonId,
-        CONTENT_TYPES.COLLECTION,
-        userUid
-      )
-    }).then(({ performanceAssessment, performanceCollection }) => {
-      component.setMilestoneCollectionPerformanceData(
-        collections,
-        performanceAssessment
-      );
-      component.setMilestoneCollectionPerformanceData(
-        collections,
-        performanceCollection
-      );
-    });
+    Ember.RSVP
+      .hash({
+        performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
+          classId,
+          courseId,
+          unitId,
+          lessonId,
+          CONTENT_TYPES.ASSESSMENT,
+          userUid
+        ),
+        performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
+          classId,
+          courseId,
+          unitId,
+          lessonId,
+          CONTENT_TYPES.COLLECTION,
+          userUid
+        )
+      })
+      .then(({ performanceAssessment, performanceCollection }) => {
+        component.setMilestoneCollectionPerformanceData(
+          collections,
+          performanceAssessment
+        );
+        component.setMilestoneCollectionPerformanceData(
+          collections,
+          performanceCollection
+        );
+      });
   },
 
   setMilestoneCollectionPerformanceData(

@@ -157,3 +157,13 @@
     {{three-bounce-spinner}}
   </div>
 {{/if}}
+
+{{#if isShowMilestoneReport}}
+  {{#reports.pull-up.milestone.milestone-report showPullUp = isShowMilestoneReport title = (concat gradeSubject.title ' - ' selectedMilestone.grade_name)}}
+    {{reports.pull-up.milestone.teacher-milestone-performance-report
+      class = class
+      activeMilestone = selectedMilestone
+      activeMilestoneIndex = activeMilestoneIndex
+      students = classMembers}}
+  {{/reports.pull-up.milestone.milestone-report}}
+{{/if}}
