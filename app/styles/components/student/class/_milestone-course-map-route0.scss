@@ -229,7 +229,7 @@
                 background: #fff;
                 display: inline-grid;
                 width: 100%;
-                grid-template-columns: 70px 1fr 50px 100px 60px;
+                grid-template-columns: 70px 1fr 50px 120px 60px;
                 align-items: center;
                 @media screen and (max-width: $screen-sm) {
                   grid-template-columns: 70px 1fr 50px 60px;
@@ -399,9 +399,10 @@
                 }
 
                 .collection-content-counts {
-                  display: inline-flex;
+                  display: grid;
                   align-items: center;
-                  justify-content: space-evenly;
+                  justify-content: center;
+                  grid-template-columns: 40px 40px 40px;
                   @media screen and (max-width: $screen-sm) {
                     display: none;
                   }
