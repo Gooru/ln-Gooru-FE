@@ -95,6 +95,7 @@ export default Object.assign(quizzesTranslations, {
     'ଆପଣଙ୍କ ବନାନ ଦେଖନ୍ତୁ । ଆମେ ସବୁ ଭୁଲ କରିଛେ ! କିମ୍ୱା ଏହା ବଦଳରେ ଅନୁରୂପ ଶବ୍ଦ ପାଇଁ ସନ୍ଧାନ କରନ୍ତୁ ।',
   'common.a-collection': 'ଏକ ସଂଗ୍ରହ',
   'common.a-course': 'ଏକ ପାଠ୍ୟକ୍ରମ',
+  'common.offline-activites':'offline activites',
   'common.a-question': 'ଏକ ପ୍ରଶ୍ନ',
   'common.a-resource': 'ଏକ ଉତ୍ସ',
   'common.a-rubric': 'ଏକ ଶୀର୍ଷକ',
