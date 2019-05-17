@@ -46,6 +46,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   classService: Ember.inject.service('api-sdk/class'),
 
+  /**
+   * @type {SkylineInitialService} Service to retrieve skyline initial service
+   */
+  skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
+
   // -------------------------------------------------------------------------
   // Methods
 
