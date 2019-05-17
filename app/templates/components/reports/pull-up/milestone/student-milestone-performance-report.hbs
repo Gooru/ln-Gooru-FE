@@ -12,7 +12,7 @@
             {{gru-icon name="flag"}}
           </div>
           <div class="milestone-title-container">
-            Milestone {{plus-one seq}}
+            {{gradeSubject.title}} - {{milestone.grade_name}}
           </div>
         </div>
         <div class="student-milesont-performance-container grade-range-{{grade-range milestone.performance.scoreInPercentage}}">
@@ -28,15 +28,17 @@
 </div>
 
 {{#if isShowMilestoneReport}}
-  {{#reports.pull-up.milestone.student-milestone-report
+  {{#reports.pull-up.milestone.milestone-report
     showPullUp = isShowMilestoneReport
-    title = (concat 'Milestone' (plus-one activeMilestoneIndex))
+    title = (concat gradeSubject.title ' - ' selectedMilestone.grade_name)
   }}
     {{reports.pull-up.milestone.student-milestone-summary-report
       activeMilestone = selectedMilestone
       class = class
       milestones = milestones
       activeMilestoneIndex = activeMilestoneIndex
+      userId = userId
+      gradeSubject = gradeSubject
     }}
-  {{/reports.pull-up.milestone.student-milestone-report}}
+  {{/reports.pull-up.milestone.milestone-report}}
 {{/if}}

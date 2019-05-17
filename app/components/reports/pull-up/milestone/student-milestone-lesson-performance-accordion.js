@@ -82,11 +82,6 @@ export default Ember.Component.extend({
   lessonId: Ember.computed.alias('lesson.lesson_id'),
 
   /**
-   * @property {UUID} userId
-   */
-  userId: Ember.computed.alias('session.userId'),
-
-  /**
    * @property {Array} collections
    */
   collections: Ember.A([]),
@@ -126,34 +121,30 @@ export default Ember.Component.extend({
   loadCollectionsPerformance() {
     const component = this;
     component.set('isLoading', true);
-    return Ember.RSVP
-      .hash({
-        lessonInfo: component.fetchLessonInfo(),
-        collectionsPerformance: component.fetchMilestoneCollectionsPerformance(
-          CONTENT_TYPES.COLLECTION
-        ),
-        assessmentsPerformance: component.fetchMilestoneCollectionsPerformance(
-          CONTENT_TYPES.ASSESSMENT
-        )
-      })
-      .then(
-        ({ lessonInfo, collectionsPerformance, assessmentsPerformance }) => {
-          let collections = lessonInfo
-            ? lessonInfo.get('children')
-            : Ember.A([]);
-          if (!component.isDestroyed) {
-            component.set(
-              'collections',
-              component.parseCollectionsPerformance(
-                collections,
-                collectionsPerformance.concat(assessmentsPerformance)
-              )
-            );
-            component.parseRescopedCollections(collections);
-            component.set('isLoading', false);
-          }
+    return Ember.RSVP.hash({
+      lessonInfo: component.fetchLessonInfo(),
+      collectionsPerformance: component.fetchMilestoneCollectionsPerformance(
+        CONTENT_TYPES.COLLECTION
+      ),
+      assessmentsPerformance: component.fetchMilestoneCollectionsPerformance(
+        CONTENT_TYPES.ASSESSMENT
+      )
+    }).then(
+      ({ lessonInfo, collectionsPerformance, assessmentsPerformance }) => {
+        let collections = lessonInfo ? lessonInfo.get('children') : Ember.A([]);
+        if (!component.isDestroyed) {
+          component.set(
+            'collections',
+            component.parseCollectionsPerformance(
+              collections,
+              collectionsPerformance.concat(assessmentsPerformance)
+            )
+          );
+          component.parseRescopedCollections(collections);
+          component.set('isLoading', false);
         }
-      );
+      }
+    );
   },
 
   /**
@@ -242,5 +233,79 @@ export default Ember.Component.extend({
       component.$('.collections-info-container').slideDown(400);
     }
     component.toggleProperty('isExpanded');
+  },
+
+  /**
+   * @function handlePathLinePointers
+   * Method to handle path line connector
+   * TODO It's not yet integrated need to extend the support
+   */
+  handlePathLinePointers(collections) {
+    let suggestedCollections = collections.filterBy('isSuggestedContent', true);
+    if (suggestedCollections) {
+      suggestedCollections.map(collection => {
+        let curCollectionPos = collections.indexOf(collection);
+        let prevCollection = collections.objectAt(curCollectionPos - 1);
+        if (prevCollection && prevCollection.get('isSuggestedContent')) {
+          if (prevCollection.get('pathType') === collection.get('pathType')) {
+            collection.set(
+              'alignmentType',
+              `${prevCollection.get('alignmentType')}`
+            );
+            collection.set('pathLine', 'identical');
+          } else if (prevCollection.get('alignmentType') === 'center-path') {
+            collection.set(
+              'alignmentType',
+              collection.get('pathType') === 'teacher'
+                ? 'left-path'
+                : 'right-path'
+            );
+            collection.set(
+              'pathLine',
+              collection.get('pathType') === 'teacher'
+                ? 'left-line'
+                : 'right-line'
+            );
+          } else {
+            collection.set('alignmentType', 'center-path');
+            collection.set(
+              'pathLine',
+              collection.get('pathType') === 'teacher'
+                ? 'left-line'
+                : 'right-line'
+            );
+          }
+        } else {
+          collection.set(
+            'alignmentType',
+            collection.get('pathType') === 'teacher'
+              ? 'left-path'
+              : 'right-path'
+          );
+          collection.set(
+            'pathLine',
+            collection.get('pathType') === 'teacher'
+              ? 'left-line'
+              : 'right-line'
+          );
+        }
+        let nextCollection = collections.objectAt(curCollectionPos + 1);
+        if (nextCollection && !nextCollection.get('isSuggestedContent')) {
+          nextCollection.set(
+            'alignmentType',
+            collection.get('alignmentType') === 'left-path'
+              ? 'right-path'
+              : 'left-path'
+          );
+          nextCollection.set(
+            'pathLine',
+            collection.get('alignmentType') === 'left-path'
+              ? 'right-line'
+              : 'left-line'
+          );
+        }
+      });
+    }
+    return collections;
   }
 });

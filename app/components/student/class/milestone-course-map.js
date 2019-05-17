@@ -133,7 +133,7 @@ export default Ember.Component.extend({
    * Maintains the student Id, by default this will be NULL
    * @type {String}
    */
-  studentId: null,
+  studentId: Ember.computed.alias('session.userId'),
 
   /**
    * Property will decided to show the play button or not
@@ -214,8 +214,7 @@ export default Ember.Component.extend({
     //Action triggered when click on collection performance
     onShowStudentMilestoneCollectionReport(lesson, collection) {
       const component = this;
-      let studentId = component.get('studentId');
-      let userUid = studentId ? studentId : component.get('session.userId');
+      let userUid = component.get('studentId');
       let studentCollectionReportContext = {
         userId: userUid,
         classId: component.get('classId'),
@@ -295,10 +294,7 @@ export default Ember.Component.extend({
         if (showPerformance) {
           component.fetchMilestonePerformance();
         }
-        let customLocationPresent = component.get('location');
-        if (customLocationPresent) {
-          component.navigateLocation();
-        } else if (locateLastPlayedItem) {
+        if (locateLastPlayedItem) {
           component.identifyUserLocationAndLocate();
         }
         component.set('isLoading', false);
@@ -312,8 +308,7 @@ export default Ember.Component.extend({
     let classId = component.get('classId');
     let courseId = component.get('courseId');
     let fwCode = component.get('fwCode');
-    let studentId = component.get('studentId');
-    let userUid = studentId ? studentId : component.get('session.userId');
+    let userUid = component.get('studentId');
     let milestones = component.get('milestones');
     performanceService
       .getPerformanceForMilestones(
@@ -343,8 +338,7 @@ export default Ember.Component.extend({
     let classId = component.get('classId');
     let courseId = component.get('courseId');
     let fwCode = component.get('fwCode');
-    let studentId = component.get('studentId');
-    let userUid = studentId ? studentId : component.get('session.userId');
+    let userUid = component.get('studentId');
 
     Ember.RSVP.hash({
       milestoneAssessmentLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
@@ -406,8 +400,7 @@ export default Ember.Component.extend({
 
   fetchCollectionPerformance(lesson, collections) {
     let component = this;
-    let studentId = component.get('studentId');
-    let userUid = studentId ? studentId : component.get('session.userId');
+    let userUid = component.get('studentId');
     let classId = component.get('classId');
     let courseId = component.get('courseId');
     let unitId = lesson.get('unit_id');
@@ -658,8 +651,7 @@ export default Ember.Component.extend({
     let component = this;
     let classId = component.get('classId');
     let courseId = component.get('courseId');
-    let studentId = component.get('studentId');
-    let userId = studentId ? studentId : component.get('session.userId');
+    let userId = component.get('studentId');
     let fwCode = component.get('fwCode');
     let locationQueryParam = {
       courseId,
@@ -764,8 +756,7 @@ export default Ember.Component.extend({
   renderMilestonesBasedOnStudentGradeRange(grades, milestones) {
     let component = this;
     let gradeBounds = component.get('class.memberGradeBounds');
-    let studentId = component.get('studentId');
-    let userUid = studentId ? studentId : component.get('session.userId');
+    let userUid = component.get('studentId');
     let gradeBound = gradeBounds.findBy(userUid);
     let milestoneData = Ember.A([]);
     let studentGradeBound = Ember.Object.create(gradeBound.get(userUid));
