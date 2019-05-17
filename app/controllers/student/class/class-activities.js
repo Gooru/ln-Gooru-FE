@@ -269,16 +269,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let top =
         dateEle.position().top - reduceHeight + scrollToContainer.scrollTop();
       scrollToContainer.animate({
-          scrollTop: top
-        },
-        1000
+        scrollTop: top
+      },
+      1000
       );
     } else if (isDefaultTop) {
       let scrollToContainer = Ember.$('.dca-list-container');
       scrollToContainer.animate({
-          scrollTop: 0
-        },
-        1000
+        scrollTop: 0
+      },
+      1000
       );
     }
   },

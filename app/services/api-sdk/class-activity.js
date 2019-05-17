@@ -451,8 +451,8 @@ export default Ember.Service.extend({
       let activityType =
         classActivity.get('collection.isAssessment') ||
         classActivity.get('collection.isExternalAssessment') ?
-        'assessment' :
-        'collection';
+          'assessment' :
+          'collection';
       let activityId = Ember.A([classActivity.get('collection.id')]);
       Ember.RSVP
         .hash({
@@ -505,8 +505,8 @@ export default Ember.Service.extend({
           function(response) {
             resolve(
               service
-              .get('classActivitySerializer')
-              .normalizeFetchUsersForClassActivity(response)
+                .get('classActivitySerializer')
+                .normalizeFetchUsersForClassActivity(response)
             );
           },
           function(error) {
