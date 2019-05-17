@@ -8,7 +8,6 @@
     <div class="destination-point">{{gru-icon name="place"}}</div>
   </div>
 </div>
-
 {{#if (and route0Applicable (or showRoute0SuggestionPreview showRoute0Suggestion))}}
   <h5 class="pre-study-title hidden-xs">{{t 'class.overview.pre-study-title'}}</h5>
   <div class="milestone-course-map-view-route0">
@@ -25,7 +24,6 @@
     {{/if}}
   </div>
 {{/if}}
-
 <h5>{{t 'class.overview.assigned-course'}}</h5>
 <div class="rescope-content-preview">
   <div class="rescope-content-preview-msg">
@@ -40,7 +38,6 @@
       onToggleButton="onToggleRescope" }}
   </div>
 </div>
-
 <div class="milestone-course-map-view">
-  {{student.class.milestone-course-map class=class rescopedContents = rescopedContents showAllRescopedContent=showAllRescopedContent}}
+  {{student.class.milestone-course-map class=class rescopedContents = rescopedContents showAllRescopedContent=showAllRescopedContent location=location }}
 </div>

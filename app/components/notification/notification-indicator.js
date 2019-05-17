@@ -152,8 +152,10 @@ export default Ember.Component.extend({
               unitId: 0,
               lessonId: 0,
               collectionId: 0,
+              milestoneId: 0,
               tab: 'assesmentreport',
-              location: 'unitId+lessonId+collectionId+currentItemType',
+              location:
+                'unitId+lessonId+collectionId+milestoneId+currentItemType',
               refresh: true
             }
           }
@@ -178,8 +180,10 @@ export default Ember.Component.extend({
               unitId: 0,
               lessonId: 0,
               collectionId: 0,
+              milestoneId: 0,
               tab: 'assesmentreport',
-              location: 'unitId+lessonId+collectionId+currentItemType'
+              location:
+                'unitId+lessonId+collectionId+milestoneId+currentItemType'
             }
           }
         }
@@ -326,17 +330,17 @@ export default Ember.Component.extend({
      * Concrete notification action
      * @param {notifiocationItem object} notin
      */
-    dismissNotifiocation(notin) {
+    dismissNotification(notin) {
       const component = this;
       if (notin && component.get('notificationCtxRole')) {
         let serviceEndpoint =
           component.get('notificationCtxRole') === 'student'
             ? component
               .get('notificationService')
-              .resetStudentNotifcation(notin.id)
+              .resetStudentNotification(notin.id)
             : component
               .get('notificationService')
-              .resetTeacherNotifcation(notin.id);
+              .resetTeacherNotification(notin.id);
         return serviceEndpoint;
         //}
       }
@@ -391,7 +395,7 @@ export default Ember.Component.extend({
       Object.assign(
         notndetail,
         component.get('notificationModel') &&
-        component.get('notificationModel').notifications
+          component.get('notificationModel').notifications
           ? component.get('notificationModel').notifications
           : {}
       );

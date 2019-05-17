@@ -4,6 +4,7 @@ import {
   PLAYER_EVENT_SOURCE,
   CONTENT_TYPES
 } from 'gooru-web/config/config';
+import CurrentLocationSerializer from 'gooru-web/serializers/analytics/current-location';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -13,6 +14,10 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Dependencies
+
+  location: null,
+
+  currentLocationSerializer: null,
 
   /**
    * @requires service:session
@@ -138,6 +143,15 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Actions
+
+  init: function() {
+    this._super(...arguments);
+
+    this.set(
+      'currentLocationSerializer',
+      CurrentLocationSerializer.create(Ember.getOwner(this).ownerInjection())
+    );
+  },
 
   actions: {
     /**
@@ -279,7 +293,10 @@ export default Ember.Component.extend({
         if (showPerformance) {
           component.fetchMilestonePerformance();
         }
-        if (locateLastPlayedItem) {
+        let customLocationPresent = component.get('location');
+        if (customLocationPresent) {
+          component.navigateLocation();
+        } else if (locateLastPlayedItem) {
           component.identifyUserLocationAndLocate();
         }
         component.set('isLoading', false);
@@ -661,6 +678,78 @@ export default Ember.Component.extend({
       });
   },
 
+  /**
+   * Enables jumping to a specific milestone driven location
+   * Location is provided with queryString paramter Location
+   */
+  navigateLocation() {
+    const component = this;
+    let rawCustomLocation = this.get('location');
+    if (rawCustomLocation) {
+      let customLocation = component.parserLocation(rawCustomLocation),
+        userLocation = component.formatCustomLocationToUserLocation(
+          customLocation
+        );
+
+      component.set('userCurrentLocation', userLocation);
+      component.set('locateLastPlayedItem', userLocation);
+
+      let selectedMilestone = component
+        .get('milestones')
+        .findBy('milestone_id', userLocation.milestoneId);
+
+      //ToDo: Refactoring required to remove the Later based workaround, here as well as in other implementation
+      Ember.run.later(function() {
+        component.handleMilestoneToggle(selectedMilestone);
+
+        Ember.run.later(function() {
+          Ember.run.later(function() {
+            let lessonO = selectedMilestone.lessons.findBy(
+                'lesson_id',
+                userLocation.lessonId
+              ),
+              collectionO = lessonO.collections.findBy(
+                'id',
+                userLocation.collectionId
+              );
+            component.send(
+              'onShowStudentMilestoneCollectionReport',
+              lessonO,
+              collectionO
+            );
+          }, 8000);
+        }, 500);
+      });
+    }
+  },
+
+  /**
+   *
+   * @param {object} customLocation
+   */
+  formatCustomLocationToUserLocation(customLocation) {
+    //ToDo: Check if this is needed and reformat
+    let serializedLocation = this.currentLocationSerializer.normalizeCurrentLocation(
+      customLocation
+    );
+    serializedLocation.milestone_id = serializedLocation.milestoneId;
+    return serializedLocation;
+  },
+
+  /**
+   *
+   * @param {string} customLocation : format 'unitId+lessonId+collectionId+milestoneId+currentItemType',
+   */
+  parserLocation(customLocation) {
+    let locationArr = customLocation.split('+');
+    return {
+      unitId: locationArr[0],
+      lessonId: locationArr[1],
+      collectionId: locationArr[2],
+      milestoneId: locationArr[3],
+      type: locationArr[4]
+    };
+  },
   /**
    * @function getRescopedContents
    * Method to get rescoped contents
