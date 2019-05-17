@@ -294,7 +294,10 @@ export default Ember.Component.extend({
         if (showPerformance) {
           component.fetchMilestonePerformance();
         }
-        if (locateLastPlayedItem) {
+        let customLocationPresent = component.get('location');
+        if (customLocationPresent) {
+          component.navigateLocation();
+        } else if (locateLastPlayedItem) {
           component.identifyUserLocationAndLocate();
         }
         component.set('isLoading', false);

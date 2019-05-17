@@ -183,7 +183,8 @@ export default Ember.Component.extend({
               milestoneId: 0,
               tab: 'assesmentreport',
               location:
-                'unitId+lessonId+collectionId+milestoneId+currentItemType'
+                'unitId+lessonId+collectionId+milestoneId+currentItemType',
+              refresh: true
             }
           }
         }
