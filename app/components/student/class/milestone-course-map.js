@@ -60,6 +60,12 @@ export default Ember.Component.extend({
    */
   taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
+  /**
+   * Maintains the state of user role is teacher or not
+   * @type {Boolean}
+   */
+  isTeacher: false,
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -276,9 +282,7 @@ export default Ember.Component.extend({
 
   loadData() {
     let component = this;
-    let courseId = component.get('courseId');
     component.set('isLoading', true);
-    let fwCode = component.get('fwCode');
     let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
     let taxonomyService = component.get('taxonomyService');
@@ -291,13 +295,11 @@ export default Ember.Component.extend({
     }
 
     Ember.RSVP.hash({
-      milestones: component
-        .get('courseService')
-        .getCourseMilestones(courseId, fwCode),
       rescopedContents: component.getRescopedContents(),
       grades: taxonomyService.fetchGradesBySubject(filters)
-    }).then(({ milestones, rescopedContents, grades }) => {
+    }).then(({ rescopedContents, grades }) => {
       if (!component.isDestroyed) {
+        let milestones = component.get('milestones');
         let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
           grades,
           milestones
@@ -509,6 +511,12 @@ export default Ember.Component.extend({
                 }
               });
             }
+            let lessonsSize = lessons.length;
+            let lessonsRescopeSize = lessons.filterBy('rescope', true).length;
+            if (lessonsRescopeSize === lessonsSize) {
+              selectedMilestone.set('rescope', true);
+            }
+
             selectedMilestone.set('lessons', lessons);
             if (showPerformance) {
               component.fetchMilestoneLessonsPerformance(milestoneId, lessons);
@@ -779,9 +787,9 @@ export default Ember.Component.extend({
     let classGradeId = component.get('class.gradeCurrent');
     component.set('studentGradeBound', studentGradeBound);
     component.set('grades', grades);
-    let gradeLowerBound = studentGradeBound.get('grade_lower_bound');
+    let classGradeLowerBound = component.get('class.gradeLowerBound');
     let gradeUpperBound = studentGradeBound.get('grade_upper_bound');
-    let startGrade = grades.findBy('id', gradeLowerBound);
+    let startGrade = grades.findBy('id', classGradeLowerBound);
     let startGradeIndex = grades.indexOf(startGrade);
     let endGrade = grades.findBy('id', gradeUpperBound);
     let endGradeIndex = grades.indexOf(endGrade);
@@ -847,7 +855,8 @@ export default Ember.Component.extend({
         courseId
       };
       let studentId = component.get('studentId');
-      if (studentId) {
+      let isTeacher = component.get('isTeacher');
+      if (isTeacher) {
         filter.userId = studentId;
       }
       return Ember.RSVP.hash({

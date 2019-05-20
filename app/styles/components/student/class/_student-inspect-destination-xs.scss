@@ -27,8 +27,15 @@
     max-height: 90vh;
     height: 90vh;
     width: 100%;
+
     .student-class-milestone-course-map {
       padding-top: 10px;
+    }
+
+    .student-milestone-not-ready {
+      padding: 10px;
+      font-size: 18px;
+      line-height: 1.2;
     }
 
     .btn-container {
@@ -45,6 +52,11 @@
       width: 57px;
       height: 57px;
       border-radius: 45px;
+
+      &.no-milestone {
+        pointer-events: none;
+        opacity: 0.8;
+      }
     }
 
     .pull-up-header {

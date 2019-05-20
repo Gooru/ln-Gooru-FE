@@ -205,6 +205,7 @@
       width: 100%;
       padding-top: 30px;
       padding-right: 20px;
+
       .student-class-milestone-course-map-route0 {
         width: 100%;
       }
@@ -366,6 +367,14 @@
         overflow-y: auto;
         background: $white;
 
+        .student-milestone-not-ready {
+          font-size: 24px;
+          line-height: 1.2;
+          box-shadow: rgba(0, 0, 0, 0.4) 0 0 11px;
+          padding: 15px;
+          border-radius: 4px;
+        }
+
         &.milestone {
           overflow: unset;
           box-shadow: none;
@@ -409,6 +418,10 @@
         padding-left: 15px;
         padding-right: 15px;
         z-index: 10;
+        &.no-milestone {
+          pointer-events: none;
+          opacity: 0.8;
+        }
       }
     }
   }

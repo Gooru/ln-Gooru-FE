@@ -1,49 +1,54 @@
-<div class="bar-charts" data-content="{{performancePercentage}}% Completed">
-  <div class="completion-chart">
-    <div class="start-point">{{gru-icon name="stars"}}</div>
-    {{charts/gru-x-bar-chart
+{{#if (gt milestones.length 0)}}
+  <div class="bar-charts" data-content="{{performancePercentage}}% Completed">
+    <div class="completion-chart">
+      <div class="start-point">{{gru-icon name="stars"}}</div>
+      {{charts/gru-x-bar-chart
       data=barChartData
       mileStone=mileStone
       mileStoneHandler=(action 'mileStoneHandler')  }}
-    <div class="destination-point">{{gru-icon name="place"}}</div>
+      <div class="destination-point">{{gru-icon name="place"}}</div>
+    </div>
   </div>
-</div>
-{{#if (and route0Applicable (or showRoute0SuggestionPreview showRoute0Suggestion))}}
-  <h5 class="pre-study-title hidden-xs">{{t 'class.overview.pre-study-title'}}</h5>
-  <div class="milestone-course-map-view-route0">
-    {{#if showRoute0Suggestion}}
-      {{student.class.milestone-course-map-route0
+  {{#if (and route0Applicable (or showRoute0SuggestionPreview showRoute0Suggestion))}}
+    <h5 class="pre-study-title hidden-xs">{{t 'class.overview.pre-study-title'}}</h5>
+    <div class="milestone-course-map-view-route0">
+      {{#if showRoute0Suggestion}}
+        {{student.class.milestone-course-map-route0
         class=class
       }}
-    {{else}}
-      {{student.class.milestone-course-map-route0-preview
+      {{else}}
+        {{student.class.milestone-course-map-route0-preview
           class=class
           route0=route0
           course=course
         }}
-    {{/if}}
-  </div>
-{{/if}}
-<h5>{{t 'class.overview.assigned-course'}}</h5>
-<div class="rescope-content-preview">
-  <div class="rescope-content-preview-msg">
-    {{t 'class.overview.course-map.rescope-info'}}
-  </div>
-  <div class="show-completed-course">
-    {{t 'class.overview.course-map.rescope-toggle'}}
-  </div>
-  <div class="show-completed-course-btn">
-    {{gru-toggle-button
+      {{/if}}
+    </div>
+  {{/if}}
+  <h5>{{t 'class.overview.assigned-course'}}</h5>
+  <div class="rescope-content-preview">
+    <div class="rescope-content-preview-msg">
+      {{t 'class.overview.course-map.rescope-info'}}
+    </div>
+    <div class="show-completed-course">
+      {{t 'class.overview.course-map.rescope-toggle'}}
+    </div>
+    <div class="show-completed-course-btn">
+      {{gru-toggle-button
       isChecked=showAllRescopedContent
       onToggleButton="onToggleRescope" }}
+    </div>
   </div>
-</div>
-<div class="milestone-course-map-view">
-  {{student.class.milestone-course-map
+  <div class="milestone-course-map-view">
+    {{student.class.milestone-course-map
    class=class
    rescopedContents=rescopedContents
    showAllRescopedContent=showAllRescopedContent
    gradeSubject=gradeSubject
    location=location
+   milestones=milestones
  }}
-</div>
+  </div>
+{{else}}
+  <div class="student-milestone-not-ready">{{t 'student-milestone-not-ready'}}</div>
+{{/if}}

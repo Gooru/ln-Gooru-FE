@@ -36,22 +36,24 @@
         </div>
       {{/if}}
       <div class="course-map-body">
+        {{#if (and class.milestoneViewApplicable  isMilestoneView)}}
         <div class="students">
           <div class="header">
             {{t 'class.info.students'}}
           </div>
-          <div class="students-list">
-            {{#each sortedStudents as |student index|}}
-              <div class="student list student-{{index}}" {{action "onSelectStudent" student index}}>
-                <div class="thumbnail" data-toggle="tooltip" style="background-image: url({{student.avatarUrl}})">
+            <div class="students-list">
+              {{#each sortedStudents as |student index|}}
+                <div class="student list student-{{index}}" {{action "onSelectStudent" student index}}>
+                  <div class="thumbnail" data-toggle="tooltip" style="background-image: url({{student.avatarUrl}})">
+                  </div>
+                  <div class="student-name">{{student.fullName}}</div>
                 </div>
-                <div class="student-name">{{student.fullName}}</div>
-              </div>
-            {{/each}}
-          </div>
+              {{/each}}
+            </div>
         </div>
+        {{/if}}
         <div class="render-course-map {{if (and (not isStudentCourseMap) questionItems) 'sm-course-map'}}">
-          {{#if class.milestoneViewApplicable}}
+          {{#if (and class.milestoneViewApplicable hasMilestoneViewReady (not isStudentCourseMap))}}
             <div class="ms-cm-view-switcher-ctn">
               <div class="current-view">
                 {{#if isMilestoneView}}
@@ -72,9 +74,13 @@
           {{#if isLoading}}
             {{three-bounce-spinner}}
           {{else}}
-            {{#unless class.milestoneViewApplicable}}
+            {{#unless (and class.milestoneViewApplicable hasMilestoneViewReady)}}
               <div class="header">
                 {{t 'common.course-map'}}
+              </div>
+              {{else if isStudentCourseMap}}
+              <div class="header">
+                {{t 'milestones'}}
               </div>
             {{/unless}}
             {{#if isStudentCourseMap}}
@@ -122,6 +128,8 @@
                   gradeSubject=gradeSubject
                   locateLastPlayedItem=false
                   showToggleButtonToViewFullCourse=true
+                  milestones=milestones
+                  isTeacher=true
                 }}
                 {{/unless}}
 
@@ -155,6 +163,7 @@
                     gradeSubject=gradeSubject
                     onPreviewContent='onPreviewContent'
                     onGoLive="goLive"
+                    milestones=milestones
                     classMembers=classMembers
                   }}
                 {{/unless}}

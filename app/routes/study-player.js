@@ -136,7 +136,10 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
     if (params.isNotification) {
       route.setStudyPlayerForTeacherNotifications(params);
     }
-    if (params.type === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
+    if (
+      params.type === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||
+      params.type === CONTENT_TYPES.EXTERNAL_COLLECTION
+    ) {
       let queryParams = {
         role: params.role,
         type: params.type,
