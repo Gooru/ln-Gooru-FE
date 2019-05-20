@@ -18,9 +18,6 @@ export default Ember.Route.extend({
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
   // -------------------------------------------------------------------------
-  // Properties
-
-  // -------------------------------------------------------------------------
   // Actions
 
   actions: {
@@ -81,6 +78,7 @@ export default Ember.Route.extend({
     controller.set('unScheduledClassActivities', model.unScheduledClassActivities);
     controller.set('forMonth', model.selectedPeriod.forMonth);
     controller.set('forYear', model.selectedPeriod.forYear);
+    controller.set('selectedDate', moment().format('YYYY-MM-DD'));
     controller.fetchAssessmentsMasteryAccrual(model.classActivities);
     controller.initialize();
     controller.get('classController').selectMenuItem('class-activities');

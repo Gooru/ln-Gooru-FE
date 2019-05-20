@@ -587,6 +587,10 @@
             background-color: rgb(216, 216, 216);
             max-height: calc(50vh - 75px);
             overflow-y: auto;
+
+            .gru-grade-items {
+              width: 100%;
+            }
           }
 
           .ca-grade-no-content-items {

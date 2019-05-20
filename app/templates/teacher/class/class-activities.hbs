@@ -136,17 +136,6 @@
       </div>
     </div>
     <div class="ca-right-panel">
-      <div class="ca-grade-items-list-container">
-        <div class="ca-grade-items-header" data-toggle="collapse" data-target="#grade">
-          <span>{{t 'class.analytics.performance.grade-items'}}</span>
-          <div class="icons">
-            {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
-            {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
-          </div>
-        </div>
-        <div class="ca-grade-content-items collapse" id="grade">
-        </div>
-      </div>
       <div class="ca-offline-activities-list-container">
         <div class="ca-offline-activities-header" data-toggle="collapse" data-target="#offline-activitiy">
           <span>{{t 'common.offline-activites'}}</span>
@@ -156,6 +145,20 @@
           </div>
         </div>
         <div class="ca-grade-content-items collapse" id="offline-activitiy">
+        </div>
+      </div>
+      <div class="ca-grade-items-list-container">
+        <div class="ca-grade-items-header" data-toggle="collapse" data-target="#grade">
+          <span>{{t 'class.analytics.performance.grade-items'}}</span>
+          <div class="icons">
+            {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+            {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+          </div>
+        </div>
+        <div class="ca-grade-content-items collapse" id="grade">
+          {{#if itemsToGrade}}
+            {{gru-grade-items contextSource=contextSource questionItems=itemsToGrade}}
+          {{/if}}
         </div>
       </div>
     </div>
