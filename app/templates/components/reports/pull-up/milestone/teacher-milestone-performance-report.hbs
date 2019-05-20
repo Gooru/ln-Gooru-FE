@@ -1,0 +1,44 @@
+<div class="teacher-milestone-performance-report-container">
+  <div class="report-header-container">
+    <div class="milestone-performance-container grade-range-{{grade-range activeMilestone.performance.scoreInPercentage}}">
+      {{#if (gte activeMilestone.performance.scoreInPercentage 0)}}
+        {{activeMilestone.performance.scoreInPercentage}}%
+      {{else}}
+        --
+      {{/if}}
+    </div>
+    <div class="students-performance-chart-bar-container">
+      {{charts.report-bar-chart useTimeSpentScore=false studentChartReportData=studentsLessonsPerformanceData}}
+    </div>
+  </div>
+  <div class="report-body-container">
+    {{reports.pull-up.unit-report-listview
+      sortByFirstnameEnabled=true
+      sortByLastnameEnabled=true
+      sortByScoreEnabled=true
+      contents=activeMilestone.lessons
+      onClosePullUp="onPullUpClose"
+      studentReportData=studentsLessonsPerformanceData
+      selectedUnit=activeMilestone
+      openStudentUnitReport="onOpenStudentMilestoneReport"
+      isMilestoneLesson = true
+    }}
+  </div>
+</div>
+
+
+{{#if isShowStudentMilestoneReport}}
+  {{#reports.pull-up.milestone.milestone-report
+    showPullUp = isShowStudentMilestoneReport
+    title = (concat gradeSubject.title ' - ' activeMilestone.grade_name)
+  }}
+    {{reports.pull-up.milestone.student-milestone-summary-report
+      activeMilestone = activeMilestone
+      class = class
+      milestones = milestones
+      activeMilestoneIndex = activeMilestoneIndex
+      rescopedContents = rescopedContents
+      userId = selectedStudentId
+    }}
+  {{/reports.pull-up.milestone.milestone-report}}
+{{/if}}

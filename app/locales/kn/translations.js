@@ -75,6 +75,7 @@ export default Object.assign(quizzesTranslations, {
   'common.frq': 'FRQ',
   'common.schedule': 'Schedule',
   'common.responses': 'Responses',
+  'common.offline-activites':'offline activites',
   'common.no-lesson-info-message': 'This unit does have any lessons.',
   'common.no-collection-info-message': 'This lesson does have any collections.',
   'common.gooru-suggestions': 'Gooru Suggestions',

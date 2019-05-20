@@ -1,11 +1,12 @@
 import Ember from 'ember';
-import { test } from 'ember-qunit';
+import {
+  test
+} from 'ember-qunit';
 import moduleForAdapter from 'gooru-web/tests/helpers/module-for-adapter';
 
 moduleForAdapter(
   'adapter:content/class-activity',
-  'Unit | Adapter | content/class-activity',
-  {
+  'Unit | Adapter | content/class-activity', {
     // needs: []
   }
 );
@@ -123,10 +124,8 @@ test('enableClassActivity', function(assert) {
   );
   this.pretender.map(function() {
     this.put(
-      '/api/nucleus/v2/classes/123/contents/321',
+      '/api/nucleus/v2/classes/123/contents/321/enable',
       function(request) {
-        //let requestBodyJson = JSON.parse(request.requestBody);
-        //assert.equal(requestBodyJson.activation_date, '2012-11-13', 'Wrong activation date');
         assert.equal(
           request.requestHeaders.Authorization,
           'Token token-api-3',

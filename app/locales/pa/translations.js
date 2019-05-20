@@ -59,6 +59,7 @@ export default Object.assign(quizzesTranslations, {
   'common.efficacy': 'ਕਾਰਗੁਜ਼ਾਰੀ',
   'common.grid': 'ਗਰਿੱਡ',
   'common.list': 'ਸੂਚੀ',
+  'common.offline-activites':'offline activites',
   'common.first': 'ਪਹਿਲਾ',
   'common.last': 'ਆਖਰੀ',
   'common.name': 'ਨਾਮ',
