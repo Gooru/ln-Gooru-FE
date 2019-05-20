@@ -22,6 +22,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
+  /**
+   * @type {CourseService} Service to retrieve course information
+   */
+  courseService: Ember.inject.service('api-sdk/course'),
+
   // -------------------------------------------------------------------------
   // Methods
   beforeModel() {
@@ -53,6 +58,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     const currentClass = route.modelFor('student.class').class;
     const course = route.modelFor('student.class').course;
     const isRoute0Applicable = currentClass.get('route0Applicable');
+    const courseId = currentClass.get('courseId');
+    const fwCode = currentClass.get('preference.framework') || 'GUT';
+    const milestonePromise = route
+      .get('courseService')
+      .getCourseMilestones(courseId, fwCode);
     let route0Promise = Ember.RSVP.resolve({});
     const courseIdContext = {
       courseId: currentClass.courseId,
@@ -68,6 +78,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       currentClass: currentClass,
       course: course,
       route0: route0Promise,
+      milestones: milestonePromise,
       rescopedContents: route.getRescopedContents(courseIdContext),
       gradeSubject: subject ? taxonomyService.fetchSubject(subject) : {}
     });
@@ -103,6 +114,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('course', model.course);
     controller.set('rescopedContents', model.rescopedContents);
     controller.set('gradeSubject', model.gradeSubject);
+    controller.set('milestones', model.milestones);
     controller.get('studentClassController').selectMenuItem('course-map');
   }
 });

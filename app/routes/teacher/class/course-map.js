@@ -26,6 +26,11 @@ export default Ember.Route.extend({
    */
   taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
+  /**
+   * @type {CourseService} Service to retrieve course information
+   */
+  courseService: Ember.inject.service('api-sdk/course'),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -132,12 +137,18 @@ export default Ember.Route.extend({
     route.getUnitLevelPerformance(units, classMembers);
     const subject = currentClass.get('preference.subject');
     let taxonomyService = route.get('taxonomyService');
+    const courseId = currentClass.get('courseId');
+    const fwCode = currentClass.get('preference.framework') || 'GUT';
+    const milestonePromise = currentClass.get('milestoneViewApplicable')
+      ? route.get('courseService').getCourseMilestones(courseId, fwCode)
+      : Ember.RSVP.resolve([]);
     return Ember.RSVP.hash({
       course: course,
       units: units,
       currentClass: currentClass,
       classMembers: classMembers,
-      gradeSubject: subject ? taxonomyService.fetchSubject(subject) : {}
+      gradeSubject: subject ? taxonomyService.fetchSubject(subject) : {},
+      milestones: milestonePromise
     });
   },
 
@@ -201,6 +212,7 @@ export default Ember.Route.extend({
     controller.get('classController').selectMenuItem('course-map');
     controller.set('isStudentCourseMap', false);
     controller.set('gradeSubject', model.gradeSubject);
+    controller.set('milestones', model.milestones);
     controller.getQuestionsToGrade();
     controller.init();
     controller.getUnitLevelPerformance();

@@ -55,6 +55,11 @@ export default Ember.Controller.extend({
    */
   assessmentService: Ember.inject.service('api-sdk/assessment'),
 
+  /**
+   * @property {Service} Notifications service
+   */
+  notifications: Ember.inject.service(),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -201,7 +206,44 @@ export default Ember.Controller.extend({
    * Maintains the value of  milestone view or not, default view will be course map.
    * @type {Boolean}
    */
-  isMilestoneView: true,
+  isMilestoneView: Ember.computed(
+    'isClassDestinationSetup',
+    'milestones',
+    function() {
+      let isClassDestinationSetup = this.get('isClassDestinationSetup');
+      let milestones = this.get('milestones');
+      if (isClassDestinationSetup && milestones && milestones.length > 0) {
+        return true;
+      }
+      return false;
+    }
+  ),
+
+  /**
+   * Identify class origin setup or not.
+   * @type {Boolean}
+   */
+  isClassDestinationSetup: Ember.computed('class', function() {
+    let gradeClassLevel = this.get('class.gradeCurrent');
+    return gradeClassLevel != null;
+  }),
+
+  /**
+   * Maintains  the state of milestone view is ready to show or not.
+   * @type {Boolean}
+   */
+  hasMilestoneViewReady: Ember.computed(
+    'isClassDestinationSetup',
+    'milestones',
+    function() {
+      let isClassDestinationSetup = this.get('isClassDestinationSetup');
+      let milestones = this.get('milestones');
+      if (isClassDestinationSetup && milestones && milestones.length > 0) {
+        return true;
+      }
+      return false;
+    }
+  ),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -389,6 +431,28 @@ export default Ember.Controller.extend({
   init() {
     const controller = this;
     controller._super(...arguments);
+    let milestoneViewApplicable = controller.get(
+      'currentClass.milestoneViewApplicable'
+    );
+    if (milestoneViewApplicable && controller.get('isPremiumClass')) {
+      controller.get('notifications').setOptions({
+        positionClass: 'toast-top-full-width',
+        timeOut: 200000
+      });
+      let message;
+      let isClassDestinationSetup = controller.get('isClassDestinationSetup');
+      let hasMilestoneViewReady = controller.get('hasMilestoneViewReady');
+      if (!isClassDestinationSetup) {
+        message = controller.get('i18n').t('warn.class-destination-not-setup')
+          .string;
+      } else if (!hasMilestoneViewReady) {
+        message = controller.get('i18n').t('warn.teacher-milestone-not-ready')
+          .string;
+      }
+      if (message) {
+        controller.get('notifications').warning(message);
+      }
+    }
     let tab = controller.get('tab');
     let studentId = controller.get('studentId');
     if (tab && tab === 'report') {

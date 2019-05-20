@@ -61,7 +61,7 @@
                     <p class="domain-name">{{lesson.tx_domain_name}}</p>
                     <p>{{lesson.lesson_title}}</p>
                   </div>
-                  
+
                   {{#if showPerformance}}
                     <div class="lesson-peformance grade-range-{{grade-range lesson.performance.scoreInPercentage}}">
                       {{#if (gte lesson.performance.scoreInPercentage 0)}}
@@ -147,6 +147,7 @@
                 </div>
               </div>
             {{/each}}
+            <div class="milestone-lessons-rescope {{if (and milestone.rescope (not showAllRescopedContent)) 'show-message' }}">{{t 'milestone-rescoped' subject=gradeSubject.title}}</div>
           {{else}}
             <div class="no-lesson">
               <span>{{t 'common.no-lesson-info-message'}}</span>
@@ -160,6 +161,7 @@
           </div>
         {{/if}}
       </div>
+
     </div>
   {{/each}}
 </div>
