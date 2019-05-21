@@ -166,8 +166,6 @@ export default Ember.Component.extend({
         action: 'explore',
         actionType: 'navigate',
         postActionHook: {
-          dismissPopupAfterAction: true,
-          deletenotificationuponaction: true,
           refreshAfterDeleteNotification: false,
           navigate: true,
           navigationDetails: {
@@ -181,7 +179,7 @@ export default Ember.Component.extend({
               lessonId: 0,
               collectionId: 0,
               milestoneId: 0,
-              tab: 'assesmentreport',
+              tab: 'none',
               location:
                 'unitId+lessonId+collectionId+milestoneId+currentItemType',
               refresh: true
@@ -194,8 +192,6 @@ export default Ember.Component.extend({
         action: 'explore',
         actionType: 'navigate',
         postActionHook: {
-          dismissPopupAfterAction: true,
-          deletenotificationuponaction: true,
           refreshAfterDeleteNotification: false,
           navigate: true,
           navigationDetails: {
