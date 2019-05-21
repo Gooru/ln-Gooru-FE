@@ -4,13 +4,13 @@
       {{gru-icon name="explore_outline"}}
     </div>
     <div class="milestone-route0-suggest-info">
-      <p>As per your competency profile, there are some competencies that you need to master so that you can do well in this course. We have a route that we recommend you take to master these competencies. Click here to see the details.</p>
+      <p>{{t 'class.overview.course-map.route0-bannerdesc'}}</p>
     </div>
   </div>
   <div class="route0-preview-container">
     <div class="route0-preview-author-info-container">
-      <p class="route0-preview-title">Suggested Lessons</p>
-      <p class="created-by"> Created by Kangoorus </p>
+      <p class="route0-preview-title">{{t 'suggested-lessons'}}</p>
+      <p class="created-by">{{t 'created-by-kangoorus'}}</p>
     </div>
     <div class="route0-preview-chart-course-map-container">
       {{#if showChart}}
@@ -24,6 +24,7 @@
       <div class="route0-preview-course-map">
         {{student.class.milestone-course-map-route0
           showPerformance=false
+          route0=route0
           locateLastPlayedItem=false
           class=class
         }}
@@ -32,10 +33,10 @@
   </div>
   <div class="route0-preview-actions-container">
     <div class="accept" {{action "updateRoute0" 'accepted'}}>
-      Accept
+      {{t 'common.accept'}}
     </div>
     <div class="ignore" {{action "updateRoute0" 'rejected'}}>
-      <span>No, thanks</span>
+      <span>{{t 'gru-suggest-test.no'}}</span>
     </div>
   </div>
 </div>

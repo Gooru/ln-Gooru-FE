@@ -5,7 +5,7 @@
           {{gru-icon name="flag"}}
         </div>
         <div class="milestone-title">
-          <p>Preparatory Material</p>
+          <p>{{t 'preparatory-material'}}</p>
         </div>
         <div class="milestone-caret">
           {{#if milestone.isActive}}
@@ -38,8 +38,6 @@
                     <p class="domain-name">{{lesson.unitTitle}}</p>
                     <p>{{lesson.lessonTitle}}</p>
                   </div>
-                  <div class="lesson-badge"></div>
-                  <div class="lesson-info"></div>
                 </div>
                 <div class="milestone-course-map-route0-collection-container" id="milestone-lesson-{{lesson.unitId}}-{{lesson.lessonId}}-{{lessonIndex}}">
                   {{#if lesson.hasCollectionFetched}}

@@ -59,6 +59,7 @@ export default Object.assign(quizzesTranslations, {
   'common.efficacy': 'ਕਾਰਗੁਜ਼ਾਰੀ',
   'common.grid': 'ਗਰਿੱਡ',
   'common.list': 'ਸੂਚੀ',
+  'common.offline-activites':'offline activites',
   'common.first': 'ਪਹਿਲਾ',
   'common.last': 'ਆਖਰੀ',
   'common.name': 'ਨਾਮ',
@@ -87,7 +88,8 @@ export default Object.assign(quizzesTranslations, {
     'ਆਪਣੇ ਸਪੈਲਿੰਗਾਂ ਦੀ ਜਾਂਚ ਕਰੋ ਅਸੀਂ ਸਾਰੇ ਗ਼ਲਤੀਆਂ ਕਰਦੇ ਹਾਂ! ਜਾਂ ਇਸਦੀ ਬਜਾਏ ਇਸੇ ਸ਼ਬਦ ਦੀ ਖੋਜ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ.',
   'common.a-collection': 'ਇੱਕ ਸੰਗ੍ਰਹਿ',
   'common.a-course': 'ਇੱਕ ਕੋਰਸ',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.a-question': 'ਇੱਕ ਸਵਾਲ',
   'common.a-resource': 'ਇੱਕ ਸਰੋਤ',
   'common.a-rubric': 'ਇੱਕ ਚਰਬੀਕਾਰ',
@@ -2537,5 +2539,19 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material',
+  milestones: 'Milestones',
+  'show-course-map': 'Show course Map',
+  'show-milestones': 'Show Milestones',
+  'warn.class-destination-not-setup':
+    'Class setup is not complete unless the class destination is set. Go to Class Settings and complete setup. Otherwise, students will not be able to access content for this class.',
+  'milestone-rescoped':
+    'This milestone is available due to your {{subject}} level setup by teacher, but you seem to have caught up on all relevant competencies.',
+  'student-milestone-not-ready':
+    'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
+  'warn.teacher-milestone-not-ready':
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.'
 });

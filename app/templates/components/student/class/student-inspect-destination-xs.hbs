@@ -3,11 +3,11 @@
 {{/if}}
 <div class="pull-up-container">
   {{#if (eq type "destination")}}
-    <div class="btn-container" {{action onMoveNext 'inspect-destination'}}>
+    <div class="btn-container" {{action onMoveNext 'route'}}>
       {{gru-icon name="directions"}}
     </div>
   {{else}}
-    <div class="btn-container" {{action onMoveNext 'playNext'}}>
+    <div class="btn-container {{if (and class.milestoneViewApplicable isMilestoneFetch (eq milestones.length 0)) 'no-milestone'}}" {{action onMoveNext 'playNext'}}>
       {{gru-icon name="near_me"}}
     </div>
   {{/if}}
@@ -51,7 +51,7 @@
                 <span>{{t 'student-first-experience.route0-action.accept'}}</span>
               </div>
             </div>
-      {{else}}
+      {{else if (and isMilestoneFetch (gt milestones.length 0))}}
         <div class="milestone-course-map-view-route0">
           {{student.class.milestone-course-map-route0-preview
              class=class
@@ -73,16 +73,24 @@
           }}
         </div>
     {{else}}
-      {{#if isRoute0Accepted}}
+      {{#if ( and isRoute0Accepted  isMilestoneFetch (gt milestones.length 0))}}
         {{student.class.milestone-course-map-route0
         showPerformance=false
         locateLastPlayedItem=false
         class=class
         }}
       {{/if}}
-      {{student.class.milestone-course-map
+      {{#if (and isMilestoneFetch (gt milestones.length 0))}}
+        {{student.class.milestone-course-map
         class=class
+        gradeSubject=subject
+        locateLastPlayedItem=false
+        showToggleButtonToViewFullCourse=true
+        milestones=milestones
       }}
+      {{else if isMilestoneFetch}}
+        <div class="student-milestone-not-ready">{{t 'student-milestone-not-ready'}}</div>
+      {{/if}}
       {{/unless}}
     {{/if}}
   </div>

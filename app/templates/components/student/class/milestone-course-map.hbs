@@ -1,8 +1,20 @@
 <div class="milestone-course-map-container">
+  {{#if showToggleButtonToViewFullCourse}}
+    <div class="ms-rescope-content-preview">
+      <div class="show-completed-course">
+        {{t 'class.overview.course-map.rescope-toggle'}}
+      </div>
+      <div class="show-completed-course-btn">
+        {{gru-toggle-button
+        isChecked=showAllRescopedContent
+        onToggleButton="onToggleRescope" }}
+      </div>
+    </div>
+  {{/if}}
   {{#each milestones as | milestone milestoneIndex | }}
     <div class="milestone-course-map {{if milestone.isClassGrade 'class-grade'}}">
       <div class="milestone-course-map-panel  {{if milestone.isActive 'active'}}">
-        <div class="milestone-info-container"  {{action 'toggleMilestoneItems' milestone }}>
+        <div class="milestone-info-container" {{action 'toggleMilestoneItems' milestone }}>
           <div class="milestone-flag-icon">
             {{gru-icon name="flag"}}
           </div>
@@ -49,8 +61,7 @@
                     <p class="domain-name">{{lesson.tx_domain_name}}</p>
                     <p>{{lesson.lesson_title}}</p>
                   </div>
-                  <div class="lesson-badge"></div>
-                  <div class="lesson-info"></div>
+
                   {{#if showPerformance}}
                     <div class="lesson-peformance grade-range-{{grade-range lesson.performance.scoreInPercentage}}">
                       {{#if (gte lesson.performance.scoreInPercentage 0)}}
@@ -136,6 +147,7 @@
                 </div>
               </div>
             {{/each}}
+            <div class="milestone-lessons-rescope {{if (and milestone.rescope (not showAllRescopedContent)) 'show-message' }}">{{t 'milestone-rescoped' subject=gradeSubject.title}}</div>
           {{else}}
             <div class="no-lesson">
               <span>{{t 'common.no-lesson-info-message'}}</span>
@@ -149,6 +161,7 @@
           </div>
         {{/if}}
       </div>
+
     </div>
   {{/each}}
 </div>
@@ -159,10 +172,7 @@
 {{/if}}
 
 {{#if isShowMilestoneReport}}
-  {{#reports.pull-up.milestone.milestone-report
-    showPullUp = isShowMilestoneReport
-    title = (concat gradeSubject.title ' - ' selectedMilestone.grade_name)
-  }}
+  {{#reports.pull-up.milestone.milestone-report showPullUp=isShowMilestoneReport title=( concat gradeSubject.title ' - ' selectedMilestone.grade_name) }}
     {{reports.pull-up.milestone.student-milestone-summary-report
       activeMilestone = selectedMilestone
       class = class

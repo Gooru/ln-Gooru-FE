@@ -77,7 +77,9 @@ export default Ember.Component.extend({
    */
   fwCode: Ember.computed('class', function() {
     let preference = this.get('class.preference');
-    return preference != null ? preference.get('framework') : null;
+    return preference != null && preference.get('framework')
+      ? preference.get('framework')
+      : 'GUT';
   }),
 
   /**
@@ -274,36 +276,25 @@ export default Ember.Component.extend({
 
   loadData() {
     let component = this;
-    let courseId = component.get('courseId');
     component.set('isLoading', true);
-    let fwCode = component.get('fwCode');
     let showPerformance = component.get('showPerformance');
     let filters = {
       subject: component.get('class.preference.subject')
     };
-    let fwkCode = component.get('class.preference.framework');
+    let fwkCode = component.get('fwCode');
     if (fwkCode) {
       filters.fw_code = fwkCode;
     }
 
-    Ember.RSVP
-      .hash({
-        milestones: component
-          .get('courseService')
-          .getCourseMilestones(courseId, fwCode)
-      })
-      .then(({ milestones }) => {
-        if (!component.isDestroyed) {
-          let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
-            milestones
-          );
-          component.set('milestones', milestoneData);
-          if (showPerformance) {
-            component.fetchMilestonePerformance();
-          }
-          component.set('isLoading', false);
-        }
-      });
+    let milestones = component.get('milestones');
+    let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
+      milestones
+    );
+    component.set('milestones', milestoneData);
+    if (showPerformance) {
+      component.fetchMilestonePerformance();
+    }
+    component.set('isLoading', false);
   },
 
   fetchMilestonePerformance() {

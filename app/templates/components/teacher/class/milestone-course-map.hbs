@@ -49,8 +49,6 @@
                     <p class="domain-name">{{lesson.tx_domain_name}}</p>
                     <p>{{lesson.lesson_title}}</p>
                   </div>
-                  <div class="lesson-badge"></div>
-                  <div class="lesson-info"></div>
                   {{#if showPerformance}}
                     <div class="lesson-peformance grade-range-{{grade-range lesson.performance.scoreInPercentage}}" {{action "onOpenLessonReport" milestone lesson}}>
                       {{#if lesson.performance.hasStarted}}

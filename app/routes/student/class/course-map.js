@@ -102,13 +102,23 @@ export default Ember.Route.extend({
 
   // -------------------------------------------------------------------------
   // Methods
-  beforeModel() {
+  beforeModel(trans) {
     const route = this;
     let isPremiumCourse = route.modelFor('student.class').isPremiumCourse;
     const currentClass = route.modelFor('student.class').class;
     if (isPremiumCourse) {
       if (currentClass.get('milestoneViewApplicable')) {
-        return route.transitionTo('student.class.milestone');
+        if (
+          trans &&
+          trans.queryParams &&
+          trans.queryParams.milestoneId &&
+          trans.queryParams.milestoneId.length > 0
+        ) {
+          let queryParams = { location: trans.queryParams.location };
+          return route.transitionTo('student.class.milestone', { queryParams });
+        } else {
+          return route.transitionTo('student.class.milestone');
+        }
       } else {
         let skylineInitialState = route.modelFor('student.class')
           .skylineInitialState;

@@ -30,11 +30,15 @@ export default Ember.Component.extend({
         .format('YYYY');
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
-      let datepickerEle = component.$('#ca-datepicker .datepicker-days .prev');
-      datepickerEle.trigger('click');
+      let datepickerPrevEle = component.$('#ca-datepicker .datepicker-days .prev');
+      datepickerPrevEle.trigger('click');
       let date = `${forYear}-${forMonth}-01`;
-      component.set('forFirstDateOfMonth', moment(date).format('YYYY-MM-DD'));
-      component.sendAction('showPreviousMonth');
+      let parsedDate = moment(date).format('YYYY-MM-DD');
+      component.set('forFirstDateOfMonth', parsedDate);
+      component.sendAction('showPreviousMonth', parsedDate);
+      if (component.get('highlightFirstDayOfMonth')) {
+        component.updateFirstDayOfMonth(parsedDate);
+      }
     },
 
     showNextMonth() {
@@ -48,11 +52,15 @@ export default Ember.Component.extend({
         .format('YYYY');
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
-      let datepickerEle = component.$('#ca-datepicker .datepicker-days .next');
-      datepickerEle.trigger('click');
+      let datepickerNextEle = component.$('#ca-datepicker .datepicker-days .next');
+      datepickerNextEle.trigger('click');
       let date = `${forYear}-${forMonth}-01`;
-      component.set('forFirstDateOfMonth', moment(date).format('YYYY-MM-DD'));
-      component.sendAction('showNextMonth');
+      let parsedDate = moment(date).format('YYYY-MM-DD');
+      component.set('forFirstDateOfMonth', parsedDate);
+      component.sendAction('showNextMonth', parsedDate);
+      if (component.get('highlightFirstDayOfMonth')) {
+        component.updateFirstDayOfMonth(parsedDate);
+      }
     },
 
     showCalendar() {
@@ -204,6 +212,12 @@ export default Ember.Component.extend({
    */
   highlightActivities: false,
 
+  /**
+   * It will decide whether  need to highlight first date of the month or not.
+   * @type {Boolean}
+   */
+  highlightFirstDayOfMonth: false,
+
   // -------------------------------------------------------------------------
   // Observers
 
@@ -278,6 +292,12 @@ export default Ember.Component.extend({
     }
   },
 
+  updateFirstDayOfMonth(date) {
+    let component = this;
+    let datePickerEle = component.$('#ca-datepicker');
+    datePickerEle.datepicker('update', date);
+  },
+
   toggleDatePicker() {
     let component = this;
     let element = component.$('.ca-datepicker-container');
@@ -308,6 +328,9 @@ export default Ember.Component.extend({
         let dateElement = component.$(dateEle);
         if (!(dateElement.hasClass('new') || dateElement.hasClass('old'))) {
           let day = dateElement.html();
+          if (day.length === 1) {
+            day = `0${day}`;
+          }
           let activity = activities.findBy('day', day);
           if (activity) {
             dateElement.removeClass('no-activities');

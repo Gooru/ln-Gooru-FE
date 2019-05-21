@@ -1,9 +1,4 @@
 .teacher-class-milestone-course-map {
-  width: inherit;
-  @media screen and (max-width: $screen-sm) {
-    width: 100%;
-  }
-
   .milestone-course-map-container {
     width: 100%;
 
@@ -110,6 +105,7 @@
 
       .milestone-course-map-lesson-container {
         display: none;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 6px 10px 0px;
 
         .no-lesson {
           text-align: center;
@@ -229,7 +225,7 @@
             background: #fff;
             display: inline-grid;
             width: 100%;
-            grid-template-columns: 70px 1fr 50px 50px 60px;
+            grid-template-columns: 70px 1fr 60px;
             align-items: center;
             border-bottom: 1px solid #e3e5ea;
             cursor: pointer;
@@ -324,7 +320,7 @@
                 background: #fff;
                 display: inline-grid;
                 width: 100%;
-                grid-template-columns: 70px 1fr 50px 100px 60px;
+                grid-template-columns: 70px 1fr 50px 120px 60px;
                 align-items: center;
                 @media screen and (max-width: $screen-sm) {
                   grid-template-columns: 70px 1fr 50px 60px;
@@ -555,6 +551,7 @@
                   cursor: pointer;
                   align-self: center;
                   justify-self: center;
+                  height: 30px;
 
                   i.go-live-icon {
                     background-image: url("gooru/on-air-icon.png");
@@ -615,9 +612,10 @@
                 }
 
                 .collection-content-counts {
-                  display: inline-flex;
+                  display: grid;
                   align-items: center;
-                  justify-content: space-evenly;
+                  justify-content: center;
+                  grid-template-columns: 40px 40px 40px;
                   @media screen and (max-width: $screen-sm) {
                     display: none;
                   }

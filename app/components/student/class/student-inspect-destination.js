@@ -19,6 +19,11 @@ export default Ember.Component.extend({
    */
   taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
+  /**
+   * @type {CourseService} Service to retrieve course information
+   */
+  courseService: Ember.inject.service('api-sdk/course'),
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -163,12 +168,32 @@ export default Ember.Component.extend({
     CLASS_SKYLINE_INITIAL_DESTINATION.showDirections
   ),
 
+  /**
+   * Maintains loaded or not
+   * @type {Boolean}
+   */
+  isMilestoneFetch: false,
+
+  // -------------------------------------------------------------------------
+  // Observer
+
   isRouteView: Ember.observer('isRoute0', function() {
     let isRoute0 = this.get('isRoute0');
     if (isRoute0) {
-      this.fetchRout0Contents().then(data => {
-        this.set('route0Contents', data);
-      });
+      const currentClass = this.get('class');
+      const fwCode = currentClass.get('preference.framework') || 'GUT';
+      const courseId = currentClass.get('courseId');
+      this.get('courseService')
+        .getCourseMilestones(courseId, fwCode)
+        .then(milestones => {
+          this.set('milestones', milestones);
+          this.set('isMilestoneFetch', true);
+          if (milestones.length > 0) {
+            this.fetchRout0Contents().then(data => {
+              this.set('route0Contents', data);
+            });
+          }
+        });
     }
   }),
 

@@ -60,7 +60,7 @@ export default ApplicationAdapter.extend({
    * Dismisses teacher notification of the supplied actionID
    * @param {actionId}
    */
-  resetTeacherNotifcation: function(actionId) {
+  resetTeacherNotification: function(actionId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/teacher/${actionId}`;
@@ -79,7 +79,7 @@ export default ApplicationAdapter.extend({
    * Dismisses student notification of the supplied actionID
    * @param {actionId}
    */
-  resetStudentNotifcation: function(actionId) {
+  resetStudentNotification: function(actionId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/student/${actionId}`;

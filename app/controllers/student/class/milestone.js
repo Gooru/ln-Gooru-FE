@@ -9,6 +9,9 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Dependencies
 
+  queryParams: ['location'],
+
+  location: null,
   /**
    * Inject the  student class parent controller.
    */
