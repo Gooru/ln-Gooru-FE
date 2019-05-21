@@ -1,5 +1,5 @@
 <div class="student-milestone-summary-report-container">
-  <div class="report-header-container">
+  <div class="student-report-header-container">
     {{charts.score-fill-gauge-chart
       scoreInPercentage = activeMilestone.performance.scoreInPercentage
       timeSpent = activeMilestone.performance.timeSpent
@@ -15,7 +15,7 @@
       {{gru-icon name="keyboard_arrow_right"}}
     </div>
   </div>
-  <div class="report-body-container">
+  <div class="student-report-body-container">
     <div class="milestone-lessons-container {{if isMilestoneNotStarted 'milestone-not-started'}}">
       {{#each activeMilestone.lessons as |milestoneLesson|}}
         {{reports.pull-up.milestone.student-milestone-lesson-performance-accordion

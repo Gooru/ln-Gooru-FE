@@ -1,6 +1,6 @@
 .milestone-report.student-milestone-summary-report {
   .student-milestone-summary-report-container {
-    .report-header-container {
+    .student-report-header-container {
       box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
       height: 240px;
       position: relative;
@@ -27,7 +27,7 @@
       }
     }
 
-    .report-body-container {
+    .student-report-body-container {
       height: calc(80vh - 230px);
       overflow-y: auto;
       &::-webkit-scrollbar {

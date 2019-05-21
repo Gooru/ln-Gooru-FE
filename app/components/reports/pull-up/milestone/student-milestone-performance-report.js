@@ -267,11 +267,10 @@ export default Ember.Component.extend({
   filterOutMilestonesBasedOnGrade(grades, milestones) {
     let component = this;
     let gradeBounds = component.get('class.memberGradeBounds');
-    let studentId = component.get('studentId');
-    let userUid = studentId ? studentId : component.get('session.userId');
-    let gradeBound = gradeBounds.findBy(userUid);
+    let userId = component.get('userId');
+    let gradeBound = gradeBounds.findBy(userId);
     let milestoneData = Ember.A([]);
-    let studentGradeBound = Ember.Object.create(gradeBound.get(userUid));
+    let studentGradeBound = Ember.Object.create(gradeBound.get(userId));
     let classGradeId = component.get('class.gradeCurrent');
     component.set('studentGradeBound', studentGradeBound);
     component.set('grades', grades);

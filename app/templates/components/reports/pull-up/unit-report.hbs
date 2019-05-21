@@ -4,8 +4,17 @@
     <div class="report-breadcrumb">
       <div class="unit-title">
         <div>
-          <div>{{t 'common.unit'}} {{unit.sequence}} :</div>
-           <div class="unit-title-value ellipsis">{{unit.title}}</div>
+          {{#if isShowMilestoneReport}}
+            <div>Milestone {{selectedUnit.sequence}} :</div>
+            <div class="unit-title-value ellipsis">
+              {{concat gradeSubject.title ' - ' selectedUnit.grade_name}}
+            </div>
+          {{else}}
+            <div>{{t 'common.unit'}} {{unit.sequence}} :</div>
+             <div class="unit-title-value ellipsis">
+               {{unit.title}}
+             </div>
+          {{/if}}
          </div>
       </div>
     </div>
@@ -70,6 +79,7 @@
           selectedUnit=selectedUnit
           openLessonReport="openLessonReport"
           openStudentUnitReport="openStudentUnitReport"
+          isShowMilestoneReport = isShowMilestoneReport
         }}
       </div>
     </div>
@@ -77,6 +87,22 @@
 </div>
 {{#if showStudentUnitReport}}
   {{reports.pull-up.student-unit-report context=studentUnitReportContext onClosePullUp="onPullUpClose" showPullUp=showStudentUnitReport}}
+{{/if}}
+
+{{#if isShowStudentMilestoneReport}}
+  {{#reports.pull-up.milestone.milestone-report
+    showPullUp = isShowStudentMilestoneReport
+    title = (concat gradeSubject.title ' - ' selectedUnit.grade_name)
+  }}
+    {{reports.pull-up.milestone.student-milestone-summary-report
+      activeMilestone = studentMilestone
+      class = class
+      milestones = units
+      activeMilestoneIndex = activeMilestoneIndex
+      userId = selectedStudentId
+      gradeSubject = gradeSubject
+    }}
+  {{/reports.pull-up.milestone.milestone-report}}
 {{/if}}
 {{#if isLoading}}
   <div class="loading-spinner">

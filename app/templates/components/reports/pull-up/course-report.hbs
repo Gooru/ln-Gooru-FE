@@ -55,11 +55,13 @@
           sortByFirstnameEnabled=sortByFirstnameEnabled
           sortByLastnameEnabled=sortByLastnameEnabled
           sortByScoreEnabled=sortByScoreEnabled
-          contents=units
+          contents=milestones
           studentReportData=studentReportData
           course=course
           openUnitReport="openUnitReport"
           openStudentCourseReport="openStudentCourseReport"
+          gradeSubject = gradeSubject
+          isShowMilestoneReport = isShowMilestoneReport
         }}
       </div>
     </div>
@@ -67,6 +69,18 @@
 </div>
 {{#if showStudentCourseReport}}
   {{reports.pull-up.student-course-report context=studentCourseReportContext onClosePullUp="onClosePullUp" showPullUp=showStudentCourseReport}}
+{{/if}}
+
+{{#if isShowStudentMilestoneCourseReport}}
+  {{#reports.pull-up.milestone.milestone-report
+    showPullUp = isShowStudentMilestoneCourseReport
+    title = course.title
+  }}
+    {{reports.pull-up.milestone.student-milestone-performance-report
+      class = studentClassData
+      userId = selectedStudentId
+    }}
+  {{/reports.pull-up.milestone.milestone-report}}
 {{/if}}
 {{#if isLoading}}
   <div class="loading-spinner">

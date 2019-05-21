@@ -5,7 +5,7 @@
       <div class="lesson-title">
         <div>
           <div>{{t 'common.lesson'}} {{lesson.sequence}} :</div>
-          <div class="lesson-title-value ellipsis">{{lesson.title}}</div>
+          <div class="lesson-title-value ellipsis">{{if isShowMilestoneReport lesson.lesson_title lesson.title}}</div>
         </div>
       </div>
     </div>
@@ -101,6 +101,7 @@
           openCollectionReport="openCollectionReport"
           collectionType="assessment"
           openStudentLessonReport="openStudentLessonReport"
+          isShowMilestoneReport = isShowMilestoneReport
         }}
         {{else}}
           {{reports.pull-up.lesson-report-listview
@@ -118,6 +119,7 @@
           openCollectionReport="openCollectionReport"
           openStudentLessonReport="openStudentLessonReport"
           collectionType="collection"
+          isShowMilestoneReport = isShowMilestoneReport
         }}
         {{/if}}
       </div>
