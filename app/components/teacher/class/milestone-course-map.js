@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
+import CurrentLocationSerializer from 'gooru-web/serializers/analytics/current-location';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -43,6 +44,9 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
 
+  location: null,
+
+  currentLocationSerializer: null,
   /**
    * Maintains the state of data loading
    * @type {Boolean}
@@ -117,6 +121,15 @@ export default Ember.Component.extend({
   showAllRescopedContent: false,
 
   classMembers: Ember.A([]),
+
+  init: function() {
+    this._super(...arguments);
+
+    this.set(
+      'currentLocationSerializer',
+      CurrentLocationSerializer.create(Ember.getOwner(this).ownerInjection())
+    );
+  },
 
   // -------------------------------------------------------------------------
   // Actions
@@ -244,6 +257,14 @@ export default Ember.Component.extend({
     if (showPerformance) {
       component.fetchMilestonePerformance();
     }
+    //Todo: If needed remove the later time based approach everywhere
+    Ember.run.later(function() {
+      let customLocationPresent = component.get('location');
+      if (customLocationPresent) {
+        component.navigateLocation();
+        component.set('isLoading', false);
+      }
+    }, 500);
     component.set('isLoading', false);
   },
 
@@ -283,44 +304,42 @@ export default Ember.Component.extend({
     let courseId = component.get('courseId');
     let fwCode = component.get('fwCode');
 
-    Ember.RSVP
-      .hash({
-        milestoneAssessmentLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
-          classId,
-          courseId,
-          milestoneId,
-          CONTENT_TYPES.ASSESSMENT,
-          undefined,
-          fwCode
-        ),
-        milestoneCollectionLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
-          classId,
-          courseId,
-          milestoneId,
-          CONTENT_TYPES.COLLECTION,
-          undefined,
-          fwCode
-        )
-      })
-      .then(
-        ({
-          milestoneAssessmentLessonsPerformance,
-          milestoneCollectionLessonsPerformance
-        }) => {
-          if (!component.isDestroyed) {
-            component.setMilestoneLessonPerformanceData(
-              CONTENT_TYPES.COLLECTION,
-              lessons,
-              milestoneCollectionLessonsPerformance
-            );
-            component.setMilestoneLessonPerformanceData(
-              CONTENT_TYPES.ASSESSMENT,
-              lessons,
-              milestoneAssessmentLessonsPerformance
-            );
-          }
+    Ember.RSVP.hash({
+      milestoneAssessmentLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
+        classId,
+        courseId,
+        milestoneId,
+        CONTENT_TYPES.ASSESSMENT,
+        undefined,
+        fwCode
+      ),
+      milestoneCollectionLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
+        classId,
+        courseId,
+        milestoneId,
+        CONTENT_TYPES.COLLECTION,
+        undefined,
+        fwCode
+      )
+    }).then(
+      ({
+        milestoneAssessmentLessonsPerformance,
+        milestoneCollectionLessonsPerformance
+      }) => {
+        if (!component.isDestroyed) {
+          component.setMilestoneLessonPerformanceData(
+            CONTENT_TYPES.COLLECTION,
+            lessons,
+            milestoneCollectionLessonsPerformance
+          );
+          component.setMilestoneLessonPerformanceData(
+            CONTENT_TYPES.ASSESSMENT,
+            lessons,
+            milestoneAssessmentLessonsPerformance
+          );
         }
-      );
+      }
+    );
   },
 
   setMilestoneLessonPerformanceData(
@@ -352,35 +371,33 @@ export default Ember.Component.extend({
     let lessonId = lesson.get('lesson_id');
     let performanceService = component.get('performanceService');
 
-    Ember.RSVP
-      .hash({
-        performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
-          classId,
-          courseId,
-          unitId,
-          lessonId,
-          CONTENT_TYPES.ASSESSMENT,
-          userUid
-        ),
-        performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
-          classId,
-          courseId,
-          unitId,
-          lessonId,
-          CONTENT_TYPES.COLLECTION,
-          userUid
-        )
-      })
-      .then(({ performanceAssessment, performanceCollection }) => {
-        component.setMilestoneCollectionPerformanceData(
-          collections,
-          performanceAssessment
-        );
-        component.setMilestoneCollectionPerformanceData(
-          collections,
-          performanceCollection
-        );
-      });
+    Ember.RSVP.hash({
+      performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
+        classId,
+        courseId,
+        unitId,
+        lessonId,
+        CONTENT_TYPES.ASSESSMENT,
+        userUid
+      ),
+      performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
+        classId,
+        courseId,
+        unitId,
+        lessonId,
+        CONTENT_TYPES.COLLECTION,
+        userUid
+      )
+    }).then(({ performanceAssessment, performanceCollection }) => {
+      component.setMilestoneCollectionPerformanceData(
+        collections,
+        performanceAssessment
+      );
+      component.setMilestoneCollectionPerformanceData(
+        collections,
+        performanceCollection
+      );
+    });
   },
 
   setMilestoneCollectionPerformanceData(
@@ -593,5 +610,79 @@ export default Ember.Component.extend({
       milestoneData.pushObject(milestone);
     });
     return milestoneData;
+  },
+  /**
+   * Enables jumping to a specific milestone driven location
+   * Location is provided with queryString paramter Location
+   */
+  navigateLocation() {
+    const component = this;
+    let rawCustomLocation = this.get('location');
+    if (rawCustomLocation) {
+      let customLocation = component.parserLocation(rawCustomLocation),
+        userLocation = component.formatCustomLocationToUserLocation(
+          customLocation
+        );
+      //Navigation basis milestoneId if not present don't navigate
+      if (userLocation && userLocation.milestoneId) {
+        component.set('userCurrentLocation', userLocation);
+        component.set('locateLastPlayedItem', userLocation);
+
+        let selectedMilestone = component
+          .get('milestones')
+          .findBy('milestone_id', userLocation.milestoneId);
+
+        //ToDo: Refactoring required to remove the Later based workaround, here as well as in other implementation
+        Ember.run.later(function() {
+          component.handleMilestoneToggle(selectedMilestone);
+
+          Ember.run.later(function() {
+            Ember.run.later(function() {
+              let lessonO = selectedMilestone.lessons.findBy(
+                  'lesson_id',
+                  userLocation.lessonId
+                ),
+                collectionO = lessonO.collections.findBy(
+                  'id',
+                  userLocation.collectionId
+                );
+              component.send(
+                'onShowStudentMilestoneCollectionReport',
+                lessonO,
+                collectionO
+              );
+            }, 8000);
+          }, 500);
+        });
+      }
+    }
+  },
+
+  /**
+   *
+   * @param {object} customLocation
+   */
+  formatCustomLocationToUserLocation(customLocation) {
+    //ToDo: Check if this is needed and reformat
+    let serializedLocation = this.currentLocationSerializer.normalizeCurrentLocation(
+      customLocation
+    );
+    serializedLocation.milestone_id = serializedLocation.milestoneId;
+    return serializedLocation;
+  },
+
+  /**
+   *
+   * @param {string} customLocation : format 'unitId+lessonId+collectionId+milestoneId+currentItemType',
+   */
+  parserLocation(customLocation) {
+    let locationArr = customLocation.split('+');
+    return {
+      unitId: locationArr[0],
+      lessonId: locationArr[1],
+      collectionId: locationArr[2],
+      milestoneId: locationArr[3],
+      type: locationArr[4]
+    };
   }
 });
