@@ -43,7 +43,7 @@
                 showNextMonth="showNextMonth"
                 onSelectDate="onSelectDate"
                 highlightFirstDayOfMonth=true
-                onSelectToday="onSelectDate"
+                onSelectToday="onSelectToday"
                 activities=scheduledClassActivitiesDatewise
                 highlightActivities=true
               }}
@@ -183,6 +183,7 @@
   {{teacher.class.ca-search-content-pull-up
     showPullUp=showSearchContentPullup
     addedContentToDCA="addedContentToDCA"
+    refreshUnScheduleItem="onRefreshUnScheduleItem"
     context=contextParams
     selectedSearchContentType=selectedSearchContentType
     todaysClassActivities=todaysClassActivities.classActivities

@@ -292,6 +292,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       this.set('showUnScheduledItemsPullup', true);
     },
 
+    onRefreshUnScheduleItem(forMonth, forYear) {
+      const controller = this;
+      if (forMonth === controller.get('forMonth') && forYear === controller.get('forYear')) {
+        controller.loadUnScheduledActivities();
+      }
+    },
+
     /**
      * It will takes care of content will schedule for the specific date.
      * @param  {String} scheduleDate
@@ -302,36 +309,45 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let classActivity = controller.get('selectedClassActivityForSchedule');
       let content = classActivity.get('collection');
       let contentType = content.get('format');
-      let contentId = content.get('id');
+      let contentId = classActivity.get('id');
+      let collectionId = content.get('id');
       let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
       datepickerEle.hide();
-      let scheduleMonth = parseInt(moment(scheduleDate).format('MM'));
-      let scheduleYear = parseInt(moment(scheduleDate).format('YYYY'));
-      let forMonth = parseInt(classActivity.get('forMonth'));
-      let forYear = parseInt(classActivity.get('forYear'));
-      let activationDate = classActivity.get('activation_date');
-      if (
-        forMonth === scheduleMonth &&
-        forYear === scheduleYear &&
-        !activationDate
-      ) {
-        const isToday = moment().format('YYYY-MM-DD') === scheduleDate;
-        this.send('changeVisibility', classActivity, scheduleDate, isToday);
-      } else {
-        controller
-          .get('classActivityService')
-          .addActivityToClass(classId, contentId, contentType, scheduleDate)
-          .then(newContentId => {
-            if (!controller.isDestroyed) {
-              let data = controller.serializerSearchContent(
-                content,
-                newContentId,
-                scheduleDate
-              );
-              controller.send('addedContentToDCA', data, scheduleDate);
+      let scheduleMonth = moment(scheduleDate).format('MM');
+      let scheduleYear = moment(scheduleDate).format('YYYY');
+      let selectedActivityIsUnScheduled = controller.get('selectedActivityIsUnScheduled');
+      return Ember.RSVP
+        .hash({
+          scheduleActivity: selectedActivityIsUnScheduled ? controller
+            .get('classActivityService')
+            .scheduleClassActivity(classId, contentId, scheduleDate) : controller
+            .get('classActivityService')
+            .addActivityToClass(
+              classId,
+              collectionId,
+              contentType,
+              scheduleDate,
+              scheduleMonth,
+              scheduleYear
+            )
+        }).then(() => {
+          if (!controller.isDestroyed) {
+            if (scheduleMonth === controller.get('forMonth') && scheduleYear === controller.get('forYear')) {
+              if (scheduleDate === controller.get('selectedDate')) {
+                let scheduledClassActivities = controller.get('scheduledClassActivities').objectAt(0);
+                scheduledClassActivities.get('classActivities').pushObject(classActivity);
+                classActivity.set('isNewlyAdded', true);
+                Ember.run.later(function() {
+                  classActivity.set('isNewlyAdded', false);
+                }, 2000);
+              }
+              let unScheduledClassActivities = controller.get('unScheduledClassActivities');
+              unScheduledClassActivities.removeObject(classActivity);
+              controller.fetchAssessmentsMasteryAccrual();
+              controller.loadActivitiesForMonth();
             }
-          });
-      }
+          }
+        });
     },
 
     /**
@@ -358,16 +374,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           forMonth,
           forYear
         )
-        .then(newContentId => {
+        .then(() => {
           if (!controller.isDestroyed) {
-            let data = controller.serializerSearchContent(
-              content,
-              newContentId,
-              null,
-              forMonth,
-              forYear
-            );
-            controller.send('addedContentToDCA', data, null, forMonth, forYear);
+            if (forMonth === controller.get('forMonth') && forYear === controller.get('forYear')) {
+              controller.loadUnScheduledActivities();
+            }
           }
         });
     },
@@ -375,7 +386,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     /**
      * Action get triggered when schedule content to CA got clicked
      */
-    onScheduleContentToDCA(classActivity, event) {
+    onScheduleContentToDCA(classActivity, event, isUnScheduled) {
       let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
       let datepickerCtnEle = Ember.$(
         '.ca-datepicker-schedule-container .ca-date-picker-container'
@@ -413,7 +424,15 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         selectedContentEle.removeClass('active');
         datepickerEle.hide();
       }
+      this.set('selectedActivityIsUnScheduled', isUnScheduled);
       this.set('selectedClassActivityForSchedule', classActivity);
+    },
+
+    onSelectToday(date) {
+      let controller = this;
+      controller.send('onSelectDate', date);
+      controller.loadActivitiesForMonth();
+      controller.loadUnScheduledActivities();
     },
 
     onSelectDate(date) {
@@ -520,6 +539,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Properties
 
   /**
+   * It maintains whether selected activity is schedule or not
+   * @property {Boolean} selectedActivityIsUnScheduled
+   */
+  selectedActivityIsUnScheduled: false,
+
+  /**
    * @property {String} contextSource
    */
   contextSource: PLAYER_EVENT_SOURCE.DAILY_CLASS,
@@ -601,7 +626,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           return classActivity;
         }
       });
-    if (controller.get('isCurrentYearAndMonth')) {
+    if (controller.get('isToday')) {
       let date = moment().format('YYYY-MM-DD');
       let todayClassActivities = classActivities.findBy('added_date', date);
       if (!todayClassActivities) {
@@ -612,7 +637,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         classActivities.pushObject(classActivity);
       }
     }
-    return classActivities.filterBy('added_date', controller.get('selectedDate'));
+    return classActivities;
   }),
 
   totalScheduleditems: Ember.computed(
@@ -878,6 +903,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   addDataContentType: '',
 
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -961,20 +987,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     const controller = this;
     const classId = controller.get('classId');
     controller.set('selectedDate', date);
-    let forMonth = moment(date).format('MM');
-    let forYear = moment(date).format('YYYY');
-    let startDate = `${forYear}-${forMonth}-01`;
-    var endDate = moment(startDate).endOf('month').format('YYYY-MM-DD');
     controller.set('isLoading', true);
     controller
       .get('classActivityService')
-      .getClassScheduledActivities(classId, startDate, endDate)
+      .getClassScheduledActivities(classId, date)
       .then(classActivities => {
         controller.set('classActivities', Ember.A([]));
         if (classActivities && classActivities.length > 0) {
           controller.parseClassActivityData(classActivities);
         }
-        controller.fetchAssessmentsMasteryAccrual(classActivities);
+        controller.fetchAssessmentsMasteryAccrual();
         controller.set('isLoading', false);
       });
   },

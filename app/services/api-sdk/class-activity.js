@@ -45,13 +45,15 @@ export default Ember.Service.extend({
     contentType,
     addedDate,
     forMonth = moment().format('MM'),
-    forYear = moment().format('YYYY')
+    forYear = moment().format('YYYY'),
+    endDate
   ) {
     const service = this;
     if (addedDate != null) {
       forMonth = moment(addedDate).format('MM');
       forYear = moment(addedDate).format('YYYY');
     }
+    let end_date = endDate ? endDate : addedDate;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('classActivityAdapter')
@@ -61,7 +63,41 @@ export default Ember.Service.extend({
           contentType,
           addedDate,
           forMonth,
-          forYear
+          forYear,
+          end_date
+        )
+        .then(function(responseData, textStatus, request) {
+          let newContentId = parseInt(request.getResponseHeader('location'));
+          resolve(newContentId);
+        }, reject);
+    });
+  },
+
+  /**
+   * Adds a new content to class
+   *
+   * @param {string} classId
+   * @param {string} contentId
+   * @param {Date} addedDate
+   * @param {Date} endDate
+   * @returns {boolean}
+   */
+  scheduleClassActivity: function(
+    classId,
+    contentId,
+    addedDate,
+    endDate
+  ) {
+    const service = this;
+    let end_date = endDate ? endDate : addedDate;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .scheduleClassActivity(
+          classId,
+          contentId,
+          addedDate,
+          end_date
         )
         .then(function(responseData, textStatus, request) {
           let newContentId = parseInt(request.getResponseHeader('location'));

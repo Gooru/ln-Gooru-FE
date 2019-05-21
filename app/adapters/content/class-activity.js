@@ -30,7 +30,8 @@ export default Ember.Object.extend({
     contentType,
     addedDate,
     forMonth = moment().format('MM'),
-    forYear = moment().format('YYYY')
+    forYear = moment().format('YYYY'),
+    endDate
   ) {
     const adapter = this;
     const namespace = this.get('namespace');
@@ -48,7 +49,39 @@ export default Ember.Object.extend({
         dca_added_date: addedDate ? formatDate(addedDate, 'YYYY-MM-DD') : null,
         for_month: parseInt(forMonth),
         for_year: parseInt(forYear),
-        end_date: addedDate ? formatDate(addedDate, 'YYYY-MM-DD') : null
+        end_date: endDate
+      })
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Adds a new content to class
+   *
+   * @param {string} classId
+   * @param {string} contentId
+   * @param {Date} addedDate
+   * @param {Date} endDate
+   * @returns {Promise}
+   */
+  scheduleClassActivity: function(
+    classId,
+    contentId,
+    addedDate,
+    endDate
+  ) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${classId}/contents/${contentId}/schedule`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({
+        dca_added_date: addedDate ? formatDate(addedDate, 'YYYY-MM-DD') : null,
+        end_date: endDate ? formatDate(endDate, 'YYYY-MM-DD') : null
       })
     };
     return Ember.$.ajax(url, options);
