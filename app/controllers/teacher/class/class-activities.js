@@ -1,6 +1,9 @@
 import Ember from 'ember';
 import SessionMixin from 'gooru-web/mixins/session';
 import ModalMixin from 'gooru-web/mixins/modal';
+import {
+  PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 
 /**
  * Class activities controller
@@ -26,6 +29,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   assessmentService: Ember.inject.service('api-sdk/assessment'),
 
+  /**
+   * @requires RubricService
+   */
+  rubricService: Ember.inject.service('api-sdk/rubric'),
+
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -41,18 +50,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Actions
 
   actions: {
-
-    toggleUnScheduleItem() {
-      let controller = this;
-      controller.toggleProperty('isToggleUnScheduleItem');
-      Ember.run.later(function() {
-        let unScheduledContainerHeight = Ember.$('.controller.teacher.class .ca-unschedule-items-list-container').height() + 41;
-        let heightAttr = controller.get('isToggleUnScheduleItem') ? unScheduledContainerHeight : 100;
-        Ember.$('.controller.teacher.class .dca-content-container').css({
-          'height': `calc(100% - ${heightAttr}px)`
-        });
-      }, 500);
-    },
 
     toggleDatePicker() {
       let controller = this;
@@ -510,6 +507,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     controller._super(...arguments);
     let todayDate = controller.get('selectedDate');
     controller.loadActivityForDate(todayDate);
+    controller.getQuestionsToGrade();
     let tab = controller.get('tab');
     if (tab && tab === 'report') {
       controller.set('isShowOCASummaryReportPullUp', true);
@@ -523,6 +521,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Properties
 
   /**
+   * @property {String} contextSource
+   */
+  contextSource: PLAYER_EVENT_SOURCE.DAILY_CLASS,
+
+  /**
    * @property {Boolean} isShowContentPreview
    */
   isShowContentPreview: false,
@@ -531,7 +534,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * it maintains date which user is selected
    * @property {String}
    */
-  selectedDate: moment().format('YYYY-MM-DD'),
+  selectedDate: null,
 
   /**
    * it maintains date which user selected is today or not
@@ -666,6 +669,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * @property {classActivity[]} classActivities
    */
   classActivities: Ember.A([]),
+
+  /**
+   * Contains itemsToGrade objects
+   * @property {Array[]} itemsToGrade
+   */
+  itemsToGrade: Ember.A([]),
 
   /**
    * Class id
@@ -911,6 +920,27 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       });
   },
 
+  getQuestionsToGrade() {
+    let controller = this;
+    let classId = controller.get('classId');
+    controller.get('rubricService').getQuestionsToGradeForDCA(classId)
+      .then(pendingGradingItems => {
+        let gradeItems = pendingGradingItems.gradeItems;
+        if (gradeItems) {
+          let itemsToGrade = Ember.A([]);
+          gradeItems.map(function(item) {
+            let gradeItem = controller.createGradeItemObject(item);
+            if (gradeItem) {
+              itemsToGrade.push(gradeItem);
+            }
+          });
+          Ember.RSVP.all(itemsToGrade).then(function(questionItems) {
+            controller.set('itemsToGrade', questionItems);
+          });
+        }
+      });
+  },
+
   loadActivitiesForMonth() {
     const controller = this;
     const classId = controller.get('classId');
@@ -948,6 +978,49 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         controller.fetchAssessmentsMasteryAccrual(classActivities);
         controller.set('isLoading', false);
       });
+  },
+
+  /**
+   * Creates the grade item information
+   * @param {[]} grade item
+   * @param {item} item
+   */
+  createGradeItemObject: function(item) {
+    const controller = this;
+    const itemObject = Ember.Object.create();
+    const collectionId = item.get('collectionId');
+    const collectionType = item.get('collectionType');
+    const isAssessment = !collectionType || collectionType === 'assessment';
+    const resourceId = item.get('resourceId');
+    const studentCount = item.get('studentCount');
+    const activityDate = item.get('activityDate');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      return Ember.RSVP
+        .hash({
+          collection: collectionId ?
+            isAssessment ?
+              controller
+                .get('assessmentService')
+                .readAssessment(collectionId) :
+              controller
+                .get('collectionService')
+                .readCollection(collectionId) : undefined
+        })
+        .then(function(hash) {
+          const collection = hash.collection;
+          const question = collection
+            .get('children')
+            .findBy('id', resourceId);
+          itemObject.setProperties({
+            classId: controller.get('class.id'),
+            collection,
+            question,
+            studentCount,
+            activityDate
+          });
+          resolve(itemObject);
+        }, reject);
+    });
   },
 
   /**

@@ -105,6 +105,8 @@
         }
 
         .left-panel-container {
+          display: grid;
+          grid-template-rows: 1fr max-content;
           height: 100%;
 
           .ca-unschedule-items-list-container {
@@ -128,7 +130,7 @@
                 margin: auto;
               }
 
-              &.collapsed {
+              &[aria-expanded="true"] {
                 .icons {
                   .arrow_drop_up {
                     display: none;
@@ -136,6 +138,18 @@
 
                   .arrow_drop_down {
                     display: block;
+                  }
+                }
+              }
+
+              &[aria-expanded="false"] {
+                .icons {
+                  .arrow_drop_up {
+                    display: block;
+                  }
+
+                  .arrow_drop_down {
+                    display: none;
                   }
                 }
               }
@@ -175,7 +189,6 @@
 
           .dca-content-container {
             padding: 20px;
-            height: calc(100% - 100px);
             position: relative;
             transition: height 0.45s ease-in;
 
@@ -532,7 +545,7 @@
         grid-gap: 1px;
         padding: 20px;
         display: grid;
-        grid-template-rows: max-content max-content;
+        grid-template-rows: 1fr max-content;
 
         .ca-grade-items-list-container,
         .ca-offline-activities-list-container {
@@ -552,7 +565,17 @@
               margin: auto;
             }
 
-            &.collapsed {
+            .icons {
+              .arrow_drop_up {
+                display: block;
+              }
+
+              .arrow_drop_down {
+                display: none;
+              }
+            }
+
+            &[aria-expanded="true"] {
               .icons {
                 .arrow_drop_up {
                   display: none;
@@ -564,13 +587,15 @@
               }
             }
 
-            .icons {
-              .arrow_drop_up {
-                display: block;
-              }
+            &[aria-expanded="false"] {
+              .icons {
+                .arrow_drop_up {
+                  display: block;
+                }
 
-              .arrow_drop_down {
-                display: none;
+                .arrow_drop_down {
+                  display: none;
+                }
               }
             }
 
@@ -587,6 +612,10 @@
             background-color: rgb(216, 216, 216);
             max-height: calc(50vh - 75px);
             overflow-y: auto;
+
+            .gru-grade-items {
+              width: 100%;
+            }
           }
 
           .ca-grade-no-content-items {

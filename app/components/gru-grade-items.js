@@ -1,4 +1,7 @@
 import Ember from 'ember';
+import {
+  PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 
 /**
  * Grade Items component
@@ -49,7 +52,9 @@ export default Ember.Component.extend({
    * Maintains the state of question items to grade pull up
    * @type {Boolean}
    */
-  showFRQuestionGrade: false
+  showFRQuestionGrade: false,
+
+  isDCAContext: Ember.computed.equal('contextSource', PLAYER_EVENT_SOURCE.DAILY_CLASS)
 
   // -------------------------------------------------------------------------
   // Observers

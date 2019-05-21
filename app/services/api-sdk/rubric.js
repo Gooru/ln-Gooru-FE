@@ -143,6 +143,20 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Returns the list of Questions that the teacher needs to grade for DCA.
+   * @param {string} classId
+   * @returns {Promise|GradeQuestion}
+   */
+  getQuestionsToGradeForDCA: function(classId) {
+    const service = this;
+    return service
+      .get('adapter')
+      .getQuestionsToGradeForDCA(classId)
+      .then(data => service.get('serializer').normalizeQuestionsToGrade(data));
+  },
+
+
+  /**
    * Returns the list of Students for a Question to be graded
    * @param {string} questionId
    * @param {string} classId
@@ -164,6 +178,29 @@ export default Ember.Service.extend({
         service.get('serializer').normalizeStudentsForQuestion(data)
       );
   },
+
+  /**
+   * Returns the list of DCA Students for a Question to be graded
+   * @param {string} questionId
+   * @param {string} classId
+   * @param {string} collectionId
+   * @returns {Promise|GradeQuestionStudents}
+   */
+  getDCAStudentsForQuestion: function(
+    questionId,
+    classId,
+    collectionId,
+    activityDate
+  ) {
+    const service = this;
+    return service
+      .get('adapter')
+      .getDCAStudentsForQuestion(questionId, classId, collectionId, activityDate)
+      .then(data =>
+        service.get('serializer').normalizeStudentsForQuestion(data)
+      );
+  },
+
 
   /**
    * Returns Answer for Rubric Grading
@@ -201,12 +238,51 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Returns Answer for Rubric Grading of DCA
+   * @param {string} studentId
+   * @param {string} classId
+   * @param {string} collectionId
+   * @param {string} questionId
+   * @param {string} activityDate
+   * @returns {Promise|GradeQuestionAnswer}
+   */
+  getAnswerToGradeForDCA: function(
+    studentId,
+    classId,
+    collectionId,
+    questionId,
+    activityDate
+  ) {
+    const service = this;
+    return service
+      .get('adapter')
+      .getAnswerToGradeForDCA(
+        studentId,
+        classId,
+        collectionId,
+        questionId,
+        activityDate
+      )
+      .then(data => service.get('serializer').normalizeAnswerToGrade(data));
+  },
+
+  /**
    * Set student rubric grades
    * @param {RubricGrade} rubricGrade
    * @returns {Promise|RubricGrade} returns the rubric model with the newly assigned ID
    */
   setStudentRubricGrades: function(rubricGrade) {
     var data = this.get('serializer').serializeStudentRubricGrades(rubricGrade);
+    return this.get('adapter').setStudentRubricGrades(data);
+  },
+
+  /**
+   * Set student rubric grades for DCA
+   * @param {RubricGrade} rubricGrade
+   * @returns {Promise|RubricGrade} returns the rubric model with the newly assigned ID
+   */
+  setStudentRubricGradesForDCA: function(rubricGrade) {
+    var data = this.get('serializer').serializeStudentRubricGradesForDCA(rubricGrade);
     return this.get('adapter').setStudentRubricGrades(data);
   },
 
