@@ -70,7 +70,7 @@
                             <span>L{{content.sequence}}</span>
                           </div>
                           <div class="content-title">
-                            <p>{{safe-html (if isMilestoneLesson content.lesson_title content.title)}}</p>
+                            <p>{{safe-html (if isShowMilestoneReport content.lesson_title content.title)}}</p>
                           </div>
                         </div>
                       </th>
@@ -111,7 +111,7 @@
                 <span>L{{content.sequence}}</span>
               </div>
               <div class="content-title">
-                <p>{{safe-html (if isMilestoneLesson content.lesson_title content.title)}}</p>
+                <p>{{safe-html (if isShowMilestoneReport content.lesson_title content.title)}}</p>
               </div>
             </div>
           </th>

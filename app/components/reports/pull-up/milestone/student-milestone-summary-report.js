@@ -264,10 +264,19 @@ export default Ember.Component.extend({
     let component = this;
     let classId = component.get('classId');
     let courseId = component.get('courseId');
-    return component.get('rescopeService').getSkippedContents({
-      classId,
-      courseId
-    });
+    return Ember.RSVP
+      .hash({
+        rescopedContents: component.get('rescopeService').getSkippedContents({
+          classId,
+          courseId
+        })
+      })
+      .then(({ rescopedContents }) => {
+        return rescopedContents;
+      })
+      .catch(function() {
+        return null;
+      });
   },
 
   /**

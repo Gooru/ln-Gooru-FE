@@ -366,6 +366,31 @@ export default Ember.Controller.extend({
       controller.set('previewContent', content);
       controller.set('previewContentType', content.get('format'));
       controller.set('isShowContentPreview', true);
+    },
+
+    onOpenTeacherMilestoneReport(teacherMilestoneReportContext) {
+      const controller = this;
+      const classController = controller.get('classController');
+      classController.set('isShowMilestoneReport', true);
+      classController.openUnitReport(teacherMilestoneReportContext);
+    },
+
+    onOpenTeacherMilestoneLessonReport(teacherMilestoneLessonReportContext) {
+      const controller = this;
+      const classController = controller.get('classController');
+      classController.set('isShowMilestoneReport', true);
+      classController.openLessonReport(teacherMilestoneLessonReportContext);
+    },
+
+    onOpenTeacherMilestoneCollectionReport(
+      teacherMilestoneCollectionReportContext
+    ) {
+      const controller = this;
+      const classController = controller.get('classController');
+      classController.set('isShowMilestoneReport', true);
+      classController.openTeacherCollectionReport(
+        teacherMilestoneCollectionReportContext
+      );
     }
   },
 

@@ -1,4 +1,8 @@
 import Ember from 'ember';
+import {
+  aggregateMilestonePerformanceScore,
+  aggregateMilestonePerformanceTimeSpent
+} from 'gooru-web/utils/performance-data';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -13,6 +17,8 @@ export default Ember.Component.extend({
    * @type {PerformanceService}
    */
   performanceService: Ember.inject.service('api-sdk/performance'),
+
+  courseService: Ember.inject.service('api-sdk/course'),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -30,12 +36,15 @@ export default Ember.Component.extend({
       let params = {
         classId: component.get('classId'),
         courseId: component.get('courseId'),
-        unitId: unit.get('id'),
-        lessonId: component.get('lessonId'),
         unit: unit,
         units: units,
-        classMembers: component.get('classMembers')
+        classMembers: component.get('classMembers'),
+        unitId: unit.get('id'),
+        lessonId: component.get('lessonId')
       };
+      if (component.get('isShowMilestoneReport')) {
+        params.milestoneId = unit.get('milestone_id');
+      }
       this.sendAction('onOpenUnitReport', params);
     },
 
@@ -71,7 +80,11 @@ export default Ember.Component.extend({
   didInsertElement() {
     this.handleScrollToFixHeader();
     this.openPullUp();
-    this.loadData();
+    if (this.get('isShowMilestoneReport')) {
+      this.loadMilestoneReportData();
+    } else {
+      this.loadData();
+    }
   },
   // -------------------------------------------------------------------------
   // Properties
@@ -87,6 +100,24 @@ export default Ember.Component.extend({
    * @type {String}
    */
   class: Ember.computed.alias('context.class'),
+
+  /**
+   * Computed Property to extract framework code from settings
+   * @return {String}
+   */
+  fwCode: Ember.computed('class', function() {
+    let preference = this.get('class.preference');
+    return preference != null ? preference.get('framework') : null;
+  }),
+
+  /**
+   * Computed Property to extract framework code from settings
+   * @return {String}
+   */
+  subject: Ember.computed('class', function() {
+    let preference = this.get('class.preference');
+    return preference != null ? preference.get('subject') : null;
+  }),
 
   /**
    * CourseId belongs to this course report.
@@ -169,6 +200,8 @@ export default Ember.Component.extend({
    */
   showStudentCourseReport: false,
 
+  gradeSubject: {},
+
   //--------------------------------------------------------------------------
   // Methods
   didDestroyElement() {
@@ -190,18 +223,16 @@ export default Ember.Component.extend({
 
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-        if (closeAll) {
-          component.sendAction('onClosePullUp');
-        }
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+      if (closeAll) {
+        component.sendAction('onClosePullUp');
       }
-    );
+    });
   },
 
   handleAppContainerScroll() {
@@ -247,20 +278,22 @@ export default Ember.Component.extend({
     let courseId = component.get('courseId');
     let classMembers = this.get('classMembers');
     component.set('isLoading', true);
-    return Ember.RSVP.hash({
-      performance: component
-        .get('performanceService')
-        .findClassPerformance(classId, courseId, classMembers)
-    }).then(({ performance }) => {
-      if (!component.isDestroyed) {
-        component.calcluateUnitPerformance(performance);
-        component.parseClassMemberAndPerformanceData(performance);
-        component.set('sortByLastnameEnabled', true);
-        component.set('sortByFirstnameEnabled', false);
-        component.set('sortByScoreEnabled', false);
-        component.set('isLoading', false);
-      }
-    });
+    return Ember.RSVP
+      .hash({
+        performance: component
+          .get('performanceService')
+          .findClassPerformance(classId, courseId, classMembers)
+      })
+      .then(({ performance }) => {
+        if (!component.isDestroyed) {
+          component.calcluateUnitPerformance(performance);
+          component.parseClassMemberAndPerformanceData(performance);
+          component.set('sortByLastnameEnabled', true);
+          component.set('sortByFirstnameEnabled', false);
+          component.set('sortByScoreEnabled', false);
+          component.set('isLoading', false);
+        }
+      });
   },
 
   calcluateUnitPerformance(performance) {
@@ -390,21 +423,209 @@ export default Ember.Component.extend({
 
   onOpenStudentCourseReport(userId) {
     let component = this;
-    let classes = this.get('class').copy();
-    classes.set(
+    let classData = component.get('class');
+    let studentClassData = classData.copy(true);
+    studentClassData.set('preference', classData.get('preference'));
+    studentClassData.set(
+      'memberGradeBounds',
+      classData.get('memberGradeBounds')
+    );
+    studentClassData.set(
       'performanceSummary',
       component.getClassPerformanceForClassMember(userId)
     );
+    if (component.get('isShowMilestoneReport')) {
+      component.set('selectedStudentId', userId);
+      component.set('studentClassData', studentClassData);
+      component.set('isShowStudentMilestoneCourseReport', true);
+    } else {
+      let params = Ember.Object.create({
+        userId: userId,
+        classId: component.get('classId'),
+        courseId: component.get('courseId'),
+        course: component.get('course'),
+        class: studentClassData,
+        loadUnitsPerformance: true
+      });
+      component.set('showStudentCourseReport', true);
+      component.set('studentCourseReportContext', params);
+    }
+  },
 
-    let params = Ember.Object.create({
-      userId: userId,
-      classId: component.get('classId'),
-      courseId: component.get('courseId'),
-      course: component.get('course'),
-      class: classes,
-      loadUnitsPerformance: true
+  loadMilestoneReportData() {
+    const component = this;
+    let courseId = component.get('courseId');
+    component.set('isLoading', true);
+    let fwCode = component.get('fwCode');
+    let filters = {
+      subject: component.get('subject')
+    };
+    let fwkCode = component.get('fwCode');
+    if (fwkCode) {
+      filters.fw_code = fwkCode;
+    }
+
+    Ember.RSVP
+      .hash({
+        milestones: component
+          .get('courseService')
+          .getCourseMilestones(courseId, fwCode)
+      })
+      .then(({ milestones }) => {
+        if (!component.isDestroyed) {
+          let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
+            milestones
+          );
+          component.set('milestones', milestoneData);
+          component.fetchMilestonePerformance();
+          component.set('isLoading', false);
+        }
+      });
+  },
+
+  fetchMilestonePerformance() {
+    let component = this;
+    let performanceService = component.get('performanceService');
+    let classId = component.get('classId');
+    let courseId = component.get('courseId');
+    let fwCode = component.get('fwCode');
+    let milestones = component.get('milestones');
+    return performanceService
+      .getPerformanceForMilestones(
+        classId,
+        courseId,
+        'assessment',
+        undefined,
+        fwCode
+      )
+      .then(milestonesPerformance => {
+        milestones.forEach((milestone, index) => {
+          let milestonePerformanceItems = milestonesPerformance.filterBy(
+            'milestoneId',
+            milestone.get('milestone_id')
+          );
+          milestone.set(
+            'performance',
+            Ember.Object.create({
+              score: null,
+              timeSpent: null,
+              hasStarted: false
+            })
+          );
+          if (milestonePerformanceItems.length) {
+            let milestonePerformanceScore = aggregateMilestonePerformanceScore(
+              milestonePerformanceItems
+            );
+            let milestonePerformanceTimeSpent = aggregateMilestonePerformanceTimeSpent(
+              milestonePerformanceItems
+            );
+            if (milestonePerformanceScore || milestonePerformanceTimeSpent) {
+              milestone.set('performance.score', milestonePerformanceScore);
+              milestone.set(
+                'performance.timeSpent',
+                milestonePerformanceTimeSpent
+              );
+              milestone.set('performance.hasStarted', true);
+            }
+          }
+          milestone.set('sequence', index + 1);
+        });
+        component.parseStudentsMilestonsPerformanceData(milestonesPerformance);
+      });
+  },
+
+  parseStudentsMilestonsPerformanceData(milestonesPerformance) {
+    let component = this;
+    let classMembers = component.get('classMembers');
+    let users = Ember.A([]);
+    let milestones = component.get('milestones');
+    classMembers.forEach(member => {
+      let user = component.createUser(member);
+      let userId = member.get('id');
+      let userMilestonesPerformance = milestonesPerformance.filterBy(
+        'userUid',
+        userId
+      );
+      let resultSet = component.parseUserMilestonesPerformance(
+        milestones,
+        userMilestonesPerformance
+      );
+      user.set('userPerformanceData', resultSet.userPerformanceData);
+      user.set('hasStarted', resultSet.hasStarted);
+      user.set('score', resultSet.overAllScore);
+      user.set('score-use-for-sort', resultSet.overAllScore);
+      users.pushObject(user);
     });
-    component.set('showStudentCourseReport', true);
-    component.set('studentCourseReportContext', params);
+    users = users.sortBy(component.get('defaultSortCriteria'));
+    component.set('studentReportData', users);
+  },
+
+  parseUserMilestonesPerformance(milestones, userMilestonesPerformance) {
+    if (milestones && milestones.length) {
+      let userPerformanceData = Ember.A([]);
+      let totalScore = 0;
+      let totalTimeSpent = 0;
+      let hasStarted = false;
+      let numberunitstarted = 0;
+      milestones.forEach((milestone, index) => {
+        let milestoneId = milestone.get('milestone_id');
+        let milestonePerformanceData = Ember.Object.create({
+          id: milestoneId,
+          sequence: index + 1,
+          hasStarted: false
+        });
+        let userMilestonePerformance = userMilestonesPerformance.findBy(
+          'milestoneId',
+          milestoneId
+        );
+        if (userMilestonePerformance) {
+          milestonePerformanceData.set('hasStarted', true);
+          hasStarted = true;
+          let score = userMilestonePerformance.get(
+            'performance.scoreInPercentage'
+          )
+            ? userMilestonePerformance.get('performance.scoreInPercentage')
+            : 0;
+          milestonePerformanceData.set(
+            'timeSpent',
+            userMilestonePerformance.get('performance.timeSpent')
+          );
+          milestonePerformanceData.set('score', score);
+          totalScore = totalScore + score;
+          totalTimeSpent =
+            totalTimeSpent +
+            userMilestonePerformance.get('performance.performance.timeSpent');
+          numberunitstarted++;
+        }
+        userPerformanceData.pushObject(milestonePerformanceData);
+      });
+      let overAllScore =
+        numberunitstarted > 0 ? Math.floor(totalScore / numberunitstarted) : 0;
+      let resultSet = {
+        userPerformanceData: userPerformanceData,
+        overAllScore: overAllScore,
+        hasStarted: hasStarted,
+        totalTimeSpent: totalTimeSpent
+      };
+      return resultSet;
+    }
+  },
+
+  /**
+   * This Method is responsible for milestone display based on students class grade.
+   * @return {Array}
+   */
+  renderMilestonesBasedOnStudentGradeRange(milestones) {
+    let component = this;
+    let milestoneData = Ember.A([]);
+    let classGradeId = component.get('class.gradeCurrent');
+    milestones.forEach(milestone => {
+      let gradeId = milestone.get('grade_id');
+      if (classGradeId === gradeId) {
+        milestone.set('isClassGrade', true);
+      }
+      milestoneData.pushObject(milestone);
+    });
+    return milestoneData;
   }
 });

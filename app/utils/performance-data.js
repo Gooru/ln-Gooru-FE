@@ -173,7 +173,7 @@ export function createDataMatrix(headers, classPerformanceData, level = false) {
 }
 
 /**
- * @function aggregateMilestonePerformance
+ * @function aggregateMilestonePerformanceScore
  * Method to aggregate given list of performance objects
  */
 export function aggregateMilestonePerformanceScore(items) {
@@ -190,7 +190,7 @@ export function aggregateMilestonePerformanceScore(items) {
 }
 
 /**
- * @function aggregateMilestonePerformance
+ * @function aggregateMilestonePerformanceTimeSpent
  * Method to aggregate given list of performance objects
  */
 export function aggregateMilestonePerformanceTimeSpent(items) {
