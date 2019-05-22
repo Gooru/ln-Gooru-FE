@@ -33,7 +33,7 @@
         </div>
       {{/if}}
       <div class="course-map-body">
-        {{#if (and class.milestoneViewApplicable  isMilestoneView)}}
+        {{#if ( or (and class.milestoneViewApplicable  isMilestoneView) (not class.milestoneViewApplicable  isMilestoneView))}}
           <div class="students">
             <div class="header">
               {{t 'class.info.students'}}
