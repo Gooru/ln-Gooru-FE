@@ -57,6 +57,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.animateDatePicker();
     },
 
+    onCloseDatePicker() {
+      let controller = this;
+      controller.set('showDatePicker', false);
+    },
+
     //Action triggered when click preview content
     onPreviewContent(content) {
       const controller = this;
@@ -300,27 +305,27 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     },
 
     /**
-     * It will takes care of content will schedule for the specific date.
+     * It will schedule Class Activities for specific date.
      * @param  {String} scheduleDate
+     * @param  {String} scheduleEndDate
      */
-    onScheduleDate(scheduleDate) {
+    onScheduleForDate(scheduleDate, scheduleEndDate, isOfflineActivity) {
       let controller = this;
       let classId = controller.get('classId');
       let classActivity = controller.get('selectedClassActivityForSchedule');
       let content = classActivity.get('collection');
-      let contentType = content.get('format');
+      let contentType = isOfflineActivity ? PLAYER_EVENT_SOURCE.OFFLINE_CLASS : content.get('format');
       let contentId = classActivity.get('id');
-      let collectionId = content.get('id');
-      let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
-      datepickerEle.hide();
+      let collectionId = classActivity.get('contentId') || content.get('id');
       let scheduleMonth = moment(scheduleDate).format('MM');
       let scheduleYear = moment(scheduleDate).format('YYYY');
       let selectedActivityIsUnScheduled = controller.get('selectedActivityIsUnScheduled');
+      controller.send('onCloseDatePicker');
       return Ember.RSVP
         .hash({
           scheduleActivity: selectedActivityIsUnScheduled ? controller
             .get('classActivityService')
-            .scheduleClassActivity(classId, contentId, scheduleDate) : controller
+            .scheduleClassActivity(classId, contentId, scheduleDate, scheduleEndDate) : controller
             .get('classActivityService')
             .addActivityToClass(
               classId,
@@ -328,7 +333,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
               contentType,
               scheduleDate,
               scheduleMonth,
-              scheduleYear
+              scheduleYear,
+              scheduleEndDate
             )
         }).then(() => {
           if (!controller.isDestroyed) {
@@ -355,15 +361,14 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      * @param  {Number} forMonth
      * @param  {Number} forYear
      */
-    onScheduleForMonth(forMonth, forYear) {
+    onScheduleForMonth(forMonth, forYear, isOfflineActivity) {
       let controller = this;
       let classId = controller.get('classId');
       let classActivity = controller.get('selectedClassActivityForSchedule');
       let content = classActivity.get('collection');
-      let contentType = content.get('format');
+      let contentType = isOfflineActivity ? PLAYER_EVENT_SOURCE.OFFLINE_CLASS : content.get('format');
       let contentId = content.get('id');
-      let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
-      datepickerEle.hide();
+      controller.send('onCloseDatePicker');
       controller
         .get('classActivityService')
         .addActivityToClass(
@@ -387,45 +392,49 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      * Action get triggered when schedule content to CA got clicked
      */
     onScheduleContentToDCA(classActivity, event, isUnScheduled) {
-      let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
-      let datepickerCtnEle = Ember.$(
-        '.ca-datepicker-schedule-container .ca-date-picker-container'
-      );
-      datepickerCtnEle.removeClass('ca-datepicker-orientation-top');
-      datepickerCtnEle.removeClass('ca-datepicker-orientation-bottom');
-      datepickerCtnEle.removeClass('ca-datepicker-orientation-left');
-      let selectedContentEle = Ember.$(event.target);
-      let position = selectedContentEle.position();
-      let top = position.top - datepickerEle.height();
-      let left = position.left + 10 - datepickerEle.width();
-      let controllerHeight = Ember.$(
-        '.teacher.class.class-activities'
-      ).height();
-      let windowHeight = $(window).height();
-      let allowedTop = windowHeight - controllerHeight + top;
-      if (left < 0) {
-        left = position.left;
-        datepickerCtnEle.addClass('ca-datepicker-orientation-left');
-      }
-      if (allowedTop < 0) {
-        datepickerCtnEle.addClass('ca-datepicker-orientation-bottom');
-        top = position.top + 25;
-      } else {
-        datepickerCtnEle.addClass('ca-datepicker-orientation-top');
-      }
-      datepickerEle.css({
-        top: top,
-        left: left
-      });
-      if (!selectedContentEle.hasClass('active')) {
-        selectedContentEle.addClass('active');
-        datepickerEle.show();
-      } else {
-        selectedContentEle.removeClass('active');
-        datepickerEle.hide();
-      }
-      this.set('selectedActivityIsUnScheduled', isUnScheduled);
-      this.set('selectedClassActivityForSchedule', classActivity);
+      let controller = this;
+      controller.set('selectedActivityIsUnScheduled', isUnScheduled);
+      controller.set('selectedClassActivityForSchedule', classActivity);
+      controller.set('showDatePicker', true);
+      Ember.run.later(function() {
+        let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
+        let datepickerCtnEle = Ember.$(
+          '.ca-datepicker-schedule-container .ca-date-picker-container'
+        );
+        datepickerCtnEle.removeClass('ca-datepicker-orientation-top');
+        datepickerCtnEle.removeClass('ca-datepicker-orientation-bottom');
+        datepickerCtnEle.removeClass('ca-datepicker-orientation-left');
+        let selectedContentEle = Ember.$(event.target);
+        let position = selectedContentEle.position();
+        let top = position.top - datepickerEle.height();
+        let left = position.left + 10 - datepickerEle.width();
+        let controllerHeight = Ember.$(
+          '.teacher.class.class-activities'
+        ).height();
+        let windowHeight = $(window).height();
+        let allowedTop = windowHeight - controllerHeight + top;
+        if (left < 0) {
+          left = position.left;
+          datepickerCtnEle.addClass('ca-datepicker-orientation-left');
+        }
+        if (allowedTop < 0) {
+          datepickerCtnEle.addClass('ca-datepicker-orientation-bottom');
+          top = position.top + 25;
+        } else {
+          datepickerCtnEle.addClass('ca-datepicker-orientation-top');
+        }
+        datepickerEle.css({
+          top: top,
+          left: left
+        });
+        if (!selectedContentEle.hasClass('active')) {
+          selectedContentEle.addClass('active');
+          datepickerEle.show();
+        } else {
+          selectedContentEle.removeClass('active');
+          datepickerEle.hide();
+        }
+      }, 100);
     },
 
     onSelectToday(date) {
@@ -525,6 +534,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     controller._super(...arguments);
     let todayDate = controller.get('selectedDate');
     controller.loadActivityForDate(todayDate);
+    controller.loadActiveOfflineActivities();
     controller.getQuestionsToGrade();
     let tab = controller.get('tab');
     if (tab && tab === 'report') {
@@ -537,6 +547,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
+
+  showDatePicker: false,
 
   /**
    * It maintains whether selected activity is schedule or not
@@ -945,6 +957,19 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       });
   },
 
+  loadActiveOfflineActivities() {
+    const controller = this;
+    const classId = controller.get('classId');
+    controller.set('isLoading', true);
+    controller
+      .get('classActivityService')
+      .fetchActiveOfflineActivities(classId)
+      .then(offlineActivities => {
+        controller.set('offlineActivities', offlineActivities);
+        controller.set('isLoading', false);
+      });
+  },
+
   getQuestionsToGrade() {
     let controller = this;
     let classId = controller.get('classId');
@@ -1113,10 +1138,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   closeCADatePickerOnClickOutSide() {
     let controller = this;
     Ember.$('.teacher_class_class-activities').on('click', function(e) {
-      if (
-        !Ember.$(e.target).hasClass('ca-datepicker-popover') &&
-        Ember.$('.ca-datepicker-popover-container').has(e.target).length === 0
-      ) {
+      // !Ember.$(e.target).hasClass('ca-datepicker-popover') &&
+      //   Ember.$('.ca-datepicker-popover-container').has(e.target).length === 0 ||
+      if (Ember.$(e.target).hasClass('backdrop')) {
         Ember.$('.ca-datepicker-popover-container').hide();
         Ember.$('.ca-datepicker-popover').removeClass('active');
       }

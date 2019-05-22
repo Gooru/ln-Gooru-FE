@@ -1,0 +1,30 @@
+<div class="backdrop"></div>
+<div class="datepickers {{if isOfflineActivity 'offline'}}">
+  <div class="start-date">
+    <span class="{{unless isOfflineActivity 'hidden'}}">Start Date</span>
+    {{ca-date-picker
+       userStartDateAsToday=true
+       onSelectDate='onScheduleStartDate'
+       showMonths=(if isOfflineActivity false true)
+       onSelectMonth='onScheduleForMonth'
+       forFirstDateOfMonth=forFirstDateOfMonth
+     }}
+  </div>
+  {{#if isOfflineActivity}}
+    <div class="end-date">
+      <span>End Date</span>
+      {{ca-date-picker
+       userStartDateAsToday=true
+       onSelectDate='onScheduleEndDate'
+       startDate=startDate
+       showMonths=false
+       validateEndDate=true
+     }}
+    </div>
+  {{/if}}
+</div>
+{{#if isOfflineActivity}}
+  <div class="months">
+    {{ca-month-picker onSelectMonth='onScheduleForMonth' currentMonth=forFirstDateOfMonth}}
+  </div>
+{{/if}}

@@ -1,9 +1,14 @@
 .gru-class-activity-panel {
-  background-color: #fff;
-  margin-bottom: 3px;
+  height: auto;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+  width: 100%;
 
   .dca-panel-container {
-    transition: background-color 2s linear;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 
     &.new {
       background-color: #ffc107ad;
@@ -22,101 +27,272 @@
     }
 
     .ca-panel-container-1 {
-      display: inline-grid;
+      display: grid;
       width: 100%;
-      grid-template-columns: 1fr 100px 60px;
-      height: 60px;
+      grid-template-columns: 48px 1fr 60px 48px 48px 48px;
+      height: 48px;
       border-bottom: solid 1px #cacaca;
 
-      .dca-panel-info {
-        width: 100%;
-        display: inline-grid;
-        grid-template-columns: 65px 1fr;
-        align-items: center;
+      &.unschedule {
+        grid-template-columns: 48px 1fr 60px auto 48px;
+      }
 
-        .collection-standards {
-          grid-column: 2 / 3;
+      .icon {
+        display: flex;
 
-          .gru-taxonomy-tag-list {
-            .gru-taxonomy-tag {
-              min-width: 65px;
-              max-width: 120px;
-              height: 23px;
-              border-radius: 12px;
-              background-color: #898b8e;
+        %icon-content {
+          width: 20px;
+          height: 20px;
+          background-repeat: no-repeat;
+          background-size: 20px 20px;
+          opacity: 0.8;
+          justify-self: center;
+          display: block;
+          margin: auto;
+        }
 
-              .standard-tag {
-                text-align: center;
-                padding: 0;
-
-                .tag-label {
-                  font-size: 14px;
-                  font-weight: bold;
-                  color: $white;
-                  line-height: 21px;
-                }
-
-                .tag-caption {
-                  display: none;
-                }
-              }
-            }
-
-            .non-visible-tags {
-              width: 25px;
-              height: 25px;
-              border-radius: 4px;
-              color: #898b8e;
-              padding: 0;
-
-              span {
-                font-weight: bold;
-                font-size: 14px;
-              }
-            }
-          }
+        .offline-activity-icon {
+          background-image: url("../assets/gooru/images/offline.svg");
+          @extend %icon-content;
         }
 
         .collection-external-icon,
         .collection-icon {
-          width: 20px;
-          height: 20px;
-          background-repeat: no-repeat;
-          background-size: 20px 20px;
+          @extend %icon-content;
           background-image: url("../assets/gooru/images/add_collection.svg");
-          opacity: 0.8;
-          justify-self: center;
         }
 
         .assessment-external-icon,
         .assessment-icon {
+          @extend %icon-content;
+          background-image: url("../assets/gooru/images/add_assessment.svg");
+        }
+      }
+
+      .resource-info {
+        display: flex;
+        margin: auto;
+
+        .dca-rubric-icon {
+          .rubric-icon {
+            width: 25px;
+            height: 25px;
+            background-repeat: no-repeat;
+            background-size: 25px 25px;
+            background-image: url("../assets/gooru/images/rubric-green.svg");
+            display: block;
+          }
+        }
+
+        .resource-count {
+          width: 40px;
+          display: inline-grid;
+          align-items: center;
+          grid-template-columns: 50% 50%;
+          justify-items: center;
+          height: 20px;
+
+          .resource-icon {
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-image: url("../assets/gooru/images/add_resource_icon.svg");
+            opacity: 0.8;
+            display: block;
+          }
+
+          span {
+            height: 20px;
+          }
+        }
+
+        .question-count {
+          width: 40px;
+          display: inline-grid;
+          align-items: center;
+          grid-template-columns: 50% 50%;
+          justify-items: center;
+          height: 20px;
+
+          .question-icon {
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-image: url("../assets/gooru/images/add_question.svg");
+            opacity: 0.8;
+            display: block;
+          }
+
+          span {
+            height: 20px;
+          }
+        }
+
+        .external-icon {
           width: 20px;
           height: 20px;
           background-repeat: no-repeat;
           background-size: 20px 20px;
-          background-image: url("../assets/gooru/images/add_assessment.svg");
-          opacity: 0.8;
-          justify-self: center;
+          background-image: url("../assets/gooru/share.png");
+          margin-right: 5px;
+          display: block;
         }
+      }
 
-        &.has-tags {
-          i {
-            position: relative;
-            top: 15px;
+      .title {
+        display: flex;
+        font-size: 16px;
+        align-items: center;
+        color: #37424b;
+
+        span {
+          width: max-content;
+          height: max-content;
+        }
+      }
+
+      .thumbnail-img {
+        display: grid;
+        height: 100%;
+        width: 100%;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .activate {
+        display: flex;
+        margin: auto;
+
+        .dca-assign {
+          width: 40px;
+          display: inline-block;
+
+          .gru-switch {
+            padding: 0;
+
+            &.assigned {
+              pointer-events: none;
+            }
+
+            .toggle.btn {
+              width: 40px !important;
+              height: 20px !important;
+              border-radius: 20px;
+
+              .toggle-group {
+                .toggle-handle,
+                .toggle-off,
+                .toggle-on {
+                  border-radius: 20px;
+                }
+
+                .toggle-on {
+                  left: -13px;
+                  font-style: italic;
+                  font-size: $font-size-xxsmall;
+                  line-height: 4px !important;
+                }
+
+                .toggle-off {
+                  left: 33px;
+                  font-style: italic;
+                  line-height: 4px !important;
+                  font-size: $font-size-xxsmall;
+                }
+
+                .toggle-handle {
+                  top: -5px;
+                  left: -2px;
+                }
+              }
+
+              &.off {
+                .toggle-group {
+                  .toggle-handle {
+                    left: 2px;
+                  }
+                }
+              }
+            }
           }
         }
+      }
 
-        p {
-          margin: 0;
-          cursor: pointer;
-          font-family: "Open Sans";
-          color: #4a4a4a;
-          padding: 0 20px 0 0;
-          @include ellipsis(
-            $font-size: 15px,
-            $line-height: 1.5,
-            $lines-to-show: 1
-          );
+      .more {
+        display: flex;
+        margin: auto;
+        cursor: pointer;
+
+        span {
+          width: 24px;
+          height: 24px;
+          display: block;
+        }
+      }
+
+      .performance {
+        .dca-panel-actions-performance {
+          display: flex;
+          height: 100%;
+          width: 100%;
+
+          .dca-panel-performance {
+            width: 100%;
+            height: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border-top-right-radius: 4px;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+
+            .assessment-score {
+              text-align: center;
+            }
+
+            .assessment-timespent {
+              font-size: 12px;
+              color: $white;
+              text-align: center;
+            }
+
+            &.collection {
+              background-color: #4e5e68;
+              font-size: 12px;
+              text-overflow: ellipsis;
+            }
+
+            &.not-started {
+              pointer-events: none;
+            }
+
+            &.add-data {
+              color: $white;
+              background-color: #4e5e67;
+              font-size: 10px;
+              text-align: center;
+              text-transform: uppercase;
+            }
+
+            &.disabled {
+              pointer-events: none;
+              opacity: 0.7;
+            }
+
+            .no-performance {
+              color: #37424b;
+            }
+          }
         }
       }
 
@@ -179,61 +355,6 @@
         }
       }
 
-      .dca-panel-actions-performance {
-        .dca-panel-performance {
-          width: 100%;
-          height: 100%;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          font-size: 18px;
-          font-weight: bold;
-          cursor: pointer;
-          border-top-right-radius: 4px;
-          display: grid;
-          align-items: center;
-          justify-content: center;
-
-          .assessment-score {
-            text-align: center;
-          }
-
-          .assessment-timespent {
-            font-size: 12px;
-            color: $white;
-            text-align: center;
-          }
-
-          &.collection {
-            background-color: #4e5e68;
-            font-size: 12px;
-            text-overflow: ellipsis;
-          }
-
-          &.not-started {
-            pointer-events: none;
-          }
-
-          &.add-data {
-            color: $white;
-            background-color: #4e5e67;
-            font-size: 10px;
-            text-align: center;
-            text-transform: uppercase;
-          }
-
-          &.disabled {
-            pointer-events: none;
-            opacity: 0.7;
-          }
-
-          .no-performance {
-            color: #37424b;
-          }
-        }
-      }
-
       .ca-panel-reschedule {
         cursor: pointer;
         justify-self: center;
@@ -264,209 +385,240 @@
     }
 
     .ca-panel-container-2 {
-      height: 20px;
-      grid-template-columns: 65px 130px 100px 1fr 80px;
+      height: 0;
+      grid-template-columns: 1fr max-content 48px 48px;
       display: grid;
       align-items: center;
-      height: 40px;
-      border-bottom: solid 1px #cacaca;
+      transition: height 0.3s ease-in;
 
-      .mastery-accrual-btn {
-        display: grid;
-        align-items: center;
-        grid-template-columns: 28px 1fr;
-        cursor: pointer;
-        &.disable-event {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
+      &.visible {
+        height: 48px;
+        transition: height 0.3s ease-in;
+        border-bottom: solid 1px #cacaca;
 
-        .mastery-accrual-icon {
-          height: 22px;
+        .dca-btn {
+          .oa-complete {
+            height: 100%;
 
-          &.mastery-accrual-checked {
-            background: url("/assets/gooru/images/check-circle-1.svg") no-repeat
-              center;
-            background-size: contain;
-            border: none;
-            display: block;
-            width: 18px;
-            height: 18px;
+            input[type="checkbox"]:after {
+              height: 18px;
+              border: 2px solid #666;
+              border-radius: 50px;
+            }
 
-            i {
-              visibility: hidden;
+            span {
+              font-size: 14px;
             }
           }
+        }
 
-          i {
-            color: #4e5e67;
-            height: 22px;
+        .ca-actions {
+          .mastery-accrual,
+          .re-schedule,
+          .student-count {
+            i {
+              font-size: 24px;
+            }
+
+            span {
+              font-size: inherit;
+            }
+
+            .re-schedule-activity {
+              i {
+                font-size: 20px;
+              }
+
+              span {
+                font-size: inherit;
+              }
+            }
+
+            .mastery-accrual-btn {
+              .mastery-accrual-text {
+                font-size: 13px;
+              }
+
+              .mastery-accrual-icon {
+                height: 100%;
+                display: flex;
+                align-items: center;
+
+                i {
+                  font-size: 20px;
+                }
+              }
+            }
           }
         }
-
-        .mastery-accrual-text {
-          height: 22px;
-          font-size: 13px;
-          color: #1aa9eb;
-          font-weight: bold;
-        }
       }
 
-      .student-count {
-        padding-left: 10px;
-        visibility: hidden;
+      .delete-activity {
         display: flex;
-        align-items: center;
-        color: #1aa9eb;
+        height: 100%;
+        margin: auto;
 
-        &.active {
-          visibility: visible;
-        }
-
-        span {
-          height: 22px;
-          cursor: pointer;
+        i.close-icon {
+          background: url("/assets/gooru/images/close.svg") no-repeat center;
+          background-size: contain;
+          border: none;
           display: block;
-          padding-left: 5px;
+          width: 24px;
+          height: 100%;
+          padding: 0;
         }
       }
 
-      .mastery-accrual {
-        height: 22px;
-      }
+      .dca-btn {
+        display: flex;
+        height: 100%;
+        margin: auto;
 
-      .re-schedule {
-        color: #1aa9eb;
-        font-size: 13px;
-        font-weight: bold;
-
-        .re-schedule-activity {
-          height: 22px;
+        .golive-icon {
+          width: 24px;
+          height: 100%;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-image: url("../assets/gooru/on-air-icon.png");
           cursor: pointer;
+          background-position: center;
+          display: block;
+        }
+
+        .oa-complete {
+          height: 0;
           display: flex;
           align-items: center;
 
-          .replay,
-          .update {
-            font-size: 20px;
-            pointer-events: none;
+          input[type="checkbox"] {
+            margin: auto;
+
+            &:after {
+              height: 0;
+              border: none;
+            }
           }
 
           span {
-            pointer-events: none;
-            padding-left: 5px;
-
-            &:hover {
-              color: #000;
-            }
+            font-size: 0;
+            font-weight: bold;
+            color: #0072bc;
           }
         }
       }
 
-      .dca-panel-actions {
-        display: inline-grid;
-        align-items: center;
-        padding-left: 10px;
-        padding-right: 10px;
-        justify-items: center;
-        grid-template-columns: 30px 35px 35px 30px;
-        grid-column-gap: 5px;
+      .thumbnail-img {
+        display: grid;
+        height: 100%;
+        width: 100%;
 
-        .rubric-icon {
-          width: 25px;
-          height: 25px;
-          background-repeat: no-repeat;
-          background-size: 25px 25px;
-          background-image: url("../assets/gooru/images/rubric-green.svg");
-          display: block;
+        img {
+          width: 100%;
+          height: 100%;
         }
+      }
 
-        .remove-dca {
-          width: 20px;
-          height: 19px;
-          cursor: pointer;
-          display: block;
+      .ca-actions {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        height: 100%;
 
-          .remove_circle {
-            font-size: 20px;
-            display: block;
+        .mastery-accrual {
+          display: grid;
+
+          .mastery-accrual-btn {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 28px 1fr;
+            cursor: pointer;
+
+            &.disable-event {
+              opacity: 0.5;
+              cursor: not-allowed;
+            }
+
+            .mastery-accrual-icon {
+              height: 0;
+
+              &.mastery-accrual-checked {
+                background: url("/assets/gooru/images/check-circle-1.svg") no-repeat center;
+                background-size: contain;
+                border: none;
+                display: block;
+                width: 18px;
+                height: 18px;
+
+                i {
+                  visibility: hidden;
+                }
+              }
+
+              i {
+                color: #4e5e67;
+                height: auto;
+                font-size: 0;
+              }
+            }
+
+            .mastery-accrual-text {
+              font-size: 0;
+              color: #1aa9eb;
+              font-weight: bold;
+            }
           }
         }
 
-        .golive-icon {
-          width: 25px;
-          height: 25px;
-          background-repeat: no-repeat;
-          background-size: 25px 25px;
-          background-image: url("../assets/gooru/on-air-icon.png");
-          cursor: pointer;
-          display: block;
+        .student-count {
+          padding-left: 10px;
+          visibility: hidden;
+          display: flex;
+          align-items: center;
+          color: #1aa9eb;
+
+          &.active {
+            visibility: visible;
+          }
+
+          span {
+            cursor: pointer;
+            display: block;
+            font-size: 0;
+            padding-left: 5px;
+          }
+
+          i {
+            font-size: 0;
+          }
         }
 
-        .dca-assign {
-          width: 40px;
-          display: inline-block;
+        .re-schedule {
+          color: #1aa9eb;
+          font-size: 13px;
+          display: grid;
+          font-weight: bold;
 
-          .gru-switch {
-            padding: 0;
+          .re-schedule-activity {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
 
-            &.assigned {
+            .replay,
+            .update {
+              font-size: 0;
               pointer-events: none;
             }
 
-            .toggle.btn {
-              width: 40px !important;
-              height: 20px !important;
-              border-radius: 20px;
+            span {
+              pointer-events: none;
+              padding-left: 5px;
+              font-size: 0;
 
-              .toggle-group {
-                .toggle-handle,
-                .toggle-off,
-                .toggle-on {
-                  border-radius: 20px;
-                }
-
-                .toggle-on {
-                  left: -13px;
-                  font-style: italic;
-                  font-size: $font-size-xxsmall;
-                  line-height: 4px !important;
-                }
-
-                .toggle-off {
-                  left: 33px;
-                  font-style: italic;
-                  line-height: 4px !important;
-                  font-size: $font-size-xxsmall;
-                }
-
-                .toggle-handle {
-                  top: -5px;
-                  left: -2px;
-                }
-              }
-
-              &.off {
-                .toggle-group {
-                  .toggle-handle {
-                    left: 2px;
-                  }
-                }
+              &:hover {
+                color: #000;
               }
             }
           }
         }
-      }
-
-      .re-add-data {
-        justify-self: right;
-        padding-right: 5px;
-        font-size: 12px;
-        font-weight: 700;
-        color: #1aa9eb;
-        cursor: pointer;
-        line-height: 15px;
-        text-align: center;
       }
     }
   }

@@ -29,6 +29,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
   // Actions
 
   actions: {
+    showMore() {
+      let component = this;
+      component.toggleProperty('isShowMore');
+    },
     /**
      * Action triggered when the user play collection
      */
@@ -165,6 +169,21 @@ export default Ember.Component.extend(ConfigurationMixin, {
     }),
     Ember.Object.create({
       label: 'Off',
+      value: false
+    })
+  ]),
+
+  /**
+   * Toggle Options
+   * @property {Ember.Array}
+   */
+  switchOptionsForOffline: Ember.A([
+    Ember.Object.create({
+      label: 'Yes',
+      value: true
+    }),
+    Ember.Object.create({
+      label: 'No',
       value: false
     })
   ]),

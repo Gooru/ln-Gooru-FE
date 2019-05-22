@@ -272,6 +272,53 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Gets all Active offline activities for the class (student|teacher)
+   *
+   * @param {string} classId
+   * @returns {Promise}
+   */
+  fetchActiveOfflineActivities(classId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .fetchActiveOfflineActivities(classId)
+        .then(function(payload) {
+          const classActivities = service
+            .get('classActivitySerializer')
+            .normalizeFindClassActivities(payload);
+          resolve(classActivities);
+        },
+        function(error) {
+          reject(error);
+        });
+    });
+  },
+
+  /**
+   * Gets all Completed offline activities for the class (student|teacher)
+   *
+   * @param {string} classId
+   * @returns {Promise}
+   */
+  fetchCompletedOfflineActivities(classId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .fetchCompletedOfflineActivities(classId)
+        .then(function(payload) {
+          const classActivities = service
+            .get('classActivitySerializer')
+            .normalizeFindClassActivities(payload);
+          resolve(classActivities);
+        }, function(error) {
+          reject(error);
+        });
+    });
+  },
+
+  /**
    * Gets all class activity for the authorized user (student|teacher)
    *
    * @param {string} userId

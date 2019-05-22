@@ -185,6 +185,43 @@ export default Ember.Object.extend({
   },
 
   /**
+   * get a active list of offlne activities from class
+   *
+   * @param classId class id to be sent
+   * @returns {Promise}
+   */
+  fetchActiveOfflineActivities(classId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${classId}/contents/offline/active`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+
+  /**
+   * get a completed list of offlne activities from class
+   *
+   * @param classId class id to be sent
+   * @returns {Promise}
+   */
+  fetchCompletedOfflineActivities(classId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${classId}/contents/offline/completed`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
    * Removes a class activity from class
    *
    * @param classId class id to be sent
