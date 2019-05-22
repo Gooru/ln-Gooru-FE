@@ -284,6 +284,9 @@ export default Ember.Controller.extend({
       courseId: controller.get('course.id'),
       classMembers: controller.get('class.members')
     };
+    if (controller.get('class.milestoneViewApplicable')) {
+      controller.set('isShowMilestoneReport', true);
+    }
     this.set('isShowCourseReport', true);
     this.set('courseReportData', params);
   },

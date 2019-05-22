@@ -65,7 +65,10 @@ export default DS.JSONAPISerializer.extend({
               lessonId: lessonPerformanceData.lessonId,
               performance: Ember.Object.create({
                 scoreInPercentage: lessonPerformanceData.scoreInPercentage,
-                timeSpent: lessonPerformanceData.timeSpent
+                timeSpent: lessonPerformanceData.timeSpent,
+                completedCount: lessonPerformanceData.completedCount,
+                totalCount: lessonPerformanceData.totalCount,
+                attempts: lessonPerformanceData.attempts
               }),
               userUid: userLessonsPerformance.userUid
             });

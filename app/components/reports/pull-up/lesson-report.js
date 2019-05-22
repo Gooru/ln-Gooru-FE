@@ -314,7 +314,7 @@ export default Ember.Component.extend({
    * lesson
    * @type {Object}
    */
-  lesson: Ember.computed.alias('context.lesson'),
+  lesson: null,
 
   /**
    * Maintains list of lesson items.
@@ -879,34 +879,47 @@ export default Ember.Component.extend({
           lessonAssessmentsPerformance,
           lessonCollectionsPerformance
         }) => {
-          component.set('collections', lessonInfo.get('children'));
-          component.parseCollectionsPerformance(
-            lessonAssessmentsPerformance.concat(lessonCollectionsPerformance)
-          );
-          component.set(
-            'assessmentStudentReportData',
-            component.parseUsersMilestoneCollectionsPerformance(
-              component
-                .get('collections')
-                .filterBy(
-                  'format',
-                  CONTENT_TYPES.ASSESSMENT || CONTENT_TYPES.EXTERNAL_ASSESSMENT
+          if (!component.isDestroyed) {
+            component.set('collections', lessonInfo.get('children'));
+            component.parseCollectionsPerformance(
+              lessonAssessmentsPerformance.concat(lessonCollectionsPerformance)
+            );
+            let collections = component.get('collections');
+            let assessmentsPerformanceData = collections.filterBy(
+              'format',
+              CONTENT_TYPES.ASSESSMENT
+            );
+            let externalAssessmentsPerformanceData = collections.filterBy(
+              'format',
+              CONTENT_TYPES.EXTERNAL_ASSESSMENT
+            );
+            component.set(
+              'assessmentStudentReportData',
+              component.parseUsersMilestoneCollectionsPerformance(
+                assessmentsPerformanceData.concat(
+                  externalAssessmentsPerformanceData
                 ),
-              lessonAssessmentsPerformance
-            )
-          );
-          component.set(
-            'collectionStudentReportData',
-            component.parseUsersMilestoneCollectionsPerformance(
-              component
-                .get('collections')
-                .filterBy(
-                  'format',
-                  CONTENT_TYPES.COLLECTION || CONTENT_TYPES.EXTERNAL_COLLECTION
+                lessonAssessmentsPerformance
+              )
+            );
+            let collectionsPerformanceData = collections.filterBy(
+              'format',
+              CONTENT_TYPES.COLLECTION
+            );
+            let externalCollectionsPerformanceData = collections.filterBy(
+              'format',
+              CONTENT_TYPES.EXTERNAL_COLLECTION
+            );
+            component.set(
+              'collectionStudentReportData',
+              component.parseUsersMilestoneCollectionsPerformance(
+                collectionsPerformanceData.concat(
+                  externalCollectionsPerformanceData
                 ),
-              lessonCollectionsPerformance
-            )
-          );
+                lessonCollectionsPerformance
+              )
+            );
+          }
         }
       );
   },
@@ -950,7 +963,7 @@ export default Ember.Component.extend({
   parseCollectionsPerformance(collectionsPerformance) {
     const component = this;
     let collections = component.get('collections');
-    if (collections && collections.length) {
+    if (collections && collections.length && !component.isDestroyed) {
       collections.map(collection => {
         let collectionPerformances = collectionsPerformance.filterBy(
           'collectionId',
@@ -985,32 +998,34 @@ export default Ember.Component.extend({
     const component = this;
     let classMembers = component.get('classMembers');
     let usersCollectionsPerformanceSummary = Ember.A([]);
-    classMembers.forEach(member => {
-      let userContext = component.createUser(member);
-      let userId = member.get('id');
-      let userCollectionsPerformance = collectionsPerformance.filterBy(
-        'userUid',
-        userId
-      );
-      let parsedUserCollectionsPerformance = component.parseMilestoneCollectionsPerformance(
-        collections,
-        userCollectionsPerformance
-      );
-      userContext.set(
-        'userPerformanceData',
-        parsedUserCollectionsPerformance.userPerformanceData
-      );
-      userContext.set(
-        'hasStarted',
-        parsedUserCollectionsPerformance.hasStarted
-      );
-      userContext.set(
-        'totalTimeSpent',
-        parsedUserCollectionsPerformance.totalTimeSpent
-      );
-      userContext.set('score', parsedUserCollectionsPerformance.averageScore);
-      usersCollectionsPerformanceSummary.pushObject(userContext);
-    });
+    if (!component.isDestroyed) {
+      classMembers.forEach(member => {
+        let userContext = component.createUser(member);
+        let userId = member.get('id');
+        let userCollectionsPerformance = collectionsPerformance.filterBy(
+          'userUid',
+          userId
+        );
+        let parsedUserCollectionsPerformance = component.parseMilestoneCollectionsPerformance(
+          collections,
+          userCollectionsPerformance
+        );
+        userContext.set(
+          'userPerformanceData',
+          parsedUserCollectionsPerformance.userPerformanceData
+        );
+        userContext.set(
+          'hasStarted',
+          parsedUserCollectionsPerformance.hasStarted
+        );
+        userContext.set(
+          'totalTimeSpent',
+          parsedUserCollectionsPerformance.totalTimeSpent
+        );
+        userContext.set('score', parsedUserCollectionsPerformance.averageScore);
+        usersCollectionsPerformanceSummary.pushObject(userContext);
+      });
+    }
     return usersCollectionsPerformanceSummary.sortBy(
       component.get('defaultSortCriteria')
     );
@@ -1020,41 +1035,44 @@ export default Ember.Component.extend({
     collections,
     userCollectionsPerformance
   ) {
+    const component = this;
     let userPerformanceData = Ember.A([]);
     let totalScore = 0;
     let totalTimeSpent = 0;
     let isStudentHasStarted = false;
     let numberCollectionStarted = 0;
-    collections.forEach((collection, index) => {
-      let collectionId = collection.get('id');
-      let userCollectionPerformanceData = Ember.Object.create({
-        id: collectionId,
-        sequence: index + 1,
-        hasStarted: false
-      });
-      if (userCollectionsPerformance && userCollectionsPerformance.length) {
-        let userCollectionPerformance = userCollectionsPerformance.findBy(
-          'collectionId',
-          collection.get('id')
-        );
-        if (userCollectionPerformance) {
-          let collectionScore = userCollectionPerformance.get(
-            'performance.scoreInPercentage'
+    if (!component.isDestroyed) {
+      collections.forEach((collection, index) => {
+        let collectionId = collection.get('id');
+        let userCollectionPerformanceData = Ember.Object.create({
+          id: collectionId,
+          sequence: index + 1,
+          hasStarted: false
+        });
+        if (userCollectionsPerformance && userCollectionsPerformance.length) {
+          let userCollectionPerformance = userCollectionsPerformance.findBy(
+            'collectionId',
+            collection.get('id')
           );
-          let collectionTimeSpent = userCollectionPerformance.get(
-            'performance.timeSpent'
-          );
-          userCollectionPerformanceData.set('hasStarted', true);
-          userCollectionPerformanceData.set('timeSpent', collectionTimeSpent);
-          userCollectionPerformanceData.set('score', collectionScore);
-          totalScore += collectionScore > 0 ? collectionScore : 0;
-          totalTimeSpent += collectionTimeSpent > 0 ? collectionTimeSpent : 0;
-          numberCollectionStarted++;
-          isStudentHasStarted = true;
+          if (userCollectionPerformance) {
+            let collectionScore = userCollectionPerformance.get(
+              'performance.scoreInPercentage'
+            );
+            let collectionTimeSpent = userCollectionPerformance.get(
+              'performance.timeSpent'
+            );
+            userCollectionPerformanceData.set('hasStarted', true);
+            userCollectionPerformanceData.set('timeSpent', collectionTimeSpent);
+            userCollectionPerformanceData.set('score', collectionScore);
+            totalScore += collectionScore > 0 ? collectionScore : 0;
+            totalTimeSpent += collectionTimeSpent > 0 ? collectionTimeSpent : 0;
+            numberCollectionStarted++;
+            isStudentHasStarted = true;
+          }
         }
-      }
-      userPerformanceData.pushObject(userCollectionPerformanceData);
-    });
+        userPerformanceData.pushObject(userCollectionPerformanceData);
+      });
+    }
     let averageScore =
       numberCollectionStarted > 0
         ? Math.floor(totalScore / numberCollectionStarted)

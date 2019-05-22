@@ -93,11 +93,13 @@
           display: block;
           line-height: 50px;
 
-          &.assessment {
+          &.assessment,
+          &.assessment-external {
             background-image: url("../assets/gooru/images/assessment-gray.svg");
           }
 
-          &.collection {
+          &.collection,
+          &.collection-external {
             background-image: url("../assets/gooru/images/collection_gray.svg");
           }
         }
@@ -109,11 +111,13 @@
           .icon {
             color: #548fe2;
 
-            &.assessment {
+            &.assessment,
+            &.assessment-external {
               background-image: url("../assets/gooru/images/assessment-dark-blue.svg");
             }
 
-            &.collection {
+            &.collection,
+            &.collection-external {
               background-image: url("../assets/gooru/images/collection-dark-blue.svg");
             }
           }
@@ -126,11 +130,13 @@
           .icon {
             color: #ec8f42;
 
-            &.collection {
+            &.collection,
+            &.collection-external {
               background-image: url("../assets/gooru/images/collection-orange.svg");
             }
 
-            &.assessment {
+            &.assessment,
+            &.assessment-external {
               background-image: url("../assets/gooru/images/assessment-orange.svg");
             }
           }
