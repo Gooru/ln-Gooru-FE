@@ -78,12 +78,13 @@ export default StudentCollection.extend({
       controller
         .get('quizzesAttemptService')
         .getAttemptIds(contextId, profileId)
-        .then(attemptIds =>
-          !attemptIds || !attemptIds.length
-            ? {}
-            : this.get('quizzesAttemptService').getAttemptData(
-              attemptIds[attemptIds.length - 1]
-            )
+        .then(
+          attemptIds =>
+            !attemptIds || !attemptIds.length
+              ? {}
+              : this.get('quizzesAttemptService').getAttemptData(
+                attemptIds[attemptIds.length - 1]
+              )
         )
         .then(attemptData =>
           Ember.RSVP.hash({
@@ -336,6 +337,7 @@ export default StudentCollection.extend({
         queryParams
       });
     } else {
+      queryParams.type = context.itemType || null; //Type is important to decide whether next item is external or normal
       queryParams.pathId = context.pathId || 0;
       queryParams.pathType = context.pathType || null;
       this.transitionToRoute('study-player', context.get('courseId'), {
