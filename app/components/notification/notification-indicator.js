@@ -166,6 +166,8 @@ export default Ember.Component.extend({
         action: 'explore',
         actionType: 'navigate',
         postActionHook: {
+          dismissPopupAfterAction: true,
+          deletenotificationuponaction: true,
           refreshAfterDeleteNotification: false,
           navigate: true,
           navigationDetails: {
@@ -181,8 +183,7 @@ export default Ember.Component.extend({
               milestoneId: 0,
               tab: 'none',
               location:
-                'unitId+lessonId+collectionId+milestoneId+currentItemType',
-              refresh: true
+                'unitId+lessonId+collectionId+milestoneId+currentItemType'
             }
           }
         }
@@ -192,6 +193,8 @@ export default Ember.Component.extend({
         action: 'explore',
         actionType: 'navigate',
         postActionHook: {
+          dismissPopupAfterAction: true,
+          deletenotificationuponaction: true,
           refreshAfterDeleteNotification: false,
           navigate: true,
           navigationDetails: {

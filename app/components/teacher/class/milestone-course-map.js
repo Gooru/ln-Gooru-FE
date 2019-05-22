@@ -273,10 +273,24 @@ export default Ember.Component.extend({
   /**
    * Function to triggered once when the component element is first rendered.
    */
+  notInit: null,
   didInsertElement() {
     this.loadData();
+    this.set('notInit', true);
   },
 
+  didUpdateAttrs() {
+    this._super(...arguments);
+    const component = this;
+    let customLocationPresent = component.get('location');
+
+    if (customLocationPresent && this.get('notInit') === true) {
+      Ember.run.later(function() {
+        component.navigateLocation();
+        component.set('isLoading', false);
+      }, 5000);
+    }
+  },
   didRender() {
     let component = this;
     component.$('[data-toggle="tooltip"]').tooltip({
@@ -307,14 +321,6 @@ export default Ember.Component.extend({
     if (showPerformance) {
       component.fetchMilestonePerformance();
     }
-    //Todo: If needed remove the later time based approach everywhere
-    Ember.run.later(function() {
-      let customLocationPresent = component.get('location');
-      if (customLocationPresent) {
-        component.navigateLocation();
-        component.set('isLoading', false);
-      }
-    });
     component.set('isLoading', false);
   },
 
@@ -732,7 +738,7 @@ export default Ember.Component.extend({
         userLocation = component.formatCustomLocationToUserLocation(
           customLocation
         );
-      //Navigation basis milestoneId if not present don't navigate
+      //Navigation basis is milestoneId if not present don't navigate
       if (userLocation && userLocation.milestoneId) {
         component.set('userCurrentLocation', userLocation);
         component.set('locateLastPlayedItem', userLocation);
@@ -744,6 +750,7 @@ export default Ember.Component.extend({
         //ToDo: Refactoring required to remove the Later based workaround, here as well as in other implementation
         Ember.run.later(function() {
           component.handleMilestoneToggle(selectedMilestone);
+
           if (component.get('showLocationReport') === 'assesmentreport') {
             Ember.run.later(function() {
               Ember.run.later(function() {
@@ -761,6 +768,12 @@ export default Ember.Component.extend({
                   lessonO,
                   collectionO
                 );
+                component.set('showLocationReport', null);
+                window.history.pushState(
+                  null,
+                  null,
+                  window.location.origin + window.location.pathname
+                ); // reset to avoid refresh issues
               }, 8000);
             }, 500);
           }
