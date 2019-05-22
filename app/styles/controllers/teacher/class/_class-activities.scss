@@ -561,6 +561,10 @@
           .offline-activities-list-container {
             .oa-active-container {
               margin-bottom: 10px;
+              display: grid;
+              grid-template-rows: max-content auto;
+              height: 100%;
+              grid-gap: 10px;
             }
 
             .oa-active-container,
@@ -621,6 +625,11 @@
                   font-size: 12px;
                   font-weight: bold;
                 }
+              }
+
+              .oa-active-items {
+                overflow: auto;
+                max-height: 50vh;
               }
             }
           }
