@@ -446,6 +446,10 @@ export default Ember.Controller.extend({
      */
     viewSwitcher() {
       this.toggleProperty('isMilestoneView');
+      //Reset milestone report to false when course map view is active
+      if (!this.get('isMilestoneView')) {
+        this.set('classController.isShowMilestoneReport', false);
+      }
     }
   },
 

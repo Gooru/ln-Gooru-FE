@@ -126,11 +126,13 @@ export default Ember.Component.extend({
       const completedCount = milestonePerformance.get('completedCount');
       const totalCount = milestonePerformance.get('totalCount');
       placeholderText =
-        completedCount === totalCount
-          ? `${component.get('i18n').t('common.completed').string}!`
-          : `${completedCount}/${totalCount} ${
-            component.get('i18n').t('common.lessonObj.zero').string
-          }`;
+        completedCount || totalCount
+          ? completedCount === totalCount
+            ? `${component.get('i18n').t('common.completed').string}!`
+            : `${completedCount}/${totalCount} ${component
+              .get('i18n')
+              .t('common.lessonObj.zero').string}`
+          : null;
     }
     return placeholderText;
   }),
@@ -171,18 +173,20 @@ export default Ember.Component.extend({
     const component = this;
     let activeMilestone = component.get('activeMilestone');
     let rescopedContents = component.get('rescopedContents');
-    return Ember.RSVP.hash({
-      milestoneLessons:
-        activeMilestone.get('lessons') || component.fetchMilestoneLessons(),
-      rescopedContents: rescopedContents || component.fetchRescopedContents()
-    }).then(hash => {
-      if (!component.isDestroyed) {
-        component.set('rescopedContents', hash.rescopedContents);
-        component.set('activeMilestone.lessons', hash.milestoneLessons);
-        component.loadMilestoneReportPerformanceData();
-        component.parseRescopedContents();
-      }
-    });
+    return Ember.RSVP
+      .hash({
+        milestoneLessons:
+          activeMilestone.get('lessons') || component.fetchMilestoneLessons(),
+        rescopedContents: rescopedContents || component.fetchRescopedContents()
+      })
+      .then(hash => {
+        if (!component.isDestroyed) {
+          component.set('rescopedContents', hash.rescopedContents);
+          component.set('activeMilestone.lessons', hash.milestoneLessons);
+          component.loadMilestoneReportPerformanceData();
+          component.parseRescopedContents();
+        }
+      });
   },
 
   /**

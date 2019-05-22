@@ -614,13 +614,15 @@ export default Ember.Component.extend({
         lessons: lessons || component.fetchMilestoneLessons()
       })
       .then(({ lessons, milestoneLessonsPerformanceData }) => {
-        component.set('lessons', lessons);
-        component.getAggregatedLessonsPerformance(
-          milestoneLessonsPerformanceData
-        );
-        component.parseStudentsLessonsPerformanceData(
-          milestoneLessonsPerformanceData
-        );
+        if (!component.isDestroyed) {
+          component.set('lessons', lessons);
+          component.getAggregatedLessonsPerformance(
+            milestoneLessonsPerformanceData
+          );
+          component.parseStudentsLessonsPerformanceData(
+            milestoneLessonsPerformanceData
+          );
+        }
       });
   },
 
@@ -655,7 +657,7 @@ export default Ember.Component.extend({
   getAggregatedLessonsPerformance(lessonsPerformance) {
     const component = this;
     let lessons = component.get('lessons');
-    if (lessons.length) {
+    if (lessons.length && !component.isDestroyed) {
       lessons.forEach((lesson, index) => {
         let lessonPerformanceData = Ember.Object.create({
           score: null,
@@ -692,75 +694,76 @@ export default Ember.Component.extend({
     let studentsLessonsPerformanceData = Ember.A([]);
     let classMembers = component.get('classMembers');
     let lessons = component.get('lessons');
-    classMembers.map(student => {
-      let studentLessonsPerformanceContext = Ember.Object.create({
-        hasStarted: false,
-        score: null,
-        id: student.get('id'),
-        firstName: student.get('firstName'),
-        lastName: student.get('lastName'),
-        avatarUrl: student.get('avatarUrl')
-      });
-      let userPerformanceData = Ember.A([]);
-      let userLessonsPerformance = milestoneLessonsPerformanceData.filterBy(
-        'userUid',
-        student.get('id')
-      );
-      let studentPerformanceScore = 0;
-      let lessonSeq = 1;
-      let totalStudentPlayedLessons = userLessonsPerformance.length;
-      let isStudentHasStarted = false;
-      // let studentLessonsPerformanceDataContext = studentLessonsPerformanceContext.get('userPerformanceData');
-      lessons.map(lesson => {
-        let lessonPerformanceContext = Ember.Object.create({
-          id: lesson.get('lesson_id'),
+    if (!component.isDestroyed) {
+      classMembers.map(student => {
+        let userLessonsPerformance = milestoneLessonsPerformanceData.filterBy(
+          'userUid',
+          student.get('id')
+        );
+        let totalStudentPlayedLessons = userLessonsPerformance.length;
+        let studentLessonsPerformanceContext = Ember.Object.create({
           hasStarted: false,
-          sequence: lessonSeq
+          score: null,
+          id: student.get('id'),
+          firstName: student.get('firstName'),
+          lastName: student.get('lastName'),
+          avatarUrl: student.get('avatarUrl')
         });
-        let lessonPerformance = userLessonsPerformance.findBy(
-          'lessonId',
-          lesson.get('lesson_id')
+        let userPerformanceData = Ember.A([]);
+        let studentPerformanceScore = 0;
+        let lessonSeq = 1;
+        let isStudentHasStarted = false;
+        lessons.map(lesson => {
+          let lessonPerformanceContext = Ember.Object.create({
+            id: lesson.get('lesson_id'),
+            hasStarted: false,
+            sequence: lessonSeq
+          });
+          let lessonPerformance = userLessonsPerformance.findBy(
+            'lessonId',
+            lesson.get('lesson_id')
+          );
+          if (lessonPerformance) {
+            lessonPerformanceContext.set(
+              'score',
+              lessonPerformance.get('performance.scoreInPercentage')
+            );
+            lessonPerformanceContext.set(
+              'timeSpent',
+              lessonPerformance.get('performance.timeSpent')
+            );
+            lessonPerformanceContext.set('hasStarted', true);
+            studentPerformanceScore += lessonPerformance.get(
+              'performance.scoreInPercentage'
+            );
+            isStudentHasStarted = true;
+          }
+          userPerformanceData.pushObject(
+            Object.assign(lessonPerformanceContext, lesson)
+          );
+          lessonSeq++;
+        });
+        let studentMilestoneScoreInPercentage = totalStudentPlayedLessons
+          ? roundFloat(studentPerformanceScore / totalStudentPlayedLessons)
+          : 0;
+        studentLessonsPerformanceContext.set(
+          'score',
+          studentMilestoneScoreInPercentage
         );
-        if (lessonPerformance) {
-          lessonPerformanceContext.set(
-            'score',
-            lessonPerformance.get('performance.scoreInPercentage')
-          );
-          lessonPerformanceContext.set(
-            'timeSpent',
-            lessonPerformance.get('performance.timeSpent')
-          );
-          lessonPerformanceContext.set('hasStarted', true);
-          studentPerformanceScore += lessonPerformance.get(
-            'performance.scoreInPercentage'
-          );
-          isStudentHasStarted = true;
-        }
-        userPerformanceData.pushObject(
-          Object.assign(lessonPerformanceContext, lesson)
+        studentLessonsPerformanceContext.set(
+          'score-use-for-sort',
+          studentMilestoneScoreInPercentage
         );
-        lessonSeq++;
+        studentLessonsPerformanceContext.set('hasStarted', isStudentHasStarted);
+        studentLessonsPerformanceContext.set(
+          'userPerformanceData',
+          userPerformanceData
+        );
+        studentsLessonsPerformanceData.pushObject(
+          studentLessonsPerformanceContext
+        );
       });
-      let studentMilestoneScoreInPercentage = totalStudentPlayedLessons
-        ? roundFloat(studentPerformanceScore / totalStudentPlayedLessons)
-        : 0;
-      studentLessonsPerformanceContext.set(
-        'score',
-        studentMilestoneScoreInPercentage
-      );
-      studentLessonsPerformanceContext.set(
-        'score-use-for-sort',
-        studentMilestoneScoreInPercentage
-      );
-      studentLessonsPerformanceContext.set('hasStarted', isStudentHasStarted);
-      studentLessonsPerformanceContext.set(
-        'userPerformanceData',
-        userPerformanceData
-      );
-      studentsLessonsPerformanceData.pushObject(
-        studentLessonsPerformanceContext
-      );
-    });
-    component.set('studentReportData', studentsLessonsPerformanceData);
+      component.set('studentReportData', studentsLessonsPerformanceData);
+    }
   }
 });

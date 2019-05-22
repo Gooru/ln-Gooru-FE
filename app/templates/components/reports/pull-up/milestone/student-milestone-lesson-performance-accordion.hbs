@@ -37,8 +37,8 @@
           {{collection.title}}
         </div>
         {{#if collection.performance}}
-          <div class="collection-performance-container {{collection.format}} {{if (eq collection.format 'assessment') (concat 'grade-range-' (grade-range collection.performance.scoreInPercentage))}}" {{action "onOpenCollectionReport" collection}}>
-            {{#if (eq collection.format 'assessment')}}
+          <div class="collection-performance-container {{collection.format}} {{if collection.isAssessment (concat 'grade-range-' (grade-range collection.performance.scoreInPercentage))}}" {{action "onOpenCollectionReport" collection}}>
+            {{#if collection.isAssessment}}
               {{collection.performance.scoreInPercentage}}%
             {{else}}
               {{format-time collection.performance.timeSpent}}
@@ -61,7 +61,7 @@
     showPullUp=isShowCollectionReport
     reportData=collectionReportContext
     model=studentCollectionReportContext.lesson
-    isStudent=true
+    isStudent=isStudent
   }}
 {{/if}}
 
@@ -70,7 +70,7 @@
     reports.pull-up.student-external-assessment-report
     showPullUp=isShowExternalAssessmentReport
     reportData=collectionReportContext
-    showPullUp=isShowStudentExternalAssessmentReport
-    isStudent=true
+    showPullUp=isShowExternalAssessmentReport
+    isStudent=isStudent
   }}
 {{/if}}

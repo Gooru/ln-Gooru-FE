@@ -4,8 +4,13 @@
     <div class="report-breadcrumb">
       <div class="lesson-title">
         <div>
-          <div>{{t 'common.lesson'}} {{lesson.sequence}} :</div>
-          <div class="lesson-title-value ellipsis">{{if isShowMilestoneReport lesson.lesson_title lesson.title}}</div>
+          {{#if isShowMilestoneReport}}
+            <div>{{t 'common.lesson'}} {{selectedLesson.sequence}} :</div>
+            <div class="lesson-title-value ellipsis">{{selectedLesson.lesson_title}}</div>
+          {{else}}
+            <div>{{t 'common.lesson'}} {{lesson.sequence}} :</div>
+            <div class="lesson-title-value ellipsis">{{lesson.title}}</div>
+          {{/if}}
         </div>
       </div>
     </div>
