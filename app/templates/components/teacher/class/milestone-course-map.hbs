@@ -101,16 +101,14 @@
                                 <i class="external-icon" title="{{t 'common.assessment-external'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover"></i>
                               {{/if}}
                             </div>
-                            {{#if (and showPerformance collection.performance) }}
+                            {{#if (and showPerformance collection.performance.hasStarted) }}
                               <div class="collection-peformance format-{{collection.format}} grade-range-{{grade-range collection.performance.scoreInPercentage}}" {{action "onOpenCollectionReport" milestone lesson collection}}>
-                                {{#if collection.performance}}
-                                  {{#if (or (eq collection.format 'assessment') (eq collection.format 'assessment-external'))}}
+                                {{#if (and collection.isAssessment (gte collection.performance.scoreInPercentage 0))}}
                                     {{collection.performance.scoreInPercentage}}%
-                                  {{else}}
-                                    {{format-time collection.performance.timeSpent}}
-                                  {{/if}}
+                                {{else if collection.performance.timeSpent}}
+                                  {{format-time collection.performance.timeSpent}}
                                 {{else}}
-                                  --
+                                    --
                                 {{/if}}
                               </div>
                             {{else}}
