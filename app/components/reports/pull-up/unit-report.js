@@ -182,7 +182,10 @@ export default Ember.Component.extend({
    */
   units: Ember.computed('context.units', function() {
     let units = this.get('context.units').map(unit => {
-      if (unit.get('performance.score') >= 0) {
+      if (
+        unit.get('performance.score') !== null &&
+        unit.get('performance.score') >= 0
+      ) {
         unit.set('performance.hasStarted', true);
       }
       return unit;
@@ -564,12 +567,14 @@ export default Ember.Component.extend({
   onOpenStudentUnitReport(userId) {
     let component = this;
     if (component.get('isShowMilestoneReport')) {
-      let milestone = component.get('selectedUnit');
       let activeMilestone = component.get('selectedUnit');
       let studentMilestone = Object.create(activeMilestone);
       let studentPerformance = component.getUnitPerformanceForClassMember(
         userId
       );
+      let activeMilestoneIndex = component
+        .get('units')
+        .indexOf(activeMilestone);
       studentMilestone.set(
         'performance',
         Ember.Object.create({
@@ -578,7 +583,7 @@ export default Ember.Component.extend({
           timeSpent: studentPerformance.get('timeSpent')
         })
       );
-      component.set('activeMilestoneIndex', milestone.get('sequence') - 1);
+      component.set('activeMilestoneIndex', activeMilestoneIndex);
       component.set('selectedStudentId', userId);
       component.set('studentMilestone', studentMilestone);
       component.set('isShowStudentMilestoneReport', true);
@@ -604,14 +609,12 @@ export default Ember.Component.extend({
 
   loadMilestoneLessonsPerformanceData() {
     const component = this;
-    let milestone = component.get('selectedUnit');
-    let lessons = milestone.get('lessons');
     return Ember.RSVP
       .hash({
         milestoneLessonsPerformanceData: component.fetchMilestoneLessonsPerformance(
           CONTENT_TYPES.ASSESSMENT
         ),
-        lessons: lessons || component.fetchMilestoneLessons()
+        lessons: component.fetchMilestoneLessons()
       })
       .then(({ lessons, milestoneLessonsPerformanceData }) => {
         if (!component.isDestroyed) {

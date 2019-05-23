@@ -26,7 +26,8 @@
     &.transparent-grade-range-not-started {
       background-color: #e4e5ea;
 
-      text.placeholder-text {
+      text.placeholder-text,
+      text.total-timespent {
         fill: #666;
       }
     }

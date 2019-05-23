@@ -203,7 +203,6 @@ export function aggregateMilestonePerformanceTimeSpent(items) {
         ? itemPerformanceTimeSpent
         : 0;
     });
-    aggregatedTimeSpentValue = aggregatedTimeSpentValue / items.length;
   }
   return roundFloat(aggregatedTimeSpentValue);
 }

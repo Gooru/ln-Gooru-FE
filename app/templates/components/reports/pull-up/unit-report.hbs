@@ -92,15 +92,15 @@
 {{#if isShowStudentMilestoneReport}}
   {{#reports.pull-up.milestone.milestone-report
     showPullUp = isShowStudentMilestoneReport
-    title = (concat gradeSubject.title ' - ' selectedUnit.grade_name)
+    title = (concat gradeSubject.title ' - ' studentMilestone.grade_name)
   }}
     {{reports.pull-up.milestone.student-milestone-summary-report
       activeMilestone = studentMilestone
       class = class
-      milestones = units
-      activeMilestoneIndex = activeMilestoneIndex
       userId = selectedStudentId
       gradeSubject = gradeSubject
+      isTeacher = true
+      activeMilestoneIndex = activeMilestoneIndex
     }}
   {{/reports.pull-up.milestone.milestone-report}}
 {{/if}}

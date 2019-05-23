@@ -232,3 +232,16 @@
     playerContext=previewPlayerContext
   }}
 {{/if}}
+
+
+{{#if isShowStudentMilestoneReport}}
+  {{#reports.pull-up.milestone.milestone-report
+    showPullUp = isShowStudentMilestoneReport
+    title = course.title
+  }}
+    {{reports.pull-up.milestone.student-milestone-performance-report
+      class = studentClassData
+      userId = activeStudent.id
+    }}
+  {{/reports.pull-up.milestone.milestone-report}}
+{{/if}}

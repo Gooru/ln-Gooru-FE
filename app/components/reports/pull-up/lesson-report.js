@@ -293,7 +293,10 @@ export default Ember.Component.extend({
    */
   lessons: Ember.computed('context.lessons', function() {
     let lessons = this.get('context.lessons').map(lesson => {
-      if (lesson.get('performance.score') >= 0) {
+      if (
+        lesson.get('performance.score') !== null &&
+        lesson.get('performance.score') >= 0
+      ) {
         lesson.set('performance.hasStarted', true);
       }
       return lesson;
