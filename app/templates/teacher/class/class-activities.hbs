@@ -222,6 +222,10 @@
             <div class="ca-grade-content-items collapse" id="grade">
               {{#if itemsToGrade}}
                 {{gru-grade-items contextSource=contextSource questionItems=itemsToGrade}}
+              {{else}}
+                <div class="no-rubric-content">
+                  {{t 'common.all-caught-up'}}
+                </div>
               {{/if}}
             </div>
           </div>
