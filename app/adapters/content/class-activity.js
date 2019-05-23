@@ -88,6 +88,29 @@ export default Ember.Object.extend({
   },
 
   /**
+   * Make offline activity as completed
+   *
+   * @param {string} classId
+   * @param {string} contentId
+   * @returns {Promise}
+   */
+  completeOfflineActivity: function(classId, contentId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${classId}/contents/${contentId}/complete`;
+    const data = {};
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(data)
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
    * Enables the class content
    *
    * @param {string} classId

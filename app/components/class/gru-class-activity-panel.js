@@ -29,6 +29,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
   // Actions
 
   actions: {
+    onComplete() {
+      let component = this;
+      component.sendAction('completeActivity', component.get('classActivity'));
+    },
+
     showMore() {
       let component = this;
       component.toggleProperty('isShowMore');

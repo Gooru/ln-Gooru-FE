@@ -1,18 +1,18 @@
 <div class="backdrop"></div>
 <div class="datepickers {{if isOfflineActivity 'offline'}}">
   <div class="start-date">
-    <span class="{{unless isOfflineActivity 'hidden'}}">Start Date</span>
+    <span class="{{unless isOfflineActivity 'hidden'}}">{{t 'goals.manage.start-date-label'}}</span>
     {{ca-date-picker
        userStartDateAsToday=true
        onSelectDate='onScheduleStartDate'
        showMonths=(if isOfflineActivity false true)
-       onSelectMonth='onScheduleForMonth'
+       onSelectMonth='onScheduleCAForMonth'
        forFirstDateOfMonth=forFirstDateOfMonth
      }}
   </div>
   {{#if isOfflineActivity}}
     <div class="end-date">
-      <span>End Date</span>
+      <span>{{t 'goals.manage.end-date-label'}}</span>
       {{ca-date-picker
        userStartDateAsToday=true
        onSelectDate='onScheduleEndDate'
@@ -25,6 +25,6 @@
 </div>
 {{#if isOfflineActivity}}
   <div class="months">
-    {{ca-month-picker onSelectMonth='onScheduleForMonth' currentMonth=forFirstDateOfMonth}}
+    {{ca-month-picker onSelectMonth='onScheduleOAForMonth' currentMonth=forFirstDateOfMonth}}
   </div>
 {{/if}}

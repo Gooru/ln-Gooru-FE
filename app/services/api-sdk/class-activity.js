@@ -319,6 +319,28 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Make offline activity as completed
+   *
+   * @param {string} classId
+   * @param {string} contentId
+   * @returns {Promise}
+   */
+  completeOfflineActivity(classId, contentId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .completeOfflineActivity(classId, contentId)
+        .then(function(payload) {
+          resolve(payload);
+        }, function(error) {
+          reject(error);
+        });
+    });
+  },
+
+
+  /**
    * Gets all class activity for the authorized user (student|teacher)
    *
    * @param {string} userId

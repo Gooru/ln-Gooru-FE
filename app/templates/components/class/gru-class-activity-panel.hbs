@@ -4,7 +4,7 @@
       <div class="icon">
         <i class="{{classActivity.contentType}}-icon" />
       </div>
-      <div class="title ellipsis" {{action 'onPlayContent' item}}>
+      <div class="title ellipsis {{if isOfflineActivity 'disable-event'}}" {{action 'onPlayContent' item}}>
         <span>{{classActivity.title}}</span>
       </div>
       <div class="resource-info">
@@ -30,7 +30,7 @@
         {{/if}}
       </div>
       <div class="activate">
-        {{#if showDcaAssignButton}}
+        {{#if (and showDcaAssignButton (not classActivity.isCompleted))}}
           <span class="dca-assign" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.assign"}}">
             {{#unless classActivity.isActive}}
               {{gru-switch switchOptions=switchOptions onOptionSwitch='changeVisibility' isChecked=classActivity.isActive item=item}}
@@ -46,7 +46,7 @@
         </span>
       </div>
       <div class="performance">
-        <div class="dca-panel-actions-performance">
+        <div class="dca-panel-actions-performance {{if isOfflineActivity 'disable-event'}}">
           {{#if collectionPerformanceSummary}}
             {{#if (and (not-eq item.collectionType 'collection' ) (not-eq item.collectionType 'collection-external'))}}
               <div class="dca-panel-performance" {{action 'openDcaContentReport' classActivity}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
@@ -120,14 +120,16 @@
             <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item}}></i>
           {{/if}}
         {{/if}}
-        {{#if isOfflineActivity}}
-          <div class="oa-complete">
-            {{input type="checkbox"}}<span>{{t 'common.completed'}}</span>
+        {{#if (and isOfflineActivity (not classActivity.isCompleted))}}
+          <div class="oa-complete {{unless classActivity.isActive 'disabled'}}">
+            {{input type="checkbox"  change=(action "onComplete") }}<span>{{t 'common.completed'}}</span>
           </div>
         {{/if}}
       </div>
       <div class="delete-activity">
-        <i class="close-icon" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.remove"}}" {{action 'removeClassActivity' classActivity}}></i>
+        <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.remove"}}" {{action 'removeClassActivity' classActivity}}>
+          {{gru-icon name="close"}}
+        </span>
       </div>
       <div class="thumbnail-img">
         {{#if item.thumbnailUrl}}

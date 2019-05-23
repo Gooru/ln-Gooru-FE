@@ -17,10 +17,22 @@ export default Ember.Component.extend({
    */
   contentType: null,
 
+  /**
+   * Maintains the value whether activity is offline or not
+   * @type {Integer}
+   */
   isOfflineActivity: Ember.computed.equal('contentType', PLAYER_EVENT_SOURCE.OFFLINE_CLASS),
 
+  /**
+   * Maintains the value which of activity startDate
+   * @type {Integer}
+   */
   startDate: null,
 
+  /**
+  * Maintains the value which of activity endDate
+   * @type {Integer}
+   */
   endDate: null,
 
   /**

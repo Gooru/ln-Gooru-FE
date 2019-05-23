@@ -146,6 +146,7 @@
         font-size: 16px;
         align-items: center;
         color: #37424b;
+        cursor: pointer;
 
         span {
           width: max-content;
@@ -393,61 +394,18 @@
 
       &.visible {
         height: 48px;
-        transition: height 0.3s ease-in;
+        transition: visibility 0.3s linear,height 0.3s linear;
         border-bottom: solid 1px #cacaca;
 
-        .dca-btn {
-          .oa-complete {
-            height: 100%;
+        .ca-actions,
+        .dca-btn,
+        .delete-activity {
+          visibility: visible;
+          height: 100%;
 
-            input[type="checkbox"]:after {
-              height: 18px;
-              border: 2px solid #666;
-              border-radius: 50px;
-            }
-
-            span {
-              font-size: 14px;
-            }
-          }
-        }
-
-        .ca-actions {
-          .mastery-accrual,
-          .re-schedule,
           .student-count {
-            i {
-              font-size: 24px;
-            }
-
-            span {
-              font-size: inherit;
-            }
-
-            .re-schedule-activity {
-              i {
-                font-size: 20px;
-              }
-
-              span {
-                font-size: inherit;
-              }
-            }
-
-            .mastery-accrual-btn {
-              .mastery-accrual-text {
-                font-size: 13px;
-              }
-
-              .mastery-accrual-icon {
-                height: 100%;
-                display: flex;
-                align-items: center;
-
-                i {
-                  font-size: 20px;
-                }
-              }
+            &.active {
+              visibility: visible;
             }
           }
         }
@@ -455,17 +413,18 @@
 
       .delete-activity {
         display: flex;
-        height: 100%;
-        margin: auto;
+        height: 0;
+        visibility: hidden;
+        align-items: center;
 
-        i.close-icon {
-          background: url("/assets/gooru/images/close.svg") no-repeat center;
-          background-size: contain;
-          border: none;
-          display: block;
-          width: 24px;
-          height: 100%;
-          padding: 0;
+        span {
+          display: flex;
+          margin: auto;
+
+          i {
+            height: 24px;
+            font-size: 25px;
+          }
         }
       }
 
@@ -473,6 +432,7 @@
         display: flex;
         height: 100%;
         margin: auto;
+        visibility: hidden;
 
         .golive-icon {
           width: 24px;
@@ -521,7 +481,14 @@
       .ca-actions {
         display: grid;
         grid-template-columns: repeat(3, auto);
-        height: 100%;
+        height: 0;
+        visibility: hidden;
+
+        .student-count {
+          &.active {
+            visibility: hidden;
+          }
+        }
 
         .mastery-accrual {
           display: grid;
@@ -556,12 +523,12 @@
               i {
                 color: #4e5e67;
                 height: auto;
-                font-size: 0;
+                font-size: 20px;
               }
             }
 
             .mastery-accrual-text {
-              font-size: 0;
+              font-size: 13px;
               color: #1aa9eb;
               font-weight: bold;
             }
@@ -575,19 +542,10 @@
           align-items: center;
           color: #1aa9eb;
 
-          &.active {
-            visibility: visible;
-          }
-
           span {
             cursor: pointer;
             display: block;
-            font-size: 0;
             padding-left: 5px;
-          }
-
-          i {
-            font-size: 0;
           }
         }
 
@@ -604,14 +562,13 @@
 
             .replay,
             .update {
-              font-size: 0;
+              font-size: 20px;
               pointer-events: none;
             }
 
             span {
               pointer-events: none;
               padding-left: 5px;
-              font-size: 0;
 
               &:hover {
                 color: #000;
