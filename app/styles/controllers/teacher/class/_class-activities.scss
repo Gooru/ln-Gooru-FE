@@ -164,6 +164,7 @@
               grid-template-columns: auto 60px;
               position: relative;
               width: 100%;
+              border: 1px solid #bbb;
 
               i {
                 width: 24px;
@@ -214,7 +215,7 @@
             }
 
             .ca-unscheduled-content-items {
-              padding: 20px;
+              padding: 10px;
               background-color: rgb(216, 216, 216);
               max-height: calc(50vh - 60px);
               overflow-y: auto;
@@ -415,6 +416,8 @@
                   width: 100%;
                   z-index: 3;
                   background-color: #fff;
+                  border: 1px solid #bbb;
+                  border-radius: 4px;
 
                   .ca-contents-button {
                     display: inline-grid;
@@ -634,11 +637,13 @@
               grid-template-columns: auto 60px;
               position: relative;
               width: 100%;
+              border: 1px solid #bbb;
 
               .icons {
                 i {
                   width: 24px;
                   margin: auto;
+                  cursor: pointer;
                 }
 
                 .arrow_drop_up {
@@ -681,6 +686,11 @@
                 font-weight: bold;
               }
             }
+
+            .oa-completed-items {
+              padding: 10px;
+              background-color: rgb(216, 216, 216);
+            }
           }
         }
 
@@ -693,11 +703,13 @@
           display: grid;
           grid-template-columns: auto 60px;
           position: relative;
+          border: 1px solid #bbb;
 
           .icons {
             i {
               width: 24px;
               margin: auto;
+              cursor: pointer;
             }
 
             .arrow_drop_up {
@@ -742,7 +754,7 @@
         }
 
         .ca-grade-content-items {
-          padding: 20px;
+          padding: 10px;
           background-color: rgb(216, 216, 216);
           max-height: calc(50vh - 75px);
           overflow-y: auto;

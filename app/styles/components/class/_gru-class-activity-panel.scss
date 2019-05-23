@@ -505,7 +505,9 @@
             }
 
             .mastery-accrual-icon {
-              height: 0;
+              justify-content: center;
+              height: max-content;
+              display: flex;
 
               &.mastery-accrual-checked {
                 background: url("/assets/gooru/images/check-circle-1.svg") no-repeat center;
