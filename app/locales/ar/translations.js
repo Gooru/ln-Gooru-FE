@@ -103,6 +103,9 @@ export default Object.assign(quizzesTranslations, {
   'common.add': 'ضِف',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content': 'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content': 'There are no projects or other offline activities that the students are currently working on',
   'common.plan-an-activities-msg':
     'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'Reschedule',

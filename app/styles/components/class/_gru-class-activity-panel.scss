@@ -399,9 +399,15 @@
 
         .ca-actions,
         .dca-btn,
-        .delete-activity {
+        .delete-activity,
+        .thumbnail-img {
           visibility: visible;
           height: 100%;
+
+          .oa-complete {
+            visibility: visible;
+            height: 100%;
+          }
 
           .student-count {
             &.active {
@@ -446,21 +452,19 @@
         }
 
         .oa-complete {
-          height: 0;
           display: flex;
           align-items: center;
+          visibility: hidden;
 
           input[type="checkbox"] {
             margin: auto;
 
             &:after {
-              height: 0;
-              border: none;
+              border-radius: 50px;
             }
           }
 
           span {
-            font-size: 0;
             font-weight: bold;
             color: #0072bc;
           }
@@ -469,7 +473,8 @@
 
       .thumbnail-img {
         display: grid;
-        height: 100%;
+        visibility: hidden;
+        height: 0;
         width: 100%;
 
         img {

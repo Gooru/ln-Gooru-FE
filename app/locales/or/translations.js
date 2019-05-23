@@ -78,6 +78,9 @@ export default Object.assign(quizzesTranslations, {
   'common.avg-score': 'ହାରାହାରି ସ୍କୋର୍',
   'common.frq': 'FRQ',
   'common.schedule': 'ସୂଚୀ',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content': 'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content': 'There are no projects or other offline activities that the students are currently working on',
   'common.no-search-result':
     'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.responses': 'ଉତ୍ତରଗୁଡ଼ିକ',

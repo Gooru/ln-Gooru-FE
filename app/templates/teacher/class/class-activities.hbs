@@ -13,7 +13,7 @@
             <div class="ca-schedule-items-header">
               <div class="ca-add-content">
                 <div class="ca-contents-button">
-                  <p>{{t 'common.plan-an-activities'}}</p>
+                  <p>{{t 'common.plan'}}</p>
                   <i class="collection-icon" {{action 'onAddDca' 'collection'}}></i>
                   <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
                 </div>
@@ -26,9 +26,8 @@
                         {{format-date selectedDate 'DD MMM, YY'}}
                       {{/if}}
                     </span>
-                    <div class="icons {{if isActive 'open'}}" {{action 'toggleDatePicker'}}>
-                      {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
-                      {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+                    <div class="icons" {{action 'toggleDatePicker'}}>
+                      {{gru-icon name="date_range"}}
                     </div>
                   </div>
                 </div>
@@ -134,57 +133,71 @@
         <div class="right-panel-header">
           <span class="title">{{t 'common.offline-activites'}}</span>
         </div>
-        <div class="right-panel-content">
-          <div class="doa-content-container">
-            <div class="doa-active-container">
-              <div class="doa-active-header" data-toggle="collapse" data-target="#active">
-                <span>{{t 'teacher-landing.class.class-settings.student-settings-sec.col-head-active'}}</span>
-                <div class="icons">
-                  {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
-                  {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
-                </div>
-              </div>
-              <div class="doa-active-items collapse in" id="active">
-                <div class="doa-active-list">
-                  {{#each activeOfflineActivities as |offlineActivity|}}
-                    {{class.gru-class-activity-panel
-                      classActivity=offlineActivity
-                      classId=classId
-                      class=class
-                      members=members
-                      classActivities=classActivities
-                      onReportclick='changeStatusValue'
-                      onGoLive='goLive'
-                      showDcaAssignButton=true
-                      isOfflineActivity=true
-                      completeActivity='onCompleteActivity'
-                      showDcaAddButton=false
-                      onChangeVisibility='changeVisibility'
-                      onRemoveClassActivity='removeClassActivity'
-                      openDcaContentReport='openDcaContentReport'
-                      activityDate=offlineActivity.added_date
-                      showCohort=true
-                      onScheduleContentToDCA='onScheduleContentToDCA'
-                      onOpenPerformanceEntry="onOpenPerformanceEntry"
-                      onPreviewContent="onPreviewContent"
-                      onUpdateMasteryAccrual="onUpdateMasteryAccrual"
-                      showMasteryAccrual=showMasteryAccrual
-                    }}
-                  {{/each}}
-                </div>
+        <div class="right-panel-content panel-group" id="right-toggle">
+          <div class="panel panel-default doa-content-container">
+            <div class="doa-header-panel collapsed" data-parent="#right-toggle" data-toggle="collapse" data-target="#panels">
+              <p>{{t 'common.plan'}}</p>
+              <i class="offline-icon"></i>
+              <div class="icons">
+                {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
               </div>
             </div>
-            <div class="oa-completed-container">
-              <div class="oa-completed-header" data-toggle="collapse" data-target="#completed">
-                <span>{{t 'common.completed'}}</span>
-                <div class="icons">
-                  {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
-                  {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+            <div class="panel-group" id="panels">
+              <div class="panel panel-default doa-active-container">
+                <div class="doa-active-header collapsed" data-parent="#panels" data-toggle="collapse" data-target="#active">
+                  <span>{{t 'teacher-landing.class.class-settings.student-settings-sec.col-head-active'}}</span>
+                  <div class="icons">
+                    {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                    {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+                  </div>
+                </div>
+                <div class="doa-active-items panel-collapse collapse in" id="active">
+                  <div class="doa-active-list">
+                    {{#each activeOfflineActivities as |offlineActivity|}}
+                      {{class.gru-class-activity-panel
+                        classActivity=offlineActivity
+                        classId=classId
+                        class=class
+                        members=members
+                        classActivities=classActivities
+                        onReportclick='changeStatusValue'
+                        onGoLive='goLive'
+                        showDcaAssignButton=true
+                        isOfflineActivity=true
+                        completeActivity='onCompleteActivity'
+                        showDcaAddButton=false
+                        onChangeVisibility='changeVisibility'
+                        onRemoveClassActivity='removeClassActivity'
+                        openDcaContentReport='openDcaContentReport'
+                        activityDate=offlineActivity.added_date
+                        showCohort=true
+                        onScheduleContentToDCA='onScheduleContentToDCA'
+                        onOpenPerformanceEntry="onOpenPerformanceEntry"
+                        onPreviewContent="onPreviewContent"
+                        onUpdateMasteryAccrual="onUpdateMasteryAccrual"
+                        showMasteryAccrual=showMasteryAccrual
+                      }}
+                    {{else}}
+                      <div class="no-active-content">
+                        {{t 'offline-activities.no-active-content'}}
+                      </div>
+                    {{/each}}
+                  </div>
                 </div>
               </div>
-              <div class="oa-completed-items collapse" id="completed">
-                {{#each completedOfflineActivities as |offlineActivity|}}
-                  {{class.gru-class-activity-panel
+              <div class="oa-completed-container panel panel-default">
+                <div class="oa-completed-header collapsed" data-toggle="collapse" data-parent="#panels" data-target="#completed">
+                  <span>{{t 'common.completed'}}</span>
+                  <div class="icons">
+                    {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                    {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+                  </div>
+                </div>
+                <div class="oa-completed-items panel-collapse collapse" id="completed">
+                  <div class="oa-completed-list">
+                    {{#each completedOfflineActivities as |offlineActivity|}}
+                      {{class.gru-class-activity-panel
                       classActivity=offlineActivity
                       classId=classId
                       class=class
@@ -207,12 +220,18 @@
                       onUpdateMasteryAccrual="onUpdateMasteryAccrual"
                       showMasteryAccrual=showMasteryAccrual
                     }}
-                {{/each}}
+                    {{else}}
+                      <div class="no-completed-content">
+                        {{t 'offline-activities.no-completed-content'}}
+                      </div>
+                    {{/each}}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="ca-grade-items-list-container">
-            <div class="ca-grade-items-header" data-toggle="collapse" data-target="#grade">
+          <div class="ca-grade-items-list-container panel panel-default">
+            <div class="ca-grade-items-header collapsed" data-toggle="collapse" data-parent="#right-toggle" data-target="#grade">
               <span>{{t 'class.analytics.performance.grade-items'}}</span>
               <div class="icons">
                 {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}

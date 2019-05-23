@@ -1029,6 +1029,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       .then(() => {
         let activeOfflineActivities = controller.get('activeOfflineActivities');
         let completedOfflineActivities = controller.get('completedOfflineActivities');
+        activity.set('isCompleted', true);
         activeOfflineActivities.removeObject(activity);
         completedOfflineActivities.pushObject(activity);
       });
