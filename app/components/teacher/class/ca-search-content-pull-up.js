@@ -6,7 +6,9 @@ import {
 } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import { isCompatibleVW } from 'gooru-web/utils/utils';
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 export default Ember.Component.extend(ConfigurationMixin, {
@@ -276,9 +278,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
   isClassPreferenceMapped: Ember.computed('classPreference', function() {
     let component = this;
     let classPreference = component.get('classPreference');
-    return classPreference
-      ? classPreference.subject && classPreference.framework
-      : false;
+    return classPreference ?
+      classPreference.subject && classPreference.framework :
+      false;
   }),
 
   /**
@@ -434,7 +436,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
         component.get('selectedContentForSchedule.format') ||
         component.get('activeContentType');
       let contentId = component.get('selectedContentForSchedule.id');
-      let content = component.get('selectedContentForSchedule');
       let datepickerEle = component.$('.schedule-ca-datepicker-container');
       datepickerEle.hide();
       component
@@ -447,22 +448,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
           forMonth,
           forYear
         )
-        .then(newContentId => {
+        .then(() => {
           if (!component.isDestroyed) {
-            let data = component.serializerSearchContent(
-              content,
-              newContentId,
-              null,
-              forMonth,
-              forYear
-            );
-            component.sendAction(
-              'addedContentToDCA',
-              data,
-              null,
-              forMonth,
-              forYear
-            );
+            component.sendAction('refreshUnScheduleItem', forMonth, forYear);
           }
         });
     },
@@ -590,11 +578,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   openPullUp() {
     let component = this;
-    component.$().animate(
-      {
-        top: '10%'
-      },
-      400
+    component.$().animate({
+      top: '10%'
+    },
+    400
     );
   },
 
@@ -635,7 +622,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
       .hash({
         searchResults: component.getSearchService()
       })
-      .then(({ searchResults }) => {
+      .then(({
+        searchResults
+      }) => {
         if (!component.isDestroyed) {
           component.set('isLoading', false);
           component.set('searchResults', searchResults);
@@ -660,7 +649,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
       .hash({
         searchResults: component.getSearchService()
       })
-      .then(({ searchResults }) => {
+      .then(({
+        searchResults
+      }) => {
         if (!component.isDestroyed) {
           component.set('isLoading', false);
           let searchResult = component.get('searchResults');

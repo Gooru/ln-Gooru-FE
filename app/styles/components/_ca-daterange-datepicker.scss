@@ -1,0 +1,35 @@
+.ca-daterange-picker {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: 100%;
+  background-color: #fff;
+  padding: 10px;
+
+  .months {
+    padding-bottom: 10px;
+  }
+
+  .datepickers {
+    display: grid;
+    grid-gap: 10px;
+    width: 100%;
+    background-color: #fff;
+
+    &.offline {
+      grid-template-columns: auto auto;
+    }
+
+    .end-date,
+    .start-date {
+      span {
+        height: 30px;
+        text-align: center;
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        color: #3e5e67;
+      }
+    }
+  }
+}
