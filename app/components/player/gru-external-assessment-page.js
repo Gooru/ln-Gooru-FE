@@ -1,11 +1,10 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import {CONTENT_TYPES, PLAYER_EVENT_SOURCE} from 'gooru-web/config/config';
-import {validatePercentage, generateUUID} from 'gooru-web/utils/utils';
+import { CONTENT_TYPES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import { validatePercentage, generateUUID } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['gru-external-assessment-page'],
@@ -125,6 +124,10 @@ export default Ember.Component.extend({
    */
   score: '',
 
+  /**
+   * @property {Object} dataParams
+   */
+  dataParams: null,
 
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags
@@ -157,7 +160,10 @@ export default Ember.Component.extend({
       } else {
         let fractionScore = component.$('#fraction-score').val();
         let fractionMaxScore = component.$('#fraction-max-score').val();
-        component.set('isValidScore', component.validateFractionScore(fractionScore, fractionMaxScore));
+        component.set(
+          'isValidScore',
+          component.validateFractionScore(fractionScore, fractionMaxScore)
+        );
       }
       component.set('isTyping', true);
     });
@@ -194,8 +200,10 @@ export default Ember.Component.extend({
       content_source: component.get('source') || null,
       path_id: context.get('pathId') || 0,
       path_type: context.get('pathType') || null,
-      time_spent: component.roundMilliseconds(component.get('stopTime') - component.get('startTime')),
-      evidence: [{TBD: 'True'}]
+      time_spent: component.roundMilliseconds(
+        component.get('stopTime') - component.get('startTime')
+      ),
+      evidence: [{ TBD: 'True' }]
     };
     return dataParams;
   },
@@ -210,16 +218,17 @@ export default Ember.Component.extend({
     let dataParams = component.getDataParams();
     let selfReportedPromise = analyticsService.studentSelfReporting(dataParams);
     component.set('score', '');
-    Ember.RSVP.hash({
-      selfReport: selfReportedPromise
-    })
+    Ember.RSVP
+      .hash({
+        selfReport: selfReportedPromise
+      })
       .then(function() {
         component.set('score', component.getEnteredScore(dataParams));
+        component.set('dataParams', dataParams);
       })
       .catch(function() {
         component.set('score', null);
       });
-
   },
 
   /**
@@ -228,7 +237,7 @@ export default Ember.Component.extend({
    */
   validateFractionScore(score, maxScore) {
     let isValidFractionScore = false;
-    if (!(isNaN(score)) && !(isNaN(maxScore))) {
+    if (!isNaN(score) && !isNaN(maxScore)) {
       let isIntegerTypeScore = score.indexOf('.');
       let isIntegerTypeMaxScore = maxScore.indexOf('.');
       score = parseFloat(score);
@@ -236,8 +245,14 @@ export default Ember.Component.extend({
       let isPositiveScore = score >= 0;
       let isNotExceedsLimit = maxScore >= 1 && maxScore <= 100;
       let isValidScore = score <= maxScore;
-      let isIntegerNumber = isIntegerTypeScore === -1 && isIntegerTypeMaxScore === -1;
-      if (isValidScore && isNotExceedsLimit && isPositiveScore && isIntegerNumber) {
+      let isIntegerNumber =
+        isIntegerTypeScore === -1 && isIntegerTypeMaxScore === -1;
+      if (
+        isValidScore &&
+        isNotExceedsLimit &&
+        isPositiveScore &&
+        isIntegerNumber
+      ) {
         isValidFractionScore = true;
       }
     }
@@ -263,7 +278,7 @@ export default Ember.Component.extend({
     if (defaultScoreType === 'percentage') {
       score = `${dataParams.percent_score}%`;
     } else {
-      score =  `${dataParams.score} of ${dataParams.max_score}`;
+      score = `${dataParams.score} of ${dataParams.max_score}`;
     }
     return score;
   },
@@ -278,7 +293,7 @@ export default Ember.Component.extend({
     component.set('score', '');
     component.set('isScoreEntered', false);
     component.set('defaultScoreType', 'percentage');
-    component.set('isDisableScoreEditor',true);
+    component.set('isDisableScoreEditor', true);
     component.set('isValidScore', false);
     component.set('startTime', 0);
     component.set('stopTime', 0);
@@ -293,30 +308,32 @@ export default Ember.Component.extend({
     let context = component.get('mapLocation.context');
     let source = component.get('source');
     if (context.get('classId') && source === PLAYER_EVENT_SOURCE.COURSE_MAP) {
-      component.get('router').transitionTo(
-        'student.class.course-map',
-        context.get('classId'),
-        {
+      component
+        .get('router')
+        .transitionTo('student.class.course-map', context.get('classId'), {
           queryParams: {
             refresh: true
           }
-        }
-      );
-    } else if (context.get('classId') && source === PLAYER_EVENT_SOURCE.DAILY_CLASS) {
-      component.get('router').transitionTo(
-        'student.class.class-activities',
-        context.get('classId')
-      );
+        });
+    } else if (
+      context.get('classId') &&
+      source === PLAYER_EVENT_SOURCE.DAILY_CLASS
+    ) {
+      component
+        .get('router')
+        .transitionTo('student.class.class-activities', context.get('classId'));
     } else {
-      component.get('router').transitionTo(
-        'student.independent.course-map',
-        context.get('courseId'),
-        {
-          queryParams: {
-            refresh: true
+      component
+        .get('router')
+        .transitionTo(
+          'student.independent.course-map',
+          context.get('courseId'),
+          {
+            queryParams: {
+              refresh: true
+            }
           }
-        }
-      );
+        );
     }
   }
 });
