@@ -5,35 +5,39 @@
         {{three-bounce-spinner}}
       </div>
       <div class="left-panel-container">
-        <div class="dca-content-container">
-          <div class="ca-schedule-items-header">
-            <div class="ca-add-content">
-              <div class="ca-contents-button">
-                <p>{{t 'common.plan-an-activities'}}</p>
-                <i class="collection-icon" {{action 'onAddDca' 'collection'}}></i>
-                <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
-              </div>
-              <div class="ca-date-section">
-                <div class="date-picker-action">
-                  <span class="label">
-                    {{#if isToday}}
-                      {{t "student-landing.class.class-activities-tab.today"}}
-                    {{else}}
-                      {{format-date selectedDate 'DD MMM, YY'}}
-                    {{/if}}
-                  </span>
-                  <div class="icons {{if isActive 'open'}}" {{action 'toggleDatePicker'}}>
-                    {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
-                    {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+        <div class="left-panel-header">
+          <span class="title">{{t 'student-landing.class.class-activities'}}</span>
+        </div>
+        <div class="left-panel-content">
+          <div class="dca-content-container">
+            <div class="ca-schedule-items-header">
+              <div class="ca-add-content">
+                <div class="ca-contents-button">
+                  <p>{{t 'common.plan-an-activities'}}</p>
+                  <i class="collection-icon" {{action 'onAddDca' 'collection'}}></i>
+                  <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
+                </div>
+                <div class="ca-date-section">
+                  <div class="date-picker-action">
+                    <span class="label">
+                      {{#if isToday}}
+                        {{t "student-landing.class.class-activities-tab.today"}}
+                      {{else}}
+                        {{format-date selectedDate 'DD MMM, YY'}}
+                      {{/if}}
+                    </span>
+                    <div class="icons {{if isActive 'open'}}" {{action 'toggleDatePicker'}}>
+                      {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                      {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="ca-date-selector {{if isActive 'open'}}">
-              {{#if isActive}}
-                <div class="backdrop" {{action 'toggleDatePicker'}}></div>
-              {{/if}}
-              {{ca-date-picker
+              <div class="ca-date-selector {{if isActive 'open'}}">
+                {{#if isActive}}
+                  <div class="backdrop" {{action 'toggleDatePicker'}}></div>
+                {{/if}}
+                {{ca-date-picker
                 showToday=true
                 forMonth=forMonth
                 allowDateSelectorToggle=false
@@ -43,30 +47,19 @@
                 showNextMonth="showNextMonth"
                 onSelectDate="onSelectDate"
                 highlightFirstDayOfMonth=true
-                onSelectToday="onSelectDate"
+                onSelectToday="onSelectToday"
                 activities=scheduledClassActivitiesDatewise
                 highlightActivities=true
               }}
+              </div>
             </div>
-          </div>
-          {{#if showClassActivities}}
-            <div class="ca-schedule-section">
-              <div class="dca-list-container">
-                {{#each scheduledClassActivities as |classActivity|}}
-                  <div class="dca-date-view-container dca-date-view-container-{{format-date classActivity.added_date 'YYYY-MM-DD'}}">
-                    <div class="dca-date-container {{if (eq today classActivity.added_date) 'dca-date-container-today'}}">
-                      {{#if (eq today classActivity.added_date)}}
-                        <span>{{t 'student-landing.class.class-activities-tab.today'}}</span>
-                      {{else}}
-                        {{gru-icon name="calendar_today"}}
-                        <span>{{format-date classActivity.added_date 'MMMM DD, YYYY'}}</span>
-                      {{/if}}
-                    </div>
-                    <hr />
-                  </div>
-                  <div class="dca-content-list-container {{if (eq today classActivity.added_date) 'dca-content-list-container-today'}}">
-                    {{#each classActivity.classActivities as |activity|}}
-                      {{class.gru-class-activity-panel
+            {{#if showClassActivities}}
+              <div class="ca-schedule-section">
+                <div class="dca-list-container">
+                  {{#each scheduledClassActivities as |classActivity|}}
+                    <div class="dca-content-list-container {{if (eq today classActivity.added_date) 'dca-content-list-container-today'}}">
+                      {{#each classActivity.classActivities as |activity|}}
+                        {{class.gru-class-activity-panel
                     classActivity=activity
                     classId=classId
                     class=class
@@ -87,28 +80,28 @@
                     onUpdateMasteryAccrual="onUpdateMasteryAccrual"
                     showMasteryAccrual=showMasteryAccrual
                   }}
-                    {{else}}
-                      <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
-                    {{/each}}
-                  </div>
-                {{/each}}
+                      {{else}}
+                        <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
+                      {{/each}}
+                    </div>
+                  {{/each}}
+                </div>
+              </div>
+            {{else}}
+              <div class="no-content">{{t "common.no-dca-teacher"}}</div>
+            {{/if}}
+          </div>
+          <div class="ca-unschedule-items-list-container hidden-xs hidden-sm`">
+            <div class="ca-unschedule-items-header" data-toggle="collapse" data-target="#unschedule">
+              <span>{{t 'common.unscheduled-items'}} ({{unScheduledClassActivities.length}})</span>
+              <div class="icons">
+                {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
               </div>
             </div>
-          {{else}}
-            <div class="no-content">{{t "common.no-dca-teacher"}}</div>
-          {{/if}}
-        </div>
-        <div class="ca-unschedule-items-list-container hidden-xs hidden-sm`">
-          <div class="ca-unschedule-items-header" data-toggle="collapse" data-target="#unschedule">
-            <span>{{t 'common.unscheduled-items'}} ({{unScheduledClassActivities.length}})</span>
-            <div class="icons">
-              {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
-              {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
-            </div>
-          </div>
-          <div class="ca-unscheduled-content-items collapse" id="unschedule">
-            {{#each unScheduledClassActivities as |classActivity|}}
-              {{class.gru-class-activity-panel
+            <div class="ca-unscheduled-content-items collapse" id="unschedule">
+              {{#each unScheduledClassActivities as |classActivity|}}
+                {{class.gru-class-activity-panel
               classActivity=classActivity
               classId=classId
               members=members
@@ -126,46 +119,128 @@
               isUnScheduled=true
               onPreviewContent="onPreviewContent"
             }}
-            {{else}}
-              <div class="ca-unscheduled-no-content-items">
-                {{t 'common.no-unschedule-items'}} {{format-date forFirstDateOfMonth 'MMMM YYYY'}}.
-              </div>
-            {{/each}}
+              {{else}}
+                <div class="ca-unscheduled-no-content-items">
+                  {{t 'common.no-unschedule-items'}} {{format-date forFirstDateOfMonth 'MMMM YYYY'}}.
+                </div>
+              {{/each}}
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="ca-right-panel">
-      <div class="ca-offline-activities-list-container">
-        <div class="ca-offline-activities-header" data-toggle="collapse" data-target="#offline-activitiy">
-          <span>{{t 'common.offline-activites'}}</span>
-          <div class="icons">
-            {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
-            {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+      <div class="right-panel-container">
+        <div class="right-panel-header">
+          <span class="title">{{t 'common.offline-activites'}}</span>
+        </div>
+        <div class="right-panel-content">
+          <div class="doa-content-container">
+            <div class="doa-active-container">
+              <div class="doa-active-header" data-toggle="collapse" data-target="#active">
+                <span>{{t 'teacher-landing.class.class-settings.student-settings-sec.col-head-active'}}</span>
+                <div class="icons">
+                  {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                  {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+                </div>
+              </div>
+              <div class="doa-active-items collapse in" id="active">
+                <div class="doa-active-list">
+                  {{#each activeOfflineActivities as |offlineActivity|}}
+                    {{class.gru-class-activity-panel
+                      classActivity=offlineActivity
+                      classId=classId
+                      class=class
+                      members=members
+                      classActivities=classActivities
+                      onReportclick='changeStatusValue'
+                      onGoLive='goLive'
+                      showDcaAssignButton=true
+                      isOfflineActivity=true
+                      completeActivity='onCompleteActivity'
+                      showDcaAddButton=false
+                      onChangeVisibility='changeVisibility'
+                      onRemoveClassActivity='removeClassActivity'
+                      openDcaContentReport='openDcaContentReport'
+                      activityDate=offlineActivity.added_date
+                      showCohort=true
+                      onScheduleContentToDCA='onScheduleContentToDCA'
+                      onOpenPerformanceEntry="onOpenPerformanceEntry"
+                      onPreviewContent="onPreviewContent"
+                      onUpdateMasteryAccrual="onUpdateMasteryAccrual"
+                      showMasteryAccrual=showMasteryAccrual
+                    }}
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+            <div class="oa-completed-container">
+              <div class="oa-completed-header" data-toggle="collapse" data-target="#completed">
+                <span>{{t 'common.completed'}}</span>
+                <div class="icons">
+                  {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                  {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+                </div>
+              </div>
+              <div class="oa-completed-items collapse" id="completed">
+                {{#each completedOfflineActivities as |offlineActivity|}}
+                  {{class.gru-class-activity-panel
+                      classActivity=offlineActivity
+                      classId=classId
+                      class=class
+                      members=members
+                      classActivities=classActivities
+                      onReportclick='changeStatusValue'
+                      onGoLive='goLive'
+                      showDcaAssignButton=true
+                      isOfflineActivity=true
+                      completeActivity='onCompleteActivity'
+                      showDcaAddButton=false
+                      onChangeVisibility='changeVisibility'
+                      onRemoveClassActivity='removeClassActivity'
+                      openDcaContentReport='openDcaContentReport'
+                      activityDate=offlineActivity.added_date
+                      showCohort=true
+                      onScheduleContentToDCA='onScheduleContentToDCA'
+                      onOpenPerformanceEntry="onOpenPerformanceEntry"
+                      onPreviewContent="onPreviewContent"
+                      onUpdateMasteryAccrual="onUpdateMasteryAccrual"
+                      showMasteryAccrual=showMasteryAccrual
+                    }}
+                {{/each}}
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="ca-grade-content-items collapse" id="offline-activitiy">
-        </div>
-      </div>
-      <div class="ca-grade-items-list-container">
-        <div class="ca-grade-items-header" data-toggle="collapse" data-target="#grade">
-          <span>{{t 'class.analytics.performance.grade-items'}}</span>
-          <div class="icons">
-            {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
-            {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+          <div class="ca-grade-items-list-container">
+            <div class="ca-grade-items-header" data-toggle="collapse" data-target="#grade">
+              <span>{{t 'class.analytics.performance.grade-items'}}</span>
+              <div class="icons">
+                {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+              </div>
+            </div>
+            <div class="ca-grade-content-items collapse" id="grade">
+              {{#if itemsToGrade}}
+                {{gru-grade-items contextSource=contextSource questionItems=itemsToGrade}}
+              {{else}}
+                <div class="no-rubric-content">
+                  {{t 'common.all-caught-up'}}
+                </div>
+              {{/if}}
+            </div>
           </div>
-        </div>
-        <div class="ca-grade-content-items collapse" id="grade">
-          {{#if itemsToGrade}}
-            {{gru-grade-items contextSource=contextSource questionItems=itemsToGrade}}
-          {{/if}}
         </div>
       </div>
     </div>
   </div>
-  <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
-    {{ca-date-picker userStartDateAsToday=true onSelectDate='onScheduleDate'  showMonths=true onSelectMonth='onScheduleForMonth'}}
-  </div>
+  {{#if showDatePicker}}
+    <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
+      {{ca-daterange-datepicker
+      onScheduleForDate='onScheduleForDate'
+      onScheduleForMonth='onScheduleForMonth'
+      contentType=selectedClassActivityForSchedule.contentType}}
+    </div>
+  {{/if}}
 </div>
 {{#if unScheduledClassActivities}}
   {{teacher.class.ca-unscheduled-items-pullup
@@ -183,6 +258,7 @@
   {{teacher.class.ca-search-content-pull-up
     showPullUp=showSearchContentPullup
     addedContentToDCA="addedContentToDCA"
+    refreshUnScheduleItem="onRefreshUnScheduleItem"
     context=contextParams
     selectedSearchContentType=selectedSearchContentType
     todaysClassActivities=todaysClassActivities.classActivities

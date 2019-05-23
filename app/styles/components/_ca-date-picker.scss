@@ -1,5 +1,6 @@
 .ca-date-picker-container {
   box-shadow: 0 4px 40px 0 rgba(0, 0, 0, 0.13);
+  background-color: #fff;
 
   .ca-date-nav-container {
     width: 100%;
@@ -88,6 +89,11 @@
     }
 
     #ca-datepicker {
+      &.disable {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+
       .datepicker {
         width: 100%;
 
@@ -161,44 +167,6 @@
 
           tr td.old {
             visibility: hidden;
-          }
-        }
-      }
-    }
-
-    #ca-month-picker {
-      padding-left: 10px;
-      padding-right: 10px;
-
-      .ca-month-picker-title {
-        font-weight: bold;
-        padding-bottom: 3px;
-        display: inline-block;
-        text-align: center;
-        width: 100%;
-        padding-top: 3px;
-      }
-
-      .ca-months {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        justify-content: center;
-        width: 100%;
-        align-items: center;
-        justify-items: center;
-
-        span {
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          cursor: pointer;
-          width: 70px;
-          display: inline-block;
-          text-align: center;
-
-          &.past-month {
-            pointer-events: none;
-            cursor: default;
-            opacity: 0.8;
           }
         }
       }
