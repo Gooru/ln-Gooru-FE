@@ -64,6 +64,7 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
       let controller = this.get('controller');
       let contextId = controller.get('contextResult.contextId');
       let classId = controller.get('classId');
+      let milestoneId = controller.get('milestoneId');
       let queryParams = {
         courseId: controller.get('course.id'),
         collectionId: controller.get('collection.id'),
@@ -79,6 +80,11 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
       if (classId) {
         queryParams.classId = classId;
       }
+
+      if (milestoneId) {
+        queryParams.milestoneId = milestoneId;
+      }
+
       /**@description { next calls moves from on finish and goes into report next }
        * @see study-student-collection > next
        */
@@ -130,13 +136,19 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
     if (params.isNotification) {
       route.setStudyPlayerForTeacherNotifications(params);
     }
-    if (params.type === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
+    if (
+      params.type === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||
+      params.type === CONTENT_TYPES.EXTERNAL_COLLECTION
+    ) {
       let queryParams = {
         role: params.role,
         type: params.type,
         sourceId: params.sourceId,
         classId: params.classId,
         courseId: params.courseId,
+        unitId: params.unitId,
+        lessonId: params.lessonId,
+        milestoneId: params.milestoneId,
         collectionId: params.collectionId,
         source: params.source
       };
@@ -150,6 +162,7 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
         .then(function(mapLocation) {
           const courseId = mapLocation.get('context.courseId');
           const unitId = mapLocation.get('context.unitId');
+          const milestoneId = mapLocation.get('context.milestoneId');
           const lessonId = mapLocation.get('context.lessonId');
 
           const collectionId =
@@ -231,7 +244,8 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
                 params.type,
                 params.classId,
                 +params.pathId,
-                params.pathType
+                params.pathType,
+                milestoneId
               );
           }
 

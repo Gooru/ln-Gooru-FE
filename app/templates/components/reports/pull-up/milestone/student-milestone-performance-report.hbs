@@ -1,0 +1,44 @@
+<div class="student-milestones-performance-container">
+  <div class="header-container">
+    {{charts.score-fill-gauge-chart
+      scoreInPercentage = courseScoreInPercentage
+    }}
+  </div>
+  <div class="body-container">
+    {{#each milestones as |milestone seq|}}
+      <div class="student-milestone-container {{if (and milestone.isRescopedMilestone (not milestone.performance)) 'hidden'}}" {{action "onSelectMilestone" milestone seq}}>
+        <div class="student-milestone-info-container">
+          <div class="milestone-icon-container">
+            {{gru-icon name="flag"}}
+          </div>
+          <div class="milestone-title-container">
+            {{gradeSubject.title}} - {{milestone.grade_name}}
+          </div>
+        </div>
+        <div class="student-milesont-performance-container grade-range-{{grade-range milestone.performance.scoreInPercentage}}">
+          {{#if (gte milestone.performance.scoreInPercentage 0)}}
+            {{milestone.performance.scoreInPercentage}}%
+          {{else}}
+            --
+          {{/if}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+{{#if isShowMilestoneReport}}
+  {{#reports.pull-up.milestone.milestone-report
+    showPullUp = isShowMilestoneReport
+    title = (concat gradeSubject.title ' - ' selectedMilestone.grade_name)
+  }}
+    {{reports.pull-up.milestone.student-milestone-summary-report
+      activeMilestone = selectedMilestone
+      class = class
+      milestones = milestones
+      activeMilestoneIndex = activeMilestoneIndex
+      userId = userId
+      gradeSubject = gradeSubject
+    }}
+  {{/reports.pull-up.milestone.milestone-report}}
+{{/if}}

@@ -252,6 +252,70 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * @function overwriteCollectionPerformance
+   * Method to overwrite collection performance data
+   */
+  overwriteCollectionPerformance(performanceData) {
+    const adapter = this;
+    const namespace = adapter.get('insightsNamespace');
+    const url = `${namespace}/perf-update`;
+    const options = {
+      type: 'PUT',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      data: JSON.stringify(performanceData)
+    };
+    return Ember.RSVP.hashSettled({
+      overwritedPerformance: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.overwritedPerformance;
+    });
+  },
+
+  /**
+   * @function getPerformanceForUnits
+   * Get units Performance Data for route0
+   */
+  getPerformanceForUnits(classId, courseId, collectionType, userUid) {
+    const adapter = this;
+    const namespace = adapter.get('insightsNamespace');
+    const url = `${namespace}/class/${classId}/course/${courseId}/performance`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: {
+        collectionType,
+        userUid
+      }
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * @function getPerformanceForLessons
+   * Get lessons Performance Data for route0
+   */
+  getPerformanceForLessons(classId, courseId, unitId, collectionType, userUid) {
+    const adapter = this;
+    const namespace = adapter.get('insightsNamespace');
+    const url = `${namespace}/class/${classId}/course/${courseId}/unit/${unitId}/performance`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: {
+        collectionType,
+        userUid
+      }
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

@@ -54,30 +54,26 @@ export default Ember.Component.extend({
   openPullUp() {
     let component = this;
     if (!component.get('isExpanded')) {
-      component.$().animate(
-        {
-          top: '10%'
-        },
-        400,
-        function() {
-          component.set('isExpanded', true);
-        }
-      );
+      component.$().animate({
+        top: '10%'
+      },
+      400,
+      function() {
+        component.set('isExpanded', true);
+      });
     }
   },
 
   closePullUp() {
     let component = this;
-    component.$().animate(
-      {
-        top: '90%'
-      },
-      400,
-      function() {
-        component.$().css('top', 'calc(100% - 70px)');
-        component.set('isExpanded', false);
-      }
-    );
+    component.$().animate({
+      top: '90%'
+    },
+    400,
+    function() {
+      component.$().css('top', 'calc(100% - 70px)');
+      component.set('isExpanded', false);
+    });
   },
 
   didInsertElement() {
@@ -96,10 +92,5 @@ export default Ember.Component.extend({
   /**
    * @property {JSON} activeGrade
    */
-  grade: null,
-
-  /**
-   * @property {Boolean} isRoute0
-   */
-  isRoute0: false
+  grade: null
 });

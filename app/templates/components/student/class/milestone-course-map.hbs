@@ -1,0 +1,205 @@
+<div class="milestone-course-map-container">
+  {{#if showToggleButtonToViewFullCourse}}
+    <div class="ms-rescope-content-preview">
+      <div class="show-completed-course">
+        {{t 'class.overview.course-map.rescope-toggle'}}
+      </div>
+      <div class="show-completed-course-btn">
+        {{gru-toggle-button
+        isChecked=showAllRescopedContent
+        onToggleButton="onToggleRescope" }}
+      </div>
+    </div>
+  {{/if}}
+  {{#each milestones as | milestone milestoneIndex | }}
+    <div class="milestone-course-map {{if milestone.isClassGrade 'class-grade'}}">
+      <div class="milestone-course-map-panel  {{if milestone.isActive 'active'}}">
+        <div class="milestone-info-container" {{action 'toggleMilestoneItems' milestone }}>
+          <div class="milestone-flag-icon">
+            {{gru-icon name="flag"}}
+          </div>
+          <div class="milestone-title">
+            <p> {{gradeSubject.title}} - {{milestone.grade_name}}
+              {{#if (gte milestone.performance.completedInPrecentage 0) }} ({{milestone.performance.completedInPrecentage}}% Completed) {{/if}}
+            </p>
+          </div>
+          <div class="milestone-caret">
+            {{#if milestone.isActive}}
+              {{gru-icon name="arrow_drop_up"}}
+            {{else}}
+              {{gru-icon name="arrow_drop_down"}}
+            {{/if}}
+          </div>
+        </div>
+        {{#if showPerformance}}
+          <div class="milestone-peformance grade-range-{{grade-range milestone.performance.scoreInPercentage}}" {{action "onShowMilestoneReport" milestone}}>
+            {{#if (gte milestone.performance.scoreInPercentage 0)}}
+              {{milestone.performance.scoreInPercentage}}%
+            {{else}}
+              --
+            {{/if}}
+          </div>
+        {{/if}}
+      </div>
+      <div class="milestone-course-map-lesson-container" id="milestone-{{milestone.milestone_id}}">
+        {{#if milestone.hasLessonFetched}}
+          {{#if milestone.lessons}}
+            {{#each milestone.lessons as | lesson lessonIndex |}}
+              <div class="milestone-course-map-lesson {{if milestoneHasClassGrade 'class-grade-milestone'}} {{if showAllRescopedContent 'show-all-rescoped-content'}} {{if lesson.rescope 'rescope'}} {{if lesson.isNextActive 'next-active'}} {{if lesson.isPrevActive 'prev-active'}} {{if lesson.isActive 'active'}}">
+                <div class="milestone-course-map-lesson-panel first-path-{{lesson.firstCollHasSuggsType}} prev-col-path-{{lesson.prevLeCollHasSuggsType}}  {{if lesson.has-activity 'has-activity'}}" {{action 'toggleLessonItems'milestone milestone.lessons lesson lessonIndex}}>
+                  <div class="lesson-icon-container">
+                    <div class="lesson-icon-upward-line">
+                      <svg height="35" width="20">
+                        <line x1="0" y1="0" x2="0" y2="35" />
+                        <path class="path-right" d="M 0 0  t 8 17 -5 60"  />
+                        <path class="path-left" d="M 15 0  t -8 17 5 60" />
+                      </svg>
+                    </div>
+                    <i class="lesson-icon"></i>
+                  </div>
+                  <div class="domain-lesson-title">
+                    <p class="domain-name">{{lesson.tx_domain_name}}</p>
+                    <p>{{lesson.lesson_title}}</p>
+                  </div>
+
+                  {{#if showPerformance}}
+                    <div class="lesson-peformance grade-range-{{grade-range lesson.performance.scoreInPercentage}}">
+                      {{#if (gte lesson.performance.scoreInPercentage 0)}}
+                        {{lesson.performance.scoreInPercentage}}%
+                      {{else}}
+                        --
+                      {{/if}}
+                    </div>
+                  {{/if}}
+                </div>
+                <div class="milestone-course-map-collection-container" id="milestone-lesson-{{milestone.milestone_id}}-{{lesson.lesson_id}}-{{lessonIndex}}">
+                  {{#if lesson.hasCollectionFetched}}
+                    {{#if lesson.collections}}
+                      {{#each lesson.collections as | collection |}}
+                        <div class="milestone-course-map-collection  {{if showAllRescopedContent 'show-all-rescoped-content'}} {{if collection.rescope 'rescope'}}">
+                          <div class="milestone-course-map-collection-panel prev-coll-path-{{collection.prevCollHasSuggsType}} next-coll-path-{{collection.nextCollHasSuggsType}} path-{{collection.pathType}}  {{if collection.has-activity 'has-activity'}} {{if collection.last-played-collection 'last-played-collection'}}">
+                            <div class="collection-icon-container">
+                              <div class="collection-icon-upward-line">
+                                <svg height="35" width="20">
+                                      <line x1="0" y1="0" x2="0" y2="35" />
+                                      <path class="path-right" d="M 0 0  t 8 17 -5 60"  />
+                                      <path class="path-left" d="M 15 0  t -8 17 5 60" />
+                                  </svg>
+                              </div>
+                              <i class="collection-icon path-{{collection.pathType}}  format-{{collection.format}}"></i>
+                            </div>
+                            <div class="collection-title-container">
+                              <p>{{collection.title}}</p>
+                            </div>
+                            <div class="colllection-play-btn {{unless allowToPlay 'not-allowed-to-play'}}" {{action 'studyPlayer' 'collection' milestone.milestone_id lesson.unit_id lesson.lesson_id collection}}>
+                              {{gru-icon style="material-icons-outlined" name="play_circle_filled_white"}}
+                            </div>
+
+                            <div class="collection-content-counts">
+                              <div class="resource-count" title="{{t 'common.resource'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+                                {{#if (gt collection.resourceCount 0)}}
+                                  <i class="resource-icon"></i>
+                                  <span>{{collection.resourceCount}}</span>
+                                {{/if}}
+                              </div>
+                              <div class="question-count" title="{{t 'common.question'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+                                {{#if (gt collection.questionCount 0)}}
+                                  <i class="question-icon"></i>
+                                  <span>{{collection.questionCount}}</span>
+                                {{/if}}
+                              </div>
+                              {{#if (or (eq collection.format 'assessment-external') (eq collection.format 'collection-external'))}}
+                                <i class="external-icon" title="{{t 'common.assessment-external'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover"></i>
+                              {{/if}}
+                            </div>
+                            {{#if (and showPerformance collection.performance) }}
+                              <div class="collection-peformance format-{{collection.format}} grade-range-{{grade-range collection.performance.scoreInPercentage}}" {{action "onShowStudentMilestoneCollectionReport" lesson collection}}>
+                                {{#if collection.performance}}
+                                  {{#if (or (eq collection.format 'assessment') (eq collection.format 'assessment-external'))}}
+                                    {{collection.performance.scoreInPercentage}}%
+                                  {{else}}
+                                    {{format-time collection.performance.timeSpent}}
+                                  {{/if}}
+                                {{else}}
+                                  --
+                                {{/if}}
+                              </div>
+                            {{else}}
+                              <div class="collection-img-container">
+                                <img src="{{collection.thumbnailUrl}}" />
+                              </div>
+                            {{/if}}
+                          </div>
+                        </div>
+                      {{/each}}
+                    {{else}}
+                      <div class="no-collection">
+                        <span>{{t 'common.no-collection-info-message'}}</span>
+                      </div>
+                    {{/if}}
+                  {{else}}
+                    <div class="collection-load-spinner">
+                      {{#if lesson.isActive}}
+                        {{three-bounce-spinner}}
+                      {{/if}}
+                    </div>
+                  {{/if}}
+                </div>
+              </div>
+            {{/each}}
+            <div class="milestone-lessons-rescope {{if (and milestone.rescope (not showAllRescopedContent)) 'show-message' }}">{{t 'milestone-rescoped' subject=gradeSubject.title}}</div>
+          {{else}}
+            <div class="no-lesson">
+              <span>{{t 'common.no-lesson-info-message'}}</span>
+            </div>
+          {{/if}}
+        {{else}}
+          <div class="lesson-load-spinner">
+            {{#if milestone.isActive}}
+              {{three-bounce-spinner}}
+            {{/if}}
+          </div>
+        {{/if}}
+      </div>
+
+    </div>
+  {{/each}}
+</div>
+{{#if isLoading}}
+  <div class="loading-spinner">
+    {{three-bounce-spinner}}
+  </div>
+{{/if}}
+
+{{#if isShowMilestoneReport}}
+  {{#reports.pull-up.milestone.milestone-report showPullUp=isShowMilestoneReport title=( concat gradeSubject.title ' - ' selectedMilestone.grade_name) }}
+    {{reports.pull-up.milestone.student-milestone-summary-report
+      activeMilestone = selectedMilestone
+      class = class
+      milestones = milestones
+      activeMilestoneIndex = activeMilestoneIndex
+      rescopedContents = rescopedContents
+      userId = studentId
+    }}
+  {{/reports.pull-up.milestone.milestone-report}}
+{{/if}}
+
+{{#if isShowStudentCollectionReport}}
+  {{
+    class.gru-report-panel
+    showPullUp=isShowStudentCollectionReport
+    reportData=studentCollectionReportContext
+    model=studentCollectionReportContext.lesson
+    isStudent=true
+  }}
+{{/if}}
+
+{{#if isShowStudentExternalAssessmentReport}}
+  {{
+    reports.pull-up.student-external-assessment-report
+    showPullUp=isShowStudentExternalAssessmentReport
+    reportData=studentCollectionReportContext
+    showPullUp=isShowStudentExternalAssessmentReport
+    isStudent=true
+  }}
+{{/if}}

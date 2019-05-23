@@ -170,11 +170,24 @@
 
             button {
               line-height: 1;
+              font-size: 13px;
 
               .caret {
                 margin-left: 10px;
               }
               color: $gray;
+
+              &:hover {
+                background-color: #ccc;
+              }
+            }
+
+            .dropdown-menu {
+              li a {
+                &.active {
+                  background-color: #ccc;
+                }
+              }
             }
           }
         }

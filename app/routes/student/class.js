@@ -241,91 +241,97 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       let caClassPerfSummaryPromise = route
         .get('performanceService')
         .getCAPerformanceData([classId], myId);
-      return Ember.RSVP
-        .hash({
-          class: classPromise,
-          members: membersPromise,
-          classPerformanceSummaryItems: performanceSummaryPromise,
-          performanceSummaryForDCA: caClassPerfSummaryPromise
-        })
-        .then(function(hash) {
-          const aClass = hash.class;
-          const members = hash.members;
-          const classPerformanceSummaryItems =
-            hash.classPerformanceSummaryItems;
-          let classPerformanceSummary = classPerformanceSummaryItems
-            ? classPerformanceSummaryItems.findBy('classId', classId)
-            : null;
-          aClass.set('performanceSummary', classPerformanceSummary);
-          const performanceSummaryForDCA = hash.performanceSummaryForDCA
-            ? hash.performanceSummaryForDCA.objectAt(0)
-            : null;
-          aClass.set('performanceSummaryForDCA', performanceSummaryForDCA);
-          const courseId = aClass.get('courseId');
-          let visibilityPromise = Ember.RSVP.resolve([]);
-          let coursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
-          let skylineInitialStatePromise = Ember.RSVP.resolve(
-            Ember.Object.create({})
-          );
-          let isPremiumCourse = route.findClassIsPermium(aClass);
-          if (courseId) {
-            visibilityPromise = route
-              .get('classService')
-              .readClassContentVisibility(classId);
-            coursePromise = route.get('courseService').fetchById(courseId);
-            if (isPremiumCourse) {
-              skylineInitialStatePromise = route
-                .get('skylineInitialService')
-                .fetchState(classId);
-            }
+      return Ember.RSVP.hash({
+        class: classPromise,
+        members: membersPromise,
+        classPerformanceSummaryItems: performanceSummaryPromise,
+        performanceSummaryForDCA: caClassPerfSummaryPromise
+      }).then(function(hash) {
+        const aClass = hash.class;
+        const members = hash.members;
+        const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
+        let classPerformanceSummary = classPerformanceSummaryItems
+          ? classPerformanceSummaryItems.findBy('classId', classId)
+          : null;
+        aClass.set('performanceSummary', classPerformanceSummary);
+        const performanceSummaryForDCA = hash.performanceSummaryForDCA
+          ? hash.performanceSummaryForDCA.objectAt(0)
+          : null;
+        aClass.set('performanceSummaryForDCA', performanceSummaryForDCA);
+        const courseId = aClass.get('courseId');
+        let visibilityPromise = Ember.RSVP.resolve([]);
+        let coursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
+        let skylineInitialStatePromise = Ember.RSVP.resolve(
+          Ember.Object.create({})
+        );
+        let isPremiumCourse = route.findClassIsPermium(aClass);
+        if (courseId) {
+          visibilityPromise = route
+            .get('classService')
+            .readClassContentVisibility(classId);
+          coursePromise = route.get('courseService').fetchById(courseId);
+          if (isPremiumCourse) {
+            skylineInitialStatePromise = route
+              .get('skylineInitialService')
+              .fetchState(classId);
           }
-          const competencyCompletionStats = isPremiumCourse
-            ? route
-              .get('competencyService')
-              .getCompetencyCompletionStats([classId], myId)
-            : Ember.RSVP.resolve(Ember.A());
+        }
+        const competencyCompletionStats = isPremiumCourse
+          ? route
+            .get('competencyService')
+            .getCompetencyCompletionStats([classId], myId)
+          : Ember.RSVP.resolve(Ember.A());
 
-          //Pass courseId as query param for student current location
-          let locationQueryParam = {
-            courseId
-          };
-          var userLocationPromise = route
-            .get('analyticsService')
-            .getUserCurrentLocation(classId, myId, locationQueryParam);
+        //Pass courseId as query param for student current location
+        let locationQueryParam = {
+          courseId
+        };
 
-          return Ember.RSVP
-            .hash({
-              contentVisibility: visibilityPromise,
-              course: coursePromise,
-              skylineInitialState: skylineInitialStatePromise,
-              currentLocation: userLocationPromise,
-              competencyStats: competencyCompletionStats
-            })
-            .then(function(hash) {
-              const contentVisibility = hash.contentVisibility;
-              const course = hash.course;
-              var currentLocation = hash.currentLocation;
-              const skylineInitialState = hash.skylineInitialState;
-              aClass.set('owner', members.get('owner'));
-              aClass.set('collaborators', members.get('collaborators'));
-              aClass.set('members', members.get('members'));
-              aClass.set('currentLocation', currentLocation);
-              aClass.set(
-                'competencyStats',
-                hash.competencyStats.findBy('classId', classId)
-              );
-              return Ember.RSVP.hash({
-                class: aClass,
-                course: course,
-                members: members,
-                units: course.get('children') || [],
-                contentVisibility: contentVisibility,
-                currentLocation: currentLocation,
-                skylineInitialState: skylineInitialState,
-                isPremiumCourse: isPremiumCourse
-              });
-            });
+        if (
+          aClass.milestoneViewApplicable &&
+          aClass.milestoneViewApplicable === true &&
+          aClass.preference &&
+          aClass.preference.framework
+        ) {
+          locationQueryParam.fwCode = aClass.preference.framework;
+        }
+
+        var userLocationPromise = route
+          .get('analyticsService')
+          .getUserCurrentLocation(classId, myId, locationQueryParam);
+
+        return Ember.RSVP.hash({
+          contentVisibility: visibilityPromise,
+          course: coursePromise,
+          skylineInitialState: skylineInitialStatePromise,
+          currentLocation: userLocationPromise,
+          competencyStats: competencyCompletionStats
+        }).then(function(hash) {
+          const contentVisibility = hash.contentVisibility;
+          const course = hash.course;
+          var currentLocation = hash.currentLocation;
+          const skylineInitialState = hash.skylineInitialState;
+          aClass.set('owner', members.get('owner'));
+          aClass.set('collaborators', members.get('collaborators'));
+          aClass.set('members', members.get('members'));
+          aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
+          aClass.set('currentLocation', currentLocation);
+          aClass.set(
+            'competencyStats',
+            hash.competencyStats.findBy('classId', classId)
+          );
+          return Ember.RSVP.hash({
+            class: aClass,
+            course: course,
+            members: members,
+            units: course.get('children') || [],
+            contentVisibility: contentVisibility,
+            currentLocation: currentLocation,
+            skylineInitialState: skylineInitialState,
+            isPremiumCourse: isPremiumCourse
+          });
         });
+      });
     });
   },
 

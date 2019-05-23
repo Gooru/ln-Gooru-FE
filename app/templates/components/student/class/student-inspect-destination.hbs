@@ -1,6 +1,21 @@
 <div class="inspect-destination-container">
   <div class="destination-chart-container">
-    {{proficiency.student-inspect-competency-chart reDrawChart=reDrawChart skylineInitialState=skylineInitialState competencyStatus=competencyStatus isProficiency=isProficiency title=activeGrade.grade route0Contents=route0Contents isRoute0Chart=isRoute0 classId=classId courseId=courseId classGrade=classGrade subjectCode=subjectCode taxonomyGrades=taxonomyGrades activeGrade=activeGrade isRoute0Applicable=isRoute0Applicable onChartDrawComplete='onChartDrawComplete'}}
+    {{proficiency.student-inspect-competency-chart
+      reDrawChart=reDrawChart
+      skylineInitialState=skylineInitialState
+      competencyStatus=competencyStatus
+      isProficiency=isProficiency
+      title=activeGrade.grade
+      route0Contents=route0Contents
+      isRoute0Chart=isRoute0
+      classId=classId
+      courseId=courseId
+      classGrade=classGrade
+      subjectCode=subjectCode
+      taxonomyGrades=taxonomyGrades
+      activeGrade=activeGrade
+      isRoute0Applicable=isRoute0Applicable
+      onChartDrawComplete='onChartDrawComplete'}}
   </div>
   {{#if showDirections}}
     {{#if (eq type "route")}}
@@ -9,40 +24,78 @@
           <div class="pre-study-title">
             {{t "student-first-experience.preStudyTitle" title=activeGrade.grade}}
           </div>
-          <div class="route0-container">
-            <div class="route0-comment" {{action "onToggleRoute0View"}}>
-              <div class="suggestion-icon">{{gru-icon name="explore_outline"}}</div>
-              <div class="suggestion-note"> {{t 'class.overview.course-map.route0-bannerdesc'}}</div>
-            </div>
-            <div class="route0-body" style="display: none;">
-              <div class="route0-accordion-container">
-                {{class.overview.course-suggestions model=route0Contents index=index class=class course=course}}
+          <div class="route0-container {{if class.milestoneViewApplicable 'milestone'}}">
+            {{#unless class.milestoneViewApplicable}}
+              <div class="route0-comment" {{action "onToggleRoute0View"}}>
+                <div class="suggestion-icon">{{gru-icon name="explore_outline"}}</div>
+                <div class="suggestion-note"> {{t 'class.overview.course-map.route0-bannerdesc'}}</div>
               </div>
+              <div class="route0-body" style="display: none;">
+                <div class="route0-accordion-container">
+                  {{class.overview.course-suggestions
+                  model=route0Contents
+                  index=index
+                  class=class
+                  course=course}}
+                </div>
+              </div>
+              <div class="route0-action">
+                <div class="ignore" {{action "onRoute0Reject"}}>
+                  <i></i>
+                  <span>{{t 'student-first-experience.route0-action.ignore'}}</span>
+                </div>
+                <div class="accept" {{action "onRoute0Accept"}}>
+                  <i></i>
+                  <span>{{t 'student-first-experience.route0-action.accept'}}</span>
+                </div>
+              </div>
+        {{else if (and isMilestoneFetch (gt milestones.length 0))}}
+            <div class="milestone-course-map-view-route0">
+              {{student.class.milestone-course-map-route0-preview
+                   class=class
+                   route0=route0Contents
+                   course=course
+                   showChart=false
+                  }}
             </div>
+            {{/unless}}
           </div>
-          <div class="route0-action">
-            <div class="ignore" {{action "onRoute0Reject"}}>
-              <i></i>
-              <span>{{t 'student-first-experience.route0-action.ignore'}}</span>
-            </div>
-            <div class="accept" {{action "onRoute0Accept"}}>
-              <i></i>
-              <span>{{t 'student-first-experience.route0-action.accept'}}</span>
-            </div>
-          </div>
+        {{/if}}
+        {{#if (and isRoute0Accepted  isMilestoneFetch (gt milestones.length 0))}}
+          {{student.class.milestone-course-map-route0
+          showPerformance=false
+          route0=route0Contents
+          locateLastPlayedItem=false
+          class=class
+          }}
         {{/if}}
         <div class="assigned-course-title">
           {{t "student-first-experience.assigned-course-title" title=activeGrade.grade}}
         </div>
-        <div class="course-map-accordion-container {{unless (and isRoute0Pending isRoute0) 'no-route0'}}">
-          {{student.class.destination.student-destination-course-accordion
-        courseData=course
-        classId=classId
-        courseId=courseId
-        isRoute0=isRoute0
-      }}
+        <div class="course-map-accordion-container {{if class.milestoneViewApplicable 'milestone'}} {{unless (and isRoute0Pending isRoute0) 'no-route0'}}">
+          {{#if class.milestoneViewApplicable}}
+            {{#if (and isMilestoneFetch (gt milestones.length 0))}}
+              {{student.class.milestone-course-map
+              class=class
+              gradeSubject=subject
+              locateLastPlayedItem=false
+              showToggleButtonToViewFullCourse=true
+              milestones=milestones
+            }}
+            {{else if isMilestoneFetch}}
+              <div class="student-milestone-not-ready">{{t 'student-milestone-not-ready'}}</div>
+            {{/if}}
+
+          {{else}}
+            {{student.class.destination.student-destination-course-accordion
+            courseData=course
+            classId=classId
+            courseId=courseId
+            isRoute0=isRoute0
+          }}
+          {{/if}}
         </div>
-        <div class="study-course" {{action onMoveNext 'playNext'}}>
+        <div class="study-course {{if (and class.milestoneViewApplicable isMilestoneFetch (eq milestones.length 0)) 'no-milestone'}}" {{action onMoveNext 'playNext'}}>
           {{gru-icon name="near_me"}} {{t "student-first-experience.start-studying"}}
         </div>
       </div>
@@ -119,7 +172,12 @@
         onRoute0Reject="onRoute0Reject"
         route0Contents=route0Contents
         index=index
+        class=class
         classData=classData
+        isRoute0Accepted=isRoute0Accepted
+        subject=subject
+        isMilestoneFetch=isMilestoneFetch
+        milestones=milestones
       }}
       {{/unless}}
     </div>

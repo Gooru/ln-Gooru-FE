@@ -279,10 +279,10 @@ export default Ember.Controller.extend(ModalMixin, {
       if (controller.get('course.id') && controller.get('subject')) {
         let tClass = controller.get('tempClass'),
           sourcePreferenceJSON = controller.get('class.preference'),
-          preferenceJSON = {
+          preferenceJSON = Ember.Object.create({
             subject: sourcePreferenceJSON.subject,
             framework: value.code
-          };
+          });
 
         tClass.set('preference', preferenceJSON);
         controller.fetchTaxonomyGrades().then(() => {

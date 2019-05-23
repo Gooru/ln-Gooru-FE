@@ -1,7 +1,8 @@
 .charts.score-fill-gauge-chart {
   svg {
     text.score-percentage,
-    text.total-timespent {
+    text.total-timespent,
+    text.placeholder-text {
       fill: $white;
       font-weight: bold;
     }
@@ -13,12 +14,21 @@
         font-size: 60px;
       }
     }
-    text.total-timespent {
+    text.total-timespent,
+    text.placeholder-text {
       font-size: 20px;
     }
 
+    .fill-range-not-started {
+      fill: #3f4c54;
+    }
+
     &.transparent-grade-range-not-started {
-      background-color: #fff;
+      background-color: #e4e5ea;
+
+      text.placeholder-text {
+        fill: #666;
+      }
     }
 
     &.transparent-grade-range-0-59 {

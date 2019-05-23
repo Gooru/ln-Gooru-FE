@@ -5,7 +5,7 @@
     </div>
     <div class="user-info">
       <h6 class="name truncate">
-        {{#link-to 'library-search' (query-params type="my-content" profileId=user.id ) tagName="div" class="pointer"}} {{ user.displayName }} {{/link-to}}
+        {{#link-to 'profile.edit' user.id  tagName="div" class="pointer"}} {{ user.displayName }} {{/link-to}}
       </h6>
       <div class="district truncate">{{if user.schoolDistrict user.schoolDistrict user.country}}</div>
     </div>

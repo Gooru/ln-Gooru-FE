@@ -74,7 +74,7 @@ export default Ember.Controller.extend({
   isRoute0Applicable: Ember.computed('class', function() {
     let controller = this;
     let classData = controller.get('class');
-    return classData.route0Applicable;
+    return classData.get('route0Applicable');
   }),
 
   /**

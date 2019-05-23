@@ -357,7 +357,7 @@ export const COMPETENCY_STATUS = [
 
 //notifciation timer
 export const NOTIFICATION_SETTINGS = {
-  polling_interval: 10 * 60 * 1000, // milliseconds = 10 mins
+  polling_interval: 1 * 60 * 1000, // milliseconds = 10 mins
   page_size: 5
 };
 
