@@ -33,7 +33,7 @@
         </div>
         {{#if showPerformance}}
           <div class="milestone-peformance grade-range-{{grade-range milestone.performance.scoreInPercentage}}" {{action "onShowMilestoneReport" milestone}}>
-            {{#if (gte milestone.performance.scoreInPercentage 0)}}
+            {{#if milestone.performance.hasStarted}}
               {{milestone.performance.scoreInPercentage}}%
             {{else}}
               --

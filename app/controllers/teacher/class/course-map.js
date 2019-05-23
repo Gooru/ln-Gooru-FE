@@ -257,6 +257,11 @@ export default Ember.Controller.extend({
     }
   ),
 
+  /**
+   * @property {Boolean} isShowStudentMilestoneReport
+   */
+  isShowStudentMilestoneReport: false,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -384,6 +389,7 @@ export default Ember.Controller.extend({
       controller.set('isShowLessonReportPullUp', false);
       controller.set('isShowStudentReport', false);
       controller.set('isShowStudentExternalAssessmentReport', false);
+      controller.set('isShowStudentMilestoneReport', false);
     },
 
     /**
@@ -411,7 +417,11 @@ export default Ember.Controller.extend({
      */
     onOpenStudentCourseReport(student) {
       const controller = this;
-      controller.openStudentCourseReport(student.get('id'));
+      if (controller.get('class.milestoneViewApplicable')) {
+        controller.openStudentMilestoneReport(student);
+      } else {
+        controller.openStudentCourseReport(student.get('id'));
+      }
     },
 
     //Action triggered when click collection/assessment title
@@ -912,6 +922,24 @@ export default Ember.Controller.extend({
         }
       }
     }
+  },
+
+  /**
+   * @function openStudentMilestoneReport
+   * Method to bring student milestone course report
+   */
+  openStudentMilestoneReport(student) {
+    const controller = this;
+    let classData = controller.get('class');
+    let studentClassData = classData.copy(true);
+    studentClassData.set('preference', classData.get('preference'));
+    studentClassData.set(
+      'memberGradeBounds',
+      classData.get('memberGradeBounds')
+    );
+    studentClassData.set('performanceSummary', student.get('performance'));
+    controller.set('studentClassData', studentClassData);
+    controller.set('isShowStudentMilestoneReport', true);
   },
 
   openStudentCourseReport(studentId) {

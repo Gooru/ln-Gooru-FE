@@ -20,7 +20,7 @@
           </div>
         </div>
         {{#if showPerformance}}
-          <div class="milestone-peformance grade-range-{{grade-range milestone.performance.scoreInPercentage}}" {{action "onOpenMilestoneReport" milestone}}>
+          <div class="milestone-peformance {{unless milestone.performance.hasStarted 'disable-event'}} grade-range-{{grade-range milestone.performance.scoreInPercentage}}" {{action "onOpenMilestoneReport" milestone}}>
             {{#if milestone.performance.hasStarted}}
               {{milestone.performance.scoreInPercentage}}%
             {{else}}
@@ -50,7 +50,7 @@
                     <p>{{lesson.lesson_title}}</p>
                   </div>
                   {{#if showPerformance}}
-                    <div class="lesson-peformance grade-range-{{grade-range lesson.performance.scoreInPercentage}}" {{action "onOpenLessonReport" milestone lesson}}>
+                    <div class="lesson-peformance {{unless lesson.performance.hasStarted 'disable-event'}} grade-range-{{grade-range lesson.performance.scoreInPercentage}}" {{action "onOpenLessonReport" milestone lesson}}>
                       {{#if lesson.performance.hasStarted}}
                         {{lesson.performance.scoreInPercentage}}%
                       {{else}}

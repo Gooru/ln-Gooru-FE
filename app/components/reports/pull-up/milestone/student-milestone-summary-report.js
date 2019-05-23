@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { aggregateMilestonePerformanceScore } from 'gooru-web/utils/performance-data';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -38,6 +39,9 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     component.loadMilestoneReportData();
+    if (component.get('isTeacher')) {
+      component.fetchMilestones();
+    }
   },
 
   // -------------------------------------------------------------------------
@@ -94,6 +98,11 @@ export default Ember.Component.extend({
   activeMilestone: {},
 
   /**
+   * @property {Array} milestoneLessons
+   */
+  milestoneLessons: Ember.A([]),
+
+  /**
    * @property {Boolean} isMilestoneNotStarted
    */
   isMilestoneNotStarted: Ember.computed(
@@ -145,13 +154,17 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isSlideRightDisabled
    */
-  isSlideRightDisabled: Ember.computed('activeMilestoneIndex', function() {
-    const component = this;
-    return (
-      component.get('activeMilestoneIndex') ===
-      component.get('milestones.length') - 1
-    );
-  }),
+  isSlideRightDisabled: Ember.computed(
+    'activeMilestoneIndex',
+    'milestones',
+    function() {
+      const component = this;
+      return (
+        component.get('activeMilestoneIndex') ===
+        component.get('milestones.length') - 1
+      );
+    }
+  ),
 
   /**
    * @property {Array} rescopedCollectionIds
@@ -163,6 +176,16 @@ export default Ember.Component.extend({
    */
   rescopedContents: null,
 
+  /**
+   * @property {Boolean} isDisableMilestoneSlider
+   */
+  isDisableMilestoneSlider: Ember.computed.equal('milestones.length', 0),
+
+  /**
+   * @property {Boolean} isTeacher
+   */
+  isTeacher: false,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -171,20 +194,20 @@ export default Ember.Component.extend({
    */
   loadMilestoneReportData() {
     const component = this;
-    let activeMilestone = component.get('activeMilestone');
+    component.set('isLoading', true);
     let rescopedContents = component.get('rescopedContents');
     return Ember.RSVP
       .hash({
-        milestoneLessons:
-          activeMilestone.get('lessons') || component.fetchMilestoneLessons(),
+        milestoneLessons: component.fetchMilestoneLessons(),
         rescopedContents: rescopedContents || component.fetchRescopedContents()
       })
       .then(hash => {
         if (!component.isDestroyed) {
           component.set('rescopedContents', hash.rescopedContents);
-          component.set('activeMilestone.lessons', hash.milestoneLessons);
+          component.set('milestoneLessons', hash.milestoneLessons);
           component.loadMilestoneReportPerformanceData();
           component.parseRescopedContents();
+          component.set('isLoading', false);
         }
       });
   },
@@ -194,7 +217,10 @@ export default Ember.Component.extend({
    */
   loadMilestoneReportPerformanceData() {
     const component = this;
-    if (component.get('activeMilestone.performance')) {
+    if (
+      component.get('activeMilestone.performance') ||
+      component.get('isTeacher')
+    ) {
       component.loadMilestonePerformanceScore();
       component.loadMilestonePerformanceTimespent();
     }
@@ -223,6 +249,29 @@ export default Ember.Component.extend({
       .fetchMilestonePerformance(collectionType)
       .then(function(milestoneLessonsPerformance) {
         component.parseLessonsPerformanceTimespent(milestoneLessonsPerformance);
+      });
+  },
+
+  /**
+   * @function fetchMilestones
+   */
+  fetchMilestones() {
+    const component = this;
+    const frameworkCode = component.get('frameworkCode');
+    const courseId = component.get('courseId');
+    return Ember.RSVP
+      .hash({
+        milestones: component
+          .get('courseService')
+          .getCourseMilestones(courseId, frameworkCode)
+      })
+      .then(({ milestones }) => {
+        if (!component.isDestroyed) {
+          component.set(
+            'milestones',
+            component.renderMilestonesBasedOnStudentGradeRange(milestones)
+          );
+        }
       });
   },
 
@@ -286,17 +335,39 @@ export default Ember.Component.extend({
    */
   parseLessonsPerformanceScore(lessonsPerformance) {
     const component = this;
-    let milestone = component.get('activeMilestone');
-    let lessons = milestone.get('lessons');
-    if (lessonsPerformance) {
-      if (!component.isDestroyed) {
-        lessonsPerformance.map(lessonPerformance => {
-          let lessonData = lessons.findBy(
-            'lesson_id',
-            lessonPerformance.get('lessonId')
+    let lessons = component.get('milestoneLessons');
+    if (
+      lessonsPerformance &&
+      lessonsPerformance.length &&
+      !component.isDestroyed
+    ) {
+      lessonsPerformance.map(lessonPerformance => {
+        let lessonData = lessons.findBy(
+          'lesson_id',
+          lessonPerformance.get('lessonId')
+        );
+        lessonData.set('performance', lessonPerformance.get('performance'));
+      });
+      if (component.get('isTeacher')) {
+        let activeMilestone = component.get('activeMilestone');
+        let milestonePerformanceScore = aggregateMilestonePerformanceScore(
+          lessonsPerformance
+        );
+        if (activeMilestone.get('performance')) {
+          activeMilestone.set('performance.score', milestonePerformanceScore);
+          activeMilestone.set(
+            'performance.scoreInPercentage',
+            milestonePerformanceScore
           );
-          lessonData.set('performance', lessonPerformance.get('performance'));
-        });
+        } else {
+          activeMilestone.set(
+            'performance',
+            Ember.Object.create({
+              score: milestonePerformanceScore,
+              scoreInPercentage: milestonePerformanceScore
+            })
+          );
+        }
       }
     }
   },
@@ -306,31 +377,42 @@ export default Ember.Component.extend({
    */
   parseLessonsPerformanceTimespent(lessonsPerformance) {
     const component = this;
-    let milestone = component.get('activeMilestone');
-    let lessons = milestone.get('lessons');
+    let lessons = component.get('milestoneLessons');
     let milestoneTimespent = 0;
-    if (lessonsPerformance) {
-      if (!component.isDestroyed) {
-        lessonsPerformance.map(lessonPerformance => {
-          let lessonTimespent = lessonPerformance.get('performance.timeSpent');
-          let lessonData = lessons.findBy(
-            'lesson_id',
-            lessonPerformance.get('lessonId')
+    if (
+      lessonsPerformance &&
+      lessonsPerformance.length &&
+      !component.isDestroyed
+    ) {
+      lessonsPerformance.map(lessonPerformance => {
+        let lessonTimespent = lessonPerformance.get('performance.timeSpent');
+        let lessonData = lessons.findBy(
+          'lesson_id',
+          lessonPerformance.get('lessonId')
+        );
+        if (lessonData.get('performance')) {
+          lessonData.set('performance.timeSpent', lessonTimespent);
+        } else {
+          lessonData.set(
+            'performance',
+            Ember.Object.create({ timeSpent: lessonTimespent })
           );
-          if (lessonData.get('performance')) {
-            lessonData.set('performance.timeSpent', lessonTimespent);
-          } else {
-            lessonData.set(
-              'performance',
-              Ember.Object.create({ timeSpent: lessonTimespent })
-            );
-          }
-          milestoneTimespent += lessonTimespent;
-        });
-      }
+        }
+        milestoneTimespent += lessonTimespent;
+      });
     }
     if (!component.isDestroyed) {
-      milestone.set('performance.timeSpent', milestoneTimespent);
+      let activeMilestone = component.get('activeMilestone');
+      if (activeMilestone.get('performance')) {
+        activeMilestone.set('performance.timeSpent', milestoneTimespent);
+      } else {
+        activeMilestone.set(
+          'performance',
+          Ember.Object.create({
+            timeSpent: milestoneTimespent
+          })
+        );
+      }
     }
   },
 
@@ -341,7 +423,7 @@ export default Ember.Component.extend({
     const component = this;
     let rescopedContents = component.get('rescopedContents');
     if (rescopedContents) {
-      let milestoneLessons = component.get('activeMilestone.lessons');
+      let milestoneLessons = component.get('milestoneLessons');
       let rescopedLessons = rescopedContents.lessons;
       if (!component.isDestroyed && rescopedLessons) {
         rescopedLessons.map(rescopedLesson => {
@@ -373,5 +455,23 @@ export default Ember.Component.extend({
     if (!component.isDestroyed) {
       component.set('rescopedCollectionIds', rescopedCollectionIds);
     }
+  },
+
+  /**
+   * This Method is responsible for milestone display based on students class grade.
+   * @return {Array}
+   */
+  renderMilestonesBasedOnStudentGradeRange(milestones) {
+    let component = this;
+    let milestoneData = Ember.A([]);
+    let classGradeId = component.get('class.gradeCurrent');
+    milestones.forEach(milestone => {
+      let gradeId = milestone.get('grade_id');
+      if (classGradeId === gradeId) {
+        milestone.set('isClassGrade', true);
+      }
+      milestoneData.pushObject(milestone);
+    });
+    return milestoneData;
   }
 });
