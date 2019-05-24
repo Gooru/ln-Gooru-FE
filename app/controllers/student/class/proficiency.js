@@ -251,7 +251,8 @@ export default Ember.Controller.extend({
     let queryParams = {
       role: ROLES.STUDENT,
       source: PLAYER_EVENT_SOURCE.COURSE_MAP,
-      courseId: hasSuggestions(resp) ? resp.context.courseId : resp.courseId // Only in case of suggestions we dont have courseId in suggestion
+      courseId: hasSuggestions(resp) ? resp.context.courseId : resp.courseId, // Only in case of suggestions we dont have courseId in suggestion
+      type: resp.context.current_item_type || null
     };
     queryParams = createStudyPlayerQueryParams(
       hasSuggestions(resp) ? resp.suggestions[0] : resp.context || resp,
