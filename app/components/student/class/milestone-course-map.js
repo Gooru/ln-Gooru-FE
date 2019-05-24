@@ -618,9 +618,12 @@ export default Ember.Component.extend({
       });
     }
     if (!selectedLesson.get('hasCollectionFetched')) {
+      let userId = component.get('isTeacher')
+        ? component.get('studentId')
+        : undefined;
       component
         .get('courseMapService')
-        .getLessonInfo(classId, courseId, unitId, lessonId, true)
+        .getLessonInfo(classId, courseId, unitId, lessonId, true, userId)
         .then(lesson => {
           if (!component.isDestroyed) {
             let collections = lesson.get('children');
