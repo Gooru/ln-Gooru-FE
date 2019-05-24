@@ -70,9 +70,9 @@ export default Ember.Controller.extend({
     playNext: function() {
       let controller = this;
       let submittedDataParams = controller.get('dataParams');
-      let submittedScoreInPercentage = controller.getScoreInPercentage(
-        submittedDataParams
-      );
+      let submittedScoreInPercentage = submittedDataParams
+        ? controller.getScoreInPercentage(submittedDataParams)
+        : null;
       controller.playNextContent(submittedScoreInPercentage);
     },
 
@@ -137,6 +137,10 @@ export default Ember.Controller.extend({
    */
   mapLocation: null,
 
+  /**
+   * @property {Object} dataParams
+   * Submitted external assessment data params
+   */
   dataParams: null,
 
   /**
@@ -161,7 +165,7 @@ export default Ember.Controller.extend({
     return isFullScreen;
   }),
 
-  isAsssessment: Ember.computed(function() {
+  isAsssessment: Ember.computed('type', function() {
     let controller = this;
     let type = controller.get('type');
     return type === 'assessment-external';
@@ -208,6 +212,7 @@ export default Ember.Controller.extend({
             isDone: true,
             hasAnySuggestion: false
           });
+          controller.toPlayer();
         } else {
           if (
             nextContentType === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||
@@ -269,7 +274,8 @@ export default Ember.Controller.extend({
           lesson,
           collection,
           mapLocation,
-          content: mapLocation.get('content')
+          content: mapLocation.get('content'),
+          dataParams: null
         });
       });
   },
