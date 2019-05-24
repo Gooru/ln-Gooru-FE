@@ -78,6 +78,7 @@ export default Object.assign(quizzesTranslations, {
   'common.schedule': 'அட்டவணை',
   'common.responses': 'பதில்களை',
   'common.offline-activites':'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.no-lesson-info-message': 'இந்த அலகு எந்த பாடங்கள் உள்ளன.',
   'common.no-collection-info-message':
     'இந்த பாடம் எந்த வசூலையும் கொண்டிருக்கவில்லை.',

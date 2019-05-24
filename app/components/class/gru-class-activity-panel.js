@@ -34,9 +34,18 @@ export default Ember.Component.extend(ConfigurationMixin, {
       component.sendAction('completeActivity', component.get('classActivity'));
     },
 
-    showMore() {
+    expandMore() {
       let component = this;
-      component.toggleProperty('isShowMore');
+      component.$('#second-panel').slideDown({
+        start: function() {
+          component.$(this).css('display', 'grid');
+        }
+      });
+    },
+
+    expandLess() {
+      let component = this;
+      component.$('#second-panel').slideUp();
     },
     /**
      * Action triggered when the user play collection

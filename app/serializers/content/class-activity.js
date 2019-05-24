@@ -70,6 +70,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       added_date: data.dca_added_date ?
         data.dca_added_date : data.activation_date,
       activation_date: data.activation_date,
+      end_date: data.end_date,
       collection: content,
       forYear: data.for_year,
       contentId: data.content_id,

@@ -88,6 +88,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-collection': 'సేకరణ',
   'common.a-course': 'ఒక శిక్షణ',
   'common.offline-activites':'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.a-question': 'ఒక ప్రశ్న',
   'common.a-resource': 'ఒక వనరు',
   'common.a-rubric': 'ఒక రంధ్రం',

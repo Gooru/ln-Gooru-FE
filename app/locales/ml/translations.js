@@ -59,6 +59,7 @@ export default Object.assign(quizzesTranslations, {
   'common.engagement': 'ഇടപഴകൽ',
   'common.efficacy': 'ഫലപ്രാപ്തി',
   'common.offline-activites':'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.grid': 'ഗ്രിഡ്',
   'common.list': 'പട്ടിക',
   'common.first': 'ആദ്യം',

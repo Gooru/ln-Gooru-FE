@@ -318,16 +318,25 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let classId = controller.get('classId');
       let classActivity = controller.get('selectedClassActivityForSchedule');
       let content = classActivity.get('collection');
-      let contentType = isOfflineActivity ? PLAYER_EVENT_SOURCE.OFFLINE_CLASS : content.get('format');
-      let contentId = classActivity.get('id');
       let collectionId = classActivity.get('contentId') || content.get('id');
+      controller.send('onCloseDatePicker');
+      if (controller.isActivityAlreadyExists(scheduleDate, collectionId)) {
+        return;
+      }
+      if (!classActivity.get('added_date')) {
+        classActivity.set('added_date', scheduleDate);
+      }
+      let contentId = classActivity.get('id');
+      let contentType = isOfflineActivity ? PLAYER_EVENT_SOURCE.OFFLINE_CLASS : content.get('format');
       let scheduleMonth = moment(scheduleDate).format('MM');
       let scheduleYear = moment(scheduleDate).format('YYYY');
-      let selectedActivityIsUnScheduled = controller.get('selectedActivityIsUnScheduled');
-      controller.send('onCloseDatePicker');
+      let currentScheduleMonth = classActivity.get('forMonth');
+      let currentScheduleYear = classActivity.get('forYear');
+      let useOldInstance = currentScheduleMonth === parseInt(scheduleMonth) &&
+        currentScheduleYear === parseInt(scheduleYear) && controller.get('selectedActivityIsUnScheduled');
       return Ember.RSVP
         .hash({
-          scheduleActivity: selectedActivityIsUnScheduled ? controller
+          scheduleActivity: useOldInstance ? controller
             .get('classActivityService')
             .scheduleClassActivity(classId, contentId, scheduleDate, scheduleEndDate) : controller
             .get('classActivityService')
@@ -946,6 +955,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Methods
 
+  isActivityAlreadyExists(scheduleDate, contentId) {
+    let controller = this;
+    let activitiesForDate = controller.get('classActivitiesOfMonth').filterBy('added_date', scheduleDate);
+    let activities = activitiesForDate.filterBy('contentId', contentId);
+    return activities.length;
+  },
+
   /**
    * Removes a class activity from a list of classActivities
    * @param {classActivity} classActivity
@@ -961,12 +977,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       }
       offlineActivities.removeObject(classActivity);
     } else {
-      let classActivities = this.get('classActivities');
+      let classActivities = this.get('scheduledClassActivities');
+      let classActivitiesOfMonth = this.get('classActivitiesOfMonth');
       let addedDate = classActivity.get('added_date');
       let dateWiseClassActivities = classActivities.findBy(
         'added_date',
         addedDate
       );
+      let monthWiseClassActivity = classActivitiesOfMonth.findBy(
+        'added_date',
+        addedDate
+      );
+      classActivitiesOfMonth.removeObject(monthWiseClassActivity);
       let classActivityToDelete = dateWiseClassActivities
         .get('classActivities')
         .findBy('id', id);
@@ -1066,7 +1088,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     controller.set('isLoading', true);
     controller
       .get('classActivityService')
-      .getClassScheduledActivities(classId, startDate, endDate)
+      .getScheduledClassActivitiesForMonth(classId, startDate, endDate)
       .then(classActivities => {
         controller.set('classActivitiesOfMonth', classActivities);
         controller.set('isLoading', false);
@@ -1080,7 +1102,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     controller.set('isLoading', true);
     controller
       .get('classActivityService')
-      .getClassScheduledActivities(classId, date)
+      .getScheduledClassActivitiesForDate(classId, date)
       .then(classActivities => {
         controller.set('classActivities', Ember.A([]));
         if (classActivities && classActivities.length > 0) {

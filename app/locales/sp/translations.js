@@ -66,6 +66,7 @@ export default Object.assign(quizzesTranslations, {
   'common.name': 'Name',
   'common.user': 'user',
   'common.offline-activites':'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.content-name': 'Content Name',
   'common.lastName': 'Lastname',
   'common.firstName': 'Firstname',

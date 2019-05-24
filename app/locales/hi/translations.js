@@ -79,6 +79,7 @@ export default Object.assign(quizzesTranslations, {
   'common.gooru-suggestions': 'Gooru सुझाव',
   'common.gooru-catalog': 'Gooru Catalog',
   'common.offline-activites':'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.suggestion-made-to': 'सुझाव दिया गया',
   'library-search-placeholder': 'Search for anything within the library…',
   'common.student-selected': 'छात्र चुने गए',

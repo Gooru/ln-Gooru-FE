@@ -675,6 +675,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
       return component.get('searchService').searchCollections(term, params);
     } else if (activeContentType === 'assessment') {
       return component.get('searchService').searchAssessments(term, params);
+    } else {
+      return component.get('searchService').searchOfflineActivity(term, params);
     }
   },
 

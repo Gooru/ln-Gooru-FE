@@ -63,7 +63,7 @@ export default Ember.Route.extend({
       unScheduledClassActivities: route.get('classActivityService')
         .getUnScheduledActivities(classId, forMonth, forYear),
       classActivitiesOfMonth: route.get('classActivityService')
-        .getClassScheduledActivities(classId, startDate, endDate),
+        .getScheduledClassActivitiesForMonth(classId, startDate, endDate),
       selectedPeriod
     });
   },

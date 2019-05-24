@@ -4,8 +4,11 @@
       <div class="icon">
         <i class="{{classActivity.contentType}}-icon" />
       </div>
-      <div class="title ellipsis {{if isOfflineActivity 'disable-event'}}" {{action 'onPlayContent' item}}>
-        <span>{{classActivity.title}}</span>
+      <div class="title-info {{if isOfflineActivity 'offline'}}" {{action 'onPlayContent' item}}>
+        <div class="label-section ellipsis">
+          <span class="title">{{classActivity.title}}</span>
+          <span class="date-section">{{format-date classActivity.dca_added_date 'DD MMM'}} - {{format-date (if classActivity.end_date classActivity.end_date classActivity.dca_added_date) 'DD MMM'}}</span>
+        </div>
       </div>
       <div class="resource-info">
         {{#if (gt classActivity.resourceCount 0)}}
@@ -41,7 +44,7 @@
         {{/if}}
       </div>
       <div class="more">
-        <span {{action 'showMore'}}>
+        <span {{action 'expandMore'}}>
           {{gru-icon name="more_vert"}}
         </span>
       </div>
@@ -69,14 +72,20 @@
               </div>
             {{else}}
               <div class="dca-panel-performance not-started">
-                <span class="no-performance">--</span>
+                <div class="thumbnail-img">
+                  {{#if item.thumbnailUrl}}
+                    <img src="{{item.thumbnailUrl}}" />
+                  {{else if classActivity.thumbnail}}
+                    <img src="{{classActivity.thumbnail}}" />
+                  {{/if}}
+                </div>
               </div>
             {{/if}}
           {{/if}}
         </div>
       </div>
     </div>
-    <div class="ca-panel-container-2 {{if isShowMore 'visible'}}">
+    <div class="ca-panel-container-2" id="second-panel">
       <div class="ca-actions">
         <div class="student-count {{if showCohort 'active'}}">
           {{gru-icon name="account_circle"}}
@@ -126,17 +135,17 @@
           </div>
         {{/if}}
       </div>
-      <div class="delete-activity">
-        <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.remove"}}" {{action 'removeClassActivity' classActivity}}>
+      {{#unless classActivity.isCompleted}}
+        <div class="delete-activity">
+          <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.remove"}}" {{action 'removeClassActivity' classActivity}}>
+            {{gru-icon name="delete_outline"}}
+          </span>
+        </div>
+      {{/unless}}
+      <div class="close-activity">
+        <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.close"}}" {{action 'expandLess'}}>
           {{gru-icon name="close"}}
         </span>
-      </div>
-      <div class="thumbnail-img">
-        {{#if item.thumbnailUrl}}
-          <img src="{{item.thumbnailUrl}}" />
-        {{else if classActivity.thumbnail}}
-          <img src="{{classActivity.thumbnail}}" />
-        {{/if}}
       </div>
     </div>
   {{else}}

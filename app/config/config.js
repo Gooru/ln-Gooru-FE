@@ -342,6 +342,10 @@ export const SEARCH_FILTER_BY_CONTENT_TYPES = [{
 {
   format: 'assessment',
   label: 'search-filter.assessments'
+},
+{
+  format: 'offline-activity',
+  label: 'common.offline-activity'
 }
 ];
 
