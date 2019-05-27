@@ -14,9 +14,25 @@
   </div>
 
 <div class="next-action">
-  <div {{action 'playNext'}} class="next" data-toggle="tooltip" title="{{ t 'common.next'}}">
-    <span>{{t 'common.next'}}</span> {{gru-icon name="skip_next"}}
-  </div>
+  {{#if isDone}}
+    {{#if classId}}
+      {{#link-to 'student.class.course-map' classId }}
+        <div class="next" data-toggle="tooltip" title="{{ t 'common.exit'}}">
+          <span class="exit">{{t 'common.exit'}}</span>
+        </div>
+      {{/link-to}}
+    {{else}}
+      {{#link-to 'student.independent.course-map' courseId}}
+        <div class="next" data-toggle="tooltip" title="{{ t 'common.exit'}}">
+          <span class="exit">{{t 'common.exit'}}</span>
+        </div>
+      {{/link-to}}
+    {{/if}}
+  {{else}}
+    <div {{action 'playNext'}} class="next" data-toggle="tooltip" title="{{ t 'common.next'}}">
+      <span>{{t 'common.next'}}</span> {{gru-icon name="skip_next"}}
+    </div>
+  {{/if}}
 </div>
 
 <div class="toggle-screen pull-right" {{action 'onToggleScreen'}}>

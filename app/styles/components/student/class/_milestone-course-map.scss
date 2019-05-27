@@ -680,7 +680,8 @@
                     color: #666;
                   }
 
-                  &.format-collection {
+                  &.format-collection,
+                  &.format-collection-external {
                     background: #ccc;
                   }
                 }
