@@ -171,6 +171,8 @@ export default Ember.Controller.extend({
     return type === 'assessment-external';
   }),
 
+  isDone: false,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -208,11 +210,10 @@ export default Ember.Controller.extend({
         let status = (mapLocation.get('context.status') || '').toLowerCase();
         let nextContentType = mapLocation.get('context.itemType');
         if (status === 'done') {
-          this.setProperties({
+          controller.setProperties({
             isDone: true,
             hasAnySuggestion: false
           });
-          controller.toPlayer();
         } else {
           if (
             nextContentType === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||

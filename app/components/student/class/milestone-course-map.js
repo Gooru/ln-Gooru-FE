@@ -61,10 +61,14 @@ export default Ember.Component.extend({
   taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
   /**
-   * Maintains the state of user role is teacher or not
-   * @type {Boolean}
+   * @property {Boolean} isTeacher
    */
-  isTeacher: false,
+  isTeacher: Ember.computed.equal('session.role', 'teacher'),
+
+  /**
+   * @property {Boolean} isStudent
+   */
+  isStudent: Ember.computed.not('isTeacher'),
 
   // -------------------------------------------------------------------------
   // Properties
@@ -236,8 +240,8 @@ export default Ember.Component.extend({
         collectionId: collection.get('id'),
         type: collection.get('format'),
         lesson,
-        isStudent: true,
-        isTeacher: false,
+        isStudent: component.get('isStudent'),
+        isTeacher: component.get('isTeacher'),
         collection
       };
       let reportType = collection.get('format');

@@ -113,7 +113,7 @@
                               {{/if}}
                             </div>
                             {{#if (and showPerformance collection.performance) }}
-                              <div class="collection-peformance format-{{collection.format}} grade-range-{{grade-range collection.performance.scoreInPercentage}}" {{action "onShowStudentMilestoneCollectionReport" lesson collection}}>
+                              <div class="collection-peformance {{if (eq collection.format 'collection-external') 'disable-event'}} format-{{collection.format}} grade-range-{{grade-range collection.performance.scoreInPercentage}}" {{action "onShowStudentMilestoneCollectionReport" lesson collection}}>
                                 {{#if collection.performance}}
                                   {{#if (or (eq collection.format 'assessment') (eq collection.format 'assessment-external'))}}
                                     {{collection.performance.scoreInPercentage}}%
