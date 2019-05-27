@@ -36,6 +36,9 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
    */
   suggestService: Ember.inject.service('api-sdk/suggest'),
 
+  /**
+   * @property {route0Service}
+   */
   route0Service: Ember.inject.service('api-sdk/route0'),
 
   /**
@@ -47,6 +50,11 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
    * @type {SkylineInitialService} Service to retrieve skyline initial service
    */
   skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
+
+  /**
+   * @property {courseService}
+   */
+  courseService: Ember.inject.service('api-sdk/course'),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -175,9 +183,16 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
           params.classId = params.classId || mapLocation.get('context.classId');
           params.courseId =
             params.courseId || mapLocation.get('context.courseId');
+
           var unitPromise = null;
           var lessonPromise = null;
           var notificationNextPromise = null;
+          //Milestone info is required to show breadcrumb
+          let milestoneLessonsPromise = milestoneId
+            ? route
+              .get('courseService')
+              .getCourseMilestoneLessons(courseId, milestoneId)
+            : null;
           if (params.pathType === 'route0') {
             let route0Model = route.get('route0Service').getRoute0({
               classId: params.classId,
@@ -249,68 +264,81 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
               );
           }
 
-          return Ember.RSVP.hash({
-            course: route.get('courseService').fetchById(courseId),
-            unit: unitPromise,
-            lesson: lessonPromise,
-            suggestedResources:
-              collectionId != null
-                ? route
-                  .get('suggestService')
-                  .suggestResourcesForCollection(
-                    route.get('session.userId'),
-                    collectionId
-                  )
-                : null,
-            notificationNextStarted: notificationNextPromise
-          }).then(function(hash) {
-            //setting query params using the map location
-            params.collectionId = collectionId;
-            //params.classId = params.classId || mapLocation.get('context.classId');
-            params.unitId = params.unitId || mapLocation.get('context.unitId');
-            params.lessonId =
-              params.lessonId || mapLocation.get('context.lessonId');
-            params.pathId = params.pathId || mapLocation.get('context.pathId');
-            params.collectionSubType =
-              params.subtype || mapLocation.get('context.collectionSubType');
+          return Ember.RSVP
+            .hash({
+              course: route.get('courseService').fetchById(courseId),
+              unit: unitPromise,
+              lesson: lessonPromise,
+              suggestedResources:
+                collectionId != null
+                  ? route
+                    .get('suggestService')
+                    .suggestResourcesForCollection(
+                      route.get('session.userId'),
+                      collectionId
+                    )
+                  : null,
+              notificationNextStarted: notificationNextPromise,
+              milestoneLessons: milestoneLessonsPromise
+            })
+            .then(function(hash) {
+              //setting query params using the map location
+              params.collectionId = collectionId;
+              //params.classId = params.classId || mapLocation.get('context.classId');
+              params.unitId =
+                params.unitId || mapLocation.get('context.unitId');
+              params.lessonId =
+                params.lessonId || mapLocation.get('context.lessonId');
+              params.pathId =
+                params.pathId || mapLocation.get('context.pathId');
+              params.collectionSubType =
+                params.subtype || mapLocation.get('context.collectionSubType');
 
-            // Set the correct unit sequence number
-            if (params.pathType !== 'route0') {
-              hash.course.children.find((child, index) => {
-                let found = false;
-                if (child.get('id') === hash.unit.get('id')) {
-                  found = true;
-                  hash.unit.set('sequence', index + 1);
-                }
-                return found;
-              });
+              if (hash.milestoneLessons && hash.milestoneLessons.length) {
+                let milestoneLesson = hash.milestoneLessons.findBy(
+                  'lesson_id',
+                  hash.lesson.get('id')
+                );
+                route.parseMilestoneLesson(milestoneLesson, hash.lesson);
+              }
 
-              // Set the correct lesson sequence number
-              hash.unit.children.find((child, index) => {
-                let found = false;
-                if (child.get('id') === hash.lesson.get('id')) {
-                  found = true;
-                  hash.lesson.set('sequence', index + 1);
-                }
-                return found;
-              });
-            }
-            //loads the player model if it has no suggestions
-            return route.playerModel(params).then(function(model) {
-              return Object.assign(model, {
-                course: hash.course,
-                unit: hash.unit,
-                lesson: hash.lesson,
-                mapLocation,
-                collectionId: params.collectionId,
-                type: params.type,
-                minScore: params.minScore,
-                suggestedResources: hash.suggestedResources,
-                collectionSource: params.collectionSource,
-                collectionSubType: params.collectionSubType
+              // Set the correct unit sequence number
+              if (params.pathType !== 'route0') {
+                hash.course.children.find((child, index) => {
+                  let found = false;
+                  if (child.get('id') === hash.unit.get('id')) {
+                    found = true;
+                    hash.unit.set('sequence', index + 1);
+                  }
+                  return found;
+                });
+
+                // Set the correct lesson sequence number
+                hash.unit.children.find((child, index) => {
+                  let found = false;
+                  if (child.get('id') === hash.lesson.get('id')) {
+                    found = true;
+                    hash.lesson.set('sequence', index + 1);
+                  }
+                  return found;
+                });
+              }
+              //loads the player model if it has no suggestions
+              return route.playerModel(params).then(function(model) {
+                return Object.assign(model, {
+                  course: hash.course,
+                  unit: hash.unit,
+                  lesson: hash.lesson,
+                  mapLocation,
+                  collectionId: params.collectionId,
+                  type: params.type,
+                  minScore: params.minScore,
+                  suggestedResources: hash.suggestedResources,
+                  collectionSource: params.collectionSource,
+                  collectionSubType: params.collectionSubType
+                });
               });
             });
-          });
         });
     }
   },
@@ -423,5 +451,16 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
     let setting = aClass.get('setting');
     let isPremiumCourse = setting ? setting['course.premium'] : false;
     return isPremiumCourse;
+  },
+
+  /**
+   * @function parseMilestoneLesson
+   * Method to set milestone info into the lessondata to show breadcrumb
+   */
+  parseMilestoneLesson(milestoneLesson, lessonData) {
+    lessonData.set('isMilestoneLesson', true);
+    lessonData.set('gradeName', milestoneLesson.get('grade_name'));
+    lessonData.set('domainName', milestoneLesson.get('tx_domain_name'));
+    lessonData.set('subjectCode', milestoneLesson.get('tx_subject_code'));
   }
 });
