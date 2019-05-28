@@ -1,6 +1,11 @@
 import Ember from 'ember';
 import StudentCollection from 'gooru-web/controllers/reports/student-collection';
-import { ASSESSMENT_SUB_TYPES, ROLES } from 'gooru-web/config/config';
+import {
+  ASSESSMENT_SUB_TYPES,
+  ROLES,
+  CONTENT_TYPES,
+  SCORES
+} from 'gooru-web/config/config';
 
 /**
  *
@@ -74,44 +79,64 @@ export default StudentCollection.extend({
       let controller = this;
       let contextId = controller.get('contextId');
       let profileId = controller.get('session.userData.gooruUId');
-      const navigateMapService = controller.get('navigateMapService');
-      controller
-        .get('quizzesAttemptService')
-        .getAttemptIds(contextId, profileId)
-        .then(
-          attemptIds =>
-            !attemptIds || !attemptIds.length
-              ? {}
-              : this.get('quizzesAttemptService').getAttemptData(
-                attemptIds[attemptIds.length - 1]
-              )
-        )
-        .then(attemptData =>
-          Ember.RSVP.hash({
-            attemptData,
-            mapLocationNxt: navigateMapService.getStoredNext()
-          })
-        )
-        .then(({ mapLocationNxt, attemptData }) => {
-          if (controller.get('hasSuggestion')) {
-            mapLocationNxt.context.set('status', 'content-served');
-          }
 
-          mapLocationNxt.context.set('score', attemptData.get('averageScore'));
-          return navigateMapService.next(mapLocationNxt.context);
-        })
-        .then(({ context, suggestions, hasContent }) => {
-          controller.set('mapLocation.context', context);
-          controller.set('mapLocation.suggestions', suggestions);
-          controller.set('mapLocation.hasContent', hasContent);
-          let suggestedContent = controller.get('suggestedContent');
-          if (suggestedContent) {
-            controller.set('isShowSuggestion', true);
-          } else {
-            controller.checknPlayNext();
-          }
-          controller.toggleScreenMode();
+      const context = this.get('mapLocation.context');
+
+      //Show student proficiency if the the assessment is mastered
+      if (controller.get('isLoadProficiencyProgress')) {
+        let queryParams = {
+          classId: context.get('classId'),
+          courseId: context.get('courseId'),
+          contextId,
+          role: ROLES.STUDENT,
+          source: controller.get('source')
+        };
+        controller.transitionToRoute('student-learner-proficiency', profileId, {
+          queryParams
         });
+      } else {
+        const navigateMapService = controller.get('navigateMapService');
+        controller
+          .get('quizzesAttemptService')
+          .getAttemptIds(contextId, profileId)
+          .then(
+            attemptIds =>
+              !attemptIds || !attemptIds.length
+                ? {}
+                : this.get('quizzesAttemptService').getAttemptData(
+                  attemptIds[attemptIds.length - 1]
+                )
+          )
+          .then(attemptData =>
+            Ember.RSVP.hash({
+              attemptData,
+              mapLocationNxt: navigateMapService.getStoredNext()
+            })
+          )
+          .then(({ mapLocationNxt, attemptData }) => {
+            if (controller.get('hasSuggestion')) {
+              mapLocationNxt.context.set('status', 'content-served');
+            }
+
+            mapLocationNxt.context.set(
+              'score',
+              attemptData.get('averageScore')
+            );
+            return navigateMapService.next(mapLocationNxt.context);
+          })
+          .then(({ context, suggestions, hasContent }) => {
+            controller.set('mapLocation.context', context);
+            controller.set('mapLocation.suggestions', suggestions);
+            controller.set('mapLocation.hasContent', hasContent);
+            let suggestedContent = controller.get('suggestedContent');
+            if (suggestedContent) {
+              controller.set('isShowSuggestion', true);
+            } else {
+              controller.checknPlayNext();
+            }
+            controller.toggleScreenMode();
+          });
+      }
     },
 
     playSignatureAssessmentSuggestions: function() {
@@ -300,6 +325,35 @@ export default StudentCollection.extend({
     let isFullScreen = studyPlayerController.get('isFullScreen');
     return isFullScreen;
   }),
+
+  /**
+   * @property {Boolean} isPremiumCourse
+   */
+  isPremiumCourse: Ember.computed('course', function() {
+    const controller = this;
+    return controller.get('course.version') === 'premium';
+  }),
+
+  /**
+   * @property {Boolean} isLoadProficiencyProgress
+   */
+  isLoadProficiencyProgress: Ember.computed(
+    'attemptData.averageScore',
+    'isPremiumCourse',
+    'mapLocation.context',
+    function() {
+      const controller = this;
+      const averageScore = controller.get('attemptData.averageScore');
+      const isPremiumCourse = controller.get('isPremiumCourse');
+      const context = controller.get('mapLocation.context');
+      return (
+        isPremiumCourse &&
+        averageScore >= SCORES.VERY_GOOD &&
+        (context.get('itemType') === CONTENT_TYPES.ASSESSMENT ||
+          context.get('itemType') === controller.get('signatureAssessmentType'))
+      );
+    }
+  ),
 
   // -------------------------------------------------------------------------
   // Methods

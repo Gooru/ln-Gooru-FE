@@ -1,4 +1,15 @@
-<div class="student-proficiency-container">
+<div class="student-proficiency-container {{if isShowSuggestion 'player-suggestion'}} {{if isPlayerProficiency 'player-proficiency'}}">
+  {{#if isPlayerProficiency}}
+    {{player.gru-study-header
+      classId=class.id
+      class=class
+      courseId=course.id
+      courseTitle=course.title
+      sourceType= source
+      isStudyPlayer=true
+      menuItem = 'profile-prof'
+    }}
+  {{/if}}
   <div class="panel-container">
     {{proficiency.student-proficiency-panel
        studentProfile=studentProfile
@@ -43,3 +54,11 @@
     {{/if}}
   </div>
 </div>
+
+{{#if isPlayerProficiency}}
+  {{player.gru-player-summary-footer isDone=isDone classId=classId parents="onPlayNext" courseId=courseId courseTitle=course.title isPlayerProficiency = isPlayerProficiency isFullScreen=isFullScreen onToggleScreen="onToggleScreen"}}
+{{/if}}
+
+{{#if isShowSuggestion}}
+  {{content.modals.gru-content-suggestion mapLocation=mapLocation onAcceptSuggestion="onAcceptSuggestion" onIgnoreSuggestion="onIgnoreSuggestion"}}
+{{/if}}

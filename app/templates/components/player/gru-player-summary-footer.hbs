@@ -6,9 +6,15 @@
 
   <div class="player-container">
     <div class="player-info">
-      <div class="pull-left resource-title ellipsis">
-        <span>Report: {{collection.title}}</span>
-      </div>
+      {{#if isPlayerProficiency}}
+        <div class="pull-left resource-title ellipsis">
+          <span>Proficiency: {{courseTitle}}</span>
+        </div>
+      {{else}}
+        <div class="pull-left resource-title ellipsis">
+          <span>Report: {{collection.title}}</span>
+        </div>
+      {{/if}}
     </div>
   </div>
 
