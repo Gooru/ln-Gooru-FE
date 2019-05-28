@@ -129,6 +129,34 @@
         }
       }
     }
+
+    &.player-proficiency {
+      padding-top: 100px;
+      height: max-content;
+      margin-bottom: 50px;
+      .gru-study-header {
+        top: 0;
+      }
+
+      //Overwrite proficiency chart panel styles
+      .panel-container {
+        .student-proficiency-panel {
+          .panel-header {
+            grid-template-columns: 1fr auto;
+            span.back {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    &.player-suggestion {
+      background-color: #37424b;
+      z-index: 888;
+      opacity: 0.4;
+      pointer-events: none;
+    }
   }
   @media only screen and (min-width: $screen-sm) and (max-width: $screen-in-1024) {
     .student-proficiency-container {
@@ -161,6 +189,15 @@
           }
         }
       }
+    }
+  }
+}
+
+//Toggle screen styles
+body.student-learner-proficiency {
+  &.fullscreen {
+    .player-proficiency {
+      padding-top: 50px;
     }
   }
 }

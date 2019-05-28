@@ -82,7 +82,8 @@
   }
 }
 
-body.reports_study-student-collection {
+body.reports_study-student-collection,
+body.student-learner-proficiency {
   &.fullscreen {
     @mixin fullscreenStyle {
       background-color: #353e47 !important;
