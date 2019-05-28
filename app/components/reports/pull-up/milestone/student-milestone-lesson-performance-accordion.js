@@ -192,12 +192,16 @@ export default Ember.Component.extend({
     const courseId = component.get('courseId');
     const unitId = component.get('unitId');
     const lessonId = component.get('lessonId');
+    const userId = component.get('isTeacher')
+      ? component.get('userId')
+      : undefined;
     return courseMapService.getLessonInfo(
       classId,
       courseId,
       unitId,
       lessonId,
-      true
+      true,
+      userId
     );
   },
 

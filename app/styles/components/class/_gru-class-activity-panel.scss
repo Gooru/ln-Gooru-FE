@@ -152,7 +152,7 @@
           .label-section {
             grid-template-rows: auto;
 
-            .date-section {
+            .group {
               display: block;
             }
           }
@@ -170,12 +170,21 @@
             color: #37424b;
           }
 
-          .date-section {
-            opacity: 0.7;
-            font-size: 11px;
-            line-height: 1.45;
-            color: #37424b;
+          .group {
             display: none;
+
+            .task-count {
+              margin-left: 10px;
+              font-size: 12px;
+              text-transform: capitalize;
+            }
+
+            .date-section {
+              opacity: 0.7;
+              font-size: 11px;
+              line-height: 1.45;
+              color: #37424b;
+            }
           }
         }
 

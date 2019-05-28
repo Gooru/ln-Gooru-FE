@@ -80,7 +80,8 @@ export default Ember.Service.extend({
           suggestions: mapSerializer.normalizeMapSuggestions(
             payload.suggestions
           ),
-          hasContent: payload.content && !!Object.keys(payload.content).length
+          hasContent: payload.content && !!Object.keys(payload.content).length,
+          content: payload.content || null
         });
       });
   },

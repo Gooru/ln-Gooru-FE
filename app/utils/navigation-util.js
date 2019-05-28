@@ -8,7 +8,8 @@ export function createStudyPlayerQueryParams(context, options) {
     role: options.role,
     source: options.source,
     courseId: options.courseId,
-    milestoneId: options.milestoneId
+    milestoneId: options.milestoneId,
+    type: context.itemType || options.type
   };
 
   if (options.classId) {

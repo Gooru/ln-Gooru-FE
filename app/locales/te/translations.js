@@ -66,6 +66,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'మొదటి పేరు',
   'common.filter-by': 'ద్వారా వడపోత',
   'common.more': 'మరింత',
+  'common.tasks': 'tasks',
   'common.no-search-result':
     'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.apply-filter': 'apply filter',
@@ -102,8 +103,10 @@ export default Object.assign(quizzesTranslations, {
   'library-search-placeholder': 'Search for anything within the library…',
   'common.add': 'జోడించడానికి',
   'common.plan': 'plan',
-  'offline-activities.no-completed-content': 'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content': 'There are no projects or other offline activities that the students are currently working on',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
   'common.plan-an-activities-msg':
@@ -830,6 +833,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'పూర్తి కోర్సు చూపించు',
   'class.overview.course-map.rescope-info':
     'ఈ నావిగేటర్ కోర్సు అనేది బహుళ తరగతులు అంతటా ప్రమాణాలను కలుపుతూ వ్యక్తిగతీకరించిన కోర్సు. ప్రతి విద్యార్ధికి అంతరాయాలను పూరించడానికి, భావనలను మరియు అభ్యాసాలను బలపరిచేందుకు మరియు వారి అభ్యాసాన్ని వేగవంతం చేయడానికి ఒక ప్రత్యేకమైన కోర్సును అందిస్తుంది. వ్యక్తిగత మార్గాలు రూపొందిస్తారు మరియు ప్రతి విద్యార్థి యొక్క అభ్యాస సామర్ధ్యాన్ని గరిష్టంగా పెంచడానికి మరియు వారి సెట్ గమ్యానికి నావిగేట్ చెయ్యడానికి రియల్ టైమ్లో విద్యార్థులను మళ్లీ వెనక్కి తీసుకుంటారు.',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'మీ నైపుణ్యత ఆధారంగా మేము ప్రత్యేకంగా ఈ కోర్సును వ్యక్తిగతీకరించాము. దయచేసి వ్యక్తిగతీకరించిన కోర్సు మ్యాప్ను చూడడానికి కొద్దిసేపట్లో మళ్లీ తనిఖీ చేయండి.',
   'class.overview.course-map.route0-bannerdesc':
@@ -2570,5 +2575,7 @@ export default Object.assign(quizzesTranslations, {
   'student-milestone-not-ready':
     'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
   'warn.teacher-milestone-not-ready':
-    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.'
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path'
 });

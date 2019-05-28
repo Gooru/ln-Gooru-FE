@@ -67,6 +67,7 @@ export default Object.assign(quizzesTranslations, {
   'featured-libraries': 'featured libraries',
   'common.lastName': 'শেষ নাম',
   'common.firstName': 'প্ৰথম নাম',
+  'common.tasks': 'tasks',
   'common.filter-by': 'ইয়াৰ দ্বাৰা ফিল্টাৰ কৰা হৈছে',
   'common.more': 'আৰু ',
   'common.apply-filter': 'apply filter',
@@ -80,8 +81,10 @@ export default Object.assign(quizzesTranslations, {
   'common.frq': 'FRQ',
   'common.schedule': 'কাৰ্যক্ৰম',
   'common.plan': 'plan',
-  'offline-activities.no-completed-content': 'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content': 'There are no projects or other offline activities that the students are currently working on',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.responses': 'উত্তৰ',
   'common.no-lesson-info-message': 'এই য়ুনিটটোত কোনো পাঠ নাই',
   'common.no-collection-info-message': 'এই পাঠটোত কোনো সংকলন নাই',
@@ -852,6 +855,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'সম্পূৰ্ণ ক\'ৰ্চ প্ৰদৰ্শন কৰক',
   'class.overview.course-map.rescope-info':
     'এই নেভিগেটৰ ক\'ৰ্চ বহুধা গ্ৰেডৰ মানক কভাৰ কৰা এক ব্যক্তিগত ক\'ৰ্চ হয়। প্ৰত্যেকজন ছাত্ৰ-ছাত্ৰীয়ে অন্তৰাল পূৰাবলৈ,  ধাৰণা সমূহ আৰু অনুশীলন সমূহ সুদৃঢ় কৰিবলৈ, আৰু তেওঁলোকৰ বিদ্যা ত্বৰাণ্বিত কৰিবলৈ বিশেষ ধৰণৰ ক\'ৰ্চ যোগান তেওঁলোকলৈ ধৰা হৈছে। ব্যক্তিগতকৃত মূল কাৰণ ডিজাইন কৰা হৈছে আৰু ছাত্ৰ-ছাত্ৰী সকলৰ বাস্তৱিক সময়ত প্ৰতেক ছাত্ৰ-ছাত্ৰীৰ শিকাৰ ক্ষমতাক অধিকতম কৰিবলৈ আৰু নিজে ধাৰ্য্য কৰা লক্ষ্যক নেভিগেট কৰিবলৈ আকৌ ৰুট কৰা হৈছে।',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'আমি এই ক\'ৰ্চটো বিশেষভাৱে আপোনাৰ কাৰণে আপোনাৰ দক্ষ্যতাৰ ওপৰত ভিত্তি কৰি ব্যক্তিগতকৃত কৰিছো। ব্যক্তিগতকৃত ক\'ৰ্চ মেপ প্ৰত্যক্ষ কৰিবলৈ অনুগ্ৰহ কৰি অলপ সময়ৰ পাছত চাওক।',
   'class.overview.course-map.route0-bannerdesc':
@@ -2606,5 +2611,7 @@ export default Object.assign(quizzesTranslations, {
   'student-milestone-not-ready':
     'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
   'warn.teacher-milestone-not-ready':
-    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.'
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path'
 });

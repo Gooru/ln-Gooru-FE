@@ -74,6 +74,7 @@ export default Object.assign(quizzesTranslations, {
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'গড় স্কোর',
   'common.frq': 'frq',
+  'common.tasks': 'tasks',
   'common.schedule': 'তফসিল',
   'common.responses': 'প্রতিক্রিয়া',
   'common.no-search-result':
@@ -112,8 +113,10 @@ export default Object.assign(quizzesTranslations, {
   'common.repeat-activity': 'পুনরাবৃত্তি কার্যকলাপ',
   'common.add-assessment': 'নতুন মূল্যায়ন তৈরি করুন',
   'common.plan': 'plan',
-  'offline-activities.no-completed-content': 'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content': 'There are no projects or other offline activities that the students are currently working on',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.add-century-skills': '21 শতকের দক্ষতা যোগ করুন',
   'common.add-collaborator': 'সহযোগী যোগ করুন',
   'common.add-collection': 'নতুন সংগ্রহ তৈরি করুন',
@@ -822,6 +825,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'সম্পূর্ণ কোর্স প্রদর্শন',
   'class.overview.course-map.rescope-info':
     'এই ন্যাভিগেটর কোর্সটি একটি ব্যক্তিগতকৃত কোর্স যা একাধিক শ্রেণীর জুড়ে মানকে আচ্ছাদিত করে। প্রতিটি ছাত্র ফাঁক পূরণ, ধারণা এবং অনুশীলন শক্তিশালী, এবং তাদের শেখার ত্বরান্বিত সাহায্য করার জন্য একটি অনন্য কোর্স প্রদান করা হয়। ব্যক্তিগতকৃত রুটগুলি ডিজাইন করা হয়েছে এবং শিক্ষার্থীদের প্রতিটি শিক্ষার্থীর শেখার সম্ভাব্যতা বাড়ানোর এবং তাদের সেট গন্তব্যে নেভিগেট করার জন্য রিয়েল-টাইমে পুনরায় রাউন্ড করা হয়।',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'আমরা আপনার দক্ষতার উপর ভিত্তি করে বিশেষভাবে আপনার জন্য এই কোর্স ব্যক্তিগতকৃত হয়। ব্যক্তিগতকৃত কোর্স মানচিত্র দেখতে একটু সময় আবার চেক করুন।',
   'class.overview.course-map.route0-bannerdesc':
@@ -2542,5 +2547,7 @@ export default Object.assign(quizzesTranslations, {
   'student-milestone-not-ready':
     'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
   'warn.teacher-milestone-not-ready':
-    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.'
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path'
 });

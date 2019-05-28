@@ -36,7 +36,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
     expandMore() {
       let component = this;
-      component.$('#second-panel').slideDown({
+      component.$('.ca-panel-container-2').slideDown({
         start: function() {
           component.$(this).css('display', 'grid');
         }
@@ -45,7 +45,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
     expandLess() {
       let component = this;
-      component.$('#second-panel').slideUp();
+      component.$('.ca-panel-container-2').slideUp();
     },
     /**
      * Action triggered when the user play collection

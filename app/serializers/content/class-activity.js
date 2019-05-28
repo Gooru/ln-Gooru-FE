@@ -79,6 +79,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       isCompleted: data.is_completed,
       questionCount: data.question_count || null,
       resourceCount: data.resource_count || null,
+      taskCount: data.task_count || 0,
       url: data.url,
       title: data.title,
       usersCount: data.users_count,

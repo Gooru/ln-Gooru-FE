@@ -17,7 +17,7 @@
   </div>
   <div class="student-report-body-container">
     <div class="milestone-lessons-container {{if isMilestoneNotStarted 'milestone-not-started'}}">
-      {{#each activeMilestone.lessons as |milestoneLesson|}}
+      {{#each milestoneLessons as |milestoneLesson|}}
         {{reports.pull-up.milestone.student-milestone-lesson-performance-accordion
           lesson = milestoneLesson
           classId = classId
@@ -29,3 +29,9 @@
     </div>
   </div>
 </div>
+
+{{#if isLoading}}
+  <div class="loading-spinner">
+    {{three-bounce-spinner}}
+  </div>
+{{/if}}

@@ -160,7 +160,8 @@
         line-height: 50px;
         border-top: 2px solid rgba(0, 0, 0, 0.1);
         cursor: pointer;
-        &.collection {
+        &.collection,
+        &.collection-external {
           background-color: #e4e5ea;
           color: #666;
         }

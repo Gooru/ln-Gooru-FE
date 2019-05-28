@@ -59,6 +59,7 @@ export default Object.assign(quizzesTranslations, {
   'common.efficacy': 'प्रभावोत्पादकता',
   'common.grid': 'ग्रिड',
   'common.list': 'सूची',
+  'common.tasks': 'tasks',
   'common.first': 'प्रथम',
   'common.last': 'अंतिम',
   'common.name': 'नाम',
@@ -96,8 +97,10 @@ export default Object.assign(quizzesTranslations, {
   'common.a-resource': 'एक संसाधन',
   'common.a-rubric': 'एक सुर्खी',
   'common.plan': 'plan',
-  'offline-activities.no-completed-content': 'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content': 'There are no projects or other offline activities that the students are currently working on',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.all-completed': 'सब पूरा हो गया',
   'common.a-assessment': 'एक मूल्यांकन',
   'common.about': 'के बारे में',
@@ -837,6 +840,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'पूरा पाठ्यक्रम मानचित्र दिखाएं',
   'class.overview.course-map.rescope-info':
     ' नेविगेटर पाठ्यक्रम एक व्यक्तिगत पाठ्यक्रम है जो सभी कक्षाओं के मानकों को सम्मिलित करता है।  हर विद्यार्थी को एक विशेष पाठ्यक्रम  उपलब्ध  किया जाता है, जो उनकी सीख के प्रक्रिया में गति लाने के साथ साथ उनक़ी आवशयकताओ को पूरा करता है और  अवधारणाएं  एवं अभ्यासों को सदृढ करता है.',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'हम विशेष रूप से आपकी प्रवीणता के आधार पर इस पाठ्यक्रम को वैयक्तिकृत कर रहे हैं। व्यक्तिगत पाठ्यक्रम मानचित्र देखने के लिए कृपया थोड़ी देर में वापस आएं।',
   'class.overview.course-map.route0-bannerdesc':
@@ -2577,5 +2582,7 @@ export default Object.assign(quizzesTranslations, {
   'student-milestone-not-ready':
     'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
   'warn.teacher-milestone-not-ready':
-    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.'
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path'
 });
