@@ -74,11 +74,13 @@ export default Object.assign(quizzesTranslations, {
   'common.avg-score': 'Avg Score',
   'common.frq': 'FRQ',
   'common.plan': 'plan',
-  'offline-activities.no-completed-content': 'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content': 'There are no projects or other offline activities that the students are currently working on',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.schedule': 'Schedule',
   'common.responses': 'Responses',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.no-lesson-info-message': 'This unit does have any lessons.',
   'common.no-collection-info-message': 'This lesson does have any collections.',
   'common.gooru-suggestions': 'Gooru Suggestions',
@@ -849,6 +851,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'ಸಂಪೂರ್ಣ ಪಠ್ಯ ನಕ್ಷೆ ತೋರಿಸಿ',
   'class.overview.course-map.rescope-info':
     'ಈ ಕೋರ್ಸ್ ಗಣಿತ ಅಡಿಪಾಯ ಕೋರ್ಸ್ನಿಂದ ನಿಮಗಾಗಿ ವೈಯಕ್ತಿಕವಾಗಿ ಪ್ರತ್ಯೇಕಿಸಲ್ಪಟ್ಟಿದೆ. ಮೂಲ ಕೋರ್ಸ್ ಅನ್ನು ನೋಡಲು, ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ.',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'ನಿಮ್ಮ ಕೌಶಲ್ಯದ ಆಧಾರದ ಮೇಲೆ ನಾವು ವಿಶೇಷವಾಗಿ ಈ ಕೋರ್ಸ್ ಅನ್ನು ವೈಯಕ್ತೀಕರಿಸುತ್ತೇವೆ. ದಯವಿಟ್ಟು ವೈಯಕ್ತೀಕರಿಸಿದ ಕೋರ್ಸ್ ನಕ್ಷೆಯನ್ನು ನೋಡಲು ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಪರಿಶೀಲಿಸಿ.',
   'class.overview.course-map.route0-bannerdesc':
@@ -2604,5 +2608,7 @@ export default Object.assign(quizzesTranslations, {
   'student-milestone-not-ready':
     'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
   'warn.teacher-milestone-not-ready':
-    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.'
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path'
 });

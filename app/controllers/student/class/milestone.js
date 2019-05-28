@@ -104,6 +104,11 @@ export default Ember.Controller.extend({
 
     onToggleRescope() {
       this.toggleProperty('showAllRescopedContent');
+    },
+
+    //Action triggered when toggle course info
+    onToggleCourseInfo() {
+      $('.rescope-content-preview.course-info-toggle-container').slideToggle();
     }
   }
 });

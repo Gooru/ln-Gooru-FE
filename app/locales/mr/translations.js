@@ -90,7 +90,7 @@ export default Object.assign(quizzesTranslations, {
   'common.no-suggest-search-results-message':
     'तुम्ही शोधण्यासाठी वापरलेले शब्द तपासा. त्या शब्दांसाठी पर्यायी शब्द वापरून पुन्हा प्रयत्न करा.',
   'common.a-collection': 'एक संग्रह',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.a-course': 'एक कोर्स',
   'common.a-question': 'एक प्रश्न',
   'common.a-resource': 'एक स्त्रोत',
@@ -100,8 +100,10 @@ export default Object.assign(quizzesTranslations, {
   'common.about': 'याबद्दल',
   'common.about-you': 'तुमच्याबद्दल',
   'common.plan': 'plan',
-  'offline-activities.no-completed-content': 'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content': 'There are no projects or other offline activities that the students are currently working on',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.about-me': 'माझ्याबद्दल',
   'common.accept': 'स्वीकार',
   'common.ignore': 'दुर्लक्ष',
@@ -830,6 +832,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'पूर्ण अभ्यासक्रम आराखडा दाखवा',
   'class.overview.course-map.rescope-info':
     'हा कोर्स विशेषतः गणित पाया अभ्यासक्रम आपल्याकडून वैयक्तिकृत केला गेला आहे. मूळ कोर्स पाहण्यासाठी, हे वैशिष्ट्य सक्षम करा',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'आम्ही आपल्या प्रवीणताच्या आधारावर विशेषतः आपल्यासाठी हा कोर्स वैयक्तिकृत करत आहोत. वैयक्तिकृत अभ्यासक्रम नकाशा पाहण्यासाठी थोड्या वेळाने परत तपासा.',
   'class.overview.course-map.route0-bannerdesc':
@@ -2552,5 +2556,7 @@ export default Object.assign(quizzesTranslations, {
   'student-milestone-not-ready':
     'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
   'warn.teacher-milestone-not-ready':
-    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.'
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path'
 });

@@ -71,7 +71,7 @@ export default Object.assign(quizzesTranslations, {
   'common.apply-filter': 'apply filter',
   'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.avg-score': 'સરેરાશ સ્કોર',
   'common.frq': 'ફ્રિક',
   'common.schedule': 'શેડ્યૂલ',
@@ -94,8 +94,10 @@ export default Object.assign(quizzesTranslations, {
   'common.a-question': 'એક પ્રશ્ન',
   'common.a-resource': 'એક સાધન',
   'common.plan': 'plan',
-  'offline-activities.no-completed-content': 'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content': 'There are no projects or other offline activities that the students are currently working on',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.a-rubric': 'રુબ્રિક',
   'common.all-completed': 'બધું પૂરું થયું',
   'common.a-assessment': 'મૂલ્યાંકન',
@@ -827,6 +829,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'સંપૂર્ણ અભ્યાસક્રમ બતાવો',
   'class.overview.course-map.rescope-info':
     'આ નેવિગેટર કોર્સ એ વ્યક્તિગત ધોરણ છે જે બહુવિધ ગ્રેડમાં ધોરણોને આવરી લે છે. દરેક વિદ્યાર્થીને અંતર ભરવા, ખ્યાલો અને સિદ્ધાંતોને મજબુત કરવામાં અને તેમના શિક્ષણને વેગ આપવા માટે એક અનન્ય અભ્યાસક્રમ પ્રદાન કરવામાં આવે છે. વ્યક્તિગત રૂપો ડિઝાઇન કરવામાં આવે છે અને વિદ્યાર્થીઓ પ્રત્યેક વિદ્યાર્થીની શીખવાની સંભવિતતાને મહત્તમ બનાવવા અને તેમના સેટ ગંતવ્ય પર નેવિગેટ કરવા માટે રીઅલ-ટાઇમમાં રી-રૂટ કરવામાં આવે છે.',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'અમે તમારી પ્રાવીણ્યના આધારે ખાસ કરીને તમારા માટે આ કોર્સને વ્યક્તિગત કરી રહ્યા છીએ. કૃપા કરીને વ્યક્તિગત કરેલ કોર્સ નકશા જોવા માટે થોડીવારમાં પાછા તપાસો.',
   'class.overview.course-map.route0-bannerdesc':
@@ -2547,5 +2551,7 @@ export default Object.assign(quizzesTranslations, {
   'student-milestone-not-ready':
     'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
   'warn.teacher-milestone-not-ready':
-    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.'
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path'
 });

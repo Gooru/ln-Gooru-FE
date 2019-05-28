@@ -107,6 +107,7 @@
             background: transparent;
             border-bottom: none;
             color: #666;
+            background: #ccc;
           }
         }
       }
@@ -190,6 +191,11 @@
 
             &.show-all-rescoped-content {
               display: block;
+              .milestone-course-map-lesson-panel {
+                .domain-lesson-title {
+                  font-style: italic;
+                }
+              }
             }
 
             &.class-grade-milestone {
@@ -319,6 +325,8 @@
               &.grade-range-not-started {
                 background: transparent;
                 color: #666;
+                background: #ccc;
+                border-bottom: 1px solid $white;
               }
             }
           }

@@ -9,26 +9,11 @@
       <div class="destination-point">{{gru-icon name="place"}}</div>
     </div>
   </div>
-  {{#if (and route0Applicable (or showRoute0SuggestionPreview showRoute0Suggestion))}}
-    <h5 class="pre-study-title hidden-xs">{{t 'class.overview.pre-study-title'}}</h5>
-    <div class="milestone-course-map-view-route0">
-      {{#if showRoute0Suggestion}}
-        {{student.class.milestone-course-map-route0
-        class=class
-      }}
-      {{else}}
-        {{student.class.milestone-course-map-route0-preview
-          class=class
-          route0=route0
-          course=course
-        }}
-      {{/if}}
-    </div>
-  {{/if}}
-  <h5>{{t 'class.overview.assigned-course'}}</h5>
-  <div class="rescope-content-preview">
+
+  <h5 class="learning-path-label">{{t 'course-map.your-learning-path'}} <span class="toggle-course-info" {{action "onToggleCourseInfo"}}>{{gru-icon name="info" style='material-icons-outlined'}}</span></h5>
+  <div class="rescope-content-preview course-info-toggle-container">
     <div class="rescope-content-preview-msg">
-      {{t 'class.overview.course-map.rescope-info'}}
+      {{t 'class.overview.course-map.learning-path'}}
     </div>
     <div class="show-completed-course">
       {{t 'class.overview.course-map.rescope-toggle'}}
@@ -40,6 +25,20 @@
     </div>
   </div>
   <div class="milestone-course-map-view">
+    {{#if (and route0Applicable (or showRoute0SuggestionPreview showRoute0Suggestion))}}
+      {{#if showRoute0Suggestion}}
+        {{student.class.milestone-course-map-route0
+        class=class
+      }}
+      {{else}}
+        {{student.class.milestone-course-map-route0-preview
+          class=class
+          route0=route0
+          course=course
+        }}
+      {{/if}}
+    {{/if}}
+
     {{student.class.milestone-course-map
    class=class
    rescopedContents=rescopedContents
