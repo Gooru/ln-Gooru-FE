@@ -77,7 +77,7 @@ export default Object.assign(quizzesTranslations, {
   'common.frq': 'frq',
   'common.schedule': 'அட்டவணை',
   'common.responses': 'பதில்களை',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.no-lesson-info-message': 'இந்த அலகு எந்த பாடங்கள் உள்ளன.',
   'common.no-collection-info-message':
     'இந்த பாடம் எந்த வசூலையும் கொண்டிருக்கவில்லை.',
@@ -101,8 +101,10 @@ export default Object.assign(quizzesTranslations, {
   'common.a-assessment': 'மதிப்பீடு',
   'common.about': 'பற்றி',
   'common.plan': 'plan',
-  'offline-activities.no-completed-content': 'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content': 'There are no projects or other offline activities that the students are currently working on',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.about-you': 'உன்னை பற்றி',
   'common.about-me': 'என்னை பற்றி',
   'common.accept': 'ஏற்க',
@@ -850,6 +852,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'முழுமையான போக்கைக் காட்டுங்கள்',
   'class.overview.course-map.rescope-info':
     'இந்த வழிகாட்டி பயிற்சியானது பல தரங்களுக்கிடையில் தரநிலைகளை உள்ளடக்கிய தனிப்பயனாக்கப்பட்ட பாடமாகும். ஒவ்வொரு மாணவருக்கும் தனித்துவமான படிப்பு வழங்கப்படும், இடைவெளிகளை நிரப்பவும், கருத்துக்களை மற்றும் நடைமுறைகளை வலுப்படுத்தவும், அவர்களின் கற்றல் முடுக்கி விடவும். தனிப்பயனாக்கப்பட்ட வழிகள் வடிவமைக்கப்பட்டுள்ளன மற்றும் ஒவ்வொரு மாணவரின் கற்றல் திறனை அதிகரிக்கவும் மற்றும் அவர்களது செட் இலக்குக்கு செல்லவும், நிகழ்நேரத்தில் மாணவர்கள் மீண்டும் வருகிறார்கள்.',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'உங்கள் தகுதி அடிப்படையில் நாங்கள் குறிப்பாக இந்த பாடத்தை தனிப்பயனாக்குகிறோம். தனிப்பயனாக்கப்பட்ட பாடத்திட்ட வரைபடத்தை காண சிறிது நேரத்தில் மீண்டும் பார்க்கவும்.',
   'class.overview.course-map.route0-bannerdesc':
@@ -2633,5 +2637,7 @@ export default Object.assign(quizzesTranslations, {
   'student-milestone-not-ready':
     'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
   'warn.teacher-milestone-not-ready':
-    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.'
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path'
 });

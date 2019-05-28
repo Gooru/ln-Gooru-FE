@@ -79,8 +79,10 @@ export default Object.assign(quizzesTranslations, {
   'common.frq': 'FRQ',
   'common.schedule': 'ସୂଚୀ',
   'common.plan': 'plan',
-  'offline-activities.no-completed-content': 'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content': 'There are no projects or other offline activities that the students are currently working on',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.no-search-result':
     'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.responses': 'ଉତ୍ତରଗୁଡ଼ିକ',
@@ -98,7 +100,7 @@ export default Object.assign(quizzesTranslations, {
     'ଆପଣଙ୍କ ବନାନ ଦେଖନ୍ତୁ । ଆମେ ସବୁ ଭୁଲ କରିଛେ ! କିମ୍ୱା ଏହା ବଦଳରେ ଅନୁରୂପ ଶବ୍ଦ ପାଇଁ ସନ୍ଧାନ କରନ୍ତୁ ।',
   'common.a-collection': 'ଏକ ସଂଗ୍ରହ',
   'common.a-course': 'ଏକ ପାଠ୍ୟକ୍ରମ',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.a-question': 'ଏକ ପ୍ରଶ୍ନ',
   'common.a-resource': 'ଏକ ଉତ୍ସ',
   'common.a-rubric': 'ଏକ ଶୀର୍ଷକ',
@@ -855,6 +857,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'ସଂପୂର୍ଣ୍ଣ ପାଠ୍ୟକ୍ରମ ଦେଖାନ୍ତୁ',
   'class.overview.course-map.rescope-info':
     'ଏହି ନେଭିଗେଟର୍ ପାଠ୍ୟକ୍ରମ ହେଉଛି ବ୍ୟକ୍ତିଗତ ପାଠ୍ୟକ୍ରମ ଯାହା ବିଭିନ୍ନ ଗ୍ରେଡ୍ ରେ ଷ୍ଟାଣ୍ଡାର୍ଡଗୁଡ଼ିକ ଅନ୍ତର୍ଭୁକ୍ତ କରେ । ପ୍ରତ୍ୟେକ ବିଦ୍ୟାର୍ଥୀଙ୍କୁ ଶୂନ୍ୟସ୍ଥାନ ପୂରଣ କରିବା, ବିଷୟବସ୍ତୁ ଓ ଅଭ୍ୟାସ ପ୍ରତି ଦୃଢ଼ କରିବା, ଏବଂ ସେମାନଙ୍କ ଶିକ୍ଷଣକୁ ତ୍ୱରିତ କରିବାରେ ସାହାଯ୍ୟ ପାଇଁ ଏକ ସ୍ୱତନ୍ତ୍ର ପାଠ୍ୟକ୍ରମ ପ୍ରଦାନ କରାଯାଇଛି । ବ୍ୟକ୍ତିଗତ ମାର୍ଗଗୁଡ଼ିକ ପ୍ରସ୍ତୁତ କରାଯାଇଛି ଓ ବିଦ୍ୟାର୍ଥୀମାନଙ୍କୁ ପ୍ରକୃତ ସମୟର ପୁନଃ-ମାର୍ଗରେ ନିଆଯାଇଛି ଫଳରେ ପ୍ରତ୍ୟେକ ବିଦ୍ୟାର୍ଥୀ ନିଜର ଶିକ୍ଷଣ ଦକ୍ଷତା ବଢ଼ାଇ ପାରିବେ ଓ ନିଜର ଲକ୍ଷ୍ୟ ଦିଗରେ ଯାଇ ପାରିବେ ।',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'ଆପଣଙ୍କ ଦକ୍ଷତା ଆଧାରରେ ଆମେ ବିଶେଷ ଭାବେ ଆପଣଙ୍କ ପାଇଁ ଏହି ପାଠ୍ୟକ୍ରମ ବ୍ୟକ୍ତିଗତକରଣ କରିଛୁ। ଦୟାକିର କିଛି ସମୟ ପରେ ବ୍ୟକ୍ତିଗତକରଣ ହୋଇଥିବା ପାଠ୍ୟକ୍ରମ ମାନଚିତ୍ରକୁ ଦେଖନ୍ତୁ ।',
   'class.overview.course-map.route0-bannerdesc':
@@ -2625,5 +2629,7 @@ export default Object.assign(quizzesTranslations, {
   'student-milestone-not-ready':
     'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
   'warn.teacher-milestone-not-ready':
-    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.'
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path'
 });

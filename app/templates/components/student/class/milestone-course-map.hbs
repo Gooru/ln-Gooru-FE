@@ -45,7 +45,7 @@
         {{#if milestone.hasLessonFetched}}
           {{#if milestone.lessons}}
             {{#each milestone.lessons as | lesson lessonIndex |}}
-              <div class="milestone-course-map-lesson {{if milestoneHasClassGrade 'class-grade-milestone'}} {{if showAllRescopedContent 'show-all-rescoped-content'}} {{if lesson.rescope 'rescope'}} {{if lesson.isNextActive 'next-active'}} {{if lesson.isPrevActive 'prev-active'}} {{if lesson.isActive 'active'}}">
+              <div class="milestone-course-map-lesson {{if milestoneHasClassGrade 'class-grade-milestone'}} {{if (or showAllRescopedContent milestone.isClassGrade) 'show-all-rescoped-content'}} {{if lesson.rescope 'rescope'}} {{if lesson.isNextActive 'next-active'}} {{if lesson.isPrevActive 'prev-active'}} {{if lesson.isActive 'active'}}">
                 <div class="milestone-course-map-lesson-panel first-path-{{lesson.firstCollHasSuggsType}} prev-col-path-{{lesson.prevLeCollHasSuggsType}}  {{if lesson.has-activity 'has-activity'}}" {{action 'toggleLessonItems'milestone milestone.lessons lesson lessonIndex}}>
                   <div class="lesson-icon-container">
                     <div class="lesson-icon-upward-line">
@@ -76,7 +76,7 @@
                   {{#if lesson.hasCollectionFetched}}
                     {{#if lesson.collections}}
                       {{#each lesson.collections as | collection |}}
-                        <div class="milestone-course-map-collection  {{if showAllRescopedContent 'show-all-rescoped-content'}} {{if collection.rescope 'rescope'}}">
+                        <div class="milestone-course-map-collection  {{if (or showAllRescopedContent milestone.isClassGrade) 'show-all-rescoped-content'}} {{if collection.rescope 'rescope'}}">
                           <div class="milestone-course-map-collection-panel prev-coll-path-{{collection.prevCollHasSuggsType}} next-coll-path-{{collection.nextCollHasSuggsType}} path-{{collection.pathType}}  {{if collection.has-activity 'has-activity'}} {{if collection.last-played-collection 'last-played-collection'}}">
                             <div class="collection-icon-container">
                               <div class="collection-icon-upward-line">
@@ -147,7 +147,7 @@
                 </div>
               </div>
             {{/each}}
-            <div class="milestone-lessons-rescope {{if (and milestone.rescope (not showAllRescopedContent)) 'show-message' }}">{{t 'milestone-rescoped' subject=gradeSubject.title}}</div>
+            <div class="milestone-lessons-rescope {{if (and milestone.rescope (not showAllRescopedContent) (not milestone.isClassGrade)) 'show-message' }}">{{t 'milestone-rescoped' subject=gradeSubject.title}}</div>
           {{else}}
             <div class="no-lesson">
               <span>{{t 'common.no-lesson-info-message'}}</span>
