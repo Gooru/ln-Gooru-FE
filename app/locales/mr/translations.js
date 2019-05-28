@@ -75,6 +75,7 @@ export default Object.assign(quizzesTranslations, {
   'common.frq': 'फ्रॅक',
   'common.schedule': 'वेळापत्रक',
   'common.responses': 'प्रतिसाद',
+  'common.tasks': 'tasks',
   'common.no-lesson-info-message': 'या युनिटमध्ये काही धडे आहेत.',
   'common.no-collection-info-message': 'या धड्यात कोणतेही संग्रह आहेत.',
   'common.gooru-suggestions': 'गुरूच्या सूचना',
@@ -90,7 +91,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-suggest-search-results-message':
     'तुम्ही शोधण्यासाठी वापरलेले शब्द तपासा. त्या शब्दांसाठी पर्यायी शब्द वापरून पुन्हा प्रयत्न करा.',
   'common.a-collection': 'एक संग्रह',
-  'common.offline-activites': 'offline activites',
+  'common.offline-activites':'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.a-course': 'एक कोर्स',
   'common.a-question': 'एक प्रश्न',
   'common.a-resource': 'एक स्त्रोत',

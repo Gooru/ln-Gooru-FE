@@ -1,30 +1,51 @@
-<div class="backdrop"></div>
-<div class="datepickers {{if isOfflineActivity 'offline'}}">
-  <div class="start-date">
-    <span class="{{unless isOfflineActivity 'hidden'}}">{{t 'goals.manage.start-date-label'}}</span>
-    {{ca-date-picker
-       userStartDateAsToday=true
-       onSelectDate='onScheduleStartDate'
-       showMonths=(if isOfflineActivity false true)
-       onSelectMonth='onScheduleCAForMonth'
-       forFirstDateOfMonth=forFirstDateOfMonth
-     }}
-  </div>
-  {{#if isOfflineActivity}}
-    <div class="end-date">
-      <span>{{t 'goals.manage.end-date-label'}}</span>
-      {{ca-date-picker
-       userStartDateAsToday=true
-       onSelectDate='onScheduleEndDate'
-       startDate=startDate
-       showMonths=false
-       validateEndDate=true
-     }}
-    </div>
-  {{/if}}
+<div class="backdrop" {{action 'close'}}></div>
+<div class="header-section hidden visible-xs">
+  <span class="back" {{action 'close'}}> {{gru-icon name="keyboard_backspace"}}</span>
+  <div class="title">Select Activity Dates</div>
 </div>
-{{#if isOfflineActivity}}
-  <div class="months">
-    {{ca-month-picker onSelectMonth='onScheduleOAForMonth' currentMonth=forFirstDateOfMonth}}
+<div class="date-info hidden visible-xs">
+  <div class="start-date-info {{if (eq selectedTabIndex 0) 'active'}}" {{action 'onSelectTab' 0}}>
+    <span>{{t 'goals.manage.start-date-label'}}</span>
+    <div class="date-container">
+      <span class="date">{{format-date startDate 'DD'}}</span>
+      <span class="month-year">{{format-date startDate 'MMM'}} {{format-date startDate 'YYYY'}}</span>
+      <span class="day">{{format-date startDate 'dddd'}}</span>
+    </div>
   </div>
-{{/if}}
+  <div class="end-date-info {{unless isOfflineActivity 'hidden'}} {{if (eq selectedTabIndex 1) 'active'}}" {{action 'onSelectTab' 1}}>
+    <span>{{t 'goals.manage.end-date-label'}}</span>
+    <div class="date-container">
+      {{#if endDate}}
+        <span class="date">{{format-date endDate 'DD'}}</span>
+        <span class="month-year">{{format-date endDate 'MMM'}} {{format-date endDate 'YYYY'}}</span>
+        <span class="day">{{format-date endDate 'dddd'}}</span>
+      {{else}}
+        <span class="not-selected">--</span>
+      {{/if}}
+    </div>
+  </div>
+</div>
+<div class="calendar">
+  {{ca-date-picker
+     userStartDateAsToday=true
+     onSelectDate='onScheduleStartDate'
+     showMonths=(if isOfflineActivity  false true)
+     onSelectMonth='onScheduleForMonth'
+     forFirstDateOfMonth=forFirstDateOfMonth
+     class=(if (eq selectedTabIndex 0) 'visible' 'hidden')
+   }}
+  {{ca-date-picker
+      userStartDateAsToday=true
+      onSelectDate='onScheduleEndDate'
+      startDate=startDate
+      showMonths=false
+      validateEndDate=true
+      class=(if (eq selectedTabIndex 1) 'visible' 'hidden')
+    }}
+</div>
+<div class="submit-btn hidden visible-xs {{unless isValid 'disable'}}" {{action 'submitDate'}}>
+  <span>{{t 'common.done'}}</span>
+</div>
+<div class="month-picker {{unless isOfflineActivity 'hidden'}}">
+  {{ca-month-picker onSelectMonth='onScheduleForMonth' currentMonth=forFirstDateOfMonth}}
+</div>

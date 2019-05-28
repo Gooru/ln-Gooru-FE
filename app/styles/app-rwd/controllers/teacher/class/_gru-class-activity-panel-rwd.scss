@@ -1,26 +1,3 @@
 .gru-class-activity-panel {
-  @media screen and (max-width: $screen-600) {
-    .dca-panel-container {
-      &.unscheduled {
-        .ca-panel-container-1 {
-          grid-template-columns: 1fr 80px;
-        }
-      }
-
-      .ca-panel-container-1 {
-        grid-template-columns: 1fr 60px;
-
-        .dca-content-counts {
-          display: none;
-        }
-      }
-
-      .ca-panel-container-2 {
-        grid-template-columns: 50px 40px 40px 1fr 60px;
-        .re-schedule {
-          justify-self: center;
-        }
-      }
-    }
-  }
+  @media screen and (max-width: $screen-767) {}
 }

@@ -204,11 +204,39 @@ export default Ember.Service.extend({
    * Gets all class scheduled activity for the authorized user (student|teacher)
    *
    * @param {string} classId
-   * @param {Month} month optional, default is current month
-   * @param {Year} year optional, default is current year
+   * @param {startDate} date optional, default is current date
+   * @param {endDate} date optional, default is current date
    * @returns {Promise}
    */
-  getClassScheduledActivities(classId,
+  getScheduledClassActivitiesForMonth(classId,
+    startDate = moment().format('YYYY-MM-DD'), endDate) {
+    const service = this;
+    let end_date = endDate ? endDate : startDate;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('classActivityAdapter')
+        .getScheduledActivities(classId, startDate, end_date).then(
+          function(payload) {
+            const classActivities = service
+              .get('classActivitySerializer')
+              .normalizeFindClassActivities(payload);
+            resolve(classActivities);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * Gets all class scheduled activity for the authorized user (student|teacher)
+   *
+   * @param {string} classId
+   * @param {startDate} date optional, default is current date
+   * @param {endDate} date optional, default is current date
+   * @returns {Promise}
+   */
+  getScheduledClassActivitiesForDate(classId,
     startDate = moment().format('YYYY-MM-DD'), endDate) {
     const service = this;
     let end_date = endDate ? endDate : startDate;
@@ -254,15 +282,7 @@ export default Ember.Service.extend({
             const classActivities = service
               .get('classActivitySerializer')
               .normalizeFindClassActivities(payload);
-            service
-              .findStudentActivitiesPerformanceSummary(
-                userId,
-                classId,
-                classActivities,
-                startDate,
-                end_date
-              )
-              .then(resolve, reject);
+            resolve(classActivities);
           },
           function(error) {
             reject(error);

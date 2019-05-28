@@ -426,11 +426,12 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
     /**
      * It will takes care of content will schedule for the specific month.
-     * @param  {Number} forMonth
-     * @param  {Number} forYear
+     * @param  {Moment} Month
      */
-    onScheduleForMonth(forMonth, forYear) {
+    onScheduleForMonth(month) {
       let component = this;
+      let forYear = month.get('monthYear');
+      let forMonth = month.get('monthNumber');
       let classId = component.get('classId');
       let contentType =
         component.get('selectedContentForSchedule.format') ||
@@ -675,6 +676,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
       return component.get('searchService').searchCollections(term, params);
     } else if (activeContentType === 'assessment') {
       return component.get('searchService').searchAssessments(term, params);
+    } else {
+      return component.get('searchService').searchOfflineActivity(term, params);
     }
   },
 
@@ -800,11 +803,12 @@ export default Ember.Component.extend(ConfigurationMixin, {
     } else {
       content.set('collectionType', format);
     }
-
     return Ember.Object.create({
       id: contentId,
+      title: content.get('title'),
       added_date: date,
       activityDate: date,
+      contentType: format,
       collection: content,
       usersCount: -1,
       isActive: false,

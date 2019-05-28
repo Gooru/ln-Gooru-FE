@@ -68,11 +68,7 @@ export default Ember.Component.extend({
     },
 
     onSelectMonth(month) {
-      this.sendAction(
-        'onSelectMonth',
-        month.get('monthNumber'),
-        month.get('monthYear')
-      );
+      this.sendAction('onSelectMonth', month);
     },
 
     onSelectToday() {
@@ -134,12 +130,6 @@ export default Ember.Component.extend({
   isInline: false,
 
   /**
-   * If startDate is null and userStartDateAsToday is true, it will takes current date.
-   * @type {Boolean}
-   */
-  userStartDateAsToday: false,
-
-  /**
    * It Maintains the state of month need to display or not.
    * @type {Boolean}
    */
@@ -196,8 +186,10 @@ export default Ember.Component.extend({
   onSelectStartDate: Ember.observer('startDate', function() {
     let component = this;
     let startDate = this.get('startDate');
-    component.enableDatePicker();
-    component.$('#ca-datepicker').datepicker('setStartDate', startDate);
+    if (startDate) {
+      component.enableDatePicker();
+      component.$('#ca-datepicker').datepicker('setStartDate', startDate);
+    }
   }),
 
 
@@ -218,14 +210,6 @@ export default Ember.Component.extend({
       format: 'yyyy-mm-dd',
       todayHighlight: true
     };
-    let startDate = this.get('startDate');
-    let userStartDateAsToday = this.get('userStartDateAsToday');
-    if (!startDate && userStartDateAsToday) {
-      startDate = moment().format('YYYY-MM-DD');
-    }
-    if (startDate) {
-      defaultParams.startDate = startDate;
-    }
     datepickerEle.datepicker(defaultParams);
     datepickerEle.off('changeDate').on('changeDate', function() {
       let datepicker = this;

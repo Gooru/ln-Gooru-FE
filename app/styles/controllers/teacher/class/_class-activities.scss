@@ -587,7 +587,7 @@
           width: 100%;
           grid-template-rows: 50px 1fr;
           grid-gap: 10px;
-          padding: 0 10px 10px;
+          padding: 0 0 10px 10px;
 
           &.panel {
             background: none;
@@ -677,19 +677,6 @@
           }
 
           .doa-active-container {
-            position: relative;
-            transition: height 0.45s ease-in;
-            height: auto;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            padding-bottom: 10px;
-
-            &.panel {
-              background: none;
-              box-shadow: none;
-            }
-
             .doa-active-items {
               width: 100%;
               height: 100%;
@@ -698,11 +685,11 @@
                 overflow-y: auto;
                 z-index: 1;
                 height: 100%;
-                padding: 10px;
+                margin: 10px 0;
                 display: inline-flex;
                 flex-direction: column;
                 width: 100%;
-                max-height: calc(100vh - 360px);
+                max-height: calc(100vh - 380px);
 
                 .no-active-content {
                   font-size: 16px;
@@ -713,18 +700,21 @@
 
           .doa-active-container,
           .oa-completed-container {
+            &.panel {
+              background: none;
+              box-shadow: none;
+            }
+
             .doa-active-header,
             .oa-completed-header {
               height: 50px;
-              box-shadow: rgba(0, 0, 0, 0.13) 0 2px 4px 0;
-              background: #fff;
               border-radius: 4px;
               align-items: center;
               display: grid;
               grid-template-columns: auto 60px;
               position: relative;
               width: 100%;
-              border: 1px solid #bbb;
+              border-bottom: 1px solid #bbb;
 
               .icons {
                 i {
@@ -768,19 +758,16 @@
 
               span {
                 text-transform: uppercase;
-                padding-left: 20px;
                 font-size: 12px;
                 font-weight: bold;
               }
             }
 
             .oa-completed-items {
-              padding: 10px;
-              background-color: rgb(216, 216, 216);
-
               .oa-completed-list {
-                max-height: calc(100vh - 380px);
+                max-height: calc(100vh - 400px);
                 overflow: auto;
+                margin: 10px 0;
 
                 .no-completed-content {
                   font-size: 16px;
@@ -791,7 +778,20 @@
         }
 
         .ca-grade-items-list-container {
-          grid-row-start: 2;
+          position: absolute;
+          width: 100%;
+          bottom: 10px;
+          display: grid;
+          height: auto;
+          width: 100%;
+          left: 0;
+          right: 0;
+          padding-right: 10px;
+
+          &.panel {
+            background: none;
+            box-shadow: none;
+          }
 
           .ca-grade-items-header {
             height: 50px;
@@ -888,7 +888,6 @@
       box-shadow: 0 13px 16px 0 rgba(0, 0, 0, 0.13);
       top: 50px;
       width: auto;
-      display: none;
 
       .backdrop {
         position: fixed;
@@ -916,36 +915,6 @@
             }
           }
         }
-      }
-    }
-    @media screen and (max-width: 992px) {
-      .ca-datepicker-schedule-container,
-      .schedule-ca-datepicker-container {
-        left: calc((100% - 250px) / 2) !important;
-
-        .ca-datepicker-orientation-top {
-          .ca-datepicker-top {
-            display: none;
-          }
-        }
-
-        .ca-datepicker-orientation-bottom {
-          .ca-datepicker-bottom {
-            display: none;
-          }
-        }
-      }
-    }
-    @media screen and (max-width: 992px) and (orientation: portrait) {
-      .ca-datepicker-schedule-container,
-      .schedule-ca-datepicker-container {
-        top: 49px !important;
-      }
-    }
-    @media screen and (max-width: 992px) and (orientation: landscape) {
-      .ca-datepicker-schedule-container,
-      .schedule-ca-datepicker-container {
-        top: 0 !important;
       }
     }
   }

@@ -66,6 +66,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'మొదటి పేరు',
   'common.filter-by': 'ద్వారా వడపోత',
   'common.more': 'మరింత',
+  'common.tasks': 'tasks',
   'common.no-search-result':
     'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.apply-filter': 'apply filter',
@@ -87,7 +88,8 @@ export default Object.assign(quizzesTranslations, {
     'మీ అక్షరక్రమాన్ని తనిఖీ చేయండి. మేము అన్ని తప్పులు చేస్తాము! లేదా బదులుగా ఒకే పదాన్ని శోధించడానికి ప్రయత్నించండి.',
   'common.a-collection': 'సేకరణ',
   'common.a-course': 'ఒక శిక్షణ',
-  'common.offline-activites': 'offline activites',
+  'common.offline-activites':'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.a-question': 'ఒక ప్రశ్న',
   'common.a-resource': 'ఒక వనరు',
   'common.a-rubric': 'ఒక రంధ్రం',

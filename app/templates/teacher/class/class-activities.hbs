@@ -5,7 +5,7 @@
         {{three-bounce-spinner}}
       </div>
       <div class="left-panel-container">
-        <div class="left-panel-header">
+        <div class="left-panel-header hidden-xs">
           <span class="title">{{t 'student-landing.class.class-activities'}}</span>
         </div>
         <div class="left-panel-content">
@@ -128,7 +128,7 @@
         </div>
       </div>
     </div>
-    <div class="ca-right-panel">
+    <div class="ca-right-panel hidden-xs">
       <div class="right-panel-container">
         <div class="right-panel-header">
           <span class="title">{{t 'common.offline-activites'}}</span>
@@ -186,7 +186,7 @@
                   </div>
                 </div>
               </div>
-              <div class="oa-completed-container panel panel-default">
+              <div class="panel panel-default oa-completed-container">
                 <div class="oa-completed-header collapsed" data-toggle="collapse" data-parent="#panels" data-target="#completed">
                   <span>{{t 'common.completed'}}</span>
                   <div class="icons">
@@ -255,24 +255,50 @@
   {{#if showDatePicker}}
     <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
       {{ca-daterange-datepicker
+      showDatePicker=showDatePicker
       onScheduleForDate='onScheduleForDate'
       onScheduleForMonth='onScheduleForMonth'
       contentType=selectedClassActivityForSchedule.contentType}}
     </div>
   {{/if}}
 </div>
-{{#if unScheduledClassActivities}}
-  {{teacher.class.ca-unscheduled-items-pullup
-    showPullUp=true
-    classId=classId
-    class=class
-    unScheduledClassActivities=unScheduledClassActivities
-    onChangeVisibility='changeVisibility'
-    onRemoveClassActivity='removeClassActivity'
-    forFirstDateOfMonth=forFirstDateOfMonth
-    class="hidden visible-xs visible-sm"
+<!--- Mobile View -->
+{{#teacher.class.ca-pull-up
+    showPullUp=false
+    contextHeader=itemsToGradeHeaderTitle
+    class="hidden visible-xs grade-items"
   }}
+  {{gru-grade-items contextSource=contextSource questionItems=itemsToGrade}}
+{{/teacher.class.ca-pull-up}}
+{{#if unScheduledClassActivities}}
+  {{#teacher.class.ca-pull-up
+    showPullUp=false
+    contextHeader=unscheduleHeaderTitle
+    class="hidden visible-xs unSchedule"
+  }}
+    {{#each unScheduledClassActivities as |classActivity|}}
+      {{class.gru-class-activity-panel
+      classActivity=classActivity
+      classId=classId
+      members=members
+      onReportclick='changeStatusValue'
+      classActivities=unScheduledClassActivities
+      onGoLive='goLive'
+      showDcaAssignButton=false
+      showDcaAddButton=false
+      onChangeVisibility='changeVisibility'
+      onRemoveClassActivity='removeClassActivity'
+      openDcaContentReport='openDcaContentReport'
+      activityDate=classActivity.added_date
+      showDcaRemoveButton=false
+      onScheduleContentToDCA='onScheduleContentToDCA'
+      isUnScheduled=true
+      onPreviewContent="onPreviewContent"
+    }}
+    {{/each}}
+  {{/teacher.class.ca-pull-up}}
 {{/if}}
+<!-- Search -->
 {{#if showSearchContentPullup}}
   {{teacher.class.ca-search-content-pull-up
     showPullUp=showSearchContentPullup
@@ -286,6 +312,8 @@
     onPreviewContent="onPreviewContent"
   }}
 {{/if}}
+
+<!-- Report -->
 {{#if showDcaCollectionReportPullUp}}
   {{#if (not-eq dcaCollectionReportData.collection.format 'collection-external')}}
     {{reports.pull-up.dca-collection-report
@@ -319,12 +347,15 @@
   {{/reports.pull-up.activity.add-performance-data}}
 {{/if}}
 
+<!-- Summary Report -->
 {{#if isShowOCASummaryReportPullUp}}
   {{teacher.offline-class.oca-summary-report-pull-up
     classId=class.id
     performanceSummary=performanceSummaryForDCA
     onClosePullUp="onClosePullUp"}}
 {{/if}}
+
+<!-- Preview -->
 
 {{#if isShowContentPreview}}
   {{reports.pull-up.gru-collection-preview

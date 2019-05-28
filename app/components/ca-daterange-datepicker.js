@@ -1,13 +1,16 @@
 import Ember from 'ember';
 import {
-  PLAYER_EVENT_SOURCE
+  PLAYER_EVENT_SOURCE,
+  SCREEN_SIZES
 } from 'gooru-web/config/config';
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
   classNames: ['ca-daterange-picker'],
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -27,10 +30,10 @@ export default Ember.Component.extend({
    * Maintains the value which of activity startDate
    * @type {Integer}
    */
-  startDate: null,
+  startDate: moment(),
 
   /**
-  * Maintains the value which of activity endDate
+   * Maintains the value which of activity endDate
    * @type {Integer}
    */
   endDate: null,
@@ -61,39 +64,75 @@ export default Ember.Component.extend({
     let date = `${forYear}-${forMonth}-01`;
     return moment(date).format('YYYY-MM-DD');
   }),
-  // -------------------------------------------------------------------------
-  // Events
 
+  /**
+   * @property {Integer} selectedTabIndex
+   * Property to handle selected tab index value
+   */
+  selectedTabIndex: 0,
+
+  /**
+   * @property {Boolean} isMobileView
+   * Property to handle is mobile view
+   */
+  isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
+
+  isValid: Ember.computed('isOfflineActivity', 'endDate', function() {
+    let component = this;
+    return component.get('isOfflineActivity') && component.get('endDate') ||
+      !component.get('isOfflineActivity') && component.get('startDate');
+  }),
 
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
+    close() {
+      let component = this;
+      component.set('showDatePicker', false);
+    },
+
+    submitDate() {
+      let component = this;
+      let startDate = component.get('startDate').format('YYYY-MM-DD');
+      let endDate = component.get('endDate');
+      let formatedEndDate = endDate ? endDate.format('YYYY-MM-DD') : endDate;
+      let isOfflineActivity = component.get('isOfflineActivity');
+      component.sendAction('onScheduleForDate', startDate, formatedEndDate, isOfflineActivity);
+      component.send('close');
+    },
+
+    onSelectTab(index) {
+      let component = this;
+      component.set('selectedTabIndex', index);
+    },
+
     onScheduleEndDate(date) {
       let component = this;
       let startDate = component.get('startDate');
+      let isOfflineActivity = component.get('isOfflineActivity');
       component.set('endDate', date);
-      component.sendAction('onScheduleForDate', startDate, date, true);
-    },
-
-    onScheduleStartDate(date) {
-      let component = this;
-      component.set('startDate', date);
-      if (!component.get('isOfflineActivity')) {
-        component.sendAction('onScheduleForDate', date, date, false);
+      if (!component.get('isMobileView')) {
+        component.sendAction('onScheduleForDate', startDate, date, isOfflineActivity);
       }
     },
 
-    onScheduleCAForMonth(forMonth, forYear) {
+    onScheduleStartDate(startDate) {
       let component = this;
-      component.sendAction('onScheduleForMonth', forMonth, forYear, false);
+      let isOfflineActivity = component.get('isOfflineActivity');
+      component.set('startDate', startDate);
+      if (!component.get('isOfflineActivity') && !component.get('isMobileView')) {
+        component.sendAction('onScheduleForDate', startDate, startDate, isOfflineActivity);
+      }
     },
 
-    onScheduleOAForMonth(month) {
+    onScheduleForMonth(month) {
       let component = this;
+      let isOfflineActivity = component.get('isOfflineActivity');
       let forMonth = month.get('monthNumber');
       let forYear = month.get('monthYear');
-      component.sendAction('onScheduleForMonth', forMonth, forYear, true);
+      component.sendAction('onScheduleForMonth', forMonth, forYear, isOfflineActivity);
     }
   }
 });

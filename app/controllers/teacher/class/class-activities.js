@@ -2,8 +2,12 @@ import Ember from 'ember';
 import SessionMixin from 'gooru-web/mixins/session';
 import ModalMixin from 'gooru-web/mixins/modal';
 import {
-  PLAYER_EVENT_SOURCE
+  PLAYER_EVENT_SOURCE,
+  SCREEN_SIZES
 } from 'gooru-web/config/config';
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
 
 /**
  * Class activities controller
@@ -128,64 +132,76 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      */
     addedContentToDCA(classActivityData, addedDate, forMonth, forYear) {
       let controller = this;
-      let addedMonth = forMonth ?
-        parseInt(forMonth) :
-        parseInt(moment(addedDate).format('MM'));
-      let addedYear = forYear ?
-        parseInt(forYear) :
-        parseInt(moment(addedDate).format('YYYY'));
-      let forFirstDateOfMonth = controller.get('forFirstDateOfMonth');
-      let selectedMonth = parseInt(moment(forFirstDateOfMonth).format('MM'));
-      let selectedYear = parseInt(moment(forFirstDateOfMonth).format('YYYY'));
-      if (selectedMonth === addedMonth && addedYear === selectedYear) {
-        let classActivities = controller.get('classActivities');
-        let dateWiseClassActivities = classActivities.findBy(
-          'added_date',
-          addedDate
-        );
-        if (!dateWiseClassActivities) {
-          classActivities.pushObject(
-            Ember.Object.create({
-              added_date: addedDate,
-              classActivities: Ember.A([])
-            })
-          );
-          dateWiseClassActivities = classActivities.findBy(
+      let isOfflineActivity = classActivityData.get('contentType') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS;
+      if (isOfflineActivity) {
+        let activeOfflineActivities = controller.get('activeOfflineActivities');
+        activeOfflineActivities.pushObject(classActivityData);
+        let unScheduledClassActivities = controller.get('unScheduledClassActivities');
+        unScheduledClassActivities.removeObject(classActivityData);
+        classActivityData.set('isNewlyAdded', true);
+        Ember.run.later(function() {
+          classActivityData.set('isNewlyAdded', false);
+        }, 2000);
+      } else {
+        let addedMonth = forMonth ?
+          parseInt(forMonth) :
+          parseInt(moment(addedDate).format('MM'));
+        let addedYear = forYear ?
+          parseInt(forYear) :
+          parseInt(moment(addedDate).format('YYYY'));
+        let forFirstDateOfMonth = controller.get('forFirstDateOfMonth');
+        let selectedMonth = parseInt(moment(forFirstDateOfMonth).format('MM'));
+        let selectedYear = parseInt(moment(forFirstDateOfMonth).format('YYYY'));
+        if (selectedMonth === addedMonth && addedYear === selectedYear) {
+          let classActivities = controller.get('classActivities');
+          let dateWiseClassActivities = classActivities.findBy(
             'added_date',
             addedDate
           );
-        }
-        let id = classActivityData.get('collection.id');
-        let addClassActivity = dateWiseClassActivities
-          .get('classActivities')
-          .findBy('collection.id', id);
-        if (!addClassActivity) {
-          addClassActivity = classActivityData;
-          dateWiseClassActivities
+          if (!dateWiseClassActivities) {
+            classActivities.pushObject(
+              Ember.Object.create({
+                added_date: addedDate,
+                classActivities: Ember.A([])
+              })
+            );
+            dateWiseClassActivities = classActivities.findBy(
+              'added_date',
+              addedDate
+            );
+          }
+          let id = classActivityData.get('collection.id');
+          let addClassActivity = dateWiseClassActivities
             .get('classActivities')
-            .pushObject(classActivityData);
-          let sortedDateWiseClassActivities = dateWiseClassActivities
-            .get('classActivities')
-            .sortBy('id')
-            .reverse();
-          dateWiseClassActivities.set(
+            .findBy('collection.id', id);
+          if (!addClassActivity) {
+            addClassActivity = classActivityData;
+            dateWiseClassActivities
+              .get('classActivities')
+              .pushObject(classActivityData);
+            let sortedDateWiseClassActivities = dateWiseClassActivities
+              .get('classActivities')
+              .sortBy('id')
+              .reverse();
+            dateWiseClassActivities.set(
+              'classActivities',
+              sortedDateWiseClassActivities
+            );
+          }
+          if (!classActivityData.get('isAddedFromPanel')) {
+            controller.get('newlyAddedDcaContents').pushObject(addClassActivity);
+          } else {
+            addClassActivity.set('isNewlyAdded', true);
+            Ember.run.later(function() {
+              addClassActivity.set('isNewlyAdded', false);
+            }, 2000);
+          }
+          this.set(
             'classActivities',
-            sortedDateWiseClassActivities
+            classActivities.sortBy('added_date').reverse()
           );
+          controller.fetchAssessmentsMasteryAccrual();
         }
-        if (!classActivityData.get('isAddedFromPanel')) {
-          controller.get('newlyAddedDcaContents').pushObject(addClassActivity);
-        } else {
-          addClassActivity.set('isNewlyAdded', true);
-          Ember.run.later(function() {
-            addClassActivity.set('isNewlyAdded', false);
-          }, 2000);
-        }
-        this.set(
-          'classActivities',
-          classActivities.sortBy('added_date').reverse()
-        );
-        controller.fetchAssessmentsMasteryAccrual();
       }
     },
 
@@ -318,16 +334,25 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let classId = controller.get('classId');
       let classActivity = controller.get('selectedClassActivityForSchedule');
       let content = classActivity.get('collection');
-      let contentType = isOfflineActivity ? PLAYER_EVENT_SOURCE.OFFLINE_CLASS : content.get('format');
-      let contentId = classActivity.get('id');
       let collectionId = classActivity.get('contentId') || content.get('id');
+      controller.send('onCloseDatePicker');
+      if (controller.isActivityAlreadyExists(scheduleDate, collectionId)) {
+        return;
+      }
+      if (!classActivity.get('added_date')) {
+        classActivity.set('added_date', scheduleDate);
+      }
+      let contentId = classActivity.get('id');
+      let contentType = isOfflineActivity ? PLAYER_EVENT_SOURCE.OFFLINE_CLASS : content.get('format');
       let scheduleMonth = moment(scheduleDate).format('MM');
       let scheduleYear = moment(scheduleDate).format('YYYY');
-      let selectedActivityIsUnScheduled = controller.get('selectedActivityIsUnScheduled');
-      controller.send('onCloseDatePicker');
+      let currentScheduleMonth = classActivity.get('forMonth');
+      let currentScheduleYear = classActivity.get('forYear');
+      let useOldInstance = currentScheduleMonth === parseInt(scheduleMonth) &&
+        currentScheduleYear === parseInt(scheduleYear) && controller.get('selectedActivityIsUnScheduled');
       return Ember.RSVP
         .hash({
-          scheduleActivity: selectedActivityIsUnScheduled ? controller
+          scheduleActivity: useOldInstance ? controller
             .get('classActivityService')
             .scheduleClassActivity(classId, contentId, scheduleDate, scheduleEndDate) : controller
             .get('classActivityService')
@@ -410,19 +435,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let controller = this;
       controller.set('selectedActivityIsUnScheduled', isUnScheduled);
       controller.set('selectedClassActivityForSchedule', classActivity);
-      let isOfflineActivity = classActivity.get('contentType') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS;
       controller.set('showDatePicker', true);
       Ember.run.later(function() {
         let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
         let datepickerCtnEle = Ember.$(
-          '.ca-datepicker-schedule-container .ca-date-picker-container'
+          '.ca-datepicker-schedule-container .ca-daterange-picker'
         );
         datepickerCtnEle.removeClass('ca-datepicker-orientation-top');
         datepickerCtnEle.removeClass('ca-datepicker-orientation-bottom');
         datepickerCtnEle.removeClass('ca-datepicker-orientation-left');
         let selectedContentEle = Ember.$(event.target);
         let position = selectedContentEle.position();
-        let top = position.top - datepickerEle.height();
+        let top = position.top + 27 - datepickerEle.height();
         let left = position.left + 10 - datepickerEle.width();
         let controllerHeight = Ember.$(
           '.teacher.class.class-activities'
@@ -439,19 +463,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         } else {
           datepickerCtnEle.addClass('ca-datepicker-orientation-top');
         }
-        if (isOfflineActivity) {
-          datepickerEle.css({
-            top: top,
-            right: left,
-            left: 'inherit'
-          });
-        } else {
-          datepickerEle.css({
-            top: top,
-            left: left,
-            right: 'inherit'
-          });
-        }
+        datepickerEle.css({
+          top: top,
+          left: left
+        });
         if (!selectedContentEle.hasClass('active')) {
           selectedContentEle.addClass('active');
           datepickerEle.show();
@@ -460,6 +475,61 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           datepickerEle.hide();
         }
       }, 100);
+      // if (!selectedContentEle.hasClass('active')) {
+      //   selectedContentEle.addClass('active');
+      //   datepickerEle.show();
+      // } else {
+      //   selectedContentEle.removeClass('active');
+      //   datepickerEle.hide();
+      // }
+      // Ember.run.later(function() {
+      //   let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
+      //   let datepickerCtnEle = Ember.$(
+      //     '.ca-datepicker-schedule-container .ca-date-picker-container'
+      //   );
+      //   datepickerCtnEle.removeClass('ca-datepicker-orientation-top');
+      //   datepickerCtnEle.removeClass('ca-datepicker-orientation-bottom');
+      //   datepickerCtnEle.removeClass('ca-datepicker-orientation-left');
+      //   let selectedContentEle = Ember.$(event.target);
+      //   let position = selectedContentEle.position();
+      //   let top = position.top - datepickerEle.height();
+      //   let left = position.left + 10 - datepickerEle.width();
+      //   let controllerHeight = Ember.$(
+      //     '.teacher.class.class-activities'
+      //   ).height();
+      //   let windowHeight = $(window).height();
+      //   let allowedTop = windowHeight - controllerHeight + top;
+      //   if (left < 0) {
+      //     left = position.left;
+      //     datepickerCtnEle.addClass('ca-datepicker-orientation-left');
+      //   }
+      //   if (allowedTop < 0) {
+      //     datepickerCtnEle.addClass('ca-datepicker-orientation-bottom');
+      //     top = position.top + 25;
+      //   } else {
+      //     datepickerCtnEle.addClass('ca-datepicker-orientation-top');
+      //   }
+      //   if (isOfflineActivity) {
+      //     datepickerEle.css({
+      //       top: top,
+      //       right: left,
+      //       left: 'inherit'
+      //     });
+      //   } else {
+      //     datepickerEle.css({
+      //       top: top,
+      //       left: left,
+      //       right: 'inherit'
+      //     });
+      //   }
+      //   if (!selectedContentEle.hasClass('active')) {
+      //     selectedContentEle.addClass('active');
+      //     datepickerEle.show();
+      //   } else {
+      //     selectedContentEle.removeClass('active');
+      //     datepickerEle.hide();
+      //   }
+      // }, 100);
     },
 
     onSelectToday(date) {
@@ -575,6 +645,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Properties
 
+  /**
+   * @property {Boolean} isMobileView
+   * Property to handle is mobile view
+   */
+  isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
+
   showDatePicker: false,
 
   /**
@@ -646,6 +723,30 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * @property {Array}
    */
   classActivitiesOfMonth: Ember.A([]),
+
+  /**
+   * It Maintains the label name for unschedule item
+   * @property {String}
+   */
+  unscheduleHeaderTitle: Ember.computed('isMobileView', function() {
+    return this.get('i18n').t('common.unscheduled-items').string;
+  }),
+
+  /**
+   * It Maintains the label name for grade items item
+   * @property {String}
+   */
+  itemsToGradeHeaderTitle: Ember.computed('isMobileView', function() {
+    return this.get('i18n').t('class.analytics.performance.grade-items').string;
+  }),
+
+  /**
+   * It Maintains the label name for offline activity item
+   * @property {String}
+   */
+  offlineActivityHeaderTitle: Ember.computed('isMobileView', function() {
+    return this.get('i18n').t('common.offline-activites').string;
+  }),
 
   /**
    * @property {boolean} Indicates if there are class activities
@@ -946,6 +1047,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Methods
 
+  isActivityAlreadyExists(scheduleDate, contentId) {
+    let controller = this;
+    let activitiesForDate = controller.get('classActivitiesOfMonth').filterBy('added_date', scheduleDate);
+    let activities = activitiesForDate.filterBy('contentId', contentId);
+    return activities.length;
+  },
+
   /**
    * Removes a class activity from a list of classActivities
    * @param {classActivity} classActivity
@@ -961,12 +1069,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       }
       offlineActivities.removeObject(classActivity);
     } else {
-      let classActivities = this.get('classActivities');
+      let classActivities = this.get('scheduledClassActivities');
+      let classActivitiesOfMonth = this.get('classActivitiesOfMonth');
       let addedDate = classActivity.get('added_date');
       let dateWiseClassActivities = classActivities.findBy(
         'added_date',
         addedDate
       );
+      let monthWiseClassActivity = classActivitiesOfMonth.findBy(
+        'added_date',
+        addedDate
+      );
+      classActivitiesOfMonth.removeObject(monthWiseClassActivity);
       let classActivityToDelete = dateWiseClassActivities
         .get('classActivities')
         .findBy('id', id);
@@ -1066,7 +1180,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     controller.set('isLoading', true);
     controller
       .get('classActivityService')
-      .getClassScheduledActivities(classId, startDate, endDate)
+      .getScheduledClassActivitiesForMonth(classId, startDate, endDate)
       .then(classActivities => {
         controller.set('classActivitiesOfMonth', classActivities);
         controller.set('isLoading', false);
@@ -1080,7 +1194,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     controller.set('isLoading', true);
     controller
       .get('classActivityService')
-      .getClassScheduledActivities(classId, date)
+      .getScheduledClassActivitiesForDate(classId, date)
       .then(classActivities => {
         controller.set('classActivities', Ember.A([]));
         if (classActivities && classActivities.length > 0) {

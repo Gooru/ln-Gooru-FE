@@ -4,8 +4,16 @@
       <div class="icon">
         <i class="{{classActivity.contentType}}-icon" />
       </div>
-      <div class="title ellipsis {{if isOfflineActivity 'disable-event'}}" {{action 'onPlayContent' item}}>
-        <span>{{classActivity.title}}</span>
+      <div class="title-info {{if isOfflineActivity 'offline'}}" {{action 'onPlayContent' item}}>
+        <div class="label-section">
+          <div class="title ellipsis">{{classActivity.title}}</div>
+          <div class="group">
+            <span class="date-section">
+              {{format-date classActivity.dca_added_date 'DD MMM'}} - {{format-date (if classActivity.end_date classActivity.end_date classActivity.dca_added_date) 'DD MMM'}}
+            </span>
+            <span class="task-count">{{t 'common.tasks'}} {{classActivity.taskCount}}</span>
+          </div>
+        </div>
       </div>
       <div class="resource-info">
         {{#if (gt classActivity.resourceCount 0)}}
@@ -41,7 +49,7 @@
         {{/if}}
       </div>
       <div class="more">
-        <span {{action 'showMore'}}>
+        <span {{action 'expandMore'}}>
           {{gru-icon name="more_vert"}}
         </span>
       </div>
@@ -69,14 +77,20 @@
               </div>
             {{else}}
               <div class="dca-panel-performance not-started">
-                <span class="no-performance">--</span>
+                <div class="thumbnail-img">
+                  {{#if item.thumbnailUrl}}
+                    <img src="{{item.thumbnailUrl}}" />
+                  {{else if classActivity.thumbnail}}
+                    <img src="{{classActivity.thumbnail}}" />
+                  {{/if}}
+                </div>
               </div>
             {{/if}}
           {{/if}}
         </div>
       </div>
     </div>
-    <div class="ca-panel-container-2 {{if isShowMore 'visible'}}">
+    <div class="ca-panel-container-2">
       <div class="ca-actions">
         <div class="student-count {{if showCohort 'active'}}">
           {{gru-icon name="account_circle"}}
@@ -92,10 +106,10 @@
           <div class="re-schedule-activity ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
             {{#if collectionPerformanceSummary}}
               {{gru-icon name="replay"}}
-              <span class="hidden-xs">{{t 'common.repeat-activity'}}</span>
+              <span>{{t 'common.repeat-activity'}}</span>
             {{else}}
               {{gru-icon name="update"}}
-              <span class="hidden-xs">{{t 'common.Reschedule'}}</span>
+              <span>{{t 'common.Reschedule'}}</span>
             {{/if}}
           </div>
         </div>
@@ -105,7 +119,7 @@
               <span class="mastery-accrual-icon mastery-accrual-{{if classActivity.allowMasteryAccrual 'checked' 'unchecked'}}">
                 {{gru-icon name=(concat 'radio_button_' (if  classActivity.allowMasteryAccrual 'checked' 'unchecked'))}}
               </span>
-              <span class="mastery-accrual-text  hidden-xs">{{t 'common.mastery'}}</span>
+              <span class="mastery-accrual-text">{{t 'common.mastery'}}</span>
             </div>
           {{/if}}
         </div>
@@ -126,17 +140,17 @@
           </div>
         {{/if}}
       </div>
-      <div class="delete-activity">
-        <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.remove"}}" {{action 'removeClassActivity' classActivity}}>
+      {{#unless classActivity.isCompleted}}
+        <div class="delete-activity">
+          <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.remove"}}" {{action 'removeClassActivity' classActivity}}>
+            {{gru-icon name="delete_outline"}}
+          </span>
+        </div>
+      {{/unless}}
+      <div class="close-activity">
+        <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.close"}}" {{action 'expandLess'}}>
           {{gru-icon name="close"}}
         </span>
-      </div>
-      <div class="thumbnail-img">
-        {{#if item.thumbnailUrl}}
-          <img src="{{item.thumbnailUrl}}" />
-        {{else if classActivity.thumbnail}}
-          <img src="{{classActivity.thumbnail}}" />
-        {{/if}}
       </div>
     </div>
   {{else}}
@@ -144,7 +158,7 @@
       <div class="icon">
         <i class="{{classActivity.contentType}}-icon" />
       </div>
-      <div class="title ellipsis" {{action 'onPlayContent' item}}>
+      <div class="title-info ellipsis" {{action 'onPlayContent' item}}>
         <span>{{classActivity.title}}</span>
       </div>
       <div class="resource-info">
