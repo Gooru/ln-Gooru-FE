@@ -372,17 +372,17 @@ export default Ember.Component.extend({
   blockAttribute: null,
 
   /**
-   * @property {Array} studyMasteredCompetencies
+   * @property {Array} studentMasteredCompetencies
    * It has competencies info which is mastered by the student
    */
-  studyMasteredCompetencies: Ember.computed(function() {
+  studentMasteredCompetencies: Ember.computed(function() {
     const component = this;
     const navigateMapService = component.get('navigateMapService');
-    let studyMasteredCompetencies = navigateMapService
+    let studentMasteredCompetencies = navigateMapService
       .getLocalStorage()
       .getItem(navigateMapService.getMasteredCompetenciesKey());
-    return studyMasteredCompetencies
-      ? JSON.parse(studyMasteredCompetencies)
+    return studentMasteredCompetencies
+      ? JSON.parse(studentMasteredCompetencies)
       : Ember.A([]);
   }),
 
@@ -450,7 +450,7 @@ export default Ember.Component.extend({
       component.drawChart(chartData);
       component.set('chartData', chartData);
       if (component.get('isPlayerProficiency')) {
-        component.highlightStudyMasteredCompetency(chartData);
+        component.highlightStudentMasteredCompetency(chartData);
       }
     }
     component.onToggleBaseline();
@@ -489,7 +489,7 @@ export default Ember.Component.extend({
     let resultSet = Ember.A();
     let numberOfCellsInEachColumn = Ember.A();
     if (component.get('isPlayerProficiency')) {
-      component.populateStudyMasteredCompetency(competencyMatrixs);
+      component.populateStudentMasteredCompetency(competencyMatrixs);
     }
     domains.forEach(domainData => {
       let domainCode = domainData.get('domainCode');
@@ -1050,15 +1050,17 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function populateStudyMasteredCompetency
+   * @function populateStudentMasteredCompetency
    * Method to populate mastered competency through studyplayer
    */
-  populateStudyMasteredCompetency(competencyMatrixs) {
+  populateStudentMasteredCompetency(competencyMatrixs) {
     const component = this;
-    let studyMasteredCompetencies = component.get('studyMasteredCompetencies');
-    studyMasteredCompetencies.map(studyMasteredCompetency => {
-      const domainCode = studyMasteredCompetency.domainCode;
-      const competencyCode = studyMasteredCompetency.competencyCode;
+    let studentMasteredCompetencies = component.get(
+      'studentMasteredCompetencies'
+    );
+    studentMasteredCompetencies.map(studentMasteredCompetency => {
+      const domainCode = studentMasteredCompetency.domainCode;
+      const competencyCode = studentMasteredCompetency.competencyCode;
       let domainCompetencies = competencyMatrixs.findBy(
         'domainCode',
         domainCode
@@ -1080,13 +1082,15 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function highlightStudyMasteredCompetency
+   * @function highlightStudentMasteredCompetency
    * Method to highlight recently mastered competency
    */
-  highlightStudyMasteredCompetency(chartData) {
+  highlightStudentMasteredCompetency(chartData) {
     const component = this;
-    let studyMasteredCompetencies = component.get('studyMasteredCompetencies');
-    let masteredCompetency = studyMasteredCompetencies.findBy(
+    let studentMasteredCompetencies = component.get(
+      'studentMasteredCompetencies'
+    );
+    let masteredCompetency = studentMasteredCompetencies.findBy(
       'isHighLight',
       true
     );
