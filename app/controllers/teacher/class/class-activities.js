@@ -59,12 +59,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      * Action triggered when unschedule item got clicked.
      */
     toggleUnSchedule() {
-      let controller = this;
       let unScheduleEle = Ember.$('.ca-panel .left-panel .unschedule-container');
       let leftPanelEle = Ember.$('.ca-panel .left-panel');
-      let controllerHeight = Ember.$(
-        '.teacher.class.class-activities'
-      ).height();
       let scheduleEle = Ember.$('.schedule-container .ca-schedule-section .dca-content-list-container');
       if (unScheduleEle.hasClass('active')) {
         unScheduleEle.removeClass('active');
@@ -75,6 +71,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           });
         });
       } else {
+        unScheduleEle.addClass('active');
         scheduleEle.animate({
           height: 'auto'
         }, function() {
@@ -115,7 +112,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     },
 
     onCloseDatePicker() {
-      let controller = this;
       let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
       datepickerEle.hide();
     },
