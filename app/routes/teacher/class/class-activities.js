@@ -90,6 +90,9 @@ export default Ember.Route.extend({
   resetController(controller) {
     controller.set('tab', null);
     controller.set('classActivities', Ember.A([]));
+    controller.set('activeOfflineActivities', Ember.A([]));
+    controller.set('completedOfflineActivities', Ember.A([]));
+    controller.set('unScheduledClassActivities', Ember.A([]));
     controller.set('month', null);
     controller.set('year', null);
     controller.set('selectedDate', null);

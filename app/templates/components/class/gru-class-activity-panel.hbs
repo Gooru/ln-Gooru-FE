@@ -11,7 +11,7 @@
             <span class="date-section">
               {{format-date classActivity.dca_added_date 'DD MMM'}} - {{format-date (if classActivity.end_date classActivity.end_date classActivity.dca_added_date) 'DD MMM'}}
             </span>
-            <span class="task-count">{{t 'common.tasks'}} {{classActivity.taskCount}}</span>
+            <span class="task-count">{{t 'common.tasks'}} {{item.taskCount}}</span>
           </div>
         </div>
       </div>
@@ -78,11 +78,7 @@
             {{else}}
               <div class="dca-panel-performance not-started">
                 <div class="thumbnail-img">
-                  {{#if item.thumbnailUrl}}
-                    <img src="{{item.thumbnailUrl}}" />
-                  {{else if classActivity.thumbnail}}
-                    <img src="{{classActivity.thumbnail}}" />
-                  {{/if}}
+                  <img src="{{item.thumbnailUrl}}" />
                 </div>
               </div>
             {{/if}}
@@ -95,21 +91,21 @@
         <div class="student-count {{if showCohort 'active'}}">
           {{gru-icon name="account_circle"}}
           {{#if (eq classActivity.usersCount -1)}}
-            <span {{action 'showStudentList'}}>{{t 'common.all'}}</span>
+            <span class="hidden-xs" {{action 'showStudentList'}}>{{t 'common.all'}}</span>
           {{else if (eq classActivity.usersCount 0)}}
-            <span {{action 'showStudentList'}}>{{t 'common.none'}}</span>
+            <span class="hidden-xs" {{action 'showStudentList'}}>{{t 'common.none'}}</span>
           {{else}}
-            <span {{action 'showStudentList'}}> {{classActivity.usersCount}}</span>
+            <span class="hidden-xs" {{action 'showStudentList'}}> {{classActivity.usersCount}}</span>
           {{/if}}
         </div>
         <div class="re-schedule">
           <div class="re-schedule-activity ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
             {{#if collectionPerformanceSummary}}
               {{gru-icon name="replay"}}
-              <span>{{t 'common.repeat-activity'}}</span>
+              <span class="hidden-xs">{{t 'common.repeat-activity'}}</span>
             {{else}}
               {{gru-icon name="update"}}
-              <span>{{t 'common.Reschedule'}}</span>
+              <span class="hidden-xs">{{t 'common.Reschedule'}}</span>
             {{/if}}
           </div>
         </div>
@@ -140,13 +136,13 @@
           </div>
         {{/if}}
       </div>
-      {{#unless classActivity.isCompleted}}
-        <div class="delete-activity">
+      <div class="delete-activity">
+        {{#unless classActivity.isCompleted}}
           <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.remove"}}" {{action 'removeClassActivity' classActivity}}>
             {{gru-icon name="delete_outline"}}
           </span>
-        </div>
-      {{/unless}}
+        {{/unless}}
+      </div>
       <div class="close-activity">
         <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.close"}}" {{action 'expandLess'}}>
           {{gru-icon name="close"}}
@@ -159,7 +155,7 @@
         <i class="{{classActivity.contentType}}-icon" />
       </div>
       <div class="title-info ellipsis" {{action 'onPlayContent' item}}>
-        <span>{{classActivity.title}}</span>
+        <span class="ellipsis">{{classActivity.title}}</span>
       </div>
       <div class="resource-info">
         {{#if (gt classActivity.resourceCount 0)}}
@@ -190,8 +186,6 @@
       <div class="thumbnail-img">
         {{#if item.thumbnailUrl}}
           <img src="{{item.thumbnailUrl}}" />
-        {{else if classActivity.thumbnail}}
-          <img src="{{classActivity.thumbnail}}" />
         {{/if}}
       </div>
     </div>

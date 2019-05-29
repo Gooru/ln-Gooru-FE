@@ -1,9 +1,9 @@
 <div class="backdrop" {{action 'close'}}></div>
-<div class="header-section hidden visible-xs">
+<div class="header-section">
   <span class="back" {{action 'close'}}> {{gru-icon name="keyboard_backspace"}}</span>
   <div class="title">Select Activity Dates</div>
 </div>
-<div class="date-info hidden visible-xs">
+<div class="date-info">
   <div class="start-date-info {{if (eq selectedTabIndex 0) 'active'}}" {{action 'onSelectTab' 0}}>
     <span>{{t 'goals.manage.start-date-label'}}</span>
     <div class="date-container">
@@ -43,7 +43,7 @@
       class=(if (eq selectedTabIndex 1) 'visible' 'hidden')
     }}
 </div>
-<div class="submit-btn hidden visible-xs {{unless isValid 'disable'}}" {{action 'submitDate'}}>
+<div class="submit-btn {{unless isValid 'disable'}}" {{action 'submitDate'}}>
   <span>{{t 'common.done'}}</span>
 </div>
 <div class="month-picker {{unless isOfflineActivity 'hidden'}}">

@@ -59,29 +59,25 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      * Action triggered when unschedule item got clicked.
      */
     toggleUnSchedule() {
-      let unScheduleParentEle = Ember.$('.ca-panel .left-panel .unschedule-container');
-      let unScheduleEle = Ember.$('.ca-panel .left-panel .unschedule-container .ca-unscheduled-items');
-      let leftPanelEle = Ember.$('.ca-panel .left-panel');
-      let scheduleEle = Ember.$('.schedule-container .ca-schedule-section .dca-content-list-container');
-      if (unScheduleParentEle.hasClass('active')) {
-        unScheduleParentEle.removeClass('active');
-        unScheduleEle.animate({
-          height: 0
-        }, function() {
-          let containerheight = leftPanelEle.height() - unScheduleEle.height();
-          scheduleEle.animate({
-            height: containerheight
-          });
-        });
+      let controller = this;
+      let isMobileView = controller.get('isMobileView');
+      if (isMobileView) {
+        controller.animateUnScheduleForMobile();
       } else {
-        scheduleEle.animate({
-          height: 100
-        }, function() {
-          unScheduleParentEle.addClass('active');
-          unScheduleEle.animate({
-            height: '100%'
-          });
-        });
+        controller.animateUnScheduleForDesktop();
+      }
+    },
+
+    /**
+     * Action triggered when items to grade section item got clicked.
+     */
+    toggleOffineActivity() {
+      let controller = this;
+      let isMobileView = controller.get('isMobileView');
+      if (isMobileView) {
+        controller.animateOfflineActivityForMobile();
+      } else {
+        controller.animateOfflineActivityForDesktop();
       }
     },
 
@@ -89,18 +85,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      * Action triggered when items to grade section item got clicked.
      */
     toggleItemsToGrade() {
-      let offlineActivityEle = Ember.$('.offline-activity-section');
-      let itemToGradeEle = Ember.$('.item-to-grade-container');
-      if (itemToGradeEle.hasClass('active')) {
-        offlineActivityEle.slideDown(400, function() {
-          offlineActivityEle.removeClass('inactive');
-          itemToGradeEle.removeClass('active');
-        });
+      let controller = this;
+      let isMobileView = controller.get('isMobileView');
+      if (isMobileView) {
+        controller.animateItemsToGradeForMobile();
       } else {
-        offlineActivityEle.slideUp(400, function() {
-          offlineActivityEle.addClass('inactive');
-          itemToGradeEle.addClass('active');
-        });
+        controller.animateItemsToGradeForDesktop();
       }
     },
 
@@ -707,30 +697,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   classActivitiesOfMonth: Ember.A([]),
 
   /**
-   * It Maintains the label name for unschedule item
-   * @property {String}
-   */
-  unscheduleHeaderTitle: Ember.computed('isMobileView', function() {
-    return this.get('i18n').t('common.unscheduled-items').string;
-  }),
-
-  /**
-   * It Maintains the label name for grade items item
-   * @property {String}
-   */
-  itemsToGradeHeaderTitle: Ember.computed('isMobileView', function() {
-    return this.get('i18n').t('class.analytics.performance.grade-items').string;
-  }),
-
-  /**
-   * It Maintains the label name for offline activity item
-   * @property {String}
-   */
-  offlineActivityHeaderTitle: Ember.computed('isMobileView', function() {
-    return this.get('i18n').t('common.offline-activites').string;
-  }),
-
-  /**
    * @property {boolean} Indicates if there are class activities
    */
   showClassActivities: Ember.computed.gt('scheduledClassActivities.length', 0),
@@ -1029,6 +995,131 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Methods
 
+  /**
+   * Animate a schedule section for desktop
+   */
+  animateUnScheduleForDesktop() {
+    let unScheduleEle = Ember.$('.ca-panel .left-panel .unschedule-container');
+    let leftPanelEle = Ember.$('.ca-panel .left-panel');
+    let scheduleEle = Ember.$('.schedule-container .ca-schedule-section .dca-content-list-container');
+    if (unScheduleEle.hasClass('active')) {
+      unScheduleEle.removeClass('active');
+      Ember.$('.ca-unscheduled-items').slideUp(400, function() {
+        let containerheight = leftPanelEle.height() - unScheduleEle.height();
+        scheduleEle.css({
+          height: containerheight
+        });
+      });
+    } else {
+      scheduleEle.animate({
+        height: '0'
+      }, function() {
+        unScheduleEle.addClass('active');
+        Ember.$('.ca-unscheduled-items').slideDown(400);
+      });
+    }
+  },
+
+  /**
+   * Animate a schedule section for mobile
+   */
+  animateUnScheduleForMobile() {
+    let unScheduleEle = Ember.$('.ca-panel .left-panel .unschedule-container');
+    let windowHeight = $(window).height();
+    if (unScheduleEle.hasClass('active')) {
+      unScheduleEle.animate({
+        top: windowHeight - 50
+      }, 400,
+      function() {
+        unScheduleEle.removeClass('active');
+      });
+    } else {
+      unScheduleEle.addClass('active');
+      unScheduleEle.animate({
+        top: 100
+      },
+      400
+      );
+    }
+  },
+
+  /**
+   * Animate a offline activity for desktop
+   */
+  animateOfflineActivityForDesktop() {
+    let offlineActivityEle = Ember.$('.offline-activity-section');
+    let itemToGradeEle = Ember.$('.ca-panel .right-panel .item-to-grade-container');
+    if (itemToGradeEle.hasClass('active')) {
+      itemToGradeEle.removeClass('active');
+      offlineActivityEle.slideDown(400);
+    }
+  },
+
+  /**
+   * Animate a offline activity for desktop
+   */
+  animateOfflineActivityForMobile() {
+    let offlineActivityEle = Ember.$('.ca-panel .right-panel .offline-activity-container');
+    let windowHeight = $(window).height();
+    if (offlineActivityEle.hasClass('active')) {
+      offlineActivityEle.animate({
+        top: windowHeight - 150
+      }, 400,
+      function() {
+        offlineActivityEle.removeClass('active');
+      });
+    } else {
+      offlineActivityEle.addClass('active');
+      offlineActivityEle.animate({
+        top: 100
+      },
+      400
+      );
+    }
+  },
+
+  /**
+   * Animate a items to grade section for desktop
+   */
+  animateItemsToGradeForDesktop() {
+    let offlineActivityEle = Ember.$('.offline-activity-section');
+    let itemToGradeEle = Ember.$('.ca-panel .right-panel .item-to-grade-container');
+    if (itemToGradeEle.hasClass('active')) {
+      offlineActivityEle.slideDown(400, function() {
+        offlineActivityEle.removeClass('inactive');
+        itemToGradeEle.removeClass('active');
+      });
+    } else {
+      offlineActivityEle.slideUp(400, function() {
+        offlineActivityEle.addClass('inactive');
+        itemToGradeEle.addClass('active');
+      });
+    }
+  },
+
+  /**
+   * Animate a items to grade section for mobile
+   */
+  animateItemsToGradeForMobile() {
+    let itemToGradeEle = Ember.$('.ca-panel .right-panel .item-to-grade-container');
+    let windowHeight = $(window).height();
+    if (itemToGradeEle.hasClass('active')) {
+      itemToGradeEle.animate({
+        top: windowHeight - 100
+      }, 400,
+      function() {
+        itemToGradeEle.removeClass('active');
+      });
+    } else {
+      itemToGradeEle.addClass('active');
+      itemToGradeEle.animate({
+        top: 100
+      },
+      400
+      );
+    }
+  },
+
   isActivityAlreadyExists(scheduleDate, contentId) {
     let controller = this;
     let activitiesForDate = controller.get('classActivitiesOfMonth').filterBy('added_date', scheduleDate);
@@ -1176,9 +1267,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         if (classActivities && classActivities.length > 0) {
           controller.parseClassActivityData(classActivities);
         }
-        if (offlineActivities && offlineActivities.length > 0) {
-          controller.set('activeOfflineActivities', offlineActivities);
-        }
+        controller.set('activeOfflineActivities', offlineActivities);
         controller.fetchAssessmentsMasteryAccrual();
         controller.set('isLoading', false);
       });
