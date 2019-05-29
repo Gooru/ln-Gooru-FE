@@ -59,24 +59,28 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      * Action triggered when unschedule item got clicked.
      */
     toggleUnSchedule() {
-      let unScheduleEle = Ember.$('.ca-panel .left-panel .unschedule-container');
+      let unScheduleParentEle = Ember.$('.ca-panel .left-panel .unschedule-container');
+      let unScheduleEle = Ember.$('.ca-panel .left-panel .unschedule-container .ca-unscheduled-items');
       let leftPanelEle = Ember.$('.ca-panel .left-panel');
       let scheduleEle = Ember.$('.schedule-container .ca-schedule-section .dca-content-list-container');
-      if (unScheduleEle.hasClass('active')) {
-        unScheduleEle.removeClass('active');
-        Ember.$('.ca-unscheduled-items').slideUp(400, function() {
+      if (unScheduleParentEle.hasClass('active')) {
+        unScheduleParentEle.removeClass('active');
+        unScheduleEle.animate({
+          height: 0
+        }, function() {
           let containerheight = leftPanelEle.height() - unScheduleEle.height();
           scheduleEle.animate({
             height: containerheight
           });
         });
       } else {
-        unScheduleEle.addClass('active');
         scheduleEle.animate({
-          height: 'auto'
+          height: 100
         }, function() {
-          unScheduleEle.addClass('active');
-          Ember.$('.ca-unscheduled-items').slideDown(400);
+          unScheduleParentEle.addClass('active');
+          unScheduleEle.animate({
+            height: '100%'
+          });
         });
       }
     },
@@ -1199,12 +1203,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         .hash({
           collection: collectionId ?
             isAssessment ?
-            controller
-            .get('assessmentService')
-            .readAssessment(collectionId) :
-            controller
-            .get('collectionService')
-            .readCollection(collectionId) : undefined
+              controller
+                .get('assessmentService')
+                .readAssessment(collectionId) :
+              controller
+                .get('collectionService')
+                .readCollection(collectionId) : undefined
         })
         .then(function(hash) {
           const collection = hash.collection;
