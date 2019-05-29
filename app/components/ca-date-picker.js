@@ -210,6 +210,14 @@ export default Ember.Component.extend({
       format: 'yyyy-mm-dd',
       todayHighlight: true
     };
+    let startDate = this.get('startDate');
+    let userStartDateAsToday = this.get('userStartDateAsToday');
+    if (!startDate && userStartDateAsToday) {
+      startDate = moment().format('YYYY-MM-DD');
+    }
+    if (startDate) {
+      defaultParams.startDate = moment(startDate).format('YYYY-MM-DD');
+    }
     datepickerEle.datepicker(defaultParams);
     datepickerEle.off('changeDate').on('changeDate', function() {
       let datepicker = this;

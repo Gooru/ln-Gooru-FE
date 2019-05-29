@@ -471,7 +471,11 @@
         .oa-complete {
           display: flex;
           align-items: center;
-          visibility: hidden;
+
+          &.disabled {
+            pointer-events: none;
+            opacity: 0.8;
+          }
 
           input[type="checkbox"] {
             margin: auto;

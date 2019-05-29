@@ -80,8 +80,8 @@ export default Ember.Component.extend({
 
   isValid: Ember.computed('isOfflineActivity', 'endDate', function() {
     let component = this;
-    return component.get('isOfflineActivity') && component.get('endDate') ||
-      !component.get('isOfflineActivity') && component.get('startDate');
+    return (component.get('isOfflineActivity') && component.get('endDate')) ||
+      (!component.get('isOfflineActivity') && component.get('startDate'));
   }),
 
   // -------------------------------------------------------------------------
@@ -90,16 +90,15 @@ export default Ember.Component.extend({
   actions: {
     close() {
       let component = this;
-      component.set('showDatePicker', false);
+      component.sendAction('closeDatePicker');
     },
 
     submitDate() {
       let component = this;
-      let startDate = component.get('startDate').format('YYYY-MM-DD');
+      let startDate = component.get('startDate');
       let endDate = component.get('endDate');
-      let formatedEndDate = endDate ? endDate.format('YYYY-MM-DD') : endDate;
       let isOfflineActivity = component.get('isOfflineActivity');
-      component.sendAction('onScheduleForDate', startDate, formatedEndDate, isOfflineActivity);
+      component.sendAction('onScheduleForDate', startDate, endDate, isOfflineActivity);
       component.send('close');
     },
 
