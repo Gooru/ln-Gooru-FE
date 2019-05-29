@@ -378,6 +378,15 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Generate a key based on user id and custom mastered competencies key
+   * @return {String}
+   */
+  getMasteredCompetenciesKey() {
+    const userId = this.get('session.userId');
+    return `${userId}_mastered_competencies`;
+  },
+
+  /**
    * Returns the local storage
    * @returns {Storage}
    */

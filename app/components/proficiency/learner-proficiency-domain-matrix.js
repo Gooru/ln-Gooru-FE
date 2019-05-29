@@ -25,6 +25,13 @@ export default Ember.Component.extend({
    */
   taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
+  /**
+   * @property {NavigateMapService}
+   */
+  navigateMapService: Ember.inject.service('api-sdk/navigate-map'),
+
+  session: Ember.inject.service('session'),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -60,9 +67,9 @@ export default Ember.Component.extend({
     onToggleChart() {
       let component = this;
       component.toggleProperty('isExpandChartEnabled');
-      let cellHeight = component.get('isExpandChartEnabled') ?
-        component.get('expandedCellHeight') :
-        component.get('compressedCellHeight');
+      let cellHeight = component.get('isExpandChartEnabled')
+        ? component.get('expandedCellHeight')
+        : component.get('compressedCellHeight');
       let maxNumberOfCellsInEachColumn = component.get(
         'maxNumberOfCellsInEachColumn'
       );
@@ -132,21 +139,25 @@ export default Ember.Component.extend({
     const cellHeight = component.get('cellHeight');
     const width = component.get('width');
     let selectedElement = component.$(
-      `.competency-${selectedCompetency.xAxisSeq}-${
-        selectedCompetency.yAxisSeq
-      }`
+      `.competency-${selectedCompetency.xAxisSeq}-${selectedCompetency.yAxisSeq}`
     );
     let xAxisSeq = parseInt(selectedElement.attr('x')) + 1;
     let yAxisSeq = parseInt(selectedElement.attr('y')) + 1;
-    component.$('.selected-competency').removeClass('hidden').addClass('visible');
-    component.set('blockAttribute', Ember.Object.create({
-      containerWidth: width,
-      status: selectedCompetency.status,
-      width: cellWidth,
-      height: cellHeight,
-      top: yAxisSeq,
-      left: xAxisSeq
-    }));
+    component
+      .$('.selected-competency')
+      .removeClass('hidden')
+      .addClass('visible');
+    component.set(
+      'blockAttribute',
+      Ember.Object.create({
+        containerWidth: width,
+        status: selectedCompetency.status,
+        width: cellWidth,
+        height: cellHeight,
+        top: yAxisSeq,
+        left: xAxisSeq
+      })
+    );
   },
 
   // Action triggered when competency is clicked or hover in
@@ -154,7 +165,9 @@ export default Ember.Component.extend({
     let component = this;
     let selectedCompetency = component.get('selectedCompetency');
     if (!selectedCompetency.get('xAxisSeq')) {
-      selectedCompetency = component.get('chartData').findBy('competencyCode', selectedCompetency.get('competencyCode'));
+      selectedCompetency = component
+        .get('chartData')
+        .findBy('competencyCode', selectedCompetency.get('competencyCode'));
     }
     component.blockChartContainer(selectedCompetency);
   },
@@ -162,7 +175,10 @@ export default Ember.Component.extend({
   // Action triggered when competency is un-clicked or hover out
   competencyFocusOut() {
     let component = this;
-    component.$('.selected-competency').removeClass('visible').addClass('hidden');
+    component
+      .$('.selected-competency')
+      .removeClass('visible')
+      .addClass('hidden');
   },
 
   // -------------------------------------------------------------------------
@@ -355,6 +371,21 @@ export default Ember.Component.extend({
 
   blockAttribute: null,
 
+  /**
+   * @property {Array} studyMasteredCompetencies
+   * It has competencies info which is mastered by the student
+   */
+  studyMasteredCompetencies: Ember.computed(function() {
+    const component = this;
+    const navigateMapService = component.get('navigateMapService');
+    let studyMasteredCompetencies = navigateMapService
+      .getLocalStorage()
+      .getItem(navigateMapService.getMasteredCompetenciesKey());
+    return studyMasteredCompetencies
+      ? JSON.parse(studyMasteredCompetencies)
+      : Ember.A([]);
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
   /**
@@ -418,6 +449,9 @@ export default Ember.Component.extend({
       );
       component.drawChart(chartData);
       component.set('chartData', chartData);
+      if (component.get('isPlayerProficiency')) {
+        component.highlightStudyMasteredCompetency(chartData);
+      }
     }
     component.onToggleBaseline();
   },
@@ -429,16 +463,17 @@ export default Ember.Component.extend({
     let component = this;
     let taxonomyService = component.get('taxonomyService');
     let gradeId = gradeData ? gradeData.id : null;
-    return Ember.RSVP.hash({
-      domainBoundary: gradeId ?
-        Ember.RSVP.resolve(
-          taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
-        ) : Ember.RSVP.resolve(null)
-    }).then(({
-      domainBoundary
-    }) => {
-      return domainBoundary;
-    });
+    return Ember.RSVP
+      .hash({
+        domainBoundary: gradeId
+          ? Ember.RSVP.resolve(
+            taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
+          )
+          : Ember.RSVP.resolve(null)
+      })
+      .then(({ domainBoundary }) => {
+        return domainBoundary;
+      });
   },
 
   /**
@@ -453,13 +488,17 @@ export default Ember.Component.extend({
     let currentXaxis = 1;
     let resultSet = Ember.A();
     let numberOfCellsInEachColumn = Ember.A();
+    if (component.get('isPlayerProficiency')) {
+      component.populateStudyMasteredCompetency(competencyMatrixs);
+    }
     domains.forEach(domainData => {
       let domainCode = domainData.get('domainCode');
       let domainName = domainData.get('domainName');
       let domainSeq = domainData.get('domainSeq');
       let competencyMatrix = competencyMatrixs.findBy('domainCode', domainCode);
-      let competencyMatrixByCompetency = competencyMatrix ?
-        competencyMatrix.get('competencies') : [];
+      let competencyMatrixByCompetency = competencyMatrix
+        ? competencyMatrix.get('competencies')
+        : [];
       if (competencyMatrix && competencyMatrixByCompetency.length > 0) {
         taxonomyDomain.pushObject(domainData);
         let mergeDomainData = Ember.A();
@@ -539,15 +578,15 @@ export default Ember.Component.extend({
           domainCode
         );
         let firstCompetency = domainCompetencyData.objectAt(0);
-        let curDomainHighLineCompetency = curDomainBoundaryData ?
-          domainCompetencyData.findBy(
+        let curDomainHighLineCompetency = curDomainBoundaryData
+          ? domainCompetencyData.findBy(
             'competencyCode',
             curDomainBoundaryData.highline
-          ) || firstCompetency :
-          firstCompetency;
-        let className = curDomainHighLineCompetency.boundaryClass ?
-          curDomainHighLineCompetency.boundaryClass :
-          '';
+          ) || firstCompetency
+          : firstCompetency;
+        let className = curDomainHighLineCompetency.boundaryClass
+          ? curDomainHighLineCompetency.boundaryClass
+          : '';
         curDomainHighLineCompetency.boundaryClass = `${className} boundary-line-${gradeSeq}`;
       });
     }
@@ -600,19 +639,13 @@ export default Ember.Component.extend({
       .attr('yaxis-seq', d => d.yAxisSeq)
       .attr('class', d => {
         let skylineClassName = d.skyline ? 'skyline-competency' : '';
-        let masteredCompetencyClassName = d.mastered ?
-          'mastered-competncy' :
-          '';
-        let domainBoundaryCompetency = d.isDomainBoundaryCompetency ?
-          'domain-boundary' :
-          '';
-        return `competency ${skylineClassName} competency-${
-          d.xAxisSeq
-        } competency-${d.xAxisSeq}-${
-          d.yAxisSeq
-        } fillArea${d.status.toString()} ${domainBoundaryCompetency} ${
-          d.boundaryClass
-        } ${masteredCompetencyClassName}`;
+        let masteredCompetencyClassName = d.mastered
+          ? 'mastered-competncy'
+          : '';
+        let domainBoundaryCompetency = d.isDomainBoundaryCompetency
+          ? 'domain-boundary'
+          : '';
+        return `competency ${skylineClassName} competency-${d.xAxisSeq} competency-${d.xAxisSeq}-${d.yAxisSeq} fillArea${d.status.toString()} ${domainBoundaryCompetency} ${d.boundaryClass} ${masteredCompetencyClassName}`;
       })
       .on('click', function(d) {
         component.selectCompetency(d);
@@ -777,10 +810,10 @@ export default Ember.Component.extend({
           }
         });
         let numberOfMasteredCompetency = domainWiseMasteredCompetencies.length;
-        let masteredCompetencyHighestSeq = numberOfMasteredCompetency ?
-          domainWiseMasteredCompetencies[numberOfMasteredCompetency - 1]
-            .competencySeq :
-          0;
+        let masteredCompetencyHighestSeq = numberOfMasteredCompetency
+          ? domainWiseMasteredCompetencies[numberOfMasteredCompetency - 1]
+            .competencySeq
+          : 0;
         let x1 = cellIndex * cellWidth;
         let y1 = cellHeight * masteredCompetencyHighestSeq; //stroke width
         let isSkyLineContainer = component.$(
@@ -790,9 +823,9 @@ export default Ember.Component.extend({
         y1 =
           y1 === parseInt(isSkyLineContainer.attr('y1')) - 6 ||
           y1 === parseInt(isSkyLineContainer.attr('y1')) ||
-          y1 === 0 ?
-            y1 + 3 :
-            y1;
+          y1 === 0
+            ? y1 + 3
+            : y1;
 
         let x2 = x1 + cellWidth;
         let y2 = y1;
@@ -944,12 +977,12 @@ export default Ember.Component.extend({
           .attr('y1', linePoint.y1)
           .attr('x2', linePoint.x2)
           .attr('y2', linePoint.y2)
-          .attr(
-            'class',
-            function() {
-              let className = isClassGrade ? 'class-boundary-line' : 'boundary-line';
-              return `${className} horizontal-line boundary-line-${gradeSeq}-${boundaryLineSeq} grade-${gradeSeq}-line`;
-            });
+          .attr('class', function() {
+            let className = isClassGrade
+              ? 'class-boundary-line'
+              : 'boundary-line';
+            return `${className} horizontal-line boundary-line-${gradeSeq}-${boundaryLineSeq} grade-${gradeSeq}-line`;
+          });
 
         component.joinDomainBoundaryLinePoints(
           linePoint,
@@ -967,7 +1000,12 @@ export default Ember.Component.extend({
    * @function joinDomainBoundaryLinePoints
    * Method to draw vertical line to connects domain boundary line points, if necessary
    */
-  joinDomainBoundaryLinePoints(curLinePoint, lastBoundaryLineSeq, gradeSeq, isClassGrade) {
+  joinDomainBoundaryLinePoints(
+    curLinePoint,
+    lastBoundaryLineSeq,
+    gradeSeq,
+    isClassGrade
+  ) {
     let component = this;
     let lastBoundaryLineContainer = component.$(
       `.boundary-line-${gradeSeq}-${lastBoundaryLineSeq}`
@@ -991,7 +1029,9 @@ export default Ember.Component.extend({
         .attr('x2', curLinePoint.x1)
         .attr('y2', curLinePoint.y1)
         .attr('class', () => {
-          let className = isClassGrade ? 'class-boundary-line' : 'boundary-line';
+          let className = isClassGrade
+            ? 'class-boundary-line'
+            : 'boundary-line';
           return `${className} vertical-line grade-${gradeSeq}-line`;
         });
     }
@@ -1007,5 +1047,60 @@ export default Ember.Component.extend({
   clearChart() {
     let component = this;
     component.$('svg').remove();
+  },
+
+  /**
+   * @function populateStudyMasteredCompetency
+   * Method to populate mastered competency through studyplayer
+   */
+  populateStudyMasteredCompetency(competencyMatrixs) {
+    const component = this;
+    let studyMasteredCompetencies = component.get('studyMasteredCompetencies');
+    studyMasteredCompetencies.map(studyMasteredCompetency => {
+      const domainCode = studyMasteredCompetency.domainCode;
+      const competencyCode = studyMasteredCompetency.competencyCode;
+      let domainCompetencies = competencyMatrixs.findBy(
+        'domainCode',
+        domainCode
+      );
+      let competencies = domainCompetencies.get('competencies');
+      let masteredCompetency = competencies.findBy(
+        'competencyCode',
+        competencyCode
+      );
+      let masteredCompetencyPos = competencies.indexOf(masteredCompetency);
+      let masteredCompetencies = competencies.slice(0, masteredCompetencyPos);
+      masteredCompetencies.map(competency => {
+        competency.set('study-infered', true);
+        competency.set('status', 2);
+      });
+      masteredCompetency.set('status', 4);
+      masteredCompetency.set('study-mastered', true);
+    });
+  },
+
+  /**
+   * @function highlightStudyMasteredCompetency
+   * Method to highlight recently mastered competency
+   */
+  highlightStudyMasteredCompetency(chartData) {
+    const component = this;
+    let studyMasteredCompetencies = component.get('studyMasteredCompetencies');
+    let masteredCompetency = studyMasteredCompetencies.findBy(
+      'isHighLight',
+      true
+    );
+    if (masteredCompetency) {
+      let masteredCompetencyChartElement = chartData.findBy(
+        'competencyCode',
+        masteredCompetency.competencyCode
+      );
+      //Select competency which is recently mastered
+      if (!component.isDestroyed) {
+        component.set('selectedCompetency', masteredCompetencyChartElement);
+        component.blockChartContainer(masteredCompetencyChartElement);
+        component.selectCompetency(masteredCompetencyChartElement);
+      }
+    }
   }
 });

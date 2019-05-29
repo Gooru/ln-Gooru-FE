@@ -168,7 +168,8 @@ export default StudentCollection.extend(PrivateRouteMixin, {
       minScore: model.minScore,
       contextId: model.contextId,
       hasSuggestion: model.hasSuggestion,
-      source: model.source
+      source: model.source,
+      collectionObj: this.get('collectionObj')
     });
     controller.confettiSetup();
   },
