@@ -1,29 +1,48 @@
 <div class="backdrop" {{action 'onPullUpClose' true}}></div>
 <div class="question-report-container">
-  <div class="report-header">
-    <div class="report-breadcrumb hidden-xs">
-      <div class="unit-title">
-        <i class="unit-icon"></i>
-        <p>{{t 'common.unit'}} {{unit.sequence}} : {{unit.title}}</p>
-      </div>
-      <div class="lesson-title">
+  <div class="report-header {{if isShowMilestoneReport 'milestone-question-report'}}">
+    {{#if isShowMilestoneReport}}
+      <div class="milestone-report-breadcrumb">
+        <div class="milestone-info ellipsis">
+          {{concat gradeSubject.title ' - ' unit.grade_name}}
+        </div>
         {{gru-icon name="keyboard_arrow_right"}}
-        <i class="lesson-icon"></i>
-        <p>{{t 'common.lesson'}} {{lesson.sequence}} : {{lesson.title}}</p>
-      </div>
-      <div class="collection-title">
+        <div class="lesson-info ellipsis">
+          <div class="domain-name ellipsis">{{lesson.tx_domain_name}}</div>
+          <div class="lesson-title ellipsis">{{lesson.lesson_title}}</div>
+        </div>
         {{gru-icon name="keyboard_arrow_right"}}
-        <i class="collection-icon {{collection.format}}"></i>
-        <p>{{collection.title}}</p>
+        <div class="collection-info">
+          <i class="collection-icon {{collection.format}}"></i>
+          <div class="collection-title ellipsis">{{collection.title}}</div>
+        </div>
       </div>
-    </div>
-    <div class="report-title hidden visible-xs">
-      <div class="title">
-        <p>{{t 'common.unit'}} {{unit.sequence}} / {{t 'common.lesson'}} {{lesson.sequence}} :</p>
-        <i class="collection-icon {{collection.format}}"></i>
-        <p class="ellipsis">{{collection.title}}</p>
+    {{else}}
+      <div class="report-breadcrumb hidden-xs">
+        <div class="unit-title">
+          <i class="unit-icon"></i>
+          <p>{{t 'common.unit'}} {{unit.sequence}} : {{unit.title}}</p>
+        </div>
+        <div class="lesson-title">
+          {{gru-icon name="keyboard_arrow_right"}}
+          <i class="lesson-icon"></i>
+          <p>{{t 'common.lesson'}} {{lesson.sequence}} : {{lesson.title}}</p>
+        </div>
+        <div class="collection-title">
+          {{gru-icon name="keyboard_arrow_right"}}
+          <i class="collection-icon {{collection.format}}"></i>
+          <p>{{collection.title}}</p>
+        </div>
       </div>
-    </div>
+      <div class="report-title hidden visible-xs">
+        <div class="title">
+          <p>{{t 'common.unit'}} {{unit.sequence}} / {{t 'common.lesson'}} {{lesson.sequence}} :</p>
+          <i class="collection-icon {{collection.format}}"></i>
+          <p class="ellipsis">{{collection.title}}</p>
+        </div>
+      </div>
+    {{/if}}
+
     <div class="report-close-pullup" {{action 'onPullUpClose'}}>
       {{gru-icon name="close" }}
     </div>
