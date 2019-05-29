@@ -158,6 +158,25 @@ export default Ember.Object.extend(ConfigurationMixin, {
       });
     }
 
+    if (
+      contentType === 'offline-activity'
+    ) {
+      const thumbnailUrl = data.thumbnail ?
+        basePath + data.thumbnail :
+        appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+
+      content = Collection.create({
+        id: data.content_id,
+        title: data.title,
+        thumbnailUrl: thumbnailUrl,
+        collectionType: data.content_type,
+        url: data.url ? data.url : '',
+        format: data.content_type,
+        taskCount: data.task_count || 0,
+        standards: taxonomySerializer.normalizeTaxonomyObject(data.taxonomy)
+      });
+    }
+
     //TODO normalize resources and questions
     return content;
   },
