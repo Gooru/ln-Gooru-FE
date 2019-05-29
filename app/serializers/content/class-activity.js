@@ -163,7 +163,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     ) {
       const thumbnailUrl = data.thumbnail ?
         basePath + data.thumbnail :
-        appRootPath + DEFAULT_IMAGES.ASSESSMENT
+        appRootPath + DEFAULT_IMAGES.ASSESSMENT;
 
       content = Collection.create({
         id: data.content_id,
