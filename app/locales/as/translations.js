@@ -2611,5 +2611,8 @@ export default Object.assign(quizzesTranslations, {
   'warn.teacher-milestone-not-ready':
     'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
   'pre-study': 'Pre-Study',
-  'course-map.your-learning-path': 'Your Learning Path'
+  'course-map.your-learning-path': 'Your Learning Path',
+  'mastery-greeting-msg':
+    'You’ve earned a Mastery Badge for <b>{{competencyInfo}}</b>. Would you like to see the improvement in your competency skyline?',
+  'show-me': 'Show Me'
 });

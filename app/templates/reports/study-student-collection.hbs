@@ -23,3 +23,29 @@
 {{#if isShowSuggestion}}
   {{content.modals.gru-content-suggestion mapLocation=mapLocation onAcceptSuggestion="onAcceptSuggestion" onIgnoreSuggestion="onIgnoreSuggestion"}}
 {{/if}}
+
+{{#if isShowMasteryGreeting}}
+  <div class="mastery-confirmation-popup">
+    <div class="mastery-greeting-container">
+      <div class="mastery-info-container">
+        <div class="greeting-images">
+          <div class="animal-img">
+          </div>
+          <div class="text-img">
+          </div>
+        </div>
+        <div class="greeting-message">
+          {{t 'mastery-greeting-msg' competencyInfo = competencyInfo}}
+        </div>
+      </div>
+      <div class="mastery-action-container">
+        <div class="no-thanks" {{action "next"}}>
+          {{t 'gru-suggest-test.no'}}
+        </div>
+        <div class="show-me" {{action "onRedirectToProfiencyProgress"}}>
+          {{t 'show-me'}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}

@@ -80,6 +80,85 @@
       pointer-events: none;
     }
   }
+
+  .mastery-confirmation-popup {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    .mastery-greeting-container {
+      width: 375px;
+      height: 330px;
+      background-color: #f7f6f4;
+      display: grid;
+      @media screen and (max-width: $screen-360) {
+        width: 100%;
+      }
+      .mastery-info-container {
+        padding: 8px;
+        border-bottom: 1px solid rgba(151, 151, 151, 0.4);
+        display: grid;
+        row-gap: 8px;
+        .greeting-images {
+          display: grid;
+          grid-template-columns: auto auto;
+          .animal-img {
+            background-image: url("gooru/bitmap.png");
+            display: block;
+            width: 157px;
+            height: 187px;
+            background-size: 157px 187px;
+            background-repeat: no-repeat;
+          }
+          .text-img {
+            background-image: url("gooru/congrats-msg.png");
+            display: block;
+            width: 157px;
+            height: 187px;
+            background-size: 157px 187px;
+            background-repeat: no-repeat;
+          }
+        }
+        .greeting-message {
+          font-size: 13px;
+          text-align: center;
+          color: #36424b;
+          .highlight-greeting {
+            font-weight: bold;
+          }
+        }
+      }
+      .mastery-action-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: right;
+        align-items: center;
+        padding: 8px;
+        column-gap: 30px;
+        .show-me,
+        .no-thanks {
+          font-size: 15px;
+          font-weight: bold;
+          text-transform: uppercase;
+          cursor: pointer;
+        }
+        .show-me {
+          color: #2f9e4b;
+        }
+        .no-thanks {
+          color: #37424b;
+        }
+      }
+    }
+  }
 }
 
 body.reports_study-student-collection,

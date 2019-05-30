@@ -34,6 +34,9 @@ export default StudentCollection.extend({
     ) {
       Ember.run.later(function() {
         controller.set('enableConfetti', false);
+        if (controller.get('isLoadProficiencyProgress')) {
+          controller.set('isShowMasteryGreeting', true);
+        }
       }, 5400);
       controller.set('enableConfetti', true);
     }
@@ -80,52 +83,45 @@ export default StudentCollection.extend({
       let controller = this;
       let contextId = controller.get('contextId');
       let profileId = controller.get('session.userData.gooruUId');
-      //Show student proficiency if the the assessment is mastered
-      if (controller.get('isLoadProficiencyProgress')) {
-        controller.showStudentProficiencyProgress(contextId);
-      } else {
-        const navigateMapService = controller.get('navigateMapService');
-        controller
-          .get('quizzesAttemptService')
-          .getAttemptIds(contextId, profileId)
-          .then(
-            attemptIds =>
-              !attemptIds || !attemptIds.length
-                ? {}
-                : this.get('quizzesAttemptService').getAttemptData(
-                  attemptIds[attemptIds.length - 1]
-                )
-          )
-          .then(attemptData =>
-            Ember.RSVP.hash({
-              attemptData,
-              mapLocationNxt: navigateMapService.getStoredNext()
-            })
-          )
-          .then(({ mapLocationNxt, attemptData }) => {
-            if (controller.get('hasSuggestion')) {
-              mapLocationNxt.context.set('status', 'content-served');
-            }
-
-            mapLocationNxt.context.set(
-              'score',
-              attemptData.get('averageScore')
-            );
-            return navigateMapService.next(mapLocationNxt.context);
+      const navigateMapService = controller.get('navigateMapService');
+      controller
+        .get('quizzesAttemptService')
+        .getAttemptIds(contextId, profileId)
+        .then(
+          attemptIds =>
+            !attemptIds || !attemptIds.length
+              ? {}
+              : this.get('quizzesAttemptService').getAttemptData(
+                attemptIds[attemptIds.length - 1]
+              )
+        )
+        .then(attemptData =>
+          Ember.RSVP.hash({
+            attemptData,
+            mapLocationNxt: navigateMapService.getStoredNext()
           })
-          .then(({ context, suggestions, hasContent }) => {
-            controller.set('mapLocation.context', context);
-            controller.set('mapLocation.suggestions', suggestions);
-            controller.set('mapLocation.hasContent', hasContent);
-            let suggestedContent = controller.get('suggestedContent');
-            if (suggestedContent) {
-              controller.set('isShowSuggestion', true);
-            } else {
-              controller.checknPlayNext();
-            }
-            controller.toggleScreenMode();
-          });
-      }
+        )
+        .then(({ mapLocationNxt, attemptData }) => {
+          if (controller.get('hasSuggestion')) {
+            mapLocationNxt.context.set('status', 'content-served');
+          }
+
+          mapLocationNxt.context.set('score', attemptData.get('averageScore'));
+          return navigateMapService.next(mapLocationNxt.context);
+        })
+        .then(({ context, suggestions, hasContent }) => {
+          controller.set('mapLocation.context', context);
+          controller.set('mapLocation.suggestions', suggestions);
+          controller.set('mapLocation.hasContent', hasContent);
+          let suggestedContent = controller.get('suggestedContent');
+          if (suggestedContent) {
+            controller.set('isShowSuggestion', true);
+          } else {
+            controller.checknPlayNext();
+          }
+          controller.toggleScreenMode();
+          controller.set('isShowMasteryGreeting', false);
+        });
     },
 
     playSignatureAssessmentSuggestions: function() {
@@ -177,6 +173,12 @@ export default StudentCollection.extend({
           .removeClass('fullscreen-exit')
           .addClass('fullscreen');
       }
+    },
+
+    onRedirectToProfiencyProgress() {
+      const controller = this;
+      controller.showStudentProficiencyProgress();
+      controller.set('isShowMasteryGreeting', false);
     }
   },
 
@@ -339,14 +341,29 @@ export default StudentCollection.extend({
       const collectionObj = controller.get('collectionObj');
       return (
         isPremiumCourse &&
-        (context.get('itemType') === CONTENT_TYPES.ASSESSMENT ||
-          context.get('itemType') ===
-            controller.get('signatureAssessmentType')) &&
+        context.get('itemType') === CONTENT_TYPES.ASSESSMENT &&
         collectionObj.get('gutCodes.length') &&
         averageScore >= SCORES.VERY_GOOD
       );
     }
   ),
+
+  isShowMasteryGreeting: false,
+
+  competencyInfo: Ember.computed('collectionObj', function() {
+    const controller = this;
+    const collectionObj = controller.get('collectionObj');
+    let competencyInfo = '';
+    let standards = collectionObj.get('standards');
+    if (standards.length) {
+      let lastStandard = standards.objectAt(standards.length - 1);
+      let standardTitle = lastStandard.get('title');
+      competencyInfo = standardTitle
+        ? `${standardTitle.substring(0, 40)}...`
+        : '';
+    }
+    return competencyInfo;
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -478,7 +495,8 @@ export default StudentCollection.extend({
       milestoneId: null,
       lessonId: null,
       collectionId: null,
-      type: null
+      type: null,
+      isShowMasteryGreeting: false
     });
   },
 
@@ -496,8 +514,9 @@ export default StudentCollection.extend({
    * @function showStudentProficiencyProgress
    * Method to redirect the student into the proficiency progress page whenever they acquired 80% or more
    */
-  showStudentProficiencyProgress(contextId) {
+  showStudentProficiencyProgress() {
     const controller = this;
+    const contextId = controller.get('contextId');
     const profileId = controller.get('session.userData.gooruUId');
     const context = this.get('mapLocation.context');
     let queryParams = {
