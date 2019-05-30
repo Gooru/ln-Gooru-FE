@@ -127,7 +127,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
       : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
     const metadata = assessmentData.metadata || {};
     const settings = assessmentData.setting || {};
-
     let normalizedAssessment = AssessmentModel.create(
       Ember.getOwner(this).ownerInjection(),
       {
@@ -193,7 +192,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
           metadata['21_century_skills'] &&
           metadata['21_century_skills'].length > 0
             ? metadata['21_century_skills']
-            : []
+            : [],
+        gutCodes: assessmentData.gut_codes || Ember.A([])
       }
     );
     return normalizedAssessment;

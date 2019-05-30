@@ -37,6 +37,7 @@
        classGrade=classGrade
        subjectCode=subjectCode
        onSelectCategory="onSelectCategory"
+       isPlayerProficiency = isPlayerProficiency
      }}
 
     {{#if isMobile}}
@@ -49,7 +50,7 @@
     {{#if isShowMatrixChart}}
       {{#proficiency.proficiency-subject-panel onDomainSelect="onDomainSelect" class=class subject=activeSubject competencyMatrixCoordinates=competencyMatrixCoordinates}}
         {{proficiency.domain-info-pull-up onSelectCompetency="onSelectCompetency" showPullUp=showDomainInfo competencies=selectedDomainCompetencies domain=selectedDomain}}
-        {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo onClosePullUp="onClosePullUp" isStudent=isStudent competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
+        {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo onClosePullUp="onClosePullUp" isStudent=isStudent competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList selectedItem = (if isPlayerProficiency 'journey')}}
       {{/proficiency.proficiency-subject-panel}}
     {{/if}}
   </div>
