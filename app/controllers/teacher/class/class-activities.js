@@ -173,12 +173,15 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      */
     addedContentToDCA(classActivityData, addedDate, forMonth, forYear) {
       let controller = this;
-      let isOfflineActivity = classActivityData.get('contentType') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS;
+      let isOfflineActivity = classActivityData.get('collection.format') ===
+        PLAYER_EVENT_SOURCE.OFFLINE_CLASS;
       if (isOfflineActivity) {
         let activeOfflineActivities = controller.get('activeOfflineActivities');
-        activeOfflineActivities.pushObject(classActivityData);
-        let unScheduledClassActivities = controller.get('unScheduledClassActivities');
-        unScheduledClassActivities.removeObject(classActivityData);
+        let existingActivities = activeOfflineActivities.filterBy('collection.id', classActivityData.get('collection.id'))
+          .filterBy('added_date', addedDate);
+        if (!existingActivities.length) {
+          activeOfflineActivities.pushObject(classActivityData);
+        }
         classActivityData.set('isNewlyAdded', true);
         Ember.run.later(function() {
           classActivityData.set('isNewlyAdded', false);
@@ -370,21 +373,33 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      * @param  {String} scheduleDate
      * @param  {String} scheduleEndDate
      */
-    onScheduleForDate(scheduleDate, scheduleEndDate, isOfflineActivity) {
+    onScheduleForDate(scheduleDate, scheduleEndDate) {
       let controller = this;
       let classId = controller.get('classId');
       let classActivity = controller.get('selectedClassActivityForSchedule');
       let content = classActivity.get('collection');
-      let collectionId = classActivity.get('contentId') || content.get('id');
+      let isOfflineActivity = content.get('format') ===
+        PLAYER_EVENT_SOURCE.OFFLINE_CLASS;
+      let collectionId = content.get('id');
       controller.send('onCloseDatePicker');
-      if (controller.isActivityAlreadyExists(scheduleDate, collectionId)) {
+      if (!isOfflineActivity &&
+        controller.isActivityAlreadyExists(scheduleDate, collectionId)) {
+        return;
+      }
+
+      if (isOfflineActivity &&
+        controller.isOfflineActivityAlreadyExists(scheduleDate, collectionId)) {
         return;
       }
       if (!classActivity.get('added_date')) {
         classActivity.set('added_date', scheduleDate);
       }
+
+      if (!classActivity.get('end_date')) {
+        classActivity.set('end_date', scheduleEndDate);
+      }
       let contentId = classActivity.get('id');
-      let contentType = isOfflineActivity ? PLAYER_EVENT_SOURCE.OFFLINE_CLASS : content.get('format');
+      let contentType = content.get('format');
       let scheduleMonth = moment(scheduleDate).format('MM');
       let scheduleYear = moment(scheduleDate).format('YYYY');
       let currentScheduleMonth = classActivity.get('forMonth');
@@ -417,6 +432,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
               Ember.run.later(function() {
                 classActivity.set('isNewlyAdded', false);
               }, 2000);
+              controller.fetchAssessmentsMasteryAccrual();
             } else {
               if (scheduleMonth === controller.get('forMonth') && scheduleYear === controller.get('forYear')) {
                 if (scheduleDate === controller.get('selectedDate')) {
@@ -442,13 +458,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      * @param  {Number} forMonth
      * @param  {Number} forYear
      */
-    onScheduleForMonth(forMonth, forYear, isOfflineActivity) {
+    onScheduleForMonth(forMonth, forYear) {
       let controller = this;
       let classId = controller.get('classId');
       let classActivity = controller.get('selectedClassActivityForSchedule');
       let content = classActivity.get('collection');
-      let contentType = isOfflineActivity ? PLAYER_EVENT_SOURCE.OFFLINE_CLASS : content.get('format');
-      let contentId = classActivity.get('contentId') || content.get('id');
+      let contentType = content.get('format');
+      let contentId = content.get('id');
       controller.send('onCloseDatePicker');
       controller
         .get('classActivityService')
@@ -474,45 +490,50 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      */
     onScheduleContentToDCA(classActivity, event, isUnScheduled) {
       let controller = this;
-      let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
-      let datepickerCtnEle = Ember.$(
-        '.ca-datepicker-schedule-container .ca-daterange-picker'
-      );
-      datepickerCtnEle.removeClass('ca-datepicker-orientation-top');
-      datepickerCtnEle.removeClass('ca-datepicker-orientation-bottom');
-      datepickerCtnEle.removeClass('ca-datepicker-orientation-left');
-      let selectedContentEle = Ember.$(event.target);
-      let position = selectedContentEle.position();
-      let top = position.top - datepickerEle.height();
-      let left = position.left + 10 - datepickerEle.width();
-      let controllerHeight = Ember.$(
-        '.teacher.class.class-activities'
-      ).height();
-      let windowHeight = $(window).height();
-      let allowedTop = windowHeight - controllerHeight + top;
-      if (left < 0) {
-        left = position.left;
-        datepickerCtnEle.addClass('ca-datepicker-orientation-left');
-      }
-      if (allowedTop < 0) {
-        datepickerCtnEle.addClass('ca-datepicker-orientation-bottom');
-        top = position.top + 25;
-      } else {
-        datepickerCtnEle.addClass('ca-datepicker-orientation-top');
-      }
-      datepickerEle.css({
-        top: top,
-        left: left
-      });
-      if (!selectedContentEle.hasClass('active')) {
-        selectedContentEle.addClass('active');
-        datepickerEle.show();
-      } else {
-        selectedContentEle.removeClass('active');
-        datepickerEle.hide();
-      }
+      let isOfflineActivity = classActivity.get('collection.format') ===
+        PLAYER_EVENT_SOURCE.OFFLINE_CLASS;
+      Ember.run.later(function() {
+        let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
+        let datepickerCtnEle = Ember.$(
+          '.ca-datepicker-schedule-container .ca-daterange-picker'
+        );
+        datepickerCtnEle.removeClass('ca-datepicker-orientation-top');
+        datepickerCtnEle.removeClass('ca-datepicker-orientation-bottom');
+        datepickerCtnEle.removeClass('ca-datepicker-orientation-left');
+        let selectedContentEle = Ember.$(event.target);
+        let position = selectedContentEle.position();
+        let top = position.top - datepickerEle.height();
+        let left = position.left + 10 - datepickerEle.width();
+        let controllerHeight = Ember.$(
+          '.teacher.class.class-activities'
+        ).height();
+        let windowHeight = $(window).height();
+        let allowedTop = windowHeight - controllerHeight + top;
+        if (left < 0) {
+          left = position.left;
+          datepickerCtnEle.addClass('ca-datepicker-orientation-left');
+        }
+        if (allowedTop < 0) {
+          datepickerCtnEle.addClass('ca-datepicker-orientation-bottom');
+          top = position.top + 25;
+        } else {
+          datepickerCtnEle.addClass('ca-datepicker-orientation-top');
+        }
+        datepickerEle.css({
+          top: top,
+          left: left
+        });
+        if (!selectedContentEle.hasClass('active')) {
+          selectedContentEle.addClass('active');
+          datepickerEle.show();
+        } else {
+          selectedContentEle.removeClass('active');
+          datepickerEle.hide();
+        }
+      }, 100);
       controller.set('selectedActivityIsUnScheduled', isUnScheduled);
       controller.set('selectedClassActivityForSchedule', classActivity);
+      controller.set('allowTwoDateRangePicker', isOfflineActivity);
     },
 
     onSelectToday(date) {
@@ -1125,6 +1146,14 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let activitiesForDate = controller.get('classActivitiesOfMonth').filterBy('added_date', scheduleDate);
     let activities = activitiesForDate.filterBy('contentId', contentId);
     return activities.length;
+  },
+
+  isOfflineActivityAlreadyExists(scheduleDate, contentId) {
+    let controller = this;
+    let activeOfflineActivities = controller.get('activeOfflineActivities');
+    let existingActivities = activeOfflineActivities.filterBy('collection.id', contentId)
+      .filterBy('added_date', scheduleDate);
+    return existingActivities.length;
   },
 
   /**

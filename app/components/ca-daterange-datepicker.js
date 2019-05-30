@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import {
-  PLAYER_EVENT_SOURCE,
   SCREEN_SIZES
 } from 'gooru-web/config/config';
 import {
@@ -13,18 +12,6 @@ export default Ember.Component.extend({
   classNames: ['ca-daterange-picker'],
   // -------------------------------------------------------------------------
   // Properties
-
-  /**
-   * Maintains content type of selected activity to schedule
-   * @type {Stype}
-   */
-  contentType: null,
-
-  /**
-   * Maintains the value whether activity is offline or not
-   * @type {Integer}
-   */
-  isOfflineActivity: Ember.computed.equal('contentType', PLAYER_EVENT_SOURCE.OFFLINE_CLASS),
 
   /**
    * Maintains the value which of activity startDate
@@ -78,10 +65,10 @@ export default Ember.Component.extend({
   isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
 
-  isValid: Ember.computed('isOfflineActivity', 'endDate', function() {
+  isValid: Ember.computed('allowTwoDateRangePicker', 'endDate', function() {
     let component = this;
-    return (component.get('isOfflineActivity') && component.get('endDate')) ||
-      (!component.get('isOfflineActivity') && component.get('startDate'));
+    return (component.get('allowTwoDateRangePicker') && component.get('endDate')) ||
+      (!component.get('allowTwoDateRangePicker') && component.get('startDate'));
   }),
 
   // -------------------------------------------------------------------------
@@ -97,8 +84,7 @@ export default Ember.Component.extend({
       let component = this;
       let startDate = component.get('startDate');
       let endDate = component.get('endDate');
-      let isOfflineActivity = component.get('isOfflineActivity');
-      component.sendAction('onScheduleForDate', startDate, endDate, isOfflineActivity);
+      component.sendAction('onScheduleForDate', startDate, endDate);
       component.send('close');
     },
 
@@ -110,28 +96,25 @@ export default Ember.Component.extend({
     onScheduleEndDate(date) {
       let component = this;
       let startDate = component.get('startDate');
-      let isOfflineActivity = component.get('isOfflineActivity');
       component.set('endDate', date);
       if (!component.get('isMobileView')) {
-        component.sendAction('onScheduleForDate', startDate, date, isOfflineActivity);
+        component.sendAction('onScheduleForDate', startDate, date);
       }
     },
 
     onScheduleStartDate(startDate) {
       let component = this;
-      let isOfflineActivity = component.get('isOfflineActivity');
       component.set('startDate', startDate);
-      if (!component.get('isOfflineActivity') && !component.get('isMobileView')) {
-        component.sendAction('onScheduleForDate', startDate, startDate, isOfflineActivity);
+      if (!component.get('allowTwoDateRangePicker') && !component.get('isMobileView')) {
+        component.sendAction('onScheduleForDate', startDate, startDate);
       }
     },
 
     onScheduleForMonth(month) {
       let component = this;
-      let isOfflineActivity = component.get('isOfflineActivity');
       let forMonth = month.get('monthNumber');
       let forYear = month.get('monthYear');
-      component.sendAction('onScheduleForMonth', forMonth, forYear, isOfflineActivity);
+      component.sendAction('onScheduleForMonth', forMonth, forYear);
     }
   }
 });

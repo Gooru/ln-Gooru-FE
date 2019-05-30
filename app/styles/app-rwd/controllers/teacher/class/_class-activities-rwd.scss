@@ -23,7 +23,7 @@
           z-index: 1;
           background: none;
           padding: 0;
-          position: fixed;
+          position: absolute;
           top: calc(100% - 150px);
 
           &.active {
@@ -84,7 +84,7 @@
           z-index: 1;
           background: none;
           padding: 0;
-          position: fixed;
+          position: absolute;
           top: calc(100% - 100px);
 
           &.active {
@@ -107,7 +107,7 @@
           z-index: 1;
           background: none;
           padding: 0;
-          position: fixed;
+          position: absolute;
           top: calc(100% - 50px);
 
           &.active {
@@ -153,6 +153,24 @@
         }
 
         .calendar {
+          display: block;
+
+          .start-date-picker {
+            display: none;
+
+            &.selected {
+              display: block;
+            }
+          }
+
+          .end-date-picker {
+            display: none;
+
+            &.selected {
+              display: block;
+            }
+          }
+
           .ca-date-picker-container {
             .ca-datepicker-container {
               #ca-datepicker {
