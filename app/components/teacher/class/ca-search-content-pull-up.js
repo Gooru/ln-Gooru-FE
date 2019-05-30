@@ -2,7 +2,8 @@ import Ember from 'ember';
 import {
   SEARCH_FILTER_BY_CONTENT_TYPES,
   KEY_CODES,
-  SCREEN_SIZES
+  SCREEN_SIZES,
+  PLAYER_EVENT_SOURCE
 } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
@@ -292,6 +293,15 @@ export default Ember.Component.extend(ConfigurationMixin, {
   // actions
 
   actions: {
+
+    /**
+     * Action triggered when the user click on close
+     */
+    closeDatePicker() {
+      let component = this;
+      component.sendAction('closeDatePicker');
+    },
+
     /**
      * Action triggered when the user preview content
      */
@@ -398,7 +408,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
      * It will takes care of content will schedule for the specific date.
      * @param  {String} scheduleDate
      */
-    onScheduleDate(scheduleDate) {
+    onScheduleDate(scheduleDate, scheduleEndDate) {
       let component = this;
       let classId = component.get('classId');
       let contentType =
@@ -408,15 +418,21 @@ export default Ember.Component.extend(ConfigurationMixin, {
       let content = component.get('selectedContentForSchedule');
       let datepickerEle = component.$('.schedule-ca-datepicker-container');
       datepickerEle.hide();
+      let forMonth = moment(scheduleDate).format('MM');
+      let forYear = moment(scheduleDate).format('YYYY');
       component
         .get('classActivityService')
-        .addActivityToClass(classId, contentId, contentType, scheduleDate)
+        .addActivityToClass(classId, contentId, contentType, scheduleDate, forMonth,
+          forYear, scheduleEndDate)
         .then(newContentId => {
           if (!component.isDestroyed) {
             let data = component.serializerSearchContent(
               content,
               newContentId,
-              scheduleDate
+              scheduleDate,
+              forMonth,
+              forYear,
+              scheduleEndDate
             );
             content.set('isScheduled', true);
             component.sendAction('addedContentToDCA', data, scheduleDate);
@@ -427,11 +443,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
     /**
      * It will takes care of content will schedule for the specific month.
      * @param  {Moment} Month
+     * @param  {Moment} Year
      */
-    onScheduleForMonth(month) {
+    onScheduleForMonth(forMonth, forYear) {
       let component = this;
-      let forYear = month.get('monthYear');
-      let forMonth = month.get('monthNumber');
       let classId = component.get('classId');
       let contentType =
         component.get('selectedContentForSchedule.format') ||
@@ -461,42 +476,45 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     onScheduleContentToDCA(content, event) {
       let component = this;
-      let datepickerEle = component.$('.schedule-ca-datepicker-container');
-      let datepickerCtnEle = component.$(
-        '.schedule-ca-datepicker-container .ca-date-picker-container'
-      );
-      datepickerCtnEle.removeClass('ca-datepicker-orientation-top');
-      datepickerCtnEle.removeClass('ca-datepicker-orientation-bottom');
-      datepickerCtnEle.removeClass('ca-datepicker-orientation-center');
-      let selectedContentEle = component.$(event.target);
-      let position = selectedContentEle.position();
-      let top = position.top + 10 - datepickerEle.height();
-      let left = position.left + 20 - datepickerEle.width();
-      let componentHeight = component.$().height();
-      let windowHeight = $(window).height();
-      let allowedTop = windowHeight - componentHeight + top;
-      if (left < 0) {
-        left = position.left - datepickerEle.width() / 2;
-        datepickerCtnEle.addClass('ca-datepicker-orientation-center');
-      }
-      if (allowedTop < 0) {
-        datepickerCtnEle.addClass('ca-datepicker-orientation-bottom');
-        top = position.top + 35;
-      } else {
-        datepickerCtnEle.addClass('ca-datepicker-orientation-top');
-      }
-      datepickerEle.css({
-        top: top,
-        left: left
-      });
-      if (!selectedContentEle.hasClass('active')) {
-        selectedContentEle.addClass('active');
-        datepickerEle.show();
-      } else {
-        selectedContentEle.removeClass('active');
-        datepickerEle.hide();
-      }
+      Ember.run.later(function() {
+        let datepickerEle = component.$('.schedule-ca-datepicker-container');
+        let datepickerCtnEle = component.$(
+          '.schedule-ca-datepicker-container .ca-date-picker-container'
+        );
+        datepickerCtnEle.removeClass('ca-datepicker-orientation-top');
+        datepickerCtnEle.removeClass('ca-datepicker-orientation-bottom');
+        datepickerCtnEle.removeClass('ca-datepicker-orientation-center');
+        let selectedContentEle = component.$(event.target);
+        let position = selectedContentEle.position();
+        let top = position.top + 10 - datepickerEle.height();
+        let left = position.left + 20 - datepickerEle.width();
+        let componentHeight = component.$().height();
+        let windowHeight = $(window).height();
+        let allowedTop = windowHeight - componentHeight + top;
+        if (left < 0) {
+          left = position.left - datepickerEle.width() / 2;
+          datepickerCtnEle.addClass('ca-datepicker-orientation-center');
+        }
+        if (allowedTop < 0) {
+          datepickerCtnEle.addClass('ca-datepicker-orientation-bottom');
+          top = position.top + 35;
+        } else {
+          datepickerCtnEle.addClass('ca-datepicker-orientation-top');
+        }
+        datepickerEle.css({
+          top: top,
+          left: left
+        });
+        if (!selectedContentEle.hasClass('active')) {
+          selectedContentEle.addClass('active');
+          datepickerEle.show();
+        } else {
+          selectedContentEle.removeClass('active');
+          datepickerEle.hide();
+        }
+      }, 100);
       this.set('selectedContentForSchedule', content);
+      this.set('allowTwoDateRangePicker', content.get('format') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS);
     },
 
     //Action triggered when click + icon in the pullup
@@ -796,7 +814,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
     return params;
   },
 
-  serializerSearchContent(content, contentId, date, forMonth, forYear) {
+  serializerSearchContent(content, contentId, startDate, forMonth, forYear, endDate) {
     let format = content.get('format');
     if (!format) {
       content.set('format', this.get('activeContentType'));
@@ -805,10 +823,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
     }
     return Ember.Object.create({
       id: contentId,
-      title: content.get('title'),
-      added_date: date,
-      activityDate: date,
-      contentType: format,
+      added_date: startDate,
+      end_date: endDate || startDate,
+      activityDate: startDate,
       collection: content,
       usersCount: -1,
       isActive: false,

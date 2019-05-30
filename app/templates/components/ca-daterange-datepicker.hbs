@@ -12,7 +12,7 @@
       <span class="day">{{format-date startDate 'dddd'}}</span>
     </div>
   </div>
-  <div class="end-date-info {{unless isOfflineActivity 'hidden'}} {{if (eq selectedTabIndex 1) 'active'}}" {{action 'onSelectTab' 1}}>
+  <div class="end-date-info {{unless allowTwoDateRangePicker 'hidden'}} {{if (eq selectedTabIndex 1) 'active'}}" {{action 'onSelectTab' 1}}>
     <span>{{t 'goals.manage.end-date-label'}}</span>
     <div class="date-container">
       {{#if endDate}}
@@ -26,26 +26,28 @@
   </div>
 </div>
 <div class="calendar">
-  {{ca-date-picker
+  <div class="start-date-picker {{if (eq selectedTabIndex 0) 'selected'}}">
+    {{ca-date-picker
      userStartDateAsToday=true
      onSelectDate='onScheduleStartDate'
-     showMonths=(if isOfflineActivity  false true)
+     showMonths=(if allowTwoDateRangePicker  false true)
      onSelectMonth='onScheduleForMonth'
      forFirstDateOfMonth=forFirstDateOfMonth
-     class=(if (eq selectedTabIndex 0) 'visible' 'hidden')
    }}
-  {{ca-date-picker
+  </div>
+  <div class="end-date-picker {{unless allowTwoDateRangePicker 'hidden'}} {{if (eq selectedTabIndex 1) 'selected'}}">
+    {{ca-date-picker
       userStartDateAsToday=true
       onSelectDate='onScheduleEndDate'
       startDate=startDate
       showMonths=false
       validateEndDate=true
-      class=(if (eq selectedTabIndex 1) 'visible' 'hidden')
     }}
+  </div>
 </div>
 <div class="submit-btn {{unless isValid 'disable'}}" {{action 'submitDate'}}>
   <span>{{t 'common.done'}}</span>
 </div>
-<div class="month-picker {{unless isOfflineActivity 'hidden'}}">
+<div class="month-picker {{unless allowTwoDateRangePicker 'hidden'}}">
   {{ca-month-picker onSelectMonth='onScheduleForMonth' currentMonth=forFirstDateOfMonth}}
 </div>

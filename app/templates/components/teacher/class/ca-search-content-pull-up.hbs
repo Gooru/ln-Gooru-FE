@@ -114,11 +114,11 @@
 {{/if}}
 
 <div class="schedule-ca-datepicker-container ca-datepicker-popover-container">
-  {{ca-date-picker
-    userStartDateAsToday=true
-    onSelectDate='onScheduleDate'
-    showMonths=true
-    onSelectMonth='onScheduleForMonth'}}
+  {{ca-daterange-datepicker
+      closeDatePicker='onCloseDatePicker'
+      onScheduleForDate='onScheduleDate'
+      onScheduleForMonth='onScheduleForMonth'
+      allowTwoDateRangePicker=allowTwoDateRangePicker}}
 </div>
 
 {{#if isShowCreateOfflineActivity}}

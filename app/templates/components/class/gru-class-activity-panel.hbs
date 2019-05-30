@@ -2,14 +2,14 @@
   {{#unless isUnScheduled}}
     <div class="ca-panel-container-1">
       <div class="icon">
-        <i class="{{classActivity.contentType}}-icon" />
+        <i class="{{item.format}}-icon" />
       </div>
       <div class="title-info {{if isOfflineActivity 'offline'}}" {{action 'onPlayContent' item}}>
         <div class="label-section">
-          <div class="title ellipsis">{{classActivity.title}}</div>
+          <div class="title ellipsis">{{item.title}}</div>
           <div class="group">
             <span class="date-section">
-              {{format-date classActivity.dca_added_date 'DD MMM'}} - {{format-date (if classActivity.end_date classActivity.end_date classActivity.dca_added_date) 'DD MMM'}}
+              {{format-date classActivity.added_date 'DD MMM'}} - {{format-date (if classActivity.end_date classActivity.end_date classActivity.added_date) 'DD MMM'}}
             </span>
             <span class="task-count">{{t 'common.tasks'}} {{item.taskCount}}</span>
           </div>
@@ -111,7 +111,7 @@
         </div>
         <div class="mastery-accrual">
           {{#if (and showMasteryAccrual item.masteryAccrualCompetencies)}}
-            <div class="mastery-accrual-btn {{if isActivityPast 'disable-event'}}" {{action "onUpdateMasteryAccrual"}}>
+            <div class="mastery-accrual-btn {{if (or activity.isCompleted isActivityPast) 'disable-event'}}" {{action "onUpdateMasteryAccrual"}}>
               <span class="mastery-accrual-icon mastery-accrual-{{if classActivity.allowMasteryAccrual 'checked' 'unchecked'}}">
                 {{gru-icon name=(concat 'radio_button_' (if  classActivity.allowMasteryAccrual 'checked' 'unchecked'))}}
               </span>
@@ -131,7 +131,7 @@
           {{/if}}
         {{/if}}
         {{#if (and isOfflineActivity (not classActivity.isCompleted))}}
-          <div class="oa-complete {{unless classActivity.isActive 'disabled'}}">
+          <div class="oa-complete {{if (or (not classActivity.isActive) isActivityFuture) 'disabled'}}">
             {{input type="checkbox"  change=(action "onComplete") }}<span>{{t 'common.completed'}}</span>
           </div>
         {{/if}}
@@ -152,10 +152,10 @@
   {{else}}
     <div class="ca-panel-container-1 unschedule">
       <div class="icon">
-        <i class="{{classActivity.contentType}}-icon" />
+        <i class="{{item.format}}-icon" />
       </div>
       <div class="title-info ellipsis" {{action 'onPlayContent' item}}>
-        <span class="ellipsis">{{classActivity.title}}</span>
+        <span class="ellipsis">{{item.title}}</span>
       </div>
       <div class="resource-info">
         {{#if (gt classActivity.resourceCount 0)}}
