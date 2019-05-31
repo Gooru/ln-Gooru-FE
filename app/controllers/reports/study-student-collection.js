@@ -348,22 +348,11 @@ export default StudentCollection.extend({
     }
   ),
 
+  /**
+   * @property {Boolean} isShowMasteryGreeting
+   * Property to show mastery greeting message
+   */
   isShowMasteryGreeting: false,
-
-  competencyInfo: Ember.computed('collectionObj', function() {
-    const controller = this;
-    const collectionObj = controller.get('collectionObj');
-    let competencyInfo = '';
-    let standards = collectionObj.get('standards');
-    if (standards.length) {
-      let lastStandard = standards.objectAt(standards.length - 1);
-      let standardTitle = lastStandard.get('title');
-      competencyInfo = standardTitle
-        ? `${standardTitle.substring(0, 40)}...`
-        : '';
-    }
-    return competencyInfo;
-  }),
 
   // -------------------------------------------------------------------------
   // Methods

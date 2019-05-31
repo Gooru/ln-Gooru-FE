@@ -2584,6 +2584,6 @@ export default Object.assign(quizzesTranslations, {
   'pre-study': 'Pre-Study',
   'course-map.your-learning-path': 'Your Learning Path',
   'mastery-greeting-msg':
-    'You’ve earned a Mastery Badge for <b>{{competencyInfo}}</b>. Would you like to see the improvement in your competency skyline?',
+    'You’ve earned a Mastery Badge! Would you like to see the improvement in your competency skyline?',
   'show-me': 'Show Me'
 });

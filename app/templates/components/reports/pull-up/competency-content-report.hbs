@@ -2,9 +2,9 @@
   <div class="competency-name">
     {{competency.competencyName}}
   </div>
-  {{#if competency}}
+  {{#if (and competency (not isPlayerProficiency))}}
     <div class="signature-content">
-      {{reports.pull-up.signature-content-report userId=userId domainCompetencyList=domainCompetencyList collectionPerformances=collectionPerformances showSignatureAssessment=showSignatureAssessment competency=competency isStudent=isStudent selectedItem = selectedItem}}
+      {{reports.pull-up.signature-content-report userId=userId domainCompetencyList=domainCompetencyList collectionPerformances=collectionPerformances showSignatureAssessment=showSignatureAssessment competency=competency isStudent=isStudent}}
     </div>
   {{/if}}
 </div>
