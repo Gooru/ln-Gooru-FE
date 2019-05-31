@@ -1,8 +1,44 @@
 [
   {
-    "description": "Get class activities by user - any class and any user",
+    "description": "Get class scheduled activities by user - any class and any user",
     "request": {
       "url": "^/api/nucleus/v2/classes/(.+)/contents$",
+      "method": "GET",
+      "headers": {
+        "Authorization": "Token (.+)"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "File not found!",
+      "file": "find-class-activities-by-user-200-response.json"
+    }
+  },
+  {
+    "description": "Get class active offline activities by user - any class and any user",
+    "request": {
+      "url": "^/api/nucleus/v2/classes/(.+)/contents/offline/active$",
+      "method": "GET",
+      "headers": {
+        "Authorization": "Token (.+)"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "File not found!",
+      "file": "find-class-activities-by-user-200-response.json"
+    }
+  },
+  {
+    "description": "Get class active completed activities by user - any class and any user",
+    "request": {
+      "url": "^/api/nucleus/v2/classes/(.+)/contents/offline/completed$",
       "method": "GET",
       "headers": {
         "Authorization": "Token (.+)"
