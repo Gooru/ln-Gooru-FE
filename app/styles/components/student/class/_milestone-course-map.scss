@@ -185,7 +185,7 @@
         .milestone-course-map-lesson {
           &.rescope {
             .milestone-course-map-lesson-panel {
-              background-color: rgba(204, 204, 204, 0.6);
+              background-color: rgba(204, 204, 204, 0.8);
             }
             display: none;
 
@@ -194,6 +194,14 @@
               .milestone-course-map-lesson-panel {
                 .domain-lesson-title {
                   font-style: italic;
+                }
+              }
+              .milestone-course-map-collection-container {
+                .milestone-course-map-collection {
+                  .milestone-course-map-collection-panel {
+                    background-color: rgba(204, 204, 204, 0.8);
+                    font-style: italic;
+                  }
                 }
               }
             }
@@ -617,6 +625,13 @@
                     &.format-assessment,
                     &.format-assessment-external {
                       background-image: url("../assets/gooru/images/assessment-gray.svg");
+                    }
+
+                    &.format-offline-activity {
+                      background-image: url("../assets/gooru/images/offline.svg");
+                      width: 27px;
+                      height: 27px;
+                      background-size: 27px 27px;
                     }
                   }
 

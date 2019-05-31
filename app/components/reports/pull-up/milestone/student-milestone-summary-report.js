@@ -452,6 +452,7 @@ export default Ember.Component.extend({
     rescopedCollectionIds.pushObjects(rescopedContents.collections);
     rescopedCollectionIds.pushObjects(rescopedContents.assessmentsExternal);
     rescopedCollectionIds.pushObjects(rescopedContents.collectionsExternal);
+    rescopedCollectionIds.pushObjects(rescopedContents.offlineActivities);
     if (!component.isDestroyed) {
       component.set('rescopedCollectionIds', rescopedCollectionIds);
     }

@@ -863,23 +863,23 @@ export default Ember.Component.extend({
     let component = this;
     let collectionIds = Ember.A([]);
     let rescopedContents = component.get('rescopedContents');
-    if (rescopedContents && rescopedContents.length > 0) {
-      let rescopedCollectionContents = component.get(
-        'rescopedContents.collections'
+    if (rescopedContents) {
+      let rescopedCollectionContents = rescopedContents.get('collections');
+      let rescopedCollectionsExternalContents = rescopedContents.get(
+        'collectionsExternal'
       );
-      let rescopedCollectionsExternalContents = component.get(
-        'rescopedContents.collectionsExternal'
+      let rescopedAssessmentsExternalContents = rescopedContents.get(
+        'assessmentsExternal'
       );
-      let rescopedAssessmentsExternalContents = component.get(
-        'rescopedContents.assessmentsExternal'
-      );
-      let rescopedAssessmentsContents = component.get(
-        'rescopedContents.assessments'
+      let rescopedAssessmentsContents = rescopedContents.get('assessments');
+      let rescopedOfflineActivityContents = rescopedContents.get(
+        'offlineActivities'
       );
       collectionIds.pushObjects(rescopedCollectionContents);
       collectionIds.pushObjects(rescopedAssessmentsContents);
       collectionIds.pushObjects(rescopedCollectionsExternalContents);
       collectionIds.pushObjects(rescopedAssessmentsExternalContents);
+      collectionIds.pushObjects(rescopedOfflineActivityContents);
     }
     return collectionIds;
   },
