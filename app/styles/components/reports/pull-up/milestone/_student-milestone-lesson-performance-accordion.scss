@@ -102,6 +102,10 @@
           &.collection-external {
             background-image: url("../assets/gooru/images/collection_gray.svg");
           }
+
+          &.offline-activity {
+            background-image: url("../assets/gooru/images/offline.svg");
+          }
         }
 
         &.started {

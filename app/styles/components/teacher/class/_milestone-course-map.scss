@@ -523,6 +523,13 @@
                     &.format-assessment-external {
                       background-image: url("../assets/gooru/images/assessment-gray.svg");
                     }
+
+                    &.format-offline-activity {
+                      background-image: url("../assets/gooru/images/offline.svg");
+                      width: 27px;
+                      height: 27px;
+                      background-size: 27px 27px;
+                    }
                   }
 
                   .collection-icon-upward-line {
