@@ -229,6 +229,41 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Gets all class scheduled activity performance for specific dates (teacher)
+   *
+   * @param {string} classId
+   * @param {startDate} date optional, default is current date
+   * @param {endDate} date optional, default is current date
+   * @returns {Promise}
+   */
+  getPerformanceOfClassActivitiesForMonth(classId,
+    startDate = moment().format('YYYY-MM-DD'), endDate) {
+    const service = this;
+    let end_date = endDate ? endDate : startDate;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('classActivityAdapter')
+        .getScheduledActivities(classId, startDate, end_date).then(
+          function(payload) {
+            const classActivities = service
+              .get('classActivitySerializer')
+              .normalizeFindClassActivities(payload);
+            service
+              .findClassActivitiesPerformanceSummary(
+                classId,
+                classActivities,
+                startDate,
+                endDate
+              )
+              .then(resolve, reject);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
    * Gets all class scheduled activity for the authorized user (student|teacher)
    *
    * @param {string} classId
