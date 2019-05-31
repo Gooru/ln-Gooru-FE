@@ -130,11 +130,10 @@ export default Ember.Component.extend({
   openPullUp() {
     let component = this;
     component.set('showPullUp', true);
-    component.$().animate(
-      {
-        top: '10%'
-      },
-      400
+    component.$().animate({
+      top: '10%'
+    },
+    400
     );
   },
 
@@ -143,15 +142,14 @@ export default Ember.Component.extend({
    */
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-        component.sendAction('onClosePullUp', closeAll);
-      }
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+      component.sendAction('onClosePullUp', closeAll);
+    }
     );
   },
 
@@ -172,12 +170,14 @@ export default Ember.Component.extend({
     let component = this;
     let forMonth = component.get('context.month');
     let forYear = component.get('context.year');
+    let startDate = `${forYear}-${forMonth}-01`;
+    var endDate = moment(startDate).endOf('month').format('YYYY-MM-DD');
     const classId = component.get('classId');
     component.set('isLoading', true);
     Ember.RSVP.hash({
       classActivities: component
         .get('classActivityService')
-        .findClassActivities(classId, null, forMonth, forYear)
+        .getPerformanceOfClassActivitiesForMonth(classId, startDate, endDate)
     }).then(function(hash) {
       component.set('classActivities', hash.classActivities);
       component.set('isLoading', false);
