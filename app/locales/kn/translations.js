@@ -73,6 +73,9 @@ export default Object.assign(quizzesTranslations, {
   'search-help-message': 'Choose filters to apply',
   'library-search-placeholder': 'Search for anything within the library…',
   'common.avg-score': 'Avg Score',
+  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
   'common.frq': 'FRQ',
   'common.plan': 'plan',
   'offline-activities.no-completed-content':

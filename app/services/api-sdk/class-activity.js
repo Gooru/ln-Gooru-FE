@@ -282,7 +282,15 @@ export default Ember.Service.extend({
             const classActivities = service
               .get('classActivitySerializer')
               .normalizeFindClassActivities(payload);
-            resolve(classActivities);
+            service
+              .findStudentActivitiesPerformanceSummary(
+                userId,
+                classId,
+                classActivities,
+                startDate,
+                end_date
+              )
+              .then(resolve, reject);
           },
           function(error) {
             reject(error);

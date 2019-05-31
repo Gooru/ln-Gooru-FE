@@ -105,6 +105,9 @@ export default Object.assign(quizzesTranslations, {
   'common.add': 'যোগ',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
+  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
   'common.plan-an-activities-msg':
     'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'পুনরায় সঞ্চালনের জন্য নির্ধারণ',

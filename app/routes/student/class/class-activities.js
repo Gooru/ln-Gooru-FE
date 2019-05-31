@@ -42,7 +42,8 @@ export default Ember.Route.extend({
    */
   setupController: function(controller, model) {
     controller.get('classController').selectMenuItem('class-activities');
-    controller.parseClassActivityData(model.classActivities);
+    controller.set('classActivitiesOfMonth', model.classActivities);
+    controller.set('selectedDate', moment().format('YYYY-MM-DD'));
     controller.initialize();
   },
 
@@ -52,6 +53,10 @@ export default Ember.Route.extend({
    */
   resetController(controller) {
     controller.set('classActivities', Ember.A([]));
+    controller.set('classActivitiesOfMonth', Ember.A([]));
+    controller.set('activeOfflineActivities', Ember.A([]));
+    controller.set('completedOfflineActivities', Ember.A([]));
+    controller.set('selectedDate', null);
     controller.set('tab', null);
   }
 });
