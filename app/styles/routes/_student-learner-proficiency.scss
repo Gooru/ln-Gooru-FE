@@ -134,9 +134,13 @@
       padding-top: 100px;
       height: max-content;
       margin-bottom: 50px;
+      justify-content: center;
       .gru-study-header {
         top: 0;
         z-index: 22;
+      }
+      @media screen and (max-width: $screen-xs) {
+        padding-top: 140px;
       }
 
       //Overwrite proficiency chart panel styles
@@ -147,6 +151,28 @@
             span.back {
               display: none;
             }
+            .taxonomy-info {
+              .dropdown {
+                button {
+                  .caret {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+          .panel-content {
+            padding-bottom: 15px;
+            .proficiency-chart {
+              .learner-proficiency-domain-matrix {
+                .actions {
+                  display: none;
+                }
+              }
+            }
+            .time-series-container {
+              display: none;
+            }
           }
         }
       }
@@ -154,7 +180,15 @@
       //Disable pointer events
       .pull-up-container {
         .proficiency-subject-panel {
+          .domain-list {
+            max-height: 400px;
+          }
           .competency-info-pull-up {
+            .competency-panel-header {
+              .close {
+                display: none;
+              }
+            }
             .body {
               pointer-events: none;
             }
