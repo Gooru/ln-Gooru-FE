@@ -106,6 +106,9 @@ export default Object.assign(quizzesTranslations, {
     'There are no projects or other offline activities that the students are currently working on',
   'common.about-you': 'Acerca de ti',
   'common.about-me': 'About Me',
+  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
   'common.accept': 'Accept',
   'common.ignore': 'Ignore',
   'common.no-search-result':

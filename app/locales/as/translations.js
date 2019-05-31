@@ -81,6 +81,9 @@ export default Object.assign(quizzesTranslations, {
   'common.frq': 'FRQ',
   'common.schedule': 'কাৰ্যক্ৰম',
   'common.plan': 'plan',
+  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
   'offline-activities.no-completed-content':
     'There are no projects or other offline activities that have been completed yet',
   'offline-activities.no-active-content':

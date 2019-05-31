@@ -101,6 +101,9 @@ export default Object.assign(quizzesTranslations, {
   'common.a-assessment': 'एक मूल्यांकन',
   'common.about': 'याबद्दल',
   'common.about-you': 'तुमच्याबद्दल',
+  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
   'common.plan': 'plan',
   'offline-activities.no-completed-content':
     'There are no projects or other offline activities that have been completed yet',

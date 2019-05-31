@@ -1,8 +1,135 @@
 <div class="controller student class class-activities">
   <div class="loading-spinner {{if isLoading 'active'}}">
-      {{three-bounce-spinner}}
+    {{three-bounce-spinner}}
   </div>
-  <div class="ca-content-container">
+  <div class="ca-panel">
+    <div class="left-panel">
+      <div class="schedule-container">
+        <div class="ca-schedule-items-header">
+          <div class="ca-schedule-header-panel">
+            <span class="title">{{t 'student-landing.class.class-activities'}}</span>
+            <div class="ca-date-section">
+              <div class="date-picker-action" {{action 'toggleDatePicker'}}>
+                <span class="label">
+                  {{#if isToday}}
+                    {{t "student-landing.class.class-activities-tab.today"}}
+                  {{else}}
+                    {{format-date selectedDate 'DD MMM YYYY'}}
+                  {{/if}}
+                </span>
+                <div class="icons">
+                  {{gru-icon name="date_range"}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ca-date-selector {{if isActive 'open'}}">
+            {{#if isActive}}
+              <div class="backdrop" {{action 'toggleDatePicker'}}></div>
+            {{/if}}
+            {{ca-date-picker
+              showToday=true
+              forMonth=forMonth
+              allowDateSelectorToggle=false
+              forYear=forYear
+              showPreviousMonth="showPreviousMonth"
+              showNextMonth="showNextMonth"
+              onSelectDate="onSelectDate"
+              highlightFirstDayOfMonth=true
+              onSelectToday="onSelectToday"
+              activities=scheduledClassActivitiesDatewise
+              highlightActivities=true
+            }}
+          </div>
+        </div>
+        <div class="ca-schedule-contents">
+          <div class="dca-content-list-container {{if isToday 'dca-content-list-container-today'}}">
+            {{#each classActivities as |classActivity|}}
+              {{class.gru-student-class-activity-panel
+               class=class
+               classActivity=classActivity
+               studentDcaReport='studentDcaReport'
+               activityDate=classActivity.added_date
+             }}
+            {{else if (not isLoading)}}
+              <p class="no-content">{{t 'ca.student.no-content'}}</p>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right-panel">
+      <div class="offline-container">
+        <div class="offline-activity-items-header" {{action 'toggleOffineActivity'}}>
+          <span class="title">{{t 'common.offline-activites'}}</span>
+          <i class="offline-icon hidden-xs"></i>
+          <div class="icons hidden visible-xs">
+            {{gru-icon name="arrow_drop_up" class="arrow-up"}}
+            {{gru-icon name="arrow_drop_down" class="arrow-bottom"}}
+          </div>
+        </div>
+        <div class="offline-activity-contents">
+          <div class="panel-group" id="panels">
+            <div class="panel panel-default oa-active-container">
+              <div class="oa-active-header collapsed" data-parent="#panels" data-toggle="collapse" data-target="#active">
+                <span>{{t 'teacher-landing.class.class-settings.student-settings-sec.col-head-active'}}</span>
+                <div class="icons">
+                  {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                  {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+                </div>
+              </div>
+              <div class="oa-active-items panel-collapse collapse in" id="active">
+                {{#if activeOfflineActivities}}
+                  <div class="oa-active-list">
+                    {{#each activeOfflineActivities as |offlineActivity|}}
+                      {{class.gru-student-class-activity-panel
+                     class=class
+                     classActivity=offlineActivity
+                     studentDcaReport='studentDcaReport'
+                     activityDate=offlineActivity.added_date
+                   }}
+                    {{/each}}
+                  </div>
+                {{else}}
+                  <div class="no-active-content">
+                    {{t 'oa.student.no-active-content'}}
+                  </div>
+                {{/if}}
+              </div>
+            </div>
+            <div class="panel panel-default oa-completed-container">
+              <div class="oa-completed-header collapsed" data-toggle="collapse" data-parent="#panels" data-target="#completed">
+                <span>{{t 'common.completed'}}</span>
+                <div class="icons">
+                  {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                  {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+                </div>
+              </div>
+              <div class="oa-completed-items panel-collapse collapse" id="completed">
+                {{#if completedOfflineActivities}}
+                  <div class="oa-completed-list">
+                    {{#each completedOfflineActivities as |offlineActivity|}}
+                      {{class.gru-student-class-activity-panel
+                        class=class
+                        classActivity=offlineActivity
+                        studentDcaReport='studentDcaReport'
+                        activityDate=offlineActivity.added_date
+                       }}
+                    {{/each}}
+                  </div>
+                {{else}}
+                  <div class="no-completed-content">
+                    {{t 'oa.student.no-completed-content'}}
+                  </div>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="ca-content-container">
     <div class="ca-date-and-add-content">
       <div class="ca-date-selector">
         {{ca-date-picker
@@ -49,15 +176,15 @@
       <div class="no-content">{{t "common.no-dca-student"}}</div>
       <div class="no-content-image"></div>
     {{/if}}
-  </div>
+  </div> -->
 </div>
 
 {{#if showStudentDcaReport}}
-{{reports.pull-up.dca-student-collection-report showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
+  {{reports.pull-up.dca-student-collection-report showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalCollectionReport}}
-{{reports.pull-up.dca-student-external-collection-report showPullUp=isShowStudentExternalCollectionReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
+  {{reports.pull-up.dca-student-external-collection-report showPullUp=isShowStudentExternalCollectionReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalAssessmentReport}}
