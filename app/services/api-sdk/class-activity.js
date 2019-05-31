@@ -229,7 +229,7 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Gets all class scheduled activity for the authorized user (student|teacher)
+   * Gets all class scheduled activity performance for specific dates (teacher)
    *
    * @param {string} classId
    * @param {startDate} date optional, default is current date
