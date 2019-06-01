@@ -94,6 +94,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       }
     },
 
+    onOpenFRQuestionGrade(itemToGrade) {
+      let controller = this;
+      controller.set('itemToGradeContextData', itemToGrade);
+      controller.set('showFRQuestionGrade', true);
+    },
+
     onCompleteActivity(activity) {
       let controller = this;
       controller.markActivityAsComplete(activity);

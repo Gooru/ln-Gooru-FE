@@ -184,7 +184,9 @@
               {{three-bounce-spinner}}
             {{else}}
               {{#if questionItems}}
-                {{gru-grade-items questionItems=questionItems}}
+                {{gru-grade-items
+                  openFRQuestionGrade='onOpenFRQuestionGrade'
+                  questionItems=questionItems}}
               {{else}}
                 <div class="no-grade-items">
                   <i></i>
@@ -243,4 +245,12 @@
       userId = activeStudent.id
     }}
   {{/reports.pull-up.milestone.milestone-report}}
+{{/if}}
+
+{{#if showFRQuestionGrade}}
+  {{grade.pull-up.free-response-question-grade
+    isDCAContext=true
+    showPullUp=showFRQuestionGrade
+    context=itemToGradeContextData
+    itemsToGrade=itemsToGrade}}
 {{/if}}

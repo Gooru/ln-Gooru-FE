@@ -231,8 +231,8 @@
           </div>
         </div>
       </div>
-      <div class="item-to-grade-container" {{action 'toggleItemsToGrade'}}>
-        <div class="ca-grade-items-header">
+      <div class="item-to-grade-container">
+        <div class="ca-grade-items-header" {{action 'toggleItemsToGrade'}}>
           <span>{{t 'class.analytics.performance.grade-items'}}</span>
           <div class="icons">
             {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
@@ -241,7 +241,9 @@
         </div>
         <div class="ca-grade-content-items">
           {{#if itemsToGrade}}
-            {{gru-grade-items contextSource=contextSource questionItems=itemsToGrade}}
+            {{gru-grade-items
+              openFRQuestionGrade='onOpenFRQuestionGrade'
+              questionItems=itemsToGrade}}
           {{else}}
             <div class="no-rubric-content">
               {{t 'common.all-caught-up'}}
@@ -324,4 +326,12 @@
     showPullUp=isShowContentPreview
     previewContentId=previewContent.id
     previewContentType=previewContentType}}
+{{/if}}
+
+{{#if showFRQuestionGrade}}
+  {{grade.pull-up.free-response-question-grade
+    isDCAContext=true
+    showPullUp=showFRQuestionGrade
+    context=itemToGradeContextData
+    itemsToGrade=itemsToGrade}}
 {{/if}}
