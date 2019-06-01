@@ -62,6 +62,7 @@ export default Object.assign(quizzesTranslations, {
   'common.first': 'First',
   'common.last': 'Last',
   'common.name': 'Name',
+  'common.tasks': 'tasks',
   'common.user': 'user',
   'common.content-name': 'Content Name',
   'common.lastName': 'Lastname',
@@ -72,9 +73,19 @@ export default Object.assign(quizzesTranslations, {
   'search-help-message': 'Choose filters to apply',
   'library-search-placeholder': 'Search for anything within the library…',
   'common.avg-score': 'Avg Score',
+  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
   'common.frq': 'FRQ',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.schedule': 'Schedule',
   'common.responses': 'Responses',
+  'common.offline-activites':'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.no-lesson-info-message': 'This unit does have any lessons.',
   'common.no-collection-info-message': 'This lesson does have any collections.',
   'common.gooru-suggestions': 'Gooru Suggestions',
@@ -125,7 +136,8 @@ export default Object.assign(quizzesTranslations, {
   'common.add-new-unit': 'ಹೊಸ ಘಟಕವನ್ನು ರಚಿಸಿ',
   'common.add-new-resource': 'ಹೊಸ ಸಂಪನ್ಮೂಲವನ್ನು ರಚಿಸಿ',
   'common.add-new-question': 'ಹೊಸ ಪ್ರಶ್ನೆಯನ್ನು ರಚಿಸಿ',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.add-question': 'ಪ್ರಶ್ನೆ ರಚಿಸಿ',
   'common.add-question-image': 'ಪ್ರಶ್ನೆ ಚಿತ್ರ ಸೇರಿಸಿ',
   'common.add-rubric': 'ಹೊಸ ರಬ್ರಿಕ್ ಸೇರಿಸಿ',
@@ -844,6 +856,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'ಸಂಪೂರ್ಣ ಪಠ್ಯ ನಕ್ಷೆ ತೋರಿಸಿ',
   'class.overview.course-map.rescope-info':
     'ಈ ಕೋರ್ಸ್ ಗಣಿತ ಅಡಿಪಾಯ ಕೋರ್ಸ್ನಿಂದ ನಿಮಗಾಗಿ ವೈಯಕ್ತಿಕವಾಗಿ ಪ್ರತ್ಯೇಕಿಸಲ್ಪಟ್ಟಿದೆ. ಮೂಲ ಕೋರ್ಸ್ ಅನ್ನು ನೋಡಲು, ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ.',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'ನಿಮ್ಮ ಕೌಶಲ್ಯದ ಆಧಾರದ ಮೇಲೆ ನಾವು ವಿಶೇಷವಾಗಿ ಈ ಕೋರ್ಸ್ ಅನ್ನು ವೈಯಕ್ತೀಕರಿಸುತ್ತೇವೆ. ದಯವಿಟ್ಟು ವೈಯಕ್ತೀಕರಿಸಿದ ಕೋರ್ಸ್ ನಕ್ಷೆಯನ್ನು ನೋಡಲು ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಪರಿಶೀಲಿಸಿ.',
   'class.overview.course-map.route0-bannerdesc':
@@ -2585,5 +2599,24 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material',
+  milestones: 'Milestones',
+  'show-course-map': 'Show course Map',
+  'show-milestones': 'Show Milestones',
+  'warn.class-destination-not-setup':
+    'Class setup is not complete unless the class destination is set. Go to Class Settings and complete setup. Otherwise, students will not be able to access content for this class.',
+  'milestone-rescoped':
+    'This milestone is available due to your {{subject}} level setup by teacher, but you seem to have caught up on all relevant competencies.',
+  'student-milestone-not-ready':
+    'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
+  'warn.teacher-milestone-not-ready':
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path',
+  'mastery-greeting-msg':
+    'You’ve earned a Mastery Badge! Would you like to see the improvement in your competency skyline?',
+  'show-me': 'Show Me'
 });

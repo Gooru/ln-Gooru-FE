@@ -39,7 +39,7 @@
       </div>
     {{/if}}
   </div>
-  {{reports.pull-up.competency-info-content userId=userId competency=competency microCompetencies=microCompetencies collectionPerformances=collectionPerformances userId=userId prequisiteCompetencies=prerequisites learningMapData=learningMapData isStudent=isStudent}}
+  {{reports.pull-up.competency-info-content userId=userId competency=competency microCompetencies=microCompetencies collectionPerformances=collectionPerformances userId=userId prequisiteCompetencies=prerequisites learningMapData=learningMapData isStudent=isStudent selectedItem = selectedItem}}
 {{/if}}
 {{#if (and isShowContentPreview (not isStudent))}}
   {{reports.pull-up.gru-collection-preview

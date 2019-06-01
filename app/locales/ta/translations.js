@@ -74,9 +74,12 @@ export default Object.assign(quizzesTranslations, {
   'common.apply-filter': 'apply filter',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'சராசரி ஸ்கோர்',
+  'common.tasks': 'tasks',
   'common.frq': 'frq',
   'common.schedule': 'அட்டவணை',
   'common.responses': 'பதில்களை',
+  'common.offline-activites':'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.no-lesson-info-message': 'இந்த அலகு எந்த பாடங்கள் உள்ளன.',
   'common.no-collection-info-message':
     'இந்த பாடம் எந்த வசூலையும் கொண்டிருக்கவில்லை.',
@@ -94,14 +97,23 @@ export default Object.assign(quizzesTranslations, {
   'common.a-question': 'ஒரு கேள்வி',
   'common.a-resource': 'ஒரு வள',
   'common.a-rubric': 'ஒரு ரூபிக்',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.all-completed': 'எல்லாம் முடிந்தது',
   'common.a-assessment': 'மதிப்பீடு',
   'common.about': 'பற்றி',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.about-you': 'உன்னை பற்றி',
   'common.about-me': 'என்னை பற்றி',
   'common.accept': 'ஏற்க',
   'common.ignore': 'புறக்கணிக்க',
+  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
   'common.add': 'கூட்டு',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
@@ -845,6 +857,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'முழுமையான போக்கைக் காட்டுங்கள்',
   'class.overview.course-map.rescope-info':
     'இந்த வழிகாட்டி பயிற்சியானது பல தரங்களுக்கிடையில் தரநிலைகளை உள்ளடக்கிய தனிப்பயனாக்கப்பட்ட பாடமாகும். ஒவ்வொரு மாணவருக்கும் தனித்துவமான படிப்பு வழங்கப்படும், இடைவெளிகளை நிரப்பவும், கருத்துக்களை மற்றும் நடைமுறைகளை வலுப்படுத்தவும், அவர்களின் கற்றல் முடுக்கி விடவும். தனிப்பயனாக்கப்பட்ட வழிகள் வடிவமைக்கப்பட்டுள்ளன மற்றும் ஒவ்வொரு மாணவரின் கற்றல் திறனை அதிகரிக்கவும் மற்றும் அவர்களது செட் இலக்குக்கு செல்லவும், நிகழ்நேரத்தில் மாணவர்கள் மீண்டும் வருகிறார்கள்.',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'உங்கள் தகுதி அடிப்படையில் நாங்கள் குறிப்பாக இந்த பாடத்தை தனிப்பயனாக்குகிறோம். தனிப்பயனாக்கப்பட்ட பாடத்திட்ட வரைபடத்தை காண சிறிது நேரத்தில் மீண்டும் பார்க்கவும்.',
   'class.overview.course-map.route0-bannerdesc':
@@ -2614,5 +2628,24 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material',
+  milestones: 'Milestones',
+  'show-course-map': 'Show course Map',
+  'show-milestones': 'Show Milestones',
+  'warn.class-destination-not-setup':
+    'Class setup is not complete unless the class destination is set. Go to Class Settings and complete setup. Otherwise, students will not be able to access content for this class.',
+  'milestone-rescoped':
+    'This milestone is available due to your {{subject}} level setup by teacher, but you seem to have caught up on all relevant competencies.',
+  'student-milestone-not-ready':
+    'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
+  'warn.teacher-milestone-not-ready':
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path',
+  'mastery-greeting-msg':
+    'You’ve earned a Mastery Badge! Would you like to see the improvement in your competency skyline?',
+  'show-me': 'Show Me'
 });

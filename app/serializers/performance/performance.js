@@ -17,7 +17,9 @@ export default DS.JSONAPISerializer.extend({
   normalizeQueryResponse: function(store, primaryModelClass, payload) {
     const serializer = this;
     const hasResults = payload.content.length > 0;
-    var model = { data: [] };
+    var model = {
+      data: []
+    };
     if (hasResults) {
       model = serializer.getSingleRecord(payload.content[0]);
     }
@@ -45,7 +47,9 @@ export default DS.JSONAPISerializer.extend({
       );
     }
 
-    var model = { data: [] };
+    var model = {
+      data: []
+    };
     Ember.$.each(results, function(index, result) {
       model.data.push(serializer.normalizePerformanceAttributes(result));
     });
@@ -139,6 +143,66 @@ export default DS.JSONAPISerializer.extend({
       let result = Ember.Object.create(data);
       resultSet.pushObject(result);
     });
+    return resultSet;
+  },
+
+  /**
+   * Normalized units performance data for course.
+   * @return {Array}
+   */
+
+  normalizeUnitsPerformanceDataForCourse(response) {
+    let resultSet = Ember.A();
+    if (response.content !== undefined && response.content.length > 0) {
+      response = Ember.A(response.content);
+      response.forEach(data => {
+        let result = Ember.Object.create(data);
+        let usageData = result.get('usageData');
+        if (usageData && usageData.length > 0) {
+          usageData.forEach(data => {
+            let unitPerformance = Ember.Object.create({
+              performance: Ember.Object.create({
+                timeSpent: data.timeSpent,
+                scoreInPercentage: data.scoreInPercentage
+              }),
+              unitId: data.unitId,
+              userUid: result.get('userUid')
+            });
+            resultSet.pushObject(unitPerformance);
+          });
+        }
+      });
+    }
+    return resultSet;
+  },
+
+  /**
+   * Normalized lessons performance data for unit.
+   * @return {Array}
+   */
+
+  normalizeLessonsPerformanceDataForUnit(response) {
+    let resultSet = Ember.A();
+    if (response.content !== undefined && response.content.length > 0) {
+      response = Ember.A(response.content);
+      response.forEach(data => {
+        let result = Ember.Object.create(data);
+        let usageData = result.get('usageData');
+        if (usageData && usageData.length > 0) {
+          usageData.forEach(data => {
+            let collectionPerformance = Ember.Object.create({
+              performance: Ember.Object.create({
+                timeSpent: data.timeSpent,
+                scoreInPercentage: data.scoreInPercentage
+              }),
+              lessonId: data.lessonId,
+              userUid: result.get('userUid')
+            });
+            resultSet.pushObject(collectionPerformance);
+          });
+        }
+      });
+    }
     return resultSet;
   }
 });

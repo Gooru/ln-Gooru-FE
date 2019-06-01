@@ -58,6 +58,8 @@ export default Object.assign(quizzesTranslations, {
   'common.relevance': 'പ്രാധാന്യം',
   'common.engagement': 'ഇടപഴകൽ',
   'common.efficacy': 'ഫലപ്രാപ്തി',
+  'common.offline-activites':'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.grid': 'ഗ്രിഡ്',
   'common.list': 'പട്ടിക',
   'common.first': 'ആദ്യം',
@@ -67,6 +69,7 @@ export default Object.assign(quizzesTranslations, {
   'common.content-name': 'ഉള്ളടക്കത്തിന്റെ പേര്',
   'common.lastName': 'പേരിന്റെ അവസാന ഭാഗം',
   'common.firstName': 'പേരിന്റെ ആദ്യഭാഗം',
+  'common.tasks': 'tasks',
   'common.filter-by': 'ഫിൽട്ടർ ചെയ്യുക',
   'common.more': 'കൂടുതൽ',
   'common.apply-filter': 'apply filter',
@@ -74,6 +77,11 @@ export default Object.assign(quizzesTranslations, {
   'library-search-placeholder': 'Search for anything within the library…',
   'common.avg-score': 'ശരാശരി സ്കോർ',
   'common.frq': 'frq',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.schedule': 'പട്ടിക',
   'common.responses': 'പ്രതികരണങ്ങൾ',
   'common.no-lesson-info-message': 'ഈ യൂണിറ്റിന് എന്തെങ്കിലും പാഠങ്ങൾ ഉണ്ട്.',
@@ -90,7 +98,8 @@ export default Object.assign(quizzesTranslations, {
     'നിങ്ങളുടെ അക്ഷരപ്പിശക് പരിശോധിക്കുക. നമ്മൾ എല്ലാവരും തെറ്റ് ചെയ്യുന്നു! അല്ലെങ്കിൽ സമാനമായ പദം തിരയാൻ ശ്രമിക്കുക.',
   'common.a-collection': 'ഒരു ശേഖരം',
   'common.a-course': 'ഒരു കോഴ്സ്',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.a-question': 'ഒരു ചോദ്യം',
   'common.a-resource': 'ഒരു വിഭവം',
   'common.a-rubric': 'ഒരു റബ്രിക്ക്',
@@ -99,6 +108,9 @@ export default Object.assign(quizzesTranslations, {
   'common.about': 'കുറിച്ച്',
   'common.about-you': 'നിന്നേക്കുറിച്ച്',
   'common.about-me': 'എന്നെ പറ്റി',
+  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
   'common.accept': 'സ്വീകരിക്കൂ',
   'common.ignore': 'അവഗണിക്കുക',
   'common.add': 'ചേർക്കുക',
@@ -839,6 +851,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'മുഴുവൻ കോഴ്സും കാണിക്കുക',
   'class.overview.course-map.rescope-info':
     'ഈ നാവിഗേറ്റർ കോഴ്സ് ഒന്നിലധികം ഗ്രേഡുകളിൽ നിലവാരത്തെ ഉൾക്കൊള്ളുന്ന വ്യക്തിഗത കോഴ്സാണ്. ഓരോ വിദ്യാർത്ഥിക്കും വിടവ് നികത്താനും, ആശയങ്ങളെ ശക്തിപ്പെടുത്താനും, അവരുടെ പഠനത്തെ ത്വരിതപ്പെടുത്തുന്നതിനും സഹായിക്കുന്ന ഒരു അദ്വിതീയ കോഴ്സാണ് നൽകുന്നത്. വ്യക്തിഗതമാക്കിയ യാത്രാമാർഗ്ഗങ്ങൾ രൂപകൽപ്പന ചെയ്യപ്പെടുന്നു, ഓരോ വിദ്യാർത്ഥികളുടെയും പഠന ശേഷി പരമാവധിയാക്കാനും അവരുടെ സെറ്റ് ഡെസ്റ്റിനേഷനിലേക്ക് നാവിഗേറ്റുചെയ്യാനും വിദ്യാർത്ഥികൾ യഥാ സമയം വീണ്ടും രൂപത്തിൽ എത്തിച്ചേരുന്നു.',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'നിങ്ങളുടെ യോഗ്യതയെ അടിസ്ഥാനമാക്കി ഞങ്ങൾ നിങ്ങൾക്ക് പ്രത്യേകമായി ഈ പഠന വ്യക്തിവൽക്കരിക്കുന്നു. വ്യക്തിഗതമാക്കിയ കോഴ്സ് മാപ്പുകൾ കാണാൻ കുറച്ച് സമയത്തിനുള്ളിൽ വീണ്ടും പരിശോധിക്കുക.',
   'class.overview.course-map.route0-bannerdesc':
@@ -2605,5 +2619,24 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material',
+  milestones: 'Milestones',
+  'show-course-map': 'Show course Map',
+  'show-milestones': 'Show Milestones',
+  'warn.class-destination-not-setup':
+    'Class setup is not complete unless the class destination is set. Go to Class Settings and complete setup. Otherwise, students will not be able to access content for this class.',
+  'milestone-rescoped':
+    'This milestone is available due to your {{subject}} level setup by teacher, but you seem to have caught up on all relevant competencies.',
+  'student-milestone-not-ready':
+    'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
+  'warn.teacher-milestone-not-ready':
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path',
+  'mastery-greeting-msg':
+    'You’ve earned a Mastery Badge! Would you like to see the improvement in your competency skyline?',
+  'show-me': 'Show Me'
 });

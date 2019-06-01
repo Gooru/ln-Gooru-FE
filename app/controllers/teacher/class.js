@@ -64,6 +64,7 @@ export default Ember.Controller.extend({
       controller.set('isShowLessonReportPullUp', false);
       controller.set('isShowCollectionReportPullUp', false);
       controller.set('isShowOCASummaryReportPullUp', false);
+      controller.set('isShowMilestoneReport', false);
     },
 
     /**
@@ -183,6 +184,8 @@ export default Ember.Controller.extend({
    */
   isShowOCASummaryReportPullUp: false,
 
+  isShowMilestoneReport: false,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -281,6 +284,9 @@ export default Ember.Controller.extend({
       courseId: controller.get('course.id'),
       classMembers: controller.get('class.members')
     };
+    if (controller.get('class.milestoneViewApplicable')) {
+      controller.set('isShowMilestoneReport', true);
+    }
     this.set('isShowCourseReport', true);
     this.set('courseReportData', params);
   },
@@ -300,11 +306,13 @@ export default Ember.Controller.extend({
     const performanceSummaryForDCAPromise = controller
       .get('analyticsService')
       .getDCASummaryPerformance(classId);
-    return Ember.RSVP.hash({
-      performanceSummaryForDCA: performanceSummaryForDCAPromise
-    }).then(function(hash) {
-      const performanceSummaryForDCA = hash.performanceSummaryForDCA;
-      controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
-    });
+    return Ember.RSVP
+      .hash({
+        performanceSummaryForDCA: performanceSummaryForDCAPromise
+      })
+      .then(function(hash) {
+        const performanceSummaryForDCA = hash.performanceSummaryForDCA;
+        controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
+      });
   }
 });

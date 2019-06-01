@@ -2,8 +2,12 @@ import Ember from 'ember';
 import ClassActivity from 'gooru-web/models/content/class-activity';
 import Collection from 'gooru-web/models/content/collection';
 import Assessment from 'gooru-web/models/content/assessment';
-import { parseDate } from 'gooru-web/utils/utils';
-import { DEFAULT_IMAGES } from 'gooru-web/config/config';
+import {
+  parseDate
+} from 'gooru-web/utils/utils';
+import {
+  DEFAULT_IMAGES
+} from 'gooru-web/config/config';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 import TaxonomySerializer from 'gooru-web/serializers/taxonomy/taxonomy';
 
@@ -57,20 +61,31 @@ export default Ember.Object.extend(ConfigurationMixin, {
   normalizeClassActivity: function(data) {
     const serializer = this;
     const content = serializer.normalizeClassActivityContent(data);
+    const taxonomySerializer = serializer.get('taxonomySerializer');
+    const basePath = serializer.get('session.cdnUrls.content');
     return ClassActivity.create(Ember.getOwner(this).ownerInjection(), {
       id: data.id,
-      date: data.activation_date
-        ? parseDate(data.activation_date, 'YYYY-MM-DD')
-        : null,
-      added_date: data.dca_added_date
-        ? data.dca_added_date
-        : data.activation_date,
+      date: data.activation_date ?
+        parseDate(data.activation_date, 'YYYY-MM-DD') : null,
+      added_date: data.dca_added_date ?
+        data.dca_added_date : data.activation_date,
       activation_date: data.activation_date,
+      end_date: data.end_date,
       collection: content,
       forYear: data.for_year,
+      contentId: data.content_id,
+      contentType: data.content_type,
       forMonth: data.for_month,
+      isCompleted: data.is_completed,
+      questionCount: data.question_count || null,
+      resourceCount: data.resource_count || null,
+      taskCount: data.task_count || 0,
+      url: data.url,
+      title: data.title,
       usersCount: data.users_count,
-      allowMasteryAccrual: data.allow_mastery_accrual
+      thumbnail: data.thumbnail ? basePath + data.thumbnail : null,
+      allowMasteryAccrual: data.allow_mastery_accrual,
+      standards: taxonomySerializer.normalizeTaxonomyObject(data.taxonomy)
     });
   },
 
@@ -87,9 +102,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
     const taxonomySerializer = this.get('taxonomySerializer');
     if (contentType === 'assessment') {
-      const thumbnailUrl = data.thumbnail
-        ? basePath + data.thumbnail
-        : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+      const thumbnailUrl = data.thumbnail ?
+        basePath + data.thumbnail :
+        appRootPath + DEFAULT_IMAGES.ASSESSMENT;
 
       content = Assessment.create({
         id: data.content_id,
@@ -105,9 +120,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
     }
 
     if (contentType === 'collection') {
-      const thumbnailUrl = data.thumbnail
-        ? basePath + data.thumbnail
-        : appRootPath + DEFAULT_IMAGES.COLLECTION;
+      const thumbnailUrl = data.thumbnail ?
+        basePath + data.thumbnail :
+        appRootPath + DEFAULT_IMAGES.COLLECTION;
 
       content = Collection.create({
         id: data.content_id,
@@ -125,12 +140,12 @@ export default Ember.Object.extend(ConfigurationMixin, {
       contentType === 'assessment-external' ||
       contentType === 'collection-external'
     ) {
-      const thumbnailUrl = data.thumbnail
-        ? basePath + data.thumbnail
-        : appRootPath +
-          (contentType === 'assessment-external'
-            ? DEFAULT_IMAGES.ASSESSMENT
-            : DEFAULT_IMAGES.COLLECTION);
+      const thumbnailUrl = data.thumbnail ?
+        basePath + data.thumbnail :
+        appRootPath +
+        (contentType === 'assessment-external' ?
+          DEFAULT_IMAGES.ASSESSMENT :
+          DEFAULT_IMAGES.COLLECTION);
 
       content = Collection.create({
         id: data.content_id,
@@ -139,6 +154,25 @@ export default Ember.Object.extend(ConfigurationMixin, {
         collectionType: data.content_type,
         url: data.url ? data.url : '',
         format: data.content_type,
+        standards: taxonomySerializer.normalizeTaxonomyObject(data.taxonomy)
+      });
+    }
+
+    if (
+      contentType === 'offline-activity'
+    ) {
+      const thumbnailUrl = data.thumbnail ?
+        basePath + data.thumbnail :
+        appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+
+      content = Collection.create({
+        id: data.content_id,
+        title: data.title,
+        thumbnailUrl: thumbnailUrl,
+        collectionType: data.content_type,
+        url: data.url ? data.url : '',
+        format: data.content_type,
+        taskCount: data.task_count || 0,
         standards: taxonomySerializer.normalizeTaxonomyObject(data.taxonomy)
       });
     }
@@ -153,9 +187,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
     if (payload && payload.users && Ember.isArray(payload.users)) {
       return payload.users.map(function(user) {
-        const thumbnailUrl = user.thumbnail
-          ? basePath + user.thumbnail
-          : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+        const thumbnailUrl = user.thumbnail ?
+          basePath + user.thumbnail :
+          appRootPath + DEFAULT_IMAGES.USER_PROFILE;
         return Ember.Object.create({
           id: user.id,
           firstname: user.first_name,

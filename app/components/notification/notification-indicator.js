@@ -126,6 +126,7 @@ export default Ember.Component.extend({
               minScore: 0,
               collectionSource: 'course_map',
               isStudyPlayer: true,
+              milestoneId: 0,
               pathType: '',
               isNotification: true
             }
@@ -151,8 +152,10 @@ export default Ember.Component.extend({
               unitId: 0,
               lessonId: 0,
               collectionId: 0,
+              milestoneId: 0,
               tab: 'assesmentreport',
-              location: 'unitId+lessonId+collectionId+currentItemType',
+              location:
+                'unitId+lessonId+collectionId+milestoneId+currentItemType',
               refresh: true
             }
           }
@@ -177,8 +180,10 @@ export default Ember.Component.extend({
               unitId: 0,
               lessonId: 0,
               collectionId: 0,
-              tab: 'assesmentreport',
-              location: 'unitId+lessonId+collectionId+currentItemType'
+              milestoneId: 0,
+              tab: 'none',
+              location:
+                'unitId+lessonId+collectionId+milestoneId+currentItemType'
             }
           }
         }
@@ -202,8 +207,10 @@ export default Ember.Component.extend({
               unitId: 0,
               lessonId: 0,
               collectionId: 0,
+              milestoneId: 0,
               tab: 'assesmentreport',
-              location: 'unitId+lessonId+collectionId+currentItemType'
+              location:
+                'unitId+lessonId+collectionId+milestoneId+currentItemType'
             }
           }
         }
@@ -218,10 +225,17 @@ export default Ember.Component.extend({
           navigate: true,
           navigationDetails: {
             route: 'teacher.class.course-map',
-            queryPType: 'paramonly',
+            queryPType: 'hybrid',
             exactparams: 'classId',
+            setlocation: true,
             queryparams: {
-              classId: 0
+              classId: 0,
+              unitId: 0,
+              lessonId: 0,
+              collectionId: 0,
+              milestoneId: 0,
+              location:
+                'unitId+lessonId+collectionId+milestoneId+currentItemType'
             }
           }
         }
@@ -244,8 +258,6 @@ export default Ember.Component.extend({
    */
   notificationModel: {},
 
-  timer: null,
-
   init() {
     this._super(...arguments);
     this.model = this.model || {
@@ -254,12 +266,12 @@ export default Ember.Component.extend({
 
     const component = this;
     component.getNotifications(component.getDefaultFilter()); // Initial call, all the rest calls would be made with the setinterval
-    this.timer = setInterval(() => {
-      component.getNotifications(component.getDefaultFilter()); //Force default filter for first time load and refresh
-    }, NOTIFICATION_SETTINGS.polling_interval);
-    window.localStorage.setItem('notificationtimer', this.timer);
   },
 
+  didReceiveAttrs() {
+    const component = this;
+    component.getNotifications(component.getDefaultFilter()); // Refresh
+  },
   // -------------------------------------------------------------------------
   // Location based setting [starts]
   // -------------------------------------------------------------------------
@@ -325,17 +337,17 @@ export default Ember.Component.extend({
      * Concrete notification action
      * @param {notifiocationItem object} notin
      */
-    dismissNotifiocation(notin) {
+    dismissNotification(notin) {
       const component = this;
       if (notin && component.get('notificationCtxRole')) {
         let serviceEndpoint =
           component.get('notificationCtxRole') === 'student'
             ? component
               .get('notificationService')
-              .resetStudentNotifcation(notin.id)
+              .resetStudentNotification(notin.id)
             : component
               .get('notificationService')
-              .resetTeacherNotifcation(notin.id);
+              .resetTeacherNotification(notin.id);
         return serviceEndpoint;
         //}
       }
@@ -451,13 +463,5 @@ export default Ember.Component.extend({
         : ''; // from page Options passed to instance
     filter.limit = component.get('rowsPerPage');
     return filter;
-  },
-
-  destroy() {
-    this._super(...arguments);
-    if (this.timer) {
-      clearInterval(this.timer);
-      this.timer = null;
-    }
   }
 });

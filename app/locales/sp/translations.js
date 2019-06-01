@@ -65,6 +65,8 @@ export default Object.assign(quizzesTranslations, {
   'common.last': 'Last',
   'common.name': 'Name',
   'common.user': 'user',
+  'common.offline-activites':'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.content-name': 'Content Name',
   'common.lastName': 'Lastname',
   'common.firstName': 'Firstname',
@@ -74,6 +76,7 @@ export default Object.assign(quizzesTranslations, {
   'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'Avg Score',
+  'common.tasks': 'tasks',
   'common.frq': 'FRQ',
   'common.schedule': 'Schedule',
   'common.responses': 'Responses',
@@ -96,11 +99,20 @@ export default Object.assign(quizzesTranslations, {
   'common.all-completed': 'Todo completado',
   'common.a-assessment': 'Una evaluación',
   'common.about': 'Acerca de',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.about-you': 'Acerca de ti',
   'common.about-me': 'About Me',
+  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
   'common.accept': 'Accept',
   'common.ignore': 'Ignore',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.add': 'Añadir',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
@@ -841,6 +853,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'Show Complete Course',
   'class.overview.course-map.rescope-info':
     'This Navigator course is a personalized course covering standards across multiple grades. Each student is provided a unique course to help fill gaps, reinforce concepts and practices, and accelerate their learning. Personalized routes are designed and students are re-routed in real-time to maximize each student\'s learning potential and to navigate to their set destination.',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'We are personalizing this course specifically for you based on your proficiency. Please check back in a little while to see the personalized course map.',
   'class.overview.course-map.route0-bannerdesc':
@@ -2588,5 +2602,24 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material',
+  milestones: 'Milestones',
+  'show-course-map': 'Show course Map',
+  'show-milestones': 'Show Milestones',
+  'warn.class-destination-not-setup':
+    'Class setup is not complete unless the class destination is set. Go to Class Settings and complete setup. Otherwise, students will not be able to access content for this class.',
+  'milestone-rescoped':
+    'This milestone is available due to your {{subject}} level setup by teacher, but you seem to have caught up on all relevant competencies.',
+  'student-milestone-not-ready':
+    'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
+  'warn.teacher-milestone-not-ready':
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path',
+  'mastery-greeting-msg':
+    'You’ve earned a Mastery Badge! Would you like to see the improvement in your competency skyline?',
+  'show-me': 'Show Me'
 });

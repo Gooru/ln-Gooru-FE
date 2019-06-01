@@ -29,6 +29,24 @@ export default Ember.Component.extend(ConfigurationMixin, {
   // Actions
 
   actions: {
+    onComplete() {
+      let component = this;
+      component.sendAction('completeActivity', component.get('classActivity'));
+    },
+
+    expandMore() {
+      let component = this;
+      component.$('.ca-panel-container-2').slideDown({
+        start: function() {
+          component.$(this).css('display', 'grid');
+        }
+      });
+    },
+
+    expandLess() {
+      let component = this;
+      component.$('.ca-panel-container-2').slideUp();
+    },
     /**
      * Action triggered when the user play collection
      */
@@ -80,7 +98,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
      * Action get triggered when schedule content to CA got clicked
      */
     onScheduleContentToDCA(classActivity, event) {
-      this.sendAction('onScheduleContentToDCA', classActivity, event);
+      this.sendAction('onScheduleContentToDCA', classActivity, event, this.get('isUnScheduled'));
     },
 
     showStudentList() {
@@ -109,15 +127,14 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-        component.sendAction('onClosePullUp', closeAll);
-      }
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+      component.sendAction('onClosePullUp', closeAll);
+    }
     );
   },
 
@@ -166,6 +183,21 @@ export default Ember.Component.extend(ConfigurationMixin, {
     }),
     Ember.Object.create({
       label: 'Off',
+      value: false
+    })
+  ]),
+
+  /**
+   * Toggle Options
+   * @property {Ember.Array}
+   */
+  switchOptionsForOffline: Ember.A([
+    Ember.Object.create({
+      label: 'Yes',
+      value: true
+    }),
+    Ember.Object.create({
+      label: 'No',
       value: false
     })
   ]),

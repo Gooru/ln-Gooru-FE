@@ -59,8 +59,11 @@ export default Object.assign(quizzesTranslations, {
   'common.efficacy': 'ਕਾਰਗੁਜ਼ਾਰੀ',
   'common.grid': 'ਗਰਿੱਡ',
   'common.list': 'ਸੂਚੀ',
+  'common.offline-activites':'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.first': 'ਪਹਿਲਾ',
   'common.last': 'ਆਖਰੀ',
+  'common.tasks': 'tasks',
   'common.name': 'ਨਾਮ',
   'common.user': 'ਯੂਜ਼ਰ',
   'common.content-name': 'ਸਮੱਗਰੀ ਦਾ ਨਾਂ',
@@ -78,6 +81,9 @@ export default Object.assign(quizzesTranslations, {
   'common.no-collection-info-message': 'ਇਸ ਪਾਠ ਵਿੱਚ ਕੋਈ ਸੰਗ੍ਰਹਿ ਹੈ',
   'common.gooru-suggestions': 'ਗੋਰੂ ਸੁਝਾਅ',
   'common.gooru-catalog': 'ਗੋੂਰੂ ਕੈਟਾਲਾਗ',
+  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
   'common.suggestion-made-to': 'ਸੁਝਾਅ',
   'common.student-selected': 'ਵਿਦਿਆਰਥੀ ਨੇ ਚੁਣਿਆ',
   'common.no-suggest-result-message': ' ਕੋਈ ਮੇਲ ਖਾਂਦੀ ਸਮਗਰੀ ਨਹੀਂ ਮਿਲੀ',
@@ -87,7 +93,8 @@ export default Object.assign(quizzesTranslations, {
     'ਆਪਣੇ ਸਪੈਲਿੰਗਾਂ ਦੀ ਜਾਂਚ ਕਰੋ ਅਸੀਂ ਸਾਰੇ ਗ਼ਲਤੀਆਂ ਕਰਦੇ ਹਾਂ! ਜਾਂ ਇਸਦੀ ਬਜਾਏ ਇਸੇ ਸ਼ਬਦ ਦੀ ਖੋਜ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ.',
   'common.a-collection': 'ਇੱਕ ਸੰਗ੍ਰਹਿ',
   'common.a-course': 'ਇੱਕ ਕੋਰਸ',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.a-question': 'ਇੱਕ ਸਵਾਲ',
   'common.a-resource': 'ਇੱਕ ਸਰੋਤ',
   'common.a-rubric': 'ਇੱਕ ਚਰਬੀਕਾਰ',
@@ -98,6 +105,11 @@ export default Object.assign(quizzesTranslations, {
   'common.about-you': 'ਤੁਹਾਡੇ ਬਾਰੇ',
   'common.about-me': 'ਮੇਰੇ ਬਾਰੇ ਵਿੱਚ',
   'common.accept': 'ਸਵੀਕਾਰ ਕਰੋ',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.ignore': 'ਅਣਡਿੱਠ ਕਰੋ',
   'common.add': 'ਜੋੜਨਾ',
   'common.plan-an-activities': 'Plan your activities',
@@ -830,6 +842,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'ਪੂਰਾ ਕੋਰਸ ਦਿਖਾਓ',
   'class.overview.course-map.rescope-info':
     'ਇਹ ਨੇਵੀਗੇਟਰ ਕੋਰਸ ਇੱਕ ਬਹੁਗਿਣਤੀ ਗ੍ਰੇਡਾਂ ਵਿੱਚ ਇੱਕ ਵਿਅਕਤੀਗਤ ਕੋਰਸ ਨੂੰ ਕਵਰ ਕਰਨ ਵਾਲੇ ਮਿਆਰ ਹਨ. ਹਰੇਕ ਵਿਦਿਆਰਥੀ ਨੂੰ ਭਰਵਾਂ ਭਰਨ, ਧਾਰਨਾਵਾਂ ਅਤੇ ਪ੍ਰਥਾਵਾਂ ਨੂੰ ਮਜ਼ਬੂਤੀ ਦੇਣ, ਅਤੇ ਆਪਣੇ ਸਿੱਖਣ ਵਿੱਚ ਵਾਧਾ ਕਰਨ ਲਈ ਇੱਕ ਵਿਲੱਖਣ ਕੋਰਸ ਦਿੱਤਾ ਗਿਆ ਹੈ. ਵਿਅਕਤੀਗਤ ਰੂਟਾਂ ਤਿਆਰ ਕੀਤੀਆਂ ਗਈਆਂ ਹਨ ਅਤੇ ਵਿਦਿਆਰਥੀਆਂ ਨੂੰ ਰੀਅਲ-ਰੂਟ ਵਿੱਚ ਹਰ ਵਿਦਿਆਰਥੀ ਦੀ ਸਿੱਖਣ ਦੀ ਸਮਰੱਥਾ ਨੂੰ ਵੱਧ ਤੋਂ ਵੱਧ ਕਰਨ ਅਤੇ ਉਹਨਾਂ ਦੇ ਨਿਰਧਾਰਤ ਮੰਜ਼ਿਲ ਤੇ ਨੈਵੀਗੇਟ ਕਰਨ ਲਈ ਰੀ-ਰੂਟ ਕੀਤਾ ਜਾਂਦਾ ਹੈ.',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'ਅਸੀਂ ਤੁਹਾਡੀ ਮੁਹਾਰਤ ਦੇ ਅਧਾਰ ਤੇ ਤੁਹਾਡੇ ਲਈ ਵਿਸ਼ੇਸ਼ ਤੌਰ ਤੇ ਇਸ ਕੋਰਸ ਨੂੰ ਨਿਜੀ ਬਣਾ ਰਹੇ ਹਾਂ ਕਿਰਪਾ ਕਰਕੇ ਵਿਅਕਤੀਗਤ ਕੋਰਸ ਦਾ ਨਕਸ਼ਾ ਦੇਖਣ ਲਈ ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਵਾਪਸ ਜਾਂਚ ਕਰੋ.',
   'class.overview.course-map.route0-bannerdesc':
@@ -2537,5 +2551,24 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material',
+  milestones: 'Milestones',
+  'show-course-map': 'Show course Map',
+  'show-milestones': 'Show Milestones',
+  'warn.class-destination-not-setup':
+    'Class setup is not complete unless the class destination is set. Go to Class Settings and complete setup. Otherwise, students will not be able to access content for this class.',
+  'milestone-rescoped':
+    'This milestone is available due to your {{subject}} level setup by teacher, but you seem to have caught up on all relevant competencies.',
+  'student-milestone-not-ready':
+    'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
+  'warn.teacher-milestone-not-ready':
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path',
+  'mastery-greeting-msg':
+    'You’ve earned a Mastery Badge! Would you like to see the improvement in your competency skyline?',
+  'show-me': 'Show Me'
 });

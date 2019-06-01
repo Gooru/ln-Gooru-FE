@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 
 export default Ember.Route.extend({
   // -------------------------------------------------------------------------
@@ -14,9 +16,6 @@ export default Ember.Route.extend({
    * @requires service:api-sdk/class-activity
    */
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
-
-  // -------------------------------------------------------------------------
-  // Properties
 
   // -------------------------------------------------------------------------
   // Actions
@@ -54,14 +53,17 @@ export default Ember.Route.extend({
     const classId = currentClass.get('id');
     let forMonth = params.month || moment().format('MM');
     let forYear = params.year || moment().format('YYYY');
+    let startDate = `${forYear}-${forMonth}-01`;
+    var endDate = moment().endOf('month').format('YYYY-MM-DD');
     let selectedPeriod = Ember.Object.create({
       forMonth,
       forYear
     });
     return Ember.RSVP.hash({
-      classActivities: route
-        .get('classActivityService')
-        .findClassActivities(classId, null, forMonth, forYear),
+      unScheduledClassActivities: route.get('classActivityService')
+        .getUnScheduledActivities(classId, forMonth, forYear),
+      classActivitiesOfMonth: route.get('classActivityService')
+        .getScheduledClassActivitiesForMonth(classId, startDate, endDate),
       selectedPeriod
     });
   },
@@ -72,10 +74,11 @@ export default Ember.Route.extend({
    * @param model
    */
   setupController: function(controller, model) {
-    controller.parseClassActivityData(model.classActivities);
+    controller.set('classActivitiesOfMonth', model.classActivitiesOfMonth);
+    controller.set('unScheduledClassActivities', model.unScheduledClassActivities);
     controller.set('forMonth', model.selectedPeriod.forMonth);
     controller.set('forYear', model.selectedPeriod.forYear);
-    controller.fetchAssessmentsMasteryAccrual(model.classActivities);
+    controller.set('selectedDate', moment().format('YYYY-MM-DD'));
     controller.initialize();
     controller.get('classController').selectMenuItem('class-activities');
   },
@@ -87,8 +90,12 @@ export default Ember.Route.extend({
   resetController(controller) {
     controller.set('tab', null);
     controller.set('classActivities', Ember.A([]));
+    controller.set('activeOfflineActivities', Ember.A([]));
+    controller.set('completedOfflineActivities', Ember.A([]));
+    controller.set('unScheduledClassActivities', Ember.A([]));
     controller.set('month', null);
     controller.set('year', null);
+    controller.set('selectedDate', null);
     controller.set('isShowAddData', false);
   }
 });

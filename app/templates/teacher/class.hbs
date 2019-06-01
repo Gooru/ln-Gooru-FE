@@ -58,19 +58,19 @@
 
 </div>
 {{#if isShowCourseReport}}
-  {{reports.pull-up.course-report context=courseReportData showPullUp=isShowCourseReport onOpenUnitReport="onOpenUnitReport"  onClosePullUp="onClosePullUp" }}
+  {{reports.pull-up.course-report context=courseReportData showPullUp=isShowCourseReport onOpenUnitReport="onOpenUnitReport"  onClosePullUp="onClosePullUp" isShowMilestoneReport = isShowMilestoneReport gradeSubject = gradeSubject}}
 {{/if}}
 
 {{#if isShowUnitReportPullUp}}
-  {{reports.pull-up.unit-report context=unitReportData onClosePullUp="onClosePullUp" showPullUp=isShowUnitReportPullUp onOpenLessonReport="onOpenLessonReport"}}
+  {{reports.pull-up.unit-report context=unitReportData onClosePullUp="onClosePullUp" showPullUp=isShowUnitReportPullUp onOpenLessonReport="onOpenLessonReport" class=class isShowMilestoneReport = isShowMilestoneReport gradeSubject = gradeSubject}}
 {{/if}}
 
 {{#if isShowLessonReportPullUp}}
-  {{reports.pull-up.lesson-report context=lessonReportData  onClosePullUp="onClosePullUp"  showPullUp=isShowLessonReportPullUp teacherCollectionReport="teacherCollectionReport"}}
+  {{reports.pull-up.lesson-report context=lessonReportData  onClosePullUp="onClosePullUp"  showPullUp=isShowLessonReportPullUp teacherCollectionReport="teacherCollectionReport" isShowMilestoneReport = isShowMilestoneReport}}
 {{/if}}
 
 {{#if isShowCollectionReportPullUp}}
-  {{reports.pull-up.collection-report onClosePullUp="onClosePullUp" context=teacherCollectionReportData showPullUp=isShowCollectionReportPullUp}}
+  {{reports.pull-up.collection-report onClosePullUp="onClosePullUp" context=teacherCollectionReportData showPullUp=isShowCollectionReportPullUp isShowMilestoneReport = isShowMilestoneReport gradeSubject = gradeSubject}}
 {{/if}}
 
 

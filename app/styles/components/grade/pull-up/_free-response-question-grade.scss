@@ -205,6 +205,20 @@
       .frq-grade-breadcrumb {
         display: flex;
 
+        &.dca-context {
+          .lesson-title,
+          .unit-title {
+            display: none;
+          }
+
+          .collection-title {
+            .gru-icon {
+              display: none;
+            }
+            padding-left: 10px;
+          }
+        }
+
         .unit-title {
           display: flex;
           align-items: center;
@@ -213,11 +227,7 @@
           p {
             max-width: 150px;
             margin: 0;
-            @include ellipsis(
-              $font-size: 14px,
-              $line-height: 1.2,
-              $lines-to-show: 2
-            );
+            @include ellipsis($font-size: 14px, $line-height: 1.2, $lines-to-show: 2);
           }
 
           .unit-icon {
@@ -242,11 +252,7 @@
           p {
             margin: 0;
             max-width: 150px;
-            @include ellipsis(
-              $font-size: 14px,
-              $line-height: 1.2,
-              $lines-to-show: 2
-            );
+            @include ellipsis($font-size: 14px, $line-height: 1.2, $lines-to-show: 2);
           }
 
           .lesson-icon {
@@ -267,11 +273,7 @@
           p {
             margin: 0;
             max-width: 260px;
-            @include ellipsis(
-              $font-size: 14px,
-              $line-height: 1.2,
-              $lines-to-show: 2
-            );
+            @include ellipsis($font-size: 14px, $line-height: 1.2, $lines-to-show: 2);
           }
 
           .collection-icon {

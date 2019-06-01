@@ -1,0 +1,76 @@
+<div class="student-milestone-lesson-performance-container {{if isRescopedLesson 'hidden'}}">
+  <div class="lesson-info-container" {{action "onToggleLesson"}}>
+    <div class="lesson-icon {{if (or lesson.performance lesson.isPerformed) 'started'}}">
+      <svg width="20" height="15">
+        <line class="lesson-connector" x1="10" y1="0" x2="10" y2="15" />
+      </svg>
+      <i class="icon"></i>
+      <svg width="20" height="15">
+        <line class="lesson-connector"  x1="10" y1="0" x2="10" y2="15" />
+      </svg>
+    </div>
+    <div class="title-container">
+      <div class="domain-name">{{lesson.tx_domain_name}}</div>
+      <div class="lesson-title">{{lesson.lesson_title}}</div>
+    </div>
+  </div>
+  <div class="lesson-performance-container grade-range-{{grade-range lesson.performance.scoreInPercentage}}">
+    {{if (gte lesson.performance.scoreInPercentage 0) (concat lesson.performance.scoreInPercentage '%') '--'}}
+  </div>
+</div>
+<div class="collections-info-container {{if isExpanded 'expanded' 'collapsed'}}">
+  {{#if isLoading}}
+    {{three-bounce-spinner}}
+  {{else}}
+    {{#each collections as |collection|}}
+      <div class="collection-info-container {{if (and collection.isRescopedCollection (not collection.performance)) 'hidden'}}">
+        <div class="collection-icon {{if collection.performance 'started'}} {{if collection.isSuggestedContent 'suggestion'}}">
+          <svg width="20" height="15">
+            <line class="collection-connector" x1="10" y1="0" x2="10" y2="15" />
+          </svg>
+          <i class="icon {{collection.format}}"></i>
+          <svg width="20" height="15">
+            <line class="collection-connector" x1="10" y1="0" x2="10" y2="15" />
+          </svg>
+        </div>
+        <div class="collection-title-container">
+          {{collection.title}}
+        </div>
+        {{#if collection.performance}}
+          <div class="collection-performance-container {{collection.format}} {{if collection.isAssessment (concat 'grade-range-' (grade-range collection.performance.scoreInPercentage))}}" {{action "onOpenCollectionReport" collection}}>
+            {{#if collection.isAssessment}}
+              {{collection.performance.scoreInPercentage}}%
+            {{else}}
+              {{format-time collection.performance.timeSpent}}
+            {{/if}}
+          </div>
+        {{else}}
+          <div class="collection-thumbnail-container" style="background-image: url({{collection.thumbnailUrl}});">
+          </div>
+        {{/if}}
+
+      </div>
+    {{/each}}
+  {{/if}}
+
+</div>
+
+{{#if isShowCollectionReport}}
+  {{
+    class.gru-report-panel
+    showPullUp=isShowCollectionReport
+    reportData=collectionReportContext
+    model=studentCollectionReportContext.lesson
+    isStudent=isStudent
+  }}
+{{/if}}
+
+{{#if isShowExternalAssessmentReport}}
+  {{
+    reports.pull-up.student-external-assessment-report
+    showPullUp=isShowExternalAssessmentReport
+    reportData=collectionReportContext
+    showPullUp=isShowExternalAssessmentReport
+    isStudent=isStudent
+  }}
+{{/if}}

@@ -1,0 +1,84 @@
+.student_class_milestone {
+  background-color: #37424b;
+  .app-container {
+    padding-top: 100px;
+  }
+
+  .student.class {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+
+    .content {
+      display: grid;
+      justify-content: center;
+      max-width: 960px;
+      margin: 0 auto;
+      @media screen and (max-width: $screen-sm) {
+        display: block;
+      }
+    }
+  }
+
+  .student-milestone-not-ready {
+    font-size: 24px;
+    line-height: 1.2;
+    border-radius: 4px;
+    background: #fff;
+    padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 0 11px;
+  }
+
+  h5 {
+    padding-left: 15px;
+    color: $white;
+    &.learning-path-label {
+      display: grid;
+      grid-template-columns: auto auto;
+      justify-content: left;
+      column-gap: 10px;
+      .toggle-course-info {
+        cursor: pointer;
+        height: 27px;
+        i {
+          font-size: 18px;
+          line-height: 27px;
+          color: $white;
+        }
+      }
+    }
+  }
+
+  .rescope-content-preview {
+    display: grid;
+    grid-template-columns: 1fr 185px 70px;
+    align-items: center;
+    padding-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.3;
+    color: $white;
+    @media screen and (max-width: $screen-sm) {
+      grid-template-columns: 1fr;
+      display: none;
+    }
+
+    .rescope-content-preview-msg {
+      padding: 10px;
+      text-align: justify;
+    }
+
+    .show-completed-course {
+      padding-left: 15px;
+      padding-bottom: 15px;
+    }
+  }
+
+  .milestone-course-map-view {
+    padding-bottom: 50px;
+
+    @media screen and (min-width: $screen-sm + 1) {
+      width: 90vw;
+      max-width: 960px;
+    }
+  }
+}

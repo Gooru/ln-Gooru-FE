@@ -45,13 +45,15 @@ export default Ember.Service.extend({
     contentType,
     addedDate,
     forMonth = moment().format('MM'),
-    forYear = moment().format('YYYY')
+    forYear = moment().format('YYYY'),
+    endDate
   ) {
     const service = this;
     if (addedDate != null) {
       forMonth = moment(addedDate).format('MM');
       forYear = moment(addedDate).format('YYYY');
     }
+    let end_date = endDate ? endDate : addedDate;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('classActivityAdapter')
@@ -61,7 +63,41 @@ export default Ember.Service.extend({
           contentType,
           addedDate,
           forMonth,
-          forYear
+          forYear,
+          end_date
+        )
+        .then(function(responseData, textStatus, request) {
+          let newContentId = parseInt(request.getResponseHeader('location'));
+          resolve(newContentId);
+        }, reject);
+    });
+  },
+
+  /**
+   * Adds a new content to class
+   *
+   * @param {string} classId
+   * @param {string} contentId
+   * @param {Date} addedDate
+   * @param {Date} endDate
+   * @returns {boolean}
+   */
+  scheduleClassActivity: function(
+    classId,
+    contentId,
+    addedDate,
+    endDate
+  ) {
+    const service = this;
+    let end_date = endDate ? endDate : addedDate;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .scheduleClassActivity(
+          classId,
+          contentId,
+          addedDate,
+          end_date
         )
         .then(function(responseData, textStatus, request) {
           let newContentId = parseInt(request.getResponseHeader('location'));
@@ -136,6 +172,236 @@ export default Ember.Service.extend({
         });
     });
   },
+
+  /**
+   * Gets all class activity for the authorized user (student|teacher)
+   *
+   * @param {string} classId
+   * @param {string} contentType collection|assessment|resource|question
+   * @param {Month} month optional, default is current month
+   * @param {Year} year optional, default is current year
+   * @returns {Promise}
+   */
+  getUnScheduledActivities(classId, forMonth, forYear) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('classActivityAdapter')
+        .getUnScheduledActivities(classId, forMonth, forYear).then(
+          function(payload) {
+            const classActivities = service
+              .get('classActivitySerializer')
+              .normalizeFindClassActivities(payload);
+            resolve(classActivities);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * Gets all class scheduled activity for the authorized user (student|teacher)
+   *
+   * @param {string} classId
+   * @param {startDate} date optional, default is current date
+   * @param {endDate} date optional, default is current date
+   * @returns {Promise}
+   */
+  getScheduledClassActivitiesForMonth(classId,
+    startDate = moment().format('YYYY-MM-DD'), endDate) {
+    const service = this;
+    let end_date = endDate ? endDate : startDate;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('classActivityAdapter')
+        .getScheduledActivities(classId, startDate, end_date).then(
+          function(payload) {
+            const classActivities = service
+              .get('classActivitySerializer')
+              .normalizeFindClassActivities(payload);
+            resolve(classActivities);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * Gets all class scheduled activity performance for specific dates (teacher)
+   *
+   * @param {string} classId
+   * @param {startDate} date optional, default is current date
+   * @param {endDate} date optional, default is current date
+   * @returns {Promise}
+   */
+  getPerformanceOfClassActivitiesForMonth(classId,
+    startDate = moment().format('YYYY-MM-DD'), endDate) {
+    const service = this;
+    let end_date = endDate ? endDate : startDate;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('classActivityAdapter')
+        .getScheduledActivities(classId, startDate, end_date).then(
+          function(payload) {
+            const classActivities = service
+              .get('classActivitySerializer')
+              .normalizeFindClassActivities(payload);
+            service
+              .findClassActivitiesPerformanceSummary(
+                classId,
+                classActivities,
+                startDate,
+                endDate
+              )
+              .then(resolve, reject);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * Gets all class scheduled activity for the authorized user (student|teacher)
+   *
+   * @param {string} classId
+   * @param {startDate} date optional, default is current date
+   * @param {endDate} date optional, default is current date
+   * @returns {Promise}
+   */
+  getScheduledClassActivitiesForDate(classId,
+    startDate = moment().format('YYYY-MM-DD'), endDate) {
+    const service = this;
+    let end_date = endDate ? endDate : startDate;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('classActivityAdapter')
+        .getScheduledActivities(classId, startDate, end_date).then(
+          function(payload) {
+            const classActivities = service
+              .get('classActivitySerializer')
+              .normalizeFindClassActivities(payload);
+            service
+              .findClassActivitiesPerformanceSummary(
+                classId,
+                classActivities,
+                startDate,
+                end_date
+              )
+              .then(resolve, reject);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * Gets all class scheduled activity for the authorized user (student|teacher)
+   *
+   * @param {string} classId
+   * @param {Month} month optional, default is current month
+   * @param {Year} year optional, default is current year
+   * @returns {Promise}
+   */
+  getStudentScheduledActivities(userId, classId,
+    startDate = moment().format('YYYY-MM-DD'), endDate) {
+    const service = this;
+    let end_date = endDate ? endDate : startDate;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('classActivityAdapter')
+        .getScheduledActivities(classId, startDate, end_date).then(
+          function(payload) {
+            const classActivities = service
+              .get('classActivitySerializer')
+              .normalizeFindClassActivities(payload);
+            service
+              .findStudentActivitiesPerformanceSummary(
+                userId,
+                classId,
+                classActivities,
+                startDate,
+                end_date
+              )
+              .then(resolve, reject);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * Gets all Active offline activities for the class (student|teacher)
+   *
+   * @param {string} classId
+   * @returns {Promise}
+   */
+  fetchActiveOfflineActivities(classId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .fetchActiveOfflineActivities(classId)
+        .then(function(payload) {
+          const classActivities = service
+            .get('classActivitySerializer')
+            .normalizeFindClassActivities(payload);
+          resolve(classActivities);
+        },
+        function(error) {
+          reject(error);
+        });
+    });
+  },
+
+  /**
+   * Gets all Completed offline activities for the class (student|teacher)
+   *
+   * @param {string} classId
+   * @returns {Promise}
+   */
+  fetchCompletedOfflineActivities(classId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .fetchCompletedOfflineActivities(classId)
+        .then(function(payload) {
+          const classActivities = service
+            .get('classActivitySerializer')
+            .normalizeFindClassActivities(payload);
+          resolve(classActivities);
+        }, function(error) {
+          reject(error);
+        });
+    });
+  },
+
+  /**
+   * Make offline activity as completed
+   *
+   * @param {string} classId
+   * @param {string} contentId
+   * @returns {Promise}
+   */
+  completeOfflineActivity(classId, contentId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .completeOfflineActivity(classId, contentId)
+        .then(function(payload) {
+          resolve(payload);
+        }, function(error) {
+          reject(error);
+        });
+    });
+  },
+
 
   /**
    * Gets all class activity for the authorized user (student|teacher)
@@ -217,26 +483,24 @@ export default Ember.Service.extend({
       const performanceService = service.get('performanceService');
       Ember.RSVP
         .hash({
-          activityCollectionPerformanceSummaryItems: collectionIds.length
-            ? performanceService.findStudentActivityPerformanceSummaryByIds(
+          activityCollectionPerformanceSummaryItems: collectionIds.length ?
+            performanceService.findStudentActivityPerformanceSummaryByIds(
               userId,
               classId,
               collectionIds,
               'collection',
               startDate,
               endDate
-            )
-            : [],
-          activityAssessmentPerformanceSummaryItems: assessmentIds.length
-            ? performanceService.findStudentActivityPerformanceSummaryByIds(
+            ) : [],
+          activityAssessmentPerformanceSummaryItems: assessmentIds.length ?
+            performanceService.findStudentActivityPerformanceSummaryByIds(
               userId,
               classId,
               assessmentIds,
               'assessment',
               startDate,
               endDate
-            )
-            : []
+            ) : []
         })
         .then(function(hash) {
           let performances = hash.activityCollectionPerformanceSummaryItems.concat(
@@ -298,24 +562,22 @@ export default Ember.Service.extend({
       const performanceService = service.get('performanceService');
       Ember.RSVP
         .hash({
-          activityCollectionPerformanceSummaryItems: collectionIds.length
-            ? performanceService.findClassActivityPerformanceSummaryByIds(
+          activityCollectionPerformanceSummaryItems: collectionIds.length ?
+            performanceService.findClassActivityPerformanceSummaryByIds(
               classId,
               collectionIds,
               'collection',
               startDate,
               endDate
-            )
-            : [],
-          activityAssessmentPerformanceSummaryItems: assessmentIds.length
-            ? performanceService.findClassActivityPerformanceSummaryByIds(
+            ) : [],
+          activityAssessmentPerformanceSummaryItems: assessmentIds.length ?
+            performanceService.findClassActivityPerformanceSummaryByIds(
               classId,
               assessmentIds,
               'assessment',
               startDate,
               endDate
-            )
-            : []
+            ) : []
         })
         .then(function(hash) {
           let performances = hash.activityCollectionPerformanceSummaryItems.concat(
@@ -356,9 +618,9 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       let activityType =
         classActivity.get('collection.isAssessment') ||
-        classActivity.get('collection.isExternalAssessment')
-          ? 'assessment'
-          : 'collection';
+        classActivity.get('collection.isExternalAssessment') ?
+          'assessment' :
+          'collection';
       let activityId = Ember.A([classActivity.get('collection.id')]);
       Ember.RSVP
         .hash({
@@ -370,7 +632,9 @@ export default Ember.Service.extend({
             endDate
           )
         })
-        .then(({ activityStudentsPerformanceData }) => {
+        .then(({
+          activityStudentsPerformanceData
+        }) => {
           resolve(activityStudentsPerformanceData);
         }, reject);
     });

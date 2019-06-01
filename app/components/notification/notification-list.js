@@ -56,7 +56,7 @@ export default Ember.Component.extend({
       notifionAddresAction.postActionHook.deletenotificationuponaction &&
       notifionAddresAction.postActionHook.deletenotificationuponaction === true
     ) {
-      let dimissPromise = component.dismissNotifiocation(notin);
+      let dimissPromise = component.dismissNotification(notin);
       dimissPromise.then(() => {
         if (
           notifionAddresAction.postActionHook.refreshAfterDeleteNotification
@@ -88,9 +88,9 @@ export default Ember.Component.extend({
    * Concrete notification action
    * @param {notifiocationItem object} notin
    */
-  dismissNotifiocation(notin) {
+  dismissNotification(notin) {
     //Service call and dismiss item.
-    this.attr.dismissNotifiocation(notin);
+    this.attr.dismissNotification(notin);
   },
 
   navigateNotification(ngtnDetails, notin) {
@@ -101,8 +101,8 @@ export default Ember.Component.extend({
     qpm = component.transfromQpms(notin, ngtnDetails.queryparams);
     if (ngtnDetails.setlocation === true) {
       let userlocation = `${qpm.unitId}+${qpm.lessonId}+${qpm.collectionId}+${
-        notin.currentItemType
-      }`;
+        qpm.milestoneId
+      }+${notin.currentItemType}`;
       qpm.location = userlocation;
     }
     if (ngtnDetails.queryPType === 'qponly') {
@@ -130,7 +130,7 @@ export default Ember.Component.extend({
 
   transfromQpms(srcObj, tgtQueryParams) {
     /* {"id":9,"ctxClassId":"002b0b27-1b51-4343-a51f-76fae80534f8","ctxClassCode":"FZRC834","ctxCourseId":"5d2d7b02-540f-495b-9ce3-6f3ed5a99074","ctxUnitId":"495644c9-5814-4144-8a06-bb2d55d58e30","ctxLessonId":"21f1bdf8-f983-4cbe-9446-0b95fdeb6798","ctxCollectionId":"63d1e631-7560-4f02-9adf-9679a1f97b63","currentItemId":"4f3b3a9e-3475-464c-9579-e1e5b1ad5f46","currentItemType":"assessment","currentItemTitle":"CFU:  Lesson 24 -Exit Ticket","notificationType":"teacher.suggestion","ctxPathId":527,"ctxPathType":"teacher","updatedAt":1535587200000}
-    */
+     */
     var keys = Object.keys(srcObj);
     var result = {},
       fresult = {};

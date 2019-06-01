@@ -64,10 +64,13 @@ export default Object.assign(quizzesTranslations, {
   'common.filter-by': 'Filter By',
   'common.sub-filter': 'Sub-Filter',
   'common.more': 'more',
+  'common.tasks': 'tasks',
   'common.apply-filter': 'apply filter',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'Avg Score',
   'common.frq': 'FRQ',
+  'common.offline-activity': 'offline activity',
+  'common.offline-activites': 'offline activites',
   'common.schedule': 'Schedule',
   'common.responses': 'Responses',
   'common.no-lesson-info-message': 'This unit does have any lessons.',
@@ -77,6 +80,9 @@ export default Object.assign(quizzesTranslations, {
   'library-search-placeholder': 'Search for anything within the library…',
   'common.suggestion-made-to': 'Suggestion made to',
   'common.student-selected': 'Student Selected',
+  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
   'common.no-suggest-result-message': ' No matching content found',
   'common.no-suggest-results-message': 'You can search and  find the related content.',
   'common.no-suggest-search-results-message': 'Check your spelling. We all make mistakes! Or try searching for a similar word instead.',
@@ -96,6 +102,9 @@ export default Object.assign(quizzesTranslations, {
   'common.add': 'ضِف',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content': 'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content': 'There are no projects or other offline activities that the students are currently working on',
   'common.plan-an-activities-msg': 'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'Reschedule',
   'common.no-unschedule-items': 'You don\'t have any activities that need scheduling for ',
@@ -630,8 +639,7 @@ export default Object.assign(quizzesTranslations, {
   'common.title': 'Title',
   'common.unBookmark': 'إشارة مرجعية',
   'common.unexpectedError': 'حدث خطأ غير متوقع وتم الإبلاغ عنه، نعتذر عن ذلك!',
-  'common.networkError':
-    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
+  'common.networkError': 'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
   'common.unfollow': 'إلغاء المتابعة',
   'common.unit': 'وحدة',
   'common.unit-title': 'عنوان الوحدة',
@@ -721,6 +729,7 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.pre-study-title': 'Pre-study for your course',
   'class.overview.course-map.rescope-toggle': 'Show Complete Course',
   'class.overview.course-map.rescope-info': 'This Navigator course is a personalized course covering standards across multiple grades. Each student is provided a unique course to help fill gaps, reinforce concepts and practices, and accelerate their learning. Personalized routes are designed and students are re-routed in real-time to maximize each student\'s learning potential and to navigate to their set destination.',
+  'class.overview.course-map.learning-path': 'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg': 'We are personalizing this course specifically for you based on your proficiency. Please check back in a little while to see the personalized course map.',
   'class.overview.course-map.route0-bannerdesc': 'As per your competency profile, there are some competencies that you need to master so that you can do well in this course. We have a route that we recommend you take to master these competencies. Click here to see the details.',
   'class.analytics.performance.title': 'عرض الأداء',
@@ -1025,10 +1034,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.progress-label': 'Progress (# of competencies)',
   'teacher-landing.class.class-activities': 'أنشطة الصف اليومية',
   'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
-  'teacher-landing.class.class-activities.warning-message':
-    'You have not entered data for {{questionCount}} questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
-  'teacher-landing.class.class-activities.info-message':
-    'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
+  'teacher-landing.class.class-activities.warning-message': 'You have not entered data for {{questionCount}} questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
+  'teacher-landing.class.class-activities.info-message': 'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
   'teacher-landing.class.offline-class-report.class-report': 'Class Report',
   'teacher-landing.class.offline-class-report.class-activity-report': 'Class Activity Report',
   'teacher-landing.class.offline-class-report.activity-report': 'Activity Report',
@@ -1068,32 +1075,19 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-desc': 'Minimum performance to earn a trophy',
   'teacher-landing.class.class-settings.class-settings-sec.class-code': 'Class Code',
   'teacher-landing.class.class-settings.class-settings-sec.subject': 'Subject',
-  'teacher-landing.class.class-settings.class-settings-sec.framework':
-    'Framework',
-  'teacher-landing.class.class-settings.class-settings-sec.grade-level':
-    'Grade Level',
-  'teacher-landing.class.class-settings.class-settings-sec.option-choose-one':
-    'Choose One',
-  'teacher-landing.class.class-settings.class-settings-sec.co-teachers':
-    'Co-Teachers',
-  'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
-    'Add another teacher',
-  'teacher-landing.class.class-settings.class-settings-sec.language':
-    'Language of instruction',
-  'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
-    'Student Settings',
-  'teacher-landing.class.class-settings.student-settings-sec.col-head-active':
-    'Active',
-  'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head':
-    'Course Settings',
-  'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable':
-    'Personalized Learning Path should cover gaps at profile?',
-  'teacher-landing.class.class-settings.course-settings-sec.apply-settings':
-    'Apply Settings',
-  'teacher-landing.class.class-settings.course-settings-sec.origin-info':
-    'What is the lowest grade level content that your students should study?',
-  'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
-    'What is the grade level of your class?',
+  'teacher-landing.class.class-settings.class-settings-sec.framework': 'Framework',
+  'teacher-landing.class.class-settings.class-settings-sec.grade-level': 'Grade Level',
+  'teacher-landing.class.class-settings.class-settings-sec.option-choose-one': 'Choose One',
+  'teacher-landing.class.class-settings.class-settings-sec.co-teachers': 'Co-Teachers',
+  'teacher-landing.class.class-settings.class-settings-sec.add-coteacher': 'Add another teacher',
+  'teacher-landing.class.class-settings.class-settings-sec.language': 'Language of instruction',
+  'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head': 'Student Settings',
+  'teacher-landing.class.class-settings.student-settings-sec.col-head-active': 'Active',
+  'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head': 'Course Settings',
+  'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable': 'Personalized Learning Path should cover gaps at profile?',
+  'teacher-landing.class.class-settings.course-settings-sec.apply-settings': 'Apply Settings',
+  'teacher-landing.class.class-settings.course-settings-sec.origin-info': 'What is the lowest grade level content that your students should study?',
+  'teacher-landing.class.class-settings.course-settings-sec.current-grade-info': 'What is the grade level of your class?',
   'teacher-landing.class.class-settings.origin': 'Origin',
   'teacher-landing.class.class-settings.destination': 'Destination',
   'teacher-landing.class.class-settings.students': 'Students',
@@ -1490,8 +1484,7 @@ export default Object.assign(quizzesTranslations, {
   'profile.proficiency.baseline': 'Baseline',
   'profile.proficiency.grade-line': 'Other Grade',
   'profile.proficiency.class-grade-line': 'Class Grade',
-  'profile.proficiency.not-tagged':
-    'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
+  'profile.proficiency.not-tagged': 'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
   'profile.proficiency.show-compressed-chart': 'Show Compressed Chart',
   'profile.proficiency.show-expanded-chart': 'Show Expanded Chart',
   'profile.preference.language-preference': 'Language Preference',
@@ -2011,5 +2004,20 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material',
+  milestones: 'Milestones',
+  'show-course-map': 'Show course Map',
+  'show-milestones': 'Show Milestones',
+  'warn.class-destination-not-setup': 'Class setup is not complete unless the class destination is set. Go to Class Settings and complete setup. Otherwise, students will not be able to access content for this class.',
+  'milestone-rescoped': 'This milestone is available due to your {{subject}} level setup by teacher, but you seem to have caught up on all relevant competencies.',
+  'student-milestone-not-ready': 'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
+  'warn.teacher-milestone-not-ready': 'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path',
+  'mastery-greeting-msg':
+    'You’ve earned a Mastery Badge! Would you like to see the improvement in your competency skyline?',
+  'show-me': 'Show Me'
 });

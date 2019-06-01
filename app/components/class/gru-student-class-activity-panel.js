@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 
 /**
  * Student Class Activity Panel
@@ -138,6 +140,9 @@ export default Ember.Component.extend({
    * @property {boolean}
    */
   visible: Ember.computed.alias('classActivity.isActive'),
+
+
+  isOfflineActivity: Ember.computed.equal('item.format', PLAYER_EVENT_SOURCE.OFFLINE_CLASS),
 
   /**
    * Class activity date

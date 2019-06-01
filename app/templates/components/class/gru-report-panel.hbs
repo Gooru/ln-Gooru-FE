@@ -25,35 +25,26 @@
     </div>
     <span class="assessment-name ellipsis"> {{assessmentResult.collection.title}} </span>
     <div class="information">
-      {{#if collections.isAssessment}}
+      {{#if isShowAttempts}}
         <span class="attempt">
-          {{#if showAttempts}}
-              <span class="title">{{t "common.attempt"}}</span>
-        <span class="attempt-selector">
-                <span class="dropdown current-attempt">
-                <button class="btn btn-default dropdown-toggle" type="button"
-                    data-toggle="dropdown">{{selectedAttempt}}<span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          {{#each attempts as |attempt|}}
-            <li><a {{action 'selectAttempt' attempt.value}}>{{attempt.label}}</a></li>
-          {{/each}}
-        </ul>
+          <span class="title">{{t "locateme.attempt"}}</span>
+          <span class="attempt-selector">
+            <span class="dropdown current-attempt">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{if visibleAttempt visibleAttempt.sequence}}<span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                {{#each attempts as |attempt|}}
+                  <li><a {{action 'onSelectAttempt' attempt}} class="{{if (eq visibleAttempt.sequence attempt.sequence) 'active'}}">{{attempt.sequence}}</a></li>
+                {{/each}}
+              </ul>
+            </span>
+            <span>{{t "common.of"}}</span>
+            <span class="total-attempts">{{assessmentResult.totalAttempts}}</span>
+          </span>
         </span>
-        <span>{{t "common.of"}}</span>
-        <span class="total-attempts">{{assessmentResult.totalAttempts}}</span>
-        </span>
-      {{else}}
-        {{#if isRealTime}}
-          <span class="title current">{{t "common.current-attempt"}}</span>
-        {{else}}
-          <span class="title latest">{{t "common.latest-attempt"}}</span>
-        {{/if}}
-      {{/if}}
-      </span>
       {{/if}}
       {{#if assessmentResult.submittedAt}}
         <span class="date">
-        {{gru-icon name='event'}}<span>{{format-date assessmentResult.submittedAt 'h:mm a MMM. Do, YYYY'}}</span>
+          {{gru-icon name='event'}}<span>{{format-date assessmentResult.submittedAt 'h:mm a MMM. Do, YYYY'}}</span>
         </span>
       {{/if}}
       <span class="time">

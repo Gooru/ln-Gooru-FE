@@ -28,7 +28,7 @@ export default Ember.Component.extend({
   /**
    * @property {Number} scoreInPercentage
    */
-  scoreInPercentage: 0,
+  scoreInPercentage: null,
 
   /**
    * @property {Number} timeSpent
@@ -60,6 +60,26 @@ export default Ember.Component.extend({
     });
   }),
 
+  /**
+   * @property {Number} timeSpentPos
+   */
+  timeSpentPos: 200,
+
+  /**
+   * @property {Number} scorePos
+   */
+  scorePos: 120,
+
+  /**
+   * @property {Number} placeholderPos
+   */
+  placeholderPos: -1,
+
+  /**
+   * @property {String} placeholderText
+   */
+  placeholderText: null,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -86,7 +106,7 @@ export default Ember.Component.extend({
       .range([0, chartProperties.waveHeight, 0])
       .domain([0, 50, 100]);
     let waveHeight = fillGaugeElementWidth * waveHeightScale(fillPercent * 100);
-    let waveLength = fillGaugeElementWidth * 2 / chartProperties.waveCount;
+    let waveLength = (fillGaugeElementWidth * 2) / chartProperties.waveCount;
     let waveClipCount = 1 + chartProperties.waveCount;
     let waveClipWidth = waveLength * waveClipCount;
     let chartHeight = component.get('chartHeight');
@@ -169,26 +189,40 @@ export default Ember.Component.extend({
       .attr('y', 0)
       .attr('class', `fill-range-${getGradeRange(scoreInPercentage)}`);
 
-    fillGaugeElement
-      .append('text')
-      .attr('transform', `translate(${fillGaugeElementWidth / 2})`)
-      .attr('y', 120)
-      .attr('class', 'score-percentage')
-      .append('tspan')
-      .attr('text-anchor', 'middle')
-      .attr('x', 0)
-      .text(`${scoreInPercentage}%`);
+    if (scoreInPercentage !== null && scoreInPercentage !== undefined) {
+      fillGaugeElement
+        .append('text')
+        .attr('transform', `translate(${fillGaugeElementWidth / 2})`)
+        .attr('y', component.get('scorePos'))
+        .attr('class', 'score-percentage')
+        .append('tspan')
+        .attr('text-anchor', 'middle')
+        .attr('x', 0)
+        .text(`${scoreInPercentage}%`);
+    }
 
     if (timeSpent !== null && timeSpent !== undefined) {
       fillGaugeElement
         .append('text')
-        .attr('y', 200)
+        .attr('y', component.get('timeSpentPos'))
         .attr('transform', `translate(${fillGaugeElementWidth / 2})`)
         .attr('class', 'total-timespent')
         .append('tspan')
         .attr('text-anchor', 'middle')
         .attr('x', 0)
         .text(`${timeSpent ? formatTime(timeSpent) : '--'}`);
+    }
+
+    if (component.get('placeholderText')) {
+      fillGaugeElement
+        .append('text')
+        .attr('y', component.get('placeholderPos'))
+        .attr('transform', `translate(${fillGaugeElementWidth / 2})`)
+        .attr('class', 'placeholder-text')
+        .append('tspan')
+        .attr('text-anchor', 'middle')
+        .attr('x', 0)
+        .text(component.get('placeholderText'));
     }
 
     let waveGroupXPosition = fillGaugeElementWidth * 2 - waveClipWidth;
