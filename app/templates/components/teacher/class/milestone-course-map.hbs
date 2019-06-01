@@ -75,11 +75,11 @@
                               </div>
                               <i class="collection-icon path-{{collection.pathType}}  format-{{collection.format}}"></i>
                             </div>
-                            <div class="collection-title-container" {{action 'openCollectionPreview' lesson.unit_id lesson.lesson_id collection}}>
+                            <div class="collection-title-container {{if collection.isOfflineActivity 'disable-event'}}" {{action 'openCollectionPreview' lesson.unit_id lesson.lesson_id collection}}>
                               <p>{{collection.title}}</p>
                             </div>
                             <div class="colllection-go-live" {{action 'goLive' collection}}>
-                              {{#unless (or collection.isExternalAssessment collection.isExternalCollection) }}
+                              {{#unless (or collection.isExternalAssessment collection.isExternalCollection collection.isOfflineActivity) }}
                                 <i class="go-live-icon"></i>
                               {{/unless}}
                             </div>

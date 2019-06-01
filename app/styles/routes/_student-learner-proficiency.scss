@@ -152,6 +152,7 @@
               display: none;
             }
             .taxonomy-info {
+              pointer-events: none;
               .dropdown {
                 button {
                   .caret {
@@ -167,6 +168,21 @@
               .learner-proficiency-domain-matrix {
                 .actions {
                   display: none;
+                }
+                .chart-area {
+                  .matrix-chart {
+                    .chart-container {
+                      .domain-chart-container {
+                        .domain-sequence-container {
+                          .domain-sequence {
+                            .domain-counts {
+                              pointer-events: none;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
