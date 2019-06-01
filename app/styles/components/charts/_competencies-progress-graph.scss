@@ -1,0 +1,70 @@
+.charts.competencies-progress-graph {
+  height: 621px;
+  width: 77px;
+  background-color: $white;
+  .progress-icon-container {
+    width: 42px;
+    height: 42px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    background-color: $white;
+    text-align: center;
+    border-radius: 50%;
+    margin: auto;
+    cursor: pointer;
+    i {
+      line-height: 42px;
+      color: #4c95d7;
+    }
+  }
+  .progress-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #5295d8;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .progress-container {
+    height: 550px;
+    .progress-graph {
+      width: 12px;
+      position: relative;
+      margin: auto;
+      cursor: grab;
+      span {
+        position: absolute;
+        bottom: -2px;
+        width: 42px;
+        height: 42px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+        text-align: center;
+        line-height: 42px;
+        border-radius: 50%;
+        border: none;
+        left: -15px;
+
+        color: $white;
+        font-size: 22px;
+        font-weight: bold;
+        transition: 1s;
+      }
+      &:hover,
+      &:hover span {
+        z-index: 5;
+      }
+      &.no-value {
+        span {
+          bottom: -8px;
+        }
+      }
+    }
+    .mastered-progress span {
+      z-index: 2;
+    }
+    .inprogress-progress span {
+      z-index: 3;
+    }
+    .notstarted-progress span {
+      z-index: 4;
+    }
+  }
+}
