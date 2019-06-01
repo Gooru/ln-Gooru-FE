@@ -12,9 +12,9 @@ export default Ember.Service.extend({
   offlineActivitySerializer: null,
 
   /**
-   * @property {OfflineActivityAdapter} OfflineActivityAdapter
+   * @property {offlineActivityAdapter} offlineActivityAdapter
    */
-  OfflineActivityAdapter: null,
+  offlineActivityAdapter: null,
 
   /**
    * @property {CollectionService}
@@ -43,10 +43,10 @@ export default Ember.Service.extend({
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       let serializedActivityData = service
-        .get('OfflineActivitySerializer')
+        .get('offlineActivitySerializer')
         .serializeCreateActivity(activityData);
       service
-        .get('OfflineActivityAdapter')
+        .get('offlineActivityAdapter')
         .createActivity({
           body: serializedActivityData
         })
@@ -72,13 +72,13 @@ export default Ember.Service.extend({
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
-        .get('OfflineActivityAdapter')
+        .get('offlineActivityAdapter')
         .readActivity(activityId)
         .then(function(responseData) {
           resolve(
             service
-            .get('OfflineActivitySerializer')
-            .normalizeReadActivity(responseData)
+              .get('offlineActivitySerializer')
+              .normalizeReadActivity(responseData)
           );
         }, reject);
     });
@@ -92,11 +92,13 @@ export default Ember.Service.extend({
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
-        .get('OfflineActivityAdapter')
+        .get('offlineActivityAdapter')
         .getSubTypes()
         .then(function(responseData) {
           resolve(
-            service.get('OfflineActivitySerializer').normalizeSubTypes(responseData)
+            service
+              .get('offlineActivitySerializer')
+              .normalizeSubTypes(responseData)
           );
         }, reject);
     });
@@ -112,10 +114,10 @@ export default Ember.Service.extend({
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       let serializedActivityData = service
-        .get('OfflineActivitySerializer')
+        .get('offlineActivitySerializer')
         .serializeCreateActivity(activityData);
       service
-        .get('OfflineActivityAdapter')
+        .get('offlineActivityAdapter')
         .updateActivity(activityId, serializedActivityData)
         .then(
           function(responseData, textStatus, request) {
@@ -140,11 +142,11 @@ export default Ember.Service.extend({
   updateActivityTitle: function(activityId, title) {
     const service = this;
     let serializedData = service
-      .get('OfflineActivitySerializer')
+      .get('offlineActivitySerializer')
       .serializeUpdateActivityTitle(title);
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
-        .get('OfflineActivityAdapter')
+        .get('offlineActivityAdapter')
         .updateActivity(activityId, serializedData)
         .then(function() {
           service.notifyQuizzesActivityChange(activityId);
@@ -163,7 +165,7 @@ export default Ember.Service.extend({
     var service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
-        .get('OfflineActivityAdapter')
+        .get('offlineActivityAdapter')
         .addQuestion(activityId, questionId)
         .then(function() {
           service.notifyQuizzesActivityChange(activityId);
@@ -182,7 +184,7 @@ export default Ember.Service.extend({
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
-        .get('OfflineActivityAdapter')
+        .get('offlineActivityAdapter')
         .deleteActivity(activity.id)
         .then(function() {
           resolve();
@@ -199,7 +201,7 @@ export default Ember.Service.extend({
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
-        .get('OfflineActivityAdapter')
+        .get('offlineActivityAdapter')
         .copyActivity(activityId)
         .then(function(responseData, textStatus, request) {
           resolve(request.getResponseHeader('location'));
@@ -217,11 +219,11 @@ export default Ember.Service.extend({
   reorderActivity: function(activityId, questionIds) {
     const service = this;
     let serializedData = service
-      .get('OfflineActivitySerializer')
+      .get('offlineActivitySerializer')
       .serializeReorderActivity(questionIds);
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
-        .get('OfflineActivityAdapter')
+        .get('offlineActivityAdapter')
         .reorderActivity(activityId, serializedData)
         .then(function() {
           service.notifyQuizzesActivityChange(activityId);
@@ -253,13 +255,13 @@ export default Ember.Service.extend({
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
-        .get('OfflineActivityAdapter')
+        .get('offlineActivityAdapter')
         .activitysMasteryAccrual(activityIds)
         .then(function(responseData) {
           resolve(
             service
-            .get('OfflineActivitySerializer')
-            .normalizeActivitysMasteryAccrual(responseData)
+              .get('offlineActivitySerializer')
+              .normalizeActivitysMasteryAccrual(responseData)
           );
         }, reject);
     });
