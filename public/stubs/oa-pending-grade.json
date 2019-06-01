@@ -1,0 +1,25 @@
+{
+  "gradeItems": [{
+      "title": "Offline Activity Testing1",
+      "collectionId": "9d213e4a-4b37-423c-82b6-82fd8a128ac2",
+      "collectionType": "offline-activity",
+      "dcaContentId": "80000",
+      "studentCount": 10
+    },
+    {
+      "title": "Offline Activity Testing2",
+      "collectionId": "8d213e4a-4b37-423c-82b6-82fd8a128ac2",
+      "collectionType": "offline-activity",
+      "dcaContentId": "80001",
+      "studentCount": 1
+    },
+    {
+      "title": "Offline Activity Testing2",
+      "collectionId": "7d213e4a-4b37-423c-82b6-82fd8a128ac2",
+      "collectionType": "offline-activity",
+      "dcaContentId": "80002",
+      "studentCount": 3
+    }
+  ],
+  "classId": "9d256e4a-4b37-423c-82b6-82fd8a128af1"
+}
