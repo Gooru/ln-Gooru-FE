@@ -216,6 +216,7 @@ export default Object.assign(quizzesTranslations, {
   'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'ಸಂಗ್ರಹಣೆಗಳು',
   'common.collection-pl.one': 'ಸಂಗ್ರಹ',
+  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
   'common.collection-pl.other': 'ಸಂಗ್ರಹಣೆಗಳು',
   'common.collection-title': 'ಸಂಗ್ರಹ ಶೀರ್ಷಿಕೆ',
   'common.collections': 'ಸಂಗ್ರಹಣೆಗಳು',

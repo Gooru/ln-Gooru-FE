@@ -39,14 +39,14 @@ export default Ember.Service.extend({
   /**
    * Get the list of Students to-be graded for a given Offline Activity
    * @param {string} classId
-   * @param {string} collectionId
+   * @param {string} activityId
    * @returns {Object}
    */
-  getStudentListToGrade(classId, collectionId) {
+  getStudentListToGrade(classId, activityId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service.get('oaAnaltyicsAdapter')
-        .getStudentListToGrade(classId, collectionId).then(function(payload) {
+        .getStudentListToGrade(classId, activityId).then(function(payload) {
           const oaGradeItems = service.get('offlineActivitySerializer')
             .normalizeStudentsForActivity(payload);
           resolve(oaGradeItems);

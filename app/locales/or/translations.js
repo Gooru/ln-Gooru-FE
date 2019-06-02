@@ -79,6 +79,7 @@ export default Object.assign(quizzesTranslations, {
   'common.avg-score': 'ହାରାହାରି ସ୍କୋର୍',
   'common.frq': 'FRQ',
   'common.schedule': 'ସୂଚୀ',
+  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
   'ca.student.no-content': 'The teacher has not assigned any activities for the day',
   'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
   'oa.student.no-completed-content': 'There are no offline activities that are completed yet',

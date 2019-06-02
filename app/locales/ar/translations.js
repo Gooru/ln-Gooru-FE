@@ -77,6 +77,7 @@ export default Object.assign(quizzesTranslations, {
   'common.no-collection-info-message': 'This lesson does have any collections.',
   'common.gooru-suggestions': 'Gooru Suggestions',
   'common.gooru-catalog': 'Gooru Catalog',
+  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
   'library-search-placeholder': 'Search for anything within the library…',
   'common.suggestion-made-to': 'Suggestion made to',
   'common.student-selected': 'Student Selected',

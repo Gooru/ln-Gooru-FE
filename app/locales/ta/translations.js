@@ -111,6 +111,7 @@ export default Object.assign(quizzesTranslations, {
   'common.about-me': 'என்னை பற்றி',
   'common.accept': 'ஏற்க',
   'common.ignore': 'புறக்கணிக்க',
+  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
   'ca.student.no-content': 'The teacher has not assigned any activities for the day',
   'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
   'oa.student.no-completed-content': 'There are no offline activities that are completed yet',

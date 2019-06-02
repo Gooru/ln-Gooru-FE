@@ -17,7 +17,8 @@ export default Ember.Object.extend({
    */
   getOAToGrade(classId) {
     const adapter = this;
-    const namespace = this.get('stubNamespace');
+    const namespace = this.get('namespace');
+    // eslint-disable-next-line no-unused-vars
     const url = `${namespace}/class/${classId}`;
     const stubUrl = '/stubs/oa-pending-grade.json';
     const options = {
@@ -36,7 +37,8 @@ export default Ember.Object.extend({
    */
   getStudentListToGrade(classId, collectionId) {
     const adapter = this;
-    const namespace = this.get('stubNamespace');
+    const namespace = this.get('namespace');
+    // eslint-disable-next-line no-unused-vars
     const url = `${namespace}/class/${classId}/collection/${collectionId}/students`;
     const stubUrl = '/stubs/oa-student-list-grading.json';
     const options = {

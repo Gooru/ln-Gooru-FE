@@ -100,6 +100,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-rubric': 'ਇੱਕ ਚਰਬੀਕਾਰ',
   'common.all-completed': 'ਸਭ ਨੂੰ ਪੂਰਾ ਕੀਤਾ',
   'common.a-assessment': 'ਇੱਕ ਮੁਲਾਂਕਣ',
+  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
   'common.about': 'ਬਾਰੇ',
   'library-search-placeholder': 'Search for anything within the library…',
   'common.about-you': 'ਤੁਹਾਡੇ ਬਾਰੇ',

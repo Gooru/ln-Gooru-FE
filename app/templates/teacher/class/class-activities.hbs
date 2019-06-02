@@ -242,8 +242,8 @@
         <div class="ca-grade-content-items">
           {{#if itemsToGrade}}
             {{gru-grade-items
-              openFRQuestionGrade='onOpenFRQuestionGrade'
-              questionItems=itemsToGrade}}
+              openReportGrade='onOpenReportGrade'
+              gradeableItems=itemsToGrade}}
           {{else}}
             <div class="no-rubric-content">
               {{t 'common.all-caught-up'}}
@@ -334,4 +334,11 @@
     showPullUp=showFRQuestionGrade
     context=itemToGradeContextData
     itemsToGrade=itemsToGrade}}
+{{/if}}
+
+{{#if showOAGrade}}
+  {{activity.offline.grading-report
+    showPullUp=showOAGrade
+    context=itemToGradeContextData
+  }}
 {{/if}}
