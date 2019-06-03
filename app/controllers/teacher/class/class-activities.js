@@ -29,6 +29,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
   /**
+   * @requires service:api-sdk/offline-activity-analytics
+   */
+  oaAnaltyicsService: Ember.inject.service('api-sdk/offline-activity/oa-analytics'),
+
+  /**
+   * @requires service:api-sdk/offline-activity
+   */
+  offlineActivityService: Ember.inject.service('api-sdk/offline-activity/offline-activity'),
+
+  /**
    * @requires service:api-sdk/assessment
    */
   assessmentService: Ember.inject.service('api-sdk/assessment'),
@@ -94,10 +104,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       }
     },
 
-    onOpenFRQuestionGrade(itemToGrade) {
+    onOpenReportGrade(itemToGrade) {
       let controller = this;
       controller.set('itemToGradeContextData', itemToGrade);
-      controller.set('showFRQuestionGrade', true);
+      if (itemToGrade.get('contentType') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS) {
+        controller.set('showFRQuestionGrade', false);
+        controller.set('showOAGrade', true);
+      } else {
+        controller.set('showOAGrade', false);
+        controller.set('showFRQuestionGrade', true);
+      }
     },
 
     onCompleteActivity(activity) {
@@ -641,7 +657,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let todayDate = controller.get('selectedDate');
     controller.loadActivityForDate(todayDate);
     controller.loadCompletedOfflineActivities();
-    controller.getQuestionsToGrade();
+    controller.loadItemsToGrade();
     let tab = controller.get('tab');
     if (tab && tab === 'report') {
       controller.set('isShowOCASummaryReportPullUp', true);
@@ -1244,25 +1260,34 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       });
   },
 
-  getQuestionsToGrade() {
+  loadItemsToGrade() {
     let controller = this;
     let classId = controller.get('classId');
-    controller.get('rubricService').getQuestionsToGradeForDCA(classId)
-      .then(pendingGradingItems => {
-        let gradeItems = pendingGradingItems.gradeItems;
-        if (gradeItems) {
-          let itemsToGrade = Ember.A([]);
-          gradeItems.map(function(item) {
-            let gradeItem = controller.createGradeItemObject(item);
-            if (gradeItem) {
-              itemsToGrade.push(gradeItem);
-            }
-          });
-          Ember.RSVP.all(itemsToGrade).then(function(questionItems) {
-            controller.set('itemsToGrade', questionItems);
-          });
-        }
-      });
+    Ember.RSVP.hash({
+      oaItems: controller.get('oaAnaltyicsService').getOAToGrade(classId),
+      questionItems: controller.get('rubricService').getQuestionsToGradeForDCA(classId)
+    }).then(function(hash) {
+      let questionItems = hash.questionItems.gradeItems;
+      let oaItems = hash.oaItems.gradeItems;
+      let gradeItems = questionItems.concat(oaItems);
+      if (gradeItems) {
+        let itemsToGrade = Ember.A([]);
+        gradeItems.map(function(item) {
+          let gradeItem;
+          if (item.get('collectionType') === 'offline-activity') {
+            gradeItem = controller.createActivityGradeItemObject(item);
+          } else {
+            gradeItem = controller.createQuestionGradeItemObject(item);
+          }
+          if (gradeItem) {
+            itemsToGrade.push(gradeItem);
+          }
+        });
+        Ember.RSVP.all(itemsToGrade).then(function(gradeItems) {
+          controller.set('itemsToGrade', gradeItems);
+        });
+      }
+    });
   },
 
   loadActivitiesForMonth() {
@@ -1309,11 +1334,36 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   },
 
   /**
-   * Creates the grade item information
+   * Creates the grade item information for activity level
    * @param {[]} grade item
    * @param {item} item
    */
-  createGradeItemObject: function(item) {
+  createActivityGradeItemObject: function(item) {
+    const controller = this;
+    const activityId = item.get('collectionId');
+    const contentType = item.get('collectionType');
+    const itemObject = Ember.Object.create();
+    const studentCount = item.get('studentCount');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      controller.get('offlineActivityService')
+        .readActivity(activityId).then(function(content) {
+          itemObject.setProperties({
+            classId: controller.get('class.id'),
+            content,
+            contentType,
+            studentCount
+          });
+          resolve(itemObject);
+        }, reject);
+    });
+  },
+
+  /**
+   * Creates the grade item information for question level
+   * @param {[]} grade item
+   * @param {item} item
+   */
+  createQuestionGradeItemObject: function(item) {
     const controller = this;
     const itemObject = Ember.Object.create();
     const collectionId = item.get('collectionId');
@@ -1336,13 +1386,14 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         })
         .then(function(hash) {
           const collection = hash.collection;
-          const question = collection
+          const content = collection
             .get('children')
             .findBy('id', resourceId);
           itemObject.setProperties({
             classId: controller.get('class.id'),
             collection,
-            question,
+            content,
+            contentType: collectionType,
             studentCount,
             activityDate
           });

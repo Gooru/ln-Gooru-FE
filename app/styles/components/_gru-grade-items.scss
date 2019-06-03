@@ -8,22 +8,34 @@
   .item {
     cursor: pointer;
 
-    .question {
+    .grade-item {
       height: 36px;
       line-height: 36px;
       display: flex;
       border-bottom: 1px solid #d7d7d7;
 
-      .rubric-icon {
+      .icon {
         padding: 12px;
 
         i {
-          background-image: url("gooru/images/add_rubric.svg");
-          width: 20px;
-          height: 20px;
-          background-size: 20px;
-          display: block;
-          background-repeat: no-repeat;
+          &.assessment-icon,
+          &.collection-icon {
+            background-image: url("gooru/images/add_rubric.svg");
+            width: 20px;
+            height: 20px;
+            background-size: 20px;
+            display: block;
+            background-repeat: no-repeat;
+          }
+
+          &.offline-activity-icon {
+            background-image: url("gooru/images/offline.svg");
+            width: 20px;
+            height: 20px;
+            background-size: 20px;
+            display: block;
+            background-repeat: no-repeat;
+          }
         }
       }
 

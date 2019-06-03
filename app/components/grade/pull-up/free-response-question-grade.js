@@ -95,7 +95,7 @@ export default Ember.Component.extend({
    * Question of this FRQ grade item.
    * @type {Object}
    */
-  question: Ember.computed.alias('context.question'),
+  question: Ember.computed.alias('context.content'),
 
   /**
    * Propery to hide the default pullup.

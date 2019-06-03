@@ -224,6 +224,7 @@ export default Object.assign(quizzesTranslations, {
   'common.brief': 'Brief',
   'common.update-grade-score': 'Update grade score to complete your FRQ.',
   'common.answer-this-rubric': 'Answer this rubric to complete your FRQ.',
+  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
   'common.all-caught-up': 'You are all caught up!',
   'common.no-users-to-grade': 'There are no users to grade for this FRQ.',
   'common.rubric-needs-grading': 'Rubric Needs Grading',

@@ -78,6 +78,7 @@ export default Object.assign(quizzesTranslations, {
   'common.avg-score': 'Avg Score',
   'common.tasks': 'tasks',
   'common.frq': 'FRQ',
+  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
   'common.schedule': 'Schedule',
   'common.responses': 'Responses',
   'common.no-lesson-info-message': 'This unit does have any lessons.',

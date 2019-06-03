@@ -1,0 +1,175 @@
+<div class="backdrop" {{action 'onPullUpClose'}}></div>
+<div class="oa-grade-container">
+  <div class="oa-grade-header">
+    <div class="icon">
+      <i class="offline-activity"></i>
+    </div>
+    <div class="title ellipsis">{{content.title}}</div>
+    <div class="close-icon" {{action 'onPullUpClose'}}>
+      {{gru-icon name="close"}}
+    </div>
+  </div>
+  <div class="oa-grading-section">
+    <div class="left-panel">
+      <div class="student-info">
+        <div class="student-count">
+          <sup>{{currentStudentIndex}}</sup>&frasl;<sub>{{users.length}}</sub>
+        </div>
+        <div class="oa-grade-students">
+          <div class="oa-grade-students-carousel">
+            <div id="oa-grade-students-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
+              <div class="carousel-inner">
+                {{#each users as |user index|}}
+                  <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
+                    <div class="user-profile-img">
+                      <img src="{{user.avatarUrl}}" />
+                      <span>{{user.lastName}} {{user.firstName}}</span>
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+              <!-- Left and right controls -->
+              <a class="left carousel-control" data-slide="prev" {{action 'onClickPrev'}}>
+                {{gru-icon name="keyboard_arrow_left"}}
+              </a>
+              <a class="right carousel-control" data-slide="next" {{action 'onClickNext'}}>
+                {{gru-icon name="keyboard_arrow_right"}}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="self-grade-section">
+          <div class="label">Self-Graded</div>
+          <div class="score">17 / 20</div>
+          <div class="label">Rubric Score</div>
+        </div>
+      </div>
+      <div class="tasks-section">
+        {{#each tasks as |task index|}}
+          <div class="task">
+            <div class="task-info">
+              <div class="icon">{{gru-icon name="language"}}</div>
+              <div class="title ellipsis">Task {{index}}: {{task.title}}</div>
+            </div>
+            <div class="task-desc">{{task.description}}</div>
+            <div class="student-submission">
+              <span class="no-submission">Student is not submitted yet</span>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="right-panel">
+      <div class="oa-grade-right-panel-header">
+        <div class="oa-grade-info">
+          {{#if rubric.scoring}}
+            <span class="oa-grade-info-title">{{t 'grading-player.grading'}}</span>
+            <span class="oa-grade-info-desc">{{t 'common.update-grade-score'}}</span>
+          {{else}}
+            <span class="oa-grade-info-title">
+              Rubric
+              {{#if (and rubric.uploaded rubric.url)}}
+                <span class="rubric-attachment" {{action 'filePreviewOpen'}}>{{gru-icon name="attachment"}}</span>
+              {{/if}}
+            </span>
+            <span class="oa-grade-info-desc">{{t 'common.answer-this-activity'}}</span>
+          {{/if}}
+        </div>
+        {{#if rubric.scoring}}
+          <div class="oa-grade-score" style={{safe-html (concat "background-color:" (grade-color userGradeScore))}}>
+            <span>{{studentGradeScore}}</span>
+            <hr />
+            <span>{{rubric.maxScore}}</span>
+          </div>
+        {{else if (gt totalRubricPoints 0)}}
+          <div class="oa-grade-score" style={{safe-html (concat "background-color:" (grade-color userRubricScore))}}>
+            <span>{{totalUserRubricPoints}}</span>
+            <hr />
+            <span>{{totalRubricPoints}}</span>
+          </div>
+        {{/if}}
+      </div>
+      <div class="oa-grade-right-panel-body">
+        {{#if rubric.scoring}}
+          <div class="oa-grade-rubric-grading">
+            {{validation.gru-input-number model=userGrade  valuePath='studentScore' min=0 max=rubric.maxScore step=rubric.increment }}
+            <span class="score">{{rubric.maxScore}}</span>
+          </div>
+        {{else}}
+          <div class="oa-grade-rubric-categories">
+            {{#each categories as | category categoryIndex |}}
+              <div class="oa-grade-rubric-category" id="oa-grade-rubric-category-{{categoryIndex}}">
+                {{#if category.allowsLevels}}
+                  <div class="oa-grade-rubric-category-info">
+                    <p>{{category.title}}</p>
+                  </div>
+                {{/if}}
+                <div class="oa-grade-rubric-level-container">
+                  {{#if category.allowsLevels}}
+                    <div class="oa-grade-rubric-levels {{unless (and category.allowsLevels category.allowsScoring) 'no-progress'}} {{if category.scoreInPrecentage 'active'}}">
+                      {{#each category.levels as |level levelIndex|}}
+                        <i class="oa-grade-info-popover {{if level.selected 'selected'}}" data-html="true" title="Points: {{level.score}}" data-content="{{level.name}}" data-category={{categoryIndex}} data-level={{levelIndex}}></i>
+                      {{/each}}
+                      {{#if (and category.allowsLevels category.allowsScoring)}}
+                        <div class="progress-bar" style={{safe-html (concat "background-color:" (grade-color category.scoreInPrecentage) ";width:" category.scoreInPrecentage "%")}}></div>
+                      {{/if}}
+                    </div>
+                  {{else}}
+                    <div class="oa-grade-rubric-category-info">
+                      <p>{{category.title}}</p>
+                    </div>
+                  {{/if}}
+                  <div class="oa-grade-clear {{if category.selected 'active'}}" {{action 'unSelectCategoryLevel' category}}>
+                    {{gru-icon name="clear"}}
+                  </div>
+                  <div class="oa-grade-comment" {{action 'onShowAddCommentBox' categoryIndex}}>
+                    {{gru-icon name="mode_comment"}}
+                  </div>
+                </div>
+                <div class="oa-grade-comment-section">
+                  {{validation.gru-textarea
+                      model=category
+                      valuePath='comment'
+                      maxLength=500
+                      rows=1
+                      placeholder='Add Comment'
+                    }}
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        {{/if}}
+        <div class="oa-grade-general-comment-container">
+          {{validation.gru-textarea
+              model=userGrade
+              valuePath='comment'
+              maxLength=500
+              rows=1
+              placeholder='General Comments Only'
+            }}
+        </div>
+        <div class="oa-grade-action-btns">
+          <button type="button" class="btn confirm btn-primary btn-lg">{{t 'common.submit'}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#if isLoading}}
+  <div class="loading-spinner">
+    {{three-bounce-spinner}}
+  </div>
+{{/if}}
+
+{{#if (and rubric.uploaded rubric.url)}}
+  <div class="rubric-file-preview-container">
+    <div class="backdrop"></div>
+    <div class="rubric-file-preview">
+      <div class="rubric-file-preview-close" {{action 'filePreviewClose'}}>
+        {{gru-icon name="close"}}
+      </div>
+      <iframe src="{{rubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+{{/if}}

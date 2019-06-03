@@ -74,6 +74,7 @@ export default Object.assign(quizzesTranslations, {
   'common.frq': 'ફ્રિક',
   'common.schedule': 'શેડ્યૂલ',
   'common.responses': 'જવાબો',
+  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
   'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.no-lesson-info-message': 'આ એકમ પાસે કોઈ પાઠ છે.',
   'common.no-collection-info-message': 'આ પાઠમાં કોઈ સંગ્રહ છે.',

@@ -1,8 +1,8 @@
-{{#each questionItems as |item|}}
-  <div class="item" {{action 'openFRQuestionGrade' item}}>
-    <div class="question ellipsis">
-      <span class="rubric-icon"><i class="icon"></i></span>
-      <span class="question-name">{{item.question.title}}</span>
+{{#each gradeableItems as |item|}}
+  <div class="item" {{action 'openReportGrade' item}}>
+    <div class="grade-item ellipsis">
+      <span class="icon"><i class="{{item.contentType}}-icon"></i></span>
+      <span class="question-name">{{item.content.title}}</span>
     </div>
   </div>
 {{/each}}
