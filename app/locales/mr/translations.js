@@ -91,7 +91,7 @@ export default Object.assign(quizzesTranslations, {
   'common.no-suggest-search-results-message':
     'तुम्ही शोधण्यासाठी वापरलेले शब्द तपासा. त्या शब्दांसाठी पर्यायी शब्द वापरून पुन्हा प्रयत्न करा.',
   'common.a-collection': 'एक संग्रह',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.a-course': 'एक कोर्स',
   'common.a-question': 'एक प्रश्न',
@@ -101,6 +101,12 @@ export default Object.assign(quizzesTranslations, {
   'common.a-assessment': 'एक मूल्यांकन',
   'common.about': 'याबद्दल',
   'common.about-you': 'तुमच्याबद्दल',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.plan': 'plan',
   'offline-activities.no-completed-content':
     'There are no projects or other offline activities that have been completed yet',
@@ -1267,8 +1273,7 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.atc-view.collapse': 'कोलॅप्स करा',
   'teacher-landing.class.atc-view.total-competencies-gained':
     'एकूण प्राप्त क्षमता',
-  'teacher-landing.class.atc-view.progress-label':
-    'क्षमतांचा झालेला विकास ',
+  'teacher-landing.class.atc-view.progress-label': 'क्षमतांचा झालेला विकास ',
   'teacher-landing.class.atc-view.progress-to-destination':
     'progress to destination',
   'teacher-landing.class.class-activities': 'वर्गाचे नियोजन',
@@ -1359,7 +1364,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
     'तुमच्या वर्गाची इयत्ता?',
   'teacher-landing.class.class-settings.origin': 'मूळ',
-  'teacher-landing.class.class-settings.destination': 'अध्ययन निष्पत्तीचे लक्ष्य',
+  'teacher-landing.class.class-settings.destination':
+    'अध्ययन निष्पत्तीचे लक्ष्य',
   'teacher-landing.class.class-settings.students': 'विद्यार्थी',
   'teacher-landing.class.class-settings.student-id': 'विद्यार्थी आय डी',
   'teacher-landing.class.class-settings.joined-on':
@@ -2560,5 +2566,8 @@ export default Object.assign(quizzesTranslations, {
   'warn.teacher-milestone-not-ready':
     'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
   'pre-study': 'Pre-Study',
-  'course-map.your-learning-path': 'Your Learning Path'
+  'course-map.your-learning-path': 'Your Learning Path',
+  'mastery-greeting-msg':
+    'You’ve earned a Mastery Badge! Would you like to see the improvement in your competency skyline?',
+  'show-me': 'Show Me'
 });
