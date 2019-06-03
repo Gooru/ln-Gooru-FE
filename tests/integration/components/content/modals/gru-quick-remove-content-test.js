@@ -60,7 +60,7 @@ test('it renders', function(assert) {
 test('it calls a generic remove method and then a callback (if provided) after clicking on the remove button', function(
   assert
 ) {
-  assert.expect(30);
+  assert.expect(33);
 
   const model = {
     removeMethod: function() {
@@ -96,7 +96,7 @@ test('it calls a generic remove method and then a callback (if provided) after c
 test('it calls a generic remove method and then redirects (if a route is provided) after clicking on the remove button', function(
   assert
 ) {
-  assert.expect(40);
+  assert.expect(44);
 
   const model = {
     removeMethod: function() {
