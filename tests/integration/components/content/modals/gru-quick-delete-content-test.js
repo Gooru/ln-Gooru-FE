@@ -60,7 +60,7 @@ test('it renders', function(assert) {
 test('it calls a generic delete method and then a callback (if provided) after clicking on the delete button', function(
   assert
 ) {
-  assert.expect(30);
+  assert.expect(33);
 
   const model = {
     deleteMethod: function() {
