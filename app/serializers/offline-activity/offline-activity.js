@@ -269,7 +269,7 @@ export default Ember.Object.extend({
     return Ember.Object.create({
       classId: payload.classId,
       gradeItems: gradeItems ?
-        gradeItems.map(item => serializer.normalizeGradeActivity(item)) : null
+        gradeItems.map(item => serializer.normalizeGradeActivity(item)) : []
     });
   },
 
