@@ -748,7 +748,7 @@ export default Ember.Component.extend({
         let itemsToGrade = component.get('itemsToGrade');
         if (itemsToGrade) {
           let questionId = component.get('question.id');
-          let item = itemsToGrade.findBy('question.id', questionId);
+          let item = itemsToGrade.findBy('content.id', questionId);
           itemsToGrade.removeObject(item);
         }
         component.$().fadeOut(5000, function() {

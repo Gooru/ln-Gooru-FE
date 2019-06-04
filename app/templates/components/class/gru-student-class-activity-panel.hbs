@@ -33,9 +33,11 @@
     {{/if}}
   </div>
   <div class="ca-play-container {{if isOfflineActivity 'disable-event'}}" {{action 'onPlayContent' classActivity}}>
-    <div class="ca-play-btn">
-      {{gru-icon name='play_arrow'}}
-    </div>
+    {{#if (not classActivity.isCompleted)}}
+      <div class="ca-play-btn">
+        {{gru-icon name='play_arrow'}}
+      </div>
+    {{/if}}
   </div>
   <div class="dca-panel-actions-performance">
     {{#if collectionPerformanceSummary}}
