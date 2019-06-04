@@ -5,7 +5,7 @@ import {
   ASSESSMENT_SHOW_VALUES
 } from 'gooru-web/config/config';
 import TaxonomySerializer from 'gooru-web/serializers/taxonomy/taxonomy';
-// import ActivityModel from 'gooru-web/models/content/activity';
+import ActivityModel from 'gooru-web/models/content/activity';
 import RubricSerializer from 'gooru-web/serializers/rubric/rubric';
 /**
  * Serializer to support the Offline Activity operations
@@ -40,7 +40,51 @@ export default Ember.Object.extend({
     );
   },
 
-  serializeCreateActivity(activityModel) {
+  /**
+   * Normalized model to serialize
+   * @param {jsonObject} activityModel
+   * @example  examplePayLoad = {
+      title: 'sr1',
+      subformat: 'oa.project.poster',
+      thumbnail: 'dummy',
+      learning_objective: 'dummy',
+      metadata: null,
+      taxonomy: {
+        'CCSS.K12.MA-1-OA-A.01': {
+          code: '1.OA.1',
+          title:
+            'Use addition and subtraction within 20 to solve word problems involving situations of adding to, taking from, putting together, taking apart, and comparing, with unknowns in all positions, e.g., by using objects, drawings, and equations with a symbol for the unknown number to represent the problem.',
+          parent_title: 'Math',
+          description: '',
+          framework_code: 'CCSS'
+        },
+        'CCSS.K12.MA-1-OA-A.02': {
+          code: '1.OA.2',
+          title:
+            'Solve word problems that call for addition of three whole numbers whose sum is less than or equal to 20, e.g., by using objects, drawings, and equations with a symbol for the unknown number to represent the problem.',
+          parent_title: 'Math',
+          description: '',
+          framework_code: 'CCSS'
+        }
+      },
+
+      setting: {
+        bidirectional_play: false,
+        show_feedback: 'summary',
+        show_key: 'never',
+        attempts_allowed: -1,
+        classroom_play_enabled: true
+      },
+      primary_language: 1,
+      taxonomy_to_build: null,
+      reference: null,
+      duration_hours: null,
+      max_score: 200,
+      exemplar: 'dummy'
+    };
+   *
+   */
+  serializeCreateActivity: function(activityModel) {
     const serializer = this;
     let actualPayLoad = this.serializeActivity(activityModel);
     actualPayLoad.taxonomy = serializer
@@ -82,6 +126,8 @@ export default Ember.Object.extend({
       activityModel.get('depthOfknowledge') || [];
     serializedActivity.metadata['21_century_skills'] =
       activityModel.get('centurySkills') || [];
+    serializedActivity.reference = activityModel.reference;
+    serializedActivity.exemplar = activityModel.exemplar;
     return serializedActivity;
   },
 
@@ -102,75 +148,79 @@ export default Ember.Object.extend({
     const metadata = activityData.metadata || {};
     const settings = activityData.setting || {};
 
-    let normalizedActivity = Ember.Object.create({
-      id:
-        activityData.target_collection_id ||
-        activityData.suggested_content_id ||
-        activityData.id,
-      pathId: activityData.id,
-      title: activityData.title,
-      learningObjectives: activityData.learning_objective,
-      isVisibleOnProfile:
-        typeof activityData.visible_on_profile !== 'undefined'
-          ? activityData.visible_on_profile
-          : true,
-      tasks: serializer.normalizeTasks(activityData.oa_tasks),
-      taskCount: activityData.oa_tasks ? activityData.oa_tasks.length : 0,
+    let normalizedActivity = ActivityModel.create(
+      Ember.getOwner(this).ownerInjection(),
+      {
+        id:
+          activityData.target_collection_id ||
+          activityData.suggested_content_id ||
+          activityData.id,
+        pathId: activityData.id,
+        title: activityData.title,
+        learningObjectives: activityData.learning_objective,
+        isVisibleOnProfile:
+          typeof activityData.visible_on_profile !== 'undefined'
+            ? activityData.visible_on_profile
+            : true,
+        tasks: serializer.normalizeTasks(activityData.oa_tasks),
+        taskCount: activityData.oa_tasks ? activityData.oa_tasks.length : 0,
 
-      sequence: activityData.sequence_id,
-      thumbnailUrl: thumbnailUrl,
-      classroom_play_enabled:
-        settings.classroom_play_enabled !== undefined
-          ? settings.classroom_play_enabled
-          : true,
-      standards: serializer
-        .get('taxonomySerializer')
-        .normalizeTaxonomyObject(activityData.taxonomy),
-      format:
-        activityData.format ||
-        activityData.target_content_type ||
-        activityData.suggested_content_type ||
-        'Offline-activity',
-      subFormat: activityData.subformat,
-      reference: activityData.reference,
-      references: serializer.normalizeReferences(activityData.oa_references),
-      rubric: serializer.normalizeActivityRubric(activityData.rubrics),
-      url: activityData.url,
-      ownerId: activityData.owner_id,
-      metadata: metadata,
-      audience:
-        metadata.audience && metadata.audience.length > 0
-          ? metadata.audience
-          : [],
-      depthOfknowledge:
-        metadata.depth_of_knowledge && metadata.depth_of_knowledge.length > 0
-          ? metadata.depth_of_knowledge
-          : [],
-      courseId:
-        activityData.target_course_id ||
-        activityData.suggested_course_id ||
-        activityData.course_id,
-      unitId:
-        activityData.target_unit_id ||
-        activityData.suggested_unit_id ||
-        activityData.unit_id,
-      lessonId:
-        activityData.target_lesson_id ||
-        activityData.suggested_lesson_id ||
-        activityData.lesson_id,
-      collectionSubType:
-        activityData.target_content_subtype ||
-        activityData.suggested_content_subtype,
-      attempts: settings.attempts_allowed || -1,
-      bidirectional: settings.bidirectional_play || false,
-      showFeedback: settings.show_feedback || ASSESSMENT_SHOW_VALUES.SUMMARY,
-      showKey: settings.show_key === ASSESSMENT_SHOW_VALUES.SUMMARY,
-      centurySkills:
-        metadata['21_century_skills'] &&
-        metadata['21_century_skills'].length > 0
-          ? metadata['21_century_skills']
-          : []
-    });
+        sequence: activityData.sequence_id,
+        thumbnailUrl: thumbnailUrl,
+        classroom_play_enabled:
+          settings.classroom_play_enabled !== undefined
+            ? settings.classroom_play_enabled
+            : true,
+        standards: serializer
+          .get('taxonomySerializer')
+          .normalizeTaxonomyObject(activityData.taxonomy),
+        format:
+          activityData.format ||
+          activityData.target_content_type ||
+          activityData.suggested_content_type ||
+          'Offline-activity',
+        subFormat: activityData.subformat,
+        reference: activityData.reference,
+        exemplar: activityData.exemplar,
+        references: serializer.normalizeReferences(activityData.oa_references),
+        rubric: serializer.normalizeActivityRubric(activityData.rubrics),
+        url: activityData.url,
+        ownerId: activityData.owner_id,
+        metadata: metadata,
+        audience:
+          metadata.audience && metadata.audience.length > 0
+            ? metadata.audience
+            : [],
+        depthOfknowledge:
+          metadata.depth_of_knowledge && metadata.depth_of_knowledge.length > 0
+            ? metadata.depth_of_knowledge
+            : [],
+        courseId:
+          activityData.target_course_id ||
+          activityData.suggested_course_id ||
+          activityData.course_id,
+        unitId:
+          activityData.target_unit_id ||
+          activityData.suggested_unit_id ||
+          activityData.unit_id,
+        lessonId:
+          activityData.target_lesson_id ||
+          activityData.suggested_lesson_id ||
+          activityData.lesson_id,
+        collectionSubType:
+          activityData.target_content_subtype ||
+          activityData.suggested_content_subtype,
+        attempts: settings.attempts_allowed || -1,
+        bidirectional: settings.bidirectional_play || false,
+        showFeedback: settings.show_feedback || ASSESSMENT_SHOW_VALUES.SUMMARY,
+        showKey: settings.show_key === ASSESSMENT_SHOW_VALUES.SUMMARY,
+        centurySkills:
+          metadata['21_century_skills'] &&
+          metadata['21_century_skills'].length > 0
+            ? metadata['21_century_skills']
+            : []
+      }
+    );
     return normalizedActivity;
   },
 
@@ -248,6 +298,16 @@ export default Ember.Object.extend({
       taskSubmissionType: item.oa_task_submission_type,
       taskSubmissionSubType: item.oa_task_submission_subtype
     });
+  },
+
+  serializeReferenceData: function(refData) {
+    return {
+      id: refData.id,
+      oa_id: refData.oaId,
+      oa_reference_type: refData.type,
+      oa_reference_subtype: refData.subType,
+      location: refData.location
+    };
   },
 
   /**

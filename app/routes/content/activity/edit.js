@@ -13,9 +13,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
   /**
-   * @requires service:activity/activity
+   * @requires service:/offline-activity//offline-activity
    */
-  activityService: Ember.inject.service('api-sdk/activity'),
+  activityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
   /**
    * @requires service:session/session
    */

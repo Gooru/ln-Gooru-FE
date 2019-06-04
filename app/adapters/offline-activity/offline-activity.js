@@ -134,45 +134,22 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Deletes an activity by id
-   *
-   * @param activityId activity id to be sent
-   * @returns {Promise}
-   */
-  deleteExternalActivity: function(activityId) {
-    const adapter = this;
-    const namespace = this.get('externalNamespace');
-    const url = `${namespace}/${activityId}`;
-    const options = {
-      type: 'DELETE',
-      contentType: 'application/json; charset=utf-8',
-      dataType: 'text',
-      processData: false,
-      headers: adapter.defineHeaders(),
-      data: JSON.stringify({})
-    };
-    return Ember.$.ajax(url, options);
-  },
-
-  /**
    * Adds a question to an activity
    *
    * @param {string} activityId
    * @param {string} questionId
    * @returns {Promise}
    */
-  addQuestion: function(activityId, questionId) {
+  createReferences: function(activityId, referencesData) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/${activityId}/questions`;
+    const url = `${namespace}/${activityId}/references`;
     const options = {
-      type: 'PUT',
+      type: 'POST',
       contentType: 'application/json; charset=utf-8',
       dataType: 'text',
       headers: adapter.defineHeaders(),
-      data: JSON.stringify({
-        id: questionId
-      })
+      data: JSON.stringify(referencesData)
     };
     return Ember.$.ajax(url, options);
   },
@@ -242,6 +219,12 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  defineHeaders: function() {
+    return {
+      Authorization: `Token ${this.get('session.token-api3')}`
+    };
+  },
+
   /**
    * Get a list of OA subtype
    * @returns {Promise}
@@ -258,6 +241,27 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * Deletes an reference by id
+   *
+   * @param reference id to be sent
+   * @returns {Promise}
+   */
+  deleteReference: function(activityId, referenceId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${activityId}/references/${referenceId}`;
+    const options = {
+      type: 'DELETE',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   oaTaskSubmissions(taskSubmissionPayload) {
     const adapter = this;
     const namespace = adapter.get('insightsNamespce');
@@ -269,11 +273,5 @@ export default Ember.Object.extend({
       data: JSON.stringify(taskSubmissionPayload)
     };
     return Ember.$.ajax(url, options);
-  },
-
-  defineHeaders: function() {
-    return {
-      Authorization: `Token ${this.get('session.token-api3')}`
-    };
   }
 });

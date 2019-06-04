@@ -4,9 +4,11 @@ export default Ember.Component.extend({
   classNames: ['gru-references'],
 
   /**
-   * @requires service:api-sdk/course
+   * @requires service:api-sdk/offline-activity/offline-activity
    */
-  activityService: Ember.inject.service('api-sdk/activity'),
+  activityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
 
   isEditing: true,
 

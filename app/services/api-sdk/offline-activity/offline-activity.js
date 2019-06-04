@@ -120,9 +120,7 @@ export default Ember.Service.extend({
         .get('offlineActivityAdapter')
         .updateActivity(activityId, serializedActivityData)
         .then(
-          function(responseData, textStatus, request) {
-            let activityId = request.getResponseHeader('location');
-            activityData.set('id', activityId);
+          function() {
             resolve(activityData);
           },
           function(error) {
@@ -133,44 +131,31 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Updates an Activity
-   *
-   * @param activityId the id of the Activity to be updated
-   * @param title the Activity title
-   * @returns {Promise}
-   */
-  updateActivityTitle: function(activityId, title) {
-    const service = this;
-    let serializedData = service
-      .get('offlineActivitySerializer')
-      .serializeUpdateActivityTitle(title);
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      service
-        .get('offlineActivityAdapter')
-        .updateActivity(activityId, serializedData)
-        .then(function() {
-          service.notifyQuizzesActivityChange(activityId);
-          resolve();
-        }, reject);
-    });
-  },
-
-  /**
-   * Adds a question to a specific activity
+   * Creates a reference in a specific offline activity
    * @param activityId
-   * @param questionId
+   * @param referenceData
    * @returns {Promise}
+   *
    */
-  addQuestion: function(activityId, questionId) {
+  createReferences: function(referenceData) {
     var service = this;
+    let serializedReferenceData = service
+      .get('activitySerializer')
+      .serializeReferenceData(referenceData);
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
-        .get('offlineActivityAdapter')
-        .addQuestion(activityId, questionId)
-        .then(function() {
-          service.notifyQuizzesActivityChange(activityId);
-          resolve();
-        }, reject);
+        .get('activityAdapter')
+        .createReferences(referenceData.oaId, serializedReferenceData)
+        .then(
+          function(responseData, textStatus, request) {
+            let refId = request.getResponseHeader('location');
+            referenceData.set('id', refId);
+            resolve(referenceData);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
     });
   },
 
@@ -275,6 +260,23 @@ export default Ember.Service.extend({
         .oaTaskSubmissions(taskSubmissionPayload)
         .then(function() {
           resolve(true);
+        }, reject);
+    });
+  },
+  /**
+   * Delete reference
+   *
+   * @param activityId The activity id to delete
+   * @returns {Ember.RSVP.Promise}
+   */
+  deleteReference: function(reference) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('offlineActivityAdapter')
+        .deleteReference(reference.oaId, reference.id)
+        .then(function() {
+          resolve();
         }, reject);
     });
   }

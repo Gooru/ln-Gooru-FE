@@ -7,9 +7,11 @@ export default NewCollectionModal.extend({
   // Dependencies
 
   /**
-   * @property {AssessmentService} Activity service API SDK
+   * @property {activityService} Activity service API SDK
    */
-  activityService: Ember.inject.service('api-sdk/activity'),
+  activityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
 
   /**
    * @property {Service} I18N service

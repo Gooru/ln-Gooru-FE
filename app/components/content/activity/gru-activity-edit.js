@@ -8,9 +8,11 @@ export default CollectionEdit.extend({
   // Dependencies
 
   /**
-   * @requires service:api-sdk/course
+   * @requires service:api-sdk/offline-activity/offline-activity
    */
-  activityService: Ember.inject.service('api-sdk/activity'),
+  activityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
 
   /**
    * @property {Service} I18N service
