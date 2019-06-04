@@ -184,6 +184,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'ମୂଲ୍ୟାଙ୍କନ',
   'common.assessment-pl.other': 'ମୂଲ୍ୟାଙ୍କନ ଗୁଡ଼ିକ',
   'common.assessment-title': 'ମୂଲ୍ୟାଙ୍କନ ଶୀର୍ଷକ',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'A',
   'common.assessments': 'ମୂଲ୍ୟାଙ୍କନ ଗୁଡ଼ିକ',
   'common.assign': 'ନ୍ୟସ୍ତ କରିବା (ଆସାଇନ୍)',

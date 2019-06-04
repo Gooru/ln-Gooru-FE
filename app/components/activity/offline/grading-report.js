@@ -159,7 +159,7 @@ export default Ember.Component.extend({
       let totalRubricPoints = this.get('totalRubricPoints');
       let totalUserRubricPoints = this.get('totalUserRubricPoints');
       if (totalUserRubricPoints > 0) {
-        score = Math.floor(totalUserRubricPoints / totalRubricPoints * 100);
+        score = Math.floor((totalUserRubricPoints / totalRubricPoints) * 100);
       }
       return score;
     }
@@ -174,7 +174,7 @@ export default Ember.Component.extend({
     let gradeMaxScore = this.get('rubric.maxScore');
     let studentScore = this.get('userGrade.studentScore');
     if (studentScore > 0) {
-      score = Math.floor(studentScore / gradeMaxScore * 100);
+      score = Math.floor((studentScore / gradeMaxScore) * 100);
     }
     return score;
   }),
@@ -348,12 +348,11 @@ export default Ember.Component.extend({
     let component = this;
     let classId = component.get('classId');
     let activityId = component.get('activityId');
-    return Ember.RSVP
-      .hash({
-        users: component
-          .get('oaAnaltyicsService')
-          .getStudentListToGrade(classId, activityId)
-      })
+    return Ember.RSVP.hash({
+      users: component
+        .get('oaAnaltyicsService')
+        .getStudentListToGrade(classId, activityId)
+    })
       .then(({ users }) => {
         if (users.get('students') && users.get('students').length) {
           return Ember.RSVP.hash({
@@ -411,7 +410,7 @@ export default Ember.Component.extend({
       level.set('selected', true);
       let totalPoints = category.get('totalPoints');
       let scoreInPrecentage = Math.floor(
-        level.get('score') / totalPoints * 100
+        (level.get('score') / totalPoints) * 100
       );
       category.set('scoreInPrecentage', scoreInPrecentage);
       category.set('selected', true);
@@ -439,7 +438,7 @@ export default Ember.Component.extend({
         $(this).popover('show');
         if (category.get('allowsScoring')) {
           let scoreInPrecentage = Math.floor(
-            level.get('score') / totalPoints * 100
+            (level.get('score') / totalPoints) * 100
           );
           Ember.$('.popover-title').css(
             'background-color',
@@ -503,13 +502,15 @@ export default Ember.Component.extend({
 
   closePullUp() {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-    });
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+      }
+    );
   },
 
   handleAppContainerScroll() {

@@ -176,6 +176,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'આકારણી',
   'common.assessment-pl.other': 'મૂલ્યાંકન',
   'common.assessment-title': 'મૂલ્યાંકન શીર્ષક',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'એ',
   'common.assessments': 'મૂલ્યાંકન',
   'common.assign': 'સોંપી',

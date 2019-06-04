@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>References</h3>
+        <div class="detail">
+            <div class="actions">
+                {{partial 'content/partials/information-actions'}}
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-body">
+        <div class="panelBodyContainer">
+            <div class="textContainer">
+                <div class='referenceText'>
+                    {{validation.gru-input model=model valuePath='reference' maxLength=50 didValidate=didValidate}}
+                </div>
+                <div class='referenceText exemplarText'>
+                    {{validation.gru-input model=model valuePath='exemplar' maxLength=50 didValidate=didValidate}}
+                </div>
+            </div>
+            <div class='referenceArtifacts'>
+                <section>
+                    <h3>Uploaded Files</h3>
+                    {{#each-in model.references as | index refItem|}}
+                        {{#if (eq refItem.type 'uploaded')}}
+                            <div> {{refItem.type}} <span class='separator'>|</span> {{refItem.subType}} <span class='separator'>|</span> <span class='ellipsis listItem'>{{refItem.location}}</span> <button class='button ' {{action 'deleteReference' refItem}}> Delete</button></div>
+                        {{/if}}
+                    {{/each-in}}
+                    {{content.activity.reference.gru-edit-reference editType='upload' updateReferenceCollection=(action 'updateReferenceCollection') referenceType=referenceType referenceSubType=referenceSubType referenceType=referenceType model=refModel editingModel=editingRefModel  isEditing=isEditing}}
+                </section>
+                <section>
+                    <h3>Reference URLs</h3>
+                    {{#each-in model.references as | index refItem|}}
+                        {{#if (eq refItem.type 'remote')}}
+                            <div> {{refItem.type}} <span class='separator'>|</span> {{refItem.subType}} <span class='separator'>|</span> <span class='ellipsis listItem'>{{refItem.location}}</span> <button class='button ' {{action 'deleteReference' refItem}}> Delete</button></div>
+                        {{/if}}
+                    {{/each-in}}
+                    {{content.activity.reference.gru-edit-reference editType='url' updateReferenceCollection=(action 'updateReferenceCollection') referenceType=referenceType referenceSubType=referenceSubType referenceType=referenceType model=refModel editingModel=editingRefModel references=model.references isEditing=isEditing}}
+                </section>
+                <div class='newReferenceArtifact collapse'>
+                    {{!-- {{#if createNewReference}} --}}
+                    {{!--  {{/if}} --}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

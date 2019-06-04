@@ -26,6 +26,10 @@ Router.map(function() {
       });
     });
 
+    this.route('activity', function() {
+      this.route('edit', { path: '/edit/:lessonId' });
+    });
+
     this.route('collections', function() {
       this.route('edit', {
         path: '/edit/:collectionId'

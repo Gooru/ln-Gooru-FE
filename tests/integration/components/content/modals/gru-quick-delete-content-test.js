@@ -37,9 +37,9 @@ test('it renders', function(assert) {
       });
       assert.equal(
         $component.find('h4.modal-title').text(),
-        `${this.get('i18n').t('common.delete').string} ${this.get('i18n').t(
-          `common.${model.type}`
-        ).string}`,
+        `${this.get('i18n').t('common.delete').string} ${
+          this.get('i18n').t(`common.${model.type}`).string
+        }`,
         'Incorrect Title'
       );
     }.bind(this)
@@ -57,10 +57,8 @@ test('it renders', function(assert) {
   );
 });
 
-test('it calls a generic delete method and then a callback (if provided) after clicking on the delete button', function(
-  assert
-) {
-  assert.expect(33);
+test('it calls a generic delete method and then a callback (if provided) after clicking on the delete button', function(assert) {
+  assert.expect(36);
 
   const model = {
     deleteMethod: function() {
@@ -93,10 +91,8 @@ test('it calls a generic delete method and then a callback (if provided) after c
   );
 });
 
-test('it calls a generic delete method and then redirects (if a route is provided) after clicking on the delete button', function(
-  assert
-) {
-  assert.expect(44);
+test('it calls a generic delete method and then redirects (if a route is provided) after clicking on the delete button', function(assert) {
+  assert.expect(48);
 
   const model = {
     deleteMethod: function() {
@@ -141,9 +137,7 @@ test('it calls a generic delete method and then redirects (if a route is provide
   );
 });
 
-test('show spinner button component while the server response, after clicking on the delete button', function(
-  assert
-) {
+test('show spinner button component while the server response, after clicking on the delete button', function(assert) {
   assert.expect(4);
 
   const model = {

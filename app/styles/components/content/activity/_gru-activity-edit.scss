@@ -1,0 +1,67 @@
+.gru-activity-edit {
+  .offline-activity-icon {
+    background-image: url(../assets/gooru/images/offline.svg);
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+  }
+  #reference {
+    padding-top: 5vh;
+  }
+  .gru-references {
+    .detail {
+      float: right;
+    }
+    h3 {
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .panelBodyContainer {
+      display: flex;
+      flex-direction: column;
+      .textContainer {
+        display: flex;
+        flex-direction: column;
+        width: 50vw;
+
+        .referenceText {
+          display: inline-block;
+        }
+      }
+      .referenceArtifacts {
+        display: inline-block;
+
+        .add-item {
+          margin: 5px 0;
+        }
+
+        .separator {
+          margin: 0 15px;
+        }
+        .listItem {
+          // max-width: 200px;
+          display: inline-block;
+          vertical-align: middle;
+        }
+        // .newReferenceArtifact {
+        // }
+        // .open {
+        //   display: inline;
+        // }
+      }
+    }
+    .gru-edit-reference {
+      display: flex;
+      align-items: baseline;
+
+      .refInfo {
+        width: 40vw;
+        display: inline-block;
+      }
+
+      .gru-file-picker > div {
+        display: flex;
+      }
+    }
+  }
+}

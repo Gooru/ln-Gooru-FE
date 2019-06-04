@@ -174,6 +174,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'التقييم',
   'common.assessment-pl.other': 'التقييمات',
   'common.assessment-title': 'عنوان التقييم',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'ت',
   'common.assessments': 'التقييمات',
   'common.assign': 'تعيين',

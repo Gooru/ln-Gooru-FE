@@ -170,6 +170,9 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'Assessment',
   'common.assessment-pl.other': 'Assessments',
   'common.assessment-title': 'Assessment Title',
+  'common.activity-title': 'Activity Title',
+  'common.activity': 'Activity Title',
+
   'common.assessmentInitial': 'A',
   'common.assessments': 'Assessments',
   'common.assign': 'Assign',
@@ -1081,6 +1084,13 @@ export default Object.assign(quizzesTranslations, {
   'content.resources.edit.information.im-publisher': 'I\'m the publisher',
   'content.resources.edit.information.select-a-license':
     'Please select a license',
+  'content.oa.reference.uploaded': 'Uploaded',
+  'content.oa.reference.image': 'Image',
+  'content.oa.reference.pdf': 'Pdf',
+  'content.oa.reference.presentation': 'Presentation',
+  'content.oa.reference.document': 'Document',
+  'content.oa.reference.others': 'Others',
+
   'user.active-classrooms': 'Active Classrooms',
   'user.archived-classrooms': 'Archived Classrooms',
   'user.classrooms': 'Classrooms',

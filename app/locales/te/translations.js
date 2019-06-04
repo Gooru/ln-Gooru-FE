@@ -173,6 +173,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'అంచనా',
   'common.assessment-pl.other': 'లెక్కింపులు',
   'common.assessment-title': 'అంచనా శీర్షిక',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'ఒక',
   'common.assessments': 'లెక్కింపులు',
   'common.assign': 'కేటాయించవచ్చు',

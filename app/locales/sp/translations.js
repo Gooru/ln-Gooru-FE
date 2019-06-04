@@ -179,6 +179,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'Evaluación',
   'common.assessment-pl.other': 'Evaluaciones',
   'common.assessment-title': 'Título de la evaluación',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'UN',
   'common.assessments': 'Evaluaciones',
   'common.assign': 'Asignar',

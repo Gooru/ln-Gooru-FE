@@ -177,6 +177,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'ਮੁਲਾਂਕਣ',
   'common.assessment-pl.other': 'ਮੁਲਾਂਕਣ',
   'common.assessment-title': 'ਮੁਲਾਂਕਣ ਦਾ ਸਿਰਲੇਖ',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'a',
   'common.assessments': 'ਮੁਲਾਂਕਣ',
   'common.assign': 'ਨਿਰਧਾਰਤ ਕਰੋ',

@@ -178,6 +178,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'মূল্যাংকন',
   'common.assessment-pl.other': 'মূল্যাংকনবোৰ',
   'common.assessment-title': 'মূল্যাংকনৰ শিৰোনাম',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'A',
   'common.assessments': 'মূল্যাংকনবোৰ',
   'common.assign': 'অনুমোদন',

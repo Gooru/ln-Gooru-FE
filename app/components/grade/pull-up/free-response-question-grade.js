@@ -214,7 +214,7 @@ export default Ember.Component.extend({
       let totalRubricPoints = this.get('totalRubricPoints');
       let totalUserRubricPoints = this.get('totalUserRubricPoints');
       if (totalUserRubricPoints > 0) {
-        score = Math.floor(totalUserRubricPoints / totalRubricPoints * 100);
+        score = Math.floor((totalUserRubricPoints / totalRubricPoints) * 100);
       }
       return score;
     }
@@ -229,7 +229,7 @@ export default Ember.Component.extend({
     let gradeMaxScore = this.get('rubric.maxScore');
     let studentScore = this.get('userGrade.studentScore');
     if (studentScore > 0) {
-      score = Math.floor(studentScore / gradeMaxScore * 100);
+      score = Math.floor((studentScore / gradeMaxScore) * 100);
     }
     return score;
   }),
@@ -408,23 +408,22 @@ export default Ember.Component.extend({
     let isDCAContext = component.get('isDCAContext');
     let activityDate = component.get('context.activityDate');
     component.set('isLoading', true);
-    return Ember.RSVP
-      .hash({
-        question: this.get('questionService').readQuestion(questionId),
-        users: isDCAContext
-          ? this.get('rubricService').getDCAStudentsForQuestion(
-            questionId,
-            classId,
-            collectionId,
-            activityDate
-          )
-          : this.get('rubricService').getStudentsForQuestion(
-            questionId,
-            classId,
-            courseId,
-            collectionId
-          )
-      })
+    return Ember.RSVP.hash({
+      question: this.get('questionService').readQuestion(questionId),
+      users: isDCAContext
+        ? this.get('rubricService').getDCAStudentsForQuestion(
+          questionId,
+          classId,
+          collectionId,
+          activityDate
+        )
+        : this.get('rubricService').getStudentsForQuestion(
+          questionId,
+          classId,
+          courseId,
+          collectionId
+        )
+    })
       .then(({ users, question }) => {
         component.set('question', question);
         if (users.get('students') && users.get('students').length) {
@@ -499,33 +498,31 @@ export default Ember.Component.extend({
     let isDCAContext = component.get('isDCAContext');
     let activityDate = component.get('context.activityDate');
     component.set('isLoading', true);
-    return Ember.RSVP
-      .hash({
-        answer: isDCAContext
-          ? this.get('rubricService').getAnswerToGradeForDCA(
-            studentId,
-            classId,
-            collectionId,
-            questionId,
-            activityDate
-          )
-          : this.get('rubricService').getAnswerToGrade(
-            studentId,
-            classId,
-            courseId,
-            collectionId,
-            questionId,
-            unitId,
-            lessonId
-          )
-      })
-      .then(({ answer }) => {
-        if (!component.get('isDestroyed')) {
-          component.set('answer', answer);
-          component.set('isLoading', false);
-          component.handleCarouselControl();
-        }
-      });
+    return Ember.RSVP.hash({
+      answer: isDCAContext
+        ? this.get('rubricService').getAnswerToGradeForDCA(
+          studentId,
+          classId,
+          collectionId,
+          questionId,
+          activityDate
+        )
+        : this.get('rubricService').getAnswerToGrade(
+          studentId,
+          classId,
+          courseId,
+          collectionId,
+          questionId,
+          unitId,
+          lessonId
+        )
+    }).then(({ answer }) => {
+      if (!component.get('isDestroyed')) {
+        component.set('answer', answer);
+        component.set('isLoading', false);
+        component.handleCarouselControl();
+      }
+    });
   },
 
   /**
@@ -543,16 +540,18 @@ export default Ember.Component.extend({
 
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-      if (closeAll) {
-        component.sendAction('onClosePullUp');
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+        if (closeAll) {
+          component.sendAction('onClosePullUp');
+        }
       }
-    });
+    );
   },
 
   handleAppContainerScroll() {
@@ -591,7 +590,7 @@ export default Ember.Component.extend({
       level.set('selected', true);
       let totalPoints = category.get('totalPoints');
       let scoreInPrecentage = Math.floor(
-        level.get('score') / totalPoints * 100
+        (level.get('score') / totalPoints) * 100
       );
       category.set('scoreInPrecentage', scoreInPrecentage);
       category.set('selected', true);
@@ -619,7 +618,7 @@ export default Ember.Component.extend({
         $(this).popover('show');
         if (category.get('allowsScoring')) {
           let scoreInPrecentage = Math.floor(
-            level.get('score') / totalPoints * 100
+            (level.get('score') / totalPoints) * 100
           );
           Ember.$('.popover-title').css(
             'background-color',

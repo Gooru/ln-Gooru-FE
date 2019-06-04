@@ -178,6 +178,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'മൂല്യനിർണ്ണയം',
   'common.assessment-pl.other': 'വിലയിരുത്തലുകൾ',
   'common.assessment-title': 'വിലയിരുത്തൽ ശീർഷകം',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'a',
   'common.assessments': 'വിലയിരുത്തലുകൾ',
   'common.assign': 'നിയമിക്കുക',

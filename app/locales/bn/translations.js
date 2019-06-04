@@ -175,6 +175,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'মূল্যায়ন',
   'common.assessment-pl.other': 'মূল্যায়ন',
   'common.assessment-title': 'মূল্যায়ন শিরোনাম',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'একটি',
   'common.assessments': 'মূল্যায়ন',
   'common.assign': 'দায়িত্ব অর্পণ করা',

@@ -181,6 +181,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'மதிப்பீடு',
   'common.assessment-pl.other': 'மதிப்பீடுகளை',
   'common.assessment-title': 'மதிப்பீடு தலைப்பு',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'ஒரு',
   'common.assessments': 'மதிப்பீடுகளை',
   'common.assign': 'ஒதுக்க',

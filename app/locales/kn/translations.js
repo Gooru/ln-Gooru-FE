@@ -175,6 +175,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'ಮೌಲ್ಯಮಾಪನ',
   'common.assessment-pl.other': 'ಮೌಲ್ಯಮಾಪನಗಳು',
   'common.assessment-title': 'ಮೌಲ್ಯಮಾಪನ ಶೀರ್ಷಿಕೆ',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'a',
   'common.assessments': 'ಮೌಲ್ಯಮಾಪನಗಳು',
   'common.assign': 'ನಿಯೋಜಿಸಿ',
