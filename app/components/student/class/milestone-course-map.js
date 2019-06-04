@@ -60,6 +60,8 @@ export default Ember.Component.extend({
    */
   taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
+  competencyService: Ember.inject.service('api-sdk/competency'),
+
   /**
    * @property {Boolean} isTeacher
    */
@@ -104,6 +106,15 @@ export default Ember.Component.extend({
   fwCode: Ember.computed('class', function() {
     let preference = this.get('class.preference');
     return preference != null ? preference.get('framework') : null;
+  }),
+
+  /**
+   * @property {String} subjectCode
+   * Property for class preference subject code
+   */
+  subjectCode: Ember.computed('class', function() {
+    let preference = this.get('class.preference');
+    return preference != null ? preference.get('subject') : null;
   }),
 
   /**
@@ -156,6 +167,12 @@ export default Ember.Component.extend({
    * @type {Boolean}
    */
   showToggleButtonToViewFullCourse: false,
+
+  /**
+   * @property {Object} competencySummary
+   * Property for student destination based competency summary data
+   */
+  competencySummary: null,
 
   // -------------------------------------------------------------------------
   // Actions
@@ -261,6 +278,20 @@ export default Ember.Component.extend({
      */
     onToggleRescope() {
       this.toggleProperty('showAllRescopedContent');
+    },
+
+    //Action triggered when click on the student competencies progress graph
+    onClickProgressChart() {
+      this.get(
+        'router'
+      ).transitionTo('student.class.student-learner-proficiency', {
+        queryParams: {
+          userId: this.get('session.userId'),
+          classId: this.get('classId'),
+          courseId: this.get('courseId'),
+          role: ROLES.STUDENT
+        }
+      });
     }
   },
 
@@ -301,10 +332,14 @@ export default Ember.Component.extend({
     Ember.RSVP
       .hash({
         rescopedContents: component.getRescopedContents(),
-        grades: taxonomyService.fetchGradesBySubject(filters)
+        grades: taxonomyService.fetchGradesBySubject(filters),
+        competencySummary: component.get('isStudent')
+          ? component.fetchStudentCompetencySummary()
+          : null
       })
-      .then(({ rescopedContents, grades }) => {
+      .then(({ rescopedContents, grades, competencySummary }) => {
         if (!component.isDestroyed) {
+          component.set('competencySummary', competencySummary);
           let milestones = component.get('milestones');
           let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
             grades,
@@ -435,6 +470,27 @@ export default Ember.Component.extend({
           }
         }
       );
+  },
+
+  /**
+   * @function fetchStudentCompetencySummary
+   * Method to fetch student competency summary
+   */
+  fetchStudentCompetencySummary() {
+    const component = this;
+    const userId = component.get('studentId');
+    const classId = component.get('classId');
+    const courseId = component.get('courseId');
+    const subjectCode = component.get('subjectCode');
+    const requestBody = {
+      userId,
+      classId,
+      courseId,
+      subjectCode
+    };
+    return component
+      .get('competencyService')
+      .fetchStudentCompetencySummary(requestBody);
   },
 
   setMilestoneLessonPerformanceData(

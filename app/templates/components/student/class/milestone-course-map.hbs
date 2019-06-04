@@ -165,6 +165,16 @@
     </div>
   {{/each}}
 </div>
+{{#if competencySummary}}
+  <div class="competency-summary-graph">
+    {{charts.competencies-progress-graph
+      totalCount = competencySummary.totalCompetencies
+      masteredCount = competencySummary.completedCompetencies
+      inProgressCount = competencySummary.inprogressCompetencies
+      notStartedCount = competencySummary.notstartedCompetencies
+      onClickProgressChart = "onClickProgressChart"}}
+    </div>
+{{/if}}
 {{#if isLoading}}
   <div class="loading-spinner">
     {{three-bounce-spinner}}
