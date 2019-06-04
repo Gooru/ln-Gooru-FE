@@ -55,3 +55,15 @@ export function average(values) {
   }
   return roundFloat(result);
 }
+
+/**
+ * Method to calculate percentage from given number
+ * @param {Number} wholeNumber
+ * @param {Number} givenNumber
+ * @return {Number} percentage value
+ */
+export function findPercentage(wholeNumber, givenNumber) {
+  let percentage = 0;
+  percentage = wholeNumber && givenNumber ? givenNumber / wholeNumber * 100 : 0;
+  return percentage;
+}

@@ -417,7 +417,8 @@ span.validation.warning {
 
       &.active {
         i {
-          background: url("gooru/images/navigation_resource_selected_icon.svg") no-repeat;
+          background: url("gooru/images/navigation_resource_selected_icon.svg")
+            no-repeat;
         }
       }
     }
@@ -442,7 +443,8 @@ span.validation.warning {
 
       &.active {
         i {
-          background: url("gooru/images/navigation_question_selected.svg") no-repeat;
+          background: url("gooru/images/navigation_question_selected.svg")
+            no-repeat;
           background-size: contain;
         }
       }
@@ -686,7 +688,7 @@ label {
 }
 
 .competency-status-0 {
-  background-color: #e7e8e9;
+  background-color: #cdcdcd;
 }
 
 .competency-status-1 {
