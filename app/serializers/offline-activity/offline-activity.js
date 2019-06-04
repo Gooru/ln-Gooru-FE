@@ -132,6 +132,7 @@ export default Ember.Object.extend({
         activityData.suggested_content_type ||
         'Offline-activity',
       subFormat: activityData.subformat,
+      reference: activityData.reference,
       references: serializer.normalizeReferences(activityData.oa_references),
       rubric: serializer
         .get('rubricSerializer')

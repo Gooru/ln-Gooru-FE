@@ -265,5 +265,17 @@ export default Ember.Service.extend({
           );
         }, reject);
     });
+  },
+
+  oaTaskSubmissions(taskSubmissionPayload) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('offlineActivityAdapter')
+        .oaTaskSubmissions(taskSubmissionPayload)
+        .then(function() {
+          resolve(true);
+        }, reject);
+    });
   }
 });

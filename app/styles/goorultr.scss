@@ -81,6 +81,7 @@
 @import "controllers/student-independent-learning/learning-base";
 @import "controllers/not-found";
 @import "controllers/student-locate";
+@import "controllers/player-offline-activity";
 
 // TODO: update these components so they follow the naming conventions
 @import "components/app-dropdown";
@@ -167,7 +168,6 @@
 @import "components/charts/student-domain-performance";
 @import "components/charts/proficiency-view";
 @import "components/charts/score-fill-gauge-chart";
-@import "components/charts/competencies-progress-graph";
 @import "components/class/gru-class-navigation";
 @import "components/class/gru-class-navbar";
 @import "components/class/gru-class-activity-panel";
@@ -473,3 +473,8 @@
 
 //CA pull-up
 @import "components/teacher/class/ca-pull-up";
+
+//Offline Activity Player
+@import "components/player/offline-activity/gru-offline-activity-start-page";
+@import "components/player/offline-activity/gru-offline-activity-submission";
+@import "components/player/offline-activity/gru-offline-activity-task-submission";

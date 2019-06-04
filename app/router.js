@@ -270,6 +270,9 @@ Router.map(function() {
   this.route('preference');
   this.route('library');
   this.route('library-search');
+  this.route('player-offline-activity', {
+    path: 'player-offline-activity/:offlineActivityId'
+  });
 });
 
 export default Router;
