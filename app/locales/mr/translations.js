@@ -1,4 +1,4 @@
-﻿import quizzesTranslations from './quizzes/translations';
+import quizzesTranslations from './quizzes/translations';
 
 export default Object.assign(quizzesTranslations, {
   en: 'English',

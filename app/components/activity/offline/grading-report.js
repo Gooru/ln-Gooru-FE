@@ -1,12 +1,8 @@
 import Ember from 'ember';
-import {
-  getGradeColor
-} from 'gooru-web/utils/utils';
+import { getGradeColor } from 'gooru-web/utils/utils';
 import RubricGrade from 'gooru-web/models/rubric/rubric-grade';
 import RubricCategoryScore from 'gooru-web/models/rubric/grade-category-score';
 export default Ember.Component.extend({
-
-
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -17,7 +13,9 @@ export default Ember.Component.extend({
   /**
    * @requires service:api-sdk/offline-activity-analytics
    */
-  oaAnaltyicsService: Ember.inject.service('api-sdk/offline-activity/oa-analytics'),
+  oaAnaltyicsService: Ember.inject.service(
+    'api-sdk/offline-activity/oa-analytics'
+  ),
 
   /**
    * @type {ProfileService} Service to retrieve profile information
@@ -90,9 +88,9 @@ export default Ember.Component.extend({
    * @type {Object}
    */
   categories: Ember.computed('userGrade', function() {
-    let categories = this.get('userGrade.categories') ?
-      this.get('userGrade.categories') :
-      Ember.A([]);
+    let categories = this.get('userGrade.categories')
+      ? this.get('userGrade.categories')
+      : Ember.A([]);
     categories.map(category => {
       let levels = category.get('levels');
       if (levels) {
@@ -351,39 +349,39 @@ export default Ember.Component.extend({
     let classId = component.get('classId');
     let activityId = component.get('activityId');
     return Ember.RSVP.hash({
-      users: component.get('oaAnaltyicsService').getStudentListToGrade(classId, activityId)
-    }).then(({
-      users
-    }) => {
-      if (users.get('students') && users.get('students').length) {
-        return Ember.RSVP.hash({
-          users: component.get('profileService').readMultipleProfiles(
-            users.get('students')
-          )
-        });
-      }
-    }).then(({
-      users
-    }) => {
-      if (!component.get('isDestroyed')) {
-        users.map(user => {
-          let rubric = component.get('rubric');
-          let newRubric = rubric ? rubric.copy() : rubric;
-          user.set(
-            'rubricGrade',
-            component.createRubricGrade(newRubric, user)
-          );
-        });
-        let studentId = component.get('studentId');
-        if (!studentId) {
-          studentId = users.get('firstObject.id');
-          component.set('studentId', studentId);
+      users: component
+        .get('oaAnaltyicsService')
+        .getStudentListToGrade(classId, activityId)
+    })
+      .then(({ users }) => {
+        if (users.get('students') && users.get('students').length) {
+          return Ember.RSVP.hash({
+            users: component
+              .get('profileService')
+              .readMultipleProfiles(users.get('students'))
+          });
         }
-        component.set('users', users);
-        component.set('isLoading', false);
-        component.handleCarouselControl();
-      }
-    });
+      })
+      .then(({ users }) => {
+        if (!component.get('isDestroyed')) {
+          users.map(user => {
+            let rubric = component.get('rubric');
+            let newRubric = rubric ? rubric.copy() : rubric;
+            user.set(
+              'rubricGrade',
+              component.createRubricGrade(newRubric, user)
+            );
+          });
+          let studentId = component.get('studentId');
+          if (!studentId) {
+            studentId = users.get('firstObject.id');
+            component.set('studentId', studentId);
+          }
+          component.set('users', users);
+          component.set('isLoading', false);
+          component.handleCarouselControl();
+        }
+      });
   },
 
   setupTooltip() {
@@ -455,7 +453,8 @@ export default Ember.Component.extend({
 
   createRubricCategory(category, level) {
     let rubricCategory = RubricCategoryScore.create(
-      Ember.getOwner(this).ownerInjection(), {
+      Ember.getOwner(this).ownerInjection(),
+      {
         title: category.get('title')
       }
     );
@@ -484,7 +483,6 @@ export default Ember.Component.extend({
     });
   },
 
-
   loadData() {
     let component = this;
     component.handleCarouselControl();
@@ -494,22 +492,24 @@ export default Ember.Component.extend({
    */
   openPullUp() {
     let component = this;
-    component.$().animate({
-      top: '10%'
-    },
-    400
+    component.$().animate(
+      {
+        top: '10%'
+      },
+      400
     );
   },
 
   closePullUp() {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-    }
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+      }
     );
   },
 

@@ -274,16 +274,9 @@ Router.map(function() {
   this.route('preference');
   this.route('library');
   this.route('library-search');
-
-  /* this.route('app', function() {
-    this.route('routes', function() {
-      this.route('content', function() {
-        this.route('activity', function() {
-          this.route('edit');
-        });
-      });
-    });
-  }); */
+  this.route('player-offline-activity', {
+    path: 'player-offline-activity/:offlineActivityId'
+  });
 });
 
 export default Router;

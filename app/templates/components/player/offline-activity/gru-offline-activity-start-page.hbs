@@ -1,0 +1,43 @@
+<div class="player-start-page-container">
+  <div class="project-container">
+    <div class="project-thumbnail-container">
+      <div class="project-standards">
+        {{#if oaTaxonomies.length}}
+          {{taxonomy.gru-taxonomy-tag-list tags=oaTaxonomies tagsVisible=1 isInCard=true}}
+        {{/if}}
+      </div>
+      <div class="project-type">
+        <span class="project-type-label">Project: </span>
+        <span class="project-type-value">{{offlineActivity.subFormat}}</span>
+      </div>
+    </div>
+    <div class="project-description-container">
+      <div class="description-label ellipsis">
+        {{offlineActivity.title}}
+      </div>
+      <div class="description-text">
+        {{offlineActivity.learningObjectives}}
+      </div>
+    </div>
+    <div class="project-references-container">
+      <div class="reference-icon"></div>
+      <div class="reference-info">
+        <div class="reference-label">References</div>
+        <div class="reference-links">{{activityReferences.length}} Links</div>
+      </div>
+    </div>
+  </div>
+  <div class="tasks-container">
+    {{#each activityTasks as |task|}}
+      {{player.offline-activity.gru-offline-activity-task-submission task = task isPreview = true}}
+    {{/each}}
+  </div>
+  <div class="actions-container">
+    <div class="cancel-action action-btn" {{action "onClosePlayer"}}>
+      Cancel
+    </div>
+    <div class="start-action action-btn" {{action "onStartPlayer"}}>
+      Start
+    </div>
+  </div>
+</div>
