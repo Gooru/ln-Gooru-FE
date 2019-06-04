@@ -82,7 +82,8 @@ export default Object.assign(quizzesTranslations, {
   'common.gooru-catalog': 'गुरू कॅटलॉग',
   'common.suggestion-made-to': 'सूचित केले',
   'common.student-selected': 'विद्यार्थी निवडले',
-  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
   'common.no-suggest-result-message':
     'तुम्ही शोधत आहात त्याच्याशी साम्य असणारा मजकूर सापडला नाही',
   'common.no-search-result':
@@ -175,6 +176,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'मूल्यांकन',
   'common.assessment-pl.other': 'मूल्यांकन',
   'common.assessment-title': 'मूल्यांकन शीर्षक',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'अ',
   'common.assessments': 'मूल्यांकन',
   'common.assign': 'सोपवा',

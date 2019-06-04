@@ -189,6 +189,9 @@
 @import "components/profile/gru-navigation-tabs";
 @import "components/profile/_change-password";
 @import "components/content/assessments/gru-assessment-edit";
+@import "components/content/activity/_gru-activity-edit.scss";
+
+@import "components/content/activity/_gru-activity-edit.scss";
 @import "components/content/gru-audience";
 @import "components/content/gru-category";
 @import "components/content/gru-image";
@@ -473,6 +476,5 @@
 //CA pull-up
 @import "components/teacher/class/ca-pull-up";
 
-
 //OA Grading reports
-@import "components/activity/offline/grading-report"
+@import "components/activity/offline/grading-report";

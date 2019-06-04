@@ -79,7 +79,8 @@ export const CONTENT_TYPES = {
   RESOURCE: 'resource',
   QUESTION: 'question',
   RUBRIC: 'rubric',
-  OFFLINE_ACTIVITY: 'offline-activity'
+  OFFLINE_ACTIVITY: 'offline-activity',
+  ACTIVITY: 'activity'
 };
 
 export const ASSESSMENT_SUB_TYPES = {

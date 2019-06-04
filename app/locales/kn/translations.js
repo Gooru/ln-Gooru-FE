@@ -73,9 +73,12 @@ export default Object.assign(quizzesTranslations, {
   'search-help-message': 'Choose filters to apply',
   'library-search-placeholder': 'Search for anything within the library…',
   'common.avg-score': 'Avg Score',
-  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.frq': 'FRQ',
   'common.plan': 'plan',
   'offline-activities.no-completed-content':
@@ -84,7 +87,7 @@ export default Object.assign(quizzesTranslations, {
     'There are no projects or other offline activities that the students are currently working on',
   'common.schedule': 'Schedule',
   'common.responses': 'Responses',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.no-lesson-info-message': 'This unit does have any lessons.',
   'common.no-collection-info-message': 'This lesson does have any collections.',
@@ -172,6 +175,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'ಮೌಲ್ಯಮಾಪನ',
   'common.assessment-pl.other': 'ಮೌಲ್ಯಮಾಪನಗಳು',
   'common.assessment-title': 'ಮೌಲ್ಯಮಾಪನ ಶೀರ್ಷಿಕೆ',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'a',
   'common.assessments': 'ಮೌಲ್ಯಮಾಪನಗಳು',
   'common.assign': 'ನಿಯೋಜಿಸಿ',
@@ -216,7 +220,8 @@ export default Object.assign(quizzesTranslations, {
   'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'ಸಂಗ್ರಹಣೆಗಳು',
   'common.collection-pl.one': 'ಸಂಗ್ರಹ',
-  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
   'common.collection-pl.other': 'ಸಂಗ್ರಹಣೆಗಳು',
   'common.collection-title': 'ಸಂಗ್ರಹ ಶೀರ್ಷಿಕೆ',
   'common.collections': 'ಸಂಗ್ರಹಣೆಗಳು',

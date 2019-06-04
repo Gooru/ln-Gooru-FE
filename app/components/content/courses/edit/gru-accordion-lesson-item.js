@@ -39,7 +39,13 @@ export default PlayerAccordionLessonItem.extend(ModalMixin, {
       var route = item.get('isCollection')
         ? 'content.collections.edit'
         : 'content.assessments.edit';
-      component.get('router').transitionTo(route, item.get('id'));
+
+      if (item.get('collectionType') === 'offline-activity') {
+        route = 'content.activity.edit';
+      }
+      component.get('router').transitionTo(route, item.get('id'), {
+        queryParams: { editingContent: true }
+      });
     },
 
     /**

@@ -258,6 +258,8 @@ export default (function() {
       properties.centurySkills = centurySkills.slice(0);
 
       properties.children = this.get('children');
+      properties.references = this.get('references');
+      properties.tasks = this.get('tasks');
 
       return this.get('constructor').create(
         Ember.getOwner(this).ownerInjection(),
