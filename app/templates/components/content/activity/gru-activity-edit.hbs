@@ -144,9 +144,9 @@
 </section>
 <section id="task">
   <div class="header">
-    {{content.activity.gru-tasks}}
+    {{content.activity.gru-tasks activityModel=activityCollection tasks=tempCollection.tasks updateParent=(action 'modelSourceFromChildChanges')}}
   </div>
 </section>
 <section id="rubrics">
-  {{content.activity.gru-rubrics}}
+  {{!-- {{content.activity.gru-rubrics}} --}}
 </section>

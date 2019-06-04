@@ -1,0 +1,6 @@
+<button {{action 'updateContent'}}>Save</button>
+<button>Cancel </button>
+{{oaId}}
+{{validation.gru-input model=model valuePath='title' maxLength=50 didValidate=true}}
+{{validation.gru-input model=model valuePath='description' maxLength=50 didValidate=true}}
+{{content.activity.task.gru-submissions}}

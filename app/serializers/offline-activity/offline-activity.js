@@ -377,5 +377,19 @@ export default Ember.Object.extend({
     return Ember.Object.create({
       students: students ? students : null
     });
+  },
+
+  /**
+   *
+   * @param {json} payload
+   * Returns object
+   */
+  serializeCreateTask(payload) {
+    return {
+      id: payload.id,
+      oa_id: payload.oaId,
+      title: payload.title,
+      description: payload.description
+    };
   }
 });

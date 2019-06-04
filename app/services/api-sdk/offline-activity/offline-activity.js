@@ -140,11 +140,11 @@ export default Ember.Service.extend({
   createReferences: function(referenceData) {
     var service = this;
     let serializedReferenceData = service
-      .get('activitySerializer')
+      .get('offlineActivitySerializer')
       .serializeReferenceData(referenceData);
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
-        .get('activityAdapter')
+        .get('offlineActivityAdapter')
         .createReferences(referenceData.oaId, serializedReferenceData)
         .then(
           function(responseData, textStatus, request) {
@@ -277,6 +277,48 @@ export default Ember.Service.extend({
         .deleteReference(reference.oaId, reference.id)
         .then(function() {
           resolve();
+        }, reject);
+    });
+  },
+
+  //--------------Tasks------------------
+  createTask(taskPayLoad) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      let serializedTaskPayLoad = service
+        .get('offlineActivitySerializer')
+        .serializeCreateTask(taskPayLoad);
+      service
+        .get('offlineActivityAdapter')
+        .createTask({
+          body: serializedTaskPayLoad
+        })
+        .then(
+          function(responseData, textStatus, request) {
+            let id = request.getResponseHeader('location');
+            taskPayLoad.set('id', id);
+            resolve(taskPayLoad);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+  /**
+   * Remove Task
+   *
+   * @param {taskPayLoad} task to remove
+   * @returns {Ember.RSVP.Promise}
+   */
+  removeTask: function(taskPayLoad) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('offlineActivityAdapter')
+        .removeTask(taskPayLoad.oaId, taskPayLoad.id)
+        .then(function() {
+          resolve(taskPayLoad);
         }, reject);
     });
   }

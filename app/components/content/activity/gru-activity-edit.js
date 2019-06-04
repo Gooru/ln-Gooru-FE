@@ -284,6 +284,7 @@ export default CollectionEdit.extend({
 
     modelSourceFromChildChanges(editingModel) {
       const component = this;
+      editingModel = editingModel || component.get('tempCollection');
       component.refreshSourceWithChanges(
         editingModel,
         component.get('activityCollection')

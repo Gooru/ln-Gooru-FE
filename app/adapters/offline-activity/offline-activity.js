@@ -273,5 +273,47 @@ export default Ember.Object.extend({
       data: JSON.stringify(taskSubmissionPayload)
     };
     return Ember.$.ajax(url, options);
+  },
+
+  //--------------Tasks------------------
+  /**
+   * Posts a new activity
+   *
+   * @param data activity data to be sent in the request body
+   * @returns {Promise}
+   */
+  createTask: function(data) {
+    const adapter = this;
+    const url = `${this.get('namespace')}/${data.body.oa_id}/tasks`;
+    const options = {
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(data.body)
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Deletes an task by oaId and id
+   *
+   * @param reference id to be sent
+   * @returns {Promise}
+   */
+  removeTask: function(oaId, taskId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${oaId}/tasks/${taskId}`;
+    const options = {
+      type: 'DELETE',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
   }
 });
