@@ -2,125 +2,86 @@ import Ember from 'ember';
 import { getGradeColor } from 'gooru-web/utils/utils';
 import RubricGrade from 'gooru-web/models/rubric/rubric-grade';
 import RubricCategoryScore from 'gooru-web/models/rubric/grade-category-score';
-import { PLAYER_EVENT_SOURCE, CONTENT_TYPES } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
-  // Dependencies
+  // Attributes
 
+  classNames: ['grade', 'backdrop-pull-ups', 'oa-grading-report'],
+
+  // -------------------------------------------------------------------------
+  // Dependencies
   /**
-   * @type {RubricService} Service to retrieve rubric information
+   * @requires service:api-sdk/offline-activity-analytics
    */
-  rubricService: Ember.inject.service('api-sdk/rubric'),
+  oaAnaltyicsService: Ember.inject.service(
+    'api-sdk/offline-activity/oa-analytics'
+  ),
 
   /**
    * @type {ProfileService} Service to retrieve profile information
    */
   profileService: Ember.inject.service('api-sdk/profile'),
 
-  /**
-   * @type {ProfileService} Service to retrieve question information
-   */
-  questionService: Ember.inject.service('api-sdk/question'),
-
-  // -------------------------------------------------------------------------
-  // Attributes
-
-  classNames: ['grade', 'backdrop-pull-ups', 'free-response-question-grade'],
-
-  // -------------------------------------------------------------------------
-  // Events
-
-  /**
-   * Function to triggered once when the component element is first rendered.
-   */
-  didInsertElement() {
-    this._super(...arguments);
-    this.openPullUp();
-    this.initialize();
-  },
-
-  didDestroyElement() {
-    this.handleAppContainerScroll();
-  },
-
-  /**
-   * Function to triggered once when the component element is after rendered
-   */
-  didRender() {
-    this._super(...arguments);
-    let component = this;
-    component.setupTooltip();
-    component.handleAppContainerScroll();
-  },
-
   // -------------------------------------------------------------------------
   // Properties
 
   /**
-   * ClassId belongs to this FRQ grade item.
+   * Content of this OA grade item.
+   * @type {Object}
+   */
+  content: Ember.computed.alias('context.content'),
+
+  /**
+   * Content Id of this OA grade item.
    * @type {String}
    */
-  classId: Ember.computed.alias('context.classId'),
+  activityId: Ember.computed.alias('context.content.id'),
 
   /**
-   * CourseId belongs to this FRQ grade item.
-   * @type {String}
-   */
-  courseId: Ember.computed.alias('context.courseId'),
-
-  /**
-   * Unit belongs to this FRQ grade item.
-   * @type {Object}
-   */
-  unit: Ember.computed.alias('context.unit'),
-
-  /**
-   * Lesson belongs to this FRQ grade item.
-   * @type {Object}
-   */
-  lesson: Ember.computed.alias('context.lesson'),
-
-  /**
-   * Collection of this FRQ grade item.
-   * @type {Object}
-   */
-  collection: Ember.computed.alias('context.collection'),
-
-  /**
-   * Question of this FRQ grade item.
-   * @type {Object}
-   */
-  question: Ember.computed.alias('context.content'),
-
-  /**
-   * Propery to hide the default pullup.
-   * @property {Boolean}
-   */
-  showPullUp: false,
-
-  /**
-   * It maintains the state of loading
-   * @type {Boolean}
-   */
-  isLoading: false,
-
-  /**
-   * List of users who need grading
+   * Tasks of this OA grade item.
    * @type {Array}
    */
-  users: Ember.A([]),
+  tasks: Ember.computed.alias('context.content.tasks'),
 
   /**
-   *  Rubric which is associated with question
+   * Rubrics of this OA grade item.
    * @type {Object}
    */
-  rubric: null,
+  rubric: Ember.computed.alias('context.content.rubric.firstObject'),
 
   /**
-   * Answer data provided by the users
-   * @type {Object}
+   * Student count of this OA grade item.
+   * @type {Number}
    */
-  answer: null,
+  studentCount: Ember.computed.alias('context.studentCount'),
+
+  /**
+   * Maintains the value of selected user index.
+   * @return {Number}
+   */
+  currentStudentIndex: Ember.computed('studentId', 'users', function() {
+    let studentIndex = 1;
+    let users = this.get('users');
+    if (users) {
+      let studentId = this.get('studentId');
+      let user = users.findBy('id', studentId);
+      studentIndex = users.indexOf(user) + 1;
+    }
+    return studentIndex;
+  }),
+
+  /**
+   * Maintains the user grade
+   * @return {Object}
+   */
+  userGrade: Ember.computed('studentId', 'users.[]', function() {
+    let studentId = this.get('studentId');
+    let user;
+    if (this.get('users')) {
+      user = this.get('users').findBy('id', studentId);
+    }
+    return user ? user.get('rubricGrade') : null;
+  }),
 
   /**
    * Computed Properties for rubric categories
@@ -141,22 +102,6 @@ export default Ember.Component.extend({
     });
     return categories ? categories : Ember.A([]);
   }),
-
-  /**
-   * Maintains the user grade
-   * @return {Object}
-   */
-  userGrade: Ember.computed('studentId', 'users.[]', function() {
-    let studentId = this.get('studentId');
-    let user = this.get('users').findBy('id', studentId);
-    return user ? user.get('rubricGrade') : null;
-  }),
-
-  /**
-   *  Maintains student id value who requires grading
-   * @type {String}
-   */
-  studentId: null,
 
   /**
    * Calculate rubric total points
@@ -247,23 +192,6 @@ export default Ember.Component.extend({
     return score;
   }),
 
-  /**
-   * Maintains the value of selected user index.
-   * @return {Number}
-   */
-  currentStudentIndex: Ember.computed('studentId', 'users', function() {
-    let users = this.get('users');
-    let studentId = this.get('studentId');
-    let user = users.findBy('id', studentId);
-    return users.indexOf(user) + 1;
-  }),
-
-  /**
-   * Maintains the  list of question items  need to grade.
-   * @type {Array}
-   */
-  itemsToGrade: Ember.A([]),
-
   // -------------------------------------------------------------------------
   // Actions
 
@@ -271,8 +199,8 @@ export default Ember.Component.extend({
     /**
      * Action triggered when the user invoke the pull up.
      **/
-    onPullUpClose(closeAll) {
-      this.closePullUp(closeAll);
+    onPullUpClose() {
+      this.closePullUp();
     },
 
     /**
@@ -280,13 +208,13 @@ export default Ember.Component.extend({
      */
     onShowAddCommentBox(categoryIndex) {
       let component = this;
-      let element = component.$(`#frq-grade-rubric-category-${categoryIndex}`);
+      let element = component.$(`#oa-grade-rubric-category-${categoryIndex}`);
       if (element.hasClass('comment-active')) {
-        element.find('.frq-grade-comment-section').slideUp(400, function() {
+        element.find('.oa-grade-comment-section').slideUp(400, function() {
           element.removeClass('comment-active');
         });
       } else {
-        element.find('.frq-grade-comment-section').slideDown(400, function() {
+        element.find('.oa-grade-comment-section').slideDown(400, function() {
           element.addClass('comment-active');
         });
       }
@@ -317,12 +245,12 @@ export default Ember.Component.extend({
       let component = this;
       component
         .$(
-          '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control'
+          '.oa-grade-students-carousel #oa-grade-students-carousel-wrapper .carousel-control'
         )
         .addClass('in-active');
       let users = component.get('users');
       let selectedElement = component.$(
-        '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .item.active'
+        '.oa-grade-students-carousel #oa-grade-students-carousel-wrapper .item.active'
       );
       let currentIndex = selectedElement.data('item-index');
       let selectedIndex = selectedElement.data('item-index') - 1;
@@ -332,7 +260,7 @@ export default Ember.Component.extend({
       let user = users.objectAt(selectedIndex);
       component.set('studentId', user.get('id'));
       component
-        .$('.frq-grade-students-carousel #frq-grade-students-carousel-wrapper')
+        .$('.oa-grade-students-carousel #oa-grade-students-carousel-wrapper')
         .carousel('prev');
       component.loadData();
     },
@@ -341,12 +269,12 @@ export default Ember.Component.extend({
       let component = this;
       component
         .$(
-          '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control'
+          '.oa-grade-students-carousel #oa-grade-students-carousel-wrapper .carousel-control'
         )
         .addClass('in-active');
       let users = component.get('users');
       let selectedElement = component.$(
-        '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .item.active'
+        '.oa-grade-students-carousel #oa-grade-students-carousel-wrapper .item.active'
       );
       let currentIndex = selectedElement.data('item-index');
       let selectedIndex = currentIndex + 1;
@@ -356,7 +284,7 @@ export default Ember.Component.extend({
       let user = users.objectAt(selectedIndex);
       component.set('studentId', user.get('id'));
       component
-        .$('.frq-grade-students-carousel #frq-grade-students-carousel-wrapper')
+        .$('.oa-grade-students-carousel #oa-grade-students-carousel-wrapper')
         .carousel('next');
       component.loadData();
     },
@@ -365,15 +293,8 @@ export default Ember.Component.extend({
      * Action triggered when general comment section got focus in/out.
      */
     updateUserGradeComment() {
-      let comment = this.$('.frq-grade-general-comment-container p').text();
+      let comment = this.$('.oa-grade-general-comment-container p').text();
       this.set('userGrade.comment', comment);
-    },
-
-    /**
-     * Action get triggered when user submit grade for student.
-     */
-    submitUserGrade() {
-      this.saveUserGrade();
     },
 
     /**
@@ -394,193 +315,92 @@ export default Ember.Component.extend({
     }
   },
 
-  //--------------------------------------------------------------------------
-  // Methods
+  // -------------------------------------------------------------------------
+  // Events
+
+  /**
+   * Function to triggered once when the component element is first rendered.
+   */
+  didInsertElement() {
+    this._super(...arguments);
+    this.openPullUp();
+    this.initialize();
+  },
+
+  didDestroyElement() {
+    this.handleAppContainerScroll();
+  },
+
+  /**
+   * Function to triggered once when the component element is after rendered
+   */
+  didRender() {
+    this._super(...arguments);
+    let component = this;
+    component.setupTooltip();
+    component.handleAppContainerScroll();
+  },
+
+  // -------------------------------------------------------------------------
+  //Methods
 
   initialize() {
     let component = this;
     let classId = component.get('classId');
-    let courseId = component.get('courseId');
-    let unitId = component.get('unitId');
-    let lessonId = component.get('lessonId');
-    let collectionId = component.get('collection.id');
-    let questionId = component.get('question.id');
-    let isDCAContext = component.get('isDCAContext');
-    let activityDate = component.get('context.activityDate');
-    component.set('isLoading', true);
+    let activityId = component.get('activityId');
     return Ember.RSVP
       .hash({
-        question: this.get('questionService').readQuestion(questionId),
-        users: isDCAContext
-          ? this.get('rubricService').getDCAStudentsForQuestion(
-            questionId,
-            classId,
-            collectionId,
-            activityDate
-          )
-          : this.get('rubricService').getStudentsForQuestion(
-            questionId,
-            classId,
-            courseId,
-            collectionId
-          )
+        users: component
+          .get('oaAnaltyicsService')
+          .getStudentListToGrade(classId, activityId)
       })
-      .then(({ users, question }) => {
-        component.set('question', question);
+      .then(({ users }) => {
         if (users.get('students') && users.get('students').length) {
-          let studentId = component.get('studentId');
-          if (!studentId) {
-            studentId = users.get('students.firstObject');
-            component.set('studentId', studentId);
-          }
-
           return Ember.RSVP.hash({
-            answer: isDCAContext
-              ? this.get('rubricService').getAnswerToGradeForDCA(
-                studentId,
-                classId,
-                collectionId,
-                questionId,
-                activityDate
-              )
-              : this.get('rubricService').getAnswerToGrade(
-                studentId,
-                classId,
-                courseId,
-                collectionId,
-                questionId,
-                unitId,
-                lessonId
-              ),
-            rubric: question.get('rubric.id')
-              ? this.get('rubricService').getRubric(question.get('rubric.id'))
-              : null,
-            userIds: users.get('students'),
-            users: this.get('profileService').readMultipleProfiles(
-              users.get('students')
-            ),
-            currentUserId: studentId,
-            classId,
-            questionId,
-            courseId,
-            collectionId,
-            unitId,
-            lessonId
+            users: component
+              .get('profileService')
+              .readMultipleProfiles(users.get('students'))
           });
         }
       })
-      .then(({ users, rubric, answer }) => {
+      .then(({ users }) => {
         if (!component.get('isDestroyed')) {
           users.map(user => {
+            let rubric = component.get('rubric');
             let newRubric = rubric ? rubric.copy() : rubric;
             user.set(
               'rubricGrade',
               component.createRubricGrade(newRubric, user)
             );
           });
+          let studentId = component.get('studentId');
+          if (!studentId) {
+            studentId = users.get('firstObject.id');
+            component.set('studentId', studentId);
+          }
           component.set('users', users);
-          component.set('rubric', rubric);
-          component.set('answer', answer);
           component.set('isLoading', false);
           component.handleCarouselControl();
         }
       });
   },
 
-  loadData() {
-    let component = this;
-    let classId = component.get('classId');
-    let courseId = component.get('courseId');
-    let unitId = component.get('unitId');
-    let lessonId = component.get('lessonId');
-    let collectionId = component.get('collection.id');
-    let questionId = component.get('question.id');
-    let studentId = component.get('studentId');
-    let isDCAContext = component.get('isDCAContext');
-    let activityDate = component.get('context.activityDate');
-    component.set('isLoading', true);
-    return Ember.RSVP
-      .hash({
-        answer: isDCAContext
-          ? this.get('rubricService').getAnswerToGradeForDCA(
-            studentId,
-            classId,
-            collectionId,
-            questionId,
-            activityDate
-          )
-          : this.get('rubricService').getAnswerToGrade(
-            studentId,
-            classId,
-            courseId,
-            collectionId,
-            questionId,
-            unitId,
-            lessonId
-          )
-      })
-      .then(({ answer }) => {
-        if (!component.get('isDestroyed')) {
-          component.set('answer', answer);
-          component.set('isLoading', false);
-          component.handleCarouselControl();
-        }
-      });
-  },
-
-  /**
-   * Function to animate the  pullup from bottom to top
-   */
-  openPullUp() {
-    let component = this;
-    component.$().animate(
-      {
-        top: '10%'
-      },
-      400
-    );
-  },
-
-  closePullUp(closeAll) {
-    let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-      if (closeAll) {
-        component.sendAction('onClosePullUp');
-      }
-    });
-  },
-
-  handleAppContainerScroll() {
-    let activePullUpCount = Ember.$(document.body).find('.backdrop-pull-ups')
-      .length;
-    if (activePullUpCount > 0) {
-      Ember.$(document.body).addClass('no-vertical-scroll');
-    } else if (activePullUpCount === 0) {
-      Ember.$(document.body).removeClass('no-vertical-scroll');
-    }
-  },
-
-  setupTooltip: function() {
+  setupTooltip() {
     let component = this;
     let categories = component.get('categories');
-    component.$('.frq-grade-info-popover').popover({
+    component.$('.oa-grade-info-popover').popover({
       placement: 'top auto',
-      container: '.free-response-question-grade',
+      container: '.oa-grading-report',
       trigger: 'manual'
     });
     let isMobile = window.matchMedia('only screen and (max-width: 768px)');
     if (isMobile.matches) {
       component.$('.close-popover').click(function() {
-        component.$('.frq-grade-info-popover').popover('hide');
+        component.$('.oa-grade-info-popover').popover('hide');
       });
     }
 
-    component.$('.frq-grade-info-popover').on('click', function() {
+    component.$('.oa-grade-info-popover').on('click', function() {
       let levelIndex = component.$(this).data('level');
       let categoryIndex = component.$(this).data('category');
       let category = categories.objectAt(categoryIndex);
@@ -597,7 +417,7 @@ export default Ember.Component.extend({
       category.set('selected', true);
       if (isMobile.matches) {
         component
-          .$('.frq-grade-info-popover')
+          .$('.oa-grade-info-popover')
           .not(this)
           .popover('hide');
         component.$(this).popover('show');
@@ -607,10 +427,10 @@ export default Ember.Component.extend({
       }
     });
     if (!isMobile.matches) {
-      component.$('.frq-grade-info-popover').on('mouseleave', function() {
+      component.$('.oa-grade-info-popover').on('mouseleave', function() {
         $(this).popover('hide');
       });
-      component.$('.frq-grade-info-popover').on('mouseenter', function() {
+      component.$('.oa-grade-info-popover').on('mouseenter', function() {
         let levelIndex = component.$(this).data('level');
         let categoryIndex = component.$(this).data('category');
         let category = categories.objectAt(categoryIndex);
@@ -657,58 +477,48 @@ export default Ember.Component.extend({
       comment: '',
       studentId: user.get('id'),
       classId: component.get('classId'),
-      courseId: component.get('courseId'),
-      unitId: component.get('unit.id'),
-      lessonId: component.get('lesson.id'),
-      collectionId: component.get('collection.id'),
-      resourceId: component.get('question.id'),
+      collectionId: component.get('contentId'),
       createdDate: new Date(),
-      rubricCreatedDate: component.get('rubric.createdDate'),
-      rubricUpdatedDate: component.get('updatedDate'),
+      rubricCreatedDate: component.get('rubrics.createdDate'),
       studentScore: 0
     });
   },
 
-  saveUserGrade() {
+  loadData() {
     let component = this;
-    let userGrade = component.get('userGrade');
-    let categories = component.get('categories');
-    let context = component.get('context');
-    let isDCAContext = component.get('isDCAContext');
-    let categoriesScore = Ember.A([]);
-    categories.forEach(category => {
-      let level = null;
-      if (category.get('allowsLevels')) {
-        level = category.get('levels').findBy('selected', true);
-        categoriesScore.pushObject(
-          component.createRubricCategory(category, level)
-        );
-      } else if (category.get('comment')) {
-        categoriesScore.pushObject(
-          component.createRubricCategory(category, level)
-        );
-      }
+    component.handleCarouselControl();
+  },
+  /**
+   * Function to animate the  pullup from bottom to top
+   */
+  openPullUp() {
+    let component = this;
+    component.$().animate(
+      {
+        top: '10%'
+      },
+      400
+    );
+  },
+
+  closePullUp() {
+    let component = this;
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
     });
-    userGrade.set('categoriesScore', categoriesScore);
-    userGrade.set('sessionId', component.get('answer.sessionId'));
-    userGrade.set('updatedDate', new Date());
-    if (isDCAContext) {
-      userGrade.set('activityDate', context.get('activityDate'));
-      userGrade.set('contentSource', PLAYER_EVENT_SOURCE.DAILY_CLASS);
-      userGrade.set('collectionType', CONTENT_TYPES.ASSESSMENT);
-      component
-        .get('rubricService')
-        .setStudentRubricGradesForDCA(userGrade)
-        .then(() => {
-          component.slideToNextUser();
-        });
-    } else {
-      component
-        .get('rubricService')
-        .setStudentRubricGrades(userGrade)
-        .then(() => {
-          component.slideToNextUser();
-        });
+  },
+
+  handleAppContainerScroll() {
+    let activePullUpCount = Ember.$(document.body).find('.backdrop-pull-ups')
+      .length;
+    if (activePullUpCount > 0) {
+      Ember.$(document.body).addClass('no-vertical-scroll');
+    } else if (activePullUpCount === 0) {
+      Ember.$(document.body).removeClass('no-vertical-scroll');
     }
   },
 
@@ -721,10 +531,10 @@ export default Ember.Component.extend({
       let selectedUser = users.findBy('id', studentId);
       let selectedIndex = users.indexOf(selectedUser);
       let rightNavElement = component.$(
-        '#frq-grade-students-carousel-wrapper .carousel-control.right'
+        '#oa-grade-students-carousel-wrapper .carousel-control.right'
       );
       let leftNavElement = component.$(
-        '#frq-grade-students-carousel-wrapper .carousel-control.left'
+        '#oa-grade-students-carousel-wrapper .carousel-control.left'
       );
       let nextUserIndex = 0;
       if (!rightNavElement.hasClass('in-active')) {
@@ -735,23 +545,11 @@ export default Ember.Component.extend({
       let nextUser = users.objectAt(nextUserIndex);
       component.set('studentId', nextUser.get('id'));
       component
-        .$('.frq-grade-students-carousel  #frq-grade-students-carousel-wrapper')
+        .$('.oa-grade-students-carousel  #oa-grade-students-carousel-wrapper')
         .carousel(nextUserIndex);
       users.removeAt(selectedIndex);
       component.loadData();
       component.handleCarouselControl();
-    } else {
-      component.$('.caught-up-container').show(400, function() {
-        let itemsToGrade = component.get('itemsToGrade');
-        if (itemsToGrade) {
-          let questionId = component.get('question.id');
-          let item = itemsToGrade.findBy('content.id', questionId);
-          itemsToGrade.removeObject(item);
-        }
-        component.$().fadeOut(5000, function() {
-          component.set('showPullUp', false);
-        });
-      });
     }
   },
 
@@ -764,33 +562,33 @@ export default Ember.Component.extend({
     if (users.length - 1 === 0) {
       component
         .$(
-          '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control'
+          '.oa-grade-students-carousel #oa-grade-students-carousel-wrapper .carousel-control'
         )
         .addClass('in-active');
     } else {
       if (currentIndex === 0) {
         component
           .$(
-            '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control.left'
+            '.oa-grade-students-carousel #oa-grade-students-carousel-wrapper .carousel-control.left'
           )
           .addClass('in-active');
       } else {
         component
           .$(
-            '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control.left'
+            '.oa-grade-students-carousel #oa-grade-students-carousel-wrapper .carousel-control.left'
           )
           .removeClass('in-active');
       }
       if (currentIndex === users.length - 1) {
         component
           .$(
-            '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control.right'
+            '.oa-grade-students-carousel #oa-grade-students-carousel-wrapper .carousel-control.right'
           )
           .addClass('in-active');
       } else {
         component
           .$(
-            '.frq-grade-students-carousel #frq-grade-students-carousel-wrapper .carousel-control.right'
+            '.oa-grade-students-carousel #oa-grade-students-carousel-wrapper .carousel-control.right'
           )
           .removeClass('in-active');
       }

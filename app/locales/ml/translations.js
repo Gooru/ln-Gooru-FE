@@ -58,10 +58,12 @@ export default Object.assign(quizzesTranslations, {
   'common.relevance': 'പ്രാധാന്യം',
   'common.engagement': 'ഇടപഴകൽ',
   'common.efficacy': 'ഫലപ്രാപ്തി',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.grid': 'ഗ്രിഡ്',
   'common.list': 'പട്ടിക',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
   'common.first': 'ആദ്യം',
   'common.last': 'അവസാനത്തെ',
   'common.name': 'പേര്',
@@ -108,9 +110,12 @@ export default Object.assign(quizzesTranslations, {
   'common.about': 'കുറിച്ച്',
   'common.about-you': 'നിന്നേക്കുറിച്ച്',
   'common.about-me': 'എന്നെ പറ്റി',
-  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.accept': 'സ്വീകരിക്കൂ',
   'common.ignore': 'അവഗണിക്കുക',
   'common.add': 'ചേർക്കുക',

@@ -65,6 +65,8 @@ export default Object.assign(quizzesTranslations, {
   'my-content': 'My Content',
   'library-search-placeholder': 'Search for anything within the library…',
   'featured-libraries': 'featured libraries',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
   'common.lastName': 'শেষ নাম',
   'common.firstName': 'প্ৰথম নাম',
   'common.tasks': 'tasks',
@@ -73,7 +75,7 @@ export default Object.assign(quizzesTranslations, {
   'common.apply-filter': 'apply filter',
   'common.sub-filter': 'Sub-Filter',
   'search-help-message': 'Choose filters to apply',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.avg-score': 'মাধ্য স্কোৰ',
   'common.no-search-result':
@@ -81,9 +83,12 @@ export default Object.assign(quizzesTranslations, {
   'common.frq': 'FRQ',
   'common.schedule': 'কাৰ্যক্ৰম',
   'common.plan': 'plan',
-  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'offline-activities.no-completed-content':
     'There are no projects or other offline activities that have been completed yet',
   'offline-activities.no-active-content':

@@ -134,9 +134,7 @@ export default Ember.Object.extend({
       subFormat: activityData.subformat,
       reference: activityData.reference,
       references: serializer.normalizeReferences(activityData.oa_references),
-      rubric: serializer
-        .get('rubricSerializer')
-        .normalizeRubric(activityData.rubrics),
+      rubric: serializer.normalizeActivityRubric(activityData.rubrics),
       url: activityData.url,
       ownerId: activityData.owner_id,
       metadata: metadata,
@@ -175,6 +173,7 @@ export default Ember.Object.extend({
     });
     return normalizedActivity;
   },
+
   normalizeTasks(payload) {
     const serializer = this;
     if (Ember.isArray(payload)) {
@@ -183,6 +182,17 @@ export default Ember.Object.extend({
       });
     }
     return [];
+  },
+
+  normalizeActivityRubric(data) {
+    const serializer = this;
+    let rubric = Ember.Object.create();
+    if (Ember.isArray(data)) {
+      return data.map(function(item) {
+        return serializer.get('rubricSerializer').normalizeRubric(item);
+      });
+    }
+    return rubric;
   },
 
   /**
@@ -277,7 +287,7 @@ export default Ember.Object.extend({
       classId: payload.classId,
       gradeItems: gradeItems
         ? gradeItems.map(item => serializer.normalizeGradeActivity(item))
-        : null
+        : []
     });
   },
 

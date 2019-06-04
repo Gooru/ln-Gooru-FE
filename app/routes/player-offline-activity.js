@@ -24,5 +24,10 @@ export default Ember.Route.extend({
 
   setupController(controller, model) {
     controller.set('offlineActivity', model.get('offlineActivity'));
+  },
+
+  resetController(controller) {
+    controller.set('isShowStartPlayer', true);
+    controller.set('offlineActivity', {});
   }
 });

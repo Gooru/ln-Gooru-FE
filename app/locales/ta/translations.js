@@ -78,7 +78,7 @@ export default Object.assign(quizzesTranslations, {
   'common.frq': 'frq',
   'common.schedule': 'அட்டவணை',
   'common.responses': 'பதில்களை',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.no-lesson-info-message': 'இந்த அலகு எந்த பாடங்கள் உள்ளன.',
   'common.no-collection-info-message':
@@ -111,9 +111,14 @@ export default Object.assign(quizzesTranslations, {
   'common.about-me': 'என்னை பற்றி',
   'common.accept': 'ஏற்க',
   'common.ignore': 'புறக்கணிக்க',
-  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.add': 'கூட்டு',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',

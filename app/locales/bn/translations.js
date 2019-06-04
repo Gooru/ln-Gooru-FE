@@ -67,7 +67,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'নামের প্রথম অংশ',
   'common.filter-by': 'দ্বারা ফিল্টার',
   'common.more': 'অধিক',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.apply-filter': 'apply filter',
   'library-search-placeholder': 'Search for anything within the library…',
@@ -77,6 +77,8 @@ export default Object.assign(quizzesTranslations, {
   'common.tasks': 'tasks',
   'common.schedule': 'তফসিল',
   'common.responses': 'প্রতিক্রিয়া',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
   'common.no-search-result':
     'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.no-lesson-info-message': 'এই ইউনিট কোন পাঠ আছে।',
@@ -105,9 +107,12 @@ export default Object.assign(quizzesTranslations, {
   'common.add': 'যোগ',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
-  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.plan-an-activities-msg':
     'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'পুনরায় সঞ্চালনের জন্য নির্ধারণ',
