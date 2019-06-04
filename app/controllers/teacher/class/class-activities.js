@@ -1071,17 +1071,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let windowHeight = $(window).height();
     if (unScheduleEle.hasClass('active')) {
       unScheduleEle.animate({
-          top: windowHeight - 50
-        }, 400,
-        function() {
-          unScheduleEle.removeClass('active');
-        });
+        top: windowHeight - 50
+      }, 400,
+      function() {
+        unScheduleEle.removeClass('active');
+      });
     } else {
       unScheduleEle.addClass('active');
       unScheduleEle.animate({
-          top: 100
-        },
-        400
+        top: 100
+      },
+      400
       );
     }
   },
@@ -1106,17 +1106,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let windowHeight = $(window).height();
     if (offlineActivityEle.hasClass('active')) {
       offlineActivityEle.animate({
-          top: windowHeight - 150
-        }, 400,
-        function() {
-          offlineActivityEle.removeClass('active');
-        });
+        top: windowHeight - 150
+      }, 400,
+      function() {
+        offlineActivityEle.removeClass('active');
+      });
     } else {
       offlineActivityEle.addClass('active');
       offlineActivityEle.animate({
-          top: 100
-        },
-        400
+        top: 100
+      },
+      400
       );
     }
   },
@@ -1148,17 +1148,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let windowHeight = $(window).height();
     if (itemToGradeEle.hasClass('active')) {
       itemToGradeEle.animate({
-          top: windowHeight - 100
-        }, 400,
-        function() {
-          itemToGradeEle.removeClass('active');
-        });
+        top: windowHeight - 100
+      }, 400,
+      function() {
+        itemToGradeEle.removeClass('active');
+      });
     } else {
       itemToGradeEle.addClass('active');
       itemToGradeEle.animate({
-          top: 100
-        },
-        400
+        top: 100
+      },
+      400
       );
     }
   },
