@@ -1071,17 +1071,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let windowHeight = $(window).height();
     if (unScheduleEle.hasClass('active')) {
       unScheduleEle.animate({
-        top: windowHeight - 50
-      }, 400,
-      function() {
-        unScheduleEle.removeClass('active');
-      });
+          top: windowHeight - 50
+        }, 400,
+        function() {
+          unScheduleEle.removeClass('active');
+        });
     } else {
       unScheduleEle.addClass('active');
       unScheduleEle.animate({
-        top: 100
-      },
-      400
+          top: 100
+        },
+        400
       );
     }
   },
@@ -1106,17 +1106,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let windowHeight = $(window).height();
     if (offlineActivityEle.hasClass('active')) {
       offlineActivityEle.animate({
-        top: windowHeight - 150
-      }, 400,
-      function() {
-        offlineActivityEle.removeClass('active');
-      });
+          top: windowHeight - 150
+        }, 400,
+        function() {
+          offlineActivityEle.removeClass('active');
+        });
     } else {
       offlineActivityEle.addClass('active');
       offlineActivityEle.animate({
-        top: 100
-      },
-      400
+          top: 100
+        },
+        400
       );
     }
   },
@@ -1148,17 +1148,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let windowHeight = $(window).height();
     if (itemToGradeEle.hasClass('active')) {
       itemToGradeEle.animate({
-        top: windowHeight - 100
-      }, 400,
-      function() {
-        itemToGradeEle.removeClass('active');
-      });
+          top: windowHeight - 100
+        }, 400,
+        function() {
+          itemToGradeEle.removeClass('active');
+        });
     } else {
       itemToGradeEle.addClass('active');
       itemToGradeEle.animate({
-        top: 100
-      },
-      400
+          top: 100
+        },
+        400
       );
     }
   },
@@ -1267,7 +1267,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       oaItems: controller.get('oaAnaltyicsService').getOAToGrade(classId),
       questionItems: controller.get('rubricService').getQuestionsToGradeForDCA(classId)
     }).then(function(hash) {
-      let questionItems = hash.questionItems.gradeItems;
+      //FE support only assessment to be graded
+      let questionItems = hash.questionItems.gradeItems.filterBy('collectionType', 'assessment');
       let oaItems = hash.oaItems.gradeItems;
       let gradeItems = questionItems.concat(oaItems);
       if (gradeItems) {
@@ -1368,21 +1369,15 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     const itemObject = Ember.Object.create();
     const collectionId = item.get('collectionId');
     const collectionType = item.get('collectionType');
-    const isAssessment = !collectionType || collectionType === 'assessment';
     const resourceId = item.get('resourceId');
     const studentCount = item.get('studentCount');
     const activityDate = item.get('activityDate');
     return new Ember.RSVP.Promise(function(resolve, reject) {
       return Ember.RSVP
         .hash({
-          collection: collectionId ?
-            isAssessment ?
-              controller
-                .get('assessmentService')
-                .readAssessment(collectionId) :
-              controller
-                .get('collectionService')
-                .readCollection(collectionId) : undefined
+          collection: collectionId ? controller
+            .get('assessmentService')
+            .readAssessment(collectionId) : undefined
         })
         .then(function(hash) {
           const collection = hash.collection;
