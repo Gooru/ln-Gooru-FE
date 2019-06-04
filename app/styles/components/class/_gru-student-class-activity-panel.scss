@@ -36,8 +36,6 @@
 
       &.offline-activity {
         .ca-play-container {
-          pointer-events: none;
-
           .ca-play-btn {
             i {
               color: #535e67;
@@ -167,7 +165,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      pointer-events: none;
+      cursor: pointer;
 
       .ca-play-btn {
         height: 30px;

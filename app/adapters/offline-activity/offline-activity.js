@@ -8,9 +8,11 @@ import Ember from 'ember';
 export default Ember.Object.extend({
   session: Ember.inject.service('session'),
 
-  namespace: '/api/nucleus/v1/oa',
+  namespace: '/api/nucleus/v2/oa',
 
   collectionNamespace: '/api/nucleus/v1/oa',
+
+  insightsNamespce: '/api/nucleus-insights/v2/oa',
 
   /**
    * Posts a new activity
@@ -252,6 +254,19 @@ export default Ember.Object.extend({
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  oaTaskSubmissions(taskSubmissionPayload) {
+    const adapter = this;
+    const namespace = adapter.get('insightsNamespce');
+    const url = `${namespace}/submissions`;
+    const options = {
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(taskSubmissionPayload)
     };
     return Ember.$.ajax(url, options);
   },

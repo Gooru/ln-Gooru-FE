@@ -65,7 +65,7 @@ export default Object.assign(quizzesTranslations, {
   'common.last': 'Last',
   'common.name': 'Name',
   'common.user': 'user',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.content-name': 'Content Name',
   'common.lastName': 'Lastname',
@@ -78,7 +78,8 @@ export default Object.assign(quizzesTranslations, {
   'common.avg-score': 'Avg Score',
   'common.tasks': 'tasks',
   'common.frq': 'FRQ',
-  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
   'common.schedule': 'Schedule',
   'common.responses': 'Responses',
   'common.no-lesson-info-message': 'This unit does have any lessons.',
@@ -107,9 +108,12 @@ export default Object.assign(quizzesTranslations, {
     'There are no projects or other offline activities that the students are currently working on',
   'common.about-you': 'Acerca de ti',
   'common.about-me': 'About Me',
-  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.accept': 'Accept',
   'common.ignore': 'Ignore',
   'common.no-search-result':

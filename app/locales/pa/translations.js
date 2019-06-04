@@ -59,7 +59,7 @@ export default Object.assign(quizzesTranslations, {
   'common.efficacy': 'ਕਾਰਗੁਜ਼ਾਰੀ',
   'common.grid': 'ਗਰਿੱਡ',
   'common.list': 'ਸੂਚੀ',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.first': 'ਪਹਿਲਾ',
   'common.last': 'ਆਖਰੀ',
@@ -81,9 +81,12 @@ export default Object.assign(quizzesTranslations, {
   'common.no-collection-info-message': 'ਇਸ ਪਾਠ ਵਿੱਚ ਕੋਈ ਸੰਗ੍ਰਹਿ ਹੈ',
   'common.gooru-suggestions': 'ਗੋਰੂ ਸੁਝਾਅ',
   'common.gooru-catalog': 'ਗੋੂਰੂ ਕੈਟਾਲਾਗ',
-  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.suggestion-made-to': 'ਸੁਝਾਅ',
   'common.student-selected': 'ਵਿਦਿਆਰਥੀ ਨੇ ਚੁਣਿਆ',
   'common.no-suggest-result-message': ' ਕੋਈ ਮੇਲ ਖਾਂਦੀ ਸਮਗਰੀ ਨਹੀਂ ਮਿਲੀ',
@@ -100,7 +103,8 @@ export default Object.assign(quizzesTranslations, {
   'common.a-rubric': 'ਇੱਕ ਚਰਬੀਕਾਰ',
   'common.all-completed': 'ਸਭ ਨੂੰ ਪੂਰਾ ਕੀਤਾ',
   'common.a-assessment': 'ਇੱਕ ਮੁਲਾਂਕਣ',
-  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
   'common.about': 'ਬਾਰੇ',
   'library-search-placeholder': 'Search for anything within the library…',
   'common.about-you': 'ਤੁਹਾਡੇ ਬਾਰੇ',

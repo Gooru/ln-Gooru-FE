@@ -88,17 +88,21 @@ export default Object.assign(quizzesTranslations, {
     'మీ అక్షరక్రమాన్ని తనిఖీ చేయండి. మేము అన్ని తప్పులు చేస్తాము! లేదా బదులుగా ఒకే పదాన్ని శోధించడానికి ప్రయత్నించండి.',
   'common.a-collection': 'సేకరణ',
   'common.a-course': 'ఒక శిక్షణ',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.a-question': 'ఒక ప్రశ్న',
   'common.a-resource': 'ఒక వనరు',
   'common.a-rubric': 'ఒక రంధ్రం',
   'common.all-completed': 'అన్ని పూర్తయింది',
   'common.a-assessment': 'ఒక అంచనా',
-  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
-  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.about': 'గురించి',
   'common.about-you': 'నీ గురించి',
   'common.about-me': 'నా గురించి',

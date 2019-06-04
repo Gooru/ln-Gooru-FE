@@ -5,7 +5,6 @@ import Ember from 'ember';
  * @typedef {Object} OfflineActivityAnalyticsAdapter
  */
 export default Ember.Object.extend({
-
   session: Ember.inject.service('session'),
 
   namespace: '/api/nucleus-insights/v2/dca/oa',
