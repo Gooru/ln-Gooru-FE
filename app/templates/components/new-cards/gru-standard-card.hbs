@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   {{#if session.anonymouse}}
-    <a {{action "openContentPlayer" content}}>
+    <a {{action "openContentPlayer" content}} class="{{if ( or (eq content.format 'collection-external') (eq content.format 'assessment-external')) 'disable-event'}}">
       <div class="panel-heading" style="background-image: url({{content.thumbnailUrl}})">
         <div class="info">
           <div class="question-resources">
@@ -34,7 +34,7 @@
     </a>
   {{else}}
     {{#if (and isOnProfile isMyProfile)}}
-      <a {{action "editContent" content}}>
+      <a {{action "editContent" content}} class="{{if ( or (eq content.format 'collection-external') (eq content.format 'assessment-external')) 'disable-event'}}">
         <div class="panel-heading" style="background-image: url({{content.thumbnailUrl}})">
           <div class="info">
             <div class="question-resources">
@@ -102,7 +102,7 @@
           </div>
         </a>
       {{else}}
-        <a {{action "openContentPlayer" content}}>
+        <a {{action "openContentPlayer" content}} class="{{if ( or (eq content.format 'collection-external') (eq content.format 'assessment-external')) 'disable-event'}}">
           <div class="panel-heading" style="background-image: url({{content.thumbnailUrl}})">
             <div class="info">
               <div class="question-resources">
@@ -257,11 +257,8 @@
     <div class="options">
       {{#if (and isOnProfile isMyProfile)}}
         <div class="course-icon-btn play-btn" title="Play" data-toggle="tooltip">
-          <a {{action "openContentPlayer" content}} class="edit-btn">{{gru-icon name="play_arrow"}}</a>
+          <a {{action "openContentPlayer" content}} class="edit-btn {{if ( or (eq content.format 'collection-external') (eq content.format 'assessment-external')) 'disable-event'}}">{{gru-icon name="play_arrow"}}</a>
         </div>
-        <!-- <div class="course-icon-btn cca-edit" title="Edit" data-toggle="tooltip">
-          <a {{action "editContent"}} class="edit-btn course-mode-edit">{{gru-icon name="mode_edit"}}</a>
-        </div> -->
       {{else}}
         <div>
           <button class="preview-btn btn btn-success btn-sm" {{action 'previewContent' content}}>{{t "common.preview"}}</button>
@@ -271,8 +268,8 @@
     <div class="actions">
       {{#if isOnProfile}}
         {{#if (and profile isMyProfile)}}
-          <div class="course-icon-btn cca-edit" title="Edit" data-toggle="tooltip">
-            <a {{action "editContent"}} class="edit-btn course-mode-edit {{if (eq content.format 'collection-external') 'disable-event'}}">{{gru-icon name="mode_edit"}}</a>
+          <div class="course-icon-btn cca-edit {{if ( or (eq content.format 'collection-external') (eq content.format 'assessment-external')) 'disable-event'}}" title="Edit" data-toggle="tooltip">
+            <a {{action "editContent"}} class="edit-btn course-mode-edit">{{gru-icon name="mode_edit"}}</a>
           </div>
           <!-- {{#unless content.isVisibleOnProfile }}
             <div class="visibility course-add-btn"  title="{{t 'common.visibility-tooltip'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
