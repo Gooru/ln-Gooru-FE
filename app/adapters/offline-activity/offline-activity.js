@@ -277,9 +277,9 @@ export default Ember.Object.extend({
 
   //--------------Tasks------------------
   /**
-   * Posts a new activity
+   * Posts a new task
    *
-   * @param data activity data to be sent in the request body
+   * @param data task data to be sent in the request body
    * @returns {Promise}
    */
   createTask: function(data) {
@@ -306,6 +306,70 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/${oaId}/tasks/${taskId}`;
+    const options = {
+      type: 'DELETE',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Update an Task
+   *
+   * @param oaId the id of the Activity to be updated
+   * @param taskId the id of the task to be updated
+   * @param data task data to be sent in the request body
+   * @returns {Promise}
+   */
+  updateTask: function(oaId, taskId, data) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${oaId}/tasks/${taskId}`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(data)
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Posts a new TaskSubmission
+   *
+   * @param data TaskSubmission data to be sent in the request body
+   * @returns {Promise}
+   */
+  createTaskSubmission: function(data) {
+    const adapter = this;
+    const url = `${this.get('namespace')}/${data.body.oa_id}/tasks/${
+      data.body.oa_task_id
+    }/submissions`;
+    const options = {
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(data.body)
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Deletes task Submission  by oaId, taskId and submission id
+   * @returns {Promise}
+   */
+  removeTaskSubmission: function(oaId, taskId, submissionId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${oaId}/tasks/${taskId}/submissions/${submissionId}`;
     const options = {
       type: 'DELETE',
       contentType: 'application/json; charset=utf-8',

@@ -84,10 +84,7 @@ export default Ember.Object.extend(
       properties.oaTaskSubmissions = Ember.A(
         this.get('oaTaskSubmissions').slice(0)
       );
-      return this.get('constructor').create(
-        Ember.getOwner(this).ownerInjection(),
-        properties
-      );
+      return this.get('constructor').create(properties);
     },
 
     /**

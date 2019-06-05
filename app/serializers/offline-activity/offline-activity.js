@@ -391,5 +391,15 @@ export default Ember.Object.extend({
       title: payload.title,
       description: payload.description
     };
+  },
+
+  serializecreateTaskSubmission(payload) {
+    return {
+      id: payload.id,
+      oa_id: payload.oaId,
+      oa_task_id: payload.oaTaskId,
+      oa_task_submission_type: payload.taskSubmissionType,
+      oa_task_submission_subtype: payload.taskSubmissionSubType
+    };
   }
 });

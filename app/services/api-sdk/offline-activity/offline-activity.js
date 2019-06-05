@@ -321,5 +321,79 @@ export default Ember.Service.extend({
           resolve(taskPayLoad);
         }, reject);
     });
+  },
+
+  /**
+   * Update task details
+   * @param oaId the id of the Activity to be updated
+   * @param taskId the id of the task to be updated
+   * @param data task data to be sent in the request body
+   * @returns {Promise}
+   */
+  updateTask: function(oaId, taskId, taskPayLoad) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      let serializedTaskPayLoad = service
+        .get('offlineActivitySerializer')
+        .serializeCreateTask(taskPayLoad);
+      service
+        .get('offlineActivityAdapter')
+        .updateActivity(oaId, taskId, serializedTaskPayLoad)
+        .then(
+          function() {
+            resolve(taskPayLoad);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  //--------------submissions------------------
+
+  createTaskSubmission(taskTaskSubmission) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      let serializedTaskSubmission = service
+        .get('offlineActivitySerializer')
+        .serializecreateTaskSubmission(taskTaskSubmission);
+      service
+        .get('offlineActivityAdapter')
+        .createTaskSubmission({
+          body: serializedTaskSubmission
+        })
+        .then(
+          function(responseData, textStatus, request) {
+            let id = request.getResponseHeader('location');
+            taskTaskSubmission.set('id', id);
+            resolve(taskTaskSubmission);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+  /**
+   * Remove TaskSubmission
+   *
+   * @param {taskPayLoad} TaskSubmission to remove
+   * @returns {Ember.RSVP.Promise}
+   */
+  removeTaskSubmission: function(taskSubmissionPayLoad) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('offlineActivityAdapter')
+        .removeTaskSubmission(
+          taskSubmissionPayLoad.oaId,
+          taskSubmissionPayLoad.taskId,
+          taskSubmissionPayLoad.id
+        )
+        .then(function() {
+          resolve(taskSubmissionPayLoad);
+        }, reject);
+    });
   }
 });

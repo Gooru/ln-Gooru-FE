@@ -1,2 +1,4 @@
-<div>List and Create Submission</div>
-{{yield}}
+{{#each submissions as |submission|}}
+    {{content.activity.task.submission.gru-submission-line-item submission=submission  removeLineItem=(action 'removeLineItem')}}
+{{/each}}
+{{content.activity.task.submission.gru-submission-edit oaId=oaId oaTaskId=oaTaskId updateParent=(action 'updateSubmissionCollection') }}

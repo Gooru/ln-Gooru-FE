@@ -1,9 +1,9 @@
 import Ember from 'ember';
-import TaskModel from 'gooru-web/models/content/oa/task';
+import SubmissionModel from 'gooru-web/models/content/oa/task/submission';
 
 export default Ember.Component.extend({
   /**------------------------------------------------------------------------------------------------
-   * Create/edit task, update parent for changes
+   * Create/edit Submission, update parent for changes
    * ------------------------------------------------------------------------------------------------*/
 
   // -------------------------------------------------------------------------
@@ -31,24 +31,21 @@ export default Ember.Component.extend({
    */
   oaId: null,
 
+  oaTaskId: null,
+
   /**
-   * Instance of TaskModel
+   * Instance of TaskSubmission  model
    */
   model: null,
-
-  // -------------------------------------------------------------------------
-  // Attributes
-  classNames: ['content', 'gru-tasks-edit'],
   // -------------------------------------------------------------------------
   // Actions
   actions: {
     /**
      * Updates parent for changes
      */
-    updateParent(task) {
+    updateParent(Submission) {
       const component = this;
-      //task = task || component.get('model');
-      component.get('updateParent')(task);
+      component.get('updateParent')(Submission);
     },
 
     /**
@@ -57,9 +54,9 @@ export default Ember.Component.extend({
     updateContent() {
       const component = this;
       //ToDo: Call activityService API and save changes
-      component.saveTask().then(task => {
-        component.sendAction('updateParent', task);
-        component.set('model', task.copy()); // needed to break the ref
+      component.saveTaskSubmission().then(submission => {
+        component.sendAction('updateParent', submission);
+        component.set('model', component.get('model').copy());
       });
     },
 
@@ -78,8 +75,12 @@ export default Ember.Component.extend({
   // Events
   init() {
     this._super(...arguments);
-    let taskInstance = TaskModel.create({ oaId: this.get('oaId') });
-    this.set('model', taskInstance);
+    let modelInstance = SubmissionModel.create({
+      oaTaskId: this.get('oaTaskId')
+    });
+
+    //let modelInstance = SubmissionModel.create();
+    this.set('model', modelInstance);
   },
   // -------------------------------------------------------------------------
   // Properties
@@ -88,10 +89,12 @@ export default Ember.Component.extend({
    * Save tasks as per configured mode: edit/create, default mode is create new
    * Returns promise
    */
-  saveTask() {
+  saveTaskSubmission() {
     const component = this;
     let model = component.get('model');
     //ToDo: Validate
-    return component.get('activityService').createTask(model);
+    model.set('oaTaskId', component.get('oaTaskId'));
+    model.set('oaId', component.get('oaId'));
+    return component.get('activityService').createTaskSubmission(model);
   }
 });
