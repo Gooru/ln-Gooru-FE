@@ -249,41 +249,31 @@
           width: 100%;
           height: 100%;
           overflow-y: auto;
-          max-height: calc(100% - 380px);
+          max-height: calc(100% - 120px);
 
-          .task {
-            width: 100%;
-            height: auto;
-            display: grid;
-            grid-template-rows: auto auto auto;
-
-            .task-info {
-              display: grid;
-              grid-template-columns: 50px 1fr;
-              width: 100%;
-              height: 48px;
-              box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3);
-              align-items: center;
-
-              .icon {
-                display: flex;
-                margin: auto;
+          .gru-offline-activity-task-submission {
+            .task-submission-container {
+              .task-toggle {
+                display: none;
               }
             }
 
-            .task-desc {
-              padding: 10px;
-              font-size: 14px;
-              font-weight: bold;
-              line-height: 1.14;
-              color: #3e5e67;
-            }
+            .task-details-container {
+              .task-upload-container {
+                .task-answer {
+                  display: none;
+                }
 
-            .student-submission {
-              padding: 10px;
-              font-size: 12px;
-              line-height: 1.33;
-              color: #37424b;
+                .task-file-upload-container {
+                  .task-file-upload {
+                    display: none;
+                  }
+                }
+
+                .save-task-submission {
+                  display: none;
+                }
+              }
             }
           }
         }
@@ -432,6 +422,24 @@
               .teacher-grading-panel {
                 padding: 10px;
                 border-bottom: 1px dotted;
+
+                .oa-grade-rubric-grading {
+                  width: 200px;
+                  font-size: 30px;
+                  line-height: 1;
+                  text-align: center;
+                  margin: 0 auto;
+                  padding-bottom: 20px;
+
+                  .studentScore {
+                    input {
+                      text-align: center;
+                      font-size: 30px;
+                      color: #fff;
+                      padding-left: 15px;
+                    }
+                  }
+                }
               }
             }
           }
