@@ -29,11 +29,14 @@
   <div class="oa-body-container">
     <div class="oa-info-image-container">
       <div class="oa-info-container">
-        <div class="oa-title-container">
-          <div class="icon-container">
+        <div class="oa-info-header-container">
+          <div class="oa-icon-container">
           </div>
-          <div class="title-container">
-            {{offlineActivity.title}}
+          <div class="oa-title-container">
+            <div class="oa-project-label">{{offlineActivity.title}}</div>
+            {{#if offlineActivity.learningObjectives}}
+              <div class="oa-project-tag">Description</div>
+            {{/if}}
           </div>
         </div>
         <div class="oa-description-container">
