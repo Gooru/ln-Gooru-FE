@@ -42,8 +42,18 @@
         </div>
         <div class="task-file-upload-container">
           {{#each studentTaskUploadSubmission as |file|}}
-            <div class="task-file-preview" data-toggle="tooltip" title="{{file.submissionSubtype}}">
-              <a href="{{file.submissionInfo}}" target="_blank" class="preview-file-link">{{gru-icon name="insert_drive_file"}}</a>
+            <div class="task-file-preview" data-toggle="tooltip">
+              <a href="{{file.submissionInfo}}" target="_blank" class="preview-file-link">
+                {{#if (eq file.submissionSubtype 'image')}}
+                  <img src="{{file.submissionInfo}}" />
+                {{else}}
+                  {{#if file.submissionIcon}}
+                    <i class="fa {{file.submissionIcon}}"></i>
+                  {{else}}
+                    {{gru-icon name="insert_drive_file"}}
+                  {{/if}}
+                {{/if}}
+              </a>
             </div>
           {{/each}}
 
@@ -85,7 +95,7 @@
             </div>
           {{/each}}
         </div>
-        <div class="save-task-submission {{unless isEnableTaskSubmission 'disable-event'}} {{if isSubmittingTask 'saving'}}" {{action "onSaveTask"}}>
+        <div class="save-task-submission {{if isSubmittingTask 'saving'}}" {{action "onSaveTask"}}>
           {{#if isSubmittingTask}}
             Saving<span class="spinner">{{three-bounce-spinner}}</span>
           {{else}}

@@ -1,11 +1,9 @@
 import Ember from 'ember';
-import {
-  cleanFilename,
-  nullIfEmpty
-} from 'gooru-web/utils/utils';
+import { cleanFilename, nullIfEmpty } from 'gooru-web/utils/utils';
 import {
   DEFAULT_IMAGES,
-  ASSESSMENT_SHOW_VALUES
+  ASSESSMENT_SHOW_VALUES,
+  OA_TASK_SUBMISSION_TYPES
 } from 'gooru-web/config/config';
 import TaxonomySerializer from 'gooru-web/serializers/taxonomy/taxonomy';
 // import ActivityModel from 'gooru-web/models/content/activity';
@@ -320,8 +318,9 @@ export default Ember.Object.extend({
     let oaRubrics = serializer.normalizeRubricGrade(response.oaRubrics);
     return Ember.Object.create({
       oaRubrics,
-      tasks: response.tasks ?
-        response.tasks.map(task => serializer.normalizeGradeTasks(task)) : []
+      tasks: response.tasks
+        ? response.tasks.map(task => serializer.normalizeGradeTasks(task))
+        : []
     });
   },
 
@@ -334,8 +333,11 @@ export default Ember.Object.extend({
     let serializer = this;
     return Ember.Object.create({
       taskId: payload.taskId,
-      submissions: payload.submissions ?
-        payload.submissions.map(submission => serializer.normalizeGradeSubmission(submission)) : []
+      submissions: payload.submissions
+        ? payload.submissions.map(submission =>
+          serializer.normalizeGradeSubmission(submission)
+        )
+        : []
     });
   },
 
@@ -345,11 +347,18 @@ export default Ember.Object.extend({
    * @return {Object}
    */
   normalizeGradeSubmission(payload) {
+    let submissionTypeData = OA_TASK_SUBMISSION_TYPES.findBy(
+      'value',
+      payload.submissionSubtype
+    );
+    let submissionIcon = submissionTypeData ? submissionTypeData.icon : null;
     return Ember.Object.create({
       submissionInfo: payload.submissionInfo,
       submissionSubtype: payload.submissionSubtype,
       submissionType: payload.submissionType,
-      submittedOn: payload.submittedOn
+      submittedOn: payload.submittedOn,
+      submissionText: payload.submissionText,
+      submissionIcon
     });
   },
 
@@ -361,10 +370,12 @@ export default Ember.Object.extend({
   normalizeRubricGrade(payload) {
     let serializer = this;
     return Ember.Object.create({
-      studentGrades: payload.studentGrades ?
-        serializer.normalizeGrade(payload.studentGrades) : null,
-      teacherGrades: payload.teacherGrades ?
-        serializer.normalizeGrade(payload.teacherGrades) : null
+      studentGrades: payload.studentGrades
+        ? serializer.normalizeGrade(payload.studentGrades)
+        : null,
+      teacherGrades: payload.teacherGrades
+        ? serializer.normalizeGrade(payload.teacherGrades)
+        : null
     });
   },
 
@@ -383,9 +394,11 @@ export default Ember.Object.extend({
       score: Math.round(parseInt(payload.studentScore)),
       submittedOn: payload.submittedOn,
       timeSpent: payload.timeSpent,
-      categoryGrade: payload.categoryScore ? payload.categoryScore.map(item =>
-        serializer.get('rubricSerializer')
-          .normalizeCategoryScore(item)) : []
+      categoryGrade: payload.categoryScore
+        ? payload.categoryScore.map(item =>
+          serializer.get('rubricSerializer').normalizeCategoryScore(item)
+        )
+        : []
     });
   },
 
@@ -404,11 +417,15 @@ export default Ember.Object.extend({
       student_score: payload.get('studentScore'),
       max_score: payload.get('maxScore'),
       overall_comment: payload.get('comment'),
-      category_score: payload.get('categoriesScore').length ?
-        payload
+      category_score: payload.get('categoriesScore').length
+        ? payload
           .get('categoriesScore')
-          .map(category => this.get('rubricSerializer')
-            .serializedStudentGradeCategoryScore(category)) : null
+          .map(category =>
+            this.get('rubricSerializer').serializedStudentGradeCategoryScore(
+              category
+            )
+          )
+        : null
     });
   },
 

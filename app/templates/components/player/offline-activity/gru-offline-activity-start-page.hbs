@@ -27,10 +27,51 @@
       </div>
     </div>
   </div>
-  <div class="tasks-container">
-    {{#each activityTasks as |task|}}
-      {{player.offline-activity.gru-offline-activity-task-submission task = task isPreview = true}}
-    {{/each}}
+  <div class="task-rubric-container">
+    <div class="tasks-container">
+      {{#each activityTasks as |task|}}
+        {{player.offline-activity.gru-offline-activity-task-submission task = task isPreview = true}}
+      {{else}}
+        No Task available
+      {{/each}}
+    </div>
+    <div class="student-rubrics-container">
+      <div class="student-label label-container" {{action "onToggleRubricContainer" 'student'}}>
+        <span class="label-type">Self Grading</span>
+        <span class="toggle-icon">
+          {{gru-icon name=(if isStudentCategoriesExpanded 'expand_less' 'expand_more')}}
+        </span>
+      </div>
+      <div class="student categories-container">
+        {{validation.gru-textarea
+          model=studentRubricCategories
+          valuePath='comment'
+          maxLength=500
+          rows=1
+          placeholder='General Comments Only'
+          disabled="disabled"
+        }}
+        {{rubric.rubric-category-grades categories=studentRubricCategories isDisable=true}}
+      </div>
+    </div>
+    <div class="teacher-rubrics-container">
+      <div class="teacher-label label-container" {{action "onToggleRubricContainer" 'teacher'}}>
+        <span class="label-type">Teacher Grading</span>
+        <span class="toggle-icon">
+          {{gru-icon name=(if isTeacherCategoriesExpanded 'expand_less' 'expand_more')}}
+        </span>
+      </div>
+      <div class="teacher categories-container">
+        {{validation.gru-textarea
+          model=activityTeacherRubrics
+          valuePath='comment'
+          maxLength=500
+          rows=1
+          placeholder='General Comments Only'
+        }}
+        {{rubric.rubric-category-grades categories=teacherRubricCategories isDisable=true}}
+      </div>
+    </div>
   </div>
   <div class="actions-container">
     <div class="cancel-action action-btn" {{action "onClosePlayer"}}>
