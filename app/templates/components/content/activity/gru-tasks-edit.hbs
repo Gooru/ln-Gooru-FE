@@ -1,7 +1,17 @@
-<button {{action 'updateContent'}}>Save</button>
-<button>Cancel </button>
-{{oaId}}
-{{validation.gru-input model=model valuePath='title' maxLength=50 didValidate=true}}
-{{validation.gru-input model=model valuePath='description' maxLength=50 didValidate=true}}
-{{content.activity.task.gru-submissions submissions=model.oaTaskSubmissions oaId=oaId oaTaskId=model.id }}
-{{!-- updateParent=(action 'updateParent') --}}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3> Task </h3>
+        {{partial 'content/partials/information-actions'}}
+        {{validation.gru-input model=model valuePath='title' maxLength=50 didValidate=true}}
+        <button class="cancel btn btn-info" {{action 'cancel'}}>{{t "common.cancel"}}</button>
+        <button class="save btn btn-success" {{action 'updateContent' model}}>{{t "common.save"}}</button>
+    </div>
+    <div class="panel panel-body">
+        {{!-- <button {{action 'updateContent'}}>Save</button>
+        <button>Cancel </button> --}}
+        {{gru-rich-text-editor content=model.description model=model valuePath='description'}}
+        {{!-- {{validation.gru-input model=model valuePath='description' maxLength=50 didValidate=true}} --}}
+        {{content.activity.task.gru-submissions submissions=model.oaTaskSubmissions oaId=oaId oaTaskId=model.id }}
+        {{!-- updateParent=(action 'updateParent') --}}
+    </div>
+</div>

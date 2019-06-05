@@ -11,12 +11,9 @@
                     <label class="switch-label">{{t 'common.rubric'}}</label>
                     {{gru-switch switchOptions=switchOptions isChecked=isTeacherRubrics}}
                 </div>
-                {{log 'teacherRubrics' 'teacherRubrics'}}
                 {{#if isTeacherRubrics}}
                     {{#if teacherRubrics.title}}
-                        {{log 'teacherRubrics' teacherRubrics.title}}
                         <div class="associated-rubric">
-                            {{log 'associated-rubric' teacherRubrics}}
                             <div class="image">
                                 {{#if teacherRubrics.thumbnail}}
                                     <img class="img-responsive" src="{{teacherRubrics.thumbnail}}" />

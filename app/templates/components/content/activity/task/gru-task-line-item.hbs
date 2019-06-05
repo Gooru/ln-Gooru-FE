@@ -1,3 +1,14 @@
-<div>{{task.title}} </div>
-<div>{{task.description}} </div>
-<button {{action 'removeLineItem'}}>Delete</button>
+<div class="associated-rubric">
+    <div class="image">
+        <i class="rubric-icon"></i>
+    </div>
+    <div class="info">
+        <h3>{{task.title}} </h3>
+    </div>
+    {{!-- {{task.description}} --}}
+    <div class="actions">
+        <button class="btn no-bgd remove-item" {{action 'removeLineItem'}}>
+            {{gru-icon name="remove_circle"}}
+        </button>
+    </div>
+</div>

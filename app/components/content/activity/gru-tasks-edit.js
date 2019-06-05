@@ -36,6 +36,7 @@ export default Ember.Component.extend({
    */
   model: null,
 
+  isEditing: true,
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['content', 'gru-tasks-edit'],
