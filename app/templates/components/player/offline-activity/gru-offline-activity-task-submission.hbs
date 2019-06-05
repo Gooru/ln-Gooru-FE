@@ -7,10 +7,12 @@
         {{task.title}}
       </div>
       <div class="pending-submission">
-        {{#each typeBasedMandatoryUploads as |mandatoryUpload|}}
-          <span>{{mandatoryUpload.pendingCount}} {{mandatoryUpload.type}}</span>,
+        {{#each typeBasedMandatoryUploads as |mandatoryUpload index|}}
+          <span>{{mandatoryUpload.pendingCount}} {{mandatoryUpload.type}}</span>
+          {{#if (lt (plus-one index) typeBasedMandatoryUploads.length )  }}
+            |
+          {{/if}}
         {{/each}}
-        required
       </div>
     </div>
     {{#unless isPreview}}
@@ -24,9 +26,6 @@
     {{/unless}}
   </div>
   <div class="task-details-container">
-    <div class="task-title">
-      {{task.title}}
-    </div>
     <div class="task-description">
       {{task.description}}
     </div>
