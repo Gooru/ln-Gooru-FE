@@ -36,3 +36,9 @@
     {{/each}}
   </div>
 </div>
+
+{{#if isLoading}}
+  <div class="loading-spinner">
+    {{three-bounce-spinner}}
+  </div>
+{{/if}}
