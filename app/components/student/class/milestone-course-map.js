@@ -12,6 +12,8 @@ export default Ember.Component.extend({
 
   classNames: ['student-class-milestone-course-map'],
 
+  classNameBindings: ['competencySummary:student-competency-summary'],
+
   // -------------------------------------------------------------------------
   // Dependencies
 

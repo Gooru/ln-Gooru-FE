@@ -34,18 +34,17 @@
       height: 0;
       span {
         position: absolute;
-        bottom: -2px;
-        width: 42px;
-        height: 42px;
+        width: 40px;
+        height: 40px;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
         text-align: center;
-        line-height: 42px;
+        line-height: 40px;
         border-radius: 50%;
         border: none;
-        left: -15px;
-
+        left: -14px;
+        bottom: 0;
         color: $white;
-        font-size: 22px;
+        font-size: 15px;
         font-weight: bold;
         transition: 1s;
         display: none;
@@ -55,6 +54,7 @@
         z-index: 5;
       }
       &.no-value {
+        display: none;
         span {
           bottom: -8px;
         }
