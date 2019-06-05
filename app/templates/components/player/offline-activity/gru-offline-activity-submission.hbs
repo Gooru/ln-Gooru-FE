@@ -32,7 +32,10 @@
   </div>
   <div class="task-submissions-container">
     {{#each activityTasks as |task|}}
-      {{player.offline-activity.gru-offline-activity-task-submission task = task caContentId = caContentId classId = classId}}
+      {{player.offline-activity.gru-offline-activity-task-submission
+        task=task
+        caContentId=caContentId
+        classId=classId}}
     {{/each}}
   </div>
 </div>
