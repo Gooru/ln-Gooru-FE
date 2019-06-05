@@ -16,13 +16,16 @@
       display: inline-block;
       margin-top: 10px;
     }
+    .panel-default {
+      margin-top: 15px;
+    }
     .panelBodyContainer {
       display: flex;
       flex-direction: column;
       .textContainer {
         display: flex;
         flex-direction: column;
-        width: 50vw;
+        // width: 50vw;
 
         .referenceText {
           display: inline-block;
