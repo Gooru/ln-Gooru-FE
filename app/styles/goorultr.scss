@@ -344,6 +344,7 @@
 @import "components/reports/pull-up/open-ended-report-pull-up";
 @import "components/reports/pull-up/student-external-assessment-report";
 @import "components/reports/pull-up/gru-collection-preview";
+@import "components/reports/pull-up/oa-preview";
 @import "components/reports/pull-up/student-activity-report";
 @import "components/reports/pull-up/activity/class-summary-report";
 @import "components/reports/pull-up/activity/monthly-summary-report";
@@ -480,6 +481,7 @@
 
 //Offline Activity Player
 @import "components/player/offline-activity/gru-offline-activity-start-page";
+@import "components/player/offline-activity/gru-offline-activity-references";
 @import "components/player/offline-activity/gru-offline-activity-submission";
 @import "components/player/offline-activity/gru-offline-activity-task-submission";
 
@@ -487,4 +489,4 @@
 @import "components/activity/offline/grading-report";
 
 //Rubric Categories
-@import "components/rubric/_rubric-category-grades"
+@import "components/rubric/_rubric-category-grades";

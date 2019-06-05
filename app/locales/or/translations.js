@@ -2645,5 +2645,20 @@ export default Object.assign(quizzesTranslations, {
   'course-map.your-learning-path': 'Your Learning Path',
   'mastery-greeting-msg':
     'You’ve earned a Mastery Badge! Would you like to see the improvement in your competency skyline?',
-  'show-me': 'Show Me'
+  'show-me': 'Show Me',
+  project: 'Project',
+  'oa.project.poster': 'Poster',
+  'oa.project.presentation': 'Presentation',
+  'oa.project.video': 'Video',
+  'oa.project.diorama': 'Diorama',
+  'oa.project.brochure': 'Brochure',
+  'oa.project.model': 'Model',
+  'oa.seminar': 'seminar',
+  'oa.short_answer': 'Short Answer',
+  'oa.extended_response': 'Extended Response',
+  'oa.research_paper': 'Research Paper',
+  'oa.position_paper': 'Position Paper',
+  'oa.lab_report': 'Report',
+  'oa.explanation_argument': 'Explanation Argument',
+  'oa.debate': 'Debate'
 });
