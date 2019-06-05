@@ -1,5 +1,4 @@
 .offline-activity-player.gru-offline-activity-start-page {
-  background-color: #e3e5ea;
   .player-start-page-container {
     display: grid;
     grid-template-columns: 360px 1fr;
@@ -93,29 +92,89 @@
       }
     }
 
-    .tasks-container {
-      max-height: 490px;
-      overflow-y: auto;
-      &::-webkit-scrollbar {
-        height: 6px;
-        width: 8px;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background: $gray-light;
-        border: 1px solid $gray-light;
-        border-radius: 5px;
-      }
-      .gru-offline-activity-task-submission {
-        .task-submission-container {
-          box-shadow: none;
+    .task-rubric-container {
+      .tasks-container {
+        max-height: 490px;
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+          height: 6px;
+          width: 8px;
         }
-        &:first-child {
+
+        &::-webkit-scrollbar-thumb {
+          background: $gray-light;
+          border: 1px solid $gray-light;
+          border-radius: 5px;
+        }
+        .gru-offline-activity-task-submission {
           .task-submission-container {
-            margin-top: 0;
+            box-shadow: none;
+          }
+          &:first-child {
+            .task-submission-container {
+              margin-top: 0;
+            }
           }
         }
       }
+
+      .teacher-rubrics-container,
+      .student-rubrics-container {
+        background-color: $white;
+        padding: 15px;
+        .label-container {
+          display: grid;
+          grid-template-columns: 1fr 30px;
+          align-items: center;
+          cursor: pointer;
+          .label-type {
+            color: #37424b;
+            font-size: 15px;
+          }
+        }
+        .categories-container {
+          display: none;
+          textarea {
+            pointer-events: none;
+          }
+          .rubric-category-container {
+            .grade-rubric-categories {
+              .grade-rubric-category {
+                .grade-rubric-level-container {
+                  .grade-rubric-category-info,
+                  p {
+                    color: #37424b;
+                  }
+                  .grade-comment {
+                    i.mode_comment {
+                      // color: #37424b;
+                    }
+                  }
+                  .grade-rubric-levels {
+                    width: 90%;
+                  }
+                }
+                .grade-rubric-category-info,
+                p {
+                  width: 90%;
+                  color: #37424b;
+                }
+                .no-progress {
+                  background-color: #5d666f;
+                  border-radius: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .student-rubrics-container {
+        margin-bottom: 15px;
+      }
+    }
+
+    .teacher-rubrics-container {
+      grid-column: 2;
     }
 
     .actions-container {

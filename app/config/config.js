@@ -404,31 +404,37 @@ export const OA_TASK_SUBMISSION_TYPES = [
   {
     value: 'image',
     submissionType: 'uploaded',
-    validExtensions: '.jpg, .jpeg, .gif, .png'
+    validExtensions: '.jpg, .jpeg, .gif, .png',
+    icon: 'fa-file-image-o'
   },
   {
     value: 'pdf',
     submissionType: 'uploaded',
-    validExtensions: '.pdf'
+    validExtensions: '.pdf',
+    icon: 'fa-file-pdf-o'
   },
   {
     value: 'presentation',
     submissionType: 'uploaded',
-    validExtensions: '.ppt, .pptx'
+    validExtensions: '.ppt, .pptx',
+    icon: 'fa-file-powerpoint-o'
   },
   {
     value: 'document',
     submissionType: 'uploaded',
-    validExtensions: '.doc, .docx'
+    validExtensions: '.doc, .docx',
+    icon: 'fa-file-word-o'
   },
   {
     value: 'others',
     submissionType: 'uploaded',
-    validExtensions: ''
+    validExtensions: '',
+    icon: 'fa-file'
   },
   {
     value: 'url',
     submissionType: 'remote',
-    validExtensions: ''
+    validExtensions: '',
+    icon: 'fa-link'
   }
 ];

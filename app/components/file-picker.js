@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import FilePicker from 'ember-cli-file-picker/components/file-picker';
+import { inferUploadType } from 'gooru-web/utils/utils';
+import { OA_TASK_SUBMISSION_TYPES } from 'gooru-web/config/config';
 
 /**
  * @constant {Number}
@@ -72,5 +74,33 @@ export default FilePicker.extend({
       this.get('errors').clear();
       this.get('onRemoveFile')();
     }
+  },
+
+  /**
+   * @override
+   * @function addPreviewImage
+   * @param file uploaded file object
+   * Method to add preview thumbnail container to show image and other type based icons
+   */
+  addPreviewImage(file) {
+    let fileType = inferUploadType(file.filename, OA_TASK_SUBMISSION_TYPES);
+    fileType = fileType || OA_TASK_SUBMISSION_TYPES.findBy('value', 'others');
+    let previewContainer = '';
+    if (fileType.value === 'image') {
+      previewContainer = this.$(
+        `<img src="${file.data}" class="file-picker__preview__image ${this.get(
+          'multiple'
+        )
+          ? 'multiple'
+          : 'single'}">`
+      );
+    } else {
+      previewContainer = this.$(
+        `<i class="fa ${fileType.icon} file-preview-type-icon"></i>`
+      );
+    }
+
+    this.hideProgress();
+    this.$('.file-picker__preview').append(previewContainer);
   }
 });

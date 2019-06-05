@@ -81,6 +81,9 @@
               &:focus {
                 outline: none;
                 border: none;
+                ::placeholder {
+                  display: none;
+                }
               }
             }
           }
@@ -106,6 +109,11 @@
               i {
                 font-size: 40px;
                 line-height: 104px;
+              }
+
+              img {
+                width: inherit;
+                height: inherit;
               }
             }
           }
