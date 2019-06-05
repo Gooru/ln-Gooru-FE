@@ -1,7 +1,9 @@
 import Ember from 'ember';
-import { getGradeColor } from 'gooru-web/utils/utils';
 import RubricGrade from 'gooru-web/models/rubric/rubric-grade';
 import RubricCategoryScore from 'gooru-web/models/rubric/grade-category-score';
+import {
+  PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -56,6 +58,18 @@ export default Ember.Component.extend({
   studentCount: Ember.computed.alias('context.studentCount'),
 
   /**
+   * Selected Student to grade
+   * @type {Object}
+   */
+  student: null,
+  /**
+   * Selected Student id
+   * @type {Object}
+   */
+  studentId: Ember.computed('student', function() {
+    return this.get('student.id');
+  }),
+  /**
    * Maintains the value of selected user index.
    * @return {Number}
    */
@@ -88,15 +102,49 @@ export default Ember.Component.extend({
    * @type {Object}
    */
   categories: Ember.computed('userGrade', function() {
-    let categories = this.get('userGrade.categories')
-      ? this.get('userGrade.categories')
-      : Ember.A([]);
+    let categories = this.get('userGrade.categories') ?
+      this.get('userGrade.categories') :
+      Ember.A([]);
     categories.map(category => {
       let levels = category.get('levels');
       if (levels) {
         if (category.get('allowsLevels') && category.get('allowsScoring')) {
           levels = levels.sortBy('score');
         }
+        category.set('levels', levels);
+      }
+    });
+    return categories ? categories : Ember.A([]);
+  }),
+
+  /**
+   * Computed Properties for rubric categories
+   * @type {Object}
+   */
+  studentSelfGradedCategories: Ember.computed('categories', 'student', function() {
+    let component = this;
+    let categories = component.get('categories') ?
+      component.normalizeRubricCatergories(component.get('categories')) :
+      Ember.A([]);
+    let studentSelfGradedCategories = component.get('student.selfGrade.categoryGrade') ?
+      component.get('student.selfGrade.categoryGrade') :
+      Ember.A([]);
+    categories.map((category, index) => {
+      let studentSelfGradedCategory = studentSelfGradedCategories.objectAt(index);
+      let levels = category.get('levels');
+      if (levels) {
+        if (category.get('allowsLevels') && category.get('allowsScoring')) {
+          levels = levels.sortBy('score');
+          let totalPoints = studentSelfGradedCategory.get('levelMaxScore');
+          let scoreInPrecentage = Math.floor(
+            (studentSelfGradedCategory.get('levelScore') / totalPoints) * 100);
+          category.set('scoreInPrecentage', scoreInPrecentage);
+        }
+        let levelObtained = levels.findBy('name', studentSelfGradedCategory.get('levelObtained'));
+        if (levelObtained) {
+          levelObtained.set('selected', true);
+        }
+        category.set('comment', studentSelfGradedCategory.get('levelComment'));
         category.set('levels', levels);
       }
     });
@@ -192,6 +240,20 @@ export default Ember.Component.extend({
     return score;
   }),
 
+  studentSelfGrade: Ember.computed('student', function() {
+    let component = this;
+    let score = 0;
+    let selfGrade = component.get('student.selfGrade');
+    if (selfGrade) {
+      let gradeMaxScore = selfGrade.get('maxScore');
+      let studentScore = selfGrade.get('score');
+      if (studentScore > 0) {
+        score = Math.floor((studentScore / gradeMaxScore) * 100);
+      }
+    }
+    return score;
+  }),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -201,44 +263,6 @@ export default Ember.Component.extend({
      **/
     onPullUpClose() {
       this.closePullUp();
-    },
-
-    /**
-     * Action get triggered when comment icon got toggle.
-     */
-    onShowAddCommentBox(categoryIndex) {
-      let component = this;
-      let element = component.$(`#oa-grade-rubric-category-${categoryIndex}`);
-      if (element.hasClass('comment-active')) {
-        element.find('.oa-grade-comment-section').slideUp(400, function() {
-          element.removeClass('comment-active');
-        });
-      } else {
-        element.find('.oa-grade-comment-section').slideDown(400, function() {
-          element.addClass('comment-active');
-        });
-      }
-    },
-
-    /**
-     * Action triggered when clear the category level choosen
-     * @param  {Object} category
-     */
-    unSelectCategoryLevel(category) {
-      category.set('scoreInPrecentage', null);
-      let levels = category.get('levels');
-      if (levels && levels.length > 0) {
-        levels.findBy('selected', true).set('selected', false);
-      }
-      category.set('selected', false);
-    },
-
-    /**
-     * Action triggered when category get choosen
-     * @param  {Object} category
-     */
-    onChooseCategory(category) {
-      category.set('selected', true);
     },
 
     onClickPrev() {
@@ -312,6 +336,10 @@ export default Ember.Component.extend({
         .css('visibility', 'visible')
         .hide()
         .fadeIn('slow');
+    },
+
+    saveGrade() {
+      this.saveUserGrade();
     }
   },
 
@@ -337,7 +365,6 @@ export default Ember.Component.extend({
   didRender() {
     this._super(...arguments);
     let component = this;
-    component.setupTooltip();
     component.handleAppContainerScroll();
   },
 
@@ -346,115 +373,117 @@ export default Ember.Component.extend({
 
   initialize() {
     let component = this;
-    let classId = component.get('classId');
-    let activityId = component.get('activityId');
+    let classId = component.get('context.classId');
+    let activityId = component.get('context.dcaContentId');
     return Ember.RSVP.hash({
-      users: component
-        .get('oaAnaltyicsService')
-        .getStudentListToGrade(classId, activityId)
-    })
-      .then(({ users }) => {
-        if (users.get('students') && users.get('students').length) {
-          return Ember.RSVP.hash({
-            users: component
-              .get('profileService')
-              .readMultipleProfiles(users.get('students'))
-          });
-        }
-      })
-      .then(({ users }) => {
-        if (!component.get('isDestroyed')) {
-          users.map(user => {
-            let rubric = component.get('rubric');
-            let newRubric = rubric ? rubric.copy() : rubric;
-            user.set(
-              'rubricGrade',
-              component.createRubricGrade(newRubric, user)
-            );
-          });
-          let studentId = component.get('studentId');
-          if (!studentId) {
-            studentId = users.get('firstObject.id');
-            component.set('studentId', studentId);
-          }
-          component.set('users', users);
-          component.set('isLoading', false);
-          component.handleCarouselControl();
-        }
-      });
-  },
-
-  setupTooltip() {
-    let component = this;
-    let categories = component.get('categories');
-    component.$('.oa-grade-info-popover').popover({
-      placement: 'top auto',
-      container: '.oa-grading-report',
-      trigger: 'manual'
-    });
-    let isMobile = window.matchMedia('only screen and (max-width: 768px)');
-    if (isMobile.matches) {
-      component.$('.close-popover').click(function() {
-        component.$('.oa-grade-info-popover').popover('hide');
-      });
-    }
-
-    component.$('.oa-grade-info-popover').on('click', function() {
-      let levelIndex = component.$(this).data('level');
-      let categoryIndex = component.$(this).data('category');
-      let category = categories.objectAt(categoryIndex);
-      let level = category.get('levels').objectAt(levelIndex);
-      category.get('levels').map(level => {
-        level.set('selected', false);
-      });
-      level.set('selected', true);
-      let totalPoints = category.get('totalPoints');
-      let scoreInPrecentage = Math.floor(
-        (level.get('score') / totalPoints) * 100
-      );
-      category.set('scoreInPrecentage', scoreInPrecentage);
-      category.set('selected', true);
-      if (isMobile.matches) {
-        component
-          .$('.oa-grade-info-popover')
-          .not(this)
-          .popover('hide');
-        component.$(this).popover('show');
-        Ember.$('.popover-title')
-          .append('<span class="close-popover">x</span>')
-          .css('background-color', getGradeColor(scoreInPrecentage));
+      users: component.get('oaAnaltyicsService').getStudentListToGrade(classId, activityId)
+    }).then(({
+      users
+    }) => {
+      if (users.get('students') && users.get('students').length) {
+        return Ember.RSVP.hash({
+          users: component.get('profileService').readMultipleProfiles(
+            users.get('students')
+          )
+        });
+      }
+    }).then(({
+      users
+    }) => {
+      let studentId = component.get('studentId');
+      if (!studentId) {
+        let student = users.get('firstObject');
+        component.set('student', student);
+        let classId = component.get('context.classId');
+        let activityId = component.get('context.dcaContentId');
+        let studentId = component.get('student.id');
+        return Ember.RSVP.hash({
+          submission: component.get('oaAnaltyicsService')
+            .getSubmissionsToGrade(classId, activityId, studentId),
+          users
+        });
+      }
+    }).then(({
+      submission,
+      users
+    }) => {
+      if (!component.get('isDestroyed')) {
+        users.map(user => {
+          let rubric = component.get('rubric');
+          let newRubric = rubric ? rubric.copy() : rubric;
+          user.set(
+            'rubricGrade',
+            component.createRubricGrade(newRubric, user)
+          );
+        });
+        component.set('users', users);
+        let studentGrade = submission.get('oaRubrics.studentGrades');
+        component.parseStudentSubmissionGrade(studentGrade);
+        component.set('isLoading', false);
+        component.handleCarouselControl();
       }
     });
-    if (!isMobile.matches) {
-      component.$('.oa-grade-info-popover').on('mouseleave', function() {
-        $(this).popover('hide');
+  },
+
+
+  parseStudentSubmissionGrade(studentGrade) {
+    let component = this;
+    let student = component.get('student');
+    student.set('selfGrade', studentGrade);
+  },
+
+  saveUserGrade() {
+    let component = this;
+    let userGrade = component.get('userGrade');
+    let categories = component.get('categories');
+    let context = component.get('context');
+    let categoriesScore = Ember.A([]);
+    userGrade.set('classId', context.get('classId'));
+    userGrade.set('dcaContentId', context.get('dcaContentId'));
+    userGrade.set('collectionId', context.get('content.id'));
+    userGrade.set('contentSource', PLAYER_EVENT_SOURCE.DAILY_CLASS);
+    userGrade.set('collectionType', PLAYER_EVENT_SOURCE.OFFLINE_CLASS);
+    userGrade.set('categoriesScore', categoriesScore);
+    categories.forEach(category => {
+      let level = null;
+      if (category.get('allowsLevels')) {
+        level = category.get('levels').findBy('selected', true);
+        categoriesScore.pushObject(
+          component.createRubricCategory(category, level)
+        );
+      } else if (category.get('comment')) {
+        categoriesScore.pushObject(
+          component.createRubricCategory(category, level)
+        );
+      } else {
+        categoriesScore.pushObject(
+          component.createRubricCategory(category)
+        );
+      }
+    });
+  },
+
+  normalizeRubricCatergories(categories) {
+    return categories.map((category) => {
+      return Ember.Object.create({
+        allowsLevels: category.allowsLevels,
+        allowsScoring: category.allowsScoring,
+        comment: category.comment,
+        requiresFeedback: category.requiresFeedback,
+        title: category.title,
+        levels: Ember.isArray(category.levels) ? category.levels.map(item => {
+          return Ember.Object.create({
+            name: item.name,
+            score: item.score
+          });
+        }) : []
       });
-      component.$('.oa-grade-info-popover').on('mouseenter', function() {
-        let levelIndex = component.$(this).data('level');
-        let categoryIndex = component.$(this).data('category');
-        let category = categories.objectAt(categoryIndex);
-        let totalPoints = category.get('totalPoints');
-        let level = category.get('levels').objectAt(levelIndex);
-        $(this).popover('show');
-        if (category.get('allowsScoring')) {
-          let scoreInPrecentage = Math.floor(
-            (level.get('score') / totalPoints) * 100
-          );
-          Ember.$('.popover-title').css(
-            'background-color',
-            getGradeColor(scoreInPrecentage)
-          );
-        } else {
-          Ember.$('.popover-title').hide();
-        }
-      });
-    }
+    });
   },
 
   createRubricCategory(category, level) {
     let rubricCategory = RubricCategoryScore.create(
-      Ember.getOwner(this).ownerInjection(),
-      {
+      Ember.getOwner(this).ownerInjection(), {
         title: category.get('title')
       }
     );
@@ -487,13 +516,13 @@ export default Ember.Component.extend({
     let component = this;
     component.handleCarouselControl();
   },
+
   /**
    * Function to animate the  pullup from bottom to top
    */
   openPullUp() {
     let component = this;
-    component.$().animate(
-      {
+    component.$().animate({
         top: '10%'
       },
       400
@@ -502,8 +531,7 @@ export default Ember.Component.extend({
 
   closePullUp() {
     let component = this;
-    component.$().animate(
-      {
+    component.$().animate({
         top: '100%'
       },
       400,

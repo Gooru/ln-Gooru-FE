@@ -58,5 +58,28 @@ export default Ember.Service.extend({
           resolve(oaGradeItems);
         }, reject);
     });
+  },
+
+  /**
+   * Get the list of Students to-be graded for a given Offline Activity
+   * @param {string} classId
+   * @param {string} activityId
+   * @returns {Object}
+   */
+  getSubmissionsToGrade(classId, activityId, studentId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('oaAnaltyicsAdapter')
+        .getSubmissionsToGrade(classId, activityId, studentId).then(function(payload) {
+          const oaSubmitedData = service.get('offlineActivitySerializer')
+            .normalizeSubmissionGrade(payload);
+          resolve(oaSubmitedData);
+        }, reject);
+    });
+  },
+
+  submitTeacherGrade(userGrade) {
+    let data = this.get('offlineActivitySerializer').serializeStudentRubricGrades(userGrade);
+    return this.get('oaAnaltyicsAdapter').submitTeacherGrade(data);
   }
 });

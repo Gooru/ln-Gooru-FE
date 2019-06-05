@@ -1340,7 +1340,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         .get('rubricService')
         .getQuestionsToGradeForDCA(classId)
     }).then(function(hash) {
-      let questionItems = hash.questionItems.gradeItems;
+      //FE support only assessment to be graded
+      let questionItems = hash.questionItems.gradeItems.filterBy('collectionType', 'assessment');
       let oaItems = hash.oaItems.gradeItems;
       let gradeItems = questionItems.concat(oaItems);
       if (gradeItems) {
@@ -1416,6 +1417,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     const controller = this;
     const activityId = item.get('collectionId');
     const contentType = item.get('collectionType');
+    const dcaContentId = item.get('dcaContentId');
     const itemObject = Ember.Object.create();
     const studentCount = item.get('studentCount');
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -1425,6 +1427,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         .then(function(content) {
           itemObject.setProperties({
             classId: controller.get('class.id'),
+            dcaContentId,
             content,
             contentType,
             studentCount
@@ -1444,30 +1447,31 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     const itemObject = Ember.Object.create();
     const collectionId = item.get('collectionId');
     const collectionType = item.get('collectionType');
-    const isAssessment = !collectionType || collectionType === 'assessment';
     const resourceId = item.get('resourceId');
     const studentCount = item.get('studentCount');
     const activityDate = item.get('activityDate');
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      return Ember.RSVP.hash({
-        collection: collectionId
-          ? isAssessment
-            ? controller.get('assessmentService').readAssessment(collectionId)
-            : controller.get('collectionService').readCollection(collectionId)
-          : undefined
-      }).then(function(hash) {
-        const collection = hash.collection;
-        const content = collection.get('children').findBy('id', resourceId);
-        itemObject.setProperties({
-          classId: controller.get('class.id'),
-          collection,
-          content,
-          contentType: collectionType,
-          studentCount,
-          activityDate
-        });
-        resolve(itemObject);
-      }, reject);
+      return Ember.RSVP
+        .hash({
+          collection: collectionId ? controller
+            .get('assessmentService')
+            .readAssessment(collectionId) : undefined
+        })
+        .then(function(hash) {
+          const collection = hash.collection;
+          const content = collection
+            .get('children')
+            .findBy('id', resourceId);
+          itemObject.setProperties({
+            classId: controller.get('class.id'),
+            collection,
+            content,
+            contentType: collectionType,
+            studentCount,
+            activityDate
+          });
+          resolve(itemObject);
+        }, reject);
     });
   },
 
