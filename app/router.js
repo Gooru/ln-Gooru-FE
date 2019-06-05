@@ -26,6 +26,10 @@ Router.map(function() {
       });
     });
 
+    this.route('activity', function() {
+      this.route('edit', { path: '/edit/:lessonId' });
+    });
+
     this.route('collections', function() {
       this.route('edit', {
         path: '/edit/:collectionId'
@@ -270,6 +274,9 @@ Router.map(function() {
   this.route('preference');
   this.route('library');
   this.route('library-search');
+  this.route('player-offline-activity', {
+    path: 'player-offline-activity/:offlineActivityId'
+  });
 });
 
 export default Router;

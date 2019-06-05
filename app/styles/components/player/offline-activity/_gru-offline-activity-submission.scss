@@ -1,0 +1,62 @@
+.offline-activity-player.gru-offline-activity-submission {
+  padding: 30px;
+  background-color: #e3e5ea;
+  .offline-activity-submission-container {
+    .offline-activity-info-container {
+      background-color: $white;
+      padding: 15px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+      margin-bottom: 15px;
+      .offline-activity-title-container {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        .icon-container {
+          width: 30px;
+          height: 30px;
+          background-size: 30px 30px;
+          background-image: url("./gooru/images/offline.svg");
+          display: block;
+        }
+        .title-container {
+          font-size: 12px;
+          color: #37424b;
+        }
+      }
+      .offline-activity-description-container {
+        font-size: 14px;
+        color: #3e5e67;
+      }
+    }
+
+    .references-container {
+      background-color: $white;
+      padding: 15px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+      .reference-info-container {
+        display: grid;
+        grid-template-columns: 30px auto;
+        align-items: center;
+        column-gap: 10px;
+        .reference-icon-container {
+          width: 20px;
+          height: 20px;
+          background-size: 20px 20px;
+          background-image: url("./gooru/images/text-resource-dark.svg");
+          display: block;
+        }
+        .reference-title-container {
+          line-height: 17px;
+          .reference-label {
+            font-size: 12px;
+            color: #37424b;
+          }
+          .reference-links {
+            opacity: 0.7;
+            font-size: 11px;
+            color: #37424b;
+          }
+        }
+      }
+    }
+  }
+}

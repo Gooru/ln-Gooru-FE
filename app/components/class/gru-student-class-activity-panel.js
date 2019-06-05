@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {
-  PLAYER_EVENT_SOURCE
-} from 'gooru-web/config/config';
+import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 
 /**
  * Student Class Activity Panel
@@ -88,6 +86,13 @@ export default Ember.Component.extend({
         component.get('router').transitionTo('player-external', {
           queryParams
         });
+      } else if (collectionType === 'offline-activity') {
+        queryParams.offlineActivityId = contentId;
+        component
+          .get('router')
+          .transitionTo('player-offline-activity', contentId, {
+            queryParams
+          });
       } else {
         component.get('router').transitionTo('player', contentId, {
           queryParams
@@ -141,8 +146,10 @@ export default Ember.Component.extend({
    */
   visible: Ember.computed.alias('classActivity.isActive'),
 
-
-  isOfflineActivity: Ember.computed.equal('item.format', PLAYER_EVENT_SOURCE.OFFLINE_CLASS),
+  isOfflineActivity: Ember.computed.equal(
+    'item.format',
+    PLAYER_EVENT_SOURCE.OFFLINE_CLASS
+  ),
 
   /**
    * Class activity date

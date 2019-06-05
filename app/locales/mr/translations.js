@@ -82,7 +82,8 @@ export default Object.assign(quizzesTranslations, {
   'common.gooru-catalog': 'गुरू कॅटलॉग',
   'common.suggestion-made-to': 'सूचित केले',
   'common.student-selected': 'विद्यार्थी निवडले',
-  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
   'common.no-suggest-result-message':
     'तुम्ही शोधत आहात त्याच्याशी साम्य असणारा मजकूर सापडला नाही',
   'common.no-search-result':
@@ -92,7 +93,7 @@ export default Object.assign(quizzesTranslations, {
   'common.no-suggest-search-results-message':
     'तुम्ही शोधण्यासाठी वापरलेले शब्द तपासा. त्या शब्दांसाठी पर्यायी शब्द वापरून पुन्हा प्रयत्न करा.',
   'common.a-collection': 'एक संग्रह',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.a-course': 'एक कोर्स',
   'common.a-question': 'एक प्रश्न',
@@ -102,9 +103,12 @@ export default Object.assign(quizzesTranslations, {
   'common.a-assessment': 'एक मूल्यांकन',
   'common.about': 'याबद्दल',
   'common.about-you': 'तुमच्याबद्दल',
-  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.plan': 'plan',
   'offline-activities.no-completed-content':
     'There are no projects or other offline activities that have been completed yet',
@@ -117,10 +121,10 @@ export default Object.assign(quizzesTranslations, {
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
   'common.plan-an-activities-msg':
-    'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
+    'वर्गात घेण्यासाठीचे उपक्रम जोडा,आपल्या उपक्रमाचे नियोजन करण्यासाठी वर दिलेल्या संग्रह पूर्वावलोकन आयकॉनवर क्लिक करा.',
   'common.Reschedule': 'पुनर्नियोजन',
   'common.no-unschedule-items': 'नियोजन करण्यसाठी उपक्रम उपलब्ध नाही',
-  'common.repeat-activity': 'उपक्रमाची पुनरावृत्ती',
+  'common.repeat-activity': 'उपक्रम पुन्हा घ्या',
   'common.add-assessment': 'नवीन मूल्यांकन तयार करा',
   'common.add-century-skills': ' 21 व्या    शतकाची कौशल्ये जोडा',
   'common.add-collaborator': 'सहयोगकर्ता जोडा',
@@ -172,6 +176,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'मूल्यांकन',
   'common.assessment-pl.other': 'मूल्यांकन',
   'common.assessment-title': 'मूल्यांकन शीर्षक',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'अ',
   'common.assessments': 'मूल्यांकन',
   'common.assign': 'सोपवा',
@@ -467,7 +472,7 @@ export default Object.assign(quizzesTranslations, {
   'common.last-updated': 'शेवटचे अपडेट',
   'common.latest-attempt': 'नवीनतम प्रयत्न',
   'common.launch-anonymous': 'निनावी लाँच करा',
-  'common.launch-on-air': 'थेट जा',
+  'common.launch-on-air': 'गो लाइव्ह',
   'common.learning-objectives': 'शिकण्याचे उद्दिष्ट',
   'common.learning-target': 'मायक्रो-स्टॅंडर्ड',
   'common.learning-target-mobile': 'मायक्रो-स्टॅंडर्ड मध्ये स्टॅंडर्ड',
@@ -512,7 +517,7 @@ export default Object.assign(quizzesTranslations, {
   'common.new-resource': 'नवीन स्त्रोत',
   'common.next': 'पुढे',
   'common.no': 'नाही',
-  'common.no-archived': 'आपल्याकडे कोणतीही संग्रहित वर्गकक्ष नाहीत',
+  'common.no-archived': 'तुमचा मागील वर्ग आत्ता उपलब्ध नाहीत',
   'common.no-content': 'कोणताही कंटेंट उपलब्ध नाही',
   'common.no-content-my-report':
     'अद्याप कोणतीही अहवाल उपलब्ध नाहीत एकदा आपण अभ्यास करणे सुरू करताच, आपले अहवाल उपलब्ध होतील.',
@@ -566,7 +571,7 @@ export default Object.assign(quizzesTranslations, {
   'common.performance': 'कामगिरी दर्शवा',
   'common.performance-dashboard': 'कामगिरी डॅशबोर्ड',
   'common.personal-information': 'वैयक्तिक माहिती',
-  'common.play': 'खेळा',
+  'common.play': 'प्ले',
   'common.please_contact': 'कृपया संपर्क करा',
   'common.post-message': 'संदेश(मेसेज) पोस्ट करा',
   'common.preview': 'पूर्वावलोकन (प्रिव्ह्यू)',
@@ -861,9 +866,9 @@ export default Object.assign(quizzesTranslations, {
   'class.analytics.performance.teacher.metricsTable.average': 'सरासरी',
   'class.analytics.performance.teacher.metricsTable.class-average':
     'वर्ग सरासरी',
-  'class.analytics.performance.grade-items': 'श्रेणीसाठी आयटम',
+  'class.analytics.performance.grade-items': 'वर्गवारी',
   'class.analytics.performance.no-grade-items':
-    'असे दिसते की आपण सगळे पकडले आहात!',
+    'आपण अभ्यासक्रम आराखड्याच्या सर्व पायऱ्या पार केलेल्या आहेत',
   'class.analytics.performance.gru-grade-items.students.zero':
     '{{count}} विद्यार्थी',
   'class.analytics.performance.gru-grade-items.students.one':
@@ -1081,7 +1086,7 @@ export default Object.assign(quizzesTranslations, {
   'content.resources.edit.information.im-publisher': 'मी प्रकाशक आहे',
   'content.resources.edit.information.select-a-license': 'कृपया परवाना निवडा',
   'user.active-classrooms': 'सक्रिय वर्ग',
-  'user.archived-classrooms': 'संग्रहित कक्षा',
+  'user.archived-classrooms': 'तुमचा मागील वर्ग',
   'user.classrooms': 'वर्ग',
   'user.rgo': 'RGO',
   'user.create-class': 'वर्ग तयार करा',
@@ -1113,7 +1118,7 @@ export default Object.assign(quizzesTranslations, {
   'student-landing.class.performance': 'कामगिरी',
   'student-landing.class.course-map': 'अभ्यासक्रम आराखडा',
   'student-landing.class.unit': 'युनिट',
-  'student-landing.class.lesson': 'धडा',
+  'student-landing.class.lesson': 'पाठ',
   'student-landing.class.class-activities': 'वर्गाचे नियोजन',
   'student-landing.class.class-activities-tab.today': 'आज',
   'student-landing.class.class-activities-tab.past-activities':
@@ -1258,21 +1263,20 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.students-tab.proficiency-in': 'मध्ये प्रभुत्व',
   'teacher-landing.class.students-tab.data-not-available': 'माहिती उपलब्ध नाही',
   'teacher-landing.class.students-tab.course-coverage-label':
-    'वर्गातील सर्व विद्यार्थ्यांनी आत्मसात केलेल्या क्षमतांचा आढावा',
+    'वर्गातील सर्व विद्यार्थ्यांच्या क्षमतांचा घेतलेला एकत्रित आढावा',
   'teacher-landing.class.students-tab.error-message':
     'या वर्गामध्ये सलंग्न अभ्यासक्रम किंवा विद्यार्थी नाहीत. जेव्हा वर्गात अभ्यासक्रम तसेच त्यातील विद्यार्थी भरले जातील तेव्हा वर्गाचा क्षमता अहवाल येथे दाखवला जाईल.',
   'teacher-landing.class.atc-view.domains-reviewed':
-    'दिलेल्या डोमेन्सचे पुनरावलोकन करा. ',
+    'उपलब्ध क्षेत्रांचं अवलोकन ',
   'teacher-landing.class.atc-view.class-activities-completed':
     'वर्गातील पूर्ण झालेले उपक्रम ',
   'teacher-landing.class.atc-view.class-activities-pending':
-    'वर्गातील प्रलंबित उपक्रम',
+    'वर्गातील बाकी राहिलेले उपक्रम',
   'teacher-landing.class.atc-view.show-all': 'सर्व दाखवा ',
   'teacher-landing.class.atc-view.collapse': 'कोलॅप्स करा',
   'teacher-landing.class.atc-view.total-competencies-gained':
     'एकूण प्राप्त क्षमता',
-  'teacher-landing.class.atc-view.progress-label':
-    'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-label': 'क्षमतांचा झालेला विकास ',
   'teacher-landing.class.atc-view.progress-to-destination':
     'progress to destination',
   'teacher-landing.class.class-activities': 'वर्गाचे नियोजन',
@@ -1363,7 +1367,8 @@ export default Object.assign(quizzesTranslations, {
   'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
     'तुमच्या वर्गाची इयत्ता?',
   'teacher-landing.class.class-settings.origin': 'मूळ',
-  'teacher-landing.class.class-settings.destination': 'अंतिम अपेक्षित पातळी',
+  'teacher-landing.class.class-settings.destination':
+    'अध्ययन निष्पत्तीचे लक्ष्य',
   'teacher-landing.class.class-settings.students': 'विद्यार्थी',
   'teacher-landing.class.class-settings.student-id': 'विद्यार्थी आय डी',
   'teacher-landing.class.class-settings.joined-on':
@@ -1473,7 +1478,7 @@ export default Object.assign(quizzesTranslations, {
   'gru-quick-course-search.add-from-course':
     'अस्तित्वात असणाऱ्या अभ्यासक्रमातून add करा',
   'gru-quick-course-search.view-featured-courses': 'उपलब्ध अभ्यासक्रम बघा',
-  'gru-quick-course-search.assign': 'नेमून द्या',
+  'gru-quick-course-search.assign': 'विद्यार्थ्यासाठी उपक्रम निवडा',
   'gru-share-pop-over.copy': 'कॉपी',
   'gru-share-pop-over.ios-tooltip': 'कॉपी करण्यासाठी बटण धरून ठेवा',
   'gru-share-pop-over.multiarch-tooltip': 'कॉपी करण्यासाठी Ctrl + C वापरा',
@@ -1833,10 +1838,10 @@ export default Object.assign(quizzesTranslations, {
   'profile.gru-navigation.about': 'याबद्दल',
   'profile.gru-navigation.about-me': 'माझ्याबद्दल',
   'profile.gru-navigation.content': 'आशय',
-  'profile.gru-navigation.followers': 'अनुयायी',
+  'profile.gru-navigation.followers': 'फॉलॉअर्स',
   'profile.gru-navigation.library': 'ग्रंथालय',
   'profile.gru-navigation.my-content': 'माझा कंटेंट',
-  'profile.gru-navigation.following': 'पाळत आहोत',
+  'profile.gru-navigation.following': 'फॉलॉइंग',
   'profile.gru-navigation.proficiency': 'प्राविण्य',
   'profile.gru-navigation.preference.preference': 'प्राधान्यक्रम',
   'profile.edit.select-district': 'एक जिल्हा निवडा ...',
@@ -1848,12 +1853,12 @@ export default Object.assign(quizzesTranslations, {
   'profile.proficiency.not-started': 'सुरु  केलेले नाही',
   'profile.proficiency.skyline': 'स्काईलाइन',
   'profile.proficiency.baseline': 'बेसलाइन',
-  'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class Grade',
+  'profile.proficiency.grade-line': 'इतर वर्ग',
+  'profile.proficiency.class-grade-line': 'वर्ग',
   'profile.proficiency.not-tagged':
-    'वर्गाला कोणताही अभ्यासक्रम नेमलेला नाही किंवा अभ्यासक्रम वैध विषयाला किंवा इयत्तेला जोडलेला नाही.',
-  'profile.proficiency.show-compressed-chart': 'संक्षिप्त चार्ट दाखवा',
-  'profile.proficiency.show-expanded-chart': 'विस्तृत चार्ट दाखवा',
+    'या वर्गासाठी कुठलाही अभ्यासक्रम अजून दिलेला नाही. किंवा, अभ्यासक्रम अजून योग्य विषय आणि इयत्तेशी जोडलेला नाही',
+  'profile.proficiency.show-compressed-chart': 'संक्षिप्त तक्ता दाखवा',
+  'profile.proficiency.show-expanded-chart': 'विस्तृत तक्ता दाखवा',
   'profile.preference.language-preference': 'भाषेचा प्राधान्य क्रम',
   'profile.preference.choose-language': 'भाषा निवडा',
   'profile.preference.choose-sec-language': 'निवडा',
@@ -2211,7 +2216,7 @@ export default Object.assign(quizzesTranslations, {
   'gru-take-tour.study-player.stepFour.description':
     'सध्या आपण काय अभ्यास करीत आहात यावर आधारित अतिरिक्त संसाधने शोधू शकता.',
   'gru-take-tour.study-player.stepFive.title': 'पूर्णत्व',
-  'gru-take-tour.study-player.stepFive.nuTitle': 'क्षमता',
+  'gru-take-tour.study-player.stepFive.nuTitle': 'एकूण क्षमता',
   'gru-take-tour.study-player.stepFive.description':
     'आपण किती पूर्ण केले आहे हे दर्शविते.',
   'gru-take-tour.study-player.stepSix.title': 'कामगिरी',
@@ -2460,15 +2465,15 @@ export default Object.assign(quizzesTranslations, {
   'competency-info-content.portfolio': 'PORTFOLIO',
   'competency-info-content.metadata': 'METADATA',
   'competency-info-content.learning-map': 'LEARNING MAP',
-  'competency-meta-data.title': 'ALT-CONCEPTS',
-  'competency-meta-data.heading.micro': 'MICRO COMPETENCIES',
-  'competency-meta-data.heading.prequisite': 'PREQUISITE COMPETENCIES',
+  'competency-meta-data.title': 'विकासात्मक संकल्पना',
+  'competency-meta-data.heading.micro': 'सूक्ष्म क्षमता',
+  'competency-meta-data.heading.prequisite': 'पूर्वापेक्षित क्षमता',
   'competency-meta-data.nodata.micro':
-    'There are no micro-competencies defined for this competency',
+    'या क्षमतेसाठी कोणत्याही सूक्ष्म क्षमता उपलब्ध नाहीत. ',
   'competency-meta-data.nodata.prequisite':
-    'There are no prerequisite-competencies defined for this competency',
+    'या क्षमतेसाठी कोणत्याही पूर्वापेक्षित क्षमता उपलब्ध नाहीत',
   'competency-meta-data.nodata.competency':
-    'There are no alt-concepts defined for this competency',
+    'या क्षमतेसाठी कोणत्याही विकासात्मक संकल्पना उपलब्ध नाहीत',
   'student-journey.heading': 'YOUR JOURNEY',
   'student-journey.teacher-heading': 'STUDENT JOURNEY',
   'student-journey.nodata':
@@ -2524,7 +2529,7 @@ export default Object.assign(quizzesTranslations, {
     'शिक्षकाने आपली सबमिशन श्रेणीमध्ये केली आहे',
   'goahead.add.something': 'Go ahead, add something.',
   'present.diagnostic.determine.not.know':
-    'Present a diagnostic to determine the student\'s current location, if not known?',
+    'विद्यार्थ्याची नैदानिक चाचणी करून त्याच्या प्रगतीचा आढावा घ्या',
   'present.diagnostic.determine.know':
     '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
   'add.to.todays.class': 'Add to Today\'s Class',
@@ -2548,7 +2553,7 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'enter-collection-timespent': 'संग्रह करण्यासाठी व्यतीत केलेला वेळ येथे घाला',
   'suggested-lessons': 'Suggested Lessons',
   'created-by-kangoorus': 'Created by Kangoorus',
   'preparatory-material': 'Preparatory Material',

@@ -5,7 +5,6 @@ import Ember from 'ember';
  * @typedef {Object} OfflineActivityAnalyticsAdapter
  */
 export default Ember.Object.extend({
-
   session: Ember.inject.service('session'),
 
   namespace: '/api/nucleus-insights/v2',
@@ -78,7 +77,7 @@ export default Ember.Object.extend({
   submitTeacherGrade(data) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/grades/collections`;
+    const url = `${namespace}/rubrics/grades/collections`;
     const options = {
       type: 'POST',
       contentType: 'application/json; charset=utf-8',

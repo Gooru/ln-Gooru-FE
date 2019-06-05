@@ -36,8 +36,6 @@
 
       &.offline-activity {
         .ca-play-container {
-          pointer-events: none;
-
           .ca-play-btn {
             i {
               color: #535e67;
@@ -91,7 +89,11 @@
           font-family: "Open Sans";
           color: #4a4a4a;
           padding: 0 20px 0 0;
-          @include ellipsis($font-size: 15px, $line-height: 1.5, $lines-to-show: 1);
+          @include ellipsis(
+            $font-size: 15px,
+            $line-height: 1.5,
+            $lines-to-show: 1
+          );
         }
 
         .offline-activity-info {
@@ -167,7 +169,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      pointer-events: none;
+      cursor: pointer;
 
       .ca-play-btn {
         height: 30px;

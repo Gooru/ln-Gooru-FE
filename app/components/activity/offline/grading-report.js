@@ -5,8 +5,6 @@ import {
   PLAYER_EVENT_SOURCE
 } from 'gooru-web/config/config';
 export default Ember.Component.extend({
-
-
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -17,7 +15,9 @@ export default Ember.Component.extend({
   /**
    * @requires service:api-sdk/offline-activity-analytics
    */
-  oaAnaltyicsService: Ember.inject.service('api-sdk/offline-activity/oa-analytics'),
+  oaAnaltyicsService: Ember.inject.service(
+    'api-sdk/offline-activity/oa-analytics'
+  ),
 
   /**
    * @type {ProfileService} Service to retrieve profile information
@@ -425,6 +425,7 @@ export default Ember.Component.extend({
     });
   },
 
+
   parseStudentSubmissionGrade(studentGrade) {
     let component = this;
     let student = component.get('student');
@@ -511,7 +512,6 @@ export default Ember.Component.extend({
     });
   },
 
-
   loadData() {
     let component = this;
     component.handleCarouselControl();
@@ -523,21 +523,21 @@ export default Ember.Component.extend({
   openPullUp() {
     let component = this;
     component.$().animate({
-      top: '10%'
-    },
-    400
+        top: '10%'
+      },
+      400
     );
   },
 
   closePullUp() {
     let component = this;
     component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-    }
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+      }
     );
   },
 

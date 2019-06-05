@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { ROLES } from 'gooru-web/config/config';
 
 /**
  * MileStone Course map controller
@@ -112,18 +111,6 @@ export default Ember.Controller.extend({
     //Action triggered when toggle course info
     onToggleCourseInfo() {
       $('.rescope-content-preview.course-info-toggle-container').slideToggle();
-    },
-
-    //Action triggered when click on the student competencies progress graph
-    onClickProgressChart() {
-      this.transitionToRoute('student.class.student-learner-proficiency', {
-        queryParams: {
-          userId: this.get('session.userId'),
-          classId: this.get('class.id'),
-          courseId: this.get('class.courseId'),
-          role: ROLES.STUDENT
-        }
-      });
     }
   }
 });

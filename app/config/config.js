@@ -79,7 +79,8 @@ export const CONTENT_TYPES = {
   RESOURCE: 'resource',
   QUESTION: 'question',
   RUBRIC: 'rubric',
-  OFFLINE_ACTIVITY: 'offline-activity'
+  OFFLINE_ACTIVITY: 'offline-activity',
+  ACTIVITY: 'activity'
 };
 
 export const ASSESSMENT_SUB_TYPES = {
@@ -398,3 +399,36 @@ export const SEARCH_CONTEXT = {
   GOORU_CATALOG: 'gooru-catalog',
   MY_CONTENT: 'my-content'
 };
+
+export const OA_TASK_SUBMISSION_TYPES = [
+  {
+    value: 'image',
+    submissionType: 'uploaded',
+    validExtensions: '.jpg, .jpeg, .gif, .png'
+  },
+  {
+    value: 'pdf',
+    submissionType: 'uploaded',
+    validExtensions: '.pdf'
+  },
+  {
+    value: 'presentation',
+    submissionType: 'uploaded',
+    validExtensions: '.ppt, .pptx'
+  },
+  {
+    value: 'document',
+    submissionType: 'uploaded',
+    validExtensions: '.doc, .docx'
+  },
+  {
+    value: 'others',
+    submissionType: 'uploaded',
+    validExtensions: ''
+  },
+  {
+    value: 'url',
+    submissionType: 'remote',
+    validExtensions: ''
+  }
+];

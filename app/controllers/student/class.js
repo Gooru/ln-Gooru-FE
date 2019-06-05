@@ -99,7 +99,7 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   barChartData: Ember.computed(function() {
     const completed = this.get('class.performanceSummary.totalCompleted');
     const total = this.get('class.performanceSummary.total');
-    const percentage = completed ? completed / total * 100 : 0;
+    const percentage = completed ? (completed / total) * 100 : 0;
     return [
       {
         color: ANONYMOUS_COLOR,

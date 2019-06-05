@@ -79,10 +79,14 @@ export default Object.assign(quizzesTranslations, {
   'common.avg-score': 'ହାରାହାରି ସ୍କୋର୍',
   'common.frq': 'FRQ',
   'common.schedule': 'ସୂଚୀ',
-  'common.answer-this-activity': 'Answer this rubric to complete your activity.',
-  'ca.student.no-content': 'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content': 'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content': 'There are no offline activities that are completed yet',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.plan': 'plan',
   'offline-activities.no-completed-content':
     'There are no projects or other offline activities that have been completed yet',
@@ -106,7 +110,7 @@ export default Object.assign(quizzesTranslations, {
   'common.a-collection': 'ଏକ ସଂଗ୍ରହ',
   'common.a-course': 'ଏକ ପାଠ୍ୟକ୍ରମ',
   'common.offline-activity': 'offline activity',
-  'common.offline-activites':'offline activites',
+  'common.offline-activites': 'offline activites',
   'common.a-question': 'ଏକ ପ୍ରଶ୍ନ',
   'common.a-resource': 'ଏକ ଉତ୍ସ',
   'common.a-rubric': 'ଏକ ଶୀର୍ଷକ',
@@ -180,6 +184,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'ମୂଲ୍ୟାଙ୍କନ',
   'common.assessment-pl.other': 'ମୂଲ୍ୟାଙ୍କନ ଗୁଡ଼ିକ',
   'common.assessment-title': 'ମୂଲ୍ୟାଙ୍କନ ଶୀର୍ଷକ',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'A',
   'common.assessments': 'ମୂଲ୍ୟାଙ୍କନ ଗୁଡ଼ିକ',
   'common.assign': 'ନ୍ୟସ୍ତ କରିବା (ଆସାଇନ୍)',

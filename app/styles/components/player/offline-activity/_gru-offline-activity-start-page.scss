@@ -1,0 +1,161 @@
+.offline-activity-player.gru-offline-activity-start-page {
+  background-color: #e3e5ea;
+  .player-start-page-container {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    column-gap: 15px;
+    padding: 30px;
+    row-gap: 15px;
+    .project-container {
+      .project-thumbnail-container {
+        position: relative;
+        width: 360px;
+        height: 230px;
+        background-size: 360px 230px;
+        display: block;
+        background-image: url("../assets/gooru/offline-activity-default.png");
+        .project-standards {
+          position: absolute;
+          bottom: 44px;
+          padding-left: 15px;
+        }
+        .project-type {
+          position: absolute;
+          bottom: 8px;
+          color: $white;
+          font-size: 12px;
+          z-index: 1;
+          width: 100%;
+          padding-left: 30px;
+        }
+        &:after {
+          display: block;
+          position: absolute;
+          background-image: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0) 0,
+            $gray-base 100%
+          );
+          bottom: 0;
+          height: 60px;
+          width: 100%;
+          content: "";
+        }
+      }
+      .project-description-container {
+        max-height: 183px;
+        padding: 15px;
+        background-color: $white;
+        .description-label {
+          font-size: 14px;
+          font-weight: bold;
+          color: #3e5e67;
+        }
+        .description-text {
+          color: #37424b;
+          @include ellipsis(
+            $font-size: 12px,
+            $line-height: 1.33,
+            $lines-to-show: 9
+          );
+        }
+      }
+      .project-references-container {
+        margin-top: 15px;
+        height: 48px;
+        box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3);
+        background-color: $white;
+        display: grid;
+        grid-template-columns: 30px auto;
+        align-items: center;
+        column-gap: 10px;
+        padding-left: 15px;
+        .reference-icon {
+          width: 20px;
+          height: 20px;
+          background-size: 20px 20px;
+          background-image: url("./gooru/images/text-resource-dark.svg");
+          display: block;
+        }
+        .reference-info {
+          display: grid;
+          line-height: 17px;
+          .reference-label {
+            font-size: 12px;
+            color: #37424b;
+          }
+          .reference-links {
+            font-size: 11px;
+            color: #37424b;
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+
+    .tasks-container {
+      max-height: 490px;
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        height: 6px;
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $gray-light;
+        border: 1px solid $gray-light;
+        border-radius: 5px;
+      }
+      .gru-offline-activity-task-submission {
+        .task-submission-container {
+          box-shadow: none;
+        }
+        &:first-child {
+          .task-submission-container {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+
+    .actions-container {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      display: grid;
+      grid-template-columns: auto auto;
+      justify-content: right;
+      column-gap: 15px;
+      .action-btn {
+        width: 120px;
+        height: 48px;
+        color: $white;
+        line-height: 48px;
+        text-align: center;
+        cursor: pointer;
+        &.cancel-action {
+          background-color: rgba(83, 94, 103, 0.5);
+        }
+
+        &.start-action {
+          background-color: #0072bc;
+        }
+      }
+    }
+
+    @media screen and (max-width: $screen-sm) {
+      grid-template-columns: auto;
+      padding: 8px;
+
+      .project-container {
+        .project-thumbnail-container {
+          width: 100%;
+          background-size: 100% 230px;
+        }
+      }
+      .actions-container {
+        grid-column-start: 1;
+        grid-column-end: 1;
+      }
+    }
+  }
+}
