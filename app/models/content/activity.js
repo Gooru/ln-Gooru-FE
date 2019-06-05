@@ -74,6 +74,11 @@ export default Ember.Object.extend(Validations, CollectionBase, {
   tasks: [],
 
   /**
+   * @property {import { module } from '@ember/array';}
+   */
+  rubric: [],
+
+  /**
    * @property {boolean}
    */
   classroom_play_enabled: null,

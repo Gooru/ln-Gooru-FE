@@ -54,9 +54,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
         model.get('thumbnail'),
         this.get('session.cdnUrls')
       ),
-      metadata: model.get('hasAudience') ? {
-        audience: model.get('audience')
-      } : null,
+      metadata: model.get('hasAudience')
+        ? {
+          audience: model.get('audience')
+        }
+        : null,
       taxonomy: serializer
         .get('taxonomySerializer')
         .serializeTaxonomy(model.get('standards'))
@@ -73,9 +75,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
   serializeUpdateRubric: function(model) {
     const serializer = this;
     if (model.get('rubricOn')) {
-      const url = model.get('uploaded') ?
-        cleanFilename(model.get('url'), this.get('session.cdnUrls')) :
-        model.get('url');
+      const url = model.get('uploaded')
+        ? cleanFilename(model.get('url'), this.get('session.cdnUrls'))
+        : model.get('url');
       return {
         title: nullIfEmpty(model.get('title')),
         description: nullIfEmpty(model.get('description')),
@@ -83,9 +85,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
           model.get('thumbnail'),
           this.get('session.cdnUrls')
         ),
-        metadata: model.get('hasAudience') ? {
-          audience: model.get('audience')
-        } : null,
+        metadata: model.get('hasAudience')
+          ? {
+            audience: model.get('audience')
+          }
+          : null,
         taxonomy: serializer
           .get('taxonomySerializer')
           .serializeTaxonomy(model.get('standards')),
@@ -93,10 +97,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
         is_remote: !model.get('uploaded'),
         feedback_guidance: nullIfEmpty(model.get('feedback')),
         overall_feedback_required: !!model.get('requiresFeedback'),
-        categories: model.get('categories').length ?
-          model.get('categories').map(function(category) {
+        categories: model.get('categories').length
+          ? model.get('categories').map(function(category) {
             return serializer.serializedUpdateRubricCategory(category);
-          }) : null
+          })
+          : null
       };
     } else {
       return {
@@ -172,23 +177,28 @@ export default Ember.Object.extend(ConfigurationMixin, {
       collection_id: nullIfEmpty(model.get('collectionId')),
       session_id: nullIfEmpty(model.get('sessionId')),
       resource_id: nullIfEmpty(model.get('resourceId')),
-      student_score: model.get('studentScore') ?
-        parseInt(model.get('studentScore')) : parseInt(model.get('currentScore')),
-      max_score: model.get('maxScore') ?
-        model.get('maxScore') : model.get('totalPoints'),
+      student_score: model.get('studentScore')
+        ? parseInt(model.get('studentScore'))
+        : parseInt(model.get('currentScore')),
+      max_score: model.get('maxScore')
+        ? model.get('maxScore')
+        : model.get('totalPoints'),
       overall_comment: model.get('comment'),
       created_at: toTimestamp(model.get('createdDate')),
       updated_at: toTimestamp(model.get('updatedDate')),
-      category_score: model.get('categoriesScore').length ?
-        model
+      category_score: model.get('categoriesScore').length
+        ? model
           .get('categoriesScore')
-          .map(category => this.serializedStudentGradeCategoryScore(category)) : null,
+          .map(category => this.serializedStudentGradeCategoryScore(category))
+        : null,
       taxonomy: this.get('taxonomySerializer').serializeTaxonomy(
         model.get('standards')
       ),
-      metadata: model.get('hasAudience') ? {
-        audience: model.get('audience')
-      } : null,
+      metadata: model.get('hasAudience')
+        ? {
+          audience: model.get('audience')
+        }
+        : null,
       tenant_root: model.get('tenantRoot'),
       tenant: model.get('tenant'),
       gut_codes: model.get('gutCodes'),
@@ -288,12 +298,14 @@ export default Ember.Object.extend(ConfigurationMixin, {
         maxScore: data.max_score,
         increment: data.increment,
         scoring: data.scoring,
-        categories: categories ?
-          categories.map(category =>
+        categories: categories
+          ? categories.map(category =>
             serializer.normalizeRubricCategory(category)
-          ) : Ember.A(),
-        owner: filteredOwners.get('length') ?
-          filteredOwners.get('firstObject') : ownerId,
+          )
+          : Ember.A(),
+        owner: filteredOwners.get('length')
+          ? filteredOwners.get('firstObject')
+          : ownerId,
         createdDate: data.created_at,
         updatedDate: data.updated_at,
         tenant: data.tenant,
@@ -302,7 +314,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
         originalCreatorId: data.original_creator_id,
         originalRubricId: data.original_rubric_id,
         parentRubricId: data.parent_rubric_id,
-        tenantRoor: data.tenant_root
+        tenantRoor: data.tenant_root,
+        grader: data.grader
       });
     }
   },
@@ -347,8 +360,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return GradeQuestion.create(Ember.getOwner(this).ownerInjection(), {
       classId: data.classId,
       courseId: data.courseId,
-      gradeItems: gradeItems ?
-        gradeItems.map(item => serializer.normalizeGradeQuestion(item)) : null
+      gradeItems: gradeItems
+        ? gradeItems.map(item => serializer.normalizeGradeQuestion(item))
+        : null
     });
   },
 
@@ -412,9 +426,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
    */
   normalizeRubricQuestionSummary: function(data) {
     const serializer = this;
-    const rubricQuestionSummary = data.queRubrics.length ?
-      data.queRubrics[0] :
-      null;
+    const rubricQuestionSummary = data.queRubrics.length
+      ? data.queRubrics[0]
+      : null;
 
     if (rubricQuestionSummary) {
       const categoryScore = rubricQuestionSummary.categoryScore;
@@ -424,8 +438,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
         learnerScore: rubricQuestionSummary.studentScore,
         maxScore: rubricQuestionSummary.maxScore,
         comment: rubricQuestionSummary.overallComment,
-        categoriesScore: categoryScore ?
-          categoryScore.map(item => serializer.normalizeCategoryScore(item)) : null
+        categoriesScore: categoryScore
+          ? categoryScore.map(item => serializer.normalizeCategoryScore(item))
+          : null
       });
     }
   },
