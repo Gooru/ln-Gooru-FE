@@ -284,16 +284,17 @@ export default Ember.Component.extend({
 
     //Action triggered when click on the student competencies progress graph
     onClickProgressChart() {
-      this.get(
-        'router'
-      ).transitionTo('student.class.student-learner-proficiency', {
-        queryParams: {
-          userId: this.get('session.userId'),
-          classId: this.get('classId'),
-          courseId: this.get('courseId'),
-          role: ROLES.STUDENT
+      this.get('router').transitionTo(
+        'student.class.student-learner-proficiency',
+        {
+          queryParams: {
+            userId: this.get('session.userId'),
+            classId: this.get('classId'),
+            courseId: this.get('courseId'),
+            role: ROLES.STUDENT
+          }
         }
-      });
+      );
     }
   },
 
@@ -331,36 +332,34 @@ export default Ember.Component.extend({
       filters.fw_code = fwkCode;
     }
 
-    Ember.RSVP
-      .hash({
-        rescopedContents: component.getRescopedContents(),
-        grades: taxonomyService.fetchGradesBySubject(filters),
-        competencySummary: component.get('isStudent')
-          ? component.fetchStudentCompetencySummary()
-          : null
-      })
-      .then(({ rescopedContents, grades, competencySummary }) => {
-        if (!component.isDestroyed) {
-          component.set('competencySummary', competencySummary);
-          let milestones = component.get('milestones');
-          let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
-            grades,
-            milestones
-          );
-          component.set('rescopedContents', rescopedContents);
-          component.set('milestones', milestoneData);
-          if (showPerformance) {
-            component.fetchMilestonePerformance();
-          }
-          let customLocationPresent = component.get('location');
-          if (customLocationPresent) {
-            component.navigateLocation();
-          } else if (locateLastPlayedItem) {
-            component.identifyUserLocationAndLocate();
-          }
-          component.set('isLoading', false);
+    Ember.RSVP.hash({
+      rescopedContents: component.getRescopedContents(),
+      grades: taxonomyService.fetchGradesBySubject(filters),
+      competencySummary: component.get('isStudent')
+        ? component.fetchStudentCompetencySummary()
+        : null
+    }).then(({ rescopedContents, grades, competencySummary }) => {
+      if (!component.isDestroyed) {
+        component.set('competencySummary', competencySummary);
+        let milestones = component.get('milestones');
+        let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
+          grades,
+          milestones
+        );
+        component.set('rescopedContents', rescopedContents);
+        component.set('milestones', milestoneData);
+        if (showPerformance) {
+          component.fetchMilestonePerformance();
         }
-      });
+        let customLocationPresent = component.get('location');
+        if (customLocationPresent) {
+          component.navigateLocation();
+        } else if (locateLastPlayedItem) {
+          component.identifyUserLocationAndLocate();
+        }
+        component.set('isLoading', false);
+      }
+    });
   },
 
   fetchMilestonePerformance() {
@@ -434,44 +433,42 @@ export default Ember.Component.extend({
     let fwCode = component.get('fwCode');
     let userUid = component.get('studentId');
 
-    Ember.RSVP
-      .hash({
-        milestoneAssessmentLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
-          classId,
-          courseId,
-          milestoneId,
-          CONTENT_TYPES.ASSESSMENT,
-          userUid,
-          fwCode
-        ),
-        milestoneCollectionLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
-          classId,
-          courseId,
-          milestoneId,
-          CONTENT_TYPES.COLLECTION,
-          userUid,
-          fwCode
-        )
-      })
-      .then(
-        ({
-          milestoneAssessmentLessonsPerformance,
-          milestoneCollectionLessonsPerformance
-        }) => {
-          if (!component.isDestroyed) {
-            component.setMilestoneLessonPerformanceData(
-              CONTENT_TYPES.COLLECTION,
-              lessons,
-              milestoneCollectionLessonsPerformance
-            );
-            component.setMilestoneLessonPerformanceData(
-              CONTENT_TYPES.ASSESSMENT,
-              lessons,
-              milestoneAssessmentLessonsPerformance
-            );
-          }
+    Ember.RSVP.hash({
+      milestoneAssessmentLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
+        classId,
+        courseId,
+        milestoneId,
+        CONTENT_TYPES.ASSESSMENT,
+        userUid,
+        fwCode
+      ),
+      milestoneCollectionLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
+        classId,
+        courseId,
+        milestoneId,
+        CONTENT_TYPES.COLLECTION,
+        userUid,
+        fwCode
+      )
+    }).then(
+      ({
+        milestoneAssessmentLessonsPerformance,
+        milestoneCollectionLessonsPerformance
+      }) => {
+        if (!component.isDestroyed) {
+          component.setMilestoneLessonPerformanceData(
+            CONTENT_TYPES.COLLECTION,
+            lessons,
+            milestoneCollectionLessonsPerformance
+          );
+          component.setMilestoneLessonPerformanceData(
+            CONTENT_TYPES.ASSESSMENT,
+            lessons,
+            milestoneAssessmentLessonsPerformance
+          );
         }
-      );
+      }
+    );
   },
 
   /**
@@ -524,35 +521,33 @@ export default Ember.Component.extend({
     let lessonId = lesson.get('lesson_id');
     let performanceService = component.get('performanceService');
 
-    Ember.RSVP
-      .hash({
-        performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
-          classId,
-          courseId,
-          unitId,
-          lessonId,
-          CONTENT_TYPES.ASSESSMENT,
-          userUid
-        ),
-        performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
-          classId,
-          courseId,
-          unitId,
-          lessonId,
-          CONTENT_TYPES.COLLECTION,
-          userUid
-        )
-      })
-      .then(({ performanceAssessment, performanceCollection }) => {
-        component.setMilestoneCollectionPerformanceData(
-          collections,
-          performanceAssessment
-        );
-        component.setMilestoneCollectionPerformanceData(
-          collections,
-          performanceCollection
-        );
-      });
+    Ember.RSVP.hash({
+      performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
+        classId,
+        courseId,
+        unitId,
+        lessonId,
+        CONTENT_TYPES.ASSESSMENT,
+        userUid
+      ),
+      performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
+        classId,
+        courseId,
+        unitId,
+        lessonId,
+        CONTENT_TYPES.COLLECTION,
+        userUid
+      )
+    }).then(({ performanceAssessment, performanceCollection }) => {
+      component.setMilestoneCollectionPerformanceData(
+        collections,
+        performanceAssessment
+      );
+      component.setMilestoneCollectionPerformanceData(
+        collections,
+        performanceCollection
+      );
+    });
   },
 
   setMilestoneCollectionPerformanceData(
@@ -963,17 +958,16 @@ export default Ember.Component.extend({
       if (isTeacher) {
         filter.userId = studentId;
       }
-      return Ember.RSVP
-        .hash({
-          rescopedContents: component
-            .get('rescopeService')
-            .getSkippedContents(filter)
-        })
+      return Ember.RSVP.hash({
+        rescopedContents: component
+          .get('rescopeService')
+          .getSkippedContents(filter)
+      })
         .then(rescopedContents => {
           return rescopedContents.rescopedContents;
         })
         .catch(function() {
-          return {};
+          return null;
         });
     }
   },

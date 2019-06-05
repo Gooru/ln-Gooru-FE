@@ -344,3 +344,9 @@
     classMembers=members
   }}
 {{/if}}
+{{#if isShowOfflineActivityPreview}}
+  {{reports.pull-up.oa-preview
+    showPullUp=isShowOfflineActivityPreview
+    oaId=previewContent.id
+  }}
+{{/if}}

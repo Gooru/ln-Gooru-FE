@@ -1,0 +1,59 @@
+<div class="backdrop" {{action "onClosePullUp"}}></div>
+<div class="oa-preview-container">
+  <div class="oa-header-container">
+    <div class="close-pullup" {{action "onClosePullUp"}}>
+      {{gru-icon name="arrow_downward"}}
+    </div>
+    <div class="preview-title-container">
+      <i class="oa-icon"></i>
+      {{#unless isLoading}}
+        <p class="preview-title">{{t 'project'}} {{t offlineActivity.subFormat}}</p>
+      {{/unless}}
+    </div>
+    {{#if allowPlay}}
+      <div class="content-player" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
+        {{gru-icon name="play_arrow"}}
+      </div>
+    {{/if}}
+    {{#if showRemix}}
+      <div class="content-remix" title="{{t 'common.remix'}}" data-toggle="tooltip" {{action "onRemixContent"}}>
+        {{gru-icon name="content_copy"}}
+      </div>
+    {{/if}}
+    {{#if showPrint}}
+      <div class="print-preview" title="{{t 'common.download-print'}}" data-toggle="tooltip" {{action "onPrintPreview"}}>
+        {{gru-icon name="get_app"}}
+      </div>
+    {{/if}}
+  </div>
+  <div class="oa-body-container">
+    <div class="oa-info-image-container">
+      <div class="oa-info-container">
+        <div class="oa-title-container">
+          <div class="icon-container">
+          </div>
+          <div class="title-container">
+            {{offlineActivity.title}}
+          </div>
+        </div>
+        <div class="oa-description-container">
+          {{offlineActivity.learningObjectives}}
+        </div>
+      </div>
+    </div>
+    <div class="oa-references-container">
+      {{player.offline-activity.gru-offline-activity-references
+          offlineActivity=offlineActivity
+        }}
+    </div>
+    <div class="oa-task-container">
+      {{#each offlineActivity.tasks as |task|}}
+        {{player.offline-activity.gru-offline-activity-task-submission
+          task=task
+          classId=classId
+          isPreview=true
+        }}
+      {{/each}}
+    </div>
+  </div>
+</div>
