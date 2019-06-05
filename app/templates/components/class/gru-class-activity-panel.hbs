@@ -119,6 +119,11 @@
             </div>
           {{/if}}
         </div>
+        <div class="re-add-data {{if (eq classActivity.usersCount 0) 'disabled'}}">
+          {{#if collectionPerformanceSummary}}
+            <span {{action "onOpenPerformanceEntry" item classActivity true}}>{{t 'common.update-data'}}</span>
+          {{/if}}
+        </div>
       </div>
       <div class="dca-btn">
         {{#if enableCollectionLiveLearning}}
@@ -142,11 +147,6 @@
             {{gru-icon name="delete_outline"}}
           </span>
         {{/unless}}
-      </div>
-      <div class="close-activity">
-        <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.close"}}" {{action 'expandLess'}}>
-          {{gru-icon name="close"}}
-        </span>
       </div>
     </div>
   {{else}}
