@@ -38,18 +38,22 @@
             </div>
           </div>
         </div>
-        <div class="self-grade-section">
-          <div class="label">Self-Graded</div>
-          <div class="score">17 / 20</div>
-          <div class="label">Rubric Score</div>
-        </div>
+        {{#if student.selfGrade}}
+          <div class="self-grade-section" style={{safe-html (concat "background-color:" (grade-color studentSelfGrade))}}>
+            <div class="label">Self-Graded</div>
+            <div class="score">
+              <sup>{{student.selfGrade.score}}</sup>&frasl;<sub>{{student.selfGrade.maxScore}}</sub>
+            </div>
+            <div class="label">Rubric Score</div>
+          </div>
+        {{/if}}
       </div>
       <div class="tasks-section">
         {{#each tasks as |task index|}}
           <div class="task">
             <div class="task-info">
               <div class="icon">{{gru-icon name="language"}}</div>
-              <div class="title ellipsis">Task {{index}}: {{task.title}}</div>
+              <div class="title ellipsis">{{task.title}}</div>
             </div>
             <div class="task-desc">{{task.description}}</div>
             <div class="student-submission">
@@ -90,66 +94,66 @@
         {{/if}}
       </div>
       <div class="oa-grade-right-panel-body">
-        {{#if rubric.scoring}}
-          <div class="oa-grade-rubric-grading">
-            {{validation.gru-input-number model=userGrade  valuePath='studentScore' min=0 max=rubric.maxScore step=rubric.increment }}
-            <span class="score">{{rubric.maxScore}}</span>
-          </div>
-        {{else}}
-          <div class="oa-grade-rubric-categories">
-            {{#each categories as | category categoryIndex |}}
-              <div class="oa-grade-rubric-category" id="oa-grade-rubric-category-{{categoryIndex}}">
-                {{#if category.allowsLevels}}
-                  <div class="oa-grade-rubric-category-info">
-                    <p>{{category.title}}</p>
-                  </div>
-                {{/if}}
-                <div class="oa-grade-rubric-level-container">
-                  {{#if category.allowsLevels}}
-                    <div class="oa-grade-rubric-levels {{unless (and category.allowsLevels category.allowsScoring) 'no-progress'}} {{if category.scoreInPrecentage 'active'}}">
-                      {{#each category.levels as |level levelIndex|}}
-                        <i class="oa-grade-info-popover {{if level.selected 'selected'}}" data-html="true" title="Points: {{level.score}}" data-content="{{level.name}}" data-category={{categoryIndex}} data-level={{levelIndex}}></i>
-                      {{/each}}
-                      {{#if (and category.allowsLevels category.allowsScoring)}}
-                        <div class="progress-bar" style={{safe-html (concat "background-color:" (grade-color category.scoreInPrecentage) ";width:" category.scoreInPrecentage "%")}}></div>
-                      {{/if}}
-                    </div>
-                  {{else}}
-                    <div class="oa-grade-rubric-category-info">
-                      <p>{{category.title}}</p>
-                    </div>
-                  {{/if}}
-                  <div class="oa-grade-clear {{if category.selected 'active'}}" {{action 'unSelectCategoryLevel' category}}>
-                    {{gru-icon name="clear"}}
-                  </div>
-                  <div class="oa-grade-comment" {{action 'onShowAddCommentBox' categoryIndex}}>
-                    {{gru-icon name="mode_comment"}}
-                  </div>
-                </div>
-                <div class="oa-grade-comment-section">
-                  {{validation.gru-textarea
-                      model=category
-                      valuePath='comment'
-                      maxLength=500
-                      rows=1
-                      placeholder='Add Comment'
-                    }}
-                </div>
+        <div class="panel-group" id="rubric-panel">
+          <div class="panel panel-default student-rubric-section">
+            <div class="student-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#student">
+              <span>{{t 'common.student'}}</span>
+              <div class="icons">
+                {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
               </div>
-            {{/each}}
+            </div>
+            <div class="student-grading-panel panel-collapse collapse in" id="student">
+              {{#if rubric.scoring}}
+                <div class="oa-grade-rubric-grading">
+                  {{validation.gru-input-number model=userGrade  valuePath='studentScore' min=0 max=rubric.maxScore step=rubric.increment }}
+                  <span class="score">{{rubric.maxScore}}</span>
+                </div>
+              {{else}}
+                {{rubric.rubric-category-grades isDisable=true categories=studentSelfGradedCategories}}
+              {{/if}}
+              <div class="oa-grade-general-comment-container disable-event">
+                {{validation.gru-textarea
+                  model=student.selfGrade
+                  valuePath='overallComment'
+                  maxLength=500
+                  rows=1
+                  placeholder='General Comments Only'
+                }}
+              </div>
+            </div>
           </div>
-        {{/if}}
-        <div class="oa-grade-general-comment-container">
-          {{validation.gru-textarea
-              model=userGrade
-              valuePath='comment'
-              maxLength=500
-              rows=1
-              placeholder='General Comments Only'
-            }}
+          <div class="panel panel-default teacher-rubric-section">
+            <div class="teacher-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#teacher">
+              <span>{{t 'common.teacher'}}</span>
+              <div class="icons">
+                {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+              </div>
+            </div>
+            <div class="teacher-grading-panel panel-collapse collapse" id="teacher">
+              {{#if rubric.scoring}}
+                <div class="oa-grade-rubric-grading">
+                  {{validation.gru-input-number model=userGrade  valuePath='studentScore' min=0 max=rubric.maxScore step=rubric.increment }}
+                  <span class="score">{{rubric.maxScore}}</span>
+                </div>
+              {{else}}
+                {{rubric.rubric-category-grades categories=categories}}
+              {{/if}}
+              <div class="oa-grade-general-comment-container">
+                {{validation.gru-textarea
+                  model=userGrade
+                  valuePath='comment'
+                  maxLength=500
+                  rows=1
+                  placeholder='General Comments Only'
+                }}
+              </div>
+            </div>
+          </div>
         </div>
         <div class="oa-grade-action-btns">
-          <button type="button" class="btn confirm btn-primary btn-lg">{{t 'common.submit'}}</button>
+          <button type="button" class="btn confirm btn-primary btn-lg" {{action 'saveGrade'}}>{{t 'common.submit'}}</button>
         </div>
       </div>
     </div>

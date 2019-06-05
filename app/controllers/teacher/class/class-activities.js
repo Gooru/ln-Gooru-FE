@@ -1343,6 +1343,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     const controller = this;
     const activityId = item.get('collectionId');
     const contentType = item.get('collectionType');
+    const dcaContentId = item.get('dcaContentId');
     const itemObject = Ember.Object.create();
     const studentCount = item.get('studentCount');
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -1350,6 +1351,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         .readActivity(activityId).then(function(content) {
           itemObject.setProperties({
             classId: controller.get('class.id'),
+            dcaContentId,
             content,
             contentType,
             studentCount

@@ -8,7 +8,7 @@ export default Ember.Object.extend({
 
   session: Ember.inject.service('session'),
 
-  namespace: '/api/nucleus-insights/v2/dca/oa',
+  namespace: '/api/nucleus-insights/v2',
 
   /**
    * Fetch the list of OA that the teacher needs to grade for a given class
@@ -18,35 +18,76 @@ export default Ember.Object.extend({
   getOAToGrade(classId) {
     const adapter = this;
     const namespace = this.get('namespace');
-    // eslint-disable-next-line no-unused-vars
-    const url = `${namespace}/class/${classId}`;
-    const stubUrl = '/stubs/oa-pending-grade.json';
+    const url = `${namespace}/rubrics/items`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: {
+        classId
+      }
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Get the student submissions
+   * @param {string} classId
+   * @param {string} activityId
+   * @param {string} studentId
+   * @returns {Object}
+   */
+  getSubmissionsToGrade(classId, activityId, studentId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/dca/class/${classId}/oa/${activityId}/student/${studentId}/submissions`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       headers: adapter.defineHeaders()
     };
-    return Ember.$.ajax(stubUrl, options);
+    return Ember.$.ajax(url, options);
   },
 
   /**
    * Get the list of Students to-be graded for a given Offline Activity
    * @param {string} classId
-   * @param {string} collectionId
+   * @param {string} activityId
    * @returns {Object}
    */
-  getStudentListToGrade(classId, collectionId) {
+  getStudentListToGrade(classId, activityId) {
     const adapter = this;
     const namespace = this.get('namespace');
-    // eslint-disable-next-line no-unused-vars
-    const url = `${namespace}/class/${classId}/collection/${collectionId}/students`;
-    const stubUrl = '/stubs/oa-student-list-grading.json';
+    const url = `${namespace}/rubrics/items/${activityId}/students`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
-      headers: adapter.defineHeaders()
+      headers: adapter.defineHeaders(),
+      data: {
+        classId
+      }
     };
-    return Ember.$.ajax(stubUrl, options);
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Submit student submission by teacher
+   * @param {Object} Grade
+   * @returns {Promise}
+   */
+  submitTeacherGrade(data) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/grades/collections`;
+    const options = {
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(data)
+    };
+    return Ember.$.ajax(url, options);
   },
 
   defineHeaders: function() {
