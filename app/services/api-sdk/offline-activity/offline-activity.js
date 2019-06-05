@@ -375,6 +375,7 @@ export default Ember.Service.extend({
         );
     });
   },
+
   /**
    * Remove TaskSubmission
    *
@@ -393,6 +394,30 @@ export default Ember.Service.extend({
         )
         .then(function() {
           resolve(taskSubmissionPayLoad);
+        }, reject);
+    });
+  },
+
+  associateTeacherRubricToOA(rubricId, oaId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('offlineActivityAdapter')
+        .associateTeacherRubricToOA(rubricId, oaId)
+        .then(function() {
+          resolve(true);
+        }, reject);
+    });
+  },
+
+  associateStudentRubricToOA(rubricId, oaId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('offlineActivityAdapter')
+        .associateStudentRubricToOA(rubricId, oaId)
+        .then(function() {
+          resolve(true);
         }, reject);
     });
   }

@@ -379,5 +379,48 @@ export default Ember.Object.extend({
       data: JSON.stringify({})
     };
     return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Rubric OA association
+   *
+   * @param oaId the id of the Activity to be updated
+   * @param rubricId
+   * @returns {Promise}
+   */
+  associateTeacherRubricToOA: function(rubricId, oaId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${oaId}/rubric/${rubricId}/teacher`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Rubric OA association
+   * @param oaId the id of the Activity to be updated
+   * @param rubricId
+   * @returns {Promise}
+   */
+  associateStudentRubricToOA: function(rubricId, oaId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${oaId}/rubric/${rubricId}/student`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
   }
 });
