@@ -1,76 +1,74 @@
-<div class="panel panel-default hidden">
+<div class="panel-default">
     <div class="panel-heading">
-        <h3>Rubrics {{t "common.builder"}}</h3>
-    </div>
-    <div class="panel panel-body">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus praesentium dolore perferendis velit maiores similique porro eius ipsa tempore veniam! Alias ab quod voluptas asperiores minus ipsam a distinctio sapiente?
-    </div>
-</div>
-<div class="feedback-grading">
-    <div class="border-bottom">
         <h3>{{t 'content.questions.edit.builder.feedback-grading.title'}}</h3>
     </div>
-    <div class="content">
-        <div class="switch rubric">
-            <label class="switch-label">{{t 'common.rubric'}}</label>
-            {{gru-switch switchOptions=switchOptions isChecked=isTeacherRubrics}}
-        </div>
-        {{log 'teacherRubrics' 'teacherRubrics'}}
-        {{#if isTeacherRubrics}}
-            {{#if teacherRubrics.title}}
-                {{log 'teacherRubrics' teacherRubrics.title}}
-                <div class="associated-rubric">
-                    {{log 'associated-rubric' teacherRubrics}}
-                    <div class="image">
-                        {{#if teacherRubrics.thumbnail}}
-                            <img class="img-responsive" src="{{teacherRubrics.thumbnail}}" />
-                        {{else}}
-                            <i class="rubric-icon"></i>
-                        {{/if}}
-                    </div>
-                    <div class="info">
-                        <h3>{{teacherRubrics.title}}</h3>
-                    </div>
-                    <div class="actions">
-                        {{!-- <button class="btn no-bgd remove-item" {{action 'removeRubric' teacherRubrics.id}}>
+    <div class="panel panel-body">
+        <div class="feedback-grading">
+            <div class="border-bottom">
+            </div>
+            <div class="content">
+                <div class="switch rubric">
+                    <label class="switch-label">{{t 'common.rubric'}}</label>
+                    {{gru-switch switchOptions=switchOptions isChecked=isTeacherRubrics}}
+                </div>
+                {{log 'teacherRubrics' 'teacherRubrics'}}
+                {{#if isTeacherRubrics}}
+                    {{#if teacherRubrics.title}}
+                        {{log 'teacherRubrics' teacherRubrics.title}}
+                        <div class="associated-rubric">
+                            {{log 'associated-rubric' teacherRubrics}}
+                            <div class="image">
+                                {{#if teacherRubrics.thumbnail}}
+                                    <img class="img-responsive" src="{{teacherRubrics.thumbnail}}" />
+                                {{else}}
+                                    <i class="rubric-icon"></i>
+                                {{/if}}
+                            </div>
+                            <div class="info">
+                                <h3>{{teacherRubrics.title}}</h3>
+                            </div>
+                            <div class="actions">
+                                {{!-- <button class="btn no-bgd remove-item" {{action 'removeRubric' teacherRubrics.id}}>
                             {{gru-icon name="remove_circle"}}
                         </button> --}}
-                        <button {{ action 'rubricEdit' teacherRubrics.id}} class="btn no-bgd edit-item">
-                            {{gru-icon name="edit"}}
-                        </button>
-                    </div>
-                </div>
-            {{else}}
-                <div class="add-rubric-container">
-                    <button class="btn btn-success add-prefix add-rubric" {{action 'showAddRubricModal' 'teacher'}}>
-                        {{t 'content.questions.edit.builder.feedback-grading.from-existing-rubric'}}
-                    </button>
-                </div>
-                <div class="validation">
-                    {{#if rubricError}}
-                        <span class="error">
-                            {{t 'content.questions.edit.builder.feedback-grading.rubric-error'}}
-                        </span>
+                                <button {{ action 'rubricEdit' teacherRubrics.id}} class="btn no-bgd edit-item">
+                                    {{gru-icon name="edit"}}
+                                </button>
+                            </div>
+                        </div>
+                    {{else}}
+                        <div class="add-rubric-container">
+                            <button class="btn btn-success add-prefix add-rubric" {{action 'showAddRubricModal' 'teacher'}}>
+                                {{t 'content.questions.edit.builder.feedback-grading.from-existing-rubric'}}
+                            </button>
+                        </div>
+                        <div class="validation">
+                            {{#if rubricError}}
+                                <span class="error">
+                                    {{t 'content.questions.edit.builder.feedback-grading.rubric-error'}}
+                                </span>
+                            {{/if}}
+                        </div>
                     {{/if}}
-                </div>
-            {{/if}}
-        {{else}}
-            <div class="switch scoring">
-                <label class="switch-label">{{t 'content.questions.edit.builder.feedback-grading.scoring'}}</label>
-                {{gru-switch switchOptions=switchOptions isChecked=tempModel.rubric.scoring}}
+                {{else}}
+                    <div class="switch scoring">
+                        <label class="switch-label">{{t 'content.questions.edit.builder.feedback-grading.scoring'}}</label>
+                        {{gru-switch switchOptions=switchOptions isChecked=tempModel.rubric.scoring}}
+                    </div>
+                    {{#if tempModel.rubrics.scoring}}
+                        <div class="scoring-settings">
+                            <div class="setting maximum-points">
+                                <span class="title">{{t 'content.questions.edit.builder.feedback-grading.maximum-points'}}</span>
+                                {{validation.gru-select options=maximumOptions search="true" optionSelected=tempModel.rubric.maxScore onOptionSelect="onMaxScoreChange"}}
+                            </div>
+                            <div class="setting increment">
+                                <span class="title">{{t 'content.questions.edit.builder.feedback-grading.increment'}}</span>
+                                {{validation.gru-select options=incrementOptions search="true" optionSelected=tempModel.rubric.increment onOptionSelect="onIncrementChange"}}
+                            </div>
+                        </div>
+                    {{/if}}
+                {{/if}}
             </div>
-            {{#if tempModel.rubrics.scoring}}
-                <div class="scoring-settings">
-                    <div class="setting maximum-points">
-                        <span class="title">{{t 'content.questions.edit.builder.feedback-grading.maximum-points'}}</span>
-                        {{validation.gru-select options=maximumOptions search="true" optionSelected=tempModel.rubric.maxScore onOptionSelect="onMaxScoreChange"}}
-                    </div>
-                    <div class="setting increment">
-                        <span class="title">{{t 'content.questions.edit.builder.feedback-grading.increment'}}</span>
-                        {{validation.gru-select options=incrementOptions search="true" optionSelected=tempModel.rubric.increment onOptionSelect="onIncrementChange"}}
-                    </div>
-                </div>
-            {{/if}}
-        {{/if}}
+        </div>
     </div>
 </div>

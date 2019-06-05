@@ -46,7 +46,9 @@
         <div class="panelBodyContainer">
             <div class='referenceArtifacts'>
                 <section>
-                    <h3>Uploaded Files</h3>
+                    <div class="border-bottom">
+                        <h3>Uploaded Files</h3>
+                    </div>
                     {{#each-in model.references as | index refItem|}}
                         {{#if (eq refItem.type 'uploaded')}}
                             <div> {{refItem.type}} <span class='separator'>|</span> {{refItem.subType}} <span class='separator'>|</span> <span class='ellipsis listItem'>{{refItem.location}}</span> <button class='button ' {{action 'deleteReference' refItem}}> Delete</button></div>
@@ -55,7 +57,9 @@
                     {{content.activity.reference.gru-edit-reference editType='upload' updateReferenceCollection=(action 'updateReferenceCollection') referenceType=referenceType referenceSubType=referenceSubType referenceType=referenceType model=refModel editingModel=editingRefModel  isEditing=isEditing}}
                 </section>
                 <section>
-                    <h3>Reference URLs</h3>
+                    <div class="border-bottom">
+                        <h3>Reference URLs</h3>
+                    </div>
                     {{#each-in model.references as | index refItem|}}
                         {{#if (eq refItem.type 'remote')}}
                             <div> {{refItem.type}} <span class='separator'>|</span> {{refItem.subType}} <span class='separator'>|</span> <span class='ellipsis listItem'>{{refItem.location}}</span> <button class='button ' {{action 'deleteReference' refItem}}> Delete</button></div>
