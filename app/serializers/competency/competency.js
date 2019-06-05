@@ -280,7 +280,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
    */
   normalizeStudentCompetencySummary(response) {
     let studentCompetencySummary = null;
-    if (response) {
+    if (response && response.competencyStats) {
       response = response.competencyStats;
       studentCompetencySummary = Ember.Object.create({
         completedCompetencies: response.completedCompetencies,
