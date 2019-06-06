@@ -36,16 +36,21 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
     expandMore() {
       let component = this;
-      component.$('.ca-panel-container-2').slideDown({
-        start: function() {
-          component.$(this).css('display', 'grid');
-        }
-      });
-    },
-
-    expandLess() {
-      let component = this;
-      component.$('.ca-panel-container-2').slideUp();
+      let panelContainerEle = component.$('.ca-panel-container-2');
+      if (!panelContainerEle.hasClass('active')) {
+        component.$('.ca-panel-container-2').slideDown({
+          start: function() {
+            component.$(this).addClass('active');
+            component.$(this).css('display', 'grid');
+          }
+        });
+      } else {
+        component.$('.ca-panel-container-2').slideUp({
+          start: function() {
+            component.$(this).removeClass('active');
+          }
+        });
+      }
     },
     /**
      * Action triggered when the user play collection

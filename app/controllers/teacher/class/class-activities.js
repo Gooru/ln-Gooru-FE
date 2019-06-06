@@ -118,6 +118,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     onCompleteActivity(activity) {
       let controller = this;
       controller.markActivityAsComplete(activity);
+      controller.loadItemsToGrade();
     },
 
     toggleDatePicker() {
@@ -429,13 +430,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       ) {
         return;
       }
-      if (!classActivity.get('added_date')) {
-        classActivity.set('added_date', scheduleDate);
-      }
-
-      if (!classActivity.get('end_date')) {
-        classActivity.set('end_date', scheduleEndDate);
-      }
       let contentId = classActivity.get('id');
       let contentType = content.get('format');
       let scheduleMonth = moment(scheduleDate).format('MM');
@@ -467,47 +461,19 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
               scheduleYear,
               scheduleEndDate
             )
-      }).then(() => {
+      }).then((hash) => {
         if (!controller.isDestroyed) {
-          if (isOfflineActivity) {
-            let activeOfflineActivities = controller.get(
-              'activeOfflineActivities'
-            );
-            activeOfflineActivities.pushObject(classActivity);
-            let unScheduledClassActivities = controller.get(
-              'unScheduledClassActivities'
-            );
-            unScheduledClassActivities.removeObject(classActivity);
-            classActivity.set('isNewlyAdded', true);
-            Ember.run.later(function() {
-              classActivity.set('isNewlyAdded', false);
-            }, 2000);
-            controller.fetchAssessmentsMasteryAccrual();
-          } else {
-            if (
-              scheduleMonth === controller.get('forMonth') &&
-              scheduleYear === controller.get('forYear')
-            ) {
-              if (scheduleDate === controller.get('selectedDate')) {
-                let scheduledClassActivities = controller
-                  .get('scheduledClassActivities')
-                  .objectAt(0);
-                scheduledClassActivities
-                  .get('classActivities')
-                  .pushObject(classActivity);
-                classActivity.set('isNewlyAdded', true);
-                Ember.run.later(function() {
-                  classActivity.set('isNewlyAdded', false);
-                }, 2000);
-              }
-              let unScheduledClassActivities = controller.get(
-                'unScheduledClassActivities'
-              );
-              unScheduledClassActivities.removeObject(classActivity);
-              controller.fetchAssessmentsMasteryAccrual();
-              controller.loadActivitiesForMonth();
-            }
+          let activityId = hash.scheduleActivity ? hash.scheduleActivity : contentId;
+          if (!hash.scheduleActivity) {
+            controller.get('unScheduledClassActivities').removeObject(classActivity);
           }
+          if (isOfflineActivity) {
+            controller.addOfflineContent(content, activityId, scheduleDate, scheduleEndDate);
+          } else {
+            controller.addContent(content, activityId, scheduleDate, scheduleEndDate);
+            controller.loadActivitiesForMonth();
+          }
+          controller.fetchAssessmentsMasteryAccrual();
         }
       });
     },
@@ -1189,12 +1155,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     );
     if (itemToGradeEle.hasClass('active')) {
       offlineActivityEle.slideDown(400, function() {
-        offlineActivityEle.removeClass('inactive');
         itemToGradeEle.removeClass('active');
       });
     } else {
       offlineActivityEle.slideUp(400, function() {
-        offlineActivityEle.addClass('inactive');
         itemToGradeEle.addClass('active');
       });
     }
@@ -1227,6 +1191,46 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         400
       );
     }
+  },
+
+  /**
+   * Add a class offlne activity from a list of activeOfflineActivities
+   * @param {collection} content
+   * @param {activityId} activityId
+   * @param {startDate} startDate
+   * @param {endDate} endDate
+   */
+  addOfflineContent(content, activityId, startDate, endDate) {
+    let controller = this;
+    let activeOfflineActivities = controller.get('activeOfflineActivities');
+    let newClassActivity = controller
+      .serializerOfflineActivityContent(content, activityId, startDate, endDate);
+    activeOfflineActivities.pushObject(newClassActivity);
+    newClassActivity.set('isNewlyAdded', true);
+    Ember.run.later(function() {
+      newClassActivity.set('isNewlyAdded', false);
+    }, 2000);
+  },
+
+  /**
+   * Add a class activity from a list of scheduledClassActivities
+   * @param {collection} content
+   * @param {activityId} activityId
+   * @param {startDate} startDate
+   * @param {endDate} endDate
+   */
+  addContent(content, activityId, startDate) {
+    let controller = this;
+    let scheduledClassActivities = controller.get('scheduledClassActivities').objectAt(0);
+    let newClassActivity = controller
+      .serializerActivityContent(content, activityId, startDate);
+    scheduledClassActivities
+      .get('classActivities')
+      .pushObject(newClassActivity);
+    newClassActivity.set('isNewlyAdded', true);
+    Ember.run.later(function() {
+      newClassActivity.set('isNewlyAdded', false);
+    }, 2000);
   },
 
   isActivityAlreadyExists(scheduleDate, contentId) {
@@ -1415,6 +1419,19 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     });
   },
 
+
+  loadActiveOfflineActivity() {
+    const controller = this;
+    const classId = controller.get('classId');
+    controller.set('isLoading', true);
+    controller.get('classActivityService')
+      .fetchActiveOfflineActivities(classId).then(function(offlineActivities) {
+        controller.set('activeOfflineActivities', offlineActivities);
+        controller.fetchAssessmentsMasteryAccrual();
+        controller.set('isLoading', false);
+      });
+  },
+
   /**
    * Creates the grade item information for activity level
    * @param {[]} grade item
@@ -1459,9 +1476,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     const activityDate = item.get('activityDate');
     return new Ember.RSVP.Promise(function(resolve, reject) {
       return Ember.RSVP.hash({
-        collection: collectionId
-          ? controller.get('assessmentService').readAssessment(collectionId)
-          : undefined
+        collection: collectionId ?
+          controller.get('assessmentService').readAssessment(collectionId) : undefined
       }).then(function(hash) {
         const collection = hash.collection;
         const content = collection.get('children').findBy('id', resourceId);
@@ -1591,7 +1607,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     });
   },
 
-  serializerSearchContent(content, contentId, date, forMonth, forYear) {
+  serializerActivityContent(content, contentId, startDate) {
+    let forMonth = moment(startDate).format('MM');
+    let forYear = moment(startDate).format('YYYY');
     let collection = Ember.Object.create({
       id: content.get('id'),
       title: content.get('title'),
@@ -1599,17 +1617,47 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       collectionType: content.get('format'),
       resourceCount: content.get('resourceCount'),
       questionCount: content.get('questionCount'),
-      oeQuestionCount: content.get('oeQuestionCount')
+      oeQuestionCount: content.get('oeQuestionCount'),
+      standards: content.get('standards'),
+      thumbnailUrl: content.get('thumbnailUrl')
     });
     return Ember.Object.create({
       id: contentId,
-      added_date: date,
-      activityDate: date,
+      added_date: startDate,
+      activityDate: startDate,
+      allowMasteryAccrual: false,
       forMonth,
       forYear,
       usersCount: -1,
       collection,
       isActive: false
+    });
+  },
+
+  serializerOfflineActivityContent(content, contentId, startDate, endDate) {
+    let forMonth = moment(startDate).format('MM');
+    let forYear = moment(startDate).format('YYYY');
+    let collection = Ember.Object.create({
+      id: content.get('id'),
+      title: content.get('title'),
+      collectionType: content.get('collectionType'),
+      format: content.get('format'),
+      taskCount: content.get('taskCount'),
+      standards: content.get('standards'),
+      thumbnailUrl: content.get('thumbnailUrl')
+    });
+    return Ember.Object.create({
+      id: contentId,
+      added_date: startDate,
+      end_date: endDate,
+      activityDate: startDate,
+      allowMasteryAccrual: false,
+      forMonth,
+      forYear,
+      collection,
+      usersCount: -1,
+      isActive: false,
+      isCompleted: false
     });
   },
 

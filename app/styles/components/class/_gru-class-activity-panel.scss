@@ -147,8 +147,6 @@
         cursor: pointer;
 
         &.offline {
-          pointer-events: none;
-
           .label-section {
             grid-template-rows: auto;
 
@@ -429,7 +427,7 @@
 
     .ca-panel-container-2 {
       height: 48px;
-      grid-template-columns: 1fr max-content 48px 48px;
+      grid-template-columns: 1fr max-content 48px;
       display: none;
       align-items: center;
       border-bottom: solid 1px #cacaca;
@@ -505,8 +503,19 @@
 
       .ca-actions {
         display: grid;
-        grid-template-columns: repeat(3, auto);
+        grid-template-columns: repeat(4, auto);
         height: 100%;
+
+        .re-add-data {
+          align-items: center;
+          display: flex;
+
+          span {
+            color: #1aa9eb;
+            font-weight: bold;
+            cursor: pointer;
+          }
+        }
 
         .mastery-accrual {
           display: grid;
