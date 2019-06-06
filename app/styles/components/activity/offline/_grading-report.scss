@@ -74,6 +74,67 @@
     }
   }
 
+  .caught-up-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 30%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    display: none;
+
+    .caught-up {
+      width: 400px;
+      height: 300px;
+      margin: 0 auto;
+      background: #fff;
+      text-align: center;
+      border-radius: 8px;
+
+      .caught-up-tick-container {
+        position: relative;
+        padding-top: 100px;
+        padding-bottom: 28px;
+
+        hr {
+          margin: 0;
+          border-width: 1px;
+          border-color: green;
+          margin-left: 20px;
+          margin-right: 20px;
+          border-color: #4caf50;
+        }
+
+        .caught-up-tick {
+          position: absolute;
+          width: 90px;
+          height: 80px;
+          background: #fff;
+          display: block;
+          left: 40%;
+          margin-top: -38px;
+          padding-left: 8px;
+
+          span {
+            display: block;
+            height: 75px;
+            width: 75px;
+            border-radius: 50%;
+            color: #4caf50;
+            border: 2px solid #4caf50;
+
+            i {
+              font-size: 40px;
+              margin-top: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .oa-grade-container {
     background: #ffffff;
     width: 768px;
