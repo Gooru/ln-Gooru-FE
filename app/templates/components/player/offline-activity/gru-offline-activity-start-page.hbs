@@ -6,9 +6,13 @@
           {{taxonomy.gru-taxonomy-tag-list tags=oaTaxonomies tagsVisible=1 isInCard=true}}
         {{/if}}
       </div>
+      <div class="project-etc">
+        <span class="label-container">ETC:</span>
+        <span class="etc-value">{{offlineActivity.durationHours}}h</span>
+      </div>
       <div class="project-type">
         <span class="project-type-label">Project: </span>
-        <span class="project-type-value">{{offlineActivity.subFormat}}</span>
+        <span class="project-type-value">{{t offlineActivity.subFormat}}</span>
       </div>
     </div>
     <div class="project-description-container">
@@ -20,11 +24,9 @@
       </div>
     </div>
     <div class="project-references-container">
-      <div class="reference-icon"></div>
-      <div class="reference-info">
-        <div class="reference-label">References</div>
-        <div class="reference-links">{{activityReferences.length}} Links</div>
-      </div>
+      {{player.offline-activity.gru-offline-activity-references
+        offlineActivity = offlineActivity
+      }}
     </div>
   </div>
   <div class="task-rubric-container">
@@ -37,43 +39,48 @@
         No Task available
       {{/each}}
     </div>
-    <div class="student-rubrics-container">
-      <div class="student-label label-container" {{action "onToggleRubricContainer" 'student'}}>
-        <span class="label-type">Self Grading</span>
-        <span class="toggle-icon">
-          {{gru-icon name=(if isStudentCategoriesExpanded 'expand_less' 'expand_more')}}
-        </span>
+    {{#if activityStudentRubrics}}
+      <div class="student-rubrics-container">
+        <div class="student-label label-container" {{action "onToggleRubricContainer" 'student'}}>
+          <span class="label-type">Self Grading</span>
+          <span class="toggle-icon">
+            {{gru-icon name=(if isStudentCategoriesExpanded 'expand_less' 'expand_more')}}
+          </span>
+        </div>
+        <div class="student categories-container">
+          {{validation.gru-textarea
+            model=studentRubricCategories
+            valuePath='comment'
+            maxLength=500
+            rows=1
+            placeholder='General Comments Only'
+            disabled="disabled"
+          }}
+          {{rubric.rubric-category-grades categories=studentRubricCategories isDisable=true}}
+        </div>
       </div>
-      <div class="student categories-container">
-        {{validation.gru-textarea
-          model=studentRubricCategories
-          valuePath='comment'
-          maxLength=500
-          rows=1
-          placeholder='General Comments Only'
-          disabled="disabled"
-        }}
-        {{rubric.rubric-category-grades categories=studentRubricCategories isDisable=true}}
+    {{/if}}
+
+    {{#if activityTeacherRubrics}}
+      <div class="teacher-rubrics-container">
+        <div class="teacher-label label-container" {{action "onToggleRubricContainer" 'teacher'}}>
+          <span class="label-type">Teacher Grading</span>
+          <span class="toggle-icon">
+            {{gru-icon name=(if isTeacherCategoriesExpanded 'expand_less' 'expand_more')}}
+          </span>
+        </div>
+        <div class="teacher categories-container">
+          {{validation.gru-textarea
+            model=activityTeacherRubrics
+            valuePath='comment'
+            maxLength=500
+            rows=1
+            placeholder='General Comments Only'
+          }}
+          {{rubric.rubric-category-grades categories=teacherRubricCategories isDisable=true}}
+        </div>
       </div>
-    </div>
-    <div class="teacher-rubrics-container">
-      <div class="teacher-label label-container" {{action "onToggleRubricContainer" 'teacher'}}>
-        <span class="label-type">Teacher Grading</span>
-        <span class="toggle-icon">
-          {{gru-icon name=(if isTeacherCategoriesExpanded 'expand_less' 'expand_more')}}
-        </span>
-      </div>
-      <div class="teacher categories-container">
-        {{validation.gru-textarea
-          model=activityTeacherRubrics
-          valuePath='comment'
-          maxLength=500
-          rows=1
-          placeholder='General Comments Only'
-        }}
-        {{rubric.rubric-category-grades categories=teacherRubricCategories isDisable=true}}
-      </div>
-    </div>
+    {{/if}}
   </div>
   <div class="actions-container">
     <div class="cancel-action action-btn" {{action "onClosePlayer"}}>

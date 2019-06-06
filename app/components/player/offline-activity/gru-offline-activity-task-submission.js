@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { OA_TASK_SUBMISSION_TYPES } from 'gooru-web/config/config';
-import { inferUploadType } from 'gooru-web/utils/utils';
+import { inferUploadType, cleanFilename } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -56,13 +56,14 @@ export default Ember.Component.extend({
       component.uploadFilesToS3().then(function() {
         component.set('isSubmittingTask', false);
         component.submitTaskDetails(component.createTaskSubmissionPayload());
+        component.actions.onToggleTask(component);
       });
     },
 
     //Action triggered when click on toggle task container
-    onToggleTask() {
-      this.toggleProperty('isTaskExpanded');
-      this.$('.task-details-container').slideToggle();
+    onToggleTask(component = this) {
+      component.toggleProperty('isTaskExpanded');
+      component.$('.task-details-container').slideToggle();
     },
 
     //Action triggered when click on remove selected file
@@ -124,9 +125,7 @@ export default Ember.Component.extend({
   oaTaskUploadSubmissions: Ember.computed.filter('oaTaskSubmissions', function(
     submission
   ) {
-    // const component = this;
     return submission.get('taskSubmissionType') === 'uploaded';
-    // return oaTaskSubmissions.filter(submission => submission.get('taskSubmissionType') === 'uploaded');
   }),
 
   /**
@@ -149,9 +148,6 @@ export default Ember.Component.extend({
   oaTaskRemoteSubmissions: Ember.computed.filter('oaTaskSubmissions', function(
     submission
   ) {
-    // const component = this;
-    // const oaTaskSubmissions = component.get('oaTaskSubmissions');
-    // return oaTaskSubmissions.filter(submission => submission.taskSubmissionType === 'remote');
     return submission.get('taskSubmissionType') === 'remote';
   }),
 
@@ -210,21 +206,21 @@ export default Ember.Component.extend({
    * Property to check whether to enable or not save button
    */
   isEnableTaskSubmission: Ember.computed(
-    'isUploadedRequiredTaskFiles',
-    'isAddedRequiredTaskUrls',
+    'task.urls.@each.value',
+    'task.files.[]',
     'task.submissionText',
     function() {
       const component = this;
-      const isUploadedRequiredTaskFiles = component.get(
-        'isUploadedRequiredTaskFiles'
-      );
-      const isAddedRequiredTaskUrls = component.get('isAddedRequiredTaskUrls');
-      const taskSubmissionText = component.get('task.submissionText');
-      return (
-        isUploadedRequiredTaskFiles &&
-        isAddedRequiredTaskUrls &&
-        taskSubmissionText
-      );
+      let addedUrls = component.get('task.ulrs')
+        ? component
+          .get('task.urls')
+          .filter(url => !url.get('isSubmittedUrl') && url.get('value'))
+        : false;
+      let addedFiles = component.get('task.files')
+        ? component.get('task.files').length
+        : false;
+      let addedAnswerText = component.get('task.submissionText');
+      return addedUrls || addedFiles || addedAnswerText;
     }
   ),
 
@@ -326,6 +322,12 @@ export default Ember.Component.extend({
    */
   showToggle: false,
 
+  /*
+   * @property {Number} timespentInMilliSec
+   * Property for student submitted timespent in millisec
+   */
+  timespentInMilliSec: 0,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -351,13 +353,17 @@ export default Ember.Component.extend({
   uploadFileIntoS3(fileObject) {
     const component = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      return Ember.RSVP.hash({
-        UUIDFileName: component
-          .get('mediaService')
-          .uploadContentFile(fileObject)
-      }).then(({ UUIDFileName }) => {
-        return resolve((fileObject.UUIDFileName = UUIDFileName));
-      }, reject);
+      return Ember.RSVP
+        .hash({
+          fileLocation: component
+            .get('mediaService')
+            .uploadContentFile(fileObject)
+        })
+        .then(({ fileLocation }) => {
+          let cdnUrls = component.get('session.cdnUrls');
+          let UUIDFileName = cleanFilename(fileLocation, cdnUrls);
+          return resolve((fileObject.UUIDFileName = UUIDFileName));
+        }, reject);
     });
   },
 

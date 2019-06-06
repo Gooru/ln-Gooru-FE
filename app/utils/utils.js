@@ -247,9 +247,7 @@ export function getReactionIcon(reactionValue, basePath) {
     if (reaction && reaction.value && reaction.unicode) {
       html = `<div class="emotion emotion-${reaction.value}">`;
       html += '  <svg class="svg-sprite">';
-      html += `    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="${basePath}assets/emoji-one/emoji.svg#${
-        reaction.unicode
-      }"></use>`;
+      html += `    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="${basePath}assets/emoji-one/emoji.svg#${reaction.unicode}"></use>`;
       html += ' </svg>';
       html += '</div>';
     } else {
@@ -292,7 +290,7 @@ export function generateUUID() {
   var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(
     c
   ) {
-    var r = (d + Math.random() * 16) % 16 | 0;
+    var r = ((d + Math.random() * 16) % 16) | 0;
     d = Math.floor(d / 16);
     return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
   });
@@ -689,9 +687,7 @@ function assessmentFileData(
     const prefixHeader =
       level === 'course'
         ? `U${index + 1} `
-        : level === 'unit'
-          ? `L${index + 1} `
-          : `A${index + 1} `;
+        : level === 'unit' ? `L${index + 1} ` : `A${index + 1} `;
     const scoreHeader = `${prefixHeader}${headerItem.get('title')} score`;
     const timeHeader = `${prefixHeader}${headerItem.get('title')} time`;
     dataHeaders.push(scoreHeader);
@@ -1096,4 +1092,15 @@ export function getOAType() {
     { display_name: 'remote', code: '0' },
     { display_name: 'uploaded', code: '1' }
   ]);
+}
+
+/**
+ * @function getTimeInMillisec
+ * @param {Number} hour
+ * @param {Number} minute
+ * @return {Number}
+ * Method to convert given hour and minute into milliseconds
+ */
+export function getTimeInMillisec(hour = 0, minute = 0) {
+  return (hour * 60 * 60 + minute * 60) * 1000;
 }

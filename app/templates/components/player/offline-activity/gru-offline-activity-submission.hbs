@@ -13,9 +13,34 @@
   </div>
 
   <div class="oa-references-container">
-    {{player.offline-activity.gru-offline-activity-references
-        offlineActivity=offlineActivity
-    }}
+    {{player.offline-activity.gru-offline-activity-references offlineActivity = offlineActivity}}
+  </div>
+
+  <div class="offline-activity-timespent">
+    <div class="timespent-info-container" {{action "onToggleTimespent"}}>
+      <div class="icon-container">
+        {{gru-icon name="schedule"}}
+      </div>
+      <div class="label-container">
+        <span class="title-container">Time spent</span>
+        <span class="description-container">
+          Please enter the total time spent on the activity
+        </span>
+      </div>
+      <div class="toggle-container">
+        {{gru-icon name=(if isTimespentExpanded 'expand_less' 'expand_more')}}
+      </div>
+    </div>
+    <div class="timespent-container">
+      {{cards.gru-timepicker-card
+        maxHour= -1
+        hour=oaTimespentHour
+        minute=oaTimespentMinute
+      }}
+      <div class="save-timespent-action {{unless isEnableSaveTimespent 'disable-event'}}" {{action "onSaveTimespent"}}>
+        Save
+      </div>
+    </div>
   </div>
 
   <div class="task-submissions-container">
@@ -25,7 +50,8 @@
         caContentId=caContentId
         showSubmissions=true
         showToggle=true
-        classId=classId}}
+        classId=classId
+        timespentInMilliSec=timespentInMilliSec}}
     {{/each}}
   </div>
 </div>

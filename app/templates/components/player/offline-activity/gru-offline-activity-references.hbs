@@ -13,7 +13,7 @@
   {{#each offlineActivity.references as |reference index|}}
     <div class="reference-container">
       <a href="{{reference.location}}" target="_blank" class="reference-link">
-        Reference {{plus-one index}}
+        <span class="reference-label">Reference</span> <span class="reference-seq">{{plus-one index}}</span>
       </a>
     </div>
   {{/each}}

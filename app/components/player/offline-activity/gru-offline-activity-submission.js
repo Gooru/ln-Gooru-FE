@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { getTimeInMillisec } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -20,6 +21,22 @@ export default Ember.Component.extend({
     component.loadTaskSubmissionData();
   },
 
+  actions: {
+    //Action triggered when toggle timespent entry container
+    onToggleTimespent() {
+      const component = this;
+      component.toggleProperty('isTimespentExpanded');
+      component.$('.timespent-container').slideToggle();
+    },
+
+    //Action triggered when save entered timespent
+    onSaveTimespent() {
+      const component = this;
+      component.set('isTimespentExpanded', false);
+      component.$('.timespent-container').slideUp();
+    }
+  },
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -27,6 +44,40 @@ export default Ember.Component.extend({
    * @property {UUID} userId
    */
   userId: Ember.computed.alias('session.userId'),
+
+  /**
+   * @property {Number} oaTimespentHour
+   */
+  oaTimespentHour: 0,
+
+  /**
+   * @property {Number} oaTimespentMinute
+   */
+  oaTimespentMinute: 0,
+
+  /**
+   * @property {Boolean} isTimespentExpanded
+   */
+  isTimespentExpanded: true,
+
+  /**
+   * @property {Number} timespentInMilliSec
+   */
+  timespentInMilliSec: Ember.computed(
+    'oaTimespentHour',
+    'oaTimespentMinute',
+    function() {
+      const component = this;
+      let hour = component.get('oaTimespentHour') || 0;
+      let minute = component.get('oaTimespentMinute') || 0;
+      return getTimeInMillisec(hour, minute);
+    }
+  ),
+
+  /**
+   * @property {Boolean} isEnableSaveTimespent
+   */
+  isEnableSaveTimespent: Ember.computed.gt('timespentInMilliSec', 0),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -38,33 +89,35 @@ export default Ember.Component.extend({
   loadTaskSubmissionData() {
     const component = this;
     component.set('isLoading', true);
-    return Ember.RSVP.hash({
-      tasksSubmissions: component.fetchTasksSubmissions()
-    }).then(({ tasksSubmissions }) => {
-      if (!component.isDestroyed) {
-        let studentTasksSubmissions = tasksSubmissions.get('tasks');
-        let activityTasks = component.get('offlineActivity.tasks');
-        activityTasks.map(task => {
-          let studentTaskSubmissions = studentTasksSubmissions.findBy(
-            'taskId',
-            task.get('id')
-          );
-          if (studentTaskSubmissions) {
-            task.set(
-              'studentTaskSubmissions',
-              studentTaskSubmissions.get('submissions')
+    return Ember.RSVP
+      .hash({
+        tasksSubmissions: component.fetchTasksSubmissions()
+      })
+      .then(({ tasksSubmissions }) => {
+        if (!component.isDestroyed) {
+          let studentTasksSubmissions = tasksSubmissions.get('tasks');
+          let activityTasks = component.get('offlineActivity.tasks');
+          activityTasks.map(task => {
+            let studentTaskSubmissions = studentTasksSubmissions.findBy(
+              'taskId',
+              task.get('id')
             );
-            task.set(
-              'submissionText',
-              studentTaskSubmissions.get('submissions').objectAt(0)
-                .submissionText
-            );
-          }
-        });
-        component.set('activityTasks', activityTasks);
-        component.set('isLoading', false);
-      }
-    });
+            if (studentTaskSubmissions) {
+              task.set(
+                'studentTaskSubmissions',
+                studentTaskSubmissions.get('submissions')
+              );
+              task.set(
+                'submissionText',
+                studentTaskSubmissions.get('submissions').objectAt(0)
+                  .submissionText
+              );
+            }
+          });
+          component.set('activityTasks', activityTasks);
+          component.set('isLoading', false);
+        }
+      });
   },
 
   /**
