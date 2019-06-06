@@ -50,14 +50,16 @@ export default Ember.Component.extend({
         return component
           .get('activityService')
           .associateStudentRubricToOA(rubricId, model.oaId)
-          .then(function() {
+          .then(function(oaRubricId) {
             if (model.callback) {
-              // component
-              //   .get('questionService')
-              //   .readQuestion(model.oaId)
-              //   .then(function(question) {
-              //     model.callback.success(question.rubric);
-              //   });
+              if (model.callback) {
+                let oaRubric = {
+                  SourceRubric: component.get('selectedRubric'),
+                  NewRubricId: oaRubricId
+                };
+
+                model.callback.success(oaRubric);
+              }
             }
             component.triggerAction({ action: 'closeModal' });
           });
@@ -65,14 +67,14 @@ export default Ember.Component.extend({
         return component
           .get('activityService')
           .associateTeacherRubricToOA(rubricId, model.oaId)
-          .then(function() {
+          .then(function(oaRubricId) {
             if (model.callback) {
-              // component
-              //   .get('questionService')
-              //   .readQuestion(model.oaId)
-              //   .then(function(question) {
-              //     model.callback.success(question.rubric);
-              //   });
+              let oaRubric = {
+                SourceRubric: component.get('selectedRubric'),
+                NewRubricId: oaRubricId
+              };
+
+              model.callback.success(oaRubric);
             }
             component.triggerAction({ action: 'closeModal' });
           });

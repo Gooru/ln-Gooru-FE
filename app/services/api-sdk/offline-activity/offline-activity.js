@@ -404,9 +404,14 @@ export default Ember.Service.extend({
       service
         .get('offlineActivityAdapter')
         .associateTeacherRubricToOA(rubricId, oaId)
-        .then(function() {
-          resolve(true);
-        }, reject);
+        .then(
+          function(responseData, textStatus, request) {
+            resolve(request.getResponseHeader('location'));
+          },
+          function(error) {
+            reject(error);
+          }
+        );
     });
   },
 
@@ -416,9 +421,14 @@ export default Ember.Service.extend({
       service
         .get('offlineActivityAdapter')
         .associateStudentRubricToOA(rubricId, oaId)
-        .then(function() {
-          resolve(true);
-        }, reject);
+        .then(
+          function(responseData, textStatus, request) {
+            resolve(request.getResponseHeader('location'));
+          },
+          function(error) {
+            reject(error);
+          }
+        );
     });
   }
 });
