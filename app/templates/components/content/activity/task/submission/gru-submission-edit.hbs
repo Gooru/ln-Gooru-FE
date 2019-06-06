@@ -1,16 +1,9 @@
-{{!-- <button {{action 'updateContent'}}>Add</button> --}}
-{{!-- {{oaId}}
-{{oaTaskId}} --}}
-<div class='actions'>
-    <button class="cancel btn btn-info" {{action 'cancel'}}>{{t "common.cancel"}}</button>
-    <button class="save btn btn-success" {{action 'updateContent' model}}>{{t "common.save"}}</button>
-</div>
-{{!-- <span>Type</span>
-{{validation.gru-input model=model valuePath='taskSubmissionType' maxLength=50 didValidate=true}}
-<span>SubType</span>
-{{validation.gru-input model=model valuePath='taskSubmissionSubType' maxLength=50 didValidate=true}} --}}
-<span>Type of submission</span>
-{{gru-dropdown
+<div class='addsubmission-container'>
+    <span>Type of submission</span>
+    <div class='actions' style="line-height: 4">
+        <button class="save btn btn-success" {{action 'updateContent' model}}>{{t "common.add"}}</button>
+    </div>
+    {{gru-dropdown
                   selectedItem=model.taskSubmissionSubTypeSel
                   placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
                   items=submissionSubType
@@ -19,3 +12,4 @@
                   onChangeAction="onSubTypeChange"
                   btn-group-size=btn-group-size
         }}
+</div>
