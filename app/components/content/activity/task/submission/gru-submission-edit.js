@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import SubmissionModel from 'gooru-web/models/content/oa/task/submission';
+import { getOAType, getOASubType } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   /**------------------------------------------------------------------------------------------------
@@ -33,10 +34,18 @@ export default Ember.Component.extend({
 
   oaTaskId: null,
 
+  submissionSubType: function() {
+    return getOASubType();
+  }.property(),
+
+  submissionType: function() {
+    return getOAType();
+  }.property(),
   /**
    * Instance of TaskSubmission  model
    */
   model: null,
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -69,6 +78,12 @@ export default Ember.Component.extend({
 
     updateSubmissionCollection() {
       //ToDo: Impl
+    },
+
+    onSubTypeChange(subType) {
+      console.log('Subtype', subType); //eslint-disable-line
+      this.get('model').set('taskSubmissionSubType', subType.display_name);
+      console.log('model', this.get('model')); //eslint-disable-line
     }
   },
   // -------------------------------------------------------------------------
@@ -82,6 +97,25 @@ export default Ember.Component.extend({
     //let modelInstance = SubmissionModel.create();
     this.set('model', modelInstance);
   },
+
+  oaTaskIdChange: Ember.observer('oaTaskId', function() {
+    console.log('Setting New SubmissionModel Ins'); //eslint-disable-line
+    let modelInstance = SubmissionModel.create({
+      oaTaskId: this.get('oaTaskId')
+    });
+
+    let chooseOne = this.get('i18n').t(
+      'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'
+    ).string;
+
+    let taskSubmissionSubTypeSel = Ember.Object.create({
+      display_name: chooseOne
+    });
+
+    modelInstance.set('taskSubmissionSubTypeSel', taskSubmissionSubTypeSel);
+    this.set('model', modelInstance);
+  }),
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -95,6 +129,7 @@ export default Ember.Component.extend({
     //ToDo: Validate
     model.set('oaTaskId', component.get('oaTaskId'));
     model.set('oaId', component.get('oaId'));
+    model.set('taskSubmissionType', 'uploaded');
     return component.get('activityService').createTaskSubmission(model);
   }
 });

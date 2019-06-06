@@ -260,9 +260,15 @@ export default (function() {
       properties.depthOfknowledge = depthOfknowledge.slice(0);
       properties.standards = standards.slice(0);
       properties.centurySkills = centurySkills.slice(0);
-      properties.references = references.slice(0);
-      properties.tasks = tasks.slice(0);
-      properties.rubric = rubric.slice(0);
+      if (references) {
+        properties.references = references.slice(0);
+      }
+      if (tasks) {
+        properties.tasks = tasks.slice(0);
+      }
+      if (rubric) {
+        properties.rubric = rubric.slice(0);
+      }
 
       properties.children = this.get('children');
 
