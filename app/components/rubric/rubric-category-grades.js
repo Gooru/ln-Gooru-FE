@@ -72,7 +72,7 @@ export default Ember.Component.extend({
     let categories = component.get('categories');
     component.$('.grade-info-popover').popover({
       placement: 'top auto',
-      container: '.rubric-category-container',
+      container: 'body',
       trigger: 'manual'
     });
     let isMobile = window.matchMedia('only screen and (max-width: 768px)');

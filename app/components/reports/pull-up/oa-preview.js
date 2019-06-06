@@ -131,17 +131,23 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
    * Maintains the object teacher rubric data from  rubric array
    * @return {Object}
    */
-  teacherRubric: Ember.computed('offlineActivity.rubric.[]', function() {
-    let offlineActivity = this.get('offlineActivity');
-    let rubric = {};
-    if (offlineActivity) {
-      rubric = this.get('offlineActivity.rubric').findBy(
-        'gradeType',
-        'teacher'
-      );
+  teacherRubric: Ember.computed(
+    'offlineActivity.rubric.[]',
+    'oaRubrics',
+    function() {
+      let offlineActivity = this.get('offlineActivity');
+      let rubric = {};
+      if (offlineActivity) {
+        rubric = this.get('offlineActivity.rubric').findBy(
+          'gradeType',
+          'teacher'
+        );
+        let teacherGrade = this.get('oaRubrics.teacherGrades');
+        this.parseRubricGradedData(rubric, teacherGrade);
+      }
+      return rubric;
     }
-    return rubric;
-  }),
+  ),
 
   /**
    * Maintains the object of  student rubric data from  rubric array
@@ -155,6 +161,8 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
         'gradeType',
         'student'
       );
+      let studentGrade = this.get('oaRubrics.teacherGrades');
+      this.parseRubricGradedData(rubric, studentGrade);
     }
     return rubric;
   }),
@@ -181,7 +189,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
       ? component
         .get('oaAnaltyicsService')
         .getSubmissionsToGrade(classId, caContentId, studentId)
-      : Ember.RSVP.resolve({});
+      : Ember.RSVP.resolve(null);
     return Ember.RSVP.hash({
       offlineActivity: oaService.readActivity(oaId),
       submissions: submissionPromise
@@ -195,15 +203,57 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
   },
 
   parseSubmissionsData(submissions) {
-    const component = this;
-    const tasks = component.get('offlineActivity.tasks');
-    const taskSubmissons = submissions.get('tasks');
-    taskSubmissons.forEach(taskSubmission => {
-      const taskId = taskSubmission.get('taskId');
-      const task = tasks.findBy('id', taskId);
-      if (task) {
-        task.set('studentTaskSubmissions', taskSubmission.get('submissions'));
-      }
-    });
+    if (submissions) {
+      const component = this;
+      component.set('oaRubrics', submissions.get('oaRubrics'));
+      const tasks = component.get('offlineActivity.tasks');
+      const taskSubmissons = submissions.get('tasks');
+      taskSubmissons.forEach(taskSubmission => {
+        const taskId = taskSubmission.get('taskId');
+        const task = tasks.findBy('id', taskId);
+        if (task) {
+          task.set('studentTaskSubmissions', taskSubmission.get('submissions'));
+        }
+      });
+    }
+  },
+
+  parseRubricGradedData(rubric, gradedRubric) {
+    if (rubric && gradedRubric) {
+      let gradedCategories = gradedRubric.get('categoryGrade')
+        ? gradedRubric.get('categoryGrade')
+        : Ember.A([]);
+      let categories = rubric.get('categories');
+
+      rubric.set('studentScore', gradedRubric.get('score'));
+      rubric.set('comment', gradedRubric.get('overallComment'));
+      categories.map((category, index) => {
+        let gradedCategory = gradedCategories.objectAt(index);
+        let levels = category.get('levels');
+        if (levels) {
+          if (category.get('allowsLevels') && category.get('allowsScoring')) {
+            levels = levels.sortBy('score');
+            if (gradedCategory) {
+              let totalPoints = gradedCategory.get('levelMaxScore');
+              let scoreInPrecentage = Math.floor(
+                (gradedCategory.get('levelScore') / totalPoints) * 100
+              );
+              category.set('scoreInPrecentage', scoreInPrecentage);
+            }
+          }
+          if (gradedCategory) {
+            let levelObtained = levels.findBy(
+              'name',
+              gradedCategory.get('levelObtained')
+            );
+            if (levelObtained) {
+              levelObtained.set('selected', true);
+            }
+            category.set('comment', gradedCategory.get('levelComment'));
+          }
+          category.set('levels', levels);
+        }
+      });
+    }
   }
 });
