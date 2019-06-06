@@ -272,7 +272,7 @@ export default Ember.Controller.extend({
     /**
      * Trigger when rubric item level  report clicked
      */
-    onOpenFRQuestionGrade(itemToGrade) {
+    onOpenReportGrade(itemToGrade) {
       let controller = this;
       controller.set('itemToGradeContextData', itemToGrade);
       controller.set('showFRQuestionGrade', true);
@@ -611,8 +611,8 @@ export default Ember.Controller.extend({
       null;
     let score =
       scorePercentage >= 0 && scorePercentage !== null ?
-        `${scorePercentage}` :
-        '--';
+      `${scorePercentage}` :
+      '--';
     controller.set('studentClassScore', score);
   },
 
@@ -658,8 +658,8 @@ export default Ember.Controller.extend({
       controller.get('rescopeService').getSkippedContents(filter)
     );
     return Ember.RSVP.hash({
-      skippedContents: skippedContentsPromise
-    })
+        skippedContents: skippedContentsPromise
+      })
       .then(function(hash) {
         controller.set('skippedContents', hash.skippedContents);
         return hash.skippedContents;
@@ -905,15 +905,15 @@ export default Ember.Controller.extend({
             return Ember.RSVP.hash({
               collection: collectionId ?
                 isAssessment ?
-                  controller
-                    .get('assessmentService')
-                    .readAssessment(collectionId) :
-                  controller
-                    .get('collectionService')
-                    .readCollection(collectionId) : undefined
+                controller
+                .get('assessmentService')
+                .readAssessment(collectionId) :
+                controller
+                .get('collectionService')
+                .readCollection(collectionId) : undefined
             }).then(function(hash) {
               const collection = hash.collection;
-              const question = collection
+              const content = collection
                 .get('children')
                 .findBy('id', resourceId);
               itemObject.setProperties({
@@ -925,8 +925,9 @@ export default Ember.Controller.extend({
                 courseId: controller.get('course.id'),
                 unitId: unit.get('id'),
                 lessonId: lesson.get('id'),
+                contentType: collectionType,
                 collection,
-                question,
+                content,
                 studentCount
               });
               resolve(itemObject);

@@ -185,7 +185,7 @@
             {{else}}
               {{#if questionItems}}
                 {{gru-grade-items
-                  openFRQuestionGrade='onOpenFRQuestionGrade'
+                  openReportGrade='onOpenReportGrade'
                   gradeableItems=questionItems}}
               {{else}}
                 <div class="no-grade-items">
@@ -249,8 +249,8 @@
 
 {{#if showFRQuestionGrade}}
   {{grade.pull-up.free-response-question-grade
-    isDCAContext=true
+    isDCAContext=false
     showPullUp=showFRQuestionGrade
     context=itemToGradeContextData
-    itemsToGrade=itemsToGrade}}
+    itemsToGrade=questionItems}}
 {{/if}}
