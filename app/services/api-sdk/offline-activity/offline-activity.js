@@ -389,7 +389,7 @@ export default Ember.Service.extend({
         .get('offlineActivityAdapter')
         .removeTaskSubmission(
           taskSubmissionPayLoad.oaId,
-          taskSubmissionPayLoad.taskId,
+          taskSubmissionPayLoad.oaTaskId,
           taskSubmissionPayLoad.id
         )
         .then(function() {
