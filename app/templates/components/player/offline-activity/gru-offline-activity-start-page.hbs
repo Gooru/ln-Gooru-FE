@@ -30,7 +30,9 @@
   <div class="task-rubric-container">
     <div class="tasks-container">
       {{#each activityTasks as |task|}}
-        {{player.offline-activity.gru-offline-activity-task-submission task = task isPreview = true}}
+        {{player.offline-activity.gru-offline-activity-task-submission
+          task=task
+        }}
       {{else}}
         No Task available
       {{/each}}

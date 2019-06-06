@@ -53,7 +53,7 @@
         </div>
       {{/if}}
     {{else}}
-      <div class="dca-panel-performance not-started">
+      <div class="dca-panel-performance {{unless (eq item.collectionType 'offline-activity') 'not-started'}}" {{action 'studentDcaReport' item collectionPerformanceSummary activityDate}}>
         <span class="no-performance">--</span>
       </div>
     {{/if}}

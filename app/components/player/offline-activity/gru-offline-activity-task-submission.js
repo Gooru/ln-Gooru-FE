@@ -296,7 +296,9 @@ export default Ember.Component.extend({
     defaultUploadCount = defaultUploadCount <= 0 ? 1 : defaultUploadCount;
     let arrayWithDefaultLength = new Array(defaultUploadCount);
     return arrayWithDefaultLength.fill(
-      Ember.Object.create({ isFileAvailable: false })
+      Ember.Object.create({
+        isFileAvailable: false
+      })
     );
   }),
 
@@ -305,6 +307,24 @@ export default Ember.Component.extend({
    * Property to check whether the student has submitted this task
    */
   isStudentSubmitted: Ember.computed.gte('studentTaskSubmissions.length', 1),
+
+  /**
+   * Maintains the mode the component view
+   * @type {Boolean}
+   */
+  isReadOnly: false,
+
+  /**
+   * Maintains the value of show the submissions or not
+   * @type {Boolean}
+   */
+  showSubmissions: false,
+
+  /**
+   * Maintains the value of show toggle or not
+   * @type {Boolean}
+   */
+  showToggle: false,
 
   // -------------------------------------------------------------------------
   // Methods

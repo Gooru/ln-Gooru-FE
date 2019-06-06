@@ -52,11 +52,13 @@ export default Ember.Component.extend({
      * Action triggred when dca report action invoke
      */
     studentDcaReport: function(assessment, studentPerformance, activityDate) {
+      let caContentId = this.get('classActivity.id');
       this.sendAction(
         'studentDcaReport',
         assessment,
         studentPerformance,
-        activityDate
+        activityDate,
+        caContentId
       );
     },
 
