@@ -26,14 +26,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Actions
 
   actions: {
-
     toggleDatePicker() {
       let controller = this;
       controller.toggleProperty('isActive');
       controller.animateDatePicker();
     },
 
-    studentDcaReport(collection, studentPerformance, activityDate) {
+    studentDcaReport(
+      collection,
+      studentPerformance,
+      activityDate,
+      caContentId
+    ) {
       let component = this;
       let userId = component.get('session.userId');
       let params = {
@@ -44,20 +48,21 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         isStudent: true,
         collection,
         activityDate,
-        studentPerformance
+        studentPerformance,
+        caContentId
       };
+      component.set('isShowStudentExternalAssessmentReport', false);
+      component.set('showStudentDcaReport', false);
+      component.set('isShowStudentExternalCollectionReport', false);
+      component.set('isShowOfflineActivityReport', false);
       if (collection.get('format') === 'assessment-external') {
         component.set('isShowStudentExternalAssessmentReport', true);
-        component.set('showStudentDcaReport', false);
-        component.set('isShowStudentExternalCollectionReport', false);
       } else if (collection.get('format') === 'collection-external') {
-        component.set('showStudentDcaReport', false);
-        component.set('isShowStudentExternalAssessmentReport', false);
         component.set('isShowStudentExternalCollectionReport', true);
+      } else if (collection.get('format') === 'offline-activity') {
+        component.set('isShowOfflineActivityReport', true);
       } else {
         component.set('showStudentDcaReport', true);
-        component.set('isShowStudentExternalAssessmentReport', false);
-        component.set('isShowStudentExternalCollectionReport', false);
       }
       component.set('studentReportContextData', params);
     },
@@ -67,6 +72,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       component.set('isShowStudentExternalCollectionReport', false);
       component.set('isShowStudentExternalAssessmentReport', false);
       component.set('studentDcaReport', false);
+      component.set('isShowOfflineActivityReport', true);
     },
 
     showPreviousMonth(date) {
@@ -220,7 +226,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     controller.loadActivityForDate(todayDate);
     controller.loadActiveOfflineActivities();
     controller.loadCompeltedOfflineActivities();
-
   },
 
   /**
@@ -253,7 +258,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     const userId = controller.get('session.userId');
     const classId = controller.get('classId');
     controller.set('isLoading', true);
-    controller.get('classActivityService')
+    controller
+      .get('classActivityService')
       .getStudentScheduledActivities(userId, classId, date)
       .then(function(classActivities) {
         controller.set('classActivities', classActivities);
@@ -272,7 +278,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let forYear = controller.get('forYear');
     let startDate = `${forYear}-${forMonth}-01`;
     let userId = controller.get('session.userId');
-    let endDate = moment(startDate).endOf('month').format('YYYY-MM-DD');
+    let endDate = moment(startDate)
+      .endOf('month')
+      .format('YYYY-MM-DD');
     controller.set('isLoading', true);
     controller
       .get('classActivityService')
@@ -290,7 +298,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   loadActiveOfflineActivities() {
     const controller = this;
     const classId = controller.get('classId');
-    controller.get('classActivityService')
+    controller
+      .get('classActivityService')
       .fetchActiveOfflineActivities(classId)
       .then(activeOfflineActivities => {
         controller.set('activeOfflineActivities', activeOfflineActivities);
@@ -308,7 +317,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       .get('classActivityService')
       .fetchCompletedOfflineActivities(classId)
       .then(completedOfflineActivities => {
-        controller.set('completedOfflineActivities', completedOfflineActivities);
+        controller.set(
+          'completedOfflineActivities',
+          completedOfflineActivities
+        );
       });
   },
 
@@ -316,21 +328,27 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Animate a offline activity for desktop
    */
   animateOfflineActivityForMobile() {
-    let offlineActivityEle = Ember.$('.ca-panel .right-panel .offline-container');
+    let offlineActivityEle = Ember.$(
+      '.ca-panel .right-panel .offline-container'
+    );
     let windowHeight = $(window).height();
     if (offlineActivityEle.hasClass('active')) {
-      offlineActivityEle.animate({
-        top: windowHeight - 50
-      }, 400,
-      function() {
-        offlineActivityEle.removeClass('active');
-      });
+      offlineActivityEle.animate(
+        {
+          top: windowHeight - 50
+        },
+        400,
+        function() {
+          offlineActivityEle.removeClass('active');
+        }
+      );
     } else {
       offlineActivityEle.addClass('active');
-      offlineActivityEle.animate({
-        top: 100
-      },
-      400
+      offlineActivityEle.animate(
+        {
+          top: 100
+        },
+        400
       );
     }
   }

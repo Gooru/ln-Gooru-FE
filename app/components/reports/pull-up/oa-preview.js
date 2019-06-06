@@ -20,6 +20,13 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
   oaService: Ember.inject.service('api-sdk/offline-activity/offline-activity'),
 
   /**
+   * @requires service:api-sdk/offline-activity-analytics
+   */
+  oaAnaltyicsService: Ember.inject.service(
+    'api-sdk/offline-activity/oa-analytics'
+  ),
+
+  /**
    * Maintains the session object.
    */
   session: Ember.inject.service('session'),
@@ -152,6 +159,12 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     return rubric;
   }),
 
+  /**
+   * Maintains the state of report view or not,  by default report view is false.
+   * @type {Boolean}
+   */
+  isReportView: false,
+
   //--------------------------------------------------------------------------
   // Methods
 
@@ -159,13 +172,37 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     const component = this;
     const oaId = component.get('oaId');
     const oaService = component.get('oaService');
+    const classId = component.get('classId');
+    const caContentId = component.get('caContentId');
+    const studentId = component.get('studentId');
+    const isReportView = component.get('isReportView');
     component.set('isLoading', true);
+    let submissionPromise = isReportView
+      ? component
+        .get('oaAnaltyicsService')
+        .getSubmissionsToGrade(classId, caContentId, studentId)
+      : Ember.RSVP.resolve({});
     return Ember.RSVP.hash({
-      offlineActivity: oaService.readActivity(oaId)
-    }).then(({ offlineActivity }) => {
+      offlineActivity: oaService.readActivity(oaId),
+      submissions: submissionPromise
+    }).then(({ offlineActivity, submissions }) => {
       if (!component.isDestroyed) {
         component.set('offlineActivity', offlineActivity);
+        component.parseSubmissionsData(submissions);
         component.set('isLoading', false);
+      }
+    });
+  },
+
+  parseSubmissionsData(submissions) {
+    const component = this;
+    const tasks = component.get('offlineActivity.tasks');
+    const taskSubmissons = submissions.get('tasks');
+    taskSubmissons.forEach(taskSubmission => {
+      const taskId = taskSubmission.get('taskId');
+      const task = tasks.findBy('id', taskId);
+      if (task) {
+        task.set('studentTaskSubmissions', taskSubmission.get('submissions'));
       }
     });
   }
