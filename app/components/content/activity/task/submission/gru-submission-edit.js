@@ -81,9 +81,7 @@ export default Ember.Component.extend({
     },
 
     onSubTypeChange(subType) {
-      console.log('Subtype', subType); //eslint-disable-line
       this.get('model').set('taskSubmissionSubType', subType.display_name);
-      console.log('model', this.get('model')); //eslint-disable-line
     }
   },
   // -------------------------------------------------------------------------
@@ -99,7 +97,6 @@ export default Ember.Component.extend({
   },
 
   oaTaskIdChange: Ember.observer('oaTaskId', function() {
-    console.log('Setting New SubmissionModel Ins'); //eslint-disable-line
     let modelInstance = SubmissionModel.create({
       oaTaskId: this.get('oaTaskId')
     });
