@@ -184,6 +184,11 @@ export default Ember.Object.extend(Validations, {
   tenantRoot: null,
 
   /**
+   * @property {String} grader
+   */
+  grader: null,
+
+  /**
    * Return a copy of the category
    *
    * @function

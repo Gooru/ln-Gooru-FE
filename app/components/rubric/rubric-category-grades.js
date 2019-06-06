@@ -1,9 +1,6 @@
 import Ember from 'ember';
-import {
-  getGradeColor
-} from 'gooru-web/utils/utils';
+import { getGradeColor } from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
 

@@ -88,11 +88,9 @@ export default FilePicker.extend({
     let previewContainer = '';
     if (fileType.value === 'image') {
       previewContainer = this.$(
-        `<img src="${file.data}" class="file-picker__preview__image ${this.get(
-          'multiple'
-        )
-          ? 'multiple'
-          : 'single'}">`
+        `<img src="${file.data}" class="file-picker__preview__image ${
+          this.get('multiple') ? 'multiple' : 'single'
+        }">`
       );
     } else {
       previewContainer = this.$(

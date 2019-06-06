@@ -64,6 +64,7 @@ export function average(values) {
  */
 export function findPercentage(wholeNumber, givenNumber) {
   let percentage = 0;
-  percentage = wholeNumber && givenNumber ? givenNumber / wholeNumber * 100 : 0;
+  percentage =
+    wholeNumber && givenNumber ? (givenNumber / wholeNumber) * 100 : 0;
   return percentage;
 }

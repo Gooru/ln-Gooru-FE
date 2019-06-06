@@ -8,9 +8,11 @@ export default CollectionEdit.extend({
   // Dependencies
 
   /**
-   * @requires service:api-sdk/course
+   * @requires service:api-sdk/offline-activity/offline-activity
    */
-  activityService: Ember.inject.service('api-sdk/activity'),
+  activityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
 
   /**
    * @property {Service} I18N service
@@ -282,6 +284,7 @@ export default CollectionEdit.extend({
 
     modelSourceFromChildChanges(editingModel) {
       const component = this;
+      editingModel = editingModel || component.get('tempCollection');
       component.refreshSourceWithChanges(
         editingModel,
         component.get('activityCollection')

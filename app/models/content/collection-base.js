@@ -251,15 +251,20 @@ export default (function() {
       var standards = this.get('standards');
       var centurySkills = this.get('centurySkills');
 
+      var references = this.get('references'),
+        tasks = this.get('tasks'),
+        rubric = this.get('rubric');
+
       // Copy array values
       properties.audience = audience.slice(0);
       properties.depthOfknowledge = depthOfknowledge.slice(0);
       properties.standards = standards.slice(0);
       properties.centurySkills = centurySkills.slice(0);
+      properties.references = references.slice(0);
+      properties.tasks = tasks.slice(0);
+      properties.rubric = rubric.slice(0);
 
       properties.children = this.get('children');
-      properties.references = this.get('references');
-      properties.tasks = this.get('tasks');
 
       return this.get('constructor').create(
         Ember.getOwner(this).ownerInjection(),

@@ -69,9 +69,12 @@ export default Ember.Service.extend({
   getSubmissionsToGrade(classId, activityId, studentId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('oaAnaltyicsAdapter')
-        .getSubmissionsToGrade(classId, activityId, studentId).then(function(payload) {
-          const oaSubmitedData = service.get('offlineActivitySerializer')
+      service
+        .get('oaAnaltyicsAdapter')
+        .getSubmissionsToGrade(classId, activityId, studentId)
+        .then(function(payload) {
+          const oaSubmitedData = service
+            .get('offlineActivitySerializer')
             .normalizeSubmissionGrade(payload);
           resolve(oaSubmitedData);
         }, reject);
@@ -79,7 +82,9 @@ export default Ember.Service.extend({
   },
 
   submitTeacherGrade(userGrade) {
-    let data = this.get('offlineActivitySerializer').serializeStudentRubricGrades(userGrade);
+    let data = this.get(
+      'offlineActivitySerializer'
+    ).serializeStudentRubricGrades(userGrade);
     return this.get('oaAnaltyicsAdapter').submitTeacherGrade(data);
   }
 });

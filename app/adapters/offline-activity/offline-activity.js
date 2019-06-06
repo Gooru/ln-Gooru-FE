@@ -134,45 +134,22 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Deletes an activity by id
-   *
-   * @param activityId activity id to be sent
-   * @returns {Promise}
-   */
-  deleteExternalActivity: function(activityId) {
-    const adapter = this;
-    const namespace = this.get('externalNamespace');
-    const url = `${namespace}/${activityId}`;
-    const options = {
-      type: 'DELETE',
-      contentType: 'application/json; charset=utf-8',
-      dataType: 'text',
-      processData: false,
-      headers: adapter.defineHeaders(),
-      data: JSON.stringify({})
-    };
-    return Ember.$.ajax(url, options);
-  },
-
-  /**
    * Adds a question to an activity
    *
    * @param {string} activityId
    * @param {string} questionId
    * @returns {Promise}
    */
-  addQuestion: function(activityId, questionId) {
+  createReferences: function(activityId, referencesData) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/${activityId}/questions`;
+    const url = `${namespace}/${activityId}/references`;
     const options = {
-      type: 'PUT',
+      type: 'POST',
       contentType: 'application/json; charset=utf-8',
       dataType: 'text',
       headers: adapter.defineHeaders(),
-      data: JSON.stringify({
-        id: questionId
-      })
+      data: JSON.stringify(referencesData)
     };
     return Ember.$.ajax(url, options);
   },
@@ -242,6 +219,12 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  defineHeaders: function() {
+    return {
+      Authorization: `Token ${this.get('session.token-api3')}`
+    };
+  },
+
   /**
    * Get a list of OA subtype
    * @returns {Promise}
@@ -254,6 +237,27 @@ export default Ember.Object.extend({
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Deletes an reference by id
+   *
+   * @param reference id to be sent
+   * @returns {Promise}
+   */
+  deleteReference: function(activityId, referenceId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${activityId}/references/${referenceId}`;
+    const options = {
+      type: 'DELETE',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({})
     };
     return Ember.$.ajax(url, options);
   },
@@ -271,9 +275,152 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
-  defineHeaders: function() {
-    return {
-      Authorization: `Token ${this.get('session.token-api3')}`
+  //--------------Tasks------------------
+  /**
+   * Posts a new task
+   *
+   * @param data task data to be sent in the request body
+   * @returns {Promise}
+   */
+  createTask: function(data) {
+    const adapter = this;
+    const url = `${this.get('namespace')}/${data.body.oa_id}/tasks`;
+    const options = {
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(data.body)
     };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Deletes an task by oaId and id
+   *
+   * @param reference id to be sent
+   * @returns {Promise}
+   */
+  removeTask: function(oaId, taskId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${oaId}/tasks/${taskId}`;
+    const options = {
+      type: 'DELETE',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Update an Task
+   *
+   * @param oaId the id of the Activity to be updated
+   * @param taskId the id of the task to be updated
+   * @param data task data to be sent in the request body
+   * @returns {Promise}
+   */
+  updateTask: function(oaId, taskId, data) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${oaId}/tasks/${taskId}`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(data)
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Posts a new TaskSubmission
+   *
+   * @param data TaskSubmission data to be sent in the request body
+   * @returns {Promise}
+   */
+  createTaskSubmission: function(data) {
+    const adapter = this;
+    const url = `${this.get('namespace')}/${data.body.oa_id}/tasks/${
+      data.body.oa_task_id
+    }/submissions`;
+    const options = {
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(data.body)
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Deletes task Submission  by oaId, taskId and submission id
+   * @returns {Promise}
+   */
+  removeTaskSubmission: function(oaId, taskId, submissionId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${oaId}/tasks/${taskId}/submissions/${submissionId}`;
+    const options = {
+      type: 'DELETE',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Rubric OA association
+   *
+   * @param oaId the id of the Activity to be updated
+   * @param rubricId
+   * @returns {Promise}
+   */
+  associateTeacherRubricToOA: function(rubricId, oaId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${oaId}/rubric/${rubricId}/teacher`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Rubric OA association
+   * @param oaId the id of the Activity to be updated
+   * @param rubricId
+   * @returns {Promise}
+   */
+  associateStudentRubricToOA: function(rubricId, oaId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${oaId}/rubric/${rubricId}/student`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
   }
 });

@@ -140,13 +140,20 @@
   </div>
 </section>
 <section id="reference">
+  <div class="header">
+    <h2>References</h2>
+  </div>
   {{content.activity.gru-references activityModel=activityCollection model=tempCollection references=activityCollection.references updateContent=(action 'updateContent') updateParent=(action 'modelSourceFromChildChanges') }}
 </section>
 <section id="task">
   <div class="header">
-    {{content.activity.gru-tasks}}
+    <h2>Task</h2>
   </div>
+  {{content.activity.gru-tasks activityModel=activityCollection tasks=tempCollection.tasks updateParent=(action 'modelSourceFromChildChanges')}}
 </section>
 <section id="rubrics">
-  {{content.activity.gru-rubrics}}
+  <div class="header">
+    <h2>Rubric</h2>
+  </div>
+  {{content.activity.gru-rubrics tempModel=tempCollection}}
 </section>

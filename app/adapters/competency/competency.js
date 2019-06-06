@@ -27,13 +27,11 @@ export default Ember.Object.extend({
         activeDuration
       }
     };
-    return Ember.RSVP
-      .hashSettled({
-        userCompetencies: Ember.$.ajax(url, options)
-      })
-      .then(function(hash) {
-        return hash.userCompetencies.value;
-      });
+    return Ember.RSVP.hashSettled({
+      userCompetencies: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.userCompetencies.value;
+    });
   },
 
   /**
@@ -54,13 +52,11 @@ export default Ember.Object.extend({
         status
       }
     };
-    return Ember.RSVP
-      .hashSettled({
-        userPerformanceCompetencyCollections: Ember.$.ajax(url, options)
-      })
-      .then(function(hash) {
-        return hash.userPerformanceCompetencyCollections.value;
-      });
+    return Ember.RSVP.hashSettled({
+      userPerformanceCompetencyCollections: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.userPerformanceCompetencyCollections.value;
+    });
   },
 
   /**
@@ -79,13 +75,11 @@ export default Ember.Object.extend({
         subject
       }
     };
-    return Ember.RSVP
-      .hashSettled({
-        competencyMatrixCoordinates: Ember.$.ajax(url, options)
-      })
-      .then(function(hash) {
-        return hash.competencyMatrixCoordinates.value;
-      });
+    return Ember.RSVP.hashSettled({
+      competencyMatrixCoordinates: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.competencyMatrixCoordinates.value;
+    });
   },
 
   /**
@@ -105,13 +99,11 @@ export default Ember.Object.extend({
         subject
       }
     };
-    return Ember.RSVP
-      .hashSettled({
-        competencyMatrixCourse: Ember.$.ajax(url, options)
-      })
-      .then(function(hash) {
-        return hash.competencyMatrixCourse.value;
-      });
+    return Ember.RSVP.hashSettled({
+      competencyMatrixCourse: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.competencyMatrixCourse.value;
+    });
   },
 
   /**
@@ -132,13 +124,11 @@ export default Ember.Object.extend({
       contentType: 'application/json; charset=utf-8'
     };
     options.data = Object.assign(defaultParams, timeSeries);
-    return Ember.RSVP
-      .hashSettled({
-        competencyMatrix: Ember.$.ajax(url, options)
-      })
-      .then(function(hash) {
-        return hash.competencyMatrix.value;
-      });
+    return Ember.RSVP.hashSettled({
+      competencyMatrix: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.competencyMatrix.value;
+    });
   },
 
   /**
@@ -158,13 +148,11 @@ export default Ember.Object.extend({
         subject
       }
     };
-    return Ember.RSVP
-      .hashSettled({
-        competencyMatrix: Ember.$.ajax(url, options)
-      })
-      .then(function(hash) {
-        return hash.competencyMatrix.value;
-      });
+    return Ember.RSVP.hashSettled({
+      competencyMatrix: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.competencyMatrix.value;
+    });
   },
 
   /**
@@ -185,13 +173,11 @@ export default Ember.Object.extend({
         userId
       }
     };
-    return Ember.RSVP
-      .hashSettled({
-        competencyMatrix: Ember.$.ajax(url, options)
-      })
-      .then(function(hash) {
-        return hash.competencyMatrix.value;
-      });
+    return Ember.RSVP.hashSettled({
+      competencyMatrix: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.competencyMatrix.value;
+    });
   },
 
   /**
@@ -211,13 +197,11 @@ export default Ember.Object.extend({
         user: userId
       }
     };
-    return Ember.RSVP
-      .hashSettled({
-        competencyMatrix: Ember.$.ajax(url, options)
-      })
-      .then(function(hash) {
-        return hash.competencyMatrix.value;
-      });
+    return Ember.RSVP.hashSettled({
+      competencyMatrix: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.competencyMatrix.value;
+    });
   },
 
   /**

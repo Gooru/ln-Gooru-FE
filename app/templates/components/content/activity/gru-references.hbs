@@ -1,6 +1,6 @@
-<div class="panel panel-default">
+<div class="panel-default">
     <div class="panel-heading">
-        <h3>References</h3>
+        <h3>Description</h3>
         <div class="detail">
             <div class="actions">
                 {{partial 'content/partials/information-actions'}}
@@ -11,15 +11,44 @@
         <div class="panelBodyContainer">
             <div class="textContainer">
                 <div class='referenceText'>
-                    {{validation.gru-input model=model valuePath='reference' maxLength=50 didValidate=didValidate}}
-                </div>
-                <div class='referenceText exemplarText'>
-                    {{validation.gru-input model=model valuePath='exemplar' maxLength=50 didValidate=didValidate}}
+                    {{gru-rich-text-editor content=model.reference model=model valuePath='reference'}}
+                    {{!-- {{validation.gru-input model=model valuePath='reference' maxLength=50 didValidate=didValidate}} --}}
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="panel-default">
+    <div class="panel-heading">
+        <h3>Exemplar Answer</h3>
+        <div class="detail">
+            <div class="actions">
+                {{partial 'content/partials/information-actions'}}
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-body">
+        <div class="panelBodyContainer">
+            <div class="textContainer">
+                <div class='referenceText exemplarText'>
+                    {{gru-rich-text-editor content=model.exemplar model=model valuePath='exemplar'}}
+                    {{!-- {{validation.gru-input model=model valuePath='exemplar' maxLength=50 didValidate=didValidate}} --}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" panel-default">
+    <div class="panel-heading">
+        <h3>Reference Artifacts</h3>
+    </div>
+    <div class="panel panel-body">
+        <div class="panelBodyContainer">
             <div class='referenceArtifacts'>
                 <section>
-                    <h3>Uploaded Files</h3>
+                    <div class="border-bottom">
+                        <h3>Uploaded Files</h3>
+                    </div>
                     {{#each-in model.references as | index refItem|}}
                         {{#if (eq refItem.type 'uploaded')}}
                             <div> {{refItem.type}} <span class='separator'>|</span> {{refItem.subType}} <span class='separator'>|</span> <span class='ellipsis listItem'>{{refItem.location}}</span> <button class='button ' {{action 'deleteReference' refItem}}> Delete</button></div>
@@ -28,7 +57,9 @@
                     {{content.activity.reference.gru-edit-reference editType='upload' updateReferenceCollection=(action 'updateReferenceCollection') referenceType=referenceType referenceSubType=referenceSubType referenceType=referenceType model=refModel editingModel=editingRefModel  isEditing=isEditing}}
                 </section>
                 <section>
-                    <h3>Reference URLs</h3>
+                    <div class="border-bottom">
+                        <h3>Reference URLs</h3>
+                    </div>
                     {{#each-in model.references as | index refItem|}}
                         {{#if (eq refItem.type 'remote')}}
                             <div> {{refItem.type}} <span class='separator'>|</span> {{refItem.subType}} <span class='separator'>|</span> <span class='ellipsis listItem'>{{refItem.location}}</span> <button class='button ' {{action 'deleteReference' refItem}}> Delete</button></div>

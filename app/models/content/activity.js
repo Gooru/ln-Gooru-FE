@@ -26,7 +26,7 @@ const Validations = buildValidations({
 });
 
 /**
- * Assessment model
+ *  Activity model
  * typedef {Object} Assessment
  */
 export default Ember.Object.extend(Validations, CollectionBase, {
@@ -66,7 +66,17 @@ export default Ember.Object.extend(Validations, CollectionBase, {
   /**
    * @property {import { module } from '@ember/array';}
    */
-  references: null,
+  references: [],
+
+  /**
+   * @property {import { module } from '@ember/array';}
+   */
+  tasks: [],
+
+  /**
+   * @property {import { module } from '@ember/array';}
+   */
+  rubric: [],
 
   /**
    * @property {boolean}
