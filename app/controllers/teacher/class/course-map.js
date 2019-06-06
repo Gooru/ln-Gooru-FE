@@ -272,7 +272,7 @@ export default Ember.Controller.extend({
     /**
      * Trigger when rubric item level  report clicked
      */
-    onOpenFRQuestionGrade(itemToGrade) {
+    onOpenReportGrade(itemToGrade) {
       let controller = this;
       controller.set('itemToGradeContextData', itemToGrade);
       controller.set('showFRQuestionGrade', true);
@@ -913,7 +913,7 @@ export default Ember.Controller.extend({
                     .readCollection(collectionId) : undefined
             }).then(function(hash) {
               const collection = hash.collection;
-              const question = collection
+              const content = collection
                 .get('children')
                 .findBy('id', resourceId);
               itemObject.setProperties({
@@ -925,8 +925,9 @@ export default Ember.Controller.extend({
                 courseId: controller.get('course.id'),
                 unitId: unit.get('id'),
                 lessonId: lesson.get('id'),
+                contentType: collectionType,
                 collection,
-                question,
+                content,
                 studentCount
               });
               resolve(itemObject);
