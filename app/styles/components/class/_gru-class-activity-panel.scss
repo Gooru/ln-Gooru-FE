@@ -147,8 +147,6 @@
         cursor: pointer;
 
         &.offline {
-          pointer-events: none;
-
           .label-section {
             grid-template-rows: auto;
 

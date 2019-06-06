@@ -1,8 +1,9 @@
 import Ember from 'ember';
-import { cleanFilename } from 'gooru-web/utils/utils';
+import { cleanFilename, nullIfEmpty } from 'gooru-web/utils/utils';
 import {
   DEFAULT_IMAGES,
-  ASSESSMENT_SHOW_VALUES
+  ASSESSMENT_SHOW_VALUES,
+  OA_TASK_SUBMISSION_TYPES
 } from 'gooru-web/config/config';
 import TaxonomySerializer from 'gooru-web/serializers/taxonomy/taxonomy';
 // import ActivityModel from 'gooru-web/models/content/activity';
@@ -304,6 +305,127 @@ export default Ember.Object.extend({
       collectionType: data.collectionType,
       dcaContentId: data.dcaContentId,
       studentCount: data.studentCount
+    });
+  },
+
+  /**
+   * Normalizes a submission grade
+   * @param {*} response
+   * @return {Object}
+   */
+  normalizeSubmissionGrade(response) {
+    let serializer = this;
+    let oaRubrics = serializer.normalizeRubricGrade(response.oaRubrics);
+    return Ember.Object.create({
+      oaRubrics,
+      tasks: response.tasks
+        ? response.tasks.map(task => serializer.normalizeGradeTasks(task))
+        : []
+    });
+  },
+
+  /**
+   * Normalizes a Grade tasks
+   * @param {*} response
+   * @return {Object}
+   */
+  normalizeGradeTasks(payload) {
+    let serializer = this;
+    return Ember.Object.create({
+      taskId: payload.taskId,
+      submissions: payload.submissions
+        ? payload.submissions.map(submission =>
+          serializer.normalizeGradeSubmission(submission)
+        )
+        : []
+    });
+  },
+
+  /**
+   * Normalizes a Grade submission
+   * @param {*} response
+   * @return {Object}
+   */
+  normalizeGradeSubmission(payload) {
+    let submissionTypeData = OA_TASK_SUBMISSION_TYPES.findBy(
+      'value',
+      payload.submissionSubtype
+    );
+    let submissionIcon = submissionTypeData ? submissionTypeData.icon : null;
+    return Ember.Object.create({
+      submissionInfo: payload.submissionInfo,
+      submissionSubtype: payload.submissionSubtype,
+      submissionType: payload.submissionType,
+      submittedOn: payload.submittedOn,
+      submissionText: payload.submissionText,
+      submissionIcon
+    });
+  },
+
+  /**
+   * Normalizes a grade
+   * @param {*} response
+   * @return {Object}
+   */
+  normalizeRubricGrade(payload) {
+    let serializer = this;
+    return Ember.Object.create({
+      studentGrades: payload.studentGrades
+        ? serializer.normalizeGrade(payload.studentGrades)
+        : null,
+      teacherGrades: payload.teacherGrades
+        ? serializer.normalizeGrade(payload.teacherGrades)
+        : null
+    });
+  },
+
+  /**
+   * Normalizes a teacher and student grade
+   * @param {*} response
+   * @return {Object}
+   */
+  normalizeGrade(payload) {
+    let serializer = this;
+    return Ember.Object.create({
+      grader: payload.grader,
+      maxScore: Math.round(parseInt(payload.maxScore)),
+      overallComment: payload.overallComment,
+      rubricId: payload.rubricId,
+      score: Math.round(parseInt(payload.studentScore)),
+      submittedOn: payload.submittedOn,
+      timeSpent: payload.timeSpent,
+      categoryGrade: payload.categoryScore
+        ? payload.categoryScore.map(item =>
+          serializer.get('rubricSerializer').normalizeCategoryScore(item)
+        )
+        : []
+    });
+  },
+
+  serializeStudentRubricGrades(payload) {
+    return Ember.Object.create({
+      rubric_id: nullIfEmpty(payload.get('id')),
+      student_id: payload.get('studentId'),
+      class_id: payload.get('classId'),
+      collection_id: payload.get('collectionId'),
+      dca_content_id: payload.get('dcaContentId'),
+      content_source: payload.get('contentSource'),
+      collection_type: payload.get('collectionType'),
+      session_id: nullIfEmpty(payload.get('sessionId')),
+      grader: 'teacher',
+      grader_id: this.get('session.userId'),
+      student_score: payload.get('studentScore'),
+      max_score: payload.get('maxScore'),
+      overall_comment: payload.get('comment'),
+      category_score: payload.get('categoriesScore').length
+        ? payload
+          .get('categoriesScore')
+          .map(category =>
+            this.get('rubricSerializer').serializedStudentGradeCategoryScore(
+              category
+            )
+          )
+        : null
     });
   },
 

@@ -8,22 +8,6 @@
   margin: auto;
   color: #37434d;
 
-  .popover {
-    border: 0;
-    padding: 0;
-
-    .popover-title {
-      text-align: center;
-
-      .close-popover {
-        position: absolute;
-        right: 5px;
-        color: #37434d;
-        cursor: pointer;
-      }
-    }
-  }
-
   .backdrop {
     background-color: #434c5a;
     position: fixed;
@@ -50,6 +34,105 @@
     width: 100%;
     height: 100%;
     top: 0;
+  }
+
+  .rubric-file-preview-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 5%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    visibility: hidden;
+
+    .rubric-file-preview {
+      width: 90%;
+      height: 90vh;
+      margin: 0 auto;
+      background: #fff;
+      text-align: center;
+      border-radius: 8px;
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        padding: 20px 20px 70px;
+      }
+
+      .rubric-file-preview-close {
+        height: 20px;
+
+        .close {
+          color: #ccc;
+          margin-right: 20px;
+          font-size: 24px;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+
+  .caught-up-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 30%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    display: none;
+
+    .caught-up {
+      width: 400px;
+      height: 300px;
+      margin: 0 auto;
+      background: #fff;
+      text-align: center;
+      border-radius: 8px;
+
+      .caught-up-tick-container {
+        position: relative;
+        padding-top: 100px;
+        padding-bottom: 28px;
+
+        hr {
+          margin: 0;
+          border-width: 1px;
+          border-color: green;
+          margin-left: 20px;
+          margin-right: 20px;
+          border-color: #4caf50;
+        }
+
+        .caught-up-tick {
+          position: absolute;
+          width: 90px;
+          height: 80px;
+          background: #fff;
+          display: block;
+          left: 40%;
+          margin-top: -38px;
+          padding-left: 8px;
+
+          span {
+            display: block;
+            height: 75px;
+            width: 75px;
+            border-radius: 50%;
+            color: #4caf50;
+            border: 2px solid #4caf50;
+
+            i {
+              font-size: 40px;
+              margin-top: 15px;
+            }
+          }
+        }
+      }
+    }
   }
 
   .oa-grade-container {
@@ -202,7 +285,7 @@
           }
 
           .self-grade-section {
-            height: 100%;
+            height: 96%;
             width: 100%;
             padding: 5px;
 
@@ -227,41 +310,31 @@
           width: 100%;
           height: 100%;
           overflow-y: auto;
-          max-height: calc(100% - 380px);
+          max-height: calc(100% - 120px);
 
-          .task {
-            width: 100%;
-            height: auto;
-            display: grid;
-            grid-template-rows: auto auto auto;
-
-            .task-info {
-              display: grid;
-              grid-template-columns: 50px 1fr;
-              width: 100%;
-              height: 48px;
-              box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3);
-              align-items: center;
-
-              .icon {
-                display: flex;
-                margin: auto;
+          .gru-offline-activity-task-submission {
+            .task-submission-container {
+              .task-toggle {
+                display: none;
               }
             }
 
-            .task-desc {
-              padding: 10px;
-              font-size: 14px;
-              font-weight: bold;
-              line-height: 1.14;
-              color: #3e5e67;
-            }
+            .task-details-container {
+              .task-upload-container {
+                .task-answer {
+                  display: none;
+                }
 
-            .student-submission {
-              padding: 10px;
-              font-size: 12px;
-              line-height: 1.33;
-              color: #37424b;
+                .task-file-upload-container {
+                  .task-file-upload {
+                    display: none;
+                  }
+                }
+
+                .save-task-submission {
+                  display: none;
+                }
+              }
             }
           }
         }
@@ -328,165 +401,105 @@
 
         .oa-grade-right-panel-body {
           color: #fff;
-          padding-left: 20px;
-          padding-right: 20px;
-          padding-top: 40px;
+          width: 100%;
+          height: 100%;
+          overflow-y: auto;
+          max-height: calc(100vh - 200px);
 
-          .oa-grade-rubric-grading {
-            width: 200px;
-            font-size: 30px;
-            line-height: 1;
-            text-align: center;
-            margin: 0 auto;
-            padding-bottom: 20px;
+          .panel-group {
+            margin-bottom: 0;
+            height: auto;
+            width: 100%;
 
-            .studentScore {
-              input {
-                text-align: center;
-                font-size: 30px;
-                color: #fff;
-              }
-            }
-          }
+            .student-rubric-section,
+            .teacher-rubric-section {
+              height: auto;
+              width: 100%;
 
-          .oa-grade-rubric-categories {
-            .oa-grade-rubric-category {
-              padding-bottom: 15px;
-
-              &.comment-active {
-                .oa-grade-rubric-level-container {
-                  .mode_comment {
-                    opacity: 1 !important;
-                  }
-                }
+              &.panel {
+                background: none;
+                box-shadow: none;
               }
 
-              .oa-grade-rubric-category-info {
-                display: inline-flex;
-
-                p {
-                  font-family: "Open Sans";
-                  font-size: 13px;
-                  font-weight: bold;
-                  color: #ffffff;
-                  line-height: 1.2;
-                }
-              }
-
-              .oa-grade-rubric-level-container {
-                display: flex;
+              .student-grading-header,
+              .teacher-grading-header {
+                height: 50px;
                 align-items: center;
-                height: 25px;
+                display: grid;
+                grid-template-columns: auto 60px;
+                position: relative;
+                width: 100%;
+                border-bottom: 1px solid #bbb;
 
-                .oa-grade-rubric-category-info {
-                  width: 290px;
-
-                  p {
-                    margin: 0;
-                  }
-                }
-
-                .oa-grade-rubric-levels {
-                  width: 290px;
-                  background-color: #5d666f;
-                  border-radius: 16px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                  padding: 3px;
-                  color: #37424b;
-                  position: relative;
-
-                  &.active,
-                  &.no-progress {
-                    background-color: transparent;
-                    border-radius: 0;
-                  }
-
-                  &.no-progress {
-                    .oa-grade-info-no-level,
-                    .oa-grade-info-popover {
-                      opacity: 0.3;
-
-                      &.selected {
-                        opacity: 1 !important;
-                        background-color: #4b9147;
-                      }
-                    }
-                  }
-
+                .icons {
                   i {
-                    height: 20px;
-                    width: 20px;
-                    border-radius: 50%;
-                    background-color: #ffff;
+                    width: 24px;
+                    margin: auto;
                     cursor: pointer;
-                    position: relative;
-                    z-index: 1;
                   }
 
-                  .progress-bar {
-                    position: absolute;
-                    height: 26px;
+                  .arrow_drop_up {
                     display: block;
-                    border-radius: 16px;
-                    margin-left: -3px;
-                    width: 0;
                   }
 
-                  .popover {
-                    .popover-title {
-                      text-align: center;
+                  .arrow_drop_down {
+                    display: none;
+                  }
+                }
+
+                &[aria-expanded="true"] {
+                  .icons {
+                    .arrow_drop_up {
+                      display: none;
                     }
 
-                    .popover-content {
-                      text-align: center;
-                      background-color: #fff;
+                    .arrow_drop_down {
+                      display: block;
                     }
                   }
                 }
 
-                .oa-grade-clear {
-                  height: 18px;
-                  width: 25px;
-                  padding-left: 4px;
-                  pointer-events: none;
-
-                  .clear {
-                    font-size: 18px;
-                    visibility: hidden;
-                  }
-
-                  &.active {
-                    .clear {
-                      visibility: visible;
-                      cursor: pointer;
+                &[aria-expanded="false"] {
+                  .icons {
+                    .arrow_drop_up {
+                      display: block;
                     }
-                    pointer-events: all;
+
+                    .arrow_drop_down {
+                      display: none;
+                    }
                   }
                 }
 
-                .oa-grade-comment {
-                  height: 20px;
-                  width: 30px;
-
-                  .mode_comment {
-                    opacity: 0.2;
-                    cursor: pointer;
-                  }
+                span {
+                  text-transform: uppercase;
+                  font-size: 12px;
+                  font-weight: bold;
+                  padding-left: 10px;
                 }
               }
 
-              .oa-grade-comment-section {
-                padding-top: 20px;
-                display: none;
+              .student-grading-panel,
+              .teacher-grading-panel {
+                padding: 10px;
+                border-bottom: 1px dotted;
 
-                textarea {
-                  font-family: "Open Sans";
-                  font-size: 16px;
-                  font-style: italic;
-                  color: #ffffff;
-                  background-color: #35424b;
+                .oa-grade-rubric-grading {
+                  width: 200px;
+                  font-size: 30px;
+                  line-height: 1;
+                  text-align: center;
+                  margin: 0 auto;
+                  padding-bottom: 20px;
+
+                  .studentScore {
+                    input {
+                      text-align: center;
+                      font-size: 30px;
+                      color: #fff;
+                      padding-left: 15px;
+                    }
+                  }
                 }
               }
             }

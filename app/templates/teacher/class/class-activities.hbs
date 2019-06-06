@@ -50,12 +50,11 @@
         }}
           </div>
         </div>
-        {{#if showClassActivities}}
-          <div class="ca-schedule-section">
+        <div class="ca-schedule-section">
+          <div class="dca-content-list-container {{if (eq today classActivity.added_date) 'dca-content-list-container-today'}}">
             {{#each scheduledClassActivities as |classActivity|}}
-              <div class="dca-content-list-container {{if (eq today classActivity.added_date) 'dca-content-list-container-today'}}">
-                {{#each classActivity.classActivities as |activity|}}
-                  {{class.gru-class-activity-panel
+              {{#each classActivity.classActivities as |activity|}}
+                {{class.gru-class-activity-panel
                     classActivity=activity
                     classId=classId
                     class=class
@@ -76,15 +75,14 @@
                     onUpdateMasteryAccrual="onUpdateMasteryAccrual"
                     showMasteryAccrual=showMasteryAccrual
                   }}
-                {{else}}
-                  <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
-                {{/each}}
-              </div>
+              {{else}}
+                <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
+              {{/each}}
+            {{else}}
+              <div class="no-content">{{t "common.no-dca-teacher"}}</div>
             {{/each}}
           </div>
-        {{else}}
-          <div class="no-content">{{t "common.no-dca-teacher"}}</div>
-        {{/if}}
+        </div>
       </div>
       <div class="unschedule-container">
         <div class="ca-unschedule-items-header" {{action 'toggleUnSchedule'}}>
@@ -340,5 +338,12 @@
   {{activity.offline.grading-report
     showPullUp=showOAGrade
     context=itemToGradeContextData
+    itemsToGrade=itemsToGrade
+  }}
+{{/if}}
+{{#if isShowOfflineActivityPreview}}
+  {{reports.pull-up.oa-preview
+    showPullUp=isShowOfflineActivityPreview
+    oaId=previewContent.id
   }}
 {{/if}}

@@ -98,11 +98,7 @@ export default Ember.Service.extend({
           contentId,
           addedDate,
           end_date
-        )
-        .then(function(responseData, textStatus, request) {
-          let newContentId = parseInt(request.getResponseHeader('location'));
-          resolve(newContentId);
-        }, reject);
+        ).then(resolve, reject);
     });
   },
 
