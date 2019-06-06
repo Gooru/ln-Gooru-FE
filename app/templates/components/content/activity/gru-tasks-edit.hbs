@@ -14,7 +14,9 @@
         <span>Description</span>
         {{gru-rich-text-editor content=model.description model=model valuePath='description'}}
         {{!-- {{validation.gru-input model=model valuePath='description' maxLength=50 didValidate=true}} --}}
-        {{content.activity.task.gru-submissions submissions=model.oaTaskSubmissions oaId=oaId oaTaskId=model.id }}
+        {{#if model.id}}
+            {{content.activity.task.gru-submissions submissions=model.oaTaskSubmissions oaId=oaId oaTaskId=model.id }}
+        {{/if}}
         {{!-- updateParent=(action 'updateParent') --}}
     </div>
 </div>
