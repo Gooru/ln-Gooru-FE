@@ -130,7 +130,7 @@
         <div class="offline-activity-item-header" {{action 'toggleOffineActivity'}}>
           <span class="hidden-xs">{{t 'common.plan'}}</span>
           <span class="title hidden visible-xs">{{t 'common.offline-activites'}}</span>
-          <i class="offline-icon"></i>
+          <i class="offline-icon" {{action 'onAddDca' 'offline-activity'}}></i>
           <div class="icons">
             {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
             {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
