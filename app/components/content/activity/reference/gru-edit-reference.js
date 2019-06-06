@@ -108,7 +108,7 @@ export default Ember.Component.extend({
       if (file) {
         this.set('editingModel.file', file);
         this.set('editingModel.type', type);
-        this.sendAction('updateContent');
+        this.send('updateContent');
       }
     },
     updateURLRef: function() {
