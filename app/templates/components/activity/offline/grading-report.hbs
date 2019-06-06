@@ -40,11 +40,11 @@
         </div>
         {{#if student.selfGrade}}
           <div class="self-grade-section" style={{safe-html (concat "background-color:" (grade-color studentSelfGrade))}}>
-            <div class="label">Self-Graded</div>
+            <div class="label">{{t 'common.self-graded'}}</div>
             <div class="score">
               <sup>{{student.selfGrade.score}}</sup>&frasl;<sub>{{student.selfGrade.maxScore}}</sub>
             </div>
-            <div class="label">Rubric Score</div>
+            <div class="label">{{t 'common.rubric-grade'}}</div>
           </div>
         {{/if}}
       </div>
@@ -61,9 +61,8 @@
     <div class="right-panel">
       <div class="oa-grade-right-panel-header">
         <div class="oa-grade-info">
-          {{#if student.teacherRubric.scoring}}
+          {{#if teacherRubric.scoring}}
             <span class="oa-grade-info-title">{{t 'grading-player.grading'}}</span>
-            <span class="oa-grade-info-desc">{{t 'common.update-grade-score'}}</span>
           {{else}}
             <span class="oa-grade-info-title">
               Rubric
@@ -74,11 +73,11 @@
             <span class="oa-grade-info-desc">{{t 'common.answer-this-activity'}}</span>
           {{/if}}
         </div>
-        {{#if student.teacherRubric.scoring}}
+        {{#if teacherRubric.scoring}}
           <div class="oa-grade-score" style={{safe-html (concat "background-color:" (grade-color userGradeScore))}}>
             <span>{{studentGradeScore}}</span>
             <hr />
-            <span>{{student.teacherRubric.maxScore}}</span>
+            <span>{{teacherRubric.maxScore}}</span>
           </div>
         {{else if (gt totalRubricPoints 0)}}
           <div class="oa-grade-score" style={{safe-html (concat "background-color:" (grade-color userRubricScore))}}>
@@ -127,10 +126,10 @@
               </div>
             </div>
             <div class="teacher-grading-panel panel-collapse collapse in" id="teacher">
-              {{#if student.teacherRubric.scoring}}
+              {{#if teacherRubric.scoring}}
                 <div class="oa-grade-rubric-grading">
-                  {{validation.gru-input-number model=teacherRubric  valuePath='studentScore' min=0 max=student.teacherRubric.maxScore step=student.teacherRubric.increment }}
-                  <span class="score">{{student.teacherRubric.maxScore}}</span>
+                  {{validation.gru-input-number model=teacherRubric  valuePath='studentScore' min=0 max=teacherRubric.maxScore step=teacherRubric.increment }}
+                  <span class="score">{{teacherRubric.maxScore}}</span>
                 </div>
               {{else}}
                 {{rubric.rubric-category-grades categories=categories}}
@@ -160,6 +159,23 @@
     {{three-bounce-spinner}}
   </div>
 {{/if}}
+
+
+
+<div class="caught-up-container">
+  <div class="backdrop" {{action 'onPullUpClose' true}}></div>
+  <div class="caught-up">
+    <div class="caught-up-tick-container">
+      <hr />
+      <div class="caught-up-tick">
+        <span>{{gru-icon name="done"}}</span>
+      </div>
+    </div>
+    <h3>{{t 'common.all-caught-up'}}</h3>
+    <p>{{t 'common.no-users-to-grade'}}</p>
+  </div>
+</div>
+
 
 {{#if (and rubric.uploaded rubric.url)}}
   <div class="rubric-file-preview-container">

@@ -103,19 +103,33 @@ export default Ember.Component.extend({
   }),
 
   /**
+   * Maintains the teacher grade
+   * @return {Object}
+   */
+  teacherGrade: Ember.computed('studentId', 'users.[]', function() {
+    let studentId = this.get('studentId');
+    let user;
+    if (this.get('users')) {
+      user = this.get('users').findBy('id', studentId);
+    }
+    return user ? user.get('teacherGrade') : null;
+  }),
+
+  /**
    * Computed Properties for rubric categories
    * @type {Object}
    */
-  categories: Ember.computed('teacherRubric', 'student.teacherGrade', function() {
+  categories: Ember.computed('teacherRubric', 'teacherGrade', function() {
     let component = this;
     let teacherGradedCategories = Ember.A([]);
     let categories = component.get('teacherRubric.categories') ?
       component.get('teacherRubric.categories') : [];
-    let teacherGrade = component.get('student.teacherGrade');
+    let teacherGrade = component.get('teacherGrade');
     if (teacherGrade) {
       teacherGradedCategories = teacherGrade.get('categoryGrade') ?
         teacherGrade.get('categoryGrade') :
         Ember.A([]);
+
       component.get('teacherRubric').set('studentScore', teacherGrade.get('score'));
       component.get('teacherRubric').set('comment', teacherGrade.get('overallComment'));
     }
@@ -264,7 +278,7 @@ export default Ember.Component.extend({
    * Calculate grade total score.
    * @return {Number}
    */
-  userGradeScore: Ember.computed('teacherRubric.studentScore', function() {
+  userGradeScore: Ember.computed('teacherRubric', function() {
     let score = -1;
     let gradeMaxScore = this.get('teacherRubric.maxScore');
     let studentScore = this.get('teacherRubric.studentScore');
@@ -287,6 +301,10 @@ export default Ember.Component.extend({
     return score;
   }),
 
+  /**
+   * Read student self graded score
+   * @return {Number}
+   */
   studentSelfGrade: Ember.computed('student.selfGrade', function() {
     let component = this;
     let score = 0;
@@ -468,6 +486,11 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * Method to set values of student self grade and teacher grade for a selected student
+   * @param  {Object} studentGrade
+   * @param  {Object} teacherGrade
+   */
   parseStudentSubmissionGrade(studentGrade, teacherGrade) {
     let component = this;
     let student = component.get('student');
@@ -475,6 +498,10 @@ export default Ember.Component.extend({
     student.set('teacherGrade', teacherGrade);
   },
 
+  /**
+   * Method to parse student lavel task submission
+   * @param  {Object} tasksSubmission
+   */
   parseStudentTaskSubmission(tasksSubmission) {
     let component = this;
     let tasks = component.get('tasks');
@@ -501,6 +528,10 @@ export default Ember.Component.extend({
     component.set('activityTasks', activityTasks);
   },
 
+  /**
+   * Method to create new object instance for task level
+   * @param  {Object} tasksSubmission
+   */
   createNewObjectForTask(task) {
     return Ember.Object.create({
       title: task.get('title'),
@@ -519,6 +550,9 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * Method to save user grade by a teacher
+   */
   saveUserGrade() {
     let component = this;
     let teacherGrade = component.get('teacherRubric');
@@ -554,6 +588,11 @@ export default Ember.Component.extend({
       });
   },
 
+  /**
+   * Method to create rubric category
+   * @param  {Object} category
+   * @param  {Object} level
+   */
   createRubricCategory(category, level) {
     let rubricCategory = RubricCategoryScore.create(
       Ember.getOwner(this).ownerInjection(), {
@@ -572,6 +611,11 @@ export default Ember.Component.extend({
     return rubricCategory;
   },
 
+  /**
+   * Method to create rubric grade
+   * @param  {Object} rubric
+   * @param  {Object} user
+   */
   createRubricGrade(rubric, user) {
     let component = this;
     return RubricGrade.create(Ember.getOwner(this).ownerInjection(), rubric, {
@@ -584,6 +628,9 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * Method to fetch submissions given by teacher and student
+   */
   loadData() {
     let component = this;
     let classId = component.get('context.classId');
@@ -595,9 +642,7 @@ export default Ember.Component.extend({
         let studentGrade = submission.get('oaRubrics.studentGrades');
         let teacherGrade = submission.get('oaRubrics.teacherGrades');
         let taskSubmission = submission.get('tasks');
-        if (studentGrade || teacherGrade) {
-          component.parseStudentSubmissionGrade(studentGrade, teacherGrade);
-        }
+        component.parseStudentSubmissionGrade(studentGrade, teacherGrade);
         component.parseStudentTaskSubmission(taskSubmission);
         component.set('isLoading', false);
         component.handleCarouselControl();
@@ -628,6 +673,9 @@ export default Ember.Component.extend({
     );
   },
 
+  /**
+   * Method to handle container scroll
+   */
   handleAppContainerScroll() {
     let activePullUpCount = Ember.$(document.body).find('.backdrop-pull-ups')
       .length;
@@ -638,6 +686,9 @@ export default Ember.Component.extend({
     }
   },
 
+  /**
+   * Method to slide to next user
+   */
   slideToNextUser() {
     let component = this;
     let users = component.get('users');
@@ -680,6 +731,9 @@ export default Ember.Component.extend({
     }
   },
 
+  /**
+   * Method to handle carousel
+   */
   handleCarouselControl() {
     let component = this;
     let studentId = component.get('studentId');
