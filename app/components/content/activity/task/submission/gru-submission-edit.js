@@ -104,8 +104,15 @@ export default Ember.Component.extend({
       oaTaskId: this.get('oaTaskId')
     });
 
-    //modelInstance.taskSubmissionSubType.display_name = '';
-    //let modelInstance = SubmissionModel.create();
+    let chooseOne = this.get('i18n').t(
+      'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'
+    ).string;
+
+    let taskSubmissionSubTypeSel = Ember.Object.create({
+      display_name: chooseOne
+    });
+
+    modelInstance.set('taskSubmissionSubTypeSel', taskSubmissionSubTypeSel);
     this.set('model', modelInstance);
   }),
 
