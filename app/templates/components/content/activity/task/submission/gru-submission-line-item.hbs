@@ -1,1 +1,14 @@
-<div> {{submission.id}}</div>
+<div class="associated-rubric">
+    <div class="image">
+        <i class="{{submission.taskSubmissionSubType}}-icon"></i>
+    </div>
+    <div class="info" style="width:90%">
+        <h3>{{submission.id}} </h3>
+    </div>
+    {{!-- {{task.description}} --}}
+    <div class="actions">
+        <button class="btn no-bgd remove-item" {{action 'removeLineItem'}}>
+            {{gru-icon name="remove_circle"}}
+        </button>
+    </div>
+</div>

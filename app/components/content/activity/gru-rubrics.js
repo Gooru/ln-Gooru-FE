@@ -31,8 +31,8 @@ export default Ember.Component.extend(ModalMixin, {
             rubrics,
             rubricsFor: rubricsFor,
             callback: {
-              success: function(rubricAssociated) {
-                console.log('Show Nothing', rubricAssociated); //eslint-disable-line
+              success: function(/* rubricAssociated */) {
+                return true;
               }
             }
           };
@@ -94,7 +94,6 @@ export default Ember.Component.extend(ModalMixin, {
         'grader',
         'Teacher'
       );
-      console.log('isTeacherRubrics', teachRubrics); //eslint-disable-line
       return teachRubrics;
     }
   }.property(),
@@ -108,7 +107,6 @@ export default Ember.Component.extend(ModalMixin, {
         'grader',
         'Teacher'
       );
-      console.log('teacherRubrics', teachRubrics); //eslint-disable-line
       return teachRubrics;
     }
   }.property(),
