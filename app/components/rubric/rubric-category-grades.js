@@ -1,13 +1,19 @@
 import Ember from 'ember';
-import {
-  getGradeColor
-} from 'gooru-web/utils/utils';
+import { getGradeColor } from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
 
   classNames: ['rubric-category-container'],
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * Maintains the state of show comment or not.
+   * @type {Boolean}
+   */
+  showComment: true,
 
   // -------------------------------------------------------------------------
   // Events

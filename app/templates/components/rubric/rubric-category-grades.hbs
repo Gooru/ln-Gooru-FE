@@ -10,10 +10,10 @@
         {{#if category.allowsLevels}}
           <div class="grade-rubric-levels {{unless (and category.allowsLevels category.allowsScoring) 'no-progress'}} {{if category.scoreInPrecentage 'active'}}">
             {{#each category.levels as |level levelIndex|}}
-              <i class="grade-info-popover {{if level.selected 'selected'}}" data-html="true" title="Points: {{level.score}}" data-content="{{level.name}}" data-category={{categoryIndex}} data-level={{levelIndex}}></i>
+              <i class="grade-info-popover {{if level.selected 'selected'}}" data-html="true" title="Points: {{level.score}}" data-content="{{level.name}}" data-category= {{categoryIndex}} data-level= {{levelIndex}}></i>
             {{/each}}
             {{#if (and category.allowsLevels category.allowsScoring)}}
-              <div class="progress-bar" style={{safe-html (concat "background-color:" (grade-color category.scoreInPrecentage) ";width:" category.scoreInPrecentage "%")}}></div>
+              <div class="progress-bar" style= {{safe-html (concat "background-color:" (grade-color category.scoreInPrecentage) ";width:" category.scoreInPrecentage "%")}}></div>
             {{/if}}
           </div>
         {{else}}
@@ -24,9 +24,11 @@
         <div class="grade-clear {{if category.selected 'active'}}" {{action 'unSelectCategoryLevel' category}}>
           {{gru-icon name="clear"}}
         </div>
-        <div class="grade-comment" {{action 'onShowAddCommentBox' categoryIndex}}>
-          {{gru-icon name="mode_comment"}}
-        </div>
+        {{#if showComment}}
+          <div class="grade-comment" {{action 'onShowAddCommentBox' categoryIndex}}>
+            {{gru-icon name="mode_comment"}}
+          </div>
+        {{/if}}
       </div>
       <div class="grade-comment-section {{if isDisable 'disable-event'}}">
         {{validation.gru-textarea

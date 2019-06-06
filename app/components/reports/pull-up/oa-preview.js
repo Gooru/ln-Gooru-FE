@@ -120,6 +120,38 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
    */
   isLoading: false,
 
+  /**
+   * Maintains the object teacher rubric data from  rubric array
+   * @return {Object}
+   */
+  teacherRubric: Ember.computed('offlineActivity.rubric.[]', function() {
+    let offlineActivity = this.get('offlineActivity');
+    let rubric = {};
+    if (offlineActivity) {
+      rubric = this.get('offlineActivity.rubric').findBy(
+        'gradeType',
+        'teacher'
+      );
+    }
+    return rubric;
+  }),
+
+  /**
+   * Maintains the object of  student rubric data from  rubric array
+   * @return {Object}
+   */
+  studentRubric: Ember.computed('offlineActivity.rubric.[]', function() {
+    let offlineActivity = this.get('offlineActivity');
+    let rubric = {};
+    if (offlineActivity) {
+      rubric = this.get('offlineActivity.rubric').findBy(
+        'gradeType',
+        'student'
+      );
+    }
+    return rubric;
+  }),
+
   //--------------------------------------------------------------------------
   // Methods
 
