@@ -58,5 +58,46 @@
         }}
       {{/each}}
     </div>
+
+    <div class="oa-teacher-student-rubric">
+      {{#if studentRubric.categories}}
+        <div class="student-rubric-section">
+          <div class="student-grading-header">
+            <div class="rubric-icon-container">
+            </div>
+            <div class="rubric-container">
+              <div class="grader-label">Student Rubric</div>
+              <div class="grade-tag">Self-grade</div>
+            </div>
+          </div>
+          <div class="student-grading-panel">
+            {{rubric.rubric-category-grades
+              isDisable=true
+              categories=studentRubric.categories
+              showComment=false
+            }}
+          </div>
+        </div>
+      {{/if}}
+      {{#if teacherRubric.categories}}
+        <div class="teacher-rubric-section">
+          <div class="teacher-grading-header">
+            <div class="rubric-icon-container">
+            </div>
+            <div class="rubric-container">
+              <div class="grader-label">Teacher Rubric</div>
+              <div class="grade-tag">Teacher-grade</div>
+            </div>
+          </div>
+          <div class="teacher-grading-panel">
+            {{rubric.rubric-category-grades
+              isDisable=true
+              categories=teacherRubric.categories
+              showComment=false
+            }}
+          </div>
+        </div>
+      {{/if}}
+    </div>
   </div>
 </div>

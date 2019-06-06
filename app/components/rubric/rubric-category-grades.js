@@ -7,6 +7,15 @@ export default Ember.Component.extend({
   classNames: ['rubric-category-container'],
 
   // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * Maintains the state of show comment or not.
+   * @type {Boolean}
+   */
+  showComment: true,
+
+  // -------------------------------------------------------------------------
   // Events
 
   /**
