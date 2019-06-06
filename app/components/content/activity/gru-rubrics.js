@@ -31,8 +31,17 @@ export default Ember.Component.extend(ModalMixin, {
             rubrics,
             rubricsFor: rubricsFor,
             callback: {
-              success: function(/* rubricAssociated */) {
-                return true;
+              success: function(oaRubric) {
+                console.log('teacherRubrics.oaRubric', oaRubric); //eslint-disable-line
+                if (component.get('isTeacherRubrics')) {
+                  component.get('selectedRubric'),
+                  component
+                    .get('teacherRubrics')
+                    .set('title', oaRubric.SourceRubric.title);
+                  component
+                    .get('teacherRubrics')
+                    .set('id', oaRubric.NewRubricId);
+                }
               }
             }
           };

@@ -94,6 +94,7 @@ export default Ember.Component.extend({
   // Properties
   removeSubmission(tasksSubmission) {
     const component = this;
+    tasksSubmission.set('oaTaskId', component.get('oaTaskId'));
     //ToDo: Validate
     return component
       .get('activityService')

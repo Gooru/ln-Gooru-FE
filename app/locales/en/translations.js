@@ -2601,7 +2601,7 @@ export default Object.assign(quizzesTranslations, {
   'common.subtask.oa.position_paper': 'Position Paper',
   'common.subtask.oa.lab_report': 'Lab Report',
   'common.subtask.oa.explanation_argument': 'Explanation Argument',
-  'common.subtask.oa.debate': 'debate',
+  'common.subtask.oa.debate': 'Debate',
   project: 'Project',
   'oa.project.poster': 'Poster',
   'oa.project.presentation': 'Presentation',
