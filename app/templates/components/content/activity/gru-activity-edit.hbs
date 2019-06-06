@@ -6,13 +6,19 @@
       </div>
     {{/link-to}}
   {{/if}}
-  <h1> Edit Activity</h1>
+  {{#if tempCollection.id }}
+    <h1> Edit Activity</h1>
+  {{else }}
+    <h1> Add Activity</h1>
+  {{/if}}
   {{partial 'content/partials/collections-header-actions'}}
   <nav>
     {{#gru-scroll to="#information" class="selected" offset='article > header'}}{{t "common.information"}}{{/gru-scroll}}
-    {{#gru-scroll to="#reference" offset='article > header'}}Reference{{/gru-scroll}}
-    {{#gru-scroll to="#task" offset='article > header'}}Task{{/gru-scroll}}
-    {{#gru-scroll to="#rubrics" offset='article > header'}}Rubric{{/gru-scroll}}
+    {{#if tempCollection.id}}
+      {{#gru-scroll to="#reference" offset='article > header'}}References{{/gru-scroll}}
+      {{#gru-scroll to="#task" offset='article > header'}}Task{{/gru-scroll}}
+      {{#gru-scroll to="#rubrics" offset='article > header'}}Rubric{{/gru-scroll}}
+    {{/if}}
   </nav>
 </header>
 <section id="information">
@@ -139,21 +145,23 @@
     </div>
   </div>
 </section>
-<section id="reference">
-  <div class="header">
-    <h2>References</h2>
-  </div>
-  {{content.activity.gru-references activityModel=activityCollection model=tempCollection references=activityCollection.references updateContent=(action 'updateContent') updateParent=(action 'modelSourceFromChildChanges') }}
-</section>
-<section id="task">
-  <div class="header">
-    <h2>Task</h2>
-  </div>
-  {{content.activity.gru-tasks activityModel=activityCollection tasks=tempCollection.tasks updateParent=(action 'modelSourceFromChildChanges')}}
-</section>
-<section id="rubrics">
-  <div class="header">
-    <h2>Rubric</h2>
-  </div>
-  {{content.activity.gru-rubrics tempModel=tempCollection}}
-</section>
+{{#if tempCollection.id}}
+  <section id="reference">
+    <div class="header">
+      <h2>References</h2>
+    </div>
+    {{content.activity.gru-references activityModel=activityCollection model=tempCollection references=activityCollection.references updateContent=(action 'updateContent') updateParent=(action 'modelSourceFromChildChanges') }}
+  </section>
+  <section id="task">
+    <div class="header">
+      <h2>Task</h2>
+    </div>
+    {{content.activity.gru-tasks activityModel=activityCollection tasks=tempCollection.tasks updateParent=(action 'modelSourceFromChildChanges')}}
+  </section>
+  <section id="rubrics">
+    <div class="header">
+      <h2>Rubric</h2>
+    </div>
+    {{content.activity.gru-rubrics tempModel=tempCollection}}
+  </section>
+{{/if}}

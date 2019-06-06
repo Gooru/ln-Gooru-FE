@@ -104,9 +104,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       activityCollection = model.activity;
       controller.set('tempCollection', model.activity.copy());
     }
-
     if (!model.course && this.modelFor('content.courses.edit')) {
-      model.course = this.modelFor('content.courses.edit');
+      model.course =
+        this.modelFor('content.courses.edit') &&
+        this.modelFor('content.courses.edit').course;
     }
     controller.set('activityCollection', activityCollection);
     controller.set('course', model.course);
