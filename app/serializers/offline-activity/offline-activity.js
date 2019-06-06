@@ -219,7 +219,8 @@ export default Ember.Object.extend({
           metadata['21_century_skills'] &&
           metadata['21_century_skills'].length > 0
             ? metadata['21_century_skills']
-            : []
+            : [],
+        durationHours: activityData.duration_hours || 0
       }
     );
     return normalizedActivity;
@@ -407,13 +408,21 @@ export default Ember.Object.extend({
    * @return {Object}
    */
   normalizeGradeSubmission(payload) {
+    const serializer = this;
+    const cdnUrls = serializer.get('session.cdnUrls');
+    const contentCDN = serializer.get('session.cdnUrls.content');
+    let submissionLocation = payload.submissionInfo;
+    if (payload.submissionType === 'uploaded') {
+      submissionLocation =
+        contentCDN + cleanFilename(submissionLocation, cdnUrls);
+    }
     let submissionTypeData = OA_TASK_SUBMISSION_TYPES.findBy(
       'value',
       payload.submissionSubtype
     );
     let submissionIcon = submissionTypeData ? submissionTypeData.icon : null;
     return Ember.Object.create({
-      submissionInfo: payload.submissionInfo,
+      submissionInfo: submissionLocation,
       submissionSubtype: payload.submissionSubtype,
       submissionType: payload.submissionType,
       submittedOn: payload.submittedOn,

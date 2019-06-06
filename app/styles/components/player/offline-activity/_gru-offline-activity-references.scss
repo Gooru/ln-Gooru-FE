@@ -31,6 +31,13 @@
 
     .reference-container {
       padding-left: 30px;
+      .reference-link {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: left;
+        align-items: center;
+        column-gap: 5px;
+      }
     }
   }
 }

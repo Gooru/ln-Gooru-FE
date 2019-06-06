@@ -97,7 +97,7 @@
           {{/each}}
         </div>
         {{#unless isReadOnly}}
-          <div class="save-task-submission {{if isSubmittingTask 'saving'}}" {{action "onSaveTask"}}>
+          <div class="save-task-submission {{unless isEnableTaskSubmission 'disable-event'}} {{if isSubmittingTask 'saving'}}" {{action "onSaveTask"}}>
             {{#if isSubmittingTask}}
               Saving<span class="spinner">{{three-bounce-spinner}}</span>
             {{else}}

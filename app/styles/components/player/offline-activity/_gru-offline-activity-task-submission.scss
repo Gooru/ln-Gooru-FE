@@ -92,16 +92,17 @@
               min-width: 70%;
 
               &::placeholder {
-                font-size: 14px;
+                font-size: 12px;
                 color: #3e5e67;
+                opacity: 0.7;
               }
 
               &:focus {
                 outline: none;
                 border: none;
 
-                ::placeholder {
-                  display: none;
+                &::placeholder {
+                  color: transparent;
                 }
               }
             }
