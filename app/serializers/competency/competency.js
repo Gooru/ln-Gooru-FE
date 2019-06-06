@@ -272,5 +272,29 @@ export default Ember.Object.extend(ConfigurationMixin, {
       });
     }
     return resultSet;
+  },
+
+  /**
+   * @function normalizeStudentCompetencySummary
+   * Method to normalize student competency summary data
+   */
+  normalizeStudentCompetencySummary(response) {
+    let studentCompetencySummary = null;
+    if (response && response.competencyStats) {
+      response = response.competencyStats;
+      studentCompetencySummary = Ember.Object.create({
+        completedCompetencies: response.completedCompetencies,
+        grade: response.grade,
+        gradeId: response.grade,
+        inprogressCompetencies: response.inprogressCompetencies,
+        percentCompletion: response.percentCompletion,
+        percentScore: response.percentScore,
+        totalCompetencies: response.totalCompetencies,
+        notstartedCompetencies:
+          response.totalCompetencies -
+          (response.completedCompetencies + response.inprogressCompetencies)
+      });
+    }
+    return studentCompetencySummary;
   }
 });

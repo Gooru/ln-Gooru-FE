@@ -1,4 +1,12 @@
 .student-class-milestone-course-map {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 15px;
+  position: relative;
+
+  &.student-competency-summary {
+    grid-template-columns: 1fr 80px;
+  }
   .milestone-course-map-container {
     width: 100%;
 
@@ -783,5 +791,16 @@
         }
       }
     }
+  }
+
+  .competency-summary-graph {
+    justify-self: right;
+  }
+
+  .loading-spinner {
+    position: absolute;
+    position: absolute;
+    top: 30px;
+    left: calc((100% - 100px) / 2);
   }
 }

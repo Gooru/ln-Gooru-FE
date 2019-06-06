@@ -280,5 +280,30 @@ export default Ember.Service.extend({
           }
         );
     });
+  },
+
+  /**
+   * @function fetchStudentCompetencySummary
+   * Method to fetch student destination based competency summary
+   */
+  fetchStudentCompetencySummary(requestBody) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('competencyAdapter')
+        .fetchStudentCompetencySummary(requestBody)
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('competencySerializer')
+                .normalizeStudentCompetencySummary(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });

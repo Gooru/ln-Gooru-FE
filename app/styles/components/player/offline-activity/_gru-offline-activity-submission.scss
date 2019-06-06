@@ -1,6 +1,5 @@
 .offline-activity-player.gru-offline-activity-submission {
   padding: 30px;
-  background-color: #e3e5ea;
   .offline-activity-submission-container {
     .offline-activity-info-container {
       background-color: $white;
@@ -11,9 +10,9 @@
         display: grid;
         grid-template-columns: 30px 1fr;
         .icon-container {
-          width: 30px;
-          height: 30px;
-          background-size: 30px 30px;
+          width: 20px;
+          height: 20px;
+          background-size: 20px;
           background-image: url("./gooru/images/offline.svg");
           display: block;
         }
@@ -58,5 +57,9 @@
         }
       }
     }
+  }
+
+  @media screen and (max-width: $screen-sm) {
+    padding: 8px;
   }
 }

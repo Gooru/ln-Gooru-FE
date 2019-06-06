@@ -340,5 +340,12 @@
   {{activity.offline.grading-report
     showPullUp=showOAGrade
     context=itemToGradeContextData
+    itemsToGrade=itemsToGrade
+  }}
+{{/if}}
+{{#if isShowOfflineActivityPreview}}
+  {{reports.pull-up.oa-preview
+    showPullUp=isShowOfflineActivityPreview
+    oaId=previewContent.id
   }}
 {{/if}}

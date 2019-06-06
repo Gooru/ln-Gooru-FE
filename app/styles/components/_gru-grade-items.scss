@@ -15,26 +15,26 @@
       border-bottom: 1px solid #d7d7d7;
 
       .icon {
-        padding: 12px;
-
         i {
           &.assessment-icon,
           &.collection-icon {
             background-image: url("gooru/images/add_rubric.svg");
-            width: 20px;
-            height: 20px;
-            background-size: 20px;
+            width: 36px;
+            height: 36px;
+            background-size: 26px;
             display: block;
             background-repeat: no-repeat;
+            background-position: center;
           }
 
           &.offline-activity-icon {
             background-image: url("gooru/images/offline.svg");
-            width: 20px;
-            height: 20px;
-            background-size: 20px;
+            width: 36px;
+            height: 36px;
+            background-size: 26px;
             display: block;
             background-repeat: no-repeat;
+            background-position: center;
           }
         }
       }

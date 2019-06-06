@@ -1,15 +1,13 @@
 <div class="offline-activity-player-container">
   <div class="header-container">
-    <div class="action pull-left" {{action 'onClosePlayer'}} data-toggle="tooltip" data-placement="bottom" title="{{t 'common.close'}}">
+    <div class="action" {{action 'onClosePlayer'}} data-toggle="tooltip" data-placement="bottom" title="{{t 'common.close'}}">
       <div class="close-icon">
         {{gru-icon name='close'}}
       </div>
     </div>
-    <div class="pull-left content-title">
-      <div class="title-info">
-        <i class="icon pull-left"></i>
-        <p class="title pull-left">{{offlineActivity.title}}</p>
-      </div>
+    <div class="content-title">
+      <i class="icon"></i>
+      <span class="title ellipsis">{{offlineActivity.title}}</span>
     </div>
   </div>
   <div class="body-container">
