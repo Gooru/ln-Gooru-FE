@@ -33,7 +33,7 @@
     {{/if}}
   </div>
   {{#if (not classActivity.isCompleted)}}
-    <div class="ca-play-container" {{action 'onPlayContent' classActivity}}>
+    <div class="ca-play-container {{if isActivityFuture 'future-activity'}}" {{action 'onPlayContent' classActivity}}>
       <div class="ca-play-btn">
         {{gru-icon name='play_arrow'}}
       </div>

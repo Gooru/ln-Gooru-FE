@@ -486,7 +486,8 @@
                 font-size: 16px;
                 padding: 10px;
                 text-align: justify;
-                height: 100%;
+                line-height: 1.5;
+                height: auto;
                 background-color: #d8d8d8;
               }
             }
@@ -698,7 +699,7 @@
                   font-size: 16px;
                   padding: 10px;
                   text-align: justify;
-                  height: 80px;
+                  min-height: 80px;
                   background-color: #d8d8d8;
                 }
               }

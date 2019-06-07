@@ -16,6 +16,17 @@
       .dca-content-counts {
         display: none;
       }
+
+      .ca-play-container {
+        pointer-events: all;
+        cursor: pointer;
+
+        .ca-play-btn {
+          i {
+            color: #4b9741;
+          }
+        }
+      }
     }
 
     &.completed {
@@ -161,6 +172,16 @@
       justify-content: center;
       cursor: pointer;
       pointer-events: none;
+
+      &.future-activity {
+        pointer-events: none;
+
+        .ca-play-btn {
+          i {
+            color: #535e67;
+          }
+        }
+      }
 
       .ca-play-btn {
         height: 30px;
