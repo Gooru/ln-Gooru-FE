@@ -4,128 +4,87 @@ export default Ember.Component.extend({
   classNames: ['gru-references'],
 
   /**
+   * @property {Service} I18N service
+   */
+  i18n: Ember.inject.service(),
+
+  /**
+   * @type {SessionService} Service to retrieve session information
+   */
+  session: Ember.inject.service('session'),
+
+  /**
    * @requires service:api-sdk/offline-activity/offline-activity
    */
   activityService: Ember.inject.service(
     'api-sdk/offline-activity/offline-activity'
   ),
 
+  /**
+   * Collection model as instantiated by the route. This is the clean model used when not editing
+   * or after any collection changes have been saved.
+   * @property {Collection}
+   */
+  activityModel: null,
+
+  /**
+   * Activity model dirty copy passed by caller, for saving exemplar and reference
+   */
+  model: null,
+  /**
+   * Collection model as passed by the route. The dirty model used for editing and saving changes to.
+   * This is sent to parent for syncing.holds list of references in the activity
+   * @property {references}
+   */
+  references: null,
+
   isEditing: true,
-
-  referenceSubType: Ember.A([
-    Ember.Object.create({
-      display_name: 'image',
-      code: '1',
-      mimeType: 'image/*'
-    }),
-    Ember.Object.create({
-      display_name: 'pdf',
-      code: '2',
-      mimeType: 'application/pdf'
-    }),
-    Ember.Object.create({
-      display_name: 'presentation',
-      mimeType:
-        'application/vnd.openxmlformats-officedocument.presentationml.presentation'
-    }),
-    Ember.Object.create({
-      display_name: 'document',
-      code: '4',
-      mimeType:
-        'application/vnd.openxmlformats-officedocument.presentationml.presentation'
-    }),
-    Ember.Object.create({
-      display_name: 'others',
-      code: '5',
-      mimeType: 'application/pdf,image/*'
-    })
-  ]),
-
-  referenceType: Ember.A([
-    { display_name: 'remote', code: '0' },
-    { display_name: 'uploaded', code: '1' }
-  ]),
 
   oaId: null,
 
-  model: null,
-
-  /**
-   * @property {references} holds list of references in the activity
-   */
-  references: Ember.A([]),
-
-  editingRefModel: Ember.computed('refModel', function() {
-    let tempEditRef = {};
-    Object.assign(tempEditRef, this.get('refModel'));
-    return Ember.Object.create(tempEditRef);
-  }),
-
-  //ToDo: Move this out to a file
-  referenceModel: Ember.Object.extend({
-    id: null,
-    oaId: null,
-    type: null,
-    subType: null,
-    location: null,
-    copy: function() {
-      var properties = [];
-      var enumerableKeys = Object.keys(this);
-
-      for (let i = 0; i < enumerableKeys.length; i++) {
-        let key = enumerableKeys[i];
-        let value = Ember.typeOf(this.get(key));
-        if (value === 'string' || value === 'number' || value === 'boolean') {
-          properties.push(key);
-        }
-      }
-    }
-  }),
+  // -------------------------------------------------------------------------
+  // Events
   init() {
     let component = this;
     component._super(...arguments);
-
-    let refModel = component.get('referenceModel').create({
-      id: null,
-      oaId: component.get('model.id'),
-      type: null,
-      subType: null,
-      location: null
-    });
-    component.set('refModel', refModel);
   },
+  // -------------------------------------------------------------------------
+  // Properties
 
   createNewReference: null,
 
   actions: {
-    createNewReference: function() {
-      this.set('createNewReference', true);
-    },
+    /**
+     * Action to save reference, and exemplar fields
+     */
     updateContent: function() {
       this.get('updateContent')(this.get('model'));
     },
+
     cancelEdit: function() {
       let srcModel = this.get('activityModel').copy();
       this.set('model', srcModel);
     },
-    updateReferenceCollection(reference) {
-      if (this.get('editingRefModel')) {
-        let editingModelRefs = this.get('model.references');
-        editingModelRefs.pushObject(reference);
-        Ember.set(this, 'references', editingModelRefs);
-        let editModel = this.get('model');
-        Ember.set(editModel, 'references', editingModelRefs);
 
-        this.get('updateParent')(editModel);
-      }
+    /**
+     * Action to save/ add reference
+     */
+
+    updateReferenceCollection(reference) {
+      const component = this;
+      let refsCol = component.get('references');
+      refsCol.pushObject(reference);
+      component.get('updateParent')();
     },
+
     deleteReference(refitem) {
       const component = this;
       component
         .get('activityService')
         .deleteReference(refitem)
-        .then(function() {
-          //dser
+        .then(refItem => {
+          component.get('references').removeObject(refItem);
+          component.get('updateParent')();
         });
     }
   }
