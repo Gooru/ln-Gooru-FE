@@ -49,23 +49,23 @@
                     <div class="border-bottom">
                         <h3>Uploaded Files</h3>
                     </div>
-                    {{#each-in model.references as | index refItem|}}
+                    {{#each references as | refItem|}}
                         {{#if (eq refItem.type 'uploaded')}}
                             <div> {{refItem.type}} <span class='separator'>|</span> {{refItem.subType}} <span class='separator'>|</span> <span class='ellipsis listItem'>{{refItem.location}}</span> <button class='button ' {{action 'deleteReference' refItem}}> Delete</button></div>
                         {{/if}}
-                    {{/each-in}}
+                    {{/each}}
                     {{content.activity.reference.gru-edit-reference editType='upload' oaId=activityModel.id  updateParent=(action 'updateReferenceCollection')    isEditing=isEditing}}
                 </section>
                 <section>
                     <div class="border-bottom">
                         <h3>Reference URLs</h3>
                     </div>
-                    {{#each-in model.references as | index refItem|}}
+                    {{#each references as | refItem|}}
                         {{#if (eq refItem.type 'remote')}}
                             <div> {{refItem.type}} <span class='separator'>|</span> {{refItem.subType}} <span class='separator'>|</span> <span class='ellipsis listItem'>{{refItem.location}}</span> <button class='button ' {{action 'deleteReference' refItem}}> Delete</button></div>
                         {{/if}}
-                    {{/each-in}}
-                    {{content.activity.reference.gru-edit-reference editType='url' oaId=activityModel.id  updateParent=(action 'updateReferenceCollection')   references=model.references isEditing=isEditing}}
+                    {{/each}}
+                    {{content.activity.reference.gru-edit-reference editType='url' oaId=activityModel.id  updateParent=(action 'updateReferenceCollection')  isEditing=isEditing}}
                 </section>
                 <div class='newReferenceArtifact collapse'>
                     {{!-- {{#if createNewReference}} --}}
