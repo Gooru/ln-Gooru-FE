@@ -121,9 +121,9 @@ export default Ember.Component.extend({
    * Returns promise
    */
   saveTaskSubmission() {
+    //ToDo: Validate
     const component = this;
     let model = component.get('model');
-    //ToDo: Validate
     model.set('oaTaskId', component.get('oaTaskId'));
     model.set('oaId', component.get('oaId'));
     model.set('taskSubmissionType', 'uploaded');

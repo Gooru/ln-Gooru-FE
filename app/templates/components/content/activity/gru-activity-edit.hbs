@@ -150,7 +150,10 @@
     <div class="header">
       <h2>References</h2>
     </div>
-    {{content.activity.gru-references activityModel=activityCollection model=tempCollection references=activityCollection.references updateContent=(action 'updateContent') updateParent=(action 'modelSourceFromChildChanges') }}
+    {{content.activity.gru-references activityModel=activityCollection references=tempCollection.references updateParent=(action 'modelSourceFromChildChanges')
+    model=tempCollection 
+     updateContent=(action 'updateContent') 
+     }}
   </section>
   <section id="task">
     <div class="header">
