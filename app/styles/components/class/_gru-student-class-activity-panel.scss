@@ -16,6 +16,17 @@
       .dca-content-counts {
         display: none;
       }
+
+      .ca-play-container {
+        pointer-events: all;
+        cursor: pointer;
+
+        .ca-play-btn {
+          i {
+            color: #4b9741;
+          }
+        }
+      }
     }
 
     &.completed {
