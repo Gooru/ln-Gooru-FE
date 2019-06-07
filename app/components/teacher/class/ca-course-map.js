@@ -152,7 +152,8 @@ export default Ember.Component.extend({
               if (
                 isExternalContent ||
                 collection.get('resourceCount') > 0 ||
-                collection.get('questionCount') > 0
+                collection.get('questionCount') > 0 ||
+                collection.get('isOfflineActivity')
               ) {
                 collections.pushObject(collection);
               }
