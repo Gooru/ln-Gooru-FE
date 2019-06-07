@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="ca-schedule-section">
-          <div class="dca-content-list-container {{if (eq today selectedDate) 'dca-content-list-container-today'}}">
+          <div class="dca-content-list-container {{if isToday 'dca-content-list-container-today'}}">
             {{#each scheduledClassActivities as |classActivity|}} {{#each classActivity.classActivities as |activity|}}
                 {{class.gru-class-activity-panel
                     classActivity=activity
