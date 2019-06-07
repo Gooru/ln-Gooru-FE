@@ -44,34 +44,34 @@
     </div>
     <div class="panel panel-body">
         <div class="panelBodyContainer">
-            <div class='referenceArtifacts'>
-                <section>
-                    <div class="border-bottom">
-                        <h3>Uploaded Files</h3>
-                    </div>
+            <section class="upload-section">
+                <div class='upload-list-container'>
+                    <span>Available Uploads</span>
                     {{#each references as | refItem|}}
                         {{#if (eq refItem.type 'uploaded')}}
-                            <div> {{refItem.type}} <span class='separator'>|</span> {{refItem.subType}} <span class='separator'>|</span> <span class='ellipsis listItem'>{{refItem.location}}</span> <button class='button ' {{action 'deleteReference' refItem}}> Delete</button></div>
+                            <span class="uploaded-item">
+                                <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteReference' refItem}}>{{gru-icon name="remove_circle"}}</button>
+                                <span class="image">
+                                    <i class="{{refItem.subType}}-icon"></i>
+                                </span>
+                            </span>
                         {{/if}}
                     {{/each}}
-                    {{content.activity.reference.gru-edit-reference editType='upload' oaId=activityModel.id  updateParent=(action 'updateReferenceCollection')    isEditing=isEditing}}
-                </section>
-                <section>
-                    <div class="border-bottom">
-                        <h3>Reference URLs</h3>
-                    </div>
-                    {{#each references as | refItem|}}
-                        {{#if (eq refItem.type 'remote')}}
-                            <div> {{refItem.type}} <span class='separator'>|</span> {{refItem.subType}} <span class='separator'>|</span> <span class='ellipsis listItem'>{{refItem.location}}</span> <button class='button ' {{action 'deleteReference' refItem}}> Delete</button></div>
-                        {{/if}}
-                    {{/each}}
-                    {{content.activity.reference.gru-edit-reference editType='url' oaId=activityModel.id  updateParent=(action 'updateReferenceCollection')  isEditing=isEditing}}
-                </section>
-                <div class='newReferenceArtifact collapse'>
-                    {{!-- {{#if createNewReference}} --}}
-                    {{!--  {{/if}} --}}
                 </div>
-            </div>
+                <button class="remove-uploaded btn no-bgd add-new-item" {{action 'deleteReference' refItem}}>{{gru-icon name="add_circle"}}</button>
+                {{content.activity.reference.gru-edit-reference editType='upload' oaId=activityModel.id  updateParent=(action 'updateReferenceCollection')    isEditing=isEditing}}
+            </section>
+            <section class='url-section'>
+                <div class="border-bottom">
+                    <h3>Reference URLs</h3>
+                </div>
+                {{#each references as | refItem|}}
+                    {{#if (eq refItem.type 'remote')}}
+                        <div> {{refItem.type}} <span class='separator'>|</span> {{refItem.subType}} <span class='separator'>|</span> <span class='ellipsis listItem'>{{refItem.location}}</span> <button class='button ' {{action 'deleteReference' refItem}}> Delete</button></div>
+                    {{/if}}
+                {{/each}}
+                {{content.activity.reference.gru-edit-reference editType='url' oaId=activityModel.id  updateParent=(action 'updateReferenceCollection')  isEditing=isEditing}}
+            </section>
         </div>
     </div>
 </div>

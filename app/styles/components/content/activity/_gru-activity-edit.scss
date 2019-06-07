@@ -5,9 +5,7 @@
     height: 24px;
     background-repeat: no-repeat;
   }
-  #reference {
-    padding-top: 5vh;
-  }
+
   .gru-references {
     .detail {
       float: right;
@@ -27,8 +25,56 @@
       margin-top: 15px;
     }
     .panelBodyContainer {
-      display: flex;
-      flex-direction: column;
+      .upload-section {
+        padding: 20px 0;
+
+        .upload-list-container {
+          display: inline-flex;
+          .uploaded-item {
+            border: 2px dotted #ccc;
+            border-style: dashed;
+            padding: 0 10px;
+            margin: 0 7px;
+            position: relative;
+
+            .remove-uploaded {
+              position: absolute;
+              top: -30px;
+              left: 32px;
+              width: 0px;
+              height: 27px;
+              z-index: 8;
+            }
+          }
+
+          .uploaded-item-big {
+            border: 2px blue;
+            border-style: solid;
+            padding: 35px;
+            margin: 0 7px;
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 6px;
+            .remove-uploaded {
+              position: absolute;
+              top: -30px;
+              left: 32px;
+              width: 0px;
+              height: 27px;
+              z-index: 8;
+            }
+          }
+
+          .add-new-item {
+            font-size: 31px;
+            padding: 0 20px;
+            color: #4b9741;
+          }
+        }
+      }
+      .url-section {
+      }
       .textContainer {
         display: flex;
         flex-direction: column;
