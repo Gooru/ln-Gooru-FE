@@ -457,9 +457,13 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     if (categories) {
       maxScore = 0;
       categories.filterBy('allowsScoring', true).map(category => {
+        let categoryLevelScore = [];
         category.get('levels').map(level => {
-          maxScore += Number(level.get('score'));
+          categoryLevelScore.push(Number(level.get('score')));
         });
+        if (categoryLevelScore.length > 0) {
+          maxScore += Math.max(...categoryLevelScore);
+        }
       });
     }
     return maxScore;
