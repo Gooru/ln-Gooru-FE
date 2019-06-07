@@ -173,6 +173,16 @@
       cursor: pointer;
       pointer-events: none;
 
+      &.future-activity {
+        pointer-events: none;
+
+        .ca-play-btn {
+          i {
+            color: #535e67;
+          }
+        }
+      }
+
       .ca-play-btn {
         height: 30px;
         border-radius: 50%;

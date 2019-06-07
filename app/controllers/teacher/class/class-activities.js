@@ -123,7 +123,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     onCompleteActivity(activity) {
       let controller = this;
       controller.markActivityAsComplete(activity);
-      controller.loadItemsToGrade();
     },
 
     toggleDatePicker() {
@@ -1336,6 +1335,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         activity.set('isCompleted', true);
         activeOfflineActivities.removeObject(activity);
         completedOfflineActivities.pushObject(activity);
+        controller.loadItemsToGrade();
       });
   },
 
