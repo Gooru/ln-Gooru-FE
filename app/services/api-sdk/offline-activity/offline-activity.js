@@ -276,7 +276,7 @@ export default Ember.Service.extend({
         .get('offlineActivityAdapter')
         .deleteReference(reference.oaId, reference.id)
         .then(function() {
-          resolve();
+          resolve(reference);
         }, reject);
     });
   },

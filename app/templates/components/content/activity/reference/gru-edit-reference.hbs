@@ -1,22 +1,38 @@
+{{!-- {{#each referenceSubType as |rst|}}
+    {{#file-picker
+  accept=validMimeType
+  preview=false
+  dropzone=false
+  fileLoaded=(action 'selectFile')
+  readAs="readAsFile"
+  errors=filePickerErrors
+  onRemoveFile=(action 'resetFileSelection') 
+}}
+        <span class="image">
+            <i class="{{rst.display_name}}-icon"></i>
+        </span>
+    {{/file-picker}}
+{{/each}} --}}
 {{#if (eq editType 'upload')}}
-    <div class='subtypeoptions'>
+    <div class='subtypeoptions hidden'>
         {{gru-dropdown
-                  selectedItem=model.subTypeSel
-                  placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
-                  items=referenceSubType
-                  displayLabelFieldKey="display_name"
-                  itemKey='code'
-                  onChangeAction="onSubTypeChange"
-                  btn-group-size=btn-group-size
-        }}
+                selectedItem=model.subTypeSel
+                placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
+                items=referenceSubType
+                displayLabelFieldKey="display_name"
+                itemKey='code'
+                onChangeAction="onSubTypeChange"
+                btn-group-size=btn-group-size
+    }}
     </div>
     <div class='uploadContainer'>
-        {{content.gru-file-picker validMimeType=subTypeMimeType onSelectFile=(action 'selectFile')}}
+        {{!-- {{content.gru-file-picker validMimeType=subTypeMimeType onSelectFile=(action 'selectFile')}} 
         {{#if emptyFileError}}
             <div class="validation">
                 <span class="error">{{emptyFileError}}</span>
             </div>
         {{/if}}
+        --}}
         {{!-- <button style='float:right' data-target='.newReferenceArtifact' class="btn btn-success save-item " title="{{t 'common.create'}}" type="button" data-toggle="collapse" {{action 'updateContent'}}>{{t "common.save"}}</button>--}}
     </div>
 {{else}}

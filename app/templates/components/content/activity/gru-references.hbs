@@ -46,8 +46,18 @@
         <div class="panelBodyContainer">
             <section class="upload-section">
                 <div class='upload-list-container'>
-                    <span>Available Uploads</span>
-                    {{#each references as | refItem|}}
+                    <span>Uploads</span>
+                    {{log 'parsedReference' parsedReference}}
+                    {{#each parsedReference as | refItem|}}
+                        <span class="uploaded-item">
+                            <button class="btn no-bgd add-item" {{action 'deleteReference1' refItem.refData }}>{{gru-icon name="add_circle"}}</button>
+                            <span class="image">
+                                <i class="{{refItem.subType}}-icon"></i>
+                            </span>
+                            <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteReference' refItem.refData }}>{{gru-icon name="remove_circle"}}</button>
+                        </span>
+                    {{/each}}
+                    {{!-- {{#each references as | refItem|}}
                         {{#if (eq refItem.type 'uploaded')}}
                             <span class="uploaded-item">
                                 <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteReference' refItem}}>{{gru-icon name="remove_circle"}}</button>
@@ -56,10 +66,9 @@
                                 </span>
                             </span>
                         {{/if}}
-                    {{/each}}
+                    {{/each}} --}}
                 </div>
-                <button class="remove-uploaded btn no-bgd add-new-item" {{action 'deleteReference' refItem}}>{{gru-icon name="add_circle"}}</button>
-                {{content.activity.reference.gru-edit-reference editType='upload' oaId=activityModel.id  updateParent=(action 'updateReferenceCollection')    isEditing=isEditing}}
+                {{content.activity.reference.gru-edit-reference editType='upload' oaId=activityModel.id  updateParent=(action 'updateReferenceCollection')  isEditing=isEditing}}
             </section>
             <section class='url-section'>
                 <div class="border-bottom">

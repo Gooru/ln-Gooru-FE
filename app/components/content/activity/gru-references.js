@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { getOASubType } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   classNames: ['gru-references'],
@@ -79,13 +80,50 @@ export default Ember.Component.extend({
 
     deleteReference(refitem) {
       const component = this;
+      if (refitem && refitem.length > 0) {
+        refitem = refitem[0];
+      } else {
+        return;
+      }
       component
         .get('activityService')
         .deleteReference(refitem)
         .then(refItem => {
-          component.get('references').removeObject(refItem);
+          console.log('removeObject', refItem); //eslint-disable-line
+          let refsCol = component.get('references');
+          refsCol.removeObject(refItem);
+          let newSource = refsCol.slice(0);
+          Ember.set(this, 'references', newSource);
+          component.set('references', refsCol);
           component.get('updateParent')();
         });
     }
-  }
+  },
+
+  parsedReference: Ember.computed('references', function() {
+    try {
+      const component = this;
+      let uploadedCol = component
+        .get('references')
+        .filter(f => f.type === 'uploaded');
+      console.log('uploadedCol', uploadedCol); //eslint-disable-line
+      let displayData = Ember.A([]);
+      let allTypes = getOASubType();
+
+      allTypes.forEach(ref => {
+        let filterCol = uploadedCol.filter(f => f.subType === ref.display_name);
+        console.log('filterCol', filterCol); //eslint-disable-line
+        let displayItem = {
+          subType: ref.display_name,
+          refData: filterCol,
+          count: filterCol.length
+        };
+        displayData.pushObject(displayItem);
+      });
+      console.log('displayData', displayData); //eslint-disable-line
+      return displayData;
+    } catch (e) {
+      console.log('e', e); //eslint-disable-line
+    }
+  })
 });
