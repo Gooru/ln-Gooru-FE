@@ -338,7 +338,7 @@ export default Ember.Service.extend({
         .serializeCreateTask(taskPayLoad);
       service
         .get('offlineActivityAdapter')
-        .updateActivity(oaId, taskId, serializedTaskPayLoad)
+        .updateTask(oaId, taskId, serializedTaskPayLoad)
         .then(
           function() {
             resolve(taskPayLoad);

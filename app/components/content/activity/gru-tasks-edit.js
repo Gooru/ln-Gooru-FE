@@ -79,9 +79,21 @@ export default Ember.Component.extend({
   // Events
   init() {
     this._super(...arguments);
-    let taskInstance = TaskModel.create({ oaId: this.get('oaId') });
-    this.set('model', taskInstance);
+    // let taskInstance = TaskModel.create({ oaId: this.get('oaId') });
+    // this.set('model', taskInstance);
   },
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+    console.log('didReceiveAttrs', 'didReceiveAttrs'); //eslint-disable-line
+    if (this.get('model') && this.get('model').id) {
+      console.log('Edit mode', 'Enter'); //eslint-disable-line
+    } else {
+      let taskInstance = TaskModel.create({ oaId: this.get('oaId') });
+      this.set('model', taskInstance);
+    }
+  },
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -92,7 +104,14 @@ export default Ember.Component.extend({
   saveTask() {
     const component = this;
     let model = component.get('model');
+    if (model && model.id) {
+      return component
+        .get('activityService')
+        .updateTask(model.oaId, model.id, model);
+    } else {
+      return component.get('activityService').createTask(model);
+    }
+
     //ToDo: Validate
-    return component.get('activityService').createTask(model);
   }
 });
