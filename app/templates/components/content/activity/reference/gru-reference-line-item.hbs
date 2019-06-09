@@ -1,6 +1,8 @@
 {{#if (eq editType 'upload')}}
+    <div class="border-bottom">
+        <h3>Uploads</h3>
+    </div>
     <div class='upload-list-container'>
-        <span>Uploads</span>
         {{#each parsedReference as | refItem|}}
             <span class="uploaded-item">
                 {{#file-picker
@@ -21,11 +23,13 @@
                 <span class="countItem">
                     {{refItem.count}}
                 </span>
-                <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteReference' refItem.refData }}>{{gru-icon name="remove_circle"}}</button>
+                {{#if (gt refItem.count 0)}}
+                    <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteReference' refItem.refData }}>{{gru-icon name="remove_circle"}}</button>
+                {{/if}}
             </span>
         {{/each}}
     </div>
 {{else}}
-    {{validation.gru-input model=model valuePath='location' class='addUrl' maxLength=50 didValidate=true}}
+    {{validation.gru-input model=model valuePath='location' class='addUrl' maxLength=1000 didValidate=true}}
     <div class="btn no-bgd add-item" {{action 'updateURLRef'}}>{{gru-icon name="add_circle"}}</div>
 {{/if}}

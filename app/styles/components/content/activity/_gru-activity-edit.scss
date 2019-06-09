@@ -25,9 +25,8 @@
       margin-top: 15px;
     }
     .panelBodyContainer {
+      margin-top: -10px;
       .upload-section {
-        padding: 20px 0;
-
         .upload-list-container {
           display: inline-flex;
           justify-content: space-between;
@@ -91,9 +90,23 @@
         }
       }
       .url-section {
+        .add-url-line {
+          display: flex;
+        }
+
+        .listItem {
+          width: 520px;
+          font-size: 14px;
+        }
         .addUrl {
-          width: 200px;
+          width: 520px;
           display: inline-block;
+        }
+        .add-item {
+          font-size: 22px;
+        }
+        .remove-item {
+          font-size: 22px;
         }
       }
       .textContainer {

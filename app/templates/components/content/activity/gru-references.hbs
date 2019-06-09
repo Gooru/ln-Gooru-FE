@@ -53,9 +53,10 @@
                 </div>
                 {{#each references as | refItem|}}
                     {{#if (eq refItem.type 'remote')}}
-                        <div>
-                            <span class='ellipsis listItem'>{{refItem.location}}</span>
-                            <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteUrlReference' refItem}}>{{gru-icon name="remove_circle"}}</button>
+                        <div class='add-url-line'>
+                            {{input type=input value=refItem.location disabled=true class=" listItem form-control" name='location' maxlength=500 }}
+                            <span class='ellipsis listItem hidden'>{{refItem.location}}</span>
+                            <button placeholder='https://gooru.org' class="remove-uploaded btn no-bgd remove-item" {{action 'deleteUrlReference' refItem}}>{{gru-icon name="remove_circle"}}</button>
                         </div>
                     {{/if}}
                 {{/each}}
