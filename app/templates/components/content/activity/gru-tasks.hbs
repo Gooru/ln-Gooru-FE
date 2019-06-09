@@ -1,5 +1,10 @@
 <div class="panel-default">
     <div class="panel-heading">
+        <div class="actions">
+            <button class="btn no-bgd add-item" {{action 'addNewTask'}}>
+                {{gru-icon name="add_circle"}}
+            </button>
+        </div>
     </div>
     <div class="panel panel-body">
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -7,7 +12,9 @@
             {{#each tasks as |task|}}
                 {{content.activity.gru-tasks-edit oaId=activityModel.id updateParent=(action 'updateTaskCollection') model=task removeLineItem=(action 'removeLineItem')}}
             {{/each}}
-            {{!-- {{content.activity.task.gru-task-line-item task=task  removeLineItem=(action 'removeLineItem')}} --}}
+            {{#if task }}
+                {{content.activity.gru-tasks-edit oaId=activityModel.id updateParent=(action 'updateTaskCollection') model=task removeLineItem=(action 'removeLineItem')}}
+            {{/if}}
         </div>
     </div>
 </div>

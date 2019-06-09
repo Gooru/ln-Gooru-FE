@@ -66,6 +66,10 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
+    addNewTask() {
+      const component = this;
+      component.set('task', 'dummy');
+    },
     updateTaskCollection(task) {
       const component = this;
       let tasksCol = component.get('tasks');
