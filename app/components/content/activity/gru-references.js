@@ -75,6 +75,7 @@ export default Ember.Component.extend({
       const component = this;
       let refsCol = component.get('references');
       refsCol.pushObject(reference);
+      component.refreshReference();
       component.get('updateParent')();
     },
 
@@ -98,6 +99,14 @@ export default Ember.Component.extend({
           component.get('updateParent')();
         });
     }
+  },
+
+  refreshReference() {
+    const component = this;
+    let refsCol = component.get('references');
+    let newSource = refsCol.slice(0);
+    Ember.set(this, 'references', newSource);
+    component.set('references', refsCol);
   },
 
   parsedReference: Ember.computed('references', function() {

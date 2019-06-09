@@ -40,6 +40,9 @@
                 <span class="image">
                     <i class="{{refItem.subType}}-icon"></i>
                 </span>
+                <span class="image">
+                    {{refItem.count}}
+                </span>
                 <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteReference' refItem.refData }}>{{gru-icon name="remove_circle"}}</button>
             </span>
         {{/each}}

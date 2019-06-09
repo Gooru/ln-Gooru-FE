@@ -93,6 +93,9 @@ export default Ember.Component.extend({
   // Actions
 
   actions: {
+    deleteReference(refItem) {
+      this.deleteReference(refItem);
+    },
     prepareForSubmission(file) {
       console.log('prepareForSubmission', 'prepareForSubmission'); //eslint-disable-line
       this.set('selectedFile', file);
