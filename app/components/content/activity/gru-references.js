@@ -116,6 +116,7 @@ export default Ember.Component.extend({
         let displayItem = {
           subType: ref.display_name,
           refData: filterCol,
+          mimeType: ref.mimeType,
           count: filterCol.length
         };
         displayData.pushObject(displayItem);

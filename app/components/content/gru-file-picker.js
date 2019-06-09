@@ -27,8 +27,9 @@ export default Ember.Component.extend({
      * @function actions:enableButtons
      */
     prepareForSubmission(file) {
+      console.log('subType', this.get('subType')); //eslint-disable-line
       this.set('selectedFile', file);
-      this.get('onSelectFile')(file);
+      this.get('onSelectFile')(file, this);
     },
 
     /**
@@ -38,7 +39,11 @@ export default Ember.Component.extend({
       // Reset the input element in the file picker
       // http://stackoverflow.com/questions/1043957/clearing-input-type-file-using-jquery/13351234#13351234
       var $fileInput = this.$('input[type="file"]');
-      $fileInput.wrap('<form>').closest('form').get(0).reset();
+      $fileInput
+        .wrap('<form>')
+        .closest('form')
+        .get(0)
+        .reset();
       $fileInput.unwrap();
 
       this.set('selectedFile', null);

@@ -14,6 +14,36 @@
     {{/file-picker}}
 {{/each}} --}}
 {{#if (eq editType 'upload')}}
+    <div class='upload-list-container'>
+        <span>Uploads</span>
+        {{log 'parsedReference' parsedReference}}
+        {{#each parsedReference as | refItem|}}
+            <span class="uploaded-item">
+                <span class="selected-item-label">{{get-value
+      source=referenceSubType
+      searchProp='display_name'
+      searchVal=refItem.subType
+      destProp='mimeType'
+    }}</span>
+                {{#file-picker
+                    accept=refItem.mimeType
+                    preview=false
+                    dropzone=false
+                    fileLoaded=(action 'selectFile')
+                    readAs="readAsFile"
+                    errors=filePickerErrors
+                    onRemoveFile=(action 'resetFileSelection')
+                    extraParams=refItem.subType
+                    }}
+                    <div class="btn no-bgd add-item">{{gru-icon name="add_circle"}}</div>
+                {{/file-picker}}
+                <span class="image">
+                    <i class="{{refItem.subType}}-icon"></i>
+                </span>
+                <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteReference' refItem.refData }}>{{gru-icon name="remove_circle"}}</button>
+            </span>
+        {{/each}}
+    </div>
     <div class='subtypeoptions hidden'>
         {{gru-dropdown
                 selectedItem=model.subTypeSel
