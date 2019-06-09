@@ -19,12 +19,6 @@
         {{log 'parsedReference' parsedReference}}
         {{#each parsedReference as | refItem|}}
             <span class="uploaded-item">
-                <span class="selected-item-label">{{get-value
-      source=referenceSubType
-      searchProp='display_name'
-      searchVal=refItem.subType
-      destProp='mimeType'
-    }}</span>
                 {{#file-picker
                     accept=refItem.mimeType
                     preview=false
@@ -40,7 +34,7 @@
                 <span class="image">
                     <i class="{{refItem.subType}}-icon"></i>
                 </span>
-                <span class="image">
+                <span class="countItem">
                     {{refItem.count}}
                 </span>
                 <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteReference' refItem.refData }}>{{gru-icon name="remove_circle"}}</button>
