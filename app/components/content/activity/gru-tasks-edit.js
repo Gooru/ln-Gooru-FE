@@ -63,7 +63,10 @@ export default Ember.Component.extend({
         component.set('model', task.copy()); // needed to break the ref
       });
     },
-
+    removeLineItem() {
+      const component = this;
+      component.get('removeLineItem')(component.get('model'));
+    },
     /**
      * Reset dirty model with clean model
      */
