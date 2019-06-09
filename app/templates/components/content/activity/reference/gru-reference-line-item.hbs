@@ -1,22 +1,6 @@
-{{!-- {{#each referenceSubType as |rst|}}
-    {{#file-picker
-  accept=validMimeType
-  preview=false
-  dropzone=false
-  fileLoaded=(action 'selectFile')
-  readAs="readAsFile"
-  errors=filePickerErrors
-  onRemoveFile=(action 'resetFileSelection') 
-}}
-        <span class="image">
-            <i class="{{rst.display_name}}-icon"></i>
-        </span>
-    {{/file-picker}}
-{{/each}} --}}
 {{#if (eq editType 'upload')}}
     <div class='upload-list-container'>
         <span>Uploads</span>
-        {{log 'parsedReference' parsedReference}}
         {{#each parsedReference as | refItem|}}
             <span class="uploaded-item">
                 {{#file-picker
@@ -41,28 +25,7 @@
             </span>
         {{/each}}
     </div>
-    <div class='subtypeoptions hidden'>
-        {{gru-dropdown
-                selectedItem=model.subTypeSel
-                placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
-                items=referenceSubType
-                displayLabelFieldKey="display_name"
-                itemKey='code'
-                onChangeAction="onSubTypeChange"
-                btn-group-size=btn-group-size
-    }}
-    </div>
-    <div class='uploadContainer'>
-        {{!-- {{content.gru-file-picker validMimeType=subTypeMimeType onSelectFile=(action 'selectFile')}} 
-        {{#if emptyFileError}}
-            <div class="validation">
-                <span class="error">{{emptyFileError}}</span>
-            </div>
-        {{/if}}
-        --}}
-        {{!-- <button style='float:right' data-target='.newReferenceArtifact' class="btn btn-success save-item " title="{{t 'common.create'}}" type="button" data-toggle="collapse" {{action 'updateContent'}}>{{t "common.save"}}</button>--}}
-    </div>
 {{else}}
-    {{validation.gru-input model=model valuePath='location' maxLength=50 didValidate=true}}
-    <button style='float:right' data-target='.newReferenceArtifact' class="btn btn-success save-item " title="{{t 'common.create'}}" type="button" data-toggle="collapse" {{action 'updateURLRef'}}>{{t "common.save"}}</button>
+    {{validation.gru-input model=model valuePath='location' class='addUrl' maxLength=50 didValidate=true}}
+    <div class="btn no-bgd add-item" {{action 'updateURLRef'}}>{{gru-icon name="add_circle"}}</div>
 {{/if}}

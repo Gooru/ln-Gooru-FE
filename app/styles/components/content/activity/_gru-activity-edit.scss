@@ -30,6 +30,8 @@
 
         .upload-list-container {
           display: inline-flex;
+          justify-content: space-between;
+          width: 564px;
           .uploaded-item {
             border: 2px dotted #ccc;
             border-style: dashed;
@@ -89,6 +91,10 @@
         }
       }
       .url-section {
+        .addUrl {
+          width: 200px;
+          display: inline-block;
+        }
       }
       .textContainer {
         display: flex;

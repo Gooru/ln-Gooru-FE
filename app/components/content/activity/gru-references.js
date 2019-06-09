@@ -86,21 +86,28 @@ export default Ember.Component.extend({
       } else {
         return;
       }
-      component
-        .get('activityService')
-        .deleteReference(refitem)
-        .then(refItem => {
-          console.log('removeObject', refItem); //eslint-disable-line
-          let refsCol = component.get('references');
-          refsCol.removeObject(refItem);
-          let newSource = refsCol.slice(0);
-          Ember.set(this, 'references', newSource);
-          component.set('references', refsCol);
-          component.get('updateParent')();
-        });
+      component.deleteReferenceItem(refitem);
+    },
+
+    deleteUrlReference(refitem) {
+      const component = this;
+      component.deleteReferenceItem(refitem);
     }
   },
 
+  deleteReferenceItem(refitem) {
+    const component = this;
+    component
+      .get('activityService')
+      .deleteReference(refitem)
+      .then(refItem => {
+        console.log('removeObject', refItem); //eslint-disable-line
+        let refsCol = component.get('references');
+        refsCol.removeObject(refItem);
+        component.refreshReference();
+        component.get('updateParent')();
+      });
+  },
   refreshReference() {
     const component = this;
     let refsCol = component.get('references');

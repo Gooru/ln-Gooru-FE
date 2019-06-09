@@ -53,7 +53,10 @@
                 </div>
                 {{#each references as | refItem|}}
                     {{#if (eq refItem.type 'remote')}}
-                        <div> {{refItem.type}} <span class='separator'>|</span> {{refItem.subType}} <span class='separator'>|</span> <span class='ellipsis listItem'>{{refItem.location}}</span> <button class='button ' {{action 'deleteReference' refItem}}> Delete</button></div>
+                        <div>
+                            <span class='ellipsis listItem'>{{refItem.location}}</span>
+                            <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteUrlReference' refItem}}>{{gru-icon name="remove_circle"}}</button>
+                        </div>
                     {{/if}}
                 {{/each}}
                 {{content.activity.reference.gru-reference-line-item editType='url' oaId=activityModel.id  updateParent=(action 'updateReferenceCollection')  isEditing=isEditing}}
