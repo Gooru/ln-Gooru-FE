@@ -173,6 +173,10 @@ export default Ember.Component.extend({
 
       component.updateReference(editRefModel).then(() => {
         component.set('isLoading', false);
+        let referenceInstance = ReferenceModel.create({
+          oaId: this.get('oaId')
+        });
+        this.set('model', referenceInstance);
       });
     }
   },
