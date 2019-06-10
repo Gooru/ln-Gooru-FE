@@ -3,11 +3,10 @@ import SessionMixin from 'gooru-web/mixins/session';
 import ModalMixin from 'gooru-web/mixins/modal';
 import {
   PLAYER_EVENT_SOURCE,
-  SCREEN_SIZES
+  SCREEN_SIZES,
+  CONTENT_TYPES
 } from 'gooru-web/config/config';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 /**
  * Class activities controller
@@ -137,7 +136,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     },
 
     //Action triggered when click preview content
-    onPreviewContent(content, caContentId) {
+    onPreviewContent(content, caContentId, isReportView) {
       const controller = this;
       controller.set(
         'previewContentType',
@@ -150,6 +149,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       } else {
         controller.set('isShowContentPreview', true);
       }
+      controller.set('isReportView', isReportView);
     },
 
     /**
@@ -177,24 +177,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let controller = this;
       let collection = selectedClassActivity.get('collection');
       let activityDate = selectedClassActivity.get('added_date');
-      let dateWiseClassActivity = controller
-        .get('classActivities')
-        .findBy('added_date', activityDate);
-      let dateWiseClassActivities = dateWiseClassActivity.get(
-        'classActivities'
-      );
-      let collections = dateWiseClassActivities.map(classActivity => {
-        return classActivity.get('collection');
-      });
+      let caContentId = selectedClassActivity.get('id');
       let params = {
         classId: controller.get('classId'),
         collection: collection,
-        collections: collections,
         activityDate: activityDate,
         classMembers: controller.get('members')
       };
-      controller.set('showDcaCollectionReportPullUp', true);
-      controller.set('dcaCollectionReportData', params);
+      let format =
+        selectedClassActivity.get('collection.format') ||
+        selectedClassActivity.get('collection.collectionType');
+      if (format === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        controller.send('onPreviewContent', collection, caContentId, true);
+      } else {
+        controller.set('showDcaCollectionReportPullUp', true);
+        controller.set('dcaCollectionReportData', params);
+      }
     },
 
     /**
@@ -220,12 +218,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           classActivityData.set('isNewlyAdded', false);
         }, 2000);
       } else {
-        let addedMonth = forMonth ?
-          parseInt(forMonth) :
-          parseInt(moment(addedDate).format('MM'));
-        let addedYear = forYear ?
-          parseInt(forYear) :
-          parseInt(moment(addedDate).format('YYYY'));
+        let addedMonth = forMonth
+          ? parseInt(forMonth)
+          : parseInt(moment(addedDate).format('MM'));
+        let addedYear = forYear
+          ? parseInt(forYear)
+          : parseInt(moment(addedDate).format('YYYY'));
         let forFirstDateOfMonth = controller.get('forFirstDateOfMonth');
         let selectedMonth = parseInt(moment(forFirstDateOfMonth).format('MM'));
         let selectedYear = parseInt(moment(forFirstDateOfMonth).format('YYYY'));
@@ -446,15 +444,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         currentScheduleYear === parseInt(scheduleYear) &&
         controller.get('selectedActivityIsUnScheduled');
       return Ember.RSVP.hash({
-        scheduleActivity: useOldInstance ?
-          controller
+        scheduleActivity: useOldInstance
+          ? controller
             .get('classActivityService')
             .scheduleClassActivity(
               classId,
               contentId,
               scheduleDate,
               scheduleEndDate
-            ) : controller
+            )
+          : controller
             .get('classActivityService')
             .addActivityToClass(
               classId,
@@ -465,16 +464,30 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
               scheduleYear,
               scheduleEndDate
             )
-      }).then((hash) => {
+      }).then(hash => {
         if (!controller.isDestroyed) {
-          let activityId = hash.scheduleActivity ? hash.scheduleActivity : contentId;
+          let activityId = hash.scheduleActivity
+            ? hash.scheduleActivity
+            : contentId;
           if (!hash.scheduleActivity) {
-            controller.get('unScheduledClassActivities').removeObject(classActivity);
+            controller
+              .get('unScheduledClassActivities')
+              .removeObject(classActivity);
           }
           if (isOfflineActivity) {
-            controller.addOfflineContent(content, activityId, scheduleDate, scheduleEndDate);
+            controller.addOfflineContent(
+              content,
+              activityId,
+              scheduleDate,
+              scheduleEndDate
+            );
           } else {
-            controller.addContent(content, activityId, scheduleDate, scheduleEndDate);
+            controller.addContent(
+              content,
+              activityId,
+              scheduleDate,
+              scheduleEndDate
+            );
             controller.loadActivitiesForMonth();
           }
           controller.fetchAssessmentsMasteryAccrual();
@@ -631,7 +644,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let classId = controller.get('classId');
       let allowMasteryAccrual = !classActivity.get('allowMasteryAccrual');
       let model = {
-        hasMultipleCompetencies: collection.get('masteryAccrualCompetencies.length') > 1,
+        hasMultipleCompetencies:
+          collection.get('masteryAccrualCompetencies.length') > 1,
         allowMasteryAccrual: classActivity.get('allowMasteryAccrual'),
         onConfirm: function() {
           return controller
@@ -792,9 +806,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       ) {
         return classActivity.get('classActivities').length;
       });
-      return totalScheduleditems.length ?
-        totalScheduleditems.reduce((total, count) => total + count) :
-        0;
+      return totalScheduleditems.length
+        ? totalScheduleditems.reduce((total, count) => total + count)
+        : 0;
     }
   ),
 
@@ -1066,13 +1080,14 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         });
       });
     } else {
-      scheduleEle.animate({
-        height: '0'
-      },
-      function() {
-        unScheduleEle.addClass('active');
-        Ember.$('.ca-unscheduled-items').slideDown(400);
-      }
+      scheduleEle.animate(
+        {
+          height: '0'
+        },
+        function() {
+          unScheduleEle.addClass('active');
+          Ember.$('.ca-unscheduled-items').slideDown(400);
+        }
       );
     }
   },
@@ -1084,20 +1099,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let unScheduleEle = Ember.$('.ca-panel .left-panel .unschedule-container');
     let windowHeight = $(window).height();
     if (unScheduleEle.hasClass('active')) {
-      unScheduleEle.animate({
-        top: windowHeight - 50
-      },
-      400,
-      function() {
-        unScheduleEle.removeClass('active');
-      }
+      unScheduleEle.animate(
+        {
+          top: windowHeight - 50
+        },
+        400,
+        function() {
+          unScheduleEle.removeClass('active');
+        }
       );
     } else {
       unScheduleEle.addClass('active');
-      unScheduleEle.animate({
-        top: 100
-      },
-      400
+      unScheduleEle.animate(
+        {
+          top: 100
+        },
+        400
       );
     }
   },
@@ -1125,20 +1142,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     );
     let windowHeight = $(window).height();
     if (offlineActivityEle.hasClass('active')) {
-      offlineActivityEle.animate({
-        top: windowHeight - 150
-      },
-      400,
-      function() {
-        offlineActivityEle.removeClass('active');
-      }
+      offlineActivityEle.animate(
+        {
+          top: windowHeight - 150
+        },
+        400,
+        function() {
+          offlineActivityEle.removeClass('active');
+        }
       );
     } else {
       offlineActivityEle.addClass('active');
-      offlineActivityEle.animate({
-        top: 100
-      },
-      400
+      offlineActivityEle.animate(
+        {
+          top: 100
+        },
+        400
       );
     }
   },
@@ -1171,20 +1190,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     );
     let windowHeight = $(window).height();
     if (itemToGradeEle.hasClass('active')) {
-      itemToGradeEle.animate({
-        top: windowHeight - 100
-      },
-      400,
-      function() {
-        itemToGradeEle.removeClass('active');
-      }
+      itemToGradeEle.animate(
+        {
+          top: windowHeight - 100
+        },
+        400,
+        function() {
+          itemToGradeEle.removeClass('active');
+        }
       );
     } else {
       itemToGradeEle.addClass('active');
-      itemToGradeEle.animate({
-        top: 100
-      },
-      400
+      itemToGradeEle.animate(
+        {
+          top: 100
+        },
+        400
       );
     }
   },
@@ -1199,8 +1220,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   addOfflineContent(content, activityId, startDate, endDate) {
     let controller = this;
     let activeOfflineActivities = controller.get('activeOfflineActivities');
-    let newClassActivity = controller
-      .serializerOfflineActivityContent(content, activityId, startDate, endDate);
+    let newClassActivity = controller.serializerOfflineActivityContent(
+      content,
+      activityId,
+      startDate,
+      endDate
+    );
     activeOfflineActivities.pushObject(newClassActivity);
     newClassActivity.set('isNewlyAdded', true);
     Ember.run.later(function() {
@@ -1217,9 +1242,14 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   addContent(content, activityId, startDate) {
     let controller = this;
-    let scheduledClassActivities = controller.get('scheduledClassActivities').objectAt(0);
-    let newClassActivity = controller
-      .serializerActivityContent(content, activityId, startDate);
+    let scheduledClassActivities = controller
+      .get('scheduledClassActivities')
+      .objectAt(0);
+    let newClassActivity = controller.serializerActivityContent(
+      content,
+      activityId,
+      startDate
+    );
     scheduledClassActivities
       .get('classActivities')
       .pushObject(newClassActivity);
@@ -1244,11 +1274,15 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let existingActiveActivities = activeOfflineActivities
       .filterBy('collection.id', contentId)
       .filterBy('added_date', scheduleDate);
-    let completedOfflineActivities = controller.get('completedOfflineActivities');
+    let completedOfflineActivities = controller.get(
+      'completedOfflineActivities'
+    );
     let existingCompletedActivities = completedOfflineActivities
       .filterBy('collection.id', contentId)
       .filterBy('added_date', scheduleDate);
-    return existingActiveActivities.length || existingCompletedActivities.length;
+    return (
+      existingActiveActivities.length || existingCompletedActivities.length
+    );
   },
 
   /**
@@ -1420,13 +1454,14 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     });
   },
 
-
   loadActiveOfflineActivity() {
     const controller = this;
     const classId = controller.get('classId');
     controller.set('isLoading', true);
-    controller.get('classActivityService')
-      .fetchActiveOfflineActivities(classId).then(function(offlineActivities) {
+    controller
+      .get('classActivityService')
+      .fetchActiveOfflineActivities(classId)
+      .then(function(offlineActivities) {
         controller.set('activeOfflineActivities', offlineActivities);
         controller.fetchAssessmentsMasteryAccrual();
         controller.set('isLoading', false);
@@ -1477,8 +1512,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     const activityDate = item.get('activityDate');
     return new Ember.RSVP.Promise(function(resolve, reject) {
       return Ember.RSVP.hash({
-        collection: collectionId ?
-          controller.get('assessmentService').readAssessment(collectionId) : undefined
+        collection: collectionId
+          ? controller.get('assessmentService').readAssessment(collectionId)
+          : undefined
       }).then(function(hash) {
         const collection = hash.collection;
         const content = collection.get('children').findBy('id', resourceId);
@@ -1537,9 +1573,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         startDate,
         endDate
       )
-    }).then(({
-      activityPerformance
-    }) => {
+    }).then(({ activityPerformance }) => {
       activityPerformance = activityPerformance.objectAt(0);
       let dateWiseClassActivities = classActivities.findBy(
         'added_date',
@@ -1671,9 +1705,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       activityMembers: controller
         .get('classActivityService')
         .fetchUsersForClassActivity(classId, activityId)
-    }).then(({
-      activityMembers
-    }) => {
+    }).then(({ activityMembers }) => {
       return activityMembers;
     });
   },
@@ -1717,9 +1749,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         assessmentsMasteryAccrual: controller
           .get('assessmentService')
           .assessmentsMasteryAccrual(assessmentIds)
-      }).then(({
-        assessmentsMasteryAccrual
-      }) => {
+      }).then(({ assessmentsMasteryAccrual }) => {
         if (!controller.get('isDestroyed')) {
           assessments.forEach(assessment => {
             let assessmentId = assessment.get('id');

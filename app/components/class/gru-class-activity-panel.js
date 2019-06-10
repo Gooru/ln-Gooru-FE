@@ -2,6 +2,7 @@ import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
@@ -67,10 +68,15 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     openDcaContentReport(selectedClassActivity) {
       let component = this;
-      component.set('selectedActivity', selectedClassActivity);
-      component.set('isShowStudentsSummaryReport', true);
-      // old style reporting at CA now replaced with above...
-      // this.sendAction('openDcaContentReport', selectedClassActivity);
+      let format =
+        selectedClassActivity.get('collection.format') ||
+        selectedClassActivity.get('collection.collectionType');
+      if (format === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        this.sendAction('openDcaContentReport', selectedClassActivity);
+      } else {
+        component.set('selectedActivity', selectedClassActivity);
+        component.set('isShowStudentsSummaryReport', true);
+      }
     },
 
     /**

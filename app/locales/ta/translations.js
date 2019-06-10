@@ -2669,5 +2669,12 @@ export default Object.assign(quizzesTranslations, {
   'oa.lab_report': 'Report',
   'oa.explanation_argument': 'Explanation Argument',
   'oa.debate': 'Debate',
-  'oa.format': 'Format'
+  'oa.format': 'Format',
+  'oa.remix': 'Remix Offline Activity',
+  'oa.remix.lead': 'You are about to remix an offline activity.',
+  'oa.remix.success':
+    'You\'ve remixed an offline activity {{title}}. Do you want to edit that offline activity?',
+  'oa.title': 'Offline Activity Title',
+  'errors.oa-not-copied':
+    'Oops! Unable to copy offline activity right now. Please try again shortly.'
 });
