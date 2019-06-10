@@ -515,6 +515,18 @@ export default Ember.Object.extend({
     };
   },
 
+  /**
+   *
+   * @param {json} payload
+   * Returns object with only required fields
+   */
+  serializeUpdateTask(payload) {
+    return {
+      title: payload.title,
+      description: payload.description
+    };
+  },
+
   serializecreateTaskSubmission(payload) {
     return {
       id: payload.id,

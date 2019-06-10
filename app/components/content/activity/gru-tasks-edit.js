@@ -60,7 +60,6 @@ export default Ember.Component.extend({
       //ToDo: Call activityService API and save changes
       component.saveTask().then(task => {
         component.sendAction('updateParent', task);
-        component.set('model', task.copy()); // needed to break the ref
       });
     },
     removeLineItem() {

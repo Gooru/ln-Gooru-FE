@@ -335,7 +335,7 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       let serializedTaskPayLoad = service
         .get('offlineActivitySerializer')
-        .serializeCreateTask(taskPayLoad);
+        .serializeUpdateTask(taskPayLoad);
       service
         .get('offlineActivityAdapter')
         .updateTask(oaId, taskId, serializedTaskPayLoad)
