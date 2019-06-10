@@ -38,7 +38,7 @@ export default Ember.Component.extend({
 
   isEditing: true,
 
-  isExpanded: false,
+  isExpandedChild: false,
 
   // -------------------------------------------------------------------------
   // Attributes
@@ -84,7 +84,11 @@ export default Ember.Component.extend({
       const component = this;
       component.showAllHeaders();
       component.collapseAll();
-      //Ember.set(this, 'isExpanded', !this.get('isExpanded'));
+      component.$(
+        '#accordion > .gru-tasks-edit > .panel-default > a .associated-rubric'
+      );
+      let componentHead = component.$('.panel-default > a .associated-rubric');
+      componentHead.addClass('hidden');
     }
   },
 

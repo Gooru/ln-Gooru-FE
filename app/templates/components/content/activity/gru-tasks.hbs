@@ -13,7 +13,7 @@
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             {{log 'tasks' tasks}}
             {{#each tasks as |task|}}
-                {{content.activity.gru-tasks-edit oaId=activityModel.id updateParent=(action 'updateTaskCollection') model=task removeLineItem=(action 'removeLineItem')}}
+                {{content.activity.gru-tasks-edit oaId=activityModel.id updateParent=(action 'updateTaskCollection') isExpanded=isExpanded model=task removeLineItem=(action 'removeLineItem')   updateExpanded=(action 'updateExpanded')}}
             {{/each}}
             {{#if task }}
                 {{content.activity.gru-tasks-edit oaId=activityModel.id updateParent=(action 'updateTaskCollection') model=task removeLineItem=(action 'removeLineItem')}}

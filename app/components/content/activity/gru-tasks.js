@@ -60,6 +60,8 @@ export default Ember.Component.extend({
    */
   tasks: null,
 
+  isExpanded: false,
+
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['content', 'gru-task'],
@@ -83,6 +85,10 @@ export default Ember.Component.extend({
         tasksCol.removeObject(task);
         component.get('updateParent')();
       });
+    },
+
+    updateExpanded(isExpanded) {
+      Ember.set(this, 'isExpanded', isExpanded);
     }
   },
   // -------------------------------------------------------------------------
