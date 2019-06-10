@@ -3,7 +3,8 @@ import { cleanFilename, nullIfEmpty } from 'gooru-web/utils/utils';
 import {
   DEFAULT_IMAGES,
   ASSESSMENT_SHOW_VALUES,
-  OA_TASK_SUBMISSION_TYPES
+  OA_TASK_SUBMISSION_TYPES,
+  CONTENT_TYPES
 } from 'gooru-web/config/config';
 import TaxonomySerializer from 'gooru-web/serializers/taxonomy/taxonomy';
 import ActivityModel from 'gooru-web/models/content/activity';
@@ -135,6 +136,18 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
+   * Serialize the Offline Activity title
+   *
+   * @param title
+   * @returns {Object} returns a JSON Object
+   */
+  serializeUpdateActivityTitle: function(title) {
+    return {
+      title
+    };
+  },
+
+  /**
    * Normalize the Activity data into a Activity object
    * @param activityData
    * @returns {Question}
@@ -181,7 +194,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
           activityData.format ||
           activityData.target_content_type ||
           activityData.suggested_content_type ||
-          'Offline-activity',
+          CONTENT_TYPES.OFFLINE_ACTIVITY,
         subFormat: activityData.subformat,
         reference: activityData.reference,
         exemplar: activityData.exemplar,

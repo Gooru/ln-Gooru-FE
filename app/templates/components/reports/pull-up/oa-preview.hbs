@@ -62,7 +62,7 @@
           <div class="oa-title-container">
             <div class="oa-project-label">{{offlineActivity.title}}</div>
             {{#if offlineActivity.learningObjectives}}
-              <div class="oa-project-tag">Description</div>
+              <div class="oa-project-tag">{{t 'common.description'}}</div>
             {{/if}}
           </div>
         </div>
@@ -94,8 +94,8 @@
             <div class="rubric-icon-container">
             </div>
             <div class="rubric-container">
-              <div class="grader-label">Student Rubric</div>
-              <div class="grade-tag">Self-grade</div>
+              <div class="grader-label">{{t 'common.student'}} {{t 'common.rubric'}}</div>
+              <div class="grade-tag">{{t 'common.self-graded'}}</div>
             </div>
           </div>
           <div class="student-grading-panel">
@@ -113,8 +113,8 @@
             <div class="rubric-icon-container">
             </div>
             <div class="rubric-container">
-              <div class="grader-label">Teacher Rubric</div>
-              <div class="grade-tag">Teacher-grade</div>
+              <div class="grader-label">{{t 'common.teacher'}} {{t 'common.rubric'}}</div>
+              <div class="grade-tag">{{t 'common.teacher'}}-{{t 'class.info.grade'}}</div>
             </div>
           </div>
           <div class="teacher-grading-panel">

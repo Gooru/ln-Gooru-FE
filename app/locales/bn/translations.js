@@ -2580,6 +2580,13 @@ export default Object.assign(quizzesTranslations, {
   'oa.format': 'Format',
   'oa.edit_activity': 'Edit Activity',
   'oa.add_activity': 'Add Activity',
+  'oa.remix': 'Remix Offline Activity',
+  'oa.remix.lead': 'You are about to remix an offline activity.',
+  'oa.remix.success':
+    'You\'ve remixed an offline activity {{title}}. Do you want to edit that offline activity?',
+  'oa.title': 'Offline Activity Title',
+  'errors.oa-not-copied':
+    'Oops! Unable to copy offline activity right now. Please try again shortly.',
   'common.self': 'Self',
   'oa.enter-timespent-label':
     'Please enter the total time spent on the activity',

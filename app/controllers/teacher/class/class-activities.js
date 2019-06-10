@@ -1,7 +1,11 @@
 import Ember from 'ember';
 import SessionMixin from 'gooru-web/mixins/session';
 import ModalMixin from 'gooru-web/mixins/modal';
-import { PLAYER_EVENT_SOURCE, SCREEN_SIZES } from 'gooru-web/config/config';
+import {
+  PLAYER_EVENT_SOURCE,
+  SCREEN_SIZES,
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 /**
@@ -139,7 +143,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     },
 
     //Action triggered when click preview content
-    onPreviewContent(content, caContentId) {
+    onPreviewContent(content, caContentId, isReportView) {
       const controller = this;
       controller.set(
         'previewContentType',
@@ -152,6 +156,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       } else {
         controller.set('isShowContentPreview', true);
       }
+      controller.set('isReportView', isReportView);
     },
 
     /**
@@ -179,24 +184,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let controller = this;
       let collection = selectedClassActivity.get('collection');
       let activityDate = selectedClassActivity.get('added_date');
-      let dateWiseClassActivity = controller
-        .get('classActivities')
-        .findBy('added_date', activityDate);
-      let dateWiseClassActivities = dateWiseClassActivity.get(
-        'classActivities'
-      );
-      let collections = dateWiseClassActivities.map(classActivity => {
-        return classActivity.get('collection');
-      });
+      let caContentId = selectedClassActivity.get('id');
       let params = {
         classId: controller.get('classId'),
         collection: collection,
-        collections: collections,
         activityDate: activityDate,
         classMembers: controller.get('members')
       };
-      controller.set('showDcaCollectionReportPullUp', true);
-      controller.set('dcaCollectionReportData', params);
+      let format =
+        selectedClassActivity.get('collection.format') ||
+        selectedClassActivity.get('collection.collectionType');
+      if (format === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        controller.send('onPreviewContent', collection, caContentId, true);
+      } else {
+        controller.set('showDcaCollectionReportPullUp', true);
+        controller.set('dcaCollectionReportData', params);
+      }
     },
 
     /**

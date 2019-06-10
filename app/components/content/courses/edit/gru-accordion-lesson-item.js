@@ -33,9 +33,7 @@ export default PlayerAccordionLessonItem.extend(ModalMixin, {
   /**
    * @requires service:api-sdk/offline-activity/offline-activity
    */
-  activityService: Ember.inject.service(
-    'api-sdk/offline-activity/offline-activity'
-  ),
+  oaService: Ember.inject.service('api-sdk/offline-activity/offline-activity'),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -43,15 +41,17 @@ export default PlayerAccordionLessonItem.extend(ModalMixin, {
   actions: {
     edit: function(item) {
       const component = this;
-      var route = item.get('isCollection')
-        ? 'content.collections.edit'
-        : 'content.assessments.edit';
-
-      if (item.get('collectionType') === 'offline-activity') {
+      const format = item.get('format');
+      let route = 'content.collections.edit';
+      if (format === CONTENT_TYPES.OFFLINE_ACTIVITY) {
         route = 'content.activity.edit';
+      } else if (format === CONTENT_TYPES.ASSESSMENT) {
+        route = 'content.assessments.edit';
       }
       component.get('router').transitionTo(route, item.get('id'), {
-        queryParams: { editingContent: true }
+        queryParams: {
+          editingContent: true
+        }
       });
     },
 
@@ -113,7 +113,11 @@ export default PlayerAccordionLessonItem.extend(ModalMixin, {
         }
       };
       var lessonItem = null;
-      if (builderItem.get('isCollection')) {
+      let format = builderItem.get('format');
+      if (
+        format === CONTENT_TYPES.COLLECTION ||
+        format === CONTENT_TYPES.COLLECTION_EXTERNAL
+      ) {
         lessonItem = {
           deleteMethod: function() {
             return this.get('collectionService').deleteCollection(
@@ -122,16 +126,10 @@ export default PlayerAccordionLessonItem.extend(ModalMixin, {
           }.bind(this),
           type: CONTENT_TYPES.COLLECTION
         };
-      } else if (builderItem.get('collectionType') === 'offline-activity') {
-        lessonItem = {
-          deleteMethod: function() {
-            return this.get('activityService').deleteActivity(
-              this.get('model')
-            );
-          }.bind(this),
-          type: CONTENT_TYPES.ACTIVITY
-        };
-      } else {
+      } else if (
+        format === CONTENT_TYPES.ASSESSMENT ||
+        format === CONTENT_TYPES.ASSESSMENT_EXTERNAL
+      ) {
         lessonItem = {
           deleteMethod: function() {
             return this.get('assessmentService').deleteAssessment(
@@ -139,6 +137,13 @@ export default PlayerAccordionLessonItem.extend(ModalMixin, {
             );
           }.bind(this),
           type: CONTENT_TYPES.ASSESSMENT
+        };
+      } else if (format === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        lessonItem = {
+          deleteMethod: function() {
+            return this.get('oaService').deleteActivity(this.get('model'));
+          }.bind(this),
+          type: CONTENT_TYPES.OFFLINE_ACTIVITY
         };
       }
       this.actions.showModal.call(
@@ -151,7 +156,8 @@ export default PlayerAccordionLessonItem.extend(ModalMixin, {
     copy: function() {
       const component = this;
       const isCollection = component.get('model.isCollection');
-      if (isCollection) {
+      const format = component.get('model.format');
+      if (format === CONTENT_TYPES.COLLECTION) {
         component
           .get('collectionService')
           .readCollection(component.get('model.id'))
@@ -170,7 +176,7 @@ export default PlayerAccordionLessonItem.extend(ModalMixin, {
               model
             );
           });
-      } else {
+      } else if (format === CONTENT_TYPES.ASSESSMENT) {
         component
           .get('assessmentService')
           .readAssessment(component.get('model.id'))
@@ -188,6 +194,21 @@ export default PlayerAccordionLessonItem.extend(ModalMixin, {
               'content.modals.gru-assessment-remix',
               model
             );
+          });
+      } else if (format === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        component
+          .get('oaService')
+          .readActivity(component.get('model.id'))
+          .then(function(result) {
+            let model = {
+              content: result,
+              lessonId: component.get('lessonId'),
+              unitId: component.get('unitId'),
+              courseId: component.get('courseId'),
+              isCollection: isCollection,
+              onRemixSuccess: component.get('onRemixLessonItem')
+            };
+            component.send('showModal', 'content.modals.gru-oa-remix', model);
           });
       }
     }
