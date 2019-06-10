@@ -6,6 +6,26 @@
     background-repeat: no-repeat;
   }
 
+  #information {
+    .two-col-info {
+      display: flex;
+      max-width: 1000px;
+
+      @media (max-width: $screen-sm) {
+        flex-direction: column;
+      }
+
+      .title,
+      .learning-objectives {
+        width: 500px;
+
+        > label {
+          display: flex !important;
+          flex-direction: column;
+        }
+      }
+    }
+  }
   .gru-references {
     .detail {
       float: right;

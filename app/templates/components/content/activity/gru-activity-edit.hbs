@@ -30,15 +30,38 @@
     {{content.gru-image isEditing=isEditing srcImage=activityCollection.thumbnailUrl editImage=tempCollection.thumbnailUrl}}
     <div class="panel panel-default">
       <div class="panel-body">
-        <div class="title">
-          <label>
-            <span class="required">Activity Title</span>
-            {{#if isEditing}}
-              {{validation.gru-input model=tempCollection valuePath='title' maxLength=50 didValidate=didValidate}}
-            {{else}}
-              <b>{{activityCollection.title}}</b>
-            {{/if}}
-          </label>
+        <div class='two-col-info'>
+          <div class="title">
+            <label>
+              <span class="required">Activity Title</span>
+              {{#if isEditing}}
+                {{validation.gru-input model=tempCollection valuePath='title' maxLength=50 didValidate=didValidate}}
+              {{else}}
+                <b>{{activityCollection.title}}</b>
+              {{/if}}
+            </label>
+          </div>
+          <div class="learning-objectives format">
+            <label>
+              <span>{{t "oa.format"}}</span>
+              {{#if activityCollection.subFormat }}
+                <b>{{subTaskDisplayValue}}</b>
+              {{else}}
+                {{#if isEditing   }}
+                  {{gru-dropdown
+                  selectedItemId=tempCollection.subFormat
+                  itemKey='code'
+                  placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
+                  items=activityCollection.formatList
+                  displayLabelFieldKey="display_name"
+                  onChangeAction="updateSubFormat"
+                  btn-group-size=btn-group-size}}
+                {{else}}
+                  <b>{{t tempCollection.subFormat}}</b>
+                {{/if}}
+              {{/if}}
+            </label>
+          </div>
         </div>
         <div class="learning-objectives">
           <label>
@@ -47,27 +70,6 @@
               {{validation.gru-textarea model=tempCollection valuePath='learningObjectives' rows=2 maxLength=500 didValidate=didValidate}}
             {{else}}
               <b>{{activityCollection.learningObjectives}}</b>
-            {{/if}}
-          </label>
-        </div>
-        <div class="learning-objectives format">
-          <label>
-            <span>{{t "oa.format"}}</span>
-            {{#if activityCollection.subFormat }}
-              <b>{{subTaskDisplayValue}}</b>
-            {{else}}
-              {{#if isEditing   }}
-                {{gru-dropdown
-                  selectedItemId=tempCollection.subFormat
-                  itemKey='code'
-                  placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
-                  items=activityCollection.formatList
-                  displayLabelFieldKey="display_name"
-                  onChangeAction="updateSubFormat"
-                  btn-group-size=btn-group-size}}
-              {{else}}
-                <b>{{tempCollection.subFormat}}</b>
-              {{/if}}
             {{/if}}
           </label>
         </div>
