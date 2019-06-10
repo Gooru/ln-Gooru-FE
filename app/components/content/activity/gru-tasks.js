@@ -75,6 +75,7 @@ export default Ember.Component.extend({
     updateTaskCollection(task) {
       const component = this;
       let tasksCol = component.get('tasks');
+      tasksCol.removeObject(task);
       tasksCol.pushObject(task);
       component.get('updateParent')();
     },
