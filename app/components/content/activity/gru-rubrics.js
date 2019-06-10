@@ -33,14 +33,27 @@ export default Ember.Component.extend(ModalMixin, {
             callback: {
               success: function(oaRubric) {
                 console.log('teacherRubrics.oaRubric', oaRubric); //eslint-disable-line
-                if (component.get('isTeacherRubrics')) {
-                  component.get('selectedRubric'),
+                if (
+                  component.get('isTeacherRubrics') &&
+                  component.get('teacherRubrics')
+                ) {
                   component
                     .get('teacherRubrics')
                     .set('title', oaRubric.SourceRubric.title);
                   component
                     .get('teacherRubrics')
                     .set('id', oaRubric.NewRubricId);
+                } else {
+                  let teacherRubric = Rubric.create(
+                    Ember.getOwner(component).ownerInjection(),
+                    {
+                      title: oaRubric.SourceRubric.title,
+                      id: oaRubric.NewRubricId,
+                      grader: 'Teacher'
+                    }
+                  );
+                  let rubric = Ember.A([teacherRubric]);
+                  component.set('tempModel.rubric', rubric);
                 }
               }
             }
@@ -105,7 +118,7 @@ export default Ember.Component.extend(ModalMixin, {
       );
       return teachRubrics;
     }
-  }.property(),
+  }.property('tempModel.rubric'),
 
   teacherRubrics: function() {
     if (
@@ -118,7 +131,7 @@ export default Ember.Component.extend(ModalMixin, {
       );
       return teachRubrics;
     }
-  }.property(),
+  }.property('tempModel.rubric'),
 
   /**
    * Toggle Options for the Advanced Edit button
