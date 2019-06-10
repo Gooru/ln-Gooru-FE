@@ -4,7 +4,7 @@
       <div class="icon">
         <i class="{{item.format}}-icon" />
       </div>
-      <div class="title-info" {{action 'onPlayContent' item}}>
+      <div class="title-info {{if isOfflineActivity 'offline'}}" {{action 'onPlayContent' item}}>
         <div class="label-section">
           <div class="title ellipsis">{{item.title}}</div>
           <div class="group">
@@ -119,6 +119,11 @@
             </div>
           {{/if}}
         </div>
+        <div class="re-add-data {{if (or (eq classActivity.usersCount 0) isOfflineActivity) 'disable-event'}}">
+          {{#if collectionPerformanceSummary}}
+            <span {{action "onOpenPerformanceEntry" item classActivity true}}>{{t 'common.update-data'}}</span>
+          {{/if}}
+        </div>
       </div>
       <div class="dca-btn">
         {{#if enableCollectionLiveLearning}}
@@ -142,11 +147,6 @@
             {{gru-icon name="delete_outline"}}
           </span>
         {{/unless}}
-      </div>
-      <div class="close-activity">
-        <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.close"}}" {{action 'expandLess'}}>
-          {{gru-icon name="close"}}
-        </span>
       </div>
     </div>
   {{else}}

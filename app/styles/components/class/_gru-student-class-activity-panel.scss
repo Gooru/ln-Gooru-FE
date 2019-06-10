@@ -16,6 +16,21 @@
       .dca-content-counts {
         display: none;
       }
+
+      .ca-play-container {
+        pointer-events: all;
+        cursor: pointer;
+
+        .ca-play-btn {
+          i {
+            color: #4b9741;
+          }
+        }
+      }
+    }
+
+    &.completed {
+      grid-template-columns: 1fr 60px;
     }
 
     &.today {
@@ -30,16 +45,6 @@
         .ca-play-btn {
           i {
             color: #4b9741;
-          }
-        }
-      }
-
-      &.offline-activity {
-        .ca-play-container {
-          .ca-play-btn {
-            i {
-              color: #535e67;
-            }
           }
         }
       }
@@ -170,6 +175,17 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      pointer-events: none;
+
+      &.future-activity {
+        pointer-events: none;
+
+        .ca-play-btn {
+          i {
+            color: #535e67;
+          }
+        }
+      }
 
       .ca-play-btn {
         height: 30px;

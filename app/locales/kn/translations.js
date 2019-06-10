@@ -2642,5 +2642,11 @@ export default Object.assign(quizzesTranslations, {
   'oa.debate': 'Debate',
   'oa.format': 'Format',
   'oa.edit_activity': 'Edit Activity',
-  'oa.add_activity': 'Add Activity'
+  'oa.add_activity': 'Add Activity',
+  'common.self': 'Self',
+  'oa.enter-timespent-label':
+    'Please enter the total time spent on the activity',
+  'no-task-available': 'No Task Available',
+  'your-answer': 'Your Answer',
+  'common.saving': 'Saving'
 });

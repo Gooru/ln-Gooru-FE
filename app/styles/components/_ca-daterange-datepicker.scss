@@ -93,6 +93,7 @@
 
   .calendar {
     display: flex;
+    padding: 0 10px 10px;
 
     .end-date-picker {
       margin-left: 10px;
@@ -104,16 +105,6 @@
       .ca-date-nav-container {
         height: 40px;
         box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.13);
-      }
-
-      .ca-datepicker-container {
-        #ca-datepicker {
-          .datepicker {
-            .datepicker-days {
-              margin-bottom: 10px;
-            }
-          }
-        }
       }
     }
   }
@@ -137,7 +128,7 @@
 
       .date-container {
         display: grid;
-        grid-template-areas: 'doy my my' 'doy day day';
+        grid-template-areas: "doy my my" "doy day day";
         text-transform: uppercase;
 
         .date {

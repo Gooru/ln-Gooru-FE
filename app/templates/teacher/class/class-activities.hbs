@@ -50,12 +50,10 @@
         }}
           </div>
         </div>
-        {{#if showClassActivities}}
-          <div class="ca-schedule-section">
-            {{#each scheduledClassActivities as |classActivity|}}
-              <div class="dca-content-list-container {{if (eq today classActivity.added_date) 'dca-content-list-container-today'}}">
-                {{#each classActivity.classActivities as |activity|}}
-                  {{class.gru-class-activity-panel
+        <div class="ca-schedule-section">
+          <div class="dca-content-list-container {{if isToday 'dca-content-list-container-today'}}">
+            {{#each scheduledClassActivities as |classActivity|}} {{#each classActivity.classActivities as |activity|}}
+                {{class.gru-class-activity-panel
                     classActivity=activity
                     classId=classId
                     class=class
@@ -76,15 +74,14 @@
                     onUpdateMasteryAccrual="onUpdateMasteryAccrual"
                     showMasteryAccrual=showMasteryAccrual
                   }}
-                {{else}}
-                  <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
-                {{/each}}
-              </div>
+              {{else}}
+                <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
+              {{/each}}
+            {{else}}
+              <div class="no-content">{{t "common.no-dca-teacher"}}</div>
             {{/each}}
           </div>
-        {{else}}
-          <div class="no-content">{{t "common.no-dca-teacher"}}</div>
-        {{/if}}
+        </div>
       </div>
       <div class="unschedule-container">
         <div class="ca-unschedule-items-header" {{action 'toggleUnSchedule'}}>
@@ -132,7 +129,7 @@
         <div class="offline-activity-item-header" {{action 'toggleOffineActivity'}}>
           <span class="hidden-xs">{{t 'common.plan'}}</span>
           <span class="title hidden visible-xs">{{t 'common.offline-activites'}}</span>
-          <i class="offline-icon"></i>
+          <i class="offline-icon" {{action 'onAddDca' 'offline-activity'}}></i>
           <div class="icons">
             {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
             {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
@@ -341,11 +338,14 @@
     showPullUp=showOAGrade
     context=itemToGradeContextData
     itemsToGrade=itemsToGrade
+    refreshItem='onRefreshItem'
   }}
 {{/if}}
 {{#if isShowOfflineActivityPreview}}
   {{reports.pull-up.oa-preview
     showPullUp=isShowOfflineActivityPreview
     oaId=previewContent.id
+    classId=classId
+    caContentId=previewCaContentId
   }}
 {{/if}}

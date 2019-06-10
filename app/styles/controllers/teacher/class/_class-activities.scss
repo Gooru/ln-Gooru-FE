@@ -113,6 +113,14 @@
           height: 100%;
           padding: 0 10px 10px;
 
+          .no-content {
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #fff;
+            font-size: 16px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+          }
+
           .left-panel-header {
             width: 100%;
             display: flex;
@@ -202,7 +210,7 @@
                               display: grid;
                               width: 100%;
                               justify-content: center;
-                              grid-template-columns: repeat(7,1fr);
+                              grid-template-columns: repeat(7, 1fr);
 
                               th.dow {
                                 height: 40px;
@@ -217,7 +225,7 @@
                               display: grid;
                               width: 100%;
                               justify-content: center;
-                              grid-template-columns: repeat(7,1fr);
+                              grid-template-columns: repeat(7, 1fr);
 
                               td {
                                 height: 40px;
@@ -233,7 +241,11 @@
 
                                 &.active {
                                   background-color: #d2e3fc;
-                                  background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
+                                  background-image: -webkit-linear-gradient(
+                                    top,
+                                    #d2e3fc,
+                                    #d2e3fc
+                                  );
                                   border-radius: 50%;
                                   display: flex;
                                   margin: auto;
@@ -248,7 +260,11 @@
 
                                 &.today {
                                   background-color: #3486f7;
-                                  background-image: -webkit-linear-gradient(top, #3486f7 , #3486f7);
+                                  background-image: -webkit-linear-gradient(
+                                    top,
+                                    #3486f7,
+                                    #3486f7
+                                  );
                                   border-radius: 50%;
                                   display: flex;
                                   margin: auto;
@@ -343,6 +359,7 @@
                   display: grid;
                   grid-template-columns: auto 30px;
                   padding-right: 10px;
+                  cursor: pointer;
 
                   .label {
                     display: flex;
@@ -358,7 +375,6 @@
 
                     i {
                       font-size: 18px;
-                      cursor: pointer;
                       margin: auto;
                       color: #0072bc;
                     }
@@ -478,7 +494,8 @@
                 font-size: 16px;
                 padding: 10px;
                 text-align: justify;
-                height: 100%;
+                line-height: 1.5;
+                height: auto;
                 background-color: #d8d8d8;
               }
             }
@@ -524,10 +541,10 @@
             border: 1px solid #bbb;
 
             %icon-content {
-              width: 25px;
-              height: 25px;
+              width: 20px;
+              height: 20px;
               background-repeat: no-repeat;
-              background-size: 25px 25px;
+              background-size: 20px 20px;
               opacity: 0.8;
               display: block;
               margin-left: 10px;
@@ -536,6 +553,7 @@
             .offline-icon {
               background-image: url("../assets/gooru/images/offline.svg");
               @extend %icon-content;
+              cursor: pointer;
             }
 
             span {
@@ -589,7 +607,7 @@
           }
 
           .offline-activity-section {
-            height: 100%;
+            height: auto;
             width: 100%;
 
             .panel-group {
@@ -689,7 +707,7 @@
                   font-size: 16px;
                   padding: 10px;
                   text-align: justify;
-                  height: 80px;
+                  min-height: 80px;
                   background-color: #d8d8d8;
                 }
               }

@@ -1097,3 +1097,14 @@ export function getOAType() {
     { display_name: 'uploaded', code: '1' }
   ]);
 }
+
+/**
+ * @function getTimeInMillisec
+ * @param {Number} hour
+ * @param {Number} minute
+ * @return {Number}
+ * Method to convert given hour and minute into milliseconds
+ */
+export function getTimeInMillisec(hour = 0, minute = 0) {
+  return (hour * 60 * 60 + minute * 60) * 1000;
+}

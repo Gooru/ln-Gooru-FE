@@ -7,6 +7,15 @@ export default Ember.Component.extend({
   classNames: ['rubric-category-container'],
 
   // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * Maintains the state of show comment or not.
+   * @type {Boolean}
+   */
+  showComment: true,
+
+  // -------------------------------------------------------------------------
   // Events
 
   /**
@@ -63,7 +72,7 @@ export default Ember.Component.extend({
     let categories = component.get('categories');
     component.$('.grade-info-popover').popover({
       placement: 'top auto',
-      container: '.rubric-category-container',
+      container: 'body',
       trigger: 'manual'
     });
     let isMobile = window.matchMedia('only screen and (max-width: 768px)');

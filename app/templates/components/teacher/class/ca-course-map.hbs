@@ -31,7 +31,7 @@
                             <div class="collection-img-container">
                               <img src="{{collection.thumbnailUrl}}" />
                             </div>
-                            <div class="collection-title-container" {{action 'playContent' unit.id lesson.id collection}}>
+                            <div class="collection-title-container {{if collection.isOfflineActivity 'disable-event'}}" {{action 'playContent' unit.id lesson.id collection}}>
                               <i class="{{collection.format}}-icon"></i>
                               <p>{{collection.title}}</p>
                             </div>

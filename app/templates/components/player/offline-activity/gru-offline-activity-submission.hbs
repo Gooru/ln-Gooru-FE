@@ -12,30 +12,47 @@
     </div>
   </div>
 
-  <div class="references-container">
-    <div class="reference-info-container">
-      <div class="reference-icon-container">
-      </div>
-      <div class="reference-title-container">
-        <div class="reference-label">References</div>
-        <div class="reference-links">{{offlineActivity.references.length}} Links</div>
-      </div>
-    </div>
-    <div class="reference-container">
-      {{offlineActivity.reference}}
-    </div>
-    {{#each offlineActivity.references as |reference index|}}
-      <div class="reference-container">
-        <a href="{{reference.location}}" target="_blank" class="reference-link">Reference {{plus-one index}}</a>
-      </div>
-    {{/each}}
+  <div class="oa-references-container">
+    {{player.offline-activity.gru-offline-activity-references offlineActivity = offlineActivity}}
   </div>
+
+  <div class="offline-activity-timespent">
+    <div class="timespent-info-container" {{action "onToggleTimespent"}}>
+      <div class="icon-container">
+        {{gru-icon name="schedule"}}
+      </div>
+      <div class="label-container">
+        <span class="title-container">Time spent</span>
+        <span class="description-container">
+          {{t 'oa.enter-timespent-label'}}
+        </span>
+      </div>
+      <div class="toggle-container">
+        {{gru-icon name=(if isTimespentExpanded 'expand_less' 'expand_more')}}
+      </div>
+    </div>
+    <div class="timespent-container">
+      {{cards.gru-timepicker-card
+        maxHour= -1
+        hour=oaTimespentHour
+        minute=oaTimespentMinute
+      }}
+      <div class="save-timespent-action {{unless isEnableSaveTimespent 'disable-event'}}" {{action "onSaveTimespent"}}>
+        {{t 'common.save'}}
+      </div>
+    </div>
+  </div>
+
   <div class="task-submissions-container">
     {{#each activityTasks as |task|}}
       {{player.offline-activity.gru-offline-activity-task-submission
         task=task
         caContentId=caContentId
-        classId=classId}}
+        showSubmissions=true
+        showToggle=true
+        classId=classId
+        timespentInMilliSec=timespentInMilliSec
+        isValidTimespent=isEnableSaveTimespent}}
     {{/each}}
   </div>
 </div>

@@ -148,3 +148,14 @@
     onClosePullUp="onClosePullUp"
   }}
 {{/if}}
+
+{{#if isShowOfflineActivityReport}}
+  {{reports.pull-up.oa-preview
+    showPullUp=isShowOfflineActivityReport
+    oaId=studentReportContextData.collection.id
+    caContentId=studentReportContextData.caContentId
+    isReportView=true
+    classId=classId
+    users=studentReportContextData.users
+  }}
+{{/if}}

@@ -22,8 +22,8 @@
                 {{#each users as |user index|}}
                   <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
                     <div class="user-profile-img">
-                      <img src="{{user.thumbnail}}" />
-                      <span>{{user.lastname}} {{user.firstname}}</span>
+                      <img src="{{user.avatarUrl}}" />
+                      <span>{{user.lastName}} {{user.firstName}}</span>
                     </div>
                   </div>
                 {{/each}}
@@ -38,7 +38,7 @@
             </div>
           </div>
         </div>
-        {{#if student.selfGrade}}
+        {{#if student.selfGrade.maxScore}}
           <div class="self-grade-section" style={{safe-html (concat "background-color:" (grade-color studentSelfGrade))}}>
             <div class="label">{{t 'common.self-graded'}}</div>
             <div class="score">

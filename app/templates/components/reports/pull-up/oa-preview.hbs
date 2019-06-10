@@ -26,7 +26,34 @@
       </div>
     {{/if}}
   </div>
-  <div class="oa-body-container">
+
+  {{#if isReportView}}
+    <div class="oa-user-list-container">
+      <div class="user-selected-profile">
+        <div class="user-profile-img">
+          <img src="{{selectedUser.avatarUrl}}" />
+          <span>{{selectedUser.lastName}} {{selectedUser.firstName}}</span>
+        </div>
+        {{#if (and isReportView isTeacher)}}
+          <div class="oa-user-list-drop-down" {{action 'toggleListOfStudents'}}>
+            {{gru-icon name="keyboard_arrow_down"}}
+          </div>
+        {{/if}}
+      </div>
+      {{#if (and isReportView isTeacher)}}
+        <div class="oa-list-of-users">
+          {{#each users as |user index|}}
+            <div class="user-profile-img {{if (eq selectedUser.id user.id) 'selected'}}" {{action 'previewStudentReport' user}}>
+              <img src="{{user.avatarUrl}}" />
+              <span>{{user.lastName}} {{user.firstName}}</span>
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+    </div>
+  {{/if}}
+
+  <div class="oa-body-container {{if isReportView 'report-view'}}">
     <div class="oa-info-image-container">
       <div class="oa-info-container">
         <div class="oa-info-header-container">
@@ -54,9 +81,51 @@
         {{player.offline-activity.gru-offline-activity-task-submission
           task=task
           classId=classId
-          isPreview=true
+          showSubmissions=isReportView
+          isReadOnly=true
         }}
       {{/each}}
+    </div>
+
+    <div class="oa-teacher-student-rubric">
+      {{#if studentRubric.categories}}
+        <div class="student-rubric-section">
+          <div class="student-grading-header">
+            <div class="rubric-icon-container">
+            </div>
+            <div class="rubric-container">
+              <div class="grader-label">Student Rubric</div>
+              <div class="grade-tag">Self-grade</div>
+            </div>
+          </div>
+          <div class="student-grading-panel">
+            {{rubric.rubric-category-grades
+              isDisable=true
+              categories=studentRubric.categories
+              showComment=false
+            }}
+          </div>
+        </div>
+      {{/if}}
+      {{#if teacherRubric.categories}}
+        <div class="teacher-rubric-section">
+          <div class="teacher-grading-header">
+            <div class="rubric-icon-container">
+            </div>
+            <div class="rubric-container">
+              <div class="grader-label">Teacher Rubric</div>
+              <div class="grade-tag">Teacher-grade</div>
+            </div>
+          </div>
+          <div class="teacher-grading-panel">
+            {{rubric.rubric-category-grades
+              isDisable=true
+              categories=teacherRubric.categories
+              showComment=false
+            }}
+          </div>
+        </div>
+      {{/if}}
     </div>
   </div>
 </div>

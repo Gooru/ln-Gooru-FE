@@ -1,4 +1,4 @@
-<div class="ca-panel-container  {{if isToday 'today'}} {{if isOfflineActivity 'offline'}}">
+<div class="ca-panel-container {{if isToday 'today'}} {{if isOfflineActivity 'offline'}} {{if classActivity.isCompleted 'completed'}}">
   <div class="dca-panel-info">
     <i class="{{item.collectionType}}-icon" />
     <div class="title-info ellipsis">
@@ -32,13 +32,13 @@
       <i class="external-icon"></i>
     {{/if}}
   </div>
-  <div class="ca-play-container" {{action 'onPlayContent' classActivity}}>
-    {{#if (not classActivity.isCompleted)}}
+  {{#if (not classActivity.isCompleted)}}
+    <div class="ca-play-container {{if isActivityFuture 'future-activity'}}" {{action 'onPlayContent' classActivity}}>
       <div class="ca-play-btn">
         {{gru-icon name='play_arrow'}}
       </div>
-    {{/if}}
-  </div>
+    </div>
+  {{/if}}
   <div class="dca-panel-actions-performance">
     {{#if collectionPerformanceSummary}}
       {{#if (and (not-eq item.collectionType 'collection') (not-eq item.collectionType 'collection-external'))}}
@@ -53,7 +53,7 @@
         </div>
       {{/if}}
     {{else}}
-      <div class="dca-panel-performance not-started">
+      <div class="dca-panel-performance {{unless (eq item.collectionType 'offline-activity') 'not-started'}}" {{action 'studentDcaReport' item collectionPerformanceSummary activityDate}}>
         <span class="no-performance">--</span>
       </div>
     {{/if}}

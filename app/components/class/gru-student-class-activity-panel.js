@@ -52,11 +52,13 @@ export default Ember.Component.extend({
      * Action triggred when dca report action invoke
      */
     studentDcaReport: function(assessment, studentPerformance, activityDate) {
+      let caContentId = this.get('classActivity.id');
       this.sendAction(
         'studentDcaReport',
         assessment,
         studentPerformance,
-        activityDate
+        activityDate,
+        caContentId
       );
     },
 
@@ -165,5 +167,15 @@ export default Ember.Component.extend({
     let activityDate = this.get('activityDate');
     let currentDate = moment().format('YYYY-MM-DD');
     return currentDate === activityDate;
+  }),
+
+  /**
+   * It is used to find activity is future or not
+   * @return {Boolean}
+   */
+  isActivityFuture: Ember.computed('activityDate', function() {
+    let activityDate = this.get('activityDate');
+    let currentDate = moment().format('YYYY-MM-DD');
+    return moment(activityDate).isAfter(currentDate);
   })
 });

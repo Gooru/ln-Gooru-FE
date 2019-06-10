@@ -9,13 +9,13 @@
       <div class="pending-submission">
         {{#each typeBasedMandatoryUploads as |mandatoryUpload index|}}
           <span>{{mandatoryUpload.pendingCount}} {{mandatoryUpload.type}}</span>
-          {{#if (lt (plus-one index) typeBasedMandatoryUploads.length )  }}
+          {{#if (lt (plus-one index) typeBasedMandatoryUploads.length ) }}
             |
           {{/if}}
         {{/each}}
       </div>
     </div>
-    {{#unless isPreview}}
+    {{#if showToggle}}
       <div class="task-toggle" {{action "onToggleTask"}}>
         {{#if isTaskExpanded}}
           {{gru-icon name="expand_less"}}
@@ -23,21 +23,25 @@
           {{gru-icon name="expand_more"}}
         {{/if}}
       </div>
-    {{/unless}}
+    {{/if}}
   </div>
   <div class="task-details-container">
     <div class="task-description">
       {{task.description}}
     </div>
-    {{#unless isPreview}}
+    {{#if showSubmissions}}
       <div class="task-upload-container">
         <div class="task-answer">
           <div class="answer-label">
-            Your Answer
+            {{t 'your-answer'}}
           </div>
-          <div class="input-container">
-            {{input type="text" value=task.submissionText class="submission-text" placeholder="Write your answer here..."}}
-          </div>
+          {{#if isReadOnly}}
+            <p>{{task.submissionText}}</p>
+          {{else}}
+            <div class="input-container">
+            {{gru-rich-text-editor isCustomEditor=true content=task.submissionText isAutoFocusDisabled="true"}}
+            </div>
+          {{/if}}
         </div>
         <div class="task-file-upload-container">
           {{#each studentTaskUploadSubmission as |file|}}
@@ -55,32 +59,27 @@
               </a>
             </div>
           {{/each}}
+          {{#unless isReadOnly}}
+            {{#each listOfFilesUploads as |file index|}}
+              <div class="task-file-upload">
+                {{#file-picker dropzone=false errors=fileUploadErrors fileLoaded="onUploadFile" readAs="readAsFile" removePreview=file.isRemovePreview onRemoveFile=removeFile}}
 
-          {{#each listOfFilesUploads as |file index|}}
-            <div class="task-file-upload">
-              {{#file-picker
-            dropzone=false
-            errors=fileUploadErrors
-            fileLoaded="onUploadFile"
-            readAs="readAsFile"
-            removePreview=file.isRemovePreview
-            onRemoveFile=removeFile}}
-
-                {{!-- A DIV is used instead of a BUTTON because the button's click default behaviour
+                  {{!-- A DIV is used instead of a BUTTON because the button's click default behaviour
                   may cause unwanted side-effects if this component is placed in a modal
                    (i.e. clicking on this button will cause the modal to close) --}}
-                <div class="file-upload-box">
-                  {{gru-icon name="add"}}
-                </div>
+                  <div class="file-upload-box">
+                    {{gru-icon name="add"}}
+                  </div>
 
-              {{/file-picker}}
-              {{#if file.isFileAvailable}}
-                <div class="file-upload-actions">
-                  <div class="remove-file" {{action "onRemoveFile" index}}>{{gru-icon name="clear"}}</div>
-                </div>
-              {{/if}}
-            </div>
-          {{/each}}
+                {{/file-picker}}
+                {{#if file.isFileAvailable}}
+                  <div class="file-upload-actions">
+                    <div class="remove-file" {{action "onRemoveFile" index}}>{{gru-icon name="clear"}}</div>
+                  </div>
+                {{/if}}
+              </div>
+            {{/each}}
+          {{/unless}}
         </div>
         <div class="task-url-upload-container">
           {{#each task.urls as |taskUrl index|}}
@@ -94,14 +93,16 @@
             </div>
           {{/each}}
         </div>
-        <div class="save-task-submission {{if isSubmittingTask 'saving'}}" {{action "onSaveTask"}}>
-          {{#if isSubmittingTask}}
-            Saving<span class="spinner">{{three-bounce-spinner}}</span>
-          {{else}}
-            Save
-          {{/if}}
-        </div>
+        {{#unless isReadOnly}}
+          <div class="save-task-submission {{unless isEnableTaskSubmission 'disable-event'}} {{if isSubmittingTask 'saving'}}" {{action "onSaveTask"}}>
+            {{#if isSubmittingTask}}
+              {{t 'common.saving'}}<span class="spinner">{{three-bounce-spinner}}</span>
+            {{else}}
+              {{t 'common.save'}}
+            {{/if}}
+          </div>
+        {{/unless}}
       </div>
-    {{/unless}}
+    {{/if}}
   </div>
 </div>

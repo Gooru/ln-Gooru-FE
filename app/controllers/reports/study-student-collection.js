@@ -87,13 +87,12 @@ export default StudentCollection.extend({
       controller
         .get('quizzesAttemptService')
         .getAttemptIds(contextId, profileId)
-        .then(
-          attemptIds =>
-            !attemptIds || !attemptIds.length
-              ? {}
-              : this.get('quizzesAttemptService').getAttemptData(
-                attemptIds[attemptIds.length - 1]
-              )
+        .then(attemptIds =>
+          !attemptIds || !attemptIds.length
+            ? {}
+            : this.get('quizzesAttemptService').getAttemptData(
+              attemptIds[attemptIds.length - 1]
+            )
         )
         .then(attemptData =>
           Ember.RSVP.hash({
@@ -333,16 +332,24 @@ export default StudentCollection.extend({
     'collectionObj',
     'isPremiumCourse',
     'mapLocation.context',
+    'isAssessmentHasFRQ',
     function() {
       const controller = this;
       const averageScore = controller.get('attemptData.averageScore');
       const isPremiumCourse = controller.get('isPremiumCourse');
       const context = controller.get('mapLocation.context');
+      const isAssessmentHasFRQ = controller.get('isAssessmentHasFRQ');
       const collectionObj = controller.get('collectionObj');
+      const isTeaherSuggestion = context.get('pathType') === 'teacher';
+      const isSignatureAssessment =
+        context.get('itemSubType') === 'signature-assessment';
       return (
         isPremiumCourse &&
         context.get('itemType') === CONTENT_TYPES.ASSESSMENT &&
         collectionObj.get('gutCodes.length') &&
+        !isAssessmentHasFRQ &&
+        !isTeaherSuggestion &&
+        !isSignatureAssessment &&
         averageScore >= SCORES.VERY_GOOD
       );
     }
@@ -353,6 +360,19 @@ export default StudentCollection.extend({
    * Property to show mastery greeting message
    */
   isShowMasteryGreeting: false,
+
+  /**
+   * @property {Boolean} isAssessmentHasFRQ
+   * Property to evaluate whether the completed collection has FR Question
+   */
+  isAssessmentHasFRQ: Ember.computed('collectionObj', function() {
+    const controller = this;
+    const questions = controller.get('collectionObj.children');
+    const frQuesitons = questions.filter(question =>
+      question.get('isOpenEnded')
+    );
+    return !!frQuesitons.length;
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
