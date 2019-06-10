@@ -2588,5 +2588,11 @@ export default Object.assign(quizzesTranslations, {
   'oa.lab_report': 'Report',
   'oa.explanation_argument': 'Explanation Argument',
   'oa.debate': 'Debate',
-  'oa.format': 'Format'
+  'oa.format': 'Format',
+  'common.self': 'Self',
+  'oa.enter-timespent-label':
+    'Please enter the total time spent on the activity',
+  'no-task-available': 'No Task Available',
+  'your-answer': 'Your Answer',
+  'common.saving': 'Saving'
 });
