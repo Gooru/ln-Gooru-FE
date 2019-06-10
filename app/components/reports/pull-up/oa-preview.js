@@ -31,6 +31,11 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
    */
   session: Ember.inject.service('session'),
 
+  /**
+   * @requires service:api-sdk/class-activity
+   */
+  classActivityService: Ember.inject.service('api-sdk/class-activity'),
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -57,7 +62,28 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
   // -------------------------------------------------------------------------
   // Actions
 
-  actions: {},
+  actions: {
+    toggleListOfStudents() {
+      const component = this;
+      let element = '.oa-list-of-users';
+      if (component.get('showUserList')) {
+        component.$(element).slideUp(400, function() {
+          component.set('showUserList', false);
+        });
+      } else {
+        component.$(element).slideDown(400, function() {
+          component.set('showUserList', true);
+        });
+      }
+    },
+
+    previewStudentReport(user) {
+      const component = this;
+      component.set('selectedUser', user);
+      component.fetchSubmissions(user);
+      component.send('toggleListOfStudents');
+    }
+  },
 
   // -------------------------------------------------------------------------
   // Properties
@@ -133,7 +159,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
    */
   teacherRubric: Ember.computed(
     'offlineActivity.rubric.[]',
-    'oaRubrics',
+    'oaRubrics.teacherGrades',
     function() {
       let offlineActivity = this.get('offlineActivity');
       let rubric = {};
@@ -153,25 +179,35 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
    * Maintains the object of  student rubric data from  rubric array
    * @return {Object}
    */
-  studentRubric: Ember.computed('offlineActivity.rubric.[]', function() {
-    let offlineActivity = this.get('offlineActivity');
-    let rubric = {};
-    if (offlineActivity) {
-      rubric = this.get('offlineActivity.rubric').findBy(
-        'gradeType',
-        'student'
-      );
-      let studentGrade = this.get('oaRubrics.teacherGrades');
-      this.parseRubricGradedData(rubric, studentGrade);
+  studentRubric: Ember.computed(
+    'offlineActivity.rubric.[]',
+    'oaRubrics.studentGrades',
+    function() {
+      let offlineActivity = this.get('offlineActivity');
+      let rubric = {};
+      if (offlineActivity) {
+        rubric = this.get('offlineActivity.rubric').findBy(
+          'gradeType',
+          'student'
+        );
+        let studentGrade = this.get('oaRubrics.teacherGrades');
+        this.parseRubricGradedData(rubric, studentGrade);
+      }
+      return rubric;
     }
-    return rubric;
-  }),
+  ),
 
   /**
    * Maintains the state of report view or not,  by default report view is false.
    * @type {Boolean}
    */
   isReportView: false,
+
+  /**
+   * Maintains the state to show the users list or not
+   * @type {Boolean}
+   */
+  showUserList: false,
 
   //--------------------------------------------------------------------------
   // Methods
@@ -182,40 +218,69 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     const oaService = component.get('oaService');
     const classId = component.get('classId');
     const caContentId = component.get('caContentId');
-    const studentId = component.get('studentId');
     const isReportView = component.get('isReportView');
+    const isTeacher = component.get('isTeacher');
     component.set('isLoading', true);
-    let submissionPromise = isReportView
-      ? component
-        .get('oaAnaltyicsService')
-        .getSubmissionsToGrade(classId, caContentId, studentId)
-      : Ember.RSVP.resolve(null);
+    const users = component.get('users') ? component.get('users') : Ember.A([]);
+    let studentListPromise =
+      isReportView && isTeacher
+        ? component
+          .get('classActivityService')
+          .fetchUsersForClassActivity(classId, caContentId)
+        : Ember.RSVP.resolve(users);
     return Ember.RSVP.hash({
       offlineActivity: oaService.readActivity(oaId),
-      submissions: submissionPromise
-    }).then(({ offlineActivity, submissions }) => {
+      users: studentListPromise
+    }).then(({ offlineActivity, users }) => {
       if (!component.isDestroyed) {
         component.set('offlineActivity', offlineActivity);
-        component.parseSubmissionsData(submissions);
+        if (isReportView) {
+          users = users.filterBy('isActive', true);
+          component.set('users', users);
+          let user = users.objectAt(0);
+          component.set('selectedUser', user);
+          component.fetchSubmissions(user);
+        }
         component.set('isLoading', false);
       }
     });
   },
 
+  fetchSubmissions(user) {
+    const component = this;
+    const classId = component.get('classId');
+    const caContentId = component.get('caContentId');
+    const isReportView = component.get('isReportView');
+    const userId = user.get('id');
+    let submissionPromise = isReportView
+      ? component
+        .get('oaAnaltyicsService')
+        .getSubmissionsToGrade(classId, caContentId, userId)
+      : Ember.RSVP.resolve(null);
+    return Ember.RSVP.hash({
+      submissions: submissionPromise
+    }).then(({ submissions }) => {
+      if (!component.isDestroyed) {
+        component.parseSubmissionsData(submissions);
+      }
+    });
+  },
+
   parseSubmissionsData(submissions) {
-    if (submissions) {
-      const component = this;
-      component.set('oaRubrics', submissions.get('oaRubrics'));
-      const tasks = component.get('offlineActivity.tasks');
-      const taskSubmissons = submissions.get('tasks');
-      taskSubmissons.forEach(taskSubmission => {
-        const taskId = taskSubmission.get('taskId');
-        const task = tasks.findBy('id', taskId);
-        if (task) {
-          task.set('studentTaskSubmissions', taskSubmission.get('submissions'));
-        }
-      });
-    }
+    const component = this;
+    const tasks = component.get('offlineActivity.tasks');
+    const oaRubrics = submissions ? submissions.get('oaRubrics') : null;
+    component.set('oaRubrics', oaRubrics);
+    const taskSubmissons = submissions ? submissions.get('tasks') : Ember.A([]);
+    tasks.forEach(task => {
+      const taskId = task.get('id');
+      const taskSubmission = taskSubmissons.findBy('taskId', taskId);
+      if (taskSubmission) {
+        task.set('studentTaskSubmissions', taskSubmission.get('submissions'));
+      } else {
+        task.set('studentTaskSubmissions', null);
+      }
+    });
   },
 
   parseRubricGradedData(rubric, gradedRubric) {
@@ -252,6 +317,18 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
             category.set('comment', gradedCategory.get('levelComment'));
           }
           category.set('levels', levels);
+        }
+      });
+    } else if (rubric) {
+      let categories = rubric.get('categories');
+      categories.map(category => {
+        category.set('scoreInPrecentage', null);
+        category.set('comment', null);
+        let levels = category.get('levels');
+        if (levels) {
+          levels.map(level => {
+            level.set('selected', false);
+          });
         }
       });
     }
