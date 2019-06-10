@@ -37,6 +37,9 @@ export default Ember.Component.extend({
   model: null,
 
   isEditing: true,
+
+  isExpanded: false,
+
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['content', 'gru-tasks-edit'],
@@ -75,8 +78,34 @@ export default Ember.Component.extend({
 
     updateSubmissionCollection() {
       //ToDo: Impl
+    },
+
+    expandTitle() {
+      const component = this;
+      component.showAllHeaders();
+      component.collapseAll();
+      //Ember.set(this, 'isExpanded', !this.get('isExpanded'));
     }
   },
+
+  didInsertElement1() {
+    //let component = this;
+    $('#accordion .panel-default').on('click', function() {
+      $('#accordion .panel-collapse').collapse('toggle');
+    });
+  },
+  collapseAll() {
+    $(
+      '#accordion > .gru-tasks-edit > .panel-default > .panel-collapse.collapse.in'
+    ).removeClass('in');
+  },
+
+  showAllHeaders() {
+    $(
+      '#accordion > .gru-tasks-edit > .panel-default > a   .associated-rubric'
+    ).removeClass('hidden');
+  },
+
   // -------------------------------------------------------------------------
   // Events
   init() {
