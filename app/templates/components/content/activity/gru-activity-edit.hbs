@@ -164,6 +164,6 @@
     <div class="header">
       <h2>Rubric</h2>
     </div>
-    {{content.activity.gru-rubrics tempModel=tempCollection}}
+    {{content.activity.gru-rubrics tempModel=tempCollection   activityModel=activityCollection    updateContent=(action 'updateContent')  }}
   </section>
 {{/if}}

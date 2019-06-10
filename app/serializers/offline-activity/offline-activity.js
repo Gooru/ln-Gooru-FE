@@ -132,6 +132,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
       activityModel.get('centurySkills') || [];
     serializedActivity.reference = activityModel.reference;
     serializedActivity.exemplar = activityModel.exemplar;
+    serializedActivity.max_score = activityModel.maxScore;
+
     return serializedActivity;
   },
 
@@ -235,7 +237,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
           metadata['21_century_skills'].length > 0
             ? metadata['21_century_skills']
             : [],
-        durationHours: activityData.duration_hours || 0
+        durationHours: activityData.duration_hours || 0,
+        maxScore: activityData.max_score
       }
     );
     return normalizedActivity;

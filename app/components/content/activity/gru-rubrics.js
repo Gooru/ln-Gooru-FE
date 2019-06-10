@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import ModalMixin from 'gooru-web/mixins/modal';
 import Rubric from 'gooru-web/models/rubric/rubric';
+import { RUBRIC_OFF_OPTIONS } from 'gooru-web/config/config';
 
 export default Ember.Component.extend(ModalMixin, {
   /**
@@ -14,6 +15,17 @@ export default Ember.Component.extend(ModalMixin, {
   session: Ember.inject.service('session'),
 
   actions: {
+    /**
+     * Action to save maxScore
+     */
+    updateContent: function() {
+      this.get('updateContent')(this.get('tempModel'));
+    },
+
+    cancelChanges: function() {
+      let maxScore = this.get('activityModel').maxScore;
+      this.set('tempModel.maxScore', maxScore);
+    },
     /**
      * Show modal with rubrics to choose one and associate it to the OA
      */
@@ -68,6 +80,13 @@ export default Ember.Component.extend(ModalMixin, {
           )
         );
     },
+
+    /**
+     * Action after selecting an option for maximum points
+     */
+    onMaxScoreChange: function(newValue) {
+      this.set('tempModel.maxScore', parseInt(newValue));
+    },
     /**
      * Route to Rubric  edit with backurl in query params.
      */
@@ -78,32 +97,6 @@ export default Ember.Component.extend(ModalMixin, {
       this.get('router').transitionTo('content.rubric.edit', rubricsId, {
         queryParams
       });
-    },
-    /**
-     * Disassociates the rubric from the question
-     */
-    removeRubric: function(associatedRubricId) {
-      let component = this;
-      let tempModel = component.get('tempModel');
-      let rubric = Rubric.create(Ember.getOwner(this).ownerInjection(), {
-        increment: 0.5,
-        maxScore: 1
-      });
-
-      component
-        .get('rubricService')
-        .deleteRubric(associatedRubricId)
-        .then(function() {
-          component.set('model.rubric', null);
-          tempModel.set('rubric', rubric);
-
-          component.setProperties({
-            isPanelExpanded: true,
-            isEditingInline: true,
-            isEditingNarration: false,
-            editImagePicker: false
-          });
-        });
     }
   },
   isTeacherRubrics: function() {
@@ -145,5 +138,19 @@ export default Ember.Component.extend(ModalMixin, {
       label: 'Off',
       value: false
     })
-  ])
+  ]),
+  /**
+   * Options for maximum points
+   * @property {Array}
+   */
+  maximumOptions: Ember.computed(function() {
+    let options = [];
+    for (let i = 1; i <= RUBRIC_OFF_OPTIONS.MAX_SCORE; i += 1) {
+      options.push({
+        id: i,
+        name: i
+      });
+    }
+    return options;
+  })
 });

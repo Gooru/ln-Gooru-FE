@@ -48,22 +48,25 @@
                         </div>
                     {{/if}}
                 {{else}}
-                    <div class="switch scoring">
+                    {{!-- <div class="switch scoring">
                         <label class="switch-label">{{t 'content.questions.edit.builder.feedback-grading.scoring'}}</label>
-                        {{gru-switch switchOptions=switchOptions isChecked=tempModel.rubric.scoring}}
-                    </div>
-                    {{#if tempModel.rubrics.scoring}}
-                        <div class="scoring-settings">
-                            <div class="setting maximum-points">
-                                <span class="title">{{t 'content.questions.edit.builder.feedback-grading.maximum-points'}}</span>
-                                {{validation.gru-select options=maximumOptions search="true" optionSelected=tempModel.rubric.maxScore onOptionSelect="onMaxScoreChange"}}
-                            </div>
-                            <div class="setting increment">
-                                <span class="title">{{t 'content.questions.edit.builder.feedback-grading.increment'}}</span>
-                                {{validation.gru-select options=incrementOptions search="true" optionSelected=tempModel.rubric.increment onOptionSelect="onIncrementChange"}}
-                            </div>
+                        {{gru-switch switchOptions=switchOptions isChecked=tempModel.maxScore}}
+                    </div> --}}
+                    {{!-- {{#if tempModel.maxScore}} --}}
+                    <div class="scoring-settings">
+                        <div class="setting maximum-points">
+                            <span class="title">{{t 'content.questions.edit.builder.feedback-grading.maximum-points'}}</span>
+                            {{validation.gru-select options=maximumOptions search="true" optionSelected=tempModel.maxScore onOptionSelect="onMaxScoreChange"}}
                         </div>
-                    {{/if}}
+                        <div class='actions'>
+                            <button class="cancel btn btn-info" {{action 'cancelChanges'}}>{{t "common.cancel"}}</button>
+                            <button class="save btn btn-success" {{action 'updateContent' model}}>{{t "common.save"}}</button>
+                        </div>
+                        {{!-- <div class="actions">
+                            {{partial 'content/partials/information-actions'}}
+                        </div> --}}
+                    </div>
+                    {{!-- {{/if}} --}}
                 {{/if}}
             </div>
         </div>
