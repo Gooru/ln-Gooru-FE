@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {
-  PLAYER_EVENT_SOURCE
-} from 'gooru-web/config/config';
+import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 
 /**
  * Student Class Activity Panel
@@ -170,7 +168,6 @@ export default Ember.Component.extend({
     let currentDate = moment().format('YYYY-MM-DD');
     return currentDate === activityDate;
   }),
-
 
   /**
    * It is used to find activity is future or not

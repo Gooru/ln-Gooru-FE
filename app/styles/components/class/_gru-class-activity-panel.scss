@@ -537,7 +537,8 @@
               display: flex;
 
               &.mastery-accrual-checked {
-                background: url("/assets/gooru/images/check-circle-1.svg") no-repeat center;
+                background: url("/assets/gooru/images/check-circle-1.svg")
+                  no-repeat center;
                 background-size: contain;
                 border: none;
                 display: block;

@@ -128,7 +128,7 @@
 
       .date-container {
         display: grid;
-        grid-template-areas: 'doy my my' 'doy day day';
+        grid-template-areas: "doy my my" "doy day day";
         text-transform: uppercase;
 
         .date {

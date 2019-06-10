@@ -2618,6 +2618,8 @@ export default Object.assign(quizzesTranslations, {
   'oa.explanation_argument': 'Explanation Argument',
   'oa.debate': 'Debate',
   'oa.format': 'Format',
+  'oa.edit_activity': 'Edit Activity',
+  'oa.add_activity': 'Add Activity',
   'oa.remix': 'Remix Offline Activity',
   'oa.remix.lead': 'You are about to remix an offline activity.',
   'oa.remix.success':

@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {
-  CONTENT_TYPES
-} from 'gooru-web/config/config';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
 
 /**
  * Class Overview controller
@@ -268,7 +266,6 @@ export default Ember.Controller.extend({
   // Actions
 
   actions: {
-
     /**
      * Trigger when rubric item level  report clicked
      */
@@ -583,10 +580,12 @@ export default Ember.Controller.extend({
     let controller = this;
     let classId = controller.get('currentClass.id');
     let courseId = controller.get('course.id');
-    let classCourseId = Ember.A([{
-      classId,
-      courseId
-    }]);
+    let classCourseId = Ember.A([
+      {
+        classId,
+        courseId
+      }
+    ]);
     return Ember.RSVP.hash({
       studentClassPerformance: controller
         .get('performanceService')
@@ -594,9 +593,7 @@ export default Ember.Controller.extend({
           studentId,
           classCourseId
         )
-    }).then(({
-      studentClassPerformance
-    }) => {
+    }).then(({ studentClassPerformance }) => {
       if (studentClassPerformance && studentClassPerformance.length) {
         controller.setStudentClassScore(studentClassPerformance[0]);
         controller.set('activeStudent.performance', studentClassPerformance[0]);
@@ -606,13 +603,13 @@ export default Ember.Controller.extend({
 
   setStudentClassScore(studentClassPerformance) {
     let controller = this;
-    let scorePercentage = studentClassPerformance ?
-      studentClassPerformance.score :
-      null;
+    let scorePercentage = studentClassPerformance
+      ? studentClassPerformance.score
+      : null;
     let score =
-      scorePercentage >= 0 && scorePercentage !== null ?
-        `${scorePercentage}` :
-        '--';
+      scorePercentage >= 0 && scorePercentage !== null
+        ? `${scorePercentage}`
+        : '--';
     controller.set('studentClassScore', score);
   },
 
@@ -826,9 +823,7 @@ export default Ember.Controller.extend({
     );
     return Ember.RSVP.hash({
       route0Contents: route0Promise
-    }).then(({
-      route0Contents
-    }) => {
+    }).then(({ route0Contents }) => {
       let status = route0Contents ? route0Contents.status : null;
       return status === 'accepted' ? route0Contents : Ember.RSVP.resolve({});
     });
@@ -903,14 +898,15 @@ export default Ember.Controller.extend({
           const lessonIndex = unit.getChildLessonIndex(lesson) + 1;
           return new Ember.RSVP.Promise(function(resolve, reject) {
             return Ember.RSVP.hash({
-              collection: collectionId ?
-                isAssessment ?
-                  controller
+              collection: collectionId
+                ? isAssessment
+                  ? controller
                     .get('assessmentService')
-                    .readAssessment(collectionId) :
-                  controller
+                    .readAssessment(collectionId)
+                  : controller
                     .get('collectionService')
-                    .readCollection(collectionId) : undefined
+                    .readCollection(collectionId)
+                : undefined
             }).then(function(hash) {
               const collection = hash.collection;
               const content = collection

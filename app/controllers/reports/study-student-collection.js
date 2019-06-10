@@ -87,13 +87,12 @@ export default StudentCollection.extend({
       controller
         .get('quizzesAttemptService')
         .getAttemptIds(contextId, profileId)
-        .then(
-          attemptIds =>
-            !attemptIds || !attemptIds.length
-              ? {}
-              : this.get('quizzesAttemptService').getAttemptData(
-                attemptIds[attemptIds.length - 1]
-              )
+        .then(attemptIds =>
+          !attemptIds || !attemptIds.length
+            ? {}
+            : this.get('quizzesAttemptService').getAttemptData(
+              attemptIds[attemptIds.length - 1]
+            )
         )
         .then(attemptData =>
           Ember.RSVP.hash({
