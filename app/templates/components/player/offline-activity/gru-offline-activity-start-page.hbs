@@ -11,7 +11,7 @@
         <span class="etc-value">{{offlineActivity.durationHours}}h</span>
       </div>
       <div class="project-type">
-        <span class="project-type-label">Project: </span>
+        <span class="project-type-label">{{t 'project'}}: </span>
         <span class="project-type-value">{{t offlineActivity.subFormat}}</span>
       </div>
     </div>
@@ -36,13 +36,13 @@
           task=task
         }}
       {{else}}
-        No Task available
+        {{t 'no-task-available'}}
       {{/each}}
     </div>
     {{#if activityStudentRubrics}}
       <div class="student-rubrics-container">
         <div class="student-label label-container" {{action "onToggleRubricContainer" 'student'}}>
-          <span class="label-type">Self Grading</span>
+          <span class="label-type">{{t 'common.self'}} {{t 'grading-player.grading'}}</span>
           <span class="toggle-icon">
             {{gru-icon name=(if isStudentCategoriesExpanded 'expand_less' 'expand_more')}}
           </span>
@@ -64,7 +64,7 @@
     {{#if activityTeacherRubrics}}
       <div class="teacher-rubrics-container">
         <div class="teacher-label label-container" {{action "onToggleRubricContainer" 'teacher'}}>
-          <span class="label-type">Teacher Grading</span>
+          <span class="label-type">{{t 'common.teacher'}} {{t 'grading-player.grading'}}</span>
           <span class="toggle-icon">
             {{gru-icon name=(if isTeacherCategoriesExpanded 'expand_less' 'expand_more')}}
           </span>
@@ -84,10 +84,10 @@
   </div>
   <div class="actions-container">
     <div class="cancel-action action-btn" {{action "onClosePlayer"}}>
-      Cancel
+      {{t 'common.cancel'}}
     </div>
     <div class="start-action action-btn" {{action "onStartPlayer"}}>
-      Start
+      {{t 'gru-assessment-confirmation.start'}}
     </div>
   </div>
 </div>

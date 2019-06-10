@@ -33,7 +33,7 @@
       <div class="task-upload-container">
         <div class="task-answer">
           <div class="answer-label">
-            Your Answer
+            {{t 'your-answer'}}
           </div>
           {{#if isReadOnly}}
             <p>{{task.submissionText}}</p>
@@ -96,9 +96,9 @@
         {{#unless isReadOnly}}
           <div class="save-task-submission {{unless isEnableTaskSubmission 'disable-event'}} {{if isSubmittingTask 'saving'}}" {{action "onSaveTask"}}>
             {{#if isSubmittingTask}}
-              Saving<span class="spinner">{{three-bounce-spinner}}</span>
+              {{t 'common.saving'}}<span class="spinner">{{three-bounce-spinner}}</span>
             {{else}}
-              Save
+              {{t 'common.save'}}
             {{/if}}
           </div>
         {{/unless}}

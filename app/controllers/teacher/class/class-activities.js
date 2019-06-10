@@ -67,6 +67,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   actions: {
     /**
+     * Action triggered when teacher graded for student.
+     */
+    onRefreshItem() {
+      let controller = this;
+      controller.loadCompletedOfflineActivities();
+    },
+    /**
      * Action triggered when unschedule item got clicked.
      */
     toggleUnSchedule() {

@@ -90,7 +90,10 @@ export default Ember.Component.extend({
     const component = this;
     const timespentInMilliSec = component.get('timespentInMilliSec');
     const timespentInMilliSecCopy = component.get('timespentInMilliSecCopy');
-    return timespentInMilliSec > timespentInMilliSecCopy;
+    return (
+      timespentInMilliSec > timespentInMilliSecCopy &&
+      component.validateOATimespent()
+    );
   }),
 
   // -------------------------------------------------------------------------
@@ -186,5 +189,21 @@ export default Ember.Component.extend({
     }
     component.set('oaTimespentHour', hour);
     component.set('oaTimespentMinute', minute);
+  },
+
+  /**
+   * @function validateOATimespent
+   * Method to validate OA timespent
+   */
+  validateOATimespent() {
+    const component = this;
+    let isValidTimeSpent = false;
+    let hour = component.get('oaTimespentHour') || 0;
+    let minute = component.get('oaTimespentMinute') || 0;
+    if (hour || minute) {
+      isValidTimeSpent =
+        hour > 0 ? minute >= 0 && minute < 60 : minute > 0 && minute <= 60;
+    }
+    return isValidTimeSpent;
   }
 });
