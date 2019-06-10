@@ -8,12 +8,14 @@ import {
 import TaxonomySerializer from 'gooru-web/serializers/taxonomy/taxonomy';
 import ActivityModel from 'gooru-web/models/content/activity';
 import RubricSerializer from 'gooru-web/serializers/rubric/rubric';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
+
 /**
  * Serializer to support the Offline Activity operations
  *
  * @typedef {Object} OfflineActivitySerializer
  */
-export default Ember.Object.extend({
+export default Ember.Object.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
   session: Ember.inject.service('session'),
