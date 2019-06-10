@@ -357,17 +357,15 @@ export default Ember.Component.extend({
   uploadFileIntoS3(fileObject) {
     const component = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      return Ember.RSVP
-        .hash({
-          fileLocation: component
-            .get('mediaService')
-            .uploadContentFile(fileObject)
-        })
-        .then(({ fileLocation }) => {
-          let cdnUrls = component.get('session.cdnUrls');
-          let UUIDFileName = cleanFilename(fileLocation, cdnUrls);
-          return resolve((fileObject.UUIDFileName = UUIDFileName));
-        }, reject);
+      return Ember.RSVP.hash({
+        fileLocation: component
+          .get('mediaService')
+          .uploadContentFile(fileObject)
+      }).then(({ fileLocation }) => {
+        let cdnUrls = component.get('session.cdnUrls');
+        let UUIDFileName = cleanFilename(fileLocation, cdnUrls);
+        return resolve((fileObject.UUIDFileName = UUIDFileName));
+      }, reject);
     });
   },
 

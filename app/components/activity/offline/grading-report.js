@@ -1,9 +1,7 @@
 import Ember from 'ember';
 import RubricGrade from 'gooru-web/models/rubric/rubric-grade';
 import RubricCategoryScore from 'gooru-web/models/rubric/grade-category-score';
-import {
-  PLAYER_EVENT_SOURCE
-} from 'gooru-web/config/config';
+import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -122,13 +120,14 @@ export default Ember.Component.extend({
   categories: Ember.computed('teacherRubric', 'teacherGrade', function() {
     let component = this;
     let teacherGradedCategories = Ember.A([]);
-    let categories = component.get('teacherRubric.categories') ?
-      component.get('teacherRubric.categories') : [];
+    let categories = component.get('teacherRubric.categories')
+      ? component.get('teacherRubric.categories')
+      : [];
     let teacherGrade = component.get('teacherGrade');
     if (teacherGrade) {
-      teacherGradedCategories = teacherGrade.get('categoryGrade') ?
-        teacherGrade.get('categoryGrade') :
-        Ember.A([]);
+      teacherGradedCategories = teacherGrade.get('categoryGrade')
+        ? teacherGrade.get('categoryGrade')
+        : Ember.A([]);
 
       component
         .get('teacherRubric')
@@ -176,13 +175,14 @@ export default Ember.Component.extend({
     'student.selfGrade',
     function() {
       let component = this;
-      let categories = component.get('student.rubric.categories') ?
-        component.get('student.rubric.categories') : [];
+      let categories = component.get('student.rubric.categories')
+        ? component.get('student.rubric.categories')
+        : [];
       let selfGrade = component.get('student.selfGrade');
       if (selfGrade && selfGrade.get('maxScore')) {
-        let studentSelfGradedCategories = selfGrade.get('categoryGrade') ?
-          selfGrade.get('categoryGrade') :
-          Ember.A([]);
+        let studentSelfGradedCategories = selfGrade.get('categoryGrade')
+          ? selfGrade.get('categoryGrade')
+          : Ember.A([]);
         categories.map((category, index) => {
           let studentSelfGradedCategory = studentSelfGradedCategories.objectAt(
             index
@@ -194,7 +194,7 @@ export default Ember.Component.extend({
               let totalPoints = studentSelfGradedCategory.get('levelMaxScore');
               let scoreInPrecentage = Math.floor(
                 (studentSelfGradedCategory.get('levelScore') / totalPoints) *
-                100
+                  100
               );
               category.set('scoreInPrecentage', scoreInPrecentage);
             }
@@ -463,9 +463,7 @@ export default Ember.Component.extend({
         .get('classActivityService')
         .fetchUsersForClassActivity(classId, activityId)
     })
-      .then(({
-        studentList
-      }) => {
+      .then(({ studentList }) => {
         if (!component.isDestroyed) {
           let users = studentList.filterBy('isActive', true);
           let studentId = component.get('studentId');
@@ -484,19 +482,16 @@ export default Ember.Component.extend({
           }
         }
       })
-      .then(({
-        submission,
-        users
-      }) => {
+      .then(({ submission, users }) => {
         if (!component.get('isDestroyed')) {
           users.map(user => {
             user.set('isGraded', false);
             let studentRubric = component
               .get('rubric')
               .findBy('isTeacherGrader', false);
-            let newStudentRubric = studentRubric ?
-              studentRubric.copy() :
-              studentRubric;
+            let newStudentRubric = studentRubric
+              ? studentRubric.copy()
+              : studentRubric;
             user.set(
               'rubric',
               component.createRubricGrade(newStudentRubric, user)
@@ -504,9 +499,9 @@ export default Ember.Component.extend({
             let teacherRubric = component
               .get('rubric')
               .findBy('isTeacherGrader', true);
-            let newTeacherRubric = teacherRubric ?
-              teacherRubric.copy() :
-              teacherRubric;
+            let newTeacherRubric = teacherRubric
+              ? teacherRubric.copy()
+              : teacherRubric;
             user.set(
               'teacherRubric',
               component.createRubricGrade(newTeacherRubric, user)
@@ -579,15 +574,17 @@ export default Ember.Component.extend({
       id: task.get('id'),
       description: task.get('description'),
       submissionCount: task.get('submissionCount'),
-      oaTaskSubmissions: task.get('oaTaskSubmissions').length > 0 ?
-        task.get('oaTaskSubmissions').map(item => {
-          return Ember.Object.create({
-            id: item.id,
-            taskSubmissionSubType: item.taskSubmissionSubType,
-            taskSubmissionType: item.taskSubmissionType,
-            oaTaskId: item.oaTaskId
-          });
-        }) : []
+      oaTaskSubmissions:
+        task.get('oaTaskSubmissions').length > 0
+          ? task.get('oaTaskSubmissions').map(item => {
+            return Ember.Object.create({
+              id: item.id,
+              taskSubmissionSubType: item.taskSubmissionSubType,
+              taskSubmissionType: item.taskSubmissionType,
+              oaTaskId: item.oaTaskId
+            });
+          })
+          : []
     });
   },
 
@@ -638,7 +635,8 @@ export default Ember.Component.extend({
    */
   createRubricCategory(category, level) {
     let rubricCategory = RubricCategoryScore.create(
-      Ember.getOwner(this).ownerInjection(), {
+      Ember.getOwner(this).ownerInjection(),
+      {
         title: category.get('title')
       }
     );
@@ -699,22 +697,24 @@ export default Ember.Component.extend({
    */
   openPullUp() {
     let component = this;
-    component.$().animate({
-      top: '10%'
-    },
-    400
+    component.$().animate(
+      {
+        top: '10%'
+      },
+      400
     );
   },
 
   closePullUp() {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-    }
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+      }
     );
   },
 

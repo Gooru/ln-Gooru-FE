@@ -131,6 +131,29 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Updates the Offline Activity title
+   *
+   * @param oaId the id of the Offline Activity to be updated
+   * @param title the Offline Activity title
+   * @returns {Promise}
+   */
+  updateActivityTitle: function(oaId, title) {
+    const service = this;
+    let serializedData = service
+      .get('offlineActivitySerializer')
+      .serializeUpdateActivityTitle(title);
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('offlineActivityAdapter')
+        .updateActivity(oaId, serializedData)
+        .then(function() {
+          service.notifyQuizzesActivityChange(oaId);
+          resolve();
+        }, reject);
+    });
+  },
+
+  /**
    * Creates a reference in a specific offline activity
    * @param activityId
    * @param referenceData

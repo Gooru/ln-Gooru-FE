@@ -248,7 +248,9 @@ export default Ember.Component.extend(
         let classId = currentClass ? currentClass.get('id') : null;
         let courseId = currentClass
           ? currentClass.get('courseId')
-          : currentCourse ? currentCourse.get('id') : null;
+          : currentCourse
+            ? currentCourse.get('id')
+            : null;
         let unitId = component.get('unitId');
         let lessonId = component.get('model.id');
         let collectionId = collection.get('id');
@@ -563,13 +565,12 @@ export default Ember.Component.extend(
           .getLessonPeers(classId, courseId, unitId, lessonId)
         : Ember.RSVP.resolve(lessonPeers);
 
-      return Ember.RSVP
-        .hash({
-          lesson: component
-            .get('courseMapService')
-            .getLessonInfo(classId, courseId, unitId, lessonId, isTeacher),
-          peers: peersPromise
-        })
+      return Ember.RSVP.hash({
+        lesson: component
+          .get('courseMapService')
+          .getLessonInfo(classId, courseId, unitId, lessonId, isTeacher),
+        peers: peersPromise
+      })
         .then(({ lesson, peers }) => {
           collections = lesson.get('children');
           lessonPeers = peers;
@@ -782,154 +783,148 @@ export default Ember.Component.extend(
 
       return new Ember.RSVP.Promise(function(resolve, reject) {
         const classMinScore = component.get('currentClass.minScore');
-        Ember.RSVP
-          .hash({
-            performanceAssessment: component
-              .get('performanceService')
-              .findStudentPerformanceByLesson(
-                userId,
-                classId,
-                courseId,
-                unitId,
-                lessonId,
-                collections,
-                {
-                  collectionType: CONTENT_TYPES.ASSESSMENT
-                }
-              ),
-            performanceCollection: component
-              .get('performanceService')
-              .findStudentPerformanceByLesson(
-                userId,
-                classId,
-                courseId,
-                unitId,
-                lessonId,
-                collections,
-                {
-                  collectionType: CONTENT_TYPES.COLLECTION
-                }
-              )
-          })
-          .then(({ performanceAssessment, performanceCollection }) => {
-            let assessments = performanceAssessment.filterBy(
-              'type',
-              'assessment'
-            );
-            let collection = performanceCollection.filterBy(
-              'type',
-              'collection'
-            );
-            let performance = assessments.concat(collection);
-            const promises = collections.map(function(collection) {
-              const collectionId = collection.get('id');
-              const isAssessment =
-                collection.get('format') === CONTENT_TYPES.ASSESSMENT;
-              const isExternalAssessment =
-                collection.get('format') === CONTENT_TYPES.EXTERNAL_ASSESSMENT;
-              const isResource =
-                collection.get('format') !== CONTENT_TYPES.OFFLINE_ACTIVITY &&
-                collection.get('format') !== CONTENT_TYPES.ASSESSMENT &&
-                collection.get('format') !==
-                  CONTENT_TYPES.EXTERNAL_ASSESSMENT &&
-                collection.get('format') !== CONTENT_TYPES.COLLECTION &&
-                collection.get('format') !== CONTENT_TYPES.EXTERNAL_COLLECTION;
-              const peer = lessonPeers.findBy('id', collectionId);
-              if (peer) {
-                component
-                  .get('profileService')
-                  .readMultipleProfiles(peer.get('peerIds'))
-                  .then(function(profiles) {
-                    collection.set('members', profiles);
-                  });
+        Ember.RSVP.hash({
+          performanceAssessment: component
+            .get('performanceService')
+            .findStudentPerformanceByLesson(
+              userId,
+              classId,
+              courseId,
+              unitId,
+              lessonId,
+              collections,
+              {
+                collectionType: CONTENT_TYPES.ASSESSMENT
               }
+            ),
+          performanceCollection: component
+            .get('performanceService')
+            .findStudentPerformanceByLesson(
+              userId,
+              classId,
+              courseId,
+              unitId,
+              lessonId,
+              collections,
+              {
+                collectionType: CONTENT_TYPES.COLLECTION
+              }
+            )
+        }).then(({ performanceAssessment, performanceCollection }) => {
+          let assessments = performanceAssessment.filterBy(
+            'type',
+            'assessment'
+          );
+          let collection = performanceCollection.filterBy('type', 'collection');
+          let performance = assessments.concat(collection);
+          const promises = collections.map(function(collection) {
+            const collectionId = collection.get('id');
+            const isAssessment =
+              collection.get('format') === CONTENT_TYPES.ASSESSMENT;
+            const isExternalAssessment =
+              collection.get('format') === CONTENT_TYPES.EXTERNAL_ASSESSMENT;
+            const isResource =
+              collection.get('format') !== CONTENT_TYPES.OFFLINE_ACTIVITY &&
+              collection.get('format') !== CONTENT_TYPES.ASSESSMENT &&
+              collection.get('format') !== CONTENT_TYPES.EXTERNAL_ASSESSMENT &&
+              collection.get('format') !== CONTENT_TYPES.COLLECTION &&
+              collection.get('format') !== CONTENT_TYPES.EXTERNAL_COLLECTION;
+            const peer = lessonPeers.findBy('id', collectionId);
+            if (peer) {
+              component
+                .get('profileService')
+                .readMultipleProfiles(peer.get('peerIds'))
+                .then(function(profiles) {
+                  collection.set('members', profiles);
+                });
+            }
 
-              collection.set('isResource', isResource);
-              collection.set('isAssessment', isAssessment);
-              collection.set('isExternalAssessment', isExternalAssessment);
+            collection.set('isResource', isResource);
+            collection.set('isAssessment', isAssessment);
+            collection.set('isExternalAssessment', isExternalAssessment);
 
-              const collectionPerformanceData = performance.findBy(
-                'id',
-                collectionId
+            const collectionPerformanceData = performance.findBy(
+              'id',
+              collectionId
+            );
+            if (collectionPerformanceData) {
+              const score = collectionPerformanceData.get('score');
+              const timeSpent = collectionPerformanceData.get('timeSpent');
+              const completionDone = collectionPerformanceData.get(
+                'completionDone'
               );
-              if (collectionPerformanceData) {
-                const score = collectionPerformanceData.get('score');
-                const timeSpent = collectionPerformanceData.get('timeSpent');
-                const completionDone = collectionPerformanceData.get(
-                  'completionDone'
-                );
-                const completionTotal = collectionPerformanceData.get(
-                  'completionTotal'
-                );
+              const completionTotal = collectionPerformanceData.get(
+                'completionTotal'
+              );
 
-                const hasStarted = score > 0 || timeSpent > 0;
-                const isCompleted =
-                  completionDone > 0 && completionDone >= completionTotal;
-                const hasTrophy =
-                  score && score > 0 && classMinScore && score >= classMinScore;
+              const hasStarted = score > 0 || timeSpent > 0;
+              const isCompleted =
+                completionDone > 0 && completionDone >= completionTotal;
+              const hasTrophy =
+                score && score > 0 && classMinScore && score >= classMinScore;
 
-                collectionPerformanceData.set('timeSpent', timeSpent);
-                collectionPerformanceData.set('hasTrophy', hasTrophy);
-                collectionPerformanceData.set('hasStarted', hasStarted);
-                collectionPerformanceData.set('isCompleted', isCompleted);
-                collection.set('performance', collectionPerformanceData);
-                let showTrophy =
-                  collection.get('performance.hasTrophy') &&
-                  component.get('isStudent') &&
-                  !collection.get('collectionSubType');
-                collection.set('showTrophy', showTrophy);
+              collectionPerformanceData.set('timeSpent', timeSpent);
+              collectionPerformanceData.set('hasTrophy', hasTrophy);
+              collectionPerformanceData.set('hasStarted', hasStarted);
+              collectionPerformanceData.set('isCompleted', isCompleted);
+              collection.set('performance', collectionPerformanceData);
+              let showTrophy =
+                collection.get('performance.hasTrophy') &&
+                component.get('isStudent') &&
+                !collection.get('collectionSubType');
+              collection.set('showTrophy', showTrophy);
 
-                const attempts = collectionPerformanceData.get('attempts');
+              const attempts = collectionPerformanceData.get('attempts');
 
-                if (isAssessment) {
-                  return component
-                    .get('assessmentService')
-                    .readAssessment(collectionId)
-                    .then(function(assessment) {
-                      const attemptsSettings = assessment.get('attempts');
-                      if (attemptsSettings) {
-                        const noMoreAttempts =
-                          attempts &&
-                          attemptsSettings > 0 &&
-                          attempts >= attemptsSettings;
-                        collectionPerformanceData.set(
-                          'noMoreAttempts',
-                          noMoreAttempts
-                        );
-                        collectionPerformanceData.set(
-                          'isDisabled',
-                          !assessment.get('classroom_play_enabled')
-                        );
-                      }
-                    });
-                } else if (isExternalAssessment) {
-                  return component
-                    .get('assessmentService')
-                    .readExternalAssessment(collectionId)
-                    .then(function(assessment) {
-                      const attemptsSettings = assessment.get('attempts');
-                      if (attemptsSettings) {
-                        const noMoreAttempts =
-                          attempts &&
-                          attemptsSettings > 0 &&
-                          attempts >= attemptsSettings;
-                        collectionPerformanceData.set(
-                          'noMoreAttempts',
-                          noMoreAttempts
-                        );
-                        collectionPerformanceData.set(
-                          'isDisabled',
-                          !assessment.get('classroom_play_enabled')
-                        );
-                      }
-                    });
-                } else {
-                  return Ember.RSVP.resolve(true);
-                }
+              if (isAssessment) {
+                return component
+                  .get('assessmentService')
+                  .readAssessment(collectionId)
+                  .then(function(assessment) {
+                    const attemptsSettings = assessment.get('attempts');
+                    if (attemptsSettings) {
+                      const noMoreAttempts =
+                        attempts &&
+                        attemptsSettings > 0 &&
+                        attempts >= attemptsSettings;
+                      collectionPerformanceData.set(
+                        'noMoreAttempts',
+                        noMoreAttempts
+                      );
+                      collectionPerformanceData.set(
+                        'isDisabled',
+                        !assessment.get('classroom_play_enabled')
+                      );
+                    }
+                  });
+              } else if (isExternalAssessment) {
+                return component
+                  .get('assessmentService')
+                  .readExternalAssessment(collectionId)
+                  .then(function(assessment) {
+                    const attemptsSettings = assessment.get('attempts');
+                    if (attemptsSettings) {
+                      const noMoreAttempts =
+                        attempts &&
+                        attemptsSettings > 0 &&
+                        attempts >= attemptsSettings;
+                      collectionPerformanceData.set(
+                        'noMoreAttempts',
+                        noMoreAttempts
+                      );
+                      collectionPerformanceData.set(
+                        'isDisabled',
+                        !assessment.get('classroom_play_enabled')
+                      );
+                    }
+                  });
+              } else {
+                return Ember.RSVP.resolve(true);
               }
-            });
-            Ember.RSVP.all(promises).then(resolve, reject);
+            }
           });
+          Ember.RSVP.all(promises).then(resolve, reject);
+        });
       });
     },
 
@@ -947,134 +942,128 @@ export default Ember.Component.extend(
       const component = this;
       return new Ember.RSVP.Promise(function(resolve, reject) {
         const classMinScore = component.get('currentClass.minScore');
-        Ember.RSVP
-          .hash({
-            performanceAssessment: component
-              .get('learnerService')
-              .fetchPerformanceLesson(
-                courseId,
-                unitId,
-                lessonId,
-                CONTENT_TYPES.ASSESSMENT
-              ),
-            performanceCollection: component
-              .get('learnerService')
-              .fetchPerformanceLesson(
-                courseId,
-                unitId,
-                lessonId,
-                CONTENT_TYPES.COLLECTION
-              )
-          })
-          .then(({ performanceAssessment, performanceCollection }) => {
-            let performance = performanceAssessment.concat(
-              performanceCollection
+        Ember.RSVP.hash({
+          performanceAssessment: component
+            .get('learnerService')
+            .fetchPerformanceLesson(
+              courseId,
+              unitId,
+              lessonId,
+              CONTENT_TYPES.ASSESSMENT
+            ),
+          performanceCollection: component
+            .get('learnerService')
+            .fetchPerformanceLesson(
+              courseId,
+              unitId,
+              lessonId,
+              CONTENT_TYPES.COLLECTION
+            )
+        }).then(({ performanceAssessment, performanceCollection }) => {
+          let performance = performanceAssessment.concat(performanceCollection);
+          const promises = collections.map(function(collection) {
+            const collectionId = collection.get('id');
+            const isAssessment = collection.get('format') === 'assessment';
+            const isExternalAssessment =
+              collection.get('format') === 'assessment-external';
+            const isResource =
+              collection.get('format') !== 'assessment' &&
+              collection.get('format') !== 'assessment-external' &&
+              collection.get('format') !== 'collection';
+            const peer = lessonPeers.findBy('id', collectionId);
+            if (peer) {
+              component
+                .get('profileService')
+                .readMultipleProfiles(peer.get('peerIds'))
+                .then(function(profiles) {
+                  collection.set('members', profiles);
+                });
+            }
+
+            collection.set('isResource', isResource);
+
+            const collectionPerformanceData = performance.findBy(
+              'collectionId',
+              collectionId
             );
-            const promises = collections.map(function(collection) {
-              const collectionId = collection.get('id');
-              const isAssessment = collection.get('format') === 'assessment';
-              const isExternalAssessment =
-                collection.get('format') === 'assessment-external';
-              const isResource =
-                collection.get('format') !== 'assessment' &&
-                collection.get('format') !== 'assessment-external' &&
-                collection.get('format') !== 'collection';
-              const peer = lessonPeers.findBy('id', collectionId);
-              if (peer) {
-                component
-                  .get('profileService')
-                  .readMultipleProfiles(peer.get('peerIds'))
-                  .then(function(profiles) {
-                    collection.set('members', profiles);
-                  });
-              }
-
-              collection.set('isResource', isResource);
-
-              const collectionPerformanceData = performance.findBy(
-                'collectionId',
-                collectionId
+            if (collectionPerformanceData) {
+              const score = collectionPerformanceData.get('scoreInPercentage');
+              const timeSpent = collectionPerformanceData.get('timeSpent');
+              const completionDone = collectionPerformanceData.get(
+                'completedCount'
               );
-              if (collectionPerformanceData) {
-                const score = collectionPerformanceData.get(
-                  'scoreInPercentage'
-                );
-                const timeSpent = collectionPerformanceData.get('timeSpent');
-                const completionDone = collectionPerformanceData.get(
-                  'completedCount'
-                );
-                const completionTotal = collectionPerformanceData.get(
-                  'totalCount'
-                );
-                const hasStarted = score > 0 || timeSpent > 0;
-                const isCompleted =
-                  completionDone > 0 && completionDone >= completionTotal;
-                const hasTrophy =
-                  score && score > 0 && classMinScore && score >= classMinScore;
+              const completionTotal = collectionPerformanceData.get(
+                'totalCount'
+              );
+              const hasStarted = score > 0 || timeSpent > 0;
+              const isCompleted =
+                completionDone > 0 && completionDone >= completionTotal;
+              const hasTrophy =
+                score && score > 0 && classMinScore && score >= classMinScore;
 
-                collectionPerformanceData.set('timeSpent', timeSpent);
-                collectionPerformanceData.set('hasTrophy', hasTrophy);
-                collectionPerformanceData.set('hasStarted', hasStarted);
-                collectionPerformanceData.set('isCompleted', isCompleted);
+              collectionPerformanceData.set('timeSpent', timeSpent);
+              collectionPerformanceData.set('hasTrophy', hasTrophy);
+              collectionPerformanceData.set('hasStarted', hasStarted);
+              collectionPerformanceData.set('isCompleted', isCompleted);
 
-                collection.set('performance', collectionPerformanceData);
+              collection.set('performance', collectionPerformanceData);
 
-                let showTrophy =
-                  collection.get('performance.hasTrophy') &&
-                  component.get('isStudent') &&
-                  !collection.get('collectionSubType');
-                collection.set('showTrophy', showTrophy);
+              let showTrophy =
+                collection.get('performance.hasTrophy') &&
+                component.get('isStudent') &&
+                !collection.get('collectionSubType');
+              collection.set('showTrophy', showTrophy);
 
-                const attempts = collectionPerformanceData.get('attempts');
-                if (isAssessment) {
-                  return component
-                    .get('assessmentService')
-                    .readAssessment(collectionId)
-                    .then(function(assessment) {
-                      const attemptsSettings = assessment.get('attempts');
-                      if (attemptsSettings) {
-                        const noMoreAttempts =
-                          attempts &&
-                          attemptsSettings > 0 &&
-                          attempts >= attemptsSettings;
-                        collectionPerformanceData.set(
-                          'noMoreAttempts',
-                          noMoreAttempts
-                        );
-                        collectionPerformanceData.set(
-                          'isDisabled',
-                          !assessment.get('classroom_play_enabled')
-                        );
-                      }
-                    });
-                } else if (isExternalAssessment) {
-                  return component
-                    .get('assessmentService')
-                    .readExternalAssessment(collectionId)
-                    .then(function(assessment) {
-                      const attemptsSettings = assessment.get('attempts');
-                      if (attemptsSettings) {
-                        const noMoreAttempts =
-                          attempts &&
-                          attemptsSettings > 0 &&
-                          attempts >= attemptsSettings;
-                        collectionPerformanceData.set(
-                          'noMoreAttempts',
-                          noMoreAttempts
-                        );
-                        collectionPerformanceData.set(
-                          'isDisabled',
-                          !assessment.get('classroom_play_enabled')
-                        );
-                      }
-                    });
-                } else {
-                  return Ember.RSVP.resolve(true);
-                }
+              const attempts = collectionPerformanceData.get('attempts');
+              if (isAssessment) {
+                return component
+                  .get('assessmentService')
+                  .readAssessment(collectionId)
+                  .then(function(assessment) {
+                    const attemptsSettings = assessment.get('attempts');
+                    if (attemptsSettings) {
+                      const noMoreAttempts =
+                        attempts &&
+                        attemptsSettings > 0 &&
+                        attempts >= attemptsSettings;
+                      collectionPerformanceData.set(
+                        'noMoreAttempts',
+                        noMoreAttempts
+                      );
+                      collectionPerformanceData.set(
+                        'isDisabled',
+                        !assessment.get('classroom_play_enabled')
+                      );
+                    }
+                  });
+              } else if (isExternalAssessment) {
+                return component
+                  .get('assessmentService')
+                  .readExternalAssessment(collectionId)
+                  .then(function(assessment) {
+                    const attemptsSettings = assessment.get('attempts');
+                    if (attemptsSettings) {
+                      const noMoreAttempts =
+                        attempts &&
+                        attemptsSettings > 0 &&
+                        attempts >= attemptsSettings;
+                      collectionPerformanceData.set(
+                        'noMoreAttempts',
+                        noMoreAttempts
+                      );
+                      collectionPerformanceData.set(
+                        'isDisabled',
+                        !assessment.get('classroom_play_enabled')
+                      );
+                    }
+                  });
+              } else {
+                return Ember.RSVP.resolve(true);
               }
-            });
-            Ember.RSVP.all(promises).then(resolve, reject);
+            }
           });
+          Ember.RSVP.all(promises).then(resolve, reject);
+        });
       });
     },
     /**

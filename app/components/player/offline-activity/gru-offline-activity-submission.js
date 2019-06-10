@@ -106,52 +106,50 @@ export default Ember.Component.extend({
   loadTaskSubmissionData() {
     const component = this;
     component.set('isLoading', true);
-    return Ember.RSVP
-      .hash({
-        tasksSubmissions: component.fetchTasksSubmissions()
-      })
-      .then(({ tasksSubmissions }) => {
-        if (!component.isDestroyed) {
-          let studentTasksSubmissions = tasksSubmissions.get('tasks');
-          let activityTasks = component.get('offlineActivity.tasks');
-          let oaRubrics = tasksSubmissions.get('oaRubrics');
-          let submittedTimespentInMillisec = oaRubrics
-            ? oaRubrics.get('studentGrades.timeSpent')
-            : 0;
-          activityTasks.map(task => {
-            let studentTaskSubmissions = studentTasksSubmissions.findBy(
-              'taskId',
-              task.get('id')
+    return Ember.RSVP.hash({
+      tasksSubmissions: component.fetchTasksSubmissions()
+    }).then(({ tasksSubmissions }) => {
+      if (!component.isDestroyed) {
+        let studentTasksSubmissions = tasksSubmissions.get('tasks');
+        let activityTasks = component.get('offlineActivity.tasks');
+        let oaRubrics = tasksSubmissions.get('oaRubrics');
+        let submittedTimespentInMillisec = oaRubrics
+          ? oaRubrics.get('studentGrades.timeSpent')
+          : 0;
+        activityTasks.map(task => {
+          let studentTaskSubmissions = studentTasksSubmissions.findBy(
+            'taskId',
+            task.get('id')
+          );
+          if (studentTaskSubmissions) {
+            task.set(
+              'studentTaskSubmissions',
+              studentTaskSubmissions.get('submissions')
             );
-            if (studentTaskSubmissions) {
+            let recentTaskSubmission = studentTaskSubmissions
+              .get('submissions')
+              .get('lastObject');
+            if (recentTaskSubmission) {
               task.set(
-                'studentTaskSubmissions',
-                studentTaskSubmissions.get('submissions')
+                'submissionText',
+                recentTaskSubmission.get('submissionText')
               );
-              let recentTaskSubmission = studentTaskSubmissions
-                .get('submissions')
-                .get('lastObject');
-              if (recentTaskSubmission) {
-                task.set(
-                  'submissionText',
-                  recentTaskSubmission.get('submissionText')
-                );
-              }
             }
-          });
-          if (submittedTimespentInMillisec) {
-            component.set(
-              'timespentInMilliSecCopy',
-              submittedTimespentInMillisec
-            );
-            component.formatMillisecondsToHourMinute(
-              formatTimeInMilliSec(submittedTimespentInMillisec)
-            );
           }
-          component.set('activityTasks', activityTasks);
-          component.set('isLoading', false);
+        });
+        if (submittedTimespentInMillisec) {
+          component.set(
+            'timespentInMilliSecCopy',
+            submittedTimespentInMillisec
+          );
+          component.formatMillisecondsToHourMinute(
+            formatTimeInMilliSec(submittedTimespentInMillisec)
+          );
         }
-      });
+        component.set('activityTasks', activityTasks);
+        component.set('isLoading', false);
+      }
+    });
   },
 
   /**

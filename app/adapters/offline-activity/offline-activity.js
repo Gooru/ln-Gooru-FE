@@ -14,6 +14,8 @@ export default Ember.Object.extend({
 
   insightsNamespce: '/api/nucleus-insights/v2/oa',
 
+  copierNamespace: '/api/nucleus/v2/copier/offline-activities',
+
   /**
    * Posts a new activity
    *

@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {
-  formatDate
-} from 'gooru-web/utils/utils';
+import { formatDate } from 'gooru-web/utils/utils';
 
 /**
  * Adapter ActivityPerformanceSummary

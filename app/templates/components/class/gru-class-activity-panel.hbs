@@ -54,7 +54,7 @@
         </span>
       </div>
       <div class="performance">
-        <div class="dca-panel-actions-performance {{if isOfflineActivity 'disable-event'}}">
+        <div class="dca-panel-actions-performance">
           {{#if collectionPerformanceSummary}}
             {{#if (and (not-eq item.collectionType 'collection' ) (not-eq item.collectionType 'collection-external'))}}
               <div class="dca-panel-performance" {{action 'openDcaContentReport' classActivity}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">

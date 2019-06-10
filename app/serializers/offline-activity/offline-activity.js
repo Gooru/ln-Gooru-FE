@@ -1,12 +1,10 @@
 import Ember from 'ember';
-import {
-  cleanFilename,
-  nullIfEmpty
-} from 'gooru-web/utils/utils';
+import { cleanFilename, nullIfEmpty } from 'gooru-web/utils/utils';
 import {
   DEFAULT_IMAGES,
   ASSESSMENT_SHOW_VALUES,
-  OA_TASK_SUBMISSION_TYPES
+  OA_TASK_SUBMISSION_TYPES,
+  CONTENT_TYPES
 } from 'gooru-web/config/config';
 import TaxonomySerializer from 'gooru-web/serializers/taxonomy/taxonomy';
 import ActivityModel from 'gooru-web/models/content/activity';
@@ -117,9 +115,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
       },
       setting: {
         bidirectional_play: activityModel.get('bidirectional') || false,
-        show_feedback: activityModel.get('showFeedback') || ASSESSMENT_SHOW_VALUES.SUMMARY,
-        show_key: activityModel.get('showKey') ?
-          ASSESSMENT_SHOW_VALUES.SUMMARY : ASSESSMENT_SHOW_VALUES.NEVER,
+        show_feedback:
+          activityModel.get('showFeedback') || ASSESSMENT_SHOW_VALUES.SUMMARY,
+        show_key: activityModel.get('showKey')
+          ? ASSESSMENT_SHOW_VALUES.SUMMARY
+          : ASSESSMENT_SHOW_VALUES.NEVER,
         attempts_allowed: activityModel.get('attempts') || -1,
         classroom_play_enabled: true
       }
@@ -136,6 +136,18 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
+   * Serialize the Offline Activity title
+   *
+   * @param title
+   * @returns {Object} returns a JSON Object
+   */
+  serializeUpdateActivityTitle: function(title) {
+    return {
+      title
+    };
+  },
+
+  /**
    * Normalize the Activity data into a Activity object
    * @param activityData
    * @returns {Question}
@@ -145,37 +157,44 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const basePath = serializer.get('session.cdnUrls.content');
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
 
-    const thumbnailUrl = activityData.thumbnail ?
-      basePath + activityData.thumbnail :
-      appRootPath + DEFAULT_IMAGES.OFFLINE_ACTIVITY;
+    const thumbnailUrl = activityData.thumbnail
+      ? basePath + activityData.thumbnail
+      : appRootPath + DEFAULT_IMAGES.OFFLINE_ACTIVITY;
 
     const metadata = activityData.metadata || {};
     const settings = activityData.setting || {};
 
     let normalizedActivity = ActivityModel.create(
-      Ember.getOwner(this).ownerInjection(), {
-        id: activityData.target_collection_id ||
+      Ember.getOwner(this).ownerInjection(),
+      {
+        id:
+          activityData.target_collection_id ||
           activityData.suggested_content_id ||
           activityData.id,
         pathId: activityData.id,
         title: activityData.title,
         learningObjectives: activityData.learning_objective,
-        isVisibleOnProfile: typeof activityData.visible_on_profile !== 'undefined' ?
-          activityData.visible_on_profile : true,
+        isVisibleOnProfile:
+          typeof activityData.visible_on_profile !== 'undefined'
+            ? activityData.visible_on_profile
+            : true,
         tasks: serializer.normalizeTasks(activityData.oa_tasks),
         taskCount: activityData.oa_tasks ? activityData.oa_tasks.length : 0,
 
         sequence: activityData.sequence_id,
         thumbnailUrl: thumbnailUrl,
-        classroom_play_enabled: settings.classroom_play_enabled !== undefined ?
-          settings.classroom_play_enabled : true,
+        classroom_play_enabled:
+          settings.classroom_play_enabled !== undefined
+            ? settings.classroom_play_enabled
+            : true,
         standards: serializer
           .get('taxonomySerializer')
           .normalizeTaxonomyObject(activityData.taxonomy),
-        format: activityData.format ||
+        format:
+          activityData.format ||
           activityData.target_content_type ||
           activityData.suggested_content_type ||
-          'Offline-activity',
+          CONTENT_TYPES.OFFLINE_ACTIVITY,
         subFormat: activityData.subformat,
         reference: activityData.reference,
         exemplar: activityData.exemplar,
@@ -184,28 +203,38 @@ export default Ember.Object.extend(ConfigurationMixin, {
         url: activityData.url,
         ownerId: activityData.owner_id,
         metadata: metadata,
-        audience: metadata.audience && metadata.audience.length > 0 ?
-          metadata.audience : [],
-        depthOfknowledge: metadata.depth_of_knowledge && metadata.depth_of_knowledge.length > 0 ?
-          metadata.depth_of_knowledge : [],
-        courseId: activityData.target_course_id ||
+        audience:
+          metadata.audience && metadata.audience.length > 0
+            ? metadata.audience
+            : [],
+        depthOfknowledge:
+          metadata.depth_of_knowledge && metadata.depth_of_knowledge.length > 0
+            ? metadata.depth_of_knowledge
+            : [],
+        courseId:
+          activityData.target_course_id ||
           activityData.suggested_course_id ||
           activityData.course_id,
-        unitId: activityData.target_unit_id ||
+        unitId:
+          activityData.target_unit_id ||
           activityData.suggested_unit_id ||
           activityData.unit_id,
-        lessonId: activityData.target_lesson_id ||
+        lessonId:
+          activityData.target_lesson_id ||
           activityData.suggested_lesson_id ||
           activityData.lesson_id,
-        collectionSubType: activityData.target_content_subtype ||
+        collectionSubType:
+          activityData.target_content_subtype ||
           activityData.suggested_content_subtype,
         attempts: settings.attempts_allowed || -1,
         bidirectional: settings.bidirectional_play || false,
         showFeedback: settings.show_feedback || ASSESSMENT_SHOW_VALUES.SUMMARY,
         showKey: settings.show_key === ASSESSMENT_SHOW_VALUES.SUMMARY,
-        centurySkills: metadata['21_century_skills'] &&
-          metadata['21_century_skills'].length > 0 ?
-          metadata['21_century_skills'] : [],
+        centurySkills:
+          metadata['21_century_skills'] &&
+          metadata['21_century_skills'].length > 0
+            ? metadata['21_century_skills']
+            : [],
         durationHours: activityData.duration_hours || 0
       }
     );
@@ -249,8 +278,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
       oaTaskSubmissions: serializer.normalizeSubmissions(
         item.oa_tasks_submissions
       ),
-      submissionCount: item.oa_tasks_submissions ?
-        item.oa_tasks_submissions.length : 0
+      submissionCount: item.oa_tasks_submissions
+        ? item.oa_tasks_submissions.length
+        : 0
     });
   },
 
@@ -260,7 +290,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
       return payload.collection_subformat_type.map(function(item) {
         return Ember.Object.create({
           code: item,
-          display_name: serializer.get('i18n').t(`common.subtask.${item}`).string ||
+          display_name:
+            serializer.get('i18n').t(`common.subtask.${item}`).string ||
             `common.subtask.${item}`
         });
       });
@@ -331,8 +362,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const gradeItems = payload.gradeItems;
     return Ember.Object.create({
       classId: payload.classId,
-      gradeItems: gradeItems ?
-        gradeItems.map(item => serializer.normalizeGradeActivity(item)) : []
+      gradeItems: gradeItems
+        ? gradeItems.map(item => serializer.normalizeGradeActivity(item))
+        : []
     });
   },
 
@@ -362,8 +394,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
     let oaRubrics = serializer.normalizeRubricGrade(response.oaRubrics);
     return Ember.Object.create({
       oaRubrics,
-      tasks: response.tasks ?
-        response.tasks.map(task => serializer.normalizeGradeTasks(task)) : []
+      tasks: response.tasks
+        ? response.tasks.map(task => serializer.normalizeGradeTasks(task))
+        : []
     });
   },
 
@@ -376,10 +409,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
     let serializer = this;
     return Ember.Object.create({
       taskId: payload.taskId,
-      submissions: payload.submissions ?
-        payload.submissions.map(submission =>
+      submissions: payload.submissions
+        ? payload.submissions.map(submission =>
           serializer.normalizeGradeSubmission(submission)
-        ) : []
+        )
+        : []
     });
   },
 
@@ -420,10 +454,12 @@ export default Ember.Object.extend(ConfigurationMixin, {
   normalizeRubricGrade(payload) {
     let serializer = this;
     return Ember.Object.create({
-      studentGrades: payload.studentGrades ?
-        serializer.normalizeGrade(payload.studentGrades) : null,
-      teacherGrades: payload.teacherGrades ?
-        serializer.normalizeGrade(payload.teacherGrades) : null
+      studentGrades: payload.studentGrades
+        ? serializer.normalizeGrade(payload.studentGrades)
+        : null,
+      teacherGrades: payload.teacherGrades
+        ? serializer.normalizeGrade(payload.teacherGrades)
+        : null
     });
   },
 
@@ -442,10 +478,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
       score: Math.round(parseInt(payload.studentScore)),
       submittedOn: payload.submittedOn,
       timeSpent: payload.timeSpent,
-      categoryGrade: payload.categoryScore ?
-        payload.categoryScore.map(item =>
+      categoryGrade: payload.categoryScore
+        ? payload.categoryScore.map(item =>
           serializer.get('rubricSerializer').normalizeCategoryScore(item)
-        ) : []
+        )
+        : []
     });
   },
 
@@ -461,18 +498,20 @@ export default Ember.Object.extend(ConfigurationMixin, {
       session_id: nullIfEmpty(payload.get('sessionId')),
       grader: 'teacher',
       grader_id: this.get('session.userId'),
-      student_score: payload.get('studentScore') ?
-        parseInt(payload.get('studentScore')) : parseInt(payload.get('currentScore')),
+      student_score: payload.get('studentScore')
+        ? parseInt(payload.get('studentScore'))
+        : parseInt(payload.get('currentScore')),
       max_score: payload.get('maxScore'),
       overall_comment: payload.get('comment'),
-      category_score: payload.get('categoriesScore').length ?
-        payload
+      category_score: payload.get('categoriesScore').length
+        ? payload
           .get('categoriesScore')
           .map(category =>
             this.get('rubricSerializer').serializedStudentGradeCategoryScore(
               category
             )
-          ) : null
+          )
+        : null
     });
   },
 

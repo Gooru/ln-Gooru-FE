@@ -336,20 +336,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     );
     let windowHeight = $(window).height();
     if (offlineActivityEle.hasClass('active')) {
-      offlineActivityEle.animate({
-        top: windowHeight - 50
-      },
-      400,
-      function() {
-        offlineActivityEle.removeClass('active');
-      }
+      offlineActivityEle.animate(
+        {
+          top: windowHeight - 50
+        },
+        400,
+        function() {
+          offlineActivityEle.removeClass('active');
+        }
       );
     } else {
       offlineActivityEle.addClass('active');
-      offlineActivityEle.animate({
-        top: 100
-      },
-      400
+      offlineActivityEle.animate(
+        {
+          top: 100
+        },
+        400
       );
     }
   }
