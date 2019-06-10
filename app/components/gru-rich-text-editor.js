@@ -110,7 +110,6 @@ export default Ember.Component.extend({
     });
 
     component.set('editor', editor);
-
     /**
      * Function to run on load
      */
@@ -137,7 +136,10 @@ export default Ember.Component.extend({
     }
 
     // observe load Event
-    editor.on('load', onLoad);
+    editor.on('load', function() {
+      editor.focus();
+      onLoad();
+    });
 
     // Add expression to MathQuill field
     component.$().on('click', '.tab-pane a', function(e) {
