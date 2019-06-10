@@ -250,8 +250,27 @@
   }
 
   #task {
+    .add-item {
+      font-size: 20px;
+      border: 0px;
+      // background-color: transparent;
+    }
     .actions {
       float: right;
+    }
+
+    .actions-top {
+      float: initial;
+      display: inline-block;
+      padding: 8px 0 0 8px;
+      vertical-align: top;
+      button {
+        background-color: transparent;
+        font-size: $font-size-h4;
+        line-height: 1;
+        margin: 0 2px 0 1px;
+        padding: 0;
+      }
     }
 
     .upload-section {
@@ -352,7 +371,7 @@
         vertical-align: top;
         border-left: 1px solid $gray-light;
         border-right: 1px solid $gray-light;
-        width: 90%;
+        width: 88%;
         h3 {
           margin: 13px 10px 14px;
         }
