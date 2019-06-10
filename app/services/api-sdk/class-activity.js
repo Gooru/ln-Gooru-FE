@@ -360,7 +360,7 @@ export default Ember.Service.extend({
    * @param {string} classId
    * @returns {Promise}
    */
-  fetchCompletedOfflineActivities(classId) {
+  fetchCompletedOfflineActivities(classId, userId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
@@ -370,7 +370,12 @@ export default Ember.Service.extend({
           const classActivities = service
             .get('classActivitySerializer')
             .normalizeFindClassActivities(payload);
-          resolve(classActivities);
+          service.findStudentOfflineActivitiesPerformanceSummary(
+            classId,
+            classActivities,
+            userId
+          )
+            .then(resolve, reject);
         }, function(error) {
           reject(error);
         });
@@ -441,6 +446,46 @@ export default Ember.Service.extend({
             )
             .then(resolve, reject);
         });
+    });
+  },
+
+  /**
+   * Gets all performance of offline class activity for the authorized user (student|teacher)
+   * @param {string} userId
+   * @param {string} classId
+   * @param {ClassActivity[]} classActivities
+   * @returns {Promise.<ClassActivity[]>}
+   */
+  findStudentOfflineActivitiesPerformanceSummary: function(
+    classId,
+    classActivities,
+    userId
+  ) {
+    const service = this;
+    const performanceService = service.get('performanceService');
+    let oaIds = classActivities.mapBy('id');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      if (oaIds.length) {
+        performanceService.findOfflineClassActivityPerformanceSummaryByIds(classId, oaIds, userId)
+          .then(function(performances) {
+            performances.forEach(performance => {
+              let classActivity = classActivities
+                .filterBy('id', performance.get('collectionPerformanceSummary.dcaContentId'))
+                .filterBy(
+                  'collection.id',
+                  performance.get('collectionPerformanceSummary.collectionId')
+                ).objectAt(0);
+
+              if (classActivity) {
+                let performanceData = performance.get(
+                  'collectionPerformanceSummary'
+                );
+                classActivity.set('collection.performance', performanceData);
+              }
+            });
+          }, reject);
+      }
+      resolve(classActivities);
     });
   },
 

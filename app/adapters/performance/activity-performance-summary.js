@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { formatDate } from 'gooru-web/utils/utils';
+import {
+  formatDate
+} from 'gooru-web/utils/utils';
 
 /**
  * Adapter ActivityPerformanceSummary
@@ -49,6 +51,28 @@ export default Ember.Object.extend({
         resolve(responseData);
       }, reject);
     });
+  },
+
+  /**
+   * @function findClassActivityPerformanceSummaryByIds
+   * Get performance of offline class activity
+   */
+  findOfflineClassActivityPerformanceSummaryByIds(classId, oaIds, userId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/class/${classId}/activity`;
+    const options = {
+      type: 'POST',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: JSON.stringify({
+        dcaContentIds: oaIds,
+        collectionType: 'offline-activity',
+        userId
+      })
+    };
+    return Ember.$.ajax(url, options);
   },
 
   defineHeaders: function() {
