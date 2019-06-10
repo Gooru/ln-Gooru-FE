@@ -2587,5 +2587,6 @@ export default Object.assign(quizzesTranslations, {
   'oa.position_paper': 'Position Paper',
   'oa.lab_report': 'Report',
   'oa.explanation_argument': 'Explanation Argument',
-  'oa.debate': 'Debate'
+  'oa.debate': 'Debate',
+  'oa.format': 'Format'
 });
