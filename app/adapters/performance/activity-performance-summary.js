@@ -51,6 +51,28 @@ export default Ember.Object.extend({
     });
   },
 
+  /**
+   * @function findClassActivityPerformanceSummaryByIds
+   * Get performance of offline class activity
+   */
+  findOfflineClassActivityPerformanceSummaryByIds(classId, oaIds, userId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/class/${classId}/activity`;
+    const options = {
+      type: 'POST',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: JSON.stringify({
+        dcaContentIds: oaIds,
+        collectionType: 'offline-activity',
+        userId
+      })
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

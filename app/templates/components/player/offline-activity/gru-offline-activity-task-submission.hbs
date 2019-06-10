@@ -39,10 +39,7 @@
             <p>{{task.submissionText}}</p>
           {{else}}
             <div class="input-container">
-              {{input type="text"
-            value=task.submissionText
-            class="submission-text"
-            placeholder="Write your answer here..."}}
+            {{gru-rich-text-editor isCustomEditor=true content=task.submissionText isAutoFocusDisabled="true"}}
             </div>
           {{/if}}
         </div>

@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['uploaded-item'],
   /**------------------------------------------------------------------------------------------------
-   * list task, update parent for removal
+   * list submission, update parent for removal
    * ------------------------------------------------------------------------------------------------*/
 
   // -------------------------------------------------------------------------

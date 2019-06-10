@@ -315,9 +315,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   loadCompeltedOfflineActivities() {
     const controller = this;
     const classId = controller.get('classId');
+    const userId = controller.get('session.userId');
     controller
       .get('classActivityService')
-      .fetchCompletedOfflineActivities(classId)
+      .fetchCompletedOfflineActivities(classId, userId)
       .then(completedOfflineActivities => {
         controller.set(
           'completedOfflineActivities',

@@ -1214,5 +1214,25 @@ export default Ember.Service.extend({
           }
         );
     });
+  },
+
+  /**
+   * Get performance of offline class activity
+   * @returns {Promise.<[]>}
+   */
+  findOfflineClassActivityPerformanceSummaryByIds: function(
+    classId,
+    oaIds,
+    userId
+  ) {
+    const service = this;
+    return service
+      .get('activityPerformanceSummaryAdapter')
+      .findOfflineClassActivityPerformanceSummaryByIds(classId, oaIds, userId)
+      .then(function(data) {
+        return service
+          .get('activityPerformanceSummarySerializer')
+          .normalizeAllActivityPerformanceSummary(data);
+      });
   }
 });

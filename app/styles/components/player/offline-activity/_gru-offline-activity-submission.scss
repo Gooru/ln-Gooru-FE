@@ -42,8 +42,6 @@
       background-color: $white;
       margin-bottom: 15px;
       padding: 15px;
-      //TODO need to enable it once api support is added
-      display: none;
       .timespent-info-container {
         display: grid;
         grid-template-columns: 30px 1fr 48px;
@@ -81,7 +79,7 @@
             .hour-picker,
             .minute-picker {
               .down-arrow {
-                pointer-events: none;
+                display: none;
               }
             }
           }

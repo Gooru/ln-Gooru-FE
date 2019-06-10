@@ -209,6 +209,7 @@ export default Ember.Component.extend({
     'task.urls.@each.value',
     'task.files.[]',
     'task.submissionText',
+    'isValidTimespent',
     function() {
       const component = this;
       let addedUrls = component.get('task.ulrs')
@@ -220,7 +221,10 @@ export default Ember.Component.extend({
         ? component.get('task.files').length
         : false;
       let addedAnswerText = component.get('task.submissionText');
-      return addedUrls || addedFiles || addedAnswerText;
+      return (
+        (addedUrls || addedFiles || addedAnswerText) &&
+        component.get('isValidTimespent')
+      );
     }
   ),
 
@@ -353,17 +357,15 @@ export default Ember.Component.extend({
   uploadFileIntoS3(fileObject) {
     const component = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      return Ember.RSVP
-        .hash({
-          fileLocation: component
-            .get('mediaService')
-            .uploadContentFile(fileObject)
-        })
-        .then(({ fileLocation }) => {
-          let cdnUrls = component.get('session.cdnUrls');
-          let UUIDFileName = cleanFilename(fileLocation, cdnUrls);
-          return resolve((fileObject.UUIDFileName = UUIDFileName));
-        }, reject);
+      return Ember.RSVP.hash({
+        fileLocation: component
+          .get('mediaService')
+          .uploadContentFile(fileObject)
+      }).then(({ fileLocation }) => {
+        let cdnUrls = component.get('session.cdnUrls');
+        let UUIDFileName = cleanFilename(fileLocation, cdnUrls);
+        return resolve((fileObject.UUIDFileName = UUIDFileName));
+      }, reject);
     });
   },
 
@@ -391,6 +393,7 @@ export default Ember.Component.extend({
     const caContentId = component.get('caContentId');
     let taskSubmissions = [];
     let uploadedFiles = task.get('files');
+    let timespentInMilliSec = component.get('timespentInMilliSec');
     uploadedFiles.map(uploadedFile => {
       let submissionContext = Ember.Object.create({
         submissionValue: uploadedFile.UUIDFileName,
@@ -435,7 +438,8 @@ export default Ember.Component.extend({
       oa_dca_id: parseInt(caContentId),
       oa_id: task.get('oaId'),
       content_source: contentSource,
-      submissions: taskSubmissions
+      submissions: taskSubmissions,
+      time_spent: timespentInMilliSec
     };
   },
 

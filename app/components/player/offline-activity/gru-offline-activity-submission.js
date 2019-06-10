@@ -1,5 +1,8 @@
 import Ember from 'ember';
-import { getTimeInMillisec } from 'gooru-web/utils/utils';
+import {
+  getTimeInMillisec,
+  formatTime as formatTimeInMilliSec
+} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -75,9 +78,20 @@ export default Ember.Component.extend({
   ),
 
   /**
+   * @property {Number} timespentInMilliSecCopy
+   * Property for copied version of timespent in millisec
+   */
+  timespentInMilliSecCopy: 0,
+
+  /**
    * @property {Boolean} isEnableSaveTimespent
    */
-  isEnableSaveTimespent: Ember.computed.gt('timespentInMilliSec', 0),
+  isEnableSaveTimespent: Ember.computed('timespentInMilliSec', function() {
+    const component = this;
+    const timespentInMilliSec = component.get('timespentInMilliSec');
+    const timespentInMilliSecCopy = component.get('timespentInMilliSecCopy');
+    return timespentInMilliSec > timespentInMilliSecCopy;
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -89,35 +103,50 @@ export default Ember.Component.extend({
   loadTaskSubmissionData() {
     const component = this;
     component.set('isLoading', true);
-    return Ember.RSVP
-      .hash({
-        tasksSubmissions: component.fetchTasksSubmissions()
-      })
-      .then(({ tasksSubmissions }) => {
-        if (!component.isDestroyed) {
-          let studentTasksSubmissions = tasksSubmissions.get('tasks');
-          let activityTasks = component.get('offlineActivity.tasks');
-          activityTasks.map(task => {
-            let studentTaskSubmissions = studentTasksSubmissions.findBy(
-              'taskId',
-              task.get('id')
+    return Ember.RSVP.hash({
+      tasksSubmissions: component.fetchTasksSubmissions()
+    }).then(({ tasksSubmissions }) => {
+      if (!component.isDestroyed) {
+        let studentTasksSubmissions = tasksSubmissions.get('tasks');
+        let activityTasks = component.get('offlineActivity.tasks');
+        let oaRubrics = tasksSubmissions.get('oaRubrics');
+        let submittedTimespentInMillisec = oaRubrics
+          ? oaRubrics.get('studentGrades.timeSpent')
+          : 0;
+        activityTasks.map(task => {
+          let studentTaskSubmissions = studentTasksSubmissions.findBy(
+            'taskId',
+            task.get('id')
+          );
+          if (studentTaskSubmissions) {
+            task.set(
+              'studentTaskSubmissions',
+              studentTaskSubmissions.get('submissions')
             );
-            if (studentTaskSubmissions) {
-              task.set(
-                'studentTaskSubmissions',
-                studentTaskSubmissions.get('submissions')
-              );
+            let recentTaskSubmission = studentTaskSubmissions
+              .get('submissions')
+              .get('lastObject');
+            if (recentTaskSubmission) {
               task.set(
                 'submissionText',
-                studentTaskSubmissions.get('submissions').objectAt(0)
-                  .submissionText
+                recentTaskSubmission.get('submissionText')
               );
             }
-          });
-          component.set('activityTasks', activityTasks);
-          component.set('isLoading', false);
+          }
+        });
+        if (submittedTimespentInMillisec) {
+          component.set(
+            'timespentInMilliSecCopy',
+            submittedTimespentInMillisec
+          );
+          component.formatMillisecondsToHourMinute(
+            formatTimeInMilliSec(submittedTimespentInMillisec)
+          );
         }
-      });
+        component.set('activityTasks', activityTasks);
+        component.set('isLoading', false);
+      }
+    });
   },
 
   /**
@@ -132,5 +161,30 @@ export default Ember.Component.extend({
     return component
       .get('oaAnalyticsService')
       .getSubmissionsToGrade(classId, caContentId, userId);
+  },
+
+  /**
+   * @function formatMillisecondsToHourMinute
+   * Method to extract hour and minute from fullstring
+   */
+  formatMillisecondsToHourMinute(timeString) {
+    const component = this;
+    let hour = 0;
+    let minute = 0;
+    if (timeString) {
+      let splittedTime = timeString.split(' ');
+      let firstHalfString = splittedTime[0];
+      let secodHalfString = splittedTime[1];
+      if (firstHalfString.includes('h')) {
+        hour = firstHalfString.slice(0, -1);
+      } else if (firstHalfString.includes('m')) {
+        minute = firstHalfString.slice(0, -1);
+      }
+      if (secodHalfString.includes('m')) {
+        minute = secodHalfString.slice(0, -1);
+      }
+    }
+    component.set('oaTimespentHour', hour);
+    component.set('oaTimespentMinute', minute);
   }
 });

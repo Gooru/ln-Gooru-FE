@@ -598,7 +598,6 @@ export default Ember.Component.extend({
     teacherGrade.set('collectionId', context.get('content.id'));
     teacherGrade.set('contentSource', PLAYER_EVENT_SOURCE.DAILY_CLASS);
     teacherGrade.set('collectionType', PLAYER_EVENT_SOURCE.OFFLINE_CLASS);
-    teacherGrade.set('categoriesScore', categoriesScore);
     categories.forEach(category => {
       let level = null;
       if (category.get('allowsLevels')) {
@@ -614,6 +613,7 @@ export default Ember.Component.extend({
         categoriesScore.pushObject(component.createRubricCategory(category));
       }
     });
+    teacherGrade.set('categoriesScore', categoriesScore);
     component
       .get('oaAnaltyicsService')
       .submitTeacherGrade(teacherGrade)
