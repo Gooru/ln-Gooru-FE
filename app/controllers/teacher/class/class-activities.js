@@ -137,12 +137,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     },
 
     //Action triggered when click preview content
-    onPreviewContent(content) {
+    onPreviewContent(content, caContentId) {
       const controller = this;
       controller.set(
         'previewContentType',
         content.get('format') || content.get('collectionType')
       );
+      controller.set('previewCaContentId', caContentId);
       controller.set('previewContent', content);
       if (controller.get('previewContentType') === 'offline-activity') {
         controller.set('isShowOfflineActivityPreview', true);

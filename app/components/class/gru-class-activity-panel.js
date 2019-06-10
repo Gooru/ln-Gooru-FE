@@ -57,7 +57,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     onPlayContent(content) {
       const component = this;
-      component.sendAction('onPreviewContent', content);
+      const caContentId = this.get('classActivity.id');
+      component.sendAction('onPreviewContent', content, caContentId);
     },
 
     /**
@@ -103,7 +104,12 @@ export default Ember.Component.extend(ConfigurationMixin, {
      * Action get triggered when schedule content to CA got clicked
      */
     onScheduleContentToDCA(classActivity, event) {
-      this.sendAction('onScheduleContentToDCA', classActivity, event, this.get('isUnScheduled'));
+      this.sendAction(
+        'onScheduleContentToDCA',
+        classActivity,
+        event,
+        this.get('isUnScheduled')
+      );
     },
 
     showStudentList() {
@@ -132,14 +138,15 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-      component.sendAction('onClosePullUp', closeAll);
-    }
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+        component.sendAction('onClosePullUp', closeAll);
+      }
     );
   },
 
