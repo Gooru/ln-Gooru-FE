@@ -24,7 +24,7 @@
       <div class="label-container">
         <span class="title-container">Time spent</span>
         <span class="description-container">
-          Please enter the total time spent on the activity
+          {{t 'oa.enter-timespent-label'}}
         </span>
       </div>
       <div class="toggle-container">
@@ -38,7 +38,7 @@
         minute=oaTimespentMinute
       }}
       <div class="save-timespent-action {{unless isEnableSaveTimespent 'disable-event'}}" {{action "onSaveTimespent"}}>
-        Save
+        {{t 'common.save'}}
       </div>
     </div>
   </div>
