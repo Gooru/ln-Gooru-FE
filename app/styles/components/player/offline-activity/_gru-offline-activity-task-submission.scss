@@ -88,22 +88,9 @@
           }
 
           .input-container {
-            input.submission-text {
-              min-width: 70%;
-
-              &::placeholder {
-                font-size: 12px;
-                color: #3e5e67;
-                opacity: 0.7;
-              }
-
-              &:focus {
-                outline: none;
-                border: none;
-
-                &::placeholder {
-                  color: transparent;
-                }
+            .gru-rich-text-editor {
+              .wysihtml5-editor {
+                min-height: 150px;
               }
             }
           }
