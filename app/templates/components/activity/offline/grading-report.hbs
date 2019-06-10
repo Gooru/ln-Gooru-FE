@@ -38,7 +38,7 @@
             </div>
           </div>
         </div>
-        {{#if student.selfGrade}}
+        {{#if student.selfGrade.maxScore}}
           <div class="self-grade-section" style={{safe-html (concat "background-color:" (grade-color studentSelfGrade))}}>
             <div class="label">{{t 'common.self-graded'}}</div>
             <div class="score">

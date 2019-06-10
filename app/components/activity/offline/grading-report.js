@@ -179,7 +179,7 @@ export default Ember.Component.extend({
       let categories = component.get('student.rubric.categories') ?
         component.get('student.rubric.categories') : [];
       let selfGrade = component.get('student.selfGrade');
-      if (selfGrade) {
+      if (selfGrade && selfGrade.get('maxScore')) {
         let studentSelfGradedCategories = selfGrade.get('categoryGrade') ?
           selfGrade.get('categoryGrade') :
           Ember.A([]);
@@ -490,6 +490,7 @@ export default Ember.Component.extend({
       }) => {
         if (!component.get('isDestroyed')) {
           users.map(user => {
+            user.set('isGraded', false);
             let studentRubric = component
               .get('rubric')
               .findBy('isTeacherGrader', false);
@@ -533,6 +534,9 @@ export default Ember.Component.extend({
     let student = component.get('student');
     student.set('selfGrade', studentGrade);
     student.set('teacherGrade', teacherGrade);
+    if (teacherGrade) {
+      student.set('isGraded', true);
+    }
   },
 
   /**
@@ -595,6 +599,7 @@ export default Ember.Component.extend({
     let teacherGrade = component.get('teacherRubric');
     let categories = component.get('categories');
     let context = component.get('context');
+    let currentStudent = component.get('student');
     let categoriesScore = Ember.A([]);
     teacherGrade.set('classId', context.get('classId'));
     teacherGrade.set('dcaContentId', context.get('dcaContentId'));
@@ -621,6 +626,7 @@ export default Ember.Component.extend({
       .get('oaAnaltyicsService')
       .submitTeacherGrade(teacherGrade)
       .then(function() {
+        currentStudent.set('isGraded', true);
         component.slideToNextUser();
       });
   },
@@ -730,8 +736,8 @@ export default Ember.Component.extend({
    */
   slideToNextUser() {
     let component = this;
-    let users = component.get('users');
-    if (users.length > 1) {
+    let users = component.get('users').filterBy('isGraded', false);
+    if (users.length > 0) {
       let studentId = component.get('studentId');
       let users = component.get('users');
       let selectedUser = users.findBy('id', studentId);
@@ -765,6 +771,7 @@ export default Ember.Component.extend({
         }
         component.$().fadeOut(5000, function() {
           component.set('showPullUp', false);
+          component.sendAction('refreshItem');
         });
       });
     }
