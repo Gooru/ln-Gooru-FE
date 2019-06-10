@@ -78,6 +78,9 @@ export default Ember.Component.extend({
       tasksCol.removeObject(task);
       tasksCol.pushObject(task);
       component.get('updateParent')();
+      if (component.get('task')) {
+        component.set('task', null);
+      }
     },
     removeLineItem(task) {
       const component = this;
