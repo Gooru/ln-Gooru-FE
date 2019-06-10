@@ -7,10 +7,26 @@
             <div class="border-bottom">
             </div>
             <div class="content">
-                <div class="switch rubric">
-                    <label class="switch-label">{{t 'common.rubric'}}</label>
-                    {{gru-switch switchOptions=switchOptions isChecked=isTeacherRubrics}}
-                </div>
+                {{#unless isTeacherRubrics}}
+                    <div class="scoring-settings">
+                        <div class="setting maximum-points">
+                            <span class="title">{{t 'content.questions.edit.builder.feedback-grading.maximum-points'}}</span>
+                            {{validation.gru-select options=maximumOptions search="true" optionSelected=tempModel.maxScore onOptionSelect="onMaxScoreChange"}}
+                        </div>
+                        <div class='actions'>
+                            <button class="cancel btn btn-info" {{action 'cancelChanges'}}>{{t "common.cancel"}}</button>
+                            <button class="save btn btn-success" {{action 'updateContent' model}}>{{t "common.save"}}</button>
+                        </div>
+                    </div>
+                {{/unless}}
+                {{#unless (and isTeacherRubrics teacherRubrics.title) }}
+                    <div>
+                        <div class="switch rubric">
+                            <label class="switch-label">{{t 'common.rubric'}}</label>
+                            {{gru-switch switchOptions=switchOptions isChecked=isTeacherRubrics}}
+                        </div>
+                    </div>
+                {{/unless}}
                 {{#if isTeacherRubrics}}
                     {{#if teacherRubrics.title}}
                         <div class="associated-rubric">
@@ -25,9 +41,6 @@
                                 <h3>{{teacherRubrics.title}}</h3>
                             </div>
                             <div class="actions">
-                                {{!-- <button class="btn no-bgd remove-item" {{action 'removeRubric' teacherRubrics.id}}>
-                            {{gru-icon name="remove_circle"}}
-                        </button> --}}
                                 <button {{action 'showAddRubricModal' 'teacher'}} class="btn no-bgd edit-item">
                                     {{gru-icon name="edit"}}
                                 </button>
@@ -47,26 +60,6 @@
                             {{/if}}
                         </div>
                     {{/if}}
-                {{else}}
-                    {{!-- <div class="switch scoring">
-                        <label class="switch-label">{{t 'content.questions.edit.builder.feedback-grading.scoring'}}</label>
-                        {{gru-switch switchOptions=switchOptions isChecked=tempModel.maxScore}}
-                    </div> --}}
-                    {{!-- {{#if tempModel.maxScore}} --}}
-                    <div class="scoring-settings">
-                        <div class="setting maximum-points">
-                            <span class="title">{{t 'content.questions.edit.builder.feedback-grading.maximum-points'}}</span>
-                            {{validation.gru-select options=maximumOptions search="true" optionSelected=tempModel.maxScore onOptionSelect="onMaxScoreChange"}}
-                        </div>
-                        <div class='actions'>
-                            <button class="cancel btn btn-info" {{action 'cancelChanges'}}>{{t "common.cancel"}}</button>
-                            <button class="save btn btn-success" {{action 'updateContent' model}}>{{t "common.save"}}</button>
-                        </div>
-                        {{!-- <div class="actions">
-                            {{partial 'content/partials/information-actions'}}
-                        </div> --}}
-                    </div>
-                    {{!-- {{/if}} --}}
                 {{/if}}
             </div>
         </div>
