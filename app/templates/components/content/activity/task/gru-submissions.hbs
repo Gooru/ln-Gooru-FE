@@ -8,7 +8,6 @@
         {{/each}} --}}
         <div class="upload-section">
             <div class="upload-list-container">
-                {{log 'parsedSubmissions' parsedSubmissions}}
                 {{#each parsedSubmissions as |submission|}}
                     {{content.activity.task.submission.gru-submission-line-item submission=submission  removeLineItem=(action 'removeLineItem') updateSubmissionCollection=(action 'updateContent')  }}
                 {{/each}}

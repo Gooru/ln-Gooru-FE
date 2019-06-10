@@ -21,7 +21,6 @@ export default Ember.Component.extend({
 
     updateSubmissionCollection() {
       const component = this;
-      console.log('updateSubmissionCollection-editline', '1'); //eslint-disable-line
       component.get('updateSubmissionCollection')(
         component.get('submission').taskSubmissionSubType
       );

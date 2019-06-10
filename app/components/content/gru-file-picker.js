@@ -27,7 +27,6 @@ export default Ember.Component.extend({
      * @function actions:enableButtons
      */
     prepareForSubmission(file) {
-      console.log('subType', this.get('subType')); //eslint-disable-line
       this.set('selectedFile', file);
       this.get('onSelectFile')(file, this);
     },

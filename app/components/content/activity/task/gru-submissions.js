@@ -121,33 +121,26 @@ export default Ember.Component.extend({
       .removeTaskSubmission(tasksSubmission);
   },
   parsedSubmissions: Ember.computed('submissions', function() {
-    try {
-      const component = this;
-      let uploadedCol = component
-        .get('submissions')
-        .filter(f => f.taskSubmissionType === 'uploaded');
-      console.log('uploadedCol', uploadedCol); //eslint-disable-line
-      let displayData = Ember.A([]);
-      let allTypes = getOASubType();
+    const component = this;
+    let uploadedCol = component
+      .get('submissions')
+      .filter(f => f.taskSubmissionType === 'uploaded');
+    let displayData = Ember.A([]);
+    let allTypes = getOASubType();
 
-      allTypes.forEach(ref => {
-        let filterCol = uploadedCol.filter(
-          f => f.taskSubmissionSubType === ref.display_name
-        );
-        console.log('filterCol', filterCol); //eslint-disable-line
-        let displayItem = {
-          taskSubmissionSubType: ref.display_name,
-          refData: filterCol,
-          mimeType: ref.mimeType,
-          count: filterCol.length
-        };
-        displayData.pushObject(displayItem);
-      });
-      console.log('displayData > parsedSubmissions', displayData); //eslint-disable-line
-      return displayData;
-    } catch (e) {
-      console.log('e', e); //eslint-disable-line
-    }
+    allTypes.forEach(ref => {
+      let filterCol = uploadedCol.filter(
+        f => f.taskSubmissionSubType === ref.display_name
+      );
+      let displayItem = {
+        taskSubmissionSubType: ref.display_name,
+        refData: filterCol,
+        mimeType: ref.mimeType,
+        count: filterCol.length
+      };
+      displayData.pushObject(displayItem);
+    });
+    return displayData;
   }),
 
   saveTaskSubmission(taskSubmissionSubType) {

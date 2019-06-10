@@ -85,7 +85,6 @@ export default Ember.Component.extend({
 
     let referenceInstance = ReferenceModel.create({ oaId: this.get('oaId') });
     referenceInstance.set('subTypeSel', subTypeSel);
-    console.log('referenceInstance', referenceInstance); //eslint-disable-line
     this.set('model', referenceInstance);
   },
   // -------------------------------------------------------------------------
@@ -97,7 +96,6 @@ export default Ember.Component.extend({
       this.deleteReference(refItem);
     },
     prepareForSubmission(file) {
-      console.log('prepareForSubmission', 'prepareForSubmission'); //eslint-disable-line
       this.set('selectedFile', file);
       this.get('onSelectFile')(file);
     },
@@ -157,7 +155,6 @@ export default Ember.Component.extend({
     selectFile: function(file) {
       let type = 'uploaded';
       if (file) {
-        console.log('fileCtx', file); //eslint-disable-line
         this.set('model.file', file);
         this.set('model.type', type);
         this.set('model.subType', file.extraParam || file.subType);

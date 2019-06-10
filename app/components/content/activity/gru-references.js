@@ -101,7 +101,6 @@ export default Ember.Component.extend({
       .get('activityService')
       .deleteReference(refitem)
       .then(refItem => {
-        console.log('removeObject', refItem); //eslint-disable-line
         let refsCol = component.get('references');
         refsCol.removeObject(refItem);
         component.refreshReference();
@@ -117,30 +116,23 @@ export default Ember.Component.extend({
   },
 
   parsedReference: Ember.computed('references', function() {
-    try {
-      const component = this;
-      let uploadedCol = component
-        .get('references')
-        .filter(f => f.type === 'uploaded');
-      console.log('uploadedCol', uploadedCol); //eslint-disable-line
-      let displayData = Ember.A([]);
-      let allTypes = getOASubType();
+    const component = this;
+    let uploadedCol = component
+      .get('references')
+      .filter(f => f.type === 'uploaded');
+    let displayData = Ember.A([]);
+    let allTypes = getOASubType();
 
-      allTypes.forEach(ref => {
-        let filterCol = uploadedCol.filter(f => f.subType === ref.display_name);
-        console.log('filterCol', filterCol); //eslint-disable-line
-        let displayItem = {
-          subType: ref.display_name,
-          refData: filterCol,
-          mimeType: ref.mimeType,
-          count: filterCol.length
-        };
-        displayData.pushObject(displayItem);
-      });
-      console.log('displayData', displayData); //eslint-disable-line
-      return displayData;
-    } catch (e) {
-      console.log('e', e); //eslint-disable-line
-    }
+    allTypes.forEach(ref => {
+      let filterCol = uploadedCol.filter(f => f.subType === ref.display_name);
+      let displayItem = {
+        subType: ref.display_name,
+        refData: filterCol,
+        mimeType: ref.mimeType,
+        count: filterCol.length
+      };
+      displayData.pushObject(displayItem);
+    });
+    return displayData;
   })
 });

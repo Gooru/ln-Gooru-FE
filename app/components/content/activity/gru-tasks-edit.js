@@ -92,12 +92,6 @@ export default Ember.Component.extend({
     }
   },
 
-  didInsertElement1() {
-    //let component = this;
-    $('#accordion .panel-default').on('click', function() {
-      $('#accordion .panel-collapse').collapse('toggle');
-    });
-  },
   collapseAll() {
     $(
       '#accordion > .gru-tasks-edit > .panel-default > .panel-collapse.collapse.in'
@@ -120,12 +114,21 @@ export default Ember.Component.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
-    console.log('didReceiveAttrs', 'didReceiveAttrs'); //eslint-disable-line
     if (this.get('model') && this.get('model').id) {
-      console.log('Edit mode', 'Enter'); //eslint-disable-line
+      //ToDo: Is this required
     } else {
       let taskInstance = TaskModel.create({ oaId: this.get('oaId') });
       this.set('model', taskInstance);
+    }
+  },
+
+  didInsertElement1() {
+    this._super(...arguments);
+    const component = this;
+    if (this.get('model') && this.get('model').id) {
+      //ToDo: Remove this after checking
+    } else {
+      Ember.run.later(() => component.send('expandTitle'));
     }
   },
 
