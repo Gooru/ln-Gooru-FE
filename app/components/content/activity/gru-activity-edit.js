@@ -36,6 +36,8 @@ export default CollectionEdit.extend({
    */
   activityCollection: null,
 
+  collection: Ember.computed.alias('activityCollection'),
+
   subTaskDisplayValue: Ember.computed(
     'activityCollection.subFormat',
     'activityCollection.formatList',
