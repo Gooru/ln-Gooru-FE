@@ -32,7 +32,6 @@ export default Ember.Component.extend(ModalMixin, {
             rubricsFor: rubricsFor,
             callback: {
               success: function(oaRubric) {
-                console.log('teacherRubrics.oaRubric', oaRubric); //eslint-disable-line
                 if (component.get('isTeacherRubrics')) {
                   component.get('selectedRubric'),
                   component
