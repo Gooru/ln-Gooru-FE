@@ -2617,5 +2617,7 @@ export default Object.assign(quizzesTranslations, {
   'oa.lab_report': 'Report',
   'oa.explanation_argument': 'Explanation Argument',
   'oa.debate': 'Debate',
-  'oa.format': 'Format'
+  'oa.format': 'Format',
+  'oa.edit_activity': 'Edit Activity',
+  'oa.add_activity': 'Add Activity'
 });
