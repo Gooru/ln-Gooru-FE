@@ -276,7 +276,7 @@ export default Ember.Service.extend({
         .get('offlineActivityAdapter')
         .deleteReference(reference.oaId, reference.id)
         .then(function() {
-          resolve();
+          resolve(reference);
         }, reject);
     });
   },
@@ -335,10 +335,10 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       let serializedTaskPayLoad = service
         .get('offlineActivitySerializer')
-        .serializeCreateTask(taskPayLoad);
+        .serializeUpdateTask(taskPayLoad);
       service
         .get('offlineActivityAdapter')
-        .updateActivity(oaId, taskId, serializedTaskPayLoad)
+        .updateTask(oaId, taskId, serializedTaskPayLoad)
         .then(
           function() {
             resolve(taskPayLoad);

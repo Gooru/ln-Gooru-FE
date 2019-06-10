@@ -65,8 +65,12 @@ export default FilePicker.extend({
    */
   filesSelected: function(event) {
     var files = event.target.files;
+    var extraParams = this.extraParams;
     if (files.length) {
-      this.handleFiles(files);
+      for (let i = 0; i < files.length; i++) {
+        files[0].extraParam = extraParams;
+      }
+      this.handleFiles(files, extraParams);
     } else {
       // The user chose to cancel the image selection from the browser file window
       // so preview will be cleared along with any error messages there might have been

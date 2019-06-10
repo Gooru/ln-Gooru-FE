@@ -60,17 +60,27 @@ export default Ember.Component.extend({
    */
   tasks: null,
 
+  isExpanded: false,
+
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['content', 'gru-task'],
   // -------------------------------------------------------------------------
   // Actions
   actions: {
+    addNewTask() {
+      const component = this;
+      component.set('task', 'dummy');
+    },
     updateTaskCollection(task) {
       const component = this;
       let tasksCol = component.get('tasks');
+      tasksCol.removeObject(task);
       tasksCol.pushObject(task);
       component.get('updateParent')();
+      if (component.get('task')) {
+        component.set('task', null);
+      }
     },
     removeLineItem(task) {
       const component = this;
@@ -79,6 +89,10 @@ export default Ember.Component.extend({
         tasksCol.removeObject(task);
         component.get('updateParent')();
       });
+    },
+
+    updateExpanded(isExpanded) {
+      Ember.set(this, 'isExpanded', isExpanded);
     }
   },
   // -------------------------------------------------------------------------

@@ -1,0 +1,35 @@
+{{#if (eq editType 'upload')}}
+    <div class="border-bottom">
+        <h3>Uploads</h3>
+    </div>
+    <div class='upload-list-container'>
+        {{#each parsedReference as | refItem|}}
+            <span class="uploaded-item">
+                {{#file-picker
+                    accept=refItem.mimeType
+                    preview=false
+                    dropzone=false
+                    fileLoaded=(action 'selectFile')
+                    readAs="readAsFile"
+                    errors=filePickerErrors
+                    onRemoveFile=(action 'resetFileSelection')
+                    extraParams=refItem.subType
+                    }}
+                    <div class="btn no-bgd add-item">{{gru-icon name="add_circle"}}</div>
+                {{/file-picker}}
+                <span class="image">
+                    <i class="{{refItem.subType}}-icon"></i>
+                </span>
+                <span class="countItem">
+                    {{refItem.count}}
+                </span>
+                {{#if (gt refItem.count 0)}}
+                    <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteReference' refItem.refData }}>{{gru-icon name="remove_circle"}}</button>
+                {{/if}}
+            </span>
+        {{/each}}
+    </div>
+{{else}}
+    {{validation.gru-input placeholder='https://gooru.org' model=model valuePath='location' class='addUrl' maxLength=1000 didValidate=true}}
+    <div class="btn no-bgd add-item" {{action 'updateURLRef'}}>{{gru-icon name="add_circle"}}</div>
+{{/if}}

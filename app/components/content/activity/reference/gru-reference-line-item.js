@@ -3,7 +3,7 @@ import { getOAType, getOASubType } from 'gooru-web/utils/utils';
 import ReferenceModel from 'gooru-web/models/content/oa/reference';
 
 export default Ember.Component.extend({
-  classNames: ['gru-edit-reference'],
+  classNames: ['gru-reference-line-item'],
 
   /**
    * @property {MediaService} Media service API SDK
@@ -61,11 +61,18 @@ export default Ember.Component.extend({
   }.property('model.subType'),
 
   isEditing: null,
+  /**
+   * List of error messages to present to the user for conditions that the loaded image does not meet
+   * @prop {String[]}
+   */
+  filePickerErrors: null,
 
   // -------------------------------------------------------------------------
   // Events
   init() {
     this._super(...arguments);
+    this.set('filePickerErrors', Ember.A());
+
     let chooseOne = this.get('i18n').t(
       'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'
     ).string;
@@ -78,7 +85,6 @@ export default Ember.Component.extend({
 
     let referenceInstance = ReferenceModel.create({ oaId: this.get('oaId') });
     referenceInstance.set('subTypeSel', subTypeSel);
-    console.log('referenceInstance', referenceInstance); //eslint-disable-line
     this.set('model', referenceInstance);
   },
   // -------------------------------------------------------------------------
@@ -86,6 +92,33 @@ export default Ember.Component.extend({
   // Actions
 
   actions: {
+    deleteReference(refItem) {
+      this.deleteReference(refItem);
+    },
+    prepareForSubmission(file) {
+      this.set('selectedFile', file);
+      this.get('onSelectFile')(file);
+    },
+
+    /**
+     * @function actions:disableButtons
+     */
+    // eslint-disable-next-line no-dupe-keys
+    resetFileSelection() {
+      // Reset the input element in the file picker
+      // http://stackoverflow.com/questions/1043957/clearing-input-type-file-using-jquery/13351234#13351234
+      var $fileInput = this.$('input[type="file"]');
+      $fileInput
+        .wrap('<form>')
+        .closest('form')
+        .get(0)
+        .reset();
+      $fileInput.unwrap();
+
+      this.set('selectedFile', null);
+      this.get('onSelectFile')(null);
+    },
+
     /**
      *
      * @param {object} subType, UI selection of subtype
@@ -124,6 +157,8 @@ export default Ember.Component.extend({
       if (file) {
         this.set('model.file', file);
         this.set('model.type', type);
+        this.set('model.subType', file.extraParam || file.subType);
+
         this.send('updateContent');
       }
     },
@@ -135,6 +170,10 @@ export default Ember.Component.extend({
 
       component.updateReference(editRefModel).then(() => {
         component.set('isLoading', false);
+        let referenceInstance = ReferenceModel.create({
+          oaId: this.get('oaId')
+        });
+        this.set('model', referenceInstance);
       });
     }
   },

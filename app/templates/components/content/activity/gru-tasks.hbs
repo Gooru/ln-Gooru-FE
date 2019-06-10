@@ -1,11 +1,23 @@
+<div class="header">
+    <h2>Task</h2>
+    <div class="actions">
+        <button class="btn btn-primary add-item dropdown-toggle" title="{{t 'common.create'}}" type="button" data-toggle="dropdown" {{action 'addNewTask'}}>{{gru-icon name="add"}}</button>
+    </div>
+</div>
 <div class="panel-default">
     <div class="panel-heading">
+        <div class="detail">
+        </div>
     </div>
     <div class="panel panel-body">
-        {{#each tasks as |task|}}
-            {{content.activity.task.gru-task-line-item task=task  removeLineItem=(action 'removeLineItem')}}
-        {{/each}}
-        {{content.activity.gru-tasks-edit oaId=activityModel.id updateParent=(action 'updateTaskCollection') }}
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            {{#if task }}
+                {{content.activity.gru-tasks-edit oaId=activityModel.id updateParent=(action 'updateTaskCollection') model=task removeLineItem=(action 'removeLineItem')}}
+            {{/if}}
+            {{#each tasks as |task|}}
+                {{content.activity.gru-tasks-edit oaId=activityModel.id updateParent=(action 'updateTaskCollection') isExpanded=isExpanded model=task  removeLineItem=(action 'removeLineItem')   updateExpanded=(action 'updateExpanded')}}
+            {{/each}}
+        </div>
     </div>
 </div>
 {{!-- <button class="btn btn-primary add-item dropdown-toggle" title="{{t 'common.create'}}" type="button" data-toggle="dropdown">{{gru-icon name="add"}}</button> --}}

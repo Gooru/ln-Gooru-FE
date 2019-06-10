@@ -5,9 +5,7 @@
     height: 24px;
     background-repeat: no-repeat;
   }
-  #reference {
-    padding-top: 5vh;
-  }
+
   .gru-references {
     .detail {
       float: right;
@@ -27,8 +25,90 @@
       margin-top: 15px;
     }
     .panelBodyContainer {
-      display: flex;
-      flex-direction: column;
+      margin-top: -10px;
+      .upload-section {
+        .upload-list-container {
+          display: inline-flex;
+          justify-content: space-between;
+          width: 564px;
+          .uploaded-item {
+            border: 2px dotted #ccc;
+            border-style: dashed;
+            padding: 0 10px;
+            margin: 0 7px;
+            position: relative;
+
+            .remove-uploaded {
+              position: absolute;
+              top: 45px;
+              left: 45px;
+              width: 15px;
+              height: 22px;
+              z-index: 8;
+              padding: 0px;
+            }
+            .add-item {
+              position: absolute;
+              top: -15px;
+              left: 45px;
+              width: 15px;
+              height: 22px;
+              z-index: 8;
+              padding: 0px;
+            }
+            .countItem {
+              width: 100%;
+              text-align: center;
+              display: block;
+              font-weight: bolder;
+            }
+          }
+
+          .uploaded-item-big {
+            border: 2px blue;
+            border-style: solid;
+            padding: 35px;
+            margin: 0 7px;
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 6px;
+            .remove-uploaded {
+              position: absolute;
+              top: -30px;
+              left: 32px;
+              width: 0px;
+              height: 27px;
+              z-index: 8;
+            }
+          }
+        }
+        .add-new-item {
+          font-size: 31px;
+          padding: 0 20px;
+          color: #4b9741;
+        }
+      }
+      .url-section {
+        .add-url-line {
+          display: flex;
+        }
+
+        .listItem {
+          width: 520px;
+          font-size: 14px;
+        }
+        .addUrl {
+          width: 520px;
+          display: inline-block;
+        }
+        .add-item {
+          font-size: 22px;
+        }
+        .remove-item {
+          font-size: 22px;
+        }
+      }
       .textContainer {
         display: flex;
         flex-direction: column;
@@ -170,8 +250,91 @@
   }
 
   #task {
+    .add-item {
+      font-size: 20px;
+      border: 0px;
+      // background-color: transparent;
+    }
     .actions {
       float: right;
+    }
+
+    .actions-top {
+      float: initial;
+      display: inline-block;
+      padding: 8px 0 0 8px;
+      vertical-align: top;
+      button {
+        background-color: transparent;
+        font-size: $font-size-h4;
+        line-height: 1;
+        margin: 0 2px 0 1px;
+        padding: 0;
+      }
+    }
+
+    .upload-section {
+      .upload-list-container {
+        display: inline-flex;
+        justify-content: space-between;
+        width: 564px;
+        .uploaded-item {
+          border: 2px dotted #ccc;
+          border-style: dashed;
+          padding: 0 10px;
+          margin: 0 7px;
+          position: relative;
+
+          .remove-uploaded {
+            position: absolute;
+            top: 45px;
+            left: 45px;
+            width: 15px;
+            height: 22px;
+            z-index: 8;
+            padding: 0px;
+          }
+          .add-item {
+            position: absolute;
+            top: -15px;
+            left: 45px;
+            width: 15px;
+            height: 22px;
+            z-index: 8;
+            padding: 0px;
+          }
+          .countItem {
+            width: 100%;
+            text-align: center;
+            display: block;
+            font-weight: bolder;
+          }
+        }
+
+        .uploaded-item-big {
+          border: 2px blue;
+          border-style: solid;
+          padding: 35px;
+          margin: 0 7px;
+          position: relative;
+          width: 100px;
+          height: 100px;
+          border-radius: 6px;
+          .remove-uploaded {
+            position: absolute;
+            top: -30px;
+            left: 32px;
+            width: 0px;
+            height: 27px;
+            z-index: 8;
+          }
+        }
+      }
+      .add-new-item {
+        font-size: 31px;
+        padding: 0 20px;
+        color: #4b9741;
+      }
     }
     .add-rubric-container {
       border: 2px dashed $gray-light;
@@ -208,7 +371,7 @@
         vertical-align: top;
         border-left: 1px solid $gray-light;
         border-right: 1px solid $gray-light;
-        width: 90%;
+        width: 88%;
         h3 {
           margin: 13px 10px 14px;
         }

@@ -37,6 +37,9 @@ export default Ember.Component.extend({
   model: null,
 
   isEditing: true,
+
+  isExpandedChild: false,
+
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['content', 'gru-tasks-edit'],
@@ -60,10 +63,12 @@ export default Ember.Component.extend({
       //ToDo: Call activityService API and save changes
       component.saveTask().then(task => {
         component.sendAction('updateParent', task);
-        component.set('model', task.copy()); // needed to break the ref
       });
     },
-
+    removeLineItem() {
+      const component = this;
+      component.get('removeLineItem')(component.get('model'));
+    },
     /**
      * Reset dirty model with clean model
      */
@@ -73,15 +78,60 @@ export default Ember.Component.extend({
 
     updateSubmissionCollection() {
       //ToDo: Impl
+    },
+
+    expandTitle() {
+      const component = this;
+      component.showAllHeaders();
+      component.collapseAll();
+      component.$(
+        '#accordion > .gru-tasks-edit > .panel-default > a .associated-rubric'
+      );
+      let componentHead = component.$('.panel-default > a .associated-rubric');
+      componentHead.addClass('hidden');
     }
   },
+
+  collapseAll() {
+    $(
+      '#accordion > .gru-tasks-edit > .panel-default > .panel-collapse.collapse.in'
+    ).removeClass('in');
+  },
+
+  showAllHeaders() {
+    $(
+      '#accordion > .gru-tasks-edit > .panel-default > a   .associated-rubric'
+    ).removeClass('hidden');
+  },
+
   // -------------------------------------------------------------------------
   // Events
   init() {
     this._super(...arguments);
-    let taskInstance = TaskModel.create({ oaId: this.get('oaId') });
-    this.set('model', taskInstance);
+    // let taskInstance = TaskModel.create({ oaId: this.get('oaId') });
+    // this.set('model', taskInstance);
   },
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+    if (this.get('model') && this.get('model').id) {
+      //ToDo: Is this required
+    } else {
+      let taskInstance = TaskModel.create({ oaId: this.get('oaId') });
+      this.set('model', taskInstance);
+    }
+  },
+
+  didInsertElement1() {
+    this._super(...arguments);
+    const component = this;
+    if (this.get('model') && this.get('model').id) {
+      //ToDo: Remove this after checking
+    } else {
+      Ember.run.later(() => component.send('expandTitle'));
+    }
+  },
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -92,7 +142,14 @@ export default Ember.Component.extend({
   saveTask() {
     const component = this;
     let model = component.get('model');
+    if (model && model.id) {
+      return component
+        .get('activityService')
+        .updateTask(model.oaId, model.id, model);
+    } else {
+      return component.get('activityService').createTask(model);
+    }
+
     //ToDo: Validate
-    return component.get('activityService').createTask(model);
   }
 });

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { getOASubType } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   classNames: ['gru-references'],
@@ -74,18 +75,64 @@ export default Ember.Component.extend({
       const component = this;
       let refsCol = component.get('references');
       refsCol.pushObject(reference);
+      component.refreshReference();
       component.get('updateParent')();
     },
 
     deleteReference(refitem) {
       const component = this;
-      component
-        .get('activityService')
-        .deleteReference(refitem)
-        .then(refItem => {
-          component.get('references').removeObject(refItem);
-          component.get('updateParent')();
-        });
+      if (refitem && refitem.length > 0) {
+        refitem = refitem[0];
+      } else {
+        return;
+      }
+      component.deleteReferenceItem(refitem);
+    },
+
+    deleteUrlReference(refitem) {
+      const component = this;
+      component.deleteReferenceItem(refitem);
     }
-  }
+  },
+
+  deleteReferenceItem(refitem) {
+    const component = this;
+    component
+      .get('activityService')
+      .deleteReference(refitem)
+      .then(refItem => {
+        let refsCol = component.get('references');
+        refsCol.removeObject(refItem);
+        component.refreshReference();
+        component.get('updateParent')();
+      });
+  },
+  refreshReference() {
+    const component = this;
+    let refsCol = component.get('references');
+    let newSource = refsCol.slice(0);
+    Ember.set(this, 'references', newSource);
+    component.set('references', refsCol);
+  },
+
+  parsedReference: Ember.computed('references', function() {
+    const component = this;
+    let uploadedCol = component
+      .get('references')
+      .filter(f => f.type === 'uploaded');
+    let displayData = Ember.A([]);
+    let allTypes = getOASubType();
+
+    allTypes.forEach(ref => {
+      let filterCol = uploadedCol.filter(f => f.subType === ref.display_name);
+      let displayItem = {
+        subType: ref.display_name,
+        refData: filterCol,
+        mimeType: ref.mimeType,
+        count: filterCol.length
+      };
+      displayData.pushObject(displayItem);
+    });
+    return displayData;
+  })
 });

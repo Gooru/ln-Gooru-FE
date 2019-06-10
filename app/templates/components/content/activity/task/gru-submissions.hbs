@@ -3,9 +3,16 @@
         <h3> Task Submissions</h3>
     </div>
     <div class="panel panel-body">
-        {{#each submissions as |submission|}}
+        {{!-- {{#each submissions as |submission|}}
             {{content.activity.task.submission.gru-submission-line-item submission=submission  removeLineItem=(action 'removeLineItem')}}
-        {{/each}}
-        {{content.activity.task.submission.gru-submission-edit oaId=oaId oaTaskId=oaTaskId updateParent=(action 'updateSubmissionCollection') }}
+        {{/each}} --}}
+        <div class="upload-section">
+            <div class="upload-list-container">
+                {{#each parsedSubmissions as |submission|}}
+                    {{content.activity.task.submission.gru-submission-line-item submission=submission  removeLineItem=(action 'removeLineItem') updateSubmissionCollection=(action 'updateContent')  }}
+                {{/each}}
+            </div>
+        </div>
+        {{!-- {{content.activity.task.submission.gru-submission-edit oaId=oaId oaTaskId=oaTaskId updateParent=(action 'updateSubmissionCollection') }} --}}
     </div>
 </div>

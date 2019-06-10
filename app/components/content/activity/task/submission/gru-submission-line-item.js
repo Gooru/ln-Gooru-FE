@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  classNames: ['uploaded-item'],
   /**------------------------------------------------------------------------------------------------
    * list task, update parent for removal
    * ------------------------------------------------------------------------------------------------*/
@@ -16,6 +17,13 @@ export default Ember.Component.extend({
     removeLineItem() {
       const component = this;
       component.get('removeLineItem')(component.get('submission'));
+    },
+
+    updateSubmissionCollection() {
+      const component = this;
+      component.get('updateSubmissionCollection')(
+        component.get('submission').taskSubmissionSubType
+      );
     }
   },
   // -------------------------------------------------------------------------
