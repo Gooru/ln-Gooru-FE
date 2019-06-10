@@ -30,6 +30,13 @@ export default PlayerAccordionLessonItem.extend(ModalMixin, {
    */
   lessonService: Ember.inject.service('api-sdk/lesson'),
 
+  /**
+   * @requires service:api-sdk/offline-activity/offline-activity
+   */
+  activityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -114,6 +121,15 @@ export default PlayerAccordionLessonItem.extend(ModalMixin, {
             );
           }.bind(this),
           type: CONTENT_TYPES.COLLECTION
+        };
+      } else if (builderItem.get('collectionType') === 'offline-activity') {
+        lessonItem = {
+          deleteMethod: function() {
+            return this.get('activityService').deleteActivity(
+              this.get('model')
+            );
+          }.bind(this),
+          type: CONTENT_TYPES.ACTIVITY
         };
       } else {
         lessonItem = {
