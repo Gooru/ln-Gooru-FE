@@ -104,7 +104,9 @@
                   <span class="score">{{student.rubric.maxScore}}</span>
                 </div>
               {{else}}
-                {{rubric.rubric-category-grades isDisable=true categories=studentSelfGradedCategories}}
+                {{rubric.rubric-category-grades
+                  isReadOnly=true
+                  categories=studentSelfGradedCategories}}
               {{/if}}
               <div class="oa-grade-general-comment-container disable-event">
                 {{validation.gru-textarea

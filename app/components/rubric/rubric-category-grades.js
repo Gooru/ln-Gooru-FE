@@ -10,10 +10,10 @@ export default Ember.Component.extend({
   // Properties
 
   /**
-   * Maintains the state of show comment or not.
+   * Maintains the state of the read or write mode.
    * @type {Boolean}
    */
-  showComment: true,
+  isReadOnly: false,
 
   // -------------------------------------------------------------------------
   // Events
@@ -25,7 +25,7 @@ export default Ember.Component.extend({
     this._super(...arguments);
     let component = this;
     component.setupTooltip();
-    if (component.get('isDisable')) {
+    if (component.get('isReadOnly')) {
       component.disableClickEvent();
     }
   },
