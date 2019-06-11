@@ -223,7 +223,24 @@
 
         .student-grading-panel,
         .teacher-grading-panel {
-          padding: 15px 15px 15px 30px;
+          padding: 15px 15px 0 30px;
+        }
+
+        .over-all-comment {
+          padding-left: 30px;
+          padding-bottom: 15px;
+
+          .over-all-comment-label {
+            color: #3e5e67;
+            font-weight: bold;
+            line-height: 1.2;
+
+            p {
+              margin: 0;
+              padding-top: 10px;
+              padding-left: 10px;
+            }
+          }
         }
 
         .student-grading-header,
