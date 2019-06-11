@@ -132,7 +132,11 @@
           font-weight: bold;
           margin: 0;
           color: #fff;
-          @include ellipsis($font-size: 15px, $line-height: 1.2, $lines-to-show: 1);
+          @include ellipsis(
+            $font-size: 15px,
+            $line-height: 1.2,
+            $lines-to-show: 1
+          );
         }
       }
 
@@ -168,7 +172,8 @@
         .oa-image-container {
           width: 250px;
           height: 230px;
-          background-size: 250px 230px;
+          background-size: cover;
+          background-position: center;
           display: block;
           position: relative;
           background-color: $white;
@@ -253,7 +258,11 @@
               .oa-project-label {
                 color: #3e5e67;
                 font-weight: bold;
-                @include ellipsis($font-size: 14px, $line-height: 1.2, $lines-to-show: 1);
+                @include ellipsis(
+                  $font-size: 14px,
+                  $line-height: 1.2,
+                  $lines-to-show: 1
+                );
               }
 
               .oa-project-tag {
