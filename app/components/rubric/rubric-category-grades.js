@@ -16,7 +16,7 @@ export default Ember.Component.extend({
    * @type {Boolean}
    */
   isReadOnly: false,
-  
+
   /**
    * Maintains the rubric categories and sort score by asc.
    * @type {Boolean}
