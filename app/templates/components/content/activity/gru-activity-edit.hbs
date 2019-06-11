@@ -15,9 +15,9 @@
   <nav>
     {{#gru-scroll to="#information" class="selected" offset='article > header'}}{{t "common.information"}}{{/gru-scroll}}
     {{#if tempCollection.id}}
-      {{#gru-scroll to="#reference" offset='article > header'}}References{{/gru-scroll}}
-      {{#gru-scroll to="#task" offset='article > header'}}Task{{/gru-scroll}}
-      {{#gru-scroll to="#rubrics" offset='article > header'}}Rubric{{/gru-scroll}}
+      {{#gru-scroll to="#reference" offset='article > header'}}{{t "oa.references.label"}}{{/gru-scroll}}
+      {{#gru-scroll to="#tasks" offset='article > header'}}{{t "oa.tasks.label"}}{{/gru-scroll}}
+      {{#gru-scroll to="#rubrics" offset='article > header'}}{{t "common.rubric"}}{{/gru-scroll}}
     {{/if}}
   </nav>
 </header>
@@ -33,7 +33,7 @@
         <div class='two-col-info'>
           <div class="title">
             <label>
-              <span class="required">Activity Title</span>
+              <span class="required">{{t "common.activity-title"}}</span>
               {{#if isEditing}}
                 {{validation.gru-input model=tempCollection valuePath='title' maxLength=50 didValidate=didValidate}}
               {{else}}
@@ -150,19 +150,19 @@
 {{#if tempCollection.id}}
   <section id="reference">
     <div class="header">
-      <h2>References</h2>
+      <h2>{{t "oa.references.label"}}</h2>
     </div>
     {{content.activity.gru-references activityModel=activityCollection references=tempCollection.references updateParent=(action 'modelSourceFromChildChanges')
     model=tempCollection 
      updateContent=(action 'updateContent') 
      }}
   </section>
-  <section id="task">
+  <section id="tasks">
     {{content.activity.gru-tasks activityModel=activityCollection tasks=tempCollection.tasks updateParent=(action 'modelSourceFromChildChanges')}}
   </section>
   <section id="rubrics">
     <div class="header">
-      <h2>Rubric</h2>
+      <h2>{{t "common.rubric"}}</h2>
     </div>
     {{content.activity.gru-rubrics tempModel=tempCollection   activityModel=activityCollection    updateContent=(action 'updateContent')  }}
   </section>
