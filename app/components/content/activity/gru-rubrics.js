@@ -131,11 +131,11 @@ export default Ember.Component.extend(ModalMixin, {
    */
   switchOptions: Ember.A([
     Ember.Object.create({
-      label: 'On',
+      label: 'Yes',
       value: true
     }),
     Ember.Object.create({
-      label: 'Off',
+      label: 'No',
       value: false
     })
   ]),

@@ -2641,5 +2641,7 @@ export default Object.assign(quizzesTranslations, {
   'your-answer': 'Your Answer',
   'common.saving': 'Saving',
   'oa.offline_activity.label': 'Offline Activity',
-  'common.oa.offline_activity.label': 'Offline Activity'
+  'common.oa.offline_activity.label': 'Offline Activity',
+  'oa.rubrics.switch.label':
+    'Maximum score can be entered OR Rubrics could be used for Grading. Use Rubrics for grading ?'
 });
