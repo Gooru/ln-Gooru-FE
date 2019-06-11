@@ -2639,5 +2639,7 @@ export default Object.assign(quizzesTranslations, {
     'Please enter the total time spent on the activity',
   'no-task-available': 'No Task Available',
   'your-answer': 'Your Answer',
-  'common.saving': 'Saving'
+  'common.saving': 'Saving',
+  'oa.offline_activity.label': 'Offline Activity',
+  'common.oa.offline_activity.label': 'Offline Activity'
 });

@@ -2640,7 +2640,14 @@ export default Object.assign(quizzesTranslations, {
   'oa.lab_report': 'Report',
   'oa.explanation_argument': 'Explanation Argument',
   'oa.debate': 'Debate',
-  'oa.format': 'Format',
+  'oa.format': 'Activity Type',
+  'oa.tasks.label': 'Tasks',
+  'oa.references.label': 'References',
+  'oa.references.artifacts': 'Reference Artifacts',
+  'oa.references.urls': 'Reference URLs',
+  'oa.references.exemplar': 'Exemplar Answer',
+  'oa.references.uploads': 'Uploads',
+  'oa.submissions.type': 'Type of Submission',
   'oa.edit_activity': 'Edit Activity',
   'oa.add_activity': 'Add Activity',
   'oa.remix': 'Remix Offline Activity',
@@ -2655,5 +2662,7 @@ export default Object.assign(quizzesTranslations, {
     'Please enter the total time spent on the activity',
   'no-task-available': 'No Task Available',
   'your-answer': 'Your Answer',
-  'common.saving': 'Saving'
+  'common.saving': 'Saving',
+  'oa.offline_activity.label': 'Offline Activity',
+  'common.oa.offline_activity.label': 'Offline Activity'
 });
