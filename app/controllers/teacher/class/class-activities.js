@@ -145,13 +145,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     },
 
     //Action triggered when click preview content
-    onPreviewContent(content, caContentId, isReportView) {
+    onPreviewContent(content, classActivity, isReportView) {
       const controller = this;
       controller.set(
         'previewContentType',
         content.get('format') || content.get('collectionType')
       );
-      controller.set('previewCaContentId', caContentId);
+      controller.set('previewCa', classActivity);
       controller.set('previewContent', content);
       if (controller.get('previewContentType') === 'offline-activity') {
         controller.set('isShowOfflineActivityPreview', true);
@@ -186,7 +186,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let controller = this;
       let collection = selectedClassActivity.get('collection');
       let activityDate = selectedClassActivity.get('added_date');
-      let caContentId = selectedClassActivity.get('id');
       let params = {
         classId: controller.get('classId'),
         collection: collection,
@@ -197,7 +196,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         selectedClassActivity.get('collection.format') ||
         selectedClassActivity.get('collection.collectionType');
       if (format === CONTENT_TYPES.OFFLINE_ACTIVITY) {
-        controller.send('onPreviewContent', collection, caContentId, true);
+        controller.send(
+          'onPreviewContent',
+          collection,
+          selectedClassActivity,
+          true
+        );
       } else {
         controller.set('showDcaCollectionReportPullUp', true);
         controller.set('dcaCollectionReportData', params);
@@ -362,8 +366,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let controller = this;
       let currentClassId = controller.get('classController.class.id');
       let classActivityId = classActivity.get('id');
-      let classActivityType =
-        classActivity.get('collection.collectionType');
+      let classActivityType = classActivity.get('collection.collectionType');
       var model = {
         type: classActivityType,
         deleteMethod: function() {
@@ -1291,7 +1294,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   removeClassActivity: function(classActivity) {
     let id = classActivity.get('id');
     if (
-      classActivity.get('collection.collectionType') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS
+      classActivity.get('collection.collectionType') ===
+      PLAYER_EVENT_SOURCE.OFFLINE_CLASS
     ) {
       let offlineActivities;
       if (classActivity.get('isCompleted')) {

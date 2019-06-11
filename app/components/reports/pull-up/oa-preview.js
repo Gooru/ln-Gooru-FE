@@ -36,6 +36,11 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
    */
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
+  /**
+   * @requires service:api-sdk/performance
+   */
+  performanceService: Ember.inject.service('api-sdk/performance'),
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -103,8 +108,8 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags
    */
-  taxonomyTags: Ember.computed('previewContent.standards.[]', function() {
-    var standards = this.get('previewContent.standards');
+  taxonomyTags: Ember.computed('offlineActivity.standards.[]', function() {
+    var standards = this.get('offlineActivity.standards');
     if (standards) {
       standards = standards.filter(function(standard) {
         // Filter out learning targets (they're too long for the card)
@@ -217,7 +222,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     const oaId = component.get('oaId');
     const oaService = component.get('oaService');
     const classId = component.get('classId');
-    const caContentId = component.get('caContentId');
+    const caContentId = component.get('classActivity.id');
     const isReportView = component.get('isReportView');
     const isTeacher = component.get('isTeacher');
     component.set('isLoading', true);
@@ -249,7 +254,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
   fetchSubmissions(user) {
     const component = this;
     const classId = component.get('classId');
-    const caContentId = component.get('caContentId');
+    const caContentId = component.get('classActivity.id');
     const isReportView = component.get('isReportView');
     const userId = user.get('id');
     let submissionPromise = isReportView

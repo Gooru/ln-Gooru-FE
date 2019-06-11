@@ -58,8 +58,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     onPlayContent(content) {
       const component = this;
-      const caContentId = this.get('classActivity.id');
-      component.sendAction('onPreviewContent', content, caContentId);
+      const classActivity = this.get('classActivity');
+      component.sendAction('onPreviewContent', content, classActivity);
     },
 
     /**

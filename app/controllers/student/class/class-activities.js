@@ -36,7 +36,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       collection,
       studentPerformance,
       activityDate,
-      caContentId
+      classActivity
     ) {
       let component = this;
       let userId = component.get('session.userId');
@@ -50,7 +50,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         collection,
         activityDate,
         studentPerformance,
-        caContentId,
+        classActivity,
         users
       };
       component.set('isShowStudentExternalAssessmentReport', false);

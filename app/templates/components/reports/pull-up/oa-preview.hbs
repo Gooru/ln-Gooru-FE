@@ -55,6 +55,23 @@
 
   <div class="oa-body-container {{if isReportView 'report-view'}}">
     <div class="oa-info-image-container">
+      <div class="oa-image-container" style="background-image: url({{offlineActivity.thumbnailUrl}})">
+        <div class="oa-standards">
+          {{#if taxonomyTags.length}}
+            {{taxonomy.gru-taxonomy-tag-list
+              tags=taxonomyTags
+              tagsVisible=1
+              isInCard=true}}
+          {{/if}}
+        </div>
+        <div class="oa-etc">
+          {{gru-icon name="access_time"}}
+          <span class="etc-value">{{offlineActivity.durationHours}}h</span>
+        </div>
+        <div class="oa-date-range">
+          {{format-date classActivity.added_date 'DD MMM'}} - {{format-date (if classActivity.end_date classActivity.end_date classActivity.added_date) 'DD MMM'}}
+        </div>
+      </div>
       <div class="oa-info-container">
         <div class="oa-info-header-container">
           <div class="oa-icon-container">
