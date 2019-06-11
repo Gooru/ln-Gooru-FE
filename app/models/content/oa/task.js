@@ -81,9 +81,8 @@ export default Ember.Object.extend(
 
       // Copy the task data
       properties = this.getProperties(properties);
-      properties.oaTaskSubmissions = Ember.A(
-        this.get('oaTaskSubmissions').slice(0)
-      );
+      let oaTaskSubmissions = this.get('oaTaskSubmissions');
+      properties.oaTaskSubmissions = oaTaskSubmissions.slice(0);
       return this.get('constructor').create(properties);
     },
 

@@ -82,11 +82,8 @@ export default Ember.Component.extend({
 
     expandTitle() {
       const component = this;
-      component.showAllHeaders();
       component.collapseAll();
-      component.$(
-        '#accordion > .gru-tasks-edit > .panel-default > a .associated-rubric'
-      );
+      component.showAllHeaders();
       let componentHead = component.$('.panel-default > a .associated-rubric');
       componentHead.addClass('hidden');
     }
@@ -112,23 +109,19 @@ export default Ember.Component.extend({
     // this.set('model', taskInstance);
   },
 
-  didReceiveAttrs() {
+  didInsertElement() {
     this._super(...arguments);
     if (this.get('model') && this.get('model').id) {
       //ToDo: Is this required
     } else {
-      let taskInstance = TaskModel.create({ oaId: this.get('oaId') });
+      let taskInstance = TaskModel.create();
+      taskInstance.set('oaId', this.get('oaId'));
+      if (taskInstance.get('oaTaskSubmissions').length > 0) {
+        let tsinst = Ember.A([]);
+        taskInstance.set('oaTaskSubmissions', tsinst);
+        console.log(`new i with oaId :${this.get('oaId')}`, taskInstance); //eslint-disable-line
+      }
       this.set('model', taskInstance);
-    }
-  },
-
-  didInsertElement1() {
-    this._super(...arguments);
-    const component = this;
-    if (this.get('model') && this.get('model').id) {
-      //ToDo: Remove this after checking
-    } else {
-      Ember.run.later(() => component.send('expandTitle'));
     }
   },
 
