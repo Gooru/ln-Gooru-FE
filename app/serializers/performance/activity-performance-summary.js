@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import ActivityPerformanceSummary from 'gooru-web/models/performance/activity-performance-summary';
-import { parseDate } from 'gooru-web/utils/utils';
+import {
+  parseDate
+} from 'gooru-web/utils/utils';
 import CollectionPerformanceSummarySerializer from 'gooru-web/serializers/performance/collection-performance-summary';
 
 /**
@@ -64,8 +66,9 @@ export default Ember.Object.extend({
     const serializer = this;
     return ActivityPerformanceSummary.create({
       userId: userId,
-      date: parseDate(data.date, 'YYYY-MM-DD'),
-      activation_date: data.date,
+      date: data.date ? parseDate(data.date, 'YYYY-MM-DD') : null,
+      activation_date: data.date ? data.date : null,
+      dcaContentId: data.dcaContentId || null,
       collectionPerformanceSummary: serializer
         .get('collectionPerformanceSummarySerializer')
         .normalizeCollectionPerformanceSummary(data)
