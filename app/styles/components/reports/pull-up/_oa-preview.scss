@@ -130,11 +130,7 @@
           font-weight: bold;
           margin: 0;
           color: #fff;
-          @include ellipsis(
-            $font-size: 15px,
-            $line-height: 1.2,
-            $lines-to-show: 1
-          );
+          @include ellipsis($font-size: 15px, $line-height: 1.2, $lines-to-show: 1);
         }
       }
 
@@ -184,11 +180,7 @@
               .oa-project-label {
                 color: #3e5e67;
                 font-weight: bold;
-                @include ellipsis(
-                  $font-size: 14px,
-                  $line-height: 1.2,
-                  $lines-to-show: 1
-                );
+                @include ellipsis($font-size: 14px, $line-height: 1.2, $lines-to-show: 1);
               }
 
               .oa-project-tag {
@@ -282,6 +274,9 @@
 
           .grade-rubric-level-container {
             .grade-rubric-levels.no-progress {
+              background-color: #f1f3f7;
+              border-radius: 15px;
+
               i {
                 background-color: #ccc;
               }
