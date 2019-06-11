@@ -166,11 +166,10 @@ export default Ember.Component.extend({
   openPullUp() {
     let component = this;
     component.set('showPullUp', true);
-    component.$().animate(
-      {
-        top: '10%'
-      },
-      400
+    component.$().animate({
+      top: '10%'
+    },
+    400
     );
   },
 
@@ -179,15 +178,14 @@ export default Ember.Component.extend({
    */
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-        component.sendAction('onClosePullUp', closeAll);
-      }
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+      component.sendAction('onClosePullUp', closeAll);
+    }
     );
   },
 
@@ -210,9 +208,9 @@ export default Ember.Component.extend({
     const activityId = component.get('context.id');
     const format = component.get('context.collection.format');
     const collectionType =
-      format === 'collection' || format === 'collection-external'
-        ? 'collection'
-        : 'assessment';
+      format === 'collection' || format === 'collection-external' ?
+        'collection' :
+        'assessment';
     const collectionId = component.get('context.collection.id');
     const activityDate = component.get('context.activation_date');
     component.set('isLoading', true);
@@ -223,7 +221,10 @@ export default Ember.Component.extend({
       studentsPerformance: component
         .get('analyticsService')
         .getDCAPerformance(classId, collectionId, collectionType, activityDate)
-    }).then(({ usersClassActivity, studentsPerformance }) => {
+    }).then(({
+      usersClassActivity,
+      studentsPerformance
+    }) => {
       if (!component.isDestroyed) {
         component.parseClassMembers(
           usersClassActivity,
@@ -241,15 +242,15 @@ export default Ember.Component.extend({
     let members = usersClassActivity.filterBy('isActive', true);
     members.forEach(member => {
       let memberId = member.get('id');
-      let lastName = member.get('lastname');
-      let firstName = member.get('firstname');
+      let lastName = member.get('lastName');
+      let firstName = member.get('firstName');
       let performance = studentsPerformance.filterBy('user', memberId);
       let student = Ember.Object.create({
         id: memberId,
         firstName: firstName,
         lastName: lastName,
         name: `${lastName} ${firstName}`,
-        avatarUrl: member.get('thumbnail'),
+        avatarUrl: member.get('avatarUrl'),
         performance: component.parseCollectionPerformanceData(
           collectionType,
           performance
@@ -270,9 +271,8 @@ export default Ember.Component.extend({
       collectionPerformanceData = Ember.Object.create({
         type: collectionType,
         score: isAssessment ? performance.assessment.score : 0,
-        timeSpent: isAssessment
-          ? performance.assessment.timespent
-          : performance.collection.timeSpent,
+        timeSpent: isAssessment ?
+          performance.assessment.timespent : performance.collection.timeSpent,
         resources: performance.resourceResults
       });
     }

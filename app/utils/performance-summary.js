@@ -1,7 +1,10 @@
 import Ember from 'ember';
 import ActivityPerformanceSummary from 'gooru-web/models/performance/activity-performance-summary';
 import CollectionPerformanceSummary from 'gooru-web/models/performance/collection-performance-summary';
-import { average, sumAll } from 'gooru-web/utils/math';
+import {
+  average,
+  sumAll
+} from 'gooru-web/utils/math';
 
 /**
  * Aggregates all users collection activity summary items
@@ -67,7 +70,6 @@ export function aggregateClassActivityPerformanceSummaryItems(
     const dateCollectionPerformanceSummaryItems = activitiesPerDate.mapBy(
       'collectionPerformanceSummary'
     );
-
     const collectionIds = dateCollectionPerformanceSummaryItems
       .mapBy('collectionId')
       .uniq();
@@ -80,6 +82,44 @@ export function aggregateClassActivityPerformanceSummaryItems(
       const aggregatedActivity = ActivityPerformanceSummary.create({
         date: new Date(date),
         activation_date: moment(date).format('YYYY-MM-DD'),
+        collectionPerformanceSummary: aggregateCollectionPerformanceSummaryItems(
+          collectionPerformanceSummaryItems
+        )
+      });
+      aggregatedClassActivities.pushObject(aggregatedActivity);
+    });
+  });
+  return aggregatedClassActivities;
+}
+
+/**
+ * Aggregates all users of offline class activity summary items
+ * @param {Ember.A|ActivityPerformanceSummary[]} activityPerformanceSummaryItems
+ * @returns {ActivityPerformanceSummary[]}
+ */
+export function aggregateOfflineClassActivityPerformanceSummaryItems(
+  activityPerformanceSummaryItems
+) {
+  const aggregatedClassActivities = Ember.A([]);
+  const dcaContentIds = activityPerformanceSummaryItems
+    .mapBy('dcaContentId')
+    .uniq();
+  dcaContentIds.forEach(function(dcaContentId) {
+    let activities = activityPerformanceSummaryItems.filterBy('dcaContentId', dcaContentId);
+    const dcaContentCollectionPerformanceSummaryItems = activities.mapBy(
+      'collectionPerformanceSummary'
+    );
+    const collectionIds = dcaContentCollectionPerformanceSummaryItems
+      .mapBy('collectionId')
+      .uniq();
+    collectionIds.forEach(function(collectionId) {
+      //gets all user performance items for the same collection
+      const collectionPerformanceSummaryItems = dcaContentCollectionPerformanceSummaryItems.filterBy(
+        'collectionId',
+        collectionId
+      );
+      const aggregatedActivity = ActivityPerformanceSummary.create({
+        dcaContentId,
         collectionPerformanceSummary: aggregateCollectionPerformanceSummaryItems(
           collectionPerformanceSummaryItems
         )
