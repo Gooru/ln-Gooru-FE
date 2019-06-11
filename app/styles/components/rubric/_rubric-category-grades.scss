@@ -154,6 +154,16 @@
         padding-top: 20px;
         display: none;
 
+        &.read-only {
+          display: block;
+          padding-top: 10px;
+
+          .category-comment {
+            padding: 0 0 0 10px;
+            margin: 0;
+          }
+        }
+
         textarea {
           font-family: "Open Sans";
           font-size: 16px;

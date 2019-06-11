@@ -24,20 +24,24 @@
         <div class="grade-clear {{if category.selected 'active'}}" {{action 'unSelectCategoryLevel' category}}>
           {{gru-icon name="clear"}}
         </div>
-        {{#if showComment}}
+        {{#unless isReadOnly}}
           <div class="grade-comment" {{action 'onShowAddCommentBox' categoryIndex}}>
             {{gru-icon name="mode_comment"}}
           </div>
-        {{/if}}
+        {{/unless}}
       </div>
-      <div class="grade-comment-section {{if isDisable 'disable-event'}}">
-        {{validation.gru-textarea
+      <div class="grade-comment-section {{if isReadOnly 'read-only'}}">
+        {{#if isReadOnly}}
+          <p class="category-comment">{{category.comment}}</p>
+        {{else}}
+          {{validation.gru-textarea
             model=category
             valuePath='comment'
             maxLength=500
             rows=1
             placeholder='Add Comment'
           }}
+        {{/if}}
       </div>
     </div>
   {{/each}}

@@ -56,7 +56,9 @@
             placeholder='General Comments Only'
             disabled="disabled"
           }}
-          {{rubric.rubric-category-grades categories=studentRubricCategories isDisable=true}}
+          {{rubric.rubric-category-grades
+            categories=studentRubricCategories
+            isReadOnly=true}}
         </div>
       </div>
     {{/if}}
@@ -77,7 +79,9 @@
             rows=1
             placeholder='General Comments Only'
           }}
-          {{rubric.rubric-category-grades categories=teacherRubricCategories isDisable=true}}
+          {{rubric.rubric-category-grades
+            categories=teacherRubricCategories
+            isReadOnly=true}}
         </div>
       </div>
     {{/if}}
