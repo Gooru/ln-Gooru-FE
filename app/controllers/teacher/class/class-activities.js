@@ -364,8 +364,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let currentClassId = controller.get('classController.class.id');
       let classActivityId = classActivity.get('id');
       let classActivityType =
-        classActivity.get('collection.collectionType') ||
-        classActivity.get('contentType');
+        classActivity.get('collection.collectionType');
       var model = {
         type: classActivityType,
         deleteMethod: function() {
@@ -1266,7 +1265,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   removeClassActivity: function(classActivity) {
     let id = classActivity.get('id');
     if (
-      classActivity.get('contentType') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS
+      classActivity.get('collection.collectionType') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS
     ) {
       let offlineActivities;
       if (classActivity.get('isCompleted')) {
