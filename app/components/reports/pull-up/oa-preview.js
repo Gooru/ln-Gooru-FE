@@ -190,7 +190,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
           'gradeType',
           'student'
         );
-        let studentGrade = this.get('oaRubrics.teacherGrades');
+        let studentGrade = this.get('oaRubrics.studentGrades');
         this.parseRubricGradedData(rubric, studentGrade);
       }
       return rubric;
