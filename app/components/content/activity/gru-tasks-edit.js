@@ -111,6 +111,7 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
+    const component = this;
     if (this.get('model') && this.get('model').id) {
       //ToDo: Is this required
     } else {
@@ -122,6 +123,8 @@ export default Ember.Component.extend({
         console.log(`new i with oaId :${this.get('oaId')}`, taskInstance); //eslint-disable-line
       }
       this.set('model', taskInstance);
+      let componentHead = component.$('.panel-default > a');
+      Ember.run(() => componentHead.click()); //show new task form expanded
     }
   },
 
