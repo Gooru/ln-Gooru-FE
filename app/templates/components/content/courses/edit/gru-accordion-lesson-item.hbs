@@ -49,11 +49,13 @@
         </div>
       {{else}}
         <div>
-          {{#if model.computedQuestionCount}}
-            <span dir="ltr"><b>{{model.computedQuestionCount}}</b> {{t "common.question-pl" count=model.computedQuestionCount}}</span>
-          {{else}}
-            <span dir="ltr"><b>{{model.questionCount}}</b> {{t "common.question-pl" count=model.questionCount}}</span>
-          {{/if}}
+          {{#unless (eq model.collectionType 'offline-activity')}}
+            {{#if model.computedQuestionCount}}
+              <span dir="ltr"><b>{{model.computedQuestionCount}}</b> {{t "common.question-pl" count=model.computedQuestionCount}}</span>
+            {{else}}
+              <span dir="ltr"><b>{{model.questionCount}}</b> {{t "common.question-pl" count=model.questionCount}}</span>
+            {{/if}}
+          {{/unless}}
         </div>
       {{/if}}
       <div class="actions">
