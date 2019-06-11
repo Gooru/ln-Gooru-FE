@@ -88,7 +88,9 @@ export default PlayerAccordionLessonItem.extend(ModalMixin, {
           ? CONTENT_TYPES.COLLECTION
           : CONTENT_TYPES.ASSESSMENT
       };
-
+      if (this.get('model').format === 'offline-activity') {
+        lessonItem.type = 'oa.offline_activity.label';
+      }
       this.actions.showModal.call(
         this,
         'content.modals.gru-remove-content',

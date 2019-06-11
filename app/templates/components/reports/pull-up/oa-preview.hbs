@@ -88,7 +88,7 @@
     </div>
 
     <div class="oa-teacher-student-rubric">
-      {{#if studentRubric.categories}}
+      {{#if studentRubric}}
         <div class="student-rubric-section">
           <div class="student-grading-header">
             <div class="rubric-icon-container">
@@ -98,16 +98,23 @@
               <div class="grade-tag">{{t 'common.self-graded'}}</div>
             </div>
           </div>
-          <div class="student-grading-panel">
-            {{rubric.rubric-category-grades
-              isDisable=true
+          {{#if studentRubric.categories}}
+            <div class="student-grading-panel">
+              {{rubric.rubric-category-grades
+              isReadOnly=true
               categories=studentRubric.categories
-              showComment=false
             }}
-          </div>
+            </div>
+          {{/if}}
+          {{#if studentRubric.comment}}
+            <div class="over-all-comment">
+              <div class="over-all-comment-label">{{t 'grading-player.overall-comment'}}</div>
+              <p>{{studentRubric.comment}}</p>
+            </div>
+          {{/if}}
         </div>
       {{/if}}
-      {{#if teacherRubric.categories}}
+      {{#if teacherRubric}}
         <div class="teacher-rubric-section">
           <div class="teacher-grading-header">
             <div class="rubric-icon-container">
@@ -117,13 +124,20 @@
               <div class="grade-tag">{{t 'common.teacher'}}-{{t 'class.info.grade'}}</div>
             </div>
           </div>
-          <div class="teacher-grading-panel">
-            {{rubric.rubric-category-grades
-              isDisable=true
+          {{#if teacherRubric.categories}}
+            <div class="teacher-grading-panel">
+              {{rubric.rubric-category-grades
+              isReadOnly=true
               categories=teacherRubric.categories
-              showComment=false
             }}
-          </div>
+            </div>
+          {{/if}}
+          {{#if teacherRubric.comment}}
+            <div class="over-all-comment">
+              <div class="over-all-comment-label">{{t 'grading-player.overall-comment'}}</div>
+              <p>{{teacherRubric.comment}}</p>
+            </div>
+          {{/if}}
         </div>
       {{/if}}
     </div>
