@@ -269,14 +269,17 @@
     }
   }
 
-  #task {
+  #tasks {
     .add-item {
       font-size: 20px;
       border: 0px;
       // background-color: transparent;
     }
     .actions {
-      float: right;
+      float: $menu-float-dir;
+      .add-item {
+        padding: 0px 9px;
+      }
     }
 
     .actions-top {
