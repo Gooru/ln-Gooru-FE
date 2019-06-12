@@ -187,7 +187,7 @@
       </div>
       <div class="item-to-grade-container">
         <div class="ca-grade-items-header" {{action 'toggleItemsToGrade'}}>
-          <span>{{t 'class.analytics.performance.grade-items'}}</span>
+          <span>{{t 'class.analytics.performance.grade-items'}} ({{itemsToGrade.length}})</span>
           <div class="icons">
             {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
             {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
@@ -207,7 +207,7 @@
       </div>
       <div class="unschedule-container">
         <div class="ca-unschedule-items-header" {{action 'toggleUnSchedule'}}>
-          <span>{{t 'common.unscheduled-items'}} {{t 'common.for'}} {{format-date selectedDate 'MMMM'}}</span>
+          <span>{{t 'common.unscheduled-items'}} {{t 'common.for'}} {{format-date selectedDate 'MMMM'}} ({{unScheduledClassActivities.length}})</span>
           <div class="icons">
             {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
             {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
