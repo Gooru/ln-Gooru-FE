@@ -73,7 +73,7 @@ export default Ember.Component.extend({
      * Reset dirty model with clean model
      */
     cancelChanges() {
-      //ToDo: Reset dirty model with clean model
+      this.get('cancelTask')();
     },
 
     updateSubmissionCollection() {
