@@ -1,6 +1,6 @@
-<div class="panel-default">
+<div class="panel panel-default">
     <div class="panel panel-body">
-        <div class="panel-heading">
+        <div class="panel-heading hidden">
             <div class='actions'>
                 <button class="cancel btn btn-info" {{action 'cancelChanges'}}>{{t "common.cancel"}}</button>
                 <button class="save btn btn-success" {{action 'updateContent' model}}>{{t "common.save"}}</button>
@@ -8,24 +8,35 @@
             <div style='clear:both;'></div>
         </div>
         <div class="panel-body">
-            <div class='options-container'>
-                <div>
-                    {{#unless isTeacherRubrics}}
-                        <span> {{t 'oa.rubrics.switch.label'}} </span>
-                        {{gru-switch switchOptions=switchOptions isChecked=isTeacherRubrics}}
-                    {{/unless}}
+            {{#unless teacherRubrics.title}}
+                <div class='options-container border-bottom'>
+                    {{gru-switch switchOptions=switchOptions isChecked=isTeacherRubrics}}
+                    <span class='options-label'> {{t 'oa.rubrics.switch.label'}} </span>
                 </div>
-            </div>
+            {{else}}
+                <span class='head-label'> {{t 'oa.teacher-rubric'}} </span>
+            {{/unless}}
             <div class="content">
                 {{#unless isTeacherRubrics}}
                     <div class="scoring-option">
+                        <span class='hidden'> {{t 'oa.max-score.label'}} </span>
                         <div class="setting maximum-points">
+                            {{input type=number value=tempModel.maxScore class="max-score-input" name='maxScore' maxlength=3 
+                            focus-out="updateQuantity"
+                            key-press="inputTyping"
+                            
+                            }}
+                            {{!--                             
+                            {{validation.gru-input options=maximumOptions search="true" optionSelected=tempModel.maxScore onOptionSelect="onMaxScoreChange"}}
+                             --}}
                             <span class="title">{{t 'content.questions.edit.builder.feedback-grading.maximum-points'}}</span>
-                            {{validation.gru-select options=maximumOptions search="true" optionSelected=tempModel.maxScore onOptionSelect="onMaxScoreChange"}}
                         </div>
                     </div>
                 {{/unless}}
                 {{#if isTeacherRubrics}}
+                    {{#if (and isTeacherRubrics (not teacherRubrics.title))}}
+                        <span> {{t 'oa.rubrics.label'}} </span>
+                    {{/if}}
                     {{#if teacherRubrics.title}}
                         <div class="associated-rubric">
                             <div class="image">

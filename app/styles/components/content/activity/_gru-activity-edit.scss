@@ -181,7 +181,23 @@
     .rubrics-container {
       padding-top: 44px;
     }
+    div.border-bottom {
+      padding-bottom: 15px;
+      border-bottom: 1px solid $gray-lighter;
+      margin-bottom: 15px;
+      margin-top: 0px;
+    }
 
+    .options-container {
+      .options-label {
+        margin-left: 25px;
+        font-size: 15px;
+      }
+    }
+
+    .head-label {
+      font-size: 15px;
+    }
     .content {
       .add-rubric-container {
         border: 2px dashed $gray-light;
@@ -190,9 +206,15 @@
         padding: 10px 0 0 14px;
       }
       .scoring-option {
-        padding-top: 35px;
         .maximum-points {
           max-width: 500px;
+
+          .title {
+            margin-left: 35px;
+          }
+          .max-score-input {
+            width: 65px;
+          }
         }
       }
       .associated-rubric {
