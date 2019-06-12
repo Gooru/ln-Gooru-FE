@@ -22,6 +22,25 @@ export default Ember.Component.extend(ModalMixin, {
       this.get('updateContent')(this.get('tempModel'));
     },
 
+    updateQuantity(val) {
+      val = parseInt(val);
+      if (val >= 0) {
+        this.set('tempModel.maxScore', val);
+        this.send('updateContent');
+      } else {
+        this.set('tempModel.maxScore', 0);
+      }
+    },
+
+    inputTyping(val) {
+      val = parseInt(val);
+      if (val >= 0) {
+        this.set('tempModel.maxScore', val);
+      } else {
+        this.set('tempModel.maxScore', 0);
+      }
+    },
+
     cancelChanges: function() {
       let maxScore = this.get('activityModel').maxScore;
       this.set('tempModel.maxScore', maxScore);
@@ -131,11 +150,11 @@ export default Ember.Component.extend(ModalMixin, {
    */
   switchOptions: Ember.A([
     Ember.Object.create({
-      label: 'On',
+      label: 'Yes',
       value: true
     }),
     Ember.Object.create({
-      label: 'Off',
+      label: 'No',
       value: false
     })
   ]),

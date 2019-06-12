@@ -2082,5 +2082,9 @@ export default Object.assign(quizzesTranslations, {
   'your-answer': 'Your Answer',
   'common.saving': 'Saving',
   'oa.offline_activity.label': 'Offline Activity',
-  'common.oa.offline_activity.label': 'Offline Activity'
+  'common.oa.offline_activity.label': 'Offline Activity',
+  'oa.rubrics.switch.label': 'Teacher will grade the activity using a rubric?',
+  'oa.rubrics.label': 'Associate a rubrics',
+  'oa.max-score.label': 'Enter maximum score',
+  'oa.teacher-rubric': 'Teacher rubric'
 });

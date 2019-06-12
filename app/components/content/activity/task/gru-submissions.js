@@ -80,6 +80,8 @@ export default Ember.Component.extend({
     },
     removeLineItem(submission) {
       const component = this;
+      component.set('isLoading', true);
+
       if (submission.refData && submission.refData.length > 0) {
         submission = submission.refData[0];
       } else {
@@ -89,6 +91,7 @@ export default Ember.Component.extend({
         let tasksSubmissionsCol = component.get('submissions');
         tasksSubmissionsCol.removeObject(submission);
         component.refreshSubmission();
+        component.set('isLoading', false);
 
         /* component.get('updateParent')(); */
       });
@@ -101,7 +104,6 @@ export default Ember.Component.extend({
       //ToDo: Call activityService API and save changes
       component.saveTaskSubmission(taskSubmissionSubType).then(submission => {
         component.send('updateSubmissionCollection', submission);
-        //component.set('model', component.get('model').copy());
       });
     }
   },
@@ -115,6 +117,8 @@ export default Ember.Component.extend({
   removeSubmission(tasksSubmission) {
     const component = this;
     tasksSubmission.set('oaTaskId', component.get('oaTaskId'));
+    tasksSubmission.set('oaId', component.get('oaId'));
+
     //ToDo: Validate
     return component
       .get('activityService')
