@@ -538,6 +538,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-questions-to-display': 'പ്രദർശിപ്പിക്കുക [1] ചോദ്യങ്ങൾ.',
   'common.no-resources-to-display': 'ഇല്ല [1] പ്രദർശിപ്പിക്കാൻ റിസോഴ്സുകൾ [2].',
   'common.no-rubrics-to-display': 'ഇല്ല [1] റബ്രിക്സ് [2] പ്രദർശിപ്പിക്കുക.',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'നിങ്ങൾക്ക് ഇതുവരെ പിന്തുടരാത്തവർക്കാവില്ല.',
   'common.no-independent-results':
     'നിങ്ങളുടെ ബുക്ക്മാർക്ക് ചെയ്ത {{contenttype}} പര്യവേക്ഷണം ആരംഭിക്കുമ്പോൾ, അവ ഇവിടെ ദൃശ്യമാകും.',

@@ -495,6 +495,28 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Return the list of rubrics related to a user
+   * @param {string} userId
+   * @param {*} params
+   * @returns {RSVP.Promise.<Rubric>}
+   */
+  readOfflineActivities: function(userId, params) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('profileAdapter')
+        .readOfflineActivities(userId, params)
+        .then(function(response) {
+          resolve(
+            service
+              .get('profileSerializer')
+              .normalizeReadOfflineActivities(response)
+          );
+        }, reject);
+    });
+  },
+
+  /**
    * Starts the forgot password workflow
    * @param {string} username - account's username or email
    * @returns {Ember.RSVP.Promise}

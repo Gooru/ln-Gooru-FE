@@ -546,6 +546,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-resources-to-display':
     'No hay <span>recursos</span> para mostrar.',
   'common.no-rubrics-to-display': 'No hay <span>rúbricas</span> para mostrar.',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'Aún no tienes seguidores.',
   'common.no-independent-results':
     'Cuando empieces a explorar tu {{contentType}} marcado como favorito, aparecerán aquí.',

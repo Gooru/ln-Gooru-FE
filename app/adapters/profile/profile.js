@@ -312,6 +312,46 @@ export default Ember.Object.extend({
   },
 
   /**
+   * Gets Rubrics by user id
+   *
+   * @param {string} userId
+   * @param {*} params
+   * @returns {Promise}
+   */
+  readOfflineActivities(userId, params = {}) {
+    const adapter = this;
+    const namespace = adapter.get('namespaceV2');
+    const url = `${namespace}/${userId}/offline-activities`;
+
+    const page = params.page || 0;
+    const pageSize = params.pageSize || DEFAULT_PAGE_SIZE;
+    const offset = page * pageSize;
+    var data = {
+      limit: pageSize,
+      offset: offset
+    };
+    if (params.filterBy) {
+      data.filterBy = params.filterBy;
+    }
+    if (params.searchText) {
+      data.searchText = params.searchText;
+    }
+    if (params.sortOn) {
+      data.sortOn = params.sortOn;
+    }
+    if (params.order) {
+      data.order = params.order;
+    }
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
    * Start the forgot password workflow
    * @param username
    * @returns {*|Promise}

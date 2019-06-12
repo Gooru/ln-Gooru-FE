@@ -277,7 +277,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       id: item.id,
       oaId: item.oa_id,
       title: item.title,
-      description: item.title,
+      description: item.description,
       oaTaskSubmissions: serializer.normalizeSubmissions(
         item.oa_tasks_submissions
       ),

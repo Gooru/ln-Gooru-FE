@@ -543,6 +543,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-questions-to-display': 'காண்பிக்க [1] கேள்விகள் [2] இல்லை.',
   'common.no-resources-to-display': 'இல்லை [1] வளங்களை காட்ட [2].',
   'common.no-rubrics-to-display': 'எந்த [1] ரப்பர் [2] காட்ட.',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'நீங்கள் இன்னும் பின்பற்றுபவர்கள் இல்லை.',
   'common.no-independent-results':
     'நீங்கள் உங்கள் புக்மார்க்குடனான {{contenttype}} ஐத் தொடங்கும் போது, அவை இங்கே தோன்றும்.',

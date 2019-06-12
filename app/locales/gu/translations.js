@@ -532,6 +532,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-questions-to-display': 'ના [1] પ્રશ્નો [2] પ્રદર્શિત કરવા માટે.',
   'common.no-resources-to-display': 'ના [1] સંસાધનો [2] પ્રદર્શિત કરવા માટે.',
   'common.no-rubrics-to-display': 'ના [1] રબર [2] પ્રદર્શિત કરવા માટે.',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'તમારી પાસે હજી અનુયાયીઓ નથી.',
   'common.no-independent-results':
     'જ્યારે તમે તમારા બુકમાર્ક્ડ {{contenttype}} ને અન્વેષણ કરવાનું શરૂ કરો છો, ત્યારે તેઓ અહીં દેખાશે.',

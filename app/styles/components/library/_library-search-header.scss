@@ -507,6 +507,12 @@
                   @include scale(0.8);
                 }
               }
+
+              &.offline-activity {
+                i {
+                  background-image: url("./gooru/images/offline.svg");
+                }
+              }
             }
           }
         }
@@ -515,7 +521,7 @@
 
     .filters {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(7, 1fr);
       align-items: center;
       text-align: center;
       height: 50px;
@@ -605,6 +611,15 @@
           .icon {
             -webkit-mask-image: url("gooru/images/add_question.svg");
             mask-image: url("gooru/images/add_question.svg");
+            -webkit-mask-size: cover;
+            @extend %bg-container;
+          }
+        }
+
+        &.offline-activity {
+          .icon {
+            -webkit-mask-image: url("gooru/images/offline.svg");
+            mask-image: url("gooru/images/offline.svg");
             -webkit-mask-size: cover;
             @extend %bg-container;
           }

@@ -533,6 +533,8 @@ export default Object.assign(quizzesTranslations, {
     'प्रदर्शित करण्यासाठी <span> स्त्रोत नाहीत </span>',
   'common.no-rubrics-to-display':
     'प्रदर्शित करण्यासाठी <span> रुब्रिक्स </span> नाही',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'आपल्याकडे अद्याप अनुयायी नाहीत',
   'common.no-independent-results':
     'जेव्हा आपण आपले {{contenttype}} बुकमार्क एक्सप्लोर करणे सुरू कराल तेव्हा ते येथे दिसतील.',

@@ -538,6 +538,8 @@ export default Object.assign(quizzesTranslations, {
     'प्रदर्शित करने के लिए कोई <span> संसाधन </span> नहीं है।',
   'common.no-rubrics-to-display':
     'प्रदर्शित करने के लिए कोई <span> सुर्खी </span> नहीं है।',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'आपके पास अभी तक अनुसरण करने वाले नहीं हैं।',
   'common.no-independent-results':
     'जब आप अपने बुकमार्क किए गए {{contenttype}} की खोज शुरू करते हैं, तो वे यहां दिखाई देंगे।',

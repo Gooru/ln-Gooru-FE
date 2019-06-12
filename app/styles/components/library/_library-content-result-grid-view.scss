@@ -7,6 +7,17 @@
     grid-template-columns: repeat(5, 1fr);
     justify-content: center;
     margin-top: 10px;
+
+    @media screen and (min-width: $screen-in-1024) {
+      &.course,
+      &.assessment,
+      &.collection,
+      &.offline-activity {
+        display: flex;
+        flex-flow: row wrap;
+      }
+    }
+
     @media screen and (max-width: $screen-in-1150) and (min-width: $screen-in-1024) {
       grid-template-columns: repeat(3, 1fr);
 
