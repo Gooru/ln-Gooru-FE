@@ -454,6 +454,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-questions-to-display': 'ପ୍ରଦର୍ଶନ କରିବାକୁ [1]ପ୍ରଶ୍ନ ଗୁଡ଼ିକ2] ନାହିଁ ।',
   'common.no-resources-to-display': 'ପ୍ରଦର୍ଶନ କରିବାକୁ [1]ସମ୍ୱଳ ଗୁଡ଼ିକ2] ନାହିଁ ।',
   'common.no-rubrics-to-display': 'ପ୍ରଦର୍ଶନ କରିବାକୁ [1]ଶୀର୍ଷକ ଗୁଡ଼ିକ2] ନାହିଁ ।',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'ଆପଣଙ୍କର ଏ ପର୍ଯ୍ୟନ୍ତ ଅନୁସରଣକାରୀ ନାହାନ୍ତି ।',
   'common.no-independent-results': 'ଆପଣ ନିଜର ବୁକମାର୍କ ହୋଇଥିବା {{contentType}}କୁ ଅନ୍ୱେଷଣ ଆରମ୍ଭ କଲେ, ସେଗୁଡ଼ିକ ଏଠାରେ ଦେଖାଯିବ ।',
   'common.no-results': 'କୌଣସି ଫଳାଫଳ ମିଳିଲା ନାହିଁ',

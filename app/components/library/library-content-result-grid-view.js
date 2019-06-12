@@ -8,7 +8,6 @@ import {
 } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Dependencies
   /**
@@ -41,7 +40,10 @@ export default Ember.Component.extend({
    * @property {Boolean} isRemixableContent
    */
   isRemixableContent: Ember.computed('type', function() {
-    return this.get('type') === SEARCH_CONTEXT.GOORU_CATALOG || this.get('type') === SEARCH_CONTEXT.LIBRARY;
+    return (
+      this.get('type') === SEARCH_CONTEXT.GOORU_CATALOG ||
+      this.get('type') === SEARCH_CONTEXT.LIBRARY
+    );
   }),
 
   // -------------------------------------------------------------------------
@@ -57,9 +59,9 @@ export default Ember.Component.extend({
     //Action triggered when click on the play icon
     openContentPlayer: function(assessment) {
       const component = this;
-      let previewContentType = assessment.get('isExternalAssessment') ?
-        'assessment-external' :
-        'assessment';
+      let previewContentType = assessment.get('isExternalAssessment')
+        ? 'assessment-external'
+        : 'assessment';
       component.set('previewContent', assessment);
       component.set('previewContentType', previewContentType);
       component.set('isShowContentPreview', true);
@@ -79,9 +81,11 @@ export default Ember.Component.extend({
      * @param {Collection} collection
      */
     editCollection: function(collection) {
-      this.get('router').transitionTo('content.collections.edit', collection.get('id'));
+      this.get('router').transitionTo(
+        'content.collections.edit',
+        collection.get('id')
+      );
     },
-
 
     /**
      * Remix course action, when clicking remix at the course card
@@ -105,10 +109,7 @@ export default Ember.Component.extend({
      * Action triggered to bookmark a course
      * @param {Course} course
      */
-    onBookmarkCourse: function({
-      title,
-      id
-    }, showType) {
+    onBookmarkCourse: function({ title, id }, showType) {
       let bookmark = Bookmark.create(Ember.getOwner(this).ownerInjection(), {
         title,
         contentId: id,
@@ -123,11 +124,7 @@ export default Ember.Component.extend({
      * Edit course action, when clicking Play at the course card
      * @param {Content/Course}
      */
-    playIndependentContent: function({
-      title,
-      id,
-      collectionType
-    }) {
+    playIndependentContent: function({ title, id, collectionType }) {
       let isCourse = !collectionType;
       let bookmark = Bookmark.create(Ember.getOwner(this).ownerInjection(), {
         title,
@@ -153,11 +150,7 @@ export default Ember.Component.extend({
      * Action triggered to bookmark a collection or assessment
      * @param {Collection/Assessment} content
      */
-    onBookmarkContent: function({
-      title,
-      id,
-      collectionType
-    }, showType) {
+    onBookmarkContent: function({ title, id, collectionType }, showType) {
       let bookmark = Bookmark.create(Ember.getOwner(this).ownerInjection(), {
         title,
         contentId: id,
@@ -176,9 +169,13 @@ export default Ember.Component.extend({
       let queryParams = {
         userId: course.get('ownerId')
       };
-      this.get('router').transitionTo('content.courses.edit', course.get('id'), {
-        queryParams
-      });
+      this.get('router').transitionTo(
+        'content.courses.edit',
+        course.get('id'),
+        {
+          queryParams
+        }
+      );
     },
 
     /**
@@ -194,11 +191,15 @@ export default Ember.Component.extend({
      * @param {Assessment} assessment
      */
     editAssessment: function(assessment) {
-      this.get('router').transitionTo('content.assessments.edit', assessment.get('id'), {
-        queryParams: {
-          editingContent: true
+      this.get('router').transitionTo(
+        'content.assessments.edit',
+        assessment.get('id'),
+        {
+          queryParams: {
+            editingContent: true
+          }
         }
-      });
+      );
     },
     /**
      * Action triggered when click preview button
@@ -215,7 +216,10 @@ export default Ember.Component.extend({
      * @param {Question} question
      */
     playQuestion: function(question) {
-      this.get('router').transitionTo('content.questions.play', question.get('id'));
+      this.get('router').transitionTo(
+        'content.questions.play',
+        question.get('id')
+      );
     },
 
     /**
@@ -223,9 +227,11 @@ export default Ember.Component.extend({
      * @param {Question} question
      */
     editQuestion: function(question) {
-      this.get('router').transitionTo('content.questions.edit', question.get('id'));
+      this.get('router').transitionTo(
+        'content.questions.edit',
+        question.get('id')
+      );
     },
-
 
     /**
      * On card remix question button click
@@ -239,7 +245,10 @@ export default Ember.Component.extend({
      * Edit rubric
      */
     editRubric: function(resource) {
-      this.get('router').transitionTo('content.rubric.edit', resource.get('id'));
+      this.get('router').transitionTo(
+        'content.rubric.edit',
+        resource.get('id')
+      );
     },
 
     /**
@@ -247,7 +256,10 @@ export default Ember.Component.extend({
      * @param {Resource} resource
      */
     editResource: function(resource) {
-      this.get('router').transitionTo('content.resources.edit', resource.get('id'));
+      this.get('router').transitionTo(
+        'content.resources.edit',
+        resource.get('id')
+      );
     },
 
     /**
@@ -255,11 +267,21 @@ export default Ember.Component.extend({
      * @param {Resource} resource
      */
     playResource: function(resource) {
-      this.get('router').transitionTo('content.resources.play', resource.get('id'));
+      this.get('router').transitionTo(
+        'content.resources.play',
+        resource.get('id')
+      );
     },
 
     showModal(type) {
       this.sendAction('onShowCreateModal', type);
+    },
+
+    //Action triggered when click on OA preview
+    onShowOfflineActivityPreview(offlineActivity) {
+      const component = this;
+      component.set('previewContent', offlineActivity);
+      component.set('isShowOfflineActivityPreview', true);
     }
   },
 
@@ -274,7 +296,9 @@ export default Ember.Component.extend({
       if (!loading) {
         let scrollTop = Ember.$(container).scrollTop();
         let listContainerHeight = Ember.$(container).height() + 500;
-        let isScrollReachedBottom = scrollTop >= (component.$(container).prop('scrollHeight') - listContainerHeight);
+        let isScrollReachedBottom =
+          scrollTop >=
+          component.$(container).prop('scrollHeight') - listContainerHeight;
         if (isScrollReachedBottom) {
           loading = true;
           component.sendAction('paginateNext');
@@ -303,11 +327,11 @@ export default Ember.Component.extend({
       toastClass: 'gooru-toast',
       timeOut: 10000
     });
-    const successMsg = showType ?
-      this.get('i18n').t('common.bookmarked-content-success', {
+    const successMsg = showType
+      ? this.get('i18n').t('common.bookmarked-content-success', {
         contentType: bookmark.get('contentType')
-      }) :
-      this.get('i18n').t('common.bookmarked-success');
+      })
+      : this.get('i18n').t('common.bookmarked-success');
     const independentLearningURL = this.get('router').generate(
       'student-independent-learning'
     );

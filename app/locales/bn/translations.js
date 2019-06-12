@@ -527,6 +527,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-questions-to-display': 'কোন <span> প্রশ্ন </span> প্রদর্শন করতে।',
   'common.no-resources-to-display': 'কোন <span> সম্পদ প্রদর্শন </span>।',
   'common.no-rubrics-to-display': 'কোন <span> রুব্রিক </span> প্রদর্শন করতে।',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'আপনি এখনও অনুসরণকারীদের আছে না।',
   'common.no-independent-results':
     'যখন আপনি বুকমার্ককৃত {{contenttype}} অনুসন্ধান শুরু করেন, তখন তারা এখানে উপস্থিত হবে।',

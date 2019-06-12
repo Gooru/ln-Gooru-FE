@@ -456,6 +456,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-questions-to-display': 'No <span>questions</span> to display.',
   'common.no-resources-to-display': 'No <span>resources</span> to display.',
   'common.no-rubrics-to-display': 'No <span>rubrics</span> to display.',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'You don\'t have followers yet.',
   'common.no-independent-results': 'When you start exploring your bookmarked {{contentType}}, they will appear here.',
   'common.no-results': 'No results found',

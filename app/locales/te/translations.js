@@ -533,6 +533,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-questions-to-display': 'ప్రదర్శించడానికి ఏ [1] ప్రశ్నలు [2].',
   'common.no-resources-to-display': 'ప్రదర్శించడానికి [1] వనరులు [2].',
   'common.no-rubrics-to-display': 'సంఖ్య [1] ప్రదర్శించడానికి [2].',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'మీరు ఇంకా అనుచరులను కలిగి లేరు.',
   'common.no-independent-results':
     'మీరు మీ బుక్మార్క్ చేసిన {{contenttype}} ను అన్వేషించడం ప్రారంభించినప్పుడు, అవి ఇక్కడ కనిపిస్తాయి.',

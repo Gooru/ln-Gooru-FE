@@ -523,6 +523,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-questions-to-display': 'لا يوجد أسئلة',
   'common.no-resources-to-display': 'لا يوجد مصادر',
   'common.no-rubrics-to-display': 'لا يوجد سلالم تقييم',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'لا يوجد متابِعون بعد',
   'common.no-independent-results':
     'عندما تبدأ البحث عن  {{contentType}} يحتوي على إشارة مرجعية، سيظهر هنا.',

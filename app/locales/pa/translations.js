@@ -454,6 +454,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-questions-to-display': 'ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਨ ਲਈ ਕੋਈ [1] ਪ੍ਰਸ਼ਨ ਨਹੀਂ [2].',
   'common.no-resources-to-display': 'ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਨ ਲਈ ਕੋਈ [1] ਸੰਸਾਧਨਾਂ [2] ਨਹੀਂ.',
   'common.no-rubrics-to-display': 'ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਨ ਲਈ ਕੋਈ [1] ਸ਼ਬਦ ਨਹੀਂ [2]',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'ਤੁਸੀਂ ਹਾਲੇ ਤੱਕ ਚੇਲੇ ਨਹੀਂ ਹਨ.',
   'common.no-independent-results': 'ਜਦੋਂ ਤੁਸੀਂ ਆਪਣੇ ਬੁੱਕਮਾਰਕ {{contenttype}} ਦੀ ਖੋਜ ਸ਼ੁਰੂ ਕਰਦੇ ਹੋ, ਉਹ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ.',
   'common.no-results': 'ਕੋਈ ਨਤੀਜੇ ਨਹੀਂ ਮਿਲੇ',
