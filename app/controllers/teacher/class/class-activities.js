@@ -1075,28 +1075,19 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Animate a schedule section for desktop
    */
   animateUnScheduleForDesktop() {
-    let unScheduleEle = Ember.$('.ca-panel .left-panel .unschedule-container');
-    let leftPanelEle = Ember.$('.ca-panel .left-panel');
-    let scheduleEle = Ember.$(
-      '.schedule-container .ca-schedule-section .dca-content-list-container'
+    let offlineActivityEle = Ember.$('.ca-panel .right-panel .offline-activity-container .offline-activity-section');
+    let unScheduleEle = Ember.$('.ca-panel .right-panel .unschedule-container .ca-unscheduled-items');
+    let itemToGradeEle = Ember.$(
+      '.ca-panel .right-panel .item-to-grade-container .ca-grade-content-items'
     );
-    if (unScheduleEle.hasClass('active')) {
-      unScheduleEle.removeClass('active');
-      Ember.$('.ca-unscheduled-items').slideUp(400, function() {
-        let containerheight = leftPanelEle.height() - unScheduleEle.height();
-        scheduleEle.css({
-          height: containerheight
-        });
-      });
-    } else {
-      scheduleEle.animate({
-        height: '0'
-      },
-      function() {
+    if (!unScheduleEle.hasClass('active')) {
+      offlineActivityEle.removeClass('active');
+      itemToGradeEle.removeClass('active');
+      offlineActivityEle.slideUp(400);
+      itemToGradeEle.slideUp(400);
+      unScheduleEle.slideDown(400, function() {
         unScheduleEle.addClass('active');
-        Ember.$('.ca-unscheduled-items').slideDown(400);
-      }
-      );
+      });
     }
   },
 
@@ -1104,7 +1095,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Animate a schedule section for mobile
    */
   animateUnScheduleForMobile() {
-    let unScheduleEle = Ember.$('.ca-panel .left-panel .unschedule-container');
+    let unScheduleEle = Ember.$('.ca-panel .right-panel .unschedule-container');
     let windowHeight = $(window).height();
     if (unScheduleEle.hasClass('active')) {
       unScheduleEle.animate({
@@ -1129,13 +1120,19 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Animate a offline activity for desktop
    */
   animateOfflineActivityForDesktop() {
-    let offlineActivityEle = Ember.$('.offline-activity-section');
+    let offlineActivityEle = Ember.$('.ca-panel .right-panel .offline-activity-container .offline-activity-section');
+    let unScheduleEle = Ember.$('.ca-panel .right-panel .unschedule-container .ca-unscheduled-items');
     let itemToGradeEle = Ember.$(
-      '.ca-panel .right-panel .item-to-grade-container'
+      '.ca-panel .right-panel .item-to-grade-container .ca-grade-content-items'
     );
-    if (itemToGradeEle.hasClass('active')) {
+    if (!offlineActivityEle.hasClass('active')) {
       itemToGradeEle.removeClass('active');
-      offlineActivityEle.slideDown(400);
+      unScheduleEle.removeClass('active');
+      itemToGradeEle.slideUp(400);
+      unScheduleEle.slideUp(400);
+      offlineActivityEle.slideDown(400, function() {
+        offlineActivityEle.addClass('active');
+      });
     }
   },
 
@@ -1170,16 +1167,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Animate a items to grade section for desktop
    */
   animateItemsToGradeForDesktop() {
-    let offlineActivityEle = Ember.$('.offline-activity-section');
+    let offlineActivityEle = Ember.$('.ca-panel .right-panel .offline-activity-container .offline-activity-section');
+    let unScheduleEle = Ember.$('.ca-panel .right-panel .unschedule-container .ca-unscheduled-items');
     let itemToGradeEle = Ember.$(
-      '.ca-panel .right-panel .item-to-grade-container'
+      '.ca-panel .right-panel .item-to-grade-container .ca-grade-content-items'
     );
-    if (itemToGradeEle.hasClass('active')) {
-      offlineActivityEle.slideDown(400, function() {
-        itemToGradeEle.removeClass('active');
-      });
-    } else {
-      offlineActivityEle.slideUp(400, function() {
+    if (!itemToGradeEle.hasClass('active')) {
+      offlineActivityEle.removeClass('active');
+      unScheduleEle.removeClass('active');
+      offlineActivityEle.slideUp(400);
+      unScheduleEle.slideUp(400);
+      itemToGradeEle.slideDown(400, function() {
         itemToGradeEle.addClass('active');
       });
     }

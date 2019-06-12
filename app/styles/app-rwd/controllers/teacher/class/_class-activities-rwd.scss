@@ -117,10 +117,9 @@
             background-color: #fff;
 
             .ca-unscheduled-items {
-              height: 100%;
+              height: auto;
               width: 100%;
               max-height: calc(100% - 150px);
-              padding-bottom: 0;
               display: block;
 
               .ca-unscheduled-content-items {
