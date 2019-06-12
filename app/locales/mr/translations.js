@@ -51,6 +51,7 @@ export default Object.assign(quizzesTranslations, {
   'errors.even': '{{description}} सम असला पाहिजे',
   'errors.positive': '{{description}} सकारात्मक असणे आवश्यक आहे',
   'errors.date': '{{description}} एक वैध तारीख असणे आवश्यक आहे',
+  'common.for': 'for',
   'errors.email': '{{description}} एक वैध ईमेल पत्ता असणे आवश्यक आहे',
   'errors.phone': '{{description}} एक वैध फोन नंबर असणे आवश्यक आहे',
   'errors.url': '{{description}} वैध url असणे आवश्यक आहे',

@@ -62,6 +62,7 @@ export default Object.assign(quizzesTranslations, {
   'common.efficacy': 'பலாபலன்',
   'common.grid': 'கட்டம்',
   'common.list': 'பட்டியலில்',
+  'common.for': 'for',
   'common.first': 'முதல்',
   'common.last': 'கடந்த',
   'common.name': 'பெயர்',

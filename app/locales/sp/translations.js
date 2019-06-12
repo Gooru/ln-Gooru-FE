@@ -61,6 +61,7 @@ export default Object.assign(quizzesTranslations, {
   'common.efficacy': 'Efficacy',
   'common.grid': 'Grid',
   'common.list': 'List',
+  'common.for': 'for',
   'common.first': 'First',
   'common.last': 'Last',
   'common.name': 'Name',
