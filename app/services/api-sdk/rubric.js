@@ -318,5 +318,36 @@ export default Ember.Service.extend({
       .then(data =>
         service.get('serializer').normalizeRubricQuestionSummary(data)
       );
+  },
+
+  /**
+   * Gets DCA report of Rubric Grading for a Question
+   * @param {string} studentId
+   * @param {string} classId
+   * @param {string} collectionId
+   * @param {string} questionId
+   * @param {string} sessionId
+   * @returns {Promise|RubricGrade}
+   */
+  getRubricQuestionSummaryForDCA: function(
+    studentId,
+    classId,
+    collectionId,
+    questionId,
+    sessionId
+  ) {
+    const service = this;
+    return service
+      .get('adapter')
+      .getRubricQuestionSummaryForDCA(
+        studentId,
+        classId,
+        collectionId,
+        questionId,
+        sessionId
+      )
+      .then(data =>
+        service.get('serializer').normalizeRubricQuestionSummary(data)
+      );
   }
 });

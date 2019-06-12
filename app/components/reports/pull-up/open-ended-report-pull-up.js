@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import Context from 'gooru-web/models/result/context';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -133,11 +135,10 @@ export default Ember.Component.extend({
    */
   openPullUp() {
     let component = this;
-    component.$().animate(
-      {
-        top: '10%'
-      },
-      400
+    component.$().animate({
+      top: '10%'
+    },
+    400
     );
   },
 
@@ -146,14 +147,13 @@ export default Ember.Component.extend({
    */
   closePullUp() {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-      }
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+    }
     );
   },
 
@@ -165,10 +165,10 @@ export default Ember.Component.extend({
     let context = component.get('context');
     component.getRubricQuestionSummary(context).then(function(model) {
       const questionResults = model.questionResult.resourceResults;
-      const questionResult = questionResults.findBy(
+      const questionResult = questionResults ? questionResults.findBy(
         'resourceId',
         model.question.get('id')
-      );
+      ) : null;
       component.set(
         'questionText',
         model.question.get('description') || model.question.get('title')
@@ -223,7 +223,7 @@ export default Ember.Component.extend({
     const questionPromise = component
       .get('questionService')
       .readQuestion(questionId);
-    const summaryPromise = component
+    const summaryPromise = courseId ? component
       .get('rubricService')
       .getRubricQuestionSummary(
         studentId,
@@ -232,7 +232,16 @@ export default Ember.Component.extend({
         collectionId,
         questionId,
         sessionId
-      );
+      ) :
+      component
+        .get('rubricService')
+        .getRubricQuestionSummaryForDCA(
+          studentId,
+          classId,
+          collectionId,
+          questionId,
+          sessionId
+        );
     const isCollection = collectionType === CONTENT_TYPES.COLLECTION;
     const session = !isCollection ? sessionId : null;
 

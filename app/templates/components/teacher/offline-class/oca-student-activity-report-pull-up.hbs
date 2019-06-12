@@ -53,33 +53,33 @@
       {{#each resourcesCollection as | resource resourceSeq|}}
         <div class="resource resource-{{resourceSeq}}">
           <div class="resource-container" data-toggle="collapse" data-target="#collapse-{{resourceSeq}}">
-          <div class="resource-icon">
+            <div class="resource-icon">
+              {{#if (eq resource.performance.resourceType 'question')}}
+                <i class="question-img"></i>
+              {{else}}
+                <i class="resource-img {{resource.format}}"></i>
+              {{/if}}
+            </div>
+            <div class="resource-title ellipsis">{{safe-html resource.title}}</div>
+            {{#if (eq resource.performance.questionType 'OE')}}
+              <i class="rubric-img"></i>
+            {{/if}}
             {{#if (eq resource.performance.resourceType 'question')}}
-              <i class="question-img"></i>
+              <div class="type"> {{resource.performance.questionType}}</div>
+              <div class="performance" style="background-color:{{if resource (grade-color resource.performance.score)}}">
+                <div class="score">
+                  <span class="graded-score">{{resource.performance.rawScore}}</span>/<span class="max-score">{{resource.performance.maxScore}}</span>
+                </div>
+                <span>{{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}</span>
+              </div>
             {{else}}
-              <i class="resource-img {{resource.format}}"></i>
+              <div class="timespent">
+                {{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}
+              </div>
             {{/if}}
           </div>
-          <div class="resource-title ellipsis">{{safe-html resource.title}}</div>
-          {{#if (eq resource.performance.questionType 'OE')}}
-            <i class="rubric-img"></i>
-          {{/if}}
-          {{#if (eq resource.performance.resourceType 'question')}}
-            <div class="type"> {{resource.performance.questionType}}</div>
-            <div class="performance" style="background-color:{{if resource (grade-color resource.performance.score)}}">
-              <div class="score">
-                <span class="graded-score">{{resource.performance.rawScore}}</span>/<span class="max-score">{{resource.maxScore}}</span>
-              </div>
-              <span>{{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}</span>
-            </div>
-          {{else}}
-            <div class="timespent">
-              {{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}
-            </div>
-          {{/if}}
-        </div>
           <div class="collapse" id="collapse-{{resourceSeq}}">
-          <span class="resource-description">{{safe-html resource.description}}</span>
+            <span class="resource-description">{{safe-html resource.description}}</span>
           </div>
         </div>
       {{/each}}
@@ -87,10 +87,10 @@
         <div class="external-collection-link">
           <div class="note">{{t 'report.external-collection-report.note'}}</div>
           {{#if collection.url}}
-          <div>{{t 'report.external-collection-report.reference'}} <a class="link" target="_blank" href="{{collection.url}}">here</a></div>
+            <div>{{t 'report.external-collection-report.reference'}} <a class="link" target="_blank" href="{{collection.url}}">here</a></div>
           {{/if}}
         </div>
-        {{else if (eq collection.collectionType 'assessment-external')}}
+      {{else if (eq collection.collectionType 'assessment-external')}}
         <div class="external-assessment-link">
           <div class="note">{{t 'report.external-assessment-report.note'}}</div>
           <div>This external assessment can be accessed <a class="link" target="_blank" href="{{collection.url}}">here</a></div>

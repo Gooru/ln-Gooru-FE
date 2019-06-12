@@ -9,7 +9,9 @@ import {
   QUESTION_TYPES,
   getQuestionTypeByApiType
 } from 'gooru-web/config/question';
-import { toLocal } from 'gooru-web/utils/utils';
+import {
+  toLocal
+} from 'gooru-web/utils/utils';
 
 export default Ember.Object.extend({
   normalizeResponse: function(payload) {
@@ -75,9 +77,9 @@ export default Ember.Object.extend({
     );
 
     let eventTime = payload.eventTime ? toLocal(payload.eventTime) : null;
-    let startedAt = payload.startTime
-      ? toLocal(payload.startTime)
-      : toLocal(new Date().getTime());
+    let startedAt = payload.startTime ?
+      toLocal(payload.startTime) :
+      toLocal(new Date().getTime());
     let submittedAt = payload.endTime ? toLocal(payload.endTime) : startedAt;
 
     if (payload.resourceType === 'question') {
@@ -103,7 +105,7 @@ export default Ember.Object.extend({
         //fields only for student collection performance
         score: payload.score,
         rawScore: payload.rawScore,
-
+        maxScore: payload.maxScore,
         resourceType: payload.resourceType,
         questionType: qtype,
         attempts: payload.attempts,
@@ -147,10 +149,8 @@ export default Ember.Object.extend({
    * @returns {AnswerObject[]}
    */
   normalizeAnswerObjects: function(answerObjects, questionType) {
-    answerObjects =
-      !answerObjects || answerObjects === 'N/A' || answerObjects === 'NA'
-        ? []
-        : answerObjects;
+    answerObjects = !answerObjects || answerObjects === 'N/A' || answerObjects === 'NA' ? [] :
+      answerObjects;
     if (typeof answerObjects === 'string') {
       answerObjects = JSON.parse(answerObjects);
     }

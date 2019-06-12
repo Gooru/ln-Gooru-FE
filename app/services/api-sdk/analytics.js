@@ -267,15 +267,12 @@ export default Ember.Service.extend({
         }
       }
       Ember.RSVP.hash({
-        course: courseId
-          ? service.get('courseService').fetchByIdWithOutProfile(courseId)
-          : undefined,
-        unit: unitId
-          ? service.get('unitService').fetchById(courseId, unitId)
-          : undefined,
-        lesson: lessonId
-          ? service.get('lessonService').fetchById(courseId, unitId, lessonId)
-          : undefined,
+        course: courseId ?
+          service.get('courseService').fetchByIdWithOutProfile(courseId) : undefined,
+        unit: unitId ?
+          service.get('unitService').fetchById(courseId, unitId) : undefined,
+        lesson: lessonId ?
+          service.get('lessonService').fetchById(courseId, unitId, lessonId) : undefined,
         collection: collection
       }).then(
         function(hash) {
