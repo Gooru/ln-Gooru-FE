@@ -36,6 +36,7 @@ export default Object.assign(quizzesTranslations, {
   'errors.after': '{{description}} ନିଶ୍ଚିତ ରୂପେ {{after}}ପରେ',
   'errors.wrongDateFormat':
     '{{description}} ନିଶ୍ଚିତ ରୂପେ {{format}} ଫର୍ମାଟରେ ହେବ',
+  'common.for': 'for',
   'errors.wrongLength':
     '{{description}} ଭୁଲ ଦୈର୍ଘ୍ୟ ବିଶିଷ୍ଟ ଅଟେ ({{is}} ବର୍ଣ୍ଣ ହେବା ଉଚିତ)',
   'errors.notANumber': '{{description}} ନିଶ୍ଚିତ ରୂପେ ଏକ ସଂଖ୍ୟା ହେବା ଆବଶ୍ୟକ',
@@ -554,6 +555,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-resources-to-display':
     'ପ୍ରଦର୍ଶନ କରିବାକୁ [1]ସମ୍ୱଳ ଗୁଡ଼ିକ2] ନାହିଁ ।',
   'common.no-rubrics-to-display': 'ପ୍ରଦର୍ଶନ କରିବାକୁ [1]ଶୀର୍ଷକ ଗୁଡ଼ିକ2] ନାହିଁ ।',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'ଆପଣଙ୍କର ଏ ପର୍ଯ୍ୟନ୍ତ ଅନୁସରଣକାରୀ ନାହାନ୍ତି ।',
   'common.no-independent-results':
     'ଆପଣ ନିଜର ବୁକମାର୍କ ହୋଇଥିବା {{contentType}}କୁ ଅନ୍ୱେଷଣ ଆରମ୍ଭ କଲେ, ସେଗୁଡ଼ିକ ଏଠାରେ ଦେଖାଯିବ ।',

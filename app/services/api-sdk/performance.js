@@ -9,7 +9,10 @@ import CourseCompetencyCompletionAdapter from 'gooru-web/adapters/performance/co
 import CourseCompetencyCompletionSerializer from 'gooru-web/serializers/performance/course-competency-completion';
 import MilestonePerformanceAdapter from 'gooru-web/adapters/performance/milestone-performance';
 import MilestonePerformanceSerializer from 'gooru-web/serializers/performance/milestone-performance';
-import { aggregateClassActivityPerformanceSummaryItems } from 'gooru-web/utils/performance-summary';
+import {
+  aggregateClassActivityPerformanceSummaryItems,
+  aggregateOfflineClassActivityPerformanceSummaryItems
+} from 'gooru-web/utils/performance-summary';
 import PerformanceAdapter from 'gooru-web/adapters/performance/performance';
 import PerformanceSerializer from 'gooru-web/serializers/performance/performance';
 
@@ -1230,9 +1233,10 @@ export default Ember.Service.extend({
       .get('activityPerformanceSummaryAdapter')
       .findOfflineClassActivityPerformanceSummaryByIds(classId, oaIds, userId)
       .then(function(data) {
-        return service
+        let activities = service
           .get('activityPerformanceSummarySerializer')
           .normalizeAllActivityPerformanceSummary(data);
+        return aggregateOfflineClassActivityPerformanceSummaryItems(activities);
       });
   }
 });

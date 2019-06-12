@@ -66,6 +66,7 @@ export default Object.assign(quizzesTranslations, {
   'common.tasks': 'tasks',
   'common.name': 'ਨਾਮ',
   'common.user': 'ਯੂਜ਼ਰ',
+  'common.for': 'for',
   'common.content-name': 'ਸਮੱਗਰੀ ਦਾ ਨਾਂ',
   'common.lastName': 'ਆਖੀਰਲਾ ਨਾਂਮ',
   'common.firstName': 'ਪਹਿਲਾ ਨਾਂ',
@@ -536,6 +537,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-resources-to-display':
     'ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਨ ਲਈ ਕੋਈ [1] ਸੰਸਾਧਨਾਂ [2] ਨਹੀਂ.',
   'common.no-rubrics-to-display': 'ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਨ ਲਈ ਕੋਈ [1] ਸ਼ਬਦ ਨਹੀਂ [2]',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'ਤੁਸੀਂ ਹਾਲੇ ਤੱਕ ਚੇਲੇ ਨਹੀਂ ਹਨ.',
   'common.no-independent-results':
     'ਜਦੋਂ ਤੁਸੀਂ ਆਪਣੇ ਬੁੱਕਮਾਰਕ {{contenttype}} ਦੀ ਖੋਜ ਸ਼ੁਰੂ ਕਰਦੇ ਹੋ, ਉਹ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ.',

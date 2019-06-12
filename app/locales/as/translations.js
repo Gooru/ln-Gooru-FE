@@ -67,6 +67,7 @@ export default Object.assign(quizzesTranslations, {
   'featured-libraries': 'featured libraries',
   'common.answer-this-activity':
     'Answer this rubric to complete your activity.',
+  'common.for': 'for',
   'common.lastName': 'শেষ নাম',
   'common.firstName': 'প্ৰথম নাম',
   'common.tasks': 'tasks',
@@ -555,6 +556,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-questions-to-display': 'দেখুৱাবলৈ কোনো <span>প্ৰশ্ন</span> নাই।',
   'common.no-resources-to-display': 'দেখুৱাবলৈ কোনো <span>সম্পদ</span> নাই।',
   'common.no-rubrics-to-display': 'দেখুৱাবলৈ কোনো <span>ৰুব্ৰিক</span> নাই।',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'আপোনাৰ এই পৰ্য্যন্ত অনুগামী নাই।',
   'common.no-independent-results':
     'যেতিয়া আপুনি আপোনাৰ বুকমাৰ্কৰ অনুসন্ধান কৰে{{contentType}}, সেইবিলাকক ইয়াত প্ৰত্যক্ষ কৰা হ\'ব।',

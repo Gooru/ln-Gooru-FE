@@ -15,6 +15,20 @@ export default Ember.Component.extend({
    */
   isReadOnly: false,
 
+  /**
+   * Maintains the rubric categories and sort score by asc.
+   * @type {Boolean}
+   */
+  rubricCategories: Ember.computed('categories', function() {
+    let component = this;
+    let categories = component.get('categories');
+    categories.map(category => {
+      let levels = category.get('levels').sortBy('score');
+      category.set('levels', levels);
+    });
+    return categories;
+  }),
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -69,7 +83,7 @@ export default Ember.Component.extend({
 
   setupTooltip() {
     let component = this;
-    let categories = component.get('categories');
+    let categories = component.get('rubricCategories');
     component.$('.grade-info-popover').popover({
       placement: 'top auto',
       container: 'body',

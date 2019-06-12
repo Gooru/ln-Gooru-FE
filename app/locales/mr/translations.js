@@ -51,6 +51,7 @@ export default Object.assign(quizzesTranslations, {
   'errors.even': '{{description}} सम असला पाहिजे',
   'errors.positive': '{{description}} सकारात्मक असणे आवश्यक आहे',
   'errors.date': '{{description}} एक वैध तारीख असणे आवश्यक आहे',
+  'common.for': 'for',
   'errors.email': '{{description}} एक वैध ईमेल पत्ता असणे आवश्यक आहे',
   'errors.phone': '{{description}} एक वैध फोन नंबर असणे आवश्यक आहे',
   'errors.url': '{{description}} वैध url असणे आवश्यक आहे',
@@ -533,6 +534,8 @@ export default Object.assign(quizzesTranslations, {
     'प्रदर्शित करण्यासाठी <span> स्त्रोत नाहीत </span>',
   'common.no-rubrics-to-display':
     'प्रदर्शित करण्यासाठी <span> रुब्रिक्स </span> नाही',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'आपल्याकडे अद्याप अनुयायी नाहीत',
   'common.no-independent-results':
     'जेव्हा आपण आपले {{contenttype}} बुकमार्क एक्सप्लोर करणे सुरू कराल तेव्हा ते येथे दिसतील.',

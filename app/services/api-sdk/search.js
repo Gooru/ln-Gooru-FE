@@ -68,7 +68,9 @@ export default Ember.Service.extend({
         .searchOfflineActivity(term, params, resetPagination)
         .then(function(response) {
           resolve(
-            service.get('searchSerializer').normalizeSearchCollections(response)
+            service
+              .get('searchSerializer')
+              .normalizeSearchOfflineActivities(response)
           );
         }, reject);
     });
@@ -239,9 +241,7 @@ export default Ember.Service.extend({
         .autoCompleteSearch(type, term)
         .then(
           function(response) {
-            resolve(
-              response
-            );
+            resolve(response);
           },
           function(error) {
             reject(error);
@@ -257,9 +257,9 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       let isCompetencyContentAvailable = competencyContentContainer[
         `${gutCode}`
-      ] ?
-        competencyContentContainer[`${gutCode}`][start] || null :
-        null;
+      ]
+        ? competencyContentContainer[`${gutCode}`][start] || null
+        : null;
       if (isCompetencyContentAvailable) {
         resolve(competencyContentContainer[`${gutCode}`][start]);
       } else {
@@ -298,9 +298,9 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       let isCompetencyContentAvailable = competencyContentContainer[
         `${gutCode}`
-      ] ?
-        competencyContentContainer[`${gutCode}`][start] || null :
-        null;
+      ]
+        ? competencyContentContainer[`${gutCode}`][start] || null
+        : null;
       if (isCompetencyContentAvailable) {
         resolve(competencyContentContainer[`${gutCode}`][start]);
       } else {

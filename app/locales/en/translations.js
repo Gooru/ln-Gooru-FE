@@ -183,6 +183,7 @@ export default Object.assign(quizzesTranslations, {
   'common.avatarFor': 'Avatar for',
   'common.averageScore': 'Average Score',
   'common.back': 'Back',
+  'common.for': 'for',
   'common.back-to-assessment': 'Back to assessment',
   'common.back-to-collection': 'Back to collection',
   'common.back-to-course-map': 'Back to Course Map',
@@ -538,6 +539,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-questions-to-display': 'No <span>questions</span> to display.',
   'common.no-resources-to-display': 'No <span>resources</span> to display.',
   'common.no-rubrics-to-display': 'No <span>rubrics</span> to display.',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'You don\'t have followers yet.',
   'common.no-independent-results':
     'When you start exploring your bookmarked {{contentType}}, they will appear here.',

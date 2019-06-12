@@ -1,0 +1,45 @@
+<div class="offline-activity-card-container">
+  <div class="header-container">
+    <div class="oa-thumbnail-container" style="background-image: url({{offlineActivity.thumbnailUrl}})">
+      <div class="oa-title-container">
+        {{offlineActivity.title}}
+      </div>
+    </div>
+    <div class="oa-info-container">
+      <div class="oa-task-count">
+        {{#if offlineActivity.taskCount}}
+          <i class="icon" data-toggle="tooltip" title="{{t 'common.tasks'}}"></i><span class="value">{{offlineActivity.taskCount}}</span>
+        {{/if}}
+      </div>
+      <div class="oa-visibility {{unless offlineActivity.isVisibleOnProfile 'not-visible'}}" title="{{t (if offlineActivity.isVisibleOnProfile 'common.visibility-available' 'common.visibility-tooltip')}}" data-toggle="tooltip">
+        {{gru-icon name="visibility"}}
+      </div>
+    </div>
+  </div>
+  <div class="body-container">
+    <div class="oa-owner-info">
+      <span class="owner-label">
+        {{t (if isSameOwnerAndCreator "common.created-by" "common.remixed-by")}}
+      </span>
+      <span class="owner-thumbnail" style="background-image: url({{offlineActivity.owner.avatarUrl}})"></span>
+      <span class="owner-name ellipsis">{{offlineActivity.owner.displayName}}</span>
+    </div>
+    <div class="oa-description">
+      {{offlineActivity.learningObjectives}}
+    </div>
+    <div class="oa-standards">
+      {{#if oaStandards.length}}
+        {{taxonomy.gru-taxonomy-tag-list tags=oaStandards tagsVisible=2 isInCard=true showDescription=true}}
+      {{/if}}
+    </div>
+  </div>
+  <div class="footer-container">
+    <div class="oa-preview" data-toggle="tooltip" title="{{t 'common.preview'}}" {{action "onShowOfflineActivityPreview"}}>{{gru-icon name="play_arrow"}}</div>
+    {{#if isEditEnabled}}
+      <div class="oa-edit" data-toggle="tooltip" title="{{t 'common.edit'}}" {{action "onEditContent"}}>{{gru-icon name="mode_edit"}}</div>
+    {{/if}}
+    {{#if isAddEnabled}}
+      <div class="oa-add" data-toggle="tooltip" title="{{t 'common.add'}}" {{action "onAddContent"}}>{{gru-icon name="add"}}</div>
+    {{/if}}
+  </div>
+</div>

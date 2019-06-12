@@ -236,6 +236,20 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
+   * Normalize the Offline Activities
+   * @param payload
+   * @returns {Rubric[]}
+   */
+  normalizeReadOfflineActivities: function(payload) {
+    const serializer = this;
+    const offlineActivities = payload.offline_activities || [];
+    const owners = serializer.normalizeOwners(payload.owner_details || []);
+    return offlineActivities.map(offlineActivity => {
+      return serializer.normalizeOfflineActivity(offlineActivity, owners);
+    });
+  },
+
+  /**
    * Normalizes a resource
    * @param {Object} resourceData
    * @param {[]} owners
@@ -386,6 +400,48 @@ export default Ember.Object.extend(ConfigurationMixin, {
         : null,
       format: assessmentData.format,
       url: assessmentData.url
+    });
+  },
+
+  /**
+   * Normalizes a offline activity
+   * @param {Object} offlineActivityData
+   * @param {[]} owners
+   * @returns {Assessment}
+   */
+  normalizeOfflineActivity: function(offlineActivityData, owners) {
+    const serializer = this;
+    const ownerId = offlineActivityData.owner_id;
+    const filteredOwners = Ember.A(owners).filterBy('id', ownerId);
+    const standards = serializer
+      .get('taxonomySerializer')
+      .normalizeTaxonomyObject(offlineActivityData.taxonomy || []);
+    const basePath = serializer.get('session.cdnUrls.content');
+    const appRootPath = this.get('appRootPath'); //configuration appRootPath
+    const thumbnailUrl = offlineActivityData.thumbnail
+      ? basePath + offlineActivityData.thumbnail
+      : appRootPath + DEFAULT_IMAGES.OFFLINE_ACTIVITY;
+
+    return Ember.Object.create({
+      id: offlineActivityData.id,
+      title: offlineActivityData.title,
+      thumbnailUrl: thumbnailUrl,
+      standards: standards,
+      durationHours: offlineActivityData.duration_hours,
+      exemplar: offlineActivityData.exemplar,
+      format: offlineActivityData.format,
+      collectionType: offlineActivityData.format,
+      learningObjectives: offlineActivityData.learning_objective,
+      maxScore: offlineActivityData.max_score,
+      publishedStatus: offlineActivityData.publish_status,
+      reference: offlineActivityData.reference,
+      taskCount: offlineActivityData.task_count,
+      isVisibleOnProfile: offlineActivityData.visible_on_profile,
+      ownerId: offlineActivityData.owner_id,
+      originalCreatorId: offlineActivityData.original_creator_id,
+      owner: filteredOwners.get('length')
+        ? filteredOwners.get('firstObject')
+        : null
     });
   },
 
