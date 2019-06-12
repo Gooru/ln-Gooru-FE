@@ -294,6 +294,10 @@ export default CollectionEdit.extend({
     }
   },
 
+  didInsertElement() {
+    this._super(...arguments);
+    this.$('#emberInfo1123').click();
+  },
   /**
    * Copies master Objects of Source model to editingModel and set editmodel to source, such that source has the latest
    * @param {*} editingModel
