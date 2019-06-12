@@ -35,7 +35,8 @@
             </div>
             {{!-- {{partial 'content/partials/information-actions'}} --}}
             <span>Description</span>
-            {{gru-rich-text-editor content=model.description model=model valuePath='description'}}
+            {{validation.gru-textarea model=model content=model.description valuePath='description' rows=2 maxLength=500 didValidate=didValidate}}
+            {{!-- {{gru-rich-text-editor content=model.description model=model valuePath='description'}} --}}
             {{!-- {{validation.gru-input model=model valuePath='description' maxLength=50 didValidate=true}} --}}
             {{#if model.id}}
                 {{content.activity.task.gru-submissions submissions=model.oaTaskSubmissions oaId=oaId oaTaskId=model.id }}

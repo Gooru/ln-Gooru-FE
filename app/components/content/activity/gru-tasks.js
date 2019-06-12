@@ -74,6 +74,13 @@ export default Ember.Component.extend({
         component.set('task', 'dummy');
       }
     },
+    cancelTask() {
+      const component = this;
+      component.get('updateParent')();
+      if (component.get('task')) {
+        component.set('task', null);
+      }
+    },
     updateTaskCollection(task) {
       const component = this;
       let tasksCol = component.get('tasks');

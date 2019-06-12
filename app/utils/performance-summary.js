@@ -1,10 +1,7 @@
 import Ember from 'ember';
 import ActivityPerformanceSummary from 'gooru-web/models/performance/activity-performance-summary';
 import CollectionPerformanceSummary from 'gooru-web/models/performance/collection-performance-summary';
-import {
-  average,
-  sumAll
-} from 'gooru-web/utils/math';
+import { average, sumAll } from 'gooru-web/utils/math';
 
 /**
  * Aggregates all users collection activity summary items
@@ -105,7 +102,10 @@ export function aggregateOfflineClassActivityPerformanceSummaryItems(
     .mapBy('dcaContentId')
     .uniq();
   dcaContentIds.forEach(function(dcaContentId) {
-    let activities = activityPerformanceSummaryItems.filterBy('dcaContentId', dcaContentId);
+    let activities = activityPerformanceSummaryItems.filterBy(
+      'dcaContentId',
+      dcaContentId
+    );
     const dcaContentCollectionPerformanceSummaryItems = activities.mapBy(
       'collectionPerformanceSummary'
     );
