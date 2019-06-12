@@ -1,5 +1,5 @@
 {{#if hasActiveNotifications }}
-    <span class= {{model.notificationlocation}} {{action "showNotificationList" bubbles=false}}>
+    <span class={{model.notificationlocation}} {{action "showNotificationList" bubbles=false}}>
         {{gru-icon name='notifications'}}
         {{#if (eq notifcationCount 0)}}
             {{log notifcationCount}}
@@ -7,7 +7,7 @@
         <span class="badge notification-indicator {{model.notificationlocation}}"> {{notifcationCountIndicator}}</span>
     </span>
 {{else}}
-    <span class= 'inactive-common'>
+    <span class='inactive-common'>
         {{gru-icon name='notifications'}}
     </span>
 {{/if}}
@@ -18,6 +18,6 @@
      moreItemsRemaining=moreItemsRemaining
      closeNotificationList = (action "closeNotificationList")
      inClass=inClass
-    dismissNotifiocation=(action "dismissNotifiocation") showMore=(action "showMore")}}
+    dismissNotification=(action "dismissNotification") showMore=(action "showMore")}}
     </div>
 {{/gru-pull-up-ex}}

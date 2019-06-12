@@ -67,6 +67,7 @@
 @import "controllers/student/class/proficiency";
 @import "controllers/student/class/diagnosis-of-knowledge";
 @import "controllers/student/class/setup-in-complete";
+@import "controllers/student/class/milestone";
 @import "controllers/teacher/class";
 @import "controllers/teacher/class/class-activities";
 @import "controllers/teacher/class/class-management";
@@ -80,6 +81,7 @@
 @import "controllers/student-independent-learning/learning-base";
 @import "controllers/not-found";
 @import "controllers/student-locate";
+@import "controllers/player-offline-activity";
 
 // TODO: update these components so they follow the naming conventions
 @import "components/app-dropdown";
@@ -166,6 +168,7 @@
 @import "components/charts/student-domain-performance";
 @import "components/charts/proficiency-view";
 @import "components/charts/score-fill-gauge-chart";
+@import "components/charts/competencies-progress-graph";
 @import "components/class/gru-class-navigation";
 @import "components/class/gru-class-navbar";
 @import "components/class/gru-class-activity-panel";
@@ -188,6 +191,9 @@
 @import "components/profile/gru-navigation-tabs";
 @import "components/profile/_change-password";
 @import "components/content/assessments/gru-assessment-edit";
+@import "components/content/activity/_gru-activity-edit.scss";
+
+@import "components/content/activity/_gru-activity-edit.scss";
 @import "components/content/gru-audience";
 @import "components/content/gru-category";
 @import "components/content/gru-image";
@@ -259,6 +265,7 @@
 @import "components/new-cards/gru-standard-card";
 @import "components/new-cards/gru-teacher-class-card";
 @import "components/new-cards/gru-new-class-card";
+@import "components/new-cards/gru-offline-activity-card";
 @import "components/player/gru-navigation";
 @import "components/player/gru-navigator";
 @import "components/player/gru-viewer";
@@ -338,6 +345,7 @@
 @import "components/reports/pull-up/open-ended-report-pull-up";
 @import "components/reports/pull-up/student-external-assessment-report";
 @import "components/reports/pull-up/gru-collection-preview";
+@import "components/reports/pull-up/oa-preview";
 @import "components/reports/pull-up/student-activity-report";
 @import "components/reports/pull-up/activity/class-summary-report";
 @import "components/reports/pull-up/activity/monthly-summary-report";
@@ -349,6 +357,9 @@
 @import "components/student/class/_gru-study-navbar";
 @import "components/student/class/gru-class-navigation";
 @import "components/student/class/analytics/gru-performance-table";
+@import "components/student/class/milestone-course-map";
+@import "components/student/class/milestone-course-map-route0";
+@import "components/student/class/milestone-course-map-route0-preview";
 @import "components/teacher/class/gru-class-statistics";
 @import "components/teacher/class/ca-search-content-pull-up";
 @import "components/teacher/suggestion-pull-up";
@@ -356,6 +367,7 @@
 @import "components/teacher/class/ca-unscheduled-items-pullup";
 @import "components/teacher/class/ca-student-list-pull-up";
 @import "components/teacher/navigator-math-banner";
+@import "components/teacher/class/milestone-course-map";
 @import "components/taxonomy/gru-subject-course-picker";
 @import "components/taxonomy/gru-subject-picker";
 @import "components/taxonomy/gru-taxonomy-selector";
@@ -456,3 +468,26 @@
 @import "controllers/library-search";
 @import "components/library/library-search-header";
 @import "components/library/library-content-result-grid-view";
+
+@import "components/ca-daterange-datepicker";
+@import "components/ca-month-picker";
+//Milestone reports
+@import "components/reports/pull-up/milestone/milestone-report";
+@import "components/reports/pull-up/milestone/student-milestone-performance-report";
+@import "components/reports/pull-up/milestone/student-milestone-summary-report";
+@import "components/reports/pull-up/milestone/student-milestone-lesson-performance-accordion";
+
+//CA pull-up
+@import "components/teacher/class/ca-pull-up";
+
+//Offline Activity Player
+@import "components/player/offline-activity/gru-offline-activity-start-page";
+@import "components/player/offline-activity/gru-offline-activity-references";
+@import "components/player/offline-activity/gru-offline-activity-submission";
+@import "components/player/offline-activity/gru-offline-activity-task-submission";
+
+//OA Grading reports
+@import "components/activity/offline/grading-report";
+
+//Rubric Categories
+@import "components/rubric/_rubric-category-grades";

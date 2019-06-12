@@ -1,0 +1,289 @@
+.offline-activity-player.gru-offline-activity-task-submission {
+  position: relative;
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+
+  .task-submission-container {
+    position: relative;
+
+    .task-summary-container {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      align-items: center;
+
+      .task-icon {
+        width: 20px;
+        height: 20px;
+        background-size: 20px 20px;
+        background-image: url("./gooru/images/website-resource-dark.svg");
+        display: block;
+      }
+
+      .task-info {
+        .task-title {
+          color: #3e5e67;
+          font-weight: bold;
+          @include ellipsis(
+            $font-size: 14px,
+            $line-height: 1.2,
+            $lines-to-show: 1
+          );
+        }
+
+        .pending-submission {
+          font-size: 11px;
+          color: #37424b;
+          opacity: 0.7;
+          height: 20px;
+        }
+      }
+
+      .task-toggle {
+        width: 48px;
+        height: 48px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        text-align: center;
+        cursor: pointer;
+
+        i {
+          line-height: 48px;
+          color: #4a4a4a;
+        }
+      }
+    }
+
+    .task-details-container {
+      .task-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #3e5e67;
+      }
+
+      .task-description {
+        padding-left: 30px;
+        padding-right: 10px;
+        font-size: 13px;
+        color: #3e5e67;
+        line-height: 1.5;
+      }
+
+      .task-upload-container {
+        display: grid;
+        row-gap: 15px;
+        grid-template-columns: 1fr 96px;
+        column-gap: 15px;
+        padding-left: 30px;
+
+        .task-answer {
+          grid-column-start: 1;
+          grid-column-end: 3;
+
+          .answer-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #3e5e67;
+          }
+
+          .input-container {
+            .gru-rich-text-editor {
+              .wysihtml5-editor {
+                min-height: 150px;
+              }
+            }
+          }
+        }
+
+        .task-file-upload-container {
+          display: flex;
+          flex-flow: row wrap;
+          grid-column-start: 1;
+          grid-column-end: 3;
+          grid-row-start: 2;
+
+          .task-file-preview {
+            width: 104px;
+            height: 104px;
+            border: 2px solid #bbb;
+            border-radius: 5px;
+            text-align: center;
+            margin: 5px;
+
+            a.preview-file-link {
+              width: inherit;
+              height: inherit;
+              display: block;
+
+              i {
+                font-size: 40px;
+                line-height: 104px;
+              }
+
+              img {
+                width: inherit;
+                height: inherit;
+              }
+            }
+          }
+
+          .task-file-upload {
+            position: relative;
+            margin: 5px;
+
+            .file-upload-box {
+              cursor: pointer;
+              width: 104px;
+              height: 104px;
+              border: 2px dashed #bbb;
+              text-align: center;
+              border-radius: 5px;
+
+              i.add {
+                line-height: 104px;
+                font-size: 30px;
+                color: #bbb;
+              }
+
+              &:hover {
+                border-color: #37424b;
+
+                i.add {
+                  color: #37424b;
+                }
+              }
+            }
+
+            .file-picker__preview {
+              position: absolute;
+              width: 104px;
+              height: 104px;
+              top: 0;
+              text-align: center;
+
+              img {
+                width: inherit;
+                height: inherit;
+                background-color: #e3e5ea;
+              }
+
+              i.file-preview-type-icon {
+                font-size: 40px;
+                line-height: 104px;
+                z-index: 9;
+                width: inherit;
+                height: inherit;
+                background-color: #e3e5ea;
+              }
+            }
+
+            .remove-file {
+              display: none;
+            }
+
+            &:hover {
+              .remove-file {
+                display: block;
+                z-index: 5;
+                position: absolute;
+                top: 0;
+                cursor: pointer;
+                width: 104px;
+                height: 104px;
+                background-color: rgba(204, 204, 204, 0.5);
+                text-align: center;
+
+                i.clear {
+                  line-height: 104px;
+                }
+              }
+            }
+          }
+        }
+
+        .task-url-upload-container {
+          grid-row-start: 3;
+
+          .task-url-upload {
+            display: grid;
+            grid-template-columns: 50px 1fr;
+
+            .url-label {
+              color: #3e5e67;
+              text-transform: uppercase;
+              font-size: 14px;
+            }
+
+            .url-value {
+              input {
+                width: 60%;
+
+                &:focus {
+                  outline: none;
+                  border: none;
+                }
+                border-color: rgba(71, 81, 89, 0.3);
+              }
+            }
+
+            &.preview-url {
+              .url-value {
+                input {
+                  border: none;
+                }
+              }
+            }
+          }
+        }
+
+        .save-task-submission {
+          grid-row-start: 3;
+          justify-self: right;
+          cursor: pointer;
+          width: 96px;
+          height: 36px;
+          background-color: #0072bc;
+          color: $white;
+          text-align: center;
+          line-height: 36px;
+          text-transform: uppercase;
+          display: grid;
+          justify-content: center;
+          grid-template-columns: auto auto;
+          align-self: end;
+
+          &.disable-event {
+            opacity: 0.5;
+          }
+
+          &.saving {
+            pointer-events: none;
+            cursor: progress;
+          }
+
+          .spinner {
+            width: 30px;
+
+            .three-bounce-spinner {
+              width: inherit;
+              margin: 0;
+
+              div {
+                width: 8px;
+                height: 8px;
+                background-color: $white;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .loading-progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+}

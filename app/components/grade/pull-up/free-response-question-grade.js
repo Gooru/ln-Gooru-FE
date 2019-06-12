@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { getGradeColor } from 'gooru-web/utils/utils';
 import RubricGrade from 'gooru-web/models/rubric/rubric-grade';
 import RubricCategoryScore from 'gooru-web/models/rubric/grade-category-score';
-
+import { PLAYER_EVENT_SOURCE, CONTENT_TYPES } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Dependencies
@@ -90,7 +90,7 @@ export default Ember.Component.extend({
    * Question of this FRQ grade item.
    * @type {Object}
    */
-  question: Ember.computed.alias('context.question'),
+  question: Ember.computed.alias('context.content'),
 
   /**
    * Propery to hide the default pullup.
@@ -405,15 +405,24 @@ export default Ember.Component.extend({
     let lessonId = component.get('lessonId');
     let collectionId = component.get('collection.id');
     let questionId = component.get('question.id');
+    let isDCAContext = component.get('isDCAContext');
+    let activityDate = component.get('context.activityDate');
     component.set('isLoading', true);
     return Ember.RSVP.hash({
       question: this.get('questionService').readQuestion(questionId),
-      users: this.get('rubricService').getStudentsForQuestion(
-        questionId,
-        classId,
-        courseId,
-        collectionId
-      )
+      users: isDCAContext
+        ? this.get('rubricService').getDCAStudentsForQuestion(
+          questionId,
+          classId,
+          collectionId,
+          activityDate
+        )
+        : this.get('rubricService').getStudentsForQuestion(
+          questionId,
+          classId,
+          courseId,
+          collectionId
+        )
     })
       .then(({ users, question }) => {
         component.set('question', question);
@@ -425,15 +434,23 @@ export default Ember.Component.extend({
           }
 
           return Ember.RSVP.hash({
-            answer: this.get('rubricService').getAnswerToGrade(
-              studentId,
-              classId,
-              courseId,
-              collectionId,
-              questionId,
-              unitId,
-              lessonId
-            ),
+            answer: isDCAContext
+              ? this.get('rubricService').getAnswerToGradeForDCA(
+                studentId,
+                classId,
+                collectionId,
+                questionId,
+                activityDate
+              )
+              : this.get('rubricService').getAnswerToGrade(
+                studentId,
+                classId,
+                courseId,
+                collectionId,
+                questionId,
+                unitId,
+                lessonId
+              ),
             rubric: question.get('rubric.id')
               ? this.get('rubricService').getRubric(question.get('rubric.id'))
               : null,
@@ -478,17 +495,27 @@ export default Ember.Component.extend({
     let collectionId = component.get('collection.id');
     let questionId = component.get('question.id');
     let studentId = component.get('studentId');
+    let isDCAContext = component.get('isDCAContext');
+    let activityDate = component.get('context.activityDate');
     component.set('isLoading', true);
     return Ember.RSVP.hash({
-      answer: this.get('rubricService').getAnswerToGrade(
-        studentId,
-        classId,
-        courseId,
-        collectionId,
-        questionId,
-        unitId,
-        lessonId
-      )
+      answer: isDCAContext
+        ? this.get('rubricService').getAnswerToGradeForDCA(
+          studentId,
+          classId,
+          collectionId,
+          questionId,
+          activityDate
+        )
+        : this.get('rubricService').getAnswerToGrade(
+          studentId,
+          classId,
+          courseId,
+          collectionId,
+          questionId,
+          unitId,
+          lessonId
+        )
     }).then(({ answer }) => {
       if (!component.get('isDestroyed')) {
         component.set('answer', answer);
@@ -645,6 +672,8 @@ export default Ember.Component.extend({
     let component = this;
     let userGrade = component.get('userGrade');
     let categories = component.get('categories');
+    let context = component.get('context');
+    let isDCAContext = component.get('isDCAContext');
     let categoriesScore = Ember.A([]);
     categories.forEach(category => {
       let level = null;
@@ -662,12 +691,24 @@ export default Ember.Component.extend({
     userGrade.set('categoriesScore', categoriesScore);
     userGrade.set('sessionId', component.get('answer.sessionId'));
     userGrade.set('updatedDate', new Date());
-    component
-      .get('rubricService')
-      .setStudentRubricGrades(userGrade)
-      .then(() => {
-        component.slideToNextUser();
-      });
+    if (isDCAContext) {
+      userGrade.set('activityDate', context.get('activityDate'));
+      userGrade.set('contentSource', PLAYER_EVENT_SOURCE.DAILY_CLASS);
+      userGrade.set('collectionType', CONTENT_TYPES.ASSESSMENT);
+      component
+        .get('rubricService')
+        .setStudentRubricGradesForDCA(userGrade)
+        .then(() => {
+          component.slideToNextUser();
+        });
+    } else {
+      component
+        .get('rubricService')
+        .setStudentRubricGrades(userGrade)
+        .then(() => {
+          component.slideToNextUser();
+        });
+    }
   },
 
   slideToNextUser() {
@@ -703,7 +744,7 @@ export default Ember.Component.extend({
         let itemsToGrade = component.get('itemsToGrade');
         if (itemsToGrade) {
           let questionId = component.get('question.id');
-          let item = itemsToGrade.findBy('question.id', questionId);
+          let item = itemsToGrade.findBy('content.id', questionId);
           itemsToGrade.removeObject(item);
         }
         component.$().fadeOut(5000, function() {

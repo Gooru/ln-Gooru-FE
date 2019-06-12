@@ -1,0 +1,43 @@
+.offline-activity-player.gru-offline-activity-references {
+  .references-container {
+    .reference-info-container {
+      display: grid;
+      grid-template-columns: 30px auto;
+      align-items: center;
+
+      .reference-icon-container {
+        width: 20px;
+        height: 20px;
+        background-size: 20px 20px;
+        background-image: url("./gooru/images/text-resource-dark.svg");
+        display: block;
+      }
+
+      .reference-title-container {
+        .reference-label {
+          color: #3e5e67;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 1.2;
+        }
+
+        .reference-links {
+          opacity: 0.7;
+          font-size: 11px;
+          color: #37424b;
+        }
+      }
+    }
+
+    .reference-container {
+      padding-left: 30px;
+      .reference-link {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: left;
+        align-items: center;
+        column-gap: 5px;
+      }
+    }
+  }
+}

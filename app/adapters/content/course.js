@@ -206,6 +206,42 @@ export default Ember.Object.extend({
     });
   },
 
+  /**
+   * Returns the milestones for the course.
+   * @param {string} courseId
+   * @param {string} fwCode
+   * @returns {Promise.<Milestones>}
+   */
+  getCourseMilestones(courseId, fwCode) {
+    const namespace = this.get('namespace');
+    const url = `${namespace}/ms/${courseId}/fw/${fwCode}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: this.defineHeaders()
+    };
+
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Returns the lessons for the course milestone.
+   * @param {string} courseId
+   * @param {string} milestoneId
+   * @returns {Promise.<Lessons>}
+   */
+  getCourseMilestoneLessons(courseId, milestoneId) {
+    const namespace = this.get('namespace');
+    const url = `${namespace}/ms/${courseId}/milestones/${milestoneId}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: this.defineHeaders()
+    };
+
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

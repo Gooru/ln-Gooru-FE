@@ -26,9 +26,21 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Actions
 
   actions: {
-    studentDcaReport(collection, studentPerformance, activityDate) {
+    toggleDatePicker() {
+      let controller = this;
+      controller.toggleProperty('isActive');
+      controller.animateDatePicker();
+    },
+
+    studentDcaReport(
+      collection,
+      studentPerformance,
+      activityDate,
+      classActivity
+    ) {
       let component = this;
       let userId = component.get('session.userId');
+      let users = component.get('class.members').filterBy('id', userId);
       let params = {
         userId: userId,
         classId: component.get('class.id'),
@@ -37,20 +49,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         isStudent: true,
         collection,
         activityDate,
-        studentPerformance
+        studentPerformance,
+        classActivity,
+        users
       };
+      component.set('isShowStudentExternalAssessmentReport', false);
+      component.set('showStudentDcaReport', false);
+      component.set('isShowStudentExternalCollectionReport', false);
+      component.set('isShowOfflineActivityReport', false);
       if (collection.get('format') === 'assessment-external') {
         component.set('isShowStudentExternalAssessmentReport', true);
-        component.set('showStudentDcaReport', false);
-        component.set('isShowStudentExternalCollectionReport', false);
       } else if (collection.get('format') === 'collection-external') {
-        component.set('showStudentDcaReport', false);
-        component.set('isShowStudentExternalAssessmentReport', false);
         component.set('isShowStudentExternalCollectionReport', true);
+      } else if (collection.get('format') === 'offline-activity') {
+        component.set('isShowOfflineActivityReport', true);
       } else {
         component.set('showStudentDcaReport', true);
-        component.set('isShowStudentExternalAssessmentReport', false);
-        component.set('isShowStudentExternalCollectionReport', false);
       }
       component.set('studentReportContextData', params);
     },
@@ -60,25 +74,36 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       component.set('isShowStudentExternalCollectionReport', false);
       component.set('isShowStudentExternalAssessmentReport', false);
       component.set('studentDcaReport', false);
+      component.set('isShowOfflineActivityReport', true);
     },
 
-    showCalendar() {
-      this.toggleDatePicker();
+    showPreviousMonth(date) {
+      let controller = this;
+      controller.loadActivitiesForMonth();
+      controller.loadActivityForDate(date);
     },
 
-    showPreviousMonth() {
-      this.loadData();
-    },
-
-    showNextMonth() {
-      this.loadData();
+    showNextMonth(date) {
+      let controller = this;
+      controller.loadActivitiesForMonth();
+      controller.loadActivityForDate(date);
     },
 
     onSelectDate(date) {
-      this.handleScrollToSpecificDate(date);
+      let controller = this;
+      controller.set('selectedDate', date);
+      controller.loadActivityForDate(date);
+      controller.send('toggleDatePicker');
     },
-    onClosePerformanceEntry() {
-      this.loadData();
+
+    onSelectToday(date) {
+      let controller = this;
+      controller.send('onSelectDate', date);
+    },
+
+    toggleOffineActivity() {
+      let controller = this;
+      controller.animateOfflineActivityForMobile();
     }
   },
 
@@ -144,7 +169,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   forMonth: Ember.computed(function() {
     return moment().format('MM');
   }),
-
   /**
    * Maintains the value which of year activities displaying
    * @type {Integer}
@@ -154,34 +178,29 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   }),
 
   /**
-   * Maintains  the value of first date of month
-   * @return {String}
+   * Maintains the value of date is today or not
+   * @type {Integer}
    */
-  forFirstDateOfMonth: Ember.computed('forMonth', 'forYear', function() {
-    let forMonth = this.get('forMonth');
-    let forYear = this.get('forYear');
-    let date = `${forYear}-${forMonth}-01`;
-    return moment(date).format('YYYY-MM-DD');
+  isToday: Ember.computed('selectedDate', function() {
+    return this.get('selectedDate') === moment().format('YYYY-MM-DD');
   }),
 
   /**
-   * Maintains the value  of today date
-   * @type {String}
+   * Maintains the value of selected date of the user
+   * @type {Integer}
    */
-  today: Ember.computed(function() {
-    return moment().format('YYYY-MM-DD');
-  }),
+  selectedDate: null,
 
   /**
    * It Maintains the list of scheduled class activities datewise.
    * @type {Array}
    */
   scheduledClassActivitiesDatewise: Ember.computed(
-    'classActivities.[]',
+    'classActivitiesOfMonth.[]',
     function() {
       let controller = this;
       let activities = Ember.A();
-      controller.get('classActivities').forEach(classActivity => {
+      controller.get('classActivitiesOfMonth').forEach(classActivity => {
         let addedDate = classActivity.get('added_date');
         if (addedDate) {
           let isToday =
@@ -205,103 +224,135 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   initialize() {
     let controller = this;
     controller._super(...arguments);
-    Ember.run.scheduleOnce('afterRender', controller, function() {
-      controller.set('forMonth', moment().format('MM'));
-      controller.set('forYear', moment().format('YYYY'));
-      let date = moment().format('YYYY-MM-DD');
-      controller.handleScrollToSpecificDate(date);
-      controller.slideUpCAInlineDatePickerOnClickOutSide();
-      if (controller.get('tab') === 'report') {
-        controller.get('classController').populateClassActivityReport();
-      }
-    });
+    let todayDate = moment().format('YYYY-MM-DD');
+    controller.loadActivityForDate(todayDate);
+    controller.loadActiveOfflineActivities();
+    controller.loadCompeltedOfflineActivities();
   },
 
-  loadData() {
+  /**
+   * @function animateDatePicker
+   * Method to slide up and down date picker
+   */
+  animateDatePicker() {
+    let element = Ember.$('.ca-schedule-items-header .ca-date-selector');
+    let dateDisplayEle = Ember.$('.ca-date-selector .ca-date-picker-container');
+    if (!element.hasClass('active')) {
+      element.slideDown(400, function() {
+        element.addClass('active');
+        dateDisplayEle.addClass('active');
+      });
+    } else {
+      element.slideUp(400, function() {
+        element.removeClass('active');
+        dateDisplayEle.removeClass('active');
+      });
+    }
+  },
+
+  /**
+   * @function loadActivityForDate
+   * Method to fetch activity for specific date
+   * @params {string} Date
+   */
+  loadActivityForDate(date) {
+    const controller = this;
+    const userId = controller.get('session.userId');
+    const classId = controller.get('classId');
+    controller.set('isLoading', true);
+    controller
+      .get('classActivityService')
+      .getStudentScheduledActivities(userId, classId, date)
+      .then(function(classActivities) {
+        controller.set('classActivities', classActivities);
+        controller.set('isLoading', false);
+      });
+  },
+
+  /**
+   * @function loadActivitiesForMonth
+   * Method to fetch activities for a month
+   */
+  loadActivitiesForMonth() {
     const controller = this;
     const classId = controller.get('classId');
     let forMonth = controller.get('forMonth');
     let forYear = controller.get('forYear');
-    const userId = controller.get('session.userId');
+    let startDate = `${forYear}-${forMonth}-01`;
+    let userId = controller.get('session.userId');
+    let endDate = moment(startDate)
+      .endOf('month')
+      .format('YYYY-MM-DD');
     controller.set('isLoading', true);
     controller
       .get('classActivityService')
-      .findStudentClassActivities(userId, classId, null, forMonth, forYear)
+      .getStudentScheduledActivities(userId, classId, startDate, endDate)
       .then(classActivities => {
-        controller.set('classActivities', Ember.A([]));
-        if (classActivities && classActivities.length > 0) {
-          controller.parseClassActivityData(classActivities);
-        }
+        controller.set('classActivitiesOfMonth', classActivities);
         controller.set('isLoading', false);
-        Ember.run.later(function() {
-          let date = moment().format('YYYY-MM-DD');
-          controller.handleScrollToSpecificDate(date, true);
-        }, 1000);
       });
   },
 
-  parseClassActivityData(classActivitiesData) {
-    let controller = this;
-    let classActivities = controller.get('classActivities');
-    classActivitiesData.forEach(data => {
-      let addedDate = data.get('added_date');
-      let classActivity = classActivities.findBy('added_date', addedDate);
-      if (!classActivity) {
-        classActivity = Ember.Object.create({
-          added_date: addedDate,
-          classActivities: Ember.A([])
-        });
-        classActivities.pushObject(classActivity);
-      }
-      classActivity.get('classActivities').pushObject(data);
-    });
+  /**
+   * @function loadActiveOfflineActivities
+   * Method to fetch active offline activities
+   */
+  loadActiveOfflineActivities() {
+    const controller = this;
+    const classId = controller.get('classId');
+    controller
+      .get('classActivityService')
+      .fetchActiveOfflineActivities(classId)
+      .then(activeOfflineActivities => {
+        controller.set('activeOfflineActivities', activeOfflineActivities);
+      });
   },
 
-  handleScrollToSpecificDate(date, isDefaultTop) {
-    let dateEle = Ember.$(
-      `.student_class_class-activities .dca-date-view-container-${date}`
+  /**
+   * @function loadCompeltedOfflineActivities
+   * Method to fetch completed offline activities
+   */
+  loadCompeltedOfflineActivities() {
+    const controller = this;
+    const classId = controller.get('classId');
+    const userId = controller.get('session.userId');
+    controller
+      .get('classActivityService')
+      .fetchCompletedOfflineActivities(classId, userId)
+      .then(completedOfflineActivities => {
+        controller.set(
+          'completedOfflineActivities',
+          completedOfflineActivities
+        );
+      });
+  },
+
+  /**
+   * Animate a offline activity for desktop
+   */
+  animateOfflineActivityForMobile() {
+    let offlineActivityEle = Ember.$(
+      '.ca-panel .right-panel .offline-container'
     );
-    if (dateEle.length > 0) {
-      let scrollToContainer = Ember.$('.dca-list-container');
-      let reduceHeight = 50;
-      let top =
-        dateEle.position().top - reduceHeight + scrollToContainer.scrollTop();
-      scrollToContainer.animate(
+    let windowHeight = $(window).height();
+    if (offlineActivityEle.hasClass('active')) {
+      offlineActivityEle.animate(
         {
-          scrollTop: top
+          top: windowHeight - 50
         },
-        1000
+        400,
+        function() {
+          offlineActivityEle.removeClass('active');
+        }
       );
-    } else if (isDefaultTop) {
-      let scrollToContainer = Ember.$('.dca-list-container');
-      scrollToContainer.animate(
+    } else {
+      offlineActivityEle.addClass('active');
+      offlineActivityEle.animate(
         {
-          scrollTop: 0
+          top: 100
         },
-        1000
+        400
       );
     }
-  },
-
-  slideUpCAInlineDatePickerOnClickOutSide() {
-    Ember.$('.student_class_class-activities').on('click', function(e) {
-      if (
-        !Ember.$(e.target).hasClass('ca-date-picker-toggle') &&
-        Ember.$('.ca-date-picker-container').has(e.target).length === 0
-      ) {
-        let element = Ember.$(
-          '.student_class_class-activities .ca-date-picker-inline'
-        );
-        if (element.length > 0 && element.hasClass('active')) {
-          let dateDisplayEle = Ember.$(
-            '.student_class_class-activities .ca-content-container .cal-mm-yyyy'
-          );
-          element.slideUp(400, function() {
-            element.removeClass('active');
-            dateDisplayEle.removeClass('active');
-          });
-        }
-      }
-    });
   }
 });

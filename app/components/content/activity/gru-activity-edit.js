@@ -1,0 +1,363 @@
+import Ember from 'ember';
+import CollectionEdit from 'gooru-web/components/content/collections/gru-collection-edit';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
+import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
+
+export default CollectionEdit.extend({
+  // -------------------------------------------------------------------------
+  // Dependencies
+
+  /**
+   * @requires service:api-sdk/offline-activity/offline-activity
+   */
+  activityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
+
+  /**
+   * @property {Service} I18N service
+   */
+  i18n: Ember.inject.service(),
+
+  /**
+   * @type {SessionService} Service to retrieve session information
+   */
+  session: Ember.inject.service('session'),
+
+  /**
+   * @property {LessonService} Lesson service API SDK
+   */
+  lessonService: Ember.inject.service('api-sdk/lesson'),
+
+  /**
+   * activityCollection model as instantiated by the route. This is the model used when not editing
+   * or after any activityCollection changes have been saved.
+   * @property {activityCollection}
+   */
+  activityCollection: null,
+
+  collection: Ember.computed.alias('activityCollection'),
+
+  subTaskDisplayValue: Ember.computed(
+    'activityCollection.subFormat',
+    'activityCollection.formatList',
+    function() {
+      let activityCollection = this.get('activityCollection');
+      let displayValue =
+        activityCollection && activityCollection.get('formatList')
+          ? activityCollection
+            .get('formatList')
+            .findBy('code', activityCollection.get('subFormat'))
+          : '';
+      return (displayValue && displayValue.get('display_name')) || '';
+    }
+  ),
+
+  aggregatedTags: Ember.computed('tempCollection.aggregatedTag.[]', function() {
+    let aggregatedTags = TaxonomyTag.getTaxonomyTags(
+      this.get('tempCollection.aggregatedTag'),
+      false,
+      false,
+      true
+    );
+    return aggregatedTags;
+  }),
+
+  model: null,
+  // -------------------------------------------------------------------------
+  // Attributes
+
+  classNames: [
+    'content',
+    'assessments',
+    'gru-assessment-edit',
+    'gru-activity-edit'
+  ],
+  // -------------------------------------------------------------------------
+  // Actions
+
+  actions: {
+    /**
+     * edit action
+     */
+    editContent: function() {
+      this.set('tempCollection', this.get('activityCollection').copy());
+      this.set('isEditing', true);
+    },
+
+    /**
+     * @param {string} subFormat
+     */
+    updateSubFormat(subFormat) {
+      const component = this;
+      const subFormatCode = subFormat.code;
+      component.set('tempCollection.subFormat', subFormatCode);
+    },
+
+    /**
+     * Saves activity
+     */
+    updateContent: function() {
+      const component = this;
+      const modelValue = component.get('model');
+      component
+        .get('validate')
+        .call(component)
+        .then(
+          function({ validations }) {
+            let isValid = validations.get('isValid');
+            if (isValid) {
+              component.set('isLoading', true);
+
+              let tempOaCollection = this.get('tempCollection');
+
+              let imageIdPromise = new Ember.RSVP.resolve(
+                tempOaCollection.get('thumbnailUrl')
+              );
+              if (
+                tempOaCollection.get('thumbnailUrl') &&
+                tempOaCollection.get('thumbnailUrl') !==
+                  this.get('activityCollection').get('thumbnailUrl') &&
+                typeof tempOaCollection.get('thumbnailUrl') != 'string'
+              ) {
+                imageIdPromise = component
+                  .get('mediaService')
+                  .uploadContentFile(tempOaCollection.get('thumbnailUrl'));
+              }
+              imageIdPromise.then(function(imageId) {
+                tempOaCollection.set('thumbnailUrl', imageId);
+                if (component.get('isNewActivity')) {
+                  component
+                    .get('createActivity')
+                    .call(component)
+                    .then(function(newActivity) {
+                      let sourceCollection = component.get(
+                        'activityCollection'
+                      );
+                      component.refreshSourceWithChanges(
+                        newActivity,
+                        sourceCollection
+                      );
+                      newActivity.set(
+                        'formatList',
+                        sourceCollection.formatList
+                      );
+
+                      if (modelValue && modelValue.associateLesson) {
+                        return component
+                          .get('associateToLesson')
+                          .call(
+                            component,
+                            modelValue.courseId,
+                            modelValue.unitId,
+                            modelValue.lessonId,
+                            newActivity.get('id')
+                          );
+                      } else {
+                        return Ember.RSVP.resolve(true);
+                      }
+                    })
+                    .then(
+                      function() {
+                        component.set('isLoading', false);
+                      },
+                      function() {
+                        component.set('isLoading', false);
+                        component.get('showErrorMessage')();
+                      }
+                    );
+                } else {
+                  //ToDo: Format here break into small and make post save behavior same for new and edit
+                  component
+                    .get('updateActivity')
+                    .call(component)
+                    .then(function(newActivity) {
+                      let sourceCollection = component.get(
+                        'activityCollection'
+                      );
+                      component.refreshSourceWithChanges(
+                        newActivity,
+                        sourceCollection
+                      );
+                      return Ember.RSVP.resolve(true);
+                    })
+                    .then(
+                      function() {
+                        component.set('isLoading', false);
+                      },
+                      function() {
+                        component.set('isLoading', false);
+                        component.get('showErrorMessage')();
+                      }
+                    );
+                }
+              });
+            }
+            this.set('didValidate', true);
+          }.bind(this)
+        );
+    },
+
+    validate: function() {
+      const collection = this.get('tempCollection');
+      return collection.validate();
+    },
+
+    /**
+     * Add tag data from the taxonomy list in tempUnit
+     */
+    addTag: function(taxonomyTag) {
+      // let tagData = taxonomyTag;
+      taxonomyTag.set('isRemovable', true);
+      taxonomyTag.set('tagAlreadyexist', false);
+      this.get('tempCollection.standards').addObject(taxonomyTag);
+      this.set(
+        'tempCollection.standards',
+        this.get('tempCollection.standards').uniqBy('code')
+      );
+      this.get('tempCollection.aggregatedTag').removeObject(taxonomyTag);
+      let newtaxonomyObj = Ember.Object.create({
+        code: taxonomyTag.get('code'),
+        frameworkCode: taxonomyTag.get('frameworkCode'),
+        isRemovable: false,
+        tagAlreadyexist: false
+      });
+      this.get('tempCollection.aggregatedTag').addObject(newtaxonomyObj);
+      this.compareAggregatedTags();
+    },
+    /**
+     * Remove tag data from the taxonomy list in tempUnit
+     */
+    removeTag: function(taxonomyTag) {
+      var tagData = taxonomyTag;
+      this.get('tempCollection.standards').removeObject(tagData);
+      tagData.set('isRemovable', false);
+      tagData.set('tagAlreadyexist', false);
+      this.get('tempCollection.aggregatedTag').addObject(tagData);
+      this.set(
+        'tempCollection.aggregatedTag',
+        this.get('tempCollection.aggregatedTag').uniqBy('code')
+      );
+      this.compareAggregatedTags();
+    },
+
+    /**
+     * Save setting for visibility of collection in profile
+     */
+    publishToProfile: function() {
+      var collectionForEditing = this.get('collection').copy();
+      this.set('tempCollection', collectionForEditing);
+      this.actions.updateContent.call(this);
+    },
+    /**
+     * Delete activity
+     */
+    deleteItem: function() {
+      const myId = this.get('session.userId');
+      var model = {
+        content: this.get('tempCollection'),
+        isHeaderDelete: true,
+        parentName: this.get('course.title'),
+        deleteMethod: function() {
+          return this.get('activityService').deleteActivity(
+            this.get('tempCollection')
+          );
+        }.bind(this),
+        type: CONTENT_TYPES.ACTIVITY,
+        redirect: {
+          route: 'library-search',
+          params: {
+            profileId: myId,
+            type: 'my-content'
+          }
+        }
+      };
+
+      this.actions.showModal.call(
+        this,
+        'content.modals.gru-delete-content',
+        model,
+        null,
+        null,
+        null,
+        false
+      );
+    },
+
+    modelSourceFromChildChanges(editingModel) {
+      const component = this;
+      editingModel = editingModel || component.get('tempCollection');
+      component.refreshSourceWithChanges(
+        editingModel,
+        component.get('activityCollection')
+      );
+    }
+  },
+
+  /**
+   * Copies master Objects of Source model to editingModel and set editmodel to source, such that source has the latest
+   * @param {*} editingModel
+   * @param {*} sourceModel
+   */
+  refreshSourceWithChanges(editingModel, sourceModel) {
+    editingModel.set('formatList', sourceModel.formatList);
+    this.set('activityCollection', editingModel);
+    this.set('isEditing', false);
+    this.set('isNewActivity', false);
+  },
+
+  validate: function() {
+    const collection = this.get('tempCollection');
+    return collection.validate();
+  },
+
+  createActivity: function() {
+    let tempOaCollection = this.get('tempCollection');
+    return this.get('activityService').createActivity(tempOaCollection);
+  },
+
+  updateActivity: function() {
+    let tempOaCollection = this.get('tempCollection').copy();
+    delete tempOaCollection.subFormat;
+    return this.get('activityService').updateActivity(
+      tempOaCollection.get('id'),
+      tempOaCollection
+    );
+  },
+
+  associateToLesson: function(
+    courseId,
+    unitId,
+    lessonId,
+    assessmentOrCollectionId
+  ) {
+    return this.get('lessonService').associateAssessmentOrCollectionToLesson(
+      courseId,
+      unitId,
+      lessonId,
+      assessmentOrCollectionId,
+      false
+    );
+  },
+  /**
+   * Returns compareAggregatedTags data
+   * @param {Number[]} compareAggregatedTags ids
+   * @return {compareAggregatedTags[]}
+   */
+  compareAggregatedTags: function() {
+    const component = this;
+    component
+      .get('tempCollection.aggregatedTag')
+      .forEach(function(suggeststanObj) {
+        Ember.set(suggeststanObj, 'tagAlreadyexist', true);
+      });
+    component.get('tempCollection.standards').forEach(function(standardObj) {
+      var suggestObj = component
+        .get('tempCollection.aggregatedTag')
+        .findBy('code', standardObj.code);
+      if (suggestObj !== undefined) {
+        Ember.set(suggestObj, 'tagAlreadyexist', false);
+      }
+    });
+  }
+});

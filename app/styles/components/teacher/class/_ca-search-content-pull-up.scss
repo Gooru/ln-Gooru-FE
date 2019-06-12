@@ -275,8 +275,8 @@
           transition: border-width 0.1s ease-in-out;
 
           i {
-            width: 20px;
-            height: 15px;
+            width: 24px;
+            height: 24px;
             background-repeat: no-repeat;
           }
 
@@ -285,6 +285,7 @@
             font-weight: bold;
             display: block;
             width: 100px;
+            text-transform: capitalize;
           }
 
           &.collection {
@@ -296,6 +297,12 @@
           &.assessment {
             i {
               background-image: url("../assets/gooru/images/assessment-gray.svg");
+            }
+          }
+
+          &.offline-activity {
+            i {
+              background-image: url("../assets/gooru/images/offline.svg");
             }
           }
 
@@ -362,7 +369,7 @@
     width: inherit;
     box-shadow: 0 13px 16px 0 rgba(0, 0, 0, 0.13);
     top: 50px;
-    width: 250px;
+    width: auto;
     display: none;
 
     #schedule-ca-datepicker {

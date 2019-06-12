@@ -1,6 +1,12 @@
 import Ember from 'ember';
 import StudentCollection from 'gooru-web/controllers/reports/student-collection';
-import { ASSESSMENT_SUB_TYPES, ROLES } from 'gooru-web/config/config';
+import {
+  ASSESSMENT_SUB_TYPES,
+  ROLES,
+  CONTENT_TYPES,
+  SCORES
+} from 'gooru-web/config/config';
+import { getDomainCode } from 'gooru-web/utils/taxonomy';
 
 /**
  *
@@ -28,6 +34,9 @@ export default StudentCollection.extend({
     ) {
       Ember.run.later(function() {
         controller.set('enableConfetti', false);
+        if (controller.get('isLoadProficiencyProgress')) {
+          controller.set('isShowMasteryGreeting', true);
+        }
       }, 5400);
       controller.set('enableConfetti', true);
     }
@@ -78,13 +87,12 @@ export default StudentCollection.extend({
       controller
         .get('quizzesAttemptService')
         .getAttemptIds(contextId, profileId)
-        .then(
-          attemptIds =>
-            !attemptIds || !attemptIds.length
-              ? {}
-              : this.get('quizzesAttemptService').getAttemptData(
-                attemptIds[attemptIds.length - 1]
-              )
+        .then(attemptIds =>
+          !attemptIds || !attemptIds.length
+            ? {}
+            : this.get('quizzesAttemptService').getAttemptData(
+              attemptIds[attemptIds.length - 1]
+            )
         )
         .then(attemptData =>
           Ember.RSVP.hash({
@@ -111,6 +119,7 @@ export default StudentCollection.extend({
             controller.checknPlayNext();
           }
           controller.toggleScreenMode();
+          controller.set('isShowMasteryGreeting', false);
         });
     },
 
@@ -163,6 +172,12 @@ export default StudentCollection.extend({
           .removeClass('fullscreen-exit')
           .addClass('fullscreen');
       }
+    },
+
+    onRedirectToProfiencyProgress() {
+      const controller = this;
+      controller.showStudentProficiencyProgress();
+      controller.set('isShowMasteryGreeting', false);
     }
   },
 
@@ -301,6 +316,64 @@ export default StudentCollection.extend({
     return isFullScreen;
   }),
 
+  /**
+   * @property {Boolean} isPremiumCourse
+   */
+  isPremiumCourse: Ember.computed('course', function() {
+    const controller = this;
+    return controller.get('course.version') === 'premium';
+  }),
+
+  /**
+   * @property {Boolean} isLoadProficiencyProgress
+   */
+  isLoadProficiencyProgress: Ember.computed(
+    'attemptData.averageScore',
+    'collectionObj',
+    'isPremiumCourse',
+    'mapLocation.context',
+    'isAssessmentHasFRQ',
+    function() {
+      const controller = this;
+      const averageScore = controller.get('attemptData.averageScore');
+      const isPremiumCourse = controller.get('isPremiumCourse');
+      const context = controller.get('mapLocation.context');
+      const isAssessmentHasFRQ = controller.get('isAssessmentHasFRQ');
+      const collectionObj = controller.get('collectionObj');
+      const isTeaherSuggestion = context.get('pathType') === 'teacher';
+      const isSignatureAssessment =
+        context.get('itemSubType') === 'signature-assessment';
+      return (
+        isPremiumCourse &&
+        context.get('itemType') === CONTENT_TYPES.ASSESSMENT &&
+        collectionObj.get('gutCodes.length') &&
+        !isAssessmentHasFRQ &&
+        !isTeaherSuggestion &&
+        !isSignatureAssessment &&
+        averageScore >= SCORES.VERY_GOOD
+      );
+    }
+  ),
+
+  /**
+   * @property {Boolean} isShowMasteryGreeting
+   * Property to show mastery greeting message
+   */
+  isShowMasteryGreeting: false,
+
+  /**
+   * @property {Boolean} isAssessmentHasFRQ
+   * Property to evaluate whether the completed collection has FR Question
+   */
+  isAssessmentHasFRQ: Ember.computed('collectionObj', function() {
+    const controller = this;
+    const questions = controller.get('collectionObj.children');
+    const frQuesitons = questions.filter(question =>
+      question.get('isOpenEnded')
+    );
+    return !!frQuesitons.length;
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -317,8 +390,13 @@ export default StudentCollection.extend({
     if (classId) {
       queryParams.classId = classId;
     }
+    let milestoneId = context.get('milestoneId');
+    if (milestoneId) {
+      queryParams.milestoneId = milestoneId;
+    }
     if (suggestion) {
       queryParams.courseId = context.courseId;
+      queryParams.milestoneId = context.get('milestoneId');
       queryParams.unitId = context.get('unitId');
       queryParams.lessonId = context.lessonId;
       queryParams.collectionId = suggestion.get('id');
@@ -332,6 +410,7 @@ export default StudentCollection.extend({
         queryParams
       });
     } else {
+      queryParams.type = context.itemType || null; //Type is important to decide whether next item is external or normal
       queryParams.pathId = context.pathId || 0;
       queryParams.pathType = context.pathType || null;
       this.transitionToRoute('study-player', context.get('courseId'), {
@@ -386,7 +465,9 @@ export default StudentCollection.extend({
         mapContext.ctx_course_id = mapContext.courseId;
         mapContext.ctx_lesson_id = mapContext.lessonId;
         mapContext.ctx_collection_id = mapContext.collectionId;
+        mapContext.ctx_milestone_id = mapContext.milestoneId;
         mapContext.ctx_unit_id = mapContext.unitId;
+        mapContext.milestone_id = mapContext.milestoneId;
         mapContext.suggested_content_type = suggestion.type;
         mapContext.suggested_content_id = suggestion.id;
         mapContext.suggested_content_subtype =
@@ -420,9 +501,11 @@ export default StudentCollection.extend({
       source: null,
       classId: '',
       unitId: null,
+      milestoneId: null,
       lessonId: null,
       collectionId: null,
-      type: null
+      type: null,
+      isShowMasteryGreeting: false
     });
   },
 
@@ -434,5 +517,67 @@ export default StudentCollection.extend({
     let controller = this;
     let studyPlayerController = controller.get('studyPlayerController');
     studyPlayerController.toggleScreenMode();
+  },
+
+  /**
+   * @function showStudentProficiencyProgress
+   * Method to redirect the student into the proficiency progress page whenever they acquired 80% or more
+   */
+  showStudentProficiencyProgress() {
+    const controller = this;
+    const contextId = controller.get('contextId');
+    const profileId = controller.get('session.userData.gooruUId');
+    const context = this.get('mapLocation.context');
+    let queryParams = {
+      classId: context.get('classId'),
+      courseId: context.get('courseId'),
+      contextId,
+      role: ROLES.STUDENT,
+      source: controller.get('source'),
+      assessmentId: controller.get('collection.id')
+    };
+    controller.updateStudentMasteredCompetencies();
+    controller.transitionToRoute('student-learner-proficiency', profileId, {
+      queryParams
+    });
+  },
+
+  /**
+   * @function updateStudentMasteredCompetencies
+   * Method to update the mastered competency into local storage to populate learner profile at FE
+   */
+  updateStudentMasteredCompetencies() {
+    const controller = this;
+    const localStorage = controller.get('navigateMapService').getLocalStorage();
+    const storageKey = controller
+      .get('navigateMapService')
+      .getMasteredCompetenciesKey();
+    let storedCompetencies = localStorage.getItem(storageKey);
+    let studentMasteredCompetencies = storedCompetencies
+      ? JSON.parse(storedCompetencies)
+      : Ember.A([]);
+    let masteredCompetencies = controller.get('collectionObj.gutCodes');
+    masteredCompetencies.map(competencyCode => {
+      if (
+        !studentMasteredCompetencies.findBy('competencyCode', competencyCode)
+      ) {
+        let domainCode = getDomainCode(competencyCode);
+        studentMasteredCompetencies.push({
+          domainCode,
+          competencyCode
+        });
+      }
+    });
+    studentMasteredCompetencies.filter(competency => {
+      competency.isHighLight = false;
+    });
+    let lastMasteredCompetency = studentMasteredCompetencies.objectAt(
+      studentMasteredCompetencies.length - 1
+    );
+    lastMasteredCompetency.isHighLight = true;
+    localStorage.setItem(
+      storageKey,
+      JSON.stringify(studentMasteredCompetencies)
+    );
   }
 });

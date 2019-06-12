@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import { ROLES } from 'gooru-web/config/config';
+import { ROLES, CONTENT_TYPES } from 'gooru-web/config/config';
+import { roundFloat } from 'gooru-web/utils/math';
 
 /**
  * Study Player External Controller
@@ -15,6 +16,9 @@ export default Ember.Controller.extend({
     'classId',
     'courseId',
     'collectionId',
+    'unitId',
+    'lessonId',
+    'milestoneId',
     'source'
   ],
 
@@ -33,6 +37,26 @@ export default Ember.Controller.extend({
   studyPlayerController: Ember.inject.controller('study-player'),
 
   /**
+   * @property {Ember.Service} Service to retrieve an assessment
+   */
+  assessmentService: Ember.inject.service('api-sdk/assessment'),
+
+  /**
+   * @property {Ember.Service} Service to retrieve a collection
+   */
+  collectionService: Ember.inject.service('api-sdk/collection'),
+
+  /**
+   * @type {UnitService} Service to retrieve unit information
+   */
+  unitService: Ember.inject.service('api-sdk/unit'),
+
+  /**
+   * @type {LessonService} Service to retrieve lesson information
+   */
+  lessonService: Ember.inject.service('api-sdk/lesson'),
+
+  /**
    * @dependency {i18nService} Service to retrieve translations information
    */
   i18n: Ember.inject.service(),
@@ -45,7 +69,11 @@ export default Ember.Controller.extend({
      */
     playNext: function() {
       let controller = this;
-      controller.playNextContent();
+      let submittedDataParams = controller.get('dataParams');
+      let submittedScoreInPercentage = submittedDataParams
+        ? controller.getScoreInPercentage(submittedDataParams)
+        : null;
+      controller.playNextContent(submittedScoreInPercentage);
     },
 
     /**
@@ -110,6 +138,12 @@ export default Ember.Controller.extend({
   mapLocation: null,
 
   /**
+   * @property {Object} dataParams
+   * Submitted external assessment data params
+   */
+  dataParams: null,
+
+  /**
    * Resets to default values
    */
   resetValues: function() {
@@ -131,11 +165,13 @@ export default Ember.Controller.extend({
     return isFullScreen;
   }),
 
-  isAsssessment: Ember.computed(function() {
+  isAsssessment: Ember.computed('type', function() {
     let controller = this;
     let type = controller.get('type');
     return type === 'assessment-external';
   }),
+
+  isDone: false,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -158,22 +194,104 @@ export default Ember.Controller.extend({
     });
   },
 
-  playNextContent: function() {
+  /**
+   * @function playNextContent
+   * Method to play next content
+   */
+  playNextContent: function(submittedScoreInPercentage) {
+    const controller = this;
     const navigateMapService = this.get('navigateMapService');
-    const context = this.get('mapLocation.context');
+    let context = this.get('mapLocation.context');
+    context.score = submittedScoreInPercentage;
     navigateMapService
       .getStoredNext()
       .then(() => navigateMapService.next(context))
       .then(mapLocation => {
         let status = (mapLocation.get('context.status') || '').toLowerCase();
+        let nextContentType = mapLocation.get('context.itemType');
         if (status === 'done') {
-          this.setProperties({
+          controller.setProperties({
             isDone: true,
             hasAnySuggestion: false
           });
         } else {
-          this.toPlayer();
+          if (
+            nextContentType === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||
+            nextContentType === CONTENT_TYPES.EXTERNAL_COLLECTION
+          ) {
+            controller.playNextExternalContent(mapLocation);
+          } else {
+            controller.toPlayer();
+          }
         }
       });
+  },
+
+  /**
+   * @function playNextExternalContent
+   * Method to play external content as next item
+   */
+  playNextExternalContent(mapLocation) {
+    const controller = this;
+    const context = mapLocation.get('context');
+    const courseId = context.get('courseId');
+    const unitId = context.get('unitId');
+    const lessonId = context.get('lessonId');
+    const collectionId = context.get('itemId');
+    const collectionType = context.get('itemType');
+    let unit = controller.get('unit');
+    let lesson = controller.get('lesson');
+    let lastPlayedUnitId = unit.get('id');
+    let lastPlayedLessonId = lesson.get('id');
+    return Ember.RSVP
+      .hash({
+        //loading breadcrumb information and navigation info
+        unit:
+          lastPlayedUnitId !== unitId
+            ? controller.get('unitService').fetchById(courseId, unitId)
+            : unit,
+        lesson:
+          lastPlayedLessonId !== lessonId
+            ? controller
+              .get('lessonService')
+              .fetchById(courseId, unitId, lessonId)
+            : lesson,
+        collection:
+          collectionType === CONTENT_TYPES.EXTERNAL_ASSESSMENT
+            ? controller
+              .get('assessmentService')
+              .readExternalAssessment(collectionId)
+            : controller
+              .get('collectionService')
+              .readExternalCollection(collectionId)
+      })
+      .then(({ unit, lesson, collection }) => {
+        controller.setProperties({
+          unitId: unit.get('id'),
+          lessonId: lesson.get('id'),
+          collectionId: collection.get('id'),
+          type: collectionType,
+          unit,
+          lesson,
+          collection,
+          mapLocation,
+          content: mapLocation.get('content'),
+          dataParams: null
+        });
+      });
+  },
+
+  /**
+   * @function getScoreInPercentage
+   * Method to get score in percentage
+   */
+  getScoreInPercentage(dataParams) {
+    let scoreInPercentage = dataParams.percent_score;
+    if (!scoreInPercentage) {
+      let score = parseInt(dataParams.score);
+      let maxScore = parseInt(dataParams.max_score);
+      scoreInPercentage = score / maxScore * 100;
+    }
+    return roundFloat(scoreInPercentage);
   }
 });

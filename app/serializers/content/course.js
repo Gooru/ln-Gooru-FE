@@ -208,9 +208,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       title: payload.title,
       unitCount: payload.unit_count
         ? payload.unit_count
-        : payload.unit_summary
-          ? payload.unit_summary.length
-          : 0,
+        : payload.unit_summary ? payload.unit_summary.length : 0,
       metadata: metadata,
       audience:
         metadata.audience && metadata.audience.length > 0
@@ -320,5 +318,37 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return {
       order: values
     };
+  },
+
+  /**
+   * Normalized data of course milestones
+   * @return {Object}
+   */
+  normalizeCourseMilestones: function(response) {
+    let resultSet = Ember.A();
+    response = Ember.A(response.milestones);
+    response.forEach(data => {
+      let result = Ember.Object.create(data);
+      resultSet.pushObject(result);
+    });
+    return resultSet;
+  },
+
+  /**
+   * Normalized data of course milestone lessons
+   * @return {Object}
+   */
+  normalizeCourseMilestoneLessons: function(response) {
+    let lessons = Ember.A(response.lessons);
+    let milestoneLessons = Ember.A([]);
+    if (lessons && lessons.length) {
+      lessons.map(lesson => {
+        //Ignore duplicate lessons
+        if (!milestoneLessons.findBy('lesson_id', lesson.lesson_id)) {
+          milestoneLessons.pushObject(Ember.Object.create(lesson));
+        }
+      });
+    }
+    return milestoneLessons;
   }
 });

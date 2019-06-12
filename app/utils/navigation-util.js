@@ -1,5 +1,5 @@
 /**
- * Creates queryParams object to be utitilized in study player by parsing the context object
+ * Creates queryParams object to be utilized in study player by parsing the context object
  * @param {Promise.<MapLocation>}
  * @returns {queryParams}
  */
@@ -7,7 +7,9 @@ export function createStudyPlayerQueryParams(context, options) {
   let queryParams = {
     role: options.role,
     source: options.source,
-    courseId: options.courseId
+    courseId: options.courseId,
+    milestoneId: options.milestoneId,
+    type: context.itemType || options.type
   };
 
   if (options.classId) {
@@ -50,7 +52,8 @@ export function currentLocationToMapContext(locationdatModeldata) {
     itemId: data.collectionId,
     status: data.status,
     score: data.scoreInPercentage || 0,
-    contextData: data.contextData
+    contextData: data.contextData,
+    milestoneId: data.milestoneId
   };
   retModel.itemType = retModel.collectionType;
   retModel.itemSubType = retModel.collectionSubType;

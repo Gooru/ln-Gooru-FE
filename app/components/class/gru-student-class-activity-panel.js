@@ -52,11 +52,13 @@ export default Ember.Component.extend({
      * Action triggred when dca report action invoke
      */
     studentDcaReport: function(assessment, studentPerformance, activityDate) {
+      let classActivity = this.get('classActivity');
       this.sendAction(
         'studentDcaReport',
         assessment,
         studentPerformance,
-        activityDate
+        activityDate,
+        classActivity
       );
     },
 
@@ -86,6 +88,13 @@ export default Ember.Component.extend({
         component.get('router').transitionTo('player-external', {
           queryParams
         });
+      } else if (collectionType === 'offline-activity') {
+        queryParams.offlineActivityId = contentId;
+        component
+          .get('router')
+          .transitionTo('player-offline-activity', contentId, {
+            queryParams
+          });
       } else {
         component.get('router').transitionTo('player', contentId, {
           queryParams
@@ -139,6 +148,11 @@ export default Ember.Component.extend({
    */
   visible: Ember.computed.alias('classActivity.isActive'),
 
+  isOfflineActivity: Ember.computed.equal(
+    'item.format',
+    PLAYER_EVENT_SOURCE.OFFLINE_CLASS
+  ),
+
   /**
    * Class activity date
    * @type {Date}
@@ -153,5 +167,15 @@ export default Ember.Component.extend({
     let activityDate = this.get('activityDate');
     let currentDate = moment().format('YYYY-MM-DD');
     return currentDate === activityDate;
+  }),
+
+  /**
+   * It is used to find activity is future or not
+   * @return {Boolean}
+   */
+  isActivityFuture: Ember.computed('activityDate', function() {
+    let activityDate = this.get('activityDate');
+    let currentDate = moment().format('YYYY-MM-DD');
+    return moment(activityDate).isAfter(currentDate);
   })
 });

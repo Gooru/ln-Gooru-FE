@@ -3,11 +3,11 @@
 {{/if}}
 <div class="pull-up-container">
   {{#if (eq type "destination")}}
-    <div class="btn-container" {{action onMoveNext 'inspect-destination'}}>
+    <div class="btn-container" {{action onMoveNext 'route'}}>
       {{gru-icon name="directions"}}
     </div>
   {{else}}
-    <div class="btn-container" {{action onMoveNext 'playNext'}}>
+    <div class="btn-container {{if (and class.milestoneViewApplicable isMilestoneFetch (eq milestones.length 0)) 'no-milestone'}}" {{action onMoveNext 'playNext'}}>
       {{gru-icon name="near_me"}}
     </div>
   {{/if}}
@@ -24,37 +24,74 @@
         </div>
       </div>
     {{else}}
-      {{#if (and isRoute0Pending isRoute0)}}
+      {{#if isRoute0Pending}}
         <div class="route0-container">
-          <div class="route0-comment" {{action "onToggleRoute0View"}}>
-            <div class="suggestion-icon">{{gru-icon name="explore_outline"}}</div>
-            <div class="suggestion-note"> {{t 'class.overview.course-map.route0-bannerdesc'}}</div>
-          </div>
-          <div class="route0-body" style="display: none;">
-            <div class="route0-accordion-container">
-              {{class.overview.course-suggestions model=route0Contents index=index class=classData course=courseData}}
+          {{log class.milestoneViewApplicable}}
+          {{#unless class.milestoneViewApplicable}}
+            <div class="route0-comment" {{action "onToggleRoute0View"}}>
+              <div class="suggestion-icon">{{gru-icon name="explore_outline"}}</div>
+              <div class="suggestion-note"> {{t 'class.overview.course-map.route0-bannerdesc'}}</div>
             </div>
-          </div>
+            <div class="route0-body" style="display: none;">
+              <div class="route0-accordion-container">
+                {{class.overview.course-suggestions
+                  model=route0Contents
+                  index=index
+                  class=class
+                  course=courseData}}
+              </div>
+            </div>
+            <div class="route0-action">
+              <div class="ignore" {{action "onRoute0Reject"}}>
+                <i></i>
+                <span>{{t 'student-first-experience.route0-action.ignore'}}</span>
+              </div>
+              <div class="accept" {{action "onRoute0Accept"}}>
+                <i></i>
+                <span>{{t 'student-first-experience.route0-action.accept'}}</span>
+              </div>
+            </div>
+      {{else if (and isMilestoneFetch (gt milestones.length 0))}}
+        <div class="milestone-course-map-view-route0">
+          {{student.class.milestone-course-map-route0-preview
+             class=class
+             route0=route0Contents
+             course=course
+             showChart=false
+            }}
         </div>
-        <div class="route0-action">
-          <div class="ignore" {{action "onRoute0Reject"}}>
-            <i></i>
-            <span>{{t 'student-first-experience.route0-action.ignore'}}</span>
-          </div>
-          <div class="accept" {{action "onRoute0Accept"}}>
-            <i></i>
-            <span>{{t 'student-first-experience.route0-action.accept'}}</span>
-          </div>
+          {{/unless}}
         </div>
       {{/if}}
-      <div class="course-map-accordion-container {{unless (and isRoute0Pending isRoute0) 'no-route0'}}">
-        {{student.class.destination.student-destination-course-accordion
+      {{#unless class.milestoneViewApplicable}}
+        <div class="course-map-accordion-container {{unless (and isRoute0Pending isRoute0) 'no-route0'}}">
+          {{student.class.destination.student-destination-course-accordion
           courseData=courseData
           classId=classId
           courseId=courseId
           isRoute0=isRoute0
+          }}
+        </div>
+    {{else}}
+      {{#if ( and isRoute0Accepted  isMilestoneFetch (gt milestones.length 0))}}
+        {{student.class.milestone-course-map-route0
+        showPerformance=false
+        locateLastPlayedItem=false
+        class=class
         }}
-      </div>
+      {{/if}}
+      {{#if (and isMilestoneFetch (gt milestones.length 0))}}
+        {{student.class.milestone-course-map
+        class=class
+        gradeSubject=subject
+        locateLastPlayedItem=false
+        showToggleButtonToViewFullCourse=true
+        milestones=milestones
+      }}
+      {{else if isMilestoneFetch}}
+        <div class="student-milestone-not-ready">{{t 'student-milestone-not-ready'}}</div>
+      {{/if}}
+      {{/unless}}
     {{/if}}
   </div>
 </div>

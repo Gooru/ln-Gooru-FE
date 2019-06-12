@@ -23,12 +23,15 @@ export default Ember.Route.extend({
   model: function() {
     const route = this;
     const currentClass = route.modelFor('student.class').class;
-    const userId = route.get('session.userId');
-
+    let userId = route.get('session.userId');
+    const classId = currentClass.get('id');
+    let forMonth = moment().format('MM');
+    let forYear = moment().format('YYYY');
+    let startDate = `${forYear}-${forMonth}-01`;
+    var endDate = moment(startDate).endOf('month').format('YYYY-MM-DD');
     return Ember.RSVP.hash({
-      classActivities: route
-        .get('classActivityService')
-        .findStudentClassActivities(userId, currentClass.get('id'))
+      classActivities: route.get('classActivityService')
+        .getStudentScheduledActivities(userId, classId, startDate, endDate)
     });
   },
 
@@ -39,7 +42,8 @@ export default Ember.Route.extend({
    */
   setupController: function(controller, model) {
     controller.get('classController').selectMenuItem('class-activities');
-    controller.parseClassActivityData(model.classActivities);
+    controller.set('classActivitiesOfMonth', model.classActivities);
+    controller.set('selectedDate', moment().format('YYYY-MM-DD'));
     controller.initialize();
   },
 
@@ -49,6 +53,10 @@ export default Ember.Route.extend({
    */
   resetController(controller) {
     controller.set('classActivities', Ember.A([]));
+    controller.set('classActivitiesOfMonth', Ember.A([]));
+    controller.set('activeOfflineActivities', Ember.A([]));
+    controller.set('completedOfflineActivities', Ember.A([]));
+    controller.set('selectedDate', null);
     controller.set('tab', null);
   }
 });

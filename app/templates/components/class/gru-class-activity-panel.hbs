@@ -1,140 +1,191 @@
 <div class="dca-panel-container {{if isUnScheduled 'unscheduled'}} {{if classActivity.isNewlyAdded 'new'}} {{if isActivityPast 'past-date'}}">
-  <div class="ca-panel-container-1">
-    <div class="dca-panel-info {{if tags.length 'has-tags'}}">
-      <i class="{{item.collectionType}}-icon" />
-      <p {{action 'onPlayContent' item}}>{{item.title}}</p>
-      {{#if tags.length}}
-        <div class="collection-standards">
-          {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true}}
+  {{#unless isUnScheduled}}
+    <div class="ca-panel-container-1">
+      <div class="icon">
+        <i class="{{item.format}}-icon" />
+      </div>
+      <div class="title-info {{if isOfflineActivity 'offline'}}" {{action 'onPlayContent' item}}>
+        <div class="label-section">
+          <div class="title ellipsis">{{item.title}}</div>
+          <div class="group">
+            <span class="date-section">
+              {{format-date classActivity.added_date 'DD MMM'}} - {{format-date (if classActivity.end_date classActivity.end_date classActivity.added_date) 'DD MMM'}}
+            </span>
+            <span class="task-count">{{t 'common.tasks'}} {{item.taskCount}}</span>
+          </div>
         </div>
-      {{/if}}
-    </div>
-    <div class="dca-content-counts">
-      <div class="resource-count">
-        {{#if (gt item.resourceCount 0)}}
-          <i class="resource-icon"></i>
-          <span>{{item.resourceCount}}</span>
+      </div>
+      <div class="resource-info">
+        {{#if (gt classActivity.resourceCount 0)}}
+          <div class="resource-count">
+            <i class="resource-icon"></i>
+            <span>{{classActivity.resourceCount}}</span>
+          </div>
+        {{/if}}
+        {{#if (gt classActivity.questionCount 0)}}
+          <div class="question-count">
+            <i class="question-icon"></i>
+            <span>{{classActivity.questionCount}}</span>
+          </div>
+        {{/if}}
+        {{#if (or (eq item.collectionType 'assessment-external' ) (eq item.collectionType 'collection-external'))}}
+          <i class="external-icon"></i>
+        {{/if}}
+        {{#if (gt item.oeQuestionCount 0)}}
+          <div class="dca-rubric-icon">
+            <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.rubric"}}" class="rubric-icon"></i>
+          </div>
         {{/if}}
       </div>
-      <div class="question-count">
-        {{#if (gt item.questionCount 0)}}
-          <i class="question-icon"></i>
-          <span>{{item.questionCount}}</span>
+      <div class="activate">
+        {{#if (and showDcaAssignButton (not classActivity.isCompleted))}}
+          <span class="dca-assign" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.assign"}}">
+            {{#unless classActivity.isActive}}
+              {{gru-switch switchOptions=switchOptions onOptionSwitch='changeVisibility' isChecked=classActivity.isActive item=item}}
+            {{else}}
+              {{gru-switch class="assigned" switchOptions=switchOptions  isChecked=classActivity.isActive item=item}}
+            {{/unless}}
+          </span>
         {{/if}}
       </div>
-      {{#if (or (eq item.collectionType 'assessment-external' ) (eq item.collectionType 'collection-external'))}}
-        <i class="external-icon"></i>
-      {{/if}}
-    </div>
-    {{#unless isUnScheduled}}
-      <div class="dca-panel-actions-performance">
-        {{#if collectionPerformanceSummary}}
-          {{#if (and (not-eq item.collectionType 'collection' ) (not-eq item.collectionType 'collection-external'))}}
-            <div class="dca-panel-performance" {{action 'openDcaContentReport' classActivity}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
-              <span class="assessment-score">{{collectionPerformanceSummary.score}}%</span>
-              {{#if collectionPerformanceSummary.timeSpent}}
-                <span class="assessment-timespent">{{format-time collectionPerformanceSummary.timeSpent}}</span>
-              {{/if}}
-            </div>
+      <div class="more">
+        <span {{action 'expandMore'}}>
+          {{gru-icon name="more_vert"}}
+        </span>
+      </div>
+      <div class="performance">
+        <div class="dca-panel-actions-performance">
+          {{#if collectionPerformanceSummary}}
+            {{#if (and (not-eq item.collectionType 'collection' ) (not-eq item.collectionType 'collection-external'))}}
+              <div class="dca-panel-performance" {{action 'openDcaContentReport' classActivity}} style="background-color:{{grade-color collectionPerformanceSummary.score}}">
+                <span class="assessment-score">{{collectionPerformanceSummary.score}}%</span>
+                {{#if collectionPerformanceSummary.timeSpent}}
+                  <span class="assessment-timespent">{{format-time collectionPerformanceSummary.timeSpent}}</span>
+                {{/if}}
+              </div>
+            {{else}}
+              <div class="dca-panel-performance collection" {{action 'openDcaContentReport' classActivity}}>
+                <span class="time-spent">
+                  {{if collectionPerformanceSummary.timeSpent (format-time collectionPerformanceSummary.timeSpent) '--'}}
+                </span>
+              </div>
+            {{/if}}
           {{else}}
-            <div class="dca-panel-performance collection" {{action 'openDcaContentReport' classActivity}}>
-              <span class="time-spent">
-                {{if collectionPerformanceSummary.timeSpent (format-time collectionPerformanceSummary.timeSpent) '--'}}
+            {{#if isShowAddData}}
+              <div class="dca-panel-performance add-data {{if (or (eq classActivity.usersCount 0) isOfflineActivity) 'disabled'}}" {{action "onOpenPerformanceEntry" item classActivity false}}>
+                {{t 'common.add-data'}}
+              </div>
+            {{else}}
+              <div class="dca-panel-performance not-started">
+                <div class="thumbnail-img">
+                  <img src="{{item.thumbnailUrl}}" />
+                </div>
+              </div>
+            {{/if}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <div class="ca-panel-container-2">
+      <div class="ca-actions">
+        <div class="student-count {{if showCohort 'active'}}">
+          {{gru-icon name="account_circle"}}
+          {{#if (eq classActivity.usersCount -1)}}
+            <span class="hidden-xs" {{action 'showStudentList'}}>{{t 'common.all'}}</span>
+          {{else if (eq classActivity.usersCount 0)}}
+            <span class="hidden-xs" {{action 'showStudentList'}}>{{t 'common.none'}}</span>
+          {{else}}
+            <span class="hidden-xs" {{action 'showStudentList'}}> {{classActivity.usersCount}}</span>
+          {{/if}}
+        </div>
+        <div class="re-schedule">
+          <div class="re-schedule-activity ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
+            {{#if collectionPerformanceSummary}}
+              {{gru-icon name="replay"}}
+              <span class="hidden-xs">{{t 'common.repeat-activity'}}</span>
+            {{else}}
+              {{gru-icon name="update"}}
+              <span class="hidden-xs">{{t 'common.Reschedule'}}</span>
+            {{/if}}
+          </div>
+        </div>
+        <div class="mastery-accrual">
+          {{#if (and showMasteryAccrual item.masteryAccrualCompetencies)}}
+            <div class="mastery-accrual-btn {{if (or activity.isCompleted isActivityPast) 'disable-event'}}" {{action "onUpdateMasteryAccrual"}}>
+              <span class="mastery-accrual-icon mastery-accrual-{{if classActivity.allowMasteryAccrual 'checked' 'unchecked'}}">
+                {{gru-icon name=(concat 'radio_button_' (if  classActivity.allowMasteryAccrual 'checked' 'unchecked'))}}
               </span>
+              <span class="mastery-accrual-text">{{t 'common.mastery'}}</span>
             </div>
+          {{/if}}
+        </div>
+        <div class="re-add-data {{if (or (eq classActivity.usersCount 0) isOfflineActivity) 'disable-event'}}">
+          {{#if collectionPerformanceSummary}}
+            <span {{action "onOpenPerformanceEntry" item classActivity true}}>{{t 'common.update-data'}}</span>
+          {{/if}}
+        </div>
+      </div>
+      <div class="dca-btn">
+        {{#if enableCollectionLiveLearning}}
+          {{#if (and showGolive (or (eq item.collectionType 'assessment') (eq item.collectionType 'collection'))) }}
+            <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item}}></i>
           {{/if}}
         {{else}}
-          {{#if isShowAddData}}
-            <div class="dca-panel-performance add-data {{if (eq classActivity.usersCount 0)'disabled'}}" {{action "onOpenPerformanceEntry" item classActivity false}}>
-              {{t 'common.add-data'}}
-            </div>
-          {{else}}
-            <div class="dca-panel-performance not-started">
-              <span class="no-performance">--</span>
-            </div>
+          {{#if (and showGolive (eq item.collectionType 'assessment') ) }}
+            <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item}}></i>
           {{/if}}
         {{/if}}
+        {{#if (and isOfflineActivity (not classActivity.isCompleted))}}
+          <div class="oa-complete {{if (or (not classActivity.isActive) isActivityFuture) 'disabled'}}">
+            {{input type="checkbox"  change=(action "onComplete") }}<span>{{t 'common.completed'}}</span>
+          </div>
+        {{/if}}
       </div>
-    {{else}}
+      <div class="delete-activity">
+        {{#unless classActivity.isCompleted}}
+          <span data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.remove"}}" {{action 'removeClassActivity' classActivity}}>
+            {{gru-icon name="delete_outline"}}
+          </span>
+        {{/unless}}
+      </div>
+    </div>
+  {{else}}
+    <div class="ca-panel-container-1 unschedule">
+      <div class="icon">
+        <i class="{{item.format}}-icon" />
+      </div>
+      <div class="title-info ellipsis" {{action 'onPlayContent' item}}>
+        <span class="ellipsis">{{item.title}}</span>
+      </div>
+      <div class="resource-info">
+        {{#if (gt classActivity.resourceCount 0)}}
+          <div class="resource-count">
+            <i class="resource-icon"></i>
+            <span>{{classActivity.resourceCount}}</span>
+          </div>
+        {{/if}}
+        {{#if (gt classActivity.questionCount 0)}}
+          <div class="question-count">
+            <i class="question-icon"></i>
+            <span>{{classActivity.questionCount}}</span>
+          </div>
+        {{/if}}
+        {{#if (or (eq item.collectionType 'assessment-external' ) (eq item.collectionType 'collection-external'))}}
+          <i class="external-icon"></i>
+        {{/if}}
+        {{#if (gt item.oeQuestionCount 0)}}
+          <div class="dca-rubric-icon">
+            <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.rubric"}}" class="rubric-icon"></i>
+          </div>
+        {{/if}}
+      </div>
       <div class="ca-panel-reschedule ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
         <span class="icon"> {{gru-icon name="update"}}</span>
         <span>{{t 'common.schedule'}}</span>
       </div>
-    {{/unless}}
-  </div>
-  {{#unless isUnScheduled}}
-    <div class="ca-panel-container-2">
-      <div class="student-count {{if showCohort 'active'}}">
-        {{gru-icon name="account_circle"}}
-        {{#if (eq classActivity.usersCount -1)}}
-          <span {{action 'showStudentList'}}>{{t 'common.all'}}</span>
-        {{else if (eq classActivity.usersCount 0)}}
-          <span {{action 'showStudentList'}}>{{t 'common.none'}}</span>
-        {{else}}
-          <span {{action 'showStudentList'}}> {{classActivity.usersCount}}</span>
-        {{/if}}
-      </div>
-      <div class="re-schedule">
-        <div class="re-schedule-activity ca-datepicker-popover" onclick={{action 'onScheduleContentToDCA' classActivity}}>
-          {{#if collectionPerformanceSummary}}
-            {{gru-icon name="replay"}}
-            <span class="hidden-xs">{{t 'common.repeat-activity'}}</span>
-          {{else}}
-            {{gru-icon name="update"}}
-            <span class="hidden-xs">{{t 'common.Reschedule'}}</span>
-          {{/if}}
-        </div>
-      </div>
-      <div class="mastery-accrual">
-        {{#if (and showMasteryAccrual item.masteryAccrualCompetencies)}}
-          <div class="mastery-accrual-btn {{if isActivityPast 'disable-event'}}" {{action "onUpdateMasteryAccrual"}}>
-            <span class="mastery-accrual-icon mastery-accrual-{{if classActivity.allowMasteryAccrual 'checked' 'unchecked'}}">
-              {{gru-icon name=(concat 'radio_button_' (if  classActivity.allowMasteryAccrual 'checked' 'unchecked'))}}
-            </span>
-            <span class="mastery-accrual-text  hidden-xs">{{t 'common.mastery'}}</span>
-          </div>
-        {{/if}}
-      </div>
-      <div class="dca-panel-actions">
-        <div class="dca-rubric-icon">
-          {{#if (gt item.oeQuestionCount 0)}}
-            <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.rubric"}}" class="rubric-icon"></i>
-          {{/if}}
-        </div>
-        <div class="dca-golive-btn">
-          {{#if enableCollectionLiveLearning}}
-            {{#if (and showGolive (or (eq item.collectionType 'assessment') (eq item.collectionType 'collection'))) }}
-              {{!-- {{#if (and showGolive (eq item.collectionType 'assessment') ) }} --}}
-              <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item}}></i>
-            {{/if}}
-          {{else}}
-            {{#if (and showGolive (eq item.collectionType 'assessment') ) }}
-              <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' item}}></i>
-            {{/if}}
-          {{/if}}
-        </div>
-        <div class="dca-assign-btn">
-          {{#if showDcaAssignButton}}
-            <span class="dca-assign" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.assign"}}">
-              {{#unless classActivity.isActive}}
-                {{gru-switch switchOptions=switchOptions onOptionSwitch='changeVisibility' isChecked=classActivity.isActive item=item}}
-              {{else}}
-                {{gru-switch class="assigned" switchOptions=switchOptions  isChecked=classActivity.isActive item=item}}
-              {{/unless}}
-            </span>
-          {{/if}}
-        </div>
-        <div class="dca-remove-btn">
-          {{#if showDcaRemoveButton}}
-            <span class="remove-dca" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.remove"}}" {{action 'removeClassActivity' classActivity}}>
-              {{gru-icon name="remove_circle" }}
-            </span>
-          {{/if}}
-        </div>
-      </div>
-      <div class="re-add-data {{if (eq classActivity.usersCount 0) 'disabled'}}">
-        {{#if collectionPerformanceSummary}}
-          <span {{action "onOpenPerformanceEntry" item classActivity true}}>{{t 'common.update-data'}}</span>
+      <div class="thumbnail-img">
+        {{#if item.thumbnailUrl}}
+          <img src="{{item.thumbnailUrl}}" />
         {{/if}}
       </div>
     </div>

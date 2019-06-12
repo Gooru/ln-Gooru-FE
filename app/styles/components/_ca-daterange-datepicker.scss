@@ -1,0 +1,162 @@
+.ca-daterange-picker {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: 100%;
+  background-color: #fff;
+
+  &.ca-datepicker-orientation-top {
+    .ca-datepicker-top {
+      display: inline-block;
+    }
+  }
+
+  &.ca-datepicker-orientation-bottom {
+    .ca-datepicker-bottom {
+      display: inline-block;
+    }
+  }
+
+  .ca-datepicker-top {
+    position: absolute;
+    right: -7px;
+    bottom: -14px;
+    color: #fff;
+    display: none;
+  }
+
+  .ca-datepicker-bottom {
+    position: absolute;
+    right: -7px;
+    top: -14px;
+    color: #fff;
+    display: none;
+  }
+
+  &.ca-datepicker-orientation-center {
+    .ca-datepicker-bottom,
+    .ca-datepicker-top {
+      right: 0;
+      left: calc(100% / 2);
+    }
+  }
+
+  &.ca-datepicker-orientation-left {
+    .ca-datepicker-bottom,
+    .ca-datepicker-top {
+      right: 0;
+      left: 2px;
+    }
+  }
+
+  .header-section {
+    display: none;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+    grid-template-columns: 40px auto;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+    background-color: #ffffff;
+
+    .back {
+      display: flex;
+
+      i {
+        width: max-content;
+        height: max-content;
+        margin: auto;
+      }
+    }
+
+    .title {
+      font-size: 16px;
+    }
+  }
+
+  .submit-btn {
+    background-color: #3486f7;
+    width: 100%;
+    height: 48px;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+
+    &.disable {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+
+  .calendar {
+    display: flex;
+    padding: 0 10px 10px;
+
+    .end-date-picker {
+      margin-left: 10px;
+    }
+
+    .ca-date-picker-container {
+      box-shadow: none;
+
+      .ca-date-nav-container {
+        height: 40px;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.13);
+      }
+    }
+  }
+
+  .date-info {
+    display: none;
+    grid-template-columns: auto auto;
+    height: auto;
+    margin-bottom: 5px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.13);
+
+    .end-date-info,
+    .start-date-info {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+
+      &.active {
+        color: #0072bc;
+      }
+
+      .date-container {
+        display: grid;
+        grid-template-areas: "doy my my" "doy day day";
+        text-transform: uppercase;
+
+        .date {
+          grid-area: doy;
+          font-size: 25px;
+          color: black;
+        }
+
+        .month-year {
+          grid-area: my;
+          font-size: 13px;
+          font-weight: 400;
+        }
+
+        .day {
+          grid-area: day;
+          font-size: 13px;
+          font-weight: 400;
+        }
+
+        .not-selected {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .month-picker {
+    padding-bottom: 10px;
+  }
+}

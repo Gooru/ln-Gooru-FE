@@ -30,7 +30,7 @@ test('Layout', function(assert) {
 
     T.exists(
       assert,
-      $container.find('.dca-list-container'),
+      $container.find('.dca-content-list-container'),
       'Missing activities collections'
     );
   });

@@ -10,6 +10,8 @@ export default Ember.Object.extend({
 
   namespace: '/api/nucleus/v2/rubrics',
 
+  gradingNamespaceForDCA: '/api/nucleus-insights/v2/dca/rubrics',
+
   profileNamespace: '/api/nucleus/v2/profiles',
 
   copierNamespace: '/api/nucleus/v2/copier',
@@ -245,6 +247,30 @@ export default Ember.Object.extend({
   },
 
   /**
+   * Gets Questions pending grading for DCA
+   *
+   * @param {string} classId
+   * @returns {Promise/Object}
+   */
+  getQuestionsToGradeForDCA: function(classId) {
+    const adapter = this;
+    const namespace = adapter.get('gradingNamespaceForDCA');
+    const url = `${namespace}/questions`;
+
+    var data = {
+      classId
+    };
+
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      data,
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
    * Gets the list of Students for a to be graded Question
    *
    * @param {string} questionId
@@ -267,6 +293,39 @@ export default Ember.Object.extend({
       collectionId,
       classId,
       courseId
+    };
+
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      data,
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Gets the list of DCA Students for a to be graded Question
+   *
+   * @param {string} questionId
+   * @param {string} classId
+   * @param {string} collectionId
+   * @returns {Promise/Object}
+   */
+  getDCAStudentsForQuestion: function(
+    questionId,
+    classId,
+    collectionId,
+    activityDate
+  ) {
+    const adapter = this;
+    const namespace = adapter.get('gradingNamespaceForDCA');
+    const url = `${namespace}/questions/${questionId}/students`;
+
+    var data = {
+      collectionId,
+      classId,
+      activityDate
     };
 
     const options = {
@@ -309,6 +368,43 @@ export default Ember.Object.extend({
       collectionId,
       unitId,
       lessonId
+    };
+
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      data,
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Gets Answer for Rubric Grading of DCA
+   *
+   * @param {string} studentId
+   * @param {string} classId
+   * @param {string} courseId
+   * @param {string} collectionId
+   * @param {string} questionId
+   * @param {string} activityDate
+   * @returns {Promise/Object}
+   */
+  getAnswerToGradeForDCA: function(
+    studentId,
+    classId,
+    collectionId,
+    questionId,
+    activityDate
+  ) {
+    const adapter = this;
+    const namespace = adapter.get('gradingNamespaceForDCA');
+    const url = `${namespace}/questions/${questionId}/students/${studentId}/answers`;
+
+    var data = {
+      classId,
+      collectionId,
+      activityDate
     };
 
     const options = {

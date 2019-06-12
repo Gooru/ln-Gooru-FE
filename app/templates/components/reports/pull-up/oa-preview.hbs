@@ -1,0 +1,162 @@
+<div class="backdrop" {{action "onClosePullUp"}}></div>
+<div class="oa-preview-container">
+  <div class="oa-header-container">
+    <div class="close-pullup" {{action "onClosePullUp"}}>
+      {{gru-icon name="arrow_downward"}}
+    </div>
+    <div class="preview-title-container">
+      <i class="oa-icon"></i>
+      {{#unless isLoading}}
+        <p class="preview-title">{{t 'project'}} {{t offlineActivity.subFormat}}</p>
+      {{/unless}}
+    </div>
+    {{#if allowPlay}}
+      <div class="content-player" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
+        {{gru-icon name="play_arrow"}}
+      </div>
+    {{/if}}
+    {{#if showRemix}}
+      <div class="content-remix" title="{{t 'common.remix'}}" data-toggle="tooltip" {{action "onRemixContent"}}>
+        {{gru-icon name="content_copy"}}
+      </div>
+    {{/if}}
+    {{#if showPrint}}
+      <div class="print-preview" title="{{t 'common.download-print'}}" data-toggle="tooltip" {{action "onPrintPreview"}}>
+        {{gru-icon name="get_app"}}
+      </div>
+    {{/if}}
+  </div>
+
+  {{#if isReportView}}
+    <div class="oa-user-list-container">
+      <div class="user-selected-profile">
+        <div class="user-profile-img">
+          <img src="{{selectedUser.avatarUrl}}" />
+          <span>{{selectedUser.lastName}} {{selectedUser.firstName}}</span>
+        </div>
+        {{#if (and isReportView isTeacher)}}
+          <div class="oa-user-list-drop-down" {{action 'toggleListOfStudents'}}>
+            {{gru-icon name="keyboard_arrow_down"}}
+          </div>
+        {{/if}}
+      </div>
+      {{#if (and isReportView isTeacher)}}
+        <div class="oa-list-of-users">
+          {{#each users as |user index|}}
+            <div class="user-profile-img {{if (eq selectedUser.id user.id) 'selected'}}" {{action 'previewStudentReport' user}}>
+              <img src="{{user.avatarUrl}}" />
+              <span>{{user.lastName}} {{user.firstName}}</span>
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+    </div>
+  {{/if}}
+
+  <div class="oa-body-container {{if isReportView 'report-view'}}">
+    <div class="oa-info-image-container">
+      <div class="oa-image-container" style="background-image: url({{offlineActivity.thumbnailUrl}})">
+        <div class="oa-standards">
+          {{#if taxonomyTags.length}}
+            {{taxonomy.gru-taxonomy-tag-list
+              tags=taxonomyTags
+              tagsVisible=1
+              isInCard=true}}
+          {{/if}}
+        </div>
+        <div class="oa-etc">
+          {{gru-icon name="access_time"}}
+          <span class="etc-value">{{offlineActivity.durationHours}}h</span>
+        </div>
+        <div class="oa-date-range">
+          {{format-date classActivity.added_date 'DD MMM'}} - {{format-date (if classActivity.end_date classActivity.end_date classActivity.added_date) 'DD MMM'}}
+        </div>
+      </div>
+      <div class="oa-info-container">
+        <div class="oa-info-header-container">
+          <div class="oa-icon-container">
+          </div>
+          <div class="oa-title-container">
+            <div class="oa-project-label">{{offlineActivity.title}}</div>
+            {{#if offlineActivity.learningObjectives}}
+              <div class="oa-project-tag">{{t 'common.description'}}</div>
+            {{/if}}
+          </div>
+        </div>
+        <div class="oa-description-container">
+          {{offlineActivity.learningObjectives}}
+        </div>
+      </div>
+    </div>
+    <div class="oa-references-container">
+      {{player.offline-activity.gru-offline-activity-references
+          offlineActivity=offlineActivity
+        }}
+    </div>
+    <div class="oa-task-container">
+      {{#each offlineActivity.tasks as |task|}}
+        {{player.offline-activity.gru-offline-activity-task-submission
+          task=task
+          classId=classId
+          showSubmissions=isReportView
+          isReadOnly=true
+        }}
+      {{/each}}
+    </div>
+
+    <div class="oa-teacher-student-rubric">
+      {{#if studentRubric}}
+        <div class="student-rubric-section">
+          <div class="student-grading-header">
+            <div class="rubric-icon-container">
+            </div>
+            <div class="rubric-container">
+              <div class="grader-label">{{t 'common.student'}} {{t 'common.rubric'}}</div>
+              <div class="grade-tag">{{t 'common.self-graded'}}</div>
+            </div>
+          </div>
+          {{#if studentRubric.categories}}
+            <div class="student-grading-panel">
+              {{rubric.rubric-category-grades
+              isReadOnly=true
+              categories=studentRubric.categories
+            }}
+            </div>
+          {{/if}}
+          {{#if studentRubric.comment}}
+            <div class="over-all-comment">
+              <div class="over-all-comment-label">{{t 'grading-player.overall-comment'}}</div>
+              <p>{{studentRubric.comment}}</p>
+            </div>
+          {{/if}}
+        </div>
+      {{/if}}
+      {{#if teacherRubric}}
+        <div class="teacher-rubric-section">
+          <div class="teacher-grading-header">
+            <div class="rubric-icon-container">
+            </div>
+            <div class="rubric-container">
+              <div class="grader-label">{{t 'common.teacher'}} {{t 'common.rubric'}}</div>
+              <div class="grade-tag">{{t 'common.teacher'}}-{{t 'class.info.grade'}}</div>
+            </div>
+          </div>
+          {{#if teacherRubric.categories}}
+            <div class="teacher-grading-panel">
+              {{rubric.rubric-category-grades
+              isReadOnly=true
+              categories=teacherRubric.categories
+            }}
+            </div>
+          {{/if}}
+          {{#if teacherRubric.comment}}
+            <div class="over-all-comment">
+              <div class="over-all-comment-label">{{t 'grading-player.overall-comment'}}</div>
+              <p>{{teacherRubric.comment}}</p>
+            </div>
+          {{/if}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</div>

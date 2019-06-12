@@ -53,6 +53,41 @@ export default Ember.Object.extend({
   },
 
   /**
+   * Fetches the offline activity that match with the term
+   *
+   * @param term the term to search
+   * @param resetPagination indicates if the pagination needs a reset
+   * @returns {Promise.<Collection[]>}
+   */
+  searchOfflineActivity: function(term, params = {}, resetPagination = false) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/scollection`;
+    const page = !params.page || resetPagination ? 0 : params.page;
+    const pageSize = params.pageSize || DEFAULT_SEARCH_PAGE_SIZE;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: {
+        q: term || '*',
+        'flt.collectionType': 'offline-activity',
+        'flt.publishStatus': 'published',
+        start: page + 1,
+        length: pageSize
+      }
+    };
+    const taxonomies = params.taxonomies;
+    if (Ember.isArray(taxonomies) && taxonomies.length > 0) {
+      options.data['flt.standard'] = taxonomies.join(',');
+    }
+    adapter.appendFilters(params, options);
+
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
    * Fetches the assessments that match with the term
    *
    * @param term the term to search

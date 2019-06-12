@@ -1,27 +1,256 @@
-.controller.teacher.class.class-activities {
-  @media only screen and (max-width: $screen-875) {
-    .ca-date-and-add-content {
-      .ca-date-selector {
-        grid-row-start: 2;
-        grid-column-start: 1;
+.content .controller.teacher.class.class-activities {
+  position: inherit;
+  @media only screen and (max-width: $screen-767) {
+    .ca-panel {
+      flex-direction: column;
+
+      .left-panel,
+      .right-panel {
+        width: 100%;
+
+        .schedule-container {
+          .ca-schedule-section {
+            .dca-content-list-container {
+              min-height: 48px;
+              max-height: calc(100vh - 405px);
+            }
+          }
+        }
+
+        .offline-activity-container {
+          height: auto;
+          width: 100%;
+          z-index: 1;
+          background: none;
+          padding: 0;
+          position: absolute;
+          top: calc(100% - 150px);
+
+          &.active {
+            height: 100%;
+            width: 100%;
+            background-color: #fff;
+            z-index: 10;
+
+            .offline-activity-section {
+              display: block;
+
+              .panel-group {
+                .oa-active-container,
+                .oa-completed-container {
+                  .oa-active-items,
+                  .oa-completed-items {
+                    .oa-active-list,
+                    .oa-completed-list {
+                      max-height: calc(100vh - 280px);
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .right-panel-header {
+            display: none;
+          }
+
+          .offline-activity-item-header {
+            box-shadow: none;
+            border: 0;
+            border-bottom: 1px solid #ccc;
+            grid-template-columns: auto 60px;
+
+            span {
+              text-transform: uppercase;
+              padding-left: 20px;
+              font-size: 12px;
+              font-weight: bold;
+              color: inherit;
+            }
+
+            .offline-icon {
+              display: none;
+            }
+          }
+
+          .offline-activity-section {
+            display: none;
+          }
+        }
+
+        .item-to-grade-container {
+          height: auto;
+          width: 100%;
+          z-index: 1;
+          background: none;
+          padding: 0;
+          position: absolute;
+          top: calc(100% - 100px);
+
+          &.active {
+            height: 100%;
+            width: 100%;
+            background-color: #fff;
+            z-index: 10;
+          }
+
+          .ca-grade-items-header {
+            box-shadow: none;
+            border: 0;
+            border-bottom: 1px solid #ccc;
+          }
+        }
+
+        .unschedule-container {
+          height: auto;
+          width: 100%;
+          z-index: 1;
+          background: none;
+          padding: 0;
+          position: absolute;
+          top: calc(100% - 50px);
+
+          &.active {
+            height: 100%;
+            width: 100%;
+            z-index: 10;
+            background-color: #fff;
+
+            .ca-unscheduled-items {
+              height: auto;
+              width: 100%;
+              max-height: calc(100% - 150px);
+              display: block;
+
+              .ca-unscheduled-content-items {
+                margin-top: 0;
+              }
+            }
+          }
+
+          .ca-unschedule-items-header {
+            box-shadow: none;
+            border: 0;
+            border-bottom: 1px solid #ccc;
+          }
+        }
       }
     }
-  }
 
-  .ca-panel {
-    grid-template-columns: 1fr;
+    .ca-datepicker-schedule-container {
+      position: absolute;
+      top: 0 !important;
+      width: 100%;
+      left: 0 !important;
+      height: 100%;
 
-    .ca-left-panel {
-      .dca-content-container {
-        padding: 0;
+      .ca-daterange-picker {
+        .date-info,
+        .header-section,
+        .submit-btn {
+          display: grid;
+        }
 
-        .dca-list-container {
-          padding: 4px;
-          height: calc(100vh - 105px);
-          @media only screen and (max-width: $screen-xs) {
-            height: calc(100vh - 210px);
+        .calendar {
+          display: block;
+
+          .start-date-picker {
+            display: none;
+
+            &.selected {
+              display: block;
+            }
           }
-          padding-bottom: 50px;
+
+          .end-date-picker {
+            display: none;
+
+            &.selected {
+              display: block;
+            }
+          }
+
+          .ca-date-picker-container {
+            .ca-datepicker-container {
+              #ca-datepicker {
+                grid-row-start: 1;
+                padding: 10px 20px 20px;
+
+                .datepicker-inline {
+                  .datepicker-days {
+                    .table-condensed {
+                      thead {
+                        tr:nth-child(2) {
+                          display: grid;
+                          width: 100%;
+                          justify-content: center;
+                          grid-template-columns: repeat(7,1fr);
+
+                          th.dow {
+                            height: 40px;
+                            width: 40px;
+                            justify-self: center;
+                          }
+                        }
+                      }
+
+                      tbody {
+                        tr {
+                          display: grid;
+                          width: 100%;
+                          justify-content: center;
+                          grid-template-columns: repeat(7,1fr);
+
+                          td {
+                            height: 40px;
+                            width: 40px;
+                            justify-self: center;
+
+                            &.has-activities:before {
+                              top: 25px;
+                              display: flex;
+                              margin: auto;
+                              left: 0;
+                            }
+
+                            &.active {
+                              background-color: #d2e3fc;
+                              background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
+                              border-radius: 50%;
+                              display: flex;
+                              margin: auto;
+                              align-items: center;
+                              justify-content: center;
+                              color: #3486f7;
+
+                              &:before {
+                                content: none;
+                              }
+                            }
+
+                            &.today {
+                              background-color: #3486f7;
+                              background-image: -webkit-linear-gradient(top, #3486f7 , #3486f7);
+                              border-radius: 50%;
+                              display: flex;
+                              margin: auto;
+                              align-items: center;
+                              justify-content: center;
+                              color: #fff;
+
+                              &:before {
+                                content: none;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

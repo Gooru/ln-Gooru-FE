@@ -38,7 +38,8 @@ export const DEFAULT_IMAGES = {
   ASSESSMENT: 'assets/gooru/assessment-default.png',
   REPORTICON: '/assets/gooru/shape.png',
   QUESTION_PLACEHOLDER_IMAGE: 'assets/gooru/question-placeholder-image.png',
-  LOADER_IMAGE: '/assets/gooru/giphy.gif'
+  LOADER_IMAGE: '/assets/gooru/giphy.gif',
+  OFFLINE_ACTIVITY: 'assets/gooru/offline-activity-default.png'
 };
 
 export const K12_CATEGORY = {
@@ -77,7 +78,9 @@ export const CONTENT_TYPES = {
   LESSON: 'lesson',
   RESOURCE: 'resource',
   QUESTION: 'question',
-  RUBRIC: 'rubric'
+  RUBRIC: 'rubric',
+  OFFLINE_ACTIVITY: 'offline-activity',
+  ACTIVITY: 'activity'
 };
 
 export const ASSESSMENT_SUB_TYPES = {
@@ -314,6 +317,7 @@ export const RUBRIC_OFF_OPTIONS = {
 export const PLAYER_EVENT_SOURCE = {
   COURSE_MAP: 'coursemap',
   DAILY_CLASS: 'dailyclassactivity',
+  OFFLINE_CLASS: 'offline-activity',
   INDEPENDENT_ACTIVITY: 'ILActivity',
   RGO: 'rgo',
   DIAGNOSTIC: 'diagnostic',
@@ -348,6 +352,10 @@ export const SEARCH_FILTER_BY_CONTENT_TYPES = [
   {
     format: 'assessment',
     label: 'search-filter.assessments'
+  },
+  {
+    format: 'offline-activity',
+    label: 'common.offline-activity'
   }
 ];
 
@@ -363,7 +371,7 @@ export const COMPETENCY_STATUS = [
 
 //notifciation timer
 export const NOTIFICATION_SETTINGS = {
-  polling_interval: 10 * 60 * 1000, // milliseconds = 10 mins
+  polling_interval: 1 * 60 * 1000, // milliseconds = 10 mins
   page_size: 5
 };
 
@@ -391,3 +399,42 @@ export const SEARCH_CONTEXT = {
   GOORU_CATALOG: 'gooru-catalog',
   MY_CONTENT: 'my-content'
 };
+
+export const OA_TASK_SUBMISSION_TYPES = [
+  {
+    value: 'image',
+    submissionType: 'uploaded',
+    validExtensions: '.jpg, .jpeg, .gif, .png',
+    icon: 'fa-file-image-o'
+  },
+  {
+    value: 'pdf',
+    submissionType: 'uploaded',
+    validExtensions: '.pdf',
+    icon: 'fa-file-pdf-o'
+  },
+  {
+    value: 'presentation',
+    submissionType: 'uploaded',
+    validExtensions: '.ppt, .pptx',
+    icon: 'fa-file-powerpoint-o'
+  },
+  {
+    value: 'document',
+    submissionType: 'uploaded',
+    validExtensions: '.doc, .docx',
+    icon: 'fa-file-word-o'
+  },
+  {
+    value: 'others',
+    submissionType: 'uploaded',
+    validExtensions: '',
+    icon: 'fa-file'
+  },
+  {
+    value: 'url',
+    submissionType: 'remote',
+    validExtensions: '',
+    icon: 'fa-link'
+  }
+];

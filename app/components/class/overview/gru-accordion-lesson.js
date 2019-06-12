@@ -819,13 +819,16 @@ export default Ember.Component.extend(
           let performance = assessments.concat(collection);
           const promises = collections.map(function(collection) {
             const collectionId = collection.get('id');
-            const isAssessment = collection.get('format') === 'assessment';
+            const isAssessment =
+              collection.get('format') === CONTENT_TYPES.ASSESSMENT;
             const isExternalAssessment =
-              collection.get('format') === 'assessment-external';
+              collection.get('format') === CONTENT_TYPES.EXTERNAL_ASSESSMENT;
             const isResource =
-              collection.get('format') !== 'assessment' &&
-              collection.get('format') !== 'assessment-external' &&
-              collection.get('format') !== 'collection';
+              collection.get('format') !== CONTENT_TYPES.OFFLINE_ACTIVITY &&
+              collection.get('format') !== CONTENT_TYPES.ASSESSMENT &&
+              collection.get('format') !== CONTENT_TYPES.EXTERNAL_ASSESSMENT &&
+              collection.get('format') !== CONTENT_TYPES.COLLECTION &&
+              collection.get('format') !== CONTENT_TYPES.EXTERNAL_COLLECTION;
             const peer = lessonPeers.findBy('id', collectionId);
             if (peer) {
               component

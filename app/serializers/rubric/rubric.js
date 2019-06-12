@@ -15,6 +15,7 @@ import GradeQuestion from 'gooru-web/models/rubric/grade-question';
 import GradeQuestionItem from 'gooru-web/models/rubric/grade-question-item';
 import GradeQuestionStudents from 'gooru-web/models/rubric/grade-question-students';
 import GradeQuestionAnswer from 'gooru-web/models/rubric/grade-question-answer';
+import { ROLES } from 'gooru-web/config/config';
 
 /**
  * Serializer to support the Rubric CRUD operations
@@ -101,7 +102,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
           ? model.get('categories').map(function(category) {
             return serializer.serializedUpdateRubricCategory(category);
           })
-          : null
+          : null,
+        max_score: model.get('maxScore')
       };
     } else {
       return {
@@ -215,6 +217,22 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
+   * Serializes a RubricGrade/RubricGrade object into a JSON representation required by the endpoint
+   *
+   * @param {RubricGrade} model - The rubric grade model to be serialized
+   * @returns {Object} JSON Object representation of the rubric grade model
+   *
+   */
+  serializeStudentRubricGradesForDCA(model) {
+    let contextModel = this.serializeStudentRubricGrades(model);
+    contextModel.activity_date = model.activityDate;
+    contextModel.additional_context = null;
+    contextModel.collection_type = model.collectionType;
+    contextModel.content_source = model.contentSource;
+    return contextModel;
+  },
+
+  /**
    * Serializes a student grade category score
    * @param {GradeCategoryScore} model
    * @returns {*} serialized category score
@@ -267,6 +285,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
         id: data.id,
         title: data.title,
         description: data.description,
+        isTeacherGrader: data.grader === 'Teacher',
         thumbnail: thumbnail,
         standards: serializer
           .get('taxonomySerializer')
@@ -298,7 +317,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
         originalCreatorId: data.original_creator_id,
         originalRubricId: data.original_rubric_id,
         parentRubricId: data.parent_rubric_id,
-        tenantRoor: data.tenant_root
+        tenantRoor: data.tenant_root,
+        grader: data.grader || null,
+        gradeType: data.grader === 'Teacher' ? ROLES.TEACHER : ROLES.STUDENT
       });
     }
   },
@@ -362,7 +383,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
       collectionId: data.collectionId,
       collectionType: data.collectionType,
       resourceId: data.resourceId,
-      studentCount: data.studentCount
+      studentCount: data.studentCount,
+      activityDate: data.activityDate
     });
   },
 
@@ -392,7 +414,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       lessonId: payload.lessonId,
       collectionId: payload.collectionId,
       questionId: payload.questionId,
-      sessionId: payload.session_id,
+      sessionId: payload.session_id || payload.sessionId,
       questionText: payload.questionText,
       answerText: answer,
       submittedAt: toLocal(payload.submittedAt),

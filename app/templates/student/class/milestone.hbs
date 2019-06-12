@@ -1,0 +1,53 @@
+{{#if (gt milestones.length 0)}}
+  <div class="bar-charts" data-content="{{performancePercentage}}% Completed">
+    <div class="completion-chart">
+      <div class="start-point">{{gru-icon name="stars"}}</div>
+      {{charts/gru-x-bar-chart
+      data=barChartData
+      mileStone=mileStone
+      mileStoneHandler=(action 'mileStoneHandler')  }}
+      <div class="destination-point">{{gru-icon name="place"}}</div>
+    </div>
+  </div>
+
+  <h5 class="learning-path-label">{{t 'course-map.your-learning-path'}} <span class="toggle-course-info" {{action "onToggleCourseInfo"}}>{{gru-icon name="info" style='material-icons-outlined'}}</span></h5>
+  <div class="rescope-content-preview course-info-toggle-container">
+    <div class="rescope-content-preview-msg">
+      {{t 'class.overview.course-map.learning-path'}}
+    </div>
+    <div class="show-completed-course">
+      {{t 'class.overview.course-map.rescope-toggle'}}
+    </div>
+    <div class="show-completed-course-btn">
+      {{gru-toggle-button
+      isChecked=showAllRescopedContent
+      onToggleButton="onToggleRescope" }}
+    </div>
+  </div>
+  <div class="milestone-course-map-view">
+    {{#if (and route0Applicable (or showRoute0SuggestionPreview showRoute0Suggestion))}}
+      {{#if showRoute0Suggestion}}
+        {{student.class.milestone-course-map-route0
+        class=class
+      }}
+      {{else}}
+        {{student.class.milestone-course-map-route0-preview
+          class=class
+          route0=route0
+          course=course
+        }}
+      {{/if}}
+    {{/if}}
+
+    {{student.class.milestone-course-map
+   class=class
+   rescopedContents=rescopedContents
+   showAllRescopedContent=showAllRescopedContent
+   gradeSubject=gradeSubject
+   location=location
+   milestones=milestones
+ }}
+  </div>
+{{else}}
+  <div class="student-milestone-not-ready">{{t 'student-milestone-not-ready'}}</div>
+{{/if}}

@@ -171,3 +171,38 @@ export function createDataMatrix(headers, classPerformanceData, level = false) {
   dataMatrix.insertAt(0, itemPerformanceAverageData);
   return dataMatrix;
 }
+
+/**
+ * @function aggregateMilestonePerformanceScore
+ * Method to aggregate given list of performance objects
+ */
+export function aggregateMilestonePerformanceScore(items) {
+  let aggregatedScoreValue = null;
+  if (items && items.length) {
+    aggregatedScoreValue = 0;
+    items.map(item => {
+      let itemPerformanceScore = item.get('performance.scoreInPercentage');
+      aggregatedScoreValue += itemPerformanceScore ? itemPerformanceScore : 0;
+    });
+    aggregatedScoreValue = aggregatedScoreValue / items.length;
+  }
+  return roundFloat(aggregatedScoreValue);
+}
+
+/**
+ * @function aggregateMilestonePerformanceTimeSpent
+ * Method to aggregate given list of performance objects
+ */
+export function aggregateMilestonePerformanceTimeSpent(items) {
+  let aggregatedTimeSpentValue = null;
+  if (items && items.length) {
+    aggregatedTimeSpentValue = 0;
+    items.map(item => {
+      let itemPerformanceTimeSpent = item.get('performance.timeSpent');
+      aggregatedTimeSpentValue += itemPerformanceTimeSpent
+        ? itemPerformanceTimeSpent
+        : 0;
+    });
+  }
+  return roundFloat(aggregatedTimeSpentValue);
+}

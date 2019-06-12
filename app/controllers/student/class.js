@@ -27,7 +27,15 @@ export default Ember.Controller.extend(ConfigurationMixin, {
      * Trigger the event to open student course report
      */
     openCourseReport: function() {
-      this.openStudentCourseReport();
+      const controller = this;
+      if (
+        controller.get('class.milestoneViewApplicable') &&
+        controller.get('class.milestoneViewApplicable') === true
+      ) {
+        controller.populateMilestoneReport();
+      } else {
+        controller.openStudentCourseReport();
+      }
     },
 
     //Action triggered when click on CA score
@@ -91,7 +99,7 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   barChartData: Ember.computed(function() {
     const completed = this.get('class.performanceSummary.totalCompleted');
     const total = this.get('class.performanceSummary.total');
-    const percentage = completed ? completed / total * 100 : 0;
+    const percentage = completed ? (completed / total) * 100 : 0;
     return [
       {
         color: ANONYMOUS_COLOR,
@@ -133,6 +141,11 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    */
   isShowClassActivityReport: false,
 
+  /**
+   * @property {Boolean} isShowMilestoneReport
+   */
+  isShowMilestoneReport: false,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -172,5 +185,14 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   populateClassActivityReport() {
     const controller = this;
     controller.set('isShowClassActivityReport', true);
+  },
+
+  /**
+   * @function populateMilestoneReport
+   * Method to populate milestone report
+   */
+  populateMilestoneReport() {
+    const controller = this;
+    controller.set('isShowMilestoneReport', true);
   }
 });

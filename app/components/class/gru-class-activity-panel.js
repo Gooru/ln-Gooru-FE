@@ -2,6 +2,7 @@ import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
@@ -29,12 +30,36 @@ export default Ember.Component.extend(ConfigurationMixin, {
   // Actions
 
   actions: {
+    onComplete() {
+      let component = this;
+      component.sendAction('completeActivity', component.get('classActivity'));
+    },
+
+    expandMore() {
+      let component = this;
+      let panelContainerEle = component.$('.ca-panel-container-2');
+      if (!panelContainerEle.hasClass('active')) {
+        component.$('.ca-panel-container-2').slideDown({
+          start: function() {
+            component.$(this).addClass('active');
+            component.$(this).css('display', 'grid');
+          }
+        });
+      } else {
+        component.$('.ca-panel-container-2').slideUp({
+          start: function() {
+            component.$(this).removeClass('active');
+          }
+        });
+      }
+    },
     /**
      * Action triggered when the user play collection
      */
     onPlayContent(content) {
       const component = this;
-      component.sendAction('onPreviewContent', content);
+      const classActivity = this.get('classActivity');
+      component.sendAction('onPreviewContent', content, classActivity);
     },
 
     /**
@@ -43,10 +68,15 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     openDcaContentReport(selectedClassActivity) {
       let component = this;
-      component.set('selectedActivity', selectedClassActivity);
-      component.set('isShowStudentsSummaryReport', true);
-      // old style reporting at CA now replaced with above...
-      // this.sendAction('openDcaContentReport', selectedClassActivity);
+      let format =
+        selectedClassActivity.get('collection.format') ||
+        selectedClassActivity.get('collection.collectionType');
+      if (format === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        this.sendAction('openDcaContentReport', selectedClassActivity);
+      } else {
+        component.set('selectedActivity', selectedClassActivity);
+        component.set('isShowStudentsSummaryReport', true);
+      }
     },
 
     /**
@@ -80,7 +110,12 @@ export default Ember.Component.extend(ConfigurationMixin, {
      * Action get triggered when schedule content to CA got clicked
      */
     onScheduleContentToDCA(classActivity, event) {
-      this.sendAction('onScheduleContentToDCA', classActivity, event);
+      this.sendAction(
+        'onScheduleContentToDCA',
+        classActivity,
+        event,
+        this.get('isUnScheduled')
+      );
     },
 
     showStudentList() {
@@ -166,6 +201,21 @@ export default Ember.Component.extend(ConfigurationMixin, {
     }),
     Ember.Object.create({
       label: 'Off',
+      value: false
+    })
+  ]),
+
+  /**
+   * Toggle Options
+   * @property {Ember.Array}
+   */
+  switchOptionsForOffline: Ember.A([
+    Ember.Object.create({
+      label: 'Yes',
+      value: true
+    }),
+    Ember.Object.create({
+      label: 'No',
       value: false
     })
   ]),

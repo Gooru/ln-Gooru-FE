@@ -1,0 +1,26 @@
+<div class="offline-activity-player-container">
+  <div class="header-container">
+    <div class="action" {{action 'onClosePlayer'}} data-toggle="tooltip" data-placement="bottom" title="{{t 'common.close'}}">
+      <div class="close-icon">
+        {{gru-icon name='close'}}
+      </div>
+    </div>
+    <div class="content-title">
+      <i class="icon"></i>
+      <span class="title ellipsis">{{offlineActivity.title}}</span>
+    </div>
+  </div>
+  <div class="body-container">
+    {{#if isShowStartPlayer}}
+      {{player.offline-activity.gru-offline-activity-start-page
+        offlineActivity = offlineActivity
+        onStartPlayer = "onStartPlayer"
+        onClosePlayer = "onClosePlayer"}}
+    {{else}}
+      {{player.offline-activity.gru-offline-activity-submission
+        offlineActivity = offlineActivity
+        classId = classId
+        caContentId = caContentId}}
+    {{/if}}
+  </div>
+</div>

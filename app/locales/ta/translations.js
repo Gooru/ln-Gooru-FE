@@ -62,6 +62,7 @@ export default Object.assign(quizzesTranslations, {
   'common.efficacy': 'பலாபலன்',
   'common.grid': 'கட்டம்',
   'common.list': 'பட்டியலில்',
+  'common.for': 'for',
   'common.first': 'முதல்',
   'common.last': 'கடந்த',
   'common.name': 'பெயர்',
@@ -74,9 +75,12 @@ export default Object.assign(quizzesTranslations, {
   'common.apply-filter': 'apply filter',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'சராசரி ஸ்கோர்',
+  'common.tasks': 'tasks',
   'common.frq': 'frq',
   'common.schedule': 'அட்டவணை',
   'common.responses': 'பதில்களை',
+  'common.offline-activites': 'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.no-lesson-info-message': 'இந்த அலகு எந்த பாடங்கள் உள்ளன.',
   'common.no-collection-info-message':
     'இந்த பாடம் எந்த வசூலையும் கொண்டிருக்கவில்லை.',
@@ -94,14 +98,28 @@ export default Object.assign(quizzesTranslations, {
   'common.a-question': 'ஒரு கேள்வி',
   'common.a-resource': 'ஒரு வள',
   'common.a-rubric': 'ஒரு ரூபிக்',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.all-completed': 'எல்லாம் முடிந்தது',
   'common.a-assessment': 'மதிப்பீடு',
   'common.about': 'பற்றி',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.about-you': 'உன்னை பற்றி',
   'common.about-me': 'என்னை பற்றி',
   'common.accept': 'ஏற்க',
   'common.ignore': 'புறக்கணிக்க',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.add': 'கூட்டு',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
@@ -164,6 +182,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'மதிப்பீடு',
   'common.assessment-pl.other': 'மதிப்பீடுகளை',
   'common.assessment-title': 'மதிப்பீடு தலைப்பு',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'ஒரு',
   'common.assessments': 'மதிப்பீடுகளை',
   'common.assign': 'ஒதுக்க',
@@ -525,6 +544,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-questions-to-display': 'காண்பிக்க [1] கேள்விகள் [2] இல்லை.',
   'common.no-resources-to-display': 'இல்லை [1] வளங்களை காட்ட [2].',
   'common.no-rubrics-to-display': 'எந்த [1] ரப்பர் [2] காட்ட.',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'நீங்கள் இன்னும் பின்பற்றுபவர்கள் இல்லை.',
   'common.no-independent-results':
     'நீங்கள் உங்கள் புக்மார்க்குடனான {{contenttype}} ஐத் தொடங்கும் போது, அவை இங்கே தோன்றும்.',
@@ -845,6 +866,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'முழுமையான போக்கைக் காட்டுங்கள்',
   'class.overview.course-map.rescope-info':
     'இந்த வழிகாட்டி பயிற்சியானது பல தரங்களுக்கிடையில் தரநிலைகளை உள்ளடக்கிய தனிப்பயனாக்கப்பட்ட பாடமாகும். ஒவ்வொரு மாணவருக்கும் தனித்துவமான படிப்பு வழங்கப்படும், இடைவெளிகளை நிரப்பவும், கருத்துக்களை மற்றும் நடைமுறைகளை வலுப்படுத்தவும், அவர்களின் கற்றல் முடுக்கி விடவும். தனிப்பயனாக்கப்பட்ட வழிகள் வடிவமைக்கப்பட்டுள்ளன மற்றும் ஒவ்வொரு மாணவரின் கற்றல் திறனை அதிகரிக்கவும் மற்றும் அவர்களது செட் இலக்குக்கு செல்லவும், நிகழ்நேரத்தில் மாணவர்கள் மீண்டும் வருகிறார்கள்.',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'உங்கள் தகுதி அடிப்படையில் நாங்கள் குறிப்பாக இந்த பாடத்தை தனிப்பயனாக்குகிறோம். தனிப்பயனாக்கப்பட்ட பாடத்திட்ட வரைபடத்தை காண சிறிது நேரத்தில் மீண்டும் பார்க்கவும்.',
   'class.overview.course-map.route0-bannerdesc':
@@ -2614,5 +2637,78 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material',
+  milestones: 'Milestones',
+  'show-course-map': 'Show course Map',
+  'show-milestones': 'Show Milestones',
+  'warn.class-destination-not-setup':
+    'Class setup is not complete unless the class destination is set. Go to Class Settings and complete setup. Otherwise, students will not be able to access content for this class.',
+  'milestone-rescoped':
+    'This milestone is available due to your {{subject}} level setup by teacher, but you seem to have caught up on all relevant competencies.',
+  'student-milestone-not-ready':
+    'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
+  'warn.teacher-milestone-not-ready':
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path',
+  'mastery-greeting-msg':
+    'You’ve earned a Mastery Badge! Would you like to see the improvement in your competency skyline?',
+  'show-me': 'Show Me',
+  'common.subtask.oa.project.poster': 'Project Poster',
+  'common.subtask.oa.project.presentation': 'Project Presentation',
+  'common.subtask.oa.project.video': ' Project Video',
+  'common.subtask.oa.project.diorama': 'Project Diorama',
+  'common.subtask.oa.project.brochure': 'Project Brochure',
+  'common.subtask.oa.project.model': 'Project Model',
+  'common.subtask.oa.seminar': 'Seminar',
+  'common.subtask.oa.short_answer': 'Short Answer',
+  'common.subtask.oa.extended_response': 'Extended Response',
+  'common.subtask.oa.research_paper': 'Research Paper',
+  'common.subtask.oa.position_paper': 'Position Paper',
+  'common.subtask.oa.lab_report': 'Lab Report',
+  'common.subtask.oa.explanation_argument': 'Explanation Argument',
+  'common.subtask.oa.debate': 'Debate',
+  project: 'Project',
+  'oa.project.poster': 'Poster',
+  'oa.project.presentation': 'Presentation',
+  'oa.project.video': 'Video',
+  'oa.project.diorama': 'Diorama',
+  'oa.project.brochure': 'Brochure',
+  'oa.project.model': 'Model',
+  'oa.seminar': 'seminar',
+  'oa.short_answer': 'Short Answer',
+  'oa.extended_response': 'Extended Response',
+  'oa.research_paper': 'Research Paper',
+  'oa.position_paper': 'Position Paper',
+  'oa.lab_report': 'Report',
+  'oa.explanation_argument': 'Explanation Argument',
+  'oa.debate': 'Debate',
+  'oa.format': 'Activity Type',
+  'oa.tasks.label': 'Tasks',
+  'oa.references.label': 'References',
+  'oa.references.artifacts': 'Reference Artifacts',
+  'oa.references.urls': 'Reference URLs',
+  'oa.references.exemplar': 'Exemplar Answer',
+  'oa.references.uploads': 'Uploads',
+  'oa.submissions.type': 'Type of Submission',
+  'oa.edit_activity': 'Edit Activity',
+  'oa.add_activity': 'Add Activity',
+  'oa.remix': 'Remix Offline Activity',
+  'oa.remix.lead': 'You are about to remix an offline activity.',
+  'oa.remix.success':
+    'You\'ve remixed an offline activity {{title}}. Do you want to edit that offline activity?',
+  'oa.title': 'Offline Activity Title',
+  'errors.oa-not-copied':
+    'Oops! Unable to copy offline activity right now. Please try again shortly.',
+  'common.self': 'Self',
+  'oa.enter-timespent-label':
+    'Please enter the total time spent on the activity',
+  'no-task-available': 'No Task Available',
+  'your-answer': 'Your Answer',
+  'common.saving': 'Saving',
+  'oa.offline_activity.label': 'Offline Activity',
+  'common.oa.offline_activity.label': 'Offline Activity'
 });

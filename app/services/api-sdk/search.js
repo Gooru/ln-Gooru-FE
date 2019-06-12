@@ -53,6 +53,30 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Search for Offline Activity
+   *
+   * @param term the term to search
+   * @param params
+   * @param resetPagination indicates if the pagination needs a reset
+   * @returns {Promise}
+   */
+  searchOfflineActivity: function(term, params, resetPagination = false) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('searchAdapter')
+        .searchOfflineActivity(term, params, resetPagination)
+        .then(function(response) {
+          resolve(
+            service
+              .get('searchSerializer')
+              .normalizeSearchOfflineActivities(response)
+          );
+        }, reject);
+    });
+  },
+
+  /**
    * Search for assessments
    *
    * @param term the term to search
@@ -217,9 +241,7 @@ export default Ember.Service.extend({
         .autoCompleteSearch(type, term)
         .then(
           function(response) {
-            resolve(
-              response
-            );
+            resolve(response);
           },
           function(error) {
             reject(error);
@@ -235,9 +257,9 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       let isCompetencyContentAvailable = competencyContentContainer[
         `${gutCode}`
-      ] ?
-        competencyContentContainer[`${gutCode}`][start] || null :
-        null;
+      ]
+        ? competencyContentContainer[`${gutCode}`][start] || null
+        : null;
       if (isCompetencyContentAvailable) {
         resolve(competencyContentContainer[`${gutCode}`][start]);
       } else {
@@ -276,9 +298,9 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       let isCompetencyContentAvailable = competencyContentContainer[
         `${gutCode}`
-      ] ?
-        competencyContentContainer[`${gutCode}`][start] || null :
-        null;
+      ]
+        ? competencyContentContainer[`${gutCode}`][start] || null
+        : null;
       if (isCompetencyContentAvailable) {
         resolve(competencyContentContainer[`${gutCode}`][start]);
       } else {

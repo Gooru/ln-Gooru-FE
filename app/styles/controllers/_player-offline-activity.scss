@@ -1,0 +1,78 @@
+.player-offline-activity {
+  .app-container {
+    padding: 0;
+    overflow-y: none;
+  }
+
+  .gru-header {
+    display: none;
+  }
+
+  .offline-activity-player-container {
+    height: 100vh;
+
+    .header-container {
+      width: 100%;
+      color: $white;
+      height: 64px;
+      background-color: $blue-400;
+      display: grid;
+      grid-template-columns: 64px 1fr;
+
+      .action {
+        width: 68px;
+        height: 64px;
+        border-right: 2px solid #e3e5ea;
+        cursor: pointer;
+
+        .close-icon {
+          padding: 21px;
+
+          i {
+            font-size: 25px;
+            color: $white;
+          }
+        }
+      }
+
+      .content-title {
+        height: 64px;
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        align-items: center;
+
+        i.icon {
+          justify-self: center;
+          width: 20px;
+          height: 20px;
+          background-size: 20px;
+          display: block;
+          background-image: url("gooru/images/offline-activity-white.svg");
+          background-repeat: no-repeat;
+          background-color: transparent;
+        }
+
+        .title {
+          position: relative;
+        }
+      }
+    }
+
+    .body-container {
+      height: calc(100% - 64px);
+      overflow-y: auto;
+      background-color: #e3e5ea;
+
+      &::-webkit-scrollbar {
+        height: 6px;
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $gray;
+        border: 1px solid $gray;
+        border-radius: 5px;
+      }
+    }
+  }
+}

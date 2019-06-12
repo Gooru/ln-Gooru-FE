@@ -17,15 +17,33 @@ export default Ember.Object.extend({
    */
   thumbnailUrl: null,
 
+  /**
+   * @property {Boolean} isCollection
+   */
   isCollection: Ember.computed('format', function() {
     return this.get('format') === CONTENT_TYPES.COLLECTION;
   }),
 
+  /**
+   * @property {Boolean} isExternalAssessment
+   */
   isExternalAssessment: Ember.computed('format', function() {
     return this.get('format') === CONTENT_TYPES.EXTERNAL_ASSESSMENT;
   }),
 
-  isAssessment: Ember.computed.not('isCollection'),
+  /**
+   * @property {Boolean} isOfflineActivity
+   */
+  isOfflineActivity: Ember.computed('format', function() {
+    return this.get('format') === CONTENT_TYPES.OFFLINE_ACTIVITY;
+  }),
+
+  /**
+   * @property {Boolean} isAssessment
+   */
+  isAssessment: Ember.computed('format', function() {
+    return this.get('format') === CONTENT_TYPES.ASSESSMENT;
+  }),
 
   /**
    * @property {String} format - Type of lesson item

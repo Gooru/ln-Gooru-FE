@@ -211,6 +211,26 @@
           }}
         {{/if}}
       {{/if}}
+      {{#if (eq activeContentType 'offline-activity')}}
+
+        {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
+          {{new-cards.gru-offline-activity-card
+          offlineActivity=content
+          profile=profile
+          isPreviewEnabled=true
+          onShowOfflineActivityPreview="onShowOfflineActivityPreview"
+        }}
+        {{else}}
+          {{new-cards.gru-offline-activity-card
+            offlineActivity=content
+            isEditEnabled=isMyProfile
+            isAddEnabled=true
+            profile=profile
+            classroomList=activeClasses
+            classStudentCount=myClasses
+            onShowOfflineActivityPreview="onShowOfflineActivityPreview"}}
+        {{/if}}
+      {{/if}}
     </div>
   {{else}}
     <div class="panel add-content panel-default {{if isSearch 'search'}}">
@@ -243,5 +263,13 @@
     showPrintPreview=false
     previewContentType=previewContentType
     isRemixableContent=isRemixableContent
+  }}
+{{/if}}
+
+{{#if isShowOfflineActivityPreview}}
+  {{reports.pull-up.oa-preview
+    showPullUp=isShowOfflineActivityPreview
+    oaId=previewContent.id
+    isReportView=false
   }}
 {{/if}}

@@ -1,0 +1,194 @@
+<div class="backdrop" {{action 'onPullUpClose'}}></div>
+<div class="oa-grade-container">
+  <div class="oa-grade-header">
+    <div class="icon">
+      <i class="offline-activity"></i>
+    </div>
+    <div class="title ellipsis">{{content.title}}</div>
+    <div class="close-icon" {{action 'onPullUpClose'}}>
+      {{gru-icon name="close"}}
+    </div>
+  </div>
+  <div class="oa-grading-section">
+    <div class="left-panel">
+      <div class="student-info">
+        <div class="student-count">
+          <sup>{{currentStudentIndex}}</sup>&frasl;<sub>{{users.length}}</sub>
+        </div>
+        <div class="oa-grade-students">
+          <div class="oa-grade-students-carousel">
+            <div id="oa-grade-students-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
+              <div class="carousel-inner">
+                {{#each users as |user index|}}
+                  <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
+                    <div class="user-profile-img">
+                      <img src="{{user.avatarUrl}}" />
+                      <span>{{user.lastName}} {{user.firstName}}</span>
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+              <!-- Left and right controls -->
+              <a class="left carousel-control" data-slide="prev" {{action 'onClickPrev'}}>
+                {{gru-icon name="keyboard_arrow_left"}}
+              </a>
+              <a class="right carousel-control" data-slide="next" {{action 'onClickNext'}}>
+                {{gru-icon name="keyboard_arrow_right"}}
+              </a>
+            </div>
+          </div>
+        </div>
+        {{#if student.selfGrade.maxScore}}
+          <div class="self-grade-section" style={{safe-html (concat "background-color:" (grade-color studentSelfGrade))}}>
+            <div class="label">{{t 'common.self-graded'}}</div>
+            <div class="score">
+              <sup>{{student.selfGrade.score}}</sup>&frasl;<sub>{{student.selfGrade.maxScore}}</sub>
+            </div>
+            <div class="label">{{t 'common.rubric-grade'}}</div>
+          </div>
+        {{/if}}
+      </div>
+      <div class="tasks-section">
+        {{#each activityTasks as |task index|}}
+          {{player.offline-activity.gru-offline-activity-task-submission
+            task=task
+            showSubmissions=true
+            isReadOnly=true
+            caContentId=context.dcaContentId
+            classId=context.classId
+          }}
+        {{/each}}
+      </div>
+    </div>
+    <div class="right-panel">
+      <div class="oa-grade-right-panel-header">
+        <div class="oa-grade-info">
+          {{#if teacherRubric.scoring}}
+            <span class="oa-grade-info-title">{{t 'grading-player.grading'}}</span>
+          {{else}}
+            <span class="oa-grade-info-title">
+              Rubric
+              {{#if (and rubric.uploaded rubric.url)}}
+                <span class="rubric-attachment" {{action 'filePreviewOpen'}}>{{gru-icon name="attachment"}}</span>
+              {{/if}}
+            </span>
+            <span class="oa-grade-info-desc">{{t 'common.answer-this-activity'}}</span>
+          {{/if}}
+        </div>
+        {{#if teacherRubric.scoring}}
+          <div class="oa-grade-score" style={{safe-html (concat "background-color:" (grade-color userGradeScore))}}>
+            <span>{{studentGradeScore}}</span>
+            <hr />
+            <span>{{teacherRubric.maxScore}}</span>
+          </div>
+        {{else if (gt totalRubricPoints 0)}}
+          <div class="oa-grade-score" style={{safe-html (concat "background-color:" (grade-color userRubricScore))}}>
+            <span>{{totalUserRubricPoints}}</span>
+            <hr />
+            <span>{{totalRubricPoints}}</span>
+          </div>
+        {{/if}}
+      </div>
+      <div class="oa-grade-right-panel-body">
+        <div class="panel-group" id="rubric-panel">
+          <div class="panel panel-default student-rubric-section">
+            <div class="student-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#student">
+              <span>{{t 'common.student'}}</span>
+              <div class="icons">
+                {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+              </div>
+            </div>
+            <div class="student-grading-panel panel-collapse collapse" id="student">
+              {{#if student.rubric.scoring}}
+                <div class="oa-grade-rubric-grading disable-event">
+                  {{validation.gru-input-number model=studentSelfGradeScore  valuePath='studentScore' min=0 max=student.rubric.maxScore step=student.rubric.increment }}
+                  <span class="score">{{student.rubric.maxScore}}</span>
+                </div>
+              {{else}}
+                {{rubric.rubric-category-grades
+                  isReadOnly=true
+                  categories=studentSelfGradedCategories}}
+              {{/if}}
+              <div class="oa-grade-general-comment-container disable-event">
+                {{validation.gru-textarea
+                  model=student.selfGrade
+                  valuePath='overallComment'
+                  maxLength=500
+                  rows=1
+                  placeholder='General Comments Only'
+                }}
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default teacher-rubric-section">
+            <div class="teacher-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#teacher">
+              <span>{{t 'common.teacher'}}</span>
+              <div class="icons">
+                {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+              </div>
+            </div>
+            <div class="teacher-grading-panel panel-collapse collapse in" id="teacher">
+              {{#if teacherRubric.scoring}}
+                <div class="oa-grade-rubric-grading">
+                  {{validation.gru-input-number model=teacherRubric  valuePath='studentScore' min=0 max=teacherRubric.maxScore step=teacherRubric.increment }}
+                  <span class="score">{{teacherRubric.maxScore}}</span>
+                </div>
+              {{else}}
+                {{rubric.rubric-category-grades categories=categories}}
+              {{/if}}
+              <div class="oa-grade-general-comment-container">
+                {{validation.gru-textarea
+                  model=teacherRubric
+                  valuePath='comment'
+                  maxLength=500
+                  rows=1
+                  placeholder='General Comments Only'
+                }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="oa-grade-action-btns">
+          <button type="button" class="btn confirm btn-primary btn-lg" {{action 'saveGrade'}}>{{t 'common.submit'}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#if isLoading}}
+  <div class="loading-spinner">
+    {{three-bounce-spinner}}
+  </div>
+{{/if}}
+
+
+
+<div class="caught-up-container">
+  <div class="backdrop" {{action 'onPullUpClose' true}}></div>
+  <div class="caught-up">
+    <div class="caught-up-tick-container">
+      <hr />
+      <div class="caught-up-tick">
+        <span>{{gru-icon name="done"}}</span>
+      </div>
+    </div>
+    <h3>{{t 'common.all-caught-up'}}</h3>
+    <p>{{t 'common.no-users-to-grade'}}</p>
+  </div>
+</div>
+
+
+{{#if (and rubric.uploaded rubric.url)}}
+  <div class="rubric-file-preview-container">
+    <div class="backdrop"></div>
+    <div class="rubric-file-preview">
+      <div class="rubric-file-preview-close" {{action 'filePreviewClose'}}>
+        {{gru-icon name="close"}}
+      </div>
+      <iframe src="{{rubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+{{/if}}

@@ -1,14 +1,8 @@
 import Ember from 'ember';
-import {
-  SCREEN_SIZES
-} from 'gooru-web/config/config';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
-
-
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -196,31 +190,35 @@ export default Ember.Component.extend({
    */
   getFilters() {
     const component = this;
-    return Ember.A([Ember.Object.create({
-      label: component.get('i18n').t('search-filter.courses').string,
-      type: 'course'
-    }),
-    Ember.Object.create({
-      label: component.get('i18n').t('search-filter.collections').string,
-      type: 'collection'
-    }),
-    Ember.Object.create({
-      label: component.get('i18n').t('search-filter.assessments').string,
-      type: 'assessment'
-    }),
-    Ember.Object.create({
-      label: component.get('i18n').t('search-filter.resources').string,
-      type: 'resource'
-    }),
-    Ember.Object.create({
-      label: component.get('i18n').t('search-filter.questions').string,
-      type: 'question'
-    }),
-    Ember.Object.create({
-      label: component.get('i18n').t('search-filter.rubrics').string,
-      type: 'rubric'
-    })
+    return Ember.A([
+      Ember.Object.create({
+        label: component.get('i18n').t('search-filter.courses').string,
+        type: 'course'
+      }),
+      Ember.Object.create({
+        label: component.get('i18n').t('search-filter.collections').string,
+        type: 'collection'
+      }),
+      Ember.Object.create({
+        label: component.get('i18n').t('search-filter.assessments').string,
+        type: 'assessment'
+      }),
+      Ember.Object.create({
+        label: component.get('i18n').t('search-filter.resources').string,
+        type: 'resource'
+      }),
+      Ember.Object.create({
+        label: component.get('i18n').t('search-filter.questions').string,
+        type: 'question'
+      }),
+      Ember.Object.create({
+        label: component.get('i18n').t('search-filter.rubrics').string,
+        type: 'rubric'
+      }),
+      Ember.Object.create({
+        label: component.get('i18n').t('common.offline-activity').string,
+        type: 'offline-activity'
+      })
     ]);
   }
-
 });

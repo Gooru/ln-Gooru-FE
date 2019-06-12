@@ -1,0 +1,67 @@
+<div class="panel-default">
+    <div class="panel-heading">
+        <h3>{{t "common.description"}}</h3>
+        <div class="detail">
+            <div class="actions">
+                {{partial 'content/partials/information-actions'}}
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-body">
+        <div class="panelBodyContainer">
+            <div class="textContainer">
+                <div class='referenceText'>
+                    {{gru-rich-text-editor content=model.reference model=model valuePath='reference'}}
+                    {{!-- {{validation.gru-input model=model valuePath='reference' maxLength=50 didValidate=didValidate}} --}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" panel-default">
+    <div class="panel-heading">
+        <h3>{{t "oa.references.artifacts"}}</h3>
+    </div>
+    <div class="panel panel-body">
+        <div class="panelBodyContainer">
+            <section class="upload-section">
+                {{content.activity.reference.gru-reference-line-item parsedReference=parsedReference editType='upload' oaId=activityModel.id  updateParent=(action 'updateReferenceCollection') deleteReference=(action 'deleteReference') isEditing=isEditing}}
+            </section>
+            <section class='url-section'>
+                <div class="border-bottom">
+                    <h3>{{t "oa.references.urls"}}</h3>
+                </div>
+                {{#each references as | refItem|}}
+                    {{#if (eq refItem.type 'remote')}}
+                        <div class='add-url-line'>
+                            {{input type=input value=refItem.location disabled=true class=" listItem form-control" name='location' maxlength=500 }}
+                            <span class='ellipsis listItem hidden'>{{refItem.location}}</span>
+                            <button placeholder='https://gooru.org' class="remove-uploaded btn no-bgd remove-item" {{action 'deleteUrlReference' refItem}}>{{gru-icon name="remove_circle"}}</button>
+                        </div>
+                    {{/if}}
+                {{/each}}
+                {{content.activity.reference.gru-reference-line-item editType='url' oaId=activityModel.id  updateParent=(action 'updateReferenceCollection')  isEditing=isEditing}}
+            </section>
+        </div>
+    </div>
+</div>
+<div class="panel-default">
+    <div class="panel-heading">
+        <h3>{{t "oa.references.exemplar"}}</h3>
+        <div class="detail">
+            <div class="actions">
+                {{partial 'content/partials/information-actions'}}
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-body">
+        <div class="panelBodyContainer">
+            <div class="textContainer">
+                <div class='referenceText exemplarText'>
+                    {{gru-rich-text-editor content=model.exemplar model=model valuePath='exemplar'}}
+                    {{!-- {{validation.gru-input model=model valuePath='exemplar' maxLength=50 didValidate=didValidate}} --}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

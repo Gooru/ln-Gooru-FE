@@ -56,12 +56,14 @@ export default Object.assign(quizzesTranslations, {
   'errors.url': '{{description}} ಒಂದು ಮಾನ್ಯವಾದ url ಆಗಿರಬೇಕು',
   'common.relevance': 'ಪ್ರಸ್ತುತತೆ',
   'common.engagement': 'ನಿಶ್ಚಿತಾರ್ಥ',
+  'common.for': 'for',
   'common.efficacy': 'ಪರಿಣಾಮಕಾರಿತ್ವ',
   'common.grid': 'Grid',
   'common.list': 'List',
   'common.first': 'First',
   'common.last': 'Last',
   'common.name': 'Name',
+  'common.tasks': 'tasks',
   'common.user': 'user',
   'common.content-name': 'Content Name',
   'common.lastName': 'Lastname',
@@ -72,9 +74,22 @@ export default Object.assign(quizzesTranslations, {
   'search-help-message': 'Choose filters to apply',
   'library-search-placeholder': 'Search for anything within the library…',
   'common.avg-score': 'Avg Score',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.frq': 'FRQ',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.schedule': 'Schedule',
   'common.responses': 'Responses',
+  'common.offline-activites': 'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.no-lesson-info-message': 'This unit does have any lessons.',
   'common.no-collection-info-message': 'This lesson does have any collections.',
   'common.gooru-suggestions': 'Gooru Suggestions',
@@ -125,7 +140,8 @@ export default Object.assign(quizzesTranslations, {
   'common.add-new-unit': 'ಹೊಸ ಘಟಕವನ್ನು ರಚಿಸಿ',
   'common.add-new-resource': 'ಹೊಸ ಸಂಪನ್ಮೂಲವನ್ನು ರಚಿಸಿ',
   'common.add-new-question': 'ಹೊಸ ಪ್ರಶ್ನೆಯನ್ನು ರಚಿಸಿ',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.add-question': 'ಪ್ರಶ್ನೆ ರಚಿಸಿ',
   'common.add-question-image': 'ಪ್ರಶ್ನೆ ಚಿತ್ರ ಸೇರಿಸಿ',
   'common.add-rubric': 'ಹೊಸ ರಬ್ರಿಕ್ ಸೇರಿಸಿ',
@@ -160,6 +176,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'ಮೌಲ್ಯಮಾಪನ',
   'common.assessment-pl.other': 'ಮೌಲ್ಯಮಾಪನಗಳು',
   'common.assessment-title': 'ಮೌಲ್ಯಮಾಪನ ಶೀರ್ಷಿಕೆ',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'a',
   'common.assessments': 'ಮೌಲ್ಯಮಾಪನಗಳು',
   'common.assign': 'ನಿಯೋಜಿಸಿ',
@@ -204,6 +221,8 @@ export default Object.assign(quizzesTranslations, {
   'common.collection-external': 'External Collection',
   'common.collection-pl.zero': 'ಸಂಗ್ರಹಣೆಗಳು',
   'common.collection-pl.one': 'ಸಂಗ್ರಹ',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
   'common.collection-pl.other': 'ಸಂಗ್ರಹಣೆಗಳು',
   'common.collection-title': 'ಸಂಗ್ರಹ ಶೀರ್ಷಿಕೆ',
   'common.collections': 'ಸಂಗ್ರಹಣೆಗಳು',
@@ -529,6 +548,8 @@ export default Object.assign(quizzesTranslations, {
     'ಯಾವುದೇ <span> ಸಂಪನ್ಮೂಲಗಳನ್ನು </span> ಪ್ರದರ್ಶಿಸಲು.',
   'common.no-rubrics-to-display':
     'ಪ್ರದರ್ಶಿಸಲು ಯಾವುದೇ <span> ರಬ್ರಿಕ್ಸ್ </span> ಇಲ್ಲ.',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'ನಿಮಗೆ ಇನ್ನೂ ಅನುಯಾಯಿಗಳು ಇಲ್ಲ.',
   'common.no-independent-results':
     'ನಿಮ್ಮ ಬುಕ್ಮಾರ್ಕ್ ಮಾಡಲಾದ {{ವಿಷಯ}} ಶೋಧವನ್ನು ನೀವು ಪ್ರಾರಂಭಿಸಿದಾಗ, ಅವರು ಇಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತಾರೆ.',
@@ -844,6 +865,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'ಸಂಪೂರ್ಣ ಪಠ್ಯ ನಕ್ಷೆ ತೋರಿಸಿ',
   'class.overview.course-map.rescope-info':
     'ಈ ಕೋರ್ಸ್ ಗಣಿತ ಅಡಿಪಾಯ ಕೋರ್ಸ್ನಿಂದ ನಿಮಗಾಗಿ ವೈಯಕ್ತಿಕವಾಗಿ ಪ್ರತ್ಯೇಕಿಸಲ್ಪಟ್ಟಿದೆ. ಮೂಲ ಕೋರ್ಸ್ ಅನ್ನು ನೋಡಲು, ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ.',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'ನಿಮ್ಮ ಕೌಶಲ್ಯದ ಆಧಾರದ ಮೇಲೆ ನಾವು ವಿಶೇಷವಾಗಿ ಈ ಕೋರ್ಸ್ ಅನ್ನು ವೈಯಕ್ತೀಕರಿಸುತ್ತೇವೆ. ದಯವಿಟ್ಟು ವೈಯಕ್ತೀಕರಿಸಿದ ಕೋರ್ಸ್ ನಕ್ಷೆಯನ್ನು ನೋಡಲು ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಪರಿಶೀಲಿಸಿ.',
   'class.overview.course-map.route0-bannerdesc':
@@ -2585,5 +2608,64 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material',
+  milestones: 'Milestones',
+  'show-course-map': 'Show course Map',
+  'show-milestones': 'Show Milestones',
+  'warn.class-destination-not-setup':
+    'Class setup is not complete unless the class destination is set. Go to Class Settings and complete setup. Otherwise, students will not be able to access content for this class.',
+  'milestone-rescoped':
+    'This milestone is available due to your {{subject}} level setup by teacher, but you seem to have caught up on all relevant competencies.',
+  'student-milestone-not-ready':
+    'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
+  'warn.teacher-milestone-not-ready':
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path',
+  'mastery-greeting-msg':
+    'You’ve earned a Mastery Badge! Would you like to see the improvement in your competency skyline?',
+  'show-me': 'Show Me',
+  project: 'Project',
+  'oa.project.poster': 'Poster',
+  'oa.project.presentation': 'Presentation',
+  'oa.project.video': 'Video',
+  'oa.project.diorama': 'Diorama',
+  'oa.project.brochure': 'Brochure',
+  'oa.project.model': 'Model',
+  'oa.seminar': 'seminar',
+  'oa.short_answer': 'Short Answer',
+  'oa.extended_response': 'Extended Response',
+  'oa.research_paper': 'Research Paper',
+  'oa.position_paper': 'Position Paper',
+  'oa.lab_report': 'Report',
+  'oa.explanation_argument': 'Explanation Argument',
+  'oa.debate': 'Debate',
+  'oa.format': 'Activity Type',
+  'oa.tasks.label': 'Tasks',
+  'oa.references.label': 'References',
+  'oa.references.artifacts': 'Reference Artifacts',
+  'oa.references.urls': 'Reference URLs',
+  'oa.references.exemplar': 'Exemplar Answer',
+  'oa.references.uploads': 'Uploads',
+  'oa.submissions.type': 'Type of Submission',
+  'oa.edit_activity': 'Edit Activity',
+  'oa.add_activity': 'Add Activity',
+  'oa.remix': 'Remix Offline Activity',
+  'oa.remix.lead': 'You are about to remix an offline activity.',
+  'oa.remix.success':
+    'You\'ve remixed an offline activity {{title}}. Do you want to edit that offline activity?',
+  'oa.title': 'Offline Activity Title',
+  'errors.oa-not-copied':
+    'Oops! Unable to copy offline activity right now. Please try again shortly.',
+  'common.self': 'Self',
+  'oa.enter-timespent-label':
+    'Please enter the total time spent on the activity',
+  'no-task-available': 'No Task Available',
+  'your-answer': 'Your Answer',
+  'common.saving': 'Saving',
+  'oa.offline_activity.label': 'Offline Activity',
+  'common.oa.offline_activity.label': 'Offline Activity'
 });

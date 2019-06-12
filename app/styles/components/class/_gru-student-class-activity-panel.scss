@@ -1,19 +1,22 @@
 .gru-student-class-activity-panel {
   background-color: #fff;
   border-radius: 4px;
-  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
 
   .ca-panel-container {
     display: inline-grid;
     width: 100%;
-    grid-template-columns: 1fr 150px 60px 60px;
+    grid-template-columns: 1fr auto 60px 60px;
     height: 60px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
 
-    &.today {
-      &:hover {
-        position: relative;
+    &.offline {
+      grid-template-columns: 1fr 60px 60px;
+
+      .dca-content-counts {
+        display: none;
       }
+
       .ca-play-container {
         pointer-events: all;
         cursor: pointer;
@@ -24,13 +27,24 @@
           }
         }
       }
-      &.offline-activity {
-        .ca-play-container {
-          pointer-events: none;
-          .ca-play-btn {
-            i {
-              color: #535e67;
-            }
+    }
+
+    &.completed {
+      grid-template-columns: 1fr 60px;
+    }
+
+    &.today {
+      &:hover {
+        position: relative;
+      }
+
+      .ca-play-container {
+        pointer-events: all;
+        cursor: pointer;
+
+        .ca-play-btn {
+          i {
+            color: #4b9741;
           }
         }
       }
@@ -42,13 +56,23 @@
       grid-template-columns: 65px 1fr;
       align-items: center;
 
-      .collection-icon,
-      .collection-external-icon {
+      .collection-external-icon,
+      .collection-icon {
         width: 20px;
         height: 20px;
         background-repeat: no-repeat;
         background-size: 20px 20px;
         background-image: url("../assets/gooru/images/add_collection.svg");
+        opacity: 0.8;
+        justify-self: center;
+      }
+
+      .offline-activity-icon {
+        background-image: url("../assets/gooru/images/offline.svg");
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+        background-size: 20px 20px;
         opacity: 0.8;
         justify-self: center;
       }
@@ -64,16 +88,24 @@
         justify-self: center;
       }
 
-      p {
-        margin: 0;
-        font-family: "Open Sans";
-        color: #4a4a4a;
-        padding: 0 20px 0 0;
-        @include ellipsis(
-          $font-size: 15px,
-          $line-height: 1.5,
-          $lines-to-show: 1
-        );
+      .title-info {
+        p {
+          margin: 0;
+          font-family: "Open Sans";
+          color: #4a4a4a;
+          padding: 0 20px 0 0;
+          @include ellipsis(
+            $font-size: 15px,
+            $line-height: 1.5,
+            $lines-to-show: 1
+          );
+        }
+
+        .offline-activity-info {
+          .task-count {
+            text-transform: capitalize;
+          }
+        }
       }
     }
 
@@ -142,7 +174,18 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
       pointer-events: none;
+
+      &.future-activity {
+        pointer-events: none;
+
+        .ca-play-btn {
+          i {
+            color: #535e67;
+          }
+        }
+      }
 
       .ca-play-btn {
         height: 30px;

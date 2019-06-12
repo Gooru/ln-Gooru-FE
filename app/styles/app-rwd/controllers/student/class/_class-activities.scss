@@ -1,25 +1,50 @@
 .controller.student.class.class-activities {
-  .ca-content-container {
-    .dca-list-container {
-      height: calc(100vh - 100px);
-    }
-  }
-  @media only screen and (max-width: $screen-xs) {
-    .ca-content-container {
-      .ca-date-and-add-content {
-        .ca-date-container {
+  @media only screen and (max-width: $screen-767) {
+    .ca-panel {
+      flex-direction: column;
+
+      .left-panel,
+      .right-panel {
+        width: 100%;
+
+        .offline-container {
+          height: auto;
           width: 100%;
-        }
-      }
+          z-index: 1;
+          background: none;
+          padding: 0;
+          position: absolute;
+          top: calc(100% - 50px);
+          left: 0;
+          right: 0;
 
-      .dca-list-container {
-        padding: 0;
+          &.active {
+            height: 100%;
+            width: 100%;
+            background-color: #fff;
+            z-index: 10;
 
-        .gru-student-class-activity-panel {
-          .ca-panel-container {
-            grid-template-columns: 1fr 60px 60px;
-            .dca-content-counts {
-              display: none;
+            .offline-activity-contents {
+              display: block;
+            }
+          }
+
+          .offline-activity-items-header {
+            pointer-events: all;
+          }
+
+          .offline-activity-contents {
+            display: none;
+
+            .panel-group {
+              padding: 0;
+
+              .oa-active-header,
+              .oa-completed-header {
+                span {
+                  padding: 0 0 0 10px;
+                }
+              }
             }
           }
         }

@@ -130,3 +130,17 @@ export function getDomainId(id) {
   let ids = id.split('-');
   return `${ids[0]}-${ids[1]}-${ids[2]}`;
 }
+
+/**
+ * Parse and extract domain code from given GUT code
+ * @param {String} gutCode
+ * @return {String}
+ */
+export function getDomainCode(gutCode) {
+  let domainCode = null;
+  if (gutCode) {
+    let ids = gutCode.split('-');
+    domainCode = ids.objectAt(2);
+  }
+  return domainCode;
+}

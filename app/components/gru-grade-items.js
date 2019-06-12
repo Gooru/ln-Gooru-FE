@@ -27,9 +27,8 @@ export default Ember.Component.extend({
      * Trigger to open free response question grade pull
      * @param  {Object} itemToGrade
      */
-    openFRQuestionGrade(itemToGrade) {
-      this.set('itemToGradeContextData', itemToGrade);
-      this.set('showFRQuestionGrade', true);
+    openReportGrade(itemToGrade) {
+      this.sendAction('openReportGrade', itemToGrade);
     }
   },
 
@@ -40,10 +39,10 @@ export default Ember.Component.extend({
   // Properties
 
   /**
-   * The Questions needs to grade
-   * @property {GradeQuestionItem[]} items
+   * The Items needs to grade
+   * @property {GradeItem[]} items
    */
-  questionItems: Ember.A(),
+  gradeableItems: Ember.A(),
 
   /**
    * Maintains the state of question items to grade pull up

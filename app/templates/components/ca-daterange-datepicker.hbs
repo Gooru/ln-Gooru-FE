@@ -1,0 +1,53 @@
+<div class="backdrop" {{action 'close'}}></div>
+<div class="header-section">
+  <span class="back" {{action 'close'}}> {{gru-icon name="keyboard_backspace"}}</span>
+  <div class="title">Select Activity Dates</div>
+</div>
+<div class="date-info">
+  <div class="start-date-info {{if (eq selectedTabIndex 0) 'active'}}" {{action 'onSelectTab' 0}}>
+    <span>{{t 'goals.manage.start-date-label'}}</span>
+    <div class="date-container">
+      <span class="date">{{format-date startDate 'DD'}}</span>
+      <span class="month-year">{{format-date startDate 'MMM'}} {{format-date startDate 'YYYY'}}</span>
+      <span class="day">{{format-date startDate 'dddd'}}</span>
+    </div>
+  </div>
+  <div class="end-date-info {{unless allowTwoDateRangePicker 'hidden'}} {{if (eq selectedTabIndex 1) 'active'}}" {{action 'onSelectTab' 1}}>
+    <span>{{t 'goals.manage.end-date-label'}}</span>
+    <div class="date-container">
+      {{#if endDate}}
+        <span class="date">{{format-date endDate 'DD'}}</span>
+        <span class="month-year">{{format-date endDate 'MMM'}} {{format-date endDate 'YYYY'}}</span>
+        <span class="day">{{format-date endDate 'dddd'}}</span>
+      {{else}}
+        <span class="not-selected">--</span>
+      {{/if}}
+    </div>
+  </div>
+</div>
+<div class="calendar">
+  <div class="start-date-picker {{if (eq selectedTabIndex 0) 'selected'}}">
+    {{ca-date-picker
+     userStartDateAsToday=true
+     onSelectDate='onScheduleStartDate'
+     showMonths=(if allowTwoDateRangePicker  false true)
+     onSelectMonth='onScheduleForMonth'
+     forFirstDateOfMonth=forFirstDateOfMonth
+   }}
+  </div>
+  <div class="end-date-picker {{unless allowTwoDateRangePicker 'hidden'}} {{if (eq selectedTabIndex 1) 'selected'}}">
+    {{ca-date-picker
+      userStartDateAsToday=true
+      onSelectDate='onScheduleEndDate'
+      startDate=startDate
+      showMonths=false
+      validateEndDate=true
+    }}
+  </div>
+</div>
+<div class="submit-btn {{unless isValid 'disable'}}" {{action 'submitDate'}}>
+  <span>{{t 'common.done'}}</span>
+</div>
+<div class="month-picker {{unless allowTwoDateRangePicker 'hidden'}}">
+  {{ca-month-picker onSelectMonth='onScheduleForMonth' currentMonth=forFirstDateOfMonth}}
+</div>

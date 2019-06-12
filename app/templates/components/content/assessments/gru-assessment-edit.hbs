@@ -1,48 +1,38 @@
 <header xmlns="http://www.w3.org/1999/html">
-{{#if allowBack}}
-  {{#link-to 'content.courses.edit' course.id (query-params unitId=collection.unitId lessonId=collection.lessonId) class="back-to"}}
+  {{#if allowBack}}
+    {{#link-to 'content.courses.edit' course.id (query-params unitId=collection.unitId lessonId=collection.lessonId) class="back-to"}}
       <div>
         {{gru-icon name="keyboard_arrow_left"}}{{t 'common.course'}}: {{course.title}}
       </div>
-  {{/link-to}}
-{{/if}}
+    {{/link-to}}
+  {{/if}}
   <h1>{{t "common.edit-assessment"}}</h1>
-
   {{partial 'content/partials/collections-header-actions'}}
-
   <nav>
     {{#gru-scroll to="#information" class="selected" offset='article > header'}}{{t "common.information"}}{{/gru-scroll}}
     {{#gru-scroll to="#builder" offset='article > header'}}{{t "common.builder"}}{{/gru-scroll}}
     {{#gru-scroll to="#settings" offset='article > header'}}{{t "common.settings"}}{{/gru-scroll}}
   </nav>
-
 </header>
-
 <section id="information">
   <div class="header">
     <h2>{{t "common.information"}}</h2>
-
     {{partial 'content/partials/information-actions'}}
-
   </div>
   <div class="content">
-
     {{content.gru-image isEditing=isEditing srcImage=collection.thumbnailUrl editImage=tempCollection.thumbnailUrl}}
-
     <div class="panel panel-default">
       <div class="panel-body">
         <div class="title">
           <label>
             <span class="required">{{t "common.assessment-title"}}</span>
             {{#if isEditing}}
-
               {{validation.gru-input model=tempCollection valuePath='title' maxLength=50 didValidate=didValidate}}
             {{else}}
               <b>{{collection.title}}</b>
             {{/if}}
           </label>
         </div>
-
         <div class="learning-objectives">
           <label>
             <span>{{t "common.learning-objectives"}}</span>
@@ -53,7 +43,6 @@
             {{/if}}
           </label>
         </div>
-
         {{#if isEditing}}
           {{taxonomy.gru-taxonomy-selector
           isEditing=isEditing
@@ -64,7 +53,7 @@
           onlySubjectsWithStandards=true
           }}
         {{/if}}
-         <div class="standards">
+        <div class="standards">
           <label>
             <span>{{t standardLabelKey}}</span>
             {{#if isEditing}}
@@ -85,30 +74,25 @@
             {{/if}}
           </label>
         </div>
-
         {{#if isEditing}}
           {{#if aggregatedTags.length}}
-          <div class="standards">
-            <div>Suggested standards based on questions in this assessment</div>
-            <label>
-              <div class="tags">
+            <div class="standards">
+              <div>Suggested standards based on questions in this assessment</div>
+              <label>
+                <div class="tags">
                   {{taxonomy.gru-taxonomy-tag-list tags=tempCollection.aggregatedTag isEditing=isEditing onAdd=(action 'addTag')}}
-              </div>
-            </label>
-          </div>
+                </div>
+              </label>
+            </div>
           {{/if}}
         {{/if}}
-
         {{content.gru-audience isEditing=isEditing srcSelectedAudiences=collection.audience editSelectedAudiences=tempCollection.audience}}
-
         {{content.gru-depth-of-knowledge isEditing=isEditing srcSelectedKnowledge=collection.depthOfknowledge editSelectedKnowledge=tempCollection.depthOfknowledge}}
-
         <div class="century-skills">
           <label>
             <span>{{t "common.century-skills"}}</span>
             {{#if isEditing}}
-              <button type="button" class="btn btn-primary choose"
-                {{action 'openSkillsModal'}}>
+              <button type="button" class="btn btn-primary choose" {{action 'openSkillsModal'}}>
                 {{gru-icon name="open_in_new"}} {{t "common.choose"}}
               </button>
               <div class="skills-buttons">
@@ -133,7 +117,6 @@
     </div>
   </div>
 </section>
-
 <section id="builder">
   {{content.collections.gru-collection-list
     model=collection
@@ -141,5 +124,4 @@
     editingContent=editingContent
   }}
 </section>
-
 {{content.gru-settings-edit id="settings" action='publishToProfile' model=collection}}

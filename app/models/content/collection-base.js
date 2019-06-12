@@ -251,11 +251,24 @@ export default (function() {
       var standards = this.get('standards');
       var centurySkills = this.get('centurySkills');
 
+      var references = this.get('references'),
+        tasks = this.get('tasks'),
+        rubric = this.get('rubric');
+
       // Copy array values
       properties.audience = audience.slice(0);
       properties.depthOfknowledge = depthOfknowledge.slice(0);
       properties.standards = standards.slice(0);
       properties.centurySkills = centurySkills.slice(0);
+      if (references) {
+        properties.references = references.slice(0);
+      }
+      if (tasks) {
+        properties.tasks = tasks.slice(0);
+      }
+      if (rubric) {
+        properties.rubric = rubric.slice(0);
+      }
 
       properties.children = this.get('children');
 

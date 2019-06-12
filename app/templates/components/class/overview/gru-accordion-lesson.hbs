@@ -187,11 +187,11 @@
                     {{#if isTeacher}}
                       <div class="controls pull-right">
                         {{#if enableCollectionLiveLearning}}
-                          {{#if (or item.isAssessment item.isCollection) }}
+                          {{#if (or item.isAssessment item.isCollection item.isOfflineActivity) }}
                             {{!--  {{#if item.isAssessment }} --}}
                             <div class="go-live-cnt">
                               {{#if item.visible}}
-                                {{#unless (or item.isExternalAssessment item.isExternalCollection) }}
+                                {{#unless (or item.isExternalAssessment item.isExternalCollection item.isOfflineActivity) }}
                                   <button {{action 'goLive' item}} data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="on-air go-live enabled">{{t "common.launch-on-air"}}
                                   </button>
                                 {{/unless}}
@@ -218,7 +218,7 @@
                         {{/if}}
                       </div>
                     {{else}}
-                      <div class="play-btn pull-right">
+                      <div class="play-btn pull-right {{if item.isOfflineActivity 'disable-event'}}">
                         <button class="btn btn-info study-now" disabled={{if item.visible '' 'true'}} {{action "studyNow" 'collection' item}} data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.play"}}">
                           {{gru-icon name='play_arrow'}}
                         </button>

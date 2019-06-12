@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import Lesson from 'gooru-web/models/content/lesson';
 import LessonItem from 'gooru-web/models/content/lessonItem';
-import { DEFAULT_IMAGES } from 'gooru-web/config/config';
+import { DEFAULT_IMAGES, CONTENT_TYPES } from 'gooru-web/config/config';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 import TaxonomySerializer from 'gooru-web/serializers/taxonomy/taxonomy';
 
@@ -79,10 +79,12 @@ export default Ember.Object.extend(ConfigurationMixin, {
             });
 
             const defaultImage =
-              lessonItemData.format === 'collection' ||
-              lessonItemData.format === 'collection-external'
+              lessonItemData.format === CONTENT_TYPES.COLLECTION ||
+              lessonItemData.format === CONTENT_TYPES.EXTERNAL_COLLECTION
                 ? appRootPath + DEFAULT_IMAGES.COLLECTION
-                : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+                : lessonItemData.format === CONTENT_TYPES.OFFLINE_ACTIVITY
+                  ? appRootPath + DEFAULT_IMAGES.OFFLINE_ACTIVITY
+                  : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
             const thumbnailUrl = lessonItemData.thumbnail
               ? basePath + lessonItemData.thumbnail
               : defaultImage;

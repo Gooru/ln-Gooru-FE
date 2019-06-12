@@ -61,10 +61,13 @@ export default Object.assign(quizzesTranslations, {
   'common.efficacy': 'Efficacy',
   'common.grid': 'Grid',
   'common.list': 'List',
+  'common.for': 'for',
   'common.first': 'First',
   'common.last': 'Last',
   'common.name': 'Name',
   'common.user': 'user',
+  'common.offline-activites': 'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.content-name': 'Content Name',
   'common.lastName': 'Lastname',
   'common.firstName': 'Firstname',
@@ -74,7 +77,10 @@ export default Object.assign(quizzesTranslations, {
   'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'Avg Score',
+  'common.tasks': 'tasks',
   'common.frq': 'FRQ',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
   'common.schedule': 'Schedule',
   'common.responses': 'Responses',
   'common.no-lesson-info-message': 'This unit does have any lessons.',
@@ -96,11 +102,23 @@ export default Object.assign(quizzesTranslations, {
   'common.all-completed': 'Todo completado',
   'common.a-assessment': 'Una evaluación',
   'common.about': 'Acerca de',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.about-you': 'Acerca de ti',
   'common.about-me': 'About Me',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.accept': 'Accept',
   'common.ignore': 'Ignore',
-  'common.no-search-result': 'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.add': 'Añadir',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
@@ -162,6 +180,7 @@ export default Object.assign(quizzesTranslations, {
   'common.assessment-pl.one': 'Evaluación',
   'common.assessment-pl.other': 'Evaluaciones',
   'common.assessment-title': 'Título de la evaluación',
+  'common.activity-title': 'Activity Title',
   'common.assessmentInitial': 'UN',
   'common.assessments': 'Evaluaciones',
   'common.assign': 'Asignar',
@@ -528,6 +547,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-resources-to-display':
     'No hay <span>recursos</span> para mostrar.',
   'common.no-rubrics-to-display': 'No hay <span>rúbricas</span> para mostrar.',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'Aún no tienes seguidores.',
   'common.no-independent-results':
     'Cuando empieces a explorar tu {{contentType}} marcado como favorito, aparecerán aquí.',
@@ -841,6 +862,8 @@ export default Object.assign(quizzesTranslations, {
   'class.overview.course-map.rescope-toggle': 'Show Complete Course',
   'class.overview.course-map.rescope-info':
     'This Navigator course is a personalized course covering standards across multiple grades. Each student is provided a unique course to help fill gaps, reinforce concepts and practices, and accelerate their learning. Personalized routes are designed and students are re-routed in real-time to maximize each student\'s learning potential and to navigate to their set destination.',
+  'class.overview.course-map.learning-path':
+    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
   'class.overview.course-map.custom-msg':
     'We are personalizing this course specifically for you based on your proficiency. Please check back in a little while to see the personalized course map.',
   'class.overview.course-map.route0-bannerdesc':
@@ -2588,5 +2611,78 @@ export default Object.assign(quizzesTranslations, {
   'student-score': 'Student Score',
   'search-resource-question': 'Search Resource/Question',
   'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent'
+  'enter-collection-timespent': 'Enter Collection Time Spent',
+  'suggested-lessons': 'Suggested Lessons',
+  'created-by-kangoorus': 'Created by Kangoorus',
+  'preparatory-material': 'Preparatory Material',
+  milestones: 'Milestones',
+  'show-course-map': 'Show course Map',
+  'show-milestones': 'Show Milestones',
+  'warn.class-destination-not-setup':
+    'Class setup is not complete unless the class destination is set. Go to Class Settings and complete setup. Otherwise, students will not be able to access content for this class.',
+  'milestone-rescoped':
+    'This milestone is available due to your {{subject}} level setup by teacher, but you seem to have caught up on all relevant competencies.',
+  'student-milestone-not-ready':
+    'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
+  'warn.teacher-milestone-not-ready':
+    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
+  'pre-study': 'Pre-Study',
+  'course-map.your-learning-path': 'Your Learning Path',
+  'mastery-greeting-msg':
+    'You’ve earned a Mastery Badge! Would you like to see the improvement in your competency skyline?',
+  'show-me': 'Show Me',
+  'common.subtask.oa.project.poster': 'Project Poster',
+  'common.subtask.oa.project.presentation': 'Project Presentation',
+  'common.subtask.oa.project.video': ' Project Video',
+  'common.subtask.oa.project.diorama': 'Project Diorama',
+  'common.subtask.oa.project.brochure': 'Project Brochure',
+  'common.subtask.oa.project.model': 'Project Model',
+  'common.subtask.oa.seminar': 'Seminar',
+  'common.subtask.oa.short_answer': 'Short Answer',
+  'common.subtask.oa.extended_response': 'Extended Response',
+  'common.subtask.oa.research_paper': 'Research Paper',
+  'common.subtask.oa.position_paper': 'Position Paper',
+  'common.subtask.oa.lab_report': 'Lab Report',
+  'common.subtask.oa.explanation_argument': 'Explanation Argument',
+  'common.subtask.oa.debate': 'Debate',
+  project: 'Project',
+  'oa.project.poster': 'Poster',
+  'oa.project.presentation': 'Presentation',
+  'oa.project.video': 'Video',
+  'oa.project.diorama': 'Diorama',
+  'oa.project.brochure': 'Brochure',
+  'oa.project.model': 'Model',
+  'oa.seminar': 'seminar',
+  'oa.short_answer': 'Short Answer',
+  'oa.extended_response': 'Extended Response',
+  'oa.research_paper': 'Research Paper',
+  'oa.position_paper': 'Position Paper',
+  'oa.lab_report': 'Report',
+  'oa.explanation_argument': 'Explanation Argument',
+  'oa.debate': 'Debate',
+  'oa.format': 'Activity Type',
+  'oa.tasks.label': 'Tasks',
+  'oa.references.label': 'References',
+  'oa.references.artifacts': 'Reference Artifacts',
+  'oa.references.urls': 'Reference URLs',
+  'oa.references.exemplar': 'Exemplar Answer',
+  'oa.references.uploads': 'Uploads',
+  'oa.submissions.type': 'Type of Submission',
+  'oa.edit_activity': 'Edit Activity',
+  'oa.add_activity': 'Add Activity',
+  'oa.remix': 'Remix Offline Activity',
+  'oa.remix.lead': 'You are about to remix an offline activity.',
+  'oa.remix.success':
+    'You\'ve remixed an offline activity {{title}}. Do you want to edit that offline activity?',
+  'oa.title': 'Offline Activity Title',
+  'errors.oa-not-copied':
+    'Oops! Unable to copy offline activity right now. Please try again shortly.',
+  'common.self': 'Self',
+  'oa.enter-timespent-label':
+    'Please enter the total time spent on the activity',
+  'no-task-available': 'No Task Available',
+  'your-answer': 'Your Answer',
+  'common.saving': 'Saving',
+  'oa.offline_activity.label': 'Offline Activity',
+  'common.oa.offline_activity.label': 'Offline Activity'
 });

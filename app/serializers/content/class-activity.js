@@ -57,6 +57,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
   normalizeClassActivity: function(data) {
     const serializer = this;
     const content = serializer.normalizeClassActivityContent(data);
+    const taxonomySerializer = serializer.get('taxonomySerializer');
+    const basePath = serializer.get('session.cdnUrls.content');
     return ClassActivity.create(Ember.getOwner(this).ownerInjection(), {
       id: data.id,
       date: data.activation_date
@@ -66,11 +68,22 @@ export default Ember.Object.extend(ConfigurationMixin, {
         ? data.dca_added_date
         : data.activation_date,
       activation_date: data.activation_date,
+      end_date: data.end_date,
       collection: content,
       forYear: data.for_year,
+      contentId: data.content_id,
+      contentType: data.content_type,
       forMonth: data.for_month,
+      isCompleted: data.is_completed,
+      questionCount: data.question_count || null,
+      resourceCount: data.resource_count || null,
+      taskCount: data.task_count || 0,
+      url: data.url,
+      title: data.title,
       usersCount: data.users_count,
-      allowMasteryAccrual: data.allow_mastery_accrual
+      thumbnail: data.thumbnail ? basePath + data.thumbnail : null,
+      allowMasteryAccrual: data.allow_mastery_accrual,
+      standards: taxonomySerializer.normalizeTaxonomyObject(data.taxonomy)
     });
   },
 
@@ -143,6 +156,23 @@ export default Ember.Object.extend(ConfigurationMixin, {
       });
     }
 
+    if (contentType === 'offline-activity') {
+      const thumbnailUrl = data.thumbnail
+        ? basePath + data.thumbnail
+        : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+
+      content = Collection.create({
+        id: data.content_id,
+        title: data.title,
+        thumbnailUrl: thumbnailUrl,
+        collectionType: data.content_type,
+        url: data.url ? data.url : '',
+        format: data.content_type,
+        taskCount: data.task_count || 0,
+        standards: taxonomySerializer.normalizeTaxonomyObject(data.taxonomy)
+      });
+    }
+
     //TODO normalize resources and questions
     return content;
   },
@@ -158,9 +188,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
           : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
         return Ember.Object.create({
           id: user.id,
-          firstname: user.first_name,
-          lastname: user.last_name,
-          thumbnail: thumbnailUrl,
+          firstName: user.first_name,
+          lastName: user.last_name,
+          avatarUrl: thumbnailUrl,
           isActive: user.is_active
         });
       });

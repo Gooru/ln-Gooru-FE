@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -304,15 +306,11 @@ export default Ember.Component.extend({
     const classActivityService = component.get('classActivityService');
     const classId = component.get('classId');
     const userId = component.get('userId');
-    let month = component.get('month');
-    let year = component.get('year');
-    return classActivityService.findStudentClassActivities(
-      userId,
-      classId,
-      null,
-      month,
-      year
-    );
+    let forMonth = component.get('month');
+    let forYear = component.get('year');
+    let startDate = `${forYear}-${forMonth}-01`;
+    var endDate = moment(startDate).endOf('month').format('YYYY-MM-DD');
+    return classActivityService.getStudentScheduledActivities(userId, classId, startDate, endDate);
   },
 
   /**
