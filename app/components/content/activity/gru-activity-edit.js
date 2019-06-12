@@ -77,6 +77,25 @@ export default CollectionEdit.extend({
   // Actions
 
   actions: {
+    cancelEdit() {
+      this._super(...arguments);
+      const component = this;
+      if (
+        component.get('activityCollection') &&
+        component.get('activityCollection').id
+      ) {
+        //ToDo: Call super
+      } else {
+        let queryParams = {
+          userId: component.get('course').get('ownerId')
+        };
+        component
+          .get('router')
+          .transitionTo('content.courses.edit', component.get('course').id, {
+            queryParams
+          });
+      }
+    },
     /**
      * edit action
      */
