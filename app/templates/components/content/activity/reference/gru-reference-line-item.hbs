@@ -24,7 +24,7 @@
                     {{refItem.count}}
                 </span>
                 {{#if (gt refItem.count 0)}}
-                    <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteReference' refItem.refData }}>{{gru-icon name="remove_circle"}}</button>
+                    <button class="remove-uploaded btn no-bgd remove-item hidden" {{action 'deleteReference' refItem.refData }}>{{gru-icon name="remove_circle"}}</button>
                 {{/if}}
             </span>
         {{/each}}

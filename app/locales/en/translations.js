@@ -2626,7 +2626,7 @@ export default Object.assign(quizzesTranslations, {
   'oa.references.artifacts': 'Reference Artifacts',
   'oa.references.urls': 'Reference URLs',
   'oa.references.exemplar': 'Exemplar Answer',
-  'oa.references.uploads': 'Uploads',
+  'oa.references.uploads': 'Upload',
   'oa.submissions.type': 'Type of Submission',
   'oa.edit_activity': 'Edit Activity',
   'oa.add_activity': 'Add Activity',
@@ -2648,5 +2648,6 @@ export default Object.assign(quizzesTranslations, {
   'oa.rubrics.switch.label': 'Teacher will grade the activity using a rubric?',
   'oa.rubrics.label': 'Associate a rubrics',
   'oa.max-score.label': 'Enter maximum score',
-  'oa.teacher-rubric': 'Teacher rubric'
+  'oa.teacher-rubric': 'Teacher rubric',
+  'oa.references.available-uploads': 'Available uploads'
 });
