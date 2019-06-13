@@ -31,7 +31,7 @@
                 {{!-- <button {{action 'updateContent'}}>Save</button>
         <button>Cancel </button> --}}
                 <span>Title</span>
-                {{validation.gru-input model=model valuePath='title' maxLength=50 didValidate=true}}
+                {{validation.gru-input model=model valuePath='title' maxLength=50 didValidate=didValidate}}
             </div>
             {{!-- {{partial 'content/partials/information-actions'}} --}}
             <span>Description</span>
