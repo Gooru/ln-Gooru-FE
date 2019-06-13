@@ -10,7 +10,7 @@ const Validations = buildValidations({
       validator('presence', {
         presence: true,
         message: '{{description}}',
-        descriptionKey: 'common.errors.activity-title-presence'
+        descriptionKey: 'oa.errors.activity-title-presence'
       })
     ]
   },
@@ -19,7 +19,16 @@ const Validations = buildValidations({
       validator('presence', {
         presence: true,
         message: '{{description}}',
-        descriptionKey: 'common.errors.activity-title-presence'
+        descriptionKey: 'oa.errors.standards-presence'
+      })
+    ]
+  },
+  subFormat: {
+    validators: [
+      validator('presence', {
+        presence: true,
+        message: '{{description}}',
+        descriptionKey: 'oa.errors.subformat-presence'
       })
     ]
   }
@@ -87,6 +96,8 @@ export default Ember.Object.extend(Validations, CollectionBase, {
    * @property {string}
    */
   showKey: null,
+
+  subFormat: null,
 
   toPlayerCollection: function() {
     var collection = this._super(...arguments);
