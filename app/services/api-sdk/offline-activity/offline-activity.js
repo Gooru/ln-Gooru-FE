@@ -115,7 +115,7 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       let serializedActivityData = service
         .get('offlineActivitySerializer')
-        .serializeCreateActivity(activityData);
+        .serializeUpdateActivity(activityData);
       service
         .get('offlineActivityAdapter')
         .updateActivity(activityId, serializedActivityData)
