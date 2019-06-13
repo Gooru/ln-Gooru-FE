@@ -412,6 +412,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     let serializer = this;
     return Ember.Object.create({
       taskId: payload.taskId,
+      submissionText: payload.submissionText,
       submissions: payload.submissions
         ? payload.submissions.map(submission =>
           serializer.normalizeGradeSubmission(submission)
@@ -444,7 +445,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
       submissionSubtype: payload.submissionSubtype,
       submissionType: payload.submissionType,
       submittedOn: payload.submittedOn,
-      submissionText: payload.submissionText,
       submissionIcon
     });
   },

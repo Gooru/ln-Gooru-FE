@@ -22,7 +22,10 @@
         {{#if showPerformance}}
           <div class="milestone-peformance {{unless milestone.performance.hasStarted 'disable-event'}} grade-range-{{grade-range milestone.performance.scoreInPercentage}}" {{action "onOpenMilestoneReport" milestone}}>
             {{#if milestone.performance.hasStarted}}
-              {{milestone.performance.scoreInPercentage}}%
+              <span class="score">{{milestone.performance.scoreInPercentage}}%</span>
+              <span class="no-of-submissions">
+                <span class="count">{{milestone.numberOfSubmissions}}</span> {{gru-icon name="account_circle"}}
+              </span>
             {{else}}
               --
             {{/if}}
@@ -52,7 +55,10 @@
                   {{#if showPerformance}}
                     <div class="lesson-peformance {{unless lesson.performance.hasStarted 'disable-event'}} grade-range-{{grade-range lesson.performance.scoreInPercentage}}" {{action "onOpenLessonReport" milestone lesson}}>
                       {{#if lesson.performance.hasStarted}}
-                        {{lesson.performance.scoreInPercentage}}%
+                        <span class="score">{{lesson.performance.scoreInPercentage}}%</span>
+                        <span class="no-of-submissions">
+                          <span class="count">{{lesson.numberOfSubmissions}}</span> {{gru-icon name="account_circle"}}
+                        </span>
                       {{else}}
                         --
                       {{/if}}
@@ -104,11 +110,17 @@
                             {{#if (and showPerformance collection.performance.hasStarted) }}
                               <div class="collection-peformance format-{{collection.format}} grade-range-{{grade-range collection.performance.scoreInPercentage}}" {{action "onOpenCollectionReport" milestone lesson collection}}>
                                 {{#if (and collection.isAssessment (gte collection.performance.scoreInPercentage 0))}}
-                                    {{collection.performance.scoreInPercentage}}%
-                                {{else if collection.performance.timeSpent}}
-                                  {{format-time collection.performance.timeSpent}}
+                                  <span class="score">{{collection.performance.scoreInPercentage}}%</span>
+                                  <span class="no-of-submissions">
+                                      <span class="count">{{collection.numberOfSubmissions}}</span> {{gru-icon name="account_circle"}}
+                                  </span>
+                                  {{else if collection.performance.timeSpent}}
+                                  <span class="time-spent">{{format-time collection.performance.timeSpent}}</span>
+                                  <span class="no-of-submissions">
+                                    <span class="count">{{collection.numberOfSubmissions}}</span> {{gru-icon name="account_circle"}}
+                                  </span>
                                 {{else}}
-                                    --
+                                  --
                                 {{/if}}
                               </div>
                             {{else}}

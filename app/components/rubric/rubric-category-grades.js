@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {
-  getGradeColor
-} from 'gooru-web/utils/utils';
+import { getGradeColor } from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -24,7 +22,7 @@ export default Ember.Component.extend({
   rubricCategories: Ember.computed('categories', function() {
     let component = this;
     let categories = component.get('categories');
-    categories.map((category) => {
+    categories.map(category => {
       let levels = category.get('levels').sortBy('score');
       category.set('levels', levels);
     });

@@ -204,6 +204,10 @@ export default Ember.Component.extend({
         type: 'assessment'
       }),
       Ember.Object.create({
+        label: component.get('i18n').t('common.offline-activites').string,
+        type: 'offline-activity'
+      }),
+      Ember.Object.create({
         label: component.get('i18n').t('search-filter.resources').string,
         type: 'resource'
       }),
@@ -214,10 +218,6 @@ export default Ember.Component.extend({
       Ember.Object.create({
         label: component.get('i18n').t('search-filter.rubrics').string,
         type: 'rubric'
-      }),
-      Ember.Object.create({
-        label: component.get('i18n').t('common.offline-activity').string,
-        type: 'offline-activity'
       })
     ]);
   }

@@ -147,7 +147,11 @@
                 text-align: $tab-float-dir;
                 $line-height: 1.5;
                 $lines-to-show: 2;
-                @include ellipsis($font-size: 13px, $line-height: $line-height, $lines-to-show: 2);
+                @include ellipsis(
+                  $font-size: 13px,
+                  $line-height: $line-height,
+                  $lines-to-show: 2
+                );
               }
             }
           }
@@ -204,7 +208,12 @@
               .truncate {
                 $line-height: 1.5;
                 $lines-to-show: 3;
-                @include ellipsis($font-size: 13px, $line-height: $line-height, $lines-to-show: 3, $excerpt-bg: $white);
+                @include ellipsis(
+                  $font-size: 13px,
+                  $line-height: $line-height,
+                  $lines-to-show: 3,
+                  $excerpt-bg: $white
+                );
               }
             }
 

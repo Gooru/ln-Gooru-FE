@@ -497,10 +497,8 @@ export default Ember.Service.extend({
           .then(function(performances) {
             performances.forEach(performance => {
               let classActivity = classActivities
-                .filterBy(
-                  'id',
-                  performance.get('dcaContentId')
-                ).objectAt(0);
+                .filterBy('id', performance.get('dcaContentId'))
+                .objectAt(0);
 
               if (classActivity) {
                 let performanceData = performance.get(
@@ -549,24 +547,26 @@ export default Ember.Service.extend({
       assessmentIds = assessmentIds.concat(externalAssessmentIds);
       const performanceService = service.get('performanceService');
       Ember.RSVP.hash({
-        activityCollectionPerformanceSummaryItems: collectionIds.length ?
-          performanceService.findStudentActivityPerformanceSummaryByIds(
+        activityCollectionPerformanceSummaryItems: collectionIds.length
+          ? performanceService.findStudentActivityPerformanceSummaryByIds(
             userId,
             classId,
             collectionIds,
             'collection',
             startDate,
             endDate
-          ) : [],
-        activityAssessmentPerformanceSummaryItems: assessmentIds.length ?
-          performanceService.findStudentActivityPerformanceSummaryByIds(
+          )
+          : [],
+        activityAssessmentPerformanceSummaryItems: assessmentIds.length
+          ? performanceService.findStudentActivityPerformanceSummaryByIds(
             userId,
             classId,
             assessmentIds,
             'assessment',
             startDate,
             endDate
-          ) : []
+          )
+          : []
       }).then(function(hash) {
         let performances = hash.activityCollectionPerformanceSummaryItems.concat(
           hash.activityAssessmentPerformanceSummaryItems
@@ -626,22 +626,24 @@ export default Ember.Service.extend({
       assessmentIds = assessmentIds.concat(externalAssessmentIds);
       const performanceService = service.get('performanceService');
       Ember.RSVP.hash({
-        activityCollectionPerformanceSummaryItems: collectionIds.length ?
-          performanceService.findClassActivityPerformanceSummaryByIds(
+        activityCollectionPerformanceSummaryItems: collectionIds.length
+          ? performanceService.findClassActivityPerformanceSummaryByIds(
             classId,
             collectionIds,
             'collection',
             startDate,
             endDate
-          ) : [],
-        activityAssessmentPerformanceSummaryItems: assessmentIds.length ?
-          performanceService.findClassActivityPerformanceSummaryByIds(
+          )
+          : [],
+        activityAssessmentPerformanceSummaryItems: assessmentIds.length
+          ? performanceService.findClassActivityPerformanceSummaryByIds(
             classId,
             assessmentIds,
             'assessment',
             startDate,
             endDate
-          ) : []
+          )
+          : []
       }).then(function(hash) {
         let performances = hash.activityCollectionPerformanceSummaryItems.concat(
           hash.activityAssessmentPerformanceSummaryItems
@@ -681,9 +683,9 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       let activityType =
         classActivity.get('collection.isAssessment') ||
-        classActivity.get('collection.isExternalAssessment') ?
-          'assessment' :
-          'collection';
+        classActivity.get('collection.isExternalAssessment')
+          ? 'assessment'
+          : 'collection';
       let activityId = Ember.A([classActivity.get('collection.id')]);
       Ember.RSVP.hash({
         activityStudentsPerformanceData: performanceService.fetchStudentsActivityPerformance(
@@ -693,9 +695,7 @@ export default Ember.Service.extend({
           startDate,
           endDate
         )
-      }).then(({
-        activityStudentsPerformanceData
-      }) => {
+      }).then(({ activityStudentsPerformanceData }) => {
         resolve(activityStudentsPerformanceData);
       }, reject);
     });
