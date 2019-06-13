@@ -1,6 +1,12 @@
 import Ember from 'ember';
 import SessionMixin from 'gooru-web/mixins/session';
 import ModalMixin from 'gooru-web/mixins/modal';
+import {
+  SCREEN_SIZES
+} from 'gooru-web/config/config';
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
 
 /**
  * Class activities controller
@@ -22,14 +28,47 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
+
+  /**
+   * @requires service:api-sdk/offline-activity-analytics
+   */
+  oaAnaltyicsService: Ember.inject.service(
+    'api-sdk/offline-activity/oa-analytics'
+  ),
+
+  /**
+   * @requires service:api-sdk/offline-activity
+   */
+  offlineActivityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
+    onOpenReportGrade(itemToGrade) {
+      let controller = this;
+      controller.set('itemToGradeContextData', itemToGrade);
+      controller.set('showOAGrade', true);
+    },
+
     toggleDatePicker() {
       let controller = this;
       controller.toggleProperty('isActive');
       controller.animateDatePicker();
+    },
+
+    /**
+     * Action triggered when items to grade section item got clicked.
+     */
+    toggleItemsToGrade() {
+      let controller = this;
+      let isMobileView = controller.get('isMobileView');
+      if (isMobileView) {
+        controller.animateItemsToGradeForMobile();
+      } else {
+        controller.animateItemsToGradeForDesktop();
+      }
     },
 
     studentDcaReport(
@@ -109,6 +148,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {Boolean} isMobileView
+   * Property to handle is mobile view
+   */
+  isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
   queryParams: ['tab'],
 
@@ -218,6 +263,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     }
   ),
 
+  studentId: Ember.computed('session', function() {
+    let controller = this;
+    return controller.get('session.userId');
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -228,6 +278,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     controller.loadActivityForDate(todayDate);
     controller.loadActiveOfflineActivities();
     controller.loadCompeltedOfflineActivities();
+    controller.loadItemsToGrade();
   },
 
   /**
@@ -327,6 +378,104 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       });
   },
 
+  loadItemsToGrade() {
+    let controller = this;
+    const classId = controller.get('classId');
+    const userId = controller.get('session.userId');
+    Ember.RSVP.hash({
+      oaItems: controller.get('oaAnaltyicsService').getOAToGrade(classId, userId)
+    }).then(function(hash) {
+      let gradeItems = hash.oaItems.gradeItems;
+      if (gradeItems) {
+        let itemsToGrade = Ember.A([]);
+        gradeItems.map(function(item) {
+          let gradeItem;
+          gradeItem = controller.createActivityGradeItemObject(item);
+          if (gradeItem) {
+            itemsToGrade.push(gradeItem);
+          }
+        });
+        Ember.RSVP.all(itemsToGrade).then(function(gradeItems) {
+          controller.set('itemsToGrade', gradeItems);
+        });
+      }
+    });
+  },
+
+  /**
+   * Creates the grade item information for activity level
+   * @param {[]} grade item
+   * @param {item} item
+   */
+  createActivityGradeItemObject: function(item) {
+    const controller = this;
+    const activityId = item.get('collectionId');
+    const contentType = item.get('collectionType');
+    const dcaContentId = item.get('dcaContentId');
+    const itemObject = Ember.Object.create();
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      controller
+        .get('offlineActivityService')
+        .readActivity(activityId)
+        .then(function(content) {
+          itemObject.setProperties({
+            classId: controller.get('class.id'),
+            dcaContentId,
+            content,
+            contentType
+          });
+          resolve(itemObject);
+        }, reject);
+    });
+  },
+
+  /**
+   * Animate a items to grade section for mobile
+   */
+  animateItemsToGradeForMobile() {
+    let itemToGradeEle = Ember.$(
+      '.ca-panel .right-panel .item-to-grade-container'
+    );
+    let windowHeight = $(window).height();
+    if (itemToGradeEle.hasClass('active')) {
+      itemToGradeEle.animate({
+        top: windowHeight - 100
+      },
+      400,
+      function() {
+        itemToGradeEle.removeClass('active');
+      }
+      );
+    } else {
+      itemToGradeEle.addClass('active');
+      itemToGradeEle.animate({
+        top: 100
+      },
+      400
+      );
+    }
+  },
+
+  /**
+   * Animate a items to grade section for desktop
+   */
+  animateItemsToGradeForDesktop() {
+    let offlineActivityEle = Ember.$('.ca-panel .right-panel .offline-activity-container .offline-activity-section');
+    let unScheduleEle = Ember.$('.ca-panel .right-panel .unschedule-container .ca-unscheduled-items');
+    let itemToGradeEle = Ember.$(
+      '.ca-panel .right-panel .item-to-grade-container .ca-grade-content-items'
+    );
+    if (!itemToGradeEle.hasClass('active')) {
+      offlineActivityEle.removeClass('active');
+      unScheduleEle.removeClass('active');
+      offlineActivityEle.slideUp(400);
+      unScheduleEle.slideUp(400);
+      itemToGradeEle.slideDown(400, function() {
+        itemToGradeEle.addClass('active');
+      });
+    }
+  },
+
   /**
    * Animate a offline activity for desktop
    */
@@ -336,22 +485,20 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     );
     let windowHeight = $(window).height();
     if (offlineActivityEle.hasClass('active')) {
-      offlineActivityEle.animate(
-        {
-          top: windowHeight - 50
-        },
-        400,
-        function() {
-          offlineActivityEle.removeClass('active');
-        }
+      offlineActivityEle.animate({
+        top: windowHeight - 50
+      },
+      400,
+      function() {
+        offlineActivityEle.removeClass('active');
+      }
       );
     } else {
       offlineActivityEle.addClass('active');
-      offlineActivityEle.animate(
-        {
-          top: 100
-        },
-        400
+      offlineActivityEle.animate({
+        top: 100
+      },
+      400
       );
     }
   }

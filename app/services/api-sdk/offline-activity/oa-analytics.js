@@ -81,10 +81,10 @@ export default Ember.Service.extend({
     });
   },
 
-  submitTeacherGrade(userGrade) {
+  submitOAGrade(userGrade) {
     let data = this.get(
       'offlineActivitySerializer'
-    ).serializeStudentRubricGrades(userGrade);
-    return this.get('oaAnaltyicsAdapter').submitTeacherGrade(data);
+    ).serializeRubricGrades(userGrade);
+    return this.get('oaAnaltyicsAdapter').submitOAGrade(data);
   }
 });
