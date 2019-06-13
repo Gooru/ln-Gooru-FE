@@ -7,6 +7,9 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     editing: {},
     editingContent: {
       refreshModel: true
+    },
+    isIndependentOA: {
+      refreshModel: true
     }
   },
   //ToDo: Store implementation
@@ -50,8 +53,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   model: function(params) {
     //In new Mode : This wont be called as model itself is passed which contains unit, course, and lesson
     //In edit mode: activityId value is passed as parameter
-
-    if (params.lessonId) {
+    //lessonId 'new' refers to an independent OA
+    if (params.lessonId && params.lessonId !== 'new') {
       params.activityId = params.lessonId;
       const route = this;
       return route
@@ -75,6 +78,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             editingContent: editingContent
           });
         });
+    } else {
+      return {
+        isIndependentOA: params.isIndependentOA
+      };
     }
   },
 
@@ -118,7 +125,9 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     this.set('isEditing', true);
     controller.set('isEditing', true);
     controller.set('tempCollection', activityCollection.copy());
-
+    if (model.isIndependentOA) {
+      controller.set('allowBackToCourse', false);
+    }
     route
       .get('centurySkillService')
       .findCenturySkills()

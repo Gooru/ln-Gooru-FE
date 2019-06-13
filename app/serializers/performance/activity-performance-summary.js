@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import ActivityPerformanceSummary from 'gooru-web/models/performance/activity-performance-summary';
-import {
-  parseDate
-} from 'gooru-web/utils/utils';
+import { parseDate } from 'gooru-web/utils/utils';
 import CollectionPerformanceSummarySerializer from 'gooru-web/serializers/performance/collection-performance-summary';
 
 /**

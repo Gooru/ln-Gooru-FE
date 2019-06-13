@@ -680,9 +680,9 @@ export default Ember.Service.extend({
   getRecord: function(modelName, id) {
     const store = this.get('store');
     const found = store.recordIsLoaded(modelName, id);
-    return found ?
-      store.recordForId(modelName, id) :
-      store.createRecord(modelName, {
+    return found
+      ? store.recordForId(modelName, id)
+      : store.createRecord(modelName, {
         id: id
       });
   },
@@ -1226,7 +1226,8 @@ export default Ember.Service.extend({
   findOfflineClassActivityPerformanceSummaryByIds: function(
     classId,
     oaIds,
-    userId
+    userId,
+    doAggregate = true
   ) {
     const service = this;
     return service
@@ -1236,7 +1237,13 @@ export default Ember.Service.extend({
         let activities = service
           .get('activityPerformanceSummarySerializer')
           .normalizeAllActivityPerformanceSummary(data);
-        return aggregateOfflineClassActivityPerformanceSummaryItems(activities);
+        if (doAggregate) {
+          return aggregateOfflineClassActivityPerformanceSummaryItems(
+            activities
+          );
+        } else {
+          return activities;
+        }
       });
   }
 });

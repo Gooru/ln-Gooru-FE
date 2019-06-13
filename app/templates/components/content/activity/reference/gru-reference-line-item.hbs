@@ -24,12 +24,12 @@
                     {{refItem.count}}
                 </span>
                 {{#if (gt refItem.count 0)}}
-                    <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteReference' refItem.refData }}>{{gru-icon name="remove_circle"}}</button>
+                    <button class="remove-uploaded btn no-bgd remove-item hidden" {{action 'deleteReference' refItem.refData }}>{{gru-icon name="remove_circle"}}</button>
                 {{/if}}
             </span>
         {{/each}}
     </div>
 {{else}}
-    {{validation.gru-input placeholder='https://gooru.org' model=model valuePath='location' class='addUrl' maxLength=1000 didValidate=true}}
+    {{validation.gru-input placeholder='https://gooru.org' rawInputValue=model.location model=model valuePath='location' class='addUrl' maxLength=1000 didValidate=didValidate}}
     <div class="btn no-bgd add-item" {{action 'updateURLRef'}}>{{gru-icon name="add_circle"}}</div>
 {{/if}}

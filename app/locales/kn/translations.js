@@ -548,6 +548,8 @@ export default Object.assign(quizzesTranslations, {
     'ಯಾವುದೇ <span> ಸಂಪನ್ಮೂಲಗಳನ್ನು </span> ಪ್ರದರ್ಶಿಸಲು.',
   'common.no-rubrics-to-display':
     'ಪ್ರದರ್ಶಿಸಲು ಯಾವುದೇ <span> ರಬ್ರಿಕ್ಸ್ </span> ಇಲ್ಲ.',
+  'common.no-offline-activitys-to-display':
+    'No <span>offline activities</span> to display.',
   'common.no-followers': 'ನಿಮಗೆ ಇನ್ನೂ ಅನುಯಾಯಿಗಳು ಇಲ್ಲ.',
   'common.no-independent-results':
     'ನಿಮ್ಮ ಬುಕ್ಮಾರ್ಕ್ ಮಾಡಲಾದ {{ವಿಷಯ}} ಶೋಧವನ್ನು ನೀವು ಪ್ರಾರಂಭಿಸಿದಾಗ, ಅವರು ಇಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತಾರೆ.',
@@ -2665,5 +2667,7 @@ export default Object.assign(quizzesTranslations, {
   'your-answer': 'Your Answer',
   'common.saving': 'Saving',
   'oa.offline_activity.label': 'Offline Activity',
-  'common.oa.offline_activity.label': 'Offline Activity'
+  'common.oa.offline_activity.label': 'Offline Activity',
+  'oa.pending-submissions': 'Pending Submissions',
+  task: 'Task'
 });

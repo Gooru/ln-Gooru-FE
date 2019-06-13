@@ -107,7 +107,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
     );
     let serializedActivity = {
       title: activityModel.get('title'),
-      learning_objective: activityModel.get('learningObjectives'),
+      learning_objective: activityModel.get('learningObjectives') !== null &&
+        activityModel.get('learningObjectives') === '' ?
+        null : activityModel.get('learningObjectives'),
       visible_on_profile: activityModel.get('isVisibleOnProfile'),
       thumbnail: !Ember.isEmpty(thumbnail) ? thumbnail : null,
       metadata: activityModel.get('metadata') || {
@@ -391,6 +393,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     let serializer = this;
     return Ember.Object.create({
       taskId: payload.taskId,
+      submissionText: payload.submissionText,
       submissions: payload.submissions ?
         payload.submissions.map(submission =>
           serializer.normalizeGradeSubmission(submission)
@@ -422,7 +425,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
       submissionSubtype: payload.submissionSubtype,
       submissionType: payload.submissionType,
       submittedOn: payload.submittedOn,
-      submissionText: payload.submissionText,
       submissionIcon
     });
   },

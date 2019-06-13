@@ -9,6 +9,7 @@ import ResourceSerializer from 'gooru-web/serializers/content/resource';
 import QuestionSerializer from 'gooru-web/serializers/content/question';
 import RubricSerializer from 'gooru-web/serializers/rubric/rubric';
 import ProfileSerializer from 'gooru-web/serializers/profile/profile';
+import OfflineActivitySerializer from 'gooru-web/serializers/offline-activity/offline-activity';
 import { DEFAULT_IMAGES, CONTENT_TYPES } from 'gooru-web/config/config';
 
 /**
@@ -48,6 +49,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
     this.set(
       'profileSerializer',
       ProfileSerializer.create(Ember.getOwner(this).ownerInjection())
+    );
+    this.set(
+      'offlineActivitySerializer',
+      OfflineActivitySerializer.create(Ember.getOwner(this).ownerInjection())
     );
   },
 
@@ -150,11 +155,17 @@ export default Ember.Object.extend(ConfigurationMixin, {
         normalizer: contentData =>
           serializer.get('courseSerializer').normalizeCourse(contentData),
         type: 'courses'
+      },
+      [CONTENT_TYPES.OFFLINE_ACTIVITY]: {
+        normalizer: contentData =>
+          serializer
+            .get('offlineActivitySerializer')
+            .serializeActivity(contentData),
+        type: 'offline_activities'
       }
     };
 
     let contentDataObject = contentData[contentType];
-
     let contentArray = payload.library_contents[contentDataObject.type];
     if (contentArray) {
       let content = contentArray.map(function(contentData) {

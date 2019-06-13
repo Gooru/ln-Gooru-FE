@@ -15,6 +15,25 @@
         {{/each}}
       </div>
     </div>
+    <div class="task-description">
+      {{task.description}}
+    </div>
+    {{#unless isReadOnly}}
+      {{#if (or pendingUploadSubmissions pendingUrlSubmissions)}}
+        <div class="pending-submission-info">
+          <div class="pending-label-container">{{t 'oa.pending-submissions'}}:</div>
+          <div class="pending-info-container">
+            {{#if pendingUploadSubmissions}}
+              <span class="pending-info">{{pendingUploadSubmissions}} {{t 'oa.references.uploads'}}</span>
+            {{/if}}
+            {{#if pendingUrlSubmissions}}
+              |
+              <span class="pending-info">{{pendingUrlSubmissions}} URLs</span>
+            {{/if}}
+          </div>
+        </div>
+      {{/if}}
+    {{/unless}}
     {{#if showToggle}}
       <div class="task-toggle" {{action "onToggleTask"}}>
         {{#if isTaskExpanded}}
@@ -26,9 +45,6 @@
     {{/if}}
   </div>
   <div class="task-details-container">
-    <div class="task-description">
-      {{task.description}}
-    </div>
     {{#if showSubmissions}}
       <div class="task-upload-container">
         <div class="task-answer">
@@ -90,6 +106,13 @@
               {{else}}
                 <span class="url-value">{{input type="text" value=taskUrl.value}}</span>
               {{/if}}
+              {{#unless isReadOnly}}
+                {{#if (eq task.urls.length (plus-one index))}}
+                  <div class="add-url" {{action "onAppendUrl"}}>
+                    {{gru-icon name="add_circle"}}
+                  </div>
+                {{/if}}
+              {{/unless}}
             </div>
           {{/each}}
         </div>

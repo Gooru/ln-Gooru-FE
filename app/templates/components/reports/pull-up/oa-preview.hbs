@@ -10,19 +10,34 @@
         <p class="preview-title">{{t 'project'}} {{t offlineActivity.subFormat}}</p>
       {{/unless}}
     </div>
-    {{#if allowPlay}}
-      <div class="content-player" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
+
+    <div class="content-player" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
+      {{#if allowPlay}}
         {{gru-icon name="play_arrow"}}
-      </div>
-    {{/if}}
-    {{#if showRemix}}
-      <div class="content-remix" title="{{t 'common.remix'}}" data-toggle="tooltip" {{action "onRemixContent"}}>
+      {{/if}}
+    </div>
+
+    <div class="content-remix" title="{{t 'common.remix'}}" data-toggle="tooltip" {{action "onRemixContent"}}>
+      {{#if showRemix}}
         {{gru-icon name="content_copy"}}
-      </div>
-    {{/if}}
-    {{#if showPrint}}
-      <div class="print-preview" title="{{t 'common.download-print'}}" data-toggle="tooltip" {{action "onPrintPreview"}}>
+      {{/if}}
+    </div>
+    <div class="print-preview" title="{{t 'common.download-print'}}" data-toggle="tooltip" {{action "onPrintPreview"}}>
+      {{#if showPrint}}
         {{gru-icon name="get_app"}}
+      {{/if}}
+    </div>
+
+    {{#if (and isReportView isTeacher)}}
+      <div class="oa-overall-performance-container">
+        {{#if (gte classActivity.collection.performance.score 0)}}
+          <div class="oa-performance grade-range-{{grade-range classActivity.collection.performance.score}}">
+            <span class="oa-score">{{classActivity.collection.performance.score}}%</span>
+            <span class="oa-timespent">{{format-time classActivity.collection.performance.timeSpent}}</span>
+          </div>
+        {{else}}
+          --
+        {{/if}}
       </div>
     {{/if}}
   </div>
@@ -43,9 +58,23 @@
       {{#if (and isReportView isTeacher)}}
         <div class="oa-list-of-users">
           {{#each users as |user index|}}
-            <div class="user-profile-img {{if (eq selectedUser.id user.id) 'selected'}}" {{action 'previewStudentReport' user}}>
-              <img src="{{user.avatarUrl}}" />
-              <span>{{user.lastName}} {{user.firstName}}</span>
+            <div class="user-list-container {{if (eq selectedUser.id user.id) 'selected'}}" {{action 'previewStudentReport' user}}>
+              <div class="user-profile-img">
+                <img src="{{user.avatarUrl}}" />
+                <span>{{user.lastName}} {{user.firstName}}</span>
+              </div>
+              {{#if isReportView}}
+                <div class="oa-performance-container">
+                  {{#if (gte user.performance.score 0)}}
+                    <div class="oa-performance grade-range-{{grade-range user.performance.score}}">
+                      <span class="oa-score">{{user.performance.score}}%</span>
+                      <span class="oa-timespent">{{format-time user.performance.timeSpent}}</span>
+                    </div>
+                  {{else}}
+                    --
+                  {{/if}}
+                </div>
+              {{/if}}
             </div>
           {{/each}}
         </div>
@@ -82,6 +111,18 @@
               <div class="oa-project-tag">{{t 'common.description'}}</div>
             {{/if}}
           </div>
+          {{#if isReportView}}
+            <div class="oa-project-performance">
+              {{#if (gte selectedUser.performance.score 0)}}
+                <div class="oa-performance grade-range-{{grade-range selectedUser.performance.score}}">
+                  <span class="oa-score">{{selectedUser.performance.score}}%</span>
+                  <span class="oa-timespent">{{format-time selectedUser.performance.timeSpent}}</span>
+                </div>
+              {{else}}
+                --
+              {{/if}}
+            </div>
+          {{/if}}
         </div>
         <div class="oa-description-container">
           {{offlineActivity.learningObjectives}}
@@ -114,6 +155,15 @@
               <div class="grader-label">{{t 'common.student'}} {{t 'common.rubric'}}</div>
               <div class="grade-tag">{{t 'common.self-graded'}}</div>
             </div>
+            {{#if (and (gte studentRubric.score 0) isReportView (gt studentRubric.maxScore 0)) }}
+              <div class="score-section">
+                <div class="oa-grade-score grade-range-{{grade-range studentGradeScore}}">
+                  <span>{{studentRubric.score}}</span>
+                  <hr />
+                  <span>{{studentRubric.maxScore}}</span>
+                </div>
+              </div>
+            {{/if}}
           </div>
           {{#if studentRubric.categories}}
             <div class="student-grading-panel">
@@ -140,6 +190,15 @@
               <div class="grader-label">{{t 'common.teacher'}} {{t 'common.rubric'}}</div>
               <div class="grade-tag">{{t 'common.teacher'}}-{{t 'class.info.grade'}}</div>
             </div>
+            {{#if (and (gte teacherRubric.score 0) isReportView (gt studentRubric.maxScore 0)) }}
+              <div class="score-section">
+                <div class="oa-grade-score grade-range-{{grade-range teacherGradeScore}}">
+                  <span>{{teacherRubric.score}}</span>
+                  <hr />
+                  <span>{{teacherRubric.maxScore}}</span>
+                </div>
+              </div>
+            {{/if}}
           </div>
           {{#if teacherRubric.categories}}
             <div class="teacher-grading-panel">

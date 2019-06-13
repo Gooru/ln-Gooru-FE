@@ -38,6 +38,11 @@ export default Ember.Component.extend({
 
   isEditing: true,
 
+  /**
+   * @param {Boolean } didValidate - value used to check if input has been validated or not
+   */
+  didValidate: false,
+
   isExpandedChild: false,
 
   // -------------------------------------------------------------------------
@@ -73,7 +78,7 @@ export default Ember.Component.extend({
      * Reset dirty model with clean model
      */
     cancelChanges() {
-      //ToDo: Reset dirty model with clean model
+      this.get('cancelTask')();
     },
 
     updateSubmissionCollection() {
@@ -115,7 +120,10 @@ export default Ember.Component.extend({
     if (this.get('model') && this.get('model').id) {
       //ToDo: Is this required
     } else {
-      let taskInstance = TaskModel.create();
+      let taskInstance = TaskModel.create(
+        Ember.getOwner(this).ownerInjection()
+      );
+
       taskInstance.set('oaId', this.get('oaId'));
       if (taskInstance.get('oaTaskSubmissions').length > 0) {
         let tsinst = Ember.A([]);
@@ -135,17 +143,39 @@ export default Ember.Component.extend({
    * Save tasks as per configured mode: edit/create, default mode is create new
    * Returns promise
    */
+  validate() {
+    const component = this;
+    let model = component.get('model');
+    var didValidate = new Ember.RSVP.Promise(function(resolve) {
+      if (model) {
+        model
+          .validate()
+          .then(
+            ({ validations }) => resolve(validations.get('isValid')),
+            () => resolve(false)
+          );
+      }
+    });
+    component.set('didValidate', didValidate);
+    return didValidate;
+  },
   saveTask() {
     const component = this;
     let model = component.get('model');
-    if (model && model.id) {
-      return component
-        .get('activityService')
-        .updateTask(model.oaId, model.id, model);
-    } else {
-      return component.get('activityService').createTask(model);
-    }
-
-    //ToDo: Validate
+    return new Ember.RSVP.Promise(function(resolve) {
+      component.validate().then(isValid => {
+        if (isValid) {
+          if (model && model.id) {
+            resolve(
+              component
+                .get('activityService')
+                .updateTask(model.oaId, model.id, model)
+            );
+          } else {
+            resolve(component.get('activityService').createTask(model));
+          }
+        }
+      });
+    });
   }
 });
