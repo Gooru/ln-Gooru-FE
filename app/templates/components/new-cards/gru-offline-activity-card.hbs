@@ -22,7 +22,9 @@
         {{t (if isSameOwnerAndCreator "common.created-by" "common.remixed-by")}}
       </span>
       <span class="owner-thumbnail" style="background-image: url({{offlineActivity.owner.avatarUrl}})"></span>
-      <span class="owner-name ellipsis">{{offlineActivity.owner.displayName}}</span>
+      {{#link-to 'profile.edit' offlineActivity.owner.id class="pointer"}}
+        <span class="owner-name ellipsis">{{offlineActivity.owner.displayName}}</span>
+      {{/link-to}}
     </div>
     <div class="oa-description">
       {{offlineActivity.learningObjectives}}
