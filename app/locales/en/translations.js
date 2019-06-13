@@ -2650,5 +2650,6 @@ export default Object.assign(quizzesTranslations, {
   'oa.max-score.label': 'Enter maximum score',
   'oa.teacher-rubric': 'Teacher rubric',
   'oa.references.available-uploads': 'Available uploads',
-  'oa.task.task-title-required': 'Please enter the task title.'
+  'oa.task.task-title-required': 'Please enter the task title.',
+  task: 'Task'
 });
