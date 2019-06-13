@@ -30,6 +30,6 @@
         {{/each}}
     </div>
 {{else}}
-    {{validation.gru-input placeholder='https://gooru.org' model=model valuePath='location' class='addUrl' maxLength=1000 didValidate=true}}
+    {{validation.gru-input placeholder='https://gooru.org' rawInputValue=model.location model=model valuePath='location' class='addUrl' maxLength=1000 didValidate=didValidate}}
     <div class="btn no-bgd add-item" {{action 'updateURLRef'}}>{{gru-icon name="add_circle"}}</div>
 {{/if}}
