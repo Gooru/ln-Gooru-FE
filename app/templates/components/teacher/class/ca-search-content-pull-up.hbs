@@ -13,7 +13,7 @@
         {{/each}}
       </div>
     </div>
-    {{#unless isCourseMap}}
+    {{#if (eq selectedMenuName 'catalog') }}
       <div class="search-right-menu">
         <div class="search-input-container">
           {{input type="text"
@@ -24,7 +24,7 @@
           <div class="filter-items">
             {{#each filters as |selectedFilter index|}}
               <div class="filter-item">
-                <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
+                <span class="name ellipsis" data-toggle="tooltip" title= {{selectedFilter.name}}>{{selectedFilter.name}}</span>
                 <span class="clear" {{action 'clearFilter' selectedFilter}}> {{gru-icon name="close"}}</span>
               </div>
             {{/each}}
@@ -34,7 +34,7 @@
             <div class="more-filters hidden">
               {{#each moreFilters as |moreFilter|}}
                 <div class="filter-item">
-                  <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
+                  <span class="name ellipsis" data-toggle="tooltip" title= {{moreFilter.name}}>{{moreFilter.name}}</span>
                   <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
                 </div>
               {{/each}}
@@ -50,9 +50,9 @@
           </div>
         {{/if}}
       </div>
-    {{/unless}}
+    {{/if}}
   </div>
-  {{#if isCourseMap}}
+  {{#if (eq selectedMenuName 'courseMap')}}
     <div class="ca-course-map-container">
       {{teacher.class.ca-course-map
         onAddContentToDCA="onAddContentToDCA"
