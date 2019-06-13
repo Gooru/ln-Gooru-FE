@@ -2617,5 +2617,6 @@ export default Object.assign(quizzesTranslations, {
   'your-answer': 'Your Answer',
   'common.saving': 'Saving',
   'oa.offline_activity.label': 'Offline Activity',
-  'common.oa.offline_activity.label': 'Offline Activity'
+  'common.oa.offline_activity.label': 'Offline Activity',
+  'oa.pending-submissions': 'Pending Submissions'
 });
