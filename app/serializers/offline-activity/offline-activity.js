@@ -105,7 +105,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
     );
     let serializedActivity = {
       title: activityModel.get('title'),
-      learning_objective: activityModel.get('learningObjectives'),
+      learning_objective:
+        activityModel.get('learningObjectives') !== null &&
+        activityModel.get('learningObjectives') === ''
+          ? null
+          : activityModel.get('learningObjectives'),
       visible_on_profile: activityModel.get('isVisibleOnProfile'),
       thumbnail: !Ember.isEmpty(thumbnail) ? thumbnail : null,
       metadata: activityModel.get('metadata') || {

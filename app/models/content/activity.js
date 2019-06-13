@@ -99,6 +99,7 @@ export default Ember.Object.extend(Validations, CollectionBase, {
 
   subFormat: null,
 
+  learningObjectives: null,
   toPlayerCollection: function() {
     var collection = this._super(...arguments);
     collection.set('attempts', this.attempts);
