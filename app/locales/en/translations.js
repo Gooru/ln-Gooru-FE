@@ -2645,6 +2645,7 @@ export default Object.assign(quizzesTranslations, {
   'common.saving': 'Saving',
   'oa.offline_activity.label': 'Offline Activity',
   'common.oa.offline_activity.label': 'Offline Activity',
+  'oa.pending-submissions': 'Pending Submissions',
   'oa.rubrics.switch.label': 'Teacher will grade the activity using a rubric?',
   'oa.rubrics.label': 'Associate a rubric',
   'oa.max-score.label': 'Enter maximum score',
