@@ -68,7 +68,11 @@
               <div class="type"> {{resource.performance.questionType}}</div>
               <div class="performance" style="background-color:{{if resource (grade-color resource.performance.score)}}">
                 <div class="score">
-                  <span class="graded-score">{{resource.performance.rawScore}}</span>/<span class="max-score">{{resource.performance.maxScore}}</span>
+                  {{#if resource.performance.maxScore}}
+                    <span class="graded-score">{{resource.performance.rawScore}}</span>/<span class="max-score">{{resource.performance.maxScore}}</span>
+                  {{else}}
+                    <span class="graded-score">{{resource.performance.rawScore}}</span>
+                  {{/if}}
                 </div>
                 <span>{{if resource.performance.timeSpent (format-time  resource.performance.timeSpent) '--'}}</span>
               </div>
