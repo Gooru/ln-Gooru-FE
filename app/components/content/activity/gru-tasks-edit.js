@@ -78,7 +78,10 @@ export default Ember.Component.extend({
      * Reset dirty model with clean model
      */
     cancelChanges() {
-      this.get('cancelTask')();
+      const component = this;
+      component.get('cancelTask')();
+      let componentHead = component.$('.panel-default > a .associated-rubric');
+      componentHead.addClass('hidden');
     },
 
     updateSubmissionCollection() {
@@ -145,7 +148,8 @@ export default Ember.Component.extend({
    */
   validate() {
     const component = this;
-    let model = component.get('model');
+    let modelo = component.get('model'),
+      model = TaskModel.create(Ember.getOwner(this).ownerInjection(), modelo);
     var didValidate = new Ember.RSVP.Promise(function(resolve) {
       if (model) {
         model
