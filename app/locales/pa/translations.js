@@ -66,6 +66,7 @@ export default Object.assign(quizzesTranslations, {
   'common.tasks': 'tasks',
   'common.name': 'ਨਾਮ',
   'common.user': 'ਯੂਜ਼ਰ',
+  'common.for': 'for',
   'common.content-name': 'ਸਮੱਗਰੀ ਦਾ ਨਾਂ',
   'common.lastName': 'ਆਖੀਰਲਾ ਨਾਂਮ',
   'common.firstName': 'ਪਹਿਲਾ ਨਾਂ',

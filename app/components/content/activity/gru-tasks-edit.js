@@ -38,6 +38,11 @@ export default Ember.Component.extend({
 
   isEditing: true,
 
+  /**
+   * @param {Boolean } didValidate - value used to check if input has been validated or not
+   */
+  didValidate: false,
+
   isExpandedChild: false,
 
   // -------------------------------------------------------------------------
@@ -73,7 +78,7 @@ export default Ember.Component.extend({
      * Reset dirty model with clean model
      */
     cancelChanges() {
-      //ToDo: Reset dirty model with clean model
+      this.get('cancelTask')();
     },
 
     updateSubmissionCollection() {
@@ -82,11 +87,8 @@ export default Ember.Component.extend({
 
     expandTitle() {
       const component = this;
-      component.showAllHeaders();
       component.collapseAll();
-      component.$(
-        '#accordion > .gru-tasks-edit > .panel-default > a .associated-rubric'
-      );
+      component.showAllHeaders();
       let componentHead = component.$('.panel-default > a .associated-rubric');
       componentHead.addClass('hidden');
     }
@@ -112,23 +114,25 @@ export default Ember.Component.extend({
     // this.set('model', taskInstance);
   },
 
-  didReceiveAttrs() {
-    this._super(...arguments);
-    if (this.get('model') && this.get('model').id) {
-      //ToDo: Is this required
-    } else {
-      let taskInstance = TaskModel.create({ oaId: this.get('oaId') });
-      this.set('model', taskInstance);
-    }
-  },
-
-  didInsertElement1() {
+  didInsertElement() {
     this._super(...arguments);
     const component = this;
     if (this.get('model') && this.get('model').id) {
-      //ToDo: Remove this after checking
+      //ToDo: Is this required
     } else {
-      Ember.run.later(() => component.send('expandTitle'));
+      let taskInstance = TaskModel.create(
+        Ember.getOwner(this).ownerInjection()
+      );
+
+      taskInstance.set('oaId', this.get('oaId'));
+      if (taskInstance.get('oaTaskSubmissions').length > 0) {
+        let tsinst = Ember.A([]);
+        taskInstance.set('oaTaskSubmissions', tsinst);
+        console.log(`new i with oaId :${this.get('oaId')}`, taskInstance); //eslint-disable-line
+      }
+      this.set('model', taskInstance);
+      let componentHead = component.$('.panel-default > a');
+      Ember.run(() => componentHead.click()); //show new task form expanded
     }
   },
 
@@ -139,17 +143,39 @@ export default Ember.Component.extend({
    * Save tasks as per configured mode: edit/create, default mode is create new
    * Returns promise
    */
+  validate() {
+    const component = this;
+    let model = component.get('model');
+    var didValidate = new Ember.RSVP.Promise(function(resolve) {
+      if (model) {
+        model
+          .validate()
+          .then(
+            ({ validations }) => resolve(validations.get('isValid')),
+            () => resolve(false)
+          );
+      }
+    });
+    component.set('didValidate', didValidate);
+    return didValidate;
+  },
   saveTask() {
     const component = this;
     let model = component.get('model');
-    if (model && model.id) {
-      return component
-        .get('activityService')
-        .updateTask(model.oaId, model.id, model);
-    } else {
-      return component.get('activityService').createTask(model);
-    }
-
-    //ToDo: Validate
+    return new Ember.RSVP.Promise(function(resolve) {
+      component.validate().then(isValid => {
+        if (isValid) {
+          if (model && model.id) {
+            resolve(
+              component
+                .get('activityService')
+                .updateTask(model.oaId, model.id, model)
+            );
+          } else {
+            resolve(component.get('activityService').createTask(model));
+          }
+        }
+      });
+    });
   }
 });

@@ -58,7 +58,6 @@ export default Ember.Object.extend({
     return CollectionPerformanceSummary.create({
       id: data.collectionId || data.collection_id,
       collectionId: data.collectionId || data.collection_id,
-      dcaContentId: data.dcaContentId || null,
       timeSpent: data.timeSpent,
       attempts: data.attempts,
       views: data.views,

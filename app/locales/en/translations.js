@@ -183,6 +183,7 @@ export default Object.assign(quizzesTranslations, {
   'common.avatarFor': 'Avatar for',
   'common.averageScore': 'Average Score',
   'common.back': 'Back',
+  'common.for': 'for',
   'common.back-to-assessment': 'Back to assessment',
   'common.back-to-collection': 'Back to collection',
   'common.back-to-course-map': 'Back to Course Map',
@@ -2625,7 +2626,7 @@ export default Object.assign(quizzesTranslations, {
   'oa.references.artifacts': 'Reference Artifacts',
   'oa.references.urls': 'Reference URLs',
   'oa.references.exemplar': 'Exemplar Answer',
-  'oa.references.uploads': 'Uploads',
+  'oa.references.uploads': 'Upload',
   'oa.submissions.type': 'Type of Submission',
   'oa.edit_activity': 'Edit Activity',
   'oa.add_activity': 'Add Activity',
@@ -2644,5 +2645,15 @@ export default Object.assign(quizzesTranslations, {
   'common.saving': 'Saving',
   'oa.offline_activity.label': 'Offline Activity',
   'common.oa.offline_activity.label': 'Offline Activity',
-  'oa.pending-submissions': 'Pending Submissions'
+  'oa.pending-submissions': 'Pending Submissions',
+  'oa.rubrics.switch.label': 'Teacher will grade the activity using a rubric?',
+  'oa.rubrics.label': 'Associate a rubric',
+  'oa.max-score.label': 'Enter maximum score',
+  'oa.teacher-rubric': 'Teacher rubric',
+  'oa.references.available-uploads': 'Available uploads',
+  'oa.task.task-title-required': 'Please enter the task title.',
+  'oa.errors.activity-title-presence':
+    'Please enter the offline activity title.',
+  'oa.errors.standards-presence': 'Please select a standard.',
+  'oa.errors.subformat-presence': 'Please select a format.'
 });

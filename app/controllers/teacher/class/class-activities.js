@@ -143,13 +143,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     },
 
     //Action triggered when click preview content
-    onPreviewContent(content, caContentId, isReportView) {
+    onPreviewContent(content, classActivity, isReportView) {
       const controller = this;
       controller.set(
         'previewContentType',
         content.get('format') || content.get('collectionType')
       );
-      controller.set('previewCaContentId', caContentId);
+      controller.set('previewCa', classActivity);
       controller.set('previewContent', content);
       if (controller.get('previewContentType') === 'offline-activity') {
         controller.set('isShowOfflineActivityPreview', true);
@@ -184,7 +184,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let controller = this;
       let collection = selectedClassActivity.get('collection');
       let activityDate = selectedClassActivity.get('added_date');
-      let caContentId = selectedClassActivity.get('id');
       let params = {
         classId: controller.get('classId'),
         collection: collection,
@@ -195,7 +194,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         selectedClassActivity.get('collection.format') ||
         selectedClassActivity.get('collection.collectionType');
       if (format === CONTENT_TYPES.OFFLINE_ACTIVITY) {
-        controller.send('onPreviewContent', collection, caContentId, true);
+        controller.send(
+          'onPreviewContent',
+          collection,
+          selectedClassActivity,
+          true
+        );
       } else {
         controller.set('showDcaCollectionReportPullUp', true);
         controller.set('dcaCollectionReportData', params);
@@ -360,8 +364,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let controller = this;
       let currentClassId = controller.get('classController.class.id');
       let classActivityId = classActivity.get('id');
-      let classActivityType =
-        classActivity.get('collection.collectionType');
+      let classActivityType = classActivity.get('collection.collectionType');
       var model = {
         type: classActivityType,
         deleteMethod: function() {
@@ -1072,29 +1075,23 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Animate a schedule section for desktop
    */
   animateUnScheduleForDesktop() {
-    let unScheduleEle = Ember.$('.ca-panel .left-panel .unschedule-container');
-    let leftPanelEle = Ember.$('.ca-panel .left-panel');
-    let scheduleEle = Ember.$(
-      '.schedule-container .ca-schedule-section .dca-content-list-container'
+    let offlineActivityEle = Ember.$(
+      '.ca-panel .right-panel .offline-activity-container .offline-activity-section'
     );
-    if (unScheduleEle.hasClass('active')) {
-      unScheduleEle.removeClass('active');
-      Ember.$('.ca-unscheduled-items').slideUp(400, function() {
-        let containerheight = leftPanelEle.height() - unScheduleEle.height();
-        scheduleEle.css({
-          height: containerheight
-        });
+    let unScheduleEle = Ember.$(
+      '.ca-panel .right-panel .unschedule-container .ca-unscheduled-items'
+    );
+    let itemToGradeEle = Ember.$(
+      '.ca-panel .right-panel .item-to-grade-container .ca-grade-content-items'
+    );
+    if (!unScheduleEle.hasClass('active')) {
+      offlineActivityEle.removeClass('active');
+      itemToGradeEle.removeClass('active');
+      offlineActivityEle.slideUp(400);
+      itemToGradeEle.slideUp(400);
+      unScheduleEle.slideDown(400, function() {
+        unScheduleEle.addClass('active');
       });
-    } else {
-      scheduleEle.animate(
-        {
-          height: '0'
-        },
-        function() {
-          unScheduleEle.addClass('active');
-          Ember.$('.ca-unscheduled-items').slideDown(400);
-        }
-      );
     }
   },
 
@@ -1102,7 +1099,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Animate a schedule section for mobile
    */
   animateUnScheduleForMobile() {
-    let unScheduleEle = Ember.$('.ca-panel .left-panel .unschedule-container');
+    let unScheduleEle = Ember.$('.ca-panel .right-panel .unschedule-container');
     let windowHeight = $(window).height();
     if (unScheduleEle.hasClass('active')) {
       unScheduleEle.animate(
@@ -1129,13 +1126,23 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Animate a offline activity for desktop
    */
   animateOfflineActivityForDesktop() {
-    let offlineActivityEle = Ember.$('.offline-activity-section');
-    let itemToGradeEle = Ember.$(
-      '.ca-panel .right-panel .item-to-grade-container'
+    let offlineActivityEle = Ember.$(
+      '.ca-panel .right-panel .offline-activity-container .offline-activity-section'
     );
-    if (itemToGradeEle.hasClass('active')) {
+    let unScheduleEle = Ember.$(
+      '.ca-panel .right-panel .unschedule-container .ca-unscheduled-items'
+    );
+    let itemToGradeEle = Ember.$(
+      '.ca-panel .right-panel .item-to-grade-container .ca-grade-content-items'
+    );
+    if (!offlineActivityEle.hasClass('active')) {
       itemToGradeEle.removeClass('active');
-      offlineActivityEle.slideDown(400);
+      unScheduleEle.removeClass('active');
+      itemToGradeEle.slideUp(400);
+      unScheduleEle.slideUp(400);
+      offlineActivityEle.slideDown(400, function() {
+        offlineActivityEle.addClass('active');
+      });
     }
   },
 
@@ -1172,16 +1179,21 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Animate a items to grade section for desktop
    */
   animateItemsToGradeForDesktop() {
-    let offlineActivityEle = Ember.$('.offline-activity-section');
-    let itemToGradeEle = Ember.$(
-      '.ca-panel .right-panel .item-to-grade-container'
+    let offlineActivityEle = Ember.$(
+      '.ca-panel .right-panel .offline-activity-container .offline-activity-section'
     );
-    if (itemToGradeEle.hasClass('active')) {
-      offlineActivityEle.slideDown(400, function() {
-        itemToGradeEle.removeClass('active');
-      });
-    } else {
-      offlineActivityEle.slideUp(400, function() {
+    let unScheduleEle = Ember.$(
+      '.ca-panel .right-panel .unschedule-container .ca-unscheduled-items'
+    );
+    let itemToGradeEle = Ember.$(
+      '.ca-panel .right-panel .item-to-grade-container .ca-grade-content-items'
+    );
+    if (!itemToGradeEle.hasClass('active')) {
+      offlineActivityEle.removeClass('active');
+      unScheduleEle.removeClass('active');
+      offlineActivityEle.slideUp(400);
+      unScheduleEle.slideUp(400);
+      itemToGradeEle.slideDown(400, function() {
         itemToGradeEle.addClass('active');
       });
     }
@@ -1298,7 +1310,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   removeClassActivity: function(classActivity) {
     let id = classActivity.get('id');
     if (
-      classActivity.get('collection.collectionType') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS
+      classActivity.get('collection.collectionType') ===
+      PLAYER_EVENT_SOURCE.OFFLINE_CLASS
     ) {
       let offlineActivities;
       if (classActivity.get('isCompleted')) {
@@ -1356,7 +1369,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       .then(completedOfflineActivities => {
         controller.set(
           'completedOfflineActivities',
-          completedOfflineActivities
+          completedOfflineActivities.sortBy('end_date')
         );
       });
   },
@@ -1454,7 +1467,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       if (classActivities && classActivities.length > 0) {
         controller.parseClassActivityData(classActivities);
       }
-      controller.set('activeOfflineActivities', offlineActivities);
+      controller.set(
+        'activeOfflineActivities',
+        offlineActivities.sortBy('end_date')
+      );
       controller.fetchAssessmentsMasteryAccrual();
       controller.set('isLoading', false);
     });
@@ -1468,7 +1484,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       .get('classActivityService')
       .fetchActiveOfflineActivities(classId)
       .then(function(offlineActivities) {
-        controller.set('activeOfflineActivities', offlineActivities);
+        controller.set(
+          'activeOfflineActivities',
+          offlineActivities.sortBy('end_date')
+        );
         controller.fetchAssessmentsMasteryAccrual();
         controller.set('isLoading', false);
       });

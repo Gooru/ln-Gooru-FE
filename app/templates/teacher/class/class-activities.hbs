@@ -5,9 +5,6 @@
   <div class="ca-panel">
     <div class="left-panel">
       <div class="schedule-container">
-        <div class="left-panel-header hidden-xs">
-          <span class="title">{{t 'student-landing.class.class-activities'}}</span>
-        </div>
         <div class="ca-schedule-items-header">
           <div class="ca-add-content">
             <div class="ca-contents-button">
@@ -83,51 +80,11 @@
           </div>
         </div>
       </div>
-      <div class="unschedule-container">
-        <div class="ca-unschedule-items-header" {{action 'toggleUnSchedule'}}>
-          <span>{{t 'common.unscheduled-items'}} ({{unScheduledClassActivities.length}})</span>
-          <div class="icons">
-            {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
-            {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
-          </div>
-        </div>
-        <div class="ca-unscheduled-items">
-          <div class="ca-unscheduled-content-items">
-            {{#each unScheduledClassActivities as |classActivity|}}
-              {{class.gru-class-activity-panel
-              classActivity=classActivity
-              classId=classId
-              members=members
-              onReportclick='changeStatusValue'
-              classActivities=unScheduledClassActivities
-              onGoLive='goLive'
-              showDcaAssignButton=false
-              showDcaAddButton=false
-              onChangeVisibility='changeVisibility'
-              onRemoveClassActivity='removeClassActivity'
-              openDcaContentReport='openDcaContentReport'
-              activityDate=classActivity.added_date
-              showDcaRemoveButton=false
-              onScheduleContentToDCA='onScheduleContentToDCA'
-              isUnScheduled=true
-              onPreviewContent="onPreviewContent"
-            }}
-            {{else}}
-              <div class="ca-unscheduled-no-content-items">
-                {{t 'common.no-unschedule-items'}} {{format-date forFirstDateOfMonth 'MMMM YYYY'}}.
-              </div>
-            {{/each}}
-          </div>
-        </div>
-      </div>
     </div>
     <div class="right-panel">
       <div class="offline-activity-container">
-        <div class="right-panel-header">
-          <span class="title">{{t 'common.offline-activites'}}</span>
-        </div>
         <div class="offline-activity-item-header" {{action 'toggleOffineActivity'}}>
-          <span class="hidden-xs">{{t 'common.plan'}}</span>
+          <span class="hidden-xs">{{t 'common.plan'}} {{t 'common.offline-activites'}}</span>
           <span class="title hidden visible-xs">{{t 'common.offline-activites'}}</span>
           <i class="offline-icon" {{action 'onAddDca' 'offline-activity'}}></i>
           <div class="icons">
@@ -135,7 +92,7 @@
             {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
           </div>
         </div>
-        <div class="offline-activity-section">
+        <div class="offline-activity-section active">
           <div class="panel-group" id="panels">
             <div class="panel panel-default oa-active-container">
               <div class="oa-active-header collapsed" data-parent="#panels" data-toggle="collapse" data-target="#active">
@@ -230,7 +187,7 @@
       </div>
       <div class="item-to-grade-container">
         <div class="ca-grade-items-header" {{action 'toggleItemsToGrade'}}>
-          <span>{{t 'class.analytics.performance.grade-items'}}</span>
+          <span>{{t 'class.analytics.performance.grade-items'}} ({{itemsToGrade.length}})</span>
           <div class="icons">
             {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
             {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
@@ -246,6 +203,43 @@
               {{t 'common.all-caught-up'}}
             </div>
           {{/if}}
+        </div>
+      </div>
+      <div class="unschedule-container">
+        <div class="ca-unschedule-items-header" {{action 'toggleUnSchedule'}}>
+          <span>{{t 'common.unscheduled-items'}} {{t 'common.for'}} {{format-date selectedDate 'MMMM'}} ({{unScheduledClassActivities.length}})</span>
+          <div class="icons">
+            {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+            {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+          </div>
+        </div>
+        <div class="ca-unscheduled-items">
+          <div class="ca-unscheduled-content-items">
+            {{#each unScheduledClassActivities as |classActivity|}}
+              {{class.gru-class-activity-panel
+              classActivity=classActivity
+              classId=classId
+              members=members
+              onReportclick='changeStatusValue'
+              classActivities=unScheduledClassActivities
+              onGoLive='goLive'
+              showDcaAssignButton=false
+              showDcaAddButton=false
+              onChangeVisibility='changeVisibility'
+              onRemoveClassActivity='removeClassActivity'
+              openDcaContentReport='openDcaContentReport'
+              activityDate=classActivity.added_date
+              showDcaRemoveButton=false
+              onScheduleContentToDCA='onScheduleContentToDCA'
+              isUnScheduled=true
+              onPreviewContent="onPreviewContent"
+            }}
+            {{else}}
+              <div class="ca-unscheduled-no-content-items">
+                {{t 'common.no-unschedule-items'}} {{format-date forFirstDateOfMonth 'MMMM YYYY'}}.
+              </div>
+            {{/each}}
+          </div>
         </div>
       </div>
     </div>
@@ -346,7 +340,7 @@
     showPullUp=isShowOfflineActivityPreview
     oaId=previewContent.id
     classId=classId
-    caContentId=previewCaContentId
+    classActivity=previewCa
     isReportView=isReportView
   }}
 {{/if}}

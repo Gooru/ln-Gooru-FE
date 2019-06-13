@@ -56,6 +56,7 @@ export default Object.assign(quizzesTranslations, {
   'errors.url': '{{description}} ಒಂದು ಮಾನ್ಯವಾದ url ಆಗಿರಬೇಕು',
   'common.relevance': 'ಪ್ರಸ್ತುತತೆ',
   'common.engagement': 'ನಿಶ್ಚಿತಾರ್ಥ',
+  'common.for': 'for',
   'common.efficacy': 'ಪರಿಣಾಮಕಾರಿತ್ವ',
   'common.grid': 'Grid',
   'common.list': 'List',

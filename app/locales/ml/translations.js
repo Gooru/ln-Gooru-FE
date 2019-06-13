@@ -58,6 +58,7 @@ export default Object.assign(quizzesTranslations, {
   'common.relevance': 'പ്രാധാന്യം',
   'common.engagement': 'ഇടപഴകൽ',
   'common.efficacy': 'ഫലപ്രാപ്തി',
+  'common.for': 'for',
   'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.grid': 'ഗ്രിഡ്',

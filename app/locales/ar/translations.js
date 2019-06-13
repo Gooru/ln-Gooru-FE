@@ -66,6 +66,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
   'common.sub-filter': 'Sub-Filter',
+  'common.for': 'for',
   'common.more': 'more',
   'common.tasks': 'tasks',
   'common.apply-filter': 'apply filter',

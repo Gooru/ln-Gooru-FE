@@ -117,10 +117,9 @@
             background-color: #fff;
 
             .ca-unscheduled-items {
-              height: 100%;
+              height: auto;
               width: 100%;
               max-height: calc(100% - 150px);
-              padding-bottom: 0;
               display: block;
 
               .ca-unscheduled-content-items {
@@ -185,7 +184,7 @@
                           display: grid;
                           width: 100%;
                           justify-content: center;
-                          grid-template-columns: repeat(7,1fr);
+                          grid-template-columns: repeat(7, 1fr);
 
                           th.dow {
                             height: 40px;
@@ -200,7 +199,7 @@
                           display: grid;
                           width: 100%;
                           justify-content: center;
-                          grid-template-columns: repeat(7,1fr);
+                          grid-template-columns: repeat(7, 1fr);
 
                           td {
                             height: 40px;
@@ -216,7 +215,11 @@
 
                             &.active {
                               background-color: #d2e3fc;
-                              background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
+                              background-image: -webkit-linear-gradient(
+                                top,
+                                #d2e3fc,
+                                #d2e3fc
+                              );
                               border-radius: 50%;
                               display: flex;
                               margin: auto;
@@ -231,7 +234,11 @@
 
                             &.today {
                               background-color: #3486f7;
-                              background-image: -webkit-linear-gradient(top, #3486f7 , #3486f7);
+                              background-image: -webkit-linear-gradient(
+                                top,
+                                #3486f7,
+                                #3486f7
+                              );
                               border-radius: 50%;
                               display: flex;
                               margin: auto;

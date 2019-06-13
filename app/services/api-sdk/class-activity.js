@@ -497,14 +497,7 @@ export default Ember.Service.extend({
           .then(function(performances) {
             performances.forEach(performance => {
               let classActivity = classActivities
-                .filterBy(
-                  'id',
-                  performance.get('collectionPerformanceSummary.dcaContentId')
-                )
-                .filterBy(
-                  'collection.id',
-                  performance.get('collectionPerformanceSummary.collectionId')
-                )
+                .filterBy('id', performance.get('dcaContentId'))
                 .objectAt(0);
 
               if (classActivity) {

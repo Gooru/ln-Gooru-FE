@@ -67,6 +67,7 @@ export default Object.assign(quizzesTranslations, {
   'featured-libraries': 'featured libraries',
   'common.answer-this-activity':
     'Answer this rubric to complete your activity.',
+  'common.for': 'for',
   'common.lastName': 'শেষ নাম',
   'common.firstName': 'প্ৰথম নাম',
   'common.tasks': 'tasks',

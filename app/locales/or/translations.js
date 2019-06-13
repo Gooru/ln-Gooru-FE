@@ -36,6 +36,7 @@ export default Object.assign(quizzesTranslations, {
   'errors.after': '{{description}} ନିଶ୍ଚିତ ରୂପେ {{after}}ପରେ',
   'errors.wrongDateFormat':
     '{{description}} ନିଶ୍ଚିତ ରୂପେ {{format}} ଫର୍ମାଟରେ ହେବ',
+  'common.for': 'for',
   'errors.wrongLength':
     '{{description}} ଭୁଲ ଦୈର୍ଘ୍ୟ ବିଶିଷ୍ଟ ଅଟେ ({{is}} ବର୍ଣ୍ଣ ହେବା ଉଚିତ)',
   'errors.notANumber': '{{description}} ନିଶ୍ଚିତ ରୂପେ ଏକ ସଂଖ୍ୟା ହେବା ଆବଶ୍ୟକ',

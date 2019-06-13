@@ -241,15 +241,15 @@ export default Ember.Component.extend({
     let members = usersClassActivity.filterBy('isActive', true);
     members.forEach(member => {
       let memberId = member.get('id');
-      let lastName = member.get('lastname');
-      let firstName = member.get('firstname');
+      let lastName = member.get('lastName');
+      let firstName = member.get('firstName');
       let performance = studentsPerformance.filterBy('user', memberId);
       let student = Ember.Object.create({
         id: memberId,
         firstName: firstName,
         lastName: lastName,
         name: `${lastName} ${firstName}`,
-        avatarUrl: member.get('thumbnail'),
+        avatarUrl: member.get('avatarUrl'),
         performance: component.parseCollectionPerformanceData(
           collectionType,
           performance

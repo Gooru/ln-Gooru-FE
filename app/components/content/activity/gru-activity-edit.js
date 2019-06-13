@@ -77,6 +77,25 @@ export default CollectionEdit.extend({
   // Actions
 
   actions: {
+    cancelEdit() {
+      this._super(...arguments);
+      const component = this;
+      if (
+        component.get('activityCollection') &&
+        component.get('activityCollection').id
+      ) {
+        //ToDo: Call super
+      } else {
+        let queryParams = {
+          userId: component.get('course').get('ownerId')
+        };
+        component
+          .get('router')
+          .transitionTo('content.courses.edit', component.get('course').id, {
+            queryParams
+          });
+      }
+    },
     /**
      * edit action
      */
@@ -294,6 +313,10 @@ export default CollectionEdit.extend({
     }
   },
 
+  didInsertElement() {
+    this._super(...arguments);
+    this.$('#emberInfo1123').click();
+  },
   /**
    * Copies master Objects of Source model to editingModel and set editmodel to source, such that source has the latest
    * @param {*} editingModel

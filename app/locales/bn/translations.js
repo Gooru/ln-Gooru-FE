@@ -67,6 +67,7 @@ export default Object.assign(quizzesTranslations, {
   'common.firstName': 'নামের প্রথম অংশ',
   'common.filter-by': 'দ্বারা ফিল্টার',
   'common.more': 'অধিক',
+  'common.for': 'for',
   'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.apply-filter': 'apply filter',

@@ -36,6 +36,11 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
    */
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
+  /**
+   * @requires service:api-sdk/performance
+   */
+  performanceService: Ember.inject.service('api-sdk/performance'),
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -103,8 +108,8 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags
    */
-  taxonomyTags: Ember.computed('previewContent.standards.[]', function() {
-    var standards = this.get('previewContent.standards');
+  taxonomyTags: Ember.computed('offlineActivity.standards.[]', function() {
+    var standards = this.get('offlineActivity.standards');
     if (standards) {
       standards = standards.filter(function(standard) {
         // Filter out learning targets (they're too long for the card)
@@ -162,7 +167,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     'oaRubrics.teacherGrades',
     function() {
       let offlineActivity = this.get('offlineActivity');
-      let rubric = {};
+      let rubric;
       if (offlineActivity) {
         rubric = this.get('offlineActivity.rubric').findBy(
           'gradeType',
@@ -184,7 +189,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     'oaRubrics.studentGrades',
     function() {
       let offlineActivity = this.get('offlineActivity');
-      let rubric = {};
+      let rubric;
       if (offlineActivity) {
         rubric = this.get('offlineActivity.rubric').findBy(
           'gradeType',
@@ -209,6 +214,24 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
    */
   showUserList: false,
 
+  /**
+   * Compute  student grade score in precentage
+   * @return {Number}
+   */
+  studentGradeScore: Ember.computed('studentRubric', function() {
+    const studentRubric = this.get('studentRubric');
+    return this.computedRubricScoreInPrecentage(studentRubric);
+  }),
+
+  /**
+   * Compute  teacher grade score in precentage
+   * @return {Number}
+   */
+  teacherGradeScore: Ember.computed('teacherRubric', function() {
+    const teacherRubric = this.get('teacherRubric');
+    return this.computedRubricScoreInPrecentage(teacherRubric);
+  }),
+
   //--------------------------------------------------------------------------
   // Methods
 
@@ -217,9 +240,10 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     const oaId = component.get('oaId');
     const oaService = component.get('oaService');
     const classId = component.get('classId');
-    const caContentId = component.get('caContentId');
+    const caContentId = component.get('classActivity.id');
     const isReportView = component.get('isReportView');
     const isTeacher = component.get('isTeacher');
+    const isStudent = component.get('isStudent');
     component.set('isLoading', true);
     const users = component.get('users') ? component.get('users') : Ember.A([]);
     let studentListPromise =
@@ -228,10 +252,22 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
           .get('classActivityService')
           .fetchUsersForClassActivity(classId, caContentId)
         : Ember.RSVP.resolve(users);
+    let userId = isStudent ? this.get('session.userId') : undefined;
+    let performancePromise = isReportView
+      ? component
+        .get('performanceService')
+        .findOfflineClassActivityPerformanceSummaryByIds(
+          classId,
+          [caContentId],
+          userId,
+          false
+        )
+      : Ember.RSVP.resolve([]);
     return Ember.RSVP.hash({
       offlineActivity: oaService.readActivity(oaId),
-      users: studentListPromise
-    }).then(({ offlineActivity, users }) => {
+      users: studentListPromise,
+      performances: performancePromise
+    }).then(({ offlineActivity, users, performances }) => {
       if (!component.isDestroyed) {
         component.set('offlineActivity', offlineActivity);
         if (isReportView) {
@@ -240,6 +276,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
           let user = users.objectAt(0);
           component.set('selectedUser', user);
           component.fetchSubmissions(user);
+          component.parsePerformanceData(users, performances);
         }
         component.set('isLoading', false);
       }
@@ -249,7 +286,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
   fetchSubmissions(user) {
     const component = this;
     const classId = component.get('classId');
-    const caContentId = component.get('caContentId');
+    const caContentId = component.get('classActivity.id');
     const isReportView = component.get('isReportView');
     const userId = user.get('id');
     let submissionPromise = isReportView
@@ -290,7 +327,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
         : Ember.A([]);
       let categories = rubric.get('categories');
 
-      rubric.set('studentScore', gradedRubric.get('score'));
+      rubric.set('score', gradedRubric.get('score'));
       rubric.set('comment', gradedRubric.get('overallComment'));
       categories.map((category, index) => {
         let gradedCategory = gradedCategories.objectAt(index);
@@ -332,5 +369,30 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
         }
       });
     }
+  },
+
+  parsePerformanceData(users, performances) {
+    users.forEach(user => {
+      const userId = user.get('id');
+      let userPerformance = performances.findBy('userId', userId);
+      if (userPerformance) {
+        user.set(
+          'performance',
+          userPerformance.get('collectionPerformanceSummary')
+        );
+      }
+    });
+  },
+
+  computedRubricScoreInPrecentage(rubric) {
+    let score = 0;
+    if (rubric) {
+      score = rubric.get('score');
+      if (score && score > 0) {
+        let gradeMaxScore = rubric.get('maxScore');
+        score = Math.floor((score / gradeMaxScore) * 100);
+      }
+    }
+    return score;
   }
 });

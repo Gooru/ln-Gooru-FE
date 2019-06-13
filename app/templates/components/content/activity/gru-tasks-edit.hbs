@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     {{!-- <div class="panel-heading"> --}}
     {{!-- hiding header as it creates extra border --}}
-    <a role="button" data-toggle="collapse" data-parent="#accordion" {{action 'expandTitle' }} id="#head-{{model.id}}" href="#m-{{model.id}}" aria-expanded="true" aria-controls="m-{{model.id}}">
+    <a role="button" data-toggle="collapse" data-parent="#accordion" {{action 'expandTitle' }} id="head-{{elementId}}" href="#m-{{elementId}}" aria-expanded="true" aria-controls="m-{{elementId}}">
         <div class="associated-rubric">
             <div class="image">
                 <i class="rubric-icon"></i>
@@ -11,15 +11,17 @@
                 <span class="submissionCount"> Submissions : {{model.oaTaskSubmissions.length}}</span>
             </div>
             {{!-- {{task.description}} --}}
-            <div class="actions">
-                <button class="btn no-bgd remove-item" {{action 'removeLineItem'}}>
-                    {{gru-icon name="remove_circle"}}
-                </button>
-            </div>
+            {{#if model.id}}
+                <div class="actions">
+                    <button class="btn no-bgd remove-item" {{action 'removeLineItem'}}>
+                        {{gru-icon name="remove_circle"}}
+                    </button>
+                </div>
+            {{/if}}
         </div>
     </a>
     {{!-- </div> --}}
-    <div id="m-{{model.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="#head-{{model.id}}">
+    <div id="m-{{elementId}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="#head-{{elementId}}">
         <div class="panel-body">
             <div class='expandedTitle'>
                 <div class='actions'>
@@ -29,11 +31,12 @@
                 {{!-- <button {{action 'updateContent'}}>Save</button>
         <button>Cancel </button> --}}
                 <span>Title</span>
-                {{validation.gru-input model=model valuePath='title' maxLength=50 didValidate=true}}
+                {{validation.gru-input model=model valuePath='title' maxLength=50 didValidate=didValidate}}
             </div>
             {{!-- {{partial 'content/partials/information-actions'}} --}}
             <span>Description</span>
-            {{gru-rich-text-editor content=model.description model=model valuePath='description'}}
+            {{validation.gru-textarea model=model content=model.description valuePath='description' rows=2 maxLength=500 didValidate=didValidate}}
+            {{!-- {{gru-rich-text-editor content=model.description model=model valuePath='description'}} --}}
             {{!-- {{validation.gru-input model=model valuePath='description' maxLength=50 didValidate=true}} --}}
             {{#if model.id}}
                 {{content.activity.task.gru-submissions submissions=model.oaTaskSubmissions oaId=oaId oaTaskId=model.id }}

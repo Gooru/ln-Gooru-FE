@@ -60,6 +60,7 @@ export default Object.assign(quizzesTranslations, {
   'common.list': 'યાદી',
   'common.first': 'પ્રથમ',
   'common.last': 'છેલ્લા',
+  'common.for': 'for',
   'common.name': 'નામ',
   'common.user': 'વપરાશકર્તા',
   'common.content-name': 'સામગ્રી નામ',

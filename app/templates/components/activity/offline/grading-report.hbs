@@ -52,6 +52,8 @@
         {{#each activityTasks as |task index|}}
           {{player.offline-activity.gru-offline-activity-task-submission
             task=task
+            showSubmissions=true
+            isReadOnly=true
             caContentId=context.dcaContentId
             classId=context.classId
           }}
