@@ -142,6 +142,13 @@ export default Ember.Component.extend({
   init() {
     const component = this;
     component._super(...arguments);
+    component.set('offlineActivityModel', {
+      courseId: null,
+      unitId: null,
+      lessonId: 'new',
+      associateLesson: false,
+      isIndependentOA: true
+    });
     component.loadFilters();
   },
 
