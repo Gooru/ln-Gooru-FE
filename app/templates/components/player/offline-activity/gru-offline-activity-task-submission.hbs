@@ -55,7 +55,7 @@
             <p>{{task.submissionText}}</p>
           {{else}}
             <div class="input-container">
-            {{gru-rich-text-editor isCustomEditor=true content=task.submissionText isAutoFocusDisabled="true"}}
+              {{gru-rich-text-editor isCustomEditor=true content=task.submissionText isAutoFocusDisabled="true"}}
             </div>
           {{/if}}
         </div>
@@ -100,10 +100,11 @@
         <div class="task-url-upload-container">
           {{#each task.urls as |taskUrl index|}}
             <div class="task-url-upload {{if taskUrl.isSubmittedUrl 'preview-url'}}">
-              <span class="url-label">URL {{plus-one index}}: </span>
               {{#if taskUrl.isSubmittedUrl}}
+                <span class="url-label">URL {{plus-one index}}: </span>
                 <a class="url-link" href="{{taskUrl.value}}" target="_blank">{{taskUrl.value}}</a>
-              {{else}}
+              {{else if (not isReadOnly)}}
+                <span class="url-label">URL {{plus-one index}}: </span>
                 <span class="url-value">{{input type="text" value=taskUrl.value}}</span>
               {{/if}}
               {{#unless isReadOnly}}

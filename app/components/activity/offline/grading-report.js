@@ -59,6 +59,14 @@ export default Ember.Component.extend({
   rubric: Ember.computed.alias('content.rubric'),
 
   /**
+   * Maintains the scoring for the activity
+   * @type {Boolean}
+   */
+  isScoring: Ember.computed('content', function() {
+    return !!this.get('content.maxScore');
+  }),
+
+  /**
    * Selected Student to grade
    * @type {Object}
    */
@@ -191,18 +199,19 @@ export default Ember.Component.extend({
    * Calculate grade total score.
    * @return {Number}
    */
-  userGradeScore: Ember.computed('teacherRubric', 'studentRubric', function() {
-    let score = -1;
-    let component = this;
-    let gradeMaxScore = component.get('isTeacher') ? component.get('teacherRubric.maxScore') :
-      component.get('studentRubric.maxScore');
-    let studentScore = component.get('isTeacher') ? component.get('teacherRubric.studentScore') :
-      component.get('studentRubric.studentScore');
-    if (studentScore > 0) {
-      score = Math.floor((studentScore / gradeMaxScore) * 100);
-    }
-    return score;
-  }),
+  userGradeScore: Ember.computed('teacherRubric.studentScore',
+    'studentRubric.studentScore',
+    function() {
+      let score = -1;
+      let component = this;
+      let gradeMaxScore = component.get('content.maxScore');
+      let studentScore = component.get('isTeacher') ? component.get('teacherRubric.studentScore') :
+        component.get('studentRubric.studentScore');
+      if (studentScore > 0) {
+        score = Math.floor((studentScore / gradeMaxScore) * 100);
+      }
+      return score;
+    }),
 
   /**
    * Read student self graded score
@@ -413,8 +422,10 @@ export default Ember.Component.extend({
     let student = component.get('student');
     if (studentGrade) {
       let studentRubric = student.get('studentRubric');
+      let score = studentGrade.get('score') ? studentGrade.get('score') : 0;
       studentRubric.set('comment', studentGrade.get('overallComment'));
-      studentRubric.set('studentScore', studentGrade.get('score'));
+      studentRubric.set('studentScore', score);
+      studentRubric.set('maxScore', studentGrade.get('maxScore'));
       component.parseStudentRubricCategories(studentGrade);
       if (studentGrade.get('maxScore')) {
         studentRubric.set('isSelfGraded', true);
@@ -424,8 +435,10 @@ export default Ember.Component.extend({
     if (teacherGrade) {
       student.set('isGraded', true);
       let teacherRubric = student.get('teacherRubric');
+      let score = teacherGrade.get('score') ? teacherGrade.get('score') : 0;
       teacherRubric.set('comment', teacherGrade.get('overallComment'));
-      teacherRubric.set('studentScore', teacherGrade.get('score'));
+      teacherRubric.set('studentScore', score);
+      teacherRubric.set('maxScore', teacherGrade.get('maxScore'));
       component.parseTeacherRubricCategories(teacherGrade);
     }
   },
@@ -578,6 +591,9 @@ export default Ember.Component.extend({
     if (isTeacher) {
       userGrade.set('graderId', component.get('session.userId'));
     }
+    if (component.get('isScoring')) {
+      userGrade.set('maxScore', component.get('content.maxScore'));
+    }
     let categoriesScore = Ember.A([]);
     userGrade.set('classId', context.get('classId'));
     userGrade.set('dcaContentId', context.get('dcaContentId'));
@@ -663,6 +679,7 @@ export default Ember.Component.extend({
       .get('oaAnaltyicsService')
       .getSubmissionsToGrade(classId, activityId, studentId)
       .then(submission => {
+        component.clearData();
         let studentGrade = submission.get('oaRubrics.studentGrades');
         let teacherGrade = submission.get('oaRubrics.teacherGrades');
         let taskSubmission = submission.get('tasks');
@@ -671,6 +688,13 @@ export default Ember.Component.extend({
         component.set('isLoading', false);
         component.handleCarouselControl();
       });
+  },
+
+  clearData() {
+    let component = this;
+    let teacherRubric = component.get('teacherRubric');
+    teacherRubric.set('comment', null);
+    teacherRubric.set('studentScore', 0);
   },
 
   /**
