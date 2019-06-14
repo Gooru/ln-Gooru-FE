@@ -2658,5 +2658,7 @@ export default Object.assign(quizzesTranslations, {
   'oa.errors.standards-presence': 'Please select a standard.',
   'oa.errors.subformat-presence': 'Please select a format.',
   'oa.task.submissions.frs-label': 'Free text',
-  'oa.task.submissions.label': 'Submissions'
+  'oa.task.submissions.label': 'Submissions',
+  'oa.student-rubric': 'Student rubric',
+  'oa.rubrics.student-associate-label': 'Associate a student rubric'
 });
