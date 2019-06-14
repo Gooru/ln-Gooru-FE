@@ -142,7 +142,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
     toggleOffineActivity() {
       let controller = this;
-      controller.animateOfflineActivityForMobile();
+      let isMobileView = controller.get('isMobileView');
+      if (isMobileView) {
+        controller.animateOfflineActivityForMobile();
+      } else {
+        controller.animateOfflineActivityForDesktop();
+      }
     }
   },
 
@@ -262,6 +267,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       return activities;
     }
   ),
+
+  itemsToGrade: Ember.A([]),
 
   studentId: Ember.computed('session', function() {
     let controller = this;
@@ -460,18 +467,36 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Animate a items to grade section for desktop
    */
   animateItemsToGradeForDesktop() {
-    let offlineActivityEle = Ember.$('.ca-panel .right-panel .offline-activity-container .offline-activity-section');
-    let unScheduleEle = Ember.$('.ca-panel .right-panel .unschedule-container .ca-unscheduled-items');
-    let itemToGradeEle = Ember.$(
-      '.ca-panel .right-panel .item-to-grade-container .ca-grade-content-items'
+    let offlineActivityContainer = Ember.$('.ca-panel .right-panel .offline-container');
+    let itemToGradeContainer = Ember.$(
+      '.ca-panel .right-panel .item-to-grade-container'
     );
-    if (!itemToGradeEle.hasClass('active')) {
-      offlineActivityEle.removeClass('active');
-      unScheduleEle.removeClass('active');
+    if (!itemToGradeContainer.hasClass('active')) {
+      let offlineActivityEle = offlineActivityContainer.children('.offline-activity-contents');
+      let itemToGradeEle = itemToGradeContainer.children('.ca-grade-content-items');
+      offlineActivityContainer.removeClass('active');
       offlineActivityEle.slideUp(400);
-      unScheduleEle.slideUp(400);
       itemToGradeEle.slideDown(400, function() {
-        itemToGradeEle.addClass('active');
+        itemToGradeContainer.addClass('active');
+      });
+    }
+  },
+
+  /**
+   * Animate a items to grade section for desktop
+   */
+  animateOfflineActivityForDesktop() {
+    let offlineActivityContainer = Ember.$('.ca-panel .right-panel .offline-container');
+    let itemToGradeContainer = Ember.$(
+      '.ca-panel .right-panel .item-to-grade-container'
+    );
+    if (!offlineActivityContainer.hasClass('active')) {
+      let offlineActivityEle = offlineActivityContainer.children('.offline-activity-contents');
+      let itemToGradeEle = itemToGradeContainer.children('.ca-grade-content-items');
+      itemToGradeContainer.removeClass('active');
+      itemToGradeEle.slideUp(400);
+      offlineActivityEle.slideDown(400, function() {
+        offlineActivityContainer.addClass('active');
       });
     }
   },
@@ -484,17 +509,17 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       '.ca-panel .right-panel .offline-container'
     );
     let windowHeight = $(window).height();
-    if (offlineActivityEle.hasClass('active')) {
+    if (offlineActivityEle.hasClass('toggle')) {
       offlineActivityEle.animate({
         top: windowHeight - 50
       },
       400,
       function() {
-        offlineActivityEle.removeClass('active');
+        offlineActivityEle.removeClass('toggle');
       }
       );
     } else {
-      offlineActivityEle.addClass('active');
+      offlineActivityEle.addClass('toggle');
       offlineActivityEle.animate({
         top: 100
       },
