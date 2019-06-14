@@ -100,6 +100,15 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return actualPayLoad;
   },
 
+  serializeUpdateActivity: function(activityModel) {
+    const serializer = this;
+    let actualPayLoad = this.serializeActivity(activityModel);
+    actualPayLoad.taxonomy = serializer
+      .get('taxonomySerializer')
+      .serializeTaxonomy(activityModel.get('standards'));
+    return actualPayLoad;
+  },
+
   serializeActivity(activityModel) {
     const thumbnail = cleanFilename(
       activityModel.get('thumbnailUrl'),

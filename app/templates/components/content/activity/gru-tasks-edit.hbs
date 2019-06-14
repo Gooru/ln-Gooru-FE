@@ -8,7 +8,14 @@
             </div>
             <div class="info">
                 <h3>{{model.title}} </h3>
-                <span class="submissionCount"> Submissions : {{model.oaTaskSubmissions.length}}</span>
+                <span class="submissionCount">
+                    {{#if model.id}}
+                        {{t 'oa.task.submissions.frs-label'}}
+                    {{/if}}
+                    {{#if (gt model.oaTaskSubmissions.length 0)}}
+                        , {{t 'oa.task.submissions.label'}} : {{model.oaTaskSubmissions.length}}
+                    {{/if}}
+                </span>
             </div>
             {{!-- {{task.description}} --}}
             {{#if model.id}}

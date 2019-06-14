@@ -156,6 +156,13 @@
         .referenceText {
           display: inline-block;
         }
+
+        .referenceTextLabel {
+          display: inline-block;
+          border: 1px solid $gray-lighter;
+          height: 200px;
+          overflow: auto;
+        }
       }
       .referenceArtifacts {
         display: inline-block;

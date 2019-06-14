@@ -2656,5 +2656,7 @@ export default Object.assign(quizzesTranslations, {
   'oa.errors.activity-title-presence':
     'Please enter the offline activity title.',
   'oa.errors.standards-presence': 'Please select a standard.',
-  'oa.errors.subformat-presence': 'Please select a format.'
+  'oa.errors.subformat-presence': 'Please select a format.',
+  'oa.task.submissions.frs-label': 'Free text',
+  'oa.task.submissions.label': 'Submissions'
 });

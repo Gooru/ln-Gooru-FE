@@ -78,7 +78,10 @@ export default Ember.Component.extend({
      * Reset dirty model with clean model
      */
     cancelChanges() {
-      this.get('cancelTask')();
+      const component = this;
+      component.get('cancelTask')();
+      let componentHead = component.$('.panel-default > a .associated-rubric');
+      componentHead.addClass('hidden');
     },
 
     updateSubmissionCollection() {
@@ -110,29 +113,48 @@ export default Ember.Component.extend({
   // Events
   init() {
     this._super(...arguments);
-    // let taskInstance = TaskModel.create({ oaId: this.get('oaId') });
-    // this.set('model', taskInstance);
   },
 
   didInsertElement() {
     this._super(...arguments);
     const component = this;
-    if (this.get('model') && this.get('model').id) {
-      //ToDo: Is this required
-    } else {
-      let taskInstance = TaskModel.create(
-        Ember.getOwner(this).ownerInjection()
-      );
-
-      taskInstance.set('oaId', this.get('oaId'));
-      if (taskInstance.get('oaTaskSubmissions').length > 0) {
-        let tsinst = Ember.A([]);
-        taskInstance.set('oaTaskSubmissions', tsinst);
-        console.log(`new i with oaId :${this.get('oaId')}`, taskInstance); //eslint-disable-line
-      }
-      this.set('model', taskInstance);
+    if (!(component.get('model') && component.get('model').id)) {
       let componentHead = component.$('.panel-default > a');
       Ember.run(() => componentHead.click()); //show new task form expanded
+    }
+  },
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+    const component = this;
+    component.prepareModelForComponent();
+  },
+
+  /**
+   * Prepares a new Model for new task creation for a new task
+   * For edit flow uses existing model
+   * In both the cases model is enriched with Owner for validation purpose
+   */
+  prepareModelForComponent() {
+    const component = this;
+    if (component.get('model') && component.get('model').id) {
+      let modelOrig = component.get('model'),
+        model = TaskModel.create(
+          Ember.getOwner(component).ownerInjection(),
+          modelOrig
+        );
+      component.set('model', model);
+    } else {
+      let taskInstance = TaskModel.create(
+        Ember.getOwner(component).ownerInjection()
+      );
+      taskInstance.set('oaId', component.get('oaId'));
+      if (taskInstance.get('oaTaskSubmissions').length > 0) {
+        let tsInst = Ember.A([]);
+        taskInstance.set('oaTaskSubmissions', tsInst);
+        console.log(`new i with oaId :${component.get('oaId')}`, taskInstance); //eslint-disable-line
+      }
+      component.set('model', taskInstance);
     }
   },
 
@@ -146,6 +168,7 @@ export default Ember.Component.extend({
   validate() {
     const component = this;
     let model = component.get('model');
+    // model = TaskModel.create(Ember.getOwner(this).ownerInjection(), modelo);
     var didValidate = new Ember.RSVP.Promise(function(resolve) {
       if (model) {
         model
