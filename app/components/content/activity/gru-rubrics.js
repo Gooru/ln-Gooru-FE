@@ -63,27 +63,10 @@ export default Ember.Component.extend(ModalMixin, {
             rubricsFor: rubricsFor,
             callback: {
               success: function(oaRubric) {
-                if (
-                  component.get('isTeacherRubrics') &&
-                  component.get('teacherRubrics')
-                ) {
-                  component
-                    .get('teacherRubrics')
-                    .set('title', oaRubric.SourceRubric.title);
-                  component
-                    .get('teacherRubrics')
-                    .set('id', oaRubric.NewRubricId);
+                if (rubricsFor === 'teacher') {
+                  component.teacherSuccessRubricCB(oaRubric);
                 } else {
-                  let teacherRubric = Rubric.create(
-                    Ember.getOwner(component).ownerInjection(),
-                    {
-                      title: oaRubric.SourceRubric.title,
-                      id: oaRubric.NewRubricId,
-                      grader: 'Teacher'
-                    }
-                  );
-                  let rubric = Ember.A([teacherRubric]);
-                  component.set('tempModel.rubric', rubric);
+                  component.studentSuccessRubricCB(oaRubric);
                 }
               }
             }
@@ -118,6 +101,46 @@ export default Ember.Component.extend(ModalMixin, {
       });
     }
   },
+
+  teacherSuccessRubricCB(oaRubric) {
+    const component = this;
+    if (component.get('isTeacherRubrics') && component.get('teacherRubrics')) {
+      component.get('teacherRubrics').set('title', oaRubric.SourceRubric.title);
+      component.get('teacherRubrics').set('id', oaRubric.NewRubricId);
+    } else {
+      let teacherRubric = Rubric.create(
+        Ember.getOwner(component).ownerInjection(),
+        {
+          title: oaRubric.SourceRubric.title,
+          id: oaRubric.NewRubricId,
+          grader: 'Teacher'
+        }
+      );
+      let rubric = Ember.A([teacherRubric]);
+      component.set('tempModel.rubric', rubric);
+      //Over writing as there cannot be student rubric before a teacher rubric
+    }
+  },
+
+  studentSuccessRubricCB(oaRubric) {
+    const component = this;
+    if (component.get('isStudentRubrics') && component.get('studentRubrics')) {
+      component.get('studentRubrics').set('title', oaRubric.SourceRubric.title);
+      component.get('studentRubrics').set('id', oaRubric.NewRubricId);
+    } else {
+      let studentRubric = Rubric.create(
+        Ember.getOwner(component).ownerInjection(),
+        {
+          title: oaRubric.SourceRubric.title,
+          id: oaRubric.NewRubricId,
+          grader: 'Self'
+        }
+      );
+      let teacherRubric = component.get('teacherRubrics');
+      let rubric = Ember.A([teacherRubric, studentRubric]);
+      component.set('tempModel.rubric', rubric);
+    }
+  },
   isTeacherRubrics: function() {
     if (
       this.get('tempModel.rubric') &&
@@ -140,6 +163,26 @@ export default Ember.Component.extend(ModalMixin, {
         'grader',
         'Teacher'
       );
+      return teachRubrics;
+    }
+  }.property('tempModel.rubric'),
+
+  isStudentRubrics: function() {
+    if (
+      this.get('tempModel.rubric') &&
+      this.get('tempModel.rubric').findBy('grader', 'Self')
+    ) {
+      let teachRubrics = this.get('tempModel.rubric').findBy('grader', 'Self');
+      return teachRubrics;
+    }
+  }.property('tempModel.rubric'),
+
+  studentRubrics: function() {
+    if (
+      this.get('tempModel.rubric') &&
+      this.get('tempModel.rubric').findBy('grader', 'Self')
+    ) {
+      let teachRubrics = this.get('tempModel.rubric').findBy('grader', 'Self');
       return teachRubrics;
     }
   }.property('tempModel.rubric'),

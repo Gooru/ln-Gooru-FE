@@ -26,8 +26,7 @@
                             key-press="inputTyping"
                             
                             }}
-                            {{!--                             
-                            {{validation.gru-input options=maximumOptions search="true" optionSelected=tempModel.maxScore onOptionSelect="onMaxScoreChange"}}
+                            {{!--{{validation.gru-input options=maximumOptions search="true" optionSelected=tempModel.maxScore onOptionSelect="onMaxScoreChange"}}
                              --}}
                             <span class="title">{{t 'content.questions.edit.builder.feedback-grading.maximum-points'}}</span>
                         </div>
@@ -70,6 +69,49 @@
                         </div>
                     {{/if}}
                 {{/if}}
+                <div class='student-section'>
+                    {{!-- Show student rubrics only when teacher rubrics is selected --}}
+                    {{#if (and isTeacherRubrics teacherRubrics.title)}}
+                        {{!-- {{#if isStudentRubrics}} --}}
+                        {{!-- {{#if (and isStudentRubrics (not studentRubrics.title))}} --}}
+                        {{!-- {{/if}} --}}
+                        {{#if studentRubrics.title}}
+                            <span class="head-label"> {{t 'oa.student-rubric'}} </span>
+                            <div class="associated-rubric">
+                                <div class="image">
+                                    {{#if studentRubrics.thumbnail}}
+                                        <img class="img-responsive" src="{{studentRubrics.thumbnail}}" />
+                                    {{else}}
+                                        <i class="rubric-icon"></i>
+                                    {{/if}}
+                                </div>
+                                <div class="info">
+                                    <h3>{{studentRubrics.title}}</h3>
+                                </div>
+                                <div class="actions">
+                                    <button {{action 'showAddRubricModal' 'student'}} class="btn no-bgd edit-item">
+                                        {{gru-icon name="edit"}}
+                                    </button>
+                                </div>
+                            </div>
+                        {{else}}
+                            <span> {{t 'oa.rubrics.student-associate-label'}} </span>
+                            <div class="add-rubric-container">
+                                <button class="btn btn-success add-prefix add-rubric" {{action 'showAddRubricModal' 'student'}}>
+                                    {{t 'content.questions.edit.builder.feedback-grading.from-existing-rubric'}}
+                                </button>
+                            </div>
+                            <div class="validation">
+                                {{#if rubricError}}
+                                    <span class="error">
+                                        {{t 'content.questions.edit.builder.feedback-grading.rubric-error'}}
+                                    </span>
+                                {{/if}}
+                            </div>
+                        {{/if}}
+                        {{!-- {{/if}} --}}
+                    {{/if}}
+                </div>
             </div>
         </div>
     </div>
