@@ -18,7 +18,7 @@
           left: 0;
           right: 0;
 
-          &.active {
+          &.toggle {
             height: 100%;
             width: 100%;
             background-color: #fff;
@@ -27,10 +27,32 @@
             .offline-activity-contents {
               display: block;
             }
+
+            .offline-activity-items-header {
+              .icons {
+                .arrow_drop_up {
+                  display: none !important;
+                }
+
+                .arrow_drop_down {
+                  display: block !important;
+                }
+              }
+            }
           }
 
           .offline-activity-items-header {
             pointer-events: all;
+
+            .icons {
+              .arrow_drop_up {
+                display: block !important;
+              }
+
+              .arrow_drop_down {
+                display: none !important;
+              }
+            }
           }
 
           .offline-activity-contents {
@@ -46,6 +68,31 @@
                 }
               }
             }
+          }
+        }
+
+        .item-to-grade-container {
+          height: auto;
+          width: 100%;
+          z-index: 1;
+          background: none;
+          padding: 0;
+          position: absolute;
+          top: calc(100% - 100px);
+          right: 0;
+          left: 0;
+
+          &.active {
+            height: 100%;
+            width: 100%;
+            background-color: #fff;
+            z-index: 10;
+          }
+
+          .ca-grade-items-header {
+            box-shadow: none;
+            border: 0;
+            border-bottom: 1px solid #ccc;
           }
         }
       }
