@@ -127,6 +127,26 @@
           </div>
         </div>
       </div>
+      <div class="item-to-grade-container">
+        <div class="ca-grade-items-header" {{action 'toggleItemsToGrade'}}>
+          <span>{{t 'class.analytics.performance.grade-items'}}</span>
+          <div class="icons">
+            {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+            {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+          </div>
+        </div>
+        <div class="ca-grade-content-items">
+          {{#if itemsToGrade}}
+            {{gru-grade-items
+              openReportGrade='onOpenReportGrade'
+              gradeableItems=itemsToGrade}}
+          {{else}}
+            <div class="no-rubric-content">
+              {{t 'common.all-caught-up'}}
+            </div>
+          {{/if}}
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -157,5 +177,15 @@
     isReportView=true
     classId=classId
     users=studentReportContextData.users
+  }}
+{{/if}}
+
+{{#if showOAGrade}}
+  {{activity.offline.grading-report
+    showPullUp=showOAGrade
+    context=itemToGradeContextData
+    itemsToGrade=itemsToGrade
+    isTeacher=false
+    studentId=studentId
   }}
 {{/if}}

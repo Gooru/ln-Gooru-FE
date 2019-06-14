@@ -70,11 +70,11 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Submit student submission by teacher
+   * Submit student submission by teacher | student
    * @param {Object} Grade
    * @returns {Promise}
    */
-  submitTeacherGrade(data) {
+  submitOAGrade(data) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/rubrics/grades/collections`;
