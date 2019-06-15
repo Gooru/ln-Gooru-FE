@@ -80,8 +80,8 @@ export default Ember.Component.extend({
     cancelChanges() {
       const component = this;
       component.get('cancelTask')();
-      let componentHead = component.$('.panel-default > a .associated-rubric');
-      componentHead.addClass('hidden');
+      component.collapseAll();
+      component.showAllHeaders();
     },
 
     updateSubmissionCollection() {
@@ -97,12 +97,18 @@ export default Ember.Component.extend({
     }
   },
 
+  /**
+   * Hides all expanded collapsible sections
+   */
   collapseAll() {
     $(
       '#accordion > .gru-tasks-edit > .panel-default > .panel-collapse.collapse.in'
     ).removeClass('in');
   },
 
+  /**
+   * Shows all the header pans associated with collapsible panels
+   */
   showAllHeaders() {
     $(
       '#accordion > .gru-tasks-edit > .panel-default > a   .associated-rubric'

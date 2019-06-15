@@ -20,7 +20,7 @@
             {{!-- {{task.description}} --}}
             {{#if model.id}}
                 <div class="actions">
-                    <button class="btn no-bgd remove-item" {{action 'removeLineItem'}}>
+                    <button class="btn no-bgd remove-item" {{action 'removeLineItem' preventDefault=false bubbles=false}}>
                         {{gru-icon name="remove_circle"}}
                     </button>
                 </div>
