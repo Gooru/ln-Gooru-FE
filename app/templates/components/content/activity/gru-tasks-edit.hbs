@@ -37,11 +37,11 @@
                 </div>
                 {{!-- <button {{action 'updateContent'}}>Save</button>
         <button>Cancel </button> --}}
-                <span>Title</span>
+                <span>{{t 'common.title'}} </span>
                 {{validation.gru-input model=model valuePath='title' maxLength=50 didValidate=didValidate}}
             </div>
             {{!-- {{partial 'content/partials/information-actions'}} --}}
-            <span>Description</span>
+            <span>{{t 'common.description' }}</span>
             {{validation.gru-textarea model=model content=model.description valuePath='description' rows=2 maxLength=500 didValidate=didValidate}}
             {{!-- {{gru-rich-text-editor content=model.description model=model valuePath='description'}} --}}
             {{!-- {{validation.gru-input model=model valuePath='description' maxLength=50 didValidate=true}} --}}
