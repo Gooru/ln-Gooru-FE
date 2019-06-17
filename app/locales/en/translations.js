@@ -1503,6 +1503,7 @@ export default Object.assign(quizzesTranslations, {
   'gru-share-pop-over.share-assessment': 'Share your assessment with link',
   'gru-share-pop-over.share-rubric': 'Share your rubric with link',
   'gru-share-pop-over.share-collection': 'Share your collection with link',
+  'gru-share-pop-over.share-OA': 'Offline Activity',
   'gru-category-panel.teacher.title': 'For Teachers',
   'gru-category-panel.teacher.body':
     'Discover standards-aligned content, customize content, and track student progress through data analytics.',

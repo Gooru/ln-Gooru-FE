@@ -1,14 +1,20 @@
 <div class="actions">
   <button class="btn btn-default btn-icon delete" title="{{t 'common.delete'}}" {{action 'deleteItem' collection}}>{{gru-icon name="delete"}}</button>
   <button class="btn btn-default btn-icon out-of-scope" title="{{t 'common.add-collaborator'}}">{{gru-icon name="person_add"}}</button>
-  {{#if isAssessment}}
-    {{#gru-share-pop-over tagName="button" type="assessment"}}
+  {{#if (and (and tempCollection  tempCollection.format ) (eq tempCollection.format "offline-activity")) }}
+    {{!-- {{#gru-share-pop-over tagName="button" type="OA"}}
       {{gru-icon name="insert_link"}}
-    {{/gru-share-pop-over}}
+    {{/gru-share-pop-over}} --}}
   {{else}}
-    {{#gru-share-pop-over tagName="button" type="collection"}}
-      {{gru-icon name="insert_link"}}
-    {{/gru-share-pop-over}}
+    {{#if isAssessment}}
+      {{#gru-share-pop-over tagName="button" type="assessment"}}
+        {{gru-icon name="insert_link"}}
+      {{/gru-share-pop-over}}
+    {{else}}
+      {{#gru-share-pop-over tagName="button" type="collection"}}
+        {{gru-icon name="insert_link"}}
+      {{/gru-share-pop-over}}
+    {{/if}}
   {{/if}}
   <button class="btn btn-default hidden">{{t "content.collections.edit.assign-to-course"}}</button>
   {{#if (and isShowOfflineActivityPreview tempCollection.id)}}
