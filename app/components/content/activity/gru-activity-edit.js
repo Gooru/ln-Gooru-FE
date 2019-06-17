@@ -210,6 +210,11 @@ export default CollectionEdit.extend({
                       let sourceCollection = component.get(
                         'activityCollection'
                       );
+
+                      newActivity.set(
+                        'subFormat',
+                        sourceCollection.get('subFormat')
+                      ); // Added back the removed subFormat
                       component.refreshSourceWithChanges(
                         newActivity,
                         sourceCollection
