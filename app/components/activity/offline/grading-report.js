@@ -59,14 +59,6 @@ export default Ember.Component.extend({
   rubric: Ember.computed.alias('content.rubric'),
 
   /**
-   * Maintains the scoring for the activity
-   * @type {Boolean}
-   */
-  isScoring: Ember.computed('content', function() {
-    return !!this.get('content.maxScore');
-  }),
-
-  /**
    * Selected Student to grade
    * @type {Object}
    */
@@ -229,6 +221,16 @@ export default Ember.Component.extend({
       }
     }
     return score;
+  }),
+
+  /**
+   * Maintains the state OA has scoring or not for teacher | student
+   * @return {Number}
+   */
+  isScoring: Ember.computed('teacherRubric', 'studentRubric', function() {
+    let component = this;
+    return component.get('isTeacher') ?
+      component.get('teacherRubric.scoring') : component.get('studentRubric.scoring');
   }),
 
   // -------------------------------------------------------------------------
@@ -663,7 +665,8 @@ export default Ember.Component.extend({
       classId: component.get('context.classId'),
       collectionId: component.get('context.dcaContentId'),
       createdDate: new Date(),
-      studentScore: 0
+      studentScore: 0,
+      scoring: !rubric
     });
   },
 
