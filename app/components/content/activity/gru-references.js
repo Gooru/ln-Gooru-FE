@@ -67,8 +67,8 @@ export default Ember.Component.extend({
 
     cancelEdit: function() {
       this.set('isEditing', false);
-      let srcModel = this.get('activityModel').copy();
-      this.set('model', srcModel);
+      let srcModelValue = this.get('activityModel.reference');
+      this.set('model.reference', srcModelValue);
     },
 
     editContent() {
@@ -85,8 +85,8 @@ export default Ember.Component.extend({
 
     cancelExemplarEdit: function() {
       this.set('isExemplarEditing', false);
-      let srcModel = this.get('activityModel').copy();
-      this.set('model', srcModel);
+      let srcModelValue = this.get('activityModel.exemplar');
+      this.set('model.exemplar', srcModelValue);
     },
 
     editExemplarContent() {

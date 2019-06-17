@@ -54,6 +54,7 @@ export default Ember.Service.extend({
           function(responseData, textStatus, request) {
             let activityId = request.getResponseHeader('location');
             activityData.set('id', activityId);
+            activityData.set('maxScore', 1);
             resolve(activityData);
           },
           function(error) {
