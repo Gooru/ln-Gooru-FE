@@ -59,6 +59,14 @@ export default Ember.Component.extend({
   rubric: Ember.computed.alias('content.rubric'),
 
   /**
+   * Maintains the scoring for the activity
+   * @type {Boolean}
+   */
+  isScoring: Ember.computed('content', function() {
+    return !!this.get('content.maxScore');
+  }),
+
+  /**
    * Selected Student to grade
    * @type {Object}
    */
@@ -191,18 +199,19 @@ export default Ember.Component.extend({
    * Calculate grade total score.
    * @return {Number}
    */
-  userGradeScore: Ember.computed('teacherRubric', 'studentRubric', function() {
-    let score = -1;
-    let component = this;
-    let gradeMaxScore = component.get('isTeacher') ? component.get('teacherRubric.maxScore') :
-      component.get('studentRubric.maxScore');
-    let studentScore = component.get('isTeacher') ? component.get('teacherRubric.studentScore') :
-      component.get('studentRubric.studentScore');
-    if (studentScore > 0) {
-      score = Math.floor((studentScore / gradeMaxScore) * 100);
-    }
-    return score;
-  }),
+  userGradeScore: Ember.computed('teacherRubric.studentScore',
+    'studentRubric.studentScore',
+    function() {
+      let score = -1;
+      let component = this;
+      let gradeMaxScore = component.get('content.maxScore');
+      let studentScore = component.get('isTeacher') ? component.get('teacherRubric.studentScore') :
+        component.get('studentRubric.studentScore');
+      if (studentScore > 0) {
+        score = Math.floor((studentScore / gradeMaxScore) * 100);
+      }
+      return score;
+    }),
 
   /**
    * Read student self graded score
@@ -413,8 +422,7 @@ export default Ember.Component.extend({
     let student = component.get('student');
     if (studentGrade) {
       let studentRubric = student.get('studentRubric');
-      studentRubric.set('comment', studentGrade.get('overallComment'));
-      studentRubric.set('studentScore', studentGrade.get('score'));
+      component.setGrade(studentGrade, studentRubric);
       component.parseStudentRubricCategories(studentGrade);
       if (studentGrade.get('maxScore')) {
         studentRubric.set('isSelfGraded', true);
@@ -424,10 +432,16 @@ export default Ember.Component.extend({
     if (teacherGrade) {
       student.set('isGraded', true);
       let teacherRubric = student.get('teacherRubric');
-      teacherRubric.set('comment', teacherGrade.get('overallComment'));
-      teacherRubric.set('studentScore', teacherGrade.get('score'));
+      component.setGrade(teacherGrade, teacherRubric);
       component.parseTeacherRubricCategories(teacherGrade);
     }
+  },
+
+  setGrade(gradeData, rubric) {
+    let score = gradeData.get('score') ? gradeData.get('score') : 0;
+    rubric.set('comment', gradeData.get('overallComment'));
+    rubric.set('studentScore', score);
+    rubric.set('maxScore', gradeData.get('maxScore'));
   },
 
 
@@ -577,6 +591,9 @@ export default Ember.Component.extend({
     let currentStudent = component.get('student');
     if (isTeacher) {
       userGrade.set('graderId', component.get('session.userId'));
+    }
+    if (component.get('isScoring')) {
+      userGrade.set('maxScore', component.get('content.maxScore'));
     }
     let categoriesScore = Ember.A([]);
     userGrade.set('classId', context.get('classId'));
