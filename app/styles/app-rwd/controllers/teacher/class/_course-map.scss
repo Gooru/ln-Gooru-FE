@@ -9,30 +9,7 @@
   .course-map-container {
     .course-map-body {
       display: grid;
-      grid-template-rows: 60px auto;
-
-      .students {
-        .header {
-          display: none;
-        }
-
-        .students-list {
-          display: flex;
-          width: 95%;
-          min-width: unset;
-          max-width: unset;
-          max-height: unset;
-          overflow-x: auto;
-
-          .list {
-            .student-name {
-              white-space: nowrap;
-              display: block;
-              margin-left: 10px;
-            }
-          }
-        }
-      }
+      grid-template-rows: auto;
 
       .render-course-map {
         width: 100%;
@@ -698,6 +675,12 @@
             }
           }
         }
+      }
+
+      .items-to-grade {
+        grid-row: 3;
+        grid-column: 1;
+        width: 100%;
       }
     }
   }

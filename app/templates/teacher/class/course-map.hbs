@@ -20,34 +20,44 @@
       </div>
     </div>
     <div class="course-map-container">
-      {{#if isStudentCourseMap}}
-        <div class="active-student">
-          <div class="student-thumbnail pull-left" style="background-image: url({{activeStudent.avatarUrl}})"></div>
-          <div class="student-name pull-left">{{activeStudent.fullName}}</div>
-          <div class="student-close pull-right" {{action "onSelectAll"}}>
-            {{gru-icon name="clear"}}
-          </div>
-          <div class="performance-container pull-right {{unless (gte studentClassScore 0) 'not-started'}}" {{action "onOpenStudentCourseReport" activeStudent}}>
-            {{charts/gru-performance-chart performanceSummary=activeStudent.performance}}
-          </div>
-        </div>
-      {{/if}}
+      
       <div class="course-map-body">
-        {{#if ( or (and class.milestoneViewApplicable  isMilestoneView) (not class.milestoneViewApplicable  isMilestoneView))}}
-          <div class="students">
-            <div class="header">
-              {{t 'class.info.students'}}
-            </div>
-            <div class="students-list">
-              {{#each sortedStudents as |student index|}}
-                <div class="student list student-{{index}}" {{action "onSelectStudent" student index}}>
-                  <div class="thumbnail" data-toggle="tooltip" style="background-image: url({{student.avatarUrl}})">
+        {{#if sortedStudents.length}}
+          {{#if ( or (and class.milestoneViewApplicable  isMilestoneView) (not class.milestoneViewApplicable  isMilestoneView))}}
+            <div class="students-dropdown-list-container">
+              <div class="student-list-toggle-container {{if isStudentCourseMap 'student-selected'}}">
+                {{#if isStudentCourseMap}}
+                  <div class="deselect-student">
+                    {{gru-icon name="clear"}}
                   </div>
-                  <div class="student-name">{{student.fullName}}</div>
+                  <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})">
+                  </div>
+                  <div class="student-name">
+                    {{activeStudent.fullName}}
+                  </div>
+                  <div class="student-performance {{unless (gte studentClassScore 0) 'not-started'}}" {{action "onOpenStudentCourseReport" activeStudent}}>
+                    {{charts/gru-performance-chart performanceSummary=activeStudent.performance}}
+                  </div>
+                {{else}}
+                  <div class="students-label">
+                    {{t 'class.info.students'}}
+                  </div>
+                {{/if}}
+                <div class="toggle-action" {{action "onToggleStudentList"}}>
+                  {{gru-icon name=(if isStudentListExpanded 'keyboard_arrow_up' 'keyboard_arrow_down')}}
                 </div>
-              {{/each}}
+              </div>
+              <div class="student-list-container">
+                {{#each sortedStudents as |student index|}}
+                  <div class="student-info-container student-{{index}} {{if (eq activeStudent.id student.id) 'selected-student'}}" {{action "onSelectStudent" student index}}>
+                    <div class="student-thumbnail" data-toggle="tooltip" style="background-image: url({{student.avatarUrl}})">
+                    </div>
+                    <div class="student-name">{{student.fullName}}</div>
+                  </div>
+                {{/each}}
+              </div>
             </div>
-          </div>
+          {{/if}}
         {{/if}}
         <div class="render-course-map {{if (and (not isStudentCourseMap) questionItems) 'sm-course-map'}}">
           {{#if (and class.milestoneViewApplicable hasMilestoneViewReady (not isStudentCourseMap))}}
