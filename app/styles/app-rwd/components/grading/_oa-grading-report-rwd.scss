@@ -1,0 +1,20 @@
+.oa-grading-report {
+  @media only screen and (max-width: $screen-767) {
+    width: 100%;
+
+    .oa-grade-container {
+      width: 100%;
+
+      .oa-grading-section {
+        grid-template-columns: unset;
+        overflow: auto;
+
+        .left-panel {
+          .tasks-section {
+            max-height: none;
+          }
+        }
+      }
+    }
+  }
+}

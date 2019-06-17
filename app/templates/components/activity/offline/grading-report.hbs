@@ -65,7 +65,7 @@
     <div class="right-panel">
       <div class="oa-grade-right-panel-header">
         <div class="oa-grade-info">
-          {{#if (or teacherRubric.scoring studentRubric.scoring)}}
+          {{#if isScoring}}
             <span class="oa-grade-info-title">{{t 'grading-player.grading'}}</span>
           {{else}}
             <span class="oa-grade-info-title">
@@ -77,7 +77,7 @@
             <span class="oa-grade-info-desc">{{t 'common.answer-this-activity'}}</span>
           {{/if}}
         </div>
-        {{#if (or teacherRubric.scoring studentRubric.scoring)}}
+        {{#if isScoring}}
           <div class="oa-grade-score" style={{safe-html (concat "background-color:" (grade-color userGradeScore))}}>
             {{#if isTeacher}}
               <span>{{teacherRubric.studentScore}}</span>
@@ -85,7 +85,7 @@
               <span>{{studentRubric.studentScore}}</span>
             {{/if}}
             <hr />
-            <span>{{rubric.maxScore}}</span>
+            <span>{{content.maxScore}}</span>
           </div>
         {{else if (gt totalRubricPoints 0)}}
           <div class="oa-grade-score" style={{safe-html (concat "background-color:" (grade-color userRubricScore))}}>
@@ -106,10 +106,10 @@
               </div>
             </div>
             <div class="student-grading-panel panel-collapse collapse {{if (not isTeacher) 'in'}}" id="student">
-              {{#if studentRubric.scoring}}
-                <div class="oa-grade-rubric-grading disable-event">
-                  {{validation.gru-input-number model=studentSelfGradeScore  valuePath='studentScore' min=0 max=student.rubric.maxScore step=studentRubric.increment }}
-                  <span class="score">{{student.rubric.maxScore}}</span>
+              {{#if isScoring}}
+                <div class="oa-grade-rubric-grading {{if isTeacher 'disable-event'}}">
+                  {{validation.gru-input-number model=(if studentRubric.studentScore studentRubric studentRubric)  valuePath='studentScore' min=0 max=content.maxScore }}
+                  <span class="score">{{content.maxScore}}</span>
                 </div>
               {{else}}
                 {{rubric.rubric-category-grades
@@ -118,7 +118,7 @@
               {{/if}}
               <div class="oa-grade-general-comment-container {{if isTeacher 'disable-event'}}">
                 {{validation.gru-textarea
-                  model=studentRubric
+                  model=(if studentRubric.comment studentRubric studentRubric)
                   valuePath='comment'
                   maxLength=500
                   rows=1
@@ -136,17 +136,17 @@
               </div>
             </div>
             <div class="teacher-grading-panel panel-collapse collapse {{if isTeacher 'in'}}" id="teacher">
-              {{#if teacherRubric.scoring}}
-                <div class="oa-grade-rubric-grading">
-                  {{validation.gru-input-number model=teacherRubric  valuePath='studentScore' min=0 max=teacherRubric.maxScore step=teacherRubric.increment }}
-                  <span class="score">{{teacherRubric.maxScore}}</span>
+              {{#if isScoring}}
+                <div class="oa-grade-rubric-grading {{if (not isTeacher) 'disable-event'}}">
+                  {{validation.gru-input-number model=(if teacherRubric.studentScore teacherRubric teacherRubric)  valuePath='studentScore' min=0 max=content.maxScore}}
+                  <span class="score">{{content.maxScore}}</span>
                 </div>
               {{else}}
                 {{rubric.rubric-category-grades isReadOnly=(if isTeacher false true) categories=teacherRubricCategories}}
               {{/if}}
               <div class="oa-grade-general-comment-container {{if (not isTeacher) 'disable-event'}}">
                 {{validation.gru-textarea
-                  model=teacherRubric
+                  model=(if teacherRubric.comment teacherRubric teacherRubric)
                   valuePath='comment'
                   maxLength=500
                   rows=1

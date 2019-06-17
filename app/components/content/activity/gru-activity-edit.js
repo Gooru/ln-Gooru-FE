@@ -73,10 +73,26 @@ export default CollectionEdit.extend({
     'gru-assessment-edit',
     'gru-activity-edit'
   ],
+
+  /**
+   * controls show hide the report popup
+   */
+  isShowOfflineActivityPreviewPopup: false,
+
+  /**
+   * Controls show/hide of the preview button
+   */
+  isShowOfflineActivityPreview: true,
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
+    /**
+     * Action to show hide the report popup
+     */
+    showOAReportPopup() {
+      this.set('isShowOfflineActivityPreviewPopup', true);
+    },
     cancelEdit() {
       this._super(...arguments);
       const component = this;

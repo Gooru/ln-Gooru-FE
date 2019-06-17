@@ -9,7 +9,7 @@
   #information {
     .two-col-info {
       display: flex;
-      max-width: 1000px;
+      width: 100%;
 
       @media (max-width: $screen-sm) {
         flex-direction: column;
@@ -17,7 +17,7 @@
 
       .title,
       .learning-objectives {
-        width: 500px;
+        flex: 1;
 
         > label {
           display: flex !important;
