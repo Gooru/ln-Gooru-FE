@@ -1503,6 +1503,7 @@ export default Object.assign(quizzesTranslations, {
   'gru-share-pop-over.share-assessment': 'Share your assessment with link',
   'gru-share-pop-over.share-rubric': 'Share your rubric with link',
   'gru-share-pop-over.share-collection': 'Share your collection with link',
+  'gru-share-pop-over.share-OA': 'Offline Activity',
   'gru-category-panel.teacher.title': 'For Teachers',
   'gru-category-panel.teacher.body':
     'Discover standards-aligned content, customize content, and track student progress through data analytics.',
@@ -2656,5 +2657,9 @@ export default Object.assign(quizzesTranslations, {
   'oa.errors.activity-title-presence':
     'Please enter the offline activity title.',
   'oa.errors.standards-presence': 'Please select a standard.',
-  'oa.errors.subformat-presence': 'Please select a format.'
+  'oa.errors.subformat-presence': 'Please select a format.',
+  'oa.task.submissions.frs-label': 'Free text',
+  'oa.task.submissions.label': 'Submissions',
+  'oa.student-rubric': 'Student rubric',
+  'oa.rubrics.student-associate-label': 'Associate a student rubric'
 });

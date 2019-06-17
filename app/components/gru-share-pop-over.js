@@ -58,16 +58,14 @@ export default Ember.Component.extend({
       tooltipText = this.get('i18n').t('gru-share-pop-over.ios-tooltip').string;
     }
     return `<div class="gru-share-pop-over-content">
-    <p>${this.get('i18n').t(
-    `gru-share-pop-over.share-${this.get('type')}`
-  ).string}</p>
+    <p>${
+  this.get('i18n').t(`gru-share-pop-over.share-${this.get('type')}`).string
+}</p>
     <div class="share-actions">
       <input id="${this.get(
     'type'
   )}-popover-input" value="${this.get('shareUrl')}" readonly type="text">
-      <input type="button" data-toggle="tooltip" title="${tooltipText}" data-clipboard-target="#${this.get(
-  'type'
-)}-popover-input" class="btn btn-primary copy-btn" value="${this.get('i18n').t('gru-share-pop-over.copy').string}">
+      <input type="button" data-toggle="tooltip" title="${tooltipText}" data-clipboard-target="#${this.get('type')}-popover-input" class="btn btn-primary copy-btn" value="${this.get('i18n').t('gru-share-pop-over.copy').string}">
     </div>
    </div>`;
   }),
@@ -84,23 +82,33 @@ export default Ember.Component.extend({
     let rubricId = params ? params.rubricId : this.get('contentId');
     switch (type) {
     case 'course':
-      return `${window
-        .location.protocol}//${window.location.host}/content/courses/play/${courseId}`;
+      return `${
+        window.location.protocol
+      }//${window.location.host}/content/courses/play/${courseId}`;
     case 'assessment':
-      return `${window
-        .location.protocol}//${window.location.host}/player/${assessmentId}?type=${type}`;
+      return `${
+        window.location.protocol
+      }//${window.location.host}/player/${assessmentId}?type=${type}`;
     case 'collection':
-      return `${window
-        .location.protocol}//${window.location.host}/player/${collectionId}?type=${type}`;
+      return `${
+        window.location.protocol
+      }//${window.location.host}/player/${collectionId}?type=${type}`;
     case 'resource':
-      return `${window
-        .location.protocol}//${window.location.host}/content/resources/play/${resourceId}`;
+      return `${
+        window.location.protocol
+      }//${window.location.host}/content/resources/play/${resourceId}`;
     case 'question':
-      return `${window
-        .location.protocol}//${window.location.host}/content/questions/play/${questionId}`;
+      return `${
+        window.location.protocol
+      }//${window.location.host}/content/questions/play/${questionId}`;
     case 'rubric':
-      return `${window
-        .location.protocol}//${window.location.host}/content/rubric/preview/${rubricId}`;
+      return `${
+        window.location.protocol
+      }//${window.location.host}/content/rubric/preview/${rubricId}`;
+    case 'OA':
+      return `${
+        window.location.protocol
+      }//${window.location.host}/content/activity/edit/${assessmentId}?type=${type}`;
     default:
       break;
     }

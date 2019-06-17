@@ -187,7 +187,7 @@
                     {{#if isTeacher}}
                       <div class="controls pull-right">
                         {{#if enableCollectionLiveLearning}}
-                          {{#if (or item.isAssessment item.isCollection item.isOfflineActivity) }}
+                          {{#unless item.isExternalCollection}}
                             {{!--  {{#if item.isAssessment }} --}}
                             <div class="go-live-cnt">
                               {{#if item.visible}}
@@ -200,7 +200,7 @@
                             <span class="switch" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.assign"}}">
                               {{gru-switch switchOptions=switchOptions onOptionSwitch='changeVisibility' isChecked=item.visible item=item}}
                             </span>
-                          {{/if}}
+                          {{/unless}}
                         {{else}}
                           {{#if item.isAssessment }}
                             <div class="go-live-cnt">
