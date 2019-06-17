@@ -106,7 +106,7 @@
               </div>
             </div>
             <div class="student-grading-panel panel-collapse collapse {{if (not isTeacher) 'in'}}" id="student">
-              {{#if studentRubric.scoring}}
+              {{#if (and studentRubric.scoring content.maxScore)}}
                 <div class="oa-grade-rubric-grading {{if isTeacher 'disable-event'}}">
                   {{validation.gru-input-number model=(if studentRubric.studentScore studentRubric studentRubric)  valuePath='studentScore' min=0 max=content.maxScore }}
                   <span class="score">{{content.maxScore}}</span>
@@ -136,7 +136,7 @@
               </div>
             </div>
             <div class="teacher-grading-panel panel-collapse collapse {{if isTeacher 'in'}}" id="teacher">
-              {{#if teacherRubric.scoring}}
+              {{#if (and teacherRubric.scoring content.maxScore)}}
                 <div class="oa-grade-rubric-grading {{if (not isTeacher) 'disable-event'}}">
                   {{validation.gru-input-number model=(if teacherRubric.studentScore teacherRubric teacherRubric)  valuePath='studentScore' min=0 max=content.maxScore}}
                   <span class="score">{{content.maxScore}}</span>

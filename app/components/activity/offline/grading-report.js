@@ -239,7 +239,10 @@ export default Ember.Component.extend({
   isScoring: Ember.computed('teacherRubric', 'studentRubric', function() {
     let component = this;
     return component.get('isTeacher') ?
-      component.get('teacherRubric.scoring') : component.get('studentRubric.scoring');
+      (component.get('teacherRubric.scoring') &&
+        component.get('content.maxScore')) :
+      (component.get('studentRubric.scoring') &&
+        component.get('content.maxScore'));
   }),
 
   // -------------------------------------------------------------------------
@@ -413,7 +416,7 @@ export default Ember.Component.extend({
           let studentGrade = submission.get('oaRubrics.studentGrades');
           let teacherGrade = submission.get('oaRubrics.teacherGrades');
           let taskSubmission = submission.get('tasks');
-          component.parseSubmissionGrade(studentGrade, teacherGrade);
+          component.parseSubmissionGrade(studentGrade, teacherGrade, submission.get('sessionId'));
           component.parseStudentTaskSubmission(taskSubmission);
           component.set('isLoading', false);
           component.handleCarouselControl();
@@ -426,13 +429,13 @@ export default Ember.Component.extend({
    * @param  {Object} studentGrade
    * @param  {Object} teacherGrade
    */
-  parseSubmissionGrade(studentGrade, teacherGrade) {
+  parseSubmissionGrade(studentGrade, teacherGrade, sessionId) {
     let component = this;
     let student = component.get('student');
+    student.set('sessionId', sessionId);
     if (studentGrade) {
       let studentRubric = student.get('studentRubric');
-      component.setGrade(studentGrade, studentRubric);
-      component.parseStudentRubricCategories(studentGrade);
+      component.parseRubricCategories(studentGrade, studentRubric);
       if (studentGrade.get('maxScore')) {
         studentRubric.set('isSelfGraded', true);
       }
@@ -441,91 +444,50 @@ export default Ember.Component.extend({
     if (teacherGrade) {
       student.set('isGraded', true);
       let teacherRubric = student.get('teacherRubric');
-      component.setGrade(teacherGrade, teacherRubric);
-      component.parseTeacherRubricCategories(teacherGrade);
+      component.parseRubricCategories(teacherGrade, teacherRubric);
     }
   },
 
-  setGrade(gradeData, rubric) {
-    let score = gradeData.get('score') ? gradeData.get('score') : 0;
-    rubric.set('comment', gradeData.get('overallComment'));
-    rubric.set('studentScore', score);
-    rubric.set('maxScore', gradeData.get('maxScore'));
-  },
-
-  parseTeacherRubricCategories(teacherGrade) {
-    let component = this;
-    let teacherGradedCategories = Ember.A([]);
-    let categories = component.get('teacherRubric.categories')
-      ? component.get('teacherRubric.categories')
-      : [];
-    if (teacherGrade) {
-      teacherGradedCategories = teacherGrade.get('categoryGrade')
-        ? teacherGrade.get('categoryGrade')
-        : [];
-    }
-    categories.map((category, index) => {
-      let teacherGradedCategory = teacherGradedCategories.objectAt(index);
-      let levels = category.get('levels');
-      if (levels) {
-        if (category.get('allowsLevels') && category.get('allowsScoring')) {
-          levels = levels.sortBy('score');
-          if (teacherGradedCategory) {
-            let totalPoints = teacherGradedCategory.get('levelMaxScore');
-            let scoreInPrecentage = Math.floor(
-              teacherGradedCategory.get('levelScore') / totalPoints * 100
-            );
-            category.set('scoreInPrecentage', scoreInPrecentage);
-          }
-        }
-        if (teacherGradedCategory) {
-          let levelObtained = levels.findBy(
-            'name',
-            teacherGradedCategory.get('levelObtained')
-          );
-          if (levelObtained) {
-            levelObtained.set('selected', true);
-          }
-          category.set('comment', teacherGradedCategory.get('levelComment'));
-        }
-        category.set('levels', levels);
-      }
-    });
-  },
-
-  parseStudentRubricCategories(studentGrade) {
-    let component = this;
-    let categories = component.get('studentRubric.categories')
-      ? component.get('studentRubric.categories')
-      : [];
-    if (studentGrade && studentGrade.get('maxScore')) {
-      let studentGradedCategories = studentGrade.get('categoryGrade')
-        ? studentGrade.get('categoryGrade')
-        : [];
+  parseRubricCategories(grade, rubric) {
+    let categories = rubric.get('categories') ?
+      rubric.get('categories') : [];
+    if (grade) {
+      let gradedCategories = grade.get('categoryGrade') ?
+        grade.get('categoryGrade') : [];
       categories.map((category, index) => {
-        let studentGradedCategory = studentGradedCategories.objectAt(index);
+        let gradedCategory = gradedCategories.objectAt(
+          index
+        );
         let levels = category.get('levels');
         if (levels) {
           if (category.get('allowsLevels') && category.get('allowsScoring')) {
             levels = levels.sortBy('score');
-            let totalPoints = studentGradedCategory.get('levelMaxScore');
+            let totalPoints = gradedCategory.get('levelMaxScore');
             let scoreInPrecentage = Math.floor(
-              studentGradedCategory.get('levelScore') / totalPoints * 100
+              (gradedCategory.get('levelScore') / totalPoints) *
+              100
             );
             category.set('scoreInPrecentage', scoreInPrecentage);
           }
           let levelObtained = levels.findBy(
             'name',
-            studentGradedCategory.get('levelObtained')
+            gradedCategory.get('levelObtained')
           );
           if (levelObtained) {
             levelObtained.set('selected', true);
           }
-          category.set('comment', studentGradedCategory.get('levelComment'));
+          category.set(
+            'comment',
+            gradedCategory.get('levelComment')
+          );
           category.set('levels', levels);
         }
       });
     }
+    let score = grade.get('score') ? grade.get('score') : 0;
+    rubric.set('comment', grade.get('overallComment'));
+    rubric.set('studentScore', score);
+    rubric.set('maxScore', grade.get('maxScore'));
   },
 
   /**
@@ -607,6 +569,7 @@ export default Ember.Component.extend({
     userGrade.set('classId', context.get('classId'));
     userGrade.set('dcaContentId', context.get('dcaContentId'));
     userGrade.set('collectionId', context.get('content.id'));
+    userGrade.set('sessionId', currentStudent.get('sessionId'));
     userGrade.set('contentSource', PLAYER_EVENT_SOURCE.DAILY_CLASS);
     userGrade.set('collectionType', PLAYER_EVENT_SOURCE.OFFLINE_CLASS);
     categories.forEach(category => {
@@ -693,7 +656,8 @@ export default Ember.Component.extend({
         let studentGrade = submission.get('oaRubrics.studentGrades');
         let teacherGrade = submission.get('oaRubrics.teacherGrades');
         let taskSubmission = submission.get('tasks');
-        component.parseSubmissionGrade(studentGrade, teacherGrade);
+        component.parseSubmissionGrade(studentGrade,
+          teacherGrade, submission.get('sessionId'));
         component.parseStudentTaskSubmission(taskSubmission);
         component.set('isLoading', false);
         component.handleCarouselControl();
