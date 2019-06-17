@@ -422,10 +422,7 @@ export default Ember.Component.extend({
     let student = component.get('student');
     if (studentGrade) {
       let studentRubric = student.get('studentRubric');
-      let score = studentGrade.get('score') ? studentGrade.get('score') : 0;
-      studentRubric.set('comment', studentGrade.get('overallComment'));
-      studentRubric.set('studentScore', score);
-      studentRubric.set('maxScore', studentGrade.get('maxScore'));
+      component.setGrade(studentGrade, studentRubric);
       component.parseStudentRubricCategories(studentGrade);
       if (studentGrade.get('maxScore')) {
         studentRubric.set('isSelfGraded', true);
@@ -435,12 +432,16 @@ export default Ember.Component.extend({
     if (teacherGrade) {
       student.set('isGraded', true);
       let teacherRubric = student.get('teacherRubric');
-      let score = teacherGrade.get('score') ? teacherGrade.get('score') : 0;
-      teacherRubric.set('comment', teacherGrade.get('overallComment'));
-      teacherRubric.set('studentScore', score);
-      teacherRubric.set('maxScore', teacherGrade.get('maxScore'));
+      component.setGrade(teacherGrade, teacherRubric);
       component.parseTeacherRubricCategories(teacherGrade);
     }
+  },
+
+  setGrade(gradeData, rubric) {
+    let score = gradeData.get('score') ? gradeData.get('score') : 0;
+    rubric.set('comment', gradeData.get('overallComment'));
+    rubric.set('studentScore', score);
+    rubric.set('maxScore', gradeData.get('maxScore'));
   },
 
 
@@ -679,7 +680,6 @@ export default Ember.Component.extend({
       .get('oaAnaltyicsService')
       .getSubmissionsToGrade(classId, activityId, studentId)
       .then(submission => {
-        component.clearData();
         let studentGrade = submission.get('oaRubrics.studentGrades');
         let teacherGrade = submission.get('oaRubrics.teacherGrades');
         let taskSubmission = submission.get('tasks');
@@ -688,13 +688,6 @@ export default Ember.Component.extend({
         component.set('isLoading', false);
         component.handleCarouselControl();
       });
-  },
-
-  clearData() {
-    let component = this;
-    let teacherRubric = component.get('teacherRubric');
-    teacherRubric.set('comment', null);
-    teacherRubric.set('studentScore', 0);
   },
 
   /**
