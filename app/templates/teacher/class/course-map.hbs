@@ -20,14 +20,14 @@
       </div>
     </div>
     <div class="course-map-container">
-      
+
       <div class="course-map-body">
         {{#if sortedStudents.length}}
           {{#if ( or (and class.milestoneViewApplicable  isMilestoneView) (not class.milestoneViewApplicable  isMilestoneView))}}
             <div class="students-dropdown-list-container">
               <div class="student-list-toggle-container {{if isStudentCourseMap 'student-selected'}}">
                 {{#if isStudentCourseMap}}
-                  <div class="deselect-student">
+                  <div class="deselect-student" {{action "onSelectAll"}}>
                     {{gru-icon name="clear"}}
                   </div>
                   <div class="student-thumbnail" style="background-image: url({{activeStudent.avatarUrl}})">
