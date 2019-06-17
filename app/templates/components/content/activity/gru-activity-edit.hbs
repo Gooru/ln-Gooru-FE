@@ -66,6 +66,13 @@
                   displayLabelFieldKey="display_name"
                   onChangeAction="updateSubFormat"
                   btn-group-size=btn-group-size}}
+                  <div class="validation error-messages">
+                    {{#if (and (v-get tempCollection 'subFormat' 'isInvalid') didValidate) }}
+                      <span class="error">
+                        {{v-get tempCollection 'subFormat' 'message'}}
+                      </span>
+                    {{/if}}
+                  </div>
                 {{else}}
                   <b>{{t tempCollection.subFormat}}</b>
                 {{/if}}
@@ -92,6 +99,13 @@
           subjectLabelKey='common.subject-and-framework'
           onlySubjectsWithStandards=true
           }}
+          <div class="validation error-messages">
+            {{#if (and (v-get tempCollection 'standards' 'isInvalid') didValidate) }}
+              <span class="error">
+                {{v-get tempCollection 'standards' 'message'}}
+              </span>
+            {{/if}}
+          </div>
         {{/if}}
         <div class="standards">
           <label>
