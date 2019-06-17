@@ -186,8 +186,9 @@ export default Ember.Component.extend({
   onSelectStartDate: Ember.observer('startDate', function() {
     let component = this;
     let startDate = this.get('startDate');
+    let forFirstDateOfMonth = moment(startDate).format('YYYY-MM-DD');
+    component.set('forFirstDateOfMonth', forFirstDateOfMonth);
     if (startDate) {
-      component.enableDatePicker();
       component.$('#ca-datepicker').datepicker('setStartDate', startDate);
     }
   }),
@@ -230,20 +231,6 @@ export default Ember.Component.extend({
       component.doHighlightActivity();
       component.sendAction('onSelectDate', selectedDate);
     });
-
-    if (component.get('validateEndDate')) {
-      component.disableDatePicker();
-    }
-  },
-
-  disableDatePicker() {
-    let component = this;
-    component.$('#ca-datepicker').removeClass('disable').addClass('disable');
-  },
-
-  enableDatePicker() {
-    let component = this;
-    component.$('#ca-datepicker').removeClass('disable');
   },
 
   showTodayActivity() {
