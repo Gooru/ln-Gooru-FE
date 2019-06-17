@@ -19,7 +19,9 @@
   {{else }}
     <h1> {{t 'oa.add_activity'}}</h1>
   {{/if}}
-  {{partial 'content/partials/collections-header-actions'}}
+  {{#if tempCollection.id}}
+    {{partial 'content/partials/collections-header-actions'}}
+  {{/if}}
   <nav>
     {{#gru-scroll to="#information" class="selected"  id='emberInfo1123' offset='article > header'}}{{t "common.information"}}{{/gru-scroll}}
     {{#if tempCollection.id}}
