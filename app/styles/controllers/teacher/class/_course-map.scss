@@ -69,9 +69,58 @@
   }
 
   .course-map-container {
+    .active-student {
+      background-color: $white;
+      width: 100%;
+      height: 67px;
+      border-radius: 4px;
+      margin-top: 15px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+
+      .student-thumbnail {
+        width: 50px;
+        height: 50px;
+        background-size: 50px 50px;
+        border-radius: 50%;
+        margin-left: 12px;
+        margin-top: 10px;
+      }
+
+      .student-name {
+        font-size: 15px;
+        color: #666666;
+        line-height: 67px;
+        margin-left: 12px;
+        text-transform: capitalize;
+      }
+
+      .performance-container {
+        .gru-performance-chart {
+          .container-box {
+            height: 67px;
+          }
+        }
+
+        &.not-started {
+          pointer-events: none;
+        }
+      }
+
+      .student-close {
+        margin: 0 12px;
+
+        i {
+          font-size: 30px;
+          opacity: 0.5;
+          color: #35424b;
+          line-height: 67px;
+          cursor: pointer;
+        }
+      }
+    }
+
     .course-map-body {
-      display: grid;
-      grid-template-columns: 1fr auto;
+      display: flex;
 
       .header {
         opacity: 0.5;
@@ -82,124 +131,91 @@
         padding: 10px 0;
       }
 
-      .students-dropdown-list-container {
-        width: 100%;
-        display: grid;
-        position: relative;
-        margin-top: 8px;
-        grid-column-start: 1;
-        grid-column-end: 3;
-        .student-list-toggle-container {
-          width: inherit;
-          display: grid;
-          grid-template-columns: 1fr 40px;
-          height: 50px;
-          align-items: center;
-          box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.4);
+      .students {
+        min-width: 61px;
+
+        .header {
+          text-align: center;
+        }
+
+        .students-list {
+          max-width: 61px;
+          min-width: 61px;
+          max-height: calc(100vh - 225px);
           background-color: $white;
-          border-radius: 4px;
-          padding: 0 20px;
-          z-index: 10;
-          .students-label {
-            text-transform: uppercase;
-            font-size: 12px;
-            font-weight: bold;
-          }
-          .toggle-action {
-            justify-self: center;
-            cursor: pointer;
+          transition: 2s;
+          position: absolute;
+          overflow-x: hidden;
+          overflow-y: auto;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+
+          &::-webkit-scrollbar {
+            height: 6px;
+            width: 8px;
           }
 
-          &.student-selected {
-            grid-template-columns: 40px 30px 1fr 50px 40px;
-            column-gap: 8px;
-            align-items: center;
-            padding: 0;
-            .student-thumbnail {
-              width: 30px;
-              height: 30px;
-              border-radius: 50%;
-              background-size: 30px;
-            }
-            .student-name {
-              text-transform: uppercase;
-              font-size: 12px;
-              font-weight: bold;
-            }
-            .student-performance {
-              width: 50px;
-              align-self: center;
-              &.not-started {
-                pointer-events: none;
-              }
-              .charts.gru-performance-chart {
-                width: 50px;
-                min-width: 50px;
-                .container-box {
-                  height: 50px;
-                  .percentage {
-                    margin-top: 8px;
-                  }
+          &::-webkit-scrollbar-thumb {
+            background: $gray-light;
+            border: 1px solid $gray-light;
+            border-radius: 5px;
+          }
+
+          &:hover {
+            z-index: 9999;
+            box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.13);
+            max-width: 100%;
+
+            .list {
+              &.active {
+                .student-name {
+                  color: #0072bc;
                 }
               }
-            }
-            .deselect-student {
-              height: 50px;
-              border-right: 1px solid $light-400;
-              justify-self: center;
-              cursor: pointer;
-              text-align: center;
-              width: 40px;
-              i.clear {
-                line-height: 50px;
-              }
-            }
 
-            .toggle-action {
-              height: 50px;
-              width: 40px;
-              text-align: center;
-              i {
-                line-height: 50px;
+              .student-name {
+                display: block;
               }
             }
           }
-        }
-        .student-list-container {
-          display: none;
-          position: absolute;
-          top: 50px;
-          background-color: $white;
-          width: 100%;
-          z-index: 9;
-          box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.2);
-          border-bottom-left-radius: 4px;
-          border-bottom-right-radius: 4px;
-          max-height: 250px;
-          overflow-y: auto;
-          .student-info-container {
-            display: grid;
-            grid-template-columns: 30px 1fr;
-            column-gap: 8px;
-            height: 50px;
-            align-items: center;
-            padding: 0 20px;
+
+          .teacher {
+            .thumbnail {
+              background-color: #535e66;
+              border: none;
+            }
+          }
+
+          .list {
+            display: flex;
             cursor: pointer;
-            .student-thumbnail {
+            width: max-content;
+            margin-left: 16px;
+
+            .thumbnail {
               width: 30px;
               height: 30px;
               border-radius: 50%;
-              background-size: 30px;
+              background-size: contain;
+              margin: 6px 0;
             }
 
             .student-name {
+              display: none;
+              margin-left: 40px;
+              margin-top: 7px;
+              padding-right: 10px;
               font-size: 15px;
               text-transform: capitalize;
+
+              &:hover {
+                color: #0072bc;
+              }
             }
 
-            &.selected-student,
-            &:hover {
-              background-color: $light-100;
+            &.active {
+              .thumbnail {
+                border: 3px solid #0072bc;
+              }
             }
           }
         }
@@ -207,8 +223,7 @@
 
       .render-course-map {
         width: 98%;
-        grid-row: 2;
-        grid-column: 1;
+        margin: 0 20px auto;
 
         .ms-cm-view-switcher-ctn {
           display: grid;
@@ -302,7 +317,8 @@
         }
 
         &.sm-course-map {
-          // width: 67%;
+          width: 67%;
+          margin: 0 10px auto;
 
           .gru-accordion .panel-heading .panel-title {
             width: 53% !important;
@@ -320,8 +336,6 @@
 
       .items-to-grade {
         width: 331px;
-        grid-row: 2;
-        grid-column: 2;
 
         .header {
           font-size: 12px;
@@ -329,12 +343,9 @@
           color: #000000;
           margin-left: 15px;
         }
-        .gru-grade-items {
-          width: inherit;
-        }
 
         .no-grade-items {
-          width: inherit;
+          width: 311px;
           height: 178px;
           display: grid;
           justify-content: center;

@@ -69,6 +69,7 @@
           width: 48px;
           height: 48px;
           justify-self: center;
+          text-align: center;
         }
       }
       .timespent-container {
@@ -78,9 +79,28 @@
           .timepicker-container {
             .hour-picker,
             .minute-picker {
+              .up-arrow {
+                i {
+                  font-size: 40px;
+                }
+              }
               .down-arrow {
                 display: none;
               }
+              .value-container {
+                height: 60px;
+                line-height: 60px;
+                input.time-value {
+                  font-size: 50px;
+                }
+              }
+              .placeholder {
+                font-size: 20px;
+              }
+            }
+            .picker-separator {
+              height: 60%;
+              font-size: 50px;
             }
           }
         }
