@@ -56,7 +56,7 @@
             {{t 'oa.task.submissions.frs-label'}}
           </div>
           {{#if isReadOnly}}
-            <p>{{safe-html task.submissionText}}</p>
+            <p>{{safe-html (if task.submissionText task.submissionText '--')}}</p>
           {{else}}
             <div class="input-container">
             {{gru-rich-text-editor isCustomEditor=true content=task.submissionText isAutoFocusDisabled="true"}}
@@ -82,6 +82,8 @@
                   {{/if}}
                 </a>
               </div>
+            {{else}}
+              {{#if isReadOnly}}--{{/if}}
             {{/each}}
             {{#unless isReadOnly}}
               {{#each listOfFilesUploads as |file index|}}
@@ -126,6 +128,8 @@
                 {{/if}}
               {{/unless}}
             </div>
+          {{else}}
+            --
           {{/each}}
         </div>
         {{#unless isReadOnly}}
