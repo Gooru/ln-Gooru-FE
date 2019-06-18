@@ -25,41 +25,46 @@
         .task-title {
           color: #3e5e67;
           font-weight: bold;
-          @include ellipsis(
-            $font-size: 14px,
-            $line-height: 1.2,
-            $lines-to-show: 1
-          );
+          @include ellipsis($font-size: 14px, $line-height: 1.2, $lines-to-show: 1);
+        }
+      }
+
+      .expected-submission-container {
+        height: 20px;
+        grid-column: 2;
+
+        .expected-submission-label {
+          font-size: 12px;
+          color: #3e5e67;
+          font-weight: bold;
         }
 
-        .expected-submission-container {
-          height: 20px;
-          .expected-submission-label {
-            font-size: 12px;
-            color: #3e5e67;
-          }
-          .expected-submission-value {
+        .expected-submission-value {
+          font-size: 11px;
+          color: #37424b;
+          opacity: 0.7;
+        }
+      }
+
+      .pending-submission-info {
+        grid-column: 2;
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: left;
+        column-gap: 8px;
+        border-bottom: 1px solid #ddd;
+
+        .pending-label-container {
+          font-size: 12px;
+          color: #3e5e67;
+          font-weight: bold;
+        }
+
+        .pending-info-container {
+          .pending-info {
             font-size: 11px;
             color: #37424b;
             opacity: 0.7;
-          }
-        }
-        .pending-submission-info {
-          grid-column: 2;
-          display: grid;
-          grid-template-columns: auto auto;
-          justify-content: left;
-          column-gap: 8px;
-          .pending-label-container {
-            font-size: 12px;
-            color: #3e5e67;
-          }
-          .pending-info-container {
-            .pending-info {
-              font-size: 11px;
-              color: #37424b;
-              opacity: 0.7;
-            }
           }
         }
       }
@@ -90,7 +95,7 @@
     .task-details-container {
       .task-upload-container {
         display: grid;
-        row-gap: 15px;
+        row-gap: 10px;
         grid-template-columns: 1fr 96px;
         column-gap: 15px;
         padding-left: 30px;
@@ -108,113 +113,126 @@
           .input-container {
             .gru-rich-text-editor {
               .wysihtml5-editor {
-                min-height: 150px;
+                min-height: 100px;
+              }
+
+              .error-messages {
+                display: none;
               }
             }
           }
         }
 
         .task-file-upload-container {
-          display: flex;
-          flex-flow: row wrap;
           grid-column-start: 1;
           grid-column-end: 3;
           grid-row-start: 2;
 
-          .task-file-preview {
-            width: 104px;
-            height: 104px;
-            border: 2px solid #bbb;
-            border-radius: 5px;
-            text-align: center;
-            margin: 5px;
-
-            a.preview-file-link {
-              width: inherit;
-              height: inherit;
-              display: block;
-
-              i {
-                font-size: 40px;
-                line-height: 104px;
-              }
-
-              img {
-                width: inherit;
-                height: inherit;
-                padding: 5px;
-              }
-            }
+          .uploads-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #3e5e67;
           }
 
-          .task-file-upload {
-            position: relative;
-            margin: 5px;
+          .task-file-uploads {
+            display: flex;
+            flex-flow: row wrap;
 
-            .file-upload-box {
-              cursor: pointer;
-              width: 104px;
-              height: 104px;
-              border: 2px dashed #bbb;
-              text-align: center;
+            .task-file-preview {
+              width: 70px;
+              height: 70px;
+              border: 2px solid #bbb;
               border-radius: 5px;
+              text-align: center;
+              margin: 5px;
 
-              i.add {
-                line-height: 104px;
-                font-size: 30px;
-                color: #bbb;
-              }
+              a.preview-file-link {
+                width: inherit;
+                height: inherit;
+                display: block;
 
-              &:hover {
-                border-color: #37424b;
+                i {
+                  font-size: 40px;
+                  line-height: 70px;
+                }
 
-                i.add {
-                  color: #37424b;
+                img {
+                  width: inherit;
+                  height: inherit;
+                  padding: 5px;
                 }
               }
             }
 
-            .file-picker__preview {
-              position: absolute;
-              width: 104px;
-              height: 104px;
-              top: 0;
-              text-align: center;
+            .task-file-upload {
+              position: relative;
+              margin: 5px;
 
-              img {
-                width: inherit;
-                height: inherit;
-                background-color: #e3e5ea;
-              }
-
-              i.file-preview-type-icon {
-                font-size: 40px;
-                line-height: 104px;
-                z-index: 9;
-                width: inherit;
-                height: inherit;
-                background-color: #e3e5ea;
-              }
-            }
-
-            .remove-file {
-              display: none;
-            }
-
-            &:hover {
-              .remove-file {
-                display: block;
-                z-index: 5;
-                position: absolute;
-                top: 0;
+              .file-upload-box {
                 cursor: pointer;
-                width: 104px;
-                height: 104px;
-                background-color: rgba(204, 204, 204, 0.5);
+                width: 70px;
+                height: 70px;
+                border: 2px dashed #bbb;
+                text-align: center;
+                border-radius: 5px;
+
+                i.add {
+                  line-height: 70px;
+                  font-size: 30px;
+                  color: #bbb;
+                }
+
+                &:hover {
+                  border-color: #37424b;
+
+                  i.add {
+                    color: #37424b;
+                  }
+                }
+              }
+
+              .file-picker__preview {
+                position: absolute;
+                width: 70px;
+                height: 70px;
+                top: 0;
                 text-align: center;
 
-                i.clear {
-                  line-height: 104px;
+                img {
+                  width: inherit;
+                  height: inherit;
+                  background-color: #e3e5ea;
+                }
+
+                i.file-preview-type-icon {
+                  font-size: 40px;
+                  line-height: 70px;
+                  z-index: 9;
+                  width: inherit;
+                  height: inherit;
+                  background-color: #e3e5ea;
+                }
+              }
+
+              .remove-file {
+                display: none;
+              }
+
+              &:hover {
+                .remove-file {
+                  display: block;
+                  z-index: 5;
+                  position: absolute;
+                  top: 0;
+                  cursor: pointer;
+                  width: 70px;
+                  height: 70px;
+                  background-color: rgba(204, 204, 204, 0.5);
+                  text-align: center;
+
+                  i.clear {
+                    line-height: 70px;
+                  }
                 }
               }
             }
@@ -223,6 +241,12 @@
 
         .task-url-upload-container {
           grid-row-start: 3;
+
+          .urls-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #3e5e67;
+          }
 
           .task-url-upload {
             display: grid;
