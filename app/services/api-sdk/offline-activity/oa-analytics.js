@@ -22,14 +22,15 @@ export default Ember.Service.extend({
   /**
    * Get the list of OA with the count of students, that the teacher needs to grade for a given class
    * @param {string} classId
+   * @param {string} userId
    * @returns {Object}
    */
-  getOAToGrade(classId) {
+  getOAToGrade(classId, userId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('oaAnaltyicsAdapter')
-        .getOAToGrade(classId)
+        .getOAToGrade(classId, userId)
         .then(function(payload) {
           const oaGradeItems = service
             .get('offlineActivitySerializer')
