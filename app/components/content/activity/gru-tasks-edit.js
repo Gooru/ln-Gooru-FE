@@ -149,8 +149,6 @@ export default Ember.Component.extend({
           Ember.getOwner(component).ownerInjection(),
           modelOrig
         );
-      let tsInst1 = Ember.A([]);
-      model.set('oaTaskSubmissions', tsInst1);
       component.set('model', model);
     } else {
       let taskInstance = TaskModel.create(
