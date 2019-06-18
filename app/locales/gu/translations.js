@@ -2640,5 +2640,6 @@ export default Object.assign(quizzesTranslations, {
   'oa.task.submissions.frs-label': 'Free text',
   'oa.task.submissions.label': 'Submissions',
   'oa.student-rubric': 'Student rubric',
-  'oa.rubrics.student-associate-label': 'Associate a student rubric'
+  'oa.rubrics.student-associate-label': 'Associate a student rubric',
+  'oa.task.submissions.head': 'Task Submissions'
 });
