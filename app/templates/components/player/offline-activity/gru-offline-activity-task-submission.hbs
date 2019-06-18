@@ -6,34 +6,38 @@
       <div class="task-title">
         {{task.title}}
       </div>
-      <div class="pending-submission">
-        {{#each typeBasedMandatoryUploads as |mandatoryUpload index|}}
-          <span>{{mandatoryUpload.pendingCount}} {{mandatoryUpload.type}}</span>
-          {{#if (lt (plus-one index) typeBasedMandatoryUploads.length ) }}
-            |
-          {{/if}}
-        {{/each}}
-      </div>
+      {{#if typeBasedMandatoryUploads.length}}
+        <div class="expected-submission-container">
+          <span class="expected-submission-label">Submissions Expected:</span>
+          {{#each typeBasedMandatoryUploads as |mandatoryUpload index|}}
+            <span class="expected-submission-value">{{mandatoryUpload.pendingCount}} {{mandatoryUpload.type}}</span>
+            {{#if (lt (plus-one index) typeBasedMandatoryUploads.length ) }}
+              |
+            {{/if}}
+          {{/each}}
+        </div>
+      {{/if}}
+      {{#unless isReadOnly}}
+        {{#if (or pendingUploadSubmissions pendingUrlSubmissions)}}
+          <div class="pending-submission-info">
+            <div class="pending-label-container">{{t 'oa.pending-submissions'}}:</div>
+            <div class="pending-info-container">
+              {{#if pendingUploadSubmissions}}
+                <span class="pending-info">{{pendingUploadSubmissions}} {{t 'oa.references.uploads'}}</span>
+              {{/if}}
+              {{#if pendingUrlSubmissions}}
+                |
+                <span class="pending-info">{{pendingUrlSubmissions}} URLs</span>
+              {{/if}}
+            </div>
+          </div>
+        {{/if}}
+      {{/unless}}
     </div>
     <div class="task-description">
       {{task.description}}
     </div>
-    {{#unless isReadOnly}}
-      {{#if (or pendingUploadSubmissions pendingUrlSubmissions)}}
-        <div class="pending-submission-info">
-          <div class="pending-label-container">{{t 'oa.pending-submissions'}}:</div>
-          <div class="pending-info-container">
-            {{#if pendingUploadSubmissions}}
-              <span class="pending-info">{{pendingUploadSubmissions}} {{t 'oa.references.uploads'}}</span>
-            {{/if}}
-            {{#if pendingUrlSubmissions}}
-              |
-              <span class="pending-info">{{pendingUrlSubmissions}} URLs</span>
-            {{/if}}
-          </div>
-        </div>
-      {{/if}}
-    {{/unless}}
+
     {{#if showToggle}}
       <div class="task-toggle" {{action "onToggleTask"}}>
         {{#if isTaskExpanded}}
@@ -52,7 +56,7 @@
             {{t 'your-answer'}}
           </div>
           {{#if isReadOnly}}
-            <p>{{task.submissionText}}</p>
+            <p>{{safe-html task.submissionText}}</p>
           {{else}}
             <div class="input-container">
             {{gru-rich-text-editor isCustomEditor=true content=task.submissionText isAutoFocusDisabled="true"}}

@@ -39,7 +39,8 @@ export default Ember.Component.extend({
       uploadedFiles.pushObject(file);
       component.get('listOfFilesUploads').pushObject(
         Ember.Object.create({
-          isFileAvailable: false
+          isFileAvailable: false,
+          isUploaded: false
         })
       );
       let fileType = inferUploadType(file.name, OA_TASK_SUBMISSION_TYPES);
@@ -164,7 +165,7 @@ export default Ember.Component.extend({
       const studentTaskUploadSubmission = component.get(
         'studentTaskUploadSubmission.length'
       );
-      return mandatoryUploads
+      return mandatoryUploads > studentTaskUploadSubmission
         ? mandatoryUploads - (uploadedFilesCount + studentTaskUploadSubmission)
         : 0;
     }
@@ -207,7 +208,7 @@ export default Ember.Component.extend({
       const uploadedUrls = taskUrls
         ? taskUrls.filter(url => url.value)
         : Ember.A([]);
-      return mandatoryUrls
+      return mandatoryUrls > studentTaskUrlSubmission
         ? mandatoryUrls - (uploadedUrls.length + studentTaskUrlSubmission)
         : 0;
     }
@@ -274,10 +275,7 @@ export default Ember.Component.extend({
         ? component.get('task.files').length
         : false;
       let addedAnswerText = component.get('task.submissionText');
-      return (
-        (addedUrls || addedFiles || addedAnswerText) &&
-        component.get('isValidTimespent')
-      );
+      return addedUrls || addedFiles || addedAnswerText;
     }
   ),
 
@@ -342,7 +340,8 @@ export default Ember.Component.extend({
   listOfFilesUploads: Ember.computed('mandatoryUploads', function() {
     return Ember.A([
       Ember.Object.create({
-        isFileAvailable: false
+        isFileAvailable: false,
+        isUploaded: false
       })
     ]);
   }),
@@ -386,7 +385,7 @@ export default Ember.Component.extend({
    */
   uploadFilesToS3() {
     const component = this;
-    let files = component.get('task.files');
+    let files = component.get('task.files').filter(file => !file.isUploaded);
     let uploadedFilesPromise = files.map(file => {
       return component.uploadFileIntoS3(file).then(function(fileObject) {
         return fileObject;
@@ -411,7 +410,9 @@ export default Ember.Component.extend({
         .then(({ fileLocation }) => {
           let cdnUrls = component.get('session.cdnUrls');
           let UUIDFileName = cleanFilename(fileLocation, cdnUrls);
-          return resolve((fileObject.UUIDFileName = UUIDFileName));
+          fileObject.UUIDFileName = UUIDFileName;
+          fileObject.isUploaded = true;
+          return resolve(fileObject);
         }, reject);
     });
   },
@@ -439,7 +440,7 @@ export default Ember.Component.extend({
     const classId = component.get('classId');
     const caContentId = component.get('caContentId');
     let taskSubmissions = [];
-    let uploadedFiles = task.get('files');
+    let uploadedFiles = task.get('files').filter(file => !file.isSubmitted);
     let timespentInMilliSec = component.get('timespentInMilliSec');
     uploadedFiles.map(uploadedFile => {
       let submissionContext = Ember.Object.create({
@@ -450,6 +451,7 @@ export default Ember.Component.extend({
       taskSubmissions.push(
         component.getTaskSubmissionContext(submissionContext)
       );
+      uploadedFile.isSubmitted = true;
     });
     //fetch only newly added urls
     let submissionUrls = task
@@ -466,19 +468,17 @@ export default Ember.Component.extend({
       taskSubmissions.push(
         component.getTaskSubmissionContext(submissionContext)
       );
+      submissionUrl.set('isSubmittedUrl', true);
     });
-    if (!taskSubmissions.length) {
-      //if no uploads are available, send submission text alone
-      taskSubmissions = [
-        {
-          task_id: task.get('id'),
-          submission_info: null,
-          submission_text: task.get('submissionText'),
-          submission_type: null,
-          submission_subtype: null
-        }
-      ];
-    }
+    //Task free form text data
+    let freeFormTextSubmissionContext = Ember.Object.create({
+      submissionValue: task.get('submissionText'),
+      submissionType: 'free-form-text',
+      submissionSubType: 'free-form-text'
+    });
+    taskSubmissions.push(
+      component.getTaskSubmissionContext(freeFormTextSubmissionContext)
+    );
     return {
       student_id: userId,
       class_id: classId,
@@ -500,7 +500,6 @@ export default Ember.Component.extend({
     return {
       task_id: task.get('id'),
       submission_info: submissionContext.get('submissionValue'),
-      submission_text: task.get('submissionText'),
       submission_type: submissionContext.get('submissionType'),
       submission_subtype: submissionContext.get('submissionSubType')
     };
