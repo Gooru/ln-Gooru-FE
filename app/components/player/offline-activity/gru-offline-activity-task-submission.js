@@ -540,11 +540,13 @@ export default Ember.Component.extend({
         }
       });
     }
-    component.get('task.urls').pushObject(
-      Ember.Object.create({
-        value: null,
-        isSubmittedUrl: false
-      })
-    );
+    if (!component.get('isReadOnly')) {
+      component.get('task.urls').pushObject(
+        Ember.Object.create({
+          value: null,
+          isSubmittedUrl: false
+        })
+      );
+    }
   }
 });

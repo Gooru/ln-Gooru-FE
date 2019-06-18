@@ -503,13 +503,15 @@ export default Ember.Component.extend({
         task.get('id')
       );
       if (studentTaskSubmissions) {
-        newTask.set(
-          'studentTaskSubmissions',
-          studentTaskSubmissions.get('submissions')
+        let activityTaskSubmissions = studentTaskSubmissions.get('submissions');
+        newTask.set('studentTaskSubmissions', activityTaskSubmissions);
+        let taskSubmissionText = activityTaskSubmissions.findBy(
+          'submissionType',
+          'free-form-text'
         );
         newTask.set(
           'submissionText',
-          studentTaskSubmissions.get('submissionText')
+          taskSubmissionText ? taskSubmissionText.get('submissionInfo') : null
         );
       }
       activityTasks.pushObject(newTask);
