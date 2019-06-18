@@ -121,7 +121,6 @@ export default Ember.Component.extend({
   // Properties
   removeTask(task) {
     const component = this;
-    //ToDo: Validate
     return component.get('activityService').removeTask(task);
   }
 });
