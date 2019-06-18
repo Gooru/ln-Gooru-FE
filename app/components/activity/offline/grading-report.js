@@ -455,9 +455,9 @@ export default Ember.Component.extend({
   parseRubricCategories(grade, rubric) {
     let categories = rubric.get('categories') ?
       rubric.get('categories') : [];
-    if (grade) {
-      let gradedCategories = grade.get('categoryGrade') ?
-        grade.get('categoryGrade') : [];
+    let gradedCategories = grade.get('categoryGrade') ?
+      grade.get('categoryGrade') : [];
+    if (grade && gradedCategories.length > 0) {
       categories.map((category, index) => {
         let gradedCategory = gradedCategories.objectAt(
           index
