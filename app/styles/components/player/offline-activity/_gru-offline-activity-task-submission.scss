@@ -11,6 +11,7 @@
       display: grid;
       grid-template-columns: 30px 1fr;
       align-items: center;
+      margin-right: 50px;
 
       .task-icon {
         width: 20px;
@@ -31,11 +32,35 @@
           );
         }
 
-        .pending-submission {
-          font-size: 11px;
-          color: #37424b;
-          opacity: 0.7;
+        .expected-submission-container {
           height: 20px;
+          .expected-submission-label {
+            font-size: 12px;
+            color: #3e5e67;
+          }
+          .expected-submission-value {
+            font-size: 11px;
+            color: #37424b;
+            opacity: 0.7;
+          }
+        }
+        .pending-submission-info {
+          grid-column: 2;
+          display: grid;
+          grid-template-columns: auto auto;
+          justify-content: left;
+          column-gap: 8px;
+          .pending-label-container {
+            font-size: 12px;
+            color: #3e5e67;
+          }
+          .pending-info-container {
+            .pending-info {
+              font-size: 11px;
+              color: #37424b;
+              opacity: 0.7;
+            }
+          }
         }
       }
 
@@ -44,25 +69,6 @@
         font-size: 13px;
         color: #3e5e67;
         line-height: 1.5;
-      }
-
-      .pending-submission-info {
-        grid-column: 2;
-        display: grid;
-        grid-template-columns: auto auto;
-        justify-content: left;
-        column-gap: 8px;
-        .pending-label-container {
-          font-size: 12px;
-          color: #3e5e67;
-        }
-        .pending-info-container {
-          .pending-info {
-            font-size: 11px;
-            color: #37424b;
-            opacity: 0.7;
-          }
-        }
       }
 
       .task-toggle {
@@ -136,6 +142,7 @@
               img {
                 width: inherit;
                 height: inherit;
+                padding: 5px;
               }
             }
           }
