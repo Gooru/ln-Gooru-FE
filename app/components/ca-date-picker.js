@@ -30,7 +30,9 @@ export default Ember.Component.extend({
         .format('YYYY');
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
-      let datepickerPrevEle = component.$('#ca-datepicker .datepicker-days .prev');
+      let datepickerPrevEle = component.$(
+        '#ca-datepicker .datepicker-days .prev'
+      );
       datepickerPrevEle.trigger('click');
       let date = `${forYear}-${forMonth}-01`;
       let parsedDate = moment(date).format('YYYY-MM-DD');
@@ -52,7 +54,9 @@ export default Ember.Component.extend({
         .format('YYYY');
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
-      let datepickerNextEle = component.$('#ca-datepicker .datepicker-days .next');
+      let datepickerNextEle = component.$(
+        '#ca-datepicker .datepicker-days .next'
+      );
       datepickerNextEle.trigger('click');
       let date = `${forYear}-${forMonth}-01`;
       let parsedDate = moment(date).format('YYYY-MM-DD');
@@ -186,12 +190,12 @@ export default Ember.Component.extend({
   onSelectStartDate: Ember.observer('startDate', function() {
     let component = this;
     let startDate = this.get('startDate');
+    let forFirstDateOfMonth = moment(startDate).format('YYYY-MM-DD');
+    component.set('forFirstDateOfMonth', forFirstDateOfMonth);
     if (startDate) {
-      component.enableDatePicker();
       component.$('#ca-datepicker').datepicker('setStartDate', startDate);
     }
   }),
-
 
   onRefresh: Ember.observer('refreshDatePicker', function() {
     let component = this;
@@ -230,20 +234,6 @@ export default Ember.Component.extend({
       component.doHighlightActivity();
       component.sendAction('onSelectDate', selectedDate);
     });
-
-    if (component.get('validateEndDate')) {
-      component.disableDatePicker();
-    }
-  },
-
-  disableDatePicker() {
-    let component = this;
-    component.$('#ca-datepicker').removeClass('disable').addClass('disable');
-  },
-
-  enableDatePicker() {
-    let component = this;
-    component.$('#ca-datepicker').removeClass('disable');
   },
 
   showTodayActivity() {

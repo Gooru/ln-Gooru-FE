@@ -412,6 +412,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     let oaRubrics = serializer.normalizeRubricGrade(response.oaRubrics);
     return Ember.Object.create({
       oaRubrics,
+      sessionId: response.sessionId,
       tasks: response.tasks
         ? response.tasks.map(task => serializer.normalizeGradeTasks(task))
         : []
@@ -521,6 +522,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
         : null,
       max_score: payload.get('maxScore'),
       grader_id: payload.get('graderId'),
+      session_id: payload.sessionId ? payload.sessionId : undefined,
       overall_comment: payload.get('comment'),
       category_score: payload.get('categoriesScore').length
         ? payload
