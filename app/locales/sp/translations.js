@@ -2697,7 +2697,7 @@ export default Object.assign(quizzesTranslations, {
     'Please enter the offline activity title.',
   'oa.errors.standards-presence': 'Please select a standard.',
   'oa.errors.subformat-presence': 'Please select a format.',
-  'oa.task.submissions.frs-label': 'Free text',
+  'oa.task.submissions.frs-label': 'Free form text',
   'oa.task.submissions.label': 'Submissions',
   'oa.student-rubric': 'Student rubric',
   'oa.rubrics.student-associate-label': 'Associate a student rubric',
