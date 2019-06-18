@@ -59,11 +59,11 @@
       </div>
     </div>
     <div class="right-panel">
-      <div class="offline-container">
+      <div class="offline-container active">
         <div class="offline-activity-items-header" {{action 'toggleOffineActivity'}}>
           <span class="title">{{t 'common.offline-activites'}}</span>
           <i class="offline-icon hidden-xs"></i>
-          <div class="icons hidden visible-xs">
+          <div class="icons">
             {{gru-icon name="arrow_drop_up" class="arrow-up"}}
             {{gru-icon name="arrow_drop_down" class="arrow-bottom"}}
           </div>
@@ -127,6 +127,26 @@
           </div>
         </div>
       </div>
+      <div class="item-to-grade-container">
+        <div class="ca-grade-items-header" {{action 'toggleItemsToGrade'}}>
+          <span>{{t 'class.analytics.performance.grade-items'}} ({{itemsToGrade.length}})</span>
+          <div class="icons">
+            {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+            {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+          </div>
+        </div>
+        <div class="ca-grade-content-items">
+          {{#if itemsToGrade}}
+            {{gru-grade-items
+              openReportGrade='onOpenReportGrade'
+              gradeableItems=itemsToGrade}}
+          {{else}}
+            <div class="no-rubric-content">
+              {{t 'common.all-caught-up'}}
+            </div>
+          {{/if}}
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -157,5 +177,15 @@
     isReportView=true
     classId=classId
     users=studentReportContextData.users
+  }}
+{{/if}}
+
+{{#if showOAGrade}}
+  {{activity.offline.grading-report
+    showPullUp=showOAGrade
+    context=itemToGradeContextData
+    itemsToGrade=itemsToGrade
+    isTeacher=false
+    studentId=studentId
   }}
 {{/if}}

@@ -1,17 +1,27 @@
 <header xmlns="http://www.w3.org/1999/html">
   {{#if allowBack}}
-    {{#link-to 'content.courses.edit' course.id (query-params unitId=activityCollection.unitId lessonId=activityCollection.lessonId) class="back-to"}}
-      <div>
-        {{gru-icon name="keyboard_arrow_left"}}{{t 'common.course'}}: {{course.title}}
-      </div>
-    {{/link-to}}
+    {{#if allowBackToCourse}}
+      {{#link-to 'content.courses.edit' course.id (query-params unitId=activityCollection.unitId lessonId=activityCollection.lessonId) class="back-to"}}
+        <div>
+          {{gru-icon name="keyboard_arrow_left"}}{{t 'common.course'}}: {{course.title}}
+        </div>
+      {{/link-to}}
+    {{else}}
+      {{#link-to 'library-search' (query-params profileId=session.userId type="my-content" activeContentType="offline-activity") class="back-to"}}
+        <div>
+          {{gru-icon name="keyboard_arrow_left"}}Back
+        </div>
+      {{/link-to}}
+    {{/if}}
   {{/if}}
   {{#if tempCollection.id }}
     <h1> {{t 'oa.edit_activity'}}</h1>
   {{else }}
     <h1> {{t 'oa.add_activity'}}</h1>
   {{/if}}
-  {{partial 'content/partials/collections-header-actions'}}
+  {{#if tempCollection.id}}
+    {{partial 'content/partials/collections-header-actions'}}
+  {{/if}}
   <nav>
     {{#gru-scroll to="#information" class="selected"  id='emberInfo1123' offset='article > header'}}{{t "common.information"}}{{/gru-scroll}}
     {{#if tempCollection.id}}
@@ -44,7 +54,7 @@
           <div class="learning-objectives format">
             <label>
               <span>{{t "oa.format"}}</span>
-              {{#if activityCollection.subFormat }}
+              {{#if tempCollection.id }}
                 <b>{{subTaskDisplayValue}}</b>
               {{else}}
                 {{#if isEditing   }}
@@ -56,6 +66,13 @@
                   displayLabelFieldKey="display_name"
                   onChangeAction="updateSubFormat"
                   btn-group-size=btn-group-size}}
+                  <div class="validation error-messages">
+                    {{#if (and (v-get tempCollection 'subFormat' 'isInvalid') didValidate) }}
+                      <span class="error">
+                        {{v-get tempCollection 'subFormat' 'message'}}
+                      </span>
+                    {{/if}}
+                  </div>
                 {{else}}
                   <b>{{t tempCollection.subFormat}}</b>
                 {{/if}}
@@ -82,6 +99,13 @@
           subjectLabelKey='common.subject-and-framework'
           onlySubjectsWithStandards=true
           }}
+          <div class="validation error-messages">
+            {{#if (and (v-get tempCollection 'standards' 'isInvalid') didValidate) }}
+              <span class="error">
+                {{v-get tempCollection 'standards' 'message'}}
+              </span>
+            {{/if}}
+          </div>
         {{/if}}
         <div class="standards">
           <label>
@@ -153,8 +177,8 @@
       <h2>{{t "oa.references.label"}}</h2>
     </div>
     {{content.activity.gru-references activityModel=activityCollection references=tempCollection.references updateParent=(action 'modelSourceFromChildChanges')
-    model=tempCollection 
-     updateContent=(action 'updateContent') 
+    model=tempCollection
+     updateContent=(action 'updateContent')
      }}
   </section>
   <section id="tasks">

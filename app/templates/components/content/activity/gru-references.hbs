@@ -10,10 +10,16 @@
     <div class="panel panel-body">
         <div class="panelBodyContainer">
             <div class="textContainer">
-                <div class='referenceText'>
-                    {{gru-rich-text-editor content=model.reference model=model valuePath='reference'}}
-                    {{!-- {{validation.gru-input model=model valuePath='reference' maxLength=50 didValidate=didValidate}} --}}
-                </div>
+                {{#if isEditing}}
+                    <div class='referenceText'>
+                        {{gru-rich-text-editor content=model.reference model=model valuePath='reference'}}
+                        {{!-- {{validation.gru-input model=model valuePath='reference' maxLength=50 didValidate=didValidate}} --}}
+                    </div>
+                {{else}}
+                    <div class='referenceTextLabel'>
+                        {{{model.reference}}}
+                    </div>
+                {{/if}}
             </div>
         </div>
     </div>
@@ -33,12 +39,12 @@
                     {{#each references as | refItem|}}
                         {{#if (eq refItem.type 'uploaded')}}
                             <span class="uploaded-item">
+                                <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteUrlReference' refItem }}>{{gru-icon name="remove_circle"}}</button>
                                 <a href='{{refItem.location}}' target="_blank">
                                     <span class="image">
                                         <i class="{{refItem.subType}}-icon"></i>
                                     </span>
                                 </a>
-                                <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteUrlReference' refItem }}>{{gru-icon name="remove_circle"}}</button>
                             </span>
                         {{/if}}
                     {{/each}}
@@ -71,17 +77,28 @@
         <h3>{{t "oa.references.exemplar"}}</h3>
         <div class="detail">
             <div class="actions">
-                {{partial 'content/partials/information-actions'}}
+                {{#if isExemplarEditing}}
+                    <button class="cancel btn btn-info" {{action 'cancelExemplarEdit'}}>{{t "common.cancel"}}</button>
+                    <button class="save btn btn-success" {{action 'updateExemplarContent'}}>{{t "common.save"}}</button>
+                {{else}}
+                    <button class="edit btn btn-primary" {{action 'editExemplarContent'}}>{{t "common.edit"}}</button>
+                {{/if}}
             </div>
         </div>
     </div>
     <div class="panel panel-body">
         <div class="panelBodyContainer">
             <div class="textContainer">
-                <div class='referenceText exemplarText'>
-                    {{gru-rich-text-editor content=model.exemplar model=model valuePath='exemplar'}}
-                    {{!-- {{validation.gru-input model=model valuePath='exemplar' maxLength=50 didValidate=didValidate}} --}}
-                </div>
+                {{#if isExemplarEditing}}
+                    <div class='referenceText exemplarText'>
+                        {{gru-rich-text-editor content=model.exemplar model=model valuePath='exemplar'}}
+                        {{!-- {{validation.gru-input model=model valuePath='exemplar' maxLength=50 didValidate=didValidate}} --}}
+                    </div>
+                {{else}}
+                    <div class='referenceTextLabel'>
+                        {{{model.exemplar}}}
+                    </div>
+                {{/if}}
             </div>
         </div>
     </div>

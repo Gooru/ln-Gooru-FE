@@ -12,9 +12,10 @@ export default Ember.Object.extend({
   /**
    * Fetch the list of OA that the teacher needs to grade for a given class
    * @param {string} classId
+   * @param {string} userId
    * @returns {Object}
    */
-  getOAToGrade(classId) {
+  getOAToGrade(classId, userId) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/rubrics/items`;
@@ -23,7 +24,8 @@ export default Ember.Object.extend({
       contentType: 'application/json; charset=utf-8',
       headers: adapter.defineHeaders(),
       data: {
-        classId
+        classId,
+        userId
       }
     };
     return Ember.$.ajax(url, options);
@@ -70,11 +72,11 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Submit student submission by teacher
+   * Submit student submission by teacher | student
    * @param {Object} Grade
    * @returns {Promise}
    */
-  submitTeacherGrade(data) {
+  submitOAGrade(data) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/rubrics/grades/collections`;

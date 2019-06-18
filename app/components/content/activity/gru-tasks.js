@@ -84,24 +84,32 @@ export default Ember.Component.extend({
     updateTaskCollection(task) {
       const component = this;
       let tasksCol = component.get('tasks');
-      tasksCol.removeObject(task);
+      component.removeItemIfFromCollection(tasksCol, task, 'id');
       tasksCol.pushObject(task);
       component.get('updateParent')();
       if (component.get('task')) {
         component.set('task', null);
       }
     },
+
     removeLineItem(task) {
       const component = this;
       component.removeTask(task).then(task => {
         let tasksCol = component.get('tasks');
-        tasksCol.removeObject(task);
+        component.removeItemIfFromCollection(tasksCol, task, 'id');
         component.get('updateParent')();
       });
     },
 
     updateExpanded(isExpanded) {
       Ember.set(this, 'isExpanded', isExpanded);
+    }
+  },
+
+  removeItemIfFromCollection(col, item, field) {
+    let curItem = col.findBy(field, item[field]);
+    if (curItem) {
+      col.removeObject(curItem);
     }
   },
   // -------------------------------------------------------------------------

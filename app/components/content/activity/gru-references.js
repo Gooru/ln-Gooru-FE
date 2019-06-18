@@ -39,7 +39,9 @@ export default Ember.Component.extend({
    */
   references: null,
 
-  isEditing: true,
+  isEditing: false,
+
+  isExemplarEditing: false,
 
   oaId: null,
 
@@ -60,11 +62,35 @@ export default Ember.Component.extend({
      */
     updateContent: function() {
       this.get('updateContent')(this.get('model'));
+      this.set('isEditing', false);
     },
 
     cancelEdit: function() {
-      let srcModel = this.get('activityModel').copy();
-      this.set('model', srcModel);
+      this.set('isEditing', false);
+      let srcModelValue = this.get('activityModel.reference');
+      this.set('model.reference', srcModelValue);
+    },
+
+    editContent() {
+      this.set('isEditing', true);
+    },
+
+    /**
+     * Action to save reference, and exemplar fields
+     */
+    updateExemplarContent: function() {
+      this.get('updateContent')(this.get('model'));
+      this.set('isExemplarEditing', false);
+    },
+
+    cancelExemplarEdit: function() {
+      this.set('isExemplarEditing', false);
+      let srcModelValue = this.get('activityModel.exemplar');
+      this.set('model.exemplar', srcModelValue);
+    },
+
+    editExemplarContent() {
+      this.set('isExemplarEditing', true);
     },
 
     /**

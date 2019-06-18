@@ -9,7 +9,7 @@
   #information {
     .two-col-info {
       display: flex;
-      max-width: 1000px;
+      width: 100%;
 
       @media (max-width: $screen-sm) {
         flex-direction: column;
@@ -17,7 +17,7 @@
 
       .title,
       .learning-objectives {
-        width: 500px;
+        flex: 1;
 
         > label {
           display: flex !important;
@@ -143,6 +143,7 @@
         }
         .add-item {
           font-size: 22px;
+          position: absolute;
         }
         .remove-item {
           font-size: 22px;
@@ -155,6 +156,13 @@
 
         .referenceText {
           display: inline-block;
+        }
+
+        .referenceTextLabel {
+          display: inline-block;
+          border: 1px solid $gray-lighter;
+          height: 200px;
+          overflow: auto;
         }
       }
       .referenceArtifacts {
@@ -383,6 +391,10 @@
         padding: 0 20px;
         color: #4b9741;
       }
+    }
+
+    .url-section {
+      margin-top: 25px;
     }
     .add-rubric-container {
       border: 2px dashed $gray-light;

@@ -83,7 +83,26 @@ export default Ember.Component.extend({
 
     this.set('referenceSubType1', getOASubType());
 
-    let referenceInstance = ReferenceModel.create({ oaId: this.get('oaId') });
+    let referenceInstance = this.getNewReferenceModel();
+
+    referenceInstance.set('subTypeSel', subTypeSel);
+    this.set('model', referenceInstance);
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    let chooseOne = this.get('i18n').t(
+      'teacher-landing.class.class-settings.class-settings-sec.option-choose-one'
+    ).string;
+
+    let subTypeSel = Ember.Object.create({
+      display_name: chooseOne
+    });
+
+    this.set('referenceSubType1', getOASubType());
+
+    let referenceInstance = this.getNewReferenceModel();
+
     referenceInstance.set('subTypeSel', subTypeSel);
     this.set('model', referenceInstance);
   },
@@ -140,14 +159,18 @@ export default Ember.Component.extend({
 
     updateContent: function() {
       const component = this;
-      component.set('isLoading', true);
-      let editRefModel = component.get('model');
-      let fileIdPromise = component.uploadSelectedFile();
-      fileIdPromise.then(function(fileId) {
-        editRefModel.location = fileId;
-        component.updateReference(editRefModel).then(() => {
-          component.set('isLoading', false); // needed to break the ref
-        });
+      component.validate().then(isValid => {
+        if (isValid) {
+          component.set('isLoading', true);
+          let editRefModel = component.get('model');
+          let fileIdPromise = component.uploadSelectedFile();
+          fileIdPromise.then(function(fileId) {
+            editRefModel.location = fileId;
+            component.updateReference(editRefModel).then(() => {
+              component.set('isLoading', false); // needed to break the ref
+            });
+          });
+        }
       });
     },
 
@@ -167,13 +190,14 @@ export default Ember.Component.extend({
       let editRefModel = component.get('model');
       this.set('model.type', 'remote');
       this.set('model.subType', 'url');
-
-      component.updateReference(editRefModel).then(() => {
-        component.set('isLoading', false);
-        let referenceInstance = ReferenceModel.create({
-          oaId: this.get('oaId')
-        });
-        this.set('model', referenceInstance);
+      component.validate().then(isValid => {
+        if (isValid) {
+          component.updateReference(editRefModel).then(() => {
+            component.set('isLoading', false);
+            let referenceInstance = component.getNewReferenceModel();
+            this.set('model', referenceInstance);
+          });
+        }
       });
     }
   },
@@ -202,7 +226,37 @@ export default Ember.Component.extend({
       .then(createdRefModel => {
         component.expandCollapse(createdRefModel);
         component.updateParent(createdRefModel);
-        component.set('model', createdRefModel.copy()); // needed to break the ref
+        let referenceInstance = this.getNewReferenceModel();
+        component.set('model', referenceInstance); // needed to break the ref
       });
+  },
+
+  getNewReferenceModel() {
+    return ReferenceModel.create(Ember.getOwner(this).ownerInjection(), {
+      oaId: this.get('oaId')
+    });
+  },
+  validate() {
+    const component = this;
+    let model = component.get('model');
+    var didValidate;
+    if (model.get('type') === 'uploaded') {
+      didValidate = new Ember.RSVP.Promise(function(resolve) {
+        resolve(true);
+      });
+    } else {
+      didValidate = new Ember.RSVP.Promise(function(resolve) {
+        if (model) {
+          model
+            .validate()
+            .then(
+              ({ validations }) => resolve(validations.get('isValid')),
+              () => resolve(false)
+            );
+        }
+      });
+    }
+    component.set('didValidate', didValidate);
+    return didValidate;
   }
 });

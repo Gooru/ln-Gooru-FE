@@ -20,7 +20,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
   session: Ember.inject.service('session'),
-
   /**
    * @property {Service} I18N service
    */
@@ -98,6 +97,15 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return actualPayLoad;
   },
 
+  serializeUpdateActivity: function(activityModel) {
+    const serializer = this;
+    let actualPayLoad = this.serializeActivity(activityModel);
+    actualPayLoad.taxonomy = serializer
+      .get('taxonomySerializer')
+      .serializeTaxonomy(activityModel.get('standards'));
+    return actualPayLoad;
+  },
+
   serializeActivity(activityModel) {
     const thumbnail = cleanFilename(
       activityModel.get('thumbnailUrl'),
@@ -105,7 +113,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
     );
     let serializedActivity = {
       title: activityModel.get('title'),
-      learning_objective: activityModel.get('learningObjectives'),
+      learning_objective:
+        activityModel.get('learningObjectives') !== null &&
+        activityModel.get('learningObjectives') === ''
+          ? null
+          : activityModel.get('learningObjectives'),
       visible_on_profile: activityModel.get('isVisibleOnProfile'),
       thumbnail: !Ember.isEmpty(thumbnail) ? thumbnail : null,
       metadata: activityModel.get('metadata') || {
@@ -132,7 +144,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
       activityModel.get('centurySkills') || [];
     serializedActivity.reference = activityModel.reference;
     serializedActivity.exemplar = activityModel.exemplar;
-    serializedActivity.max_score = activityModel.maxScore;
+    if (!(activityModel.rubric && activityModel.rubric.length > 0)) {
+      //set max score only when no rubrics
+      serializedActivity.max_score = activityModel.maxScore;
+    }
 
     return serializedActivity;
   },
@@ -238,7 +253,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
             ? metadata['21_century_skills']
             : [],
         durationHours: activityData.duration_hours || 0,
-        maxScore: activityData.max_score
+        maxScore: activityData.max_score || 1
       }
     );
     return normalizedActivity;
@@ -397,6 +412,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     let oaRubrics = serializer.normalizeRubricGrade(response.oaRubrics);
     return Ember.Object.create({
       oaRubrics,
+      sessionId: response.sessionId,
       tasks: response.tasks
         ? response.tasks.map(task => serializer.normalizeGradeTasks(task))
         : []
@@ -489,8 +505,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
     });
   },
 
-  serializeStudentRubricGrades(payload) {
-    return Ember.Object.create({
+  serializeRubricGrades(payload) {
+    let grade = Ember.Object.create({
       rubric_id: nullIfEmpty(payload.get('id')),
       student_id: payload.get('studentId'),
       class_id: payload.get('classId'),
@@ -498,13 +514,15 @@ export default Ember.Object.extend(ConfigurationMixin, {
       dca_content_id: payload.get('dcaContentId'),
       content_source: payload.get('contentSource'),
       collection_type: payload.get('collectionType'),
-      session_id: nullIfEmpty(payload.get('sessionId')),
-      grader: 'teacher',
-      grader_id: this.get('session.userId'),
-      student_score: payload.get('studentScore')
-        ? parseInt(payload.get('studentScore'))
-        : parseInt(payload.get('currentScore')),
+      grader: payload.get('grader'),
+      student_score: payload.get('maxScore')
+        ? payload.get('studentScore')
+          ? parseInt(payload.get('studentScore'))
+          : parseInt(payload.get('currentScore'))
+        : null,
       max_score: payload.get('maxScore'),
+      grader_id: payload.get('graderId'),
+      session_id: payload.sessionId ? payload.sessionId : undefined,
       overall_comment: payload.get('comment'),
       category_score: payload.get('categoriesScore').length
         ? payload
@@ -516,6 +534,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
           )
         : null
     });
+    return grade;
   },
 
   /**

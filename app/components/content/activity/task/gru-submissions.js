@@ -101,7 +101,6 @@ export default Ember.Component.extend({
      */
     updateContent(taskSubmissionSubType) {
       const component = this;
-      //ToDo: Call activityService API and save changes
       component.saveTaskSubmission(taskSubmissionSubType).then(submission => {
         component.send('updateSubmissionCollection', submission);
       });

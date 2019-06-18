@@ -1,15 +1,10 @@
 import Ember from 'ember';
-import {
-  ROLES,
-  SCREEN_SIZES
-} from 'gooru-web/config/config';
+import { ROLES, SCREEN_SIZES } from 'gooru-web/config/config';
 import {
   getSubjectIdFromSubjectBucket,
   isCompatibleVW
 } from 'gooru-web/utils/utils';
-import {
-  getCategoryCodeFromSubjectId
-} from 'gooru-web/utils/taxonomy';
+import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
 export default Ember.Mixin.create({
   // -------------------------------------------------------------------------
   // Dependencies
@@ -195,7 +190,7 @@ export default Ember.Mixin.create({
     const competencyStatus = competency.get('status');
     let showSignatureAssessment =
       signatureCompetencyList[domainCode] ===
-      competency.get('competencyCode') ||
+        competency.get('competencyCode') ||
       competencyStatus === 2 ||
       competencyStatus === 4;
     competency.set('showSignatureAssessment', showSignatureAssessment);
@@ -224,9 +219,7 @@ export default Ember.Mixin.create({
           .get('competencyService')
           .getUserSignatureCompetencies(userId, subject)
       })
-      .then(({
-        competencyList
-      }) => {
+      .then(({ competencyList }) => {
         component.set('signatureCompetencyList', competencyList);
       });
   },
@@ -280,17 +273,14 @@ export default Ember.Mixin.create({
     if (course.get('id')) {
       let taxonomySubjects = component.get('taxonomySubjects');
       let subjectBucket = component.get('subjectBucket');
-      let subjectCode = subjectBucket ?
-        getSubjectIdFromSubjectBucket(subjectBucket) :
-        null;
+      let subjectCode = subjectBucket
+        ? getSubjectIdFromSubjectBucket(subjectBucket)
+        : null;
       let isSupportedTaxonomySubject = taxonomySubjects.findBy(
         'code',
         subjectCode
       );
-      let aggregatedTaxonomy = course.get('aggregatedTaxonomy');
-      let isShowMatrixChart = !!(
-        aggregatedTaxonomy && isSupportedTaxonomySubject
-      );
+      let isShowMatrixChart = !!isSupportedTaxonomySubject;
       component.set('isShowMatrixChart', isShowMatrixChart);
     }
   },
@@ -315,10 +305,7 @@ export default Ember.Mixin.create({
             .getCompetencyMatrixCoordinates(subjectId),
           userProficiencyBaseLine: component.fetchBaselineCompetencies()
         })
-        .then(({
-          competencyMatrixs,
-          competencyMatrixCoordinates
-        }) => {
+        .then(({ competencyMatrixs, competencyMatrixCoordinates }) => {
           if (
             !(component.get('isDestroyed') || component.get('isDestroying'))
           ) {
@@ -350,9 +337,7 @@ export default Ember.Mixin.create({
           .get('competencyService')
           .getUserProficiencyBaseLine(classId, courseId, userId)
       })
-      .then(({
-        userProficiencyBaseLine
-      }) => {
+      .then(({ userProficiencyBaseLine }) => {
         component.set('userProficiencyBaseLine', userProficiencyBaseLine);
         return userProficiencyBaseLine;
       });
@@ -361,9 +346,14 @@ export default Ember.Mixin.create({
   setCompetencyCount() {
     let controller = this;
     let domainMatrixs = controller.get('competencyMatrixDomains');
-    let competencyMatrixCoordinates = controller.get('competencyMatrixCoordinates');
-    competencyMatrixCoordinates.domains.map((domain) => {
-      let domainCompetency = domainMatrixs.findBy('domainCode', domain.get('domainCode'));
+    let competencyMatrixCoordinates = controller.get(
+      'competencyMatrixCoordinates'
+    );
+    competencyMatrixCoordinates.domains.map(domain => {
+      let domainCompetency = domainMatrixs.findBy(
+        'domainCode',
+        domain.get('domainCode')
+      );
       domain.set('competencyCount', domainCompetency.competencies.length);
     });
   },
@@ -387,9 +377,7 @@ export default Ember.Mixin.create({
         .hash({
           taxonomyGrades: taxonomyService.fetchGradesBySubject(filters)
         })
-        .then(({
-          taxonomyGrades
-        }) => {
+        .then(({ taxonomyGrades }) => {
           component.set(
             'taxonomyGrades',
             taxonomyGrades.sortBy('sequence').reverse()

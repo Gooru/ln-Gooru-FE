@@ -20,6 +20,7 @@
       </div>
     </div>
     <div class="course-map-container">
+
       {{#if isStudentCourseMap}}
         <div class="active-student">
           <div class="student-thumbnail pull-left" style="background-image: url({{activeStudent.avatarUrl}})"></div>
@@ -32,6 +33,7 @@
           </div>
         </div>
       {{/if}}
+
       <div class="course-map-body">
         {{#if ( or (and class.milestoneViewApplicable  isMilestoneView) (not class.milestoneViewApplicable  isMilestoneView))}}
           <div class="students">
@@ -49,6 +51,7 @@
             </div>
           </div>
         {{/if}}
+
         <div class="render-course-map {{if (and (not isStudentCourseMap) questionItems) 'sm-course-map'}}">
           {{#if (and class.milestoneViewApplicable hasMilestoneViewReady (not isStudentCourseMap))}}
             <div class="ms-cm-view-switcher-ctn">

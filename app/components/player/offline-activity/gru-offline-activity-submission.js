@@ -125,14 +125,23 @@ export default Ember.Component.extend({
             );
 
             if (activityTask) {
+              let activityTaskSubmissions = taskSubmission.get('submissions');
               activityTask.set(
                 'studentTaskSubmissions',
-                taskSubmission.get('submissions')
+                activityTaskSubmissions
               );
-              activityTask.set(
-                'submissionText',
-                taskSubmission.get('submissionText')
-              );
+              if (activityTaskSubmissions.length) {
+                let taskSubmissionText = activityTaskSubmissions.findBy(
+                  'submissionType',
+                  'free-form-text'
+                );
+                activityTask.set(
+                  'submissionText',
+                  taskSubmissionText
+                    ? taskSubmissionText.get('submissionInfo')
+                    : null
+                );
+              }
             }
           });
           if (submittedTimespentInMillisec) {

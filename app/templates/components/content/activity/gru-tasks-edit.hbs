@@ -8,12 +8,19 @@
             </div>
             <div class="info">
                 <h3>{{model.title}} </h3>
-                <span class="submissionCount"> Submissions : {{model.oaTaskSubmissions.length}}</span>
+                <span class="submissionCount">
+                    {{#if model.id}}
+                        {{t 'oa.task.submissions.frs-label'}}
+                    {{/if}}
+                    {{#if (gt model.oaTaskSubmissions.length 0)}}
+                        , {{t 'oa.task.submissions.label'}} : {{model.oaTaskSubmissions.length}}
+                    {{/if}}
+                </span>
             </div>
             {{!-- {{task.description}} --}}
             {{#if model.id}}
                 <div class="actions">
-                    <button class="btn no-bgd remove-item" {{action 'removeLineItem'}}>
+                    <button class="btn no-bgd remove-item" {{action 'removeLineItem' preventDefault=false bubbles=false}}>
                         {{gru-icon name="remove_circle"}}
                     </button>
                 </div>
@@ -30,11 +37,11 @@
                 </div>
                 {{!-- <button {{action 'updateContent'}}>Save</button>
         <button>Cancel </button> --}}
-                <span>Title</span>
+                <span>{{t 'common.title'}} </span>
                 {{validation.gru-input model=model valuePath='title' maxLength=50 didValidate=didValidate}}
             </div>
             {{!-- {{partial 'content/partials/information-actions'}} --}}
-            <span>Description</span>
+            <span>{{t 'common.description' }}</span>
             {{validation.gru-textarea model=model content=model.description valuePath='description' rows=2 maxLength=500 didValidate=didValidate}}
             {{!-- {{gru-rich-text-editor content=model.description model=model valuePath='description'}} --}}
             {{!-- {{validation.gru-input model=model valuePath='description' maxLength=50 didValidate=true}} --}}

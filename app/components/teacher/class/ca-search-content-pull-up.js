@@ -3,13 +3,12 @@ import {
   SEARCH_FILTER_BY_CONTENT_TYPES,
   KEY_CODES,
   SCREEN_SIZES,
-  PLAYER_EVENT_SOURCE
+  PLAYER_EVENT_SOURCE,
+  CONTENT_TYPES
 } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 export default Ember.Component.extend(ConfigurationMixin, {
@@ -218,12 +217,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
   }),
 
   /**
-   * This flag gets update on selection of menu items
-   * @type {Boolean}
-   */
-  isCourseMap: false,
-
-  /**
    * @property {Object} competencyData
    * Property to hold selected competency data
    */
@@ -279,9 +272,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
   isClassPreferenceMapped: Ember.computed('classPreference', function() {
     let component = this;
     let classPreference = component.get('classPreference');
-    return classPreference ?
-      classPreference.subject && classPreference.framework :
-      false;
+    return classPreference
+      ? classPreference.subject && classPreference.framework
+      : false;
   }),
 
   /**
@@ -289,11 +282,23 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   isShowMoreEnabled: true,
 
+  /**
+   * Maintains the value of currently selected menu name.
+   * @return {String}
+   */
+  selectedMenuName: Ember.computed(
+    'menuItems.[]',
+    'menuItems.@each.selected',
+    function() {
+      let menuItem = this.get('menuItems').findBy('selected', true);
+      return menuItem.get('key');
+    }
+  ),
+
   // -------------------------------------------------------------------------
   // actions
 
   actions: {
-
     /**
      * Action triggered when the user click on close
      */
@@ -422,8 +427,15 @@ export default Ember.Component.extend(ConfigurationMixin, {
       let forYear = moment(scheduleDate).format('YYYY');
       component
         .get('classActivityService')
-        .addActivityToClass(classId, contentId, contentType, scheduleDate, forMonth,
-          forYear, scheduleEndDate)
+        .addActivityToClass(
+          classId,
+          contentId,
+          contentType,
+          scheduleDate,
+          forMonth,
+          forYear,
+          scheduleEndDate
+        )
         .then(newContentId => {
           if (!component.isDestroyed) {
             let data = component.serializerSearchContent(
@@ -514,7 +526,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
         }
       }, 100);
       this.set('selectedContentForSchedule', content);
-      this.set('allowTwoDateRangePicker', content.get('format') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS);
+      this.set(
+        'allowTwoDateRangePicker',
+        content.get('format') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS
+      );
     },
 
     //Action triggered when click + icon in the pullup
@@ -597,10 +612,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   openPullUp() {
     let component = this;
-    component.$().animate({
-      top: '10%'
-    },
-    400
+    component.$().animate(
+      {
+        top: '10%'
+      },
+      400
     );
   },
 
@@ -641,9 +657,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
       .hash({
         searchResults: component.getSearchService()
       })
-      .then(({
-        searchResults
-      }) => {
+      .then(({ searchResults }) => {
         if (!component.isDestroyed) {
           component.set('isLoading', false);
           component.set('searchResults', searchResults);
@@ -668,9 +682,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
       .hash({
         searchResults: component.getSearchService()
       })
-      .then(({
-        searchResults
-      }) => {
+      .then(({ searchResults }) => {
         if (!component.isDestroyed) {
           component.set('isLoading', false);
           let searchResult = component.get('searchResults');
@@ -687,14 +699,26 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   getSearchService() {
     let component = this;
+    let searchService = null;
+    let label = component.get('selectedMenuItem.label');
+    if (label === 'common.myContent') {
+      searchService = component.getMyContentByType();
+    } else if (label === 'common.gooru-catalog') {
+      searchService = component.getSearchServiceByType();
+    }
+    return searchService;
+  },
+
+  getSearchServiceByType() {
+    let component = this;
     let activeContentType = component.get('activeContentType');
     let params = component.getSearchParams();
     let term = component.getSearchTerm() ? component.getSearchTerm() : '*';
-    if (activeContentType === 'collection') {
+    if (activeContentType === CONTENT_TYPES.COLLECTION) {
       return component.get('searchService').searchCollections(term, params);
-    } else if (activeContentType === 'assessment') {
+    } else if (activeContentType === CONTENT_TYPES.ASSESSMENT) {
       return component.get('searchService').searchAssessments(term, params);
-    } else {
+    } else if (activeContentType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
       return component.get('searchService').searchOfflineActivity(term, params);
     }
   },
@@ -708,14 +732,18 @@ export default Ember.Component.extend(ConfigurationMixin, {
     if (term) {
       params.searchText = term;
     }
-    if (activeContentType === 'collection') {
+    if (activeContentType === CONTENT_TYPES.COLLECTION) {
       return component
         .get('profileService')
         .readCollections(currentUserId, params);
-    } else if (activeContentType === 'assessment') {
+    } else if (activeContentType === CONTENT_TYPES.ASSESSMENT) {
       return component
         .get('profileService')
         .readAssessments(currentUserId, params);
+    } else if (activeContentType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+      return component
+        .get('profileService')
+        .readOfflineActivities(currentUserId, params);
     }
   },
 
@@ -814,7 +842,14 @@ export default Ember.Component.extend(ConfigurationMixin, {
     return params;
   },
 
-  serializerSearchContent(content, contentId, startDate, forMonth, forYear, endDate) {
+  serializerSearchContent(
+    content,
+    contentId,
+    startDate,
+    forMonth,
+    forYear,
+    endDate
+  ) {
     let format = content.get('format');
     if (!format) {
       content.set('format', this.get('activeContentType'));
@@ -861,7 +896,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
         item.set('selected', true);
       }
     });
-    this.set('isCourseMap', false);
   },
 
   closeCADatePickerOnScroll() {
@@ -898,10 +932,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
     if (!skipToggle) {
       component.toggleProperty('isMenuEnabled');
     }
-    if (selectedItem.get('key') === 'courseMap') {
-      component.set('isCourseMap', true);
-    } else {
-      component.set('isCourseMap', false);
+    if (selectedItem.get('key') !== 'courseMap') {
       component.loadData();
     }
   }

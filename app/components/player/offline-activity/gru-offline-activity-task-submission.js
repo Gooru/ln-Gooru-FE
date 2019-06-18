@@ -37,13 +37,12 @@ export default Ember.Component.extend({
       let uploadedFiles = task.get('files');
       //add new file
       uploadedFiles.pushObject(file);
-      if (component.get('isUploadedRequiredTaskFiles')) {
-        component.get('listOfFilesUploads').pushObject(
-          Ember.Object.create({
-            isFileAvailable: false
-          })
-        );
-      }
+      component.get('listOfFilesUploads').pushObject(
+        Ember.Object.create({
+          isFileAvailable: false,
+          isUploaded: false
+        })
+      );
       let fileType = inferUploadType(file.name, OA_TASK_SUBMISSION_TYPES);
       file.fileType = fileType ? fileType.value : 'others';
       file.icon = OA_TASK_SUBMISSION_TYPES.findBy('value', file.fileType).icon;
@@ -69,6 +68,16 @@ export default Ember.Component.extend({
     //Action triggered when click on remove selected file
     onRemoveFile(filePos) {
       this.removeFile(filePos);
+    },
+
+    //Action triggered when click on plus button in the url
+    onAppendUrl() {
+      this.get('task.urls').pushObject(
+        Ember.Object.create({
+          value: null,
+          isSubmittedUrl: false
+        })
+      );
     }
   },
 
@@ -142,6 +151,27 @@ export default Ember.Component.extend({
   }),
 
   /**
+   * @property {Number} pendingUploadSubmissions
+   * Property for number of upload submissions pending
+   */
+  pendingUploadSubmissions: Ember.computed(
+    'task.files.[]',
+    'mandatoryUploads',
+    'studentTaskUploadSubmission',
+    function() {
+      const component = this;
+      const uploadedFilesCount = component.get('task.files.length');
+      const mandatoryUploads = component.get('mandatoryUploads');
+      const studentTaskUploadSubmission = component.get(
+        'studentTaskUploadSubmission.length'
+      );
+      return mandatoryUploads > studentTaskUploadSubmission
+        ? mandatoryUploads - (uploadedFilesCount + studentTaskUploadSubmission)
+        : 0;
+    }
+  ),
+
+  /**
    * @property {Array} oaTaskRemoteSubmissions
    * Property to capture student added url submissions
    */
@@ -159,6 +189,30 @@ export default Ember.Component.extend({
     const component = this;
     return component.get('oaTaskRemoteSubmissions.length');
   }),
+
+  /**
+   * @property {Number} pendingUrlSubmissions
+   * Property for number of url submissions pending
+   */
+  pendingUrlSubmissions: Ember.computed(
+    'task.urls.@each.value',
+    'mandatoryUrls',
+    'studentTaskUrlSubmission',
+    function() {
+      const component = this;
+      const taskUrls = component.get('task.urls');
+      const mandatoryUrls = component.get('mandatoryUrls');
+      const studentTaskUrlSubmission = component.get(
+        'studentTaskUrlSubmission.length'
+      );
+      const uploadedUrls = taskUrls
+        ? taskUrls.filter(url => url.value)
+        : Ember.A([]);
+      return mandatoryUrls > studentTaskUrlSubmission
+        ? mandatoryUrls - (uploadedUrls.length + studentTaskUrlSubmission)
+        : 0;
+    }
+  ),
 
   /**
    * @property {Boolean} isUploadedRequiredTaskFiles
@@ -221,10 +275,7 @@ export default Ember.Component.extend({
         ? component.get('task.files').length
         : false;
       let addedAnswerText = component.get('task.submissionText');
-      return (
-        (addedUrls || addedFiles || addedAnswerText) &&
-        component.get('isValidTimespent')
-      );
+      return addedUrls || addedFiles || addedAnswerText;
     }
   ),
 
@@ -287,19 +338,12 @@ export default Ember.Component.extend({
    * Property to handle the visibility of number of files needs to be uploaded
    */
   listOfFilesUploads: Ember.computed('mandatoryUploads', function() {
-    const component = this;
-    let studentTaskUploadSubmission = component.get(
-      'studentTaskUploadSubmission.length'
-    );
-    let mandatoryUploads = component.get('mandatoryUploads');
-    let defaultUploadCount = mandatoryUploads - studentTaskUploadSubmission;
-    defaultUploadCount = defaultUploadCount <= 0 ? 1 : defaultUploadCount;
-    let arrayWithDefaultLength = new Array(defaultUploadCount);
-    return arrayWithDefaultLength.fill(
+    return Ember.A([
       Ember.Object.create({
-        isFileAvailable: false
+        isFileAvailable: false,
+        isUploaded: false
       })
-    );
+    ]);
   }),
 
   /**
@@ -341,7 +385,7 @@ export default Ember.Component.extend({
    */
   uploadFilesToS3() {
     const component = this;
-    let files = component.get('task.files');
+    let files = component.get('task.files').filter(file => !file.isUploaded);
     let uploadedFilesPromise = files.map(file => {
       return component.uploadFileIntoS3(file).then(function(fileObject) {
         return fileObject;
@@ -357,15 +401,19 @@ export default Ember.Component.extend({
   uploadFileIntoS3(fileObject) {
     const component = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      return Ember.RSVP.hash({
-        fileLocation: component
-          .get('mediaService')
-          .uploadContentFile(fileObject)
-      }).then(({ fileLocation }) => {
-        let cdnUrls = component.get('session.cdnUrls');
-        let UUIDFileName = cleanFilename(fileLocation, cdnUrls);
-        return resolve((fileObject.UUIDFileName = UUIDFileName));
-      }, reject);
+      return Ember.RSVP
+        .hash({
+          fileLocation: component
+            .get('mediaService')
+            .uploadContentFile(fileObject)
+        })
+        .then(({ fileLocation }) => {
+          let cdnUrls = component.get('session.cdnUrls');
+          let UUIDFileName = cleanFilename(fileLocation, cdnUrls);
+          fileObject.UUIDFileName = UUIDFileName;
+          fileObject.isUploaded = true;
+          return resolve(fileObject);
+        }, reject);
     });
   },
 
@@ -392,7 +440,7 @@ export default Ember.Component.extend({
     const classId = component.get('classId');
     const caContentId = component.get('caContentId');
     let taskSubmissions = [];
-    let uploadedFiles = task.get('files');
+    let uploadedFiles = task.get('files').filter(file => !file.isSubmitted);
     let timespentInMilliSec = component.get('timespentInMilliSec');
     uploadedFiles.map(uploadedFile => {
       let submissionContext = Ember.Object.create({
@@ -403,6 +451,7 @@ export default Ember.Component.extend({
       taskSubmissions.push(
         component.getTaskSubmissionContext(submissionContext)
       );
+      uploadedFile.isSubmitted = true;
     });
     //fetch only newly added urls
     let submissionUrls = task
@@ -419,19 +468,17 @@ export default Ember.Component.extend({
       taskSubmissions.push(
         component.getTaskSubmissionContext(submissionContext)
       );
+      submissionUrl.set('isSubmittedUrl', true);
     });
-    if (!taskSubmissions.length) {
-      //if no uploads are available, send submission text alone
-      taskSubmissions = [
-        {
-          task_id: task.get('id'),
-          submission_info: null,
-          submission_text: task.get('submissionText'),
-          submission_type: null,
-          submission_subtype: null
-        }
-      ];
-    }
+    //Task free form text data
+    let freeFormTextSubmissionContext = Ember.Object.create({
+      submissionValue: task.get('submissionText'),
+      submissionType: 'free-form-text',
+      submissionSubType: 'free-form-text'
+    });
+    taskSubmissions.push(
+      component.getTaskSubmissionContext(freeFormTextSubmissionContext)
+    );
     return {
       student_id: userId,
       class_id: classId,
@@ -453,7 +500,6 @@ export default Ember.Component.extend({
     return {
       task_id: task.get('id'),
       submission_info: submissionContext.get('submissionValue'),
-      submission_text: task.get('submissionText'),
       submission_type: submissionContext.get('submissionType'),
       submission_subtype: submissionContext.get('submissionSubType')
     };
@@ -474,7 +520,7 @@ export default Ember.Component.extend({
   setDefaultProperties() {
     const component = this;
     component.set('task.files', Ember.A([]));
-    component.set('task.urls', component.get('oaTaskRemoteSubmissions'));
+    component.set('task.urls', Ember.A([]));
     component.set('fileUploadErrors', Ember.A());
     if (component.get('isStudentSubmitted')) {
       let studentTaskUrlSubmission = component.get('studentTaskUrlSubmission');
@@ -493,6 +539,14 @@ export default Ember.Component.extend({
           );
         }
       });
+    }
+    if (!component.get('isReadOnly')) {
+      component.get('task.urls').pushObject(
+        Ember.Object.create({
+          value: null,
+          isSubmittedUrl: false
+        })
+      );
     }
   }
 });
