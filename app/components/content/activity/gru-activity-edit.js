@@ -101,7 +101,8 @@ export default CollectionEdit.extend({
         component.get('activityCollection').id
       ) {
         //ToDo: Call super
-      } else {
+      } else if (component.get('course')) {
+        //redirect to course edit only if it has tagged with a course
         let queryParams = {
           userId: component.get('course').get('ownerId')
         };
@@ -110,6 +111,8 @@ export default CollectionEdit.extend({
           .transitionTo('content.courses.edit', component.get('course').id, {
             queryParams
           });
+      } else {
+        component.set('isEditing', false);
       }
     },
     /**
