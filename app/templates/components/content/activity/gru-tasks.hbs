@@ -11,18 +11,18 @@
     </div>
     <div class="panel panel-body">
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
-            {{#if task }}
-                {{content.activity.gru-tasks-edit oaId=activityModel.id 
-                updateParent=(action 'updateTaskCollection') model=task removeLineItem=(action 'removeLineItem')
-                cancelTask= (action 'cancelTask')
-                }}
-            {{/if}}
             {{#each tasks as |task|}}
                 {{content.activity.gru-tasks-edit oaId=activityModel.id updateParent=(action 'updateTaskCollection') 
                 isExpanded=isExpanded model=task  removeLineItem=(action 'removeLineItem')   updateExpanded=(action 'updateExpanded')
                 cancelTask= (action 'cancelTask')
                 }}
             {{/each}}
+            {{#if task }}
+                {{content.activity.gru-tasks-edit oaId=activityModel.id 
+                updateParent=(action 'updateTaskCollection') model=task removeLineItem=(action 'removeLineItem')
+                cancelTask= (action 'cancelTask')
+                }}
+            {{/if}}
         </div>
     </div>
 </div>

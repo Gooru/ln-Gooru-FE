@@ -60,6 +60,13 @@ export default Ember.Component.extend({
    */
   tasks: null,
 
+  sortedTasks: Ember.observer('tasks', function() {
+    const component = this;
+    let tasksCol = component.get('tasks');
+    tasksCol = tasksCol.sortBy('id');
+    return tasksCol;
+  }),
+
   isExpanded: false,
 
   // -------------------------------------------------------------------------
@@ -86,6 +93,8 @@ export default Ember.Component.extend({
       let tasksCol = component.get('tasks');
       component.removeItemIfFromCollection(tasksCol, task, 'id');
       tasksCol.pushObject(task);
+      tasksCol = tasksCol.sortBy('id');
+      Ember.set(this, 'tasks', tasksCol);
       component.get('updateParent')();
       if (component.get('task')) {
         component.set('task', null);
