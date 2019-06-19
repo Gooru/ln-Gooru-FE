@@ -200,6 +200,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
 
         sequence: activityData.sequence_id,
         thumbnailUrl: thumbnailUrl,
+
         classroom_play_enabled:
           settings.classroom_play_enabled !== undefined
             ? settings.classroom_play_enabled
