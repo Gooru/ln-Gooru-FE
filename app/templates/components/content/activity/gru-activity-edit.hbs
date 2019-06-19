@@ -53,7 +53,7 @@
           </div>
           <div class="learning-objectives format">
             <label>
-              <span>{{t "oa.format"}}</span>
+              <span class="required">{{t "oa.format"}}</span>
               {{#if tempCollection.id }}
                 <b>{{subTaskDisplayValue}}</b>
               {{else}}
@@ -109,7 +109,7 @@
         {{/if}}
         <div class="standards">
           <label>
-            <span>{{t standardLabelKey}}</span>
+            <span class="required">{{t standardLabelKey}}</span>
             {{#if isEditing}}
               <button type="button" class="btn btn-primary" {{action 'openTaxonomyModal'}} disabled={{standardDisabled}}>
                 {{gru-icon name="open_in_new"}} {{t "common.select"}}
