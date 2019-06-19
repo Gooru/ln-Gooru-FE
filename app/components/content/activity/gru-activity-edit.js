@@ -331,6 +331,24 @@ export default CollectionEdit.extend({
         editingModel,
         component.get('activityCollection')
       );
+    },
+
+    updateQuantity(val) {
+      val = parseInt(val);
+      if (val >= 0) {
+        this.set('tempCollection.durationHours', val);
+      } else {
+        this.set('tempCollection.durationHours', 0);
+      }
+    },
+
+    inputTyping(val) {
+      val = parseInt(val);
+      if (val >= 0) {
+        this.set('tempCollection.durationHours', val);
+      } else {
+        this.set('tempCollection.durationHours', 0);
+      }
     }
   },
 

@@ -51,7 +51,7 @@
               {{/if}}
             </label>
           </div>
-          <div class="learning-objectives format">
+          <div class="activity-type learning-objectives format">
             <label>
               <span class="required">{{t "oa.format"}}</span>
               {{#if tempCollection.id }}
@@ -80,15 +80,29 @@
             </label>
           </div>
         </div>
-        <div class="learning-objectives">
-          <label>
-            <span>{{t "common.learning-objectives"}}</span>
+        <div class='two-col-info'>
+          <div class="learning-objectives">
+            <label>
+              <span>{{t "common.learning-objectives"}}</span>
+              {{#if isEditing}}
+                {{validation.gru-textarea model=tempCollection valuePath='learningObjectives' rows=2 maxLength=500 didValidate=didValidate}}
+              {{else}}
+                <b>{{activityCollection.learningObjectives}}</b>
+              {{/if}}
+            </label>
+          </div>
+          <div class="duration-hours">
+            <div>{{t "oa.info.duration-hrs"}}</div>
             {{#if isEditing}}
-              {{validation.gru-textarea model=tempCollection valuePath='learningObjectives' rows=2 maxLength=500 didValidate=didValidate}}
+              {{input type=number value=tempCollection.durationHours class="duration-hours-input" name='durationHours' maxlength=3 
+                            focus-out="updateQuantity"
+                            key-press="inputTyping"
+                            
+                            }} {{t "oa.info.hrs"}}
             {{else}}
-              <b>{{activityCollection.learningObjectives}}</b>
+              <span class="duration-hours-label">{{activityCollection.durationHours}} {{t "oa.info.hrs"}}</span>
             {{/if}}
-          </label>
+          </div>
         </div>
         {{#if isEditing}}
           {{taxonomy.gru-taxonomy-selector

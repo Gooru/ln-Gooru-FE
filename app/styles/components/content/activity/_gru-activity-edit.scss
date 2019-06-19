@@ -16,6 +16,8 @@
       }
 
       .title,
+      .activity-type,
+      .duration-hours,
       .learning-objectives {
         flex: 1;
 
@@ -23,6 +25,13 @@
           display: flex !important;
           flex-direction: column;
         }
+      }
+      .activity-type,
+      .duration-hours {
+        padding-left: 20px;
+      }
+      .duration-hours-input {
+        text-align: center;
       }
     }
   }
