@@ -1,6 +1,10 @@
 import Ember from 'ember';
 import ModalMixin from 'gooru-web/mixins/modal';
-import { SEARCH_CONTEXT, CONTENT_TYPES, ROLES } from 'gooru-web/config/config';
+import {
+  SEARCH_CONTEXT,
+  CONTENT_TYPES,
+  ROLES
+} from 'gooru-web/config/config';
 export default Ember.Controller.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
@@ -81,11 +85,10 @@ export default Ember.Controller.extend(ModalMixin, {
     'appController.myClasses.classes.[]',
     function() {
       const classes = this.get('appController.myClasses');
-      return classes
-        ? classes
+      return classes ?
+        classes
           .getTeacherActiveClasses(this.get('session.userId'))
-          .filterBy('courseId', null)
-        : [];
+          .filterBy('courseId', null) : [];
     }
   ),
 
@@ -255,7 +258,9 @@ export default Ember.Controller.extend(ModalMixin, {
       .hash({
         searchResults: controller.getSearchService()
       })
-      .then(({ searchResults }) => {
+      .then(({
+        searchResults
+      }) => {
         if (!controller.isDestroyed) {
           controller.set('isLoading', false);
           controller.set('searchResults', searchResults);
@@ -274,7 +279,9 @@ export default Ember.Controller.extend(ModalMixin, {
       .hash({
         searchResults: controller.getMyContentService()
       })
-      .then(({ searchResults }) => {
+      .then(({
+        searchResults
+      }) => {
         if (!controller.isDestroyed) {
           controller.set('isLoading', false);
           controller.set('searchResults', searchResults);
@@ -320,7 +327,9 @@ export default Ember.Controller.extend(ModalMixin, {
         .hash({
           searchResults: controller.getSearchService()
         })
-        .then(({ searchResults }) => {
+        .then(({
+          searchResults
+        }) => {
           if (!controller.isDestroyed) {
             controller.set('isPaginate', false);
             let searchResult = controller.get('searchResults');
@@ -343,7 +352,9 @@ export default Ember.Controller.extend(ModalMixin, {
         .hash({
           searchResults: controller.getMyContentService()
         })
-        .then(({ searchResults }) => {
+        .then(({
+          searchResults
+        }) => {
           if (!controller.isDestroyed) {
             controller.set('isPaginate', false);
             let searchResult = controller.get('searchResults');
@@ -484,14 +495,6 @@ export default Ember.Controller.extend(ModalMixin, {
     };
     let filters = controller.filterBuilder();
 
-    if (
-      !controller.get('selectedFilters').length > 0 &&
-      controller.get('isTeacher') &&
-      controller.get('activeContentType') !== 'course' &&
-      controller.get('activeContentType') !== 'rubric'
-    ) {
-      filters['flt.audience'] = 'All Students,Teachers';
-    }
     if (controller.get('type') === SEARCH_CONTEXT.LIBRARY) {
       filters.scopeKey = 'open-library';
       filters.scopeTargetNames = controller.get('library.shortName');
@@ -583,9 +586,9 @@ export default Ember.Controller.extend(ModalMixin, {
       ownerMap[owner.id] = owner;
     });
     let mappedContents = contents.map(function(content) {
-      content.owner = content.ownerId
-        ? ownerMap[content.ownerId]
-        : ownerMap[content.owner];
+      content.owner = content.ownerId ?
+        ownerMap[content.ownerId] :
+        ownerMap[content.owner];
       return content;
     });
     return mappedContents;
