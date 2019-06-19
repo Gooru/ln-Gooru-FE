@@ -74,7 +74,7 @@
                     {{/if}}
                   </div>
                 {{else}}
-                  <b>{{t tempCollection.subFormat}}</b>
+                  <b>{{t (if tempCollection.subFormat tempCollection.subFormat "common.not-specified")}}</b>
                 {{/if}}
               {{/if}}
             </label>
