@@ -5,7 +5,13 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Dependencies
 
-  queryParams: ['caContentId', 'offlineActivityId', 'classId', 'role'],
+  queryParams: [
+    'caContentId',
+    'offlineActivityId',
+    'classId',
+    'role',
+    'isPreview'
+  ],
 
   // -------------------------------------------------------------------------
   // Actions
@@ -20,7 +26,12 @@ export default Ember.Controller.extend({
     onClosePlayer: function() {
       const controller = this;
       const classId = controller.get('classId');
-      controller.transitionToRoute('student.class.class-activities', classId);
+      //Redirect to CA if class ID is available otherwise go back to last accessed url
+      if (classId) {
+        controller.transitionToRoute('student.class.class-activities', classId);
+      } else {
+        window.history.back();
+      }
     }
   },
 
@@ -56,5 +67,10 @@ export default Ember.Controller.extend({
   /**
    * @property {Object} offlineActivity
    */
-  offlineActivity: {}
+  offlineActivity: {},
+
+  /**
+   * @property {Boolean} isPreview
+   */
+  isPreview: false
 });
