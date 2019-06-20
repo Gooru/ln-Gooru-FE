@@ -16,7 +16,7 @@ module.exports = function(grunt) {
       'build-dev': 'ember build',
       'build-prod': 'ember build --environment=production',
       'build-prod-bamboo':
-        'node --max-old-space-size=2048 node_modules/.bin/ember build --environment=production --output-path gooru-web'
+        'node --max-old-space-size=8192 node_modules/.bin/ember build --environment=production --output-path gooru-web'
     },
 
     stubby: {
