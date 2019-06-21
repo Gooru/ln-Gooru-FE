@@ -2729,5 +2729,7 @@ export default Object.assign(quizzesTranslations, {
   'oa.rubrics.student-associate-label': 'Associate a student rubric',
   'oa.task.submissions.head': 'Task Submissions',
   'common.uploads': 'Uploads',
-  'common.urls': 'URLs'
+  'common.urls': 'URLs',
+  'oa.info.duration-hrs': 'Expected time to complete',
+  'oa.info.hrs': ' hrs'
 });

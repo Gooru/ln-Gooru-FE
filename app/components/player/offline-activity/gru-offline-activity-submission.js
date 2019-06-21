@@ -9,6 +9,8 @@ export default Ember.Component.extend({
   // Attributes
   classNames: ['offline-activity-player', 'gru-offline-activity-submission'],
 
+  classNameBindings: ['isPreview:player-preview'],
+
   // -------------------------------------------------------------------------
   // Dependencies
   oaAnalyticsService: Ember.inject.service(
@@ -96,6 +98,12 @@ export default Ember.Component.extend({
     );
   }),
 
+  /**
+   * @property {Boolean} isPreview
+   * Property to show the player in read only mode or not
+   */
+  isPreview: false,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -108,50 +116,54 @@ export default Ember.Component.extend({
     component.set('isLoading', true);
     return Ember.RSVP
       .hash({
-        tasksSubmissions: component.fetchTasksSubmissions()
+        tasksSubmissions: !component.get('isPreview')
+          ? component.fetchTasksSubmissions()
+          : null
       })
       .then(({ tasksSubmissions }) => {
         if (!component.isDestroyed) {
-          let studentTasksSubmissions = tasksSubmissions.get('tasks');
           let activityTasks = component.get('offlineActivity.tasks');
-          let oaRubrics = tasksSubmissions.get('oaRubrics');
-          let submittedTimespentInMillisec = oaRubrics
-            ? oaRubrics.get('studentGrades.timeSpent')
-            : 0;
-          studentTasksSubmissions.map(taskSubmission => {
-            let activityTask = activityTasks.findBy(
-              'id',
-              taskSubmission.get('taskId')
-            );
-
-            if (activityTask) {
-              let activityTaskSubmissions = taskSubmission.get('submissions');
-              activityTask.set(
-                'studentTaskSubmissions',
-                activityTaskSubmissions
+          if (tasksSubmissions) {
+            let studentTasksSubmissions = tasksSubmissions.get('tasks');
+            let oaRubrics = tasksSubmissions.get('oaRubrics');
+            let submittedTimespentInMillisec = oaRubrics
+              ? oaRubrics.get('studentGrades.timeSpent')
+              : 0;
+            studentTasksSubmissions.map(taskSubmission => {
+              let activityTask = activityTasks.findBy(
+                'id',
+                taskSubmission.get('taskId')
               );
-              if (activityTaskSubmissions.length) {
-                let taskSubmissionText = activityTaskSubmissions.findBy(
-                  'submissionType',
-                  'free-form-text'
-                );
+
+              if (activityTask) {
+                let activityTaskSubmissions = taskSubmission.get('submissions');
                 activityTask.set(
-                  'submissionText',
-                  taskSubmissionText
-                    ? taskSubmissionText.get('submissionInfo')
-                    : null
+                  'studentTaskSubmissions',
+                  activityTaskSubmissions
                 );
+                if (activityTaskSubmissions.length) {
+                  let taskSubmissionText = activityTaskSubmissions.findBy(
+                    'submissionType',
+                    'free-form-text'
+                  );
+                  activityTask.set(
+                    'submissionText',
+                    taskSubmissionText
+                      ? taskSubmissionText.get('submissionInfo')
+                      : null
+                  );
+                }
               }
+            });
+            if (submittedTimespentInMillisec) {
+              component.set(
+                'timespentInMilliSecCopy',
+                submittedTimespentInMillisec
+              );
+              component.formatMillisecondsToHourMinute(
+                formatTimeInMilliSec(submittedTimespentInMillisec)
+              );
             }
-          });
-          if (submittedTimespentInMillisec) {
-            component.set(
-              'timespentInMilliSecCopy',
-              submittedTimespentInMillisec
-            );
-            component.formatMillisecondsToHourMinute(
-              formatTimeInMilliSec(submittedTimespentInMillisec)
-            );
           }
           component.set('activityTasks', activityTasks);
           component.set('isLoading', false);

@@ -257,3 +257,12 @@
     context=itemToGradeContextData
     itemsToGrade=questionItems}}
 {{/if}}
+
+{{#if isShowOfflineActivityPreview}}
+  {{reports.pull-up.oa-preview
+    showPullUp=isShowOfflineActivityPreview
+    oaId=previewContent.id
+    classId=classId
+    isReportView=false
+  }}
+{{/if}}

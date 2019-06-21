@@ -144,6 +144,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       activityModel.get('centurySkills') || [];
     serializedActivity.reference = activityModel.reference;
     serializedActivity.exemplar = activityModel.exemplar;
+    serializedActivity.duration_hours = activityModel.durationHours;
     if (!(activityModel.rubric && activityModel.rubric.length > 0)) {
       //set max score only when no rubrics
       serializedActivity.max_score = activityModel.maxScore;
@@ -200,6 +201,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
 
         sequence: activityData.sequence_id,
         thumbnailUrl: thumbnailUrl,
+
         classroom_play_enabled:
           settings.classroom_play_enabled !== undefined
             ? settings.classroom_play_enabled
@@ -262,9 +264,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
   normalizeTasks(payload) {
     const serializer = this;
     if (Ember.isArray(payload)) {
-      return payload.map(function(item, index) {
+      let taskArray = payload.map(function(item, index) {
         return serializer.normalizeReadTask(item, index);
       });
+      taskArray = taskArray.sortBy('id');
+      return taskArray;
     }
     return [];
   },

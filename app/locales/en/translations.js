@@ -2625,9 +2625,9 @@ export default Object.assign(quizzesTranslations, {
   'oa.tasks.label': 'Tasks',
   'oa.references.label': 'References',
   'oa.references.artifacts': 'Reference Artifacts',
-  'oa.references.urls': 'Reference URLs',
+  'oa.references.urls': 'URL References',
   'oa.references.exemplar': 'Exemplar Answer',
-  'oa.references.uploads': 'Upload',
+  'oa.references.uploads': 'Upload Files',
   'oa.submissions.type': 'Type of Submission',
   'oa.edit_activity': 'Edit Activity',
   'oa.add_activity': 'Add Activity',
@@ -2662,7 +2662,9 @@ export default Object.assign(quizzesTranslations, {
   'oa.task.submissions.label': 'Submissions',
   'oa.student-rubric': 'Student rubric',
   'oa.rubrics.student-associate-label': 'Associate a student rubric',
-  'oa.task.submissions.head': 'Task Submissions',
+  'oa.task.submissions.head': 'Required Submissions',
   'common.uploads': 'Uploads',
-  'common.urls': 'URLs'
+  'common.urls': 'URLs',
+  'oa.info.duration-hrs': 'Expected time to complete',
+  'oa.info.hrs': ' hrs'
 });

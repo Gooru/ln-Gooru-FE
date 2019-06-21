@@ -46,7 +46,6 @@ export default Ember.Component.extend({
      */
     deleteContent: function(model) {
       let component = this;
-
       component.set('isLoading', true);
 
       // This deleteMethod will be a wrapper around the actual delete method that is particular to
@@ -58,12 +57,16 @@ export default Ember.Component.extend({
             model.callback.success();
           }
           component.set('isLoading', false);
-          component.triggerAction({ action: 'closeModal' });
+          component.triggerAction({
+            action: 'closeModal'
+          });
 
           if (model.redirect) {
             component
               .get('router')
-              .transitionTo(model.redirect.route, model.redirect.params.id);
+              .transitionTo(model.redirect.route, {
+                queryParams: model.redirect.params
+              });
           }
         })
         .catch(function(error) {
@@ -72,7 +75,7 @@ export default Ember.Component.extend({
             .t('content.modals.delete-content.delete-error', {
               type: component
                 .get('i18n')
-                .t(`common.'${model.type}`)
+                .t(`common.${model.type}`)
                 .string.toLowerCase()
             }).string;
           component.get('notifications').error(message);
