@@ -327,7 +327,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
         levels.pushObject(
           Ember.Object.create({
             name: level.level_name,
-            score: level.level_score
+            score: Number(level.level_score)
           })
         );
       });
