@@ -125,4 +125,29 @@
   @media screen and (max-width: $screen-sm) {
     padding: 8px;
   }
+
+  &.player-preview {
+    .offline-activity-submission-container {
+      .offline-activity-timespent {
+        .timespent-container {
+          pointer-events: none;
+          .save-timespent-action {
+            display: none;
+          }
+        }
+      }
+      .task-submissions-container {
+        .gru-offline-activity-task-submission {
+          .task-submission-container {
+            .task-details-container {
+              pointer-events: none;
+              .save-task-submission {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

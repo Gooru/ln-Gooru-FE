@@ -5,13 +5,7 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Dependencies
 
-  queryParams: [
-    'caContentId',
-    'offlineActivityId',
-    'classId',
-    'role',
-    'isPreview'
-  ],
+  queryParams: ['caContentId', 'classId', 'role', 'isPreview'],
 
   // -------------------------------------------------------------------------
   // Actions
@@ -56,6 +50,7 @@ export default Ember.Controller.extend({
 
   /**
    * @property {Object} role
+   * Default role value
    */
   role: ROLES.STUDENT,
 
