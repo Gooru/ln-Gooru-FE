@@ -4,7 +4,9 @@ import Category from 'gooru-web/models/rubric/rubric-category';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import ModalMixin from 'gooru-web/mixins/modal';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import { EDUCATION_CATEGORY } from 'gooru-web/config/config';
+import {
+  EDUCATION_CATEGORY
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend(SessionMixin, ModalMixin, {
   // -------------------------------------------------------------------------
@@ -174,48 +176,46 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
    * @property {Object[]} footerActions List of action buttons to show
    */
   footerActions: Ember.computed(function() {
-    return [
-      {
-        name: 'cancel',
-        text: this.get('i18n').t('common.cancel'),
-        class: 'btn-default',
-        action: () => this.cancel()
-      },
-      {
-        name: 'save',
-        text: this.get('i18n').t('common.save'),
-        class: 'btn-primary',
-        action: () => this.save()
-      }
+    return [{
+      name: 'cancel',
+      text: this.get('i18n').t('common.cancel'),
+      class: 'btn-default',
+      action: () => this.cancel()
+    },
+    {
+      name: 'save',
+      text: this.get('i18n').t('common.save'),
+      class: 'btn-primary',
+      action: () => this.save()
+    }
     ];
   }),
   /**
    * @property {Object[]} headerActions List of action buttons to show
    */
   headerActions: Ember.computed(function() {
-    return [
-      {
-        name: 'delete',
-        icon: 'delete',
-        action: () => this.delete()
-      },
-      {
-        name: 'link',
-        text: this.get('i18n').t('common.link'),
-        icon: 'insert_link',
-        isShare: true,
-        type: 'rubric'
-      },
-      {
-        name: 'copy',
-        icon: 'content_copy',
-        action: () => this.copy()
-      },
-      {
-        name: 'preview',
-        text: this.get('i18n').t('common.preview'),
-        action: () => this.preview()
-      }
+    return [{
+      name: 'delete',
+      icon: 'delete',
+      action: () => this.delete()
+    },
+    {
+      name: 'link',
+      text: this.get('i18n').t('common.link'),
+      icon: 'insert_link',
+      isShare: true,
+      type: 'rubric'
+    },
+    {
+      name: 'copy',
+      icon: 'content_copy',
+      action: () => this.copy()
+    },
+    {
+      name: 'preview',
+      text: this.get('i18n').t('common.preview'),
+      action: () => this.preview()
+    }
     ];
   }),
 
@@ -247,15 +247,14 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
    * @property {Object[]} options List of tab options to show
    */
   options: Ember.computed(function() {
-    return [
-      {
-        name: 'information',
-        text: this.get('i18n').t('common.information')
-      },
-      {
-        name: 'rubric',
-        text: this.get('i18n').t('common.rubric-creation')
-      }
+    return [{
+      name: 'information',
+      text: this.get('i18n').t('common.information')
+    },
+    {
+      name: 'rubric',
+      text: this.get('i18n').t('common.rubric-creation')
+    }
     ];
   }),
   /**
@@ -283,9 +282,9 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
    * @property {string}
    */
   standardLabelKey: Ember.computed('standardLabel', function() {
-    return this.get('standardLabel')
-      ? 'common.standards'
-      : 'common.competencies';
+    return this.get('standardLabel') ?
+      'common.standards' :
+      'common.competencies';
   }),
 
   // -------------------------------------------------------------------------
@@ -322,6 +321,7 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       deleteMethod: function() {
         return this.get('rubricService').deleteRubric(this.get('rubric.id'));
       }.bind(this),
+      type: 'rubric',
       redirect: {
         route: 'library-search',
         params: {
@@ -330,7 +330,6 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
         }
       }
     };
-
     this.actions.showModal.call(
       this,
       'content.modals.gru-delete-rubric',
@@ -381,13 +380,11 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       'categories',
       component.get('categories').filter(category => category.get('title'))
     );
-    const maxScore = component.computeRubricMaxScore(
-      tempRubric.get('categories')
-    );
-    tempRubric.set('maxScore', maxScore);
     let rubric = component.get('rubric');
     this.set('emptyFileError', !tempRubric.get('url'));
-    tempRubric.validate().then(function({ validations }) {
+    tempRubric.validate().then(function({
+      validations
+    }) {
       if (validations.get('isValid')) {
         let imageIdPromise = new Ember.RSVP.resolve(
           tempRubric.get('thumbnail')
@@ -440,8 +437,8 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
         .filter(
           cat =>
             cat.get('title') &&
-            (categories.findBy('title', cat.get('title')) ||
-              category.get('title') === cat.get('title'))
+        (categories.findBy('title', cat.get('title')) ||
+          category.get('title') === cat.get('title'))
         )
     );
     const maxScore = component.computeRubricMaxScore(
