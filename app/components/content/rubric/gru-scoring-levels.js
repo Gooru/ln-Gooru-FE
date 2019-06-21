@@ -20,7 +20,10 @@ export default Ember.Component.extend({
      * Delete Level
      */
     addLevel: function() {
-      this.get('scoringLevels').addObject({ name: '', score: null });
+      this.get('scoringLevels').addObject(Ember.Object.create({
+        name: '',
+        score: null
+      }));
     },
     /**
      *Triggered when scoring switch change
@@ -60,27 +63,26 @@ export default Ember.Component.extend({
    * @property {[]} scoringLevels
    * Should have 4 levels as default
    */
-  scoringLevels: Ember.A([
-    {
-      name: '',
-      score: null
-    },
-    {
-      name: '',
-      score: null
-    },
-    {
-      name: '',
-      score: null
-    },
-    {
-      name: '',
-      score: null
-    },
-    {
-      name: '',
-      score: null
-    }
+  scoringLevels: Ember.A([{
+    name: '',
+    score: null
+  },
+  {
+    name: '',
+    score: null
+  },
+  {
+    name: '',
+    score: null
+  },
+  {
+    name: '',
+    score: null
+  },
+  {
+    name: '',
+    score: null
+  }
   ]),
 
   /**
