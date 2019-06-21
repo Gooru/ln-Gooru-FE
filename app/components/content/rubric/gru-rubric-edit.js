@@ -380,6 +380,10 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       'categories',
       component.get('categories').filter(category => category.get('title'))
     );
+    const maxScore = component.computeRubricMaxScore(
+      tempRubric.get('categories')
+    );
+    tempRubric.set('maxScore', maxScore);
     let rubric = component.get('rubric');
     this.set('emptyFileError', !tempRubric.get('url'));
     tempRubric.validate().then(function({
