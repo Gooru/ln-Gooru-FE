@@ -87,6 +87,21 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
       component.set('selectedUser', user);
       component.fetchSubmissions(user);
       component.send('toggleListOfStudents');
+    },
+
+    //Action triggered when click on play
+    onPlayContent() {
+      const component = this;
+      const offlineActivityId = component.get('oaId');
+      const queryParams = {
+        role: component.get('isTeacher') ? ROLES.TEACHER : ROLES.STUDENT,
+        isPreview: true
+      };
+      component
+        .get('router')
+        .transitionTo('player-offline-activity', offlineActivityId, {
+          queryParams
+        });
     }
   },
 
@@ -138,7 +153,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
    * Maintains the value of allow the offline activity to play or not.
    * @type {Boolean}
    */
-  allowPlay: false,
+  allowPlay: Ember.computed.equal('isTeacher', true),
 
   /**
    * Maintains the value of show  the remix button or not.
@@ -263,24 +278,26 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
           false
         )
       : Ember.RSVP.resolve([]);
-    return Ember.RSVP.hash({
-      offlineActivity: oaService.readActivity(oaId),
-      users: studentListPromise,
-      performances: performancePromise
-    }).then(({ offlineActivity, users, performances }) => {
-      if (!component.isDestroyed) {
-        component.set('offlineActivity', offlineActivity);
-        if (isReportView) {
-          users = users.filterBy('isActive', true);
-          component.set('users', users);
-          let user = users.objectAt(0);
-          component.set('selectedUser', user);
-          component.fetchSubmissions(user);
-          component.parsePerformanceData(users, performances);
+    return Ember.RSVP
+      .hash({
+        offlineActivity: oaService.readActivity(oaId),
+        users: studentListPromise,
+        performances: performancePromise
+      })
+      .then(({ offlineActivity, users, performances }) => {
+        if (!component.isDestroyed) {
+          component.set('offlineActivity', offlineActivity);
+          if (isReportView) {
+            users = users.filterBy('isActive', true);
+            component.set('users', users);
+            let user = users.objectAt(0);
+            component.set('selectedUser', user);
+            component.fetchSubmissions(user);
+            component.parsePerformanceData(users, performances);
+          }
+          component.set('isLoading', false);
         }
-        component.set('isLoading', false);
-      }
-    });
+      });
   },
 
   fetchSubmissions(user) {
@@ -294,13 +311,15 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
         .get('oaAnaltyicsService')
         .getSubmissionsToGrade(classId, caContentId, userId)
       : Ember.RSVP.resolve(null);
-    return Ember.RSVP.hash({
-      submissions: submissionPromise
-    }).then(({ submissions }) => {
-      if (!component.isDestroyed) {
-        component.parseSubmissionsData(submissions);
-      }
-    });
+    return Ember.RSVP
+      .hash({
+        submissions: submissionPromise
+      })
+      .then(({ submissions }) => {
+        if (!component.isDestroyed) {
+          component.parseSubmissionsData(submissions);
+        }
+      });
   },
 
   parseSubmissionsData(submissions) {
@@ -338,7 +357,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
             if (gradedCategory) {
               let totalPoints = gradedCategory.get('levelMaxScore');
               let scoreInPrecentage = Math.floor(
-                (gradedCategory.get('levelScore') / totalPoints) * 100
+                gradedCategory.get('levelScore') / totalPoints * 100
               );
               category.set('scoreInPrecentage', scoreInPrecentage);
             }
@@ -390,7 +409,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
       score = rubric.get('score');
       if (score && score > 0) {
         let gradeMaxScore = rubric.get('maxScore');
-        score = Math.floor((score / gradeMaxScore) * 100);
+        score = Math.floor(score / gradeMaxScore * 100);
       }
     }
     return score;
