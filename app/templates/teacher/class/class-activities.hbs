@@ -12,11 +12,20 @@
               <i class="collection-icon" {{action 'onAddDca' 'collection'}}></i>
               <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
             </div>
+            <div class="ca-calendar-tabs">
+              <div class="title {{if (eq selectedCalendarView 'monthly') 'active'}}" {{action 'selectCalendarView' 'monthly'}}>Monthly</div>
+              <div class="title {{if (eq selectedCalendarView 'weekly') 'active'}}" {{action 'selectCalendarView' 'weekly'}}>Weekly</div>
+              <div class="title {{if (eq selectedCalendarView 'daily') 'active'}}" {{action 'selectCalendarView' 'daily'}}>Daily</div>
+            </div>
             <div class="ca-date-section">
               <div class="date-picker-action" {{action 'toggleDatePicker'}}>
                 <span class="label">
-                  {{#if isToday}}
+                  {{#if (and (eq selectedCalendarView 'daily') isToday)}}
                     {{t "student-landing.class.class-activities-tab.today"}}
+                  {{else if (eq selectedCalendarView 'weekly')}}
+                    {{format-date startDateOfWeek 'DD MMM'}} - {{format-date endDateOfWeek 'DD MMM YYYY'}}
+                  {{else if (eq selectedCalendarView 'monthly')}}
+                    {{format-date selectedMonth 'MMM YYYY'}}
                   {{else}}
                     {{format-date selectedDate 'DD MMM YYYY'}}
                   {{/if}}
@@ -36,10 +45,12 @@
           forMonth=forMonth
           allowDateSelectorToggle=false
           forYear=forYear
-          refreshDatePicker=refreshDatePicker
           showPreviousMonth="showPreviousMonth"
           showNextMonth="showNextMonth"
           onSelectDate="onSelectDate"
+          onSelectWeek="onSelectWeek"
+          onSelectMonth="onSelectMonth"
+          calendarView=selectedCalendarView
           highlightFirstDayOfMonth=true
           onSelectToday="onSelectToday"
           activities=scheduledClassActivitiesDatewise
@@ -49,8 +60,15 @@
         </div>
         <div class="ca-schedule-section">
           <div class="dca-content-list-container {{if isToday 'dca-content-list-container-today'}}">
-            {{#each scheduledClassActivities as |classActivity|}} {{#each classActivity.classActivities as |activity|}}
-                {{class.gru-class-activity-panel
+            {{#each scheduledClassActivities as |classActivity|}}
+              <div class="class-activity-container">
+                {{#unless (eq selectedCalendarView 'daily')}}
+                  <div class="added-date">{{format-date classActivity.added_date 'DD MMM YYYY'}}
+                    <hr />
+                  </div>
+                {{/unless}}
+                {{#each classActivity.classActivities as |activity|}}
+                  {{class.gru-class-activity-panel
                     classActivity=activity
                     classId=classId
                     class=class
@@ -71,11 +89,12 @@
                     onUpdateMasteryAccrual="onUpdateMasteryAccrual"
                     showMasteryAccrual=showMasteryAccrual
                   }}
-              {{else}}
-                <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
-              {{/each}}
+                {{else}}
+                  <p class="no-content">{{t "common.no-dca-teacher"}}</p>
+                {{/each}}
+              </div>
             {{else}}
-              <div class="no-content">{{t "common.no-dca-teacher"}}</div>
+              <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
             {{/each}}
           </div>
         </div>

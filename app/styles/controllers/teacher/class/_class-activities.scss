@@ -202,6 +202,34 @@
                     grid-row-start: 1;
                     padding: 10px 20px 20px;
 
+                    &.weekly {
+                      .datepicker {
+                        .table-condensed {
+                          tbody tr {
+                            &.week-active,
+                            &:hover {
+                              border-radius: 50px;
+                              background-color: #d2e3fc;
+
+                              td {
+                                color: #3486f7;
+
+                                &.active {
+                                  background: none;
+                                  width: auto;
+                                  height: auto;
+
+                                  &:before {
+                                    content: "";
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+
                     .datepicker-inline {
                       .datepicker-days {
                         .table-condensed {
@@ -228,30 +256,28 @@
                               grid-template-columns: repeat(7, 1fr);
 
                               td {
-                                height: 40px;
-                                width: 40px;
+                                height: 36px;
+                                width: auto;
                                 justify-self: center;
+                                margin: auto;
 
                                 &.has-activities:before {
-                                  top: 25px;
-                                  display: flex;
-                                  margin: auto;
-                                  left: 0;
+                                  position: relative;
+                                  left: 50%;
+                                  transform: translateX(-50%);
                                 }
 
                                 &.active {
                                   background-color: #d2e3fc;
-                                  background-image: -webkit-linear-gradient(
-                                    top,
-                                    #d2e3fc,
-                                    #d2e3fc
-                                  );
+                                  background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
                                   border-radius: 50%;
                                   display: flex;
                                   margin: auto;
                                   align-items: center;
                                   justify-content: center;
                                   color: #3486f7;
+                                  width: 40px;
+                                  height: 40px;
 
                                   &:before {
                                     content: none;
@@ -260,17 +286,15 @@
 
                                 &.today {
                                   background-color: #3486f7;
-                                  background-image: -webkit-linear-gradient(
-                                    top,
-                                    #3486f7,
-                                    #3486f7
-                                  );
+                                  background-image: -webkit-linear-gradient(top, #3486f7, #3486f7);
                                   border-radius: 50%;
                                   display: flex;
                                   margin: auto;
                                   align-items: center;
                                   justify-content: center;
                                   color: #fff;
+                                  width: 40px;
+                                  height: 40px;
 
                                   &:before {
                                     content: none;
@@ -351,10 +375,28 @@
                 }
               }
 
+              .ca-calendar-tabs {
+                width: 100%;
+                display: grid;
+                grid-template-columns: repeat(3, auto);
+
+                .title {
+                  text-align: center;
+                  text-transform: uppercase;
+                  opacity: 0.6;
+                  font-weight: bold;
+                  cursor: pointer;
+
+                  &.active {
+                    opacity: 1;
+                  }
+                }
+              }
+
               .ca-date-section {
                 display: flex;
                 justify-content: flex-end;
-                width: 100%;
+                width: max-content;
 
                 .date-picker-action {
                   display: grid;
@@ -399,6 +441,21 @@
               overflow-y: auto;
               box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
               background-color: #ffffff;
+
+              .added-date {
+                font-size: 15px;
+                font-weight: bold;
+                padding: 0 10px;
+                display: grid;
+                grid-template-columns: max-content auto;
+                align-items: center;
+                grid-gap: 10px;
+
+                hr {
+                  border-top: 1px solid #4e5e67;
+                  width: 100%;
+                }
+              }
 
               &.dca-content-list-container-today {
                 .add-content-message {

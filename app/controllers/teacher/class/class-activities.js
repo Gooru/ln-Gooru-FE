@@ -4,7 +4,8 @@ import ModalMixin from 'gooru-web/mixins/modal';
 import {
   PLAYER_EVENT_SOURCE,
   SCREEN_SIZES,
-  CONTENT_TYPES
+  CONTENT_TYPES,
+  DCA_CALENDAR_VIEWS
 } from 'gooru-web/config/config';
 import {
   isCompatibleVW
@@ -68,6 +69,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Actions
 
   actions: {
+
+    selectCalendarView(type) {
+      let controller = this;
+      controller.set('selectedCalendarView', type);
+    },
     /**
      * Action triggered when teacher graded for student.
      */
@@ -608,6 +614,27 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.send('toggleDatePicker');
     },
 
+    onSelectWeek(startDate, endDate, togglePicker) {
+      let controller = this;
+      controller.set('startDateOfWeek', startDate);
+      controller.set('endDateOfWeek', endDate);
+      controller.loadScheduledClassActivities(startDate, endDate);
+      if (togglePicker) {
+        controller.send('toggleDatePicker');
+      }
+    },
+
+    onSelectMonth(date, togglePicker) {
+      let controller = this;
+      let startDate = `${date}-01`;
+      let endDate = moment(startDate).endOf('month').format('YYYY-MM-DD');
+      controller.set('selectedMonth', date);
+      controller.loadScheduledClassActivities(startDate, endDate);
+      if (togglePicker) {
+        controller.send('toggleDatePicker');
+      }
+    },
+
     onOpenPerformanceEntry(item, activity, isRepeatEntry) {
       let component = this;
       component.fetchActivityUsers(activity.id).then(function(activityMembers) {
@@ -705,10 +732,28 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Properties
 
   /**
+   * @property {String} selectedActivityView
+   * Property to handle is state of selected view for activity
+   */
+  selectedCalendarView: DCA_CALENDAR_VIEWS.DAILY,
+
+  /**
    * @property {Boolean} isMobileView
    * Property to handle is mobile view
    */
   isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
+  /**
+   * @property {String} startDateOfWeek
+   * Property to maintains the start date of week
+   */
+  startDateOfWeek: null,
+
+  /**
+   * @property {String} endDateOfWeek
+   * Property to maintains the end date of week
+   */
+  endDateOfWeek: null,
 
   /**
    * It maintains whether selected activity is schedule or not
@@ -791,17 +836,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           return classActivity;
         }
       });
-    if (controller.get('isToday')) {
-      let date = moment().format('YYYY-MM-DD');
-      let todayClassActivities = classActivities.findBy('added_date', date);
-      if (!todayClassActivities) {
-        let classActivity = Ember.Object.create({
-          added_date: date,
-          classActivities: Ember.A([])
-        });
-        classActivities.pushObject(classActivity);
-      }
-    }
     return classActivities;
   }),
 
@@ -1470,6 +1504,23 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.fetchAssessmentsMasteryAccrual();
       controller.set('isLoading', false);
     });
+  },
+
+  loadScheduledClassActivities(startDate, endDate) {
+    const controller = this;
+    const classId = controller.get('classId');
+    controller.set('isLoading', true);
+    controller
+      .get('classActivityService')
+      .getScheduledClassActivitiesForDate(classId, startDate, endDate)
+      .then(function(classActivities) {
+        controller.set('classActivities', Ember.A([]));
+        if (classActivities && classActivities.length > 0) {
+          controller.parseClassActivityData(classActivities);
+        }
+        controller.fetchAssessmentsMasteryAccrual();
+        controller.set('isLoading', false);
+      });
   },
 
   loadActiveOfflineActivity() {

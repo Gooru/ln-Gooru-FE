@@ -8,7 +8,8 @@
   {{#if showToday}}
     <div class="ca-datepicker-today" {{action 'onSelectToday'}}>{{t "student-landing.class.class-activities-tab.today"}}</div>
   {{/if}}
-  <div id="ca-datepicker"></div>
+  <div id="ca-monthpicker" class="{{unless isMonthly 'hidden'}}"></div>
+  <div id="ca-datepicker" class="{{unless (or isWeekly isDaily) 'hidden'}}"></div>
   {{#if showMonths}}
     <hr />
     {{ca-month-picker onSelectMonth='onSelectMonth' currentMonth=forFirstDateOfMonth}}
