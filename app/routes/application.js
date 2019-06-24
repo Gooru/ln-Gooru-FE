@@ -96,11 +96,6 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
 
   beforeModel: function(transition) {
     const route = this;
-
-    // route.get('profileService').loadScript('hi/translations.js'); // This does not works and gives 404 as we have already removed the files in mail appjs
-    // current build system uses broccoli, where these options aren't there
-    // With ember > 2.14, this can be done with webpack inclusion
-
     // Below logic is used to clear the left over state of study player,
     // in order to avoid the conflict.
 
@@ -151,8 +146,17 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
     let whichLocalSet = this.getLocalStorage().getItem(
       this.device_language_key
     );
+    whichLocalSet = whichLocalSet || lang;
+    route
+      .get('profileService')
+      .loadScript(whichLocalSet)
+      .then(() => {
+        console.log('translation loaded successfully', whichLocalSet); //eslint-disable-line
+        console.log('transition', window.i18ln); //eslint-disable-line
+        route.get('i18n').addTranslations('hi', window.i18ln);
+      });
 
-    this.setupDefaultLanguage(whichLocalSet || lang);
+    this.setupDefaultLanguage(whichLocalSet);
 
     route.setupTheme(themeId);
 

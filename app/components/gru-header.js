@@ -3,6 +3,7 @@ import SessionMixin from '../mixins/session';
 import ModalMixin from '../mixins/modal';
 import EndPointsConfig from 'gooru-web/utils/endpoint-config';
 import Env from 'gooru-web/config/environment';
+import { appLocales } from 'gooru-web/utils/utils';
 
 /**
  * Application header component
@@ -31,16 +32,13 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
   displayNotificationList: null,
 
   locales: Ember.computed('i18n.locale', 'i18n.locales', function() {
-    const i18n = this.get('i18n');
-
+    let configLocales = appLocales(); //this.get('i18n.locales');
     var arr = Ember.A();
-    this.get('i18n.locales').map(function(loc) {
-      if (!loc.includes('/quizzes')) {
-        arr.addObject({
-          id: loc,
-          text: i18n.t(loc)
-        });
-      }
+    configLocales.map(function(loc) {
+      arr.addObject({
+        id: Object.keys(loc)[0],
+        text: Object.values(loc)[0]
+      });
     });
 
     return arr;

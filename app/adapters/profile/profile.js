@@ -515,10 +515,11 @@ export default Ember.Object.extend({
   },
   loadScript: function(script) {
     const adapter = this;
-    const namespace = 'locales';
-    const url = `${namespace}/${script}`;
+    const namespace = 'assets/locales';
+    const url = `${namespace}/${script}/translations.js`;
 
     const options = {
+      cache: true,
       type: 'GET',
       headers: adapter.defineHeaders(),
       url: url,
