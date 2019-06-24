@@ -56,7 +56,6 @@ export default Ember.Component.extend({
      */
     updateParent(task) {
       const component = this;
-      //task = task || component.get('model');
       component.get('updateParent')(task);
     },
 
@@ -65,7 +64,6 @@ export default Ember.Component.extend({
      */
     updateContent() {
       const component = this;
-      //ToDo: Call activityService API and save changes
       component.saveTask().then(task => {
         component.sendAction('updateParent', task);
       });
@@ -155,11 +153,7 @@ export default Ember.Component.extend({
         Ember.getOwner(component).ownerInjection()
       );
       taskInstance.set('oaId', component.get('oaId'));
-      if (taskInstance.get('oaTaskSubmissions').length > 0) {
-        let tsInst = Ember.A([]);
-        taskInstance.set('oaTaskSubmissions', tsInst);
-        console.log(`new i with oaId :${component.get('oaId')}`, taskInstance); //eslint-disable-line
-      }
+      taskInstance.set('oaTaskSubmissions', Ember.A([]));
       component.set('model', taskInstance);
     }
   },

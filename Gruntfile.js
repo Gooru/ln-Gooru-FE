@@ -16,7 +16,7 @@ module.exports = function(grunt) {
       'build-dev': 'ember build',
       'build-prod': 'ember build --environment=production',
       'build-prod-bamboo':
-        'node --max-old-space-size=2048 node_modules/.bin/ember build --environment=production --output-path gooru-web'
+        'node --max-old-space-size=5120 node_modules/.bin/ember build --environment=production --output-path gooru-web'
     },
 
     stubby: {
@@ -128,7 +128,7 @@ module.exports = function(grunt) {
   grunt.registerTask('bamboo-test', function() {
     grunt.task.run([
       'stubby:test',
-      'exec:run:ember exam --split=4 --parallel --silent -r xunit > report-xunit.xml'
+      'exec:run:ember exam --split=4 --parallel -r xunit | tee  report-xunit.xml'
     ]);
   });
 

@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="reference-container">
-    {{offlineActivity.reference}}
+    {{safe-html offlineActivity.reference}}
   </div>
   {{#each offlineActivity.references as |reference index|}}
     <div class="reference-container">

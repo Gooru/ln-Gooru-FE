@@ -6,6 +6,15 @@
     background-repeat: no-repeat;
   }
 
+  .no-bgd {
+    background-color: transparent;
+    font-size: $font-size-h4;
+    line-height: 1;
+    i {
+      color: $gray;
+    }
+  }
+
   #information {
     .two-col-info {
       display: flex;
@@ -16,6 +25,8 @@
       }
 
       .title,
+      .activity-type,
+      .duration-hours,
       .learning-objectives {
         flex: 1;
 
@@ -23,6 +34,13 @@
           display: flex !important;
           flex-direction: column;
         }
+      }
+      .activity-type,
+      .duration-hours {
+        padding-left: 20px;
+      }
+      .duration-hours-input {
+        text-align: center;
       }
     }
   }
@@ -51,17 +69,24 @@
           display: inline-flex;
           justify-content: flex-start;
           width: 100%;
-          border: 2px dotted #ccc;
-          border-style: dashed;
-          align-items: center;
           flex-wrap: wrap;
+
           .uploaded-item {
-            margin-left: 10px;
-            margin-bottom: 10px;
-            padding: 10px;
-            /*
-            border: solid 1px; 
-            border-radius: 5%; */
+            border: 2px dotted #ccc;
+            border-style: dashed;
+            padding: 0 10px;
+            margin: 20px 7px;
+            position: relative;
+
+            .remove-uploaded {
+              position: absolute;
+              top: -25px;
+              left: 25px;
+              width: 35px;
+              height: 35px;
+              font-size: 20px;
+              z-index: 8;
+            }
           }
         }
       }
@@ -69,7 +94,8 @@
         .upload-list-container {
           display: inline-flex;
           justify-content: space-between;
-          width: 564px;
+          width: 100%;
+
           .uploaded-item {
             border: 2px dotted #ccc;
             border-style: dashed;
@@ -81,8 +107,9 @@
               position: absolute;
               top: 45px;
               left: 45px;
-              width: 15px;
-              height: 22px;
+              width: 25px;
+              height: 25px;
+              font-size: 20px;
               z-index: 8;
               padding: 0px;
             }
@@ -90,8 +117,9 @@
               position: absolute;
               top: -15px;
               left: 45px;
-              width: 15px;
-              height: 22px;
+              width: 25px;
+              height: 25px;
+              font-size: 20px;
               z-index: 8;
               padding: 0px;
             }
@@ -134,11 +162,10 @@
         }
 
         .listItem {
-          width: 520px;
+          width: 100%;
           font-size: 14px;
         }
         .addUrl {
-          width: 520px;
           display: inline-block;
         }
         .add-item {
@@ -180,11 +207,6 @@
           display: inline-block;
           vertical-align: middle;
         }
-        // .newReferenceArtifact {
-        // }
-        // .open {
-        //   display: inline;
-        // }
       }
     }
     .gru-edit-reference {
@@ -297,9 +319,6 @@
   }
 
   #tasks {
-    .panel-default {
-      margin-bottom: 25px;
-    }
     .add-item {
       font-size: 20px;
       border: 0px;
@@ -333,7 +352,8 @@
       .upload-list-container {
         display: inline-flex;
         justify-content: space-between;
-        width: 564px;
+        width: 100%;
+
         .uploaded-item {
           border: 2px dotted #ccc;
           border-style: dashed;
@@ -345,8 +365,9 @@
             position: absolute;
             top: 45px;
             left: 45px;
-            width: 15px;
-            height: 22px;
+            width: 25px;
+            height: 25px;
+            font-size: 20px;
             z-index: 8;
             padding: 0px;
           }
@@ -356,6 +377,7 @@
             left: 45px;
             width: 15px;
             height: 22px;
+            font-size: 20px;
             z-index: 8;
             padding: 0px;
           }
