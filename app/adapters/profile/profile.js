@@ -515,9 +515,24 @@ export default Ember.Object.extend({
   },
   loadScript: function(script) {
     const adapter = this;
-    const namespace = 'assets/locales';
-    const url = `${namespace}/${script}/translations.js`;
+    const localAssetMap = {
+      ar: 'assets/locales/ar/translations.js',
+      as: 'assets/locales/as/translations.js',
+      bn: 'assets/locales/bn/translations.js',
+      en: 'assets/locales/en/translations.js',
+      gu: 'assets/locales/gu/translations.js',
+      hi: 'assets/locales/hi/translations.js',
+      kn: 'assets/locales/kn/translations.js',
+      ml: 'assets/locales/ml/translations.js',
+      mr: 'assets/locales/mr/translations.js',
+      or: 'assets/locales/or/translations.js',
+      pa: 'assets/locales/pa/translations.js',
+      sp: 'assets/locales/sp/translations.js',
+      ta: 'assets/locales/ta/translations.js',
+      te: 'assets/locales/te/translations.js'
+    };
 
+    const url = localAssetMap[script];
     const options = {
       cache: true,
       type: 'GET',
