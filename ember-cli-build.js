@@ -33,7 +33,6 @@ module.exports = function(defaults) {
       useLintTree: false
     },
     fingerprint: {
-      enabled: false,
       ignore: ['locales'],
       exclude: ['themes', 'application-widget.js'] //excluding files,
     },

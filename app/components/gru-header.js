@@ -27,6 +27,11 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
   device_language_key: 'deviceLanguage',
 
   /**
+   * @type {ProfileService} Service to retrieve profile information
+   */
+  profileService: Ember.inject.service('api-sdk/profile'),
+
+  /**
    * Controls display of notification list, typical use from header is to hide it as required.
    */
   displayNotificationList: null,
@@ -60,8 +65,10 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     },
 
     setLocale(selVal) {
-      this.setLocale(selVal);
-      this.getLocalStorage().setItem(this.device_language_key, selVal);
+      this.getTranslationFile(selVal).then(() => {
+        this.setLocale(selVal);
+        this.getLocalStorage().setItem(this.device_language_key, selVal);
+      });
     },
 
     navigateToSupport() {
@@ -105,6 +112,17 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
    */
   willDestroyElement: function() {
     this.set('searchErrorMessage', null);
+  },
+
+  getTranslationFile(whichLocalSet) {
+    const component = this;
+    return component
+      .get('profileService')
+      .loadScript(whichLocalSet)
+      .then(() => {
+        component.get('i18n').addTranslations(whichLocalSet, window.i18ln);
+        return Ember.RSVP.resolve(true);
+      });
   },
 
   /**
