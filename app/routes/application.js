@@ -151,8 +151,6 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
       .get('profileService')
       .loadScript(whichLocalSet)
       .then(() => {
-        // console.log('translation loaded successfully', whichLocalSet); //eslint-disable-line
-        // console.log('transition', window.i18ln); //eslint-disable-line
         route.get('i18n').addTranslations(whichLocalSet, window.i18ln);
       });
 
