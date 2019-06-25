@@ -567,7 +567,9 @@ export default Ember.Component.extend({
       userGrade.set('sessionId', currentStudent.get('sessionId'));
       userGrade.set('graderId', component.get('session.userId'));
     }
-    userGrade.set('maxScore', component.get('content.maxScore'));
+    if (isTeacher && !userGrade.scoring) {
+      userGrade.set('maxScore', component.get('content.maxScore'));
+    }
     let categoriesScore = Ember.A([]);
     userGrade.set('classId', context.get('classId'));
     userGrade.set('dcaContentId', context.get('dcaContentId'));
