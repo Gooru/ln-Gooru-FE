@@ -313,10 +313,14 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     const component = this;
     let teacherRubric = component.get('teacherRubric');
     let studentRubric = component.get('studentRubric');
-    teacherRubric.set('score', null);
-    teacherRubric.set('comment', null);
-    studentRubric.set('score', null);
-    studentRubric.set('comment', null);
+    if (teacherRubric) {
+      teacherRubric.set('score', null);
+      teacherRubric.set('comment', null);
+    }
+    if (studentRubric) {
+      studentRubric.set('score', null);
+      studentRubric.set('comment', null);
+    }
   },
 
   fetchSubmissions(user) {
