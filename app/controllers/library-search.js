@@ -87,8 +87,8 @@ export default Ember.Controller.extend(ModalMixin, {
       const classes = this.get('appController.myClasses');
       return classes ?
         classes
-        .getTeacherActiveClasses(this.get('session.userId'))
-        .filterBy('courseId', null) : [];
+          .getTeacherActiveClasses(this.get('session.userId'))
+          .filterBy('courseId', null) : [];
     }
   ),
 
