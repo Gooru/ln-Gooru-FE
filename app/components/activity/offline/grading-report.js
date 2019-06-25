@@ -362,8 +362,8 @@ export default Ember.Component.extend({
       .hash({
         studentList: component.get('isTeacher') ?
           component
-          .get('classActivityService')
-          .fetchUsersForClassActivity(classId, dcaContentId) : []
+            .get('classActivityService')
+            .fetchUsersForClassActivity(classId, dcaContentId) : []
       })
       .then(({
         studentList
@@ -674,21 +674,21 @@ export default Ember.Component.extend({
   openPullUp() {
     let component = this;
     component.$().animate({
-        top: '10%'
-      },
-      400
+      top: '10%'
+    },
+    400
     );
   },
 
   closePullUp() {
     let component = this;
     component.$().animate({
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-      });
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+    });
   },
 
   /**
