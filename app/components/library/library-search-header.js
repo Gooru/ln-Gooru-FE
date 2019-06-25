@@ -1,6 +1,10 @@
 import Ember from 'ember';
-import { SCREEN_SIZES } from 'gooru-web/config/config';
-import { isCompatibleVW } from 'gooru-web/utils/utils';
+import {
+  SCREEN_SIZES
+} from 'gooru-web/config/config';
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -50,17 +54,7 @@ export default Ember.Component.extend({
    */
   onSelectFilter: Ember.observer('selectedFilters.[]', function() {
     let component = this;
-    let selectedFilters = component.get('selectedFilters');
-    let selectedFiltersLimit = component.get('selectedFiltersLimit');
-    if (selectedFilters.length < selectedFiltersLimit) {
-      component.set('filters', selectedFilters);
-    } else {
-      component.set('filters', selectedFilters.slice(0, selectedFiltersLimit));
-      component.set(
-        'moreFilters',
-        selectedFilters.slice(selectedFiltersLimit, selectedFilters.length)
-      );
-    }
+    component.parseSelectedFilters();
   }),
 
   actions: {
@@ -157,8 +151,34 @@ export default Ember.Component.extend({
     component.initializePopover();
   },
 
+  didInsertElement() {
+    const component = this;
+    let selectedFilters = component.get('selectedFilters');
+    if (selectedFilters) {
+      component.parseSelectedFilters();
+    }
+  },
+
   // -------------------------------------------------------------------------
   // Methods
+
+  /**
+   * Method to parse selected filters to render
+   */
+  parseSelectedFilters() {
+    const component = this;
+    let selectedFilters = component.get('selectedFilters');
+    let selectedFiltersLimit = component.get('selectedFiltersLimit');
+    if (selectedFilters.length < selectedFiltersLimit) {
+      component.set('filters', selectedFilters);
+    } else {
+      component.set('filters', selectedFilters.slice(0, selectedFiltersLimit));
+      component.set(
+        'moreFilters',
+        selectedFilters.slice(selectedFiltersLimit, selectedFilters.length)
+      );
+    }
+  },
 
   /**
    * Method to initialize popover

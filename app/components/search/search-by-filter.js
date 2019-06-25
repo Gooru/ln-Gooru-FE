@@ -238,8 +238,9 @@ export default Ember.Component.extend({
   onSelectFilter(item) {
     const component = this;
     let selectedFilters = component.get('selectedFilters');
-    if (selectedFilters.includes(item)) {
-      selectedFilters.removeObject(item);
+    let selectedFilter = selectedFilters.findBy('name', item.get('name'));
+    if (selectedFilter) {
+      selectedFilters.removeObject(selectedFilter);
     } else {
       selectedFilters.pushObject(item);
     }
