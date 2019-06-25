@@ -358,7 +358,16 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
       const taskId = task.get('id');
       const taskSubmission = taskSubmissons.findBy('taskId', taskId);
       if (taskSubmission) {
-        task.set('studentTaskSubmissions', taskSubmission.get('submissions'));
+        let activityTaskSubmissions = taskSubmission.get('submissions');
+        task.set('studentTaskSubmissions', activityTaskSubmissions);
+        let taskSubmissionText = activityTaskSubmissions.findBy(
+          'submissionType',
+          'free-form-text'
+        );
+        task.set(
+          'submissionText',
+          taskSubmissionText ? taskSubmissionText.get('submissionInfo') : null
+        );
       } else {
         task.set('studentTaskSubmissions', null);
       }
