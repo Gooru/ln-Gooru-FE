@@ -51,9 +51,9 @@
               {{/if}}
             </label>
           </div>
-          <div class="learning-objectives format">
+          <div class="activity-type learning-objectives format">
             <label>
-              <span>{{t "oa.format"}}</span>
+              <span class="required">{{t "oa.format"}}</span>
               {{#if tempCollection.id }}
                 <b>{{subTaskDisplayValue}}</b>
               {{else}}
@@ -74,21 +74,35 @@
                     {{/if}}
                   </div>
                 {{else}}
-                  <b>{{t tempCollection.subFormat}}</b>
+                  <b>{{t (if tempCollection.subFormat tempCollection.subFormat "common.not-specified")}}</b>
                 {{/if}}
               {{/if}}
             </label>
           </div>
         </div>
-        <div class="learning-objectives">
-          <label>
-            <span>{{t "common.learning-objectives"}}</span>
+        <div class='two-col-info'>
+          <div class="learning-objectives">
+            <label>
+              <span>{{t "common.learning-objectives"}}</span>
+              {{#if isEditing}}
+                {{validation.gru-textarea model=tempCollection valuePath='learningObjectives' rows=2 maxLength=500 didValidate=didValidate}}
+              {{else}}
+                <b>{{activityCollection.learningObjectives}}</b>
+              {{/if}}
+            </label>
+          </div>
+          <div class="duration-hours">
+            <div>{{t "oa.info.duration-hrs"}}</div>
             {{#if isEditing}}
-              {{validation.gru-textarea model=tempCollection valuePath='learningObjectives' rows=2 maxLength=500 didValidate=didValidate}}
+              {{input type=number value=tempCollection.durationHours class="duration-hours-input" name='durationHours' maxlength=3 
+                            focus-out="updateQuantity"
+                            key-press="inputTyping"
+                            
+                            }} {{t "oa.info.hrs"}}
             {{else}}
-              <b>{{activityCollection.learningObjectives}}</b>
+              <span class="duration-hours-label">{{activityCollection.durationHours}} {{t "oa.info.hrs"}}</span>
             {{/if}}
-          </label>
+          </div>
         </div>
         {{#if isEditing}}
           {{taxonomy.gru-taxonomy-selector
@@ -109,7 +123,7 @@
         {{/if}}
         <div class="standards">
           <label>
-            <span>{{t standardLabelKey}}</span>
+            <span class="required">{{t standardLabelKey}}</span>
             {{#if isEditing}}
               <button type="button" class="btn btn-primary" {{action 'openTaxonomyModal'}} disabled={{standardDisabled}}>
                 {{gru-icon name="open_in_new"}} {{t "common.select"}}

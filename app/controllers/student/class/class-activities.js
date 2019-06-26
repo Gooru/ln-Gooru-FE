@@ -201,6 +201,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   studentDcaReport: false,
 
   /**
+   * it maintains data for active offline activities
+   * @property {Array}
+   */
+  activeOfflineActivities: Ember.A([]),
+
+  /**
+   * it maintains data for completed offline activities
+   * @property {Array}
+   */
+  completedOfflineActivities: Ember.A([]),
+
+  /**
    * Class id
    * @property {String}
    */

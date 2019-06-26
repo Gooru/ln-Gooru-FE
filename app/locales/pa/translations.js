@@ -65,6 +65,7 @@ export default Object.assign(quizzesTranslations, {
   'common.last': 'ਆਖਰੀ',
   'common.tasks': 'tasks',
   'common.name': 'ਨਾਮ',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.user': 'ਯੂਜ਼ਰ',
   'common.for': 'for',
   'common.content-name': 'ਸਮੱਗਰੀ ਦਾ ਨਾਂ',
@@ -82,6 +83,7 @@ export default Object.assign(quizzesTranslations, {
   'common.no-collection-info-message': 'ਇਸ ਪਾਠ ਵਿੱਚ ਕੋਈ ਸੰਗ੍ਰਹਿ ਹੈ',
   'common.gooru-suggestions': 'ਗੋਰੂ ਸੁਝਾਅ',
   'common.gooru-catalog': 'ਗੋੂਰੂ ਕੈਟਾਲਾਗ',
+  'common.no-users-to-grade-oa': 'There are no users to grade for this Offline Activity.',
   'ca.student.no-content':
     'The teacher has not assigned any activities for the day',
   'oa.student.no-active-content':
@@ -2635,5 +2637,24 @@ export default Object.assign(quizzesTranslations, {
   'oa.offline_activity.label': 'Offline Activity',
   'common.oa.offline_activity.label': 'Offline Activity',
   'oa.pending-submissions': 'Pending Submissions',
-  task: 'Task'
+  'oa.rubrics.switch.label': 'Teacher will grade the activity using a rubric?',
+  'oa.rubrics.label': 'Associate a rubric',
+  'oa.max-score.label': 'Enter maximum score',
+  'oa.teacher-rubric': 'Teacher rubric',
+  'oa.references.available-uploads': 'Available uploads',
+  'oa.task.task-title-required': 'Please enter the task title.',
+  task: 'Task',
+  'oa.errors.activity-title-presence':
+    'Please enter the offline activity title.',
+  'oa.errors.standards-presence': 'Please select a standard.',
+  'oa.errors.subformat-presence': 'Please select a format.',
+  'oa.task.submissions.frs-label': 'Free form text',
+  'oa.task.submissions.label': 'Submissions',
+  'oa.student-rubric': 'Student rubric',
+  'oa.rubrics.student-associate-label': 'Associate a student rubric',
+  'oa.task.submissions.head': 'Task Submissions',
+  'common.uploads': 'Uploads',
+  'common.urls': 'URLs',
+  'oa.info.duration-hrs': 'Expected time to complete',
+  'oa.info.hrs': ' hrs'
 });

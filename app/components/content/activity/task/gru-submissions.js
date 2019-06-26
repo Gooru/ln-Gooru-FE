@@ -76,7 +76,6 @@ export default Ember.Component.extend({
       let taskSubmissionsCol = component.get('submissions');
       taskSubmissionsCol.pushObject(submission);
       component.refreshSubmission();
-      // component.get('updateParent')();
     },
     removeLineItem(submission) {
       const component = this;
@@ -92,8 +91,6 @@ export default Ember.Component.extend({
         tasksSubmissionsCol.removeObject(submission);
         component.refreshSubmission();
         component.set('isLoading', false);
-
-        /* component.get('updateParent')(); */
       });
     },
     /**
@@ -101,7 +98,6 @@ export default Ember.Component.extend({
      */
     updateContent(taskSubmissionSubType) {
       const component = this;
-      //ToDo: Call activityService API and save changes
       component.saveTaskSubmission(taskSubmissionSubType).then(submission => {
         component.send('updateSubmissionCollection', submission);
       });
@@ -118,8 +114,6 @@ export default Ember.Component.extend({
     const component = this;
     tasksSubmission.set('oaTaskId', component.get('oaTaskId'));
     tasksSubmission.set('oaId', component.get('oaId'));
-
-    //ToDo: Validate
     return component
       .get('activityService')
       .removeTaskSubmission(tasksSubmission);
@@ -152,8 +146,6 @@ export default Ember.Component.extend({
     let model = SubmissionModel.create({
       oaTaskId: this.get('oaTaskId')
     });
-    //ToDo: Validate
-    //let model = component.get('model');
     model.set('oaTaskId', component.get('oaTaskId'));
     model.set('oaId', component.get('oaId'));
     model.set('taskSubmissionType', 'uploaded');
@@ -166,7 +158,6 @@ export default Ember.Component.extend({
     let newSource = subCol.slice(0);
     Object.assign(newSource, subCol);
     Ember.set(this, 'submissions', newSource);
-    //Ember.set(this, 'submissions', subCol);
   },
   initRefreshSubmission() {
     const component = this;

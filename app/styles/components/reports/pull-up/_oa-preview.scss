@@ -37,9 +37,9 @@
         grid-template-columns: 1fr 60px;
         background: #fff;
         align-items: center;
+        cursor: pointer;
 
         .oa-user-list-drop-down {
-          cursor: pointer;
           justify-self: center;
           height: 20px;
         }
@@ -80,9 +80,10 @@
               color: #fff;
               font-size: 18px;
               font-weight: bold;
-              display: grid;
               align-items: center;
               justify-content: center;
+              display: flex;
+              flex-direction: column;
 
               .oa-score {
                 text-align: center;
@@ -94,6 +95,7 @@
                 color: #fff;
                 text-align: center;
                 line-height: 1;
+                margin-top: 5px;
               }
             }
           }
@@ -122,9 +124,13 @@
       height: 50px;
       background-color: #425e67;
       display: grid;
-      grid-template-columns: 50px 1fr 50px 50px 50px 50px;
+      grid-template-columns: 50px 1fr 50px 50px 50px;
       align-items: center;
       justify-items: center;
+
+      &.report {
+        grid-template-columns: 50px 1fr 50px 50px 50px 50px;
+      }
 
       .close-pullup {
         width: 32px;
@@ -166,11 +172,7 @@
           @media screen and (max-width: $screen-sm) {
             font-size: 13px;
           }
-          @include ellipsis(
-            $font-size: 15px,
-            $line-height: 1.2,
-            $lines-to-show: 1
-          );
+          @include ellipsis($font-size: 15px, $line-height: 1.2, $lines-to-show: 1);
         }
       }
 
@@ -187,9 +189,10 @@
           color: #fff;
           font-size: 18px;
           font-weight: bold;
-          display: grid;
           align-items: center;
           justify-content: center;
+          display: flex;
+          flex-direction: column;
 
           .oa-score {
             text-align: center;
@@ -201,6 +204,7 @@
             color: #fff;
             text-align: center;
             line-height: 1;
+            margin-top: 5px;
           }
         }
       }
@@ -326,7 +330,8 @@
               color: #fff;
               font-size: 18px;
               font-weight: bold;
-              display: grid;
+              display: flex;
+              flex-direction: column;
               align-items: center;
               justify-content: center;
 
@@ -340,6 +345,7 @@
                 color: #fff;
                 text-align: center;
                 line-height: 1;
+                margin-top: 5px;
               }
             }
           }
@@ -363,11 +369,7 @@
               .oa-project-label {
                 color: #3e5e67;
                 font-weight: bold;
-                @include ellipsis(
-                  $font-size: 14px,
-                  $line-height: 1.2,
-                  $lines-to-show: 1
-                );
+                @include ellipsis($font-size: 14px, $line-height: 1.2, $lines-to-show: 1);
               }
 
               .oa-project-tag {
@@ -403,6 +405,19 @@
         .student-grading-panel,
         .teacher-grading-panel {
           padding: 15px 15px 0 30px;
+
+          .rubric-category-container {
+            .grade-rubric-categories {
+              .grade-rubric-category {
+                .grade-rubric-level-container {
+                  .grade-rubric-levels {
+                    background-color: #5d666f;
+                    border-radius: 16px;
+                  }
+                }
+              }
+            }
+          }
         }
 
         .over-all-comment {

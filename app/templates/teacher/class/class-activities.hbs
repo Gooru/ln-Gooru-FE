@@ -115,7 +115,7 @@
           <div class="panel-group" id="panels">
             <div class="panel panel-default oa-active-container">
               <div class="oa-active-header collapsed" data-parent="#panels" data-toggle="collapse" data-target="#active">
-                <span>{{t 'teacher-landing.class.class-settings.student-settings-sec.col-head-active'}}</span>
+                <span>{{t 'teacher-landing.class.class-settings.student-settings-sec.col-head-active'}} ({{activeOfflineActivities.length}})</span>
                 <div class="icons">
                   {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
                   {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
@@ -159,7 +159,7 @@
             </div>
             <div class="panel panel-default oa-completed-container">
               <div class="oa-completed-header collapsed" data-toggle="collapse" data-parent="#panels" data-target="#completed">
-                <span>{{t 'common.completed'}}</span>
+                <span>{{t 'common.completed'}} ({{completedOfflineActivities.length}})</span>
                 <div class="icons">
                   {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
                   {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}

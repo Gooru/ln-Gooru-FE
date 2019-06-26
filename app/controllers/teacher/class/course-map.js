@@ -198,9 +198,14 @@ export default Ember.Controller.extend({
   previewContentType: '',
 
   /**
-   * @property {Object} isShowContentPreview
+   * @property {Boolean} isShowContentPreview
    */
   isShowContentPreview: false,
+
+  /**
+   * @property {Boolean} isShowOfflineActivityPreview
+   */
+  isShowOfflineActivityPreview: false,
 
   /**
    * Maintains the value of  milestone view or not, default view will be course map.
@@ -449,7 +454,11 @@ export default Ember.Controller.extend({
       controller.set('previewPlayerContext', previewPlayerContext);
       controller.set('previewContent', content);
       controller.set('previewContentType', content.get('format'));
-      controller.set('isShowContentPreview', true);
+      if (content.get('format') === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        controller.set('isShowOfflineActivityPreview', true);
+      } else {
+        controller.set('isShowContentPreview', true);
+      }
     },
 
     onOpenTeacherMilestoneReport(teacherMilestoneReportContext) {

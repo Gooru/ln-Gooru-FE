@@ -233,8 +233,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return {
       category_title: nullIfEmpty(model.get('title')),
       level_obtained: nullIfEmpty(model.get('levelObtained')),
-      level_score: model.get('levelScore'),
-      level_max_score: model.get('levelMaxScore'),
+      level_score: Number(model.get('levelScore')),
+      level_max_score: Number(model.get('levelMaxScore')),
       level_comment: nullIfEmpty(model.get('levelComment'))
     };
   },
@@ -447,8 +447,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return RubricCategoryScore.create(Ember.getOwner(this).ownerInjection(), {
       title: data.category_title,
       levelObtained: data.level_obtained,
-      levelMaxScore: data.level_max_score,
-      levelScore: data.level_score,
+      levelMaxScore: Number(data.level_max_score),
+      levelScore: Number(data.level_score),
       levelComment: data.level_comment
     });
   }

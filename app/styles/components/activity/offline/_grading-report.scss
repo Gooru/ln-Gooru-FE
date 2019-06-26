@@ -379,6 +379,13 @@
             padding-top: 10px;
             text-align: center;
 
+            .score {
+              font-size: 25px;
+              font-weight: bold;
+              text-align: center;
+              color: #35424b;
+            }
+
             span {
               font-family: "Open Sans";
               font-size: 20px;
@@ -479,6 +486,13 @@
               .teacher-grading-panel {
                 padding: 10px;
                 border-bottom: 1px dotted;
+
+                .no-self-grade {
+                  font-family: "Open Sans";
+                  font-size: 15px;
+                  line-height: 1.15;
+                  color: #ffffff;
+                }
 
                 .oa-grade-rubric-grading {
                   width: 200px;

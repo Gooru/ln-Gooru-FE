@@ -155,6 +155,7 @@ export default Ember.Controller.extend(ModalMixin, {
     doSearch(searchTerm) {
       const controller = this;
       controller.set('searchTerm', searchTerm);
+      controller.storeSelectedFilter();
       controller.fetchContent();
     },
 
@@ -243,6 +244,39 @@ export default Ember.Controller.extend(ModalMixin, {
         controller.fetchLibraryContent();
       } else {
         controller.fetchMyContent();
+      }
+    }
+  },
+
+  /**
+   * Method is used to store selected filter
+   */
+  storeSelectedFilter() {
+    const component = this;
+    const selectedFilters = component.get('selectedFilters');
+    let storeObject = {};
+    if (component.get('searchTerm')) {
+      storeObject.searchTerm = component.get('searchTerm');
+    }
+    storeObject.selectedFilters = selectedFilters;
+    let localStorage = window.localStorage;
+    let itemId = `${component.get('profile.id')}_search_filter`;
+    localStorage.setItem(itemId, JSON.stringify(storeObject));
+  },
+
+  /**
+   * Method is used to init the selected filter
+   */
+  initializeSelectedFilter() {
+    const component = this;
+    let localStorage = window.localStorage;
+    let storedObject = JSON.parse(localStorage.getItem(`${component.get('profile.id')}_search_filter`));
+    if (storedObject) {
+      component.set('searchTerm', storedObject.searchTerm);
+      if (storedObject.searchedFilter) {
+        storedObject.searchedFilter.map((searchFilter) => {
+          component.get('selectedFilters').pushObject(Ember.Object.create(searchFilter));
+        });
       }
     }
   },
