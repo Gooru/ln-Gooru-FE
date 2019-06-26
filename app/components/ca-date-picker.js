@@ -30,7 +30,9 @@ export default Ember.Component.extend({
         .format('YYYY');
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
-      let datepickerPrevEle = component.$('#ca-datepicker .datepicker-days .prev');
+      let datepickerPrevEle = component.$(
+        '#ca-datepicker .datepicker-days .prev'
+      );
       datepickerPrevEle.trigger('click');
       let date = `${forYear}-${forMonth}-01`;
       let parsedDate = moment(date).format('YYYY-MM-DD');
@@ -52,7 +54,9 @@ export default Ember.Component.extend({
         .format('YYYY');
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
-      let datepickerNextEle = component.$('#ca-datepicker .datepicker-days .next');
+      let datepickerNextEle = component.$(
+        '#ca-datepicker .datepicker-days .next'
+      );
       datepickerNextEle.trigger('click');
       let date = `${forYear}-${forMonth}-01`;
       let parsedDate = moment(date).format('YYYY-MM-DD');

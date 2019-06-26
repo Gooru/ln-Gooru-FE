@@ -26,15 +26,11 @@
 </div>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h2>{{t "oa.references.artifacts"}}</h2>
+        <h3>{{t 'oa.references.artifacts'}}</h3>
     </div>
     <div class="panel panel-body">
         <div class="panelBodyContainer">
-            <section class="existing-upload-section">
-                {{!-- upload listing --}}
-                <div class="border-bottom1">
-                    <h3>{{t 'oa.references.available-uploads'}}</h3>
-                </div>
+            <section class="existing-upload-section col-md-12">
                 <div class='upload-list-container'>
                     {{#each references as | refItem|}}
                         {{#if (eq refItem.type 'uploaded')}}
@@ -51,19 +47,20 @@
                 </div>
                 {{!-- upload listing --}}
             </section>
-            <section class="upload-section">
+
+            <section class="upload-section col-md-6">
                 {{content.activity.reference.gru-reference-line-item parsedReference=parsedReference editType='upload' oaId=activityModel.id  updateParent=(action 'updateReferenceCollection') deleteReference=(action 'deleteReference') isEditing=isEditing}}
             </section>
-            <section class='url-section'>
+
+            <section class='url-section col-md-6'>
                 <div class="border-bottom">
                     <h3>{{t "oa.references.urls"}}</h3>
                 </div>
                 {{#each references as | refItem|}}
                     {{#if (eq refItem.type 'remote')}}
                         <div class='add-url-line'>
-                            {{input type=input value=refItem.location disabled=true class=" listItem form-control" name='location' maxlength=500 }}
-                            <span class='ellipsis listItem hidden'>{{refItem.location}}</span>
-                            <button placeholder='https://gooru.org' class="remove-uploaded btn no-bgd remove-item" {{action 'deleteUrlReference' refItem}}>{{gru-icon name="remove_circle"}}</button>
+                            {{validation.gru-input disabled=true rawInputValue=refItem.location model=refItem valuePath='location' class='addUrl col-md-10' maxLength=1000 didValidate=didValidate}}
+                            <button class="remove-uploaded btn no-bgd remove-item" {{action 'deleteUrlReference' refItem}}>{{gru-icon name="remove_circle"}}</button>
                         </div>
                     {{/if}}
                 {{/each}}

@@ -211,11 +211,14 @@
         width: 40px;
         cursor: pointer;
         margin: 0 8px;
-
         i {
           color: $white;
           line-height: 48px;
         }
+      }
+
+      .content-player {
+        grid-column: 6;
       }
     }
 

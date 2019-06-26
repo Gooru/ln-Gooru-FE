@@ -11,6 +11,30 @@
       display: grid;
       grid-template-rows: auto;
 
+      .students {
+        height: 50px;
+        .header {
+          display: none;
+        }
+
+        .students-list {
+          display: flex;
+          width: 95%;
+          min-width: unset;
+          max-width: unset;
+          max-height: unset;
+          overflow-x: auto;
+
+          .list {
+            .student-name {
+              white-space: nowrap;
+              display: block;
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+
       .render-course-map {
         width: 100%;
         margin: auto;
