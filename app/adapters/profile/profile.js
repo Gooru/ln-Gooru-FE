@@ -532,7 +532,10 @@ export default Ember.Object.extend({
       te: 'assets/locales/te/translations.js'
     };
 
-    const url = localAssetMap[script];
+    let url = localAssetMap[script];
+    let originLocation = `${window.location.origin}/`;
+    url = originLocation + url;
+
     const options = {
       cache: true,
       type: 'GET',
