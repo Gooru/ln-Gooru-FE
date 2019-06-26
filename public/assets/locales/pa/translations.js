@@ -1,6 +1,5 @@
-import quizzesTranslations from './quizzes/translations';
-
-export default Object.assign(quizzesTranslations, {
+//eslint-disable-next-line
+window.i18ln = {
   en: 'English',
   sp: 'Español',
   ar: 'عربى',
@@ -83,7 +82,8 @@ export default Object.assign(quizzesTranslations, {
   'common.no-collection-info-message': 'ਇਸ ਪਾਠ ਵਿੱਚ ਕੋਈ ਸੰਗ੍ਰਹਿ ਹੈ',
   'common.gooru-suggestions': 'ਗੋਰੂ ਸੁਝਾਅ',
   'common.gooru-catalog': 'ਗੋੂਰੂ ਕੈਟਾਲਾਗ',
-  'common.no-users-to-grade-oa': 'There are no users to grade for this Offline Activity.',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'ca.student.no-content':
     'The teacher has not assigned any activities for the day',
   'oa.student.no-active-content':
@@ -2657,4 +2657,4 @@ export default Object.assign(quizzesTranslations, {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'Expected time to complete',
   'oa.info.hrs': ' hrs'
-});
+};

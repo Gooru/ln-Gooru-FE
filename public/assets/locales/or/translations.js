@@ -1,6 +1,5 @@
-import quizzesTranslations from './quizzes/translations';
-
-export default Object.assign(quizzesTranslations, {
+//eslint-disable-next-line
+window.i18ln = {
   en: 'English',
   sp: 'Español',
   ar: 'عربى',
@@ -64,7 +63,8 @@ export default Object.assign(quizzesTranslations, {
   'common.engagement': 'ଜଡ଼ିତ ରଖିବା',
   'common.efficacy': 'ସାମର୍ଥ୍ୟ',
   'common.grid': 'ଗ୍ରୀଡ୍',
-  'common.no-users-to-grade-oa': 'There are no users to grade for this Offline Activity.',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.list': 'ତାଲିକା',
   'common.first': 'ପ୍ରଥମ',
   'common.last': 'ଶେଷ',
@@ -2726,4 +2726,4 @@ export default Object.assign(quizzesTranslations, {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'Expected time to complete',
   'oa.info.hrs': ' hrs'
-});
+};

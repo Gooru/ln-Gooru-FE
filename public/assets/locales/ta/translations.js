@@ -1,6 +1,5 @@
-import quizzesTranslations from './quizzes/translations';
-
-export default Object.assign(quizzesTranslations, {
+//eslint-disable-next-line
+window.i18ln = {
   en: 'English',
   sp: 'Español',
   ar: 'عربى',
@@ -59,7 +58,8 @@ export default Object.assign(quizzesTranslations, {
   'errors.url': '{{description}} சரியான URL ஆக இருக்க வேண்டும்',
   'common.relevance': 'சம்பந்தம்',
   'common.engagement': 'நிச்சயதார்த்தம்',
-  'common.no-users-to-grade-oa': 'There are no users to grade for this Offline Activity.',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.efficacy': 'பலாபலன்',
   'common.grid': 'கட்டம்',
   'common.list': 'பட்டியலில்',
@@ -2734,4 +2734,4 @@ export default Object.assign(quizzesTranslations, {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'Expected time to complete',
   'oa.info.hrs': ' hrs'
-});
+};

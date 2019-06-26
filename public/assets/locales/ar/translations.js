@@ -1,6 +1,5 @@
-import quizzesTranslations from './quizzes/translations';
-
-export default Object.assign(quizzesTranslations, {
+//eslint-disable-next-line
+window.i18ln = {
   en: 'English',
   sp: 'Español',
   ar: 'عربى',
@@ -253,7 +252,8 @@ export default Object.assign(quizzesTranslations, {
   'common.answer-this-rubric': 'Answer this rubric to complete your FRQ.',
   'common.all-caught-up': 'You are all caught up!',
   'common.no-users-to-grade': 'There are no users to grade for this FRQ.',
-  'common.no-users-to-grade-oa': 'There are no users to grade for this Offline Activity.',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.rubric-needs-grading': 'Rubric Needs Grading',
   'common.not-answered': 'Not Answered',
   'common.rubric-not-answered': 'Rubric Not Answered',
@@ -2609,4 +2609,4 @@ export default Object.assign(quizzesTranslations, {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'Expected time to complete',
   'oa.info.hrs': ' hrs'
-});
+};

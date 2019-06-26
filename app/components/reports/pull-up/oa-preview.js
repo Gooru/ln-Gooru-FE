@@ -3,13 +3,8 @@ import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import PullUpMixin from 'gooru-web/mixins/reports/pull-up/pull-up-mixin';
 import ModalMixin from 'gooru-web/mixins/modal';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
-import {
-  SCREEN_SIZES,
-  ROLES
-} from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
+import { SCREEN_SIZES, ROLES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend(ModalMixin, PullUpMixin, {
   // -------------------------------------------------------------------------
@@ -267,46 +262,40 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     component.set('isLoading', true);
     const users = component.get('users') ? component.get('users') : Ember.A([]);
     let studentListPromise =
-      isReportView && isTeacher ?
-        component
+      isReportView && isTeacher
+        ? component
           .get('classActivityService')
-          .fetchUsersForClassActivity(classId, caContentId) :
-        Ember.RSVP.resolve(users);
+          .fetchUsersForClassActivity(classId, caContentId)
+        : Ember.RSVP.resolve(users);
     let userId = isStudent ? this.get('session.userId') : undefined;
-    let performancePromise = isReportView ?
-      component
+    let performancePromise = isReportView
+      ? component
         .get('performanceService')
         .findOfflineClassActivityPerformanceSummaryByIds(
           classId,
           [caContentId],
           userId,
           false
-        ) :
-      Ember.RSVP.resolve([]);
-    return Ember.RSVP
-      .hash({
-        offlineActivity: oaService.readActivity(oaId),
-        users: studentListPromise,
-        performances: performancePromise
-      })
-      .then(({
-        offlineActivity,
-        users,
-        performances
-      }) => {
-        if (!component.isDestroyed) {
-          component.set('offlineActivity', offlineActivity);
-          if (isReportView) {
-            users = users.filterBy('isActive', true);
-            component.set('users', users);
-            let user = users.objectAt(0);
-            component.set('selectedUser', user);
-            component.fetchSubmissions(user);
-            component.parsePerformanceData(users, performances);
-          }
-          component.set('isLoading', false);
+        )
+      : Ember.RSVP.resolve([]);
+    return Ember.RSVP.hash({
+      offlineActivity: oaService.readActivity(oaId),
+      users: studentListPromise,
+      performances: performancePromise
+    }).then(({ offlineActivity, users, performances }) => {
+      if (!component.isDestroyed) {
+        component.set('offlineActivity', offlineActivity);
+        if (isReportView) {
+          users = users.filterBy('isActive', true);
+          component.set('users', users);
+          let user = users.objectAt(0);
+          component.set('selectedUser', user);
+          component.fetchSubmissions(user);
+          component.parsePerformanceData(users, performances);
         }
-      });
+        component.set('isLoading', false);
+      }
+    });
   },
 
   resetValues() {
@@ -329,23 +318,19 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     const caContentId = component.get('classActivity.id');
     const isReportView = component.get('isReportView');
     const userId = user.get('id');
-    let submissionPromise = isReportView ?
-      component
+    let submissionPromise = isReportView
+      ? component
         .get('oaAnaltyicsService')
-        .getSubmissionsToGrade(classId, caContentId, userId) :
-      Ember.RSVP.resolve(null);
-    return Ember.RSVP
-      .hash({
-        submissions: submissionPromise
-      })
-      .then(({
-        submissions
-      }) => {
-        if (!component.isDestroyed) {
-          component.resetValues();
-          component.parseSubmissionsData(submissions);
-        }
-      });
+        .getSubmissionsToGrade(classId, caContentId, userId)
+      : Ember.RSVP.resolve(null);
+    return Ember.RSVP.hash({
+      submissions: submissionPromise
+    }).then(({ submissions }) => {
+      if (!component.isDestroyed) {
+        component.resetValues();
+        component.parseSubmissionsData(submissions);
+      }
+    });
   },
 
   parseSubmissionsData(submissions) {
@@ -376,9 +361,9 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
 
   parseRubricGradedData(rubric, gradedRubric) {
     if (rubric && gradedRubric) {
-      let gradedCategories = gradedRubric.get('categoryGrade') ?
-        gradedRubric.get('categoryGrade') :
-        Ember.A([]);
+      let gradedCategories = gradedRubric.get('categoryGrade')
+        ? gradedRubric.get('categoryGrade')
+        : Ember.A([]);
       let categories = rubric.get('categories');
       rubric.set('score', gradedRubric.get('score'));
       rubric.set('comment', gradedRubric.get('overallComment'));
@@ -390,10 +375,15 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
             levels = levels.sortBy('score');
             if (gradedCategory) {
               levels.map((level, index) => {
-                let score = index > 0 ? index * (Math.floor(100 / (levels.length - 1))) : 10;
+                let score =
+                  index > 0
+                    ? index * Math.floor(100 / (levels.length - 1))
+                    : 10;
                 level.set('scoreInPrecentage', score);
-                if (level.get('score') === gradedCategory.get('levelScore') &&
-                  level.get('name') === gradedCategory.get('levelObtained')) {
+                if (
+                  level.get('score') === gradedCategory.get('levelScore') &&
+                  level.get('name') === gradedCategory.get('levelObtained')
+                ) {
                   category.set('scoreInPrecentage', score);
                 }
               });
@@ -446,7 +436,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
       score = rubric.get('score');
       if (score && score > 0) {
         let gradeMaxScore = rubric.get('maxScore');
-        score = Math.floor(score / gradeMaxScore * 100);
+        score = Math.floor((score / gradeMaxScore) * 100);
       }
     }
     return score;

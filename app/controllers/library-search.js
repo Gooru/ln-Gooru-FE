@@ -1,10 +1,6 @@
 import Ember from 'ember';
 import ModalMixin from 'gooru-web/mixins/modal';
-import {
-  SEARCH_CONTEXT,
-  CONTENT_TYPES,
-  ROLES
-} from 'gooru-web/config/config';
+import { SEARCH_CONTEXT, CONTENT_TYPES, ROLES } from 'gooru-web/config/config';
 export default Ember.Controller.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
@@ -85,10 +81,11 @@ export default Ember.Controller.extend(ModalMixin, {
     'appController.myClasses.classes.[]',
     function() {
       const classes = this.get('appController.myClasses');
-      return classes ?
-        classes
+      return classes
+        ? classes
           .getTeacherActiveClasses(this.get('session.userId'))
-          .filterBy('courseId', null) : [];
+          .filterBy('courseId', null)
+        : [];
     }
   ),
 
@@ -288,18 +285,14 @@ export default Ember.Controller.extend(ModalMixin, {
     const controller = this;
     controller.set('isLoading', true);
     controller.set('page', 0);
-    Ember.RSVP
-      .hash({
-        searchResults: controller.getSearchService()
-      })
-      .then(({
-        searchResults
-      }) => {
-        if (!controller.isDestroyed) {
-          controller.set('isLoading', false);
-          controller.set('searchResults', searchResults);
-        }
-      });
+    Ember.RSVP.hash({
+      searchResults: controller.getSearchService()
+    }).then(({ searchResults }) => {
+      if (!controller.isDestroyed) {
+        controller.set('isLoading', false);
+        controller.set('searchResults', searchResults);
+      }
+    });
   },
 
   /**
@@ -309,18 +302,14 @@ export default Ember.Controller.extend(ModalMixin, {
     const controller = this;
     controller.set('isLoading', true);
     controller.set('page', 0);
-    Ember.RSVP
-      .hash({
-        searchResults: controller.getMyContentService()
-      })
-      .then(({
-        searchResults
-      }) => {
-        if (!controller.isDestroyed) {
-          controller.set('isLoading', false);
-          controller.set('searchResults', searchResults);
-        }
-      });
+    Ember.RSVP.hash({
+      searchResults: controller.getMyContentService()
+    }).then(({ searchResults }) => {
+      if (!controller.isDestroyed) {
+        controller.set('isLoading', false);
+        controller.set('searchResults', searchResults);
+      }
+    });
   },
 
   /**
@@ -330,22 +319,17 @@ export default Ember.Controller.extend(ModalMixin, {
     let controller = this;
     controller.set('isLoading', true);
     controller.set('page', 0);
-    Ember.RSVP
-      .hash({
-        searchResults: controller.getLibraryService()
-      })
-      .then(function(result) {
-        if (result) {
-          let libraryContent = result.searchResults.libraryContent;
-          let content = libraryContent[Object.keys(libraryContent)[0]];
-          let owners = libraryContent[Object.keys(libraryContent)[1]];
-          controller.set(
-            'searchResults',
-            controller.mapOwners(content, owners)
-          );
-        }
-        controller.set('isLoading', false);
-      });
+    Ember.RSVP.hash({
+      searchResults: controller.getLibraryService()
+    }).then(function(result) {
+      if (result) {
+        let libraryContent = result.searchResults.libraryContent;
+        let content = libraryContent[Object.keys(libraryContent)[0]];
+        let owners = libraryContent[Object.keys(libraryContent)[1]];
+        controller.set('searchResults', controller.mapOwners(content, owners));
+      }
+      controller.set('isLoading', false);
+    });
   },
 
   /**
@@ -357,19 +341,15 @@ export default Ember.Controller.extend(ModalMixin, {
       controller.set('isPaginate', true);
       let page = controller.get('page') + 1;
       controller.set('page', page);
-      Ember.RSVP
-        .hash({
-          searchResults: controller.getSearchService()
-        })
-        .then(({
-          searchResults
-        }) => {
-          if (!controller.isDestroyed) {
-            controller.set('isPaginate', false);
-            let searchResult = controller.get('searchResults');
-            controller.set('searchResults', searchResult.concat(searchResults));
-          }
-        });
+      Ember.RSVP.hash({
+        searchResults: controller.getSearchService()
+      }).then(({ searchResults }) => {
+        if (!controller.isDestroyed) {
+          controller.set('isPaginate', false);
+          let searchResult = controller.get('searchResults');
+          controller.set('searchResults', searchResult.concat(searchResults));
+        }
+      });
     }
   },
 
@@ -382,19 +362,15 @@ export default Ember.Controller.extend(ModalMixin, {
       controller.set('isPaginate', true);
       let page = controller.get('page') + 1;
       controller.set('page', page);
-      Ember.RSVP
-        .hash({
-          searchResults: controller.getMyContentService()
-        })
-        .then(({
-          searchResults
-        }) => {
-          if (!controller.isDestroyed) {
-            controller.set('isPaginate', false);
-            let searchResult = controller.get('searchResults');
-            controller.set('searchResults', searchResult.concat(searchResults));
-          }
-        });
+      Ember.RSVP.hash({
+        searchResults: controller.getMyContentService()
+      }).then(({ searchResults }) => {
+        if (!controller.isDestroyed) {
+          controller.set('isPaginate', false);
+          let searchResult = controller.get('searchResults');
+          controller.set('searchResults', searchResult.concat(searchResults));
+        }
+      });
     }
   },
 
@@ -407,23 +383,21 @@ export default Ember.Controller.extend(ModalMixin, {
       controller.set('isPaginate', true);
       let page = controller.get('page') + 1;
       controller.set('page', page);
-      Ember.RSVP
-        .hash({
-          searchResults: controller.getLibraryService()
-        })
-        .then(function(result) {
-          if (result) {
-            let libraryContent = result.searchResults.libraryContent;
-            let content = libraryContent[Object.keys(libraryContent)[0]];
-            let owners = libraryContent[Object.keys(libraryContent)[1]];
-            let searchResult = controller.get('searchResults');
-            controller.set(
-              'searchResults',
-              searchResult.concat(controller.mapOwners(content, owners))
-            );
-          }
-          controller.set('isPaginate', false);
-        });
+      Ember.RSVP.hash({
+        searchResults: controller.getLibraryService()
+      }).then(function(result) {
+        if (result) {
+          let libraryContent = result.searchResults.libraryContent;
+          let content = libraryContent[Object.keys(libraryContent)[0]];
+          let owners = libraryContent[Object.keys(libraryContent)[1]];
+          let searchResult = controller.get('searchResults');
+          controller.set(
+            'searchResults',
+            searchResult.concat(controller.mapOwners(content, owners))
+          );
+        }
+        controller.set('isPaginate', false);
+      });
     }
   },
 
@@ -620,9 +594,9 @@ export default Ember.Controller.extend(ModalMixin, {
       ownerMap[owner.id] = owner;
     });
     let mappedContents = contents.map(function(content) {
-      content.owner = content.ownerId ?
-        ownerMap[content.ownerId] :
-        ownerMap[content.owner];
+      content.owner = content.ownerId
+        ? ownerMap[content.ownerId]
+        : ownerMap[content.owner];
       return content;
     });
     return mappedContents;

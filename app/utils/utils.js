@@ -1108,3 +1108,25 @@ export function getOAType() {
 export function getTimeInMillisec(hour = 0, minute = 0) {
   return (hour * 60 * 60 + minute * 60) * 1000;
 }
+
+/**
+ * Returns list of locales configured
+ */
+export function appLocales() {
+  return Ember.A([
+    { en: 'English' },
+    { sp: 'Español' },
+    { ar: 'عربى' },
+    { mr: 'मराठी' },
+    { kn: 'ಕನ್ನಡ' },
+    { hi: 'हिंदी' },
+    { as: 'অসমীয়া' },
+    { bn: 'বাংলা' },
+    { gu: 'ગુજરાતી' },
+    { ml: 'മല്യാലം' },
+    { or: ' ଓଡ଼ିଆ' },
+    { pa: 'ਪੰਜਾਬੀ' },
+    { ta: 'தமிழ்' },
+    { te: 'తెలుగు' }
+  ]);
+}
