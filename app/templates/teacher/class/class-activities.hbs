@@ -13,9 +13,9 @@
               <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
             </div>
             <div class="ca-calendar-tabs">
-              <div class="title {{if (eq selectedCalendarView 'monthly') 'active'}}" {{action 'selectCalendarView' 'monthly'}}>Monthly</div>
-              <div class="title {{if (eq selectedCalendarView 'weekly') 'active'}}" {{action 'selectCalendarView' 'weekly'}}>Weekly</div>
-              <div class="title {{if (eq selectedCalendarView 'daily') 'active'}}" {{action 'selectCalendarView' 'daily'}}>Daily</div>
+              <div class="title {{if isMonthly 'active'}}" {{action 'selectCalendarView' 'monthly'}}>Monthly</div>
+              <div class="title {{if isWeekly 'active'}}" {{action 'selectCalendarView' 'weekly'}}>Weekly</div>
+              <div class="title {{if isDaily 'active'}}" {{action 'selectCalendarView' 'daily'}}>Daily</div>
             </div>
             <div class="ca-date-section">
               <div class="date-picker-action" {{action 'toggleDatePicker'}}>
@@ -41,21 +41,39 @@
               <div class="backdrop" {{action 'toggleDatePicker'}}></div>
             {{/if}}
             {{ca-date-picker
-          showToday=true
-          forMonth=forMonth
-          allowDateSelectorToggle=false
-          forYear=forYear
-          showPreviousMonth="showPreviousMonth"
-          showNextMonth="showNextMonth"
-          onSelectDate="onSelectDate"
-          onSelectWeek="onSelectWeek"
-          onSelectMonth="onSelectMonth"
-          calendarView=selectedCalendarView
-          highlightFirstDayOfMonth=true
-          onSelectToday="onSelectToday"
-          activities=scheduledClassActivitiesDatewise
-          highlightActivities=true
-        }}
+                showPreviousMonth="showPreviousMonth"
+                showNextMonth="showNextMonth"
+                forMonth=forMonth
+                forYear=forYear
+                onSelectDate="onSelectDate"
+                highlightFirstDayOfMonth=true
+                onSelectToday="onSelectToday"
+                showToday=true
+                isDaily=isDaily
+                activities=scheduledClassActivitiesDatewise
+                highlightActivities=true
+                class=(if isDaily  'visible' 'hidden')
+              }}
+            {{ca-week-picker
+                forMonth=forWeekMonth
+                forYear=forWeekYear
+                showPreviousMonth="showPreviousMonthForWeek"
+                showNextMonth="showNextMonthForWeek"
+                onSelectWeek="onSelectWeek"
+                isWeekly=isWeekly
+                activities=scheduledClassActivitiesDatewise
+                highlightActivities=true
+                class=(if isWeekly  'visible' 'hidden')
+                }}
+            {{ca-month-picker
+                startYear="2018"
+                showCalendarView=true
+                showPreviousYear="showPreviousYear"
+                showNextYear="showNextYear"
+                onSelectMonth="onSelectMonth"
+                isMonthly=isMonthly
+                class=(if isMonthly  'visible' 'hidden')
+              }}
           </div>
         </div>
         <div class="ca-schedule-section">
@@ -266,11 +284,12 @@
     </div>
   </div>
   <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
-    <!-- {{ca-daterange-datepicker
+    {{ca-daterange-datepicker
       closeDatePicker='onCloseDatePicker'
       onScheduleForDate='onScheduleForDate'
       onScheduleForMonth='onScheduleForMonth'
-      allowTwoDateRangePicker=allowTwoDateRangePicker}} -->
+      endDate=endDate
+      allowTwoDateRangePicker=allowTwoDateRangePicker}}
   </div>
 </div>
 <!-- Search -->
