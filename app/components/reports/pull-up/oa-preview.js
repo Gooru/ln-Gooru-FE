@@ -196,7 +196,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
   ),
 
   /**
-   * Maintains the object of  student rubric data from  rubric array
+   * Maintains the object of student rubric data from  rubric array
    * @return {Object}
    */
   studentRubric: Ember.computed(
@@ -300,6 +300,20 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
       });
   },
 
+  resetValues() {
+    const component = this;
+    let teacherRubric = component.get('teacherRubric');
+    let studentRubric = component.get('studentRubric');
+    if (teacherRubric) {
+      teacherRubric.set('score', null);
+      teacherRubric.set('comment', null);
+    }
+    if (studentRubric) {
+      studentRubric.set('score', null);
+      studentRubric.set('comment', null);
+    }
+  },
+
   fetchSubmissions(user) {
     const component = this;
     const classId = component.get('classId');
@@ -317,6 +331,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
       })
       .then(({ submissions }) => {
         if (!component.isDestroyed) {
+          component.resetValues();
           component.parseSubmissionsData(submissions);
         }
       });
@@ -354,7 +369,6 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
         ? gradedRubric.get('categoryGrade')
         : Ember.A([]);
       let categories = rubric.get('categories');
-
       rubric.set('score', gradedRubric.get('score'));
       rubric.set('comment', gradedRubric.get('overallComment'));
       categories.map((category, index) => {
@@ -364,11 +378,19 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
           if (category.get('allowsLevels') && category.get('allowsScoring')) {
             levels = levels.sortBy('score');
             if (gradedCategory) {
-              let totalPoints = gradedCategory.get('levelMaxScore');
-              let scoreInPrecentage = Math.floor(
-                gradedCategory.get('levelScore') / totalPoints * 100
-              );
-              category.set('scoreInPrecentage', scoreInPrecentage);
+              levels.map((level, index) => {
+                let score =
+                  index > 0
+                    ? index * Math.floor(100 / (levels.length - 1))
+                    : 10;
+                level.set('scoreInPrecentage', score);
+                if (
+                  level.get('score') === gradedCategory.get('levelScore') &&
+                  level.get('name') === gradedCategory.get('levelObtained')
+                ) {
+                  category.set('scoreInPrecentage', score);
+                }
+              });
             }
           }
           if (gradedCategory) {

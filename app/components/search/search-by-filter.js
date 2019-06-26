@@ -1,15 +1,8 @@
 import Ember from 'ember';
-import {
-  getCategoryCodeFromSubjectId
-} from 'gooru-web/utils/taxonomy';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
-import {
-  SCREEN_SIZES
-} from 'gooru-web/config/config';
+import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
 export default Ember.Component.extend({
-
   classNames: ['search-by-filter'],
 
   classNameBindings: ['isShow:active'],
@@ -30,7 +23,6 @@ export default Ember.Component.extend({
    * @property {Service} Taxonomy service
    */
   taxonomyService: Ember.inject.service('taxonomy'),
-
 
   // -------------------------------------------------------------------------
   // Properties
@@ -75,7 +67,6 @@ export default Ember.Component.extend({
    */
   isCompatiableMode: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
-
   /**
    * i18n key for the browse selector text
    * @property {string}
@@ -84,9 +75,9 @@ export default Ember.Component.extend({
     'taxonomyPickerData.standardLabel',
     function() {
       const standardLabel = this.get('taxonomyPickerData.standardLabel');
-      return standardLabel ?
-        'taxonomy.modals.gru-standard-picker.browseSelectorText' :
-        'taxonomy.modals.gru-standard-picker.browseCompetencySelectorText';
+      return standardLabel
+        ? 'taxonomy.modals.gru-standard-picker.browseSelectorText'
+        : 'taxonomy.modals.gru-standard-picker.browseCompetencySelectorText';
     }
   ),
 
@@ -99,9 +90,9 @@ export default Ember.Component.extend({
     function() {
       const standardLabel = this.get('taxonomyPickerData.standardLabel');
 
-      return standardLabel ?
-        'taxonomy.modals.gru-standard-picker.selectedText' :
-        'taxonomy.modals.gru-standard-picker.selectedCompetencyText';
+      return standardLabel
+        ? 'taxonomy.modals.gru-standard-picker.selectedText'
+        : 'taxonomy.modals.gru-standard-picker.selectedCompetencyText';
     }
   ),
 
@@ -120,13 +111,10 @@ export default Ember.Component.extend({
   /**
    * @type {String} the selected category
    */
-  selectedCategory: Ember.computed(
-    'preference',
-    function() {
-      let subjectId = this.get('preference.subject');
-      return subjectId ? getCategoryCodeFromSubjectId(subjectId) : null;
-    }
-  ),
+  selectedCategory: Ember.computed('preference', function() {
+    let subjectId = this.get('preference.subject');
+    return subjectId ? getCategoryCodeFromSubjectId(subjectId) : null;
+  }),
 
   init() {
     let component = this;
@@ -139,9 +127,7 @@ export default Ember.Component.extend({
     component.loadSubjects();
   },
 
-
   actions: {
-
     applyFilter() {
       let component = this;
       component.toggleProperty('isShow');
@@ -153,7 +139,9 @@ export default Ember.Component.extend({
       component.set('selectedSubject.courses', Ember.A([]));
       component.set('selectedSubject', subject);
       let selectedFilters = component.get('selectedFilters');
-      selectedFilters.removeObjects(selectedFilters.filterBy('filter', 'flt.standard')); //remove previous object
+      selectedFilters.removeObjects(
+        selectedFilters.filterBy('filter', 'flt.standard')
+      ); //remove previous object
       component.set('taxonomyPickerData.selected', Ember.A([]));
       component.set('course', null);
       component.set('domain', null);
@@ -182,8 +170,10 @@ export default Ember.Component.extend({
       const component = this;
       component.set('taxonomyPickerData.selected', selectedTags);
       let selectedFilters = component.get('selectedFilters');
-      selectedFilters.removeObjects(selectedFilters.filterBy('filter', 'flt.standard')); //remove previous object
-      selectedTags.map((standard) => {
+      selectedFilters.removeObjects(
+        selectedFilters.filterBy('filter', 'flt.standard')
+      ); //remove previous object
+      selectedTags.map(standard => {
         standard.set('filter', 'flt.standard');
         standard.set('name', standard.get('data.code'));
         standard.set('id', standard.get('data.id'));
@@ -238,8 +228,9 @@ export default Ember.Component.extend({
   onSelectFilter(item) {
     const component = this;
     let selectedFilters = component.get('selectedFilters');
-    if (selectedFilters.includes(item)) {
-      selectedFilters.removeObject(item);
+    let selectedFilter = selectedFilters.findBy('name', item.get('name'));
+    if (selectedFilter) {
+      selectedFilters.removeObject(selectedFilter);
     } else {
       selectedFilters.pushObject(item);
     }
@@ -253,8 +244,8 @@ export default Ember.Component.extend({
   fetchAudiences() {
     const component = this;
     const lookupService = component.get('lookupService');
-    lookupService.readAudiences().then((audiences) => {
-      let serializeData = audiences.map((audience) => {
+    lookupService.readAudiences().then(audiences => {
+      let serializeData = audiences.map(audience => {
         return Ember.Object.create({
           name: audience.get('name'),
           filter: 'flt.audience'
@@ -273,8 +264,8 @@ export default Ember.Component.extend({
   fetchEducationalUse() {
     const component = this;
     const lookupService = component.get('lookupService');
-    lookupService.getEducationalUse().then((educationalUses) => {
-      let serializeData = educationalUses.map((educationalUse) => {
+    lookupService.getEducationalUse().then(educationalUses => {
+      let serializeData = educationalUses.map(educationalUse => {
         return Ember.Object.create({
           name: educationalUse.get('label'),
           filter: 'flt.educational'
@@ -297,8 +288,13 @@ export default Ember.Component.extend({
       .then(function(subjects) {
         let preference = component.get('preference');
         if (preference) {
-          let preferedSubjects = subjects.findBy('code', preference.get('subject'));
-          let subject = preferedSubjects.get('frameworks').findBy('frameworkId', preference.get('framework'));
+          let preferedSubjects = subjects.findBy(
+            'code',
+            preference.get('subject')
+          );
+          let subject = preferedSubjects
+            .get('frameworks')
+            .findBy('frameworkId', preference.get('framework'));
           if (!component.isDestroyed) {
             component.set('selectedSubject', subject);
           }
@@ -313,8 +309,8 @@ export default Ember.Component.extend({
   fetchLanguages() {
     const component = this;
     const lookupService = component.get('lookupService');
-    lookupService.getLanguages().then((languages) => {
-      let serializeData = languages.map((language) => {
+    lookupService.getLanguages().then(languages => {
+      let serializeData = languages.map(language => {
         return Ember.Object.create({
           name: language.get('name'),
           filter: 'flt.language'
@@ -333,34 +329,35 @@ export default Ember.Component.extend({
 
   getResourceTypes() {
     const component = this;
-    return Ember.A([Ember.Object.create({
-      name: component.get('i18n').t('resource.video').string,
-      type: 'flt.resources'
-    }),
-    Ember.Object.create({
-      name: component.get('i18n').t('resource.webpage').string,
-      type: 'flt.resources'
-    }),
-    Ember.Object.create({
-      name: component.get('i18n').t('resource.webpage').string,
-      type: 'flt.resources'
-    }),
-    Ember.Object.create({
-      name: component.get('i18n').t('resource.interactive').string,
-      type: 'flt.resources'
-    }),
-    Ember.Object.create({
-      name: component.get('i18n').t('resource.image').string,
-      type: 'flt.resources'
-    }),
-    Ember.Object.create({
-      name: component.get('i18n').t('resource.text').string,
-      type: 'flt.resources'
-    }),
-    Ember.Object.create({
-      name: component.get('i18n').t('resource.audio').string,
-      type: 'flt.resources'
-    })
+    return Ember.A([
+      Ember.Object.create({
+        name: component.get('i18n').t('resource.video').string,
+        type: 'flt.resources'
+      }),
+      Ember.Object.create({
+        name: component.get('i18n').t('resource.webpage').string,
+        type: 'flt.resources'
+      }),
+      Ember.Object.create({
+        name: component.get('i18n').t('resource.webpage').string,
+        type: 'flt.resources'
+      }),
+      Ember.Object.create({
+        name: component.get('i18n').t('resource.interactive').string,
+        type: 'flt.resources'
+      }),
+      Ember.Object.create({
+        name: component.get('i18n').t('resource.image').string,
+        type: 'flt.resources'
+      }),
+      Ember.Object.create({
+        name: component.get('i18n').t('resource.text').string,
+        type: 'flt.resources'
+      }),
+      Ember.Object.create({
+        name: component.get('i18n').t('resource.audio').string,
+        type: 'flt.resources'
+      })
     ]);
   },
 
@@ -379,9 +376,9 @@ export default Ember.Component.extend({
       standardLabel: true
     };
     component.set('taxonomyPickerData', taxonomyPickerData);
-    const standardLabel = this.get('taxonomyPickerData.standardLabel') ?
-      'common.standard' :
-      'common.competency';
+    const standardLabel = this.get('taxonomyPickerData.standardLabel')
+      ? 'common.standard'
+      : 'common.competency';
 
     component.set('panelHeaders', [
       component.get('i18n').t('common.course').string,
@@ -395,29 +392,29 @@ export default Ember.Component.extend({
     component.set('filters', component.getFilters());
   },
 
-
   getFilters() {
     const component = this;
-    return Ember.A([Ember.Object.create({
-      label: component.get('i18n').t('search-filter.courses').string,
-      type: 'courses'
-    }),
-    Ember.Object.create({
-      label: component.get('i18n').t('search-filter.collections').string,
-      type: 'collections'
-    }),
-    Ember.Object.create({
-      label: component.get('i18n').t('search-filter.assessments').string,
-      type: 'assessments'
-    }),
-    Ember.Object.create({
-      label: component.get('i18n').t('search-filter.resources').string,
-      type: 'resources'
-    }),
-    Ember.Object.create({
-      label: component.get('i18n').t('search-filter.rubrics').string,
-      type: 'rubrics'
-    })
+    return Ember.A([
+      Ember.Object.create({
+        label: component.get('i18n').t('search-filter.courses').string,
+        type: 'courses'
+      }),
+      Ember.Object.create({
+        label: component.get('i18n').t('search-filter.collections').string,
+        type: 'collections'
+      }),
+      Ember.Object.create({
+        label: component.get('i18n').t('search-filter.assessments').string,
+        type: 'assessments'
+      }),
+      Ember.Object.create({
+        label: component.get('i18n').t('search-filter.resources').string,
+        type: 'resources'
+      }),
+      Ember.Object.create({
+        label: component.get('i18n').t('search-filter.rubrics').string,
+        type: 'rubrics'
+      })
     ]);
   }
 });

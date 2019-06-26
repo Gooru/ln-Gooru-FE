@@ -24,6 +24,11 @@ export default Ember.Component.extend({
     let categories = component.get('categories');
     categories.map(category => {
       let levels = category.get('levels').sortBy('score');
+      levels.map((level, index) => {
+        let score =
+          index > 0 ? index * Math.floor(100 / (levels.length - 1)) : 10;
+        level.set('scoreInPrecentage', score);
+      });
       category.set('levels', levels);
     });
     return categories;
@@ -104,11 +109,7 @@ export default Ember.Component.extend({
         level.set('selected', false);
       });
       level.set('selected', true);
-      let totalPoints = category.get('totalPoints');
-      let scoreInPrecentage = Math.floor(
-        (level.get('score') / totalPoints) * 100
-      );
-      category.set('scoreInPrecentage', scoreInPrecentage);
+      category.set('scoreInPrecentage', level.get('scoreInPrecentage'));
       category.set('selected', true);
       if (isMobile.matches) {
         component
@@ -118,7 +119,10 @@ export default Ember.Component.extend({
         component.$(this).popover('show');
         Ember.$('.popover-title')
           .append('<span class="close-popover">x</span>')
-          .css('background-color', getGradeColor(scoreInPrecentage));
+          .css(
+            'background-color',
+            getGradeColor(level.get('scoreInPrecentage'))
+          );
       }
     });
     if (!isMobile.matches) {
@@ -134,7 +138,7 @@ export default Ember.Component.extend({
         $(this).popover('show');
         if (category.get('allowsScoring')) {
           let scoreInPrecentage = Math.floor(
-            (level.get('score') / totalPoints) * 100
+            level.get('score') / totalPoints * 100
           );
           Ember.$('.popover-title').css(
             'background-color',

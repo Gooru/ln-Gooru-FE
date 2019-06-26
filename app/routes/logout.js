@@ -30,14 +30,14 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   authenticationService: Ember.inject.service('api-sdk/authentication'),
 
   defaultMarketingSiteUrl: Ember.computed(function() {
-    return `${
-      window.location.protocol
-    }//${window.location.host}${Env.marketingSiteUrl}`;
+    return `${window
+      .location.protocol}//${window.location.host}${Env.marketingSiteUrl}`;
   }),
 
   beforeModel: function() {
     this._super(...arguments);
     const router = this;
+    const userId = router.get('session.userId');
     router
       .get('authenticationService')
       .signOut()
@@ -45,6 +45,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         const isProd = Env.environment === 'production';
         let redirectUrl = null;
         redirectUrl = EndPointsConfig.getMarketingsiteURL();
+        window.localStorage.removeItem(`${userId}_search_filter`);
         if (resp && resp.default === false) {
           $('.logout-container').css('display', 'flex');
           $('.navbar-default').css('display', 'none');

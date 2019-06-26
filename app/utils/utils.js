@@ -1117,3 +1117,26 @@ export function isValidEmailId(emailId = '') {
   );
   return emailPattern.test(emailId);
 }
+
+/**
+ * @function appLocales
+ * Returns list of locales configured
+ */
+export function appLocales() {
+  return Ember.A([
+    { en: 'English' },
+    { sp: 'Español' },
+    { ar: 'عربى' },
+    { mr: 'मराठी' },
+    { kn: 'ಕನ್ನಡ' },
+    { hi: 'हिंदी' },
+    { as: 'অসমীয়া' },
+    { bn: 'বাংলা' },
+    { gu: 'ગુજરાતી' },
+    { ml: 'മല്യാലം' },
+    { or: ' ଓଡ଼ିଆ' },
+    { pa: 'ਪੰਜਾਬੀ' },
+    { ta: 'தமிழ்' },
+    { te: 'తెలుగు' }
+  ]);
+}

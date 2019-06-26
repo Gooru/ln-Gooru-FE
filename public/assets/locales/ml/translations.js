@@ -1,6 +1,5 @@
-import quizzesTranslations from './quizzes/translations';
-
-export default Object.assign(quizzesTranslations, {
+//eslint-disable-next-line
+window.i18ln = {
   en: 'English',
   sp: 'Español',
   ar: 'عربى',
@@ -66,6 +65,8 @@ export default Object.assign(quizzesTranslations, {
   'common.answer-this-activity':
     'Answer this rubric to complete your activity.',
   'common.first': 'ആദ്യം',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.last': 'അവസാനത്തെ',
   'common.name': 'പേര്',
   'common.user': 'ഉപയോക്താവ്',
@@ -81,6 +82,7 @@ export default Object.assign(quizzesTranslations, {
   'common.avg-score': 'ശരാശരി സ്കോർ',
   'common.frq': 'frq',
   'common.plan': 'plan',
+  'self-grade.not-required': 'Student self-grading not required',
   'offline-activities.no-completed-content':
     'There are no projects or other offline activities that have been completed yet',
   'offline-activities.no-active-content':
@@ -2726,4 +2728,4 @@ export default Object.assign(quizzesTranslations, {
   'class.add-more-people': 'Add more people...',
   'cass.add-co-teachers': 'Add Co-Teachers',
   'class.add-co-teacher-class': 'Add co-teacher to class'
-});
+};

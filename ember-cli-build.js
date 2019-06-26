@@ -33,7 +33,8 @@ module.exports = function(defaults) {
       useLintTree: false
     },
     fingerprint: {
-      exclude: ['themes', 'application-widget.js'] //excluding files
+      ignore: ['locales'],
+      exclude: ['themes', 'application-widget.js'] //excluding files,
     },
     babel: {
       includePolyfill: true,

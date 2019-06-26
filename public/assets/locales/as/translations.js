@@ -1,6 +1,5 @@
-import quizzesTranslations from './quizzes/translations';
-
-export default Object.assign(quizzesTranslations, {
+//eslint-disable-next-line
+window.i18ln = {
   en: 'English',
   sp: 'Español',
   ar: 'عربى',
@@ -57,6 +56,7 @@ export default Object.assign(quizzesTranslations, {
   'common.efficacy': 'দক্ষতা',
   'common.grid': 'গ্ৰিড',
   'common.list': 'তালিকা',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.first': 'প্ৰথম',
   'common.last': 'শেষ',
   'common.name': 'নাম',
@@ -259,6 +259,8 @@ export default Object.assign(quizzesTranslations, {
   'common.all-caught-up': 'আপোনালোক সকলোকে আৱদ্ধ কৰা হ\'ল!',
   'common.no-users-to-grade':
     'এই FRQ ৰ কাৰণে গ্ৰেডৰ বাবে কোনো ৱ্যৱহাৰকাৰী নাই।',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.rubric-needs-grading': 'ৰিউব্ৰিকক গ্ৰেডিংৰ প্ৰয়োজন হয়',
   'common.not-answered': 'উত্তৰ দিয়া হোৱা নাই',
   'common.rubric-not-answered': 'ৰিউব্ৰিকৰ উত্তৰ দিয়া হোৱা নাই',
@@ -2707,4 +2709,4 @@ export default Object.assign(quizzesTranslations, {
   'class.add-more-people': 'Add more people...',
   'cass.add-co-teachers': 'Add Co-Teachers',
   'class.add-co-teacher-class': 'Add co-teacher to class'
-});
+};

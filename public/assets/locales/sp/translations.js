@@ -1,6 +1,5 @@
-import quizzesTranslations from './quizzes/translations';
-
-export default Object.assign(quizzesTranslations, {
+//eslint-disable-next-line
+window.i18ln = {
   en: 'English',
   sp: 'Español',
   ar: 'عربى',
@@ -64,7 +63,10 @@ export default Object.assign(quizzesTranslations, {
   'common.for': 'for',
   'common.first': 'First',
   'common.last': 'Last',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.name': 'Name',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.user': 'user',
   'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
@@ -2709,4 +2711,4 @@ export default Object.assign(quizzesTranslations, {
   'class.add-more-people': 'Add more people...',
   'cass.add-co-teachers': 'Add Co-Teachers',
   'class.add-co-teacher-class': 'Add co-teacher to class'
-});
+};

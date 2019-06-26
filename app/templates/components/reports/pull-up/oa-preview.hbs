@@ -1,6 +1,6 @@
 <div class="backdrop" {{action "onClosePullUp"}}></div>
 <div class="oa-preview-container">
-  <div class="oa-header-container">
+  <div class="oa-header-container {{if isReportView 'report'}}">
     <div class="close-pullup" {{action "onClosePullUp"}}>
       {{gru-icon name="arrow_downward"}}
     </div>
@@ -11,12 +11,6 @@
       {{/unless}}
     </div>
 
-    <div class="content-player" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
-      {{#if allowPlay}}
-        {{gru-icon name="play_arrow"}}
-      {{/if}}
-    </div>
-
     <div class="content-remix" title="{{t 'common.remix'}}" data-toggle="tooltip" {{action "onRemixContent"}}>
       {{#if showRemix}}
         {{gru-icon name="content_copy"}}
@@ -25,6 +19,12 @@
     <div class="print-preview" title="{{t 'common.download-print'}}" data-toggle="tooltip" {{action "onPrintPreview"}}>
       {{#if showPrint}}
         {{gru-icon name="get_app"}}
+      {{/if}}
+    </div>
+
+    <div class="content-player" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
+      {{#if allowPlay}}
+        {{gru-icon name="play_arrow"}}
       {{/if}}
     </div>
 
@@ -44,13 +44,13 @@
 
   {{#if isReportView}}
     <div class="oa-user-list-container">
-      <div class="user-selected-profile">
+      <div class="user-selected-profile" {{action 'toggleListOfStudents'}}>
         <div class="user-profile-img">
           <img src="{{selectedUser.avatarUrl}}" />
           <span>{{selectedUser.lastName}} {{selectedUser.firstName}}</span>
         </div>
         {{#if (and isReportView isTeacher)}}
-          <div class="oa-user-list-drop-down" {{action 'toggleListOfStudents'}}>
+          <div class="oa-user-list-drop-down">
             {{gru-icon name="keyboard_arrow_down"}}
           </div>
         {{/if}}
@@ -155,7 +155,7 @@
               <div class="grader-label">{{t 'common.student'}} {{t 'common.rubric'}}</div>
               <div class="grade-tag">{{t 'common.self-graded'}}</div>
             </div>
-            {{#if (and (gte studentRubric.score 0) isReportView (gt studentRubric.maxScore 0)) }}
+            {{#if (and studentRubric.score  isReportView  studentRubric.maxScore) }}
               <div class="score-section">
                 <div class="oa-grade-score grade-range-{{grade-range studentGradeScore}}">
                   <span>{{studentRubric.score}}</span>
@@ -190,7 +190,7 @@
               <div class="grader-label">{{t 'common.teacher'}} {{t 'common.rubric'}}</div>
               <div class="grade-tag">{{t 'common.teacher'}}-{{t 'class.info.grade'}}</div>
             </div>
-            {{#if (and (gte teacherRubric.score 0) isReportView (gt studentRubric.maxScore 0)) }}
+            {{#if (and teacherRubric.score isReportView  teacherRubric.maxScore) }}
               <div class="score-section">
                 <div class="oa-grade-score grade-range-{{grade-range teacherGradeScore}}">
                   <span>{{teacherRubric.score}}</span>

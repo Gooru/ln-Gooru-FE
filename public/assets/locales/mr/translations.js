@@ -1,6 +1,5 @@
-import quizzesTranslations from './quizzes/translations';
-
-export default Object.assign(quizzesTranslations, {
+//eslint-disable-next-line
+window.i18ln = {
   en: 'English',
   sp: 'Español',
   ar: 'عربى',
@@ -60,8 +59,11 @@ export default Object.assign(quizzesTranslations, {
   'common.efficacy': 'परिणामकारकता',
   'common.grid': 'ग्रिड',
   'common.list': 'यादी',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.first': 'पहिला',
   'common.last': 'शेवटचे',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.name': 'नाव',
   'common.user': 'वापरणारी व्यक्ती',
   'common.content-name': 'आशयाचे नाव',
@@ -2640,4 +2642,4 @@ export default Object.assign(quizzesTranslations, {
   'class.add-more-people': 'Add more people...',
   'cass.add-co-teachers': 'Add Co-Teachers',
   'class.add-co-teacher-class': 'Add co-teacher to class'
-});
+};

@@ -1,6 +1,5 @@
-import quizzesTranslations from './quizzes/translations';
-
-export default Object.assign(quizzesTranslations, {
+//eslint-disable-next-line
+window.i18ln = {
   en: 'English',
   sp: 'Español',
   ar: 'عربى',
@@ -46,6 +45,8 @@ export default Object.assign(quizzesTranslations, {
   'errors.lessThan': '{{description}} {{lt}} से कम होना चाहिए',
   'errors.lessThanOrEqualTo':
     '{{description}} {{lte}} से कम या बराबर होना चाहिए',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'errors.otherThan': '{{description}} {{value}} से अधिक होना चाहिए',
   'errors.odd': '{{description}} विषम होना चाहिए',
   'errors.even': '{{description}} सम होना चाहिए',
@@ -75,6 +76,7 @@ export default Object.assign(quizzesTranslations, {
   'common.avg-score': 'औसत अंक',
   'common.frq': 'एफआर ',
   'common.schedule': 'कार्यक्रम',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.responses': 'प्रतिक्रिया',
   'common.no-lesson-info-message': 'इस इकाई में कोई पाठ नही है।',
   'common.no-collection-info-message': 'इस पाठ में कोई संग्रह नहीं है।',
@@ -2678,4 +2680,4 @@ export default Object.assign(quizzesTranslations, {
   'class.add-more-people': 'Add more people...',
   'cass.add-co-teachers': 'Add Co-Teachers',
   'class.add-co-teacher-class': 'Add co-teacher to class'
-});
+};

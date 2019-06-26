@@ -735,6 +735,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   selectedDate: null,
 
   /**
+   * it maintains data for active offline activities
+   * @property {Array}
+   */
+  activeOfflineActivities: Ember.A([]),
+
+  /**
+   * it maintains data for completed offline activities
+   * @property {Array}
+   */
+  completedOfflineActivities: Ember.A([]),
+
+  /**
    * it maintains date which user selected is today or not
    * @property {Boolean} isToday
    */

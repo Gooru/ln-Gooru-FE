@@ -16,6 +16,8 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
 
   i18n: Ember.inject.service(),
 
+  //i18nLoader: Ember.inject.service('i18n-loader'),
+
   /**
    * @type {ClassService} Service to retrieve user information
    */
@@ -94,9 +96,9 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
 
   beforeModel: function(transition) {
     const route = this;
-
     // Below logic is used to clear the left over state of study player,
     // in order to avoid the conflict.
+
     let navigateMapService = route.get('navigateMapService');
     navigateMapService
       .getLocalStorage()
@@ -144,8 +146,15 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
     let whichLocalSet = this.getLocalStorage().getItem(
       this.device_language_key
     );
+    whichLocalSet = whichLocalSet || lang;
+    route
+      .get('profileService')
+      .loadScript(whichLocalSet)
+      .then(() => {
+        route.get('i18n').addTranslations(whichLocalSet, window.i18ln);
+      });
 
-    this.setupDefaultLanguage(whichLocalSet || lang);
+    this.setupDefaultLanguage(whichLocalSet);
 
     route.setupTheme(themeId);
 

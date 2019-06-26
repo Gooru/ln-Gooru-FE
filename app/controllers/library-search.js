@@ -1,10 +1,6 @@
 import Ember from 'ember';
 import ModalMixin from 'gooru-web/mixins/modal';
-import {
-  SEARCH_CONTEXT,
-  CONTENT_TYPES,
-  ROLES
-} from 'gooru-web/config/config';
+import { SEARCH_CONTEXT, CONTENT_TYPES, ROLES } from 'gooru-web/config/config';
 export default Ember.Controller.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
@@ -85,10 +81,11 @@ export default Ember.Controller.extend(ModalMixin, {
     'appController.myClasses.classes.[]',
     function() {
       const classes = this.get('appController.myClasses');
-      return classes ?
-        classes
+      return classes
+        ? classes
           .getTeacherActiveClasses(this.get('session.userId'))
-          .filterBy('courseId', null) : [];
+          .filterBy('courseId', null)
+        : [];
     }
   ),
 
@@ -155,6 +152,7 @@ export default Ember.Controller.extend(ModalMixin, {
     doSearch(searchTerm) {
       const controller = this;
       controller.set('searchTerm', searchTerm);
+      controller.storeSelectedFilter();
       controller.fetchContent();
     },
 
@@ -248,6 +246,35 @@ export default Ember.Controller.extend(ModalMixin, {
   },
 
   /**
+   * Method is used to store selected filter
+   */
+  storeSelectedFilter() {
+    const component = this;
+    const selectedFilters = component.get('selectedFilters');
+    let localStorage = window.localStorage;
+    let itemId = `${component.get('profile.id')}_search_filter`;
+    localStorage.setItem(itemId, JSON.stringify(selectedFilters));
+  },
+
+  /**
+   * Method is used to init the selected filter
+   */
+  initializeSelectedFilter() {
+    const component = this;
+    let localStorage = window.localStorage;
+    let searchedFilter = JSON.parse(
+      localStorage.getItem(`${component.get('profile.id')}_search_filter`)
+    );
+    if (searchedFilter && searchedFilter) {
+      searchedFilter.map(searchFilter => {
+        component
+          .get('selectedFilters')
+          .pushObject(Ember.Object.create(searchFilter));
+      });
+    }
+  },
+
+  /**
    * Method is used to fetch Search contents
    */
   fetchSearchContent() {
@@ -258,9 +285,7 @@ export default Ember.Controller.extend(ModalMixin, {
       .hash({
         searchResults: controller.getSearchService()
       })
-      .then(({
-        searchResults
-      }) => {
+      .then(({ searchResults }) => {
         if (!controller.isDestroyed) {
           controller.set('isLoading', false);
           controller.set('searchResults', searchResults);
@@ -279,9 +304,7 @@ export default Ember.Controller.extend(ModalMixin, {
       .hash({
         searchResults: controller.getMyContentService()
       })
-      .then(({
-        searchResults
-      }) => {
+      .then(({ searchResults }) => {
         if (!controller.isDestroyed) {
           controller.set('isLoading', false);
           controller.set('searchResults', searchResults);
@@ -327,9 +350,7 @@ export default Ember.Controller.extend(ModalMixin, {
         .hash({
           searchResults: controller.getSearchService()
         })
-        .then(({
-          searchResults
-        }) => {
+        .then(({ searchResults }) => {
           if (!controller.isDestroyed) {
             controller.set('isPaginate', false);
             let searchResult = controller.get('searchResults');
@@ -352,9 +373,7 @@ export default Ember.Controller.extend(ModalMixin, {
         .hash({
           searchResults: controller.getMyContentService()
         })
-        .then(({
-          searchResults
-        }) => {
+        .then(({ searchResults }) => {
           if (!controller.isDestroyed) {
             controller.set('isPaginate', false);
             let searchResult = controller.get('searchResults');
@@ -586,9 +605,9 @@ export default Ember.Controller.extend(ModalMixin, {
       ownerMap[owner.id] = owner;
     });
     let mappedContents = contents.map(function(content) {
-      content.owner = content.ownerId ?
-        ownerMap[content.ownerId] :
-        ownerMap[content.owner];
+      content.owner = content.ownerId
+        ? ownerMap[content.ownerId]
+        : ownerMap[content.owner];
       return content;
     });
     return mappedContents;

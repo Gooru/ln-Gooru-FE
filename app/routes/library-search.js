@@ -58,6 +58,7 @@ export default Ember.Route.extend({
   setupController: function(controller, model) {
     controller.set('library', model.library);
     controller.set('profile', model.profile);
+    controller.initializeSelectedFilter();
     if (controller.get('term')) {
       controller.searchByParams(controller.get('term'));
     } else {
