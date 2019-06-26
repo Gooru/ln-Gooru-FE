@@ -56,6 +56,7 @@ window.i18ln = {
   'common.engagement': 'સગાઈ',
   'common.efficacy': 'અસરકારકતા',
   'common.grid': 'ગ્રીડ',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.list': 'યાદી',
   'common.first': 'પ્રથમ',
   'common.last': 'છેલ્લા',
@@ -64,6 +65,8 @@ window.i18ln = {
   'common.user': 'વપરાશકર્તા',
   'common.content-name': 'સામગ્રી નામ',
   'common.lastName': 'છેલ્લું નામ',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.tasks': 'tasks',
   'common.sub-filter': 'Sub-Filter',
   'common.firstName': 'પ્રથમ નામ',

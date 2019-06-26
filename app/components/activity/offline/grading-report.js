@@ -187,7 +187,7 @@ export default Ember.Component.extend({
       let totalRubricPoints = this.get('totalRubricPoints');
       let totalUserRubricPoints = this.get('totalUserRubricPoints');
       if (totalUserRubricPoints > 0) {
-        score = Math.floor(totalUserRubricPoints / totalRubricPoints * 100);
+        score = Math.floor((totalUserRubricPoints / totalRubricPoints) * 100);
       }
       return score;
     }
@@ -208,7 +208,7 @@ export default Ember.Component.extend({
         ? component.get('teacherRubric.studentScore')
         : component.get('studentRubric.studentScore');
       if (studentScore > 0) {
-        score = Math.floor(studentScore / gradeMaxScore * 100);
+        score = Math.floor((studentScore / gradeMaxScore) * 100);
       }
       return score;
     }
@@ -226,7 +226,7 @@ export default Ember.Component.extend({
       let gradeMaxScore = selfGrade.get('maxScore');
       let studentScore = selfGrade.get('studentScore');
       if (studentScore > 0) {
-        score = Math.floor(studentScore / gradeMaxScore * 100);
+        score = Math.floor((studentScore / gradeMaxScore) * 100);
       }
     }
     return score;
@@ -358,14 +358,13 @@ export default Ember.Component.extend({
     let component = this;
     let classId = component.get('context.classId');
     let dcaContentId = component.get('context.dcaContentId');
-    return Ember.RSVP
-      .hash({
-        studentList: component.get('isTeacher')
-          ? component
-            .get('classActivityService')
-            .fetchUsersForClassActivity(classId, dcaContentId)
-          : []
-      })
+    return Ember.RSVP.hash({
+      studentList: component.get('isTeacher')
+        ? component
+          .get('classActivityService')
+          .fetchUsersForClassActivity(classId, dcaContentId)
+        : []
+    })
       .then(({ studentList }) => {
         if (!component.isDestroyed) {
           let users = studentList.filterBy('isActive', true);
@@ -464,11 +463,17 @@ export default Ember.Component.extend({
         if (levels) {
           if (category.get('allowsLevels') && category.get('allowsScoring')) {
             levels = levels.sortBy('score');
-            let totalPoints = gradedCategory.get('levelMaxScore');
-            let scoreInPrecentage = Math.floor(
-              gradedCategory.get('levelScore') / totalPoints * 100
-            );
-            category.set('scoreInPrecentage', scoreInPrecentage);
+            levels.map((level, index) => {
+              let score =
+                index > 0 ? index * Math.floor(100 / (levels.length - 1)) : 10;
+              level.set('scoreInPrecentage', score);
+              if (
+                level.get('score') === gradedCategory.get('levelScore') &&
+                level.get('name') === gradedCategory.get('levelObtained')
+              ) {
+                category.set('scoreInPrecentage', score);
+              }
+            });
           }
           let levelObtained = levels.findBy(
             'name',
@@ -563,7 +568,9 @@ export default Ember.Component.extend({
       userGrade.set('sessionId', currentStudent.get('sessionId'));
       userGrade.set('graderId', component.get('session.userId'));
     }
-    userGrade.set('maxScore', component.get('content.maxScore'));
+    if (isTeacher && !userGrade.scoring) {
+      userGrade.set('maxScore', component.get('content.maxScore'));
+    }
     let categoriesScore = Ember.A([]);
     userGrade.set('classId', context.get('classId'));
     userGrade.set('dcaContentId', context.get('dcaContentId'));
@@ -634,7 +641,7 @@ export default Ember.Component.extend({
       collectionId: component.get('context.dcaContentId'),
       createdDate: new Date(),
       studentScore: 0,
-      scoring: !rubric
+      scoring: !!rubric
     });
   },
 
@@ -680,13 +687,15 @@ export default Ember.Component.extend({
 
   closePullUp() {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-    });
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+      }
+    );
   },
 
   /**

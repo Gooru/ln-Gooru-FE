@@ -65,6 +65,8 @@ window.i18ln = {
   'common.answer-this-activity':
     'Answer this rubric to complete your activity.',
   'common.first': 'ആദ്യം',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.last': 'അവസാനത്തെ',
   'common.name': 'പേര്',
   'common.user': 'ഉപയോക്താവ്',
@@ -80,6 +82,7 @@ window.i18ln = {
   'common.avg-score': 'ശരാശരി സ്കോർ',
   'common.frq': 'frq',
   'common.plan': 'plan',
+  'self-grade.not-required': 'Student self-grading not required',
   'offline-activities.no-completed-content':
     'There are no projects or other offline activities that have been completed yet',
   'offline-activities.no-active-content':

@@ -59,8 +59,11 @@ window.i18ln = {
   'common.efficacy': 'परिणामकारकता',
   'common.grid': 'ग्रिड',
   'common.list': 'यादी',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.first': 'पहिला',
   'common.last': 'शेवटचे',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.name': 'नाव',
   'common.user': 'वापरणारी व्यक्ती',
   'common.content-name': 'आशयाचे नाव',

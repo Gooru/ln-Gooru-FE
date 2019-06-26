@@ -1,12 +1,8 @@
 import Ember from 'ember';
 import SessionMixin from 'gooru-web/mixins/session';
 import ModalMixin from 'gooru-web/mixins/modal';
-import {
-  SCREEN_SIZES
-} from 'gooru-web/config/config';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 /**
  * Class activities controller
@@ -27,7 +23,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * @requires service:api-sdk/class-activity
    */
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
-
 
   /**
    * @requires service:api-sdk/offline-activity-analytics
@@ -199,6 +194,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * @property {Boolean} studentDcaReport
    */
   studentDcaReport: false,
+
+  /**
+   * it maintains data for active offline activities
+   * @property {Array}
+   */
+  activeOfflineActivities: Ember.A([]),
+
+  /**
+   * it maintains data for completed offline activities
+   * @property {Array}
+   */
+  completedOfflineActivities: Ember.A([]),
 
   /**
    * Class id
@@ -390,7 +397,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     const classId = controller.get('classId');
     const userId = controller.get('session.userId');
     Ember.RSVP.hash({
-      oaItems: controller.get('oaAnaltyicsService').getOAToGrade(classId, userId)
+      oaItems: controller
+        .get('oaAnaltyicsService')
+        .getOAToGrade(classId, userId)
     }).then(function(hash) {
       let gradeItems = hash.oaItems.gradeItems;
       if (gradeItems) {
@@ -445,20 +454,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     );
     let windowHeight = $(window).height();
     if (itemToGradeEle.hasClass('active')) {
-      itemToGradeEle.animate({
-        top: windowHeight - 100
-      },
-      400,
-      function() {
-        itemToGradeEle.removeClass('active');
-      }
+      itemToGradeEle.animate(
+        {
+          top: windowHeight - 100
+        },
+        400,
+        function() {
+          itemToGradeEle.removeClass('active');
+        }
       );
     } else {
       itemToGradeEle.addClass('active');
-      itemToGradeEle.animate({
-        top: 100
-      },
-      400
+      itemToGradeEle.animate(
+        {
+          top: 100
+        },
+        400
       );
     }
   },
@@ -467,13 +478,19 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Animate a items to grade section for desktop
    */
   animateItemsToGradeForDesktop() {
-    let offlineActivityContainer = Ember.$('.ca-panel .right-panel .offline-container');
+    let offlineActivityContainer = Ember.$(
+      '.ca-panel .right-panel .offline-container'
+    );
     let itemToGradeContainer = Ember.$(
       '.ca-panel .right-panel .item-to-grade-container'
     );
     if (!itemToGradeContainer.hasClass('active')) {
-      let offlineActivityEle = offlineActivityContainer.children('.offline-activity-contents');
-      let itemToGradeEle = itemToGradeContainer.children('.ca-grade-content-items');
+      let offlineActivityEle = offlineActivityContainer.children(
+        '.offline-activity-contents'
+      );
+      let itemToGradeEle = itemToGradeContainer.children(
+        '.ca-grade-content-items'
+      );
       offlineActivityContainer.removeClass('active');
       offlineActivityEle.slideUp(400);
       itemToGradeEle.slideDown(400, function() {
@@ -486,13 +503,19 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Animate a items to grade section for desktop
    */
   animateOfflineActivityForDesktop() {
-    let offlineActivityContainer = Ember.$('.ca-panel .right-panel .offline-container');
+    let offlineActivityContainer = Ember.$(
+      '.ca-panel .right-panel .offline-container'
+    );
     let itemToGradeContainer = Ember.$(
       '.ca-panel .right-panel .item-to-grade-container'
     );
     if (!offlineActivityContainer.hasClass('active')) {
-      let offlineActivityEle = offlineActivityContainer.children('.offline-activity-contents');
-      let itemToGradeEle = itemToGradeContainer.children('.ca-grade-content-items');
+      let offlineActivityEle = offlineActivityContainer.children(
+        '.offline-activity-contents'
+      );
+      let itemToGradeEle = itemToGradeContainer.children(
+        '.ca-grade-content-items'
+      );
       itemToGradeContainer.removeClass('active');
       itemToGradeEle.slideUp(400);
       offlineActivityEle.slideDown(400, function() {
@@ -510,20 +533,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     );
     let windowHeight = $(window).height();
     if (offlineActivityEle.hasClass('toggle')) {
-      offlineActivityEle.animate({
-        top: windowHeight - 50
-      },
-      400,
-      function() {
-        offlineActivityEle.removeClass('toggle');
-      }
+      offlineActivityEle.animate(
+        {
+          top: windowHeight - 50
+        },
+        400,
+        function() {
+          offlineActivityEle.removeClass('toggle');
+        }
       );
     } else {
       offlineActivityEle.addClass('toggle');
-      offlineActivityEle.animate({
-        top: 100
-      },
-      400
+      offlineActivityEle.animate(
+        {
+          top: 100
+        },
+        400
       );
     }
   }

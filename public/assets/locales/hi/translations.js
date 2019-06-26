@@ -45,6 +45,8 @@ window.i18ln = {
   'errors.lessThan': '{{description}} {{lt}} से कम होना चाहिए',
   'errors.lessThanOrEqualTo':
     '{{description}} {{lte}} से कम या बराबर होना चाहिए',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'errors.otherThan': '{{description}} {{value}} से अधिक होना चाहिए',
   'errors.odd': '{{description}} विषम होना चाहिए',
   'errors.even': '{{description}} सम होना चाहिए',
@@ -74,6 +76,7 @@ window.i18ln = {
   'common.avg-score': 'औसत अंक',
   'common.frq': 'एफआर ',
   'common.schedule': 'कार्यक्रम',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.responses': 'प्रतिक्रिया',
   'common.no-lesson-info-message': 'इस इकाई में कोई पाठ नही है।',
   'common.no-collection-info-message': 'इस पाठ में कोई संग्रह नहीं है।',

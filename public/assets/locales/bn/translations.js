@@ -46,6 +46,8 @@ window.i18ln = {
   'errors.otherThan': '{{description}} {{মান}} এর চেয়ে অন্য হতে হবে',
   'errors.odd': '{{বর্ণনা}} অদ্ভুত হতে হবে',
   'errors.even': '{{বর্ণনা}} এমনকি হতে হবে',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'errors.positive': '{{বর্ণনা}} ইতিবাচক হতে হবে',
   'errors.date': '{{বর্ণনা}} একটি বৈধ তারিখ হতে হবে',
   'errors.email': '{{বর্ণনা}} একটি বৈধ ইমেইল ঠিকানা হতে হবে',
@@ -58,6 +60,7 @@ window.i18ln = {
   'common.list': 'তালিকা',
   'common.first': 'প্রথম',
   'common.last': 'গত',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.name': 'নাম',
   'common.user': 'ব্যবহারকারী',
   'common.sub-filter': 'Sub-Filter',

@@ -68,7 +68,10 @@ window.i18ln = {
   'common.lastName': 'Lastname',
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.more': 'more',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.apply-filter': 'apply filter',
   'search-help-message': 'Choose filters to apply',
   'library-search-placeholder': 'Search for anything within the library…',

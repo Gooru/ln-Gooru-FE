@@ -524,7 +524,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
           ? parseInt(payload.get('studentScore'))
           : parseInt(payload.get('currentScore'))
         : null,
-      max_score: payload.get('maxScore'),
+      max_score: payload.get('maxScore') ? payload.get('maxScore') : null,
       grader_id: payload.get('graderId'),
       session_id: payload.sessionId ? payload.sessionId : undefined,
       overall_comment: payload.get('comment'),

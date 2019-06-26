@@ -91,6 +91,7 @@ window.i18ln = {
   'common.gooru-catalog': 'Gooru Catalog',
   'common.suggestion-made-to': 'Suggestion made to',
   'common.student-selected': 'Student Selected',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.no-suggest-result-message': ' No matching content found',
   'common.no-suggest-results-message':
     'You can search and  find the related content.',
@@ -251,6 +252,8 @@ window.i18ln = {
     'Answer this rubric to complete your activity.',
   'common.all-caught-up': 'You are all caught up!',
   'common.no-users-to-grade': 'There are no users to grade for this FRQ.',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.rubric-needs-grading': 'Rubric Needs Grading',
   'common.not-answered': 'Not Answered',
   'common.rubric-not-answered': 'Rubric Not Answered',

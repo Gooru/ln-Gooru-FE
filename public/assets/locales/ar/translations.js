@@ -66,6 +66,7 @@ window.i18ln = {
   'common.filter-by': 'Filter By',
   'common.sub-filter': 'Sub-Filter',
   'common.for': 'for',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.more': 'more',
   'common.tasks': 'tasks',
   'common.apply-filter': 'apply filter',
@@ -251,6 +252,8 @@ window.i18ln = {
   'common.answer-this-rubric': 'Answer this rubric to complete your FRQ.',
   'common.all-caught-up': 'You are all caught up!',
   'common.no-users-to-grade': 'There are no users to grade for this FRQ.',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.rubric-needs-grading': 'Rubric Needs Grading',
   'common.not-answered': 'Not Answered',
   'common.rubric-not-answered': 'Rubric Not Answered',

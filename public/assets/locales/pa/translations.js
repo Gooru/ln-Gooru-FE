@@ -64,6 +64,7 @@ window.i18ln = {
   'common.last': 'ਆਖਰੀ',
   'common.tasks': 'tasks',
   'common.name': 'ਨਾਮ',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.user': 'ਯੂਜ਼ਰ',
   'common.for': 'for',
   'common.content-name': 'ਸਮੱਗਰੀ ਦਾ ਨਾਂ',
@@ -81,6 +82,8 @@ window.i18ln = {
   'common.no-collection-info-message': 'ਇਸ ਪਾਠ ਵਿੱਚ ਕੋਈ ਸੰਗ੍ਰਹਿ ਹੈ',
   'common.gooru-suggestions': 'ਗੋਰੂ ਸੁਝਾਅ',
   'common.gooru-catalog': 'ਗੋੂਰੂ ਕੈਟਾਲਾਗ',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'ca.student.no-content':
     'The teacher has not assigned any activities for the day',
   'oa.student.no-active-content':

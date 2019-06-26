@@ -63,7 +63,10 @@ window.i18ln = {
   'common.for': 'for',
   'common.first': 'First',
   'common.last': 'Last',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.name': 'Name',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.user': 'user',
   'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
