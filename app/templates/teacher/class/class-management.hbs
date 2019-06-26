@@ -65,7 +65,7 @@
             <div class='sub-sec-coteach'>
               {{#if class.collaborators}}
                 <div class='sub-sec-head'>{{t 'teacher-landing.class.class-settings.class-settings-sec.co-teachers'}}</div>
-                {{#each class.collaborators as |coteacher|}}
+                {{#each collaborators as |coteacher|}}
                   <div class='sub-sec-row'>
                     <div class='teacher-icon' style="background-image: url({{coteacher.avatarUrl}})"></div>
                     <div class='co-teacher-label'> {{coteacher.lastName}} {{coteacher.firstName}}</div>
@@ -73,6 +73,32 @@
                   </div>
                 {{/each}}
               {{/if}}
+              <div class="trigger-add-coteacher" {{action "onToggleAddCollaborator"}}>
+                <div class="add-co-teacher-icon">
+                  {{gru-icon name="add_circle_outline"}}
+                </div>
+                <div class="add-co-teacher-label">
+                  {{t 'class.add-co-teacher-class'}}
+                </div>
+              </div>
+              <div class="add-collaborator-container">
+                <div class="header-container">
+                  {{t 'cass.add-co-teachers'}}
+                </div>
+                <div class="body-container">
+                <div class="search-user-container">
+                  {{gru-user-multi-select
+                    users = teacherUserProfiles
+                    onSelectUserItem = "onSelectUserItem"
+                    onRemoveUserItem = "onRemoveUserItem"
+                    onSearchUser = "onSearchUser"}}
+                </div>
+                </div>
+                <div class="footer-container">
+                  <div class="action-btn cancel-btn">{{t 'common.cancel'}}</div>
+                  <div class="action-btn done-btn" {{action "onAddCollaborators"}}>{{t 'common.done'}}</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

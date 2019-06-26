@@ -187,7 +187,7 @@ export default Ember.Component.extend({
       let totalRubricPoints = this.get('totalRubricPoints');
       let totalUserRubricPoints = this.get('totalUserRubricPoints');
       if (totalUserRubricPoints > 0) {
-        score = Math.floor((totalUserRubricPoints / totalRubricPoints) * 100);
+        score = Math.floor(totalUserRubricPoints / totalRubricPoints * 100);
       }
       return score;
     }
@@ -208,7 +208,7 @@ export default Ember.Component.extend({
         ? component.get('teacherRubric.studentScore')
         : component.get('studentRubric.studentScore');
       if (studentScore > 0) {
-        score = Math.floor((studentScore / gradeMaxScore) * 100);
+        score = Math.floor(studentScore / gradeMaxScore * 100);
       }
       return score;
     }
@@ -226,7 +226,7 @@ export default Ember.Component.extend({
       let gradeMaxScore = selfGrade.get('maxScore');
       let studentScore = selfGrade.get('studentScore');
       if (studentScore > 0) {
-        score = Math.floor((studentScore / gradeMaxScore) * 100);
+        score = Math.floor(studentScore / gradeMaxScore * 100);
       }
     }
     return score;
@@ -358,13 +358,14 @@ export default Ember.Component.extend({
     let component = this;
     let classId = component.get('context.classId');
     let dcaContentId = component.get('context.dcaContentId');
-    return Ember.RSVP.hash({
-      studentList: component.get('isTeacher')
-        ? component
-          .get('classActivityService')
-          .fetchUsersForClassActivity(classId, dcaContentId)
-        : []
-    })
+    return Ember.RSVP
+      .hash({
+        studentList: component.get('isTeacher')
+          ? component
+            .get('classActivityService')
+            .fetchUsersForClassActivity(classId, dcaContentId)
+          : []
+      })
       .then(({ studentList }) => {
         if (!component.isDestroyed) {
           let users = studentList.filterBy('isActive', true);
@@ -687,15 +688,13 @@ export default Ember.Component.extend({
 
   closePullUp() {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-      }
-    );
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+    });
   },
 
   /**
