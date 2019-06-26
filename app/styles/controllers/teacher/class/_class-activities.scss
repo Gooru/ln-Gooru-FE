@@ -198,7 +198,8 @@
                     background-color: #3486f7;
                   }
 
-                  #ca-datepicker {
+                  #ca-datepicker,
+                  #ca-weekpicker {
                     grid-row-start: 1;
                     padding: 10px 20px 20px;
 
@@ -457,15 +458,14 @@
                 }
               }
 
-              &.dca-content-list-container-today {
-                .add-content-message {
-                  padding: 15px;
-                  font-size: 18px;
-                  background: #fff;
-                  border-radius: 4px;
-                  line-height: 1.2;
-                  margin: 0;
-                }
+              .add-content-message,
+              .no-content {
+                padding: 15px;
+                font-size: 18px;
+                background: #fff;
+                border-radius: 4px;
+                line-height: 1.2;
+                margin: 0;
               }
             }
           }

@@ -20,11 +20,11 @@
             <div class="ca-date-section">
               <div class="date-picker-action" {{action 'toggleDatePicker'}}>
                 <span class="label">
-                  {{#if (and (eq selectedCalendarView 'daily') isToday)}}
+                  {{#if (and isDaily isToday)}}
                     {{t "student-landing.class.class-activities-tab.today"}}
-                  {{else if (eq selectedCalendarView 'weekly')}}
+                  {{else if isWeekly}}
                     {{format-date startDateOfWeek 'DD MMM'}} - {{format-date endDateOfWeek 'DD MMM YYYY'}}
-                  {{else if (eq selectedCalendarView 'monthly')}}
+                  {{else if isMonthly}}
                     {{format-date selectedMonth 'MMM YYYY'}}
                   {{else}}
                     {{format-date selectedDate 'DD MMM YYYY'}}
@@ -59,10 +59,10 @@
           </div>
         </div>
         <div class="ca-schedule-section">
-          <div class="dca-content-list-container {{if isToday 'dca-content-list-container-today'}}">
+          <div class="dca-content-list-container">
             {{#each scheduledClassActivities as |classActivity|}}
               <div class="class-activity-container">
-                {{#unless (eq selectedCalendarView 'daily')}}
+                {{#unless isDaily}}
                   <div class="added-date">{{format-date classActivity.added_date 'DD MMM YYYY'}}
                     <hr />
                   </div>
@@ -89,12 +89,14 @@
                     onUpdateMasteryAccrual="onUpdateMasteryAccrual"
                     showMasteryAccrual=showMasteryAccrual
                   }}
-                {{else}}
-                  <p class="no-content">{{t "common.no-dca-teacher"}}</p>
                 {{/each}}
               </div>
-            {{else}}
-              <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
+            {{else if (not isLoading)}}
+              {{#if (and isDaily isToday)}}
+                <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
+              {{else}}
+                <p class="no-content">{{t "common.no-dca-teacher"}}</p>
+              {{/if}}
             {{/each}}
           </div>
         </div>
@@ -264,11 +266,11 @@
     </div>
   </div>
   <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
-    {{ca-daterange-datepicker
+    <!-- {{ca-daterange-datepicker
       closeDatePicker='onCloseDatePicker'
       onScheduleForDate='onScheduleForDate'
       onScheduleForMonth='onScheduleForMonth'
-      allowTwoDateRangePicker=allowTwoDateRangePicker}}
+      allowTwoDateRangePicker=allowTwoDateRangePicker}} -->
   </div>
 </div>
 <!-- Search -->

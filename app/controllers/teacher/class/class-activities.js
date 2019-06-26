@@ -605,16 +605,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.loadUnScheduledActivities();
     },
 
-    onSelectDate(date) {
+    onSelectDate(date, togglePicker = true) {
       let controller = this;
       let isToday = date === moment().format('YYYY-MM-DD');
       controller.set('isToday', isToday);
       controller.set('selectedDate', date);
       controller.loadActivityForDate(date);
-      controller.send('toggleDatePicker');
+      if (togglePicker) {
+        controller.send('toggleDatePicker');
+      }
     },
 
-    onSelectWeek(startDate, endDate, togglePicker) {
+    onSelectWeek(startDate, endDate, togglePicker = true) {
       let controller = this;
       controller.set('startDateOfWeek', startDate);
       controller.set('endDateOfWeek', endDate);
@@ -624,7 +626,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       }
     },
 
-    onSelectMonth(date, togglePicker) {
+    onSelectMonth(date, togglePicker = true) {
       let controller = this;
       let startDate = `${date}-01`;
       let endDate = moment(startDate).endOf('month').format('YYYY-MM-DD');
@@ -736,6 +738,24 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Property to handle is state of selected view for activity
    */
   selectedCalendarView: DCA_CALENDAR_VIEWS.DAILY,
+
+  /**
+   * It maintains the state of calendar view for weekly.
+   * @type {Boolean}
+   */
+  isWeekly: Ember.computed.equal('selectedCalendarView', DCA_CALENDAR_VIEWS.WEEKLY),
+
+  /**
+   * It maintains the state of calendar view for monthly.
+   * @type {Boolean}
+   */
+  isMonthly: Ember.computed.equal('selectedCalendarView', DCA_CALENDAR_VIEWS.MONTHLY),
+
+  /**
+   * It maintains the state of calendar view for daily.
+   * @type {Boolean}
+   */
+  isDaily: Ember.computed.equal('selectedCalendarView', DCA_CALENDAR_VIEWS.DAILY),
 
   /**
    * @property {Boolean} isMobileView
@@ -1510,11 +1530,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     const controller = this;
     const classId = controller.get('classId');
     controller.set('isLoading', true);
+    controller.set('classActivities', Ember.A([]));
     controller
       .get('classActivityService')
       .getScheduledClassActivitiesForDate(classId, startDate, endDate)
       .then(function(classActivities) {
-        controller.set('classActivities', Ember.A([]));
         if (classActivities && classActivities.length > 0) {
           controller.parseClassActivityData(classActivities);
         }

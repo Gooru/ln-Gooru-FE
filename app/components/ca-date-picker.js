@@ -14,7 +14,6 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
     this.initialize();
-    this.doHighlightActivity();
   },
   // -------------------------------------------------------------------------
   // Actions
@@ -221,62 +220,76 @@ export default Ember.Component.extend({
   // Methods
 
   initialize() {
-    let component = this;
+    const component = this;
     const isMonthly = component.get('isMonthly');
+    const isWeekly = component.get('isWeekly');
     if (isMonthly) {
       component.set('showToday', false);
       component.initializeMonthPicker();
+    } else if (isWeekly) {
+      component.set('showToday', false);
+      component.initializeWeekPicker();
     } else {
+      component.set('showToday', true);
       component.initializeDatePicker();
     }
   },
 
   initializeDatePicker() {
-    let component = this;
-    const calendarView = component.get('calendarView');
-    const isWeekly = component.get('isWeekly');
-    let allowDateSelectorToggle = component.get('allowDateSelectorToggle');
+    const component = this;
     let datepickerEle = component.$('#ca-datepicker');
-    datepickerEle.removeClass().addClass(calendarView);
     let defaultParams = {
       maxViewMode: 0,
       format: 'yyyy-mm-dd',
       todayHighlight: true
     };
-    let startDate = this.get('startDate');
-    let userStartDateAsToday = this.get('userStartDateAsToday');
-    if (!startDate && userStartDateAsToday) {
-      startDate = moment().format('YYYY-MM-DD');
-    }
-    if (startDate) {
-      defaultParams.startDate = moment(startDate).format('YYYY-MM-DD');
-    }
     datepickerEle.datepicker(defaultParams);
-    if (isWeekly && !component.get('selectedWeek')) {
+    if (!component.get('selectedDate')) {
       datepickerEle.datepicker('setDate', 'now');
-      component.doHighlightWeek(moment().format('YYYY-MM-DD'), false);
+      component.set('selectedDate', moment().format('YYYY-MM-DD'));
     }
+    component.doHighlightActivity();
+    component.sendAction('onSelectDate', component.get('selectedDate'), false);
     datepickerEle.off('changeDate').on('changeDate', function() {
       let datepicker = this;
       let selectedDate = Ember.$(datepicker)
         .datepicker('getFormattedDate')
         .valueOf();
-      if (allowDateSelectorToggle) {
-        component.toggleDatePicker();
-      }
       component.doHighlightActivity();
-      if (isWeekly) {
-        component.set('selectedWeek', selectedDate);
-        component.doHighlightWeek(selectedDate, true);
-      } else {
-        component.set('selectedDate', selectedDate);
-        component.sendAction('onSelectDate', selectedDate);
-      }
+      component.set('selectedDate', selectedDate);
+      component.sendAction('onSelectDate', selectedDate);
     });
   },
 
+  initializeWeekPicker() {
+    const component = this;
+    let weekpickerEle = component.$('#ca-weekpicker');
+    let defaultParams = {
+      maxViewMode: 0,
+      format: 'yyyy-mm-dd',
+      todayHighlight: true
+    };
+    weekpickerEle.datepicker(defaultParams);
+    component.doHighlightActivity();
+    if (!component.get('selectedWeek')) {
+      weekpickerEle.datepicker('setDate', 'now');
+      component.set('selectedWeek', moment().format('YYYY-MM-DD'));
+    }
+    component.doHighlightWeek(component.get('selectedWeek'), false);
+    weekpickerEle.off('changeDate').on('changeDate', function() {
+      let weekpickerEle = this;
+      let selectedDate = Ember.$(weekpickerEle)
+        .datepicker('getFormattedDate')
+        .valueOf();
+      component.doHighlightActivity();
+      component.set('selectedWeek', selectedDate);
+      component.doHighlightWeek(selectedDate);
+    });
+
+  },
+
   initializeMonthPicker() {
-    let component = this;
+    const component = this;
     let monthPickerEle = component.$('#ca-monthpicker');
     let defaultParams = {
       format: 'yyyy-mm',
@@ -286,15 +299,16 @@ export default Ember.Component.extend({
     monthPickerEle.datepicker(defaultParams);
     if (!component.get('selectedMonth')) {
       monthPickerEle.datepicker('setDate', 'now');
-      component.sendAction('onSelectMonth', moment().format('YYYY-MM'), false);
+      component.set('selectedMonth', moment().format('YYYY-MM'));
     }
+    component.sendAction('onSelectMonth', component.get('selectedMonth'), false);
     monthPickerEle.off('changeDate').on('changeDate', function() {
       let monthpicker = this;
       let selectedMonth = Ember.$(monthpicker)
         .datepicker('getFormattedDate')
         .valueOf();
       component.set('selectedMonth', selectedMonth);
-      component.sendAction('onSelectMonth', selectedMonth, true);
+      component.sendAction('onSelectMonth', selectedMonth);
     });
 
   },
@@ -343,9 +357,16 @@ export default Ember.Component.extend({
     }
   },
 
+  getElementNameByCalendarView() {
+    const component = this;
+    return component.get('isMonthly') ? 'ca-monthpicker' :
+      component.get('isWeekly') ? 'ca-weekpicker' : 'ca-datepicker';
+  },
+
   doHighlightWeek(selectedDate, togglePicker) {
     const component = this;
-    let dateEleContainer = component.$('#ca-datepicker .datepicker .datepicker-days .table-condensed tbody tr');
+    let dateEleContainer = component.$(`#ca-weekpicker
+    .datepicker .datepicker-days .table-condensed tbody tr`);
     dateEleContainer.removeClass('week-active');
     var dateElement = dateEleContainer.find('td.active.day').parent();
     dateElement.addClass('week-active');
@@ -356,30 +377,30 @@ export default Ember.Component.extend({
 
   doHighlightActivity() {
     let component = this;
-    let highlightActivities = component.get('highlightActivities');
-    if (highlightActivities) {
-      let dateEles = component.$(
-        '#ca-datepicker .datepicker .datepicker-days  .table-condensed tbody tr td'
-      );
-      let activities = component.get('activities');
-
-      dateEles.each(function(index, dateEle) {
-        let dateElement = component.$(dateEle);
-        if (!(dateElement.hasClass('new') || dateElement.hasClass('old'))) {
-          let day = dateElement.html();
-          if (day.length === 1) {
-            day = `0${day}`;
+    Ember.run.later((function() {
+      let highlightActivities = component.get('highlightActivities');
+      if (highlightActivities) {
+        let dateEles = component.$(`#${component.getElementNameByCalendarView()}
+        .datepicker .datepicker-days .table-condensed tbody tr td`);
+        let activities = component.get('activities');
+        dateEles.each(function(index, dateEle) {
+          let dateElement = component.$(dateEle);
+          if (!(dateElement.hasClass('new') || dateElement.hasClass('old'))) {
+            let day = dateElement.html();
+            if (day.length === 1) {
+              day = `0${day}`;
+            }
+            let activity = activities.findBy('day', day);
+            if (activity) {
+              dateElement.removeClass('no-activities');
+              dateElement.addClass('has-activities');
+            } else {
+              dateElement.addClass('no-activities');
+              dateElement.removeClass('has-activities');
+            }
           }
-          let activity = activities.findBy('day', day);
-          if (activity) {
-            dateElement.removeClass('no-activities');
-            dateElement.addClass('has-activities');
-          } else {
-            dateElement.addClass('no-activities');
-            dateElement.removeClass('has-activities');
-          }
-        }
-      });
-    }
+        });
+      }
+    }), 400);
   }
 });
