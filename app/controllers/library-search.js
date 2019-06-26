@@ -226,6 +226,7 @@ export default Ember.Controller.extend(ModalMixin, {
   fetchContent() {
     const controller = this;
     controller.get('searchResults').clear();
+    controller.set('noMoreDataAvailable', false);
     if (
       controller.get('selectedFilters').length > 0 ||
       controller.get('searchTerm') ||
@@ -337,19 +338,26 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   loadMoreDataForSearch() {
     let controller = this;
-    if (!controller.get('isPaginate')) {
+    if (!controller.get('isPaginate') && !controller.get('noMoreDataAvailable')) {
       controller.set('isPaginate', true);
       let page = controller.get('page') + 1;
       controller.set('page', page);
-      Ember.RSVP.hash({
-        searchResults: controller.getSearchService()
-      }).then(({ searchResults }) => {
-        if (!controller.isDestroyed) {
-          controller.set('isPaginate', false);
-          let searchResult = controller.get('searchResults');
-          controller.set('searchResults', searchResult.concat(searchResults));
-        }
-      });
+      Ember.RSVP
+        .hash({
+          searchResults: controller.getSearchService()
+        })
+        .then(({
+          searchResults
+        }) => {
+          if (!controller.isDestroyed) {
+            controller.set('isPaginate', false);
+            if (searchResults.length < 1) {
+              controller.set('noMoreDataAvailable', true);
+            }
+            let searchResult = controller.get('searchResults');
+            controller.set('searchResults', searchResult.concat(searchResults));
+          }
+        });
     }
   },
 
@@ -358,19 +366,26 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   loadMoreDataForMyContent() {
     let controller = this;
-    if (!controller.get('isPaginate')) {
+    if (!controller.get('isPaginate') && !controller.get('noMoreDataAvailable')) {
       controller.set('isPaginate', true);
       let page = controller.get('page') + 1;
       controller.set('page', page);
-      Ember.RSVP.hash({
-        searchResults: controller.getMyContentService()
-      }).then(({ searchResults }) => {
-        if (!controller.isDestroyed) {
-          controller.set('isPaginate', false);
-          let searchResult = controller.get('searchResults');
-          controller.set('searchResults', searchResult.concat(searchResults));
-        }
-      });
+      Ember.RSVP
+        .hash({
+          searchResults: controller.getMyContentService()
+        })
+        .then(({
+          searchResults
+        }) => {
+          if (!controller.isDestroyed) {
+            controller.set('isPaginate', false);
+            let searchResult = controller.get('searchResults');
+            if (searchResults.length < 1) {
+              controller.set('noMoreDataAvailable', true);
+            }
+            controller.set('searchResults', searchResult.concat(searchResults));
+          }
+        });
     }
   },
 
@@ -379,25 +394,30 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   loadMoreDataForLibrary() {
     let controller = this;
-    if (!controller.get('isPaginate')) {
+    if (!controller.get('isPaginate') && !controller.get('noMoreDataAvailable')) {
       controller.set('isPaginate', true);
       let page = controller.get('page') + 1;
       controller.set('page', page);
-      Ember.RSVP.hash({
-        searchResults: controller.getLibraryService()
-      }).then(function(result) {
-        if (result) {
-          let libraryContent = result.searchResults.libraryContent;
-          let content = libraryContent[Object.keys(libraryContent)[0]];
-          let owners = libraryContent[Object.keys(libraryContent)[1]];
-          let searchResult = controller.get('searchResults');
-          controller.set(
-            'searchResults',
-            searchResult.concat(controller.mapOwners(content, owners))
-          );
-        }
-        controller.set('isPaginate', false);
-      });
+      Ember.RSVP
+        .hash({
+          searchResults: controller.getLibraryService()
+        })
+        .then(function(result) {
+          if (result) {
+            let libraryContent = result.searchResults.libraryContent;
+            let content = libraryContent[Object.keys(libraryContent)[0]];
+            let owners = libraryContent[Object.keys(libraryContent)[1]];
+            if (content.length < 1) {
+              controller.set('noMoreDataAvailable', true);
+            }
+            let searchResult = controller.get('searchResults');
+            controller.set(
+              'searchResults',
+              searchResult.concat(controller.mapOwners(content, owners))
+            );
+          }
+          controller.set('isPaginate', false);
+        });
     }
   },
 
