@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {
-  getGradeColor
-} from 'gooru-web/utils/utils';
+import { getGradeColor } from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -27,7 +25,8 @@ export default Ember.Component.extend({
     categories.map(category => {
       let levels = category.get('levels').sortBy('score');
       levels.map((level, index) => {
-        let score = index > 0 ? index * (Math.floor(100 / (levels.length - 1))) : 10;
+        let score =
+          index > 0 ? index * Math.floor(100 / (levels.length - 1)) : 10;
         level.set('scoreInPrecentage', score);
       });
       category.set('levels', levels);
@@ -120,7 +119,10 @@ export default Ember.Component.extend({
         component.$(this).popover('show');
         Ember.$('.popover-title')
           .append('<span class="close-popover">x</span>')
-          .css('background-color', getGradeColor(level.get('scoreInPrecentage')));
+          .css(
+            'background-color',
+            getGradeColor(level.get('scoreInPrecentage'))
+          );
       }
     });
     if (!isMobile.matches) {
