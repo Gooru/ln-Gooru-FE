@@ -443,19 +443,19 @@ export default Ember.Controller.extend(ModalMixin, {
         .then(function() {
           controller.set('collaborators', classCollaborators);
         });
-      controller.actions.onToggleAddCollaborator();
-      //reset collaborator details
-      controller.set('teacherUserProfiles', Ember.A([]));
-      controller.set('selectedCollaborators', Ember.A([]));
+      controller.actions.onToggleAddCollaborator(controller);
     },
 
     //Action triggered when toggle collaborator panel
-    onToggleAddCollaborator() {
+    onToggleAddCollaborator(controller = this) {
       $('.sub-sec-coteach .add-collaborator-container').slideToggle(function() {
         if ($(this).is(':visible')) {
           $(this).css('display', 'grid');
         }
       });
+      //reset collaborator details
+      controller.set('teacherUserProfiles', Ember.A([]));
+      controller.set('selectedCollaborators', Ember.A([]));
     }
   },
 

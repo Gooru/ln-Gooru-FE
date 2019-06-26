@@ -66,6 +66,6 @@ export default Ember.Component.extend({
    * @property {String} placeholder
    */
   placeholder: Ember.computed(function() {
-    return this.get('i18n').t('class.add-more-people');
+    return this.get('i18n').t('class.add-teachers');
   })
 });
