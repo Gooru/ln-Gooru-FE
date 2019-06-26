@@ -2669,7 +2669,6 @@ window.i18ln = {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'Expected time to complete',
   'oa.info.hrs': ' hrs',
-  'class.add-more-people': 'Add more people...',
-  'class.add-co-teachers': 'Add Co-Teachers',
-  'class.add-co-teacher-class': 'Add co-teacher to class'
+  'class.add-teachers': 'Add teachers',
+  'class.add-co-teachers': 'Add Co-teachers'
 };

@@ -78,13 +78,10 @@
                   {{gru-icon name="add_circle_outline"}}
                 </div>
                 <div class="add-co-teacher-label">
-                  {{t 'class.add-co-teacher-class'}}
+                  {{t 'class.add-co-teachers'}}
                 </div>
               </div>
               <div class="add-collaborator-container">
-                <div class="header-container">
-                  {{t 'class.add-co-teachers'}}
-                </div>
                 <div class="body-container">
                 <div class="search-user-container">
                   {{gru-user-multi-select
@@ -95,7 +92,7 @@
                 </div>
                 </div>
                 <div class="footer-container">
-                  <div class="action-btn cancel-btn">{{t 'common.cancel'}}</div>
+                  <div class="action-btn cancel-btn" {{action "onToggleAddCollaborator"}}>{{t 'common.cancel'}}</div>
                   <div class="action-btn done-btn" {{action "onAddCollaborators"}}>{{t 'common.done'}}</div>
                 </div>
               </div>

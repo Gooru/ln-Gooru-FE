@@ -1,12 +1,14 @@
 .gru-user-multi-select {
   .chosen-container-multi {
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
     background-color: $white;
     width: auto !important;
     border: none;
     min-width: 100%;
     .chosen-choices {
-      min-height: 100px;
+      min-height: 30px;
+      background-image: none;
+      border: none;
+      border-bottom: 1px solid $light-200;
       .search-choice {
         background: none;
         background-color: #e3e5ea;
@@ -55,10 +57,11 @@
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
           width: inherit;
           font-size: 13px;
-          color: #666666;
+          color: #666;
           &::placeholder {
             font-size: 13px;
-            color: #666666;
+            color: #666;
+            text-transform: capitalize;
           }
         }
       }
@@ -86,6 +89,10 @@
             background-color: #e3e5ea;
             background-image: none;
           }
+        }
+
+        .no-results {
+          display: none;
         }
 
         .result-selected {
