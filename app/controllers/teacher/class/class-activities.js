@@ -901,8 +901,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     return classActivities ? classActivities : [];
   }),
 
-  activeOfflineActivities: Ember.A([]),
-
   totalScheduleditems: Ember.computed(
     'scheduledClassActivities.[]',
     function() {
