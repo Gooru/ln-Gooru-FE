@@ -113,11 +113,12 @@
   </div>
 {{/if}}
 
-<div class="schedule-ca-datepicker-container ca-datepicker-popover-container">
+<div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
   {{ca-daterange-datepicker
       closeDatePicker='onCloseDatePicker'
       onScheduleForDate='onScheduleDate'
       onScheduleForMonth='onScheduleForMonth'
+      endDate=endDate
       allowTwoDateRangePicker=allowTwoDateRangePicker}}
 </div>
 

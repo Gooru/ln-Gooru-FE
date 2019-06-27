@@ -1,5 +1,4 @@
 import Ember from 'ember';
-
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -11,10 +10,9 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    this.initializeDatePicker();
+    this.initialize();
     this.doHighlightActivity();
   },
-
   // -------------------------------------------------------------------------
   // Actions
 
@@ -175,7 +173,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Observers
-
   /**
    * This method  will trigger when  the property change happen in activities or highlightActivities
    */
@@ -197,17 +194,17 @@ export default Ember.Component.extend({
     }
   }),
 
-  onRefresh: Ember.observer('refreshDatePicker', function() {
-    let component = this;
-    component.showTodayActivity();
+  onChange: Ember.observer('isDaily', function() {
+    const component = this;
+    if (component.get('isDaily')) {
+      component.sendAction('onSelectDate', component.get('selectedDate'), false);
+      component.doHighlightActivity();
+    }
   }),
-
   // -------------------------------------------------------------------------
   // Methods
-
-  initializeDatePicker: function() {
-    let component = this;
-    let allowDateSelectorToggle = component.get('allowDateSelectorToggle');
+  initialize() {
+    const component = this;
     let datepickerEle = component.$('#ca-datepicker');
     let defaultParams = {
       maxViewMode: 0,
@@ -223,15 +220,17 @@ export default Ember.Component.extend({
       defaultParams.startDate = moment(startDate).format('YYYY-MM-DD');
     }
     datepickerEle.datepicker(defaultParams);
+    if (!component.get('selectedDate')) {
+      datepickerEle.datepicker('setDate', 'now');
+      component.set('selectedDate', moment().format('YYYY-MM-DD'));
+    }
     datepickerEle.off('changeDate').on('changeDate', function() {
       let datepicker = this;
       let selectedDate = Ember.$(datepicker)
         .datepicker('getFormattedDate')
         .valueOf();
-      if (allowDateSelectorToggle) {
-        component.toggleDatePicker();
-      }
       component.doHighlightActivity();
+      component.set('selectedDate', selectedDate);
       component.sendAction('onSelectDate', selectedDate);
     });
   },
@@ -282,30 +281,30 @@ export default Ember.Component.extend({
 
   doHighlightActivity() {
     let component = this;
-    let highlightActivities = component.get('highlightActivities');
-    if (highlightActivities) {
-      let dateEles = component.$(
-        '#ca-datepicker .datepicker .datepicker-days  .table-condensed tbody tr td'
-      );
-      let activities = component.get('activities');
-
-      dateEles.each(function(index, dateEle) {
-        let dateElement = component.$(dateEle);
-        if (!(dateElement.hasClass('new') || dateElement.hasClass('old'))) {
-          let day = dateElement.html();
-          if (day.length === 1) {
-            day = `0${day}`;
+    Ember.run.later((function() {
+      let highlightActivities = component.get('highlightActivities');
+      if (highlightActivities) {
+        let dateEles = component.$(`#ca-datepicker
+        .datepicker .datepicker-days .table-condensed tbody tr td`);
+        let activities = component.get('activities');
+        dateEles.each(function(index, dateEle) {
+          let dateElement = component.$(dateEle);
+          if (!(dateElement.hasClass('new') || dateElement.hasClass('old'))) {
+            let day = dateElement.html();
+            if (day.length === 1) {
+              day = `0${day}`;
+            }
+            let activity = activities.findBy('day', day);
+            if (activity) {
+              dateElement.removeClass('no-activities');
+              dateElement.addClass('has-activities');
+            } else {
+              dateElement.addClass('no-activities');
+              dateElement.removeClass('has-activities');
+            }
           }
-          let activity = activities.findBy('day', day);
-          if (activity) {
-            dateElement.removeClass('no-activities');
-            dateElement.addClass('has-activities');
-          } else {
-            dateElement.addClass('no-activities');
-            dateElement.removeClass('has-activities');
-          }
-        }
-      });
-    }
+        });
+      }
+    }), 400);
   }
 });

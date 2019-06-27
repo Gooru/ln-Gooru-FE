@@ -54,7 +54,7 @@ export default Ember.Route.extend({
     let forMonth = params.month || moment().format('MM');
     let forYear = params.year || moment().format('YYYY');
     let startDate = `${forYear}-${forMonth}-01`;
-    var endDate = moment().endOf('month').format('YYYY-MM-DD');
+    let endDate = moment().endOf('month').format('YYYY-MM-DD');
     let selectedPeriod = Ember.Object.create({
       forMonth,
       forYear
