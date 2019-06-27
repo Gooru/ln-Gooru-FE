@@ -12,11 +12,20 @@
               <i class="collection-icon" {{action 'onAddDca' 'collection'}}></i>
               <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
             </div>
+            <div class="ca-calendar-tabs">
+              <div class="title {{if isMonthly 'active'}}" {{action 'selectCalendarView' 'monthly'}}>Monthly</div>
+              <div class="title {{if isWeekly 'active'}}" {{action 'selectCalendarView' 'weekly'}}>Weekly</div>
+              <div class="title {{if isDaily 'active'}}" {{action 'selectCalendarView' 'daily'}}>Daily</div>
+            </div>
             <div class="ca-date-section">
               <div class="date-picker-action" {{action 'toggleDatePicker'}}>
                 <span class="label">
-                  {{#if isToday}}
+                  {{#if (and isDaily isToday)}}
                     {{t "student-landing.class.class-activities-tab.today"}}
+                  {{else if isWeekly}}
+                    {{format-date startDateOfWeek 'DD MMM'}} - {{format-date endDateOfWeek 'DD MMM YYYY'}}
+                  {{else if isMonthly}}
+                    {{format-date selectedMonth 'MMM YYYY'}}
                   {{else}}
                     {{format-date selectedDate 'DD MMM YYYY'}}
                   {{/if}}
@@ -32,25 +41,52 @@
               <div class="backdrop" {{action 'toggleDatePicker'}}></div>
             {{/if}}
             {{ca-date-picker
-          showToday=true
-          forMonth=forMonth
-          allowDateSelectorToggle=false
-          forYear=forYear
-          refreshDatePicker=refreshDatePicker
-          showPreviousMonth="showPreviousMonth"
-          showNextMonth="showNextMonth"
-          onSelectDate="onSelectDate"
-          highlightFirstDayOfMonth=true
-          onSelectToday="onSelectToday"
-          activities=scheduledClassActivitiesDatewise
-          highlightActivities=true
-        }}
+                showPreviousMonth="showPreviousMonth"
+                showNextMonth="showNextMonth"
+                forMonth=forMonth
+                forYear=forYear
+                onSelectDate="onSelectDate"
+                highlightFirstDayOfMonth=true
+                onSelectToday="onSelectToday"
+                showToday=true
+                isDaily=isDaily
+                activities=scheduledClassActivitiesDatewise
+                highlightActivities=true
+                class=(if isDaily  'visible' 'hidden')
+              }}
+            {{ca-week-picker
+                forMonth=forWeekMonth
+                forYear=forWeekYear
+                showPreviousMonth="showPreviousMonthForWeek"
+                showNextMonth="showNextMonthForWeek"
+                onSelectWeek="onSelectWeek"
+                isWeekly=isWeekly
+                activities=scheduledClassActivitiesDatewise
+                highlightActivities=true
+                class=(if isWeekly  'visible' 'hidden')
+                }}
+            {{ca-month-picker
+                startYear="2018"
+                showCalendarView=true
+                showPreviousYear="showPreviousYear"
+                showNextYear="showNextYear"
+                onSelectMonth="onSelectMonth"
+                isMonthly=isMonthly
+                class=(if isMonthly  'visible' 'hidden')
+              }}
           </div>
         </div>
         <div class="ca-schedule-section">
-          <div class="dca-content-list-container {{if isToday 'dca-content-list-container-today'}}">
-            {{#each scheduledClassActivities as |classActivity|}} {{#each classActivity.classActivities as |activity|}}
-                {{class.gru-class-activity-panel
+          <div class="dca-content-list-container">
+            {{#each scheduledClassActivities as |classActivity|}}
+              <div class="class-activity-container">
+                {{#unless isDaily}}
+                  <div class="added-date">{{format-date classActivity.added_date 'DD MMM YYYY'}}
+                    <hr />
+                  </div>
+                {{/unless}}
+                {{#each classActivity.classActivities as |activity|}}
+                  {{class.gru-class-activity-panel
                     classActivity=activity
                     classId=classId
                     class=class
@@ -71,11 +107,14 @@
                     onUpdateMasteryAccrual="onUpdateMasteryAccrual"
                     showMasteryAccrual=showMasteryAccrual
                   }}
-              {{else}}
+                {{/each}}
+              </div>
+            {{else if (not isDataLoading)}}
+              {{#if (and isDaily isToday)}}
                 <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
-              {{/each}}
-            {{else}}
-              <div class="no-content">{{t "common.no-dca-teacher"}}</div>
+              {{else}}
+                <p class="no-content">{{t "common.no-dca-teacher"}}</p>
+              {{/if}}
             {{/each}}
           </div>
         </div>
@@ -249,6 +288,7 @@
       closeDatePicker='onCloseDatePicker'
       onScheduleForDate='onScheduleForDate'
       onScheduleForMonth='onScheduleForMonth'
+      endDate=endDate
       allowTwoDateRangePicker=allowTwoDateRangePicker}}
   </div>
 </div>

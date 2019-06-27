@@ -33,7 +33,7 @@
       <div class="filter-items hidden-xs">
         {{#each filters as |selectedFilter index|}}
           <div class="filter-item">
-            <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
+            <span class="name ellipsis" data-toggle="tooltip" data-placement="bottom" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
             <span class="clear" {{action 'clearFilter' selectedFilter}}> {{gru-icon name="close"}}</span>
           </div>
         {{/each}}
@@ -43,7 +43,7 @@
         <div class="more-filters hidden">
           {{#each moreFilters as |moreFilter|}}
             <div class="filter-item">
-              <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
+              <span class="name ellipsis" data-toggle="tooltip" data-placement="bottom" title={{moreFilter.name}}>{{moreFilter.name}}</span>
               <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
             </div>
           {{/each}}
@@ -106,7 +106,7 @@
           <li><a class="assessment" href="#" {{action "showModal" "content.modals.gru-assessment-new"}}><i></i>{{t "common.assessment"}}</a></li>
           <li>
             {{#link-to 'content.activity.edit' offlineActivityModel class="offline-activity"}}
-            <i></i>{{t "common.offline-activity"}}
+              <i></i>{{t "common.offline-activity"}}
             {{/link-to}}
           </li>
           <li><a class="resource" href="#" {{action "showModal" "content.modals.gru-resource-new" }}><i></i>{{t "common.resource"}}</a></li>

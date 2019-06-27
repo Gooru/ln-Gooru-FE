@@ -95,17 +95,13 @@ export default Ember.Component.extend({
 
     onScheduleEndDate(date) {
       let component = this;
-      let startDate = component.get('startDate');
       component.set('endDate', date);
-      if (!component.get('isMobileView')) {
-        component.sendAction('onScheduleForDate', startDate, date);
-      }
     },
 
     onScheduleStartDate(startDate) {
       let component = this;
       component.set('startDate', startDate);
-      if (!component.get('allowTwoDateRangePicker') && !component.get('isMobileView')) {
+      if (!component.get('allowTwoDateRangePicker')) {
         component.sendAction('onScheduleForDate', startDate, startDate);
       }
     },

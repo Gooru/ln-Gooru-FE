@@ -1,10 +1,6 @@
 import Ember from 'ember';
 import ModalMixin from 'gooru-web/mixins/modal';
-import {
-  SEARCH_CONTEXT,
-  CONTENT_TYPES,
-  ROLES
-} from 'gooru-web/config/config';
+import { SEARCH_CONTEXT, CONTENT_TYPES, ROLES } from 'gooru-web/config/config';
 export default Ember.Controller.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
@@ -85,10 +81,11 @@ export default Ember.Controller.extend(ModalMixin, {
     'appController.myClasses.classes.[]',
     function() {
       const classes = this.get('appController.myClasses');
-      return classes ?
-        classes
+      return classes
+        ? classes
           .getTeacherActiveClasses(this.get('session.userId'))
-          .filterBy('courseId', null) : [];
+          .filterBy('courseId', null)
+        : [];
     }
   ),
 
@@ -229,6 +226,7 @@ export default Ember.Controller.extend(ModalMixin, {
   fetchContent() {
     const controller = this;
     controller.get('searchResults').clear();
+    controller.set('noMoreDataAvailable', false);
     if (
       controller.get('selectedFilters').length > 0 ||
       controller.get('searchTerm') ||
@@ -254,9 +252,14 @@ export default Ember.Controller.extend(ModalMixin, {
   storeSelectedFilter() {
     const component = this;
     const selectedFilters = component.get('selectedFilters');
+    let storeObject = {};
+    if (component.get('searchTerm')) {
+      storeObject.searchTerm = component.get('searchTerm');
+    }
+    storeObject.selectedFilters = selectedFilters;
     let localStorage = window.localStorage;
     let itemId = `${component.get('profile.id')}_search_filter`;
-    localStorage.setItem(itemId, JSON.stringify(selectedFilters));
+    localStorage.setItem(itemId, JSON.stringify(storeObject));
   },
 
   /**
@@ -265,11 +268,14 @@ export default Ember.Controller.extend(ModalMixin, {
   initializeSelectedFilter() {
     const component = this;
     let localStorage = window.localStorage;
-    let searchedFilter = JSON.parse(localStorage.getItem(`${component.get('profile.id')}_search_filter`));
-    if (searchedFilter && searchedFilter) {
-      searchedFilter.map((searchFilter) => {
-        component.get('selectedFilters').pushObject(Ember.Object.create(searchFilter));
-      });
+    let storedObject = JSON.parse(localStorage.getItem(`${component.get('profile.id')}_search_filter`));
+    if (storedObject) {
+      component.set('searchTerm', storedObject.searchTerm);
+      if (storedObject.searchedFilter) {
+        storedObject.searchedFilter.map((searchFilter) => {
+          component.get('selectedFilters').pushObject(Ember.Object.create(searchFilter));
+        });
+      }
     }
   },
 
@@ -284,9 +290,7 @@ export default Ember.Controller.extend(ModalMixin, {
       .hash({
         searchResults: controller.getSearchService()
       })
-      .then(({
-        searchResults
-      }) => {
+      .then(({ searchResults }) => {
         if (!controller.isDestroyed) {
           controller.set('isLoading', false);
           controller.set('searchResults', searchResults);
@@ -305,9 +309,7 @@ export default Ember.Controller.extend(ModalMixin, {
       .hash({
         searchResults: controller.getMyContentService()
       })
-      .then(({
-        searchResults
-      }) => {
+      .then(({ searchResults }) => {
         if (!controller.isDestroyed) {
           controller.set('isLoading', false);
           controller.set('searchResults', searchResults);
@@ -345,7 +347,7 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   loadMoreDataForSearch() {
     let controller = this;
-    if (!controller.get('isPaginate')) {
+    if (!controller.get('isPaginate') && !controller.get('noMoreDataAvailable')) {
       controller.set('isPaginate', true);
       let page = controller.get('page') + 1;
       controller.set('page', page);
@@ -358,6 +360,9 @@ export default Ember.Controller.extend(ModalMixin, {
         }) => {
           if (!controller.isDestroyed) {
             controller.set('isPaginate', false);
+            if (searchResults.length < 1) {
+              controller.set('noMoreDataAvailable', true);
+            }
             let searchResult = controller.get('searchResults');
             controller.set('searchResults', searchResult.concat(searchResults));
           }
@@ -370,7 +375,7 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   loadMoreDataForMyContent() {
     let controller = this;
-    if (!controller.get('isPaginate')) {
+    if (!controller.get('isPaginate') && !controller.get('noMoreDataAvailable')) {
       controller.set('isPaginate', true);
       let page = controller.get('page') + 1;
       controller.set('page', page);
@@ -384,6 +389,9 @@ export default Ember.Controller.extend(ModalMixin, {
           if (!controller.isDestroyed) {
             controller.set('isPaginate', false);
             let searchResult = controller.get('searchResults');
+            if (searchResults.length < 1) {
+              controller.set('noMoreDataAvailable', true);
+            }
             controller.set('searchResults', searchResult.concat(searchResults));
           }
         });
@@ -395,7 +403,7 @@ export default Ember.Controller.extend(ModalMixin, {
    */
   loadMoreDataForLibrary() {
     let controller = this;
-    if (!controller.get('isPaginate')) {
+    if (!controller.get('isPaginate') && !controller.get('noMoreDataAvailable')) {
       controller.set('isPaginate', true);
       let page = controller.get('page') + 1;
       controller.set('page', page);
@@ -408,6 +416,9 @@ export default Ember.Controller.extend(ModalMixin, {
             let libraryContent = result.searchResults.libraryContent;
             let content = libraryContent[Object.keys(libraryContent)[0]];
             let owners = libraryContent[Object.keys(libraryContent)[1]];
+            if (content.length < 1) {
+              controller.set('noMoreDataAvailable', true);
+            }
             let searchResult = controller.get('searchResults');
             controller.set(
               'searchResults',
@@ -612,9 +623,9 @@ export default Ember.Controller.extend(ModalMixin, {
       ownerMap[owner.id] = owner;
     });
     let mappedContents = contents.map(function(content) {
-      content.owner = content.ownerId ?
-        ownerMap[content.ownerId] :
-        ownerMap[content.owner];
+      content.owner = content.ownerId
+        ? ownerMap[content.ownerId]
+        : ownerMap[content.owner];
       return content;
     });
     return mappedContents;

@@ -3,6 +3,7 @@ import SessionMixin from '../mixins/session';
 import ModalMixin from '../mixins/modal';
 import EndPointsConfig from 'gooru-web/utils/endpoint-config';
 import Env from 'gooru-web/config/environment';
+import { appLocales } from 'gooru-web/utils/utils';
 
 /**
  * Application header component
@@ -26,21 +27,23 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
   device_language_key: 'deviceLanguage',
 
   /**
+   * @type {ProfileService} Service to retrieve profile information
+   */
+  profileService: Ember.inject.service('api-sdk/profile'),
+
+  /**
    * Controls display of notification list, typical use from header is to hide it as required.
    */
   displayNotificationList: null,
 
   locales: Ember.computed('i18n.locale', 'i18n.locales', function() {
-    const i18n = this.get('i18n');
-
+    let configLocales = appLocales(); //this.get('i18n.locales');
     var arr = Ember.A();
-    this.get('i18n.locales').map(function(loc) {
-      if (!loc.includes('/quizzes')) {
-        arr.addObject({
-          id: loc,
-          text: i18n.t(loc)
-        });
-      }
+    configLocales.map(function(loc) {
+      arr.addObject({
+        id: Object.keys(loc)[0],
+        text: Object.values(loc)[0]
+      });
     });
 
     return arr;
@@ -62,8 +65,10 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     },
 
     setLocale(selVal) {
-      this.setLocale(selVal);
-      this.getLocalStorage().setItem(this.device_language_key, selVal);
+      this.getTranslationFile(selVal).then(() => {
+        this.setLocale(selVal);
+        this.getLocalStorage().setItem(this.device_language_key, selVal);
+      });
     },
 
     navigateToSupport() {
@@ -107,6 +112,17 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
    */
   willDestroyElement: function() {
     this.set('searchErrorMessage', null);
+  },
+
+  getTranslationFile(whichLocalSet) {
+    const component = this;
+    return component
+      .get('profileService')
+      .loadScript(whichLocalSet)
+      .then(() => {
+        component.get('i18n').addTranslations(whichLocalSet, window.i18ln);
+        return Ember.RSVP.resolve(true);
+      });
   },
 
   /**

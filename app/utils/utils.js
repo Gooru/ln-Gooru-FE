@@ -247,9 +247,7 @@ export function getReactionIcon(reactionValue, basePath) {
     if (reaction && reaction.value && reaction.unicode) {
       html = `<div class="emotion emotion-${reaction.value}">`;
       html += '  <svg class="svg-sprite">';
-      html += `    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="${basePath}assets/emoji-one/emoji.svg#${
-        reaction.unicode
-      }"></use>`;
+      html += `    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="${basePath}assets/emoji-one/emoji.svg#${reaction.unicode}"></use>`;
       html += ' </svg>';
       html += '</div>';
     } else {
@@ -292,7 +290,7 @@ export function generateUUID() {
   var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(
     c
   ) {
-    var r = (d + Math.random() * 16) % 16 | 0;
+    var r = ((d + Math.random() * 16) % 16) | 0;
     d = Math.floor(d / 16);
     return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
   });
@@ -689,9 +687,7 @@ function assessmentFileData(
     const prefixHeader =
       level === 'course'
         ? `U${index + 1} `
-        : level === 'unit'
-          ? `L${index + 1} `
-          : `A${index + 1} `;
+        : level === 'unit' ? `L${index + 1} ` : `A${index + 1} `;
     const scoreHeader = `${prefixHeader}${headerItem.get('title')} score`;
     const timeHeader = `${prefixHeader}${headerItem.get('title')} time`;
     dataHeaders.push(scoreHeader);
@@ -1107,4 +1103,40 @@ export function getOAType() {
  */
 export function getTimeInMillisec(hour = 0, minute = 0) {
   return (hour * 60 * 60 + minute * 60) * 1000;
+}
+
+/**
+ * @function isValidEmailId
+ * @param {String} emailId
+ * @return {Boolean}
+ * Method to validate whether the given string is valid email id or not
+ */
+export function isValidEmailId(emailId = '') {
+  let emailPattern = RegExp(
+    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
+  );
+  return emailPattern.test(emailId);
+}
+
+/**
+ * @function appLocales
+ * Returns list of locales configured
+ */
+export function appLocales() {
+  return Ember.A([
+    { en: 'English' },
+    { sp: 'Español' },
+    { ar: 'عربى' },
+    { mr: 'मराठी' },
+    { kn: 'ಕನ್ನಡ' },
+    { hi: 'हिंदी' },
+    { as: 'অসমীয়া' },
+    { bn: 'বাংলা' },
+    { gu: 'ગુજરાતી' },
+    { ml: 'മല്യാലം' },
+    { or: ' ଓଡ଼ିଆ' },
+    { pa: 'ਪੰਜਾਬੀ' },
+    { ta: 'தமிழ்' },
+    { te: 'తెలుగు' }
+  ]);
 }

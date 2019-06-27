@@ -33,7 +33,8 @@ module.exports = function(defaults) {
       useLintTree: false
     },
     fingerprint: {
-      exclude: ['themes', 'application-widget.js'] //excluding files
+      ignore: ['locales'],
+      exclude: ['themes', 'application-widget.js'] //excluding files,
     },
     babel: {
       includePolyfill: true,
@@ -105,7 +106,6 @@ module.exports = function(defaults) {
     production: 'bower_components/jquery-ui/ui/minified/autocomplete.min.js'
   });
 
-
   app.import({
     development: 'bower_components/jquery-ui/ui/mouse.js',
     production: 'bower_components/jquery-ui/ui/minified/mouse.min.js'
@@ -121,15 +121,19 @@ module.exports = function(defaults) {
   });
 
   app.import({
-    development: 'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
-    production: 'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'
+    development:
+      'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
+    production:
+      'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'
   });
 
   // Add touch events to jquery UI: https://github.com/furf/jquery-ui-touch-punch
 
   app.import({
-    development: 'bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js',
-    production: 'bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.min.js'
+    development:
+      'bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js',
+    production:
+      'bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.min.js'
   });
 
   app.import({
@@ -144,7 +148,8 @@ module.exports = function(defaults) {
 
   app.import({
     development: 'bower_components/bootstrap-toggle/css/bootstrap2-toggle.css',
-    production: 'bower_components/bootstrap-toggle/css/bootstrap2-toggle.min.css'
+    production:
+      'bower_components/bootstrap-toggle/css/bootstrap2-toggle.min.css'
   });
 
   app.import({
@@ -158,18 +163,24 @@ module.exports = function(defaults) {
   });
 
   app.import({
-    development: 'bower_components/moment-timezone/builds/moment-timezone-with-data.js',
-    production: 'bower_components/moment-timezone/builds/moment-timezone-with-data.min.js'
+    development:
+      'bower_components/moment-timezone/builds/moment-timezone-with-data.js',
+    production:
+      'bower_components/moment-timezone/builds/moment-timezone-with-data.min.js'
   });
 
   app.import({
-    development: 'bower_components/bootstrap-select/dist/css/bootstrap-select.min.css',
-    production: 'bower_components/bootstrap-select/dist/css/bootstrap-select.min.css'
+    development:
+      'bower_components/bootstrap-select/dist/css/bootstrap-select.min.css',
+    production:
+      'bower_components/bootstrap-select/dist/css/bootstrap-select.min.css'
   });
 
   app.import({
-    development: 'bower_components/bootstrap-select/dist/js/bootstrap-select.min.js',
-    production: 'bower_components/bootstrap-select/dist/js/bootstrap-select.min.js'
+    development:
+      'bower_components/bootstrap-select/dist/js/bootstrap-select.min.js',
+    production:
+      'bower_components/bootstrap-select/dist/js/bootstrap-select.min.js'
   });
 
   app.import({
@@ -206,6 +217,17 @@ module.exports = function(defaults) {
   app.import('bower_components/KaTeX/dist/katex.min.css');
   app.import('bower_components/KaTeX/dist/katex.min.js');
   app.import('bower_components/KaTeX/dist/contrib/auto-render.min.js');
+
+  //Documentation URL: https://harvesthq.github.io/chosen/
+  app.import({
+    development: 'bower_components/chosen/chosen.jquery.js',
+    production: 'bower_components/chosen/chosen.jquery.min.js'
+  });
+
+  app.import({
+    development: 'bower_components/chosen/chosen.css',
+    production: 'bower_components/chosen/chosen.min.css'
+  });
 
   app.import({
     development: 'vendor/mathquill/mathquill.js',

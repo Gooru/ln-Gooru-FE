@@ -281,8 +281,10 @@ export default Ember.Service.extend({
         .get('availabilityAdapter')
         .verifyEmail(email)
         .then(
-          function() {
-            resolve();
+          function(response) {
+            resolve(
+              service.get('profileSerializer').normalizeReadProfile(response)
+            );
           },
           function() {
             reject(i18n.t('forgot-password.error-email-not-exists').string);
@@ -723,5 +725,9 @@ export default Ember.Service.extend({
    */
   newUser: function() {
     return this.get('store').createRecord('user/user');
+  },
+
+  loadScript: function(script) {
+    return this.get('profileAdapter').loadScript(script);
   }
 });

@@ -362,7 +362,7 @@
     }
   }
 
-  .schedule-ca-datepicker-container {
+  .ca-datepicker-schedule-container {
     background: #fff;
     position: absolute;
     z-index: 10;
@@ -371,20 +371,6 @@
     top: 50px;
     width: auto;
     display: none;
-
-    #schedule-ca-datepicker {
-      .datepicker {
-        width: 100%;
-
-        .table-condensed {
-          width: 100%;
-
-          thead tr:first-child {
-            display: none;
-          }
-        }
-      }
-    }
   }
   @media screen and (max-width: 992px) {
     .schedule-ca-datepicker-container {

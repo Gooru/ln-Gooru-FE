@@ -172,7 +172,11 @@
           @media screen and (max-width: $screen-sm) {
             font-size: 13px;
           }
-          @include ellipsis($font-size: 15px, $line-height: 1.2, $lines-to-show: 1);
+          @include ellipsis(
+            $font-size: 15px,
+            $line-height: 1.2,
+            $lines-to-show: 1
+          );
         }
       }
 
@@ -369,7 +373,11 @@
               .oa-project-label {
                 color: #3e5e67;
                 font-weight: bold;
-                @include ellipsis($font-size: 14px, $line-height: 1.2, $lines-to-show: 1);
+                @include ellipsis(
+                  $font-size: 14px,
+                  $line-height: 1.2,
+                  $lines-to-show: 1
+                );
               }
 
               .oa-project-tag {

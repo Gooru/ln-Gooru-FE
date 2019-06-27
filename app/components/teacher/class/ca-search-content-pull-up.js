@@ -8,7 +8,9 @@ import {
 } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import { isCompatibleVW } from 'gooru-web/utils/utils';
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 export default Ember.Component.extend(ConfigurationMixin, {
@@ -272,9 +274,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
   isClassPreferenceMapped: Ember.computed('classPreference', function() {
     let component = this;
     let classPreference = component.get('classPreference');
-    return classPreference
-      ? classPreference.subject && classPreference.framework
-      : false;
+    return classPreference ?
+      classPreference.subject && classPreference.framework :
+      false;
   }),
 
   /**
@@ -302,7 +304,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
     /**
      * Action triggered when the user click on close
      */
-    closeDatePicker() {
+    onCloseDatePicker() {
       let component = this;
       component.sendAction('closeDatePicker');
     },
@@ -421,7 +423,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
         component.get('activeContentType');
       let contentId = component.get('selectedContentForSchedule.id');
       let content = component.get('selectedContentForSchedule');
-      let datepickerEle = component.$('.schedule-ca-datepicker-container');
+      let datepickerEle = component.$('.ca-datepicker-schedule-container');
       datepickerEle.hide();
       let forMonth = moment(scheduleDate).format('MM');
       let forYear = moment(scheduleDate).format('YYYY');
@@ -464,7 +466,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
         component.get('selectedContentForSchedule.format') ||
         component.get('activeContentType');
       let contentId = component.get('selectedContentForSchedule.id');
-      let datepickerEle = component.$('.schedule-ca-datepicker-container');
+      let datepickerEle = component.$('.ca-datepicker-schedule-container');
       datepickerEle.hide();
       component
         .get('classActivityService')
@@ -488,48 +490,21 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     onScheduleContentToDCA(content, event) {
       let component = this;
-      Ember.run.later(function() {
-        let datepickerEle = component.$('.schedule-ca-datepicker-container');
-        let datepickerCtnEle = component.$(
-          '.schedule-ca-datepicker-container .ca-date-picker-container'
-        );
-        datepickerCtnEle.removeClass('ca-datepicker-orientation-top');
-        datepickerCtnEle.removeClass('ca-datepicker-orientation-bottom');
-        datepickerCtnEle.removeClass('ca-datepicker-orientation-center');
-        let selectedContentEle = component.$(event.target);
-        let position = selectedContentEle.position();
-        let top = position.top + 10 - datepickerEle.height();
-        let left = position.left + 20 - datepickerEle.width();
-        let componentHeight = component.$().height();
-        let windowHeight = $(window).height();
-        let allowedTop = windowHeight - componentHeight + top;
-        if (left < 0) {
-          left = position.left - datepickerEle.width() / 2;
-          datepickerCtnEle.addClass('ca-datepicker-orientation-center');
-        }
-        if (allowedTop < 0) {
-          datepickerCtnEle.addClass('ca-datepicker-orientation-bottom');
-          top = position.top + 35;
-        } else {
-          datepickerCtnEle.addClass('ca-datepicker-orientation-top');
-        }
-        datepickerEle.css({
-          top: top,
-          left: left
-        });
-        if (!selectedContentEle.hasClass('active')) {
-          selectedContentEle.addClass('active');
-          datepickerEle.show();
-        } else {
-          selectedContentEle.removeClass('active');
-          datepickerEle.hide();
-        }
-      }, 100);
-      this.set('selectedContentForSchedule', content);
-      this.set(
+      let datepickerEle = component.$('.ca-datepicker-schedule-container');
+      let selectedContentEle = component.$(event.target);
+      if (!selectedContentEle.hasClass('active')) {
+        selectedContentEle.addClass('active');
+        datepickerEle.show();
+      } else {
+        selectedContentEle.removeClass('active');
+        datepickerEle.hide();
+      }
+      component.set('selectedContentForSchedule', content);
+      component.set(
         'allowTwoDateRangePicker',
         content.get('format') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS
       );
+      component.set('endDate', null);
     },
 
     //Action triggered when click + icon in the pullup
@@ -612,11 +587,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   openPullUp() {
     let component = this;
-    component.$().animate(
-      {
-        top: '10%'
-      },
-      400
+    component.$().animate({
+      top: '10%'
+    },
+    400
     );
   },
 
@@ -657,7 +631,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
       .hash({
         searchResults: component.getSearchService()
       })
-      .then(({ searchResults }) => {
+      .then(({
+        searchResults
+      }) => {
         if (!component.isDestroyed) {
           component.set('isLoading', false);
           component.set('searchResults', searchResults);
@@ -682,7 +658,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
       .hash({
         searchResults: component.getSearchService()
       })
-      .then(({ searchResults }) => {
+      .then(({
+        searchResults
+      }) => {
         if (!component.isDestroyed) {
           component.set('isLoading', false);
           let searchResult = component.get('searchResults');

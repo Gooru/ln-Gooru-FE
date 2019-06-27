@@ -1,38 +1,110 @@
 .ca-month-picker {
-  #ca-month-picker {
+  .ca-year-nav-container {
+    width: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: 50px 1fr 50px;
+    align-items: center;
+    justify-items: center;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+    height: auto;
+
+    .next-cal-arrow,
+    .prev-cal-arrow {
+      cursor: pointer;
+      user-select: none;
+
+      i {
+        display: flex;
+        font-size: 30px;
+        pointer-events: none;
+      }
+    }
+
+    .cal-yyyy {
+      display: inline-flex;
+      font-weight: bold;
+      pointer-events: none;
+
+      .arrow_drop_down,
+      .arrow_drop_up {
+        display: none;
+        pointer-events: none;
+        height: 20px;
+        align-self: center;
+      }
+    }
+  }
+
+  .ca-monthpicker-container {
+    #ca-monthpicker {
+      .datepicker {
+        width: 100%;
+
+        .table-condensed {
+          width: 100%;
+
+          thead tr:first-child {
+            display: none;
+          }
+
+          tbody {
+            display: grid;
+            grid-gap: 5px;
+
+            tr {
+              td {
+                width: 100%;
+                display: grid;
+                grid-template-columns: repeat(4,1fr);
+                height: 100%;
+
+                span.month {
+                  padding: 0;
+                  min-width: 100px;
+                  justify-self: center;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .ca-month-picker-title {
+    font-weight: bold;
+    padding-bottom: 3px;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .ca-months {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
     padding-left: 10px;
     padding-right: 10px;
 
-    .ca-month-picker-title {
-      font-weight: bold;
-      padding-bottom: 3px;
+    span {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 70px;
       display: inline-block;
       text-align: center;
-      width: 100%;
-      padding-top: 3px;
-    }
 
-    .ca-months {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      justify-content: center;
-      width: 100%;
-      align-items: center;
-      justify-items: center;
-
-      span {
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        cursor: pointer;
-        width: 70px;
-        display: inline-block;
-        text-align: center;
-
-        &.past-month {
-          pointer-events: none;
-          cursor: default;
-          opacity: 0.8;
-        }
+      &.past-month {
+        pointer-events: none;
+        cursor: default;
+        opacity: 0.8;
       }
     }
   }
