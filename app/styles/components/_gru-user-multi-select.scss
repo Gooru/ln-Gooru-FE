@@ -53,9 +53,8 @@
       }
       .search-field {
         width: 100%;
-        input.chosen-search {
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
-          width: inherit;
+        input.chosen-search-input {
+          width: inherit !important;
           font-size: 13px;
           color: #666;
           &::placeholder {
@@ -71,6 +70,7 @@
       .chosen-results {
         .result-selected,
         .active-result {
+          color: rgb(55, 66, 75);
           .user-profile-item {
             display: grid;
             grid-template-columns: 24px auto;
