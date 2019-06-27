@@ -17,9 +17,7 @@ export default Ember.Route.extend({
     term: {
       refreshModel: true
     },
-    activeContentType: {
-      refreshModel: true
-    }
+    activeContentType: false
   },
 
   /**
