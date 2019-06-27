@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import { isValidEmailId } from 'gooru-web/utils/utils';
-import { KEY_CODES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -29,12 +28,11 @@ export default Ember.Component.extend({
         }
       });
 
-    component.$('.search-field .chosen-search-input').keyup(function(event) {
+    component.$('.search-field .chosen-search-input').keyup(function() {
       let enteredEmailId = this.value;
-      let keyCode = event.keyCode || event.which;
+      component.set('activeEmailId', enteredEmailId);
       //Send action to parrent only when hit Enter key
       if (
-        keyCode === KEY_CODES.ENTER &&
         isValidEmailId(enteredEmailId) &&
         !component.isDuplicateUser(enteredEmailId)
       ) {
@@ -46,6 +44,12 @@ export default Ember.Component.extend({
   didRender() {
     const component = this;
     component.$('#user-multi-select').trigger('chosen:updated');
+    let activeEmailId = component.get('activeEmailId');
+    let stringToShow =
+      activeEmailId.trim() === ''
+        ? component.get('placeholder')
+        : activeEmailId;
+    this.$('.chosen-search-input').val(stringToShow);
   },
 
   // -------------------------------------------------------------------------
@@ -62,6 +66,12 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {String} activeEmailId
+   * Property for active email id which is typed in the textbox
+   */
+  activeEmailId: '',
   /**
    * @property {String} placeholder
    */

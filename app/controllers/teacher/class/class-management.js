@@ -404,7 +404,7 @@ export default Ember.Controller.extend(ModalMixin, {
     //Action triggered when select a user to add as a co-teacher
     onSelectUserItem(user) {
       const controller = this;
-      controller.get('selectedCollaborators').pushObject(user);
+      controller.get('selectedCollaborators').unshiftObject(user);
     },
 
     //Action triggered when deselect an user to update co-teacher list
@@ -785,6 +785,7 @@ export default Ember.Controller.extend(ModalMixin, {
     const controller = this;
     const classService = controller.get('classService');
     const classId = controller.get('class.id');
+    collaborators = collaborators.length ? collaborators : null;
     return classService.removeCoTeacherFromClass(classId, collaborators);
   }
 });
