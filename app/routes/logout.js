@@ -30,9 +30,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   authenticationService: Ember.inject.service('api-sdk/authentication'),
 
   defaultMarketingSiteUrl: Ember.computed(function() {
-    return `${
-      window.location.protocol
-    }//${window.location.host}${Env.marketingSiteUrl}`;
+    return `${window
+      .location.protocol}//${window.location.host}${Env.marketingSiteUrl}`;
   }),
 
   beforeModel: function() {

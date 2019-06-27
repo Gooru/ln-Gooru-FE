@@ -281,8 +281,10 @@ export default Ember.Service.extend({
         .get('availabilityAdapter')
         .verifyEmail(email)
         .then(
-          function() {
-            resolve();
+          function(response) {
+            resolve(
+              service.get('profileSerializer').normalizeReadProfile(response)
+            );
           },
           function() {
             reject(i18n.t('forgot-password.error-email-not-exists').string);

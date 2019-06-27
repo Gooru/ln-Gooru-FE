@@ -138,7 +138,7 @@ export default Ember.Component.extend({
         $(this).popover('show');
         if (category.get('allowsScoring')) {
           let scoreInPrecentage = Math.floor(
-            (level.get('score') / totalPoints) * 100
+            level.get('score') / totalPoints * 100
           );
           Ember.$('.popover-title').css(
             'background-color',

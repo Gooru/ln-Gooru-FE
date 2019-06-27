@@ -286,14 +286,16 @@ export default Ember.Controller.extend(ModalMixin, {
     const controller = this;
     controller.set('isLoading', true);
     controller.set('page', 0);
-    Ember.RSVP.hash({
-      searchResults: controller.getSearchService()
-    }).then(({ searchResults }) => {
-      if (!controller.isDestroyed) {
-        controller.set('isLoading', false);
-        controller.set('searchResults', searchResults);
-      }
-    });
+    Ember.RSVP
+      .hash({
+        searchResults: controller.getSearchService()
+      })
+      .then(({ searchResults }) => {
+        if (!controller.isDestroyed) {
+          controller.set('isLoading', false);
+          controller.set('searchResults', searchResults);
+        }
+      });
   },
 
   /**
@@ -303,14 +305,16 @@ export default Ember.Controller.extend(ModalMixin, {
     const controller = this;
     controller.set('isLoading', true);
     controller.set('page', 0);
-    Ember.RSVP.hash({
-      searchResults: controller.getMyContentService()
-    }).then(({ searchResults }) => {
-      if (!controller.isDestroyed) {
-        controller.set('isLoading', false);
-        controller.set('searchResults', searchResults);
-      }
-    });
+    Ember.RSVP
+      .hash({
+        searchResults: controller.getMyContentService()
+      })
+      .then(({ searchResults }) => {
+        if (!controller.isDestroyed) {
+          controller.set('isLoading', false);
+          controller.set('searchResults', searchResults);
+        }
+      });
   },
 
   /**
@@ -320,17 +324,22 @@ export default Ember.Controller.extend(ModalMixin, {
     let controller = this;
     controller.set('isLoading', true);
     controller.set('page', 0);
-    Ember.RSVP.hash({
-      searchResults: controller.getLibraryService()
-    }).then(function(result) {
-      if (result) {
-        let libraryContent = result.searchResults.libraryContent;
-        let content = libraryContent[Object.keys(libraryContent)[0]];
-        let owners = libraryContent[Object.keys(libraryContent)[1]];
-        controller.set('searchResults', controller.mapOwners(content, owners));
-      }
-      controller.set('isLoading', false);
-    });
+    Ember.RSVP
+      .hash({
+        searchResults: controller.getLibraryService()
+      })
+      .then(function(result) {
+        if (result) {
+          let libraryContent = result.searchResults.libraryContent;
+          let content = libraryContent[Object.keys(libraryContent)[0]];
+          let owners = libraryContent[Object.keys(libraryContent)[1]];
+          controller.set(
+            'searchResults',
+            controller.mapOwners(content, owners)
+          );
+        }
+        controller.set('isLoading', false);
+      });
   },
 
   /**

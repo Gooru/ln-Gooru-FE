@@ -396,26 +396,28 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let controller = this;
     const classId = controller.get('classId');
     const userId = controller.get('session.userId');
-    Ember.RSVP.hash({
-      oaItems: controller
-        .get('oaAnaltyicsService')
-        .getOAToGrade(classId, userId)
-    }).then(function(hash) {
-      let gradeItems = hash.oaItems.gradeItems;
-      if (gradeItems) {
-        let itemsToGrade = Ember.A([]);
-        gradeItems.map(function(item) {
-          let gradeItem;
-          gradeItem = controller.createActivityGradeItemObject(item);
-          if (gradeItem) {
-            itemsToGrade.push(gradeItem);
-          }
-        });
-        Ember.RSVP.all(itemsToGrade).then(function(gradeItems) {
-          controller.set('itemsToGrade', gradeItems);
-        });
-      }
-    });
+    Ember.RSVP
+      .hash({
+        oaItems: controller
+          .get('oaAnaltyicsService')
+          .getOAToGrade(classId, userId)
+      })
+      .then(function(hash) {
+        let gradeItems = hash.oaItems.gradeItems;
+        if (gradeItems) {
+          let itemsToGrade = Ember.A([]);
+          gradeItems.map(function(item) {
+            let gradeItem;
+            gradeItem = controller.createActivityGradeItemObject(item);
+            if (gradeItem) {
+              itemsToGrade.push(gradeItem);
+            }
+          });
+          Ember.RSVP.all(itemsToGrade).then(function(gradeItems) {
+            controller.set('itemsToGrade', gradeItems);
+          });
+        }
+      });
   },
 
   /**

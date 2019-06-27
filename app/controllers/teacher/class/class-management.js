@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ModalMixin from 'gooru-web/mixins/modal';
+import { ROLES } from 'gooru-web/config/config';
 /**
  * Class management controller
  *
@@ -32,6 +33,8 @@ export default Ember.Controller.extend(ModalMixin, {
    * @type {SkylineInitialService} Service to retrieve skyline initial service
    */
   skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
+
+  profileService: Ember.inject.service('api-sdk/profile'),
 
   // -------------------------------------------------------------------------
   // Properties
@@ -214,19 +217,17 @@ export default Ember.Controller.extend(ModalMixin, {
     /**
      * Triggered from a co-teacher card of class mgt
      */
-    removeCoteacher: function(coteacher) {
-      var classCollaboratorsRef = this.get('class').get('collaborators');
-      let classCollaborators = classCollaboratorsRef.copy();
-      classCollaborators.reduce((acc, ccb, index, ccArr) => {
-        if (ccb.id === coteacher.id) {
-          ccArr.removeAt(index);
-        }
-      }, 0);
-      let classCollaboratorArr = classCollaborators.map(ccb => ccb.id);
-      this.get('classService')
-        .removeCoTeacherFromClass(this.get('class.id'), classCollaboratorArr)
-        .then(() => {
-          this.get('class').set('collaborators', classCollaborators);
+    removeCoteacher: function(collaborator) {
+      const controller = this;
+      let classCollaborators = controller.get('collaborators');
+      classCollaborators = classCollaborators.removeObject(collaborator);
+      let classCollaboratorIds = classCollaborators.map(
+        collaborator => collaborator.id
+      );
+      controller
+        .updateCollaboratorInClass(classCollaboratorIds)
+        .then(function() {
+          controller.set('collaborators', classCollaborators);
         });
     },
 
@@ -398,6 +399,63 @@ export default Ember.Controller.extend(ModalMixin, {
         .then(() => {
           controller.set('class.primaryLanguage', languageId);
         });
+    },
+
+    //Action triggered when select a user to add as a co-teacher
+    onSelectUserItem(user) {
+      const controller = this;
+      controller.get('selectedCollaborators').pushObject(user);
+    },
+
+    //Action triggered when deselect an user to update co-teacher list
+    onRemoveUserItem(user) {
+      const controller = this;
+      controller.get('selectedCollaborators').removeObject(user);
+    },
+
+    //Action triggered when hit search for an user
+    onSearchUser(emailId) {
+      const controller = this;
+      controller
+        .fetchMatchingUserProfiles(emailId)
+        .then(function(userDetails) {
+          if (userDetails.get('role') === ROLES.TEACHER) {
+            controller.get('teacherUserProfiles').pushObject(userDetails);
+          }
+        })
+        .catch(function() {
+          //TODO dummy callback to avoid red bar
+          return false;
+        });
+    },
+
+    //Action triggered when add list of users as co-teacher
+    onAddCollaborators() {
+      const controller = this;
+      const selectedCollaborators = controller.get('selectedCollaborators');
+      const collaborators = controller.get('collaborators');
+      let classCollaborators = collaborators.concat(selectedCollaborators);
+      let classCollaboratorIds = classCollaborators.map(collaborator =>
+        collaborator.get('id')
+      );
+      controller
+        .updateCollaboratorInClass(classCollaboratorIds)
+        .then(function() {
+          controller.set('collaborators', classCollaborators);
+        });
+      controller.actions.onToggleAddCollaborator(controller);
+    },
+
+    //Action triggered when toggle collaborator panel
+    onToggleAddCollaborator(controller = this) {
+      $('.sub-sec-coteach .add-collaborator-container').slideToggle(function() {
+        if ($(this).is(':visible')) {
+          $(this).css('display', 'grid');
+        }
+      });
+      //reset collaborator details
+      controller.set('teacherUserProfiles', Ember.A([]));
+      controller.set('selectedCollaborators', Ember.A([]));
     }
   },
 
@@ -495,6 +553,24 @@ export default Ember.Controller.extend(ModalMixin, {
   subjectTaxonomyGrades: null,
 
   /**
+   * @property {Array} selectedCollaborators
+   * Property for list of selected collaborators
+   */
+  selectedCollaborators: Ember.A([]),
+
+  /**
+   * @property {Array} collaborators
+   * Property for list of class collaborators
+   */
+  collaborators: Ember.computed.alias('class.collaborators'),
+
+  /**
+   * @property {Array} teacherUserProfiles
+   * Property for list of teacher profile who can be added as a collaborator
+   */
+  teacherUserProfiles: Ember.A([]),
+
+  /**
    * @function fetchTaxonomyGrades
    * Method to fetch taxonomy grades
    */
@@ -512,13 +588,15 @@ export default Ember.Controller.extend(ModalMixin, {
         filters.fw_code = fwkCode;
       }
 
-      return Ember.RSVP.hash({
-        taxonomyGrades: Ember.RSVP.resolve(
-          taxonomyService.fetchGradesBySubject(filters)
-        )
-      }).then(({ taxonomyGrades }) => {
-        controller.set('subjectTaxonomyGrades', taxonomyGrades);
-      });
+      return Ember.RSVP
+        .hash({
+          taxonomyGrades: Ember.RSVP.resolve(
+            taxonomyService.fetchGradesBySubject(filters)
+          )
+        })
+        .then(({ taxonomyGrades }) => {
+          controller.set('subjectTaxonomyGrades', taxonomyGrades);
+        });
     }
   },
 
@@ -687,5 +765,26 @@ export default Ember.Controller.extend(ModalMixin, {
     this.set('editingTitle', null);
     this.set('editingScore', null);
     this.set('didValidate', false);
+  },
+
+  /**
+   * @function fetchMatchingUserProfiles
+   * Method to fetch user profile details for given emailId
+   */
+  fetchMatchingUserProfiles(userEmail) {
+    const controller = this;
+    const profileService = controller.get('profileService');
+    return profileService.checkEmailExists(userEmail);
+  },
+
+  /**
+   * @function updateCollaboratorInClass
+   * Method to update collaborator list in a class
+   */
+  updateCollaboratorInClass(collaborators) {
+    const controller = this;
+    const classService = controller.get('classService');
+    const classId = controller.get('class.id');
+    return classService.removeCoTeacherFromClass(classId, collaborators);
   }
 });

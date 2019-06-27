@@ -2641,5 +2641,7 @@ window.i18ln = {
   'common.uploads': 'Uploads',
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'Expected time to complete',
-  'oa.info.hrs': ' hrs'
+  'oa.info.hrs': ' hrs',
+  'class.add-teachers': 'Add teachers',
+  'class.add-co-teachers': 'Add Co-teachers'
 };
