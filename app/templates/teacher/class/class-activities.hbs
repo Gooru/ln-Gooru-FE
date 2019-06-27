@@ -109,7 +109,7 @@
                   }}
                 {{/each}}
               </div>
-            {{else if (not isLoading)}}
+            {{else if (not isDataLoading)}}
               {{#if (and isDaily isToday)}}
                 <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
               {{else}}

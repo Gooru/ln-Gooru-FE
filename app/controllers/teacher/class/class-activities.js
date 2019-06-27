@@ -70,6 +70,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   actions: {
 
+    /**
+     * Action triggered when teacher switched the calendar tab.
+     */
     selectCalendarView(type) {
       const controller = this;
       controller.set('selectedCalendarView', type);
@@ -402,6 +405,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       );
     },
 
+    /**
+     * Load the data for month user selected
+     * @param  {Date} date
+     */
     showPreviousMonth(date) {
       const controller = this;
       controller.set('isToday', false);
@@ -413,6 +420,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.loadUnScheduledActivities();
     },
 
+    /**
+     * Load the data for month user selected
+     * @param  {Date} date
+     */
     showNextMonth(date) {
       const controller = this;
       controller.set('isToday', false);
@@ -424,6 +435,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.loadUnScheduledActivities();
     },
 
+    /**
+     * Load the data for month user selected
+     * @param  {Date} date
+     */
     showPreviousMonthForWeek(date) {
       const controller = this;
       controller.set('isToday', false);
@@ -433,9 +448,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let startDateOfWeek = moment(date).day(0).format('YYYY-MM-DD');
       let endDateOfWeek = moment(date).day(6).format('YYYY-MM-DD');
       controller.loadScheduledClassActivities(startDateOfWeek, endDateOfWeek);
-      controller.loadUnScheduledActivities();
     },
 
+    /**
+     * Load the data for month user selected
+     * @param  {Date} date
+     */
     showNextMonthForWeek(date) {
       const controller = this;
       controller.set('isToday', false);
@@ -445,7 +463,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let startDateOfWeek = moment(date).day(0).format('YYYY-MM-DD');
       let endDateOfWeek = moment(date).day(6).format('YYYY-MM-DD');
       controller.loadScheduledClassActivities(startDateOfWeek, endDateOfWeek);
-      controller.loadUnScheduledActivities();
     },
 
     showUnScheduledItems() {
@@ -1550,7 +1567,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   loadScheduledClassActivities(startDate, endDate) {
     const controller = this;
     const classId = controller.get('classId');
-    controller.set('isLoading', true);
+    controller.set('isDataLoading', true);
     controller.set('classActivities', Ember.A([]));
     controller
       .get('classActivityService')
@@ -1560,27 +1577,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           controller.parseClassActivityData(classActivities);
         }
         controller.fetchAssessmentsMasteryAccrual();
-        controller.set('isLoading', false);
       });
+    controller.set('isDataLoading', false);
   },
-
-  loadActiveOfflineActivity() {
-    const controller = this;
-    const classId = controller.get('classId');
-    controller.set('isLoading', true);
-    controller
-      .get('classActivityService')
-      .fetchActiveOfflineActivities(classId)
-      .then(function(offlineActivities) {
-        controller.set(
-          'activeOfflineActivities',
-          offlineActivities.sortBy('end_date')
-        );
-        controller.fetchAssessmentsMasteryAccrual();
-        controller.set('isLoading', false);
-      });
-  },
-
   /**
    * Creates the grade item information for activity level
    * @param {[]} grade item
