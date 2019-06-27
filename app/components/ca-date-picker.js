@@ -1,7 +1,4 @@
 import Ember from 'ember';
-import {
-  DCA_CALENDAR_VIEWS
-} from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -174,27 +171,8 @@ export default Ember.Component.extend({
    */
   highlightFirstDayOfMonth: false,
 
-  /**
-   * It maintains the state of calendar view for weekly.
-   * @type {Boolean}
-   */
-  isWeekly: Ember.computed.equal('calendarView', DCA_CALENDAR_VIEWS.WEEKLY),
-
-  /**
-   * It maintains the state of calendar view for monthly.
-   * @type {Boolean}
-   */
-  isMonthly: Ember.computed.equal('calendarView', DCA_CALENDAR_VIEWS.MONTHLY),
-
-  /**
-   * It maintains the state of calendar view for daily.
-   * @type {Boolean}
-   */
-  isDaily: Ember.computed.equal('calendarView', DCA_CALENDAR_VIEWS.DAILY),
-
   // -------------------------------------------------------------------------
   // Observers
-
   /**
    * This method  will trigger when  the property change happen in activities or highlightActivities
    */
@@ -216,32 +194,18 @@ export default Ember.Component.extend({
     }
   }),
 
-  onChangeCalendarView: Ember.observer('calendarView', function() {
-    let component = this;
-    component.initialize();
+  onChange: Ember.observer('isDaily', function() {
+    const component = this;
+    if (component.get('isDaily')) {
+      component.sendAction('onSelectDate', component.get('selectedDate'), false);
+      component.doHighlightActivity();
+    }
   }),
-
   // -------------------------------------------------------------------------
   // Methods
-
   initialize() {
-    let component = this;
-    const isMonthly = component.get('isMonthly');
-    if (isMonthly) {
-      component.set('showToday', false);
-      component.initializeMonthPicker();
-    } else {
-      component.initializeDatePicker();
-    }
-  },
-
-  initializeDatePicker() {
-    let component = this;
-    const calendarView = component.get('calendarView');
-    const isWeekly = component.get('isWeekly');
-    let allowDateSelectorToggle = component.get('allowDateSelectorToggle');
+    const component = this;
     let datepickerEle = component.$('#ca-datepicker');
-    datepickerEle.removeClass().addClass(calendarView);
     let defaultParams = {
       maxViewMode: 0,
       format: 'yyyy-mm-dd',
@@ -256,51 +220,19 @@ export default Ember.Component.extend({
       defaultParams.startDate = moment(startDate).format('YYYY-MM-DD');
     }
     datepickerEle.datepicker(defaultParams);
-    if (isWeekly && !component.get('selectedWeek')) {
+    if (!component.get('selectedDate')) {
       datepickerEle.datepicker('setDate', 'now');
-      component.doHighlightWeek(moment().format('YYYY-MM-DD'), false);
+      component.set('selectedDate', moment().format('YYYY-MM-DD'));
     }
     datepickerEle.off('changeDate').on('changeDate', function() {
       let datepicker = this;
       let selectedDate = Ember.$(datepicker)
         .datepicker('getFormattedDate')
         .valueOf();
-      if (allowDateSelectorToggle) {
-        component.toggleDatePicker();
-      }
       component.doHighlightActivity();
-      if (isWeekly) {
-        component.set('selectedWeek', selectedDate);
-        component.doHighlightWeek(selectedDate, true);
-      } else {
-        component.set('selectedDate', selectedDate);
-        component.sendAction('onSelectDate', selectedDate);
-      }
+      component.set('selectedDate', selectedDate);
+      component.sendAction('onSelectDate', selectedDate);
     });
-  },
-
-  initializeMonthPicker() {
-    let component = this;
-    let monthPickerEle = component.$('#ca-monthpicker');
-    let defaultParams = {
-      format: 'yyyy-mm',
-      viewMode: 'months',
-      minViewMode: 'months'
-    };
-    monthPickerEle.datepicker(defaultParams);
-    if (!component.get('selectedMonth')) {
-      monthPickerEle.datepicker('setDate', 'now');
-      component.sendAction('onSelectMonth', moment().format('YYYY-MM'), false);
-    }
-    monthPickerEle.off('changeDate').on('changeDate', function() {
-      let monthpicker = this;
-      let selectedMonth = Ember.$(monthpicker)
-        .datepicker('getFormattedDate')
-        .valueOf();
-      component.set('selectedMonth', selectedMonth);
-      component.sendAction('onSelectMonth', selectedMonth, true);
-    });
-
   },
 
   showTodayActivity() {
@@ -347,43 +279,32 @@ export default Ember.Component.extend({
     }
   },
 
-  doHighlightWeek(selectedDate, togglePicker) {
-    const component = this;
-    let dateEleContainer = component.$('#ca-datepicker .datepicker .datepicker-days .table-condensed tbody tr');
-    dateEleContainer.removeClass('week-active');
-    var dateElement = dateEleContainer.find('td.active.day').parent();
-    dateElement.addClass('week-active');
-    var startDateOfWeek = moment(selectedDate).day(0).format('YYYY-MM-DD');
-    var endDateOfWeek = moment(selectedDate).day(6).format('YYYY-MM-DD');
-    component.sendAction('onSelectWeek', startDateOfWeek, endDateOfWeek, togglePicker);
-  },
-
   doHighlightActivity() {
     let component = this;
-    let highlightActivities = component.get('highlightActivities');
-    if (highlightActivities) {
-      let dateEles = component.$(
-        '#ca-datepicker .datepicker .datepicker-days  .table-condensed tbody tr td'
-      );
-      let activities = component.get('activities');
-
-      dateEles.each(function(index, dateEle) {
-        let dateElement = component.$(dateEle);
-        if (!(dateElement.hasClass('new') || dateElement.hasClass('old'))) {
-          let day = dateElement.html();
-          if (day.length === 1) {
-            day = `0${day}`;
+    Ember.run.later((function() {
+      let highlightActivities = component.get('highlightActivities');
+      if (highlightActivities) {
+        let dateEles = component.$(`#ca-datepicker
+        .datepicker .datepicker-days .table-condensed tbody tr td`);
+        let activities = component.get('activities');
+        dateEles.each(function(index, dateEle) {
+          let dateElement = component.$(dateEle);
+          if (!(dateElement.hasClass('new') || dateElement.hasClass('old'))) {
+            let day = dateElement.html();
+            if (day.length === 1) {
+              day = `0${day}`;
+            }
+            let activity = activities.findBy('day', day);
+            if (activity) {
+              dateElement.removeClass('no-activities');
+              dateElement.addClass('has-activities');
+            } else {
+              dateElement.addClass('no-activities');
+              dateElement.removeClass('has-activities');
+            }
           }
-          let activity = activities.findBy('day', day);
-          if (activity) {
-            dateElement.removeClass('no-activities');
-            dateElement.addClass('has-activities');
-          } else {
-            dateElement.addClass('no-activities');
-            dateElement.removeClass('has-activities');
-          }
-        }
-      });
-    }
+        });
+      }
+    }), 400);
   }
 });

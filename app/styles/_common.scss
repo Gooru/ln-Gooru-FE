@@ -417,8 +417,7 @@ span.validation.warning {
 
       &.active {
         i {
-          background: url("gooru/images/navigation_resource_selected_icon.svg")
-            no-repeat;
+          background: url("gooru/images/navigation_resource_selected_icon.svg") no-repeat;
         }
       }
     }
@@ -443,8 +442,7 @@ span.validation.warning {
 
       &.active {
         i {
-          background: url("gooru/images/navigation_question_selected.svg")
-            no-repeat;
+          background: url("gooru/images/navigation_question_selected.svg") no-repeat;
           background-size: contain;
         }
       }
@@ -704,4 +702,8 @@ label {
 
 .disable-event {
   pointer-events: none !important;
+}
+
+.visible {
+  display: block !important;
 }

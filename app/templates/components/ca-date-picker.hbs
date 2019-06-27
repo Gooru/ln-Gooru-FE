@@ -1,18 +1,15 @@
-{{gru-icon name="arrow_drop_up" class="ca-datepicker-bottom"}}
 <div class="ca-date-nav-container">
   <div class="prev-cal-arrow" {{action 'showPreviousMonth'}}>{{gru-icon name="keyboard_arrow_left"}}</div>
-  <div class="cal-mm-yyyy {{if allowDateSelectorToggle 'ca-date-picker-toggle'}}" {{action 'showCalendar'}}>{{format-date forFirstDateOfMonth 'MMMM YYYY'}} {{gru-icon name="arrow_drop_down"}}{{gru-icon name="arrow_drop_up"}}</div>
+  <div class="cal-mm-yyyy">{{format-date forFirstDateOfMonth 'MMMM YYYY'}} {{gru-icon name="arrow_drop_down"}}{{gru-icon name="arrow_drop_up"}}</div>
   <div class="next-cal-arrow" {{action 'showNextMonth'}}>{{gru-icon name="keyboard_arrow_right"}}</div>
 </div>
-<div class="ca-datepicker-container {{if allowDateSelectorToggle 'ca-date-picker-toggle ca-date-picker-inline'}}">
+<div class="ca-datepicker-container">
   {{#if showToday}}
     <div class="ca-datepicker-today" {{action 'onSelectToday'}}>{{t "student-landing.class.class-activities-tab.today"}}</div>
   {{/if}}
-  <div id="ca-monthpicker" class="{{unless isMonthly 'hidden'}}"></div>
-  <div id="ca-datepicker" class="{{unless (or isWeekly isDaily) 'hidden'}}"></div>
+  <div id="ca-datepicker"></div>
   {{#if showMonths}}
     <hr />
     {{ca-month-picker onSelectMonth='onSelectMonth' currentMonth=forFirstDateOfMonth}}
   {{/if}}
 </div>
-{{gru-icon name="arrow_drop_down" class="ca-datepicker-top"}}

@@ -1,0 +1,8 @@
+<div class="ca-week-nav-container">
+  <div class="prev-cal-arrow" {{action 'showPreviousMonth'}}>{{gru-icon name="keyboard_arrow_left"}}</div>
+  <div class="cal-mm-yyyy">{{format-date dateOfMonth 'MMMM YYYY'}} {{gru-icon name="arrow_drop_down"}}{{gru-icon name="arrow_drop_up"}}</div>
+  <div class="next-cal-arrow" {{action 'showNextMonth'}}>{{gru-icon name="keyboard_arrow_right"}}</div>
+</div>
+<div class="ca-weekpicker-container">
+  <div id="ca-weekpicker" class="weekly"></div>
+</div>
