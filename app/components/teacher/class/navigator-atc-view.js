@@ -252,7 +252,7 @@ export default Ember.Component.extend({
       .axis()
       .scale(xScale)
       .orient('bottom')
-      .tickPadding(7);
+      .tickPadding(10);
 
     var yAxis = d3.svg
       .axis()
@@ -297,7 +297,7 @@ export default Ember.Component.extend({
 
     svg
       .append('g')
-      .attr('transform', 'translate(-50, -25)')
+      .attr('transform', 'translate(-50, -21)')
       .append('text')
       .attr('class', 'placeholder')
       .attr('x', '50')
