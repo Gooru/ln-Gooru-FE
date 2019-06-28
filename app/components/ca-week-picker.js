@@ -30,7 +30,7 @@ export default Ember.Component.extend({
    * Maintains  the value of first date of month
    * @return {String}
    */
-  dateOfMonth: Ember.computed('forMonth', 'forYear', function() {
+  firstDateOfMonth: Ember.computed('forMonth', 'forYear', function() {
     let forMonth = this.get('forMonth');
     let forYear = this.get('forYear');
     let date = `${forYear}-${forMonth}-01`;
@@ -72,11 +72,11 @@ export default Ember.Component.extend({
   actions: {
     showPreviousMonth() {
       let component = this;
-      let dateOfMonth = component.get('dateOfMonth');
-      let forMonth = moment(dateOfMonth)
+      let firstDateOfMonth = component.get('firstDateOfMonth');
+      let forMonth = moment(firstDateOfMonth)
         .subtract(1, 'months')
         .format('MM');
-      let forYear = moment(dateOfMonth)
+      let forYear = moment(firstDateOfMonth)
         .subtract(1, 'months')
         .format('YYYY');
       component.set('forMonth', forMonth);
@@ -87,17 +87,16 @@ export default Ember.Component.extend({
       datepickerPrevEle.trigger('click');
       let date = `${forYear}-${forMonth}-01`;
       let parsedDate = moment(date).format('YYYY-MM-DD');
-      component.set('dateOfMonth', parsedDate);
-      component.sendAction('showPreviousMonth', parsedDate);
+      component.set('firstDateOfMonth', parsedDate);
     },
 
     showNextMonth() {
       let component = this;
-      let dateOfMonth = component.get('dateOfMonth');
-      let forMonth = moment(dateOfMonth)
+      let firstDateOfMonth = component.get('firstDateOfMonth');
+      let forMonth = moment(firstDateOfMonth)
         .add(1, 'months')
         .format('MM');
-      let forYear = moment(dateOfMonth)
+      let forYear = moment(firstDateOfMonth)
         .add(1, 'months')
         .format('YYYY');
       component.set('forMonth', forMonth);
@@ -108,8 +107,7 @@ export default Ember.Component.extend({
       datepickerNextEle.trigger('click');
       let date = `${forYear}-${forMonth}-01`;
       let parsedDate = moment(date).format('YYYY-MM-DD');
-      component.set('dateOfMonth', parsedDate);
-      component.sendAction('showNextMonth', parsedDate);
+      component.set('firstDateOfMonth', parsedDate);
     }
   },
 
@@ -166,10 +164,8 @@ export default Ember.Component.extend({
             }
             let activity = activities.findBy('day', day);
             if (activity) {
-              dateElement.removeClass('no-activities');
               dateElement.addClass('has-activities');
             } else {
-              dateElement.addClass('no-activities');
               dateElement.removeClass('has-activities');
             }
           }

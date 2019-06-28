@@ -215,11 +215,7 @@
 
                             &.active {
                               background-color: #d2e3fc;
-                              background-image: -webkit-linear-gradient(
-                                top,
-                                #d2e3fc,
-                                #d2e3fc
-                              );
+                              background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
                               border-radius: 50%;
                               display: flex;
                               margin: auto;
@@ -234,11 +230,7 @@
 
                             &.today {
                               background-color: #3486f7;
-                              background-image: -webkit-linear-gradient(
-                                top,
-                                #3486f7,
-                                #3486f7
-                              );
+                              background-image: -webkit-linear-gradient(top, #3486f7, #3486f7);
                               border-radius: 50%;
                               display: flex;
                               margin: auto;

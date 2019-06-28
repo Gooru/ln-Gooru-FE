@@ -411,7 +411,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      */
     showPreviousMonth(date) {
       const controller = this;
-      controller.set('isToday', false);
       let forMonth = controller.get('forMonth');
       let forYear = controller.get('forYear');
       controller.set('selectedDate', date);
@@ -426,43 +425,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      */
     showNextMonth(date) {
       const controller = this;
-      controller.set('isToday', false);
       let forMonth = controller.get('forMonth');
       let forYear = controller.get('forYear');
       controller.set('selectedDate', date);
       controller.loadActivitiesForMonth(forMonth, forYear);
       controller.loadScheduledClassActivities(date, date);
       controller.loadUnScheduledActivities();
-    },
-
-    /**
-     * Load the data for month user selected
-     * @param  {Date} date
-     */
-    showPreviousMonthForWeek(date) {
-      const controller = this;
-      controller.set('isToday', false);
-      let forMonth = controller.get('forWeekMonth');
-      let forYear = controller.get('forWeekYear');
-      controller.loadActivitiesForMonth(forMonth, forYear);
-      let startDateOfWeek = moment(date).day(0).format('YYYY-MM-DD');
-      let endDateOfWeek = moment(date).day(6).format('YYYY-MM-DD');
-      controller.loadScheduledClassActivities(startDateOfWeek, endDateOfWeek);
-    },
-
-    /**
-     * Load the data for month user selected
-     * @param  {Date} date
-     */
-    showNextMonthForWeek(date) {
-      const controller = this;
-      controller.set('isToday', false);
-      let forMonth = controller.get('forWeekMonth');
-      let forYear = controller.get('forWeekYear');
-      controller.loadActivitiesForMonth(forMonth, forYear);
-      let startDateOfWeek = moment(date).day(0).format('YYYY-MM-DD');
-      let endDateOfWeek = moment(date).day(6).format('YYYY-MM-DD');
-      controller.loadScheduledClassActivities(startDateOfWeek, endDateOfWeek);
     },
 
     showUnScheduledItems() {
@@ -640,10 +608,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
     onSelectDate(date, togglePicker = true) {
       let controller = this;
-      let isToday = date === moment().format('YYYY-MM-DD');
-      controller.set('isToday', isToday);
       controller.set('selectedDate', date);
       controller.loadScheduledClassActivities(date, date);
+      controller.loadUnScheduledActivities();
       if (togglePicker) {
         controller.send('toggleDatePicker');
       }
@@ -654,6 +621,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('startDateOfWeek', startDate);
       controller.set('endDateOfWeek', endDate);
       controller.loadScheduledClassActivities(startDate, endDate);
+      controller.loadUnScheduledActivities();
       if (togglePicker) {
         controller.send('toggleDatePicker');
       }
@@ -750,6 +718,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   initialize() {
     let controller = this;
     controller._super(...arguments);
+    controller.set('selectedCalendarView', DCA_CALENDAR_VIEWS.DAILY);
     controller.loadActiveOfflineActivities();
     controller.loadScheduledClassActivities(controller.get('selectedDate'));
     controller.loadCompletedOfflineActivities();
@@ -767,7 +736,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * @property {String} selectedActivityView
    * Property to handle is state of selected view for activity
    */
-  selectedCalendarView: DCA_CALENDAR_VIEWS.DAILY,
+  selectedCalendarView: null,
 
   /**
    * It maintains the state of calendar view for weekly.
@@ -843,7 +812,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * it maintains date which user selected is today or not
    * @property {Boolean} isToday
    */
-  isToday: true,
+  isToday: Ember.computed('selectedDate', function() {
+    return this.get('selectedDate') === moment().format('YYYY-MM-DD');
+  }),
   /**
    * @property {Object}
    */

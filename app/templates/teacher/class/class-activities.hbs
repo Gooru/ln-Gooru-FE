@@ -13,9 +13,9 @@
               <i class="assessment-icon" {{action 'onAddDca' 'assessment'}}></i>
             </div>
             <div class="ca-calendar-tabs">
-              <div class="title {{if isMonthly 'active'}}" {{action 'selectCalendarView' 'monthly'}}>Monthly</div>
-              <div class="title {{if isWeekly 'active'}}" {{action 'selectCalendarView' 'weekly'}}>Weekly</div>
-              <div class="title {{if isDaily 'active'}}" {{action 'selectCalendarView' 'daily'}}>Daily</div>
+              <div class="title {{if isMonthly 'active'}}" {{action 'selectCalendarView' 'monthly'}}>{{t 'common.month'}}</div>
+              <div class="title {{if isWeekly 'active'}}" {{action 'selectCalendarView' 'weekly'}}>{{t 'common.week'}}</div>
+              <div class="title {{if isDaily 'active'}}" {{action 'selectCalendarView' 'daily'}}>{{t 'common.day'}}</div>
             </div>
             <div class="ca-date-section">
               <div class="date-picker-action" {{action 'toggleDatePicker'}}>
@@ -57,8 +57,6 @@
             {{ca-week-picker
                 forMonth=forWeekMonth
                 forYear=forWeekYear
-                showPreviousMonth="showPreviousMonthForWeek"
-                showNextMonth="showNextMonthForWeek"
                 onSelectWeek="onSelectWeek"
                 isWeekly=isWeekly
                 activities=scheduledClassActivitiesDatewise
@@ -246,7 +244,7 @@
       </div>
       <div class="unschedule-container">
         <div class="ca-unschedule-items-header" {{action 'toggleUnSchedule'}}>
-          <span>{{t 'common.unscheduled-items'}} {{t 'common.for'}} {{format-date selectedDate 'MMMM'}} ({{unScheduledClassActivities.length}})</span>
+          <span>{{t 'common.unscheduled-items'}} {{t 'common.for'}} {{format-date forMonth 'MMMM'}} ({{unScheduledClassActivities.length}})</span>
           <div class="icons">
             {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
             {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}

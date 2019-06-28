@@ -341,9 +341,9 @@
                 display: inline-grid;
                 justify-items: center;
                 align-items: center;
-                grid-template-columns: max-content 20px 20px 20px;
+                grid-template-columns: max-content 20px 20px;
                 grid-gap: 15px;
-                width: 100%;
+                width: auto;
 
                 p {
                   font-size: 13px;
@@ -386,7 +386,10 @@
               .ca-calendar-tabs {
                 width: 100%;
                 display: grid;
-                grid-template-columns: repeat(3, auto);
+                grid-template-columns: repeat(3,auto);
+                margin: 0 10px;
+                grid-gap: 10px;
+                justify-content: space-evenly;
 
                 .title {
                   text-align: center;
@@ -394,6 +397,7 @@
                   opacity: 0.6;
                   font-weight: bold;
                   cursor: pointer;
+                  width: auto;
 
                   &.active {
                     opacity: 1;
