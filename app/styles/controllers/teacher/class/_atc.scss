@@ -3,22 +3,26 @@
     width: 89%;
     margin: auto;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
-    .ca-date-picker-container {
+    .ca-date-nav-container {
+      background-color: $white;
+      margin: auto;
+      margin-bottom: 10px;
       box-shadow: none;
-      .ca-date-nav-container {
-        background-color: $white;
-        margin: auto;
-        margin-bottom: 10px;
-        box-shadow: none;
-        grid-template-columns: 50px auto 50px;
-        justify-content: center;
-        .ca-date-picker-toggle {
-          pointer-events: none;
-          i {
-            display: none;
-          }
+      grid-template-columns: 50px auto 50px;
+      justify-content: center;
+      .ca-date-picker-toggle {
+        pointer-events: none;
+        i {
+          display: none;
         }
       }
+      .cal-mm-yyyy {
+        font-size: 24px;
+      }
+    }
+    .ca-datepicker-container {
+      box-shadow: none;
+      display: none;
     }
     &.current-month {
       .ca-date-picker-container {
