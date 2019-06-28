@@ -5,7 +5,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   queryParams: {
     collectionId: {},
     isCollection: {},
-    editing: {}
+    editing: {},
+    isLibraryContent: false
   },
   // -------------------------------------------------------------------------
   // Dependencies
@@ -48,6 +49,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     const collectionId = params.collectionId;
     const isCollection = params.isCollection === 'true';
     const isEditing = params.editing;
+    const isLibraryContent = params.isLibraryContent;
 
     var question = null;
     var collection = null;
@@ -72,7 +74,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       question: question,
       collection: collection,
       isCollection: isCollection,
-      isEditing: !!isEditing
+      isEditing: !!isEditing,
+      isLibraryContent
     });
   },
 
@@ -81,5 +84,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('collection', model.collection);
     controller.set('isCollection', model.isCollection);
     controller.set('isEditing', model.isEditing);
+    controller.set('isLibraryContent', model.isLibraryContent);
   }
 });
