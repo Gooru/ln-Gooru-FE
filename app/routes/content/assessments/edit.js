@@ -6,7 +6,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     editing: {},
     editingContent: {
       refreshModel: true
-    }
+    },
+    isLibraryContent: false
   },
 
   // -------------------------------------------------------------------------
@@ -47,6 +48,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         const editingContent = params.editingContent
           ? params.editingContent
           : null;
+        const isLibraryContent = params.isLibraryContent;
         var course = null;
 
         if (courseId) {
@@ -64,7 +66,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           assessment: assessment,
           course: course,
           isEditing: !!isEditing,
-          editingContent: editingContent
+          editingContent: editingContent,
+          isLibraryContent
         });
       });
   },
@@ -80,6 +83,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('isEditing', model.isEditing);
     controller.set('editingContent', model.editingContent);
     controller.set('isAssessment', true);
+    controller.set('isLibraryContent', model.isLibraryContent);
 
     route
       .get('centurySkillService')

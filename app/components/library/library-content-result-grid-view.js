@@ -83,7 +83,8 @@ export default Ember.Component.extend({
     editCollection: function(collection) {
       this.get('router').transitionTo(
         'content.collections.edit',
-        collection.get('id')
+        collection.get('id'),
+        { queryParams: { isLibraryContent: true } }
       );
     },
 
@@ -167,7 +168,8 @@ export default Ember.Component.extend({
      */
     editCourse: function(course) {
       let queryParams = {
-        userId: course.get('ownerId')
+        userId: course.get('ownerId'),
+        isLibraryContent: true
       };
       this.get('router').transitionTo(
         'content.courses.edit',
@@ -196,7 +198,8 @@ export default Ember.Component.extend({
         assessment.get('id'),
         {
           queryParams: {
-            editingContent: true
+            editingContent: true,
+            isLibraryContent: true
           }
         }
       );
@@ -229,7 +232,8 @@ export default Ember.Component.extend({
     editQuestion: function(question) {
       this.get('router').transitionTo(
         'content.questions.edit',
-        question.get('id')
+        question.get('id'),
+        { queryParams: { isLibraryContent: true } }
       );
     },
 
@@ -258,7 +262,8 @@ export default Ember.Component.extend({
     editResource: function(resource) {
       this.get('router').transitionTo(
         'content.resources.edit',
-        resource.get('id')
+        resource.get('id'),
+        { queryParams: { isLibraryContent: true } }
       );
     },
 

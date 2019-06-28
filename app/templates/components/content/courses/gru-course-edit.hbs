@@ -1,7 +1,12 @@
 <header>
   <a {{action "courseEditBackButton"}} class="back-to">
     <div>
-      {{gru-icon name="keyboard_arrow_left"}}{{t 'common.course'}}: {{course.title}}
+      {{gru-icon name="keyboard_arrow_left"}}
+      {{#if isLibraryContent}}
+        {{t 'common.back'}}
+      {{else}}
+        {{t 'common.course'}}: {{course.title}}
+      {{/if}}
     </div>
   </a>
 
