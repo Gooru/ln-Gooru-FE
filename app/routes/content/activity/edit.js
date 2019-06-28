@@ -10,7 +10,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     },
     isIndependentOA: {
       refreshModel: true
-    }
+    },
+    isLibraryContent: false
   },
   //ToDo: Store implementation
   // -------------------------------------------------------------------------
@@ -67,6 +68,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             ? params.editingContent
             : null;
           var course = null;
+          const isLibraryContent = params.isLibraryContent;
           if (courseId) {
             course = route.get('courseService').fetchById(courseId);
           }
@@ -75,7 +77,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             activity: activity,
             course: course,
             isEditing: !!isEditing,
-            editingContent: editingContent
+            editingContent: editingContent,
+            isLibraryContent
           });
         });
     } else {
@@ -125,7 +128,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     this.set('isEditing', true);
     controller.set('isEditing', true);
     controller.set('tempCollection', activityCollection.copy());
-    if (model.isIndependentOA) {
+    if (model.isIndependentOA || model.isLibraryContent) {
       controller.set('allowBackToCourse', false);
     }
     route

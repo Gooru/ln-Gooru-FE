@@ -1,9 +1,7 @@
 import Ember from 'ember';
 import ContentEditMixin from 'gooru-web/mixins/content/edit';
 import ModalMixin from 'gooru-web/mixins/modal';
-import {
-  CONTENT_TYPES
-} from 'gooru-web/config/config';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
   // -------------------------------------------------------------------------
@@ -55,19 +53,17 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
      */
     courseEditBackButton: function() {
       let component = this;
-      if (component.get('classId')) {
+      if (component.get('classId') && !component.get('isLibraryContent')) {
         component
           .get('router')
           .transitionTo('teacher.class.course-map', component.get('classId'));
       } else {
-        component
-          .get('router')
-          .transitionTo('library-search', {
-            queryParams: {
-              profileId: component.get('session.userId'),
-              type: 'my-content'
-            }
-          });
+        component.get('router').transitionTo('library-search', {
+          queryParams: {
+            profileId: component.get('session.userId'),
+            type: 'my-content'
+          }
+        });
       }
     },
 
@@ -126,9 +122,7 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
       let component = this;
       var editedCourse = component.get('tempCourse');
       let course = component.get('course');
-      editedCourse.validate().then(function({
-        validations
-      }) {
+      editedCourse.validate().then(function({ validations }) {
         if (validations.get('isValid')) {
           let imageIdPromise = new Ember.RSVP.resolve(
             editedCourse.get('thumbnailUrl')

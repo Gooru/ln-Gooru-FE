@@ -1,5 +1,11 @@
 <header>
-  {{#if collection}}
+  {{#if (or isLibraryContent (not collection.id))}}
+    <a href="#" class="back-to" {{action "onClickBack"}}>
+      <div class="{{if isCollection 'return-collection' 'return-assessment'}}">
+        {{gru-icon name="keyboard_arrow_left"}}Back
+      </div>
+    </a>
+  {{else}}
     {{#link-to (if isCollection 'content.collections.edit' 'content.assessments.edit') collection.id class="back-to" }}
       <div class="{{if isCollection 'return-collection' 'return-assessment'}}">
         {{gru-icon name="keyboard_arrow_left"}}{{t (if isCollection 'common.collection' 'common.assessment')}}: {{collection.title}}

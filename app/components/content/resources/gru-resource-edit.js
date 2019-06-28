@@ -10,14 +10,13 @@ import {
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import ModalMixin from 'gooru-web/mixins/modal';
-import {
-  isVideoURL
-} from 'gooru-web/utils/utils';
+import { isVideoURL } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend(
   ContentEditMixin,
   ModalMixin,
-  ProtocolMixin, {
+  ProtocolMixin,
+  {
     // -------------------------------------------------------------------------
     // Dependencies
 
@@ -134,7 +133,8 @@ export default Ember.Component.extend(
             .then(function(collections) {
               component.send(
                 'showModal',
-                'content.modals.gru-add-to-collection', {
+                'content.modals.gru-add-to-collection',
+                {
                   content: component.get('resource'),
                   collections
                 },
@@ -191,6 +191,11 @@ export default Ember.Component.extend(
        */
       removeSkill: function(skillItemId) {
         this.get('tempResource.centurySkills').removeObject(skillItemId);
+      },
+
+      //Action triggered when click on back
+      onClickBack() {
+        window.history.back();
       }
     },
 
@@ -236,9 +241,9 @@ export default Ember.Component.extend(
      * @property {string}
      */
     standardLabelKey: Ember.computed('standardLabel', function() {
-      return this.get('standardLabel') ?
-        'common.standards' :
-        'common.competencies';
+      return this.get('standardLabel')
+        ? 'common.standards'
+        : 'common.competencies';
     }),
 
     /**
@@ -385,9 +390,7 @@ export default Ember.Component.extend(
       const component = this;
       const collection = component.get('collection');
       var editedResource = component.get('tempResource');
-      editedResource.validate().then(function({
-        validations
-      }) {
+      editedResource.validate().then(function({ validations }) {
         if (validations.get('isValid')) {
           if (editedResource.description === '') {
             Ember.set(editedResource, 'description', null);

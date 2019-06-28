@@ -17,7 +17,7 @@
         stroke-width: 2px;
         fill: none;
       }
-      .tick:nth-child(-n + 3) {
+      .tick:nth-child(-n + 4) {
         text {
           display: none;
         }
@@ -27,7 +27,7 @@
     .tick {
       text {
         fill: $white;
-        font-size: 10px;
+        font-size: 13px;
         font-weight: bold;
       }
     }
@@ -43,7 +43,7 @@
 
     .placeholder {
       fill: $white;
-      font-size: 10px;
+      font-size: 13px;
       font-weight: bold;
       text-transform: uppercase;
     }
