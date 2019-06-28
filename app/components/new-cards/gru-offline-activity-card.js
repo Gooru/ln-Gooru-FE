@@ -24,8 +24,9 @@ export default Ember.Component.extend(ModalMixin, {
     onEditContent() {
       const component = this;
       const contentId = component.get('offlineActivity.id');
+      const isLibraryContent = component.get('isLibraryContent');
       component.get('router').transitionTo('content.activity.edit', contentId, {
-        queryParams: { editingContent: true }
+        queryParams: { editingContent: true, isLibraryContent }
       });
     },
 

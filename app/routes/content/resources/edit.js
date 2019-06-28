@@ -6,7 +6,8 @@ import Resource from 'gooru-web/models/content/resource';
 export default Ember.Route.extend(PrivateRouteMixin, {
   queryParams: {
     collectionId: {},
-    editing: {}
+    editing: {},
+    isLibraryContent: false
   },
 
   // -------------------------------------------------------------------------
@@ -79,6 +80,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
 
     var isEditing = params.editing;
     var collection = null;
+    const isLibraryContent = params.isLibraryContent;
 
     if (params.collectionId) {
       collection = route
@@ -89,7 +91,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     return Ember.RSVP.hash({
       resource: resource,
       collection: collection,
-      isEditing: !!isEditing
+      isEditing: !!isEditing,
+      isLibraryContent
     });
   },
 
@@ -99,6 +102,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('resource', model.resource);
     controller.set('collection', model.collection);
     controller.set('isEditing', model.isEditing);
+    controller.set('isLibraryContent', model.isLibraryContent);
 
     route
       .get('centurySkillService')

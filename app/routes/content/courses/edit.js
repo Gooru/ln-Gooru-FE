@@ -6,7 +6,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   queryParams: {
     editing: {},
     classId: {},
-    userId: {}
+    userId: {},
+    isLibraryContent: false
   },
 
   // -------------------------------------------------------------------------
@@ -31,12 +32,14 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   model: function(params) {
     var course = this.get('courseService').fetchById(params.courseId);
     var isEditing = params.editing;
+    const isLibraryContent = params.isLibraryContent;
 
     return Ember.RSVP.hash({
       course: course,
       isEditing: !!isEditing,
       userId: params.userId,
-      classId: params.classId
+      classId: params.classId,
+      isLibraryContent
     });
   },
 
@@ -56,6 +59,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('userId', model.userId);
     controller.set('classId', model.classId);
     controller.set('isEditing', model.isEditing);
+    controller.set('isLibraryContent', model.isLibraryContent);
     if (model.isEditing) {
       controller.set('tempCourse', course.copy());
     }

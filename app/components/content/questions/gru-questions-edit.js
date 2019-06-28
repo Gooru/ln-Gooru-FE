@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import ContentEditMixin from 'gooru-web/mixins/content/edit';
-import {
-  QUESTION_CONFIG
-} from 'gooru-web/config/question';
+import { QUESTION_CONFIG } from 'gooru-web/config/question';
 import {
   CONTENT_TYPES,
   EDUCATION_CATEGORY,
@@ -12,10 +10,7 @@ import ModalMixin from 'gooru-web/mixins/modal';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import FillInTheBlank from 'gooru-web/utils/question/fill-in-the-blank';
-import {
-  replaceMathExpression,
-  removeHtmlTags
-} from 'gooru-web/utils/utils';
+import { replaceMathExpression, removeHtmlTags } from 'gooru-web/utils/utils';
 import Rubric from 'gooru-web/models/rubric/rubric';
 
 export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
@@ -92,7 +87,8 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
       };
       this.get('router').transitionTo(
         'content.rubric.edit',
-        this.get('rubric.id'), {
+        this.get('rubric.id'),
+        {
           queryParams
         }
       );
@@ -330,6 +326,11 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
             null
           )
         );
+    },
+
+    //Action triggered when click on back
+    onClickBack() {
+      window.history.back();
     }
   },
 
@@ -455,9 +456,9 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
     'question.rubric',
     'tempQuestion.rubric',
     function() {
-      return this.get('isBuilderEditing') ?
-        this.get('tempQuestion.rubric') :
-        this.get('question.rubric');
+      return this.get('isBuilderEditing')
+        ? this.get('tempQuestion.rubric')
+        : this.get('question.rubric');
     }
   ),
 
@@ -472,9 +473,9 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
    * @property {string}
    */
   standardLabelKey: Ember.computed('standardLabel', function() {
-    return this.get('standardLabel') ?
-      'common.standards' :
-      'common.competencies';
+    return this.get('standardLabel')
+      ? 'common.standards'
+      : 'common.competencies';
   }),
 
   /**
@@ -655,9 +656,7 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
     let question = component.get('question');
     const collection = component.get('collection');
 
-    editedQuestion.validate().then(function({
-      validations
-    }) {
+    editedQuestion.validate().then(function({ validations }) {
       if (validations.get('isValid')) {
         let imageIdPromise = new Ember.RSVP.resolve(
           editedQuestion.get('thumbnail')
@@ -717,10 +716,12 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
               ) {
                 editedQuestion.get('rubric').setProperties({
                   title: null,
-                  maxScore: editedQuestion.get('rubric.maxScore') ?
-                    editedQuestion.get('rubric.maxScore') : 1,
-                  increment: editedQuestion.get('rubric.increment') ?
-                    editedQuestion.get('rubric.increment') : 0.5
+                  maxScore: editedQuestion.get('rubric.maxScore')
+                    ? editedQuestion.get('rubric.maxScore')
+                    : 1,
+                  increment: editedQuestion.get('rubric.increment')
+                    ? editedQuestion.get('rubric.increment')
+                    : 0.5
                 });
               }
 
@@ -802,9 +803,7 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
         answer.set('text', removeHtmlTags(answer.text));
       }
     }
-    return answer.validate().then(function({
-      validations
-    }) {
+    return answer.validate().then(function({ validations }) {
       return validations.get('isValid');
     });
   },
