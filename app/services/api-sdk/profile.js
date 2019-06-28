@@ -728,6 +728,11 @@ export default Ember.Service.extend({
   },
 
   loadScript: function(script) {
-    return this.get('profileAdapter').loadScript(script);
+    return Ember.RSVP.hash({
+      gooruTrans: this.get('profileAdapter').loadScript(script),
+      quizzesTrans: this.get('profileAdapter').loadScript(script, true)
+    }).then((gooruTrans, quizzesTrans) => {
+      Ember.RSVP.resolve(Object.assign(window.i18ln, quizzesTrans));
+    });
   }
 });
