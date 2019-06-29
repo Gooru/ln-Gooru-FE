@@ -75,16 +75,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      */
     selectCalendarView(type) {
       const controller = this;
-      controller.set('selectedCalendarView', type);
-      if (type === DCA_CALENDAR_VIEWS.DAILY) {
-        let forMonth = controller.get('forMonth');
-        let forYear = controller.get('forYear');
-        controller.loadActivitiesForMonth(forMonth, forYear);
-      } else if (type === DCA_CALENDAR_VIEWS.WEEKLY) {
-        let forMonth = controller.get('forWeekMonth');
-        let forYear = controller.get('forWeekYear');
-        controller.loadActivitiesForMonth(forMonth, forYear);
-      }
+      controller.loadActivitiesForMonth();
+      controller.onSetDataForCalendarView(type);
     },
     /**
      * Action triggered when teacher graded for student.
@@ -411,10 +403,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      */
     showPreviousMonth(date) {
       const controller = this;
-      let forMonth = controller.get('forMonth');
-      let forYear = controller.get('forYear');
+      controller.set('isToday', false);
       controller.set('selectedDate', date);
-      controller.loadActivitiesForMonth(forMonth, forYear);
+      controller.loadActivitiesForMonth();
       controller.loadScheduledClassActivities(date, date);
       controller.loadUnScheduledActivities();
     },
@@ -425,10 +416,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      */
     showNextMonth(date) {
       const controller = this;
-      let forMonth = controller.get('forMonth');
-      let forYear = controller.get('forYear');
+      controller.set('isToday', false);
       controller.set('selectedDate', date);
-      controller.loadActivitiesForMonth(forMonth, forYear);
+      controller.loadActivitiesForMonth();
       controller.loadScheduledClassActivities(date, date);
       controller.loadUnScheduledActivities();
     },
@@ -457,8 +447,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let classId = controller.get('classId');
       let classActivity = controller.get('selectedClassActivityForSchedule');
       let content = classActivity.get('collection');
-      let forMonth = controller.get('forMonth');
-      let forYear = controller.get('forYear');
       let isOfflineActivity =
         content.get('format') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS;
       let collectionId = content.get('id');
@@ -532,7 +520,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
                 scheduleDate,
                 scheduleEndDate
               );
-              controller.loadActivitiesForMonth(forMonth, forYear);
+              controller.loadActivitiesForMonth();
             }
             controller.fetchAssessmentsMasteryAccrual();
           }
@@ -600,40 +588,46 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     onSelectToday(date) {
       let controller = this;
       controller.send('onSelectDate', date);
-      let forMonth = controller.get('forMonth');
-      let forYear = controller.get('forYear');
-      controller.loadActivitiesForMonth(forMonth, forYear);
+      controller.loadActivitiesForMonth();
       controller.loadUnScheduledActivities();
     },
 
-    onSelectDate(date, togglePicker = true) {
+    onSelectDate(date, isToggle) {
       let controller = this;
+      let isToday = date === moment().format('YYYY-MM-DD');
+      controller.set('isToday', isToday);
       controller.set('selectedDate', date);
       controller.loadScheduledClassActivities(date, date);
       controller.loadUnScheduledActivities();
-      if (togglePicker) {
+      if (isToggle) {
         controller.send('toggleDatePicker');
       }
     },
 
-    onSelectWeek(startDate, endDate, togglePicker = true) {
+    onSelectWeek(startDate, endDate, isToggle) {
       let controller = this;
+      controller.set('selectedWeekDate', startDate);
       controller.set('startDateOfWeek', startDate);
       controller.set('endDateOfWeek', endDate);
       controller.loadScheduledClassActivities(startDate, endDate);
       controller.loadUnScheduledActivities();
-      if (togglePicker) {
+      if (isToggle) {
         controller.send('toggleDatePicker');
       }
     },
 
-    onSelectMonth(date, togglePicker = true) {
+    onSelectMonth(date, isToggle) {
       let controller = this;
       let startDate = `${date}-01`;
+      let forMonth = moment(startDate).format('MM');
+      let forYear = moment(startDate).format('YYYY');
+      controller.set('forMonth', forMonth);
+      controller.set('forYear', forYear);
       let endDate = moment(startDate).endOf('month').format('YYYY-MM-DD');
       controller.set('selectedMonth', date);
       controller.loadScheduledClassActivities(startDate, endDate);
-      if (togglePicker) {
+      controller.loadUnScheduledActivities();
+      if (isToggle) {
         controller.send('toggleDatePicker');
       }
     },
@@ -718,7 +712,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   initialize() {
     let controller = this;
     controller._super(...arguments);
-    controller.set('selectedCalendarView', DCA_CALENDAR_VIEWS.DAILY);
     controller.loadActiveOfflineActivities();
     controller.loadScheduledClassActivities(controller.get('selectedDate'));
     controller.loadCompletedOfflineActivities();
@@ -736,7 +729,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * @property {String} selectedActivityView
    * Property to handle is state of selected view for activity
    */
-  selectedCalendarView: null,
+  selectedCalendarView: DCA_CALENDAR_VIEWS.DAILY,
 
   /**
    * It maintains the state of calendar view for weekly.
@@ -812,9 +805,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * it maintains date which user selected is today or not
    * @property {Boolean} isToday
    */
-  isToday: Ember.computed('selectedDate', function() {
-    return this.get('selectedDate') === moment().format('YYYY-MM-DD');
-  }),
+  isToday: true,
   /**
    * @property {Object}
    */
@@ -1154,6 +1145,33 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Methods
+
+  onSetDataForCalendarView(type) {
+    const controller = this;
+    let forMonth = controller.get('forMonth');
+    let forYear = controller.get('forYear');
+    if (type === DCA_CALENDAR_VIEWS.DAILY) {
+      let parsedDate;
+      if (controller.get('selectedCalendarView') === DCA_CALENDAR_VIEWS.WEEKLY) {
+        parsedDate = controller.get('startDateOfWeek');
+      } else {
+        parsedDate = `${forYear}-${forMonth}-01`;
+      }
+      controller.set('selectedDate', parsedDate);
+    } else if (type === DCA_CALENDAR_VIEWS.WEEKLY) {
+      let parsedDate;
+      if (controller.get('selectedCalendarView') === DCA_CALENDAR_VIEWS.DAILY) {
+        parsedDate = controller.get('selectedDate');
+      } else {
+        parsedDate = `${forYear}-${forMonth}-01`;
+      }
+      controller.set('selectedWeekDate', parsedDate);
+    } else {
+      let parsedMonth = `${forYear}-${forMonth}`;
+      controller.set('selectedMonth', parsedMonth);
+    }
+    controller.set('selectedCalendarView', type);
+  },
 
   /**
    * Animate a schedule section for desktop
@@ -1511,9 +1529,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       });
   },
 
-  loadActivitiesForMonth(forMonth, forYear) {
+  loadActivitiesForMonth() {
     const controller = this;
     const classId = controller.get('classId');
+    const forYear = controller.get('forYear');
+    const forMonth = controller.get('forMonth');
     let startDate = `${forYear}-${forMonth}-01`;
     var endDate = moment(startDate)
       .endOf('month')

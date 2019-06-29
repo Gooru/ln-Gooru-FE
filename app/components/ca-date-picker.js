@@ -193,14 +193,6 @@ export default Ember.Component.extend({
       component.$('#ca-datepicker').datepicker('setStartDate', startDate);
     }
   }),
-
-  onChange: Ember.observer('isDaily', function() {
-    const component = this;
-    if (component.get('isDaily')) {
-      component.sendAction('onSelectDate', component.get('selectedDate'), false);
-      component.doHighlightActivity();
-    }
-  }),
   // -------------------------------------------------------------------------
   // Methods
   initialize() {
@@ -220,9 +212,12 @@ export default Ember.Component.extend({
       defaultParams.startDate = moment(startDate).format('YYYY-MM-DD');
     }
     datepickerEle.datepicker(defaultParams);
-    if (!component.get('selectedDate')) {
-      datepickerEle.datepicker('setDate', 'now');
-      component.set('selectedDate', moment().format('YYYY-MM-DD'));
+    let selectedDate = component.get('selectedDate');
+    if (selectedDate) {
+      let parsedDate = moment(selectedDate).format('YYYY-MM-DD');
+      component.set('forFirstDateOfMonth', parsedDate);
+      datepickerEle.datepicker('setDate', parsedDate);
+      component.sendAction('onSelectDate', parsedDate, false);
     }
     datepickerEle.off('changeDate').on('changeDate', function() {
       let datepicker = this;
@@ -230,8 +225,7 @@ export default Ember.Component.extend({
         .datepicker('getFormattedDate')
         .valueOf();
       component.doHighlightActivity();
-      component.set('selectedDate', selectedDate);
-      component.sendAction('onSelectDate', selectedDate);
+      component.sendAction('onSelectDate', selectedDate, true);
     });
   },
 

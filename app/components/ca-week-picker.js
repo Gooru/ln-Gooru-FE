@@ -26,6 +26,7 @@ export default Ember.Component.extend({
     return moment().format('YYYY');
   }),
 
+  selectedWeekDate: null,
   /**
    * Maintains  the value of first date of month
    * @return {String}
@@ -39,14 +40,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Observers
-
-  onChange: Ember.observer('isWeekly', function() {
-    const component = this;
-    if (component.get('isWeekly')) {
-      component.doHighlightWeek(component.get('selectedWeek'), false);
-      component.doHighlightActivity();
-    }
-  }),
   /**
    * This method  will trigger when  the property change happen in activities or highlightActivities
    */
@@ -111,18 +104,6 @@ export default Ember.Component.extend({
     }
   },
 
-  doHighlightWeek(selectedDate, togglePicker) {
-    const component = this;
-    let dateEleContainer = component.$(`#ca-weekpicker
-    .datepicker .datepicker-days .table-condensed tbody tr`);
-    dateEleContainer.removeClass('week-active');
-    let dateElement = dateEleContainer.find('td.active.day').parent();
-    dateElement.addClass('week-active');
-    let startDateOfWeek = moment(selectedDate).day(0).format('YYYY-MM-DD');
-    let endDateOfWeek = moment(selectedDate).day(6).format('YYYY-MM-DD');
-    component.sendAction('onSelectWeek', startDateOfWeek, endDateOfWeek, togglePicker);
-  },
-
   initialize() {
     const component = this;
     let weekpickerEle = component.$('#ca-weekpicker');
@@ -131,10 +112,12 @@ export default Ember.Component.extend({
       format: 'yyyy-mm-dd',
       todayHighlight: true
     };
+    let startDate = component.get('selectedWeekDate');
     weekpickerEle.datepicker(defaultParams);
-    if (!component.get('selectedWeek')) {
-      weekpickerEle.datepicker('setDate', 'now');
-      component.set('selectedWeek', moment().format('YYYY-MM-DD'));
+    if (startDate) {
+      startDate = moment(startDate).format('YYYY-MM-DD');
+      weekpickerEle.datepicker('setDate', startDate);
+      component.doHighlightWeek(startDate, false);
     }
     weekpickerEle.off('changeDate').on('changeDate', function() {
       let weekpickerEle = this;
@@ -142,9 +125,20 @@ export default Ember.Component.extend({
         .datepicker('getFormattedDate')
         .valueOf();
       component.doHighlightActivity();
-      component.set('selectedWeek', selectedDate);
-      component.doHighlightWeek(selectedDate);
+      component.doHighlightWeek(selectedDate, true);
     });
+  },
+
+  doHighlightWeek(selectedDate, isToggle) {
+    const component = this;
+    let dateEleContainer = component.$(`#ca-weekpicker
+      .datepicker .datepicker-days .table-condensed tbody tr`);
+    dateEleContainer.removeClass('week-active');
+    let dateElement = dateEleContainer.find('td.active.day').parent();
+    dateElement.addClass('week-active');
+    let startDateOfWeek = moment(selectedDate).day(0).format('YYYY-MM-DD');
+    let endDateOfWeek = moment(selectedDate).day(6).format('YYYY-MM-DD');
+    component.sendAction('onSelectWeek', startDateOfWeek, endDateOfWeek, isToggle);
   },
 
   doHighlightActivity() {

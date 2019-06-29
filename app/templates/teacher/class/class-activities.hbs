@@ -40,7 +40,8 @@
             {{#if isActive}}
               <div class="backdrop" {{action 'toggleDatePicker'}}></div>
             {{/if}}
-            {{ca-date-picker
+            {{#if isDaily}}
+              {{ca-date-picker
                 showPreviousMonth="showPreviousMonth"
                 showNextMonth="showNextMonth"
                 forMonth=forMonth
@@ -49,29 +50,30 @@
                 highlightFirstDayOfMonth=true
                 onSelectToday="onSelectToday"
                 showToday=true
-                isDaily=isDaily
+                selectedDate=selectedDate
                 activities=scheduledClassActivitiesDatewise
                 highlightActivities=true
-                class=(if isDaily  'visible' 'hidden')
               }}
-            {{ca-week-picker
-                forMonth=forWeekMonth
-                forYear=forWeekYear
+            {{else if isWeekly}}
+              {{ca-week-picker
+                forMonth=forMonth
+                forYear=forYear
                 onSelectWeek="onSelectWeek"
-                isWeekly=isWeekly
+                selectedWeekDate=selectedWeekDate
                 activities=scheduledClassActivitiesDatewise
                 highlightActivities=true
-                class=(if isWeekly  'visible' 'hidden')
                 }}
-            {{ca-month-picker
-                startYear="2018"
+            {{else}}
+              {{ca-month-picker
+                forMonth=forMonth
+                forYear=forYear
                 showCalendarView=true
                 showPreviousYear="showPreviousYear"
                 showNextYear="showNextYear"
                 onSelectMonth="onSelectMonth"
-                isMonthly=isMonthly
-                class=(if isMonthly  'visible' 'hidden')
+                selectedMonth=selectedMonth
               }}
+            {{/if}}
           </div>
         </div>
         <div class="ca-schedule-section">
