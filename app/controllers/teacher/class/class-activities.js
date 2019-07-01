@@ -1575,6 +1575,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       .get('classActivityService')
       .getScheduledClassActivitiesForDate(classId, startDate, endDate)
       .then(function(classActivities) {
+        controller.set('classActivities', Ember.A([]));
         if (classActivities && classActivities.length > 0) {
           controller.parseClassActivityData(classActivities);
         }
