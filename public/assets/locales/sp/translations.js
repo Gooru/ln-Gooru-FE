@@ -64,6 +64,10 @@ window.i18ln = {
   'common.week': 'week',
   'common.month': 'month',
   'common.for': 'for',
+  'common.add-data-choice-title': 'How do you want to enter the data?',
+  'common.take-photo':'take photo',
+  'common.upload-image':'upload image',
+  'common.by-question':'question-by-question',
   'common.first': 'First',
   'common.last': 'Last',
   'common.no-users-to-grade-oa':

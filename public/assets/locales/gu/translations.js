@@ -66,6 +66,10 @@ window.i18ln = {
   'common.for': 'for',
   'common.name': 'નામ',
   'common.user': 'વપરાશકર્તા',
+  'common.add-data-choice-title': 'How do you want to enter the data?',
+  'common.take-photo':'take photo',
+  'common.upload-image':'upload image',
+  'common.by-question':'question-by-question',
   'common.content-name': 'સામગ્રી નામ',
   'common.lastName': 'છેલ્લું નામ',
   'common.no-users-to-grade-oa':

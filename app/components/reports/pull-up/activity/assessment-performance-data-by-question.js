@@ -10,7 +10,7 @@ import { CONTENT_TYPES, SCREEN_SIZES } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
-  classNames: ['add-data', 'assessment-performance-data'],
+  classNames: ['add-data', 'assessment-performance-data-by-question'],
 
   // -------------------------------------------------------------------------
   // Serevices

@@ -426,7 +426,8 @@
 @import "components/reports/pull-up/activity/add-performance-data";
 @import "components/reports/pull-up/activity/add-student-performance-data";
 @import "components/reports/pull-up/activity/add-question-score";
-@import "components/reports/pull-up/activity/assessment-performance-data";
+@import "components/reports/pull-up/activity/assessment-performance-data-by-question";
+@import "components/reports/pull-up/activity/assessment-performance-data-by-upload-image";
 @import "components/reports/pull-up/activity/collection-performance-data";
 
 // Add course to class
@@ -496,3 +497,6 @@
 
 //Multiselect Dropdown
 @import "components/gru-user-multi-select";
+
+//Add data
+@import "components/reports/pull-up/activity/add-performance-data-choice";

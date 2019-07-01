@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -14,6 +16,10 @@ export default Ember.Component.extend({
   actions: {
     onClosePullUp() {
       this.sendAction('onClosePullUp');
+    },
+
+    onSelectOption(option) {
+      this.set('selectedOption', option.name);
     }
   },
 

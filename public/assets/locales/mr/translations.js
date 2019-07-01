@@ -61,6 +61,10 @@ window.i18ln = {
   'common.list': 'यादी',
   'self-grade.not-required': 'Student self-grading not required',
   'common.first': 'पहिला',
+  'common.add-data-choice-title': 'How do you want to enter the data?',
+  'common.take-photo':'take photo',
+  'common.upload-image':'upload image',
+  'common.by-question':'question-by-question',
   'common.last': 'शेवटचे',
   'common.no-users-to-grade-oa':
     'There are no users to grade for this Offline Activity.',

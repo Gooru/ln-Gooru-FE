@@ -1,0 +1,25 @@
+<div class="panels">
+  <div class="left-panel">
+    <div class="collection-image-container" style="background-image: url({{assessment.thumbnailUrl}})">
+      <div class="collection-standards">
+        {{#if taxonomyTags.length}}
+          {{taxonomy.gru-taxonomy-tag-list
+              tags=taxonomyTags
+              tagsVisible=1
+              isInCard=true}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="choice-title">{{t 'common.add-data-choice-title'}}</div>
+    <div class="choice-list">
+      {{#each choiceList as |choice|}}
+        <div class="row-option" {{action 'selectChoiceOption' choice}}>
+          <div class="icon">{{gru-icon name=choice.icon}}</div>
+          <div class="title">{{t (concat 'common.' choice.name)}}</div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>

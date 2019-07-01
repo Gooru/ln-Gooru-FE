@@ -1,0 +1,17 @@
+<div class="panels">
+  <div class="left-panel">
+    <div class="collection-image-container" style="background-image: url({{assessment.thumbnailUrl}})">
+      <div class="collection-standards">
+        {{#if taxonomyTags.length}}
+          {{taxonomy.gru-taxonomy-tag-list
+              tags=taxonomyTags
+              tagsVisible=1
+              isInCard=true}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+  <div class="right-panel">
+
+  </div>
+</div>
