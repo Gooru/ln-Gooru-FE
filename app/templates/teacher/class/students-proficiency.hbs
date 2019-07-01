@@ -1,4 +1,15 @@
 <div class="students-proficiency-container">
+  <div class="report-selector">
+    <div class="selected-report-type" {{action "onToggleReportTypeContainer"}}>
+      <span class="active-report-text">{{activeReport.text}}</span>
+      <span class="toggle-icon">{{gru-icon name="arrow_drop_down"}}</span>
+    </div>
+    <div class="report-types-container">
+      {{#each reportTypes as |reportType|}}
+        <div class="report-type {{if (eq activeReport.value reportType.value) 'active-report'}}" {{action "onSelectReport" reportType}}>{{reportType.text}}</div>
+      {{/each}}
+    </div>
+  </div>
   {{#if isShowCompetencyReport}}
     {{#unless domainLevelSummary}}
       {{#if isDataNotAvailable}}
@@ -17,7 +28,6 @@
           numberOfStudents=numberOfStudents
           subjectFramework=subjectFramework
           onSelectDomain="onSelectDomain"
-          onClickClassView="onClickClassView"
           onSelectStudent="onSelectStudent"
         }}
       {{else if isShowDomainCompetencyReport}}
@@ -41,6 +51,10 @@
           onClickCourseCompetencyView="onClickCourseCompetencyView"
           onSelectStudent="onSelectStudent"
         }}
+
+      {{else if isShowClassWeeklyReport}}
+        {{proficiency.inspect.student-weekly-report
+          class=class}}
       {{/if}}
     {{/unless}}
   {{else}}

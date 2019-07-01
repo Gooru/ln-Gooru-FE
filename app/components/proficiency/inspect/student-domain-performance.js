@@ -46,12 +46,6 @@ export default Ember.Component.extend({
       component.sendAction('onSelectDomain', domain);
     },
 
-    //Action triggered when click class view
-    onClickClassView() {
-      let component = this;
-      component.sendAction('onClickClassView');
-    },
-
     //Action triggered when select a student
     onSelectStudent(student) {
       let component = this;
