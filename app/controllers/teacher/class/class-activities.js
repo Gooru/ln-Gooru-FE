@@ -1168,6 +1168,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('selectedWeekDate', parsedDate);
     } else {
       let parsedMonth = `${forYear}-${forMonth}`;
+      controller.set('selectedDate', null);
       controller.set('selectedMonth', parsedMonth);
     }
     controller.set('selectedCalendarView', type);
