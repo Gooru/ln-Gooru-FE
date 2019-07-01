@@ -39,5 +39,14 @@ export default Ember.Route.extend({
     controller.set('courses', model.courses);
     controller.set('libraries', model.libraries);
     controller.set('session', model.session);
+    this.resetFilter();
+  },
+
+  resetFilter() {
+    const router = this;
+    const userId = router.get('session.userId');
+    if (userId) {
+      window.localStorage.removeItem(`${userId}_search_filter`);
+    }
   }
 });
