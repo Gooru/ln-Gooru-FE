@@ -83,6 +83,23 @@ export default Ember.Controller.extend({
      **/
     onClosePullUp() {
       this.set('isShowProficiencyPullup', false);
+    },
+
+    onSelectReport(report) {
+      const controller = this;
+      controller.set('activeReport', report);
+      controller.set('isShowDomainCompetencyReport', false);
+      controller
+        .get('reportTypes')
+        .map(reportType => controller.set(`${reportType.prop}`, false));
+      controller.set(`${report.prop}`, true);
+      controller.actions.onToggleReportTypeContainer();
+    },
+
+    onToggleReportTypeContainer() {
+      $(
+        '.students-proficiency-container .report-selector .report-types-container'
+      ).slideToggle();
     }
   },
 
@@ -320,7 +337,9 @@ export default Ember.Controller.extend({
     controller.set('isShowCourseCompetencyReport', false);
     controller.set('isShowDomainCompetencyReport', false);
     controller.set('isShowClassProficiencyReport', true);
+    controller.set('isShowClassWeeklyReport', false);
     controller.set('studentDomainPerformance', Ember.A([]));
+    controller.set('activeReport', controller.get('reportTypes').objectAt(0));
   },
 
   // -------------------------------------------------------------------------
@@ -410,6 +429,31 @@ export default Ember.Controller.extend({
     let classMembers = controller.get('classMembers');
     return course && subjectCode && classMembers.length;
   }),
+
+  activeReport: Ember.computed(function() {
+    const controller = this;
+    return controller.get('reportTypes').objectAt(0);
+  }),
+
+  reportTypes: Ember.A([
+    Ember.Object.create({
+      text: 'Class Proficiency Report',
+      value: 'class-proficiency',
+      prop: 'isShowClassProficiencyReport'
+    }),
+    Ember.Object.create({
+      text: 'Course Competency Report',
+      value: 'course-proficiency',
+      prop: 'isShowCourseCompetencyReport'
+    }),
+    Ember.Object.create({
+      text: 'Class Weekly Report',
+      value: 'class-weekly',
+      prop: 'isShowClassWeeklyReport'
+    })
+  ]),
+
+  isShowClassWeeklyReport: false,
 
   /**
    * @property {Boolean} isShowClassProficiencyReport
