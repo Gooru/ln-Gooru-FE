@@ -68,9 +68,6 @@ window.i18ln = {
   'common.lastName': 'Lastname',
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
-  'common.day': 'day',
-  'common.week': 'week',
-  'common.month': 'month',
   'common.more': 'more',
   'common.apply-filter': 'apply filter',
   'library-search-placeholder': 'Search for anything within the library…',
@@ -553,9 +550,10 @@ window.i18ln = {
   'common.no-results-message':
     'Check your spelling. We all make mistakes!<br/>Go broader and remove some filters.<br/> Or try searching for a similar word instead.',
   'common.no-more-attempts': 'No more attempts',
-  'common.no-dca-student': 'Your teacher has not yet assigned any collections or assessments to Class Activities.',
-  'common.no-dca-teacher': 'No current activities. Add  Class Activities from the Course Map or Content Catalog.',
-  'common.no-content-for-week': 'No class activities scheduled for the selected period',
+  'common.no-dca-student':
+    'Your teacher has not yet assigned any collections or assessments to Class Activities.',
+  'common.no-dca-teacher':
+    'No current activities. Add  Class Activities from the Course Map or Content Catalog.',
   'common.notScored': 'Unscored',
   'common.notStarted': 'Not started',
   'common.not-added': 'Not Added',
@@ -2673,4 +2671,4 @@ window.i18ln = {
   'class.add-teachers': 'Add teachers',
   'class.add-co-teachers': 'Add Co-teachers'
 };
-//export default window.i18ln;
+export default window.i18ln;

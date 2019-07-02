@@ -218,17 +218,6 @@ module.exports = function(defaults) {
   app.import('bower_components/KaTeX/dist/katex.min.js');
   app.import('bower_components/KaTeX/dist/contrib/auto-render.min.js');
 
-  //Documentation URL: https://harvesthq.github.io/chosen/
-  app.import({
-    development: 'bower_components/chosen/chosen.jquery.js',
-    production: 'bower_components/chosen/chosen.jquery.min.js'
-  });
-
-  app.import({
-    development: 'bower_components/chosen/chosen.css',
-    production: 'bower_components/chosen/chosen.min.css'
-  });
-
   app.import({
     development: 'vendor/mathquill/mathquill.js',
     production: 'vendor/mathquill/mathquill.min.js'
