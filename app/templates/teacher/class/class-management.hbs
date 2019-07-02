@@ -81,20 +81,10 @@
                   {{t 'class.add-co-teachers'}}
                 </div>
               </div>
-              <div class="add-collaborator-container">
-                <div class="body-container">
-                <div class="search-user-container">
-                  {{gru-user-multi-select
-                    users = teacherUserProfiles
-                    onSelectUserItem = "onSelectUserItem"
-                    onRemoveUserItem = "onRemoveUserItem"
-                    onSearchUser = "onSearchUser"}}
-                </div>
-                </div>
-                <div class="footer-container">
-                  <div class="action-btn cancel-btn" {{action "onToggleAddCollaborator"}}>{{t 'common.cancel'}}</div>
-                  <div class="action-btn done-btn" {{action "onAddCollaborators"}}>{{t 'common.done'}}</div>
-                </div>
+              <div class="add-collaborator-panel">
+                {{teacher.class.gru-add-collaborator
+                  onAddCollaborators = "onAddCollaborators"
+                  onToggleAddCollaborator = "onToggleAddCollaborator"}}
               </div>
             </div>
           </div>
