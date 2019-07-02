@@ -70,6 +70,7 @@ window.i18ln = {
   'common.user': 'उपयोगकर्ता',
   'common.content-name': 'सामग्री का नाम',
   'common.for': 'for',
+  'common.no-content-for-week': 'No class activities scheduled for the selected period',
   'common.lastName': 'अंतिम नाम',
   'common.firstName': 'प्रथम नाम',
   'common.filter-by': 'फ़िल्टर',

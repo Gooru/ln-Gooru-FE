@@ -73,6 +73,7 @@ window.i18ln = {
   'common.filter-by': 'ద్వారా వడపోత',
   'common.more': 'మరింత',
   'common.tasks': 'tasks',
+  'common.no-content-for-week': 'No class activities scheduled for the selected period',
   'common.no-search-result':
     'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.apply-filter': 'apply filter',

@@ -72,6 +72,7 @@ window.i18ln = {
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',
+  'common.no-content-for-week': 'No class activities scheduled for the selected period',
   'common.user': 'ଉପଭୋକ୍ତା',
   'common.content-name': 'ବିଷୟ ନାମ',
   'common.lastName': 'ଅନ୍ତିମ ନାମ',

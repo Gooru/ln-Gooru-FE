@@ -65,6 +65,7 @@ window.i18ln = {
   'common.last': 'છેલ્લા',
   'common.for': 'for',
   'common.name': 'નામ',
+  'common.no-content-for-week': 'No class activities scheduled for the selected period',
   'common.user': 'વપરાશકર્તા',
   'common.content-name': 'સામગ્રી નામ',
   'common.lastName': 'છેલ્લું નામ',

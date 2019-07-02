@@ -469,6 +469,7 @@ window.i18ln = {
   'common.no-more-attempts': 'No more attempts',
   'common.no-dca-student': 'Your teacher has not yet assigned any collections or assessments to Class Activities.',
   'common.no-dca-teacher': 'No current activities. Add  Class Activities from the Course Map or Content Catalog.',
+  'common.no-content-for-week': 'No class activities scheduled for the selected period',
   'common.notScored': 'Unscored',
   'common.notStarted': 'Not started',
   'common.not-added': 'Not Added',

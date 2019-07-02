@@ -68,6 +68,7 @@ window.i18ln = {
   'common.user': 'वापरणारी व्यक्ती',
   'common.content-name': 'आशयाचे नाव',
   'common.lastName': 'आडनाव',
+  'common.no-content-for-week': 'No class activities scheduled for the selected period',
   'common.firstName': 'पहिले नाव',
   'common.filter-by': 'द्वारे फिल्टर करा',
   'common.more': 'अधिक',
