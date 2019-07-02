@@ -61,9 +61,17 @@
           &.in-valid {
             color: $red-400;
           }
-          &:focus {
+          &:focus,
+          &:active {
             outline: none;
             border: none;
+            &::placeholder {
+              display: none;
+            }
+          }
+          &::placeholder {
+            font-size: 13px;
+            opacity: 0.7;
           }
         }
       }
