@@ -146,15 +146,22 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
     let whichLocalSet = this.getLocalStorage().getItem(
       this.device_language_key
     );
-    whichLocalSet = whichLocalSet || lang;
+
+    //Prefer param over local set language use case coming from welcome page with language selection should set that language
+    whichLocalSet = lang || whichLocalSet;
+    if (lang) {
+      route.replaceWith('');
+    }
     route
       .get('profileService')
       .loadScript(whichLocalSet)
       .then(() => {
         route.get('i18n').addTranslations(whichLocalSet, window.i18ln);
+        route.setupDefaultLanguage(whichLocalSet);
+        route
+          .getLocalStorage()
+          .setItem(this.device_language_key, whichLocalSet);
       });
-
-    this.setupDefaultLanguage(whichLocalSet);
 
     route.setupTheme(themeId);
 
