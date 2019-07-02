@@ -68,9 +68,6 @@ window.i18ln = {
   'common.lastName': 'Lastname',
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
-  'common.day': 'day',
-  'common.week': 'week',
-  'common.month': 'month',
   'common.more': 'more',
   'common.apply-filter': 'apply filter',
   'library-search-placeholder': 'Search for anything within the library…',
@@ -2674,4 +2671,4 @@ window.i18ln = {
   'class.add-teachers': 'Add teachers',
   'class.add-co-teachers': 'Add Co-teachers'
 };
-//export default window.i18ln;
+export default window.i18ln;

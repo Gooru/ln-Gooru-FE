@@ -96,6 +96,7 @@ export default Ember.Route.extend({
     controller.set('month', null);
     controller.set('year', null);
     controller.set('selectedDate', null);
+    controller.set('selectedCalendarView', null);
     controller.set('isShowAddData', false);
   }
 });

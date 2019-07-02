@@ -62,6 +62,9 @@ window.i18ln = {
   'common.offline-activity': 'offline activity',
   'common.grid': 'ഗ്രിഡ്',
   'common.list': 'പട്ടിക',
+  'common.day': 'day',
+  'common.week': 'week',
+  'common.month': 'month',
   'common.answer-this-activity':
     'Answer this rubric to complete your activity.',
   'common.first': 'ആദ്യം',

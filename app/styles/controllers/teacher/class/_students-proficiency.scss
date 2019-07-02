@@ -1,4 +1,5 @@
 .teacher_class_students-proficiency {
+  background-color: #36424b;
   @media only screen and (max-width: $screen-xs) {
     .app-container {
       padding-top: 102px;
@@ -7,11 +8,63 @@
   .teacher.class {
     padding: 0;
     .students-proficiency-container {
-      padding-bottom: 55px;
       .no-data {
         font-size: 15px;
         text-align: center;
         margin-top: 30px;
+      }
+      .report-selector {
+        position: relative;
+        width: 50%;
+        margin: auto;
+        margin-bottom: 15px;
+        .selected-report-type {
+          height: 50px;
+          text-align: center;
+          font-size: 15px;
+          color: $white;
+          text-transform: uppercase;
+          box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+          line-height: 50px;
+          cursor: pointer;
+          display: grid;
+          grid-template-columns: auto auto;
+          justify-content: center;
+          .toggle-icon {
+            height: 50px;
+            i {
+              line-height: 50px;
+            }
+          }
+        }
+        .report-types-container {
+          display: none;
+          position: absolute;
+          top: 50px;
+          box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.4);
+          background-color: $white;
+          left: 0;
+          right: 0;
+          text-align: center;
+          font-size: 15px;
+          text-transform: uppercase;
+          z-index: 9;
+          .report-type {
+            height: 50px;
+            line-height: 50px;
+            color: #36424b;
+            cursor: pointer;
+            border-bottom: 1px solid $white;
+            &:hover,
+            &.active-report {
+              background-color: #36424b;
+              color: $white;
+            }
+          }
+        }
+        @media screena and (max-width: $screen-md) {
+          width: 100%;
+        }
       }
     }
   }

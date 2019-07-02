@@ -12,13 +12,6 @@ export default Ember.Component.extend({
     onSelectStudentCard(student) {
       let component = this;
       component.sendAction('onSelectStudent', student);
-    },
-
-    // Action triggered when click class view
-
-    onClickClassView() {
-      let component = this;
-      component.sendAction('onClickCourseCompetencyView');
     }
   },
 

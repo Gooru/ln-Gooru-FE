@@ -22,9 +22,15 @@ export default Ember.Component.extend({
 
   /**
    * Maintains the value which of year activities displaying
-   * @type {Integer}
+   * @type {Moment}
    */
   forYear: moment(),
+
+  /**
+   * Maintains the selected month by user
+   * @type {String}
+   */
+  selectedMonth: moment().format('MM'),
   /**
    * It maintains list of months to be display for unschedule contents
    * @return {Array}
@@ -63,12 +69,6 @@ export default Ember.Component.extend({
     return monthsList;
   }),
 
-  onChange: Ember.observer('isMonthly', function() {
-    const component = this;
-    if (component.get('isMonthly')) {
-      component.sendAction('onSelectMonth', component.get('selectedMonth'), false);
-    }
-  }),
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -79,13 +79,13 @@ export default Ember.Component.extend({
 
     showPreviousYear() {
       const component = this;
-      let previousYear = moment(component.get('forYear')).subtract(1, 'years');
+      let previousYear = moment(component.get('forYear')).subtract(1, 'years').format('YYYY');
       component.set('forYear', previousYear);
     },
 
     showNextYear() {
       const component = this;
-      let nextYear = moment(component.get('forYear')).add(1, 'years');
+      let nextYear = moment(component.get('forYear')).add(1, 'years').format('YYYY');
       component.set('forYear', nextYear);
     }
   },
@@ -106,18 +106,26 @@ export default Ember.Component.extend({
       minViewMode: 'months'
     };
     monthPickerEle.datepicker(defaultParams);
-    if (!component.get('selectedMonth')) {
-      monthPickerEle.datepicker('setDate', 'now');
-      component.set('selectedMonth', moment().format('YYYY-MM'));
+    let selectedMonth = component.get('selectedMonth');
+    const showCalendarView = component.get('showCalendarView');
+    if (showCalendarView && selectedMonth) {
+      let forMonth = moment(selectedMonth).format('MM');
+      let forYear = component.get('forYear');
+      monthPickerEle.datepicker('setDate', forMonth);
+      let monthAndyear = `${forYear}-${forMonth}`;
+      component.sendAction('onSelectMonth', monthAndyear, false);
     }
     monthPickerEle.off('changeDate').on('changeDate', function() {
       let monthpicker = this;
       let selectedMonth = Ember.$(monthpicker)
         .datepicker('getFormattedDate')
         .valueOf();
-      let monthAndyear = `${component.get('forYear').format('YYYY')}-${selectedMonth}`;
-      component.set('selectedMonth', monthAndyear);
-      component.sendAction('onSelectMonth', monthAndyear);
+      let forYear = component.get('forYear');
+      if (!moment(forYear).isValid()) {
+        forYear = moment(forYear).format('YYYY');
+      }
+      let monthAndyear = `${forYear}-${selectedMonth}`;
+      component.sendAction('onSelectMonth', monthAndyear, true);
     });
   }
 });

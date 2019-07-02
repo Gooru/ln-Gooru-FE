@@ -138,116 +138,113 @@
     }
 
     .ca-datepicker-schedule-container {
-      position: absolute;
-      top: 0 !important;
       width: 100%;
-      left: 0 !important;
       height: 100%;
 
       .ca-daterange-picker {
-        .date-info,
-        .header-section,
-        .submit-btn {
-          display: grid;
-        }
+        .ca-datepicker-body {
+          transform: none;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
 
-        .calendar {
-          display: block;
-
-          .start-date-picker {
-            display: none;
-
-            &.selected {
-              display: block;
-            }
+          .date-info,
+          .header-section,
+          .submit-btn {
+            display: grid;
           }
 
-          .end-date-picker {
-            display: none;
+          .calendar {
+            display: block;
 
-            &.selected {
-              display: block;
+            .start-date-picker {
+              display: none;
+
+              &.selected {
+                display: block;
+              }
             }
-          }
 
-          .ca-date-picker-container {
-            .ca-datepicker-container {
-              #ca-datepicker {
-                grid-row-start: 1;
-                padding: 10px 20px 20px;
+            .end-date-picker {
+              display: none;
 
-                .datepicker-inline {
-                  .datepicker-days {
-                    .table-condensed {
-                      thead {
-                        tr:nth-child(2) {
-                          display: grid;
-                          width: 100%;
-                          justify-content: center;
-                          grid-template-columns: repeat(7, 1fr);
+              &.selected {
+                display: block;
+              }
+            }
 
-                          th.dow {
-                            height: 40px;
-                            width: 40px;
-                            justify-self: center;
+            .ca-date-picker-container {
+              .ca-datepicker-container {
+                #ca-datepicker {
+                  grid-row-start: 1;
+                  padding: 10px 20px 20px;
+
+                  .datepicker-inline {
+                    .datepicker-days {
+                      .table-condensed {
+                        thead {
+                          tr:nth-child(2) {
+                            display: grid;
+                            width: 100%;
+                            justify-content: center;
+                            grid-template-columns: repeat(7, 1fr);
+
+                            th.dow {
+                              height: 40px;
+                              width: 40px;
+                              justify-self: center;
+                            }
                           }
                         }
-                      }
 
-                      tbody {
-                        tr {
-                          display: grid;
-                          width: 100%;
-                          justify-content: center;
-                          grid-template-columns: repeat(7, 1fr);
+                        tbody {
+                          tr {
+                            display: grid;
+                            width: 100%;
+                            justify-content: center;
+                            grid-template-columns: repeat(7, 1fr);
 
-                          td {
-                            height: 40px;
-                            width: 40px;
-                            justify-self: center;
+                            td {
+                              height: 40px;
+                              width: 40px;
+                              justify-self: center;
 
-                            &.has-activities:before {
-                              top: 25px;
-                              display: flex;
-                              margin: auto;
-                              left: 0;
-                            }
-
-                            &.active {
-                              background-color: #d2e3fc;
-                              background-image: -webkit-linear-gradient(
-                                top,
-                                #d2e3fc,
-                                #d2e3fc
-                              );
-                              border-radius: 50%;
-                              display: flex;
-                              margin: auto;
-                              align-items: center;
-                              justify-content: center;
-                              color: #3486f7;
-
-                              &:before {
-                                content: none;
+                              &.has-activities:before {
+                                top: 25px;
+                                display: flex;
+                                margin: auto;
+                                left: 0;
                               }
-                            }
 
-                            &.today {
-                              background-color: #3486f7;
-                              background-image: -webkit-linear-gradient(
-                                top,
-                                #3486f7,
-                                #3486f7
-                              );
-                              border-radius: 50%;
-                              display: flex;
-                              margin: auto;
-                              align-items: center;
-                              justify-content: center;
-                              color: #fff;
+                              &.active {
+                                background-color: #d2e3fc;
+                                background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
+                                border-radius: 50%;
+                                display: flex;
+                                margin: auto;
+                                align-items: center;
+                                justify-content: center;
+                                color: #3486f7;
 
-                              &:before {
-                                content: none;
+                                &:before {
+                                  content: none;
+                                }
+                              }
+
+                              &.today {
+                                background-color: #3486f7;
+                                background-image: -webkit-linear-gradient(top, #3486f7, #3486f7);
+                                border-radius: 50%;
+                                display: flex;
+                                margin: auto;
+                                align-items: center;
+                                justify-content: center;
+                                color: #fff;
+
+                                &:before {
+                                  content: none;
+                                }
                               }
                             }
                           }
