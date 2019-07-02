@@ -15,6 +15,9 @@
       }
       .report-selector {
         position: relative;
+        width: 50%;
+        margin: auto;
+        margin-bottom: 15px;
         .selected-report-type {
           height: 50px;
           text-align: center;
@@ -58,6 +61,9 @@
               color: $white;
             }
           }
+        }
+        @media screena and (max-width: $screen-md) {
+          width: 100%;
         }
       }
     }

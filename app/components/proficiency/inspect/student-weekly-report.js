@@ -13,16 +13,40 @@ export default Ember.Component.extend({
   // Events
   didInsertElement() {
     const component = this;
-    component.set('isLoading', true);
-    component
-      .fetchStudentsWeeklySummaryReport()
-      .then(function(summaryReportData) {
-        component.parseStudentsWeeklySummaryReportData(summaryReportData);
-      });
+    component.loadSummaryReportData();
+  },
+
+  // -------------------------------------------------------------------------
+  // Actions
+  actions: {
+    onToggleReportPeriod(component = this) {
+      component.$('.report-period-selector .report-periods').slideToggle();
+    },
+
+    onSelectReportPeriod(reportPeriod) {
+      const component = this;
+      let isWeeklyReport = reportPeriod.get('value') !== 'till-now';
+      if (reportPeriod.get('type') === 'weekly') {
+        component.set(
+          'activeWeek',
+          reportPeriod.get('value') === 'current-week' ? 0 : 1
+        );
+      }
+      component.set('activeReportPeriod', reportPeriod);
+      component.loadSummaryReportData(isWeeklyReport);
+      component.actions.onToggleReportPeriod(component);
+    }
   },
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {Number} activeWeek
+   * Property for number of earlier week data to be populated
+   * Default 0 => Current Week
+   */
+  activeWeek: 0,
 
   /**
    * @property {UUID} classId
@@ -33,8 +57,8 @@ export default Ember.Component.extend({
    * @property {Date} startDate
    * Property for summary report start date
    */
-  startDate: Ember.computed(function() {
-    const today = moment();
+  startDate: Ember.computed('activeWeek', function() {
+    const today = moment().subtract(this.get('activeWeek'), 'weeks');
     const startDate = today.startOf('week').format('YYYY-MM-DD');
     return startDate;
   }),
@@ -43,14 +67,57 @@ export default Ember.Component.extend({
    * @property {Date} endDate
    * Property for summary report end date
    */
-  endDate: Ember.computed(function() {
-    const today = moment();
+  endDate: Ember.computed('activeWeek', function() {
+    const today = moment().subtract(this.get('activeWeek'), 'weeks');
     const endDate = today.endOf('week').format('YYYY-MM-DD');
     return endDate;
   }),
 
+  activeReportPeriod: Ember.computed('reportPeriods', function() {
+    return this.get('reportPeriods').objectAt(0);
+  }),
+
+  /**
+   * @property {Array} reportPeriods
+   */
+  reportPeriods: Ember.A([
+    Ember.Object.create({
+      text: 'This Week',
+      value: 'current-week',
+      type: 'weekly'
+    }),
+    Ember.Object.create({
+      text: 'Previous Week',
+      value: 'previous-week',
+      type: 'weekly'
+    }),
+    Ember.Object.create({
+      text: 'Beginning Till Now',
+      value: 'till-now',
+      type: 'complete'
+    })
+  ]),
+
   // -------------------------------------------------------------------------
   // Methods
+
+  /**
+   * @function loadSummaryReportData
+   * Method to load summary report data
+   */
+  loadSummaryReportData(isWeekly = true) {
+    const component = this;
+    component.set('isLoading', true);
+    return Ember.RSVP
+      .hash({
+        summaryReportData: isWeekly
+          ? component.fetchStudentsWeeklySummaryReport()
+          : component.fetchStudentsClassSummaryReport()
+      })
+      .then(({ summaryReportData }) => {
+        component.parseStudentsWeeklySummaryReportData(summaryReportData);
+      });
+  },
 
   /**
    * @function parseStudentsWeeklySummaryReportData
@@ -108,7 +175,7 @@ export default Ember.Component.extend({
     if (!component.isDestroyed) {
       component.set(
         'studentsSummaryReportData',
-        parsedStudentsSummaryReportData
+        parsedStudentsSummaryReportData.sortBy('student.lastName')
       );
       component.set('isLoading', false);
     }
@@ -130,5 +197,15 @@ export default Ember.Component.extend({
     return component
       .get('reportService')
       .fetchStudentsWeeklySummaryReport(classId, dataParam);
+  },
+
+  /**
+   * @function fetchStudentsClassSummaryReport
+   * Method to fetch students class summary report
+   */
+  fetchStudentsClassSummaryReport() {
+    const component = this;
+    const classId = component.get('classId');
+    return component.get('reportService').fetchStudentsSummaryReport(classId);
   }
 });

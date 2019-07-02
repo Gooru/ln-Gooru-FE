@@ -1,4 +1,17 @@
 <div class="weekly-report-container">
+  <div class="report-period-selector">
+    <div class="active-period" {{action "onToggleReportPeriod"}}>
+      <span class="report-period-text">{{activeReportPeriod.text}}</span>
+      <span class="toggle-icon">{{gru-icon name="arrow_drop_down"}}</span>
+    </div>
+    <div class="report-periods">
+      {{#each reportPeriods as |reportPeriod|}}
+        <div class="report-period {{if (eq activeReportPeriod.value reportPeriod.value) 'active-report-period'}}" {{action "onSelectReportPeriod" reportPeriod}}>
+          {{reportPeriod.text}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
   <div class="header-container">
     <div class="header-left">
       Name
@@ -14,9 +27,9 @@
       <div class="timespent-label">
         <div class="label-text">Timespent</div>
         <div class="sub-header">
-          <div class="total-header">Total</div>
           <div class="collection-header">Collections</div>
           <div class="assessment-header">Assessments</div>
+          <div class="total-header">Total</div>
         </div>
       </div>
       <div class="badge-earned-label label-text">
@@ -51,15 +64,6 @@
             <div class="inprogress-competencies">
               <span class="competency-status-1 competency-status"></span> <span class="competency-count">{{reportData.weeklyReportData.inprogressCompetencies}}</span>
             </div>
-            <div class="total-timespent">
-              <span class="time-spent">
-                {{#if reportData.weeklyReportData.totalTimespent}}
-                  {{format-time reportData.weeklyReportData.totalTimespent}}
-                {{else}}
-                  --
-                {{/if}}
-              </span>
-            </div>
             <div class="collection-timespent">
               <span class="time-spent">
                 {{#if reportData.weeklyReportData.collectionTimespent}}
@@ -73,6 +77,15 @@
               <span class="time-spent">
                 {{#if reportData.weeklyReportData.assessmentTimespent}}
                   {{format-time reportData.weeklyReportData.assessmentTimespent}}
+                {{else}}
+                  --
+                {{/if}}
+              </span>
+            </div>
+            <div class="total-timespent">
+              <span class="time-spent">
+                {{#if reportData.weeklyReportData.totalTimespent}}
+                  {{format-time reportData.weeklyReportData.totalTimespent}}
                 {{else}}
                   --
                 {{/if}}

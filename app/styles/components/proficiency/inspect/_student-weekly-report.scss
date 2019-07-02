@@ -2,14 +2,67 @@
   padding: 30px;
   width: 100%;
   height: 100%;
+  padding-top: 15px;
   .weekly-report-container {
     background-color: $white;
     border-radius: 10px;
+    .report-period-selector {
+      display: grid;
+      justify-content: right;
+      position: relative;
+      padding-right: 15px;
+      .active-period {
+        height: 50px;
+        line-height: 50px;
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: right;
+        align-items: center;
+        cursor: pointer;
+        .report-period-text {
+          font-size: 14px;
+          font-weight: bold;
+          color: #35424a;
+        }
+        .toggle-icon {
+          height: 50px;
+          i {
+            line-height: 50px;
+          }
+        }
+      }
+      .report-periods {
+        display: none;
+        position: absolute;
+        top: 50px;
+        background-color: $white;
+        z-index: 9;
+        right: 15px;
+        box-shadow: -1px 0 10px 1px rgba(0, 0, 0, 0.4);
+        width: 150px;
+        .report-period {
+          cursor: pointer;
+          height: 35px;
+          line-height: 35px;
+          font-size: 14px;
+          font-weight: bold;
+          color: #35424a;
+          padding-left: 15px;
+          border-bottom: 1px solid $white;
+          &.active-report-period,
+          &:hover {
+            background-color: #36424b;
+            color: $white;
+          }
+        }
+      }
+    }
     .header-container {
       display: grid;
-      grid-template-columns: 300px auto;
+      grid-template-columns: 300px 1fr;
       justify-content: left;
       border-bottom: 1px solid #f2f2f2;
+      border-top: 1px solid #f2f2f2;
       .header-left {
         font-size: 13px;
         font-weight: bold;
