@@ -430,11 +430,17 @@ export default Ember.Controller.extend({
     return course && subjectCode && classMembers.length;
   }),
 
+  /**
+   * @property {Object} activeReport
+   */
   activeReport: Ember.computed(function() {
     const controller = this;
     return controller.get('reportTypes').objectAt(0);
   }),
 
+  /**
+   * @property {Array} reportTypes
+   */
   reportTypes: Ember.A([
     Ember.Object.create({
       text: 'Class Proficiency Report',
@@ -442,7 +448,7 @@ export default Ember.Controller.extend({
       prop: 'isShowClassProficiencyReport'
     }),
     Ember.Object.create({
-      text: 'Course Competency Report',
+      text: 'Domain Competency Report',
       value: 'course-proficiency',
       prop: 'isShowCourseCompetencyReport'
     }),
@@ -453,6 +459,9 @@ export default Ember.Controller.extend({
     })
   ]),
 
+  /**
+   * @property {Boolean} isShowClassWeeklyReport
+   */
   isShowClassWeeklyReport: false,
 
   /**
