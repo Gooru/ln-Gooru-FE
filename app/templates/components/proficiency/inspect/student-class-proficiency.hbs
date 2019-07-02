@@ -1,13 +1,4 @@
 <div class="class-proficiency-container">
-  <div class="header-container">
-    <div class="proficiency-info">
-      <div class="subject">{{t 'teacher-landing.class.students-tab.proficiency'}}</div>
-      <div class="students-count">
-        <div class="count-container">
-          {{numberOfStudents}} {{t 'common.students'}} | {{domainCoverageCount.length}} {{t 'common.domains'}} , {{totalCompetencies}} {{t 'common.competencies'}}</div>
-      </div>
-    </div>
-  </div>
   <div class="body-container">
     <div class="proficiency-cards-container">
       {{#each studentsDomainPerformance as |studentDomainPerformance studentSeq|}}
