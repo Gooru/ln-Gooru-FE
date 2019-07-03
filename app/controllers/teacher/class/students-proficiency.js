@@ -17,6 +17,8 @@ export default Ember.Controller.extend({
    */
   classService: Ember.inject.service('api-sdk/class'),
 
+  i18n: Ember.inject.service(),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -376,6 +378,11 @@ export default Ember.Controller.extend({
   }),
 
   /**
+   * @property {Boolean} isPremiumClass
+   */
+  isPremiumClass: Ember.computed.alias('classController.isPremiumClass'),
+
+  /**
    * @property {subjectCode}
    */
   subjectCode: Ember.computed('course', function() {
@@ -441,23 +448,31 @@ export default Ember.Controller.extend({
   /**
    * @property {Array} reportTypes
    */
-  reportTypes: Ember.A([
-    Ember.Object.create({
-      text: 'Class Proficiency Report',
-      value: 'class-proficiency',
-      prop: 'isShowClassProficiencyReport'
-    }),
-    Ember.Object.create({
-      text: 'Domain Competency Report',
-      value: 'course-proficiency',
-      prop: 'isShowCourseCompetencyReport'
-    }),
-    Ember.Object.create({
-      text: 'Class Weekly Report',
-      value: 'class-weekly',
-      prop: 'isShowClassWeeklyReport'
-    })
-  ]),
+  reportTypes: Ember.computed('isPremiumClass', function() {
+    const controller = this;
+    let reportTypes = Ember.A([
+      Ember.Object.create({
+        text: controller.get('i18n').t('report.class-proficiency-report'),
+        value: 'class-proficiency',
+        prop: 'isShowClassProficiencyReport'
+      }),
+      Ember.Object.create({
+        text: controller.get('i18n').t('report.domain-proficiency-report'),
+        value: 'course-proficiency',
+        prop: 'isShowCourseCompetencyReport'
+      })
+    ]);
+    if (controller.get('isPremiumClass')) {
+      reportTypes.pushObject(
+        Ember.Object.create({
+          text: controller.get('i18n').t('report.class-weekly-report'),
+          value: 'class-weekly',
+          prop: 'isShowClassWeeklyReport'
+        })
+      );
+    }
+    return reportTypes;
+  }),
 
   /**
    * @property {Boolean} isShowClassWeeklyReport

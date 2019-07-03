@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { getDomainCode } from 'gooru-web/utils/taxonomy';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -8,6 +9,8 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Dependencies
   reportService: Ember.inject.service('api-sdk/report'),
+
+  i18n: Ember.inject.service(),
 
   // -------------------------------------------------------------------------
   // Events
@@ -19,10 +22,12 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
+    //Action triggered when toggle report period
     onToggleReportPeriod(component = this) {
       component.$('.report-period-selector .report-periods').slideToggle();
     },
 
+    //Action triggered when select a reprot period
     onSelectReportPeriod(reportPeriod) {
       const component = this;
       let isWeeklyReport = reportPeriod.get('value') !== 'till-now';
@@ -34,7 +39,22 @@ export default Ember.Component.extend({
       }
       component.set('activeReportPeriod', reportPeriod);
       component.loadSummaryReportData(isWeeklyReport);
+      component.resetActiveStudentData();
       component.actions.onToggleReportPeriod(component);
+    },
+
+    //Action triggered when select a student
+    onSelectStudent(reportData) {
+      const component = this;
+      component.parseStudentCompetencies(reportData);
+      component.resetActiveStudentData();
+      reportData.set('active', true);
+      component.set('isShowStudentCompetencies', true);
+    },
+
+    //Action triggered when remove a student
+    onRemoveActiveStudentData() {
+      this.resetActiveStudentData();
     }
   },
 
@@ -73,6 +93,9 @@ export default Ember.Component.extend({
     return endDate;
   }),
 
+  /**
+   * @property {Object} activeReportPeriod
+   */
   activeReportPeriod: Ember.computed('reportPeriods', function() {
     return this.get('reportPeriods').objectAt(0);
   }),
@@ -80,23 +103,26 @@ export default Ember.Component.extend({
   /**
    * @property {Array} reportPeriods
    */
-  reportPeriods: Ember.A([
-    Ember.Object.create({
-      text: 'This Week',
-      value: 'current-week',
-      type: 'weekly'
-    }),
-    Ember.Object.create({
-      text: 'Previous Week',
-      value: 'previous-week',
-      type: 'weekly'
-    }),
-    Ember.Object.create({
-      text: 'Beginning Till Now',
-      value: 'till-now',
-      type: 'complete'
-    })
-  ]),
+  reportPeriods: Ember.computed(function() {
+    const component = this;
+    return Ember.A([
+      Ember.Object.create({
+        text: component.get('i18n').t('this-week'),
+        value: 'current-week',
+        type: 'weekly'
+      }),
+      Ember.Object.create({
+        text: component.get('i18n').t('previous-week'),
+        value: 'previous-week',
+        type: 'weekly'
+      }),
+      Ember.Object.create({
+        text: component.get('i18n').t('beginning-till-now'),
+        value: 'till-now',
+        type: 'complete'
+      })
+    ]);
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -154,14 +180,19 @@ export default Ember.Component.extend({
         let assessmentSuggestion = suggestionContents.get('assessmentData');
         let collectionSuggestion = suggestionContents.get('collectionData');
         let weeklyReportData = Ember.Object.create({
-          masteredCompetencies:
+          masteredCompetencies: masteredCompetencies.concat(
+            completedCompetencies
+          ),
+          masteredCompetenciesCount:
             masteredCompetencies.length + completedCompetencies.length,
-          inprogressCompetencies: inprogressCompetencies.length,
+          inprogressCompetencies: inprogressCompetencies,
+          inprogressCompetenciesCount: inprogressCompetencies.length,
           totalTimespent:
             collectionInteraction.get('totalTimespent') +
             assessmentInteration.get('totalTimespent'),
           collectionTimespent: collectionInteraction.get('totalTimespent'),
           assessmentTimespent: assessmentInteration.get('totalTimespent'),
+          isNotStarted: assessmentInteration.get('isNotStarted'),
           badgeEarned: masteredCompetencies.length,
           averageScore: assessmentInteration.get('averageScore'),
           suggestionTaken:
@@ -179,6 +210,80 @@ export default Ember.Component.extend({
       );
       component.set('isLoading', false);
     }
+  },
+
+  /**
+   * @function parseStudentCompetencies
+   * Method to parse student performed competencies
+   */
+  parseStudentCompetencies(studentReportData) {
+    const component = this;
+    let studentDomainCompetencies = Ember.A([]);
+    const weeklyReportData = studentReportData.get('weeklyReportData');
+    let masteredCompetencies = weeklyReportData.get('masteredCompetencies');
+    let inprogressCompetencies = weeklyReportData.get('inprogressCompetencies');
+    let studentCompetencies = masteredCompetencies.concat(
+      inprogressCompetencies
+    );
+    let domainCompetencies = component.get(
+      'domainLevelSummary.domainCompetencies'
+    );
+    studentCompetencies.map(competency => {
+      let domainCode = getDomainCode(competency.id);
+      let domainCompetencyData = domainCompetencies.findBy(
+        'domainCode',
+        domainCode
+      );
+      let competencies = Ember.A([]);
+      let domainData = Ember.Object.create({
+        domainCode: null,
+        domainName: null,
+        competencies
+      });
+      if (domainCompetencyData) {
+        domainData.set('domainCode', domainCode);
+        domainData.set('domainName', domainCompetencyData.domainName);
+        let competencyData = domainCompetencyData.competencies.findBy(
+          'competencyCode',
+          competency.id
+        );
+        competencies.pushObject(
+          Ember.Object.create({
+            status: competency.status,
+            competencyName: competencyData.competencyName,
+            competencyStudentDesc: competencyData.competencyStudentDesc,
+            competencyCode: competencyData.competencyCode,
+            displayCode: competency.code
+          })
+        );
+      }
+      let parsedDomainData = studentDomainCompetencies.findBy(
+        'domainCode',
+        domainCode
+      );
+      if (parsedDomainData) {
+        let parsedDomainCompetencies = parsedDomainData.get('competencies');
+        parsedDomainData.set(
+          'competencies',
+          competencies.concat(parsedDomainCompetencies)
+        );
+      } else {
+        studentDomainCompetencies.pushObject(domainData);
+      }
+    });
+    component.set('studentDomainCompetencies', studentDomainCompetencies);
+  },
+
+  /**
+   * @func resetActiveStudentData
+   * Method to reset active student
+   */
+  resetActiveStudentData() {
+    const component = this;
+    component
+      .get('studentsSummaryReportData')
+      .map(reportData => reportData.set('active', false));
+    component.set('isShowStudentCompetencies', false);
   },
 
   /**

@@ -94,10 +94,22 @@ export default DS.JSONAPISerializer.extend(ConfigurationMixin, {
     let serializedSummaryData = {};
     if (summaryData) {
       serializedSummaryData = Ember.Object.create({
-        masteredCompetencies: summaryData.mastered,
-        completedCompetencies: summaryData.completed,
-        inferredCompetencies: summaryData.inferred,
-        inprogressCompetencies: summaryData.inprogress,
+        masteredCompetencies: serializer.serializeCompetencies(
+          summaryData.mastered,
+          5
+        ),
+        completedCompetencies: serializer.serializeCompetencies(
+          summaryData.completed,
+          4
+        ),
+        inferredCompetencies: serializer.serializeCompetencies(
+          summaryData.inferred,
+          3
+        ),
+        inprogressCompetencies: serializer.serializeCompetencies(
+          summaryData.inprogress,
+          1
+        ),
         interactionData: Ember.Object.create({
           assessmentData: serializer.serializeInteraction(
             summaryData.interactions
@@ -159,5 +171,15 @@ export default DS.JSONAPISerializer.extend(ConfigurationMixin, {
       serializedInteracitonData.set('isNotStarted', false);
     }
     return serializedInteracitonData;
+  },
+
+  serializeCompetencies(competencies, status) {
+    return competencies.map(competency => {
+      return Ember.Object.create({
+        id: competency.id,
+        code: competency.code,
+        status
+      });
+    });
   }
 });

@@ -68,7 +68,8 @@ window.i18ln = {
   'common.user': 'वापरणारी व्यक्ती',
   'common.content-name': 'आशयाचे नाव',
   'common.lastName': 'आडनाव',
-  'common.no-content-for-week': 'No class activities scheduled for the selected period',
+  'common.no-content-for-week':
+    'No class activities scheduled for the selected period',
   'common.firstName': 'पहिले नाव',
   'common.filter-by': 'द्वारे फिल्टर करा',
   'common.more': 'अधिक',
@@ -2644,5 +2645,14 @@ window.i18ln = {
   'oa.info.duration-hrs': 'Expected time to complete',
   'oa.info.hrs': ' hrs',
   'class.add-teachers': 'Add teachers',
-  'class.add-co-teachers': 'Add Co-teachers'
+  'class.add-co-teachers': 'Add Co-teachers',
+  'common.gained': 'Gained',
+  'badges-earned': 'Badges Earned',
+  'suggestion-taken': 'Suggestions Taken',
+  'this-week': 'This Week',
+  'previous-week': 'Previous Week',
+  'beginning-till-now': 'Beginning Till Now',
+  'report.class-proficiency-report': 'Class Proficiency Report',
+  'report.domain-proficiency-report': 'Domain Competency Report',
+  'report.class-weekly-report': 'Class Weekly Report'
 };
