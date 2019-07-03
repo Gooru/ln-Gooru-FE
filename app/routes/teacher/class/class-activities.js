@@ -93,10 +93,8 @@ export default Ember.Route.extend({
     controller.set('activeOfflineActivities', Ember.A([]));
     controller.set('completedOfflineActivities', Ember.A([]));
     controller.set('unScheduledClassActivities', Ember.A([]));
-    controller.set('month', null);
-    controller.set('year', null);
-    controller.set('selectedDate', null);
-    controller.set('selectedCalendarView', null);
+    controller.set('selectedDate', moment().format('YYYY-MM-DD'));
+    controller.set('selectedCalendarView', 'daily');
     controller.set('isShowAddData', false);
   }
 });

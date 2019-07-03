@@ -55,6 +55,7 @@ window.i18ln = {
   'errors.url': '{{বর্ণনা}} একটি বৈধ ইউআরএল হতে হবে',
   'common.relevance': 'প্রাসঙ্গিকতা',
   'common.engagement': 'প্রবৃত্তি',
+  'common.no-content-for-week': 'No class activities scheduled for the selected period',
   'common.efficacy': 'কার্যক্ষমতা',
   'common.grid': 'গ্রিড',
   'common.list': 'তালিকা',

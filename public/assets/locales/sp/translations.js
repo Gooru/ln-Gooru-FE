@@ -84,6 +84,7 @@ window.i18ln = {
   'common.avg-score': 'Avg Score',
   'common.tasks': 'tasks',
   'common.frq': 'FRQ',
+  'common.no-content-for-week': 'No class activities scheduled for the selected period',
   'common.answer-this-activity':
     'Answer this rubric to complete your activity.',
   'common.schedule': 'Schedule',

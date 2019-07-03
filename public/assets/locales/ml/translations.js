@@ -65,6 +65,7 @@ window.i18ln = {
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',
+  'common.no-content-for-week': 'No class activities scheduled for the selected period',
   'common.answer-this-activity':
     'Answer this rubric to complete your activity.',
   'common.first': 'ആദ്യം',

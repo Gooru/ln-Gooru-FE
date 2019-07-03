@@ -58,6 +58,7 @@ window.i18ln = {
   'common.no-users-to-grade-oa': 'There are no users to grade for this Offline Activity.',
   'common.efficacy': 'பலாபலன்',
   'common.grid': 'கட்டம்',
+  'common.no-content-for-week': 'No class activities scheduled for the selected period',
   'common.list': 'பட்டியலில்',
   'common.for': 'for',
   'self-grade.not-required': 'Student self-grading not required',

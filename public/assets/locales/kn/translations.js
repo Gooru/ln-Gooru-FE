@@ -70,6 +70,7 @@ window.i18ln = {
   'common.content-name': 'Content Name',
   'common.lastName': 'Lastname',
   'common.firstName': 'Firstname',
+  'common.no-content-for-week': 'No class activities scheduled for the selected period',
   'common.filter-by': 'Filter By',
   'common.no-users-to-grade-oa':
     'There are no users to grade for this Offline Activity.',

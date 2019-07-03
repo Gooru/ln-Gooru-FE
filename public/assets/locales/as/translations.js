@@ -71,6 +71,7 @@ window.i18ln = {
   'common.lastName': 'শেষ নাম',
   'common.firstName': 'প্ৰথম নাম',
   'common.tasks': 'tasks',
+  'common.no-content-for-week': 'No class activities scheduled for the selected period',
   'common.filter-by': 'ইয়াৰ দ্বাৰা ফিল্টাৰ কৰা হৈছে',
   'common.more': 'আৰু ',
   'common.day': 'day',

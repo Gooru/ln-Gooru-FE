@@ -62,6 +62,7 @@ window.i18ln = {
   'common.offline-activity': 'offline activity',
   'common.first': 'ਪਹਿਲਾ',
   'common.day': 'day',
+  'common.no-content-for-week': 'No class activities scheduled for the selected period',
   'common.week': 'week',
   'common.month': 'month',
   'common.last': 'ਆਖਰੀ',
