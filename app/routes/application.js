@@ -160,9 +160,6 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
         route
           .getLocalStorage()
           .setItem(route.device_language_key, whichLocalSet);
-        if (params.lang) {
-          route.replaceWith('');
-        }
       });
 
     route.setupTheme(themeId);
