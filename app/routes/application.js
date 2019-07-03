@@ -130,7 +130,8 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
     const route = this;
     const currentSession = route.get('session.data.authenticated');
     const themeId = params.themeId || Env.themes.default;
-    const lang = params.lang || EndPointsConfig.getLanguageSettingdefaultLang();
+    const lang = params.lang;
+    const defaultLanguage = EndPointsConfig.getLanguageSettingdefaultLang();
 
     let myClasses = null;
     var profilePromise = null;
@@ -146,15 +147,23 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
     let whichLocalSet = this.getLocalStorage().getItem(
       this.device_language_key
     );
-    whichLocalSet = whichLocalSet || lang;
+
+    //Prefer param over local set language, use case: coming from welcome page with language selection should set that language
+    whichLocalSet = lang || whichLocalSet || defaultLanguage;
+
     route
       .get('profileService')
       .loadScript(whichLocalSet)
       .then(() => {
         route.get('i18n').addTranslations(whichLocalSet, window.i18ln);
+        route.setupDefaultLanguage(whichLocalSet);
+        route
+          .getLocalStorage()
+          .setItem(route.device_language_key, whichLocalSet);
+        if (params.lang) {
+          route.replaceWith('');
+        }
       });
-
-    this.setupDefaultLanguage(whichLocalSet);
 
     route.setupTheme(themeId);
 
