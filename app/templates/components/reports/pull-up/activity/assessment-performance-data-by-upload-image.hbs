@@ -10,8 +10,43 @@
         {{/if}}
       </div>
     </div>
+    {{#if selectedFiles}}
+      <div class="selected-image-container">
+        {{#each selectedFiles as |selectedFile|}}
+          <div class="selected-image-panel">
+            <div class="image-preview">
+              <img src="{{selectedFile.file.data}}" />
+            </div>
+            <div class="image-name ellipsis">
+              <span class="ellipsis">{{selectedFile.name}}</span>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+    <div class="file-picker-container">
+      {{#file-picker
+        accept=validMimeType
+        preview=false
+        dropzone=false
+        fileLoaded=(action 'prepareForSubmission')
+        readAs="readAsFile"
+        errors=filePickerErrors
+      }}
+        <div class="file-picker-panel">
+          <i class="icon"></i>
+          <span class="title">Choose a file or drag it here</span>
+        </div>
+      {{/file-picker}}
+    </div>
   </div>
   <div class="right-panel">
-
+    <div class="preview-panel">
+      {{#if selectedFiles}}
+        {{gru-image-preview previewImages=selectedFiles}}
+      {{else}}
+        <div class="prev-message">no preview available</div>
+      {{/if}}
+    </div>
   </div>
 </div>

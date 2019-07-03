@@ -1,0 +1,32 @@
+<div class="image-preview-container">
+  <div id="image-preview-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
+    <div class="carousel-inner">
+      {{#each previewImages as |image index|}}
+        <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
+          <div class="image-container">
+            <img src="{{image.file.data}}" />
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <!-- Left and right controls -->
+    <a class="left carousel-control" data-slide="prev" {{action 'onClickPrev'}}>
+      {{gru-icon name="arrow_left"}}
+    </a>
+    <a class="right carousel-control" data-slide="next" {{action 'onClickNext'}}>
+      {{gru-icon name="arrow_right"}}
+    </a>
+  </div>
+  <div class="footer-container">
+    <div class="preview-slides">
+      {{#each previewImages as |image index|}}
+        <div class="slide item-{{index}}">
+          <img src="{{image.file.data}}" />
+        </div>
+      {{/each}}
+    </div>
+    <div class="action">
+      <button type="button" class="submit-btn">Confirm & Continue</button>
+    </div>
+  </div>
+</div>
