@@ -55,6 +55,9 @@
       .email-value-container {
         height: 35px;
         margin-bottom: 8px;
+        display: grid;
+        grid-template-columns: 1fr 30px;
+        column-gap: 10px;
         .email-value {
           height: inherit;
           width: 100%;
@@ -73,6 +76,27 @@
             font-size: 13px;
             opacity: 0.7;
           }
+        }
+        .validate-icon {
+          height: 35px;
+          text-align: center;
+          position: relative;
+          opacity: 0.7;
+          i {
+            position: absolute;
+            bottom: 4px;
+            font-size: 20px;
+            left: 6px;
+          }
+          &.enabled {
+            opacity: 1;
+            cursor: pointer;
+          }
+        }
+        .error-msg {
+          grid-column-start: 1;
+          grid-column-end: 2;
+          color: $red-400;
         }
       }
     }
