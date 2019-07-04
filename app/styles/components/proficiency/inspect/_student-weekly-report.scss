@@ -164,6 +164,19 @@
     .body-container {
       display: grid;
       grid-template-columns: 300px 1fr;
+      height: calc(100vh - 260px);
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        height: 6px;
+        width: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $gray-light;
+        border: 1px solid $gray-light;
+        border-radius: 5px;
+      }
       .body-left {
         .student-info-container {
           height: 45px;
@@ -309,6 +322,16 @@
         max-height: 390px;
         overflow-y: auto;
         display: grid;
+        &::-webkit-scrollbar {
+          height: 6px;
+          width: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: $gray-light;
+          border: 1px solid $gray-light;
+          border-radius: 5px;
+        }
         .domain-name {
           font-size: 13px;
           color: #000000;

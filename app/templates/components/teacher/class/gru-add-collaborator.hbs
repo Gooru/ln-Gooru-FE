@@ -15,7 +15,7 @@
         class=(concat 'email-value' (if inValidEmail ' in-valid'))
         placeholder = (t 'class.add-teachers')
       }}
-      <span class="validate-icon {{if isEnableValidateIcon 'enabled'}}" {{action "onValidateEmail"}}>{{gru-icon name="check_circle_outline"}}</span>
+      <span class="validate-icon {{if isEnableValidateIcon 'enabled'}}" {{action "onValidateEmail"}}>{{gru-icon name="add_circle"}}</span>
       {{#if inValidEmail}}
         <span class="error-msg">{{t 'forgot-password.error-email-not-exists'}}</span>
       {{/if}}
