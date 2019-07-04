@@ -37,6 +37,17 @@ export default Ember.Component.extend({
     //Action triggered when click on cancel
     onToggleAddCollaborator() {
       this.sendAction('onToggleAddCollaborator');
+    },
+
+    //Action triggered when click on tick icon which is next to input box
+    onValidateEmail() {
+      const component = this;
+      const enteredUserEmail = component.get('userEmail');
+      const isEnteredValidEmailId = isValidEmailId(enteredUserEmail);
+      if (isEnteredValidEmailId) {
+        component.doValidateTeacherUser(enteredUserEmail);
+      }
+      component.set('inValidEmail', !isEnteredValidEmailId);
     }
   },
 
@@ -73,6 +84,16 @@ export default Ember.Component.extend({
    * Property for entered user email
    */
   userEmail: null,
+
+  /**
+   * @property {Boolean} isEnableValidateIcon
+   * Property to enable validation icon which is next to input box
+   */
+  isEnableValidateIcon: Ember.computed('userEmail', function() {
+    const component = this;
+    const userEmail = component.get('userEmail');
+    return userEmail !== null && userEmail !== '';
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
