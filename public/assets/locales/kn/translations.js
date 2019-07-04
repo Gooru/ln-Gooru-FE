@@ -2706,5 +2706,6 @@ window.i18ln = {
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
-  'report.class-weekly-report': 'Class Weekly Report'
+  'report.class-weekly-report': 'Class Weekly Report',
+  'no-teacher-found': 'No teacher with that email id found!'
 };
