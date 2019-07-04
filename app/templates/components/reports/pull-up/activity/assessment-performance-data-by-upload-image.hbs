@@ -12,15 +12,34 @@
     </div>
     {{#if selectedFiles}}
       <div class="selected-image-container">
-        {{#each selectedFiles as |selectedFile|}}
-          <div class="selected-image-panel">
+        {{#each selectedFiles as |selectedFile index|}}
+          <div class="selected-image-panel {{if (eq currentPreviewIndex index) 'active'}}">
             <div class="image-preview">
-              <img src="{{selectedFile.file.data}}" />
+              <img src="{{selectedFile.url}}" />
             </div>
             <div class="image-name ellipsis">
               <span class="ellipsis">{{selectedFile.name}}</span>
+              {{#if selectedFile.isError}}
+                <div class="error-bar"></div>
+              {{/if}}
+            </div>
+            <div class="status-icon">
+              {{#unless selectedFile.isError}}
+                {{gru-icon name="check_circle"}}
+              {{else}}
+                {{gru-icon name="info"}}
+              {{/unless}}
             </div>
           </div>
+          {{#if selectedFile.isError}}
+            <div class="error-panel">
+              <div class="message">There was an error reading the class code on this image. Re-upload?</div>
+              <div class="actions">
+                <button type="button" class="submit-btn" {{action 'onReUpload'}}>Re-Upload</button>
+                <button type="button" class="ignore-btn" {{action 'onIgnore'}}>Ignore & Continue</button>
+              </div>
+            </div>
+          {{/if}}
         {{/each}}
       </div>
     {{/if}}
@@ -43,7 +62,7 @@
   <div class="right-panel">
     <div class="preview-panel">
       {{#if selectedFiles}}
-        {{gru-image-preview previewImages=selectedFiles}}
+        {{gru-image-preview previewImages=selectedFiles currentPreviewIndex=currentPreviewIndex isDisableButton=isDisableButton onConfirm="onConfirm"}}
       {{else}}
         <div class="prev-message">no preview available</div>
       {{/if}}

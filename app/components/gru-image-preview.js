@@ -16,27 +16,42 @@ export default Ember.Component.extend({
 
   actions: {
     onClickPrev() {
-      let component = this;
+      const component = this;
       component
         .$(
           '.image-preview-container #image-preview-carousel-wrapper .carousel-control'
         )
         .addClass('in-active');
+      let selectedElement = component.$(
+        '.image-preview-container #image-preview-carousel-wrapper .item.active'
+      );
+      let currentIndex = selectedElement.data('item-index');
+      component.set('currentPreviewIndex', currentIndex);
       component
         .$('.image-preview-container #image-preview-carousel-wrapper')
         .carousel('prev');
     },
 
     onClickNext() {
-      let component = this;
+      const component = this;
       component
         .$(
           '.image-preview-container #image-preview-carousel-wrapper .carousel-control'
         )
         .addClass('in-active');
+      let selectedElement = component.$(
+        '.image-preview-container #image-preview-carousel-wrapper .item.active'
+      );
+      let currentIndex = selectedElement.data('item-index');
+      component.set('currentPreviewIndex', currentIndex);
       component
         .$('.image-preview-container #image-preview-carousel-wrapper')
         .carousel('next');
+    },
+
+    onConfirm() {
+      const component = this;
+      component.sendAction('onConfirm');
     }
   }
 });

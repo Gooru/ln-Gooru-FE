@@ -4,7 +4,7 @@
       {{#each previewImages as |image index|}}
         <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
           <div class="image-container">
-            <img src="{{image.file.data}}" />
+            <img src="{{image.url}}" />
           </div>
         </div>
       {{/each}}
@@ -20,13 +20,13 @@
   <div class="footer-container">
     <div class="preview-slides">
       {{#each previewImages as |image index|}}
-        <div class="slide item-{{index}}">
-          <img src="{{image.file.data}}" />
+        <div class="slide item-{{index}} {{if (eq currentPreviewIndex index) 'active'}}">
+          <img src="{{image.url}}" />
         </div>
       {{/each}}
     </div>
     <div class="action">
-      <button type="button" class="submit-btn">Confirm & Continue</button>
+      <button type="button" class="submit-btn {{if isDisableButton 'disable-event'}}" {{action 'onConfirm'}}>Confirm & Continue</button>
     </div>
   </div>
 </div>
