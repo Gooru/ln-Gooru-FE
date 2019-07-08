@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 
@@ -14,7 +14,7 @@ moduleForAcceptance('Acceptance | gru-tour', {
   }
 });
 
-test('Course Map Layout', function(assert) {
+skip('Course Map Layout', function(assert) {
   visit('/class/class-for-pochita-as-teacher/overview?location=');
   andThen(function() {
     const $component = find('.gru-tour button');

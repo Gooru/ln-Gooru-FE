@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -16,7 +16,7 @@ moduleForAcceptance('Acceptance | Edit Course', {
   }
 });
 
-test('Remove Assessment from Lesson', function(assert) {
+skip('Remove Assessment from Lesson', function(assert) {
   visit('/content/courses/edit/course-123');
 
   andThen(function() {
@@ -65,7 +65,7 @@ test('Remove Assessment from Lesson', function(assert) {
   });
 });
 
-test('Edit course information', function(assert) {
+skip('Edit course information', function(assert) {
   visit('/content/courses/edit/course-123');
 
   andThen(function() {
@@ -114,7 +114,7 @@ test('Edit course information', function(assert) {
   });
 });
 
-test('Click share button and check clipboard functionality', function(assert) {
+skip('Click share button and check clipboard functionality', function(assert) {
   visit('/content/courses/edit/course-123');
 
   andThen(function() {
@@ -137,7 +137,7 @@ test('Click share button and check clipboard functionality', function(assert) {
   });
 });
 
-test('Delete unit', function(assert) {
+skip('Delete unit', function(assert) {
   visit('/content/courses/edit/course-123');
 
   andThen(function() {
@@ -179,7 +179,7 @@ test('Delete unit', function(assert) {
   });
 });
 
-test('Delete lesson', function(assert) {
+skip('Delete lesson', function(assert) {
   visit('/content/courses/edit/course-123');
 
   andThen(function() {
@@ -229,7 +229,7 @@ test('Delete lesson', function(assert) {
   });
 });
 
-test('Delete collection', function(assert) {
+skip('Delete collection', function(assert) {
   visit('/content/courses/edit/course-123');
 
   andThen(function() {
@@ -284,7 +284,7 @@ test('Delete collection', function(assert) {
   });
 });
 
-test('Delete assessment', function(assert) {
+skip('Delete assessment', function(assert) {
   visit('/content/courses/edit/course-123');
 
   andThen(function() {
@@ -338,7 +338,7 @@ test('Delete assessment', function(assert) {
   });
 });
 
-test('Delete resource', function(assert) {
+skip('Delete resource', function(assert) {
   visit(
     '/content/collections/edit/all-resource-types-collection-id?courseId=course-123'
   );
@@ -370,7 +370,7 @@ test('Delete resource', function(assert) {
   });
 });
 
-test('Delete question from collection', function(assert) {
+skip('Delete question from collection', function(assert) {
   visit(
     '/content/collections/edit/all-resource-types-collection-id?courseId=course-123'
   );
@@ -399,7 +399,7 @@ test('Delete question from collection', function(assert) {
   });
 });
 
-test('Delete question from assessment', function(assert) {
+skip('Delete question from assessment', function(assert) {
   visit(
     '/content/assessments/edit/all-question-types-assessment-id?courseId=course-123'
   );

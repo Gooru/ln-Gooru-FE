@@ -81,7 +81,7 @@ moduleForComponent(
   }
 );
 
-test('it has header and main sections', function(assert) {
+skip('it has header and main sections', function(assert) {
   var ResourceValidation = Resource.extend(CreateResourceValidations);
   var resource = ResourceValidation.create(
     Ember.getOwner(this).ownerInjection(),

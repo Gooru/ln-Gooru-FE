@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | features', {
   }
 });
 
-test('Verifying header.enable feature default value', function(assert) {
+skip('Verifying header.enable feature default value', function(assert) {
   visit('/student-home');
   andThen(function() {
     assert.equal(currentURL(), '/student-home');
@@ -25,7 +25,7 @@ test('Verifying header.enable feature default value', function(assert) {
   });
 });
 
-test('Verifying collections.player.reactions feature default value', function(assert) {
+skip('Verifying collections.player.reactions feature default value', function(assert) {
   visit('/player/all-resource-types-collection-id?type=collection');
 
   andThen(function() {
