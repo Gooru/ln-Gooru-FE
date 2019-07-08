@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | reports/student-collection-analytics', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   assert.expect(5);
   visit(
     '/reports/student-collection-analytics?courseId=course-123&unitId=first-unit-id&lessonId=first-lesson-id&classId=class-for-pochita-as-teacher&collectionId=all-question-types-assessment-id&role=student&type=assessment'
@@ -48,7 +48,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('Layout-from IL', function(assert) {
+skip('Layout-from IL', function(assert) {
   assert.expect(5);
   visit(
     '/reports/student-collection-analytics?courseId=course-123&unitId=first-unit-id&lessonId=first-lesson-id&collectionId=all-question-types-assessment-id&role=student&type=assessment'

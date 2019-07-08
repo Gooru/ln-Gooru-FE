@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 
@@ -14,7 +14,7 @@ moduleForAcceptance('Acceptance | Edit Rubric', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/content/rubric/edit/123');
 
   andThen(function() {
@@ -29,7 +29,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('Cancel edit', function(assert) {
+skip('Cancel edit', function(assert) {
   visit('/content/rubric/edit/123?editing=true');
 
   andThen(function() {
@@ -44,7 +44,7 @@ test('Cancel edit', function(assert) {
   });
 });
 
-test('Rubric edit', function(assert) {
+skip('Rubric edit', function(assert) {
   visit('/content/rubric/edit/123?editing=true');
 
   andThen(function() {
@@ -68,7 +68,7 @@ test('Rubric edit', function(assert) {
   });
 });
 
-test('Preview edit', function(assert) {
+skip('Preview edit', function(assert) {
   visit('/content/rubric/edit/123');
 
   andThen(function() {
@@ -126,7 +126,7 @@ test('Preview edit', function(assert) {
   });
 });
 
-test('Add a category and go to preview before save', function(assert) {
+skip('Add a category and go to preview before save', function(assert) {
   visit('/content/rubric/edit/123?editing=true');
 
   andThen(function() {
@@ -162,7 +162,7 @@ test('Add a category and go to preview before save', function(assert) {
   });
 });
 
-test('Share rubric', function(assert) {
+skip('Share rubric', function(assert) {
   visit('/content/rubric/edit/123');
 
   andThen(function() {
@@ -185,7 +185,7 @@ test('Share rubric', function(assert) {
   });
 });
 
-test('Create category without level input', function(assert) {
+skip('Create category without level input', function(assert) {
   visit('/content/rubric/edit/123?editing=true');
 
   andThen(function() {

@@ -1,11 +1,6 @@
-import {
-  test,
-  skip
-} from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
-import {
-  authenticateSession
-} from 'gooru-web/tests/helpers/ember-simple-auth';
+import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
 
 moduleForAcceptance('Acceptance | add from course map', {
@@ -20,7 +15,7 @@ moduleForAcceptance('Acceptance | add from course map', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/add-from-course-map/class-for-pochita-as-teacher');
 
   andThen(function() {

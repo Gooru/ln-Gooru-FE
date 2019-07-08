@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | student-open-ended-summary', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit(
     '/reports/student-open-ended-summary?classId=class-id&collectionId=first-assessment-id&courseId=course-id&unitId=first-unit-id&lessonId=first-lesson-id&questionId=question-id&collectionType=assessment&studentId=profile-id-1&sessionId=90ee529d-c47a-42f0-915a-c7f0a144b7af'
   );

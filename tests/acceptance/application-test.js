@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -16,7 +16,7 @@ moduleForAcceptance('Acceptance | application', {
   }
 });
 
-test('Theme support - no theme', function(assert) {
+skip('Theme support - no theme', function(assert) {
   visit('/');
 
   andThen(function() {
@@ -31,7 +31,7 @@ test('Theme support - no theme', function(assert) {
   });
 });
 
-test('Theme support - Having translations and styles url', function(assert) {
+skip('Theme support - Having translations and styles url', function(assert) {
   visit('/?themeId=bergen');
 
   andThen(function() {
@@ -55,7 +55,7 @@ test('Theme support - Having translations and styles url', function(assert) {
   });
 });
 
-test('Legacy uri collection-play with no content id', function(assert) {
+skip('Legacy uri collection-play with no content id', function(assert) {
   visit('/#collection-play&id=all-resource-types-collection-id');
   andThen(function() {
     assert.equal(
@@ -65,7 +65,7 @@ test('Legacy uri collection-play with no content id', function(assert) {
   });
 });
 
-test('Legacy uri collection-play with content id', function(assert) {
+skip('Legacy uri collection-play with content id', function(assert) {
   visit(
     '/#collection-play&id=all-resource-types-collection-id&cid=f86f874c-efc9-4100-9cf7-55eb86ec95ae'
   );
@@ -77,7 +77,7 @@ test('Legacy uri collection-play with content id', function(assert) {
   });
 });
 
-test('Legacy uri assessment-play with no content id', function(assert) {
+skip('Legacy uri assessment-play with no content id', function(assert) {
   visit('/#assessment-play&id=all-question-types-assessment-id');
   andThen(function() {
     assert.equal(
@@ -87,7 +87,7 @@ test('Legacy uri assessment-play with no content id', function(assert) {
   });
 });
 
-test('Legacy uri assessment-play with content id', function(assert) {
+skip('Legacy uri assessment-play with content id', function(assert) {
   visit(
     '/#assessment-play&id=all-question-types-assessment-id&cid=f86f874c-efc9-4100-9cf7-55eb86ec95ae'
   );
@@ -99,7 +99,7 @@ test('Legacy uri assessment-play with content id', function(assert) {
   });
 });
 
-test('Legacy uri resource-play', function(assert) {
+skip('Legacy uri resource-play', function(assert) {
   visit('/#resource-play&id=all-question-types-assessment-id');
   andThen(function() {
     assert.equal(
@@ -109,7 +109,7 @@ test('Legacy uri resource-play', function(assert) {
   });
 });
 
-test('Legacy uri profile', function(assert) {
+skip('Legacy uri profile', function(assert) {
   authenticateSession(this.application, {
     isAnonymous: false,
     token: 'token-value',
@@ -124,7 +124,7 @@ test('Legacy uri profile', function(assert) {
   });
 });
 
-test('Trying the google sign in url', function(assert) {
+skip('Trying the google sign in url', function(assert) {
   authenticateSession(this.application, {
     isAnonymous: false,
     token: 'token-value',

@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | teacher class', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/teacher/class/class-for-pochita-as-teacher');
 
   andThen(function() {
@@ -50,7 +50,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('Click on back link', function(assert) {
+skip('Click on back link', function(assert) {
   visit('/teacher/class/class-for-pochita-as-teacher');
   andThen(function() {
     assert.equal(currentURL(), '/teacher/class/class-for-pochita-as-teacher');

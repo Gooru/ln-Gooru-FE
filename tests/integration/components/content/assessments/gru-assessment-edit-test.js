@@ -1,4 +1,4 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent, test, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import Assessment from 'gooru-web/models/content/assessment';
@@ -44,7 +44,7 @@ moduleForComponent(
   }
 );
 
-test('it has header and main sections', function(assert) {
+skip('it has header and main sections', function(assert) {
   var assessment = Assessment.create(Ember.getOwner(this).ownerInjection(), {
     title: 'Assessment Title'
   });
@@ -95,7 +95,7 @@ test('it has header and main sections', function(assert) {
   }, 300);
 });
 
-test('Header when comes from content builder', function(assert) {
+skip('Header when comes from content builder', function(assert) {
   var assessment = Assessment.create(Ember.getOwner(this).ownerInjection(), {
     title: 'Assessment Title'
   });

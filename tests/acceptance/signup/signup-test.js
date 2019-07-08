@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 
@@ -138,9 +138,7 @@ moduleForAcceptance('Acceptance | SignUp', {
 //  });
 //});
 
-test('it shows error messages if username or email are taken', function(
-  assert
-) {
+skip('it shows error messages if username or email are taken', function(assert) {
   visit('/sign-up');
 
   andThen(function() {
@@ -163,9 +161,18 @@ test('it shows error messages if username or email are taken', function(
     $signUpContainer.find('.gru-input input').val('testtest');
     $emailField.find('input').val('test@gooru.org');
     $usernameField.find('input').val('testtest');
-    $signUpContainer.find('.selectpicker.months').val('01').change();
-    $signUpContainer.find('.selectpicker.days').val('01').change();
-    $signUpContainer.find('.selectpicker.years').val('2000').change();
+    $signUpContainer
+      .find('.selectpicker.months')
+      .val('01')
+      .change();
+    $signUpContainer
+      .find('.selectpicker.days')
+      .val('01')
+      .change();
+    $signUpContainer
+      .find('.selectpicker.years')
+      .val('2000')
+      .change();
     $signUpContainer.find('div.sign-up-button button').click();
 
     return wait().then(function() {

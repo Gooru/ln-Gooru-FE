@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | Manage Goals page', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/goals/manage');
 
   andThen(function() {
@@ -53,9 +53,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('It shows an error message if the Goal field is left blank', function(
-  assert
-) {
+skip('It shows an error message if the Goal field is left blank', function(assert) {
   visit('/goals/manage');
 
   andThen(function() {
@@ -103,9 +101,7 @@ test('It shows an error message if the Goal field is left blank', function(
   });
 });
 
-test('It shows an error message if the Start Date field is left blank', function(
-  assert
-) {
+skip('It shows an error message if the Start Date field is left blank', function(assert) {
   visit('/goals/manage');
 
   andThen(function() {
@@ -140,9 +136,7 @@ test('It shows an error message if the Start Date field is left blank', function
   });
 });
 
-test('It shows an error message if the End Date field is left blank', function(
-  assert
-) {
+skip('It shows an error message if the End Date field is left blank', function(assert) {
   visit('/goals/manage');
 
   andThen(function() {
@@ -177,9 +171,7 @@ test('It shows an error message if the End Date field is left blank', function(
   });
 });
 
-test('It shows an error message if the Start Date is greater than End Date', function(
-  assert
-) {
+skip('It shows an error message if the Start Date is greater than End Date', function(assert) {
   visit('/goals/manage');
 
   andThen(function() {
@@ -212,9 +204,7 @@ test('It shows an error message if the Start Date is greater than End Date', fun
   });
 });
 
-test('It shows an error message if the Status field is not selected', function(
-  assert
-) {
+skip('It shows an error message if the Status field is not selected', function(assert) {
   visit('/goals/manage');
 
   andThen(function() {
@@ -246,7 +236,10 @@ test('It shows an error message if the Status field is not selected', function(
         );
 
         //valid
-        $statusField.find('.selectpicker').val('completed').change();
+        $statusField
+          .find('.selectpicker')
+          .val('completed')
+          .change();
         click($form.find('.create-goal'));
         andThen(function() {
           T.notExists(

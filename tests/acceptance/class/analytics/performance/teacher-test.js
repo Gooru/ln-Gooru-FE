@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { test, skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -16,7 +16,7 @@ moduleForAcceptance('Acceptance | class/analytics/performance/teacher', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit(
     '/class/class-for-pochita-as-teacher/analytics/performance/teacher/course'
   );
@@ -116,7 +116,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('Navigating from class navigation', function(assert) {
+skip('Navigating from class navigation', function(assert) {
   visit('/class/class-for-pochita-as-teacher');
 
   andThen(function() {
@@ -155,9 +155,7 @@ test('When view by both option is selected', function(assert) {
   });
   */
 });
-test('When view by assessment and collection option is selected for course level', function(
-  assert
-) {
+skip('When view by assessment and collection option is selected for course level', function(assert) {
   visit(
     '/class/class-for-pochita-as-teacher/analytics/performance/teacher/course'
   );
@@ -235,9 +233,7 @@ test('When view by assessment and collection option is selected for course level
   });
 });
 
-test('When view by assessment and collection option is selected for unit level', function(
-  assert
-) {
+skip('When view by assessment and collection option is selected for unit level', function(assert) {
   visit(
     '/class/class-for-pochita-as-teacher/analytics/performance/teacher/unit/first-unit-id'
   );
@@ -315,9 +311,7 @@ test('When view by assessment and collection option is selected for unit level',
   });
 });
 
-test('When view by assessment and collection option is selected for lesson level', function(
-  assert
-) {
+skip('When view by assessment and collection option is selected for lesson level', function(assert) {
   visit(
     '/class/class-for-pochita-as-teacher/analytics/performance/teacher/unit/first-unit-id/lesson/first-lesson-id'
   );
@@ -402,7 +396,7 @@ test('When view by assessment and collection option is selected for lesson level
   });
 });
 
-test('View Full Screen and Exit Full Screen', function(assert) {
+skip('View Full Screen and Exit Full Screen', function(assert) {
   visit(
     '/class/class-for-pochita-as-teacher/analytics/performance/teacher/course'
   );

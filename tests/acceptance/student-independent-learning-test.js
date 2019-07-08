@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | Student Independent Learning', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/student-independent-learning/studying');
 
   andThen(function() {
@@ -90,7 +90,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('Will disappear next login', function(assert) {
+skip('Will disappear next login', function(assert) {
   window.localStorage.setItem('param-123_logins', 5);
   visit('/student-independent-learning');
 
@@ -109,7 +109,7 @@ test('Will disappear next login', function(assert) {
   });
 });
 
-test('Layout without feature courses', function(assert) {
+skip('Layout without feature courses', function(assert) {
   window.localStorage.setItem('param-123_logins', 6);
   visit('/student-independent-learning');
 
@@ -128,7 +128,7 @@ test('Layout without feature courses', function(assert) {
   });
 });
 
-test('Go to library from featured-courses panel', function(assert) {
+skip('Go to library from featured-courses panel', function(assert) {
   window.localStorage.setItem('param-123_logins', 2);
   visit('/student-independent-learning');
 

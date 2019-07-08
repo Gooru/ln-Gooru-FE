@@ -1,4 +1,4 @@
-import { test, skip } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 
@@ -14,7 +14,7 @@ moduleForAcceptance('Acceptance | index-student', {
   }
 });
 
-test('logged in as a student and home-link button navigation', function(assert) {
+skip('logged in as a student and home-link button navigation', function(assert) {
   visit('/');
 
   andThen(function() {

@@ -1,11 +1,6 @@
-import {
-  test,
-  skip
-} from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
-import {
-  authenticateSession
-} from 'gooru-web/tests/helpers/ember-simple-auth';
+import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
 
 moduleForAcceptance('Acceptance | Edit Resource', {
@@ -20,7 +15,7 @@ moduleForAcceptance('Acceptance | Edit Resource', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/content/resources/edit/123');
 
   andThen(function() {
@@ -33,7 +28,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('Click share button and check clipboard functionality', function(assert) {
+skip('Click share button and check clipboard functionality', function(assert) {
   visit('/content/resources/edit/123');
 
   andThen(function() {
@@ -73,7 +68,10 @@ skip('Delete Resource', function(assert) {
           var $deleteButton = $deleteContentModal.find('button.delete');
           click($deleteButton);
           andThen(function() {
-            assert.equal(currentURL(), '/library-search?profileId=id-for-pochita&type=my-content');
+            assert.equal(
+              currentURL(),
+              '/library-search?profileId=id-for-pochita&type=my-content'
+            );
           });
         });
       });
