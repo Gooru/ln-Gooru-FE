@@ -23,20 +23,31 @@
                 <div class="error-bar"></div>
               {{/if}}
             </div>
-            <div class="status-icon">
-              {{#unless selectedFile.isError}}
-                {{gru-icon name="check_circle"}}
-              {{else}}
-                {{gru-icon name="info"}}
-              {{/unless}}
-            </div>
+            {{#if selectedFile.isUpload}}
+              <div class="status-icon">
+                {{#if selectedFile.isError}}
+                  {{gru-icon name="info"}}
+                {{else}}
+                  <i class="sucess"></i>
+                {{/if}}
+              </div>
+            {{/if}}
           </div>
           {{#if selectedFile.isError}}
             <div class="error-panel">
               <div class="message">There was an error reading the class code on this image. Re-upload?</div>
               <div class="actions">
-                <button type="button" class="submit-btn" {{action 'onReUpload'}}>Re-Upload</button>
-                <button type="button" class="ignore-btn" {{action 'onIgnore'}}>Ignore & Continue</button>
+                {{#file-picker
+                  accept=mimeType
+                  preview=false
+                  dropzone=false
+                  fileLoaded=(action 'prepareForReUpload')
+                  readAs="readAsFile"
+                  errors=filePickerErrors
+                }}
+                  <button type="button" class="submit-btn" {{action 'onReUpload' selectedFile}}>Re-Upload</button>
+                {{/file-picker}}
+                <button type="button" class="ignore-btn" {{action 'onIgnore' selectedFile}}>Ignore & Continue</button>
               </div>
             </div>
           {{/if}}
@@ -45,7 +56,7 @@
     {{/if}}
     <div class="file-picker-container">
       {{#file-picker
-        accept=validMimeType
+        accept=mimeType
         preview=false
         dropzone=false
         fileLoaded=(action 'prepareForSubmission')
@@ -62,7 +73,17 @@
   <div class="right-panel">
     <div class="preview-panel">
       {{#if selectedFiles}}
-        {{gru-image-preview previewImages=selectedFiles currentPreviewIndex=currentPreviewIndex isDisableButton=isDisableButton onConfirm="onConfirm"}}
+        {{gru-image-preview
+          previewContent=selectedFiles
+          studentScores=studentScores
+          questions=assessmentQuestions
+          currentPreviewIndex=currentPreviewIndex
+          showConfirm=showConfirm
+          isImagePreview=isImagePreview
+          isDisableButton=isDisableButton
+          onConfirmUpload="onConfirmUpload"
+          onConfirmScore="onConfirmScore"
+        }}
       {{else}}
         <div class="prev-message">no preview available</div>
       {{/if}}

@@ -102,12 +102,20 @@ export default Ember.Component.extend({
   serializeUploadedFiles(uploads) {
     const component = this;
     let uploadedFiles = Ember.A([]);
+    let reviewedUpload = uploads.findBy('status', -1); //Change the status value to 3 for appropiate review status
+    const isReviewed = !!reviewedUpload;
+    component.set('isImagePreview', isReviewed);
     uploads.map((item) => {
-      uploadedFiles.pushObject(Ember.Object.create({
-        url: item.imagePath,
-        isError: item.status === -1,
-        name: cleanFilename(item.imagePath)
-      }));
+      component.get('i2dService').fetchImageData(item.get('id')).then((content) => {
+        uploadedFiles.pushObject(Ember.Object.create({
+          url: item.get('imagePath'),
+          isUpload: true,
+          isError: false,
+          content,
+          isConversionError: item.get('status') === -1,
+          name: cleanFilename(item.get('imagePath'))
+        }));
+      });
     });
     component.set('uploadedFiles', uploadedFiles);
   },

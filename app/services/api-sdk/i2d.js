@@ -44,5 +44,16 @@ export default Ember.Service.extend({
       reject
       );
     });
+  },
+
+  fetchImageData: function(uploadId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('i2dAdapter').fetchImageData(uploadId).then(result =>
+        resolve(service.get('i2dSerializer')
+          .normalizeImageData(result)),
+      reject
+      );
+    });
   }
 });

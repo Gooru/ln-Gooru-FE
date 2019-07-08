@@ -6,6 +6,7 @@
     height: 100%;
     width: 100%;
     position: relative;
+    background-color: #32404b;
 
     #image-preview-carousel-wrapper {
       height: 100%;
@@ -20,7 +21,6 @@
           height: 100%;
 
           .image-container {
-            background: #32404b;
             width: 100%;
             height: 100%;
 
@@ -45,6 +45,49 @@
           border-radius: 50px;
           background-color: #ccc;
           color: #29353e;
+        }
+      }
+    }
+
+    .student-score-table {
+      width: 100%;
+      height: auto;
+      color: #32404b;
+      padding: 0 0 40px;
+      display: block;
+      clear: both;
+      background: #fff;
+      padding: 0 15px 40px;
+
+      tbody,
+      thead {
+        tr {
+          td {
+            padding: 10px 15px;
+            text-transform: capitalize;
+          }
+
+          th {
+            padding-left: 8px;
+            height: 30px;
+            text-align: center;
+            vertical-align: top;
+            padding: 10px 15px;
+
+            &.name {
+              text-align: left;
+            }
+          }
+        }
+      }
+
+      .gru-input.studentScore {
+        .form-group {
+          input {
+            color: #32404b;
+            width: 30px;
+            text-align: center;
+          }
         }
       }
     }

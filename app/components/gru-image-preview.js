@@ -12,7 +12,7 @@ export default Ember.Component.extend({
    * It maintains the images which needs to display
    * @prop {Array}
    */
-  previewImages: null,
+  previewContent: null,
 
   actions: {
     onClickPrev() {
@@ -25,8 +25,13 @@ export default Ember.Component.extend({
       let selectedElement = component.$(
         '.image-preview-container #image-preview-carousel-wrapper .item.active'
       );
+      const previewContent = component.get('previewContent');
       let currentIndex = selectedElement.data('item-index');
-      component.set('currentPreviewIndex', currentIndex);
+      let selectedIndex = currentIndex - 1;
+      if (currentIndex === 0) {
+        selectedIndex = previewContent.length - 1;
+      }
+      component.set('currentPreviewIndex', selectedIndex);
       component
         .$('.image-preview-container #image-preview-carousel-wrapper')
         .carousel('prev');
@@ -42,16 +47,26 @@ export default Ember.Component.extend({
       let selectedElement = component.$(
         '.image-preview-container #image-preview-carousel-wrapper .item.active'
       );
+      const previewContent = component.get('previewContent');
       let currentIndex = selectedElement.data('item-index');
-      component.set('currentPreviewIndex', currentIndex);
+      let selectedIndex = currentIndex + 1;
+      if (previewContent.length - 1 === currentIndex) {
+        selectedIndex = 0;
+      }
+      component.set('currentPreviewIndex', selectedIndex);
       component
         .$('.image-preview-container #image-preview-carousel-wrapper')
         .carousel('next');
     },
 
-    onConfirm() {
+    onConfirmUpload() {
       const component = this;
-      component.sendAction('onConfirm');
+      component.sendAction('onConfirmUpload');
+    },
+
+    onConfirmScore() {
+      const component = this;
+      component.sendAction('onConfirmScore');
     }
   }
 });

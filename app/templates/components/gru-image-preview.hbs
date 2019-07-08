@@ -1,32 +1,60 @@
 <div class="image-preview-container">
-  <div id="image-preview-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
-    <div class="carousel-inner">
-      {{#each previewImages as |image index|}}
-        <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
-          <div class="image-container">
-            <img src="{{image.url}}" />
+  {{#if isImagePreview}}
+    <div id="image-preview-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
+      <div class="carousel-inner">
+        {{#each previewContent as |image index|}}
+          <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
+            <div class="image-container">
+              <img src="{{image.url}}" />
+            </div>
           </div>
-        </div>
-      {{/each}}
+        {{/each}}
+      </div>
+      <!-- Left and right controls -->
+      <a class="left carousel-control" data-slide="prev" {{action 'onClickPrev'}}>
+        {{gru-icon name="arrow_left"}}
+      </a>
+      <a class="right carousel-control" data-slide="next" {{action 'onClickNext'}}>
+        {{gru-icon name="arrow_right"}}
+      </a>
     </div>
-    <!-- Left and right controls -->
-    <a class="left carousel-control" data-slide="prev" {{action 'onClickPrev'}}>
-      {{gru-icon name="arrow_left"}}
-    </a>
-    <a class="right carousel-control" data-slide="next" {{action 'onClickNext'}}>
-      {{gru-icon name="arrow_right"}}
-    </a>
-  </div>
+  {{else}}
+    <table class="student-score-table">
+      <thead>
+        <tr>
+          <th class="name">Name</th>
+          {{#each questions as |question|}}
+            <th>Q{{question.order}}</th>
+          {{/each}}
+        </tr>
+      </thead>
+      <tbody>
+        {{#each studentScores as |student index|}}
+          <tr>
+            <td>{{student.firstName}}</td>
+            {{#each student.questions as |question|}}
+              <td> {{validation.gru-input model=question valuePath='studentScore' maxLength=question.maxScore}}</td>
+            {{/each}}
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/if}}
   <div class="footer-container">
     <div class="preview-slides">
-      {{#each previewImages as |image index|}}
+      {{#each previewContent as |image index|}}
         <div class="slide item-{{index}} {{if (eq currentPreviewIndex index) 'active'}}">
           <img src="{{image.url}}" />
         </div>
       {{/each}}
     </div>
     <div class="action">
-      <button type="button" class="submit-btn {{if isDisableButton 'disable-event'}}" {{action 'onConfirm'}}>Confirm & Continue</button>
+      {{#if showConfirm}}
+        <button type="button" class="submit-btn {{if isDisableButton 'disable-event'}}" {{action 'onConfirm'}}>Confirm & Continue</button>
+      {{/if}}
+      {{#unless isImagePreview}}
+        <button type="button" class="submit-btn" {{action 'onConfirmScore'}}>Confirm Scores</button>
+      {{/unless}}
     </div>
   </div>
 </div>

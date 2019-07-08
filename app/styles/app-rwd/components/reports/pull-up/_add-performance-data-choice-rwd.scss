@@ -1,0 +1,13 @@
+.add-performance-data-by-choice {
+  @media only screen and (max-width: $screen-sm - 1) {
+    .panels {
+      flex-direction: column;
+
+      .left-panel {
+        width: 100%;
+        margin: 0;
+        height: auto;
+      }
+    }
+  }
+}

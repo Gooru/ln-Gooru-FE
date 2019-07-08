@@ -8,9 +8,7 @@
   .panels {
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-columns: 410px auto;
-    grid-gap: 15px;
+    display: flex;
 
     .right-panel {
       background-color: #fff;
@@ -41,13 +39,14 @@
 
     .left-panel {
       background-color: #fff;
-      width: 100%;
+      width: 450px;
       height: 100%;
       max-height: calc(100vh - 115px);
       overflow-y: auto;
+      margin-right: 15px;
 
       .collection-image-container {
-        height: 230px;
+        height: 200px;
         background-size: cover;
         background-position: center;
         display: block;
@@ -96,13 +95,24 @@
           .status-icon {
             display: flex;
             margin: auto;
+
+            .sucess {
+              width: 20px;
+              height: 20px;
+              object-fit: contain;
+              background-size: contain;
+              background-repeat: no-repeat;
+              background-position: center center;
+              display: inline-block;
+              background-image: url("gooru/images/tick-inside-circle-blue.svg");
+            }
           }
 
           .image-name {
             display: flex;
             flex-direction: column;
             padding-left: 10px;
-            align-items: center;
+            justify-content: center;
 
             .error-bar {
               width: 100%;

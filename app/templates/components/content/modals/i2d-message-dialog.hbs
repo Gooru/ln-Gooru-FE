@@ -1,0 +1,16 @@
+<div class="modal-container">
+  <div class="modal-body">
+    <div class="success-container">
+      {{gru-icon name="check_circle" class="success-icon"}}
+      <span class="success-text">Success</span>
+    </div>
+    <p class="message">
+      Successfully uploaded images. The data extraction from images will take some time. Please check back later for review
+    </p>
+    <p class="question">Do you want to close ?</p>
+  </div>
+  <div class="actions">
+    <div class="cancel-btn" {{action 'cancel'}}>{{t 'common.cancel'}}</div>
+    <div class="proceed-btn" {{action 'confirm'}}>{{t 'proceed'}}</div>
+  </div>
+</div>
