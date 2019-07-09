@@ -112,6 +112,8 @@
             {{else if (not isDataLoading)}}
               {{#if (and isDaily isToday)}}
                 <p class="add-content-message">{{t 'common.plan-an-activities-msg'}}</p>
+              {{else if isWeekly}}
+                <p class="no-content">{{t "common.no-content-for-week"}}</p>
               {{else}}
                 <p class="no-content">{{t "common.no-dca-teacher"}}</p>
               {{/if}}

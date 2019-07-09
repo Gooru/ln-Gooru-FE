@@ -1,5 +1,5 @@
 /*global SockJS:true*/
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -16,7 +16,7 @@ moduleForAcceptance('Acceptance | reports/collection', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   assert.expect(2);
   visit(
     '/reports/class/just-a-class/collection/all-question-types-assessment-id'

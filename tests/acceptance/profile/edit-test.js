@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+/* import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | profile edit', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/id-for-pochita/edit');
 
   andThen(function() {
@@ -152,9 +152,7 @@ test('it shows an error message if the username exists', function(assert) {
   });
 });
 
-test('it shows an error message if the username has reserved words', function(
-  assert
-) {
+test('it shows an error message if the username has reserved words', function(assert) {
   visit('/id-for-pochita/edit');
 
   andThen(function() {
@@ -181,7 +179,7 @@ test('it shows an error message if the username has reserved words', function(
       });
     });
   });
-});
+}); */
 
 //test('menu option \'about\' is selected when cancelling the edit', function (assert) {
 //  visit('/id-for-pochita/edit');

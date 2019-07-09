@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 
@@ -14,7 +14,7 @@ moduleForAcceptance('Acceptance | Content Classes Create Class', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/content/classes/create');
 
   andThen(function() {
@@ -52,9 +52,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('it shows an error message if the title field is left blank and you blur it out', function(
-  assert
-) {
+skip('it shows an error message if the title field is left blank and you blur it out', function(assert) {
   visit('/content/classes/create');
 
   andThen(function() {
@@ -89,7 +87,7 @@ test('it shows an error message if the title field is left blank and you blur it
   });
 });
 
-test('Create Class', function(assert) {
+skip('Create Class', function(assert) {
   visit('/content/classes/create');
 
   andThen(function() {

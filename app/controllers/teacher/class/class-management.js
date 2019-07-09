@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import ModalMixin from 'gooru-web/mixins/modal';
-import { ROLES } from 'gooru-web/config/config';
 /**
  * Class management controller
  *
@@ -401,38 +400,9 @@ export default Ember.Controller.extend(ModalMixin, {
         });
     },
 
-    //Action triggered when select a user to add as a co-teacher
-    onSelectUserItem(user) {
-      const controller = this;
-      controller.get('selectedCollaborators').unshiftObject(user);
-    },
-
-    //Action triggered when deselect an user to update co-teacher list
-    onRemoveUserItem(user) {
-      const controller = this;
-      controller.get('selectedCollaborators').removeObject(user);
-    },
-
-    //Action triggered when hit search for an user
-    onSearchUser(emailId) {
-      const controller = this;
-      controller
-        .fetchMatchingUserProfiles(emailId)
-        .then(function(userDetails) {
-          if (userDetails.get('role') === ROLES.TEACHER) {
-            controller.get('teacherUserProfiles').pushObject(userDetails);
-          }
-        })
-        .catch(function() {
-          //TODO dummy callback to avoid red bar
-          return false;
-        });
-    },
-
     //Action triggered when add list of users as co-teacher
-    onAddCollaborators() {
+    onAddCollaborators(selectedCollaborators = Ember.A([])) {
       const controller = this;
-      const selectedCollaborators = controller.get('selectedCollaborators');
       const collaborators = controller.get('collaborators');
       let classCollaborators = collaborators.concat(selectedCollaborators);
       let classCollaboratorIds = classCollaborators.map(collaborator =>
@@ -443,19 +413,12 @@ export default Ember.Controller.extend(ModalMixin, {
         .then(function() {
           controller.set('collaborators', classCollaborators);
         });
-      controller.actions.onToggleAddCollaborator(controller);
+      controller.actions.onToggleAddCollaborator();
     },
 
     //Action triggered when toggle collaborator panel
-    onToggleAddCollaborator(controller = this) {
-      $('.sub-sec-coteach .add-collaborator-container').slideToggle(function() {
-        if ($(this).is(':visible')) {
-          $(this).css('display', 'grid');
-        }
-      });
-      //reset collaborator details
-      controller.set('teacherUserProfiles', Ember.A([]));
-      controller.set('selectedCollaborators', Ember.A([]));
+    onToggleAddCollaborator() {
+      $('.sub-sec-coteach .add-collaborator-panel').slideToggle();
     }
   },
 
@@ -553,22 +516,10 @@ export default Ember.Controller.extend(ModalMixin, {
   subjectTaxonomyGrades: null,
 
   /**
-   * @property {Array} selectedCollaborators
-   * Property for list of selected collaborators
-   */
-  selectedCollaborators: Ember.A([]),
-
-  /**
    * @property {Array} collaborators
    * Property for list of class collaborators
    */
   collaborators: Ember.computed.alias('class.collaborators'),
-
-  /**
-   * @property {Array} teacherUserProfiles
-   * Property for list of teacher profile who can be added as a collaborator
-   */
-  teacherUserProfiles: Ember.A([]),
 
   /**
    * @function fetchTaxonomyGrades

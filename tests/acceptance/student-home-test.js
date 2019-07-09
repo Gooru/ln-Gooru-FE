@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -16,7 +16,7 @@ moduleForAcceptance('Acceptance | Student Home Landing page', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   window.localStorage.setItem('param-123_logins', 3);
   visit('/student-home');
 
@@ -63,7 +63,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('Will disappear next login', function(assert) {
+skip('Will disappear next login', function(assert) {
   window.localStorage.setItem('param-123_logins', 5);
   visit('/student-home');
 
@@ -82,7 +82,7 @@ test('Will disappear next login', function(assert) {
   });
 });
 
-test('Layout without feature courses', function(assert) {
+skip('Layout without feature courses', function(assert) {
   window.localStorage.setItem('param-123_logins', 6);
   visit('/student-home');
 
@@ -101,7 +101,7 @@ test('Layout without feature courses', function(assert) {
   });
 });
 
-test('Go to library from featured-courses panel', function(assert) {
+skip('Go to library from featured-courses panel', function(assert) {
   visit('/student-home');
 
   andThen(function() {
@@ -117,7 +117,7 @@ test('Go to library from featured-courses panel', function(assert) {
   });
 });
 
-test('Go to course map from class card', function(assert) {
+skip('Go to course map from class card', function(assert) {
   visit('/student-home');
 
   andThen(function() {
@@ -136,7 +136,7 @@ test('Go to course map from class card', function(assert) {
   });
 });
 
-test('Class order', function(assert) {
+skip('Class order', function(assert) {
   visit('/student-home');
 
   andThen(function() {

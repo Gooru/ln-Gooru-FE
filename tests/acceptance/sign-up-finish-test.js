@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -16,7 +16,7 @@ moduleForAcceptance('Acceptance | sign-up-finish', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/sign-up-finish');
 
   andThen(function() {
@@ -67,9 +67,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('it shows error messages if the all fields are left blank', function(
-  assert
-) {
+skip('it shows error messages if the all fields are left blank', function(assert) {
   visit('/sign-up-finish');
 
   andThen(function() {

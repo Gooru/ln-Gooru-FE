@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 
@@ -14,7 +14,7 @@ moduleForAcceptance('Acceptance | profile', {
   }
 });
 
-test('menu option \'about\' is selected when navigating directly to profile.about', function(assert) {
+skip('menu option \'about\' is selected when navigating directly to profile.about', function(assert) {
   visit('/id-for-pochita/about');
 
   andThen(function() {
@@ -29,7 +29,7 @@ test('menu option \'about\' is selected when navigating directly to profile.abou
   });
 });
 
-test('menu option \'network\' is selected when navigating directly to profile.network', function(assert) {
+skip('menu option \'network\' is selected when navigating directly to profile.network', function(assert) {
   visit('/id-for-pochita/network');
 
   andThen(function() {
@@ -37,7 +37,7 @@ test('menu option \'network\' is selected when navigating directly to profile.ne
   });
 });
 
-test('menu option selection updates when navigating between sections', function(assert) {
+skip('menu option selection updates when navigating between sections', function(assert) {
   visit('/id-for-pochita/about');
 
   andThen(function() {
@@ -66,14 +66,14 @@ test('menu option selection updates when navigating between sections', function(
   });
 });
 
-test('follow button appears by default', function(assert) {
+skip('follow button appears by default', function(assert) {
   visit('/param-123/about');
   andThen(function() {
     assert.equal(currentURL(), '/param-123/about');
   });
 });
 
-test('click follow button', function(assert) {
+skip('click follow button', function(assert) {
   visit('/param-123/about');
   andThen(function() {
     assert.equal(currentURL(), '/param-123/about');
@@ -87,7 +87,7 @@ test('click follow button', function(assert) {
   });
 });
 
-test('click unfollow button', function(assert) {
+skip('click unfollow button', function(assert) {
   visit('/param-123/about');
   andThen(function() {
     assert.equal(currentURL(), '/param-123/about');

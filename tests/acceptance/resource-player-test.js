@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -32,7 +32,7 @@ moduleForAcceptance('Acceptance | resource-player', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit(
     '/study-player/course/course-123/resource/image-resource-id?collectionUrl=collection-url&classId=class-for-pochita-as-student'
   );

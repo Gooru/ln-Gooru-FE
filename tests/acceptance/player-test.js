@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | player', {
   }
 });
 
-test('Layout - default to collection since parameter is not sent', function(assert) {
+skip('Layout - default to collection since parameter is not sent', function(assert) {
   assert.expect(2);
   visit('/player/all-resource-types-collection-id');
 

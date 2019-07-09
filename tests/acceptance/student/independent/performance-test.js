@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 
@@ -14,7 +14,7 @@ moduleForAcceptance('Acceptance | student/independent/performance', {
   }
 });
 
-test('My report', function(assert) {
+skip('My report', function(assert) {
   visit('/student/course/course-for-pochita-as-student');
   andThen(function() {
     let $MyReport = find('.gru-performance-chart div');

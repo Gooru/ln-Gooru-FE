@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -40,7 +40,7 @@ moduleForAcceptance('Acceptance | study-player-external', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit(
     '/study-player-external?classId=class-for-pochita-as-student&collectionId=first-assessment-id&classId=class-for-pochita-as-student&role=student&source=coursemap&type=assessment-external'
   );
@@ -56,6 +56,5 @@ test('Layout', function(assert) {
 
     const $playerContainer = find('.player-container');
     T.exists(assert, $playerContainer, 'Missing external player component');
-
   });
 });

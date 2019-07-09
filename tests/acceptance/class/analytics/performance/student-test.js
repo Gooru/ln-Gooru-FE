@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -17,7 +17,7 @@ moduleForAcceptance('Acceptance | class/analytics/performance/student', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/class/class-for-pochita-as-student/analytics/performance/student');
 
   andThen(function() {
@@ -60,7 +60,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('Navigating from class navigation', function(assert) {
+skip('Navigating from class navigation', function(assert) {
   visit('/class/class-for-pochita-as-student');
 
   andThen(function() {
@@ -99,7 +99,7 @@ test('When view by collection option is selected', function(assert) {
 });
 */
 
-test('When filtering by collection is  pre-selected', function(assert) {
+skip('When filtering by collection is  pre-selected', function(assert) {
   visit(
     '/class/class-for-pochita-as-student/analytics/performance/student?filterBy=collection'
   );
@@ -130,7 +130,7 @@ test('When filtering by collection is  pre-selected', function(assert) {
   });
 });
 
-test('View Full Screen and Exit Full Screen', function(assert) {
+skip('View Full Screen and Exit Full Screen', function(assert) {
   visit('/class/class-for-pochita-as-student/analytics/performance/student');
 
   andThen(function() {
@@ -197,7 +197,7 @@ test('View Full Screen and Exit Full Screen', function(assert) {
   });
 });
 
-test('Exit Full Screen by pressing Esc', function(assert) {
+skip('Exit Full Screen by pressing Esc', function(assert) {
   visit('/class/class-for-pochita-as-student/analytics/performance/student');
 
   andThen(function() {

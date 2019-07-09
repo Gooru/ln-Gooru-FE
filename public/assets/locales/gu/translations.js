@@ -65,6 +65,8 @@ window.i18ln = {
   'common.last': 'છેલ્લા',
   'common.for': 'for',
   'common.name': 'નામ',
+  'common.no-content-for-week':
+    'No class activities scheduled for the selected period',
   'common.user': 'વપરાશકર્તા',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo':'take photo',
@@ -2656,5 +2658,15 @@ window.i18ln = {
   'oa.info.duration-hrs': 'Expected time to complete',
   'oa.info.hrs': ' hrs',
   'class.add-teachers': 'Add teachers',
-  'class.add-co-teachers': 'Add Co-teachers'
+  'class.add-co-teachers': 'Add Co-teachers',
+  'common.gained': 'Gained',
+  'badges-earned': 'Badges Earned',
+  'suggestion-taken': 'Suggestions Taken',
+  'this-week': 'This Week',
+  'previous-week': 'Previous Week',
+  'beginning-till-now': 'Beginning Till Now',
+  'report.class-proficiency-report': 'Class Proficiency Report',
+  'report.domain-proficiency-report': 'Domain Competency Report',
+  'report.class-weekly-report': 'Class Weekly Report',
+  'no-teacher-found': 'No teacher with that email id found!'
 };

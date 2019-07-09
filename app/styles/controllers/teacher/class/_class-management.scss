@@ -404,39 +404,8 @@
               }
             }
 
-            .add-collaborator-container {
-              width: 95%;
-              height: auto;
-              border-radius: 4px;
-              box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-              padding: 15px;
+            .add-collaborator-panel {
               display: none;
-              margin-top: 8px;
-              row-gap: 8px;
-
-              .footer-container {
-                display: grid;
-                grid-template-columns: auto auto;
-                column-gap: 8px;
-                justify-content: right;
-                align-self: end;
-                .action-btn {
-                  width: 73px;
-                  height: 28px;
-                  border-radius: 2px;
-                  text-align: center;
-                  line-height: 28px;
-                  cursor: pointer;
-                }
-                .cancel-btn {
-                  border: solid 1px #979797;
-                  color: #535e66;
-                }
-                .done-btn {
-                  background-color: #0072bc;
-                  color: $white;
-                }
-              }
             }
           }
         }
