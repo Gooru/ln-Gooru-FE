@@ -59,6 +59,11 @@ export default Ember.Component.extend({
         .carousel('next');
     },
 
+    onSelectImage(index) {
+      const component = this;
+      component.set('currentPreviewIndex', index);
+    },
+
     onConfirmUpload() {
       const component = this;
       component.sendAction('onConfirmUpload');

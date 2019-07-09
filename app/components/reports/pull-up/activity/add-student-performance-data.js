@@ -87,7 +87,6 @@ export default Ember.Component.extend({
     component.get('i2dService')
       .searchImage(component.serializeUploadContext())
       .then((result) => {
-        component.set('isLoading', false);
         if (result.length) {
           component.set('selectedOption', 'upload-image');
           component.serializeUploadedFiles(result);
@@ -102,9 +101,9 @@ export default Ember.Component.extend({
   serializeUploadedFiles(uploads) {
     const component = this;
     let uploadedFiles = Ember.A([]);
-    let reviewedUpload = uploads.findBy('status', -1); //Change the status value to 3 for appropiate review status
-    const isReviewed = !!reviewedUpload;
-    component.set('isImagePreview', isReviewed);
+    let reviewedUpload = uploads.findBy('status', 1); //Change the status value to 3 for appropiate review status
+    const isReview = !!reviewedUpload;
+    component.set('isReview', isReview);
     uploads.map((item) => {
       component.get('i2dService').fetchImageData(item.get('id')).then((content) => {
         uploadedFiles.pushObject(Ember.Object.create({
@@ -117,6 +116,7 @@ export default Ember.Component.extend({
         }));
       });
     });
+    component.set('isLoading', false);
     component.set('uploadedFiles', uploadedFiles);
   },
 

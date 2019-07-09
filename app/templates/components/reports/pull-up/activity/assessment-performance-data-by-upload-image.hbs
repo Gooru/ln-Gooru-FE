@@ -54,8 +54,9 @@
         {{/each}}
       </div>
     {{/if}}
-    <div class="file-picker-container">
-      {{#file-picker
+    {{#unless isReview}}
+      <div class="file-picker-container">
+        {{#file-picker
         accept=mimeType
         preview=false
         dropzone=false
@@ -63,23 +64,24 @@
         readAs="readAsFile"
         errors=filePickerErrors
       }}
-        <div class="file-picker-panel">
-          <i class="icon"></i>
-          <span class="title">Choose a file or drag it here</span>
-        </div>
-      {{/file-picker}}
-    </div>
+          <div class="file-picker-panel">
+            <i class="icon"></i>
+            <span class="title">Choose a file or drag it here</span>
+          </div>
+        {{/file-picker}}
+      </div>
+    {{/unless}}
   </div>
   <div class="right-panel">
     <div class="preview-panel">
       {{#if selectedFiles}}
         {{gru-image-preview
           previewContent=selectedFiles
-          studentScores=studentScores
+          uploadedStudentScores=uploadedStudentScores
           questions=assessmentQuestions
           currentPreviewIndex=currentPreviewIndex
           showConfirm=showConfirm
-          isImagePreview=isImagePreview
+          isReview=isReview
           isDisableButton=isDisableButton
           onConfirmUpload="onConfirmUpload"
           onConfirmScore="onConfirmScore"

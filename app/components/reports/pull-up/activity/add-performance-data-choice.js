@@ -28,9 +28,6 @@ export default Ember.Component.extend({
       'name': 'question',
       'icon': 'help_outline'
     }, {
-      'name': 'take-photo',
-      'icon': 'camera'
-    }, {
       'name': 'upload-image',
       'icon': 'photo'
     }]

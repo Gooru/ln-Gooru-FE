@@ -59,9 +59,18 @@
       background: #fff;
       padding: 0 15px 40px;
 
-      tbody,
-      thead {
+      tbody {
         tr {
+          &.student-score {
+            background-color: rgba(0,0,0,0.4);
+            pointer-events: none;
+          }
+
+          &.active {
+            pointer-events: visible;
+            background-color: transparent;
+          }
+
           td {
             padding: 10px 15px;
             text-transform: capitalize;
@@ -87,6 +96,11 @@
             color: #32404b;
             width: 30px;
             text-align: center;
+            box-shadow: none;
+
+            &:focus {
+              border: solid 1px #1aa9eb;
+            }
           }
         }
       }

@@ -91,13 +91,13 @@ export default Ember.Component.extend(ModalMixin, {
    */
   showConfirm: false,
 
-  studentScores: Ember.computed('selectedFiles.@each.content.parsedData.[]',
+  uploadedStudentScores: Ember.computed('selectedFiles.@each.content.parsedData.[]',
     'assessmentQuestions',
     function() {
       const component = this;
       const uploadedFiles = this.get('selectedFiles');
       let studentScores = component.parseConvertedData(uploadedFiles);
-      return studentScores.objectAt(0);
+      return studentScores;
     }),
 
   /**
@@ -228,6 +228,7 @@ export default Ember.Component.extend(ModalMixin, {
         let users = parsedData.uniqBy('userId');
         return users.map((user) => {
           let student = component.parseUser(user);
+          student.set('uploadId', uploadFile.get('content.uploadInfo.id'));
           let userQuestionList = parsedData.filterBy('userId', student.get('userId'));
           return component.parseQuestionData(student, userQuestionList);
         });

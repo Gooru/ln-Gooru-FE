@@ -1,5 +1,5 @@
 <div class="image-preview-container">
-  {{#if isImagePreview}}
+  {{#unless isReview}}
     <div id="image-preview-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
       <div class="carousel-inner">
         {{#each previewContent as |image index|}}
@@ -20,41 +20,41 @@
     </div>
   {{else}}
     <table class="student-score-table">
-      <thead>
+      <tbody>
         <tr>
           <th class="name">Name</th>
           {{#each questions as |question|}}
             <th>Q{{question.order}}</th>
           {{/each}}
         </tr>
-      </thead>
-      <tbody>
-        {{#each studentScores as |student index|}}
-          <tr>
-            <td>{{student.firstName}}</td>
-            {{#each student.questions as |question|}}
-              <td> {{validation.gru-input model=question valuePath='studentScore' maxLength=question.maxScore}}</td>
-            {{/each}}
-          </tr>
+        {{#each uploadedStudentScores as |students index|}}
+          {{#each students as |student|}}
+            <tr class="student-score {{if (eq index currentPreviewIndex) 'active'}}">
+              <td>{{student.firstName}}</td>
+              {{#each student.questions as |question|}}
+                <td> {{validation.gru-input model=question valuePath='studentScore' maxLength=question.maxScore}}</td>
+              {{/each}}
+            </tr>
+          {{/each}}
         {{/each}}
       </tbody>
     </table>
-  {{/if}}
+  {{/unless}}
   <div class="footer-container">
     <div class="preview-slides">
       {{#each previewContent as |image index|}}
-        <div class="slide item-{{index}} {{if (eq currentPreviewIndex index) 'active'}}">
+        <div class="slide item-{{index}} {{if (eq currentPreviewIndex index) 'active'}}" {{action 'onSelectImage' index}}>
           <img src="{{image.url}}" />
         </div>
       {{/each}}
     </div>
     <div class="action">
       {{#if showConfirm}}
-        <button type="button" class="submit-btn {{if isDisableButton 'disable-event'}}" {{action 'onConfirm'}}>Confirm & Continue</button>
+        <button type="button" class="submit-btn {{if isDisableButton 'disable-event'}}" {{action 'onConfirmUpload'}}>Confirm & Continue</button>
       {{/if}}
-      {{#unless isImagePreview}}
+      {{#if isReview}}
         <button type="button" class="submit-btn" {{action 'onConfirmScore'}}>Confirm Scores</button>
-      {{/unless}}
+      {{/if}}
     </div>
   </div>
 </div>
