@@ -11,6 +11,7 @@
     #image-preview-carousel-wrapper {
       height: 100%;
       width: 100%;
+      max-height: calc(100vh - 252px);
 
       .carousel-inner {
         height: 100%;
@@ -53,22 +54,19 @@
       width: 100%;
       height: auto;
       color: #32404b;
-      padding: 0 0 40px;
       display: block;
       clear: both;
-      background: #fff;
-      padding: 0 15px 40px;
+      padding: 10px 15px 40px;
+      overflow: auto;
+      max-height: calc(100vh - 252px);
+      border-collapse: collapse;
 
       tbody {
         tr {
-          &.student-score {
-            background-color: rgba(0,0,0,0.4);
-            pointer-events: none;
-          }
+          background: #fff;
 
-          &.active {
-            pointer-events: visible;
-            background-color: transparent;
+          &.heading {
+            border-bottom: 5px solid #32404b;
           }
 
           td {

@@ -153,6 +153,16 @@ export default Ember.Component.extend(ModalMixin, {
       const component = this;
       component.set('isDisableButton', true);
       component.uploadImageFiles();
+    },
+
+    showStudentScores() {
+      const component = this;
+      component.set('isReview', true);
+    },
+
+    showImagePreview() {
+      const component = this;
+      component.set('isReview', false);
     }
 
     // onConfirmScore() {

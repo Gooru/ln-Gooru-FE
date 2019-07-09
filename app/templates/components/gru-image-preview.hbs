@@ -21,15 +21,15 @@
   {{else}}
     <table class="student-score-table">
       <tbody>
-        <tr>
-          <th class="name">Name</th>
+        <tr class="heading">
+          <th>Name</th>
           {{#each questions as |question|}}
             <th>Q{{question.order}}</th>
           {{/each}}
         </tr>
         {{#each uploadedStudentScores as |students index|}}
           {{#each students as |student|}}
-            <tr class="student-score {{if (eq index currentPreviewIndex) 'active'}}">
+            <tr class="student-score">
               <td>{{student.firstName}}</td>
               {{#each student.questions as |question|}}
                 <td> {{validation.gru-input model=question valuePath='studentScore' maxLength=question.maxScore}}</td>

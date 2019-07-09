@@ -73,6 +73,10 @@
     {{/unless}}
   </div>
   <div class="right-panel">
+    <div class="toggle-btns">
+      <button type="button" class="btn-primary {{unless isReview 'active'}}" {{action 'showImagePreview'}}>Image Preview</button>
+      <button type="button" class="btn-primary {{if isReview 'active'}}" {{action 'showStudentScores'}}>Scores</button>
+    </div>
     <div class="preview-panel">
       {{#if selectedFiles}}
         {{gru-image-preview
