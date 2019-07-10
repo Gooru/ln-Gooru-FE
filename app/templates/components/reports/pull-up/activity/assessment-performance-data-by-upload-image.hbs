@@ -19,21 +19,19 @@
             </div>
             <div class="image-name ellipsis">
               <span class="ellipsis">{{selectedFile.name}}</span>
-              {{#if selectedFile.isError}}
+              {{#unless selectedFile.isUpload}}
                 <div class="error-bar"></div>
+              {{/unless}}
+            </div>
+            <div class="status-icon">
+              {{#if selectedFile.isUpload}}
+                <i class="sucess"></i>
+              {{else}}
+                {{gru-icon name="info"}}
               {{/if}}
             </div>
-            {{#if selectedFile.isUpload}}
-              <div class="status-icon">
-                {{#if selectedFile.isError}}
-                  {{gru-icon name="info"}}
-                {{else}}
-                  <i class="sucess"></i>
-                {{/if}}
-              </div>
-            {{/if}}
           </div>
-          {{#if selectedFile.isError}}
+          {{#unless selectedFile.isUpload}}
             <div class="error-panel">
               <div class="message">There was an error reading the class code on this image. Re-upload?</div>
               <div class="actions">
@@ -50,20 +48,20 @@
                 <button type="button" class="ignore-btn" {{action 'onIgnore' selectedFile}}>Ignore & Continue</button>
               </div>
             </div>
-          {{/if}}
+          {{/unless}}
         {{/each}}
       </div>
     {{/if}}
-    {{#unless isReview}}
+    {{#unless showScoreReview}}
       <div class="file-picker-container">
         {{#file-picker
-        accept=mimeType
-        preview=false
-        dropzone=false
-        fileLoaded=(action 'prepareForSubmission')
-        readAs="readAsFile"
-        errors=filePickerErrors
-      }}
+            accept=mimeType
+            preview=false
+            dropzone=false
+            fileLoaded=(action 'prepareForSubmission')
+            readAs="readAsFile"
+            errors=filePickerErrors
+          }}
           <div class="file-picker-panel">
             <i class="icon"></i>
             <span class="title">Choose a file or drag it here</span>
@@ -74,18 +72,16 @@
   </div>
   <div class="right-panel">
     <div class="toggle-btns">
-      <button type="button" class="btn-primary {{unless isReview 'active'}}" {{action 'showImagePreview'}}>Image Preview</button>
-      <button type="button" class="btn-primary {{if isReview 'active'}}" {{action 'showStudentScores'}}>Scores</button>
+      <button type="button" class="btn-primary {{unless showScoreReview 'active'}}" {{action 'showImagePreview'}}>Image Preview</button>
+      <button type="button" class="btn-primary {{if showScoreReview 'active'}}" {{action 'showStudentScores'}}>Scores</button>
     </div>
     <div class="preview-panel">
       {{#if selectedFiles}}
-        {{gru-image-preview
-          previewContent=selectedFiles
-          uploadedStudentScores=uploadedStudentScores
-          questions=assessmentQuestions
+        {{gru-i2d-preview
+          previewContents=selectedFiles
           currentPreviewIndex=currentPreviewIndex
           showConfirm=showConfirm
-          isReview=isReview
+          showScoreReview=showScoreReview
           isDisableButton=isDisableButton
           onConfirmUpload="onConfirmUpload"
           onConfirmScore="onConfirmScore"

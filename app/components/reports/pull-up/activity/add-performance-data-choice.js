@@ -23,6 +23,9 @@ export default Ember.Component.extend({
     return TaxonomyTag.getTaxonomyTags(standards);
   }),
 
+  /**
+   * @property {Array[]} List of choice
+   */
   choiceList: Ember.A(
     [{
       'name': 'question',
@@ -33,7 +36,12 @@ export default Ember.Component.extend({
     }]
   ),
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+    /**
+     * Action triggered when teacher select choice.
+     */
     selectChoiceOption(option) {
       const component = this;
       component.sendAction('onSelectOption', option);

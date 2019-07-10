@@ -16,6 +16,9 @@ export default Ember.Component.extend(ModalMixin, {
    */
   mediaService: Ember.inject.service('api-sdk/media'),
 
+  /**
+   * @property {AssessmentService} assessment service API SDK
+   */
   assessmentService: Ember.inject.service('api-sdk/assessment'),
 
   /**
@@ -80,25 +83,25 @@ export default Ember.Component.extend(ModalMixin, {
   isDisableButton: false,
 
   /**
-   * It maintains the current preview image index.
+   * It maintains the index position of current preview image.
    * @prop {Integer}
    */
   currentPreviewIndex: 0,
 
   /**
-   * It maintains the whether we need to show confirm or not.
+   * It maintains the whether we need to show confirm button or not.
    * @prop {Integer}
    */
   showConfirm: false,
 
-  uploadedStudentScores: Ember.computed('selectedFiles.@each.content.parsedData.[]',
-    'assessmentQuestions',
-    function() {
-      const component = this;
-      const uploadedFiles = this.get('selectedFiles');
-      let studentScores = component.parseConvertedData(uploadedFiles);
-      return studentScores;
-    }),
+  // uploadedStudentScores: Ember.computed('selectedFiles.@each.content.parsedData.[]',
+  //   'assessmentQuestions',
+  //   function() {
+  //     const component = this;
+  //     const uploadedFiles = this.get('selectedFiles');
+  //     let studentScores = component.parseConvertedData(uploadedFiles);
+  //     return studentScores;
+  //   }),
 
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags
@@ -116,6 +119,9 @@ export default Ember.Component.extend(ModalMixin, {
   // Actions
   actions: {
 
+    /**
+     * Action triggered when user select any file.
+     */
     prepareForSubmission(file) {
       const component = this;
       component.set('showConfirm', true);
@@ -125,12 +131,14 @@ export default Ember.Component.extend(ModalMixin, {
           file: fileData,
           url: fileData.data,
           name: fileData.name,
-          isUpload: false,
-          isError: false
+          isUpload: false
         }));
       });
     },
 
+    /**
+     * Action triggered when user select any file for re-upload.
+     */
     prepareForReUpload(file) {
       const component = this;
       component.set('showConfirm', true);
@@ -139,47 +147,59 @@ export default Ember.Component.extend(ModalMixin, {
         selectedFile.set('file', fileData);
         selectedFile.set('url', fileData.data);
         selectedFile.set('name', fileData.name);
-        selectedFile.set('isError', false);
-        selectedFile.set('isConversionError', false);
+        selectedFile.set('isUpload', false);
       });
     },
 
+    /**
+     * Action triggered when user click re-upload button.
+     */
     onReUpload(selectedFile) {
       const component = this;
       component.set('selectedFile', selectedFile);
     },
 
+    /**
+     * Action triggered when user confirms the upload.
+     */
     onConfirmUpload() {
       const component = this;
       component.set('isDisableButton', true);
       component.uploadImageFiles();
     },
 
+    /**
+     * Action triggered when user select student score button.
+     */
     showStudentScores() {
       const component = this;
-      component.set('isReview', true);
+      component.set('showScoreReview', true);
     },
 
+    /**
+     * Action triggered when user select image preview button.
+     */
     showImagePreview() {
       const component = this;
-      component.set('isReview', false);
+      component.set('showScoreReview', false);
     }
 
+    /**
+     * Action triggered when user select confirm score button.
+     */
     // onConfirmScore() {
     //   const component = this;
     //   console.log(this.get('studentScores'));
     // }
   },
 
-  init() {
-    const component = this;
-    component._super(...arguments);
-    component.fetchAssessment();
-  },
-
   // -------------------------------------------------------------------------
   // Methods
 
+  /**
+   * It is used to convert the selected file to data url
+   * @return {Promise Object}
+   */
   readFile(file) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       const reader = new FileReader();
@@ -195,6 +215,9 @@ export default Ember.Component.extend(ModalMixin, {
     });
   },
 
+  /**
+   * It is used to upload the selected filees to s3 and BE
+   */
   uploadImageFiles() {
     const component = this;
     let selectedFiles = component.get('selectedFiles').filterBy('file');
@@ -205,16 +228,16 @@ export default Ember.Component.extend(ModalMixin, {
             selectedFile.set('isUpload', true);
             resolve(addProtocolIfNecessary(imageId));
           }, (error) => {
-            selectedFile.set('isError', true);
+            selectedFile.set('isUpload', false);
             reject(error);
           });
       });
     });
     Promise.all(filePromises).then((uploadedFiles) => {
       if (uploadedFiles.length) {
-        const uploadImageContext = component.get('imageContext');
-        uploadImageContext.set('image_path', uploadedFiles);
-        component.get('i2dService').uploadImage(uploadImageContext).then(() => {
+        const imageUploadContext = component.get('imageUploadContext');
+        imageUploadContext.set('image_path', uploadedFiles);
+        component.get('i2dService').uploadImage(imageUploadContext).then(() => {
           let model = {
             onConfirm: function() {
               component.sendAction('onClosePullUp');
@@ -228,62 +251,65 @@ export default Ember.Component.extend(ModalMixin, {
         });
       }
     });
-  },
-
-  parseConvertedData(uploadedFiles) {
-    const component = this;
-    return uploadedFiles.map((uploadFile) => {
-      if (uploadFile.get('content')) {
-        let parsedData = uploadFile.get('content.parsedData');
-        let users = parsedData.uniqBy('userId');
-        return users.map((user) => {
-          let student = component.parseUser(user);
-          student.set('uploadId', uploadFile.get('content.uploadInfo.id'));
-          let userQuestionList = parsedData.filterBy('userId', student.get('userId'));
-          return component.parseQuestionData(student, userQuestionList);
-        });
-      }
-    });
-  },
-
-  parseUser(user) {
-    return Ember.Object.create({
-      userId: user.get('userId'),
-      username: user.get('username'),
-      email: user.get('email'),
-      firstName: user.get('firstName'),
-      lastName: user.get('lastName')
-    });
-  },
-
-  parseQuestionData(student, userQuestionList) {
-    const component = this;
-    let assessmentQuestions = component.get('assessmentQuestions');
-    let questions = Ember.A([]);
-    userQuestionList.map((userQuestion) => {
-      let question = assessmentQuestions.findBy('id', userQuestion.get('questionId'));
-      if (question) {
-        let questionObject = question.copy();
-        questionObject.set('studentScore', userQuestion.get('score'));
-        questions.pushObject(questionObject);
-      }
-    });
-    student.set('questions', questions);
-    return student;
-  },
-
-  /**
-   * @function fetchAssessment
-   * Method to fetch assessment
-   */
-  fetchAssessment() {
-    const component = this;
-    const assessmentId = component.get('assessmentId');
-    component.get('assessmentService').readAssessment(assessmentId)
-      .then((assessmentData) => {
-        if (!component.isDestroyed) {
-          component.set('assessmentQuestions', assessmentData.get('children'));
-        }
-      });
   }
+
+  // /**
+  //  * It is used to upload the selected filees to s3 and BE
+  //  */
+  // parseConvertedData(uploadedFiles) {
+  //   const component = this;
+  //   return uploadedFiles.map((uploadFile) => {
+  //     if (uploadFile.get('content')) {
+  //       let parsedData = uploadFile.get('content.parsedData');
+  //       let users = parsedData.uniqBy('userId');
+  //       return users.map((user) => {
+  //         let student = component.parseUser(user);
+  //         student.set('uploadId', uploadFile.get('content.uploadInfo.id'));
+  //         let userQuestionList = parsedData.filterBy('userId', student.get('userId'));
+  //         return component.parseQuestionData(student, userQuestionList);
+  //       });
+  //     }
+  //   });
+  // },
+  //
+  // parseUser(user) {
+  //   return Ember.Object.create({
+  //     userId: user.get('userId'),
+  //     username: user.get('username'),
+  //     email: user.get('email'),
+  //     firstName: user.get('firstName'),
+  //     lastName: user.get('lastName')
+  //   });
+  // },
+  //
+  // parseQuestionData(student, userQuestionList) {
+  //   const component = this;
+  //   let assessmentQuestions = component.get('assessmentQuestions');
+  //   let questions = Ember.A([]);
+  //   userQuestionList.map((userQuestion) => {
+  //     let question = assessmentQuestions.findBy('id', userQuestion.get('questionId'));
+  //     if (question) {
+  //       let questionObject = question.copy();
+  //       questionObject.set('studentScore', userQuestion.get('score'));
+  //       questions.pushObject(questionObject);
+  //     }
+  //   });
+  //   student.set('questions', questions);
+  //   return student;
+  // },
+  //
+  // /**
+  //  * @function fetchAssessment
+  //  * Method to fetch assessment
+  //  */
+  // fetchAssessment() {
+  //   const component = this;
+  //   const assessmentId = component.get('assessmentId');
+  //   component.get('assessmentService').readAssessment(assessmentId)
+  //     .then((assessmentData) => {
+  //       if (!component.isDestroyed) {
+  //         component.set('assessmentQuestions', assessmentData.get('children'));
+  //       }
+  //     });
+  // }
 });

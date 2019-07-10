@@ -19,10 +19,16 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
+    /**
+     * Action triggered when teacher close the pull up.
+     */
     onClosePullUp() {
       this.sendAction('onClosePullUp');
     },
 
+    /**
+     * Action triggered when teacher selected a option.
+     */
     onSelectOption(option) {
       this.set('selectedOption', option.name);
     }
@@ -55,6 +61,10 @@ export default Ember.Component.extend({
    */
   activityId: Ember.computed.alias('activityData.id'),
 
+  /**
+   * It maintains the uploaded files.
+   * @prop {Array}
+   */
   uploadedFiles: Ember.A([]),
 
   /**
@@ -80,13 +90,19 @@ export default Ember.Component.extend({
     }
   },
 
+  // -------------------------------------------------------------------------
   //Methods
+
+  /**
+   * It fetch uploaded data for the selected add-data content
+   */
   searchImageUpload() {
     const component = this;
     component.set('isLoading', true);
     component.get('i2dService')
       .searchImage(component.serializeUploadContext())
       .then((result) => {
+        component.set('isLoading', false);
         if (result.length) {
           component.set('selectedOption', 'upload-image');
           component.serializeUploadedFiles(result);
@@ -96,27 +112,21 @@ export default Ember.Component.extend({
 
   /**
    * Serialize data of uploaded images
-   * @return {Object}
    */
   serializeUploadedFiles(uploads) {
     const component = this;
     let uploadedFiles = Ember.A([]);
-    let reviewedUpload = uploads.findBy('status', 1); //Change the status value to 3 for appropiate review status
-    const isReview = !!reviewedUpload;
-    component.set('isReview', isReview);
+    let reviewData = uploads.findBy('status', 1); //Change the status value to 3 for appropiate review status
+    const showScoreReview = !!reviewData;
+    component.set('showScoreReview', showScoreReview);
     uploads.map((item) => {
-      component.get('i2dService').fetchImageData(item.get('id')).then((content) => {
-        uploadedFiles.pushObject(Ember.Object.create({
-          url: item.get('imagePath'),
-          isUpload: true,
-          isError: false,
-          content,
-          isConversionError: item.get('status') === -1,
-          name: cleanFilename(item.get('imagePath'))
-        }));
-      });
+      uploadedFiles.pushObject(Ember.Object.create({
+        url: item.get('imagePath'),
+        isUpload: true,
+        id: item.get('id'),
+        name: cleanFilename(item.get('imagePath'))
+      }));
     });
-    component.set('isLoading', false);
     component.set('uploadedFiles', uploadedFiles);
   },
 

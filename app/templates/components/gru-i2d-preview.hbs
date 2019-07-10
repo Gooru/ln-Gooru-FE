@@ -1,8 +1,8 @@
 <div class="image-preview-container">
-  {{#unless isReview}}
+  {{#unless showScoreReview}}
     <div id="image-preview-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
       <div class="carousel-inner">
-        {{#each previewContent as |image index|}}
+        {{#each previewContents as |image index|}}
           <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
             <div class="image-container">
               <img src="{{image.url}}" />
@@ -19,40 +19,45 @@
       </a>
     </div>
   {{else}}
-    <table class="student-score-table">
-      <tbody>
-        <tr class="heading">
-          <th>Name</th>
-          {{#each questions as |question|}}
-            <th>Q{{question.order}}</th>
-          {{/each}}
-        </tr>
-        {{#each uploadedStudentScores as |students index|}}
-          {{#each students as |student|}}
+    {{log isLoading}}
+    {{#unless isLoading}}
+      <table class="student-score-table">
+        <tbody>
+          <tr class="heading">
+            <th>Name</th>
+            {{#each questions as |question|}}
+              <th>Q{{question.questionSequence}}</th>
+            {{/each}}
+          </tr>
+          {{#each studentScores as |student|}}
             <tr class="student-score">
               <td>{{student.firstName}}</td>
               {{#each student.questions as |question|}}
-                <td> {{validation.gru-input model=question valuePath='studentScore' maxLength=question.maxScore}}</td>
+                <td> {{validation.gru-input model=question valuePath='score' maxLength=question.maxScore}}</td>
               {{/each}}
             </tr>
           {{/each}}
-        {{/each}}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    {{else}}
+      <div class="loading-spinner {{if isLoading 'active'}}">
+        {{three-bounce-spinner}}
+      </div>
+    {{/unless}}
   {{/unless}}
   <div class="footer-container">
     <div class="preview-slides">
-      {{#each previewContent as |image index|}}
+      {{#each previewContents as |image index|}}
         <div class="slide item-{{index}} {{if (eq currentPreviewIndex index) 'active'}}" {{action 'onSelectImage' index}}>
           <img src="{{image.url}}" />
         </div>
       {{/each}}
     </div>
     <div class="action">
-      {{#if showConfirm}}
+      {{#if (and (not showScoreReview) showConfirm)}}
         <button type="button" class="submit-btn {{if isDisableButton 'disable-event'}}" {{action 'onConfirmUpload'}}>Confirm & Continue</button>
       {{/if}}
-      {{#if isReview}}
+      {{#if showScoreReview}}
         <button type="button" class="submit-btn" {{action 'onConfirmScore'}}>Confirm Scores</button>
       {{/if}}
     </div>
