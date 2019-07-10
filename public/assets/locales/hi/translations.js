@@ -2693,5 +2693,12 @@ window.i18ln = {
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
   'report.class-weekly-report': 'Class Weekly Report',
-  'no-teacher-found': 'No teacher with that email id found!'
+  'no-teacher-found': 'No teacher with that email id found!',
+  'domain-code.G': 'ज्यामितीय आकृतियां',
+  'domain-code.PN': 'पूर्व संख्या ज्ञान',
+  'domain-code.PD': 'पैटर्न और आँकड़े',
+  'domain-code.FD': 'भिन्न और दशमलव',
+  'domain-code.M': 'मापन',
+  'domain-code.NS': 'संख्या ज्ञान',
+  'domain-code.NO': 'संख्याओं पर संक्रियाए'
 };
