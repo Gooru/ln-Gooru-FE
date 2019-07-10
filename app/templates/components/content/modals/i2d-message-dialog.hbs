@@ -2,12 +2,12 @@
   <div class="modal-body">
     <div class="success-container">
       {{gru-icon name="check_circle" class="success-icon"}}
-      <span class="success-text">Success</span>
+      <span class="success-text">{{t 'common.success'}}</span>
     </div>
     <p class="message">
-      Successfully uploaded images. The data extraction from images will take some time. Please check back later for review
+      {{t 'i2d-successfully-image-upload'}}
     </p>
-    <p class="question">Do you want to close ?</p>
+    <p class="question">{{t 'common.dialog-close'}}</p>
   </div>
   <div class="actions">
     <div class="cancel-btn" {{action 'cancel'}}>{{t 'common.cancel'}}</div>

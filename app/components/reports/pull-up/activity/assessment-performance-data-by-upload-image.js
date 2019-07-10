@@ -1,12 +1,9 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import {
-  addProtocolIfNecessary
-} from 'gooru-web/utils/utils';
+import { addProtocolIfNecessary } from 'gooru-web/utils/utils';
 import ModalMixin from 'gooru-web/mixins/modal';
 export default Ember.Component.extend(ModalMixin, {
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['assessment-performance-data-by-upload-image'],
@@ -118,7 +115,6 @@ export default Ember.Component.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Actions
   actions: {
-
     /**
      * Action triggered when user select any file.
      */
@@ -127,12 +123,14 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('showConfirm', true);
       let selectedFiles = component.get('selectedFiles');
       component.readFile(file).then(function(fileData) {
-        selectedFiles.pushObject(Ember.Object.create({
-          file: fileData,
-          url: fileData.data,
-          name: fileData.name,
-          isUpload: false
-        }));
+        selectedFiles.pushObject(
+          Ember.Object.create({
+            file: fileData,
+            url: fileData.data,
+            name: fileData.name,
+            isUpload: false
+          })
+        );
       });
     },
 
@@ -221,95 +219,43 @@ export default Ember.Component.extend(ModalMixin, {
   uploadImageFiles() {
     const component = this;
     let selectedFiles = component.get('selectedFiles').filterBy('file');
-    let filePromises = selectedFiles.map((selectedFile) => {
+    let filePromises = selectedFiles.map(selectedFile => {
       return new Ember.RSVP.Promise(function(resolve, reject) {
-        return component.get('mediaService').uploadContentFile(selectedFile.get('file'))
-          .then((imageId) => {
-            selectedFile.set('isUpload', true);
-            resolve(addProtocolIfNecessary(imageId));
-          }, (error) => {
-            selectedFile.set('isUpload', false);
-            reject(error);
-          });
+        return component
+          .get('mediaService')
+          .uploadContentFile(selectedFile.get('file'))
+          .then(
+            imageId => {
+              selectedFile.set('isUpload', true);
+              resolve(addProtocolIfNecessary(imageId));
+            },
+            error => {
+              selectedFile.set('isUpload', false);
+              reject(error);
+            }
+          );
       });
     });
-    Promise.all(filePromises).then((uploadedFiles) => {
+    Promise.all(filePromises).then(uploadedFiles => {
       if (uploadedFiles.length) {
         const imageUploadContext = component.get('imageUploadContext');
         imageUploadContext.set('image_path', uploadedFiles);
-        component.get('i2dService').uploadImage(imageUploadContext).then(() => {
-          let model = {
-            onConfirm: function() {
-              component.sendAction('onClosePullUp');
-            }
-          };
-          component.actions.showModal.call(
-            component,
-            'content.modals.i2d-message-dialog',
-            model
-          );
-        });
+        component
+          .get('i2dService')
+          .uploadImage(imageUploadContext)
+          .then(() => {
+            let model = {
+              onConfirm: function() {
+                component.sendAction('onClosePullUp');
+              }
+            };
+            component.actions.showModal.call(
+              component,
+              'content.modals.i2d-message-dialog',
+              model
+            );
+          });
       }
     });
   }
-
-  // /**
-  //  * It is used to upload the selected filees to s3 and BE
-  //  */
-  // parseConvertedData(uploadedFiles) {
-  //   const component = this;
-  //   return uploadedFiles.map((uploadFile) => {
-  //     if (uploadFile.get('content')) {
-  //       let parsedData = uploadFile.get('content.parsedData');
-  //       let users = parsedData.uniqBy('userId');
-  //       return users.map((user) => {
-  //         let student = component.parseUser(user);
-  //         student.set('uploadId', uploadFile.get('content.uploadInfo.id'));
-  //         let userQuestionList = parsedData.filterBy('userId', student.get('userId'));
-  //         return component.parseQuestionData(student, userQuestionList);
-  //       });
-  //     }
-  //   });
-  // },
-  //
-  // parseUser(user) {
-  //   return Ember.Object.create({
-  //     userId: user.get('userId'),
-  //     username: user.get('username'),
-  //     email: user.get('email'),
-  //     firstName: user.get('firstName'),
-  //     lastName: user.get('lastName')
-  //   });
-  // },
-  //
-  // parseQuestionData(student, userQuestionList) {
-  //   const component = this;
-  //   let assessmentQuestions = component.get('assessmentQuestions');
-  //   let questions = Ember.A([]);
-  //   userQuestionList.map((userQuestion) => {
-  //     let question = assessmentQuestions.findBy('id', userQuestion.get('questionId'));
-  //     if (question) {
-  //       let questionObject = question.copy();
-  //       questionObject.set('studentScore', userQuestion.get('score'));
-  //       questions.pushObject(questionObject);
-  //     }
-  //   });
-  //   student.set('questions', questions);
-  //   return student;
-  // },
-  //
-  // /**
-  //  * @function fetchAssessment
-  //  * Method to fetch assessment
-  //  */
-  // fetchAssessment() {
-  //   const component = this;
-  //   const assessmentId = component.get('assessmentId');
-  //   component.get('assessmentService').readAssessment(assessmentId)
-  //     .then((assessmentData) => {
-  //       if (!component.isDestroyed) {
-  //         component.set('assessmentQuestions', assessmentData.get('children'));
-  //       }
-  //     });
-  // }
 });

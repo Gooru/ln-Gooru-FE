@@ -19,26 +19,35 @@
       </a>
     </div>
   {{else}}
-    {{log isLoading}}
     {{#unless isLoading}}
-      <table class="student-score-table">
-        <tbody>
-          <tr class="heading">
-            <th>Name</th>
-            {{#each questions as |question|}}
-              <th>Q{{question.questionSequence}}</th>
-            {{/each}}
-          </tr>
-          {{#each studentScores as |student|}}
-            <tr class="student-score">
-              <td>{{student.firstName}}</td>
-              {{#each student.questions as |question|}}
-                <td> {{validation.gru-input model=question valuePath='score' maxLength=question.maxScore}}</td>
+      {{#if isUploadReadyForReview}}
+        <table class="student-score-table">
+          <tbody>
+            <tr class="heading">
+              <th>{{t 'common.name'}}</th>
+              {{#each questions as |question|}}
+                <th>Q{{question.questionSequence}}</th>
               {{/each}}
             </tr>
-          {{/each}}
-        </tbody>
-      </table>
+            {{#each studentScores as |student|}}
+              <tr class="student-score">
+                <td>{{student.firstName}}</td>
+                {{#each student.questions as |question|}}
+                  <td> {{validation.gru-input model=question valuePath='score' maxLength=question.maxScore}}</td>
+                {{/each}}
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{else}}
+        <div class="message">
+          {{#if (eq uploadStatus -1)}}
+            {{t 'i2d.conversion-error'}}
+          {{else}}
+            {{t 'i2d.conversion-progress'}}
+          {{/if}}
+        </div>
+      {{/if}}
     {{else}}
       <div class="loading-spinner {{if isLoading 'active'}}">
         {{three-bounce-spinner}}
@@ -55,10 +64,10 @@
     </div>
     <div class="action">
       {{#if (and (not showScoreReview) showConfirm)}}
-        <button type="button" class="submit-btn {{if isDisableButton 'disable-event'}}" {{action 'onConfirmUpload'}}>Confirm & Continue</button>
+        <button type="button" class="submit-btn {{if isDisableButton 'disable-event'}}" {{action 'onConfirmUpload'}}>{{t 'common.confirm'}} & {{t 'gru-assessment-confirmation.continue'}}</button>
       {{/if}}
       {{#if showScoreReview}}
-        <button type="button" class="submit-btn" {{action 'onConfirmScore'}}>Confirm Scores</button>
+        <button type="button" class="submit-btn" {{action 'onConfirmScore'}}>{{t 'common.confirm'}} {{t 'gru-performance-summary.scores'}}</button>
       {{/if}}
     </div>
   </div>

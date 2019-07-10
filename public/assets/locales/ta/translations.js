@@ -40,6 +40,21 @@ window.i18ln = {
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',
+  'common.add-data-choice-title': 'How do you want to enter the data?',
+  'common.take-photo': 'take photo',
+  'common.upload-image': 'upload image',
+  'common.by-question': 'question-by-question',
+  'i2d.conversion-progress':
+    'The uploaded image(s) are being processed. Please check back later',
+  'i2d.conversion-error':
+    'There was an error when trying to convert the image. Please resubmit the image',
+  'file-picker-placeholder': 'Choose a file or drag it here',
+  'no-preview-available': 'no preview available',
+  'common.success': 'Success',
+  'i2d-successfully-image-upload':
+    'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
+  'common.dialog-close': 'Do you want to close ?',
+  're-upload': 'Re-Upload',
   'errors.wrongLength':
     '{{description}} தவறான நீளம் ({{is}} எழுத்துகள் இருக்க வேண்டும்)',
   'errors.notANumber': '{{description}} ஒரு எண்ணாக இருக்க வேண்டும்',
@@ -68,10 +83,6 @@ window.i18ln = {
   'common.no-content-for-week':
     'No class activities scheduled for the selected period',
   'common.list': 'பட்டியலில்',
-  'common.add-data-choice-title': 'How do you want to enter the data?',
-  'common.take-photo':'take photo',
-  'common.upload-image':'upload image',
-  'common.by-question':'question-by-question',
   'common.for': 'for',
   'self-grade.not-required': 'Student self-grading not required',
   'common.first': 'முதல்',

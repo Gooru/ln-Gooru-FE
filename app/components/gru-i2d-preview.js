@@ -1,7 +1,6 @@
 import Ember from 'ember';
-
+import { I2D_CONVERSION_STATUS } from 'gooru-web/config/config';
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['gru-i2d-preview'],
@@ -129,12 +128,24 @@ export default Ember.Component.extend({
     const component = this;
     const uploadContent = component.get('currentPreviewContent');
     component.set('isLoading', true);
-    component.get('i2dService').fetchImageData(uploadContent.get('id')).then((content) => {
-      const parsedData = content.get('parsedData');
-      component.set('questions', component.parseQuestions(parsedData).sortBy('questionSequence'));
-      component.set('studentScores', component.parseScores(parsedData));
-      component.set('isLoading', false);
-    });
+    component
+      .get('i2dService')
+      .fetchImageData(uploadContent.get('id'))
+      .then(content => {
+        const uploadStatus = content.get('uploadInfo.status');
+        const parsedData = content.get('parsedData');
+        component.set(
+          'questions',
+          component.parseQuestions(parsedData).sortBy('questionSequence')
+        );
+        component.set('studentScores', component.parseScores(parsedData));
+        component.set('uploadStatus', uploadStatus);
+        component.set(
+          'isUploadReadyForReview',
+          uploadStatus === I2D_CONVERSION_STATUS.READY_FOR_REVIEW
+        );
+        component.set('isLoading', false);
+      });
   },
 
   /**
@@ -143,7 +154,7 @@ export default Ember.Component.extend({
    */
   parseQuestions(data) {
     let questions = data.uniqBy('questionId');
-    return questions.map((question) => {
+    return questions.map(question => {
       return Ember.Object.create({
         questionId: question.questionId,
         questionTitle: question.questionTitle,
@@ -161,7 +172,7 @@ export default Ember.Component.extend({
   parseScores(data) {
     const component = this;
     let users = data.uniqBy('userId');
-    return users.map((user) => {
+    return users.map(user => {
       let student = component.parseUserDetails(user);
       let studentData = data.filterBy('userId', student.get('userId'));
       student.set('questions', studentData);

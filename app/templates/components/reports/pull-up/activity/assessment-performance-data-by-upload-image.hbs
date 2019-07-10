@@ -43,9 +43,13 @@
                   readAs="readAsFile"
                   errors=filePickerErrors
                 }}
-                  <button type="button" class="submit-btn" {{action 'onReUpload' selectedFile}}>Re-Upload</button>
+                  <button type="button" class="submit-btn" {{action 'onReUpload' selectedFile}}>
+                    {{t 're-upload'}}
+                  </button>
                 {{/file-picker}}
-                <button type="button" class="ignore-btn" {{action 'onIgnore' selectedFile}}>Ignore & Continue</button>
+                <button type="button" class="ignore-btn" {{action 'onIgnore' selectedFile}}>
+                  {{t 'common.ignore'}} & {{t 'gru-assessment-confirmation.continue'}}
+                </button>
               </div>
             </div>
           {{/unless}}
@@ -64,17 +68,23 @@
           }}
           <div class="file-picker-panel">
             <i class="icon"></i>
-            <span class="title">Choose a file or drag it here</span>
+            <span class="title">{{t 'file-picker-placeholder'}}</span>
           </div>
         {{/file-picker}}
       </div>
     {{/unless}}
   </div>
   <div class="right-panel">
-    <div class="toggle-btns">
-      <button type="button" class="btn-primary {{unless showScoreReview 'active'}}" {{action 'showImagePreview'}}>Image Preview</button>
-      <button type="button" class="btn-primary {{if showScoreReview 'active'}}" {{action 'showStudentScores'}}>Scores</button>
-    </div>
+    {{#if showScoreReview}}
+      <div class="toggle-btns">
+        <button type="button" class="btn-primary {{unless showScoreReview 'active'}}" {{action 'showImagePreview'}}>
+          {{t 'resource.image'}} {{t 'common.preview'}}
+        </button>
+        <button type="button" class="btn-primary {{if showScoreReview 'active'}}" {{action 'showStudentScores'}}>
+          {{t 'gru-performance-summary.scores'}}
+        </button>
+      </div>
+    {{/if}}
     <div class="preview-panel">
       {{#if selectedFiles}}
         {{gru-i2d-preview
@@ -87,7 +97,7 @@
           onConfirmScore="onConfirmScore"
         }}
       {{else}}
-        <div class="prev-message">no preview available</div>
+        <div class="prev-message">{{t 'no-preview-available'}}</div>
       {{/if}}
     </div>
   </div>

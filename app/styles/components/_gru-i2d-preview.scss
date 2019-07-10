@@ -64,6 +64,13 @@
       }
     }
 
+    .message {
+      text-align: center;
+      color: #fff;
+      font-size: 16px;
+      padding: 20px;
+    }
+
     .student-score-table {
       width: 100%;
       height: auto;
@@ -124,7 +131,7 @@
       height: 80px;
       width: 100%;
       display: flex;
-      background-color: rgba(0,0,0,0.5);
+      background-color: rgba(0, 0, 0, 0.5);
 
       .preview-slides {
         display: flex;
@@ -157,7 +164,7 @@
 
         button {
           margin: auto;
-          background-image: linear-gradient(to right, #00abe0 , #0072bc);
+          background-image: linear-gradient(to right, #00abe0, #0072bc);
           border: none;
           color: #fff;
           height: 40px;
