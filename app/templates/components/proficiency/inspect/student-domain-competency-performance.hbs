@@ -6,7 +6,7 @@
           {{gru-icon name="arrow_back"}}
         </div>
         <div class="domain-name ellipsis">
-          {{concat activeDomain.domainSeq '. ' activeDomain.domainName}}
+          {{concat activeDomain.domainSeq '. ' (locale-translation (t (concat 'domain-code.' activeDomain.domainCode)) activeDomain.domainName)}}
         </div>
       </div>
       <div class="competency-count">
