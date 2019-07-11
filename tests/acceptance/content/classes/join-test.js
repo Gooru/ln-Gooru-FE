@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 
@@ -14,7 +14,7 @@ moduleForAcceptance('Acceptance | Content Classes Join Class', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/content/classes/join');
 
   andThen(function() {
@@ -25,7 +25,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('Join class', function(assert) {
+skip('Join class', function(assert) {
   visit('/content/classes/join');
 
   andThen(function() {

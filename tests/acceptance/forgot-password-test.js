@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -17,7 +17,7 @@ moduleForAcceptance('Acceptance | forgot-password', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/forgot-password');
 
   andThen(function() {
@@ -82,9 +82,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('it shows an error message if the email field is left blank', function(
-  assert
-) {
+skip('it shows an error message if the email field is left blank', function(assert) {
   visit('/forgot-password');
 
   andThen(function() {
@@ -120,7 +118,7 @@ test('it shows an error message if the email field is left blank', function(
   });
 });
 
-test('it shows an error message if the email is wrong', function(assert) {
+skip('it shows an error message if the email is wrong', function(assert) {
   visit('/forgot-password');
 
   authenticateSession(this.application, {

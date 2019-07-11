@@ -9,7 +9,7 @@
       <ul>
         {{#each taxonomyDomains as |taxonomyDomain index |}}
           <li>
-            {{taxonomyDomain.domainSeq}}. {{taxonomyDomain.domainName}}
+            {{taxonomyDomain.domainSeq}}. {{locale-translation (t (concat 'domain-code.' taxonomyDomain.domainCode)) taxonomyDomain.domainName}}
           </li>
         {{/each}}
       </ul>

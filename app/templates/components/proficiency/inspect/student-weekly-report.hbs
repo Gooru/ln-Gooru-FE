@@ -131,7 +131,7 @@
       {{#if isShowStudentCompetencies}}
         <div class="student-competencies-container">
           {{#each studentDomainCompetencies as |domainCompetencies|}}
-            <div class="domain-name">{{domainCompetencies.domainName}}</div>
+            <div class="domain-name">{{locale-translation (t (concat 'domain-code.' domainCompetencies.domainCode)) domainCompetencies.domainName}}</div>
             <div class="competencies">
               {{#each domainCompetencies.competencies as |competency|}}
                 <div class="student-competency">

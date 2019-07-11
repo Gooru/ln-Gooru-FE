@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import Ember from 'ember';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | student/class/performance', {
   }
 });
 
-test('My report', function(assert) {
+skip('My report', function(assert) {
   visit(
     '/student/class/class-for-pochita-as-student/performance?collectionType=collection'
   );

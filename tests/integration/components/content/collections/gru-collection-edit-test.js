@@ -1,4 +1,4 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent, test, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import Collection from 'gooru-web/models/content/collection';
@@ -44,7 +44,7 @@ moduleForComponent(
   }
 );
 
-test('it has header and main sections', function(assert) {
+skip('it has header and main sections', function(assert) {
   var collection = Collection.create(Ember.getOwner(this).ownerInjection(), {
     title: 'Collection Title'
   });

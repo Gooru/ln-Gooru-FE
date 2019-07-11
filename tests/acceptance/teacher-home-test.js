@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -16,7 +16,7 @@ moduleForAcceptance('Acceptance | Teacher Home Landing page', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   window.localStorage.setItem('id-for-pochita_logins', 3);
   visit('/teacher-home');
 

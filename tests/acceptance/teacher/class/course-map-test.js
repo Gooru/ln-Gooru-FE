@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 
@@ -14,7 +14,7 @@ moduleForAcceptance('Acceptance | teacher/class/course-map', {
   }
 });
 
-test('Layout as a teacher', function(assert) {
+skip('Layout as a teacher', function(assert) {
   visit('/teacher/class/class-for-pochita-as-teacher/course-map');
   andThen(function() {
     assert.equal(
@@ -37,7 +37,7 @@ test('Layout as a teacher', function(assert) {
   });
 });
 
-test('Layout as a teacher with location', function(assert) {
+skip('Layout as a teacher with location', function(assert) {
   visit(
     '/teacher/class/class-for-pochita-as-teacher/course-map?location=first-unit-id%2Bfirst-lesson-id'
   );

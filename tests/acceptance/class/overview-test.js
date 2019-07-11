@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 
@@ -14,7 +14,7 @@ moduleForAcceptance('Acceptance | class/overview', {
   }
 });
 
-test('Layout as a student', function(assert) {
+skip('Layout as a student', function(assert) {
   visit('/class/class-for-pochita-as-student/overview');
   andThen(function() {
     assert.equal(

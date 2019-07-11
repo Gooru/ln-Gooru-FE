@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -16,7 +16,7 @@ moduleForAcceptance('Acceptance | student/class/analytics/performance', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/student/class/class-for-pochita-as-student/analytics/performance');
 
   andThen(function() {
@@ -55,7 +55,7 @@ test('Layout', function(assert) {
   });
 });
 
-test('Navigating from class navigation', function(assert) {
+skip('Navigating from class navigation', function(assert) {
   visit('/student/class/class-for-pochita-as-student/analytics/performance');
 
   andThen(function() {
@@ -76,7 +76,7 @@ test('Navigating from class navigation', function(assert) {
   });
 });
 
-test('When filtering by collection is  pre-selected', function(assert) {
+skip('When filtering by collection is  pre-selected', function(assert) {
   visit(
     '/student/class/class-for-pochita-as-student/analytics/performance?filterBy=collection'
   );

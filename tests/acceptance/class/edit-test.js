@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | class/edit', {
   }
 });
 
-test('Teacher Layout', function(assert) {
+skip('Teacher Layout', function(assert) {
   visit('/class/class-for-pochita-as-teacher/edit');
 
   andThen(function() {
@@ -58,9 +58,7 @@ test('Teacher Layout', function(assert) {
   });
 });
 
-test('it shows an error message if the name field is left blank', function(
-  assert
-) {
+skip('it shows an error message if the name field is left blank', function(assert) {
   visit('/class/class-for-pochita-as-teacher/edit');
 
   andThen(function() {

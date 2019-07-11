@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 
@@ -14,7 +14,7 @@ moduleForAcceptance('Acceptance | integration', {
   }
 });
 
-test('integration route to info', function(assert) {
+skip('integration route to info', function(assert) {
   visit(
     '/integration/teams?token=any-token&classId=class-for-pochita-as-teacher&page=class-info'
   );
@@ -24,9 +24,7 @@ test('integration route to info', function(assert) {
   });
 });
 
-test('integration route to data analytics page in a teacher class', function(
-  assert
-) {
+skip('integration route to data analytics page in a teacher class', function(assert) {
   visit(
     '/integration/teams?token=any-token&classId=class-for-pochita-as-teacher&page=teacher-data'
   );
@@ -39,9 +37,7 @@ test('integration route to data analytics page in a teacher class', function(
   });
 });
 
-test('integration route to data analytics page in a student class', function(
-  assert
-) {
+skip('integration route to data analytics page in a student class', function(assert) {
   visit(
     '/integration/teams?token=any-token&classId=class-for-pochita-as-student&page=student-data'
   );
@@ -55,7 +51,7 @@ test('integration route to data analytics page in a student class', function(
   });
 });
 
-test('integration route to overview', function(assert) {
+skip('integration route to overview', function(assert) {
   visit(
     '/integration/teams?token=any-token&classId=class-for-pochita-as-student&page=course-map'
   );
@@ -69,7 +65,7 @@ test('integration route to overview', function(assert) {
   });
 });
 
-test('integration route to overview with unit id', function(assert) {
+skip('integration route to overview with unit id', function(assert) {
   visit(
     '/integration/teams?token=any-token&classId=class-for-pochita-as-student&page=course-map&unitId=first-unit-id'
   );
@@ -83,9 +79,7 @@ test('integration route to overview with unit id', function(assert) {
   });
 });
 
-test('integration route to overview with unit id and lesson id', function(
-  assert
-) {
+skip('integration route to overview with unit id and lesson id', function(assert) {
   visit(
     '/integration/teams?token=any-token&classId=class-for-pochita-as-student&page=course-map&unitId=first-unit-id&lessonId=first-lesson-id'
   );
@@ -99,9 +93,7 @@ test('integration route to overview with unit id and lesson id', function(
   });
 });
 
-test('integration route to overview with unit id and lesson id and collection id', function(
-  assert
-) {
+skip('integration route to overview with unit id and lesson id and collection id', function(assert) {
   visit(
     '/integration/teams?token=any-token&classId=class-for-pochita-as-student&page=course-map&unitId=first-unit-id&lessonId=first-lesson-id&collectionId=first-assessment-id'
   );
@@ -115,9 +107,7 @@ test('integration route to overview with unit id and lesson id and collection id
   });
 });
 
-test('integration route to player with collection id and type', function(
-  assert
-) {
+skip('integration route to player with collection id and type', function(assert) {
   visit(
     '/integration/teams?token=any-token&page=player&collectionId=all-resource-types-collection-id&collectionType=collection'
   );
@@ -131,9 +121,7 @@ test('integration route to player with collection id and type', function(
   });
 });
 
-test('integration route to player with collection id and type and source id', function(
-  assert
-) {
+skip('integration route to player with collection id and type and source id', function(assert) {
   visit(
     '/integration/teams?token=any-token&page=player&collectionId=all-resource-types-collection-id&collectionType=collection&sourceId=123'
   );
