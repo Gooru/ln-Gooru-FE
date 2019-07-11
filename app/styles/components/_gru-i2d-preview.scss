@@ -125,6 +125,25 @@
       }
     }
 
+    .re-upload-container {
+      position: absolute;
+      bottom: 90px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+
+      button {
+        border-radius: 50px;
+        border: none;
+        box-shadow: none;
+        width: 40px;
+        height: 40px;
+        color: #fff;
+        background-color: #007ec1;
+      }
+    }
+
     .footer-container {
       position: absolute;
       bottom: 0;

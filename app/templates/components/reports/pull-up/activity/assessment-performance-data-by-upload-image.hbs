@@ -1,4 +1,5 @@
-<div class="panels">
+<!-- Desktop View -->
+<div class="panels hidden-xs">
   <div class="left-panel">
     <div class="collection-image-container" style="background-image: url({{assessment.thumbnailUrl}})">
       <div class="collection-standards">
@@ -19,19 +20,19 @@
             </div>
             <div class="image-name ellipsis">
               <span class="ellipsis">{{selectedFile.name}}</span>
-              {{#unless selectedFile.isUpload}}
+              {{#if selectedFile.isUploadFailed}}
                 <div class="error-bar"></div>
-              {{/unless}}
+              {{/if}}
             </div>
             <div class="status-icon">
-              {{#if selectedFile.isUpload}}
+              {{#if selectedFile.isUploadSuccess}}
                 <i class="sucess"></i>
-              {{else}}
+              {{else if selectedFile.isUploadFailed}}
                 {{gru-icon name="info"}}
               {{/if}}
             </div>
           </div>
-          {{#unless selectedFile.isUpload}}
+          {{#if selectedFile.isUploadFailed}}
             <div class="error-panel">
               <div class="message">There was an error reading the class code on this image. Re-upload?</div>
               <div class="actions">
@@ -41,7 +42,6 @@
                   dropzone=false
                   fileLoaded=(action 'prepareForReUpload')
                   readAs="readAsFile"
-                  errors=filePickerErrors
                 }}
                   <button type="button" class="submit-btn" {{action 'onReUpload' selectedFile}}>
                     {{t 're-upload'}}
@@ -52,7 +52,7 @@
                 </button>
               </div>
             </div>
-          {{/unless}}
+          {{/if}}
         {{/each}}
       </div>
     {{/if}}
@@ -64,7 +64,6 @@
             dropzone=false
             fileLoaded=(action 'prepareForSubmission')
             readAs="readAsFile"
-            errors=filePickerErrors
           }}
           <div class="file-picker-panel">
             <i class="icon"></i>
@@ -75,7 +74,7 @@
     {{/unless}}
   </div>
   <div class="right-panel">
-    {{#if showScoreReview}}
+    {{#if showToggle}}
       <div class="toggle-btns">
         <button type="button" class="btn-primary {{unless showScoreReview 'active'}}" {{action 'showImagePreview'}}>
           {{t 'resource.image'}} {{t 'common.preview'}}
@@ -91,8 +90,11 @@
           previewContents=selectedFiles
           currentPreviewIndex=currentPreviewIndex
           showConfirm=showConfirm
+          showToggle=showToggle
           showScoreReview=showScoreReview
+          selectedFile=selectedFile
           isDisableButton=isDisableButton
+          onPrepareForReUpload="prepareForReUpload"
           onConfirmUpload="onConfirmUpload"
           onConfirmScore="onConfirmScore"
         }}
@@ -100,5 +102,38 @@
         <div class="prev-message">{{t 'no-preview-available'}}</div>
       {{/if}}
     </div>
+  </div>
+</div>
+
+<!-- Mobile View -->
+<div class="container-xs hidden visible-xs">
+  <div class="image-preview">
+    <img src="{{uploadedFile.url}}" />
+  </div>
+  <div class="selected-images">
+    {{#each selectedFiles as |selectedFile index|}}
+      <div class="selected-image-panel {{if (eq currentPreviewIndex index) 'active'}}">
+        <div class="image-preview">
+          <img src="{{selectedFile.url}}" />
+        </div>
+        {{gru-icon name="done_all"}}
+      </div>
+    {{/each}}
+  </div>
+  <button type="submit" class="submit-btn">
+    <span class="icon">{{gru-icon name="done_all"}}</span>
+    <span class="label">{{selectedFiles.length}}</span>
+  </button>
+  <div class="footer">
+    {{#file-picker
+        accept=mimeType
+        preview=false
+        dropzone=false
+        fileLoaded=(action 'prepareForSubmission')
+        readAs="readAsFile"
+      }}
+      <div class="tap-section"></div>
+    {{/file-picker}}
+    <span class="info-msg">Tap for image upload</span>
   </div>
 </div>

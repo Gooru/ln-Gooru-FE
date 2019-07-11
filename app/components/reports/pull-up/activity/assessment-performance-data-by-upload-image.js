@@ -19,6 +19,11 @@ export default Ember.Component.extend(ModalMixin, {
   assessmentService: Ember.inject.service('api-sdk/assessment'),
 
   /**
+   * @requires service:notifications
+   */
+  notifications: Ember.inject.service(),
+
+  /**
    * @property {I2dService} Media service API SDK
    */
   i2dService: Ember.inject.service('api-sdk/i2d'),
@@ -30,12 +35,6 @@ export default Ember.Component.extend(ModalMixin, {
    * @prop {Array}
    */
   selectedFiles: Ember.A([]),
-
-  /**
-   * List of error messages to present to the user for conditions that the loaded image does not meet
-   * @prop {String[]}
-   */
-  filePickerErrors: Ember.A([]),
 
   /**
    * List of assessment questions
@@ -87,18 +86,21 @@ export default Ember.Component.extend(ModalMixin, {
 
   /**
    * It maintains the whether we need to show confirm button or not.
-   * @prop {Integer}
+   * @prop {Boolean}
    */
   showConfirm: false,
 
-  // uploadedStudentScores: Ember.computed('selectedFiles.@each.content.parsedData.[]',
-  //   'assessmentQuestions',
-  //   function() {
-  //     const component = this;
-  //     const uploadedFiles = this.get('selectedFiles');
-  //     let studentScores = component.parseConvertedData(uploadedFiles);
-  //     return studentScores;
-  //   }),
+  /**
+   * It maintains the whether we need to show toggle buttons or not.
+   * @prop {Boolean}
+   */
+  showToggle: false,
+
+  /**
+   * It maintains the uploaded file for submission
+   * @prop {Object}
+   */
+  uploadedFile: null,
 
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags
@@ -123,14 +125,14 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('showConfirm', true);
       let selectedFiles = component.get('selectedFiles');
       component.readFile(file).then(function(fileData) {
-        selectedFiles.pushObject(
-          Ember.Object.create({
-            file: fileData,
-            url: fileData.data,
-            name: fileData.name,
-            isUpload: false
-          })
-        );
+        let uploadedFile = Ember.Object.create({
+          file: fileData,
+          url: fileData.data,
+          name: fileData.name,
+          isUploadSuccess: false
+        });
+        component.set('uploadedFile', uploadedFile);
+        selectedFiles.pushObject(uploadedFile);
       });
     },
 
@@ -145,7 +147,7 @@ export default Ember.Component.extend(ModalMixin, {
         selectedFile.set('file', fileData);
         selectedFile.set('url', fileData.data);
         selectedFile.set('name', fileData.name);
-        selectedFile.set('isUpload', false);
+        selectedFile.set('isUploadSuccess', false);
       });
     },
 
@@ -226,17 +228,39 @@ export default Ember.Component.extend(ModalMixin, {
           .uploadContentFile(selectedFile.get('file'))
           .then(
             imageId => {
-              selectedFile.set('isUpload', true);
-              resolve(addProtocolIfNecessary(imageId));
+              selectedFile.set('isUploadSuccess', true);
+              resolve(
+                Ember.Object.create({
+                  url: addProtocolIfNecessary(imageId),
+                  id: selectedFile.get('id')
+                })
+              );
             },
             error => {
-              selectedFile.set('isUpload', false);
+              selectedFile.set('isUploadFailed', true);
               reject(error);
             }
           );
       });
     });
-    Promise.all(filePromises).then(uploadedFiles => {
+    Promise.all(filePromises).then(imagePaths => {
+      let reUploadedFiles = imagePaths.filterBy('id');
+      let uploadedFiles = imagePaths
+        .rejectBy('id')
+        .map(image => image.get('url'));
+      if (reUploadedFiles.length) {
+        reUploadedFiles.map(uploadFile => {
+          let request = Ember.Object.create({
+            image_path: uploadFile.get('url')
+          });
+          component
+            .get('i2dService')
+            .replaceImage(uploadFile.get('id'), request)
+            .then(() => {
+              component.notifyUploadSuccess();
+            });
+        });
+      }
       if (uploadedFiles.length) {
         const imageUploadContext = component.get('imageUploadContext');
         imageUploadContext.set('image_path', uploadedFiles);
@@ -257,5 +281,16 @@ export default Ember.Component.extend(ModalMixin, {
           });
       }
     });
+  },
+
+  notifyUploadSuccess() {
+    const component = this;
+    component.get('notifications').setOptions({
+      positionClass: 'toast-top-full-width',
+      toastClass: 'gooru-toast',
+      timeOut: 10000
+    });
+    const successMsg = component.get('i18n').t('upload-success');
+    component.get('notifications').success(successMsg);
   }
 });

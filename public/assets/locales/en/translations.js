@@ -77,6 +77,7 @@ window.i18ln = {
   'i2d-successfully-image-upload':
     'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
   'common.dialog-close': 'Do you want to close ?',
+  'upload-success': 'Uploaded Successfully',
   're-upload': 'Re-Upload',
   'common.user': 'user',
   'common.content-name': 'Content Name',

@@ -34,26 +34,36 @@ export default Ember.Service.extend({
     return service.get('i2dAdapter').uploadImage(context);
   },
 
-
   searchImage: function(context) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('i2dAdapter').searchImage(context).then(result =>
-        resolve(service.get('i2dSerializer')
-          .normalizeSearchResult(result)),
-      reject
-      );
+      service
+        .get('i2dAdapter')
+        .searchImage(context)
+        .then(
+          result =>
+            resolve(service.get('i2dSerializer').normalizeSearchResult(result)),
+          reject
+        );
     });
   },
 
   fetchImageData: function(uploadId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('i2dAdapter').fetchImageData(uploadId).then(result =>
-        resolve(service.get('i2dSerializer')
-          .normalizeImageData(result)),
-      reject
-      );
+      service
+        .get('i2dAdapter')
+        .fetchImageData(uploadId)
+        .then(
+          result =>
+            resolve(service.get('i2dSerializer').normalizeImageData(result)),
+          reject
+        );
     });
+  },
+
+  replaceImage: function(uploadId, data) {
+    const service = this;
+    return service.get('i2dAdapter').replaceImage(uploadId, data);
   }
 });

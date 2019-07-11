@@ -19,6 +19,12 @@ export default Ember.Component.extend({
   previewContents: null,
 
   /**
+   * List of valid file extensions.
+   * @prop {String}
+   */
+  mimeType: 'image/*',
+
+  /**
    * It maintains the preview content
    * @prop {Array}
    */
@@ -116,6 +122,22 @@ export default Ember.Component.extend({
     onConfirmScore() {
       const component = this;
       component.sendAction('onConfirmScore');
+    },
+
+    /**
+     * Action triggered when user clicks on reupload button
+     */
+    onReUpload() {
+      const component = this;
+      component.set('selectedFile', component.get('currentPreviewContent'));
+    },
+
+    /**
+     * Action triggered when file loaded from file picker
+     */
+    prepareForReUpload(file) {
+      const component = this;
+      component.sendAction('onPrepareForReUpload', file);
     }
   },
 
@@ -142,7 +164,7 @@ export default Ember.Component.extend({
         component.set('uploadStatus', uploadStatus);
         component.set(
           'isUploadReadyForReview',
-          uploadStatus === I2D_CONVERSION_STATUS.READY_FOR_REVIEW
+          uploadStatus === I2D_CONVERSION_STATUS.SENT_FOR_CONVERSION
         );
         component.set('isLoading', false);
       });

@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Object.extend({
-
   session: Ember.inject.service('session'),
   /**
    * @property {string} End-point URI
@@ -47,6 +46,19 @@ export default Ember.Object.extend({
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  replaceImage: function(uploadId, data) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/upload/${uploadId}`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify(data),
       headers: adapter.defineHeaders()
     };
     return Ember.$.ajax(url, options);

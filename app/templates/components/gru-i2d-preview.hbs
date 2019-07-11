@@ -18,6 +18,21 @@
         {{gru-icon name="arrow_right"}}
       </a>
     </div>
+    {{#if isUploadReadyForReview}}
+      <div class="re-upload-container">
+        {{#file-picker
+        accept=mimeType
+        preview=false
+        dropzone=false
+        fileLoaded=(action 'prepareForReUpload')
+        readAs="readAsFile"
+      }}
+          <button type="button" class="re-upload-btn" {{action 'onReUpload'}}>
+            <span>{{gru-icon name="replay"}}</span>
+          </button>
+        {{/file-picker}}
+      </div>
+    {{/if}}
   {{else}}
     {{#unless isLoading}}
       {{#if isUploadReadyForReview}}
@@ -64,7 +79,7 @@
     </div>
     <div class="action">
       {{#if (and (not showScoreReview) showConfirm)}}
-        <button type="button" class="submit-btn {{if isDisableButton 'disable-event'}}" {{action 'onConfirmUpload'}}>{{t 'common.confirm'}} & {{t 'gru-assessment-confirmation.continue'}}</button>
+        <button type="button" class="submit-btn" {{action 'onConfirmUpload'}}>{{t 'common.confirm'}} & {{t 'gru-assessment-confirmation.continue'}}</button>
       {{/if}}
       {{#if showScoreReview}}
         <button type="button" class="submit-btn" {{action 'onConfirmScore'}}>{{t 'common.confirm'}} {{t 'gru-performance-summary.scores'}}</button>

@@ -1,10 +1,6 @@
 import Ember from 'ember';
-import {
-  CONTENT_TYPES
-} from 'gooru-web/config/config';
-import {
-  cleanFilename
-} from 'gooru-web/utils/utils';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
+import { cleanFilename } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -99,12 +95,15 @@ export default Ember.Component.extend({
   searchImageUpload() {
     const component = this;
     component.set('isLoading', true);
-    component.get('i2dService')
+    component
+      .get('i2dService')
       .searchImage(component.serializeUploadContext())
-      .then((result) => {
+      .then(result => {
         component.set('isLoading', false);
         if (result.length) {
           component.set('selectedOption', 'upload-image');
+          component.set('showScoreReview', true);
+          component.set('showToggle', true);
           component.serializeUploadedFiles(result);
         }
       });
@@ -116,16 +115,15 @@ export default Ember.Component.extend({
   serializeUploadedFiles(uploads) {
     const component = this;
     let uploadedFiles = Ember.A([]);
-    let reviewData = uploads.findBy('status', 1); //Change the status value to 3 for appropiate review status
-    const showScoreReview = !!reviewData;
-    component.set('showScoreReview', showScoreReview);
-    uploads.map((item) => {
-      uploadedFiles.pushObject(Ember.Object.create({
-        url: item.get('imagePath'),
-        isUpload: true,
-        id: item.get('id'),
-        name: cleanFilename(item.get('imagePath'))
-      }));
+    uploads.map(item => {
+      uploadedFiles.pushObject(
+        Ember.Object.create({
+          url: item.get('imagePath'),
+          isUploadSuccess: true,
+          id: item.get('id'),
+          name: cleanFilename(item.get('imagePath'))
+        })
+      );
     });
     component.set('uploadedFiles', uploadedFiles);
   },
