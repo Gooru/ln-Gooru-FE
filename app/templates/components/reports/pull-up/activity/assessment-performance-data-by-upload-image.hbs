@@ -1,5 +1,5 @@
 <!-- Desktop View -->
-<div class="panels hidden-xs">
+<div class="panels">
   <div class="left-panel">
     <div class="collection-image-container" style="background-image: url({{assessment.thumbnailUrl}})">
       <div class="collection-standards">
@@ -73,7 +73,7 @@
       </div>
     {{/unless}}
   </div>
-  <div class="right-panel">
+  <div class="right-panel {{if showToggle 'show-toggle'}}">
     {{#if showToggle}}
       <div class="toggle-btns">
         <button type="button" class="btn-primary {{unless showScoreReview 'active'}}" {{action 'showImagePreview'}}>
@@ -105,26 +105,9 @@
   </div>
 </div>
 
-<!-- Mobile View -->
+<!-- Mobile View Section-->
 <div class="container-xs hidden visible-xs">
-  <div class="image-preview">
-    <img src="{{uploadedFile.url}}" />
-  </div>
-  <div class="selected-images">
-    {{#each selectedFiles as |selectedFile index|}}
-      <div class="selected-image-panel {{if (eq currentPreviewIndex index) 'active'}}">
-        <div class="image-preview">
-          <img src="{{selectedFile.url}}" />
-        </div>
-        {{gru-icon name="done_all"}}
-      </div>
-    {{/each}}
-  </div>
-  <button type="submit" class="submit-btn">
-    <span class="icon">{{gru-icon name="done_all"}}</span>
-    <span class="label">{{selectedFiles.length}}</span>
-  </button>
-  <div class="footer">
+  <div class="footer-panel">
     {{#file-picker
         accept=mimeType
         preview=false

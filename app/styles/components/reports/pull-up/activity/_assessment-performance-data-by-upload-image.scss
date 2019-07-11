@@ -4,9 +4,6 @@
   display: grid;
   background-color: #f1f3f7;
   padding: 10px 15px 0;
-  @media only screen and (max-width: $screen-sm - 1) {
-    padding: 0;
-  }
 
   .panels {
     width: 100%;
@@ -216,66 +213,12 @@
 
   .container-xs {
     background-color: #30424e;
-    position: relative;
 
-    .image-preview {
-      width: 100%;
-      height: calc(100vh - 350px);
-      display: flex;
-      justify-content: center;
-    }
-
-    .submit {
-      position: absolute;
-      right: 15px;
-      border: none;
-      border-radius: 50px;
-      width: 50px;
-      bottom: 160px;
-      z-index: 9;
-      height: 50px;
-      background-color: #008ccc;
-      color: #fff;
-      display: grid;
-    }
-
-    .selected-images {
-      display: flex;
-      width: 100%;
-      height: auto;
-      bottom: 155px;
-      position: absolute;
-      overflow-x: auto;
-
-      .selected-image-panel {
-        position: relative;
-
-        .gru-icon {
-          position: absolute;
-          top: 0;
-          left: 50%;
-          transform: translate(-50%, 100%);
-        }
-
-        .image-preview {
-          width: 80px;
-          height: 80px;
-
-          img {
-            width: 100%;
-            padding: 10px;
-            height: 100%;
-            background-color: #9ba1a5;
-          }
-        }
-      }
-    }
-
-    .footer {
+    .footer-panel {
       background-color: rgba(0, 0, 0, 0.5);
       height: 100px;
       position: absolute;
-      bottom: 55px;
+      bottom: 0;
       left: 0;
       right: 0;
       display: grid;

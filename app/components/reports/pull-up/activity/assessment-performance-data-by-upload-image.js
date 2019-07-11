@@ -97,12 +97,6 @@ export default Ember.Component.extend(ModalMixin, {
   showToggle: false,
 
   /**
-   * It maintains the uploaded file for submission
-   * @prop {Object}
-   */
-  uploadedFile: null,
-
-  /**
    * @property {TaxonomyTag[]} List of taxonomy tags
    */
   taxonomyTags: Ember.computed('assessment.standards.[]', function() {
@@ -131,7 +125,6 @@ export default Ember.Component.extend(ModalMixin, {
           name: fileData.name,
           isUploadSuccess: false
         });
-        component.set('uploadedFile', uploadedFile);
         selectedFiles.pushObject(uploadedFile);
       });
     },

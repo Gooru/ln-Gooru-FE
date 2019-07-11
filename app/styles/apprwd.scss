@@ -5,8 +5,7 @@
 @import "variables";
 @import "mixins";
 @import "common";
-@import "quizzes-rwd";
-// Components
+@import "quizzes-rwd"; // Components
 @import "app-rwd/components/class/overview/routesuggestion-preview";
 @import "app-rwd/components/class/overview/routesuggestion-coursemap";
 @import "app-rwd/components/_gru-student-featured-courses-rwd";
@@ -51,9 +50,7 @@
 @import "app-rwd/components/proficiency/student-proficiency-panel-rwd";
 @import "app-rwd/components/proficiency/student-learner-proficiency-rwd";
 @import "app-rwd/components/charts/competency-progress-bar-rwd";
-@import "app-rwd/components/grading/oa-grading-report-rwd";
-
-//Controllers
+@import "app-rwd/components/grading/oa-grading-report-rwd"; //Controllers
 @import "app-rwd/controllers/student/class-rwd";
 @import "app-rwd/controllers/student/class/proficiency";
 @import "app-rwd/controllers/student/class/course-map";
@@ -81,4 +78,5 @@
 @import "app-rwd/controllers/_student-locate-rwd";
 @import "app-rwd/controllers/library-rwd";
 @import "app-rwd/controllers/library-search-rwd";
+@import "app-rwd/components/reports/pull-up/add-performance-data-rwd";
 @import "app-rwd/components/reports/pull-up/add-performance-data-choice-rwd";

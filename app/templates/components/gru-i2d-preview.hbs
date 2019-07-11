@@ -79,7 +79,11 @@
     </div>
     <div class="action">
       {{#if (and (not showScoreReview) showConfirm)}}
-        <button type="button" class="submit-btn" {{action 'onConfirmUpload'}}>{{t 'common.confirm'}} & {{t 'gru-assessment-confirmation.continue'}}</button>
+        <button type="button" class="submit-btn hidden-xs" {{action 'onConfirmUpload'}}>{{t 'common.confirm'}} & {{t 'gru-assessment-confirmation.continue'}}</button>
+        <button type="button" class="submit-btn hidden visible-xs" {{action 'onConfirmUpload'}}>
+          <span class="icon">{{gru-icon name="done_all"}}</span>
+          <span class="label">{{previewContents.length}}</span>
+        </button>
       {{/if}}
       {{#if showScoreReview}}
         <button type="button" class="submit-btn" {{action 'onConfirmScore'}}>{{t 'common.confirm'}} {{t 'gru-performance-summary.scores'}}</button>
