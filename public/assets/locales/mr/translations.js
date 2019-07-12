@@ -2662,5 +2662,6 @@ window.i18ln = {
   'domain-code.NO': 'गणितीक्रिया',
   'domain-code.G': 'भौमितिक आकारांची ओळख',
   'domain-code.M': 'मापन',
-  'domain-code.NS': 'संख्याज्ञान'
+  'domain-code.NS': 'संख्याज्ञान',
+  'no.content.assoc.fw': 'Currently no content associated with this framework.'
 };

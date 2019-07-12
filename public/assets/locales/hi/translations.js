@@ -2700,5 +2700,6 @@ window.i18ln = {
   'domain-code.FD': 'भिन्न और दशमलव',
   'domain-code.M': 'मापन',
   'domain-code.NS': 'संख्या ज्ञान',
-  'domain-code.NO': 'संख्याओं पर संक्रियाए'
+  'domain-code.NO': 'संख्याओं पर संक्रियाए',
+  'no.content.assoc.fw': 'Currently no content associated with this framework.'
 };
