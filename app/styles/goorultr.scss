@@ -427,7 +427,8 @@
 @import "components/reports/pull-up/activity/add-performance-data";
 @import "components/reports/pull-up/activity/add-student-performance-data";
 @import "components/reports/pull-up/activity/add-question-score";
-@import "components/reports/pull-up/activity/assessment-performance-data";
+@import "components/reports/pull-up/activity/assessment-performance-data-by-question";
+@import "components/reports/pull-up/activity/assessment-performance-data-by-upload-image";
 @import "components/reports/pull-up/activity/collection-performance-data";
 
 // Add course to class
@@ -495,5 +496,9 @@
 //Rubric Categories
 @import "components/rubric/_rubric-category-grades";
 
+//Add data
+@import "components/reports/pull-up/activity/add-performance-data-choice";
+@import "components/gru-i2d-preview";
+@import "components/content/modals/i2d-message-dialog";
 //Add Collaborator
 @import "components/teacher/class/gru-add-collaborator";

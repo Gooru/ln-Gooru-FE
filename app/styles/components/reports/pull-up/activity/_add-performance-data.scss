@@ -7,7 +7,7 @@
   right: 0;
   margin: auto;
   background-color: $white;
-  height: 100%;
+  height: calc(100% - 52px);
 
   .backdrop {
     position: fixed;
@@ -26,6 +26,7 @@
   .add-performance-data-container {
     background-color: $white;
     height: 100%;
+
     .add-data-header-container {
       display: grid;
       grid-template-columns: 32px 1fr auto;
@@ -33,6 +34,7 @@
       align-items: center;
       padding: 0 15px;
       column-gap: 15px;
+
       .icon-container {
         width: 22px;
         height: 16px;
@@ -49,6 +51,7 @@
           background-image: url("../assets/gooru/images/add_collection.svg");
         }
       }
+
       .activity-info-container {
         display: grid;
         align-items: center;
@@ -56,11 +59,13 @@
         justify-content: left;
         column-gap: 15px;
         height: 56px;
+
         .date-container {
           font-size: 10px;
           font-style: italic;
           color: #37424b;
         }
+
         .activity-title-container {
           font-size: 16px;
           font-weight: bold;

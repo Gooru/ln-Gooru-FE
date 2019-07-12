@@ -67,6 +67,21 @@ window.i18ln = {
   'common.month': 'month',
   'common.tasks': 'tasks',
   'common.user': 'user',
+  'common.add-data-choice-title': 'How do you want to enter the data?',
+  'common.take-photo': 'take photo',
+  'common.upload-image': 'upload image',
+  'common.by-question': 'question-by-question',
+  'i2d.conversion-progress':
+    'The uploaded image(s) are being processed. Please check back later',
+  'i2d.conversion-error':
+    'There was an error when trying to convert the image. Please resubmit the image',
+  'file-picker-placeholder': 'Choose a file or drag it here',
+  'no-preview-available': 'no preview available',
+  'common.success': 'Success',
+  'i2d-successfully-image-upload':
+    'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
+  'common.dialog-close': 'Do you want to close ?',
+  're-upload': 'Re-Upload',
   'common.content-name': 'Content Name',
   'common.lastName': 'Lastname',
   'common.firstName': 'Firstname',

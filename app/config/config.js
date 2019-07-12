@@ -6,16 +6,17 @@ export const RESOURCE_COMPONENT_MAP = {
   'vimeo/video': 'player.resources.gru-vimeo-resource'
 };
 
-export const UPLOADABLE_TYPES = [{
-  value: 'image',
-  validExtensions: '.jpg, .jpeg, .gif, .png',
-  validType: 'image/*'
-},
-{
-  value: 'text',
-  validExtensions: '.pdf',
-  validType: 'application/pdf'
-}
+export const UPLOADABLE_TYPES = [
+  {
+    value: 'image',
+    validExtensions: '.jpg, .jpeg, .gif, .png',
+    validType: 'image/*'
+  },
+  {
+    value: 'text',
+    validExtensions: '.pdf',
+    validType: 'application/pdf'
+  }
 ];
 
 export const VIDEO_RESOURCE_TYPE = 'video';
@@ -101,27 +102,38 @@ export const VIEW_LAYOUT_PICKER_OPTIONS = {
   THUMBNAILS: 'thumbnails'
 };
 
-export const EMOTION_VALUES = [{
-  value: 5,
-  unicode: '1f601'
-},
-{
-  value: 4,
-  unicode: '1f642'
-},
-{
-  value: 3,
-  unicode: '1f610'
-},
-{
-  value: 2,
-  unicode: '1f641'
-},
-{
-  value: 1,
-  unicode: '1f625'
-}
+export const EMOTION_VALUES = [
+  {
+    value: 5,
+    unicode: '1f601'
+  },
+  {
+    value: 4,
+    unicode: '1f642'
+  },
+  {
+    value: 3,
+    unicode: '1f610'
+  },
+  {
+    value: 2,
+    unicode: '1f641'
+  },
+  {
+    value: 1,
+    unicode: '1f625'
+  }
 ];
+
+// I2D status values for the conversion
+export const I2D_CONVERSION_STATUS = {
+  CREATED: 0,
+  SENT_FOR_CONVERSION: 1,
+  RECEIVED_AFTER_CONVERSION: 2,
+  READY_FOR_REVIEW: 3,
+  REVIEWED: 4,
+  ERROR_IN_CONVERSION: -1
+};
 
 // unicode values for the correct and incorrect svg files
 export const FEEDBACK_EMOTION_VALUES = {
@@ -136,53 +148,55 @@ export const SCORES = {
   EXCELLENT: 90
 };
 
-export const GRADING_SCALE = [{
-  LOWER_LIMIT: 0,
-  COLOR: '#F46360',
-  RANGE: '0-59'
-},
-{
-  LOWER_LIMIT: 60,
-  COLOR: '#ED8E36',
-  RANGE: '60-69'
-},
-{
-  LOWER_LIMIT: 70,
-  COLOR: '#FABA36',
-  RANGE: '70-79'
-},
-{
-  LOWER_LIMIT: 80,
-  COLOR: '#A8C99C',
-  RANGE: '80-89'
-},
-{
-  LOWER_LIMIT: 90,
-  COLOR: '#4B9740',
-  RANGE: '90-100'
-}
+export const GRADING_SCALE = [
+  {
+    LOWER_LIMIT: 0,
+    COLOR: '#F46360',
+    RANGE: '0-59'
+  },
+  {
+    LOWER_LIMIT: 60,
+    COLOR: '#ED8E36',
+    RANGE: '60-69'
+  },
+  {
+    LOWER_LIMIT: 70,
+    COLOR: '#FABA36',
+    RANGE: '70-79'
+  },
+  {
+    LOWER_LIMIT: 80,
+    COLOR: '#A8C99C',
+    RANGE: '80-89'
+  },
+  {
+    LOWER_LIMIT: 90,
+    COLOR: '#4B9740',
+    RANGE: '90-100'
+  }
 ];
 
-export const BARS_GRADING_SCALE = [{
-  LOWER_LIMIT: 0,
-  COLOR: '#D82100'
-},
-{
-  LOWER_LIMIT: 60,
-  COLOR: '#CF7400'
-},
-{
-  LOWER_LIMIT: 70,
-  COLOR: '#CC9700'
-},
-{
-  LOWER_LIMIT: 80,
-  COLOR: '#4B9740'
-},
-{
-  LOWER_LIMIT: 90,
-  COLOR: '#A8C99C'
-}
+export const BARS_GRADING_SCALE = [
+  {
+    LOWER_LIMIT: 0,
+    COLOR: '#D82100'
+  },
+  {
+    LOWER_LIMIT: 60,
+    COLOR: '#CF7400'
+  },
+  {
+    LOWER_LIMIT: 70,
+    COLOR: '#CC9700'
+  },
+  {
+    LOWER_LIMIT: 80,
+    COLOR: '#4B9740'
+  },
+  {
+    LOWER_LIMIT: 90,
+    COLOR: '#A8C99C'
+  }
 ];
 
 export const ROLES = {
@@ -298,14 +312,15 @@ export const RUBRIC_TYPE = {
 
 export const RUBRIC_OFF_OPTIONS = {
   MAX_SCORE: 200,
-  INCREMENT: [{
-    id: 0.5,
-    name: 0.5
-  },
-  {
-    id: 1,
-    name: 1
-  }
+  INCREMENT: [
+    {
+      id: 0.5,
+      name: 0.5
+    },
+    {
+      id: 1,
+      name: 1
+    }
   ]
 };
 
@@ -318,7 +333,6 @@ export const PLAYER_EVENT_SOURCE = {
   DIAGNOSTIC: 'diagnostic',
   MASTER_COMPETENCY: 'competencyMastery'
 };
-
 
 export const DCA_CALENDAR_VIEWS = {
   DAILY: 'daily',
@@ -334,28 +348,30 @@ export const PROFILE_NAV_MENU_ITEMS = [
   'preference'
 ];
 
-export const SUGGESTION_FILTER_BY_CONTENT_TYPES = [{
-  format: 'collection',
-  label: 'search-filter.collections'
-},
-{
-  format: 'assessment',
-  label: 'search-filter.assessments'
-}
+export const SUGGESTION_FILTER_BY_CONTENT_TYPES = [
+  {
+    format: 'collection',
+    label: 'search-filter.collections'
+  },
+  {
+    format: 'assessment',
+    label: 'search-filter.assessments'
+  }
 ];
 
-export const SEARCH_FILTER_BY_CONTENT_TYPES = [{
-  format: 'collection',
-  label: 'search-filter.collections'
-},
-{
-  format: 'assessment',
-  label: 'search-filter.assessments'
-},
-{
-  format: 'offline-activity',
-  label: 'common.offline-activity'
-}
+export const SEARCH_FILTER_BY_CONTENT_TYPES = [
+  {
+    format: 'collection',
+    label: 'search-filter.collections'
+  },
+  {
+    format: 'assessment',
+    label: 'search-filter.assessments'
+  },
+  {
+    format: 'offline-activity',
+    label: 'common.offline-activity'
+  }
 ];
 
 //Competency status
@@ -399,40 +415,41 @@ export const SEARCH_CONTEXT = {
   MY_CONTENT: 'my-content'
 };
 
-export const OA_TASK_SUBMISSION_TYPES = [{
-  value: 'image',
-  submissionType: 'uploaded',
-  validExtensions: '.jpg, .jpeg, .gif, .png',
-  icon: 'fa-file-image-o'
-},
-{
-  value: 'pdf',
-  submissionType: 'uploaded',
-  validExtensions: '.pdf',
-  icon: 'fa-file-pdf-o'
-},
-{
-  value: 'presentation',
-  submissionType: 'uploaded',
-  validExtensions: '.ppt, .pptx',
-  icon: 'fa-file-powerpoint-o'
-},
-{
-  value: 'document',
-  submissionType: 'uploaded',
-  validExtensions: '.doc, .docx',
-  icon: 'fa-file-word-o'
-},
-{
-  value: 'others',
-  submissionType: 'uploaded',
-  validExtensions: '',
-  icon: 'fa-file'
-},
-{
-  value: 'url',
-  submissionType: 'remote',
-  validExtensions: '',
-  icon: 'fa-link'
-}
+export const OA_TASK_SUBMISSION_TYPES = [
+  {
+    value: 'image',
+    submissionType: 'uploaded',
+    validExtensions: '.jpg, .jpeg, .gif, .png',
+    icon: 'fa-file-image-o'
+  },
+  {
+    value: 'pdf',
+    submissionType: 'uploaded',
+    validExtensions: '.pdf',
+    icon: 'fa-file-pdf-o'
+  },
+  {
+    value: 'presentation',
+    submissionType: 'uploaded',
+    validExtensions: '.ppt, .pptx',
+    icon: 'fa-file-powerpoint-o'
+  },
+  {
+    value: 'document',
+    submissionType: 'uploaded',
+    validExtensions: '.doc, .docx',
+    icon: 'fa-file-word-o'
+  },
+  {
+    value: 'others',
+    submissionType: 'uploaded',
+    validExtensions: '',
+    icon: 'fa-file'
+  },
+  {
+    value: 'url',
+    submissionType: 'remote',
+    validExtensions: '',
+    icon: 'fa-link'
+  }
 ];

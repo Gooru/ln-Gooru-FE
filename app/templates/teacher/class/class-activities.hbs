@@ -326,21 +326,22 @@
 <!-- Acitvity Add Performance Data -->
 {{#if isShowAddData}}
   {{#reports.pull-up.activity.add-performance-data
-    showPullUp = isShowAddData
-    activityDate = selectedActivity.activation_date
-    activityTitle = selectedItem.title
-    onClosePullUp = "onClosePerformanceEntry"
-    contentType = addDataContentType
+    showPullUp=isShowAddData
+    activityDate=selectedActivity.activation_date
+    activityTitle=selectedItem.title
+    onClosePullUp="onClosePerformanceEntry"
+    contentType=addDataContentType
   }}
     {{reports.pull-up.activity.add-student-performance-data
-      collection=selectedItem
-      course=course
-      students=activityMembers
-      activityData=selectedActivity
-      classId=classId
-      onClosePullUp = "onClosePerformanceEntry"
-      contentType = addDataContentType
-    }}
+        collection=selectedItem
+        course=course
+        students=activityMembers
+        activityData=selectedActivity
+        classId=classId
+        classCode=class.code
+        onClosePullUp="onClosePerformanceEntry"
+        contentType=addDataContentType
+      }}
   {{/reports.pull-up.activity.add-performance-data}}
 {{/if}}
 

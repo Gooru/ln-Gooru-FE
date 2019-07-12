@@ -1,21 +1,37 @@
 <div class="student-performance-data-container">
   {{#if isAsessmentAddData}}
-    {{reports.pull-up.activity.assessment-performance-data
-      course = course
-      activityData = activityData
-      classId = classId
-      assessment = collection
-      students = students
-      onClosePullUp = "onClosePullUp"
-    }}
+    {{#unless selectedOption}}
+      {{reports.pull-up.activity.add-performance-data-choice
+        assessment=collection
+        onSelectOption="onSelectOption"
+      }}
+    {{else}}
+      {{component (concat 'reports.pull-up.activity.assessment-performance-data-by-' selectedOption)
+        course=course
+        activityData=activityData
+        classId=classId
+        assessment=collection
+        classCode=classCode
+        selectedFiles=uploadedFiles
+        imageUploadContext=imageUploadContext
+        students=students
+        showToggle=showToggle
+        showScoreReview=showScoreReview
+        onClosePullUp="onClosePullUp"
+      }}
+    {{/unless}}
   {{else}}
     {{reports.pull-up.activity.collection-performance-data
-      course = course
-      activityData = activityData
-      classId = classId
-      collection = collection
-      students = students
-      onClosePullUp = "onClosePullUp"
+      course=course
+      activityData=activityData
+      classId=classId
+      collection=collection
+      students=students
+      onClosePullUp="onClosePullUp"
     }}
   {{/if}}
+</div>
+
+<div class="loading-spinner {{if isLoading 'active'}}">
+  {{three-bounce-spinner}}
 </div>

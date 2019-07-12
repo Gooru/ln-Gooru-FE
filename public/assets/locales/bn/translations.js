@@ -82,6 +82,21 @@ window.i18ln = {
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'গড় স্কোর',
   'common.frq': 'frq',
+  'common.add-data-choice-title': 'How do you want to enter the data?',
+  'common.take-photo': 'take photo',
+  'common.upload-image': 'upload image',
+  'common.by-question': 'question-by-question',
+  'i2d.conversion-progress':
+    'The uploaded image(s) are being processed. Please check back later',
+  'i2d.conversion-error':
+    'There was an error when trying to convert the image. Please resubmit the image',
+  'file-picker-placeholder': 'Choose a file or drag it here',
+  'no-preview-available': 'no preview available',
+  'common.success': 'Success',
+  'i2d-successfully-image-upload':
+    'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
+  'common.dialog-close': 'Do you want to close ?',
+  're-upload': 'Re-Upload',
   'common.tasks': 'tasks',
   'common.schedule': 'তফসিল',
   'common.responses': 'প্রতিক্রিয়া',
