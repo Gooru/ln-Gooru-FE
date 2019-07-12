@@ -54,10 +54,33 @@
         timespentInMilliSec=timespentInMilliSec}}
     {{/each}}
   </div>
+
+  <div class="complete-submission-container">
+    <div class="complete-submit-btn" {{action "onShowCompletionConfirmation"}}>Complete and Submit</div>
+  </div>
 </div>
 
 {{#if isLoading}}
   <div class="loading-spinner">
     {{three-bounce-spinner}}
+  </div>
+{{/if}}
+
+{{#if isShowCompletionConfirmation}}
+  <div class="confirmation-popup-overlay">
+    <div class="completion-confirmation-popup">
+      <div class="info-container">
+        Once you mark it as completed, it's no longer available for changes in submission!<br>
+        Do you want to continue?
+      </div>
+      <div class="action-container">
+        <div class="cancel-btn action-btn" {{action "onCancelCompletion"}}>
+          {{t 'common.no'}}
+        </div>
+        <div class="confirm-btn action-btn" {{action "onCompleteSubmission"}}>
+          {{t 'common.yes'}}
+        </div>
+      </div>
+    </div>
   </div>
 {{/if}}

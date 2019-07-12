@@ -12,7 +12,7 @@ export default Ember.Object.extend({
 
   collectionNamespace: '/api/nucleus/v1/oa',
 
-  insightsNamespce: '/api/nucleus-insights/v2/oa',
+  insightsNamespace: '/api/nucleus-insights/v2/oa',
 
   copierNamespace: '/api/nucleus/v2/copier/offline-activities',
 
@@ -266,7 +266,7 @@ export default Ember.Object.extend({
 
   oaTaskSubmissions(taskSubmissionPayload) {
     const adapter = this;
-    const namespace = adapter.get('insightsNamespce');
+    const namespace = adapter.get('insightsNamespace');
     const url = `${namespace}/submissions`;
     const options = {
       type: 'POST',
@@ -350,9 +350,8 @@ export default Ember.Object.extend({
    */
   createTaskSubmission: function(data) {
     const adapter = this;
-    const url = `${this.get('namespace')}/${data.body.oa_id}/tasks/${
-      data.body.oa_task_id
-    }/submissions`;
+    const url = `${this.get('namespace')}/${data.body.oa_id}/tasks/${data.body
+      .oa_task_id}/submissions`;
     const options = {
       type: 'POST',
       contentType: 'application/json; charset=utf-8',
@@ -422,6 +421,25 @@ export default Ember.Object.extend({
       processData: false,
       headers: adapter.defineHeaders(),
       data: JSON.stringify({})
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * @function updateOACompleted
+   * @param {Object} oaData
+   * @return {Promise}
+   * Method to update OA status as completed
+   */
+  updateOACompleted(oaData) {
+    const adapter = this;
+    const namespace = this.get('insightsNamespace');
+    const url = `${namespace}/complete`;
+    const options = {
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(oaData)
     };
     return Ember.$.ajax(url, options);
   }
