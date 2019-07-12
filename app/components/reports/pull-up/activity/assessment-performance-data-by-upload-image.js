@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import { addProtocolIfNecessary } from 'gooru-web/utils/utils';
+import { addProtocolIfNecessary, generateUUID } from 'gooru-web/utils/utils';
 import ModalMixin from 'gooru-web/mixins/modal';
 export default Ember.Component.extend(ModalMixin, {
   // -------------------------------------------------------------------------
@@ -40,7 +40,7 @@ export default Ember.Component.extend(ModalMixin, {
    * List of assessment questions
    * @prop {Array}
    */
-  assessmentQuestions: Ember.A([]),
+  questions: Ember.A([]),
 
   /**
    * List of valid file extensions.
@@ -285,5 +285,53 @@ export default Ember.Component.extend(ModalMixin, {
     });
     const successMsg = component.get('i18n').t('upload-success');
     component.get('notifications').success(successMsg);
+  },
+
+  /**
+   * @function getAssessmentDataParams
+   */
+  getAssessmentDataParams() {
+    let component = this;
+    let questions = component.get('questions');
+    let assessmentResources = Ember.A([]);
+    let activeStudent = component.get('activeStudent');
+    let activityData = component.get('activityData');
+    let activityId = activityData.get('id');
+    let conductedOn = new Date(activityData.activation_date) || new Date();
+    let classId = component.get('classId');
+    let assessment = component.get('assessment');
+    let courseId = component.get('course') ? component.get('course').id : null;
+    questions.map(question => {
+      let resourceData = {
+        resource_id: question.get('id'),
+        resource_type: 'question',
+        question_type: question.get('type'),
+        score: Number(question.get('score')) || 0,
+        max_score: question.get('maxScore'),
+        time_spent: component.get('questionTimespent')
+      };
+      assessmentResources.push(resourceData);
+    });
+    let studentPerformanceData = {
+      tenant_id: component.get('session.tenantId') || null,
+      student_id: activeStudent.get('id'),
+      session_id: generateUUID(),
+      class_id: classId,
+      collection_id: assessment.get('id'),
+      collection_type: 'assessment',
+      content_source: component.get('contentSource'),
+      time_zone: component.get('timeZone'),
+      conducted_on: conductedOn.toISOString(),
+      path_id: 0,
+      path_type: null,
+      resources: assessmentResources,
+      course_id: courseId,
+      additionalContext: btoa(
+        JSON.stringify({
+          dcaContentId: activityId
+        })
+      )
+    };
+    return studentPerformanceData;
   }
 });
