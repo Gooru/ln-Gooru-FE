@@ -44,10 +44,22 @@ export default DS.JSONAPISerializer.extend({
   normalizeImageData: function(data) {
     const serializer = this;
     return Ember.Object.create({
+      conversionInfo: serializer.normalizeConversionInfo(data.conversion_info),
       uploadInfo: serializer.normalizeSearchItem(data.upload_info),
       parsedData: data.parsed_data.map(data => {
         return serializer.normalizeParseData(data);
       })
+    });
+  },
+
+  normalizeConversionInfo: function(data) {
+    return Ember.Object.create({
+      errorCodes: data.processing_error_codes,
+      confidentPercent: data.response_confidence_percent,
+      itemCode: data.response_item_code,
+      questionCount: data.response_question_count,
+      studentCount: data.response_student_count,
+      classCode: data.response_class_code
     });
   },
 

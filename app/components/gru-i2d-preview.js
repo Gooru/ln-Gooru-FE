@@ -28,9 +28,9 @@ export default Ember.Component.extend({
    * It maintains the preview content
    * @prop {Array}
    */
-  currentPreviewContent: Ember.computed('currentPreviewIndex', function() {
+  activeContent: Ember.computed('activePreviewIndex', function() {
     const component = this;
-    const currentIndexPosition = component.get('currentPreviewIndex');
+    const currentIndexPosition = component.get('activePreviewIndex');
     return component.get('previewContents').objectAt(currentIndexPosition);
   }),
 
@@ -66,7 +66,7 @@ export default Ember.Component.extend({
       if (currentIndex === 0) {
         selectedIndex = previewContents.length - 1;
       }
-      component.set('currentPreviewIndex', selectedIndex);
+      component.set('activePreviewIndex', selectedIndex);
       component
         .$('.image-preview-container #image-preview-carousel-wrapper')
         .carousel('prev');
@@ -91,7 +91,7 @@ export default Ember.Component.extend({
       if (previewContents.length - 1 === currentIndex) {
         selectedIndex = 0;
       }
-      component.set('currentPreviewIndex', selectedIndex);
+      component.set('activePreviewIndex', selectedIndex);
       component
         .$('.image-preview-container #image-preview-carousel-wrapper')
         .carousel('next');
@@ -102,7 +102,7 @@ export default Ember.Component.extend({
      */
     onSelectImage(index) {
       const component = this;
-      component.set('currentPreviewIndex', index);
+      component.set('activePreviewIndex', index);
       if (component.get('showScoreReview')) {
         component.fetchImageData();
       }
@@ -129,7 +129,7 @@ export default Ember.Component.extend({
      */
     onReUpload() {
       const component = this;
-      component.set('selectedFile', component.get('currentPreviewContent'));
+      component.set('selectedFile', component.get('activeContent'));
     },
 
     /**
@@ -148,7 +148,7 @@ export default Ember.Component.extend({
    */
   fetchImageData() {
     const component = this;
-    const uploadContent = component.get('currentPreviewContent');
+    const uploadContent = component.get('activeContent');
     component.set('isLoading', true);
     component
       .get('i2dService')
@@ -156,15 +156,17 @@ export default Ember.Component.extend({
       .then(content => {
         const uploadStatus = content.get('uploadInfo.status');
         const parsedData = content.get('parsedData');
+        const conversionErros = content.get('conversionInfo.errorCodes');
+        component.set('conversionErros', conversionErros);
         component.set(
           'questions',
-          component.parseQuestions(parsedData).sortBy('questionSequence')
+          component.parseQuestions(parsedData).sortBy('sequence')
         );
         component.set('studentScores', component.parseScores(parsedData));
         component.set('uploadStatus', uploadStatus);
         component.set(
           'isUploadReadyForReview',
-          uploadStatus === I2D_CONVERSION_STATUS.SENT_FOR_CONVERSION
+          uploadStatus === I2D_CONVERSION_STATUS.READY_FOR_REVIEW
         );
         component.set('isLoading', false);
       });
@@ -178,11 +180,11 @@ export default Ember.Component.extend({
     let questions = data.uniqBy('questionId');
     return questions.map(question => {
       return Ember.Object.create({
-        questionId: question.questionId,
-        questionTitle: question.questionTitle,
-        questionType: question.questionType,
+        id: question.questionId,
+        title: question.questionTitle,
+        type: question.questionType,
         maxScore: question.maxScore,
-        questionSequence: question.questionSequence
+        sequence: question.questionSequence
       });
     });
   },
@@ -193,7 +195,9 @@ export default Ember.Component.extend({
    */
   parseScores(data) {
     const component = this;
-    let users = data.uniqBy('userId');
+    let users = data
+      .uniqBy('userId')
+      .filter(user => user && user.get('userId'));
     return users.map(user => {
       let student = component.parseUserDetails(user);
       let studentData = data.filterBy('userId', student.get('userId'));

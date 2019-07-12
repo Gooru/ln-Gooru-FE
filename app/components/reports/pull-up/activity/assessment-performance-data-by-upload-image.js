@@ -18,10 +18,19 @@ export default Ember.Component.extend(ModalMixin, {
    */
   assessmentService: Ember.inject.service('api-sdk/assessment'),
 
+  performanceService: Ember.inject.service('api-sdk/performance'),
+
+  session: Ember.inject.service('session'),
+
   /**
    * @requires service:notifications
    */
   notifications: Ember.inject.service(),
+
+  /**
+   * @type {i18nService} Service to retrieve translations information
+   */
+  i18n: Ember.inject.service(),
 
   /**
    * @property {I2dService} Media service API SDK
@@ -35,6 +44,28 @@ export default Ember.Component.extend(ModalMixin, {
    * @prop {Array}
    */
   selectedFiles: Ember.A([]),
+
+  /**
+   * @property {String} timeZone
+   */
+  timeZone: Ember.computed(function() {
+    return moment.tz.guess() || null;
+  }),
+
+  /**
+   * @property {String} contentSource
+   */
+  contentSource: 'dailyclassactivity',
+
+  /**
+   * It maintains the preview content
+   * @prop {Array}
+   */
+  activeContent: Ember.computed('activePreviewIndex', function() {
+    const component = this;
+    const activeIndex = component.get('activePreviewIndex');
+    return component.get('selectedFiles').objectAt(activeIndex);
+  }),
 
   /**
    * List of assessment questions
@@ -82,7 +113,7 @@ export default Ember.Component.extend(ModalMixin, {
    * It maintains the index position of current preview image.
    * @prop {Integer}
    */
-  currentPreviewIndex: 0,
+  activePreviewIndex: 0,
 
   /**
    * It maintains the whether we need to show confirm button or not.
@@ -175,15 +206,32 @@ export default Ember.Component.extend(ModalMixin, {
     showImagePreview() {
       const component = this;
       component.set('showScoreReview', false);
-    }
+    },
 
     /**
      * Action triggered when user select confirm score button.
      */
-    // onConfirmScore() {
-    //   const component = this;
-    //   console.log(this.get('studentScores'));
-    // }
+    onConfirmScore() {
+      const component = this;
+      const performanceService = component.get('performanceService');
+      const activeContent = component.get('activeContent');
+      let students = component.get('studentScores');
+      let performancePromises = students.map(student => {
+        return performanceService.updateCollectionOfflinePerformance(
+          component.getAssessmentDataParams(student)
+        );
+      });
+      Promise.all(performancePromises).then(() => {
+        component
+          .get('i2dService')
+          .markImageReviewed(activeContent.get('id'))
+          .then(() => {
+            if (component.get('selectedFiles').length === 1) {
+              component.sendAction('onClosePullUp');
+            }
+          });
+      });
+    }
   },
 
   // -------------------------------------------------------------------------
@@ -284,17 +332,16 @@ export default Ember.Component.extend(ModalMixin, {
       timeOut: 10000
     });
     const successMsg = component.get('i18n').t('upload-success');
-    component.get('notifications').success(successMsg);
+    component.get('notifications').success(`${successMsg}`);
   },
 
   /**
    * @function getAssessmentDataParams
    */
-  getAssessmentDataParams() {
+  getAssessmentDataParams(student) {
     let component = this;
-    let questions = component.get('questions');
+    let questions = student.get('questions');
     let assessmentResources = Ember.A([]);
-    let activeStudent = component.get('activeStudent');
     let activityData = component.get('activityData');
     let activityId = activityData.get('id');
     let conductedOn = new Date(activityData.activation_date) || new Date();
@@ -303,18 +350,17 @@ export default Ember.Component.extend(ModalMixin, {
     let courseId = component.get('course') ? component.get('course').id : null;
     questions.map(question => {
       let resourceData = {
-        resource_id: question.get('id'),
+        resource_id: question.get('questionId'),
         resource_type: 'question',
-        question_type: question.get('type'),
+        question_type: question.get('questionType'),
         score: Number(question.get('score')) || 0,
-        max_score: question.get('maxScore'),
-        time_spent: component.get('questionTimespent')
+        max_score: question.get('maxScore')
       };
       assessmentResources.push(resourceData);
     });
     let studentPerformanceData = {
       tenant_id: component.get('session.tenantId') || null,
-      student_id: activeStudent.get('id'),
+      student_id: student.get('userId'),
       session_id: generateUUID(),
       class_id: classId,
       collection_id: assessment.get('id'),

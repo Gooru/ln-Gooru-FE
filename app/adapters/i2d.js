@@ -64,6 +64,19 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  markImageReviewed: function(uploadId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/upload/${uploadId}/reviewed`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({}),
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

@@ -65,5 +65,10 @@ export default Ember.Service.extend({
   replaceImage: function(uploadId, data) {
     const service = this;
     return service.get('i2dAdapter').replaceImage(uploadId, data);
+  },
+
+  markImageReviewed: function(uploadId) {
+    const service = this;
+    return service.get('i2dAdapter').markImageReviewed(uploadId);
   }
 });

@@ -14,7 +14,7 @@
     {{#if selectedFiles}}
       <div class="selected-image-container">
         {{#each selectedFiles as |selectedFile index|}}
-          <div class="selected-image-panel {{if (eq currentPreviewIndex index) 'active'}}">
+          <div class="selected-image-panel {{if (eq activePreviewIndex index) 'active'}}">
             <div class="image-preview">
               <img src="{{selectedFile.url}}" />
             </div>
@@ -88,8 +88,10 @@
       {{#if selectedFiles}}
         {{gru-i2d-preview
           previewContents=selectedFiles
-          currentPreviewIndex=currentPreviewIndex
+          activePreviewIndex=activePreviewIndex
+          activeContent=activeContent
           showConfirm=showConfirm
+          studentScores=studentScores
           questions=questions
           showToggle=showToggle
           showScoreReview=showScoreReview
