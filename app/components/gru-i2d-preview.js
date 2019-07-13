@@ -28,14 +28,45 @@ export default Ember.Component.extend({
    * It maintains the preview content
    * @prop {Array}
    */
-  activeContent: Ember.computed('activePreviewIndex', function() {
-    const component = this;
-    const currentIndexPosition = component.get('activePreviewIndex');
-    return component.get('previewContents').objectAt(currentIndexPosition);
-  }),
+  activeContent: null,
+
+  /**
+   * It maintains the whether to show reupload option or not
+   * @prop {Boolean}
+   */
+  showReUpload: Ember.computed(
+    'activeContent.isUploadReadyForReview',
+    'activeContent.conversionErros',
+    function() {
+      return (
+        this.get('activeContent.isUploadReadyForReview') ||
+        this.get('activeContent.conversionErros')
+      );
+    }
+  ),
+
+  /**
+   * It maintains the whether to show student score table or not
+   * @prop {Boolean}
+   */
+  showStudentScore: Ember.computed(
+    'activeContent.isUploadReadyForReview',
+    'activeContent.conversionErros',
+    function() {
+      return (
+        this.get('activeContent.isUploadReadyForReview') &&
+        !this.get('activeContent.conversionErros')
+      );
+    }
+  ),
 
   // -------------------------------------------------------------------------
   // Events
+
+  didRender() {
+    const component = this;
+    component.send('slideTo', component.get('activePreviewIndex'));
+  },
 
   didInsertElement() {
     const component = this;
@@ -54,11 +85,11 @@ export default Ember.Component.extend({
       const component = this;
       component
         .$(
-          '.image-preview-container #image-preview-carousel-wrapper .carousel-control'
+          '.image-to-data-preview-container #image-preview-carousel-wrapper .carousel-control'
         )
         .addClass('in-active');
       let selectedElement = component.$(
-        '.image-preview-container #image-preview-carousel-wrapper .item.active'
+        '.image-to-data-preview-container #image-preview-carousel-wrapper .item.active'
       );
       const previewContents = component.get('previewContents');
       let currentIndex = selectedElement.data('item-index');
@@ -68,7 +99,7 @@ export default Ember.Component.extend({
       }
       component.set('activePreviewIndex', selectedIndex);
       component
-        .$('.image-preview-container #image-preview-carousel-wrapper')
+        .$('.image-to-data-preview-container #image-preview-carousel-wrapper')
         .carousel('prev');
     },
 
@@ -79,11 +110,11 @@ export default Ember.Component.extend({
       const component = this;
       component
         .$(
-          '.image-preview-container #image-preview-carousel-wrapper .carousel-control'
+          '.image-to-data-preview-container #image-preview-carousel-wrapper .carousel-control'
         )
         .addClass('in-active');
       let selectedElement = component.$(
-        '.image-preview-container #image-preview-carousel-wrapper .item.active'
+        '.image-to-data-preview-container #image-preview-carousel-wrapper .item.active'
       );
       const previewContents = component.get('previewContents');
       let currentIndex = selectedElement.data('item-index');
@@ -93,18 +124,36 @@ export default Ember.Component.extend({
       }
       component.set('activePreviewIndex', selectedIndex);
       component
-        .$('.image-preview-container #image-preview-carousel-wrapper')
+        .$('.image-to-data-preview-container #image-preview-carousel-wrapper')
         .carousel('next');
     },
 
     /**
      * Action triggered when we click on thumbnail
      */
-    onSelectImage(index) {
+    slideTo(index) {
       const component = this;
+      component
+        .$(
+          '.image-to-data-preview-container #image-preview-carousel-wrapper .carousel-control'
+        )
+        .addClass('in-active');
+      component
+        .$('.image-to-data-preview-container #image-preview-carousel-wrapper')
+        .carousel(index);
+    },
+
+    /**
+     * Action triggered when we click on thumbnail
+     */
+    onSelectImage(content, index) {
+      const component = this;
+      component.set('activeContent', content);
       component.set('activePreviewIndex', index);
       if (component.get('showScoreReview')) {
         component.fetchImageData();
+      } else {
+        component.send('slideTo', index);
       }
     },
 
@@ -149,27 +198,29 @@ export default Ember.Component.extend({
   fetchImageData() {
     const component = this;
     const uploadContent = component.get('activeContent');
-    component.set('isLoading', true);
-    component
-      .get('i2dService')
-      .fetchImageData(uploadContent.get('id'))
-      .then(content => {
-        const uploadStatus = content.get('uploadInfo.status');
-        const parsedData = content.get('parsedData');
-        const conversionErros = content.get('conversionInfo.errorCodes');
-        component.set('conversionErros', conversionErros);
-        component.set(
-          'questions',
-          component.parseQuestions(parsedData).sortBy('sequence')
-        );
-        component.set('studentScores', component.parseScores(parsedData));
-        component.set('uploadStatus', uploadStatus);
-        component.set(
-          'isUploadReadyForReview',
-          uploadStatus === I2D_CONVERSION_STATUS.READY_FOR_REVIEW
-        );
-        component.set('isLoading', false);
-      });
+    if (uploadContent.get('id')) {
+      component.set('isLoading', true);
+      component
+        .get('i2dService')
+        .fetchImageData(uploadContent.get('id'))
+        .then(content => {
+          const uploadStatus = content.get('uploadInfo.status');
+          const parsedData = content.get('parsedData');
+          const conversionErros = content.get('conversionInfo.errorCodes');
+          uploadContent.set('conversionErros', conversionErros);
+          component.set(
+            'questions',
+            component.parseQuestions(parsedData).sortBy('sequence')
+          );
+          component.set('studentList', component.parseScores(parsedData));
+          uploadContent.set('uploadStatus', uploadStatus);
+          uploadContent.set(
+            'isUploadReadyForReview',
+            uploadStatus === I2D_CONVERSION_STATUS.READY_FOR_REVIEW
+          );
+          component.set('isLoading', false);
+        });
+    }
   },
 
   /**

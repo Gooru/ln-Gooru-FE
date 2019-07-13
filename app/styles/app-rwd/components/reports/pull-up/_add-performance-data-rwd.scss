@@ -1,6 +1,6 @@
 .activities.add-performance-data {
   @media only screen and (max-width: $screen-sm - 1) {
-    height: calc(100% - 102px);
+    height: 100%;
 
     .add-performance-data-container {
       .add-data-body-container {
@@ -11,19 +11,42 @@
               padding: 0;
 
               .panels {
+                .footer-panel {
+                  bottom: 50px;
+                }
+
                 .left-panel {
                   display: none;
+                  margin: 0;
+                  max-height: 100vh;
+                  background-color: #f1f3f7;
+
+                  .selected-image-container {
+                    display: block;
+                    height: calc(100% - 250px);
+                    background-color: #fff;
+                  }
+
+                  .collection-image-container,
+                  .file-picker-container {
+                    display: none;
+                  }
                 }
 
                 .right-panel {
                   background-color: #30424e;
+                  max-height: 100vh;
 
                   &.show-toggle {
                     .preview-panel {
                       .gru-i2d-preview {
                         .image-preview-container {
                           .footer-container {
-                            bottom: 155px;
+                            bottom: 150px;
+
+                            &.score-review {
+                              bottom: 50px;
+                            }
                           }
                         }
                       }
@@ -32,37 +55,46 @@
 
                   .preview-panel {
                     .gru-i2d-preview {
-                      .image-preview-container {
+                      .image-to-data-preview-container {
                         .re-upload-container {
                           right: 30px;
-                          bottom: 105px;
+                          bottom: 95px;
                           left: auto;
                           z-index: 2;
                         }
 
                         .footer-container {
-                          bottom: 100px;
+                          bottom: 93px;
                           overflow-x: auto;
-                          display: block;
+                          display: flex;
 
                           .action,
                           .preview-slides {
                             width: 100%;
-                            height: 100%;
+                            height: auto;
                             justify-content: flex-start;
+                            align-items: center;
 
-                            .submit-btn {
+                            button {
                               position: absolute;
                               right: 15px;
                               border: none;
                               border-radius: 50px;
-                              width: 50px;
                               bottom: 15px;
                               z-index: 9;
-                              height: 50px;
+                              height: 60px;
                               background-color: #008ccc;
                               color: #fff;
+                            }
+
+                            .submit-btn {
+                              width: 60px;
                               display: grid !important;
+                            }
+
+                            .submit-score-btn {
+                              width: auto;
+                              display: flex !important;
                             }
                           }
                         }

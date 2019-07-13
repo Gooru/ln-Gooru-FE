@@ -1,8 +1,13 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import { addProtocolIfNecessary, generateUUID } from 'gooru-web/utils/utils';
+import {
+  addProtocolIfNecessary,
+  generateUUID,
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
 import ModalMixin from 'gooru-web/mixins/modal';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
 export default Ember.Component.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Attributes
@@ -18,8 +23,14 @@ export default Ember.Component.extend(ModalMixin, {
    */
   assessmentService: Ember.inject.service('api-sdk/assessment'),
 
+  /**
+   * @property {PerformanceService} performance service API SDK
+   */
   performanceService: Ember.inject.service('api-sdk/performance'),
 
+  /**
+   * @property {SessionService} session service API SDK
+   */
   session: Ember.inject.service('session'),
 
   /**
@@ -84,6 +95,12 @@ export default Ember.Component.extend(ModalMixin, {
    * @prop {String}
    */
   assessmentId: Ember.computed.alias('assessment.id'),
+
+  /**
+   * @property {Boolean} isMobileView
+   * Property to handle is mobile view
+   */
+  isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
   /**
    * It maintains the format
@@ -172,6 +189,9 @@ export default Ember.Component.extend(ModalMixin, {
         selectedFile.set('url', fileData.data);
         selectedFile.set('name', fileData.name);
         selectedFile.set('isUploadSuccess', false);
+        selectedFile.set('isUploadReadyForReview', false);
+        selectedFile.set('conversionErros', null);
+        selectedFile.set('uploadStatus', 1);
       });
     },
 
@@ -209,13 +229,21 @@ export default Ember.Component.extend(ModalMixin, {
     },
 
     /**
+     * Action triggered when user clicks on Ingore button.
+     */
+    onIgnore(selectedFile) {
+      const component = this;
+      component.get('selectedFiles').removeObject(selectedFile);
+    },
+
+    /**
      * Action triggered when user select confirm score button.
      */
     onConfirmScore() {
       const component = this;
       const performanceService = component.get('performanceService');
       const activeContent = component.get('activeContent');
-      let students = component.get('studentScores');
+      let students = component.get('studentList');
       let performancePromises = students.map(student => {
         return performanceService.updateCollectionOfflinePerformance(
           component.getAssessmentDataParams(student)
@@ -261,6 +289,10 @@ export default Ember.Component.extend(ModalMixin, {
    */
   uploadImageFiles() {
     const component = this;
+    if (component.get('isMobileView')) {
+      component.handleMobileViewControl();
+      component.set('isUpload', true);
+    }
     let selectedFiles = component.get('selectedFiles').filterBy('file');
     let filePromises = selectedFiles.map(selectedFile => {
       return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -270,6 +302,7 @@ export default Ember.Component.extend(ModalMixin, {
           .then(
             imageId => {
               selectedFile.set('isUploadSuccess', true);
+              selectedFile.set('isUploadFailed', false);
               resolve(
                 Ember.Object.create({
                   url: addProtocolIfNecessary(imageId),
@@ -278,7 +311,9 @@ export default Ember.Component.extend(ModalMixin, {
               );
             },
             error => {
+              selectedFile.set('isUploadSuccess', false);
               selectedFile.set('isUploadFailed', true);
+              component.set('showError', true);
               reject(error);
             }
           );
@@ -324,6 +359,18 @@ export default Ember.Component.extend(ModalMixin, {
     });
   },
 
+  /**
+   * This method is used to handle mobile view
+   */
+  handleMobileViewControl() {
+    const component = this;
+    component.$('.left-panel').show();
+    component.$('.right-panel').hide();
+  },
+
+  /**
+   * This method is used to trigger toast message
+   */
   notifyUploadSuccess() {
     const component = this;
     component.get('notifications').setOptions({

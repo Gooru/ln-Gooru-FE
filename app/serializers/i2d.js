@@ -44,7 +44,9 @@ export default DS.JSONAPISerializer.extend({
   normalizeImageData: function(data) {
     const serializer = this;
     return Ember.Object.create({
-      conversionInfo: serializer.normalizeConversionInfo(data.conversion_info),
+      conversionInfo: data.conversion_info
+        ? serializer.normalizeConversionInfo(data.conversion_info)
+        : null,
       uploadInfo: serializer.normalizeSearchItem(data.upload_info),
       parsedData: data.parsed_data.map(data => {
         return serializer.normalizeParseData(data);

@@ -11,6 +11,13 @@
         {{/if}}
       </div>
     </div>
+    <div class="hidden visible-xs">
+      {{#if showError}}
+        <div class="error-message">
+          <span class="error-icon">{{gru-icon name="info"}}</span>
+          <span class="text">There was a error</span></div>
+      {{/if}}
+    </div>
     {{#if selectedFiles}}
       <div class="selected-image-container">
         {{#each selectedFiles as |selectedFile index|}}
@@ -34,7 +41,7 @@
           </div>
           {{#if selectedFile.isUploadFailed}}
             <div class="error-panel">
-              <div class="message">There was an error reading the class code on this image. Re-upload?</div>
+              <div class="message">There was an error while uploading this image. Re-upload?</div>
               <div class="actions">
                 {{#file-picker
                   accept=mimeType
@@ -54,6 +61,11 @@
             </div>
           {{/if}}
         {{/each}}
+      </div>
+      <div class="btn-container">
+        <button type="button" class="submit-btn hidden visible-xs" {{action 'onConfirmUpload'}}>
+          {{t 'common.confirm'}} & {{t 'gru-assessment-confirmation.continue'}}
+        </button>
       </div>
     {{/if}}
     {{#unless showScoreReview}}
@@ -91,7 +103,7 @@
           activePreviewIndex=activePreviewIndex
           activeContent=activeContent
           showConfirm=showConfirm
-          studentScores=studentScores
+          studentList=studentList
           questions=questions
           showToggle=showToggle
           showScoreReview=showScoreReview
@@ -109,17 +121,19 @@
 </div>
 
 <!-- Mobile View Section-->
-<div class="container-xs hidden visible-xs">
-  <div class="footer-panel">
-    {{#file-picker
+{{#unless (or isUpload showScoreReview)}}
+  <div class="container-xs hidden visible-xs">
+    <div class="footer-panel">
+      {{#file-picker
         accept=mimeType
         preview=false
         dropzone=false
         fileLoaded=(action 'prepareForSubmission')
         readAs="readAsFile"
       }}
-      <div class="tap-section"></div>
-    {{/file-picker}}
-    <span class="info-msg">Tap for image upload</span>
+        <div class="tap-section"></div>
+      {{/file-picker}}
+      <span class="info-msg">Tap for image upload</span>
+    </div>
   </div>
-</div>
+{{/unless}}
