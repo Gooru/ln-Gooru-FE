@@ -82,6 +82,11 @@ window.i18ln = {
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
+  'upload-success': 'Uploaded Successfully',
+  'mobile-camera-placeholder': 'Tap for image upload',
+  'i2d.mobile-upload-failed': 'There was a error',
+  'i2d.upload-failed':
+    'There was an error while uploading this image. Re-upload?',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':

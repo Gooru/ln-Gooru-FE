@@ -80,6 +80,11 @@ window.i18ln = {
     'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
   'common.dialog-close': 'Do you want to close ?',
   're-upload': 'Re-Upload',
+  'upload-success': 'Uploaded Successfully',
+  'mobile-camera-placeholder': 'Tap for image upload',
+  'i2d.mobile-upload-failed': 'There was a error',
+  'i2d.upload-failed':
+    'There was an error while uploading this image. Re-upload?',
   'common.last': 'Last',
   'common.no-users-to-grade-oa':
     'There are no users to grade for this Offline Activity.',
