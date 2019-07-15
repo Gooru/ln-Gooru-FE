@@ -61,6 +61,28 @@
       overflow-y: auto;
       margin-right: 15px;
 
+      .error-message {
+        height: 200px;
+        width: 100%;
+        color: #30424e;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+
+        .error-icon {
+          display: flex;
+          justify-content: center;
+
+          i {
+            font-size: 70px;
+          }
+        }
+
+        .text {
+          font-size: 25px;
+        }
+      }
+
       .collection-image-container {
         height: 200px;
         background-size: cover;
@@ -175,6 +197,21 @@
               }
             }
           }
+        }
+      }
+
+      .btn-container {
+        width: 100%;
+        background-color: #fff;
+        height: auto;
+        display: flex;
+
+        .submit-btn {
+          margin: auto;
+          background-image: linear-gradient(to right, #00abe0, #0072bc);
+          border: none;
+          color: #fff;
+          height: 40px;
         }
       }
 
