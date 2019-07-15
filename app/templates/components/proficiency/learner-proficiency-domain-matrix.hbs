@@ -1,19 +1,21 @@
 {{#if isLoading}}
-  <div class="spinner">
-    {{three-bounce-spinner}}
-  </div>
+<div class="spinner">
+  {{three-bounce-spinner}}
+</div>
 {{/if}}
 <div class="actions">
   {{#if (and (gt taxonomyGrades.length 0) isShowMatrixChart)}}
-    {{proficiency.grade-selector classGrade=classGrade taxonomyGrades=taxonomyGrades onToggleBaseline="onToggleBaseline" onSelectGrade="onSelectGrade" activeGrade=activeGrade}}
+  {{proficiency.grade-selector classGrade=classGrade taxonomyGrades=taxonomyGrades onToggleBaseline="onToggleBaseline" onSelectGrade="onSelectGrade" activeGrade=activeGrade}}
   {{/if}}
+  {{#if showExpandedButton}}
   <div class="toggle-chart" {{action "onToggleChart"}}>
     {{#if isExpandChartEnabled}}
-      {{gru-icon name="unfold_less"}}<span class="hidden-xs">{{t 'profile.proficiency.show-compressed-chart'}}</span>
+    {{gru-icon name="unfold_less"}}<span class="hidden-xs">{{t 'profile.proficiency.show-compressed-chart'}}</span>
     {{else}}
-      {{gru-icon name="unfold_more"}}<span class="hidden-xs">{{t 'profile.proficiency.show-expanded-chart'}}</span>
+    {{gru-icon name="unfold_more"}}<span class="hidden-xs">{{t 'profile.proficiency.show-expanded-chart'}}</span>
     {{/if}}
   </div>
+  {{/if}}
 </div>
 <div class="chart-area {{unless isExpandChartEnabled 'compressed-view'}}">
   <div class="matrix-chart">
@@ -21,17 +23,21 @@
       <div class="domain-chart-container">
         <div class="scrollable-chart">
           <div id="render-proficiency-matrix">
-            <div class="selected-competency background{{blockAttribute.status}}" style="width:{{blockAttribute.width}}px; height:{{blockAttribute.height}}px; top:{{blockAttribute.top}}px; left:{{blockAttribute.left}}px">
+            <div class="selected-competency background{{blockAttribute.status}}"
+              style="width:{{blockAttribute.width}}px; height:{{blockAttribute.height}}px; top:{{blockAttribute.top}}px; left:{{blockAttribute.left}}px">
             </div>
           </div>
         </div>
         <div class="domain-sequence-container">
           <div class="domain-sequence" style="width:{{width}}px">
             {{#each taxonomyDomains as |taxonomyDomain index |}}
-              <li class="domain-counts" title="{{locale-translation (t (concat 'domain-code.' taxonomyDomain.domainCode)) taxonomyDomain.domainName}}" data-placement="auto right" {{action "onDomainSelect" taxonomyDomain}} onmouseover={{action "domainFocusIn" taxonomyDomain}} onmouseout={{action 'domainFocusOut'}}
-                data-toggle="tooltip">
-                {{taxonomyDomain.domainSeq}}
-              </li>
+            <li class="domain-counts"
+              title="{{locale-translation (t (concat 'domain-code.' taxonomyDomain.domainCode)) taxonomyDomain.domainName}}"
+              data-placement="auto right" {{action "onDomainSelect" taxonomyDomain}}
+              onmouseover={{action "domainFocusIn" taxonomyDomain}} onmouseout={{action 'domainFocusOut'}}
+              data-toggle="tooltip" style="width:{{cellWidth}}px">
+              {{taxonomyDomain.domainSeq}}
+            </li>
             {{/each}}
           </div>
         </div>
