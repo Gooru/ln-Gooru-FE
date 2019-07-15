@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
 import { cleanFilename } from 'gooru-web/utils/utils';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['add-data', 'add-student-performance-data'],
@@ -76,16 +77,27 @@ export default Ember.Component.extend({
     );
   }),
 
+  /**
+   * It decides whether we need to allow i2d flow or not
+   * @prop {Boolean}
+   */
+  allowI2D: Ember.computed.alias('configuration.GRU_FEATURE_FLAG.i2dFlow'),
+
+  /**
+   * It maintains the state of selected option
+   * @prop {String}
+   */
+  selectedOption: 'question',
+
   // -------------------------------------------------------------------------
   // Events
   init() {
     const component = this;
     component._super(...arguments);
-    if (component.get('isAsessmentAddData')) {
+    if (component.get('isAsessmentAddData') && component.get('allowI2D')) {
       component.searchImageUpload();
     }
   },
-
   // -------------------------------------------------------------------------
   //Methods
 

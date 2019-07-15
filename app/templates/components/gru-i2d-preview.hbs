@@ -37,10 +37,16 @@
       {{#if showStudentScore}}
         <table class="student-score-table">
           <tbody>
-            <tr class="heading">
+            <tr>
               <th>{{t 'common.name'}}</th>
               {{#each questions as |question|}}
-                <th>Q{{question.sequence}}</th>
+                <th data-toggle="popover" data-content="{{question.title}}">Q{{question.sequence}}</th>
+              {{/each}}
+            </tr>
+            <tr class="heading">
+              <th>{{t 'teacher-landing.class.class-activities-tab.max-score'}}</th>
+              {{#each questionsMaxScore as |maxScore|}}
+                <th>{{maxScore}}</th>
               {{/each}}
             </tr>
             {{#each studentList as |student|}}
