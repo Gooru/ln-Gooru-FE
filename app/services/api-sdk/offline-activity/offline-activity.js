@@ -454,5 +454,27 @@ export default Ember.Service.extend({
           }
         );
     });
+  },
+
+  /**
+   * @function updateOACompleted
+   * @param {Object} oaData
+   * Method to update the student's OA status as completed
+   */
+  updateOACompleted(oaData) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('offlineActivityAdapter')
+        .updateOACompleted(oaData)
+        .then(
+          function() {
+            resolve(true);
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });
