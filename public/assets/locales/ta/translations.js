@@ -2765,5 +2765,6 @@ window.i18ln = {
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
   'report.class-weekly-report': 'Class Weekly Report',
-  'no-teacher-found': 'No teacher with that email id found!'
+  'no-teacher-found': 'No teacher with that email id found!',
+  'no.content.assoc.fw': 'Currently no content associated with this framework.'
 };
