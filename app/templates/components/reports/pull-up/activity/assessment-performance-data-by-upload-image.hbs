@@ -15,7 +15,7 @@
       {{#if showError}}
         <div class="error-message">
           <span class="error-icon">{{gru-icon name="info"}}</span>
-          <span class="text">There was a error</span></div>
+          <span class="text">{{ t 'i2d.mobile-upload-failed'}}</span></div>
       {{/if}}
     </div>
     {{#if selectedFiles}}
@@ -41,7 +41,7 @@
           </div>
           {{#if selectedFile.isUploadFailed}}
             <div class="error-panel">
-              <div class="message">There was an error while uploading this image. Re-upload?</div>
+              <div class="message">{{t 'i2d.upload-failed'}}</div>
               <div class="actions">
                 {{#file-picker
                   accept=mimeType
@@ -133,7 +133,7 @@
       }}
         <div class="tap-section"></div>
       {{/file-picker}}
-      <span class="info-msg">Tap for image upload</span>
+      <span class="info-msg">{{t 'mobile-camera-placeholder'}}</span>
     </div>
   </div>
 {{/unless}}
