@@ -87,7 +87,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
    * It maintains the state of selected option
    * @prop {String}
    */
-  selectedOption: 'question',
+  selectedOption: Ember.computed('allowI2D', function() {
+    return !this.get('allowI2D') ? 'question' : null;
+  }),
 
   // -------------------------------------------------------------------------
   // Events
