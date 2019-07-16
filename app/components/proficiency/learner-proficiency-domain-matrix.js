@@ -48,6 +48,11 @@ export default Ember.Component.extend({
     component.set('domainBoundariesContainer', Ember.A([]));
   },
 
+  didInsertElement() {
+    let maxHeight = this.$('.scrollable-chart').height() - 50;
+    this.set('maxHeight', maxHeight);
+  },
+
   didRender() {
     var component = this;
     component.$('[data-toggle="tooltip"]').tooltip({
