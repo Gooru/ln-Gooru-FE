@@ -321,7 +321,9 @@ export default Ember.Component.extend({
       oa_id: oaId,
       content_source: contentSource,
       student_id: studentId,
-      marked_by: ROLES.STUDENT
+      marked_by: ROLES.STUDENT,
+      path_id: 0,
+      path_type: null
     };
     return component.get('oaService').updateOACompleted(oaData);
   },
