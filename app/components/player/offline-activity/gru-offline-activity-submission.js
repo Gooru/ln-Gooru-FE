@@ -146,6 +146,28 @@ export default Ember.Component.extend({
    */
   isOaCompleted: false,
 
+  /**
+   * @property {Boolean} isEnableCompletionButton
+   * Property to check whether to enable or not the mark complete button
+   */
+  isEnableCompletionButton: Ember.computed(
+    'activityTasks.@each.isAddedMandatorySubmission',
+    'activityTasks.@each.isTaskSubmitted',
+    function() {
+      const component = this;
+      const activityTasks = component.get('activityTasks') || Ember.A([]);
+      const isInCompleteTaskAvailable = activityTasks.filter(
+        task => !task.isAddedMandatorySubmission
+      );
+      const isUnSubmittedTaskAvailable = activityTasks.filter(
+        task => !task.isTaskSubmitted
+      );
+      return !(
+        isInCompleteTaskAvailable.length || isUnSubmittedTaskAvailable.length
+      );
+    }
+  ),
+
   // -------------------------------------------------------------------------
   // Methods
 

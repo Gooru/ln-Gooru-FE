@@ -2676,6 +2676,9 @@ window.i18ln = {
   'report.domain-proficiency-report': 'Domain Competency Report',
   'report.class-weekly-report': 'Class Weekly Report',
   'no-teacher-found': 'No teacher with that email id found!',
+  'oa-player.complete-confirm':
+    'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',
+  'oa-player.mark-complete': 'Mark Complete',
   'domain-code.FD': 'अपूर्णांक आणि दशांश अपूर्णांक',
   'domain-code.PD': 'आकृतिबंध आणि माहितीचे व्यवस्थापन',
   'domain-code.PN': 'गणन पूरक संबोध',

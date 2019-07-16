@@ -2728,5 +2728,8 @@ window.i18ln = {
   'report.domain-proficiency-report': 'Domain Competency Report',
   'report.class-weekly-report': 'Class Weekly Report',
   'no-teacher-found': 'No teacher with that email id found!',
+  'oa-player.complete-confirm':
+    'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',
+  'oa-player.mark-complete': 'Mark Complete',
   'no.content.assoc.fw': 'Currently no content associated with this framework.'
 };
