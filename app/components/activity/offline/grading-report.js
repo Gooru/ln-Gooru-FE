@@ -187,7 +187,7 @@ export default Ember.Component.extend({
       let totalRubricPoints = this.get('totalRubricPoints');
       let totalUserRubricPoints = this.get('totalUserRubricPoints');
       if (totalUserRubricPoints > 0) {
-        score = Math.floor(totalUserRubricPoints / totalRubricPoints * 100);
+        score = Math.floor((totalUserRubricPoints / totalRubricPoints) * 100);
       }
       return score;
     }
@@ -208,7 +208,7 @@ export default Ember.Component.extend({
         ? component.get('teacherRubric.studentScore')
         : component.get('studentRubric.studentScore');
       if (studentScore > 0) {
-        score = Math.floor(studentScore / gradeMaxScore * 100);
+        score = Math.floor((studentScore / gradeMaxScore) * 100);
       }
       return score;
     }
@@ -226,7 +226,7 @@ export default Ember.Component.extend({
       let gradeMaxScore = selfGrade.get('maxScore');
       let studentScore = selfGrade.get('studentScore');
       if (studentScore > 0) {
-        score = Math.floor(studentScore / gradeMaxScore * 100);
+        score = Math.floor((studentScore / gradeMaxScore) * 100);
       }
     }
     return score;
@@ -358,14 +358,13 @@ export default Ember.Component.extend({
     let component = this;
     let classId = component.get('context.classId');
     let dcaContentId = component.get('context.dcaContentId');
-    return Ember.RSVP
-      .hash({
-        studentList: component.get('isTeacher')
-          ? component
-            .get('classActivityService')
-            .fetchUsersForClassActivity(classId, dcaContentId)
-          : []
-      })
+    return Ember.RSVP.hash({
+      studentList: component.get('isTeacher')
+        ? component
+          .get('classActivityService')
+          .fetchUsersForClassActivity(classId, dcaContentId)
+        : []
+    })
       .then(({ studentList }) => {
         if (!component.isDestroyed) {
           let users = studentList.filterBy('isActive', true);
@@ -491,7 +490,6 @@ export default Ember.Component.extend({
     let score = grade.get('score') ? grade.get('score') : 0;
     rubric.set('comment', grade.get('overallComment'));
     rubric.set('studentScore', score);
-    rubric.set('maxScore', grade.get('maxScore'));
   },
 
   /**
@@ -569,9 +567,12 @@ export default Ember.Component.extend({
       userGrade.set('sessionId', currentStudent.get('sessionId'));
       userGrade.set('graderId', component.get('session.userId'));
     }
-    if (isTeacher && !userGrade.scoring) {
-      userGrade.set('maxScore', component.get('content.maxScore'));
-    }
+    let maxScore = isTeacher
+      ? component.get('content.maxScore')
+      : userGrade
+        ? userGrade.get('maxScore')
+        : null;
+    userGrade.set('maxScore', maxScore);
     let categoriesScore = Ember.A([]);
     userGrade.set('classId', context.get('classId'));
     userGrade.set('dcaContentId', context.get('dcaContentId'));
@@ -642,6 +643,7 @@ export default Ember.Component.extend({
       collectionId: component.get('context.dcaContentId'),
       createdDate: new Date(),
       studentScore: 0,
+      maxScore: rubric ? rubric.get('maxScore') : null,
       scoring: !!rubric
     });
   },
@@ -688,13 +690,15 @@ export default Ember.Component.extend({
 
   closePullUp() {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-    });
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+      }
+    );
   },
 
   /**

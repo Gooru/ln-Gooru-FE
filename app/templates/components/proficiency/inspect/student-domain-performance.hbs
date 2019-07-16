@@ -30,7 +30,7 @@
         {{#each domainCoverageCount as |domain|}}
           <div class="domain-coverage-count" {{action "onSelectDomain" domain}}>
             <div class="domain-name title">
-              {{domain.domainName}}
+              {{locale-translation (t (concat 'domain-code.' domain.domainCode)) domain.domainName}}
             </div>
             <div class="coverage-count">
               <div class="count-container">

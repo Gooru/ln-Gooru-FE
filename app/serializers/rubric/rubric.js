@@ -103,7 +103,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
             return serializer.serializedUpdateRubricCategory(category);
           })
           : null,
-        max_score: model.get('maxScore')
+        max_score: model.get('maxScore'),
+        scoring: model.get('scoring')
       };
     } else {
       return {

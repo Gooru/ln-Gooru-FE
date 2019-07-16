@@ -51,7 +51,8 @@
   },
 
   "GRU_FEATURE_FLAG": {
-    "searchFilter": true
+    "searchFilter": true,
+    "i2dFlow": true
   },
 
   "marketingSiteUrl": "/welcome"

@@ -10,7 +10,7 @@ import { CONTENT_TYPES, SCREEN_SIZES } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
-  classNames: ['add-data', 'assessment-performance-data'],
+  classNames: ['add-data', 'assessment-performance-data-by-question'],
 
   // -------------------------------------------------------------------------
   // Serevices
@@ -554,20 +554,18 @@ export default Ember.Component.extend({
     const activityData = component.get('activityData');
     const activityDate = activityData.get('activation_date');
     const classId = component.get('classId');
-    return Ember.RSVP
-      .hash({
-        studentsActivityPerformanceData: classActivityService.fetchStudentsActivityPerformance(
-          classId,
-          activityData,
-          activityDate,
-          activityDate
-        )
-      })
-      .then(({ studentsActivityPerformanceData }) => {
-        component.parseStudentsActivityPerforamanceData(
-          studentsActivityPerformanceData
-        );
-      });
+    return Ember.RSVP.hash({
+      studentsActivityPerformanceData: classActivityService.fetchStudentsActivityPerformance(
+        classId,
+        activityData,
+        activityDate,
+        activityDate
+      )
+    }).then(({ studentsActivityPerformanceData }) => {
+      component.parseStudentsActivityPerforamanceData(
+        studentsActivityPerformanceData
+      );
+    });
   },
 
   /**
@@ -583,9 +581,11 @@ export default Ember.Component.extend({
         activeStudent.get('performance.sessionId')
       )
       .then(function(activityQuestionsPerformance) {
-        component.populateActivityQuestionsPerformance(
-          activityQuestionsPerformance
-        );
+        if (activityQuestionsPerformance) {
+          component.populateActivityQuestionsPerformance(
+            activityQuestionsPerformance
+          );
+        }
       });
   },
 
@@ -600,24 +600,22 @@ export default Ember.Component.extend({
     const userId = student.get('id');
     const classId = component.get('classId');
     const activityDate = component.get('activityData.activation_date');
-    return Ember.RSVP
-      .hash({
-        studentActivityPerformance: classActivityService.findStudentActivitiesPerformanceSummary(
-          userId,
-          classId,
-          activityData,
-          activityDate,
-          activityDate
-        )
-      })
-      .then(({ studentActivityPerformance }) => {
-        if (!component.isDestroyed) {
-          student.set(
-            'performance',
-            studentActivityPerformance.objectAt(0).get('collection.performance')
-          );
-        }
-      });
+    return Ember.RSVP.hash({
+      studentActivityPerformance: classActivityService.findStudentActivitiesPerformanceSummary(
+        userId,
+        classId,
+        activityData,
+        activityDate,
+        activityDate
+      )
+    }).then(({ studentActivityPerformance }) => {
+      if (!component.isDestroyed) {
+        student.set(
+          'performance',
+          studentActivityPerformance.objectAt(0).get('collection.performance')
+        );
+      }
+    });
   },
 
   /**
@@ -674,21 +672,19 @@ export default Ember.Component.extend({
   submitAssessmentPerformanceData() {
     const component = this;
     const performanceService = component.get('performanceService');
-    return Ember.RSVP
-      .hash({
-        studentPerformanceUpdated: Ember.RSVP.resolve(
-          performanceService.updateCollectionOfflinePerformance(
-            component.getAssessmentDataParams()
-          )
+    return Ember.RSVP.hash({
+      studentPerformanceUpdated: Ember.RSVP.resolve(
+        performanceService.updateCollectionOfflinePerformance(
+          component.getAssessmentDataParams()
         )
-      })
-      .then(() => {
-        if (!component.isDestroyed) {
-          component.resetQuestionScores();
-          component.set('activeStudent', component.get('activeStudentTemp'));
-          component.set('activeStudent.isSubmitted', true);
-        }
-      });
+      )
+    }).then(() => {
+      if (!component.isDestroyed) {
+        component.resetQuestionScores();
+        component.set('activeStudent', component.get('activeStudentTemp'));
+        component.set('activeStudent.isSubmitted', true);
+      }
+    });
   },
 
   /**
@@ -697,20 +693,18 @@ export default Ember.Component.extend({
   submitExternalAssessmentPerformanceData() {
     const component = this;
     const performanceService = component.get('performanceService');
-    return Ember.RSVP
-      .hash({
-        studentPerformanceUpdated: Ember.RSVP.resolve(
-          performanceService.updateCollectionOfflinePerformance(
-            component.getExternalAssessmentDataParams()
-          )
+    return Ember.RSVP.hash({
+      studentPerformanceUpdated: Ember.RSVP.resolve(
+        performanceService.updateCollectionOfflinePerformance(
+          component.getExternalAssessmentDataParams()
         )
-      })
-      .then(() => {
-        if (!component.isDestroyed) {
-          component.set('activeStudent', component.get('activeStudentTemp'));
-          component.set('activeStudent.isSubmitted', true);
-        }
-      });
+      )
+    }).then(() => {
+      if (!component.isDestroyed) {
+        component.set('activeStudent', component.get('activeStudentTemp'));
+        component.set('activeStudent.isSubmitted', true);
+      }
+    });
   },
 
   /**
@@ -792,7 +786,11 @@ export default Ember.Component.extend({
       path_type: null,
       resources: assessmentResources,
       course_id: courseId,
-      additionalContext: btoa(JSON.stringify({ dcaContentId: activityId }))
+      additionalContext: btoa(
+        JSON.stringify({
+          dcaContentId: activityId
+        })
+      )
     };
     return studentPerformanceData;
   },
@@ -823,7 +821,11 @@ export default Ember.Component.extend({
       max_score: parseInt(maxScore) || 0,
       time_spent: 0,
       conducted_on: conductedOn.toISOString(),
-      additionalContext: btoa(JSON.stringify({ dcaContentId: activityId }))
+      additionalContext: btoa(
+        JSON.stringify({
+          dcaContentId: activityId
+        })
+      )
     };
     return studentPerformanceData;
   },
@@ -876,8 +878,10 @@ export default Ember.Component.extend({
           'resourceId',
           question.get('id')
         );
-        question.set('score', questionPerformance.get('rawScore'));
-        question.set('isScored', true);
+        if (questionPerformance) {
+          question.set('score', questionPerformance.get('rawScore'));
+          question.set('isScored', true);
+        }
       });
       component.set('isLoading', false);
     }
@@ -909,7 +913,11 @@ export default Ember.Component.extend({
       class_id: component.get('classId'),
       collection_type: 'assessment',
       content_source: component.get('contentSource'),
-      additional_context: btoa(JSON.stringify({ dcaContentId: activityId })),
+      additional_context: btoa(
+        JSON.stringify({
+          dcaContentId: activityId
+        })
+      ),
       resources: resourcesContext
     };
     return qustionsScorePayload;

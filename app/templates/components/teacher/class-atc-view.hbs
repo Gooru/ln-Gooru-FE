@@ -36,7 +36,7 @@
 {{/if}}
 
 {{#if isShowDomainCompetencyReport}}
-  {{#reports.pull-up.competency-report type=(t 'report.domain-report') title=selectedDomain.domainData.domainName showPullUp=isShowDomainCompetencyReport onClosePullUp="onCloseCompetencyReportPullUp" }}
+  {{#reports.pull-up.competency-report type=(t 'report.domain-report') title=(locale-translation (t (concat 'domain-code.' selectedDomain.domainData.domainCode)) selectedDomain.domainData.domainName) showPullUp=isShowDomainCompetencyReport onClosePullUp="onCloseCompetencyReportPullUp" }}
     {{reports.pull-up.domain-competency-report domainSet=selectedDomain onSelectCompetency="onSelectCompetency"}}
   {{/reports.pull-up.competency-report}}
 {{/if}}

@@ -46,7 +46,6 @@ export default Ember.Component.extend({
    */
   standardCode: Ember.computed.alias('competency.competencyCode'),
 
-
   onCompetencyChange: Ember.observer('competency', function() {
     let component = this;
     component.loadData();
@@ -126,7 +125,6 @@ export default Ember.Component.extend({
   source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
 
   actions: {
-
     //Action triggered when click collection/assessment title
     onPreviewContent() {
       const component = this;
@@ -163,9 +161,7 @@ export default Ember.Component.extend({
       competencyCodes: component
         .get('taxonomyService')
         .fetchCodes(frameworkId, subjectId, courseId, domainId)
-    }).then(({
-      competencyCodes
-    }) => {
+    }).then(({ competencyCodes }) => {
       let microCompetencies = this.filterMicroCompetency(competencyCodes);
       component.set('microCompetencies', microCompetencies);
     });
@@ -188,28 +184,30 @@ export default Ember.Component.extend({
         competencyCode,
         filters
       )
-    }).then(({
-      learningMapData
-    }) => {
-      component.set('learningMapData', learningMapData);
-      component.checkPrerequisiteCompetencyStatus(
-        learningMapData.prerequisites
-      );
-      let signatureContentList = learningMapData.signatureContents;
-      let showSignatureAssessment =
-        component.get('showSignatureAssessment') &&
-        signatureContentList.assessments.length > 0;
-      component.set('showSignatureAssessment', showSignatureAssessment);
-      let signatureContent = showSignatureAssessment ?
-        signatureContentList.assessments :
-        signatureContentList.collections;
-      let content = signatureContent.objectAt(0);
-      component.set('isLoading', false);
-      if (content) {
-        component.set('signatureContent', content);
-        component.fetchContentSettings(content.id);
-      }
-    });
+    })
+      .then(({ learningMapData }) => {
+        component.set('learningMapData', learningMapData);
+        component.checkPrerequisiteCompetencyStatus(
+          learningMapData.prerequisites
+        );
+        let signatureContentList = learningMapData.signatureContents;
+        let showSignatureAssessment =
+          component.get('showSignatureAssessment') &&
+          signatureContentList.assessments.length > 0;
+        component.set('showSignatureAssessment', showSignatureAssessment);
+        let signatureContent = showSignatureAssessment
+          ? signatureContentList.assessments
+          : signatureContentList.collections;
+        let content = signatureContent.objectAt(0);
+        component.set('isLoading', false);
+        if (content) {
+          component.set('signatureContent', content);
+          component.fetchContentSettings(content.id);
+        }
+      })
+      .catch(() => {
+        component.set('isLoading', false);
+      });
   },
 
   /**
@@ -253,9 +251,7 @@ export default Ember.Component.extend({
     }
     return Ember.RSVP.hash({
       content: contentPromise
-    }).then(({
-      content
-    }) => {
+    }).then(({ content }) => {
       component.set('content', content);
     });
   },

@@ -7,7 +7,7 @@
   <ol>
     {{#each domains as |domain|}}
       <li {{action 'onDomainSelect' domain }}>
-        <span class="domain-title">{{domain.domainName}}</span>
+        <span class="domain-title">{{locale-translation (t (concat 'domain-code.' domain.domainCode)) domain.domainName}}</span>
         <span class="competency-count">{{domain.competencyCount}} {{t 'common.competencies'}}</span>
       </li>
     {{/each}}
