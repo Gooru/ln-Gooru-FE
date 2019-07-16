@@ -31,6 +31,14 @@ export default Ember.Component.extend({
   activeContent: null,
 
   /**
+   * It maintains the question maxscores
+   * @prop {Array}
+   */
+  questionsMaxScore: Ember.computed('questions.[]', function() {
+    return this.get('questions').map(question => question.maxScore);
+  }),
+
+  /**
    * It maintains the whether to show reupload option or not
    * @prop {Boolean}
    */
@@ -66,6 +74,9 @@ export default Ember.Component.extend({
   didRender() {
     const component = this;
     component.send('slideTo', component.get('activePreviewIndex'));
+    component.$('[data-toggle="popover"]').popover({
+      trigger: 'hover'
+    });
   },
 
   didInsertElement() {

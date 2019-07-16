@@ -7,7 +7,10 @@ import {
   isCompatibleVW
 } from 'gooru-web/utils/utils';
 import ModalMixin from 'gooru-web/mixins/modal';
-import { SCREEN_SIZES } from 'gooru-web/config/config';
+import {
+  SCREEN_SIZES,
+  I2D_SUPPORTED_IMAGE_TYPES
+} from 'gooru-web/config/config';
 export default Ember.Component.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Attributes
@@ -156,6 +159,18 @@ export default Ember.Component.extend(ModalMixin, {
     }
     return TaxonomyTag.getTaxonomyTags(standards);
   }),
+
+  // -------------------------------------------------------------------------
+  // Observers
+  resetPicker: Ember.observer('mimeType', function() {
+    // Clear any previous errors
+    this.get('filePickerErrors').clear();
+  }),
+
+  onError: Ember.observer('filePickerErrors.[]', function() {
+    const errorMsg = this.get('i18n').t('common.errors.file-max-size');
+    this.notifyInvalidFileType(errorMsg);
+  }),
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -193,6 +208,21 @@ export default Ember.Component.extend(ModalMixin, {
         selectedFile.set('conversionErros', null);
         selectedFile.set('uploadStatus', 1);
       });
+    },
+
+    /**
+     * @function actions:disableButtons
+     */
+    resetFileSelection() {
+      // Reset the input element in the file picker
+      // http://stackoverflow.com/questions/1043957/clearing-input-type-file-using-jquery/13351234#13351234
+      var $fileInput = this.$('input[type="file"]');
+      $fileInput
+        .wrap('<form>')
+        .closest('form')
+        .get(0)
+        .reset();
+      $fileInput.unwrap();
     },
 
     /**
@@ -264,21 +294,35 @@ export default Ember.Component.extend(ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Methods
+  init: function() {
+    this._super(...arguments);
+    this.set('filePickerErrors', Ember.A());
+  },
+
+  // -------------------------------------------------------------------------
+  // Methods
 
   /**
    * It is used to convert the selected file to data url
    * @return {Promise Object}
    */
   readFile(file) {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    return new Ember.RSVP.Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onloadend = function() {
         file.data = reader.result;
         resolve(file);
       };
-      if (file) {
+      if (I2D_SUPPORTED_IMAGE_TYPES.validTypes.contains(file.type)) {
         reader.readAsDataURL(file);
       } else {
+        const warningMsg = this.get('i18n').t(
+          'common.errors.file-upload-missing',
+          {
+            extensions: I2D_SUPPORTED_IMAGE_TYPES.validExtensions
+          }
+        );
+        this.notifyInvalidFileType(warningMsg);
         reject();
       }
     });
@@ -380,6 +424,19 @@ export default Ember.Component.extend(ModalMixin, {
     });
     const successMsg = component.get('i18n').t('upload-success');
     component.get('notifications').success(`${successMsg}`);
+  },
+
+  /**
+   * This method is used to trigger toast message
+   */
+  notifyInvalidFileType(message) {
+    const component = this;
+    component.get('notifications').setOptions({
+      positionClass: 'toast-top-full-width',
+      toastClass: 'gooru-toast',
+      timeOut: 10000
+    });
+    component.get('notifications').warning(`${message}`);
   },
 
   /**

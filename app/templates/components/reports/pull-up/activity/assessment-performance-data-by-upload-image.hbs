@@ -47,8 +47,10 @@
                   accept=mimeType
                   preview=false
                   dropzone=false
+                  errors=filePickerErrors
                   fileLoaded=(action 'prepareForReUpload')
                   readAs="readAsFile"
+                  onRemoveFile=(action 'resetFileSelection')
                 }}
                   <button type="button" class="submit-btn" {{action 'onReUpload' selectedFile}}>
                     {{t 're-upload'}}
@@ -76,6 +78,8 @@
             dropzone=false
             fileLoaded=(action 'prepareForSubmission')
             readAs="readAsFile"
+            errors=filePickerErrors
+            onRemoveFile=(action 'resetFileSelection')
           }}
           <div class="file-picker-panel">
             <i class="icon"></i>
@@ -130,6 +134,8 @@
         dropzone=false
         fileLoaded=(action 'prepareForSubmission')
         readAs="readAsFile"
+        errors=filePickerErrors
+        onRemoveFile=(action 'resetFileSelection')
       }}
         <div class="tap-section"></div>
       {{/file-picker}}

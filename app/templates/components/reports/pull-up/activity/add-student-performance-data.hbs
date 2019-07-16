@@ -1,6 +1,6 @@
 <div class="student-performance-data-container">
   {{#if isAsessmentAddData}}
-    {{#unless selectedOption}}
+    {{#if (and (not selectedOption) allowI2D)}}
       {{reports.pull-up.activity.add-performance-data-choice
         assessment=collection
         onSelectOption="onSelectOption"
@@ -19,7 +19,7 @@
         showScoreReview=showScoreReview
         onClosePullUp="onClosePullUp"
       }}
-    {{/unless}}
+    {{/if}}
   {{else}}
     {{reports.pull-up.activity.collection-performance-data
       course=course

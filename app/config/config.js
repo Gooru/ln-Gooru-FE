@@ -6,6 +6,11 @@ export const RESOURCE_COMPONENT_MAP = {
   'vimeo/video': 'player.resources.gru-vimeo-resource'
 };
 
+export const I2D_SUPPORTED_IMAGE_TYPES = {
+  validExtensions: '.jpg, .jpeg, .png',
+  validTypes: ['image/png', 'image/jpg', 'image/jpeg']
+};
+
 export const UPLOADABLE_TYPES = [
   {
     value: 'image',

@@ -81,6 +81,7 @@
       overflow: auto;
       max-height: calc(100vh - 252px);
       border-collapse: collapse;
+      position: absolute;
 
       tbody {
         tr {
@@ -98,7 +99,7 @@
           th {
             padding-left: 8px;
             height: 30px;
-            text-align: center;
+            text-align: left;
             vertical-align: top;
             padding: 10px 15px;
 
@@ -114,7 +115,7 @@
           input {
             color: #32404b;
             width: 30px;
-            text-align: center;
+            text-align: left;
             box-shadow: none;
 
             &:focus {
