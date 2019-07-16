@@ -28,6 +28,37 @@ export default Ember.Component.extend({
   },
 
   // -------------------------------------------------------------------------
+  // Observer
+
+  /**
+   * Observe task submission changes
+   */
+  observePendingItems: Ember.observer(
+    'pendingUrlSubmissions',
+    'pendingUploadSubmissions',
+    'task.submissionText',
+    function() {
+      const component = this;
+      const pendingUrlSubmissions = component.get('pendingUrlSubmissions');
+      const pendingUploadSubmissions = component.get(
+        'pendingUploadSubmissions'
+      );
+      const freeeFormText = component.get('task.submissionText');
+      const isFreeFormTextEntered = freeeFormText
+        ? freeeFormText.length
+        : false;
+      component.set(
+        'task.isAddedMandatorySubmission',
+        !!(
+          pendingUploadSubmissions <= 0 &&
+          pendingUrlSubmissions <= 0 &&
+          isFreeFormTextEntered
+        )
+      );
+    }
+  ),
+
+  // -------------------------------------------------------------------------
   // Actions
   actions: {
     //Action triggered when select a file from picker
@@ -55,6 +86,7 @@ export default Ember.Component.extend({
       component.uploadFilesToS3().then(function() {
         component.set('isSubmittingTask', false);
         component.submitTaskDetails(component.createTaskSubmissionPayload());
+        component.set('task.isTaskSubmitted', true);
         component.actions.onToggleTask(component);
       });
     },
@@ -525,6 +557,7 @@ export default Ember.Component.extend({
     if (component.get('isStudentSubmitted')) {
       let studentTaskUrlSubmission = component.get('studentTaskUrlSubmission');
       let taskUrls = component.get('task.urls');
+      component.set('task.isTaskSubmitted', true);
       studentTaskUrlSubmission.forEach(function(taskUrlSubmission, urlIndex) {
         let taskUrl = taskUrls.objectAt(urlIndex);
         if (taskUrl) {

@@ -134,6 +134,9 @@
         font-size: 15px;
         cursor: pointer;
       }
+      &.disable-event {
+        opacity: 0.5;
+      }
     }
   }
   @media screen and (max-width: $screen-sm) {
@@ -222,13 +225,7 @@
   }
 
   .loading-spinner {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
     cursor: progress;
-    background-color: rgba(0, 0, 0, 0.5);
     .three-bounce-spinner {
       position: absolute;
       top: 45%;
