@@ -1,0 +1,26 @@
+.gru-i2d-template {
+  .i2d-template-container {
+    .i2d-table-template {
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 100%;
+      top: 0;
+      display: none;
+
+      tr {
+        td,
+        th {
+          border: 1px solid black;
+          border-collapse: collapse;
+          padding: 5px;
+          text-align: left;
+
+          &.student-name {
+            text-transform: capitalize;
+          }
+        }
+      }
+    }
+  }
+}

@@ -312,6 +312,7 @@ window.i18ln = {
   'common.domain': 'Domain',
   'common.domains': 'Domains',
   'common.download': 'Download',
+  'common.template': 'Template',
   'common.download-print': 'Download/Print',
   'common.drag-drop-suggestions': 'Or Drag and Drop Suggestions ...',
   'common.download-report': 'Download Report',

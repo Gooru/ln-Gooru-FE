@@ -1,0 +1,55 @@
+.teacher_class_class-management {
+  .class {
+    padding: 0;
+
+    .content {
+      .class-settings {
+        padding: 0;
+
+        .sec-col-layout {
+          .left-panel {
+            margin: 0;
+
+            .class-layout-btn {
+              display: none;
+            }
+
+            .class-layout {
+              .class-sec-cont {
+                .class-settings-label {
+                  display: none;
+                }
+
+                .class-settings-sec {
+                  padding: 0;
+
+                  .class-head-row-wrap,
+                  .language-row,
+                  .sub-sec-coteach {
+                    display: none;
+                  }
+
+                  .gru-i2d-template {
+                    .i2d-template-container {
+                      button {
+                        display: none;
+                      }
+
+                      .i2d-table-template {
+                        display: table;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .right-panel {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

@@ -13,8 +13,8 @@
                   <span class='class-title ellipsis'>{{class.title}}</span>
                   <span title="{{t 'teacher-landing.class.class-management-tab.edit'}}" data-toggle="tooltip" class='edit-icon' {{action "editTitle" true}}>{{gru-icon name='edit'}}</span>
                   <div class='sec-head-sep'></div>
-                  {{else}}
-                    {{validation.gru-input model=tempClass valuePath='title' didValidate=didValidate onFocusOut="editTitle"
+                {{else}}
+                  {{validation.gru-input model=tempClass valuePath='title' didValidate=didValidate onFocusOut="editTitle"
                 autofocus=true maxLength=25}}
                 {{/unless}}
                 <div class="min-score-container">
@@ -26,11 +26,11 @@
                       <div class='sec-dec-value'>{{if class.minScore class.minScore '--'}} %
                         <span title="{{t 'teacher-landing.class.class-management-tab.edit'}}" data-toggle="tooltip" {{action "editScore"}}>{{gru-icon name='edit'}}</span>
                       </div>
-                      {{else}}
-                        <div class="colscoreedit">
-                          {{validation.gru-input-number model=tempClass valuePath='minScore' min=1 max=100 step=1
+                    {{else}}
+                      <div class="colscoreedit">
+                        {{validation.gru-input-number model=tempClass valuePath='minScore' min=1 max=100 step=1
                     didValidate=didValidate onFocusOut="saveScore" onFocusIn="editScore" autofocus=true}}
-                        </div>
+                      </div>
                     {{/unless}}
                   </div>
                 </div>
@@ -62,6 +62,7 @@
               </div>
             </div>
             {{!-- language  ends--}}
+            {{gru-i2d-template classCode=class.code students=sortedMembers}}
             <div class='sub-sec-coteach'>
               {{#if class.collaborators}}
                 <div class='sub-sec-head'>{{t 'teacher-landing.class.class-settings.class-settings-sec.co-teachers'}}</div>
@@ -319,23 +320,23 @@
                     </div>
                   </td>
                   <td class="actions-container">
-                      <span class="hidden visible-xs menu-icon" onclick={{action 'showActionButton'}}>
-                        {{gru-icon name='more_vert'}}
-                      </span>
-                      <div class="actions-btn">
-                       <div class="student-action-col">
-                         {{gru-switch
+                    <span class="hidden visible-xs menu-icon" onclick={{action 'showActionButton'}}>
+                      {{gru-icon name='more_vert'}}
+                    </span>
+                    <div class="actions-btn">
+                      <div class="student-action-col">
+                        {{gru-switch
                              switchOptions=switchOptions
                              onOptionSwitch='classMembersToggle'
                              item=student data-toggle="tooltip"
                              isChecked=(if student.isActive true false)
                            }}
-                       </div>
-                       <div class='student-action-col'>
-                         <div class='student-delete' {{action "onRemoveStudent" student}} title="{{t 'common.remove'}}" data-toggle="tooltip">
-                           {{gru-icon name='delete'}}</div>
-                       </div>
-                     </div>
+                      </div>
+                      <div class='student-action-col'>
+                        <div class='student-delete' {{action "onRemoveStudent" student}} title="{{t 'common.remove'}}" data-toggle="tooltip">
+                          {{gru-icon name='delete'}}</div>
+                      </div>
+                    </div>
                   </td>
                 </tr>
               {{/each}}
