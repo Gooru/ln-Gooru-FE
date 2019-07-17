@@ -333,6 +333,7 @@ export default Ember.Component.extend({
    * Function to triggered once when the component element is first rendered.
    */
   didInsertElement() {
+    this._super(...arguments);
     this.openPullUp();
     this.initialize();
   },
@@ -345,8 +346,8 @@ export default Ember.Component.extend({
    * Function to triggered once when the component element is after rendered
    */
   didRender() {
+    this._super(...arguments);
     let component = this;
-    component.handleRubricTooltip();
     component.handleAppContainerScroll();
   },
 
@@ -672,15 +673,6 @@ export default Ember.Component.extend({
         component.set('isLoading', false);
         component.handleCarouselControl();
       });
-  },
-
-  handleRubricTooltip() {
-    const component = this;
-    component.$().on('click', function(e) {
-      if (!component.$(e.target).hasClass('grade-info-popover')) {
-        Ember.$('.popover').hide();
-      }
-    });
   },
 
   /**
