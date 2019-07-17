@@ -85,6 +85,7 @@ export default Ember.Component.extend({
       component.set('isSubmittingTask', true);
       component.uploadFilesToS3().then(function() {
         component.set('isSubmittingTask', false);
+        // console.log('submissionPayload', component.createTaskSubmissionPayload());
         component.submitTaskDetails(component.createTaskSubmissionPayload());
         component.set('task.isTaskSubmitted', true);
         component.actions.onToggleTask(component);
@@ -408,6 +409,13 @@ export default Ember.Component.extend({
    */
   timespentInMilliSec: 0,
 
+  /**
+   * @property {String} timeZone
+   */
+  timeZone: Ember.computed(function() {
+    return moment.tz.guess() || null;
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -511,15 +519,22 @@ export default Ember.Component.extend({
     taskSubmissions.push(
       component.getTaskSubmissionContext(freeFormTextSubmissionContext)
     );
-    return {
+    let submissionPayload = {
       student_id: userId,
       class_id: classId,
-      oa_dca_id: parseInt(caContentId),
       oa_id: task.get('oaId'),
       content_source: contentSource,
       submissions: taskSubmissions,
       time_spent: timespentInMilliSec
     };
+    if (component.get('isStudyPlayer')) {
+      submissionPayload.course_id = component.get('courseId');
+      submissionPayload.unit_id = component.get('unitId');
+      submissionPayload.lesson_id = component.get('lessonId');
+    } else {
+      submissionPayload.oa_dca_id = parseInt(caContentId);
+    }
+    return submissionPayload;
   },
 
   /**

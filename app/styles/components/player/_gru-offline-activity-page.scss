@@ -1,0 +1,10 @@
+.player-container.offline-activity {
+  height: calc(100vh - 160px);
+  .player {
+    padding-top: 0;
+  }
+
+  @media screen and (max-width: 568px) {
+    height: calc(100vh - 160px);
+  }
+}

@@ -38,15 +38,20 @@ export default Ember.Object.extend({
    * @param {string} studentId
    * @returns {Object}
    */
-  getSubmissionsToGrade(classId, activityId, studentId) {
+  getSubmissionsToGrade(classId, activityId, studentId, dataParam) {
     const adapter = this;
     const namespace = this.get('namespace');
-    const url = `${namespace}/dca/class/${classId}/oa/${activityId}/student/${studentId}/submissions`;
+    let url = `${namespace}`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
-      headers: adapter.defineHeaders()
+      headers: adapter.defineHeaders(),
+      data: dataParam
     };
+    if (!dataParam) {
+      url += '/dca';
+    }
+    url += `/class/${classId}/oa/${activityId}/student/${studentId}/submissions`;
     return Ember.$.ajax(url, options);
   },
 
@@ -98,15 +103,22 @@ export default Ember.Object.extend({
    * @param {UUID} itemId CA content ID
    * Method to get list of students who have marked an OA as completed
    */
-  getOaCompletedStudents(classId, oaId, itemId) {
+  getOaCompletedStudents(classId, oaId, itemId, dataParam) {
     const adapter = this;
     const namespace = this.get('namespace');
-    const url = `${namespace}/dca/class/${classId}/oa/${oaId}/item/${itemId}/students`;
+    const url = `${namespace}${itemId
+      ? '/dca'
+      : ''}/class/${classId}/oa/${oaId}${itemId
+      ? `/item/${itemId}`
+      : ''}/students`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       headers: adapter.defineHeaders()
     };
+    if (dataParam) {
+      options.data = dataParam;
+    }
     return Ember.$.ajax(url, options);
   },
 

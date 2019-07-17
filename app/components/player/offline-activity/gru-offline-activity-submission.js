@@ -69,6 +69,14 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
 
+  classId: null,
+
+  courseId: null,
+
+  unitId: null,
+
+  lessonId: null,
+
   /**
    * @property {UUID} userId
    */
@@ -145,6 +153,8 @@ export default Ember.Component.extend({
    * Property to evaluate whether the OA is completed or not
    */
   isOaCompleted: false,
+
+  oaId: Ember.computed.alias('offlineActivity.id'),
 
   /**
    * @property {Boolean} isEnableCompletionButton
@@ -255,11 +265,22 @@ export default Ember.Component.extend({
   fetchTasksSubmissions() {
     const component = this;
     const classId = component.get('classId');
-    const caContentId = component.get('caContentId');
+    const oaId = component.get('caContentId') || component.get('oaId');
     const userId = component.get('userId');
+    let dataParam = undefined;
+    if (component.get('isStudyPlayer')) {
+      const courseId = component.get('courseId');
+      const unitId = component.get('unitId');
+      const lessonId = component.get('lessonId');
+      dataParam = {
+        courseId,
+        unitId,
+        lessonId
+      };
+    }
     return component
       .get('oaAnalyticsService')
-      .getSubmissionsToGrade(classId, caContentId, userId);
+      .getSubmissionsToGrade(classId, oaId, userId, dataParam);
   },
 
   /**
@@ -312,7 +333,7 @@ export default Ember.Component.extend({
     const component = this;
     const classId = component.get('classId');
     const caContentId = component.get('caContentId');
-    const oaId = component.get('offlineActivity.id');
+    const oaId = component.get('oaId');
     const contentSource = component.get('contentSource');
     const studentId = component.get('userId');
     const oaData = {
@@ -336,10 +357,21 @@ export default Ember.Component.extend({
   fetchOaCompletedStudents() {
     const component = this;
     const classId = component.get('classId');
-    const oaId = component.get('offlineActivity.id');
-    const caContentId = component.get('caContentId');
+    const oaId = component.get('oaId');
+    const caContentId = component.get('caContentId') || null;
+    const courseId = component.get('courseId');
+    const unitId = component.get('unitId');
+    const lessonId = component.get('lessonId');
+    let dataParam = null;
+    if (component.get('isStudyPlayer')) {
+      dataParam = {
+        courseId,
+        unitId,
+        lessonId
+      };
+    }
     return component
       .get('oaAnalyticsService')
-      .getOaCompletedStudents(classId, oaId, caContentId);
+      .getOaCompletedStudents(classId, oaId, caContentId, dataParam);
   }
 });
