@@ -321,6 +321,10 @@ window.i18ln = {
   'common.domain': 'Dominio',
   'common.domains': 'Dominios',
   'common.download': 'Descargar',
+  'common.template': 'Template',
+  'assessment-template-msg':
+    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
+  'common.code': 'Code',
   'common.download-print': 'Descargar / Imprimir',
   'common.drag-drop-suggestions': 'O Sugerencias de arrastrar y soltar ...',
   'common.download-report': 'Descargar informe',

@@ -1,4 +1,10 @@
 .teacher_class_class-management {
+  @media print {
+    @page {
+      size: landscape;
+    }
+  }
+
   .class {
     padding: 0;
 
@@ -10,22 +16,20 @@
           .left-panel {
             margin: 0;
 
+            .class-layout,
             .class-layout-btn {
               display: none;
             }
 
-            .class-layout {
-              .class-sec-cont {
-                .class-settings-label {
+            .assessment-template-layout {
+              .template-sec-cont {
+                .assessment-template-label {
                   display: none;
                 }
 
-                .class-settings-sec {
-                  padding: 0;
-
-                  .class-head-row-wrap,
-                  .language-row,
-                  .sub-sec-coteach {
+                .assessment-template-sec {
+                  .info-msg,
+                  .sec-title {
                     display: none;
                   }
 

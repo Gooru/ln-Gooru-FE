@@ -62,7 +62,6 @@
               </div>
             </div>
             {{!-- language  ends--}}
-            {{gru-i2d-template classCode=class.code students=sortedMembers}}
             <div class='sub-sec-coteach'>
               {{#if class.collaborators}}
                 <div class='sub-sec-head'>{{t 'teacher-landing.class.class-settings.class-settings-sec.co-teachers'}}</div>
@@ -87,6 +86,22 @@
                   onAddCollaborators = "onAddCollaborators"
                   onToggleAddCollaborator = "onToggleAddCollaborator"}}
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="assessment-template-layout">
+        <div class="template-sec-cont">
+          <div class="assessment-template-label">
+            {{t 'common.download'}} {{t 'common.assessment'}} {{t 'common.template'}}
+          </div>
+          <div class="assessment-template-sec">
+            <div class="sec-title">
+              {{t 'common.assessment'}} {{t 'common.template'}}
+            </div>
+            {{gru-i2d-template classCode=class.code students=sortedMembers}}
+            <div class="info-msg">
+              {{t 'assessment-template-msg'}}
             </div>
           </div>
         </div>

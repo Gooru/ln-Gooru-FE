@@ -14,12 +14,7 @@ export default Ember.Component.extend({
    */
   activeStudents: Ember.computed('students', function() {
     let activeStudents = this.get('students').filterBy('isActive', true);
-    let studentHeader = Ember.A([
-      {
-        fullName: 'student'
-      }
-    ]);
-    return studentHeader.concat(activeStudents);
+    return activeStudents;
   }),
 
   /**
@@ -31,7 +26,7 @@ export default Ember.Component.extend({
       {
         length: 15
       },
-      i => i
+      (x, i) => 1 + i
     );
   }),
 

@@ -1,16 +1,22 @@
 <div class="i2d-template-container">
-  <button type="button" class="primary" {{action 'printTemplate'}}>
-    {{t 'common.download'}} {{t 'common.template'}}
+  <button type="button" class="btn-primary" {{action 'printTemplate'}}>
+    {{t 'common.download'}}
   </button>
   <table class="i2d-table-template">
     <thead>
       <tr>
-        <th>Class code</th>
+        <th>{{t 'student-landing.class-code'}}</th>
         <td colspan="15">{{classCode}}</td>
       </tr>
       <tr>
-        <th>Assessment code</th>
+        <th>{{t 'common.assessment'}} {{t 'common.code'}}</th>
         <td colspan="15"></td>
+      </tr>
+      <tr>
+        <th>{{t 'common.student'}}</th>
+        {{#each questionColumns as |questionCol|}}
+          <td>Q{{questionCol}}</td>
+        {{/each}}
       </tr>
     </thead>
     <tbody>
@@ -18,7 +24,7 @@
         <tr>
           <th class="student-name">{{student.fullName}}</th>
           {{#each questionColumns as |questionCol|}}
-            <th></th>
+            <th class="score"></th>
           {{/each}}
         </tr>
       {{/each}}

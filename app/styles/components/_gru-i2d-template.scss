@@ -1,5 +1,9 @@
 .gru-i2d-template {
   .i2d-template-container {
+    button {
+      padding: 10px;
+    }
+
     .i2d-table-template {
       position: absolute;
       left: 0;
@@ -15,6 +19,10 @@
           border-collapse: collapse;
           padding: 5px;
           text-align: left;
+
+          &.score {
+            width: 50px;
+          }
 
           &.student-name {
             text-transform: capitalize;
