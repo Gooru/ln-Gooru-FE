@@ -67,5 +67,10 @@ export default Ember.Controller.extend({
   /**
    * @property {Boolean} isPreview
    */
-  isPreview: false
+  isPreview: false,
+
+  /**
+   * @property {Boolean} isTeacher
+   */
+  isTeacher: Ember.computed.equal('role', ROLES.TEACHER)
 });
