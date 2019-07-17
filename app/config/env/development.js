@@ -85,6 +85,7 @@ export default {
 
   GRU_FEATURE_FLAG: {
     searchFilter: true,
+    i2dFlow: false,
     enableCollectionLiveLearning: true
   }
 };

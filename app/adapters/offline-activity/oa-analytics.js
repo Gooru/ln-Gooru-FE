@@ -91,6 +91,25 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * @function getOaCompletedStudents
+   * @param {UUID} classId
+   * @param {UUID} oaId
+   * @param {UUID} itemId CA content ID
+   * Method to get list of students who have marked an OA as completed
+   */
+  getOaCompletedStudents(classId, oaId, itemId) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/dca/class/${classId}/oa/${oaId}/item/${itemId}/students`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

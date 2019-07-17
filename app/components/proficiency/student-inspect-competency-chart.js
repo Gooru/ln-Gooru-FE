@@ -31,6 +31,8 @@ export default Ember.Component.extend({
   didInsertElement() {
     let component = this;
     component.set('isLoading', true);
+    let maxHeight = this.$('.scrollable-chart').height() - 30;
+    this.set('maxHeight', maxHeight);
     component.loadDataAndDrawChart();
   },
 
@@ -125,6 +127,16 @@ export default Ember.Component.extend({
     'skylineInitialState.destination',
     CLASS_SKYLINE_INITIAL_DESTINATION.showDirections
   ),
+
+  /**
+   * Maintains the maximum Width of the chart.
+   */
+  maxWidth: 550,
+
+  /**
+   * Maintains the maximum Height of the chart.
+   */
+  maxHeight: 300,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -295,8 +307,9 @@ export default Ember.Component.extend({
 
     component.set(
       'chartHeight',
-      maxNumberOfCompetencies * component.get('cellHeight')
+      maxNumberOfCompetencies * component.get('cellHeight') + 5
     );
+    component.set('maxNumberOfCompetencies', maxNumberOfCompetencies);
     component.set('taxonomyDomains', taxonomyDomains);
     component.set('chartData', chartData);
     return chartData;
@@ -310,11 +323,25 @@ export default Ember.Component.extend({
     let component = this;
     let numberOfColumns = component.get('taxonomyDomains.length');
     component.set('numberOfColumns', numberOfColumns);
-    const cellWidth = component.get('cellWidth');
-    const cellHeight = component.get('cellHeight');
-    const width = Math.round(numberOfColumns * cellWidth) + 1;
+    let cellWidth = component.get('cellWidth');
+    let cellHeight = component.get('cellHeight');
+    const maxWidth = component.get('maxWidth');
+    const maxHeight = component.get('maxHeight');
+    let width = Math.round(numberOfColumns * cellWidth) + 5;
+    const maxCellsInDomain = component.get('maxNumberOfCompetencies');
+    if (width < maxWidth) {
+      cellWidth = Math.round(maxWidth / numberOfColumns);
+      component.set('cellWidth', cellWidth);
+      width = Math.round(numberOfColumns * cellWidth) + 5;
+    }
     component.set('width', width);
-    const height = component.get('chartHeight');
+    let height = component.get('chartHeight');
+    if (height < maxHeight) {
+      cellHeight = Math.round(maxHeight / maxCellsInDomain);
+      component.set('cellHeight', cellHeight);
+      height = Math.round(maxCellsInDomain * cellHeight) + 5;
+    }
+
     component.clearChart();
     const svg = d3
       .select('#student-inspect-competency-chart')
@@ -354,9 +381,7 @@ export default Ember.Component.extend({
         let domainBoundaryCompetency = d.isDoaminBoundaryCompetency
           ? 'domain-boundary'
           : '';
-        return `competency competency-${d.xAxisSeq}-${
-          d.yAxisSeq
-        } ${skylineClassName} ${domainBoundaryCompetency} ${masteredCompetencyClassName} ${cellColorClass} competency-cell`;
+        return `competency competency-${d.xAxisSeq}-${d.yAxisSeq} ${skylineClassName} ${domainBoundaryCompetency} ${masteredCompetencyClassName} ${cellColorClass} competency-cell`;
       })
 
       .attr('width', cellWidth)

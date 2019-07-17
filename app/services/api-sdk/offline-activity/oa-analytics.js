@@ -87,5 +87,27 @@ export default Ember.Service.extend({
       userGrade
     );
     return this.get('oaAnaltyicsAdapter').submitOAGrade(data);
+  },
+
+  /**
+   * @function getOaCompletedStudents
+   * @param {UUID} classId
+   * @param {UUID} oaId
+   * @param {UUID} itemId CA content ID
+   */
+  getOaCompletedStudents(classId, oaId, itemId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('oaAnaltyicsAdapter')
+        .getOaCompletedStudents(classId, oaId, itemId)
+        .then(function(payload) {
+          resolve(
+            service
+              .get('offlineActivitySerializer')
+              .serializeOaCompletedStudents(payload)
+          );
+        }, reject);
+    });
   }
 });

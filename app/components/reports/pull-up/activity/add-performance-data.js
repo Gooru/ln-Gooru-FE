@@ -13,10 +13,32 @@ export default Ember.Component.extend(PullUpMixin, {
   didInsertElement() {
     const component = this;
     component.openPullUp();
+    component.handleAppContainerScroll();
+  },
+
+  didDestroyElement() {
+    const component = this;
+    component.removeAppContainerScroll();
   },
 
   didRender() {
-    this.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    this.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
+  },
+
+  /**
+   * Method to handle container scroll
+   */
+  handleAppContainerScroll() {
+    Ember.$(document.body).addClass('no-vertical-scroll');
+  },
+
+  /**
+   * Method to remove container scroll
+   */
+  removeAppContainerScroll() {
+    Ember.$(document.body).removeClass('no-vertical-scroll');
   },
 
   // -------------------------------------------------------------------------
@@ -25,6 +47,6 @@ export default Ember.Component.extend(PullUpMixin, {
    * @property {String} populatedTopPos
    */
   populatedTopPos: Ember.computed(function() {
-    return isCompatibleVW(SCREEN_SIZES.EXTRA_SMALL) ? '14%' : '52px';
+    return isCompatibleVW(SCREEN_SIZES.EXTRA_SMALL) ? '0%' : '52px';
   })
 });
