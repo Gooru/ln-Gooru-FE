@@ -71,12 +71,24 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
 
+  /**
+   * @property {UUID} classId
+   */
   classId: null,
 
+  /**
+   * @property {UUID} classId
+   */
   courseId: null,
 
+  /**
+   * @property {UUID} classId
+   */
   unitId: null,
 
+  /**
+   * @property {UUID} classId
+   */
   lessonId: null,
 
   /**
@@ -156,6 +168,10 @@ export default Ember.Component.extend({
    */
   isOaCompleted: false,
 
+  /**
+   * @property {UUID} oaId
+   * Property for active Offline Activity UUID
+   */
   oaId: Ember.computed.alias('offlineActivity.id'),
 
   /**
@@ -374,7 +390,8 @@ export default Ember.Component.extend({
     const component = this;
     const classId = component.get('classId');
     const oaId = component.get('oaId');
-    const caContentId = component.get('caContentId') || null;
+    //content Id will be undefined to treat it as a CM request
+    const caContentId = component.get('caContentId') || undefined;
     const courseId = component.get('courseId');
     const unitId = component.get('unitId');
     const lessonId = component.get('lessonId');

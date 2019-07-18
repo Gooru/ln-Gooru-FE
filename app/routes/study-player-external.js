@@ -182,6 +182,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     this.get('controller').resetValues();
   },
 
+  resetController(controller) {
+    controller.set('isShowOaLandingPage', true);
+  },
+
   doCheckClassDestination(classId) {
     const route = this;
     const classPromise = classId

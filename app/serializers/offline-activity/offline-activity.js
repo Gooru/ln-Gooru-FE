@@ -594,6 +594,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * Method to serialize response payload of fetching list of students who have marked an OA as completed
    */
   serializeOaCompletedStudents(payload) {
-    return payload ? payload.students : Ember.A([]);
+    return payload ? payload.students || Ember.A([]) : Ember.A([]);
   }
 });

@@ -34,9 +34,11 @@ export default Ember.Object.extend({
   /**
    * Get the student submissions
    * @param {string} classId
-   * @param {string} activityId
+   * @param {string} activityId Either CA Content ID or OA ID based on request type
    * @param {string} studentId
+   * @param {Object} dataParam Dataparam is required only at the CM
    * @returns {Object}
+   * If it's CA dataParam is not required otherwise dataParam is mandatory
    */
   getSubmissionsToGrade(classId, activityId, studentId, dataParam) {
     const adapter = this;
@@ -101,16 +103,17 @@ export default Ember.Object.extend({
    * @param {UUID} classId
    * @param {UUID} oaId
    * @param {UUID} itemId CA content ID
+   * @param {Object} dataParam is required at the CM request
    * Method to get list of students who have marked an OA as completed
+   * If itemId is there, we should treat it as CA request otherwise CM
    */
   getOaCompletedStudents(classId, oaId, itemId, dataParam) {
     const adapter = this;
     const namespace = this.get('namespace');
-    const url = `${namespace}${itemId
-      ? '/dca'
-      : ''}/class/${classId}/oa/${oaId}${itemId
-      ? `/item/${itemId}`
-      : ''}/students`;
+    let url = `${namespace}`;
+    const caCompletedListUrl = `/dca/class/${classId}/oa/${oaId}/item/${itemId}/students`;
+    const cmCompletedListUrl = `/class/${classId}/oa/${oaId}/students`;
+    url = url + (itemId ? caCompletedListUrl : cmCompletedListUrl);
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
