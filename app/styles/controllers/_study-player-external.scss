@@ -1,6 +1,7 @@
 .study-player-external {
   .gru-study-header {
     position: relative;
+    height: 93px;
   }
   .gru-header {
     display: none;
@@ -10,11 +11,11 @@
   }
   .player-container {
     overflow: auto;
-    height: 100vh;
+    height: calc(100vh - 143px);
 
     .player {
       height: 100%;
-      padding-top: 50px;
+      overflow: auto;
     }
   }
 

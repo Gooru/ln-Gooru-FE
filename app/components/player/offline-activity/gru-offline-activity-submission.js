@@ -180,6 +180,13 @@ export default Ember.Component.extend({
     }
   ),
 
+  /**
+   * @property {String} timeZone
+   */
+  timeZone: Ember.computed(function() {
+    return moment.tz.guess() || null;
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -340,7 +347,6 @@ export default Ember.Component.extend({
     const studentId = component.get('userId');
     const oaData = {
       class_id: classId,
-      oa_dca_id: parseInt(caContentId),
       oa_id: oaId,
       content_source: contentSource,
       student_id: studentId,
@@ -348,6 +354,14 @@ export default Ember.Component.extend({
       path_id: 0,
       path_type: null
     };
+    if (component.get('isStudyPlayer')) {
+      oaData.course_id = component.get('courseId');
+      oaData.unit_id = component.get('unitId');
+      oaData.lesson_id = component.get('lessonId');
+      oaData.timezone = component.get('timeZone');
+    } else {
+      oaData.oa_dca_id = parseInt(caContentId);
+    }
     return component.get('oaService').updateOACompleted(oaData);
   },
 

@@ -182,6 +182,12 @@ export default Ember.Controller.extend({
 
   isDone: false,
 
+  /**
+   * @property {Boolean} isShowOaLandingPage
+   * Property to show/hide OA landing page
+   */
+  isShowOaLandingPage: true,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -290,7 +296,8 @@ export default Ember.Controller.extend({
           collection,
           mapLocation,
           content: mapLocation.get('content'),
-          dataParams: null
+          dataParams: null,
+          isShowOaLandingPage: true //By default show OA Landing page
         });
       });
   },

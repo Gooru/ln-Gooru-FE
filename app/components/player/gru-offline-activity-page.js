@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   classNames: ['oa-study-player', 'gru-offline-activity-page'],
@@ -10,7 +11,24 @@ export default Ember.Component.extend({
     },
 
     onClosePlayer() {
-      // const component = this;
+      const component = this;
+      const classId = component.get('classId');
+      const source = component.get('source');
+      if (classId && source === PLAYER_EVENT_SOURCE.COURSE_MAP) {
+        component
+          .get('router')
+          .transitionTo('student.class.course-map', classId, {
+            queryParams: {
+              refresh: true
+            }
+          });
+      } else if (classId && source === PLAYER_EVENT_SOURCE.DAILY_CLASS) {
+        component
+          .get('router')
+          .transitionTo('student.class.class-activities', classId);
+      } else {
+        component.get('router').transitionTo('student-home');
+      }
     }
   },
 
