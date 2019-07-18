@@ -1,10 +1,8 @@
 /**
  * Print Page styles container
  */
-
- @import "variables";
- @import "mixins";
-
+@import "variables";
+@import "mixins";
 //Components
-
 @import "print-preview/components/reports/pull-up/gru-collection-preview";
+@import "print-preview/components/gru-i2d-template";

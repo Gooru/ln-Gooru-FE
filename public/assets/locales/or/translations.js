@@ -327,6 +327,10 @@ window.i18ln = {
   'common.domain': 'ପ୍ରଦେଶ',
   'common.domains': 'ପ୍ରଦେଶଗୁଡ଼ିକ',
   'common.download': 'ଡାଉନଲୋଡ୍',
+  'common.template': 'Template',
+  'assessment-template-msg':
+    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
+  'common.code': 'Code',
   'common.download-print': 'ଡାଉନଲୋଡ୍/ପ୍ରିଣ୍ଟ',
   'common.drag-drop-suggestions': 'କିମ୍ୱା ଡ୍ରାଗ୍ ଓ ଡ୍ରପ୍ ପରାମର୍ଶଗୁଡ଼ିକ...',
   'common.download-report': 'ଡାଉନଲୋଡ୍ ରିପୋର୍ଟ',
