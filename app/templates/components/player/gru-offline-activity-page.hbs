@@ -1,0 +1,23 @@
+<div class="oa-study-player-container">
+  {{#if isShowLandingPage}}
+    {{player/offline-activity/gru-offline-activity-start-page
+      offlineActivity = offlineActivity
+      contentSource = source
+      onClosePlayer = "onClosePlayer"
+      onStartPlayer = "onStartPlayer"
+      classId = classId
+      courseId = courseId
+      unitId = unitId
+      lessonId = lessonId
+      isStudyPlayer = isStudyPlayer}}
+  {{else}}
+    {{player/offline-activity/gru-offline-activity-submission
+      offlineActivity = offlineActivity
+      contentSource = source
+      classId = classId
+      courseId = courseId
+      unitId = unitId
+      lessonId = lessonId
+      isStudyPlayer = isStudyPlayer}}
+  {{/if}}
+</div>

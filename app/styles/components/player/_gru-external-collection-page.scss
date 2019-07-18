@@ -15,8 +15,13 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 154px);
   background-position: inherit;
+  display: grid;
+  justify-content: center;
+  vertical-align: baseline;
+  align-items: center;
+  grid-template-columns: auto;
   .external-collection-landing-page {
     .external-collection-card {
       width: 499px;
@@ -293,10 +298,8 @@
     }
     @media screen and (min-width: $screen-568) {
       overflow: auto;
-      height: 144vh;
       .player {
         height: 100%;
-        padding-top: 92px;
         .gru-external-collection-page {
           width: 100%;
           height: 100%;
@@ -325,11 +328,6 @@
     }
     @media screen and (max-width: $screen-md) {
       .gru-external-collection-page {
-        display: grid;
-        justify-content: center;
-        vertical-align: baseline;
-        align-items: center;
-        grid-template-columns: auto;
         .external-collection-landing-page {
           @media screen and (max-width: $sm-width-max) {
             .external-collection-card {
@@ -397,7 +395,7 @@
         .player-container {
           .gru-external-collection-page {
             display: flex;
-            height: 100vh;
+            height: calc(100vh - 154px);
             .external-collection-landing-page {
               margin: auto;
               .external-collection-card {

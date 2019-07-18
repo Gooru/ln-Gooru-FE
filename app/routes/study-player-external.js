@@ -29,6 +29,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   collectionService: Ember.inject.service('api-sdk/collection'),
 
+  offlineActivityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
+
   /**
    * @type {UnitService} Service to retrieve course information
    */
@@ -94,9 +98,13 @@ export default Ember.Route.extend(PrivateRouteMixin, {
                 ? route
                   .get('collectionService')
                   .readExternalCollection(params.collectionId)
-                : route
-                  .get('assessmentService')
-                  .readExternalAssessment(params.collectionId)
+                : contentType === CONTENT_TYPES.OFFLINE_ACTIVITY
+                  ? route
+                    .get('offlineActivityService')
+                    .readActivity(params.collectionId)
+                  : route
+                    .get('assessmentService')
+                    .readExternalAssessment(params.collectionId)
           })
           .then(function(hash) {
             //setting query params using the map location
@@ -172,6 +180,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
 
   deactivate: function() {
     this.get('controller').resetValues();
+  },
+
+  resetController(controller) {
+    controller.set('isShowOaLandingPage', true);
   },
 
   doCheckClassDestination(classId) {

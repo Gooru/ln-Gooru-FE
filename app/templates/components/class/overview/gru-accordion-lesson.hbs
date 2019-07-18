@@ -218,7 +218,7 @@
                         {{/if}}
                       </div>
                     {{else}}
-                      <div class="play-btn pull-right {{if item.isOfflineActivity 'disable-event'}}">
+                      <div class="play-btn pull-right">
                         <button class="btn btn-info study-now" disabled={{if item.visible '' 'true'}} {{action "studyNow" 'collection' item}} data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.play"}}">
                           {{gru-icon name='play_arrow'}}
                         </button>
