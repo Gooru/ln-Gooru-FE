@@ -175,6 +175,10 @@ export default Ember.Controller.extend({
     return type === 'assessment-external';
   }),
 
+  /**
+   * @property {Boolean} isOfflineActivity
+   * Property to whether the current item is an Offline Activity or not
+   */
   isOfflineActivity: Ember.computed('type', function() {
     const component = this;
     return component.get('type') === CONTENT_TYPES.OFFLINE_ACTIVITY;

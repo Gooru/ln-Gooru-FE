@@ -85,7 +85,6 @@ export default Ember.Component.extend({
       component.set('isSubmittingTask', true);
       component.uploadFilesToS3().then(function() {
         component.set('isSubmittingTask', false);
-        // console.log('submissionPayload', component.createTaskSubmissionPayload());
         component.submitTaskDetails(component.createTaskSubmissionPayload());
         component.set('task.isTaskSubmitted', true);
         component.actions.onToggleTask(component);
