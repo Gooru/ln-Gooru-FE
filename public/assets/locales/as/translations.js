@@ -322,6 +322,10 @@ window.i18ln = {
   'common.domain': 'ক্ষেত্ৰ',
   'common.domains': 'ক্ষেত্ৰসমূহ',
   'common.download': 'ডাউনল\'দ',
+  'common.template': 'Template',
+  'assessment-template-msg':
+    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
+  'common.code': 'Code',
   'common.download-print': 'ডাউনল\'দ/ছপা',
   'common.drag-drop-suggestions': 'বা টনা আৰু সৰি পৰাৰ উপদেশবোৰ',
   'common.download-report': 'ডাউনল\'দ ৰিপৰ্ট',

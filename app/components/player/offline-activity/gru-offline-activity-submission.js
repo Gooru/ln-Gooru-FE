@@ -27,7 +27,9 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     component.loadTaskSubmissionData();
-    component.doCheckOaCompleted();
+    if (!component.get('isTeacher')) {
+      component.doCheckOaCompleted();
+    }
   },
 
   actions: {
