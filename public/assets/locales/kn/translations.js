@@ -318,6 +318,10 @@ window.i18ln = {
   'common.domain': 'ಡೊಮೇನ್',
   'common.domains': 'ಡೊಮೇನ್ಗಳು',
   'common.download': 'ಡೌನ್ಲೋಡ್ ಮಾಡಿ',
+  'common.template': 'Template',
+  'assessment-template-msg':
+    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
+  'common.code': 'Code',
   'common.download-print': 'ಡೌನ್ಲೋಡ್ / ಮುದ್ರಣ',
   'common.drag-drop-suggestions': 'ಅಥವಾ ಸಲಹೆಗಳನ್ನು ಎಳೆಯಿರಿ ಮತ್ತು ಬಿಡಿ ...',
   'common.download-report': 'ಡೌನ್ಲೋಡ್ ವರದಿ',

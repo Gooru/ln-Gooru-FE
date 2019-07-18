@@ -316,6 +316,10 @@ window.i18ln = {
   'common.domain': 'ડોમેન',
   'common.domains': 'ડોમેન્સ',
   'common.download': 'ડાઉનલોડ કરો',
+  'common.template': 'Template',
+  'assessment-template-msg':
+    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
+  'common.code': 'Code',
   'common.download-print': 'ડાઉનલોડ / છાપો',
   'common.drag-drop-suggestions': 'અથવા સૂચનો ખેંચો અને છોડો ...',
   'common.download-report': 'અહેવાલ ડાઉનલોડ કરો',

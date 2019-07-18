@@ -311,6 +311,10 @@ window.i18ln = {
   'common.domain': 'مجال',
   'common.domains': 'مجالات',
   'common.download': 'تنزيل',
+  'common.template': 'Template',
+  'assessment-template-msg':
+    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
+  'common.code': 'Code',
   'common.download-print': 'تنزيل أو طباعة',
   'common.drag-drop-suggestions': 'أو ضع اقتراحاتك هنا.',
   'common.download-report': 'تنزيل  التقرير',
