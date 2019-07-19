@@ -39,10 +39,8 @@
     background: $white;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
     border-radius: 4px;
-
     .competencies-list-container {
       margin: 0 8px;
-
       .title-container {
         height: 40px;
         font-size: 15px;
@@ -55,23 +53,19 @@
         justify-content: left;
         column-gap: 8px;
         border-bottom: 1px solid #37424b;
-
         .close-pullup {
           cursor: pointer;
-
           i {
             line-height: 40px;
           }
         }
       }
-
       .competencies-container {
         height: 83vh;
         overflow-y: auto;
         padding-bottom: 35px;
         padding-right: 5px;
         @extend %scroll-style;
-
         .competency-container {
           .competency-completion-info-container {
             border-bottom: 2px solid rgba(0, 0, 0, 0.3);
@@ -81,21 +75,18 @@
             padding: 5px 0;
             margin-left: 15px;
             cursor: pointer;
-
             .competency-info {
               .competency-name {
                 font-size: 14px;
                 font-weight: bold;
                 color: #37424b;
               }
-
               .competency-code {
                 font-size: 10px;
                 font-weight: bold;
                 color: #37424b;
               }
             }
-
             .competency-suggestion {
               width: 20px;
               height: 20px;
@@ -106,24 +97,20 @@
               display: block;
               background-image: url("gooru/images/add_collection.svg");
             }
-
             .competency-completion-performance {
               display: grid;
               justify-content: right;
-
               .completion-percentage {
                 font-size: 15px;
                 font-weight: bold;
                 text-align: right;
                 color: #3a444d;
               }
-
               .completion-box {
                 display: block;
                 height: 10px;
                 width: 100px;
                 background-color: rgba(191, 191, 191, 0.5);
-
                 span {
                   height: inherit;
                   float: right;
@@ -141,14 +128,12 @@
             .user-completion-container {
               display: grid;
               grid-template-columns: auto auto;
-
               .user-info {
                 display: grid;
                 grid-template-columns: 30px auto;
                 column-gap: 8px;
                 height: 40px;
                 align-items: center;
-
                 .user-thumbnail {
                   width: 30px;
                   height: 30px;
@@ -174,7 +159,6 @@
                     }
                   }
                 }
-
                 .user-name {
                   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
                   height: inherit;
@@ -191,13 +175,11 @@
                 align-items: center;
                 column-gap: 10px;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-
                 .competency-status-text {
                   font-size: 14px;
                   text-align: right;
                   color: #3a444d;
                 }
-
                 .competency-status-color {
                   width: 30px;
                   height: 30px;
@@ -205,7 +187,6 @@
                   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
                 }
               }
-
               .user-completion-performance {
                 display: grid;
                 justify-content: right;
@@ -213,20 +194,17 @@
                 align-items: center;
                 column-gap: 5px;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-
                 .completion-percentage {
                   font-size: 15px;
                   font-weight: bold;
                   text-align: right;
                   color: #3a444d;
                 }
-
                 .completion-box {
                   display: block;
                   height: 10px;
                   width: 100px;
                   background-color: rgba(191, 191, 191, 0.5);
-
                   span {
                     height: inherit;
                     float: right;
@@ -246,31 +224,26 @@
                 .arrow_drop_up {
                   display: none;
                 }
-
                 .arrow_drop_down {
                   display: block;
                 }
               }
             }
-
             .users-completion-container {
               display: none;
             }
           }
-
           &.expanded {
             .competency-completion-info-container {
               .competency-toggle {
                 .arrow_drop_up {
                   display: block;
                 }
-
                 .arrow_drop_down {
                   display: none;
                 }
               }
             }
-
             .users-completion-container {
               display: block;
             }
@@ -288,7 +261,6 @@
             }
           }
         }
-
         .data-not-available {
           text-align: center;
         }
@@ -324,9 +296,6 @@
     padding: 0 23px 0 11px;
     box-shadow: 1px 15px 20px 20px rgba(0, 0, 0, 0.13);
     background-color: #f98e4e;
-    @media screen and (max-width: 768px) {
-      bottom: 50px;
-    }
 
     .clear-suggestion {
       color: $white;
@@ -335,7 +304,6 @@
       font-weight: 600;
       cursor: pointer;
       height: 40px;
-
       i {
         line-height: 40px;
       }
@@ -346,7 +314,6 @@
       grid-template-columns: auto auto;
       align-items: center;
       column-gap: 8px;
-
       .selected-icon {
         width: 30px;
         height: 30px;
@@ -358,12 +325,10 @@
         text-align: center;
         display: grid;
         align-items: center;
-
         i {
           color: #f98e4e;
         }
       }
-
       .selected-all-text {
         height: 40px;
         font-size: 16px;
@@ -396,13 +361,11 @@
       justify-self: end;
       position: relative;
       cursor: pointer;
-
       i.explore {
         line-height: 40px;
         color: $white;
         transform: rotate(90deg);
       }
-
       .suggestion-count {
         width: 16px;
         border-radius: 50%;
@@ -421,11 +384,9 @@
 
     &.empty-suggestion {
       background-color: $white;
-
       .students-suggestion {
         display: grid;
         align-items: center;
-
         i.collection-icon {
           width: 20px;
           height: 20px;
@@ -437,18 +398,15 @@
           background-image: url("gooru/images/add_collection.svg");
         }
       }
-
       .clear-suggestion,
+      .selected-student-count,
       .label-text,
-      .selected-all-text,
-      .selected-student-count {
+      .selected-all-text {
         color: #37424b;
       }
-
       .selected-all {
         .selected-icon {
           background-color: #37424b;
-
           i.tick-icon {
             color: $white;
           }

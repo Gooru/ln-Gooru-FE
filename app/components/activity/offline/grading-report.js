@@ -353,6 +353,15 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   //Methods
 
+  handleRubricTooltip() {
+    const component = this;
+    component.$().on('click', function(e) {
+      if (!component.$(e.target).hasClass('grade-info-popover')) {
+        Ember.$('.popover').hide();
+      }
+    });
+  },
+
   initialize() {
     let component = this;
     let classId = component.get('context.classId');
@@ -672,15 +681,6 @@ export default Ember.Component.extend({
         component.set('isLoading', false);
         component.handleCarouselControl();
       });
-  },
-
-  handleRubricTooltip() {
-    const component = this;
-    component.$().on('click', function(e) {
-      if (!component.$(e.target).hasClass('grade-info-popover')) {
-        Ember.$('.popover').hide();
-      }
-    });
   },
 
   /**
