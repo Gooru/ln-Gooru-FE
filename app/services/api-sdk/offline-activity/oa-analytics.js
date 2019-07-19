@@ -67,12 +67,12 @@ export default Ember.Service.extend({
    * @param {string} activityId
    * @returns {Object}
    */
-  getSubmissionsToGrade(classId, activityId, studentId) {
+  getSubmissionsToGrade(classId, activityId, studentId, dataParam = undefined) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('oaAnaltyicsAdapter')
-        .getSubmissionsToGrade(classId, activityId, studentId)
+        .getSubmissionsToGrade(classId, activityId, studentId, dataParam)
         .then(function(payload) {
           const oaSubmitedData = service
             .get('offlineActivitySerializer')
@@ -95,12 +95,17 @@ export default Ember.Service.extend({
    * @param {UUID} oaId
    * @param {UUID} itemId CA content ID
    */
-  getOaCompletedStudents(classId, oaId, itemId) {
+  getOaCompletedStudents(
+    classId,
+    oaId,
+    itemId = undefined,
+    dataParam = undefined
+  ) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('oaAnaltyicsAdapter')
-        .getOaCompletedStudents(classId, oaId, itemId)
+        .getOaCompletedStudents(classId, oaId, itemId, dataParam)
         .then(function(payload) {
           resolve(
             service
