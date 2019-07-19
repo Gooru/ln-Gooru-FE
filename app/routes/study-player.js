@@ -146,7 +146,8 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
     }
     if (
       params.type === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||
-      params.type === CONTENT_TYPES.EXTERNAL_COLLECTION
+      params.type === CONTENT_TYPES.EXTERNAL_COLLECTION ||
+      params.type === CONTENT_TYPES.OFFLINE_ACTIVITY
     ) {
       let queryParams = {
         role: params.role,

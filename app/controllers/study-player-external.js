@@ -46,6 +46,10 @@ export default Ember.Controller.extend({
    */
   collectionService: Ember.inject.service('api-sdk/collection'),
 
+  offlineActivityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
+
   /**
    * @type {UnitService} Service to retrieve unit information
    */
@@ -171,7 +175,22 @@ export default Ember.Controller.extend({
     return type === 'assessment-external';
   }),
 
+  /**
+   * @property {Boolean} isOfflineActivity
+   * Property to whether the current item is an Offline Activity or not
+   */
+  isOfflineActivity: Ember.computed('type', function() {
+    const component = this;
+    return component.get('type') === CONTENT_TYPES.OFFLINE_ACTIVITY;
+  }),
+
   isDone: false,
+
+  /**
+   * @property {Boolean} isShowOaLandingPage
+   * Property to show/hide OA landing page
+   */
+  isShowOaLandingPage: true,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -217,7 +236,8 @@ export default Ember.Controller.extend({
         } else {
           if (
             nextContentType === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||
-            nextContentType === CONTENT_TYPES.EXTERNAL_COLLECTION
+            nextContentType === CONTENT_TYPES.EXTERNAL_COLLECTION ||
+            nextContentType === CONTENT_TYPES.OFFLINE_ACTIVITY
           ) {
             controller.playNextExternalContent(mapLocation);
           } else {
@@ -261,9 +281,13 @@ export default Ember.Controller.extend({
             ? controller
               .get('assessmentService')
               .readExternalAssessment(collectionId)
-            : controller
-              .get('collectionService')
-              .readExternalCollection(collectionId)
+            : collectionType === CONTENT_TYPES.OFFLINE_ACTIVITY
+              ? controller
+                .get('offlineActivityService')
+                .readActivity(collectionId)
+              : controller
+                .get('collectionService')
+                .readExternalCollection(collectionId)
       })
       .then(({ unit, lesson, collection }) => {
         controller.setProperties({
@@ -276,7 +300,8 @@ export default Ember.Controller.extend({
           collection,
           mapLocation,
           content: mapLocation.get('content'),
-          dataParams: null
+          dataParams: null,
+          isShowOaLandingPage: true //By default show OA Landing page
         });
       });
   },
