@@ -4,9 +4,16 @@
 
     .milestone-course-map {
       margin-bottom: 5px;
+      position: relative;
 
       &.class-grade {
-        box-shadow: 0 0 10px 0 #4cc32b;
+        box-shadow: 0 0 10px 0 #000;
+
+        .milestone-course-map-panel {
+          .milestone-info-container {
+            background-color: #000;
+          }
+        }
       }
 
       .milestone-course-map-panel {
@@ -18,6 +25,15 @@
         grid-template-columns: 1fr 60px;
         height: 50px;
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+
+        &.fixed {
+          position: fixed;
+          top: 50px;
+          z-index: 2;
+          @media screen and (max-width: $screen-xs) {
+            top: 100px;
+          }
+        }
 
         .milestone-info-container {
           height: inherit;
