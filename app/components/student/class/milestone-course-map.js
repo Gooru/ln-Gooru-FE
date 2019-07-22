@@ -156,7 +156,7 @@ export default Ember.Component.extend({
    * Maintains the student Id, by default this will be NULL
    * @type {String}
    */
-  studentId: Ember.computed.alias('session.userId'),
+  studentId: null,
 
   /**
    * Property will decided to show the play button or not
@@ -175,6 +175,12 @@ export default Ember.Component.extend({
    * Property for student destination based competency summary data
    */
   competencySummary: null,
+
+  /**
+   * Maintains the userId of milestone display view
+   * @type {String}
+   */
+  userId: null,
 
   // -------------------------------------------------------------------------
   // Actions
@@ -249,7 +255,7 @@ export default Ember.Component.extend({
     //Action triggered when click on collection performance
     onShowStudentMilestoneCollectionReport(lesson, collection) {
       const component = this;
-      let userUid = component.get('studentId');
+      let userUid = component.get('userId');
       let studentCollectionReportContext = {
         userId: userUid,
         classId: component.get('classId'),
@@ -305,6 +311,10 @@ export default Ember.Component.extend({
    * Function to triggered once when the component element is first rendered.
    */
   didInsertElement() {
+    const userId = this.get('studentId')
+      ? this.get('studentId')
+      : this.get('session.userId');
+    this.set('userId', userId);
     this.loadData();
   },
 
@@ -368,7 +378,7 @@ export default Ember.Component.extend({
     let classId = component.get('classId');
     let courseId = component.get('courseId');
     let fwCode = component.get('fwCode');
-    let userUid = component.get('studentId');
+    let userUid = component.get('userId');
     let milestones = component.get('milestones');
     performanceService
       .getPerformanceForMilestones(
@@ -431,7 +441,7 @@ export default Ember.Component.extend({
     let classId = component.get('classId');
     let courseId = component.get('courseId');
     let fwCode = component.get('fwCode');
-    let userUid = component.get('studentId');
+    let userUid = component.get('userId');
 
     Ember.RSVP.hash({
       milestoneAssessmentLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
@@ -477,7 +487,7 @@ export default Ember.Component.extend({
    */
   fetchStudentCompetencySummary() {
     const component = this;
-    const userId = component.get('studentId');
+    const userId = component.get('userId');
     const classId = component.get('classId');
     const courseId = component.get('courseId');
     const subjectCode = component.get('subjectCode');
@@ -514,7 +524,7 @@ export default Ember.Component.extend({
 
   fetchCollectionPerformance(lesson, collections) {
     let component = this;
-    let userUid = component.get('studentId');
+    let userUid = component.get('userId');
     let classId = component.get('classId');
     let courseId = component.get('courseId');
     let unitId = lesson.get('unit_id');
@@ -676,7 +686,7 @@ export default Ember.Component.extend({
     }
     if (!selectedLesson.get('hasCollectionFetched')) {
       let userId = component.get('isTeacher')
-        ? component.get('studentId')
+        ? component.get('userId')
         : undefined;
       component
         .get('courseMapService')
@@ -774,7 +784,7 @@ export default Ember.Component.extend({
     let component = this;
     let classId = component.get('classId');
     let courseId = component.get('courseId');
-    let userId = component.get('studentId');
+    let userId = component.get('userId');
     let fwCode = component.get('fwCode');
     let locationQueryParam = {
       courseId,
@@ -879,7 +889,7 @@ export default Ember.Component.extend({
   renderMilestonesBasedOnStudentGradeRange(grades, milestones) {
     let component = this;
     let gradeBounds = component.get('class.memberGradeBounds');
-    let userUid = component.get('studentId');
+    let userUid = component.get('userId');
     let gradeBound = gradeBounds.findBy(userUid);
     let milestoneData = Ember.A([]);
     let studentGradeBound = Ember.Object.create(gradeBound.get(userUid));
@@ -953,7 +963,7 @@ export default Ember.Component.extend({
         classId,
         courseId
       };
-      let studentId = component.get('studentId');
+      let studentId = component.get('userId');
       let isTeacher = component.get('isTeacher');
       if (isTeacher) {
         filter.userId = studentId;
