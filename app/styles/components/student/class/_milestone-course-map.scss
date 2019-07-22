@@ -7,6 +7,7 @@
   &.student-competency-summary {
     grid-template-columns: 1fr 80px;
   }
+
   .milestone-course-map-container {
     width: 100%;
 
@@ -35,6 +36,48 @@
         height: 50px;
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
 
+        &.lesson-active {
+          &.prev-col-path-system {
+            .milestone-info-container {
+              .milestone-icon-upward-line {
+                left: 30px;
+
+                svg {
+                  margin-top: 10px;
+
+                  line {
+                    display: none;
+                  }
+
+                  .path-left {
+                    display: block;
+                  }
+                }
+              }
+            }
+          }
+
+          &.prev-col-path-teacher {
+            .milestone-info-container {
+              .milestone-icon-upward-line {
+                left: 26px;
+
+                svg {
+                  margin-top: 10px;
+
+                  line {
+                    display: none;
+                  }
+
+                  .path-right {
+                    display: block;
+                  }
+                }
+              }
+            }
+          }
+        }
+
         .milestone-info-container {
           height: inherit;
           background-color: #5c8fd2;
@@ -47,6 +90,26 @@
 
           &.active {
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+          }
+
+          .milestone-icon-upward-line {
+            position: absolute;
+            top: -32px;
+            left: 34px;
+
+            svg {
+              line {
+                stroke: #ccc;
+                stroke-width: 3;
+              }
+
+              path {
+                stroke: #ec8f42;
+                stroke-width: 2;
+                fill: none;
+                display: none;
+              }
+            }
           }
 
           .milestone-flag-icon {
@@ -199,11 +262,13 @@
 
             &.show-all-rescoped-content {
               display: block;
+
               .milestone-course-map-lesson-panel {
                 .domain-lesson-title {
                   font-style: italic;
                 }
               }
+
               .milestone-course-map-collection-container {
                 .milestone-course-map-collection {
                   .milestone-course-map-collection-panel {

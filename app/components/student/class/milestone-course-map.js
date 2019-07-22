@@ -75,6 +75,13 @@ export default Ember.Component.extend({
   isStudent: Ember.computed.not('isTeacher'),
 
   // -------------------------------------------------------------------------
+  // Observer
+
+  onRescopeChange: Ember.observer('showAllRescopedContent', function() {
+    this.handleLastLessonPath();
+  }),
+
+  // -------------------------------------------------------------------------
   // Properties
 
   /**
@@ -580,17 +587,25 @@ export default Ember.Component.extend({
   handleMilestoneToggle(selectedMilestone) {
     let component = this;
     let milestoneId = selectedMilestone.get('milestone_id');
+    component.set('selectedMilestone', selectedMilestone);
     let element = `#milestone-${milestoneId}`;
     let courseId = component.get('courseId');
+    let nextMilestone = component
+      .get('milestones')
+      .objectAt(selectedMilestone.get('milestoneIndex'));
     let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
     if (selectedMilestone.get('isActive')) {
       component.$(element).slideUp(400, function() {
         selectedMilestone.set('isActive', false);
+        if (nextMilestone) {
+          nextMilestone.set('prevMilestoneIsActive', false);
+        }
       });
     } else {
       component.$(element).slideDown(400, function() {
         component.get('milestones').forEach(milestone => {
+          milestone.set('prevMilestoneIsActive', false);
           if (milestone.get('isActive')) {
             let milestoneId = milestone.get('milestone_id');
             let element = `#milestone-${milestoneId}`;
@@ -599,53 +614,94 @@ export default Ember.Component.extend({
           }
         });
         selectedMilestone.set('isActive', true);
+        if (nextMilestone) {
+          nextMilestone.set('prevMilestoneIsActive', true);
+        }
+        let rescopedLessonContents = component.get('rescopedContents.lessons');
+        if (!selectedMilestone.get('hasLessonFetched')) {
+          component
+            .get('courseService')
+            .getCourseMilestoneLessons(courseId, milestoneId)
+            .then(lessons => {
+              if (!component.isDestroyed) {
+                if (rescopedLessonContents) {
+                  rescopedLessonContents.forEach(rescopedLessonId => {
+                    let lesson = lessons.findBy('lesson_id', rescopedLessonId);
+                    if (lesson) {
+                      lesson.set('rescope', true);
+                    }
+                  });
+                }
+                let lessonsSize = lessons.length;
+                let lessonsRescopeSize = lessons.filterBy('rescope', true)
+                  .length;
+                if (lessonsRescopeSize === lessonsSize) {
+                  selectedMilestone.set('rescope', true);
+                }
+
+                selectedMilestone.set('lessons', lessons);
+                if (showPerformance) {
+                  component.fetchMilestoneLessonsPerformance(
+                    milestoneId,
+                    lessons
+                  );
+                }
+                selectedMilestone.set('hasLessonFetched', true);
+                let userCurrentLocation = component.get('userCurrentLocation');
+                if (locateLastPlayedItem && userCurrentLocation) {
+                  let lessonId = userCurrentLocation.get('lessonId');
+                  let selectedLesson = lessons.findBy('lesson_id', lessonId);
+                  let lessonIndex = lessons.indexOf(selectedLesson);
+                  if (selectedLesson) {
+                    Ember.run.later(function() {
+                      component.handleMilestoneLessonToggle(
+                        selectedMilestone,
+                        lessons,
+                        selectedLesson,
+                        lessonIndex
+                      );
+                    }, 500);
+                  }
+                }
+              }
+            });
+        }
       });
     }
-    let rescopedLessonContents = component.get('rescopedContents.lessons');
+  },
 
-    if (!component.get('hasLessonFetched')) {
-      component
-        .get('courseService')
-        .getCourseMilestoneLessons(courseId, milestoneId)
-        .then(lessons => {
-          if (!component.isDestroyed) {
-            if (rescopedLessonContents) {
-              rescopedLessonContents.forEach(rescopedLessonId => {
-                let lesson = lessons.findBy('lesson_id', rescopedLessonId);
-                if (lesson) {
-                  lesson.set('rescope', true);
-                }
-              });
-            }
-            let lessonsSize = lessons.length;
-            let lessonsRescopeSize = lessons.filterBy('rescope', true).length;
-            if (lessonsRescopeSize === lessonsSize) {
-              selectedMilestone.set('rescope', true);
-            }
-
-            selectedMilestone.set('lessons', lessons);
-            if (showPerformance) {
-              component.fetchMilestoneLessonsPerformance(milestoneId, lessons);
-            }
-            selectedMilestone.set('hasLessonFetched', true);
-            let userCurrentLocation = component.get('userCurrentLocation');
-            if (locateLastPlayedItem && userCurrentLocation) {
-              let lessonId = userCurrentLocation.get('lessonId');
-              let selectedLesson = lessons.findBy('lesson_id', lessonId);
-              let lessonIndex = lessons.indexOf(selectedLesson);
-              if (selectedLesson) {
-                Ember.run.later(function() {
-                  component.handleMilestoneLessonToggle(
-                    selectedMilestone,
-                    lessons,
-                    selectedLesson,
-                    lessonIndex
-                  );
-                }, 500);
-              }
-            }
-          }
-        });
+  handleLastLessonPath() {
+    const component = this;
+    let lessonIndex;
+    let lessonSize;
+    let selectedLesson = component.get('selectedLesson');
+    let milestone = component.get('selectedMilestone');
+    let lessons = milestone.get('lessons');
+    let collections = selectedLesson.get('collections');
+    let nextMilestone = component
+      .get('milestones')
+      .objectAt(milestone.get('milestoneIndex'));
+    const nonRescopedLessons = lessons.filter(lesson => {
+      if (!lesson.get('rescope')) {
+        return lesson;
+      }
+    });
+    if (component.get('showAllRescopedContent')) {
+      lessonIndex = lessons.indexOf(selectedLesson);
+      lessonSize = lessons.length;
+    } else {
+      lessonIndex = nonRescopedLessons.indexOf(selectedLesson);
+      lessonSize = nonRescopedLessons.length;
+    }
+    const isLastLessonActive =
+      lessonIndex === lessonSize - 1 && selectedLesson.get('isActive');
+    nextMilestone.set('prevMilestoneOfLastLessonIsActive', isLastLessonActive);
+    if (isLastLessonActive) {
+      let lastCollection = collections.objectAt(collections.length - 1);
+      nextMilestone.set(
+        'prevMilestoneOfLastCollectionPath',
+        lastCollection.get('pathType')
+      );
     }
   },
 
@@ -659,7 +715,7 @@ export default Ember.Component.extend({
     let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
     let courseId = component.get('courseId');
-
+    component.set('selectedLesson', selectedLesson);
     let selectedLessonIndex = lessons.indexOf(selectedLesson);
     let prevLesson = lessons.objectAt(selectedLessonIndex + 1);
     let nextLesson = lessons.objectAt(selectedLessonIndex - 1);
@@ -701,7 +757,6 @@ export default Ember.Component.extend({
                 collection.set('rescope', true);
               }
             });
-
             component.updateSuggestionDetails(
               lessons,
               selectedLesson,
@@ -709,7 +764,9 @@ export default Ember.Component.extend({
             );
             selectedLesson.set('collections', collections);
             selectedLesson.set('hasCollectionFetched', true);
-
+            Ember.run.later(function() {
+              component.handleLastLessonPath();
+            }, 500);
             let userCurrentLocation = component.get('userCurrentLocation');
             if (locateLastPlayedItem && userCurrentLocation) {
               let collectionId = userCurrentLocation.get('collectionId');
@@ -723,6 +780,10 @@ export default Ember.Component.extend({
             }
           }
         });
+    } else {
+      Ember.run.later(function() {
+        component.handleLastLessonPath();
+      }, 500);
     }
   },
 
