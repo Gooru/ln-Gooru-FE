@@ -557,21 +557,20 @@ export default Ember.Controller.extend({
   handleScrollToFixHeader() {
     Ember.$(document).scroll(function() {
       let scrollTop = Ember.$(document).scrollTop();
-      let activePanelEle = Ember.$(
-        '.teacher-class-milestone-course-map .milestone-course-map-container .milestone-course-map .milestone-course-map-panel.active'
+      let activeContainerEle = Ember.$(
+        '.teacher-class-milestone-course-map .milestone-course-map-container .milestone-course-map.active'
       );
-      let height =
-        Ember.$(
-          '.teacher.course-map .render-course-map .ms-cm-view-switcher-ctn'
-        ).height() +
-        Ember.$('.teacher.course-map .panel.welcome.visible').height() +
-        Ember.$('.gru-class-navbar').height() +
-        35;
+      let activePanelEle = Ember.$(
+        '.teacher-class-milestone-course-map .milestone-course-map-container .milestone-course-map.active .milestone-course-map-panel.active'
+      );
       Ember.$(activePanelEle).width(activePanelEle.parent().width());
-      if (scrollTop >= height) {
-        Ember.$(activePanelEle).addClass('fixed');
+      if (
+        scrollTop >=
+        activeContainerEle.offset().top - activePanelEle.height()
+      ) {
+        activePanelEle.addClass('sticky');
       } else {
-        Ember.$(activePanelEle).removeClass('fixed');
+        activePanelEle.removeClass('sticky');
       }
     });
   },

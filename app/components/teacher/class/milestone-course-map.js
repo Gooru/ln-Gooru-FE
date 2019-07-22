@@ -311,6 +311,13 @@ export default Ember.Component.extend({
     }
   },
 
+  didDestroyElement() {
+    let component = this;
+    component.get('milestones').map(milestone => {
+      milestone.set('isActive', false);
+    });
+  },
+
   didRender() {
     let component = this;
     component.$('[data-toggle="tooltip"]').tooltip({
@@ -607,7 +614,7 @@ export default Ember.Component.extend({
       });
     }
 
-    if (!component.get('hasLessonFetched')) {
+    if (!selectedMilestone.get('hasLessonFetched')) {
       component
         .get('courseService')
         .getCourseMilestoneLessons(courseId, milestoneId)
