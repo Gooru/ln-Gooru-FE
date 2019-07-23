@@ -678,15 +678,6 @@ export default Ember.Component.extend({
     });
   },
 
-  handleRubricTooltip() {
-    const component = this;
-    component.$().on('click', function(e) {
-      if (!component.$(e.target).hasClass('grade-info-popover')) {
-        Ember.$('.popover').hide();
-      }
-    });
-  },
-
   fetchStudentSubmissions() {
     const component = this;
     const context = component.get('context');
