@@ -6,7 +6,7 @@
       <div class="destination-point">{{gru-icon name="place"}}</div>
     </div>
   </div>
-  <div class="controller student course-map">
+  <div class="controller student course-map {{if selfGradeItems.length 'student-grading-enabled'}}">
     {{#if hasRouteSuggestion}}
       <h5 class="pre-study-title hidden-xs">{{t 'class.overview.pre-study-title'}}</h5>{{!-- ToDo: Move css out of HBS --}}
       {{class.overview.routesuggestion-preview route0=route0 routeSuggestAction=(action 'courseRouteSuggestAction' ) class=currentClass course=course }}
@@ -47,24 +47,40 @@
         {{/if}}
       {{/if}}
     </div>
+
     <div class="student-coursemap-container">
-      {{class.overview.gru-accordion-course
-          currentClass=class
-          classMembers=classMembers
-          onSelectResource="playResource"
-          onStudyNow="studyPlayer"
-          onLocationUpdate=(action 'updateLocation')
-          userLocation=userLocation
-          location=openingLocation
-          units=units
-          contentVisibility=contentVisibility
-          showLocation=showLocation
-          isTeacher=false
-          isStudent=true
-          toggleLocation=toggleLocation
-          onSelectItem="onSelectItem"
-          showLocationReport= tab
-          }}
+      <div class="course-map-accordion-container">
+        {{class.overview.gru-accordion-course
+            currentClass=class
+            classMembers=classMembers
+            onSelectResource="playResource"
+            onStudyNow="studyPlayer"
+            onLocationUpdate=(action 'updateLocation')
+            userLocation=userLocation
+            location=openingLocation
+            units=units
+            contentVisibility=contentVisibility
+            showLocation=showLocation
+            isTeacher=false
+            isStudent=true
+            toggleLocation=toggleLocation
+            onSelectItem="onSelectItem"
+            showLocationReport= tab
+            }}
+      </div>
+      {{#if (gt selfGradeItems.length 0) }}
+        <div class="self-grading-container">
+          <div class="header-container">
+            Items to Grade
+          </div>
+          <div class="body-container">
+            {{grading/student/gru-self-grading-items
+             selfGradeItems = selfGradeItems
+             userId = userId
+             classId = class.id}}
+          </div>
+        </div>
+      {{/if}}
     </div>
   </div>
 {{else}}

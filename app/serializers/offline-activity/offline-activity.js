@@ -515,7 +515,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
       student_id: payload.get('studentId'),
       class_id: payload.get('classId'),
       collection_id: payload.get('collectionId'),
-      dca_content_id: payload.get('dcaContentId'),
       content_source: payload.get('contentSource'),
       collection_type: payload.get('collectionType'),
       grader: payload.get('grader'),
@@ -538,6 +537,14 @@ export default Ember.Object.extend(ConfigurationMixin, {
           )
         : null
     });
+    if (!payload.get('isCourseMapGrading')) {
+      grade.set('dca_content_id', payload.get('dcaContentId'));
+    } else {
+      grade.set('course_id', payload.get('courseId') || undefined);
+      grade.set('unit_id', payload.get('unitId') || undefined);
+      grade.set('lesson_id', payload.get('lessonId') || undefined);
+      grade.set('time_spent', payload.get('timeSpent') || null);
+    }
     return grade;
   },
 
