@@ -274,8 +274,15 @@ export default Ember.Controller.extend({
     return isCourseSetup && showRoute0Suggestion;
   }),
 
+  /**
+   * @property {UUID} userId
+   */
   userId: Ember.computed.alias('session.userId'),
 
+  /**
+   * @property {Array} selfGradeItems
+   * List of items to be graded
+   */
   selfGradeItems: Ember.A([]),
 
   // -------------------------------------------------------------------------
@@ -360,6 +367,11 @@ export default Ember.Controller.extend({
     return formattedContents;
   },
 
+  /**
+   * @function fetchOaItemsToGradeByStudent
+   * Method to fetch OA items to be graded by student
+   * @return {Promise}
+   */
   fetchOaItemsToGradeByStudent() {
     const controller = this;
     const requestParam = {
@@ -452,6 +464,10 @@ export default Ember.Controller.extend({
     }
   },
 
+  /**
+   * @function loadSelfGradeItems
+   * Method to load self grade items
+   */
   loadSelfGradeItems() {
     const controller = this;
     controller.fetchOaItemsToGradeByStudent().then(function(selfGradeItems) {

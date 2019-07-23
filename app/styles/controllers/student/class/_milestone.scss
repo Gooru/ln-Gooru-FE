@@ -80,5 +80,24 @@
       width: 90vw;
       max-width: 960px;
     }
+    .course-map-milestone-container {
+      &.self-grading-enabled {
+        display: grid;
+        grid-template-columns: auto 331px;
+        column-gap: 15px;
+
+        @media screen and (max-width: $screen-md) {
+          grid-template-columns: auto;
+        }
+        .self-grading-container {
+          .header-container {
+            color: $white;
+            font-size: 12px;
+            text-transform: uppercase;
+            padding-left: 15px;
+          }
+        }
+      }
+    }
   }
 }

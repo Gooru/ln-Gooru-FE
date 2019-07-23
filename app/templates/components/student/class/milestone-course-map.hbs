@@ -101,7 +101,7 @@
                             <div class="collection-title-container">
                               <p>{{collection.title}}</p>
                             </div>
-                            <div class="colllection-play-btn {{unless allowToPlay 'not-allowed-to-play'}} {{if collection.isOfflineActivity 'not-allowed-to-play'}}"
+                            <div class="colllection-play-btn {{unless allowToPlay 'not-allowed-to-play'}}"
                               {{action 'studyPlayer' 'collection' milestone.milestone_id lesson.unit_id lesson.lesson_id collection}}>
                               {{gru-icon style="material-icons-outlined" name="play_circle_filled_white"}}
                             </div>

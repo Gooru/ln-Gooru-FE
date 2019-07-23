@@ -543,7 +543,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       grade.set('course_id', payload.get('courseId') || undefined);
       grade.set('unit_id', payload.get('unitId') || undefined);
       grade.set('lesson_id', payload.get('lessonId') || undefined);
-      grade.set('time_spent', payload.get('timeSpent') || null);
+      grade.set('time_spent', payload.get('timeSpent') || undefined);
     }
     return grade;
   },
