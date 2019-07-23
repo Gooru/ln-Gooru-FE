@@ -355,6 +355,15 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   //Methods
 
+  handleRubricTooltip() {
+    const component = this;
+    component.$().on('click', function(e) {
+      if (!component.$(e.target).hasClass('grade-info-popover')) {
+        Ember.$('.popover').hide();
+      }
+    });
+  },
+
   initialize() {
     let component = this;
     return Ember.RSVP
