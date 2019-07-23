@@ -278,6 +278,60 @@ export default Ember.Controller.extend({
 
   actions: {
     /**
+     * Trigger when user click on student list (mobile view)
+     */
+    toggleStudentList() {
+      let studentListEle = Ember.$(
+        '.teacher .class .course-map .course-map-body .students'
+      );
+      if (!studentListEle.hasClass('active')) {
+        studentListEle.animate(
+          {
+            top: '0%'
+          },
+          400
+        );
+        studentListEle.addClass('active');
+      } else {
+        //To calc position based on whether student course map is selected or not
+        let height = this.get('isStudentCourseMap') ? 50 : 100;
+        let topPosition = studentListEle.height() - height;
+        studentListEle.removeClass('active');
+        studentListEle.animate(
+          {
+            top: topPosition
+          },
+          400
+        );
+      }
+    },
+    /**
+     * Trigger when user click on item to grade (mobile view)
+     */
+    toggleItemsToGrade() {
+      let itemToGradeEle = Ember.$(
+        '.teacher .class .course-map .course-map-body .items-to-grade'
+      );
+      if (!itemToGradeEle.hasClass('active')) {
+        itemToGradeEle.animate(
+          {
+            top: '0%'
+          },
+          400
+        );
+        itemToGradeEle.addClass('active');
+      } else {
+        let height = itemToGradeEle.height() - 50;
+        itemToGradeEle.removeClass('active');
+        itemToGradeEle.animate(
+          {
+            top: height
+          },
+          400
+        );
+      }
+    },
+    /**
      * Trigger when rubric item level  report clicked
      */
     onOpenReportGrade(itemToGrade) {
@@ -352,6 +406,15 @@ export default Ember.Controller.extend({
       controller.set('isLoading', false);
       Ember.$('.list').removeClass('active');
       Ember.$('.teacher.list').addClass('active');
+      let studentListEle = Ember.$(
+        '.teacher .class .course-map .course-map-body .students'
+      );
+      if (studentListEle) {
+        let topPosition = studentListEle.height() - 100;
+        studentListEle.css({
+          top: topPosition
+        });
+      }
     },
 
     /**
@@ -574,13 +637,15 @@ export default Ember.Controller.extend({
         '.teacher-class-milestone-course-map .milestone-course-map-container .milestone-course-map.active .milestone-course-map-panel.active'
       );
       Ember.$(activePanelEle).width(activePanelEle.parent().width());
-      if (
-        scrollTop >=
-        activeContainerEle.offset().top - activePanelEle.height()
-      ) {
-        activePanelEle.addClass('sticky');
-      } else {
-        activePanelEle.removeClass('sticky');
+      if (activeContainerEle.length) {
+        if (
+          scrollTop >=
+          activeContainerEle.offset().top - activePanelEle.height()
+        ) {
+          activePanelEle.addClass('sticky');
+        } else {
+          activePanelEle.removeClass('sticky');
+        }
       }
     });
   },

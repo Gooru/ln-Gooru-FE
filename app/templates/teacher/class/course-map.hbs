@@ -34,11 +34,18 @@
         </div>
       {{/if}}
 
-      <div class="course-map-body">
+      <div class="course-map-body {{unless isStudentCourseMap 'teacher-cm'}}">
         {{#if ( or (and class.milestoneViewApplicable  isMilestoneView) (not class.milestoneViewApplicable  isMilestoneView))}}
           <div class="students">
-            <div class="header">
+            <div class="header hidden-xs">
               {{t 'class.info.students'}}
+            </div>
+            <div class="header hidden visible-xs" {{action 'toggleStudentList'}}>
+              <div class="title">{{t 'class.info.students'}}</div>
+              <div class="icon">
+                {{gru-icon name="arrow_drop_down" class="arrow-down"}}
+                {{gru-icon name="arrow_drop_up" class="arrow-up"}}
+              </div>
             </div>
             <div class="students-list">
               {{#each sortedStudents as |student index|}}
@@ -180,8 +187,15 @@
         </div>
         {{#unless isStudentCourseMap}}
           <div class="items-to-grade">
-            <div class="header">
+            <div class="header hidden-xs">
               {{t 'class.analytics.performance.grade-items'}}
+            </div>
+            <div class="header hidden visible-xs" {{action 'toggleItemsToGrade'}}>
+              <div class="title">{{t 'class.analytics.performance.grade-items'}} </div>
+              <div class="icon">
+                {{gru-icon name="arrow_drop_down" class="arrow-down"}}
+                {{gru-icon name="arrow_drop_up" class="arrow-up"}}
+              </div>
             </div>
             {{#if isGradeLoading}}
               {{three-bounce-spinner}}
