@@ -564,13 +564,13 @@ export default Ember.Controller.extend({
         '.teacher-class-milestone-course-map .milestone-course-map-container .milestone-course-map.active .milestone-course-map-panel.active'
       );
       Ember.$(activePanelEle).width(activePanelEle.parent().width());
-      if (
-        scrollTop >=
-        activeContainerEle.offset().top - activePanelEle.height()
-      ) {
-        activePanelEle.addClass('sticky');
-      } else {
-        activePanelEle.removeClass('sticky');
+      let offset = activeContainerEle.offset();
+      if (offset) {
+        if (scrollTop >= offset.top - activePanelEle.height()) {
+          activePanelEle.addClass('sticky');
+        } else {
+          activePanelEle.removeClass('sticky');
+        }
       }
     });
   },

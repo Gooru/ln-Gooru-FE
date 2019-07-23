@@ -674,34 +674,48 @@ export default Ember.Component.extend({
     const component = this;
     let lessonIndex;
     let lessonSize;
+    let lastLesson;
     let selectedLesson = component.get('selectedLesson');
     let milestone = component.get('selectedMilestone');
-    let lessons = milestone.get('lessons');
-    let collections = selectedLesson.get('collections');
-    let nextMilestone = component
-      .get('milestones')
-      .objectAt(milestone.get('milestoneIndex'));
-    const nonRescopedLessons = lessons.filter(lesson => {
-      if (!lesson.get('rescope')) {
-        return lesson;
+    if (milestone && selectedLesson) {
+      let lessons = milestone.get('lessons');
+      let collections = selectedLesson.get('collections');
+      let nextMilestone = component
+        .get('milestones')
+        .objectAt(milestone.get('milestoneIndex'));
+      const nonRescopedLessons = lessons.filter(lesson => {
+        if (!lesson.get('rescope')) {
+          return lesson;
+        }
+      });
+      if (component.get('showAllRescopedContent')) {
+        lessonIndex = lessons.indexOf(selectedLesson);
+        lessonSize = lessons.length;
+        lastLesson = lessons.objectAt(lessonIndex);
+      } else {
+        lessonIndex = nonRescopedLessons.indexOf(selectedLesson);
+        lessonSize = nonRescopedLessons.length;
+        lastLesson = nonRescopedLessons.objectAt(lessonIndex);
       }
-    });
-    if (component.get('showAllRescopedContent')) {
-      lessonIndex = lessons.indexOf(selectedLesson);
-      lessonSize = lessons.length;
-    } else {
-      lessonIndex = nonRescopedLessons.indexOf(selectedLesson);
-      lessonSize = nonRescopedLessons.length;
-    }
-    const isLastLessonActive =
-      lessonIndex === lessonSize - 1 && selectedLesson.get('isActive');
-    nextMilestone.set('prevMilestoneOfLastLessonIsActive', isLastLessonActive);
-    if (isLastLessonActive) {
-      let lastCollection = collections.objectAt(collections.length - 1);
-      nextMilestone.set(
-        'prevMilestoneOfLastCollectionPath',
-        lastCollection.get('pathType')
-      );
+      const isLastLesson = lessonIndex === lessonSize - 1;
+      if (isLastLesson) {
+        const isLastLessonActive = isLastLesson && lastLesson.get('isActive');
+        if (nextMilestone) {
+          nextMilestone.set(
+            'prevMilestoneOfLastLessonIsActive',
+            isLastLessonActive
+          );
+        }
+        if (isLastLessonActive) {
+          let lastCollection = collections.objectAt(collections.length - 1);
+          if (nextMilestone) {
+            nextMilestone.set(
+              'prevMilestoneOfLastCollectionPath',
+              lastCollection.get('pathType')
+            );
+          }
+        }
+      }
     }
   },
 
