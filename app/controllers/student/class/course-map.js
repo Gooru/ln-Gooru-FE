@@ -21,6 +21,8 @@ export default Ember.Controller.extend({
    */
   route0Service: Ember.inject.service('api-sdk/route0'),
 
+  rubricService: Ember.inject.service('api-sdk/rubric'),
+
   /**
    * Logged in user session object
    * @type {Session}
@@ -272,6 +274,10 @@ export default Ember.Controller.extend({
     return isCourseSetup && showRoute0Suggestion;
   }),
 
+  userId: Ember.computed.alias('session.userId'),
+
+  selfGradeItems: Ember.A([]),
+
   // -------------------------------------------------------------------------
   // Observers
 
@@ -325,9 +331,10 @@ export default Ember.Controller.extend({
     let skippedContentsPromise = Ember.RSVP.resolve(
       controller.get('rescopeService').getSkippedContents(filter)
     );
-    return Ember.RSVP.hash({
-      skippedContents: skippedContentsPromise
-    })
+    return Ember.RSVP
+      .hash({
+        skippedContents: skippedContentsPromise
+      })
       .then(function(hash) {
         controller.set('skippedContents', hash.skippedContents);
         return hash.skippedContents;
@@ -351,6 +358,18 @@ export default Ember.Controller.extend({
       );
     });
     return formattedContents;
+  },
+
+  fetchOaItemsToGradeByStudent() {
+    const controller = this;
+    const requestParam = {
+      classId: controller.get('class.id'),
+      type: 'oa',
+      source: 'coursemap',
+      courseId: controller.get('course.id'),
+      userId: controller.get('userId')
+    };
+    return controller.get('rubricService').getOaItemsToGrade(requestParam);
   },
 
   /**
@@ -431,5 +450,12 @@ export default Ember.Controller.extend({
     if (this.attrs && this.attrs.updateModel) {
       this.attrs.updateModel(objData);
     }
+  },
+
+  loadSelfGradeItems() {
+    const controller = this;
+    controller.fetchOaItemsToGradeByStudent().then(function(selfGradeItems) {
+      controller.set('selfGradeItems', selfGradeItems.get('gradeItems'));
+    });
   }
 });
