@@ -214,7 +214,7 @@ export default Ember.Route.extend({
     controller.set('gradeSubject', model.gradeSubject);
     controller.set('classController.gradeSubject', model.gradeSubject);
     controller.set('milestones', model.milestones);
-    controller.getQuestionsToGrade();
+    controller.loadItemsToGrade();
     controller.init();
     controller.getUnitLevelPerformance();
   },
@@ -224,5 +224,6 @@ export default Ember.Route.extend({
     controller.set('studentId', null);
     controller.set('questionItems', null);
     controller.set('isAccepted', false);
+    controller.set('itemsToGradeList', Ember.A([]));
   }
 });

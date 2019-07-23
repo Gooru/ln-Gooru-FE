@@ -12,6 +12,11 @@
       justify-content: left;
       column-gap: 5px;
       cursor: pointer;
+      border-bottom: 1px solid #666;
+
+      &:last-child {
+        border: none;
+      }
 
       .item-thumbnail {
         &.offline-activity {
