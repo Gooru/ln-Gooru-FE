@@ -368,13 +368,13 @@ export default Ember.Component.extend({
       student_id: studentId,
       marked_by: ROLES.STUDENT,
       path_id: 0,
-      path_type: null
+      path_type: null,
+      time_zone: component.get('timeZone')
     };
     if (component.get('isStudyPlayer')) {
       oaData.course_id = component.get('courseId');
       oaData.unit_id = component.get('unitId');
       oaData.lesson_id = component.get('lessonId');
-      oaData.timezone = component.get('timeZone');
     } else {
       oaData.oa_dca_id = parseInt(caContentId);
     }

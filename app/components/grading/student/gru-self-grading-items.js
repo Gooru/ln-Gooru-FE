@@ -1,20 +1,29 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  // -------------------------------------------------------------------------
+  // Attributes
   classNames: ['self-grading', 'gru-self-grading-items'],
 
+  // -------------------------------------------------------------------------
+  // Dependencies
   offlineActivityService: Ember.inject.service(
     'api-sdk/offline-activity/offline-activity'
   ),
 
   session: Ember.inject.service('session'),
 
+  // -------------------------------------------------------------------------
+  // Events
   didInsertElement() {
     const component = this;
     component.loadItemsToGrade();
   },
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+    //Action triggered when select an item to grade
     onSelectGradeItem(gradeItem) {
       const component = this;
       component.set('selectedGradeItem', gradeItem);
@@ -22,14 +31,40 @@ export default Ember.Component.extend({
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {UUID} userId
+   * UserID of logged in user
+   */
   userId: Ember.computed.alias('session.userId'),
 
+  /**
+   * @property {Boolean} isShowOaSelfGrading
+   * Property to check whether to show self grading pull up or not
+   */
   isShowOaSelfGrading: false,
 
+  /**
+   * @property {Array} selfGradeItems
+   * List of self grading items
+   */
   selfGradeItems: Ember.A([]),
 
+  /**
+   * @property {Array} itemsToGrade
+   * List of items to grade
+   */
   itemsToGrade: Ember.A([]),
 
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function loadItemsToGrade
+   * Method to load items to be graded
+   */
   loadItemsToGrade() {
     let component = this;
     const selfGradeItems = component.get('selfGradeItems');

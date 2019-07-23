@@ -364,6 +364,12 @@ export default Ember.Service.extend({
       );
   },
 
+  /**
+   * @function getOaItemsToGrade
+   * Method to get OA items to grade
+   * @param {Object} requestParam
+   * @return {Promise}
+   */
   getOaItemsToGrade(requestParam) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -378,6 +384,13 @@ export default Ember.Service.extend({
     });
   },
 
+  /**
+   * @function getOaGradingStudents
+   * Method to get List of students to be graded
+   * @param {UUID} oaId
+   * @param {Object} requestParam
+   * @return {Promise}
+   */
   getOaGradingStudents(oaId, requestParam) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {

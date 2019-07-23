@@ -678,6 +678,11 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * @function fetchStudentSubmissions
+   * Method to fetch student OA submissions
+   * @return {Promise}
+   */
   fetchStudentSubmissions() {
     const component = this;
     const context = component.get('context');
@@ -827,6 +832,11 @@ export default Ember.Component.extend({
     }
   },
 
+  /**
+   * @function getGradingStudentList
+   * Method to get list of students to be graded
+   * @return {Promise} studentList
+   */
   getGradingStudentList() {
     const component = this;
     const classId = component.get('context.classId');

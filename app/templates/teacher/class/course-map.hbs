@@ -186,10 +186,10 @@
             {{#if isGradeLoading}}
               {{three-bounce-spinner}}
             {{else}}
-              {{#if questionItems}}
+              {{#if itemsToGradeList}}
                 {{gru-grade-items
                   openReportGrade='onOpenReportGrade'
-                  gradeableItems=questionItems}}
+                  gradeableItems=itemsToGradeList}}
               {{else}}
                 <div class="no-grade-items">
                   <i></i>
@@ -264,5 +264,16 @@
     oaId=previewContent.id
     classId=classId
     isReportView=false
+  }}
+{{/if}}
+
+{{#if isShowOaGrading}}
+  {{activity.offline.grading-report
+    showPullUp=isShowOaGrading
+    context=itemToGradeContextData
+    itemsToGrade=itemsToGradeList
+    isTeacher=true
+    refreshItem='onRefreshItem'
+    isCourseMapGrading = true
   }}
 {{/if}}
