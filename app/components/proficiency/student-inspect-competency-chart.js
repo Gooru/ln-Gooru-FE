@@ -515,13 +515,17 @@ export default Ember.Component.extend({
 
   showDomainPopOver() {
     let component = this;
-    let domainBoundaryLines = component.$('.horizontal-line');
-    let midDomain = Math.round((domainBoundaryLines.length - 6) / 2);
-    let midLevelDomainBoundary = component.$(
-      `.domain-boundary-line-${midDomain}`
+    const horizontalLines = component.$(
+      '#course-covered-line-container .horizontal-line'
+    ).length;
+    const midPos = Math.round(horizontalLines / 2);
+    const midPosContainer = component.$(
+      `#course-covered-line-container .horizontal-line:eq(${midPos})`
     );
-    let topPosition = parseInt(midLevelDomainBoundary.attr('y2')) + 15;
-    let leftPosition = parseInt(midLevelDomainBoundary.attr('x1')) - 15;
+    const x1 = midPosContainer.attr('x1');
+    const y1 = midPosContainer.attr('y1');
+    const topPosition = Number(y1) + 15;
+    const leftPosition = Number(x1) + 15;
     component.$('#popover').css({
       top: `${topPosition}px`,
       left: `${leftPosition}px`
