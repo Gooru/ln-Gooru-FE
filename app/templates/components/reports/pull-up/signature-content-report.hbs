@@ -1,48 +1,64 @@
 {{#if isLoading}}
-  {{three-bounce-spinner}}
+{{three-bounce-spinner}}
 {{else}}
-  <div class="signature-content">
-    {{#if showSignatureAssessment}}
-      <div class="competency-content">
-        <div class="competency-img"></div>
-        <div class="competency-note">{{t 'report.competency-report.note'}}</div>
-      </div>
-    {{/if}}
-    {{#if signatureContent}}
-      <div class="signature-accordion">
-        <div class="signature-panel">
-          <div class="signature-header">
-            <i class="signature-icon {{collectionType}}"></i>
-            <div class="signature {{unless isStudent 'hide-play'}}">
-              <div class="title ellipsis" {{action 'onPreviewContent'}} title="{{signatureContent.title}}">{{signatureContent.title}}</div>
-              <div class="content-count">
-                {{#if (or content.questionCount content.resourceCount)}}
-                  <span class="{{if (gt content.resourceCount 0) '' 'invisible'}}" title="{{t "common.resources"}}">{{gru-icon name='local_library'}}</span><span
-                    class="{{if (gt content.resourceCount 0) '' 'invisible'}}">{{content.resourceCount}}</span>
-                  <span class="{{if (gt content.questionCount 0) '' 'invisible'}}" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span
-                    class="{{if (gt content.questionCount 0) '' 'invisible'}}">{{content.questionCount}}</span>
-                {{/if}}
-              </div>
-              {{#if isStudent}}
-                {{#link-to 'player' signatureContent.id (query-params type=collectionType role='student' source=source) target="_blank"}}
-                  <div class="action">
-                    {{gru-icon name='play_arrow'}}
-                  </div>
-                {{/link-to}}
-              {{/if}}
-              <span class="suggestion-icon">
-                {{gru-icon name='explore'}}
-              </span>
-            </div>
+<div class="signature-content">
+  {{#if showSignatureAssessment}}
+  <div class="competency-content">
+    <div class="competency-img"></div>
+    <div class="competency-note">{{t 'report.competency-report.note'}}</div>
+  </div>
+  {{/if}}
+  {{#if signatureContent}}
+  <div class="signature-accordion">
+    <div class="signature-panel">
+      <div class="signature-header">
+        <i class="signature-icon {{collectionType}}"></i>
+        <div class="signature {{unless isStudent 'hide-play'}}">
+          <div class="title ellipsis" {{action 'onPreviewContent'}} title="{{signatureContent.title}}">
+            {{signatureContent.title}}</div>
+          <div class="content-count">
+            {{#if (or content.questionCount content.resourceCount)}}
+            <span class="{{if (gt content.resourceCount 0) '' 'invisible'}}"
+              title="{{t "common.resources"}}">{{gru-icon name='local_library'}}</span><span
+              class="{{if (gt content.resourceCount 0) '' 'invisible'}}">{{content.resourceCount}}</span>
+            <span class="{{if (gt content.questionCount 0) '' 'invisible'}}"
+              title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span
+              class="{{if (gt content.questionCount 0) '' 'invisible'}}">{{content.questionCount}}</span>
+            {{/if}}
           </div>
+          {{#if isStudent}}
+          {{#link-to 'player' signatureContent.id (query-params type=collectionType role='student' source=source) target="_blank"}}
+          <div class="action">
+            {{gru-icon name='play_arrow'}}
+          </div>
+          {{/link-to}}
+          {{/if}}
+          <span class="suggestion-icon">
+            {{gru-icon name='explore'}}
+          </span>
         </div>
       </div>
-    {{/if}}
+    </div>
   </div>
-  {{reports.pull-up.competency-info-content userId=userId competency=competency microCompetencies=microCompetencies collectionPerformances=collectionPerformances userId=userId prequisiteCompetencies=prerequisites learningMapData=learningMapData isStudent=isStudent}}
+  {{/if}}
+</div>
+{{#if learningMapData}}
+{{reports/pull-up/competency-info-content 
+    userId=userId 
+    competency=competency 
+    microCompetencies=microCompetencies 
+    collectionPerformances=collectionPerformances 
+    userId=userId 
+    prequisiteCompetencies=prerequisites 
+    learningMapData=learningMapData 
+    isStudent=isStudent}}
+{{else}}
+<p id="lm-no-content">{{t 'no.content.assoc.fw'}}</p>
+{{/if}}
+
 {{/if}}
 {{#if (and isShowContentPreview (not isStudent))}}
-  {{reports.pull-up.gru-collection-preview
+{{reports.pull-up.gru-collection-preview
     showPullUp=isShowContentPreview
     previewContentId=previewContent.id
     previewContentType=previewContentType

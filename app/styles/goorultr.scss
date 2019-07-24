@@ -289,6 +289,7 @@
 @import "components/player/gru-player-summary-footer.scss";
 @import "components/player/gru-external-assessment-page";
 @import "components/player/gru-external-collection-page";
+@import "components/player/gru-offline-activity-page";
 @import "components/player/gru-external-assessment-footer";
 @import "components/reports/gru-assessment-report";
 @import "components/reports/assessment/gru-questions";
@@ -427,7 +428,8 @@
 @import "components/reports/pull-up/activity/add-performance-data";
 @import "components/reports/pull-up/activity/add-student-performance-data";
 @import "components/reports/pull-up/activity/add-question-score";
-@import "components/reports/pull-up/activity/assessment-performance-data";
+@import "components/reports/pull-up/activity/assessment-performance-data-by-question";
+@import "components/reports/pull-up/activity/assessment-performance-data-by-upload-image";
 @import "components/reports/pull-up/activity/collection-performance-data";
 
 // Add course to class
@@ -495,5 +497,13 @@
 //Rubric Categories
 @import "components/rubric/_rubric-category-grades";
 
+//Add data
+@import "components/reports/pull-up/activity/add-performance-data-choice";
+@import "components/gru-i2d-preview";
+@import "components/content/modals/i2d-message-dialog";
 //Add Collaborator
 @import "components/teacher/class/gru-add-collaborator";
+@import "components/gru-i2d-template";
+
+//CM self grading
+@import "components/grading/student/gru-self-grading-items";

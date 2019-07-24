@@ -8,11 +8,11 @@
           </span>
         {{/if}}
         {{input
-          class = "search-student-input"
-          type = "text"
-          key-up = "onSearchStudent"
-          value = studentSearchPattern
-          placeholder = (concat (t 'common.search') ' ' (t 'common.student'))
+          class="search-student-input"
+          type="text"
+          key-up="onSearchStudent"
+          value=studentSearchPattern
+          placeholder=(concat (t 'common.search') ' ' (t 'common.student'))
           }}
         <span class="search-icon">{{gru-icon name="search"}}</span>
       </div>
@@ -91,8 +91,8 @@
           </div>
         {{/if}}
         <div class="score-container max-score">
-            {{input type="text" class="max-score score-input" value=externalAssessmentMaxScore disabled=isCaptureExternalAssessmentStudentScore}}
-            <span class="score-label">{{t 'teacher-landing.class.class-activities-tab.max-score'}}</span>
+          {{input type="text" class="max-score score-input" value=externalAssessmentMaxScore disabled=isCaptureExternalAssessmentStudentScore}}
+          <span class="score-label">{{t 'teacher-landing.class.class-activities-tab.max-score'}}</span>
         </div>
         <div class="score-action-container">
           {{#if isCaptureExternalAssessmentStudentScore}}

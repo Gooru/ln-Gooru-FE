@@ -124,6 +124,20 @@ export default Ember.Component.extend({
    */
   showAllRescopedContent: false,
 
+  /**
+   * Maintains the state of class grade.
+   * @type {Number}
+   */
+  classGrade: Ember.computed.alias('class.gradeCurrent'),
+
+  /**
+   * Maintains the state of active milestone.
+   * @type {Object}
+   */
+  activeMilestone: Ember.computed('milestones', 'classGrade', function() {
+    return this.get('milestones').findBy('grade_id', this.get('classGrade'));
+  }),
+
   classMembers: Ember.A([]),
 
   init: function() {
@@ -275,8 +289,13 @@ export default Ember.Component.extend({
    */
   notInit: null,
   didInsertElement() {
-    this.loadData();
+    const component = this;
+    component.loadData();
     this.set('notInit', true);
+    let activeMilestone = component.get('activeMilestone');
+    if (activeMilestone) {
+      component.send('toggleMilestoneItems', activeMilestone);
+    }
   },
 
   didUpdateAttrs() {
@@ -291,6 +310,14 @@ export default Ember.Component.extend({
       }, 5000);
     }
   },
+
+  didDestroyElement() {
+    let component = this;
+    component.get('milestones').map(milestone => {
+      milestone.set('isActive', false);
+    });
+  },
+
   didRender() {
     let component = this;
     component.$('[data-toggle="tooltip"]').tooltip({
@@ -587,7 +614,7 @@ export default Ember.Component.extend({
       });
     }
 
-    if (!component.get('hasLessonFetched')) {
+    if (!selectedMilestone.get('hasLessonFetched')) {
       component
         .get('courseService')
         .getCourseMilestoneLessons(courseId, milestoneId)

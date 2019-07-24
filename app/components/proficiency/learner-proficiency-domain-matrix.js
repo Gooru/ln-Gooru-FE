@@ -48,6 +48,11 @@ export default Ember.Component.extend({
     component.set('domainBoundariesContainer', Ember.A([]));
   },
 
+  didInsertElement() {
+    let maxHeight = this.$('.scrollable-chart').height() - 50;
+    this.set('maxHeight', maxHeight);
+  },
+
   didRender() {
     var component = this;
     component.$('[data-toggle="tooltip"]').tooltip({
@@ -141,8 +146,10 @@ export default Ember.Component.extend({
     let selectedElement = component.$(
       `.competency-${selectedCompetency.xAxisSeq}-${selectedCompetency.yAxisSeq}`
     );
-    let xAxisSeq = parseInt(selectedElement.attr('x')) + 1;
-    let yAxisSeq = parseInt(selectedElement.attr('y')) + 1;
+    const x = selectedElement.attr('x');
+    const y = selectedElement.attr('y');
+    let xAxisSeq = x ? parseInt(x) + 1 : -500;
+    let yAxisSeq = y ? parseInt(y) + 1 : 0;
     component
       .$('.selected-competency')
       .removeClass('hidden')
@@ -386,6 +393,22 @@ export default Ember.Component.extend({
       : Ember.A([]);
   }),
 
+  /**
+   * This property will decide to show expanded/compress button or not.
+   * @property {Boolean}
+   */
+  showExpandedButton: false,
+
+  /**
+   * Maintains the maximum Width of the chart.
+   */
+  maxWidth: 600,
+
+  /**
+   * Maintains the maximum Height of the chart.
+   */
+  maxHeight: 300,
+
   // -------------------------------------------------------------------------
   // Methods
   /**
@@ -448,6 +471,15 @@ export default Ember.Component.extend({
         competencyMatrixCoordinates
       );
       component.drawChart(chartData);
+      const cellHeight = component.get('cellHeight');
+      const expandedCellHeight = component.get('expandedCellHeight');
+      if (cellHeight <= expandedCellHeight) {
+        component.set('showExpandedButton', true);
+        component.set('isExpandChartEnabled', false);
+      } else {
+        component.set('showExpandedButton', false);
+        component.set('isExpandChartEnabled', true);
+      }
       component.set('chartData', chartData);
       if (component.get('isPlayerProficiency')) {
         component.highlightStudentMasteredCompetency(chartData);
@@ -463,17 +495,15 @@ export default Ember.Component.extend({
     let component = this;
     let taxonomyService = component.get('taxonomyService');
     let gradeId = gradeData ? gradeData.id : null;
-    return Ember.RSVP
-      .hash({
-        domainBoundary: gradeId
-          ? Ember.RSVP.resolve(
-            taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
-          )
-          : Ember.RSVP.resolve(null)
-      })
-      .then(({ domainBoundary }) => {
-        return domainBoundary;
-      });
+    return Ember.RSVP.hash({
+      domainBoundary: gradeId
+        ? Ember.RSVP.resolve(
+          taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
+        )
+        : Ember.RSVP.resolve(null)
+    }).then(({ domainBoundary }) => {
+      return domainBoundary;
+    });
   },
 
   /**
@@ -603,11 +633,25 @@ export default Ember.Component.extend({
     let numberOfCellsInEachColumn = cellSizeInRow.length;
     let extendedChartHeight = 15;
     component.set('numberOfCellsInEachColumn', numberOfCellsInEachColumn);
-    const cellWidth = component.get('cellWidth');
-    const cellHeight = component.get('cellHeight');
-    var width = Math.round(numberOfCellsInEachColumn * cellWidth) + 5;
+    let cellWidth = component.get('cellWidth');
+    let cellHeight = component.get('cellHeight');
+    const maxWidth = component.get('maxWidth');
+    const maxHeight = component.get('maxHeight');
+    const maxCellsInDomain = component.get('maxNumberOfCellsInEachColumn');
+    let width = Math.round(numberOfCellsInEachColumn * cellWidth) + 5;
+    if (width < maxWidth) {
+      cellWidth = Math.round(maxWidth / numberOfCellsInEachColumn);
+      component.set('cellWidth', cellWidth);
+      width = Math.round(numberOfCellsInEachColumn * cellWidth) + 5;
+    }
     component.set('width', width);
-    var height = component.get('height') + extendedChartHeight;
+    let height = component.get('height') + extendedChartHeight;
+    if (height < maxHeight) {
+      cellHeight = Math.round(maxHeight / maxCellsInDomain);
+      component.set('cellHeight', cellHeight);
+      height = Math.round(maxCellsInDomain * cellHeight) + 5;
+    }
+
     component.$('#render-proficiency-matrix svg').remove();
     component.$('#render-proficiency-matrix').height(height);
     const svg = d3
@@ -645,7 +689,13 @@ export default Ember.Component.extend({
         let domainBoundaryCompetency = d.isDomainBoundaryCompetency
           ? 'domain-boundary'
           : '';
-        return `competency ${skylineClassName} competency-${d.xAxisSeq} competency-${d.xAxisSeq}-${d.yAxisSeq} fillArea${d.status.toString()} ${domainBoundaryCompetency} ${d.boundaryClass} ${masteredCompetencyClassName}`;
+        return `competency ${skylineClassName} competency-${
+          d.xAxisSeq
+        } competency-${d.xAxisSeq}-${
+          d.yAxisSeq
+        } fillArea${d.status.toString()} ${domainBoundaryCompetency} ${
+          d.boundaryClass
+        } ${masteredCompetencyClassName}`;
       })
       .on('click', function(d) {
         component.selectCompetency(d);

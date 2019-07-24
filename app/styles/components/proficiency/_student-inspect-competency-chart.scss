@@ -58,6 +58,7 @@
         .scrollable-chart {
           overflow-y: auto;
           width: max-content;
+          height: calc(100vh - 130px);
 
           &::-webkit-scrollbar {
             height: 6px;
@@ -106,7 +107,6 @@
           }
 
           #student-inspect-competency-chart {
-            margin-bottom: 20px;
             position: relative;
             transform: rotateX(180deg);
             box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.4);
@@ -163,7 +163,6 @@
 
     .domain-sequence {
       width: max-content;
-      padding-left: 5px;
       display: inline-block;
 
       .domain-counts {

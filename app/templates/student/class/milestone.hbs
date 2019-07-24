@@ -39,14 +39,29 @@
       {{/if}}
     {{/if}}
 
-    {{student.class.milestone-course-map
-   class=class
-   rescopedContents=rescopedContents
-   showAllRescopedContent=showAllRescopedContent
-   gradeSubject=gradeSubject
-   location=location
-   milestones=milestones
- }}
+    <div class="course-map-milestone-container {{if (gt selfGradeItems.length 0) 'self-grading-enabled'}}">
+      {{student.class.milestone-course-map
+       class=class
+       rescopedContents=rescopedContents
+       showAllRescopedContent=showAllRescopedContent
+       gradeSubject=gradeSubject
+       location=location
+       milestones=milestones
+     }}
+     {{#if (gt selfGradeItems.length 0)}}
+        <div class="self-grading-container">
+          <div class="header-container">
+            {{t 'class.analytics.performance.grade-items'}}
+          </div>
+          <div class="body-container">
+            {{grading/student/gru-self-grading-items
+             selfGradeItems = selfGradeItems
+             userId = userId
+             classId = class.id}}
+          </div>
+        </div>
+      {{/if}}
+    </div>
   </div>
 {{else}}
   <div class="student-milestone-not-ready">{{t 'student-milestone-not-ready'}}</div>

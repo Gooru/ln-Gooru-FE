@@ -60,6 +60,10 @@ export default Ember.Controller.extend({
    */
   notifications: Ember.inject.service(),
 
+  offlineActivityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -176,7 +180,7 @@ export default Ember.Controller.extend({
 
   isStudentCourseMap: false,
 
-  questionItems: null,
+  itemsToGradeList: Ember.A([]),
 
   studentClassScore: null,
 
@@ -267,17 +271,77 @@ export default Ember.Controller.extend({
    */
   isShowStudentMilestoneReport: false,
 
+  userId: Ember.computed.alias('session.userId'),
+
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
     /**
+     * Trigger when user click on student list (mobile view)
+     */
+    toggleStudentList() {
+      let studentListEle = Ember.$(
+        '.teacher .class .course-map .course-map-body .students'
+      );
+      if (!studentListEle.hasClass('active')) {
+        studentListEle.animate(
+          {
+            top: '0%'
+          },
+          400
+        );
+        studentListEle.addClass('active');
+      } else {
+        //To calc position based on whether student course map is selected or not
+        let height = this.get('isStudentCourseMap') ? 50 : 100;
+        let topPosition = studentListEle.height() - height;
+        studentListEle.removeClass('active');
+        studentListEle.animate(
+          {
+            top: topPosition
+          },
+          400
+        );
+      }
+    },
+    /**
+     * Trigger when user click on item to grade (mobile view)
+     */
+    toggleItemsToGrade() {
+      let itemToGradeEle = Ember.$(
+        '.teacher .class .course-map .course-map-body .items-to-grade'
+      );
+      if (!itemToGradeEle.hasClass('active')) {
+        itemToGradeEle.animate(
+          {
+            top: '0%'
+          },
+          400
+        );
+        itemToGradeEle.addClass('active');
+      } else {
+        let height = itemToGradeEle.height() - 50;
+        itemToGradeEle.removeClass('active');
+        itemToGradeEle.animate(
+          {
+            top: height
+          },
+          400
+        );
+      }
+    },
+    /**
      * Trigger when rubric item level  report clicked
      */
     onOpenReportGrade(itemToGrade) {
       let controller = this;
+      if (itemToGrade.get('contentType') === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        controller.set('isShowOaGrading', true);
+      } else {
+        controller.set('showFRQuestionGrade', true);
+      }
       controller.set('itemToGradeContextData', itemToGrade);
-      controller.set('showFRQuestionGrade', true);
     },
 
     /**
@@ -342,6 +406,15 @@ export default Ember.Controller.extend({
       controller.set('isLoading', false);
       Ember.$('.list').removeClass('active');
       Ember.$('.teacher.list').addClass('active');
+      let studentListEle = Ember.$(
+        '.teacher .class .course-map .course-map-body .students'
+      );
+      if (studentListEle) {
+        let topPosition = studentListEle.height() - 100;
+        studentListEle.css({
+          top: topPosition
+        });
+      }
     },
 
     /**
@@ -541,13 +614,39 @@ export default Ember.Controller.extend({
     } else if (tab === 'student-report' && studentId) {
       controller.openStudentCourseReport(studentId);
     }
+    Ember.run.scheduleOnce('afterRender', function() {
+      controller.handleScrollToFixHeader();
+    });
   },
-
   // -------------------------------------------------------------------------
   // Observers
 
   // -------------------------------------------------------------------------
   // Methods
+
+  /**
+   * @function to handle scroll to fix on the header
+   */
+  handleScrollToFixHeader() {
+    Ember.$(document).scroll(function() {
+      let scrollTop = Ember.$(document).scrollTop();
+      let activeContainerEle = Ember.$(
+        '.teacher-class-milestone-course-map .milestone-course-map-container .milestone-course-map.active'
+      );
+      let activePanelEle = Ember.$(
+        '.teacher-class-milestone-course-map .milestone-course-map-container .milestone-course-map.active .milestone-course-map-panel.active'
+      );
+      Ember.$(activePanelEle).width(activePanelEle.parent().width());
+      let offset = activeContainerEle.offset();
+      if (offset) {
+        if (scrollTop >= offset.top - activePanelEle.height()) {
+          activePanelEle.addClass('sticky');
+        } else {
+          activePanelEle.removeClass('sticky');
+        }
+      }
+    });
+  },
 
   /**
    * @function  get class course map performance by student
@@ -862,7 +961,7 @@ export default Ember.Controller.extend({
       });
   },
 
-  getQuestionsToGrade() {
+  loadItemsToGrade() {
     let controller = this;
     controller.set('isGradeLoading', true);
     let currentClass = controller.get('currentClass');
@@ -873,12 +972,17 @@ export default Ember.Controller.extend({
         .hash({
           pendingGradingItems: controller
             .get('rubricService')
-            .getQuestionsToGrade(classId, courseId)
+            .getQuestionsToGrade(classId, courseId),
+          pendingOaGradingItems: controller.fetchOaItemsToGrade()
         })
-        .then(function(pendingGradingItems) {
-          let questionGradingItems = pendingGradingItems.pendingGradingItems;
-          let gradeItems = questionGradingItems.gradeItems;
-          if (gradeItems) {
+        .then(({ pendingGradingItems, pendingOaGradingItems }) => {
+          let gradeItems = pendingGradingItems.gradeItems || Ember.A([]);
+          let oaGradeItems = pendingOaGradingItems.gradeItems || Ember.A([]);
+          if (oaGradeItems.length) {
+            controller.loadOaItemsToGrade(oaGradeItems);
+          }
+          if (gradeItems.length) {
+            let itemsToGradeList = controller.get('itemsToGradeList');
             controller.getCourseStructure().then(function() {
               let itemsToGrade = Ember.A([]);
               gradeItems.map(function(item) {
@@ -889,12 +993,34 @@ export default Ember.Controller.extend({
               });
               Ember.RSVP.all(itemsToGrade).then(function(questionItems) {
                 controller.set('isGradeLoading', false);
-                controller.set('questionItems', questionItems);
+                controller.set(
+                  'itemsToGradeList',
+                  itemsToGradeList.concat(questionItems)
+                );
               });
             });
           }
         });
+    } else {
+      controller.set('isGradeLoading', false);
     }
+  },
+
+  /**
+   * @function loadOaItemsToGrade
+   * Method to load OA items to be graded
+   * @param {Array} oaItemsToGrade
+   */
+  loadOaItemsToGrade(oaItemsToGrade = Ember.A([])) {
+    const controller = this;
+    oaItemsToGrade.map(oaItem => {
+      controller
+        .createOaGradeItemObject(oaItem)
+        .then(function(oaGradeItemObject) {
+          controller.get('itemsToGradeList').pushObject(oaGradeItemObject);
+        });
+    });
+    controller.set('isGradeLoading', false);
   },
 
   getCourseStructure() {
@@ -1003,5 +1129,50 @@ export default Ember.Controller.extend({
     });
     controller.set('studentCourseReportContext', params);
     controller.set('showCourseReport', true);
+  },
+
+  /**
+   * @function fetchOaItemsToGrade
+   * Method to fetch OA items to be graded by teacher
+   * @return {Promise}
+   */
+  fetchOaItemsToGrade() {
+    const controller = this;
+    const requestParam = {
+      classId: controller.get('class.id'),
+      type: 'oa',
+      source: 'coursemap',
+      courseId: controller.get('course.id')
+    };
+    return controller.get('rubricService').getOaItemsToGrade(requestParam);
+  },
+
+  /**
+   * Creates the grade item information for activity level
+   * @param {[]} grade item
+   * @param {item} item
+   */
+  createOaGradeItemObject: function(item) {
+    const controller = this;
+    const activityId = item.get('collectionId');
+    const contentType = item.get('collectionType');
+    const dcaContentId = item.get('dcaContentId');
+    const itemObject = Ember.Object.create();
+    const studentCount = item.get('studentCount');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      controller
+        .get('offlineActivityService')
+        .readActivity(activityId)
+        .then(function(content) {
+          itemObject.setProperties({
+            classId: controller.get('class.id'),
+            dcaContentId,
+            content,
+            contentType,
+            studentCount
+          });
+          resolve(itemObject);
+        }, reject);
+    });
   }
 });

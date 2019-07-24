@@ -19,6 +19,8 @@ export default Ember.Controller.extend({
 
   session: Ember.inject.service('session'),
 
+  rubricService: Ember.inject.service('api-sdk/rubric'),
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -87,6 +89,22 @@ export default Ember.Controller.extend({
    */
   showAllRescopedContent: false,
 
+  /**
+   * @property {UUID} userId
+   * Current logged in user Id
+   */
+  userId: Ember.computed.alias('session.userId'),
+
+  /**
+   * @property {UUID} classId
+   */
+  classId: Ember.computed.alias('studentClassController.class.id'),
+
+  /**
+   * @property {UUID} courseId
+   */
+  courseId: Ember.computed.alias('studentClassController.course.id'),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -112,5 +130,37 @@ export default Ember.Controller.extend({
     onToggleCourseInfo() {
       $('.rescope-content-preview.course-info-toggle-container').slideToggle();
     }
+  },
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function loadSelfGradeItems
+   * Method to load self grading items
+   * @return {Promise}
+   */
+  loadSelfGradeItems() {
+    const controller = this;
+    controller.fetchOaItemsToGradeByStudent().then(function(selfGradeItems) {
+      controller.set('selfGradeItems', selfGradeItems.get('gradeItems'));
+    });
+  },
+
+  /**
+   * @function fetchOaItemsToGradeByStudent
+   * Method to fetch list of OA items to be graded by student
+   * @return {Promise}
+   */
+  fetchOaItemsToGradeByStudent() {
+    const controller = this;
+    const requestParam = {
+      classId: controller.get('classId'),
+      type: 'oa',
+      source: 'coursemap',
+      courseId: controller.get('courseId'),
+      userId: controller.get('userId')
+    };
+    return controller.get('rubricService').getOaItemsToGrade(requestParam);
   }
 });

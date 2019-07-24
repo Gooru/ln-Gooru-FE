@@ -19,7 +19,7 @@ export default DS.JSONAPISerializer.extend(ConfigurationMixin, {
         studentSummaryData.student
       );
       let normalizedSummaryData = serializer.serializeSummaryData(
-        studentSummaryData.summaryData.allTime
+        studentSummaryData.summaryData
       );
       serializedStudentsSumaryReportData.pushObject(
         Ember.Object.create({

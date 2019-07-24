@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import RubricGrade from 'gooru-web/models/rubric/rubric-grade';
 import RubricCategoryScore from 'gooru-web/models/rubric/grade-category-score';
-import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import { PLAYER_EVENT_SOURCE, CONTENT_TYPES } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -26,6 +26,8 @@ export default Ember.Component.extend({
    * @type {ProfileService} Service to retrieve profile information
    */
   profileService: Ember.inject.service('api-sdk/profile'),
+
+  rubricService: Ember.inject.service('api-sdk/rubric'),
 
   session: Ember.inject.service('session'),
 
@@ -333,7 +335,6 @@ export default Ember.Component.extend({
    * Function to triggered once when the component element is first rendered.
    */
   didInsertElement() {
-    this._super(...arguments);
     this.openPullUp();
     this.initialize();
   },
@@ -346,43 +347,45 @@ export default Ember.Component.extend({
    * Function to triggered once when the component element is after rendered
    */
   didRender() {
-    this._super(...arguments);
     let component = this;
+    component.handleRubricTooltip();
     component.handleAppContainerScroll();
   },
 
   // -------------------------------------------------------------------------
   //Methods
 
+  handleRubricTooltip() {
+    const component = this;
+    component.$().on('click', function(e) {
+      if (!component.$(e.target).hasClass('grade-info-popover')) {
+        Ember.$('.popover').hide();
+      }
+    });
+  },
+
   initialize() {
     let component = this;
-    let classId = component.get('context.classId');
-    let dcaContentId = component.get('context.dcaContentId');
     return Ember.RSVP
       .hash({
-        studentList: component.get('isTeacher')
-          ? component
-            .get('classActivityService')
-            .fetchUsersForClassActivity(classId, dcaContentId)
+        users: component.get('isTeacher')
+          ? component.getGradingStudentList()
           : []
       })
-      .then(({ studentList }) => {
+      .then(({ users }) => {
         if (!component.isDestroyed) {
-          let users = studentList.filterBy('isActive', true);
           let studentId = component.get('studentId');
           if (!studentId) {
             let student = users.get('firstObject');
             component.set('student', student);
-            studentId = component.get('studentId');
+            studentId = student.get('id');
           } else {
             let student = component.get('student');
             student.set('id', studentId);
             users.pushObject(student);
           }
           return Ember.RSVP.hash({
-            submission: component
-              .get('oaAnaltyicsService')
-              .getSubmissionsToGrade(classId, dcaContentId, studentId),
+            submission: component.fetchStudentSubmissions(),
             users
           });
         }
@@ -491,7 +494,6 @@ export default Ember.Component.extend({
     let score = grade.get('score') ? grade.get('score') : 0;
     rubric.set('comment', grade.get('overallComment'));
     rubric.set('studentScore', score);
-    rubric.set('maxScore', grade.get('maxScore'));
   },
 
   /**
@@ -565,19 +567,23 @@ export default Ember.Component.extend({
       : component.get('studentRubricCategories');
     let context = component.get('context');
     let currentStudent = component.get('student');
+    let contentSource = component.get('isCourseMapGrading')
+      ? PLAYER_EVENT_SOURCE.COURSE_MAP
+      : PLAYER_EVENT_SOURCE.DAILY_CLASS;
     if (isTeacher) {
       userGrade.set('sessionId', currentStudent.get('sessionId'));
       userGrade.set('graderId', component.get('session.userId'));
     }
-    if (isTeacher && !userGrade.scoring) {
-      userGrade.set('maxScore', component.get('content.maxScore'));
-    }
+    let maxScore = isTeacher
+      ? component.get('content.maxScore')
+      : userGrade ? userGrade.get('maxScore') : null;
+    userGrade.set('maxScore', maxScore);
     let categoriesScore = Ember.A([]);
     userGrade.set('classId', context.get('classId'));
     userGrade.set('dcaContentId', context.get('dcaContentId'));
     userGrade.set('collectionId', context.get('content.id'));
-    userGrade.set('contentSource', PLAYER_EVENT_SOURCE.DAILY_CLASS);
-    userGrade.set('collectionType', PLAYER_EVENT_SOURCE.OFFLINE_CLASS);
+    userGrade.set('contentSource', contentSource);
+    userGrade.set('collectionType', CONTENT_TYPES.OFFLINE_ACTIVITY);
     categories.forEach(category => {
       let level = null;
       if (category.get('allowsLevels')) {
@@ -595,6 +601,10 @@ export default Ember.Component.extend({
     });
     userGrade.set('grader', grader);
     userGrade.set('categoriesScore', categoriesScore);
+    userGrade.set('courseId', context.get('content.courseId') || null);
+    userGrade.set('unitId', context.get('content.unitId') || null);
+    userGrade.set('lessonId', context.get('content.lessonId') || null);
+    userGrade.set('isCourseMapGrading', component.get('isCourseMapGrading'));
     component
       .get('oaAnaltyicsService')
       .submitOAGrade(userGrade)
@@ -642,6 +652,7 @@ export default Ember.Component.extend({
       collectionId: component.get('context.dcaContentId'),
       createdDate: new Date(),
       studentScore: 0,
+      maxScore: rubric ? rubric.get('maxScore') : null,
       scoring: !!rubric
     });
   },
@@ -651,26 +662,45 @@ export default Ember.Component.extend({
    */
   loadData() {
     let component = this;
-    let classId = component.get('context.classId');
-    let activityId = component.get('context.dcaContentId');
-    let studentId = component.get('studentId');
     component.set('isLoading', true);
-    component
+    component.fetchStudentSubmissions().then(submission => {
+      let studentGrade = submission.get('oaRubrics.studentGrades');
+      let teacherGrade = submission.get('oaRubrics.teacherGrades');
+      let taskSubmission = submission.get('tasks');
+      component.parseSubmissionGrade(
+        studentGrade,
+        teacherGrade,
+        submission.get('sessionId')
+      );
+      component.parseStudentTaskSubmission(taskSubmission);
+      component.set('isLoading', false);
+      component.handleCarouselControl();
+    });
+  },
+
+  /**
+   * @function fetchStudentSubmissions
+   * Method to fetch student OA submissions
+   * @return {Promise}
+   */
+  fetchStudentSubmissions() {
+    const component = this;
+    const context = component.get('context');
+    const content = context.get('content');
+    const classId = context.get('classId');
+    const contentId = context.get('dcaContentId') || content.get('id');
+    const studentId = component.get('studentId');
+    let requestParam = undefined;
+    if (component.get('isCourseMapGrading')) {
+      requestParam = {
+        courseId: content.get('courseId'),
+        unitId: content.get('unitId'),
+        lessonId: content.get('lessonId')
+      };
+    }
+    return component
       .get('oaAnaltyicsService')
-      .getSubmissionsToGrade(classId, activityId, studentId)
-      .then(submission => {
-        let studentGrade = submission.get('oaRubrics.studentGrades');
-        let teacherGrade = submission.get('oaRubrics.teacherGrades');
-        let taskSubmission = submission.get('tasks');
-        component.parseSubmissionGrade(
-          studentGrade,
-          teacherGrade,
-          submission.get('sessionId')
-        );
-        component.parseStudentTaskSubmission(taskSubmission);
-        component.set('isLoading', false);
-        component.handleCarouselControl();
-      });
+      .getSubmissionsToGrade(classId, contentId, studentId, requestParam);
   },
 
   /**
@@ -743,7 +773,8 @@ export default Ember.Component.extend({
     } else {
       component.$('.caught-up-container').show(400, function() {
         let itemsToGrade = component.get('itemsToGrade');
-        if (itemsToGrade) {
+        //remove item from items to grade list only if teacher grading for a student
+        if (itemsToGrade && component.get('isTeacher')) {
           let contentId = component.get('content.id');
           let item = itemsToGrade.findBy('content.id', contentId);
           itemsToGrade.removeObject(item);
@@ -798,6 +829,42 @@ export default Ember.Component.extend({
           )
           .removeClass('in-active');
       }
+    }
+  },
+
+  /**
+   * @function getGradingStudentList
+   * Method to get list of students to be graded
+   * @return {Promise} studentList
+   */
+  getGradingStudentList() {
+    const component = this;
+    const classId = component.get('context.classId');
+    const contentId =
+      component.get('context.dcaContentId') ||
+      component.get('context.content.id');
+    if (component.get('isCourseMapGrading')) {
+      const requestParam = {
+        classId,
+        type: 'oa',
+        source: PLAYER_EVENT_SOURCE.COURSE_MAP,
+        courseId: component.get('context.content.courseId') || null
+      };
+      return Ember.RSVP
+        .hash({
+          studentIds: component
+            .get('rubricService')
+            .getOaGradingStudents(contentId, requestParam)
+        })
+        .then(({ studentIds }) => {
+          return component
+            .get('profileService')
+            .readMultipleProfiles(studentIds.students);
+        });
+    } else {
+      return component
+        .get('classActivityService')
+        .fetchUsersForClassActivity(classId, contentId);
     }
   }
 });

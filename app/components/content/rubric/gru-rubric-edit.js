@@ -386,6 +386,7 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       tempRubric.get('categories')
     );
     tempRubric.set('maxScore', maxScore);
+    component.setScoring(tempRubric);
     let rubric = component.get('rubric');
     this.set('emptyFileError', !tempRubric.get('url'));
     tempRubric.validate().then(function({ validations }) {
@@ -449,6 +450,7 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       tempRubric.get('categories')
     );
     tempRubric.set('maxScore', maxScore);
+    component.setScoring(tempRubric);
     return component.get('rubricService').updateRubric(tempRubric);
   },
 
@@ -471,6 +473,18 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
       });
     }
     return maxScore > 0 ? maxScore : null;
+  },
+
+  /**
+   * @param {Object} rubric
+   */
+  setScoring(rubric) {
+    let maxScore = rubric.get('maxScore');
+    if (maxScore > 0) {
+      rubric.set('scoring', true);
+    } else {
+      rubric.set('scoring', false);
+    }
   },
 
   /**

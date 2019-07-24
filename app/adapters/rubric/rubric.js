@@ -509,6 +509,43 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * @function getOaItemsToGrade
+   * Method to get list of items grade
+   * @param {Object} requestParam
+   * @return {Promise}
+   */
+  getOaItemsToGrade(requestParam) {
+    const adapter = this;
+    const url = `${adapter.get('gradingNamespace')}/items`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      data: requestParam,
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * @function getOaItemsToGrade
+   * Method to get list of items grade
+   * @param {UUID} itemId
+   * @param {Object} requestParam
+   * @return {Promise}
+   */
+  getOaGradingStudents(itemId, requestParam) {
+    const adapter = this;
+    const url = `${adapter.get('gradingNamespace')}/items/${itemId}/students`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      data: requestParam,
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

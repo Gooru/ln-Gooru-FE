@@ -137,7 +137,9 @@ export default Ember.Component.extend({
   didValidate: false,
 
   isMaxLength: computed('value.length', 'maxLength', function() {
-    return this.get('value.length') >= this.get('maxLength');
+    const maxLen = this.get('maxLength');
+    if (maxLen) {return this.get('value.length') >= this.get('maxLength');}
+    else {return false;} // no maxLength limit set...so return false
   }),
 
   /**

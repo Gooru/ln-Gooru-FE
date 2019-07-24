@@ -13,7 +13,11 @@
       </div>
       <div class="domain-sequence">
         {{#each taxonomyDomains as |taxonomyDomain index |}}
-          <li class="domain-counts" title="{{locale-translation (t (concat 'domain-code.' taxonomyDomain.domainCode)) taxonomyDomain.domainName}}" data-toggle="tooltip">
+          <li class="domain-counts"
+          title="{{locale-translation (t (concat 'domain-code.' taxonomyDomain.domainCode)) taxonomyDomain.domainName}}"
+          data-toggle="tooltip"
+          style="width:{{cellWidth}}px"
+          >
             {{taxonomyDomain.domainSeq}}
           </li>
         {{/each}}

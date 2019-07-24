@@ -90,11 +90,12 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   getRescopedContents(courseIdContext) {
     let component = this;
-    return Ember.RSVP.hash({
-      rescopedContents: component
-        .get('rescopeService')
-        .getSkippedContents(courseIdContext)
-    })
+    return Ember.RSVP
+      .hash({
+        rescopedContents: component
+          .get('rescopeService')
+          .getSkippedContents(courseIdContext)
+      })
       .then(rescopedContents => {
         return rescopedContents.rescopedContents;
       })
@@ -116,5 +117,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('gradeSubject', model.gradeSubject);
     controller.set('milestones', model.milestones);
     controller.get('studentClassController').selectMenuItem('course-map');
+    controller.loadSelfGradeItems();
   }
 });

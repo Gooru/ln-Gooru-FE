@@ -135,6 +135,56 @@
         margin-left: 15px;
       }
 
+      .template-sec-cont {
+        .assessment-template-label {
+          height: 15px;
+          text-transform: uppercase;
+          margin: 15px;
+          @extend .white-font-label;
+        }
+
+        .assessment-template-sec {
+          display: grid;
+          grid-template-areas: "title button" "info info";
+          align-items: center;
+          grid-gap: 10px;
+          padding-bottom: 10px;
+          grid-template-rows: 54px;
+          padding-left: 20px;
+          @extend .sec-panel;
+          @extend .font-base;
+          color: $gray-dove;
+
+          .sec-title {
+            grid-area: title;
+            font-size: 14px;
+            font-weight: bold;
+          }
+
+          .gru-i2d-template {
+            grid-area: button;
+            display: flex;
+            justify-content: flex-end;
+            height: 100%;
+
+            .i2d-template-container {
+              width: 100%;
+              height: 100%;
+
+              button {
+                width: 100%;
+                height: 100%;
+                text-transform: uppercase;
+              }
+            }
+          }
+
+          .info-msg {
+            grid-area: info;
+          }
+        }
+      }
+
       .class-sec-cont {
         .class-settings-label {
           width: 94px;
@@ -391,13 +441,16 @@
               cursor: pointer;
               justify-content: left;
               width: max-content;
+
               .add-co-teacher-icon {
                 height: 25px;
+
                 i.gru-icon {
                   font-size: 22px;
                   line-height: 25px;
                 }
               }
+
               .add-co-teacher-label {
                 font-size: 14px;
                 color: #29323a;
@@ -556,14 +609,14 @@
             }
           }
 
-          .route-class-setting,
-          .force-calculate-ilp-class-setting {
+          .force-calculate-ilp-class-setting,
+          .route-class-setting {
             padding-top: 10px;
             align-items: center;
             height: auto;
 
-            .route-class-icon,
-            .force-calculate-ilp-class-icon {
+            .force-calculate-ilp-class-icon,
+            .route-class-icon {
               display: inline;
               width: 22px;
               height: 30px;
@@ -573,12 +626,13 @@
               background-image: url("gooru/sort-horizontal.svg");
             }
 
-            .route-class-label,
-            .force-calculate-ilp-class-label {
+            .force-calculate-ilp-class-label,
+            .route-class-label {
               width: 287px;
               font-family: Lato;
               font-size: 13px;
               flex: 1;
+
               p {
                 margin: 0;
                 padding: 0;

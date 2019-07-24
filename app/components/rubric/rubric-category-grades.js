@@ -41,7 +41,6 @@ export default Ember.Component.extend({
    * Function to triggered once when the component element is after rendered
    */
   didRender() {
-    this._super(...arguments);
     let component = this;
     component.setupTooltip();
     if (component.get('isReadOnly')) {
@@ -138,7 +137,7 @@ export default Ember.Component.extend({
         $(this).popover('show');
         if (category.get('allowsScoring')) {
           let scoreInPrecentage = Math.floor(
-            level.get('score') / totalPoints * 100
+            (level.get('score') / totalPoints) * 100
           );
           Ember.$('.popover-title').css(
             'background-color',

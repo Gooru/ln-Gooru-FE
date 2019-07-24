@@ -35,7 +35,7 @@
                 {{validation.gru-input model=model valuePath='title' maxLength=50 didValidate=didValidate}}
             </div>
             <span>{{t 'common.description' }}</span>
-            {{validation.gru-textarea model=model content=model.description valuePath='description' rows=2 maxLength=500 didValidate=didValidate}}
+            {{validation/gru-textarea model=model content=model.description valuePath='description' rows=4 didValidate=didValidate}}
             {{#if model.id}}
                 {{content.activity.task.gru-submissions submissions=model.oaTaskSubmissions oaId=oaId oaTaskId=model.id }}
             {{/if}}

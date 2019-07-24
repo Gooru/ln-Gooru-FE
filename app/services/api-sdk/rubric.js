@@ -50,10 +50,12 @@ export default Ember.Service.extend({
   createRubric: function(rubric) {
     var data = this.get('serializer').serializeCreateRubric(rubric);
 
-    return this.get('adapter').createRubric(data).then(function(rubricId) {
-      rubric.set('id', rubricId);
-      return rubricId;
-    });
+    return this.get('adapter')
+      .createRubric(data)
+      .then(function(rubricId) {
+        rubric.set('id', rubricId);
+        return rubricId;
+      });
   },
 
   /**
@@ -92,9 +94,12 @@ export default Ember.Service.extend({
    */
   getRubric: function(rubricId) {
     const service = this;
-    return service.get('adapter').getRubric(rubricId).then(function(data) {
-      return service.get('serializer').normalizeRubric(data);
-    });
+    return service
+      .get('adapter')
+      .getRubric(rubricId)
+      .then(function(data) {
+        return service.get('serializer').normalizeRubric(data);
+      });
   },
 
   /**
@@ -104,9 +109,12 @@ export default Ember.Service.extend({
    */
   getUserRubrics: function(userId) {
     const service = this;
-    return service.get('adapter').getUserRubrics(userId).then(function(data) {
-      return service.get('serializer').normalizeGetRubrics(data);
-    });
+    return service
+      .get('adapter')
+      .getUserRubrics(userId)
+      .then(function(data) {
+        return service.get('serializer').normalizeGetRubrics(data);
+      });
   },
 
   /**
@@ -155,7 +163,6 @@ export default Ember.Service.extend({
       .then(data => service.get('serializer').normalizeQuestionsToGrade(data));
   },
 
-
   /**
    * Returns the list of Students for a Question to be graded
    * @param {string} questionId
@@ -195,12 +202,16 @@ export default Ember.Service.extend({
     const service = this;
     return service
       .get('adapter')
-      .getDCAStudentsForQuestion(questionId, classId, collectionId, activityDate)
+      .getDCAStudentsForQuestion(
+        questionId,
+        classId,
+        collectionId,
+        activityDate
+      )
       .then(data =>
         service.get('serializer').normalizeStudentsForQuestion(data)
       );
   },
-
 
   /**
    * Returns Answer for Rubric Grading
@@ -282,7 +293,9 @@ export default Ember.Service.extend({
    * @returns {Promise|RubricGrade} returns the rubric model with the newly assigned ID
    */
   setStudentRubricGradesForDCA: function(rubricGrade) {
-    var data = this.get('serializer').serializeStudentRubricGradesForDCA(rubricGrade);
+    var data = this.get('serializer').serializeStudentRubricGradesForDCA(
+      rubricGrade
+    );
     return this.get('adapter').setStudentRubricGrades(data);
   },
 
@@ -349,5 +362,44 @@ export default Ember.Service.extend({
       .then(data =>
         service.get('serializer').normalizeRubricQuestionSummary(data)
       );
+  },
+
+  /**
+   * @function getOaItemsToGrade
+   * Method to get OA items to grade
+   * @param {Object} requestParam
+   * @return {Promise}
+   */
+  getOaItemsToGrade(requestParam) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('adapter')
+        .getOaItemsToGrade(requestParam)
+        .then(responsePayload => {
+          resolve(
+            service.get('serializer').normalizeOaItemsToGrade(responsePayload)
+          );
+        }, reject);
+    });
+  },
+
+  /**
+   * @function getOaGradingStudents
+   * Method to get List of students to be graded
+   * @param {UUID} oaId
+   * @param {Object} requestParam
+   * @return {Promise}
+   */
+  getOaGradingStudents(oaId, requestParam) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('adapter')
+        .getOaGradingStudents(oaId, requestParam)
+        .then(responsePayload => {
+          resolve(responsePayload);
+        }, reject);
+    });
   }
 });

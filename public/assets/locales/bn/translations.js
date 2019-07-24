@@ -82,6 +82,26 @@ window.i18ln = {
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'গড় স্কোর',
   'common.frq': 'frq',
+  'common.add-data-choice-title': 'How do you want to enter the data?',
+  'common.take-photo': 'take photo',
+  'common.upload-image': 'upload image',
+  'common.by-question': 'question-by-question',
+  'i2d.conversion-progress':
+    'The uploaded image(s) are being processed. Please check back later',
+  'i2d.conversion-error':
+    'There was an error when trying to convert the image. Please resubmit the image',
+  'file-picker-placeholder': 'Choose a file or drag it here',
+  'no-preview-available': 'no preview available',
+  'common.success': 'Success',
+  'i2d-successfully-image-upload':
+    'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
+  'common.dialog-close': 'Do you want to close ?',
+  'upload-success': 'Uploaded Successfully',
+  'mobile-camera-placeholder': 'Tap for image upload',
+  'i2d.mobile-upload-failed': 'There was a error',
+  'i2d.upload-failed':
+    'There was an error while uploading this image. Re-upload?',
+  're-upload': 'Re-Upload',
   'common.tasks': 'tasks',
   'common.schedule': 'তফসিল',
   'common.responses': 'প্রতিক্রিয়া',
@@ -296,6 +316,10 @@ window.i18ln = {
   'common.domain': 'ডোমেইন',
   'common.domains': 'ডোমেইনের',
   'common.download': 'ডাউনলোড',
+  'common.template': 'Template',
+  'assessment-template-msg':
+    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
+  'common.code': 'Code',
   'common.download-print': 'ডাউনলোড / মুদ্রণ',
   'common.drag-drop-suggestions': 'বা ড্র্যাগ এবং ড্রপ পরামর্শ ...',
   'common.download-report': 'ডাউনলোড রিপোর্ট',
@@ -2658,5 +2682,9 @@ window.i18ln = {
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
   'report.class-weekly-report': 'Class Weekly Report',
-  'no-teacher-found': 'No teacher with that email id found!'
+  'no-teacher-found': 'No teacher with that email id found!',
+  'oa-player.complete-confirm':
+    'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',
+  'oa-player.mark-complete': 'Mark Complete',
+  'no.content.assoc.fw': 'Currently no content associated with this framework.'
 };

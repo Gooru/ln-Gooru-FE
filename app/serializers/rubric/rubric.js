@@ -103,7 +103,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
             return serializer.serializedUpdateRubricCategory(category);
           })
           : null,
-        max_score: model.get('maxScore')
+        max_score: model.get('maxScore'),
+        scoring: model.get('scoring')
       };
     } else {
       return {
@@ -462,6 +463,32 @@ export default Ember.Object.extend(ConfigurationMixin, {
       levelMaxScore: Number(data.level_max_score),
       levelScore: Number(data.level_score),
       levelComment: data.level_comment
+    });
+  },
+
+  normalizeOaItemsToGrade(responsePayload) {
+    const serializer = this;
+    let normalizedGradeItems = Ember.Object.create({});
+    if (responsePayload) {
+      normalizedGradeItems.set('studentId', responsePayload.studentId);
+      let oaGradeItems = Ember.A([]);
+      responsePayload.gradeItems.map(gradeItem => {
+        oaGradeItems.pushObject(serializer.normalizeOaGradeItem(gradeItem));
+      });
+      normalizedGradeItems.set('gradeItems', oaGradeItems);
+    }
+    return normalizedGradeItems;
+  },
+
+  normalizeOaGradeItem(gradeItem) {
+    return Ember.Object.create({
+      collectionId: gradeItem.collectionId,
+      collectionTitle: gradeItem.collectionTitle,
+      collectionType: gradeItem.collectionType,
+      lessonId: gradeItem.lessonId,
+      lessonTitle: gradeItem.lessonTitle,
+      unitId: gradeItem.unitId,
+      unitTitle: gradeItem.unitTitle
     });
   }
 });

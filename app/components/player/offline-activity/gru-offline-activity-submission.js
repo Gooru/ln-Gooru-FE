@@ -3,19 +3,22 @@ import {
   getTimeInMillisec,
   formatTime as formatTimeInMilliSec
 } from 'gooru-web/utils/utils';
+import { ROLES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['offline-activity-player', 'gru-offline-activity-submission'],
 
-  classNameBindings: ['isPreview:player-preview'],
+  classNameBindings: ['isPreview:player-preview', 'isOaCompleted:oa-completed'],
 
   // -------------------------------------------------------------------------
   // Dependencies
   oaAnalyticsService: Ember.inject.service(
     'api-sdk/offline-activity/oa-analytics'
   ),
+
+  oaService: Ember.inject.service('api-sdk/offline-activity/offline-activity'),
 
   session: Ember.inject.service('session'),
 
@@ -24,6 +27,9 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     component.loadTaskSubmissionData();
+    if (!component.get('isTeacher')) {
+      component.doCheckOaCompleted();
+    }
   },
 
   actions: {
@@ -39,11 +45,51 @@ export default Ember.Component.extend({
       const component = this;
       component.set('isTimespentExpanded', false);
       component.$('.timespent-container').slideUp();
+    },
+
+    //Action triggered when click on complete submission
+    onCompleteSubmission() {
+      const component = this;
+      component.markOACompleted().then(function() {
+        component.set('isOaCompleted', true);
+        component.set('isShowCompletionConfirmation', false);
+      });
+    },
+
+    //Action triggered when click on cancel button in the confirmation popup
+    onCancelCompletion() {
+      this.set('isShowCompletionConfirmation', false);
+    },
+
+    //Action triggered when click on confirm/yes button in the confirmation popup
+    onShowCompletionConfirmation() {
+      const component = this;
+      component.set('isShowCompletionConfirmation', true);
     }
   },
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {UUID} classId
+   */
+  classId: null,
+
+  /**
+   * @property {UUID} classId
+   */
+  courseId: null,
+
+  /**
+   * @property {UUID} classId
+   */
+  unitId: null,
+
+  /**
+   * @property {UUID} classId
+   */
+  lessonId: null,
 
   /**
    * @property {UUID} userId
@@ -103,6 +149,59 @@ export default Ember.Component.extend({
    * Property to show the player in read only mode or not
    */
   isPreview: false,
+
+  /**
+   * @property {String} contentSource
+   * Assign DCA player event source as default
+   */
+  contentSource: PLAYER_EVENT_SOURCE.DAILY_CLASS,
+
+  /**
+   * @property {Boolean} isShowCompletionConfirmation
+   * Property to check whether to show or not the completeion confirmation popup
+   */
+  isShowCompletionConfirmation: false,
+
+  /**
+   * @property {Boolean} isOaCompleted
+   * Property to evaluate whether the OA is completed or not
+   */
+  isOaCompleted: false,
+
+  /**
+   * @property {UUID} oaId
+   * Property for active Offline Activity UUID
+   */
+  oaId: Ember.computed.alias('offlineActivity.id'),
+
+  /**
+   * @property {Boolean} isEnableCompletionButton
+   * Property to check whether to enable or not the mark complete button
+   */
+  isEnableCompletionButton: Ember.computed(
+    'activityTasks.@each.isAddedMandatorySubmission',
+    'activityTasks.@each.isTaskSubmitted',
+    function() {
+      const component = this;
+      const activityTasks = component.get('activityTasks') || Ember.A([]);
+      const isInCompleteTaskAvailable = activityTasks.filter(
+        task => !task.isAddedMandatorySubmission
+      );
+      const isUnSubmittedTaskAvailable = activityTasks.filter(
+        task => !task.isTaskSubmitted
+      );
+      return !(
+        isInCompleteTaskAvailable.length || isUnSubmittedTaskAvailable.length
+      );
+    }
+  ),
+
+  /**
+   * @property {String} timeZone
+   */
+  timeZone: Ember.computed(function() {
+    return moment.tz.guess() || null;
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -172,17 +271,41 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function doCheckOaCompleted
+   * Method to check whether the OA is completed by the student or not
+   */
+  doCheckOaCompleted() {
+    const component = this;
+    return component.fetchOaCompletedStudents().then(function(students) {
+      const userId = component.get('userId');
+      let isCompletedByStudent = students.includes(userId);
+      component.set('isOaCompleted', isCompletedByStudent);
+    });
+  },
+
+  /**
    * @function fetchTasksSubmissions
    * Method to fetch student submitted oa task data
    */
   fetchTasksSubmissions() {
     const component = this;
     const classId = component.get('classId');
-    const caContentId = component.get('caContentId');
+    const oaId = component.get('caContentId') || component.get('oaId');
     const userId = component.get('userId');
+    let dataParam = undefined;
+    if (component.get('isStudyPlayer')) {
+      const courseId = component.get('courseId');
+      const unitId = component.get('unitId');
+      const lessonId = component.get('lessonId');
+      dataParam = {
+        courseId,
+        unitId,
+        lessonId
+      };
+    }
     return component
       .get('oaAnalyticsService')
-      .getSubmissionsToGrade(classId, caContentId, userId);
+      .getSubmissionsToGrade(classId, oaId, userId, dataParam);
   },
 
   /**
@@ -224,5 +347,64 @@ export default Ember.Component.extend({
         hour > 0 ? minute >= 0 && minute < 60 : minute > 0 && minute <= 60;
     }
     return isValidTimeSpent;
+  },
+
+  /**
+   * @function markOACompleted
+   * @return {Promise}
+   * Method to update the OA status for active student
+   */
+  markOACompleted() {
+    const component = this;
+    const classId = component.get('classId');
+    const caContentId = component.get('caContentId');
+    const oaId = component.get('oaId');
+    const contentSource = component.get('contentSource');
+    const studentId = component.get('userId');
+    const oaData = {
+      class_id: classId,
+      oa_id: oaId,
+      content_source: contentSource,
+      student_id: studentId,
+      marked_by: ROLES.STUDENT,
+      path_id: 0,
+      path_type: null,
+      time_zone: component.get('timeZone')
+    };
+    if (component.get('isStudyPlayer')) {
+      oaData.course_id = component.get('courseId');
+      oaData.unit_id = component.get('unitId');
+      oaData.lesson_id = component.get('lessonId');
+    } else {
+      oaData.oa_dca_id = parseInt(caContentId);
+    }
+    return component.get('oaService').updateOACompleted(oaData);
+  },
+
+  /**
+   * @function fetchOaCompletedStudents
+   * @return {Promise}
+   * Method to get list of students who have marked an OA as completed
+   */
+  fetchOaCompletedStudents() {
+    const component = this;
+    const classId = component.get('classId');
+    const oaId = component.get('oaId');
+    //content Id will be undefined to treat it as a CM request
+    const caContentId = component.get('caContentId') || undefined;
+    const courseId = component.get('courseId');
+    const unitId = component.get('unitId');
+    const lessonId = component.get('lessonId');
+    let dataParam = null;
+    if (component.get('isStudyPlayer')) {
+      dataParam = {
+        courseId,
+        unitId,
+        lessonId
+      };
+    }
+    return component
+      .get('oaAnalyticsService')
+      .getOaCompletedStudents(classId, oaId, caContentId, dataParam);
   }
 });
