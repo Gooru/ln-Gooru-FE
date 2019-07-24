@@ -109,9 +109,9 @@
             {{/if}}
           </div>
         </div>
-        <div class="mastery-accrual">
-          {{#if (and showMasteryAccrual item.masteryAccrualCompetencies)}}
-            <div class="mastery-accrual-btn {{if (or activity.isCompleted (and (not isOfflineActivity) isActivityPast)) 'disable-event'}}" {{action "onUpdateMasteryAccrual"}}>
+        <div class="mastery-accrual" data-toggle="tooltip" title="{{if (and (not showMasteryAccrual) item.masteryAccrualCompetencies) (t 'teacher-landing.class.class-activities-tab.add-subject-framework')}}">
+          {{#if item.masteryAccrualCompetencies}}
+            <div class="mastery-accrual-btn {{unless showMasteryAccrual 'show-warning'}} {{if (or activity.isCompleted (and (not isOfflineActivity) isActivityPast)) 'disable-event'}}" {{action "onUpdateMasteryAccrual"}}>
               <span class="mastery-accrual-icon mastery-accrual-{{if classActivity.allowMasteryAccrual 'checked' 'unchecked'}}">
                 {{gru-icon name=(concat 'radio_button_' (if  classActivity.allowMasteryAccrual 'checked' 'unchecked'))}}
               </span>
