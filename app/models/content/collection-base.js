@@ -113,6 +113,11 @@ export default (function() {
     standards: [],
 
     /**
+     * @property {aggregatedTag[]} aggregatedTag - The collection aggregatedTag information
+     */
+    aggregatedTag: [],
+
+    /**
      * @property {Number[]} Array with the centurySkills ids
      */
     centurySkills: [],
