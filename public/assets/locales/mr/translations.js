@@ -29,19 +29,26 @@ window.i18ln = {
   'errors.present': '{{description}} रिक्त असणे आवश्यक आहे',
   'errors.collection': '{{description}} हा संग्रह असणे आवश्यक आहे',
   'errors.singular': '{{description}} हा संग्रह असू शकत नाही',
-  'errors.tooLong': '{{description}} खूपच मोठे आहे (कमाल अक्षर मर्यादा {{max}} आहे)',
-  'errors.tooShort': '{{description}} खूप लहान आहे (किमान अक्षर मर्यादा {{min}} आहे)',
+  'errors.tooLong':
+    '{{description}} खूपच मोठे आहे (कमाल अक्षर मर्यादा {{max}} आहे)',
+  'errors.tooShort':
+    '{{description}} खूप लहान आहे (किमान अक्षर मर्यादा {{min}} आहे)',
   'errors.before': '{{before}} च्या आधी {{description}} असणे आवश्यक आहे ',
   'errors.after': '{{after}} च्या नंतर {{description}} असणे आवश्यक आहे',
-  'errors.wrongDateFormat': ' {{format}} च्या स्वरूपात  {{description}} असणे आवश्यक आहे',
-  'errors.wrongLength': '{{description}} अक्षर मर्यादा अधिक आहे ({{is}}अक्षरे असली पाहिजेत)',
+  'errors.wrongDateFormat':
+    ' {{format}} च्या स्वरूपात  {{description}} असणे आवश्यक आहे',
+  'errors.wrongLength':
+    '{{description}} अक्षर मर्यादा अधिक आहे ({{is}}अक्षरे असली पाहिजेत)',
   'errors.notANumber': '{{description}} एक संख्या असणे आवश्यक आहे',
   'errors.notAnInteger': '{{description}} हा पूर्णांक असणे आवश्यक आहे',
-  'errors.greaterThan': '{{description}} हा {{gt}} पेक्षा जास्त असणे आवश्यक आहे',
-  'errors.greaterThanOrEqualTo': '{{description}} हा {{gte} पेक्षा मोठे किंवा त्यासमान असणे आवश्यक आहे',
+  'errors.greaterThan':
+    '{{description}} हा {{gt}} पेक्षा जास्त असणे आवश्यक आहे',
+  'errors.greaterThanOrEqualTo':
+    '{{description}} हा {{gte} पेक्षा मोठे किंवा त्यासमान असणे आवश्यक आहे',
   'errors.equalTo': ' {{description}} हा {{is}} च्या बरोबरीने असणे आवश्यक आहे',
   'errors.lessThan': '{{description}} हा {{lt}} पेक्षा कमी असणे आवश्यक आहे',
-  'errors.lessThanOrEqualTo': '{{description}} हे {{lte}} पेक्षा कमी किंवा त्यासमान असणे आवश्यक आहे',
+  'errors.lessThanOrEqualTo':
+    '{{description}} हे {{lte}} पेक्षा कमी किंवा त्यासमान असणे आवश्यक आहे',
   'errors.otherThan': '{{description}} हा {{value}} पेक्षा इतर असणे आवश्यक आहे',
   'errors.odd': '{{description}} विषम असला पाहिजे',
   'errors.even': '{{description}} सम असला पाहिजे',
@@ -96,9 +103,12 @@ window.i18ln = {
   'common.frq': 'फ्रॅक',
   'common.schedule': 'वेळापत्रक',
   'common.responses': 'प्रतिसाद',
-  'ca.student.no-content': 'शिक्षकाने आजच्या दिवसासाठी कोणतीही क्रिया नियुक्त केलेली नाही',
-  'oa.student.no-active-content': 'सध्या सक्रीय आहेत अशी कोणतीही नवीन ऑफलाईन क्रिया तुमच्यासाठी नियुक्त केलेली नाही',
-  'oa.student.no-completed-content': 'अशा कोणत्याही ऑफलाईन क्रिया नाही ज्या पूर्ण झाल्या आहेत.',
+  'ca.student.no-content':
+    'शिक्षकाने आजच्या दिवसासाठी कोणतीही क्रिया नियुक्त केलेली नाही',
+  'oa.student.no-active-content':
+    'सध्या सक्रीय आहेत अशी कोणतीही नवीन ऑफलाईन क्रिया तुमच्यासाठी नियुक्त केलेली नाही',
+  'oa.student.no-completed-content':
+    'अशा कोणत्याही ऑफलाईन क्रिया नाही ज्या पूर्ण झाल्या आहेत.',
   'common.no-lesson-info-message': 'या युनिटमध्ये काही धडे आहेत.',
   'common.no-collection-info-message': 'या धड्यात काही संग्रह आहेत.',
   'common.gooru-suggestions': 'गुरूच्या सूचना',
@@ -106,9 +116,11 @@ window.i18ln = {
   'common.suggestion-made-to': 'ला सूचना केले',
   'common.student-selected': 'विद्यार्थी निवडले',
   'self-grade.not-required': 'विद्यार्थ्यांची स्वयं-गुणवारी आवश्यक नाही',
-  'common.no-suggest-result-message': 'तुम्ही शोधत आहात त्याच्याशी साम्य असणारा मजकूर सापडला नाही',
+  'common.no-suggest-result-message':
+    'तुम्ही शोधत आहात त्याच्याशी साम्य असणारा मजकूर सापडला नाही',
   'common.no-suggest-results-message': 'आपण संबंधित सामग्री शोधून मिळवू शकता.',
-  'common.no-suggest-search-results-message': 'तुम्ही शोधण्यासाठी वापरलेले शब्द तपासा. त्या शब्दांसाठी पर्यायी शब्द वापरून पुन्हा प्रयत्न करा.',
+  'common.no-suggest-search-results-message':
+    'तुम्ही शोधण्यासाठी वापरलेले शब्द तपासा. त्या शब्दांसाठी पर्यायी शब्द वापरून पुन्हा प्रयत्न करा.',
   'common.a-collection': 'एक संग्रह',
   'common.a-course': 'एक कोर्स',
   'common.a-question': 'एक प्रश्न',
@@ -124,7 +136,8 @@ window.i18ln = {
   'common.add': 'जोडा',
   'common.plan-an-activities': 'तुमच्या कार्याचे नियोजन ठरवा',
   'common.plan-activities': 'कार्याचे नियोजन ठरवा',
-  'common.plan-an-activities-msg': 'वर्गात घेण्यासाठीचे उपक्रम जोडा. आपल्या उपक्रमाचे नियोजन करण्यासाठी वर दिलेल्या संग्रह किंवा मुल्यांकन चिन्हावर क्लिक करा.',
+  'common.plan-an-activities-msg':
+    'वर्गात घेण्यासाठीचे उपक्रम जोडा. आपल्या उपक्रमाचे नियोजन करण्यासाठी वर दिलेल्या संग्रह किंवा मुल्यांकन चिन्हावर क्लिक करा.',
   'common.Reschedule': 'पुनर्नियोजन',
   'common.no-unschedule-items': 'नियोजन करण्यसाठी उपक्रम उपलब्ध नाही',
   'common.repeat-activity': 'उपक्रम पुन्हा घ्या',
@@ -134,7 +147,8 @@ window.i18ln = {
   'common.add-collection': 'नवीन संकलन तयार करा',
   'common.add-collection-item': 'स्रोत किंवा प्रश्न तयार करा',
   'common.add-competency': 'क्षमता जोडा',
-  'common.add-content-prompt': 'आपण <span>{{type}}</span> अजून तयार केले नाही ,चला बिनधास्त तयार करा.',
+  'common.add-content-prompt':
+    'आपण <span>{{type}}</span> अजून तयार केले नाही ,चला बिनधास्त तयार करा.',
   'common.add-course': 'नवीन अभ्यासक्रम तयार करा',
   'common.add-coruse-to-class': 'अभ्यासक्रम जोडा',
   'common.add-domains-to-unit': 'युनिटमध्ये डोमेन्स जोडा',
@@ -154,8 +168,10 @@ window.i18ln = {
   'common.add-to': 'मध्ये जोडा',
   'common.add-to-classroom': 'वर्गामध्ये जोडा',
   'common.add-to-daily-class': 'वर्गाच्या दैनंदिन कामकाजामध्ये सामील करा',
-  'common.add-to-collection-success': 'आपण {{contentTitle}} ला {{collectionTitle}} वर जोडले आहे. आपण {{collectionType}} संपादित करू इच्छिता?',
-  'common.add-to-lesson-success': 'आपण {{collectTitle}} {{lessonTitle}} वर जोडले आहे आपण {{collectionType}} संपादित करू इच्छिता?',
+  'common.add-to-collection-success':
+    'आपण {{contentTitle}} ला {{collectionTitle}} वर जोडले आहे. आपण {{collectionType}} संपादित करू इच्छिता?',
+  'common.add-to-lesson-success':
+    'आपण {{collectTitle}} {{lessonTitle}} वर जोडले आहे आपण {{collectionType}} संपादित करू इच्छिता?',
   'common.add-type-question': 'आपण कोणत्या प्रकारचा प्रश्न जोडू इच्छिता?',
   'common.add-type-resource': 'हे कशा प्रकारचे साधन आहे?',
   'common.add-units': 'एकके जोडा',
@@ -166,11 +182,13 @@ window.i18ln = {
   'common.answer': 'तुमचे उत्तर',
   'common.answer-correct': 'आपण बरोबर आहात!',
   'common.answer-incorrect': 'आपण चुकीचे आहात ...',
-  'common.answer-key-was-hidden': 'टीप: आपल्या शिक्षकाने उत्तर पत्रिका लपवली आहे.',
+  'common.answer-key-was-hidden':
+    'टीप: आपल्या शिक्षकाने उत्तर पत्रिका लपवली आहे.',
   'common.approved': 'मंजूर',
   'common.archive': 'संग्रह',
   'common.assessment': 'मूल्यांकन',
-  'common.assessment-disabled': 'आपण हे मूल्यांकन सोडवण्याचा प्रयत्न करू शकत नाही',
+  'common.assessment-disabled':
+    'आपण हे मूल्यांकन सोडवण्याचा प्रयत्न करू शकत नाही',
   'common.assessment-external': 'बाह्य मूल्यांकन',
   'common.assessment-pl.zero': 'मूल्यांकन',
   'common.assessment-pl.one': 'मूल्यांकन',
@@ -200,8 +218,10 @@ window.i18ln = {
   'common.biography': 'जीवनचरित्र',
   'common.bookmark': 'बुकमार्क',
   'common.bookmarks': 'बुकमार्क्स',
-  'common.bookmarked-content-success': 'बुकमार्क केलेले {{contentType} हे आपल्या स्वतंत्र शिक्षण पृष्ठावर जोडले जाईल.',
-  'common.bookmarked-success': 'सर्व बुकमार्क सामग्री स्वतंत्र शिक्षण पृष्ठावर जोडली जाईल.',
+  'common.bookmarked-content-success':
+    'बुकमार्क केलेले {{contentType} हे आपल्या स्वतंत्र शिक्षण पृष्ठावर जोडले जाईल.',
+  'common.bookmarked-success':
+    'सर्व बुकमार्क सामग्री स्वतंत्र शिक्षण पृष्ठावर जोडली जाईल.',
   'common.builder': 'संपादक',
   'common.cancel': 'रद्द करा',
   'common.categories': 'श्रेण्या',
@@ -235,7 +255,8 @@ window.i18ln = {
   'common.content': 'सामग्री',
   'common.content-manager': 'सामग्री व्यवस्थापक',
   'common.contentUnavailable': 'सामग्री उपलब्ध नाही',
-  'common.contentUnavailabletoday': 'कोणतीही वर्तमान कार्ये नाहीत. अभ्यासक्रमातून किंवा माझी सामग्री यातून  वर्ग कार्ये जोडा.',
+  'common.contentUnavailabletoday':
+    'कोणतीही वर्तमान कार्ये नाहीत. अभ्यासक्रमातून किंवा माझी सामग्री यातून  वर्ग कार्ये जोडा.',
   'common.contentUnavailableyesterday': 'कोणतेही कार्ये जोडलेली नाही.',
   'common.contributed-by': 'द्वारा योगदान',
   'common.copy': 'कॉपी करा',
@@ -248,12 +269,17 @@ window.i18ln = {
   'common.self-graded': 'स्व-श्रेणीबद्ध',
   'common.rubric-grade': 'मथळ्याची श्रेणी',
   'common.brief': 'संक्षिप्त',
-  'common.update-grade-score': 'आपले FRQ पूर्ण करण्यासाठी स्तर गुण अद्ययावत करा.',
-  'common.answer-this-rubric': 'आपल्या FRQ पूर्ण करण्यासाठी या मथळ्याचे उत्तर द्या.',
-  'common.answer-this-activity': 'तुमचे कार्य पूर्ण करण्यासाठी या मथळ्याचे उत्तर द्या.',
+  'common.update-grade-score':
+    'आपले FRQ पूर्ण करण्यासाठी स्तर गुण अद्ययावत करा.',
+  'common.answer-this-rubric':
+    'आपल्या FRQ पूर्ण करण्यासाठी या मथळ्याचे उत्तर द्या.',
+  'common.answer-this-activity':
+    'तुमचे कार्य पूर्ण करण्यासाठी या मथळ्याचे उत्तर द्या.',
   'common.all-caught-up': 'तुम्ही काम पूर्ण केलं आहे!',
-  'common.no-users-to-grade': 'या FRQ चे गुणांकन करण्यासाठी कोणतेही वापरकर्ते उपलब्ध नाहीत.',
-  'common.no-users-to-grade-oa': 'या ऑफलाईन क्रियेला गुणांकन करण्यासाठी कोणतेही वापरकर्ते उपलब्ध नाहीत.',
+  'common.no-users-to-grade':
+    'या FRQ चे गुणांकन करण्यासाठी कोणतेही वापरकर्ते उपलब्ध नाहीत.',
+  'common.no-users-to-grade-oa':
+    'या ऑफलाईन क्रियेला गुणांकन करण्यासाठी कोणतेही वापरकर्ते उपलब्ध नाहीत.',
   'common.rubric-needs-grading': 'मथळ्यासाठी मुल्यांकन गरजेचे आहे',
   'common.not-answered': 'उत्तर दिले नाही',
   'common.rubric-not-answered': 'मथळ्याचे उत्तर दिले नाही',
@@ -276,8 +302,10 @@ window.i18ln = {
   'common.currently-studying': 'सध्या अभ्यास करत आहे',
   'common.date': 'तारीख',
   'common.delete': 'हटवा',
-  'common.delete-instructions.links-inaccessible': 'सर्व शेअर लिंक्स पाहू शकता येणार नाहीत',
-  'common.delete-instructions.content-inaccessible': 'त्याच्याशी संलग्न वर्गांना सर्व सामग्री पाहू शकता येणार नाही',
+  'common.delete-instructions.links-inaccessible':
+    'सर्व शेअर लिंक्स पाहू शकता येणार नाहीत',
+  'common.delete-instructions.content-inaccessible':
+    'त्याच्याशी संलग्न वर्गांना सर्व सामग्री पाहू शकता येणार नाही',
   'common.depth-of-knowledge': 'ज्ञानाची गहनता',
   'common.description': 'वर्णन',
   'common.destination': 'गंतव्य',
@@ -319,91 +347,141 @@ window.i18ln = {
   'common.errors.answer-has-no-image': 'कृपया उत्तर प्रतिमा अपलोड करा.',
   'common.errors.add-username': 'कृपया युजरनेम प्रविष्ट करा',
   'common.errors.add-course-title': 'कृपया अभ्यासक्रम शीर्षक प्रविष्ट करा.',
-  'common.errors.add-question-answer-text': 'कृपया उत्तर निवड मजकूर प्रविष्ट करा.',
+  'common.errors.add-question-answer-text':
+    'कृपया उत्तर निवड मजकूर प्रविष्ट करा.',
   'common.errors.add-question-description': 'कृपया प्रश्न प्रविष्ट करा.',
   'common.errors.add-question-title': 'कृपया प्रश्न शीर्षक प्रविष्ट करा.',
-  'common.errors.assessment-title-presence': 'कृपया मूल्यांकन शीर्षक प्रविष्ट करा.',
-  'common.errors.can-not-join-class': 'क्षमा करा! वर्गात सामील  होण्यासाठी असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.assessment-not-added-to': 'क्षमा करा! ह्या क्षणी धड्यामध्ये मूल्यांकन जोडण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.assessment-not-copied': 'क्षमा करा! ह्या क्षणी मूल्यांकन कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.assessment-not-created': 'क्षमा करा! ह्या क्षणी मूल्यांकन तयार करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.assessment-not-updated': 'क्षमा करा! ह्या क्षणी मूल्यांकन अपडेट करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.assessment-title-presence':
+    'कृपया मूल्यांकन शीर्षक प्रविष्ट करा.',
+  'common.errors.can-not-join-class':
+    'क्षमा करा! वर्गात सामील  होण्यासाठी असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.assessment-not-added-to':
+    'क्षमा करा! ह्या क्षणी धड्यामध्ये मूल्यांकन जोडण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.assessment-not-copied':
+    'क्षमा करा! ह्या क्षणी मूल्यांकन कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.assessment-not-created':
+    'क्षमा करा! ह्या क्षणी मूल्यांकन तयार करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.assessment-not-updated':
+    'क्षमा करा! ह्या क्षणी मूल्यांकन अपडेट करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
   'common.errors.category-title-presence': 'श्रेणी शीर्षक प्रविष्ट करा.',
   'common.errors.class-min-score': 'किमान गुण हे 1 ते 100 दरम्यान असावेत',
-  'common.errors.class-not-created': 'क्षमा करा! ह्या क्षणी वर्ग तयार करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.class-not-created':
+    'क्षमा करा! ह्या क्षणी वर्ग तयार करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
   'common.errors.class-title-presence': 'कृपया आपल्या वर्गाला एक नाव द्या.',
-  'common.errors.collection-not-added-to': 'क्षमा करा! ह्या क्षणी धड्यात संकलन जोडण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.collection-not-copied': 'क्षमा करा! ह्या क्षणी संकलन कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.collection-not-created': 'क्षमा करा! ह्या क्षणी संकलन तयार करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.collection-not-updated': 'क्षमा करा! ह्या क्षणी संकलन करण्यास असमर्थ.  कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.collection-not-added-to':
+    'क्षमा करा! ह्या क्षणी धड्यात संकलन जोडण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.collection-not-copied':
+    'क्षमा करा! ह्या क्षणी संकलन कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.collection-not-created':
+    'क्षमा करा! ह्या क्षणी संकलन तयार करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.collection-not-updated':
+    'क्षमा करा! ह्या क्षणी संकलन करण्यास असमर्थ.  कृपया लवकरच पुन्हा प्रयत्न करा.',
   'common.errors.collection-title-presence': 'कृपया संकलन शीर्षक प्रविष्ट करा.',
   'common.errors.correct-answer-presence': 'कृपया योग्य उत्तर सूचित करा.',
-  'common.errors.course-not-copied': 'क्षमा करा! ह्या क्षणी अभ्यासक्रम कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.course-not-created': 'क्षमा करा! ह्या क्षणी अभ्यासक्रम तयार करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.course-not-updated': 'क्षमा करा! ह्या क्षणी अभ्यासक्रम अपडेट करण्यास असमर्थ.  कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.course-not-copied':
+    'क्षमा करा! ह्या क्षणी अभ्यासक्रम कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.course-not-created':
+    'क्षमा करा! ह्या क्षणी अभ्यासक्रम तयार करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.course-not-updated':
+    'क्षमा करा! ह्या क्षणी अभ्यासक्रम अपडेट करण्यास असमर्थ.  कृपया लवकरच पुन्हा प्रयत्न करा.',
   'common.errors.highlight-text-not-selected': 'कृपया योग्य उत्तर सूचित करा.',
   'common.errors.highlight-text-wrong-format': 'प्रश्नांचा चुकीचा फॉर्मेट.',
-  'common.errors.hotspot-text-max-choices': 'आपण उत्तर निवडींची मर्यादा गाठली आहे.',
-  'common.errors.file-max-size': 'फक्त 5MB पेक्षा लहान आकाराच्या फाईल्स सपोर्टेड आहेत',
-  'common.errors.file-upload-missing': 'खालीलपैकी कोणत्याही  एका एक्सटेन्शनची फाईल निवडा: {{extensions}}',
-  'common.errors.getting-next-resource': 'आपले उत्तर सबमिट करताना एक त्रुटी आली. कृपया पुन्हा प्रयत्न करा.',
-  'common.errors.lesson-not-copied': 'क्षमा करा! ह्या क्षणी धडा कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.lesson-not-created': 'क्षमा करा! ह्या क्षणी धडा तयार करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.lesson-not-loaded': 'क्षमा करा! ह्या क्षणी धडा लोड करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.hotspot-text-max-choices':
+    'आपण उत्तर निवडींची मर्यादा गाठली आहे.',
+  'common.errors.file-max-size':
+    'फक्त 5MB पेक्षा लहान आकाराच्या फाईल्स सपोर्टेड आहेत',
+  'common.errors.file-upload-missing':
+    'खालीलपैकी कोणत्याही  एका एक्सटेन्शनची फाईल निवडा: {{extensions}}',
+  'common.errors.getting-next-resource':
+    'आपले उत्तर सबमिट करताना एक त्रुटी आली. कृपया पुन्हा प्रयत्न करा.',
+  'common.errors.lesson-not-copied':
+    'क्षमा करा! ह्या क्षणी धडा कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.lesson-not-created':
+    'क्षमा करा! ह्या क्षणी धडा तयार करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.lesson-not-loaded':
+    'क्षमा करा! ह्या क्षणी धडा लोड करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
   'common.errors.lesson-title-required': 'कृपया धड्याचे शीर्षक प्रविष्ट करा.',
   'common.errors.password-confirm': 'कृपया आपल्या पासवर्डची पुष्टी करा.',
   'common.errors.password-length': 'पासवर्ड 5 ते 14 अक्षरी असणे आवश्यक आहे.',
   'common.errors.password-not-match': 'पासवर्ड्स जुळत नाही्त.',
   'common.errors.password-required': 'कृपया पासवर्ड प्रविष्ट करा.',
   'common.errors.password-special-characters': 'कृपया विशेष अक्षरे वापरू नका.',
-  'common.errors.profile-not-updated': 'क्षमा करा! ह्या क्षणी प्रोफाईल अपडेट करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.question-not-added-to': 'क्षमा करा! ह्या क्षणी {{collectionType}} मध्ये प्रश्न जोडण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.question-not-copied': 'क्षमा करा! ह्या क्षणी प्रश्न कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.question-not-created': 'क्षमा करा! ह्या क्षणी प्रश्न तयार करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.question-not-updated': 'क्षमा करा! ह्या क्षणी प्रश्न अपडेट करण्यास असमर्थ .कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.reset-password-error': 'क्षमा करा! काहीतरी समस्या आहे. पासवर्ड रिसेट करू शकत नाही. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.reset-google-account-exists': 'आपले ईमेल लॉगिन Google अकाऊंट सह तयार केले गेले आहे आणि आम्ही Google पासवर्ड रिसेट करू शकत नाही. आपण आपला Google पासवर्ड विसरला असल्यास, आपल्याला आपल्या Google अॅप्सद्वारे तो रीसेट करणे आवश्यक आहे.',
-  'common.errors.resource-description-length': 'वर्णन 500 शब्दांपेक्षा मोठे असू शकत नाही.',
+  'common.errors.profile-not-updated':
+    'क्षमा करा! ह्या क्षणी प्रोफाईल अपडेट करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.question-not-added-to':
+    'क्षमा करा! ह्या क्षणी {{collectionType}} मध्ये प्रश्न जोडण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.question-not-copied':
+    'क्षमा करा! ह्या क्षणी प्रश्न कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.question-not-created':
+    'क्षमा करा! ह्या क्षणी प्रश्न तयार करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.question-not-updated':
+    'क्षमा करा! ह्या क्षणी प्रश्न अपडेट करण्यास असमर्थ .कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.reset-password-error':
+    'क्षमा करा! काहीतरी समस्या आहे. पासवर्ड रिसेट करू शकत नाही. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.reset-google-account-exists':
+    'आपले ईमेल लॉगिन Google अकाऊंट सह तयार केले गेले आहे आणि आम्ही Google पासवर्ड रिसेट करू शकत नाही. आपण आपला Google पासवर्ड विसरला असल्यास, आपल्याला आपल्या Google अॅप्सद्वारे तो रीसेट करणे आवश्यक आहे.',
+  'common.errors.resource-description-length':
+    'वर्णन 500 शब्दांपेक्षा मोठे असू शकत नाही.',
   'common.errors.resource-invalid-url': 'अवैध URL',
-  'common.errors.resource-missing-title': 'कृपया एक संसाधन शीर्षक प्रविष्ट करा.',
+  'common.errors.resource-missing-title':
+    'कृपया एक संसाधन शीर्षक प्रविष्ट करा.',
   'common.errors.resource-missing-type': 'कृपया संसाधन प्रकार निवडा.',
   'common.errors.resource-missing-url': 'कृपया वैध URL प्रविष्ट करा.',
-  'common.errors.resource-not-added-to-collection': 'क्षमा करा! ह्या क्षणी तुमच्या संकलनात संसाधन जोडण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.resource-not-copied': 'क्षमा करा! ह्या क्षणी संसाधन कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.resource-not-created': 'क्षमा करा! ह्या क्षणी संसाधन निर्माण करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.resource-not-updated': 'क्षमा करा! ह्या क्षणी संसाधन अपडेट करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा',
+  'common.errors.resource-not-added-to-collection':
+    'क्षमा करा! ह्या क्षणी तुमच्या संकलनात संसाधन जोडण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.resource-not-copied':
+    'क्षमा करा! ह्या क्षणी संसाधन कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.resource-not-created':
+    'क्षमा करा! ह्या क्षणी संसाधन निर्माण करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.resource-not-updated':
+    'क्षमा करा! ह्या क्षणी संसाधन अपडेट करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा',
   'common.errors.resource-same-host-url': 'संसाधने Gooru URLs असू शकत नाहीत.',
-  'common.errors.resource-title-length': 'शीर्षक 50 शब्दांपेक्षा मोठे असून शकत नाही.',
+  'common.errors.resource-title-length':
+    'शीर्षक 50 शब्दांपेक्षा मोठे असून शकत नाही.',
   'common.errors.rubric-title-presence': 'कृपया मथळ्याचे शीर्षक प्रविष्ट करा.',
   'common.errors.rubric-url-presence': 'कृपया मथळ्याचा URL  प्रविष्ट करा.',
   'common.errors.select-correct-answer': 'कृपया योग्य उत्तर निवडा.',
-  'common.errors.search-collections-length': 'कृपया किमान 3 अक्षरे प्रविष्ट करा.',
-  'common.errors.sign-in-credentials-not-valid': 'क्षमा करा ! काहीतरी समस्या आहे. कृपया आपले युजरनेम आणि पासवर्ड दोनवेळा नीट तपासा आणि पुन्हा प्रयत्न करा.',
-  'common.errors.sign-in-google-account-exists': 'कृपया Google साइनइन वापरा. आम्ही आपला पासवर्ड रीसेट करू शकत नाही.',
-  'common.errors.sign-up-error': 'क्षमा करा! ह्या क्षणी साइन-अप करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा',
+  'common.errors.search-collections-length':
+    'कृपया किमान 3 अक्षरे प्रविष्ट करा.',
+  'common.errors.sign-in-credentials-not-valid':
+    'क्षमा करा ! काहीतरी समस्या आहे. कृपया आपले युजरनेम आणि पासवर्ड दोनवेळा नीट तपासा आणि पुन्हा प्रयत्न करा.',
+  'common.errors.sign-in-google-account-exists':
+    'कृपया Google साइनइन वापरा. आम्ही आपला पासवर्ड रीसेट करू शकत नाही.',
+  'common.errors.sign-up-error':
+    'क्षमा करा! ह्या क्षणी साइन-अप करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा',
   'common.errors.sign-up-first-name': 'कृपया आपले प्रथम नाव प्रविष्ट करा',
   'common.errors.sign-up-last-name': 'कृपया आपले आडनाव प्रविष्ट करा',
-  'common.errors.sign-up-name-length': 'आडनावात किमान 2 अक्षरे असणे आवश्यक आहे.',
+  'common.errors.sign-up-name-length':
+    'आडनावात किमान 2 अक्षरे असणे आवश्यक आहे.',
   'common.errors.sign-up-name-only-letters': 'कृपया केवळ अक्षरे प्रविष्ट करा',
   'common.errors.sign-up-valid-email': 'कृपया एक वैध ईमेल पत्ता प्रविष्ट करा.',
-  'common.errors.special-characters': 'आपण विशेष अक्षरे वापरू शकत नाही किंवा रिकामी जागा ठेवू शकत नाही.',
-  'common.errors.unit-not-copied': 'क्षमा करा! ह्या क्षणी युनिट कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.unit-not-created': 'क्षमा करा! ह्या क्षणी युनिट निर्माण करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'common.errors.unit-not-loaded': 'क्षमा करा! ह्या क्षणी  युनिट लोड करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.special-characters':
+    'आपण विशेष अक्षरे वापरू शकत नाही किंवा रिकामी जागा ठेवू शकत नाही.',
+  'common.errors.unit-not-copied':
+    'क्षमा करा! ह्या क्षणी युनिट कॉपी करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.unit-not-created':
+    'क्षमा करा! ह्या क्षणी युनिट निर्माण करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'common.errors.unit-not-loaded':
+    'क्षमा करा! ह्या क्षणी  युनिट लोड करण्यास असमर्थ. कृपया लवकरच पुन्हा प्रयत्न करा.',
   'common.errors.unit-title-required': 'कृपया एकक शीर्षक प्रविष्ट करा.',
   'common.errors.user-email-presence': 'एक वैध ईमेल प्रविष्ट करा.',
   'common.errors.username-length': 'युजरनेम 4 ते 254 अक्षरांदरम्यान आवश्यक आहे',
-  'common.errors.forgot-password-gmail': 'कृपया Google साइनइन वापरा. आम्ही आपला पासवर्ड रीसेट करू शकत नाही.',
-  'common.errors.no-studymaterial': 'या वर्गात नियुक्त केलेल्या अभ्यासक्रमामध्ये कोणतीही अभ्यास सामग्री नाही. कृपया हि गोष्ट निदर्शनास आणून देण्यासाठी आपल्या शिक्षकांशी संपर्क साधा',
+  'common.errors.forgot-password-gmail':
+    'कृपया Google साइनइन वापरा. आम्ही आपला पासवर्ड रीसेट करू शकत नाही.',
+  'common.errors.no-studymaterial':
+    'या वर्गात नियुक्त केलेल्या अभ्यासक्रमामध्ये कोणतीही अभ्यास सामग्री नाही. कृपया हि गोष्ट निदर्शनास आणून देण्यासाठी आपल्या शिक्षकांशी संपर्क साधा',
   'common.essential-questions': 'आवश्यक प्रश्न',
   'common.example': 'उदाहरण:',
   'common.exit': 'बाहेर जा',
-  'common.no-search-result': 'शोध संज्ञामध्ये आणि फिल्टर सेटिंग्जमध्ये {{contentType}} शी निगडीत कोणताही मजकूर सापडला नाही. शोध संज्ञा किंवा फिल्टर परिमाण बदलून प्रयत्न करा',
+  'common.no-search-result':
+    'शोध संज्ञामध्ये आणि फिल्टर सेटिंग्जमध्ये {{contentType}} शी निगडीत कोणताही मजकूर सापडला नाही. शोध संज्ञा किंवा फिल्टर परिमाण बदलून प्रयत्न करा',
   'common.external-collection': 'बाह्य संकलन',
   'common.explanation': 'स्पष्टीकरण',
   'common.plan': 'योजना',
-  'offline-activities.no-completed-content': 'पूर्ण झाले आहेत असे कोणतेही प्रकल्प वा क्रिया येथे नाहीत',
-  'offline-activities.no-active-content': 'असे कोणतेही प्रकल्प किंवा इतर ऑफलाईन क्रिया नाहीत ज्यावर विद्यार्थी सध्या काम करत आहेत',
+  'offline-activities.no-completed-content':
+    'पूर्ण झाले आहेत असे कोणतेही प्रकल्प वा क्रिया येथे नाहीत',
+  'offline-activities.no-active-content':
+    'असे कोणतेही प्रकल्प किंवा इतर ऑफलाईन क्रिया नाहीत ज्यावर विद्यार्थी सध्या काम करत आहेत',
   'common.explore': 'अन्वेषण',
   'common.false': 'खोटे',
   'common.featured-courses': 'वैशिष्ट्यकृत अभ्यासक्रम',
@@ -445,7 +523,8 @@ window.i18ln = {
   'common.license': 'परवाना',
   'common.link': 'लिंक',
   'common.link-out': 'लिंक-आऊट',
-  'common.link-out-message': '* वरील आगाऊ प्रदर्शनामध्ये मध्ये तुमचे संसाधन रिकामे दाखवत असेल तर मजकूर पाहण्यासाठी त्याला कदाचित दुसर्‍या पृष्ठावर "लिंक-आऊट"करावे लागेल. ',
+  'common.link-out-message':
+    '* वरील आगाऊ प्रदर्शनामध्ये मध्ये तुमचे संसाधन रिकामे दाखवत असेल तर मजकूर पाहण्यासाठी त्याला कदाचित दुसर्‍या पृष्ठावर "लिंक-आऊट"करावे लागेल. ',
   'common.live-assessments': 'लाइव्ह मूल्यांकने',
   'common.loading': 'लोड करत आहे ...',
   'common.login': 'लॉग इन',
@@ -453,7 +532,8 @@ window.i18ln = {
   'common.logout.head_1': 'शैक्षणिक मार्गदर्शक:',
   'common.logout.head_2': 'प्रत्येक विद्यार्थी',
   'common.logout.head_3': 'प्रभुत्व मिळवतो',
-  'common.logout.description': 'शैक्षणिक मार्गदर्शक हे एक “शिकण्यासाठी असलेले जीपीएस माध्यम” म्हणून तयार करण्यात आलेले आहे – हा एक असा मार्ग आहे ज्यावर प्रत्येक विद्यार्थ्याने शिक्षणावर प्रभुत्व शिक्षण मिळवण्यासाठी चालावे. प्रत्येक विद्यार्थ्याने एकाच स्तराचे प्राविण्य मिळवावे अशी शाळेची इच्छा असते, परंतु प्रत्येक विद्यार्थी हा वेगवेगळ्या प्रकारच्या ज्ञानासह आणि कौशल्यासह शिक्षणाच्या मार्गावर प्रारंभ करतो. शैक्षणिक मार्गदर्शक अशा विद्यार्थ्यांना ते जेथे आहेत तेथे येऊन भेटते आणि त्यांना त्यांची शैक्षणिक उद्दिष्टे पूर्ण करण्यासाठी मार्गदर्शन करते.',
+  'common.logout.description':
+    'शैक्षणिक मार्गदर्शक हे एक “शिकण्यासाठी असलेले जीपीएस माध्यम” म्हणून तयार करण्यात आलेले आहे – हा एक असा मार्ग आहे ज्यावर प्रत्येक विद्यार्थ्याने शिक्षणावर प्रभुत्व शिक्षण मिळवण्यासाठी चालावे. प्रत्येक विद्यार्थ्याने एकाच स्तराचे प्राविण्य मिळवावे अशी शाळेची इच्छा असते, परंतु प्रत्येक विद्यार्थी हा वेगवेगळ्या प्रकारच्या ज्ञानासह आणि कौशल्यासह शिक्षणाच्या मार्गावर प्रारंभ करतो. शैक्षणिक मार्गदर्शक अशा विद्यार्थ्यांना ते जेथे आहेत तेथे येऊन भेटते आणि त्यांना त्यांची शैक्षणिक उद्दिष्टे पूर्ण करण्यासाठी मार्गदर्शन करते.',
   'common.logout.logout-btn-msg1': 'तुम्ही लॉग आऊट झालेले आहात.',
   'common.logout.logout-btn-msg2': 'लॉग इन करण्यासाठी येथे क्लिक करा.',
   'common.mastery': 'प्रभुत्व',
@@ -476,23 +556,36 @@ window.i18ln = {
   'common.no': 'नाही',
   'common.no-archived': 'तुमच्याकडे कोणतेही संग्रहित वर्ग उपलब्ध नाहीत.',
   'common.no-content': 'कोणताही मजकूर उपलब्ध नाही',
-  'common.no-content-my-report': 'अद्याप कोणतेही अहवाल उपलब्ध नाहीत. आपण अभ्यास करणे सुरू करताच, आपले अहवाल उपलब्ध होतील.',
-  'common.no-assessments-to-display': 'प्रदर्शित करण्यासाठी कोणतेही  <span>मुल्यांकन</span> उपलब्ध नाही.',
-  'common.no-collections-to-display': 'प्रदर्शित करण्यासाठी कोणतेही <span>संकलन</span> उपलब्ध नाही.',
-  'common.no-courses-to-display': 'प्रदर्शित करण्यासाठी कोणताही <span>अभ्यासक्रम</span> उपलब्ध नाही.',
-  'common.no-questions-to-display': 'प्रदर्शित करण्यासाठी कोणताही <span>प्रश्न</span> उपलब्ध नाही.',
-  'common.no-resources-to-display': 'प्रदर्शित करण्यासाठी कोणतेही <span>संसाधन</span> उपलब्ध नाही.',
-  'common.no-rubrics-to-display': 'प्रदर्शित करण्यासाठी कोणताही <span>मथळा</span> उपलब्ध नाही.',
-  'common.no-offline-activitys-to-display': 'प्रदर्शित करण्यासाठी कोणततीही <span>ऑफलाईन क्रिया</span> उपलब्ध नाही.',
+  'common.no-content-my-report':
+    'अद्याप कोणतेही अहवाल उपलब्ध नाहीत. आपण अभ्यास करणे सुरू करताच, आपले अहवाल उपलब्ध होतील.',
+  'common.no-assessments-to-display':
+    'प्रदर्शित करण्यासाठी कोणतेही  <span>मुल्यांकन</span> उपलब्ध नाही.',
+  'common.no-collections-to-display':
+    'प्रदर्शित करण्यासाठी कोणतेही <span>संकलन</span> उपलब्ध नाही.',
+  'common.no-courses-to-display':
+    'प्रदर्शित करण्यासाठी कोणताही <span>अभ्यासक्रम</span> उपलब्ध नाही.',
+  'common.no-questions-to-display':
+    'प्रदर्शित करण्यासाठी कोणताही <span>प्रश्न</span> उपलब्ध नाही.',
+  'common.no-resources-to-display':
+    'प्रदर्शित करण्यासाठी कोणतेही <span>संसाधन</span> उपलब्ध नाही.',
+  'common.no-rubrics-to-display':
+    'प्रदर्शित करण्यासाठी कोणताही <span>मथळा</span> उपलब्ध नाही.',
+  'common.no-offline-activitys-to-display':
+    'प्रदर्शित करण्यासाठी कोणततीही <span>ऑफलाईन क्रिया</span> उपलब्ध नाही.',
   'common.no-followers': 'आपल्याकडे अद्याप फॉलोअर्स नाहीत',
-  'common.no-independent-results': 'जेव्हा आपण आपले बुकमार्क केलेले {{contentType}} पाहणे सुरु कराल तेव्हा ते येथे दिसतील.',
+  'common.no-independent-results':
+    'जेव्हा आपण आपले बुकमार्क केलेले {{contentType}} पाहणे सुरु कराल तेव्हा ते येथे दिसतील.',
   'common.no-results': 'परिणाम आढळले नाही',
   'common.no-available-results': 'उपलब्ध परिणाम नाहीत',
-  'common.no-results-message': 'तुमचे स्पेलिंग तपासा. आपण सर्वच जण चुका करतो! <br/> आणखी विस्तार करा आणि काही फिल्टर काढून टाका.<br/> किंवा त्याऐवजी समान शब्द शोधण्याचा प्रयत्न करा.',
+  'common.no-results-message':
+    'तुमचे स्पेलिंग तपासा. आपण सर्वच जण चुका करतो! <br/> आणखी विस्तार करा आणि काही फिल्टर काढून टाका.<br/> किंवा त्याऐवजी समान शब्द शोधण्याचा प्रयत्न करा.',
   'common.no-more-attempts': 'आणखी प्रयत्न नाहीत',
-  'common.no-dca-student': 'आपल्या शिक्षकाने अद्याप वर्गांच्या कार्यांसाठी कोणतेही संग्रह किंवा मूल्यांकन सोपवलेले नाही.',
-  'common.no-dca-teacher': 'कोणतीही वर्तमान कार्ये नाहीत. अभ्यासक्रम आराखडा किंवा मजकूर यादीतून वर्ग कृती जोडा.',
-  'common.no-content-for-week': 'निवड केलेल्या कालावधीसाठी कोणतीही वर्ग कार्ये नाहीत',
+  'common.no-dca-student':
+    'आपल्या शिक्षकाने अद्याप वर्गांच्या कार्यांसाठी कोणतेही संग्रह किंवा मूल्यांकन सोपवलेले नाही.',
+  'common.no-dca-teacher':
+    'कोणतीही वर्तमान कार्ये नाहीत. अभ्यासक्रम आराखडा किंवा मजकूर यादीतून वर्ग कृती जोडा.',
+  'common.no-content-for-week':
+    'निवड केलेल्या कालावधीसाठी कोणतीही वर्ग कार्ये नाहीत',
   'common.notScored': 'गुणांकन न केलेले',
   'common.notStarted': 'सुरु केले नाही',
   'common.not-added': 'जोडले नाही',
@@ -555,28 +648,43 @@ window.i18ln = {
   'common.remaining': '{{number}} बाकी',
   'common.remix': 'पुर्नमिश्रीत',
   'common.remix-assessment': 'पुर्नमिश्रीत मूल्यांकन',
-  'common.remix-assessment-lead': 'तुम्ही एक मूल्यांकन पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
-  'common.remix-assessment-success': 'तुम्ही {{assessTitle}} हे मूल्यांकन पुर्नमिश्रीत केले आहे. तुम्ही हे मूल्यांकन संपादित करू इच्छिता का?',
+  'common.remix-assessment-lead':
+    'तुम्ही एक मूल्यांकन पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
+  'common.remix-assessment-success':
+    'तुम्ही {{assessTitle}} हे मूल्यांकन पुर्नमिश्रीत केले आहे. तुम्ही हे मूल्यांकन संपादित करू इच्छिता का?',
   'common.remix-collection': 'पुर्नमिश्रीत संग्रह',
-  'common.remix-collection-lead': 'तुम्ही संग्रह पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
-  'common.remix-collection-success': 'तुम्ही {{collectionTitle}} हे संकलन पुर्नमिश्रीत केले आहे. तुम्ही हे संकलन संपादित करू इच्छिता का?',
+  'common.remix-collection-lead':
+    'तुम्ही संग्रह पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
+  'common.remix-collection-success':
+    'तुम्ही {{collectionTitle}} हे संकलन पुर्नमिश्रीत केले आहे. तुम्ही हे संकलन संपादित करू इच्छिता का?',
   'common.remix-course': 'पुर्नमिश्रीत अभ्यासक्रम',
-  'common.remix-course-lead': 'तुम्ही एक अभ्यासक्रम पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
-  'common.remix-course-success': 'तुम्ही {{courseTitle} हा अभ्यासक्रम पुर्नमिश्रीत केला आहे. तुम्ही हा अभ्यासक्रम संपादित करू इच्छिता का?',
+  'common.remix-course-lead':
+    'तुम्ही एक अभ्यासक्रम पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
+  'common.remix-course-success':
+    'तुम्ही {{courseTitle} हा अभ्यासक्रम पुर्नमिश्रीत केला आहे. तुम्ही हा अभ्यासक्रम संपादित करू इच्छिता का?',
   'common.remix-lesson': 'पुर्नमिश्रीत धडा',
-  'common.remix-lesson-lead': 'तुम्ही एक धडा पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
-  'common.remix-lesson-success': 'तुम्ही {{lessonTitle}} हा एक धडा पुर्नमिश्रीत केला आहे.',
+  'common.remix-lesson-lead':
+    'तुम्ही एक धडा पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
+  'common.remix-lesson-success':
+    'तुम्ही {{lessonTitle}} हा एक धडा पुर्नमिश्रीत केला आहे.',
   'common.remix-question': 'पुर्नमिश्रीत प्रश्न',
-  'common.remix-question-lead': 'तुम्ही एक प्रश्न पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
-  'common.remix-question-success': 'तुम्ही {{questionTitle}} हा प्रश्न पुर्नमिश्रीत केला आहे. तुम्ही हा प्रश्न संपादित करू इच्छिता का?',
+  'common.remix-question-lead':
+    'तुम्ही एक प्रश्न पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
+  'common.remix-question-success':
+    'तुम्ही {{questionTitle}} हा प्रश्न पुर्नमिश्रीत केला आहे. तुम्ही हा प्रश्न संपादित करू इच्छिता का?',
   'common.remix-resource': 'पुर्नमिश्रीत संकलन',
-  'common.remix-resource-lead': 'तुम्ही एक संसाधन पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
-  'common.remix-resource-success': 'तुम्ही {{resourceTitle}} हे संसाधन पुर्नमिश्रीत केले आहे. तुम्ही हे संसाधन संपादित करू इच्छिता का?',
+  'common.remix-resource-lead':
+    'तुम्ही एक संसाधन पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
+  'common.remix-resource-success':
+    'तुम्ही {{resourceTitle}} हे संसाधन पुर्नमिश्रीत केले आहे. तुम्ही हे संसाधन संपादित करू इच्छिता का?',
   'common.remix-unit': 'पुर्नमिश्रीत युनिट',
-  'common.remix-unit-lead': 'तुम्ही एक युनिट पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
-  'common.remix-unit-success': 'तुम्ही {{resourceTitle}} हे युनिट पुर्नमिश्रीत केले आहे.',
+  'common.remix-unit-lead':
+    'तुम्ही एक युनिट पुर्नमिश्रीत करण्याची सुरुवात करणार आहात.',
+  'common.remix-unit-success':
+    'तुम्ही {{resourceTitle}} हे युनिट पुर्नमिश्रीत केले आहे.',
   'common.remixed-by': 'द्वारा पुर्नमिश्रीत',
-  'common.remix-warning': 'इकडे लक्ष द्या! अभ्यासक्रमात खूप उत्तमोत्तम सामग्री आहे आणि ती कॉपी करण्यासाठी वेळ लागेल. आपण प्रक्रिया सुरू करू इच्छित असल्याची पुष्टी करा आणि 15 मिनिटांमध्ये तुम्हाला तुमच्या <b>प्रोफाईलवर</b> या अभ्यासक्रमाची कॉपी मिळेल. </b>',
+  'common.remix-warning':
+    'इकडे लक्ष द्या! अभ्यासक्रमात खूप उत्तमोत्तम सामग्री आहे आणि ती कॉपी करण्यासाठी वेळ लागेल. आपण प्रक्रिया सुरू करू इच्छित असल्याची पुष्टी करा आणि 15 मिनिटांमध्ये तुम्हाला तुमच्या <b>प्रोफाईलवर</b> या अभ्यासक्रमाची कॉपी मिळेल. </b>',
   'common.remove': 'काढून टाका',
   'common.report': 'अहवाल',
   'common.report-in-progress': 'अहवाल तयार होत आहे',
@@ -619,7 +727,8 @@ window.i18ln = {
   'common.school-info': 'शाळेची माहिती',
   'common.score': 'गुण',
   'common.select': 'निवडा',
-  'common.select-a-framework': 'कृपया प्रथम वरील अभ्यासक्रम माहिती विभागात एक इयत्ता रचना निवडा.',
+  'common.select-a-framework':
+    'कृपया प्रथम वरील अभ्यासक्रम माहिती विभागात एक इयत्ता रचना निवडा.',
   'common.sentence': 'वाक्य',
   'common.settings': 'सेटिंग्ज',
   'common.search': 'शोध',
@@ -649,7 +758,8 @@ window.i18ln = {
   'common.student': 'विद्यार्थी',
   'common.students': 'विद्यार्थी',
   'common.student-id': 'विद्यार्थी आयडी (प्रोफाइलवर प्रदर्शित होत नाही)',
-  'common.studen-id-display': 'विद्यार्थी आयडी (प्रोफाइलवर प्रदर्शित केला नाही, निनावी मोडमध्ये प्रदर्शित केला आहे)',
+  'common.studen-id-display':
+    'विद्यार्थी आयडी (प्रोफाइलवर प्रदर्शित केला नाही, निनावी मोडमध्ये प्रदर्शित केला आहे)',
   'common.subject-and-framework': 'विषय आणि रचना',
   'common.subject': 'विषय',
   'common.submit': 'सबमिट करा',
@@ -672,8 +782,10 @@ window.i18ln = {
   'common.type': 'प्रकार',
   'common.title': 'शीर्षक',
   'common.unBookmark': 'बुकमार्क काढा',
-  'common.unexpectedError': 'एक अनपेक्षित त्रुटी आली आणि तक्रार करण्यात आली आहे. असुविधेसाठी आम्ही दिलगीर आहोत!',
-  'common.networkError': 'नेटवर्क खंडित झाले आहे. हि एक तात्पुरती समस्या असू शकते. नंतर पुन्हा प्रयत्न करा किंवा तुमचे इंटरनेट कनेक्शन तपासा.',
+  'common.unexpectedError':
+    'एक अनपेक्षित त्रुटी आली आणि तक्रार करण्यात आली आहे. असुविधेसाठी आम्ही दिलगीर आहोत!',
+  'common.networkError':
+    'नेटवर्क खंडित झाले आहे. हि एक तात्पुरती समस्या असू शकते. नंतर पुन्हा प्रयत्न करा किंवा तुमचे इंटरनेट कनेक्शन तपासा.',
   'common.unfollow': 'अनफॉलो',
   'common.unit': 'युनिट',
   'common.unit-title': 'युनिट शीर्षक',
@@ -697,15 +809,19 @@ window.i18ln = {
   'common.verified': 'सत्यापित',
   'common.visibility-tooltip': 'इतरांना दिसत नाही',
   'common.visibility-available': 'इतरांना दिसते',
-  'common.warnings.on-air-connection-lost': 'गो-लाईव्ह डॅशबोर्ड्चे कनेक्शन तुटले आहे आणि पुन्हा ते स्वयं जोडणीचा प्रयत्न करत आहे. तुमचा संयम ढासळू शकतो, परंतु कृपया आपली स्क्रीन रिफ्रेश करू नका!',
+  'common.warnings.on-air-connection-lost':
+    'गो-लाईव्ह डॅशबोर्ड्चे कनेक्शन तुटले आहे आणि पुन्हा ते स्वयं जोडणीचा प्रयत्न करत आहे. तुमचा संयम ढासळू शकतो, परंतु कृपया आपली स्क्रीन रिफ्रेश करू नका!',
   'common.warnings.character-limit': 'आपण शब्द मर्यादा गाठली आहे.',
   'common.word': 'शब्द',
   'common.yes': 'होय',
   'common.change-score': 'गुण बदला',
-  'not-found.tenant.login-not-found-msg-1': 'गुरु सदस्याचे लॉग इन सापडत नाही आहे, पेज आपोआप रीडायरेक्ट होईल',
+  'not-found.tenant.login-not-found-msg-1':
+    'गुरु सदस्याचे लॉग इन सापडत नाही आहे, पेज आपोआप रीडायरेक्ट होईल',
   'not-found.tenant.login-not-found-msg-2': 'मध्ये लॉगइन पेज',
-  'not-found.tenant.login-not-found-msg-3': 'म्हणून लॉग इन करण्यासाठी खालील बटणवर क्लिक करा',
-  'index.joinUs': 'शिक्षणा्च्या  <br/> मानवी ह्क्काचा आदर करण्यासाठी <br/> आमच्यासोबत सामील व्हा',
+  'not-found.tenant.login-not-found-msg-3':
+    'म्हणून लॉग इन करण्यासाठी खालील बटणवर क्लिक करा',
+  'index.joinUs':
+    'शिक्षणा्च्या  <br/> मानवी ह्क्काचा आदर करण्यासाठी <br/> आमच्यासोबत सामील व्हा',
   'index.browseContent.title': 'नमस्कार! आपणास काय हवे आहे?',
   'index.browseContent.description_1': 'मी शोधत आहे',
   'index.browseContent.description_2': 'मध्ये शिक्षण साहित्य',
@@ -718,22 +834,31 @@ window.i18ln = {
   'index.browseContent.subjects_missing_message': 'कृपया विषय निवडा.',
   'index.gettingStarted.title': 'गूरुसोबत  सुरुवात करा',
   'index.gettingStarted.toolkit.title': 'प्रारंभ करण्यासाठी साधनसामग्री',
-  'index.gettingStarted.toolkit.description': 'गूरू मध्ये स्वागत आहे! आपण गूरुसह काय करू शकता हे जाणून घेण्यासाठी हि संसाधने तपासा आणि त्वरीत प्रारंभ करा.',
+  'index.gettingStarted.toolkit.description':
+    'गूरू मध्ये स्वागत आहे! आपण गूरुसह काय करू शकता हे जाणून घेण्यासाठी हि संसाधने तपासा आणि त्वरीत प्रारंभ करा.',
   'index.gettingStarted.classroom.title': 'वर्गात सुरु असलेल्या गोष्टी',
-  'index.gettingStarted.classroom.description': 'जे शिक्षक म्हणतात कि त्यांच्या वर्गात गुरूमुळे मोठा बदल घडला आहे अशा शिक्षकांच्या गोष्टींमधून  उदाहरणासह शिका.',
+  'index.gettingStarted.classroom.description':
+    'जे शिक्षक म्हणतात कि त्यांच्या वर्गात गुरूमुळे मोठा बदल घडला आहे अशा शिक्षकांच्या गोष्टींमधून  उदाहरणासह शिका.',
   'index.gettingStarted.events.title': 'आमचे कार्यक्रम तपासा!',
-  'index.gettingStarted.events.description': 'तुम्हाला गुरु वापरणे सोपे जावे यासाठी आम्ही विनामूल्य वेबिनार आणि प्रशिक्षण देतो.',
-  'index.empowerStudents.title': 'विद्यार्थ्यांनी त्यांचे मार्ग स्वत: शिकावेत यासाठी त्यांना सक्षम करा',
+  'index.gettingStarted.events.description':
+    'तुम्हाला गुरु वापरणे सोपे जावे यासाठी आम्ही विनामूल्य वेबिनार आणि प्रशिक्षण देतो.',
+  'index.empowerStudents.title':
+    'विद्यार्थ्यांनी त्यांचे मार्ग स्वत: शिकावेत यासाठी त्यांना सक्षम करा',
   'index.empowerStudents.find': 'शोधा',
   'index.empowerStudents.remix': 'पुर्नमिश्रीत',
   'index.empowerStudents.share': 'शेअर करा',
   'index.empowerStudents.monitor': 'देखरेख',
-  'index.findDescription': 'शिक्षकांनी बनवलेले हजारो K-12 संग्रह पहा किंवा 16M संसाधनांमधून शोधा',
-  'index.remixDescription': 'तुमच्या विद्यार्थ्यांच्या गरजा पूर्ण करण्यासाठी  संग्रह पुर्नमिश्रित करा आणि मजकूरामध्ये गरजेचे बदल करा.',
-  'index.shareDescription': 'गुरु वर्गांच्या माध्यमातून विद्यार्थ्यांसह संग्रह  शेअर करा. प्रवेशासाठी लॉगिन आवश्यक नाही',
-  'index.monitorDescription': 'प्रत्यक्ष वेळात हस्तक्षेप करण्यासाठी तुमच्या विद्यार्थ्यांचा सहभाग आणि प्रगतीचे मापन करा.',
+  'index.findDescription':
+    'शिक्षकांनी बनवलेले हजारो K-12 संग्रह पहा किंवा 16M संसाधनांमधून शोधा',
+  'index.remixDescription':
+    'तुमच्या विद्यार्थ्यांच्या गरजा पूर्ण करण्यासाठी  संग्रह पुर्नमिश्रित करा आणि मजकूरामध्ये गरजेचे बदल करा.',
+  'index.shareDescription':
+    'गुरु वर्गांच्या माध्यमातून विद्यार्थ्यांसह संग्रह  शेअर करा. प्रवेशासाठी लॉगिन आवश्यक नाही',
+  'index.monitorDescription':
+    'प्रत्यक्ष वेळात हस्तक्षेप करण्यासाठी तुमच्या विद्यार्थ्यांचा सहभाग आणि प्रगतीचे मापन करा.',
   'index.freeAndOpen.title': 'मुक्त आणि खुले.<br/> नेहमी.',
-  'index.freeAndOpen.description': 'शिक्षण हा मानवी हक्क आहे असा आमचा विश्वास आहे. गुरु नेहमीच मोफत असेल व जगभरातील शिक्षण तज्ञ आणि विद्यार्थ्यांसाठी सहाय्य करेल.',
+  'index.freeAndOpen.description':
+    'शिक्षण हा मानवी हक्क आहे असा आमचा विश्वास आहे. गुरु नेहमीच मोफत असेल व जगभरातील शिक्षण तज्ञ आणि विद्यार्थ्यांसाठी सहाय्य करेल.',
   'index.freeAndOpen.button': 'आमच्या दृष्टीकोनबद्दल अधिक जाणून घ्या',
   'class.info.class-info': 'वर्गाबद्दल माहिती',
   'class.info.teachers': 'शिक्षक',
@@ -751,64 +876,87 @@ window.i18ln = {
   'class.edit.basic-info': 'मुलभूत माहिती',
   'class.edit.class-name': 'वर्गाचे नाव',
   'class.edit.class-greetings': 'वर्गातील घोषणा',
-  'class.edit.class-greetings-placeholder': 'आपल्या विद्यार्थ्यांना अभिवादन करा, त्यांना प्रेरित करा, किंवा मोठी घोषणा करा इत्यादि.',
+  'class.edit.class-greetings-placeholder':
+    'आपल्या विद्यार्थ्यांना अभिवादन करा, त्यांना प्रेरित करा, किंवा मोठी घोषणा करा इत्यादि.',
   'class.edit.class-minscore': 'पुरस्कारासाठी कमीत कमी गुण (1-100%)',
   'class.edit.course-map': 'अभ्यासक्रम आराखडा',
   'class.edit.edit-class': 'वर्ग सेटिंग्ज संपादित करा',
   'class.overview.title': 'पाठ्यक्रम नकाशा',
   'class.overview.locate': 'मला शोधा',
   'class.overview.edit-content': 'सामग्री संपादित करा',
-  'class.overview.add-to-daily-class-activities': 'वर्गाच्या दैनंदिन कामकाजामध्ये सामील करा',
+  'class.overview.add-to-daily-class-activities':
+    'वर्गाच्या दैनंदिन कामकाजामध्ये सामील करा',
   'class.overview.assigned-course': 'तुमच्यासाठी नियुक्त केलेला अभ्यासक्रम',
   'class.overview.pre-study-title': 'तुमच्या अभ्यासक्रमासाठी पूर्व-अभ्यास',
   'class.overview.course-map.rescope-toggle': 'पूर्ण अभ्यासक्रम दाखवा',
-  'class.overview.course-map.rescope-info': 'मार्गदर्शक अभ्यासक्रम हा एक वैयक्तिकृत अभ्यासक्रम असून विविध स्तरावरील इयत्तांचा यात समावेश आहे. प्रत्येक विद्यार्थ्याला त्याच्या उणीवा भरून काढण्यासाठी, संकल्पना अधिक मजबूत करण्यासाठी, सरावासाठी आणि त्यांची शिकण्याची इच्छा प्रबळ व्हावी यासाठी एक विशिष्ट अभ्यासक्रम प्रदान केला जातो. वैयक्तिकृत मार्ग आखण्यात आले आहेत आणि प्रत्येक विद्यार्थ्याची शिकण्याची क्षमता वाढवण्यासाठी त्यांना पुर्नमार्गदर्शित केले जाते आणि त्यांच्या इच्छित उद्दिष्टापर्यंत पोहचवले जाते.',
-  'class.overview.course-map.learning-path': 'तुमच्या शिक्षण मार्गात काही धडे आहेत जे तुम्हाला तुमच्या क्षमतेमधील उणीवा भरून काढायला आणि तुमचे ध्येय साध्य करायला सहाय्य करतात. तुमचा इयत्ता स्तर तुम्ही कार्यक्षमतेत आधीच प्रभुत्व मिळवल्याचे दाखवून देते आहे (इटॅलिक शब्द प्रकारात हलक्या करड्या रंगाच्या पार्श्वभूमीवर दाखवले जाते), तर प्रभुत्व मिळवलेले इतर ध्येयापासून दडवून ठेवण्यात आले आहेत. इतर ध्येयांतील प्रभुत्वपूर्ण कार्यक्षमतेचे धडे पाहण्यासाठी हा पर्याय सुरु करा. ',
-  'class.overview.course-map.custom-msg': 'आम्ही आतुमच्या प्राविण्यतेच्या आधारावर विशेषतः आपल्यासाठी हा अभ्यासक्रम वैयक्तिकृत करत आहोत. वैयक्तिकृत अभ्यासक्रम आराखडा पाहण्यासाठी थोड्या वेळाने परत तपासा.',
-  'class.overview.course-map.route0-bannerdesc': 'आपल्या कार्यक्षमता प्रोफाइलनुसार, काही कार्यक्षमता आहेत ज्या आपल्याला प्रभुत्व मिळवावे लागते ज्यायोगे आपण या अभ्यासक्रमात चांगले कार्य करू शकता. आमच्याकडे असा एक मार्ग आहे ज्याद्वारे आपण कार्यक्षमतांमध्ये प्रभुत्व साध्य करू शकता आणि आम्ही हा मार्ग स्वीकारण्याची आपणास शिफारस करतो. तपशील पाहण्यासाठी येथे क्लिक करा.',
+  'class.overview.course-map.rescope-info':
+    'मार्गदर्शक अभ्यासक्रम हा एक वैयक्तिकृत अभ्यासक्रम असून विविध स्तरावरील इयत्तांचा यात समावेश आहे. प्रत्येक विद्यार्थ्याला त्याच्या उणीवा भरून काढण्यासाठी, संकल्पना अधिक मजबूत करण्यासाठी, सरावासाठी आणि त्यांची शिकण्याची इच्छा प्रबळ व्हावी यासाठी एक विशिष्ट अभ्यासक्रम प्रदान केला जातो. वैयक्तिकृत मार्ग आखण्यात आले आहेत आणि प्रत्येक विद्यार्थ्याची शिकण्याची क्षमता वाढवण्यासाठी त्यांना पुर्नमार्गदर्शित केले जाते आणि त्यांच्या इच्छित उद्दिष्टापर्यंत पोहचवले जाते.',
+  'class.overview.course-map.learning-path':
+    'तुमच्या शिक्षण मार्गात काही धडे आहेत जे तुम्हाला तुमच्या क्षमतेमधील उणीवा भरून काढायला आणि तुमचे ध्येय साध्य करायला सहाय्य करतात. तुमचा इयत्ता स्तर तुम्ही कार्यक्षमतेत आधीच प्रभुत्व मिळवल्याचे दाखवून देते आहे (इटॅलिक शब्द प्रकारात हलक्या करड्या रंगाच्या पार्श्वभूमीवर दाखवले जाते), तर प्रभुत्व मिळवलेले इतर ध्येयापासून दडवून ठेवण्यात आले आहेत. इतर ध्येयांतील प्रभुत्वपूर्ण कार्यक्षमतेचे धडे पाहण्यासाठी हा पर्याय सुरु करा. ',
+  'class.overview.course-map.custom-msg':
+    'आम्ही आतुमच्या प्राविण्यतेच्या आधारावर विशेषतः आपल्यासाठी हा अभ्यासक्रम वैयक्तिकृत करत आहोत. वैयक्तिकृत अभ्यासक्रम आराखडा पाहण्यासाठी थोड्या वेळाने परत तपासा.',
+  'class.overview.course-map.route0-bannerdesc':
+    'आपल्या कार्यक्षमता प्रोफाइलनुसार, काही कार्यक्षमता आहेत ज्या आपल्याला प्रभुत्व मिळवावे लागते ज्यायोगे आपण या अभ्यासक्रमात चांगले कार्य करू शकता. आमच्याकडे असा एक मार्ग आहे ज्याद्वारे आपण कार्यक्षमतांमध्ये प्रभुत्व साध्य करू शकता आणि आम्ही हा मार्ग स्वीकारण्याची आपणास शिफारस करतो. तपशील पाहण्यासाठी येथे क्लिक करा.',
   'class.analytics.performance.title': 'कामगिरी पहा',
-  'class.analytics.performance.better-experience-message': 'गुरुच्या उत्तम अनुभवासाठी, टॅब्लेट किंवा डेस्कटॉपमध्ये पूर्ण वर्गाचे विश्लेषण पहा.',
-  'class.analytics.performance.no-content': 'तुमच्या विद्यार्थ्यांनी अद्याप अभ्यासक्रम अभ्यासणे सुरु केलेले नाही.',
+  'class.analytics.performance.better-experience-message':
+    'गुरुच्या उत्तम अनुभवासाठी, टॅब्लेट किंवा डेस्कटॉपमध्ये पूर्ण वर्गाचे विश्लेषण पहा.',
+  'class.analytics.performance.no-content':
+    'तुमच्या विद्यार्थ्यांनी अद्याप अभ्यासक्रम अभ्यासणे सुरु केलेले नाही.',
   'class.analytics.performance.actions.share': 'शेअर करा',
   'class.analytics.performance.actions.edit': 'सामग्री संपादित करा',
   'class.analytics.performance.actions.download': 'डाऊनलोड',
   'class.analytics.performance.actions.fullScreen': 'पूर्ण स्क्रीन पहा',
-  'class.analytics.performance.actions.exitFullScreen': 'पूर्ण स्क्रीनमधून बाहेर पडा ',
+  'class.analytics.performance.actions.exitFullScreen':
+    'पूर्ण स्क्रीनमधून बाहेर पडा ',
   'class.analytics.performance.actions.assessment': 'मूल्यांकन पहा',
   'class.analytics.performance.actions.collection': 'संकलन पहा',
   'class.analytics.performance.actions.both': 'दोन्ही पहा',
   'class.analytics.performance.teacher.metricsTable.average': 'सरासरी',
-  'class.analytics.performance.teacher.metricsTable.class-average': 'वर्ग सरासरी',
+  'class.analytics.performance.teacher.metricsTable.class-average':
+    'वर्ग सरासरी',
   'class.analytics.performance.grade-items': 'गुणांकन कराव्या लागणाऱ्या गोष्टी',
-  'class.analytics.performance.no-grade-items': 'तुम्ही अभ्यासक्रम आराखड्याच्या सर्व पायऱ्या पूर्ण केलेल्या आहेत!',
-  'class.analytics.performance.gru-grade-items.students.zero': '{{count}} विद्यार्थी',
-  'class.analytics.performance.gru-grade-items.students.one': '{{count}} विद्यार्थी',
-  'class.analytics.performance.gru-grade-items.students.other': '{{count}} विद्यार्थी',
-  'class.analytics.performance.gru-grade-items.students.not-started': 'सुरु नाही',
+  'class.analytics.performance.no-grade-items':
+    'तुम्ही अभ्यासक्रम आराखड्याच्या सर्व पायऱ्या पूर्ण केलेल्या आहेत!',
+  'class.analytics.performance.gru-grade-items.students.zero':
+    '{{count}} विद्यार्थी',
+  'class.analytics.performance.gru-grade-items.students.one':
+    '{{count}} विद्यार्थी',
+  'class.analytics.performance.gru-grade-items.students.other':
+    '{{count}} विद्यार्थी',
+  'class.analytics.performance.gru-grade-items.students.not-started':
+    'सुरु नाही',
   'class.analytics.mastery.title': 'प्रभुत्व पहा',
   'class.quick-start.title': 'या वर्गामध्ये सामग्री नियुक्त करा.',
   'class.quick-start.new-course': 'नवीन अभ्यासक्रम सुरु करा',
-  'class.quick-start.new-course-desc': 'एक नवीन अभ्यासक्रम, संग्रह किंवा मुल्यांकन तयार करून प्रारंभ करा',
+  'class.quick-start.new-course-desc':
+    'एक नवीन अभ्यासक्रम, संग्रह किंवा मुल्यांकन तयार करून प्रारंभ करा',
   'class.quick-start.course': 'नवीन अभ्यासक्रम',
   'class.quick-start.new-collection': 'नविन संग्रह',
   'class.quick-start.new-assessment': 'नवीन मूल्यांकन',
   'class.quick-start.remix-a-sample': 'एक नमुना पुर्नमिश्रित कर',
-  'class.quick-start.add-existing-course': 'तुमच्या ग्रंथालयामधून एक अभ्यासक्रम जोडा',
-  'class.quick-start.existing-course-desc': 'वर्ग प्रारंभ करण्यासाठीचा सर्वात जलद मार्ग',
+  'class.quick-start.add-existing-course':
+    'तुमच्या ग्रंथालयामधून एक अभ्यासक्रम जोडा',
+  'class.quick-start.existing-course-desc':
+    'वर्ग प्रारंभ करण्यासाठीचा सर्वात जलद मार्ग',
   'class.quick-start.choose-course': 'अभ्यासक्रम निवडा',
-  'class.quick-start.remix-from-course': 'एक वैशिष्ट्यपूर्ण अभ्यासक्रम पुर्नमिश्रित करा',
+  'class.quick-start.remix-from-course':
+    'एक वैशिष्ट्यपूर्ण अभ्यासक्रम पुर्नमिश्रित करा',
   'class.quick-start.featured-course': 'वैशिष्ट्यीकृत अभ्यासक्रम पहा',
-  'class.quick-start.remix-desc': 'कॉपी करा आणि आपल्या विद्यार्थ्यांसाठी वैशिष्ट्यीकृत अभ्यासक्रम वैयक्तीकृत करा',
+  'class.quick-start.remix-desc':
+    'कॉपी करा आणि आपल्या विद्यार्थ्यांसाठी वैशिष्ट्यीकृत अभ्यासक्रम वैयक्तीकृत करा',
   'class.quick-start.browse-content': 'किंवा आमची मजकूर सूची पहा',
   'classes.classesJoined': ' मी सहभागी झालो आहे ते वर्ग',
   'classes.classesTaught': 'मी शिकवतो ते वर्ग',
   'classes.noClassesJoined': 'तुम्ही कोणत्याही वर्गांमध्ये सहभाग घेतलेला नाही',
   'classes.noClassesTaught': 'तुमच्याकडे कोणतेही तयार केलेले वर्ग नाहीत',
-  'content.assessments.edit.best-practices': '<p>मुल्यांकन म्हणजे मूल्यांकन केलेल्या अशा प्रश्नांचा संच जो तुम्ही आणि तुमचे विद्यार्थी  आकलनावर आणि कामगिरीवर लक्ष ठेवण्यासाठी वापरू शकाल.</p><p>आपल्या मूल्यांकना मध्ये विविध प्रश्नांचे प्रकार वापरा  (SBAC वर आधारित प्रश्नांसारखे प्रश्न) ज्यांच्या द्वारा विद्यार्थी त्यांना होणारे आकलन विविध प्रकारे प्रदर्शित करू शकतील. इयत्ता, लघु इयत्ता आणि वेबच्या गहन ज्ञानात प्रत्येक प्रश्न टॅग करण्याची आम्ही शिफारस करतो.</p>',
+  'content.assessments.edit.best-practices':
+    '<p>मुल्यांकन म्हणजे मूल्यांकन केलेल्या अशा प्रश्नांचा संच जो तुम्ही आणि तुमचे विद्यार्थी  आकलनावर आणि कामगिरीवर लक्ष ठेवण्यासाठी वापरू शकाल.</p><p>आपल्या मूल्यांकना मध्ये विविध प्रश्नांचे प्रकार वापरा  (SBAC वर आधारित प्रश्नांसारखे प्रश्न) ज्यांच्या द्वारा विद्यार्थी त्यांना होणारे आकलन विविध प्रकारे प्रदर्शित करू शकतील. इयत्ता, लघु इयत्ता आणि वेबच्या गहन ज्ञानात प्रत्येक प्रश्न टॅग करण्याची आम्ही शिफारस करतो.</p>',
   'content.classes.create.title': 'वर्ग तयार करा',
-  'content.classes.create.content': 'जिथे विद्यार्थी मजकूर अभ्यासण्यात व्यस्त असतात.',
+  'content.classes.create.content':
+    'जिथे विद्यार्थी मजकूर अभ्यासण्यात व्यस्त असतात.',
   'content.classes.create.class-name-input': 'आपल्या वर्गाला नाव द्या',
-  'content.classes.create.condition-prompt': 'विद्यार्थी आपल्या वर्गात कसे सहभागी होतील?',
+  'content.classes.create.condition-prompt':
+    'विद्यार्थी आपल्या वर्गात कसे सहभागी होतील?',
   'content.classes.create.condition-prompt-code': 'वर्गाचा कोड असणारा कोणीही',
   'content.classes.create.condition-prompt-invite': 'केवळ आमंत्रित',
   'content.classes.create.get-started': 'सुरु करा',
@@ -817,99 +965,173 @@ window.i18ln = {
   'content.classes.join.content': 'जिथे प्रवास सुरु होतो',
   'content.classes.join.not-now': 'आता नाही',
   'content.classes.join.class-code-input': 'वर्गाचा कोड प्रविष्ट करा',
-  'content.classes.join.class-not-found': 'वर्ग सापडला नाही.. आपण योग्य वर्ग कोड प्रविष्ट केल्याची खात्री करा',
+  'content.classes.join.class-not-found':
+    'वर्ग सापडला नाही.. आपण योग्य वर्ग कोड प्रविष्ट केल्याची खात्री करा',
   'content.classes.join.invalid-code': 'अवैध वर्ग कोड',
-  'content.classes.join.join-not-allowed': 'आपण ज्या वर्गात सहभागी होण्याचा प्रयत्न करीत आहात तो आता सक्रिय नाही. कृपया आपल्या शिक्षकांशी योग्य वर्ग कोडसाठी संपर्क साधा.',
+  'content.classes.join.join-not-allowed':
+    'आपण ज्या वर्गात सहभागी होण्याचा प्रयत्न करीत आहात तो आता सक्रिय नाही. कृपया आपल्या शिक्षकांशी योग्य वर्ग कोडसाठी संपर्क साधा.',
   'content.classes.join.already-member': 'आपण आधीच या वर्गाचे सदस्य आहात',
   'content.classes.join.join-class': 'क्लासरूममध्ये सहभागी व्हा',
-  'content.classes.join.terms-and-conditions': 'क्लासरूममध्ये सहभागी व्हा या पर्यायावर क्लिक करून, मी या वर्गाच्या ह्या गुरु वर्गामध्ये अभ्यास करण्याने निर्माण झालेले माझे मूल्यमापन आणि संकलित प्रगती तपशील शिक्षकांबरोबर शेअर करण्यास सहमत आहे.',
+  'content.classes.join.terms-and-conditions':
+    'क्लासरूममध्ये सहभागी व्हा या पर्यायावर क्लिक करून, मी या वर्गाच्या ह्या गुरु वर्गामध्ये अभ्यास करण्याने निर्माण झालेले माझे मूल्यमापन आणि संकलित प्रगती तपशील शिक्षकांबरोबर शेअर करण्यास सहमत आहे.',
   'content.collections.edit.assign-to-course': 'पाठ्यक्रमात द्या',
-  'content.collections.edit.best-practices': '<p>विद्यार्थी संकलन स्तरावर आपल्या सामग्रीसह संवाद साधतात. शिक्षणाचे संकलन तयार करताना, शिकण्याची उद्दिष्टे समाविष्ट करणे सुनिश्चित करा आणि विद्यार्थ्यांसमोर सिध्दांत विविध संसाधनांद्वारे प्रस्तुत करण्याचा विचार करा.</p><p>संकल्पना तयार करण्यासाठी संसाधनांच्या क्रमवारीचा वापर करा. एका संकलन माध्यमातून प्रगती तार्किक पद्धतीने प्रवाहित झाली पाहिजे आणि गरज भासल्यास अपेक्षित श्रोत्यांना समजूतीच्या/आत्मसात करण्याच्या एका सर्व सामान्य स्तरावरून आणखी क्लीष्ट स्तरावर घेऊन जा किंवा विद्यार्थ्यांना पुरेसे अन्वेषण करू द्या.</p><p>मार्गावरील शिक्षण समजले आहे का हे जाणण्यासाठी चाचण्या घ्या आणि त्या साठी आमच्या गूरु प्रश्नांचा वा इतर संभाषकांचा वापर करा.  आम्ही संग्रहातील उद्दीष्टे पूर्ण करण्यासाठी आणि प्रत्येक स्रोताची भूमिका आणि उद्देश सुनिश्चित करण्यासाठी पुरेसे स्त्रोत आणि / किंवा पुरेशी विविध संसाधने शिफारस करतो.</p>',
+  'content.collections.edit.best-practices':
+    '<p>विद्यार्थी संकलन स्तरावर आपल्या सामग्रीसह संवाद साधतात. शिक्षणाचे संकलन तयार करताना, शिकण्याची उद्दिष्टे समाविष्ट करणे सुनिश्चित करा आणि विद्यार्थ्यांसमोर सिध्दांत विविध संसाधनांद्वारे प्रस्तुत करण्याचा विचार करा.</p><p>संकल्पना तयार करण्यासाठी संसाधनांच्या क्रमवारीचा वापर करा. एका संकलन माध्यमातून प्रगती तार्किक पद्धतीने प्रवाहित झाली पाहिजे आणि गरज भासल्यास अपेक्षित श्रोत्यांना समजूतीच्या/आत्मसात करण्याच्या एका सर्व सामान्य स्तरावरून आणखी क्लीष्ट स्तरावर घेऊन जा किंवा विद्यार्थ्यांना पुरेसे अन्वेषण करू द्या.</p><p>मार्गावरील शिक्षण समजले आहे का हे जाणण्यासाठी चाचण्या घ्या आणि त्या साठी आमच्या गूरु प्रश्नांचा वा इतर संभाषकांचा वापर करा.  आम्ही संग्रहातील उद्दीष्टे पूर्ण करण्यासाठी आणि प्रत्येक स्रोताची भूमिका आणि उद्देश सुनिश्चित करण्यासाठी पुरेसे स्त्रोत आणि / किंवा पुरेशी विविध संसाधने शिफारस करतो.</p>',
   'content.courses.edit.assign-to-class': 'वर्गाकडे सोपवा',
-  'content.courses.edit.best-practices': '<p>अभ्यासक्रम एक असा फोल्डर आहे जो आपल्याला आपल्या शिकण्याच्या सामग्रीचे विविध विभागात धडे रुपात निर्माण करण्यास मदत करते. अभ्यासक्रम तयार करताना आपण संबोधित करत असलेले महत्वाचे प्रश्न, शिकण्याच्या उद्देश आणि आपल्या सामग्रीचे संघटन यावर विचार करा.</p><p>तुमच्या विद्यार्थी जनतेला वेगळा अनुभव देण्यासाठी तुम्ही धडे एकत्र करू शकता (उदाहरणार्थ, तुम्ही तुमची युनिट्स कालानुक्रमे किंवा विषयानुसार, किंवा इयत्तेनुसार अनुक्रमित करू शकता).</p>',
+  'content.courses.edit.best-practices':
+    '<p>अभ्यासक्रम एक असा फोल्डर आहे जो आपल्याला आपल्या शिकण्याच्या सामग्रीचे विविध विभागात धडे रुपात निर्माण करण्यास मदत करते. अभ्यासक्रम तयार करताना आपण संबोधित करत असलेले महत्वाचे प्रश्न, शिकण्याच्या उद्देश आणि आपल्या सामग्रीचे संघटन यावर विचार करा.</p><p>तुमच्या विद्यार्थी जनतेला वेगळा अनुभव देण्यासाठी तुम्ही धडे एकत्र करू शकता (उदाहरणार्थ, तुम्ही तुमची युनिट्स कालानुक्रमे किंवा विषयानुसार, किंवा इयत्तेनुसार अनुक्रमित करू शकता).</p>',
   'content.courses.edit.information.course-title': 'अभ्यासक्रम शीर्षक',
   'content.courses.edit.information.description': 'वर्णन',
   'content.questions.edit.add-to': 'जोडा',
-  'content.questions.edit.best-practices': '<p>प्रश्न हा असा एक स्रोत आहे ज्याचे विद्यार्थ्याने उत्तर देणे आवश्यक आहे आणि आम्ही विविध प्रकारचे प्रश्न देऊ करतो जे तुमच्या विद्यार्थ्यांना SBAC, PARCC आणि इतर मूल्यांकनांवर दिसतील.</p><p>प्रश्नांचे प्रकार  बदलत्या स्वरूपानुसार करण्याचा विचार करा आणि आपल्या विद्यार्थ्यांना अशा प्रकारच्या प्रश्नांना सामोरे जाऊ द्या आणि ज्ञान प्रदर्शित करण्यासाठी विविध प्रकारच्या पद्धतीच्या वापराबद्दल विचार करा.</p><p>आपल्या प्रश्नांना इयत्ता, लघु इयत्ता आणि वेबच्या गहन ज्ञानावर टॅग करा. शिक्षक डॅशबोर्ड द्वारे आपले विद्यार्थी प्रश्नांशी कसे परस्परसंवाद साधू शकता ते युंही पाहू शकता.</p>',
+  'content.questions.edit.best-practices':
+    '<p>प्रश्न हा असा एक स्रोत आहे ज्याचे विद्यार्थ्याने उत्तर देणे आवश्यक आहे आणि आम्ही विविध प्रकारचे प्रश्न देऊ करतो जे तुमच्या विद्यार्थ्यांना SBAC, PARCC आणि इतर मूल्यांकनांवर दिसतील.</p><p>प्रश्नांचे प्रकार  बदलत्या स्वरूपानुसार करण्याचा विचार करा आणि आपल्या विद्यार्थ्यांना अशा प्रकारच्या प्रश्नांना सामोरे जाऊ द्या आणि ज्ञान प्रदर्शित करण्यासाठी विविध प्रकारच्या पद्धतीच्या वापराबद्दल विचार करा.</p><p>आपल्या प्रश्नांना इयत्ता, लघु इयत्ता आणि वेबच्या गहन ज्ञानावर टॅग करा. शिक्षक डॅशबोर्ड द्वारे आपले विद्यार्थी प्रश्नांशी कसे परस्परसंवाद साधू शकता ते युंही पाहू शकता.</p>',
   'content.questions.edit.information.question-title': 'प्रश्न शीर्षक',
   'content.questions.edit.information.question-type': 'प्रश्न प्रकार',
   'content.questions.edit.builder.add-answer-choice': '+ उत्तर निवड जोडा',
   'content.questions.edit.builder.add-hint': 'इशारे जोडा',
   'content.questions.edit.builder.add-explanation': 'स्पष्टीकरण जोडा',
   'content.questions.edit.builder.answer': 'उत्तर',
-  'content.questions.edit.builder.answer-instructions.FIB': 'उत्तर आणि स्पष्टीकरण यासाठी 5 इशारे जोडा.',
-  'content.questions.edit.builder.answer-instructions.HS_IMG': 'तुम्ही दहा पर्यंत उत्तर प्रतिमा जोडू शकता  आणि एक किंवा अधिक बरोबर उत्तरे निवडू शकता',
-  'content.questions.edit.builder.answer-instructions.HS_TXT': 'तुम्ही दहा उत्तर निवडी जोडू शकता आणि एक किंवा अधिक बरोबर उत्तरे निवडू शकता',
-  'content.questions.edit.builder.answer-instructions.HT_HL_ST': 'प्रश्न लिहिल्यावर, ठळक केलेले वाक्य दर्शविण्यासाठी कंसांचा वापर करा. एका कंसामध्ये फक्त एक वाक्य असू शकते सोबत कंसांमधील काळही वापरा. उदाहरणार्थ, पहिल्या छोट्या डुक्कराने आपले घर गवताने बांधले   [मोठ्ठ्या वाईट लांडग्याने घर उडवून लावले] दुसर्‍या डुक्कराने त्याचे घर लाकडाने बांधले. शब्द मर्यादा: 5000',
-  'content.questions.edit.builder.answer-instructions.HT_HL_WD': 'प्रश्न लिहिल्यावर, ठळक केलेल्या शब्दांसाठी कंसाचा वापर करा. एका कंसात केवळ एक शब्द असू शकतो. उदाहरणार्थ, [मोठ्या] खराब लांडग्याने घर खाली [उडवून] लावले. शब्द मर्यादा: 5000',
-  'content.questions.edit.builder.answer-instructions.HT_RO': 'आपण योग्य क्रमाने दहा उत्तर पर्याय जोडू शकता. हा क्रम विद्यार्थ्यांसाठी पुढे मागे केला जाईल.',
-  'content.questions.edit.builder.answer-instructions.MA': 'तुम्ही दहा उत्तरे, एक प्रतिमा, एक स्पष्टीकरण आणि पाच पर्यंत इशारे जोडू शकता.',
-  'content.questions.edit.builder.answer-instructions.MC': 'तुम्ही दहा उत्तर निवडी जोडू शकता आणि एक बरोबर उत्तर दर्शवू शकता. शब्द मर्यादा: 200',
-  'content.questions.edit.builder.answer-instructions.OE': 'योग्य प्रतिसाद लिहा. शब्द मर्यादा: 5000',
-  'content.questions.edit.builder.answer-instructions.T/F': 'योग्य उत्तर निवडा.',
-  'content.questions.edit.builder.question-instructions.FIB': 'प्रश्न लिहिल्यावर, लिहिता, आपल्या रिक्त-जागा-भरा या प्रश्नांची उत्तरे देण्यासाठी कंसाचा वापर करा. उदाहरणार्थ: "मोठ्या दुष्ट [लांडग्याने] [घर] उडवून दिले." आपण एक प्रतिमा देखील जोडू शकता.',
-  'content.questions.edit.builder.question-instructions.HS_TXT': 'आपला प्रश्न लिहा.',
-  'content.questions.edit.builder.question-instructions.HS_IMG': 'आपला प्रश्न लिहा.',
-  'content.questions.edit.builder.question-instructions.HT_RO': 'आपला प्रश्न लिहा.',
-  'content.questions.edit.builder.question-instructions.HT_HL': 'आपला प्रश्न त्वरित लिहा.',
-  'content.questions.edit.builder.question-instructions.MC': 'आपला प्रश्न लिहा.',
-  'content.questions.edit.builder.question-instructions.MA': 'आपला प्रश्न लिहा.',
-  'content.questions.edit.builder.question-instructions.OE': 'आपला प्रश्न लिहा.',
-  'content.questions.edit.builder.question-instructions.T/F': 'आपला प्रश्न लिहा.',
-  'content.questions.edit.builder.submission-format.title': 'विद्यार्थी सबमिशन फॉर्मेट',
-  'content.questions.edit.builder.submission-format.answer-type.text-box': 'मजकूर बॉक्स',
-  'content.questions.edit.builder.feedback-grading.title': 'अभिप्राय आणि गुणांकन',
-  'content.questions.edit.builder.feedback-grading.from-existing-rubric': 'विद्यमान मथळ्याकडून',
+  'content.questions.edit.builder.answer-instructions.FIB':
+    'उत्तर आणि स्पष्टीकरण यासाठी 5 इशारे जोडा.',
+  'content.questions.edit.builder.answer-instructions.HS_IMG':
+    'तुम्ही दहा पर्यंत उत्तर प्रतिमा जोडू शकता  आणि एक किंवा अधिक बरोबर उत्तरे निवडू शकता',
+  'content.questions.edit.builder.answer-instructions.HS_TXT':
+    'तुम्ही दहा उत्तर निवडी जोडू शकता आणि एक किंवा अधिक बरोबर उत्तरे निवडू शकता',
+  'content.questions.edit.builder.answer-instructions.HT_HL_ST':
+    'प्रश्न लिहिल्यावर, ठळक केलेले वाक्य दर्शविण्यासाठी कंसांचा वापर करा. एका कंसामध्ये फक्त एक वाक्य असू शकते सोबत कंसांमधील काळही वापरा. उदाहरणार्थ, पहिल्या छोट्या डुक्कराने आपले घर गवताने बांधले   [मोठ्ठ्या वाईट लांडग्याने घर उडवून लावले] दुसर्‍या डुक्कराने त्याचे घर लाकडाने बांधले. शब्द मर्यादा: 5000',
+  'content.questions.edit.builder.answer-instructions.HT_HL_WD':
+    'प्रश्न लिहिल्यावर, ठळक केलेल्या शब्दांसाठी कंसाचा वापर करा. एका कंसात केवळ एक शब्द असू शकतो. उदाहरणार्थ, [मोठ्या] खराब लांडग्याने घर खाली [उडवून] लावले. शब्द मर्यादा: 5000',
+  'content.questions.edit.builder.answer-instructions.HT_RO':
+    'आपण योग्य क्रमाने दहा उत्तर पर्याय जोडू शकता. हा क्रम विद्यार्थ्यांसाठी पुढे मागे केला जाईल.',
+  'content.questions.edit.builder.answer-instructions.MA':
+    'तुम्ही दहा उत्तरे, एक प्रतिमा, एक स्पष्टीकरण आणि पाच पर्यंत इशारे जोडू शकता.',
+  'content.questions.edit.builder.answer-instructions.MC':
+    'तुम्ही दहा उत्तर निवडी जोडू शकता आणि एक बरोबर उत्तर दर्शवू शकता. शब्द मर्यादा: 200',
+  'content.questions.edit.builder.answer-instructions.OE':
+    'योग्य प्रतिसाद लिहा. शब्द मर्यादा: 5000',
+  'content.questions.edit.builder.answer-instructions.T/F':
+    'योग्य उत्तर निवडा.',
+  'content.questions.edit.builder.question-instructions.FIB':
+    'प्रश्न लिहिल्यावर, लिहिता, आपल्या रिक्त-जागा-भरा या प्रश्नांची उत्तरे देण्यासाठी कंसाचा वापर करा. उदाहरणार्थ: "मोठ्या दुष्ट [लांडग्याने] [घर] उडवून दिले." आपण एक प्रतिमा देखील जोडू शकता.',
+  'content.questions.edit.builder.question-instructions.HS_TXT':
+    'आपला प्रश्न लिहा.',
+  'content.questions.edit.builder.question-instructions.HS_IMG':
+    'आपला प्रश्न लिहा.',
+  'content.questions.edit.builder.question-instructions.HT_RO':
+    'आपला प्रश्न लिहा.',
+  'content.questions.edit.builder.question-instructions.HT_HL':
+    'आपला प्रश्न त्वरित लिहा.',
+  'content.questions.edit.builder.question-instructions.MC':
+    'आपला प्रश्न लिहा.',
+  'content.questions.edit.builder.question-instructions.MA':
+    'आपला प्रश्न लिहा.',
+  'content.questions.edit.builder.question-instructions.OE':
+    'आपला प्रश्न लिहा.',
+  'content.questions.edit.builder.question-instructions.T/F':
+    'आपला प्रश्न लिहा.',
+  'content.questions.edit.builder.submission-format.title':
+    'विद्यार्थी सबमिशन फॉर्मेट',
+  'content.questions.edit.builder.submission-format.answer-type.text-box':
+    'मजकूर बॉक्स',
+  'content.questions.edit.builder.feedback-grading.title':
+    'अभिप्राय आणि गुणांकन',
+  'content.questions.edit.builder.feedback-grading.from-existing-rubric':
+    'विद्यमान मथळ्याकडून',
   'content.questions.edit.builder.feedback-grading.scoring': 'गुण',
-  'content.questions.edit.builder.feedback-grading.maximum-points': 'जास्तीत जास्त गुण',
+  'content.questions.edit.builder.feedback-grading.maximum-points':
+    'जास्तीत जास्त गुण',
   'content.questions.edit.builder.feedback-grading.increment': 'वाढ',
-  'content.questions.edit.builder.feedback-grading.rubric-error': 'कृपया एक मथळा जोडा',
-  'content.modals.delete-bookmark.confirmation': 'तुम्हाला हे {{type}} बुकमार्क काढायचे आहे का?',
-  'content.modals.delete-bookmark.delete-error': 'क्षमा करा! ह्या क्षणी हे {{type}} बुकमार्क काढण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'content.modals.remove-class-activity.confirmation': 'तुम्हाला खरंच तुमच्या वर्ग क्रियांमधून हे {{type}} काढून टाकायचे आहे का?',
-  'content.modals.remove-class-activity.delete-error': 'क्षमा करा!  ह्या क्षणी हे  {{type}} काढण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'content.modals.delete-class.legend': 'आपण आता आपला वर्ग हटवण्याच्या तयारीत आहात.',
-  'content.modals.delete-class.student-access': 'विद्यार्थी या वर्गात प्रवेश करू शकणार नाहीत',
-  'content.modals.delete-class.student-data-deleted': 'सर्व विद्यार्थी माहिती हटविली जाईल',
+  'content.questions.edit.builder.feedback-grading.rubric-error':
+    'कृपया एक मथळा जोडा',
+  'content.modals.delete-bookmark.confirmation':
+    'तुम्हाला हे {{type}} बुकमार्क काढायचे आहे का?',
+  'content.modals.delete-bookmark.delete-error':
+    'क्षमा करा! ह्या क्षणी हे {{type}} बुकमार्क काढण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'content.modals.remove-class-activity.confirmation':
+    'तुम्हाला खरंच तुमच्या वर्ग क्रियांमधून हे {{type}} काढून टाकायचे आहे का?',
+  'content.modals.remove-class-activity.delete-error':
+    'क्षमा करा!  ह्या क्षणी हे  {{type}} काढण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'content.modals.delete-class.legend':
+    'आपण आता आपला वर्ग हटवण्याच्या तयारीत आहात.',
+  'content.modals.delete-class.student-access':
+    'विद्यार्थी या वर्गात प्रवेश करू शकणार नाहीत',
+  'content.modals.delete-class.student-data-deleted':
+    'सर्व विद्यार्थी माहिती हटविली जाईल',
   'content.modals.archive-class.title': 'वर्ग संग्रहित करा',
-  'content.modals.archive-class.legend': 'आपण आता आपला वर्ग संग्रहित करण्याच्या तयारीत आहात',
-  'content.modals.archive-class.links-not-accessible': 'शेअर केलेल्या सर्व लिंक्स उघडणार नाहीत',
-  'content.modals.archive-class.students-no-access': 'विद्यार्थी वर्गात प्रवेश करू शकणार नाहीत',
-  'content.modals.archive-class.not-add-students': 'आपण वर्गात आणखी विद्यार्थी जोडू शकणार नाही',
-  'content.modals.archive-class.confirmation': 'तुम्ही खरंच हे संग्रहित करू इच्छिता?',
+  'content.modals.archive-class.legend':
+    'आपण आता आपला वर्ग संग्रहित करण्याच्या तयारीत आहात',
+  'content.modals.archive-class.links-not-accessible':
+    'शेअर केलेल्या सर्व लिंक्स उघडणार नाहीत',
+  'content.modals.archive-class.students-no-access':
+    'विद्यार्थी वर्गात प्रवेश करू शकणार नाहीत',
+  'content.modals.archive-class.not-add-students':
+    'आपण वर्गात आणखी विद्यार्थी जोडू शकणार नाही',
+  'content.modals.archive-class.confirmation':
+    'तुम्ही खरंच हे संग्रहित करू इच्छिता?',
   'content.modals.delete-content.legend': 'आपण हटवण्याच्या तयारीत आहात',
-  'content.modals.delete-content.content-legend': '<span>{{type}}</span> {{index}} - {{title}} कडून {{parentname}}',
-  'content.modals.delete-content.content-legend-header': '{{parentname}} कडून {{title}}',
-  'content.modals.delete-content.delete-warning': 'या {{type}} मधील सर्व मजकूर हटवला जाईल',
-  'content.modals.delete-content.delete-error': 'क्षमा करा! ह्या क्षणी {{type}} हटवण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'content.modals.delete-content.confirmation': 'तुम्हाला खरंच हे सुरु ठेवायचे आहे का? कृपया खाली "डिलीट" टाइप करा आणि "डिलीट" वर क्लिक करा.',
-  'content.modals.delete-resource.legend': 'तुम्हाला खरंच कायमचे <b>{{title}}</b> हटवायचे आहे का याची पुष्टी करा',
-  'content.modals.delete-resource.delete-warning': 'या {{type}} मधील सर्व मजकूर हटवला जाईल',
-  'content.modals.delete-resource.delete-error': 'क्षमा करा! ह्या क्षणी {{type}} हटवण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'content.modals.delete-resource.confirmation': 'तुम्हाला खरंच हे सुरु ठेवायचे आहे का? कृपया "कायमचे हटवा" वर क्लिक करा.',
-  'content.modals.delete-resource.first-check': 'हे कायमचे हटविले केले गेले आहे आणि पूर्ववत केले जाऊ शकत नाही',
-  'content.modals.delete-resource.second-check': 'आपल्या संकलनातील आणि समुदायाच्या इतर वापरकर्ताकडील कोणत्याही संकलनातील या संसाधनाची प्रत हटविली जाईल',
-  'content.modals.delete-rubric.legend': 'तुम्हाला खरंच कायमचे <b>{{title}}</b> हटवायचे आहे का याची पुष्टी करा',
-  'content.modals.delete-rubric.delete-warning': 'या मथळ्या मधील मजकूर हटवला जाईल',
-  'content.modals.delete-rubric.delete-error': 'क्षमा करा! ह्या क्षणी मथळा हटवण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा',
-  'content.modals.delete-rubric.confirmation': 'तुम्हाला खरंच हे सुरु ठेवायचे आहे का? कृपया "कायमचे हटवा" वर क्लिक करा.',
-  'content.modals.delete-rubric.first-check': 'हे कायमचे हटविले केले गेले आहे आणि पूर्ववत केले जाऊ शकत नाही',
-  'content.modals.remove-content.legend': 'आपण <b>{{parentname}}</b> मधून <b>{{title}}</b>काढून टाकत आहात',
-  'content.modals.remove-content.remove-error': 'क्षमा करा! ह्या क्षणी {{type}} काढण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा',
-  'content.modals.remove-content.confirmation': 'तुम्हाला खरंच हे सुरु ठेवायचं आहे का? कृपया खाली "रिमूव्ह" टाइप करा आणि "रिमूव्ह"वर  क्लिक करा.',
-  'content.modals.remove-student.title': 'विद्यार्थी आणि त्यांचा डेटा काढून टाका',
-  'content.modals.remove-student.legend': 'आपण या वर्गातून {{studentName}} ला काढून टाकणार आहात आणि त्यांचा सर्व डेटा डिलीट करणार आहात.',
-  'content.modals.remove-student.data-inaccessible': 'त्यांचा सर्व डेटा डिलीट केला जाईल आणि तुम्ही किंवा ते पुन्हा वापरू शकणार नाही',
-  'content.modals.remove-student.classroom-access': 'त्यांना वर्ग किंवा मजकूर पाहू शकणार नाहीत',
-  'content.modals.remove-student.data-lost': 'जर ते पुन्हा क्लासमध्ये सहभागी झाले तर, तर मागील सर्व डेटा गमावलेला असेल',
-  'content.modals.remove-student.remove-error': 'क्षमा करा! ह्या क्षणी ह्या विद्यार्थ्याला काढून टाकण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा.',
-  'content.modals.remove-student.confirmation': 'तुम्हाला खरंच हे सुरु ठेवायचे आहे का? कृपया खाली "डिलीट" टाइप करा आणि "डिलीट" वर क्लिक करा.',
-  'content.modals.quick-remove-content.legend': 'तुम्हाला <b>{{parentName}}</b> मधून <b>{{title}}</b> काढून टाकायचे आहे याची पुष्टी करा.',
-  'content.modals.quick-delete-content.legend': 'तुम्हाला <b>{{parentName}}</b> मधून <b>{{title}}</b> कायमसाठी काढून टाकायचे आहे याची पुष्टी करा.',
+  'content.modals.delete-content.content-legend':
+    '<span>{{type}}</span> {{index}} - {{title}} कडून {{parentname}}',
+  'content.modals.delete-content.content-legend-header':
+    '{{parentname}} कडून {{title}}',
+  'content.modals.delete-content.delete-warning':
+    'या {{type}} मधील सर्व मजकूर हटवला जाईल',
+  'content.modals.delete-content.delete-error':
+    'क्षमा करा! ह्या क्षणी {{type}} हटवण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'content.modals.delete-content.confirmation':
+    'तुम्हाला खरंच हे सुरु ठेवायचे आहे का? कृपया खाली "डिलीट" टाइप करा आणि "डिलीट" वर क्लिक करा.',
+  'content.modals.delete-resource.legend':
+    'तुम्हाला खरंच कायमचे <b>{{title}}</b> हटवायचे आहे का याची पुष्टी करा',
+  'content.modals.delete-resource.delete-warning':
+    'या {{type}} मधील सर्व मजकूर हटवला जाईल',
+  'content.modals.delete-resource.delete-error':
+    'क्षमा करा! ह्या क्षणी {{type}} हटवण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'content.modals.delete-resource.confirmation':
+    'तुम्हाला खरंच हे सुरु ठेवायचे आहे का? कृपया "कायमचे हटवा" वर क्लिक करा.',
+  'content.modals.delete-resource.first-check':
+    'हे कायमचे हटविले केले गेले आहे आणि पूर्ववत केले जाऊ शकत नाही',
+  'content.modals.delete-resource.second-check':
+    'आपल्या संकलनातील आणि समुदायाच्या इतर वापरकर्ताकडील कोणत्याही संकलनातील या संसाधनाची प्रत हटविली जाईल',
+  'content.modals.delete-rubric.legend':
+    'तुम्हाला खरंच कायमचे <b>{{title}}</b> हटवायचे आहे का याची पुष्टी करा',
+  'content.modals.delete-rubric.delete-warning':
+    'या मथळ्या मधील मजकूर हटवला जाईल',
+  'content.modals.delete-rubric.delete-error':
+    'क्षमा करा! ह्या क्षणी मथळा हटवण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा',
+  'content.modals.delete-rubric.confirmation':
+    'तुम्हाला खरंच हे सुरु ठेवायचे आहे का? कृपया "कायमचे हटवा" वर क्लिक करा.',
+  'content.modals.delete-rubric.first-check':
+    'हे कायमचे हटविले केले गेले आहे आणि पूर्ववत केले जाऊ शकत नाही',
+  'content.modals.remove-content.legend':
+    'आपण <b>{{parentname}}</b> मधून <b>{{title}}</b>काढून टाकत आहात',
+  'content.modals.remove-content.remove-error':
+    'क्षमा करा! ह्या क्षणी {{type}} काढण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा',
+  'content.modals.remove-content.confirmation':
+    'तुम्हाला खरंच हे सुरु ठेवायचं आहे का? कृपया खाली "रिमूव्ह" टाइप करा आणि "रिमूव्ह"वर  क्लिक करा.',
+  'content.modals.remove-student.title':
+    'विद्यार्थी आणि त्यांचा डेटा काढून टाका',
+  'content.modals.remove-student.legend':
+    'आपण या वर्गातून {{studentName}} ला काढून टाकणार आहात आणि त्यांचा सर्व डेटा डिलीट करणार आहात.',
+  'content.modals.remove-student.data-inaccessible':
+    'त्यांचा सर्व डेटा डिलीट केला जाईल आणि तुम्ही किंवा ते पुन्हा वापरू शकणार नाही',
+  'content.modals.remove-student.classroom-access':
+    'त्यांना वर्ग किंवा मजकूर पाहू शकणार नाहीत',
+  'content.modals.remove-student.data-lost':
+    'जर ते पुन्हा क्लासमध्ये सहभागी झाले तर, तर मागील सर्व डेटा गमावलेला असेल',
+  'content.modals.remove-student.remove-error':
+    'क्षमा करा! ह्या क्षणी ह्या विद्यार्थ्याला काढून टाकण्यास अक्षम. कृपया लवकरच पुन्हा प्रयत्न करा.',
+  'content.modals.remove-student.confirmation':
+    'तुम्हाला खरंच हे सुरु ठेवायचे आहे का? कृपया खाली "डिलीट" टाइप करा आणि "डिलीट" वर क्लिक करा.',
+  'content.modals.quick-remove-content.legend':
+    'तुम्हाला <b>{{parentName}}</b> मधून <b>{{title}}</b> काढून टाकायचे आहे याची पुष्टी करा.',
+  'content.modals.quick-delete-content.legend':
+    'तुम्हाला <b>{{parentName}}</b> मधून <b>{{title}}</b> कायमसाठी काढून टाकायचे आहे याची पुष्टी करा.',
   'content.modals.quick-delete-content.delete': 'कायमचे हटवा',
-  'content.resources.edit.best-practices': '<p> संसाधने हि बहुमाध्यमी मजकूर असतात जी व्हिडीओ, मुलाखती, संभाषणे, संकेतस्थळे, प्रतिमा, Google डॉक्स आणि अन्य अनेक प्रकारात उपलब्ध असतात. सृजनशील व्हा आणि तुमची स्वत:ची संसाधने वापरा किंवा “संसाधनयुक्त” व्हा आणि गुरूमधील आमचा पुरेसा पुरवठा पहा.</p><p>आपल्या विद्यार्थ्यांना व्यस्त ठेवण्यासाठी विविध प्रकारचे संसाधन वापरा आणि वर्णन व विवरण समाविष्ट करा जेणेकरुन आपण  आपल्या विद्यार्थ्यांना संसाधनाद्वारे मार्गदर्शन करण्यास मदत करू शकता.</p><p>> आम्ही प्रत्येक प्रश्नासाठी इयत्ता, लघु इयत्ता आणि 21 व्या शतकातील कौशल्यांचे टॅगिंग करण्याची शिफारस करतो. आपण शिक्षक डॅशबोर्डद्वारे आपले विद्यार्थी संसाधनांसह परस्परसंवाद कसा करतात हे पाहू शकता.</p>',
-  'content.resources.edit.placeholder-message': '<span>येथे आगाऊ प्रदर्शन दाखवा</span>> यात संसाधन जोडा',
-  'content.resources.edit.not-implemented': 'संसाधन प्रकाराचे आगाऊ प्रदर्शन 1]अद्याप लागू नाही.</span>',
+  'content.resources.edit.best-practices':
+    '<p> संसाधने हि बहुमाध्यमी मजकूर असतात जी व्हिडीओ, मुलाखती, संभाषणे, संकेतस्थळे, प्रतिमा, Google डॉक्स आणि अन्य अनेक प्रकारात उपलब्ध असतात. सृजनशील व्हा आणि तुमची स्वत:ची संसाधने वापरा किंवा “संसाधनयुक्त” व्हा आणि गुरूमधील आमचा पुरेसा पुरवठा पहा.</p><p>आपल्या विद्यार्थ्यांना व्यस्त ठेवण्यासाठी विविध प्रकारचे संसाधन वापरा आणि वर्णन व विवरण समाविष्ट करा जेणेकरुन आपण  आपल्या विद्यार्थ्यांना संसाधनाद्वारे मार्गदर्शन करण्यास मदत करू शकता.</p><p>> आम्ही प्रत्येक प्रश्नासाठी इयत्ता, लघु इयत्ता आणि 21 व्या शतकातील कौशल्यांचे टॅगिंग करण्याची शिफारस करतो. आपण शिक्षक डॅशबोर्डद्वारे आपले विद्यार्थी संसाधनांसह परस्परसंवाद कसा करतात हे पाहू शकता.</p>',
+  'content.resources.edit.placeholder-message':
+    '<span>येथे आगाऊ प्रदर्शन दाखवा</span>> यात संसाधन जोडा',
+  'content.resources.edit.not-implemented':
+    'संसाधन प्रकाराचे आगाऊ प्रदर्शन 1]अद्याप लागू नाही.</span>',
   'content.resources.edit.information.im-publisher': 'मी प्रकाशक आहे',
   'content.resources.edit.information.select-a-license': 'कृपया परवाना निवडा',
   'content.oa.reference.uploaded': 'अपलोड केले',
@@ -927,7 +1149,8 @@ window.i18ln = {
   'user.join-class': 'क्लासरूममध्ये सहभागी व्हा',
   'user.joined-classes.zero': 'आपण सध्या {{count}} वर्गांमध्ये नोंदणी केली आहे',
   'user.joined-classes.one': 'आपण सध्या 1 वर्गामध्ये नाव नोंदवले आहे',
-  'user.joined-classes.other': 'आपण सध्या {{count}} वर्गांमध्ये नोंदणी केली आहे',
+  'user.joined-classes.other':
+    'आपण सध्या {{count}} वर्गांमध्ये नोंदणी केली आहे',
   'user.my-current-classes': 'माझे वर्तमान वर्ग',
   'user.manage-goals': 'गोल व्यवस्थापित करा',
   'user.my-classes': 'माझे वर्ग',
@@ -956,10 +1179,14 @@ window.i18ln = {
   'student-landing.class.my-location': 'माझा स्थान',
   'student-landing.class.my-proficiency': 'माझं प्राविण्य',
   'student-landing.class.establish-skyline': 'चला तुमची ध्येय ठरवूया',
-  'student-landing.class.waiting-establish-skyline': 'तुमच्या शिक्षकांनी वर्ग स्थापित करणे पूर्ण करण्याची प्रतीक्षा करत आहोत.',
-  'student-landing.class.setup-in-complete-desc1': 'असे दिसत आहे कि तुमच्या शिक्षकाने केलेलं नाही',
-  'student-landing.class.setup-in-complete-desc2': 'क्लास सेटिंग्ज अपडेट केली आहे',
-  'student-landing.class.setup-in-complete-desc3': 'कृपया समस्या सोडवण्यासाठी तिच्याशी संपर्क साधा. एकदा का सर्व योग्यरीत्या स्थापन झाले कि पुन्हा पेज रिफ्रेश करा.',
+  'student-landing.class.waiting-establish-skyline':
+    'तुमच्या शिक्षकांनी वर्ग स्थापित करणे पूर्ण करण्याची प्रतीक्षा करत आहोत.',
+  'student-landing.class.setup-in-complete-desc1':
+    'असे दिसत आहे कि तुमच्या शिक्षकाने केलेलं नाही',
+  'student-landing.class.setup-in-complete-desc2':
+    'क्लास सेटिंग्ज अपडेट केली आहे',
+  'student-landing.class.setup-in-complete-desc3':
+    'कृपया समस्या सोडवण्यासाठी तिच्याशी संपर्क साधा. एकदा का सर्व योग्यरीत्या स्थापन झाले कि पुन्हा पेज रिफ्रेश करा.',
   'student-landing.course.to-report': 'वापर सारांश',
   'student-landing.course.total-time-spent': 'खर्च केलेला एकूण वेळ',
   'student-landing.current-activity': 'वर्तमान कार्य',
@@ -967,45 +1194,63 @@ window.i18ln = {
   'student-landing.last-activity': 'शेवटची क्रिया',
   'student-landing.start-studying': 'अभ्यास सुरू करा',
   'student-landing.not-available': 'लागू नाही',
-  'student-landing.join-classroom': 'शिकण्यास प्रारंभ करण्यासाठी आपल्या शिक्षकांच्या वर्गात सहभागी व्हा',
+  'student-landing.join-classroom':
+    'शिकण्यास प्रारंभ करण्यासाठी आपल्या शिक्षकांच्या वर्गात सहभागी व्हा',
   'student-landing.learn': 'गोरु वर्गातून  शिका',
   'student-landing.my-performance.activity': 'कार्य',
   'student-landing.my-performance.activities.study': 'अभ्यास',
   'student-landing.my-performance.assessments': 'मूल्यांकन',
   'student-landing.my-performance.collections': 'संग्रह',
   'student-landing.my-performance.filter': 'फिल्टर',
-  'student-landing.my-performance.primary-text': 'आपण विश्लेषण करू इच्छिता त्या गोष्टी निवडा आणि आम्ही तुमच्यासाठी एक वैयक्तिकृत कामगिरी अहवाल तयार करू.',
+  'student-landing.my-performance.primary-text':
+    'आपण विश्लेषण करू इच्छिता त्या गोष्टी निवडा आणि आम्ही तुमच्यासाठी एक वैयक्तिकृत कामगिरी अहवाल तयार करू.',
   'student-landing.my-performance.subject': 'विषय',
   'student-landing.my-performance.title': 'आपल्या कामगिरीचे विश्लेषण करा',
   'student-landing.my-performance.time-period': 'कालावधी',
   'student-landing.my-performance.update-report': 'अहवाल अपडेट करा',
   'student-landing.study-player': 'अभ्यास खेळाडू',
   'student-landing.my-study': 'माझा अभ्यास',
-  'student-landing.no-classrooms': 'तुम्ही कोणत्याही वर्गात सहभाग घेतलेला नाही. तुमच्या शिक्षकांच्या वर्गात जोडले जाण्यासाठी “</br> वर्गात सहभागी व्हा वर क्लिक करा. तुम्ही ग्रंथालय पर्यायातही </br> वैशिष्ट्यकृत अभ्यासक्रम शोधू शकता.',
-  'student-landing.no-content-classrooms': 'या वर्गात सध्या कोणतीही सामग्री उपलब्ध नाही',
+  'student-landing.no-classrooms':
+    'तुम्ही कोणत्याही वर्गात सहभाग घेतलेला नाही. तुमच्या शिक्षकांच्या वर्गात जोडले जाण्यासाठी “</br> वर्गात सहभागी व्हा वर क्लिक करा. तुम्ही ग्रंथालय पर्यायातही </br> वैशिष्ट्यकृत अभ्यासक्रम शोधू शकता.',
+  'student-landing.no-content-classrooms':
+    'या वर्गात सध्या कोणतीही सामग्री उपलब्ध नाही',
   'student-landing.welcome': 'गुरुमध्ये स्वागत आहे',
-  'student-landing.no-course-assigned': 'अद्याप या वर्गात कोणताही अभ्यासक्रम नियुक्त केला गेला नाही. कृपया आपल्या शिक्षकांशी संपर्क साधा.',
+  'student-landing.no-course-assigned':
+    'अद्याप या वर्गात कोणताही अभ्यासक्रम नियुक्त केला गेला नाही. कृपया आपल्या शिक्षकांशी संपर्क साधा.',
   'student-independent-learning.show-more': 'अजून दाखवा',
   'student-independent-learning.show-less': 'कमी दर्शवा',
-  'student-independent-learning.no-courses': 'जेव्हा आपण आपले बुकमार्क केलेले अभ्यासक्रम शोधाल, तेव्हा ते इथे दिसतील.',
-  'student-independent-learning.no-collections': 'जेव्हा आपण आपले बुकमार्क केलेले संकलन शोधाल, तेव्हा ते इथे दिसतील.',
-  'student-independent-learning.no-assessments': 'जेव्हा आपण आपले बुकमार्क केलेले मुल्यांकन शोधाल, तेव्हा ते इथे दिसतील.',
-  'student-independent-learning.no-independent-results': 'काहीतरी नवीन शिकण्यासाठी लायब्ररी पहा.',
-  'student-independent-learning.no-bookmarks': 'जेव्हा तुम्ही  अभ्यासक्रम, संकलन आणि मूल्यमापन बुकमार्क करणे सुरु करता तेव्हा ते इथे दिसतील.',
+  'student-independent-learning.no-courses':
+    'जेव्हा आपण आपले बुकमार्क केलेले अभ्यासक्रम शोधाल, तेव्हा ते इथे दिसतील.',
+  'student-independent-learning.no-collections':
+    'जेव्हा आपण आपले बुकमार्क केलेले संकलन शोधाल, तेव्हा ते इथे दिसतील.',
+  'student-independent-learning.no-assessments':
+    'जेव्हा आपण आपले बुकमार्क केलेले मुल्यांकन शोधाल, तेव्हा ते इथे दिसतील.',
+  'student-independent-learning.no-independent-results':
+    'काहीतरी नवीन शिकण्यासाठी लायब्ररी पहा.',
+  'student-independent-learning.no-bookmarks':
+    'जेव्हा तुम्ही  अभ्यासक्रम, संकलन आणि मूल्यमापन बुकमार्क करणे सुरु करता तेव्हा ते इथे दिसतील.',
   'student-independent-learning.add-bookmark': 'बुकमार्क जोडा',
   'teacher-landing.latest-announcement': 'नवीनतम घोषणा',
   'teacher-landing.latest-assessment': 'नवीनतम मूल्यांकन',
-  'teacher-landing.create-classroom': 'वर्ग तयार करा, सामग्री नियुक्त करा, विद्यार्थ्यांना आमंत्रित करा',
-  'teacher-landing.dca-create-info': 'खालील चिन्हांवर क्लिक करा आणि वर्ग क्रिया तयार करण्यासाठी गुरु लायब्ररीमधून मजकूर शोधा. तुम्ही अभ्यासक्रमाच्या आराखड्यावर क्लिक करून तुमच्या अभ्यासक्रमाच्या आराखड्यातून वर्ग क्रियेत मजकूरही जोडू शकता.',
+  'teacher-landing.create-classroom':
+    'वर्ग तयार करा, सामग्री नियुक्त करा, विद्यार्थ्यांना आमंत्रित करा',
+  'teacher-landing.dca-create-info':
+    'खालील चिन्हांवर क्लिक करा आणि वर्ग क्रिया तयार करण्यासाठी गुरु लायब्ररीमधून मजकूर शोधा. तुम्ही अभ्यासक्रमाच्या आराखड्यावर क्लिक करून तुमच्या अभ्यासक्रमाच्या आराखड्यातून वर्ग क्रियेत मजकूरही जोडू शकता.',
   'teacher-landing.schedule-for-later': 'नंतरसाठी निर्धारित करा',
-  'teacher-landing.teach-this-activity-later': 'नंतर डीसीए येथे या क्रिया शिकवा',
-  'teacher-landing.schedule-dca-instruction-1': 'ही गतिविधी शिकवण्याची पुढील तारीख निवडा.',
-  'teacher-landing.schedule-dca-instruction-2': 'ही क्रिया निवडलेल्या तारखेसाठी डीसीए ​​येथे दिसेल.',
+  'teacher-landing.teach-this-activity-later':
+    'नंतर डीसीए येथे या क्रिया शिकवा',
+  'teacher-landing.schedule-dca-instruction-1':
+    'ही गतिविधी शिकवण्याची पुढील तारीख निवडा.',
+  'teacher-landing.schedule-dca-instruction-2':
+    'ही क्रिया निवडलेल्या तारखेसाठी डीसीए ​​येथे दिसेल.',
   'teacher-landing.navigator-banner.title': 'गणित साठी मार्गदर्शक',
-  'teacher-landing.navigator-banner.description': 'शिक्षण तंत्रज्ञानासाठी या जीपीएसचा वापर करून, आम्ही गणितासाठी मार्गदर्शक तयार केले आहे जेणेकरुन प्रत्येक विद्यार्थी आत्मविश्वास मिळवू शकेल आणि गणितातील त्यांच्या शिक्षणास वेग वाढवू शकेल.<br/>गणितासाठी मार्गदर्शक हा अशा अभ्यासाचा अभ्यासक्रम आहे ज्यायोगे स्तर 2-12 मधील सर्व गणित संकल्पनांचा समावेश असेल. विद्यार्थ्यांक्झ्या वर्तमान ज्ञानानुसार त्यांना अधिक प्रगल्भ करण्यासाठी, त्याचप्रमाणे त्यांच्या आकलनातील उणीवा भरून काढण्यासाठी विद्यार्थ्यांना मार्ग आखून दिला जातो आणि नंतर विशिष्ट वैयक्तिकृत मार्गाने त्यांना पुर्नमार्गदर्शित केले जाते. या व्यापक आणि वैयक्तिकृत शिक्षणाच्या अनुभवाद्वारे, प्रत्येक विद्यार्थी अधिक प्रगत गणितासाठी पूर्णपणे तयार होऊ शकतो.',
+  'teacher-landing.navigator-banner.description':
+    'शिक्षण तंत्रज्ञानासाठी या जीपीएसचा वापर करून, आम्ही गणितासाठी मार्गदर्शक तयार केले आहे जेणेकरुन प्रत्येक विद्यार्थी आत्मविश्वास मिळवू शकेल आणि गणितातील त्यांच्या शिक्षणास वेग वाढवू शकेल.<br/>गणितासाठी मार्गदर्शक हा अशा अभ्यासाचा अभ्यासक्रम आहे ज्यायोगे स्तर 2-12 मधील सर्व गणित संकल्पनांचा समावेश असेल. विद्यार्थ्यांक्झ्या वर्तमान ज्ञानानुसार त्यांना अधिक प्रगल्भ करण्यासाठी, त्याचप्रमाणे त्यांच्या आकलनातील उणीवा भरून काढण्यासाठी विद्यार्थ्यांना मार्ग आखून दिला जातो आणि नंतर विशिष्ट वैयक्तिकृत मार्गाने त्यांना पुर्नमार्गदर्शित केले जाते. या व्यापक आणि वैयक्तिकृत शिक्षणाच्या अनुभवाद्वारे, प्रत्येक विद्यार्थी अधिक प्रगत गणितासाठी पूर्णपणे तयार होऊ शकतो.',
   'teacher-landing.navigator-banner.join': 'डेमो वर्गामध्ये सहभागी व्हा',
-  'teacher-landing.navigator-banner.success-message': 'मार्गदर्शक वर्गामध्ये तुम्ही यशस्वीपणे सह-शिक्षक म्हणून सहभागी झालेले आहात.',
-  'teacher-landing.navigator-banner.error-message': 'वर्गात सहभागी होतानाच्या समस्या',
+  'teacher-landing.navigator-banner.success-message':
+    'मार्गदर्शक वर्गामध्ये तुम्ही यशस्वीपणे सह-शिक्षक म्हणून सहभागी झालेले आहात.',
+  'teacher-landing.navigator-banner.error-message':
+    'वर्गात सहभागी होतानाच्या समस्या',
   'teacher-landing.class.manage': 'व्यवस्थापित करा',
   'teacher-landing.class.reports': 'अहवाल',
   'teacher-landing.class.daily-activites': 'दैनंदिन क्रिया',
@@ -1017,24 +1262,32 @@ window.i18ln = {
   'teacher-landing.class.performance-overview': 'कामगिरी आढावा',
   'teacher-landing.class.student-proficiency': 'विद्यार्थ्यांचे प्रभुत्व',
   'teacher-landing.class.class-management-tab.actions': 'कृती',
-  'teacher-landing.class.class-management-tab.assessment-min-score': 'पुरस्कार मिळवण्यासाठी आवश्यक कमीत कमी गुण',
-  'teacher-landing.class.class-management-tab.assigned-course': 'नियुक्त अभ्यासक्रम',
+  'teacher-landing.class.class-management-tab.assessment-min-score':
+    'पुरस्कार मिळवण्यासाठी आवश्यक कमीत कमी गुण',
+  'teacher-landing.class.class-management-tab.assigned-course':
+    'नियुक्त अभ्यासक्रम',
   'teacher-landing.class.class-management-tab.archive': 'संग्रह',
-  'teacher-landing.class.class-management-tab.archive-class': 'वर्ग संग्रहण करा',
+  'teacher-landing.class.class-management-tab.archive-class':
+    'वर्ग संग्रहण करा',
   'teacher-landing.class.class-management-tab.archive-classroom': 'संग्रह वर्ग',
-  'teacher-landing.class.class-management-tab.attend-class-with-code': 'कोडसह वर्गात हजर रहा',
+  'teacher-landing.class.class-management-tab.attend-class-with-code':
+    'कोडसह वर्गात हजर रहा',
   'teacher-landing.class.class-management-tab.class-information': 'वर्ग माहिती',
   'teacher-landing.class.class-management-tab.class-name': 'वर्गाचे नाव',
   'teacher-landing.class.class-management-tab.class-code': 'वर्ग कोड',
-  'teacher-landing.class.class-management-tab.click-to-copy-class-code': 'वर्ग कोड कॉपी करण्यासाठी क्लिक करा',
-  'teacher-landing.class.class-management-tab.course-information': 'अभ्यासक्रम माहिती',
+  'teacher-landing.class.class-management-tab.click-to-copy-class-code':
+    'वर्ग कोड कॉपी करण्यासाठी क्लिक करा',
+  'teacher-landing.class.class-management-tab.course-information':
+    'अभ्यासक्रम माहिती',
   'teacher-landing.class.class-management-tab.delete': 'हटवा',
   'teacher-landing.class.class-management-tab.delete-class': 'वर्ग हटवा',
-  'teacher-landing.class.class-management-tab.download-roster': 'क्रिया यादी डाउनलोड करा',
+  'teacher-landing.class.class-management-tab.download-roster':
+    'क्रिया यादी डाउनलोड करा',
   'teacher-landing.class.class-management-tab.edit': 'संपादित करा',
   'teacher-landing.class.class-management-tab.email-address': 'ईमेल पत्ता',
   'teacher-landing.class.class-management-tab.first-name': 'पहिले नाव',
-  'teacher-landing.class.class-management-tab.import-roster': 'क्रिया यादी आयात करा',
+  'teacher-landing.class.class-management-tab.import-roster':
+    'क्रिया यादी आयात करा',
   'teacher-landing.class.class-management-tab.last-name': 'आडनाव',
   'teacher-landing.class.class-management-tab.message': 'संदेश',
   'teacher-landing.class.class-management-tab.performance': 'कामगिरी',
@@ -1043,40 +1296,57 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.student-id': 'विद्यार्थी ओळखपत्र',
   'teacher-landing.class.class-management-tab.teachers': 'शिक्षक',
   'teacher-landing.class.class-management-tab.view-report': 'अहवाल पहा',
-  'teacher-landing.class.class-management-tab.course-null': 'ह्या वर्गाला अद्याप कोणताही अभ्यासक्रम नियुक्त केलेला नाही.',
-  'teacher-landing.class.class-management-tab.course-subject-null': 'वर्गाला नेमलेला अभ्यासक्रम वैध विषयाला जोडलेला नाही.',
-  'teacher-landing.class.class-management-tab.students-null': 'विद्यार्थ्यांनी तुमच्या वर्गात सहभागी व्हावे यासाठी त्यांच्यासोबर वर्ग कोड शेअर करा. ',
+  'teacher-landing.class.class-management-tab.course-null':
+    'ह्या वर्गाला अद्याप कोणताही अभ्यासक्रम नियुक्त केलेला नाही.',
+  'teacher-landing.class.class-management-tab.course-subject-null':
+    'वर्गाला नेमलेला अभ्यासक्रम वैध विषयाला जोडलेला नाही.',
+  'teacher-landing.class.class-management-tab.students-null':
+    'विद्यार्थ्यांनी तुमच्या वर्गात सहभागी व्हावे यासाठी त्यांच्यासोबर वर्ग कोड शेअर करा. ',
   'teacher-landing.class.students-tab.last-name': 'आडनाव',
   'teacher-landing.class.students-tab.first-name': 'पहिले नाव',
   'teacher-landing.class.students-tab.performance': 'कामगिरी',
   'teacher-landing.class.students-tab.proficiency': 'प्राविण्य',
   'teacher-landing.class.students-tab.location': 'स्थान',
-  'teacher-landing.class.students-tab.currently-studying': 'सध्या अभ्यास करत आहे',
+  'teacher-landing.class.students-tab.currently-studying':
+    'सध्या अभ्यास करत आहे',
   'teacher-landing.class.students-tab.student-id': 'विद्यार्थी ओळखपत्र',
   'teacher-landing.class.students-tab.remove': 'काढा',
   'teacher-landing.class.students-tab.mastered': 'प्रभुत्व मिळवले आहे',
   'teacher-landing.class.students-tab.in-progress': 'प्रक्रिया सुरु आहे',
   'teacher-landing.class.students-tab.not-started': 'सुरु झालेले नाही',
-  'teacher-landing.class.students-tab.course-coverage': 'अभ्यासक्रमाची व्याप्ती',
+  'teacher-landing.class.students-tab.course-coverage':
+    'अभ्यासक्रमाची व्याप्ती',
   'teacher-landing.class.students-tab.class-statistics': 'वर्गाची आकडेवारी',
   'teacher-landing.class.students-tab.proficiency-in': 'मध्ये प्राविण्य',
   'teacher-landing.class.students-tab.data-not-available': 'माहिती उपलब्ध नाही',
-  'teacher-landing.class.students-tab.course-coverage-label': 'वर्गातील सर्व विद्यार्थ्यांच्या क्षमतांचा घेतलेला एकत्रित आढावा',
-  'teacher-landing.class.students-tab.error-message': 'या वर्गासाठी कोणताही अभ्यासक्रम नियुक्त केलेला नाही किंवा या वर्गात विद्यार्थी कार्य यादी तयार नाही. जेव्हा वर्गात अभ्यासक्रम तसेच त्यातील विद्यार्थी भरले जातील तेव्हा वर्गाचा क्षमता अहवाल येथे दाखवला जाईल.',
-  'teacher-landing.class.atc-view.domains-reviewed': 'उपलब्ध क्षेत्रांच अवलोकन ',
-  'teacher-landing.class.atc-view.class-activities-completed': 'वर्गातील पूर्ण झालेले उपक्रम ',
-  'teacher-landing.class.atc-view.class-activities-pending': 'वर्गातील बाकी राहिलेले उपक्रम',
+  'teacher-landing.class.students-tab.course-coverage-label':
+    'वर्गातील सर्व विद्यार्थ्यांच्या क्षमतांचा घेतलेला एकत्रित आढावा',
+  'teacher-landing.class.students-tab.error-message':
+    'या वर्गासाठी कोणताही अभ्यासक्रम नियुक्त केलेला नाही किंवा या वर्गात विद्यार्थी कार्य यादी तयार नाही. जेव्हा वर्गात अभ्यासक्रम तसेच त्यातील विद्यार्थी भरले जातील तेव्हा वर्गाचा क्षमता अहवाल येथे दाखवला जाईल.',
+  'teacher-landing.class.atc-view.domains-reviewed':
+    'उपलब्ध क्षेत्रांच अवलोकन ',
+  'teacher-landing.class.atc-view.class-activities-completed':
+    'वर्गातील पूर्ण झालेले उपक्रम ',
+  'teacher-landing.class.atc-view.class-activities-pending':
+    'वर्गातील बाकी राहिलेले उपक्रम',
   'teacher-landing.class.atc-view.show-all': 'सर्व दाखवा ',
   'teacher-landing.class.atc-view.collapse': 'कोलॅप्स करा',
-  'teacher-landing.class.atc-view.total-competencies-gained': 'एकूण प्राप्त क्षमता',
-  'teacher-landing.class.atc-view.progress-label': '(# क्षमतांचा झालेला) विकास ',
-  'teacher-landing.class.atc-view.progress-to-destination': 'गंतव्य स्थानाच्या दिशेने होणारी प्रगती',
+  'teacher-landing.class.atc-view.total-competencies-gained':
+    'एकूण प्राप्त क्षमता',
+  'teacher-landing.class.atc-view.progress-label':
+    '(# क्षमतांचा झालेला) विकास ',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'गंतव्य स्थानाच्या दिशेने होणारी प्रगती',
   'teacher-landing.class.class-activities': 'वर्गाचे नियोजन',
-  'teacher-landing.class.class-activities.input-timespent': 'व्यतीत केलेला वेळ सांगा',
-  'teacher-landing.class.class-activities.warning-message': 'तुम्ही {{studentName}} साठी {{questionCount}} प्रश्नांचा डेटा प्रविष्ट केलेला नाही. इतर विद्यार्थ्याची निवड केल्यास डेटा हटवला जाईल. तुम्हाला तरीही सुरु ठेवायचे आहे का?',
-  'teacher-landing.class.class-activities.info-message': 'तुम्ही {{studentName}} साठी डेटा प्रविष्ट केलेला आहे, पण तो सेव्ह केलेला नाही. सुरु ठेवण्यापूर्वी तो तुम्हाला सेव्ह करण्याची इच्छा आहे का?',
+  'teacher-landing.class.class-activities.input-timespent':
+    'व्यतीत केलेला वेळ सांगा',
+  'teacher-landing.class.class-activities.warning-message':
+    'तुम्ही {{studentName}} साठी {{questionCount}} प्रश्नांचा डेटा प्रविष्ट केलेला नाही. इतर विद्यार्थ्याची निवड केल्यास डेटा हटवला जाईल. तुम्हाला तरीही सुरु ठेवायचे आहे का?',
+  'teacher-landing.class.class-activities.info-message':
+    'तुम्ही {{studentName}} साठी डेटा प्रविष्ट केलेला आहे, पण तो सेव्ह केलेला नाही. सुरु ठेवण्यापूर्वी तो तुम्हाला सेव्ह करण्याची इच्छा आहे का?',
   'teacher-landing.class.offline-class-report.class-report': 'वर्ग अहवाल',
-  'teacher-landing.class.offline-class-report.class-activity-report': 'वर्ग क्रिया अहवाल',
+  'teacher-landing.class.offline-class-report.class-activity-report':
+    'वर्ग क्रिया अहवाल',
   'teacher-landing.class.offline-class-report.activity-report': 'उपक्रम अहवाल',
   'teacher-landing.class.offline-class-report.conducted-on': 'दिनांक',
   'teacher-landing.class.offline-class-report.not-started': 'सुरु झालेले नाही',
@@ -1084,23 +1354,36 @@ window.i18ln = {
   'teacher-landing.class.class-activities-tab.today': 'आज:',
   'teacher-landing.class.class-activities-tab.yesterday': 'काल:',
   'teacher-landing.class.class-activities-tab.month': 'महिना:',
-  'teacher-landing.class.class-activities-tab.add-from-course-map': 'अभ्यासक्रम आराखड्यातून जोडा',
-  'teacher-landing.class.class-activities-tab.add-from-my-content': 'माझी सामग्री मधून जोडा',
-  'teacher-landing.class.class-activities-tab.welcome-dca': 'आपल्या वर्ग कार्यामध्ये आपले स्वागत आहे, जिथे आपण आज विद्यार्थ्यांना पूर्ण करण्यासाठी संकलने आणि आकलन सोपवू शकता. कृपया लक्षात ठेवा: आज निर्माण झालेला कोणताही अहवाल सर्वात नवीनतम प्रयत्नासाठी उपलब्ध असेल.',
-  'teacher-landing.class.class-activities-tab.enter-max-timespent': 'मूल्यमापनासाठी लागलेला जास्तीत जास्त वेळ प्रविष्ट करा',
-  'teacher-landing.class.class-activities-tab.enter-max-assessment-time-spent': 'मूल्यमापन पूर्ण करण्यासाठी लागलेला एकूण वेळ',
-  'teacher-landing.class.class-activities-tab.enter-max-score': 'या मूल्यमापनासाठी दिले जाणारे जास्तीत जास्त गुण प्रविष्ट करा',
+  'teacher-landing.class.class-activities-tab.add-from-course-map':
+    'अभ्यासक्रम आराखड्यातून जोडा',
+  'teacher-landing.class.class-activities-tab.add-from-my-content':
+    'माझी सामग्री मधून जोडा',
+  'teacher-landing.class.class-activities-tab.welcome-dca':
+    'आपल्या वर्ग कार्यामध्ये आपले स्वागत आहे, जिथे आपण आज विद्यार्थ्यांना पूर्ण करण्यासाठी संकलने आणि आकलन सोपवू शकता. कृपया लक्षात ठेवा: आज निर्माण झालेला कोणताही अहवाल सर्वात नवीनतम प्रयत्नासाठी उपलब्ध असेल.',
+  'teacher-landing.class.class-activities-tab.enter-max-timespent':
+    'मूल्यमापनासाठी लागलेला जास्तीत जास्त वेळ प्रविष्ट करा',
+  'teacher-landing.class.class-activities-tab.enter-max-assessment-time-spent':
+    'मूल्यमापन पूर्ण करण्यासाठी लागलेला एकूण वेळ',
+  'teacher-landing.class.class-activities-tab.enter-max-score':
+    'या मूल्यमापनासाठी दिले जाणारे जास्तीत जास्त गुण प्रविष्ट करा',
   'teacher-landing.class.class-activities-tab.hour': 'एच',
   'teacher-landing.class.class-activities-tab.min': 'एम',
   'teacher-landing.class.class-activities-tab.question-score': 'प्रश्नाचे गुण',
   'teacher-landing.class.class-activities-tab.max-score': 'जास्तीत जास्त गुण',
-  'teacher-landing.class.class-activities-tab.assessment-score': 'मूल्यमापनाचे गुण',
-  'teacher-landing.class.class-activities-tab.assessment-max-score': 'मूल्यमापनाचे जास्तीत जास्त गुण',
-  'teacher-landing.class.class-activities-tab.enter-valid-timespent': 'लागलेला एकूण वैध वेळ प्रविष्ट करा',
-  'teacher-landing.class.class-activities-tab.create-activity': 'उपक्रम तयार करा',
-  'teacher-landing.class.class-activities-tab.schedule-activity': 'नियोजित उपक्रम',
-  'teacher-landing.class.class-activities-tab.add-subject-framework': 'कृपया वर्ग सेटिंग्जमध्ये विषय आणि अभ्यासक्रम आराखडा निवडा',
-  'teacher-landing.class.class-activities-tab.create-external-collection': 'बाह्य संग्रह तयार करा',
+  'teacher-landing.class.class-activities-tab.assessment-score':
+    'मूल्यमापनाचे गुण',
+  'teacher-landing.class.class-activities-tab.assessment-max-score':
+    'मूल्यमापनाचे जास्तीत जास्त गुण',
+  'teacher-landing.class.class-activities-tab.enter-valid-timespent':
+    'लागलेला एकूण वैध वेळ प्रविष्ट करा',
+  'teacher-landing.class.class-activities-tab.create-activity':
+    'उपक्रम तयार करा',
+  'teacher-landing.class.class-activities-tab.schedule-activity':
+    'नियोजित उपक्रम',
+  'teacher-landing.class.class-activities-tab.add-subject-framework':
+    'कृपया वर्ग सेटिंग्जमध्ये विषय आणि अभ्यासक्रम आराखडा निवडा',
+  'teacher-landing.class.class-activities-tab.create-external-collection':
+    'बाह्य संग्रह तयार करा',
   'teacher-landing.class.click-to-copy': 'वर्ग कोड कॉपी करण्यासाठी क्लिक करा',
   'teacher-landing.class.course-map': 'अभ्यासक्रम आराखडा',
   'teacher-landing.class.management': 'कार्य यादी व्यवस्थापन',
@@ -1109,36 +1392,59 @@ window.i18ln = {
   'teacher-landing.class.performance-tab.assessments': 'मूल्यांकन',
   'teacher-landing.class.performance-tab.collections': 'संग्रह',
   'teacher-landing.class.view-more': 'अधिक पहा',
-  'teacher-landing.class.class-settings.class-settings-sec.generate-pathway': 'वैयक्तिकृत शिक्षणाचा मार्ग',
-  'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-head': 'वर्ग सेटिंग्ज',
-  'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-desc': 'पुरस्कार  मिळवण्यासाठी किमान पात्रता',
-  'teacher-landing.class.class-settings.class-settings-sec.class-code': 'वर्ग संकेतांक',
+  'teacher-landing.class.class-settings.class-settings-sec.generate-pathway':
+    'वैयक्तिकृत शिक्षणाचा मार्ग',
+  'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-head':
+    'वर्ग सेटिंग्ज',
+  'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-desc':
+    'पुरस्कार  मिळवण्यासाठी किमान पात्रता',
+  'teacher-landing.class.class-settings.class-settings-sec.class-code':
+    'वर्ग संकेतांक',
   'teacher-landing.class.class-settings.class-settings-sec.subject': 'विषय',
   'teacher-landing.class.class-settings.class-settings-sec.framework': 'आराखडा',
-  'teacher-landing.class.class-settings.class-settings-sec.grade-level': 'वर्ग स्तर',
-  'teacher-landing.class.class-settings.class-settings-sec.option-choose-one': 'पर्याय निवडा',
-  'teacher-landing.class.class-settings.class-settings-sec.co-teachers': 'सह-शिक्षक',
-  'teacher-landing.class.class-settings.class-settings-sec.add-coteacher': 'आणखी शिक्षक जोडा',
-  'teacher-landing.class.class-settings.class-settings-sec.language': 'सुचनेची भाषा',
-  'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head': 'विद्यार्थी सेटिंग्ज',
-  'teacher-landing.class.class-settings.student-settings-sec.col-head-active': 'सक्रीय',
-  'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head': 'अभ्यासक्रम सेटिंग्ज',
-  'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable': 'वैयक्तीकृत शैक्षणिक मार्गात विद्यार्थ्यांच्या प्रोफाईलमधील उणीवांचा विचार करायचा आहे का?',
-  'teacher-landing.class.class-settings.course-settings-sec.apply-settings': 'सेटिंग्ज लागू करा',
-  'teacher-landing.class.class-settings.course-settings-sec.origin-info': 'तुमच्या वर्गामधील सर्वात खालचा अभ्यासक्रमाचा स्तर कोणता? ',
-  'teacher-landing.class.class-settings.course-settings-sec.current-grade-info': 'तुमच्या वर्गाचा इयत्ता स्तर काय आहे?',
+  'teacher-landing.class.class-settings.class-settings-sec.grade-level':
+    'वर्ग स्तर',
+  'teacher-landing.class.class-settings.class-settings-sec.option-choose-one':
+    'पर्याय निवडा',
+  'teacher-landing.class.class-settings.class-settings-sec.co-teachers':
+    'सह-शिक्षक',
+  'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
+    'आणखी शिक्षक जोडा',
+  'teacher-landing.class.class-settings.class-settings-sec.language':
+    'सुचनेची भाषा',
+  'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
+    'विद्यार्थी सेटिंग्ज',
+  'teacher-landing.class.class-settings.student-settings-sec.col-head-active':
+    'सक्रीय',
+  'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head':
+    'अभ्यासक्रम सेटिंग्ज',
+  'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable':
+    'वैयक्तीकृत शैक्षणिक मार्गात विद्यार्थ्यांच्या प्रोफाईलमधील उणीवांचा विचार करायचा आहे का?',
+  'teacher-landing.class.class-settings.course-settings-sec.apply-settings':
+    'सेटिंग्ज लागू करा',
+  'teacher-landing.class.class-settings.course-settings-sec.origin-info':
+    'तुमच्या वर्गामधील सर्वात खालचा अभ्यासक्रमाचा स्तर कोणता? ',
+  'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
+    'तुमच्या वर्गाचा इयत्ता स्तर काय आहे?',
   'teacher-landing.class.class-settings.origin': 'मूळ',
-  'teacher-landing.class.class-settings.destination': 'अध्ययन निष्पत्तीचे लक्ष्य',
+  'teacher-landing.class.class-settings.destination':
+    'अध्ययन निष्पत्तीचे लक्ष्य',
   'teacher-landing.class.class-settings.students': 'विद्यार्थी',
   'teacher-landing.class.class-settings.student-id': 'विद्यार्थी ओळखपत्र',
   'teacher-landing.class.class-settings.joined-on': 'सहभागी झाल्याची तारीख',
-  'teacher-landing.class.class-settings.action-lable-add-student': 'आणखी एक विद्यार्थी जोडा',
-  'teacher-landing.no-classrooms': 'तुम्ही अजून कोणतेही वर्ग तयार केलेले नाहीत. “वर्ग तयार करा” या पर्यायावर क्लिक करा किंवा लायब्ररी पर्यायामध्ये </br> वैशिष्ट्यकृत अभ्यासक्रम शोधा.',
-  'teacher-landing.no-course': 'आपण अद्याप या </br> वर्गाला कोणताही अभ्यासक्रम नेमून दिलेला नाही.',
+  'teacher-landing.class.class-settings.action-lable-add-student':
+    'आणखी एक विद्यार्थी जोडा',
+  'teacher-landing.no-classrooms':
+    'तुम्ही अजून कोणतेही वर्ग तयार केलेले नाहीत. “वर्ग तयार करा” या पर्यायावर क्लिक करा किंवा लायब्ररी पर्यायामध्ये </br> वैशिष्ट्यकृत अभ्यासक्रम शोधा.',
+  'teacher-landing.no-course':
+    'आपण अद्याप या </br> वर्गाला कोणताही अभ्यासक्रम नेमून दिलेला नाही.',
   'teacher-landing.teach': 'गुरु वर्गाच्या सहाय्याने शिकवा',
-  'teacher-landing.welcome-course-map': 'हा तुमचा अभ्यासक्रम आराखडा आहे येथे तुम्ही अभ्यासक्रमातील मजकूर पाहू शकता, मूल्यमापन सुरु किंवा बंद करू शकता तसेच प्रत्यक्ष वेळेत मूल्यमापन घेऊन माहिती भरू शकता. तुम्ही तुमच्या वर्गाची एकूण कामगिरी पाहू शकता तसेच वर्गातील पूर्ण-अपूर्ण उपक्रम पाहू शकता. वर्गाच्या कामगिरीचा  सविस्तर आढावा बघण्यासाठी वर्गाच्या अहवाल पर्यायावर जा.',
-  'teacher-landing.welcome-rescoped-course-map': 'वर्गातील प्रत्येक विद्यार्थ्यासाठी हा अभ्यासक्रम वैयक्तिकृत केलेला आहे. विद्यार्थी शैक्षणिक अभ्यास मार्ग यावर क्लिक करून तुम्ही प्रत्येक विद्यार्थ्याचा अभ्यासक्रम आराखडा वर्ग व्यवस्थापन पेजवर पाहू शकता.  (\"->\")',
-  'teacher-landing.welcome-premium-course-map': 'मार्गदर्शक अभ्यासक्रम हा एक वैयक्तिकृत अभ्यासक्रम असून विविध स्तरावरील इयत्तांचा यात समावेश आहे. प्रत्येक विद्यार्थ्याला त्याच्या उणीवा भरून काढण्यासाठी, संकल्पना अधिक मजबूत करण्यासाठी, सरावासाठी आणि त्यांची शिकण्याची इच्छा प्रबळ व्हावी यासाठी एक विशिष्ट अभ्यासक्रम प्रदान केला जातो. वैयक्तिकृत मार्ग आखण्यात आले आहेत आणि प्रत्येक विद्यार्थ्याची शिकण्याची क्षमता वाढवण्यासाठी त्यांना पुर्नमार्गदर्शित केले जाते आणि त्यांच्या इच्छित उद्दिष्टापर्यंत पोहचवले जाते.',
+  'teacher-landing.welcome-course-map':
+    'हा तुमचा अभ्यासक्रम आराखडा आहे येथे तुम्ही अभ्यासक्रमातील मजकूर पाहू शकता, मूल्यमापन सुरु किंवा बंद करू शकता तसेच प्रत्यक्ष वेळेत मूल्यमापन घेऊन माहिती भरू शकता. तुम्ही तुमच्या वर्गाची एकूण कामगिरी पाहू शकता तसेच वर्गातील पूर्ण-अपूर्ण उपक्रम पाहू शकता. वर्गाच्या कामगिरीचा  सविस्तर आढावा बघण्यासाठी वर्गाच्या अहवाल पर्यायावर जा.',
+  'teacher-landing.welcome-rescoped-course-map':
+    'वर्गातील प्रत्येक विद्यार्थ्यासाठी हा अभ्यासक्रम वैयक्तिकृत केलेला आहे. विद्यार्थी शैक्षणिक अभ्यास मार्ग यावर क्लिक करून तुम्ही प्रत्येक विद्यार्थ्याचा अभ्यासक्रम आराखडा वर्ग व्यवस्थापन पेजवर पाहू शकता.  (->)',
+  'teacher-landing.welcome-premium-course-map':
+    'मार्गदर्शक अभ्यासक्रम हा एक वैयक्तिकृत अभ्यासक्रम असून विविध स्तरावरील इयत्तांचा यात समावेश आहे. प्रत्येक विद्यार्थ्याला त्याच्या उणीवा भरून काढण्यासाठी, संकल्पना अधिक मजबूत करण्यासाठी, सरावासाठी आणि त्यांची शिकण्याची इच्छा प्रबळ व्हावी यासाठी एक विशिष्ट अभ्यासक्रम प्रदान केला जातो. वैयक्तिकृत मार्ग आखण्यात आले आहेत आणि प्रत्येक विद्यार्थ्याची शिकण्याची क्षमता वाढवण्यासाठी त्यांना पुर्नमार्गदर्शित केले जाते आणि त्यांच्या इच्छित उद्दिष्टापर्यंत पोहचवले जाते.',
   'goals.manage.title': 'माझे ध्येय!',
   'goals.manage.add-goal': 'ध्येय जोडा',
   'goals.manage.goal-label': 'ध्येय',
@@ -1153,56 +1459,84 @@ window.i18ln = {
   'goals.manage.reflection-label': 'प्रतिबिंब',
   'goals.manage.save': 'सेव्ह करा',
   'goals.manage.update': 'अपडेट करा',
-  'goals.manage.goals-not-found': 'आपण अद्याप कोणतेही ध्येय ठरवलेले नाही. आपण वरील \"ध्येय जोडा\" बटणवर क्लिक करून ध्येय जोडू शकता.',
+  'goals.manage.goals-not-found':
+    'आपण अद्याप कोणतेही ध्येय ठरवलेले नाही. आपण वरील ध्येय जोडा बटणवर क्लिक करून ध्येय जोडू शकता.',
   'goals.create.error-add-title': 'कृपया ध्येय प्रविष्ट करा',
-  'goals.create.error-length-title': 'ध्येय मध्ये कमाल 200 शब्द असणे आवश्यक आहे',
+  'goals.create.error-length-title':
+    'ध्येय मध्ये कमाल 200 शब्द असणे आवश्यक आहे',
   'goals.create.error-add-start-date': 'कृपया प्रारंभ तारीख प्रविष्ट करा',
   'goals.create.error-add-end-date': 'कृपया शेवटची तारीख प्रविष्ट करा',
-  'goals.create.error-greater-end-date': 'शेवटची तारीख ही प्रारंभ तारखेपेक्षा मोठी असणे आवश्यक आहे',
+  'goals.create.error-greater-end-date':
+    'शेवटची तारीख ही प्रारंभ तारखेपेक्षा मोठी असणे आवश्यक आहे',
   'goals.create.error-add-status': 'कृपया ध्येय स्थिती निवडा',
-  'goals.create.error-length-reflection': 'प्रतिबिंबांमध्ये कमाल 2000 शब्द असणे आवश्यक आहे',
-  'goals.create.created-success-msg': 'तुम्ही ध्येय {{goalTitle}} तयार केले आहे',
+  'goals.create.error-length-reflection':
+    'प्रतिबिंबांमध्ये कमाल 2000 शब्द असणे आवश्यक आहे',
+  'goals.create.created-success-msg':
+    'तुम्ही ध्येय {{goalTitle}} तयार केले आहे',
   'goals.delete.deleted-success-msg': 'तुम्ही ध्येय हटविले आहे',
   'goals.update.updated-success-msg': 'तुम्ही ध्येय अपडेट केले आहे',
   'gru-add-to.add-assessment-to-lesson': 'माझे मुल्यमापन यामधून जोडा',
-  'gru-add-to.add-assessment-to-lesson-lead': 'या धड्यामध्ये जोडण्यासाठी मूल्यमापन निवडा',
+  'gru-add-to.add-assessment-to-lesson-lead':
+    'या धड्यामध्ये जोडण्यासाठी मूल्यमापन निवडा',
   'gru-add-to.add-collection-to-lesson': 'माझे संग्रह यामधून भरा ',
-  'gru-add-to.add-collection-to-lesson-lead': 'या धड्यामध्ये जोडण्यासाठी संग्रह निवडा',
+  'gru-add-to.add-collection-to-lesson-lead':
+    'या धड्यामध्ये जोडण्यासाठी संग्रह निवडा',
   'gru-add-to.add-to-collection': 'संग्रहामध्ये जोडा',
-  'gru-add-to.add-to-collection-lead': '{{contentTitle}} मध्ये तुम्हाला संग्रह जोडायचा आहे तो निवडा',
+  'gru-add-to.add-to-collection-lead':
+    '{{contentTitle}} मध्ये तुम्हाला संग्रह जोडायचा आहे तो निवडा',
   'gru-add-to.add-to-existing-classroom': 'विद्यमान वर्गामध्ये जोडा',
-  'gru-add-to.add-to-existing-classroom-lead': 'आपण जोडण्यास इच्छुक असलेला एक वर्ग निवडा',
+  'gru-add-to.add-to-existing-classroom-lead':
+    'आपण जोडण्यास इच्छुक असलेला एक वर्ग निवडा',
   'gru-add-to.add-to-assessment': 'मूल्यमापन किंवा संग्रहामध्ये जोडा',
-  'gru-add-to.add-to-assessment-lead': '{{contentTitle}} ,मध्हेये जोडण्यासाठी मूल्यमापन निवडा',
-  'gru-add-to.assessments-info': 'येथे दिलेले मूल्यमापन हे इतर कोणत्याही धड्याला किंवा अभ्यासक्रमाला लागू <b>होत नाही</b>.',
-  'gru-add-to.collections-info': 'येथे दिलेले संग्रह हे इतर कोणत्याही धड्याला किंवा अभ्यासक्रमाला लागू <b>होत नाही</b>.',
+  'gru-add-to.add-to-assessment-lead':
+    '{{contentTitle}} ,मध्हेये जोडण्यासाठी मूल्यमापन निवडा',
+  'gru-add-to.assessments-info':
+    'येथे दिलेले मूल्यमापन हे इतर कोणत्याही धड्याला किंवा अभ्यासक्रमाला लागू <b>होत नाही</b>.',
+  'gru-add-to.collections-info':
+    'येथे दिलेले संग्रह हे इतर कोणत्याही धड्याला किंवा अभ्यासक्रमाला लागू <b>होत नाही</b>.',
   'gru-add-rubric-to-question.title': 'माझ्या मथळ्यातून जोडा',
-  'gru-add-rubric-to-question.lead': 'या प्रश्नामध्ये जोडण्यासाठी एक मथळा निवडा.',
-  'gru-add-rubric-to-question.no-rubrics': 'ह्या मुक्त रचना प्रश्नाशी संलग्न केला जाऊ शकतो असा कोणताही मथळा तुम्ही तयार केलेला नाही. तुम्ही माझी सामग्री या पर्यायावर जाऊन मथळे तयार करू शकता जे तुम्ही तुमच्या प्रोफाईल मधून मिळवू शकता.',
+  'gru-add-rubric-to-question.lead':
+    'या प्रश्नामध्ये जोडण्यासाठी एक मथळा निवडा.',
+  'gru-add-rubric-to-question.no-rubrics':
+    'ह्या मुक्त रचना प्रश्नाशी संलग्न केला जाऊ शकतो असा कोणताही मथळा तुम्ही तयार केलेला नाही. तुम्ही माझी सामग्री या पर्यायावर जाऊन मथळे तयार करू शकता जे तुम्ही तुमच्या प्रोफाईल मधून मिळवू शकता.',
   'gru-add-rubric-to-question.go-to-content': 'माझ्या सामग्रीवर जा',
   'gru-assessment-confirmation.title': 'आपण मूल्यांकन सुरू करणार आहात ...',
-  'gru-assessment-confirmation.description': 'या मूल्यांकनामध्ये, {{model.title}}',
+  'gru-assessment-confirmation.description':
+    'या मूल्यांकनामध्ये, {{model.title}}',
   'gru-assessment-confirmation.setting-forward': 'तुम्ही फक्त पुढेच जाऊ शकता',
-  'gru-assessment-confirmation.setting-forward-backward': 'तुम्ही प्रश्नांची उत्तरे देण्यासाठी तुम्ही पुढे किंवा मागे जाऊ शकता',
-  'gru-assessment-confirmation.unlimited-attempts-left': 'तुमच्याकडे अमर्यादित प्रयत्न आहेत',
-  'gru-assessment-confirmation.setting-forward-teacher': 'विद्यार्थी फक्त पुढेच जाऊ शकतो',
-  'gru-assessment-confirmation.setting-forward-backward-teacher': 'प्रश्नांची उत्तरे देण्यासाठी विद्यार्थी पुढे किंवा मागे जाऊ शकतो',
-  'gru-assessment-confirmation.unlimited-attempts-left-teacher': 'विद्यार्थ्याकडे अमर्यादित प्रयत्न आहेत',
-  'gru-assessment-confirmation.attempts-left.zero': 'तुमच्याकडे {{count}} प्रयत्न आहेत',
-  'gru-assessment-confirmation.attempts-left.one': 'तुमच्याकडे 1 प्रयत्न शिल्लक आहे',
-  'gru-assessment-confirmation.attempts-left.other': 'तुमच्याकडे {{count}} प्रयत्न आहेत',
-  'gru-assessment-confirmation.attempts-left.other-teacher': 'विद्यार्थ्याकडे {{count}} प्रयत्न आहेत',
-  'gru-assessment-confirmation.unlimited-attempts': 'तुमच्याकडे अमर्यादित प्रयत्न आहेत',
+  'gru-assessment-confirmation.setting-forward-backward':
+    'तुम्ही प्रश्नांची उत्तरे देण्यासाठी तुम्ही पुढे किंवा मागे जाऊ शकता',
+  'gru-assessment-confirmation.unlimited-attempts-left':
+    'तुमच्याकडे अमर्यादित प्रयत्न आहेत',
+  'gru-assessment-confirmation.setting-forward-teacher':
+    'विद्यार्थी फक्त पुढेच जाऊ शकतो',
+  'gru-assessment-confirmation.setting-forward-backward-teacher':
+    'प्रश्नांची उत्तरे देण्यासाठी विद्यार्थी पुढे किंवा मागे जाऊ शकतो',
+  'gru-assessment-confirmation.unlimited-attempts-left-teacher':
+    'विद्यार्थ्याकडे अमर्यादित प्रयत्न आहेत',
+  'gru-assessment-confirmation.attempts-left.zero':
+    'तुमच्याकडे {{count}} प्रयत्न आहेत',
+  'gru-assessment-confirmation.attempts-left.one':
+    'तुमच्याकडे 1 प्रयत्न शिल्लक आहे',
+  'gru-assessment-confirmation.attempts-left.other':
+    'तुमच्याकडे {{count}} प्रयत्न आहेत',
+  'gru-assessment-confirmation.attempts-left.other-teacher':
+    'विद्यार्थ्याकडे {{count}} प्रयत्न आहेत',
+  'gru-assessment-confirmation.unlimited-attempts':
+    'तुमच्याकडे अमर्यादित प्रयत्न आहेत',
   'gru-assessment-confirmation.cancel': 'रद्द करा',
   'gru-assessment-confirmation.continue': 'सुरू',
   'gru-assessment-confirmation.start': 'प्रारंभ!',
   'gru-assessment-confirmation.submit': 'सबमिट करा',
-  'gru-submit-confirmation.title': 'ही प्रश्नमंजुषा पूर्ण करा आणि सर्व प्रश्नांची उत्तरे सबमिट करा',
-  'gru-submit-confirmation.description': 'तुम्ही सर्व प्रतिसाद सबमिट करत आहात. कोणताही अनुत्तरीत प्रश्न हा चुकीचे उत्तर म्हणून मोजला जाईल.',
+  'gru-submit-confirmation.title':
+    'ही प्रश्नमंजुषा पूर्ण करा आणि सर्व प्रश्नांची उत्तरे सबमिट करा',
+  'gru-submit-confirmation.description':
+    'तुम्ही सर्व प्रतिसाद सबमिट करत आहात. कोणताही अनुत्तरीत प्रश्न हा चुकीचे उत्तर म्हणून मोजला जाईल.',
   'gru-submit-confirmation.cancel': 'कॅन्सल',
   'gru-submit-confirmation.ok': 'मान्य आहे',
   'gru-submit-confirmation.confirm': 'प्रश्नमंजुषा पूर्ण करा',
-  'gru-submit-confirmation.finish-description': 'तुमचे प्रतिसाद सबमिट करण्यासाठी "समाप्त प्रश्नमंजुषा" वर क्लिक करा',
+  'gru-submit-confirmation.finish-description':
+    'तुमचे प्रतिसाद सबमिट करण्यासाठी "समाप्त प्रश्नमंजुषा" वर क्लिक करा',
   'gru-quick-course-search.add-from-course': 'विद्यमान अभ्यासक्रमातून जोडा',
   'gru-quick-course-search.view-featured-courses': 'उपलब्ध अभ्यासक्रम बघा',
   'gru-quick-course-search.assign': 'विद्यार्थ्यासाठी उपक्रम निवडा',
@@ -1218,17 +1552,21 @@ window.i18ln = {
   'gru-share-pop-over.share-collection': 'लिंकसह तुमचा संग्रह शेयर करा ',
   'gru-share-pop-over.share-OA': 'ऑफलाईन क्रिया',
   'gru-category-panel.teacher.title': 'शिक्षकांसाठी',
-  'gru-category-panel.teacher.body': 'इयत्तांशी संलग्न मजकूर शोधा, त्यात अनुकूल बदल करा, माहिती विश्लेषणाच्या आधारे तुमच्या विद्यार्थ्यांच्या प्रगतीचा मागोवा घ्या',
+  'gru-category-panel.teacher.body':
+    'इयत्तांशी संलग्न मजकूर शोधा, त्यात अनुकूल बदल करा, माहिती विश्लेषणाच्या आधारे तुमच्या विद्यार्थ्यांच्या प्रगतीचा मागोवा घ्या',
   'gru-category-panel.teacher.cta': 'गोष्टी बघा',
   'gru-category-panel.student.title': 'विद्यार्थ्यांसाठी',
-  'gru-category-panel.student.body': 'आवड शोधा, घडवा, शैक्षणिक साहित्याच्या आधारे प्रगतीचा मागोवा घ्या आणि त्यावर लक्ष ठेवा',
+  'gru-category-panel.student.body':
+    'आवड शोधा, घडवा, शैक्षणिक साहित्याच्या आधारे प्रगतीचा मागोवा घ्या आणि त्यावर लक्ष ठेवा',
   'gru-category-panel.student.cta': 'प्रविष्ट करा',
   'gru-category-panel.student.text-placeholder': 'वर्गाचा संकेतांक भरा',
   'gru-category-panel.district.title': 'जिल्ह्यांसाठी',
-  'gru-category-panel.district.body': 'वैयक्तिकृत शैक्षणिक मार्ग तयार करण्यासाठी आणि जिल्हानिहाय अभ्यासक्रम शेयर करण्यासाठी गुरुसोबत सहकार्य करा.',
+  'gru-category-panel.district.body':
+    'वैयक्तिकृत शैक्षणिक मार्ग तयार करण्यासाठी आणि जिल्हानिहाय अभ्यासक्रम शेयर करण्यासाठी गुरुसोबत सहकार्य करा.',
   'gru-category-panel.district.cta': 'आमचा प्रभाव पहा',
   'gru-category-panel.partner.title': 'भागीदारांसाठी',
-  'gru-category-panel.partner.body': 'शिक्षण व्यवस्थेवरील आपला एकत्रित प्रभाव वाढवण्यासाठी समान ध्येय उराशी बाळगणाऱ्या भागीदारांसोबत सहकार्य करा.',
+  'gru-category-panel.partner.body':
+    'शिक्षण व्यवस्थेवरील आपला एकत्रित प्रभाव वाढवण्यासाठी समान ध्येय उराशी बाळगणाऱ्या भागीदारांसोबत सहकार्य करा.',
   'gru-category-panel.partner.cta': 'आणखी शिका',
   'class.gru-class-navigation.active': 'सक्रीय:',
   'class.gru-class-navigation.members': 'सदस्य',
@@ -1244,34 +1582,47 @@ window.i18ln = {
   'class.gru-class-statistics.time-spent': 'खर्च केलेला वेळ',
   'class.gru-class-statistics.no-performance': '--',
   'gru-user-registration.joinTitle': 'गुरु समुदायात सामील व्हा!',
-  'gru-user-registration.joinDescription': 'शोधा, पुर्नमिश्रीत करा आणि सर्वोत्तम विनामूल्य K-12 शिक्षण संसाधने शेअर करा',
+  'gru-user-registration.joinDescription':
+    'शोधा, पुर्नमिश्रीत करा आणि सर्वोत्तम विनामूल्य K-12 शिक्षण संसाधने शेअर करा',
   'gru-user-registration.googleButton': 'Google सह साइन अप करा',
   'gru-user-registration.whyGoogle': 'Google सह साइन अप का करावे?',
-  'gru-user-registration.descriptionWhyGoogle': 'ते जलद आणि सोपे आहे पासवर्डशिवाय साइन इन करण्यासाठी आपले विद्यमान Google खाते वापरा',
+  'gru-user-registration.descriptionWhyGoogle':
+    'ते जलद आणि सोपे आहे पासवर्डशिवाय साइन इन करण्यासाठी आपले विद्यमान Google खाते वापरा',
   'gru-user-registration.or': 'किंवा',
   'gru-user-registration.noGoogleAccount': 'आपल्याकडे Google खाते नाही?',
   'gru-user-registration.signUpEmail': 'तुमच्या ईमेल पत्त्यासह साइन अप करा',
   'gru-user-registration.haveAccount': 'आधीपासूनच एक खाते आहे?',
   'gru-user-registration.clickLogIn': 'लॉग इन करण्यासाठी येथे क्लिक करा',
-  'gru-welcome-message.title': 'Gooru च्या शैक्षणिक मार्गदर्शकात आपले स्वागत आहे!',
-  'gru-welcome-message.text-temporary-one': 'आपण संपूर्ण शैक्षणिक मार्गदर्शकामधून जाता तेव्हा आपल्या प्रवासाला समर्थन देण्यास आम्ही आनंदी आहोत. \'एक फेरफटका मारा\' या पर्यायावर जा',
-  'gru-welcome-message.text-temporary-two': ' आमच्या वैशिष्ट्यांचा वापर कसा करावा यासाठी केलेल्या मार्गदर्शनपर प्रवासासाठी',
-  'gru-welcome-message.text-one': 'आपण संपूर्ण शैक्षणिक मार्गदर्शकामधून जाता तेव्हा, आम्ही खालील प्रकारे आपल्या प्रवासास समर्थन करण्यास आनंदित आहोत:',
+  'gru-welcome-message.title':
+    'Gooru च्या शैक्षणिक मार्गदर्शकात आपले स्वागत आहे!',
+  'gru-welcome-message.text-temporary-one':
+    'आपण संपूर्ण शैक्षणिक मार्गदर्शकामधून जाता तेव्हा आपल्या प्रवासाला समर्थन देण्यास आम्ही आनंदी आहोत. \'एक फेरफटका मारा\' या पर्यायावर जा',
+  'gru-welcome-message.text-temporary-two':
+    ' आमच्या वैशिष्ट्यांचा वापर कसा करावा यासाठी केलेल्या मार्गदर्शनपर प्रवासासाठी',
+  'gru-welcome-message.text-one':
+    'आपण संपूर्ण शैक्षणिक मार्गदर्शकामधून जाता तेव्हा, आम्ही खालील प्रकारे आपल्या प्रवासास समर्थन करण्यास आनंदित आहोत:',
   'gru-welcome-message.text-two.subtitle': 'एक फेरफटका मारा',
-  'gru-welcome-message.text-two.text': ': आमच्या वैशिष्ट्यांचा वापर कसा करावा यावर  मार्गदर्शनपर प्रवास उपलब्ध करून देतो.',
+  'gru-welcome-message.text-two.text':
+    ': आमच्या वैशिष्ट्यांचा वापर कसा करावा यावर  मार्गदर्शनपर प्रवास उपलब्ध करून देतो.',
   'gru-welcome-message.text-three.subtitle': 'मदत',
-  'gru-welcome-message.text-three.text': ': अतिरिक्त प्रश्नांसाठी-आमच्याशी कधीही संपर्क साधा',
+  'gru-welcome-message.text-three.text':
+    ': अतिरिक्त प्रश्नांसाठी-आमच्याशी कधीही संपर्क साधा',
   'gru-welcome-message.text-four.subtitle': 'नवीन',
-  'gru-welcome-message.text-four.text': ': तुम्ही वापरून पहावीत अशी नवीन वैशिष्ट्ये घेऊन आलो आहोत.',
-  'gru-welcome-message.text-five': 'तुम्हाला तुमच्या मुख्यपृष्ठावर कधीही परत जावेस वाटले तर, फक्त क्लिक करा',
+  'gru-welcome-message.text-four.text':
+    ': तुम्ही वापरून पहावीत अशी नवीन वैशिष्ट्ये घेऊन आलो आहोत.',
+  'gru-welcome-message.text-five':
+    'तुम्हाला तुमच्या मुख्यपृष्ठावर कधीही परत जावेस वाटले तर, फक्त क्लिक करा',
   'gru-welcome-message.dont-show-again': 'पुन्हा दाखवू नका',
   'sign-up.step-1-title': 'नमस्कार !',
-  'sign-up.step-1-description': 'आपण आमच्यासोबत  या प्रवासात सहभागी होत आहात याचा आम्हाला आनंद आहे.',
+  'sign-up.step-1-description':
+    'आपण आमच्यासोबत  या प्रवासात सहभागी होत आहात याचा आम्हाला आनंद आहे.',
   'sign-up.step-child-title': 'इतक्या जलद नाही',
   'sign-up.step-child-subtitle': 'तुमची नोंदणी आम्ही पूर्ण करू शकत नाही.',
-  'sign-up.step-child-description-1': 'गुरू आपली नाव नोंदणी पूर्ण करू शकत नाही कारण',
+  'sign-up.step-child-description-1':
+    'गुरू आपली नाव नोंदणी पूर्ण करू शकत नाही कारण',
   'sign-up.step-child-age-requirements': 'नियम व अटी',
-  'sign-up.step-child-description-2': '. शिकणे चालू राहू द्या आणि आपण भेटूच काही वर्षात !',
+  'sign-up.step-child-description-2':
+    '. शिकणे चालू राहू द्या आणि आपण भेटूच काही वर्षात !',
   'sign-up.step-2-title': 'मुलभूत माहिती',
   'sign-up.step-2-description': 'ही माहिती फारच महत्वाची आहे.',
   'sign-up.log-in': 'लॉग इन',
@@ -1300,12 +1651,15 @@ window.i18ln = {
   'sign-up.rePassword': 'पासवर्डची खात्री करा',
   'sign-up.state': 'राज्य किंवा केंद्रशासित प्रदेश',
   'sign-up.district': 'जिल्हा किंवा नोंदणीकृत संस्था',
-  'sign-up.error-username-taken': 'क्षमा करा, हे युजरनेम याआधी कोणीतरी वापरलेले आहे. दुसरे युजरनेमचा वापरून पहा.',
-  'sign-up.error-email-taken': 'माफ करा, हा इमेल आयडी याआधी कोणीतरी वापरलेला आहे. दुसरा इमेल आयडी वापरून प्रयत्न करा.',
+  'sign-up.error-username-taken':
+    'क्षमा करा, हे युजरनेम याआधी कोणीतरी वापरलेले आहे. दुसरे युजरनेमचा वापरून पहा.',
+  'sign-up.error-email-taken':
+    'माफ करा, हा इमेल आयडी याआधी कोणीतरी वापरलेला आहे. दुसरा इमेल आयडी वापरून प्रयत्न करा.',
   'sign-up.error-role-message': 'प्रोफाईलचे स्वरूप निवडा',
   'sign-up.error-country-message': 'तुमचा देश निवडा',
   'sign-up.error-state-message': 'तुमचे राज्य किंवा केंद्रशासित प्रदेश निवडा',
-  'sign-up.error-district-message': 'दिलेल्या यादीतून तुमचा जिल्हा किंवा संस्थेचे नाव निवडा अन्यथा \'इतर\' हा पर्याय निवडा',
+  'sign-up.error-district-message':
+    'दिलेल्या यादीतून तुमचा जिल्हा किंवा संस्थेचे नाव निवडा अन्यथा \'इतर\' हा पर्याय निवडा',
   'gru-user-sign-up-cancel.title': 'रजा नोंदणी?',
   'gru-user-sign-up-cancel.exit?': 'तुम्हाला खरंच बाहेर पडायचे आहे का?',
   'gru-user-sign-up-cancel.registration_incomplete': 'तुमची नोंदणी पूर्ण नाही.',
@@ -1326,14 +1680,19 @@ window.i18ln = {
   'login.log-in': 'लॉग इन',
   'forgot-password.description': 'हे आपल्या सर्वांच्या बाबतीत घडते',
   'forgot-password.usernameOrEmail': 'कृपया आपला ईमेल प्रविष्ट करा',
-  'forgot-password.footer-google-description-1': '<a href=\'/sign-in\'>\'Google सह साईन इन करा.\'</a> या पर्यायावर दाबून पुन्हा लॉगिंग करण्याचा प्रयत्न करा',
-  'forgot-password.footer-description-1': 'तुम्हाला तुमचा संकेतशब्द रीसेट करण्यासाठी एका दुव्यासह एक ईमेल प्राप्त होईल.',
-  'forgot-password.footer-description-2': 'तुम्हाला कोणतेही प्रश्न असल्यास, कृपया येथे संपर्क साधा',
+  'forgot-password.footer-google-description-1':
+    '<a href=\'/sign-in\'>\'Google सह साईन इन करा.\'</a> या पर्यायावर दाबून पुन्हा लॉगिंग करण्याचा प्रयत्न करा',
+  'forgot-password.footer-description-1':
+    'तुम्हाला तुमचा संकेतशब्द रीसेट करण्यासाठी एका दुव्यासह एक ईमेल प्राप्त होईल.',
+  'forgot-password.footer-description-2':
+    'तुम्हाला कोणतेही प्रश्न असल्यास, कृपया येथे संपर्क साधा',
   'forgot-password.mail': 'support@gooru.org',
   'forgot-password.error-email-not-exists': 'क्षमस्व, आम्ही हा ईमेल ओळखत नाही',
   'forgot-password.secondStepTitle': 'तुमचा ईमेल तपासा',
-  'forgot-password.secondStepDescription-1': 'आम्ही आपला पासवर्ड रीसेट करण्यासाठी एका दुव्यासह ईमेल पाठविला आहे.',
-  'forgot-password.secondStepDescription-2': 'तुम्हाला कोणतेही प्रश्न असल्यास, कृपया येथे संपर्क साधा',
+  'forgot-password.secondStepDescription-1':
+    'आम्ही आपला पासवर्ड रीसेट करण्यासाठी एका दुव्यासह ईमेल पाठविला आहे.',
+  'forgot-password.secondStepDescription-2':
+    'तुम्हाला कोणतेही प्रश्न असल्यास, कृपया येथे संपर्क साधा',
   'reset-password.new-password': 'तुमचा नवीन पासवर्ड प्रविष्ट करा',
   'reset-password.new-password-confirm': 'आपल्या पासवर्डची पुष्टी करा',
   'reset-password.title': 'पासवर्ड रीसेट करा',
@@ -1342,8 +1701,10 @@ window.i18ln = {
   'change-password.current-password-label': 'तुमचा विद्यमान पासवर्ड टाका',
   'change-password.change-success': 'पासवर्ड यशस्वीरित्या बदलला आहे !',
   'change-password.new-password-required': 'तुमचा नवीन पासवर्ड टाका ',
-  'change-password.change-password-error': 'काहीतरी चुकले आहे. तुमचा पासवर्ड बदलण्यात अपयश आले आहे. थोड्यावेळाने पुन्हा प्रयत्न करा.',
-  'footer.footerDescription': 'आपला प्लॅटफॉर्म हा मुक्त स्त्रोत ठेवण्यासाठी तसेच समुदायाने तयार केलेल्या मजकुरा CC0 साठी  गुरु वचनबद्ध आहे.',
+  'change-password.change-password-error':
+    'काहीतरी चुकले आहे. तुमचा पासवर्ड बदलण्यात अपयश आले आहे. थोड्यावेळाने पुन्हा प्रयत्न करा.',
+  'footer.footerDescription':
+    'आपला प्लॅटफॉर्म हा मुक्त स्त्रोत ठेवण्यासाठी तसेच समुदायाने तयार केलेल्या मजकुरा CC0 साठी  गुरु वचनबद्ध आहे.',
   'footer.company': 'कंपनी',
   'footer.community': 'समुदाय',
   'footer.legal': 'कायदेशीर',
@@ -1423,67 +1784,101 @@ window.i18ln = {
   'search-result.search-results-for': 'च्या शोधाचे निकाल',
   'gru-image-picker.chooseFile': 'फाईल निवडा ...',
   'gru-image-picker.instruction': 'तुमच्या संगणकामधील प्रतिमा अपलोड करा.',
-  'gru-image-picker.restriction': 'प्रतिमा हि JPG, GIF किंवा PNG या प्रकारातील आणि 5MB पेक्षा लहान असावी.',
+  'gru-image-picker.restriction':
+    'प्रतिमा हि JPG, GIF किंवा PNG या प्रकारातील आणि 5MB पेक्षा लहान असावी.',
   'gru-image-picker.submit': 'प्रतिमा वापरा',
-  'gru-fib.instructions': 'कृपया दिलेल्या रकान्यामध्ये मध्ये आपले उत्तर लिहा आणि टाइप करा आणि \"{{action}}\" वर क्लिक करा.',
-  'gru-hs-image.instructions': 'कृपया योग्य प्रतिमा निवडा आणि \"{{action}}\" वर क्लिक करा.',
-  'gru-hs-text.instructions': 'कृपया योग्य उत्तरे निवडा आणि \"{{action}}\" वर क्लिक करा.',
-  'gru-hot-text.instructions': 'कृपया योग्य उत्तर निवडा आणि \"{{action}}\" वर क्लिक करा.',
+  'gru-fib.instructions':
+    'कृपया दिलेल्या रकान्यामध्ये मध्ये आपले उत्तर लिहा आणि टाइप करा आणि {{action}} वर क्लिक करा.',
+  'gru-hs-image.instructions':
+    'कृपया योग्य प्रतिमा निवडा आणि {{action}} वर क्लिक करा.',
+  'gru-hs-text.instructions':
+    'कृपया योग्य उत्तरे निवडा आणि {{action}} वर क्लिक करा.',
+  'gru-hot-text.instructions':
+    'कृपया योग्य उत्तर निवडा आणि {{action}} वर क्लिक करा.',
   'gru-login-prompt.title': 'Gooru मध्ये स्वागत आहे!',
-  'gru-login-prompt.instructions': 'ती क्रिया पूर्ण करण्यासाठी आपल्याला साइन इन करणे आवश्यक आहे.',
+  'gru-login-prompt.instructions':
+    'ती क्रिया पूर्ण करण्यासाठी आपल्याला साइन इन करणे आवश्यक आहे.',
   'gru-login-prompt.existing-user': 'आधीपासूनच एक खाते आहे?',
   'gru-login-prompt.new-user': 'येथे नवीन आहात?',
   'gru-login-prompt.not-now': 'आता नाही',
   'gru-login-prompt.sign-in': 'साइन इन',
-  'gru-multiple-answer.instructions': 'कृपया योग्य उत्तर निवडा आणि \"{{action}}\" वर क्लिक करा.',
-  'gru-multiple-choice.instructions': 'कृपया योग्य उत्तर निवडा आणि \"{{action}}\" वर क्लिक करा.',
-  'gru-open-ended.instructions': 'कृपया आपले उत्तर खालील क्षेत्रामध्ये टाइप करा आणि आपले कार्य पूर्ण झाल्यावर आपला प्रतिसाद जतन करण्यासाठी \"{{action}}\" बटणवर क्लिक करा.',
+  'gru-multiple-answer.instructions':
+    'कृपया योग्य उत्तर निवडा आणि {{action}} वर क्लिक करा.',
+  'gru-multiple-choice.instructions':
+    'कृपया योग्य उत्तर निवडा आणि {{action}} वर क्लिक करा.',
+  'gru-open-ended.instructions':
+    'कृपया आपले उत्तर खालील क्षेत्रामध्ये टाइप करा आणि आपले कार्य पूर्ण झाल्यावर आपला प्रतिसाद जतन करण्यासाठी {{action}} बटणवर क्लिक करा.',
   'gru-open-ended.characterLimit': 'शब्द मर्यादा',
   'gru-question-viewer.answer': 'उत्तर',
   'gru-question-viewer.question': 'प्रश्न',
-  'gru-true-false.instructions': 'कृपया योग्य उत्तर निवडा आणि \"{{action}}\" वर क्लिक करा.',
+  'gru-true-false.instructions':
+    'कृपया योग्य उत्तर निवडा आणि {{action}} वर क्लिक करा.',
   'gru-true-false.true': 'सत्य',
   'gru-true-false.false': 'खोटे',
-  'gru-reorder.instructions': 'कृपया योग्य क्रमाने उत्तरे पुनर्क्रमित करा आणि \"{{action}}\" वर क्लिक करा.',
+  'gru-reorder.instructions':
+    'कृपया योग्य क्रमाने उत्तरे पुनर्क्रमित करा आणि {{action}} वर क्लिक करा.',
   'student-first-experience.preStudyTitle': '{{title}} साठी पूर्व-अभ्यास',
-  'student-first-experience.lp-compute-inprogress': 'आम्ही {{title}} मध्ये तुमचे प्रारंभिक प्राविण्य संगणन करत आहोत',
+  'student-first-experience.lp-compute-inprogress':
+    'आम्ही {{title}} मध्ये तुमचे प्रारंभिक प्राविण्य संगणन करत आहोत',
   'student-first-experience.route0-action.accept': 'स्वीकार',
   'student-first-experience.route0-action.ignore': 'दुर्लक्ष',
   'student-first-experience.competency.popover.title': '{{title}} सीमा',
-  'student-first-experience.competency.popover.content': 'तुम्हाला तुमच्या गंतव्य स्थानापर्यंत पोचण्यासाठी तुमचे ध्येय आणि हा इयत्ता रेषामधील सर्व इयत्ता अभ्यासणे गरजेचे आहे. ',
-  'student-first-experience.assigned-course-title': '{{title}} साठी नियुक्त केलेला अभ्यासक्रम',
+  'student-first-experience.competency.popover.content':
+    'तुम्हाला तुमच्या गंतव्य स्थानापर्यंत पोचण्यासाठी तुमचे ध्येय आणि हा इयत्ता रेषामधील सर्व इयत्ता अभ्यासणे गरजेचे आहे. ',
+  'student-first-experience.assigned-course-title':
+    '{{title}} साठी नियुक्त केलेला अभ्यासक्रम',
   'student-first-experience.start-studying': 'Start Studying',
   'student-first-experience.show-route': 'मार्ग दाखवा',
   'student-first-experience.review-destination': 'गंतव्याचे पुनरावलोकन करा',
   'student-first-experience.competency-level.title': 'आपली प्राविण्य प्रोफाइल',
-  'student-first-experience.competency-level.mastery': '{{count}} इयत्तेत प्रभुत्व',
-  'student-first-experience.competency-level.in-progress': '{{count}} इयत्तेमध्ये प्रगती होत आहे',
-  'student-first-experience.competency-level.not-started': '{{count}} इयत्ता सुरु झालेली नाही',
+  'student-first-experience.competency-level.mastery':
+    '{{count}} इयत्तेत प्रभुत्व',
+  'student-first-experience.competency-level.in-progress':
+    '{{count}} इयत्तेमध्ये प्रगती होत आहे',
+  'student-first-experience.competency-level.not-started':
+    '{{count}} इयत्ता सुरु झालेली नाही',
   'student-first-experience.competency-level.your-skyline': 'तुमचे ध्येय',
   'student-first-experience.explanatory.master.title': 'प्रभुत्व मिळवले',
-  'student-first-experience.explanatory.master.desc': 'दर्शवत आहे की तुम्ही यशस्वीरित्या इयत्तेमध्ये प्रभुत्व मिळवले आहे',
+  'student-first-experience.explanatory.master.desc':
+    'दर्शवत आहे की तुम्ही यशस्वीरित्या इयत्तेमध्ये प्रभुत्व मिळवले आहे',
   'student-first-experience.explanatory.in-progress.title': 'प्रगती होत आहे',
-  'student-first-experience.explanatory.in-progress.desc': 'दर्शवत आहे की असा एक पुरावा आहे जो सांगतो की तुम्ही इयत्तांचा अभ्यास सुरु केला आहे आणि प्रभुत्व मिळवण्याच्या दिशेने तुमची प्रगती सुरु आहे ',
+  'student-first-experience.explanatory.in-progress.desc':
+    'दर्शवत आहे की असा एक पुरावा आहे जो सांगतो की तुम्ही इयत्तांचा अभ्यास सुरु केला आहे आणि प्रभुत्व मिळवण्याच्या दिशेने तुमची प्रगती सुरु आहे ',
   'student-first-experience.explanatory.not-started.title': 'सुरु केले नाही',
-  'student-first-experience.explanatory.not-started.desc': 'दर्शवत आहे की असे कोणतेही पुरावे नाहीत आणि आपण अद्याप इयत्तांचा अभ्यास सुरु करणे बाकी आहे',
-  'student-first-experience.competency-level-partial.desc1': 'तुम्ही सध्या आहात',
-  'student-first-experience.competency-level-partial.desc2': 'हि तुमची {{title}} प्राविण्य प्रोफाईल आहे. ते {{title}} (उर्फ डोमेन्स) मधील विविध महत्त्वपूर्ण विभागातील तुमचे इयत्तांमधील प्रभुत्व (उर्फ कार्यक्षमता) दर्शवते. रकाने डोमेन्स दाखवतात आणि चौकोन प्रत्येक {{title}} डोमेन मधील इयत्ता दाखवतात.',
-  'student-first-experience.competency-level-partial.desc3': 'जसं जसं प्रत्येक कार्यक्षमतेमध्ये तुम्ही प्रभुत्व मिळवत जाल, तसं तसं त्याच्याशी निगडीत चौकोन गडद निळा होईल.',
-  'student-first-experience.competency-level-partial.desc4': 'ध्येय हि एक हलकीशी पांढरी रेषा आहे जी प्रत्येक गणित विभागात तुम्ही मिळवलेली सर्वोच्च कार्यक्षमतेमधील प्रभुत्व दाखवते.',
-  'student-first-experience.competency-level-partial.desc5': 'जर ध्येयरेषा ही डोमेनच्या खाली असेल, तर यंत्रणेला त्या विषयात शोधण्यासाठी अधीक माहितीची गरज आहे. तुम्ही जस जसे धडे अभ्यासणे सुरु कराल आणि तुमचे आकलन तपासाल, तस तशी तुमची ध्येय रेषा वाढत जाईल आणि प्रत्येक विभागात तुमचे प्राविण्य अपडेट केले जाईल.',
+  'student-first-experience.explanatory.not-started.desc':
+    'दर्शवत आहे की असे कोणतेही पुरावे नाहीत आणि आपण अद्याप इयत्तांचा अभ्यास सुरु करणे बाकी आहे',
+  'student-first-experience.competency-level-partial.desc1':
+    'तुम्ही सध्या आहात',
+  'student-first-experience.competency-level-partial.desc2':
+    'हि तुमची {{title}} प्राविण्य प्रोफाईल आहे. ते {{title}} (उर्फ डोमेन्स) मधील विविध महत्त्वपूर्ण विभागातील तुमचे इयत्तांमधील प्रभुत्व (उर्फ कार्यक्षमता) दर्शवते. रकाने डोमेन्स दाखवतात आणि चौकोन प्रत्येक {{title}} डोमेन मधील इयत्ता दाखवतात.',
+  'student-first-experience.competency-level-partial.desc3':
+    'जसं जसं प्रत्येक कार्यक्षमतेमध्ये तुम्ही प्रभुत्व मिळवत जाल, तसं तसं त्याच्याशी निगडीत चौकोन गडद निळा होईल.',
+  'student-first-experience.competency-level-partial.desc4':
+    'ध्येय हि एक हलकीशी पांढरी रेषा आहे जी प्रत्येक गणित विभागात तुम्ही मिळवलेली सर्वोच्च कार्यक्षमतेमधील प्रभुत्व दाखवते.',
+  'student-first-experience.competency-level-partial.desc5':
+    'जर ध्येयरेषा ही डोमेनच्या खाली असेल, तर यंत्रणेला त्या विषयात शोधण्यासाठी अधीक माहितीची गरज आहे. तुम्ही जस जसे धडे अभ्यासणे सुरु कराल आणि तुमचे आकलन तपासाल, तस तशी तुमची ध्येय रेषा वाढत जाईल आणि प्रत्येक विभागात तुमचे प्राविण्य अपडेट केले जाईल.',
   'student-first-experience.units.other': '{{count}} युनिट्स',
   'player.gru-navigation.view-report': 'अहवाल पहा',
   'player.gru-navigator.see-usage-report': 'वापर अहवाल पहा',
-  'player.gru-viewer.not-iframe-url.header_1': 'हे संसाधन गुरु अंतर्गत पाहिले जाऊ शकत नाही',
-  'player.gru-viewer.not-iframe-url.header_external_assessment_1': 'हे मूल्यांकन गुरु अंतर्गत पाहिले जाऊ शकत नाही.',
-  'player.gru-viewer.not-iframe-url.header_2': 'नवीन टॅबमध्ये संसाधन उघडण्यासाठी खालील बटणवर क्लिक करा.',
+  'player.gru-viewer.not-iframe-url.header_1':
+    'हे संसाधन गुरु अंतर्गत पाहिले जाऊ शकत नाही',
+  'player.gru-viewer.not-iframe-url.header_external_assessment_1':
+    'हे मूल्यांकन गुरु अंतर्गत पाहिले जाऊ शकत नाही.',
+  'player.gru-viewer.not-iframe-url.header_2':
+    'नवीन टॅबमध्ये संसाधन उघडण्यासाठी खालील बटणवर क्लिक करा.',
   'player.gru-viewer.not-iframe-url.view-resource': 'संसाधन पहा',
-  'player.gru-viewer.not-iframe-url.https_external': 'हि लिंक गुरुमध्ये पाहिली जाऊ शकत नाही.',
-  'player.gru-viewer.not-iframe-url.https_new_tab': 'नवीन टॅबमध्ये उघडण्यासाठी खालील लिंकवर क्लिक करा.',
-  'player.gru-viewer.not-iframe-url.footer_1': 'मला हे पृष्ठ रिकामी का दिसत आहे?',
-  'player.gru-viewer.not-iframe-url.footer_2': 'गुरु मध्ये जोडलेली संसाधने हजारो वेगवेगळ्या प्रकाशकांकडून येतात जे',
-  'player.gru-viewer.not-iframe-url.footer_3': 'त्यांची सामग्री तयार आणि शेअर करतात. संसाधनांमध्ये विविध सेटिंग्ज असतात, ज्यात',
-  'player.gru-viewer.not-iframe-url.footer_4': 'सामग्री पाहण्यासाठी तुम्हाला दुसऱ्या पृष्ठावर घेऊन जाण्याच्या आवश्यकतेचा देखील समावेश असतो.',
+  'player.gru-viewer.not-iframe-url.https_external':
+    'हि लिंक गुरुमध्ये पाहिली जाऊ शकत नाही.',
+  'player.gru-viewer.not-iframe-url.https_new_tab':
+    'नवीन टॅबमध्ये उघडण्यासाठी खालील लिंकवर क्लिक करा.',
+  'player.gru-viewer.not-iframe-url.footer_1':
+    'मला हे पृष्ठ रिकामी का दिसत आहे?',
+  'player.gru-viewer.not-iframe-url.footer_2':
+    'गुरु मध्ये जोडलेली संसाधने हजारो वेगवेगळ्या प्रकाशकांकडून येतात जे',
+  'player.gru-viewer.not-iframe-url.footer_3':
+    'त्यांची सामग्री तयार आणि शेअर करतात. संसाधनांमध्ये विविध सेटिंग्ज असतात, ज्यात',
+  'player.gru-viewer.not-iframe-url.footer_4':
+    'सामग्री पाहण्यासाठी तुम्हाला दुसऱ्या पृष्ठावर घेऊन जाण्याच्या आवश्यकतेचा देखील समावेश असतो.',
   'grading-player.answer': 'सादर केलेले कार्य',
   'grading-player.back-to': 'मागे',
   'grading-player.current-response': 'वर्तमान प्रतिसाद',
@@ -1496,7 +1891,8 @@ window.i18ln = {
   'grading-player.points': 'गुण',
   'grading-player.prompt': 'कार्य त्वरित',
   'grading-player.overall-comment': 'एकूण टिप्पणी',
-  'grading-player.overall-lead': 'निबंधावर संपूर्णतः आपल्या अभिप्रायाचा सारांश द्या.',
+  'grading-player.overall-lead':
+    'निबंधावर संपूर्णतः आपल्या अभिप्रायाचा सारांश द्या.',
   'grading-player.time-spent': 'खर्च केलेला वेळ',
   'grading-player.total-score': 'एकूण गुण',
   'grading-player.student-roster.title': 'विद्यार्थी सूची',
@@ -1515,7 +1911,8 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'प्राविण्य',
   'profile.gru-navigation.preference.preference': 'प्राधान्यक्रम',
   'profile.edit.select-district': 'एक जिल्हा निवडा ...',
-  'profile.proficiency.is-empty': 'अद्याप कोणताही डेटा उपलब्ध नाही एकदा तुम्ही अभ्यास करायला सुरूवात केली की आपला डेटा उपलब्ध होईल.',
+  'profile.proficiency.is-empty':
+    'अद्याप कोणताही डेटा उपलब्ध नाही एकदा तुम्ही अभ्यास करायला सुरूवात केली की आपला डेटा उपलब्ध होईल.',
   'profile.proficiency.expand-chart': 'विस्तृत तक्ता दाखवा',
   'profile.proficiency.mastered': 'प्रभुत्व',
   'profile.proficiency.in-progress': 'प्रक्रिया सुरु आहे',
@@ -1524,14 +1921,17 @@ window.i18ln = {
   'profile.proficiency.baseline': 'आधार रेषा',
   'profile.proficiency.grade-line': 'इतर इयत्ता',
   'profile.proficiency.class-grade-line': 'वर्ग इयत्ता',
-  'profile.proficiency.not-tagged': 'या वर्गासाठी कुठलाही अभ्यासक्रम अजून दिलेला नाही. किंवा, अभ्यासक्रम अजून योग्य विषय आणि इयत्तेशी जोडलेला नाही',
+  'profile.proficiency.not-tagged':
+    'या वर्गासाठी कुठलाही अभ्यासक्रम अजून दिलेला नाही. किंवा, अभ्यासक्रम अजून योग्य विषय आणि इयत्तेशी जोडलेला नाही',
   'profile.proficiency.show-compressed-chart': 'संक्षिप्त तक्ता दाखवा',
   'profile.proficiency.show-expanded-chart': 'विस्तृत तक्ता दाखवा',
   'profile.preference.language-preference': 'भाषेचा प्राधान्य क्रम',
   'profile.preference.choose-language': 'भाषा निवडा',
   'profile.preference.choose-sec-language': 'निवडा',
-  'profile.preference.choose-preferred-language': 'प्रोफाईलसाठी प्राथमिक भाषा निवडा',
-  'profile.preference.choose-preferred-other-languages': 'इतर प्राधान्य भाषा निवडा',
+  'profile.preference.choose-preferred-language':
+    'प्रोफाईलसाठी प्राथमिक भाषा निवडा',
+  'profile.preference.choose-preferred-other-languages':
+    'इतर प्राधान्य भाषा निवडा',
   'profile.preference.language': 'भाषा',
   'profile.preference.select-category-label': 'नवीन श्रेणी जोडा',
   'profile.preference.choose-category': 'श्रेणी निवडा',
@@ -1576,9 +1976,11 @@ window.i18ln = {
   'gru-metrics-sub-header.report': 'अहवाल',
   'gru-metrics-sub-header.completion': 'पूर्ण झाले',
   'gru-metrics-sub-header.time-spent': 'वेळ',
-  'gru-resource-new.resource-already-exist': 'हे संसाधन आधीपासूनच Gooru मध्ये आहे!',
+  'gru-resource-new.resource-already-exist':
+    'हे संसाधन आधीपासूनच Gooru मध्ये आहे!',
   'gru-assessment-report.gru-summary.total-time-spent': 'एकूण वेळ घालवला',
-  'gru-assessment-report.hidden-report': 'आपल्या शिक्षकाने या मूल्यांकनासाठी आपला सारांश अहवाल दडविण्याचा पर्याय निवडला आहे.',
+  'gru-assessment-report.hidden-report':
+    'आपल्या शिक्षकाने या मूल्यांकनासाठी आपला सारांश अहवाल दडविण्याचा पर्याय निवडला आहे.',
   'cards.gru-class-card.student.zero': '{{count}} विद्यार्थी',
   'cards.gru-class-card.student.one': '{{count}} विद्यार्थी',
   'cards.gru-class-card.student.other': '{{count}} विद्यार्थी',
@@ -1586,10 +1988,14 @@ window.i18ln = {
   'cards.gru-class-card.unit.zero': 'अभ्यासक्रम नाही',
   'cards.gru-class-card.unit.one': '{{count}} युनिट',
   'cards.gru-class-card.unit.other': '{{count}} युनिट्स',
-  'cards.gru-class-card.archived.request-report': 'हा वर्ग संग्रहित केला आहे आणि सुधारित केला जाऊ शकत नाही. विद्यमान वर्ग डेटा अहवालाद्वारे मिळवता येणे शक्य आहे.',
-  'cards.gru-class-card.archived.report-in-progress': 'अहवाल तयार करण्यास 20 मिनिटे लागू शकतात. कृपया परत तपासा.',
-  'cards.gru-class-card.archived.download-report': 'या वर्गासाठी आपला डेटा डाउनलोड करा.',
-  'cards.gru-class-card.archived.no-report-available': 'या वर्गात नियोजित अभ्यासक्रम सामग्री नाही',
+  'cards.gru-class-card.archived.request-report':
+    'हा वर्ग संग्रहित केला आहे आणि सुधारित केला जाऊ शकत नाही. विद्यमान वर्ग डेटा अहवालाद्वारे मिळवता येणे शक्य आहे.',
+  'cards.gru-class-card.archived.report-in-progress':
+    'अहवाल तयार करण्यास 20 मिनिटे लागू शकतात. कृपया परत तपासा.',
+  'cards.gru-class-card.archived.download-report':
+    'या वर्गासाठी आपला डेटा डाउनलोड करा.',
+  'cards.gru-class-card.archived.no-report-available':
+    'या वर्गात नियोजित अभ्यासक्रम सामग्री नाही',
   'cards.gru-course-card.in': 'मध्ये',
   'cards.gru-course-card.units.zero': '{{count}} युनिट्स',
   'cards.gru-course-card.units.one': '{{count}} युनिट',
@@ -1632,44 +2038,65 @@ window.i18ln = {
   'reports.gru-table-view.totals': 'एकूण',
   'gru-emotion-picker.react-to-resource': 'या संसाधनावर प्रतिक्रिया द्या',
   'home.no-classes-found.create-class.title': 'गोरू वर्गाने शिकवा',
-  'home.no-classes-found.create-class.description': 'एक वर्ग तयार केला, सामग्री नियुक्त करा आणि विद्यार्थ्यांना आमंत्रित करा',
+  'home.no-classes-found.create-class.description':
+    'एक वर्ग तयार केला, सामग्री नियुक्त करा आणि विद्यार्थ्यांना आमंत्रित करा',
   'home.no-classes-found.create-class.button-text': 'वर्ग तयार करा',
   'home.no-classes-found.join-class.title': 'गोरु वर्गातून  शिका',
-  'home.no-classes-found.join-class.description': 'शिकण्यास प्रारंभ करण्यासाठी आपल्या शिक्षकांच्या वर्गात सामील व्हा',
+  'home.no-classes-found.join-class.description':
+    'शिकण्यास प्रारंभ करण्यासाठी आपल्या शिक्षकांच्या वर्गात सामील व्हा',
   'home.no-classes-found.join-class.button-text': 'वर्ग कोड प्रविष्ट करा',
   'home.no-classes-found.featured-courses.title': 'उपलब्ध अभ्यासक्रम',
-  'home.no-classes-found.featured-courses.description': 'गणित, विज्ञान, सामाजिक अभ्यास आणि एला अभ्यासक्रम पहा.',
+  'home.no-classes-found.featured-courses.description':
+    'गणित, विज्ञान, सामाजिक अभ्यास आणि एला अभ्यासक्रम पहा.',
   'home.no-classes-found.featured-courses.button-text': 'प्रदर्शित अभ्यासक्रम',
   'home.no-classes-found.teacher-toolkit.title': 'शिक्षक साहित्यसामग्री',
-  'home.no-classes-found.teacher-toolkit.description': 'या साहित्यसामग्रीमध्ये तुम्हाला प्रारंभ करण्यात मदत करतील अशी संसाधने आहेत.',
+  'home.no-classes-found.teacher-toolkit.description':
+    'या साहित्यसामग्रीमध्ये तुम्हाला प्रारंभ करण्यात मदत करतील अशी संसाधने आहेत.',
   'home.no-classes-found.teacher-toolkit.button-text': 'शिक्षक साहित्यसामग्री',
   'taxonomy.grades': 'इयत्ता',
   'taxonomy.gru-taxonomy-selector.add-secondary': 'माध्यमिक जोडा',
   'taxonomy.gru-taxonomy-selector.choose-subject': 'विषय निवडा',
-  'taxonomy.gru-taxonomy-selector.competency-subject-and-course': 'कार्क्षयमता आराखडा आणि अभ्यासक्रम',
-  'taxonomy.gru-taxonomy-selector.primary-subject-and-course': 'इयत्ता आराखडा आणि अभ्यासक्रम',
-  'validations.unsavedChanges': 'आपले बदल अजून सेव्ह केले गेलेले नाहीत. आपण हे पेज सोडू इच्छिता?',
+  'taxonomy.gru-taxonomy-selector.competency-subject-and-course':
+    'कार्क्षयमता आराखडा आणि अभ्यासक्रम',
+  'taxonomy.gru-taxonomy-selector.primary-subject-and-course':
+    'इयत्ता आराखडा आणि अभ्यासक्रम',
+  'validations.unsavedChanges':
+    'आपले बदल अजून सेव्ह केले गेलेले नाहीत. आपण हे पेज सोडू इच्छिता?',
   'featured.featured-title': 'प्रदर्शित अभ्यासक्रम',
-  'featured.featured-description': 'येथे प्रसिद्ध झालेले अभ्यासक्रम हे सृजनशील शिक्षकांनी तयार केलेले असून ते तज्ञांनी तपासलेले, पुनरावलोकन केलेले आणि विद्यार्थ्यांसोबत सोबत वर्गात राबवलेले आहेत. वैयक्तिक शिक्षणाचा अनुभव निर्माण करण्यासाठी आणि विद्यार्थ्यांना वर्गात गुंतवण्यासाठी अभ्यासक्रम शोधा, त्यांचे पुर्नमिश्रण करा आणि तुम्हाला हवे ते बदल करा. या अभ्यासक्रमांच्या निर्मिती बाबत <a href=\'http://about.gooru.org/courses\' target=\'_blank\'>अधिक माहिती</a> इथे वाचा.',
+  'featured.featured-description':
+    'येथे प्रसिद्ध झालेले अभ्यासक्रम हे सृजनशील शिक्षकांनी तयार केलेले असून ते तज्ञांनी तपासलेले, पुनरावलोकन केलेले आणि विद्यार्थ्यांसोबत सोबत वर्गात राबवलेले आहेत. वैयक्तिक शिक्षणाचा अनुभव निर्माण करण्यासाठी आणि विद्यार्थ्यांना वर्गात गुंतवण्यासाठी अभ्यासक्रम शोधा, त्यांचे पुर्नमिश्रण करा आणि तुम्हाला हवे ते बदल करा. या अभ्यासक्रमांच्या निर्मिती बाबत <a href=\'http://about.gooru.org/courses\' target=\'_blank\'>अधिक माहिती</a> इथे वाचा.',
   'locateme.score': 'गुण',
   'locateme.timespent': 'खर्च केलेला वेळ',
   'locateme.view': 'पहा',
   'locateme.attempt': 'प्रयत्न',
   'locateme.lastAcessesed': 'अखेरचा केलेला प्रवेश',
-  'taxonomy.modals.gru-domain-picker.browseSelectorText': 'या युनिटमध्ये कोणकोणते डोमेन्स समाविष्ट असतील?',
-  'taxonomy.modals.gru-domain-picker.selectedText.zero': '{{count}} निवडलेले डोमेन्स ',
-  'taxonomy.modals.gru-domain-picker.selectedText.one': '{{count}} निवडलेला डोमेन',
-  'taxonomy.modals.gru-domain-picker.selectedText.other': '{{count}} निवडलेले डोमेन्स',
+  'taxonomy.modals.gru-domain-picker.browseSelectorText':
+    'या युनिटमध्ये कोणकोणते डोमेन्स समाविष्ट असतील?',
+  'taxonomy.modals.gru-domain-picker.selectedText.zero':
+    '{{count}} निवडलेले डोमेन्स ',
+  'taxonomy.modals.gru-domain-picker.selectedText.one':
+    '{{count}} निवडलेला डोमेन',
+  'taxonomy.modals.gru-domain-picker.selectedText.other':
+    '{{count}} निवडलेले डोमेन्स',
   'taxonomy.modals.gru-domain-picker.shortcutText': 'यात अभ्यासक्रम आहे',
-  'taxonomy.modals.gru-standard-picker.browseSelectorText': 'कोणत्या इयत्ता समाविष्ट केल्या जातील?',
-  'taxonomy.modals.gru-standard-picker.browseCompetencySelectorText': 'काय क्षमता समाविष्ट केल्या जातील?',
-  'taxonomy.modals.gru-standard-picker.selectedText.zero': '{{count}} इयत्ता निवडल्या',
-  'taxonomy.modals.gru-standard-picker.selectedText.one': '{{count}} इयत्ता निवडली',
-  'taxonomy.modals.gru-standard-picker.selectedText.other': '{{count}} इयत्ता निवडल्या',
-  'taxonomy.modals.gru-standard-picker.selectedCompetencyText.zero': '{{count}} क्षमता निवडल्या',
-  'taxonomy.modals.gru-standard-picker.selectedCompetencyText.one': '{{count}} क्षमता निवडली',
-  'taxonomy.modals.gru-standard-picker.selectedCompetencyText.other': '{{count}} क्षमता निवडल्या',
-  'taxonomy.modals.gru-standard-picker.shortcutText': 'शी युनिटचा संबंध जोडला आहे',
+  'taxonomy.modals.gru-standard-picker.browseSelectorText':
+    'कोणत्या इयत्ता समाविष्ट केल्या जातील?',
+  'taxonomy.modals.gru-standard-picker.browseCompetencySelectorText':
+    'काय क्षमता समाविष्ट केल्या जातील?',
+  'taxonomy.modals.gru-standard-picker.selectedText.zero':
+    '{{count}} इयत्ता निवडल्या',
+  'taxonomy.modals.gru-standard-picker.selectedText.one':
+    '{{count}} इयत्ता निवडली',
+  'taxonomy.modals.gru-standard-picker.selectedText.other':
+    '{{count}} इयत्ता निवडल्या',
+  'taxonomy.modals.gru-standard-picker.selectedCompetencyText.zero':
+    '{{count}} क्षमता निवडल्या',
+  'taxonomy.modals.gru-standard-picker.selectedCompetencyText.one':
+    '{{count}} क्षमता निवडली',
+  'taxonomy.modals.gru-standard-picker.selectedCompetencyText.other':
+    '{{count}} क्षमता निवडल्या',
+  'taxonomy.modals.gru-standard-picker.shortcutText':
+    'शी युनिटचा संबंध जोडला आहे',
   'account-settings.title': 'खाते सेटिंग्ज',
   'account-settings.account-info': 'खात्याची माहिती',
   'account-settings.private-info': 'खाजगी माहिती',
@@ -1692,216 +2119,319 @@ window.i18ln = {
   'gru-rich-text-editor.expressions-panel.tabs.trigonometry': 'त्रिकोणमिती',
   'gru-rich-text-editor.expressions-panel.insert-expression': 'टाका',
   'gru-rich-text-editor.expressions-panel.update-expression': 'अपडेट करा',
-  'gru-rich-text-editor.expressions-panel.create-expression': 'अभिव्यक्ती तयार करा',
+  'gru-rich-text-editor.expressions-panel.create-expression':
+    'अभिव्यक्ती तयार करा',
   'gru-settings-edit.answerkey-attempts': 'उत्तर पत्रिका आणि प्रयत्न',
   'gru-settings-edit.answer-key': 'विद्यार्थी शेवटी उत्तरे पाहू शकतात',
   'gru-settings-edit.attempts': 'प्रयत्न',
   'gru-settings-edit.attempts-unlimited': 'अमर्यादित',
   'gru-settings-edit.backwards': 'विद्यार्थी मागे जाऊन उत्तर बदलू शकतात',
-  'gru-settings-edit.feedback': 'विद्यार्थ्यांनी  त्यांची उत्तरे चूक/ बरोबर आहेत ते पाहावे',
+  'gru-settings-edit.feedback':
+    'विद्यार्थ्यांनी  त्यांची उत्तरे चूक/ बरोबर आहेत ते पाहावे',
   'gru-settings-edit.feedback-immediate': 'प्रत्येक प्रश्नाकरिता आणि शेवटी',
   'gru-settings-edit.feedback-never': 'कधीही नाही',
   'gru-settings-edit.feedback-summary': 'शेवटी',
   'gru-settings-edit.navigation-scoring': 'मार्गदर्शक आणि गुणांकन',
-  'gru-settings-edit.disable-heading': 'अभ्यासक्रमाच्या आराखड्यामध्ये मूल्यमापन कार्यान्वित करा',
-  'gru-settings-edit.disable-legend': 'विद्यार्थी त्यांच्या अभ्यासक्रमाच्या आराखड्यामध्ये मूल्यमापन सुरु करू शकतात',
+  'gru-settings-edit.disable-heading':
+    'अभ्यासक्रमाच्या आराखड्यामध्ये मूल्यमापन कार्यान्वित करा',
+  'gru-settings-edit.disable-legend':
+    'विद्यार्थी त्यांच्या अभ्यासक्रमाच्या आराखड्यामध्ये मूल्यमापन सुरु करू शकतात',
   'gru-icon-popover.settings-visibility-title': 'आपली सामग्री दृश्यमान करा',
-  'gru-icon-popover.settings-visibility-content': 'हे सेटिंग आपल्या वापरकर्त्याच्या प्रोफाइलद्वारे दृश्यमान बनविते. तुम्ही तयार केलेले अभ्यासक्रम, संग्रह, आकलन, संसाधने आणि / किंवा प्रश्न आपल्या सहकाऱ्यांसोबत सामायिक करू इच्छित असल्यास, आम्ही सुचवितो की आपण हे वैशिष्ट्य चालू करावे.',
+  'gru-icon-popover.settings-visibility-content':
+    'हे सेटिंग आपल्या वापरकर्त्याच्या प्रोफाइलद्वारे दृश्यमान बनविते. तुम्ही तयार केलेले अभ्यासक्रम, संग्रह, आकलन, संसाधने आणि / किंवा प्रश्न आपल्या सहकाऱ्यांसोबत सामायिक करू इच्छित असल्यास, आम्ही सुचवितो की आपण हे वैशिष्ट्य चालू करावे.',
   'gru-take-tour.text': 'फेरफटका',
   'gru-take-tour.teacher-home.stepOne.title': 'एक फेरफटका मारा',
-  'gru-take-tour.teacher-home.stepOne.description': 'फेरफटका मारण्यासाठी आणि आपले मुख्यपृष्ठ पाहण्यासाठी आपले स्वागत आहे! आता प्रारंभ करूया!',
+  'gru-take-tour.teacher-home.stepOne.description':
+    'फेरफटका मारण्यासाठी आणि आपले मुख्यपृष्ठ पाहण्यासाठी आपले स्वागत आहे! आता प्रारंभ करूया!',
   'gru-take-tour.teacher-home.stepTwo.title': 'लोगो',
-  'gru-take-tour.teacher-home.stepTwo.description': 'लोगोवर क्लिक केल्यावर तुम्ही मुख्यपृष्ठावर परत याल',
+  'gru-take-tour.teacher-home.stepTwo.description':
+    'लोगोवर क्लिक केल्यावर तुम्ही मुख्यपृष्ठावर परत याल',
   'gru-take-tour.teacher-home.stepThree.title': 'शोध पर्याय',
-  'gru-take-tour.teacher-home.stepThree.description': 'आपल्याला स्वारस्य असलेल्या विषयांसाठी आमचो सामग्री सूची शोधा',
+  'gru-take-tour.teacher-home.stepThree.description':
+    'आपल्याला स्वारस्य असलेल्या विषयांसाठी आमचो सामग्री सूची शोधा',
   'gru-take-tour.teacher-home.stepFour.title': 'वर्ग',
-  'gru-take-tour.teacher-home.stepFour.description': 'आपल्या मुख्यपृष्ठावर परत जा.',
+  'gru-take-tour.teacher-home.stepFour.description':
+    'आपल्या मुख्यपृष्ठावर परत जा.',
   'gru-take-tour.teacher-home.stepFive.title': 'सामग्री व्यवस्थापक',
-  'gru-take-tour.teacher-home.stepFive.description': 'आपली सामग्री तयार करण्यासाठी आणि प्रवेश करण्यासाठी जलद दुवा.',
+  'gru-take-tour.teacher-home.stepFive.description':
+    'आपली सामग्री तयार करण्यासाठी आणि प्रवेश करण्यासाठी जलद दुवा.',
   'gru-take-tour.teacher-home.stepSix.title': 'लायब्ररी',
-  'gru-take-tour.teacher-home.stepSix.description': 'आमचे वैशिष्ट्यीकृत अभ्यासक्रम पहा',
+  'gru-take-tour.teacher-home.stepSix.description':
+    'आमचे वैशिष्ट्यीकृत अभ्यासक्रम पहा',
   'gru-take-tour.teacher-home.stepSeven.title': 'तुमचे प्रोफाइल',
-  'gru-take-tour.teacher-home.stepSeven.description': 'तुमची सामग्री, वापरकर्ता प्रोफाइल आणि सेटिंग्जमध्ये प्रवेश करा आणि अपडेट करा.',
+  'gru-take-tour.teacher-home.stepSeven.description':
+    'तुमची सामग्री, वापरकर्ता प्रोफाइल आणि सेटिंग्जमध्ये प्रवेश करा आणि अपडेट करा.',
   'gru-take-tour.teacher-home.stepEight.title': 'सहाय्य',
-  'gru-take-tour.teacher-home.stepEight.description': 'साहाय्य केंद्रात प्रवेश करा किंवा लॉगआउट करा.',
+  'gru-take-tour.teacher-home.stepEight.description':
+    'साहाय्य केंद्रात प्रवेश करा किंवा लॉगआउट करा.',
   'gru-take-tour.teacher-home.stepNine.title': 'वर्ग',
-  'gru-take-tour.teacher-home.stepNine.description': 'तुम्ही सध्या शिक्षण देत असलेल्या वर्गांची यादी पहा.',
+  'gru-take-tour.teacher-home.stepNine.description':
+    'तुम्ही सध्या शिक्षण देत असलेल्या वर्गांची यादी पहा.',
   'gru-take-tour.teacher-home.stepTen.title': 'संग्रहित वर्ग',
-  'gru-take-tour.teacher-home.stepTen.description': 'तुम्ही पूर्वी शिकविलेल्या वर्गांची यादी पहा.',
+  'gru-take-tour.teacher-home.stepTen.description':
+    'तुम्ही पूर्वी शिकविलेल्या वर्गांची यादी पहा.',
   'gru-take-tour.teacher-home.stepEleven.title': 'वर्ग तयार करा',
-  'gru-take-tour.teacher-home.stepEleven.description': 'तुमच्या वर्गाचे नाव द्या आणि एक नवीन वर्ग तयार करण्यासाठी बटणवर क्लिक करा',
+  'gru-take-tour.teacher-home.stepEleven.description':
+    'तुमच्या वर्गाचे नाव द्या आणि एक नवीन वर्ग तयार करण्यासाठी बटणवर क्लिक करा',
   'gru-take-tour.student-home.stepOne.title': 'एक फेरफटका मारा',
-  'gru-take-tour.student-home.stepOne.description': 'फेरफटका मारण्यासाठी आणि तुमचे मुख्यपृष्ठ घेण्यासाठी स्वागत आहे! तुमच्या होमपेजवर तुमच्यासाठी उपलब्ध असलेल्या वैशिष्ट्यांची ओळख करून घेऊया.',
+  'gru-take-tour.student-home.stepOne.description':
+    'फेरफटका मारण्यासाठी आणि तुमचे मुख्यपृष्ठ घेण्यासाठी स्वागत आहे! तुमच्या होमपेजवर तुमच्यासाठी उपलब्ध असलेल्या वैशिष्ट्यांची ओळख करून घेऊया.',
   'gru-take-tour.student-home.stepFeaturedCourses.title': 'उपलब्ध अभ्यासक्रम',
-  'gru-take-tour.student-home.stepFeaturedCourses.description': 'तुम्हाला स्वारस्य असलेल्या विषयांसाठी शैक्षणिक मार्गदर्शकाच्या सामग्री सूचीमध्ये वैशिष्ट्यीकृत अभ्यासक्रम पहा.',
+  'gru-take-tour.student-home.stepFeaturedCourses.description':
+    'तुम्हाला स्वारस्य असलेल्या विषयांसाठी शैक्षणिक मार्गदर्शकाच्या सामग्री सूचीमध्ये वैशिष्ट्यीकृत अभ्यासक्रम पहा.',
   'gru-take-tour.student-home.stepTwo.title': 'लोगो',
-  'gru-take-tour.student-home.stepTwo.description': 'लोगोवर क्लिक केल्यावर तुम्ही मुख्यपृष्ठावर परत याल',
+  'gru-take-tour.student-home.stepTwo.description':
+    'लोगोवर क्लिक केल्यावर तुम्ही मुख्यपृष्ठावर परत याल',
   'gru-take-tour.student-home.stepThree.title': 'शोध पर्याय',
-  'gru-take-tour.student-home.stepThree.description': 'तुम्हाला स्वारस्य असलेल्या विषयांसाठी आमची सामग्री सूची शोधा',
+  'gru-take-tour.student-home.stepThree.description':
+    'तुम्हाला स्वारस्य असलेल्या विषयांसाठी आमची सामग्री सूची शोधा',
   'gru-take-tour.student-home.stepFour.title': 'माझा अभ्यास',
-  'gru-take-tour.student-home.stepFour.description': 'तुमच्या मुख्यपृष्ठावर परत जा.',
+  'gru-take-tour.student-home.stepFour.description':
+    'तुमच्या मुख्यपृष्ठावर परत जा.',
   'gru-take-tour.student-home.stepFive.title': 'लायब्ररी',
-  'gru-take-tour.student-home.stepFive.description': 'तुम्हाला स्वारस्य असलेल्या विषयांसाठी  शैक्षणिक मार्गदर्शकाचे वैशिष्ट्यीकृत अभ्यासक्रम आणि भागीदार लायब्ररी पहा.',
+  'gru-take-tour.student-home.stepFive.description':
+    'तुम्हाला स्वारस्य असलेल्या विषयांसाठी  शैक्षणिक मार्गदर्शकाचे वैशिष्ट्यीकृत अभ्यासक्रम आणि भागीदार लायब्ररी पहा.',
   'gru-take-tour.student-home.stepSix.title': 'कामगिरी',
-  'gru-take-tour.student-home.stepSix.description': 'तुम्ही नोंदवलेला अभ्यासक्रमांमध्ये आपल्या कामगिरीचा सारांश पहा.',
+  'gru-take-tour.student-home.stepSix.description':
+    'तुम्ही नोंदवलेला अभ्यासक्रमांमध्ये आपल्या कामगिरीचा सारांश पहा.',
   'gru-take-tour.student-home.stepSeven.title': 'तुमचे प्रोफाइल',
-  'gru-take-tour.student-home.stepSeven.description': 'तुमच्या सामग्री आणि वापरकर्ता प्रोफाइलमध्ये प्रवेश करा आणि अपडेट करा.',
+  'gru-take-tour.student-home.stepSeven.description':
+    'तुमच्या सामग्री आणि वापरकर्ता प्रोफाइलमध्ये प्रवेश करा आणि अपडेट करा.',
   'gru-take-tour.student-home.stepEight.title': 'सहाय्य',
-  'gru-take-tour.student-home.stepEight.description': 'साहाय्य केंद्रात प्रवेश करा किंवा लॉगआउट करा.',
+  'gru-take-tour.student-home.stepEight.description':
+    'साहाय्य केंद्रात प्रवेश करा किंवा लॉगआउट करा.',
   'gru-take-tour.student-home.stepNine.title': 'घोषणा',
-  'gru-take-tour.student-home.stepNine.description': 'येथे तुम्हाला तुमच्या शिक्षक किंवा शाळेने तुमच्यासाठी केलेली घोषणा दिसेल. ',
+  'gru-take-tour.student-home.stepNine.description':
+    'येथे तुम्हाला तुमच्या शिक्षक किंवा शाळेने तुमच्यासाठी केलेली घोषणा दिसेल. ',
   'gru-take-tour.student-home.stepTen.title': 'वर्ग',
-  'gru-take-tour.student-home.stepTen.description': 'तुम्ही प्रवेश घेतलेल्या सर्व वर्गांची यादी पहा.',
+  'gru-take-tour.student-home.stepTen.description':
+    'तुम्ही प्रवेश घेतलेल्या सर्व वर्गांची यादी पहा.',
   'gru-take-tour.student-home.stepEleven.title': 'स्वतंत्र शिक्षण',
-  'gru-take-tour.student-home.stepEleven.description': 'आपण बुकमार्क केलेले विषय आणि ज्याबद्दल आपल्याला अजून जाणून घ्यायचे आहे असे विषय पहा.',
+  'gru-take-tour.student-home.stepEleven.description':
+    'आपण बुकमार्क केलेले विषय आणि ज्याबद्दल आपल्याला अजून जाणून घ्यायचे आहे असे विषय पहा.',
   'gru-take-tour.student-home.stepTwelve.title': 'क्लासरूममध्ये सहभागी व्हा',
-  'gru-take-tour.student-home.stepTwelve.description': 'वर्गात सहभागी होण्यासाठी वर्गातील कोड प्रविष्ट करा',
+  'gru-take-tour.student-home.stepTwelve.description':
+    'वर्गात सहभागी होण्यासाठी वर्गातील कोड प्रविष्ट करा',
   'gru-take-tour.student-home.stepThirteen.title': 'पूर्ण झाले!',
-  'gru-take-tour.student-home.stepThirteen.description': 'आता पुढे जा आणि तुम्ही प्रवेश घेतलेल्या अभ्यासक्रमावर क्लिक करा, वर्गात प्रवेश करा किंवा आपल्यास आवडत्या मजकुराचा शोध घ्या',
+  'gru-take-tour.student-home.stepThirteen.description':
+    'आता पुढे जा आणि तुम्ही प्रवेश घेतलेल्या अभ्यासक्रमावर क्लिक करा, वर्गात प्रवेश करा किंवा आपल्यास आवडत्या मजकुराचा शोध घ्या',
   'gru-take-tour.student-performance.stepOne.title': 'स्वागत आहे!',
-  'gru-take-tour.student-performance.stepOne.description': 'आपल्या कामगिरी डॅशबोर्डवर आपले स्वागत आहे आपण सर्व वर्ग आणि अभ्यासक्रमांमध्ये कसे कार्य करीत आहात ते पाहू शकता.',
+  'gru-take-tour.student-performance.stepOne.description':
+    'आपल्या कामगिरी डॅशबोर्डवर आपले स्वागत आहे आपण सर्व वर्ग आणि अभ्यासक्रमांमध्ये कसे कार्य करीत आहात ते पाहू शकता.',
   'gru-take-tour.student-performance.stepTwo.title': 'फिल्टर पर्याय',
-  'gru-take-tour.student-performance.stepTwo.description': 'क्रिया, कालावधी, विषय आणि अभ्यासक्रमानुसार आपली कामगिरी फिल्टर करण्यासाठी बाणावर क्लिक करा.',
+  'gru-take-tour.student-performance.stepTwo.description':
+    'क्रिया, कालावधी, विषय आणि अभ्यासक्रमानुसार आपली कामगिरी फिल्टर करण्यासाठी बाणावर क्लिक करा.',
   'gru-take-tour.student-performance.stepThree.title': 'अहवाल अपडेट करा',
-  'gru-take-tour.student-performance.stepThree.description': 'एकदा आपण आपले फिल्टर निवडल्यास, परिणाम प्रदर्शित करण्यासाठी अपडेट अहवालावर क्लिक करा.',
+  'gru-take-tour.student-performance.stepThree.description':
+    'एकदा आपण आपले फिल्टर निवडल्यास, परिणाम प्रदर्शित करण्यासाठी अपडेट अहवालावर क्लिक करा.',
   'gru-take-tour.student-performance.stepFour.title': 'डाउनलोड / प्रिंट',
-  'gru-take-tour.student-performance.stepFour.description': 'आपला अहवाल डाउनलोड करा',
+  'gru-take-tour.student-performance.stepFour.description':
+    'आपला अहवाल डाउनलोड करा',
   'gru-take-tour.student-performance.stepFive.title': 'पूर्ण झाले!',
-  'gru-take-tour.student-performance.stepFive.description': 'पुढे जा आणि आपल्या कामगिरीचे विश्लेषण करा!',
+  'gru-take-tour.student-performance.stepFive.description':
+    'पुढे जा आणि आपल्या कामगिरीचे विश्लेषण करा!',
   'gru-take-tour.student-class.stepOne.title': 'स्वागत आहे!',
-  'gru-take-tour.student-class.stepOne.description': 'आपल्या वर्गात स्वागत आहे येथे आपण आपली वर्ग क्रिया, अभ्यासक्रम आराखडा आणि कामगिरी तपशील शोधू शकाल. चला सुरू करुया!',
-  'gru-take-tour.student-class.stepTopBar.title': 'अभ्यासक्रम, कामगिरी, पूर्णता',
-  'gru-take-tour.student-class.stepTopBar.description': 'आतापर्यंत आपल्या अभ्यासक्रमाचा आणि संपूर्ण कामगिरीचा सारांश पहा.',
+  'gru-take-tour.student-class.stepOne.description':
+    'आपल्या वर्गात स्वागत आहे येथे आपण आपली वर्ग क्रिया, अभ्यासक्रम आराखडा आणि कामगिरी तपशील शोधू शकाल. चला सुरू करुया!',
+  'gru-take-tour.student-class.stepTopBar.title':
+    'अभ्यासक्रम, कामगिरी, पूर्णता',
+  'gru-take-tour.student-class.stepTopBar.description':
+    'आतापर्यंत आपल्या अभ्यासक्रमाचा आणि संपूर्ण कामगिरीचा सारांश पहा.',
   'gru-take-tour.student-class.stepTwo.title': 'दैनिक वर्ग कृती',
-  'gru-take-tour.student-class.stepTwo.description': 'आपल्या शिक्षकाने नियुक्त केलेल्या आजच्या कार्यामध्ये प्रवेश आणि अभ्यास करा.',
+  'gru-take-tour.student-class.stepTwo.description':
+    'आपल्या शिक्षकाने नियुक्त केलेल्या आजच्या कार्यामध्ये प्रवेश आणि अभ्यास करा.',
   'gru-take-tour.student-class.stepThree.title': 'पाठ्यक्रम नकाशा',
-  'gru-take-tour.student-class.stepThree.description': 'अभ्यासक्रमातील संग्रह आणि मूल्यमापन पूर्ण करण्यासाठी युनिट्सवर क्लिक करा आणि धडे पहा.',
+  'gru-take-tour.student-class.stepThree.description':
+    'अभ्यासक्रमातील संग्रह आणि मूल्यमापन पूर्ण करण्यासाठी युनिट्सवर क्लिक करा आणि धडे पहा.',
   'gru-take-tour.student-class.stepFour.title': 'माझा अहवाल',
-  'gru-take-tour.student-class.stepFour.description': 'आपल्या एकूण वर्ग कामगिरीचे पुनरावलोकन करा.',
+  'gru-take-tour.student-class.stepFour.description':
+    'आपल्या एकूण वर्ग कामगिरीचे पुनरावलोकन करा.',
   'gru-take-tour.student-class.stepFive.title': 'पूर्ण झाले!',
-  'gru-take-tour.student-class.stepFive.description': 'अभ्यासक्रम नकाशा किंवा दैनंदिन कार्यावर क्लिक करुन अभ्यासक्रमाचा अभ्यास करणे सुरू करा.',
+  'gru-take-tour.student-class.stepFive.description':
+    'अभ्यासक्रम नकाशा किंवा दैनंदिन कार्यावर क्लिक करुन अभ्यासक्रमाचा अभ्यास करणे सुरू करा.',
   'gru-take-tour.teacher-class.stepOne.title': 'स्वागत आहे!',
-  'gru-take-tour.teacher-class.stepOne.description': 'आपल्या वर्गात स्वागत आहे. येथे आपण आपली वर्ग क्रिया, अभ्यासक्रम आराखडा पाहू आणि नियुक्त करू शकता, तसेच वर्ग माहिती अपडेट करू शकता, पाहू शकता आणि विद्यार्थ्यांच्या कामगिरी डेटाचे पुनरावलोकन करू शकता. चला सुरू करुया!',
-  'gru-take-tour.teacher-class.stepTopBar.title': 'अभ्यासक्रम, कामगिरी, पूर्णता',
-  'gru-take-tour.teacher-class.stepTopBar.description': 'आतापर्यंत आपल्या अभ्यासक्रमाचा सारांश आणि एकूण विद्यार्थी कामगिरी पाहा.',
+  'gru-take-tour.teacher-class.stepOne.description':
+    'आपल्या वर्गात स्वागत आहे. येथे आपण आपली वर्ग क्रिया, अभ्यासक्रम आराखडा पाहू आणि नियुक्त करू शकता, तसेच वर्ग माहिती अपडेट करू शकता, पाहू शकता आणि विद्यार्थ्यांच्या कामगिरी डेटाचे पुनरावलोकन करू शकता. चला सुरू करुया!',
+  'gru-take-tour.teacher-class.stepTopBar.title':
+    'अभ्यासक्रम, कामगिरी, पूर्णता',
+  'gru-take-tour.teacher-class.stepTopBar.description':
+    'आतापर्यंत आपल्या अभ्यासक्रमाचा सारांश आणि एकूण विद्यार्थी कामगिरी पाहा.',
   'gru-take-tour.teacher-class.stepTwo.title': 'दैनंदिन वर्ग कृती',
-  'gru-take-tour.teacher-class.stepTwo.description': 'तुमच्या विद्यार्थ्यांना आजच्या गोष्टी पहा आणि नेमून द्या.',
+  'gru-take-tour.teacher-class.stepTwo.description':
+    'तुमच्या विद्यार्थ्यांना आजच्या गोष्टी पहा आणि नेमून द्या.',
   'gru-take-tour.teacher-class.stepThree.title': 'पाठ्यक्रम नकाशा',
-  'gru-take-tour.teacher-class.stepThree.description': 'अभ्यासक्रमात नेमून दिलेले युनिट्स, धडे, संकलन किंवा मूल्यांकने पहा किंवा संपादित करा.',
+  'gru-take-tour.teacher-class.stepThree.description':
+    'अभ्यासक्रमात नेमून दिलेले युनिट्स, धडे, संकलन किंवा मूल्यांकने पहा किंवा संपादित करा.',
   'gru-take-tour.teacher-class.stepFour.title': 'माझा अहवाल',
-  'gru-take-tour.teacher-class.stepFour.description': 'तुमचे विद्यार्थी अभ्यासक्रमात कसे कार्यप्रदर्शन करतात याचा सारांश पहा आणि त्यांच्या अहवालांमध्ये प्रवेश करा.',
+  'gru-take-tour.teacher-class.stepFour.description':
+    'तुमचे विद्यार्थी अभ्यासक्रमात कसे कार्यप्रदर्शन करतात याचा सारांश पहा आणि त्यांच्या अहवालांमध्ये प्रवेश करा.',
   'gru-take-tour.teacher-class.stepClassManagement.title': 'वर्ग व्यवस्थापन',
-  'gru-take-tour.teacher-class.stepClassManagement.description': 'तुमची वर्ग माहिती आणि वर्गात नोंदणी झालेल्या विद्यार्थ्यांना नियुक्त किंवा अपडेट करा.',
+  'gru-take-tour.teacher-class.stepClassManagement.description':
+    'तुमची वर्ग माहिती आणि वर्गात नोंदणी झालेल्या विद्यार्थ्यांना नियुक्त किंवा अपडेट करा.',
   'gru-take-tour.teacher-class.stepFive.title': 'पूर्ण झाले!',
-  'gru-take-tour.teacher-class.stepFive.description': 'आता पुढे जा आणि आपल्या विद्यार्थ्यांसह वर्ग शेअर करा',
+  'gru-take-tour.teacher-class.stepFive.description':
+    'आता पुढे जा आणि आपल्या विद्यार्थ्यांसह वर्ग शेअर करा',
   'gru-take-tour.study-player.stepOne.title': 'स्वागत आहे!',
-  'gru-take-tour.study-player.stepOne.description': 'हा आपला अभ्यास खेळाडू आहे, येथे तुमच्यासाठी उपलब्ध असलेल्या वैशिष्ट्यांची ओळख करून घेऊया.',
+  'gru-take-tour.study-player.stepOne.description':
+    'हा आपला अभ्यास खेळाडू आहे, येथे तुमच्यासाठी उपलब्ध असलेल्या वैशिष्ट्यांची ओळख करून घेऊया.',
   'gru-take-tour.study-player.stepTwo.title': 'पाठ्यक्रम नकाशा',
-  'gru-take-tour.study-player.stepTwo.description': 'आपल्या कोर्स नकाशावर परत येण्यासाठी कोणत्याही वेळी चिन्ह क्लिक करा.',
+  'gru-take-tour.study-player.stepTwo.description':
+    'आपल्या कोर्स नकाशावर परत येण्यासाठी कोणत्याही वेळी चिन्ह क्लिक करा.',
   'gru-take-tour.study-player.stepThree.title': 'अभ्यासक्रमाचे नाव',
-  'gru-take-tour.study-player.stepThree.description': 'तुम्ही ज्या अभ्यासक्रमवार काम करत आहात ते दर्शवतो',
+  'gru-take-tour.study-player.stepThree.description':
+    'तुम्ही ज्या अभ्यासक्रमवार काम करत आहात ते दर्शवतो',
   'gru-take-tour.study-player.stepFour.title': 'सूचना',
-  'gru-take-tour.study-player.stepFour.description': 'सध्या आपण जो अभ्यास करीत आहात त्यावर आधारित अतिरिक्त संसाधने इच्छा असल्यास शोधू शकता.',
+  'gru-take-tour.study-player.stepFour.description':
+    'सध्या आपण जो अभ्यास करीत आहात त्यावर आधारित अतिरिक्त संसाधने इच्छा असल्यास शोधू शकता.',
   'gru-take-tour.study-player.stepFive.title': 'पूर्णत्व',
   'gru-take-tour.study-player.stepFive.nuTitle': 'एकूण क्षमता',
-  'gru-take-tour.study-player.stepFive.description': 'तुम्ही किती अभ्यासक्रम पूर्ण केला आहे ते दर्शविते.',
+  'gru-take-tour.study-player.stepFive.description':
+    'तुम्ही किती अभ्यासक्रम पूर्ण केला आहे ते दर्शविते.',
   'gru-take-tour.study-player.stepSix.title': 'कामगिरी',
-  'gru-take-tour.study-player.stepSix.description': 'तुम्ही या अभ्यासक्रमामध्ये कशी कामगिरी बजावत आहात ते दर्शवते.',
+  'gru-take-tour.study-player.stepSix.description':
+    'तुम्ही या अभ्यासक्रमामध्ये कशी कामगिरी बजावत आहात ते दर्शवते.',
   'gru-take-tour.study-player.stepSeven.title': 'संसाधनावर प्रतिक्रिया',
-  'gru-take-tour.study-player.stepSeven.description': 'तुम्ही या संसाधनाबद्दल काय विचार करता आहात हे आपल्या शिक्षकांना कळू द्या.',
+  'gru-take-tour.study-player.stepSeven.description':
+    'तुम्ही या संसाधनाबद्दल काय विचार करता आहात हे आपल्या शिक्षकांना कळू द्या.',
   'gru-take-tour.study-player.stepEight.title': 'पूर्ण झाले!',
   'gru-take-tour.study-player.stepEight.description': 'अभ्यास सुरू!',
   'gru-take-tour.study-player.stepNine.title': 'संकलनावर परत जा',
-  'gru-take-tour.study-player.stepNine.description': 'आपल्या संग्रह किंवा मूल्यांकनाकडे परत येण्यासाठी कोणत्याही वेळी चिन्हावर क्लिक करा',
+  'gru-take-tour.study-player.stepNine.description':
+    'आपल्या संग्रह किंवा मूल्यांकनाकडे परत येण्यासाठी कोणत्याही वेळी चिन्हावर क्लिक करा',
   'gru-take-tour.library.stepOne.title': 'स्वागत आहे!',
-  'gru-take-tour.library.stepOne.description': 'शैक्षणिक मार्दर्शकातील लायब्ररीमध्ये स्वागत आहे.',
+  'gru-take-tour.library.stepOne.description':
+    'शैक्षणिक मार्दर्शकातील लायब्ररीमध्ये स्वागत आहे.',
   'gru-take-tour.library.stepTwo.title': 'प्रदर्शित अभ्यासक्रम',
-  'gru-take-tour.library.stepTwo.description': 'शिक्षकांनी वर्गामध्ये विकसित व अंमलबजावणी केलेल्या अभ्यासक्रमांचे अन्वेषणकरा.',
+  'gru-take-tour.library.stepTwo.description':
+    'शिक्षकांनी वर्गामध्ये विकसित व अंमलबजावणी केलेल्या अभ्यासक्रमांचे अन्वेषणकरा.',
   'gru-take-tour.library.stepThree.title': 'इतर लायब्ररी',
-  'gru-take-tour.library.stepThree.description': 'गुरुच्या भागीदारांनी विकसित केलेली सामग्री पहा.',
+  'gru-take-tour.library.stepThree.description':
+    'गुरुच्या भागीदारांनी विकसित केलेली सामग्री पहा.',
   'gru-take-tour.library.stepFour.title': 'आगाऊ प्रदर्शन',
-  'gru-take-tour.library.stepFour.description': 'तुम्हाला या अभ्यासक्रमात स्वारस्य आहे का हे पाहण्यासाठी आगाऊ प्रदर्शन पहा.',
+  'gru-take-tour.library.stepFour.description':
+    'तुम्हाला या अभ्यासक्रमात स्वारस्य आहे का हे पाहण्यासाठी आगाऊ प्रदर्शन पहा.',
   'gru-take-tour.library.stepFive.title': 'शेअर करा',
   'gru-take-tour.library.stepFive.description': 'इतरांशी हा कोर्स शेअर करा.',
   'gru-take-tour.library.stepSix.title': 'बुकमार्क',
-  'gru-take-tour.library.stepSix.description': 'या अभ्यासक्रमाचे नंतर पुनरावलोकन करण्यासाठी बुकमार्क करा.',
+  'gru-take-tour.library.stepSix.description':
+    'या अभ्यासक्रमाचे नंतर पुनरावलोकन करण्यासाठी बुकमार्क करा.',
   'gru-take-tour.profile.stepOne.title': 'स्वागत आहे!',
-  'gru-take-tour.profile.stepOne.description': 'तुमच्या प्रोफाइलमध्ये तुमचे स्वागत आहे येथे तुम्ही तुमची सामग्री, वैयक्तिक माहिती आणि फॉलोअर्स पाहू शकता.',
+  'gru-take-tour.profile.stepOne.description':
+    'तुमच्या प्रोफाइलमध्ये तुमचे स्वागत आहे येथे तुम्ही तुमची सामग्री, वैयक्तिक माहिती आणि फॉलोअर्स पाहू शकता.',
   'gru-take-tour.profile.stepTwo.title': 'माझ्या गोष्टी',
-  'gru-take-tour.profile.stepTwo.description': 'नवीन सामग्री तयार करा आणि आपण पुर्नमिश्रित केलेली सामग्री पहा.',
+  'gru-take-tour.profile.stepTwo.description':
+    'नवीन सामग्री तयार करा आणि आपण पुर्नमिश्रित केलेली सामग्री पहा.',
   'gru-take-tour.profile.stepThree.title': 'माझ्याबद्दल',
-  'gru-take-tour.profile.stepThree.description': 'आपली वैयक्तिक माहिती, शाळा माहिती आणि आपले प्रोफाइल चित्र अपडेट करा.',
+  'gru-take-tour.profile.stepThree.description':
+    'आपली वैयक्तिक माहिती, शाळा माहिती आणि आपले प्रोफाइल चित्र अपडेट करा.',
   'gru-take-tour.profile.stepFour.title': 'ध्येये',
-  'gru-take-tour.profile.stepFour.description': 'आपल्या शिक्षणासंबंधीचे ध्येय साध्य करण्यासाठी आपले ध्येय निर्धारित करा आणि त्याचा पाठपुरावा घ्या.',
+  'gru-take-tour.profile.stepFour.description':
+    'आपल्या शिक्षणासंबंधीचे ध्येय साध्य करण्यासाठी आपले ध्येय निर्धारित करा आणि त्याचा पाठपुरावा घ्या.',
   'gru-take-tour.profile.stepFive.title': 'फॉलोअर्स',
-  'gru-take-tour.profile.stepFive.description': 'तुम्हाला एखाद्याची सामग्री आवडत असल्यास, तुम्ही त्याला फॉलो करू शकता. तुम्ही हे देखील पाहू शकता की तुम्हाला कोण फॉलो करत आहे.',
+  'gru-take-tour.profile.stepFive.description':
+    'तुम्हाला एखाद्याची सामग्री आवडत असल्यास, तुम्ही त्याला फॉलो करू शकता. तुम्ही हे देखील पाहू शकता की तुम्हाला कोण फॉलो करत आहे.',
   'gru-take-tour.profile.stepSix.title': 'बॅज्डस',
-  'gru-take-tour.profile.stepSix.description': 'आपल्याला प्राप्त झालेल्या बॅज्डस पुनरावलोकन करा. आपण आपल्या शिक्षकाने ठरवलेले निर्धारित मूल्यमापन पूर्ण केल्यास आपल्याला एक बॅज्डस प्राप्त होईल.',
+  'gru-take-tour.profile.stepSix.description':
+    'आपल्याला प्राप्त झालेल्या बॅज्डस पुनरावलोकन करा. आपण आपल्या शिक्षकाने ठरवलेले निर्धारित मूल्यमापन पूर्ण केल्यास आपल्याला एक बॅज्डस प्राप्त होईल.',
   'gru-tour.assessments-settings.stepOne.title': 'मार्गदर्शक आणि गुणांकन',
-  'gru-tour.assessments-settings.stepOne.description': 'हे सेटिंग विद्यार्थ्यांना मूल्यांकनाचा कसा वापर करू करायचा आणि त्यांचे उत्तर चूक आहेत किंवा नाहीत हे दर्शविते. हे त्यांना उत्तरपत्रिका दर्शवत नाही.',
-  'gru-tour.assessments-settings.stepTwo.title': 'उत्तरपत्रिका आणि केलेलं एकूण प्रयत्न',
-  'gru-tour.assessments-settings.stepTwo.description': 'ही सेटिंग उत्तरपत्रिका प्रकट करण्यास परवानगी देते आणि मूल्यांकन केलेल्या विद्यार्थ्यांची संख्या निर्धारित करते.',
+  'gru-tour.assessments-settings.stepOne.description':
+    'हे सेटिंग विद्यार्थ्यांना मूल्यांकनाचा कसा वापर करू करायचा आणि त्यांचे उत्तर चूक आहेत किंवा नाहीत हे दर्शविते. हे त्यांना उत्तरपत्रिका दर्शवत नाही.',
+  'gru-tour.assessments-settings.stepTwo.title':
+    'उत्तरपत्रिका आणि केलेलं एकूण प्रयत्न',
+  'gru-tour.assessments-settings.stepTwo.description':
+    'ही सेटिंग उत्तरपत्रिका प्रकट करण्यास परवानगी देते आणि मूल्यांकन केलेल्या विद्यार्थ्यांची संख्या निर्धारित करते.',
   'gru-tour.overview.stepOne.title': 'अभ्यासक्रमाचा आराखडा',
-  'gru-tour.overview.stepOne.description': 'अभ्यासक्रमाच्या आराखड्यावरून तुमच्या विद्यार्थ्यांना त्यांच्यासाठी नेमून दिलेली सर्व मूल्यमापने आणि संग्रह मिळू शकतात',
+  'gru-tour.overview.stepOne.description':
+    'अभ्यासक्रमाच्या आराखड्यावरून तुमच्या विद्यार्थ्यांना त्यांच्यासाठी नेमून दिलेली सर्व मूल्यमापने आणि संग्रह मिळू शकतात',
   'gru-tour.overview.stepTwo.title': 'वर्गाचा कोड',
-  'gru-tour.overview.stepTwo.description': 'तुम्ही तयार केलेल्या प्रत्येक वर्गाकरिता एक विशिष्ट वर्ग कोड असतो. जेव्हा तुम्ही त्यांना तुमच्या वर्गात प्रवेश देण्याकरिता आणि त्यातील मजकूर बघू देण्याकरिता तयार असाल तेव्हा त्यांना  हा कोड द्या.',
-  'gru-tour.overview.stepThree.title': 'विद्यार्थी आणि वर्गाची माहिती लक्षपूर्वक पहा',
-  'gru-tour.overview.stepThree.description': 'जेव्हा विद्यार्थी अभ्यासक्रमाचा भाग असलेली मूल्यमापने पूर्ण करतो तेव्हा हे वैशिष्ट्य तुम्हाला वर्गाच्या आणि विद्यार्थ्याच्या वैयक्तिक मूल्यमापनाच्या माहितीचे विश्लेषण दाखवते.',
+  'gru-tour.overview.stepTwo.description':
+    'तुम्ही तयार केलेल्या प्रत्येक वर्गाकरिता एक विशिष्ट वर्ग कोड असतो. जेव्हा तुम्ही त्यांना तुमच्या वर्गात प्रवेश देण्याकरिता आणि त्यातील मजकूर बघू देण्याकरिता तयार असाल तेव्हा त्यांना  हा कोड द्या.',
+  'gru-tour.overview.stepThree.title':
+    'विद्यार्थी आणि वर्गाची माहिती लक्षपूर्वक पहा',
+  'gru-tour.overview.stepThree.description':
+    'जेव्हा विद्यार्थी अभ्यासक्रमाचा भाग असलेली मूल्यमापने पूर्ण करतो तेव्हा हे वैशिष्ट्य तुम्हाला वर्गाच्या आणि विद्यार्थ्याच्या वैयक्तिक मूल्यमापनाच्या माहितीचे विश्लेषण दाखवते.',
   'gru-tour.overview.stepFour.title': 'वर्गाची माहिती',
-  'gru-tour.overview.stepFour.description': 'येथे तुम्ही तुमच्या वर्गाचे नाव बदलू शकता, तुमच्या विद्यार्थ्यांसाठी सूचना पोस्ट करू शकता, तुमच्या वर्गात नोंदणी केलेल्या विद्यार्थ्यांची नावे पाहू शकता आणि तुमचा वर्ग हटवू शकता.',
-  'gru-tour.overview.stepFive.title': 'तुमच्या अभ्यासक्रमातील साहित्यामध्ये बदल होत आहे',
-  'gru-tour.overview.stepFive.description': 'जेव्हा तुम्ही वर्गात असाल तेव्हा तुमच्या विद्यार्थ्यांना नेमुन दिलेल्या अभ्यासक्रमात काहीही बदल करण्यासाठी येथे क्लिक करा.',
+  'gru-tour.overview.stepFour.description':
+    'येथे तुम्ही तुमच्या वर्गाचे नाव बदलू शकता, तुमच्या विद्यार्थ्यांसाठी सूचना पोस्ट करू शकता, तुमच्या वर्गात नोंदणी केलेल्या विद्यार्थ्यांची नावे पाहू शकता आणि तुमचा वर्ग हटवू शकता.',
+  'gru-tour.overview.stepFive.title':
+    'तुमच्या अभ्यासक्रमातील साहित्यामध्ये बदल होत आहे',
+  'gru-tour.overview.stepFive.description':
+    'जेव्हा तुम्ही वर्गात असाल तेव्हा तुमच्या विद्यार्थ्यांना नेमुन दिलेल्या अभ्यासक्रमात काहीही बदल करण्यासाठी येथे क्लिक करा.',
   'gru-tour.overview.stepSix.title': 'प्रत्यक्ष वेळात प्रगतीवर लक्ष ठेवा!',
-  'gru-tour.overview.stepSix.description': 'वर्गाच्या मूल्यमापनामधील प्रगतीवर सतत लक्ष ठेवण्यासाठी प्रत्यक्ष वेळ डॅशबोर्ड वापरा. <br><br>विद्यार्थ्यांसाठी प्रत्यक्ष वेळ मूल्यमापन सुरु करण्यासाठी प्रत्येक मूल्यमापनाच्या डाव्या बाजुला असलेल्या \"Go Live\" चिन्हावर क्लिक करा. <br><br>',
+  'gru-tour.overview.stepSix.description':
+    'वर्गाच्या मूल्यमापनामधील प्रगतीवर सतत लक्ष ठेवण्यासाठी प्रत्यक्ष वेळ डॅशबोर्ड वापरा. <br><br>विद्यार्थ्यांसाठी प्रत्यक्ष वेळ मूल्यमापन सुरु करण्यासाठी प्रत्येक मूल्यमापनाच्या डाव्या बाजुला असलेल्या Go Live चिन्हावर क्लिक करा. <br><br>',
   'gru-tour.quick-start.stepOne.title': 'तुमच्या वर्गांमध्ये पुढे मागे जाणे',
-  'gru-tour.quick-start.stepOne.description': 'हा नवीन तयार केलेला वर्ग आहे. कोणत्याही वेळी एखाद्या वर्गात परत जाण्यासाठी, \"Classrooms\" वर क्लिक करा आणि ड्रॉप डाउन मधील सूची वापरून तुम्हाला हवा असलेला वर्ग निवडा.',
+  'gru-tour.quick-start.stepOne.description':
+    'हा नवीन तयार केलेला वर्ग आहे. कोणत्याही वेळी एखाद्या वर्गात परत जाण्यासाठी, Classrooms वर क्लिक करा आणि ड्रॉप डाउन मधील सूची वापरून तुम्हाला हवा असलेला वर्ग निवडा.',
   'gru-tour.quick-start.stepTwo.title': 'सुरवात करताय? मूल्यमापन तयार करा!',
-  'gru-tour.quick-start.stepTwo.description': 'आम्ही तुम्हाला असे सुचवू की गुरु वापरण्याची सुरवात करताना तसेच तुमच्या वर्गातील विद्यार्थ्यांच्या आकलनशक्तीची सध्याची पातळी मोजण्याकरिता तुम्ही एक मूल्यमापन तयार करावे',
+  'gru-tour.quick-start.stepTwo.description':
+    'आम्ही तुम्हाला असे सुचवू की गुरु वापरण्याची सुरवात करताना तसेच तुमच्या वर्गातील विद्यार्थ्यांच्या आकलनशक्तीची सध्याची पातळी मोजण्याकरिता तुम्ही एक मूल्यमापन तयार करावे',
   'gru-tour.real-time.stepOne.title': 'प्रतिसादांचा विस्तृत तपशील ',
-  'gru-tour.real-time.stepOne.description': 'विद्यार्थ्यांनी कशी उत्तर दिले याचे विश्लेषण पाहण्यासाठी प्रत्येक प्रश्नावर क्लिक करा.',
+  'gru-tour.real-time.stepOne.description':
+    'विद्यार्थ्यांनी कशी उत्तर दिले याचे विश्लेषण पाहण्यासाठी प्रत्येक प्रश्नावर क्लिक करा.',
   'gru-tour.real-time.stepTwo.title': 'वैयक्तिक विद्यार्थी डेटा',
-  'gru-tour.real-time.stepTwo.description': 'व्यक्तिगत विद्यार्थी डेटा अहवाल पाहण्यासाठी प्रत्येक विद्यार्थी पर्याय निवडा.',
+  'gru-tour.real-time.stepTwo.description':
+    'व्यक्तिगत विद्यार्थी डेटा अहवाल पाहण्यासाठी प्रत्येक विद्यार्थी पर्याय निवडा.',
   'gru-tour.real-time.stepThree.title': 'एक दृश्य निवडा',
-  'gru-tour.real-time.stepThree.description': 'डेटा प्रदर्शित करण्यासाठी पर्याय पाहण्यासाठी "शीर्षक दृश्य" किंवा "सूची दृश्य" निवडा.',
+  'gru-tour.real-time.stepThree.description':
+    'डेटा प्रदर्शित करण्यासाठी पर्याय पाहण्यासाठी "शीर्षक दृश्य" किंवा "सूची दृश्य" निवडा.',
   'gru-tour.real-time.stepFour.title': 'सरासरी गुण',
-  'gru-tour.real-time.stepFour.description': 'सर्व प्रतिसादांसाठी प्रत्यक्ष वेळेमध्ये गणना केलेली सरासरी वर्गवारी पहा.',
+  'gru-tour.real-time.stepFour.description':
+    'सर्व प्रतिसादांसाठी प्रत्यक्ष वेळेमध्ये गणना केलेली सरासरी वर्गवारी पहा.',
   'gru-tour.real-time.stepFive.title': 'निनावी डेटा दर्शवा',
-  'gru-tour.real-time.stepFive.description': 'या पर्यायाचा उपयोग विद्यार्थ्यांच्या डेटाचे निनावी दृश्य दर्शवण्यासाठी करा.',
+  'gru-tour.real-time.stepFive.description':
+    'या पर्यायाचा उपयोग विद्यार्थ्यांच्या डेटाचे निनावी दृश्य दर्शवण्यासाठी करा.',
   'gru-course-play.hide-unit-details': 'युनिट मेटाडेटा लपवा',
   'gru-course-play.view-unit-details': 'युनिट मेटाडेटा पाहा',
   'gru-course-play.performance': 'कामगिरी',
   'gru-century-skills.legends.hewlett': 'हेवेट्ट सखोल शिक्षण मॉडेल',
   'gru-century-skills.legends.conley': 'शंकू चार कळा',
   'gru-century-skills.legends.framework': 'पी 21 आराखडा',
-  'gru-century-skills.legends.national': 'जीवन आणि कार्य राष्ट्रीय संशोधन केंद्र',
-  'gru-century-skills.content.groups.cognitive': 'प्रमुख संज्ञानात्मक कौशल्य आणि धोरण',
+  'gru-century-skills.legends.national':
+    'जीवन आणि कार्य राष्ट्रीय संशोधन केंद्र',
+  'gru-century-skills.content.groups.cognitive':
+    'प्रमुख संज्ञानात्मक कौशल्य आणि धोरण',
   'gru-century-skills.content.groups.content': 'प्रमुख सामग्री ज्ञान',
-  'gru-century-skills.content.groups.learning': 'प्रमुख शिकण्याचे कौशल आणि तंत्र',
+  'gru-century-skills.content.groups.learning':
+    'प्रमुख शिकण्याचे कौशल आणि तंत्र',
   'gru-rubric-edit.upload-rubric': 'मथळा अपलोड करा',
-  'gru-rubric-edit.copy.success-message': 'आपण मथळा {{title}} कॉपी केला आहे. तुम्ही हा मथळा संपादित करू इच्छिता?',
+  'gru-rubric-edit.copy.success-message':
+    'आपण मथळा {{title}} कॉपी केला आहे. तुम्ही हा मथळा संपादित करू इच्छिता?',
   'gru-rubric-creation.url': 'युआरएल',
   'gru-rubric-creation.upload-file': ' फाइल अपलोड करा',
   'gru-rubric-creation.add-category': 'नवीन श्रेणी जोडा',
-  'gru-rubric-creation.gru-preview-url.preview': 'उपरोक्त मथळा जोडा आणि येथे पूर्वावलोकन करा',
+  'gru-rubric-creation.gru-preview-url.preview':
+    'उपरोक्त मथळा जोडा आणि येथे पूर्वावलोकन करा',
   'gru-rubric-creation.overall-narrative': 'संपूर्ण कथा अभिप्राय',
   'gru-rubric-creation.feedback-guidance': 'प्रतिक्रिया मार्गदर्शन',
   'gru-rubric-creation.required-feedback': 'अभिप्राय आवश्यक',
-  'gru-rubric-creation.feedback-guidance-placeholder': 'निबंधावर संपूर्णतः आपल्या अभिप्रायाचा सारांश द्या.',
+  'gru-rubric-creation.feedback-guidance-placeholder':
+    'निबंधावर संपूर्णतः आपल्या अभिप्रायाचा सारांश द्या.',
   'gru-rubric-creation.gru-category.category-title': 'श्रेणी शीर्षक',
-  'gru-rubric-creation.gru-category.category-feedback': 'उदाहरणार्थ. आपण या श्रेणीचे पुनरावलोकन करत असताना, लेखकाच्या उद्देश्यावर नीट लक्ष द्या.',
-  'gru-rubric-creation.gru-category.gru-scoring-levels.0': 'उदाहरण: प्राविण्य वाढवणे',
-  'gru-rubric-creation.gru-category.gru-scoring-levels.1': 'उदाहरण: प्राविण्य मिळवणे',
-  'gru-rubric-creation.gru-category.gru-scoring-levels.2': 'उदाहरण: प्राविण्य मिळवण्यासाठी प्रयत्न करणे',
-  'gru-rubric-creation.gru-category.gru-scoring-levels.3': 'उदाहरण: प्राविण्यतेची सुरुवात',
-  'gru-rubric-creation.gru-category.gru-scoring-levels.4': 'उदाहरण: प्राविण्यतेचा कोणताही पुरावा नाही',
+  'gru-rubric-creation.gru-category.category-feedback':
+    'उदाहरणार्थ. आपण या श्रेणीचे पुनरावलोकन करत असताना, लेखकाच्या उद्देश्यावर नीट लक्ष द्या.',
+  'gru-rubric-creation.gru-category.gru-scoring-levels.0':
+    'उदाहरण: प्राविण्य वाढवणे',
+  'gru-rubric-creation.gru-category.gru-scoring-levels.1':
+    'उदाहरण: प्राविण्य मिळवणे',
+  'gru-rubric-creation.gru-category.gru-scoring-levels.2':
+    'उदाहरण: प्राविण्य मिळवण्यासाठी प्रयत्न करणे',
+  'gru-rubric-creation.gru-category.gru-scoring-levels.3':
+    'उदाहरण: प्राविण्यतेची सुरुवात',
+  'gru-rubric-creation.gru-category.gru-scoring-levels.4':
+    'उदाहरण: प्राविण्यतेचा कोणताही पुरावा नाही',
   'gru-rubric-creation.gru-category.gru-scoring-levels.best': 'सर्वोत्कृष्ट',
   'gru-rubric-creation.gru-category.gru-scoring-levels.levels': 'स्तर',
-  'gru-rubric-creation.gru-category.gru-scoring-levels.new-level': 'नवीन स्तर जोडा',
+  'gru-rubric-creation.gru-category.gru-scoring-levels.new-level':
+    'नवीन स्तर जोडा',
   'gru-rubric-creation.gru-category.gru-scoring-levels.scoring': 'गुण',
   'gru-rubric-creation.gru-category.gru-scoring-levels.worst': 'सर्वात वाईट',
-  'gru-rubric-creation.gru-category.gru-scoring-levels.name-error': 'कृपया स्तर शीर्षक प्रविष्ट करा.',
-  'gru-rubric-creation.gru-category.gru-scoring-levels.score-error': 'कृपया गुण मूल्य प्रविष्ट करा.',
-  'gru-rubric-creation.gru-category.gru-scoring-levels.no-levels-error': 'कृपया कमीत कमी एका पातळीसाठी एक मूल्य ठरवा.',
+  'gru-rubric-creation.gru-category.gru-scoring-levels.name-error':
+    'कृपया स्तर शीर्षक प्रविष्ट करा.',
+  'gru-rubric-creation.gru-category.gru-scoring-levels.score-error':
+    'कृपया गुण मूल्य प्रविष्ट करा.',
+  'gru-rubric-creation.gru-category.gru-scoring-levels.no-levels-error':
+    'कृपया कमीत कमी एका पातळीसाठी एक मूल्य ठरवा.',
   'library.browse-library': 'लायब्ररी पहा',
   'library.featured-courses': 'उपलब्ध अभ्यासक्रम',
   'library.gru-library-card.featured-course': 'उपलब्ध अभ्यासक्रम',
@@ -1930,28 +2460,38 @@ window.i18ln = {
   'gru-study-header.resources-assessment-report': 'मूल्यांकन सारांश अहवाल',
   'gru-study-header.check-summary': 'आपला सारांश अहवाल तपासा',
   'gru-study-header.check-usage': 'आपला वापर अहवाल तपासा',
-  'gru-study-header.no-suggestions': 'आम्ही आपल्या शिक्षणास समर्थन करण्यासाठी सर्वोत्कृष्ट सूचनांवर कार्य करीत आहोत',
+  'gru-study-header.no-suggestions':
+    'आम्ही आपल्या शिक्षणास समर्थन करण्यासाठी सर्वोत्कृष्ट सूचनांवर कार्य करीत आहोत',
   'gru-study-header.resource.zero': 'संसाधन',
   'gru-study-header.resource.one': 'संसाधन',
   'gru-study-header.resource.other': 'संसाधने',
   'gru-study-header.question.zero': 'प्रश्न',
   'gru-study-header.question.one': 'प्रश्न',
   'gru-study-header.question.other': 'प्रश्न',
-  'gru-study-header.suggestions-legend': 'अधिक जाणून घेण्यासाठी, हि संसाधने तपासा',
+  'gru-study-header.suggestions-legend':
+    'अधिक जाणून घेण्यासाठी, हि संसाधने तपासा',
   'gru-suggest-test.pre-test-header': 'पूर्व-चाचणी (Optional)',
   'gru-suggest-test.post-test-header': 'चाचणी-पश्चात (Optional)',
   'gru-suggest-test.backfill-header': 'सूचित संग्रह (Optional)',
   'gru-suggest-test.benchmark-header': 'निर्धारित-चाचणी (Optional)',
   'gru-suggest-test.resource-header': 'सूचित संसाधने (Optional)',
   'gru-suggest-test.signature_collection-header': 'सूचित संग्रह (Optional)',
-  'gru-suggest-test.signature_collection-lead': 'या अभ्यासक्रमावरील आपल्या कार्यक्षमतेवर आधारित, पुढील संकलन आपले आकलन वाढवू शकते.',
-  'gru-suggest-test.signature_assessment-header': 'सुचविलेले मूल्यांकन (Optional)',
-  'gru-suggest-test.signature_assessment-lead': 'या अभ्यासक्रमावरील आपल्या कार्यक्षमतेवर आधारित, खालील मूल्यांकनमुळे आपले आकलन वाढेल.',
-  'gru-suggest-test.pre-test-lead': 'या धड्यातील संकल्पनांची सध्याची समज मोजण्यासाठी पूर्व चाचणीचा सल्ला दिला जातो. पूर्व चाचणी आपल्याला धड्यातील सामग्रीसाठी तयार करण्यास मदत करू शकते. पूर्व-चाचणी आपल्या अभ्यासक्रमाच्या कामगिरी गुणांकनावर परिणाम करणार नाही.',
-  'gru-suggest-test.post-test-lead': 'प्रस्तुत माहितीची आपली समज मोजण्यासाठी पश्चात-चाचणी सुचविण्यात येते. पश्चात-चाचणी आपल्या अभ्यासक्रमाच्या कामगिरी गुणांकनावर परिणाम करणार नाही.',
-  'gru-suggest-test.backfill-lead': 'आपल्या पूर्व-चाचणीमधील प्रतिसादांवर आधारित, धडे सुरवातीपूर्वी अतिरिक्त सामग्रीचे पुनरावलोकन करणे उपयुक्त ठरू शकते. आधार सामग्रीचे पुनरावलोकन करणे नवीन सामग्री शिकण्यासाठी विद्यार्थ्यांना तयार करण्यास मदत करू शकेल.',
-  'gru-suggest-test.benchmark-lead': 'आपण आता एक निर्धारित मूल्यांकन घेऊन आपले आकलन प्रदर्शित करण्यासाठी सज्ज आहात आपण यशस्वीरित्या निर्धारित लक्ष्य पूर्ण करण्यासाठी बॅज्ड प्राप्त कराल. बेंचमार्क आपल्या अभ्यासक्रमाच्या कामगिरी गुणांकनावर परिणाम करणार नाही.',
-  'gru-suggest-test.resource-lead': 'या अभ्यासक्रमावरील आपल्या कार्यक्षमतेवर आधारित, खालील संसाधने आपले आकलन वाढवू शकतात.',
+  'gru-suggest-test.signature_collection-lead':
+    'या अभ्यासक्रमावरील आपल्या कार्यक्षमतेवर आधारित, पुढील संकलन आपले आकलन वाढवू शकते.',
+  'gru-suggest-test.signature_assessment-header':
+    'सुचविलेले मूल्यांकन (Optional)',
+  'gru-suggest-test.signature_assessment-lead':
+    'या अभ्यासक्रमावरील आपल्या कार्यक्षमतेवर आधारित, खालील मूल्यांकनमुळे आपले आकलन वाढेल.',
+  'gru-suggest-test.pre-test-lead':
+    'या धड्यातील संकल्पनांची सध्याची समज मोजण्यासाठी पूर्व चाचणीचा सल्ला दिला जातो. पूर्व चाचणी आपल्याला धड्यातील सामग्रीसाठी तयार करण्यास मदत करू शकते. पूर्व-चाचणी आपल्या अभ्यासक्रमाच्या कामगिरी गुणांकनावर परिणाम करणार नाही.',
+  'gru-suggest-test.post-test-lead':
+    'प्रस्तुत माहितीची आपली समज मोजण्यासाठी पश्चात-चाचणी सुचविण्यात येते. पश्चात-चाचणी आपल्या अभ्यासक्रमाच्या कामगिरी गुणांकनावर परिणाम करणार नाही.',
+  'gru-suggest-test.backfill-lead':
+    'आपल्या पूर्व-चाचणीमधील प्रतिसादांवर आधारित, धडे सुरवातीपूर्वी अतिरिक्त सामग्रीचे पुनरावलोकन करणे उपयुक्त ठरू शकते. आधार सामग्रीचे पुनरावलोकन करणे नवीन सामग्री शिकण्यासाठी विद्यार्थ्यांना तयार करण्यास मदत करू शकेल.',
+  'gru-suggest-test.benchmark-lead':
+    'आपण आता एक निर्धारित मूल्यांकन घेऊन आपले आकलन प्रदर्शित करण्यासाठी सज्ज आहात आपण यशस्वीरित्या निर्धारित लक्ष्य पूर्ण करण्यासाठी बॅज्ड प्राप्त कराल. बेंचमार्क आपल्या अभ्यासक्रमाच्या कामगिरी गुणांकनावर परिणाम करणार नाही.',
+  'gru-suggest-test.resource-lead':
+    'या अभ्यासक्रमावरील आपल्या कार्यक्षमतेवर आधारित, खालील संसाधने आपले आकलन वाढवू शकतात.',
   'gru-suggest-test.no': 'नको धन्यवाद',
   'gru-suggest-test.no-suggestions': 'येथे आपल्या कामगिरीचा सारांश आहे.',
   'gru-suggest-test.take': '{{{type}} घ्या',
@@ -1961,18 +2501,25 @@ window.i18ln = {
   'gru-suggest-test.take-resource': 'अभ्यास संसाधन',
   'gru-suggest-test.end-of-course': 'आपण अभ्यासक्रमाच्या शेवटी पोहोचला आहात.',
   'gru-content-suggestion.header': 'आमच्याकडे आपल्यासाठी एक सूचना आहे!',
-  'gru-content-suggestion.suggestion-text.collection': 'या विषयावरील आपल्या कामगिरीवर आधारित, आम्ही आपल्याला प्रभुत्व मिळविण्यात मदत करण्यासाठी आमच्या सुचविलेल्या संकलनातून पुढे जाण्याची शिफारस करतो.',
-  'gru-content-suggestion.suggestion-text.assessment': 'या विषयावरील आपल्या कामगिरीवर आधारित, आम्ही आपल्याला प्रभुत्व मिळविण्यात मदत करण्यासाठी आमच्या सुचविलेल्या मुल्यांकनातून पुढे जाण्याची शिफारस करतो.',
+  'gru-content-suggestion.suggestion-text.collection':
+    'या विषयावरील आपल्या कामगिरीवर आधारित, आम्ही आपल्याला प्रभुत्व मिळविण्यात मदत करण्यासाठी आमच्या सुचविलेल्या संकलनातून पुढे जाण्याची शिफारस करतो.',
+  'gru-content-suggestion.suggestion-text.assessment':
+    'या विषयावरील आपल्या कामगिरीवर आधारित, आम्ही आपल्याला प्रभुत्व मिळविण्यात मदत करण्यासाठी आमच्या सुचविलेल्या मुल्यांकनातून पुढे जाण्याची शिफारस करतो.',
   'student-open-ended-summary.overall-comment': 'एकूण टिप्पणी',
   'student-open-ended-summary.overall-score': 'एकूण गुण',
   'student-open-ended-summary.prompt': 'प्रश्न त्वरित',
-  'gru-performance-chart.teacher-tooltip': 'च्या आपल्या विद्यार्थ्यांनी या धड्यातील सर्व मूल्यमापन पूर्ण केले आहेत',
-  'report.external-assessment-report.note': 'मूल्यांकनासाठी विद्यार्थ्यांच्या अहवालानुसार हे एक बाह्य मूल्यांकन आहे. वैयक्तिक प्रश्न पातळी डेटा उपलब्ध नाही.',
+  'gru-performance-chart.teacher-tooltip':
+    'च्या आपल्या विद्यार्थ्यांनी या धड्यातील सर्व मूल्यमापन पूर्ण केले आहेत',
+  'report.external-assessment-report.note':
+    'मूल्यांकनासाठी विद्यार्थ्यांच्या अहवालानुसार हे एक बाह्य मूल्यांकन आहे. वैयक्तिक प्रश्न पातळी डेटा उपलब्ध नाही.',
   'report.external-assessment-report.wish': 'अभिनंदन! तुम्ही गुण मिळवले आहेत',
-  'report.external-assessment-report.reference': 'या बाह्य मूल्यांकनात प्रवेश केला जाऊ शकतो ',
-  'report.external-collection-report.note': 'संकलनासाठी विद्यार्थ्यांच्या अहवालानुसार हे एक बाह्य संकलन आहे. वैयक्तिक प्रश्न पातळी डेटा उपलब्ध नाही.',
+  'report.external-assessment-report.reference':
+    'या बाह्य मूल्यांकनात प्रवेश केला जाऊ शकतो ',
+  'report.external-collection-report.note':
+    'संकलनासाठी विद्यार्थ्यांच्या अहवालानुसार हे एक बाह्य संकलन आहे. वैयक्तिक प्रश्न पातळी डेटा उपलब्ध नाही.',
   'report.external-collection-report.wish': 'अभिनंदन! तुम्ही गुण मिळवले आहेत',
-  'report.external-collection-report.reference': 'या बाह्य संकलनात प्रवेश केला जाऊ शकतो  ',
+  'report.external-collection-report.reference':
+    'या बाह्य संकलनात प्रवेश केला जाऊ शकतो  ',
   'report.competency-report.title': 'क्षमता अहवाल',
   'report.competency-report.no-subject': 'कोणताही विषय नियुक्त केला नाही',
   'report.competency-report.prerequisites': 'पूर्वतयारी',
@@ -1981,7 +2528,8 @@ window.i18ln = {
   'report.competency-report.show-global-data': 'ग्लोबल डेटा दर्शवा',
   'report.competency-report.show-student-data': 'विद्यार्थ्यांची माहिती दाखवा',
   'report.competency-report.show-learning-map': 'शैक्षणिक आराखडा दाखवा',
-  'report.competency-report.note': 'आमच्या प्रमुख मुल्यांकनामध्ये 80% गुण मिळवून दाखवा आणि तुमचे प्रभुत्व सिद्ध करा',
+  'report.competency-report.note':
+    'आमच्या प्रमुख मुल्यांकनामध्ये 80% गुण मिळवून दाखवा आणि तुमचे प्रभुत्व सिद्ध करा',
   'report.domain-report': 'डोमेन अहवाल',
   'competency-info-content.portfolio': 'कारकीर्द',
   'competency-info-content.metadata': 'मेटाडेटा',
@@ -1989,23 +2537,35 @@ window.i18ln = {
   'competency-meta-data.title': 'विकासात्मक संकल्पना',
   'competency-meta-data.heading.micro': 'सूक्ष्म क्षमता',
   'competency-meta-data.heading.prequisite': 'पूर्वतयारी क्षमता',
-  'competency-meta-data.nodata.micro': 'या क्षमतेसाठी कोणत्याही सूक्ष्म क्षमता उपलब्ध नाहीत. ',
-  'competency-meta-data.nodata.prequisite': 'या क्षमतेसाठी कोणत्याही पूर्वतयारी क्षमता उपलब्ध नाहीत',
-  'competency-meta-data.nodata.competency': 'या क्षमतेसाठी कोणत्याही विकासात्मक संकल्पना उपलब्ध नाहीत',
+  'competency-meta-data.nodata.micro':
+    'या क्षमतेसाठी कोणत्याही सूक्ष्म क्षमता उपलब्ध नाहीत. ',
+  'competency-meta-data.nodata.prequisite':
+    'या क्षमतेसाठी कोणत्याही पूर्वतयारी क्षमता उपलब्ध नाहीत',
+  'competency-meta-data.nodata.competency':
+    'या क्षमतेसाठी कोणत्याही विकासात्मक संकल्पना उपलब्ध नाहीत',
   'student-journey.heading': 'तुमचा प्रवास',
   'student-journey.teacher-heading': 'विद्यार्थी प्रवास',
-  'student-journey.nodata': 'या क्षमतेसाठी तुम्ही अभ्यास अजून सुरु केलेला  नाही',
-  'student-journey.no-data-teacher': 'विद्यार्थ्याने या क्षमतेसाठी अभ्यास अजून सुरु केलेला  नाही',
-  'student-journey.student-status-3': 'तुम्ही मान्य केले आहे कि तुम्हाला या क्षमतेबद्दल माहिती आहे आणि या क्षमतेसाठी मार्गदर्शकावर तुम्ही कोणत्याही शैक्षणिक क्रियेचा अभ्यास केलेला नाही.',
-  'student-journey.student-status-2': 'या क्षमतेची स्थिती हि डोमेनमधील इतर क्षमतेतील प्रभुत्वाच्या पुराव्यावर आधारित अनुमानित प्रभुत्व आहे. या क्षमतेसाठी तुम्ही मार्गदर्शकावर कोणताही शैक्षणिक मजकूर अभ्यासलेला नाही.',
-  'student-journey.teacher-status-2': 'या क्षमतेची स्थिती हि डोमेनमधील इतर क्षमतेतील प्रभुत्वाच्या पुराव्यावर आधारित अनुमानित प्रभुत्व आहे. या क्षमतेसाठी तुम्ही मार्गदर्शकावर कोणताही शैक्षणिक मजकूर अभ्यासलेला नाही.',
-  'student-journey.teacher-status-3': 'विद्यार्थ्याने मान्य केले आहे कि त्याला या क्षमतेबद्दल माहिती आहे आणि या क्षमतेसाठी मार्गदर्शकावर त्याने कोणत्याही शैक्षणिक क्रियेचा अभ्यास केलेला नाही.',
+  'student-journey.nodata':
+    'या क्षमतेसाठी तुम्ही अभ्यास अजून सुरु केलेला  नाही',
+  'student-journey.no-data-teacher':
+    'विद्यार्थ्याने या क्षमतेसाठी अभ्यास अजून सुरु केलेला  नाही',
+  'student-journey.student-status-3':
+    'तुम्ही मान्य केले आहे कि तुम्हाला या क्षमतेबद्दल माहिती आहे आणि या क्षमतेसाठी मार्गदर्शकावर तुम्ही कोणत्याही शैक्षणिक क्रियेचा अभ्यास केलेला नाही.',
+  'student-journey.student-status-2':
+    'या क्षमतेची स्थिती हि डोमेनमधील इतर क्षमतेतील प्रभुत्वाच्या पुराव्यावर आधारित अनुमानित प्रभुत्व आहे. या क्षमतेसाठी तुम्ही मार्गदर्शकावर कोणताही शैक्षणिक मजकूर अभ्यासलेला नाही.',
+  'student-journey.teacher-status-2':
+    'या क्षमतेची स्थिती हि डोमेनमधील इतर क्षमतेतील प्रभुत्वाच्या पुराव्यावर आधारित अनुमानित प्रभुत्व आहे. या क्षमतेसाठी तुम्ही मार्गदर्शकावर कोणताही शैक्षणिक मजकूर अभ्यासलेला नाही.',
+  'student-journey.teacher-status-3':
+    'विद्यार्थ्याने मान्य केले आहे कि त्याला या क्षमतेबद्दल माहिती आहे आणि या क्षमतेसाठी मार्गदर्शकावर त्याने कोणत्याही शैक्षणिक क्रियेचा अभ्यास केलेला नाही.',
   'learning-map.practice-question': 'सराव प्रश्न',
-  'learning-map.no-practice-questions': 'या क्षमतेसाठी कोणतेही सराव प्रश्न नाहीत',
+  'learning-map.no-practice-questions':
+    'या क्षमतेसाठी कोणतेही सराव प्रश्न नाहीत',
   'learning-map.solved-examples': 'सोडवलेली उदाहरणे',
-  'learning-map.no-solved-examples': 'या क्षमतेसाठी कोणतेही सोडवलेली उदाहरणे नाहीत आहेत.',
+  'learning-map.no-solved-examples':
+    'या क्षमतेसाठी कोणतेही सोडवलेली उदाहरणे नाहीत आहेत.',
   'learning-map.challenging-questions': 'आव्हानात्मक प्रश्न',
-  'learning-map.no-challenging-questions': 'या क्षमतेसाठी कोणतेही आव्हानात्मक प्रश्न नाहीत',
+  'learning-map.no-challenging-questions':
+    'या क्षमतेसाठी कोणतेही आव्हानात्मक प्रश्न नाहीत',
   'student-card.message': 'हा {{type}} हटवण्यात आला आहे',
   'self-report.your-score': 'तुमचे गुण',
   'self-report.time_spent': 'एकूण लागलेला वेळ',
@@ -2016,48 +2576,72 @@ window.i18ln = {
   'self-report.validation-error-time': 'वैध वेळ प्रविष्ट करा',
   'notifications.notificationlist-header-title': 'अधिसूचना',
   'notifications.show-more': 'अजून दाखवा',
-  'notifications.type.teacher-suggestion-title': 'आपल्याकडे वर्गात एक नवीन शिक्षक सूचना आहे : {{ classTitle }}',
-  'notifications.type.student-gradable-submission-title': 'तुमच्याकडे वर्गात {{occurrence}} गोष्टी गुणांकन करण्यासाठी आहेत : {{ classTitle }',
-  'notifications.type.student-self-report-title': '{{occurrence}} विद्यार्थ्यांनी वर्गात कामगिरीचा अहवाल सादर केला : {{ classTitle }}',
-  'notifications.type.teacher-override-title': 'शिक्षकाने वर्गामध्ये तुमची सबमिशन दुरुस्त केली आहे : {{ classTitle }}  ',
-  'notifications.type.teacher-grading-complete-title': 'शिक्षकाने तुमच्या सबमिशनला गुण दिले आहेत : {{ classTitle }}',
-  'notifications.typeinclass.teacher-suggestion-title': 'तुमच्यासाठी एक नवीन शिक्षक सूचना आहे',
-  'notifications.typeinclass.student-gradable-submission-title': 'तुमच्याकडे {{occurrence}} विद्यार्थी गोष्टी गुणांकन करण्यासाठी आहेत',
-  'notifications.typeinclass.student-self-report-title': '{{occurrence}} विद्यार्थ्यांनी कामगिरी अहवाल दिला',
-  'notifications.typeinclass.teacher-override-title': 'शिक्षकाने तुमची सबमिशन दुरुस्त केली आहे',
-  'notifications.typeinclass.teacher-grading-complete-title': 'शिक्षकाने वर्गात तुमच्या सबमिशनला गुणांकन दिले आहे',
+  'notifications.type.teacher-suggestion-title':
+    'आपल्याकडे वर्गात एक नवीन शिक्षक सूचना आहे : {{ classTitle }}',
+  'notifications.type.student-gradable-submission-title':
+    'तुमच्याकडे वर्गात {{occurrence}} गोष्टी गुणांकन करण्यासाठी आहेत : {{ classTitle }',
+  'notifications.type.student-self-report-title':
+    '{{occurrence}} विद्यार्थ्यांनी वर्गात कामगिरीचा अहवाल सादर केला : {{ classTitle }}',
+  'notifications.type.teacher-override-title':
+    'शिक्षकाने वर्गामध्ये तुमची सबमिशन दुरुस्त केली आहे : {{ classTitle }}  ',
+  'notifications.type.teacher-grading-complete-title':
+    'शिक्षकाने तुमच्या सबमिशनला गुण दिले आहेत : {{ classTitle }}',
+  'notifications.typeinclass.teacher-suggestion-title':
+    'तुमच्यासाठी एक नवीन शिक्षक सूचना आहे',
+  'notifications.typeinclass.student-gradable-submission-title':
+    'तुमच्याकडे {{occurrence}} विद्यार्थी गोष्टी गुणांकन करण्यासाठी आहेत',
+  'notifications.typeinclass.student-self-report-title':
+    '{{occurrence}} विद्यार्थ्यांनी कामगिरी अहवाल दिला',
+  'notifications.typeinclass.teacher-override-title':
+    'शिक्षकाने तुमची सबमिशन दुरुस्त केली आहे',
+  'notifications.typeinclass.teacher-grading-complete-title':
+    'शिक्षकाने वर्गात तुमच्या सबमिशनला गुणांकन दिले आहे',
   'goahead.add.something': 'काहीतरी नवीन जोडा',
-  'present.diagnostic.determine.not.know': 'जर माहित नसेल, तर विद्यार्थ्याचे विद्यमान स्थान ठरवून त्यावर उपाय सुचवावा का?',
-  'present.diagnostic.determine.know': '(जर तुम्ही नाही हा पर्याय निवडला, तर {{subject}} स्तर हा विद्यार्थ्याचे अंदाजे स्थान पाहण्यासाठी वापरला जाईल)',
+  'present.diagnostic.determine.not.know':
+    'जर माहित नसेल, तर विद्यार्थ्याचे विद्यमान स्थान ठरवून त्यावर उपाय सुचवावा का?',
+  'present.diagnostic.determine.know':
+    '(जर तुम्ही नाही हा पर्याय निवडला, तर {{subject}} स्तर हा विद्यार्थ्याचे अंदाजे स्थान पाहण्यासाठी वापरला जाईल)',
   'add.to.todays.class': 'आजच्या वर्गात जोडा',
-  'warning': 'चेतावणी',
-  'ca.warn.turn-on.multiple-competencies': 'हे मुल्यांकन विविध क्षमतांमध्ये जोडले गेलेले आहे. प्रभुत्व मिळवण्याचा पर्याय सुरु करणे याचा अर्थ ह्या मुल्यांकनामध्येजोडल्या गेलेल्या सर्व क्षमतांच्या विरोधात विद्यार्थी प्रभुत्व मिळवू शकतो.',
-  'ca.warn.turn-on.multiple-competencies.question': 'एकेरी मुल्यांकनामधून बहु क्षमतेमध्ये प्रभूत्व मिळवण्याचा पर्याय सुरु करण्याला तुमची समंती आहे का?',
-  'ca.warn.turn-on.multiple-competencies.note': 'टीप : तुम्ही कोणतेही मुल्यांकन पुर्नमिश्रित (कॉपी) करू शकता आणि वर्ग क्रियेमध्ये जोडण्यापूर्वी विद्यार्थ्यांना प्रभुत्व मिळवण्यात सहकार्य व्हावे यासाठी योग्य क्षमता त्यात जोडू शकता.',
-  'ca.warn.trun-off.mastery-accrual': 'प्रभुत्व मिळवण्याचा पर्याय बंद केल्याने विद्यार्थ्याचा कोणताही आधीचा डेटा परत प्राप्त होणार नाही. ज्या विद्यार्थ्यांनी या मुल्यांकनामध्ये जोडल्या गेलेल्या क्षमतांविरुद्ध प्रभुत्व आधीच मिळवले आहे फक्त त्यांचाच डेटा पुढे दिसत राहील.',
-  'ca.warn.trun-on.mastery-accrual': 'प्रभुत्व संचय पर्याय सुरु केल्याने मुल्यांकन आधीच पूर्ण करणाऱ्या विद्यार्थ्यांच्या कामगिरीमध्ये प्रभुत्व स्थिती दर्शवली जाणार नाही. ',
-  'ca.mastery-accrual.update.error': 'क्षमा करा! ह्या क्षणी वर्ग क्रिया मजकूर प्रभुत्व संचय अपडेट करण्यास अक्षम. कृपया थोड्या वेळाने पुन्हा प्रयत्न करा. ',
+  warning: 'चेतावणी',
+  'ca.warn.turn-on.multiple-competencies':
+    'हे मुल्यांकन विविध क्षमतांमध्ये जोडले गेलेले आहे. प्रभुत्व मिळवण्याचा पर्याय सुरु करणे याचा अर्थ ह्या मुल्यांकनामध्येजोडल्या गेलेल्या सर्व क्षमतांच्या विरोधात विद्यार्थी प्रभुत्व मिळवू शकतो.',
+  'ca.warn.turn-on.multiple-competencies.question':
+    'एकेरी मुल्यांकनामधून बहु क्षमतेमध्ये प्रभूत्व मिळवण्याचा पर्याय सुरु करण्याला तुमची समंती आहे का?',
+  'ca.warn.turn-on.multiple-competencies.note':
+    'टीप : तुम्ही कोणतेही मुल्यांकन पुर्नमिश्रित (कॉपी) करू शकता आणि वर्ग क्रियेमध्ये जोडण्यापूर्वी विद्यार्थ्यांना प्रभुत्व मिळवण्यात सहकार्य व्हावे यासाठी योग्य क्षमता त्यात जोडू शकता.',
+  'ca.warn.trun-off.mastery-accrual':
+    'प्रभुत्व मिळवण्याचा पर्याय बंद केल्याने विद्यार्थ्याचा कोणताही आधीचा डेटा परत प्राप्त होणार नाही. ज्या विद्यार्थ्यांनी या मुल्यांकनामध्ये जोडल्या गेलेल्या क्षमतांविरुद्ध प्रभुत्व आधीच मिळवले आहे फक्त त्यांचाच डेटा पुढे दिसत राहील.',
+  'ca.warn.trun-on.mastery-accrual':
+    'प्रभुत्व संचय पर्याय सुरु केल्याने मुल्यांकन आधीच पूर्ण करणाऱ्या विद्यार्थ्यांच्या कामगिरीमध्ये प्रभुत्व स्थिती दर्शवली जाणार नाही. ',
+  'ca.mastery-accrual.update.error':
+    'क्षमा करा! ह्या क्षणी वर्ग क्रिया मजकूर प्रभुत्व संचय अपडेट करण्यास अक्षम. कृपया थोड्या वेळाने पुन्हा प्रयत्न करा. ',
   'want.to.proceed': 'तुम्हाला सुरु ठेवायचे आहे का?',
-  'proceed': 'सुरु ठेवा',
+  proceed: 'सुरु ठेवा',
   'enter-student-score': 'विद्यार्थी गुण प्रविष्ट करा',
   'enter-assessment-max-score': 'मुल्यांकन कमाल गुण प्रविष्ट करा',
   'student-score': 'विद्यार्थी गुण',
   'search-resource-question': 'शोध संसाधने/प्रश्न',
   'enter-resource-timespent': 'संसाधनावर व्यतीत केलेला वेळ प्रविष्ट करा',
-  'enter-collection-timespent': 'संग्रह करण्यासाठी व्यतीत केलेला वेळ येथे प्रविष्ट करा',
+  'enter-collection-timespent':
+    'संग्रह करण्यासाठी व्यतीत केलेला वेळ येथे प्रविष्ट करा',
   'suggested-lessons': 'सुचवलेले धडे',
   'created-by-kangoorus': 'कांगारूमार्फत निर्माण केलेले',
   'preparatory-material': 'प्रारंभिक सामग्री',
-  'milestones': 'निर्धारित उद्दिष्ट',
+  milestones: 'निर्धारित उद्दिष्ट',
   'show-course-map': 'अभ्यासक्रम आराखडा दाखवा',
   'show-milestones': 'निर्धारित उद्दिष्टे दाखवा',
-  'warn.class-destination-not-setup': 'वर्ग गंतव्य स्थान ठरवल्याशिवाय वर्ग स्थापना पूर्ण होत नाही. वर्ग सेटिंगमध्ये जा अन स्थापना पूर्ण करा. नाहीतर, विद्यार्थी या वर्गाची सामग्री पाहू शकणार नाहीत.',
-  'milestone-rescoped': 'तुमच्या शिक्षकाने {{subject}} स्तराची स्थापना केल्याने हे निर्धारित उद्दिष्ट उपलब्ध झाले आहे, पण तुम्ही आधीच सर्व क्षमता आत्मसात केल्याचे दिसते आहे.',
-  'student-milestone-not-ready': 'वैयक्तीकृत शैक्षणिक मार्ग अजूनही पूर्णपणे स्थापन झालेला नाही. कृपया सामग्री मिळवण्यासाठी तुमच्या शिक्षकाशी संपर्क साधा.',
-  'warn.teacher-milestone-not-ready': 'ह्या वर्गात अभ्यासक्रमासाठी वापरण्यात आलेले निर्धारित उद्दिष्ट दृश्य अजूनही तयार झालेले नाही. निर्धारित उद्दिष्ट दृश्य तयार होत नाही तोवर विद्यार्थ्यांना वर्गातील सामग्री मिळवता येणार नाही. वर्ग स्थापना मूळ आणि गंतव्य मुल्यांसह पूर्ण झाली आहे का ते तपासा.',
+  'warn.class-destination-not-setup':
+    'वर्ग गंतव्य स्थान ठरवल्याशिवाय वर्ग स्थापना पूर्ण होत नाही. वर्ग सेटिंगमध्ये जा अन स्थापना पूर्ण करा. नाहीतर, विद्यार्थी या वर्गाची सामग्री पाहू शकणार नाहीत.',
+  'milestone-rescoped':
+    'तुमच्या शिक्षकाने {{subject}} स्तराची स्थापना केल्याने हे निर्धारित उद्दिष्ट उपलब्ध झाले आहे, पण तुम्ही आधीच सर्व क्षमता आत्मसात केल्याचे दिसते आहे.',
+  'student-milestone-not-ready':
+    'वैयक्तीकृत शैक्षणिक मार्ग अजूनही पूर्णपणे स्थापन झालेला नाही. कृपया सामग्री मिळवण्यासाठी तुमच्या शिक्षकाशी संपर्क साधा.',
+  'warn.teacher-milestone-not-ready':
+    'ह्या वर्गात अभ्यासक्रमासाठी वापरण्यात आलेले निर्धारित उद्दिष्ट दृश्य अजूनही तयार झालेले नाही. निर्धारित उद्दिष्ट दृश्य तयार होत नाही तोवर विद्यार्थ्यांना वर्गातील सामग्री मिळवता येणार नाही. वर्ग स्थापना मूळ आणि गंतव्य मुल्यांसह पूर्ण झाली आहे का ते तपासा.',
   'pre-study': 'पूर्व-अभ्यास',
   'course-map.your-learning-path': 'तुमचा शैक्षणिक मार्ग',
-  'mastery-greeting-msg': 'तुम्ही प्रभुत्व बॅज्ड कमावला आहे! तुम्हाला तुमच्या क्षमता ध्येय रेषेमधील सुधारणा पाहायला आवडेल ',
+  'mastery-greeting-msg':
+    'तुम्ही प्रभुत्व बॅज्ड कमावला आहे! तुम्हाला तुमच्या क्षमता ध्येय रेषेमधील सुधारणा पाहायला आवडेल ',
   'show-me': 'मला दाखवा',
   'common.subtask.oa.project.poster': 'प्रकल्प भित्तीपत्रिका',
   'common.subtask.oa.project.presentation': 'प्रकल्प सादरीकरण',
@@ -2073,7 +2657,7 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'प्रयोगशाळा अहवाल',
   'common.subtask.oa.explanation_argument': 'स्पष्टीकरण वाद',
   'common.subtask.oa.debate': 'चर्चा विवाद',
-  'project': 'प्रकल्प',
+  project: 'प्रकल्प',
   'oa.project.poster': 'भित्तीपत्रिका',
   'oa.project.presentation': 'सादरीकरण',
   'oa.project.video': 'Video',
@@ -2100,25 +2684,30 @@ window.i18ln = {
   'oa.add_activity': 'क्रिया जोडा',
   'oa.remix': 'ऑफलाईन क्रिया पुर्नमिश्रित करा',
   'oa.remix.lead': 'तुम्ही ऑफलाईन क्रिया पुर्नमिश्रित करणार आहात',
-  'oa.remix.success': 'तुम्ही ऑफलाईन क्रिया {{title}} पुर्नमिश्रित केली आहे. तुम्हाला ती ऑफलाईन क्रिया संपादित करायची आहे का?',
+  'oa.remix.success':
+    'तुम्ही ऑफलाईन क्रिया {{title}} पुर्नमिश्रित केली आहे. तुम्हाला ती ऑफलाईन क्रिया संपादित करायची आहे का?',
   'oa.title': 'ऑफलाईन क्रिया शीर्षक',
-  'errors.oa-not-copied': 'क्षमा करा! ह्या क्षणी ऑफलाईन क्रिया कॉपी करण्यास अक्षम. कृपया थोड्या वेळाने पुन्हा प्रयत्न करा.',
+  'errors.oa-not-copied':
+    'क्षमा करा! ह्या क्षणी ऑफलाईन क्रिया कॉपी करण्यास अक्षम. कृपया थोड्या वेळाने पुन्हा प्रयत्न करा.',
   'common.self': 'स्वयं',
-  'oa.enter-timespent-label': 'कृपया या क्रियेवर तुम्ही घालवलेला एकूण वेळ प्रविष्ट करा',
+  'oa.enter-timespent-label':
+    'कृपया या क्रियेवर तुम्ही घालवलेला एकूण वेळ प्रविष्ट करा',
   'no-task-available': 'कोणतेही कार्य उपलब्ध नाही',
   'your-answer': 'Your Answer',
   'common.saving': 'सेव्ह करत आहे',
   'oa.offline_activity.label': 'ऑफलाईन क्रिया',
   'common.oa.offline_activity.label': 'ऑफलाईन क्रिया',
   'oa.pending-submissions': 'सबमिशन प्रलंबित',
-  'oa.rubrics.switch.label': 'मथळ्याच्या आधारे शिक्षक क्रियेला गुणांकन देतील का?',
+  'oa.rubrics.switch.label':
+    'मथळ्याच्या आधारे शिक्षक क्रियेला गुणांकन देतील का?',
   'oa.rubrics.label': 'मथळा संलग्न करा',
   'oa.max-score.label': 'कमाल गुण प्रविष्ट करा',
   'oa.teacher-rubric': 'शिक्षक मथळा',
   'oa.references.available-uploads': 'उपलब्ध अपलोड',
   'oa.task.task-title-required': 'कृपया कार्य शीर्षक प्रविष्ट करा',
-  'task': 'कार्य',
-  'oa.errors.activity-title-presence': 'कृपया ऑफलाईन क्रिया शीर्षक प्रविष्ट करा.',
+  task: 'कार्य',
+  'oa.errors.activity-title-presence':
+    'कृपया ऑफलाईन क्रिया शीर्षक प्रविष्ट करा.',
   'oa.errors.standards-presence': 'कृपया इयत्ता निवडा.',
   'oa.errors.subformat-presence': 'कृपया पद्धत निवडा.',
   'oa.task.submissions.frs-label': 'मुक्त प्रकार मजकूर',
@@ -2142,20 +2731,6 @@ window.i18ln = {
   'report.domain-proficiency-report': 'डोमेन क्षमता अहवाल',
   'report.class-weekly-report': 'वर्ग साप्ताहिक अहवाल',
   'no-teacher-found': 'या इमेल आयडी शी संबंधित कोणतेही शिक्षक सापडले नाहीत!',
-  'oa.info.duration-hrs': 'Expected time to complete',
-  'oa.info.hrs': ' hrs',
-  'class.add-teachers': 'Add teachers',
-  'class.add-co-teachers': 'Add Co-teachers',
-  'common.gained': 'Gained',
-  'badges-earned': 'Badges Earned',
-  'suggestion-taken': 'Suggestions Taken',
-  'this-week': 'This Week',
-  'previous-week': 'Previous Week',
-  'beginning-till-now': 'Beginning Till Now',
-  'report.class-proficiency-report': 'Class Proficiency Report',
-  'report.domain-proficiency-report': 'Domain Competency Report',
-  'report.class-weekly-report': 'Class Weekly Report',
-  'no-teacher-found': 'No teacher with that email id found!',
   'oa-player.complete-confirm':
     'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',
   'oa-player.mark-complete': 'Mark Complete',
