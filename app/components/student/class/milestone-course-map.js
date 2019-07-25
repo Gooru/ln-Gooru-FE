@@ -688,6 +688,7 @@ export default Ember.Component.extend({
           return lesson;
         }
       });
+
       if (component.get('showAllRescopedContent')) {
         lessonIndex = lessons.indexOf(selectedLesson);
         lessonSize = lessons.length;
@@ -697,8 +698,9 @@ export default Ember.Component.extend({
         lessonSize = nonRescopedLessons.length;
         lastLesson = nonRescopedLessons.objectAt(lessonIndex);
       }
+
       const isLastLesson = lessonIndex === lessonSize - 1;
-      if (isLastLesson) {
+      if (isLastLesson && lastLesson) {
         const isLastLessonActive = isLastLesson && lastLesson.get('isActive');
         if (nextMilestone) {
           nextMilestone.set(
