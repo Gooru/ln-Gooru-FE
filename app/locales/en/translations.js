@@ -2682,6 +2682,8 @@ window.i18ln = {
   'no-teacher-found': 'No teacher with that email id is found!',
   'oa-player.complete-confirm':
     'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',
-  'oa-player.mark-complete': 'Mark Complete'
+  'oa-player.mark-complete': 'Mark Complete',
+  'report.offline-activity-report.note':
+    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.'
 };
 export default window.i18ln;

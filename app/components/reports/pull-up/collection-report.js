@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { EMOTION_VALUES } from 'gooru-web/config/config';
+import { EMOTION_VALUES, CONTENT_TYPES } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 
@@ -36,6 +36,10 @@ export default Ember.Component.extend({
    * @type {ClassService} Service to retrieve class information
    */
   classService: Ember.inject.service('api-sdk/class'),
+
+  offlineActivityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -265,6 +269,22 @@ export default Ember.Component.extend({
    * @type {Array}
    */
   selectedCollection: Ember.computed.alias('context.collection'),
+
+  /**
+   * @property {Boolean} isOfflineActivityReport
+   */
+  isOfflineActivityReport: Ember.computed.equal(
+    'selectedCollection.format',
+    CONTENT_TYPES.OFFLINE_ACTIVITY
+  ),
+
+  /**
+   * @property {Boolean} isExternalAssessmentReport
+   */
+  isExternalAssessmentReport: Ember.computed.equal(
+    'selectedCollection.format',
+    CONTENT_TYPES.EXTERNAL_ASSESSMENT
+  ),
 
   /**
    * Propery to hide the default pullup.
@@ -523,14 +543,7 @@ export default Ember.Component.extend({
       : Ember.RSVP.resolve({});
     return Ember.RSVP
       .hash({
-        collection:
-          format === 'assessment'
-            ? component.get('assessmentService').readAssessment(collectionId)
-            : format === 'assessment-external'
-              ? component
-                .get('assessmentService')
-                .readExternalAssessment(collectionId)
-              : component.get('collectionService').readCollection(collectionId),
+        collection: component.getContentDetails(format, collectionId),
         performance: component
           .get('analyticsService')
           .findResourcesByCollection(
@@ -547,7 +560,10 @@ export default Ember.Component.extend({
         if (!component.isDestroyed) {
           component.set('collection', collection);
           component.set('class', classData);
-          if (format === 'assessment-external') {
+          if (
+            format === CONTENT_TYPES.ASSESSMENT ||
+            format === CONTENT_TYPES.OFFLINE_ACTIVITY
+          ) {
             component.parseClassMemberAndExternalPerformanceData(performance);
           } else {
             component.parseClassMemberAndPerformanceData(
@@ -832,5 +848,26 @@ export default Ember.Component.extend({
       params.filters['flt.languageId'] = primaryLanguage;
     }
     return params;
+  },
+
+  /**
+   * @function getContentDetails
+   * Method to active content/collection details
+   */
+  getContentDetails(format, collectionId) {
+    const component = this;
+    if (format === CONTENT_TYPES.ASSESSMENT) {
+      return component.get('assessmentService').readAssessment(collectionId);
+    } else if (format === CONTENT_TYPES.COLLECTION) {
+      return component.get('collectionService').readCollection(collectionId);
+    } else if (format === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
+      return component
+        .get('assessmentService')
+        .readExternalAssessment(collectionId);
+    } else if (format === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+      return component.get('offlineActivityService').readActivity(collectionId);
+    } else {
+      return Ember.RSVP.resolve({});
+    }
   }
 });
