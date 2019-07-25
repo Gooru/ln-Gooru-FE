@@ -110,7 +110,7 @@
                             </div>
                             {{#if (and showPerformance collection.performance.hasStarted) }}
                               <div class="collection-peformance format-{{collection.format}} grade-range-{{grade-range collection.performance.scoreInPercentage}}" {{action "onOpenCollectionReport" milestone lesson collection}}>
-                                {{#if (and collection.isAssessment (gte collection.performance.scoreInPercentage 0))}}
+                                {{#if (and (or collection.isAssessment collection.isOfflineActivity) (gte collection.performance.scoreInPercentage 0))}}
                                   <span class="score">{{collection.performance.scoreInPercentage}}%</span>
                                   <span class="no-of-submissions">
                                     <span class="count">{{collection.numberOfSubmissions}}</span> {{gru-icon name="account_circle"}}

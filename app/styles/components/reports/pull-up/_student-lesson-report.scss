@@ -303,6 +303,15 @@
               background-position: 15px;
             }
 
+            .offline-activity-icon {
+              background-image: url("gooru/images/offline.svg");
+              width: 50px;
+              height: 40px;
+              display: block;
+              background-repeat: no-repeat;
+              background-position: center;
+            }
+
             span {
               width: calc(100% - 80px);
               padding-right: 20px;

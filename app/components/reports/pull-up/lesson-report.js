@@ -434,14 +434,17 @@ export default Ember.Component.extend({
    * @type {Array}
    */
   assessmentList: Ember.computed('collections', function() {
-    let component = this;
-    let assessmentList = component
-      .get('collections')
-      .filterBy('format', 'assessment');
-    let externalAssessmentList = component
-      .get('collections')
-      .filterBy('format', 'assessment-external');
-    return assessmentList.concat(externalAssessmentList);
+    const component = this;
+    const collections = component.get('collections');
+    let assessmentList = collections.filter(collection => {
+      let collectionType = collection.get('format');
+      return (
+        collectionType === CONTENT_TYPES.ASSESSMENT ||
+        collectionType === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||
+        collectionType === CONTENT_TYPES.OFFLINE_ACTIVITY
+      );
+    });
+    return assessmentList;
   }),
 
   /**
@@ -619,15 +622,11 @@ export default Ember.Component.extend({
 
   calcluateCollectionPerformance(performance, collectionType) {
     let component = this;
-    let collections = component
-      .get('collections')
-      .filterBy('format', collectionType);
-    if (collectionType === 'assessment') {
-      let externalAssessments = component
-        .get('collections')
-        .filterBy('format', 'assessment-external');
-      collections = collections.concat(externalAssessments);
-    }
+    let collections =
+      collectionType === CONTENT_TYPES.ASSESSMENT
+        ? component.get('assessmentList')
+        : component.get('collectionList');
+
     collections.map(function(collection) {
       let collectionId = collection.get('id');
       const averageScore = performance.calculateAverageScoreByItem(
@@ -663,15 +662,10 @@ export default Ember.Component.extend({
     let totalTimeSpent = 0;
     classMembers.forEach(member => {
       let user = component.createUser(member);
-      let collections = component
-        .get('collections')
-        .filterBy('format', collectionType);
-      if (collectionType === 'assessment') {
-        let externalAssessments = component
-          .get('collections')
-          .filterBy('format', 'assessment-external');
-        collections = collections.concat(externalAssessments);
-      }
+      let collections =
+        collectionType === CONTENT_TYPES.ASSESSMENT
+          ? component.get('assessmentList')
+          : component.get('collectionList');
       let performanceData = performance.get('studentPerformanceData');
       let userId = member.get('id');
       let userPerformance = performanceData.findBy('user.id', userId);
@@ -888,37 +882,35 @@ export default Ember.Component.extend({
               lessonAssessmentsPerformance.concat(lessonCollectionsPerformance)
             );
             let collections = component.get('collections');
-            let assessmentsPerformanceData = collections.filterBy(
-              'format',
-              CONTENT_TYPES.ASSESSMENT
-            );
-            let externalAssessmentsPerformanceData = collections.filterBy(
-              'format',
-              CONTENT_TYPES.EXTERNAL_ASSESSMENT
-            );
+
+            let assessmentsPerformanceData = collections.filter(collection => {
+              let collectionType = collection.get('format');
+              return (
+                collectionType === CONTENT_TYPES.ASSESSMENT ||
+                collectionType === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||
+                collectionType === CONTENT_TYPES.OFFLINE_ACTIVITY
+              );
+            });
+
             component.set(
               'assessmentStudentReportData',
               component.parseUsersMilestoneCollectionsPerformance(
-                assessmentsPerformanceData.concat(
-                  externalAssessmentsPerformanceData
-                ),
+                assessmentsPerformanceData,
                 lessonAssessmentsPerformance
               )
             );
-            let collectionsPerformanceData = collections.filterBy(
-              'format',
-              CONTENT_TYPES.COLLECTION
-            );
-            let externalCollectionsPerformanceData = collections.filterBy(
-              'format',
-              CONTENT_TYPES.EXTERNAL_COLLECTION
-            );
+            let collectionsPerformanceData = collections.filter(collection => {
+              let collectionType = collection.get('format');
+              return (
+                collectionType === CONTENT_TYPES.COLLECTION ||
+                collectionType === CONTENT_TYPES.EXTERNAL_COLLECTION
+              );
+            });
+
             component.set(
               'collectionStudentReportData',
               component.parseUsersMilestoneCollectionsPerformance(
-                collectionsPerformanceData.concat(
-                  externalCollectionsPerformanceData
-                ),
+                collectionsPerformanceData,
                 lessonCollectionsPerformance
               )
             );

@@ -67,6 +67,10 @@
           &.collection {
             background-image: url("../assets/gooru/images/collection_gray.svg");
           }
+
+          &.offline-activity {
+            background-image: url("gooru/images/offline.svg");
+          }
         }
 
         .title {
@@ -171,6 +175,10 @@
 
             &.collection {
               background-image: url("../assets/gooru/images/collection_gray.svg");
+            }
+
+            &.offline-activity {
+              background-image: url("gooru/images/offline.svg");
             }
           }
         }

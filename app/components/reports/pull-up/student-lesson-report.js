@@ -98,9 +98,12 @@ export default Ember.Component.extend({
         collection
       };
       let reportType = collection.get('format');
-      if (reportType === 'assessment-external') {
+      if (reportType === CONTENT_TYPES.ASSESSMENT_EXTERNAL) {
         component.set('isShowStudentExternalAssessmentReport', true);
         component.set('showCollectionReport', false);
+      } else if (reportType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        component.set('isShowStudentOfflineActivityReport', true);
+        params.studentPerformance = collection.get('performance');
       } else {
         component.set('isShowStudentExternalAssessmentReport', false);
         component.set('showCollectionReport', true);
@@ -230,6 +233,8 @@ export default Ember.Component.extend({
    */
   showCollectionReport: false,
 
+  isShowStudentOfflineActivityReport: false,
+
   //--------------------------------------------------------------------------
   // Methods
 
@@ -248,18 +253,16 @@ export default Ember.Component.extend({
 
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-        if (closeAll) {
-          component.sendAction('onClosePullUp');
-        }
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+      if (closeAll) {
+        component.sendAction('onClosePullUp');
       }
-    );
+    });
   },
   handleAppContainerScroll() {
     let activePullUpCount = Ember.$(document.body).find('.backdrop-pull-ups')
@@ -313,21 +316,23 @@ export default Ember.Component.extend({
     let unitId = component.get('unitId');
     let lessonId = component.get('selectedLesson.id');
     component.set('isLoading', true);
-    return Ember.RSVP.hash({
-      lesson: component
-        .get('courseMapService')
-        .getLessonInfo(classId, courseId, unitId, lessonId, false)
-    }).then(({ lesson }) => {
-      if (!component.isDestroyed) {
-        component.set('lesson', lesson);
-        component.set('collections', lesson.get('children'));
-      }
-      if (classId) {
-        component.fetchClassCollectionPerformance();
-      } else {
-        component.fetchNonClassCollectionPerformance();
-      }
-    });
+    return Ember.RSVP
+      .hash({
+        lesson: component
+          .get('courseMapService')
+          .getLessonInfo(classId, courseId, unitId, lessonId, false)
+      })
+      .then(({ lesson }) => {
+        if (!component.isDestroyed) {
+          component.set('lesson', lesson);
+          component.set('collections', lesson.get('children'));
+        }
+        if (classId) {
+          component.fetchClassCollectionPerformance();
+        } else {
+          component.fetchNonClassCollectionPerformance();
+        }
+      });
   },
 
   fetchClassCollectionPerformance() {
@@ -337,52 +342,58 @@ export default Ember.Component.extend({
     let unitId = component.get('unitId');
     let lessonId = component.get('selectedLesson.id');
     let userId = component.get('userId');
-    let collections = component
-      .get('collections')
-      .filterBy('format', 'collection');
-    let assessmentExternal = component
-      .get('collections')
-      .filterBy('format', 'assessment-external');
-    let assessments = component
-      .get('collections')
-      .filterBy('format', 'assessment');
-    let assessmentsAndExternalAssessments = assessments.concat(
-      assessmentExternal
+    let collections = component.get('collections');
+
+    let collectionList = collections.filterBy(
+      'format',
+      CONTENT_TYPES.COLLECTION
     );
-    Ember.RSVP.hash({
-      collectionsPerformance: component
-        .get('performanceService')
-        .findStudentPerformanceByLesson(
-          userId,
-          classId,
-          courseId,
-          unitId,
-          lessonId,
-          collections,
-          {
-            collectionType: 'collection'
-          }
-        ),
-      assessmentsPerformance: component
-        .get('performanceService')
-        .findStudentPerformanceByLesson(
-          userId,
-          classId,
-          courseId,
-          unitId,
-          lessonId,
-          assessmentsAndExternalAssessments
-        )
-    }).then(({ collectionsPerformance, assessmentsPerformance }) => {
-      if (!component.isDestroyed) {
-        let performances = assessmentsPerformance.concat(
-          collectionsPerformance
-        );
-        component.renderCollectionsPerformance(performances, 'id');
-        component.set('isLoading', false);
-        component.handleCarouselControl();
-      }
+
+    let assessmentList = collections.filter(collection => {
+      let collectionType = collection.get('format');
+      return (
+        collectionType === CONTENT_TYPES.ASSESSMENT ||
+        collectionType === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||
+        collectionType === CONTENT_TYPES.OFFLINE_ACTIVITY
+      );
     });
+
+    Ember.RSVP
+      .hash({
+        collectionsPerformance: component
+          .get('performanceService')
+          .findStudentPerformanceByLesson(
+            userId,
+            classId,
+            courseId,
+            unitId,
+            lessonId,
+            collectionList,
+            {
+              collectionType: 'collection'
+            }
+          ),
+        assessmentsPerformance: component
+          .get('performanceService')
+          .findStudentPerformanceByLesson(
+            userId,
+            classId,
+            courseId,
+            unitId,
+            lessonId,
+            assessmentList
+          )
+      })
+      .then(({ collectionsPerformance, assessmentsPerformance }) => {
+        if (!component.isDestroyed) {
+          let performances = assessmentsPerformance.concat(
+            collectionsPerformance
+          );
+          component.renderCollectionsPerformance(performances, 'id');
+          component.set('isLoading', false);
+          component.handleCarouselControl();
+        }
+      });
   },
 
   fetchNonClassCollectionPerformance() {
@@ -390,36 +401,38 @@ export default Ember.Component.extend({
     let lessonId = component.get('selectedLesson.id');
     let unitId = component.get('unitId');
     let courseId = component.get('courseId');
-    Ember.RSVP.hash({
-      assessmentPerformance: component
-        .get('learnerService')
-        .fetchPerformanceLesson(
-          courseId,
-          unitId,
-          lessonId,
-          CONTENT_TYPES.ASSESSMENT
-        ),
-      collectionPerformance: component
-        .get('learnerService')
-        .fetchPerformanceLesson(
-          courseId,
-          unitId,
-          lessonId,
-          CONTENT_TYPES.COLLECTION
-        )
-    }).then(({ assessmentPerformance, collectionPerformance }) => {
-      let collectionsPerformance = assessmentPerformance.concat(
-        collectionPerformance
-      );
-      if (!component.isDestroyed) {
-        component.renderCollectionsPerformance(
-          collectionsPerformance,
-          'collectionId'
+    Ember.RSVP
+      .hash({
+        assessmentPerformance: component
+          .get('learnerService')
+          .fetchPerformanceLesson(
+            courseId,
+            unitId,
+            lessonId,
+            CONTENT_TYPES.ASSESSMENT
+          ),
+        collectionPerformance: component
+          .get('learnerService')
+          .fetchPerformanceLesson(
+            courseId,
+            unitId,
+            lessonId,
+            CONTENT_TYPES.COLLECTION
+          )
+      })
+      .then(({ assessmentPerformance, collectionPerformance }) => {
+        let collectionsPerformance = assessmentPerformance.concat(
+          collectionPerformance
         );
-        component.set('isLoading', false);
-        component.handleCarouselControl();
-      }
-    });
+        if (!component.isDestroyed) {
+          component.renderCollectionsPerformance(
+            collectionsPerformance,
+            'collectionId'
+          );
+          component.set('isLoading', false);
+          component.handleCarouselControl();
+        }
+      });
   },
 
   renderCollectionsPerformance(collectionsPerformance, key) {
@@ -495,38 +508,42 @@ export default Ember.Component.extend({
     let courseId = component.get('courseId');
     let userId = component.get('userId');
     let unitId = component.get('unitId');
-    return Ember.RSVP.hash({
-      lessonsPerformance: component
-        .get('performanceService')
-        .findStudentPerformanceByUnit(
-          userId,
-          classId,
-          courseId,
-          unitId,
-          component.get('lessons')
-        )
-    }).then(({ lessonsPerformance }) => {
-      if (!component.isDestroyed) {
-        component.renderLessonsPerformance(lessonsPerformance, 'id');
-        component.loadData();
-      }
-    });
+    return Ember.RSVP
+      .hash({
+        lessonsPerformance: component
+          .get('performanceService')
+          .findStudentPerformanceByUnit(
+            userId,
+            classId,
+            courseId,
+            unitId,
+            component.get('lessons')
+          )
+      })
+      .then(({ lessonsPerformance }) => {
+        if (!component.isDestroyed) {
+          component.renderLessonsPerformance(lessonsPerformance, 'id');
+          component.loadData();
+        }
+      });
   },
 
   fetchNonClassLessonPerformance() {
     let component = this;
     let unitId = component.get('unitId');
     let courseId = component.get('courseId');
-    Ember.RSVP.hash({
-      lessonsPerformance: component
-        .get('learnerService')
-        .fetchPerformanceUnit(courseId, unitId, CONTENT_TYPES.ASSESSMENT)
-    }).then(({ lessonsPerformance }) => {
-      if (!component.isDestroyed) {
-        component.renderLessonsPerformance(lessonsPerformance, 'lessonId');
-        component.loadData();
-      }
-    });
+    Ember.RSVP
+      .hash({
+        lessonsPerformance: component
+          .get('learnerService')
+          .fetchPerformanceUnit(courseId, unitId, CONTENT_TYPES.ASSESSMENT)
+      })
+      .then(({ lessonsPerformance }) => {
+        if (!component.isDestroyed) {
+          component.renderLessonsPerformance(lessonsPerformance, 'lessonId');
+          component.loadData();
+        }
+      });
   },
 
   renderLessonsPerformance(lessonsPerformance, key) {

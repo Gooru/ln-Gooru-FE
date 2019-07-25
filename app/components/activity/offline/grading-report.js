@@ -773,8 +773,7 @@ export default Ember.Component.extend({
     } else {
       component.$('.caught-up-container').show(400, function() {
         let itemsToGrade = component.get('itemsToGrade');
-        //remove item from items to grade list only if teacher grading for a student
-        if (itemsToGrade && component.get('isTeacher')) {
+        if (itemsToGrade) {
           let contentId = component.get('content.id');
           let item = itemsToGrade.findBy('content.id', contentId);
           itemsToGrade.removeObject(item);

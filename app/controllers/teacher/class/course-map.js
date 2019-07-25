@@ -992,7 +992,6 @@ export default Ember.Controller.extend({
                 }
               });
               Ember.RSVP.all(itemsToGrade).then(function(questionItems) {
-                controller.set('isGradeLoading', false);
                 controller.set(
                   'itemsToGradeList',
                   itemsToGradeList.concat(questionItems)
@@ -1000,6 +999,7 @@ export default Ember.Controller.extend({
               });
             });
           }
+          controller.set('isGradeLoading', false);
         });
     } else {
       controller.set('isGradeLoading', false);
@@ -1020,7 +1020,6 @@ export default Ember.Controller.extend({
           controller.get('itemsToGradeList').pushObject(oaGradeItemObject);
         });
     });
-    controller.set('isGradeLoading', false);
   },
 
   getCourseStructure() {

@@ -124,10 +124,10 @@
                               {{/if}}
                             </div>
                             {{#if (and showPerformance collection.performance) }}
-                              <div class="collection-peformance {{if (eq collection.format 'collection-external') 'disable-event'}} format-{{collection.format}} grade-range-{{grade-range collection.performance.scoreInPercentage}}"
+                              <div class="collection-peformance {{if (or (eq collection.format 'collection-external') (eq collection.format 'offline-activity')) 'disable-event'}} format-{{collection.format}} grade-range-{{grade-range collection.performance.scoreInPercentage}}"
                                 {{action "onShowStudentMilestoneCollectionReport" lesson collection}}>
                                 {{#if collection.performance}}
-                                  {{#if (or (eq collection.format 'assessment') (eq collection.format 'assessment-external'))}}
+                                  {{#if (or (eq collection.format 'assessment') (eq collection.format 'offline-activity') (eq collection.format 'assessment-external'))}}
                                     {{collection.performance.scoreInPercentage}}%
                                   {{else}}
                                     {{format-time collection.performance.timeSpent}}
