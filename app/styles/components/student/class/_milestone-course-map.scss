@@ -7,6 +7,7 @@
   &.student-competency-summary {
     grid-template-columns: 1fr 80px;
   }
+
   .milestone-course-map-container {
     width: 100%;
 
@@ -29,11 +30,52 @@
         display: inline-grid;
         width: 100%;
         align-items: center;
-        cursor: pointer;
         position: relative;
         grid-template-columns: 1fr 60px;
         height: 50px;
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+
+        &.lesson-active {
+          &.prev-col-path-system {
+            .milestone-info-container {
+              .milestone-icon-upward-line {
+                left: 30px;
+
+                svg {
+                  margin-top: 10px;
+
+                  line {
+                    display: none;
+                  }
+
+                  .path-left {
+                    display: block;
+                  }
+                }
+              }
+            }
+          }
+
+          &.prev-col-path-teacher {
+            .milestone-info-container {
+              .milestone-icon-upward-line {
+                left: 26px;
+
+                svg {
+                  margin-top: 10px;
+
+                  line {
+                    display: none;
+                  }
+
+                  .path-right {
+                    display: block;
+                  }
+                }
+              }
+            }
+          }
+        }
 
         .milestone-info-container {
           height: inherit;
@@ -42,11 +84,30 @@
           width: 100%;
           grid-template-columns: 70px 1fr 50px;
           align-items: center;
-          cursor: pointer;
           position: relative;
 
           &.active {
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+          }
+
+          .milestone-icon-upward-line {
+            position: absolute;
+            top: -32px;
+            left: 34px;
+
+            svg {
+              line {
+                stroke: #ccc;
+                stroke-width: 3;
+              }
+
+              path {
+                stroke: #ec8f42;
+                stroke-width: 2;
+                fill: none;
+                display: none;
+              }
+            }
           }
 
           .milestone-flag-icon {
@@ -64,6 +125,7 @@
             justify-self: center;
             position: relative;
             z-index: 1;
+            cursor: pointer;
 
             i {
               font-size: 16px;
@@ -74,6 +136,7 @@
           }
 
           .milestone-title {
+            cursor: pointer;
             p {
               margin: 0;
               font-family: "Lato";
@@ -93,6 +156,7 @@
             align-self: center;
             height: 26px;
             text-align: center;
+            cursor: pointer;
 
             i {
               font-size: 30px;
@@ -110,12 +174,14 @@
           font-size: 16px;
           font-weight: bold;
           border-bottom: 1px solid #fff;
+          cursor: pointer;
 
           &.grade-range-not-started {
             background: transparent;
             border-bottom: none;
             color: #666;
             background: #ccc;
+            pointer-events: none;
           }
         }
       }
@@ -147,6 +213,7 @@
           align-items: center;
           justify-content: center;
           position: relative;
+          cursor: pointer;
 
           i {
             position: relative;
@@ -199,11 +266,13 @@
 
             &.show-all-rescoped-content {
               display: block;
+
               .milestone-course-map-lesson-panel {
                 .domain-lesson-title {
                   font-style: italic;
                 }
               }
+
               .milestone-course-map-collection-container {
                 .milestone-course-map-collection {
                   .milestone-course-map-collection-panel {
@@ -286,7 +355,6 @@
             grid-template-columns: 70px 1fr 60px;
             align-items: center;
             border-bottom: 1px solid #e3e5ea;
-            cursor: pointer;
 
             &.has-activity {
               .lesson-icon-container {
@@ -305,6 +373,7 @@
             }
 
             .domain-lesson-title {
+              cursor: pointer;
               p {
                 margin: 0;
                 font-family: "Lato";
@@ -337,12 +406,14 @@
               font-size: 16px;
               font-weight: bold;
               color: #fff;
+              cursor: pointer;
 
               &.grade-range-not-started {
                 background: transparent;
                 color: #666;
                 background: #ccc;
                 border-bottom: 1px solid $white;
+                pointer-events: none;
               }
             }
           }
@@ -709,6 +780,7 @@
                   &.grade-range-not-started {
                     background: transparent;
                     color: #666;
+                    pointer-events: none;
                   }
 
                   &.format-collection,

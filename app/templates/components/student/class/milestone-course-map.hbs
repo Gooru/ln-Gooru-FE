@@ -13,8 +13,15 @@
   {{/if}}
   {{#each milestones as | milestone milestoneIndex | }}
     <div class="milestone-course-map {{if milestone.isClassGrade 'class-grade'}}">
-      <div class="milestone-course-map-panel  {{if milestone.isActive 'active'}}">
+      <div class="milestone-course-map-panel prev-col-path-{{milestone.prevMilestoneOfLastCollectionPath}} {{if (and milestone.prevMilestoneIsActive milestone.prevMilestoneOfLastLessonIsActive) 'lesson-active'}} {{if milestone.isActive 'active'}}">
         <div class="milestone-info-container" {{action 'toggleMilestoneItems' milestone }}>
+          <div class="milestone-icon-upward-line {{if (eq milestoneIndex 0) 'hidden'}}">
+            <svg height="40" width="20">
+              <line x1="0" y1="0" x2="0" y2="40" />
+              <path class="path-right" d="M 0 0  t 8 17 -5 60" />
+              <path class="path-left" d="M 15 0  t -8 17 5 60" />
+            </svg>
+          </div>
           <div class="milestone-flag-icon">
             {{gru-icon name="flag"}}
           </div>
@@ -45,13 +52,15 @@
         {{#if milestone.hasLessonFetched}}
           {{#if milestone.lessons}}
             {{#each milestone.lessons as | lesson lessonIndex |}}
-              <div class="milestone-course-map-lesson {{if milestoneHasClassGrade 'class-grade-milestone'}} {{if (or showAllRescopedContent milestone.isClassGrade) 'show-all-rescoped-content'}} {{if lesson.rescope 'rescope'}} {{if lesson.isNextActive 'next-active'}} {{if lesson.isPrevActive 'prev-active'}} {{if lesson.isActive 'active'}}">
-                <div class="milestone-course-map-lesson-panel first-path-{{lesson.firstCollHasSuggsType}} prev-col-path-{{lesson.prevLeCollHasSuggsType}}  {{if lesson.has-activity 'has-activity'}}" {{action 'toggleLessonItems'milestone milestone.lessons lesson lessonIndex}}>
+              <div
+                class="milestone-course-map-lesson {{lessonIndex}} {{if milestoneHasClassGrade 'class-grade-milestone'}} {{if (or showAllRescopedContent milestone.isClassGrade) 'show-all-rescoped-content'}} {{if lesson.rescope 'rescope'}} {{if lesson.isNextActive 'next-active'}} {{if lesson.isPrevActive 'prev-active'}} {{if lesson.isActive 'active'}}">
+                <div class="milestone-course-map-lesson-panel first-path-{{lesson.firstCollHasSuggsType}} prev-col-path-{{lesson.prevLeCollHasSuggsType}}  {{if lesson.has-activity 'has-activity'}}"
+                  {{action 'toggleLessonItems'milestone milestone.lessons lesson lessonIndex}}>
                   <div class="lesson-icon-container">
                     <div class="lesson-icon-upward-line">
                       <svg height="35" width="20">
                         <line x1="0" y1="0" x2="0" y2="35" />
-                        <path class="path-right" d="M 0 0  t 8 17 -5 60"  />
+                        <path class="path-right" d="M 0 0  t 8 17 -5 60" />
                         <path class="path-left" d="M 15 0  t -8 17 5 60" />
                       </svg>
                     </div>
@@ -77,21 +86,23 @@
                     {{#if lesson.collections}}
                       {{#each lesson.collections as | collection |}}
                         <div class="milestone-course-map-collection  {{if (or showAllRescopedContent milestone.isClassGrade) 'show-all-rescoped-content'}} {{if collection.rescope 'rescope'}}">
-                          <div class="milestone-course-map-collection-panel prev-coll-path-{{collection.prevCollHasSuggsType}} next-coll-path-{{collection.nextCollHasSuggsType}} path-{{collection.pathType}}  {{if collection.has-activity 'has-activity'}} {{if collection.last-played-collection 'last-played-collection'}}">
+                          <div
+                            class="milestone-course-map-collection-panel prev-coll-path-{{collection.prevCollHasSuggsType}} next-coll-path-{{collection.nextCollHasSuggsType}} path-{{collection.pathType}}  {{if collection.has-activity 'has-activity'}} {{if collection.last-played-collection 'last-played-collection'}}">
                             <div class="collection-icon-container">
                               <div class="collection-icon-upward-line">
                                 <svg height="35" width="20">
-                                      <line x1="0" y1="0" x2="0" y2="35" />
-                                      <path class="path-right" d="M 0 0  t 8 17 -5 60"  />
-                                      <path class="path-left" d="M 15 0  t -8 17 5 60" />
-                                  </svg>
+                                  <line x1="0" y1="0" x2="0" y2="35" />
+                                  <path class="path-right" d="M 0 0  t 8 17 -5 60" />
+                                  <path class="path-left" d="M 15 0  t -8 17 5 60" />
+                                </svg>
                               </div>
                               <i class="collection-icon path-{{collection.pathType}}  format-{{collection.format}}"></i>
                             </div>
                             <div class="collection-title-container">
                               <p>{{collection.title}}</p>
                             </div>
-                            <div class="colllection-play-btn {{unless allowToPlay 'not-allowed-to-play'}} {{if collection.isOfflineActivity 'not-allowed-to-play'}}" {{action 'studyPlayer' 'collection' milestone.milestone_id lesson.unit_id lesson.lesson_id collection}}>
+                            <div class="colllection-play-btn {{unless allowToPlay 'not-allowed-to-play'}}"
+                              {{action 'studyPlayer' 'collection' milestone.milestone_id lesson.unit_id lesson.lesson_id collection}}>
                               {{gru-icon style="material-icons-outlined" name="play_circle_filled_white"}}
                             </div>
 
@@ -113,9 +124,10 @@
                               {{/if}}
                             </div>
                             {{#if (and showPerformance collection.performance) }}
-                              <div class="collection-peformance {{if (eq collection.format 'collection-external') 'disable-event'}} format-{{collection.format}} grade-range-{{grade-range collection.performance.scoreInPercentage}}" {{action "onShowStudentMilestoneCollectionReport" lesson collection}}>
+                              <div class="collection-peformance {{if (or (eq collection.format 'collection-external') (eq collection.format 'offline-activity')) 'disable-event'}} format-{{collection.format}} grade-range-{{grade-range collection.performance.scoreInPercentage}}"
+                                {{action "onShowStudentMilestoneCollectionReport" lesson collection}}>
                                 {{#if collection.performance}}
-                                  {{#if (or (eq collection.format 'assessment') (eq collection.format 'assessment-external'))}}
+                                  {{#if (or (eq collection.format 'assessment') (eq collection.format 'offline-activity') (eq collection.format 'assessment-external'))}}
                                     {{collection.performance.scoreInPercentage}}%
                                   {{else}}
                                     {{format-time collection.performance.timeSpent}}
@@ -173,7 +185,7 @@
       inProgressCount = competencySummary.inprogressCompetencies
       notStartedCount = competencySummary.notstartedCompetencies
       onClickProgressChart = "onClickProgressChart"}}
-    </div>
+  </div>
 {{/if}}
 {{#if isLoading}}
   <div class="loading-spinner">
@@ -189,7 +201,7 @@
       milestones = milestones
       activeMilestoneIndex = activeMilestoneIndex
       rescopedContents = rescopedContents
-      userId = studentId
+      userId = userId
     }}
   {{/reports.pull-up.milestone.milestone-report}}
 {{/if}}

@@ -321,6 +321,10 @@ window.i18ln = {
   'common.domain': 'Dominio',
   'common.domains': 'Dominios',
   'common.download': 'Descargar',
+  'common.template': 'Template',
+  'assessment-template-msg':
+    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
+  'common.code': 'Code',
   'common.download-print': 'Descargar / Imprimir',
   'common.drag-drop-suggestions': 'O Sugerencias de arrastrar y soltar ...',
   'common.download-report': 'Descargar informe',
@@ -2748,5 +2752,7 @@ window.i18ln = {
   'oa-player.complete-confirm':
     'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',
   'oa-player.mark-complete': 'Mark Complete',
-  'no.content.assoc.fw': 'Currently no content associated with this framework.'
+  'no.content.assoc.fw': 'Currently no content associated with this framework.',
+  'report.offline-activity-report.note':
+    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.'
 };

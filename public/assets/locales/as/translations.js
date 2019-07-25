@@ -322,6 +322,10 @@ window.i18ln = {
   'common.domain': 'ক্ষেত্ৰ',
   'common.domains': 'ক্ষেত্ৰসমূহ',
   'common.download': 'ডাউনল\'দ',
+  'common.template': 'Template',
+  'assessment-template-msg':
+    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
+  'common.code': 'Code',
   'common.download-print': 'ডাউনল\'দ/ছপা',
   'common.drag-drop-suggestions': 'বা টনা আৰু সৰি পৰাৰ উপদেশবোৰ',
   'common.download-report': 'ডাউনল\'দ ৰিপৰ্ট',
@@ -2746,5 +2750,7 @@ window.i18ln = {
   'oa-player.complete-confirm':
     'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',
   'oa-player.mark-complete': 'Mark Complete',
-  'no.content.assoc.fw': 'Currently no content associated with this framework.'
+  'no.content.assoc.fw': 'Currently no content associated with this framework.',
+  'report.offline-activity-report.note':
+    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.'
 };

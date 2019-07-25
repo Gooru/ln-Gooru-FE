@@ -229,6 +229,7 @@ export default Ember.Route.extend({
     controller.get('studentClassController').selectMenuItem('course-map');
     controller.set('isPremiumCourse', model.isPremiumCourse);
     controller.init();
+    controller.loadSelfGradeItems();
   },
 
   resetController(controller) {

@@ -289,6 +289,7 @@
 @import "components/player/gru-player-summary-footer.scss";
 @import "components/player/gru-external-assessment-page";
 @import "components/player/gru-external-collection-page";
+@import "components/player/gru-offline-activity-page";
 @import "components/player/gru-external-assessment-footer";
 @import "components/reports/gru-assessment-report";
 @import "components/reports/assessment/gru-questions";
@@ -502,3 +503,7 @@
 @import "components/content/modals/i2d-message-dialog";
 //Add Collaborator
 @import "components/teacher/class/gru-add-collaborator";
+@import "components/gru-i2d-template";
+
+//CM self grading
+@import "components/grading/student/gru-self-grading-items";

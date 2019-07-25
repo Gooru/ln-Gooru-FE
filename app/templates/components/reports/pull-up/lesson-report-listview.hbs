@@ -81,11 +81,11 @@
                     <th class="tabular-header on-scroll-fixed">
                       <div class="content-header {{unless content.performance.hasStarted 'not-started'}}" {{action 'openCollectionReport' content contents}}>
                         {{#if (eq collectionType 'assessment')}}
-                          <div style= {{safe-html (concat "background-color:" (grade-color content.performance.score))}} class="content-icon {{collectionType}}">
+                          <div style= {{safe-html (concat "background-color:" (grade-color content.performance.score))}} class="content-icon {{collectionType}} {{content.format}}">
                             <i></i>
                           </div>
                         {{else}}
-                          <div class="content-icon {{collectionType}}">
+                          <div class="content-icon {{collectionType}} {{content.format}}">
                             <i></i>
                           </div>
                         {{/if}}
@@ -138,11 +138,11 @@
           <th class="tabular-header on-scroll-fixed">
             <div class="content-header {{unless content.performance.hasStarted 'not-started'}}" {{action 'openCollectionReport' content contents}}>
               {{#if (eq collectionType 'assessment')}}
-                <div style= {{safe-html (concat "background-color:" (grade-color content.performance.score))}} class="content-icon {{collectionType}}">
+                <div style= {{safe-html (concat "background-color:" (grade-color content.performance.score))}} class="content-icon {{collectionType}} {{content.format}}">
                   <i></i>
                 </div>
               {{else}}
-                <div class="content-icon {{collectionType}}">
+                <div class="content-icon {{collectionType}} {{content.format}}">
                   <i></i>
                 </div>
               {{/if}}

@@ -531,6 +531,11 @@
               cursor: not-allowed;
             }
 
+            &.show-warning {
+              opacity: 0.5;
+              pointer-events: none;
+            }
+
             .mastery-accrual-icon {
               justify-content: center;
               height: max-content;

@@ -37,8 +37,8 @@
           {{collection.title}}
         </div>
         {{#if collection.performance}}
-          <div class="collection-performance-container {{collection.format}} {{if collection.isAssessment (concat 'grade-range-' (grade-range collection.performance.scoreInPercentage))}}" {{action "onOpenCollectionReport" collection}}>
-            {{#if collection.isAssessment}}
+          <div class="{{if collection.isOfflineActivity 'disable-event'}} collection-performance-container {{collection.format}} {{if (or collection.isAssessment collection.isOfflineActivity) (concat 'grade-range-' (grade-range collection.performance.scoreInPercentage))}}" {{action "onOpenCollectionReport" collection}}>
+            {{#if (or collection.isAssessment collection.isOfflineActivity)}}
               {{collection.performance.scoreInPercentage}}%
             {{else}}
               {{format-time collection.performance.timeSpent}}

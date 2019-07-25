@@ -10,27 +10,109 @@
     .course-map-body {
       display: grid;
       grid-template-rows: auto;
+      @media only screen and (max-width: $screen-sm - 1) {
+        &.teacher-cm {
+          .students {
+            top: calc(100% - 100px);
+          }
+        }
+
+        .students {
+          top: calc(100% - 50px);
+          position: fixed;
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: 100% !important;
+          z-index: 1024;
+          background-color: #fff;
+
+          &.teacher-cm {
+            top: calc(100% - 100px);
+          }
+
+          &.active {
+            .header {
+              .icon {
+                .arrow-down {
+                  display: none;
+                }
+
+                .arrow-up {
+                  display: block;
+                }
+              }
+            }
+
+            .students-list {
+              display: block !important;
+              width: 100%;
+              margin-top: 5px;
+              max-height: calc(100vh - 100px);
+            }
+          }
+
+          .header {
+            display: grid;
+            grid-template-columns: 1fr 50px;
+            margin: 0;
+            box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+            background-color: #ffffff;
+            padding: 0;
+            height: 50px;
+
+            &.visible-xs {
+              display: grid !important;
+            }
+
+            .title {
+              padding: 10px;
+              display: flex;
+              align-items: center;
+            }
+
+            .icon {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              .arrow-up {
+                display: none;
+              }
+
+              .arrow-down {
+                display: block;
+              }
+            }
+          }
+
+          .students-list {
+            display: none !important;
+          }
+        }
+      }
 
       .students {
         height: 50px;
+
         .header {
           display: none;
         }
+      }
 
-        .students-list {
-          display: flex;
-          width: 95%;
-          min-width: unset;
-          max-width: unset;
-          max-height: unset;
-          overflow-x: auto;
+      .students-list {
+        display: flex;
+        width: 95%;
+        min-width: unset;
+        max-width: unset;
+        max-height: unset;
+        overflow-x: auto;
 
-          .list {
-            .student-name {
-              white-space: nowrap;
-              display: block;
-              margin-left: 10px;
-            }
+        .list {
+          .student-name {
+            white-space: nowrap;
+            display: block;
+            margin-left: 10px;
           }
         }
       }
@@ -705,6 +787,69 @@
         grid-row: 3;
         grid-column: 1;
         width: 100%;
+        @media only screen and (max-width: $screen-sm - 1) {
+          top: calc(100% - 50px);
+          position: fixed;
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 1024;
+          background-color: #fff;
+
+          &.active {
+            .header {
+              .icon {
+                .arrow-down {
+                  display: none;
+                }
+
+                .arrow-up {
+                  display: block;
+                }
+              }
+            }
+          }
+
+          .header {
+            display: grid;
+            grid-template-columns: 1fr 50px;
+            margin: 0;
+            box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+            background-color: #ffffff;
+            padding: 0;
+            height: 50px;
+
+            &.visible-xs {
+              display: grid !important;
+            }
+
+            .title {
+              padding: 10px;
+              display: flex;
+              align-items: center;
+            }
+
+            .icon {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              .arrow-up {
+                display: none;
+              }
+
+              .arrow-down {
+                display: block;
+              }
+            }
+          }
+
+          .gru-grade-items {
+            box-shadow: none;
+            width: 100%;
+          }
+        }
       }
     }
   }
