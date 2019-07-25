@@ -2166,5 +2166,7 @@ window.i18ln = {
   'domain-code.G': 'भौमितिक आकारांची ओळख',
   'domain-code.M': 'मापन',
   'domain-code.NS': 'संख्याज्ञान',
-  'no.content.assoc.fw': 'Currently no content associated with this framework.'
+  'no.content.assoc.fw': 'Currently no content associated with this framework.',
+  'report.offline-activity-report.note':
+    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.'
 };

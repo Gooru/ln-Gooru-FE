@@ -382,16 +382,15 @@
 .controller.student.course-map {
   //Styles while self grading enabled
   &.student-grading-enabled {
-    .assigned-course-title {
-      width: max-content;
-      font-size: 15px;
-    }
-
     .student-coursemap-container {
       display: grid;
       grid-template-columns: auto 331px;
       column-gap: 15px;
       .course-map-accordion-container {
+        .assigned-course-title {
+          width: max-content;
+          font-size: 15px;
+        }
         .gru-accordion-course {
           padding: 0;
         }
@@ -399,12 +398,8 @@
       .self-grading-container {
         width: 331px;
         .header-container {
-          font-size: 12px;
-          font-weight: 700;
-          color: #000;
-          margin-left: 15px;
-          text-transform: uppercase;
-          opacity: 0.5;
+          width: max-content;
+          font-size: 15px;
         }
         .body-container {
           max-height: 400px;

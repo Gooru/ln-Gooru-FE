@@ -145,12 +145,12 @@
                       <div class="performance pull-right">
                         {{#if (or item.isAssessment item.isExternalAssessment item.isOfflineActivity)}}
                           {{#if item.performance.isCompleted}}
-                            <span {{action 'studentReport' item}} class="score {{unless (gte item.performance.score 0) 'not-started'}}" style={{safe-html (concat "color:" (grade-color item.performance.score))}}>
+                            <span {{action 'studentReport' item}} class="score {{if item.isOfflineActivity 'disable-event'}} {{unless (gte item.performance.score 0) 'not-started'}}" style={{safe-html (concat "color:" (grade-color item.performance.score))}}>
                               {{item.performance.score}}%
                             </span>
                           {{else}}
                             {{#if item.performance.hasStarted}}
-                              <span {{action 'studentReport' item}} class="score {{unless (gte item.performance.score 0) 'not-started'}}" style={{safe-html (concat "color:" (grade-color item.performance.score))}}>
+                              <span {{action 'studentReport' item}} class="score {{if item.isOfflineActivity 'disable-event'}} {{unless (gte item.performance.score 0) 'not-started'}}" style={{safe-html (concat "color:" (grade-color item.performance.score))}}>
                                 {{item.performance.score}}%
                               </span>
                             {{else}}

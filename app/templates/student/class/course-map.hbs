@@ -23,8 +23,6 @@
           onStudyNow=(action 'studyCoursePlayer' ) }}
     {{/if}}
 
-    <h5 class="assigned-course-title">{{t 'class.overview.assigned-course'}}</h5>
-
     <div class="rescope-section">
       {{#if isPremiumClass}}
         <div class="rescope-toggle" style="display:flex">
@@ -50,6 +48,7 @@
 
     <div class="student-coursemap-container">
       <div class="course-map-accordion-container">
+        <h5 class="assigned-course-title">{{t 'class.overview.assigned-course'}}</h5>
         {{class.overview.gru-accordion-course
             currentClass=class
             classMembers=classMembers
@@ -70,9 +69,9 @@
       </div>
       {{#if (gt selfGradeItems.length 0) }}
         <div class="self-grading-container">
-          <div class="header-container">
+          <h5 class="header-container">
             {{t 'class.analytics.performance.grade-items'}}
-          </div>
+          </h5>
           <div class="body-container">
             {{grading/student/gru-self-grading-items
              selfGradeItems = selfGradeItems

@@ -77,7 +77,7 @@
       </div>
       {{#each collections as |collection|}}
         <div class="report-performance-list">
-          <div class="content-name {{collection.format}} {{unless collection.performance.hasStarted 'not-started'}} {{if collection.isSuggestedContent 'suggested-content'}}" {{action 'openCollectionReport' collection}}>
+          <div class="{{if (eq collection.format 'offline-activity') 'disable-event'}} content-name {{collection.format}} {{unless collection.performance.hasStarted 'not-started'}} {{if collection.isSuggestedContent 'suggested-content'}}" {{action 'openCollectionReport' collection}}>
             <i class="{{collection.format}}-icon"></i>
             <span>{{collection.title}}</span>
             {{#if collection.isSuggestedContent}}
@@ -127,5 +127,14 @@
     showPullUp=isShowStudentExternalAssessmentReport
     isStudent=studentCollectionReportContext.isStudent
     onClosePullUp="onClosePullUp"
+  }}
+{{/if}}
+
+{{#if isShowStudentOfflineActivityReport}}
+  {{reports.pull-up.oa-preview
+    showPullUp=isShowStudentOfflineActivityReport
+    oaId=studentCollectionReportContext.collection.id
+    isReportView=true
+    classId=classId
   }}
 {{/if}}
