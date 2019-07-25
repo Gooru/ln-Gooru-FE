@@ -235,6 +235,10 @@ export default Ember.Component.extend({
             collectionData.get('format') === CONTENT_TYPES.ASSESSMENT ||
               collectionData.get('format') === CONTENT_TYPES.EXTERNAL_ASSESSMENT
           );
+          collectionData.set(
+            'isOfflineActivity',
+            collectionData.get('format') === CONTENT_TYPES.OFFLINE_ACTIVITY
+          );
           component.set('lesson.isPerformed', true);
         }
       });
