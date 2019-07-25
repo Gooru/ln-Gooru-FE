@@ -143,7 +143,7 @@
                   <div class="info">
                     {{#if isStudent}}
                       <div class="performance pull-right">
-                        {{#if (or item.isAssessment item.isExternalAssessment)}}
+                        {{#if (or item.isAssessment item.isExternalAssessment item.isOfflineActivity)}}
                           {{#if item.performance.isCompleted}}
                             <span {{action 'studentReport' item}} class="score {{unless (gte item.performance.score 0) 'not-started'}}" style={{safe-html (concat "color:" (grade-color item.performance.score))}}>
                               {{item.performance.score}}%

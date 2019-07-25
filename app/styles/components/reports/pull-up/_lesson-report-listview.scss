@@ -199,6 +199,12 @@
                 background-image: url("../assets/gooru/images/assessment-white.svg");
               }
             }
+
+            &.offline-activity {
+              i {
+                background-image: url("gooru/images/offline.svg");
+              }
+            }
           }
 
           &.not-started {
