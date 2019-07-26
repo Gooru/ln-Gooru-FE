@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent, test, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import T from 'gooru-web/tests/helpers/assert';
 import Location from 'gooru-web/models/learner/location';
@@ -17,7 +17,7 @@ moduleForComponent(
   }
 );
 
-test('Course Card Layout', function(assert) {
+skip('Course Card Layout', function(assert) {
   this.set(
     'location',
     Location.create(Ember.getOwner(this).ownerInjection(), {
@@ -80,7 +80,7 @@ test('Course Card Layout', function(assert) {
   T.exists(assert, $panelFooter.find('.report'), 'Missing Report');
 });
 
-test('Collection Card Layout', function(assert) {
+skip('Collection Card Layout', function(assert) {
   this.set(
     'location',
     Location.create(Ember.getOwner(this).ownerInjection(), {

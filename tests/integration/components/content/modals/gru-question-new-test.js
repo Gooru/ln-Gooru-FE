@@ -1,4 +1,4 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent, test, skip } from 'ember-qunit';
 import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 import Collection from 'gooru-web/models/content/collection';
@@ -122,9 +122,7 @@ test('Select question type', function(assert) {
   );
 });
 
-test('show spinner button component while the server response, after clicking on the add to button', function(
-  assert
-) {
+skip('show spinner button component while the server response, after clicking on the add to button', function(assert) {
   this.set('router', {
     transitionTo(route, resourceId, queryParams) {
       return {

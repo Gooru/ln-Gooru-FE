@@ -1,4 +1,4 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent, test, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent(
@@ -54,7 +54,10 @@ test('Layout without image - edit', function(assert) {
     'Upload button'
   );
   assert.equal(
-    $component.find('> .file-picker > button.btn-info').text().trim(),
+    $component
+      .find('> .file-picker > button.btn-info')
+      .text()
+      .trim(),
     this.get('i18n').t('common.upload-thumbnail').string,
     'Upload button text'
   );
@@ -84,16 +87,17 @@ test('Layout with image - edit', function(assert) {
     'Update button'
   );
   assert.equal(
-    $component.find('> .file-picker > button.btn-info').text().trim(),
+    $component
+      .find('> .file-picker > button.btn-info')
+      .text()
+      .trim(),
     this.get('i18n').t('common.update-thumbnail').string,
     'Update button text'
   );
   assert.ok($component.find('> button.delete').length, 'Delete button');
 });
 
-test('Delete button replaces the currently selected image with a placeholder', function(
-  assert
-) {
+skip('Delete button replaces the currently selected image with a placeholder', function(assert) {
   var imageUrl = '/path/image.png';
   this.set('imageUrl', imageUrl);
   this.render(
@@ -113,7 +117,10 @@ test('Delete button replaces the currently selected image with a placeholder', f
     'Upload button'
   );
   assert.equal(
-    $component.find('> .file-picker > button.btn-info').text().trim(),
+    $component
+      .find('> .file-picker > button.btn-info')
+      .text()
+      .trim(),
     this.get('i18n').t('common.upload-thumbnail').string,
     'Upload button text'
   );
