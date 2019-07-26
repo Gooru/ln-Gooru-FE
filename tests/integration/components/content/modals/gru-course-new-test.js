@@ -36,7 +36,7 @@ moduleForComponent(
   }
 );
 
-test('it renders', function(assert) {
+skip('it renders', function(assert) {
   this.render(hbs`{{content/modals/gru-course-new}}`);
 
   const $component = this.$('.content.modals.gru-course-new');
