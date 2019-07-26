@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import { DEFAULT_IMAGES } from 'gooru-web/config/config';
 
 var configurationService = Ember.Object.create({
@@ -8,7 +9,7 @@ var configurationService = Ember.Object.create({
   }
 });
 
-moduleFor('serializer:user/user', 'Unit | Serializer | user/user');
+moduleForComponent('serializer:user/user', 'Unit | Serializer | user/user');
 
 test('normalizeSingleResponse', function(assert) {
   const serializer = this.subject();

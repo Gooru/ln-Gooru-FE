@@ -36,6 +36,7 @@ moduleForComponent(
     beforeEach: function() {
       this.i18n = this.container.lookup('service:i18n');
       this.i18n.set('locale', 'en');
+      this.register('service:popover', Ember.Service.extend({}));
       this.register('service:api-sdk/taxonomy', taxonomyServiceStub);
       this.inject.service('api-sdk/taxonomy');
 

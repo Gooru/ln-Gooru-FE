@@ -1,7 +1,8 @@
 import { moduleForComponent, test } from 'ember-qunit';
 
 moduleForComponent('gru-tour', 'Unit | Component | gru-tour', {
-  integration: false
+  integration: false,
+  needs: ['service:i18n']
 });
 
 test('generateTemplate', function(assert) {

@@ -45,7 +45,7 @@ test('Audience layout, no audiences selected - read only', function(assert) {
   this.set('selectedAudiences', selectedAudiences);
 
   this.render(hbs`
-    {{content.gru-audience isEditing=false srcSelectedAudiences=selectedAudiences}}
+    {{content/gru-audience isEditing=false srcSelectedAudiences=selectedAudiences}}
   `);
 
   const $component = this.$('.content.gru-audience');
@@ -68,7 +68,7 @@ test('Audience layout, audiences selected - read only', function(assert) {
   this.set('selectedAudiences', selectedAudiences);
 
   this.render(hbs`
-    {{content.gru-audience isEditing=false srcSelectedAudiences=selectedAudiences}}
+    {{content/gru-audience isEditing=false srcSelectedAudiences=selectedAudiences}}
   `);
 
   const $component = this.$('.content.gru-audience');
@@ -86,7 +86,7 @@ test('Audience layout - edit', function(assert) {
   this.set('selectedAudiences', selectedAudiences);
 
   this.render(hbs`
-    {{content.gru-audience isEditing=true srcSelectedAudiences=initialAudiences editSelectedAudiences=selectedAudiences}}
+    {{content/gru-audience isEditing=true srcSelectedAudiences=initialAudiences editSelectedAudiences=selectedAudiences}}
   `);
 
   const $component = this.$('.content.gru-audience');
@@ -135,7 +135,7 @@ test('Audience edit, remove audience', function(assert) {
   this.set('selectedAudiences', selectedAudiences);
 
   this.render(hbs`
-    {{content.gru-audience isEditing=true srcSelectedAudiences=initialAudiences editSelectedAudiences=selectedAudiences}}
+    {{content/gru-audience isEditing=true srcSelectedAudiences=initialAudiences editSelectedAudiences=selectedAudiences}}
   `);
 
   const $component = this.$('.content.gru-audience');
@@ -174,9 +174,7 @@ test('Audience edit, remove audience', function(assert) {
   });
 });
 
-test('Audience edit, add audience -returning to edit mode will discard any changes', function(
-  assert
-) {
+test('Audience edit, add audience -returning to edit mode will discard any changes', function(assert) {
   var initialAudiences = [1];
   var selectedAudiences = [1];
 
@@ -185,7 +183,7 @@ test('Audience edit, add audience -returning to edit mode will discard any chang
   this.set('isEditing', true);
 
   this.render(hbs`
-    {{content.gru-audience isEditing=isEditing srcSelectedAudiences=initialAudiences editSelectedAudiences=selectedAudiences}}
+    {{content/gru-audience isEditing=isEditing srcSelectedAudiences=initialAudiences editSelectedAudiences=selectedAudiences}}
   `);
 
   const $component = this.$('.content.gru-audience');

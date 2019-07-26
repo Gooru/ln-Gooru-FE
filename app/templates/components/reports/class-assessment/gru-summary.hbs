@@ -2,17 +2,17 @@
 
   <ul class="overview">
     <li class="scores">
-      {{ charts.gru-pie-chart data=classScores }}
+      {{ charts/gru-pie-chart data=classScores }}
       <span>{{t "common.classScores"}}</span>
     </li>
 
     <li class="average-score">
-      {{charts.gru-bubble-chart content=(concat averageScore '%') color=(grade-color averageScore)}}
+      {{charts/gru-bubble-chart content=(concat averageScore '%') color=(grade-color averageScore)}}
       <span>{{t "common.averageScore"}}</span>
     </li>
 
     <li class="completion">
-      {{charts.gru-radial-chart
+      {{charts/gru-radial-chart
       value=totalCompleted
       minValue=0
       maxValue=students.length }}
@@ -22,12 +22,12 @@
 
   <ul class="overview small {{if isFullScreen 'visible'}}">
     <li class="scores">
-      {{ charts.gru-pie-chart data=classScores }}
+      {{ charts/gru-pie-chart data=classScores }}
       <span>{{t "common.classScores"}}</span>
     </li>
 
     <li class="completion">
-      {{charts.gru-radial-chart
+      {{charts/gru-radial-chart
       value=totalCompleted
       minValue=0
       maxValue=students.length }}
@@ -35,12 +35,12 @@
     </li>
 
     <li class="average-score">
-      {{charts.gru-bubble-chart content=(concat averageScore '%') color=(grade-color averageScore)}}
+      {{charts/gru-bubble-chart content=(concat averageScore '%') color=(grade-color averageScore)}}
       <span>{{t "common.averageScore"}}</span>
     </li>
   </ul>
 
-  {{ reports.class-assessment.gru-questions-summary
+  {{ reports/class-assessment/gru-questions-summary
   data=questionsData
   isExpanded=isQuestionView
   onSelectQuestion=(action 'selectQuestion')

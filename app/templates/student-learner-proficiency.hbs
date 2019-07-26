@@ -1,6 +1,6 @@
 <div class="student-proficiency-container {{if isShowSuggestion 'player-suggestion'}} {{if isPlayerProficiency 'player-proficiency'}}">
   {{#if isPlayerProficiency}}
-    {{player.gru-study-header
+    {{player/gru-study-header
       classId=class.id
       class=class
       courseId=course.id
@@ -11,7 +11,7 @@
     }}
   {{/if}}
   <div class="panel-container">
-    {{proficiency.student-proficiency-panel
+    {{proficiency/student-proficiency-panel
        studentProfile=studentProfile
        course=course
        activeSubject=activeSubject
@@ -42,24 +42,24 @@
 
     {{#if isMobile}}
       <div class="inspect-competency">
-        {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo onClosePullUp="onClosePullUp" isStudent=isStudent competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
+        {{proficiency/competency-info-pull-up isInspectCompetency=showCompetencyInfo onClosePullUp="onClosePullUp" isStudent=isStudent competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
       </div>
     {{/if}}
   </div>
   <div class="pull-up-container">
     {{#if isShowMatrixChart}}
-      {{#proficiency.proficiency-subject-panel onDomainSelect="onDomainSelect" class=class subject=activeSubject competencyMatrixCoordinates=competencyMatrixCoordinates}}
-        {{proficiency.domain-info-pull-up onSelectCompetency="onSelectCompetency" showPullUp=showDomainInfo competencies=selectedDomainCompetencies domain=selectedDomain}}
-        {{proficiency.competency-info-pull-up isInspectCompetency=showCompetencyInfo onClosePullUp="onClosePullUp" isStudent=isStudent competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList isPlayerProficiency = isPlayerProficiency}}
-      {{/proficiency.proficiency-subject-panel}}
+      {{#proficiency/proficiency-subject-panel onDomainSelect="onDomainSelect" class=class subject=activeSubject competencyMatrixCoordinates=competencyMatrixCoordinates}}
+        {{proficiency/domain-info-pull-up onSelectCompetency="onSelectCompetency" showPullUp=showDomainInfo competencies=selectedDomainCompetencies domain=selectedDomain}}
+        {{proficiency/competency-info-pull-up isInspectCompetency=showCompetencyInfo onClosePullUp="onClosePullUp" isStudent=isStudent competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList isPlayerProficiency = isPlayerProficiency}}
+      {{/proficiency/proficiency-subject-panel}}
     {{/if}}
   </div>
 </div>
 
 {{#if isPlayerProficiency}}
-  {{player.gru-player-summary-footer isDone=isDone classId=classId parents="onPlayNext" courseId=courseId courseTitle=course.title isPlayerProficiency = isPlayerProficiency isFullScreen=isFullScreen onToggleScreen="onToggleScreen"}}
+  {{player/gru-player-summary-footer isDone=isDone classId=classId parents="onPlayNext" courseId=courseId courseTitle=course.title isPlayerProficiency = isPlayerProficiency isFullScreen=isFullScreen onToggleScreen="onToggleScreen"}}
 {{/if}}
 
 {{#if isShowSuggestion}}
-  {{content.modals.gru-content-suggestion mapLocation=mapLocation onAcceptSuggestion="onAcceptSuggestion" onIgnoreSuggestion="onIgnoreSuggestion"}}
+  {{content/modals/gru-content-suggestion mapLocation=mapLocation onAcceptSuggestion="onAcceptSuggestion" onIgnoreSuggestion="onIgnoreSuggestion"}}
 {{/if}}

@@ -34,7 +34,7 @@
   </label>
   {{#if isEditing}}
     {{#if subjects.length}}
-      {{taxonomy.gru-subject-picker
+      {{taxonomy/gru-subject-picker
         subjects=subjects
         onlySubjectsWithStandards=onlySubjectsWithStandards
         selectedSubject=selectedSubject
@@ -42,7 +42,7 @@
       }}
     {{/if}}
     {{#if (and showCourses selectedSubject subjectCourses)}}
-      {{taxonomy.gru-subject-course-picker
+      {{taxonomy/gru-subject-course-picker
         selectedSubject=selectedSubject
         courses=subjectCourses
         selectedTaxonomy=selectedTaxonomy
@@ -50,7 +50,7 @@
       }}
       {{#if editableTags}}
         <div class="tags">
-          {{taxonomy.gru-taxonomy-tag-list tags=editableTags onRemove=(action 'removeTag')}}
+          {{taxonomy/gru-taxonomy-tag-list tags=editableTags onRemove=(action 'removeTag')}}
         </div>
       {{/if}}
     {{/if}}
@@ -58,7 +58,7 @@
     {{#if showCourses}}
       {{#if tags}}
         <div class="tags">
-          {{taxonomy.gru-taxonomy-tag-list tags=tags}}
+          {{taxonomy/gru-taxonomy-tag-list tags=tags}}
         </div>
       {{/if}}
     {{/if}}

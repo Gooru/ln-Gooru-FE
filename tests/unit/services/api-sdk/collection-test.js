@@ -11,7 +11,8 @@ moduleForService(
       'serializer:collection/collection',
       'model:collection/collection',
       'model:resource/resource',
-      'adapter:collection/collection'
+      'adapter:collection/collection',
+      'service:api-sdk/profile'
     ]
   }
 );

@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
 let activeClasses = [
   Ember.Object.create({
@@ -14,7 +15,13 @@ var applicationController = Ember.Object.create({
   profile: Ember.Object.create({ id: 'profile-id' }),
   getLocalStorage: () => ({ getItem: () => null })
 });
-moduleFor('controller:student-home', 'Unit | Controller | student-home', {});
+moduleForComponent(
+  'controller:student-home',
+  'Unit | Controller | student-home',
+  {
+    needs: ['controller:application', 'service:notifications']
+  }
+);
 
 test('profile', function(assert) {
   assert.expect(1);

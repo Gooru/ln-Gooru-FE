@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="course-report-chart">
-            {{charts.report-bar-chart useTimeSpentScore=false studentChartReportData=studentReportData onClickChart="onClickChart"}}
+            {{charts/report-bar-chart useTimeSpentScore=false studentChartReportData=studentReportData onClickChart="onClickChart"}}
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@
       </div>
 
       <div class="report-view-container">
-        {{reports.pull-up.course-report-listview
+        {{reports/pull-up/course-report-listview
           sortByFirstnameEnabled=sortByFirstnameEnabled
           sortByLastnameEnabled=sortByLastnameEnabled
           sortByScoreEnabled=sortByScoreEnabled
@@ -68,19 +68,19 @@
   </div>
 </div>
 {{#if showStudentCourseReport}}
-  {{reports.pull-up.student-course-report context=studentCourseReportContext onClosePullUp="onClosePullUp" showPullUp=showStudentCourseReport}}
+  {{reports/pull-up/student-course-report context=studentCourseReportContext onClosePullUp="onClosePullUp" showPullUp=showStudentCourseReport}}
 {{/if}}
 
 {{#if isShowStudentMilestoneCourseReport}}
-  {{#reports.pull-up.milestone.milestone-report
+  {{#reports/pull-up/milestone/milestone-report
     showPullUp = isShowStudentMilestoneCourseReport
     title = course.title
   }}
-    {{reports.pull-up.milestone.student-milestone-performance-report
+    {{reports/pull-up/milestone/student-milestone-performance-report
       class = studentClassData
       userId = selectedStudentId
     }}
-  {{/reports.pull-up.milestone.milestone-report}}
+  {{/reports/pull-up/milestone/milestone-report}}
 {{/if}}
 {{#if isLoading}}
   <div class="loading-spinner">

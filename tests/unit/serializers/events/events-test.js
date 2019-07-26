@@ -1,11 +1,15 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Context from 'gooru-web/models/result/context';
 import QuestionResult from 'gooru-web/models/result/question';
 import ResourceResult from 'gooru-web/models/result/resource';
 import AssessmentResult from 'gooru-web/models/result/assessment';
 
-moduleFor('serializer:events/events', 'Unit | Serializer | events/events');
+moduleForComponent(
+  'serializer:events/events',
+  'Unit | Serializer | events/events'
+);
 
 test('serializeResource, for resource result', function(assert) {
   const serializer = this.subject();
@@ -75,9 +79,7 @@ test('serializeResource, for resource result', function(assert) {
   assert.equal(response.payLoadObject.sourceId, 10, 'Wrong source id');
 });
 
-test('serializeResource, for resource result, having submittedAt lower than startedAt', function(
-  assert
-) {
+test('serializeResource, for resource result, having submittedAt lower than startedAt', function(assert) {
   const serializer = this.subject();
 
   let context = Context.create({

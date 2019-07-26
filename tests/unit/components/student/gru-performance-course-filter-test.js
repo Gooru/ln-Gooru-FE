@@ -5,7 +5,8 @@ moduleForComponent(
   'student/gru-performance-course-filter',
   'Unit | Component | student/gru performance course filter',
   {
-    unit: true
+    unit: true,
+    needs: ['service:configuration']
   }
 );
 

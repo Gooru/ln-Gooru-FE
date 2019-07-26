@@ -7,7 +7,7 @@
             <div class="upload-list-container">
                 {{#each parsedSubmissions as |submission|}}
                     <div class="text-center">
-                        {{content.activity.task.submission.gru-submission-line-item submission=submission  removeLineItem=(action 'removeLineItem') updateSubmissionCollection=(action 'updateContent')  }}
+                        {{content/activity/task/submission/gru-submission-line-item submission=submission  removeLineItem=(action 'removeLineItem') updateSubmissionCollection=(action 'updateContent')  }}
                         <span class="countItem text-capitalize">
                             {{submission.taskSubmissionSubType}}
                         </span>

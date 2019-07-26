@@ -53,10 +53,10 @@
         {{#unless (and isAtCollectionLevel reportData)}}
           <div class="data-picker">
             {{#if filteredByAssessment}}
-              {{class.analytics.performance.gru-data-picker
+              {{class/analytics/performance/gru-data-picker
                 onOptionsChange="optionsChange" options=defaultAssessmentOptions max=3}}
             {{else}}
-              {{class.analytics.performance.gru-data-picker
+              {{class/analytics/performance/gru-data-picker
                 onOptionsChange="optionsChange" options=defaultCollectionOptions max=3}}
             {{/if}}
           </div>
@@ -77,7 +77,7 @@
       <div class="row gru-content">
         <div class="col-md-12 col-sm-12 col-xs-12">
           {{#if (and isAtCollectionLevel reportData)}}
-            {{reports.gru-class-assessment-report
+            {{reports/gru-class-assessment-report
               assessment=collection
               students=class.members
               reportData=reportData
@@ -85,7 +85,7 @@
               isRealTime=false
             }}
           {{else}}
-            {{class.analytics.performance.teacher.gru-metrics-table
+            {{class/analytics/performance/teacher/gru-metrics-table
             headers=performanceDataHeaders
             courseId=courseId
             filterBy=filterBy

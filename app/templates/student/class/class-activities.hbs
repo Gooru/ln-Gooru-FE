@@ -45,7 +45,7 @@
         <div class="ca-schedule-contents">
           <div class="dca-content-list-container {{if isToday 'dca-content-list-container-today'}}">
             {{#each classActivities as |classActivity|}}
-              {{class.gru-student-class-activity-panel
+              {{class/gru-student-class-activity-panel
                class=class
                classActivity=classActivity
                studentDcaReport='studentDcaReport'
@@ -82,7 +82,7 @@
                 {{#if activeOfflineActivities}}
                   <div class="oa-active-list">
                     {{#each activeOfflineActivities as |offlineActivity|}}
-                      {{class.gru-student-class-activity-panel
+                      {{class/gru-student-class-activity-panel
                      class=class
                      classActivity=offlineActivity
                      studentDcaReport='studentDcaReport'
@@ -109,7 +109,7 @@
                 {{#if completedOfflineActivities}}
                   <div class="oa-completed-list">
                     {{#each completedOfflineActivities as |offlineActivity|}}
-                      {{class.gru-student-class-activity-panel
+                      {{class/gru-student-class-activity-panel
                         class=class
                         classActivity=offlineActivity
                         studentDcaReport='studentDcaReport'
@@ -152,16 +152,16 @@
 </div>
 
 {{#if showStudentDcaReport}}
-  {{reports.pull-up.dca-student-collection-report showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
+  {{reports/pull-up/dca-student-collection-report showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalCollectionReport}}
-  {{reports.pull-up.dca-student-external-collection-report showPullUp=isShowStudentExternalCollectionReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
+  {{reports/pull-up/dca-student-external-collection-report showPullUp=isShowStudentExternalCollectionReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalAssessmentReport}}
   {{
-    reports.pull-up.dca-student-external-assessment-report
+    reports/pull-up/dca-student-external-assessment-report
     reportData=studentReportContextData
     showPullUp=isShowStudentExternalAssessmentReport
     isStudent=true
@@ -170,7 +170,7 @@
 {{/if}}
 
 {{#if isShowOfflineActivityReport}}
-  {{reports.pull-up.oa-preview
+  {{reports/pull-up/oa-preview
     showPullUp=isShowOfflineActivityReport
     oaId=studentReportContextData.collection.id
     classActivity=studentReportContextData.classActivity
@@ -181,7 +181,7 @@
 {{/if}}
 
 {{#if showOAGrade}}
-  {{activity.offline.grading-report
+  {{activity/offline/grading-report
     showPullUp=showOAGrade
     context=itemToGradeContextData
     itemsToGrade=itemsToGrade

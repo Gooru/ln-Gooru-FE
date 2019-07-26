@@ -1,7 +1,7 @@
 <div class="controller teacher-landing row">
   {{#if isShowNavigatorBanner}}
     <div class="landing-banner">
-      {{teacher.navigator-math-banner updateClass="updateClass"}}
+      {{teacher/navigator-math-banner updateClass="updateClass"}}
     </div>
   {{/if}}
   <div class="teacher-panel">
@@ -49,7 +49,7 @@
 
     <div class="content tab-content">
       <div role="tabpanel active-class" class="tab-pane row {{if showActiveClasses 'active'}}" id="active-classes">
-        {{new-cards.gru-new-class-card
+        {{new-cards/gru-new-class-card
           onJoinClass="joinClass"
           validCode=validCode
           notMember=notMember
@@ -58,7 +58,7 @@
           isLoading=isLoading}}
         {{#if hasClasses}}
           {{#each sortedActiveClasses as |class|}}
-            {{new-cards.gru-teacher-class-card
+            {{new-cards/gru-teacher-class-card
             class=class
             course=class.course
             classStudentCount=myClasses.memberCount
@@ -70,7 +70,7 @@
 
       <div role="tabpanel" class="tab-pane row {{if showArchivedClasses 'active'}}" id="archived-classes">
         {{#each sortedArchivedClassrooms as |class|}}
-          {{cards.gru-class-card
+          {{cards/gru-class-card
             class=class
             course=class.course
             classStudentCount=myClasses.memberCount
@@ -85,17 +85,17 @@
 </div>
 
 {{#if isShowArchiveClassReport}}
-  {{reports.pull-up.course-report context=classReportParams showPullUp=isShowArchiveClassReport onOpenUnitReport="onOpenUnitReport"  onClosePullUp="onClosePullUp"}}
+  {{reports/pull-up/course-report context=classReportParams showPullUp=isShowArchiveClassReport onOpenUnitReport="onOpenUnitReport"  onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowUnitReportPullUp}}
-  {{reports.pull-up.unit-report context=unitReportData onClosePullUp="onClosePullUp" showPullUp=isShowUnitReportPullUp onOpenLessonReport="onOpenLessonReport"}}
+  {{reports/pull-up/unit-report context=unitReportData onClosePullUp="onClosePullUp" showPullUp=isShowUnitReportPullUp onOpenLessonReport="onOpenLessonReport"}}
 {{/if}}
 
 {{#if isShowLessonReportPullUp}}
-  {{reports.pull-up.lesson-report context=lessonReportData  onClosePullUp="onClosePullUp"  showPullUp=isShowLessonReportPullUp teacherCollectionReport="teacherCollectionReport"}}
+  {{reports/pull-up/lesson-report context=lessonReportData  onClosePullUp="onClosePullUp"  showPullUp=isShowLessonReportPullUp teacherCollectionReport="teacherCollectionReport"}}
 {{/if}}
 
 {{#if isShowCollectionReportPullUp}}
-  {{reports.pull-up.collection-report onClosePullUp="onClosePullUp" context=teacherCollectionReportData showPullUp=isShowCollectionReportPullUp isArchivedClass=true}}
+  {{reports/pull-up/collection-report onClosePullUp="onClosePullUp" context=teacherCollectionReportData showPullUp=isShowCollectionReportPullUp isArchivedClass=true}}
 {{/if}}

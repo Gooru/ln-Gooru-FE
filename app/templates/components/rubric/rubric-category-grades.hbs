@@ -34,7 +34,7 @@
         {{#if isReadOnly}}
           <p class="category-comment">{{category.comment}}</p>
         {{else}}
-          {{validation.gru-textarea
+          {{validation/gru-textarea
             model=category
             valuePath='comment'
             maxLength=500

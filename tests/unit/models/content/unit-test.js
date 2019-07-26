@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import Lesson from 'gooru-web/models/content/lesson';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('model:content/unit', 'Unit | Model | content/unit', {
+moduleForComponent('model:content/unit', 'Unit | Model | content/unit', {
   unit: true,
   needs: ['validator:presence']
 });

@@ -1,5 +1,5 @@
 <div class="teacher class">
-  {{teacher.class.gru-class-navbar
+  {{teacher/class/gru-class-navbar
     navTitle= class.title
     class=class
     onItemSelected="selectMenuItem"
@@ -9,14 +9,13 @@
     onOpenOCAReport="onOpenOCAReport"
     performanceSummaryForDCA=performanceSummaryForDCA
    onOpenCompetencyReport="onOpenCompetencyReport"}}
-
   <div class="header clearfix">
     <div class="go-back-container">
       {{#if backUrls}}
         <a {{action 'backToClassReport' }} class="back-to">
-            {{gru-icon name='arrow_back'}}
+          {{gru-icon name='arrow_back'}}
           {{t "common.back-to-report"}}
-          </a>
+        </a>
       {{else}}
         {{#if class.isArchived}}
           {{#link-to 'teacher-home' (query-params showArchivedClasses="true" showActiveClasses="false" ) class="back-to" }}
@@ -31,49 +30,38 @@
       <h1>{{class.title}}</h1>
     </div>
   </div>
-
   {{#if isShowCompetencyReport}}
-    {{#reports.pull-up.competency-report type=(t 'report.competency-report.title') title=(if class.course.subject class.course.subject (t 'report.competency-report.no-subject')) showPullUp=isShowCompetencyReport}}
-      {{reports.pull-up.course-competency-report classData=class onSelectDomain="onSelectDomain"}}
-    {{/reports.pull-up.competency-report}}
+    {{#reports/pull-up/competency-report type=(t 'report.competency-report.title') title=(if class.course.subject class.course.subject (t 'report.competency-report.no-subject')) showPullUp=isShowCompetencyReport}}
+      {{reports/pull-up/course-competency-report classData=class onSelectDomain="onSelectDomain"}}
+    {{/reports/pull-up/competency-report}}
   {{/if}}
-
   {{#if isShowDomainCompetencyReport}}
-    {{#reports.pull-up.competency-report type=(t 'report.domain-report') title=(locale-translation (t (concat 'domain-code.' selectedDomain.domainData.domainCode)) selectedDomain.domainData.domainName) showPullUp=isShowDomainCompetencyReport onClosePullUp="onCloseCompetencyReportPullUp" }}
-      {{reports.pull-up.domain-competency-report domainSet=selectedDomain onSelectCompetency="onSelectCompetency"}}
-    {{/reports.pull-up.competency-report}}
+    {{#reports/pull-up/competency-report type=(t 'report.domain-report') title=(locale-translation (t (concat 'domain-code.' selectedDomain.domainData.domainCode)) selectedDomain.domainData.domainName) showPullUp=isShowDomainCompetencyReport onClosePullUp="onCloseCompetencyReportPullUp" }}
+      {{reports/pull-up/domain-competency-report domainSet=selectedDomain onSelectCompetency="onSelectCompetency"}}
+    {{/reports/pull-up/competency-report}}
   {{/if}}
-
   {{#if isShowCompetencyContentReport}}
-    {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
+    {{#reports/pull-up/competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
       onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
-      {{reports.pull-up.competency-content-report competency=selectedCompetency userId=selectedStudentUserId}}
-    {{/reports.pull-up.competency-report}}
+      {{reports/pull-up/competency-content-report competency=selectedCompetency userId=selectedStudentUserId}}
+    {{/reports/pull-up/competency-report}}
   {{/if}}
-
   <div class="content">
     {{outlet}}
   </div>
-
-
 </div>
 {{#if isShowCourseReport}}
-  {{reports.pull-up.course-report context=courseReportData showPullUp=isShowCourseReport onOpenUnitReport="onOpenUnitReport"  onClosePullUp="onClosePullUp" isShowMilestoneReport = isShowMilestoneReport gradeSubject = gradeSubject}}
+  {{reports/pull-up/course-report context=courseReportData showPullUp=isShowCourseReport onOpenUnitReport="onOpenUnitReport"  onClosePullUp="onClosePullUp" isShowMilestoneReport = isShowMilestoneReport gradeSubject = gradeSubject}}
 {{/if}}
-
 {{#if isShowUnitReportPullUp}}
-  {{reports.pull-up.unit-report context=unitReportData onClosePullUp="onClosePullUp" showPullUp=isShowUnitReportPullUp onOpenLessonReport="onOpenLessonReport" class=class isShowMilestoneReport = isShowMilestoneReport gradeSubject = gradeSubject}}
+  {{reports/pull-up/unit-report context=unitReportData onClosePullUp="onClosePullUp" showPullUp=isShowUnitReportPullUp onOpenLessonReport="onOpenLessonReport" class=class isShowMilestoneReport = isShowMilestoneReport gradeSubject = gradeSubject}}
 {{/if}}
-
 {{#if isShowLessonReportPullUp}}
-  {{reports.pull-up.lesson-report context=lessonReportData  onClosePullUp="onClosePullUp"  showPullUp=isShowLessonReportPullUp teacherCollectionReport="teacherCollectionReport" isShowMilestoneReport = isShowMilestoneReport}}
+  {{reports/pull-up/lesson-report context=lessonReportData  onClosePullUp="onClosePullUp"  showPullUp=isShowLessonReportPullUp teacherCollectionReport="teacherCollectionReport" isShowMilestoneReport = isShowMilestoneReport}}
 {{/if}}
-
 {{#if isShowCollectionReportPullUp}}
-  {{reports.pull-up.collection-report onClosePullUp="onClosePullUp" context=teacherCollectionReportData showPullUp=isShowCollectionReportPullUp isShowMilestoneReport = isShowMilestoneReport gradeSubject = gradeSubject}}
+  {{reports/pull-up/collection-report onClosePullUp="onClosePullUp" context=teacherCollectionReportData showPullUp=isShowCollectionReportPullUp isShowMilestoneReport = isShowMilestoneReport gradeSubject = gradeSubject}}
 {{/if}}
-
-
 {{#if isShowOCASummaryReportPullUp}}
-  {{teacher.offline-class.oca-summary-report-pull-up  classId=class.id performanceSummary=performanceSummaryForDCA onClosePullUp="onClosePullUp"}}
+  {{teacher/offline-class/oca-summary-report-pull-up classId=class.id performanceSummary=performanceSummaryForDCA onClosePullUp="onClosePullUp"}}
 {{/if}}

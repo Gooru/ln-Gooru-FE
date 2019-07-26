@@ -1,9 +1,14 @@
 import { ASSESSMENT_SUB_TYPES } from 'gooru-web/config/config';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('model:map/map-suggestion', 'Unit | Model | map/map-suggestion', {
-  unit: true
-});
+moduleForComponent(
+  'model:map/map-suggestion',
+  'Unit | Model | map/map-suggestion',
+  {
+    unit: true
+  }
+);
 
 test('isPreTest', function(assert) {
   var model = this.subject({

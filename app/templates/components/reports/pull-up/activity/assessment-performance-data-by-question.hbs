@@ -40,7 +40,7 @@
         <div class="question-list-container">
           {{isScoreSubmittedForAllQuestion}}
           {{#each questions as |question seq|}}
-            {{reports.pull-up.activity.add-question-score
+            {{reports/pull-up/activity/add-question-score
               question = question
               seq = seq
               onToggleQuestion = "onToggleQuestion"
@@ -66,7 +66,7 @@
             {{t 'teacher-landing.class.class-activities.input-timespent'}}
           </div>
           <div class="timepicker">
-            {{cards.gru-timepicker-card hour=maxHour minute=maxMinute}}
+            {{cards/gru-timepicker-card hour=maxHour minute=maxMinute}}
           </div>
           <div class="action-container">
             <div class="confirm-btn {{unless isValidMaxTimespent 'disable-event'}}" {{action "onSubmitMaxTimespent"}}>

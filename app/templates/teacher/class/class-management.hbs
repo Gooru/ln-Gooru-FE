@@ -1,6 +1,6 @@
 <div class="controller teacher class class-settings">
-  <div class='sec-col-layout'> {{!-- two col layout ends1 --}}
-    <div class='sec-rows-layout left-panel'> {{!-- two rows in a col layout ends1 --}}
+  <div class='sec-col-layout'>
+    <div class='sec-rows-layout left-panel'>
       <div class="class-layout">
         <div class='class-sec-cont'>
           <div class='class-settings-label'>
@@ -14,7 +14,7 @@
                   <span title="{{t 'teacher-landing.class.class-management-tab.edit'}}" data-toggle="tooltip" class='edit-icon' {{action "editTitle" true}}>{{gru-icon name='edit'}}</span>
                   <div class='sec-head-sep'></div>
                 {{else}}
-                  {{validation.gru-input model=tempClass valuePath='title' didValidate=didValidate onFocusOut="editTitle"
+                  {{validation/gru-input model=tempClass valuePath='title' didValidate=didValidate onFocusOut="editTitle"
                 autofocus=true maxLength=25}}
                 {{/unless}}
                 <div class="min-score-container">
@@ -28,7 +28,7 @@
                       </div>
                     {{else}}
                       <div class="colscoreedit">
-                        {{validation.gru-input-number model=tempClass valuePath='minScore' min=1 max=100 step=1
+                        {{validation/gru-input-number model=tempClass valuePath='minScore' min=1 max=100 step=1
                     didValidate=didValidate onFocusOut="saveScore" onFocusIn="editScore" autofocus=true}}
                       </div>
                     {{/unless}}
@@ -45,7 +45,6 @@
                 </div>
               </div>
             </div>
-
             {{!-- language --}}
             <div class='language-row'>
               <div class='row-label'> {{t
@@ -82,7 +81,7 @@
                 </div>
               </div>
               <div class="add-collaborator-panel">
-                {{teacher.class.gru-add-collaborator
+                {{teacher/class/gru-add-collaborator
                   onAddCollaborators = "onAddCollaborators"
                   onToggleAddCollaborator = "onToggleAddCollaborator"}}
               </div>
@@ -118,7 +117,6 @@
       </div>
     </div>
     {{!-- two col layout ends --}}
-
     <div class='sec-rows-layout right-panel'>
       {{!-- Course Settings container  starts --}}
       <div class="course-settings-layout">
@@ -154,7 +152,6 @@
                   </span>
                 </div>
               </div>
-
               <div class='sub-sec-row'>
                 <div class='field-dropdown-caps-label'> {{t
                     'teacher-landing.class.class-settings.class-settings-sec.framework'}}</div>
@@ -172,7 +169,6 @@
                   }}
                 </div>
               </div>
-
               {{#if (and (and course subject) isPremiumClass) }}
                 <div class='sub-sec-row'>
                   <div class='field-dropdown-caps-label'>
@@ -195,7 +191,6 @@
                     }}
                   </div>
                 </div>
-
                 <div class='sub-sec-row'>
                   <div class='field-dropdown-caps-label'> {{t
                               'teacher-landing.class.class-settings.class-settings-sec.grade-level'}}</div>
@@ -216,8 +211,6 @@
                     btn-group-size=btn-group-size}}
                   </div>
                 </div>
-
-
                 <div class='sub-sec-sep'></div>
                 <div class='route-class-setting sub-sec-row'>
                   <div class='route-class-icon'></div>
@@ -253,7 +246,6 @@
           {{/if }}
         </div>
       </div>
-
       <div class='student-sec-cont'>
         <div class='student-settings-label'> {{t 'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head'}}</div>
         {{#if (gt sortedMembers.length 0)}}

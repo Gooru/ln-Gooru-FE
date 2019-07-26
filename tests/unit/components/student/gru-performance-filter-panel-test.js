@@ -5,7 +5,8 @@ moduleForComponent(
   'student/gru-performance-filter-panel',
   'Unit | Component | student/gru performance filter panel',
   {
-    unit: true
+    unit: true,
+    needs: ['service:configuration']
   }
 );
 

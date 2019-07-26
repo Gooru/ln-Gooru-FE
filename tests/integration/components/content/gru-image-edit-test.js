@@ -1,4 +1,4 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent, test, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent(
@@ -70,9 +70,7 @@ test('Layout with image - edit', function(assert) {
   );
 });
 
-test('Delete photo button will replace currently selected image into default', function(
-  assert
-) {
+skip('Delete photo button will replace currently selected image into default', function(assert) {
   var imageUrl = '/path/image.png';
   this.set('imageUrl', imageUrl);
   this.render(

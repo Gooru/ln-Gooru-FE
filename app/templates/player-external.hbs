@@ -14,13 +14,13 @@
   </div>
   <div class="player-container">
     {{#if (eq resourceType 'collection-external')}}
-      {{player.gru-external-collection-page
+      {{player/gru-external-collection-page
         collection=externalResource
         mapLocation=mapLocation
         source=source
       }}
     {{else}}
-      {{player.gru-external-assessment-page
+      {{player/gru-external-assessment-page
         assessment=externalResource
         mapLocation=mapLocation
         source=source

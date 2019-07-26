@@ -1,5 +1,5 @@
 {{#if isEdition}}
-  {{goal.gru-goal-form goal=tmpGoal isEditView=true onUpdate='update' onCancelEdit='cancelEditGoal' didValidate=didValidate}}
+  {{goal/gru-goal-form goal=tmpGoal isEditView=true onUpdate='update' onCancelEdit='cancelEditGoal' didValidate=didValidate}}
 {{else}}
   <div class="collapse" {{action 'toggle'}}></div>
   <div class="panel">
@@ -16,7 +16,7 @@
       </div>
       {{#if expanded }}
         <div class="reflection">
-            {{{goal.reflection}}}
+          {{{goal.reflection}}}
         </div>
       {{/if}}
     </div>

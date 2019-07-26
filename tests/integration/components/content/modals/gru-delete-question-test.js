@@ -1,4 +1,4 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent, test, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import wait from 'ember-test-helpers/wait';
@@ -57,9 +57,7 @@ test('it renders', function(assert) {
     'Delete Button Should be enable'
   );
 });
-test('it calls a generic delete method and then a callback (if provided) after clicking on the delete button', function(
-  assert
-) {
+test('it calls a generic delete method and then a callback (if provided) after clicking on the delete button', function(assert) {
   assert.expect(3);
 
   const model = {
@@ -87,9 +85,7 @@ test('it calls a generic delete method and then a callback (if provided) after c
   $component.find('.actions .delete').click();
 });
 
-test('it calls a generic delete method and then redirects (if a route is provided) after clicking on the delete button', function(
-  assert
-) {
+test('it calls a generic delete method and then redirects (if a route is provided) after clicking on the delete button', function(assert) {
   assert.expect(4);
 
   const model = {
@@ -128,9 +124,7 @@ test('it calls a generic delete method and then redirects (if a route is provide
   $component.find('.actions .delete').click();
 });
 
-test('show spinner button component while the server response, after clicking on the delete button', function(
-  assert
-) {
+skip('show spinner button component while the server response, after clicking on the delete button', function(assert) {
   assert.expect(4);
 
   const model = {

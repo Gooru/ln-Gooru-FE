@@ -4,7 +4,8 @@ moduleForComponent(
   'library/gru-browse-library',
   'Unit | Component | library/gru browse library',
   {
-    unit: true
+    unit: true,
+    needs: ['service:i18n']
   }
 );
 

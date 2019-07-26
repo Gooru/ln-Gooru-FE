@@ -12,7 +12,7 @@
       <label class="filename-label">
         <span class="required">{{t 'common.file-name'}}</span>
         <small>{{t 'common.valid-extensions' extensions=allValidExtensions}}</small>
-        {{content.gru-file-picker validMimeType=resource.mimeType onSelectFile=(action 'selectFile')}}
+        {{content/gru-file-picker validMimeType=resource.mimeType onSelectFile=(action 'selectFile')}}
         {{#if emptyFileError}}
           <div class="validation">
             <span class="error">{{emptyFileError}}</span>
@@ -22,7 +22,7 @@
 
       <label class="title-label">
         <span class="required">{{t 'common.resource-title'}}</span>
-        {{validation.gru-input model=resource valuePath='title' maxLength=50 didValidate=didValidate}}
+        {{validation/gru-input model=resource valuePath='title' maxLength=50 didValidate=didValidate}}
       </label>
       <label class="type">
         <span class="required">{{t 'common.add-type-resource'}}</span>
@@ -50,7 +50,7 @@
       </div>
       <label class="url-label">
         <span class="required">{{t 'common.enter-url'}}</span>
-        {{validation.gru-input model=resource valuePath='url' didValidate=didValidate onChange="onURLChange"}}
+        {{validation/gru-input model=resource valuePath='url' didValidate=didValidate onChange="onURLChange"}}
         {{#if existingResource}}
           <span class="validation error">{{t 'gru-resource-new.resource-already-exist'}}</span>
           {{#if model}}
@@ -59,7 +59,7 @@
             </div>
           {{/if}}
           <div class="existing-resource-message">
-            {{new-cards.gru-resource-card isExistingResource=true resource=existingResource addEnabled=false}}
+            {{new-cards/gru-resource-card isExistingResource=true resource=existingResource addEnabled=false}}
           </div>
         {{/if}}
       </label>
@@ -67,7 +67,7 @@
       {{#unless existingResource}}
         <label class="title-label">
           <span class="required">{{t 'common.resource-title'}}</span>
-          {{validation.gru-input model=resource valuePath='title' maxLength=50 didValidate=didValidate}}
+          {{validation/gru-input model=resource valuePath='title' maxLength=50 didValidate=didValidate}}
         </label>
         <label class="type">
           <span class="required">{{t 'common.add-type-resource'}}</span>

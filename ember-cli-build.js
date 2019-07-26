@@ -1,4 +1,4 @@
-/*jshint node:true*/
+/* eslint-env node */
 var mergeTrees = require('broccoli-merge-trees');
 var pickFiles = require('broccoli-static-compiler');
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');

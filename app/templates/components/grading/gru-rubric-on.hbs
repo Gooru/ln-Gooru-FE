@@ -27,7 +27,7 @@
       {{#if category.selected}}
         {{#if category.info.levels.length}}
           <div class="category-level">
-            {{validation.gru-select
+            {{validation/gru-select
               options=category.levels
               search="false"
               optionSelected=category.grade.levelObtained
@@ -36,7 +36,7 @@
           </div>
         {{/if}}
         <div class="category-comment">
-          {{validation.gru-textarea
+          {{validation/gru-textarea
             model=category.grade
             valuePath='levelComment'
             maxLength=500
@@ -51,7 +51,7 @@
 <div class="overall-comments">
   <div class="overall-title">{{t 'grading-player.overall-comment'}}</div>
   <div class="overall-lead">{{t 'grading-player.overall-lead'}}</div>
-  {{validation.gru-textarea
+  {{validation/gru-textarea
     model=grade
     valuePath='comment'
     maxLength=500

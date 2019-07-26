@@ -1,13 +1,10 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor(
-  'adapter:class/class',
-  'Unit | Adapter | class/class',
-  {
-    // Specify the other units that are required for this test.
-    // needs: ['serializer:foo']
-  }
-);
+moduleForComponent('adapter:class/class', 'Unit | Adapter | class/class', {
+  // Specify the other units that are required for this test.
+  // needs: ['serializer:foo']
+});
 
 test('urlForQueryRecord querying for classes as student', function(assert) {
   let adapter = this.subject();

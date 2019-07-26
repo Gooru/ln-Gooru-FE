@@ -14,7 +14,7 @@
                 <span>{{t "common.rubric"}}</span>
               </div>
               <div class="tags">
-                {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=3}}
+                {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=3}}
               </div>
             </div>
           </div>
@@ -39,13 +39,13 @@
             <h2>{{t "common.rubric"}}</h2>
           </div>
           {{#if resource.url}}
-            {{content.rubric.gru-preview-url resource=resource}}
+            {{content/rubric/gru-preview-url resource=resource}}
           {{/if}}
         </div>
       </div>
       <div class="category-panel">
         {{#each rubric.categories as |category index|}}
-          {{content.rubric.gru-category category=category index=index preview=true}}
+          {{content/rubric/gru-category category=category index=index preview=true}}
         {{/each}}
       </div>
     </div>

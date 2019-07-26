@@ -1,13 +1,9 @@
 import { test } from 'ember-qunit';
 import moduleForAdapter from 'gooru-web/tests/helpers/module-for-adapter';
 
-moduleForAdapter(
-  'adapter:configuration',
-  'Unit | Adapter | configuration',
-  {
-    // needs: []
-  }
-);
+moduleForAdapter('adapter:configuration', 'Unit | Adapter | configuration', {
+  // needs: []
+});
 
 test('loadConfiguration', function(assert) {
   assert.expect(1);

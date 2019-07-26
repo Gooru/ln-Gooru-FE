@@ -43,9 +43,9 @@
           </div>
           <div class="collection-report-chart">
             {{#if (eq collectionType 'assessment') }}
-              {{charts.report-bar-chart useTimeSpentScore=false assessmentFormat=selectedCollection.format studentChartReportData=studentReportData onClickChart="onClickChart"}}
+              {{charts/report-bar-chart useTimeSpentScore=false assessmentFormat=selectedCollection.format studentChartReportData=studentReportData onClickChart="onClickChart"}}
             {{else}}
-              {{charts.report-bar-chart useTimeSpentScore=true assessmentFormat=selectedCollection.format studentChartReportData=studentReportData onClickChart="onClickChart"}}
+              {{charts/report-bar-chart useTimeSpentScore=true assessmentFormat=selectedCollection.format studentChartReportData=studentReportData onClickChart="onClickChart"}}
             {{/if}}
           </div>
         </div>
@@ -56,7 +56,7 @@
       <div class="report-header-container">
         <div class="taxonomy-details">
           {{#if tags.length}}
-            {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 showDescription=true }}
+            {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=1 showDescription=true }}
           {{/if}}
         </div>
         <div class="report-action-btns">
@@ -91,12 +91,12 @@
       <div class="report-view-container">
         {{#if (eq selectedCollection.format 'assessment-external')}}
           {{#if isGridView}}
-          {{reports.pull-up.dca-teacher-external-assessment-report-grid-view
+          {{reports/pull-up/dca-teacher-external-assessment-report-grid-view
             studentReportData=studentReportData
             selectedCollection=selectedCollection
           }}
           {{else}}
-            {{reports.pull-up.dca-teacher-external-assessment-report-list-view
+            {{reports/pull-up/dca-teacher-external-assessment-report-list-view
               studentReportData=studentReportData
               selectedCollection=selectedCollection
               context=context
@@ -106,7 +106,7 @@
           {{/if}}
         {{else}}
           {{#if isGridView}}
-            {{reports.pull-up.dca-collection-report-gridview
+            {{reports/pull-up/dca-collection-report-gridview
               contents=collection.children
               studentReportData=studentReportData
               selectedCollection=selectedCollection
@@ -114,7 +114,7 @@
               collection=collection
             }}
           {{else}}
-            {{reports.pull-up.dca-collection-report-listview
+            {{reports/pull-up/dca-collection-report-listview
               sortByFirstnameEnabled=sortByFirstnameEnabled
               sortByLastnameEnabled=sortByLastnameEnabled
               sortByScoreEnabled=sortByScoreEnabled
@@ -137,12 +137,12 @@
 </div>
 
 {{#if isShowStudentReport}}
-  {{reports.pull-up.dca-student-collection-report showPullUp=isShowStudentReport reportData=studentReportContextData model=studentReportContextData.lesson isStudent=studentReportContextData.isStudent onClosePullUp="onClosePullUp"}}
+  {{reports/pull-up/dca-student-collection-report showPullUp=isShowStudentReport reportData=studentReportContextData model=studentReportContextData.lesson isStudent=studentReportContextData.isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalAssessmentReport}}
   {{
-    reports.pull-up.dca-student-external-assessment-report
+    reports/pull-up/dca-student-external-assessment-report
     reportData=studentReportContextData
     isStudent=studentReportContextData.isStudent
     onClosePullUp="onClosePullUp"
@@ -151,7 +151,7 @@
 {{/if}}
 
 {{#if isShowQuestionReport}}
-  {{reports.pull-up.dca-question-report showPullUp=isShowQuestionReport  context=studentQuestionReportContextData}}
+  {{reports/pull-up/dca-question-report showPullUp=isShowQuestionReport  context=studentQuestionReportContextData}}
 {{/if}}
 
 {{#if isLoading}}

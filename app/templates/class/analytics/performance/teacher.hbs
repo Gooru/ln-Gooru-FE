@@ -18,7 +18,7 @@
         {{gru-breadcrumb items=breadcrumb onSelectedItem="selectBreadcrumbItem"}}
       </div>
       <div class="teacher-actions col-lg-8 col-md-9 col-sm-7 col-xs-12">
-        {{class.analytics.performance.gru-actions-bar
+        {{class/analytics/performance/gru-actions-bar
           mode='teacher'
           onFilterSelected="selectFilterBy"
           selectedFilterBy=filterBy
@@ -35,19 +35,19 @@
     <div class="row gru-filters col-xs-12">
       <div class="data-picker hidden-xs">
           {{#if (eq filterBy 'assessment')}}
-            {{class.analytics.performance.gru-data-picker
+            {{class/analytics/performance/gru-data-picker
             onOptionsChange="optionsChange" options=optionsTeacher max=3}}
           {{else}}
-            {{class.analytics.performance.gru-data-picker
+            {{class/analytics/performance/gru-data-picker
             onOptionsChange="optionsChange" options=optionsCollectionsTeacher max=3}}
           {{/if}}
       </div>
       <div class="data-picker visible-xs">
         {{#if (eq filterBy 'assessment')}}
-          {{class.analytics.performance.gru-data-picker
+          {{class/analytics/performance/gru-data-picker
           onOptionsChange="optionsChange" options=mobileOptionsTeacher max=1 }}
         {{else}}
-          {{class.analytics.performance.gru-data-picker
+          {{class/analytics/performance/gru-data-picker
           onOptionsChange="optionsChange" options=mobileOptionsCollectionsTeacher max=1 }}
         {{/if}}
       </div>

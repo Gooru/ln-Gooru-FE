@@ -1,7 +1,8 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Goal from 'gooru-web/models/goal/goal';
 
-moduleFor('serializer:goal/goal', 'Unit | Serializer | goal/goal');
+moduleForComponent('serializer:goal/goal', 'Unit | Serializer | goal/goal');
 
 test('serializeCreateGoal', function(assert) {
   const serializer = this.subject();

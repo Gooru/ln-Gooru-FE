@@ -2,13 +2,9 @@ import Ember from 'ember';
 import { test } from 'ember-qunit';
 import moduleForAdapter from 'gooru-web/tests/helpers/module-for-adapter';
 
-moduleForAdapter(
-  'adapter:lookup/lookup',
-  'Unit | Adapter | lookup/lookup',
-  {
-    // needs: []
-  }
-);
+moduleForAdapter('adapter:lookup/lookup', 'Unit | Adapter | lookup/lookup', {
+  // needs: []
+});
 
 test('readAudiences', function(assert) {
   assert.expect(1);

@@ -1,6 +1,6 @@
 <div class="inspect-destination-container">
   <div class="destination-chart-container">
-    {{proficiency.student-inspect-competency-chart
+    {{proficiency/student-inspect-competency-chart
       reDrawChart=reDrawChart
       skylineInitialState=skylineInitialState
       competencyStatus=competencyStatus
@@ -32,7 +32,7 @@
               </div>
               <div class="route0-body" style="display: none;">
                 <div class="route0-accordion-container">
-                  {{class.overview.course-suggestions
+                  {{class/overview/course-suggestions
                   model=route0Contents
                   index=index
                   class=class
@@ -51,7 +51,7 @@
               </div>
         {{else if (and isMilestoneFetch (gt milestones.length 0))}}
             <div class="milestone-course-map-view-route0">
-              {{student.class.milestone-course-map-route0-preview
+              {{student/class/milestone-course-map-route0-preview
                    class=class
                    route0=route0Contents
                    course=course
@@ -62,7 +62,7 @@
           </div>
         {{/if}}
         {{#if (and isRoute0Accepted  isMilestoneFetch (gt milestones.length 0))}}
-          {{student.class.milestone-course-map-route0
+          {{student/class/milestone-course-map-route0
           showPerformance=false
           route0=route0Contents
           locateLastPlayedItem=false
@@ -75,7 +75,7 @@
         <div class="course-map-accordion-container {{if class.milestoneViewApplicable 'milestone'}} {{unless (and isRoute0Pending isRoute0) 'no-route0'}}">
           {{#if class.milestoneViewApplicable}}
             {{#if (and isMilestoneFetch (gt milestones.length 0))}}
-              {{student.class.milestone-course-map
+              {{student/class/milestone-course-map
               class=class
               gradeSubject=subject
               locateLastPlayedItem=false
@@ -87,7 +87,7 @@
             {{/if}}
 
           {{else}}
-            {{student.class.destination.student-destination-course-accordion
+            {{student/class/destination/student-destination-course-accordion
             courseData=course
             classId=classId
             courseId=courseId
@@ -158,7 +158,7 @@
     {{/if}}
     <div class="student-inspect-destination-sm">
       {{#unless (eq type "proficiency") }}
-        {{student.class.student-inspect-destination-xs
+        {{student/class/student-inspect-destination-xs
         type=type
         onMoveNext="onMoveNext"
         courseData=course
