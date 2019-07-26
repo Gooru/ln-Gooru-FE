@@ -25,11 +25,11 @@
   {{/if}}
 </div>
 {{#if showCollectionReport}}
-  {{class.gru-report-panel showPullUp=showCollectionReport reportData=studentReportContextData  model=studentReportContextData.lesson isStudent=isStudent onClosePullUp="onClosePullUp"}}
+  {{class/gru-report-panel showPullUp=showCollectionReport reportData=studentReportContextData  model=studentReportContextData.lesson isStudent=isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if showExternalAssessmentReport}}
-  {{reports.pull-up.student-external-assessment-report
+  {{reports/pull-up/student-external-assessment-report
     showPullUp=showExternalAssessmentReport
     reportData=studentReportContextData
     isStudent=isStudent
@@ -39,16 +39,16 @@
 
 
 {{#if showStudentDcaReport}}
-  {{reports.pull-up.dca-student-collection-report useSession=true showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=isStudent onClosePullUp="onClosePullUp"}}
+  {{reports/pull-up/dca-student-collection-report useSession=true showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalCollectionReport}}
-  {{reports.pull-up.dca-student-external-collection-report showPullUp=isShowStudentExternalCollectionReport reportData=studentReportContextData isStudent=isStudent onClosePullUp="onClosePullUp"}}
+  {{reports/pull-up/dca-student-external-collection-report showPullUp=isShowStudentExternalCollectionReport reportData=studentReportContextData isStudent=isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalAssessmentReport}}
   {{
-      reports.pull-up.dca-student-external-assessment-report
+      reports/pull-up/dca-student-external-assessment-report
       reportData=studentReportContextData
       showPullUp=isShowStudentExternalAssessmentReport
       isStudent=isStudent
@@ -57,7 +57,7 @@
 {{/if}}
 
 {{#if isShowContentPreview}}
-  {{reports.pull-up.gru-collection-preview
+  {{reports/pull-up/gru-collection-preview
       showPullUp=isShowContentPreview
       previewContentId=previewContent.id
       previewContentType=previewContentType

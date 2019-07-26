@@ -78,7 +78,7 @@
       </div>
     </div>
   </div>
-  {{search.search-by-filter
+  {{search/search-by-filter
       isShow=isShow
       activeContentType=activeContentType
       onFilterApply="searchContent"
@@ -122,12 +122,12 @@
     <span class="title">{{t 'common.sub-filter'}}</span>
     <div class="filters">
       {{#if (eq activeContentType 'resource')}}
-        {{ search.gru-resource-options
+        {{ search/gru-resource-options
          selectedOptionTypes=selectedResourceTypes
          onSelectedOption="selectResourceOption"
        }}
       {{else}}
-        {{ search.gru-question-options
+        {{ search/gru-question-options
            selectedOptionTypes=selectedQuestionTypes
            onSelectedOption="selectQuestionOption"
         }}

@@ -1,6 +1,11 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('adapter:rating/rating', 'Unit | Adapter | rating/rating', {});
+moduleForComponent(
+  'adapter:rating/rating',
+  'Unit | Adapter | rating/rating',
+  {}
+);
 
 test('urlForFindRecord querying for a single rating', function(assert) {
   let adapter = this.subject();

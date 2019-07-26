@@ -86,7 +86,7 @@
                   </div>
                 {{/unless}}
                 {{#each classActivity.classActivities as |activity|}}
-                  {{class.gru-class-activity-panel
+                  {{class/gru-class-activity-panel
                     classActivity=activity
                     classId=classId
                     class=class
@@ -147,7 +147,7 @@
                 {{#if activeOfflineActivities}}
                   <div class="oa-active-list">
                     {{#each activeOfflineActivities as |offlineActivity|}}
-                      {{class.gru-class-activity-panel
+                      {{class/gru-class-activity-panel
                     classActivity=offlineActivity
                     classId=classId
                     class=class
@@ -191,7 +191,7 @@
                 {{#if completedOfflineActivities}}
                   <div class="oa-completed-list">
                     {{#each completedOfflineActivities as |offlineActivity|}}
-                      {{class.gru-class-activity-panel
+                      {{class/gru-class-activity-panel
                   classActivity=offlineActivity
                   classId=classId
                   class=class
@@ -257,7 +257,7 @@
         <div class="ca-unscheduled-items">
           <div class="ca-unscheduled-content-items">
             {{#each unScheduledClassActivities as |classActivity|}}
-              {{class.gru-class-activity-panel
+              {{class/gru-class-activity-panel
               classActivity=classActivity
               classId=classId
               members=members
@@ -296,7 +296,7 @@
 </div>
 <!-- Search -->
 {{#if showSearchContentPullup}}
-  {{teacher.class.ca-search-content-pull-up
+  {{teacher/class/ca-search-content-pull-up
     showPullUp=showSearchContentPullup
     addedContentToDCA="addedContentToDCA"
     refreshUnScheduleItem="onRefreshUnScheduleItem"
@@ -309,69 +309,61 @@
     onPreviewContent="onPreviewContent"
   }}
 {{/if}}
-
 <!-- Report -->
 {{#if showDcaCollectionReportPullUp}}
   {{#if (not-eq dcaCollectionReportData.collection.format 'collection-external')}}
-    {{reports.pull-up.dca-collection-report
+    {{reports/pull-up/dca-collection-report
       context=dcaCollectionReportData
       showPullUp=showDcaCollectionReportPullUp}}
   {{else}}
-    {{reports.pull-up.dca-external-collection-report
+    {{reports/pull-up/dca-external-collection-report
       context=dcaCollectionReportData
       showPullUp=showDcaCollectionReportPullUp}}
   {{/if}}
 {{/if}}
-
 <!-- Acitvity Add Performance Data -->
 {{#if isShowAddData}}
-  {{#reports.pull-up.activity.add-performance-data
-    showPullUp=isShowAddData
-    activityDate=selectedActivity.activation_date
-    activityTitle=selectedItem.title
-    onClosePullUp="onClosePerformanceEntry"
-    contentType=addDataContentType
+  {{#reports/pull-up/activity/add-performance-data
+    showPullUp = isShowAddData
+    activityDate = selectedActivity.activation_date
+    activityTitle = selectedItem.title
+    onClosePullUp = "onClosePerformanceEntry"
+    contentType = addDataContentType
   }}
-    {{reports.pull-up.activity.add-student-performance-data
-        collection=selectedItem
-        course=course
-        students=activityMembers
-        activityData=selectedActivity
-        classId=classId
-        classCode=class.code
-        onClosePullUp="onClosePerformanceEntry"
-        contentType=addDataContentType
-      }}
-  {{/reports.pull-up.activity.add-performance-data}}
+    {{reports/pull-up/activity/add-student-performance-data
+      collection=selectedItem
+      course=course
+      students=activityMembers
+      activityData=selectedActivity
+      classId=classId
+      onClosePullUp = "onClosePerformanceEntry"
+      contentType = addDataContentType
+    }}
+  {{/reports/pull-up/activity/add-performance-data}}
 {{/if}}
-
 <!-- Summary Report -->
 {{#if isShowOCASummaryReportPullUp}}
-  {{teacher.offline-class.oca-summary-report-pull-up
+  {{teacher/offline-class/oca-summary-report-pull-up
     classId=class.id
     performanceSummary=performanceSummaryForDCA
     onClosePullUp="onClosePullUp"}}
 {{/if}}
-
 <!-- Preview -->
-
 {{#if isShowContentPreview}}
-  {{reports.pull-up.gru-collection-preview
+  {{reports/pull-up/gru-collection-preview
     showPullUp=isShowContentPreview
     previewContentId=previewContent.id
     previewContentType=previewContentType}}
 {{/if}}
-
 {{#if showFRQuestionGrade}}
-  {{grade.pull-up.free-response-question-grade
+  {{grade/pull-up/free-response-question-grade
     isDCAContext=true
     showPullUp=showFRQuestionGrade
     context=itemToGradeContextData
     itemsToGrade=itemsToGrade}}
 {{/if}}
-
 {{#if showOAGrade}}
-  {{activity.offline.grading-report
+  {{activity/offline/grading-report
     showPullUp=showOAGrade
     context=itemToGradeContextData
     itemsToGrade=itemsToGrade
@@ -380,7 +372,7 @@
   }}
 {{/if}}
 {{#if isShowOfflineActivityPreview}}
-  {{reports.pull-up.oa-preview
+  {{reports/pull-up/oa-preview
     showPullUp=isShowOfflineActivityPreview
     oaId=previewContent.id
     classId=classId

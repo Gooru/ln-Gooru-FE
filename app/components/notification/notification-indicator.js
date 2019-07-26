@@ -264,13 +264,13 @@ export default Ember.Component.extend({
       notificationlocation: notificationAccesor.global
     };
 
-    const component = this;
-    component.getNotifications(component.getDefaultFilter()); // Initial call, all the rest calls would be made with the setinterval
+    // const component = this;
+    // component.getNotifications(component.getDefaultFilter()); // Initial call, all the rest calls would be made with the setinterval
   },
 
   didReceiveAttrs() {
-    const component = this;
-    component.getNotifications(component.getDefaultFilter()); // Refresh
+    // const component = this;
+    // component.getNotifications(component.getDefaultFilter()); // Refresh
   },
   // -------------------------------------------------------------------------
   // Location based setting [starts]

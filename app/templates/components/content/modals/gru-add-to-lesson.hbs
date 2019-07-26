@@ -18,7 +18,7 @@
     </span>
     <div class="search">
       {{gru-icon name='search'}}
-      {{validation.gru-input model=searchObject valuePath='term' placeholder=(t "common.search-placeholder") hasClearButton=true onEnter=(action "updateContent" value=searchObject.term) onClearContent='clearContent'}}
+      {{validation/gru-input model=searchObject valuePath='term' placeholder=(t "common.search-placeholder") hasClearButton=true onEnter=(action "updateContent" value=searchObject.term) onClearContent='clearContent'}}
     </div>
   </div>
   <div class="info">
@@ -34,7 +34,7 @@
   <div class="list">
     {{#each collections as |collection|}}
       <div class="{{collection.id}} collection" {{action "selectCollection" collection}}>
-        {{cards.gru-collection-card
+        {{cards/gru-collection-card
         collection=collection
         isSmall=true}}
       </div>

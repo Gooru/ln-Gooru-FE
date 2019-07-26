@@ -1,6 +1,7 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor(
+moduleForComponent(
   'adapter:collection/collection',
   'Unit | Adapter | collection/collection',
   {}
@@ -19,9 +20,7 @@ test('urlForFindRecord querying for a single collection', function(assert) {
   );
 });
 
-test('urlForQueryRecord querying for collections that belong to a specific lesson, unit, course and class', function(
-  assert
-) {
+test('urlForQueryRecord querying for collections that belong to a specific lesson, unit, course and class', function(assert) {
   let adapter = this.subject();
 
   const query = {

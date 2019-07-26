@@ -43,11 +43,13 @@ export default Ember.Component.extend({
    * Filter course list by course name
    */
   searchCourse: function() {
-    var searchTerm = $('.search-box').val().toLowerCase();
+    var searchTerm = $('.search-box')
+      .val()
+      .toLowerCase();
 
     $('.gru-performance-courses .item').each(function() {
       if (
-        $(this).filter(`[data-search-term *= ${searchTerm}]`).length > 0 ||
+        $(this).filter(`[data-search-term *= '${searchTerm}']`).length > 0 ||
         searchTerm.length < 1
       ) {
         $(this).show();
@@ -62,7 +64,12 @@ export default Ember.Component.extend({
   setDataSearchTerms: function() {
     const component = this;
     $('.gru-performance-courses .item').each(function() {
-      $(this).attr('data-search-term', $(this).text().toLowerCase());
+      $(this).attr(
+        'data-search-term',
+        $(this)
+          .text()
+          .toLowerCase()
+      );
     });
     $('.search-box').on('keyup', function() {
       component.searchCourse();

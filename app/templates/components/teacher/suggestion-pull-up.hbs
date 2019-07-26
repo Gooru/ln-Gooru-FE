@@ -47,19 +47,19 @@
     {{#if (gt searchResults.length 0)}}
       <div class="search-list">
         {{#each searchResults as |result|}}
-          {{cards.suggest-collection-card collection=result contentType=activeContentType onSuggestCollection="onSuggestCollection"}}
+          {{cards/suggest-collection-card collection=result contentType=activeContentType onSuggestCollection="onSuggestCollection"}}
         {{/each}}
       </div>
     {{else}}
       {{#unless isLoading}}
-        {{cards.no-suggest-result-found isFromSearch=isFromSearch}}
+        {{cards/no-suggest-result-found isFromSearch=isFromSearch}}
       {{/unless}}
     {{/if}}
   </div>
 </div>
 
 {{#if showSuggestConfirmation}}
-  {{cards.suggest-confirmation
+  {{cards/suggest-confirmation
    collection=suggestSelectedCollection
    students=students
    contentType=activeContentType

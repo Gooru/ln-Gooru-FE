@@ -32,7 +32,7 @@
   <div class="list">
     {{#each collectionsList as |collection|}}
       <div class="{{collection.id}} collection" {{action "selectCollection" collection}}>
-        {{cards.gru-collection-card
+        {{cards/gru-collection-card
         collection=collection
         isSmall=true}}
       </div>

@@ -8,10 +8,10 @@
 </div>
 <div class="body">
     <div class="question-info {{if anonymous 'anonymous'}}">
-       {{reports.class-assessment.gru-question-information question=selectedQuestion anonymous=anonymous}}
+       {{reports/class-assessment/gru-question-information question=selectedQuestion anonymous=anonymous}}
     </div>
     <div class="question-metrics">
-        {{reports.class-assessment.gru-question-performance
+        {{reports/class-assessment/gru-question-performance
           question=selectedQuestion
           reportData=reportData
           anonymous=anonymous

@@ -87,7 +87,7 @@
       <div class="oa-image-container" style="background-image: url({{offlineActivity.thumbnailUrl}})">
         <div class="oa-standards">
           {{#if taxonomyTags.length}}
-            {{taxonomy.gru-taxonomy-tag-list
+            {{taxonomy/gru-taxonomy-tag-list
               tags=taxonomyTags
               tagsVisible=1
               isInCard=true}}
@@ -130,13 +130,13 @@
       </div>
     </div>
     <div class="oa-references-container">
-      {{player.offline-activity.gru-offline-activity-references
+      {{player/offline-activity/gru-offline-activity-references
           offlineActivity=offlineActivity
         }}
     </div>
     <div class="oa-task-container">
       {{#each offlineActivity.tasks as |task|}}
-        {{player.offline-activity.gru-offline-activity-task-submission
+        {{player/offline-activity/gru-offline-activity-task-submission
           task=task
           classId=classId
           showSubmissions=isReportView
@@ -167,7 +167,7 @@
           </div>
           {{#if studentRubric.categories}}
             <div class="student-grading-panel">
-              {{rubric.rubric-category-grades
+              {{rubric/rubric-category-grades
               isReadOnly=true
               categories=studentRubric.categories
             }}
@@ -202,7 +202,7 @@
           </div>
           {{#if teacherRubric.categories}}
             <div class="teacher-grading-panel">
-              {{rubric.rubric-category-grades
+              {{rubric/rubric-category-grades
               isReadOnly=true
               categories=teacherRubric.categories
             }}

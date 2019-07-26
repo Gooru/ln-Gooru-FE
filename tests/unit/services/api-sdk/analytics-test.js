@@ -7,7 +7,14 @@ moduleForService(
   'Unit | Service | api-sdk/analytics',
   {
     // Specify the other units that are required for this test.
-    // needs: ['serializer:foo']
+    needs: [
+      'service:api-sdk/analytics',
+      'service:api-sdk/course',
+      'service:api-sdk/unit',
+      'service:api-sdk/lesson',
+      'service:api-sdk/assessment',
+      'service:api-sdk/collection'
+    ]
   }
 );
 

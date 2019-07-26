@@ -39,7 +39,7 @@
       <div class="cards-container">
         {{#each courses as |course|}}
           <div class="course-card-container">
-            {{activity.course-card course=course isHideCoursePerf=true onAddCourse="onAddCourse" onRemixCourse="onRemixCourse"}}
+            {{activity/course-card course=course isHideCoursePerf=true onAddCourse="onAddCourse" onRemixCourse="onRemixCourse"}}
           </div>
         {{/each}}
       </div>

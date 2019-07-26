@@ -27,7 +27,7 @@
     <div class="external-assessment-container">
       <div class="taxonomy-container">
         {{#if tags.length}}
-          {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=4 showDescription=true }}
+          {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=4 showDescription=true }}
         {{/if}}
       </div>
       <div class="reference">{{t 'report.external-assessment-report.reference'}} <a target="_blank" href="{{externalAssessment.url}}" class="link">here</a></div>

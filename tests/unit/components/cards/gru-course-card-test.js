@@ -1,12 +1,13 @@
 import Ember from 'ember';
-import { moduleForComponent, test } from 'ember-qunit';
+import { test, moduleForComponent } from 'ember-qunit';
 import Course from 'gooru-web/models/content/course';
 
 moduleForComponent(
   'cards/gru-course-card',
   'Unit | Component | cards/gru course card',
   {
-    integration: false
+    integration: false,
+    needs: ['service:session']
   }
 );
 

@@ -10,10 +10,10 @@
         </button>
       </div>
     {{/if}}
-    {{reports.gru-assessment-report assessmentResult=assessmentResult showReactionBar=showReactionBar}}
+    {{reports/gru-assessment-report assessmentResult=assessmentResult showReactionBar=showReactionBar}}
   {{else}}
     {{#if collection.hasResources }}
-      {{player.gru-navigation
+      {{player/gru-navigation
       collection=collection
       submitted=assessmentResult.submitted
       ratingScore=resourceResult.reaction
@@ -27,7 +27,7 @@
       collapsedMenu=collapsedMenu}}
 
       {{#if resource}}
-        {{player.gru-viewer
+        {{player/gru-viewer
         submitted=assessmentResult.submitted
         resource=resource
         resourceResult=resourceResult
@@ -49,7 +49,7 @@
 </div>
 {{#unless showReport}}
   <div class="aside">
-    {{player.gru-navigator
+    {{player/gru-navigator
     lessonTitle=lessonTitle
     resourceResults=resourcesPlayer
     collection=collection

@@ -2,6 +2,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import T from 'gooru-web/tests/helpers/assert';
 import wait from 'ember-test-helpers/wait';
+import Ember from 'ember';
 
 moduleForComponent(
   'gru-icon-popover',
@@ -10,6 +11,7 @@ moduleForComponent(
     integration: true,
     beforeEach: function() {
       this.container.lookup('service:i18n').set('locale', 'en');
+      this.register('service:popover', Ember.Service.extend({}));
     }
   }
 );

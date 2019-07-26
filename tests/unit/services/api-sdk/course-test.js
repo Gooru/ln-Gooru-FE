@@ -3,7 +3,12 @@ import { test } from 'ember-qunit';
 import moduleForService from 'gooru-web/tests/helpers/module-for-service';
 
 moduleForService('service:api-sdk/course', 'Unit | Service | api-sdk/course', {
-  needs: ['model:user/user']
+  needs: [
+    'model:user/user',
+    'service:api-sdk/lesson',
+    'service:api-sdk/unit',
+    'service:api-sdk/profile'
+  ]
 });
 
 test('createCourse', function(assert) {

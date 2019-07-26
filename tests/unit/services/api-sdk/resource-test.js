@@ -6,7 +6,9 @@ import ResourceModel from 'gooru-web/models/content/resource';
 moduleForService(
   'service:api-sdk/resource',
   'Unit | Service | api-sdk/resource',
-  {}
+  {
+    needs: ['service:api-sdk/collection', 'service:api-sdk/assessment']
+  }
 );
 
 test('createResource', function(assert) {

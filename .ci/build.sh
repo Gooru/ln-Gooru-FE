@@ -42,10 +42,10 @@ info "Running eslint..."
 silent grunt bamboo-eslint
 
 info "Running tests..."
-silent grunt bamboo-test
+grunt bamboo-test
 
 info "Building..."
-silent grunt build:prod-bamboo
+grunt build:prod-bamboo
 echo $VERSION > gooru-web/version.html
 
 

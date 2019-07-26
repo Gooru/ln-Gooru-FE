@@ -1,6 +1,6 @@
 {{#if course.id}}
   <div class="controller student course-map">
-    {{class.overview.gru-accordion-course
+    {{class/overview/gru-accordion-course
       currentCourse=course
       onSelectResource="playResource"
       onStudyNow="studyPlayer"
@@ -19,5 +19,5 @@
 {{/if}}
 
 {{#if showCourseReport}}
-  {{reports.pull-up.student-course-report context=studentCourseReportContext showPullUp=showCourseReport}}
+  {{reports/pull-up/student-course-report context=studentCourseReportContext showPullUp=showCourseReport}}
 {{/if}}

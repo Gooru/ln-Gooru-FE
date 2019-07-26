@@ -179,7 +179,7 @@
 </div>
 {{#if competencySummary}}
   <div class="competency-summary-graph">
-    {{charts.competencies-progress-graph
+    {{charts/competencies-progress-graph
       totalCount = competencySummary.totalCompetencies
       masteredCount = competencySummary.completedCompetencies
       inProgressCount = competencySummary.inprogressCompetencies
@@ -194,8 +194,8 @@
 {{/if}}
 
 {{#if isShowMilestoneReport}}
-  {{#reports.pull-up.milestone.milestone-report showPullUp=isShowMilestoneReport title=( concat gradeSubject.title ' - ' selectedMilestone.grade_name) }}
-    {{reports.pull-up.milestone.student-milestone-summary-report
+  {{#reports/pull-up/milestone/milestone-report showPullUp=isShowMilestoneReport title=( concat gradeSubject.title ' - ' selectedMilestone.grade_name) }}
+    {{reports/pull-up/milestone/student-milestone-summary-report
       activeMilestone = selectedMilestone
       class = class
       milestones = milestones
@@ -203,12 +203,12 @@
       rescopedContents = rescopedContents
       userId = userId
     }}
-  {{/reports.pull-up.milestone.milestone-report}}
+  {{/reports/pull-up/milestone/milestone-report}}
 {{/if}}
 
 {{#if isShowStudentCollectionReport}}
   {{
-    class.gru-report-panel
+    class/gru-report-panel
     showPullUp=isShowStudentCollectionReport
     reportData=studentCollectionReportContext
     model=studentCollectionReportContext.lesson
@@ -218,7 +218,7 @@
 
 {{#if isShowStudentExternalAssessmentReport}}
   {{
-    reports.pull-up.student-external-assessment-report
+    reports/pull-up/student-external-assessment-report
     showPullUp=isShowStudentExternalAssessmentReport
     reportData=studentCollectionReportContext
     showPullUp=isShowStudentExternalAssessmentReport

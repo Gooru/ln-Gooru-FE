@@ -1,5 +1,5 @@
 <div class="panel-container">
-  {{ library.library-search-header
+  {{ library/library-search-header
      selectedFilters=selectedFilters
      activeContentType=activeContentType
      library=library
@@ -17,7 +17,7 @@
   {{#if isLoading}}
     {{three-bounce-spinner}}
   {{else}}
-    {{library.library-content-result-grid-view
+    {{library/library-content-result-grid-view
        paginateNext="doPaginate"
        isTeacher=isTeacher
        activeClasses=activeClasses

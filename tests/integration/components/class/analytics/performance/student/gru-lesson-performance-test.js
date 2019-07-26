@@ -69,7 +69,7 @@ test('Test for started lesson performance', function(assert) {
     assert.ok(true, 'This should be called 1 time');
   });
   assert.expect(12);
-  this.render(hbs`{{class.analytics.performance.student.gru-lesson-performance
+  this.render(hbs`{{class/analytics/performance/student/gru-lesson-performance
     lesson=lesson
     localIndex=index
     index=index
@@ -213,7 +213,7 @@ test('Test no show score for lesson performance', function(assert) {
     assert.ok(true, 'This should be called 1 time');
   });
   assert.expect(9);
-  this.render(hbs`{{class.analytics.performance.student.gru-lesson-performance
+  this.render(hbs`{{class/analytics/performance/student/gru-lesson-performance
     lesson=lesson
     localIndex=index
     index=index
@@ -338,7 +338,7 @@ test('Test for not started lesson performance', function(assert) {
 
   assert.expect(9);
 
-  this.render(hbs`{{class.analytics.performance.student.gru-lesson-performance
+  this.render(hbs`{{class/analytics/performance/student/gru-lesson-performance
     lesson=lesson
     localIndex=index
     index=index
@@ -415,7 +415,7 @@ test('Test lesson performance with no collections', function(assert) {
   });
 
   assert.expect(6);
-  this.render(hbs`{{class.analytics.performance.student.gru-lesson-performance
+  this.render(hbs`{{class/analytics/performance/student/gru-lesson-performance
     lesson=lesson
     localIndex=index
     index=index

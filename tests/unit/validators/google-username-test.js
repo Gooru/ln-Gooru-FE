@@ -1,9 +1,14 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('validator:google-username', 'Unit | Validator | google-username', {
-  needs: ['validator:messages']
-});
+moduleForComponent(
+  'validator:google-username',
+  'Unit | Validator | google-username',
+  {
+    needs: ['validator:messages', 'service:i18n', 'service:api-sdk/profile']
+  }
+);
 
 test('Username is not used in a google account', function(assert) {
   assert.expect(2);

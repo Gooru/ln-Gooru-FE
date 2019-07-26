@@ -34,7 +34,7 @@
             </div>
             <div class="route0-body" style="display: none;">
               <div class="route0-accordion-container">
-                {{class.overview.course-suggestions
+                {{class/overview/course-suggestions
                   model=route0Contents
                   index=index
                   class=class
@@ -53,7 +53,7 @@
             </div>
       {{else if (and isMilestoneFetch (gt milestones.length 0))}}
         <div class="milestone-course-map-view-route0">
-          {{student.class.milestone-course-map-route0-preview
+          {{student/class/milestone-course-map-route0-preview
              class=class
              route0=route0Contents
              course=course
@@ -65,7 +65,7 @@
       {{/if}}
       {{#unless class.milestoneViewApplicable}}
         <div class="course-map-accordion-container {{unless (and isRoute0Pending isRoute0) 'no-route0'}}">
-          {{student.class.destination.student-destination-course-accordion
+          {{student/class/destination/student-destination-course-accordion
           courseData=courseData
           classId=classId
           courseId=courseId
@@ -74,14 +74,14 @@
         </div>
     {{else}}
       {{#if ( and isRoute0Accepted  isMilestoneFetch (gt milestones.length 0))}}
-        {{student.class.milestone-course-map-route0
+        {{student/class/milestone-course-map-route0
         showPerformance=false
         locateLastPlayedItem=false
         class=class
         }}
       {{/if}}
       {{#if (and isMilestoneFetch (gt milestones.length 0))}}
-        {{student.class.milestone-course-map
+        {{student/class/milestone-course-map
         class=class
         gradeSubject=subject
         locateLastPlayedItem=false

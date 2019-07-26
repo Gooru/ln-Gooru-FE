@@ -38,7 +38,7 @@
               <div class="collection-performance-timespent">{{format-time selectedCollection.performance.timeSpent}}</div>
           </div>
           <div class="collection-report-chart">
-              {{charts.report-bar-chart useTimeSpentScore=true assessmentFormat=selectedCollection.format studentChartReportData=studentReportData onClickChart="onClickChart"}}
+              {{charts/report-bar-chart useTimeSpentScore=true assessmentFormat=selectedCollection.format studentChartReportData=studentReportData onClickChart="onClickChart"}}
           </div>
         </div>
       </div>
@@ -48,7 +48,7 @@
       <div class="report-header-container">
         <div class="taxonomy-details">
           {{#if tags.length}}
-            {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 showDescription=true }}
+            {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=1 showDescription=true }}
           {{/if}}
         </div>
         <div class="report-action-btns">
@@ -83,12 +83,12 @@
       <div class="report-view-container">
         {{#if (eq selectedCollection.format 'collection-external')}}
           {{#if isGridView}}
-          {{reports.pull-up.dca-teacher-external-collection-report-grid-view
+          {{reports/pull-up/dca-teacher-external-collection-report-grid-view
             studentReportData=studentReportData
             selectedCollection=selectedCollection
           }}
           {{else}}
-            {{reports.pull-up.dca-teacher-external-collection-report-list-view
+            {{reports/pull-up/dca-teacher-external-collection-report-list-view
               studentReportData=studentReportData
               selectedCollection=selectedCollection
               context=context
@@ -103,12 +103,12 @@
 </div>
 
 {{#if isShowStudentReport}}
-  {{reports.pull-up.dca-student-external-collection-report showPullUp=isShowStudentReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
+  {{reports/pull-up/dca-student-external-collection-report showPullUp=isShowStudentReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 
 {{#if isShowQuestionReport}}
-  {{reports.pull-up.dca-question-report showPullUp=isShowQuestionReport  context=studentQuestionReportContextData}}
+  {{reports/pull-up/dca-question-report showPullUp=isShowQuestionReport  context=studentQuestionReportContextData}}
 {{/if}}
 
 {{#if isLoading}}

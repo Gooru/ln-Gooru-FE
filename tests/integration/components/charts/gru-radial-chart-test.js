@@ -25,7 +25,7 @@ test('Information Chart Layout', function(assert) {
   this.set('completePercent', completePercent);
 
   this.render(
-    hbs`{{charts.gru-radial-chart minValue=minValue maxValue=maxValue completePercent=completePercent}}`
+    hbs`{{charts/gru-radial-chart minValue=minValue maxValue=maxValue completePercent=completePercent}}`
   );
 
   const $component = this.$(); //component dom element

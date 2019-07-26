@@ -1,6 +1,6 @@
 <div class="student performance container-fluid">
   <div class="row">
-    {{student.gru-performance-filter-panel
+    {{student/gru-performance-filter-panel
       courses=courses
       selectedCourse=course
       filterCriteria=filterCriteria
@@ -33,7 +33,7 @@
           {{grading-scale-legend}}
         </div>
       </div>
-      {{student.class.analytics.gru-performance-table
+      {{student/class/analytics/gru-performance-table
         metrics=metrics
         contentTitle=contentTitle
         assessments=collections

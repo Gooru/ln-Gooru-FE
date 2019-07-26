@@ -7,7 +7,7 @@
       <div class="featured-courses-container">
         {{#each featuredCourses as |course|}}
           <div class="featured-course">
-            {{cards.gru-add-course-card course=course onAddCourse="onAddCourse" onRemixCourse="onRemixCourse"}}
+            {{cards/gru-add-course-card course=course onAddCourse="onAddCourse" onRemixCourse="onRemixCourse"}}
           </div>
         {{/each}}
       </div>
@@ -30,7 +30,7 @@
 
 
 {{#if isShowSearchCoursePullUp}}
-  {{teacher.class.course-search-pull-up
+  {{teacher/class/course-search-pull-up
     showPullUp=isShowSearchCoursePullUp
     courses=libraryCourses
     contentCatalogs=contentCatalogs

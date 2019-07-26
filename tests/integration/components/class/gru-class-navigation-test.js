@@ -36,7 +36,7 @@ test('Class Navigation', function(assert) {
   });
 
   this.render(
-    hbs`{{class.gru-class-navigation class=class selectedMenuItem='info' onItemSelected='itemSelected'}}`
+    hbs`{{class/gru-class-navigation class=class selectedMenuItem='info' onItemSelected='itemSelected'}}`
   );
 
   var $component = this.$(); //component dom element
@@ -96,7 +96,7 @@ test('Layout when a menu Item is selected', function(assert) {
   });
 
   this.render(
-    hbs`{{class.gru-class-navigation onItemSelected='itemSelected'}}`
+    hbs`{{class/gru-class-navigation onItemSelected='itemSelected'}}`
   );
   var $navigation = this.$(); //component dom element
   const $infoMenuItem = $navigation.find('.class-menu .class-menu-item.info');

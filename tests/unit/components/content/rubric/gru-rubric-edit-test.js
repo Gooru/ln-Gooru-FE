@@ -5,7 +5,14 @@ moduleForComponent(
   'content/rubric/gru-rubric-edit',
   'Unit | Component | content/rubric/gru rubric edit',
   {
-    unit: true
+    unit: true,
+    needs: [
+      'service:session',
+      'service:i18n',
+      'service:notifications',
+      'service:api-sdk/media',
+      'service:api-sdk/rubric'
+    ]
   }
 );
 

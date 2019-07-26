@@ -1,4 +1,5 @@
-import { moduleForComponent, test } from 'ember-qunit';
+//import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test, moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
 import Ember from 'ember';
@@ -11,6 +12,10 @@ moduleForComponent(
   {
     integration: true,
     beforeEach: function() {
+      this.register(
+        'service:api-sdk/course-location',
+        Ember.Service.extend({})
+      );
       this.i18n = this.container.lookup('service:i18n');
       this.i18n.set('locale', 'en');
       this.registry.register('helper:t', tHelper);
