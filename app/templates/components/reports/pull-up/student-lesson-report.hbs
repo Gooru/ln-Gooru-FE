@@ -129,3 +129,14 @@
     onClosePullUp="onClosePullUp"
   }}
 {{/if}}
+
+{{#if isShowStudentOfflineActivityReport}}
+  {{reports.pull-up.oa-preview
+    showPullUp=isShowStudentOfflineActivityReport
+    oaId=studentCollectionReportContext.collection.id
+    isReportView=true
+    classId=classId
+    isCmReport = true
+    reportContext = studentCollectionReportContext
+  }}
+{{/if}}

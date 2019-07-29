@@ -71,8 +71,12 @@
     </table>
   </div>
   <div class="external-assessment-link">
-    <div class="note">{{t 'report.external-assessment-report.note'}}</div>
-    <div>This external assessment can be accessed <a class="link" target="_blank" href="{{selectedCollection.url}}">here</a></div>
+    {{#if isOfflineActivityReport}}
+      <div class="note">{{t 'report.offline-activity-report.note'}}</div>
+    {{else}}
+      <div class="note">{{t 'report.external-assessment-report.note'}}</div>
+      <div>This external assessment can be accessed <a class="link" target="_blank" href="{{selectedCollection.url}}">here</a></div>
+    {{/if}}
   </div>
 </div>
 

@@ -37,8 +37,8 @@
           {{collection.title}}
         </div>
         {{#if collection.performance}}
-          <div class="collection-performance-container {{collection.format}} {{if collection.isAssessment (concat 'grade-range-' (grade-range collection.performance.scoreInPercentage))}}" {{action "onOpenCollectionReport" collection}}>
-            {{#if collection.isAssessment}}
+          <div class="collection-performance-container {{collection.format}} {{if (or collection.isAssessment collection.isOfflineActivity) (concat 'grade-range-' (grade-range collection.performance.scoreInPercentage))}}" {{action "onOpenCollectionReport" collection}}>
+            {{#if (or collection.isAssessment collection.isOfflineActivity)}}
               {{collection.performance.scoreInPercentage}}%
             {{else}}
               {{format-time collection.performance.timeSpent}}
@@ -72,5 +72,16 @@
     reportData=collectionReportContext
     showPullUp=isShowExternalAssessmentReport
     isStudent=isStudent
+  }}
+{{/if}}
+
+{{#if isShowStudentOfflineActivityReport}}
+  {{reports.pull-up.oa-preview
+    showPullUp=isShowStudentOfflineActivityReport
+    oaId=collectionReportContext.collection.id
+    isReportView=true
+    classId=classId
+    isCmReport = true
+    reportContext = collectionReportContext
   }}
 {{/if}}

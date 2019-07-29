@@ -30,7 +30,6 @@
         display: inline-grid;
         width: 100%;
         align-items: center;
-        cursor: pointer;
         position: relative;
         grid-template-columns: 1fr 60px;
         height: 50px;
@@ -85,7 +84,6 @@
           width: 100%;
           grid-template-columns: 70px 1fr 50px;
           align-items: center;
-          cursor: pointer;
           position: relative;
 
           &.active {
@@ -127,6 +125,7 @@
             justify-self: center;
             position: relative;
             z-index: 1;
+            cursor: pointer;
 
             i {
               font-size: 16px;
@@ -137,6 +136,7 @@
           }
 
           .milestone-title {
+            cursor: pointer;
             p {
               margin: 0;
               font-family: "Lato";
@@ -156,6 +156,7 @@
             align-self: center;
             height: 26px;
             text-align: center;
+            cursor: pointer;
 
             i {
               font-size: 30px;
@@ -173,12 +174,14 @@
           font-size: 16px;
           font-weight: bold;
           border-bottom: 1px solid #fff;
+          cursor: pointer;
 
           &.grade-range-not-started {
             background: transparent;
             border-bottom: none;
             color: #666;
             background: #ccc;
+            pointer-events: none;
           }
         }
       }
@@ -210,6 +213,7 @@
           align-items: center;
           justify-content: center;
           position: relative;
+          cursor: pointer;
 
           i {
             position: relative;
@@ -351,7 +355,6 @@
             grid-template-columns: 70px 1fr 60px;
             align-items: center;
             border-bottom: 1px solid #e3e5ea;
-            cursor: pointer;
 
             &.has-activity {
               .lesson-icon-container {
@@ -370,6 +373,7 @@
             }
 
             .domain-lesson-title {
+              cursor: pointer;
               p {
                 margin: 0;
                 font-family: "Lato";
@@ -402,12 +406,14 @@
               font-size: 16px;
               font-weight: bold;
               color: #fff;
+              cursor: pointer;
 
               &.grade-range-not-started {
                 background: transparent;
                 color: #666;
                 background: #ccc;
                 border-bottom: 1px solid $white;
+                pointer-events: none;
               }
             }
           }
@@ -774,6 +780,7 @@
                   &.grade-range-not-started {
                     background: transparent;
                     color: #666;
+                    pointer-events: none;
                   }
 
                   &.format-collection,

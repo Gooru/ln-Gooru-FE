@@ -277,8 +277,14 @@ export default Ember.Component.extend({
         collection
       };
       let reportType = collection.get('format');
-      if (reportType === 'assessment-external') {
+      if (reportType === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
         component.set('isShowStudentExternalAssessmentReport', true);
+      } else if (reportType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        studentCollectionReportContext.performance = {
+          score: collection.get('performance.scoreInPercentage'),
+          timeSpent: collection.get('performance.timeSpent')
+        };
+        component.set('isShowStudentOfflineActivityReport', true);
       } else {
         component.set('isShowStudentCollectionReport', true);
       }
@@ -688,6 +694,7 @@ export default Ember.Component.extend({
           return lesson;
         }
       });
+
       if (component.get('showAllRescopedContent')) {
         lessonIndex = lessons.indexOf(selectedLesson);
         lessonSize = lessons.length;
@@ -697,8 +704,9 @@ export default Ember.Component.extend({
         lessonSize = nonRescopedLessons.length;
         lastLesson = nonRescopedLessons.objectAt(lessonIndex);
       }
+
       const isLastLesson = lessonIndex === lessonSize - 1;
-      if (isLastLesson) {
+      if (isLastLesson && lastLesson) {
         const isLastLessonActive = isLastLesson && lastLesson.get('isActive');
         if (nextMilestone) {
           nextMilestone.set(

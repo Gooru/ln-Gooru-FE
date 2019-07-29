@@ -61,6 +61,9 @@ export default Ember.Component.extend({
       let reportType = collection.get('format');
       if (reportType === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
         component.set('isShowExternalAssessmentReport', true);
+      } else if (reportType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        collectionReportContext.performance = collection.get('performance');
+        component.set('isShowStudentOfflineActivityReport', true);
       } else {
         component.set('isShowCollectionReport', true);
       }
@@ -131,34 +134,30 @@ export default Ember.Component.extend({
   loadCollectionsPerformance() {
     const component = this;
     component.set('isLoading', true);
-    return Ember.RSVP
-      .hash({
-        lessonInfo: component.fetchLessonInfo(),
-        collectionsPerformance: component.fetchMilestoneCollectionsPerformance(
-          CONTENT_TYPES.COLLECTION
-        ),
-        assessmentsPerformance: component.fetchMilestoneCollectionsPerformance(
-          CONTENT_TYPES.ASSESSMENT
-        )
-      })
-      .then(
-        ({ lessonInfo, collectionsPerformance, assessmentsPerformance }) => {
-          let collections = lessonInfo
-            ? lessonInfo.get('children')
-            : Ember.A([]);
-          if (!component.isDestroyed) {
-            component.set(
-              'collections',
-              component.parseCollectionsPerformance(
-                collections,
-                collectionsPerformance.concat(assessmentsPerformance)
-              )
-            );
-            component.parseRescopedCollections(collections);
-            component.set('isLoading', false);
-          }
+    return Ember.RSVP.hash({
+      lessonInfo: component.fetchLessonInfo(),
+      collectionsPerformance: component.fetchMilestoneCollectionsPerformance(
+        CONTENT_TYPES.COLLECTION
+      ),
+      assessmentsPerformance: component.fetchMilestoneCollectionsPerformance(
+        CONTENT_TYPES.ASSESSMENT
+      )
+    }).then(
+      ({ lessonInfo, collectionsPerformance, assessmentsPerformance }) => {
+        let collections = lessonInfo ? lessonInfo.get('children') : Ember.A([]);
+        if (!component.isDestroyed) {
+          component.set(
+            'collections',
+            component.parseCollectionsPerformance(
+              collections,
+              collectionsPerformance.concat(assessmentsPerformance)
+            )
+          );
+          component.parseRescopedCollections(collections);
+          component.set('isLoading', false);
         }
-      );
+      }
+    );
   },
 
   /**
@@ -234,6 +233,10 @@ export default Ember.Component.extend({
             'isAssessment',
             collectionData.get('format') === CONTENT_TYPES.ASSESSMENT ||
               collectionData.get('format') === CONTENT_TYPES.EXTERNAL_ASSESSMENT
+          );
+          collectionData.set(
+            'isOfflineActivity',
+            collectionData.get('format') === CONTENT_TYPES.OFFLINE_ACTIVITY
           );
           component.set('lesson.isPerformed', true);
         }

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { EMOTION_VALUES } from 'gooru-web/config/config';
+import { EMOTION_VALUES, CONTENT_TYPES } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 
@@ -36,6 +36,10 @@ export default Ember.Component.extend({
    * @type {ClassService} Service to retrieve class information
    */
   classService: Ember.inject.service('api-sdk/class'),
+
+  offlineActivityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -118,7 +122,7 @@ export default Ember.Component.extend({
         userId = component.get('session.userId');
       }
       let params = {
-        userId: userId,
+        userId,
         classId: component.get('classId'),
         courseId: component.get('courseId'),
         unitId: component.get('unit.id'),
@@ -131,9 +135,12 @@ export default Ember.Component.extend({
         studentPerformance
       };
       let reportType = params.type;
-      if (reportType === 'assessment-external') {
+      if (reportType === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
         component.set('isShowStudentReport', false);
         component.set('isShowStudentExternalAssessmentReport', true);
+      } else if (reportType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        params.performance = studentPerformance;
+        component.set('isShowStudentOfflineActivityReport', true);
       } else {
         component.set('isShowStudentReport', true);
         component.set('isShowStudentExternalAssessmentReport', false);
@@ -265,6 +272,22 @@ export default Ember.Component.extend({
    * @type {Array}
    */
   selectedCollection: Ember.computed.alias('context.collection'),
+
+  /**
+   * @property {Boolean} isOfflineActivityReport
+   */
+  isOfflineActivityReport: Ember.computed.equal(
+    'selectedCollection.format',
+    CONTENT_TYPES.OFFLINE_ACTIVITY
+  ),
+
+  /**
+   * @property {Boolean} isExternalAssessmentReport
+   */
+  isExternalAssessmentReport: Ember.computed.equal(
+    'selectedCollection.format',
+    CONTENT_TYPES.EXTERNAL_ASSESSMENT
+  ),
 
   /**
    * Propery to hide the default pullup.
@@ -442,16 +465,18 @@ export default Ember.Component.extend({
 
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-      if (closeAll) {
-        component.sendAction('onClosePullUp');
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+        if (closeAll) {
+          component.sendAction('onClosePullUp');
+        }
       }
-    });
+    );
   },
 
   handleAppContainerScroll() {
@@ -521,44 +546,35 @@ export default Ember.Component.extend({
     let classDataPromise = classId
       ? classService.readClassInfo(classId)
       : Ember.RSVP.resolve({});
-    return Ember.RSVP
-      .hash({
-        collection:
-          format === 'assessment'
-            ? component.get('assessmentService').readAssessment(collectionId)
-            : format === 'assessment-external'
-              ? component
-                .get('assessmentService')
-                .readExternalAssessment(collectionId)
-              : component.get('collectionService').readCollection(collectionId),
-        performance: component
-          .get('analyticsService')
-          .findResourcesByCollection(
-            classId,
-            courseId,
-            unitId,
-            lessonId,
-            collectionId,
-            collectionType
-          ),
-        classData: classDataPromise
-      })
-      .then(({ collection, performance, classData }) => {
-        if (!component.isDestroyed) {
-          component.set('collection', collection);
-          component.set('class', classData);
-          if (format === 'assessment-external') {
-            component.parseClassMemberAndExternalPerformanceData(performance);
-          } else {
-            component.parseClassMemberAndPerformanceData(
-              collection,
-              performance
-            );
-          }
-          component.set('isLoading', false);
-          component.loadSuggestion();
+    return Ember.RSVP.hash({
+      collection: component.getContentDetails(format, collectionId),
+      performance: component
+        .get('analyticsService')
+        .findResourcesByCollection(
+          classId,
+          courseId,
+          unitId,
+          lessonId,
+          collectionId,
+          collectionType
+        ),
+      classData: classDataPromise
+    }).then(({ collection, performance, classData }) => {
+      if (!component.isDestroyed) {
+        component.set('collection', collection);
+        component.set('class', classData);
+        if (
+          format === CONTENT_TYPES.ASSESSMENT ||
+          format === CONTENT_TYPES.OFFLINE_ACTIVITY
+        ) {
+          component.parseClassMemberAndExternalPerformanceData(performance);
+        } else {
+          component.parseClassMemberAndPerformanceData(collection, performance);
         }
-      });
+        component.set('isLoading', false);
+        component.loadSuggestion();
+      }
+    });
   },
 
   parseClassMemberAndExternalPerformanceData(performance) {
@@ -693,7 +709,7 @@ export default Ember.Component.extend({
     });
 
     let overAllScore = Math.floor(
-      numberOfCorrectAnswers / numberOfQuestionsStarted * 100
+      (numberOfCorrectAnswers / numberOfQuestionsStarted) * 100
     );
 
     let resultSet = {
@@ -750,7 +766,7 @@ export default Ember.Component.extend({
   calculateTimeSpentScore(users, maxTimeSpent) {
     users.forEach(data => {
       let timeSpentScore = Math.round(
-        data.get('totalTimeSpent') / maxTimeSpent * 100
+        (data.get('totalTimeSpent') / maxTimeSpent) * 100
       );
       data.set('timeSpentScore', timeSpentScore);
       data.set('timeSpentDifference', 100 - timeSpentScore);
@@ -832,5 +848,26 @@ export default Ember.Component.extend({
       params.filters['flt.languageId'] = primaryLanguage;
     }
     return params;
+  },
+
+  /**
+   * @function getContentDetails
+   * Method to active content/collection details
+   */
+  getContentDetails(format, collectionId) {
+    const component = this;
+    if (format === CONTENT_TYPES.ASSESSMENT) {
+      return component.get('assessmentService').readAssessment(collectionId);
+    } else if (format === CONTENT_TYPES.COLLECTION) {
+      return component.get('collectionService').readCollection(collectionId);
+    } else if (format === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
+      return component
+        .get('assessmentService')
+        .readExternalAssessment(collectionId);
+    } else if (format === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+      return component.get('offlineActivityService').readActivity(collectionId);
+    } else {
+      return Ember.RSVP.resolve({});
+    }
   }
 });

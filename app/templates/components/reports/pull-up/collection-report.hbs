@@ -3,7 +3,7 @@
   <div class="report-header">
     <div class="report-breadcrumb">
       <div class="collection-title">
-        <i class="collection-icon {{collectionType}}"></i>
+        <i class="collection-icon {{collectionType}} {{if isOfflineActivityReport 'offline-activity'}}"></i>
         <p>{{selectedCollection.title}}</p>
       </div>
     </div>
@@ -86,11 +86,12 @@
         </div>
       </div>
       <div class="report-view-container">
-        {{#if (eq selectedCollection.format 'assessment-external')}}
+        {{#if (or isExternalAssessmentReport isOfflineActivityReport)}}
           {{#if isGridView}}
             {{reports.pull-up.teacher-external-assessment-report-grid-view
             studentReportData=studentReportData
             selectedCollection=selectedCollection
+            isOfflineActivityReport = isOfflineActivityReport
           }}
           {{else}}
             {{reports.pull-up.teacher-external-assessment-report-list-view
@@ -105,6 +106,7 @@
               studentReport="studentReport"
               class=class
               isArchivedClass=isArchivedClass
+              isOfflineActivityReport = isOfflineActivityReport
             }}
           {{/if}}
         {{else}}
@@ -161,6 +163,17 @@
     onClosePullUp="onClosePullUp"
     showPullUp=isShowStudentExternalAssessmentReport
     isArchivedClass=isArchivedClass
+  }}
+{{/if}}
+
+{{#if isShowStudentOfflineActivityReport}}
+  {{reports.pull-up.oa-preview
+    showPullUp=isShowStudentOfflineActivityReport
+    oaId=studentReportContextData.collection.id
+    isReportView=true
+    classId=classId
+    isCmReport = true
+    reportContext = studentReportContextData
   }}
 {{/if}}
 
