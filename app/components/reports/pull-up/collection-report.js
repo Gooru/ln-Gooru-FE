@@ -122,7 +122,7 @@ export default Ember.Component.extend({
         userId = component.get('session.userId');
       }
       let params = {
-        userId: userId,
+        userId,
         classId: component.get('classId'),
         courseId: component.get('courseId'),
         unitId: component.get('unit.id'),
@@ -135,9 +135,12 @@ export default Ember.Component.extend({
         studentPerformance
       };
       let reportType = params.type;
-      if (reportType === 'assessment-external') {
+      if (reportType === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
         component.set('isShowStudentReport', false);
         component.set('isShowStudentExternalAssessmentReport', true);
+      } else if (reportType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        params.performance = studentPerformance;
+        component.set('isShowStudentOfflineActivityReport', true);
       } else {
         component.set('isShowStudentReport', true);
         component.set('isShowStudentExternalAssessmentReport', false);

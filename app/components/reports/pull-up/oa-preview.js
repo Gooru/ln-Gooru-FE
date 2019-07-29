@@ -41,6 +41,11 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
    */
   performanceService: Ember.inject.service('api-sdk/performance'),
 
+  /**
+   * @type {ProfileService} Service to retrieve profile information
+   */
+  profileService: Ember.inject.service('api-sdk/profile'),
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -51,7 +56,11 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     const component = this;
     component._super(...arguments);
     component.openPullUp();
-    component.loadData();
+    if (component.get('isCmReport')) {
+      component.loadStudentCmReportData();
+    } else {
+      component.loadData();
+    }
   },
 
   /**
@@ -247,6 +256,18 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     return this.computedRubricScoreInPrecentage(teacherRubric);
   }),
 
+  /**
+   * @property {Boolean} isCmReport
+   * Property for CM Report
+   */
+  isCmReport: false,
+
+  /**
+   * @property {Object} reportContext
+   * Property for CM report context
+   */
+  reportContext: {},
+
   //--------------------------------------------------------------------------
   // Methods
 
@@ -268,16 +289,17 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
           .fetchUsersForClassActivity(classId, caContentId)
         : Ember.RSVP.resolve(users);
     let userId = isStudent ? this.get('session.userId') : undefined;
-    let performancePromise = isReportView
-      ? component
-        .get('performanceService')
-        .findOfflineClassActivityPerformanceSummaryByIds(
-          classId,
-          [caContentId],
-          userId,
-          false
-        )
-      : Ember.RSVP.resolve([]);
+    let performancePromise =
+      isReportView && !component.get('isCmReport')
+        ? component
+          .get('performanceService')
+          .findOfflineClassActivityPerformanceSummaryByIds(
+            classId,
+            [caContentId],
+            userId,
+            false
+          )
+        : Ember.RSVP.resolve([]);
     return Ember.RSVP
       .hash({
         offlineActivity: oaService.readActivity(oaId),
@@ -300,6 +322,31 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
       });
   },
 
+  /**
+   * @function loadStudentCmReportData
+   * Method to load student CM report data
+   */
+  loadStudentCmReportData() {
+    const component = this;
+    const reportContext = component.get('reportContext');
+    return Ember.RSVP
+      .hash({
+        userProfile: component.fetchUserProfile(reportContext.userId),
+        offlineActivity: component
+          .get('oaService')
+          .readActivity(component.get('oaId'))
+      })
+      .then(({ userProfile, offlineActivity }) => {
+        component.fetchSubmissions(userProfile);
+        component.set('selectedUser', userProfile);
+        component.set(
+          'selectedUser.performance',
+          component.get('reportContext.performance')
+        );
+        component.set('offlineActivity', offlineActivity);
+      });
+  },
+
   resetValues() {
     const component = this;
     let teacherRubric = component.get('teacherRubric');
@@ -317,13 +364,21 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
   fetchSubmissions(user) {
     const component = this;
     const classId = component.get('classId');
-    const caContentId = component.get('classActivity.id');
+    const oaId = component.get('classActivity.id') || component.get('oaId');
     const isReportView = component.get('isReportView');
     const userId = user.get('id');
+    let dataParam = undefined;
+    if (component.get('isCmReport')) {
+      dataParam = {
+        courseId: component.get('reportContext.courseId'),
+        unitId: component.get('reportContext.unitId'),
+        lessonId: component.get('reportContext.lessonId')
+      };
+    }
     let submissionPromise = isReportView
       ? component
         .get('oaAnaltyicsService')
-        .getSubmissionsToGrade(classId, caContentId, userId)
+        .getSubmissionsToGrade(classId, oaId, userId, dataParam)
       : Ember.RSVP.resolve(null);
     return Ember.RSVP
       .hash({
@@ -444,5 +499,16 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
       }
     }
     return score;
+  },
+
+  /**
+   * @function fetchUserProfile
+   * @param {UUID} userId
+   * @return {Promise} userDetails
+   * Method to fetch user details by using given user ID
+   */
+  fetchUserProfile(userId) {
+    const component = this;
+    return component.get('profileService').readUserProfile(userId);
   }
 });
