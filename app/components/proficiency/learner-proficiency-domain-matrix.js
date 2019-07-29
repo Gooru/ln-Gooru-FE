@@ -54,7 +54,7 @@ export default Ember.Component.extend({
   },
 
   didRender() {
-    var component = this;
+    let component = this;
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
     });
@@ -438,6 +438,7 @@ export default Ember.Component.extend({
       delete activeGradeList[`${selectedGradeSeq}`];
       selectedGradeLine.addClass('hidden-line');
     } else {
+      activeGradeList.clear();
       activeGradeList[`${gradeData.sequence}`] = gradeData;
       if (!domainBoundariesContainer[`${selectedGradeSeq}`]) {
         component

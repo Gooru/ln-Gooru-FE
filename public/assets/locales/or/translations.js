@@ -82,6 +82,8 @@ window.i18ln = {
   'common.tasks': 'tasks',
   'common.more': 'ଅଧିକ',
   'common.add-data-choice-title': 'How do you want to enter the data?',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
@@ -1772,7 +1774,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Grade Lines',
+  'grade-selector.placeholder': 'Hiline',
   'standard-dropdown.placeholder': 'ଷ୍ଟାଣ୍ଡାର୍ଡ ଦ୍ୱାରା ବ୍ରାଉଜ୍ କରନ୍ତୁ',
   'subject-dropdown.placeholder': 'ବିଷୟ(ଗୁଡ଼ିକ)',
   'subject-dropdown.prompt': 'ଗୋଟିଏ ବିଷୟ ଚୟନ କରନ୍ତୁ',
@@ -2765,7 +2767,7 @@ window.i18ln = {
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
-  'report.class-weekly-report': 'Class Weekly Report',
+  'report.class-weekly-report': 'Class Progress Report',
   'no-teacher-found': 'No teacher with that email id found!',
   'oa-player.complete-confirm':
     'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',

@@ -70,6 +70,8 @@ window.i18ln = {
   'common.lastName': 'आडनाव',
   'common.no-content-for-week':
     'No class activities scheduled for the selected period',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
   'common.firstName': 'पहिले नाव',
   'common.filter-by': 'द्वारे फिल्टर करा',
   'common.add-data-choice-title': 'How do you want to enter the data?',
@@ -2678,7 +2680,7 @@ window.i18ln = {
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
-  'report.class-weekly-report': 'Class Weekly Report',
+  'report.class-weekly-report': 'Class Progress Report',
   'no-teacher-found': 'No teacher with that email id found!',
   'oa-player.complete-confirm':
     'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',

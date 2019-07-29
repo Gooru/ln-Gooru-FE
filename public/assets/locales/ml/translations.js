@@ -73,6 +73,8 @@ window.i18ln = {
   'common.no-users-to-grade-oa':
     'There are no users to grade for this Offline Activity.',
   'common.last': 'അവസാനത്തെ',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
   'common.name': 'പേര്',
   'common.user': 'ഉപയോക്താവ്',
   'common.content-name': 'ഉള്ളടക്കത്തിന്റെ പേര്',
@@ -1760,7 +1762,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Grade Lines',
+  'grade-selector.placeholder': 'Hiline',
   'standard-dropdown.placeholder': 'സ്റ്റാൻഡേർഡ് ബ്രൗസുചെയ്യുക',
   'subject-dropdown.placeholder': 'വിഷയം (കൾ)',
   'subject-dropdown.prompt': 'ഒരു വിഷയം തിരഞ്ഞെടുക്കുക',
@@ -2764,7 +2766,7 @@ window.i18ln = {
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
-  'report.class-weekly-report': 'Class Weekly Report',
+  'report.class-weekly-report': 'Class Progress Report',
   'no-teacher-found': 'No teacher with that email id found!',
   'oa-player.complete-confirm':
     'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',
