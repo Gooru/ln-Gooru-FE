@@ -564,7 +564,7 @@ export default Ember.Component.extend({
           component.set('collection', collection);
           component.set('class', classData);
           if (
-            format === CONTENT_TYPES.ASSESSMENT ||
+            format === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||
             format === CONTENT_TYPES.OFFLINE_ACTIVITY
           ) {
             component.parseClassMemberAndExternalPerformanceData(performance);
