@@ -121,25 +121,16 @@
     .course-map-body {
       display: flex;
 
-      .header {
-        opacity: 0.5;
-        font-size: 12px;
-        font-weight: bold;
-        color: #000000;
-        text-transform: uppercase;
-        padding: 10px 0;
-        height: 50px;
-        align-items: center;
-        display: flex;
-        margin-top: 10px;
-        margin-bottom: 5px;
-      }
-
       .students {
         min-width: 61px;
 
         .header {
-          text-align: center;
+          opacity: 0.5;
+          font-size: 12px;
+          font-weight: bold;
+          color: #000000;
+          text-transform: uppercase;
+          padding: 10px 0;
           height: 50px;
           align-items: center;
           display: flex;
@@ -233,6 +224,20 @@
       .render-course-map {
         width: 98%;
         margin: 0 20px auto;
+
+        .header.title {
+          opacity: 0.5;
+          font-size: 12px;
+          font-weight: bold;
+          color: #000000;
+          text-transform: uppercase;
+          padding: 10px 0;
+          height: 50px;
+          align-items: center;
+          display: flex;
+          margin-top: 10px;
+          margin-bottom: 5px;
+        }
 
         .ms-cm-view-switcher-ctn {
           display: grid;

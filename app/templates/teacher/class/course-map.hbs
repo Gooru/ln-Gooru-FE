@@ -82,11 +82,11 @@
             {{three-bounce-spinner}}
           {{else}}
             {{#unless (and class.milestoneViewApplicable hasMilestoneViewReady)}}
-              <div class="header">
+              <div class="header title">
                 {{t 'common.course-map'}}
               </div>
             {{else if isStudentCourseMap}}
-              <div class="header">
+              <div class="header title">
                 {{t 'milestones'}}
               </div>
             {{/unless}}
