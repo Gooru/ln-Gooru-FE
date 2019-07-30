@@ -68,6 +68,8 @@
             overflow-y: auto;
             max-height: calc(100vh - 130px);
             width: 100%;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+            background-color: #fff;
 
             &.dca-content-list-container-today {
               box-shadow: 0 0 11px 3px #0072bc;
@@ -200,7 +202,7 @@
                             display: grid;
                             width: 100%;
                             justify-content: center;
-                            grid-template-columns: repeat(7,1fr);
+                            grid-template-columns: repeat(7, 1fr);
 
                             th.dow {
                               height: 40px;
@@ -215,7 +217,7 @@
                             display: grid;
                             width: 100%;
                             justify-content: center;
-                            grid-template-columns: repeat(7,1fr);
+                            grid-template-columns: repeat(7, 1fr);
 
                             td {
                               height: 40px;
@@ -231,7 +233,11 @@
 
                               &.active {
                                 background-color: #d2e3fc;
-                                background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
+                                background-image: -webkit-linear-gradient(
+                                  top,
+                                  #d2e3fc,
+                                  #d2e3fc
+                                );
                                 border-radius: 50%;
                                 display: flex;
                                 margin: auto;
@@ -246,7 +252,11 @@
 
                               &.today {
                                 background-color: #3486f7;
-                                background-image: -webkit-linear-gradient(top, #3486f7 , #3486f7);
+                                background-image: -webkit-linear-gradient(
+                                  top,
+                                  #3486f7,
+                                  #3486f7
+                                );
                                 border-radius: 50%;
                                 display: flex;
                                 margin: auto;

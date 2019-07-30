@@ -76,9 +76,9 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Observer
-
-  onRescopeChange: Ember.observer('showAllRescopedContent', function() {
+  onShowRescope: Ember.observer('showAllRescopedContent', function() {
     this.handleLastLessonPath();
+    this.handleMileStonePath();
   }),
 
   // -------------------------------------------------------------------------
@@ -653,6 +653,7 @@ export default Ember.Component.extend({
                   );
                 }
                 selectedMilestone.set('hasLessonFetched', true);
+                component.handleMileStonePath();
                 let userCurrentLocation = component.get('userCurrentLocation');
                 if (locateLastPlayedItem && userCurrentLocation) {
                   let lessonId = userCurrentLocation.get('lessonId');
@@ -674,6 +675,28 @@ export default Ember.Component.extend({
         }
       });
     }
+  },
+
+  handleMileStonePath() {
+    const component = this;
+    let selectedMilestone = component.get('selectedMilestone');
+    let milestones = component.get('milestones');
+    let nextMilestone = milestones.objectAt(
+      selectedMilestone.get('milestoneIndex')
+    );
+    let lessons = selectedMilestone.get('lessons');
+    const nonRescopedLessons = lessons.filter(lesson => {
+      if (!lesson.get('rescope')) {
+        return lesson;
+      }
+    });
+    let showMilestoneLessons =
+      !nonRescopedLessons.length > 0 &&
+      !component.get('showAllRescopedContent');
+    if (nextMilestone) {
+      nextMilestone.set('prevMileStoneShowLessons', showMilestoneLessons);
+    }
+    selectedMilestone.set('showLessons', showMilestoneLessons);
   },
 
   handleLastLessonPath() {
