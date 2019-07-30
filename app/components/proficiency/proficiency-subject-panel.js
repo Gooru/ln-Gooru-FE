@@ -32,5 +32,12 @@ export default Ember.Component.extend({
       let component = this;
       component.sendAction('onDomainSelect', selectedDomain);
     }
+  },
+
+  didRender() {
+    let component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   }
 });

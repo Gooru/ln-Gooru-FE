@@ -10,7 +10,7 @@
   .domain-list {
     padding-left: 16px;
     overflow-y: auto;
-    height: 90vh;
+    height: calc(90vh - 100px);
 
     .title {
       font-weight: bold;
@@ -30,6 +30,56 @@
           display: block;
           color: #1aa9eb;
           cursor: pointer;
+        }
+
+        .competency-sec {
+          display: flex;
+          padding: 10px 0;
+
+          .competency-status {
+            display: grid;
+            grid-template-columns: repeat(3, max-content);
+            grid-gap: 10px;
+            margin-right: 10px;
+
+            .mastered {
+              display: grid;
+              grid-template-columns: 20px auto;
+              justify-content: center;
+
+              .status-label {
+                width: 24px;
+                height: 24px;
+                background-color: #6f9ce2;
+              }
+            }
+
+            .in-progress {
+              display: grid;
+              grid-template-columns: 20px auto;
+              justify-content: center;
+
+              .status-label {
+                width: 24px;
+                height: 24px;
+                opacity: 0.3;
+                background-color: #333c4f;
+              }
+            }
+
+            .not-started {
+              display: grid;
+              grid-template-columns: 20px auto;
+              justify-content: center;
+
+              .status-label {
+                width: 24px;
+                height: 24px;
+                opacity: 0.3;
+                background-color: #99c5e6;
+              }
+            }
+          }
         }
       }
     }

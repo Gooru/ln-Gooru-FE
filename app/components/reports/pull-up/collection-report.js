@@ -465,16 +465,18 @@ export default Ember.Component.extend({
 
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-      if (closeAll) {
-        component.sendAction('onClosePullUp');
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+        if (closeAll) {
+          component.sendAction('onClosePullUp');
+        }
       }
-    });
+    );
   },
 
   handleAppContainerScroll() {
@@ -544,40 +546,35 @@ export default Ember.Component.extend({
     let classDataPromise = classId
       ? classService.readClassInfo(classId)
       : Ember.RSVP.resolve({});
-    return Ember.RSVP
-      .hash({
-        collection: component.getContentDetails(format, collectionId),
-        performance: component
-          .get('analyticsService')
-          .findResourcesByCollection(
-            classId,
-            courseId,
-            unitId,
-            lessonId,
-            collectionId,
-            collectionType
-          ),
-        classData: classDataPromise
-      })
-      .then(({ collection, performance, classData }) => {
-        if (!component.isDestroyed) {
-          component.set('collection', collection);
-          component.set('class', classData);
-          if (
-            format === CONTENT_TYPES.ASSESSMENT ||
-            format === CONTENT_TYPES.OFFLINE_ACTIVITY
-          ) {
-            component.parseClassMemberAndExternalPerformanceData(performance);
-          } else {
-            component.parseClassMemberAndPerformanceData(
-              collection,
-              performance
-            );
-          }
-          component.set('isLoading', false);
-          component.loadSuggestion();
+    return Ember.RSVP.hash({
+      collection: component.getContentDetails(format, collectionId),
+      performance: component
+        .get('analyticsService')
+        .findResourcesByCollection(
+          classId,
+          courseId,
+          unitId,
+          lessonId,
+          collectionId,
+          collectionType
+        ),
+      classData: classDataPromise
+    }).then(({ collection, performance, classData }) => {
+      if (!component.isDestroyed) {
+        component.set('collection', collection);
+        component.set('class', classData);
+        if (
+          format === CONTENT_TYPES.ASSESSMENT ||
+          format === CONTENT_TYPES.OFFLINE_ACTIVITY
+        ) {
+          component.parseClassMemberAndExternalPerformanceData(performance);
+        } else {
+          component.parseClassMemberAndPerformanceData(collection, performance);
         }
-      });
+        component.set('isLoading', false);
+        component.loadSuggestion();
+      }
+    });
   },
 
   parseClassMemberAndExternalPerformanceData(performance) {
@@ -712,7 +709,7 @@ export default Ember.Component.extend({
     });
 
     let overAllScore = Math.floor(
-      numberOfCorrectAnswers / numberOfQuestionsStarted * 100
+      (numberOfCorrectAnswers / numberOfQuestionsStarted) * 100
     );
 
     let resultSet = {
@@ -769,7 +766,7 @@ export default Ember.Component.extend({
   calculateTimeSpentScore(users, maxTimeSpent) {
     users.forEach(data => {
       let timeSpentScore = Math.round(
-        data.get('totalTimeSpent') / maxTimeSpent * 100
+        (data.get('totalTimeSpent') / maxTimeSpent) * 100
       );
       data.set('timeSpentScore', timeSpentScore);
       data.set('timeSpentDifference', 100 - timeSpentScore);

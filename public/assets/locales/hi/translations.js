@@ -60,6 +60,8 @@ window.i18ln = {
   'common.grid': 'ग्रिड',
   'common.list': 'सूची',
   'common.first': 'प्रथम',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
   'common.last': 'अंतिम',
   'common.name': 'नाम',
   'common.user': 'उपयोगकर्ता',
@@ -1733,7 +1735,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '1 1',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'ग्रेड लाइन्स',
+  'grade-selector.placeholder': 'Hiline',
   'standard-dropdown.placeholder': 'मानक के क्रम में ब्राउज़ करें',
   'subject-dropdown.placeholder': 'विषय (यों)',
   'subject-dropdown.prompt': 'एक विषय चुनिए',

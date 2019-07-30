@@ -134,34 +134,30 @@ export default Ember.Component.extend({
   loadCollectionsPerformance() {
     const component = this;
     component.set('isLoading', true);
-    return Ember.RSVP
-      .hash({
-        lessonInfo: component.fetchLessonInfo(),
-        collectionsPerformance: component.fetchMilestoneCollectionsPerformance(
-          CONTENT_TYPES.COLLECTION
-        ),
-        assessmentsPerformance: component.fetchMilestoneCollectionsPerformance(
-          CONTENT_TYPES.ASSESSMENT
-        )
-      })
-      .then(
-        ({ lessonInfo, collectionsPerformance, assessmentsPerformance }) => {
-          let collections = lessonInfo
-            ? lessonInfo.get('children')
-            : Ember.A([]);
-          if (!component.isDestroyed) {
-            component.set(
-              'collections',
-              component.parseCollectionsPerformance(
-                collections,
-                collectionsPerformance.concat(assessmentsPerformance)
-              )
-            );
-            component.parseRescopedCollections(collections);
-            component.set('isLoading', false);
-          }
+    return Ember.RSVP.hash({
+      lessonInfo: component.fetchLessonInfo(),
+      collectionsPerformance: component.fetchMilestoneCollectionsPerformance(
+        CONTENT_TYPES.COLLECTION
+      ),
+      assessmentsPerformance: component.fetchMilestoneCollectionsPerformance(
+        CONTENT_TYPES.ASSESSMENT
+      )
+    }).then(
+      ({ lessonInfo, collectionsPerformance, assessmentsPerformance }) => {
+        let collections = lessonInfo ? lessonInfo.get('children') : Ember.A([]);
+        if (!component.isDestroyed) {
+          component.set(
+            'collections',
+            component.parseCollectionsPerformance(
+              collections,
+              collectionsPerformance.concat(assessmentsPerformance)
+            )
+          );
+          component.parseRescopedCollections(collections);
+          component.set('isLoading', false);
         }
-      );
+      }
+    );
   },
 
   /**

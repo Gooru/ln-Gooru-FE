@@ -300,26 +300,24 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
             false
           )
         : Ember.RSVP.resolve([]);
-    return Ember.RSVP
-      .hash({
-        offlineActivity: oaService.readActivity(oaId),
-        users: studentListPromise,
-        performances: performancePromise
-      })
-      .then(({ offlineActivity, users, performances }) => {
-        if (!component.isDestroyed) {
-          component.set('offlineActivity', offlineActivity);
-          if (isReportView) {
-            users = users.filterBy('isActive', true);
-            component.set('users', users);
-            let user = users.objectAt(0);
-            component.set('selectedUser', user);
-            component.fetchSubmissions(user);
-            component.parsePerformanceData(users, performances);
-          }
-          component.set('isLoading', false);
+    return Ember.RSVP.hash({
+      offlineActivity: oaService.readActivity(oaId),
+      users: studentListPromise,
+      performances: performancePromise
+    }).then(({ offlineActivity, users, performances }) => {
+      if (!component.isDestroyed) {
+        component.set('offlineActivity', offlineActivity);
+        if (isReportView) {
+          users = users.filterBy('isActive', true);
+          component.set('users', users);
+          let user = users.objectAt(0);
+          component.set('selectedUser', user);
+          component.fetchSubmissions(user);
+          component.parsePerformanceData(users, performances);
         }
-      });
+        component.set('isLoading', false);
+      }
+    });
   },
 
   /**
@@ -329,22 +327,20 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
   loadStudentCmReportData() {
     const component = this;
     const reportContext = component.get('reportContext');
-    return Ember.RSVP
-      .hash({
-        userProfile: component.fetchUserProfile(reportContext.userId),
-        offlineActivity: component
-          .get('oaService')
-          .readActivity(component.get('oaId'))
-      })
-      .then(({ userProfile, offlineActivity }) => {
-        component.fetchSubmissions(userProfile);
-        component.set('selectedUser', userProfile);
-        component.set(
-          'selectedUser.performance',
-          component.get('reportContext.performance')
-        );
-        component.set('offlineActivity', offlineActivity);
-      });
+    return Ember.RSVP.hash({
+      userProfile: component.fetchUserProfile(reportContext.userId),
+      offlineActivity: component
+        .get('oaService')
+        .readActivity(component.get('oaId'))
+    }).then(({ userProfile, offlineActivity }) => {
+      component.fetchSubmissions(userProfile);
+      component.set('selectedUser', userProfile);
+      component.set(
+        'selectedUser.performance',
+        component.get('reportContext.performance')
+      );
+      component.set('offlineActivity', offlineActivity);
+    });
   },
 
   resetValues() {
@@ -380,16 +376,14 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
         .get('oaAnaltyicsService')
         .getSubmissionsToGrade(classId, oaId, userId, dataParam)
       : Ember.RSVP.resolve(null);
-    return Ember.RSVP
-      .hash({
-        submissions: submissionPromise
-      })
-      .then(({ submissions }) => {
-        if (!component.isDestroyed) {
-          component.resetValues();
-          component.parseSubmissionsData(submissions);
-        }
-      });
+    return Ember.RSVP.hash({
+      submissions: submissionPromise
+    }).then(({ submissions }) => {
+      if (!component.isDestroyed) {
+        component.resetValues();
+        component.parseSubmissionsData(submissions);
+      }
+    });
   },
 
   parseSubmissionsData(submissions) {
@@ -495,7 +489,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
       score = rubric.get('score');
       if (score && score > 0) {
         let gradeMaxScore = rubric.get('maxScore');
-        score = Math.floor(score / gradeMaxScore * 100);
+        score = Math.floor((score / gradeMaxScore) * 100);
       }
     }
     return score;
