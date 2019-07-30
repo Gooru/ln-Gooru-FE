@@ -1,8 +1,5 @@
 import Ember from 'ember';
-import {
-  moduleForComponent,
-  test
-} from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
 import T from 'gooru-web/tests/helpers/assert';
 import hbs from 'htmlbars-inline-precompile';
 import Assessment from 'gooru-web/models/content/assessment';
@@ -13,7 +10,8 @@ import tHelper from 'ember-i18n/helper';
 
 moduleForComponent(
   'class/gru-student-class-activity-panel',
-  'Integration | Component | class/gru student class activity panel', {
+  'Integration | Component | class/gru student class activity panel',
+  {
     integration: true,
     beforeEach: function() {
       this.i18n = this.container.lookup('service:i18n');
@@ -25,7 +23,8 @@ moduleForComponent(
 
 test('Layout', function(assert) {
   const collectionMock = Assessment.create(
-    Ember.getOwner(this).ownerInjection(), {
+    Ember.getOwner(this).ownerInjection(),
+    {
       id: '3-1',
       format: 'assessment',
       openEndedQuestionCount: 0,
@@ -47,6 +46,7 @@ test('Layout', function(assert) {
   const classActivity = ClassActivity.create({
     activationDate: null, //inactive
     collection: collectionMock,
+    isCompleted: false,
     activityPerformanceSummary: ActivityPerformanceSummary.create({
       collectionPerformanceSummary: performance
     })
@@ -55,7 +55,7 @@ test('Layout', function(assert) {
   this.set('classActivity', classActivity);
 
   this.render(
-    hbs `{{class.gru-student-class-activity-panel classActivity=classActivity}}`
+    hbs`{{class.gru-student-class-activity-panel isToday=true isOfflineActivity=false classActivity=classActivity}}`
   );
 
   var $component = this.$(); //component dom element
@@ -83,7 +83,8 @@ test('Layout', function(assert) {
 
 test('Layout - collection', function(assert) {
   const collectionMock = Collection.create(
-    Ember.getOwner(this).ownerInjection(), {
+    Ember.getOwner(this).ownerInjection(),
+    {
       id: '3-1',
       format: 'collection',
       openEndedQuestionCount: 0,
@@ -114,7 +115,7 @@ test('Layout - collection', function(assert) {
   this.set('classActivity', classActivity);
 
   this.render(
-    hbs `{{class.gru-student-class-activity-panel classActivity=classActivity}}`
+    hbs`{{class.gru-student-class-activity-panel classActivity=classActivity}}`
   );
 
   var $component = this.$(); //component dom element
