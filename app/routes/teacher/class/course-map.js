@@ -167,36 +167,38 @@ export default Ember.Route.extend({
         classMembers
       )
     );
-    return Ember.RSVP.hash({
-      unitPerformances: unitPerformancePromise
-    }).then(function(hash) {
-      let classPerformance = hash.unitPerformances;
-      units.map(unit => {
-        let unitId = unit.id;
-        let score = classPerformance.calculateAverageScoreByItem(unitId);
-        let timeSpent = classPerformance.calculateAverageTimeSpentByItem(
-          unitId
-        );
-        let completionDone = classPerformance.calculateSumCompletionDoneByItem(
-          unitId
-        );
-        let completionTotal = classPerformance.calculateSumCompletionTotalByItem(
-          unitId
-        );
-        let numberOfStudents = classPerformance.findNumberOfStudentsByItem(
-          unitId
-        );
-        let performance = {
-          score,
-          timeSpent,
-          completionDone,
-          completionTotal,
-          numberOfStudents
-        };
-        unit.set('performance', performance);
+    return Ember.RSVP
+      .hash({
+        unitPerformances: unitPerformancePromise
+      })
+      .then(function(hash) {
+        let classPerformance = hash.unitPerformances;
+        units.map(unit => {
+          let unitId = unit.id;
+          let score = classPerformance.calculateAverageScoreByItem(unitId);
+          let timeSpent = classPerformance.calculateAverageTimeSpentByItem(
+            unitId
+          );
+          let completionDone = classPerformance.calculateSumCompletionDoneByItem(
+            unitId
+          );
+          let completionTotal = classPerformance.calculateSumCompletionTotalByItem(
+            unitId
+          );
+          let numberOfStudents = classPerformance.findNumberOfStudentsByItem(
+            unitId
+          );
+          let performance = {
+            score,
+            timeSpent,
+            completionDone,
+            completionTotal,
+            numberOfStudents
+          };
+          unit.set('performance', performance);
+        });
+        return units;
       });
-      return units;
-    });
   },
   /**
    * Set all controller properties from the model

@@ -496,15 +496,17 @@ export default Ember.Component.extend({
     let component = this;
     let taxonomyService = component.get('taxonomyService');
     let gradeId = gradeData ? gradeData.id : null;
-    return Ember.RSVP.hash({
-      domainBoundary: gradeId
-        ? Ember.RSVP.resolve(
-          taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
-        )
-        : Ember.RSVP.resolve(null)
-    }).then(({ domainBoundary }) => {
-      return domainBoundary;
-    });
+    return Ember.RSVP
+      .hash({
+        domainBoundary: gradeId
+          ? Ember.RSVP.resolve(
+            taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
+          )
+          : Ember.RSVP.resolve(null)
+      })
+      .then(({ domainBoundary }) => {
+        return domainBoundary;
+      });
   },
 
   /**
@@ -690,13 +692,7 @@ export default Ember.Component.extend({
         let domainBoundaryCompetency = d.isDomainBoundaryCompetency
           ? 'domain-boundary'
           : '';
-        return `competency ${skylineClassName} competency-${
-          d.xAxisSeq
-        } competency-${d.xAxisSeq}-${
-          d.yAxisSeq
-        } fillArea${d.status.toString()} ${domainBoundaryCompetency} ${
-          d.boundaryClass
-        } ${masteredCompetencyClassName}`;
+        return `competency ${skylineClassName} competency-${d.xAxisSeq} competency-${d.xAxisSeq}-${d.yAxisSeq} fillArea${d.status.toString()} ${domainBoundaryCompetency} ${d.boundaryClass} ${masteredCompetencyClassName}`;
       })
       .on('click', function(d) {
         component.selectCompetency(d);

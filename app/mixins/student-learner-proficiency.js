@@ -219,13 +219,15 @@ export default Ember.Mixin.create({
     let component = this;
     let subject = component.get('subjectCode');
     let userId = component.get('studentProfile.id');
-    return Ember.RSVP.hash({
-      competencyList: component
-        .get('competencyService')
-        .getUserSignatureCompetencies(userId, subject)
-    }).then(({ competencyList }) => {
-      component.set('signatureCompetencyList', competencyList);
-    });
+    return Ember.RSVP
+      .hash({
+        competencyList: component
+          .get('competencyService')
+          .getUserSignatureCompetencies(userId, subject)
+      })
+      .then(({ competencyList }) => {
+        component.set('signatureCompetencyList', competencyList);
+      });
   },
 
   /**
@@ -299,26 +301,30 @@ export default Ember.Mixin.create({
     let userId = component.get('studentProfile.id');
     let timeLine = component.get('timeLine');
     if (subjectId) {
-      return Ember.RSVP.hash({
-        competencyMatrixs: component
-          .get('competencyService')
-          .getCompetencyMatrixDomain(userId, subjectId, timeLine),
-        competencyMatrixCoordinates: component
-          .get('competencyService')
-          .getCompetencyMatrixCoordinates(subjectId),
-        userProficiencyBaseLine: component.fetchBaselineCompetencies()
-      }).then(({ competencyMatrixs, competencyMatrixCoordinates }) => {
-        if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
-          component.set('competencyMatrixDomains', competencyMatrixs.domains);
-          component.set(
-            'competencyMatrixCoordinates',
-            competencyMatrixCoordinates
-          );
-          this.setCompetencyCount();
-        } else {
-          Ember.Logger.warn('comp is destroyed...');
-        }
-      }, this);
+      return Ember.RSVP
+        .hash({
+          competencyMatrixs: component
+            .get('competencyService')
+            .getCompetencyMatrixDomain(userId, subjectId, timeLine),
+          competencyMatrixCoordinates: component
+            .get('competencyService')
+            .getCompetencyMatrixCoordinates(subjectId),
+          userProficiencyBaseLine: component.fetchBaselineCompetencies()
+        })
+        .then(({ competencyMatrixs, competencyMatrixCoordinates }) => {
+          if (
+            !(component.get('isDestroyed') || component.get('isDestroying'))
+          ) {
+            component.set('competencyMatrixDomains', competencyMatrixs.domains);
+            component.set(
+              'competencyMatrixCoordinates',
+              competencyMatrixCoordinates
+            );
+            this.setCompetencyCount();
+          } else {
+            Ember.Logger.warn('comp is destroyed...');
+          }
+        }, this);
     }
   },
 
@@ -331,14 +337,16 @@ export default Ember.Mixin.create({
     let classId = component.get('class.id');
     let courseId = component.get('class.courseId');
     let userId = component.get('studentProfile.id');
-    return Ember.RSVP.hash({
-      userProficiencyBaseLine: component
-        .get('competencyService')
-        .getUserProficiencyBaseLine(classId, courseId, userId)
-    }).then(({ userProficiencyBaseLine }) => {
-      component.set('userProficiencyBaseLine', userProficiencyBaseLine);
-      return userProficiencyBaseLine;
-    });
+    return Ember.RSVP
+      .hash({
+        userProficiencyBaseLine: component
+          .get('competencyService')
+          .getUserProficiencyBaseLine(classId, courseId, userId)
+      })
+      .then(({ userProficiencyBaseLine }) => {
+        component.set('userProficiencyBaseLine', userProficiencyBaseLine);
+        return userProficiencyBaseLine;
+      });
   },
 
   setCompetencyCount() {
@@ -387,14 +395,16 @@ export default Ember.Mixin.create({
       filters.fw_code = fwCode;
     }
     if (component.get('subjectCode')) {
-      return Ember.RSVP.hash({
-        taxonomyGrades: taxonomyService.fetchGradesBySubject(filters)
-      }).then(({ taxonomyGrades }) => {
-        component.set(
-          'taxonomyGrades',
-          taxonomyGrades.sortBy('sequence').reverse()
-        );
-      });
+      return Ember.RSVP
+        .hash({
+          taxonomyGrades: taxonomyService.fetchGradesBySubject(filters)
+        })
+        .then(({ taxonomyGrades }) => {
+          component.set(
+            'taxonomyGrades',
+            taxonomyGrades.sortBy('sequence').reverse()
+          );
+        });
     }
   }
 });
