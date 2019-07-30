@@ -23,7 +23,7 @@
 }
 
 .content {
-  height: 100%;
+  height: auto;
   width: 100%;
 
   .controller.teacher.class.class-activities {
@@ -277,7 +277,11 @@
 
                                 &.active {
                                   background-color: #d2e3fc;
-                                  background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
+                                  background-image: -webkit-linear-gradient(
+                                    top,
+                                    #d2e3fc,
+                                    #d2e3fc
+                                  );
                                   border-radius: 50%;
                                   display: flex;
                                   margin: auto;
@@ -294,7 +298,11 @@
 
                                 &.today {
                                   background-color: #3486f7;
-                                  background-image: -webkit-linear-gradient(top, #3486f7, #3486f7);
+                                  background-image: -webkit-linear-gradient(
+                                    top,
+                                    #3486f7,
+                                    #3486f7
+                                  );
                                   border-radius: 50%;
                                   display: flex;
                                   margin: auto;
@@ -386,7 +394,7 @@
               .ca-calendar-tabs {
                 width: 100%;
                 display: grid;
-                grid-template-columns: repeat(3,auto);
+                grid-template-columns: repeat(3, auto);
                 margin: 0 10px;
                 grid-gap: 10px;
                 justify-content: space-evenly;

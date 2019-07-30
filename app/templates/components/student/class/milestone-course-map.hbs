@@ -15,7 +15,7 @@
     <div class="milestone-course-map {{if milestone.isClassGrade 'class-grade'}}">
       <div class="milestone-course-map-panel prev-col-path-{{milestone.prevMilestoneOfLastCollectionPath}} {{if (and milestone.prevMilestoneIsActive milestone.prevMilestoneOfLastLessonIsActive) 'lesson-active'}} {{if milestone.isActive 'active'}}">
         <div class="milestone-info-container" {{action 'toggleMilestoneItems' milestone }}>
-          <div class="milestone-icon-upward-line {{if (eq milestoneIndex 0) 'hidden'}}">
+          <div class="milestone-icon-upward-line {{if (or (eq milestoneIndex 0) milestone.prevMileStoneShowLessons) 'hidden'}}">
             <svg height="40" width="20">
               <line x1="0" y1="0" x2="0" y2="40" />
               <path class="path-right" d="M 0 0  t 8 17 -5 60" />
@@ -38,15 +38,19 @@
             {{/if}}
           </div>
         </div>
-        {{#if showPerformance}}
-          <div class="milestone-peformance grade-range-{{grade-range milestone.performance.scoreInPercentage}}" {{action "onShowMilestoneReport" milestone}}>
-            {{#if milestone.performance.hasStarted}}
-              {{milestone.performance.scoreInPercentage}}%
-            {{else}}
-              --
-            {{/if}}
-          </div>
-        {{/if}}
+        <div class="performance">
+          {{#if (and showPerformance (not milestone.showLessons))}}
+            <div class="milestone-peformance grade-range-{{grade-range milestone.performance.scoreInPercentage}}" {{action "onShowMilestoneReport" milestone}}>
+              {{#if milestone.performance.hasStarted}}
+                {{milestone.performance.scoreInPercentage}}%
+              {{else}}
+                --
+              {{/if}}
+            </div>
+          {{else}}
+            --
+          {{/if}}
+        </div>
       </div>
       <div class="milestone-course-map-lesson-container" id="milestone-{{milestone.milestone_id}}">
         {{#if milestone.hasLessonFetched}}
@@ -101,8 +105,7 @@
                             <div class="collection-title-container">
                               <p>{{collection.title}}</p>
                             </div>
-                            <div class="colllection-play-btn {{unless allowToPlay 'not-allowed-to-play'}}"
-                              {{action 'studyPlayer' 'collection' milestone.milestone_id lesson.unit_id lesson.lesson_id collection}}>
+                            <div class="colllection-play-btn {{unless allowToPlay 'not-allowed-to-play'}}" {{action 'studyPlayer' 'collection' milestone.milestone_id lesson.unit_id lesson.lesson_id collection}}>
                               {{gru-icon style="material-icons-outlined" name="play_circle_filled_white"}}
                             </div>
 
