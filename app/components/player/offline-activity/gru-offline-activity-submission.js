@@ -3,7 +3,11 @@ import {
   getTimeInMillisec,
   formatTime as formatTimeInMilliSec
 } from 'gooru-web/utils/utils';
-import { ROLES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  ROLES,
+  PLAYER_EVENT_SOURCE,
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -65,6 +69,23 @@ export default Ember.Component.extend({
     onShowCompletionConfirmation() {
       const component = this;
       component.set('isShowCompletionConfirmation', true);
+    },
+
+    //Action triggered when click on self grade
+    onTriggerSelfGrade() {
+      const component = this;
+      const classId = component.get('classId');
+      const content = component.get('offlineActivity');
+      const contentType = CONTENT_TYPES.OFFLINE_ACTIVITY;
+      const selfGradeItemContext = Ember.Object.create({
+        classId,
+        content,
+        contentType
+      });
+      const itemsToGrade = Ember.A([selfGradeItemContext]);
+      component.set('itemsToGrade', itemsToGrade);
+      component.set('selfGradeItemContext', selfGradeItemContext);
+      component.set('isShowOaSelfGrading', true);
     }
   },
 
@@ -203,6 +224,47 @@ export default Ember.Component.extend({
     return moment.tz.guess() || null;
   }),
 
+  /**
+   * @property {Boolean} isEnableSelfGrading
+   * Property to enable/disable self grading flow
+   */
+  isEnableSelfGrading: Ember.computed(
+    'isSelfGradingDone',
+    'isOaCompleted',
+    function() {
+      const component = this;
+      return (
+        !component.get('isSelfGradingDone') && component.get('isOaCompleted')
+      );
+    }
+  ),
+
+  /**
+   * @property {Boolean} isSelfGradingDone
+   * Property to check whether self grading is done or not
+   */
+  isSelfGradingDone: false,
+
+  /**
+   * @property {Array} studentRubric
+   * Property will contain attached student rubric item
+   */
+  studentRubric: Ember.computed.filterBy(
+    'offlineActivity.rubric',
+    'grader',
+    'Self'
+  ),
+
+  /**
+   * @property {Array} teacherRubric
+   * Property will contain attached teacher rubric item
+   */
+  teacherRubric: Ember.computed.filterBy(
+    'offlineActivity.rubric',
+    'grader',
+    'Teacher'
+  ),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -263,6 +325,10 @@ export default Ember.Component.extend({
                 formatTimeInMilliSec(submittedTimespentInMillisec)
               );
             }
+          }
+          if (tasksSubmissions.get('oaRubrics.studentGrades')) {
+            let studentGrades = tasksSubmissions.get('oaRubrics.studentGrades');
+            component.set('isSelfGradingDone', !!studentGrades.get('grader'));
           }
           component.set('activityTasks', activityTasks);
           component.set('isLoading', false);
