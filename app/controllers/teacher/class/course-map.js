@@ -132,7 +132,7 @@ export default Ember.Controller.extend({
   /**
    * @property {boolean} showWelcome - indicates the toggle welcome panel state, true means open, false means closed
    */
-  showWelcome: true,
+  showWelcome: false,
 
   /**
    * @property {boolean}

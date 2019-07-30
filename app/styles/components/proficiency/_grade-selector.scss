@@ -33,6 +33,11 @@
 
         label {
           width: 100%;
+          cursor: pointer;
+
+          &.active {
+            color: #0072bc;
+          }
 
           span {
             margin-left: 20px;
@@ -50,7 +55,6 @@
       padding: 4px;
       border-radius: 4px;
       margin: 5px;
-      max-width: 80px;
       display: grid;
       grid-template-columns: auto auto;
       color: #fff;

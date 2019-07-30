@@ -334,6 +334,20 @@
               color: #37424b;
             }
           }
+
+          .icon {
+            margin: auto;
+
+            i.rubric-icon {
+              background-image: url("gooru/images/add_rubric.svg");
+              width: 36px;
+              height: 36px;
+              background-size: 24px;
+              display: block;
+              background-repeat: no-repeat;
+              background-position: center;
+            }
+          }
         }
       }
 

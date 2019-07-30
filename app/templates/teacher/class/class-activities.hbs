@@ -47,7 +47,8 @@
                 forMonth=forMonth
                 forYear=forYear
                 onSelectDate="onSelectDate"
-                highlightFirstDayOfMonth=true
+                updateMonthAndYear=false
+                highlightFirstDayOfMonth=false
                 onSelectToday="onSelectToday"
                 showToday=true
                 selectedDate=selectedDate
@@ -59,6 +60,8 @@
                 forMonth=forMonth
                 forYear=forYear
                 onSelectWeek="onSelectWeek"
+                showPreviousMonth="showPreviousMonth"
+                showNextMonth="showNextMonth"
                 selectedWeekDate=selectedWeekDate
                 activities=scheduledClassActivitiesDatewise
                 highlightActivities=true
@@ -124,7 +127,7 @@
     </div>
     <div class="right-panel">
       <div class="offline-activity-container">
-        <div class="offline-activity-item-header" {{action 'toggleOffineActivity'}}>
+        <div class="offline-activity-item-header {{if (eq selectedPanel 'OA') 'active'}}" {{action 'toggleOffineActivity'}}>
           <span class="hidden-xs">{{t 'common.plan'}} {{t 'common.offline-activites'}}</span>
           <span class="title hidden visible-xs">{{t 'common.offline-activites'}}</span>
           <i class="offline-icon" {{action 'onAddDca' 'offline-activity'}}></i>
@@ -227,7 +230,7 @@
         </div>
       </div>
       <div class="item-to-grade-container">
-        <div class="ca-grade-items-header" {{action 'toggleItemsToGrade'}}>
+        <div class="ca-grade-items-header {{if (eq selectedPanel 'items-to-grade') 'active'}}" {{action 'toggleItemsToGrade'}}>
           <span>{{t 'class.analytics.performance.grade-items'}} ({{itemsToGrade.length}})</span>
           <div class="icons">
             {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
@@ -247,7 +250,7 @@
         </div>
       </div>
       <div class="unschedule-container">
-        <div class="ca-unschedule-items-header" {{action 'toggleUnSchedule'}}>
+        <div class="ca-unschedule-items-header {{if (eq selectedPanel 'unschedule-activity') 'active'}}" {{action 'toggleUnSchedule'}}>
           <span>{{t 'common.unscheduled-items'}} {{t 'common.for'}} {{format-date forMonth 'MMMM'}} ({{unScheduledClassActivities.length}})</span>
           <div class="icons">
             {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
