@@ -7,7 +7,12 @@
     {{#each taxonomyGrades as |taxonomyGrade|}}
       <li>
         <label class="{{if (eq activeGrade.id taxonomyGrade.id) 'active'}}" {{action 'selectGrade' taxonomyGrade}}>
-          <span>{{taxonomyGrade.grade}}</span>
+          <span>
+            {{taxonomyGrade.grade}}
+            {{#if taxonomyGrade.isClassGrade}}
+              ({{t 'profile.proficiency.class-grade-line'}})
+            {{/if}}
+          </span>
         </label>
       </li>
     {{/each}}
@@ -21,7 +26,7 @@
       <span class="ellipsis" data-toggle="tooltip" title={{activeGrade.grade}}>
         {{activeGrade.grade}}
         {{#if activeGrade.isClassGrade}}
-          ({{t 'profile.proficiency.class-grade-line'}} {{t 'grading-player.level'}})
+          ({{t 'profile.proficiency.class-grade-line'}})
         {{/if}}
       </span>
       <span {{action 'onCloseGrade' activeGrade}}>{{gru-icon name="close"}}</span>

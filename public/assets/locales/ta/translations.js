@@ -1951,7 +1951,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'வானலைகளில்',
   'profile.proficiency.baseline': 'அடிப்படை',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class Grade',
+  'profile.proficiency.class-grade-line': 'Class HiLine',
   'profile.proficiency.not-tagged':
     'வகுப்புக்கு நிச்சயமாக ஒதுக்கப்படவில்லை அல்லது நிச்சயமாக ஒரு செல்லுபடியாகாத பொருள் அல்லது தரத்திற்கு குறிக்கப்படவில்லை.',
   'profile.proficiency.show-compressed-chart': 'சுருக்கப்பட்ட அட்டவணையை காட்டு',

@@ -21,7 +21,7 @@
         margin: 15px auto auto;
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         justify-content: space-around;
 
         .legend {
@@ -36,9 +36,7 @@
             margin-right: 8.4px;
           }
 
-          .box-baseline,
-          .box-class-grade-line,
-          .box-grade-line {
+          .box-class-grade-line {
             width: 18px;
             height: 5px;
             margin-top: 4px;
@@ -83,21 +81,9 @@
             }
           }
 
-          &.baseline {
-            .box-baseline {
-              background-color: $dark-400;
-            }
-          }
-
           &.class-grade-line {
             .box-class-grade-line {
               background-color: #8fd383;
-            }
-          }
-
-          &.grade-line {
-            .box-grade-line {
-              background-color: #c77;
             }
           }
         }
