@@ -86,6 +86,12 @@ export default Ember.Component.extend({
       component.set('itemsToGrade', itemsToGrade);
       component.set('selfGradeItemContext', selfGradeItemContext);
       component.set('isShowOaSelfGrading', true);
+    },
+
+    //Action triggered once self grading is done
+    onDoneOaGrading() {
+      const component = this;
+      component.set('isEnableSelfGrading', false);
     }
   },
 
@@ -325,10 +331,12 @@ export default Ember.Component.extend({
                 formatTimeInMilliSec(submittedTimespentInMillisec)
               );
             }
-          }
-          if (tasksSubmissions.get('oaRubrics.studentGrades')) {
-            let studentGrades = tasksSubmissions.get('oaRubrics.studentGrades');
-            component.set('isSelfGradingDone', !!studentGrades.get('grader'));
+            if (tasksSubmissions.get('oaRubrics.studentGrades')) {
+              let studentGrades = tasksSubmissions.get(
+                'oaRubrics.studentGrades'
+              );
+              component.set('isSelfGradingDone', !!studentGrades.get('grader'));
+            }
           }
           component.set('activityTasks', activityTasks);
           component.set('isLoading', false);
@@ -427,6 +435,7 @@ export default Ember.Component.extend({
     const oaId = component.get('oaId');
     const contentSource = component.get('contentSource');
     const studentId = component.get('userId');
+    const studentRubric = component.get('studentRubric').objectAt(0) || null;
     const oaData = {
       class_id: classId,
       oa_id: oaId,
@@ -435,8 +444,12 @@ export default Ember.Component.extend({
       marked_by: ROLES.STUDENT,
       path_id: 0,
       path_type: null,
-      time_zone: component.get('timeZone')
+      time_zone: component.get('timeZone'),
+      student_rubric_id: null
     };
+    if (studentRubric) {
+      oaData.student_rubric_id = studentRubric.get('id');
+    }
     if (component.get('isStudyPlayer')) {
       oaData.course_id = component.get('courseId');
       oaData.unit_id = component.get('unitId');
