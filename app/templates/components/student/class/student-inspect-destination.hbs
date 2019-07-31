@@ -49,15 +49,15 @@
                   <span>{{t 'student-first-experience.route0-action.accept'}}</span>
                 </div>
               </div>
-        {{else if (and isMilestoneFetch (gt milestones.length 0))}}
-            <div class="milestone-course-map-view-route0">
-              {{student/class/milestone-course-map-route0-preview
+            {{else if (and isMilestoneFetch (gt milestones.length 0))}}
+              <div class="milestone-course-map-view-route0">
+                {{student/class/milestone-course-map-route0-preview
                    class=class
                    route0=route0Contents
                    course=course
                    showChart=false
                   }}
-            </div>
+              </div>
             {{/unless}}
           </div>
         {{/if}}
@@ -85,7 +85,6 @@
             {{else if isMilestoneFetch}}
               <div class="student-milestone-not-ready">{{t 'student-milestone-not-ready'}}</div>
             {{/if}}
-
           {{else}}
             {{student/class/destination/student-destination-course-accordion
             courseData=course
@@ -99,7 +98,7 @@
           {{gru-icon name="near_me"}} {{t "student-first-experience.start-studying"}}
         </div>
       </div>
-      {{else if (eq type "destination")}}
+    {{else if (eq type "destination")}}
       <div class="grade-data-container">
         <div class="grade-title">
           {{activeGrade.grade}}
@@ -115,35 +114,34 @@
       <div class="competency-level-container">
         <div class="proficiency-info-1 proficiency-info">
           <div class="grade-title">
-            {{'t' "student-first-experience.competency-level.title"}}
+            {{t "student-first-experience.competency-level.title"}}
           </div>
           <div class="grade-description">
-            {{'t' "student-first-experience.competency-level-partial.desc1"}}
+            {{ t "student-first-experience.competency-level-partial.desc1"}}
             <span class="desc-title">{{activeGrade.grade}}</span> <br>
-            <p>{{'t' "student-first-experience.competency-level-partial.desc2" title=subject.title}}</p>
+            <p>{{ t "student-first-experience.competency-level-partial.desc2" title=subject.title}}</p>
           </div>
         </div>
         <p class="proficiency-info-2 proficiency-info">
-          {{'t' "student-first-experience.competency-level-partial.desc3"}}
+          {{ t "student-first-experience.competency-level-partial.desc3"}}
         </p>
         <p class="proficiency-info-3 proficiency-info">
-          {{'t' "student-first-experience.competency-level-partial.desc4"}}
+          {{ t "student-first-experience.competency-level-partial.desc4"}}
         </p>
         <p class="proficiency-info-4 proficiency-info">
-          <p>{{'t' "student-first-experience.competency-level-partial.desc5" title=subject.title}}</p>
+          <p>{{ t "student-first-experience.competency-level-partial.desc5" title=subject.title}}</p>
         </p>
-
         <div class="competency-level-list proficiency-info-5 proficiency-info">
           <div class="mastery-container">
-            <div class="legend" title= {{ t "student-first-experience.explanatory.master.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.master.desc"}} data-placement='left'></div>
+            <div class="legend" title={{ t "student-first-experience.explanatory.master.title"}} data-toggle="popover" data-content={{ t "student-first-experience.explanatory.master.desc"}} data-placement='left'></div>
             <div class="label"> {{t "student-first-experience.competency-level.mastery" count=competencyStatus.master}}</div>
           </div>
           <div class="in-progress-container">
-            <div class="legend" title= {{ t "student-first-experience.explanatory.in-progress.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.in-progress.desc"}} data-placement='left'></div>
+            <div class="legend" title={{ t "student-first-experience.explanatory.in-progress.title"}} data-toggle="popover" data-content={{ t "student-first-experience.explanatory.in-progress.desc"}} data-placement='left'></div>
             <div class="label"> {{t "student-first-experience.competency-level.in-progress" count=competencyStatus.inProgress}}</div>
           </div>
           <div class="not-started-container">
-            <div class="legend" title= {{ t "student-first-experience.explanatory.not-started.title"}} data-toggle="popover" data-content= {{ t "student-first-experience.explanatory.not-started.desc"}} data-placement='left'></div>
+            <div class="legend" title={{ t "student-first-experience.explanatory.not-started.title"}} data-toggle="popover" data-content={{ t "student-first-experience.explanatory.not-started.desc"}} data-placement='left'></div>
             <div class="label"> {{t "student-first-experience.competency-level.not-started" count=competencyStatus.notStarted}}</div>
           </div>
           <div class="skyline-container">
@@ -185,7 +183,7 @@
     <div class="lp-compute-inprogress">
       <span>{{t 'common.please-wait'}}.</span>
       <i class="compute-icon"></i>
-      <p>{{'t' "student-first-experience.lp-compute-inprogress" title=subject.title}}</p>
+      <p>{{ t "student-first-experience.lp-compute-inprogress" title=subject.title}}</p>
     </div>
   {{/if}}
 </div>
