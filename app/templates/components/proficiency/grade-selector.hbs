@@ -9,6 +9,8 @@
         <label class="{{if (eq activeGrade.id taxonomyGrade.id) 'active'}}" {{action 'selectGrade' taxonomyGrade}}>
           <span>
             {{taxonomyGrade.grade}}
+          </span>
+          <span>
             {{#if taxonomyGrade.isClassGrade}}
               ({{t 'profile.proficiency.class-grade-line'}})
             {{/if}}
