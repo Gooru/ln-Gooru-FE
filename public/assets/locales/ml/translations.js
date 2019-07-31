@@ -64,6 +64,10 @@ window.i18ln = {
   'common.list': 'പട്ടിക',
   'common.day': 'day',
   'common.week': 'week',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.month': 'month',
   'common.no-content-for-week':
     'No class activities scheduled for the selected period',

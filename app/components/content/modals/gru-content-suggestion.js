@@ -77,7 +77,7 @@ export default Ember.Component.extend({
     let component = this;
     component.$().animate(
       {
-        top: '20%'
+        top: '10%'
       },
       850
     );
@@ -90,13 +90,11 @@ export default Ember.Component.extend({
   getCollectionById(collectionId) {
     let component = this;
     const collectionService = component.get('collectionService');
-    return Ember.RSVP
-      .hash({
-        collection: collectionService.readCollection(collectionId)
-      })
-      .then(function(hash) {
-        return hash.collection;
-      });
+    return Ember.RSVP.hash({
+      collection: collectionService.readCollection(collectionId)
+    }).then(function(hash) {
+      return hash.collection;
+    });
   },
 
   /**
@@ -106,13 +104,11 @@ export default Ember.Component.extend({
   getAssessmentById(assessmentId) {
     let component = this;
     const assessmentService = component.get('assessmentService');
-    return Ember.RSVP
-      .hash({
-        assessment: assessmentService.readAssessment(assessmentId)
-      })
-      .then(function(hash) {
-        return hash.assessment;
-      });
+    return Ember.RSVP.hash({
+      assessment: assessmentService.readAssessment(assessmentId)
+    }).then(function(hash) {
+      return hash.assessment;
+    });
   },
 
   // -------------------------------------------------------------------------

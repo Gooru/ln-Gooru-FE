@@ -67,6 +67,10 @@ window.i18ln = {
   'common.first': 'First',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
   'i2d.conversion-progress':
