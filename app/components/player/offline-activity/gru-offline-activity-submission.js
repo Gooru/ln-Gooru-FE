@@ -76,11 +76,14 @@ export default Ember.Component.extend({
       const component = this;
       const classId = component.get('classId');
       const content = component.get('offlineActivity');
+      const contentSource = component.get('contentSource');
       const contentType = CONTENT_TYPES.OFFLINE_ACTIVITY;
       const selfGradeItemContext = Ember.Object.create({
         classId,
         content,
-        contentType
+        contentType,
+        contentSource,
+        dcaContentId: component.get('caContentId')
       });
       const itemsToGrade = Ember.A([selfGradeItemContext]);
       component.set('itemsToGrade', itemsToGrade);
@@ -179,9 +182,15 @@ export default Ember.Component.extend({
 
   /**
    * @property {String} contentSource
-   * Assign DCA player event source as default
+   * Assign player event source as based on caContentId property
    */
-  contentSource: PLAYER_EVENT_SOURCE.DAILY_CLASS,
+  contentSource: Ember.computed('caContentId', function() {
+    const component = this;
+    const caContentId = component.get('caContentId');
+    return caContentId
+      ? PLAYER_EVENT_SOURCE.DAILY_CLASS
+      : PLAYER_EVENT_SOURCE.COURSE_MAP;
+  }),
 
   /**
    * @property {Boolean} isShowCompletionConfirmation
@@ -269,6 +278,11 @@ export default Ember.Component.extend({
     'offlineActivity.rubric',
     'grader',
     'Teacher'
+  ),
+
+  isCourseMapGrading: Ember.computed.equal(
+    'contentSource',
+    PLAYER_EVENT_SOURCE.COURSE_MAP
   ),
 
   // -------------------------------------------------------------------------
