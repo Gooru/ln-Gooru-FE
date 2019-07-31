@@ -24,7 +24,7 @@
           <div class="filter-items">
             {{#each filters as |selectedFilter index|}}
               <div class="filter-item">
-                <span class="name ellipsis" data-toggle="tooltip" title= {{selectedFilter.name}}>{{selectedFilter.name}}</span>
+                <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
                 <span class="clear" {{action 'clearFilter' selectedFilter}}> {{gru-icon name="close"}}</span>
               </div>
             {{/each}}
@@ -34,7 +34,7 @@
             <div class="more-filters hidden">
               {{#each moreFilters as |moreFilter|}}
                 <div class="filter-item">
-                  <span class="name ellipsis" data-toggle="tooltip" title= {{moreFilter.name}}>{{moreFilter.name}}</span>
+                  <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
                   <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
                 </div>
               {{/each}}
@@ -105,14 +105,12 @@
       {{/if}}
     </div>
   {{/if}}
-
 </div>
 {{#if isLoading}}
   <div class="loading-spinner">
     {{three-bounce-spinner}}
   </div>
 {{/if}}
-
 <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
   {{ca-daterange-datepicker
       closeDatePicker='onCloseDatePicker'
@@ -121,9 +119,8 @@
       endDate=endDate
       allowTwoDateRangePicker=allowTwoDateRangePicker}}
 </div>
-
 {{#if isShowCreateOfflineActivity}}
-  {{activity.gru-new-offline-activity
+  {{activity/gru-new-offline-activity
     isShowPullUp=isShowCreateOfflineActivity
     classPreference=classPreference
     classId=classId
