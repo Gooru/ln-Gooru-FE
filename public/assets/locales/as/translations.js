@@ -59,6 +59,10 @@ window.i18ln = {
   'self-grade.not-required': 'Student self-grading not required',
   'common.first': 'প্ৰথম',
   'common.last': 'শেষ',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.name': 'নাম',
   'common.user': 'ব্যৱহাৰকাৰী',
   'common.content-name': 'বিষয়বস্তুৰ নাম',

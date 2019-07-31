@@ -61,6 +61,10 @@ window.i18ln = {
   'common.first': 'First',
   'common.last': 'Last',
   'common.name': 'Name',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',

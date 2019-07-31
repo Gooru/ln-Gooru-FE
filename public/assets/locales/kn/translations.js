@@ -60,6 +60,10 @@ window.i18ln = {
   'common.grid': 'ಗ್ರಿಡ್ ',
   'common.list': 'ಪಟ್ಟಿ ',
   'common.first': 'ಮೊದಲ ',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.last': 'ಕೊನೆಯ',
   'common.name': 'ಹೆಸರು',
   'common.user': 'ಬಳಕೆದಾರ ',

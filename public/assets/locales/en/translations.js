@@ -282,6 +282,10 @@ window.i18ln = {
   'common.not-answered': 'Not Answered',
   'common.rubric-not-answered': 'Rubric Not Answered',
   'common.country': 'Country',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.course-map': 'Course Map',
   'common.course': 'Course',
   'common.course-title': 'Course Title',
@@ -2464,7 +2468,7 @@ window.i18ln = {
     'Suggested Assessment (Optional)',
   'gru-suggest-test.signature_assessment-lead':
     'Based on your performance on this course, the following assessment may enhance your understanding.',
-  'gru-suggest-test.pre-test-lead':
+  'gru-suggest-test.pre-tessignaturet-lead':
     'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'gru-suggest-test.post-test-lead':
     'The following post-test is suggested to measure your understanding of the information presented. The post-test will not affect your course performance score.',
