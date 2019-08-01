@@ -1883,10 +1883,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     });
     activeOfflineActivities.map(offlineActivity => {
       let collection = offlineActivity.get('collection');
-      let standards = offlineActivity.get('collection.standards');
-      if (standards && standards.length > 0) {
-        assessments.pushObject(collection);
-      }
+      assessments.pushObject(collection);
     });
 
     let assessmentIds = assessments.map(assessment => {
