@@ -842,28 +842,26 @@ export default Ember.Component.extend({
     const contentId =
       component.get('context.dcaContentId') ||
       component.get('context.content.id');
+    const requestParam = {
+      classId,
+      type: 'oa'
+    };
     if (component.get('isCourseMapGrading')) {
-      const requestParam = {
-        classId,
-        type: 'oa',
-        source: PLAYER_EVENT_SOURCE.COURSE_MAP,
-        courseId: component.get('context.content.courseId') || null
-      };
-      return Ember.RSVP
-        .hash({
-          studentIds: component
-            .get('rubricService')
-            .getOaGradingStudents(contentId, requestParam)
-        })
-        .then(({ studentIds }) => {
-          return component
-            .get('profileService')
-            .readMultipleProfiles(studentIds.students);
-        });
+      requestParam.source = PLAYER_EVENT_SOURCE.COURSE_MAP;
+      requestParam.courseId = component.get('context.content.courseId') || null;
     } else {
-      return component
-        .get('classActivityService')
-        .fetchUsersForClassActivity(classId, contentId);
+      requestParam.source = 'dca';
     }
+    return Ember.RSVP
+      .hash({
+        studentIds: component
+          .get('rubricService')
+          .getOaGradingStudents(contentId, requestParam)
+      })
+      .then(({ studentIds }) => {
+        return component
+          .get('profileService')
+          .readMultipleProfiles(studentIds.students);
+      });
   }
 });
