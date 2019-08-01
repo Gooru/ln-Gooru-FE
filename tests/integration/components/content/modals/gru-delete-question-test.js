@@ -1,4 +1,4 @@
-import { moduleForComponent, test, skip } from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import wait from 'ember-test-helpers/wait';
@@ -124,7 +124,7 @@ test('it calls a generic delete method and then redirects (if a route is provide
   $component.find('.actions .delete').click();
 });
 
-skip('show spinner button component while the server response, after clicking on the delete button', function(assert) {
+test('show spinner button component while the server response, after clicking on the delete button', function(assert) {
   assert.expect(4);
 
   const model = {
@@ -150,7 +150,7 @@ skip('show spinner button component while the server response, after clicking on
   const $component = this.$('.gru-delete-question');
 
   $component.find('.actions> button.delete').click();
-
+  this.set('isLoading', true);
   return wait().then(function() {
     assert.ok(
       $component.find('.actions> .gru-spinner-button').length,
