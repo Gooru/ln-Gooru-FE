@@ -1904,7 +1904,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'ਸਕਾਈਲਾਈਨ',
   'profile.proficiency.baseline': 'ਬੇਸਲਾਈਨ',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class Grade',
+  'profile.proficiency.class-grade-line': 'Class HiLine',
   'profile.proficiency.not-tagged':
     'ਕਲਾਸ ਦੇ ਕਿਸੇ ਵੀ ਕੋਰਸ ਨੂੰ ਨਿਰਧਾਰਤ ਨਹੀਂ ਕੀਤਾ ਗਿਆ ਹੈ ਜਾਂ ਕੋਰਸ ਕਿਸੇ ਯੋਗ ਵਿਸ਼ਾ ਜਾਂ ਮਿਆਰਾਂ ਲਈ ਨਹੀਂ ਟੈਗ ਕੀਤਾ ਗਿਆ ਹੈ.',
   'profile.proficiency.show-compressed-chart': 'ਕੰਪਰੈੱਸਡ ਚਾਰਟ ਦਿਖਾਓ',

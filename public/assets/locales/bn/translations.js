@@ -1887,7 +1887,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'দিগন্ত',
   'profile.proficiency.baseline': 'বেসলাইন',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class Grade',
+  'profile.proficiency.class-grade-line': 'Class HiLine',
   'profile.proficiency.not-tagged':
     'ক্লাসের কোন কোর্স নির্ধারিত নেই অথবা কোর্সটিকে কোনও বৈধ বিষয় বা মানগুলিতে ট্যাগ করা হয়নি।',
   'profile.proficiency.show-compressed-chart': 'সংক্ষেপিত চার্ট প্রদর্শন করুন',

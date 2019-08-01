@@ -1939,7 +1939,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'স্কাইলাইন',
   'profile.proficiency.baseline': 'বেচলাইন',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class Grade',
+  'profile.proficiency.class-grade-line': 'Class HiLine',
   'profile.proficiency.not-tagged':
     'শ্ৰেণীটোক কোনো কাৰ্যক্ৰম দিয়া হোৱা নাই অথবা কাৰ্যক্ৰমটো বৈধ বিষয় অথবা মানকৰ লগত টেগ কৰা নাই।',
   'profile.proficiency.show-compressed-chart': 'সংকোচিত তালিকা দেখুৱাওক',

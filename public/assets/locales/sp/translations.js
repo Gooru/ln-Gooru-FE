@@ -1937,7 +1937,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'Skyline',
   'profile.proficiency.baseline': 'Baseline',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class Grade',
+  'profile.proficiency.class-grade-line': 'Class HiLine',
   'profile.proficiency.not-tagged':
     'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
   'profile.proficiency.show-compressed-chart': 'Show Compressed Chart',

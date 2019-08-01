@@ -21,7 +21,7 @@
       border-radius: 0;
       max-height: 300px;
       overflow-y: auto;
-      width: 100%;
+      width: auto;
 
       li {
         padding: 2px;
@@ -32,15 +32,19 @@
         }
 
         label {
-          width: 100%;
+          width: max-content;
           cursor: pointer;
+          display: grid;
+          grid-template-columns: auto auto;
+          grid-gap: 5px;
 
           &.active {
             color: #0072bc;
           }
 
           span {
-            margin-left: 20px;
+            display: block;
+            width: max-content;
           }
         }
       }
