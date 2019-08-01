@@ -212,6 +212,11 @@ export default Ember.Controller.extend({
   isShowOfflineActivityPreview: false,
 
   /**
+   * @property {Boolean} isShowStudentOfflineActivityReport
+   */
+  isShowStudentOfflineActivityReport: false,
+
+  /**
    * Maintains the value of  milestone view or not, default view will be course map.
    * @type {Boolean}
    */
@@ -460,9 +465,12 @@ export default Ember.Controller.extend({
     collectionReport(params) {
       let controller = this;
       let reportType = params.type;
-      if (reportType === 'assessment-external') {
+      if (reportType === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
         controller.set('isShowStudentExternalAssessmentReport', true);
         controller.set('isShowStudentReport', false);
+      } else if (reportType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        params.performance = params.collection.performance;
+        controller.set('isShowStudentOfflineActivityReport', true);
       } else {
         controller.set('isShowStudentExternalAssessmentReport', false);
         controller.set('isShowStudentReport', true);
