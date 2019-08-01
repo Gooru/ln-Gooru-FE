@@ -145,7 +145,6 @@
           &.grade-range-not-started {
             background: transparent;
             border-bottom: none;
-            pointer-events: none;
             color: #666;
           }
         }
@@ -348,7 +347,6 @@
               &.grade-range-not-started {
                 background: transparent;
                 color: #666;
-                pointer-events: none;
               }
             }
           }
@@ -682,7 +680,6 @@
                   &.grade-range-not-started {
                     background: transparent;
                     color: #666;
-                    pointer-events: none;
                   }
 
                   &.format-collection {
