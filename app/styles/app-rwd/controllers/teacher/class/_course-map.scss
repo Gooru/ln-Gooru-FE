@@ -1,8 +1,18 @@
 .controller.teacher.course-map {
-  max-width: 95%;
+  max-width: 100%;
   @media screen and (max-width: $screen-sm - 1) {
     .actions {
       display: none;
+    }
+
+    .course-map-container {
+      .course-map-body.teacher-cm {
+        .render-course-map {
+          .ms-cm-view-switcher-ctn {
+            box-shadow: none;
+          }
+        }
+      }
     }
   }
 
@@ -859,6 +869,21 @@ body.teacher_class_course-map {
   @media only screen and (max-width: $screen-xs) {
     .app-container {
       padding-top: 102px;
+    }
+  }
+
+  .teacher.class {
+    @media only screen and (max-width: $screen-sm - 1) {
+      .content {
+        padding-top: 0;
+
+        .controller.teacher.class.course-map {
+          .course-map-container {
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+          }
+        }
+      }
     }
   }
 }
