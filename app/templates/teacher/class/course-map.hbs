@@ -20,11 +20,20 @@
       </div>
     </div>
     <div class="course-map-container">
-
       {{#if isStudentCourseMap}}
         <div class="active-student">
           <div class="student-thumbnail pull-left" style="background-image: url({{activeStudent.avatarUrl}})"></div>
           <div class="student-name pull-left">{{activeStudent.fullName}}</div>
+          <div class="ms-rescope-content-preview">
+            <div class="show-completed-course hidden-xs">
+              {{t 'class.overview.course-map.rescope-toggle'}}
+            </div>
+            <div class="show-completed-course-btn">
+              {{gru-toggle-button
+                isChecked=showAllRescopedContent
+                onToggleButton="onToggleRescope" }}
+            </div>
+          </div>
           <div class="student-close pull-right" {{action "onSelectAll"}}>
             {{gru-icon name="clear"}}
           </div>
@@ -82,11 +91,11 @@
             {{three-bounce-spinner}}
           {{else}}
             {{#unless (and class.milestoneViewApplicable hasMilestoneViewReady)}}
-              <div class="header title">
+              <div class="header">
                 {{t 'common.course-map'}}
               </div>
             {{else if isStudentCourseMap}}
-              <div class="header title">
+              <div class="header">
                 {{t 'milestones'}}
               </div>
             {{/unless}}
@@ -138,7 +147,8 @@
                   milestones=milestones
                   isTeacher=true
                   location=location
-                  showLocationReport= tab
+                  showAllRescopedContent=showAllRescopedContent
+                  showLocationReport=tab
 
                 }}
                 {{/unless}}
