@@ -450,6 +450,12 @@ export default Ember.Controller.extend({
         Ember.$('.list').removeClass('active');
         Ember.$(`.student-${index}`).addClass('active');
         controller.actions.onToggleStudentList(controller);
+        let studentListEle = Ember.$(
+          '.teacher .class .course-map .course-map-body .students'
+        );
+        if (studentListEle.hasClass('active')) {
+          controller.send('toggleStudentList');
+        }
       }
     },
 
