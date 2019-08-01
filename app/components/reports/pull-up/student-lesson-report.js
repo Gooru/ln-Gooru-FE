@@ -103,7 +103,7 @@ export default Ember.Component.extend({
         component.set('showCollectionReport', false);
       } else if (reportType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
         component.set('isShowStudentOfflineActivityReport', true);
-        params.studentPerformance = collection.get('performance');
+        params.performance = collection.get('performance');
       } else {
         component.set('isShowStudentExternalAssessmentReport', false);
         component.set('showCollectionReport', true);

@@ -301,3 +301,14 @@
     isCourseMapGrading = true
   }}
 {{/if}}
+
+{{#if isShowStudentOfflineActivityReport}}
+  {{reports.pull-up.oa-preview
+    showPullUp=isShowStudentOfflineActivityReport
+    oaId=studentReportContextData.collection.id
+    isReportView=true
+    classId=class.id
+    isCmReport = true
+    reportContext = studentReportContextData
+  }}
+{{/if}}

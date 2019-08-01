@@ -85,7 +85,7 @@
             {{/if}}
           </div>
           <div class="score">
-            {{#if collection.performance.hasStarted}}
+            {{#if (or collection.performance.hasStarted collection.performance.isCompleted)}}
               {{#if (not-eq collection.format 'collection')}}
                 <span style= {{safe-html (concat "color:" (grade-color collection.performance.score))}}>{{collection.performance.score}}%</span>
               {{else}}
