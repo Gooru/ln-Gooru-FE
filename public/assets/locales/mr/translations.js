@@ -1,4 +1,4 @@
-//eslint-disable-next-line
+﻿//eslint-disable-next-line
 window.i18ln = {
   en: 'English',
   sp: 'Español',
@@ -1266,7 +1266,7 @@ window.i18ln = {
   'teacher-landing.class.class-management': 'वर्ग व्यवस्थापन',
   'teacher-landing.class.atc': 'एटीसी',
   'teacher-landing.class.performance-overview': 'कामगिरी आढावा',
-  'teacher-landing.class.student-proficiency': 'विद्यार्थ्यांचे प्रभुत्व',
+  'teacher-landing.class.student-proficiency': 'प्रभुत्व पातळी',
   'teacher-landing.class.class-management-tab.actions': 'कृती',
   'teacher-landing.class.class-management-tab.assessment-min-score':
     'पुरस्कार मिळवण्यासाठी आवश्यक कमीत कमी गुण',
@@ -1417,7 +1417,7 @@ window.i18ln = {
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'आणखी शिक्षक जोडा',
   'teacher-landing.class.class-settings.class-settings-sec.language':
-    'सुचनेची भाषा',
+    'माध्यम',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
     'विद्यार्थी सेटिंग्ज',
   'teacher-landing.class.class-settings.student-settings-sec.col-head-active':
@@ -1617,7 +1617,7 @@ window.i18ln = {
   'gru-welcome-message.text-four.text':
     ': तुम्ही वापरून पहावीत अशी नवीन वैशिष्ट्ये घेऊन आलो आहोत.',
   'gru-welcome-message.text-five':
-    'तुम्हाला तुमच्या मुख्यपृष्ठावर कधीही परत जावेस वाटले तर, फक्त क्लिक करा',
+    'तुम्हाला तुमच्या मुख्य पृष्ठावर कधीही परत जावेस वाटले तर, फक्त क्लिक करा',
   'gru-welcome-message.dont-show-again': 'पुन्हा दाखवू नका',
   'sign-up.step-1-title': 'नमस्कार !',
   'sign-up.step-1-description':
@@ -1682,7 +1682,7 @@ window.i18ln = {
   'login.signUpHere': 'येथे साइन अप करा!',
   'login.forgotPassword': 'तुमचा पासवर्ड विसरलात?',
   'login.password': 'पासवर्ड',
-  'login.usernameOrEmail': 'वापरकर्तानाव किंवा ईमेल',
+  'login.usernameOrEmail': 'वापरकर्ता नाव किंवा ईमेल',
   'login.log-in': 'लॉग इन',
   'forgot-password.description': 'हे आपल्या सर्वांच्या बाबतीत घडते',
   'forgot-password.usernameOrEmail': 'कृपया आपला ईमेल प्रविष्ट करा',
@@ -2081,7 +2081,7 @@ window.i18ln = {
   'taxonomy.modals.gru-domain-picker.selectedText.zero':
     '{{count}} निवडलेले डोमेन्स ',
   'taxonomy.modals.gru-domain-picker.selectedText.one':
-    '{{count}} निवडलेला डोमेन',
+    '{{count}} निवडलेले क्षेत्र',
   'taxonomy.modals.gru-domain-picker.selectedText.other':
     '{{count}} निवडलेले डोमेन्स',
   'taxonomy.modals.gru-domain-picker.shortcutText': 'यात अभ्यासक्रम आहे',
@@ -2536,7 +2536,7 @@ window.i18ln = {
   'report.competency-report.show-learning-map': 'शैक्षणिक आराखडा दाखवा',
   'report.competency-report.note':
     'आमच्या प्रमुख मुल्यांकनामध्ये 80% गुण मिळवून दाखवा आणि तुमचे प्रभुत्व सिद्ध करा',
-  'report.domain-report': 'डोमेन अहवाल',
+  'report.domain-report': 'अध्ययन क्षेत्र अहवाल',
   'competency-info-content.portfolio': 'कारकीर्द',
   'competency-info-content.metadata': 'मेटाडेटा',
   'competency-info-content.learning-map': 'शैक्षणिक आराखडा',
@@ -2734,7 +2734,7 @@ window.i18ln = {
   'previous-week': 'मागचा आठवडा',
   'beginning-till-now': 'सुरुवातीपासून आतापर्यंत',
   'report.class-proficiency-report': 'वर्ग प्राविण्य अहवाल',
-  'report.domain-proficiency-report': 'डोमेन क्षमता अहवाल',
+  'report.domain-proficiency-report': 'अध्ययन क्षेत्र क्षमता अहवाल',
   'report.class-weekly-report': 'वर्ग साप्ताहिक अहवाल',
   'no-teacher-found': 'या इमेल आयडी शी संबंधित कोणतेही शिक्षक सापडले नाहीत!',
   'oa-player.complete-confirm':
