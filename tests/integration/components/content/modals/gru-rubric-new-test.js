@@ -1,4 +1,4 @@
-import { moduleForComponent, test, skip } from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import wait from 'ember-test-helpers/wait';
@@ -163,7 +163,7 @@ test('Create a rubric', function(assert) {
   });
 });
 
-skip('show spinner button component while the server response, after clicking on the create button', function(assert) {
+test('show spinner button component while the server response, after clicking on the create button', function(assert) {
   assert.expect(5);
 
   // Mock the transitionTo method in the router
@@ -191,6 +191,7 @@ skip('show spinner button component while the server response, after clicking on
   $titleField.find('input').blur();
 
   $component.find('.actions .add').click();
+  this.set('isLoading', true);
 
   return wait().then(function() {
     assert.ok(

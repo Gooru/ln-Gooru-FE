@@ -222,7 +222,7 @@ test('Validate the character limit in the Course title field', function(assert) 
   assert.equal(maxLenValue, 50, 'Input max length');
 });
 
-skip('show spinner button component while the server response, after clicking on the create button', function(assert) {
+test('show spinner button component while the server response, after clicking on the create button', function(assert) {
   assert.expect(5);
 
   this.on('closeModal', function() {
@@ -251,6 +251,7 @@ skip('show spinner button component while the server response, after clicking on
   $titleField.find('input').blur();
 
   $component.find('.actions .create').click();
+  this.set('isLoading', true);
 
   return wait().then(function() {
     assert.ok(
