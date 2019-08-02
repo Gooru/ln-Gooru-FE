@@ -1,4 +1,4 @@
-import { moduleForComponent, test, skip } from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
 import Ember from 'ember';
@@ -111,7 +111,7 @@ test('Load a list of answers and add new answer', function(assert) {
     assert.equal($option.length, 3, 'Incorrect number of answer');
   });
 });
-skip('Delete answer', function(assert) {
+test('Delete answer', function(assert) {
   const answers = Ember.A([
     Answer.create(Ember.getOwner(this).ownerInjection(), {
       text: 'Option A',
