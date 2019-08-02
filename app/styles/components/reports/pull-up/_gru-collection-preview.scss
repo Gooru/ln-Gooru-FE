@@ -240,6 +240,7 @@
         .content-items-container {
           width: 100vw;
           overflow-x: hidden;
+          height: calc(100% - 200px);
         }
       }
     }
