@@ -70,7 +70,7 @@ export default Ember.Component.extend({
   /**
    * @property {UUID} userId
    */
-  userId: Ember.computed.alias('session.userId'),
+  userId: null,
 
   /**
    * @property {String} frameworkCode
@@ -108,24 +108,26 @@ export default Ember.Component.extend({
    */
   loadMilestonesPerformanceData() {
     const component = this;
-    return Ember.RSVP.hash({
-      milestones: component.fetchMilestones(),
-      milestonesPerformanceScore: component.fetchMilestonesPerformanceScore(),
-      milestonesPerformanceTimespent: component.fetchMilestonesPerformanceTimespent(),
-      grades: component.fetchGradesBySubject()
-    }).then(hash => {
-      if (!component.isDestroyed) {
-        let milestones = component.filterOutMilestonesBasedOnGrade(
-          hash.grades,
-          hash.milestones
-        );
-        component.parseMilestonesPerformance(
-          milestones,
-          hash.milestonesPerformanceScore,
-          hash.milestonesPerformanceTimespent
-        );
-      }
-    });
+    return Ember.RSVP
+      .hash({
+        milestones: component.fetchMilestones(),
+        milestonesPerformanceScore: component.fetchMilestonesPerformanceScore(),
+        milestonesPerformanceTimespent: component.fetchMilestonesPerformanceTimespent(),
+        grades: component.fetchGradesBySubject()
+      })
+      .then(hash => {
+        if (!component.isDestroyed) {
+          let milestones = component.filterOutMilestonesBasedOnGrade(
+            hash.grades,
+            hash.milestones
+          );
+          component.parseMilestonesPerformance(
+            milestones,
+            hash.milestonesPerformanceScore,
+            hash.milestonesPerformanceTimespent
+          );
+        }
+      });
   },
 
   /**
@@ -149,7 +151,7 @@ export default Ember.Component.extend({
     const performanceService = component.get('performanceService');
     const classId = component.get('classId');
     const courseId = component.get('courseId');
-    const userId = component.get('userId');
+    const userId = component.get('userId') || component.get('session.userId');
     const frameworkCode = component.get('frameworkCode');
     return performanceService.getPerformanceForMilestones(
       classId,
@@ -169,7 +171,7 @@ export default Ember.Component.extend({
     const performanceService = component.get('performanceService');
     const classId = component.get('classId');
     const courseId = component.get('courseId');
-    const userId = component.get('userId');
+    const userId = component.get('userId') || component.get('session.userId');
     const frameworkCode = component.get('frameworkCode');
     return performanceService.getPerformanceForMilestones(
       classId,
@@ -203,13 +205,15 @@ export default Ember.Component.extend({
   setGradeSubject() {
     const component = this;
     const subject = component.get('subject');
-    return Ember.RSVP.hash({
-      gradeSubject: subject
-        ? component.get('taxonomyService').fetchSubject(subject)
-        : {}
-    }).then(({ gradeSubject }) => {
-      component.set('gradeSubject', gradeSubject);
-    });
+    return Ember.RSVP
+      .hash({
+        gradeSubject: subject
+          ? component.get('taxonomyService').fetchSubject(subject)
+          : {}
+      })
+      .then(({ gradeSubject }) => {
+        component.set('gradeSubject', gradeSubject);
+      });
   },
 
   /**
@@ -267,7 +271,7 @@ export default Ember.Component.extend({
   filterOutMilestonesBasedOnGrade(grades, milestones) {
     let component = this;
     let gradeBounds = component.get('class.memberGradeBounds');
-    let userId = component.get('userId');
+    const userId = component.get('userId') || component.get('session.userId');
     let gradeBound = gradeBounds.findBy(userId);
     let milestoneData = Ember.A([]);
     let studentGradeBound = Ember.Object.create(gradeBound.get(userId));
