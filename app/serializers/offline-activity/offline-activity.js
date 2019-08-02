@@ -538,7 +538,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
         : null
     });
     if (!payload.get('isCourseMapGrading')) {
-      grade.set('dca_content_id', payload.get('dcaContentId'));
+      grade.set('dca_content_id', parseInt(payload.get('dcaContentId')));
     } else {
       grade.set('course_id', payload.get('courseId') || undefined);
       grade.set('unit_id', payload.get('unitId') || undefined);

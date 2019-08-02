@@ -59,6 +59,10 @@ window.i18ln = {
   'self-grade.not-required': 'Student self-grading not required',
   'common.first': 'প্ৰথম',
   'common.last': 'শেষ',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.name': 'নাম',
   'common.user': 'ব্যৱহাৰকাৰী',
   'common.content-name': 'বিষয়বস্তুৰ নাম',
@@ -67,6 +71,8 @@ window.i18ln = {
   'featured-libraries': 'featured libraries',
   'common.answer-this-activity':
     'Answer this rubric to complete your activity.',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
   'common.for': 'for',
   'common.lastName': 'শেষ নাম',
   'common.firstName': 'প্ৰথম নাম',
@@ -1752,7 +1758,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Grade Lines',
+  'grade-selector.placeholder': 'Hiline',
   'standard-dropdown.placeholder': 'মানকৰ মতে ব্ৰাউজ কৰক',
   'subject-dropdown.placeholder': 'বিষয়',
   'subject-dropdown.prompt': 'এটা বিষয় নিৰ্বাচন কৰক',
@@ -1933,7 +1939,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'স্কাইলাইন',
   'profile.proficiency.baseline': 'বেচলাইন',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class Grade',
+  'profile.proficiency.class-grade-line': 'Class HiLine',
   'profile.proficiency.not-tagged':
     'শ্ৰেণীটোক কোনো কাৰ্যক্ৰম দিয়া হোৱা নাই অথবা কাৰ্যক্ৰমটো বৈধ বিষয় অথবা মানকৰ লগত টেগ কৰা নাই।',
   'profile.proficiency.show-compressed-chart': 'সংকোচিত তালিকা দেখুৱাওক',
@@ -2745,7 +2751,7 @@ window.i18ln = {
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
-  'report.class-weekly-report': 'Class Weekly Report',
+  'report.class-weekly-report': 'Class Progress Report',
   'no-teacher-found': 'No teacher with that email id found!',
   'oa-player.complete-confirm':
     'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',

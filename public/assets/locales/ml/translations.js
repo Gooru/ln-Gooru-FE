@@ -64,6 +64,10 @@ window.i18ln = {
   'common.list': 'പട്ടിക',
   'common.day': 'day',
   'common.week': 'week',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.month': 'month',
   'common.no-content-for-week':
     'No class activities scheduled for the selected period',
@@ -73,6 +77,8 @@ window.i18ln = {
   'common.no-users-to-grade-oa':
     'There are no users to grade for this Offline Activity.',
   'common.last': 'അവസാനത്തെ',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
   'common.name': 'പേര്',
   'common.user': 'ഉപയോക്താവ്',
   'common.content-name': 'ഉള്ളടക്കത്തിന്റെ പേര്',
@@ -1760,7 +1766,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Grade Lines',
+  'grade-selector.placeholder': 'Hiline',
   'standard-dropdown.placeholder': 'സ്റ്റാൻഡേർഡ് ബ്രൗസുചെയ്യുക',
   'subject-dropdown.placeholder': 'വിഷയം (കൾ)',
   'subject-dropdown.prompt': 'ഒരു വിഷയം തിരഞ്ഞെടുക്കുക',
@@ -1942,7 +1948,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'ആകാശം',
   'profile.proficiency.baseline': 'അടിസ്ഥാനരേഖ',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class Grade',
+  'profile.proficiency.class-grade-line': 'Class HiLine',
   'profile.proficiency.not-tagged':
     'ക്ലാസ് ഒന്നും തന്നെ നിശ്ചയിച്ചിട്ടില്ല, അല്ലെങ്കിൽ കോഴ്സ് ഒരു സാധുതയുള്ള വിഷയം അല്ലെങ്കിൽ നിലവാരത്തിലേക്ക് ടാഗുചെയ്തിട്ടില്ല.',
   'profile.proficiency.show-compressed-chart':
@@ -2764,7 +2770,7 @@ window.i18ln = {
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
-  'report.class-weekly-report': 'Class Weekly Report',
+  'report.class-weekly-report': 'Class Progress Report',
   'no-teacher-found': 'No teacher with that email id found!',
   'oa-player.complete-confirm':
     'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',

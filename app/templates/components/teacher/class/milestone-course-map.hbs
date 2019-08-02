@@ -3,6 +3,11 @@
     <div class="milestone-course-map {{if milestone.isActive 'active'}} {{if milestone.isClassGrade 'class-grade'}}">
       <div class="milestone-course-map-panel  {{if milestone.isActive 'active'}}">
         <div class="milestone-info-container" {{action 'toggleMilestoneItems' milestone }}>
+          <div class="milestone-icon-upward-line {{if  (eq milestoneIndex 0) 'hidden'}}">
+            <svg height="40" width="20">
+              <line x1="0" y1="0" x2="0" y2="40" />
+            </svg>
+          </div>
           <div class="milestone-flag-icon">
             {{gru-icon name="flag"}}
           </div>

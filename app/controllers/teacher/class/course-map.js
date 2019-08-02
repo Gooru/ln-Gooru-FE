@@ -132,7 +132,7 @@ export default Ember.Controller.extend({
   /**
    * @property {boolean} showWelcome - indicates the toggle welcome panel state, true means open, false means closed
    */
-  showWelcome: true,
+  showWelcome: false,
 
   /**
    * @property {boolean}
@@ -212,6 +212,11 @@ export default Ember.Controller.extend({
   isShowOfflineActivityPreview: false,
 
   /**
+   * @property {Boolean} isShowStudentOfflineActivityReport
+   */
+  isShowStudentOfflineActivityReport: false,
+
+  /**
    * Maintains the value of  milestone view or not, default view will be course map.
    * @type {Boolean}
    */
@@ -278,6 +283,12 @@ export default Ember.Controller.extend({
 
   actions: {
     /**
+     * This action is responsible for toggle the property of @property showAllRescopedContent
+     */
+    onToggleRescope() {
+      this.toggleProperty('showAllRescopedContent');
+    },
+    /**
      * Trigger when user click on student list (mobile view)
      */
     toggleStudentList() {
@@ -285,9 +296,10 @@ export default Ember.Controller.extend({
         '.teacher .class .course-map .course-map-body .students'
       );
       if (!studentListEle.hasClass('active')) {
+        let height = Ember.$('.gru-class-navbar').height();
         studentListEle.animate(
           {
-            top: '0%'
+            top: height
           },
           400
         );
@@ -313,9 +325,10 @@ export default Ember.Controller.extend({
         '.teacher .class .course-map .course-map-body .items-to-grade'
       );
       if (!itemToGradeEle.hasClass('active')) {
+        let height = Ember.$('.gru-class-navbar').height();
         itemToGradeEle.animate(
           {
-            top: '0%'
+            top: height
           },
           400
         );
@@ -437,6 +450,12 @@ export default Ember.Controller.extend({
         Ember.$('.list').removeClass('active');
         Ember.$(`.student-${index}`).addClass('active');
         controller.actions.onToggleStudentList(controller);
+        let studentListEle = Ember.$(
+          '.teacher .class .course-map .course-map-body .students'
+        );
+        if (studentListEle.hasClass('active')) {
+          controller.send('toggleStudentList');
+        }
       }
     },
 
@@ -460,9 +479,12 @@ export default Ember.Controller.extend({
     collectionReport(params) {
       let controller = this;
       let reportType = params.type;
-      if (reportType === 'assessment-external') {
+      if (reportType === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
         controller.set('isShowStudentExternalAssessmentReport', true);
         controller.set('isShowStudentReport', false);
+      } else if (reportType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        params.performance = params.collection.performance;
+        controller.set('isShowStudentOfflineActivityReport', true);
       } else {
         controller.set('isShowStudentExternalAssessmentReport', false);
         controller.set('isShowStudentReport', true);
@@ -670,32 +692,30 @@ export default Ember.Controller.extend({
         collectionType
       );
 
-    return Ember.RSVP
-      .hash({
-        studentUnitPerformance: studentUnitPerformance
-      })
-      .then(function(hash) {
-        let unitsPerformance = hash.studentUnitPerformance[0];
-        let unitUsageData = unitsPerformance.usageData;
-        let units = course.get('children');
-        let unPerformedUnit = {
-          completionDone: 0,
-          completionTotal: 0,
-          score: -1,
-          timeSpent: -1
-        };
-        units.map(unit => {
-          let id = unit.get('id');
-          let data = unitUsageData.findBy('unitId', id);
-          if (data) {
-            unit.set('performance', data);
-          } else {
-            unit.set('performance', unPerformedUnit);
-          }
-        });
-        controller.set('units', units);
-        controller.set('isLoading', false);
+    return Ember.RSVP.hash({
+      studentUnitPerformance: studentUnitPerformance
+    }).then(function(hash) {
+      let unitsPerformance = hash.studentUnitPerformance[0];
+      let unitUsageData = unitsPerformance.usageData;
+      let units = course.get('children');
+      let unPerformedUnit = {
+        completionDone: 0,
+        completionTotal: 0,
+        score: -1,
+        timeSpent: -1
+      };
+      units.map(unit => {
+        let id = unit.get('id');
+        let data = unitUsageData.findBy('unitId', id);
+        if (data) {
+          unit.set('performance', data);
+        } else {
+          unit.set('performance', unPerformedUnit);
+        }
       });
+      controller.set('units', units);
+      controller.set('isLoading', false);
+    });
   },
 
   getStudentClassPerformance(studentId) {
@@ -708,24 +728,19 @@ export default Ember.Controller.extend({
         courseId
       }
     ]);
-    return Ember.RSVP
-      .hash({
-        studentClassPerformance: controller
-          .get('performanceService')
-          .findClassPerformanceSummaryByStudentAndClassIds(
-            studentId,
-            classCourseId
-          )
-      })
-      .then(({ studentClassPerformance }) => {
-        if (studentClassPerformance && studentClassPerformance.length) {
-          controller.setStudentClassScore(studentClassPerformance[0]);
-          controller.set(
-            'activeStudent.performance',
-            studentClassPerformance[0]
-          );
-        }
-      });
+    return Ember.RSVP.hash({
+      studentClassPerformance: controller
+        .get('performanceService')
+        .findClassPerformanceSummaryByStudentAndClassIds(
+          studentId,
+          classCourseId
+        )
+    }).then(({ studentClassPerformance }) => {
+      if (studentClassPerformance && studentClassPerformance.length) {
+        controller.setStudentClassScore(studentClassPerformance[0]);
+        controller.set('activeStudent.performance', studentClassPerformance[0]);
+      }
+    });
   },
 
   setStudentClassScore(studentClassPerformance) {
@@ -781,10 +796,9 @@ export default Ember.Controller.extend({
     let skippedContentsPromise = Ember.RSVP.resolve(
       controller.get('rescopeService').getSkippedContents(filter)
     );
-    return Ember.RSVP
-      .hash({
-        skippedContents: skippedContentsPromise
-      })
+    return Ember.RSVP.hash({
+      skippedContents: skippedContentsPromise
+    })
       .then(function(hash) {
         controller.set('skippedContents', hash.skippedContents);
         return hash.skippedContents;
@@ -877,40 +891,38 @@ export default Ember.Controller.extend({
         classMembers
       )
     );
-    return Ember.RSVP
-      .hash({
-        unitPerformances: unitPerformancePromise
-      })
-      .then(function(hash) {
-        let classPerformance = hash.unitPerformances;
-        units.map(unit => {
-          let unitId = unit.id;
-          let score = classPerformance.calculateAverageScoreByItem(unitId);
-          let timeSpent = classPerformance.calculateAverageTimeSpentByItem(
-            unitId
-          );
-          let completionDone = classPerformance.calculateSumCompletionDoneByItem(
-            unitId
-          );
-          let completionTotal = classPerformance.calculateSumCompletionTotalByItem(
-            unitId
-          );
+    return Ember.RSVP.hash({
+      unitPerformances: unitPerformancePromise
+    }).then(function(hash) {
+      let classPerformance = hash.unitPerformances;
+      units.map(unit => {
+        let unitId = unit.id;
+        let score = classPerformance.calculateAverageScoreByItem(unitId);
+        let timeSpent = classPerformance.calculateAverageTimeSpentByItem(
+          unitId
+        );
+        let completionDone = classPerformance.calculateSumCompletionDoneByItem(
+          unitId
+        );
+        let completionTotal = classPerformance.calculateSumCompletionTotalByItem(
+          unitId
+        );
 
-          let numberOfStudents = classPerformance.findNumberOfStudentsByItem(
-            unitId
-          );
+        let numberOfStudents = classPerformance.findNumberOfStudentsByItem(
+          unitId
+        );
 
-          let performance = {
-            score,
-            timeSpent,
-            completionDone,
-            completionTotal,
-            numberOfStudents
-          };
-          unit.set('performance', performance);
-        });
-        controller.set('units', units);
+        let performance = {
+          score,
+          timeSpent,
+          completionDone,
+          completionTotal,
+          numberOfStudents
+        };
+        unit.set('performance', performance);
       });
+      controller.set('units', units);
+    });
   },
 
   /**
@@ -951,14 +963,12 @@ export default Ember.Controller.extend({
         userId
       })
     );
-    return Ember.RSVP
-      .hash({
-        route0Contents: route0Promise
-      })
-      .then(({ route0Contents }) => {
-        let status = route0Contents ? route0Contents.status : null;
-        return status === 'accepted' ? route0Contents : Ember.RSVP.resolve({});
-      });
+    return Ember.RSVP.hash({
+      route0Contents: route0Promise
+    }).then(({ route0Contents }) => {
+      let status = route0Contents ? route0Contents.status : null;
+      return status === 'accepted' ? route0Contents : Ember.RSVP.resolve({});
+    });
   },
 
   loadItemsToGrade() {
@@ -968,39 +978,37 @@ export default Ember.Controller.extend({
     let classId = currentClass.get('id');
     let courseId = currentClass.get('courseId');
     if (classId && courseId) {
-      return Ember.RSVP
-        .hash({
-          pendingGradingItems: controller
-            .get('rubricService')
-            .getQuestionsToGrade(classId, courseId),
-          pendingOaGradingItems: controller.fetchOaItemsToGrade()
-        })
-        .then(({ pendingGradingItems, pendingOaGradingItems }) => {
-          let gradeItems = pendingGradingItems.gradeItems || Ember.A([]);
-          let oaGradeItems = pendingOaGradingItems.gradeItems || Ember.A([]);
-          if (oaGradeItems.length) {
-            controller.loadOaItemsToGrade(oaGradeItems);
-          }
-          if (gradeItems.length) {
-            let itemsToGradeList = controller.get('itemsToGradeList');
-            controller.getCourseStructure().then(function() {
-              let itemsToGrade = Ember.A([]);
-              gradeItems.map(function(item) {
-                let gradeItem = controller.createGradeItemObject(item);
-                if (gradeItem) {
-                  itemsToGrade.push(gradeItem);
-                }
-              });
-              Ember.RSVP.all(itemsToGrade).then(function(questionItems) {
-                controller.set(
-                  'itemsToGradeList',
-                  itemsToGradeList.concat(questionItems)
-                );
-              });
+      return Ember.RSVP.hash({
+        pendingGradingItems: controller
+          .get('rubricService')
+          .getQuestionsToGrade(classId, courseId),
+        pendingOaGradingItems: controller.fetchOaItemsToGrade()
+      }).then(({ pendingGradingItems, pendingOaGradingItems }) => {
+        let gradeItems = pendingGradingItems.gradeItems || Ember.A([]);
+        let oaGradeItems = pendingOaGradingItems.gradeItems || Ember.A([]);
+        if (oaGradeItems.length) {
+          controller.loadOaItemsToGrade(oaGradeItems);
+        }
+        if (gradeItems.length) {
+          let itemsToGradeList = controller.get('itemsToGradeList');
+          controller.getCourseStructure().then(function() {
+            let itemsToGrade = Ember.A([]);
+            gradeItems.map(function(item) {
+              let gradeItem = controller.createGradeItemObject(item);
+              if (gradeItem) {
+                itemsToGrade.push(gradeItem);
+              }
             });
-          }
-          controller.set('isGradeLoading', false);
-        });
+            Ember.RSVP.all(itemsToGrade).then(function(questionItems) {
+              controller.set(
+                'itemsToGradeList',
+                itemsToGradeList.concat(questionItems)
+              );
+            });
+          });
+        }
+        controller.set('isGradeLoading', false);
+      });
     } else {
       controller.set('isGradeLoading', false);
     }
@@ -1057,39 +1065,37 @@ export default Ember.Controller.extend({
           const unitIndex = courseStructure.getChildUnitIndex(unit) + 1;
           const lessonIndex = unit.getChildLessonIndex(lesson) + 1;
           return new Ember.RSVP.Promise(function(resolve, reject) {
-            return Ember.RSVP
-              .hash({
-                collection: collectionId
-                  ? isAssessment
-                    ? controller
-                      .get('assessmentService')
-                      .readAssessment(collectionId)
-                    : controller
-                      .get('collectionService')
-                      .readCollection(collectionId)
-                  : undefined
-              })
-              .then(function(hash) {
-                const collection = hash.collection;
-                const content = collection
-                  .get('children')
-                  .findBy('id', resourceId);
-                itemObject.setProperties({
-                  unitIndex: unitIndex,
-                  lessonIndex: lessonIndex,
-                  unit: unit,
-                  lesson: lesson,
-                  classId: controller.get('class.id'),
-                  courseId: controller.get('course.id'),
-                  unitId: unit.get('id'),
-                  lessonId: lesson.get('id'),
-                  contentType: collectionType,
-                  collection,
-                  content,
-                  studentCount
-                });
-                resolve(itemObject);
-              }, reject);
+            return Ember.RSVP.hash({
+              collection: collectionId
+                ? isAssessment
+                  ? controller
+                    .get('assessmentService')
+                    .readAssessment(collectionId)
+                  : controller
+                    .get('collectionService')
+                    .readCollection(collectionId)
+                : undefined
+            }).then(function(hash) {
+              const collection = hash.collection;
+              const content = collection
+                .get('children')
+                .findBy('id', resourceId);
+              itemObject.setProperties({
+                unitIndex: unitIndex,
+                lessonIndex: lessonIndex,
+                unit: unit,
+                lesson: lesson,
+                classId: controller.get('class.id'),
+                courseId: controller.get('course.id'),
+                unitId: unit.get('id'),
+                lessonId: lesson.get('id'),
+                contentType: collectionType,
+                collection,
+                content,
+                studentCount
+              });
+              resolve(itemObject);
+            }, reject);
           });
         }
       }

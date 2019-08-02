@@ -63,7 +63,8 @@ export default Ember.Component.extend({
     studentReport(collection, user) {
       let studentPerformance = {
         score: user.score,
-        hasStarted: user.hasStarted
+        hasStarted: user.hasStarted,
+        timeSpent: user.timeSpent || null
       };
       this.sendAction('studentReport', collection, user.id, studentPerformance);
     },

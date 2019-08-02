@@ -56,9 +56,15 @@ window.i18ln = {
   'my-content': 'My Content',
   'featured-libraries': 'featured libraries',
   'common.list': 'List',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
   'common.first': 'First',
   'common.last': 'Last',
   'common.name': 'Name',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',
@@ -1671,7 +1677,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Grade Lines',
+  'grade-selector.placeholder': 'Hiline',
   'standard-dropdown.placeholder': 'تصفح حسب المعيار',
   'subject-dropdown.placeholder': 'الموضوع (المواضيع)',
   'subject-dropdown.prompt': 'اختر موضوعاً',
@@ -1848,7 +1854,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'Skyline',
   'profile.proficiency.baseline': 'Baseline',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class Grade',
+  'profile.proficiency.class-grade-line': 'Class HiLine',
   'profile.proficiency.not-tagged':
     'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
   'profile.proficiency.show-compressed-chart': 'Show Compressed Chart',
@@ -2648,7 +2654,7 @@ window.i18ln = {
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
-  'report.class-weekly-report': 'Class Weekly Report',
+  'report.class-weekly-report': 'Class Progress Report',
   'no-teacher-found': 'No teacher with that email id found!',
   'oa-player.complete-confirm':
     'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',

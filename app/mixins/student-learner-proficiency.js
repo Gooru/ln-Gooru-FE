@@ -121,6 +121,12 @@ export default Ember.Mixin.create({
    */
   isStudent: Ember.computed.equal('session.role', ROLES.STUDENT),
 
+  /**
+   * @property {String}
+   * Property to store is class framework
+   */
+  classFramework: Ember.computed.alias('class.preference.framework'),
+
   actions: {
     onSelectCategory(category) {
       let component = this;
@@ -354,6 +360,22 @@ export default Ember.Mixin.create({
         'domainCode',
         domain.get('domainCode')
       );
+      let notStartedCompetencies = domainCompetency.competencies.filterBy(
+        'status',
+        0
+      );
+      let inProgressCompetencies = domainCompetency.competencies.filterBy(
+        'status',
+        1
+      );
+      let masteredCompetencies = domainCompetency.competencies.filter(
+        competency => {
+          return competency.get('status') >= 2;
+        }
+      );
+      domain.set('notStartedCompetenciesCount', notStartedCompetencies.length);
+      domain.set('inProgressCompetenciesCount', inProgressCompetencies.length);
+      domain.set('masteredCompetenciesCount', masteredCompetencies.length);
       domain.set('competencyCount', domainCompetency.competencies.length);
     });
   },

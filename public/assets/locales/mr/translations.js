@@ -65,9 +65,15 @@ window.i18ln = {
   'common.first': 'पहिले',
   'common.last': 'शेवटचे',
   'common.name': 'नाव',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.user': 'वापरणारी व्यक्ती',
   'common.content-name': 'आशयाचे नाव',
   'common.lastName': 'आडनाव',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
   'common.firstName': 'पहिले नाव',
   'common.filter-by': 'द्वारे फिल्टर करा',
   'common.day': 'दिवस',

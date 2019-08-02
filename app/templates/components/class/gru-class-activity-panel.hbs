@@ -71,10 +71,12 @@
               </div>
             {{/if}}
           {{else}}
-            {{#if isShowAddData}}
+            {{#if (and isShowAddData (not isOfflineActivity))}}
               <div class="dca-panel-performance add-data {{if (or (eq classActivity.usersCount 0) isOfflineActivity) 'disabled'}}" {{action "onOpenPerformanceEntry" item classActivity false}}>
                 {{t 'common.add-data'}}
               </div>
+            {{else if (and isOfflineActivity classActivity.isCompleted)}}
+              <span class="icon" data-placement="left" data-toggle="tooltip" title="{{t 'tooltip.check-items-to-grade'}}"><i class="rubric-icon"></i></span>
             {{else}}
               <div class="dca-panel-performance not-started">
                 <div class="thumbnail-img">
@@ -111,7 +113,7 @@
         </div>
         <div class="mastery-accrual">
           {{#if item.masteryAccrualCompetencies}}
-            <div class="mastery-accrual-btn {{if (or activity.isCompleted (and (not isOfflineActivity) isActivityPast)) 'disable-event'}}" {{action "onUpdateMasteryAccrual"}}>
+            <div class="mastery-accrual-btn {{if (or classActivity.isCompleted (and (not isOfflineActivity) isActivityPast)) 'disable-event'}}" {{action "onUpdateMasteryAccrual"}}>
               <span class="mastery-accrual-icon mastery-accrual-{{if classActivity.allowMasteryAccrual 'checked' 'unchecked'}}">
                 {{gru-icon name=(concat 'radio_button_' (if  classActivity.allowMasteryAccrual 'checked' 'unchecked'))}}
               </span>
