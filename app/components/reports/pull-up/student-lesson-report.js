@@ -98,7 +98,7 @@ export default Ember.Component.extend({
         collection
       };
       let reportType = collection.get('format');
-      if (reportType === CONTENT_TYPES.ASSESSMENT_EXTERNAL) {
+      if (reportType === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
         component.set('isShowStudentExternalAssessmentReport', true);
         component.set('showCollectionReport', false);
       } else if (reportType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
