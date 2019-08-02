@@ -2,7 +2,10 @@ import Ember from 'ember';
 import CollectionEdit from 'gooru-web/components/content/collections/gru-collection-edit';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
-import { getCategoryCodeFromId } from 'gooru-web/utils/taxonomy';
+import {
+  getCategoryCodeFromSubjectId,
+  getSubjectId
+} from 'gooru-web/utils/taxonomy';
 
 export default CollectionEdit.extend({
   // -------------------------------------------------------------------------
@@ -69,7 +72,8 @@ export default CollectionEdit.extend({
    */
   selectedCategory: Ember.computed('activityCollection', function() {
     let standard = this.get('activityCollection.standards.firstObject');
-    return standard ? getCategoryCodeFromId(standard.get('id')) : null;
+    let subjectId = standard ? getSubjectId(standard.get('id')) : null;
+    return subjectId ? getCategoryCodeFromSubjectId(subjectId) : null;
   }),
 
   selectedSubject: Ember.computed('activityCollection', function() {

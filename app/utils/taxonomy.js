@@ -103,16 +103,6 @@ export function getCategoryCodeFromSubjectId(subjectId) {
 }
 
 /**
- * Gets a category code from a id
- * @param {String} id
- * @return {String} - An code with the category information
- */
-export function getCategoryCodeFromId(subjectId) {
-  let categoryCode = subjectId.split('.');
-  return categoryCode.length >= 3 ? categoryCode[1] : categoryCode[0];
-}
-
-/**
  * Parse and read subject id for given string
  * @param  {String} id
  * @return {String}
