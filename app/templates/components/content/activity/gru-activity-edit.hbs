@@ -94,10 +94,10 @@
           <div class="duration-hours">
             <div>{{t "oa.info.duration-hrs"}}</div>
             {{#if isEditing}}
-              {{input type=number value=tempCollection.durationHours class="duration-hours-input" name='durationHours' maxlength=3 
+              {{input type=number value=tempCollection.durationHours class="duration-hours-input" name='durationHours' maxlength=3
                             focus-out="updateQuantity"
                             key-press="inputTyping"
-                            
+
                             }} {{t "oa.info.hrs"}}
             {{else}}
               <span class="duration-hours-label">{{activityCollection.durationHours}} {{t "oa.info.hrs"}}</span>
@@ -110,6 +110,7 @@
           onSubjectSelected="selectSubject"
           onCategorySelected="selectCategory"
           selectedSubject=selectedSubject
+          selectedCategory=selectedCategory
           subjectLabelKey='common.subject-and-framework'
           onlySubjectsWithStandards=true
           }}

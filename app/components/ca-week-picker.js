@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -72,8 +71,6 @@ export default Ember.Component.extend({
       let forYear = moment(firstDateOfMonth)
         .subtract(1, 'months')
         .format('YYYY');
-      component.set('forMonth', forMonth);
-      component.set('forYear', forYear);
       let datepickerPrevEle = component.$(
         '#ca-weekpicker .datepicker-days .prev'
       );
@@ -81,6 +78,7 @@ export default Ember.Component.extend({
       let date = `${forYear}-${forMonth}-01`;
       let parsedDate = moment(date).format('YYYY-MM-DD');
       component.set('firstDateOfMonth', parsedDate);
+      component.sendAction('showPreviousMonth', parsedDate);
     },
 
     showNextMonth() {
@@ -92,8 +90,6 @@ export default Ember.Component.extend({
       let forYear = moment(firstDateOfMonth)
         .add(1, 'months')
         .format('YYYY');
-      component.set('forMonth', forMonth);
-      component.set('forYear', forYear);
       let datepickerNextEle = component.$(
         '#ca-weekpicker .datepicker-days .next'
       );
@@ -101,6 +97,7 @@ export default Ember.Component.extend({
       let date = `${forYear}-${forMonth}-01`;
       let parsedDate = moment(date).format('YYYY-MM-DD');
       component.set('firstDateOfMonth', parsedDate);
+      component.sendAction('showNextMonth', parsedDate);
     }
   },
 
@@ -136,14 +133,23 @@ export default Ember.Component.extend({
     dateEleContainer.removeClass('week-active');
     let dateElement = dateEleContainer.find('td.active.day').parent();
     dateElement.addClass('week-active');
-    let startDateOfWeek = moment(selectedDate).day(0).format('YYYY-MM-DD');
-    let endDateOfWeek = moment(selectedDate).day(6).format('YYYY-MM-DD');
-    component.sendAction('onSelectWeek', startDateOfWeek, endDateOfWeek, isToggle);
+    let startDateOfWeek = moment(selectedDate)
+      .day(0)
+      .format('YYYY-MM-DD');
+    let endDateOfWeek = moment(selectedDate)
+      .day(6)
+      .format('YYYY-MM-DD');
+    component.sendAction(
+      'onSelectWeek',
+      startDateOfWeek,
+      endDateOfWeek,
+      isToggle
+    );
   },
 
   doHighlightActivity() {
     let component = this;
-    Ember.run.later((function() {
+    Ember.run.later(function() {
       let highlightActivities = component.get('highlightActivities');
       if (highlightActivities) {
         let dateEles = component.$(`#ca-weekpicker
@@ -151,20 +157,30 @@ export default Ember.Component.extend({
         let activities = component.get('activities');
         dateEles.each(function(index, dateEle) {
           let dateElement = component.$(dateEle);
+          let parentDateEle = dateElement.closest('tr');
           if (!(dateElement.hasClass('new') || dateElement.hasClass('old'))) {
             let day = dateElement.html();
             if (day.length === 1) {
               day = `0${day}`;
             }
-            let activity = activities.findBy('day', day);
-            if (activity) {
-              dateElement.addClass('has-activities');
-            } else {
-              dateElement.removeClass('has-activities');
+            if (!parentDateEle.hasClass('week-active')) {
+              let activity = activities.findBy('day', day);
+              if (activity) {
+                parentDateEle.removeClass();
+                dateElement.addClass('has-activities');
+                parentDateEle.addClass('has-activities');
+              } else {
+                if (parentDateEle.attr('class') !== 'has-activities') {
+                  parentDateEle.addClass('no-activities');
+                }
+                dateElement.removeClass('has-activities');
+              }
             }
+          } else {
+            parentDateEle.addClass('disable-event');
           }
         });
       }
-    }), 400);
+    }, 400);
   }
 });

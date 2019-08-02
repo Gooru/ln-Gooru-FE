@@ -49,13 +49,13 @@
           <img src="{{selectedUser.avatarUrl}}" />
           <span>{{selectedUser.lastName}} {{selectedUser.firstName}}</span>
         </div>
-        {{#if (and isReportView isTeacher)}}
+        {{#if (and isReportView isTeacher (not isCmReport))}}
           <div class="oa-user-list-drop-down">
             {{gru-icon name="keyboard_arrow_down"}}
           </div>
         {{/if}}
       </div>
-      {{#if (and isReportView isTeacher)}}
+      {{#if (and isReportView isTeacher (not isCmReport))}}
         <div class="oa-list-of-users">
           {{#each users as |user index|}}
             <div class="user-list-container {{if (eq selectedUser.id user.id) 'selected'}}" {{action 'previewStudentReport' user}}>

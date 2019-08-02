@@ -8,7 +8,23 @@
     {{#each domains as |domain|}}
       <li {{action 'onDomainSelect' domain }}>
         <span class="domain-title">{{locale-translation (t (concat 'domain-code.' domain.domainCode)) domain.domainName}}</span>
-        <span class="competency-count">{{domain.competencyCount}} {{t 'common.competencies'}}</span>
+        <div class="competency-sec">
+          <div class="competency-status">
+            <div class="mastered">
+              <div class="count">{{domain.masteredCompetenciesCount}}</div>
+              <div class="status-label" title="{{t 'profile.proficiency.mastered'}}" data-toggle="tooltip"></div>
+            </div>
+            <div class="in-progress">
+              <div class="count">{{domain.inProgressCompetenciesCount}}</div>
+              <div class="status-label" title="{{t 'profile.proficiency.in-progress'}}" data-toggle="tooltip"></div>
+            </div>
+            <div class="not-started">
+              <div class="count">{{domain.notStartedCompetenciesCount}}</div>
+              <div class="status-label" title="{{t 'profile.proficiency.not-started'}}" data-toggle="tooltip"></div>
+            </div>
+          </div>
+          <span class="competency-count">| {{domain.competencyCount}} {{t 'common.competencies'}}</span>
+        </div>
       </li>
     {{/each}}
   </ol>

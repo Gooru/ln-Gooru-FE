@@ -46,6 +46,7 @@ test('Layout', function(assert) {
   const classActivity = ClassActivity.create({
     activationDate: null, //inactive
     collection: collectionMock,
+    isCompleted: false,
     activityPerformanceSummary: ActivityPerformanceSummary.create({
       collectionPerformanceSummary: performance
     })
@@ -54,7 +55,7 @@ test('Layout', function(assert) {
   this.set('classActivity', classActivity);
 
   this.render(
-    hbs`{{class/gru-student-class-activity-panel classActivity=classActivity}}`
+    hbs`{{class/gru-student-class-activity-panel isToday=true isOfflineActivity=false classActivity=classActivity}}`
   );
 
   var $component = this.$(); //component dom element

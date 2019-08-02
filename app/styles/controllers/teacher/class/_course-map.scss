@@ -4,10 +4,13 @@
     margin: 0 auto !important;
     float: none !important;
   }
+
+  .content {
+    padding-top: 50px;
+  }
 }
 
 .teacher.course-map {
-  margin-top: 30px;
   max-width: 90%;
 
   .actions {
@@ -74,8 +77,15 @@
       width: 100%;
       height: 67px;
       border-radius: 4px;
-      margin-top: 15px;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+      display: grid;
+      grid-template-columns: max-content auto max-content max-content max-content;
+      margin-top: 15px;
+
+      .ms-rescope-content-preview {
+        display: flex;
+        align-items: center;
+      }
 
       .student-thumbnail {
         width: 50px;
@@ -122,20 +132,34 @@
     .course-map-body {
       display: flex;
 
-      .header {
-        opacity: 0.5;
-        font-size: 12px;
-        font-weight: bold;
-        color: #000000;
-        text-transform: uppercase;
-        padding: 10px 0;
+      &.teacher-cm {
+        .render-course-map,
+        .students {
+          margin-top: 0;
+
+          .header {
+            display: block;
+          }
+        }
       }
 
       .students {
         min-width: 61px;
+        margin-top: 10px;
 
         .header {
-          text-align: center;
+          opacity: 0.5;
+          font-size: 12px;
+          font-weight: bold;
+          color: #000000;
+          text-transform: uppercase;
+          padding: 10px 0;
+          height: 50px;
+          align-items: center;
+          display: flex;
+          margin-top: 10px;
+          display: none;
+          margin-bottom: 5px;
         }
 
         .students-list {
@@ -223,7 +247,21 @@
 
       .render-course-map {
         width: 98%;
-        margin: 0 20px auto;
+        margin: 10px 20px auto;
+
+        .header.title {
+          opacity: 0.5;
+          font-size: 12px;
+          font-weight: bold;
+          color: #000000;
+          text-transform: uppercase;
+          padding: 10px 0;
+          height: 50px;
+          align-items: center;
+          display: flex;
+          margin-top: 10px;
+          margin-bottom: 5px;
+        }
 
         .ms-cm-view-switcher-ctn {
           display: grid;
@@ -256,6 +294,7 @@
 
         .header {
           padding-left: 20px;
+          display: none;
         }
 
         .routesuggestion-coursemap {
@@ -288,6 +327,14 @@
         }
 
         .student-coursemap {
+          .student-class-milestone-course-map {
+            .milestone-course-map-container {
+              .ms-rescope-content-preview {
+                display: none;
+              }
+            }
+          }
+
           .gru-learner-accordion-unit {
             background-color: $white;
 
@@ -338,10 +385,17 @@
         width: 331px;
 
         .header {
+          opacity: 0.5;
           font-size: 12px;
           font-weight: bold;
           color: #000000;
-          margin-left: 15px;
+          text-transform: uppercase;
+          padding: 10px 0;
+          height: 50px;
+          align-items: center;
+          display: flex;
+          margin-top: 10px;
+          margin-bottom: 5px;
         }
 
         .no-grade-items {

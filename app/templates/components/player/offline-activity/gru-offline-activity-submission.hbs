@@ -63,6 +63,12 @@
   <div class="complete-submission-container {{unless isEnableCompletionButton 'disable-event'}}">
     <div class="complete-submit-btn" {{action "onShowCompletionConfirmation"}}>{{t 'oa-player.mark-complete'}}</div>
   </div>
+
+  {{#if isEnableSelfGrading}}
+    <div class="self-grading-button-container">
+      <div class="self-grade-btn" {{action "onTriggerSelfGrade"}}>{{concat (t 'common.self') (t 'class.info.grade')}}</div>
+    </div>
+  {{/if}}
 </div>
 
 {{#if isLoading}}
@@ -87,4 +93,16 @@
       </div>
     </div>
   </div>
+{{/if}}
+
+{{#if isShowOaSelfGrading}}
+  {{activity.offline.grading-report
+    showPullUp=isShowOaSelfGrading
+    context=selfGradeItemContext
+    itemsToGrade=itemsToGrade
+    isTeacher=false
+    studentId=userId
+    isCourseMapGrading = isCourseMapGrading
+    refreshItem = "onDoneOaGrading"
+  }}
 {{/if}}

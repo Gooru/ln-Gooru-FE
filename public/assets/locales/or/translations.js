@@ -71,6 +71,10 @@ window.i18ln = {
   'common.name': 'ନାମ',
   'common.day': 'day',
   'common.week': 'week',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.month': 'month',
   'common.no-content-for-week':
     'No class activities scheduled for the selected period',
@@ -82,6 +86,8 @@ window.i18ln = {
   'common.tasks': 'tasks',
   'common.more': 'ଅଧିକ',
   'common.add-data-choice-title': 'How do you want to enter the data?',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
@@ -1772,7 +1778,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Grade Lines',
+  'grade-selector.placeholder': 'Hiline',
   'standard-dropdown.placeholder': 'ଷ୍ଟାଣ୍ଡାର୍ଡ ଦ୍ୱାରା ବ୍ରାଉଜ୍ କରନ୍ତୁ',
   'subject-dropdown.placeholder': 'ବିଷୟ(ଗୁଡ଼ିକ)',
   'subject-dropdown.prompt': 'ଗୋଟିଏ ବିଷୟ ଚୟନ କରନ୍ତୁ',
@@ -1953,7 +1959,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'ସ୍କାଏଲାଇନ',
   'profile.proficiency.baseline': 'ବେସଲାଇନ',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class Grade',
+  'profile.proficiency.class-grade-line': 'Class HiLine',
   'profile.proficiency.not-tagged':
     'ଶ୍ରେଣୀରେ କୌଣସି ପାଠ୍ୟକ୍ରମ ଦିଆ ଯାଇନାହିଁ ଅବା ଉଦ୍ଦିଷ୍ଟ ବିଷୟବସ୍ତୁ ଅବା ଷ୍ଟାଣ୍ଡାର୍ଡ ସହିତ ପାଠ୍ୟକ୍ରମକୁ ଟ୍ୟାଗ୍ କରାଯାଇ ନାହିଁ |',
   'profile.proficiency.show-compressed-chart': 'ସଙ୍କୁଚିତ ଚାର୍ଟ ଦେଖାନ୍ତୁ ',
@@ -2765,7 +2771,7 @@ window.i18ln = {
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
-  'report.class-weekly-report': 'Class Weekly Report',
+  'report.class-weekly-report': 'Class Progress Report',
   'no-teacher-found': 'No teacher with that email id found!',
   'oa-player.complete-confirm':
     'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',

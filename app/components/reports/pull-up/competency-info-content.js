@@ -9,7 +9,7 @@ export default Ember.Component.extend({
    * @property {String} selectedItem
    * Property to store selected item
    */
-  selectedItem: 'learning',
+  selectedItem: 'journey',
 
   actions: {
     selectItem(item) {

@@ -1,5 +1,8 @@
 <div class="competency-performance">
   <div class="competency-name">
+    {{#if classFramework}}
+      {{classFramework}}:
+    {{/if}}
     {{competency.competencyName}}
   </div>
   {{#if (and competency (not isPlayerProficiency))}}

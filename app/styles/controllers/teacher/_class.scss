@@ -1,5 +1,4 @@
 .teacher.class {
-  padding: 12px 0;
   margin: 0 auto;
 
   .gru-take-tour {
@@ -7,8 +6,10 @@
     top: 125px;
   }
 
-  .content .no-content {
-    margin-top: 15px;
+  .content {
+    .no-content {
+      margin-top: 15px;
+    }
   }
 
   .header {
@@ -31,8 +32,7 @@
       font-size: $font-size-lead;
       font-weight: 300;
       display: inline-block;
-      margin: 0 200px 0 200px;
+      margin: 0 200px;
     }
-
   }
 }
