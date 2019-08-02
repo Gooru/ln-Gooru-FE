@@ -90,7 +90,7 @@
     "firebase": "^3.6.2",
     "grunt-exec": "^1.0.0",
     "loader.js": "^4.2.3",
-    "quizzes-addon": "4.7.20",
+    "quizzes-addon": "4.8.10",
     "url-search-params": "^0.10.0"
   },
   "ember-addon": {
