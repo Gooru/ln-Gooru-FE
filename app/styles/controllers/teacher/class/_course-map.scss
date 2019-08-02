@@ -133,12 +133,19 @@
       display: flex;
 
       &.teacher-cm {
-        .render-course-map,
         .students {
           margin-top: 0;
 
           .header {
-            display: block;
+            display: flex;
+          }
+        }
+
+        .render-course-map {
+          margin-top: 0;
+
+          .header.title {
+            display: flex;
           }
         }
       }
@@ -156,10 +163,7 @@
           padding: 10px 0;
           height: 50px;
           align-items: center;
-          display: flex;
-          margin-top: 10px;
           display: none;
-          margin-bottom: 5px;
         }
 
         .students-list {
@@ -258,9 +262,7 @@
           padding: 10px 0;
           height: 50px;
           align-items: center;
-          display: flex;
-          margin-top: 10px;
-          margin-bottom: 5px;
+          display: none;
         }
 
         .ms-cm-view-switcher-ctn {
@@ -270,7 +272,6 @@
           height: 50px;
           background: #fff;
           border-radius: 4px;
-          margin-top: 10px;
           margin-bottom: 5px;
           box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.4);
 
@@ -290,11 +291,6 @@
             cursor: pointer;
             font-weight: bold;
           }
-        }
-
-        .header {
-          padding-left: 20px;
-          display: none;
         }
 
         .routesuggestion-coursemap {
@@ -394,8 +390,6 @@
           height: 50px;
           align-items: center;
           display: flex;
-          margin-top: 10px;
-          margin-bottom: 5px;
         }
 
         .no-grade-items {
