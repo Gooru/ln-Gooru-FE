@@ -5,13 +5,13 @@
       <div class="collection-panel">
         <i class="icon {{collectionPerformance.collectionType}}"></i>
         <div class="collection-title" {{action 'onPreviewContent' collectionPerformance}}>{{collectionPerformance.title}}</div>
-        {{#if (eq collectionPerformance.collectionType 'assessment')}}
-          <div class="performance {{unless isStudent 'disable'}}" {{action 'onOpenCollectionReport' collectionPerformance}} style="background-color:{{grade-color collectionPerformance.score}}">
-            <span class="score">{{collectionPerformance.score}}%</span>
-          </div>
-        {{else}}
+        {{#if ( or (eq collectionPerformance.collectionType 'collection') (eq collectionPerformance.collectionType 'collection-external'))}}
           <div class="performance collection {{unless isStudent 'disable'}}">
             <span class="timespent"> {{if collectionPerformance.timeSpent (format-time  collectionPerformance.timeSpent) '--'}}</span>
+          </div>
+        {{else}}
+          <div class="performance {{unless isStudent 'disable'}}" {{action 'onOpenCollectionReport' collectionPerformance}} style="background-color:{{grade-color collectionPerformance.score}}">
+            <span class="score">{{collectionPerformance.score}}%</span>
           </div>
         {{/if}}
       </div>
