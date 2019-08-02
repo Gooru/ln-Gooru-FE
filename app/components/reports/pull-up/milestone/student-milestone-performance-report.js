@@ -70,7 +70,10 @@ export default Ember.Component.extend({
   /**
    * @property {UUID} userId
    */
-  userId: null,
+  userId: Ember.computed(function() {
+    const component = this;
+    return component.get('session.userId');
+  }),
 
   /**
    * @property {String} frameworkCode
@@ -151,7 +154,7 @@ export default Ember.Component.extend({
     const performanceService = component.get('performanceService');
     const classId = component.get('classId');
     const courseId = component.get('courseId');
-    const userId = component.get('userId') || component.get('session.userId');
+    const userId = component.get('userId');
     const frameworkCode = component.get('frameworkCode');
     return performanceService.getPerformanceForMilestones(
       classId,
@@ -171,7 +174,7 @@ export default Ember.Component.extend({
     const performanceService = component.get('performanceService');
     const classId = component.get('classId');
     const courseId = component.get('courseId');
-    const userId = component.get('userId') || component.get('session.userId');
+    const userId = component.get('userId');
     const frameworkCode = component.get('frameworkCode');
     return performanceService.getPerformanceForMilestones(
       classId,
@@ -271,7 +274,7 @@ export default Ember.Component.extend({
   filterOutMilestonesBasedOnGrade(grades, milestones) {
     let component = this;
     let gradeBounds = component.get('class.memberGradeBounds');
-    const userId = component.get('userId') || component.get('session.userId');
+    const userId = component.get('userId');
     let gradeBound = gradeBounds.findBy(userId);
     let milestoneData = Ember.A([]);
     let studentGradeBound = Ember.Object.create(gradeBound.get(userId));
