@@ -2,6 +2,7 @@ import Ember from 'ember';
 import CollectionEdit from 'gooru-web/components/content/collections/gru-collection-edit';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
+import { getCategoryCodeFromId } from 'gooru-web/utils/taxonomy';
 
 export default CollectionEdit.extend({
   // -------------------------------------------------------------------------
@@ -63,6 +64,19 @@ export default CollectionEdit.extend({
     return aggregatedTags;
   }),
 
+  /**
+   * @type {String} the selected category
+   */
+  selectedCategory: Ember.computed('activityCollection', function() {
+    let standard = this.get('activityCollection.standards.firstObject');
+    return standard ? getCategoryCodeFromId(standard.get('id')) : null;
+  }),
+
+  selectedSubject: Ember.computed('activityCollection', function() {
+    let standard = this.get('activityCollection.standards.firstObject');
+    return standard ? standard : null;
+  }),
+
   model: null,
   // -------------------------------------------------------------------------
   // Attributes
@@ -83,10 +97,20 @@ export default CollectionEdit.extend({
    * Controls show/hide of the preview button
    */
   isShowOfflineActivityPreview: true,
+
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
+    selectCategory(category) {
+      let component = this;
+      if (category === component.get('selectedCategory')) {
+        component.set('selectedCategory', null);
+      } else {
+        component.set('selectedCategory', category);
+      }
+      component.set('selectedSubject', null);
+    },
     /**
      * Action to show hide the report popup
      */
