@@ -36,12 +36,18 @@
         height: 100%;
         background-repeat: no-repeat;
 
-        &.assessment {
+        &.assessment,
+        &.assessment-external {
           background-image: url("/assets/gooru/images/add_assessment.svg");
         }
 
-        &.collection {
+        &.collection,
+        &.collection-external {
           background-image: url("/assets/gooru/images/add_collection.svg");
+        }
+
+        &.offline-activity {
+          background-image: url("/assets/gooru/images/offline.svg");
         }
       }
 
