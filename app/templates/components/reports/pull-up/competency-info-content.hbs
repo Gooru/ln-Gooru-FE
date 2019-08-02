@@ -7,14 +7,10 @@
 </div>
 <div class="panel-content">
   {{#if (eq selectedItem 'journey')}}
-    {{reports.pull-up.student-journey competency=competency isStudent=isStudent collectionPerformances=collectionPerformances userId=userId}}
+    {{reports/pull-up/student-journey competency=competency isStudent=isStudent collectionPerformances=collectionPerformances userId=userId}}
   {{else if (eq selectedItem 'metadata')}}
-    {{reports.pull-up.competency-meta-data microCompetencies=microCompetencies prequisiteCompetencies=prequisiteCompetencies }}
+    {{reports/pull-up/competency-meta-data microCompetencies=microCompetencies prequisiteCompetencies=prequisiteCompetencies }}
   {{else}}
-    {{#if learningMapData}}
-      {{reports.pull-up.learning-map-content learningMapData=learningMapData onSelectActivityContent="onSelectActivityContent" isStudent=isStudent learningMapData=learningMapData}}
-    {{else}}
-      <p id="lm-no-content">{{t 'no.content.assoc.fw'}}</p>
-    {{/if}}
+    {{reports/pull-up/learning-map-content learningMapData=learningMapData onSelectActivityContent="onSelectActivityContent" isStudent=isStudent learningMapData=learningMapData}}
   {{/if}}
 </div>

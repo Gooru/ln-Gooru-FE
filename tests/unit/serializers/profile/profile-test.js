@@ -1,10 +1,14 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import ProfileModel from 'gooru-web/models/profile/profile';
 import Env from 'gooru-web/config/environment';
 import { NETWORK_TYPE, DEFAULT_IMAGES } from 'gooru-web/config/config';
 
-moduleFor('serializer:profile/profile', 'Unit | Serializer | profile/profile');
+moduleForComponent(
+  'serializer:profile/profile',
+  'Unit | Serializer | profile/profile'
+);
 
 test('serializeCreateProfile', function(assert) {
   const serializer = this.subject();
@@ -921,9 +925,7 @@ test('normalizeReadNetwork for followers', function(assert) {
   );
 });
 
-test('normalizeQuestion - if visible_on_profile is undefined', function(
-  assert
-) {
+test('normalizeQuestion - if visible_on_profile is undefined', function(assert) {
   const serializer = this.subject();
   const owners = [
     Ember.Object.create({
@@ -982,9 +984,7 @@ test('normalizeQuestion - if it is not visible on profile', function(assert) {
   );
 });
 
-test('normalizeResource - if visible_on_profile is undefined', function(
-  assert
-) {
+test('normalizeResource - if visible_on_profile is undefined', function(assert) {
   const serializer = this.subject();
   const owners = [
     Ember.Object.create({
@@ -1043,9 +1043,7 @@ test('normalizeResource - if it is not visible on profile', function(assert) {
   );
 });
 
-test('normalizeCollection - if visible_on_profile is undefined', function(
-  assert
-) {
+test('normalizeCollection - if visible_on_profile is undefined', function(assert) {
   const serializer = this.subject();
   serializer.set(
     'session',
@@ -1118,9 +1116,7 @@ test('normalizeCollection - if is not visible on profile', function(assert) {
   );
 });
 
-test('normalizeAssessment - if visible_on_profile is undefined', function(
-  assert
-) {
+test('normalizeAssessment - if visible_on_profile is undefined', function(assert) {
   const serializer = this.subject();
   serializer.set(
     'session',

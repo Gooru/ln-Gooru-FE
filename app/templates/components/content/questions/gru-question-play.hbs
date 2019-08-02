@@ -19,7 +19,7 @@
             <span>{{t (concat "common.question-type." question.type)}}</span>
           </div>
           <div class="tags">
-            {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=3}}
+            {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=3}}
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
 </header>
 
 <div id="content" class="player">
-  {{player.gru-question-viewer
+  {{player/gru-question-viewer
   submitted=false
   question=playerQuestion
   questionResult=questionResult

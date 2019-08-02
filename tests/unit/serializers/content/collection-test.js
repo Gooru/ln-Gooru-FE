@@ -1,9 +1,10 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import CollectionModel from 'gooru-web/models/content/collection';
 import { ASSESSMENT_SUB_TYPES } from 'gooru-web/config/config';
 
-moduleFor(
+moduleForComponent(
   'serializer:content/collection',
   'Unit | Serializer | content/collection'
 );
@@ -182,9 +183,7 @@ test('serializeReorderCollection', function(assert) {
   assert.equal(data.order[0].sequence_id, 1, 'Wrong sequence id');
 });
 
-test('normalizeReadCollection - if visible_on_profile is undefined', function(
-  assert
-) {
+test('normalizeReadCollection - if visible_on_profile is undefined', function(assert) {
   const serializer = this.subject();
   serializer.set(
     'session',
@@ -206,9 +205,7 @@ test('normalizeReadCollection - if visible_on_profile is undefined', function(
   );
 });
 
-test('normalizeReadCollection - if it is not visible on profile', function(
-  assert
-) {
+test('normalizeReadCollection - if it is not visible on profile', function(assert) {
   const serializer = this.subject();
   serializer.set(
     'session',

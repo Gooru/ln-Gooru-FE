@@ -1,7 +1,8 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Ember from 'ember';
 
-moduleFor(
+moduleForComponent(
   'serializer:user/availability',
   'Unit | Serializer | user/availability'
 );

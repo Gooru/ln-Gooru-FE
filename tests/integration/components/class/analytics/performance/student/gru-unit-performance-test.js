@@ -44,7 +44,7 @@ test('Test for unit performance for assessment', function(assert) {
 
   assert.expect(7);
 
-  this.render(hbs`{{class.analytics.performance.student.gru-unit-performance
+  this.render(hbs`{{class/analytics/performance/student/gru-unit-performance
     unit=unit
     classModel=classModel
     userId=userId
@@ -117,7 +117,7 @@ test('Test for unit performance filtering by collection', function(assert) {
 
   assert.expect(7);
 
-  this.render(hbs`{{class.analytics.performance.student.gru-unit-performance
+  this.render(hbs`{{class/analytics/performance/student/gru-unit-performance
     unit=unit
     classModel=classModel
     userId=userId

@@ -1,9 +1,10 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Pretender from 'pretender';
 import EndPointsConfig from 'gooru-web/utils/endpoint-config';
 
-moduleFor(
+moduleForComponent(
   'adapter:authentication/authentication',
   'Unit | Adapter | authentication/authentication',
   {

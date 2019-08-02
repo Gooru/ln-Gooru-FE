@@ -1,8 +1,9 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import { ASSESSMENT_SUB_TYPES } from 'gooru-web/config/config';
 
-moduleFor(
+moduleForComponent(
   'service:api-sdk/course-map',
   'Unit | Service | api sdk/course map',
   {

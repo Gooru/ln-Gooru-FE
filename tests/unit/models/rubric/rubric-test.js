@@ -1,9 +1,11 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Category from 'gooru-web/models/rubric/rubric-category';
 
-moduleFor('model:rubric/rubric', 'Unit | Model | rubric/rubric', {
-  integration: true
+moduleForComponent('model:rubric/rubric', 'Unit | Model | rubric/rubric', {
+  integration: true,
+  needs: ['validator:presence']
 });
 
 test('hasAudience', function(assert) {

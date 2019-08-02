@@ -1,11 +1,15 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Rubric from 'gooru-web/models/rubric/rubric';
 import RubricGrade from 'gooru-web/models/rubric/rubric-grade';
 import GradeCategoryScore from 'gooru-web/models/rubric/grade-category-score';
 import RubricCategory from 'gooru-web/models/rubric/rubric-category';
 
-moduleFor('serializer:rubric/rubric', 'Unit | Serializer | rubric/rubric');
+moduleForComponent(
+  'serializer:rubric/rubric',
+  'Unit | Serializer | rubric/rubric'
+);
 
 test('serializeCreateRubric', function(assert) {
   const serializer = this.subject();
@@ -42,9 +46,7 @@ test('serializeCreateRubric', function(assert) {
   assert.deepEqual(rubricObject.metadata.audience, [1], 'Wrong audience');
 });
 
-test('serializeUpdateRubric uploaded and no feedback required', function(
-  assert
-) {
+test('serializeUpdateRubric uploaded and no feedback required', function(assert) {
   const serializer = this.subject();
 
   const contentCdnUrl = 'content-url/';
@@ -112,9 +114,7 @@ test('serializeUpdateRubric uploaded and no feedback required', function(
   assert.equal(rubricObject.categories.length, 3, 'Wrong categories length');
 });
 
-test('serializeUpdateRubric not uploaded and feedback required', function(
-  assert
-) {
+test('serializeUpdateRubric not uploaded and feedback required', function(assert) {
   const serializer = this.subject();
 
   serializer.set(

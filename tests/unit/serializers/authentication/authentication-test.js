@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Env from 'gooru-web/config/environment';
 import { DEFAULT_IMAGES } from 'gooru-web/config/config';
 
@@ -9,7 +10,7 @@ var configurationService = Ember.Object.create({
   }
 });
 
-moduleFor(
+moduleForComponent(
   'serializer:authentication/authentication',
   'Unit | Serializer | authentication/authentication'
 );

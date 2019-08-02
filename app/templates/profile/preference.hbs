@@ -1,6 +1,6 @@
 <div class="content_outlet">
     <div class='profile-preference'>
-        <div class="category-wrapper">{{!-- A two row layout  --}}
+        <div class="category-wrapper">
             {{#if isEditMode}}
                 <div class='category-head edit-head'>
                     <button class='add-category btn btn-basic cancel' {{action 'cancel' false}}> {{t "common.cancel"}}
@@ -223,8 +223,6 @@
                                         <div class="addSubjectFWK hideMe" {{action 'addSelectedSubject' category }} title="{{t 'profile.preference.add-subject'}}">
                                             {{gru-icon name='add'}}
                                         </div>
-                                        {{!-- {{action 'updateMarkedSelectionsAsAdded' fwk subjects category }} --}}
-                                        {{!-- subject Dropdown with plus icon --}}
                                     </div>
                                     <div class='panel-body'>
                                         {{!-- New section for added subject --}}
@@ -313,8 +311,6 @@
                                                     </div>
                                                     <div class='fwk'>
                                                         <div class="dropdown pull-left">
-                                                            {{!--  {{get-value 'source' source=(get-value 'source' source=category.subjectFwks searchProp='code' searchVal=sub destProp='frameworks') searchProp='frameworkId' searchVal=fwk destProp='title' }} 
-                                                            --}}
                                                             {{#if (not fwk)}}
                                                                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                                     {{t 'profile.preference.choose-fwk'}}

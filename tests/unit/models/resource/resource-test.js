@@ -1,9 +1,14 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('model:resource/resource', 'Unit | Model | resource/resource', {
-  unit: true
-});
+moduleForComponent(
+  'model:resource/resource',
+  'Unit | Model | resource/resource',
+  {
+    unit: true
+  }
+);
 
 test('thumbnailUrl with no thumbnail', function(assert) {
   assert.expect(1);

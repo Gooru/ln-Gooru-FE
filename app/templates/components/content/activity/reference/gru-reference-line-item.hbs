@@ -35,6 +35,6 @@
         {{/each}}
     </div>
 {{else}}
-    {{validation.gru-input placeholder='https://example.org' rawInputValue=model.location model=model valuePath='location' class='addUrl col-md-10' maxLength=1000 didValidate=didValidate}}
+    {{validation/gru-input placeholder='https://example.org' rawInputValue=model.location model=model valuePath='location' class='addUrl col-md-10' maxLength=1000 didValidate=didValidate}}
     <button class="btn add-item no-bgd" {{action 'updateURLRef'}}>{{gru-icon name="add_circle"}}</button>
 {{/if}}

@@ -13,7 +13,9 @@ export default function(name, moduleName, options = {}) {
        * beforeEach method
        */
       this.register('service:session', Ember.Service.extend({}));
-
+      this.register('service:i18n', Ember.Service.extend({}));
+      this.register('service:firebaseApp', Ember.Service.extend({}));
+      this.register('service:quizzes/collection', Ember.Service.extend({}));
       //Starting the pretender
       this.pretender = new Pretender();
 

@@ -6,7 +6,17 @@ moduleForComponent(
   'profile/gru-edit-profile',
   'Unit | Component | profile/gru edit profile',
   {
-    integration: false
+    integration: false,
+    needs: [
+      'service:i18n',
+      'service:configuration',
+      'service:api-sdk/profile',
+      'service:api-sdk/lookup',
+      'service:api-sdk/session',
+      'service:api-sdk/media',
+      'service:session',
+      'service:notifications'
+    ]
   }
 );
 
@@ -248,11 +258,8 @@ test('Student ID', function(assert) {
     studentId: 'student-id',
     isTeacher: false
   });
-  let component = this.subject({profile});
-  assert.ok(
-    component.get('profile.isStudent'),
-    'Student ID should visible'
-  );
+  let component = this.subject({ profile });
+  assert.ok(component.get('profile.isStudent'), 'Student ID should visible');
   assert.equal(
     component.get('profile.studentId'),
     'student-id',

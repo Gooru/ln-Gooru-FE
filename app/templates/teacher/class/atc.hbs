@@ -17,7 +17,7 @@
       <div class="data-view-container navigator-class">
         <div class="chart-container">
           <div class="chart-area">
-            {{teacher.class.navigator-atc-view classData=class month=activeMonth year=activeYear}}
+            {{teacher/class/navigator-atc-view classData=class month=activeMonth year=activeYear}}
           </div>
         </div>
         <div class="data-analysis-cards-container">
@@ -53,7 +53,7 @@
     {{else}}
       <div class="data-view-container regular-class">
         <div class="chart-container">
-          {{teacher.class.atc-chart classData=class isPremiumClass=isPremiumClass}}
+          {{teacher/class/atc-chart classData=class isPremiumClass=isPremiumClass}}
         </div>
       </div>
     {{/if}}
@@ -63,11 +63,11 @@
 </div>
 
 {{#if isShowCompetencyCompletionReport}}
-  {{reports.pull-up.competency-completion-report showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent onSuggestAtCompetency="onSuggestAtCompetency" maxLimitToSuggestContent=maxLimitToSuggestContent}}
+  {{reports/pull-up/competency-completion-report showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent onSuggestAtCompetency="onSuggestAtCompetency" maxLimitToSuggestContent=maxLimitToSuggestContent}}
 {{/if}}
 
 {{#if isShowActivitySearchContentPullup}}
-  {{teacher.class.ca-search-content-pull-up
+  {{teacher/class/ca-search-content-pull-up
     showPullUp=isShowActivitySearchContentPullup
     addedContentToDCA="addedContentToDCA"
     context=contextParams

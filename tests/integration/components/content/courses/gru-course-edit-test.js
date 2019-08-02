@@ -2,6 +2,11 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import Course from 'gooru-web/models/content/course';
+import TaxonomyRoot from 'gooru-web/models/taxonomy/taxonomy-root';
+import TaxonomyItem from 'gooru-web/models/taxonomy/taxonomy-item';
+import DS from 'ember-data';
+import AudienceModel from 'gooru-web/models/audience';
+import KnowledgeModel from 'gooru-web/models/depth-of-knowledge';
 
 const courseServiceStub = Ember.Service.extend({
   updateCourse(editedCourse) {
@@ -18,27 +23,28 @@ const courseServiceStub = Ember.Service.extend({
 });
 
 const taxonomyServiceStub = Ember.Service.extend({
-  getSubjects(category) {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (!category) {
-        reject({
-          status: 500
-        });
-      } else {
-        resolve({
-          subjects: [
-            {
-              id: 'GDF.K12.CS',
-              title: 'Computer Science',
-              description: null,
-              code: 'GDF.K12.CS',
-              standard_framework_id: 'GDF'
-            }
-          ]
-        });
-      }
+  getSubjects: function() {
+    const t1 = TaxonomyRoot.create({
+      id: 'subject.K12.1',
+      frameworkId: 'framework-1',
+      title: 'Subject 1',
+      subjectTitle: 'Subject 1.1',
+      code: 'subject.K12.1-code',
+      frameworks: []
     });
+
+    const t2 = TaxonomyRoot.create({
+      id: 'subject-2',
+      frameworkId: 'framework-2',
+      title: 'Subject 2',
+      subjectTitle: 'Subject 2.1',
+      code: 'subject-2-code',
+      frameworks: []
+    });
+
+    return new Ember.RSVP.resolve([t1, t2]);
   },
+
   getCategories: function() {
     const c1 = Ember.Object.create({
       id: 'k_12',
@@ -59,6 +65,71 @@ const taxonomyServiceStub = Ember.Service.extend({
     });
 
     return new Ember.RSVP.resolve([c1, c2, c3]);
+  },
+
+  getCourses: function(subject) {
+    const courses = [
+      TaxonomyItem.create({
+        id: 'course-1',
+        code: 'course-1-code',
+        title: 'Course 1'
+      }),
+      TaxonomyItem.create({
+        id: 'course-2',
+        code: 'course-2-code',
+        title: 'Course 2'
+      })
+    ];
+    subject.set('courses', courses); //TODO the method should return the courses, not assign it to the parameter
+    return new Ember.RSVP.resolve(courses);
+  },
+  findSubjectById: function(/* subjectId */) {
+    const t1 = TaxonomyRoot.create({
+      id: 'subject.K12.1',
+      frameworkId: 'framework-1',
+      title: 'Subject 1',
+      subjectTitle: 'Subject 1.1',
+      code: 'subject.K12.1-code',
+      frameworks: []
+    });
+    return new Ember.RSVP.resolve(t1);
+  }
+});
+
+var lookupServiceStub = Ember.Service.extend({
+  readAudiences() {
+    var promiseResponse;
+    var response = [
+      AudienceModel.create({ id: 1, name: 'all students', order: 1 }),
+      AudienceModel.create({ id: 4, name: 'none students', order: 2 })
+    ];
+
+    promiseResponse = new Ember.RSVP.Promise(function(resolve) {
+      Ember.run.next(this, function() {
+        resolve(response);
+      });
+    });
+
+    return DS.PromiseArray.create({
+      promise: promiseResponse
+    });
+  },
+  readDepthOfKnowledgeItems() {
+    var promiseResponse;
+    var response = [
+      KnowledgeModel.create({ id: 1, name: 'Level 1: Recall', order: 1 }),
+      KnowledgeModel.create({ id: 4, name: 'Level 4: Skill/Concept', order: 2 })
+    ];
+
+    promiseResponse = new Ember.RSVP.Promise(function(resolve) {
+      Ember.run.next(this, function() {
+        resolve(response);
+      });
+    });
+
+    return DS.PromiseArray.create({
+      promise: promiseResponse
+    });
   }
 });
 
@@ -70,11 +141,13 @@ moduleForComponent(
     beforeEach: function() {
       this.i18n = this.container.lookup('service:i18n');
       this.i18n.set('locale', 'en');
-
+      this.register('service:popover', Ember.Service.extend({}));
       this.register('service:api-sdk/course', courseServiceStub);
       this.inject.service('api-sdk/course');
-      this.register('service:api-sdk/taxonomy', taxonomyServiceStub);
-      this.inject.service('api-sdk/taxonomy');
+      this.register('service:taxonomy', taxonomyServiceStub);
+      this.inject.service('taxonomy');
+      this.register('service:api-sdk/lookup', lookupServiceStub);
+      this.inject.service('api-sdk/lookup');
     }
   }
 );

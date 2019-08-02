@@ -1,11 +1,15 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import CollectionModel from 'gooru-web/models/content/collection';
 import AssessmentModel from 'gooru-web/models/content/assessment';
 import AlternatePathModel from 'gooru-web/models/content/alternate-path';
 import ResourceModel from 'gooru-web/models/content/resource';
 
-moduleFor('serializer:map/course-map', 'Unit | Serializer | map/course-map');
+moduleForComponent(
+  'serializer:map/course-map',
+  'Unit | Serializer | map/course-map'
+);
 
 test('normalizeLessonInfo', function(assert) {
   var course_path = {

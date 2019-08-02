@@ -1,9 +1,10 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import QuestionModel from 'gooru-web/models/content/question';
 import AnswerModel from 'gooru-web/models/content/answer';
 
-moduleFor(
+moduleForComponent(
   'serializer:content/question',
   'Unit | Serializer | content/question'
 );
@@ -303,9 +304,7 @@ test('normalizeAnswer - MA type', function(assert) {
   assert.equal(answer.get('type'), 'text', 'Wrong type');
 });
 
-test('normalizeReadQuestion - if visible_on_profile is undefined', function(
-  assert
-) {
+test('normalizeReadQuestion - if visible_on_profile is undefined', function(assert) {
   const serializer = this.subject();
   serializer.set(
     'session',
@@ -329,9 +328,7 @@ test('normalizeReadQuestion - if visible_on_profile is undefined', function(
   );
 });
 
-test('normalizeReadQuestion - if it is not visible on profile', function(
-  assert
-) {
+test('normalizeReadQuestion - if it is not visible on profile', function(assert) {
   const serializer = this.subject();
   serializer.set(
     'session',

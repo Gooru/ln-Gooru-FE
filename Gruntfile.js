@@ -83,16 +83,39 @@ module.exports = function(grunt) {
     var noStubby = grunt.option('no-stubby') || grunt.option('ns'),
       server = grunt.option('server') || grunt.option('s');
 
-    var command = 'ember test';
+    var command = 'ember test ';
     if (server) {
       command += ' --server';
     }
+
     var testExecTask = `exec:run:${command}`;
 
     var tasks = noStubby ? [testExecTask] : ['stubby:test', testExecTask];
     grunt.task.run(tasks);
   });
 
+  grunt.registerTask('testprod', function() {
+    //for development
+    //grunt testprod -s -f -ft='Integration | Component | content/questions/gru questions edit: Header return to an assessment';
+    var noStubby = grunt.option('no-stubby') || grunt.option('ns'),
+      server = grunt.option('server') || grunt.option('s'),
+      filter = grunt.option('filter') || grunt.option('f'),
+      filtertest = grunt.option('filtertest') || grunt.option('ft');
+
+    //var command = 'ember test --environment=production';
+    var command = 'ember test ';
+    if (server) {
+      command += ' --server';
+    }
+
+    if (filter && filtertest) {
+      command += ` --filter=${filtertest}`;
+    }
+    var testExecTask = `exec:run:${command}`;
+
+    var tasks = noStubby ? [testExecTask] : ['stubby:test', testExecTask];
+    grunt.task.run(tasks);
+  });
   /**
    * Test Runnner task taking module as paramter and running with 4 process
    */

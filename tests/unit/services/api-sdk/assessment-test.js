@@ -6,13 +6,14 @@ import AssessmentModel from 'gooru-web/models/content/assessment';
 moduleForService(
   'service:api-sdk/assessment',
   'Unit | Service | api-sdk/assessment',
-  {}
+  {
+    needs: ['service:api-sdk/assessment']
+  }
 );
 
 test('createAssessment', function(assert) {
   const service = this.subject();
   let assessmentModel = Ember.Object.create();
-
   assert.expect(2);
 
   // There is not a Adapter stub in this case
@@ -46,6 +47,7 @@ test('createAssessment', function(assert) {
   );
 
   var done = assert.async();
+
   service.createAssessment(assessmentModel).then(function() {
     assert.equal(
       assessmentModel.get('id'),

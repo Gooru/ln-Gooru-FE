@@ -8,7 +8,7 @@
         {{gru-icon name="keyboard_arrow_right"}}
       </div>
     </div>
-    {{charts.score-fill-gauge-chart
+    {{charts/score-fill-gauge-chart
       scoreInPercentage = reportContext.scoreInPercentage
       timeSpent = reportContext.timeSpent}}
   </div>
@@ -85,16 +85,16 @@
 </div>
 
 {{#if showStudentDcaReport}}
-  {{reports.pull-up.dca-student-collection-report showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
+  {{reports/pull-up/dca-student-collection-report showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalCollectionReport}}
-  {{reports.pull-up.dca-student-external-collection-report showPullUp=isShowStudentExternalCollectionReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
+  {{reports/pull-up/dca-student-external-collection-report showPullUp=isShowStudentExternalCollectionReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalAssessmentReport}}
   {{
-    reports.pull-up.dca-student-external-assessment-report
+    reports/pull-up/dca-student-external-assessment-report
     reportData=studentReportContextData
     showPullUp=isShowStudentExternalAssessmentReport
     isStudent=true

@@ -54,14 +54,11 @@ test('Player Navigator', function(assert) {
   this.set('collection', collectionMock);
   this.set('resourceResults', resourceResults);
 
-  this.on(
-    'itemSelected',
-    function(/*resource*/) {
-      assert.ok(false, 'This should not be called');
-    }
-  );
+  this.on('itemSelected', function(/*resource*/) {
+    assert.ok(false, 'This should not be called');
+  });
 
-  this.render(hbs`{{player.gru-navigator collection=collection
+  this.render(hbs`{{player/gru-navigator collection=collection
       resourceResults=resourceResults lessonTitle='E-Lesson1'
       selectedResourceId='1' onItemSelected='itemSelected' showBackLink=true}}`);
 
@@ -199,7 +196,7 @@ test('Player Navigator keyup on left', function(assert) {
   this.set('collection', collectionMock);
 
 
-  this.render(hbs`{{player.gru-navigator resourceResults=resourceResults
+  this.render(hbs`{{player/gru-navigator resourceResults=resourceResults
         onItemSelected='itemSelected' lessonTitle='E-Lesson1'
         collection=collection selectedResourceId='2'}}`);
 
@@ -216,9 +213,7 @@ test('Player Navigator keyup on left', function(assert) {
 });
 */
 
-test('it allows navigation between resource links -by default', function(
-  assert
-) {
+test('it allows navigation between resource links -by default', function(assert) {
   assert.expect(3);
   var selectCtr = 0;
 
@@ -262,7 +257,7 @@ test('it allows navigation between resource links -by default', function(
   this.set('collection', collectionMock);
 
   this.render(hbs`
-    {{player.gru-navigator
+    {{player/gru-navigator
       resourceResults=resourceResults
       onItemSelected='externalAction'
       collection=collection
@@ -319,7 +314,7 @@ test('resource link navigation is disabled', function(assert) {
   this.set('collection', collectionMock);
 
   this.render(hbs`
-    {{player.gru-navigator
+    {{player/gru-navigator
       isNavigationDisabled=true
       resourceResults=resourceResults
       onItemSelected='externalAction'
@@ -392,7 +387,7 @@ test('Player Navigator keyup on right', function(assert) {
 
   this.set('collection', collectionMock);
 
-  this.render(hbs`{{player.gru-navigator resourceResults=resourceResults
+  this.render(hbs`{{player/gru-navigator resourceResults=resourceResults
         onItemSelected='itemSelected' lessonTitle='E-Lesson1'
         collection=collection selectedResourceId='1'}}`);
 

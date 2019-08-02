@@ -77,6 +77,8 @@ moduleForComponent(
       this.inject.service('taxonomy');
       this.register('service:configuration', ConfigurationService);
       this.inject.service('configuration');
+      this.register('service:popover', Ember.Service.extend({}));
+      this.inject.service('popover');
     }
   }
 );

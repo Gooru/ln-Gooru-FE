@@ -7,7 +7,7 @@
       <div class="modal-body">
         <div class="form-group class-name-input-container">
           <label class="control-label" for="">{{t 'content.classes.create.class-name-input'}}</label>
-          {{validation.gru-input
+          {{validation/gru-input
              model=newClass
               valuePath='title'
                maxLength=25
@@ -19,7 +19,7 @@
           <p>{{t 'content.classes.create.condition-prompt'}}</p>
           <div class="conditions">
             {{
-              validation.gru-radio
+              validation/gru-radio
               model=newClass
               groupValue=currentClassSharing
               valuePath='open'
@@ -28,7 +28,7 @@
               didValidate=didValidate
             }}
             {{
-              validation.gru-radio
+              validation/gru-radio
               model=newClass
               groupValue=currentClassSharing
               valuePath='restricted'

@@ -28,9 +28,9 @@
     {{#if grade}}
       <div class="grading {{if isGrading 'active'}}">
         {{#if rubric.rubricOn}}
-          {{grading.gru-rubric-on rubric=rubric grade=grade}}
+          {{grading/gru-rubric-on rubric=rubric grade=grade}}
         {{else}}
-          {{grading.gru-rubric-off rubric=rubric grade=grade}}
+          {{grading/gru-rubric-off rubric=rubric grade=grade}}
         {{/if}}
       </div>
     {{/if}}

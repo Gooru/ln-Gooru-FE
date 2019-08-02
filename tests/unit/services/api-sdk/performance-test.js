@@ -7,6 +7,8 @@ moduleForService(
   'Unit | Service | api-sdk/performance',
   {
     needs: [
+      'service:api-sdk/analytics',
+      'service:api-sdk/performance',
       'adapter:performance/unit-performance',
       'adapter:performance/lesson-performance',
       'adapter:performance/collection-performance',
@@ -35,7 +37,9 @@ moduleForService(
       'validator:format',
       'validator:length',
       'validator:username',
-      'validator:email'
+      'validator:email',
+      'service:api-sdk/search',
+      'service:api-sdk/taxonomy'
     ]
   }
 );
@@ -560,9 +564,7 @@ test('findClassPerformanceSummaryByStudentAndClassIds', function(assert) {
     });
 });
 
-test('findClassPerformanceSummaryByStudentAndClassIds with empty class ids', function(
-  assert
-) {
+test('findClassPerformanceSummaryByStudentAndClassIds with empty class ids', function(assert) {
   const service = this.subject();
   assert.expect(1);
 
@@ -883,9 +885,7 @@ test('findCourseCompetencyCompletionByCourseIds', function(assert) {
     });
 });
 
-test('findCourseCompetencyCompletionByCourseIds with empty course ids', function(
-  assert
-) {
+test('findCourseCompetencyCompletionByCourseIds with empty course ids', function(assert) {
   const service = this.subject();
   assert.expect(1);
 

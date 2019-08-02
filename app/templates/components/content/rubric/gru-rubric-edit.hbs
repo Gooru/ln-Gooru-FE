@@ -1,4 +1,4 @@
-{{content.gru-header
+{{content/gru-header
    options=options
    selected=selected
    headerActions=headerActions
@@ -13,21 +13,21 @@
       {{partial 'content/partials/information-actions'}}
     </div>
     <div class="content">
-      {{content.gru-image isEditing=isEditing srcImage=rubric.thumbnail editImage=tempRubric.thumbnail}}
+      {{content/gru-image isEditing=isEditing srcImage=rubric.thumbnail editImage=tempRubric.thumbnail}}
       <div class="panel panel-default information">
         <div class="panel-body">
           <div class="title">
             <label>
               <span class="required">{{t "common.rubric-title"}}</span>
               {{#if isEditing}}
-                {{validation.gru-input model=tempRubric valuePath='title' maxLength=50  didValidate=didValidate}}
+                {{validation/gru-input model=tempRubric valuePath='title' maxLength=50  didValidate=didValidate}}
               {{else}}
                 <b>{{rubric.title}}</b>
               {{/if}}
             </label>
           </div>
           {{#if isEditing}}
-            {{taxonomy.gru-taxonomy-selector
+            {{taxonomy/gru-taxonomy-selector
             isEditing=isEditing
             onSubjectSelected="selectSubject"
             onCategorySelected="selectCategory"
@@ -44,12 +44,12 @@
                   {{gru-icon name="open_in_new"}} {{t "common.select"}}
                 </button>
                 <div class="tags">
-                  {{taxonomy.gru-taxonomy-tag-list tags=editableTags onRemove=(action 'removeTag')}}
+                  {{taxonomy/gru-taxonomy-tag-list tags=editableTags onRemove=(action 'removeTag')}}
                 </div>
               {{else}}
                 <div class="tags">
                   {{#if tags.length}}
-                    {{taxonomy.gru-taxonomy-tag-list tags=tags}}
+                    {{taxonomy/gru-taxonomy-tag-list tags=tags}}
                   {{else}}
                     {{t "common.not-specified"}}
                   {{/if}}
@@ -57,7 +57,7 @@
               {{/if}}
             </label>
           </div>
-          {{content.gru-audience isEditing=isEditing srcSelectedAudiences=tempRubric.audience editSelectedAudiences=tempRubric.audience}}
+          {{content/gru-audience isEditing=isEditing srcSelectedAudiences=tempRubric.audience editSelectedAudiences=tempRubric.audience}}
         </div>
       </div>
     </div>
@@ -74,7 +74,7 @@
           </div>
         </div>
         <div class="panel-body">
-          {{content.rubric.gru-rubric-creation
+          {{content/rubric/gru-rubric-creation
           rubric=tempRubric
           didValidate=didValidate
           emptyFileError=emptyFileError
@@ -91,7 +91,7 @@
           <div class="feedback">
             <label>
               <span>{{t "gru-rubric-creation.feedback-guidance"}}</span>
-              {{validation.gru-textarea rawTextareaValue=rubric.feedback model=tempRubric valuePath='feedback' maxLength=500 rows=5 placeholder=(t 'gru-rubric-creation.feedback-guidance-placeholder')}}
+              {{validation/gru-textarea rawTextareaValue=rubric.feedback model=tempRubric valuePath='feedback' maxLength=500 rows=5 placeholder=(t 'gru-rubric-creation.feedback-guidance-placeholder')}}
             </label>
           </div>
           <label class="required-feedback">
@@ -108,7 +108,7 @@
       </div>
       <div class="category-panel">
         {{#each categories as |category index|}}
-          {{content.rubric.gru-category
+          {{content/rubric/gru-category
             category=category
             index=index
             onCopyCategory='copyCategory'
@@ -121,11 +121,11 @@
       </div>
     {{else}}
       {{#if rubric.url}}
-        {{content.rubric.gru-preview-url resource=rubric}}
+        {{content/rubric/gru-preview-url resource=rubric}}
       {{/if}}
       <div class="category-panel non-edit">
         {{#each rubric.categories as |category index|}}
-          {{content.rubric.gru-category
+          {{content/rubric/gru-category
             category=category
             index=index
             preview=true

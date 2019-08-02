@@ -1,18 +1,17 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Ember from 'ember';
 import Answer from 'gooru-web/models/content/answer';
 
-moduleFor(
+moduleForComponent(
   'validator:hot-text-highlight',
   'Unit | Validator | hot-text-highlight',
   {
-    needs: ['validator:messages']
+    needs: ['validator:messages', 'service:i18n']
   }
 );
 
-test('check if brackets are balanced using bracketsAreBalanced()', function(
-  assert
-) {
+test('check if brackets are balanced using bracketsAreBalanced()', function(assert) {
   var validator = this.subject();
   const correctlyBalanced = 'The quick brown fox [jumps] over the lazy dog';
   const incorrectlyBalanced =
@@ -28,9 +27,7 @@ test('check if brackets are balanced using bracketsAreBalanced()', function(
   );
 });
 
-test('check if selections are valid using validateSelections()', function(
-  assert
-) {
+test('check if selections are valid using validateSelections()', function(assert) {
   var validator = this.subject();
   var answerText = 'The [quick] brown fox [jumps] over the lazy dog';
 

@@ -2,13 +2,9 @@ import Ember from 'ember';
 import { test } from 'ember-qunit';
 import moduleForAdapter from 'gooru-web/tests/helpers/module-for-adapter';
 
-moduleForAdapter(
-  'adapter:content/class',
-  'Unit | Adapter | content/class',
-  {
-    // needs: []
-  }
-);
+moduleForAdapter('adapter:content/class', 'Unit | Adapter | content/class', {
+  // needs: []
+});
 
 test('Archive class', function(assert) {
   assert.expect(0);

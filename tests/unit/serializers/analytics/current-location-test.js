@@ -1,6 +1,7 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor(
+moduleForComponent(
   'serializer:analytics/current-location',
   'Unit | Serializer | analytics/current-location'
 );
@@ -60,9 +61,7 @@ test('normalizeForGetUserCurrentLocation', function(assert) {
   assert.equal(response, 'fake', 'Wrong response');
 });
 
-test('normalizeCurrentLocation with collectionId, no collection type', function(
-  assert
-) {
+test('normalizeCurrentLocation with collectionId, no collection type', function(assert) {
   assert.expect(7);
   const serializer = this.subject();
 
@@ -93,9 +92,7 @@ test('normalizeCurrentLocation with collectionId, no collection type', function(
   assert.equal(location.get('status'), 'complete', 'Wrong class id');
 });
 
-test('normalizeCurrentLocation with assessmentId, no collection type', function(
-  assert
-) {
+test('normalizeCurrentLocation with assessmentId, no collection type', function(assert) {
   assert.expect(7);
   const serializer = this.subject();
 

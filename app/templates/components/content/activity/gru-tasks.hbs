@@ -9,7 +9,7 @@
   <div class="panel panel-body">
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
       {{#each tasks as |task|}}
-        {{content.activity.gru-tasks-edit
+        {{content/activity/gru-tasks-edit
           oaId=activityModel.id
           updateParent=(action 'updateTaskCollection')
           isExpanded=isExpanded
@@ -20,7 +20,7 @@
           }}
       {{/each}}
       {{#if task }}
-        {{content.activity.gru-tasks-edit
+        {{content/activity/gru-tasks-edit
           oaId=activityModel.id
           updateParent=(action 'updateTaskCollection')
           model=task removeLineItem=(action 'removeLineItem')

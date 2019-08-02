@@ -68,5 +68,5 @@
   {{/if}}
 </div>
 {{#if isShowStudentActivityReport}}
-  {{teacher.offline-class.oca-student-activity-report-pull-up students=students collection=collection student=selectedStudent classId=classId showPullUp=isShowStudentActivityReport onClosePullUp="pullUpClose"}}
+  {{teacher/offline-class/oca-student-activity-report-pull-up students=students collection=collection student=selectedStudent classId=classId showPullUp=isShowStudentActivityReport onClosePullUp="pullUpClose"}}
 {{/if}}

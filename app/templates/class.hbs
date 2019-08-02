@@ -1,7 +1,7 @@
 <div class="controller class row ">
 
   <div class="navigation {{if isFullScreen 'hide' 'show'}}">
-    {{class.gru-class-navigation class=class
+    {{class/gru-class-navigation class=class
     onItemSelected="selectMenuItem" selectedMenuItem=menuItem onOpenCourseReport="onOpenCourseReport"}}</div>
 
   <div class="content {{if isFullScreen 'full-screen'}}">
@@ -9,7 +9,7 @@
   </div>
 
   <div class="channel">
-  {{class.community-channel class=class channels=channels isFullScreen=false showChannel=true messages=messages currentUser=userInfo}}
+  {{class/community-channel class=class channels=channels isFullScreen=false showChannel=true messages=messages currentUser=userInfo}}
   </div>
 
 </div>

@@ -18,9 +18,7 @@ moduleForAdapter(
   }
 );
 
-test('searchStudentCollectionPerformanceSummary all criteria provided', function(
-  assert
-) {
+test('searchStudentCollectionPerformanceSummary all criteria provided', function(assert) {
   assert.expect(6);
   // Mock backend response
   this.pretender.map(function() {
@@ -75,9 +73,7 @@ test('searchStudentCollectionPerformanceSummary all criteria provided', function
     });
 });
 
-test('searchStudentCollectionPerformanceSummary just required criteria provided', function(
-  assert
-) {
+test('searchStudentCollectionPerformanceSummary just required criteria provided', function(assert) {
   assert.expect(6);
   // Mock backend response
   this.pretender.map(function() {

@@ -9,7 +9,7 @@
   <ul class="row">
       <li class="performance-unit-content">
           <div>
-            {{class.analytics.performance.gru-performance-summary
+            {{class/analytics/performance/gru-performance-summary
             showScore=(not isFilteredByCollection)
             performance=unit
             index=localIndex
@@ -22,7 +22,7 @@
 <div class="lessons-container collapse" id="_{{unit.id}}">
   <div>
     {{#each lessons as |lesson indexLesson|}}
-      {{class.analytics.performance.student.gru-lesson-performance
+      {{class/analytics/performance/student/gru-lesson-performance
       lesson = lesson
       index = indexLesson
       selectedOption = selectedOption

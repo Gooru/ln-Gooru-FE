@@ -88,23 +88,19 @@ export default Ember.Component.extend({
     var metrics = this.get('metrics');
 
     metrics.forEach(function(metric) {
-      if (metric.get('value') !== 'student') {
+      let foundInDataPicker = false;
+      dataPickerOptions.forEach(function(option) {
+        if (!foundInDataPicker) {
+          foundInDataPicker = metric.get('value') === option;
+        }
+      }); //inner
+      if (metric.get('value') !== 'student' && foundInDataPicker === false) {
         metric.set('visible', false);
-      }
-    });
-
-    dataPickerOptions.forEach(function(option) {
-      var metric = metrics.findBy('value', option);
-      if (metric) {
-        metric.set('visible', true);
       } else {
-        Ember.Logger.warn(
-          `Option in data picker: ${option} does not appear to be a valid metric`
-        );
+        metric.set('visible', true);
       }
-    });
-
-    return this.get('metrics');
+    }); //Outer
+    return metrics;
   }),
 
   // -------------------------------------------------------------------------
@@ -141,6 +137,7 @@ export default Ember.Component.extend({
   resetSortByMetrics() {
     var component = this;
     var metrics = component.get('metrics');
+    console.log('resetSortByMetrics', metrics); //eslint-disable-line
     metrics.forEach(function(option) {
       option.set('isAsc', null);
       option.set('sorted', false);

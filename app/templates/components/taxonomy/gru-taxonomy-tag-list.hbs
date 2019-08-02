@@ -1,5 +1,5 @@
 {{#each visibleTags as |taxonomyTag|}}
-  {{taxonomy.gru-taxonomy-tag model=taxonomyTag isEditing=isEditing hasTooltip=hasTooltips tagPopoverDefaultPosition=tagPopoverDefaultPosition onRemove=(action 'removeTag' taxonomyTag) onAdd=(action 'addTag' taxonomyTag)}}
+  {{taxonomy/gru-taxonomy-tag model=taxonomyTag isEditing=isEditing hasTooltip=hasTooltips tagPopoverDefaultPosition=tagPopoverDefaultPosition onRemove=(action 'removeTag' taxonomyTag) onAdd=(action 'addTag' taxonomyTag)}}
 {{/each}}
 
 {{#if nonVisibleTags}}
@@ -8,7 +8,7 @@
   </button>
   <div class="all-tags">
     {{#each tags as |taxonomyTag|}}
-      {{taxonomy.gru-taxonomy-tag
+      {{taxonomy/gru-taxonomy-tag
       model=taxonomyTag
       isEditing=isEditing
       hasTooltip=false

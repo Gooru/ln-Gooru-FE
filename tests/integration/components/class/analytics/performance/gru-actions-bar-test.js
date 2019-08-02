@@ -22,7 +22,7 @@ test('Class Performance Actions Bar with student mode', function(assert) {
   this.set('collectionLevel', collectionLevel);
 
   this.render(
-    hbs`{{class.analytics.performance.gru-actions-bar mode='student' selectedFilterBy='assessment' onFilterSelected='selectFilterBy' collectionLevel=collectionLevel enableFullScreen=true}}`
+    hbs`{{class/analytics/performance/gru-actions-bar mode='student' selectedFilterBy='assessment' onFilterSelected='selectFilterBy' collectionLevel=collectionLevel enableFullScreen=true}}`
   );
 
   var $component = this.$(); //component dom element
@@ -71,7 +71,7 @@ test('Class Performance Actions Bar with teacher mode', function(assert) {
   this.set('collectionLevel', collectionLevel);
 
   this.render(
-    hbs`{{class.analytics.performance.gru-actions-bar mode='teacher' selectedFilterBy='collection' onFilterSelected='selectFilterBy' collectionLevel=collectionLevel enableFullScreen=true}}`
+    hbs`{{class/analytics/performance/gru-actions-bar mode='teacher' selectedFilterBy='collection' onFilterSelected='selectFilterBy' collectionLevel=collectionLevel enableFullScreen=true}}`
   );
 
   var $component = this.$(); //component dom element
@@ -122,7 +122,7 @@ test('Download action', function(assert) {
   });
 
   this.render(
-    hbs`{{class.analytics.performance.gru-actions-bar mode='teacher' onDownload='myDownload' collectionLevel=collectionLevel}}`
+    hbs`{{class/analytics/performance/gru-actions-bar mode='teacher' onDownload='myDownload' collectionLevel=collectionLevel}}`
   );
 
   var $component = this.$(); //component dom element
@@ -131,9 +131,7 @@ test('Download action', function(assert) {
   $button.click();
 });
 
-test('Calling external action when pressing the full screen button', function(
-  assert
-) {
+test('Calling external action when pressing the full screen button', function(assert) {
   assert.expect(2);
 
   this.on('externalAction', function() {
@@ -143,7 +141,7 @@ test('Calling external action when pressing the full screen button', function(
   this.set('isFullScreenMode', true);
 
   this.render(
-    hbs`{{class.analytics.performance.gru-actions-bar onToggleFullScreen=(action 'externalAction') enableFullScreen=true}}`
+    hbs`{{class/analytics/performance/gru-actions-bar onToggleFullScreen=(action 'externalAction') enableFullScreen=true}}`
   );
 
   var $component = this.$(); //component dom element
@@ -153,9 +151,7 @@ test('Calling external action when pressing the full screen button', function(
   $button.click();
 });
 
-test('Displaying Edit Content option when enableEdit is true', function(
-  assert
-) {
+test('Displaying Edit Content option when enableEdit is true', function(assert) {
   assert.expect(2);
 
   this.on('editContent', function() {
@@ -166,7 +162,7 @@ test('Displaying Edit Content option when enableEdit is true', function(
   this.set('enableEdit', enableEdit);
 
   this.render(
-    hbs`{{class.analytics.performance.gru-actions-bar onEditContent=(action 'editContent')}}`
+    hbs`{{class/analytics/performance/gru-actions-bar onEditContent=(action 'editContent')}}`
   );
 
   var $component = this.$(); //component dom element
@@ -176,9 +172,7 @@ test('Displaying Edit Content option when enableEdit is true', function(
   $button.click();
 });
 
-test('Not displaying Edit Content option when enableEdit is false', function(
-  assert
-) {
+test('Not displaying Edit Content option when enableEdit is false', function(assert) {
   assert.expect(1);
 
   const enableEdit = false;
@@ -190,9 +184,7 @@ test('Not displaying Edit Content option when enableEdit is false', function(
   T.notExists(assert, $button, 'Button should not be visible');
 });
 
-test('Not displaying Edit Content option when enableEdit is false', function(
-  assert
-) {
+test('Not displaying Edit Content option when enableEdit is false', function(assert) {
   assert.expect(1);
 
   const enableFullScreen = false;

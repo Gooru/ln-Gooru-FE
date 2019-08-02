@@ -27,7 +27,6 @@
     {{#gru-scroll to="#settings" offset='article > header' }}{{t "common.settings"}}{{/gru-scroll}}
   </nav>
 </header>
-
 <section id="builder">
   <div class="header">
     <h2>{{t "common.builder"}} - {{t (concat 'common.question-type.' question.type)}}</h2>
@@ -51,7 +50,7 @@
       {{#if isBuilderEditing}}
         {{gru-rich-text-editor content=tempQuestion.text model=tempQuestion valuePath='description' didValidate=didValidate}}
         {{#if showImagePicker}}
-          {{content.gru-image isEditing=true srcImage=question.thumbnail editImage=tempQuestion.thumbnail}}
+          {{content/gru-image isEditing=true srcImage=question.thumbnail editImage=tempQuestion.thumbnail}}
         {{else}}
           <button class="add-image btn btn-sm btn-primary" {{action "toggleImagePicker"}}>{{t "common.add-question-image"}}</button>
         {{/if}}
@@ -64,7 +63,7 @@
           <p class="text-empty">{{t 'common.nothing-to-display'}}</p>
         {{/if}}
         {{#if showImagePicker}}
-          {{content.gru-image isEditing=false srcImage=question.thumbnail editImage=tempQuestion.thumbnail}}
+          {{content/gru-image isEditing=false srcImage=question.thumbnail editImage=tempQuestion.thumbnail}}
         {{/if}}
       {{/if}}
       {{#if question.isOpenEnded}}
@@ -142,7 +141,7 @@
                   <div class="setting maximum-points">
                     <span class="title">{{t 'content.questions.edit.builder.feedback-grading.maximum-points'}}</span>
                     {{#if isBuilderEditing}}
-                      {{validation.gru-select options=maximumOptions search="true" optionSelected=tempQuestion.rubric.maxScore onOptionSelect="onMaxScoreChange"}}
+                      {{validation/gru-select options=maximumOptions search="true" optionSelected=tempQuestion.rubric.maxScore onOptionSelect="onMaxScoreChange"}}
                     {{else}}
                       {{rubric.maxScore}}
                     {{/if}}
@@ -150,7 +149,7 @@
                   <div class="setting increment">
                     <span class="title">{{t 'content.questions.edit.builder.feedback-grading.increment'}}</span>
                     {{#if isBuilderEditing}}
-                      {{validation.gru-select options=incrementOptions search="true" optionSelected=tempQuestion.rubric.increment onOptionSelect="onIncrementChange"}}
+                      {{validation/gru-select options=incrementOptions search="true" optionSelected=tempQuestion.rubric.increment onOptionSelect="onIncrementChange"}}
                     {{else}}
                       {{rubric.increment}}
                     {{/if}}
@@ -163,7 +162,6 @@
       {{/if}}
     </div>
   </div>
-
   {{#unless (or question.isOpenEnded question.isFIB)}}
     <div class="panel panel-default question-answer">
       <div class="panel-heading">
@@ -213,7 +211,6 @@
     </div>
   {{/if}}
 </section>
-
 <section id="information">
   <div class="header">
     <h2>{{t "common.information"}}</h2> {{partial 'content/partials/information-actions'}}
@@ -226,7 +223,7 @@
             <label>
               <span class="required">{{t "content.questions.edit.information.question-title"}}</span>
               {{#if isEditing}}
-                {{validation.gru-input model=tempQuestion valuePath='title' maxLength=50 didValidate=didValidate}}
+                {{validation/gru-input model=tempQuestion valuePath='title' maxLength=50 didValidate=didValidate}}
               {{else}}
                 <b>{{{question.title}}}</b>
               {{/if}}
@@ -257,14 +254,14 @@
                       </ul>
                   </div>
               {{else}} --}}
-                  <div class="btn-empty btn btn-sm">{{t (concat 'common.question-type.' question.type) }}</div>
+              <div class="btn-empty btn btn-sm">{{t (concat 'common.question-type.' question.type) }}</div>
               {{!--  {{/if}} --}}
             </label>
           </div>
         </div>
         <div class="standards">
           {{#if isEditing}}
-            {{taxonomy.gru-taxonomy-selector
+            {{taxonomy/gru-taxonomy-selector
             isEditing=isEditing
             onSubjectSelected="selectSubject"
             onCategorySelected="selectCategory"
@@ -278,16 +275,16 @@
               <span>{{t standardLabelKey}}</span>
             </label>
             {{#if isEditing}}
-              <button type="button" class="btn btn-primary" {{action 'openTaxonomyModal'}} disabled= {{standardDisabled}}>
+              <button type="button" class="btn btn-primary" {{action 'openTaxonomyModal'}} disabled={{standardDisabled}}>
                 {{gru-icon name="open_in_new"}} {{t "common.select"}}
               </button>
               <div class="tags">
-                {{taxonomy.gru-taxonomy-tag-list tags=editableTags onRemove=(action 'removeTag')}}
+                {{taxonomy/gru-taxonomy-tag-list tags=editableTags onRemove=(action 'removeTag')}}
               </div>
             {{else}}
               <div class="tags">
                 {{#if tags.length}}
-                  {{taxonomy.gru-taxonomy-tag-list tags=tags}}
+                  {{taxonomy/gru-taxonomy-tag-list tags=tags}}
                 {{else}}
                   {{t "common.not-specified"}}
                 {{/if}}
@@ -295,10 +292,9 @@
             {{/if}}
           </div>
         </div>
-        {{content.gru-audience isEditing=isEditing srcSelectedAudiences=question.audience editSelectedAudiences=tempQuestion.audience}} {{content.gru-depth-of-knowledge isEditing=isEditing srcSelectedKnowledge=question.depthOfknowledge editSelectedKnowledge=tempQuestion.depthOfknowledge}}
+        {{content/gru-audience isEditing=isEditing srcSelectedAudiences=question.audience editSelectedAudiences=tempQuestion.audience}} {{content/gru-depth-of-knowledge isEditing=isEditing srcSelectedKnowledge=question.depthOfknowledge editSelectedKnowledge=tempQuestion.depthOfknowledge}}
       </div>
     </div>
   </div>
 </section>
-
-{{content.gru-settings-edit id="settings" action='publishToProfile' model=question}}
+{{content/gru-settings-edit id="settings" action='publishToProfile' model=question}}

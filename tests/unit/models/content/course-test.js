@@ -2,9 +2,10 @@ import Ember from 'ember';
 import Unit from 'gooru-web/models/content/unit';
 import Lesson from 'gooru-web/models/content/lesson';
 import LessonItem from 'gooru-web/models/content/lessonItem';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('model:content/course', 'Unit | Model | content/course', {
+moduleForComponent('model:content/course', 'Unit | Model | content/course', {
   unit: true,
   needs: ['validator:presence']
 });
