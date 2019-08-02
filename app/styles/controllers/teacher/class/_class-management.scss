@@ -303,6 +303,14 @@
                   font-size: 15.5px;
                   font-weight: bold;
                   color: $white;
+
+                  .gru-copy-value {
+                    .copy-btn {
+                      i {
+                        color: $white;
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -341,13 +349,13 @@
             }
           }
 
-          .sub-sec-coteach {
+          .sub-sec-coteach,
+          .sub-sec-teach {
             margin-top: 5px;
             padding-bottom: 8px;
 
             .sub-sec-head {
               height: 14px;
-              opacity: 0.8;
               font-size: 12px;
               font-weight: bold;
               line-height: normal;
@@ -371,7 +379,8 @@
                 border-radius: 50%;
               }
 
-              .co-teacher-label {
+              .co-teacher-label,
+              .teacher-label {
                 width: 97px;
                 height: 15px;
                 font-family: Lato;

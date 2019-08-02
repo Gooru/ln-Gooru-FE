@@ -58,6 +58,10 @@ window.i18ln = {
   'upload-success': 'Uploaded Successfully',
   'mobile-camera-placeholder': 'Tap for image upload',
   'i2d.mobile-upload-failed': 'There was a error',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'i2d.upload-failed':
     'There was an error while uploading this image. Re-upload?',
   'errors.wrongLength':
@@ -131,6 +135,8 @@ window.i18ln = {
   'common.a-assessment': 'மதிப்பீடு',
   'common.about': 'பற்றி',
   'common.plan': 'plan',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
   'offline-activities.no-completed-content':
     'There are no projects or other offline activities that have been completed yet',
   'offline-activities.no-active-content':
@@ -1767,7 +1773,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Grade Lines',
+  'grade-selector.placeholder': 'Hiline',
   'standard-dropdown.placeholder': 'தரமான உலாவ',
   'subject-dropdown.placeholder': 'பாடம் (ங்கள்)',
   'subject-dropdown.prompt': 'ஒரு பொருளைத் தேர்ந்தெடுக்கவும்',
@@ -1949,7 +1955,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'வானலைகளில்',
   'profile.proficiency.baseline': 'அடிப்படை',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class Grade',
+  'profile.proficiency.class-grade-line': 'Class HiLine',
   'profile.proficiency.not-tagged':
     'வகுப்புக்கு நிச்சயமாக ஒதுக்கப்படவில்லை அல்லது நிச்சயமாக ஒரு செல்லுபடியாகாத பொருள் அல்லது தரத்திற்கு குறிக்கப்படவில்லை.',
   'profile.proficiency.show-compressed-chart': 'சுருக்கப்பட்ட அட்டவணையை காட்டு',
@@ -2773,7 +2779,7 @@ window.i18ln = {
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
-  'report.class-weekly-report': 'Class Weekly Report',
+  'report.class-weekly-report': 'Class Progress Report',
   'no-teacher-found': 'No teacher with that email id found!',
   'oa-player.complete-confirm':
     'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',

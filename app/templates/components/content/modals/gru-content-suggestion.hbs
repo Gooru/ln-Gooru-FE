@@ -1,8 +1,58 @@
 <div class="modal-header">
-  <span class="suggestion-title">{{t 'gru-content-suggestion.header'}}</span>
+  <span class="suggestion-title">{{t 'reroute.suggestion'}}</span>
 </div>
 <div class="modal-body">
-  <div class="deviation">
+  <div class="image-container">
+    <i class="suggestion-img"></i>
+  </div>
+  <div class="suggestion-details">
+    <div class="title">{{t 'reroute.suggestion.title'}}</div>
+    <div class="description">{{ t 'reroute.suggestion.desc'}}</div>
+    <div class="taxonomy">
+      {{#if tags.length}}
+        {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+        <span class="border"></span>
+      {{/if}}
+    </div>
+  </div>
+  <div class="suggestion-container">
+    <div class="thumbnail-img">
+      <img src="{{suggestedContent.thumbnail}}" />
+    </div>
+    <div class="suggestion-info-panel">
+      <div class="icons">
+        <i class="collection"></i>
+        <span class="suggestion">
+          {{gru-icon name="explore"}}
+        </span>
+      </div>
+      <div class="suggestion-info">
+        <div class="title ellipsis">
+          {{suggestedContent.title}}
+        </div>
+        <div class="count">
+          {{#if suggestedContent.resourceCount}}
+            <span class="resource">{{suggestedContent.resourceCount}} {{t "common.resource-pl" count=suggestedContent.resourceCount}}</span>
+          {{/if}}
+          {{#if (and suggestedContent.resourceCount suggestedContent.questionCount)}}
+            <span>|</span>
+          {{/if}}
+          {{#if suggestedContent.questionCount}}
+            <span class="question">{{suggestedContent.questionCount}} {{t "common.question-pl" count=suggestedContent.questionCount}}</span>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="action">
+    <div class="ignore" {{action "onIgnoreSuggestion"}}>
+      <span>{{t 'gru-suggest-test.no'}}</span>
+    </div>
+    <div class="accept" {{action "onAcceptSuggestion"}}>
+      {{t 'common.study-now'}}
+    </div>
+  </div>
+  <!-- <div class="deviation">
   </div>
   <div class="suggestion-details">
     <div class="title">
@@ -58,5 +108,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

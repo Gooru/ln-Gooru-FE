@@ -23,7 +23,7 @@
 }
 
 .content {
-  height: 100%;
+  height: auto;
   width: 100%;
 
   .controller.teacher.class.class-activities {
@@ -214,6 +214,10 @@
                       .datepicker {
                         .table-condensed {
                           tbody tr {
+                            &.no-activities {
+                              pointer-events: none;
+                            }
+
                             &.week-active,
                             &:hover {
                               border-radius: 50px;
@@ -277,7 +281,11 @@
 
                                 &.active {
                                   background-color: #d2e3fc;
-                                  background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
+                                  background-image: -webkit-linear-gradient(
+                                    top,
+                                    #d2e3fc,
+                                    #d2e3fc
+                                  );
                                   border-radius: 50%;
                                   display: flex;
                                   margin: auto;
@@ -294,7 +302,11 @@
 
                                 &.today {
                                   background-color: #3486f7;
-                                  background-image: -webkit-linear-gradient(top, #3486f7, #3486f7);
+                                  background-image: -webkit-linear-gradient(
+                                    top,
+                                    #3486f7,
+                                    #3486f7
+                                  );
                                   border-radius: 50%;
                                   display: flex;
                                   margin: auto;
@@ -303,6 +315,7 @@
                                   color: #fff;
                                   width: 40px;
                                   height: 40px;
+                                  pointer-events: auto;
 
                                   &:before {
                                     content: none;
@@ -386,7 +399,7 @@
               .ca-calendar-tabs {
                 width: 100%;
                 display: grid;
-                grid-template-columns: repeat(3,auto);
+                grid-template-columns: repeat(3, auto);
                 margin: 0 10px;
                 grid-gap: 10px;
                 justify-content: space-evenly;
@@ -521,6 +534,18 @@
             width: 100%;
             border: 1px solid #bbb;
 
+            &.active {
+              .icons {
+                .arrow_drop_up {
+                  display: none;
+                }
+
+                .arrow_drop_down {
+                  display: block;
+                }
+              }
+            }
+
             %icon-content {
               width: 20px;
               height: 20px;
@@ -550,11 +575,12 @@
               i {
                 width: 24px;
                 margin: auto;
-                cursor: pointer;
+                cursor: default;
               }
 
               .arrow_drop_up {
                 display: block;
+                cursor: pointer;
               }
 
               .arrow_drop_down {
@@ -713,39 +739,28 @@
             width: 100%;
             border: 1px solid #bbb;
 
+            &.active {
+              .icons {
+                .arrow_drop_up {
+                  display: none;
+                }
+
+                .arrow_drop_down {
+                  display: block;
+                }
+              }
+            }
+
             i {
               width: 24px;
-              cursor: pointer;
               margin: auto;
-            }
-
-            &[aria-expanded="true"] {
-              .icons {
-                .arrow_drop_up {
-                  display: none;
-                }
-
-                .arrow_drop_down {
-                  display: block;
-                }
-              }
-            }
-
-            &[aria-expanded="false"] {
-              .icons {
-                .arrow_drop_up {
-                  display: block;
-                }
-
-                .arrow_drop_down {
-                  display: none;
-                }
-              }
+              cursor: default;
             }
 
             .icons {
               .arrow_drop_up {
                 display: block;
+                cursor: pointer;
               }
 
               .arrow_drop_down {
@@ -810,43 +825,32 @@
             position: relative;
             border: 1px solid #bbb;
 
+            &.active {
+              .icons {
+                .arrow_drop_up {
+                  display: none;
+                }
+
+                .arrow_drop_down {
+                  display: block;
+                }
+              }
+            }
+
             .icons {
               i {
                 width: 24px;
                 margin: auto;
-                cursor: pointer;
+                cursor: default;
               }
 
               .arrow_drop_up {
                 display: block;
+                cursor: pointer;
               }
 
               .arrow_drop_down {
                 display: none;
-              }
-            }
-
-            &[aria-expanded="true"] {
-              .icons {
-                .arrow_drop_up {
-                  display: none;
-                }
-
-                .arrow_drop_down {
-                  display: block;
-                }
-              }
-            }
-
-            &[aria-expanded="false"] {
-              .icons {
-                .arrow_drop_up {
-                  display: block;
-                }
-
-                .arrow_drop_down {
-                  display: none;
-                }
               }
             }
 

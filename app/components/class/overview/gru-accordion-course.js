@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import AccordionMixin from '../../../mixins/gru-accordion';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
 
 /**
  * Accordion Course
@@ -64,6 +65,7 @@ export default Ember.Component.extend(AccordionMixin, {
       this.set('showUnitReportPullUp', false);
       this.set('showCollectionReportPullUp', false);
       this.set('isShowStudentExternalAssessmentReport', false);
+      this.set('isShowStudentOfflineActivityReport', false);
     },
 
     /**
@@ -147,9 +149,12 @@ export default Ember.Component.extend(AccordionMixin, {
     onOpenStudentReport(params) {
       let component = this;
       let reportType = params.type;
-      if (reportType === 'assessment-external') {
+      if (reportType === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
         component.set('isShowStudentExternalAssessmentReport', true);
         component.set('isShowStudentReport', false);
+      } else if (reportType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        params.performance = params.collection.performance;
+        component.set('isShowStudentOfflineActivityReport', true);
       } else {
         component.set('isShowStudentExternalAssessmentReport', false);
         component.set('isShowStudentReport', true);
@@ -296,6 +301,12 @@ export default Ember.Component.extend(AccordionMixin, {
    * @type {Boolean}
    */
   showReportPullUp: false,
+
+  /**
+   * @property {Boolean} isShowStudentOfflineActivityReport
+   * Property to show/hide student offline activity report
+   */
+  isShowStudentOfflineActivityReport: false,
 
   // -------------------------------------------------------------------------
   // Observers

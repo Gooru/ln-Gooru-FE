@@ -3,7 +3,11 @@ import {
   getTimeInMillisec,
   formatTime as formatTimeInMilliSec
 } from 'gooru-web/utils/utils';
-import { ROLES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  ROLES,
+  PLAYER_EVENT_SOURCE,
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -65,6 +69,32 @@ export default Ember.Component.extend({
     onShowCompletionConfirmation() {
       const component = this;
       component.set('isShowCompletionConfirmation', true);
+    },
+
+    //Action triggered when click on self grade
+    onTriggerSelfGrade() {
+      const component = this;
+      const classId = component.get('classId');
+      const content = component.get('offlineActivity');
+      const contentSource = component.get('contentSource');
+      const contentType = CONTENT_TYPES.OFFLINE_ACTIVITY;
+      const selfGradeItemContext = Ember.Object.create({
+        classId,
+        content,
+        contentType,
+        contentSource,
+        dcaContentId: component.get('caContentId')
+      });
+      const itemsToGrade = Ember.A([selfGradeItemContext]);
+      component.set('itemsToGrade', itemsToGrade);
+      component.set('selfGradeItemContext', selfGradeItemContext);
+      component.set('isShowOaSelfGrading', true);
+    },
+
+    //Action triggered once self grading is done
+    onDoneOaGrading() {
+      const component = this;
+      component.set('isEnableSelfGrading', false);
     }
   },
 
@@ -152,9 +182,15 @@ export default Ember.Component.extend({
 
   /**
    * @property {String} contentSource
-   * Assign DCA player event source as default
+   * Assign player event source as based on caContentId property
    */
-  contentSource: PLAYER_EVENT_SOURCE.DAILY_CLASS,
+  contentSource: Ember.computed('caContentId', function() {
+    const component = this;
+    const caContentId = component.get('caContentId');
+    return caContentId
+      ? PLAYER_EVENT_SOURCE.DAILY_CLASS
+      : PLAYER_EVENT_SOURCE.COURSE_MAP;
+  }),
 
   /**
    * @property {Boolean} isShowCompletionConfirmation
@@ -202,6 +238,52 @@ export default Ember.Component.extend({
   timeZone: Ember.computed(function() {
     return moment.tz.guess() || null;
   }),
+
+  /**
+   * @property {Boolean} isEnableSelfGrading
+   * Property to enable/disable self grading flow
+   */
+  isEnableSelfGrading: Ember.computed(
+    'isSelfGradingDone',
+    'isOaCompleted',
+    function() {
+      const component = this;
+      return (
+        !component.get('isSelfGradingDone') && component.get('isOaCompleted')
+      );
+    }
+  ),
+
+  /**
+   * @property {Boolean} isSelfGradingDone
+   * Property to check whether self grading is done or not
+   */
+  isSelfGradingDone: false,
+
+  /**
+   * @property {Array} studentRubric
+   * Property will contain attached student rubric item
+   */
+  studentRubric: Ember.computed.filterBy(
+    'offlineActivity.rubric',
+    'grader',
+    'Self'
+  ),
+
+  /**
+   * @property {Array} teacherRubric
+   * Property will contain attached teacher rubric item
+   */
+  teacherRubric: Ember.computed.filterBy(
+    'offlineActivity.rubric',
+    'grader',
+    'Teacher'
+  ),
+
+  isCourseMapGrading: Ember.computed.equal(
+    'contentSource',
+    PLAYER_EVENT_SOURCE.COURSE_MAP
+  ),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -262,6 +344,12 @@ export default Ember.Component.extend({
               component.formatMillisecondsToHourMinute(
                 formatTimeInMilliSec(submittedTimespentInMillisec)
               );
+            }
+            if (tasksSubmissions.get('oaRubrics.studentGrades')) {
+              let studentGrades = tasksSubmissions.get(
+                'oaRubrics.studentGrades'
+              );
+              component.set('isSelfGradingDone', !!studentGrades.get('grader'));
             }
           }
           component.set('activityTasks', activityTasks);
@@ -361,6 +449,7 @@ export default Ember.Component.extend({
     const oaId = component.get('oaId');
     const contentSource = component.get('contentSource');
     const studentId = component.get('userId');
+    const studentRubric = component.get('studentRubric').objectAt(0) || null;
     const oaData = {
       class_id: classId,
       oa_id: oaId,
@@ -369,8 +458,12 @@ export default Ember.Component.extend({
       marked_by: ROLES.STUDENT,
       path_id: 0,
       path_type: null,
-      time_zone: component.get('timeZone')
+      time_zone: component.get('timeZone'),
+      student_rubric_id: null
     };
+    if (studentRubric) {
+      oaData.student_rubric_id = studentRubric.get('id');
+    }
     if (component.get('isStudyPlayer')) {
       oaData.course_id = component.get('courseId');
       oaData.unit_id = component.get('unitId');

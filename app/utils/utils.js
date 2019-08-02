@@ -1089,8 +1089,14 @@ export function getOASubType() {
  */
 export function getOAType() {
   return Ember.A([
-    { display_name: 'remote', code: '0' },
-    { display_name: 'uploaded', code: '1' }
+    {
+      display_name: 'remote',
+      code: '0'
+    },
+    {
+      display_name: 'uploaded',
+      code: '1'
+    }
   ]);
 }
 
@@ -1105,6 +1111,24 @@ export function getTimeInMillisec(hour = 0, minute = 0) {
   return (hour * 60 * 60 + minute * 60) * 1000;
 }
 
+/**
+ * @function getWeekDaysByDate
+ * @param {string} date
+ * @return {Array}
+ * Method to get week days for given date
+ */
+export function getWeekDaysByDate(date, formatDate = 'YYYY/MM/DD') {
+  let dateformat = 'YYYY/MM/DD';
+  let parsedDate = date ? moment(date, dateformat) : moment(),
+    weeklength = 7,
+    result = [];
+  parsedDate = parsedDate.startOf('week');
+  while (weeklength--) {
+    result.push(moment(parsedDate.format(dateformat)).format(formatDate));
+    parsedDate.add(1, 'day');
+  }
+  return result;
+}
 /**
  * @function isValidEmailId
  * @param {String} emailId
@@ -1124,19 +1148,47 @@ export function isValidEmailId(emailId = '') {
  */
 export function appLocales() {
   return Ember.A([
-    { en: 'English' },
-    { sp: 'Español' },
-    { ar: 'عربى' },
-    { mr: 'मराठी' },
-    { kn: 'ಕನ್ನಡ' },
-    { hi: 'हिंदी' },
-    { as: 'অসমীয়া' },
-    { bn: 'বাংলা' },
-    { gu: 'ગુજરાતી' },
-    { ml: 'മല്യാലം' },
-    { or: ' ଓଡ଼ିଆ' },
-    { pa: 'ਪੰਜਾਬੀ' },
-    { ta: 'தமிழ்' },
-    { te: 'తెలుగు' }
+    {
+      en: 'English'
+    },
+    {
+      sp: 'Español'
+    },
+    {
+      ar: 'عربى'
+    },
+    {
+      mr: 'मराठी'
+    },
+    {
+      kn: 'ಕನ್ನಡ'
+    },
+    {
+      hi: 'हिंदी'
+    },
+    {
+      as: 'অসমীয়া'
+    },
+    {
+      bn: 'বাংলা'
+    },
+    {
+      gu: 'ગુજરાતી'
+    },
+    {
+      ml: 'മല്യാലം'
+    },
+    {
+      or: ' ଓଡ଼ିଆ'
+    },
+    {
+      pa: 'ਪੰਜਾਬੀ'
+    },
+    {
+      ta: 'தமிழ்'
+    },
+    {
+      te: 'తెలుగు'
+    }
   ]);
 }

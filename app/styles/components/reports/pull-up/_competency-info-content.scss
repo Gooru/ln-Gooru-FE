@@ -1,6 +1,14 @@
 .competency-info-content {
   background-color: #36424b;
   height: auto;
+  #lm-no-content {
+    margin: 0;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 15px;
+    background-color: #fff;
+  }
 
   .header-tab-panel {
     padding-top: 10px;

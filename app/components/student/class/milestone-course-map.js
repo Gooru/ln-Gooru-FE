@@ -76,9 +76,9 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Observer
-
-  onRescopeChange: Ember.observer('showAllRescopedContent', function() {
+  onShowRescope: Ember.observer('showAllRescopedContent', function() {
     this.handleLastLessonPath();
+    this.handleMileStonePath();
   }),
 
   // -------------------------------------------------------------------------
@@ -277,8 +277,14 @@ export default Ember.Component.extend({
         collection
       };
       let reportType = collection.get('format');
-      if (reportType === 'assessment-external') {
+      if (reportType === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
         component.set('isShowStudentExternalAssessmentReport', true);
+      } else if (reportType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        studentCollectionReportContext.performance = {
+          score: collection.get('performance.scoreInPercentage'),
+          timeSpent: collection.get('performance.timeSpent')
+        };
+        component.set('isShowStudentOfflineActivityReport', true);
       } else {
         component.set('isShowStudentCollectionReport', true);
       }
@@ -647,6 +653,7 @@ export default Ember.Component.extend({
                   );
                 }
                 selectedMilestone.set('hasLessonFetched', true);
+                component.handleMileStonePath();
                 let userCurrentLocation = component.get('userCurrentLocation');
                 if (locateLastPlayedItem && userCurrentLocation) {
                   let lessonId = userCurrentLocation.get('lessonId');
@@ -667,6 +674,30 @@ export default Ember.Component.extend({
             });
         }
       });
+    }
+  },
+
+  handleMileStonePath() {
+    const component = this;
+    let selectedMilestone = component.get('selectedMilestone');
+    if (selectedMilestone) {
+      let milestones = component.get('milestones');
+      let nextMilestone = milestones.objectAt(
+        selectedMilestone.get('milestoneIndex')
+      );
+      let lessons = selectedMilestone.get('lessons');
+      const nonRescopedLessons = lessons.filter(lesson => {
+        if (!lesson.get('rescope')) {
+          return lesson;
+        }
+      });
+      let showMilestoneLessons =
+        !nonRescopedLessons.length > 0 &&
+        !component.get('showAllRescopedContent');
+      if (nextMilestone) {
+        nextMilestone.set('prevMileStoneShowLessons', showMilestoneLessons);
+      }
+      selectedMilestone.set('showLessons', showMilestoneLessons);
     }
   },
 
@@ -983,6 +1014,9 @@ export default Ember.Component.extend({
 
     milestones.forEach((milestone, index) => {
       let gradeId = milestone.get('grade_id');
+      milestone.set('hasLessonFetched', false);
+      milestone.set('prevMilestoneIsActive', false);
+      milestone.set('isActive', false);
       let grade = studentGrades.findBy('id', gradeId);
       if (grade) {
         if (gradeId === classGradeId) {

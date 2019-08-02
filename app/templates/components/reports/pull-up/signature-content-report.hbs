@@ -42,20 +42,15 @@
   </div>
   {{/if}}
 </div>
-{{#if learningMapData}}
-{{reports/pull-up/competency-info-content 
-    userId=userId 
-    competency=competency 
+{{reports/pull-up/competency-info-content
+    userId=userId
+    competency=competency
     microCompetencies=microCompetencies 
-    collectionPerformances=collectionPerformances 
-    userId=userId 
-    prequisiteCompetencies=prerequisites 
-    learningMapData=learningMapData 
+    collectionPerformances=collectionPerformances
+    userId=userId
+    prequisiteCompetencies=prerequisites
+    learningMapData=learningMapData
     isStudent=isStudent}}
-{{else}}
-<p id="lm-no-content">{{t 'no.content.assoc.fw'}}</p>
-{{/if}}
-
 {{/if}}
 {{#if (and isShowContentPreview (not isStudent))}}
 {{reports.pull-up.gru-collection-preview

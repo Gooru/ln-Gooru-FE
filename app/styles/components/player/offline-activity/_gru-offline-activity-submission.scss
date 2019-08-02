@@ -121,10 +121,12 @@
         }
       }
     }
-    .complete-submission-container {
+    .complete-submission-container,
+    .self-grading-button-container {
       width: 250px;
       margin: auto;
-      .complete-submit-btn {
+      .complete-submit-btn,
+      .self-grade-btn {
         background-color: #0072bc;
         color: $white;
         height: 40px;

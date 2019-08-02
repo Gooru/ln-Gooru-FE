@@ -1,77 +1,15 @@
 .gru-content-suggestion {
-  @media only screen and (max-width: $screen-481 - 1) {
-    top: 10% !important;
+  @media only screen and (max-width: $screen-sm - 1) {
+    top: 50px !important;
     width: 100%;
     left: 0;
     overflow-x: hidden;
-    height: auto;
+    height: 100%;
 
     .modal-header {
       .suggestion-title {
         font-size: 22px;
       }
     }
-
-    .modal-body {
-      display: grid;
-      grid-template-columns: auto auto auto;
-      height: auto;
-
-      .devation {
-        display: block;
-        height: 100%;
-        grid-column-start: 1;
-        grid-column-end: 2;
-      }
-
-      .content-details {
-        border-top: 1px solid #67727b;
-        width: 100%;
-        grid-column-start: 1;
-        grid-column-end: 4;
-        display: grid;
-        grid-template-columns: 1fr auto;
-
-        .collection {
-          width: 100%;
-
-          .header {
-            width: 100%;
-          }
-        }
-      }
-
-      .suggestion-details {
-        width: 100%;
-        grid-column-start: 2;
-        grid-column-end: 4;
-
-        .description {
-          margin-top: 0;
-          padding: 10px;
-        }
-      }
-    }
-  }
-  @media only screen and (orientation: landscape) {
-    overflow-y: auto;
-    width: 100%;
-    height: auto;
-    @media only screen and (max-width: $screen-640) {
-      .deviation {
-        display: none;
-      }
-
-      .modal-body {
-        .suggestion-details {
-          margin-left: 10px;
-          padding-right: 10px;
-        }
-      }
-    }
-  }
-
-  @media only screen and (max-width: $screen-791) {
-    width: 100%;
   }
 }
