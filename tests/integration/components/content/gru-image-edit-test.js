@@ -1,6 +1,5 @@
 import { moduleForComponent, test, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-
 moduleForComponent(
   'content/gru-image-edit',
   'Integration | Component | content/gru image edit',

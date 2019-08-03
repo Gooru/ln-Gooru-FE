@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { moduleForComponent, test, skip } from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
 import Resource from 'gooru-web/models/content/resource';
@@ -419,7 +419,7 @@ test('it toggles views between a URL and an upload resource', function(assert) {
   );
 });
 
-skip('show spinner button component while the server response, after clicking on the create button', function(assert) {
+test('show spinner button component while the server response, after clicking on the create button', function(assert) {
   // Mock the refresh method in the router
   this.set('router', {
     router: {
@@ -456,6 +456,9 @@ skip('show spinner button component while the server response, after clicking on
   $titleField.find('input').blur();
   $component.find('.add-btn').click();
 
+  this.set('isLoadingCreate', true);
+  this.set('isLoading', true);
+
   return wait().then(function() {
     assert.ok(
       $component.find('.actions .gru-spinner-button .has-spinner').length,
@@ -468,7 +471,7 @@ skip('show spinner button component while the server response, after clicking on
   });
 });
 
-skip('show spinner button component while the server response, after clicking on the more details button', function(assert) {
+test('show spinner button component while the server response, after clicking on the more details button', function(assert) {
   // Mock the transitionTo method in the router
   this.set('router', {
     transitionTo(route, resourceId) {
@@ -511,6 +514,8 @@ skip('show spinner button component while the server response, after clicking on
   $titleField.find('input').blur();
 
   $component.find('.more-btn').click();
+  this.set('isLoadingMoreDetails', true);
+
   return wait().then(function() {
     assert.ok(
       $component.find('.actions .gru-spinner-button .has-spinner').length,
@@ -523,7 +528,7 @@ skip('show spinner button component while the server response, after clicking on
   });
 });
 
-skip('show spinner button component while the server response, after clicking on the add to button', function(assert) {
+test('show spinner button component while the server response, after clicking on the add to button', function(assert) {
   // Mock the refresh method in the router
   this.set('router', {
     router: {
@@ -580,6 +585,7 @@ skip('show spinner button component while the server response, after clicking on
   const $component = this.$('.gru-resource-new');
 
   $component.find('.add-btn').click();
+  this.set('isLoadingAddTo', true);
 
   return wait().then(function() {
     assert.ok(
