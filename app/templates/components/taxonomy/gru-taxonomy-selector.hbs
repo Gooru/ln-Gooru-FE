@@ -33,7 +33,6 @@
     <span class="{{unless subjects 'no-subject'}}">{{t subjectLabelKey}}</span>
   </label>
   {{#if isEditing}}
-  {{log subjects}}
     {{#if subjects.length}}
       {{taxonomy.gru-subject-picker
         subjects=subjects
