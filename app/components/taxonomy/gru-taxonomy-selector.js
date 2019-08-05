@@ -109,8 +109,8 @@ export default Ember.Component.extend({
         component.set('subjects', subjects);
         if (component.get('selectedCategory')) {
           let preferedSubjects = subjects.findBy(
-            'subjectTitle',
-            component.get('selectedSubject.parentTitle')
+            'code',
+            component.get('selectedSubject.subjectCode')
           );
           if (preferedSubjects) {
             let subject = preferedSubjects
