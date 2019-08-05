@@ -31,9 +31,6 @@
 
         .destination-chart-container {
           margin-right: 0;
-          @media screen and (max-width: $screen-xs) {
-            zoom: 0.7;
-          }
         }
 
         .competency-level-container {
@@ -71,9 +68,6 @@
 
       .destination-chart-container {
         margin: 0;
-        @media screen and (max-width: $screen-xs) {
-          zoom: 0.7;
-        }
       }
 
       .grade-data-container {
@@ -112,9 +106,6 @@
 
       .destination-chart-container {
         margin: 0;
-        @media screen and (max-width: $screen-xs) {
-          zoom: 0.7;
-        }
       }
 
       .course-container {

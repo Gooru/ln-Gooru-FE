@@ -6,6 +6,7 @@
  */
 import Ember from 'ember';
 import d3 from 'd3';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   //------------------------------------------------------------------------
@@ -402,12 +403,22 @@ export default Ember.Component.extend({
   /**
    * Maintains the maximum Width of the chart.
    */
-  maxWidth: 600,
+  maxWidth: Ember.computed(function() {
+    const screenWidth = screen.width;
+    return screenWidth <= SCREEN_SIZES.SMALL ? screenWidth - 15 : 600;
+  }),
 
   /**
    * Maintains the maximum Height of the chart.
    */
   maxHeight: 300,
+
+  /**
+   * @property {Number} thresholdDomainCount
+   * Property to maintain threshold domain count
+   * Currently it refers to math subject domain size
+   */
+  thresholdDomainCount: 14,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -496,17 +507,15 @@ export default Ember.Component.extend({
     let component = this;
     let taxonomyService = component.get('taxonomyService');
     let gradeId = gradeData ? gradeData.id : null;
-    return Ember.RSVP
-      .hash({
-        domainBoundary: gradeId
-          ? Ember.RSVP.resolve(
-            taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
-          )
-          : Ember.RSVP.resolve(null)
-      })
-      .then(({ domainBoundary }) => {
-        return domainBoundary;
-      });
+    return Ember.RSVP.hash({
+      domainBoundary: gradeId
+        ? Ember.RSVP.resolve(
+          taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
+        )
+        : Ember.RSVP.resolve(null)
+    }).then(({ domainBoundary }) => {
+      return domainBoundary;
+    });
   },
 
   /**
@@ -641,8 +650,9 @@ export default Ember.Component.extend({
     const maxWidth = component.get('maxWidth');
     const maxHeight = component.get('maxHeight');
     const maxCellsInDomain = component.get('maxNumberOfCellsInEachColumn');
+    const thresholdDomainCount = component.get('thresholdDomainCount');
     let width = Math.round(numberOfCellsInEachColumn * cellWidth) + 5;
-    if (width < maxWidth) {
+    if (numberOfCellsInEachColumn <= thresholdDomainCount || width < maxWidth) {
       cellWidth = Math.round(maxWidth / numberOfCellsInEachColumn);
       component.set('cellWidth', cellWidth);
       width = Math.round(numberOfCellsInEachColumn * cellWidth) + 5;
@@ -692,7 +702,13 @@ export default Ember.Component.extend({
         let domainBoundaryCompetency = d.isDomainBoundaryCompetency
           ? 'domain-boundary'
           : '';
-        return `competency ${skylineClassName} competency-${d.xAxisSeq} competency-${d.xAxisSeq}-${d.yAxisSeq} fillArea${d.status.toString()} ${domainBoundaryCompetency} ${d.boundaryClass} ${masteredCompetencyClassName}`;
+        return `competency ${skylineClassName} competency-${
+          d.xAxisSeq
+        } competency-${d.xAxisSeq}-${
+          d.yAxisSeq
+        } fillArea${d.status.toString()} ${domainBoundaryCompetency} ${
+          d.boundaryClass
+        } ${masteredCompetencyClassName}`;
       })
       .on('click', function(d) {
         component.selectCompetency(d);

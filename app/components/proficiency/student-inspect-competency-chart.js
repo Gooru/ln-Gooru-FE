@@ -1,6 +1,9 @@
 import Ember from 'ember';
 import d3 from 'd3';
-import { CLASS_SKYLINE_INITIAL_DESTINATION } from 'gooru-web/config/config';
+import {
+  CLASS_SKYLINE_INITIAL_DESTINATION,
+  SCREEN_SIZES
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -131,12 +134,22 @@ export default Ember.Component.extend({
   /**
    * Maintains the maximum Width of the chart.
    */
-  maxWidth: 550,
+  maxWidth: Ember.computed(function() {
+    const screenWidth = screen.width;
+    return screenWidth <= SCREEN_SIZES.SMALL ? screenWidth - 15 : 550;
+  }),
 
   /**
    * Maintains the maximum Height of the chart.
    */
   maxHeight: 300,
+
+  /**
+   * @property {Number} thresholdDomainCount
+   * Property to maintain threshold domain count
+   * Currently it refers to math subject domain size
+   */
+  thresholdDomainCount: 14,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -329,7 +342,8 @@ export default Ember.Component.extend({
     const maxHeight = component.get('maxHeight');
     let width = Math.round(numberOfColumns * cellWidth) + 5;
     const maxCellsInDomain = component.get('maxNumberOfCompetencies');
-    if (width < maxWidth) {
+    const thresholdDomainCount = component.get('thresholdDomainCount');
+    if (numberOfColumns <= thresholdDomainCount || width < maxWidth) {
       cellWidth = Math.round(maxWidth / numberOfColumns);
       component.set('cellWidth', cellWidth);
       width = Math.round(numberOfColumns * cellWidth) + 5;
