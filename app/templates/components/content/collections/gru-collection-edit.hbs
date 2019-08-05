@@ -53,9 +53,10 @@
         {{#if isEditing}}
           {{taxonomy.gru-taxonomy-selector
             isEditing=isEditing
-            onSubjectSelected="selectSubject"
             onCategorySelected="selectCategory"
+            onSubjectSelected="selectSubject"
             selectedSubject=selectedSubject
+            selectedCategory=selectedCategory
             subjectLabelKey='common.subject-and-framework'
             onlySubjectsWithStandards=true
           }}
@@ -84,14 +85,14 @@
 
         {{#if isEditing}}
           {{#if aggregatedTags.length}}
-          <div class="standards">
-            <div>Suggested standards based on resources in this collection</div>
-            <label>
-              <div class="tags">
+            <div class="standards">
+              <div>Suggested standards based on resources in this collection</div>
+              <label>
+                <div class="tags">
                   {{taxonomy.gru-taxonomy-tag-list tags=tempCollection.aggregatedTag isEditing=isEditing onAdd=(action 'addTag')}}
-              </div>
-            </label>
-          </div>
+                </div>
+              </label>
+            </div>
           {{/if}}
         {{/if}}
 
@@ -101,8 +102,7 @@
           <label>
             <span>{{t "common.century-skills"}}</span>
             {{#if isEditing}}
-              <button type="button" class="btn btn-primary choose"
-                {{action 'openSkillsModal'}}>
+              <button type="button" class="btn btn-primary choose" {{action 'openSkillsModal'}}>
                 {{gru-icon name="open_in_new"}} {{t "common.choose"}}
               </button>
               <div class="skills-buttons">

@@ -4,7 +4,8 @@ import { CONTENT_TYPES } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import {
   getCategoryCodeFromSubjectId,
-  getSubjectId
+  getSubjectId,
+  getGutCodeFromSubjectId
 } from 'gooru-web/utils/taxonomy';
 
 export default CollectionEdit.extend({
@@ -78,6 +79,12 @@ export default CollectionEdit.extend({
 
   selectedSubject: Ember.computed('activityCollection', function() {
     let standard = this.get('activityCollection.standards.firstObject');
+    if (standard) {
+      standard.set(
+        'subjectCode',
+        getGutCodeFromSubjectId(getSubjectId(standard.get('id')))
+      );
+    }
     return standard ? standard : null;
   }),
 

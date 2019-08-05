@@ -1416,8 +1416,7 @@ window.i18ln = {
     'सह-शिक्षक',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
     'आणखी शिक्षक जोडा',
-  'teacher-landing.class.class-settings.class-settings-sec.language':
-    'माध्यम',
+  'teacher-landing.class.class-settings.class-settings-sec.language': 'माध्यम',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
     'विद्यार्थी सेटिंग्ज',
   'teacher-landing.class.class-settings.student-settings-sec.col-head-active':
@@ -2663,6 +2662,7 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'प्रयोगशाळा अहवाल',
   'common.subtask.oa.explanation_argument': 'स्पष्टीकरण वाद',
   'common.subtask.oa.debate': 'चर्चा विवाद',
+  'common.subtask.oa.others': 'इतर',
   project: 'प्रकल्प',
   'oa.project.poster': 'भित्तीपत्रिका',
   'oa.project.presentation': 'सादरीकरण',

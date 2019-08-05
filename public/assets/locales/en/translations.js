@@ -1908,7 +1908,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'Skyline',
   'profile.proficiency.baseline': 'Baseline',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class HiLine',
+  'profile.proficiency.class-grade-line': 'Class Hi-line',
   'profile.proficiency.not-tagged':
     'The class has no course assigned or the course has not been tagged to a valid subject or standards.',
   'profile.proficiency.show-compressed-chart': 'Show Compressed Chart',
@@ -2642,6 +2642,7 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'Lab Report',
   'common.subtask.oa.explanation_argument': 'Explanation Argument',
   'common.subtask.oa.debate': 'Debate',
+  'common.subtask.oa.others': 'Others',
   project: 'Project',
   'oa.project.poster': 'Poster',
   'oa.project.presentation': 'Presentation',

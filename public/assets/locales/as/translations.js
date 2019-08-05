@@ -1939,7 +1939,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'স্কাইলাইন',
   'profile.proficiency.baseline': 'বেচলাইন',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class HiLine',
+  'profile.proficiency.class-grade-line': 'Class Hi-line',
   'profile.proficiency.not-tagged':
     'শ্ৰেণীটোক কোনো কাৰ্যক্ৰম দিয়া হোৱা নাই অথবা কাৰ্যক্ৰমটো বৈধ বিষয় অথবা মানকৰ লগত টেগ কৰা নাই।',
   'profile.proficiency.show-compressed-chart': 'সংকোচিত তালিকা দেখুৱাওক',
@@ -2680,6 +2680,7 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'Lab Report',
   'common.subtask.oa.explanation_argument': 'Explanation Argument',
   'common.subtask.oa.debate': 'Debate',
+  'common.subtask.oa.others': 'Others',
   project: 'Project',
   'oa.project.poster': 'Poster',
   'oa.project.presentation': 'Presentation',

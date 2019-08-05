@@ -11,7 +11,11 @@ import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import ModalMixin from 'gooru-web/mixins/modal';
 import { isVideoURL } from 'gooru-web/utils/utils';
-
+import {
+  getCategoryCodeFromSubjectId,
+  getSubjectId,
+  getGutCodeFromSubjectId
+} from 'gooru-web/utils/taxonomy';
 export default Ember.Component.extend(
   ContentEditMixin,
   ModalMixin,
@@ -61,7 +65,6 @@ export default Ember.Component.extend(
         this.set('tempResource', resourceForEditing);
         this.get('tempResource').set('owner', this.get('resource.owner'));
         this.set('isEditing', true);
-        this.set('selectedSubject', null);
       },
 
       /**
@@ -150,8 +153,15 @@ export default Ember.Component.extend(
       },
 
       selectCategory: function(category) {
+        let component = this;
         var standardLabel = category === EDUCATION_CATEGORY.value;
-        this.set('standardLabel', !standardLabel);
+        component.set('standardLabel', !standardLabel);
+        if (category === component.get('selectedCategory')) {
+          component.set('selectedCategory', null);
+        } else {
+          component.set('selectedCategory', category);
+        }
+        component.set('selectedSubject', null);
       },
 
       /**
@@ -229,12 +239,6 @@ export default Ember.Component.extend(
     resourceComponent: Ember.computed('resource.resourceType', function() {
       return RESOURCE_COMPONENT_MAP[this.get('resource.resourceType')];
     }),
-
-    /**
-     *
-     * @property {TaxonomyRoot}
-     */
-    selectedSubject: null,
 
     /**
      * i18n key for the standard/competency dropdown label
@@ -337,6 +341,26 @@ export default Ember.Component.extend(
      * @prop {CenturySkill[]}
      */
     centurySkills: Ember.A([]),
+
+    /**
+     * @type {String} the selected category
+     */
+    selectedCategory: Ember.computed('resource', function() {
+      let standard = this.get('resource.standards.firstObject');
+      let subjectId = standard ? getSubjectId(standard.get('id')) : null;
+      return subjectId ? getCategoryCodeFromSubjectId(subjectId) : null;
+    }),
+
+    selectedSubject: Ember.computed('resource', function() {
+      let standard = this.get('resource.standards.firstObject');
+      if (standard) {
+        standard.set(
+          'subjectCode',
+          getGutCodeFromSubjectId(getSubjectId(standard.get('id')))
+        );
+      }
+      return standard ? standard : null;
+    }),
 
     // -------------------------------------------------------------------------
     // Methods

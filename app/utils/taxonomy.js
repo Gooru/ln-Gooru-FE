@@ -112,6 +112,18 @@ export function getSubjectId(id) {
 }
 
 /**
+ * Parse and read gut code id from given subject id
+ * @param  {String} id
+ * @return {String}
+ */
+export function getGutCodeFromSubjectId(subjectId) {
+  let subjectCodes = subjectId.split('.');
+  return subjectCodes.length === 3
+    ? `${subjectCodes[1]}.${subjectCodes[2]}`
+    : subjectId;
+}
+
+/**
  * Parse and read course id for given string
  * @param  {String} id
  * @return {String}

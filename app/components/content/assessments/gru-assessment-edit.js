@@ -2,7 +2,11 @@ import Ember from 'ember';
 import CollectionEdit from 'gooru-web/components/content/collections/gru-collection-edit';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
-
+import {
+  getCategoryCodeFromSubjectId,
+  getSubjectId,
+  getGutCodeFromSubjectId
+} from 'gooru-web/utils/taxonomy';
 export default CollectionEdit.extend({
   // -------------------------------------------------------------------------
   // Dependencies
@@ -48,6 +52,15 @@ export default CollectionEdit.extend({
   // Actions
 
   actions: {
+    selectCategory: function(category) {
+      let component = this;
+      if (category === component.get('selectedCategory')) {
+        component.set('selectedCategory', null);
+      } else {
+        component.set('selectedCategory', category);
+      }
+      component.set('selectedSubject', null);
+    },
     /**
      * Save Content
      */
@@ -151,6 +164,26 @@ export default CollectionEdit.extend({
       this.set('tempCollection', collectionForEditing);
       this.actions.updateContent.call(this);
     },
+
+    /**
+     * @type {String} the selected category
+     */
+    selectedCategory: Ember.computed('collection', function() {
+      let standard = this.get('collection.standards.firstObject');
+      let subjectId = standard ? getSubjectId(standard.get('id')) : null;
+      return subjectId ? getCategoryCodeFromSubjectId(subjectId) : null;
+    }),
+
+    selectedSubject: Ember.computed('collection', function() {
+      let standard = this.get('collection.standards.firstObject');
+      if (standard) {
+        standard.set(
+          'subjectCode',
+          getGutCodeFromSubjectId(getSubjectId(standard.get('id')))
+        );
+      }
+      return standard ? standard : null;
+    }),
     /**
      * Delete assessment
      */

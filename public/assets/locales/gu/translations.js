@@ -1895,7 +1895,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'સ્કાયલાઇન',
   'profile.proficiency.baseline': 'આધારરેખા',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class HiLine',
+  'profile.proficiency.class-grade-line': 'Class Hi-line',
   'profile.proficiency.not-tagged':
     'વર્ગને કોઈ કોર્સ સોંપવામાં આવ્યો નથી અથવા કોર્સને માન્ય વિષય અથવા માનકો પર ટૅગ કરવામાં આવ્યો નથી.',
   'profile.proficiency.show-compressed-chart': 'સંકુચિત ચાર્ટ બતાવો',
@@ -2622,6 +2622,7 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'Lab Report',
   'common.subtask.oa.explanation_argument': 'Explanation Argument',
   'common.subtask.oa.debate': 'Debate',
+  'common.subtask.oa.others': 'Others',
   project: 'Project',
   'oa.project.poster': 'Poster',
   'oa.project.presentation': 'Presentation',
