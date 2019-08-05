@@ -2693,6 +2693,7 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'ಲ್ಯಾಬ್ ವರದಿ',
   'common.subtask.oa.explanation_argument': 'ವಿವರಣೆ ವಾದ',
   'common.subtask.oa.debate': 'ಚರ್ಚೆ',
+  'common.subtask.oa.others': 'Others',
   project: 'ಯೋಜನೆ',
   'oa.project.poster': 'ಪೋಸ್ಟರ್',
   'oa.project.presentation': 'ಪ್ರಸ್ತುತಿ',

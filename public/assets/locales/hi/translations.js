@@ -303,8 +303,7 @@ window.i18ln = {
   'common.currently-studying': 'अभी अध्ययन कर रहा है',
   'common.date': 'दिनांक ',
   'common.delete': 'हटाएं',
-  'common.delete-instructions.links-inaccessible':
-    'सभी शेयर लिंक पहुच मे नही होंगे',
+  'common.delete-instructions.links-inaccessible': 'सभी शेयर लिंक पहुच मे नही होंगे',
   'common.delete-instructions.content-inaccessible':
     'सभी विषयवस्तु इसके साथ जुड़े हुए कक्षा खण्डों  के लिए पहुच मे नही होगी',
   'common.depth-of-knowledge': 'ज्ञान की गहराई',
@@ -710,7 +709,7 @@ window.i18ln = {
   'common.select-all': 'सभी का चयन करे',
   'common.none': 'कोई छात्र नहीं',
   'common.add-data': 'डेटा जोड़ें',
-  'common.update-data': 'आँकड़े जोड़ें',
+  'common.update-data': 'आँकड़े अपडेट करें',
   'common.all': 'सभी ',
   'common.please-wait': 'कृपया प्रतीक्षा करें',
   'common.unscheduled-items': 'अनिर्धारित सामग्री',
@@ -1338,7 +1337,7 @@ window.i18ln = {
   'teacher-landing.class.atc-view.progress-to-destination':
     'गंतव्य के लिए प्रगति',
   'teacher-landing.class.class-activities': 'कक्षा की दैनिक गतिविधियां',
-  'teacher-landing.class.class-activities.input-timespent': 'इनपुट समय बिताया',
+  'teacher-landing.class.class-activities.input-timespent': 'मूल्यांकन काई लिये निर्धारित समय दर्ज करें',
   'teacher-landing.class.class-activities.warning-message':
     'आपने {{studentName}} के लिए {{questionCount}} प्रश्नों के लिए डेटा दर्ज नहीं किया है। किसी अन्य छात्र का चयन करने से <छात्र का नाम> का डेटा समाप्त हो जाएगा। क्या आप जारी रखना चाहते हैं?',
   'teacher-landing.class.class-activities.info-message':
@@ -2656,6 +2655,7 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'प्रयोगशाला की रिपोर्ट',
   'common.subtask.oa.explanation_argument': 'स्पस्टिकरण तर्क',
   'common.subtask.oa.debate': 'परिचर्चा',
+  'common.subtask.oa.others': 'अन्य',
   project: 'परियोजना',
   'oa.project.poster': 'पोस्टर',
   'oa.project.presentation': 'प्रदर्शन',

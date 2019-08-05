@@ -12,7 +12,11 @@ import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import FillInTheBlank from 'gooru-web/utils/question/fill-in-the-blank';
 import { replaceMathExpression, removeHtmlTags } from 'gooru-web/utils/utils';
 import Rubric from 'gooru-web/models/rubric/rubric';
-
+import {
+  getCategoryCodeFromSubjectId,
+  getSubjectId,
+  getGutCodeFromSubjectId
+} from 'gooru-web/utils/taxonomy';
 export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
@@ -68,7 +72,6 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
       var questionForEditing = this.get('question').copy();
       this.set('tempQuestion', questionForEditing);
       this.set('isEditing', true);
-      this.set('selectedSubject', null);
       this.set('rubricError', false);
     },
     /**
@@ -215,8 +218,15 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
     },
 
     selectCategory: function(category) {
+      let component = this;
       var standardLabel = category === EDUCATION_CATEGORY.value;
-      this.set('standardLabel', !standardLabel);
+      component.set('standardLabel', !standardLabel);
+      if (category === component.get('selectedCategory')) {
+        component.set('selectedCategory', null);
+      } else {
+        component.set('selectedCategory', category);
+      }
+      component.set('selectedSubject', null);
     },
 
     /**
@@ -463,12 +473,6 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
   ),
 
   /**
-   *
-   * @property {TaxonomyRoot}
-   */
-  selectedSubject: null,
-
-  /**
    * i18n key for the standard/competency dropdown label
    * @property {string}
    */
@@ -544,6 +548,26 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
    * @property {Boolean}
    */
   rubricError: false,
+
+  /**
+   * @type {String} the selected category
+   */
+  selectedCategory: Ember.computed('question', function() {
+    let standard = this.get('question.standards.firstObject');
+    let subjectId = standard ? getSubjectId(standard.get('id')) : null;
+    return subjectId ? getCategoryCodeFromSubjectId(subjectId) : null;
+  }),
+
+  selectedSubject: Ember.computed('question', function() {
+    let standard = this.get('question.standards.firstObject');
+    if (standard) {
+      standard.set(
+        'subjectCode',
+        getGutCodeFromSubjectId(getSubjectId(standard.get('id')))
+      );
+    }
+    return standard ? standard : null;
+  }),
 
   // ----------------------------
   // Methods
@@ -625,16 +649,16 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
           promiseArray = editedQuestion
             .get('answers')
             .map(component.getAnswerSaveImagePromise.bind(component));
-          answersPromise = Ember.RSVP.Promise
-            .all(promiseArray)
-            .then(function(values) {
-              for (var i = 0; i < editedQuestion.get('answers').length; i++) {
-                editedQuestion.get('answers')[i].set('text', values[i]);
-              }
-              return Ember.RSVP.Promise.all(
-                answersForValidate.map(component.getAnswerValidatePromise)
-              );
-            });
+          answersPromise = Ember.RSVP.Promise.all(promiseArray).then(function(
+            values
+          ) {
+            for (var i = 0; i < editedQuestion.get('answers').length; i++) {
+              editedQuestion.get('answers')[i].set('text', values[i]);
+            }
+            return Ember.RSVP.Promise.all(
+              answersForValidate.map(component.getAnswerValidatePromise)
+            );
+          });
         } else {
           promiseArray = answersForValidate.map(
             component.getAnswerValidatePromise

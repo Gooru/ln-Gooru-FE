@@ -1887,7 +1887,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'দিগন্ত',
   'profile.proficiency.baseline': 'বেসলাইন',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class HiLine',
+  'profile.proficiency.class-grade-line': 'Class Hi-line',
   'profile.proficiency.not-tagged':
     'ক্লাসের কোন কোর্স নির্ধারিত নেই অথবা কোর্সটিকে কোনও বৈধ বিষয় বা মানগুলিতে ট্যাগ করা হয়নি।',
   'profile.proficiency.show-compressed-chart': 'সংক্ষেপিত চার্ট প্রদর্শন করুন',
@@ -2616,6 +2616,7 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'Lab Report',
   'common.subtask.oa.explanation_argument': 'Explanation Argument',
   'common.subtask.oa.debate': 'Debate',
+  'common.subtask.oa.others': 'Others',
   project: 'Project',
   'oa.project.poster': 'Poster',
   'oa.project.presentation': 'Presentation',

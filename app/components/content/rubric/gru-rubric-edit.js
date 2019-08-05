@@ -5,7 +5,11 @@ import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import ModalMixin from 'gooru-web/mixins/modal';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import { EDUCATION_CATEGORY } from 'gooru-web/config/config';
-
+import {
+  getCategoryCodeFromSubjectId,
+  getSubjectId,
+  getGutCodeFromSubjectId
+} from 'gooru-web/utils/taxonomy';
 export default Ember.Component.extend(SessionMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
@@ -107,8 +111,15 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
      * @param {String} category
      */
     selectCategory: function(category) {
+      let component = this;
       var standardLabel = category === EDUCATION_CATEGORY.value;
-      this.set('standardLabel', !standardLabel);
+      component.set('standardLabel', !standardLabel);
+      if (category === component.get('selectedCategory')) {
+        component.set('selectedCategory', null);
+      } else {
+        component.set('selectedCategory', category);
+      }
+      component.set('selectedSubject', null);
     },
 
     /**
@@ -263,10 +274,6 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
    */
   selected: 'information',
   /**
-   * @property {TaxonomyRoot}
-   */
-  selectedSubject: null,
-  /**
    * @property {RubricBackUrl} to back url
    */
   RubricBackUrl: null,
@@ -286,6 +293,26 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     return this.get('standardLabel')
       ? 'common.standards'
       : 'common.competencies';
+  }),
+
+  /**
+   * @type {String} the selected category
+   */
+  selectedCategory: Ember.computed('rubric', function() {
+    let standard = this.get('rubric.standards.firstObject');
+    let subjectId = standard ? getSubjectId(standard.get('id')) : null;
+    return subjectId ? getCategoryCodeFromSubjectId(subjectId) : null;
+  }),
+
+  selectedSubject: Ember.computed('rubric', function() {
+    let standard = this.get('rubric.standards.firstObject');
+    if (standard) {
+      standard.set(
+        'subjectCode',
+        getGutCodeFromSubjectId(getSubjectId(standard.get('id')))
+      );
+    }
+    return standard ? standard : null;
   }),
 
   // -------------------------------------------------------------------------

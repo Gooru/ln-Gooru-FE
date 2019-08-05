@@ -1948,7 +1948,7 @@ window.i18ln = {
   'profile.proficiency.skyline': 'ആകാശം',
   'profile.proficiency.baseline': 'അടിസ്ഥാനരേഖ',
   'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class HiLine',
+  'profile.proficiency.class-grade-line': 'Class Hi-line',
   'profile.proficiency.not-tagged':
     'ക്ലാസ് ഒന്നും തന്നെ നിശ്ചയിച്ചിട്ടില്ല, അല്ലെങ്കിൽ കോഴ്സ് ഒരു സാധുതയുള്ള വിഷയം അല്ലെങ്കിൽ നിലവാരത്തിലേക്ക് ടാഗുചെയ്തിട്ടില്ല.',
   'profile.proficiency.show-compressed-chart':
@@ -2699,6 +2699,7 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'Lab Report',
   'common.subtask.oa.explanation_argument': 'Explanation Argument',
   'common.subtask.oa.debate': 'Debate',
+  'common.subtask.oa.others': 'Others',
   project: 'Project',
   'oa.project.poster': 'Poster',
   'oa.project.presentation': 'Presentation',
