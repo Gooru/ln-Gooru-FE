@@ -2655,6 +2655,7 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'प्रयोगशाला की रिपोर्ट',
   'common.subtask.oa.explanation_argument': 'स्पस्टिकरण तर्क',
   'common.subtask.oa.debate': 'परिचर्चा',
+  'common.subtask.oa.others': 'अन्य',
   project: 'परियोजना',
   'oa.project.poster': 'पोस्टर',
   'oa.project.presentation': 'प्रदर्शन',
