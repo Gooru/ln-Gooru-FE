@@ -1,7 +1,8 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor(
+moduleForComponent(
   'serializer:performance/activity-performance-summary',
   'Unit | Serializer | performance/activity-performance-summary'
 );

@@ -12,13 +12,13 @@
   </div>
   <div class="body-container">
     {{#if isShowStartPlayer}}
-      {{player.offline-activity.gru-offline-activity-start-page
+      {{player/offline-activity/gru-offline-activity-start-page
         offlineActivity = offlineActivity
         onStartPlayer = "onStartPlayer"
         onClosePlayer = "onClosePlayer"
         isPreview = isPreview}}
     {{else}}
-      {{player.offline-activity.gru-offline-activity-submission
+      {{player/offline-activity/gru-offline-activity-submission
         offlineActivity = offlineActivity
         classId = classId
         caContentId = caContentId

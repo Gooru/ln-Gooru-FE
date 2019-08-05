@@ -1,6 +1,10 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('serializer:suggest/suggest', 'Unit | Serializer | suggest/suggest');
+moduleForComponent(
+  'serializer:suggest/suggest',
+  'Unit | Serializer | suggest/suggest'
+);
 
 test('normalizeSearchResources', function(assert) {
   const serializer = this.subject();

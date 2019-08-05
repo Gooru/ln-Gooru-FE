@@ -15,7 +15,7 @@ moduleForComponent(
 
 test('Independent learning Navigation', function(assert) {
   this.render(
-    hbs`{{student.independent.gru-independent-learning-navigation selectedMenuItem='current-study'}}`
+    hbs`{{student/independent/gru-independent-learning-navigation selectedMenuItem='current-study'}}`
   );
 
   var $component = this.$(); //component dom element
@@ -25,7 +25,11 @@ test('Independent learning Navigation', function(assert) {
     2,
     'Number of class navigator links'
   );
-  T.exists(assert, $navigation.find('.nav .bookmarks'), 'Missing bookmarks link');
+  T.exists(
+    assert,
+    $navigation.find('.nav .bookmarks'),
+    'Missing bookmarks link'
+  );
   T.exists(
     assert,
     $navigation.find('.nav .current-study'),
@@ -46,7 +50,7 @@ test('Layout when a menu Item is selected', function(assert) {
   });
 
   this.render(
-    hbs`{{student.independent.gru-independent-learning-navigation onItemSelected='itemSelected'}}`
+    hbs`{{student/independent/gru-independent-learning-navigation onItemSelected='itemSelected'}}`
   );
   var $navigation = this.$(); //component dom element
 

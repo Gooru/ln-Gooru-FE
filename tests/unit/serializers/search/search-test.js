@@ -1,7 +1,11 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('serializer:search/search', 'Unit | Serializer | search/search');
+moduleForComponent(
+  'serializer:search/search',
+  'Unit | Serializer | search/search'
+);
 
 test('normalizeCollection', function(assert) {
   const serializer = this.subject();

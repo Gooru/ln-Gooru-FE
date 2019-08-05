@@ -13,7 +13,7 @@
   </div>
 
   <div class="oa-references-container">
-    {{player.offline-activity.gru-offline-activity-references offlineActivity = offlineActivity}}
+    {{player/offline-activity/gru-offline-activity-references offlineActivity = offlineActivity}}
   </div>
 
   <div class="offline-activity-timespent">
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="timespent-container">
-      {{cards.gru-timepicker-card
+      {{cards/gru-timepicker-card
         maxHour= -1
         hour=oaTimespentHour
         minute=oaTimespentMinute
@@ -45,7 +45,7 @@
 
   <div class="task-submissions-container">
     {{#each activityTasks as |task|}}
-      {{player.offline-activity.gru-offline-activity-task-submission
+      {{player/offline-activity/gru-offline-activity-task-submission
         task=task
         caContentId=caContentId
         showSubmissions=true

@@ -41,7 +41,7 @@ test('Layout', function(assert) {
   this.set('filterCriteria', filterCriteria);
 
   this.render(
-    hbs`{{student.gru-performance-course-filter selectedCourse=selectedCourse filterCriteria=filterCriteria}}`
+    hbs`{{student/gru-performance-course-filter selectedCourse=selectedCourse filterCriteria=filterCriteria}}`
   );
 
   var $performanceFilterPanel = this.$(); //component dom element
@@ -121,7 +121,7 @@ test('Expand/Collapse Course content panel', function(assert) {
   this.set('filterCriteria', filterCriteria);
 
   this.render(
-    hbs`{{student.gru-performance-course-filter  selectedCourse=selectedCourse filterCriteria=filterCriteria}}`
+    hbs`{{student/gru-performance-course-filter  selectedCourse=selectedCourse filterCriteria=filterCriteria}}`
   );
 
   var $performanceFilterPanel = this.$(); //component dom element
@@ -183,7 +183,7 @@ test('Do not show the course tab', function(assert) {
   this.set('showCourse', false);
 
   this.render(
-    hbs`{{student.gru-performance-course-filter selectedCourse=selectedCourse filterCriteria=filterCriteria showCourse=showCourse}}`
+    hbs`{{student/gru-performance-course-filter selectedCourse=selectedCourse filterCriteria=filterCriteria showCourse=showCourse}}`
   );
 
   var $performanceFilterPanel = this.$(); //component dom element

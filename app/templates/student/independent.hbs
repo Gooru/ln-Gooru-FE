@@ -33,7 +33,7 @@
         </div>
         <div class="taxonomy-standards">
           {{#if course.tags.length}}
-            {{taxonomy.gru-taxonomy-tag-list tags=course.tags tagsVisible=1 isInCard=true hasTooltips=false}}
+            {{taxonomy/gru-taxonomy-tag-list tags=course.tags tagsVisible=1 isInCard=true hasTooltips=false}}
           {{/if}}
         </div>
         <div class="performance-container pull-right {{unless hasStarted 'not-started'}}" {{action 'openCourseReport'}}>
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  {{student.class.gru-study-navbar
+  {{student/class/gru-study-navbar
     performanceSummary=performance
     navTitle=course.title
     onItemSelected="selectMenuItem"
@@ -60,5 +60,5 @@
 </div>
 
 {{#if showCourseReport}}
-  {{reports.pull-up.student-course-report context=studentCourseReportContext showPullUp=showCourseReport}}
+  {{reports/pull-up/student-course-report context=studentCourseReportContext showPullUp=showCourseReport}}
 {{/if}}

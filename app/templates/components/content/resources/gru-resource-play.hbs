@@ -19,7 +19,7 @@
             <span>{{t (concat "common.resource-format." resource.format)}}</span>
           </div>
           <div class="tags">
-            {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=3}}
+            {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=3}}
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@
         </p>
       </div>
       <div class="panel-body">
-        {{new-cards.gru-resource-card resource=resource editEnabled=false isLinkOut=true}}
+        {{new-cards/gru-resource-card resource=resource editEnabled=false isLinkOut=true}}
       </div>
       <div class="panel-footer">
         <p class="title">

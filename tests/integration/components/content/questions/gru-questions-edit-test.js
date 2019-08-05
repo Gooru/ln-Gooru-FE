@@ -9,6 +9,9 @@ import Collection from 'gooru-web/models/content/collection';
 import Rubric from 'gooru-web/models/rubric/rubric';
 import Ember from 'ember';
 import T from 'gooru-web/tests/helpers/assert';
+import DS from 'ember-data';
+import AudienceModel from 'gooru-web/models/audience';
+import KnowledgeModel from 'gooru-web/models/depth-of-knowledge';
 
 const questionServiceStub = Ember.Service.extend({
   updateQuestion(questionID, editedQuestion) {
@@ -61,18 +64,58 @@ const taxonomyServiceStub = Ember.Service.extend({
   }
 });
 
+var lookupServiceStub = Ember.Service.extend({
+  readAudiences() {
+    var promiseResponse;
+    var response = [
+      AudienceModel.create({ id: 1, name: 'all students', order: 1 }),
+      AudienceModel.create({ id: 4, name: 'none students', order: 2 })
+    ];
+
+    promiseResponse = new Ember.RSVP.Promise(function(resolve) {
+      Ember.run.next(this, function() {
+        resolve(response);
+      });
+    });
+
+    return DS.PromiseArray.create({
+      promise: promiseResponse
+    });
+  },
+  readDepthOfKnowledgeItems() {
+    var promiseResponse;
+    var response = [
+      KnowledgeModel.create({ id: 1, name: 'Level 1: Recall', order: 1 }),
+      KnowledgeModel.create({ id: 4, name: 'Level 4: Skill/Concept', order: 2 })
+    ];
+
+    promiseResponse = new Ember.RSVP.Promise(function(resolve) {
+      Ember.run.next(this, function() {
+        resolve(response);
+      });
+    });
+
+    return DS.PromiseArray.create({
+      promise: promiseResponse
+    });
+  }
+});
+
 moduleForComponent(
   'content/questions/gru-questions-edit',
   'Integration | Component | content/questions/gru questions edit',
   {
     integration: true,
     beforeEach: function() {
+      this.register('service:popover', Ember.Service.extend({}));
       this.i18n = this.container.lookup('service:i18n');
       this.i18n.set('locale', 'en');
       this.register('service:api-sdk/question', questionServiceStub);
       this.inject.service('api-sdk/question');
       this.register('service:taxonomy', taxonomyServiceStub);
       this.inject.service('taxonomy');
+      this.register('service:api-sdk/lookup', lookupServiceStub);
+      this.inject.service('api-sdk/lookup');
     }
   }
 );

@@ -85,9 +85,7 @@ test('Validate if the collection title field is left blank', function(assert) {
     });
   });
 });
-test('Validate if the Rubric Title field has only whitespaces', function(
-  assert
-) {
+test('Validate if the Rubric Title field has only whitespaces', function(assert) {
   assert.expect(3);
 
   this.render(hbs`{{content/modals/gru-rubric-new}}`);
@@ -118,9 +116,7 @@ test('Validate if the Rubric Title field has only whitespaces', function(
     });
   });
 });
-test('Validate the character limit in the Rubric title field', function(
-  assert
-) {
+test('Validate the character limit in the Rubric title field', function(assert) {
   this.render(hbs`{{content/modals/gru-rubric-new}}`);
 
   const maxLenValue = this.$('.gru-rubric-new .gru-input.title input').prop(
@@ -167,9 +163,7 @@ test('Create a rubric', function(assert) {
   });
 });
 
-test('show spinner button component while the server response, after clicking on the create button', function(
-  assert
-) {
+test('show spinner button component while the server response, after clicking on the create button', function(assert) {
   assert.expect(5);
 
   // Mock the transitionTo method in the router
@@ -197,6 +191,7 @@ test('show spinner button component while the server response, after clicking on
   $titleField.find('input').blur();
 
   $component.find('.actions .add').click();
+  this.set('isLoading', true);
 
   return wait().then(function() {
     assert.ok(

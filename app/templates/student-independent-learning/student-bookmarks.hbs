@@ -21,7 +21,7 @@
   <div class="content-results {{if isExpanded 'expanded' 'not-expanded'}}">
     {{#if bookmarks}}
       {{#each bookmarks as |bookmark|}}
-        {{new-cards.gru-bookmark-card
+        {{new-cards/gru-bookmark-card
           bookmark=bookmark
           onDeleteBookmark=(action 'removeBookmark')
         }}

@@ -6,7 +6,7 @@ moduleForComponent(
   'Unit | Component | content/rubric/gru rubric creation',
   {
     // Specify the other units that are required for this test
-    // needs: ['component:foo', 'helper:bar'],
+    needs: ['service:api-sdk/media'],
     unit: true
   }
 );

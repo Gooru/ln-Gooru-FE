@@ -32,7 +32,7 @@
 <div class="panel-content">
   {{#if isShowMatrixChart}}
     <div class="proficiency-chart">
-      {{proficiency.learner-proficiency-domain-matrix
+      {{proficiency/learner-proficiency-domain-matrix
         subjectBucket=subjectBucket
         timeLine=timeLine
         userId=studentProfile.id
@@ -80,7 +80,7 @@
     </div>
     {{#if isShowTimeSeries}}
       <div class="time-series-container">
-        {{charts.monthly-time-series-chart onSelectMonth="onSelectMonth" startDate=timeSeriesStartDate}}
+        {{charts/monthly-time-series-chart onSelectMonth="onSelectMonth" startDate=timeSeriesStartDate}}
       </div>
     {{/if}}
   {{else}}

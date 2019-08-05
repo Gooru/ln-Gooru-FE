@@ -1,5 +1,5 @@
 {{#unless isStudent}}
-  {{proficiency.competency-content-info learningMapData=learningMapData onSelectActivityContent="onSelectActivityContent"}}
+  {{proficiency/competency-content-info learningMapData=learningMapData onSelectActivityContent="onSelectActivityContent"}}
   {{else}}
     <div class="student-learning-map">
       <div class="practice-question">
@@ -17,7 +17,7 @@
     </div>
 {{/unless}}
 {{#if isShowActivityPullup}}
-  {{reports.pull-up.activity-list
+  {{reports/pull-up/activity-list
     activityContents=activityContents
     activityContentType=activityContentType
     activityTotalHitCount=activityTotalHitCount

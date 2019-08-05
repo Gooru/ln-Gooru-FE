@@ -9,7 +9,6 @@
       <div class="destination-point">{{gru-icon name="place"}}</div>
     </div>
   </div>
-
   <h5 class="learning-path-label">{{t 'course-map.your-learning-path'}} <span class="toggle-course-info" {{action "onToggleCourseInfo"}}>{{gru-icon name="info" style='material-icons-outlined'}}</span></h5>
   <div class="rescope-content-preview course-info-toggle-container">
     <div class="rescope-content-preview-msg">
@@ -27,20 +26,19 @@
   <div class="milestone-course-map-view">
     {{#if (and route0Applicable (or showRoute0SuggestionPreview showRoute0Suggestion))}}
       {{#if showRoute0Suggestion}}
-        {{student.class.milestone-course-map-route0
+        {{student/class/milestone-course-map-route0
         class=class
       }}
       {{else}}
-        {{student.class.milestone-course-map-route0-preview
+        {{student/class/milestone-course-map-route0-preview
           class=class
           route0=route0
           course=course
         }}
       {{/if}}
     {{/if}}
-
     <div class="course-map-milestone-container {{if (gt selfGradeItems.length 0) 'self-grading-enabled'}}">
-      {{student.class.milestone-course-map
+      {{student/class/milestone-course-map
        class=class
        rescopedContents=rescopedContents
        showAllRescopedContent=showAllRescopedContent
@@ -48,7 +46,7 @@
        location=location
        milestones=milestones
      }}
-     {{#if (gt selfGradeItems.length 0)}}
+      {{#if (gt selfGradeItems.length 0)}}
         <div class="self-grading-container">
           <div class="header-container">
             {{t 'class.analytics.performance.grade-items'}}

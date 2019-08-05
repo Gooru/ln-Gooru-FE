@@ -1,8 +1,9 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Ember from 'ember';
 import ResourceModel from 'gooru-web/models/content/resource';
 
-moduleFor(
+moduleForComponent(
   'serializer:content/resource',
   'Unit | Serializer | content/resource'
 );
@@ -175,9 +176,7 @@ test('normalizeReadResource when providing is remote', function(assert) {
   assert.equal(resource.get('isRemote'), false, 'wrong is remote');
 });
 
-test('normalizeReadResource for image resource with relative path', function(
-  assert
-) {
+test('normalizeReadResource for image resource with relative path', function(assert) {
   const serializer = this.subject();
   serializer.set(
     'session',
@@ -207,9 +206,7 @@ test('normalizeReadResource for image resource with relative path', function(
   );
 });
 
-test('normalizeReadResource for url resource with no full path', function(
-  assert
-) {
+test('normalizeReadResource for url resource with no full path', function(assert) {
   const serializer = this.subject();
   serializer.set(
     'session',
@@ -251,9 +248,7 @@ test('normalizeReadResource for url resource with no full path', function(
 //
 //});
 
-test('normalizeReadResource - if visible_on_profile is undefined', function(
-  assert
-) {
+test('normalizeReadResource - if visible_on_profile is undefined', function(assert) {
   const serializer = this.subject();
   const resourceData = {
     id: 'abcd'
@@ -268,9 +263,7 @@ test('normalizeReadResource - if visible_on_profile is undefined', function(
   );
 });
 
-test('normalizeReadResource - if it is not visible on profile', function(
-  assert
-) {
+test('normalizeReadResource - if it is not visible on profile', function(assert) {
   const serializer = this.subject();
   const resourceData = {
     id: 'abcd',

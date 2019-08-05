@@ -1,6 +1,10 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('serializer:tenant/tenant', 'Unit | Serializer | tenant/tenant');
+moduleForComponent(
+  'serializer:tenant/tenant',
+  'Unit | Serializer | tenant/tenant'
+);
 
 test('normalizeTenant', function(assert) {
   const serializer = this.subject();

@@ -5,7 +5,10 @@ import moduleForService from 'gooru-web/tests/helpers/module-for-service';
 moduleForService(
   'service:api-sdk/class-activity',
   'Unit | Service | api-sdk/class-activity',
-  {}
+  {
+    // Specify the other units that are required for this test.
+    needs: ['service:api-sdk/performance']
+  }
 );
 
 test('enableClassActivity', function(assert) {

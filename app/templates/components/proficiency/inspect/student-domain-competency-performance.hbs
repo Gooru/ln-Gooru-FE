@@ -17,7 +17,7 @@
       <div class="scrollable-chartlist">
         {{#each activeDomainCompetencyPerformance.studentCompetencies as |studentPerformance studentSeq|}}
           <div class="student-performance-detail">
-            {{charts.domain-competency-chart domainSeq=activeDomainCompetencyPerformance.domainData.domainSeq studentSeq=studentSeq competencies=studentPerformance.competencies maxChartHeight=180}}
+            {{charts/domain-competency-chart domainSeq=activeDomainCompetencyPerformance.domainData.domainSeq studentSeq=studentSeq competencies=studentPerformance.competencies maxChartHeight=180}}
             <div class="thumbnail-container" style="background-image: url({{studentPerformance.thumbnail}})">
             </div>
           </div>
@@ -65,8 +65,8 @@
 </div>
 
 {{#if isShowCompetencyContentReport}}
-  {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
+  {{#reports/pull-up/competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
     onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
-    {{reports.pull-up.competency-content-report domainCompetencyList=domainCompetencyList competency=selectedCompetency userId=selectedStudentUserId learningMapData=learningMapData onToggleGlobalCompetencyView="onToggleGlobalCompetencyView"}}
-  {{/reports.pull-up.competency-report}}
+    {{reports/pull-up/competency-content-report domainCompetencyList=domainCompetencyList competency=selectedCompetency userId=selectedStudentUserId learningMapData=learningMapData onToggleGlobalCompetencyView="onToggleGlobalCompetencyView"}}
+  {{/reports/pull-up/competency-report}}
 {{/if}}

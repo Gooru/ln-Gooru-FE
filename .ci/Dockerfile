@@ -16,7 +16,7 @@ RUN curl --silent --location https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get install -y nodejs
 
 RUN npm install -g yarn
-RUN npm install -g ember-cli@2.9.1
+RUN npm install -g ember-cli@2.12.2
 RUN npm install -g bower
 RUN apt-get install -y libfontconfig
 RUN npm install -g stubby@0.2.13
