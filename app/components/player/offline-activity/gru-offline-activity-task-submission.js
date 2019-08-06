@@ -305,7 +305,7 @@ export default Ember.Component.extend({
     'isValidTimespent',
     function() {
       const component = this;
-      let addedUrls = component.get('task.ulrs')
+      let addedUrls = component.get('task.urls')
         ? component
           .get('task.urls')
           .filter(url => !url.get('isSubmittedUrl') && url.get('value'))
