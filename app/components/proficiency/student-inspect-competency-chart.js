@@ -532,7 +532,9 @@ export default Ember.Component.extend({
     const horizontalLines = component.$(
       '#course-covered-line-container .horizontal-line'
     ).length;
-    const midPos = Math.round(horizontalLines / 2);
+    const screenWidth = screen.width;
+    const midPos =
+      screenWidth <= SCREEN_SIZES.SMALL ? 1 : Math.round(horizontalLines / 2);
     const midPosContainer = component.$(
       `#course-covered-line-container .horizontal-line:eq(${midPos})`
     );
