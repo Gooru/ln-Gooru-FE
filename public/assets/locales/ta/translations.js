@@ -1773,7 +1773,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'தரமான உலாவ',
   'subject-dropdown.placeholder': 'பாடம் (ங்கள்)',
   'subject-dropdown.prompt': 'ஒரு பொருளைத் தேர்ந்தெடுக்கவும்',

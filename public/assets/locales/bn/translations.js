@@ -1708,7 +1708,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'মান দ্বারা ব্রাউজ করুন',
   'subject-dropdown.placeholder': 'বিষয় (গুলি)',
   'subject-dropdown.prompt': 'একটি বিষয় নির্বাচন করুন',

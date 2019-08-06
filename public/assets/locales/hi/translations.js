@@ -303,7 +303,8 @@ window.i18ln = {
   'common.currently-studying': 'अभी अध्ययन कर रहा है',
   'common.date': 'दिनांक ',
   'common.delete': 'हटाएं',
-  'common.delete-instructions.links-inaccessible': 'सभी शेयर लिंक पहुच मे नही होंगे',
+  'common.delete-instructions.links-inaccessible':
+    'सभी शेयर लिंक पहुच मे नही होंगे',
   'common.delete-instructions.content-inaccessible':
     'सभी विषयवस्तु इसके साथ जुड़े हुए कक्षा खण्डों  के लिए पहुच मे नही होगी',
   'common.depth-of-knowledge': 'ज्ञान की गहराई',
@@ -1337,7 +1338,8 @@ window.i18ln = {
   'teacher-landing.class.atc-view.progress-to-destination':
     'गंतव्य के लिए प्रगति',
   'teacher-landing.class.class-activities': 'कक्षा की दैनिक गतिविधियां',
-  'teacher-landing.class.class-activities.input-timespent': 'मूल्यांकन काई लिये निर्धारित समय दर्ज करें',
+  'teacher-landing.class.class-activities.input-timespent':
+    'मूल्यांकन काई लिये निर्धारित समय दर्ज करें',
   'teacher-landing.class.class-activities.warning-message':
     'आपने {{studentName}} के लिए {{questionCount}} प्रश्नों के लिए डेटा दर्ज नहीं किया है। किसी अन्य छात्र का चयन करने से <छात्र का नाम> का डेटा समाप्त हो जाएगा। क्या आप जारी रखना चाहते हैं?',
   'teacher-landing.class.class-activities.info-message':
@@ -1739,7 +1741,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '1 1',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'मानक के क्रम में ब्राउज़ करें',
   'subject-dropdown.placeholder': 'विषय (यों)',
   'subject-dropdown.prompt': 'एक विषय चुनिए',
