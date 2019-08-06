@@ -19,6 +19,7 @@
       .ca-play-container {
         pointer-events: all;
         cursor: pointer;
+        grid-column-start: 3;
 
         .ca-play-btn {
           i {
@@ -30,6 +31,10 @@
 
     &.completed {
       grid-template-columns: 1fr 60px;
+
+      .dca-panel-actions-performance {
+        grid-column-start: 2;
+      }
     }
 
     &.today {
