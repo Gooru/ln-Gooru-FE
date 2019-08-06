@@ -39,7 +39,7 @@ export default Ember.Component.extend({
     'task.submissionText',
     function() {
       const component = this;
-      const pendingUrlSubmissions = component.get('pendingUrlSubmissions');
+      //const pendingUrlSubmissions = component.get('pendingUrlSubmissions');
       const pendingUploadSubmissions = component.get(
         'pendingUploadSubmissions'
       );
@@ -47,13 +47,20 @@ export default Ember.Component.extend({
       const isFreeFormTextEntered = freeeFormText
         ? freeeFormText.length
         : false;
+
+      const mandatoryUploads = component.get('mandatoryUploads');
+      let hasAddedMandatorySubmission = false;
+      if (mandatoryUploads > 0) {
+        if (pendingUploadSubmissions <= 0) {
+          hasAddedMandatorySubmission = true;
+        }
+      } else if (isFreeFormTextEntered || pendingUploadSubmissions <= 0) {
+        hasAddedMandatorySubmission = true;
+      }
+
       component.set(
         'task.isAddedMandatorySubmission',
-        !!(
-          pendingUploadSubmissions <= 0 &&
-          pendingUrlSubmissions <= 0 &&
-          isFreeFormTextEntered
-        )
+        hasAddedMandatorySubmission
       );
     }
   ),
@@ -440,19 +447,17 @@ export default Ember.Component.extend({
   uploadFileIntoS3(fileObject) {
     const component = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      return Ember.RSVP
-        .hash({
-          fileLocation: component
-            .get('mediaService')
-            .uploadContentFile(fileObject)
-        })
-        .then(({ fileLocation }) => {
-          let cdnUrls = component.get('session.cdnUrls');
-          let UUIDFileName = cleanFilename(fileLocation, cdnUrls);
-          fileObject.UUIDFileName = UUIDFileName;
-          fileObject.isUploaded = true;
-          return resolve(fileObject);
-        }, reject);
+      return Ember.RSVP.hash({
+        fileLocation: component
+          .get('mediaService')
+          .uploadContentFile(fileObject)
+      }).then(({ fileLocation }) => {
+        let cdnUrls = component.get('session.cdnUrls');
+        let UUIDFileName = cleanFilename(fileLocation, cdnUrls);
+        fileObject.UUIDFileName = UUIDFileName;
+        fileObject.isUploaded = true;
+        return resolve(fileObject);
+      }, reject);
     });
   },
 
