@@ -36,13 +36,12 @@ export default Ember.Component.extend({
   observePendingItems: Ember.observer(
     'pendingUrlSubmissions',
     'pendingUploadSubmissions',
+    'savedUploadSubmissions',
     'task.submissionText',
     function() {
       const component = this;
       //const pendingUrlSubmissions = component.get('pendingUrlSubmissions');
-      const pendingUploadSubmissions = component.get(
-        'pendingUploadSubmissions'
-      );
+      const pendingUploadSubmissions = component.get('savedUploadSubmissions');
       const freeeFormText = component.get('task.submissionText');
       const isFreeFormTextEntered = freeeFormText
         ? freeeFormText.length
@@ -211,6 +210,28 @@ export default Ember.Component.extend({
   ),
 
   /**
+   * @property {Number} savedUploadSubmissions
+   * Property for number of upload submissions pending
+   */
+  savedUploadSubmissions: Ember.computed(
+    'task.files.[]',
+    'mandatoryUploads',
+    'studentTaskUploadSubmission',
+    function() {
+      const component = this;
+      const uploadedFilesCount = component
+        .get('task.files')
+        .filter(f => f.isUploaded).length;
+      const mandatoryUploads = component.get('mandatoryUploads');
+      const studentTaskUploadSubmission = component.get(
+        'studentTaskUploadSubmission.length'
+      );
+      return mandatoryUploads > studentTaskUploadSubmission
+        ? mandatoryUploads - (uploadedFilesCount + studentTaskUploadSubmission)
+        : 0;
+    }
+  ),
+  /**
    * @property {Array} oaTaskRemoteSubmissions
    * Property to capture student added url submissions
    */
@@ -309,12 +330,13 @@ export default Ember.Component.extend({
         ? component
           .get('task.urls')
           .filter(url => !url.get('isSubmittedUrl') && url.get('value'))
-        : false;
+          .length
+        : 0;
       let addedFiles = component.get('task.files')
         ? component.get('task.files').length
         : false;
       let addedAnswerText = component.get('task.submissionText');
-      return addedUrls || addedFiles || addedAnswerText;
+      return addedUrls > 0 || addedFiles > 0 || addedAnswerText;
     }
   ),
 
