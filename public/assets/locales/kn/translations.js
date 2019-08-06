@@ -1769,7 +1769,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'ಪ್ರಮಾಣಿತ ಮೂಲಕ ಬ್ರೌಸ್ ಮಾಡಿ',
   'subject-dropdown.placeholder': 'ವಿಷಯ (ಗಳು) ',
   'subject-dropdown.prompt': 'ವಿಷಯ ಆಯ್ಕೆಮಾಡಿ',

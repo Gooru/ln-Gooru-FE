@@ -303,16 +303,18 @@ export default Ember.Component.extend({
 
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-      if (closeAll) {
-        component.sendAction('onClosePullUp');
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+        if (closeAll) {
+          component.sendAction('onClosePullUp');
+        }
       }
-    });
+    );
   },
 
   handleAppContainerScroll() {
@@ -367,38 +369,29 @@ export default Ember.Component.extend({
     let courseId = component.get('courseId');
     let classMembers = this.get('classMembers');
     component.set('isLoading', true);
-    return Ember.RSVP
-      .hash({
-        unit: component.get('unitService').fetchById(courseId, unitId)
-      })
-      .then(({ unit }) => {
+    return Ember.RSVP.hash({
+      unit: component.get('unitService').fetchById(courseId, unitId)
+    }).then(({ unit }) => {
+      if (!component.isDestroyed) {
+        component.set('unit', unit);
+        component.set('lessons', unit.get('children'));
+      }
+      return Ember.RSVP.hash({
+        performance: component
+          .get('performanceService')
+          .findClassPerformanceByUnit(classId, courseId, unitId, classMembers)
+      }).then(({ performance }) => {
         if (!component.isDestroyed) {
-          component.set('unit', unit);
-          component.set('lessons', unit.get('children'));
+          component.calcluateLessonPerformance(performance);
+          component.parseClassMemberAndPerformanceData(performance);
+          component.set('sortByLastnameEnabled', true);
+          component.set('sortByFirstnameEnabled', false);
+          component.set('sortByScoreEnabled', false);
+          component.set('isLoading', false);
+          component.handleCarouselControl();
         }
-        return Ember.RSVP
-          .hash({
-            performance: component
-              .get('performanceService')
-              .findClassPerformanceByUnit(
-                classId,
-                courseId,
-                unitId,
-                classMembers
-              )
-          })
-          .then(({ performance }) => {
-            if (!component.isDestroyed) {
-              component.calcluateLessonPerformance(performance);
-              component.parseClassMemberAndPerformanceData(performance);
-              component.set('sortByLastnameEnabled', true);
-              component.set('sortByFirstnameEnabled', false);
-              component.set('sortByScoreEnabled', false);
-              component.set('isLoading', false);
-              component.handleCarouselControl();
-            }
-          });
       });
+    });
   },
 
   calcluateLessonPerformance(performance) {
@@ -609,24 +602,23 @@ export default Ember.Component.extend({
 
   loadMilestoneLessonsPerformanceData() {
     const component = this;
-    return Ember.RSVP
-      .hash({
-        milestoneLessonsPerformanceData: component.fetchMilestoneLessonsPerformance(
-          CONTENT_TYPES.ASSESSMENT
-        ),
-        lessons: component.fetchMilestoneLessons()
-      })
-      .then(({ lessons, milestoneLessonsPerformanceData }) => {
-        if (!component.isDestroyed) {
-          component.set('lessons', lessons);
-          component.getAggregatedLessonsPerformance(
-            milestoneLessonsPerformanceData
-          );
-          component.parseStudentsLessonsPerformanceData(
-            milestoneLessonsPerformanceData
-          );
-        }
-      });
+    return Ember.RSVP.hash({
+      milestoneLessonsPerformanceData: component.fetchMilestoneLessonsPerformance(
+        CONTENT_TYPES.ASSESSMENT
+      ),
+      lessons: component.fetchMilestoneLessons()
+    }).then(({ lessons, milestoneLessonsPerformanceData }) => {
+      if (!component.isDestroyed) {
+        component.set('lessons', lessons);
+        component.getAggregatedLessonsPerformance(
+          milestoneLessonsPerformanceData
+        );
+        component.parseStudentsLessonsPerformanceData(
+          milestoneLessonsPerformanceData
+        );
+        component.handleCarouselControl();
+      }
+    });
   },
 
   fetchMilestoneLessons() {
