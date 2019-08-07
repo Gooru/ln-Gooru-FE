@@ -56,6 +56,7 @@ window.i18ln = {
   'errors.url': '{{description}} एक वैध यूआरएल होना चाहिए',
   'common.relevance': 'प्रासंगिकता',
   'common.engagement': 'अनुबंध',
+  'common.tenantLibrary': 'Tenant Library',
   'common.efficacy': 'प्रभावोत्पादकता',
   'common.grid': 'ग्रिड',
   'reroute.suggestion': 'reroute suggestion',

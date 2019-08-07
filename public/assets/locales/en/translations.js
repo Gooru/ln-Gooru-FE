@@ -552,6 +552,7 @@ window.i18ln = {
   'common.move': 'Move',
   'common.myContent': 'My Content',
   'common.myProfile': 'My Location',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'Library',
   'common.myPerformance': 'My Performance',
   'common.edit-narration': 'Edit Narration',

@@ -60,6 +60,7 @@ window.i18ln = {
   'self-grade.not-required': 'Student self-grading not required',
   'common.grid': 'గ్రిడ్',
   'common.list': 'జాబితా',
+  'common.tenantLibrary': 'Tenant Library',
   'common.first': 'ప్రధమ',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',

@@ -60,6 +60,7 @@ window.i18ln = {
   'common.efficacy': 'Efficacy',
   'common.grid': 'Grid',
   'common.list': 'List',
+  'common.tenantLibrary': 'Tenant Library',
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',
